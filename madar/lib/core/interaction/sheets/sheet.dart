@@ -261,6 +261,7 @@ class InteractionSheetFrame extends StatelessWidget {
     this.bodyPadding = const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.l),
     this.scrollable = true,
     this.scrollController,
+    this.toolbar,
   });
 
   final String title;
@@ -271,6 +272,9 @@ class InteractionSheetFrame extends StatelessWidget {
   final EdgeInsetsGeometry bodyPadding;
   final bool scrollable;
   final ScrollController? scrollController;
+
+  /// Pinned under the header, above the scrolling body (e.g. a search field).
+  final Widget? toolbar;
 
   @override
   Widget build(BuildContext context) {
@@ -366,6 +370,11 @@ class InteractionSheetFrame extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             dragArea,
+            if (toolbar != null)
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, 0, Space.gutter, Space.m),
+                child: toolbar,
+              ),
             Container(
               height: 0.8,
               margin: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
