@@ -28,6 +28,9 @@ dependencies:
   meta: ^1.19.0
   flutter_localizations:
     sdk: flutter
+  adhan_dart: ^2.0.1
+  sensors_plus: ^7.1.0
+  flutter_displaymode: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +59,18 @@ flutter:
   shaders:
     - shaders/glass.frag
     - shaders/cosmos_backdrop.frag
+    - shaders/orbit/sky.frag
+    - shaders/orbit/moon.frag
+    - shaders/orbit/brass.frag
+    - shaders/orbit/ring_text.frag
+    - shaders/orbit/planet_faith.frag
+    - shaders/orbit/planet_ocean.frag
+    - shaders/orbit/planet_terracotta.frag
+    - shaders/orbit/planet_industrial.frag
+    - shaders/orbit/planet_crystal.frag
+    - shaders/orbit/planet_verdant.frag
+    - shaders/orbit/planet_volcanic.frag
+    - shaders/orbit/planet_gas_giant.frag
 
   fonts:
     - family: PlexArabic
