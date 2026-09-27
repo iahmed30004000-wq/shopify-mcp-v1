@@ -1,0 +1,570 @@
+{
+  "shellSplashAssembling": {
+    "ar": "نُركّب أسطرلابك…",
+    "en": "Assembling your astrolabe…",
+    "description": "Splash caption while the encrypted database opens"
+  },
+  "shellSplashSemantics": {
+    "ar": "يجري فتح بياناتك المشفّرة",
+    "en": "Unlocking your encrypted data",
+    "description": "Screen-reader label of the splash"
+  },
+  "shellGateErrorTitle": {
+    "ar": "تعذّر فتح مَدار",
+    "en": "Madar couldn't open",
+    "description": "Title of the database-unlock error view"
+  },
+  "shellGateRetry": {
+    "ar": "أعِد المحاولة",
+    "en": "Try again"
+  },
+  "shellGateReset": {
+    "ar": "ابدأ من جديد",
+    "en": "Start fresh",
+    "description": "Offers deleting the unreadable database"
+  },
+  "shellGateResetTitle": {
+    "ar": "حذف جميع البيانات؟",
+    "en": "Delete all data?"
+  },
+  "shellGateResetBody": {
+    "ar": "سيُحذف ملف البيانات المشفّر نهائيًا ويبدأ مَدار من الصفر، ولا يمكن التراجع عن ذلك. إن لم تكن لديك نسخة احتياطية فلن تعود بياناتك القديمة.",
+    "en": "The encrypted data file will be permanently deleted and Madar will start from scratch. This can't be undone, and without a backup your old data won't come back."
+  },
+  "shellGateResetConfirm": {
+    "ar": "احذف وابدأ من جديد",
+    "en": "Delete and start fresh"
+  },
+  "shellGateResetFailed": {
+    "ar": "تعذّر حذف البيانات. أعد تشغيل التطبيق ثم حاول مجددًا.",
+    "en": "Couldn't delete the data. Restart the app and try again."
+  },
+  "shellDurationHoursMinutes": {
+    "ar": "{hours} س {minutes} د",
+    "en": "{hours}h {minutes}m",
+    "description": "Compact duration; numbers are pre-formatted",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationHours": {
+    "ar": "{hours} س",
+    "en": "{hours}h",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationMinutes": {
+    "ar": "{minutes} د",
+    "en": "{minutes} min",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationLessThanMinute": {
+    "ar": "أقل من دقيقة",
+    "en": "under a minute"
+  },
+  "homeOpenSettings": {
+    "ar": "الإعدادات",
+    "en": "Settings",
+    "description": "Home header button"
+  },
+  "homeNow": {
+    "ar": "الآن",
+    "en": "Now",
+    "description": "Badge on the current prayer window"
+  },
+  "homeNextPrayer": {
+    "ar": "{prayer} بعد {duration}",
+    "en": "{prayer} in {duration}",
+    "description": "Countdown to the next prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "homePlaceholderBadge": {
+    "ar": "مواقيت تقريبية",
+    "en": "Approximate times",
+    "description": "Marks the static placeholder prayer times"
+  },
+  "homePlaceholderNote": {
+    "ar": "المواقيت الدقيقة لموقعك تصل قريبًا",
+    "en": "Exact times for your location are coming soon"
+  },
+  "homeWindowStarts": {
+    "ar": "{window}، يبدأ {time}",
+    "en": "{window}, starts {time}",
+    "description": "Screen-reader label of a window chip",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTasksCount": {
+    "ar": "{count, plural, =0{لا مهام بعد} =1{مهمة واحدة} =2{مهمتان} few{{count} مهام} many{{count} مهمة} other{{count} مهمة}}",
+    "en": "{count, plural, =0{No tasks yet} =1{1 task} other{{count} tasks}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeTasksProgress": {
+    "ar": "أنجزت {done} من {total}",
+    "en": "{done} of {total} done",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAddTask": {
+    "ar": "مهمة جديدة",
+    "en": "New task"
+  },
+  "homeEditTask": {
+    "ar": "تعديل المهمة",
+    "en": "Edit task"
+  },
+  "homeTaskTitleField": {
+    "ar": "المهمة",
+    "en": "Task"
+  },
+  "homeTaskTitleHint": {
+    "ar": "ماذا تودّ أن تنجز؟",
+    "en": "What would you like to get done?"
+  },
+  "homeTaskNotesField": {
+    "ar": "ملاحظات",
+    "en": "Notes"
+  },
+  "homeTaskWindowField": {
+    "ar": "وقتها من اليوم",
+    "en": "Time of day"
+  },
+  "homeTaskDateField": {
+    "ar": "اليوم",
+    "en": "Day"
+  },
+  "homeTaskPlanetField": {
+    "ar": "الكوكب",
+    "en": "Planet"
+  },
+  "homeTaskAdded": {
+    "ar": "أُضيفت المهمة",
+    "en": "Task added"
+  },
+  "homeTaskCompleted": {
+    "ar": "أُنجزت المهمة",
+    "en": "Task completed"
+  },
+  "homeTaskReopened": {
+    "ar": "أُعيد فتح المهمة",
+    "en": "Task reopened"
+  },
+  "homeTaskReopen": {
+    "ar": "إعادة فتح",
+    "en": "Reopen",
+    "description": "Swipe action on a completed task"
+  },
+  "homeTaskDone": {
+    "ar": "منجزة",
+    "en": "Done",
+    "description": "Screen-reader state of a completed task"
+  },
+  "homeMoveTitle": {
+    "ar": "انقلها إلى وقت آخر",
+    "en": "Move to another window"
+  },
+  "homeMoveSubtitle": {
+    "ar": "تبقى في اليوم نفسه",
+    "en": "It stays on the same day"
+  },
+  "homeReminderSet": {
+    "ar": "ضُبط التذكير",
+    "en": "Reminder set"
+  },
+  "homeReminderRemoved": {
+    "ar": "أُزيل التذكير",
+    "en": "Reminder removed"
+  },
+  "homeEmptyTitle": {
+    "ar": "هذا الوقت ما زال رحبًا",
+    "en": "This window is wide open"
+  },
+  "homeEmptyBody": {
+    "ar": "أضف مهمة، أو اكتب ما يدور في بالك في الشريط أدناه.",
+    "en": "Add a task, or type what's on your mind in the bar below."
+  },
+  "homeRadarTitle": {
+    "ar": "رادار الإهمال",
+    "en": "Neglect Radar"
+  },
+  "homeRadarBody": {
+    "ar": "سيلفت نظرك بلطف إلى جوانب حياتك التي غبت عنها طويلًا، ويصل مع المدار الحيّ.",
+    "en": "It will gently point you to the parts of life you've drifted from — arriving with the living orbit."
+  },
+  "homeRadarBadge": {
+    "ar": "قريبًا",
+    "en": "Soon"
+  },
+  "homeDefaultWallet": {
+    "ar": "المحفظة",
+    "en": "Wallet",
+    "description": "Name of the wallet created on demand by quick add"
+  },
+  "homeDialSemantics": {
+    "ar": "أسطرلاب اليوم: {window}، و{next}",
+    "en": "Today's astrolabe: {window}; {next}",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "next": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": {
+    "ar": "الإعدادات",
+    "en": "Settings"
+  },
+  "settingsPersonal": {
+    "ar": "التخصيص",
+    "en": "Personalisation"
+  },
+  "settingsGeneral": {
+    "ar": "عام",
+    "en": "General"
+  },
+  "settingsAppearance": {
+    "ar": "المظهر",
+    "en": "Appearance"
+  },
+  "settingsAppearanceSubtitle": {
+    "ar": "السمة ولون التمييز واللغة والأرقام",
+    "en": "Theme, accent, language and digits"
+  },
+  "settingsTheme": {
+    "ar": "السمة",
+    "en": "Theme"
+  },
+  "settingsThemeSelected": {
+    "ar": "السمة الحالية",
+    "en": "Current theme"
+  },
+  "settingsFollowSystem": {
+    "ar": "اتّباع وضع الجهاز",
+    "en": "Follow the device"
+  },
+  "settingsFollowSystemHint": {
+    "ar": "اللؤلؤ في الوضع الفاتح، وسمتك المختارة في الداكن",
+    "en": "Pearl in light mode, your chosen theme in dark mode"
+  },
+  "settingsAccent": {
+    "ar": "لون التمييز",
+    "en": "Accent colour"
+  },
+  "settingsAccentDefault": {
+    "ar": "لون السمة",
+    "en": "Theme colour"
+  },
+  "settingsAccentCustom": {
+    "ar": "لون مخصّص",
+    "en": "Custom colour"
+  },
+  "settingsLanguage": {
+    "ar": "اللغة",
+    "en": "Language"
+  },
+  "settingsLanguageArabic": {
+    "ar": "العربية",
+    "en": "العربية",
+    "description": "Always shown in Arabic"
+  },
+  "settingsLanguageEnglish": {
+    "ar": "English",
+    "en": "English",
+    "description": "Always shown in English"
+  },
+  "settingsDigits": {
+    "ar": "الأرقام",
+    "en": "Digits"
+  },
+  "settingsDigitsAuto": {
+    "ar": "تلقائية",
+    "en": "Automatic"
+  },
+  "settingsDigitsWestern": {
+    "ar": "غربية",
+    "en": "Western"
+  },
+  "settingsDigitsArabicIndic": {
+    "ar": "مشرقية",
+    "en": "Arabic-Indic"
+  },
+  "settingsDigitsHint": {
+    "ar": "التلقائية: مشرقية بالعربية وغربية بالإنجليزية",
+    "en": "Automatic: Arabic-Indic in Arabic, Western in English"
+  },
+  "settingsSound": {
+    "ar": "الصوت واللمس",
+    "en": "Sound & haptics"
+  },
+  "settingsSoundSubtitle": {
+    "ar": "المؤثرات والأجواء ومستويات الصوت",
+    "en": "Effects, ambience and volume levels"
+  },
+  "settingsSoundEnabled": {
+    "ar": "الأصوات",
+    "en": "Sounds"
+  },
+  "settingsSoundEnabledHint": {
+    "ar": "مفتاح عام لكل أصوات التطبيق",
+    "en": "One switch for every sound in the app"
+  },
+  "settingsHaptics": {
+    "ar": "الاهتزاز اللمسي",
+    "en": "Haptics"
+  },
+  "settingsHapticsHint": {
+    "ar": "نبضة خفيفة ترافق كل صوت",
+    "en": "A light pulse with every sound"
+  },
+  "settingsAmbient": {
+    "ar": "أجواء الفضاء",
+    "en": "Cosmic ambience"
+  },
+  "settingsAmbientHint": {
+    "ar": "طبقة صوتية هادئة تحت الواجهة",
+    "en": "A calm bed of sound beneath the interface"
+  },
+  "settingsVolumes": {
+    "ar": "مستويات الصوت",
+    "en": "Volume levels"
+  },
+  "settingsSoundProfile": {
+    "ar": "طابع الأصوات",
+    "en": "Sound character"
+  },
+  "settingsSoundProfileHint": {
+    "ar": "يتبدّل مع السمة",
+    "en": "Changes with the theme"
+  },
+  "settingsMotion": {
+    "ar": "الحركة",
+    "en": "Motion"
+  },
+  "settingsMotionSystem": {
+    "ar": "حسب الجهاز",
+    "en": "Device"
+  },
+  "settingsMotionReduced": {
+    "ar": "مخفّفة",
+    "en": "Reduced"
+  },
+  "settingsMotionFull": {
+    "ar": "كاملة",
+    "en": "Full"
+  },
+  "settingsMotionHint": {
+    "ar": "المخفّفة تستبدل الانتقالات السينمائية بتلاشٍ هادئ",
+    "en": "Reduced swaps cinematic transitions for a calm fade"
+  },
+  "settingsPower": {
+    "ar": "وضع الطاقة",
+    "en": "Power mode"
+  },
+  "settingsPowerAuto": {
+    "ar": "تلقائي",
+    "en": "Automatic"
+  },
+  "settingsPowerSaver": {
+    "ar": "توفير البطارية",
+    "en": "Battery saver"
+  },
+  "settingsPowerHint": {
+    "ar": "توفير البطارية يُثبّت خلفية الفضاء ويخفّف العرض",
+    "en": "Battery saver stills the cosmic backdrop and lightens rendering"
+  },
+  "settingsData": {
+    "ar": "البيانات",
+    "en": "Data"
+  },
+  "settingsImport": {
+    "ar": "استيراد من النموذج الأوّلي",
+    "en": "Import from the prototype"
+  },
+  "settingsImportHint": {
+    "ar": "ملف JSON صدّرته من النسخة الأولى",
+    "en": "A JSON file exported from the first version"
+  },
+  "settingsPrivacyNote": {
+    "ar": "بياناتك مشفّرة وتبقى على جهازك وحده.",
+    "en": "Your data is encrypted and never leaves your device."
+  },
+  "settingsAbout": {
+    "ar": "حول مَدار",
+    "en": "About Madar"
+  },
+  "settingsVersion": {
+    "ar": "الإصدار {version}",
+    "en": "Version {version}",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsFonts": {
+    "ar": "الخطوط",
+    "en": "Fonts"
+  },
+  "settingsFontsBody": {
+    "ar": "خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1",
+    "en": "Open fonts under the SIL Open Font License 1.1"
+  },
+  "settingsFontRoleUi": {
+    "ar": "خط الواجهة",
+    "en": "Interface"
+  },
+  "settingsFontRoleDisplay": {
+    "ar": "خط العناوين",
+    "en": "Headings"
+  },
+  "settingsFontRoleQuran": {
+    "ar": "نص القرآن الكريم",
+    "en": "Quran text"
+  },
+  "settingsFontRoleNaskh": {
+    "ar": "النصوص الكلاسيكية",
+    "en": "Classical text"
+  },
+  "settingsFontPlex": {
+    "ar": "IBM Plex Sans Arabic",
+    "en": "IBM Plex Sans Arabic",
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontReemKufi": {
+    "ar": "Reem Kufi",
+    "en": "Reem Kufi",
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiriQuran": {
+    "ar": "Amiri Quran",
+    "en": "Amiri Quran",
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiri": {
+    "ar": "Amiri",
+    "en": "Amiri",
+    "description": "Font name (proper noun)"
+  },
+  "settingsLicense": {
+    "ar": "الترخيص",
+    "en": "Licence"
+  },
+  "settingsLicenseUnavailable": {
+    "ar": "تعذّر تحميل نص الترخيص",
+    "en": "Couldn't load the licence text"
+  },
+  "settingsGalleryHint": {
+    "ar": "كل مكوّنات الواجهة في مكان واحد",
+    "en": "Every interface component in one place"
+  },
+  "settingsDeveloper": {
+    "ar": "للمطوّرين",
+    "en": "Developer"
+  },
+  "settingsOpen": {
+    "ar": "فتح {name}",
+    "en": "Open {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingWelcomeTagline": {
+    "ar": "يومك يدور حول الصلوات الخمس",
+    "en": "Your day orbits the five prayers"
+  },
+  "onboardingWelcomeBody": {
+    "ar": "مهامك وصحتك ومالك وأهلك… لكلٍّ منها مداره، والصلاة هي المركز الذي يجمعها ويضبط إيقاعها.",
+    "en": "Tasks, health, money, family — each has its own orbit, and prayer is the centre that holds them together and sets their rhythm."
+  },
+  "onboardingStyleTitle": {
+    "ar": "لغتك وطابعك",
+    "en": "Your language and look"
+  },
+  "onboardingStyleBody": {
+    "ar": "جرّب وشاهد التغيير فورًا، ويمكنك تعديله متى شئت من الإعدادات.",
+    "en": "Try them and watch everything change live — you can adjust this anytime in Settings."
+  },
+  "onboardingStartTitle": {
+    "ar": "من أين نبدأ؟",
+    "en": "Where shall we begin?"
+  },
+  "onboardingStartBody": {
+    "ar": "بياناتك مشفّرة وتبقى على جهازك وحده.",
+    "en": "Your data is encrypted and stays on your device."
+  },
+  "onboardingStartFresh": {
+    "ar": "بداية جديدة",
+    "en": "Start fresh"
+  },
+  "onboardingStartFreshBody": {
+    "ar": "مدارٌ صافٍ ينتظر خطوتك الأولى",
+    "en": "A clear orbit, waiting for your first step"
+  },
+  "onboardingImport": {
+    "ar": "استيراد بياناتي",
+    "en": "Import my data"
+  },
+  "onboardingImportBody": {
+    "ar": "من ملف JSON صدّرته من النموذج الأوّلي",
+    "en": "From a JSON file exported by the prototype"
+  },
+  "onboardingBegin": {
+    "ar": "لنبدأ",
+    "en": "Let's begin"
+  },
+  "onboardingSkip": {
+    "ar": "تخطٍّ",
+    "en": "Skip"
+  },
+  "onboardingStep": {
+    "ar": "الخطوة {current} من {total}",
+    "en": "Step {current} of {total}",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  }
+}

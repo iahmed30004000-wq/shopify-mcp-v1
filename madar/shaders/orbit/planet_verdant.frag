@@ -10,7 +10,7 @@
 // forest behind it deep green.
 //   thriving : lush layered greens, glinting rivers and seas, soft clouds,
 //              settlement lights along coasts and rivers at night,
-//              bioluminescent forest shimmer, lime aurora curtains.
+//              bioluminescent forest shimmer, emerald aurora curtains.
 //   neglected: barren tan/brown rock, spreading desert and dunes, seas
 //              shrinking into cracked dry basins (drought-crack network),
 //              dust storms, desaturation, red distress pulse.
@@ -26,6 +26,15 @@
 //       uScore). Pass e.g. habit-streak progress or goal completion.
 //   y, z, w : unused.
 // Draw rect: centre ± uRadius × 1.35 (haloFactor 1.35).
+//
+// FAMILY LOOK (common.glsl): lifeGrade (thriveGrade + neglectGrade) on the lit
+// surface BEFORE the night lights / bioluminescence, the shared forward-scatter
+// haze/halo (a crescent when back-lit, density × haloGain), the shared soft
+// aurora curtains (emerald → teal), the limb shock ring for uPulse (the lime
+// bloom at the growth front stays as this world's flourish), the shared
+// distress rim/halo and compositeDiscHalo.
+// Identity vs Health (ocean): Growth is GREEN LAND – a low sea level so the
+// continents dominate, saturated forests, dark blue seas, an emerald sky.
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -82,56 +91,26 @@ float vd_mud8(vec3 x) {
   return dot(0.5 * (r1 + r2), normalize(r2 - r1));
 }
 
-// Auroral footprint on the ground (object-space point q): the thin bright
-// lower edge of the curtains; `edge` = half-width in q.y units.
-float vd_auroraFoot(vec3 q, float t, float edge, float c0) {
-  vec2 dir = normalize(q.xz + 1e-4);
-  float hemi = q.y > 0.0 ? 1.0 : -1.0;
-  float band = abs(q.y) - c0;
-  float rays = noise3(vec3(dir * 34.0, t * 0.5 + hemi * 9.0));
-  float folds = noise3(vec3(dir * 3.5, t * 0.15 - hemi * 4.0));
-  return exp(-band * band / (edge * edge)) * (0.3 + 0.7 * smoothstep(0.25, 0.8, rays)) * (0.2 + 0.8 * folds);
-}
-
-// One crossing of the view ray with an auroral sheet at view-space point X.
-// Returns (emission, emission × relative height).
-vec2 vd_sheet(vec3 X, vec3 axis, float c, float H, float zs, mat3 rot, float t, float px) {
-  float rX = length(X);
-  float h = rX - 1.0;
-  if (h <= 0.0 || h >= H || X.z < zs) return vec2(0.0);
-  vec3 Xo = rot * X;
-  vec2 dir = normalize(Xo.xz + 1e-5);
-  float hemi = Xo.y > 0.0 ? 1.0 : -1.0;
-  float u = h / H;
-  float rays = noise3(vec3(dir * mix(34.0, 80.0, saturate(0.004 / px)), t * 0.5 + hemi * 9.0 + u * 0.3));
-  float folds = noise3(vec3(dir * 3.5, t * 0.15 - hemi * 4.0));
-  float prof = smoothstep(0.0, 0.05, u) * exp(-u * 2.4);
-  vec3 nrm = normalize(dot(X, axis) * axis - c * c * X);
-  float graze = 1.0 / max(abs(nrm.z), 0.15);
-  float vis = smoothstep(0.6, 2.5, H * length(X.xy) / rX / px);
-  float e = (0.15 + 0.85 * smoothstep(0.3, 0.85, rays)) * (0.2 + 0.8 * folds) * prof * graze * vis;
-  return vec2(e, e * u);
-}
-
-// Aurora curtains: thin emissive sheets rising H radii above both auroral
-// ovals (the cone |X·axis| = c·|X|), intersected analytically with the
-// orthographic view ray. The ovals are tied to the star wind, not the crust.
-vec2 vd_curtains(vec2 p, vec3 axis, mat3 rot, float c0, float t, float px) {
-  float H = 0.09;
-  float pp = dot(p, p);
-  if (pp > (1.0 + H) * (1.0 + H)) return vec2(0.0);
-  float zs = pp < 1.0 ? sqrt(1.0 - pp) : -9.0;
-  float c = c0 + (noise3(vec3(p * 2.2, t * 0.08)) - 0.5) * 0.07;
-  float k = dot(axis.xy, p);
-  float A = axis.z * axis.z - c * c;
-  A = A < 0.0 ? min(A, -1e-4) : max(A, 1e-4);
-  float B = 2.0 * k * axis.z;
-  float C = k * k - c * c * pp;
-  float D = B * B - 4.0 * A * C;
-  if (D <= 0.0) return vec2(0.0);
-  float sD = sqrt(D);
-  return vd_sheet(vec3(p, (-B + sD) / (2.0 * A)), axis, c, H, zs, rot, t, px)
-       + vd_sheet(vec3(p, (-B - sD) / (2.0 * A)), axis, c, H, zs, rot, t, px);
+// Conservative screen-space bound of the shared aurora curtains: every sheet
+// point X = rho·(±c·A + s·w) (w ⟂ A, rho ∈ [1, 1+AURORA_H], c = ovalY ± 0.03)
+// projects inside one of two flat ellipses around the projected ovals, so
+// outside them auroraCurtains() returns exactly 0 and the call (1 noise tap +
+// the quadratic, up to 7 taps) can be skipped with no visible change.
+bool vd_auroraNear(vec2 p, mat3 rot, float ovalY, float px) {
+  vec3 A = vec3(0.0, 1.0, 0.0) * rot;              // spin axis in view space (as auroraCurtains)
+  float a2l = length(A.xy);
+  vec2 e1 = a2l > 1e-4 ? A.xy / a2l : vec2(0.0, 1.0);
+  float cLo = ovalY - 0.031;
+  float cHi = min(ovalY + 0.031, 1.0);
+  float sMax = sqrt(max(1.0 - cLo * cLo, 0.0));
+  float R = 1.0 + AURORA_H;
+  float m = 3.0 * px + 0.01;
+  float S = R * sMax + m;                          // semi-axis across the axis
+  float Y = R * sMax * abs(A.z) + m;               // semi-axis along the projected axis
+  float u = abs(dot(p, e1));                       // both hemispheres by symmetry
+  float v = dot(p, vec2(-e1.y, e1.x));
+  float du = u - clamp(u, cLo * a2l, R * cHi * a2l);
+  return du * du / (Y * Y) + v * v / (S * S) <= 1.0;
 }
 
 void main() {
@@ -150,23 +129,24 @@ void main() {
   vec3 cLeaf = toLinear(uColorA.rgb);
   vec3 cGlow = toLinear(uColorB.rgb);
   vec3 cDeep = toLinear(uColorC.rgb);
-  vec3 red = vec3(1.0, 0.047, 0.023);
-  float distress = ng * distressPulse(t);
-  vec3 atmoCol = mix(cGlow, vec3(0.22, 0.55, 1.0), 0.45);
-  float atmoD = mix(0.3, 0.6, th) * (1.0 - ng * 0.45) + pls * 0.35;
+  float pulseD = distressPulse(t) * ng;
+  // emerald sky (Growth), away from the Health ocean's cyan; dusty when neglected
+  vec3 atmoCol = mix(mix(cGlow, toLinear(vec3(0.3, 0.85, 0.62)), 0.55), vec3(0.45, 0.62, 0.62), 0.25);
+  atmoCol = mix(atmoCol, toLinear(vec3(0.62, 0.56, 0.46)), ng * 0.6);
   mat3 rot = rotY(uSpin.x + t * 0.02) * rotX(uSpin.y);
   vec3 seedOff = vec3(uSeed * 1.3, -uSeed * 0.7, uSeed * 1.9);
-  vec2 ldir = l.xy;
-  float mie = pow(saturate(-l.z), 3.0);
+  // shared atmosphere (disc haze + halo use the same parameters)
+  float phase = atmoPhase(l);
+  float gain = 2.0 * haloGain(th, ng) * (1.0 + 0.5 * pls);
+  float tau0 = 0.03 * (1.0 + 1.2 * ng);
 
-  // Aurora curtains (thriving only), shared by the disc and the halo.
-  float auC0 = 0.87;
-  vec3 auCur = vec3(0.0);
-  if (th > 0.01) {
-    vec2 cu = vd_curtains(p, vec3(0.0, 1.0, 0.0) * rot, rot, auC0, t, px) * th;
-    vec3 auTop = mix(cGlow, vec3(0.05, 0.75, 0.85), 0.65);
-    auCur = mix(cGlow * 1.3, auTop, saturate(cu.y / max(cu.x, 1e-4) * 2.0)) * cu.x * 0.18;
-  }
+  // shared aurora curtains (emerald base → teal top), evaluated once for disc
+  // and halo; faded at small radii where a 2 px arc would read as an outline
+  float auK = (th * 0.9 + pls * 0.8) * mix(0.35, 1.0, smoothstep(22.0, 60.0, uRadius));
+  vec2 au = (auK > 0.001 && vd_auroraNear(p, rot, 0.9, px)) ? auroraCurtains(p, rot, l, 0.9, t, px) * auK : vec2(0.0);
+  vec3 auBase = mix(cGlow, vec3(0.2, 1.0, 0.55), 0.55);
+  vec3 auTop = mix(cGlow, vec3(0.05, 0.75, 0.85), 0.65);
+  vec3 auC = mix(auBase, auTop, saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.17;
 
   float discA = discMask(p, uRadius);
   vec3 col = vec3(0.0);
@@ -177,6 +157,7 @@ void main() {
     vec3 q = rot * n;
     vec3 qs = q + seedOff;
     vec3 V = vec3(0.0, 0.0, 1.0);
+    float mu = n.z;
     float ndl = dot(n, l);
     float diff = smoothstep(-0.06, 0.35, ndl) * saturate(ndl * 0.85 + 0.2);
     float night = 1.0 - smoothstep(-0.22, 0.06, ndl);
@@ -188,10 +169,10 @@ void main() {
     // --- terrain -------------------------------------------------------------
     float warp = fbm3lo(qs * 1.4);
     float h = fbm3(qs * 1.9 + warp * 1.1);
-    float sea = 0.515 - ng * 0.035;                 // seas shrink in drought
+    float sea = 0.47 - ng * 0.035;                  // low sea: green land dominates; seas shrink in drought
     float cw = 0.002 + px * 2.2;                    // coastline antialias width
     float land = smoothstep(sea - cw, sea + cw, h);
-    float e = saturate((h - sea) / 0.23);           // elevation above the sea
+    float e = saturate((h - sea) / 0.26);           // elevation above the sea
     float lat = abs(q.y);
     vec3 lo = rot * l;
     // Land-only lookups are skipped over open ocean (coherent branch).
@@ -209,7 +190,10 @@ void main() {
         relief = (ridge2 - ridge) * smoothstep(0.05, 0.4, e) * land * reliefK;
       }
     }
-    float mount = smoothstep(0.22, 0.75, e) * smoothstep(0.45, 0.8, ridge);
+    // ridge-driven detail (high rock, snow) is sub-pixel below ~80 px: settle it
+    // to its mean there instead of letting it alias into white speckles
+    float ridgeL = mix(0.55, ridge, smoothstep(28.0, 80.0, uRadius));
+    float mount = smoothstep(0.25, 0.78, e) * smoothstep(0.45, 0.8, ridgeL);
 
     // Rivers: meandering iso-lines on the lowlands, energy-conserving width.
     float rw0 = 0.009;
@@ -228,20 +212,22 @@ void main() {
     float front = veg * (1.0 - smoothstep(0.0, 0.22, age));   // fresh growth fringe
 
     // --- albedo --------------------------------------------------------------
-    // Ocean: deep → shallow shelves.
+    // Ocean: dark blue deep → shallow shelves (the luminous cyan belongs to Health).
     float depth = saturate((sea - h) / 0.1);
-    vec3 deepSea = vec3(0.003, 0.018, 0.042);
-    vec3 shelf = vec3(0.015, 0.1, 0.11);
+    vec3 deepSea = vec3(0.003, 0.016, 0.045);
+    vec3 shelf = vec3(0.012, 0.07, 0.1);
     vec3 water = mix(shelf, deepSea, pow(depth, 0.5));
     // Barren ground: tan and brown rock with strata, ochre in the dry basins.
-    vec3 tanRock = vec3(0.36, 0.25, 0.14);
+    vec3 tanRock = vec3(0.3, 0.21, 0.12);
     vec3 brown = vec3(0.17, 0.11, 0.065);
-    vec3 ochre = vec3(0.36, 0.16, 0.07);
+    vec3 ochre = vec3(0.3, 0.14, 0.06);
     vec3 rock = mix(tanRock, brown, smoothstep(0.3, 0.85, ridge * 0.6 + strata * 0.5));
     rock = mix(rock, ochre, smoothstep(0.5, 0.8, 1.0 - moist) * 0.5);
     rock = mix(rock, vec3(0.24, 0.22, 0.2), mount * 0.6);                // grey high rock
-    vec3 beach = vec3(0.5, 0.43, 0.3);
-    rock = mix(beach, rock, smoothstep(0.0, 0.012, h - sea));
+    // Beaches: a thin, dark, patchy strand on only some coasts (no sticker outline).
+    vec3 beach = vec3(0.36, 0.31, 0.22);
+    float beachK = smoothstep(0.5, 0.7, noise3(qs * 5.0 + 17.0));
+    rock = mix(rock, beach, beachK * (1.0 - smoothstep(0.0, 0.004 + px * 0.5, h - sea)));
     // Forest: fresh lime at the front, layered greens behind it; drier land
     // grows olive grassland, wet valleys deep blue-green rainforest.
     vec3 young = mix(cGlow, cLeaf, 0.35) * 0.34;
@@ -251,14 +237,15 @@ void main() {
     vec3 mature = mix(grass, midG, smoothstep(0.3, 0.65, moist + valley * 0.3));
     mature = mix(mature, old, smoothstep(0.35, 1.0, age) * smoothstep(0.3, 0.6, moist + valley * 0.4 + (1.0 - e) * 0.2));
     vec3 forest = mix(young, mature, smoothstep(0.0, 0.3, age));
+    forest = max(mix(vec3(luma(forest)), forest, 1.3), 0.0);          // lush, saturated greens
     // Canopy clumps + a slow seasonal hue drift between hemispheres.
     float canopy = (hiDet > 0.0 && veg > 0.0) ? mix(0.5, noise3(qs * 38.0), hiDet) : 0.5;
-    forest *= 0.75 + 0.5 * canopy;
+    forest *= (0.75 + 0.5 * canopy) * 1.12;
     float season = sin(t * 0.12 + q.y * 3.0 + uSeed);
     forest *= mix(vec3(1.0), vec3(1.2, 1.0, 0.65), 0.1 + 0.08 * season);
     vec3 ground = mix(rock, forest, veg);
     // Snow on the high ridges and the polar caps.
-    float snow = smoothstep(0.62, 0.82, ridge) * smoothstep(0.4, 0.75, e) * land * (1.0 - ng * 0.9);
+    float snow = smoothstep(0.62, 0.82, ridgeL) * smoothstep(0.45, 0.8, e) * land * (1.0 - ng * 0.9);
     float capN = smoothstep(0.935, 0.965, lat + (warp - 0.5) * 0.1 + (strata - 0.5) * 0.05);
     vec3 ice = vec3(0.6, 0.66, 0.72) * (0.7 + 0.45 * smoothstep(0.2, 0.8, strata * 0.6 + ridge * 0.5));
     ground = mix(ground, ice, max(snow * 0.9, capN));
@@ -272,13 +259,13 @@ void main() {
     // --- lighting ------------------------------------------------------------
     vec3 hv = normalize(l + V);
     float nh = saturate(dot(n, hv));
-    float fres = pow(1.0 - saturate(n.z), 5.0);
+    float fres = pow(1.0 - saturate(mu), 5.0);
     float sunShade = diff * saturate(1.0 + relief * 7.0);
     vec3 c = albedo * sunShade * 2.3;
     float ripple = (hiDet > 0.0 && nh > 0.9) ? mix(0.5, noise3(qs * 22.0 + t * 0.15), hiDet) : 0.5;
     float glint = (pow(nh, 400.0) * 1.6 + pow(nh, 60.0) * 0.2 * (0.7 + 0.6 * ripple)) * smoothstep(0.0, 0.2, ndl);
     c += vec3(1.0, 0.93, 0.8) * glint * wet;
-    c += atmoCol * fres * 0.25 * (1.0 - land) * diff;
+    c += atmoCol * fres * 0.2 * (1.0 - land) * diff;
     // Wind waves over the canopy on thriving worlds.
     float wave = sin(dot(qs, vec3(21.0, 7.0, -13.0)) + warp * 18.0 - t * 1.4);
     c += cGlow * veg * th * diff * smoothstep(0.6, 1.0, wave) * 0.04;
@@ -298,7 +285,38 @@ void main() {
     }
     c = mix(c, vec3(0.9, 0.94, 1.0) * (diff * 2.15 + 0.008), cloud * 0.8);
 
-    // --- night side: settlements and bioluminescent forests --------------------
+    // --- neglect: desert, dunes, drought cracks, murk, dust (surface) ----------
+    float crackGlow = 0.0;
+    if (ng > 0.01) {
+      float dryness = saturate(ng * 1.2 - moist * 0.6 + e * 0.15);
+      float desert = smoothstep(0.25, 0.6, dryness) * land * (1.0 - veg);
+      vec3 sand = mix(vec3(0.34, 0.19, 0.085), vec3(0.4, 0.28, 0.15), moist);
+      float dunes = 0.5 + 0.5 * sin(dot(qs, vec3(150.0, 40.0, 95.0)) + warp * 60.0 + strata * 6.0) * reliefK;
+      sand *= 0.95 + 0.08 * dunes;
+      c = mix(c, sand * sunShade * 0.95, desert * (1.0 - cloud) * 0.8);   // no brightener: the desert is not a lamp
+      // Exposed seabed and dry lowlands crack into polygons.
+      float bed = smoothstep(sea - 0.03, sea + 0.004, h) * (1.0 - smoothstep(0.0, 0.25, e));
+      float shelfDry = smoothstep(sea - 0.03, sea - 0.002, h) * (1.0 - land);
+      c = mix(c, vec3(0.34, 0.3, 0.24) * diff * 1.5, shelfDry * ng);
+      float mudMask = max(bed, shelfDry) * smoothstep(0.3, 0.8, ng) * (1.0 - veg);
+      if (mudMask > 0.01) {
+        vec3 mx = qs * 13.0;
+        float ed = uDetail < 0.3 ? vd_mud8(mx) : vd_mud27(mx);
+        float mw = max(0.03, 13.0 * px * 0.9);
+        float crack = (1.0 - smoothstep(mw * 0.4, mw, ed)) * sqrt(0.03 / mw);
+        c *= 1.0 - crack * mudMask * 0.65;
+        crackGlow = crack * mudMask;
+      }
+      // Murky, algae-choked seas.
+      c = mix(c, vec3(0.05, 0.06, 0.03) * diff * 2.0, (1.0 - land) * ng * 0.45);
+      float dust = dustStorm(q, t) * ng;
+      c = mix(c, vec3(0.36, 0.23, 0.12) * (diff * 1.5 + 0.02), dust * 0.5);
+    }
+
+    // Family living-state grade: after surface lighting, before emission.
+    c = lifeGrade(c, th, ng);
+
+    // --- night side: settlements and bioluminescent forests (emission) ---------
     if (night > 0.0 && land > 0.0) {
       float settle = smoothstep(0.3, 0.95, sc);
       float coast = 1.0 - smoothstep(0.0, 0.03, abs(h - sea));
@@ -311,69 +329,26 @@ void main() {
       c += cGlow * veg * night * bioBeat * bioPat * mix(0.004, 0.03, th) * (1.0 - cloud * 0.6);
       c += cGlow * front * night * th * 0.03;
     }
+    // drought cracks smoulder with the distress pulse at night
+    c += distressColor() * crackGlow * pulseD * night * 0.4;
 
-    // --- neglect: desert, dunes, drought cracks, murk, dust --------------------
-    if (ng > 0.01) {
-      float dryness = saturate(ng * 1.2 - moist * 0.6 + e * 0.15);
-      float desert = smoothstep(0.25, 0.6, dryness) * land * (1.0 - veg);
-      vec3 sand = mix(vec3(0.34, 0.19, 0.085), vec3(0.4, 0.28, 0.15), moist);
-      float dunes = 0.5 + 0.5 * sin(dot(qs, vec3(150.0, 40.0, 95.0)) + warp * 60.0 + strata * 6.0) * reliefK;
-      sand *= 0.95 + 0.08 * dunes;
-      c = mix(c, sand * sunShade * 2.0, desert * (1.0 - cloud) * 0.8);
-      // Exposed seabed and dry lowlands crack into polygons.
-      float bed = smoothstep(sea - 0.03, sea + 0.004, h) * (1.0 - smoothstep(0.0, 0.25, e));
-      float shelfDry = smoothstep(sea - 0.03, sea - 0.002, h) * (1.0 - land);
-      c = mix(c, vec3(0.42, 0.38, 0.31) * diff * 2.1, shelfDry * ng);
-      float mudMask = max(bed, shelfDry) * smoothstep(0.3, 0.8, ng) * (1.0 - veg);
-      if (mudMask > 0.01) {
-        vec3 mx = qs * 13.0;
-        float ed = uDetail < 0.3 ? vd_mud8(mx) : vd_mud27(mx);
-        float mw = max(0.03, 13.0 * px * 0.9);
-        float crack = (1.0 - smoothstep(mw * 0.4, mw, ed)) * sqrt(0.03 / mw);
-        c *= 1.0 - crack * mudMask * 0.65;
-        c += red * crack * mudMask * distress * night * 0.4;
-      }
-      // Murky, algae-choked seas.
-      c = mix(c, vec3(0.05, 0.06, 0.03) * diff * 2.0, (1.0 - land) * ng * 0.45);
-      c = desaturate(c, ng * 0.35) * (1.0 - ng * 0.3);
-      float dust = dustStorm(q, t) * ng;
-      c = mix(c, vec3(0.36, 0.23, 0.12) * (diff * 1.7 + 0.02), dust * 0.5);
-    }
-
-    // Aurora: bright footprint line + the curtains rising above it.
-    if (th > 0.01) {
-      float foot = vd_auroraFoot(q, t, max(0.012, px * 1.2), auC0) * th;
-      c += (cGlow * 1.3 * foot * 0.12 + auCur) * (0.15 + 1.1 * night);
-    }
-
-    // Atmosphere rim (continuous with the halo), warm band at the terminator.
-    vec2 dirN = n.xy / max(length(n.xy), 1e-4);
-    float illum = smoothstep(-0.5, 0.45, dot(dirN, ldir) + 0.12);
-    float limb = pow(1.0 - saturate(n.z), 3.0);
-    float dusk = exp(-ndl * ndl * 30.0);
-    vec3 rimCol = mix(atmoCol, vec3(1.0, 0.5, 0.25), dusk * 0.5);
-    c += rimCol * atmoD * limb * (illum * 1.1 + mie * 0.9);
-    c += atmoCol * atmoD * 0.06 * diff;                              // airlight haze
-
-    // Distress + celebration (forest surge, lime bloom at the growth front).
-    float fresR = pow(1.0 - saturate(n.z), 4.0);
-    c += red * fresR * distress * 1.1;
-    c += cGlow * pls * (fresR * 1.4 + front * 1.4 * (0.4 + diff) + veg * 0.08);
+    // --- shared atmosphere, aurora, distress, celebration ------------------------
+    vec3 T;
+    vec3 S = atmoHaze(mu, ndl, atmoCol, tau0, vec3(1.2, 1.0, 0.8), gain, phase, T);
+    c = c * T + S;
+    c += auC;
+    c += distressColor() * distressRim(mu, pulseD);
+    // celebration flourish: rim flash + forest surge with a lime bloom at the growth front
+    c += cGlow * pls * (pow(1.0 - saturate(mu), 6.0) * 1.2 + front * 1.4 * (0.4 + diff) + veg * 0.08);
 
     col = c;
   }
 
-  // --- halo (evaluated at r >= 1, composited under the disc) ---------------
-  float rh = max(r, 1.0);
-  vec2 dir = p / max(r, 1e-5);
-  float hw = 0.22 + pls * 0.08;
-  float fall = 1.0 - smoothstep(1.0, 1.0 + hw, rh);
-  fall *= fall;
-  float illumH = smoothstep(-0.5, 0.45, dot(dir, ldir) + 0.12);
-  vec3 halo = atmoCol * atmoD * fall * (illumH * 1.1 + mie * 0.9);
-  halo += red * distress * 0.5 * (1.0 - smoothstep(1.0, 1.1, rh));
-  halo += auCur * (0.35 + 0.65 * (1.0 - illumH));
-  float haloA = saturate(max(halo.r, max(halo.g, halo.b)) * 2.5);
-  vec3 pm = toGamma(tonemapACES(col)) * discA + toGamma(tonemapACES(halo)) * haloA * (1.0 - discA);
-  fragColor = vec4(dither(frag, pm), discA + haloA * (1.0 - discA));
+  // --- halo: shared forward-scatter halo + aurora + limb shock + distress -----
+  vec3 halo = atmoHalo(p, l, atmoCol, tau0, 0.035, gain, phase, px);
+  halo += auC;
+  halo += cGlow * limbShock(r, pls, px) * 0.6;
+  halo += distressColor() * distressHalo(r, pulseD, px);
+
+  fragColor = compositeDiscHalo(col, discA, halo, frag);
 }

@@ -18,6 +18,13 @@
 // uExtra.zw unused.
 // uSpin.x spin angle, uSpin.y axial tilt (aurora poles follow the axis).
 // haloFactor: 1.35 (embers/heat plumes stay inside 1.3 radii).
+//
+// FAMILY LOOK (common.glsl): lifeGrade on the lit crust (before emission), the
+// shared forward-scatter haze/halo (hot sulphur haze), the shared aurora as a
+// faint white-gold plasma arc (50 %, only above 60 px so the pole never reads
+// as an olive ring), the limb shock ring for celebrations (the rivers still
+// flash), the shared distress rim/halo and compositeDiscHalo. The limb glow is
+// day-side weighted so a small volcanic world never reads as a second sun.
 // ---------------------------------------------------------------------------
 uniform vec2 uSize;
 uniform vec2 uCenter;
@@ -43,76 +50,6 @@ vec3 volHeat(float T, vec3 surf, vec3 glow, vec3 deep) {
   c = mix(c, glow, smoothstep(0.5, 0.88, T));
   c = mix(c, vec3(1.0, 0.9, 0.7), smoothstep(0.9, 1.4, T));
   return c * (0.35 + T * T * 1.6);
-}
-
-// Polar aurora: analytic curtain sheets. Each hemisphere's auroral oval is a
-// cone of half-angle colat0 about the pole axis As (view space); the curtain
-// is that cone extruded from the ground to height H with an exponential
-// emission profile. For the orthographic view ray through p we solve where
-// it pierces the cone, f(z) = dot(P, As)/|P| = cos(colat0), P = (p, z)
-// (a quadratic), and integrate the emission across the sheet thickness
-// (path ∝ 1/|f'(z)|, capped). Curtains therefore lean out over the limb and
-// stand up correctly at any tilt; the ground term keeps the footprint visible
-// when looking straight down the sheet. Returns rgb emission.
-vec3 volCurtain(vec2 p, float r, vec3 As, mat3 rot, float t, float px, float hemi, vec3 cLow, vec3 cHigh) {
-  const float H = 0.085;
-  const float Hs = 0.03;
-  float R1 = 1.0 + H;
-  float zt2 = R1 * R1 - r * r;
-  if (zt2 <= 0.0) return vec3(0.0);
-  float z1 = sqrt(zt2);
-  float z0 = r < 1.0 ? sqrt(1.0 - r * r) : -z1;
-  // Reference direction (ground point or limb tangent point) for the wobble.
-  vec3 dref = r < 1.0 ? vec3(p, z0) : vec3(p / r, 0.0);
-  float cref = dot(dref, As);
-  if (cref < 0.72) return vec3(0.0);                 // far from this pole
-  vec3 qr = rot * dref;
-  vec2 dir = normalize(qr.xz + 1e-4);
-  float wob = noise3(vec3(dir * 2.5, t * 0.05 + hemi)) - 0.5;
-  float fold = noise3(vec3(dir * 11.0, t * 0.2 + hemi)) - 0.5;
-  float colat0 = 0.36 + wob * 0.12 + fold * 0.02;
-  // Arcs brighten and break along the oval (substorm structure).
-  float arcs = smoothstep(0.2, 0.75, noise3(vec3(dir * 3.2, t * 0.07 + hemi + 2.0)));
-  float c = cos(colat0);
-  float delta = sin(colat0) * max(0.014, px * 1.5);
-  float a = dot(p, As.xy);
-  float b = As.z;
-  vec3 res = vec3(0.0);
-  if (r < 1.0) {
-    float gd = (cref - c) / delta;
-    float rays = 0.35 + 0.65 * noise3(vec3(dir * 37.0, t * 0.45 + hemi));
-    res = cLow * exp(-gd * gd) * rays * (0.35 + 0.65 * arcs) * Hs * 0.7;
-  }
-  float qa = b * b - c * c;
-  qa = abs(qa) < 1e-5 ? 1e-5 : qa;
-  float qb = 2.0 * a * b;
-  float qc = a * a - c * c * r * r;
-  float disc = qb * qb - 4.0 * qa * qc;
-  if (disc > 0.0) {
-    float sq = sqrt(disc);
-    for (int k = 0; k < 2; k++) {
-      float z = (-qb + (k == 0 ? -sq : sq)) / (2.0 * qa);
-      float L2 = r * r + z * z;
-      float L = sqrt(L2);
-      float h = L - 1.0;
-      if (z >= z0 && z <= z1 && (a + b * z) > 0.0 && h > -0.001) {
-        float fp = abs(b / L - (a + b * z) * z / (L2 * L));
-        float dz = min(delta / max(fp, 1e-4), Hs * 1.1);
-        float g = exp(-h / Hs) * (1.0 - smoothstep(H * 0.55, H, h));
-        vec3 q = rot * (vec3(p, z) / L);
-        vec2 hd = normalize(q.xz + 1e-4);
-        float rays = 0.3 + 0.7 * noise3(vec3(hd * 37.0, t * 0.45 + hemi));
-        res = max(res, mix(cLow, cHigh, smoothstep(0.0, H * 0.8, h)) * g * dz * rays * (0.3 + 0.7 * arcs));
-      }
-    }
-  }
-  return res;
-}
-vec3 volAurora(vec2 p, float r, mat3 rot, float t, float px, vec3 cLow, vec3 cHigh) {
-  vec3 A = vec3(0.0, 1.0, 0.0) * rot;                // planet north axis, view space
-  float lodE = 0.014 / max(0.014, px * 1.5);         // widened when tiny: keep energy
-  lodE *= lodE;
-  return (volCurtain(p, r, A, rot, t, px, 5.0, cLow, cHigh) + volCurtain(p, r, -A, rot, t, px, 0.0, cLow, cHigh)) * (lodE / 0.03);
 }
 
 // Ember sparks rising off the limb (screen space, polar cells).
@@ -160,7 +97,6 @@ void main() {
   vec3 glow = toLinear(uColorB.rgb);
   vec3 deep = toLinear(uColorC.rgb);
   vec3 ashC = toLinear(vec3(0.50, 0.48, 0.46));
-  vec3 distressC = toLinear(vec3(1.0, 0.25, 0.18));
   float hot = 0.26 + 0.44 * act + 0.4 * th + train * 0.4 + uPulse * 0.25;
 
   // Heat shimmer: refractive radial wobble concentrated on the limb.
@@ -174,6 +110,30 @@ void main() {
   float r = length(p);
 
   mat3 rot = rotY(uSpin.x + t * 0.03) * rotX(uSpin.y);
+
+  // --- shared family parameters (disc and halo use the same ones) -------------
+  // Hot sulphur haze: thin and warm when thriving, grey ash smog when neglected.
+  vec3 atmoCol = mix(mix(surf, glow, 0.45), vec3(1.0, 0.78, 0.5), 0.25);
+  atmoCol = mix(atmoCol, ashC * 0.6, ng * 0.8);
+  float phase = atmoPhase(l);
+  float gain = 2.0 * haloGain(th, ng) * (1.0 + 0.5 * uPulse);
+  float tau0 = 0.03 * (1.0 + 1.2 * ng);
+  float pulseD = distressPulse(t) * ng;
+  // Aurora: Body's is a CELEBRATION plasma — white-gold arcs over the poles
+  // while uPulse is high (at most 50 % of the family strength),
+  // only a whisper when merely thriving (a dim gold curtain over the dark sky
+  // read as an olive/grey plate), and only on planets > ~60 px.
+  float auK = (th * 0.2 + uPulse * 1.1) * 0.5 * smoothstep(55.0, 75.0, uRadius);
+  // Cheap conservative pre-test (ray through p cannot reach the auroral cone
+  // |X·axis| = c|X| inside the curtain shell) skips most of the disc.
+  vec3 auAxis = vec3(0.0, 1.0, 0.0) * rot;
+  float auReach = abs(dot(p, auAxis.xy)) + abs(auAxis.z) * sqrt(max((1.0 + AURORA_H) * (1.0 + AURORA_H) - r * r, 0.0));
+  vec2 au = (auK > 0.001 && auReach > 0.9 - 0.04) ? auroraCurtains(p, rot, l, 0.9, t, px) * auK : vec2(0.0);
+  vec3 auBase = mix(glow, vec3(1.0, 0.78, 0.4), 0.6);      // white-gold plasma foot
+  vec3 auTop = mix(glow, vec3(1.0, 0.55, 0.15), 0.5);       // deeper amber top
+  vec3 auC = mix(auBase, auTop, saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.22;
+
+  float discA = discMask(p, uRadius);
   vec3 col = vec3(0.0);
 
   if (r < 1.0 + 2.0 * px) {
@@ -185,8 +145,9 @@ void main() {
 
     // --- river network ---------------------------------------------------------
     // Rivers follow the median contour of a warped fbm (long, winding,
-    // connected channels); tributaries are contours of a finer field that
-    // only ignite near a main channel; fine cooling cracks web the plates.
+    // connected channels); tributaries are distance-estimated contours of a
+    // finer field that only ignite near a main channel; fine cooling cracks
+    // are cellular (voronoi) plate edges that open in patches.
     float warp = fbm3lo(qs * 1.25 + vec3(0.0, t * 0.004, t * 0.002));
     vec3 wq = qs * 1.8 + (warp - 0.5) * vec3(2.0, 1.6, 2.0);
     float v1 = fbm3lo(wq);
@@ -194,19 +155,46 @@ void main() {
     float wide = smoothstep(0.5, 0.85, noise3(qs * 2.1 + 9.0));
     // Pixel footprint on the surface (planet radii) for band-limiting.
     float pxq = px / max(n.z, 0.2);
-    float wM0 = mix(0.045, 0.13, wide);
+    float wM0 = mix(0.045, 0.13, wide) * mix(0.9, 1.3, th);   // thriving rivers swell
     float wM = max(wM0, pxq * 6.5);                      // ≥ ~1 px wide channels
-    float lodE = sqrt(wM0 / wM);                         // keep energy readable when widened
+    // Widened (small) channels keep most of their energy but not all of it:
+    // a 22–40 px world shows glowing veins on dark crust, not a molten ball.
+    float lodE = pow(wM0 / wM, 0.7);
     float coreM = smoothstep(1.0 - wM, 1.0 - wM * 0.3, major);
     float bank = smoothstep(1.0 - wM * 4.5, 1.0 - wM * 0.5, major);
-    float v2 = noise3(wq * 3.4 + 5.1);
-    float trib = smoothstep(0.93, 0.985, 1.0 - abs(v2 * 2.0 - 1.0)) * smoothstep(1.0 - wM * 7.0, 1.0 - wM * 1.5, major);
-    trib *= smoothstep(0.02, 0.008, pxq);
+    // Tributaries: |v2 - 0.5| / |grad v2| is the distance to the contour, so the
+    // line has a constant width, and the tiny closed loops that value noise
+    // draws around its extrema (where the gradient vanishes) fade out instead
+    // of reading as procedural 'O' rings.
+    float tribBand = smoothstep(1.0 - wM * 7.0, 1.0 - wM * 1.5, major) * smoothstep(0.02, 0.008, pxq);
+    float trib = 0.0;
+    if (tribBand > 0.001) {
+      vec3 tq = wq * 3.4 + 5.1;
+      float v2 = noise3(tq);
+      vec3 e1 = normalize(cross(q, vec3(0.31, 0.93, 0.19)));
+      vec3 e2 = cross(q, e1);
+      const float EPS = 0.06;
+      vec2 g2 = vec2(noise3(tq + e1 * EPS), noise3(tq + e2 * EPS)) - v2;
+      float gl = length(g2) / EPS * 3.4 * 1.8;            // |grad| per planet radius
+      float dT = abs(v2 - 0.5) / max(gl, 1e-3);           // planet radii to the contour
+      float tw = max(0.0045, pxq * 0.9);
+      trib = (1.0 - smoothstep(tw * 0.35, tw, dT)) * smoothstep(3.0, 7.0, gl) * tribBand;
+    }
     float fine = 0.0;
-    if (detail > 0.3) {
-      vec3 fq = qs * 8.0 + warp * 2.5 + 2.0;
-      float v3 = noise3(fq) * 0.62 + noise3(fq * 2.4 + 7.0) * 0.38;   // irregular, few closed loops
-      fine = smoothstep(0.91, 0.985, 1.0 - abs(v3 * 2.0 - 1.0)) * (1.0 - bank) * smoothstep(0.009, 0.004, pxq);
+    if (detail > 0.3 && ng < 0.7) {
+      // Hot cooling cracks (thriving/steady crust; a neglected world shows the
+      // dull-red dying fissures below instead — never both voronoi passes).
+      // Cracks open in patches: the patch mask is evaluated first so the
+      // 27-cell voronoi only runs where a crack can show
+      float fineVis = smoothstep(0.009, 0.004, pxq) * (1.0 - bank) * smoothstep(0.5, 0.78, noise3(qs * 3.1 + 11.0))
+                    * (1.0 - smoothstep(0.3, 0.7, ng));
+      if (fineVis > 0.001) {
+        const float FF = 7.0;
+        vec2 vv = voronoi3(qs * FF + (warp - 0.5) * 1.5);
+        float ed = (vv.y - vv.x) * 0.5 / FF;              // ≈ planet radii to the plate edge
+        float cw = max(0.0022, pxq * 0.7);
+        fine = (1.0 - smoothstep(cw * 0.3, cw, ed)) * fineVis * (0.55 + 0.45 * hash12(floor(vv.xy * 97.0)));
+      }
     }
     float chan = max(bank, trib);   // channel depression mask
 
@@ -252,13 +240,14 @@ void main() {
     vent *= (0.55 + 0.45 * sin(t * (1.5 + vh.x * 2.0) + vh.y * 20.0)) * th;
 
     // --- surface shading -------------------------------------------------------
+    // Cooled basalt: dark, warm-brown iron-oxide plains, scorched levees.
     float plains = smoothstep(0.35, 0.7, warp);
-    vec3 basalt = mix(vec3(0.004, 0.0038, 0.004), vec3(0.027, 0.021, 0.018), smoothstep(0.45, 0.95, crust));
+    vec3 basalt = mix(vec3(0.014, 0.012, 0.0115), vec3(0.07, 0.054, 0.045), smoothstep(0.4, 0.95, crust));
     basalt *= 0.6 + 0.8 * grain;
-    basalt = mix(basalt, basalt * vec3(1.3, 1.08, 0.95) + deep * 0.25, plains * 0.5);
-    basalt = mix(basalt, deep * 0.35, chan * 0.7);       // scorched channel levees
+    basalt = mix(basalt, basalt * vec3(1.35, 1.05, 0.9) + deep * 0.3, plains * 0.6);
+    basalt = mix(basalt, deep * 0.4, chan * 0.7);       // scorched channel levees
     // Neglect: dusty, grey ash-covered crust.
-    basalt = mix(basalt, ashC * (0.045 + 0.08 * crust) * (0.8 + 0.4 * grain), ng * 0.8);
+    basalt = mix(basalt, ashC * (0.11 + 0.12 * crust) * (0.8 + 0.4 * grain), ng * 0.85);
 
     float ndl = dot(n, l);
     float diff = smoothstep(-0.12, 0.35, ndl) * saturate(ndl * 0.85 + 0.2);
@@ -267,6 +256,7 @@ void main() {
     float gloss = pow(saturate(dot(n, hv)), 48.0) * smoothstep(0.0, 0.2, ndl);
     float fres = pow(1.0 - saturate(n.z), 5.0);
     float night = 1.0 - smoothstep(-0.25, 0.15, ndl);
+    float dayside = smoothstep(-0.3, 0.4, ndl);
 
     // Glassy obsidian highlight (dulled by ash).
     vec3 lit = basalt * diff * 2.4;
@@ -276,7 +266,7 @@ void main() {
     vec3 emit = volHeat(T, surf, glow, deep) * saturate(T * 5.0);
     emit *= 0.8 + 0.55 * night;
     // Warm light spilling from the channels onto the surrounding crust.
-    emit += surf * pow(smoothstep(1.0 - wM * 8.0, 1.0, major), 3.0) * hot * 0.03 * (0.5 + night);
+    emit += surf * pow(smoothstep(1.0 - wM * 8.0, 1.0, major), 3.0) * hot * mix(0.03, 0.06, th) * (0.5 + night);
     emit += mix(glow, vec3(1.0, 0.72, 0.22), 0.5) * (fastWave * (coreM * 2.0 + trib * 0.8 + bank * 0.35) + fastBreath * coreM * 0.25);
     emit += mix(glow, vec3(1.0, 0.9, 0.7), 0.35) * vent * (1.2 + 1.8 * night);
 
@@ -286,38 +276,35 @@ void main() {
       float ashCl = smoothstep(0.5, 0.85, fbm3lo(qs * 2.4 + vec3(t * 0.01, 0.0, t * 0.006) + warp));
       ash = saturate(ash * 0.8 + ashCl * 0.6) * ng;
       emit *= 1.0 - ash * 0.45;
-      lit = mix(lit, ashC * 0.42 * (diff * 1.1 + 0.008), ash * 0.85);
+      lit = mix(lit, ashC * 0.75 * (diff * 1.1 + 0.01), ash * 0.85);
     }
 
-    col = lit + emit;
+    // Shared living-state grade on the reflected light only (the rivers cool
+    // on their own terms through `hot`).
+    lit = lifeGrade(lit, th, ng);
 
     // Cracks: faint dull-red fissures in the dying crust.
     if (ng > 0.02) {
       float ck = cracks(qs * 1.7 + 3.0) * smoothstep(0.35, 0.9, ng) * smoothstep(0.015, 0.006, pxq);
       ck *= smoothstep(0.45, 0.7, warp);                 // fissures open in patches
-      col += surf * vec3(0.8, 0.25, 0.12) * ck * (0.012 + 0.035 * night) * (0.6 + 0.4 * distressPulse(t));
+      emit += surf * vec3(0.8, 0.25, 0.12) * ck * (0.012 + 0.035 * night) * (0.6 + 0.4 * distressPulse(t));
     }
 
-    // Aurora (gold curtains over the poles, strongest on the night side).
-    float aurAmt = smoothstep(0.15, 1.0, th);
-    if (aurAmt > 0.001) {
-      vec3 aur = volAurora(p, r, rot, t, px, mix(glow, vec3(1.0, 0.85, 0.4), 0.15), surf) * aurAmt;
-      col += aur * (0.3 + 1.7 * night) * mix(0.4, 1.0, smoothstep(30.0, 90.0, uRadius));
-    }
+    // Shared hot-haze atmosphere (continuous with the halo at the limb).
+    vec3 T3;
+    vec3 S = atmoHaze(n.z, ndl, atmoCol, tau0, vec3(0.8, 1.0, 1.25), gain, phase, T3);
+    col = (lit + emit) * T3 + S;
+    col += auC;
 
-    // Hot haze atmosphere on the limb.
-    vec3 hazeC = mix(mix(surf, glow, 0.35), ashC * 0.5, ng * 0.8);
-    float hazeD = mix(0.2, 0.55, act) * (1.0 - ng * 0.3);
-    col += atmosphere(pc, n, l, hazeC, hazeD, 0.15);
-    col += mix(surf, glow, 0.3) * fres * hot * 0.12 * (1.0 - ng * 0.7);
+    // Warm limb glow from the incandescent crust: day-side weighted (the old
+    // all-round rim made a 22–40 px world read as a small sun).
+    col += mix(surf, glow, 0.3) * fres * hot * 0.06 * (0.25 + 0.75 * dayside) * (1.0 - ng * 0.7);
 
-    // Distress pulse (red rim) and celebration flare.
-    col += distressC * fres * ng * distressPulse(t) * 1.2;
-    // Celebration: rivers flash, a golden shock ring sweeps outward, rim flares.
-    float ringR = (1.0 - uPulse) * 1.25;
-    float shD = (r - ringR) / 0.07;
-    float shock = exp(-shD * shD) * uPulse;
-    col += glow * uPulse * (0.02 + fres * 1.3) + glow * (shock * 0.45 + uPulse * (coreM + trib * 0.6) * 0.5);
+    // Distress (shared rim).
+    col += distressColor() * distressRim(n.z, pulseD);
+    // Celebration flourish: the river network flashes and the limb flares
+    // (the shock ring itself is the shared limbShock in the halo).
+    col += glow * uPulse * (pow(1.0 - saturate(n.z), 6.0) * 1.0 + (coreM + trib * 0.6) * 0.5);
 
     // Sparkles: embers winking on the hottest channels of thriving worlds.
     float sp = step(0.997, hash12(floor(frag * 0.7) + floor(t * 6.0) * 7.31)) * coreM * th * smoothstep(50.0, 120.0, uRadius);
@@ -325,47 +312,28 @@ void main() {
   }
 
   // --- halo (continuous across the limb, composited under the disc) ---------
-  // Skipped where the opaque disc fully covers it.
-  vec3 halo = vec3(0.0);
-  if (r > 1.0 - 2.0 * px) {
+  vec3 halo = atmoHalo(p, l, atmoCol, tau0, 0.035, gain, phase, px);
   float rh = max(r, 1.0);
-  vec3 hazeC = mix(mix(surf, glow, 0.35), ashC * 0.5, ng * 0.8);
-  float hazeD = mix(0.2, 0.55, act) * (1.0 - ng * 0.3);
-  float hr = 1.0 - smoothstep(1.0, 1.15, rh);
-  hr *= hr;
   vec2 lpd = normalize(l.xy + 1e-4);
-  float dayside = saturate(dot(pdir, lpd) * 0.6 + 0.55);
-  float back = pow(saturate(-l.z), 2.0) * saturate(dot(pdir, lpd) * 0.5 + 0.5);
-  // Heat plumes: flickering bands rising off the limb.
-  halo = hazeC * hazeD * hr * (dayside * 1.2 + back * 2.0 + 0.1);
+  float dayH = smoothstep(-0.4, 0.5, dot(pdir, lpd));
+  // Heat plumes: flickering bands rising off the limb (mostly on the day side).
   float hr2 = 1.0 - smoothstep(1.0, 1.07, rh);
-  if (hr2 > 0.0) {
+  if (hr2 > 0.0 && r > 1.0 - 2.0 * px) {
     float plume = noise3(vec3(pdir * 11.0, rh * 7.0 - t * 0.7)) * 0.6 + 0.4 * noise3(vec3(pdir * 29.0, rh * 13.0 - t * 1.3));
-    halo += mix(surf, glow, 0.25) * hr2 * hr2 * (0.2 + 0.8 * plume) * hot * 0.22 * (1.0 - ng * 0.7);
+    halo += mix(surf, glow, 0.25) * hr2 * hr2 * (0.2 + 0.8 * plume) * hot * 0.12 * (0.25 + 0.75 * dayH) * (1.0 - ng * 0.7);
   }
-  // Aurora rising above the polar limb.
-  float aurAmtH = smoothstep(0.15, 1.0, th);
-  if (aurAmtH > 0.001 && r > 1.0) {
-    halo += volAurora(p, r, rot, t, px, mix(glow, vec3(1.0, 0.85, 0.4), 0.15), surf) * aurAmtH * 1.6 * mix(0.4, 1.0, smoothstep(30.0, 90.0, uRadius));
-  }
+  halo += auC;
   // Embers rising off the limb.
   float emberAmt = saturate(th + train * 0.6 + uPulse);
-  if (emberAmt > 0.001) {
+  if (emberAmt > 0.001 && r > 0.98) {
     float sizePx = clamp(uRadius * 0.008, 0.55, 1.6);
     float em = volEmbers(p, t, sizePx, px);
     halo += mix(glow, vec3(1.0, 0.85, 0.5), 0.4) * em * emberAmt * 1.8 * step(0.99, r) * smoothstep(20.0, 60.0, uRadius);
   }
-  halo += distressC * ng * distressPulse(t) * 0.5 * (1.0 - smoothstep(1.0, 1.1, rh));
-  halo += glow * uPulse * 0.4 * hr;
-  float shH = (rh - 1.0 - (1.0 - uPulse) * 0.25) / 0.03;
-  halo += mix(glow, vec3(1.0, 0.9, 0.6), 0.4) * exp(-shH * shH) * uPulse * 0.5 * step(1.0, r);
-  }
+  // Celebration: the shared limb shock ring (gold-white).
+  halo += mix(glow, vec3(1.0, 0.9, 0.6), 0.4) * limbShock(r, uPulse, px) * 0.6;
+  // Distress (shared halo).
+  halo += distressColor() * distressHalo(r, pulseD, px);
 
-  float haloA = saturate(max(halo.r, max(halo.g, halo.b)) * 2.5);
-  float discA = discMask(p, uRadius);
-  vec3 discCol = toGamma(tonemapACES(col));
-  vec3 haloCol = toGamma(tonemapACES(halo));
-  vec3 pm = discCol * discA + haloCol * haloA * (1.0 - discA);
-  float a = discA + haloA * (1.0 - discA);
-  fragColor = vec4(dither(frag, pm), a);
+  fragColor = compositeDiscHalo(col, discA, halo, frag);
 }

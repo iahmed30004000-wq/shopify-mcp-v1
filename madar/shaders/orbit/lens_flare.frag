@@ -13,8 +13,11 @@
 // library; this shader only uses the ALU hash, but bind the noise image anyway):
 //   uSize       canvas size (px). Draw rect: the full canvas (Offset.zero & size).
 //   uSource     flare source in px (the core star centre, same canvas).
-//   uIntensity  0..1 overall strength (0 = nothing; ~0.6 is the tasteful default;
-//               scale with the star's brightness / uBalance / uPulse).
+//   uIntensity  0..1 overall strength (0 = nothing). The flare is permanently
+//               on screen on the home screen, so keep the resting value ≤ 0.4
+//               (0.35 is a good default) and drive it UP from camera motion
+//               (fly-ins, pans) and the core star's uPulse, e.g.
+//               0.35 + 0.4 * motion + 0.25 * pulse, clamped to 1.
 //   uTint       flare tint (straight sRGB), e.g. #FFD9A0; ghosts drift from it
 //               toward teal / violet / rose for a subtle multi-coated look.
 // Blend: paint with BlendMode.plus (true additive); with the default srcOver
@@ -97,8 +100,12 @@ void main() {
   // ---------------- anamorphic streak ----------------
   vec2 ds = frag - uSource;
   float thick = max(sc * 0.0022, 1.0);
-  float streak = exp(-abs(ds.y) / thick) * (exp(-abs(ds.x) / (sc * 0.22)) * 0.5 + exp(-abs(ds.x) / (sc * 0.75)) * 0.18);
+  // Short anamorphic streak: the long tail stops well inside the screen.
+  float streak = exp(-abs(ds.y) / thick) * (exp(-abs(ds.x) / (sc * 0.2)) * 0.5 + exp(-abs(ds.x) / (sc * 0.4)) * 0.18);
   streak += exp(-abs(ds.y) / (thick * 6.0)) * exp(-abs(ds.x) / (sc * 0.12)) * 0.06;
+  // Hard window: tonemap + gamma would otherwise lift the far exponential tail
+  // into a faint line across the whole screen.
+  streak *= 1.0 - smoothstep(sc * 0.35, sc * 0.75, abs(ds.x));
   vec3 streakC = mix(tint, vec3(0.62, 0.8, 1.0), 0.35 + 0.35 * smoothstep(0.0, sc * 0.5, abs(ds.x)));
   col += streakC * streak * 0.55;
 

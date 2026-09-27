@@ -1063,19 +1063,16 @@ class L10nEn extends L10n {
   String get importPreviewTitle => 'What we found';
 
   @override
-  String importTotalRecords(int count) {
+  String importRecordsReady(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count records',
-      one: '1 record',
-      zero: 'No records',
+      other: 'records ready to import',
+      one: 'record ready to import',
+      zero: 'No records to import',
     );
     return '$_temp0';
   }
-
-  @override
-  String get importRecordsCaption => 'ready to import';
 
   @override
   String get importShapeTitle => 'File layout';
@@ -1492,4 +1489,408 @@ class L10nEn extends L10n {
 
   @override
   String get importBudgetWhole => 'the whole budget';
+
+  @override
+  String get shellSplashAssembling => 'Assembling your astrolabe…';
+
+  @override
+  String get shellSplashSemantics => 'Unlocking your encrypted data';
+
+  @override
+  String get shellGateErrorTitle => 'Madar couldn\'t open';
+
+  @override
+  String get shellGateRetry => 'Try again';
+
+  @override
+  String get shellGateReset => 'Start fresh';
+
+  @override
+  String get shellGateResetTitle => 'Delete all data?';
+
+  @override
+  String get shellGateResetBody =>
+      'The encrypted data file will be permanently deleted and Madar will start from scratch. This can\'t be undone, and without a backup your old data won\'t come back.';
+
+  @override
+  String get shellGateResetConfirm => 'Delete and start fresh';
+
+  @override
+  String get shellGateResetFailed =>
+      'Couldn\'t delete the data. Restart the app and try again.';
+
+  @override
+  String shellDurationHoursMinutes(String hours, String minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String shellDurationHours(String hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String shellDurationMinutes(String minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get shellDurationLessThanMinute => 'under a minute';
+
+  @override
+  String get homeOpenSettings => 'Settings';
+
+  @override
+  String get homeNow => 'Now';
+
+  @override
+  String homeNextPrayer(String prayer, String duration) {
+    return '$prayer in $duration';
+  }
+
+  @override
+  String get homePlaceholderBadge => 'Approximate times';
+
+  @override
+  String get homePlaceholderNote =>
+      'Exact times for your location are coming soon';
+
+  @override
+  String homeWindowStarts(String window, String time) {
+    return '$window, starts $time';
+  }
+
+  @override
+  String homeTasksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tasks',
+      one: '1 task',
+      zero: 'No tasks yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String homeTasksProgress(String done, String total) {
+    return '$done of $total done';
+  }
+
+  @override
+  String get homeAddTask => 'New task';
+
+  @override
+  String get homeEditTask => 'Edit task';
+
+  @override
+  String get homeTaskTitleField => 'Task';
+
+  @override
+  String get homeTaskTitleHint => 'What would you like to get done?';
+
+  @override
+  String get homeTaskNotesField => 'Notes';
+
+  @override
+  String get homeTaskWindowField => 'Time of day';
+
+  @override
+  String get homeTaskDateField => 'Day';
+
+  @override
+  String get homeTaskPlanetField => 'Planet';
+
+  @override
+  String get homeTaskAdded => 'Task added';
+
+  @override
+  String get homeTaskCompleted => 'Task completed';
+
+  @override
+  String get homeTaskReopened => 'Task reopened';
+
+  @override
+  String get homeTaskReopen => 'Reopen';
+
+  @override
+  String get homeTaskDone => 'Done';
+
+  @override
+  String get homeMoveTitle => 'Move to another window';
+
+  @override
+  String get homeMoveSubtitle => 'It stays on the same day';
+
+  @override
+  String get homeReminderSet => 'Reminder set';
+
+  @override
+  String get homeReminderRemoved => 'Reminder removed';
+
+  @override
+  String get homeEmptyTitle => 'This window is wide open';
+
+  @override
+  String get homeEmptyBody =>
+      'Add a task, or type what\'s on your mind in the bar below.';
+
+  @override
+  String get homeRadarTitle => 'Neglect Radar';
+
+  @override
+  String get homeRadarBody =>
+      'It will gently point you to the parts of life you\'ve drifted from — arriving with the living orbit.';
+
+  @override
+  String get homeRadarBadge => 'Soon';
+
+  @override
+  String get homeDefaultWallet => 'Wallet';
+
+  @override
+  String homeDialSemantics(String window, String next) {
+    return 'Today\'s astrolabe: $window; $next';
+  }
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsPersonal => 'Personalisation';
+
+  @override
+  String get settingsGeneral => 'General';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Theme, accent, language and digits';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get settingsThemeSelected => 'Current theme';
+
+  @override
+  String get settingsFollowSystem => 'Follow the device';
+
+  @override
+  String get settingsFollowSystemHint =>
+      'Pearl in light mode, your chosen theme in dark mode';
+
+  @override
+  String get settingsAccent => 'Accent colour';
+
+  @override
+  String get settingsAccentDefault => 'Theme colour';
+
+  @override
+  String get settingsAccentCustom => 'Custom colour';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguageArabic => 'العربية';
+
+  @override
+  String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsDigits => 'Digits';
+
+  @override
+  String get settingsDigitsAuto => 'Automatic';
+
+  @override
+  String get settingsDigitsWestern => 'Western';
+
+  @override
+  String get settingsDigitsArabicIndic => 'Arabic-Indic';
+
+  @override
+  String get settingsDigitsHint =>
+      'Automatic: Arabic-Indic in Arabic, Western in English';
+
+  @override
+  String get settingsSound => 'Sound & haptics';
+
+  @override
+  String get settingsSoundSubtitle => 'Effects, ambience and volume levels';
+
+  @override
+  String get settingsSoundEnabled => 'Sounds';
+
+  @override
+  String get settingsSoundEnabledHint =>
+      'One switch for every sound in the app';
+
+  @override
+  String get settingsHaptics => 'Haptics';
+
+  @override
+  String get settingsHapticsHint => 'A light pulse with every sound';
+
+  @override
+  String get settingsAmbient => 'Cosmic ambience';
+
+  @override
+  String get settingsAmbientHint => 'A calm bed of sound beneath the interface';
+
+  @override
+  String get settingsVolumes => 'Volume levels';
+
+  @override
+  String get settingsSoundProfile => 'Sound character';
+
+  @override
+  String get settingsSoundProfileHint => 'Changes with the theme';
+
+  @override
+  String get settingsMotion => 'Motion';
+
+  @override
+  String get settingsMotionSystem => 'Device';
+
+  @override
+  String get settingsMotionReduced => 'Reduced';
+
+  @override
+  String get settingsMotionFull => 'Full';
+
+  @override
+  String get settingsMotionHint =>
+      'Reduced swaps cinematic transitions for a calm fade';
+
+  @override
+  String get settingsPower => 'Power mode';
+
+  @override
+  String get settingsPowerAuto => 'Automatic';
+
+  @override
+  String get settingsPowerSaver => 'Battery saver';
+
+  @override
+  String get settingsPowerHint =>
+      'Battery saver stills the cosmic backdrop and lightens rendering';
+
+  @override
+  String get settingsData => 'Data';
+
+  @override
+  String get settingsImport => 'Import from the prototype';
+
+  @override
+  String get settingsImportHint =>
+      'A JSON file exported from the first version';
+
+  @override
+  String get settingsPrivacyNote =>
+      'Your data is encrypted and never leaves your device.';
+
+  @override
+  String get settingsAbout => 'About Madar';
+
+  @override
+  String settingsVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get settingsFonts => 'Fonts';
+
+  @override
+  String get settingsFontsBody =>
+      'Open fonts under the SIL Open Font License 1.1';
+
+  @override
+  String get settingsFontRoleUi => 'Interface';
+
+  @override
+  String get settingsFontRoleDisplay => 'Headings';
+
+  @override
+  String get settingsFontRoleQuran => 'Quran text';
+
+  @override
+  String get settingsFontRoleNaskh => 'Classical text';
+
+  @override
+  String get settingsFontPlex => 'IBM Plex Sans Arabic';
+
+  @override
+  String get settingsFontReemKufi => 'Reem Kufi';
+
+  @override
+  String get settingsFontAmiriQuran => 'Amiri Quran';
+
+  @override
+  String get settingsFontAmiri => 'Amiri';
+
+  @override
+  String get settingsLicense => 'Licence';
+
+  @override
+  String get settingsLicenseUnavailable => 'Couldn\'t load the licence text';
+
+  @override
+  String get settingsGalleryHint => 'Every interface component in one place';
+
+  @override
+  String get settingsDeveloper => 'Developer';
+
+  @override
+  String settingsOpen(String name) {
+    return 'Open $name';
+  }
+
+  @override
+  String get onboardingWelcomeTagline => 'Your day orbits the five prayers';
+
+  @override
+  String get onboardingWelcomeBody =>
+      'Tasks, health, money, family — each has its own orbit, and prayer is the centre that holds them together and sets their rhythm.';
+
+  @override
+  String get onboardingStyleTitle => 'Your language and look';
+
+  @override
+  String get onboardingStyleBody =>
+      'Try them and watch everything change live — you can adjust this anytime in Settings.';
+
+  @override
+  String get onboardingStartTitle => 'Where shall we begin?';
+
+  @override
+  String get onboardingStartBody =>
+      'Your data is encrypted and stays on your device.';
+
+  @override
+  String get onboardingStartFresh => 'Start fresh';
+
+  @override
+  String get onboardingStartFreshBody =>
+      'A clear orbit, waiting for your first step';
+
+  @override
+  String get onboardingImport => 'Import my data';
+
+  @override
+  String get onboardingImportBody =>
+      'From a JSON file exported by the prototype';
+
+  @override
+  String get onboardingBegin => 'Let\'s begin';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String onboardingStep(String current, String total) {
+    return 'Step $current of $total';
+  }
 }

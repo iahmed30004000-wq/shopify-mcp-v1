@@ -23,6 +23,15 @@
 // uSpin.x spin angle, uSpin.y axial tilt = ring opening toward the viewer
 // (its magnitude is clamped to ≥ 0.2 rad so the rings always read).
 // haloFactor: 2.3 (main rings to 2.04 R, F ring 2.10 R, ship lanes to 2.17 R).
+//
+// FAMILY LOOK (common.glsl): lifeGrade on the lit clouds (before the night
+// lights), the shared forward-scatter haze/halo, ONE aurora evaluation
+// (auroraCurtains, shared by disc and halo), the limb shock ring + a gold wave
+// through the rings for celebrations, the shared distress rim/halo, and
+// compositeDiscHalo for disc + halo (the rings are layered around it: back
+// ring under, front ring over, ships on top).
+// Ships are warm gold beads (≥ 1.6 px) with a readable wake; below 40 px they
+// become bright beads with a short lane arc so 0 / 2 / 6 trips stay countable.
 // ---------------------------------------------------------------------------
 uniform vec2 uSize;
 uniform vec2 uCenter;
@@ -68,60 +77,6 @@ float ggRingDensity(float rr, float aa, float fine) {
   return saturate(d);
 }
 
-// Polar aurora: analytic curtain sheets (derivation in planet_volcanic.frag).
-// Cone of half-angle colat0 about the axis As, extruded to height H.
-vec3 ggCurtain(vec2 p, float r, vec3 As, vec3 B1, vec3 B2, float t, float px, float hemi, vec3 cLow, vec3 cHigh) {
-  const float H = 0.09;
-  const float Hs = 0.032;
-  float R1 = 1.0 + H;
-  float zt2 = R1 * R1 - r * r;
-  if (zt2 <= 0.0) return vec3(0.0);
-  float z1 = sqrt(zt2);
-  float z0 = r < 1.0 ? sqrt(1.0 - r * r) : -z1;
-  vec3 dref = r < 1.0 ? vec3(p, z0) : vec3(p / r, 0.0);
-  float cref = dot(dref, As);
-  if (cref < 0.74) return vec3(0.0);
-  vec2 dir = normalize(vec2(dot(dref, B1), dot(dref, B2)) + 1e-4);
-  float wob = noise3(vec3(dir * 2.3, t * 0.05 + hemi)) - 0.5;
-  float fold = noise3(vec3(dir * 10.0, t * 0.18 + hemi)) - 0.5;
-  float colat0 = 0.33 + wob * 0.1 + fold * 0.018;
-  // Arcs brighten and break along the oval (substorm structure).
-  float arcs = smoothstep(0.2, 0.75, noise3(vec3(dir * 3.2, t * 0.07 + hemi + 2.0)));
-  float c = cos(colat0);
-  float delta = sin(colat0) * max(0.02, px * 1.5);
-  float a = dot(p, As.xy);
-  float b = As.z;
-  vec3 res = vec3(0.0);
-  if (r < 1.0) {
-    float gd = (cref - c) / delta;
-    float rays = 0.45 + 0.55 * noise3(vec3(dir * 24.0, t * 0.4 + hemi));
-    res = cLow * exp(-gd * gd) * rays * (0.35 + 0.65 * arcs) * Hs * 0.7;
-  }
-  float qa = b * b - c * c;
-  qa = abs(qa) < 1e-5 ? 1e-5 : qa;
-  float qb = 2.0 * a * b;
-  float qc = a * a - c * c * r * r;
-  float disc = qb * qb - 4.0 * qa * qc;
-  if (disc > 0.0) {
-    float sq = sqrt(disc);
-    for (int k = 0; k < 2; k++) {
-      float z = (-qb + (k == 0 ? -sq : sq)) / (2.0 * qa);
-      float L2 = r * r + z * z;
-      float L = sqrt(L2);
-      float h = L - 1.0;
-      if (z >= z0 && z <= z1 && (a + b * z) > 0.0 && h > -0.001) {
-        float fp = abs(b / L - (a + b * z) * z / (L2 * L));
-        float dz = min(delta / max(fp, 1e-4), Hs * 0.8);
-        float g = exp(-h / Hs) * (1.0 - smoothstep(H * 0.55, H, h));
-        vec3 P = vec3(p, z) / L;
-        vec2 hd = normalize(vec2(dot(P, B1), dot(P, B2)) + 1e-4);
-        float rays = 0.45 + 0.55 * noise3(vec3(hd * 24.0, t * 0.4 + hemi));
-        res = max(res, mix(cLow, cHigh, smoothstep(0.0, H * 0.8, h)) * g * dz * rays * (0.3 + 0.7 * arcs));
-      }
-    }
-  }
-  return res;
-}
 
 void main() {
   vec2 frag = FlutterFragCoord().xy;
@@ -140,7 +95,7 @@ void main() {
   vec3 glow = toLinear(uColorB.rgb);
   vec3 deep = toLinear(uColorC.rgb);
   vec3 dustC = toLinear(vec3(0.56, 0.5, 0.45));
-  vec3 distressC = toLinear(vec3(1.0, 0.25, 0.18));
+  vec3 gold = glow * vec3(1.0, 0.85, 0.55);
 
   // --- frame: planet axis = ring normal ------------------------------------
   float tiltE = (uSpin.y < 0.0 ? -1.0 : 1.0) * max(abs(uSpin.y), 0.2);
@@ -151,6 +106,27 @@ void main() {
   float spin = uSpin.x + t * 0.035;
   vec3 S1 = cos(spin) * E1 + sin(spin) * E2;       // spun planet basis
   vec3 S2 = -sin(spin) * E1 + cos(spin) * E2;
+  // view → planet frame (rows S1, A, S2): q = rot * n, object +y = north.
+  mat3 rot = mat3(S1.x, A.x, S2.x, S1.y, A.y, S2.y, S1.z, A.z, S2.z);
+
+  // --- shared family parameters (disc and halo use the same ones) -------------
+  vec3 atmoCol = mix(glow, surf, 0.3);
+  atmoCol = mix(atmoCol, dustC * 0.8, ng * 0.6);
+  float phase = atmoPhase(l);
+  float gain = 2.0 * haloGain(th, ng) * (1.0 + 0.5 * uPulse);
+  float tau0 = 0.032 * (1.0 + 1.2 * ng);
+  float pulseD = distressPulse(t) * ng;
+  // ONE aurora evaluation for disc and halo (lavender → rose curtains).
+  // Cheap conservative pre-test: the view ray through p can only meet the
+  // auroral cone |X·A| = c|X| inside the curtain shell if |X·A| can reach
+  // ~c there (skips the noise taps over most of the disc).
+  float auK = th * 0.9 + uPulse * 0.8;
+  float auReach = abs(dot(p, A.xy)) + abs(A.z) * sqrt(max((1.0 + AURORA_H) * (1.0 + AURORA_H) - r * r, 0.0));
+  vec2 au = (auK > 0.001 && r < 1.0 + AURORA_H && auReach > 0.92 - 0.04)
+          ? auroraCurtains(p, rot, l, 0.92, t, px) * auK : vec2(0.0);
+  vec3 auBase = glow * vec3(0.85, 0.8, 1.0);
+  vec3 auTop = mix(surf, vec3(1.0, 0.4, 0.75), 0.4);
+  vec3 auC = mix(auBase, auTop, saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.22;
 
   // --- ring-plane intersection for this pixel --------------------------------
   float zr = -(p.x * A.x + p.y * A.y) / A.z;
@@ -187,7 +163,6 @@ void main() {
     float refl = mix(0.55, 1.0, ringD);
     float transmit = ringD * (1.0 - ringD) * 2.2;
     float lum = mix(transmit, refl, face) * inc;
-    // Forward scattering when back-lit (dusty, thinner parts glow).
     // Forward scattering at high phase angle: thin, dusty ringlets glow,
     // the dense B ring stays comparatively dark.
     float fwd = pow(saturate(-l.z), 3.0) * (0.1 + ringD * (1.0 - ringD) * (1.0 - ringD) * 9.0) * 1.3;
@@ -198,14 +173,16 @@ void main() {
     // Planetshine: faint lift on the rings from the lit planet.
     float pshine = 0.04 * saturate(dot(-normalize(PR), l) * 0.5 + 0.5);
     ringCol = rc * (lum * 1.1 * shadow + pshine) + mix(glow, rc, 0.4) * fwd * shadow;
-    ringCol *= mix(0.55, 1.0, act) * (1.0 - ng * 0.35);
+    // Living state: same grade as the clouds (thriving rings are a touch
+    // richer and brighter; neglected ones dim, dusty grey).
+    ringCol = lifeGrade(ringCol * mix(0.7, 1.0, act), th, ng);
     // Sparkling ice (thriving).
     float spk = step(0.998, hash12(floor(frag) + floor(t * 6.0) * 3.17));
     ringCol += vec3(1.0, 0.97, 1.0) * spk * th * ringD * shadow * face * 0.9 * smoothstep(40.0, 120.0, uRadius);
-    // Celebration: a bright wave rippling outward through the rings.
+    // Celebration: a bright GOLD wave rippling outward through the rings.
     float wr = 1.2 + (1.0 - uPulse) * 1.0;
     float wv = (rr - wr) / 0.06;
-    ringCol += glow * exp(-wv * wv) * uPulse * 1.5 + glow * uPulse * 0.25 * ringD;
+    ringCol += gold * (exp(-wv * wv) * uPulse * 3.0 + uPulse * 0.5 * ringD);
     ringA = 1.0 - exp(-ringD * 0.85 / max(abs(A.z), 0.2));
     // Neglect: dust haze smeared around the ring plane.
     float dustBand = ng * 0.12 * ggBand(rr, 1.15, 2.1, 0.06);
@@ -214,11 +191,12 @@ void main() {
   }
 
   // --- planet disc -------------------------------------------------------------
+  float discA = discMask(p, uRadius);
   vec3 col = vec3(0.0);
   if (r < 1.0 + 2.0 * px) {
     vec2 pc = p / max(r, 1.0) * 0.9999;
     vec3 n = sphereNormal(pc);
-    vec3 q = vec3(dot(n, S1), dot(n, A), dot(n, S2));      // planet frame (y = north)
+    vec3 q = rot * n;                                    // planet frame (y = north)
     float seed = uSeed * 1.73;
 
     // Storms: a great rose vortex in the northern tropics and a smaller white
@@ -285,7 +263,7 @@ void main() {
     float tb0;
     float tb1;
     float st = 0.5;
-    if (detail > 0.35) {
+    if (detail > 0.55) {
       tb0 = fbm3(k0 * aniso + seed);
       tb1 = fbm3(k1 * aniso + seed + 17.0);
       // Fine streaks drawn out along the jets.
@@ -304,7 +282,9 @@ void main() {
     float b3 = noise2(vec2(y * 33.0 + seed * 3.0, 9.5)) * smoothstep(0.02, 0.008, px);
     float bandL = b1 * 0.58 + b2 * 0.3 + (b3 - 0.5) * 0.18 + 0.06;
     float band = smoothstep(0.3, 0.7, bandL);
-    float contrast = mix(0.4, 1.0, act) * (1.0 - ng * 0.5);
+    // Band contrast fades with neglect only (steady keeps its structure; the
+    // thriving cue is vividness + brightness, below).
+    float contrast = mix(0.4, 1.0, smoothstep(0.02, 0.6, uScore)) * (1.0 - ng * 0.5);
     vec3 cream = toLinear(vec3(0.98, 0.93, 0.9));
     vec3 beltC = mix(surf, deep, 0.6);
     vec3 zoneC = mix(glow, cream, 0.35);
@@ -315,14 +295,16 @@ void main() {
     // A warmer rose tint in some belts for richness.
     albedo = mix(albedo, albedo * vec3(1.2, 0.86, 0.92), smoothstep(0.55, 0.8, b2) * (1.0 - band) * 0.6);
     albedo = mix(mix(surf, glow, 0.45), albedo, contrast);
-    // Poles: deep-violet hoods with a faint hexagonal jet in the north.
+    // Poles: deep-violet hoods with a faint hexagonal jet in the north,
+    // evaluated on the turbulent coordinates so it reads as a cloud jet,
+    // not a drawn outline.
     float pole = smoothstep(0.72, 0.95, abs(q.y));
     albedo = mix(albedo, mix(deep, surf, 0.4) * (0.8 + 0.4 * turb), pole * 0.75);
-    if (q.y > 0.8) {
-      float ang = atan(q.z, q.x);
-      float hexR = length(q.xz) * cos(PI / 6.0) / cos(mod(ang + t * 0.02, PI / 3.0) - PI / 6.0);
-      float hx = (hexR - 0.34) / 0.02;
-      albedo = mix(albedo, zoneC * 0.7, exp(-hx * hx) * 0.35 * contrast);
+    if (qw.y > 0.78) {
+      float ang = atan(qw.z, qw.x);
+      float hexR = length(qw.xz) * cos(PI / 6.0) / cos(mod(ang + t * 0.02, PI / 3.0) - PI / 6.0);
+      float hx = (hexR - 0.34 + (turb - 0.5) * 0.04) / 0.035;
+      albedo = mix(albedo, zoneC * 0.7, exp(-hx * hx) * 0.15 * contrast);
     }
     // Storm colours: rose eye with a pale collar; white oval.
     vec3 stormC = mix(toLinear(vec3(0.93, 0.52, 0.66)), surf, 0.2);
@@ -331,107 +313,107 @@ void main() {
     albedo = mix(albedo, stormCol, sIn * mix(0.35, 0.9, act));
     albedo = mix(albedo, zoneC, collar * 0.35);
     albedo = mix(albedo, cream, wIn * 0.7 * mix(0.5, 1.0, act));
+    // Thriving: vivid, saturated bands (a low-frequency day-side read at 22 px).
+    albedo = max(mix(vec3(luma(albedo)), albedo, 1.0 + 0.5 * th), 0.0);
 
-    // Neglect: faded, hazy, dusty bands.
-    albedo = desaturate(albedo, ng * 0.6);
-    albedo = mix(albedo, dustC * 0.6, ng * 0.38);
+    // Neglect: faded, hazy, dusty bands (the shared grade does the dimming).
+    albedo = desaturate(albedo, ng * 0.35);
+    albedo = mix(albedo, dustC * 0.6, ng * 0.3);
 
     // Lighting: soft terminator (thick atmosphere) and gentle limb darkening.
     float ndl = dot(n, l);
     float diff = smoothstep(-0.2, 0.55, ndl) * saturate(ndl * 0.75 + 0.3);
     float limbD = pow(max(n.z, 0.0), 0.38);
-    // Ring shadow bands on the clouds.
-    float tl = -dot(n, A) / dot(l, A);
+    // Ring shadow bands on the clouds (only where the sun reaches).
     float rShadow = 1.0;
-    if (tl > 0.0) {
-      vec3 shp = n + l * tl;
-      float sr = length(shp);
-      if (sr > 1.15 && sr < 2.16) {
-        float sd = ggRingDensity(sr, 0.004, ringFine * 0.6);
-        rShadow = 1.0 - (1.0 - exp(-sd * 0.85 / max(abs(dot(l, A)), 0.15))) * 0.9;
+    if (ndl > -0.2) {
+      float tl = -dot(n, A) / dot(l, A);
+      if (tl > 0.0) {
+        vec3 shp = n + l * tl;
+        float sr = length(shp);
+        if (sr > 1.15 && sr < 2.16) {
+          float sd = ggRingDensity(sr, 0.004, ringFine * 0.6);
+          rShadow = 1.0 - (1.0 - exp(-sd * 0.85 / max(abs(dot(l, A)), 0.15))) * 0.9;
+        }
       }
     }
-    float fres = pow(1.0 - saturate(n.z), 4.0);
     float night = 1.0 - smoothstep(-0.25, 0.12, ndl);
-    col = albedo * diff * limbD * rShadow * 1.2;
-
-    // Night side: sky-city lights along the bright zones, and lightning.
-    vec3 cq = q * 26.0 + seed;
-    vec3 cc = floor(cq);
-    vec3 ch = hash33(cc);
-    float cd = length(cq - cc - (0.3 + 0.4 * ch));
-    float cityZone = smoothstep(0.55, 0.8, band) * (1.0 - pole) * step(0.55, ch.z);
-    float city = exp(-cd * cd * 70.0) * cityZone * (0.6 + 0.4 * sin(t * (1.0 + ch.x * 2.0) + ch.y * 30.0));
-    city *= smoothstep(0.012, 0.005, px / max(n.z, 0.2));
-    vec3 lq = q * 7.0 + seed + 3.0;
-    vec3 lc = floor(lq);
-    vec3 lh = hash33(lc + floor(t * 1.7) * 0.37);
-    float ld = length(lq - lc - (0.25 + 0.5 * lh));
-    float bolt = exp(-ld * ld * 140.0) * step(0.95, lh.x) * (1.0 - band) * (0.5 + 0.5 * sin(t * 40.0 + lh.y * 20.0));
-    col += (toLinear(vec3(1.0, 0.82, 0.55)) * city * 1.4 + mix(glow, vec3(0.75, 0.9, 1.0), 0.5) * bolt * 0.9) * night * th;
-
-    // Aurora (lavender curtains over both poles).
-    float aurAmt = smoothstep(0.15, 1.0, th);
-    if (aurAmt > 0.001) {
-      float lodE = 0.013 / max(0.013, px * 1.5);
-      vec3 cLow = glow * vec3(0.85, 0.8, 1.0);
-      vec3 cHigh = mix(surf, vec3(1.0, 0.4, 0.75), 0.4);
-      vec3 aur = (ggCurtain(p, r, A, S1, S2, t, px, 5.0, cLow, cHigh) + ggCurtain(p, r, -A, S1, S2, t, px, 0.0, cLow, cHigh)) / 0.032;
-      col += aur * aurAmt * lodE * lodE * (0.2 + 1.5 * night) * 0.8 * mix(0.4, 1.0, smoothstep(30.0, 90.0, uRadius));
-    }
+    vec3 lit = albedo * diff * limbD * rShadow;
 
     // Haze and dust storms (neglect).
     if (ng > 0.001) {
       float dust = dustStorm(q * vec3(1.0, 2.2, 1.0), t) * ng;
-      col = mix(col, dustC * 0.55 * (diff * 1.3 + 0.01), dust * 0.55);
-      col = mix(col, dustC * 0.5 * (diff + 0.02), ng * 0.22);
-      float rift = cracks(q * vec3(1.4, 3.6, 1.4) + 2.0) * smoothstep(0.4, 0.9, ng) * smoothstep(0.015, 0.006, px);
-      rift *= smoothstep(0.4, 0.65, noise3(q * 2.3 + 5.0));                // rifts open in patches
-      col *= 1.0 - rift * 0.22;
-      col += distressC * rift * 0.012 * (0.4 + 0.6 * distressPulse(t)) * (0.3 + night);
+      lit = mix(lit, dustC * 0.55 * (diff * 1.3 + 0.01), dust * 0.55);
+      lit = mix(lit, dustC * 0.5 * (diff + 0.02), ng * 0.22);
+      // Shear streaks: dark, latitude-stretched tears where the jets rip the
+      // decks apart (1-D lanes in latitude × longitude-stretched turbulence),
+      // the gas-world vocabulary for decay instead of polygon cracks.
+      float shearVis = smoothstep(0.4, 0.9, ng) * smoothstep(0.03, 0.012, px);
+      if (shearVis > 0.001) {
+        float lane = smoothstep(0.52, 0.86, noise2(vec2(y * 24.0 + seed * 1.3, 13.5)));
+        float tear = smoothstep(0.4, 0.8, noise3(k0 * vec3(2.2, 30.0, 2.2) + seed + 3.0));
+        float shear = lane * tear * shearVis;
+        lit *= 1.0 - shear * 0.4;
+      }
     }
-    col *= 1.0 - ng * 0.5;
 
-    // Atmosphere: lavender limb glow, distress rim, celebration flare.
-    float atmoD = mix(0.16, 0.36, act) * (1.0 - ng * 0.45);
-    col += atmosphere(pc, n, l, mix(glow, surf, 0.3), atmoD, 0.1);
-    col += distressC * fres * ng * distressPulse(t) * 1.1;
-    col += glow * uPulse * (0.06 + fres * 1.8);
+    // Shared living-state grade on the reflected light (before the lights).
+    lit = lifeGrade(lit, th, ng);
+
+    // Night side: sky-city lights clustered along the zone edges (sparse,
+    // gated by a clustering noise so they never read as a starfield seen
+    // through the planet), and lightning in the belts.
+    vec3 emit = vec3(0.0);
+    if (night > 0.001 && th > 0.001) {
+      vec3 cq = q * 26.0 + seed;
+      vec3 cc = floor(cq);
+      vec3 ch = hash33(cc);
+      float cd = length(cq - cc - (0.3 + 0.4 * ch));
+      float zoneEdge = smoothstep(0.35, 0.85, 1.0 - abs(band * 2.0 - 1.0));
+      float cluster = smoothstep(0.55, 0.8, noise3(q * 4.0 + seed + 1.3));
+      float cityZone = zoneEdge * cluster * (1.0 - pole) * step(0.8, ch.z);
+      float city = exp(-cd * cd * 70.0) * cityZone * (0.6 + 0.4 * sin(t * (1.0 + ch.x * 2.0) + ch.y * 30.0));
+      city *= smoothstep(0.012, 0.005, px / max(n.z, 0.2));
+      vec3 lq = q * 7.0 + seed + 3.0;
+      vec3 lc = floor(lq);
+      vec3 lh = hash33(lc + floor(t * 1.7) * 0.37);
+      float ld = length(lq - lc - (0.25 + 0.5 * lh));
+      float bolt = exp(-ld * ld * 140.0) * step(0.95, lh.x) * (1.0 - band) * (0.5 + 0.5 * sin(t * 40.0 + lh.y * 20.0));
+      emit = (toLinear(vec3(1.0, 0.82, 0.55)) * city * 1.4 + mix(glow, vec3(0.75, 0.9, 1.0), 0.5) * bolt * 0.9) * night * th;
+    }
+
+    // Shared haze (continuous with the halo at the limb).
+    vec3 T3;
+    vec3 S = atmoHaze(n.z, ndl, atmoCol, tau0, vec3(1.15, 1.0, 0.85), gain, phase, T3);
+    col = (lit + emit) * T3 + S;
+    col += auC;
+    col += distressColor() * distressRim(n.z, pulseD);
+    // Celebration flourish: the whole deck flares gold toward the limb.
+    col += gold * uPulse * (0.05 + pow(1.0 - saturate(n.z), 4.0) * 1.2);
   }
 
-  // --- halo (skipped where the opaque disc fully covers it) -----------------------
+  // --- halo (shared; skipped far from the limb) ---------------------------------
   vec3 halo = vec3(0.0);
-  if (r > 1.0 - 2.0 * px && r < 1.35) {
-  float rh = max(r, 1.0);
-  vec2 pdir = p / max(r, 1e-4);
-  // Thin crisp haze line on the limb plus a faint wide glow.
-  float ha = rh - 1.0;
-  float hr = (0.55 * exp(-ha / 0.012) + 0.45 * exp(-ha / 0.05)) * (1.0 - smoothstep(0.12, 0.3, ha));
-  vec2 lpd = normalize(l.xy + 1e-4);
-  float dayside = saturate(dot(pdir, lpd) * 0.6 + 0.55);
-  float back = pow(saturate(-l.z), 2.0) * saturate(dot(pdir, lpd) * 0.5 + 0.5);
-  float atmoH = mix(0.25, 0.55, act) * (1.0 - ng * 0.45);
-  halo = mix(glow, surf, 0.3) * atmoH * hr * (dayside * 1.2 + back * 2.2 + 0.08);
-  float aurAmtH = smoothstep(0.15, 1.0, th);
-  if (aurAmtH > 0.001 && r > 1.0) {
-    float lodE = 0.013 / max(0.013, px * 1.5);
-    vec3 cLow = glow * vec3(0.85, 0.8, 1.0);
-    vec3 cHigh = mix(surf, vec3(1.0, 0.4, 0.75), 0.4);
-    vec3 aur = (ggCurtain(p, r, A, S1, S2, t, px, 5.0, cLow, cHigh) + ggCurtain(p, r, -A, S1, S2, t, px, 0.0, cLow, cHigh)) / 0.032;
-    halo += aur * aurAmtH * lodE * lodE * 1.5 * mix(0.4, 1.0, smoothstep(30.0, 90.0, uRadius));
-  }
-  halo += distressC * ng * distressPulse(t) * 0.5 * (1.0 - smoothstep(1.0, 1.1, rh));
-  halo += glow * uPulse * 0.35 * hr;
+  if (r > 1.0 - 2.0 * px && r < 1.45) {
+    halo = atmoHalo(p, l, atmoCol, tau0, 0.035, gain, phase, px);
+    halo += auC;
+    halo += gold * limbShock(r, uPulse, px) * 0.9;
+    halo += distressColor() * distressHalo(r, pulseD, px);
   }
 
   // --- ships along the ring plane --------------------------------------------------
   vec3 shipCol = vec3(0.0);
   float trips = clamp(uExtra.x, 0.0, 6.0);
   if (trips > 0.001) {
-    float sizePx = clamp(uRadius * 0.012, 1.1, 3.2);
+    float sizePx = clamp(uRadius * 0.012, 1.6, 3.2);
+    // Small planets: each ship is a bright bead (bigger core, short lane arc)
+    // so the number of upcoming trips can still be counted at a glance.
+    float small = 1.0 - smoothstep(28.0, 40.0, uRadius);
+    float beadPx = mix(sizePx, 1.9, small);
     float phiP = atan(dot(PR, E2), dot(PR, E1));
     float zs = sqrt(max(1.0 - r * r, 0.0));
     float trailVis = (r < 1.0 && zr < zs) ? 0.0 : 1.0;
+    vec3 warm = mix(glow, vec3(1.0, 0.72, 0.35), 0.6);
     for (int i = 0; i < 6; i++) {
       float fi = float(i);
       float vis = saturate(trips - fi);
@@ -442,46 +424,51 @@ void main() {
         float w = 0.55 / (R * sqrt(R));
         float ang = fi * 2.39996 + uSeed * 1.3 + w * t;
         vec3 SP = R * (cos(ang) * E1 + sin(ang) * E2);
+        // Early-out: most of the 2.3 R rect is far from both this ship's bead
+        // (bloom / glint support) and its lane (wake): skip the shading.
+        float radPx = abs(rr - R) * (r / max(rr, 1e-3)) / px;
+        float tw = max(0.9, sizePx * 0.45);
+        vec2 dv0 = (p - SP.xy) / px;
+        float reach = max(beadPx * 10.0, sizePx * 18.0);
+        if (dot(dv0, dv0) > reach * reach && radPx > tw * 3.5) continue;
         float sr2 = dot(SP.xy, SP.xy);
         float hidden = (sr2 < 1.0 && SP.z < sqrt(max(1.0 - sr2, 0.0))) ? 1.0 : 0.0;
         vec2 dv = (p - SP.xy) / px;
         float d = length(dv);
-        float core = exp(-d * d / (sizePx * sizePx * 0.3));
-        float bloom = exp(-d / (sizePx * 1.6)) * 0.3 + exp(-d / (sizePx * 4.0)) * 0.12;
-        // Four-point glint (twinkles gently).
+        float core = exp(-d * d / (beadPx * beadPx * 0.35));
+        // (finite support: gamma would lift an exponential tail into a visible box)
+        float bloom = (exp(-d / (beadPx * 1.6)) * 0.35 + exp(-d / (beadPx * 4.0)) * 0.14 * (1.0 - 0.85 * small))
+                    * smoothstep(beadPx * mix(10.0, 4.0, small), beadPx * mix(5.0, 2.0, small), d);
+        // Four-point glint (twinkles gently; large planets only).
         vec2 ad = abs(dv);
         float glint = (exp(-ad.y * ad.y / 0.5) * exp(-ad.x / (sizePx * 3.0)) + exp(-ad.x * ad.x / 0.5) * exp(-ad.y / (sizePx * 3.0)));
-        glint *= 0.35 * (0.7 + 0.3 * sin(t * 3.0 + fi * 1.7)) * smoothstep(1.2, 2.2, sizePx);
-        // Trail: a luminous arc behind the ship on its lane.
+        glint *= 0.35 * (0.7 + 0.3 * sin(t * 3.0 + fi * 1.7)) * smoothstep(1.8, 2.6, sizePx);
+        // Wake: a luminous arc behind the ship on its lane, brightest at the head.
         float dth = mod(ang - phiP, TAU);
-        float radPx = abs(rr - R) * (r / max(rr, 1e-3)) / px;
-        float tw = max(0.55, sizePx * 0.3);
-        float trail = exp(-radPx * radPx / (tw * tw)) * exp(-dth / 0.6) * step(dth, 2.8) * trailVis;
-        trail *= smoothstep(0.0, 0.04, dth);
-        vec3 hue = mix(vec3(1.0, 0.93, 0.8), glow, 0.25 + 0.2 * sin(fi * 2.1));
-        float I = (core * 2.4 + bloom + glint) * (1.0 - hidden);
+        float tLen = mix(0.9, 0.22, small);
+        float trail = exp(-radPx * radPx / (tw * tw)) * (exp(-dth / tLen) + exp(-dth / 0.12) * 0.8) * smoothstep(2.8, 1.6, dth) * trailVis;
+        trail *= step(radPx, tw * 3.5);
+        trail *= smoothstep(0.0, 0.03, dth);
+        vec3 hue = mix(warm, vec3(1.0, 0.93, 0.8), 0.25 + 0.15 * sin(fi * 2.1));
+        float I = (core * mix(2.6, 3.4, small) + bloom + glint) * (1.0 - hidden);
         I *= vis * (1.0 + uPulse * 1.5);
-        shipCol += hue * I + mix(glow, hue, exp(-dth / 0.25)) * trail * 1.0 * vis;
+        shipCol += hue * I + mix(warm, hue, exp(-dth / 0.25)) * trail * mix(0.9, 0.45, small) * vis;
       }
     }
   }
 
   // --- composite (premultiplied, display space) ------------------------------------
-  float discA = discMask(p, uRadius);
-  float haloA = saturate(max(halo.r, max(halo.g, halo.b)) * 2.5);
-  vec3 discCol = toGamma(tonemapACES(col));
-  vec3 haloCol = toGamma(tonemapACES(halo));
+  // Disc over halo with the shared convention, the rings layered around it.
+  vec4 acc = compositeDiscHalo(col, discA, halo, frag);
   vec3 ringC = toGamma(tonemapACES(ringCol));
   float zSurf = sqrt(max(1.0 - r * r, 0.0));
   float ringFront = r < 1.0 ? step(zSurf, zr) : step(0.0, zr);
   vec4 ringL = vec4(ringC * ringA, ringA);
-  vec4 acc = ringL * (1.0 - ringFront);
-  acc = vec4(haloCol * haloA, haloA) + acc * (1.0 - haloA);
-  acc = vec4(discCol * discA, discA) + acc * (1.0 - discA);
-  acc = ringL * ringFront + acc * (1.0 - ringA * ringFront);
+  acc = acc + ringL * (1.0 - ringFront) * (1.0 - acc.a);          // back ring under disc + halo
+  acc = ringL * ringFront + acc * (1.0 - ringA * ringFront);        // front ring over
   // Ships are self-luminous and already occlusion-tested: add on top.
-  float shipA = saturate(max(shipCol.r, max(shipCol.g, shipCol.b)));
-  vec3 shipG = toGamma(tonemapACES(shipCol));
-  acc = vec4(shipG * shipA, shipA) + acc * (1.0 - shipA);
-  fragColor = vec4(dither(frag, acc.rgb), acc.a);
+  vec3 shipG = toGamma(tonemapACES(max(shipCol - 0.0015, 0.0)));
+  float shipA = saturate(max(shipG.r, max(shipG.g, shipG.b)));
+  acc = vec4(shipG, shipA) + acc * (1.0 - shipA);
+  fragColor = vec4(min(acc.rgb, vec3(acc.a)), acc.a);
 }

@@ -212,7 +212,7 @@ abstract final class ImportValues {
   /// `٨:٣٠ م`, `20h`, `0830`), or null.
   static int? _clock(String token) {
     var t = MoneyText.foldDigits(token).toLowerCase().trim();
-    t = t.replaceAll(RegExp('[ً-ٟ]'), '');
+    t = t.replaceAll(RegExp('[\u064B-\u065F]'), '');
     if (RegExp(r'^\d{3,4}$').hasMatch(t)) {
       final n = int.parse(t);
       final h = n ~/ 100, mm = n % 100;

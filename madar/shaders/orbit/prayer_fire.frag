@@ -24,6 +24,10 @@
 // Draw rect: Rect.fromCircle(center: uBase + dir * uHeight * 0.4,
 //                            radius: uHeight * 0.95).
 // Output: premultiplied, alpha = max(rgb) → composites like "screen".
+// Look: a golden heart inside a saturated orange-red envelope with visible
+// torn tongues (not a white teardrop); the ignition spark is a small glint
+// (arms 0.18 H) that never reads as a lens flare; 3 embers below 40 px
+// (6 above), spread sideways so they never stack into a dotted line.
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -104,19 +108,19 @@ void main() {
   float feather = mix(aa, 0.05, kk);
   float body = 1.0 - smoothstep(-feather - 0.01, feather, d);
   float soft = 1.0 - smoothstep(-0.07, 0.0, d);
-  float heart = 1.0 - smoothstep(-0.04, 0.035, dc);
+  float heart = 1.0 - smoothstep(-0.035, 0.02, dc);
   // Along the body: luminous gold low, deep orange-red at the flickering tip.
-  vec3 tipC = outer * vec3(1.0, 0.42, 0.18);
-  vec3 bodyC = mix(outer * vec3(1.0, 0.86, 0.62), tipC, smoothstep(0.2, 1.0, kk));
+  vec3 tipC = outer * vec3(1.0, 0.3, 0.1);
+  vec3 bodyC = mix(outer * vec3(1.0, 0.84, 0.55), tipC, smoothstep(0.12, 0.9, kk));
   // Edge envelope is thinner and redder than the core of the body.
-  vec3 edgeC = outer * vec3(1.0, 0.5, 0.25);
-  vec3 col = mix(edgeC * 0.8, bodyC * 1.25, soft) * body;
-  col += inner * heart * mix(2.4, 1.2, kk);
+  vec3 edgeC = outer * vec3(1.0, 0.38, 0.14);
+  vec3 col = mix(edgeC * 0.85, bodyC * 1.05, soft) * body;
+  col += inner * heart * mix(1.5, 0.9, kk);
   // Faint blue root (hot, oxygen-rich base of a real flame).
   float root = (1.0 - smoothstep(-0.02, 0.03, d)) * smoothstep(0.02, -0.05, q.y + w * 0.25)
              * smoothstep(-0.05, 0.0, -dc);
   col += vec3(0.15, 0.35, 1.0) * root * 0.9 * (0.4 + 0.6 * grow);
-  col += mix(bodyC, tipC, 0.75) * tongue * (1.0 - body * 0.7) * 0.9;
+  col += mix(outer * vec3(1.0, 0.6, 0.3), tipC, 0.4) * tongue * (1.0 - body * 0.7) * 1.4;
 
   // Ignition: begins as a small blue bead, warming to gold.
   float blueStage = 1.0 - smoothstep(0.08, 0.55, ign);
@@ -125,7 +129,9 @@ void main() {
   // --- glow ---
   float dd = max(d, 0.0);
   vec3 glowC = mix(outer, inner, 0.25);
-  vec3 glow = glowC * (exp(-dd / 0.045) * 0.45 + exp(-dd / 0.13) * 0.16) * (0.4 + 0.6 * grow);
+  // (the near glow belongs OUTSIDE the body: on top of it, it bleached the
+  // orange envelope to pale yellow after tonemapping)
+  vec3 glow = glowC * (exp(-dd / 0.045) * 0.45 * (1.0 - body * 0.8) + exp(-dd / 0.13) * 0.16) * (0.4 + 0.6 * grow);
   // Warm light pooling on the pointer tip.
   float rb = length(vec2(v, u + 0.02));
   glow += outer * exp(-rb / 0.1) * 0.3 * grow;
@@ -137,15 +143,16 @@ void main() {
   if (spark > 0.01) {
     vec2 sp = vec2(v, u - 0.05) * H;               // px from the spark
     vec2 a = abs(sp);
-    float armL = H * 0.35;
+    float armL = H * 0.18;
     float g = exp(-a.y / 0.7) * saturate(1.0 - a.x / armL) + exp(-a.x / 0.7) * saturate(1.0 - a.y / armL)
             + exp(-dot(sp, sp) / (H * H * 0.004));
-    glow += vec3(1.0, 0.92, 0.75) * g * spark * 1.6;
+    glow += vec3(1.0, 0.92, 0.75) * g * spark * 0.9;
   }
 
   // --- embers ---
   vec3 emb = vec3(0.0);
   float emberAmt = smoothstep(0.45, 1.0, ign);
+  float nEmb = H < 40.0 ? 3.0 : 6.0;             // few embers on a tiny flame
   if (emberAmt > 0.0) {
     for (int i = 0; i < 6; i++) {
       float fi = float(i);
@@ -155,11 +162,12 @@ void main() {
       float cyc = floor(t / per + h.y);
       vec3 h2 = hash33(vec3(cyc, fi, 2.3));          // fresh path every cycle
       float eu = hF * 1.02 + ph * (0.4 + 0.35 * h2.x);
-      float ev = (h2.y - 0.5) * 0.14 * ph + sin(t * (2.0 + h.z * 2.0) + fi) * 0.025 * ph + sway * 0.8;
+      float ev = (h2.y - 0.5) * 0.3 * ph + sin(t * (2.0 + h.z * 2.0) + fi) * 0.025 * ph + sway * 0.8;
       vec2 e = (vec2(v, u) - vec2(ev, eu)) * H;      // px
       float sz = max(0.9, H * 0.018);
       float b = exp(-dot(e, e) / (sz * sz)) * pf_sq(1.0 - ph) * smoothstep(0.0, 0.08, ph);
       b *= 0.6 + 0.4 * sin(t * 17.0 + fi * 3.0);    // twinkle
+      b *= step(fi, nEmb - 0.5);                     // 3 or 6 embers
       emb += mix(inner * 1.2, outer * vec3(1.0, 0.45, 0.2), ph) * b * 2.2;
     }
   }

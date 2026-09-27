@@ -5,9 +5,9 @@ library;
 import '../domain/money.dart' show MoneyText;
 
 abstract final class ImportText {
-  static final RegExp _arabicMarks = RegExp('[ً-ٰٟـۖ-ۭ]');
-  static final RegExp _nonKey = RegExp('[^a-z0-9ء-ي%]');
-  static final RegExp _nonWord = RegExp('[^a-z0-9ء-ي%]+');
+  static final RegExp _arabicMarks = RegExp('[\u064B-\u065F\u0670\u0640\u06D6-\u06ED]');
+  static final RegExp _nonKey = RegExp('[^a-z0-9\u0621-\u064A%]');
+  static final RegExp _nonWord = RegExp('[^a-z0-9\u0621-\u064A%]+');
 
   /// Folds Arabic spelling variants: removes diacritics and tatweel and
   /// unifies alef / hamza / yaa / taa-marbuta forms (`أإآٱ→ا`, `ة→ه`,
@@ -31,10 +31,11 @@ abstract final class ImportText {
   /// Canonical form of a JSON key or alias: digits folded, lower-cased,
   /// Arabic folded, every separator removed (`taken_with`, `takenWith` and
   /// `Taken With` all become `takenwith`) and a leading Arabic article `ال`
-  /// dropped when at least three letters remain (`الميزانية` ≡ `ميزانية`).
+  /// dropped when at least two letters remain (`الميزانية` ≡ `ميزانية`,
+  /// `النص` ≡ `نص`).
   static String key(String raw) {
     var s = foldArabic(MoneyText.foldDigits(raw).toLowerCase()).replaceAll(_nonKey, '');
-    if (s.length >= 5 && s.startsWith('ال')) s = s.substring(2);
+    if (s.length >= 4 && s.startsWith('ال')) s = s.substring(2);
     return s;
   }
 
@@ -44,7 +45,7 @@ abstract final class ImportText {
   static String words(String raw) {
     final s = foldArabic(MoneyText.foldDigits(raw).toLowerCase()).replaceAll(_nonWord, ' ').trim();
     if (s.isEmpty) return s;
-    return s.split(' ').map((w) => w.length >= 5 && w.startsWith('ال') ? w.substring(2) : w).join(' ');
+    return s.split(' ').map((w) => w.length >= 4 && w.startsWith('ال') ? w.substring(2) : w).join(' ');
   }
 
   /// A readable label from a key: `readingList` / `reading_list` →
@@ -52,7 +53,7 @@ abstract final class ImportText {
   static String humanize(String key) {
     final trimmed = key.trim();
     if (trimmed.isEmpty) return trimmed;
-    if (RegExp('[؀-ۿ]').hasMatch(trimmed)) return trimmed.replaceAll('_', ' ');
+    if (RegExp('[\u0600-\u06FF]').hasMatch(trimmed)) return trimmed.replaceAll('_', ' ');
     final spaced = trimmed
         .replaceAllMapped(RegExp('([a-z0-9])([A-Z])'), (m) => '${m[1]} ${m[2]}')
         .replaceAll(RegExp(r'[_\-.]+'), ' ')
@@ -66,13 +67,13 @@ abstract final class ImportText {
   /// [fallback] when nothing usable remains.
   static String slug(String raw, {String fallback = 'x'}) {
     final s = foldArabic(MoneyText.foldDigits(raw).toLowerCase())
-        .replaceAll(RegExp('[^a-z0-9ء-ي]+'), '-')
+        .replaceAll(RegExp('[^a-z0-9\u0621-\u064A]+'), '-')
         .replaceAll(RegExp(r'^-+|-+$'), '');
     return s.isEmpty ? fallback : s;
   }
 
   /// Whether [key] looks like `snake_case`, `camelCase` or Arabic.
-  static bool isArabic(String key) => RegExp('[؀-ۿ]').hasMatch(key);
+  static bool isArabic(String key) => RegExp('[\u0600-\u06FF]').hasMatch(key);
   static bool isSnake(String key) => key.contains('_') || key.contains('-');
   static bool isCamel(String key) => RegExp('[a-z][A-Z]').hasMatch(key);
 }

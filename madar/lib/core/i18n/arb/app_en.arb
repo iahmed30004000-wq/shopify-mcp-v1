@@ -749,15 +749,15 @@
   "importFileLabel": "File",
   "importPastedLabel": "Pasted text",
   "importPreviewTitle": "What we found",
-  "importTotalRecords": "{count, plural, =0{No records} =1{1 record} other{{count} records}}",
-  "@importTotalRecords": {
+  "importRecordsReady": "{count, plural, =0{No records to import} =1{record ready to import} other{records ready to import}}",
+  "@importRecordsReady": {
+    "description": "Caption under the big record count (the number itself is shown above it)",
     "placeholders": {
       "count": {
         "type": "int"
       }
     }
   },
-  "importRecordsCaption": "ready to import",
   "importShapeTitle": "File layout",
   "importShapeWrapped": "data + logs",
   "importShapeDataOnly": "data only",
@@ -983,5 +983,270 @@
       }
     }
   },
-  "importBudgetWhole": "the whole budget"
+  "importBudgetWhole": "the whole budget",
+  "shellSplashAssembling": "Assembling your astrolabe…",
+  "@shellSplashAssembling": {
+    "description": "Splash caption while the encrypted database opens"
+  },
+  "shellSplashSemantics": "Unlocking your encrypted data",
+  "@shellSplashSemantics": {
+    "description": "Screen-reader label of the splash"
+  },
+  "shellGateErrorTitle": "Madar couldn't open",
+  "@shellGateErrorTitle": {
+    "description": "Title of the database-unlock error view"
+  },
+  "shellGateRetry": "Try again",
+  "shellGateReset": "Start fresh",
+  "@shellGateReset": {
+    "description": "Offers deleting the unreadable database"
+  },
+  "shellGateResetTitle": "Delete all data?",
+  "shellGateResetBody": "The encrypted data file will be permanently deleted and Madar will start from scratch. This can't be undone, and without a backup your old data won't come back.",
+  "shellGateResetConfirm": "Delete and start fresh",
+  "shellGateResetFailed": "Couldn't delete the data. Restart the app and try again.",
+  "shellDurationHoursMinutes": "{hours}h {minutes}m",
+  "@shellDurationHoursMinutes": {
+    "description": "Compact duration; numbers are pre-formatted",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationHours": "{hours}h",
+  "@shellDurationHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationMinutes": "{minutes} min",
+  "@shellDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationLessThanMinute": "under a minute",
+  "homeOpenSettings": "Settings",
+  "@homeOpenSettings": {
+    "description": "Home header button"
+  },
+  "homeNow": "Now",
+  "@homeNow": {
+    "description": "Badge on the current prayer window"
+  },
+  "homeNextPrayer": "{prayer} in {duration}",
+  "@homeNextPrayer": {
+    "description": "Countdown to the next prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "homePlaceholderBadge": "Approximate times",
+  "@homePlaceholderBadge": {
+    "description": "Marks the static placeholder prayer times"
+  },
+  "homePlaceholderNote": "Exact times for your location are coming soon",
+  "homeWindowStarts": "{window}, starts {time}",
+  "@homeWindowStarts": {
+    "description": "Screen-reader label of a window chip",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTasksCount": "{count, plural, =0{No tasks yet} =1{1 task} other{{count} tasks}}",
+  "@homeTasksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeTasksProgress": "{done} of {total} done",
+  "@homeTasksProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAddTask": "New task",
+  "homeEditTask": "Edit task",
+  "homeTaskTitleField": "Task",
+  "homeTaskTitleHint": "What would you like to get done?",
+  "homeTaskNotesField": "Notes",
+  "homeTaskWindowField": "Time of day",
+  "homeTaskDateField": "Day",
+  "homeTaskPlanetField": "Planet",
+  "homeTaskAdded": "Task added",
+  "homeTaskCompleted": "Task completed",
+  "homeTaskReopened": "Task reopened",
+  "homeTaskReopen": "Reopen",
+  "@homeTaskReopen": {
+    "description": "Swipe action on a completed task"
+  },
+  "homeTaskDone": "Done",
+  "@homeTaskDone": {
+    "description": "Screen-reader state of a completed task"
+  },
+  "homeMoveTitle": "Move to another window",
+  "homeMoveSubtitle": "It stays on the same day",
+  "homeReminderSet": "Reminder set",
+  "homeReminderRemoved": "Reminder removed",
+  "homeEmptyTitle": "This window is wide open",
+  "homeEmptyBody": "Add a task, or type what's on your mind in the bar below.",
+  "homeRadarTitle": "Neglect Radar",
+  "homeRadarBody": "It will gently point you to the parts of life you've drifted from — arriving with the living orbit.",
+  "homeRadarBadge": "Soon",
+  "homeDefaultWallet": "Wallet",
+  "@homeDefaultWallet": {
+    "description": "Name of the wallet created on demand by quick add"
+  },
+  "homeDialSemantics": "Today's astrolabe: {window}; {next}",
+  "@homeDialSemantics": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "next": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "settingsPersonal": "Personalisation",
+  "settingsGeneral": "General",
+  "settingsAppearance": "Appearance",
+  "settingsAppearanceSubtitle": "Theme, accent, language and digits",
+  "settingsTheme": "Theme",
+  "settingsThemeSelected": "Current theme",
+  "settingsFollowSystem": "Follow the device",
+  "settingsFollowSystemHint": "Pearl in light mode, your chosen theme in dark mode",
+  "settingsAccent": "Accent colour",
+  "settingsAccentDefault": "Theme colour",
+  "settingsAccentCustom": "Custom colour",
+  "settingsLanguage": "Language",
+  "settingsLanguageArabic": "العربية",
+  "@settingsLanguageArabic": {
+    "description": "Always shown in Arabic"
+  },
+  "settingsLanguageEnglish": "English",
+  "@settingsLanguageEnglish": {
+    "description": "Always shown in English"
+  },
+  "settingsDigits": "Digits",
+  "settingsDigitsAuto": "Automatic",
+  "settingsDigitsWestern": "Western",
+  "settingsDigitsArabicIndic": "Arabic-Indic",
+  "settingsDigitsHint": "Automatic: Arabic-Indic in Arabic, Western in English",
+  "settingsSound": "Sound & haptics",
+  "settingsSoundSubtitle": "Effects, ambience and volume levels",
+  "settingsSoundEnabled": "Sounds",
+  "settingsSoundEnabledHint": "One switch for every sound in the app",
+  "settingsHaptics": "Haptics",
+  "settingsHapticsHint": "A light pulse with every sound",
+  "settingsAmbient": "Cosmic ambience",
+  "settingsAmbientHint": "A calm bed of sound beneath the interface",
+  "settingsVolumes": "Volume levels",
+  "settingsSoundProfile": "Sound character",
+  "settingsSoundProfileHint": "Changes with the theme",
+  "settingsMotion": "Motion",
+  "settingsMotionSystem": "Device",
+  "settingsMotionReduced": "Reduced",
+  "settingsMotionFull": "Full",
+  "settingsMotionHint": "Reduced swaps cinematic transitions for a calm fade",
+  "settingsPower": "Power mode",
+  "settingsPowerAuto": "Automatic",
+  "settingsPowerSaver": "Battery saver",
+  "settingsPowerHint": "Battery saver stills the cosmic backdrop and lightens rendering",
+  "settingsData": "Data",
+  "settingsImport": "Import from the prototype",
+  "settingsImportHint": "A JSON file exported from the first version",
+  "settingsPrivacyNote": "Your data is encrypted and never leaves your device.",
+  "settingsAbout": "About Madar",
+  "settingsVersion": "Version {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsFonts": "Fonts",
+  "settingsFontsBody": "Open fonts under the SIL Open Font License 1.1",
+  "settingsFontRoleUi": "Interface",
+  "settingsFontRoleDisplay": "Headings",
+  "settingsFontRoleQuran": "Quran text",
+  "settingsFontRoleNaskh": "Classical text",
+  "settingsFontPlex": "IBM Plex Sans Arabic",
+  "@settingsFontPlex": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontReemKufi": "Reem Kufi",
+  "@settingsFontReemKufi": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiriQuran": "Amiri Quran",
+  "@settingsFontAmiriQuran": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiri": "Amiri",
+  "@settingsFontAmiri": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsLicense": "Licence",
+  "settingsLicenseUnavailable": "Couldn't load the licence text",
+  "settingsGalleryHint": "Every interface component in one place",
+  "settingsDeveloper": "Developer",
+  "settingsOpen": "Open {name}",
+  "@settingsOpen": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingWelcomeTagline": "Your day orbits the five prayers",
+  "onboardingWelcomeBody": "Tasks, health, money, family — each has its own orbit, and prayer is the centre that holds them together and sets their rhythm.",
+  "onboardingStyleTitle": "Your language and look",
+  "onboardingStyleBody": "Try them and watch everything change live — you can adjust this anytime in Settings.",
+  "onboardingStartTitle": "Where shall we begin?",
+  "onboardingStartBody": "Your data is encrypted and stays on your device.",
+  "onboardingStartFresh": "Start fresh",
+  "onboardingStartFreshBody": "A clear orbit, waiting for your first step",
+  "onboardingImport": "Import my data",
+  "onboardingImportBody": "From a JSON file exported by the prototype",
+  "onboardingBegin": "Let's begin",
+  "onboardingSkip": "Skip",
+  "onboardingStep": "Step {current} of {total}",
+  "@onboardingStep": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  }
 }

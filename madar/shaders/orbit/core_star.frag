@@ -23,7 +23,11 @@
 //   uColorA   core tint (straight sRGB), e.g. #FFE7A3.
 //   uColorB   corona tint (straight sRGB), e.g. #F2C14E.
 // Output is premultiplied with alpha = coverage of the disc plus max(rgb)
-// of the glow, i.e. the glow composites like "screen" under srcOver.
+// of the glow, i.e. the glow composites like "screen" under srcOver (the
+// same convention as compositeDiscHalo in common.glsl).
+// Balance reads: the white-hot centre is kept modest so the outer third of a
+// balanced star stays visibly gold, and an ailing star's diffraction spikes
+// shrink and soften (0.35× at balance 0) instead of staying long and crisp.
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -105,7 +109,7 @@ void main() {
     disc = photo * bright * mix(1.7, 2.0, bal) * exposure;
     // Hot white centre (only a balanced star burns white); the outer third of
     // the disc stays visibly gold so the star reads white-GOLD, not blank white.
-    disc += vec3(1.0, 0.97, 0.9) * pow(mu, 3.0) * 2.4 * bal * bal * exposure;
+    disc += vec3(1.0, 0.97, 0.9) * pow(mu, 3.0) * 1.6 * bal * bal * exposure;
     // An ailing star still smoulders: a deep ember glow from within.
     disc += vec3(1.0, 0.36, 0.08) * pow(mu, 1.5) * 0.9 * turb * exposure;
   }
@@ -168,6 +172,7 @@ void main() {
            + cs_ray(p, vec2(D, -D), sShort, w0) + cs_ray(p, vec2(-D, -D), sShort, w0)) * 0.7;
   // Gentle shimmer running outward along the rays.
   spikes *= (0.8 + 0.2 * sin(r * 9.0 - t * 2.2)) * step(1.0, r);
+  spikes *= mix(0.35, 1.0, bal);                  // an ailing star's spikes fade
 
   // ---------------- celebration shock ring ----------------
   // An 8-lobed rosette shock front (echoing the Rub el Hizb) with a soft wake.

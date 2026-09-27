@@ -29,6 +29,16 @@
 //            limb, in the glow colour) — for the focused / tapped moon.
 //   uExtra.z,w unused (pass 0).
 // Draw rect: centre ± uRadius × 1.6 (haloFactor 1.6).
+//
+// FAMILY LOOK (common.glsl): lifeGrade on the reflected light (emission —
+// settlement lights, cryo-fissures, lava — cools on its own terms), the shared
+// aurora curtains (thriving, lod > 0.2, not on gems), the shared limb shock
+// ring for celebrations, and compositeDiscHalo. Distress uses the family
+// colour and the PARENT's phase — distressPulse(uTime), no seed offset — so a
+// neglected planet and its moons breathe together; it is softer than the
+// planets' (rim 0.35 / halo 0.2) so a neglected cluster never reads as an
+// alarm panel. Integration note: derive the wallet gem tint from the Money
+// palette (uColorA #7FE3C4 deepened) so gem moons match their planet.
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -154,9 +164,15 @@ vec3 dm_env(vec3 dir, vec3 V, vec3 up, vec3 key, vec3 lo, vec3 hi) {
   float front = dot(dir, V);
   vec3 side = normalize(cross(up, V) + vec3(1e-4));
   vec3 c = lo;
-  c += hi * (0.4 * smoothstep(-0.2, 0.9, front) + 0.3 * smoothstep(0.2, 1.0, dot(dir, up)));
+  c += hi * (0.25 * smoothstep(-0.2, 0.9, front) + 0.3 * smoothstep(0.2, 1.0, dot(dir, up)));
+  // The camera and lens block the studio right around the view axis, so a
+  // facet facing the viewer reflects a dark centre ringed by the lights (as
+  // in a real gem photograph), never a flat pale panel.
+  c *= mix(0.22, 1.0, smoothstep(0.985, 0.88, front));
   float k = saturate(dot(dir, key));
-  c += vec3(1.0, 0.94, 0.84) * (pow(k, 10.0) * 0.7 + pow(k, 140.0) * 9.0);
+  // Broad key sheen: a facet that faces the camera sweeps a soft gradient
+  // (bright toward the star) instead of reflecting a flat pale panel.
+  c += vec3(1.0, 0.94, 0.84) * (pow(k, 3.0) * 0.35 + pow(k, 10.0) * 0.7 + pow(k, 140.0) * 9.0);
   // Strip softboxes flanking the camera and a warm bounce card below.
   c += hi * 1.3 * smoothstep(0.86, 0.95, dot(dir, normalize(V * 0.7 + up * 0.7 - side * 0.3)));
   c += vec3(1.0) * 0.9 * smoothstep(0.9, 0.975, dot(dir, normalize(V * 0.6 + side * 0.8 - up * 0.2)));
@@ -184,13 +200,20 @@ void main() {
                                : mix(tint, vec3(1.0), 0.4);
   vec3 deepC = uColorC.a > 0.5 ? toLinear(uColorC.rgb) : tint * 0.1;
   vec3 sunC = vec3(1.0, 0.93, 0.82);         // the core star's light
-  vec3 redC = vec3(1.0, 0.14, 0.08);
-  float distress = ng * distressPulse(uTime + uSeed * 0.37);
+  // Distress in the PARENT's phase (no seed offset) and the family colour.
+  float pulseD = distressPulse(uTime) * ng;
 
   vec3 col = vec3(0.0);
   float discA = discMask(p, uRadius);
   float spinRate = kind > 1.5 && kind < 2.5 ? 0.22 : 0.035;
   mat3 rot = rotY(uSpin.x + uTime * spinRate + uSeed) * rotX(uSpin.y);
+  float px = aa;
+
+  // Shared aurora (thriving; disc AND halo), not on gems, only when the moon
+  // is big enough for curtains to resolve.
+  float auK = (th * 0.6 + uPulse * 0.5) * step(0.2, lod) * (kind > 1.5 && kind < 2.5 ? 0.0 : 1.0);
+  vec2 au = auK > 0.001 ? auroraCurtains(p, rot, l, 0.88, uTime, px) * auK : vec2(0.0);
+  vec3 auC = mix(glowC, mix(glowC, vec3(0.8, 0.6, 1.0), 0.4), saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.22;
 
   // Disc shading is evaluated a pixel past the limb with a clamped normal so the
   // antialiased edge never blends against black (no dark limb line).
@@ -205,7 +228,8 @@ void main() {
 
     vec3 albedo = tint;
     vec3 nrm = n;
-    vec3 emis = vec3(0.0);
+    vec3 emis = vec3(0.0);     // true emission (lights, fissures, lava)
+    vec3 reflE = vec3(0.0);    // extra REFLECTED light (graded with the surface)
     vec3 rimTint = glowC;
     float wrap = 0.06;
     float specAmt = 0.25;
@@ -268,17 +292,23 @@ void main() {
       emis += glowC * fissure * th * (0.1 + 0.9 * night) * 0.7 * (0.5 + 0.5 * lod);
       // Blue translucency just inside the terminator.
       float term = exp(-dm_sq((ndlG + 0.05) / 0.22));
-      emis += vec3(0.08, 0.3, 0.75) * term * 0.16 * (1.0 - ng * 0.6);
+      reflE += vec3(0.08, 0.3, 0.75) * term * 0.16;
     } else if (kind < 2.5) {
       // ---------------- faceted gem (ray-traced) ----------------
+      // The cut's own pose: spin about a face axis with the tilt pinned to
+      // 0.31–0.39 rad. The view direction then sweeps a cone that stays
+      // ≥ ~12° from all 26 facet normals (at tilt 0 an equatorial facet
+      // would face the camera exactly — the flat 'UI window' table).
+      float gTilt = (uSpin.y < 0.0 ? -1.0 : 1.0) * (0.31 + 0.08 * saturate(abs(uSpin.y) / 0.5));
+      mat3 grot = rotY(uSpin.x + uTime * spinRate + uSeed + 0.47) * rotX(gTilt);
       // Camera ray in object space.
-      vec3 ex = rot * vec3(1.0, 0.0, 0.0);
-      vec3 ey = rot * vec3(0.0, 1.0, 0.0);
+      vec3 ex = grot * vec3(1.0, 0.0, 0.0);
+      vec3 ey = grot * vec3(0.0, 1.0, 0.0);
       // Mild pinhole perspective (camera ~5.5 radii away): rays diverge a
       // little, so each flat facet sweeps a gradient of the environment
       // instead of reading as a flat low-poly tile.
       vec3 lateral = ex * p.x + ey * p.y;
-      vec3 dir = normalize(rot * vec3(0.0, 0.0, -1.0) + lateral * 0.18);
+      vec3 dir = normalize(grot * vec3(0.0, 0.0, -1.0) + lateral * 0.26);
       vec3 o = lateral - dir * 2.0;
       float tIn = -1e4, tOut = 1e4;
       vec3 dIn = vec3(0.0, 0.0, 1.0), dOut = vec3(0.0, 0.0, 1.0);
@@ -302,7 +332,7 @@ void main() {
                      dot(ey, dIn) / dinI - dot(ey, dOut) / dinO);
       float sd = thick / max(length(gT), 1e-3);
       discA = saturate(sd * uRadius + 0.5);
-      nrm = dIn * rot;                       // flat facet normal, view space
+      nrm = dIn * grot;                      // flat facet normal, view space
       vec3 P = o + dir * tIn;
       // Two-bounce interior: refract in, hit the back facets, split into the
       // transmitted ray (Fresnel) and the internally reflected one (total
@@ -310,7 +340,7 @@ void main() {
       const float IOR = 2.0;
       vec3 Vo = -dir;
       vec3 upO = ey;
-      vec3 keyO = rot * l;
+      vec3 keyO = grot * l;
       vec3 lo = deepC * 0.04 + tint * 0.012 + vec3(0.001, 0.0015, 0.003);
       // Studio fill follows the scene: a back-lit stone is lit mostly by the
       // core star shining THROUGH it (the key term in dm_env).
@@ -338,12 +368,15 @@ void main() {
       vec3 fire = 0.5 + 0.5 * cos(6.2832 * (fidX + vec3(0.0, 0.33, 0.67)));
       vec3 inner = dm_env(ro1, Vo, upO, keyO, lo, hi) * ab1 * (1.0 - F1)
                  + dm_env(ro2, Vo, upO, keyO, lo, hi) * mix(ab2, fire * 0.9, 0.1) * F1 * (1.0 - tir2 * 0.5);
-      emis += inner * (1.1 + 0.4 * th);
+      reflE += inner * (1.1 + 0.4 * th) * mix(0.8, 1.1, smoothstep(-0.9, 0.9, dot(p, normalize(l.xy + 1e-4))));
       // Surface reflection (Schlick) — dielectric, uncoloured.
       vec3 R = reflect(dir, dIn);
       float cosi = saturate(-dinI);
       float F = 0.1 + 0.9 * pow(1.0 - cosi, 5.0);
-      emis += dm_env(R, Vo, upO, keyO, lo * 0.0, mix(hi, vec3(0.8), 0.6)) * F;
+      // Key-light reflection gradient: every facet (the camera-facing table
+      // included) brightens toward the star and falls off away from it.
+      float keyGrad = mix(0.45, 1.3, smoothstep(-0.9, 0.9, dot(p, normalize(l.xy + 1e-4))));
+      reflE += dm_env(R, Vo, upO, keyO, lo * 0.0, mix(hi, vec3(0.8), 0.35)) * F * keyGrad;
       // Bright facet edges (antialiased by the facet-plane distance gap).
       float gap = 1e4;
       for (int k = -1; k <= 1; k++)
@@ -360,11 +393,11 @@ void main() {
       }
       float edge = 1.0 - smoothstep(0.0, 1.5 * aa, gap);
       float edgeKey = pow(saturate(dot(reflect(vec3(0.0, 0.0, -1.0), nrm), l) * 0.5 + 0.5), 6.0);
-      emis += mix(tint, vec3(1.0), 0.7) * edge * (0.08 + 0.9 * edgeKey) * mix(0.3, 0.7, lod);
+      reflE += mix(tint, vec3(1.0), 0.6) * edge * (0.03 + 0.8 * edgeKey) * mix(0.3, 0.7, lod);
       // Facet glints: whole facets flash as the gem turns.
       // (Per-pixel mirror direction, so the flash sweeps across the facet.)
-      float fl = saturate(dot(R * rot, l));
-      emis += mix(tint * 0.7, sunC * 3.0, smoothstep(0.975, 0.997, fl)) * smoothstep(0.93, 0.997, fl) * (0.4 + 0.8 * fid);
+      float fl = saturate(dot(R * grot, l));
+      reflE += mix(tint * 0.7, sunC * 3.0, smoothstep(0.975, 0.997, fl)) * smoothstep(0.93, 0.997, fl) * (0.4 + 0.8 * fid);
       // Inner fire for thriving items: a slow glow that breathes through the stone.
       emis += tint * glowC * (0.02 + 0.1 * th) * (0.6 + 0.4 * sin(uTime * 1.7 + fid * 6.28));
       albedo = tint * 0.04;
@@ -391,7 +424,7 @@ void main() {
       vec3 hot = dm_lava(heat);
       hot = mix(hot, hot * (0.5 + tint * 1.5), 0.3);
       emis += hot * mix(1.4, 2.4, lod) * (0.65 + 0.35 * night) * (1.0 - ng * 0.5);
-      emis += albedo * bump * saturate(ndlG) * 2.0;
+      reflE += albedo * bump * saturate(ndlG) * 2.0;
       // Heat haze at the limb.
       emis += vec3(1.0, 0.35, 0.08) * pow(fres, 3.0) * 0.14 * (1.0 - ng * 0.7);
       specAmt = 0.12;
@@ -407,7 +440,7 @@ void main() {
     vec3 hv = normalize(l + vec3(0.0, 0.0, 1.0));
     float spec = pow(saturate(dot(nrm, hv)), specPow) * specAmt * smoothstep(0.0, 0.2, ndlG);
     vec3 ambient = (deepC * 0.4 + tint * 0.06) * 0.2 + vec3(0.004, 0.006, 0.012);
-    col = albedo * (diff * 1.75 * sunC + ambient) + sunC * spec + emis;
+    vec3 lit = albedo * (diff * 1.75 * sunC + ambient) + sunC * spec + reflE;
 
     // Clean rim light (fresh) — strong toward the core star, a hint on the
     // whole limb so the silhouette always reads on the night side.
@@ -415,33 +448,28 @@ void main() {
     float sunward = saturate(dot(normalize(pd), normalize(l.xy + 1e-4)) * 0.5 + 0.5);
     float backlit = saturate(-l.z);
     float rimAmt = mix(0.12, 1.0, fresh) * (0.12 + 0.88 * sunward * sunward + backlit * 0.9 * sunward) * rimScale;
-    col += rimTint * rim * rimAmt;
+    lit += rimTint * rim * rimAmt;
 
-    // Thriving: tiny polar aurora curtains in the glow colour.
-    if (lod > 0.2 && kind != 2.0) {
-      float lat = abs(q.y);
-      float band = exp(-dm_sq((lat - 0.82) / 0.07));
-      float lon = atan(q.z, q.x);
-      float curtain = noise2(vec2(lon * 9.0 + uTime * 0.35, uTime * 0.2 + uSeed));
-      curtain = smoothstep(0.4, 0.95, curtain);
-      col += glowC * band * curtain * th * (0.05 + 0.5 * night) * (1.0 - fres) * 0.45 * lod;
-    }
-
-    // ---------------- neglect ----------------
+    // ---------------- living state ----------------
     if (ng > 0.001) {                        // skip 6 texture taps on healthy moons
       vec3 dq = q * 2.2 + vec3(uTime * 0.05, 0.0, -uTime * 0.03);
       float dust = smoothstep(0.38, 0.8, fbm3lo(dq + fbm3lo(q * 3.0 + uTime * 0.02) * 1.2));
       vec3 dustC = vec3(0.36, 0.33, 0.3) * (diff * 1.4 + 0.03);
-      col = mix(col, dustC, dust * ng * 0.5);
+      lit = mix(lit, dustC, dust * ng * 0.5);
     }
-    float lum = luma(col);
-    col = mix(col, lum * vec3(0.74, 0.85, 1.0), ng * 0.6);    // cold + desaturated
-    col *= 1.0 - ng * 0.45;                                    // dim
+    // Shared grade (thriving: richer and a touch brighter; neglected: dimmer
+    // and greyer), then the moons' cold cast (luminance-neutral).
+    lit = lifeGrade(lit, th, ng);
+    lit *= mix(vec3(1.0), vec3(0.82, 0.95, 1.2), ng * 0.6);
+    // Emission cools with neglect on its own terms (lights fail, lava dulls).
+    col = lit + emis * (1.0 - ng * 0.45);
+    col += auC;
     if (ng > 0.3 && lod > 0.35) {
       float ck = cracks(q * 0.8 + uSeed) * smoothstep(0.45, 0.7, noise3(q * 2.0 + uSeed));
       col += vec3(1.0, 0.28, 0.1) * ck * smoothstep(0.45, 0.95, ng) * (0.15 + 0.85 * night) * 0.22 * lod;
     }
-    col += redC * pow(fres, mix(1.8, 3.2, lod)) * distress * 0.55;
+    // Distress: family colour, parent's phase, softer than the planets (0.35).
+    col += distressColor() * pow(fres, mix(1.8, 3.0, lod)) * pulseD * 0.35;
 
     // ---------------- celebration ----------------
     // Exposure lift keeps the surface legible; the flare lives on the rim.
@@ -461,11 +489,12 @@ void main() {
   float edgeFade = 1.0 - smoothstep(DM_HALO - 0.4, DM_HALO - 0.02, r);
   vec3 halo = glowC * (exp(-dpx / tightPx) * 0.45 + exp(-dpx / widePx) * 0.2)
             * mix(0.12, 1.0, fresh) * (1.0 - ng * 0.55) * dayside;
-  halo += redC * exp(-dpx / max(uRadius * 0.09, 1.3)) * distress * 0.3;
-  // Celebration: bright flare plus a ring that races outward as it decays.
-  float ringR = 1.0 + (1.0 - uPulse) * 0.5;
-  float ring = exp(-dm_sq((r - ringR) * uRadius / max(uRadius * 0.06, 0.9)));
-  halo += glowC * uPulse * (exp(-dpx / widePx) * 0.9 + ring * 0.8);
+  halo += auC;
+  // Distress halo: shared shape, softer (0.2).
+  halo += distressColor() * distressHalo(r, pulseD, px) * (0.2 / 0.3);
+  // Celebration: bright flare plus the family limb shock ring.
+  halo += glowC * uPulse * exp(-dpx / widePx) * 0.9;
+  halo += mix(glowC, vec3(1.0), 0.3) * limbShock(r, uPulse, px) * 0.8;
   // Selection ring: thin, breathing.
   float selR = 1.0 + max(3.0 / uRadius, 0.16);
   float sel = exp(-dm_sq((r - selR) * uRadius / 0.8));
@@ -485,11 +514,5 @@ void main() {
     halo += gl;
   }
 
-  vec3 discG = toGamma(tonemapACES(col));
-  vec3 haloG = toGamma(tonemapACES(halo));
-  float haloA = saturate(max(haloG.r, max(haloG.g, haloG.b)) * 1.1);
-  vec3 pm = discG * discA + haloG * (1.0 - discA);
-  float a = discA + haloA * (1.0 - discA);
-  pm = dither(frag, pm) * step(0.002, a);
-  fragColor = vec4(min(pm, vec3(a)), a);
+  fragColor = compositeDiscHalo(col, discA, halo, frag);
 }

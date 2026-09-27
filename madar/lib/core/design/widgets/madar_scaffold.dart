@@ -165,13 +165,18 @@ class MadarAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: NavigationToolbar(
             centerMiddle: true,
             middleSpacing: Space.m,
+            // NavigationToolbar gives the leading slot the full bar height;
+            // centre the button so it keeps its round size.
             leading: showBack
-                ? MadarButton.icon(
-                    icon: Icons.arrow_back_rounded,
-                    semanticLabel: backLabel,
-                    size: MadarButtonSize.small,
-                    sfx: Sfx.back,
-                    onPressed: onBack ?? () => Navigator.maybePop(context),
+                ? Center(
+                    widthFactor: 1,
+                    child: MadarButton.icon(
+                      icon: Icons.arrow_back_rounded,
+                      semanticLabel: backLabel,
+                      size: MadarButtonSize.small,
+                      sfx: Sfx.back,
+                      onPressed: onBack ?? () => Navigator.maybePop(context),
+                    ),
                   )
                 : null,
             middle: middle,

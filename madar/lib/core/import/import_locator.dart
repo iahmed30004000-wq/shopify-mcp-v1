@@ -500,14 +500,14 @@ class ImportLocator {
     }
 
     // {"items": [...], "weeksPerMonth": 4}
-    final containers = [
+    final containers = {
       for (final e in v.entries)
-        if (ImportAliases.genericContainers.contains(ImportText.key('${e.key}')) && e.value is List) e,
-    ];
+        if (ImportAliases.genericContainers.contains(ImportText.key('${e.key}')) && e.value is List) e.key,
+    };
     if (containers.isNotEmpty) {
       for (final e in v.entries) {
         final p = _join(path, '${e.key}');
-        if (containers.contains(e)) {
+        if (containers.contains(e.key)) {
           _section(match, e.value, p, ctx);
         } else if (e.value is Map && ImportAliases.sectionFor('${e.key}') == match) {
           _section(match, e.value, p, ctx);
@@ -554,6 +554,27 @@ class ImportLocator {
                 : item;
             _item(section, grouped, '$p[$i]', ctx, hint: hint, sourceId: item is Map ? _idOf(item) : null);
           }
+        }
+      }
+      return;
+    }
+
+    // Boards keyed by country / business: {"Jordan": [cards…], "Egypt": {"todo": [...]}}.
+    if (section == ImportSection.boards && v.values.every((x) => x is List || x is Map)) {
+      for (final e in v.entries) {
+        final key = '${e.key}';
+        final p = _join(path, key);
+        final val = e.value;
+        if (val is List) {
+          final rec = _item(section, <String, Object?>{'name': key, 'country': key}, p, ctx, sourceId: key);
+          if (rec != null) _section((section: ImportSection.boardCards, hint: null), val, p, ctx.child(rec));
+        } else {
+          final fields = _fields(val as Map);
+          if (!_hasAny(fields, ImportAliases.name)) {
+            fields['name'] = key;
+            fields['country'] = key;
+          }
+          _item(section, fields, p, ctx, sourceId: _idOf(fields) ?? key);
         }
       }
       return;

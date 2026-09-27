@@ -2,20 +2,39 @@
 #include <flutter/runtime_effect.glsl>
 #include "lib/common.glsl"
 
-// WORK — "Industrial": a megastructure world of steel/basalt continents plated
-// with grid districts, and dark oily seas. The NIGHT SIDE is the hero: one
-// bright metropolis per country board, each radiating highway filaments into
-// a sodium-amber street grid.
-//   thriving : dense, bright lights; an equatorial ring-light with moving
-//              traffic, two inclined traffic arcs, amber aurora, glints.
-//   neglected: brown smog/haze, flickering & failing lights, rust bloom on the
-//              steel, faint cracks, red distress pulse.
+// WORK — "Industrial": a working megastructure world. Continents are plated
+// with a steel-blue city fabric (mottled blocks of blue steel, concrete and a
+// few bronze roofs, darker street canyons, polished-steel arterial traces),
+// soot-dark heavy-industry quarters with furnaces, steam plumes drifting from
+// the metropolises, basalt bedrock with dusty flats, and dark slate seas. The
+// NIGHT SIDE is the hero: one bright metropolis per country board, each
+// radiating highway filaments into a sodium-amber street grid. A sparse chain
+// of orbital stations circles the equator (station lights + traffic packets,
+// never a continuous hoop: the ring SILHOUETTE belongs to Travel).
+//   thriving : the plating gleams (broad metallic sheen), furnaces glow and
+//              steam rises, a faint sodium warmth over the districts, denser
+//              halo (together with the shared thriveGrade: the 22 px day-side
+//              cue), dense bright lights by night, station chain lit with
+//              moving traffic, glass glints, amber aurora (shared curtains).
+//   neglected: brown smog, flickering & failing lights, rust bloom on the
+//              steel, faint cracks, dim and grey (shared neglectGrade), red
+//              distress pulse (shared, in phase with every other world).
+//
+// Family pipeline (common.glsl): lit → lifeGrade → (lit+emit)·T + S (atmoHaze)
+// → aurora / rims → halo = atmoHalo + aurora + limbShock + distress →
+// compositeDiscHalo.
+//
+// Cost notes: the land block is skipped over the seas, the night-light block
+// on the day side, the curtain call where no auroral oval can project, the
+// city work outside 37° of each metropolis (filaments outside 0.36 rad,
+// highways off their great circle); the next city is carried between loop
+// iterations (one cos/sin pair per board); no inclined traffic arcs.
 //
 // uExtra: x = number of country boards (0..8) → that many metropolises
 //         y = activity 0..1 → light density/brightness (0.6 is a good default)
 //         z, w unused.
-// haloFactor: 1.35 is enough (ring/arcs stay within r ≤ 1.31); 1.4 gives the
-//             arcs' soft glow a little more room.
+// haloFactor: 1.35 is enough (station chain at r 1.24, aurora ≤ 1.12,
+//             limb shock ring ≤ 1.30); 1.4 is fine too.
 uniform vec2 uSize;
 uniform vec2 uCenter;
 uniform float uRadius;
@@ -42,13 +61,17 @@ vec2 ind_cube(vec3 x, out float face) {
 }
 
 // City i of 8: Fibonacci latitudes visited in bit-reversed order so that any
-// prefix (1..8 boards) is spread evenly over the globe.
-vec3 ind_city(float i) {
+// prefix (1..8 boards) is spread evenly over the globe. Also returns the
+// city's east tangent (analytic: normalize(cross(c, +y)) = (-sinφ, 0, cosφ)),
+// so the per-pixel loop needs no cross/normalize for the local frame.
+vec3 ind_city(float i, out vec3 east) {
   float br = i == 0.0 ? 0.0 : i == 1.0 ? 4.0 : i == 2.0 ? 2.0 : i == 3.0 ? 6.0 : i == 4.0 ? 1.0 : i == 5.0 ? 5.0 : i == 6.0 ? 3.0 : 7.0;
   float y = (1.0 - (br + 0.5) / 4.0) * 0.72;
   float rr = sqrt(1.0 - y * y);
   float phi = br * 2.39996 + uSeed * 1.9 + i * 0.37;
-  return vec3(cos(phi) * rr, y, sin(phi) * rr);
+  float cp = cos(phi), sp = sin(phi);
+  east = vec3(-sp, 0.0, cp);
+  return vec3(cp * rr, y, sp * rr);
 }
 
 // Road grid on a cube face: returns line coverage, energy-conserving when
@@ -62,49 +85,70 @@ float ind_grid(vec2 uv, float cells, float width, float px, out vec2 id) {
   return (1.0 - smoothstep(0.0, w, d)) * (width / w);
 }
 
-// Amber aurora ribbon on the auroral ovals (object space, y = spin axis).
-float ind_aurora(vec3 q, float t, float px) {
-  vec2 dir = normalize(q.xz + 1e-4);
-  float hemi = q.y > 0.0 ? 1.0 : -1.0;
-  float wob = (noise3(vec3(dir * 1.7, t * 0.06 + hemi * 4.0)) - 0.5) * 0.06
-            + (noise3(vec3(dir * 7.0, t * 0.15 + hemi * 2.0)) - 0.5) * 0.02;
-  float d = abs(q.y) - (0.91 + wob);
-  float wEq = max(0.004, px);
-  float band = (d < 0.0 ? exp(-d * d / (wEq * wEq)) : exp(-d / max(0.005, px * 0.8))) * (0.004 / wEq);
-  float rays = noise3(vec3(dir * 34.0, t * 0.3 + hemi * 3.0));
-  float drift = smoothstep(0.25, 0.65, noise3(vec3(dir * 2.2 - t * 0.03, hemi * 9.0)));
-  return band * (0.6 + 0.4 * rays) * (0.2 + 0.8 * drift);
+// 4-octave fbm for the continents (the 5th octave of fbm3 is below the
+// coastline antialiasing even at the 220 px hero size; saves a tap).
+float ind_fbm4(vec3 p) {
+  float a = 0.5, s = 0.0;
+  for (int i = 0; i < 4; i++) {
+    s += a * noise3(p);
+    p = p * 2.03 + vec3(1.7, 9.2, 3.1);
+    a *= 0.5;
+  }
+  return s / 0.9375;
 }
 
-// Orbital ring / traffic arc in a plane with unit normal nr (view space),
-// radius R. Returns x = emission (traffic + ring light), y = sunlit sheen,
-// z = 1 if the ring point is in front of the planet (or outside the disc).
-vec3 ind_ring(vec2 p, vec3 nr, float R, float w0, float px, float t, float speed, float lanes, vec3 l) {
+// Zone noise for the district plan. `cell` = centre of an arterial block in
+// cube-face uv, blended toward the continuous surface point q by (1 - snap)
+// so tiny planets keep smooth zones. x = district field (its fine octave is
+// added by the caller from a shared tap), y = heavy industry.
+vec2 ind_zone(vec2 cell, float face, vec3 q, float snap) {
+  vec3 P = normalize(face < 2.0 ? vec3(face < 1.0 ? 1.0 : -1.0, cell) :
+                     face < 4.0 ? vec3(cell.x, face < 3.0 ? 1.0 : -1.0, cell.y) :
+                                  vec3(cell, face < 5.0 ? 1.0 : -1.0));
+  vec3 zq = mix(q, P, snap) + uSeed * vec3(0.53, 0.29, 0.71);
+  return vec2(noise3(zq * 3.2 + 11.0) * 0.55 + noise3(zq * 8.0 + 5.0) * 0.3 + 0.075,
+              noise3(zq * 6.5 + 29.0));
+}
+
+// Equatorial station chain in the plane with unit normal nr (view space),
+// radius R, in-plane basis e1/e2 (hoisted: computed once per fragment).
+// Returns x = emission (station lights + moving traffic packets, a faint
+// 0.05 thread between them), y = sunlit sheen of the station hulls, z = 1 if
+// the point is in front of the planet (or outside the disc).
+vec3 ind_ring(vec2 p, float r, vec3 nr, vec3 e1, vec3 e2, float R, float w0, float px, float t, vec3 l) {
   float w = max(w0, px);
-  float nz = abs(nr.z) < 0.02 ? (nr.z < 0.0 ? -0.02 : 0.02) : nr.z;
+  float anz = max(abs(nr.z), 0.02);
+  // cheap reject before any per-point work: the projected ellipse spans |p| in [R|nz|, R]
+  if (r > R + 4.0 * w || r < R * anz - 4.0 * w) return vec3(0.0, 0.0, 1.0);
+  float nz = nr.z < 0.0 ? -anz : anz;
   float z = -(p.x * nr.x + p.y * nr.y) / nz;
   vec3 X = vec3(p, z);
   float rho = length(X);
   // screen-space width: the plane is foreshortened by |nz|
-  float dr = (rho - R) * abs(nz) / max(abs(nz), 0.25);
+  float dr = (rho - R) * anz / max(anz, 0.25);
   float band = exp(-dr * dr / (w * w));
-  if (band < 0.002) return vec3(0.0);
-  vec3 e1 = normalize(cross(nr, vec3(0.0, 0.0, 1.0)) + vec3(1e-4, 0.0, 0.0));
-  vec3 e2 = cross(nr, e1);
+  if (band < 0.002) return vec3(0.0, 0.0, 1.0);
   float ang = atan(dot(X, e2), dot(X, e1));
-  float lane = fract(ang / TAU * lanes - t * speed);
-  float lane2 = fract(ang / TAU * lanes * 0.61 + t * speed * 0.7 + 0.3);
-  float packets = smoothstep(0.0, 0.02, lane) * (1.0 - smoothstep(0.02, 0.16, lane))
-                + 0.6 * smoothstep(0.0, 0.015, lane2) * (1.0 - smoothstep(0.015, 0.1, lane2));
-  // traffic arcs are partial: a lit segment sweeps around the orbit
-  float seg = lanes < 8.0 ? smoothstep(0.1, 0.9, 0.5 + 0.5 * sin(ang + t * speed * 6.0 + lanes)) : 1.0;
-  packets *= seg;
-  // planet shadow on the ring
+  float a01 = ang / TAU + 0.5;
+  // stations: 14 fixed slots, ~60 % occupied, each a small point light
+  float sg = a01 * 14.0 + t * 0.004;
+  float sid = floor(sg);
+  float sh = hash12(vec2(sid, 11.0 + uSeed));
+  float sOn = step(0.4, sh);
+  float sd = (fract(sg) - 0.5) * TAU * R / 14.0;              // arc distance to the slot centre (radii)
+  float sw = max(0.012, px * 1.1);
+  float station = exp(-sd * sd / (sw * sw)) * (0.012 * 0.012) / (sw * sw) * sOn * (0.7 + 0.6 * fract(sh * 7.3));
+  // traffic packets: short moving beads between the stations
+  float lane = fract(a01 * 9.0 - t * 0.05);
+  float lane2 = fract(a01 * 5.5 + t * 0.035 + 0.3);
+  float packets = smoothstep(0.0, 0.01, lane) * (1.0 - smoothstep(0.01, 0.05, lane))
+                + 0.6 * smoothstep(0.0, 0.01, lane2) * (1.0 - smoothstep(0.01, 0.04, lane2));
+  // planet shadow on the chain
   float xl = dot(X, l);
   float shadow = (xl < 0.0 && length(X - l * xl) < 1.0) ? 0.0 : 1.0;
-  float front = (length(p) > 1.0 || z > 0.0) ? 1.0 : 0.0;
+  float front = (r > 1.0 || z > 0.0) ? 1.0 : 0.0;
   band *= w0 / w;
-  return vec3(band * (0.3 * seg + packets * 1.6), band * shadow * (0.4 + 0.6 * seg), front);
+  return vec3(band * (0.05 + packets * 0.8) + station * 1.6, station * shadow * 0.35, front);
 }
 
 void main() {
@@ -112,6 +156,7 @@ void main() {
   vec2 p = (frag - uCenter) / uRadius;
   p.y = -p.y;
   float r = length(p);
+  float px = 1.0 / uRadius;
   vec3 l = normalize(uLight);
   float t = uTime;
   float th = thrive(uScore);
@@ -126,36 +171,40 @@ void main() {
   vec3 cC = toLinear(uColorC.rgb);
   vec3 atmoCol = mix(toLinear(vec3(0.58, 0.7, 0.92)), cB, 0.18);
   atmoCol = mix(atmoCol, toLinear(vec3(0.55, 0.47, 0.36)), ng * 0.7);     // smoggy
-  vec3 distressCol = toLinear(vec3(1.0, 0.2, 0.12));
   vec3 whiteHot = mix(cB, vec3(1.0, 0.95, 0.85), 0.6);
   float pulseD = distressPulse(t) * ng;
 
   float tilt = uSpin.y;
   mat3 rot = rotY(uSpin.x + t * 0.02) * rotX(tilt);
-  float phase = 0.7 + 3.0 * pow(saturate(0.5 - 0.5 * l.z), 5.0);
-  float atmoGain = mix(0.7, 1.0, live) * (1.0 + uPulse * 0.5);
-  const float tauAtm = 0.013;
+  // shared family atmosphere (same parameters for disc haze and halo)
+  float phase = atmoPhase(l);
+  float gain = 2.0 * haloGain(th, ng) * (1.0 + 0.5 * uPulse);
+  float tau0 = 0.016 * (1.0 + 1.5 * ng);
 
-  // Orbital traffic: equatorial ring-light + two inclined arcs (thriving).
+  // shared family aurora (amber), evaluated once for disc and halo
+  // Cheap conservative pre-test before the shared curtain call (skips its
+  // noise taps where no oval can project): |X·axis| = c|X| needs
+  // |axis.xy·p| + |axis.z|·(1+H) ≥ c.
+  float auK = th * 0.9 + uPulse * 0.8;
+  vec3 axisV = vec3(0.0, 1.0, 0.0) * rot;
+  bool auNear = abs(dot(axisV.xy, p)) + abs(axisV.z) * (1.0 + AURORA_H) > 0.9 - 0.04;
+  vec2 au = (auK > 0.001 && auNear) ? auroraCurtains(p, rot, l, 0.9, t, px) * auK : vec2(0.0);
+  vec3 auBase = mix(cB, whiteHot, 0.2);
+  vec3 auTop = toLinear(vec3(1.0, 0.62, 0.34));
+  vec3 auC = mix(auBase, auTop, saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.13;
+
+  // Orbital station chain (equatorial), lit when working.
   float ringVis = smoothstep(0.5, 0.9, uScore) + uPulse * 0.6;
-  vec3 axis = vec3(0.0, cos(tilt), -sin(tilt));          // planet spin axis in view space (q.y = dot(n, axis))
-  vec3 ringE = vec3(0.0), ringS = vec3(0.0);
-  vec3 ringFront = vec3(1.0);
+  vec3 axis = vec3(0.0, cos(tilt), -sin(tilt));          // spin axis in view space (q.y = dot(n, axis))
+  vec3 ring = vec3(0.0, 0.0, 1.0);
   if (ringVis > 0.001 && r < 1.34) {
-    float px = 0.9 / uRadius;
-    vec3 n1 = axis;
-    vec3 n2 = normalize(rotZ(0.5) * rotX(0.45) * axis);
-    vec3 n3 = normalize(rotZ(-0.8) * rotX(-0.3) * axis);
-    float arcs = smoothstep(30.0, 60.0, uRadius);        // inclined arcs only when there is room
-    vec3 r1 = ind_ring(p, n1, 1.24, 0.008, px, t, 0.05, 9.0, l);
-    vec3 r2 = arcs > 0.0 ? ind_ring(p, n2, 1.12, 0.006, px, t, -0.08, 6.0, l) * vec3(arcs, arcs, 1.0) : vec3(0.0, 0.0, 1.0);
-    vec3 r3 = arcs > 0.0 ? ind_ring(p, n3, 1.31, 0.005, px, t, 0.035, 5.0, l) * vec3(arcs, arcs, 1.0) : vec3(0.0, 0.0, 1.0);
-    ringFront = vec3(r1.z, r2.z, r3.z);
-    ringE = vec3(r1.x * 1.1, r2.x * 0.6, r3.x * 0.45) * ringVis;
-    ringS = vec3(r1.y, r2.y * 0.5, r3.y * 0.4) * ringVis;
+    vec3 e1 = normalize(cross(axis, vec3(0.0, 0.0, 1.0)) + vec3(1e-4, 0.0, 0.0));
+    vec3 e2 = cross(axis, e1);
+    ring = ind_ring(p, r, axis, e1, e2, 1.24, 0.006, 0.9 * px, t, l);
+    ring.xy *= ringVis;
   }
-  vec3 ringCol = mix(cB, whiteHot, 0.3);
-  vec3 sheenCol = mix(cA, vec3(1.0), 0.4) * 0.35;
+  vec3 ringCol = mix(cB, whiteHot, 0.35);
+  vec3 sheenCol = mix(cA, vec3(1.0), 0.4);
 
   float discA = discMask(p, uRadius);
   vec3 col = vec3(0.0);
@@ -169,49 +218,70 @@ void main() {
     float ndl = dot(n, l);
     float pxObj = 1.0 / (uRadius * max(mu, 0.05));
 
-    // ---- metropolises (up to 8) + highways linking them ----
-    float cityCore = 0.0, citySprawl = 0.0, filaments = 0.0, highways = 0.0;
+    // ---- metropolises (up to 8) + highways linking them + steam plumes ----
+    float cityCore = 0.0, citySprawl = 0.0, filaments = 0.0, highways = 0.0, plume = 0.0;
     float fw = max(0.0016, pxObj * 0.7);
-    for (int i = 0; i < 8; i++) {
-      float fi = float(i);
-      if (fi < boards) {
-        vec3 c = ind_city(fi);
-        float cs = dot(q, c);
-        float hsh = hash12(vec2(fi, 7.0 + uSeed));
-        if (cs > 0.55) {
-          float a2 = 2.0 * (1.0 - cs);                   // ≈ angle²
-          float ang = sqrt(a2);
-          cityCore += exp(-a2 / 0.0010) * (0.8 + 0.4 * hsh);
-          citySprawl += exp(-a2 / 0.02) + 0.4 * exp(-a2 / 0.07);
-          // radiating arterial filaments (constant width, curving, varied length)
-          vec3 e1 = normalize(cross(c, vec3(0.0, 1.0, 0.0)) + vec3(0.0, 0.0, 1e-3));
-          vec3 e2 = cross(c, e1);
-          float th0 = atan(dot(q, e2), dot(q, e1));
-          float k = 9.0 + floor(hsh * 5.0);
-          float bend = (noise3(vec3(ang * 7.0, th0 * 2.0, fi * 3.0)) - 0.5) * 0.9 * smoothstep(0.0, 0.2, ang);
-          float sid = floor((th0 + bend) * k / TAU + hsh);
-          float rel = (fract((th0 + bend) * k / TAU + hsh) - 0.5) * TAU / k;
-          float dist = ang * abs(sin(rel));
-          float len = 0.1 + 0.25 * hash12(vec2(sid, fi));
-          float str = 0.4 + 0.6 * hash12(vec2(fi, sid + 5.0));
-          filaments += exp(-dist * dist / (fw * fw)) * (0.0016 / fw) * str * (1.0 - smoothstep(len * 0.2, len, ang)) * smoothstep(0.01, 0.04, ang);
-        }
-        // great-circle highway to the next metropolis
-        if (fi + 1.0 < boards) {
-          vec3 c2 = ind_city(fi + 1.0);
-          vec3 gn = normalize(cross(c, c2));
-          float gd = dot(q, gn);                          // distance to the great circle
-          float inside = step(0.0, dot(cross(c, q), gn)) * step(0.0, dot(cross(q, c2), gn));
-          highways += exp(-gd * gd / (fw * fw)) * (0.0016 / fw) * inside * step(0.0, dot(q, c + c2));
+    if (boards > 0.5) {
+      vec3 east;
+      vec3 c = ind_city(0.0, east);
+      for (int i = 0; i < 8; i++) {
+        float fi = float(i);
+        if (fi < boards) {
+          // next city computed once and carried to the next iteration (halves the trig)
+          vec3 eastN = east;
+          vec3 c2 = fi + 1.0 < boards ? ind_city(fi + 1.0, eastN) : c;
+          float cs = dot(q, c);
+          // tight early-outs: sprawl < 0.2 % beyond 37°, filaments end by 0.35 rad
+          if (cs > 0.8) {
+            float hsh = hash12(vec2(fi, 7.0 + uSeed));
+            float a2 = 2.0 * (1.0 - cs);                   // ≈ angle²
+            float ang = sqrt(a2);
+            cityCore += exp(-a2 / 0.0010) * (0.8 + 0.4 * hsh);
+            citySprawl += exp(-a2 / 0.02) + 0.4 * exp(-a2 / 0.07);
+            // local frame (analytic east tangent; north = c × east)
+            vec3 north = cross(c, east);
+            float lu = dot(q, east), lv = dot(q, north);
+            // radiating arterial filaments (constant width, curving, varied length)
+            if (ang < 0.36) {
+              float th0 = atan(lv, lu);
+              float k = 9.0 + floor(hsh * 5.0);
+              float bend = (noise3(vec3(ang * 7.0, th0 * 2.0, fi * 3.0)) - 0.5) * 0.9 * smoothstep(0.0, 0.2, ang);
+              float sid = floor((th0 + bend) * k / TAU + hsh);
+              float rel = (fract((th0 + bend) * k / TAU + hsh) - 0.5) * TAU / k;
+              float dist = ang * abs(sin(rel));
+              float len = 0.1 + 0.25 * hash12(vec2(sid, fi));
+              float str = 0.4 + 0.6 * hash12(vec2(fi, sid + 5.0));
+              filaments += exp(-dist * dist / (fw * fw)) * (0.0016 / fw) * str * (1.0 - smoothstep(len * 0.2, len, ang)) * smoothstep(0.01, 0.04, ang);
+            }
+            // steam / smoke plume drifting east from the metropolis core
+            if (lu > -0.015) {
+              float pu = lu + 0.015;
+              float pw = 0.012 + 0.16 * pu;
+              float pv = lv + sin(pu * 38.0 + fi * 2.7 + t * 0.4) * 0.012 * smoothstep(0.0, 0.1, pu);
+              plume += exp(-pv * pv / (pw * pw)) * smoothstep(0.0, 0.03, pu) * (1.0 - smoothstep(0.06, 0.3, pu)) * (0.5 + 0.6 * hsh);
+            }
+          }
+          // great-circle highway to the next metropolis
+          if (fi + 1.0 < boards) {
+            vec3 gn = normalize(cross(c, c2));
+            float gd = dot(q, gn);                          // distance to the great circle
+            if (abs(gd) < 4.0 * fw) {
+              float inside = step(0.0, dot(cross(c, q), gn)) * step(0.0, dot(cross(q, c2), gn));
+              highways += exp(-gd * gd / (fw * fw)) * (0.0016 / fw) * inside * step(0.0, dot(q, c + c2));
+            }
+          }
+          c = c2;
+          east = eastN;
         }
       }
     }
 
-    // ---- continents & seas ----
+    // ---- continents & seas (land ≥ 55 %) ----
     float warp = fbm3lo(x * 1.2 + vec3(7.0, 1.0, 3.0));
-    float hgt = fbm3(x * 1.35 + warp * 0.9) + citySprawl * 0.35 + cityCore * 0.2;
+    float hgt = (uDetail > 0.3 ? ind_fbm4(x * 1.35 + warp * 0.9) : fbm3lo(x * 1.35 + warp * 0.9))
+              + citySprawl * 0.35 + cityCore * 0.2;
     float coastW = max(0.006, pxObj * 1.5);
-    float land = smoothstep(0.46 - coastW, 0.46 + coastW, hgt);
+    float land = smoothstep(0.40 - coastW, 0.40 + coastW, hgt);
 
     float face;
     vec2 uv = ind_cube(q, face);
@@ -221,31 +291,81 @@ void main() {
     float roadB = ind_grid(uv + 0.013, 56.0, 0.0011, pxUv, idB);
     float blk = hash12(idB + face * 17.0);
     float blkA = hash12(idA + face * 5.0 + 3.0);
-
-    float resolveB = smoothstep(1.0, 3.5, 1.0 / (56.0 * pxUv));   // minor blocks resolvable?
+    float resolveB = smoothstep(1.0, 3.5, 1.0 / (56.0 * pxUv));   // minor blocks resolvable? (lights)
     float resolveA = smoothstep(1.0, 3.5, 1.0 / (14.0 * pxUv));
-    // Megastructure zones. Zone noise is sampled at the centre of the fine
-    // block so zone borders follow the street grid (planned districts).
-    vec2 cB0 = (idB + 0.5) / 56.0 - 0.013;
-    vec3 cellP = normalize(face < 2.0 ? vec3(face < 1.0 ? 1.0 : -1.0, cB0) :
-                           face < 4.0 ? vec3(cB0.x, face < 3.0 ? 1.0 : -1.0, cB0.y) :
-                                        vec3(cB0, face < 5.0 ? 1.0 : -1.0));
-    vec3 zq = mix(q, cellP, resolveB) + uSeed * vec3(0.53, 0.29, 0.71);
-    float zoneN = noise3(zq * 3.0 + 11.0) * 0.75 + noise3(zq * 9.0 + 5.0) * 0.25;
-    float distr = smoothstep(0.44, 0.56, zoneN + citySprawl * 0.3) * land;
-    float heavy = smoothstep(0.52, 0.56, noise3(zq * 4.5 + 29.0));             // heavy-industry zones (dark)
+    float blockPx = 1.0 / (14.0 * pxUv);                          // arterial block size in px
+    float roofRes = smoothstep(2.5, 6.0, 1.0 / (56.0 * pxUv));    // fine blocks resolvable (albedo)
+    float roof = mix(0.5, blk, roofRes);
+    float nT6 = noise3(x * 6.0 + 3.0);                            // shared: bedrock tone + night towns
+    float n11 = noise3(x * 11.0);                                 // shared: dust tone + urban lights
 
-    // ---- albedo ----
-    vec3 basalt = mix(cC, cA, 0.14) * (0.75 + 0.45 * noise3(x * 6.0)) * (1.0 + (noise3(x * 23.0) - 0.5) * 0.3 * smoothstep(2.0, 5.0, 1.0 / (23.0 * pxObj)));
-    float roof = mix(0.5, blk, resolveB);
-    vec3 steel = cA * mix(0.78, 0.4, heavy) * (0.88 + 0.24 * roof);
-    steel = mix(steel, cC * 1.5, step(0.9, roof) * resolveB * 0.4);           // dark rooftops / vents
-    vec3 landCol = mix(basalt, steel, distr);
-    landCol *= 1.0 - roadB * 0.55 * distr;
-    landCol = mix(landCol, cA * 1.1, roadA * 0.6 * distr);                     // bright concrete arterials
-    vec3 sea = cC * 0.22;
-    vec3 albedo = mix(sea, landCol, land);
-    // polar ice shelves, steel-tinted
+    vec3 steel = cA * vec3(0.4, 0.66, 0.92);                      // blue steel plating (saturated in linear: ACES desaturates)
+    vec3 sea = mix(cC, cA, 0.25) * 0.7;
+    vec3 albedo = sea;
+    float distr = 0.0, heavy = 0.0, trace = 0.0;
+    if (land > 0.001) {
+      // Planned districts. Zone borders are ORGANIC (smooth noise, antialiased
+      // by its own smoothstep) until an arterial block is a real on-screen
+      // city block (≥ ~14 px, beyond the 220 px hero); only then is the zone
+      // snapped to the arterial (14-cell) grid so districts end at a road,
+      // antialiased by blending with the neighbouring block across the
+      // nearest edge within one pixel. (Snapping at smaller blocks is what
+      // read as a pixel mosaic.)
+      float snap = smoothstep(14.0, 22.0, blockPx);
+      float n24 = noise3(x * 24.0 + 7.0);                         // shared: zone fine octave + block-scale mottling
+      vec2 zone = ind_zone((idA + 0.5) / 14.0, face, q, snap);
+      if (snap > 0.001) {
+        vec2 fA = fract(uv * 14.0) - 0.5;
+        vec2 ddA = 0.5 - abs(fA);
+        float nbW = snap * 0.5 * (1.0 - smoothstep(0.0, pxUv * 14.0, min(ddA.x, ddA.y)));
+        if (nbW > 0.002) {
+          vec2 stepA = ddA.x < ddA.y ? vec2(sign(fA.x), 0.0) : vec2(0.0, sign(fA.y));
+          zone = mix(zone, ind_zone((idA + stepA + 0.5) / 14.0, face, q, snap), nbW);
+        }
+      }
+      // sprawl edges fray block by block once the fine blocks are resolvable
+      float builtK = zone.x + (n24 - 0.5) * 0.15 * (1.0 - snap) + citySprawl * 0.3 + (blk - 0.5) * 0.08 * roofRes;
+      distr = smoothstep(0.34, 0.54, builtK) * land;
+      heavy = smoothstep(0.6, 0.7, zone.y) * distr * mix(0.75, step(0.3, blk), roofRes);  // heavy industry (compact, speckled)
+
+      // ---- albedo: Work is a STEEL-BLUE plated world. Districts are a
+      //      mottled city fabric of blue steel plating with neutral concrete
+      //      and a few bronze roofs (warm accents only at the block scale,
+      //      so the 22 px average stays steel-blue, never pink or tan),
+      //      darker street canyons, soot-dark heavy industry; basalt bedrock
+      //      with dusty flats; deep slate seas. ----
+      float plan = smoothstep(2.5, 6.0, blockPx);                 // per-block tone once blocks are resolvable
+      // mottling (city fabric and bedrock) from the district scale down to
+      // the block scale; each octave fades out before it would alias
+      float n9 = noise3(x * 9.0 + 2.0);
+      float m1 = (n9 - 0.5) * smoothstep(2.0, 5.0, 1.0 / (9.0 * pxObj));
+      float m2 = (n24 - 0.5) * smoothstep(2.5, 6.0, 1.0 / (24.0 * pxObj));
+      vec3 basalt = mix(cC, cA, 0.4) * vec3(0.6, 0.85, 1.12) * (0.72 + 0.5 * nT6) * (1.0 + m1 * 0.4 + m2 * 0.45);
+      vec3 dust = toLinear(vec3(0.46, 0.43, 0.39)) * (0.8 + 0.35 * n11) * (1.0 + m2 * 0.3);
+      vec3 ground = mix(basalt, dust, smoothstep(0.52, 0.72, warp) * 0.4);
+      float plateK = mix(0.5, blkA, plan);                        // per-block tone (city mottling)
+      float mott = 1.0 + m1 * 0.5 + m2 * 0.45;
+      vec3 concrete = toLinear(vec3(0.46, 0.5, 0.53));
+      vec3 copper = toLinear(vec3(0.6, 0.44, 0.34));              // weathered copper / bronze roofs
+      vec3 tar = cC * 3.0;
+      // roof mix per fine block when resolved (steel 64 %, concrete 22 %,
+      // bronze 4 %, tar 10 %), the same average when not
+      float rS = step(roof, 0.64), rC = step(0.64, roof) * step(roof, 0.86), rO = step(0.86, roof) * step(roof, 0.9);
+      vec3 avgRoof = steel * 0.64 + concrete * 0.22 + copper * 0.04 + tar * 0.1;
+      vec3 roofCol = mix(avgRoof, steel * rS + concrete * rC + copper * rO + tar * (1.0 - rS - rC - rO), roofRes * 0.75);
+      vec3 dcol = roofCol * (0.84 + 0.32 * plateK) * mott;
+      vec3 soot = mix(toLinear(vec3(0.16, 0.17, 0.18)), toLinear(vec3(0.27, 0.23, 0.2)), saturate(0.2 + m1)) * (0.75 + 0.5 * roof);
+      dcol = mix(dcol, soot, heavy * 0.85);
+      vec3 landCol = mix(ground, dcol, distr);
+      // minor streets are dark canyons; the arterials are bright polished-
+      // steel TRACES broken into fragments (a circuit, not a graph-paper
+      // lattice); they carry the amber light at night
+      float frag0 = smoothstep(0.4, 0.62, n9);
+      trace = roadA * frag0 * distr * (1.0 - heavy);
+      landCol *= 1.0 - (mix(0.12, roadB, roofRes) * 0.45 + roadA * (1.0 - frag0) * 0.3) * distr;
+      landCol = mix(landCol, steel * 1.9, trace * 0.6);
+      albedo = mix(sea, landCol, land);
+    }
 
     // rust bloom on the steel (neglect)
     float rustM = ng > 0.001 ? smoothstep(0.4, 0.75, noise3(x * 5.0 + 3.0) * 0.8 + noise3(x * 19.0) * 0.2) * land : 0.0;
@@ -255,140 +375,141 @@ void main() {
     // ---- lighting ----
     float lam = saturate(ndl);
     float diff = lam * smoothstep(-0.05, 0.1, ndl + 0.03);
-    vec3 sunCol = vec3(1.0, 0.95, 0.88) * mix(1.75, 1.4, ng);
+    vec3 sunCol = vec3(1.0, 0.95, 0.88) * 1.75;
     vec3 sky = atmoCol * 0.05 * smoothstep(-0.25, 0.4, ndl);
     vec3 lit = albedo * (sunCol * diff + sky);
     vec3 hv = normalize(l + vec3(0.0, 0.0, 1.0));
     float nh = saturate(dot(n, hv));
     float fres = pow(1.0 - saturate(mu), 5.0);
-    // dark glossy seas: sharp sun glint + sky sheen; steel plates: broad metallic sheen
-    float waves = mix(0.5, fine > 0.0 ? noise3(x * 70.0 + vec3(t * 0.2, 0.0, 0.0)) : 0.5, smoothstep(2.0, 5.0, 1.0 / (70.0 * pxObj)));
-    float seaSpec = pow(nh, 400.0) * 0.8 * (0.5 + waves) + pow(nh, 60.0) * 0.04;
+    // glossy seas: sharp sun glint + sky sheen; steel plates: broad metallic sheen
+    float wavesK = smoothstep(2.0, 5.0, 1.0 / (70.0 * pxObj)) * step(0.001, fine) * (1.0 - land);
+    float waves = wavesK > 0.001 ? mix(0.5, noise3(x * 70.0 + vec3(t * 0.2, 0.0, 0.0)), wavesK) : 0.5;
+    float nh2 = nh * nh, nh4 = nh2 * nh2, nh8 = nh4 * nh4, nh16 = nh8 * nh8, nh64 = nh16 * nh16 * nh16 * nh16;
+    float nh256 = nh64 * nh64 * nh64 * nh64;
+    float seaSpec = nh256 * nh64 * 0.8 * (0.8 + 0.4 * waves) + nh64 * 0.04;
     lit += sunCol * seaSpec * (1.0 - land) * smoothstep(0.0, 0.15, ndl) * (1.0 - ng * 0.6);
     lit += atmoCol * fres * 0.06 * (1.0 - land) * smoothstep(-0.1, 0.3, ndl);
-    float plateSpec = pow(nh, 22.0) * mix(0.1, 0.45, blk * resolveB) * distr * (1.0 - rustM * ng);
+    // steel plating sheen: maintained plating gleams when the world is working
+    // (broad, low-frequency: part of the 22 px thriving cue), dull when steady
+    float plateSpec = (nh8 * nh4 * mix(0.06, 0.2, th) + nh16 * nh4 * mix(0.1, 0.45, blk * resolveB))
+                    * distr * (1.0 - heavy * 0.6) * (1.0 - rustM * ng);
     lit += sunCol * cA * plateSpec * smoothstep(0.0, 0.2, ndl);
 
-    // thin cloud decks / smog
+    // steam plumes (white when working) / smog (brown, neglect)
     vec3 cq = x * vec3(2.4, 4.5, 2.4) + vec3(t * 0.012, 0.0, -t * 0.009) + warp;
-    float cloudN = fbm3lo(cq);
-    float cl = 0.0;
+    float cloudN = (plume > 0.001 || ng > 0.001) ? fbm3lo(cq) : 0.5;
+    float steam = saturate(plume * (0.55 + 0.6 * cloudN)) * (0.35 + 0.65 * act) * mix(0.35, 1.0, live);
+    vec3 steamCol = mix(vec3(0.72, 0.72, 0.74), vec3(0.42, 0.36, 0.3), ng);
     float smog = ng * smoothstep(0.4, 0.8, cloudN * 0.8 + warp * 0.35) * 0.8;
     vec3 smogCol = toLinear(vec3(0.42, 0.38, 0.32));
-    lit = mix(lit, smogCol * (sunCol * saturate(ndl * 0.9 + 0.12) + sky * 2.0), smog);
-    lit = desaturate(lit, ng * 0.3) * (1.0 - ng * 0.2);
+    vec3 cloudLight = sunCol * saturate(ndl * 0.9 + 0.12) + sky * 2.0;
+    lit = mix(lit, steamCol * cloudLight, steam * 0.75);
+    lit = mix(lit, smogCol * cloudLight, smog);
 
-    // ---- night lights ----
-    float nightVis = smoothstep(0.05, -0.25, ndl);
-    float density = (0.15 + 0.85 * act) * mix(0.3, 1.0, live);
-    float towns = smoothstep(0.45, 0.8, noise3(x * 6.0 + 3.0) * 0.7 + noise3(x * 17.0) * 0.3);
-    float urban = land * (distr * (0.15 + 0.5 * towns) + citySprawl * (0.6 + 0.5 * noise3(x * 11.0)));
-    float U = saturate(urban * density);
-    float frag1 = smoothstep(0.35, 0.65, noise3(x * 26.0 + 8.0));               // streets lit in fragments
-    float streets = roadA * smoothstep(0.2, 0.7, U) * (0.3 + 0.7 * frag1) * 1.1
-                  + roadB * smoothstep(0.45, 0.95, U) * (0.4 + 0.6 * frag1) * 0.9;
-    float blockOn = smoothstep(blk, blk + 0.05, U * 1.2);
-    vec2 cellF = fract((uv + 0.013) * 56.0) - 0.5;
-    float dotS = max(0.0014, pxUv * 0.6);
-    float bd = length(cellF - (hash22(idB + face) - 0.5) * 0.5) / 56.0;
-    float blockLight = exp(-bd * bd / (dotS * dotS)) * (0.0014 * 0.0014) / (dotS * dotS) * blockOn * (0.4 + hash12(idB * 1.7));
-    // towns: a coarser layer of bright points that stays resolvable at mid scale
-    vec2 tg = uv * 18.0 + 0.37;
-    vec2 tid = floor(tg);
-    vec2 th2 = hash22(tid + face * 3.3 + uSeed);
-    float tOn = smoothstep(th2.x * 0.9, th2.x * 0.9 + 0.08, U);
-    float tS = max(0.0022, pxUv * 0.7);
-    float td = length(fract(tg) - 0.25 - 0.5 * th2) / 18.0;
-    float resolveT = smoothstep(1.0, 3.0, 1.0 / (18.0 * pxUv));
-    float townPt = exp(-td * td / (tS * tS)) * (0.0022 * 0.0022) / (tS * tS) * tOn * (0.5 + th2.y);
-    townPt = mix(U * 0.12, townPt, resolveT);
-    float haze = U * U * 0.18;                                                  // light pollution
-    float lodPts = U * 0.14 * (0.6 + 0.8 * frag1);                              // average of the block points
-    float grid = haze + townPt * 1.4 + mix(lodPts, blockLight * 1.4, resolveB) + mix(U * 0.06, streets, resolveA);
-    // failing lights: whole districts drop out / flicker (neglect)
-    float failKey = hash12(idA + face * 9.0 + floor(t * 5.0 + blkA * 7.0) * 0.01);
-    float alive = 1.0 - ng * 0.85 * step(blkA, 0.75) * (0.6 + 0.4 * step(0.5, hash12(idA + floor(t * 7.0 + blkA * 13.0))));
-    float cityLum = cityCore * 2.4 + filaments * 1.0 + highways * 0.8 * (0.35 + 0.65 * land);
-    cityLum *= mix(0.3, 1.0, live) * (0.5 + 0.5 * act) * (1.0 - ng * 0.5 * step(0.5, failKey));
-    vec3 lightsCol = cB * (grid * alive * 1.5 + cityLum) + whiteHot * cityCore * cityCore * 1.6 * mix(0.3, 1.0, live);
-    lightsCol *= 1.0 + uPulse * 1.2;
-    vec3 emit = lightsCol * nightVis * (1.0 - smog * 0.55);
-    // day side: metropolis cores and furnace sparks still read (a working world)
-    emit += cB * (cityCore * 0.1 + filaments * 0.03 + (townPt * 0.25 + blockLight * 0.12 * resolveB) * U) * (1.0 - nightVis) * live;
-
-    // glints of glass towers on the day side (thriving)
-    vec2 sg = floor(uv * 90.0);
-    float sph = fract(t * 0.4 + hash12(sg + 3.0) * 9.0);
-    float spk = step(0.993, hash12(sg + face * 7.0)) * smoothstep(0.0, 0.06, sph) * (1.0 - smoothstep(0.06, 0.25, sph));
-    vec2 sf = fract(uv * 90.0) - 0.5;
-    float ss = max(0.0012, pxUv * 0.6);
-    spk *= exp(-dot(sf, sf) / (8100.0 * ss * ss)) * (0.0012 * 0.0012) / (ss * ss);
-    emit += vec3(1.0, 0.96, 0.9) * spk * distr * (th + uPulse) * smoothstep(0.1, 0.5, ndl) * 3.0 * resolveB;
-
-    // cracks (neglect): faint red fault lines, embers on the night side
+    // cracks (neglect) darken the crust
+    float ck = 0.0;
     if (ng > 0.02) {
       vec2 v = voronoi3(x * 4.2 + noise3(x * 6.0) * 0.4);
-      float ck = (1.0 - smoothstep(0.0, max(0.018, pxObj * 2.0), v.y - v.x)) * smoothstep(0.3, 0.8, ng);
+      ck = (1.0 - smoothstep(0.0, max(0.018, pxObj * 2.0), v.y - v.x)) * smoothstep(0.3, 0.8, ng);
       ck *= smoothstep(0.45, 0.7, noise3(x * 2.0 + 17.0)) * smoothstep(0.02, 0.008, pxObj);
       lit *= 1.0 - ck * 0.3;
-      emit += distressCol * ck * (0.03 + 0.35 * (1.0 - smoothstep(-0.2, 0.1, ndl))) * (0.4 + 0.6 * pulseD) * 0.5;
     }
 
-    // ---- ring shadow on the surface (ring-light casts a thin dark band) ----
-    if (ringVis > 0.001) {
-      float s = -dot(n, axis) / dot(l, axis);
-      vec3 P = n + l * s;
-      float rs = (length(P) - 1.24) / 0.012;
-      lit *= 1.0 - 0.55 * exp(-rs * rs) * step(0.0, s) * smoothstep(0.0, 0.3, ndl) * min(ringVis, 1.0);
-    }
-
-    // ---- atmosphere ----
-    float airmass = 1.0 / (max(mu, 0.0) + 0.1);
-    float tau = tauAtm * airmass * (1.0 + ng * 1.5);
-    vec3 T = exp(-tau * vec3(1.25, 1.0, 0.8));
-    float sunAtm = smoothstep(-0.3, 0.3, ndl);
-    vec3 S = atmoCol * (1.0 - exp(-tau)) * sunAtm * phase * 1.8 * atmoGain;
     float term = exp(-ndl * ndl / 0.02);
     lit *= mix(vec3(1.0), vec3(1.35, 0.85, 0.6), term * 0.6);
+    // shared living-state grade: thriving richer/warmer, neglected dim & grey
+    lit = lifeGrade(lit, th, ng);
+
+    // ---- night lights (evaluated only where they can show) ----
+    float nightVis = smoothstep(0.05, -0.25, ndl);
+    float cityLum = cityCore * 2.4 + filaments * 1.0 + highways * 0.8 * (0.35 + 0.65 * land);
+    cityLum *= mix(0.3, 1.0, live) * (0.5 + 0.5 * act);
+    vec3 emit = vec3(0.0);
+    if (nightVis > 0.001) {
+      float density = (0.15 + 0.85 * act) * mix(0.3, 1.0, live);
+      float towns = smoothstep(0.45, 0.8, nT6 * 0.7 + noise3(x * 17.0) * 0.3);
+      float urban = land * (distr * (0.15 + 0.5 * towns) + citySprawl * (0.6 + 0.5 * n11));
+      float U = saturate(urban * density);
+      float frag1 = smoothstep(0.35, 0.65, noise3(x * 26.0 + 8.0));             // streets lit in fragments
+      float streets = roadA * smoothstep(0.2, 0.7, U) * (0.3 + 0.7 * frag1) * 1.1
+                    + roadB * smoothstep(0.45, 0.95, U) * (0.4 + 0.6 * frag1) * 0.9;
+      float blockOn = smoothstep(blk, blk + 0.05, U * 1.2);
+      vec2 cellF = fract((uv + 0.013) * 56.0) - 0.5;
+      float dotS = max(0.0014, pxUv * 0.6);
+      float bd = length(cellF - (hash22(idB + face) - 0.5) * 0.5) / 56.0;
+      float blockLight = exp(-bd * bd / (dotS * dotS)) * (0.0014 * 0.0014) / (dotS * dotS) * blockOn * (0.4 + hash12(idB * 1.7));
+      // towns: a coarser layer of bright points that stays resolvable at mid scale
+      vec2 tg = uv * 18.0 + 0.37;
+      vec2 tid = floor(tg);
+      vec2 th2 = hash22(tid + face * 3.3 + uSeed);
+      float tOn = smoothstep(th2.x * 0.9, th2.x * 0.9 + 0.08, U);
+      float tS = max(0.0022, pxUv * 0.7);
+      float td = length(fract(tg) - 0.25 - 0.5 * th2) / 18.0;
+      float resolveT = smoothstep(1.0, 3.0, 1.0 / (18.0 * pxUv));
+      float townPt = exp(-td * td / (tS * tS)) * (0.0022 * 0.0022) / (tS * tS) * tOn * (0.5 + th2.y);
+      townPt = mix(U * 0.12, townPt, resolveT);
+      float haze = U * U * 0.18;                                                // light pollution
+      float lodPts = U * 0.14 * (0.6 + 0.8 * frag1);                            // average of the block points
+      float grid = haze + townPt * 1.4 + mix(lodPts, blockLight * 1.4, resolveB) + mix(U * 0.06, streets, resolveA);
+      // failing lights: whole districts drop out / flicker (neglect)
+      float failKey = hash12(idA + face * 9.0 + floor(t * 5.0 + blkA * 7.0) * 0.01);
+      float alive = 1.0 - ng * 0.85 * step(blkA, 0.75) * (0.6 + 0.4 * step(0.5, hash12(idA + floor(t * 7.0 + blkA * 13.0))));
+      vec3 lightsCol = cB * (grid * alive * 1.5 + cityLum * (1.0 - ng * 0.5 * step(0.5, failKey)))
+                     + whiteHot * cityCore * cityCore * 1.6 * mix(0.3, 1.0, live);
+      emit = lightsCol * (1.0 + uPulse * 1.2) * nightVis * (1.0 - smog * 0.55) * (1.0 - steam * 0.4);
+    }
+    // day side: metropolis cores and arterial filaments still read (a working world)
+    emit += cB * (cityCore * 0.1 + filaments * 0.03) * (1.0 - nightVis) * live;
+    // furnaces in the heavy-industry quarters: a warm glow that reads by day
+    // when the world is working (the low-frequency thriving cue), embers by night
+    float hot = mix(0.3, smoothstep(0.62, 0.9, blk) * 2.0, roofRes);          // furnace blocks, averaged when tiny
+    float furn = heavy > 0.001 ? heavy * hot * (0.55 + 0.45 * noise3(x * 14.0 + vec3(0.0, t * 0.15, 0.0))) * (0.3 + 0.7 * act) : 0.0;
+    emit += toLinear(vec3(1.0, 0.52, 0.2)) * furn * mix(0.004, 0.03, th) * (1.0 + 5.0 * nightVis) * (1.0 - ng);
+    // a working world: a faint sodium / glass warmth over the districts by day
+    emit += cB * distr * (1.0 - heavy) * 0.006 * th * (0.4 + 0.6 * act) * (1.0 - nightVis);
+
+    // glints of glass towers on the day side (thriving)
+    float glintK = distr * (th + uPulse) * smoothstep(0.1, 0.5, ndl) * resolveB;
+    if (glintK > 0.001) {
+      vec2 sg = floor(uv * 90.0);
+      float sph = fract(t * 0.4 + hash12(sg + 3.0) * 9.0);
+      float spk = step(0.993, hash12(sg + face * 7.0)) * smoothstep(0.0, 0.06, sph) * (1.0 - smoothstep(0.06, 0.25, sph));
+      vec2 sf = fract(uv * 90.0) - 0.5;
+      float ss = max(0.0012, pxUv * 0.6);
+      spk *= exp(-dot(sf, sf) / (8100.0 * ss * ss)) * (0.0012 * 0.0012) / (ss * ss);
+      emit += vec3(1.0, 0.96, 0.9) * spk * glintK * 3.0;
+    }
+
+    // cracks (neglect): faint red fault lines, embers on the night side
+    emit += distressColor() * ck * (0.03 + 0.35 * (1.0 - smoothstep(-0.2, 0.1, ndl))) * (0.4 + 0.6 * pulseD) * 0.5;
+
+    // ---- atmosphere (shared family haze) ----
+    vec3 T;
+    vec3 S = atmoHaze(mu, ndl, atmoCol, tau0, vec3(1.25, 1.0, 0.8), gain, phase, T);
     col = (lit + emit) * T + S;
-    // city light pollution glow at the night limb + amber aurora
-    col += cB * (0.02 + 0.05 * act) * live * pow(1.0 - saturate(mu), 3.0) * nightVis;
-    float auK = th * 0.8 + uPulse * 0.8;
-    float au = auK > 0.001 ? ind_aurora(q, t, 1.0 / uRadius) * auK : 0.0;
-    col += mix(cB, whiteHot, 0.2) * au * (0.06 + nightVis) / (saturate(mu) + 0.6) * 0.5;
+    // city light pollution glow at the night limb
     float fr3 = pow(1.0 - saturate(mu), 3.0);
-    col += distressCol * fr3 * pulseD * 0.65;
+    col += cB * (0.02 + 0.05 * act) * live * fr3 * nightVis;
+    col += auC;
+    col += distressColor() * distressRim(mu, pulseD);
+    // celebration flourish: the whole limb flares amber
     col += cB * uPulse * fr3 * fr3 * 1.1;
   }
 
-  // ---- halo ----
+  // ---- halo (shared family model) ----
+  vec3 halo = atmoHalo(p, l, atmoCol, tau0, 0.035, gain, phase, px);
   float hr = max(r - 1.0, 0.0);
-  vec3 d3 = vec3(p / max(r, 1e-4), 0.0);
-  float ndlL = dot(d3, l);
-  float dens = exp(-hr / 0.035);
-  float tauH = tauAtm * 11.0 * dens * (1.0 + ng * 1.5);
-  vec3 halo = atmoCol * (1.0 - exp(-tauH)) * smoothstep(-0.3, 0.3, ndlL) * phase * 2.2 * atmoGain;
+  float ndlL = dot(vec3(p / max(r, 1e-4), 0.0), l);
   float nightL = 1.0 - smoothstep(-0.2, 0.15, ndlL);
-  halo += cB * (0.02 + 0.04 * act) * live * dens * nightL;
-  float qaK = th * 0.8 + uPulse * 0.8;
-  float qa = (qaK > 0.001 && hr < 0.2) ? ind_aurora(rot * d3, t, 1.0 / uRadius) * qaK : 0.0;
-  halo += mix(cB, toLinear(vec3(1.0, 0.5, 0.3)), smoothstep(0.0, 0.05, hr)) * qa * exp(-hr / 0.022) * (0.1 + 0.8 * nightL) * 0.55;
-  halo += distressCol * pulseD * exp(-hr / 0.035) * 0.4;
-  float ringR = 1.0 + (1.0 - uPulse) * 0.26;
-  float rdp = (r - ringR) / (0.012 + 0.03 * (1.0 - uPulse));
-  halo += cB * uPulse * exp(-rdp * rdp) * 0.6 * smoothstep(1.0, 1.02, r);
+  halo += cB * (0.02 + 0.04 * act) * live * exp(-hr / max(0.035, 1.2 * px)) * nightL;   // city glow above the night limb
+  halo += auC;
+  halo += cB * limbShock(r, uPulse, px) * 0.6;
+  halo += distressColor() * distressHalo(r, pulseD, px);
 
-  // ---- orbital rings: front parts over the disc; everything outside the disc in the halo ----
-  float fE = dot(ringE, ringFront);
-  float fS = dot(ringS, ringFront);
-  col += ringCol * fE + sheenCol * fS;
-  halo += (ringCol * (ringE.x + ringE.y + ringE.z) + sheenCol * (ringS.x + ringS.y + ringS.z)) * step(1.0, r);
+  // ---- station chain: front part over the disc, everything outside the disc in the halo ----
+  vec3 ringL = ringCol * ring.x + sheenCol * ring.y;
+  col += ringL * ring.z;
+  halo += ringL * step(1.0, r);
 
-  vec3 dC = toGamma(tonemapACES(col));
-  vec3 hC = toGamma(tonemapACES(halo));
-  float hA = saturate(max(hC.r, max(hC.g, hC.b)));
-  vec3 pm = dC * discA + hC * (1.0 - discA);
-  float a = discA + hA * (1.0 - discA);
-  pm = dither(frag, pm);
-  fragColor = vec4(clamp(pm, vec3(0.0), vec3(a)), a);
+  fragColor = compositeDiscHalo(col, discA, halo, frag);
 }

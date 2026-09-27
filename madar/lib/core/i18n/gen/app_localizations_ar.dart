@@ -1092,22 +1092,19 @@ class L10nAr extends L10n {
   String get importPreviewTitle => 'ما وجدناه';
 
   @override
-  String importTotalRecords(int count) {
+  String importRecordsReady(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count سجل',
-      many: '$count سجلًا',
-      few: '$count سجلات',
-      two: 'سجلان',
-      one: 'سجل واحد',
-      zero: 'لا سجلات',
+      other: 'سجل جاهز للاستيراد',
+      many: 'سجلًا جاهزًا للاستيراد',
+      few: 'سجلات جاهزة للاستيراد',
+      two: 'سجلان جاهزان للاستيراد',
+      one: 'سجل جاهز للاستيراد',
+      zero: 'لا سجلات للاستيراد',
     );
     return '$_temp0';
   }
-
-  @override
-  String get importRecordsCaption => 'جاهزة للاستيراد';
 
   @override
   String get importShapeTitle => 'بنية الملف';
@@ -1533,4 +1530,404 @@ class L10nAr extends L10n {
 
   @override
   String get importBudgetWhole => 'الميزانية كلها';
+
+  @override
+  String get shellSplashAssembling => 'نُركّب أسطرلابك…';
+
+  @override
+  String get shellSplashSemantics => 'يجري فتح بياناتك المشفّرة';
+
+  @override
+  String get shellGateErrorTitle => 'تعذّر فتح مَدار';
+
+  @override
+  String get shellGateRetry => 'أعِد المحاولة';
+
+  @override
+  String get shellGateReset => 'ابدأ من جديد';
+
+  @override
+  String get shellGateResetTitle => 'حذف جميع البيانات؟';
+
+  @override
+  String get shellGateResetBody =>
+      'سيُحذف ملف البيانات المشفّر نهائيًا ويبدأ مَدار من الصفر، ولا يمكن التراجع عن ذلك. إن لم تكن لديك نسخة احتياطية فلن تعود بياناتك القديمة.';
+
+  @override
+  String get shellGateResetConfirm => 'احذف وابدأ من جديد';
+
+  @override
+  String get shellGateResetFailed =>
+      'تعذّر حذف البيانات. أعد تشغيل التطبيق ثم حاول مجددًا.';
+
+  @override
+  String shellDurationHoursMinutes(String hours, String minutes) {
+    return '$hours س $minutes د';
+  }
+
+  @override
+  String shellDurationHours(String hours) {
+    return '$hours س';
+  }
+
+  @override
+  String shellDurationMinutes(String minutes) {
+    return '$minutes د';
+  }
+
+  @override
+  String get shellDurationLessThanMinute => 'أقل من دقيقة';
+
+  @override
+  String get homeOpenSettings => 'الإعدادات';
+
+  @override
+  String get homeNow => 'الآن';
+
+  @override
+  String homeNextPrayer(String prayer, String duration) {
+    return '$prayer بعد $duration';
+  }
+
+  @override
+  String get homePlaceholderBadge => 'مواقيت تقريبية';
+
+  @override
+  String get homePlaceholderNote => 'المواقيت الدقيقة لموقعك تصل قريبًا';
+
+  @override
+  String homeWindowStarts(String window, String time) {
+    return '$window، يبدأ $time';
+  }
+
+  @override
+  String homeTasksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مهمة',
+      many: '$count مهمة',
+      few: '$count مهام',
+      two: 'مهمتان',
+      one: 'مهمة واحدة',
+      zero: 'لا مهام بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String homeTasksProgress(String done, String total) {
+    return 'أنجزت $done من $total';
+  }
+
+  @override
+  String get homeAddTask => 'مهمة جديدة';
+
+  @override
+  String get homeEditTask => 'تعديل المهمة';
+
+  @override
+  String get homeTaskTitleField => 'المهمة';
+
+  @override
+  String get homeTaskTitleHint => 'ماذا تودّ أن تنجز؟';
+
+  @override
+  String get homeTaskNotesField => 'ملاحظات';
+
+  @override
+  String get homeTaskWindowField => 'وقتها من اليوم';
+
+  @override
+  String get homeTaskDateField => 'اليوم';
+
+  @override
+  String get homeTaskPlanetField => 'الكوكب';
+
+  @override
+  String get homeTaskAdded => 'أُضيفت المهمة';
+
+  @override
+  String get homeTaskCompleted => 'أُنجزت المهمة';
+
+  @override
+  String get homeTaskReopened => 'أُعيد فتح المهمة';
+
+  @override
+  String get homeTaskReopen => 'إعادة فتح';
+
+  @override
+  String get homeTaskDone => 'منجزة';
+
+  @override
+  String get homeMoveTitle => 'انقلها إلى وقت آخر';
+
+  @override
+  String get homeMoveSubtitle => 'تبقى في اليوم نفسه';
+
+  @override
+  String get homeReminderSet => 'ضُبط التذكير';
+
+  @override
+  String get homeReminderRemoved => 'أُزيل التذكير';
+
+  @override
+  String get homeEmptyTitle => 'هذا الوقت ما زال رحبًا';
+
+  @override
+  String get homeEmptyBody =>
+      'أضف مهمة، أو اكتب ما يدور في بالك في الشريط أدناه.';
+
+  @override
+  String get homeRadarTitle => 'رادار الإهمال';
+
+  @override
+  String get homeRadarBody =>
+      'سيلفت نظرك بلطف إلى جوانب حياتك التي غبت عنها طويلًا، ويصل مع المدار الحيّ.';
+
+  @override
+  String get homeRadarBadge => 'قريبًا';
+
+  @override
+  String get homeDefaultWallet => 'المحفظة';
+
+  @override
+  String homeDialSemantics(String window, String next) {
+    return 'أسطرلاب اليوم: $window، و$next';
+  }
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get settingsPersonal => 'التخصيص';
+
+  @override
+  String get settingsGeneral => 'عام';
+
+  @override
+  String get settingsAppearance => 'المظهر';
+
+  @override
+  String get settingsAppearanceSubtitle => 'السمة ولون التمييز واللغة والأرقام';
+
+  @override
+  String get settingsTheme => 'السمة';
+
+  @override
+  String get settingsThemeSelected => 'السمة الحالية';
+
+  @override
+  String get settingsFollowSystem => 'اتّباع وضع الجهاز';
+
+  @override
+  String get settingsFollowSystemHint =>
+      'اللؤلؤ في الوضع الفاتح، وسمتك المختارة في الداكن';
+
+  @override
+  String get settingsAccent => 'لون التمييز';
+
+  @override
+  String get settingsAccentDefault => 'لون السمة';
+
+  @override
+  String get settingsAccentCustom => 'لون مخصّص';
+
+  @override
+  String get settingsLanguage => 'اللغة';
+
+  @override
+  String get settingsLanguageArabic => 'العربية';
+
+  @override
+  String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsDigits => 'الأرقام';
+
+  @override
+  String get settingsDigitsAuto => 'تلقائية';
+
+  @override
+  String get settingsDigitsWestern => 'غربية';
+
+  @override
+  String get settingsDigitsArabicIndic => 'مشرقية';
+
+  @override
+  String get settingsDigitsHint =>
+      'التلقائية: مشرقية بالعربية وغربية بالإنجليزية';
+
+  @override
+  String get settingsSound => 'الصوت واللمس';
+
+  @override
+  String get settingsSoundSubtitle => 'المؤثرات والأجواء ومستويات الصوت';
+
+  @override
+  String get settingsSoundEnabled => 'الأصوات';
+
+  @override
+  String get settingsSoundEnabledHint => 'مفتاح عام لكل أصوات التطبيق';
+
+  @override
+  String get settingsHaptics => 'الاهتزاز اللمسي';
+
+  @override
+  String get settingsHapticsHint => 'نبضة خفيفة ترافق كل صوت';
+
+  @override
+  String get settingsAmbient => 'أجواء الفضاء';
+
+  @override
+  String get settingsAmbientHint => 'طبقة صوتية هادئة تحت الواجهة';
+
+  @override
+  String get settingsVolumes => 'مستويات الصوت';
+
+  @override
+  String get settingsSoundProfile => 'طابع الأصوات';
+
+  @override
+  String get settingsSoundProfileHint => 'يتبدّل مع السمة';
+
+  @override
+  String get settingsMotion => 'الحركة';
+
+  @override
+  String get settingsMotionSystem => 'حسب الجهاز';
+
+  @override
+  String get settingsMotionReduced => 'مخفّفة';
+
+  @override
+  String get settingsMotionFull => 'كاملة';
+
+  @override
+  String get settingsMotionHint =>
+      'المخفّفة تستبدل الانتقالات السينمائية بتلاشٍ هادئ';
+
+  @override
+  String get settingsPower => 'وضع الطاقة';
+
+  @override
+  String get settingsPowerAuto => 'تلقائي';
+
+  @override
+  String get settingsPowerSaver => 'توفير البطارية';
+
+  @override
+  String get settingsPowerHint =>
+      'توفير البطارية يُثبّت خلفية الفضاء ويخفّف العرض';
+
+  @override
+  String get settingsData => 'البيانات';
+
+  @override
+  String get settingsImport => 'استيراد من النموذج الأوّلي';
+
+  @override
+  String get settingsImportHint => 'ملف JSON صدّرته من النسخة الأولى';
+
+  @override
+  String get settingsPrivacyNote => 'بياناتك مشفّرة وتبقى على جهازك وحده.';
+
+  @override
+  String get settingsAbout => 'حول مَدار';
+
+  @override
+  String settingsVersion(String version) {
+    return 'الإصدار $version';
+  }
+
+  @override
+  String get settingsFonts => 'الخطوط';
+
+  @override
+  String get settingsFontsBody =>
+      'خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1';
+
+  @override
+  String get settingsFontRoleUi => 'خط الواجهة';
+
+  @override
+  String get settingsFontRoleDisplay => 'خط العناوين';
+
+  @override
+  String get settingsFontRoleQuran => 'نص القرآن الكريم';
+
+  @override
+  String get settingsFontRoleNaskh => 'النصوص الكلاسيكية';
+
+  @override
+  String get settingsFontPlex => 'IBM Plex Sans Arabic';
+
+  @override
+  String get settingsFontReemKufi => 'Reem Kufi';
+
+  @override
+  String get settingsFontAmiriQuran => 'Amiri Quran';
+
+  @override
+  String get settingsFontAmiri => 'Amiri';
+
+  @override
+  String get settingsLicense => 'الترخيص';
+
+  @override
+  String get settingsLicenseUnavailable => 'تعذّر تحميل نص الترخيص';
+
+  @override
+  String get settingsGalleryHint => 'كل مكوّنات الواجهة في مكان واحد';
+
+  @override
+  String get settingsDeveloper => 'للمطوّرين';
+
+  @override
+  String settingsOpen(String name) {
+    return 'فتح $name';
+  }
+
+  @override
+  String get onboardingWelcomeTagline => 'يومك يدور حول الصلوات الخمس';
+
+  @override
+  String get onboardingWelcomeBody =>
+      'مهامك وصحتك ومالك وأهلك… لكلٍّ منها مداره، والصلاة هي المركز الذي يجمعها ويضبط إيقاعها.';
+
+  @override
+  String get onboardingStyleTitle => 'لغتك وطابعك';
+
+  @override
+  String get onboardingStyleBody =>
+      'جرّب وشاهد التغيير فورًا، ويمكنك تعديله متى شئت من الإعدادات.';
+
+  @override
+  String get onboardingStartTitle => 'من أين نبدأ؟';
+
+  @override
+  String get onboardingStartBody => 'بياناتك مشفّرة وتبقى على جهازك وحده.';
+
+  @override
+  String get onboardingStartFresh => 'بداية جديدة';
+
+  @override
+  String get onboardingStartFreshBody => 'مدارٌ صافٍ ينتظر خطوتك الأولى';
+
+  @override
+  String get onboardingImport => 'استيراد بياناتي';
+
+  @override
+  String get onboardingImportBody => 'من ملف JSON صدّرته من النموذج الأوّلي';
+
+  @override
+  String get onboardingBegin => 'لنبدأ';
+
+  @override
+  String get onboardingSkip => 'تخطٍّ';
+
+  @override
+  String onboardingStep(String current, String total) {
+    return 'الخطوة $current من $total';
+  }
 }

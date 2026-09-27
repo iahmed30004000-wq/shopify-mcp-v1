@@ -17,12 +17,12 @@
   "importFileLabel": {"ar": "الملف", "en": "File"},
   "importPastedLabel": {"ar": "نص ملصوق", "en": "Pasted text"},
   "importPreviewTitle": {"ar": "ما وجدناه", "en": "What we found"},
-  "importTotalRecords": {
-    "ar": "{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلان} few{{count} سجلات} many{{count} سجلًا} other{{count} سجل}}",
-    "en": "{count, plural, =0{No records} =1{1 record} other{{count} records}}",
+  "importRecordsReady": {
+    "ar": "{count, plural, =0{لا سجلات للاستيراد} =1{سجل جاهز للاستيراد} =2{سجلان جاهزان للاستيراد} few{سجلات جاهزة للاستيراد} many{سجلًا جاهزًا للاستيراد} other{سجل جاهز للاستيراد}}",
+    "en": "{count, plural, =0{No records to import} =1{record ready to import} other{records ready to import}}",
+    "description": "Caption under the big record count (the number itself is shown above it)",
     "placeholders": {"count": {"type": "int"}}
   },
-  "importRecordsCaption": {"ar": "جاهزة للاستيراد", "en": "ready to import"},
   "importShapeTitle": {"ar": "بنية الملف", "en": "File layout"},
   "importShapeWrapped": {"ar": "بيانات + سجلات", "en": "data + logs"},
   "importShapeDataOnly": {"ar": "بيانات فقط", "en": "data only"},

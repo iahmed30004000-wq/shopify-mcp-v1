@@ -749,15 +749,15 @@
   "importFileLabel": "الملف",
   "importPastedLabel": "نص ملصوق",
   "importPreviewTitle": "ما وجدناه",
-  "importTotalRecords": "{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلان} few{{count} سجلات} many{{count} سجلًا} other{{count} سجل}}",
-  "@importTotalRecords": {
+  "importRecordsReady": "{count, plural, =0{لا سجلات للاستيراد} =1{سجل جاهز للاستيراد} =2{سجلان جاهزان للاستيراد} few{سجلات جاهزة للاستيراد} many{سجلًا جاهزًا للاستيراد} other{سجل جاهز للاستيراد}}",
+  "@importRecordsReady": {
+    "description": "Caption under the big record count (the number itself is shown above it)",
     "placeholders": {
       "count": {
         "type": "int"
       }
     }
   },
-  "importRecordsCaption": "جاهزة للاستيراد",
   "importShapeTitle": "بنية الملف",
   "importShapeWrapped": "بيانات + سجلات",
   "importShapeDataOnly": "بيانات فقط",
@@ -983,5 +983,270 @@
       }
     }
   },
-  "importBudgetWhole": "الميزانية كلها"
+  "importBudgetWhole": "الميزانية كلها",
+  "shellSplashAssembling": "نُركّب أسطرلابك…",
+  "@shellSplashAssembling": {
+    "description": "Splash caption while the encrypted database opens"
+  },
+  "shellSplashSemantics": "يجري فتح بياناتك المشفّرة",
+  "@shellSplashSemantics": {
+    "description": "Screen-reader label of the splash"
+  },
+  "shellGateErrorTitle": "تعذّر فتح مَدار",
+  "@shellGateErrorTitle": {
+    "description": "Title of the database-unlock error view"
+  },
+  "shellGateRetry": "أعِد المحاولة",
+  "shellGateReset": "ابدأ من جديد",
+  "@shellGateReset": {
+    "description": "Offers deleting the unreadable database"
+  },
+  "shellGateResetTitle": "حذف جميع البيانات؟",
+  "shellGateResetBody": "سيُحذف ملف البيانات المشفّر نهائيًا ويبدأ مَدار من الصفر، ولا يمكن التراجع عن ذلك. إن لم تكن لديك نسخة احتياطية فلن تعود بياناتك القديمة.",
+  "shellGateResetConfirm": "احذف وابدأ من جديد",
+  "shellGateResetFailed": "تعذّر حذف البيانات. أعد تشغيل التطبيق ثم حاول مجددًا.",
+  "shellDurationHoursMinutes": "{hours} س {minutes} د",
+  "@shellDurationHoursMinutes": {
+    "description": "Compact duration; numbers are pre-formatted",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationHours": "{hours} س",
+  "@shellDurationHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationMinutes": "{minutes} د",
+  "@shellDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationLessThanMinute": "أقل من دقيقة",
+  "homeOpenSettings": "الإعدادات",
+  "@homeOpenSettings": {
+    "description": "Home header button"
+  },
+  "homeNow": "الآن",
+  "@homeNow": {
+    "description": "Badge on the current prayer window"
+  },
+  "homeNextPrayer": "{prayer} بعد {duration}",
+  "@homeNextPrayer": {
+    "description": "Countdown to the next prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "homePlaceholderBadge": "مواقيت تقريبية",
+  "@homePlaceholderBadge": {
+    "description": "Marks the static placeholder prayer times"
+  },
+  "homePlaceholderNote": "المواقيت الدقيقة لموقعك تصل قريبًا",
+  "homeWindowStarts": "{window}، يبدأ {time}",
+  "@homeWindowStarts": {
+    "description": "Screen-reader label of a window chip",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTasksCount": "{count, plural, =0{لا مهام بعد} =1{مهمة واحدة} =2{مهمتان} few{{count} مهام} many{{count} مهمة} other{{count} مهمة}}",
+  "@homeTasksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeTasksProgress": "أنجزت {done} من {total}",
+  "@homeTasksProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAddTask": "مهمة جديدة",
+  "homeEditTask": "تعديل المهمة",
+  "homeTaskTitleField": "المهمة",
+  "homeTaskTitleHint": "ماذا تودّ أن تنجز؟",
+  "homeTaskNotesField": "ملاحظات",
+  "homeTaskWindowField": "وقتها من اليوم",
+  "homeTaskDateField": "اليوم",
+  "homeTaskPlanetField": "الكوكب",
+  "homeTaskAdded": "أُضيفت المهمة",
+  "homeTaskCompleted": "أُنجزت المهمة",
+  "homeTaskReopened": "أُعيد فتح المهمة",
+  "homeTaskReopen": "إعادة فتح",
+  "@homeTaskReopen": {
+    "description": "Swipe action on a completed task"
+  },
+  "homeTaskDone": "منجزة",
+  "@homeTaskDone": {
+    "description": "Screen-reader state of a completed task"
+  },
+  "homeMoveTitle": "انقلها إلى وقت آخر",
+  "homeMoveSubtitle": "تبقى في اليوم نفسه",
+  "homeReminderSet": "ضُبط التذكير",
+  "homeReminderRemoved": "أُزيل التذكير",
+  "homeEmptyTitle": "هذا الوقت ما زال رحبًا",
+  "homeEmptyBody": "أضف مهمة، أو اكتب ما يدور في بالك في الشريط أدناه.",
+  "homeRadarTitle": "رادار الإهمال",
+  "homeRadarBody": "سيلفت نظرك بلطف إلى جوانب حياتك التي غبت عنها طويلًا، ويصل مع المدار الحيّ.",
+  "homeRadarBadge": "قريبًا",
+  "homeDefaultWallet": "المحفظة",
+  "@homeDefaultWallet": {
+    "description": "Name of the wallet created on demand by quick add"
+  },
+  "homeDialSemantics": "أسطرلاب اليوم: {window}، و{next}",
+  "@homeDialSemantics": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "next": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": "الإعدادات",
+  "settingsPersonal": "التخصيص",
+  "settingsGeneral": "عام",
+  "settingsAppearance": "المظهر",
+  "settingsAppearanceSubtitle": "السمة ولون التمييز واللغة والأرقام",
+  "settingsTheme": "السمة",
+  "settingsThemeSelected": "السمة الحالية",
+  "settingsFollowSystem": "اتّباع وضع الجهاز",
+  "settingsFollowSystemHint": "اللؤلؤ في الوضع الفاتح، وسمتك المختارة في الداكن",
+  "settingsAccent": "لون التمييز",
+  "settingsAccentDefault": "لون السمة",
+  "settingsAccentCustom": "لون مخصّص",
+  "settingsLanguage": "اللغة",
+  "settingsLanguageArabic": "العربية",
+  "@settingsLanguageArabic": {
+    "description": "Always shown in Arabic"
+  },
+  "settingsLanguageEnglish": "English",
+  "@settingsLanguageEnglish": {
+    "description": "Always shown in English"
+  },
+  "settingsDigits": "الأرقام",
+  "settingsDigitsAuto": "تلقائية",
+  "settingsDigitsWestern": "غربية",
+  "settingsDigitsArabicIndic": "مشرقية",
+  "settingsDigitsHint": "التلقائية: مشرقية بالعربية وغربية بالإنجليزية",
+  "settingsSound": "الصوت واللمس",
+  "settingsSoundSubtitle": "المؤثرات والأجواء ومستويات الصوت",
+  "settingsSoundEnabled": "الأصوات",
+  "settingsSoundEnabledHint": "مفتاح عام لكل أصوات التطبيق",
+  "settingsHaptics": "الاهتزاز اللمسي",
+  "settingsHapticsHint": "نبضة خفيفة ترافق كل صوت",
+  "settingsAmbient": "أجواء الفضاء",
+  "settingsAmbientHint": "طبقة صوتية هادئة تحت الواجهة",
+  "settingsVolumes": "مستويات الصوت",
+  "settingsSoundProfile": "طابع الأصوات",
+  "settingsSoundProfileHint": "يتبدّل مع السمة",
+  "settingsMotion": "الحركة",
+  "settingsMotionSystem": "حسب الجهاز",
+  "settingsMotionReduced": "مخفّفة",
+  "settingsMotionFull": "كاملة",
+  "settingsMotionHint": "المخفّفة تستبدل الانتقالات السينمائية بتلاشٍ هادئ",
+  "settingsPower": "وضع الطاقة",
+  "settingsPowerAuto": "تلقائي",
+  "settingsPowerSaver": "توفير البطارية",
+  "settingsPowerHint": "توفير البطارية يُثبّت خلفية الفضاء ويخفّف العرض",
+  "settingsData": "البيانات",
+  "settingsImport": "استيراد من النموذج الأوّلي",
+  "settingsImportHint": "ملف JSON صدّرته من النسخة الأولى",
+  "settingsPrivacyNote": "بياناتك مشفّرة وتبقى على جهازك وحده.",
+  "settingsAbout": "حول مَدار",
+  "settingsVersion": "الإصدار {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsFonts": "الخطوط",
+  "settingsFontsBody": "خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1",
+  "settingsFontRoleUi": "خط الواجهة",
+  "settingsFontRoleDisplay": "خط العناوين",
+  "settingsFontRoleQuran": "نص القرآن الكريم",
+  "settingsFontRoleNaskh": "النصوص الكلاسيكية",
+  "settingsFontPlex": "IBM Plex Sans Arabic",
+  "@settingsFontPlex": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontReemKufi": "Reem Kufi",
+  "@settingsFontReemKufi": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiriQuran": "Amiri Quran",
+  "@settingsFontAmiriQuran": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiri": "Amiri",
+  "@settingsFontAmiri": {
+    "description": "Font name (proper noun)"
+  },
+  "settingsLicense": "الترخيص",
+  "settingsLicenseUnavailable": "تعذّر تحميل نص الترخيص",
+  "settingsGalleryHint": "كل مكوّنات الواجهة في مكان واحد",
+  "settingsDeveloper": "للمطوّرين",
+  "settingsOpen": "فتح {name}",
+  "@settingsOpen": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingWelcomeTagline": "يومك يدور حول الصلوات الخمس",
+  "onboardingWelcomeBody": "مهامك وصحتك ومالك وأهلك… لكلٍّ منها مداره، والصلاة هي المركز الذي يجمعها ويضبط إيقاعها.",
+  "onboardingStyleTitle": "لغتك وطابعك",
+  "onboardingStyleBody": "جرّب وشاهد التغيير فورًا، ويمكنك تعديله متى شئت من الإعدادات.",
+  "onboardingStartTitle": "من أين نبدأ؟",
+  "onboardingStartBody": "بياناتك مشفّرة وتبقى على جهازك وحده.",
+  "onboardingStartFresh": "بداية جديدة",
+  "onboardingStartFreshBody": "مدارٌ صافٍ ينتظر خطوتك الأولى",
+  "onboardingImport": "استيراد بياناتي",
+  "onboardingImportBody": "من ملف JSON صدّرته من النموذج الأوّلي",
+  "onboardingBegin": "لنبدأ",
+  "onboardingSkip": "تخطٍّ",
+  "onboardingStep": "الخطوة {current} من {total}",
+  "@onboardingStep": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  }
 }

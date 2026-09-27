@@ -1933,17 +1933,11 @@ abstract class L10n {
   /// **'ما وجدناه'**
   String get importPreviewTitle;
 
-  /// No description provided for @importTotalRecords.
+  /// Caption under the big record count (the number itself is shown above it)
   ///
   /// In ar, this message translates to:
-  /// **'{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلان} few{{count} سجلات} many{{count} سجلًا} other{{count} سجل}}'**
-  String importTotalRecords(int count);
-
-  /// No description provided for @importRecordsCaption.
-  ///
-  /// In ar, this message translates to:
-  /// **'جاهزة للاستيراد'**
-  String get importRecordsCaption;
+  /// **'{count, plural, =0{لا سجلات للاستيراد} =1{سجل جاهز للاستيراد} =2{سجلان جاهزان للاستيراد} few{سجلات جاهزة للاستيراد} many{سجلًا جاهزًا للاستيراد} other{سجل جاهز للاستيراد}}'**
+  String importRecordsReady(int count);
 
   /// No description provided for @importShapeTitle.
   ///
@@ -2646,6 +2640,720 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الميزانية كلها'**
   String get importBudgetWhole;
+
+  /// Splash caption while the encrypted database opens
+  ///
+  /// In ar, this message translates to:
+  /// **'نُركّب أسطرلابك…'**
+  String get shellSplashAssembling;
+
+  /// Screen-reader label of the splash
+  ///
+  /// In ar, this message translates to:
+  /// **'يجري فتح بياناتك المشفّرة'**
+  String get shellSplashSemantics;
+
+  /// Title of the database-unlock error view
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح مَدار'**
+  String get shellGateErrorTitle;
+
+  /// No description provided for @shellGateRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعِد المحاولة'**
+  String get shellGateRetry;
+
+  /// Offers deleting the unreadable database
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ من جديد'**
+  String get shellGateReset;
+
+  /// No description provided for @shellGateResetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف جميع البيانات؟'**
+  String get shellGateResetTitle;
+
+  /// No description provided for @shellGateResetBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُحذف ملف البيانات المشفّر نهائيًا ويبدأ مَدار من الصفر، ولا يمكن التراجع عن ذلك. إن لم تكن لديك نسخة احتياطية فلن تعود بياناتك القديمة.'**
+  String get shellGateResetBody;
+
+  /// No description provided for @shellGateResetConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف وابدأ من جديد'**
+  String get shellGateResetConfirm;
+
+  /// No description provided for @shellGateResetFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر حذف البيانات. أعد تشغيل التطبيق ثم حاول مجددًا.'**
+  String get shellGateResetFailed;
+
+  /// Compact duration; numbers are pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} س {minutes} د'**
+  String shellDurationHoursMinutes(String hours, String minutes);
+
+  /// No description provided for @shellDurationHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} س'**
+  String shellDurationHours(String hours);
+
+  /// No description provided for @shellDurationMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{minutes} د'**
+  String shellDurationMinutes(String minutes);
+
+  /// No description provided for @shellDurationLessThanMinute.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل من دقيقة'**
+  String get shellDurationLessThanMinute;
+
+  /// Home header button
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات'**
+  String get homeOpenSettings;
+
+  /// Badge on the current prayer window
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get homeNow;
+
+  /// Countdown to the next prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {duration}'**
+  String homeNextPrayer(String prayer, String duration);
+
+  /// Marks the static placeholder prayer times
+  ///
+  /// In ar, this message translates to:
+  /// **'مواقيت تقريبية'**
+  String get homePlaceholderBadge;
+
+  /// No description provided for @homePlaceholderNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواقيت الدقيقة لموقعك تصل قريبًا'**
+  String get homePlaceholderNote;
+
+  /// Screen-reader label of a window chip
+  ///
+  /// In ar, this message translates to:
+  /// **'{window}، يبدأ {time}'**
+  String homeWindowStarts(String window, String time);
+
+  /// No description provided for @homeTasksCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا مهام بعد} =1{مهمة واحدة} =2{مهمتان} few{{count} مهام} many{{count} مهمة} other{{count} مهمة}}'**
+  String homeTasksCount(int count);
+
+  /// No description provided for @homeTasksProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزت {done} من {total}'**
+  String homeTasksProgress(String done, String total);
+
+  /// No description provided for @homeAddTask.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة جديدة'**
+  String get homeAddTask;
+
+  /// No description provided for @homeEditTask.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل المهمة'**
+  String get homeEditTask;
+
+  /// No description provided for @homeTaskTitleField.
+  ///
+  /// In ar, this message translates to:
+  /// **'المهمة'**
+  String get homeTaskTitleField;
+
+  /// No description provided for @homeTaskTitleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا تودّ أن تنجز؟'**
+  String get homeTaskTitleHint;
+
+  /// No description provided for @homeTaskNotesField.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get homeTaskNotesField;
+
+  /// No description provided for @homeTaskWindowField.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقتها من اليوم'**
+  String get homeTaskWindowField;
+
+  /// No description provided for @homeTaskDateField.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get homeTaskDateField;
+
+  /// No description provided for @homeTaskPlanetField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكوكب'**
+  String get homeTaskPlanetField;
+
+  /// No description provided for @homeTaskAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت المهمة'**
+  String get homeTaskAdded;
+
+  /// No description provided for @homeTaskCompleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجزت المهمة'**
+  String get homeTaskCompleted;
+
+  /// No description provided for @homeTaskReopened.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد فتح المهمة'**
+  String get homeTaskReopened;
+
+  /// Swipe action on a completed task
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة فتح'**
+  String get homeTaskReopen;
+
+  /// Screen-reader state of a completed task
+  ///
+  /// In ar, this message translates to:
+  /// **'منجزة'**
+  String get homeTaskDone;
+
+  /// No description provided for @homeMoveTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقلها إلى وقت آخر'**
+  String get homeMoveTitle;
+
+  /// No description provided for @homeMoveSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبقى في اليوم نفسه'**
+  String get homeMoveSubtitle;
+
+  /// No description provided for @homeReminderSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضُبط التذكير'**
+  String get homeReminderSet;
+
+  /// No description provided for @homeReminderRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيل التذكير'**
+  String get homeReminderRemoved;
+
+  /// No description provided for @homeEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الوقت ما زال رحبًا'**
+  String get homeEmptyTitle;
+
+  /// No description provided for @homeEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف مهمة، أو اكتب ما يدور في بالك في الشريط أدناه.'**
+  String get homeEmptyBody;
+
+  /// No description provided for @homeRadarTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رادار الإهمال'**
+  String get homeRadarTitle;
+
+  /// No description provided for @homeRadarBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيلفت نظرك بلطف إلى جوانب حياتك التي غبت عنها طويلًا، ويصل مع المدار الحيّ.'**
+  String get homeRadarBody;
+
+  /// No description provided for @homeRadarBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبًا'**
+  String get homeRadarBadge;
+
+  /// Name of the wallet created on demand by quick add
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة'**
+  String get homeDefaultWallet;
+
+  /// No description provided for @homeDialSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسطرلاب اليوم: {window}، و{next}'**
+  String homeDialSemantics(String window, String next);
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsPersonal.
+  ///
+  /// In ar, this message translates to:
+  /// **'التخصيص'**
+  String get settingsPersonal;
+
+  /// No description provided for @settingsGeneral.
+  ///
+  /// In ar, this message translates to:
+  /// **'عام'**
+  String get settingsGeneral;
+
+  /// No description provided for @settingsAppearance.
+  ///
+  /// In ar, this message translates to:
+  /// **'المظهر'**
+  String get settingsAppearance;
+
+  /// No description provided for @settingsAppearanceSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'السمة ولون التمييز واللغة والأرقام'**
+  String get settingsAppearanceSubtitle;
+
+  /// No description provided for @settingsTheme.
+  ///
+  /// In ar, this message translates to:
+  /// **'السمة'**
+  String get settingsTheme;
+
+  /// No description provided for @settingsThemeSelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'السمة الحالية'**
+  String get settingsThemeSelected;
+
+  /// No description provided for @settingsFollowSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتّباع وضع الجهاز'**
+  String get settingsFollowSystem;
+
+  /// No description provided for @settingsFollowSystemHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللؤلؤ في الوضع الفاتح، وسمتك المختارة في الداكن'**
+  String get settingsFollowSystemHint;
+
+  /// No description provided for @settingsAccent.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون التمييز'**
+  String get settingsAccent;
+
+  /// No description provided for @settingsAccentDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون السمة'**
+  String get settingsAccentDefault;
+
+  /// No description provided for @settingsAccentCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون مخصّص'**
+  String get settingsAccentCustom;
+
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللغة'**
+  String get settingsLanguage;
+
+  /// Always shown in Arabic
+  ///
+  /// In ar, this message translates to:
+  /// **'العربية'**
+  String get settingsLanguageArabic;
+
+  /// Always shown in English
+  ///
+  /// In ar, this message translates to:
+  /// **'English'**
+  String get settingsLanguageEnglish;
+
+  /// No description provided for @settingsDigits.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأرقام'**
+  String get settingsDigits;
+
+  /// No description provided for @settingsDigitsAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائية'**
+  String get settingsDigitsAuto;
+
+  /// No description provided for @settingsDigitsWestern.
+  ///
+  /// In ar, this message translates to:
+  /// **'غربية'**
+  String get settingsDigitsWestern;
+
+  /// No description provided for @settingsDigitsArabicIndic.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشرقية'**
+  String get settingsDigitsArabicIndic;
+
+  /// No description provided for @settingsDigitsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'التلقائية: مشرقية بالعربية وغربية بالإنجليزية'**
+  String get settingsDigitsHint;
+
+  /// No description provided for @settingsSound.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصوت واللمس'**
+  String get settingsSound;
+
+  /// No description provided for @settingsSoundSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المؤثرات والأجواء ومستويات الصوت'**
+  String get settingsSoundSubtitle;
+
+  /// No description provided for @settingsSoundEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأصوات'**
+  String get settingsSoundEnabled;
+
+  /// No description provided for @settingsSoundEnabledHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتاح عام لكل أصوات التطبيق'**
+  String get settingsSoundEnabledHint;
+
+  /// No description provided for @settingsHaptics.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاهتزاز اللمسي'**
+  String get settingsHaptics;
+
+  /// No description provided for @settingsHapticsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبضة خفيفة ترافق كل صوت'**
+  String get settingsHapticsHint;
+
+  /// No description provided for @settingsAmbient.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجواء الفضاء'**
+  String get settingsAmbient;
+
+  /// No description provided for @settingsAmbientHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبقة صوتية هادئة تحت الواجهة'**
+  String get settingsAmbientHint;
+
+  /// No description provided for @settingsVolumes.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستويات الصوت'**
+  String get settingsVolumes;
+
+  /// No description provided for @settingsSoundProfile.
+  ///
+  /// In ar, this message translates to:
+  /// **'طابع الأصوات'**
+  String get settingsSoundProfile;
+
+  /// No description provided for @settingsSoundProfileHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتبدّل مع السمة'**
+  String get settingsSoundProfileHint;
+
+  /// No description provided for @settingsMotion.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحركة'**
+  String get settingsMotion;
+
+  /// No description provided for @settingsMotionSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب الجهاز'**
+  String get settingsMotionSystem;
+
+  /// No description provided for @settingsMotionReduced.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخفّفة'**
+  String get settingsMotionReduced;
+
+  /// No description provided for @settingsMotionFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'كاملة'**
+  String get settingsMotionFull;
+
+  /// No description provided for @settingsMotionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخفّفة تستبدل الانتقالات السينمائية بتلاشٍ هادئ'**
+  String get settingsMotionHint;
+
+  /// No description provided for @settingsPower.
+  ///
+  /// In ar, this message translates to:
+  /// **'وضع الطاقة'**
+  String get settingsPower;
+
+  /// No description provided for @settingsPowerAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get settingsPowerAuto;
+
+  /// No description provided for @settingsPowerSaver.
+  ///
+  /// In ar, this message translates to:
+  /// **'توفير البطارية'**
+  String get settingsPowerSaver;
+
+  /// No description provided for @settingsPowerHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'توفير البطارية يُثبّت خلفية الفضاء ويخفّف العرض'**
+  String get settingsPowerHint;
+
+  /// No description provided for @settingsData.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيانات'**
+  String get settingsData;
+
+  /// No description provided for @settingsImport.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد من النموذج الأوّلي'**
+  String get settingsImport;
+
+  /// No description provided for @settingsImportHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف JSON صدّرته من النسخة الأولى'**
+  String get settingsImportHint;
+
+  /// No description provided for @settingsPrivacyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'بياناتك مشفّرة وتبقى على جهازك وحده.'**
+  String get settingsPrivacyNote;
+
+  /// No description provided for @settingsAbout.
+  ///
+  /// In ar, this message translates to:
+  /// **'حول مَدار'**
+  String get settingsAbout;
+
+  /// No description provided for @settingsVersion.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإصدار {version}'**
+  String settingsVersion(String version);
+
+  /// No description provided for @settingsFonts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوط'**
+  String get settingsFonts;
+
+  /// No description provided for @settingsFontsBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1'**
+  String get settingsFontsBody;
+
+  /// No description provided for @settingsFontRoleUi.
+  ///
+  /// In ar, this message translates to:
+  /// **'خط الواجهة'**
+  String get settingsFontRoleUi;
+
+  /// No description provided for @settingsFontRoleDisplay.
+  ///
+  /// In ar, this message translates to:
+  /// **'خط العناوين'**
+  String get settingsFontRoleDisplay;
+
+  /// No description provided for @settingsFontRoleQuran.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص القرآن الكريم'**
+  String get settingsFontRoleQuran;
+
+  /// No description provided for @settingsFontRoleNaskh.
+  ///
+  /// In ar, this message translates to:
+  /// **'النصوص الكلاسيكية'**
+  String get settingsFontRoleNaskh;
+
+  /// Font name (proper noun)
+  ///
+  /// In ar, this message translates to:
+  /// **'IBM Plex Sans Arabic'**
+  String get settingsFontPlex;
+
+  /// Font name (proper noun)
+  ///
+  /// In ar, this message translates to:
+  /// **'Reem Kufi'**
+  String get settingsFontReemKufi;
+
+  /// Font name (proper noun)
+  ///
+  /// In ar, this message translates to:
+  /// **'Amiri Quran'**
+  String get settingsFontAmiriQuran;
+
+  /// Font name (proper noun)
+  ///
+  /// In ar, this message translates to:
+  /// **'Amiri'**
+  String get settingsFontAmiri;
+
+  /// No description provided for @settingsLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترخيص'**
+  String get settingsLicense;
+
+  /// No description provided for @settingsLicenseUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل نص الترخيص'**
+  String get settingsLicenseUnavailable;
+
+  /// No description provided for @settingsGalleryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل مكوّنات الواجهة في مكان واحد'**
+  String get settingsGalleryHint;
+
+  /// No description provided for @settingsDeveloper.
+  ///
+  /// In ar, this message translates to:
+  /// **'للمطوّرين'**
+  String get settingsDeveloper;
+
+  /// No description provided for @settingsOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح {name}'**
+  String settingsOpen(String name);
+
+  /// No description provided for @onboardingWelcomeTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'يومك يدور حول الصلوات الخمس'**
+  String get onboardingWelcomeTagline;
+
+  /// No description provided for @onboardingWelcomeBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهامك وصحتك ومالك وأهلك… لكلٍّ منها مداره، والصلاة هي المركز الذي يجمعها ويضبط إيقاعها.'**
+  String get onboardingWelcomeBody;
+
+  /// No description provided for @onboardingStyleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لغتك وطابعك'**
+  String get onboardingStyleTitle;
+
+  /// No description provided for @onboardingStyleBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب وشاهد التغيير فورًا، ويمكنك تعديله متى شئت من الإعدادات.'**
+  String get onboardingStyleBody;
+
+  /// No description provided for @onboardingStartTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'من أين نبدأ؟'**
+  String get onboardingStartTitle;
+
+  /// No description provided for @onboardingStartBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بياناتك مشفّرة وتبقى على جهازك وحده.'**
+  String get onboardingStartBody;
+
+  /// No description provided for @onboardingStartFresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية جديدة'**
+  String get onboardingStartFresh;
+
+  /// No description provided for @onboardingStartFreshBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدارٌ صافٍ ينتظر خطوتك الأولى'**
+  String get onboardingStartFreshBody;
+
+  /// No description provided for @onboardingImport.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد بياناتي'**
+  String get onboardingImport;
+
+  /// No description provided for @onboardingImportBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'من ملف JSON صدّرته من النموذج الأوّلي'**
+  String get onboardingImportBody;
+
+  /// No description provided for @onboardingBegin.
+  ///
+  /// In ar, this message translates to:
+  /// **'لنبدأ'**
+  String get onboardingBegin;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطٍّ'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingStep.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوة {current} من {total}'**
+  String onboardingStep(String current, String total);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

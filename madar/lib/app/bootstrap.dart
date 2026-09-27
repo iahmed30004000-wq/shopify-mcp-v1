@@ -1,6 +1,97 @@
-import 'package:flutter/widgets.dart';
+import 'dart:async';
+import 'dart:io' show Platform;
 
-/// Placeholder – implemented by the app-shell work package.
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../core/design/widgets/shader_cache.dart';
+import '../core/settings/app_settings.dart';
+import '../core/sound/haptics.dart';
+import '../core/sound/profiles.dart';
+import '../core/sound/soloud_sound_service.dart';
+import '../core/sound/sound_api.dart';
+import 'app.dart';
+import 'app_preferences.dart';
+
+/// Starts Madar.
+///
+/// 1. Error hooks (log in debug builds only – nothing leaves the device).
+/// 2. Edge-to-edge system UI with transparent bars; portrait only for now.
+/// 3. Shader programs start loading (surfaces paint a gradient until then).
+/// 4. UI preferences are read from SharedPreferences (theme, language …) –
+///    the encrypted database opens later, behind the splash (see AppGate).
+/// 5. The sound engine and haptics are constructed and [Fx] is installed;
+///    the audio device opens after the first frame so it never delays it
+///    (the service falls back to silence if audio is unavailable).
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
+  installErrorHooks();
+  await _configureSystemUi();
+  unawaited(MadarShaders.preload());
+
+  final prefs = await SharedPreferences.getInstance();
+  final settings = _readSettings(prefs);
+  final brightness = PlatformDispatcher.instance.platformBrightness;
+
+  final sound = SoloudSoundService(profileId: SoundProfiles.idForTheme(settings.effectiveTheme(brightness)));
+  final haptics = PlatformHapticsService(enabled: settings.hapticsEnabled);
+  sound.enabled = settings.soundEnabled;
+  Fx.install(FeedbackService(sound, haptics));
+
+  runApp(
+    ProviderScope(
+      overrides: madarAppOverrides(prefs: prefs, sound: sound, haptics: haptics),
+      child: const MadarApp(),
+    ),
+  );
+
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    unawaited(sound.init().catchError((Object e, StackTrace s) => _log('sound init', e, s)));
+    unawaited(_preferHighRefreshRate());
+  });
+}
+
+/// Debug-only logging for framework and uncaught async errors. Release
+/// builds stay silent: Madar has no crash reporting by design (privacy).
+void installErrorHooks() {
+  FlutterError.onError = (details) {
+    if (kDebugMode) FlutterError.presentError(details);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    _log('uncaught', error, stack);
+    return true;
+  };
+}
+
+void _log(String what, Object error, StackTrace stack) {
+  if (kDebugMode) debugPrint('Madar $what: $error\n$stack');
+}
+
+Future<void> _configureSystemUi() async {
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(systemBarsFor(Brightness.dark));
+  await SystemChrome.setPreferredOrientations(const [DeviceOrientation.portraitUp]);
+}
+
+AppSettings _readSettings(SharedPreferences prefs) {
+  final probe = ProviderContainer(overrides: [sharedPreferencesProvider.overrideWithValue(prefs)]);
+  try {
+    return probe.read(appSettingsProvider);
+  } finally {
+    probe.dispose();
+  }
+}
+
+/// Physics-based motion deserves 90/120 Hz where the panel offers it.
+Future<void> _preferHighRefreshRate() async {
+  if (kIsWeb || !Platform.isAndroid) return;
+  try {
+    await FlutterDisplayMode.setHighRefreshRate();
+  } catch (e, s) {
+    _log('display mode', e, s);
+  }
 }
