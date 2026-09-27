@@ -54,5 +54,317 @@
         "type": "int"
       }
     }
+  },
+  "designLoading": "جارٍ التحميل",
+  "@designLoading": {
+    "description": "Semantic label of the orbit loader / loading buttons"
+  },
+  "designEmptyListTitle": "لا شيء هنا بعد",
+  "designEmptyListBody": "أضف أول عنصر، ودَعْ مداره يبدأ بالدوران.",
+  "designNoDataTitle": "لا بيانات بعد",
+  "designNoDataBody": "ستظهر الرسوم هنا حين تتجمّع لديك بضعة أيام.",
+  "designNoResultsTitle": "لا نتائج",
+  "designNoResultsBody": "جرّب كلمة أخرى، أو وسّع نطاق البحث.",
+  "designGalleryTitle": "معرض التصميم",
+  "designGallerySubtitle": "مكوّنات مَدار كلّها في مكان واحد",
+  "designGalleryTheme": "السِّمة",
+  "designGalleryDirection": "اتجاه الكتابة",
+  "designDirectionRtl": "من اليمين",
+  "designDirectionLtr": "من اليسار",
+  "designThemeLapis": "لازَوَرد",
+  "designThemeEmerald": "زُمُرُّد",
+  "designThemeDesert": "صحراء",
+  "designThemeAurora": "شَفَق",
+  "designThemePearl": "لؤلؤ",
+  "designSectionSurfaces": "الأسطح الزجاجية",
+  "designSectionButtons": "الأزرار",
+  "designSectionChips": "الاختيارات",
+  "designSectionToggles": "المفاتيح",
+  "designSectionProgress": "التقدّم",
+  "designSectionStats": "الإحصاءات",
+  "designSectionOrnaments": "الزخارف",
+  "designSectionLoaders": "الانتظار",
+  "designSectionEmpty": "الحالات الفارغة",
+  "designSectionType": "الخطوط والألوان",
+  "designSeeAll": "عرض الكل",
+  "designPanelTitle": "لوحة زجاجية",
+  "designPanelBody": "ضبابية حقيقية فوق الكون الحيّ، بإطار ذهبي رفيع ولمعة تنساب على مهل.",
+  "designCardBody": "زجاج مُحاكى للقوائم الطويلة: بلا ضبابية، وبالأناقة نفسها.",
+  "designButtonPrimary": "ابدأ يومك",
+  "designButtonSecondary": "لاحقًا",
+  "designButtonGhost": "التفاصيل",
+  "designChipsSingle": "اختيار واحد",
+  "designChipsMulti": "اختيارات متعددة",
+  "designToggleSound": "أصوات الواجهة",
+  "designToggleHaptics": "الاهتزاز اللمسي",
+  "designToggleReduceMotion": "تقليل الحركة",
+  "designRingDaily": "هدف اليوم",
+  "designRingPrayers": "الصلوات",
+  "designRingDone": "اكتمل",
+  "designStatStreak": "سلسلة الصلاة",
+  "designStatSteps": "الخطوات",
+  "designStatWater": "الماء",
+  "designStatFocus": "التركيز",
+  "designStatVsLastWeek": "مقارنةً بالأسبوع الماضي",
+  "designUnitDays": "{count, plural, =0{يوم} =1{يوم} =2{يومان} few{أيام} many{يومًا} other{يوم}}",
+  "@designUnitDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "designUnitLitres": "لتر",
+  "designUnitHours": "ساعة",
+  "designOrnamentStar": "نجمة ثُمانية",
+  "designOrnamentStar12": "نجمة اثنا عشرية",
+  "designOrnamentRub": "ربع الحزب",
+  "designOrnamentRosette": "وردة هندسية متشابكة",
+  "designOrnamentAstrolabe": "حلقة الأسطرلاب",
+  "designOrnamentArabesque": "إفريز الأرابيسك",
+  "designTypeSample": "يتنفّس الخطّ العربي هنا براحة: سطور رحبة، وتشكيل واضح، وأرقام منتظمة.",
+  "dbCurrencyJod": "دينار أردني",
+  "@dbCurrencyJod": {
+    "description": "Seeded currency name (JOD)"
+  },
+  "dbCurrencyUsd": "دولار أمريكي",
+  "@dbCurrencyUsd": {
+    "description": "Seeded currency name (USD)"
+  },
+  "dbCurrencySyp": "ليرة سورية",
+  "@dbCurrencySyp": {
+    "description": "Seeded currency name (SYP)"
+  },
+  "dbCurrencyEgp": "جنيه مصري",
+  "@dbCurrencyEgp": {
+    "description": "Seeded currency name (EGP)"
+  },
+  "dbCurrencyLyd": "دينار ليبي",
+  "@dbCurrencyLyd": {
+    "description": "Seeded currency name (LYD)"
+  },
+  "dbSeedPainHead": "الرأس",
+  "@dbSeedPainHead": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainNeck": "الرقبة",
+  "@dbSeedPainNeck": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainShoulders": "الكتفان",
+  "@dbSeedPainShoulders": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainUpperBack": "أعلى الظهر",
+  "@dbSeedPainUpperBack": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainLowerBack": "أسفل الظهر",
+  "@dbSeedPainLowerBack": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainChest": "الصدر",
+  "@dbSeedPainChest": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainAbdomen": "البطن",
+  "@dbSeedPainAbdomen": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainArms": "الذراعان",
+  "@dbSeedPainArms": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainHands": "اليدان والأصابع",
+  "@dbSeedPainHands": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainHips": "الوركان",
+  "@dbSeedPainHips": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainKnees": "الركبتان",
+  "@dbSeedPainKnees": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainFeet": "القدمان والكاحلان",
+  "@dbSeedPainFeet": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainJoints": "المفاصل عمومًا",
+  "@dbSeedPainJoints": {
+    "description": "Default pain location"
+  },
+  "dbSeedTriggerSleep": "قلّة النوم",
+  "@dbSeedTriggerSleep": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerStress": "التوتر والضغط",
+  "@dbSeedTriggerStress": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerSitting": "الجلوس الطويل",
+  "@dbSeedTriggerSitting": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerStanding": "الوقوف الطويل",
+  "@dbSeedTriggerStanding": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerExertion": "مجهود بدني زائد",
+  "@dbSeedTriggerExertion": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerCold": "البرد",
+  "@dbSeedTriggerCold": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerWeather": "تقلّب الطقس",
+  "@dbSeedTriggerWeather": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerFood": "طعام بعينه",
+  "@dbSeedTriggerFood": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerWater": "قلّة شرب الماء",
+  "@dbSeedTriggerWater": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerMissedDose": "نسيان جرعة الدواء",
+  "@dbSeedTriggerMissedDose": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerScreens": "طول النظر إلى الشاشات",
+  "@dbSeedTriggerScreens": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedMoodSleep": "النوم",
+  "@dbSeedMoodSleep": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodPrayer": "الصلاة والذكر",
+  "@dbSeedMoodPrayer": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodFamily": "العائلة",
+  "@dbSeedMoodFamily": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodWork": "العمل",
+  "@dbSeedMoodWork": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodMoney": "المال",
+  "@dbSeedMoodMoney": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodHealth": "الصحة",
+  "@dbSeedMoodHealth": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodExercise": "الحركة والرياضة",
+  "@dbSeedMoodExercise": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodFriends": "الأصدقاء",
+  "@dbSeedMoodFriends": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodCaffeine": "الكافيين",
+  "@dbSeedMoodCaffeine": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodWeather": "الطقس",
+  "@dbSeedMoodWeather": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodNews": "الأخبار",
+  "@dbSeedMoodNews": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodLoneliness": "الوحدة",
+  "@dbSeedMoodLoneliness": {
+    "description": "Default mood factor"
+  },
+  "dbSeedHabitBreathing": "خمس دقائق من التنفّس العميق",
+  "@dbSeedHabitBreathing": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitWalk": "مشيٌ هادئ في الهواء الطلق",
+  "@dbSeedHabitWalk": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitAdhkar": "أذكار الصباح والمساء",
+  "@dbSeedHabitAdhkar": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitGratitude": "ثلاث نِعَم أحمد الله عليها اليوم",
+  "@dbSeedHabitGratitude": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitScreens": "ساعة بلا شاشات قبل النوم",
+  "@dbSeedHabitScreens": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitSleep": "النوم في وقت مبكر",
+  "@dbSeedHabitSleep": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitWater": "شرب الماء على مدار اليوم",
+  "@dbSeedHabitWater": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitCaffeine": "لا كافيين بعد العصر",
+  "@dbSeedHabitCaffeine": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitStretch": "تمارين إطالة خفيفة",
+  "@dbSeedHabitStretch": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitJournal": "تدوين ما يشغل البال",
+  "@dbSeedHabitJournal": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitConnect": "التواصل مع شخص عزيز",
+  "@dbSeedHabitConnect": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbErrorCipherUnavailable": "تعذّر تفعيل تشفير البيانات على هذا الجهاز، ولن يحفظ مَدار بياناتك دون تشفير.",
+  "@dbErrorCipherUnavailable": {
+    "description": "SQLCipher missing on device"
+  },
+  "dbErrorWrongKey": "تعذّر فتح بياناتك: مفتاح التشفير لا يطابق الملف، أو أن الملف تالف.",
+  "@dbErrorWrongKey": {
+    "description": "Wrong database key or corrupted file"
+  },
+  "dbErrorKeyMissing": "مفتاح التشفير غير موجود في المخزن الآمن، لذلك لا يمكن فتح البيانات المحفوظة.",
+  "@dbErrorKeyMissing": {
+    "description": "Key missing while a database file exists"
+  },
+  "dbErrorKeyMalformed": "مفتاح التشفير المحفوظ تالف.",
+  "@dbErrorKeyMalformed": {
+    "description": "Stored key isn't 64 hex chars"
+  },
+  "dbErrorKeyStorage": "تعذّر الوصول إلى المخزن الآمن في الجهاز.",
+  "@dbErrorKeyStorage": {
+    "description": "Secure storage read/write failed"
+  },
+  "dbErrorSnapshotInvalid": "هذا الملف ليس نسخة احتياطية صالحة من مَدار.",
+  "@dbErrorSnapshotInvalid": {
+    "description": "Snapshot has the wrong shape"
+  },
+  "dbErrorSnapshotNewer": "هذه النسخة الاحتياطية من إصدار أحدث من مَدار. حدّث التطبيق ثم أعد المحاولة.",
+  "@dbErrorSnapshotNewer": {
+    "description": "Snapshot schemaVersion is newer than the app"
+  },
+  "dbErrorSnapshotRejected": "تعذّرت استعادة النسخة الاحتياطية، وبقيت بياناتك الحالية كما هي.",
+  "@dbErrorSnapshotRejected": {
+    "description": "Restore failed and was rolled back"
+  },
+  "dbErrorUnknown": "حدث خطأ غير متوقّع في حفظ البيانات.",
+  "@dbErrorUnknown": {
+    "description": "Fallback database error"
   }
 }

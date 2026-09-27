@@ -54,5 +54,317 @@
         "type": "int"
       }
     }
+  },
+  "designLoading": "Loading",
+  "@designLoading": {
+    "description": "Semantic label of the orbit loader / loading buttons"
+  },
+  "designEmptyListTitle": "Nothing here yet",
+  "designEmptyListBody": "Add your first item and set its orbit in motion.",
+  "designNoDataTitle": "No data yet",
+  "designNoDataBody": "Charts appear here once a few days are recorded.",
+  "designNoResultsTitle": "No results",
+  "designNoResultsBody": "Try another word, or widen your search.",
+  "designGalleryTitle": "Design gallery",
+  "designGallerySubtitle": "Every Madar component in one place",
+  "designGalleryTheme": "Theme",
+  "designGalleryDirection": "Writing direction",
+  "designDirectionRtl": "Right to left",
+  "designDirectionLtr": "Left to right",
+  "designThemeLapis": "Lapis",
+  "designThemeEmerald": "Emerald",
+  "designThemeDesert": "Desert",
+  "designThemeAurora": "Aurora",
+  "designThemePearl": "Pearl",
+  "designSectionSurfaces": "Glass surfaces",
+  "designSectionButtons": "Buttons",
+  "designSectionChips": "Choices",
+  "designSectionToggles": "Toggles",
+  "designSectionProgress": "Progress",
+  "designSectionStats": "Stats",
+  "designSectionOrnaments": "Ornaments",
+  "designSectionLoaders": "Loading",
+  "designSectionEmpty": "Empty states",
+  "designSectionType": "Type & colour",
+  "designSeeAll": "See all",
+  "designPanelTitle": "Glass panel",
+  "designPanelBody": "Real blur over the living cosmos, with a fine gold hairline and a slowly drifting sheen.",
+  "designCardBody": "Faux glass for long lists: no blur, the same elegance.",
+  "designButtonPrimary": "Start your day",
+  "designButtonSecondary": "Later",
+  "designButtonGhost": "Details",
+  "designChipsSingle": "Single choice",
+  "designChipsMulti": "Multiple choice",
+  "designToggleSound": "Interface sounds",
+  "designToggleHaptics": "Haptics",
+  "designToggleReduceMotion": "Reduce motion",
+  "designRingDaily": "Daily goal",
+  "designRingPrayers": "Prayers",
+  "designRingDone": "Complete",
+  "designStatStreak": "Prayer streak",
+  "designStatSteps": "Steps",
+  "designStatWater": "Water",
+  "designStatFocus": "Focus",
+  "designStatVsLastWeek": "vs last week",
+  "designUnitDays": "{count, plural, =1{day} other{days}}",
+  "@designUnitDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "designUnitLitres": "L",
+  "designUnitHours": "h",
+  "designOrnamentStar": "Eight-point star",
+  "designOrnamentStar12": "Twelve-point star",
+  "designOrnamentRub": "Rub el Hizb",
+  "designOrnamentRosette": "Girih rosette",
+  "designOrnamentAstrolabe": "Astrolabe ring",
+  "designOrnamentArabesque": "Arabesque band",
+  "designTypeSample": "Arabic breathes easy here: generous lines, clear diacritics, tidy numerals.",
+  "dbCurrencyJod": "Jordanian Dinar",
+  "@dbCurrencyJod": {
+    "description": "Seeded currency name (JOD)"
+  },
+  "dbCurrencyUsd": "US Dollar",
+  "@dbCurrencyUsd": {
+    "description": "Seeded currency name (USD)"
+  },
+  "dbCurrencySyp": "Syrian Pound",
+  "@dbCurrencySyp": {
+    "description": "Seeded currency name (SYP)"
+  },
+  "dbCurrencyEgp": "Egyptian Pound",
+  "@dbCurrencyEgp": {
+    "description": "Seeded currency name (EGP)"
+  },
+  "dbCurrencyLyd": "Libyan Dinar",
+  "@dbCurrencyLyd": {
+    "description": "Seeded currency name (LYD)"
+  },
+  "dbSeedPainHead": "Head",
+  "@dbSeedPainHead": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainNeck": "Neck",
+  "@dbSeedPainNeck": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainShoulders": "Shoulders",
+  "@dbSeedPainShoulders": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainUpperBack": "Upper back",
+  "@dbSeedPainUpperBack": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainLowerBack": "Lower back",
+  "@dbSeedPainLowerBack": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainChest": "Chest",
+  "@dbSeedPainChest": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainAbdomen": "Abdomen",
+  "@dbSeedPainAbdomen": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainArms": "Arms",
+  "@dbSeedPainArms": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainHands": "Hands and fingers",
+  "@dbSeedPainHands": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainHips": "Hips",
+  "@dbSeedPainHips": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainKnees": "Knees",
+  "@dbSeedPainKnees": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainFeet": "Feet and ankles",
+  "@dbSeedPainFeet": {
+    "description": "Default pain location"
+  },
+  "dbSeedPainJoints": "Joints in general",
+  "@dbSeedPainJoints": {
+    "description": "Default pain location"
+  },
+  "dbSeedTriggerSleep": "Poor sleep",
+  "@dbSeedTriggerSleep": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerStress": "Stress",
+  "@dbSeedTriggerStress": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerSitting": "Sitting for long",
+  "@dbSeedTriggerSitting": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerStanding": "Standing for long",
+  "@dbSeedTriggerStanding": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerExertion": "Overexertion",
+  "@dbSeedTriggerExertion": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerCold": "Cold",
+  "@dbSeedTriggerCold": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerWeather": "Weather change",
+  "@dbSeedTriggerWeather": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerFood": "A particular food",
+  "@dbSeedTriggerFood": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerWater": "Not drinking enough water",
+  "@dbSeedTriggerWater": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerMissedDose": "Missed medication dose",
+  "@dbSeedTriggerMissedDose": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedTriggerScreens": "Long screen time",
+  "@dbSeedTriggerScreens": {
+    "description": "Default pain trigger"
+  },
+  "dbSeedMoodSleep": "Sleep",
+  "@dbSeedMoodSleep": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodPrayer": "Prayer and dhikr",
+  "@dbSeedMoodPrayer": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodFamily": "Family",
+  "@dbSeedMoodFamily": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodWork": "Work",
+  "@dbSeedMoodWork": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodMoney": "Money",
+  "@dbSeedMoodMoney": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodHealth": "Health",
+  "@dbSeedMoodHealth": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodExercise": "Movement and exercise",
+  "@dbSeedMoodExercise": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodFriends": "Friends",
+  "@dbSeedMoodFriends": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodCaffeine": "Caffeine",
+  "@dbSeedMoodCaffeine": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodWeather": "Weather",
+  "@dbSeedMoodWeather": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodNews": "News",
+  "@dbSeedMoodNews": {
+    "description": "Default mood factor"
+  },
+  "dbSeedMoodLoneliness": "Loneliness",
+  "@dbSeedMoodLoneliness": {
+    "description": "Default mood factor"
+  },
+  "dbSeedHabitBreathing": "Five minutes of deep breathing",
+  "@dbSeedHabitBreathing": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitWalk": "A calm walk outdoors",
+  "@dbSeedHabitWalk": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitAdhkar": "Morning and evening adhkar",
+  "@dbSeedHabitAdhkar": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitGratitude": "Three blessings to thank Allah for today",
+  "@dbSeedHabitGratitude": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitScreens": "A screen-free hour before bed",
+  "@dbSeedHabitScreens": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitSleep": "Go to bed early",
+  "@dbSeedHabitSleep": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitWater": "Drink water through the day",
+  "@dbSeedHabitWater": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitCaffeine": "No caffeine after Asr",
+  "@dbSeedHabitCaffeine": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitStretch": "Gentle stretching",
+  "@dbSeedHabitStretch": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitJournal": "Write down what's on your mind",
+  "@dbSeedHabitJournal": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbSeedHabitConnect": "Reach out to someone dear",
+  "@dbSeedHabitConnect": {
+    "description": "Default stress-reduction habit"
+  },
+  "dbErrorCipherUnavailable": "Encryption isn't available on this device, and Madar won't store your data unencrypted.",
+  "@dbErrorCipherUnavailable": {
+    "description": "SQLCipher missing on device"
+  },
+  "dbErrorWrongKey": "Couldn't unlock your data: the encryption key doesn't match the file, or the file is damaged.",
+  "@dbErrorWrongKey": {
+    "description": "Wrong database key or corrupted file"
+  },
+  "dbErrorKeyMissing": "The encryption key is missing from secure storage, so the saved data can't be opened.",
+  "@dbErrorKeyMissing": {
+    "description": "Key missing while a database file exists"
+  },
+  "dbErrorKeyMalformed": "The stored encryption key is damaged.",
+  "@dbErrorKeyMalformed": {
+    "description": "Stored key isn't 64 hex chars"
+  },
+  "dbErrorKeyStorage": "Couldn't reach the device's secure storage.",
+  "@dbErrorKeyStorage": {
+    "description": "Secure storage read/write failed"
+  },
+  "dbErrorSnapshotInvalid": "This file isn't a valid Madar backup.",
+  "@dbErrorSnapshotInvalid": {
+    "description": "Snapshot has the wrong shape"
+  },
+  "dbErrorSnapshotNewer": "This backup comes from a newer version of Madar. Update the app and try again.",
+  "@dbErrorSnapshotNewer": {
+    "description": "Snapshot schemaVersion is newer than the app"
+  },
+  "dbErrorSnapshotRejected": "The backup couldn't be restored; your current data is unchanged.",
+  "@dbErrorSnapshotRejected": {
+    "description": "Restore failed and was rolled back"
+  },
+  "dbErrorUnknown": "Something went wrong while saving your data.",
+  "@dbErrorUnknown": {
+    "description": "Fallback database error"
   }
 }

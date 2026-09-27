@@ -1,0 +1,32 @@
+/// Secondary indexes for the hot query paths (day views, per-parent lists,
+/// activity scoring). They are plain SQLite indexes created idempotently on
+/// every open, so they need no schema migration and never appear in
+/// snapshots.
+const madarIndexStatements = <String>[
+  'CREATE INDEX IF NOT EXISTS idx_tasks_date_window ON tasks (date, "window")',
+  'CREATE INDEX IF NOT EXISTS idx_tasks_project ON tasks (project_id)',
+  'CREATE INDEX IF NOT EXISTS idx_tasks_card ON tasks (card_id)',
+  'CREATE INDEX IF NOT EXISTS idx_activity_at ON activity_log ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_activity_planet_at ON activity_log (planet_key, "at")',
+  'CREATE INDEX IF NOT EXISTS idx_activity_ref ON activity_log (ref_table, ref_id)',
+  'CREATE INDEX IF NOT EXISTS idx_reminders_owner ON reminders (owner_table, owner_id)',
+  'CREATE INDEX IF NOT EXISTS idx_med_doses_med_at ON med_doses (medication_id, scheduled_at)',
+  'CREATE INDEX IF NOT EXISTS idx_lab_readings_test_date ON lab_readings (test_id, date)',
+  'CREATE INDEX IF NOT EXISTS idx_pain_entries_at ON pain_entries ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_mood_entries_at ON mood_entries ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_habit_logs_day ON habit_logs (day)',
+  'CREATE INDEX IF NOT EXISTS idx_transactions_wallet_date ON transactions (wallet_id, date)',
+  'CREATE INDEX IF NOT EXISTS idx_transactions_date ON transactions (date)',
+  'CREATE INDEX IF NOT EXISTS idx_transactions_budget ON transactions (budget_item_id)',
+  'CREATE INDEX IF NOT EXISTS idx_jar_deposits_jar ON jar_deposits (jar_id)',
+  'CREATE INDEX IF NOT EXISTS idx_debt_payments_debt ON debt_payments (debt_id)',
+  'CREATE INDEX IF NOT EXISTS idx_obligation_payments_obl ON obligation_payments (obligation_id)',
+  'CREATE INDEX IF NOT EXISTS idx_contact_logs_person_at ON contact_logs (person_id, "at")',
+  'CREATE INDEX IF NOT EXISTS idx_project_items_project ON project_items (project_id)',
+  'CREATE INDEX IF NOT EXISTS idx_board_cards_board_col ON board_cards (board_id, column_id)',
+  'CREATE INDEX IF NOT EXISTS idx_trip_items_trip ON trip_items (trip_id)',
+  'CREATE INDEX IF NOT EXISTS idx_goal_logs_goal_at ON goal_logs (goal_id, "at")',
+  'CREATE INDEX IF NOT EXISTS idx_workout_logs_at ON workout_logs ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_water_logs_at ON water_logs ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_custom_entries_module_at ON custom_entries (module_id, "at")',
+];

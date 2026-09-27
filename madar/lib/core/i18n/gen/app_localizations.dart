@@ -366,6 +366,720 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}'**
   String itemsCount(int count);
+
+  /// Semantic label of the orbit loader / loading buttons
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التحميل'**
+  String get designLoading;
+
+  /// No description provided for @designEmptyListTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء هنا بعد'**
+  String get designEmptyListTitle;
+
+  /// No description provided for @designEmptyListBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أول عنصر، ودَعْ مداره يبدأ بالدوران.'**
+  String get designEmptyListBody;
+
+  /// No description provided for @designNoDataTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات بعد'**
+  String get designNoDataTitle;
+
+  /// No description provided for @designNoDataBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستظهر الرسوم هنا حين تتجمّع لديك بضعة أيام.'**
+  String get designNoDataBody;
+
+  /// No description provided for @designNoResultsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج'**
+  String get designNoResultsTitle;
+
+  /// No description provided for @designNoResultsBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب كلمة أخرى، أو وسّع نطاق البحث.'**
+  String get designNoResultsBody;
+
+  /// No description provided for @designGalleryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرض التصميم'**
+  String get designGalleryTitle;
+
+  /// No description provided for @designGallerySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكوّنات مَدار كلّها في مكان واحد'**
+  String get designGallerySubtitle;
+
+  /// No description provided for @designGalleryTheme.
+  ///
+  /// In ar, this message translates to:
+  /// **'السِّمة'**
+  String get designGalleryTheme;
+
+  /// No description provided for @designGalleryDirection.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه الكتابة'**
+  String get designGalleryDirection;
+
+  /// No description provided for @designDirectionRtl.
+  ///
+  /// In ar, this message translates to:
+  /// **'من اليمين'**
+  String get designDirectionRtl;
+
+  /// No description provided for @designDirectionLtr.
+  ///
+  /// In ar, this message translates to:
+  /// **'من اليسار'**
+  String get designDirectionLtr;
+
+  /// No description provided for @designThemeLapis.
+  ///
+  /// In ar, this message translates to:
+  /// **'لازَوَرد'**
+  String get designThemeLapis;
+
+  /// No description provided for @designThemeEmerald.
+  ///
+  /// In ar, this message translates to:
+  /// **'زُمُرُّد'**
+  String get designThemeEmerald;
+
+  /// No description provided for @designThemeDesert.
+  ///
+  /// In ar, this message translates to:
+  /// **'صحراء'**
+  String get designThemeDesert;
+
+  /// No description provided for @designThemeAurora.
+  ///
+  /// In ar, this message translates to:
+  /// **'شَفَق'**
+  String get designThemeAurora;
+
+  /// No description provided for @designThemePearl.
+  ///
+  /// In ar, this message translates to:
+  /// **'لؤلؤ'**
+  String get designThemePearl;
+
+  /// No description provided for @designSectionSurfaces.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسطح الزجاجية'**
+  String get designSectionSurfaces;
+
+  /// No description provided for @designSectionButtons.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأزرار'**
+  String get designSectionButtons;
+
+  /// No description provided for @designSectionChips.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاختيارات'**
+  String get designSectionChips;
+
+  /// No description provided for @designSectionToggles.
+  ///
+  /// In ar, this message translates to:
+  /// **'المفاتيح'**
+  String get designSectionToggles;
+
+  /// No description provided for @designSectionProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقدّم'**
+  String get designSectionProgress;
+
+  /// No description provided for @designSectionStats.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإحصاءات'**
+  String get designSectionStats;
+
+  /// No description provided for @designSectionOrnaments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الزخارف'**
+  String get designSectionOrnaments;
+
+  /// No description provided for @designSectionLoaders.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتظار'**
+  String get designSectionLoaders;
+
+  /// No description provided for @designSectionEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالات الفارغة'**
+  String get designSectionEmpty;
+
+  /// No description provided for @designSectionType.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوط والألوان'**
+  String get designSectionType;
+
+  /// No description provided for @designSeeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get designSeeAll;
+
+  /// No description provided for @designPanelTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة زجاجية'**
+  String get designPanelTitle;
+
+  /// No description provided for @designPanelBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضبابية حقيقية فوق الكون الحيّ، بإطار ذهبي رفيع ولمعة تنساب على مهل.'**
+  String get designPanelBody;
+
+  /// No description provided for @designCardBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'زجاج مُحاكى للقوائم الطويلة: بلا ضبابية، وبالأناقة نفسها.'**
+  String get designCardBody;
+
+  /// No description provided for @designButtonPrimary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ يومك'**
+  String get designButtonPrimary;
+
+  /// No description provided for @designButtonSecondary.
+  ///
+  /// In ar, this message translates to:
+  /// **'لاحقًا'**
+  String get designButtonSecondary;
+
+  /// No description provided for @designButtonGhost.
+  ///
+  /// In ar, this message translates to:
+  /// **'التفاصيل'**
+  String get designButtonGhost;
+
+  /// No description provided for @designChipsSingle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار واحد'**
+  String get designChipsSingle;
+
+  /// No description provided for @designChipsMulti.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيارات متعددة'**
+  String get designChipsMulti;
+
+  /// No description provided for @designToggleSound.
+  ///
+  /// In ar, this message translates to:
+  /// **'أصوات الواجهة'**
+  String get designToggleSound;
+
+  /// No description provided for @designToggleHaptics.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاهتزاز اللمسي'**
+  String get designToggleHaptics;
+
+  /// No description provided for @designToggleReduceMotion.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقليل الحركة'**
+  String get designToggleReduceMotion;
+
+  /// No description provided for @designRingDaily.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف اليوم'**
+  String get designRingDaily;
+
+  /// No description provided for @designRingPrayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلوات'**
+  String get designRingPrayers;
+
+  /// No description provided for @designRingDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل'**
+  String get designRingDone;
+
+  /// No description provided for @designStatStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'سلسلة الصلاة'**
+  String get designStatStreak;
+
+  /// No description provided for @designStatSteps.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوات'**
+  String get designStatSteps;
+
+  /// No description provided for @designStatWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء'**
+  String get designStatWater;
+
+  /// No description provided for @designStatFocus.
+  ///
+  /// In ar, this message translates to:
+  /// **'التركيز'**
+  String get designStatFocus;
+
+  /// No description provided for @designStatVsLastWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقارنةً بالأسبوع الماضي'**
+  String get designStatVsLastWeek;
+
+  /// No description provided for @designUnitDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{يوم} =1{يوم} =2{يومان} few{أيام} many{يومًا} other{يوم}}'**
+  String designUnitDays(int count);
+
+  /// No description provided for @designUnitLitres.
+  ///
+  /// In ar, this message translates to:
+  /// **'لتر'**
+  String get designUnitLitres;
+
+  /// No description provided for @designUnitHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعة'**
+  String get designUnitHours;
+
+  /// No description provided for @designOrnamentStar.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجمة ثُمانية'**
+  String get designOrnamentStar;
+
+  /// No description provided for @designOrnamentStar12.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجمة اثنا عشرية'**
+  String get designOrnamentStar12;
+
+  /// No description provided for @designOrnamentRub.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربع الحزب'**
+  String get designOrnamentRub;
+
+  /// No description provided for @designOrnamentRosette.
+  ///
+  /// In ar, this message translates to:
+  /// **'وردة هندسية متشابكة'**
+  String get designOrnamentRosette;
+
+  /// No description provided for @designOrnamentAstrolabe.
+  ///
+  /// In ar, this message translates to:
+  /// **'حلقة الأسطرلاب'**
+  String get designOrnamentAstrolabe;
+
+  /// No description provided for @designOrnamentArabesque.
+  ///
+  /// In ar, this message translates to:
+  /// **'إفريز الأرابيسك'**
+  String get designOrnamentArabesque;
+
+  /// No description provided for @designTypeSample.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتنفّس الخطّ العربي هنا براحة: سطور رحبة، وتشكيل واضح، وأرقام منتظمة.'**
+  String get designTypeSample;
+
+  /// Seeded currency name (JOD)
+  ///
+  /// In ar, this message translates to:
+  /// **'دينار أردني'**
+  String get dbCurrencyJod;
+
+  /// Seeded currency name (USD)
+  ///
+  /// In ar, this message translates to:
+  /// **'دولار أمريكي'**
+  String get dbCurrencyUsd;
+
+  /// Seeded currency name (SYP)
+  ///
+  /// In ar, this message translates to:
+  /// **'ليرة سورية'**
+  String get dbCurrencySyp;
+
+  /// Seeded currency name (EGP)
+  ///
+  /// In ar, this message translates to:
+  /// **'جنيه مصري'**
+  String get dbCurrencyEgp;
+
+  /// Seeded currency name (LYD)
+  ///
+  /// In ar, this message translates to:
+  /// **'دينار ليبي'**
+  String get dbCurrencyLyd;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الرأس'**
+  String get dbSeedPainHead;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقبة'**
+  String get dbSeedPainNeck;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الكتفان'**
+  String get dbSeedPainShoulders;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى الظهر'**
+  String get dbSeedPainUpperBack;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'أسفل الظهر'**
+  String get dbSeedPainLowerBack;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الصدر'**
+  String get dbSeedPainChest;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'البطن'**
+  String get dbSeedPainAbdomen;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الذراعان'**
+  String get dbSeedPainArms;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'اليدان والأصابع'**
+  String get dbSeedPainHands;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الوركان'**
+  String get dbSeedPainHips;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'الركبتان'**
+  String get dbSeedPainKnees;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'القدمان والكاحلان'**
+  String get dbSeedPainFeet;
+
+  /// Default pain location
+  ///
+  /// In ar, this message translates to:
+  /// **'المفاصل عمومًا'**
+  String get dbSeedPainJoints;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'قلّة النوم'**
+  String get dbSeedTriggerSleep;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'التوتر والضغط'**
+  String get dbSeedTriggerStress;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'الجلوس الطويل'**
+  String get dbSeedTriggerSitting;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقوف الطويل'**
+  String get dbSeedTriggerStanding;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'مجهود بدني زائد'**
+  String get dbSeedTriggerExertion;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'البرد'**
+  String get dbSeedTriggerCold;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'تقلّب الطقس'**
+  String get dbSeedTriggerWeather;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'طعام بعينه'**
+  String get dbSeedTriggerFood;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'قلّة شرب الماء'**
+  String get dbSeedTriggerWater;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيان جرعة الدواء'**
+  String get dbSeedTriggerMissedDose;
+
+  /// Default pain trigger
+  ///
+  /// In ar, this message translates to:
+  /// **'طول النظر إلى الشاشات'**
+  String get dbSeedTriggerScreens;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم'**
+  String get dbSeedMoodSleep;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة والذكر'**
+  String get dbSeedMoodPrayer;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة'**
+  String get dbSeedMoodFamily;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'العمل'**
+  String get dbSeedMoodWork;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'المال'**
+  String get dbSeedMoodMoney;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة'**
+  String get dbSeedMoodHealth;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الحركة والرياضة'**
+  String get dbSeedMoodExercise;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الأصدقاء'**
+  String get dbSeedMoodFriends;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الكافيين'**
+  String get dbSeedMoodCaffeine;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الطقس'**
+  String get dbSeedMoodWeather;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الأخبار'**
+  String get dbSeedMoodNews;
+
+  /// Default mood factor
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get dbSeedMoodLoneliness;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'خمس دقائق من التنفّس العميق'**
+  String get dbSeedHabitBreathing;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'مشيٌ هادئ في الهواء الطلق'**
+  String get dbSeedHabitWalk;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الصباح والمساء'**
+  String get dbSeedHabitAdhkar;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'ثلاث نِعَم أحمد الله عليها اليوم'**
+  String get dbSeedHabitGratitude;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعة بلا شاشات قبل النوم'**
+  String get dbSeedHabitScreens;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم في وقت مبكر'**
+  String get dbSeedHabitSleep;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'شرب الماء على مدار اليوم'**
+  String get dbSeedHabitWater;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'لا كافيين بعد العصر'**
+  String get dbSeedHabitCaffeine;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'تمارين إطالة خفيفة'**
+  String get dbSeedHabitStretch;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'تدوين ما يشغل البال'**
+  String get dbSeedHabitJournal;
+
+  /// Default stress-reduction habit
+  ///
+  /// In ar, this message translates to:
+  /// **'التواصل مع شخص عزيز'**
+  String get dbSeedHabitConnect;
+
+  /// SQLCipher missing on device
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تفعيل تشفير البيانات على هذا الجهاز، ولن يحفظ مَدار بياناتك دون تشفير.'**
+  String get dbErrorCipherUnavailable;
+
+  /// Wrong database key or corrupted file
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح بياناتك: مفتاح التشفير لا يطابق الملف، أو أن الملف تالف.'**
+  String get dbErrorWrongKey;
+
+  /// Key missing while a database file exists
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتاح التشفير غير موجود في المخزن الآمن، لذلك لا يمكن فتح البيانات المحفوظة.'**
+  String get dbErrorKeyMissing;
+
+  /// Stored key isn't 64 hex chars
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتاح التشفير المحفوظ تالف.'**
+  String get dbErrorKeyMalformed;
+
+  /// Secure storage read/write failed
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الوصول إلى المخزن الآمن في الجهاز.'**
+  String get dbErrorKeyStorage;
+
+  /// Snapshot has the wrong shape
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الملف ليس نسخة احتياطية صالحة من مَدار.'**
+  String get dbErrorSnapshotInvalid;
+
+  /// Snapshot schemaVersion is newer than the app
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه النسخة الاحتياطية من إصدار أحدث من مَدار. حدّث التطبيق ثم أعد المحاولة.'**
+  String get dbErrorSnapshotNewer;
+
+  /// Restore failed and was rolled back
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت استعادة النسخة الاحتياطية، وبقيت بياناتك الحالية كما هي.'**
+  String get dbErrorSnapshotRejected;
+
+  /// Fallback database error
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقّع في حفظ البيانات.'**
+  String get dbErrorUnknown;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
