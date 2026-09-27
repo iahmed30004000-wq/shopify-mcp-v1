@@ -1,0 +1,58 @@
+{
+  "@@locale": "en",
+  "appName": "Madar",
+  "@appName": {
+    "description": "Application name"
+  },
+  "appTagline": "A life that orbits the prayer",
+  "actionSave": "Save",
+  "actionCancel": "Cancel",
+  "actionAdd": "Add",
+  "actionEdit": "Edit",
+  "actionDuplicate": "Duplicate",
+  "actionMove": "Move",
+  "actionSetReminder": "Set reminder",
+  "actionDelete": "Delete",
+  "actionUndo": "Undo",
+  "actionDone": "Done",
+  "actionClose": "Close",
+  "actionBack": "Back",
+  "actionContinue": "Continue",
+  "actionComplete": "Complete",
+  "actionSearch": "Search",
+  "itemDeleted": "Deleted",
+  "itemDuplicated": "Duplicated",
+  "itemMoved": "Moved",
+  "itemSaved": "Saved",
+  "fieldRequired": "This field is required",
+  "fieldInvalidNumber": "Enter a valid number",
+  "windowFajr": "After Fajr",
+  "windowDuha": "Duha",
+  "windowDhuhr": "Dhuhr → Asr",
+  "windowAsr": "Asr → Maghrib",
+  "windowMaghrib": "Maghrib → Isha",
+  "windowIsha": "After Isha",
+  "windowAnytime": "Anytime",
+  "prayerFajr": "Fajr",
+  "prayerSunrise": "Sunrise",
+  "prayerDhuhr": "Dhuhr",
+  "prayerAsr": "Asr",
+  "prayerMaghrib": "Maghrib",
+  "prayerIsha": "Isha",
+  "planetFaith": "Faith",
+  "planetHealth": "Health",
+  "planetFamily": "Family",
+  "planetWork": "Work",
+  "planetMoney": "Money",
+  "planetGrowth": "Growth",
+  "planetBody": "Body",
+  "planetTravel": "Travel",
+  "itemsCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@itemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "@@locale": "ar",
+  "appName": "مَدار",
+  "@appName": {
+    "description": "Application name"
+  },
+  "appTagline": "حياتك تدور حول الصلاة",
+  "actionSave": "حفظ",
+  "actionCancel": "إلغاء",
+  "actionAdd": "إضافة",
+  "actionEdit": "تعديل",
+  "actionDuplicate": "تكرار",
+  "actionMove": "نقل",
+  "actionSetReminder": "تذكير",
+  "actionDelete": "حذف",
+  "actionUndo": "تراجع",
+  "actionDone": "تم",
+  "actionClose": "إغلاق",
+  "actionBack": "رجوع",
+  "actionContinue": "متابعة",
+  "actionComplete": "إنجاز",
+  "actionSearch": "بحث",
+  "itemDeleted": "تم الحذف",
+  "itemDuplicated": "تم التكرار",
+  "itemMoved": "تم النقل",
+  "itemSaved": "تم الحفظ",
+  "fieldRequired": "هذا الحقل مطلوب",
+  "fieldInvalidNumber": "أدخل رقمًا صحيحًا",
+  "windowFajr": "بعد الفجر",
+  "windowDuha": "الضحى",
+  "windowDhuhr": "الظهر ← العصر",
+  "windowAsr": "العصر ← المغرب",
+  "windowMaghrib": "المغرب ← العشاء",
+  "windowIsha": "بعد العشاء",
+  "windowAnytime": "أي وقت",
+  "prayerFajr": "الفجر",
+  "prayerSunrise": "الشروق",
+  "prayerDhuhr": "الظهر",
+  "prayerAsr": "العصر",
+  "prayerMaghrib": "المغرب",
+  "prayerIsha": "العشاء",
+  "planetFaith": "الإيمان",
+  "planetHealth": "الصحة",
+  "planetFamily": "العائلة",
+  "planetWork": "العمل",
+  "planetMoney": "المال",
+  "planetGrowth": "النمو",
+  "planetBody": "الجسد",
+  "planetTravel": "السفر",
+  "itemsCount": "{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}",
+  "@itemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}
