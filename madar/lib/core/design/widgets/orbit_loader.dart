@@ -18,7 +18,8 @@ class OrbitLoader extends StatefulWidget {
   /// Defaults to the theme accent.
   final Color? color;
 
-  /// Moon colour; defaults to [MadarTokens.starTint].
+  /// Moon colour; defaults to [MadarTokens.starTint] (ink [MadarTokens.secondary]
+  /// in the light theme).
   final Color? secondaryColor;
 
   /// Defaults to the localised "Loading".
@@ -51,7 +52,7 @@ class _OrbitLoaderState extends State<OrbitLoader> with SingleTickerProviderStat
           painter: OrbitLoaderPainter(
             progress: _c,
             color: widget.color ?? t.accent,
-            moonColor: widget.secondaryColor ?? t.starTint,
+            moonColor: widget.secondaryColor ?? (t.isDark ? t.starTint : t.secondary),
             reduced: context.reducedMotion,
           ),
         ),
@@ -62,7 +63,7 @@ class _OrbitLoaderState extends State<OrbitLoader> with SingleTickerProviderStat
 
 class OrbitLoaderPainter extends CustomPainter {
   OrbitLoaderPainter({required this.progress, required this.color, required this.moonColor, this.reduced = false})
-      : super(repaint: progress);
+    : super(repaint: progress);
 
   final Animation<double> progress;
   final Color color;
@@ -109,15 +110,17 @@ class OrbitLoaderPainter extends CustomPainter {
       final depth = isBack ? 0.55 : 1.0;
       final r = s * 0.065 * m.$4 * (isBack ? 0.85 : 1);
       if (!reduced) {
-        // Wake: short fading arc behind the moon.
-        const steps = 10;
+        // Wake: a tapered comet tail of short overlapping segments.
+        const steps = 16;
         for (var i = steps; i >= 1; i--) {
-          final pa = a - i * 0.09;
-          final alpha = (1 - i / steps) * 0.45 * depth;
-          canvas.drawCircle(
-            onOrbit(m.$1, pa),
-            r * (1 - i / (steps * 1.6)),
-            Paint()..color = color.withValues(alpha: color.a * alpha),
+          final f = i / steps;
+          canvas.drawLine(
+            onOrbit(m.$1, a - i * 0.06),
+            onOrbit(m.$1, a - (i - 1) * 0.06),
+            Paint()
+              ..color = color.withValues(alpha: color.a * (1 - f) * 0.5 * depth)
+              ..strokeWidth = r * 1.7 * (1 - f * 0.85)
+              ..strokeCap = StrokeCap.round,
           );
         }
       }
@@ -141,17 +144,20 @@ class OrbitLoaderPainter extends CustomPainter {
     canvas.drawCircle(
       c,
       coreR * 2.4,
-      Paint()..shader = ui.Gradient.radial(c, coreR * 2.4, [color.withValues(alpha: color.a * 0.5), color.withValues(alpha: 0)]),
+      Paint()
+        ..shader = ui.Gradient.radial(c, coreR * 2.4, [
+          color.withValues(alpha: color.a * 0.5),
+          color.withValues(alpha: 0),
+        ]),
     );
     canvas.drawCircle(
       c,
       coreR,
       Paint()
-        ..shader = ui.Gradient.radial(
-          c - Offset(coreR * 0.35, coreR * 0.35),
-          coreR * 1.3,
-          [Color.lerp(color, moonColor, 0.55)!, color],
-        ),
+        ..shader = ui.Gradient.radial(c - Offset(coreR * 0.35, coreR * 0.35), coreR * 1.3, [
+          Color.lerp(color, moonColor, 0.55)!,
+          color,
+        ]),
     );
 
     for (final m in _moons) {

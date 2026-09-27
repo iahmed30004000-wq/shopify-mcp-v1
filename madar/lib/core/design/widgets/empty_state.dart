@@ -4,6 +4,7 @@ import '../../i18n/gen/app_localizations.dart';
 import '../../motion/motion.dart';
 import '../painters/empty_state_painters.dart';
 import '../tokens.dart';
+import 'ambient_motion.dart';
 import 'madar_button.dart';
 
 /// Which illustration an [AnimatedEmptyState] shows.
@@ -52,19 +53,26 @@ class AnimatedEmptyState extends StatefulWidget {
 }
 
 class _AnimatedEmptyStateState extends State<AnimatedEmptyState> with TickerProviderStateMixin {
-  late final AnimationController _loop = AnimationController(vsync: this, duration: _loopDuration(widget.kind), value: 0.18);
+  late final AnimationController _loop = AnimationController(
+    vsync: this,
+    duration: _loopDuration(widget.kind),
+    value: 0.18,
+  );
   late final AnimationController _entrance = AnimationController(vsync: this, duration: MadarMotion.long);
   late final List<CurvedAnimation> _stagger = [
     for (final begin in const [0.0, 0.12, 0.22, 0.34])
-      CurvedAnimation(parent: _entrance, curve: Interval(begin, begin + 0.6, curve: MadarMotion.decelerate)),
+      CurvedAnimation(
+        parent: _entrance,
+        curve: Interval(begin, begin + 0.6, curve: MadarMotion.decelerate),
+      ),
   ];
   bool _started = false;
 
   static Duration _loopDuration(EmptyStateKind kind) => switch (kind) {
-        EmptyStateKind.emptyList => const Duration(seconds: 16),
-        EmptyStateKind.noData => const Duration(seconds: 9),
-        EmptyStateKind.noResults => const Duration(seconds: 14),
-      };
+    EmptyStateKind.emptyList => const Duration(seconds: 16),
+    EmptyStateKind.noData => const Duration(seconds: 9),
+    EmptyStateKind.noResults => const Duration(seconds: 14),
+  };
 
   @override
   void didChangeDependencies() {
@@ -75,7 +83,7 @@ class _AnimatedEmptyStateState extends State<AnimatedEmptyState> with TickerProv
       _entrance.duration = context.motion(MadarMotion.long);
       _entrance.forward();
     }
-    if (reduced) {
+    if (reduced || !AmbientMotion.enabled) {
       _loop.stop();
     } else if (!_loop.isAnimating) {
       _loop.repeat();
@@ -153,21 +161,31 @@ class _AnimatedEmptyStateState extends State<AnimatedEmptyState> with TickerProv
               ),
             ),
           ),
-          const SizedBox(height: Space.l),
-          _rise(
-            1,
-            Semantics(
-              header: true,
-              child: Text(title, textAlign: TextAlign.center, style: text.titleLarge!.copyWith(color: t.textPrimary)),
+          if (title.isNotEmpty) ...[
+            const SizedBox(height: Space.l),
+            _rise(
+              1,
+              Semantics(
+                header: true,
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: text.titleLarge!.copyWith(color: t.textPrimary),
+                ),
+              ),
             ),
-          ),
-          if (body != null) ...[
+          ],
+          if (body != null && body.isNotEmpty) ...[
             const SizedBox(height: Space.xs + 2),
             _rise(
               2,
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 300),
-                child: Text(body, textAlign: TextAlign.center, style: text.bodyMedium!.copyWith(color: t.textSecondary)),
+                child: Text(
+                  body,
+                  textAlign: TextAlign.center,
+                  style: text.bodyMedium!.copyWith(color: t.textSecondary),
+                ),
               ),
             ),
           ],

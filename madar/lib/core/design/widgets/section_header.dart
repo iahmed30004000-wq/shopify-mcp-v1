@@ -33,10 +33,7 @@ class SectionHeader extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (ornament) ...[
-            const IslamicStar(size: 15, glow: true),
-            const SizedBox(width: Space.s + 2),
-          ],
+          if (ornament) ...[const IslamicStar(size: 15, glow: true), const SizedBox(width: Space.s + 2)],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

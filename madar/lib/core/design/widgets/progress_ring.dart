@@ -16,8 +16,7 @@ abstract final class ProgressRingGeometry {
 
   /// Canvas angle of the arc head: starts at 12 o'clock, clockwise (or
   /// counter-clockwise when [clockwise] is false).
-  static double headAngle(double value, {bool clockwise = true}) =>
-      -math.pi / 2 + sweep(value) * (clockwise ? 1 : -1);
+  static double headAngle(double value, {bool clockwise = true}) => -math.pi / 2 + sweep(value) * (clockwise ? 1 : -1);
 }
 
 /// Animated progress arc with a luminous head and optional centre child.

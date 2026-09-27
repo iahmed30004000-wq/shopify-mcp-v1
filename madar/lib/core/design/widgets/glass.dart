@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../motion/motion.dart';
 import '../tokens.dart';
+import 'ambient_motion.dart';
 import 'pressable.dart';
 import 'shader_cache.dart';
 
@@ -23,21 +24,20 @@ abstract final class GlassUniforms {
     required double seed,
     required double specular,
     required TextDirection direction,
-  }) =>
-      [
-        size.width,
-        size.height,
-        time % period,
-        highlight.r,
-        highlight.g,
-        highlight.b,
-        highlight.a,
-        grain,
-        light ? 1 : 0,
-        seed,
-        specular.clamp(0.0, 1.0),
-        direction == TextDirection.rtl ? -1 : 1,
-      ];
+  }) => [
+    size.width,
+    size.height,
+    time % period,
+    highlight.r,
+    highlight.g,
+    highlight.b,
+    highlight.a,
+    grain,
+    light ? 1 : 0,
+    seed,
+    specular.clamp(0.0, 1.0),
+    direction == TextDirection.rtl ? -1 : 1,
+  ];
 }
 
 /// The signature Madar surface for sheets, dialogs and hero panels: one
@@ -116,7 +116,9 @@ class GlassPanel extends StatelessWidget {
       width: width,
       height: height,
       child: CustomPaint(
-        painter: glow ? GlassGlowPainter(radius: radius, color: glowColor ?? t.glassShadow, sigma: 18) : null,
+        painter: glow
+            ? GlassGlowPainter(radius: radius, color: glowColor ?? t.glassShadow, sigma: 16, offset: const Offset(0, 5))
+            : null,
         foregroundPainter: GlassBorderPainter(
           radius: radius,
           highlight: t.glassHighlight,
@@ -182,7 +184,9 @@ class GlassCard extends StatelessWidget {
       width: width,
       height: height,
       child: CustomPaint(
-        painter: glow ? GlassGlowPainter(radius: radius, color: glowColor ?? t.glassShadow, sigma: 10) : null,
+        painter: glow
+            ? GlassGlowPainter(radius: radius, color: glowColor ?? t.glassShadow, sigma: 9, offset: const Offset(0, 3))
+            : null,
         foregroundPainter: GlassBorderPainter(
           radius: radius,
           highlight: t.glassHighlight,
@@ -219,7 +223,15 @@ class GlassCard extends StatelessWidget {
 /// Fill recipe of a glass surface.
 @immutable
 class GlassFillStyle {
-  const GlassFillStyle({required this.base, required this.top, required this.bottom, required this.sheen, required this.highlight, required this.light, required this.grain});
+  const GlassFillStyle({
+    required this.base,
+    required this.top,
+    required this.bottom,
+    required this.sheen,
+    required this.highlight,
+    required this.light,
+    required this.grain,
+  });
 
   /// Translucent fill for real (blurred) glass.
   factory GlassFillStyle.panel(MadarTokens t, {Color? tint}) {
@@ -231,7 +243,7 @@ class GlassFillStyle {
       sheen: t.glassHighlight.withValues(alpha: t.glassHighlight.a * 0.10),
       highlight: t.glassHighlight,
       light: !t.isDark,
-      grain: t.grainOpacity,
+      grain: t.grainOpacity * (t.isDark ? 0.75 : 0.45),
     );
   }
 
@@ -246,7 +258,7 @@ class GlassFillStyle {
       sheen: t.glassHighlight.withValues(alpha: t.glassHighlight.a * 0.14),
       highlight: t.glassHighlight,
       light: !t.isDark,
-      grain: t.grainOpacity,
+      grain: t.grainOpacity * (t.isDark ? 0.7 : 0.4),
     );
   }
 
@@ -306,13 +318,13 @@ class _GlassSurfaceState extends State<_GlassSurface> with SingleTickerProviderS
   void initState() {
     super.initState();
     _base = _time.value;
+    _shader = _program.value?.fragmentShader();
     _program.addListener(_onProgram);
-    _onProgram();
   }
 
   void _onProgram() {
     final program = _program.value;
-    if (program == null || _shader != null) return;
+    if (program == null || _shader != null || !mounted) return;
     setState(() => _shader = program.fragmentShader());
   }
 
@@ -329,7 +341,7 @@ class _GlassSurfaceState extends State<_GlassSurface> with SingleTickerProviderS
   }
 
   void _syncTicker() {
-    final run = widget.animate && !context.reducedMotion;
+    final run = widget.animate && AmbientMotion.enabled && !context.reducedMotion;
     if (run) {
       final ticker = _ticker ??= createTicker(_onTick);
       if (!ticker.isActive) {
@@ -360,7 +372,10 @@ class _GlassSurfaceState extends State<_GlassSurface> with SingleTickerProviderS
 
   @override
   Widget build(BuildContext context) {
+    // passthrough: the content receives the card's own constraints, so a
+    // stretched card lays its content out across the full width.
     return Stack(
+      fit: StackFit.passthrough,
       children: [
         Positioned.fill(
           child: RepaintBoundary(
@@ -497,25 +512,44 @@ class GlassBorderPainter extends CustomPainter {
       old.width != width;
 }
 
+/// Paints a soft glow strictly outside [rrect] (never tints the surface
+/// itself). Uses a normal blur clipped to the outside of the shape – robust
+/// on every backend (unlike `BlurStyle.outer`).
+void paintOuterGlow(Canvas canvas, RRect rrect, Color color, double sigma, {Offset offset = Offset.zero}) {
+  if (color.a == 0 || sigma <= 0) return;
+  final outside = Path()
+    ..fillType = PathFillType.evenOdd
+    ..addRect(rrect.outerRect.inflate(sigma * 3 + offset.distance))
+    ..addRRect(rrect);
+  canvas.save();
+  canvas.clipPath(outside);
+  canvas.drawRRect(
+    rrect.shift(offset),
+    Paint()
+      ..color = color
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, sigma),
+  );
+  canvas.restore();
+}
+
 /// Soft glow strictly outside the surface (never darkens the glass itself).
 class GlassGlowPainter extends CustomPainter {
-  const GlassGlowPainter({required this.radius, required this.color, this.sigma = 16});
+  const GlassGlowPainter({required this.radius, required this.color, this.sigma = 16, this.offset = Offset.zero});
 
   final BorderRadius radius;
   final Color color;
   final double sigma;
 
+  /// Drop offset (a little downward lift reads as elevation).
+  final Offset offset;
+
   @override
   void paint(Canvas canvas, Size size) {
-    if (size.isEmpty || color.a == 0) return;
-    canvas.drawRRect(
-      radius.toRRect(Offset.zero & size),
-      Paint()
-        ..color = color
-        ..maskFilter = MaskFilter.blur(BlurStyle.outer, sigma),
-    );
+    if (size.isEmpty) return;
+    paintOuterGlow(canvas, radius.toRRect(Offset.zero & size), color, sigma, offset: offset);
   }
 
   @override
-  bool shouldRepaint(GlassGlowPainter old) => old.radius != radius || old.color != color || old.sigma != sigma;
+  bool shouldRepaint(GlassGlowPainter old) =>
+      old.radius != radius || old.color != color || old.sigma != sigma || old.offset != offset;
 }

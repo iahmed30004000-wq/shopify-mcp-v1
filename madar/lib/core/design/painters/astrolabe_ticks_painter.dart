@@ -39,18 +39,26 @@ abstract final class AstrolabeScale {
           d % majorStep == 0
               ? AstrolabeTickKind.major
               : d % midStep == 0
-                  ? AstrolabeTickKind.mid
-                  : AstrolabeTickKind.minor,
+              ? AstrolabeTickKind.mid
+              : AstrolabeTickKind.minor,
         ),
     ];
   }
 
-  /// Replaces ASCII digits with Arabic-Indic digits (٠١٢٣٤٥٦٧٨٩).
-  static String toArabicIndic(String input) {
+  /// Replaces ASCII digits with Arabic-Indic digits (٠١٢٣٤٥٦٧٨٩). With
+  /// [separators], also localises the decimal point (٫), thousands
+  /// separator (٬) and percent sign (٪).
+  static String toArabicIndic(String input, {bool separators = false}) {
     final out = StringBuffer();
     for (final unit in input.codeUnits) {
       if (unit >= 0x30 && unit <= 0x39) {
         out.write(_arabicIndicDigits[unit - 0x30]);
+      } else if (separators && unit == 0x2E) {
+        out.write('\u066B');
+      } else if (separators && unit == 0x2C) {
+        out.write('\u066C');
+      } else if (separators && unit == 0x25) {
+        out.write('\u066A');
       } else {
         out.writeCharCode(unit);
       }
@@ -59,12 +67,10 @@ abstract final class AstrolabeScale {
   }
 
   /// Formats a scale numeral.
-  static String numeral(int value, {bool arabicIndic = true}) =>
-      arabicIndic ? toArabicIndic('$value') : '$value';
+  static String numeral(int value, {bool arabicIndic = true}) => arabicIndic ? toArabicIndic('$value') : '$value';
 
   /// Angle in radians (canvas space, 0 = +x) for a scale reading.
-  static double radiansFor(num degrees, {double rotation = 0}) =>
-      (degrees - 90) * math.pi / 180 + rotation;
+  static double radiansFor(num degrees, {double rotation = 0}) => (degrees - 90) * math.pi / 180 + rotation;
 }
 
 /// A brass astrolabe degree ring: outer ring, major/mid/minor ticks and
@@ -189,8 +195,8 @@ class AstrolabeTicksPainter extends CustomPainter {
     }
 
     if (!showNumerals) return;
-    final fontSize = (radius * 0.085).clamp(6.0, 15.0);
-    final labelR = innerR - fontSize * 0.95;
+    final fontSize = (radius * 0.105).clamp(7.0, 16.0);
+    final labelR = innerR - fontSize * 0.85;
     if (labelR <= fontSize) return;
     for (var d = 0; d < 360; d += majorStep) {
       final painter = TextPainter(
@@ -209,8 +215,9 @@ class AstrolabeTicksPainter extends CustomPainter {
       final a = AstrolabeScale.radiansFor(d, rotation: rotation);
       canvas.save();
       canvas.translate(center.dx + math.cos(a) * labelR, center.dy + math.sin(a) * labelR);
-      // Engraved tangentially: the glyph tops face outward.
-      canvas.rotate(a + math.pi / 2);
+      // Engraved tangentially; labels in the lower half turn so they still
+      // read upright (tops toward the centre).
+      canvas.rotate(math.sin(a) > 0.001 ? a - math.pi / 2 : a + math.pi / 2);
       painter.paint(canvas, Offset(-painter.width / 2, -painter.height / 2));
       canvas.restore();
       painter.dispose();

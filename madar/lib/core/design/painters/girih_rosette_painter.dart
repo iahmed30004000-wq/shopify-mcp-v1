@@ -8,7 +8,12 @@ import 'islamic_star_painter.dart';
 /// Where two strands of the rosette cross, and which one passes over.
 @immutable
 class GirihCrossing {
-  const GirihCrossing({required this.point, required this.overDirection, required this.overStrand, required this.underStrand});
+  const GirihCrossing({
+    required this.point,
+    required this.overDirection,
+    required this.overStrand,
+    required this.underStrand,
+  });
 
   /// Crossing point in unit coordinates (rosette radius 1, centre 0,0).
   final Offset point;
@@ -112,12 +117,14 @@ class GirihRosetteGeometry {
       final underEdge = overEdge == hits[h].e1 ? hits[h].e2 : hits[h].e1;
       final e = edges[overEdge];
       final d = e.b - e.a;
-      crossings.add(GirihCrossing(
-        point: hits[h].p,
-        overDirection: d / d.distance,
-        overStrand: e.strand,
-        underStrand: edges[underEdge].strand,
-      ));
+      crossings.add(
+        GirihCrossing(
+          point: hits[h].p,
+          overDirection: d / d.distance,
+          overStrand: e.strand,
+          underStrand: edges[underEdge].strand,
+        ),
+      );
     }
     return GirihRosetteGeometry._(n, List.unmodifiable(strands), List.unmodifiable(crossings), innerR);
   }
@@ -226,11 +233,11 @@ class GirihRosettePainter extends CustomPainter {
     final groove = strandInnerColor == null
         ? null
         : (Paint()
-          ..color = strandInnerColor!
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = math.max(0.5, w * 0.28)
-          ..strokeJoin = StrokeJoin.miter
-          ..strokeMiterLimit = 10);
+            ..color = strandInnerColor!
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = math.max(0.5, w * 0.28)
+            ..strokeJoin = StrokeJoin.miter
+            ..strokeMiterLimit = 10);
 
     void drawStrap(Path p) {
       canvas.drawPath(p, clear);

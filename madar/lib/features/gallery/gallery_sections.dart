@@ -34,7 +34,7 @@ class GalleryBody extends StatelessWidget {
   final ValueChanged<GalleryDemoState> onDemo;
   final VoidCallback onStartLoading;
 
-  String _digits(String s) => arabicDigits ? AstrolabeScale.toArabicIndic(s) : s;
+  String _digits(String s) => arabicDigits ? AstrolabeScale.toArabicIndic(s, separators: true) : s;
 
   @override
   Widget build(BuildContext context) {
@@ -124,8 +124,16 @@ class _Hero extends StatelessWidget {
                   ChoicePills<TextDirection>.single(
                     dense: true,
                     options: [
-                      ChoiceOption(value: TextDirection.rtl, label: l.designDirectionRtl, icon: Icons.format_textdirection_r_to_l_rounded),
-                      ChoiceOption(value: TextDirection.ltr, label: l.designDirectionLtr, icon: Icons.format_textdirection_l_to_r_rounded),
+                      ChoiceOption(
+                        value: TextDirection.rtl,
+                        label: l.designDirectionRtl,
+                        icon: Icons.format_textdirection_r_to_l_rounded,
+                      ),
+                      ChoiceOption(
+                        value: TextDirection.ltr,
+                        label: l.designDirectionLtr,
+                        icon: Icons.format_textdirection_l_to_r_rounded,
+                      ),
                     ],
                     selected: direction,
                     onChanged: (d) => onDirection(d!),
@@ -272,9 +280,25 @@ class _Buttons extends StatelessWidget {
             children: [
               MadarButton(label: l.actionSave, loading: loading, onPressed: onStartLoading),
               MadarButton(label: l.designButtonSecondary, variant: MadarButtonVariant.secondary, onPressed: () {}),
-              MadarButton(label: l.designButtonGhost, variant: MadarButtonVariant.ghost, trailingIcon: Icons.chevron_right_rounded, onPressed: () {}),
-              MadarButton(label: l.actionDelete, icon: Icons.delete_outline_rounded, variant: MadarButtonVariant.danger, onPressed: () {}),
-              MadarButton(label: l.actionEdit, variant: MadarButtonVariant.secondary, size: MadarButtonSize.small, icon: Icons.edit_rounded, onPressed: () {}),
+              MadarButton(
+                label: l.designButtonGhost,
+                variant: MadarButtonVariant.ghost,
+                trailingIcon: Icons.chevron_right_rounded,
+                onPressed: () {},
+              ),
+              MadarButton(
+                label: l.actionDelete,
+                icon: Icons.delete_outline_rounded,
+                variant: MadarButtonVariant.danger,
+                onPressed: () {},
+              ),
+              MadarButton(
+                label: l.actionEdit,
+                variant: MadarButtonVariant.secondary,
+                size: MadarButtonSize.small,
+                icon: Icons.edit_rounded,
+                onPressed: () {},
+              ),
               MadarButton(label: l.actionContinue, onPressed: null),
             ],
           ),
@@ -283,13 +307,33 @@ class _Buttons extends StatelessWidget {
             children: [
               MadarButton.icon(icon: Icons.search_rounded, semanticLabel: l.actionSearch, onPressed: () {}),
               const SizedBox(width: Space.s),
-              MadarButton.icon(icon: Icons.notifications_none_rounded, semanticLabel: l.actionSetReminder, onPressed: () {}),
+              MadarButton.icon(
+                icon: Icons.notifications_none_rounded,
+                semanticLabel: l.actionSetReminder,
+                onPressed: () {},
+              ),
               const SizedBox(width: Space.s),
-              MadarButton.icon(icon: Icons.undo_rounded, semanticLabel: l.actionUndo, variant: MadarButtonVariant.ghost, onPressed: () {}),
+              MadarButton.icon(
+                icon: Icons.undo_rounded,
+                semanticLabel: l.actionUndo,
+                variant: MadarButtonVariant.ghost,
+                onPressed: () {},
+              ),
               const SizedBox(width: Space.s),
-              MadarButton.icon(icon: Icons.add_rounded, semanticLabel: l.actionAdd, variant: MadarButtonVariant.primary, onPressed: () {}),
+              MadarButton.icon(
+                icon: Icons.add_rounded,
+                semanticLabel: l.actionAdd,
+                variant: MadarButtonVariant.primary,
+                onPressed: () {},
+              ),
               const SizedBox(width: Space.s),
-              MadarButton.icon(icon: Icons.check_rounded, semanticLabel: l.actionDone, variant: MadarButtonVariant.primary, loading: true, onPressed: () {}),
+              MadarButton.icon(
+                icon: Icons.check_rounded,
+                semanticLabel: l.actionDone,
+                variant: MadarButtonVariant.primary,
+                loading: true,
+                onPressed: () {},
+              ),
             ],
           ),
         ],
@@ -342,7 +386,8 @@ class _Choices extends StatelessWidget {
           padding: galleryGutter,
           maxSelected: 5,
           options: [
-            for (final e in planets.entries) ChoiceOption(value: e.key, label: e.value, color: PlanetPalettes.byKey[e.key]!.surface),
+            for (final e in planets.entries)
+              ChoiceOption(value: e.key, label: e.value, color: PlanetPalettes.byKey[e.key]!.surface),
           ],
           selected: demo.planets,
           onChanged: (p) => onDemo(demo.copyWith(planets: p)),
@@ -363,16 +408,16 @@ class _Toggles extends StatelessWidget {
     final l = L10n.of(context);
     final text = Theme.of(context).textTheme;
     Widget row(IconData icon, String label, bool value, ValueChanged<bool> onChanged) => Padding(
-          padding: const EdgeInsetsDirectional.symmetric(vertical: Space.xs),
-          child: Row(
-            children: [
-              Icon(icon, size: 20, color: context.tokens.textSecondary),
-              const SizedBox(width: Space.m),
-              Expanded(child: Text(label, style: text.bodyLarge)),
-              MadarSwitch(value: value, onChanged: onChanged, semanticLabel: label),
-            ],
-          ),
-        );
+      padding: const EdgeInsetsDirectional.symmetric(vertical: Space.xs),
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: context.tokens.textSecondary),
+          const SizedBox(width: Space.m),
+          Expanded(child: Text(label, style: text.bodyLarge)),
+          MadarSwitch(value: value, onChanged: onChanged, semanticLabel: label),
+        ],
+      ),
+    );
     return Padding(
       padding: galleryGutter,
       child: GlassCard(
@@ -383,8 +428,12 @@ class _Toggles extends StatelessWidget {
             const MadarDivider(ornament: false, height: 8),
             row(Icons.vibration_rounded, l.designToggleHaptics, demo.haptics, (v) => onDemo(demo.copyWith(haptics: v))),
             const MadarDivider(ornament: false, height: 8),
-            row(Icons.motion_photos_off_rounded, l.designToggleReduceMotion, demo.reduceMotion,
-                (v) => onDemo(demo.copyWith(reduceMotion: v))),
+            row(
+              Icons.motion_photos_off_rounded,
+              l.designToggleReduceMotion,
+              demo.reduceMotion,
+              (v) => onDemo(demo.copyWith(reduceMotion: v)),
+            ),
           ],
         ),
       ),
@@ -404,20 +453,28 @@ class _Rings extends StatelessWidget {
     final l = L10n.of(context);
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    Widget labelled(Widget ring, String label) => Column(
-          children: [
-            ring,
-            const SizedBox(height: Space.s),
-            Text(label, style: text.labelMedium),
-          ],
-        );
+    Widget labelled(Widget ring, String label) => Expanded(
+      child: Column(
+        children: [
+          FittedBox(fit: BoxFit.scaleDown, child: ring),
+          const SizedBox(height: Space.s),
+          Text(
+            label,
+            style: text.labelMedium,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
     final pct = '${(demo.ring * 100).round()}';
     return Padding(
       padding: galleryGutter,
       child: GlassCard(
         padding: const EdgeInsetsDirectional.symmetric(vertical: Space.l, horizontal: Space.s),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             labelled(
               MadarPressable(
@@ -442,7 +499,11 @@ class _Rings extends StatelessWidget {
                 color: PlanetPalettes.faith.surface,
                 gradientEnd: PlanetPalettes.faith.glow,
                 semanticLabel: l.designRingPrayers,
-                child: Text(digits('3/5'), textDirection: TextDirection.ltr, style: MadarTypography.numerals(t, size: 20)),
+                child: Text(
+                  digits('3/5'),
+                  textDirection: TextDirection.ltr,
+                  style: MadarTypography.numerals(t, size: 20),
+                ),
               ),
               l.designRingPrayers,
             ),
@@ -474,9 +535,13 @@ class _Stats extends StatelessWidget {
     final l = L10n.of(context);
     final vs = l.designStatVsLastWeek;
     Widget pair(Widget a, Widget b) => Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Expanded(child: a), const SizedBox(width: Space.m), Expanded(child: b)],
-        );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: a),
+        const SizedBox(width: Space.m),
+        Expanded(child: b),
+      ],
+    );
     return Padding(
       padding: galleryGutter,
       child: Column(
@@ -537,14 +602,24 @@ class _Ornaments extends StatelessWidget {
     final l = L10n.of(context);
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    Widget captioned(Widget child, String caption) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            child,
-            const SizedBox(height: Space.s),
-            Text(caption, style: text.labelMedium, textAlign: TextAlign.center),
-          ],
-        );
+    // Flexible cells: ornaments scale down and captions wrap, so the rows
+    // hold up at any width and text scale.
+    Widget captioned(Widget child, String caption) => Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FittedBox(fit: BoxFit.scaleDown, child: child),
+          const SizedBox(height: Space.s),
+          Text(
+            caption,
+            style: text.labelMedium,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
     return Padding(
       padding: galleryGutter,
       child: GlassPanel(
@@ -552,7 +627,7 @@ class _Ornaments extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 captioned(const IslamicStar(size: 58, glow: true), l.designOrnamentStar),
                 captioned(
@@ -571,7 +646,12 @@ class _Ornaments extends StatelessWidget {
                 captioned(
                   CustomPaint(
                     size: const Size.square(58),
-                    painter: IslamicStarPainter(points: 12, strokeColor: t.brass, strokeWidth: 1.4, fillColor: t.accentSoft),
+                    painter: IslamicStarPainter(
+                      points: 12,
+                      strokeColor: t.brass,
+                      strokeWidth: 1.4,
+                      fillColor: t.accentSoft,
+                    ),
                   ),
                   l.designOrnamentStar12,
                 ),
@@ -579,10 +659,16 @@ class _Ornaments extends StatelessWidget {
             ),
             const SizedBox(height: Space.l),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 captioned(const GirihRosette(size: 138), l.designOrnamentRosette),
-                captioned(const AstrolabeRing(size: 138), l.designOrnamentAstrolabe),
+                captioned(
+                  const AstrolabeRing(
+                    size: 138,
+                    child: IslamicStar(size: 46, style: IslamicStarStyle.rubElHizb, filled: false, glow: true),
+                  ),
+                  l.designOrnamentAstrolabe,
+                ),
               ],
             ),
             const SizedBox(height: Space.l),
@@ -629,6 +715,7 @@ class _EmptyStates extends StatelessWidget {
     return Padding(
       padding: galleryGutter,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           GlassCard(
             padding: EdgeInsetsDirectional.zero,
@@ -640,9 +727,15 @@ class _EmptyStates extends StatelessWidget {
             ),
           ),
           const SizedBox(height: Space.m),
-          const GlassCard(padding: EdgeInsetsDirectional.zero, child: AnimatedEmptyState(kind: EmptyStateKind.noData)),
+          const GlassCard(
+            padding: EdgeInsetsDirectional.zero,
+            child: AnimatedEmptyState(kind: EmptyStateKind.noData),
+          ),
           const SizedBox(height: Space.m),
-          const GlassCard(padding: EdgeInsetsDirectional.zero, child: AnimatedEmptyState(kind: EmptyStateKind.noResults)),
+          const GlassCard(
+            padding: EdgeInsetsDirectional.zero,
+            child: AnimatedEmptyState(kind: EmptyStateKind.noResults),
+          ),
         ],
       ),
     );
@@ -657,7 +750,19 @@ class _TypeAndColour extends StatelessWidget {
     final l = L10n.of(context);
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    final swatches = [t.accent, t.secondary, t.highlight, t.gold, t.brass, t.success, t.warning, t.danger, t.info, t.nebulaA, t.nebulaB];
+    final swatches = [
+      t.accent,
+      t.secondary,
+      t.highlight,
+      t.gold,
+      t.brass,
+      t.success,
+      t.warning,
+      t.danger,
+      t.info,
+      t.nebulaA,
+      t.nebulaB,
+    ];
     return Padding(
       padding: galleryGutter,
       child: GlassPanel(

@@ -5,7 +5,6 @@
 // Used by @Tags(['screenshot']) tests for visual critic passes:
 //   flutter test --tags screenshot
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/design/themes.dart';
+import 'package:madar/core/design/widgets/ambient_motion.dart';
 import 'package:madar/core/design/widgets/shader_cache.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 
@@ -49,9 +49,7 @@ Future<void> loadMadarFonts() async {
 
 File? _materialIconsFont() {
   const rel = 'bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf';
-  final roots = <String>[
-    if (Platform.environment['FLUTTER_ROOT'] case final root?) root,
-  ];
+  final roots = <String>[?Platform.environment['FLUTTER_ROOT']];
   // flutter_tester lives in <root>/bin/cache/artifacts/engine/<platform>/.
   var dir = File(Platform.resolvedExecutable).parent;
   for (var i = 0; i < 8; i++) {
@@ -107,6 +105,8 @@ Future<File> captureScreen(
   addTearDown(tester.view.reset);
 
   final boundaryKey = GlobalKey();
+  // Screenshots show the live look (drifting cosmos, glass sheen).
+  AmbientMotion.debugOverride = true;
   final previousShadows = debugDisableShadows;
   // Real shadows/glows – the test binding disables them for golden stability.
   debugDisableShadows = false;
@@ -137,5 +137,6 @@ Future<File> captureScreen(
     return file;
   } finally {
     debugDisableShadows = previousShadows;
+    AmbientMotion.debugOverride = null;
   }
 }

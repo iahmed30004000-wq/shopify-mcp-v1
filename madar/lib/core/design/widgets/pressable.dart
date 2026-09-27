@@ -69,12 +69,35 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
   bool _pressed = false;
   bool _focused = false;
 
+  /// Cached so gesture callbacks never look up inherited widgets (a tap
+  /// cancel can arrive while the element is being unmounted).
+  bool _reduced = false;
+  bool _active = true;
+
   late final Map<Type, Action<Intent>> _actions = {
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => _handleTap()),
   };
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _reduced = context.reducedMotion;
+  }
+
+  @override
+  void deactivate() {
+    _active = false;
+    super.deactivate();
+  }
+
+  @override
+  void activate() {
+    super.activate();
+    _active = true;
+  }
+
   void _springTo(double target, SpringDescription spring) {
-    if (context.reducedMotion) {
+    if (_reduced) {
       _scale.value = 1;
       return;
     }
@@ -82,7 +105,7 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
   }
 
   void _setPressed(bool value) {
-    if (_pressed == value) return;
+    if (_pressed == value || !_active) return;
     _pressed = value;
     widget.onPressedChanged?.call(value);
     _springTo(value ? widget.pressScale : 1, value ? MadarMotion.snappy : MadarMotion.bouncy);
@@ -118,17 +141,19 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     final interactive = widget._interactive;
-    Widget child = ScaleTransition(scale: _scale, child: widget.child);
-    if (_focused) {
-      child = _FocusRing(radius: widget.focusRadius, child: child);
-    }
+    // The ring is always in the tree (only its decoration changes), so
+    // focusing never rebuilds – and never resets – the child's state.
+    final child = _FocusRing(
+      visible: _focused,
+      radius: widget.focusRadius,
+      child: ScaleTransition(scale: _scale, child: widget.child),
+    );
     return Semantics(
       button: widget.button,
       enabled: interactive,
       selected: widget.selected,
       toggled: widget.toggled,
       label: widget.semanticLabel,
-      excludeSemantics: widget.excludeChildSemantics,
       onTap: interactive && widget.onTap != null ? _handleTap : null,
       onLongPress: interactive && widget.onLongPress != null ? _handleLongPress : null,
       child: FocusableActionDetector(
@@ -137,17 +162,24 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
         autofocus: widget.autofocus,
         actions: _actions,
         mouseCursor: interactive ? SystemMouseCursors.click : MouseCursor.defer,
-        onShowFocusHighlight: (v) => setState(() => _focused = v),
-        child: GestureDetector(
-          behavior: widget.behavior,
-          excludeFromSemantics: true,
-          onTapDown: interactive ? (_) => _setPressed(true) : null,
-          onTapUp: interactive ? (_) => _setPressed(false) : null,
-          onTapCancel: interactive ? () => _setPressed(false) : null,
-          onTap: interactive && widget.onTap != null ? _handleTap : null,
-          onLongPress: interactive && widget.onLongPress != null ? _handleLongPress : null,
-          dragStartBehavior: DragStartBehavior.down,
-          child: child,
+        onShowFocusHighlight: (v) {
+          if (mounted) setState(() => _focused = v);
+        },
+        // Excluded below the focus detector so focusability still merges
+        // into this node.
+        child: ExcludeSemantics(
+          excluding: widget.excludeChildSemantics,
+          child: GestureDetector(
+            behavior: widget.behavior,
+            excludeFromSemantics: true,
+            onTapDown: interactive ? (_) => _setPressed(true) : null,
+            onTapUp: interactive ? (_) => _setPressed(false) : null,
+            onTapCancel: interactive ? () => _setPressed(false) : null,
+            onTap: interactive && widget.onTap != null ? _handleTap : null,
+            onLongPress: interactive && widget.onLongPress != null ? _handleLongPress : null,
+            dragStartBehavior: DragStartBehavior.down,
+            child: child,
+          ),
         ),
       ),
     );
@@ -156,19 +188,22 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
 
 /// Keyboard focus indication (hardware keyboards / accessibility switches).
 class _FocusRing extends StatelessWidget {
-  const _FocusRing({required this.child, this.radius});
+  const _FocusRing({required this.child, required this.visible, this.radius});
 
   final Widget child;
+  final bool visible;
   final BorderRadius? radius;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       position: DecorationPosition.foreground,
-      decoration: BoxDecoration(
-        borderRadius: radius ?? BorderRadius.circular(999),
-        border: Border.all(color: context.tokens.accent, width: 1.5),
-      ),
+      decoration: visible
+          ? BoxDecoration(
+              borderRadius: radius ?? BorderRadius.circular(999),
+              border: Border.all(color: context.tokens.accent, width: 1.5),
+            )
+          : const BoxDecoration(),
       child: child,
     );
   }

@@ -13,16 +13,16 @@ import 'package:madar/features/gallery/design_gallery_screen.dart';
 import '../../helpers/screenshot_harness.dart';
 
 Widget _gallery(MadarThemeId theme, Locale locale) => madarScreenshotApp(
-      theme: theme,
-      locale: locale,
-      home: DesignGalleryScreen(initialTheme: theme),
-    );
+  theme: theme,
+  locale: locale,
+  home: DesignGalleryScreen(initialTheme: theme),
+);
 
 Future<void> Function(WidgetTester) _scrollTo(double offset) => (tester) async {
-      final scrollable = tester.state<ScrollableState>(find.byType(Scrollable).first);
-      scrollable.position.jumpTo(offset);
-      await tester.pump();
-    };
+  final scrollable = tester.state<ScrollableState>(find.byType(Scrollable).first);
+  scrollable.position.jumpTo(offset);
+  await tester.pump();
+};
 
 void main() {
   const ar = Locale('ar');

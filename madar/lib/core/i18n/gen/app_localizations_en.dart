@@ -528,4 +528,464 @@ class L10nEn extends L10n {
 
   @override
   String get dbErrorUnknown => 'Something went wrong while saving your data.';
+
+  @override
+  String get soundProfileLapis => 'Crystal bells';
+
+  @override
+  String get soundProfileEmerald => 'Warm wood';
+
+  @override
+  String get soundProfileDesert => 'Oud & frame drum';
+
+  @override
+  String get soundProfileAurora => 'Aurora shimmer';
+
+  @override
+  String get soundProfilePearl => 'Pearl chimes';
+
+  @override
+  String get soundProfileLapisDescription => 'Clear glass bells in maqam Rast';
+
+  @override
+  String get soundProfileEmeraldDescription =>
+      'Kalimba and warm wood in maqam Bayati';
+
+  @override
+  String get soundProfileDesertDescription =>
+      'Oud plucks and a soft frame drum in maqam Hijaz';
+
+  @override
+  String get soundProfileAuroraDescription =>
+      'An airy, shimmering glow in maqam \'Ajam';
+
+  @override
+  String get soundProfilePearlDescription =>
+      'Delicate crystal chimes in maqam Nahawand';
+
+  @override
+  String get soundCategoryUi => 'Interface sounds';
+
+  @override
+  String get soundCategoryAmbient => 'Cosmic ambience';
+
+  @override
+  String get soundCategoryGames => 'Games';
+
+  @override
+  String get soundCategoryPrayer => 'Adhan & prayer';
+
+  @override
+  String get soundPrayerMuteNote =>
+      'Ambience and games fall silent during the adhan and prayer; soft interface sounds remain.';
+
+  @override
+  String get soundPreview => 'Preview';
+
+  @override
+  String get soundUnavailable => 'Audio isn\'t available on this device';
+
+  @override
+  String get interactionMenuLabel => 'Item options';
+
+  @override
+  String get interactionMenuDismiss => 'Close menu';
+
+  @override
+  String get interactionQuickActions => 'Quick actions';
+
+  @override
+  String get interactionSwipeToComplete => 'Swipe right to complete';
+
+  @override
+  String get interactionReorderHandle => 'Drag to reorder';
+
+  @override
+  String interactionUndoAvailable(int seconds) {
+    String _temp0 = intl.Intl.pluralLogic(
+      seconds,
+      locale: localeName,
+      other: 'Undo available for $seconds seconds',
+      one: 'Undo available for 1 second',
+      zero: 'Undo expired',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get interactionUndone => 'Undone';
+
+  @override
+  String get interactionSheetGrabber => 'Drag down to close';
+
+  @override
+  String get interactionDiscardTitle => 'Discard changes?';
+
+  @override
+  String get interactionDiscardBody => 'Your changes haven\'t been saved.';
+
+  @override
+  String get interactionDiscardConfirm => 'Discard';
+
+  @override
+  String get interactionKeepEditing => 'Keep editing';
+
+  @override
+  String get interactionSaveDisabledHint =>
+      'Complete the required fields first';
+
+  @override
+  String get interactionFieldOptional => 'Optional';
+
+  @override
+  String interactionFieldMin(String min) {
+    return 'At least $min';
+  }
+
+  @override
+  String interactionFieldMax(String max) {
+    return 'At most $max';
+  }
+
+  @override
+  String interactionFieldDecimals(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Up to $count decimal places',
+      one: 'Up to 1 decimal place',
+      zero: 'Whole numbers only',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String interactionFieldTooLong(int max) {
+    return 'Keep it under $max characters';
+  }
+
+  @override
+  String interactionFieldSelectAtLeast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Pick at least $count',
+      one: 'Pick at least one',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String interactionFieldSelectAtMost(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Pick up to $count',
+      one: 'Pick only one',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get interactionFieldDateRange => 'That date is out of range';
+
+  @override
+  String get interactionFieldPickDate => 'Pick a date';
+
+  @override
+  String get interactionFieldPickTime => 'Pick a time';
+
+  @override
+  String get interactionFieldClear => 'Clear';
+
+  @override
+  String get interactionFieldAddTime => 'Add time';
+
+  @override
+  String get interactionFieldTimeExists => 'That time is already added';
+
+  @override
+  String get interactionFieldAddOption => 'New option';
+
+  @override
+  String get interactionFieldAddOptionHint => 'Type it, then tap Add';
+
+  @override
+  String interactionFieldRemove(String label) {
+    return 'Remove $label';
+  }
+
+  @override
+  String interactionFieldRating(int count, int max) {
+    return '$count of $max';
+  }
+
+  @override
+  String get interactionFieldIncrease => 'Increase';
+
+  @override
+  String get interactionFieldDecrease => 'Decrease';
+
+  @override
+  String interactionFieldColor(int index) {
+    return 'Colour $index';
+  }
+
+  @override
+  String get interactionFieldAmount => 'Amount';
+
+  @override
+  String get interactionFieldCurrency => 'Currency';
+
+  @override
+  String get interactionTimeHour => 'Hour';
+
+  @override
+  String get interactionTimeMinute => 'Minute';
+
+  @override
+  String get interactionDateToday => 'Today';
+
+  @override
+  String get interactionDateTomorrow => 'Tomorrow';
+
+  @override
+  String get interactionDateDayAfter => 'Day after tomorrow';
+
+  @override
+  String get interactionDateYesterday => 'Yesterday';
+
+  @override
+  String get interactionCurrencyJOD => 'Jordanian dinar';
+
+  @override
+  String get interactionCurrencyUSD => 'US dollar';
+
+  @override
+  String get interactionCurrencySYP => 'Syrian pound';
+
+  @override
+  String get interactionCurrencyEGP => 'Egyptian pound';
+
+  @override
+  String get interactionCurrencyLYD => 'Libyan dinar';
+
+  @override
+  String get interactionCurrencySymbolJOD => 'JD';
+
+  @override
+  String get interactionCurrencySymbolUSD => '\$';
+
+  @override
+  String get interactionCurrencySymbolSYP => 'SYP';
+
+  @override
+  String get interactionCurrencySymbolEGP => 'EGP';
+
+  @override
+  String get interactionCurrencySymbolLYD => 'LYD';
+
+  @override
+  String get interactionMoveSearch => 'Find a destination';
+
+  @override
+  String get interactionMoveCurrent => 'Current';
+
+  @override
+  String get interactionMoveEmpty => 'No destination matches';
+
+  @override
+  String get interactionReminderTitle => 'When should I remind you?';
+
+  @override
+  String get interactionReminderKindOnce => 'Once';
+
+  @override
+  String get interactionReminderKindDaily => 'Daily';
+
+  @override
+  String get interactionReminderKindWeekly => 'Weekly';
+
+  @override
+  String get interactionReminderKindPrayer => 'With prayer';
+
+  @override
+  String get interactionReminderKindBeforeDue => 'Before due';
+
+  @override
+  String get interactionReminderDate => 'Day';
+
+  @override
+  String get interactionReminderTime => 'Time';
+
+  @override
+  String get interactionReminderDays => 'Days';
+
+  @override
+  String get interactionReminderPrayer => 'Prayer';
+
+  @override
+  String get interactionReminderOffset => 'Timing around the prayer';
+
+  @override
+  String get interactionReminderLead => 'Remind me';
+
+  @override
+  String get interactionReminderPast =>
+      'That time has passed – pick a later one';
+
+  @override
+  String get interactionReminderNoDays => 'Pick at least one day';
+
+  @override
+  String interactionReminderPrayerAt(String prayer) {
+    return 'At $prayer';
+  }
+
+  @override
+  String interactionReminderPrayerAfter(String prayer, String duration) {
+    return '$duration after $prayer';
+  }
+
+  @override
+  String interactionReminderPrayerBefore(String prayer, String duration) {
+    return '$duration before $prayer';
+  }
+
+  @override
+  String interactionReminderBefore(String duration) {
+    return '$duration before';
+  }
+
+  @override
+  String interactionReminderDaily(String time) {
+    return 'Every day at $time';
+  }
+
+  @override
+  String interactionReminderOnce(String date, String time) {
+    return '$date at $time';
+  }
+
+  @override
+  String interactionDurationMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String interactionDurationHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hours',
+      one: '1 hour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String interactionDurationDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String interactionDurationWeeks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count weeks',
+      one: '1 week',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get interactionWeekdayMon => 'Mon';
+
+  @override
+  String get interactionWeekdayTue => 'Tue';
+
+  @override
+  String get interactionWeekdayWed => 'Wed';
+
+  @override
+  String get interactionWeekdayThu => 'Thu';
+
+  @override
+  String get interactionWeekdayFri => 'Fri';
+
+  @override
+  String get interactionWeekdaySat => 'Sat';
+
+  @override
+  String get interactionWeekdaySun => 'Sun';
+
+  @override
+  String get interactionQuickAddHint => 'Type anything… “spent 5 JD on coffee”';
+
+  @override
+  String get interactionQuickAddLabel => 'Quick add';
+
+  @override
+  String get interactionQuickAddUnavailable => 'Quick add isn\'t ready yet';
+
+  @override
+  String get interactionQuickAddFailed => 'Couldn\'t add that – try again';
+
+  @override
+  String get interactionQuickAddEmpty => 'Type something first';
+
+  @override
+  String get interactionQuickAddAdded => 'Added to its orbit';
+
+  @override
+  String interactionQuickAddAt(String time) {
+    return 'at $time';
+  }
+
+  @override
+  String interactionQuickAddMl(String ml) {
+    return '$ml ml';
+  }
+
+  @override
+  String interactionQuickAddScore(String score, int max) {
+    return '$score/$max';
+  }
+
+  @override
+  String get interactionKindTask => 'Task';
+
+  @override
+  String get interactionKindExpense => 'Expense';
+
+  @override
+  String get interactionKindIncome => 'Income';
+
+  @override
+  String get interactionKindWater => 'Water';
+
+  @override
+  String get interactionKindPain => 'Pain';
+
+  @override
+  String get interactionKindMood => 'Mood';
+
+  @override
+  String get interactionKindContact => 'Contact';
+
+  @override
+  String get interactionKindNote => 'Note';
 }

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,6 +9,7 @@ import '../../motion/motion.dart';
 import '../../sound/sound_api.dart';
 import '../painters/islamic_star_painter.dart';
 import '../tokens.dart';
+import 'glass.dart';
 
 /// Madar's toggle: a glass track that floods with glowing accent when on,
 /// and a pearl thumb engraved with an eight-point star that turns as it
@@ -35,6 +37,13 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
   late final AnimationController _pos = AnimationController.unbounded(vsync: this, value: widget.value ? 1 : 0);
   late final AnimationController _press = AnimationController(vsync: this, duration: MadarMotion.micro);
   bool _dragging = false;
+  bool _reduced = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _reduced = context.reducedMotion;
+  }
 
   static const _travel = 22.0;
 
@@ -48,7 +57,7 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
 
   void _animateTo(bool on, {double velocity = 0}) {
     final target = on ? 1.0 : 0.0;
-    if (context.reducedMotion) {
+    if (_reduced) {
       _pos.value = target;
       return;
     }
@@ -112,14 +121,18 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
         enabled: _enabled,
         mouseCursor: _enabled ? SystemMouseCursors.click : MouseCursor.defer,
         actions: {
-          ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {
-            _request(!widget.value);
-            return null;
-          }),
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              _request(!widget.value);
+              return null;
+            },
+          ),
         },
         child: GestureDetector(
           excludeFromSemantics: true,
           behavior: HitTestBehavior.opaque,
+          // Track the finger from first contact (includes the touch slop).
+          dragStartBehavior: DragStartBehavior.down,
           onTapDown: _enabled ? (_) => _press.forward() : null,
           onTapCancel: _enabled ? () => _press.reverse() : null,
           onTapUp: _enabled ? (_) => _press.reverse() : null,
@@ -190,12 +203,7 @@ class MadarSwitchPainter extends CustomPainter {
 
     // Glow when on.
     if (p > 0) {
-      canvas.drawRRect(
-        rrect,
-        Paint()
-          ..color = accentGlow.withValues(alpha: accentGlow.a * 0.7 * p)
-          ..maskFilter = const MaskFilter.blur(BlurStyle.outer, 9),
-      );
+      paintOuterGlow(canvas, rrect, accentGlow.withValues(alpha: accentGlow.a * 0.7 * p), 8);
     }
     // Track: glass → accent flood.
     canvas.drawRRect(rrect, Paint()..color = track);
@@ -214,7 +222,12 @@ class MadarSwitchPainter extends CustomPainter {
     canvas.drawRRect(
       rrect,
       Paint()
-        ..shader = ui.Gradient.linear(rect.topCenter, rect.bottomCenter, [shadow.withValues(alpha: shadow.a * 0.35), shadow.withValues(alpha: 0)], const [0, 0.5]),
+        ..shader = ui.Gradient.linear(
+          rect.topCenter,
+          rect.bottomCenter,
+          [shadow.withValues(alpha: shadow.a * 0.35), shadow.withValues(alpha: 0)],
+          const [0, 0.5],
+        ),
     );
     canvas.drawRRect(
       rrect.deflate(0.5),
@@ -254,14 +267,18 @@ class MadarSwitchPainter extends CustomPainter {
     canvas.drawRRect(
       thumb,
       Paint()
-        ..shader = ui.Gradient.radial(
-          thumbRect.center - Offset(r * 0.35, r * 0.4),
-          r * 1.6,
-          [Color.lerp(thumbColor, highlight, 0.35)!, thumbColor],
-        ),
+        ..shader = ui.Gradient.radial(thumbRect.center - Offset(r * 0.35, r * 0.4), r * 1.6, [
+          Color.lerp(thumbColor, highlight, 0.35)!,
+          thumbColor,
+        ]),
     );
     // Engraved star, turning 45° across the travel.
-    final star = IslamicGeometry.starPath(center: thumbRect.center, radius: r * 0.52, points: 8, rotation: p * math.pi / 4 * (rtl ? -1 : 1));
+    final star = IslamicGeometry.starPath(
+      center: thumbRect.center,
+      radius: r * 0.52,
+      points: 8,
+      rotation: p * math.pi / 4 * (rtl ? -1 : 1),
+    );
     canvas.drawPath(
       star,
       Paint()

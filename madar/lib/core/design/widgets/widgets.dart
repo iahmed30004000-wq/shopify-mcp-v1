@@ -2,6 +2,7 @@
 /// `import 'package:madar/core/design/widgets/widgets.dart';`
 library;
 
+export 'ambient_motion.dart';
 export 'cosmos_backdrop.dart';
 export 'empty_state.dart';
 export 'glass.dart';

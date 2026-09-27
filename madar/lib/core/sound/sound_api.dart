@@ -77,7 +77,9 @@ abstract class SoundService {
   double volumeOf(SoundCategory category);
   void setVolume(SoundCategory category, double value);
 
-  /// Mutes ambient + games (and UI) while the adhan plays or during prayer.
+  /// Mutes ambient + games while the adhan plays or during prayer. Soft UI
+  /// feedback stays audible by default (see `PrayerMutePolicy` in
+  /// soloud_sound_service.dart); the prayer bus itself is never muted.
   void setPrayerMute(bool muted);
   bool get prayerMuted;
 
@@ -151,4 +153,13 @@ abstract final class Fx {
 
   static void fire(Sfx sfx, {double volume = 1.0, double pitch = 1.0, Haptic? haptic}) =>
       _instance?.fire(sfx, volume: volume, pitch: pitch, haptic: haptic);
+}
+
+/// Optional capability of a [SoundService] (additive to the contract): react
+/// to the app moving between foreground and background – e.g. pause the
+/// ambient bed while hidden and pre-warm the output device on return so the
+/// first tap is instant. `SoundSettingsSync` drives it from the app
+/// lifecycle; services that don't implement it are simply not notified.
+abstract interface class SoundLifecycleAware {
+  void onAppLifecycleChanged({required bool foreground});
 }

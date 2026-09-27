@@ -366,5 +366,348 @@
   "dbErrorUnknown": "Something went wrong while saving your data.",
   "@dbErrorUnknown": {
     "description": "Fallback database error"
-  }
+  },
+  "soundProfileLapis": "Crystal bells",
+  "@soundProfileLapis": {
+    "description": "Name of the Lapis sound profile (glass bells)"
+  },
+  "soundProfileEmerald": "Warm wood",
+  "@soundProfileEmerald": {
+    "description": "Name of the Emerald sound profile (wood and kalimba)"
+  },
+  "soundProfileDesert": "Oud & frame drum",
+  "@soundProfileDesert": {
+    "description": "Name of the Desert sound profile"
+  },
+  "soundProfileAurora": "Aurora shimmer",
+  "@soundProfileAurora": {
+    "description": "Name of the Aurora sound profile (airy synth)"
+  },
+  "soundProfilePearl": "Pearl chimes",
+  "@soundProfilePearl": {
+    "description": "Name of the Pearl sound profile (delicate crystal pings)"
+  },
+  "soundProfileLapisDescription": "Clear glass bells in maqam Rast",
+  "soundProfileEmeraldDescription": "Kalimba and warm wood in maqam Bayati",
+  "soundProfileDesertDescription": "Oud plucks and a soft frame drum in maqam Hijaz",
+  "soundProfileAuroraDescription": "An airy, shimmering glow in maqam 'Ajam",
+  "soundProfilePearlDescription": "Delicate crystal chimes in maqam Nahawand",
+  "soundCategoryUi": "Interface sounds",
+  "@soundCategoryUi": {
+    "description": "Volume slider: taps, toggles, sheets"
+  },
+  "soundCategoryAmbient": "Cosmic ambience",
+  "@soundCategoryAmbient": {
+    "description": "Volume slider: deep-space ambient soundscape"
+  },
+  "soundCategoryGames": "Games",
+  "@soundCategoryGames": {
+    "description": "Volume slider: games music and effects"
+  },
+  "soundCategoryPrayer": "Adhan & prayer",
+  "@soundCategoryPrayer": {
+    "description": "Volume slider: adhan and prayer sounds"
+  },
+  "soundPrayerMuteNote": "Ambience and games fall silent during the adhan and prayer; soft interface sounds remain.",
+  "soundPreview": "Preview",
+  "@soundPreview": {
+    "description": "Button that plays a sample of a sound profile"
+  },
+  "soundUnavailable": "Audio isn't available on this device",
+  "interactionMenuLabel": "Item options",
+  "@interactionMenuLabel": {
+    "description": "Semantic label of the long-press context menu"
+  },
+  "interactionMenuDismiss": "Close menu",
+  "@interactionMenuDismiss": {
+    "description": "Barrier label of the context menu"
+  },
+  "interactionQuickActions": "Quick actions",
+  "@interactionQuickActions": {
+    "description": "Semantic action that reveals the swipe tray"
+  },
+  "interactionSwipeToComplete": "Swipe right to complete",
+  "@interactionSwipeToComplete": {
+    "description": "Accessibility hint on swipe-to-complete rows"
+  },
+  "interactionReorderHandle": "Drag to reorder",
+  "@interactionReorderHandle": {
+    "description": "Semantic label of a drag handle"
+  },
+  "interactionUndoAvailable": "{seconds, plural, =0{Undo expired} =1{Undo available for 1 second} other{Undo available for {seconds} seconds}}",
+  "@interactionUndoAvailable": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionUndone": "Undone",
+  "@interactionUndone": {
+    "description": "Announced after an undo"
+  },
+  "interactionSheetGrabber": "Drag down to close",
+  "interactionDiscardTitle": "Discard changes?",
+  "interactionDiscardBody": "Your changes haven't been saved.",
+  "interactionDiscardConfirm": "Discard",
+  "interactionKeepEditing": "Keep editing",
+  "interactionSaveDisabledHint": "Complete the required fields first",
+  "interactionFieldOptional": "Optional",
+  "interactionFieldMin": "At least {min}",
+  "@interactionFieldMin": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionFieldMax": "At most {max}",
+  "@interactionFieldMax": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionFieldDecimals": "{count, plural, =0{Whole numbers only} =1{Up to 1 decimal place} other{Up to {count} decimal places}}",
+  "@interactionFieldDecimals": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldTooLong": "Keep it under {max} characters",
+  "@interactionFieldTooLong": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldSelectAtLeast": "{count, plural, =1{Pick at least one} other{Pick at least {count}}}",
+  "@interactionFieldSelectAtLeast": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldSelectAtMost": "{count, plural, =1{Pick only one} other{Pick up to {count}}}",
+  "@interactionFieldSelectAtMost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldDateRange": "That date is out of range",
+  "interactionFieldPickDate": "Pick a date",
+  "interactionFieldPickTime": "Pick a time",
+  "interactionFieldClear": "Clear",
+  "interactionFieldAddTime": "Add time",
+  "interactionFieldTimeExists": "That time is already added",
+  "interactionFieldAddOption": "New option",
+  "interactionFieldAddOptionHint": "Type it, then tap Add",
+  "interactionFieldRemove": "Remove {label}",
+  "@interactionFieldRemove": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionFieldRating": "{count} of {max}",
+  "@interactionFieldRating": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldIncrease": "Increase",
+  "interactionFieldDecrease": "Decrease",
+  "interactionFieldColor": "Colour {index}",
+  "@interactionFieldColor": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldAmount": "Amount",
+  "interactionFieldCurrency": "Currency",
+  "interactionTimeHour": "Hour",
+  "interactionTimeMinute": "Minute",
+  "interactionDateToday": "Today",
+  "interactionDateTomorrow": "Tomorrow",
+  "interactionDateDayAfter": "Day after tomorrow",
+  "interactionDateYesterday": "Yesterday",
+  "interactionCurrencyJOD": "Jordanian dinar",
+  "interactionCurrencyUSD": "US dollar",
+  "interactionCurrencySYP": "Syrian pound",
+  "interactionCurrencyEGP": "Egyptian pound",
+  "interactionCurrencyLYD": "Libyan dinar",
+  "interactionCurrencySymbolJOD": "JD",
+  "interactionCurrencySymbolUSD": "$",
+  "interactionCurrencySymbolSYP": "SYP",
+  "interactionCurrencySymbolEGP": "EGP",
+  "interactionCurrencySymbolLYD": "LYD",
+  "interactionMoveSearch": "Find a destination",
+  "interactionMoveCurrent": "Current",
+  "interactionMoveEmpty": "No destination matches",
+  "interactionReminderTitle": "When should I remind you?",
+  "interactionReminderKindOnce": "Once",
+  "interactionReminderKindDaily": "Daily",
+  "interactionReminderKindWeekly": "Weekly",
+  "interactionReminderKindPrayer": "With prayer",
+  "interactionReminderKindBeforeDue": "Before due",
+  "interactionReminderDate": "Day",
+  "interactionReminderTime": "Time",
+  "interactionReminderDays": "Days",
+  "interactionReminderPrayer": "Prayer",
+  "interactionReminderOffset": "Timing around the prayer",
+  "interactionReminderLead": "Remind me",
+  "interactionReminderPast": "That time has passed – pick a later one",
+  "interactionReminderNoDays": "Pick at least one day",
+  "interactionReminderPrayerAt": "At {prayer}",
+  "@interactionReminderPrayerAt": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderPrayerAfter": "{duration} after {prayer}",
+  "@interactionReminderPrayerAfter": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderPrayerBefore": "{duration} before {prayer}",
+  "@interactionReminderPrayerBefore": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderBefore": "{duration} before",
+  "@interactionReminderBefore": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderDaily": "Every day at {time}",
+  "@interactionReminderDaily": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderOnce": "{date} at {time}",
+  "@interactionReminderOnce": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionDurationMinutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+  "@interactionDurationMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionDurationHours": "{count, plural, =1{1 hour} other{{count} hours}}",
+  "@interactionDurationHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionDurationDays": "{count, plural, =1{1 day} other{{count} days}}",
+  "@interactionDurationDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionDurationWeeks": "{count, plural, =1{1 week} other{{count} weeks}}",
+  "@interactionDurationWeeks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionWeekdayMon": "Mon",
+  "interactionWeekdayTue": "Tue",
+  "interactionWeekdayWed": "Wed",
+  "interactionWeekdayThu": "Thu",
+  "interactionWeekdayFri": "Fri",
+  "interactionWeekdaySat": "Sat",
+  "interactionWeekdaySun": "Sun",
+  "interactionQuickAddHint": "Type anything… “spent 5 JD on coffee”",
+  "interactionQuickAddLabel": "Quick add",
+  "interactionQuickAddUnavailable": "Quick add isn't ready yet",
+  "interactionQuickAddFailed": "Couldn't add that – try again",
+  "interactionQuickAddEmpty": "Type something first",
+  "interactionQuickAddAdded": "Added to its orbit",
+  "interactionQuickAddAt": "at {time}",
+  "@interactionQuickAddAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionQuickAddMl": "{ml} ml",
+  "@interactionQuickAddMl": {
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionQuickAddScore": "{score}/{max}",
+  "@interactionQuickAddScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionKindTask": "Task",
+  "interactionKindExpense": "Expense",
+  "interactionKindIncome": "Income",
+  "interactionKindWater": "Water",
+  "interactionKindPain": "Pain",
+  "interactionKindMood": "Mood",
+  "interactionKindContact": "Contact",
+  "interactionKindNote": "Note"
 }

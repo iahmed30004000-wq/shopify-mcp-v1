@@ -69,6 +69,16 @@ class MadarButtonStyle {
     }
   }
 
+  /// Quiet, colourless recipe for a disabled button of any variant.
+  factory MadarButtonStyle.disabled(MadarTokens t, MadarButtonVariant variant) {
+    if (variant == MadarButtonVariant.ghost) return MadarButtonStyle(foreground: t.textTertiary);
+    return MadarButtonStyle(
+      foreground: t.textTertiary,
+      fill: Color.alphaBlend(t.glassFill, t.space2.withValues(alpha: t.isDark ? 0.35 : 0.3)),
+      border: t.glassBorder.withValues(alpha: t.glassBorder.a * 0.6),
+    );
+  }
+
   final Color foreground;
   final List<Color>? gradient;
   final Color? fill;
@@ -107,9 +117,9 @@ class MadarButton extends StatefulWidget {
     this.size = MadarButtonSize.medium,
     this.loading = false,
     this.sfx = Sfx.tap,
-  })  : label = null,
-        trailingIcon = null,
-        expand = false;
+  }) : label = null,
+       trailingIcon = null,
+       expand = false;
 
   final String? label;
   final VoidCallback? onPressed;
@@ -128,10 +138,10 @@ class MadarButton extends StatefulWidget {
   bool get enabled => onPressed != null && !loading;
 
   static double heightFor(MadarButtonSize size) => switch (size) {
-        MadarButtonSize.small => 36,
-        MadarButtonSize.medium => 48,
-        MadarButtonSize.large => 56,
-      };
+    MadarButtonSize.small => 36,
+    MadarButtonSize.medium => 48,
+    MadarButtonSize.large => 56,
+  };
 
   @override
   State<MadarButton> createState() => _MadarButtonState();
@@ -144,7 +154,9 @@ class _MadarButtonState extends State<MadarButton> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final theme = Theme.of(context).textTheme;
-    final style = MadarButtonStyle.of(t, widget.variant);
+    final style = widget.onPressed == null
+        ? MadarButtonStyle.disabled(t, widget.variant)
+        : MadarButtonStyle.of(t, widget.variant);
     final h = MadarButton.heightFor(widget.size);
     final iconSize = switch (widget.size) {
       MadarButtonSize.small => 17.0,
@@ -155,8 +167,7 @@ class _MadarButtonState extends State<MadarButton> {
       MadarButtonSize.small => theme.labelMedium,
       MadarButtonSize.medium => theme.labelLarge,
       MadarButtonSize.large => theme.titleMedium,
-    })!
-        .copyWith(color: style.foreground, fontWeight: FontWeight.w600, height: 1.2);
+    })!.copyWith(color: style.foreground, fontWeight: FontWeight.w600, height: 1.2);
     final duration = context.motion(MadarMotion.short);
 
     Widget content;
@@ -193,8 +204,7 @@ class _MadarButtonState extends State<MadarButton> {
       alignment: Alignment.center,
       children: [
         AnimatedOpacity(opacity: widget.loading ? 0 : 1, duration: duration, child: content),
-        if (widget.loading)
-          OrbitLoader(size: h * 0.62, color: loaderColor, secondaryColor: loaderColor),
+        if (widget.loading) OrbitLoader(size: h * 0.62, color: loaderColor, secondaryColor: loaderColor),
       ],
     );
 
@@ -213,13 +223,14 @@ class _MadarButtonState extends State<MadarButton> {
       width: widget.isIconOnly ? h : (widget.expand ? double.infinity : null),
       constraints: widget.isIconOnly ? null : BoxConstraints(minWidth: h * 1.8),
       padding: widget.isIconOnly ? EdgeInsets.zero : EdgeInsetsDirectional.symmetric(horizontal: hPad),
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: radius,
         color: _pressed && style.pressedFill != null
             ? Color.alphaBlend(style.pressedFill!, style.fill ?? Colors.transparent)
             : style.fill,
-        gradient: style.gradient == null ? null : LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: style.gradient!),
+        gradient: style.gradient == null
+            ? null
+            : LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: style.gradient!),
         boxShadow: glow == null || !widget.enabled
             ? null
             : [
@@ -231,7 +242,8 @@ class _MadarButtonState extends State<MadarButton> {
                 ),
               ],
       ),
-      child: content,
+      // widthFactor 1: hug the label (a Container alignment would stretch).
+      child: Center(widthFactor: widget.expand ? null : 1, child: content),
     );
 
     final border = style.border;
@@ -239,8 +251,8 @@ class _MadarButtonState extends State<MadarButton> {
       surface = CustomPaint(
         foregroundPainter: GlassBorderPainter(
           radius: radius,
-          highlight: widget.variant == MadarButtonVariant.primary ? t.glassHighlight : Color.lerp(border, t.glassHighlight, 0.6)!,
-          border: widget.variant == MadarButtonVariant.primary ? border.withValues(alpha: 0) : border,
+          highlight: style.gradient != null ? t.glassHighlight : Color.lerp(border, t.glassHighlight, 0.6)!,
+          border: style.gradient != null ? border.withValues(alpha: 0) : border,
           direction: Directionality.of(context),
         ),
         child: surface,
@@ -255,12 +267,10 @@ class _MadarButtonState extends State<MadarButton> {
       semanticLabel: widget.loading && loadingLabel != null ? '${semantic ?? ''} ($loadingLabel)' : semantic,
       excludeChildSemantics: true,
       focusRadius: radius,
-      onPressedChanged: (v) => setState(() => _pressed = v),
-      child: AnimatedOpacity(
-        opacity: widget.onPressed == null ? 0.42 : 1,
-        duration: duration,
-        child: surface,
-      ),
+      onPressedChanged: (v) {
+        if (mounted) setState(() => _pressed = v);
+      },
+      child: AnimatedOpacity(opacity: widget.onPressed == null ? 0.72 : 1, duration: duration, child: surface),
     );
     if (widget.isIconOnly && widget.semanticLabel != null) {
       surface = Tooltip(message: widget.semanticLabel!, excludeFromSemantics: true, child: surface);

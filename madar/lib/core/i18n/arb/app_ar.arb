@@ -366,5 +366,348 @@
   "dbErrorUnknown": "حدث خطأ غير متوقّع في حفظ البيانات.",
   "@dbErrorUnknown": {
     "description": "Fallback database error"
-  }
+  },
+  "soundProfileLapis": "أجراسٌ بلّورية",
+  "@soundProfileLapis": {
+    "description": "Name of the Lapis sound profile (glass bells)"
+  },
+  "soundProfileEmerald": "خشبٌ دافئ",
+  "@soundProfileEmerald": {
+    "description": "Name of the Emerald sound profile (wood and kalimba)"
+  },
+  "soundProfileDesert": "عودٌ ودفّ",
+  "@soundProfileDesert": {
+    "description": "Name of the Desert sound profile"
+  },
+  "soundProfileAurora": "وميض الشفق",
+  "@soundProfileAurora": {
+    "description": "Name of the Aurora sound profile (airy synth)"
+  },
+  "soundProfilePearl": "رنين اللؤلؤ",
+  "@soundProfilePearl": {
+    "description": "Name of the Pearl sound profile (delicate crystal pings)"
+  },
+  "soundProfileLapisDescription": "أجراسٌ زجاجية صافية على مقام الراست",
+  "soundProfileEmeraldDescription": "كاليمبا وخشبٌ دافئ على مقام البياتي",
+  "soundProfileDesertDescription": "نقراتُ عودٍ ودفٌّ هادئ على مقام الحجاز",
+  "soundProfileAuroraDescription": "بريقٌ سماويّ هادئ على مقام العجم",
+  "soundProfilePearlDescription": "رنينٌ بلّوريّ رقيق على مقام النهاوند",
+  "soundCategoryUi": "أصوات الواجهة",
+  "@soundCategoryUi": {
+    "description": "Volume slider: taps, toggles, sheets"
+  },
+  "soundCategoryAmbient": "أجواء الفضاء",
+  "@soundCategoryAmbient": {
+    "description": "Volume slider: deep-space ambient soundscape"
+  },
+  "soundCategoryGames": "الألعاب",
+  "@soundCategoryGames": {
+    "description": "Volume slider: games music and effects"
+  },
+  "soundCategoryPrayer": "الأذان والصلاة",
+  "@soundCategoryPrayer": {
+    "description": "Volume slider: adhan and prayer sounds"
+  },
+  "soundPrayerMuteNote": "تهدأ الأجواء والألعاب وقت الأذان والصلاة، وتبقى أصوات الواجهة الخافتة.",
+  "soundPreview": "استمع",
+  "@soundPreview": {
+    "description": "Button that plays a sample of a sound profile"
+  },
+  "soundUnavailable": "الصوت غير متاح على هذا الجهاز",
+  "interactionMenuLabel": "خيارات العنصر",
+  "@interactionMenuLabel": {
+    "description": "Semantic label of the long-press context menu"
+  },
+  "interactionMenuDismiss": "إغلاق القائمة",
+  "@interactionMenuDismiss": {
+    "description": "Barrier label of the context menu"
+  },
+  "interactionQuickActions": "إجراءات سريعة",
+  "@interactionQuickActions": {
+    "description": "Semantic action that reveals the swipe tray"
+  },
+  "interactionSwipeToComplete": "اسحب نحو اليمين للإنجاز",
+  "@interactionSwipeToComplete": {
+    "description": "Accessibility hint on swipe-to-complete rows"
+  },
+  "interactionReorderHandle": "اسحب لإعادة الترتيب",
+  "@interactionReorderHandle": {
+    "description": "Semantic label of a drag handle"
+  },
+  "interactionUndoAvailable": "{seconds, plural, =0{انتهت مهلة التراجع} =1{يمكنك التراجع خلال ثانية واحدة} =2{يمكنك التراجع خلال ثانيتين} few{يمكنك التراجع خلال {seconds} ثوانٍ} many{يمكنك التراجع خلال {seconds} ثانية} other{يمكنك التراجع خلال {seconds} ثانية}}",
+  "@interactionUndoAvailable": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionUndone": "تمّ التراجع",
+  "@interactionUndone": {
+    "description": "Announced after an undo"
+  },
+  "interactionSheetGrabber": "اسحب للأسفل للإغلاق",
+  "interactionDiscardTitle": "تجاهُل التعديلات؟",
+  "interactionDiscardBody": "لم تُحفَظ تعديلاتك بعد.",
+  "interactionDiscardConfirm": "تجاهُل",
+  "interactionKeepEditing": "متابعة التعديل",
+  "interactionSaveDisabledHint": "أكمل الحقول المطلوبة أولًا",
+  "interactionFieldOptional": "اختياري",
+  "interactionFieldMin": "لا يقلّ عن {min}",
+  "@interactionFieldMin": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionFieldMax": "لا يزيد على {max}",
+  "@interactionFieldMax": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionFieldDecimals": "{count, plural, =0{أدخل عددًا صحيحًا دون كسور} =1{منزلة عشرية واحدة كحدّ أقصى} =2{منزلتان عشريتان كحدّ أقصى} few{{count} منازل عشرية كحدّ أقصى} many{{count} منزلة عشرية كحدّ أقصى} other{{count} منزلة عشرية كحدّ أقصى}}",
+  "@interactionFieldDecimals": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldTooLong": "النص أطول من {max} حرفًا",
+  "@interactionFieldTooLong": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldSelectAtLeast": "{count, plural, =1{اختر خيارًا واحدًا على الأقل} =2{اختر خيارين على الأقل} few{اختر {count} خيارات على الأقل} many{اختر {count} خيارًا على الأقل} other{اختر {count} خيار على الأقل}}",
+  "@interactionFieldSelectAtLeast": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldSelectAtMost": "{count, plural, =1{اختر خيارًا واحدًا فقط} =2{خياران على الأكثر} few{{count} خيارات على الأكثر} many{{count} خيارًا على الأكثر} other{{count} خيار على الأكثر}}",
+  "@interactionFieldSelectAtMost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldDateRange": "التاريخ خارج النطاق المسموح",
+  "interactionFieldPickDate": "اختر تاريخًا",
+  "interactionFieldPickTime": "اختر وقتًا",
+  "interactionFieldClear": "مسح",
+  "interactionFieldAddTime": "إضافة وقت",
+  "interactionFieldTimeExists": "هذا الوقت مضاف مسبقًا",
+  "interactionFieldAddOption": "خيار جديد",
+  "interactionFieldAddOptionHint": "اكتب الخيار ثم اضغط إضافة",
+  "interactionFieldRemove": "إزالة {label}",
+  "@interactionFieldRemove": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionFieldRating": "{count} من {max}",
+  "@interactionFieldRating": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldIncrease": "زيادة",
+  "interactionFieldDecrease": "إنقاص",
+  "interactionFieldColor": "لون {index}",
+  "@interactionFieldColor": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionFieldAmount": "المبلغ",
+  "interactionFieldCurrency": "العملة",
+  "interactionTimeHour": "الساعة",
+  "interactionTimeMinute": "الدقيقة",
+  "interactionDateToday": "اليوم",
+  "interactionDateTomorrow": "غدًا",
+  "interactionDateDayAfter": "بعد غد",
+  "interactionDateYesterday": "أمس",
+  "interactionCurrencyJOD": "دينار أردني",
+  "interactionCurrencyUSD": "دولار أمريكي",
+  "interactionCurrencySYP": "ليرة سورية",
+  "interactionCurrencyEGP": "جنيه مصري",
+  "interactionCurrencyLYD": "دينار ليبي",
+  "interactionCurrencySymbolJOD": "د.أ",
+  "interactionCurrencySymbolUSD": "$",
+  "interactionCurrencySymbolSYP": "ل.س",
+  "interactionCurrencySymbolEGP": "ج.م",
+  "interactionCurrencySymbolLYD": "د.ل",
+  "interactionMoveSearch": "ابحث عن وجهة",
+  "interactionMoveCurrent": "الحالي",
+  "interactionMoveEmpty": "لا وجهة تطابق بحثك",
+  "interactionReminderTitle": "متى أذكّرك؟",
+  "interactionReminderKindOnce": "مرة واحدة",
+  "interactionReminderKindDaily": "يوميًا",
+  "interactionReminderKindWeekly": "أسبوعيًا",
+  "interactionReminderKindPrayer": "مع الصلاة",
+  "interactionReminderKindBeforeDue": "قبل الموعد",
+  "interactionReminderDate": "اليوم",
+  "interactionReminderTime": "الوقت",
+  "interactionReminderDays": "الأيام",
+  "interactionReminderPrayer": "الصلاة",
+  "interactionReminderOffset": "التوقيت حول الصلاة",
+  "interactionReminderLead": "قبل الموعد بـ",
+  "interactionReminderPast": "هذا الوقت مضى، اختر وقتًا قادمًا",
+  "interactionReminderNoDays": "اختر يومًا واحدًا على الأقل",
+  "interactionReminderPrayerAt": "عند {prayer}",
+  "@interactionReminderPrayerAt": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderPrayerAfter": "بعد {prayer} بـ{duration}",
+  "@interactionReminderPrayerAfter": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderPrayerBefore": "قبل {prayer} بـ{duration}",
+  "@interactionReminderPrayerBefore": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderBefore": "قبل {duration}",
+  "@interactionReminderBefore": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderDaily": "كل يوم الساعة {time}",
+  "@interactionReminderDaily": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderOnce": "{date} الساعة {time}",
+  "@interactionReminderOnce": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionDurationMinutes": "{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}",
+  "@interactionDurationMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionDurationHours": "{count, plural, =1{ساعة} =2{ساعتين} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}",
+  "@interactionDurationHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionDurationDays": "{count, plural, =1{يوم} =2{يومين} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@interactionDurationDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionDurationWeeks": "{count, plural, =1{أسبوع} =2{أسبوعين} few{{count} أسابيع} many{{count} أسبوعًا} other{{count} أسبوع}}",
+  "@interactionDurationWeeks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionWeekdayMon": "إثنين",
+  "interactionWeekdayTue": "ثلاثاء",
+  "interactionWeekdayWed": "أربعاء",
+  "interactionWeekdayThu": "خميس",
+  "interactionWeekdayFri": "جمعة",
+  "interactionWeekdaySat": "سبت",
+  "interactionWeekdaySun": "أحد",
+  "interactionQuickAddHint": "اكتب ما يدور في بالك… «صرفت ٥ دنانير قهوة»",
+  "interactionQuickAddLabel": "إضافة سريعة",
+  "interactionQuickAddUnavailable": "الإضافة السريعة ليست جاهزة بعد",
+  "interactionQuickAddFailed": "تعذّرت الإضافة، حاول مرة أخرى",
+  "interactionQuickAddEmpty": "اكتب شيئًا أولًا",
+  "interactionQuickAddAdded": "أُضيف إلى مداره",
+  "interactionQuickAddAt": "الساعة {time}",
+  "@interactionQuickAddAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionQuickAddMl": "{ml} مل",
+  "@interactionQuickAddMl": {
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionQuickAddScore": "{score} من {max}",
+  "@interactionQuickAddScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "interactionKindTask": "مهمة",
+  "interactionKindExpense": "مصروف",
+  "interactionKindIncome": "دخل",
+  "interactionKindWater": "ماء",
+  "interactionKindPain": "ألم",
+  "interactionKindMood": "مزاج",
+  "interactionKindContact": "تواصل",
+  "interactionKindNote": "ملاحظة"
 }

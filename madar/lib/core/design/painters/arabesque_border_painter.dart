@@ -69,73 +69,86 @@ class ArabesqueBorderPainter extends CustomPainter {
     final railGap = math.max(sw * 1.6, h * 0.09);
     if (rails) {
       for (final y in [inset, inset + railGap, h - inset, h - inset - railGap]) {
-        canvas.drawLine(Offset(0, y), Offset(size.width, y), railPaint..strokeWidth = y == inset || y == h - inset ? sw * 0.8 : sw * 0.45);
+        canvas.drawLine(
+          Offset(0, y),
+          Offset(size.width, y),
+          railPaint..strokeWidth = y == inset || y == h - inset ? sw * 0.8 : sw * 0.45,
+        );
       }
     }
 
-    final top = rails ? inset + railGap + sw * 1.2 : sw;
-    final bottom = rails ? h - inset - railGap - sw * 1.2 : h - sw;
+    final top = rails ? inset + railGap + sw * 1.4 : sw;
+    final bottom = rails ? h - inset - railGap - sw * 1.4 : h - sw;
     final cy = (top + bottom) / 2;
-    final amp = (bottom - top) / 2 * 0.62;
+    final amp = (bottom - top) / 2 * 0.7;
 
     final stem = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = sw
+      ..strokeWidth = sw * 1.15
       ..strokeCap = StrokeCap.round;
     final tendril = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = sw * 0.75
+      ..strokeWidth = sw * 0.8
       ..strokeCap = StrokeCap.round;
     final leaf = Paint()..color = leafColor ?? color;
 
+    Offset cubic(double x0, double s, double t) {
+      final u = 1 - t;
+      final x = x0 + tw * (3 * u * u * t * 0.28 + 3 * u * t * t * 0.72 + t * t * t);
+      final y = cy - s * amp * 1.33 * (3 * u * u * t + 3 * u * t * t);
+      return Offset(x, y);
+    }
+
     final shift = (phase % 1) * tw * 2;
-    // Draw one extra period on the leading side so scrolling never shows a gap.
+    // Draw extra tiles on both sides so scrolling never shows a gap.
     for (var i = -2; i < count + 2; i++) {
       final x0 = i * tw + shift;
       if (x0 > size.width + tw || x0 + tw < -tw) continue;
       final s = i.isEven ? 1.0 : -1.0;
       // Stem hump (alternating up/down → continuous wave).
-      final path = Path()
-        ..moveTo(x0, cy)
-        ..cubicTo(x0 + tw * 0.28, cy - s * amp * 1.33, x0 + tw * 0.72, cy - s * amp * 1.33, x0 + tw, cy);
-      canvas.drawPath(path, stem);
+      canvas.drawPath(
+        Path()
+          ..moveTo(x0, cy)
+          ..cubicTo(x0 + tw * 0.28, cy - s * amp * 1.33, x0 + tw * 0.72, cy - s * amp * 1.33, x0 + tw, cy),
+        stem,
+      );
 
-      // Spiral tendril curling into the hump's concavity.
-      final start = Offset(x0 + tw * 0.3, cy - s * amp * 0.86);
-      final c1 = Offset(x0 + tw * 0.5, cy + s * amp * 0.1);
-      final r0 = amp * 0.62;
-      final spiral = Path()..moveTo(start.dx, start.dy);
-      spiral.quadraticBezierTo(x0 + tw * 0.34, cy + s * amp * 0.1, c1.dx - r0 * 0.1, c1.dy + s * r0 * 0.55);
-      _spiral(spiral, Offset(c1.dx + r0 * 0.12, c1.dy + s * r0 * 0.15), r0 * 0.45, s);
-      canvas.drawPath(spiral, tendril);
-      final budAt = Offset(c1.dx + r0 * 0.12, c1.dy + s * r0 * 0.15);
-      canvas.drawCircle(budAt, sw * 0.9, leaf);
+      // Rinceau scroll: peels off the rising stem, runs under the crest and
+      // curls inward into the hump's hollow, ending in a bud.
+      final p0 = cubic(x0, s, 0.2);
+      final r0 = amp * 0.84;
+      const theta0 = -1.9;
+      final c = p0 + Offset(-math.cos(theta0) * r0, -math.sin(theta0) * r0 * s);
+      final scroll = Path()..moveTo(p0.dx, p0.dy);
+      const steps = 36;
+      const turns = 1.3;
+      Offset end = p0;
+      for (var k = 1; k <= steps; k++) {
+        final u = k / steps;
+        final th = theta0 + u * turns * 2 * math.pi;
+        final r = r0 * (1 - 0.74 * u);
+        end = c + Offset(math.cos(th) * r, math.sin(th) * r * s);
+        scroll.lineTo(end.dx, end.dy);
+      }
+      canvas.drawPath(scroll, tendril);
+      canvas.drawCircle(end, sw * 1.05, leaf);
 
-      // Almond leaf springing forward from the descending side.
-      final base = Offset(x0 + tw * 0.74, cy - s * amp * 0.8);
-      final tip = Offset(x0 + tw * 0.98, cy - s * amp * 1.28);
-      canvas.drawPath(_almond(base, tip, amp * 0.34), leaf);
+      // Half-palmette springing from the descending stem toward the rail.
+      final base = cubic(x0, s, 0.7);
+      final tip = base + Offset(tw * 0.2, -s * amp * 0.95);
+      canvas.drawPath(_almond(base, tip, amp * 0.4), leaf);
+      // A smaller leaf on the other side of the stem.
+      final base2 = cubic(x0, s, 0.86);
+      final tip2 = base2 + Offset(tw * 0.1, s * amp * 0.62);
+      canvas.drawPath(_almond(base2, tip2, amp * 0.28), leaf);
 
-      // Tiny trefoil bud where the vine crosses the centre line.
+      // Trefoil bud where the vine crosses the centre line.
       final bud = Offset(x0, cy);
-      canvas.drawCircle(bud, sw * 0.7, leaf);
+      canvas.drawCircle(bud, sw * 0.95, leaf);
     }
     canvas.restore();
-  }
-
-  /// Appends a smooth inward spiral (1¼ turns) around [center].
-  static void _spiral(Path path, Offset center, double radius, double s) {
-    const steps = 28;
-    const turns = 1.25;
-    final startAngle = s > 0 ? math.pi * 0.95 : -math.pi * 0.95;
-    for (var i = 0; i <= steps; i++) {
-      final t = i / steps;
-      final a = startAngle - s * t * turns * 2 * math.pi;
-      final r = radius * (1 - 0.78 * t);
-      path.lineTo(center.dx + math.cos(a) * r, center.dy + math.sin(a) * r);
-    }
   }
 
   static Path _almond(Offset base, Offset tip, double width) {

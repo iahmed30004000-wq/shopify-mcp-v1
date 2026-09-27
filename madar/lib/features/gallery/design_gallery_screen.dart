@@ -121,16 +121,15 @@ class GalleryDemoState {
     bool? reduceMotion,
     bool? loading,
     double? ring,
-  }) =>
-      GalleryDemoState(
-        window: window ?? this.window,
-        planets: planets ?? this.planets,
-        sound: sound ?? this.sound,
-        haptics: haptics ?? this.haptics,
-        reduceMotion: reduceMotion ?? this.reduceMotion,
-        loading: loading ?? this.loading,
-        ring: ring ?? this.ring,
-      );
+  }) => GalleryDemoState(
+    window: window ?? this.window,
+    planets: planets ?? this.planets,
+    sound: sound ?? this.sound,
+    haptics: haptics ?? this.haptics,
+    reduceMotion: reduceMotion ?? this.reduceMotion,
+    loading: loading ?? this.loading,
+    ring: ring ?? this.ring,
+  );
 }
 
 /// Scroll padding shared by gallery sections.

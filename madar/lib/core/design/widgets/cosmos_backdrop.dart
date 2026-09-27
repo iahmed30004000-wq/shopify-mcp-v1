@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../motion/motion.dart';
 import '../tokens.dart';
+import 'ambient_motion.dart';
 import 'shader_cache.dart';
 
 /// Packs the uniforms of `shaders/cosmos_backdrop.frag` (pure, unit-tested).
@@ -55,13 +56,7 @@ abstract final class CosmosUniforms {
 /// [TickerMode] is off and renders one static frame under reduced motion.
 /// Falls back to a painted gradient while (or if) the shader is unavailable.
 class CosmosBackdrop extends StatefulWidget {
-  const CosmosBackdrop({
-    super.key,
-    this.intensity = 1,
-    this.animate = true,
-    this.seed = 0,
-    this.child,
-  });
+  const CosmosBackdrop({super.key, this.intensity = 1, this.animate = true, this.seed = 0, this.child});
 
   /// Nebula strength (0 = bare sky, 1 = default, up to 2).
   final double intensity;
@@ -92,13 +87,13 @@ class _CosmosBackdropState extends State<CosmosBackdrop> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
+    _shader = _program.value?.fragmentShader();
     _program.addListener(_onProgram);
-    _onProgram();
   }
 
   void _onProgram() {
     final program = _program.value;
-    if (program == null || _shader != null) return;
+    if (program == null || _shader != null || !mounted) return;
     setState(() => _shader = program.fragmentShader());
   }
 
@@ -114,7 +109,7 @@ class _CosmosBackdropState extends State<CosmosBackdrop> with SingleTickerProvid
     if (oldWidget.animate != widget.animate) _syncTicker();
   }
 
-  bool get _shouldAnimate => widget.animate && !context.reducedMotion;
+  bool get _shouldAnimate => widget.animate && AmbientMotion.enabled && !context.reducedMotion;
 
   void _syncTicker() {
     if (_shouldAnimate) {
@@ -188,13 +183,7 @@ class CosmosBackdropPainter extends CustomPainter {
     final rect = Offset.zero & size;
     final s = shader;
     if (s != null) {
-      final u = CosmosUniforms.pack(
-        size: size,
-        time: time.value,
-        tokens: tokens,
-        intensity: intensity,
-        seed: seed,
-      );
+      final u = CosmosUniforms.pack(size: size, time: time.value, tokens: tokens, intensity: intensity, seed: seed);
       for (var i = 0; i < u.length; i++) {
         s.setFloat(i, u[i]);
       }
@@ -221,11 +210,10 @@ class CosmosBackdropPainter extends CustomPainter {
         c,
         r,
         Paint()
-          ..shader = ui.Gradient.radial(
-            c,
-            r,
-            [color.withValues(alpha: alpha * intensity.clamp(0.0, 1.0)), color.withValues(alpha: 0)],
-          ),
+          ..shader = ui.Gradient.radial(c, r, [
+            color.withValues(alpha: alpha * intensity.clamp(0.0, 1.0)),
+            color.withValues(alpha: 0),
+          ]),
       );
     }
 

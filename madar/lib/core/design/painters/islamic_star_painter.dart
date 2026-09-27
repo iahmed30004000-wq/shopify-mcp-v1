@@ -47,37 +47,28 @@ abstract final class IslamicGeometry {
     int points = 8,
     double? innerRatio,
     double rotation = 0,
-  }) =>
-      polygon(starVertices(
-        center: center,
-        radius: radius,
-        points: points,
-        innerRatio: innerRatio ?? defaultInnerRatio(points),
-        rotation: rotation,
-      ));
+  }) => polygon(
+    starVertices(
+      center: center,
+      radius: radius,
+      points: points,
+      innerRatio: innerRatio ?? defaultInnerRatio(points),
+      rotation: rotation,
+    ),
+  );
 
   /// The two squares of the Rub el Hizb (۞), the second turned 45°.
-  static List<List<Offset>> rubElHizbSquares({
-    required Offset center,
-    required double radius,
-    double rotation = 0,
-  }) {
+  static List<List<Offset>> rubElHizbSquares({required Offset center, required double radius, double rotation = 0}) {
     List<Offset> square(double turn) => List<Offset>.generate(4, (i) {
-          final a = rotation + turn - math.pi / 2 + i * math.pi / 2;
-          return center + Offset(math.cos(a) * radius, math.sin(a) * radius);
-        }, growable: false);
+      final a = rotation + turn - math.pi / 2 + i * math.pi / 2;
+      return center + Offset(math.cos(a) * radius, math.sin(a) * radius);
+    }, growable: false);
     return [square(0), square(math.pi / 4)];
   }
 
   /// Union outline of the Rub el Hizb (an {8/2} octagram).
   static Path rubElHizbOutline({required Offset center, required double radius, double rotation = 0}) =>
-      starPath(
-        center: center,
-        radius: radius,
-        points: 8,
-        innerRatio: starPolygonInnerRatio(8, 2),
-        rotation: rotation,
-      );
+      starPath(center: center, radius: radius, points: 8, innerRatio: starPolygonInnerRatio(8, 2), rotation: rotation);
 }
 
 enum IslamicStarStyle {
@@ -133,17 +124,17 @@ class IslamicStarPainter extends CustomPainter {
     final radius = math.max(0.0, size.shortestSide / 2 - margin);
     final outline = switch (style) {
       IslamicStarStyle.star => IslamicGeometry.starPath(
-          center: center,
-          radius: radius,
-          points: points,
-          innerRatio: innerRatio,
-          rotation: rotation,
-        ),
+        center: center,
+        radius: radius,
+        points: points,
+        innerRatio: innerRatio,
+        rotation: rotation,
+      ),
       IslamicStarStyle.rubElHizb => IslamicGeometry.rubElHizbOutline(
-          center: center,
-          radius: radius,
-          rotation: rotation,
-        ),
+        center: center,
+        radius: radius,
+        rotation: rotation,
+      ),
     };
 
     final glow = glowColor;
@@ -159,10 +150,7 @@ class IslamicStarPainter extends CustomPainter {
     final gradient = fillGradient;
     if (gradient != null && gradient.length >= 2) {
       final bounds = Rect.fromCircle(center: center, radius: radius);
-      canvas.drawPath(
-        outline,
-        Paint()..shader = ui.Gradient.linear(bounds.topLeft, bounds.bottomRight, gradient),
-      );
+      canvas.drawPath(outline, Paint()..shader = ui.Gradient.linear(bounds.topLeft, bounds.bottomRight, gradient));
     } else if (fillColor != null) {
       canvas.drawPath(outline, Paint()..color = fillColor!);
     }

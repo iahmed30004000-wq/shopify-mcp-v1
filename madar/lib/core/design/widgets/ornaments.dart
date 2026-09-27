@@ -122,7 +122,14 @@ class ArabesqueBorder extends StatelessWidget {
 /// Brass astrolabe degree ring. Numerals use Arabic-Indic digits in Arabic
 /// locales unless [arabicIndic] says otherwise.
 class AstrolabeRing extends StatelessWidget {
-  const AstrolabeRing({super.key, this.size = 160, this.rotation = 0, this.showNumerals = true, this.arabicIndic, this.child});
+  const AstrolabeRing({
+    super.key,
+    this.size = 160,
+    this.rotation = 0,
+    this.showNumerals = true,
+    this.arabicIndic,
+    this.child,
+  });
 
   final double size;
   final double rotation;
@@ -146,7 +153,10 @@ class AstrolabeRing extends StatelessWidget {
           arabicIndic: arabic,
           fontFamily: MadarTypography.uiFamily,
         ),
-        child: SizedBox.square(dimension: size, child: child == null ? null : Center(child: child)),
+        child: SizedBox.square(
+          dimension: size,
+          child: child == null ? null : Center(child: child),
+        ),
       ),
     );
   }
@@ -249,7 +259,10 @@ class MadarDividerPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.9
       ..strokeJoin = StrokeJoin.miter;
-    canvas.drawPath(IslamicGeometry.rubElHizbOutline(center: center, radius: r), Paint()..color = color.withValues(alpha: color.a * 0.25));
+    canvas.drawPath(
+      IslamicGeometry.rubElHizbOutline(center: center, radius: r),
+      Paint()..color = color.withValues(alpha: color.a * 0.25),
+    );
     for (final sq in squares) {
       canvas.drawPath(IslamicGeometry.polygon(sq), stroke);
     }

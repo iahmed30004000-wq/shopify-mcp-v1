@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../motion/motion.dart';
 import '../../sound/sound_api.dart';
 import '../tokens.dart';
+import 'glass.dart';
 import 'pressable.dart';
 
 /// Pure selection rules for [ChoicePills] (unit-tested).
@@ -163,7 +164,13 @@ class _Dot extends StatelessWidget {
 
 /// Paints a chip pill at a given [selection] (0..1) blend.
 class ChipPainter extends CustomPainter {
-  const ChipPainter({required this.selection, required this.fill, required this.border, required this.accent, required this.highlight});
+  const ChipPainter({
+    required this.selection,
+    required this.fill,
+    required this.border,
+    required this.accent,
+    required this.highlight,
+  });
 
   final double selection;
   final Color fill;
@@ -177,21 +184,22 @@ class ChipPainter extends CustomPainter {
     final v = selection.clamp(0.0, 1.0);
     final rrect = RRect.fromRectAndRadius(Offset.zero & size, Radius.circular(size.height / 2));
     if (v > 0) {
-      canvas.drawRRect(
-        rrect,
-        Paint()
-          ..color = accent.withValues(alpha: 0.45 * v)
-          ..maskFilter = const MaskFilter.blur(BlurStyle.outer, 7),
-      );
+      paintOuterGlow(canvas, rrect, accent.withValues(alpha: 0.45 * v), 6);
     }
-    canvas.drawRRect(rrect, Paint()..color = Color.lerp(fill, Color.alphaBlend(accent.withValues(alpha: 0.22), fill), v)!);
+    canvas.drawRRect(
+      rrect,
+      Paint()..color = Color.lerp(fill, Color.alphaBlend(accent.withValues(alpha: 0.22), fill), v)!,
+    );
     canvas.drawRRect(
       rrect,
       Paint()
         ..shader = LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [highlight.withValues(alpha: highlight.a * (0.12 + 0.1 * v)), highlight.withValues(alpha: 0)],
+          colors: [
+            highlight.withValues(alpha: highlight.a * (0.12 + 0.1 * v)),
+            highlight.withValues(alpha: 0),
+          ],
           stops: const [0, 0.6],
         ).createShader(Offset.zero & size),
     );
@@ -242,12 +250,12 @@ class ChoicePills<T> extends StatelessWidget {
     this.runSpacing = Space.s,
     this.dense = false,
     this.padding = EdgeInsetsDirectional.zero,
-  })  : _onSingle = onChanged,
-        _selectedSet = null,
-        _onMulti = null,
-        minSelected = 0,
-        maxSelected = 1,
-        showCheck = false;
+  }) : _onSingle = onChanged,
+       _selectedSet = null,
+       _onMulti = null,
+       minSelected = 0,
+       maxSelected = 1,
+       showCheck = false;
 
   /// Any number of options (bounded by [minSelected]/[maxSelected]).
   const ChoicePills.multi({
@@ -263,11 +271,11 @@ class ChoicePills<T> extends StatelessWidget {
     this.runSpacing = Space.s,
     this.dense = false,
     this.padding = EdgeInsetsDirectional.zero,
-  })  : _selectedSet = selected,
-        _onMulti = onChanged,
-        _selected = null,
-        _onSingle = null,
-        allowDeselect = true;
+  }) : _selectedSet = selected,
+       _onMulti = onChanged,
+       _selected = null,
+       _onSingle = null,
+       allowDeselect = true;
 
   final List<ChoiceOption<T>> options;
   final bool allowDeselect;
@@ -333,10 +341,7 @@ class ChoicePills<T> extends StatelessWidget {
         clipBehavior: Clip.none,
         child: Row(
           children: [
-            for (var i = 0; i < chips.length; i++) ...[
-              if (i > 0) SizedBox(width: spacing),
-              chips[i],
-            ],
+            for (var i = 0; i < chips.length; i++) ...[if (i > 0) SizedBox(width: spacing), chips[i]],
           ],
         ),
       );

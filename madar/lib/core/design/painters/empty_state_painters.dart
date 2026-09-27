@@ -58,17 +58,14 @@ void _sparkle(Canvas canvas, Offset c, double r, Color color, {double glow = 0})
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, r * 1.4),
     );
   }
-  canvas.drawPath(
-    IslamicGeometry.starPath(center: c, radius: r, points: 4, innerRatio: 0.28),
-    Paint()..color = color,
-  );
+  canvas.drawPath(IslamicGeometry.starPath(center: c, radius: r, points: 4, innerRatio: 0.28), Paint()..color = color);
 }
 
 /// Base class: every illustration loops on [phase] (0..1) and repaints
 /// itself from the animation (no widget rebuilds).
 abstract class EmptyIllustrationPainter extends CustomPainter {
   EmptyIllustrationPainter({required this.phase, required this.colors, this.textDirection = TextDirection.rtl})
-      : super(repaint: phase);
+    : super(repaint: phase);
 
   final Animation<double> phase;
   final EmptyIllustrationColors colors;
@@ -107,7 +104,11 @@ class CrescentStarsPainter extends EmptyIllustrationPainter {
     canvas.drawCircle(
       c,
       r * 1.9,
-      Paint()..shader = ui.Gradient.radial(c, r * 1.9, [colors.glow.withValues(alpha: 0.32), colors.glow.withValues(alpha: 0)]),
+      Paint()
+        ..shader = ui.Gradient.radial(c, r * 1.9, [
+          colors.glow.withValues(alpha: 0.32),
+          colors.glow.withValues(alpha: 0),
+        ]),
     );
 
     // Orbit ellipse with a travelling moonlet.
@@ -131,11 +132,7 @@ class CrescentStarsPainter extends EmptyIllustrationPainter {
       canvas.save();
       canvas.translate(c.dx, c.dy);
       canvas.rotate(-0.21);
-      canvas.drawCircle(
-        moonlet,
-        s * 0.022,
-        Paint()..color = colors.star.withValues(alpha: behind ? 0.35 : 0.95),
-      );
+      canvas.drawCircle(moonlet, s * 0.022, Paint()..color = colors.star.withValues(alpha: behind ? 0.35 : 0.95));
       canvas.restore();
     }
 
@@ -157,8 +154,7 @@ class CrescentStarsPainter extends EmptyIllustrationPainter {
     );
     canvas.drawPath(
       crescent,
-      Paint()
-        ..shader = ui.Gradient.linear(Offset(-r, -r), Offset(r * 0.2, r), [colors.gold, colors.brass]),
+      Paint()..shader = ui.Gradient.linear(Offset(-r, -r), Offset(r * 0.2, r), [colors.gold, colors.brass]),
     );
     canvas.drawPath(
       crescent,
@@ -190,7 +186,13 @@ class CrescentStarsPainter extends EmptyIllustrationPainter {
       final local = (t * 2 + star.$4) % 1;
       final fade = math.sin(math.pi * local);
       final p = Offset(star.$1 * size.width, star.$2 * size.height) + Offset(-s * 0.05 * local, -s * 0.08 * local);
-      _sparkle(canvas, p, s * 0.028 * star.$3 * (0.7 + 0.3 * fade), colors.star.withValues(alpha: 0.9 * fade), glow: fade);
+      _sparkle(
+        canvas,
+        p,
+        s * 0.028 * star.$3 * (0.7 + 0.3 * fade),
+        colors.star.withValues(alpha: 0.9 * fade),
+        glow: fade,
+      );
     }
   }
 }
@@ -211,17 +213,20 @@ class AstrolabeNeedlePainter extends EmptyIllustrationPainter {
     canvas.drawCircle(
       c,
       r * 1.25,
-      Paint()..shader = ui.Gradient.radial(c, r * 1.25, [colors.glow.withValues(alpha: 0.22), colors.glow.withValues(alpha: 0)]),
+      Paint()
+        ..shader = ui.Gradient.radial(c, r * 1.25, [
+          colors.glow.withValues(alpha: 0.22),
+          colors.glow.withValues(alpha: 0),
+        ]),
     );
     canvas.drawCircle(
       c,
       r,
       Paint()
-        ..shader = ui.Gradient.radial(
-          c - Offset(r * 0.3, r * 0.35),
-          r * 1.4,
-          [colors.brass.withValues(alpha: 0.28), colors.brassDark.withValues(alpha: 0.18)],
-        ),
+        ..shader = ui.Gradient.radial(c - Offset(r * 0.3, r * 0.35), r * 1.4, [
+          colors.brass.withValues(alpha: 0.28),
+          colors.brassDark.withValues(alpha: 0.18),
+        ]),
     );
     // Throne (the hanging ring) at the top.
     final throne = c - Offset(0, r * 1.08);
@@ -264,11 +269,12 @@ class AstrolabeNeedlePainter extends EmptyIllustrationPainter {
       ..color = colors.gold.withValues(alpha: 0.75)
       ..style = PaintingStyle.stroke
       ..strokeWidth = math.max(0.6, r * 0.018);
-    canvas.drawPath(
-      IslamicGeometry.starPath(center: c, radius: r * 0.62, points: 8, rotation: reteRot),
-      rete,
+    canvas.drawPath(IslamicGeometry.starPath(center: c, radius: r * 0.62, points: 8, rotation: reteRot), rete);
+    canvas.drawCircle(
+      c + Offset(math.cos(reteRot) * r * 0.16, math.sin(reteRot) * r * 0.16),
+      r * 0.4,
+      rete..color = colors.gold.withValues(alpha: 0.45),
     );
-    canvas.drawCircle(c + Offset(math.cos(reteRot) * r * 0.16, math.sin(reteRot) * r * 0.16), r * 0.4, rete..color = colors.gold.withValues(alpha: 0.45));
 
     // Alidade: sweeps back and forth with an eased swing.
     final swing = math.sin(2 * math.pi * t * 2);
@@ -320,6 +326,11 @@ class TelescopeScanPainter extends EmptyIllustrationPainter {
     return List.generate(26, (_) => (rnd.nextDouble(), rnd.nextDouble(), 0.4 + rnd.nextDouble() * 0.6));
   }();
 
+  static final List<(double, double, double)> _deepField = () {
+    final rnd = math.Random(29);
+    return List.generate(34, (_) => (rnd.nextDouble(), rnd.nextDouble(), 0.3 + rnd.nextDouble() * 0.7));
+  }();
+
   @override
   void paint(Canvas canvas, Size size) {
     if (size.isEmpty) return;
@@ -334,7 +345,11 @@ class TelescopeScanPainter extends EmptyIllustrationPainter {
     for (var i = 0; i < _field.length; i++) {
       final st = _field[i];
       final tw = 0.55 + 0.45 * _wave(t * 3 + i * 0.137);
-      canvas.drawCircle(starAt(st), s * 0.008 * st.$3 + 0.4, Paint()..color = colors.star.withValues(alpha: 0.55 * tw * st.$3));
+      canvas.drawCircle(
+        starAt(st),
+        s * 0.008 * st.$3 + 0.4,
+        Paint()..color = colors.star.withValues(alpha: 0.55 * tw * st.$3),
+      );
     }
 
     // Lens path: a slow lissajous sweep.
@@ -372,8 +387,20 @@ class TelescopeScanPainter extends EmptyIllustrationPainter {
     canvas.drawCircle(
       lc,
       lr,
-      Paint()..shader = ui.Gradient.radial(lc - Offset(lr * 0.3, lr * 0.3), lr * 1.3, [colors.glass, colors.glass.withValues(alpha: 0.05)]),
+      Paint()
+        ..shader = ui.Gradient.radial(lc - Offset(lr * 0.3, lr * 0.3), lr * 1.3, [
+          colors.glass,
+          colors.glass.withValues(alpha: 0.05),
+        ]),
     );
+    // Faint stars that only the lens reveals.
+    for (var i = 0; i < _deepField.length; i++) {
+      final st = _deepField[i];
+      final p = lc + Offset((st.$1 - 0.5) * lr * 2.2, (st.$2 - 0.5) * lr * 2.2);
+      if ((p - lc).distance > lr) continue;
+      final tw = 0.6 + 0.4 * _wave(t * 4 + i * 0.21);
+      canvas.drawCircle(p, s * 0.006 * st.$3 + 0.5, Paint()..color = colors.star.withValues(alpha: 0.75 * tw));
+    }
     const mag = 1.9;
     for (var i = 0; i < _field.length; i++) {
       final st = _field[i];
@@ -419,7 +446,11 @@ class TelescopeScanPainter extends EmptyIllustrationPainter {
       lc,
       lr,
       Paint()
-        ..shader = ui.Gradient.sweep(lc, [colors.gold, colors.brassDark, colors.brass, colors.gold], const [0, 0.35, 0.7, 1])
+        ..shader = ui.Gradient.sweep(
+          lc,
+          [colors.gold, colors.brassDark, colors.brass, colors.gold],
+          const [0, 0.35, 0.7, 1],
+        )
         ..style = PaintingStyle.stroke
         ..strokeWidth = lr * 0.13,
     );
