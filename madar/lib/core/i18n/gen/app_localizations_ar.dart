@@ -1930,4 +1930,537 @@ class L10nAr extends L10n {
   String onboardingStep(String current, String total) {
     return 'الخطوة $current من $total';
   }
+
+  @override
+  String orbitReasonPersonOverdue(String name, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'متأخر $n يوم',
+      many: 'متأخر $n يومًا',
+      few: 'متأخر $n أيام',
+      two: 'متأخر يومين',
+      one: 'متأخر يومًا واحدًا',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonDosesPastDue(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n جرعة فائتة',
+      many: '$n جرعة فائتة',
+      few: '$n جرعات فائتة',
+      two: 'جرعتان فائتتان',
+      one: 'جرعة فائتة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitReasonDosesPastDueNamed(String name, int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n جرعة فائتة',
+      many: '$n جرعة فائتة',
+      few: '$n جرعات فائتة',
+      two: 'جرعتان فائتتان',
+      one: 'جرعة فائتة',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonPrayersMissed(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n صلاة لم تُسجَّل هذا الأسبوع',
+      many: '$n صلاةً لم تُسجَّل هذا الأسبوع',
+      few: '$n صلوات لم تُسجَّل هذا الأسبوع',
+      two: 'صلاتان لم تُسجَّلا هذا الأسبوع',
+      one: 'صلاة لم تُسجَّل هذا الأسبوع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitReasonTasksOverdue(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n مهمة متأخرة',
+      many: '$n مهمة متأخرة',
+      few: '$n مهام متأخرة',
+      two: 'مهمتان متأخرتان',
+      one: 'مهمة متأخرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitReasonCardsOverdue(String board, int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n بطاقة متأخرة',
+      many: '$n بطاقة متأخرة',
+      few: '$n بطاقات متأخرة',
+      two: 'بطاقتان متأخرتان',
+      one: 'بطاقة متأخرة',
+    );
+    return '$board — $_temp0';
+  }
+
+  @override
+  String orbitReasonBudgetOverspent(String item, String percent) {
+    return '$item — تجاوز الميزانية بنسبة $percent';
+  }
+
+  @override
+  String orbitReasonObligationOverdue(String name, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'تأخّر السداد $n يوم',
+      many: 'تأخّر السداد $n يومًا',
+      few: 'تأخّر السداد $n أيام',
+      two: 'تأخّر السداد يومين',
+      one: 'تأخّر السداد يومًا واحدًا',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonDebtOverdue(String person, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'تأخّر السداد $n يوم',
+      many: 'تأخّر السداد $n يومًا',
+      few: 'تأخّر السداد $n أيام',
+      two: 'تأخّر السداد يومين',
+      one: 'تأخّر السداد يومًا واحدًا',
+    );
+    return 'دَين $person — $_temp0';
+  }
+
+  @override
+  String orbitReasonGoalBehind(String name, String percent) {
+    return '$name — أنجزتَ $percent من المتوقَّع حتى الآن';
+  }
+
+  @override
+  String orbitReasonGoalQuiet(String name, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'لا تقدّم منذ $n يوم',
+      many: 'لا تقدّم منذ $n يومًا',
+      few: 'لا تقدّم منذ $n أيام',
+      two: 'لا تقدّم منذ يومين',
+      one: 'لا تقدّم منذ يوم',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonWorkoutsMissed(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n تمرين فائت هذا الأسبوع',
+      many: '$n تمرينًا فائتًا هذا الأسبوع',
+      few: '$n تمارين فائتة هذا الأسبوع',
+      two: 'تمرينان فائتان هذا الأسبوع',
+      one: 'تمرين فائت هذا الأسبوع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitReasonWaterLow(String percent) {
+    return 'الماء — $percent فقط من هدف اليوم';
+  }
+
+  @override
+  String orbitReasonDocumentExpiring(String name, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'انتهاء الصلاحية خلال $n يوم',
+      many: 'انتهاء الصلاحية خلال $n يومًا',
+      few: 'انتهاء الصلاحية خلال $n أيام',
+      two: 'انتهاء الصلاحية خلال يومين',
+      one: 'انتهاء الصلاحية خلال يوم',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonDocumentExpiresToday(String name) {
+    return '$name — انتهاء الصلاحية اليوم';
+  }
+
+  @override
+  String orbitReasonDocumentExpired(String name) {
+    return '$name — انتهت الصلاحية';
+  }
+
+  @override
+  String orbitReasonTripUnpacked(
+    String destination,
+    int days,
+    String n,
+    String percent,
+  ) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'السفر بعد $n يوم',
+      many: 'السفر بعد $n يومًا',
+      few: 'السفر بعد $n أيام',
+      two: 'السفر بعد يومين',
+      one: 'السفر غدًا',
+      zero: 'السفر اليوم',
+    );
+    return '$destination — $_temp0، والتجهيز $percent فقط';
+  }
+
+  @override
+  String orbitReasonModuleStale(String name, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'لا إدخال منذ $n يوم',
+      many: 'لا إدخال منذ $n يومًا',
+      few: 'لا إدخال منذ $n أيام',
+      two: 'لا إدخال منذ يومين',
+      one: 'لا إدخال منذ يوم',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonNoActivity(int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'لا نشاط منذ $n يوم',
+      many: 'لا نشاط منذ $n يومًا',
+      few: 'لا نشاط منذ $n أيام',
+      two: 'لا نشاط منذ يومين',
+      one: 'لا نشاط منذ يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitReasonHabitsSlipping(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n عادة متعثّرة هذا الأسبوع',
+      many: '$n عادةً متعثّرة هذا الأسبوع',
+      few: '$n عادات متعثّرة هذا الأسبوع',
+      two: 'عادتان متعثّرتان هذا الأسبوع',
+      one: 'عادة متعثّرة هذا الأسبوع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitReasonHabitSlipping(String name, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'لم تُنجَز منذ $n يوم',
+      many: 'لم تُنجَز منذ $n يومًا',
+      few: 'لم تُنجَز منذ $n أيام',
+      two: 'لم تُنجَز منذ يومين',
+      one: 'لم تُنجَز منذ يوم',
+    );
+    return '$name — $_temp0';
+  }
+
+  @override
+  String orbitReasonProjectItemsOverdue(String project, int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n بند متأخر',
+      many: '$n بندًا متأخرًا',
+      few: '$n بنود متأخرة',
+      two: 'بندان متأخران',
+      one: 'بند متأخر',
+    );
+    return '$project — $_temp0';
+  }
+
+  @override
+  String orbitReasonJarBehind(String name, String percent) {
+    return '$name — ادّخرتَ $percent من المتوقَّع';
+  }
+
+  @override
+  String orbitReasonSourceStale(String source, int days, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'لا تسجيل منذ $n يوم',
+      many: 'لا تسجيل منذ $n يومًا',
+      few: 'لا تسجيل منذ $n أيام',
+      two: 'لا تسجيل منذ يومين',
+      one: 'لا تسجيل منذ يوم',
+    );
+    return '$source — $_temp0';
+  }
+
+  @override
+  String get orbitSourcePrayers => 'الصلوات';
+
+  @override
+  String get orbitSourceAdhkar => 'الأذكار';
+
+  @override
+  String get orbitSourceQuran => 'القرآن';
+
+  @override
+  String get orbitSourceDoses => 'جرعات الأدوية';
+
+  @override
+  String get orbitSourceHabits => 'العادات';
+
+  @override
+  String get orbitSourceMood => 'المزاج';
+
+  @override
+  String get orbitSourcePain => 'الألم';
+
+  @override
+  String get orbitSourceAppointments => 'المواعيد الطبية';
+
+  @override
+  String get orbitSourceContacts => 'صلة الناس';
+
+  @override
+  String get orbitSourceTasks => 'المهام';
+
+  @override
+  String get orbitSourceCards => 'لوحات العمل';
+
+  @override
+  String get orbitSourceProjects => 'المشاريع';
+
+  @override
+  String get orbitSourceBudget => 'الميزانية';
+
+  @override
+  String get orbitSourceTransactions => 'تسجيل المصروفات';
+
+  @override
+  String get orbitSourceJars => 'صناديق الادّخار';
+
+  @override
+  String get orbitSourceObligations => 'الالتزامات والفواتير';
+
+  @override
+  String get orbitSourceDebts => 'الديون';
+
+  @override
+  String get orbitSourceGoals => 'أهداف التعلّم';
+
+  @override
+  String get orbitSourceWorkouts => 'التمارين';
+
+  @override
+  String get orbitSourceFasting => 'الصيام';
+
+  @override
+  String get orbitSourceWater => 'شرب الماء';
+
+  @override
+  String get orbitSourceDocuments => 'وثائق السفر';
+
+  @override
+  String get orbitSourceTrips => 'الرحلات';
+
+  @override
+  String get orbitArchetypeFaith => 'قبّة ذهبية منقوشة';
+
+  @override
+  String get orbitArchetypeOcean => 'محيط حيّ';
+
+  @override
+  String get orbitArchetypeTerracotta => 'أرض فخّارية دافئة';
+
+  @override
+  String get orbitArchetypeIndustrial => 'عالم صناعي مضيء';
+
+  @override
+  String get orbitArchetypeCrystal => 'بلّور بعروق ذهبية';
+
+  @override
+  String get orbitArchetypeVerdant => 'عالم أخضر ينمو';
+
+  @override
+  String get orbitArchetypeVolcanic => 'عالم بركاني';
+
+  @override
+  String get orbitArchetypeGasGiant => 'عملاق غازي بحلقات';
+
+  @override
+  String get orbitArchetypeIce => 'عالم جليدي';
+
+  @override
+  String get orbitArchetypeDesert => 'عالم صحراوي';
+
+  @override
+  String get orbitStateThriving => 'مزدهر';
+
+  @override
+  String get orbitStateSteady => 'مستقر';
+
+  @override
+  String get orbitStateNeglected => 'يحتاج إلى اهتمام';
+
+  @override
+  String get orbitStateDormant => 'هادئ، لا بيانات بعد';
+
+  @override
+  String orbitPlanetSemantics(String name, String state, String percent) {
+    return '$name، $state، التوازن $percent';
+  }
+
+  @override
+  String orbitBalanceSemantics(String percent) {
+    return 'توازن حياتك $percent';
+  }
+
+  @override
+  String orbitMoonsMore(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$n قمر آخر',
+      many: 'و$n قمرًا آخر',
+      few: 'و$n أقمار أخرى',
+      two: 'وقمران آخران',
+      one: 'وقمر آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String orbitCountdown(String prayer, String duration) {
+    return '$prayer بعد $duration';
+  }
+
+  @override
+  String get orbitNewPlanetName => 'كوكب جديد';
+
+  @override
+  String get orbitBuiltInCannotDelete => 'الكواكب الأساسية تُخفى ولا تُحذف';
+
+  @override
+  String get orbitUndoRenamed => 'تغيّر اسم الكوكب';
+
+  @override
+  String orbitUndoRecolored(String name) {
+    return 'تغيّر لون $name';
+  }
+
+  @override
+  String get orbitUndoReordered => 'تغيّر ترتيب الكواكب';
+
+  @override
+  String orbitUndoHidden(String name) {
+    return 'أُخفي $name';
+  }
+
+  @override
+  String orbitUndoShown(String name) {
+    return 'عاد $name إلى المدار';
+  }
+
+  @override
+  String orbitUndoWeight(String name) {
+    return 'تغيّرت أهمية $name';
+  }
+
+  @override
+  String orbitUndoSources(String name) {
+    return 'تغيّرت مصادر $name';
+  }
+
+  @override
+  String orbitUndoStyle(String name) {
+    return 'تغيّر طراز $name';
+  }
+
+  @override
+  String orbitUndoAdded(String name) {
+    return 'أُضيف $name إلى المدار';
+  }
+
+  @override
+  String orbitUndoDeleted(String name) {
+    return 'حُذف $name';
+  }
+
+  @override
+  String orbitUndoReset(String name) {
+    return 'أُعيد $name إلى أصله';
+  }
+
+  @override
+  String astrolabeCountdown(String prayer, String time) {
+    return '$prayer بعد $time';
+  }
+
+  @override
+  String astrolabeCountdownNow(String prayer) {
+    return 'حان وقت $prayer';
+  }
+
+  @override
+  String astrolabeSemantics(
+    String window,
+    String countdown,
+    String done,
+    String total,
+  ) {
+    return 'أسطرلاب يومك. $window. $countdown. صلّيت $done من $total.';
+  }
+
+  @override
+  String astrolabeWindowNow(String window) {
+    return 'الآن وقت $window';
+  }
+
+  @override
+  String astrolabePrayerPrayed(String prayer) {
+    return '$prayer: صلّيتها';
+  }
+
+  @override
+  String astrolabePrayerDue(String prayer) {
+    return '$prayer: حان وقتها';
+  }
+
+  @override
+  String astrolabePrayerUpcoming(String prayer, String time) {
+    return '$prayer: الساعة $time';
+  }
+
+  @override
+  String astrolabePrayerMissed(String prayer) {
+    return '$prayer: فاتت';
+  }
+
+  @override
+  String get astrolabeMakersMark => 'مَدار';
 }

@@ -1248,5 +1248,563 @@
         "type": "String"
       }
     }
+  },
+  "orbitReasonPersonOverdue": "{name} — {days, plural, =1{متأخر يومًا واحدًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}",
+  "@orbitReasonPersonOverdue": {
+    "description": "Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDosesPastDue": "{count, plural, =1{جرعة فائتة} =2{جرعتان فائتتان} few{{n} جرعات فائتة} many{{n} جرعة فائتة} other{{n} جرعة فائتة}}",
+  "@orbitReasonDosesPastDue": {
+    "description": "Neglect Radar: medication doses due today that were not taken",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDosesPastDueNamed": "{name} — {count, plural, =1{جرعة فائتة} =2{جرعتان فائتتان} few{{n} جرعات فائتة} many{{n} جرعة فائتة} other{{n} جرعة فائتة}}",
+  "@orbitReasonDosesPastDueNamed": {
+    "description": "Neglect Radar: past-due doses of a single medication",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonPrayersMissed": "{count, plural, =1{صلاة لم تُسجَّل هذا الأسبوع} =2{صلاتان لم تُسجَّلا هذا الأسبوع} few{{n} صلوات لم تُسجَّل هذا الأسبوع} many{{n} صلاةً لم تُسجَّل هذا الأسبوع} other{{n} صلاة لم تُسجَّل هذا الأسبوع}}",
+  "@orbitReasonPrayersMissed": {
+    "description": "Neglect Radar: obligatory prayers of the last 7 days not logged as prayed",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonTasksOverdue": "{count, plural, =1{مهمة متأخرة} =2{مهمتان متأخرتان} few{{n} مهام متأخرة} many{{n} مهمة متأخرة} other{{n} مهمة متأخرة}}",
+  "@orbitReasonTasksOverdue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonCardsOverdue": "{board} — {count, plural, =1{بطاقة متأخرة} =2{بطاقتان متأخرتان} few{{n} بطاقات متأخرة} many{{n} بطاقة متأخرة} other{{n} بطاقة متأخرة}}",
+  "@orbitReasonCardsOverdue": {
+    "description": "Neglect Radar: overdue cards on one work board",
+    "placeholders": {
+      "board": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonBudgetOverspent": "{item} — تجاوز الميزانية بنسبة {percent}",
+  "@orbitReasonBudgetOverspent": {
+    "description": "Neglect Radar: a budget item overspent this month; percent is pre-formatted (e.g. 30%)",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonObligationOverdue": "{name} — {days, plural, =1{تأخّر السداد يومًا واحدًا} =2{تأخّر السداد يومين} few{تأخّر السداد {n} أيام} many{تأخّر السداد {n} يومًا} other{تأخّر السداد {n} يوم}}",
+  "@orbitReasonObligationOverdue": {
+    "description": "Neglect Radar: a recurring bill / obligation past its due date",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDebtOverdue": "دَين {person} — {days, plural, =1{تأخّر السداد يومًا واحدًا} =2{تأخّر السداد يومين} few{تأخّر السداد {n} أيام} many{تأخّر السداد {n} يومًا} other{تأخّر السداد {n} يوم}}",
+  "@orbitReasonDebtOverdue": {
+    "description": "Neglect Radar: a debt the user owes, past its due date",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonGoalBehind": "{name} — أنجزتَ {percent} من المتوقَّع حتى الآن",
+  "@orbitReasonGoalBehind": {
+    "description": "Neglect Radar: a learning goal behind its deadline pace",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonGoalQuiet": "{name} — {days, plural, =1{لا تقدّم منذ يوم} =2{لا تقدّم منذ يومين} few{لا تقدّم منذ {n} أيام} many{لا تقدّم منذ {n} يومًا} other{لا تقدّم منذ {n} يوم}}",
+  "@orbitReasonGoalQuiet": {
+    "description": "Neglect Radar: a learning goal without deadline and no recent log",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonWorkoutsMissed": "{count, plural, =1{تمرين فائت هذا الأسبوع} =2{تمرينان فائتان هذا الأسبوع} few{{n} تمارين فائتة هذا الأسبوع} many{{n} تمرينًا فائتًا هذا الأسبوع} other{{n} تمرين فائت هذا الأسبوع}}",
+  "@orbitReasonWorkoutsMissed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonWaterLow": "الماء — {percent} فقط من هدف اليوم",
+  "@orbitReasonWaterLow": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDocumentExpiring": "{name} — {days, plural, =1{انتهاء الصلاحية خلال يوم} =2{انتهاء الصلاحية خلال يومين} few{انتهاء الصلاحية خلال {n} أيام} many{انتهاء الصلاحية خلال {n} يومًا} other{انتهاء الصلاحية خلال {n} يوم}}",
+  "@orbitReasonDocumentExpiring": {
+    "description": "Neglect Radar: a travel document close to its expiry",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDocumentExpiresToday": "{name} — انتهاء الصلاحية اليوم",
+  "@orbitReasonDocumentExpiresToday": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDocumentExpired": "{name} — انتهت الصلاحية",
+  "@orbitReasonDocumentExpired": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonTripUnpacked": "{destination} — {days, plural, =0{السفر اليوم} =1{السفر غدًا} =2{السفر بعد يومين} few{السفر بعد {n} أيام} many{السفر بعد {n} يومًا} other{السفر بعد {n} يوم}}، والتجهيز {percent} فقط",
+  "@orbitReasonTripUnpacked": {
+    "description": "Neglect Radar: an upcoming trip whose packing list is behind",
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonModuleStale": "{name} — {days, plural, =1{لا إدخال منذ يوم} =2{لا إدخال منذ يومين} few{لا إدخال منذ {n} أيام} many{لا إدخال منذ {n} يومًا} other{لا إدخال منذ {n} يوم}}",
+  "@orbitReasonModuleStale": {
+    "description": "Neglect Radar: a custom tracker without recent entries",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonNoActivity": "{days, plural, =1{لا نشاط منذ يوم} =2{لا نشاط منذ يومين} few{لا نشاط منذ {n} أيام} many{لا نشاط منذ {n} يومًا} other{لا نشاط منذ {n} يوم}}",
+  "@orbitReasonNoActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonHabitsSlipping": "{count, plural, =1{عادة متعثّرة هذا الأسبوع} =2{عادتان متعثّرتان هذا الأسبوع} few{{n} عادات متعثّرة هذا الأسبوع} many{{n} عادةً متعثّرة هذا الأسبوع} other{{n} عادة متعثّرة هذا الأسبوع}}",
+  "@orbitReasonHabitsSlipping": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonHabitSlipping": "{name} — {days, plural, =1{لم تُنجَز منذ يوم} =2{لم تُنجَز منذ يومين} few{لم تُنجَز منذ {n} أيام} many{لم تُنجَز منذ {n} يومًا} other{لم تُنجَز منذ {n} يوم}}",
+  "@orbitReasonHabitSlipping": {
+    "description": "Neglect Radar: one tracked habit not done recently",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonProjectItemsOverdue": "{project} — {count, plural, =1{بند متأخر} =2{بندان متأخران} few{{n} بنود متأخرة} many{{n} بندًا متأخرًا} other{{n} بند متأخر}}",
+  "@orbitReasonProjectItemsOverdue": {
+    "placeholders": {
+      "project": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonJarBehind": "{name} — ادّخرتَ {percent} من المتوقَّع",
+  "@orbitReasonJarBehind": {
+    "description": "Neglect Radar: a savings jar behind its deadline pace",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonSourceStale": "{source} — {days, plural, =1{لا تسجيل منذ يوم} =2{لا تسجيل منذ يومين} few{لا تسجيل منذ {n} أيام} many{لا تسجيل منذ {n} يومًا} other{لا تسجيل منذ {n} يوم}}",
+  "@orbitReasonSourceStale": {
+    "description": "Neglect Radar: a data source (adhkar, Quran, spending) without recent entries",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitSourcePrayers": "الصلوات",
+  "orbitSourceAdhkar": "الأذكار",
+  "orbitSourceQuran": "القرآن",
+  "orbitSourceDoses": "جرعات الأدوية",
+  "orbitSourceHabits": "العادات",
+  "orbitSourceMood": "المزاج",
+  "orbitSourcePain": "الألم",
+  "orbitSourceAppointments": "المواعيد الطبية",
+  "orbitSourceContacts": "صلة الناس",
+  "orbitSourceTasks": "المهام",
+  "orbitSourceCards": "لوحات العمل",
+  "orbitSourceProjects": "المشاريع",
+  "orbitSourceBudget": "الميزانية",
+  "orbitSourceTransactions": "تسجيل المصروفات",
+  "orbitSourceJars": "صناديق الادّخار",
+  "orbitSourceObligations": "الالتزامات والفواتير",
+  "orbitSourceDebts": "الديون",
+  "orbitSourceGoals": "أهداف التعلّم",
+  "orbitSourceWorkouts": "التمارين",
+  "orbitSourceFasting": "الصيام",
+  "orbitSourceWater": "شرب الماء",
+  "orbitSourceDocuments": "وثائق السفر",
+  "orbitSourceTrips": "الرحلات",
+  "orbitArchetypeFaith": "قبّة ذهبية منقوشة",
+  "orbitArchetypeOcean": "محيط حيّ",
+  "orbitArchetypeTerracotta": "أرض فخّارية دافئة",
+  "orbitArchetypeIndustrial": "عالم صناعي مضيء",
+  "orbitArchetypeCrystal": "بلّور بعروق ذهبية",
+  "orbitArchetypeVerdant": "عالم أخضر ينمو",
+  "orbitArchetypeVolcanic": "عالم بركاني",
+  "orbitArchetypeGasGiant": "عملاق غازي بحلقات",
+  "orbitArchetypeIce": "عالم جليدي",
+  "orbitArchetypeDesert": "عالم صحراوي",
+  "orbitStateThriving": "مزدهر",
+  "orbitStateSteady": "مستقر",
+  "orbitStateNeglected": "يحتاج إلى اهتمام",
+  "orbitStateDormant": "هادئ، لا بيانات بعد",
+  "orbitPlanetSemantics": "{name}، {state}، التوازن {percent}",
+  "@orbitPlanetSemantics": {
+    "description": "Screen-reader label of a planet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitBalanceSemantics": "توازن حياتك {percent}",
+  "@orbitBalanceSemantics": {
+    "description": "Screen-reader label of the core star",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitMoonsMore": "{count, plural, =1{وقمر آخر} =2{وقمران آخران} few{و{n} أقمار أخرى} many{و{n} قمرًا آخر} other{و{n} قمر آخر}}",
+  "@orbitMoonsMore": {
+    "description": "Moons that did not fit around a planet (beyond the cap of 12)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitCountdown": "{prayer} بعد {duration}",
+  "@orbitCountdown": {
+    "description": "Countdown to the next prayer engraved on the astrolabe's inner ring",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitNewPlanetName": "كوكب جديد",
+  "orbitBuiltInCannotDelete": "الكواكب الأساسية تُخفى ولا تُحذف",
+  "orbitUndoRenamed": "تغيّر اسم الكوكب",
+  "orbitUndoRecolored": "تغيّر لون {name}",
+  "@orbitUndoRecolored": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoReordered": "تغيّر ترتيب الكواكب",
+  "orbitUndoHidden": "أُخفي {name}",
+  "@orbitUndoHidden": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoShown": "عاد {name} إلى المدار",
+  "@orbitUndoShown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoWeight": "تغيّرت أهمية {name}",
+  "@orbitUndoWeight": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoSources": "تغيّرت مصادر {name}",
+  "@orbitUndoSources": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoStyle": "تغيّر طراز {name}",
+  "@orbitUndoStyle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoAdded": "أُضيف {name} إلى المدار",
+  "@orbitUndoAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoDeleted": "حُذف {name}",
+  "@orbitUndoDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoReset": "أُعيد {name} إلى أصله",
+  "@orbitUndoReset": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdown": "{prayer} بعد {time}",
+  "@astrolabeCountdown": {
+    "description": "Countdown engraved on the astrolabe's inner ring, e.g. «العصر بعد ١:٢٣:٠٥»",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdownNow": "حان وقت {prayer}",
+  "@astrolabeCountdownNow": {
+    "description": "Engraved on the inner ring in the moment the next prayer begins",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeSemantics": "أسطرلاب يومك. {window}. {countdown}. صلّيت {done} من {total}.",
+  "@astrolabeSemantics": {
+    "description": "Screen-reader summary of the astrolabe centrepiece",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "countdown": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeWindowNow": "الآن وقت {window}",
+  "@astrolabeWindowNow": {
+    "description": "Current prayer window, used in the astrolabe's screen-reader summary",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerPrayed": "{prayer}: صلّيتها",
+  "@astrolabePrayerPrayed": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerDue": "{prayer}: حان وقتها",
+  "@astrolabePrayerDue": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerUpcoming": "{prayer}: الساعة {time}",
+  "@astrolabePrayerUpcoming": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerMissed": "{prayer}: فاتت",
+  "@astrolabePrayerMissed": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeMakersMark": "مَدار",
+  "@astrolabeMakersMark": {
+    "description": "Maker's mark engraved on the lower half of the astrolabe's inner ring (like a signed museum astrolabe)"
   }
 }

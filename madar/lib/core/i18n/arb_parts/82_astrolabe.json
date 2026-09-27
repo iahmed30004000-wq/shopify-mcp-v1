@@ -1,0 +1,56 @@
+{
+  "astrolabeCountdown": {
+    "ar": "{prayer} بعد {time}",
+    "en": "{prayer} in {time}",
+    "description": "Countdown engraved on the astrolabe's inner ring, e.g. «العصر بعد ١:٢٣:٠٥»",
+    "placeholders": {"prayer": {"type": "String"}, "time": {"type": "String"}}
+  },
+  "astrolabeCountdownNow": {
+    "ar": "حان وقت {prayer}",
+    "en": "Time for {prayer}",
+    "description": "Engraved on the inner ring in the moment the next prayer begins",
+    "placeholders": {"prayer": {"type": "String"}}
+  },
+  "astrolabeSemantics": {
+    "ar": "أسطرلاب يومك. {window}. {countdown}. صلّيت {done} من {total}.",
+    "en": "Your day's astrolabe. {window}. {countdown}. {done} of {total} prayers done.",
+    "description": "Screen-reader summary of the astrolabe centrepiece",
+    "placeholders": {
+      "window": {"type": "String"},
+      "countdown": {"type": "String"},
+      "done": {"type": "String"},
+      "total": {"type": "String"}
+    }
+  },
+  "astrolabeWindowNow": {
+    "ar": "الآن وقت {window}",
+    "en": "Now: {window}",
+    "description": "Current prayer window, used in the astrolabe's screen-reader summary",
+    "placeholders": {"window": {"type": "String"}}
+  },
+  "astrolabePrayerPrayed": {
+    "ar": "{prayer}: صلّيتها",
+    "en": "{prayer}: prayed",
+    "placeholders": {"prayer": {"type": "String"}}
+  },
+  "astrolabePrayerDue": {
+    "ar": "{prayer}: حان وقتها",
+    "en": "{prayer}: it's time",
+    "placeholders": {"prayer": {"type": "String"}}
+  },
+  "astrolabePrayerUpcoming": {
+    "ar": "{prayer}: الساعة {time}",
+    "en": "{prayer}: at {time}",
+    "placeholders": {"prayer": {"type": "String"}, "time": {"type": "String"}}
+  },
+  "astrolabePrayerMissed": {
+    "ar": "{prayer}: فاتت",
+    "en": "{prayer}: missed",
+    "placeholders": {"prayer": {"type": "String"}}
+  },
+  "astrolabeMakersMark": {
+    "ar": "مَدار",
+    "en": "MADAR",
+    "description": "Maker's mark engraved on the lower half of the astrolabe's inner ring (like a signed museum astrolabe)"
+  }
+}

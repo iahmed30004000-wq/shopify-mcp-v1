@@ -227,6 +227,13 @@ class PrayerSchedule {
     );
   }
 
+  /// The prayer-anchored day of [now]: the hours before Fajr still belong to
+  /// yesterday ("after Isha"). Returns local midnight of that day.
+  DateTime prayerDayOf(DateTime now) {
+    final day = DateTime(now.year, now.month, now.day);
+    return now.isBefore(timesFor(now).fajr) ? DateTime(day.year, day.month, day.day - 1) : day;
+  }
+
   /// Obligatory prayers whose time started within the last [days] days up to
   /// [now] (feeds the Faith planet score).
   int obligatoryStartedInLast(DateTime now, {int days = 7}) {

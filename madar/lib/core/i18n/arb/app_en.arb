@@ -1248,5 +1248,563 @@
         "type": "String"
       }
     }
+  },
+  "orbitReasonPersonOverdue": "{name} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
+  "@orbitReasonPersonOverdue": {
+    "description": "Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDosesPastDue": "{count, plural, =1{1 dose past due} other{{n} doses past due}}",
+  "@orbitReasonDosesPastDue": {
+    "description": "Neglect Radar: medication doses due today that were not taken",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDosesPastDueNamed": "{name} — {count, plural, =1{1 dose past due} other{{n} doses past due}}",
+  "@orbitReasonDosesPastDueNamed": {
+    "description": "Neglect Radar: past-due doses of a single medication",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonPrayersMissed": "{count, plural, =1{1 prayer not logged this week} other{{n} prayers not logged this week}}",
+  "@orbitReasonPrayersMissed": {
+    "description": "Neglect Radar: obligatory prayers of the last 7 days not logged as prayed",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonTasksOverdue": "{count, plural, =1{1 task overdue} other{{n} tasks overdue}}",
+  "@orbitReasonTasksOverdue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonCardsOverdue": "{board} — {count, plural, =1{1 card overdue} other{{n} cards overdue}}",
+  "@orbitReasonCardsOverdue": {
+    "description": "Neglect Radar: overdue cards on one work board",
+    "placeholders": {
+      "board": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonBudgetOverspent": "{item} — {percent} over budget",
+  "@orbitReasonBudgetOverspent": {
+    "description": "Neglect Radar: a budget item overspent this month; percent is pre-formatted (e.g. 30%)",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonObligationOverdue": "{name} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
+  "@orbitReasonObligationOverdue": {
+    "description": "Neglect Radar: a recurring bill / obligation past its due date",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDebtOverdue": "Debt to {person} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
+  "@orbitReasonDebtOverdue": {
+    "description": "Neglect Radar: a debt the user owes, past its due date",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonGoalBehind": "{name} — {percent} of the expected progress",
+  "@orbitReasonGoalBehind": {
+    "description": "Neglect Radar: a learning goal behind its deadline pace",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonGoalQuiet": "{name} — {days, plural, =1{no progress for a day} other{no progress for {n} days}}",
+  "@orbitReasonGoalQuiet": {
+    "description": "Neglect Radar: a learning goal without deadline and no recent log",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonWorkoutsMissed": "{count, plural, =1{1 workout missed this week} other{{n} workouts missed this week}}",
+  "@orbitReasonWorkoutsMissed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonWaterLow": "Water — only {percent} of today's goal",
+  "@orbitReasonWaterLow": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDocumentExpiring": "{name} — {days, plural, =1{expires in a day} other{expires in {n} days}}",
+  "@orbitReasonDocumentExpiring": {
+    "description": "Neglect Radar: a travel document close to its expiry",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDocumentExpiresToday": "{name} — expires today",
+  "@orbitReasonDocumentExpiresToday": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonDocumentExpired": "{name} — expired",
+  "@orbitReasonDocumentExpired": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonTripUnpacked": "{destination} — {days, plural, =0{leaving today} =1{leaving tomorrow} other{leaving in {n} days}}, only {percent} packed",
+  "@orbitReasonTripUnpacked": {
+    "description": "Neglect Radar: an upcoming trip whose packing list is behind",
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonModuleStale": "{name} — {days, plural, =1{no entry for a day} other{no entry for {n} days}}",
+  "@orbitReasonModuleStale": {
+    "description": "Neglect Radar: a custom tracker without recent entries",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonNoActivity": "{days, plural, =1{No activity for a day} other{No activity for {n} days}}",
+  "@orbitReasonNoActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonHabitsSlipping": "{count, plural, =1{1 habit slipping this week} other{{n} habits slipping this week}}",
+  "@orbitReasonHabitsSlipping": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonHabitSlipping": "{name} — {days, plural, =1{not done for a day} other{not done for {n} days}}",
+  "@orbitReasonHabitSlipping": {
+    "description": "Neglect Radar: one tracked habit not done recently",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonProjectItemsOverdue": "{project} — {count, plural, =1{1 item overdue} other{{n} items overdue}}",
+  "@orbitReasonProjectItemsOverdue": {
+    "placeholders": {
+      "project": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonJarBehind": "{name} — {percent} of the expected savings",
+  "@orbitReasonJarBehind": {
+    "description": "Neglect Radar: a savings jar behind its deadline pace",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitReasonSourceStale": "{source} — {days, plural, =1{nothing logged for a day} other{nothing logged for {n} days}}",
+  "@orbitReasonSourceStale": {
+    "description": "Neglect Radar: a data source (adhkar, Quran, spending) without recent entries",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitSourcePrayers": "Prayers",
+  "orbitSourceAdhkar": "Adhkar",
+  "orbitSourceQuran": "Quran",
+  "orbitSourceDoses": "Medication doses",
+  "orbitSourceHabits": "Habits",
+  "orbitSourceMood": "Mood",
+  "orbitSourcePain": "Pain",
+  "orbitSourceAppointments": "Appointments",
+  "orbitSourceContacts": "Keeping in touch",
+  "orbitSourceTasks": "Tasks",
+  "orbitSourceCards": "Work boards",
+  "orbitSourceProjects": "Projects",
+  "orbitSourceBudget": "Budget",
+  "orbitSourceTransactions": "Spending log",
+  "orbitSourceJars": "Savings jars",
+  "orbitSourceObligations": "Bills & obligations",
+  "orbitSourceDebts": "Debts",
+  "orbitSourceGoals": "Learning goals",
+  "orbitSourceWorkouts": "Workouts",
+  "orbitSourceFasting": "Fasting",
+  "orbitSourceWater": "Water",
+  "orbitSourceDocuments": "Travel documents",
+  "orbitSourceTrips": "Trips",
+  "orbitArchetypeFaith": "Engraved gold dome",
+  "orbitArchetypeOcean": "Living ocean",
+  "orbitArchetypeTerracotta": "Warm terracotta",
+  "orbitArchetypeIndustrial": "Industrial world",
+  "orbitArchetypeCrystal": "Crystal with gold veins",
+  "orbitArchetypeVerdant": "Verdant world",
+  "orbitArchetypeVolcanic": "Volcanic world",
+  "orbitArchetypeGasGiant": "Ringed gas giant",
+  "orbitArchetypeIce": "Ice world",
+  "orbitArchetypeDesert": "Desert world",
+  "orbitStateThriving": "Thriving",
+  "orbitStateSteady": "Steady",
+  "orbitStateNeglected": "Needs care",
+  "orbitStateDormant": "Quiet, no data yet",
+  "orbitPlanetSemantics": "{name}, {state}, balance {percent}",
+  "@orbitPlanetSemantics": {
+    "description": "Screen-reader label of a planet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitBalanceSemantics": "Life balance {percent}",
+  "@orbitBalanceSemantics": {
+    "description": "Screen-reader label of the core star",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitMoonsMore": "{count, plural, =1{+1 more moon} other{+{n} more moons}}",
+  "@orbitMoonsMore": {
+    "description": "Moons that did not fit around a planet (beyond the cap of 12)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitCountdown": "{prayer} in {duration}",
+  "@orbitCountdown": {
+    "description": "Countdown to the next prayer engraved on the astrolabe's inner ring",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitNewPlanetName": "New planet",
+  "orbitBuiltInCannotDelete": "Built-in planets can be hidden, not deleted",
+  "orbitUndoRenamed": "Planet renamed",
+  "orbitUndoRecolored": "{name} recoloured",
+  "@orbitUndoRecolored": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoReordered": "Planets reordered",
+  "orbitUndoHidden": "{name} hidden",
+  "@orbitUndoHidden": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoShown": "{name} is back in orbit",
+  "@orbitUndoShown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoWeight": "{name}'s weight changed",
+  "@orbitUndoWeight": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoSources": "{name}'s sources changed",
+  "@orbitUndoSources": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoStyle": "{name}'s style changed",
+  "@orbitUndoStyle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoAdded": "{name} added to the orbit",
+  "@orbitUndoAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoDeleted": "{name} deleted",
+  "@orbitUndoDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUndoReset": "{name} restored to its defaults",
+  "@orbitUndoReset": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdown": "{prayer} in {time}",
+  "@astrolabeCountdown": {
+    "description": "Countdown engraved on the astrolabe's inner ring, e.g. «العصر بعد ١:٢٣:٠٥»",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdownNow": "Time for {prayer}",
+  "@astrolabeCountdownNow": {
+    "description": "Engraved on the inner ring in the moment the next prayer begins",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeSemantics": "Your day's astrolabe. {window}. {countdown}. {done} of {total} prayers done.",
+  "@astrolabeSemantics": {
+    "description": "Screen-reader summary of the astrolabe centrepiece",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "countdown": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeWindowNow": "Now: {window}",
+  "@astrolabeWindowNow": {
+    "description": "Current prayer window, used in the astrolabe's screen-reader summary",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerPrayed": "{prayer}: prayed",
+  "@astrolabePrayerPrayed": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerDue": "{prayer}: it's time",
+  "@astrolabePrayerDue": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerUpcoming": "{prayer}: at {time}",
+  "@astrolabePrayerUpcoming": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerMissed": "{prayer}: missed",
+  "@astrolabePrayerMissed": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeMakersMark": "MADAR",
+  "@astrolabeMakersMark": {
+    "description": "Maker's mark engraved on the lower half of the astrolabe's inner ring (like a signed museum astrolabe)"
   }
 }

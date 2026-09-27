@@ -3354,6 +3354,538 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الخطوة {current} من {total}'**
   String onboardingStep(String current, String total);
+
+  /// Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {days, plural, =1{متأخر يومًا واحدًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}'**
+  String orbitReasonPersonOverdue(String name, int days, String n);
+
+  /// Neglect Radar: medication doses due today that were not taken
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{جرعة فائتة} =2{جرعتان فائتتان} few{{n} جرعات فائتة} many{{n} جرعة فائتة} other{{n} جرعة فائتة}}'**
+  String orbitReasonDosesPastDue(int count, String n);
+
+  /// Neglect Radar: past-due doses of a single medication
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {count, plural, =1{جرعة فائتة} =2{جرعتان فائتتان} few{{n} جرعات فائتة} many{{n} جرعة فائتة} other{{n} جرعة فائتة}}'**
+  String orbitReasonDosesPastDueNamed(String name, int count, String n);
+
+  /// Neglect Radar: obligatory prayers of the last 7 days not logged as prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{صلاة لم تُسجَّل هذا الأسبوع} =2{صلاتان لم تُسجَّلا هذا الأسبوع} few{{n} صلوات لم تُسجَّل هذا الأسبوع} many{{n} صلاةً لم تُسجَّل هذا الأسبوع} other{{n} صلاة لم تُسجَّل هذا الأسبوع}}'**
+  String orbitReasonPrayersMissed(int count, String n);
+
+  /// No description provided for @orbitReasonTasksOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مهمة متأخرة} =2{مهمتان متأخرتان} few{{n} مهام متأخرة} many{{n} مهمة متأخرة} other{{n} مهمة متأخرة}}'**
+  String orbitReasonTasksOverdue(int count, String n);
+
+  /// Neglect Radar: overdue cards on one work board
+  ///
+  /// In ar, this message translates to:
+  /// **'{board} — {count, plural, =1{بطاقة متأخرة} =2{بطاقتان متأخرتان} few{{n} بطاقات متأخرة} many{{n} بطاقة متأخرة} other{{n} بطاقة متأخرة}}'**
+  String orbitReasonCardsOverdue(String board, int count, String n);
+
+  /// Neglect Radar: a budget item overspent this month; percent is pre-formatted (e.g. 30%)
+  ///
+  /// In ar, this message translates to:
+  /// **'{item} — تجاوز الميزانية بنسبة {percent}'**
+  String orbitReasonBudgetOverspent(String item, String percent);
+
+  /// Neglect Radar: a recurring bill / obligation past its due date
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {days, plural, =1{تأخّر السداد يومًا واحدًا} =2{تأخّر السداد يومين} few{تأخّر السداد {n} أيام} many{تأخّر السداد {n} يومًا} other{تأخّر السداد {n} يوم}}'**
+  String orbitReasonObligationOverdue(String name, int days, String n);
+
+  /// Neglect Radar: a debt the user owes, past its due date
+  ///
+  /// In ar, this message translates to:
+  /// **'دَين {person} — {days, plural, =1{تأخّر السداد يومًا واحدًا} =2{تأخّر السداد يومين} few{تأخّر السداد {n} أيام} many{تأخّر السداد {n} يومًا} other{تأخّر السداد {n} يوم}}'**
+  String orbitReasonDebtOverdue(String person, int days, String n);
+
+  /// Neglect Radar: a learning goal behind its deadline pace
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — أنجزتَ {percent} من المتوقَّع حتى الآن'**
+  String orbitReasonGoalBehind(String name, String percent);
+
+  /// Neglect Radar: a learning goal without deadline and no recent log
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {days, plural, =1{لا تقدّم منذ يوم} =2{لا تقدّم منذ يومين} few{لا تقدّم منذ {n} أيام} many{لا تقدّم منذ {n} يومًا} other{لا تقدّم منذ {n} يوم}}'**
+  String orbitReasonGoalQuiet(String name, int days, String n);
+
+  /// No description provided for @orbitReasonWorkoutsMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تمرين فائت هذا الأسبوع} =2{تمرينان فائتان هذا الأسبوع} few{{n} تمارين فائتة هذا الأسبوع} many{{n} تمرينًا فائتًا هذا الأسبوع} other{{n} تمرين فائت هذا الأسبوع}}'**
+  String orbitReasonWorkoutsMissed(int count, String n);
+
+  /// No description provided for @orbitReasonWaterLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء — {percent} فقط من هدف اليوم'**
+  String orbitReasonWaterLow(String percent);
+
+  /// Neglect Radar: a travel document close to its expiry
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {days, plural, =1{انتهاء الصلاحية خلال يوم} =2{انتهاء الصلاحية خلال يومين} few{انتهاء الصلاحية خلال {n} أيام} many{انتهاء الصلاحية خلال {n} يومًا} other{انتهاء الصلاحية خلال {n} يوم}}'**
+  String orbitReasonDocumentExpiring(String name, int days, String n);
+
+  /// No description provided for @orbitReasonDocumentExpiresToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — انتهاء الصلاحية اليوم'**
+  String orbitReasonDocumentExpiresToday(String name);
+
+  /// No description provided for @orbitReasonDocumentExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — انتهت الصلاحية'**
+  String orbitReasonDocumentExpired(String name);
+
+  /// Neglect Radar: an upcoming trip whose packing list is behind
+  ///
+  /// In ar, this message translates to:
+  /// **'{destination} — {days, plural, =0{السفر اليوم} =1{السفر غدًا} =2{السفر بعد يومين} few{السفر بعد {n} أيام} many{السفر بعد {n} يومًا} other{السفر بعد {n} يوم}}، والتجهيز {percent} فقط'**
+  String orbitReasonTripUnpacked(
+    String destination,
+    int days,
+    String n,
+    String percent,
+  );
+
+  /// Neglect Radar: a custom tracker without recent entries
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {days, plural, =1{لا إدخال منذ يوم} =2{لا إدخال منذ يومين} few{لا إدخال منذ {n} أيام} many{لا إدخال منذ {n} يومًا} other{لا إدخال منذ {n} يوم}}'**
+  String orbitReasonModuleStale(String name, int days, String n);
+
+  /// No description provided for @orbitReasonNoActivity.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =1{لا نشاط منذ يوم} =2{لا نشاط منذ يومين} few{لا نشاط منذ {n} أيام} many{لا نشاط منذ {n} يومًا} other{لا نشاط منذ {n} يوم}}'**
+  String orbitReasonNoActivity(int days, String n);
+
+  /// No description provided for @orbitReasonHabitsSlipping.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{عادة متعثّرة هذا الأسبوع} =2{عادتان متعثّرتان هذا الأسبوع} few{{n} عادات متعثّرة هذا الأسبوع} many{{n} عادةً متعثّرة هذا الأسبوع} other{{n} عادة متعثّرة هذا الأسبوع}}'**
+  String orbitReasonHabitsSlipping(int count, String n);
+
+  /// Neglect Radar: one tracked habit not done recently
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — {days, plural, =1{لم تُنجَز منذ يوم} =2{لم تُنجَز منذ يومين} few{لم تُنجَز منذ {n} أيام} many{لم تُنجَز منذ {n} يومًا} other{لم تُنجَز منذ {n} يوم}}'**
+  String orbitReasonHabitSlipping(String name, int days, String n);
+
+  /// No description provided for @orbitReasonProjectItemsOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{project} — {count, plural, =1{بند متأخر} =2{بندان متأخران} few{{n} بنود متأخرة} many{{n} بندًا متأخرًا} other{{n} بند متأخر}}'**
+  String orbitReasonProjectItemsOverdue(String project, int count, String n);
+
+  /// Neglect Radar: a savings jar behind its deadline pace
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — ادّخرتَ {percent} من المتوقَّع'**
+  String orbitReasonJarBehind(String name, String percent);
+
+  /// Neglect Radar: a data source (adhkar, Quran, spending) without recent entries
+  ///
+  /// In ar, this message translates to:
+  /// **'{source} — {days, plural, =1{لا تسجيل منذ يوم} =2{لا تسجيل منذ يومين} few{لا تسجيل منذ {n} أيام} many{لا تسجيل منذ {n} يومًا} other{لا تسجيل منذ {n} يوم}}'**
+  String orbitReasonSourceStale(String source, int days, String n);
+
+  /// No description provided for @orbitSourcePrayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلوات'**
+  String get orbitSourcePrayers;
+
+  /// No description provided for @orbitSourceAdhkar.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذكار'**
+  String get orbitSourceAdhkar;
+
+  /// No description provided for @orbitSourceQuran.
+  ///
+  /// In ar, this message translates to:
+  /// **'القرآن'**
+  String get orbitSourceQuran;
+
+  /// No description provided for @orbitSourceDoses.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرعات الأدوية'**
+  String get orbitSourceDoses;
+
+  /// No description provided for @orbitSourceHabits.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادات'**
+  String get orbitSourceHabits;
+
+  /// No description provided for @orbitSourceMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج'**
+  String get orbitSourceMood;
+
+  /// No description provided for @orbitSourcePain.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم'**
+  String get orbitSourcePain;
+
+  /// No description provided for @orbitSourceAppointments.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد الطبية'**
+  String get orbitSourceAppointments;
+
+  /// No description provided for @orbitSourceContacts.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلة الناس'**
+  String get orbitSourceContacts;
+
+  /// No description provided for @orbitSourceTasks.
+  ///
+  /// In ar, this message translates to:
+  /// **'المهام'**
+  String get orbitSourceTasks;
+
+  /// No description provided for @orbitSourceCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحات العمل'**
+  String get orbitSourceCards;
+
+  /// No description provided for @orbitSourceProjects.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع'**
+  String get orbitSourceProjects;
+
+  /// No description provided for @orbitSourceBudget.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية'**
+  String get orbitSourceBudget;
+
+  /// No description provided for @orbitSourceTransactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل المصروفات'**
+  String get orbitSourceTransactions;
+
+  /// No description provided for @orbitSourceJars.
+  ///
+  /// In ar, this message translates to:
+  /// **'صناديق الادّخار'**
+  String get orbitSourceJars;
+
+  /// No description provided for @orbitSourceObligations.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات والفواتير'**
+  String get orbitSourceObligations;
+
+  /// No description provided for @orbitSourceDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get orbitSourceDebts;
+
+  /// No description provided for @orbitSourceGoals.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف التعلّم'**
+  String get orbitSourceGoals;
+
+  /// No description provided for @orbitSourceWorkouts.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمارين'**
+  String get orbitSourceWorkouts;
+
+  /// No description provided for @orbitSourceFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام'**
+  String get orbitSourceFasting;
+
+  /// No description provided for @orbitSourceWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'شرب الماء'**
+  String get orbitSourceWater;
+
+  /// No description provided for @orbitSourceDocuments.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثائق السفر'**
+  String get orbitSourceDocuments;
+
+  /// No description provided for @orbitSourceTrips.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات'**
+  String get orbitSourceTrips;
+
+  /// No description provided for @orbitArchetypeFaith.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبّة ذهبية منقوشة'**
+  String get orbitArchetypeFaith;
+
+  /// No description provided for @orbitArchetypeOcean.
+  ///
+  /// In ar, this message translates to:
+  /// **'محيط حيّ'**
+  String get orbitArchetypeOcean;
+
+  /// No description provided for @orbitArchetypeTerracotta.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرض فخّارية دافئة'**
+  String get orbitArchetypeTerracotta;
+
+  /// No description provided for @orbitArchetypeIndustrial.
+  ///
+  /// In ar, this message translates to:
+  /// **'عالم صناعي مضيء'**
+  String get orbitArchetypeIndustrial;
+
+  /// No description provided for @orbitArchetypeCrystal.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلّور بعروق ذهبية'**
+  String get orbitArchetypeCrystal;
+
+  /// No description provided for @orbitArchetypeVerdant.
+  ///
+  /// In ar, this message translates to:
+  /// **'عالم أخضر ينمو'**
+  String get orbitArchetypeVerdant;
+
+  /// No description provided for @orbitArchetypeVolcanic.
+  ///
+  /// In ar, this message translates to:
+  /// **'عالم بركاني'**
+  String get orbitArchetypeVolcanic;
+
+  /// No description provided for @orbitArchetypeGasGiant.
+  ///
+  /// In ar, this message translates to:
+  /// **'عملاق غازي بحلقات'**
+  String get orbitArchetypeGasGiant;
+
+  /// No description provided for @orbitArchetypeIce.
+  ///
+  /// In ar, this message translates to:
+  /// **'عالم جليدي'**
+  String get orbitArchetypeIce;
+
+  /// No description provided for @orbitArchetypeDesert.
+  ///
+  /// In ar, this message translates to:
+  /// **'عالم صحراوي'**
+  String get orbitArchetypeDesert;
+
+  /// No description provided for @orbitStateThriving.
+  ///
+  /// In ar, this message translates to:
+  /// **'مزدهر'**
+  String get orbitStateThriving;
+
+  /// No description provided for @orbitStateSteady.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستقر'**
+  String get orbitStateSteady;
+
+  /// No description provided for @orbitStateNeglected.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحتاج إلى اهتمام'**
+  String get orbitStateNeglected;
+
+  /// No description provided for @orbitStateDormant.
+  ///
+  /// In ar, this message translates to:
+  /// **'هادئ، لا بيانات بعد'**
+  String get orbitStateDormant;
+
+  /// Screen-reader label of a planet
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}، {state}، التوازن {percent}'**
+  String orbitPlanetSemantics(String name, String state, String percent);
+
+  /// Screen-reader label of the core star
+  ///
+  /// In ar, this message translates to:
+  /// **'توازن حياتك {percent}'**
+  String orbitBalanceSemantics(String percent);
+
+  /// Moons that did not fit around a planet (beyond the cap of 12)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وقمر آخر} =2{وقمران آخران} few{و{n} أقمار أخرى} many{و{n} قمرًا آخر} other{و{n} قمر آخر}}'**
+  String orbitMoonsMore(int count, String n);
+
+  /// Countdown to the next prayer engraved on the astrolabe's inner ring
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {duration}'**
+  String orbitCountdown(String prayer, String duration);
+
+  /// No description provided for @orbitNewPlanetName.
+  ///
+  /// In ar, this message translates to:
+  /// **'كوكب جديد'**
+  String get orbitNewPlanetName;
+
+  /// No description provided for @orbitBuiltInCannotDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكواكب الأساسية تُخفى ولا تُحذف'**
+  String get orbitBuiltInCannotDelete;
+
+  /// No description provided for @orbitUndoRenamed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر اسم الكوكب'**
+  String get orbitUndoRenamed;
+
+  /// No description provided for @orbitUndoRecolored.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر لون {name}'**
+  String orbitUndoRecolored(String name);
+
+  /// No description provided for @orbitUndoReordered.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر ترتيب الكواكب'**
+  String get orbitUndoReordered;
+
+  /// No description provided for @orbitUndoHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخفي {name}'**
+  String orbitUndoHidden(String name);
+
+  /// No description provided for @orbitUndoShown.
+  ///
+  /// In ar, this message translates to:
+  /// **'عاد {name} إلى المدار'**
+  String orbitUndoShown(String name);
+
+  /// No description provided for @orbitUndoWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّرت أهمية {name}'**
+  String orbitUndoWeight(String name);
+
+  /// No description provided for @orbitUndoSources.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّرت مصادر {name}'**
+  String orbitUndoSources(String name);
+
+  /// No description provided for @orbitUndoStyle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر طراز {name}'**
+  String orbitUndoStyle(String name);
+
+  /// No description provided for @orbitUndoAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف {name} إلى المدار'**
+  String orbitUndoAdded(String name);
+
+  /// No description provided for @orbitUndoDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف {name}'**
+  String orbitUndoDeleted(String name);
+
+  /// No description provided for @orbitUndoReset.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد {name} إلى أصله'**
+  String orbitUndoReset(String name);
+
+  /// Countdown engraved on the astrolabe's inner ring, e.g. «العصر بعد ١:٢٣:٠٥»
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {time}'**
+  String astrolabeCountdown(String prayer, String time);
+
+  /// Engraved on the inner ring in the moment the next prayer begins
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت {prayer}'**
+  String astrolabeCountdownNow(String prayer);
+
+  /// Screen-reader summary of the astrolabe centrepiece
+  ///
+  /// In ar, this message translates to:
+  /// **'أسطرلاب يومك. {window}. {countdown}. صلّيت {done} من {total}.'**
+  String astrolabeSemantics(
+    String window,
+    String countdown,
+    String done,
+    String total,
+  );
+
+  /// Current prayer window, used in the astrolabe's screen-reader summary
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن وقت {window}'**
+  String astrolabeWindowNow(String window);
+
+  /// No description provided for @astrolabePrayerPrayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer}: صلّيتها'**
+  String astrolabePrayerPrayed(String prayer);
+
+  /// No description provided for @astrolabePrayerDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer}: حان وقتها'**
+  String astrolabePrayerDue(String prayer);
+
+  /// No description provided for @astrolabePrayerUpcoming.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer}: الساعة {time}'**
+  String astrolabePrayerUpcoming(String prayer, String time);
+
+  /// No description provided for @astrolabePrayerMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer}: فاتت'**
+  String astrolabePrayerMissed(String prayer);
+
+  /// Maker's mark engraved on the lower half of the astrolabe's inner ring (like a signed museum astrolabe)
+  ///
+  /// In ar, this message translates to:
+  /// **'مَدار'**
+  String get astrolabeMakersMark;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
