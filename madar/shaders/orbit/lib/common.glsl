@@ -292,9 +292,13 @@ vec3 atmoHalo(vec2 p, vec3 l, vec3 atmoCol, float tau0, float scaleH, float gain
 //   * soft base smoothstep(0, 0.3, u) and a long faded top (broad hump over
 //     the curtain height, not a bright line at the foot): no hard ellipse
 //   * rays never finer than ~6 px (frequency follows uRadius)
-//   * low-frequency arcs break the oval into patches (never a closed ring)
+//   * low-frequency arcs break the oval into separate curtains with real gaps
+//     (about 8 arcs around the oval, no emission floor): never a closed ring.
+//     A closed oval read as a glowing saucer under every thriving world at
+//     the always-visible south pole (stage-3 review).
 //   * day-side factor 0.2 + 1.1 * night, evaluated at the curtain point
-//   * edge-on silhouette softened (finite sheet thickness)
+//   * edge-on silhouette softened: emission fades over a 0.5 R depth gap
+//     where the view ray grazes the cone (no hard vertical 'bowl' sides)
 #define AURORA_H 0.12
 
 vec2 _auroraSheet(vec3 X, float dz, vec3 axis, float c, float zs, mat3 rot, vec3 l, float t, float px, float rayF) {
@@ -307,15 +311,15 @@ vec2 _auroraSheet(vec3 X, float dz, vec3 axis, float c, float zs, mat3 rot, vec3
   float u = h / AURORA_H;
   float rays = noise3(vec3(dir * rayF, t * 0.35 + hemi * 9.0 + u * 0.4));
   float folds = noise3(vec3(dir * 3.2, t * 0.12 - hemi * 4.0));
-  float arcs = smoothstep(0.45, 0.72, noise3(vec3(dir * 1.3 + t * 0.02, hemi * 7.0 + 3.0)));
+  float arcs = smoothstep(0.45, 0.72, noise3(vec3(dir * 2.1 + t * 0.02, hemi * 7.0 + 3.0)));
   // broad soft hump: soft base (0 → 0.3), long soft top (0.35 → 1): no thin bright line
   float prof = smoothstep(0.0, 0.3, u) * (1.0 - smoothstep(0.35, 1.0, u));
   vec3 nrm = normalize(dot(X, axis) * axis - c * c * X);
   float graze = 1.0 / max(abs(nrm.z), 0.4);
   float vis = smoothstep(0.6, 2.5, AURORA_H * length(X.xy) / rX / px);
   float night = 1.0 - smoothstep(-0.25, 0.15, dot(X / rX, l));
-  float e = (0.5 + 0.5 * rays) * (0.35 + 0.65 * folds) * (0.03 + 0.97 * arcs)
-          * prof * graze * vis * (0.2 + 1.1 * night) * smoothstep(0.0, 0.15, dz);
+  float e = (0.5 + 0.5 * rays) * (0.35 + 0.65 * folds) * arcs
+          * prof * graze * vis * (0.2 + 1.1 * night) * smoothstep(0.0, 0.5, dz);
   return vec2(e, e * u);
 }
 

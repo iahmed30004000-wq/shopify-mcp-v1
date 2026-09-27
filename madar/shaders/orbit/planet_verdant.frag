@@ -35,6 +35,12 @@
 // distress rim/halo and compositeDiscHalo.
 // Identity vs Health (ocean): Growth is GREEN LAND – a low sea level so the
 // continents dominate, saturated forests, dark blue seas, an emerald sky.
+// Thriving cue (22 px, day side): the growth mechanic alone can CANCEL the
+// shared grade (at 1.0 most forest is dark old growth, at 0.6 bright young
+// lime + rock), so thriving canopies are lifted (× 0.9 → 1.25 with th) and the
+// graded surface steps 0.95 → 1.06; the sun is 2.1 (was 2.3) and the clouds
+// 1.7 (was 2.15) to keep the exposure band. Stage-3 check: thriving-vs-steady ΔE00 ≥ 4 at seeds 0.5,
+// 1.9, 3.7, 6.2 and 9.1 (it was 1.8–2.4 at two of them).
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -240,7 +246,7 @@ void main() {
     forest = max(mix(vec3(luma(forest)), forest, 1.3), 0.0);          // lush, saturated greens
     // Canopy clumps + a slow seasonal hue drift between hemispheres.
     float canopy = (hiDet > 0.0 && veg > 0.0) ? mix(0.5, noise3(qs * 38.0), hiDet) : 0.5;
-    forest *= (0.75 + 0.5 * canopy) * 1.12;
+    forest *= (0.75 + 0.5 * canopy) * 1.12 * mix(0.9, 1.25, th);   // thriving canopies are lush and bright
     float season = sin(t * 0.12 + q.y * 3.0 + uSeed);
     forest *= mix(vec3(1.0), vec3(1.2, 1.0, 0.65), 0.1 + 0.08 * season);
     vec3 ground = mix(rock, forest, veg);
@@ -261,7 +267,7 @@ void main() {
     float nh = saturate(dot(n, hv));
     float fres = pow(1.0 - saturate(mu), 5.0);
     float sunShade = diff * saturate(1.0 + relief * 7.0);
-    vec3 c = albedo * sunShade * 2.3;
+    vec3 c = albedo * sunShade * 2.1;
     float ripple = (hiDet > 0.0 && nh > 0.9) ? mix(0.5, noise3(qs * 22.0 + t * 0.15), hiDet) : 0.5;
     float glint = (pow(nh, 400.0) * 1.6 + pow(nh, 60.0) * 0.2 * (0.7 + 0.6 * ripple)) * smoothstep(0.0, 0.2, ndl);
     c += vec3(1.0, 0.93, 0.8) * glint * wet;
@@ -283,7 +289,9 @@ void main() {
       float cs = smoothstep(cThr, cThr + 0.2, fbm3lo(cq + lo * 0.2));
       c *= 1.0 - cs * 0.45 * (1.0 - cloud) * shadowK;
     }
-    c = mix(c, vec3(0.9, 0.94, 1.0) * (diff * 2.15 + 0.008), cloud * 0.8);
+    // (1.7, was 2.15: still white after ACES, but cloudy seeds no longer
+    // swamp the 22 px thriving cue or the exposure band)
+    c = mix(c, vec3(0.9, 0.94, 1.0) * (diff * 1.7 + 0.008), cloud * 0.8);
 
     // --- neglect: desert, dunes, drought cracks, murk, dust (surface) ----------
     float crackGlow = 0.0;
@@ -314,7 +322,8 @@ void main() {
     }
 
     // Family living-state grade: after surface lighting, before emission.
-    c = lifeGrade(c, th, ng);
+    // (plus a small verdant-only exposure step: see the header, thriving cue)
+    c = lifeGrade(c, th, ng) * mix(0.95, 1.06, th);
 
     // --- night side: settlements and bioluminescent forests (emission) ---------
     if (night > 0.0 && land > 0.0) {
