@@ -1,17 +1,180 @@
-# madar
+# مَدار · Madar
 
-Madar — a prayer-centered personal life operating system
+A personal life operating system whose day orbits the five prayers.
+Arabic-first (RTL), offline-first, encrypted on device, built in Flutter.
 
-## Getting Started
+> Status: **Phase 0 (foundation) + Phase 1 groundwork** — see
+> [Feature checklist](#feature-checklist). This README is updated at the end of
+> every phase.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Build
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### Requirements
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Tool | Version |
+| --- | --- |
+| Flutter | 3.47.5 (stable) · Dart 3.13 |
+| JDK | 17–21 |
+| Android SDK | platform 36, build-tools, NDK (installed automatically by Gradle when licences are accepted) |
+| Android Gradle Plugin / Gradle | 9.1 / 9.3.1 (wrapper) |
+
+### Commands
+
+```bash
+cd madar
+flutter pub get
+dart run tool/merge_arb.dart && flutter gen-l10n   # after editing strings
+dart run build_runner build                         # after editing Drift tables
+tool/check_shaders.sh                               # validate GLSL (SkSL + SPIR-V)
+flutter analyze
+flutter test --exclude-tags screenshot
+flutter test --tags screenshot                      # renders screens to screenshots/ for visual review
+flutter build apk --release
+```
+
+The APK lands in `build/app/outputs/flutter-apk/app-release.apk`.
+
+### Continuous integration
+
+`.github/workflows/madar-android.yml` (repository root) analyses, tests and
+builds a signed release APK on every push to `main` or `claude/madar-**` that
+touches `madar/`, and uploads it as the artifact `madar-apk-<run>` (APK plus
+`SHA256SUMS.txt`). It can also be started manually (**Actions → Madar Android →
+Run workflow**).
+
+### Signing (keystore)
+
+Release builds are signed with, in order of preference:
+
+1. `android/key.properties` (local builds; git-ignored):
+
+   ```properties
+   storeFile=/absolute/path/madar-release.jks
+   storePassword=…
+   keyAlias=madar
+   keyPassword=…
+   ```
+
+2. Environment variables (CI): `MADAR_KEYSTORE_PATH`, `MADAR_KEYSTORE_PASSWORD`,
+   `MADAR_KEY_ALIAS`, `MADAR_KEY_PASSWORD`.
+3. The debug key, as a fallback so a release build always succeeds. The CI
+   artifact name ends in `-debug-key` in that case.
+
+To sign CI builds with your own key, add these **repository secrets**
+(Settings → Secrets and variables → Actions):
+
+| Secret | Value |
+| --- | --- |
+| `MADAR_KEYSTORE_BASE64` | `base64 -w0 madar-release.jks` |
+| `MADAR_KEYSTORE_PASSWORD` | keystore password |
+| `MADAR_KEY_ALIAS` | `madar` |
+| `MADAR_KEY_PASSWORD` | key password |
+
+Create a keystore with:
+
+```bash
+keytool -genkeypair -v -keystore madar-release.jks -storetype PKCS12 \
+  -alias madar -keyalg RSA -keysize 4096 -validity 36500
+```
+
+Keep the keystore and its passwords safe and out of git: Android only installs
+an update over an existing install when it is signed with the same key.
+
+---
+
+## Architecture
+
+Feature-first clean architecture: `lib/core` holds cross-cutting systems,
+`lib/features/<feature>` holds screens, controllers and feature data access.
+State and dependency injection use Riverpod; navigation uses go_router;
+persistence uses Drift over SQLCipher.
+
+```
+lib/
+  app/                 bootstrap, root app, gates (unlock / lock)
+  core/
+    astro/             sun, moon and star positions, Yale Bright Star Catalog
+    db/                Drift schema (tables/), encryption, repositories, snapshot
+    design/            tokens, 5 themes, typography, glass widgets, painters
+    domain/            enums, money value type, budget math
+    i18n/              ARB parts → ARB → generated L10n, formatters (digits, bidi)
+    import/            tolerant importer for the HTML prototype export
+    interaction/       long-press menu, swipe actions, reorder, edit/move/reminder sheets, quick-add
+    motion/            motion language, transitions, springs, particles
+    settings/          UI preferences readable before unlock
+    sound/             procedural synthesiser, per-theme sound kits, ambient, haptics
+  features/
+    orbit/             The Astrolabe Orbit (home scene): scene math, planet scores, rendering
+    home/ settings/ onboarding/ import/ gallery/
+shaders/               GLSL fragment shaders (Flutter FragmentProgram)
+  orbit/lib/common.glsl  shared noise / lighting / living-state library
+tool/                  merge_arb.dart, check_shaders.sh
+```
+
+### Data model
+
+About 50 encrypted Drift tables grouped by domain (`lib/core/db/tables/`):
+
+* **Core**: planets, key/values, reminders, activity log, tasks (placed in
+  prayer windows), prayer logs, import archive.
+* **Health**: alerts, conditions, medications (times, taken-with, stock,
+  titration), courses (phases), timing rules, doses, lab tests and readings,
+  appointments, doctor questions, pain, mood, tag options, habits, worries.
+* **Money** (integer milli-units, no tax/VAT/zakat fields): currencies with
+  manual rates, wallets, nested budget items (amount or percent of parent or
+  total, monthly or weekly), transactions, jars, deposits, debts, payments,
+  recurring obligations.
+* **Life**: people and contact logs, projects and items, boards and cards,
+  trips, packing, documents, learning goals and logs, exercises, workouts,
+  avoid list, fasting, water, custom modules and entries.
+
+### Security
+
+* The database is encrypted with SQLCipher (sqlite3 build hooks,
+  `source: sqlcipher` on Android). The 256-bit key is generated on first run
+  and kept in Android Keystore-backed secure storage.
+* Only UI preferences (theme, language, lock settings) live outside the
+  encrypted database.
+* No analytics, no ads, no backend. The network is used only for Quran
+  text/audio, optional downloads, user-initiated AI calls and the optional
+  Together Mode online sync (off by default).
+
+### Import format
+
+See [`docs/import-format.md`](docs/import-format.md).
+
+---
+
+## Data sources and credits
+
+| Asset | Source | Licence |
+| --- | --- | --- |
+| IBM Plex Sans Arabic | IBM / Google Fonts | SIL OFL 1.1 |
+| Reem Kufi | Khaled Hosny / Google Fonts | SIL OFL 1.1 |
+| Amiri, Amiri Quran | Khaled Hosny / Google Fonts | SIL OFL 1.1 |
+| Bright stars (V ≤ 5.2) | Yale Bright Star Catalog, 5th rev. ed. (Hoffleit & Warren), NASA ADC / Harvard CfA | public scientific data |
+| Sun & moon positions | NOAA solar calculator, Meeus *Astronomical Algorithms* | algorithms |
+| All UI sounds, ambient, game music | procedurally synthesised in Dart | original |
+| All visuals | code (shaders, painters) — no image files | original |
+
+---
+
+## Feature checklist
+
+Legend: ✅ done · 🟡 partial · ⏳ planned phase
+
+| Area | Status |
+| --- | --- |
+| Phase 0 – setup, architecture, design system, motion, sound, interaction kit, encrypted DB, JSON import | 🟡 in progress |
+| Phase 1 – The Astrolabe Orbit | 🟡 groundwork (astronomy, star catalog, scene math, planet scores, shader library) |
+| Phase 2 – lock screen, themes, i18n, prayer times, adhan, tracker, adhkar | ⏳ |
+| Phase 3 – Quran, wird, Hifz, Qibla | ⏳ |
+| Phase 4 – Health | ⏳ |
+| Phase 5 – Money | ⏳ |
+| Phase 6 – Life + Custom Modules Builder | ⏳ |
+| Phase 7 – Film Reel Engine + Tier 1 games | ⏳ |
+| Phase 8 – Tier 2 games | ⏳ |
+| Phase 9 – AI Bridge, notifications, widgets, search, backup | ⏳ |
+| Phase 10 – Together Mode | ⏳ |
