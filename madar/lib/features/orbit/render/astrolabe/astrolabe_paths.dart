@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:ui';
 
 import '../../../../core/astro/star_catalog.dart';
+import '../../../../core/design/painters/girih_rosette_painter.dart';
 import 'astrolabe_geometry.dart';
 
 /// A bright star carried by the rete: its pointer tip (rete-local unit
@@ -30,6 +31,7 @@ class ReteModel {
   ReteModel._({
     required this.rings,
     required this.straps,
+    required this.overs,
     required this.flames,
     required this.stars,
     required this.eclipticCenter,
@@ -39,8 +41,13 @@ class ReteModel {
   /// Circle centre lines stroked [ringWidth] wide (Capricorn + ecliptic).
   final Path rings;
 
-  /// Strapwork centre lines stroked [strapWidth] wide (the 8-fold lattice).
+  /// Strapwork centre lines stroked [strapWidth] wide: the interlaced
+  /// 8-fold girih rosette, the equinoctial bar and the upper equator arc.
   final Path straps;
+
+  /// Short pieces of the "over" strands at every rosette crossing, redrawn
+  /// on top so the lattice weaves over and under.
+  final Path overs;
 
   /// Filled shapes: the flame-shaped star pointers and their bosses.
   final Path flames;
@@ -48,12 +55,13 @@ class ReteModel {
   final Offset eclipticCenter;
   final double eclipticRadius;
 
-  static const ringWidth = 0.021;
-  static const eclipticWidth = 0.036;
+  static const ringWidth = 0.019;
+  static const eclipticWidth = 0.034;
   static const strapWidth = 0.0125;
 
-  /// Radius of the 8-fold lattice star.
-  static const latticeRadius = 0.47;
+  /// Radius of the 8-fold lattice rosette's outer star tips: a star-shaped
+  /// crown around the hub.
+  static const latticeRadius = 0.435;
 }
 
 /// Pure path builders of the astrolabe (unit or pixel coordinates as noted).
@@ -189,30 +197,35 @@ abstract final class AstrolabePaths {
 
   // --- rete ------------------------------------------------------------------------
 
-  /// A flame-shaped rete pointer from [base] to the sharp [tip] (px or unit),
-  /// curving to one side ([bend] ±1), widest ([width]) near its base.
-  static Path flamePointer(Offset base, Offset tip, {required double width, double bend = 1, int samples = 14}) {
+  /// A flame-shaped rete pointer from [base] to the sharp [tip] (px or unit):
+  /// a slender S-curved blade, narrow at its neck, swelling into a teardrop
+  /// body and tapering into a long point; [bend] (±1) picks the curl side.
+  static Path flamePointer(Offset base, Offset tip, {required double width, double bend = 1, int samples = 18}) {
     final d = tip - base;
     final len = d.distance;
     if (len < 1e-9) return Path();
     final dir = d / len;
     final nrm = Offset(-dir.dy, dir.dx);
-    final ctrl = base + d * 0.45 + nrm * (len * 0.2 * bend);
+    final c1 = base + d * 0.28 + nrm * (len * 0.2 * bend);
+    final c2 = base + d * 0.72 - nrm * (len * 0.1 * bend);
     Offset curve(double t) {
       final u = 1 - t;
-      return base * (u * u) + ctrl * (2 * u * t) + tip * (t * t);
+      return base * (u * u * u) + c1 * (3 * u * u * t) + c2 * (3 * u * t * t) + tip * (t * t * t);
     }
 
     Offset tangent(double t) {
-      final g = (ctrl - base) * (2 * (1 - t)) + (tip - ctrl) * (2 * t);
+      final u = 1 - t;
+      final g = (c1 - base) * (3 * u * u) + (c2 - c1) * (6 * u * t) + (tip - c2) * (3 * t * t);
       final l = g.distance;
       return l < 1e-9 ? dir : g / l;
     }
 
     double half(double t) {
-      // neck at the base, a swelling body, a long tapering point
-      final swell = math.sin(math.min(1.0, t / 0.26) * math.pi / 2);
-      return width / 2 * math.pow(1 - t, 1.15) * (0.45 + 0.55 * swell);
+      const peak = 0.3;
+      final body = t < peak
+          ? math.pow(t / peak, 0.55).toDouble()
+          : math.pow((1 - t) / (1 - peak), 1.35).toDouble();
+      return width / 2 * math.max(body, 0.34 * (1 - t / peak));
     }
 
     final left = <Offset>[];
@@ -264,52 +277,63 @@ abstract final class AstrolabePaths {
       ..addOval(Rect.fromCircle(center: Offset.zero, radius: cap))
       ..addOval(Rect.fromCircle(center: ecl.center, radius: ecl.radius));
 
-    // 8-fold lattice: the sharp {8/3} star, tips on the axes and diagonals.
-    const rho = ReteModel.latticeRadius;
-    final verts = [for (var k = 0; k < 8; k++) Offset(math.cos(k * math.pi / 4 - math.pi / 2), math.sin(k * math.pi / 4 - math.pi / 2)) * rho];
+    // 8-fold interlaced girih rosette (outer {8/2} + inner {8/3} strands).
+    final geo = GirihRosetteGeometry.of(8);
+    const scale = ReteModel.latticeRadius / GirihRosetteGeometry.outerRadius;
+    Offset map(Offset u) => Offset(u.dx, u.dy) * scale;
     final straps = Path();
     final segments = <(Offset, Offset)>[];
-    for (var k = 0; k < 8; k++) {
-      final a = verts[k];
-      final b = verts[(k + 3) % 8];
-      straps
+    for (final strand in geo.strands) {
+      final pts = strand.map(map).toList();
+      straps.addPolygon(pts, true);
+      for (var i = 0; i < pts.length; i++) {
+        segments.add((pts[i], pts[(i + 1) % pts.length]));
+      }
+    }
+    final overs = Path();
+    const half = ReteModel.strapWidth * 2.2;
+    for (final x in geo.crossings) {
+      final p = map(x.point);
+      final a = p - x.overDirection * half;
+      final b = p + x.overDirection * half;
+      overs
         ..moveTo(a.dx, a.dy)
         ..lineTo(b.dx, b.dy);
-      segments.add((a, b));
     }
-    // The equinoctial bar and the meridian bar tie lattice, ecliptic and
-    // Capricorn ring together (as on every real rete).
-    for (var k = 0; k < 4; k++) {
-      final d = Offset(math.cos(k * math.pi / 2), math.sin(k * math.pi / 2));
-      final a = d * rho;
-      final b = d * (cap - ReteModel.ringWidth * 0.3);
-      straps
-        ..moveTo(a.dx, a.dy)
-        ..lineTo(b.dx, b.dy);
-      segments.add((a, b));
-    }
+    // Equinoctial bar (the equator's diameter through the equinoxes).
+    final barEnd = cap - ReteModel.ringWidth * 0.3;
+    straps
+      ..moveTo(-barEnd, 0)
+      ..lineTo(barEnd, 0);
+    segments.add((Offset(-barEnd, 0), Offset(barEnd, 0)));
+    // Lower meridian bar from the hub to where the ecliptic meets Capricorn.
+    straps
+      ..moveTo(0, AstrolabeRadii.hubOuter)
+      ..lineTo(0, cap);
+    segments.add((const Offset(0, AstrolabeRadii.hubOuter), const Offset(0, cap)));
 
     // Star pointers.
     final flames = Path();
     final stars = <ReteStar>[];
     final catalog = {for (final s in kArabicStarNames) s.en: s};
-    var side = 1.0;
     for (final name in reteStarNames) {
       final s = catalog[name];
       if (s == null) continue;
       final tip = AstrolabeProjection.reteLocal(s.ra, s.dec);
       final base = _anchorFor(tip, ecl.center, ecl.radius, segments);
       if (base == null) continue;
-      side = -side;
-      final bend = side;
-      flames.addPath(flamePointer(base, tip, width: 0.034, bend: bend), Offset.zero);
-      // a round boss where the pointer is riveted to the rete
-      flames.addOval(Rect.fromCircle(center: base, radius: 0.0125));
+      // Curl away from the centre line between base and tip, alternating
+      // with the side of the dial for a balanced, hand-made look.
+      final cross = base.dx * tip.dy - base.dy * tip.dx;
+      final bend = cross >= 0 ? 1.0 : -1.0;
+      flames.addPath(flamePointer(base, tip, width: 0.036, bend: bend), Offset.zero);
+      flames.addOval(Rect.fromCircle(center: base, radius: 0.011));
       stars.add(ReteStar(tip: tip, base: base, bend: bend, nameAr: s.ar, nameEn: s.en));
     }
     return ReteModel._(
       rings: rings,
       straps: straps,
+      overs: overs,
       flames: flames,
       stars: stars,
       eclipticCenter: ecl.center,
@@ -320,8 +344,8 @@ abstract final class AstrolabePaths {
   /// Where a star's pointer is riveted: the nearest rete element that is
   /// neither too close (the flame must show) nor too far.
   static Offset? _anchorFor(Offset tip, Offset eclC, double eclR, List<(Offset, Offset)> segments) {
-    const minLen = 0.075;
-    const maxLen = 0.24;
+    const minLen = 0.095;
+    const maxLen = 0.26;
     final candidates = <Offset>[];
     void circle(Offset c, double r) {
       final d = tip - c;

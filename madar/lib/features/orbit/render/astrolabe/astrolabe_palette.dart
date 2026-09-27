@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
 import '../../../../core/design/themes.dart';
@@ -88,9 +89,9 @@ class AstrolabePalette {
       starCore: faith.glow,
       starCorona: faith.surface,
       labelPrayed: mix(faith.glow, warmWhite, 0.35),
-      labelDue: mix(t.gold, faith.glow, 0.4),
-      labelUpcoming: mix(t.gold, enamelMid, 0.18),
-      labelMissed: mix(t.textTertiary, enamelMid, light ? 0.1 : 0.35),
+      labelDue: light ? mix(faith.surface, t.space0, 0.3) : mix(t.gold, faith.glow, 0.4),
+      labelUpcoming: light ? mix(t.gold, t.space0, 0.4) : mix(t.gold, enamelMid, 0.12),
+      labelMissed: light ? mix(t.textTertiary, t.space2, 0.3) : mix(t.textTertiary, enamelMid, 0.3),
       sun: mix(faith.surface, t.gold, 0.3),
       sunGlow: faith.glow,
     );

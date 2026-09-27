@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'dart:typed_data';
+import 'dart:ui' show Offset;
 
 import 'package:flutter/foundation.dart';
 
@@ -24,8 +24,8 @@ class AstrolabeController extends ChangeNotifier {
     this.igniteDuration = const Duration(milliseconds: 800),
     this.pulseDuration = const Duration(milliseconds: 1700),
     this.extinguishDuration = const Duration(milliseconds: 300),
-    double time = 12,
-  }) : _time = time {
+    double initialTime = 12,
+  }) : _time = initialTime {
     if (state != null) update(state, animate: false);
   }
 

@@ -335,7 +335,7 @@ abstract final class MoonBuilder {
 
     // People around Family.
     final family = MoonRules.hostOf['people']!;
-    final people = inp.people.where((p) => p.showAsMoon).toList();
+    final people = palettes.containsKey(family) ? inp.people.where((p) => p.showAsMoon).toList() : const <PersonMoonIn>[];
     for (var i = 0; i < people.length; i++) {
       final p = people[i];
       final rhythm = p.rhythmDays ?? 0;
@@ -363,9 +363,10 @@ abstract final class MoonBuilder {
 
     // Wallets around Money, sized by their share of the positive balances.
     final money = MoonRules.hostOf['wallets']!;
-    final positive = inp.wallets.fold<int>(0, (a, w) => a + math.max(0, w.balanceBaseMilli));
-    for (var i = 0; i < inp.wallets.length; i++) {
-      final w = inp.wallets[i];
+    final walletList = palettes.containsKey(money) ? inp.wallets : const <WalletMoonIn>[];
+    final positive = walletList.fold<int>(0, (a, w) => a + math.max(0, w.balanceBaseMilli));
+    for (var i = 0; i < walletList.length; i++) {
+      final w = walletList[i];
       final share = positive <= 0 || w.balanceBaseMilli <= 0 ? 0.0 : w.balanceBaseMilli / positive;
       add(
         money,
@@ -389,9 +390,10 @@ abstract final class MoonBuilder {
 
     // Boards around Work, sized by their open cards.
     final work = MoonRules.hostOf['boards']!;
-    final maxOpen = inp.boards.fold<int>(0, (a, b) => math.max(a, b.open));
-    for (var i = 0; i < inp.boards.length; i++) {
-      final b = inp.boards[i];
+    final boardList = palettes.containsKey(work) ? inp.boards : const <BoardMoonIn>[];
+    final maxOpen = boardList.fold<int>(0, (a, b) => math.max(a, b.open));
+    for (var i = 0; i < boardList.length; i++) {
+      final b = boardList[i];
       add(
         work,
         _Candidate(
@@ -416,9 +418,9 @@ abstract final class MoonBuilder {
     // undated ones; finished trips are not moons.
     final travel = MoonRules.hostOf['trips']!;
     final today = DateTime(now.year, now.month, now.day);
-    final trips = inp.trips
-        .where((t) => t.status != TripStatus.done && (t.endDate == null || !t.endDate!.isBefore(today)))
-        .toList();
+    final trips = palettes.containsKey(travel)
+        ? inp.trips.where((t) => t.status != TripStatus.done && (t.endDate == null || !t.endDate!.isBefore(today))).toList()
+        : const <TripMoonIn>[];
     final ordered = [
       ...trips.where((t) => t.startDate != null && !t.startDate!.isBefore(today)).toList()
         ..sort((a, b) => a.startDate!.compareTo(b.startDate!)),

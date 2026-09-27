@@ -31,8 +31,10 @@ abstract final class AstrolabeRadii {
   /// stereographic plate (horizon / almucantars are clipped to it).
   static const capricorn = 0.758;
 
-  /// Prayer names engraved on the plate (upright, inside the channel).
-  static const labels = 0.688;
+  /// Prayer names engraved on the plate (upright, inside the channel):
+  /// nominal centre radius, and the radius their outer edge never passes.
+  static const labels = 0.672;
+  static const labelsOuter = 0.742;
 
   // --- hub -----------------------------------------------------------------
   /// Outer edge of the central brass hub ring carrying the countdown.
@@ -62,6 +64,8 @@ enum AstrolabeLod {
   ultra;
 
   bool operator >=(AstrolabeLod other) => index >= other.index;
+
+  bool operator <(AstrolabeLod other) => index < other.index;
 }
 
 /// Display state of one obligatory prayer pointer.
@@ -215,19 +219,22 @@ abstract final class AstrolabeGeometry {
   }
 
   /// Canvas angles for the five prayer names: each at its prayer's angle,
-  /// spread so neighbours never overlap. [minGap] is the smallest allowed
-  /// angular distance (radians) between neighbouring names.
-  static Map<Prayer, double> labelAngles(Map<Prayer, double> fractions, double minGap) {
+  /// spread so neighbours never overlap. [gapFor] gives the smallest allowed
+  /// angular distance (radians) between two names meeting around a canvas
+  /// angle (upright names need more room side by side than stacked).
+  static Map<Prayer, double> labelAngles(
+    Map<Prayer, double> fractions, {
+    required double Function(double angle) gapFor,
+  }) {
     final entries = fractions.entries.toList()..sort((a, b) => a.value.compareTo(b.value));
     if (entries.isEmpty) return const {};
-    // Unwrap angles in dial order starting just after the widest gap so the
-    // spread never pushes a label across midnight.
-    final base = entries.map((e) => e.value).toList();
+    // Unwrap in dial order starting after the widest gap so the spread never
+    // pushes a name across that gap.
     var widest = 0;
     var widestGap = -1.0;
-    for (var i = 0; i < base.length; i++) {
-      final next = i + 1 < base.length ? base[i + 1] : base.first + 1;
-      final gap = next - base[i];
+    for (var i = 0; i < entries.length; i++) {
+      final next = i + 1 < entries.length ? entries[i + 1].value : entries.first.value + 1;
+      final gap = next - entries[i].value;
       if (gap > widestGap) {
         widestGap = gap;
         widest = i;
@@ -235,22 +242,20 @@ abstract final class AstrolabeGeometry {
     }
     final order = [for (var k = 1; k <= entries.length; k++) entries[(widest + k) % entries.length]];
     var prev = -double.infinity;
-    final unwrapped = <double>[];
+    final angles = <double>[];
     for (final e in order) {
       var f = e.value;
       while (f < prev) {
         f += 1;
       }
-      unwrapped.add(f);
+      angles.add(f * tau);
       prev = f;
     }
-    final spreadOut = spread(
-      [for (final f in unwrapped) f * tau],
-      List<double>.filled(math.max(0, unwrapped.length - 1), minGap),
-    );
-    return {
-      for (var i = 0; i < order.length; i++) order[i].key: angleForFraction(spreadOut[i] / tau),
-    };
+    final gaps = <double>[
+      for (var i = 0; i + 1 < angles.length; i++) gapFor(angleForFraction((angles[i] + angles[i + 1]) / 2 / tau)),
+    ];
+    final spreadOut = spread(angles, gaps);
+    return {for (var i = 0; i < order.length; i++) order[i].key: angleForFraction(spreadOut[i] / tau)};
   }
 
   /// Status of [prayer] at [now] given today's [times], the prayers logged

@@ -395,13 +395,16 @@ class ScoreInputs {
 
 /// Default source weights per planet; users override them per planet
 /// (`planets.sources` JSON: `{"prayers": 0.7, "tasks": 0.3}`).
+///
+/// Secondary sources (adhkar, mood, jars …) only count once they have data,
+/// so a planet is scored by whatever the user actually tracks.
 const Map<String, Map<String, double>> kDefaultSourceWeights = {
-  'faith': {'prayers': 0.8, 'tasks': 0.2},
-  'health': {'doses': 0.7, 'tasks': 0.3},
+  'faith': {'prayers': 0.8, 'tasks': 0.2, 'adhkar': 0.2, 'quran': 0.2},
+  'health': {'doses': 0.7, 'tasks': 0.3, 'habits': 0.2, 'mood': 0.2, 'pain': 0.1, 'appointments': 0.1},
   'family': {'contacts': 0.8, 'tasks': 0.2},
-  'work': {'cards': 0.6, 'tasks': 0.4},
-  'money': {'budget': 0.4, 'obligations': 0.3, 'debts': 0.2, 'tasks': 0.1},
-  'growth': {'goals': 0.8, 'tasks': 0.2},
+  'work': {'cards': 0.6, 'tasks': 0.4, 'projects': 0.3},
+  'money': {'budget': 0.4, 'obligations': 0.3, 'debts': 0.2, 'tasks': 0.1, 'jars': 0.2, 'transactions': 0.2},
+  'growth': {'goals': 0.8, 'tasks': 0.2, 'projects': 0.3},
   'body': {'workouts': 0.5, 'fasting': 0.2, 'water': 0.2, 'tasks': 0.1},
   'travel': {'documents': 0.5, 'trips': 0.4, 'tasks': 0.1},
 };
