@@ -830,7 +830,7 @@ class L10nAr extends L10n {
   String get interactionReminderKindBeforeDue => 'قبل الموعد';
 
   @override
-  String get interactionReminderDate => 'اليوم';
+  String get interactionReminderDate => 'التاريخ';
 
   @override
   String get interactionReminderTime => 'الوقت';
@@ -882,6 +882,32 @@ class L10nAr extends L10n {
   String interactionReminderOnce(String date, String time) {
     return '$date الساعة $time';
   }
+
+  @override
+  String get interactionReminderRelBefore => 'قبلها';
+
+  @override
+  String get interactionReminderRelAt => 'في وقتها';
+
+  @override
+  String get interactionReminderRelAfter => 'بعدها';
+
+  @override
+  String interactionReminderWeekly(String days, String time) {
+    return '$days الساعة $time';
+  }
+
+  @override
+  String get interactionReminderWorkdays => 'أيام الدوام';
+
+  @override
+  String get interactionReminderEveryDay => 'كل الأيام';
+
+  @override
+  String get interactionReminderRemove => 'إزالة التذكير';
+
+  @override
+  String get interactionReminderNoDue => 'لا موعد نهائي لهذا العنصر';
 
   @override
   String interactionDurationMinutes(int count) {
@@ -1017,4 +1043,494 @@ class L10nAr extends L10n {
 
   @override
   String get interactionKindNote => 'ملاحظة';
+
+  @override
+  String get interactionListSeparator => '، ';
+
+  @override
+  String get interactionQuickAddPreview => 'هكذا فهمتُها';
+
+  @override
+  String get interactionTrayLabel => 'إجراءات سريعة مفتوحة';
+
+  @override
+  String get importTitle => 'استيراد البيانات';
+
+  @override
+  String get importHeroTitle => 'أعِد بياناتك إلى مَدارها';
+
+  @override
+  String get importHeroBody =>
+      'اختر ملف JSON الذي صدّرته من النسخة التجريبية، أو الصق محتواه. نحلّله أولًا ونريك كل شيء قبل أن يُكتب سطر واحد.';
+
+  @override
+  String get importPickFile => 'اختيار ملف JSON';
+
+  @override
+  String get importPasteToggle => 'لصق نص JSON';
+
+  @override
+  String get importPasteHint => 'الصق محتوى الملف هنا…';
+
+  @override
+  String get importAnalyzeAction => 'تحليل';
+
+  @override
+  String get importAnalyzing => 'نقرأ ملفك ونرسم خريطته…';
+
+  @override
+  String get importAcceptedHint =>
+      'نقبل تصدير النسخة التجريبية (data و logs) أو أقسامًا مباشرة، بمفاتيح عربية أو إنجليزية. لا يضيع شيء: ما لا نعرفه يُحفظ في الأرشيف.';
+
+  @override
+  String get importFileLabel => 'الملف';
+
+  @override
+  String get importPastedLabel => 'نص ملصوق';
+
+  @override
+  String get importPreviewTitle => 'ما وجدناه';
+
+  @override
+  String importTotalRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سجل',
+      many: '$count سجلًا',
+      few: '$count سجلات',
+      two: 'سجلان',
+      one: 'سجل واحد',
+      zero: 'لا سجلات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importRecordsCaption => 'جاهزة للاستيراد';
+
+  @override
+  String get importShapeTitle => 'بنية الملف';
+
+  @override
+  String get importShapeWrapped => 'بيانات + سجلات';
+
+  @override
+  String get importShapeDataOnly => 'بيانات فقط';
+
+  @override
+  String get importShapeLogsOnly => 'سجلات فقط';
+
+  @override
+  String get importShapeFlat => 'أقسام مباشرة';
+
+  @override
+  String get importShapeList => 'قائمة سجلات';
+
+  @override
+  String get importShapeNested => 'مجمّعة حسب المجال';
+
+  @override
+  String get importShapeDayKeyed => 'سجلات مرتّبة بالأيام';
+
+  @override
+  String get importShapeTyped => 'أحداث مصنّفة';
+
+  @override
+  String get importShapeIdKeyed => 'مفهرسة بالمعرّفات';
+
+  @override
+  String get importKeysArabic => 'مفاتيح عربية';
+
+  @override
+  String get importKeysCamel => 'مفاتيح camelCase';
+
+  @override
+  String get importKeysSnake => 'مفاتيح snake_case';
+
+  @override
+  String get importKeysMixed => 'مفاتيح مختلطة';
+
+  @override
+  String get importSectionsTitle => 'الأقسام';
+
+  @override
+  String importBudgetTotal(String amount) {
+    return 'مجموع الميزانية الشهرية: $amount';
+  }
+
+  @override
+  String get importModulesTitle => 'وحدات جديدة من بيانات غير معروفة';
+
+  @override
+  String get importModulesBody =>
+      'لم نتعرّف على هذه الأقسام، فحوّلناها إلى وحدات مخصّصة كي لا يضيع منها شيء.';
+
+  @override
+  String importModuleEntries(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إدخال',
+      many: '$count إدخالًا',
+      few: '$count إدخالات',
+      two: 'إدخالان',
+      one: 'إدخال واحد',
+      zero: 'بلا إدخالات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importWarningsTitle => 'ملاحظات قبل الاستيراد';
+
+  @override
+  String get importUnmappedTitle => 'محفوظ في الأرشيف';
+
+  @override
+  String get importUnmappedBody =>
+      'قيم لا مكان لها في مَدار بعد؛ تُحفظ كما هي مع النسخة الأصلية من الملف.';
+
+  @override
+  String importTimesCount(String count) {
+    return '×$count';
+  }
+
+  @override
+  String get importDuplicateTitle => 'استوردت هذا الملف من قبل';
+
+  @override
+  String importDuplicateBody(String date) {
+    return 'كان ذلك في $date. لن تتكرر السجلات الموجودة؛ ستُضاف الجديدة فقط.';
+  }
+
+  @override
+  String get importDuplicateAnyway => 'استيراد على أي حال';
+
+  @override
+  String importStartAction(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'استيراد $count سجل',
+      many: 'استيراد $count سجلًا',
+      few: 'استيراد $count سجلات',
+      two: 'استيراد سجلين',
+      one: 'استيراد سجل واحد',
+      zero: 'حفظ في الأرشيف',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importChooseAnother => 'ملف آخر';
+
+  @override
+  String get importWriting => 'نكتب بياناتك في مَدارها…';
+
+  @override
+  String get importDoneTitle => 'اكتمل الاستيراد';
+
+  @override
+  String importDoneBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'أُضيف $count سجل',
+      many: 'أُضيف $count سجلًا',
+      few: 'أُضيفت $count سجلات',
+      two: 'أُضيف سجلان',
+      one: 'أُضيف سجل واحد',
+      zero: 'لم يُضف أي سجل جديد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String importDoneExisting(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سجل كانت موجودة فتُركت كما هي',
+      many: '$count سجلًا كانت موجودة فتُركت كما هي',
+      few: '$count سجلات كانت موجودة فتُركت كما هي',
+      two: 'سجلان كانا موجودَين فتُركا كما هما',
+      one: 'سجل واحد كان موجودًا فتُرك كما هو',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importDoneArchived =>
+      'حُفظت نسخة أصلية كاملة من الملف في الأرشيف.';
+
+  @override
+  String get importErrorInvalidJson => 'هذا ليس نص JSON صالحًا.';
+
+  @override
+  String get importErrorEmpty => 'لا يوجد محتوى لاستيراده.';
+
+  @override
+  String get importErrorNotObject =>
+      'الملف لا يحتوي على بيانات قابلة للاستيراد.';
+
+  @override
+  String get importErrorRead => 'تعذّرت قراءة الملف.';
+
+  @override
+  String get importErrorCommit => 'تعذّر الاستيراد، ولم يتغيّر شيء في بياناتك.';
+
+  @override
+  String get importNothingFound =>
+      'لم نجد في هذا الملف بيانات نعرفها، لكنه سيُحفظ كاملًا في الأرشيف.';
+
+  @override
+  String get importTryAgain => 'حاول مجددًا';
+
+  @override
+  String get importDefaultWallet => 'المحفظة الرئيسية';
+
+  @override
+  String get importDefaultBoard => 'العمل';
+
+  @override
+  String get importOpeningBalance => 'الرصيد الافتتاحي';
+
+  @override
+  String get importColumnTodo => 'للإنجاز';
+
+  @override
+  String get importColumnDoing => 'قيد العمل';
+
+  @override
+  String get importColumnDone => 'منجز';
+
+  @override
+  String get importSectionHealthAlerts => 'تنبيهات صحية';
+
+  @override
+  String get importSectionConditions => 'الحالات الصحية';
+
+  @override
+  String get importSectionMedications => 'الأدوية والمكمّلات';
+
+  @override
+  String get importSectionMedDoses => 'سجل الجرعات';
+
+  @override
+  String get importSectionLabTests => 'التحاليل';
+
+  @override
+  String get importSectionLabReadings => 'نتائج التحاليل';
+
+  @override
+  String get importSectionAppointments => 'المواعيد الطبية';
+
+  @override
+  String get importSectionDoctorQuestions => 'أسئلة للطبيب';
+
+  @override
+  String get importSectionPainEntries => 'سجل الألم';
+
+  @override
+  String get importSectionMoodEntries => 'المزاج والتوتر';
+
+  @override
+  String get importSectionHabits => 'العادات';
+
+  @override
+  String get importSectionHabitLogs => 'سجل العادات';
+
+  @override
+  String get importSectionWorries => 'المخاوف';
+
+  @override
+  String get importSectionCurrencies => 'العملات';
+
+  @override
+  String get importSectionWallets => 'المحافظ';
+
+  @override
+  String get importSectionBudgetItems => 'بنود الميزانية';
+
+  @override
+  String get importSectionTransactions => 'المعاملات';
+
+  @override
+  String get importSectionJars => 'الحصّالات';
+
+  @override
+  String get importSectionJarDeposits => 'إيداعات الحصّالات';
+
+  @override
+  String get importSectionDebts => 'الديون';
+
+  @override
+  String get importSectionDebtPayments => 'سداد الديون';
+
+  @override
+  String get importSectionObligations => 'الالتزامات الدورية';
+
+  @override
+  String get importSectionPeople => 'الأشخاص';
+
+  @override
+  String get importSectionContactLogs => 'سجل التواصل';
+
+  @override
+  String get importSectionProjects => 'المشاريع';
+
+  @override
+  String get importSectionProjectItems => 'مهام المشاريع';
+
+  @override
+  String get importSectionBoards => 'لوحات العمل';
+
+  @override
+  String get importSectionBoardCards => 'بطاقات العمل';
+
+  @override
+  String get importSectionTrips => 'الرحلات';
+
+  @override
+  String get importSectionTripItems => 'قوائم التجهيز';
+
+  @override
+  String get importSectionTravelDocuments => 'وثائق السفر';
+
+  @override
+  String get importSectionLearningGoals => 'أهداف التعلّم';
+
+  @override
+  String get importSectionGoalLogs => 'سجل التقدّم';
+
+  @override
+  String get importSectionExercises => 'التمارين';
+
+  @override
+  String get importSectionWorkoutLogs => 'سجل التمارين';
+
+  @override
+  String get importSectionAvoidItems => 'قائمة التجنّب';
+
+  @override
+  String get importSectionFastingSessions => 'الصيام';
+
+  @override
+  String get importSectionWaterLogs => 'الماء';
+
+  @override
+  String get importSectionPrayerLogs => 'سجل الصلاة';
+
+  @override
+  String get importSectionTasks => 'المهام';
+
+  @override
+  String get importSectionCustomModules => 'وحدات مخصّصة';
+
+  @override
+  String get importSectionCustomEntries => 'إدخالات الوحدات';
+
+  @override
+  String get importIssueInvalidJson => 'نص JSON غير صالح';
+
+  @override
+  String get importIssueEmptyInput => 'لا يوجد محتوى';
+
+  @override
+  String get importIssueNotAnObject => 'لا بيانات قابلة للاستيراد';
+
+  @override
+  String get importIssueUnparsedDate => 'تواريخ لم نستطع قراءتها';
+
+  @override
+  String get importIssueUnparsedAmount => 'مبالغ لم نستطع قراءتها';
+
+  @override
+  String get importIssueUnparsedTime => 'أوقات لم نستطع قراءتها';
+
+  @override
+  String get importIssueUnparsedNumber => 'أرقام لم نستطع قراءتها';
+
+  @override
+  String get importIssueInferredTime =>
+      'أوقات استنتجناها من كلمات (صباحًا ← ٨:٠٠)';
+
+  @override
+  String get importIssueMissingRequired =>
+      'سجلات تنقصها قيمة أساسية فلم تُستورد، وهي محفوظة في الأرشيف';
+
+  @override
+  String get importIssueUnresolvedReference => 'إشارات إلى عناصر غير موجودة';
+
+  @override
+  String get importIssueCreatedReference => 'عناصر أنشأناها من أسمائها';
+
+  @override
+  String get importIssueUnknownValue => 'قيم غير معروفة استبدلنا بها الافتراضي';
+
+  @override
+  String get importIssueAssumedGlasses => 'كميات ماء قرأناها أكوابًا (٢٥٠ مل)';
+
+  @override
+  String get importIssueAssumedFastingTarget => 'أهداف صيام مفترضة';
+
+  @override
+  String get importIssueAssumedDate => 'تواريخ مفترضة';
+
+  @override
+  String get importIssueAssumedValue => 'قيم مفترضة';
+
+  @override
+  String get importIssueCurrencyWallet =>
+      'محافظ أنشأناها لعملات مختلفة (دون تحويل)';
+
+  @override
+  String get importIssueMissingRate =>
+      'عملات بلا سعر صرف (افترضنا ١) — عدّلها من الإعدادات';
+
+  @override
+  String get importIssueDuplicateSourceId => 'معرّفات مكرّرة في الملف';
+
+  @override
+  String get importIssueBudget => 'فحوص الميزانية';
+
+  @override
+  String get importIssueDuplicateFile => 'ملف مستورد من قبل';
+
+  @override
+  String get importIssueSettingRead => 'إعدادات قرأناها من الملف';
+
+  @override
+  String importBudgetChildrenUnder(String name, String amount) {
+    return 'بنود «$name» أقل منه بـ $amount';
+  }
+
+  @override
+  String importBudgetChildrenOver(String name, String amount) {
+    return 'بنود «$name» تزيد عليه بـ $amount';
+  }
+
+  @override
+  String importBudgetPercentOver(String name, String percent) {
+    return 'نِسَب «$name» تتجاوز ١٠٠٪ ($percent)';
+  }
+
+  @override
+  String importBudgetCircular(String name) {
+    return 'نِسَب «$name» تعتمد على نفسها';
+  }
+
+  @override
+  String importBudgetStructure(String name) {
+    return '«$name» مرتبط ببند غير صالح، فجعلناه بندًا رئيسيًا';
+  }
+
+  @override
+  String importBudgetMissingRate(String currency) {
+    return 'لا يوجد سعر صرف لـ $currency';
+  }
+
+  @override
+  String get importBudgetWhole => 'الميزانية كلها';
 }

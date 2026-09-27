@@ -95,20 +95,18 @@ abstract final class LocalizedNumbers {
   /// zeros: 12500 → "12.5", 3000 → "3", 1250 → "1.25".
   static String formatMilli(int milli, {int maxDecimals = 3}) {
     final negative = milli < 0;
-    final abs = milli.abs();
-    final whole = abs ~/ 1000;
-    var frac = (abs % 1000).toString().padLeft(3, '0');
+    var abs = milli.abs();
     if (maxDecimals < 3) {
-      final rounded = (abs / 1000).toStringAsFixed(maxDecimals);
-      final parts = rounded.split('.');
-      final w = parts[0];
-      final f = parts.length > 1 ? parts[1].replaceAll(RegExp(r'0+$'), '') : '';
-      final body = f.isEmpty ? w : '$w.$f';
-      return negative && body != '0' ? '-$body' : body;
+      // Round half-up in integer arithmetic (1255 → 1.26, never 1.25 from a
+      // binary-float 1.2549999…).
+      const steps = [1000, 100, 10];
+      final step = steps[maxDecimals.clamp(0, 2)];
+      abs = (abs + step ~/ 2) ~/ step * step;
     }
-    frac = frac.replaceAll(RegExp(r'0+$'), '');
+    final whole = abs ~/ 1000;
+    final frac = (abs % 1000).toString().padLeft(3, '0').replaceAll(RegExp(r'0+$'), '');
     final body = frac.isEmpty ? '$whole' : '$whole.$frac';
-    return negative ? '-$body' : body;
+    return negative && abs != 0 ? '-$body' : body;
   }
 
   /// Formats a number for an input field: integers without a decimal point,

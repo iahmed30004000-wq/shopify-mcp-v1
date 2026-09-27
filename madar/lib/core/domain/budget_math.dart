@@ -146,7 +146,13 @@ class BudgetSettings {
   /// First day of a budgeting week ([DateTime.monday] … [DateTime.sunday]).
   final int weekStart;
 
-  Rational get weeksPerMonthRatio => Rational.fromNum(weeksPerMonth);
+  /// [weeksPerMonth] as an exact ratio; a non-positive or non-finite value
+  /// falls back to [defaultWeeksPerMonth].
+  Rational get weeksPerMonthRatio {
+    final w = weeksPerMonth;
+    if (w <= 0 || (w is double && !w.isFinite)) return Rational.fromNum(defaultWeeksPerMonth);
+    return Rational.fromNum(w);
+  }
 
   BudgetSettings copyWith({num? weeksPerMonth, String? baseCurrency, Map<String, num>? ratesToBase, int? weekStart}) =>
       BudgetSettings(
@@ -543,24 +549,26 @@ class BudgetMath {
       sum += _affine(r);
     }
     final bSum = sum.b;
+    final Rational solved;
     if (bSum >= Rational.one) {
       // Σ percent-of-total ≥ 100 %: T = A + p·T has no (finite, unique)
-      // solution. Exactly 100 % is circular; more is over-allocated.
+      // solution. Exactly 100 % is circular; more is over-allocated. The
+      // percent items are then valued against the fixed part A and the
+      // total is the plain sum of the roots.
       _warnings.add(
         BudgetWarning(
           bSum > Rational.one ? BudgetWarningKind.percentOver100 : BudgetWarningKind.circularPercent,
           percent: (bSum * Rational.hundred).toDouble(),
         ),
       );
-      _total = sum.a;
+      solved = sum.a;
     } else {
-      _total = sum.a / (Rational.one - bSum);
+      solved = sum.a / (Rational.one - bSum);
     }
     for (final id in _byId.keys) {
-      _value[id] = _affine(id).at(_total);
+      _value[id] = _affine(id).at(solved);
     }
-    final rootSum = _roots.fold(Rational.zero, (a, r) => a + _value[r]!);
-    if (bSum >= Rational.one) _total = rootSum;
+    _total = bSum >= Rational.one ? _roots.fold(Rational.zero, (a, r) => a + _value[r]!) : solved;
 
     // Percent-of-parent siblings that together claim more than their parent
     // (a derived parent reports this from `_rollup` instead).

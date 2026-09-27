@@ -39,18 +39,28 @@ class _HostState extends State<_Host> {
   }
 }
 
-Future<_HostState> _open(WidgetTester tester, List<FieldSpec> fields, {Map<String, Object?> initial = const {}, Locale locale = const Locale('ar')}) async {
+Future<_HostState> _open(
+  WidgetTester tester,
+  List<FieldSpec> fields, {
+  Map<String, Object?> initial = const {},
+  Locale locale = const Locale('ar'),
+}) async {
   usePhoneSurface(tester);
-  await tester.pumpWidget(interactionApp(_Host(fields: fields, initial: initial), locale: locale));
+  await tester.pumpWidget(
+    interactionApp(
+      _Host(fields: fields, initial: initial),
+      locale: locale,
+    ),
+  );
   await tester.tap(find.text('open'));
   await tester.pumpAndSettle();
   return tester.state<_HostState>(find.byType(_Host));
 }
 
 Finder _input(String label) => find.descendant(
-      of: find.ancestor(of: find.text(label), matching: find.byType(Column)).first,
-      matching: find.byType(TextField),
-    );
+  of: find.ancestor(of: find.text(label), matching: find.byType(Column)).first,
+  matching: find.byType(TextField),
+);
 
 void main() {
   late List<Sfx> played;
@@ -123,7 +133,8 @@ void main() {
       FieldSpec.number(
         'max',
         'الأعلى',
-        validator: (v, all) => v != null && all['min'] != null && (v as num) < (all['min'] as num) ? 'أصغر من الأدنى' : null,
+        validator: (v, all) =>
+            v != null && all['min'] != null && (v as num) < (all['min'] as num) ? 'أصغر من الأدنى' : null,
       ),
     ]);
     await tester.enterText(_input('الأدنى'), '10');
@@ -136,7 +147,10 @@ void main() {
     final host = await _open(
       tester,
       [FieldSpec.text('title', 'العنوان'), FieldSpec.currency('price', 'السعر')],
-      initial: {'title': 'قهوة', 'price': const MoneyValue(amountMilli: 2500, currency: 'JOD')},
+      initial: {
+        'title': 'قهوة',
+        'price': const MoneyValue(amountMilli: 2500, currency: 'JOD'),
+      },
     );
     expect(find.text('قهوة'), findsOneWidget);
     expect(find.text('2.5'), findsOneWidget);
@@ -207,13 +221,19 @@ void main() {
 
   testWidgets('chips, toggle, rating, prayer window, colour and icon', (tester) async {
     final host = await _open(tester, [
-      FieldSpec.singleSelect('priority', 'الأولوية', options: const [
-        SelectOption(id: 'low', label: 'منخفضة'),
-        SelectOption(id: 'high', label: 'عالية'),
-      ]),
+      FieldSpec.singleSelect(
+        'priority',
+        'الأولوية',
+        options: const [
+          SelectOption(id: 'low', label: 'منخفضة'),
+          SelectOption(id: 'high', label: 'عالية'),
+        ],
+      ),
       FieldSpec.toggle('top3', 'من أهم ثلاث'),
       FieldSpec.rating('stars', 'التقييم'),
       FieldSpec.prayerWindow('window', 'الوقت'),
+      FieldSpec.color('color', 'اللون', palette: const [Color(0xFF7FE3C4), Color(0xFF9C8CFF)]),
+      FieldSpec.icon('icon', 'الأيقونة', icons: const {'star': Icons.star_rounded, 'moon': Icons.dark_mode_rounded}),
     ]);
     await tester.tap(find.text('عالية'));
     await tester.tap(find.text('من أهم ثلاث'));
@@ -222,6 +242,12 @@ void main() {
     await tester.ensureVisible(find.text('بعد العشاء'));
     await tester.tap(find.text('بعد العشاء'));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.bySemanticsLabel('لون 2'));
+    await tester.tap(find.bySemanticsLabel('لون 2'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byIcon(Icons.dark_mode_rounded));
+    await tester.tap(find.byIcon(Icons.dark_mode_rounded));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('حفظ'));
     await tester.pumpAndSettle();
     expect(host.result, {
@@ -229,16 +255,23 @@ void main() {
       'top3': true,
       'stars': 4,
       'window': PrayerWindow.isha,
+      'color': 0xFF9C8CFF,
+      'icon': 'moon',
     });
     expect(played, contains(Sfx.toggleOn));
   });
 
   testWidgets('multi-select can add an option inline', (tester) async {
     final host = await _open(tester, [
-      FieldSpec.multiSelect('triggers', 'المحفّزات', allowAdd: true, options: const [
-        SelectOption(id: 'stress', label: 'توتر'),
-        SelectOption(id: 'sleep', label: 'قلة نوم'),
-      ]),
+      FieldSpec.multiSelect(
+        'triggers',
+        'المحفّزات',
+        allowAdd: true,
+        options: const [
+          SelectOption(id: 'stress', label: 'توتر'),
+          SelectOption(id: 'sleep', label: 'قلة نوم'),
+        ],
+      ),
     ]);
     await tester.tap(find.text('توتر'));
     await tester.tap(find.text('خيار جديد'));
@@ -253,9 +286,13 @@ void main() {
   });
 
   testWidgets('time list adds times in order and removes them', (tester) async {
-    final host = await _open(tester, [FieldSpec.timeList('times', 'أوقات الجرعات')], initial: {
-      'times': ['20:00'],
-    });
+    final host = await _open(
+      tester,
+      [FieldSpec.timeList('times', 'أوقات الجرعات')],
+      initial: {
+        'times': ['20:00'],
+      },
+    );
     await tester.tap(find.text('إضافة وقت'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('إضافة'));
@@ -266,11 +303,10 @@ void main() {
   });
 
   testWidgets('works left-to-right in English', (tester) async {
-    final host = await _open(
-      tester,
-      [FieldSpec.text('title', 'Title', required: true), FieldSpec.slider('pain', 'Pain', labels: const {0: 'None', 10: 'Worst'})],
-      locale: const Locale('en'),
-    );
+    final host = await _open(tester, [
+      FieldSpec.text('title', 'Title', required: true),
+      FieldSpec.slider('pain', 'Pain', labels: const {0: 'None', 10: 'Worst'}),
+    ], locale: const Locale('en'));
     expect(find.text('Save'), findsOneWidget);
     expect(find.text('None'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'Walk');

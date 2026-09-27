@@ -331,16 +331,21 @@ class ActionableItemState extends State<ActionableItem> with TickerProviderState
       startScale: 1 - (1 - MadarMotion.pressScale) * _press.value.clamp(0.0, 1.0),
       fallback: (_) => Theme(
         data: theme,
-        child: DefaultTextStyle(style: textStyle.style, child: Material(type: MaterialType.transparency, child: child)),
+        child: DefaultTextStyle(
+          style: textStyle.style,
+          child: Material(type: MaterialType.transparency, child: child),
+        ),
       ),
     );
     _pressTo(0);
     final choice = await nav.push(route);
+    if (choice == null) Fx.fire(Sfx.drop);
+    // `push` resolves as soon as the menu pops; keep the row hidden until the
+    // lifted snapshot has landed back on it, so the two never show at once
+    // and a delete dissolves the settled row.
+    await route.completed;
     if (mounted) setState(() => _menuOpen = false);
-    if (choice == null) {
-      Fx.fire(Sfx.drop);
-      return;
-    }
+    if (choice == null) return;
     await choice.run();
   }
 
@@ -442,10 +447,8 @@ class ActionableItemState extends State<ActionableItem> with TickerProviderState
     Widget content = RepaintBoundary(key: _snapshotKey, child: widget.child);
     content = AnimatedBuilder(
       animation: _press,
-      builder: (context, child) => Transform.scale(
-        scale: 1 - (1 - MadarMotion.pressScale) * _press.value,
-        child: child,
-      ),
+      builder: (context, child) =>
+          Transform.scale(scale: 1 - (1 - MadarMotion.pressScale) * _press.value, child: child),
       child: content,
     );
     content = AnimatedBuilder(
@@ -516,11 +519,7 @@ class ActionableItemState extends State<ActionableItem> with TickerProviderState
       child: stack,
     );
 
-    result = TapRegion(
-      enabled: _trayOpen,
-      onTapOutside: (_) => closeTray(),
-      child: result,
-    );
+    result = TapRegion(enabled: _trayOpen, onTapOutside: (_) => closeTray(), child: result);
 
     // Delete dissolve: collapse height, fade and sink slightly.
     result = AnimatedBuilder(
@@ -547,7 +546,8 @@ class ActionableItemState extends State<ActionableItem> with TickerProviderState
       if (widget.enabled && a.onEdit != null) CustomSemanticsAction(label: l10n.actionEdit): () => a.onEdit!(),
       if (widget.enabled && a.onDuplicate != null)
         CustomSemanticsAction(label: l10n.actionDuplicate): () => _runUndoable(a.onDuplicate!),
-      if (widget.enabled && a.onMove != null) CustomSemanticsAction(label: l10n.actionMove): () => _runUndoable(a.onMove!),
+      if (widget.enabled && a.onMove != null)
+        CustomSemanticsAction(label: l10n.actionMove): () => _runUndoable(a.onMove!),
       if (widget.enabled && a.onSetReminder != null)
         CustomSemanticsAction(label: l10n.actionSetReminder): () => a.onSetReminder!(),
       if (widget.enabled)
@@ -663,6 +663,11 @@ class _SwipeBackdrop extends StatelessWidget {
         final reveal = -dx;
         final trayWidth = quickActions.length * trayButtonWidth + trayPadding * 2;
         final fraction = trayWidth == 0 ? 0.0 : (reveal / trayWidth).clamp(0.0, 1.2);
+        // The tray is uncovered from the physical right edge inwards; the Row
+        // follows the reading direction, so map each button to its physical
+        // slot counted from the right.
+        final rtl = Directionality.of(context) == TextDirection.rtl;
+        final n = quickActions.length;
         return ClipRRect(
           borderRadius: radius,
           child: Align(
@@ -690,8 +695,8 @@ class _SwipeBackdrop extends StatelessWidget {
                             width: trayButtonWidth,
                             child: _TrayButton(
                               action: q,
-                              // Buttons further from the item edge pop in later.
-                              reveal: ((fraction * quickActions.length) - i * 0.6).clamp(0.0, 1.0),
+                              // Buttons pop in as the row uncovers them.
+                              reveal: ((fraction * n) - (rtl ? i : n - 1 - i) * 0.6).clamp(0.0, 1.0),
                               onTap: () => onQuick(q),
                             ),
                           ),
@@ -740,14 +745,10 @@ class _CompleteTrackPainter extends CustomPainter {
     canvas.drawRect(
       wash,
       Paint()
-        ..shader = ui.Gradient.linear(
-          wash.centerLeft,
-          wash.centerRight,
-          [
-            color.withValues(alpha: 0.16 + 0.34 * p + 0.2 * a + 0.2 * flash),
-            color.withValues(alpha: 0.04 + 0.1 * a),
-          ],
-        ),
+        ..shader = ui.Gradient.linear(wash.centerLeft, wash.centerRight, [
+          color.withValues(alpha: 0.16 + 0.34 * p + 0.2 * a + 0.2 * flash),
+          color.withValues(alpha: 0.04 + 0.1 * a),
+        ]),
     );
     if (a > 0 || flash > 0) {
       final c = Offset(math.max(28, reveal / 2), size.height / 2);
@@ -791,7 +792,12 @@ class _CheckBadge extends StatelessWidget {
     return SizedBox.square(
       dimension: 36,
       child: CustomPaint(
-        painter: _RingPainter(progress: progress.clamp(0.0, 1.0), color: t.success, track: t.glassBorder, fill: s.clamp(0.0, 1.0)),
+        painter: _RingPainter(
+          progress: progress.clamp(0.0, 1.0),
+          color: t.success,
+          track: t.glassBorder,
+          fill: s.clamp(0.0, 1.0),
+        ),
         child: Center(
           child: Transform.scale(
             scale: s,

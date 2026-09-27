@@ -218,7 +218,10 @@ class _ReorderSlotState extends State<_ReorderSlot> with SingleTickerProviderSta
               decoration: BoxDecoration(
                 borderRadius: widget.radius,
                 boxShadow: [
-                  BoxShadow(color: t.accentGlow.withValues(alpha: t.accentGlow.a * 0.4 * v), blurRadius: 26 * v),
+                  BoxShadow(
+                    color: t.accentGlow.withValues(alpha: t.accentGlow.a * 0.4 * v),
+                    blurRadius: 26 * v,
+                  ),
                   BoxShadow(
                     color: t.glassShadow.withValues(alpha: t.glassShadow.a * v),
                     blurRadius: 22 * v,
@@ -247,7 +250,10 @@ class _ReorderSlotState extends State<_ReorderSlot> with SingleTickerProviderSta
         child: item,
       );
     }
-    return Padding(padding: EdgeInsetsDirectional.only(bottom: widget.spacing), child: item);
+    return Padding(
+      padding: EdgeInsetsDirectional.only(bottom: widget.spacing),
+      child: item,
+    );
   }
 }
 
@@ -265,7 +271,10 @@ class ReorderGrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    // Own node: the row's reorder actions (move up / down) come from the
+    // list; the grip only needs to say what it is.
     return Semantics(
+      container: true,
       label: L10n.of(context).interactionReorderHandle,
       child: Listener(
         onPointerDown: (e) => GripPointerRegistry.add(e.pointer),

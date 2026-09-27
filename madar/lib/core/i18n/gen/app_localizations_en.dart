@@ -813,7 +813,7 @@ class L10nEn extends L10n {
   String get interactionReminderKindBeforeDue => 'Before due';
 
   @override
-  String get interactionReminderDate => 'Day';
+  String get interactionReminderDate => 'Date';
 
   @override
   String get interactionReminderTime => 'Time';
@@ -866,6 +866,32 @@ class L10nEn extends L10n {
   String interactionReminderOnce(String date, String time) {
     return '$date at $time';
   }
+
+  @override
+  String get interactionReminderRelBefore => 'Before';
+
+  @override
+  String get interactionReminderRelAt => 'On time';
+
+  @override
+  String get interactionReminderRelAfter => 'After';
+
+  @override
+  String interactionReminderWeekly(String days, String time) {
+    return '$days at $time';
+  }
+
+  @override
+  String get interactionReminderWorkdays => 'Workdays';
+
+  @override
+  String get interactionReminderEveryDay => 'Every day';
+
+  @override
+  String get interactionReminderRemove => 'Remove reminder';
+
+  @override
+  String get interactionReminderNoDue => 'This item has no due date';
 
   @override
   String interactionDurationMinutes(int count) {
@@ -988,4 +1014,482 @@ class L10nEn extends L10n {
 
   @override
   String get interactionKindNote => 'Note';
+
+  @override
+  String get interactionListSeparator => ', ';
+
+  @override
+  String get interactionQuickAddPreview => 'Here\'s how I read it';
+
+  @override
+  String get interactionTrayLabel => 'Quick actions open';
+
+  @override
+  String get importTitle => 'Import data';
+
+  @override
+  String get importHeroTitle => 'Bring your data into orbit';
+
+  @override
+  String get importHeroBody =>
+      'Choose the JSON file you exported from the prototype, or paste its contents. We analyse it first and show you everything before a single row is written.';
+
+  @override
+  String get importPickFile => 'Choose a JSON file';
+
+  @override
+  String get importPasteToggle => 'Paste JSON text';
+
+  @override
+  String get importPasteHint => 'Paste the file contents here…';
+
+  @override
+  String get importAnalyzeAction => 'Analyse';
+
+  @override
+  String get importAnalyzing => 'Reading your file and charting it…';
+
+  @override
+  String get importAcceptedHint =>
+      'We accept the prototype export (data + logs) or plain sections, with Arabic or English keys. Nothing is lost: what we don\'t recognise is kept in the archive.';
+
+  @override
+  String get importFileLabel => 'File';
+
+  @override
+  String get importPastedLabel => 'Pasted text';
+
+  @override
+  String get importPreviewTitle => 'What we found';
+
+  @override
+  String importTotalRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records',
+      one: '1 record',
+      zero: 'No records',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importRecordsCaption => 'ready to import';
+
+  @override
+  String get importShapeTitle => 'File layout';
+
+  @override
+  String get importShapeWrapped => 'data + logs';
+
+  @override
+  String get importShapeDataOnly => 'data only';
+
+  @override
+  String get importShapeLogsOnly => 'logs only';
+
+  @override
+  String get importShapeFlat => 'plain sections';
+
+  @override
+  String get importShapeList => 'a list of records';
+
+  @override
+  String get importShapeNested => 'grouped by area';
+
+  @override
+  String get importShapeDayKeyed => 'logs by day';
+
+  @override
+  String get importShapeTyped => 'typed events';
+
+  @override
+  String get importShapeIdKeyed => 'keyed by id';
+
+  @override
+  String get importKeysArabic => 'Arabic keys';
+
+  @override
+  String get importKeysCamel => 'camelCase keys';
+
+  @override
+  String get importKeysSnake => 'snake_case keys';
+
+  @override
+  String get importKeysMixed => 'mixed keys';
+
+  @override
+  String get importSectionsTitle => 'Sections';
+
+  @override
+  String importBudgetTotal(String amount) {
+    return 'Monthly budget total: $amount';
+  }
+
+  @override
+  String get importModulesTitle => 'New modules from unknown data';
+
+  @override
+  String get importModulesBody =>
+      'We didn\'t recognise these sections, so they became custom modules — nothing is lost.';
+
+  @override
+  String importModuleEntries(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+      zero: 'no entries',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importWarningsTitle => 'Before you import';
+
+  @override
+  String get importUnmappedTitle => 'Kept in the archive';
+
+  @override
+  String get importUnmappedBody =>
+      'Values Madar has no place for yet; they are kept as they are with the original file.';
+
+  @override
+  String importTimesCount(String count) {
+    return '×$count';
+  }
+
+  @override
+  String get importDuplicateTitle => 'You imported this file before';
+
+  @override
+  String importDuplicateBody(String date) {
+    return 'That was on $date. Existing records won\'t be duplicated — only new ones are added.';
+  }
+
+  @override
+  String get importDuplicateAnyway => 'Import anyway';
+
+  @override
+  String importStartAction(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Import $count records',
+      one: 'Import 1 record',
+      zero: 'Keep in the archive',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importChooseAnother => 'Another file';
+
+  @override
+  String get importWriting => 'Writing your data into orbit…';
+
+  @override
+  String get importDoneTitle => 'Import complete';
+
+  @override
+  String importDoneBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records added',
+      one: '1 record added',
+      zero: 'No new records were added',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String importDoneExisting(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records already existed and were left as they are',
+      one: '1 record already existed and was left as it is',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importDoneArchived =>
+      'A complete original copy of the file is kept in the archive.';
+
+  @override
+  String get importErrorInvalidJson => 'This isn\'t valid JSON.';
+
+  @override
+  String get importErrorEmpty => 'There\'s nothing to import.';
+
+  @override
+  String get importErrorNotObject => 'The file holds no importable data.';
+
+  @override
+  String get importErrorRead => 'The file couldn\'t be read.';
+
+  @override
+  String get importErrorCommit =>
+      'The import failed and nothing in your data changed.';
+
+  @override
+  String get importNothingFound =>
+      'We found nothing we recognise in this file, but it will be kept whole in the archive.';
+
+  @override
+  String get importTryAgain => 'Try again';
+
+  @override
+  String get importDefaultWallet => 'Main wallet';
+
+  @override
+  String get importDefaultBoard => 'Work';
+
+  @override
+  String get importOpeningBalance => 'Opening balance';
+
+  @override
+  String get importColumnTodo => 'To-do';
+
+  @override
+  String get importColumnDoing => 'Doing';
+
+  @override
+  String get importColumnDone => 'Done';
+
+  @override
+  String get importSectionHealthAlerts => 'Health alerts';
+
+  @override
+  String get importSectionConditions => 'Conditions';
+
+  @override
+  String get importSectionMedications => 'Medications';
+
+  @override
+  String get importSectionMedDoses => 'Dose log';
+
+  @override
+  String get importSectionLabTests => 'Lab tests';
+
+  @override
+  String get importSectionLabReadings => 'Lab results';
+
+  @override
+  String get importSectionAppointments => 'Appointments';
+
+  @override
+  String get importSectionDoctorQuestions => 'Doctor questions';
+
+  @override
+  String get importSectionPainEntries => 'Pain log';
+
+  @override
+  String get importSectionMoodEntries => 'Mood & stress';
+
+  @override
+  String get importSectionHabits => 'Habits';
+
+  @override
+  String get importSectionHabitLogs => 'Habit log';
+
+  @override
+  String get importSectionWorries => 'Worries';
+
+  @override
+  String get importSectionCurrencies => 'Currencies';
+
+  @override
+  String get importSectionWallets => 'Wallets';
+
+  @override
+  String get importSectionBudgetItems => 'Budget items';
+
+  @override
+  String get importSectionTransactions => 'Transactions';
+
+  @override
+  String get importSectionJars => 'Savings jars';
+
+  @override
+  String get importSectionJarDeposits => 'Jar deposits';
+
+  @override
+  String get importSectionDebts => 'Debts';
+
+  @override
+  String get importSectionDebtPayments => 'Debt payments';
+
+  @override
+  String get importSectionObligations => 'Recurring bills';
+
+  @override
+  String get importSectionPeople => 'People';
+
+  @override
+  String get importSectionContactLogs => 'Contact log';
+
+  @override
+  String get importSectionProjects => 'Projects';
+
+  @override
+  String get importSectionProjectItems => 'Project items';
+
+  @override
+  String get importSectionBoards => 'Work boards';
+
+  @override
+  String get importSectionBoardCards => 'Work cards';
+
+  @override
+  String get importSectionTrips => 'Trips';
+
+  @override
+  String get importSectionTripItems => 'Packing items';
+
+  @override
+  String get importSectionTravelDocuments => 'Travel documents';
+
+  @override
+  String get importSectionLearningGoals => 'Learning goals';
+
+  @override
+  String get importSectionGoalLogs => 'Progress log';
+
+  @override
+  String get importSectionExercises => 'Exercises';
+
+  @override
+  String get importSectionWorkoutLogs => 'Workout log';
+
+  @override
+  String get importSectionAvoidItems => 'Avoid list';
+
+  @override
+  String get importSectionFastingSessions => 'Fasting';
+
+  @override
+  String get importSectionWaterLogs => 'Water';
+
+  @override
+  String get importSectionPrayerLogs => 'Prayer log';
+
+  @override
+  String get importSectionTasks => 'Tasks';
+
+  @override
+  String get importSectionCustomModules => 'Custom modules';
+
+  @override
+  String get importSectionCustomEntries => 'Module entries';
+
+  @override
+  String get importIssueInvalidJson => 'Invalid JSON';
+
+  @override
+  String get importIssueEmptyInput => 'Nothing to import';
+
+  @override
+  String get importIssueNotAnObject => 'No importable data';
+
+  @override
+  String get importIssueUnparsedDate => 'Dates we couldn\'t read';
+
+  @override
+  String get importIssueUnparsedAmount => 'Amounts we couldn\'t read';
+
+  @override
+  String get importIssueUnparsedTime => 'Times we couldn\'t read';
+
+  @override
+  String get importIssueUnparsedNumber => 'Numbers we couldn\'t read';
+
+  @override
+  String get importIssueInferredTime =>
+      'Times inferred from words (morning → 08:00)';
+
+  @override
+  String get importIssueMissingRequired =>
+      'Records missing a required value weren\'t imported — they\'re kept in the archive';
+
+  @override
+  String get importIssueUnresolvedReference =>
+      'References to items that don\'t exist';
+
+  @override
+  String get importIssueCreatedReference => 'Items created from their names';
+
+  @override
+  String get importIssueUnknownValue =>
+      'Unknown values replaced with the default';
+
+  @override
+  String get importIssueAssumedGlasses =>
+      'Water amounts read as glasses (250 ml)';
+
+  @override
+  String get importIssueAssumedFastingTarget => 'Assumed fasting targets';
+
+  @override
+  String get importIssueAssumedDate => 'Assumed dates';
+
+  @override
+  String get importIssueAssumedValue => 'Assumed values';
+
+  @override
+  String get importIssueCurrencyWallet =>
+      'Wallets created for other currencies (nothing converted)';
+
+  @override
+  String get importIssueMissingRate =>
+      'Currencies without a rate (1 assumed) — set it in settings';
+
+  @override
+  String get importIssueDuplicateSourceId => 'Duplicate ids in the file';
+
+  @override
+  String get importIssueBudget => 'Budget checks';
+
+  @override
+  String get importIssueDuplicateFile => 'File imported before';
+
+  @override
+  String get importIssueSettingRead => 'Settings read from the file';
+
+  @override
+  String importBudgetChildrenUnder(String name, String amount) {
+    return 'Items under “$name” add up to $amount less than it';
+  }
+
+  @override
+  String importBudgetChildrenOver(String name, String amount) {
+    return 'Items under “$name” add up to $amount more than it';
+  }
+
+  @override
+  String importBudgetPercentOver(String name, String percent) {
+    return 'Percentages of “$name” exceed 100% ($percent)';
+  }
+
+  @override
+  String importBudgetCircular(String name) {
+    return 'Percentages of “$name” depend on themselves';
+  }
+
+  @override
+  String importBudgetStructure(String name) {
+    return '“$name” pointed to an invalid parent, so it became a top-level item';
+  }
+
+  @override
+  String importBudgetMissingRate(String currency) {
+    return 'No exchange rate for $currency';
+  }
+
+  @override
+  String get importBudgetWhole => 'the whole budget';
 }

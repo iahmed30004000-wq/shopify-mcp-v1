@@ -33,7 +33,9 @@ class _KitStaggerInState extends State<KitStaggerIn> with SingleTickerProviderSt
     final total = delay + body;
     final c = AnimationController(vsync: this, duration: total);
     _c = c;
-    _a = c.drive(CurveTween(curve: Interval(delay.inMicroseconds / total.inMicroseconds, 1, curve: MadarMotion.decelerate)));
+    _a = c.drive(
+      CurveTween(curve: Interval(delay.inMicroseconds / total.inMicroseconds, 1, curve: MadarMotion.decelerate)),
+    );
     c.forward();
   }
 

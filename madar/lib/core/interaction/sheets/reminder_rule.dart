@@ -111,7 +111,8 @@ final class DailyReminder extends ReminderRule {
 }
 
 final class WeeklyReminder extends ReminderRule {
-  WeeklyReminder(this.time, Iterable<int> weekdays) : weekdays = List.unmodifiable(ReminderRule.normalizeWeekdays(weekdays));
+  WeeklyReminder(this.time, Iterable<int> weekdays)
+    : weekdays = List.unmodifiable(ReminderRule.normalizeWeekdays(weekdays));
 
   final String time;
 
@@ -122,7 +123,11 @@ final class WeeklyReminder extends ReminderRule {
   ReminderKind get kind => ReminderKind.weekly;
 
   @override
-  Map<String, Object?> toJson() => {'kind': 'weekly', 'time': time, 'weekdays': [...weekdays]};
+  Map<String, Object?> toJson() => {
+    'kind': 'weekly',
+    'time': time,
+    'weekdays': [...weekdays],
+  };
 
   @override
   bool operator ==(Object other) =>
@@ -183,12 +188,8 @@ enum ReminderIssue { inPast, noWeekdays, noDueDate }
 /// once so switching kinds back and forth never loses what the user picked.
 /// Pure logic (no widgets) – unit-tested.
 class ReminderDraft extends ChangeNotifier {
-  ReminderDraft({
-    required DateTime now,
-    this.dueDate,
-    this.allowPrayerRelative = true,
-    Map<String, Object?>? initial,
-  }) : _now = now {
+  ReminderDraft({required DateTime now, this.dueDate, this.allowPrayerRelative = true, Map<String, Object?>? initial})
+    : _now = now {
     final today = DateTime(now.year, now.month, now.day);
     // Sensible defaults: the next whole hour, today (or tomorrow late at
     // night); after Asr; a day before the due date.
@@ -216,8 +217,8 @@ class ReminderDraft extends ChangeNotifier {
           _relation = offsetMin < 0
               ? PrayerRelation.before
               : offsetMin == 0
-                  ? PrayerRelation.at
-                  : PrayerRelation.after;
+              ? PrayerRelation.at
+              : PrayerRelation.after;
           if (offsetMin != 0) _offsetMinutes = offsetMin.abs();
         case BeforeDueReminder(:final minutes):
           _leadMinutes = minutes;
@@ -257,13 +258,16 @@ class ReminderDraft extends ChangeNotifier {
   DateTime get now => _now;
 
   /// Kinds offered by the sheet.
-  List<ReminderKind> get availableKinds => [for (final k in ReminderKind.values) if (isAvailable(k)) k];
+  List<ReminderKind> get availableKinds => [
+    for (final k in ReminderKind.values)
+      if (isAvailable(k)) k,
+  ];
 
   bool isAvailable(ReminderKind k) => switch (k) {
-        ReminderKind.prayer => allowPrayerRelative,
-        ReminderKind.beforeDue => dueDate != null,
-        _ => true,
-      };
+    ReminderKind.prayer => allowPrayerRelative,
+    ReminderKind.beforeDue => dueDate != null,
+    _ => true,
+  };
 
   set kind(ReminderKind k) {
     if (!isAvailable(k) || k == _kind) return;
@@ -317,10 +321,10 @@ class ReminderDraft extends ChangeNotifier {
 
   /// Signed offset stored in the rule.
   int get offsetMin => switch (_relation) {
-        PrayerRelation.before => -_offsetMinutes,
-        PrayerRelation.at => 0,
-        PrayerRelation.after => _offsetMinutes,
-      };
+    PrayerRelation.before => -_offsetMinutes,
+    PrayerRelation.at => 0,
+    PrayerRelation.after => _offsetMinutes,
+  };
 
   /// The moment a one-off reminder fires.
   DateTime get onceAt {
@@ -329,11 +333,11 @@ class ReminderDraft extends ChangeNotifier {
   }
 
   ReminderIssue? get issue => switch (_kind) {
-        ReminderKind.once => onceAt.isAfter(_now) ? null : ReminderIssue.inPast,
-        ReminderKind.weekly => _weekdays.isEmpty ? ReminderIssue.noWeekdays : null,
-        ReminderKind.beforeDue => dueDate == null ? ReminderIssue.noDueDate : null,
-        _ => null,
-      };
+    ReminderKind.once => onceAt.isAfter(_now) ? null : ReminderIssue.inPast,
+    ReminderKind.weekly => _weekdays.isEmpty ? ReminderIssue.noWeekdays : null,
+    ReminderKind.beforeDue => dueDate == null ? ReminderIssue.noDueDate : null,
+    _ => null,
+  };
 
   bool get isValid => issue == null;
 

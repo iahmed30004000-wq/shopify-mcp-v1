@@ -1,0 +1,204 @@
+{
+  "importTitle": {"ar": "استيراد البيانات", "en": "Import data", "description": "Import screen title"},
+  "importHeroTitle": {"ar": "أعِد بياناتك إلى مَدارها", "en": "Bring your data into orbit"},
+  "importHeroBody": {
+    "ar": "اختر ملف JSON الذي صدّرته من النسخة التجريبية، أو الصق محتواه. نحلّله أولًا ونريك كل شيء قبل أن يُكتب سطر واحد.",
+    "en": "Choose the JSON file you exported from the prototype, or paste its contents. We analyse it first and show you everything before a single row is written."
+  },
+  "importPickFile": {"ar": "اختيار ملف JSON", "en": "Choose a JSON file"},
+  "importPasteToggle": {"ar": "لصق نص JSON", "en": "Paste JSON text"},
+  "importPasteHint": {"ar": "الصق محتوى الملف هنا…", "en": "Paste the file contents here…"},
+  "importAnalyzeAction": {"ar": "تحليل", "en": "Analyse"},
+  "importAnalyzing": {"ar": "نقرأ ملفك ونرسم خريطته…", "en": "Reading your file and charting it…"},
+  "importAcceptedHint": {
+    "ar": "نقبل تصدير النسخة التجريبية (data و logs) أو أقسامًا مباشرة، بمفاتيح عربية أو إنجليزية. لا يضيع شيء: ما لا نعرفه يُحفظ في الأرشيف.",
+    "en": "We accept the prototype export (data + logs) or plain sections, with Arabic or English keys. Nothing is lost: what we don't recognise is kept in the archive."
+  },
+  "importFileLabel": {"ar": "الملف", "en": "File"},
+  "importPastedLabel": {"ar": "نص ملصوق", "en": "Pasted text"},
+  "importPreviewTitle": {"ar": "ما وجدناه", "en": "What we found"},
+  "importTotalRecords": {
+    "ar": "{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلان} few{{count} سجلات} many{{count} سجلًا} other{{count} سجل}}",
+    "en": "{count, plural, =0{No records} =1{1 record} other{{count} records}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "importRecordsCaption": {"ar": "جاهزة للاستيراد", "en": "ready to import"},
+  "importShapeTitle": {"ar": "بنية الملف", "en": "File layout"},
+  "importShapeWrapped": {"ar": "بيانات + سجلات", "en": "data + logs"},
+  "importShapeDataOnly": {"ar": "بيانات فقط", "en": "data only"},
+  "importShapeLogsOnly": {"ar": "سجلات فقط", "en": "logs only"},
+  "importShapeFlat": {"ar": "أقسام مباشرة", "en": "plain sections"},
+  "importShapeList": {"ar": "قائمة سجلات", "en": "a list of records"},
+  "importShapeNested": {"ar": "مجمّعة حسب المجال", "en": "grouped by area"},
+  "importShapeDayKeyed": {"ar": "سجلات مرتّبة بالأيام", "en": "logs by day"},
+  "importShapeTyped": {"ar": "أحداث مصنّفة", "en": "typed events"},
+  "importShapeIdKeyed": {"ar": "مفهرسة بالمعرّفات", "en": "keyed by id"},
+  "importKeysArabic": {"ar": "مفاتيح عربية", "en": "Arabic keys"},
+  "importKeysCamel": {"ar": "مفاتيح camelCase", "en": "camelCase keys"},
+  "importKeysSnake": {"ar": "مفاتيح snake_case", "en": "snake_case keys"},
+  "importKeysMixed": {"ar": "مفاتيح مختلطة", "en": "mixed keys"},
+  "importSectionsTitle": {"ar": "الأقسام", "en": "Sections"},
+  "importBudgetTotal": {
+    "ar": "مجموع الميزانية الشهرية: {amount}",
+    "en": "Monthly budget total: {amount}",
+    "placeholders": {"amount": {"type": "String"}}
+  },
+  "importModulesTitle": {"ar": "وحدات جديدة من بيانات غير معروفة", "en": "New modules from unknown data"},
+  "importModulesBody": {
+    "ar": "لم نتعرّف على هذه الأقسام، فحوّلناها إلى وحدات مخصّصة كي لا يضيع منها شيء.",
+    "en": "We didn't recognise these sections, so they became custom modules — nothing is lost."
+  },
+  "importModuleEntries": {
+    "ar": "{count, plural, =0{بلا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}",
+    "en": "{count, plural, =0{no entries} =1{1 entry} other{{count} entries}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "importWarningsTitle": {"ar": "ملاحظات قبل الاستيراد", "en": "Before you import"},
+  "importUnmappedTitle": {"ar": "محفوظ في الأرشيف", "en": "Kept in the archive"},
+  "importUnmappedBody": {
+    "ar": "قيم لا مكان لها في مَدار بعد؛ تُحفظ كما هي مع النسخة الأصلية من الملف.",
+    "en": "Values Madar has no place for yet; they are kept as they are with the original file."
+  },
+  "importTimesCount": {"ar": "×{count}", "en": "×{count}", "placeholders": {"count": {"type": "String"}}},
+  "importDuplicateTitle": {"ar": "استوردت هذا الملف من قبل", "en": "You imported this file before"},
+  "importDuplicateBody": {
+    "ar": "كان ذلك في {date}. لن تتكرر السجلات الموجودة؛ ستُضاف الجديدة فقط.",
+    "en": "That was on {date}. Existing records won't be duplicated — only new ones are added.",
+    "placeholders": {"date": {"type": "String"}}
+  },
+  "importDuplicateAnyway": {"ar": "استيراد على أي حال", "en": "Import anyway"},
+  "importStartAction": {
+    "ar": "{count, plural, =0{حفظ في الأرشيف} =1{استيراد سجل واحد} =2{استيراد سجلين} few{استيراد {count} سجلات} many{استيراد {count} سجلًا} other{استيراد {count} سجل}}",
+    "en": "{count, plural, =0{Keep in the archive} =1{Import 1 record} other{Import {count} records}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "importChooseAnother": {"ar": "ملف آخر", "en": "Another file"},
+  "importWriting": {"ar": "نكتب بياناتك في مَدارها…", "en": "Writing your data into orbit…"},
+  "importDoneTitle": {"ar": "اكتمل الاستيراد", "en": "Import complete"},
+  "importDoneBody": {
+    "ar": "{count, plural, =0{لم يُضف أي سجل جديد} =1{أُضيف سجل واحد} =2{أُضيف سجلان} few{أُضيفت {count} سجلات} many{أُضيف {count} سجلًا} other{أُضيف {count} سجل}}",
+    "en": "{count, plural, =0{No new records were added} =1{1 record added} other{{count} records added}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "importDoneExisting": {
+    "ar": "{count, plural, =1{سجل واحد كان موجودًا فتُرك كما هو} =2{سجلان كانا موجودَين فتُركا كما هما} few{{count} سجلات كانت موجودة فتُركت كما هي} many{{count} سجلًا كانت موجودة فتُركت كما هي} other{{count} سجل كانت موجودة فتُركت كما هي}}",
+    "en": "{count, plural, =1{1 record already existed and was left as it is} other{{count} records already existed and were left as they are}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "importDoneArchived": {"ar": "حُفظت نسخة أصلية كاملة من الملف في الأرشيف.", "en": "A complete original copy of the file is kept in the archive."},
+  "importErrorInvalidJson": {"ar": "هذا ليس نص JSON صالحًا.", "en": "This isn't valid JSON."},
+  "importErrorEmpty": {"ar": "لا يوجد محتوى لاستيراده.", "en": "There's nothing to import."},
+  "importErrorNotObject": {"ar": "الملف لا يحتوي على بيانات قابلة للاستيراد.", "en": "The file holds no importable data."},
+  "importErrorRead": {"ar": "تعذّرت قراءة الملف.", "en": "The file couldn't be read."},
+  "importErrorCommit": {"ar": "تعذّر الاستيراد، ولم يتغيّر شيء في بياناتك.", "en": "The import failed and nothing in your data changed."},
+  "importNothingFound": {
+    "ar": "لم نجد في هذا الملف بيانات نعرفها، لكنه سيُحفظ كاملًا في الأرشيف.",
+    "en": "We found nothing we recognise in this file, but it will be kept whole in the archive."
+  },
+  "importTryAgain": {"ar": "حاول مجددًا", "en": "Try again"},
+
+  "importDefaultWallet": {"ar": "المحفظة الرئيسية", "en": "Main wallet", "description": "Name of the wallet created for imported transactions that name none"},
+  "importDefaultBoard": {"ar": "العمل", "en": "Work", "description": "Name of the board created for imported cards that name none"},
+  "importOpeningBalance": {"ar": "الرصيد الافتتاحي", "en": "Opening balance", "description": "Note of the deposit created from a jar's saved amount"},
+  "importColumnTodo": {"ar": "للإنجاز", "en": "To-do"},
+  "importColumnDoing": {"ar": "قيد العمل", "en": "Doing"},
+  "importColumnDone": {"ar": "منجز", "en": "Done"},
+
+  "importSectionHealthAlerts": {"ar": "تنبيهات صحية", "en": "Health alerts"},
+  "importSectionConditions": {"ar": "الحالات الصحية", "en": "Conditions"},
+  "importSectionMedications": {"ar": "الأدوية والمكمّلات", "en": "Medications"},
+  "importSectionMedDoses": {"ar": "سجل الجرعات", "en": "Dose log"},
+  "importSectionLabTests": {"ar": "التحاليل", "en": "Lab tests"},
+  "importSectionLabReadings": {"ar": "نتائج التحاليل", "en": "Lab results"},
+  "importSectionAppointments": {"ar": "المواعيد الطبية", "en": "Appointments"},
+  "importSectionDoctorQuestions": {"ar": "أسئلة للطبيب", "en": "Doctor questions"},
+  "importSectionPainEntries": {"ar": "سجل الألم", "en": "Pain log"},
+  "importSectionMoodEntries": {"ar": "المزاج والتوتر", "en": "Mood & stress"},
+  "importSectionHabits": {"ar": "العادات", "en": "Habits"},
+  "importSectionHabitLogs": {"ar": "سجل العادات", "en": "Habit log"},
+  "importSectionWorries": {"ar": "المخاوف", "en": "Worries"},
+  "importSectionCurrencies": {"ar": "العملات", "en": "Currencies"},
+  "importSectionWallets": {"ar": "المحافظ", "en": "Wallets"},
+  "importSectionBudgetItems": {"ar": "بنود الميزانية", "en": "Budget items"},
+  "importSectionTransactions": {"ar": "المعاملات", "en": "Transactions"},
+  "importSectionJars": {"ar": "الحصّالات", "en": "Savings jars"},
+  "importSectionJarDeposits": {"ar": "إيداعات الحصّالات", "en": "Jar deposits"},
+  "importSectionDebts": {"ar": "الديون", "en": "Debts"},
+  "importSectionDebtPayments": {"ar": "سداد الديون", "en": "Debt payments"},
+  "importSectionObligations": {"ar": "الالتزامات الدورية", "en": "Recurring bills"},
+  "importSectionPeople": {"ar": "الأشخاص", "en": "People"},
+  "importSectionContactLogs": {"ar": "سجل التواصل", "en": "Contact log"},
+  "importSectionProjects": {"ar": "المشاريع", "en": "Projects"},
+  "importSectionProjectItems": {"ar": "مهام المشاريع", "en": "Project items"},
+  "importSectionBoards": {"ar": "لوحات العمل", "en": "Work boards"},
+  "importSectionBoardCards": {"ar": "بطاقات العمل", "en": "Work cards"},
+  "importSectionTrips": {"ar": "الرحلات", "en": "Trips"},
+  "importSectionTripItems": {"ar": "قوائم التجهيز", "en": "Packing items"},
+  "importSectionTravelDocuments": {"ar": "وثائق السفر", "en": "Travel documents"},
+  "importSectionLearningGoals": {"ar": "أهداف التعلّم", "en": "Learning goals"},
+  "importSectionGoalLogs": {"ar": "سجل التقدّم", "en": "Progress log"},
+  "importSectionExercises": {"ar": "التمارين", "en": "Exercises"},
+  "importSectionWorkoutLogs": {"ar": "سجل التمارين", "en": "Workout log"},
+  "importSectionAvoidItems": {"ar": "قائمة التجنّب", "en": "Avoid list"},
+  "importSectionFastingSessions": {"ar": "الصيام", "en": "Fasting"},
+  "importSectionWaterLogs": {"ar": "الماء", "en": "Water"},
+  "importSectionPrayerLogs": {"ar": "سجل الصلاة", "en": "Prayer log"},
+  "importSectionTasks": {"ar": "المهام", "en": "Tasks"},
+  "importSectionCustomModules": {"ar": "وحدات مخصّصة", "en": "Custom modules"},
+  "importSectionCustomEntries": {"ar": "إدخالات الوحدات", "en": "Module entries"},
+
+  "importIssueInvalidJson": {"ar": "نص JSON غير صالح", "en": "Invalid JSON"},
+  "importIssueEmptyInput": {"ar": "لا يوجد محتوى", "en": "Nothing to import"},
+  "importIssueNotAnObject": {"ar": "لا بيانات قابلة للاستيراد", "en": "No importable data"},
+  "importIssueUnparsedDate": {"ar": "تواريخ لم نستطع قراءتها", "en": "Dates we couldn't read"},
+  "importIssueUnparsedAmount": {"ar": "مبالغ لم نستطع قراءتها", "en": "Amounts we couldn't read"},
+  "importIssueUnparsedTime": {"ar": "أوقات لم نستطع قراءتها", "en": "Times we couldn't read"},
+  "importIssueUnparsedNumber": {"ar": "أرقام لم نستطع قراءتها", "en": "Numbers we couldn't read"},
+  "importIssueInferredTime": {"ar": "أوقات استنتجناها من كلمات (صباحًا ← ٨:٠٠)", "en": "Times inferred from words (morning → 08:00)"},
+  "importIssueMissingRequired": {"ar": "سجلات تنقصها قيمة أساسية فلم تُستورد، وهي محفوظة في الأرشيف", "en": "Records missing a required value weren't imported — they're kept in the archive"},
+  "importIssueUnresolvedReference": {"ar": "إشارات إلى عناصر غير موجودة", "en": "References to items that don't exist"},
+  "importIssueCreatedReference": {"ar": "عناصر أنشأناها من أسمائها", "en": "Items created from their names"},
+  "importIssueUnknownValue": {"ar": "قيم غير معروفة استبدلنا بها الافتراضي", "en": "Unknown values replaced with the default"},
+  "importIssueAssumedGlasses": {"ar": "كميات ماء قرأناها أكوابًا (٢٥٠ مل)", "en": "Water amounts read as glasses (250 ml)"},
+  "importIssueAssumedFastingTarget": {"ar": "أهداف صيام مفترضة", "en": "Assumed fasting targets"},
+  "importIssueAssumedDate": {"ar": "تواريخ مفترضة", "en": "Assumed dates"},
+  "importIssueAssumedValue": {"ar": "قيم مفترضة", "en": "Assumed values"},
+  "importIssueCurrencyWallet": {"ar": "محافظ أنشأناها لعملات مختلفة (دون تحويل)", "en": "Wallets created for other currencies (nothing converted)"},
+  "importIssueMissingRate": {"ar": "عملات بلا سعر صرف (افترضنا ١) — عدّلها من الإعدادات", "en": "Currencies without a rate (1 assumed) — set it in settings"},
+  "importIssueDuplicateSourceId": {"ar": "معرّفات مكرّرة في الملف", "en": "Duplicate ids in the file"},
+  "importIssueBudget": {"ar": "فحوص الميزانية", "en": "Budget checks"},
+  "importIssueDuplicateFile": {"ar": "ملف مستورد من قبل", "en": "File imported before"},
+  "importIssueSettingRead": {"ar": "إعدادات قرأناها من الملف", "en": "Settings read from the file"},
+
+  "importBudgetChildrenUnder": {
+    "ar": "بنود «{name}» أقل منه بـ {amount}",
+    "en": "Items under “{name}” add up to {amount} less than it",
+    "placeholders": {"name": {"type": "String"}, "amount": {"type": "String"}}
+  },
+  "importBudgetChildrenOver": {
+    "ar": "بنود «{name}» تزيد عليه بـ {amount}",
+    "en": "Items under “{name}” add up to {amount} more than it",
+    "placeholders": {"name": {"type": "String"}, "amount": {"type": "String"}}
+  },
+  "importBudgetPercentOver": {
+    "ar": "نِسَب «{name}» تتجاوز ١٠٠٪ ({percent})",
+    "en": "Percentages of “{name}” exceed 100% ({percent})",
+    "placeholders": {"name": {"type": "String"}, "percent": {"type": "String"}}
+  },
+  "importBudgetCircular": {
+    "ar": "نِسَب «{name}» تعتمد على نفسها",
+    "en": "Percentages of “{name}” depend on themselves",
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "importBudgetStructure": {
+    "ar": "«{name}» مرتبط ببند غير صالح، فجعلناه بندًا رئيسيًا",
+    "en": "“{name}” pointed to an invalid parent, so it became a top-level item",
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "importBudgetMissingRate": {
+    "ar": "لا يوجد سعر صرف لـ {currency}",
+    "en": "No exchange rate for {currency}",
+    "placeholders": {"currency": {"type": "String"}}
+  },
+  "importBudgetWhole": {"ar": "الميزانية كلها", "en": "the whole budget"}
+}

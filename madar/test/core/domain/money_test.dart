@@ -176,12 +176,13 @@ void main() {
 
   group('Money formatting', () {
     test('English: grouping, per-currency decimals, symbol placement', () {
-      expect(const Money(1234500, 'JOD').format(), '1,234.500 JOD');
+      const nb = '\u00A0'; // amount and symbol never wrap apart
+      expect(const Money(1234500, 'JOD').format(), '1,234.500${nb}JOD');
       expect(const Money(1234500, 'USD').format(), r'$1,234.50');
       expect(const Money(-1234500, 'USD').format(), r'-$1,234.50');
-      expect(const Money(99990, 'EGP').format(), '99.99 EGP');
+      expect(const Money(99990, 'EGP').format(), '99.99${nb}EGP');
       expect(const Money(20000, 'JOD').format(withSymbol: false), '20.000');
-      expect(const Money(20000, 'SYP').format(decimals: 0), '20 SYP');
+      expect(const Money(20000, 'SYP').format(decimals: 0), '20${nb}SYP');
     });
 
     test('Arabic: Arabic-Indic digits and Arabic symbol after the amount', () {

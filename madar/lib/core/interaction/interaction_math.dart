@@ -14,9 +14,7 @@ class InteractionSpringCurve extends Curve {
   /// defaults to the spring's own [settleDuration]. A longer timeline makes
   /// the spring come to rest before `t = 1`.
   InteractionSpringCurve(this.spring, {Duration? timeline})
-      : _seconds = timeline == null
-            ? settleSeconds(spring)
-            : timeline.inMicroseconds / Duration.microsecondsPerSecond;
+    : _seconds = timeline == null ? settleSeconds(spring) : timeline.inMicroseconds / Duration.microsecondsPerSecond;
 
   final SpringDescription spring;
   final double _seconds;

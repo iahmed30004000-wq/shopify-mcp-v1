@@ -92,10 +92,12 @@ class _KitPressableState extends State<KitPressable> with SingleTickerProviderSt
       enabled: _active,
       mouseCursor: _active ? SystemMouseCursors.click : MouseCursor.defer,
       actions: {
-        ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {
-          _handleTap();
-          return null;
-        }),
+        ActivateIntent: CallbackAction<ActivateIntent>(
+          onInvoke: (_) {
+            _handleTap();
+            return null;
+          },
+        ),
       },
       child: child,
     );

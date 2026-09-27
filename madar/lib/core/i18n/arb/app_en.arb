@@ -565,7 +565,7 @@
   "interactionReminderKindWeekly": "Weekly",
   "interactionReminderKindPrayer": "With prayer",
   "interactionReminderKindBeforeDue": "Before due",
-  "interactionReminderDate": "Day",
+  "interactionReminderDate": "Date",
   "interactionReminderTime": "Time",
   "interactionReminderDays": "Days",
   "interactionReminderPrayer": "Prayer",
@@ -630,6 +630,24 @@
       }
     }
   },
+  "interactionReminderRelBefore": "Before",
+  "interactionReminderRelAt": "On time",
+  "interactionReminderRelAfter": "After",
+  "interactionReminderWeekly": "{days} at {time}",
+  "@interactionReminderWeekly": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderWorkdays": "Workdays",
+  "interactionReminderEveryDay": "Every day",
+  "interactionReminderRemove": "Remove reminder",
+  "interactionReminderNoDue": "This item has no due date",
   "interactionDurationMinutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
   "@interactionDurationMinutes": {
     "placeholders": {
@@ -709,5 +727,261 @@
   "interactionKindPain": "Pain",
   "interactionKindMood": "Mood",
   "interactionKindContact": "Contact",
-  "interactionKindNote": "Note"
+  "interactionKindNote": "Note",
+  "interactionListSeparator": ", ",
+  "@interactionListSeparator": {
+    "description": "Separator between items of an inline list"
+  },
+  "interactionQuickAddPreview": "Here's how I read it",
+  "interactionTrayLabel": "Quick actions open",
+  "importTitle": "Import data",
+  "@importTitle": {
+    "description": "Import screen title"
+  },
+  "importHeroTitle": "Bring your data into orbit",
+  "importHeroBody": "Choose the JSON file you exported from the prototype, or paste its contents. We analyse it first and show you everything before a single row is written.",
+  "importPickFile": "Choose a JSON file",
+  "importPasteToggle": "Paste JSON text",
+  "importPasteHint": "Paste the file contents here…",
+  "importAnalyzeAction": "Analyse",
+  "importAnalyzing": "Reading your file and charting it…",
+  "importAcceptedHint": "We accept the prototype export (data + logs) or plain sections, with Arabic or English keys. Nothing is lost: what we don't recognise is kept in the archive.",
+  "importFileLabel": "File",
+  "importPastedLabel": "Pasted text",
+  "importPreviewTitle": "What we found",
+  "importTotalRecords": "{count, plural, =0{No records} =1{1 record} other{{count} records}}",
+  "@importTotalRecords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importRecordsCaption": "ready to import",
+  "importShapeTitle": "File layout",
+  "importShapeWrapped": "data + logs",
+  "importShapeDataOnly": "data only",
+  "importShapeLogsOnly": "logs only",
+  "importShapeFlat": "plain sections",
+  "importShapeList": "a list of records",
+  "importShapeNested": "grouped by area",
+  "importShapeDayKeyed": "logs by day",
+  "importShapeTyped": "typed events",
+  "importShapeIdKeyed": "keyed by id",
+  "importKeysArabic": "Arabic keys",
+  "importKeysCamel": "camelCase keys",
+  "importKeysSnake": "snake_case keys",
+  "importKeysMixed": "mixed keys",
+  "importSectionsTitle": "Sections",
+  "importBudgetTotal": "Monthly budget total: {amount}",
+  "@importBudgetTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "importModulesTitle": "New modules from unknown data",
+  "importModulesBody": "We didn't recognise these sections, so they became custom modules — nothing is lost.",
+  "importModuleEntries": "{count, plural, =0{no entries} =1{1 entry} other{{count} entries}}",
+  "@importModuleEntries": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importWarningsTitle": "Before you import",
+  "importUnmappedTitle": "Kept in the archive",
+  "importUnmappedBody": "Values Madar has no place for yet; they are kept as they are with the original file.",
+  "importTimesCount": "×{count}",
+  "@importTimesCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "importDuplicateTitle": "You imported this file before",
+  "importDuplicateBody": "That was on {date}. Existing records won't be duplicated — only new ones are added.",
+  "@importDuplicateBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "importDuplicateAnyway": "Import anyway",
+  "importStartAction": "{count, plural, =0{Keep in the archive} =1{Import 1 record} other{Import {count} records}}",
+  "@importStartAction": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importChooseAnother": "Another file",
+  "importWriting": "Writing your data into orbit…",
+  "importDoneTitle": "Import complete",
+  "importDoneBody": "{count, plural, =0{No new records were added} =1{1 record added} other{{count} records added}}",
+  "@importDoneBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importDoneExisting": "{count, plural, =1{1 record already existed and was left as it is} other{{count} records already existed and were left as they are}}",
+  "@importDoneExisting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importDoneArchived": "A complete original copy of the file is kept in the archive.",
+  "importErrorInvalidJson": "This isn't valid JSON.",
+  "importErrorEmpty": "There's nothing to import.",
+  "importErrorNotObject": "The file holds no importable data.",
+  "importErrorRead": "The file couldn't be read.",
+  "importErrorCommit": "The import failed and nothing in your data changed.",
+  "importNothingFound": "We found nothing we recognise in this file, but it will be kept whole in the archive.",
+  "importTryAgain": "Try again",
+  "importDefaultWallet": "Main wallet",
+  "@importDefaultWallet": {
+    "description": "Name of the wallet created for imported transactions that name none"
+  },
+  "importDefaultBoard": "Work",
+  "@importDefaultBoard": {
+    "description": "Name of the board created for imported cards that name none"
+  },
+  "importOpeningBalance": "Opening balance",
+  "@importOpeningBalance": {
+    "description": "Note of the deposit created from a jar's saved amount"
+  },
+  "importColumnTodo": "To-do",
+  "importColumnDoing": "Doing",
+  "importColumnDone": "Done",
+  "importSectionHealthAlerts": "Health alerts",
+  "importSectionConditions": "Conditions",
+  "importSectionMedications": "Medications",
+  "importSectionMedDoses": "Dose log",
+  "importSectionLabTests": "Lab tests",
+  "importSectionLabReadings": "Lab results",
+  "importSectionAppointments": "Appointments",
+  "importSectionDoctorQuestions": "Doctor questions",
+  "importSectionPainEntries": "Pain log",
+  "importSectionMoodEntries": "Mood & stress",
+  "importSectionHabits": "Habits",
+  "importSectionHabitLogs": "Habit log",
+  "importSectionWorries": "Worries",
+  "importSectionCurrencies": "Currencies",
+  "importSectionWallets": "Wallets",
+  "importSectionBudgetItems": "Budget items",
+  "importSectionTransactions": "Transactions",
+  "importSectionJars": "Savings jars",
+  "importSectionJarDeposits": "Jar deposits",
+  "importSectionDebts": "Debts",
+  "importSectionDebtPayments": "Debt payments",
+  "importSectionObligations": "Recurring bills",
+  "importSectionPeople": "People",
+  "importSectionContactLogs": "Contact log",
+  "importSectionProjects": "Projects",
+  "importSectionProjectItems": "Project items",
+  "importSectionBoards": "Work boards",
+  "importSectionBoardCards": "Work cards",
+  "importSectionTrips": "Trips",
+  "importSectionTripItems": "Packing items",
+  "importSectionTravelDocuments": "Travel documents",
+  "importSectionLearningGoals": "Learning goals",
+  "importSectionGoalLogs": "Progress log",
+  "importSectionExercises": "Exercises",
+  "importSectionWorkoutLogs": "Workout log",
+  "importSectionAvoidItems": "Avoid list",
+  "importSectionFastingSessions": "Fasting",
+  "importSectionWaterLogs": "Water",
+  "importSectionPrayerLogs": "Prayer log",
+  "importSectionTasks": "Tasks",
+  "importSectionCustomModules": "Custom modules",
+  "importSectionCustomEntries": "Module entries",
+  "importIssueInvalidJson": "Invalid JSON",
+  "importIssueEmptyInput": "Nothing to import",
+  "importIssueNotAnObject": "No importable data",
+  "importIssueUnparsedDate": "Dates we couldn't read",
+  "importIssueUnparsedAmount": "Amounts we couldn't read",
+  "importIssueUnparsedTime": "Times we couldn't read",
+  "importIssueUnparsedNumber": "Numbers we couldn't read",
+  "importIssueInferredTime": "Times inferred from words (morning → 08:00)",
+  "importIssueMissingRequired": "Records missing a required value weren't imported — they're kept in the archive",
+  "importIssueUnresolvedReference": "References to items that don't exist",
+  "importIssueCreatedReference": "Items created from their names",
+  "importIssueUnknownValue": "Unknown values replaced with the default",
+  "importIssueAssumedGlasses": "Water amounts read as glasses (250 ml)",
+  "importIssueAssumedFastingTarget": "Assumed fasting targets",
+  "importIssueAssumedDate": "Assumed dates",
+  "importIssueAssumedValue": "Assumed values",
+  "importIssueCurrencyWallet": "Wallets created for other currencies (nothing converted)",
+  "importIssueMissingRate": "Currencies without a rate (1 assumed) — set it in settings",
+  "importIssueDuplicateSourceId": "Duplicate ids in the file",
+  "importIssueBudget": "Budget checks",
+  "importIssueDuplicateFile": "File imported before",
+  "importIssueSettingRead": "Settings read from the file",
+  "importBudgetChildrenUnder": "Items under “{name}” add up to {amount} less than it",
+  "@importBudgetChildrenUnder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetChildrenOver": "Items under “{name}” add up to {amount} more than it",
+  "@importBudgetChildrenOver": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetPercentOver": "Percentages of “{name}” exceed 100% ({percent})",
+  "@importBudgetPercentOver": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetCircular": "Percentages of “{name}” depend on themselves",
+  "@importBudgetCircular": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetStructure": "“{name}” pointed to an invalid parent, so it became a top-level item",
+  "@importBudgetStructure": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetMissingRate": "No exchange rate for {currency}",
+  "@importBudgetMissingRate": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetWhole": "the whole budget"
 }

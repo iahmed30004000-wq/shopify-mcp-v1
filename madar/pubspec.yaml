@@ -71,6 +71,11 @@ flutter:
     - shaders/orbit/planet_verdant.frag
     - shaders/orbit/planet_volcanic.frag
     - shaders/orbit/planet_gas_giant.frag
+    - shaders/orbit/data_moon.frag
+    - shaders/orbit/core_star.frag
+    - shaders/orbit/prayer_fire.frag
+    - shaders/orbit/lens_flare.frag
+    - shaders/orbit/zoom_blur.frag
 
   fonts:
     - family: PlexArabic

@@ -47,19 +47,23 @@ class FieldShell extends StatelessWidget {
           padding: const EdgeInsetsDirectional.only(bottom: Space.s, start: Space.xxs),
           child: Row(
             children: [
-              if (icon != null) ...[
-                Icon(icon, size: 16, color: t.accent),
-                const SizedBox(width: Space.xs + 2),
-              ],
-              Flexible(
-                child: Text(label, style: text.titleSmall?.copyWith(color: t.textSecondary)),
-              ),
-              if (optional)
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(start: Space.s),
-                  child: Text(l10n.interactionFieldOptional, style: text.labelSmall),
+              if (icon != null) ...[Icon(icon, size: 16, color: t.accent), const SizedBox(width: Space.xs + 2)],
+              // Label + "optional" take the free space so [trailing] sits at
+              // the far end of the row.
+              Expanded(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(label, style: text.titleSmall?.copyWith(color: t.textSecondary)),
+                    ),
+                    if (optional)
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(start: Space.s),
+                        child: Text(l10n.interactionFieldOptional, style: text.labelSmall),
+                      ),
+                  ],
                 ),
-              const Spacer(),
+              ),
               ?trailing,
             ],
           ),
@@ -93,7 +97,9 @@ class FieldShell extends StatelessWidget {
                             child: Icon(Icons.error_outline_rounded, size: 15, color: t.danger),
                           ),
                           const SizedBox(width: Space.xs),
-                          Expanded(child: Text(error!, style: text.bodySmall?.copyWith(color: t.danger))),
+                          Expanded(
+                            child: Text(error!, style: text.bodySmall?.copyWith(color: t.danger)),
+                          ),
                         ],
                       ),
                     ),
@@ -106,7 +112,13 @@ class FieldShell extends StatelessWidget {
 }
 
 /// Glass input decoration consistent with the theme's input style.
-InputDecoration kitInputDecoration(BuildContext context, {String? hint, bool error = false, String? suffix, Widget? suffixIcon}) {
+InputDecoration kitInputDecoration(
+  BuildContext context, {
+  String? hint,
+  bool error = false,
+  String? suffix,
+  Widget? suffixIcon,
+}) {
   final t = context.tokens;
   final radius = BorderRadius.circular(t.radiusM);
   return InputDecoration(
@@ -126,8 +138,9 @@ InputDecoration kitInputDecoration(BuildContext context, {String? hint, bool err
 }
 
 /// Allows digits of every script, separators and a minus sign.
-final TextInputFormatter kitNumberFormatter =
-    FilteringTextInputFormatter.allow(RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9.,\u066B\u066C\-\u2212]', unicode: true));
+final TextInputFormatter kitNumberFormatter = FilteringTextInputFormatter.allow(
+  RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9.,\u066B\u066C\-\u2212]', unicode: true),
+);
 
 /// Tappable glass "field" that opens an inline picker.
 class PickerButton extends StatelessWidget {
@@ -174,10 +187,7 @@ class PickerButton extends StatelessWidget {
             Icon(icon, size: 19, color: active ? t.accent : t.textSecondary),
             const SizedBox(width: Space.m),
             Expanded(
-              child: Text(
-                text,
-                style: style?.copyWith(color: placeholder ? t.textTertiary : t.textPrimary),
-              ),
+              child: Text(text, style: style?.copyWith(color: placeholder ? t.textTertiary : t.textPrimary)),
             ),
             AnimatedRotation(
               turns: active ? 0.5 : 0,
@@ -235,7 +245,10 @@ class KitChip extends StatelessWidget {
         duration: motion,
         curve: MadarMotion.emphasized,
         height: dense ? 34 : 40,
-        padding: EdgeInsetsDirectional.only(start: dense ? Space.m : Space.l, end: onRemove != null ? Space.xs : (dense ? Space.m : Space.l)),
+        padding: EdgeInsetsDirectional.only(
+          start: dense ? Space.m : Space.l,
+          end: onRemove != null ? Space.xs : (dense ? Space.m : Space.l),
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(t.radiusXL),
           gradient: selected
@@ -279,7 +292,12 @@ class KitChip extends StatelessWidget {
               const SizedBox(width: Space.xs + 2),
             ],
             Flexible(
-              child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: text?.copyWith(color: fg)),
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: text?.copyWith(color: fg),
+              ),
             ),
             if (onRemove != null)
               KitPressable(
@@ -403,8 +421,16 @@ class _TimeWheelState extends State<TimeWheel> {
         value: current.toString().padLeft(2, '0'),
         increasedValue: ((current + step) % modulo).toString().padLeft(2, '0'),
         decreasedValue: ((current - step + modulo) % modulo).toString().padLeft(2, '0'),
-        onIncrease: () => controller.animateToItem(controller.selectedItem + 1, duration: MadarMotion.short, curve: MadarMotion.standard),
-        onDecrease: () => controller.animateToItem(controller.selectedItem - 1, duration: MadarMotion.short, curve: MadarMotion.standard),
+        onIncrease: () => controller.animateToItem(
+          controller.selectedItem + 1,
+          duration: MadarMotion.short,
+          curve: MadarMotion.standard,
+        ),
+        onDecrease: () => controller.animateToItem(
+          controller.selectedItem - 1,
+          duration: MadarMotion.short,
+          curve: MadarMotion.standard,
+        ),
         child: SizedBox(
           width: 76,
           child: ListWheelScrollView.useDelegate(
@@ -421,10 +447,7 @@ class _TimeWheelState extends State<TimeWheel> {
               children: [
                 for (var i = 0; i < count; i++)
                   Center(
-                    child: Text(
-                      valueAt(i).toString().padLeft(2, '0'),
-                      style: MadarTypography.numerals(t, size: 24),
-                    ),
+                    child: Text(valueAt(i).toString().padLeft(2, '0'), style: MadarTypography.numerals(t, size: 24)),
                   ),
               ],
             ),
@@ -743,7 +766,8 @@ class LabeledSlider extends StatelessWidget {
             max: max.toDouble(),
             divisions: span,
             label: '$value',
-            semanticFormatterCallback: (v) => '${v.round()}${labels[v.round()] != null ? ' – ${labels[v.round()]}' : ''}',
+            semanticFormatterCallback: (v) =>
+                '${v.round()}${labels[v.round()] != null ? ' – ${labels[v.round()]}' : ''}',
             onChanged: (v) {
               final r = v.round();
               if (r == value) return;
@@ -818,7 +842,9 @@ class SwatchPicker extends StatelessWidget {
                     color: c.toARGB32() == value ? t.textPrimary : t.glassBorder,
                     width: c.toARGB32() == value ? 2.2 : 0.8,
                   ),
-                  boxShadow: c.toARGB32() == value ? [BoxShadow(color: c.withValues(alpha: 0.6), blurRadius: 14)] : null,
+                  boxShadow: c.toARGB32() == value
+                      ? [BoxShadow(color: c.withValues(alpha: 0.6), blurRadius: 14)]
+                      : null,
                 ),
                 child: c.toARGB32() == value
                     ? Icon(
@@ -864,7 +890,9 @@ class IconGrid extends StatelessWidget {
                 borderRadius: BorderRadius.circular(t.radiusM),
                 color: e.key == value ? t.accentSoft : t.glassFill,
                 border: Border.all(color: e.key == value ? t.accent : t.glassBorder, width: e.key == value ? 1.4 : 0.8),
-                boxShadow: e.key == value ? [BoxShadow(color: t.accentGlow.withValues(alpha: 0.35), blurRadius: 12)] : null,
+                boxShadow: e.key == value
+                    ? [BoxShadow(color: t.accentGlow.withValues(alpha: 0.35), blurRadius: 12)]
+                    : null,
               ),
               child: Icon(e.value, size: 22, color: e.key == value ? t.accent : t.textSecondary),
             ),

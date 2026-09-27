@@ -27,13 +27,13 @@ enum ActionTone {
   info;
 
   Color resolve(MadarTokens t) => switch (this) {
-        ActionTone.neutral => t.textPrimary,
-        ActionTone.accent => t.accent,
-        ActionTone.success => t.success,
-        ActionTone.warning => t.warning,
-        ActionTone.danger => t.danger,
-        ActionTone.info => t.info,
-      };
+    ActionTone.neutral => t.textPrimary,
+    ActionTone.accent => t.accent,
+    ActionTone.success => t.success,
+    ActionTone.warning => t.warning,
+    ActionTone.danger => t.danger,
+    ActionTone.info => t.info,
+  };
 }
 
 /// An extra entry of the long-press context menu.
@@ -101,12 +101,7 @@ class ItemActions {
 /// A button in the tray revealed by swiping an item to the LEFT.
 @immutable
 class QuickAction {
-  const QuickAction({
-    required this.icon,
-    required this.label,
-    required this.onPressed,
-    this.tone = ActionTone.accent,
-  });
+  const QuickAction({required this.icon, required this.label, required this.onPressed, this.tone = ActionTone.accent});
 
   final IconData icon;
   final String label;

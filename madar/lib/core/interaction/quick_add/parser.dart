@@ -84,8 +84,9 @@ class QuickAddIntent {
   int? get ml => kind == QuickAddKind.water && amountMilli != null ? (amountMilli! / 1000).round() : null;
 
   /// Pain (0–10) or mood (1–5) score.
-  int? get score =>
-      (kind == QuickAddKind.pain || kind == QuickAddKind.mood) && amountMilli != null ? (amountMilli! / 1000).round() : null;
+  int? get score => (kind == QuickAddKind.pain || kind == QuickAddKind.mood) && amountMilli != null
+      ? (amountMilli! / 1000).round()
+      : null;
 
   bool get hasSchedule => date != null || time != null || window != null;
 
@@ -100,19 +101,19 @@ class QuickAddIntent {
   }
 
   Map<String, Object?> toJson() => {
-        'kind': kind.name,
-        'title': title,
-        'raw': raw,
-        'amountMilli': amountMilli,
-        'currency': currency,
-        'unit': unit,
-        'window': window?.name,
-        'date': date?.toIso8601String(),
-        'time': time,
-        'planetKey': planetKey,
-        'channel': channel?.name,
-        'confidence': confidence,
-      };
+    'kind': kind.name,
+    'title': title,
+    'raw': raw,
+    'amountMilli': amountMilli,
+    'currency': currency,
+    'unit': unit,
+    'window': window?.name,
+    'date': date?.toIso8601String(),
+    'time': time,
+    'planetKey': planetKey,
+    'channel': channel?.name,
+    'confidence': confidence,
+  };
 
   @override
   bool operator ==(Object other) =>
@@ -170,7 +171,10 @@ abstract final class QuickAddParser {
         if (m != null) hits.add(_Hit(rule, m));
       }
     }
-    final prelim = hits.firstWhereOrNull((h) => h.rule.kind == QuickAddKind.pain || h.rule.kind == QuickAddKind.mood)?.rule.kind;
+    final prelim = hits
+        .firstWhereOrNull((h) => h.rule.kind == QuickAddKind.pain || h.rule.kind == QuickAddKind.mood)
+        ?.rule
+        .kind;
 
     // 3. Dates, times, windows.
     // Scores like "7/10" are not dates when logging pain or mood.
@@ -328,32 +332,53 @@ abstract final class QuickAddParser {
 
   static final List<(RegExp, QuickAddKind, bool)> _prefixes = [
     (_re(r'^(?:note|idea|memo|ملاحظة|فكرة|نوت)\s*(?:[:：\-–]\s*|\s+|$)'), QuickAddKind.note, false),
-    (_re(r'^(?:task|todo|to-do|to do|مهمة|remind me to|remind me|ذكرني|ذكّرني)\s*(?:[:：\-–]\s*|\s+|$)'), QuickAddKind.task, true),
+    (
+      _re(r'^(?:task|todo|to-do|to do|مهمة|remind me to|remind me|ذكرني|ذكّرني)\s*(?:[:：\-–]\s*|\s+|$)'),
+      QuickAddKind.task,
+      true,
+    ),
   ];
 
   // ------------------------------------------------------------- kinds ----
 
-  static final String _curWords = [
-    for (final c in _currencies) c.pattern,
-  ].join('|');
+  static final String _curWords = [for (final c in _currencies) c.pattern].join('|');
 
   static final List<_Rule> _rules = [
     // Money – strong past-tense verbs.
-    _Rule(QuickAddKind.expense, _re('$_b(?:و)?(?:صرفت|صرفنا|دفعت|دفعنا|اشتريت|اشترينا|شريت|شرينا|سددت|سددنا|spent|paid|bought|purchased)$_e'),
-        strength: 3),
+    _Rule(
+      QuickAddKind.expense,
+      _re('$_b(?:و)?(?:صرفت|صرفنا|دفعت|دفعنا|اشتريت|اشترينا|شريت|شرينا|سددت|سددنا|spent|paid|bought|purchased)$_e'),
+      strength: 3,
+    ),
     _Rule(QuickAddKind.expense, _re('$_b(?:مصروف|مصاريف|مصروفات|expense|expenses)$_e'), strength: 2),
     _Rule(QuickAddKind.expense, _re('$_b(?:فاتورة|فواتير|bill|bills)$_e'), strength: 1, consume: false),
     // Imperatives are to-dos, even with an amount ("ادفع الإيجار 300 دينار").
-    _Rule(QuickAddKind.task, _re('$_b(?:ادفع|اشتري|اشتر|سدد|حول|حوّل|pay|buy|purchase|transfer)$_e'),
-        strength: 2, consume: false),
+    _Rule(
+      QuickAddKind.task,
+      _re('$_b(?:ادفع|اشتري|اشتر|سدد|حول|حوّل|pay|buy|purchase|transfer)$_e'),
+      strength: 2,
+      consume: false,
+    ),
     _Rule(QuickAddKind.income, _re('$_b(?:و)?(?:قبضت|قبضنا|ربحت|كسبت|received|earned|got paid)$_e'), strength: 3),
-    _Rule(QuickAddKind.income, _re('$_b(?:ال)?(?:راتب|معاش|salary|paycheck|income|bonus|مكافأة|refund)$_e'),
-        strength: 2, consume: false),
+    _Rule(
+      QuickAddKind.income,
+      _re('$_b(?:ال)?(?:راتب|معاش|salary|paycheck|income|bonus|مكافأة|refund)$_e'),
+      strength: 2,
+      consume: false,
+    ),
     _Rule(QuickAddKind.income, _re('$_b(?:و)?(?:استلمت|وصلني|وصلتني|اجاني|جاني|اجتني|got)$_e'), strength: 0),
     // Health logs.
-    _Rule(QuickAddKind.pain, _re('$_b(?:ال)?(?:ألم|آلام|اوجاع|وجع|اوجعني|بيوجعني|يوجعني|بوجعني|pain|ache|aches|aching|sore|hurts|hurt)$_e'),
-        strength: 2),
-    _Rule(QuickAddKind.pain, _re('$_b(?:ال)?(?:صداع|شقيقة|مغص|headache|migraine|cramps|cramp)$_e'), strength: 2, consume: false),
+    _Rule(
+      QuickAddKind.pain,
+      _re('$_b(?:ال)?(?:ألم|آلام|اوجاع|وجع|اوجعني|بيوجعني|يوجعني|بوجعني|pain|ache|aches|aching|sore|hurts|hurt)$_e'),
+      strength: 2,
+    ),
+    _Rule(
+      QuickAddKind.pain,
+      _re('$_b(?:ال)?(?:صداع|شقيقة|مغص|headache|migraine|cramps|cramp)$_e'),
+      strength: 2,
+      consume: false,
+    ),
     _Rule(QuickAddKind.mood, _re('$_b(?:ال)?(?:مزاجي|مزاج|نفسيتي|نفسية|mood|feeling)$_e'), strength: 2),
     _Rule(QuickAddKind.water, _re('$_b(?:شربت|شرب|اشرب|نشرب|drank|drink|drinking)$_e'), strength: -1, drinkVerb: true),
     _Rule(
@@ -362,14 +387,24 @@ abstract final class QuickAddParser {
       strength: 2,
     ),
     // Contact.
-    _Rule(QuickAddKind.contact,
-        _re('$_b(?:و)?(?:اتصل|اتصلت|اتصال|تصل|رن|رنيت|رني|كلم|كلمت|حاكي|احكي مع|احكي|call|called|phone|ring)$_e'),
-        strength: 2, channel: ContactChannel.call),
-    _Rule(QuickAddKind.contact, _re('$_b(?:و)?(?:زور|زرت|زيارة|visit|visited)$_e'),
-        strength: 2, channel: ContactChannel.visit),
-    _Rule(QuickAddKind.contact,
-        _re('$_b(?:و)?(?:ابعث|ابعتل|بعتت|ارسل|راسل|راسلت|text|texted|message|msg|email|whatsapp|واتساب|واتس)$_e'),
-        strength: 2, channel: ContactChannel.message),
+    _Rule(
+      QuickAddKind.contact,
+      _re('$_b(?:و)?(?:اتصل|اتصلت|اتصال|تصل|رن|رنيت|رني|كلم|كلمت|حاكي|احكي مع|احكي|call|called|phone|ring)$_e'),
+      strength: 2,
+      channel: ContactChannel.call,
+    ),
+    _Rule(
+      QuickAddKind.contact,
+      _re('$_b(?:و)?(?:زور|زرت|زيارة|visit|visited)$_e'),
+      strength: 2,
+      channel: ContactChannel.visit,
+    ),
+    _Rule(
+      QuickAddKind.contact,
+      _re('$_b(?:و)?(?:ابعث|ابعتل|بعتت|ارسل|راسل|راسلت|text|texted|message|msg|email|whatsapp|واتساب|واتس)$_e'),
+      strength: 2,
+      channel: ContactChannel.message,
+    ),
   ];
 
   static ({QuickAddKind kind, double base, _Hit? hit}) _resolveKind(
@@ -411,14 +446,19 @@ abstract final class QuickAddParser {
 
   // ------------------------------------------------------------- dates ----
 
-  static final RegExp _dayAfter = _re('$_b(?:و)?(?:بعد (?:بكرا|بكرة|بكره|بكرى|غدا|الغد)|(?:the )?day after tomorrow|overmorrow)$_e');
-  static final RegExp _tomorrow = _re('$_b(?:و)?(?:بكرا|بكرة|بكره|بكرى|غدا|الغد|tomorrow|tmrw|tmr|tomorow|tommorow)$_e');
+  static final RegExp _dayAfter = _re(
+    '$_b(?:و)?(?:بعد (?:بكرا|بكرة|بكره|بكرى|غدا|الغد)|(?:the )?day after tomorrow|overmorrow)$_e',
+  );
+  static final RegExp _tomorrow = _re(
+    '$_b(?:و)?(?:بكرا|بكرة|بكره|بكرى|غدا|الغد|tomorrow|tmrw|tmr|tomorow|tommorow)$_e',
+  );
   static final RegExp _today = _re('$_b(?:و)?(?:اليوم|هاليوم|النهارده|النهاردة|today|tonight|tonite)$_e');
   static final RegExp _yesterday = _re('$_b(?:و)?(?:امبارح|مبارح|أمس|البارحة|yesterday)$_e');
   static final RegExp _inDays = _re('$_b(?:بعد|in|within) (\\d{1,3}) ?(?:يوم|ايام|أيام|days?)$_e');
   static final RegExp _inTwoDays = _re('$_b(?:بعد يومين|in two days)$_e');
   static final RegExp _nextWeek = _re(
-      '$_b(?:بعد (?:أسبوع|اسبوع|جمعة)|in a week|(?:ال)?(?:أسبوع|اسبوع) (?:الجاي|القادم|الياي)|next week)$_e');
+    '$_b(?:بعد (?:أسبوع|اسبوع|جمعة)|in a week|(?:ال)?(?:أسبوع|اسبوع) (?:الجاي|القادم|الياي)|next week)$_e',
+  );
   static final RegExp _weekday = _re(
     '$_b(?:(?<pre>يوم|next|this|on|coming) )?(?<al>ال)?'
     '(?<d>سبت|أحد|احد|حد|اثنين|إثنين|اتنين|تنين|ثلاثاء|ثلاثا|تلاتا|تلات|أربعاء|اربعاء|أربعا|اربعا|خميس|جمعة|'
@@ -544,9 +584,7 @@ abstract final class QuickAddParser {
   static final RegExp _timeAt = _re(
     '$_b(?:at|@) ?(?<h>\\d{1,2})(?:[.:](?<m>\\d{2}))?(?: ?(?<mk>am|pm|a\\.m\\.?|p\\.m\\.?|in the morning|in the evening|in the afternoon|at night|tonight))?$_e',
   );
-  static final RegExp _timeMarked = _re(
-    '(?<![\\p{N}.:/])(?<h>\\d{1,2})(?:[.:](?<m>\\d{2}))? ?(?<mk>$_markers|ص|م)$_e',
-  );
+  static final RegExp _timeMarked = _re('(?<![\\p{N}.:/])(?<h>\\d{1,2})(?:[.:](?<m>\\d{2}))? ?(?<mk>$_markers|ص|م)$_e');
 
   static ({String hhmm, bool guessed})? _extractTime(_Scan s) {
     for (final re in [_timeColon, _timeArabic, _timeAt, _timeMarked]) {
@@ -578,10 +616,10 @@ abstract final class QuickAddParser {
   }
 
   static int _fraction(String f) => switch (f) {
-        'نص' => 30,
-        'ربع' => 15,
-        _ => 20,
-      };
+    'نص' => 30,
+    'ربع' => 15,
+    _ => 20,
+  };
 
   static bool _in(String? marker, String alternatives) =>
       marker != null && RegExp('^(?:${_fold(alternatives, ascii: false)})\$', unicode: true).hasMatch(marker);
@@ -612,7 +650,9 @@ abstract final class QuickAddParser {
     '(?: (?:prayer|salah))?$_e',
   );
   static final RegExp _morning = _re('$_b(?:(?:في|ب) )?(?:الصبح|الصباح|صباحا|this morning|in the morning|morning)$_e');
-  static final RegExp _evening = _re('$_b(?:(?:في|ب) )?(?:المسا|المساء|مساء|مساءا|this evening|in the evening|evening)$_e');
+  static final RegExp _evening = _re(
+    '$_b(?:(?:في|ب) )?(?:المسا|المساء|مساء|مساءا|this evening|in the evening|evening)$_e',
+  );
   static final RegExp _nightWords = _re('$_b(?:بالليل|الليل|ليلا|at night|night)$_e');
   static final RegExp _noonWords = _re('$_b(?:الظهيرة|noon|midday|afternoon|this afternoon|in the afternoon)$_e');
   static final RegExp _anytime = _re('$_b(?:أي وقت|اي وقت|anytime|any time)$_e');
@@ -641,14 +681,14 @@ abstract final class QuickAddParser {
   };
 
   static PrayerWindow _before(PrayerWindow w) => switch (w) {
-        PrayerWindow.fajr => PrayerWindow.isha,
-        PrayerWindow.duha => PrayerWindow.fajr,
-        PrayerWindow.dhuhr => PrayerWindow.duha,
-        PrayerWindow.asr => PrayerWindow.dhuhr,
-        PrayerWindow.maghrib => PrayerWindow.asr,
-        PrayerWindow.isha => PrayerWindow.maghrib,
-        PrayerWindow.anytime => PrayerWindow.anytime,
-      };
+    PrayerWindow.fajr => PrayerWindow.isha,
+    PrayerWindow.duha => PrayerWindow.fajr,
+    PrayerWindow.dhuhr => PrayerWindow.duha,
+    PrayerWindow.asr => PrayerWindow.dhuhr,
+    PrayerWindow.maghrib => PrayerWindow.asr,
+    PrayerWindow.isha => PrayerWindow.maghrib,
+    PrayerWindow.anytime => PrayerWindow.anytime,
+  };
 
   static PrayerWindow? _extractWindow(_Scan s, {required bool strict, required bool timeFound}) {
     final m = s.first(_window, (m) {
@@ -690,7 +730,10 @@ abstract final class QuickAddParser {
     _Currency('EGP', r'جنيه مصري|جنيهات مصرية|جنيهات|جنيه|ج\. ?م|egp|egyptian pounds?'),
     _Currency('SYP', r'ليرة سورية|ليرات سورية|ليرات|ليرة|ل\. ?س|syp|syrian pounds?|liras?|lira'),
     _Currency('USD', r'دولار أمريكي|دولار امريكي|دولارات|دولار|usd|us\$|dollars?|bucks?|\$'),
-    _Currency('JOD', r'دينار أردني|دينار اردني|دنانير أردنية|دنانير اردنية|دنانير|دينار|jod|jds?|dinars?|د\. ?أ|د\. ?ا'),
+    _Currency(
+      'JOD',
+      r'دينار أردني|دينار اردني|دنانير أردنية|دنانير اردنية|دنانير|دينار|jod|jds?|dinars?|د\. ?أ|د\. ?ا',
+    ),
     _Currency('JOD', r'قروش|قرش|قرشا|piasters?|piastres?', factor: 0.01),
     _Currency('JOD', r'فلس|fils', factor: 0.001),
   ];
@@ -802,7 +845,9 @@ abstract final class QuickAddParser {
       return (milli: LocalizedNumbers.toMilli(n), currency: code);
     }
     // A currency word alone ("دينار بنزين") → 1 unit.
-    final lone = s.first(_re('$_b(?:ب)?(?<cur>دينار|دولار|ليرة|جنيه)$_e(?! ?(?:ليبي|سوري|مصري|أمريكي|امريكي|اردني|أردني))'));
+    final lone = s.first(
+      _re('$_b(?:ب)?(?<cur>دينار|دولار|ليرة|جنيه)$_e(?! ?(?:ليبي|سوري|مصري|أمريكي|امريكي|اردني|أردني))'),
+    );
     if (lone != null) {
       final r = build(1, lone.namedGroup('cur')!, null);
       if (r != null) {
@@ -848,7 +893,9 @@ abstract final class QuickAddParser {
     if (m != null) {
       final numText = m.namedGroup('num');
       final word = m.namedGroup('w');
-      final n = numText != null ? LocalizedNumbers.parse(numText) : (word == 'a' || word == 'an' ? 1 : _numberWords[word]);
+      final n = numText != null
+          ? LocalizedNumbers.parse(numText)
+          : (word == 'a' || word == 'an' ? 1 : _numberWords[word]);
       if (n != null) {
         s.take(m.start, m.end);
         return (n * _unitMl(m.namedGroup('u')!)).round();
@@ -967,14 +1014,54 @@ abstract final class QuickAddParser {
   // ------------------------------------------------------------ planet ----
 
   static final List<(String, RegExp)> _planetWords = [
-    ('faith', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:صلاة|قرآن|قران|أذكار|اذكار|مسجد|جامع|صدقة|صيام|صوم|عمرة|حج|دعاء|تهجد|قيام|ختمة|تلاوة|quran|mosque|charity|sadaqah|dua|prayer|fasting|umrah)$_e')),
-    ('health', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:دكتور|دكتورة|طبيب|دواء|دوا|علاج|صيدلية|تحليل|تحاليل|مستشفى|عيادة|أسنان|اسنان|doctor|medicine|meds|pharmacy|clinic|hospital|lab|dentist|checkup)$_e')),
-    ('body', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:رياضة|جيم|نادي|مشي|تمرين|تمارين|ركض|جري|سباحة|يوغا|gym|workout|run|running|walk|exercise|training|swim|yoga|steps)$_e')),
-    ('travel', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:سفر|سفرة|طيارة|طيران|رحلة|فندق|تذكرة|تذاكر|مطار|جواز|فيزا|flight|trip|hotel|airport|passport|visa|travel)$_e')),
-    ('work', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:اجتماع|ميتنج|ميتينج|فريق|مشروع|عميل|عملاء|زبون|زباين|مورد|موردين|شغل|دوام|مدير|مديري|تقرير|مكتب|meeting|team|project|client|customer|supplier|vendor|boss|manager|report|office|work|deadline|invoice|presentation|standup)$_e')),
-    ('family', _re('$_b(?:و|ب|ل|لل)?(?:أبوي|ابوي|ابويا|بابا|أبي|امي|أمي|ماما|يما|اخوي|أخوي|اخي|أخي|اختي|أختي|خيتي|اخواني|اخواتي|زوجتي|مرتي|جوزي|زوجي|ابني|بنتي|ولادي|اولادي|عمي|عمتي|خالي|خالتي|جدي|جدتي|ستي|سيدي|نسايبي|حماي|حماتي|العيلة|عيلتي|اهلي|أهلي|dad|father|mom|mum|mother|brother|sister|wife|husband|son|daughter|uncle|aunt|grandma|grandpa|grandmother|grandfather|family|parents|kids)$_e')),
-    ('growth', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:كتاب|قراءة|اقرأ|اقرا|دورة|كورس|تعلم|اتعلم|ادرس|دراسة|درس|محاضرة|book|read|reading|course|study|learn|lesson|lecture|class)$_e')),
-    ('money', _re('$_b(?:و|ب|ل|لل)?(?:ال)?(?:بنك|فاتورة|فواتير|إيجار|ايجار|قسط|تحويل|bank|bill|rent|loan|installment|transfer|budget)$_e')),
+    (
+      'faith',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:صلاة|قرآن|قران|أذكار|اذكار|مسجد|جامع|صدقة|صيام|صوم|عمرة|حج|دعاء|تهجد|قيام|ختمة|تلاوة|quran|mosque|charity|sadaqah|dua|prayer|fasting|umrah)$_e',
+      ),
+    ),
+    (
+      'health',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:دكتور|دكتورة|طبيب|دواء|دوا|علاج|صيدلية|تحليل|تحاليل|مستشفى|عيادة|أسنان|اسنان|doctor|medicine|meds|pharmacy|clinic|hospital|lab|dentist|checkup)$_e',
+      ),
+    ),
+    (
+      'body',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:رياضة|جيم|نادي|مشي|تمرين|تمارين|ركض|جري|سباحة|يوغا|gym|workout|run|running|walk|exercise|training|swim|yoga|steps)$_e',
+      ),
+    ),
+    (
+      'travel',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:سفر|سفرة|طيارة|طيران|رحلة|فندق|تذكرة|تذاكر|مطار|جواز|فيزا|flight|trip|hotel|airport|passport|visa|travel)$_e',
+      ),
+    ),
+    (
+      'work',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:اجتماع|ميتنج|ميتينج|فريق|مشروع|عميل|عملاء|زبون|زباين|مورد|موردين|شغل|دوام|مدير|مديري|تقرير|مكتب|meeting|team|project|client|customer|supplier|vendor|boss|manager|report|office|work|deadline|invoice|presentation|standup)$_e',
+      ),
+    ),
+    (
+      'family',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:أبوي|ابوي|ابويا|بابا|أبي|امي|أمي|ماما|يما|اخوي|أخوي|اخي|أخي|اختي|أختي|خيتي|اخواني|اخواتي|زوجتي|مرتي|جوزي|زوجي|ابني|بنتي|ولادي|اولادي|عمي|عمتي|خالي|خالتي|جدي|جدتي|ستي|سيدي|نسايبي|حماي|حماتي|العيلة|عيلتي|اهلي|أهلي|dad|father|mom|mum|mother|brother|sister|wife|husband|son|daughter|uncle|aunt|grandma|grandpa|grandmother|grandfather|family|parents|kids)$_e',
+      ),
+    ),
+    (
+      'growth',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:كتاب|قراءة|اقرأ|اقرا|دورة|كورس|تعلم|اتعلم|ادرس|دراسة|درس|محاضرة|book|read|reading|course|study|learn|lesson|lecture|class)$_e',
+      ),
+    ),
+    (
+      'money',
+      _re(
+        '$_b(?:و|ب|ل|لل)?(?:ال)?(?:بنك|فاتورة|فواتير|إيجار|ايجار|قسط|تحويل|bank|bill|rent|loan|installment|transfer|budget)$_e',
+      ),
+    ),
   ];
 
   static String? _planet(QuickAddKind kind, String folded) {
@@ -1003,8 +1090,8 @@ abstract final class QuickAddParser {
 
 class _Currency {
   _Currency(this.code, String pattern, {this.factor = 1})
-      : pattern = QuickAddParser._fold(pattern, ascii: false),
-        exact = RegExp('^(?:${QuickAddParser._fold(pattern, ascii: false)})\$', unicode: true);
+    : pattern = QuickAddParser._fold(pattern, ascii: false),
+      exact = RegExp('^(?:${QuickAddParser._fold(pattern, ascii: false)})\$', unicode: true);
   final String code;
   final String pattern;
   final RegExp exact;
@@ -1012,14 +1099,7 @@ class _Currency {
 }
 
 class _Rule {
-  _Rule(
-    this.kind,
-    this.re, {
-    required this.strength,
-    this.consume = true,
-    this.channel,
-    this.drinkVerb = false,
-  });
+  _Rule(this.kind, this.re, {required this.strength, this.consume = true, this.channel, this.drinkVerb = false});
 
   final QuickAddKind kind;
   final RegExp re;
@@ -1041,9 +1121,7 @@ class _Hit {
 /// Folded text plus a mask of consumed characters (indexes align with the
 /// cleaned input because folding is length-preserving).
 class _Scan {
-  _Scan(this.clean)
-      : norm = QuickAddParser._fold(clean),
-        _used = List<bool>.filled(clean.length, false);
+  _Scan(this.clean) : norm = QuickAddParser._fold(clean), _used = List<bool>.filled(clean.length, false);
 
   final String clean;
   final String norm;

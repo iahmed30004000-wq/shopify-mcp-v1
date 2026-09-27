@@ -115,27 +115,32 @@ class _ToastStack extends StatelessWidget {
       left: Space.gutter,
       right: Space.gutter,
       bottom: bottom,
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 460),
-          child: ValueListenableBuilder<List<_ToastData>>(
-            valueListenable: host.toasts,
-            builder: (context, toasts, _) {
-              final live = toasts.where((t) => !t.leaving).toList();
-              return Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.bottomCenter,
-                children: [
-                  for (final t in toasts)
-                    _ToastCard(
-                      key: ValueKey(t.id),
-                      data: t,
-                      host: host,
-                      depth: t.leaving ? 0 : live.length - 1 - live.indexOf(t),
-                    ),
-                ],
-              );
-            },
+      // The root overlay sits above every Material: give the toast the
+      // theme's text defaults (no fallback "missing Material" underline).
+      child: Material(
+        type: MaterialType.transparency,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 460),
+            child: ValueListenableBuilder<List<_ToastData>>(
+              valueListenable: host.toasts,
+              builder: (context, toasts, _) {
+                final live = toasts.where((t) => !t.leaving).toList();
+                return Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    for (final t in toasts)
+                      _ToastCard(
+                        key: ValueKey(t.id),
+                        data: t,
+                        host: host,
+                        depth: t.leaving ? 0 : live.length - 1 - live.indexOf(t),
+                      ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -286,11 +291,16 @@ class _ToastCardState extends State<_ToastCard> with TickerProviderStateMixin {
       ),
     );
 
+    // One announced node per toast (label + remaining time); the Undo button
+    // is its own node so screen readers can reach it directly.
     body = Semantics(
       container: true,
+      explicitChildNodes: true,
       liveRegion: front,
-      label: widget.data.action.label,
-      hint: l10n.interactionUndoAvailable(widget.data.duration.inSeconds),
+      label: _undone ? l10n.interactionUndone : widget.data.action.label,
+      hint: _undone
+          ? null
+          : l10n.interactionUndoAvailable(_countdown.duration?.inSeconds ?? widget.data.duration.inSeconds),
       child: body,
     );
 
@@ -318,7 +328,11 @@ class _ToastCardState extends State<_ToastCard> with TickerProviderStateMixin {
           child: AnimatedOpacity(
             duration: motion,
             opacity: hidden ? 0 : (1 - 0.3 * depth).clamp(0.0, 1.0),
-            child: IgnorePointer(ignoring: !front, child: body),
+            // Toasts behind the front one are decoration until they return.
+            child: IgnorePointer(
+              ignoring: !front,
+              child: ExcludeSemantics(excluding: !front, child: body),
+            ),
           ),
         ),
       ),
@@ -364,26 +378,33 @@ class _ToastBody extends StatelessWidget {
               dimension: 40,
               child: AnimatedSwitcher(
                 duration: motion,
-                transitionBuilder: (child, a) => ScaleTransition(scale: a, child: FadeTransition(opacity: a, child: child)),
+                transitionBuilder: (child, a) => ScaleTransition(
+                  scale: a,
+                  child: FadeTransition(opacity: a, child: child),
+                ),
                 child: undone
                     ? Icon(Icons.check_rounded, key: const ValueKey('done'), color: t.success, size: 22)
-                    : _CountdownRing(key: const ValueKey('ring'), progress: countdown),
+                    : ExcludeSemantics(
+                        key: const ValueKey('ring'),
+                        child: _CountdownRing(progress: countdown),
+                      ),
               ),
             ),
             const SizedBox(width: Space.m),
             Expanded(
               child: AnimatedSwitcher(
                 duration: motion,
-                layoutBuilder: (current, previous) => Stack(
-                  alignment: AlignmentDirectional.centerStart,
-                  children: [...previous, ?current],
-                ),
-                child: Text(
-                  label,
+                layoutBuilder: (current, previous) =>
+                    Stack(alignment: AlignmentDirectional.centerStart, children: [...previous, ?current]),
+                // Announced by the toast's own semantics node.
+                child: ExcludeSemantics(
                   key: ValueKey(label),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: text.bodyLarge?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w500),
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: text.bodyLarge?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ),
@@ -424,7 +445,7 @@ class _ToastBody extends StatelessWidget {
 
 /// Depleting ring with the remaining whole seconds in its centre.
 class _CountdownRing extends StatelessWidget {
-  const _CountdownRing({super.key, required this.progress});
+  const _CountdownRing({required this.progress});
 
   final Animation<double> progress;
 
@@ -447,10 +468,7 @@ class _CountdownRing extends StatelessWidget {
               glow: t.accentGlow,
             ),
             child: Center(
-              child: Text(
-                '$seconds',
-                style: MadarTypography.numerals(t, size: 13, color: t.textPrimary),
-              ),
+              child: Text('$seconds', style: MadarTypography.numerals(t, size: 13, color: t.textPrimary)),
             ),
           );
         },
@@ -496,7 +514,13 @@ class CountdownRingPainter extends CustomPainter {
     );
     final end = -math.pi / 2 + sweep;
     final tip = c + Offset(math.cos(end), math.sin(end)) * r;
-    canvas.drawCircle(tip, 3.2, Paint()..color = glow..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3));
+    canvas.drawCircle(
+      tip,
+      3.2,
+      Paint()
+        ..color = glow
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3),
+    );
     canvas.drawCircle(tip, 1.6, Paint()..color = arc);
   }
 

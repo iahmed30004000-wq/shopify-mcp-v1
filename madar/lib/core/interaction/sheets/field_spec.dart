@@ -58,7 +58,8 @@ class MoneyValue {
   Map<String, Object?> toJson() => {'amountMilli': amountMilli, 'currency': currency};
 
   @override
-  bool operator ==(Object other) => other is MoneyValue && other.amountMilli == amountMilli && other.currency == currency;
+  bool operator ==(Object other) =>
+      other is MoneyValue && other.amountMilli == amountMilli && other.currency == currency;
 
   @override
   int get hashCode => Object.hash(amountMilli, currency);
@@ -169,18 +170,17 @@ class FieldSpec {
     int? maxLength,
     bool autofocus = false,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.text,
-        key: key,
-        label: label,
-        required: required,
-        hint: hint,
-        icon: icon,
-        maxLength: maxLength,
-        autofocus: autofocus,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.text,
+    key: key,
+    label: label,
+    required: required,
+    hint: hint,
+    icon: icon,
+    maxLength: maxLength,
+    autofocus: autofocus,
+    validator: validator,
+  );
 
   factory FieldSpec.multiline(
     String key,
@@ -190,17 +190,16 @@ class FieldSpec {
     IconData? icon,
     int? maxLength,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.multiline,
-        key: key,
-        label: label,
-        required: required,
-        hint: hint,
-        icon: icon,
-        maxLength: maxLength,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.multiline,
+    key: key,
+    label: label,
+    required: required,
+    hint: hint,
+    icon: icon,
+    maxLength: maxLength,
+    validator: validator,
+  );
 
   /// Numeric input accepting Western, Arabic-Indic and Persian digits.
   factory FieldSpec.number(
@@ -215,21 +214,20 @@ class FieldSpec {
     String? hint,
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.number,
-        key: key,
-        label: label,
-        required: required,
-        min: min,
-        max: max,
-        decimals: decimals,
-        unit: unit,
-        step: step,
-        hint: hint,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.number,
+    key: key,
+    label: label,
+    required: required,
+    min: min,
+    max: max,
+    decimals: decimals,
+    unit: unit,
+    step: step,
+    hint: hint,
+    icon: icon,
+    validator: validator,
+  );
 
   /// Amount + currency picker. Amounts allow up to [decimals] (3 = fils).
   factory FieldSpec.currency(
@@ -244,21 +242,20 @@ class FieldSpec {
     String? hint,
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.currency,
-        key: key,
-        label: label,
-        required: required,
-        currencies: currencies,
-        defaultCurrency: defaultCurrency,
-        min: min,
-        max: max,
-        decimals: decimals,
-        hint: hint,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.currency,
+    key: key,
+    label: label,
+    required: required,
+    currencies: currencies,
+    defaultCurrency: defaultCurrency,
+    min: min,
+    max: max,
+    decimals: decimals,
+    hint: hint,
+    icon: icon,
+    validator: validator,
+  );
 
   factory FieldSpec.date(
     String key,
@@ -268,20 +265,24 @@ class FieldSpec {
     DateTime? lastDate,
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.date,
-        key: key,
-        label: label,
-        required: required,
-        firstDate: firstDate,
-        lastDate: lastDate,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.date,
+    key: key,
+    label: label,
+    required: required,
+    firstDate: firstDate,
+    lastDate: lastDate,
+    icon: icon,
+    validator: validator,
+  );
 
-  factory FieldSpec.time(String key, String label, {bool required = false, IconData? icon, FieldValidator? validator}) =>
-      FieldSpec._(kind: FieldKind.time, key: key, label: label, required: required, icon: icon, validator: validator);
+  factory FieldSpec.time(
+    String key,
+    String label, {
+    bool required = false,
+    IconData? icon,
+    FieldValidator? validator,
+  }) => FieldSpec._(kind: FieldKind.time, key: key, label: label, required: required, icon: icon, validator: validator);
 
   /// Any number of `HH:mm` times (e.g. medication times).
   factory FieldSpec.timeList(
@@ -292,17 +293,16 @@ class FieldSpec {
     int? maxCount,
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.timeList,
-        key: key,
-        label: label,
-        required: required,
-        minCount: minCount,
-        maxCount: maxCount,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.timeList,
+    key: key,
+    label: label,
+    required: required,
+    minCount: minCount,
+    maxCount: maxCount,
+    icon: icon,
+    validator: validator,
+  );
 
   factory FieldSpec.singleSelect(
     String key,
@@ -311,16 +311,15 @@ class FieldSpec {
     bool required = false,
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.singleSelect,
-        key: key,
-        label: label,
-        options: options,
-        required: required,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.singleSelect,
+    key: key,
+    label: label,
+    options: options,
+    required: required,
+    icon: icon,
+    validator: validator,
+  );
 
   /// Chips; with [allowAdd] the user can type a new option inline.
   factory FieldSpec.multiSelect(
@@ -333,19 +332,18 @@ class FieldSpec {
     int? maxCount,
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.multiSelect,
-        key: key,
-        label: label,
-        options: options,
-        allowAdd: allowAdd,
-        required: required,
-        minCount: minCount,
-        maxCount: maxCount,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.multiSelect,
+    key: key,
+    label: label,
+    options: options,
+    allowAdd: allowAdd,
+    required: required,
+    minCount: minCount,
+    maxCount: maxCount,
+    icon: icon,
+    validator: validator,
+  );
 
   /// A switch; [hint] is shown as its description.
   factory FieldSpec.toggle(String key, String label, {String? hint, bool required = false, IconData? icon}) =>
@@ -365,17 +363,16 @@ class FieldSpec {
     Map<int, String> labels = const {},
     IconData? icon,
     FieldValidator? validator,
-  }) =>
-      FieldSpec._(
-        kind: FieldKind.slider,
-        key: key,
-        label: label,
-        min: min,
-        max: max,
-        sliderLabels: labels,
-        icon: icon,
-        validator: validator,
-      );
+  }) => FieldSpec._(
+    kind: FieldKind.slider,
+    key: key,
+    label: label,
+    min: min,
+    max: max,
+    sliderLabels: labels,
+    icon: icon,
+    validator: validator,
+  );
 
   /// Swatches from [palette] (defaults to the curated planet palette).
   factory FieldSpec.color(String key, String label, {List<Color>? palette, bool required = false, IconData? icon}) =>
@@ -386,15 +383,20 @@ class FieldSpec {
       FieldSpec._(kind: FieldKind.icon, key: key, label: label, icons: icons, required: required);
 
   /// The six prayer windows (+ "anytime" unless [includeAnytime] is false).
-  factory FieldSpec.prayerWindow(String key, String label, {bool includeAnytime = true, bool required = false, IconData? icon}) =>
-      FieldSpec._(
-        kind: FieldKind.prayerWindow,
-        key: key,
-        label: label,
-        includeAnytime: includeAnytime,
-        required: required,
-        icon: icon,
-      );
+  factory FieldSpec.prayerWindow(
+    String key,
+    String label, {
+    bool includeAnytime = true,
+    bool required = false,
+    IconData? icon,
+  }) => FieldSpec._(
+    kind: FieldKind.prayerWindow,
+    key: key,
+    label: label,
+    includeAnytime: includeAnytime,
+    required: required,
+    icon: icon,
+  );
 
   final FieldKind kind;
   final String key;
@@ -459,7 +461,9 @@ class FieldSpec {
         }
         return null;
       case FieldKind.date:
-        final d = raw is DateTime ? raw : (raw is String ? DateTime.tryParse(LocalizedNumbers.normalizeDigits(raw)) : null);
+        final d = raw is DateTime
+            ? raw
+            : (raw is String ? DateTime.tryParse(LocalizedNumbers.normalizeDigits(raw)) : null);
         return d == null ? null : DateTime(d.year, d.month, d.day);
       case FieldKind.time:
         return ClockTime.normalize(raw);
@@ -594,7 +598,9 @@ class EditFormModel extends ChangeNotifier {
         _values[key] = text.trim().isEmpty ? null : f.coerce(LocalizedNumbers.parse(text));
       case FieldKind.currency:
         final n = LocalizedNumbers.parse(text);
-        _values[key] = n == null ? null : MoneyValue(amountMilli: LocalizedNumbers.toMilli(n), currency: currencyOf(key));
+        _values[key] = n == null
+            ? null
+            : MoneyValue(amountMilli: LocalizedNumbers.toMilli(n), currency: currencyOf(key));
       default:
         break;
     }
@@ -625,7 +631,10 @@ class EditFormModel extends ChangeNotifier {
     final f = spec(key);
     final text = label.trim();
     if (f.kind != FieldKind.multiSelect || !f.allowAdd || text.isEmpty) return false;
-    final existing = [...f.options, ...addedOptions(key)].firstWhereOrNull((o) => o.label.trim() == text || o.id == text);
+    final existing = [
+      ...f.options,
+      ...addedOptions(key),
+    ].firstWhereOrNull((o) => o.label.trim() == text || o.id == text);
     final id = existing?.id ?? text;
     if (existing == null) (_added[key] ??= []).add(SelectOption(id: text, label: text));
     final current = List<String>.of((_values[key] as List<String>?) ?? const []);
@@ -729,7 +738,9 @@ class EditFormModel extends ChangeNotifier {
     return {
       for (final f in fields)
         f.key: switch (f.kind) {
-          FieldKind.timeList => List<String>.unmodifiable(ClockTime.sortUnique((_values[f.key] as List<String>?) ?? const [])),
+          FieldKind.timeList => List<String>.unmodifiable(
+            ClockTime.sortUnique((_values[f.key] as List<String>?) ?? const []),
+          ),
           FieldKind.multiSelect => List<String>.unmodifiable((_values[f.key] as List<String>?) ?? const []),
           FieldKind.toggle => _values[f.key] == true,
           _ => _values[f.key],

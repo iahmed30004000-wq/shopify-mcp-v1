@@ -44,7 +44,13 @@ class InteractionGlass extends StatelessWidget {
     final radius = borderRadius ?? BorderRadius.circular(t.radiusL);
     final dir = Directionality.of(context);
     Widget body = CustomPaint(
-      painter: InteractionGlassFillPainter(tokens: t, radius: radius, dense: dense || !blur, tint: tint, direction: dir),
+      painter: InteractionGlassFillPainter(
+        tokens: t,
+        radius: radius,
+        dense: dense || !blur,
+        tint: tint,
+        direction: dir,
+      ),
       child: Padding(padding: padding, child: child),
     );
     if (blur) {
@@ -96,7 +102,12 @@ class InteractionGlassFillPainter extends CustomPainter {
         ..shader = ui.Gradient.linear(
           rect.topCenter,
           rect.bottomCenter,
-          [top, top.withValues(alpha: 0), t.space0.withValues(alpha: 0), t.space0.withValues(alpha: t.isDark ? 0.18 : 0.04)],
+          [
+            top,
+            top.withValues(alpha: 0),
+            t.space0.withValues(alpha: 0),
+            t.space0.withValues(alpha: t.isDark ? 0.18 : 0.04),
+          ],
           const [0, 0.42, 0.7, 1],
         ),
     );
@@ -110,12 +121,21 @@ class InteractionGlassFillPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(InteractionGlassFillPainter old) =>
-      old.tokens != tokens || old.radius != radius || old.dense != dense || old.tint != tint || old.direction != direction;
+      old.tokens != tokens ||
+      old.radius != radius ||
+      old.dense != dense ||
+      old.tint != tint ||
+      old.direction != direction;
 }
 
 /// Soft outer glow under a rounded rectangle.
 class InteractionGlowPainter extends CustomPainter {
-  const InteractionGlowPainter({required this.radius, required this.color, this.sigma = 18, this.offset = const Offset(0, 6)});
+  const InteractionGlowPainter({
+    required this.radius,
+    required this.color,
+    this.sigma = 18,
+    this.offset = const Offset(0, 6),
+  });
 
   final BorderRadius radius;
   final Color color;
@@ -141,7 +161,12 @@ class InteractionGlowPainter extends CustomPainter {
 
 /// Gradient hairline: bright along the top edge, fading down the sides.
 class InteractionHairlinePainter extends CustomPainter {
-  const InteractionHairlinePainter({required this.radius, required this.highlight, required this.border, this.width = 1});
+  const InteractionHairlinePainter({
+    required this.radius,
+    required this.highlight,
+    required this.border,
+    this.width = 1,
+  });
 
   final BorderRadius radius;
   final Color highlight;

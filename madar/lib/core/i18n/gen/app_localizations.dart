@@ -1546,7 +1546,7 @@ abstract class L10n {
   /// No description provided for @interactionReminderDate.
   ///
   /// In ar, this message translates to:
-  /// **'اليوم'**
+  /// **'التاريخ'**
   String get interactionReminderDate;
 
   /// No description provided for @interactionReminderTime.
@@ -1626,6 +1626,54 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'{date} الساعة {time}'**
   String interactionReminderOnce(String date, String time);
+
+  /// No description provided for @interactionReminderRelBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبلها'**
+  String get interactionReminderRelBefore;
+
+  /// No description provided for @interactionReminderRelAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'في وقتها'**
+  String get interactionReminderRelAt;
+
+  /// No description provided for @interactionReminderRelAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعدها'**
+  String get interactionReminderRelAfter;
+
+  /// No description provided for @interactionReminderWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days} الساعة {time}'**
+  String interactionReminderWeekly(String days, String time);
+
+  /// No description provided for @interactionReminderWorkdays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام الدوام'**
+  String get interactionReminderWorkdays;
+
+  /// No description provided for @interactionReminderEveryDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الأيام'**
+  String get interactionReminderEveryDay;
+
+  /// No description provided for @interactionReminderRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة التذكير'**
+  String get interactionReminderRemove;
+
+  /// No description provided for @interactionReminderNoDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا موعد نهائي لهذا العنصر'**
+  String get interactionReminderNoDue;
 
   /// No description provided for @interactionDurationMinutes.
   ///
@@ -1794,6 +1842,810 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'ملاحظة'**
   String get interactionKindNote;
+
+  /// Separator between items of an inline list
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get interactionListSeparator;
+
+  /// No description provided for @interactionQuickAddPreview.
+  ///
+  /// In ar, this message translates to:
+  /// **'هكذا فهمتُها'**
+  String get interactionQuickAddPreview;
+
+  /// No description provided for @interactionTrayLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجراءات سريعة مفتوحة'**
+  String get interactionTrayLabel;
+
+  /// Import screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد البيانات'**
+  String get importTitle;
+
+  /// No description provided for @importHeroTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعِد بياناتك إلى مَدارها'**
+  String get importHeroTitle;
+
+  /// No description provided for @importHeroBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ملف JSON الذي صدّرته من النسخة التجريبية، أو الصق محتواه. نحلّله أولًا ونريك كل شيء قبل أن يُكتب سطر واحد.'**
+  String get importHeroBody;
+
+  /// No description provided for @importPickFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار ملف JSON'**
+  String get importPickFile;
+
+  /// No description provided for @importPasteToggle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لصق نص JSON'**
+  String get importPasteToggle;
+
+  /// No description provided for @importPasteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق محتوى الملف هنا…'**
+  String get importPasteHint;
+
+  /// No description provided for @importAnalyzeAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل'**
+  String get importAnalyzeAction;
+
+  /// No description provided for @importAnalyzing.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقرأ ملفك ونرسم خريطته…'**
+  String get importAnalyzing;
+
+  /// No description provided for @importAcceptedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقبل تصدير النسخة التجريبية (data و logs) أو أقسامًا مباشرة، بمفاتيح عربية أو إنجليزية. لا يضيع شيء: ما لا نعرفه يُحفظ في الأرشيف.'**
+  String get importAcceptedHint;
+
+  /// No description provided for @importFileLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف'**
+  String get importFileLabel;
+
+  /// No description provided for @importPastedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص ملصوق'**
+  String get importPastedLabel;
+
+  /// No description provided for @importPreviewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما وجدناه'**
+  String get importPreviewTitle;
+
+  /// No description provided for @importTotalRecords.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلان} few{{count} سجلات} many{{count} سجلًا} other{{count} سجل}}'**
+  String importTotalRecords(int count);
+
+  /// No description provided for @importRecordsCaption.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهزة للاستيراد'**
+  String get importRecordsCaption;
+
+  /// No description provided for @importShapeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنية الملف'**
+  String get importShapeTitle;
+
+  /// No description provided for @importShapeWrapped.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات + سجلات'**
+  String get importShapeWrapped;
+
+  /// No description provided for @importShapeDataOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات فقط'**
+  String get importShapeDataOnly;
+
+  /// No description provided for @importShapeLogsOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلات فقط'**
+  String get importShapeLogsOnly;
+
+  /// No description provided for @importShapeFlat.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقسام مباشرة'**
+  String get importShapeFlat;
+
+  /// No description provided for @importShapeList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة سجلات'**
+  String get importShapeList;
+
+  /// No description provided for @importShapeNested.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجمّعة حسب المجال'**
+  String get importShapeNested;
+
+  /// No description provided for @importShapeDayKeyed.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلات مرتّبة بالأيام'**
+  String get importShapeDayKeyed;
+
+  /// No description provided for @importShapeTyped.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحداث مصنّفة'**
+  String get importShapeTyped;
+
+  /// No description provided for @importShapeIdKeyed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفهرسة بالمعرّفات'**
+  String get importShapeIdKeyed;
+
+  /// No description provided for @importKeysArabic.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفاتيح عربية'**
+  String get importKeysArabic;
+
+  /// No description provided for @importKeysCamel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفاتيح camelCase'**
+  String get importKeysCamel;
+
+  /// No description provided for @importKeysSnake.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفاتيح snake_case'**
+  String get importKeysSnake;
+
+  /// No description provided for @importKeysMixed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفاتيح مختلطة'**
+  String get importKeysMixed;
+
+  /// No description provided for @importSectionsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقسام'**
+  String get importSectionsTitle;
+
+  /// No description provided for @importBudgetTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع الميزانية الشهرية: {amount}'**
+  String importBudgetTotal(String amount);
+
+  /// No description provided for @importModulesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدات جديدة من بيانات غير معروفة'**
+  String get importModulesTitle;
+
+  /// No description provided for @importModulesBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نتعرّف على هذه الأقسام، فحوّلناها إلى وحدات مخصّصة كي لا يضيع منها شيء.'**
+  String get importModulesBody;
+
+  /// No description provided for @importModuleEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}'**
+  String importModuleEntries(int count);
+
+  /// No description provided for @importWarningsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات قبل الاستيراد'**
+  String get importWarningsTitle;
+
+  /// No description provided for @importUnmappedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظ في الأرشيف'**
+  String get importUnmappedTitle;
+
+  /// No description provided for @importUnmappedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم لا مكان لها في مَدار بعد؛ تُحفظ كما هي مع النسخة الأصلية من الملف.'**
+  String get importUnmappedBody;
+
+  /// No description provided for @importTimesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'×{count}'**
+  String importTimesCount(String count);
+
+  /// No description provided for @importDuplicateTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استوردت هذا الملف من قبل'**
+  String get importDuplicateTitle;
+
+  /// No description provided for @importDuplicateBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'كان ذلك في {date}. لن تتكرر السجلات الموجودة؛ ستُضاف الجديدة فقط.'**
+  String importDuplicateBody(String date);
+
+  /// No description provided for @importDuplicateAnyway.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد على أي حال'**
+  String get importDuplicateAnyway;
+
+  /// No description provided for @importStartAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{حفظ في الأرشيف} =1{استيراد سجل واحد} =2{استيراد سجلين} few{استيراد {count} سجلات} many{استيراد {count} سجلًا} other{استيراد {count} سجل}}'**
+  String importStartAction(int count);
+
+  /// No description provided for @importChooseAnother.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف آخر'**
+  String get importChooseAnother;
+
+  /// No description provided for @importWriting.
+  ///
+  /// In ar, this message translates to:
+  /// **'نكتب بياناتك في مَدارها…'**
+  String get importWriting;
+
+  /// No description provided for @importDoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل الاستيراد'**
+  String get importDoneTitle;
+
+  /// No description provided for @importDoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم يُضف أي سجل جديد} =1{أُضيف سجل واحد} =2{أُضيف سجلان} few{أُضيفت {count} سجلات} many{أُضيف {count} سجلًا} other{أُضيف {count} سجل}}'**
+  String importDoneBody(int count);
+
+  /// No description provided for @importDoneExisting.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{سجل واحد كان موجودًا فتُرك كما هو} =2{سجلان كانا موجودَين فتُركا كما هما} few{{count} سجلات كانت موجودة فتُركت كما هي} many{{count} سجلًا كانت موجودة فتُركت كما هي} other{{count} سجل كانت موجودة فتُركت كما هي}}'**
+  String importDoneExisting(int count);
+
+  /// No description provided for @importDoneArchived.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت نسخة أصلية كاملة من الملف في الأرشيف.'**
+  String get importDoneArchived;
+
+  /// No description provided for @importErrorInvalidJson.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا ليس نص JSON صالحًا.'**
+  String get importErrorInvalidJson;
+
+  /// No description provided for @importErrorEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد محتوى لاستيراده.'**
+  String get importErrorEmpty;
+
+  /// No description provided for @importErrorNotObject.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف لا يحتوي على بيانات قابلة للاستيراد.'**
+  String get importErrorNotObject;
+
+  /// No description provided for @importErrorRead.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت قراءة الملف.'**
+  String get importErrorRead;
+
+  /// No description provided for @importErrorCommit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الاستيراد، ولم يتغيّر شيء في بياناتك.'**
+  String get importErrorCommit;
+
+  /// No description provided for @importNothingFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نجد في هذا الملف بيانات نعرفها، لكنه سيُحفظ كاملًا في الأرشيف.'**
+  String get importNothingFound;
+
+  /// No description provided for @importTryAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'حاول مجددًا'**
+  String get importTryAgain;
+
+  /// Name of the wallet created for imported transactions that name none
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة الرئيسية'**
+  String get importDefaultWallet;
+
+  /// Name of the board created for imported cards that name none
+  ///
+  /// In ar, this message translates to:
+  /// **'العمل'**
+  String get importDefaultBoard;
+
+  /// Note of the deposit created from a jar's saved amount
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد الافتتاحي'**
+  String get importOpeningBalance;
+
+  /// No description provided for @importColumnTodo.
+  ///
+  /// In ar, this message translates to:
+  /// **'للإنجاز'**
+  String get importColumnTodo;
+
+  /// No description provided for @importColumnDoing.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد العمل'**
+  String get importColumnDoing;
+
+  /// No description provided for @importColumnDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'منجز'**
+  String get importColumnDone;
+
+  /// No description provided for @importSectionHealthAlerts.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات صحية'**
+  String get importSectionHealthAlerts;
+
+  /// No description provided for @importSectionConditions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالات الصحية'**
+  String get importSectionConditions;
+
+  /// No description provided for @importSectionMedications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية والمكمّلات'**
+  String get importSectionMedications;
+
+  /// No description provided for @importSectionMedDoses.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الجرعات'**
+  String get importSectionMedDoses;
+
+  /// No description provided for @importSectionLabTests.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل'**
+  String get importSectionLabTests;
+
+  /// No description provided for @importSectionLabReadings.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتائج التحاليل'**
+  String get importSectionLabReadings;
+
+  /// No description provided for @importSectionAppointments.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد الطبية'**
+  String get importSectionAppointments;
+
+  /// No description provided for @importSectionDoctorQuestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسئلة للطبيب'**
+  String get importSectionDoctorQuestions;
+
+  /// No description provided for @importSectionPainEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الألم'**
+  String get importSectionPainEntries;
+
+  /// No description provided for @importSectionMoodEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج والتوتر'**
+  String get importSectionMoodEntries;
+
+  /// No description provided for @importSectionHabits.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادات'**
+  String get importSectionHabits;
+
+  /// No description provided for @importSectionHabitLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل العادات'**
+  String get importSectionHabitLogs;
+
+  /// No description provided for @importSectionWorries.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخاوف'**
+  String get importSectionWorries;
+
+  /// No description provided for @importSectionCurrencies.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملات'**
+  String get importSectionCurrencies;
+
+  /// No description provided for @importSectionWallets.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ'**
+  String get importSectionWallets;
+
+  /// No description provided for @importSectionBudgetItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود الميزانية'**
+  String get importSectionBudgetItems;
+
+  /// No description provided for @importSectionTransactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعاملات'**
+  String get importSectionTransactions;
+
+  /// No description provided for @importSectionJars.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحصّالات'**
+  String get importSectionJars;
+
+  /// No description provided for @importSectionJarDeposits.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداعات الحصّالات'**
+  String get importSectionJarDeposits;
+
+  /// No description provided for @importSectionDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get importSectionDebts;
+
+  /// No description provided for @importSectionDebtPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'سداد الديون'**
+  String get importSectionDebtPayments;
+
+  /// No description provided for @importSectionObligations.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات الدورية'**
+  String get importSectionObligations;
+
+  /// No description provided for @importSectionPeople.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأشخاص'**
+  String get importSectionPeople;
+
+  /// No description provided for @importSectionContactLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل التواصل'**
+  String get importSectionContactLogs;
+
+  /// No description provided for @importSectionProjects.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع'**
+  String get importSectionProjects;
+
+  /// No description provided for @importSectionProjectItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهام المشاريع'**
+  String get importSectionProjectItems;
+
+  /// No description provided for @importSectionBoards.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحات العمل'**
+  String get importSectionBoards;
+
+  /// No description provided for @importSectionBoardCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقات العمل'**
+  String get importSectionBoardCards;
+
+  /// No description provided for @importSectionTrips.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات'**
+  String get importSectionTrips;
+
+  /// No description provided for @importSectionTripItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم التجهيز'**
+  String get importSectionTripItems;
+
+  /// No description provided for @importSectionTravelDocuments.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثائق السفر'**
+  String get importSectionTravelDocuments;
+
+  /// No description provided for @importSectionLearningGoals.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف التعلّم'**
+  String get importSectionLearningGoals;
+
+  /// No description provided for @importSectionGoalLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل التقدّم'**
+  String get importSectionGoalLogs;
+
+  /// No description provided for @importSectionExercises.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمارين'**
+  String get importSectionExercises;
+
+  /// No description provided for @importSectionWorkoutLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل التمارين'**
+  String get importSectionWorkoutLogs;
+
+  /// No description provided for @importSectionAvoidItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة التجنّب'**
+  String get importSectionAvoidItems;
+
+  /// No description provided for @importSectionFastingSessions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام'**
+  String get importSectionFastingSessions;
+
+  /// No description provided for @importSectionWaterLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء'**
+  String get importSectionWaterLogs;
+
+  /// No description provided for @importSectionPrayerLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الصلاة'**
+  String get importSectionPrayerLogs;
+
+  /// No description provided for @importSectionTasks.
+  ///
+  /// In ar, this message translates to:
+  /// **'المهام'**
+  String get importSectionTasks;
+
+  /// No description provided for @importSectionCustomModules.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدات مخصّصة'**
+  String get importSectionCustomModules;
+
+  /// No description provided for @importSectionCustomEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخالات الوحدات'**
+  String get importSectionCustomEntries;
+
+  /// No description provided for @importIssueInvalidJson.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص JSON غير صالح'**
+  String get importIssueInvalidJson;
+
+  /// No description provided for @importIssueEmptyInput.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد محتوى'**
+  String get importIssueEmptyInput;
+
+  /// No description provided for @importIssueNotAnObject.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات قابلة للاستيراد'**
+  String get importIssueNotAnObject;
+
+  /// No description provided for @importIssueUnparsedDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواريخ لم نستطع قراءتها'**
+  String get importIssueUnparsedDate;
+
+  /// No description provided for @importIssueUnparsedAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبالغ لم نستطع قراءتها'**
+  String get importIssueUnparsedAmount;
+
+  /// No description provided for @importIssueUnparsedTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقات لم نستطع قراءتها'**
+  String get importIssueUnparsedTime;
+
+  /// No description provided for @importIssueUnparsedNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرقام لم نستطع قراءتها'**
+  String get importIssueUnparsedNumber;
+
+  /// No description provided for @importIssueInferredTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقات استنتجناها من كلمات (صباحًا ← ٨:٠٠)'**
+  String get importIssueInferredTime;
+
+  /// No description provided for @importIssueMissingRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلات تنقصها قيمة أساسية فلم تُستورد، وهي محفوظة في الأرشيف'**
+  String get importIssueMissingRequired;
+
+  /// No description provided for @importIssueUnresolvedReference.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشارات إلى عناصر غير موجودة'**
+  String get importIssueUnresolvedReference;
+
+  /// No description provided for @importIssueCreatedReference.
+  ///
+  /// In ar, this message translates to:
+  /// **'عناصر أنشأناها من أسمائها'**
+  String get importIssueCreatedReference;
+
+  /// No description provided for @importIssueUnknownValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم غير معروفة استبدلنا بها الافتراضي'**
+  String get importIssueUnknownValue;
+
+  /// No description provided for @importIssueAssumedGlasses.
+  ///
+  /// In ar, this message translates to:
+  /// **'كميات ماء قرأناها أكوابًا (٢٥٠ مل)'**
+  String get importIssueAssumedGlasses;
+
+  /// No description provided for @importIssueAssumedFastingTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف صيام مفترضة'**
+  String get importIssueAssumedFastingTarget;
+
+  /// No description provided for @importIssueAssumedDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواريخ مفترضة'**
+  String get importIssueAssumedDate;
+
+  /// No description provided for @importIssueAssumedValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم مفترضة'**
+  String get importIssueAssumedValue;
+
+  /// No description provided for @importIssueCurrencyWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'محافظ أنشأناها لعملات مختلفة (دون تحويل)'**
+  String get importIssueCurrencyWallet;
+
+  /// No description provided for @importIssueMissingRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'عملات بلا سعر صرف (افترضنا ١) — عدّلها من الإعدادات'**
+  String get importIssueMissingRate;
+
+  /// No description provided for @importIssueDuplicateSourceId.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّفات مكرّرة في الملف'**
+  String get importIssueDuplicateSourceId;
+
+  /// No description provided for @importIssueBudget.
+  ///
+  /// In ar, this message translates to:
+  /// **'فحوص الميزانية'**
+  String get importIssueBudget;
+
+  /// No description provided for @importIssueDuplicateFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف مستورد من قبل'**
+  String get importIssueDuplicateFile;
+
+  /// No description provided for @importIssueSettingRead.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات قرأناها من الملف'**
+  String get importIssueSettingRead;
+
+  /// No description provided for @importBudgetChildrenUnder.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود «{name}» أقل منه بـ {amount}'**
+  String importBudgetChildrenUnder(String name, String amount);
+
+  /// No description provided for @importBudgetChildrenOver.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود «{name}» تزيد عليه بـ {amount}'**
+  String importBudgetChildrenOver(String name, String amount);
+
+  /// No description provided for @importBudgetPercentOver.
+  ///
+  /// In ar, this message translates to:
+  /// **'نِسَب «{name}» تتجاوز ١٠٠٪ ({percent})'**
+  String importBudgetPercentOver(String name, String percent);
+
+  /// No description provided for @importBudgetCircular.
+  ///
+  /// In ar, this message translates to:
+  /// **'نِسَب «{name}» تعتمد على نفسها'**
+  String importBudgetCircular(String name);
+
+  /// No description provided for @importBudgetStructure.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» مرتبط ببند غير صالح، فجعلناه بندًا رئيسيًا'**
+  String importBudgetStructure(String name);
+
+  /// No description provided for @importBudgetMissingRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد سعر صرف لـ {currency}'**
+  String importBudgetMissingRate(String currency);
+
+  /// No description provided for @importBudgetWhole.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية كلها'**
+  String get importBudgetWhole;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -26,12 +26,14 @@ Future<T?> showInteractionSheet<T>(
 }) {
   final nav = Navigator.of(context, rootNavigator: useRootNavigator);
   Fx.fire(Sfx.sheetOpen);
-  return nav.push(InteractionSheetRoute<T>(
-    builder: builder,
-    tokens: context.tokens,
-    reduced: context.reducedMotion,
-    barrierText: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-  ));
+  return nav.push(
+    InteractionSheetRoute<T>(
+      builder: builder,
+      tokens: context.tokens,
+      reduced: context.reducedMotion,
+      barrierText: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    ),
+  );
 }
 
 /// The route behind [showInteractionSheet].
@@ -87,7 +89,10 @@ class InteractionSheetRoute<T> extends PopupRoute<T> {
               final scrim = ColoredBox(color: tokens.space0.withValues(alpha: (tokens.isDark ? 0.5 : 0.25) * t));
               if (t <= 0.01) return scrim;
               final sigma = 6.0 * t;
-              return BackdropFilter(filter: ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma), child: scrim);
+              return BackdropFilter(
+                filter: ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+                child: scrim,
+              );
             },
           ),
         ),
@@ -288,10 +293,7 @@ class InteractionSheetFrame extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, 0, Space.gutter, Space.m),
       child: Row(
         children: [
-          if (icon != null) ...[
-            _Medallion(icon: icon!),
-            const SizedBox(width: Space.m),
-          ],
+          if (icon != null) ...[_Medallion(icon: icon!), const SizedBox(width: Space.m)],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,7 +314,9 @@ class InteractionSheetFrame extends StatelessWidget {
           ExcludeSemantics(
             child: SizedBox.square(
               dimension: 34,
-              child: CustomPaint(painter: StarOrnamentPainter(color: t.brass.withValues(alpha: 0.45), strokeWidth: 0.9)),
+              child: CustomPaint(
+                painter: StarOrnamentPainter(color: t.brass.withValues(alpha: 0.45), strokeWidth: 0.9),
+              ),
             ),
           ),
         ],
@@ -486,10 +490,7 @@ class SheetButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) ...[
-                Icon(icon, size: 19, color: fg),
-                const SizedBox(width: Space.s),
-              ],
+              if (icon != null) ...[Icon(icon, size: 19, color: fg), const SizedBox(width: Space.s)],
               Flexible(
                 child: Text(
                   label,

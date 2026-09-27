@@ -502,6 +502,8 @@ class Money implements Comparable<Money> {
   /// ([decimals] or [CurrencyCatalog.decimalsFor]), digits per [digits] and
   /// the currency symbol (Arabic abbreviation after the number in Arabic,
   /// `$12.50` / `12.500 JOD` in English). [symbol] overrides the symbol.
+  /// A no-break space (U+00A0) joins amount and symbol so they never wrap
+  /// apart.
   String format({
     String locale = 'en',
     MoneyDigits digits = MoneyDigits.auto,
@@ -516,7 +518,7 @@ class Money implements Comparable<Money> {
     if (!arabic && symbol == null && CurrencyCatalog.isPrefixSign(currency)) {
       return amount.startsWith('-') ? '-$sym${amount.substring(1)}' : '$sym$amount';
     }
-    return '$amount $sym';
+    return '$amount\u00A0$sym';
   }
 
   Map<String, Object?> toJson() => {'milli': milli, 'currency': currency};

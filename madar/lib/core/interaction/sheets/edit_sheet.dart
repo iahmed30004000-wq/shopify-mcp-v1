@@ -37,14 +37,8 @@ Future<Map<String, Object?>?> showEditSheet(
 }) {
   return showInteractionSheet<Map<String, Object?>>(
     context,
-    builder: (_) => EditSheet(
-      title: title,
-      fields: fields,
-      initial: initial,
-      saveLabel: saveLabel,
-      subtitle: subtitle,
-      icon: icon,
-    ),
+    builder: (_) =>
+        EditSheet(title: title, fields: fields, initial: initial, saveLabel: saveLabel, subtitle: subtitle, icon: icon),
   );
 }
 
@@ -131,7 +125,12 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
     final key = _model.firstInvalidKey;
     final ctx = key == null ? null : _keys[key]?.currentContext;
     if (ctx != null) {
-      Scrollable.ensureVisible(ctx, duration: context.motion(MadarMotion.medium), curve: MadarMotion.standard, alignment: 0.15);
+      Scrollable.ensureVisible(
+        ctx,
+        duration: context.motion(MadarMotion.medium),
+        curve: MadarMotion.standard,
+        alignment: 0.15,
+      );
       _focus[key]?.requestFocus();
     }
   }
@@ -152,14 +151,19 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final dirty = _model.isDirty;
-    final textKeys = [for (final f in widget.fields) if (f.isTextEntry) f.key];
+    final textKeys = [
+      for (final f in widget.fields)
+        if (f.isTextEntry) f.key,
+    ];
     final children = <Widget>[];
     for (final (i, f) in widget.fields.indexed) {
       if (i > 0) children.add(const SizedBox(height: Space.xl));
-      children.add(KitStaggerIn(
-        index: i + 1,
-        child: KeyedSubtree(key: _keys[f.key], child: _field(f, textKeys)),
-      ));
+      children.add(
+        KitStaggerIn(
+          index: i + 1,
+          child: KeyedSubtree(key: _keys[f.key], child: _field(f, textKeys)),
+        ),
+      );
     }
 
     final footer = AnimatedSize(
@@ -198,10 +202,7 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
       children: [
         Expanded(
           flex: 2,
-          child: SheetButton(
-            label: l10n.actionCancel,
-            onPressed: () => Navigator.of(context).maybePop(),
-          ),
+          child: SheetButton(label: l10n.actionCancel, onPressed: () => Navigator.of(context).maybePop()),
         ),
         const SizedBox(width: Space.m),
         Expanded(
@@ -248,10 +249,12 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
               const SizedBox(width: Space.s),
               Expanded(
                 child: Text.rich(
-                  TextSpan(children: [
-                    TextSpan(text: '${l10n.interactionDiscardTitle}  ', style: text.titleMedium),
-                    TextSpan(text: l10n.interactionDiscardBody, style: text.bodySmall),
-                  ]),
+                  TextSpan(
+                    children: [
+                      TextSpan(text: '${l10n.interactionDiscardTitle}  ', style: text.titleMedium),
+                      TextSpan(text: l10n.interactionDiscardBody, style: text.bodySmall),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -289,14 +292,8 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
     final issue = _model.visibleIssueOf(f.key);
     final error = issue == null ? null : KitLabels.issue(l10n, issue);
     final optional = !f.required && f.kind != FieldKind.toggle && f.kind != FieldKind.slider;
-    Widget shell(Widget child, {Widget? trailing}) => FieldShell(
-          label: f.label,
-          icon: f.icon,
-          optional: optional,
-          error: error,
-          trailing: trailing,
-          child: child,
-        );
+    Widget shell(Widget child, {Widget? trailing}) =>
+        FieldShell(label: f.label, icon: f.icon, optional: optional, error: error, trailing: trailing, child: child);
 
     switch (f.kind) {
       case FieldKind.text:
@@ -308,109 +305,111 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
         return shell(_currencyField(f, textKeys, error != null, l10n));
       case FieldKind.date:
         final v = _model.valueOf(f.key) as DateTime?;
-        return shell(Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            PickerButton(
-              icon: Icons.event_rounded,
-              text: v == null ? l10n.interactionFieldPickDate : KitLabels.date(context, v),
-              placeholder: v == null,
-              active: _expanded == f.key,
-              error: error != null,
-              semanticLabel: f.label,
-              onTap: () => _toggle(f.key),
-            ),
-            _Expander(
-              open: _expanded == f.key,
-              child: InlineDatePicker(
-                value: v,
-                firstDate: f.firstDate,
-                lastDate: f.lastDate,
-                allowClear: !f.required,
-                onChanged: (d) => _model.setValue(f.key, d),
+        return shell(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              PickerButton(
+                icon: Icons.event_rounded,
+                text: v == null ? l10n.interactionFieldPickDate : KitLabels.date(context, v),
+                placeholder: v == null,
+                active: _expanded == f.key,
+                error: error != null,
+                semanticLabel: f.label,
+                onTap: () => _toggle(f.key),
               ),
-            ),
-          ],
-        ));
+              _Expander(
+                open: _expanded == f.key,
+                child: InlineDatePicker(
+                  value: v,
+                  firstDate: f.firstDate,
+                  lastDate: f.lastDate,
+                  allowClear: !f.required,
+                  onChanged: (d) => _model.setValue(f.key, d),
+                ),
+              ),
+            ],
+          ),
+        );
       case FieldKind.time:
         final v = _model.valueOf(f.key) as String?;
-        return shell(Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            PickerButton(
-              icon: Icons.schedule_rounded,
-              text: v == null ? l10n.interactionFieldPickTime : KitLabels.time(context, v),
-              placeholder: v == null,
-              active: _expanded == f.key,
-              error: error != null,
-              semanticLabel: f.label,
-              onTap: () {
-                if (v == null) _model.setValue(f.key, _defaultTime());
-                _toggle(f.key);
-              },
-            ),
-            _Expander(
-              open: _expanded == f.key,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: Space.s),
-                  TimeWheel(
-                    value: v ?? _defaultTime(),
-                    onChanged: (x) => _model.setValue(f.key, x),
-                  ),
-                  if (!f.required && v != null)
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: KitChip(
-                        dense: true,
-                        label: l10n.interactionFieldClear,
-                        icon: Icons.close_rounded,
-                        selected: false,
-                        sfx: Sfx.toggleOff,
-                        onTap: () {
-                          _model.setValue(f.key, null);
-                          setState(() => _expanded = null);
-                        },
-                      ),
-                    ),
-                ],
+        return shell(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              PickerButton(
+                icon: Icons.schedule_rounded,
+                text: v == null ? l10n.interactionFieldPickTime : KitLabels.time(context, v),
+                placeholder: v == null,
+                active: _expanded == f.key,
+                error: error != null,
+                semanticLabel: f.label,
+                onTap: () {
+                  if (v == null) _model.setValue(f.key, _defaultTime());
+                  _toggle(f.key);
+                },
               ),
-            ),
-          ],
-        ));
+              _Expander(
+                open: _expanded == f.key,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: Space.s),
+                    TimeWheel(value: v ?? _defaultTime(), onChanged: (x) => _model.setValue(f.key, x)),
+                    if (!f.required && v != null)
+                      Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: KitChip(
+                          dense: true,
+                          label: l10n.interactionFieldClear,
+                          icon: Icons.close_rounded,
+                          selected: false,
+                          sfx: Sfx.toggleOff,
+                          onTap: () {
+                            _model.setValue(f.key, null);
+                            setState(() => _expanded = null);
+                          },
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
       case FieldKind.timeList:
-        return shell(_TimeListInput(
-          times: (_model.valueOf(f.key) as List<String>?) ?? const [],
-          open: _expanded == f.key,
-          maxCount: f.maxCount,
-          onToggle: () => _toggle(f.key),
-          onChanged: (list) => _model.setValue(f.key, list),
-        ));
+        return shell(
+          _TimeListInput(
+            times: (_model.valueOf(f.key) as List<String>?) ?? const [],
+            open: _expanded == f.key,
+            maxCount: f.maxCount,
+            onToggle: () => _toggle(f.key),
+            onChanged: (list) => _model.setValue(f.key, list),
+          ),
+        );
       case FieldKind.singleSelect:
         final v = _model.valueOf(f.key) as String?;
-        return shell(Wrap(
-          spacing: Space.s,
-          runSpacing: Space.s,
-          children: [
-            for (final o in f.options)
-              KitChip(
-                label: o.label,
-                icon: o.icon,
-                swatch: o.color,
-                selected: v == o.id,
-                sfx: Sfx.tap,
-                onTap: () => _model.setValue(f.key, !f.required && v == o.id ? null : o.id),
-              ),
-          ],
-        ));
+        return shell(
+          Wrap(
+            spacing: Space.s,
+            runSpacing: Space.s,
+            children: [
+              for (final o in f.options)
+                KitChip(
+                  label: o.label,
+                  icon: o.icon,
+                  swatch: o.color,
+                  selected: v == o.id,
+                  sfx: Sfx.tap,
+                  onTap: () => _model.setValue(f.key, !f.required && v == o.id ? null : o.id),
+                ),
+            ],
+          ),
+        );
       case FieldKind.multiSelect:
-        return shell(_MultiSelectInput(
-          spec: f,
-          model: _model,
-          adding: _expanded == f.key,
-          onToggleAdd: () => _toggle(f.key),
-        ));
+        return shell(
+          _MultiSelectInput(spec: f, model: _model, adding: _expanded == f.key, onToggleAdd: () => _toggle(f.key)),
+        );
       case FieldKind.toggle:
         final v = _model.valueOf(f.key) == true;
         return FieldShell(
@@ -425,13 +424,15 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
           ),
         );
       case FieldKind.rating:
-        return shell(StarRating(
-          value: _model.valueOf(f.key) as int?,
-          max: (f.max ?? 5).toInt(),
-          allowClear: !f.required,
-          semanticLabel: f.label,
-          onChanged: (v) => _model.setValue(f.key, v),
-        ));
+        return shell(
+          StarRating(
+            value: _model.valueOf(f.key) as int?,
+            max: (f.max ?? 5).toInt(),
+            allowClear: !f.required,
+            semanticLabel: f.label,
+            onChanged: (v) => _model.setValue(f.key, v),
+          ),
+        );
       case FieldKind.slider:
         final v = _model.valueOf(f.key) as int;
         final t = context.tokens;
@@ -446,7 +447,10 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
           ),
           trailing: AnimatedSwitcher(
             duration: context.motion(MadarMotion.short),
-            transitionBuilder: (child, a) => ScaleTransition(scale: a, child: FadeTransition(opacity: a, child: child)),
+            transitionBuilder: (child, a) => ScaleTransition(
+              scale: a,
+              child: FadeTransition(opacity: a, child: child),
+            ),
             child: Text(
               '$v',
               key: ValueKey(v),
@@ -455,24 +459,30 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
           ),
         );
       case FieldKind.color:
-        return shell(SwatchPicker(
-          colors: f.palette ?? CuratedPalette.colors,
-          value: _model.valueOf(f.key) as int?,
-          onChanged: (v) => _model.setValue(f.key, !f.required && v == _model.valueOf(f.key) ? null : v),
-        ));
+        return shell(
+          SwatchPicker(
+            colors: f.palette ?? CuratedPalette.colors,
+            value: _model.valueOf(f.key) as int?,
+            onChanged: (v) => _model.setValue(f.key, !f.required && v == _model.valueOf(f.key) ? null : v),
+          ),
+        );
       case FieldKind.icon:
-        return shell(IconGrid(
-          icons: f.icons ?? InteractionIcons.curated,
-          value: _model.valueOf(f.key) as String?,
-          onChanged: (v) => _model.setValue(f.key, !f.required && v == _model.valueOf(f.key) ? null : v),
-        ));
+        return shell(
+          IconGrid(
+            icons: f.icons ?? InteractionIcons.curated,
+            value: _model.valueOf(f.key) as String?,
+            onChanged: (v) => _model.setValue(f.key, !f.required && v == _model.valueOf(f.key) ? null : v),
+          ),
+        );
       case FieldKind.prayerWindow:
-        return shell(PrayerWindowPicker(
-          value: _model.valueOf(f.key) as PrayerWindow?,
-          includeAnytime: f.includeAnytime,
-          allowClear: !f.required,
-          onChanged: (w) => _model.setValue(f.key, w),
-        ));
+        return shell(
+          PrayerWindowPicker(
+            value: _model.valueOf(f.key) as PrayerWindow?,
+            includeAnytime: f.includeAnytime,
+            allowClear: !f.required,
+            onChanged: (w) => _model.setValue(f.key, w),
+          ),
+        );
     }
   }
 
@@ -583,7 +593,10 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
                 controller: _controllers[f.key],
                 focusNode: _focus[f.key],
                 autofocus: f.autofocus,
-                keyboardType: TextInputType.numberWithOptions(decimal: f.decimals > 0, signed: f.min == null || f.min! < 0),
+                keyboardType: TextInputType.numberWithOptions(
+                  decimal: f.decimals > 0,
+                  signed: f.min == null || f.min! < 0,
+                ),
                 inputFormatters: [kitNumberFormatter],
                 textInputAction: _action(f.key, textKeys),
                 style: MadarTypography.numerals(t, size: 18),
@@ -610,7 +623,10 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(KitLabels.currencySymbol(l10n, code), style: MadarTypography.numerals(t, size: 16, color: t.accent)),
+                    Text(
+                      KitLabels.currencySymbol(l10n, code),
+                      style: MadarTypography.numerals(t, size: 16, color: t.accent),
+                    ),
                     const SizedBox(width: Space.xs),
                     Text(code, style: Theme.of(context).textTheme.labelMedium),
                     Icon(Icons.expand_more_rounded, size: 18, color: t.textTertiary),
@@ -805,10 +821,13 @@ class _TimeListInputState extends State<_TimeListInput> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: Space.s),
-              TimeWheel(value: _draft, onChanged: (v) => setState(() {
-                    _draft = v;
-                    _duplicate = false;
-                  })),
+              TimeWheel(
+                value: _draft,
+                onChanged: (v) => setState(() {
+                  _draft = v;
+                  _duplicate = false;
+                }),
+              ),
               if (_duplicate)
                 Padding(
                   padding: const EdgeInsetsDirectional.only(bottom: Space.s),

@@ -101,7 +101,10 @@ class KitContextMenuRoute extends PopupRoute<KitMenuEntry> {
               final scrim = ColoredBox(color: tokens.space0.withValues(alpha: (tokens.isDark ? 0.42 : 0.22) * t));
               if (t <= 0.01) return scrim;
               final sigma = 9.0 * t;
-              return BackdropFilter(filter: ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma), child: scrim);
+              return BackdropFilter(
+                filter: ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+                child: scrim,
+              );
             },
           ),
         ),
@@ -112,7 +115,10 @@ class KitContextMenuRoute extends PopupRoute<KitMenuEntry> {
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    return _ContextMenuPage(route: this, animation: animation);
+    return Material(
+      type: MaterialType.transparency,
+      child: _ContextMenuPage(route: this, animation: animation),
+    );
   }
 
   @override
@@ -192,12 +198,7 @@ class _ContextMenuPage extends StatelessWidget {
     );
 
     return CustomMultiChildLayout(
-      delegate: _MenuLayoutDelegate(
-        item: route.itemRect,
-        safe: mq.padding,
-        direction: dir,
-        progress: lift,
-      ),
+      delegate: _MenuLayoutDelegate(item: route.itemRect, safe: mq.padding, direction: dir, progress: lift),
       children: [
         LayoutId(id: _Slot.item, child: item),
         LayoutId(id: _Slot.menu, child: menu),
@@ -218,7 +219,7 @@ enum _Slot { item, menu }
 
 class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
   _MenuLayoutDelegate({required this.item, required this.safe, required this.direction, required this.progress})
-      : super(relayout: progress);
+    : super(relayout: progress);
 
   final Rect item;
   final EdgeInsets safe;
@@ -229,7 +230,10 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
   void performLayout(Size size) {
     final maxW = math.min(280.0, size.width - 24);
     final maxH = math.max(0.0, size.height - safe.vertical - 24);
-    final menu = layoutChild(_Slot.menu, BoxConstraints(minWidth: math.min(220, maxW), maxWidth: maxW, maxHeight: maxH));
+    final menu = layoutChild(
+      _Slot.menu,
+      BoxConstraints(minWidth: math.min(220, maxW), maxWidth: maxW, maxHeight: maxH),
+    );
     final p = ContextMenuLayout.compute(item: item, menu: menu, screen: size, safe: safe, direction: direction);
     positionChild(_Slot.menu, p.menuOffset);
     layoutChild(_Slot.item, BoxConstraints.tight(item.size));
@@ -257,23 +261,27 @@ class _MenuPanel extends StatelessWidget {
     for (var i = 0; i < entries.length; i++) {
       final e = entries[i];
       if (e.dividerBefore && i > 0) {
-        rows.add(Padding(
-          padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.m, vertical: Space.xs),
-          child: Container(height: 0.8, color: t.glassBorder.withValues(alpha: 0.6)),
-        ));
+        rows.add(
+          Padding(
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.m, vertical: Space.xs),
+            child: Container(height: 0.8, color: t.glassBorder.withValues(alpha: 0.6)),
+          ),
+        );
       }
       // Staggered entrance of the rows.
       final start = route.reduced ? 0.0 : math.min(0.5, 0.05 + i * 0.045);
       final curved = animation.drive(
         CurveTween(curve: Interval(start, math.min(1, start + 0.4), curve: MadarMotion.decelerate)),
       );
-      rows.add(FadeTransition(
-        opacity: curved,
-        child: SlideTransition(
-          position: Tween<Offset>(begin: const Offset(0, 0.25), end: Offset.zero).animate(curved),
-          child: _MenuRow(entry: e),
+      rows.add(
+        FadeTransition(
+          opacity: curved,
+          child: SlideTransition(
+            position: Tween<Offset>(begin: const Offset(0, 0.25), end: Offset.zero).animate(curved),
+            child: _MenuRow(entry: e),
+          ),
         ),
-      ));
+      );
     }
     return Semantics(
       scopesRoute: true,

@@ -565,7 +565,7 @@
   "interactionReminderKindWeekly": "أسبوعيًا",
   "interactionReminderKindPrayer": "مع الصلاة",
   "interactionReminderKindBeforeDue": "قبل الموعد",
-  "interactionReminderDate": "اليوم",
+  "interactionReminderDate": "التاريخ",
   "interactionReminderTime": "الوقت",
   "interactionReminderDays": "الأيام",
   "interactionReminderPrayer": "الصلاة",
@@ -630,6 +630,24 @@
       }
     }
   },
+  "interactionReminderRelBefore": "قبلها",
+  "interactionReminderRelAt": "في وقتها",
+  "interactionReminderRelAfter": "بعدها",
+  "interactionReminderWeekly": "{days} الساعة {time}",
+  "@interactionReminderWeekly": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "interactionReminderWorkdays": "أيام الدوام",
+  "interactionReminderEveryDay": "كل الأيام",
+  "interactionReminderRemove": "إزالة التذكير",
+  "interactionReminderNoDue": "لا موعد نهائي لهذا العنصر",
   "interactionDurationMinutes": "{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}",
   "@interactionDurationMinutes": {
     "placeholders": {
@@ -709,5 +727,261 @@
   "interactionKindPain": "ألم",
   "interactionKindMood": "مزاج",
   "interactionKindContact": "تواصل",
-  "interactionKindNote": "ملاحظة"
+  "interactionKindNote": "ملاحظة",
+  "interactionListSeparator": "، ",
+  "@interactionListSeparator": {
+    "description": "Separator between items of an inline list"
+  },
+  "interactionQuickAddPreview": "هكذا فهمتُها",
+  "interactionTrayLabel": "إجراءات سريعة مفتوحة",
+  "importTitle": "استيراد البيانات",
+  "@importTitle": {
+    "description": "Import screen title"
+  },
+  "importHeroTitle": "أعِد بياناتك إلى مَدارها",
+  "importHeroBody": "اختر ملف JSON الذي صدّرته من النسخة التجريبية، أو الصق محتواه. نحلّله أولًا ونريك كل شيء قبل أن يُكتب سطر واحد.",
+  "importPickFile": "اختيار ملف JSON",
+  "importPasteToggle": "لصق نص JSON",
+  "importPasteHint": "الصق محتوى الملف هنا…",
+  "importAnalyzeAction": "تحليل",
+  "importAnalyzing": "نقرأ ملفك ونرسم خريطته…",
+  "importAcceptedHint": "نقبل تصدير النسخة التجريبية (data و logs) أو أقسامًا مباشرة، بمفاتيح عربية أو إنجليزية. لا يضيع شيء: ما لا نعرفه يُحفظ في الأرشيف.",
+  "importFileLabel": "الملف",
+  "importPastedLabel": "نص ملصوق",
+  "importPreviewTitle": "ما وجدناه",
+  "importTotalRecords": "{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلان} few{{count} سجلات} many{{count} سجلًا} other{{count} سجل}}",
+  "@importTotalRecords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importRecordsCaption": "جاهزة للاستيراد",
+  "importShapeTitle": "بنية الملف",
+  "importShapeWrapped": "بيانات + سجلات",
+  "importShapeDataOnly": "بيانات فقط",
+  "importShapeLogsOnly": "سجلات فقط",
+  "importShapeFlat": "أقسام مباشرة",
+  "importShapeList": "قائمة سجلات",
+  "importShapeNested": "مجمّعة حسب المجال",
+  "importShapeDayKeyed": "سجلات مرتّبة بالأيام",
+  "importShapeTyped": "أحداث مصنّفة",
+  "importShapeIdKeyed": "مفهرسة بالمعرّفات",
+  "importKeysArabic": "مفاتيح عربية",
+  "importKeysCamel": "مفاتيح camelCase",
+  "importKeysSnake": "مفاتيح snake_case",
+  "importKeysMixed": "مفاتيح مختلطة",
+  "importSectionsTitle": "الأقسام",
+  "importBudgetTotal": "مجموع الميزانية الشهرية: {amount}",
+  "@importBudgetTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "importModulesTitle": "وحدات جديدة من بيانات غير معروفة",
+  "importModulesBody": "لم نتعرّف على هذه الأقسام، فحوّلناها إلى وحدات مخصّصة كي لا يضيع منها شيء.",
+  "importModuleEntries": "{count, plural, =0{بلا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}",
+  "@importModuleEntries": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importWarningsTitle": "ملاحظات قبل الاستيراد",
+  "importUnmappedTitle": "محفوظ في الأرشيف",
+  "importUnmappedBody": "قيم لا مكان لها في مَدار بعد؛ تُحفظ كما هي مع النسخة الأصلية من الملف.",
+  "importTimesCount": "×{count}",
+  "@importTimesCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "importDuplicateTitle": "استوردت هذا الملف من قبل",
+  "importDuplicateBody": "كان ذلك في {date}. لن تتكرر السجلات الموجودة؛ ستُضاف الجديدة فقط.",
+  "@importDuplicateBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "importDuplicateAnyway": "استيراد على أي حال",
+  "importStartAction": "{count, plural, =0{حفظ في الأرشيف} =1{استيراد سجل واحد} =2{استيراد سجلين} few{استيراد {count} سجلات} many{استيراد {count} سجلًا} other{استيراد {count} سجل}}",
+  "@importStartAction": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importChooseAnother": "ملف آخر",
+  "importWriting": "نكتب بياناتك في مَدارها…",
+  "importDoneTitle": "اكتمل الاستيراد",
+  "importDoneBody": "{count, plural, =0{لم يُضف أي سجل جديد} =1{أُضيف سجل واحد} =2{أُضيف سجلان} few{أُضيفت {count} سجلات} many{أُضيف {count} سجلًا} other{أُضيف {count} سجل}}",
+  "@importDoneBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importDoneExisting": "{count, plural, =1{سجل واحد كان موجودًا فتُرك كما هو} =2{سجلان كانا موجودَين فتُركا كما هما} few{{count} سجلات كانت موجودة فتُركت كما هي} many{{count} سجلًا كانت موجودة فتُركت كما هي} other{{count} سجل كانت موجودة فتُركت كما هي}}",
+  "@importDoneExisting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importDoneArchived": "حُفظت نسخة أصلية كاملة من الملف في الأرشيف.",
+  "importErrorInvalidJson": "هذا ليس نص JSON صالحًا.",
+  "importErrorEmpty": "لا يوجد محتوى لاستيراده.",
+  "importErrorNotObject": "الملف لا يحتوي على بيانات قابلة للاستيراد.",
+  "importErrorRead": "تعذّرت قراءة الملف.",
+  "importErrorCommit": "تعذّر الاستيراد، ولم يتغيّر شيء في بياناتك.",
+  "importNothingFound": "لم نجد في هذا الملف بيانات نعرفها، لكنه سيُحفظ كاملًا في الأرشيف.",
+  "importTryAgain": "حاول مجددًا",
+  "importDefaultWallet": "المحفظة الرئيسية",
+  "@importDefaultWallet": {
+    "description": "Name of the wallet created for imported transactions that name none"
+  },
+  "importDefaultBoard": "العمل",
+  "@importDefaultBoard": {
+    "description": "Name of the board created for imported cards that name none"
+  },
+  "importOpeningBalance": "الرصيد الافتتاحي",
+  "@importOpeningBalance": {
+    "description": "Note of the deposit created from a jar's saved amount"
+  },
+  "importColumnTodo": "للإنجاز",
+  "importColumnDoing": "قيد العمل",
+  "importColumnDone": "منجز",
+  "importSectionHealthAlerts": "تنبيهات صحية",
+  "importSectionConditions": "الحالات الصحية",
+  "importSectionMedications": "الأدوية والمكمّلات",
+  "importSectionMedDoses": "سجل الجرعات",
+  "importSectionLabTests": "التحاليل",
+  "importSectionLabReadings": "نتائج التحاليل",
+  "importSectionAppointments": "المواعيد الطبية",
+  "importSectionDoctorQuestions": "أسئلة للطبيب",
+  "importSectionPainEntries": "سجل الألم",
+  "importSectionMoodEntries": "المزاج والتوتر",
+  "importSectionHabits": "العادات",
+  "importSectionHabitLogs": "سجل العادات",
+  "importSectionWorries": "المخاوف",
+  "importSectionCurrencies": "العملات",
+  "importSectionWallets": "المحافظ",
+  "importSectionBudgetItems": "بنود الميزانية",
+  "importSectionTransactions": "المعاملات",
+  "importSectionJars": "الحصّالات",
+  "importSectionJarDeposits": "إيداعات الحصّالات",
+  "importSectionDebts": "الديون",
+  "importSectionDebtPayments": "سداد الديون",
+  "importSectionObligations": "الالتزامات الدورية",
+  "importSectionPeople": "الأشخاص",
+  "importSectionContactLogs": "سجل التواصل",
+  "importSectionProjects": "المشاريع",
+  "importSectionProjectItems": "مهام المشاريع",
+  "importSectionBoards": "لوحات العمل",
+  "importSectionBoardCards": "بطاقات العمل",
+  "importSectionTrips": "الرحلات",
+  "importSectionTripItems": "قوائم التجهيز",
+  "importSectionTravelDocuments": "وثائق السفر",
+  "importSectionLearningGoals": "أهداف التعلّم",
+  "importSectionGoalLogs": "سجل التقدّم",
+  "importSectionExercises": "التمارين",
+  "importSectionWorkoutLogs": "سجل التمارين",
+  "importSectionAvoidItems": "قائمة التجنّب",
+  "importSectionFastingSessions": "الصيام",
+  "importSectionWaterLogs": "الماء",
+  "importSectionPrayerLogs": "سجل الصلاة",
+  "importSectionTasks": "المهام",
+  "importSectionCustomModules": "وحدات مخصّصة",
+  "importSectionCustomEntries": "إدخالات الوحدات",
+  "importIssueInvalidJson": "نص JSON غير صالح",
+  "importIssueEmptyInput": "لا يوجد محتوى",
+  "importIssueNotAnObject": "لا بيانات قابلة للاستيراد",
+  "importIssueUnparsedDate": "تواريخ لم نستطع قراءتها",
+  "importIssueUnparsedAmount": "مبالغ لم نستطع قراءتها",
+  "importIssueUnparsedTime": "أوقات لم نستطع قراءتها",
+  "importIssueUnparsedNumber": "أرقام لم نستطع قراءتها",
+  "importIssueInferredTime": "أوقات استنتجناها من كلمات (صباحًا ← ٨:٠٠)",
+  "importIssueMissingRequired": "سجلات تنقصها قيمة أساسية فلم تُستورد، وهي محفوظة في الأرشيف",
+  "importIssueUnresolvedReference": "إشارات إلى عناصر غير موجودة",
+  "importIssueCreatedReference": "عناصر أنشأناها من أسمائها",
+  "importIssueUnknownValue": "قيم غير معروفة استبدلنا بها الافتراضي",
+  "importIssueAssumedGlasses": "كميات ماء قرأناها أكوابًا (٢٥٠ مل)",
+  "importIssueAssumedFastingTarget": "أهداف صيام مفترضة",
+  "importIssueAssumedDate": "تواريخ مفترضة",
+  "importIssueAssumedValue": "قيم مفترضة",
+  "importIssueCurrencyWallet": "محافظ أنشأناها لعملات مختلفة (دون تحويل)",
+  "importIssueMissingRate": "عملات بلا سعر صرف (افترضنا ١) — عدّلها من الإعدادات",
+  "importIssueDuplicateSourceId": "معرّفات مكرّرة في الملف",
+  "importIssueBudget": "فحوص الميزانية",
+  "importIssueDuplicateFile": "ملف مستورد من قبل",
+  "importIssueSettingRead": "إعدادات قرأناها من الملف",
+  "importBudgetChildrenUnder": "بنود «{name}» أقل منه بـ {amount}",
+  "@importBudgetChildrenUnder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetChildrenOver": "بنود «{name}» تزيد عليه بـ {amount}",
+  "@importBudgetChildrenOver": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetPercentOver": "نِسَب «{name}» تتجاوز ١٠٠٪ ({percent})",
+  "@importBudgetPercentOver": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetCircular": "نِسَب «{name}» تعتمد على نفسها",
+  "@importBudgetCircular": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetStructure": "«{name}» مرتبط ببند غير صالح، فجعلناه بندًا رئيسيًا",
+  "@importBudgetStructure": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetMissingRate": "لا يوجد سعر صرف لـ {currency}",
+  "@importBudgetMissingRate": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "importBudgetWhole": "الميزانية كلها"
 }
