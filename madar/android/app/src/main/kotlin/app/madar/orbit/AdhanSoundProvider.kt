@@ -106,7 +106,7 @@ class AdhanSoundProvider : ContentProvider() {
     ): Cursor {
         val file = fileFor(uri)
         val columns = projection ?: arrayOf(OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE)
-        val row = columns.map { col ->
+        val row: List<Any?> = columns.map { col ->
             when (col) {
                 OpenableColumns.DISPLAY_NAME -> file.name
                 OpenableColumns.SIZE -> file.length()
