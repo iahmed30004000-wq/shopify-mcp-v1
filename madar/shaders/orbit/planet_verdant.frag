@@ -175,7 +175,10 @@ void main() {
     // --- terrain -------------------------------------------------------------
     float warp = fbm3lo(qs * 1.4);
     float h = fbm3(qs * 1.9 + warp * 1.1);
-    float sea = 0.47 - ng * 0.035;                  // low sea: green land dominates; seas shrink in drought
+    // low sea: forest-green land dominates. The coastline never moves with
+    // the score (drought shows as dry shelves drawn over the sea, below):
+    // a moving sea level punched dark jagged lakes into the land mid-morph.
+    const float sea = 0.43;
     float cw = 0.002 + px * 2.2;                    // coastline antialias width
     float land = smoothstep(sea - cw, sea + cw, h);
     float e = saturate((h - sea) / 0.26);           // elevation above the sea
@@ -212,7 +215,9 @@ void main() {
     // --- vegetation: potential vs. a threshold that moves with growth --------
     float v = 0.42 * (1.0 - e) + 0.34 * (1.0 - lat) + 0.24 * moist + 0.14 * valley - 0.5 * mount;
     float thr = mix(1.02, 0.2, g) - pls * 0.08;     // celebration: forests surge
-    float vegSoft = 0.025 + px * 1.5;
+    // feathered growth front (≥ 0.08): the forest fades into the land beneath
+    // it as it grows or dies back, never a hard jagged mask
+    float vegSoft = 0.08 + px * 1.5;
     float veg = smoothstep(thr - vegSoft, thr + vegSoft, v) * land * (1.0 - smoothstep(0.86, 0.92, lat));
     float age = saturate((v - thr) / 0.28);
     float front = veg * (1.0 - smoothstep(0.0, 0.22, age));   // fresh growth fringe
@@ -304,7 +309,7 @@ void main() {
       c = mix(c, sand * sunShade * 0.95, desert * (1.0 - cloud) * 0.8);   // no brightener: the desert is not a lamp
       // Exposed seabed and dry lowlands crack into polygons.
       float bed = smoothstep(sea - 0.03, sea + 0.004, h) * (1.0 - smoothstep(0.0, 0.25, e));
-      float shelfDry = smoothstep(sea - 0.03, sea - 0.002, h) * (1.0 - land);
+      float shelfDry = smoothstep(sea - 0.05, sea - 0.002, h) * (1.0 - land);
       c = mix(c, vec3(0.34, 0.3, 0.24) * diff * 1.5, shelfDry * ng);
       float mudMask = max(bed, shelfDry) * smoothstep(0.3, 0.8, ng) * (1.0 - veg);
       if (mudMask > 0.01) {
@@ -348,7 +353,10 @@ void main() {
     c += auC;
     c += distressColor() * distressRim(mu, pulseD);
     // celebration flourish: rim flash + forest surge with a lime bloom at the growth front
-    c += cGlow * pls * (pow(1.0 - saturate(mu), 6.0) * 1.2 + front * 1.4 * (0.4 + diff) + veg * 0.08);
+    // (the surge lights the land evenly, bare rock too, and mostly by day:
+    // lighting only the night-side canopy left the bare rock as black
+    // jagged holes in a lime glow)
+    c += cGlow * pls * (pow(1.0 - saturate(mu), 3.0) * 0.45 + front * 1.4 * (0.2 + diff) + land * (0.02 + 0.05 * veg) * (0.35 + diff));
 
     col = c;
   }

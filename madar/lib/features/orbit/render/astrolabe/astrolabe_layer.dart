@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/ambient_motion.dart';
 import '../../../../core/domain/enums.dart';
-import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/motion/motion.dart';
 import '../../../../core/motion/particles/celebration.dart';
 import '../../../../core/sound/sound_api.dart';
@@ -26,17 +25,24 @@ typedef AstrolabePrayerLit = void Function(Prayer prayer, Offset globalTip);
 /// prayer dial around the user's core star (see [AstrolabePainter]).
 ///
 /// Integration:
+/// * call `AstrolabePrograms.warmUp()` during the splash so the first frame
+///   never compiles a shader;
 /// * pass a [controller] driven by the scene's single ticker
-///   (`controller.advance(dt)`) and push new [AstrolabeState]s into it (or
-///   rebuild with a new [state]); without a controller the layer runs its
-///   own ticker (standalone use), only while ambient motion is allowed;
+///   (`controller.advance(dt)`; `controller.isAnimating` tells when a
+///   one-shot animation needs full frame rate, otherwise 30 fps is plenty)
+///   and rebuild with a new [state] whenever it changes (once a second for
+///   the countdown) – or push states into the controller directly. Without a
+///   controller the layer runs its own ticker (standalone use) while ambient
+///   motion is allowed, at 30 fps when idle and never while hidden;
 /// * [tilt] (or `controller.tilt`) tilts the disc in perspective;
-/// * [repaint] adds the scene's own repaint signal (camera, frame clock).
+/// * [repaint] adds the scene's own repaint signal (camera, frame clock);
+/// * battery saver: draw an `AstrolabeStill.render(...)` image instead.
 ///
 /// When a prayer gets logged its pointer ignites over 0.8 s: [onPrayerLit]
 /// is called after the frame (default: `Fx.fire(Sfx.prayerLit)` plus a
 /// Celebrate orbitalRing burst at the pointer). Tapping a pointer or its name
-/// fires `Sfx.tap` and calls [onPrayerTap].
+/// fires `Sfx.tap` and calls [onPrayerTap]; nothing else is claimed, so the
+/// scene's gestures work across the astrolabe.
 class AstrolabeLayer extends StatefulWidget {
   const AstrolabeLayer({
     super.key,
@@ -49,13 +55,27 @@ class AstrolabeLayer extends StatefulWidget {
     this.celebrate = true,
     this.animate = true,
     this.showMakersMark = true,
+    this.palette,
   });
 
+  /// What the dial shows. A different object is pushed into the controller
+  /// (newly logged prayers ignite); the same object is ignored.
   final AstrolabeState state;
+
+  /// The scene's controller (advanced by the scene's ticker); null → the
+  /// layer owns one and ticks it itself.
   final AstrolabeController? controller;
+
+  /// Extra repaint signal merged with the controller's.
   final Listenable? repaint;
+
+  /// Disc tilt (gyro parallax / camera); null leaves the controller's tilt.
   final AstrolabeTilt? tilt;
+
+  /// Replaces the default ignition feedback (see the class docs).
   final AstrolabePrayerLit? onPrayerLit;
+
+  /// Opens a prayer (its pointer or engraved name was tapped).
   final ValueChanged<Prayer>? onPrayerTap;
 
   /// Default ignition feedback (sound + particles) when [onPrayerLit] is null.
@@ -66,6 +86,9 @@ class AstrolabeLayer extends StatefulWidget {
 
   /// Engrave the maker's mark on the lower hub ring (large dials).
   final bool showMakersMark;
+
+  /// Overrides the colours (default: derived from the theme's tokens).
+  final AstrolabePalette? palette;
 
   @override
   State<AstrolabeLayer> createState() => _AstrolabeLayerState();
@@ -91,10 +114,12 @@ class _AstrolabeLayerState extends State<AstrolabeLayer> with SingleTickerProvid
     if (programs != null) {
       _shaders = AstrolabeShaderSet(programs);
     } else {
-      unawaited(AstrolabePrograms.load().then((p) {
-        if (!mounted) return;
-        setState(() => _shaders = AstrolabeShaderSet(p));
-      }, onError: (Object _) {}));
+      unawaited(
+        AstrolabePrograms.load().then((p) {
+          if (!mounted) return;
+          setState(() => _shaders = AstrolabeShaderSet(p));
+        }, onError: (Object _) {}),
+      );
     }
   }
 
@@ -193,11 +218,15 @@ class _AstrolabeLayerState extends State<AstrolabeLayer> with SingleTickerProvid
   }
 
   void _onTapUp(TapUpDetails details) {
-    final onTap = widget.onPrayerTap;
     final box = _paintKey.currentContext?.findRenderObject();
-    if (onTap == null || box is! RenderBox) return;
+    if (box is! RenderBox) return;
     final prayer = _painter?.prayerAt(details.localPosition, box.size);
-    if (prayer == null) return;
+    if (prayer != null) _tapPrayer(prayer);
+  }
+
+  void _tapPrayer(Prayer prayer) {
+    final onTap = widget.onPrayerTap;
+    if (onTap == null) return;
     Fx.fire(Sfx.tap);
     onTap(prayer);
   }
@@ -211,11 +240,12 @@ class _AstrolabeLayerState extends State<AstrolabeLayer> with SingleTickerProvid
     super.dispose();
   }
 
-  String _semantics(L10n l10n, AstrolabeState s) {
+  static String _summary(AstrolabeState s) {
     final labels = s.labels;
+    final l10n = labels.l10n;
     return l10n.astrolabeSemantics(
       l10n.astrolabeWindowNow(labels.windowName(s.window.window)),
-      s.countdown,
+      s.spokenCountdown,
       labels.formatter.formatInt(s.prayedCount),
       labels.formatter.formatInt(AstrolabeGeometry.prayers.length),
     );
@@ -223,8 +253,8 @@ class _AstrolabeLayerState extends State<AstrolabeLayer> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final palette = AstrolabePalette.fromTokens(context.tokens);
-    final l10n = L10n.of(context);
+    final palette = widget.palette ?? AstrolabePalette.fromTokens(context.tokens);
+    final l10n = widget.state.labels.l10n;
     final painter = _painter = AstrolabePainter(
       controller: _controller,
       palette: palette,
@@ -232,15 +262,19 @@ class _AstrolabeLayerState extends State<AstrolabeLayer> with SingleTickerProvid
       shaders: _shaders,
       devicePixelRatio: MediaQuery.devicePixelRatioOf(context),
       makersMark: widget.showMakersMark ? l10n.astrolabeMakersMark : null,
+      semanticsState: widget.state,
+      onPrayerTap: widget.onPrayerTap == null ? null : _tapPrayer,
       repaint: widget.repaint,
     );
     Widget child = CustomPaint(key: _paintKey, painter: painter, size: Size.infinite);
     if (widget.onPrayerTap != null) {
-      child = GestureDetector(behavior: HitTestBehavior.translucent, onTapUp: _onTapUp, child: child);
+      // Only taps on a pointer or its name are claimed (see the painter's
+      // hitTest); everything else reaches the orbit scene.
+      child = GestureDetector(behavior: HitTestBehavior.deferToChild, onTapUp: _onTapUp, child: child);
     }
     return Semantics(
       container: true,
-      label: _semantics(l10n, widget.state),
+      label: _summary(widget.state),
       child: RepaintBoundary(child: child),
     );
   }

@@ -37,6 +37,8 @@ class AstrolabePalette {
     required this.labelMissed,
     required this.sun,
     required this.sunGlow,
+    required this.bevelLight,
+    required this.bevelDark,
   });
 
   factory AstrolabePalette.fromTokens(MadarTokens t) {
@@ -44,7 +46,10 @@ class AstrolabePalette {
     Color mix(Color a, Color b, double k) => Color.lerp(a, b, k)!;
     Color hsl(Color c, {double? l, double? s}) {
       final h = HSLColor.fromColor(c);
-      return h.withLightness((l ?? h.lightness).clamp(0.0, 1.0)).withSaturation((s ?? h.saturation).clamp(0.0, 1.0)).toColor();
+      return h
+          .withLightness((l ?? h.lightness).clamp(0.0, 1.0))
+          .withSaturation((s ?? h.saturation).clamp(0.0, 1.0))
+          .toColor();
     }
 
     const faith = PlanetPalettes.faith;
@@ -65,12 +70,15 @@ class AstrolabePalette {
       enamelEdge = mix(t.space0, t.space1, 0.5);
       enamelSheen = mix(t.space3, t.secondary, 0.55);
     }
-    final brassHi = mix(t.gold, warmWhite, light ? 0.62 : 0.5);
+    // Real brass, a three-stop ramp: umber lows (the theme's dark brass,
+    // ≈ #5A3A12), a warm amber body (≈ #B8893A) and pale-gold highlights
+    // (≈ #F3DDA0) – never a flat saturated yellow, never cream.
+    final brassHi = mix(t.gold, warmWhite, light ? 0.3 : 0.32);
     return AstrolabePalette(
       light: light,
-      brass: light ? mix(t.brass, t.gold, 0.45) : mix(t.brass, t.gold, 0.25),
+      brass: light ? mix(t.brass, t.gold, 0.12) : t.brass,
       brassHi: brassHi,
-      brassLow: t.brassDark,
+      brassLow: light ? t.brassDark : mix(t.brassDark, t.space0, 0.08),
       ink: mix(t.brassDark, light ? t.textPrimary : t.space0, 0.45),
       engraveHi: mix(t.gold, warmWhite, 0.55),
       enamelCenter: enamelCenter,
@@ -82,18 +90,24 @@ class AstrolabePalette {
       twilight: mix(t.warning, t.secondary, 0.35),
       halo: light ? t.gold : mix(t.gold, t.accentGlow, 0.3),
       shadow: light ? t.glassShadow : t.space0,
-      litArc: mix(faith.surface, t.gold, 0.4),
-      litHead: mix(faith.glow, warmWhite, 0.5),
-      fireOuter: mix(t.warning, t.danger, 0.22),
-      fireInner: mix(faith.glow, warmWhite, 0.45),
+      // The lit window: molten amber (≈ #E9A43A) heating to warm gold
+      // (≈ #FFD27A) – never white.
+      litArc: mix(t.warning, t.brass, 0.25),
+      litHead: mix(faith.glow, t.warning, 0.4),
+      // Gold at the filaments' roots, orange at their tips.
+      fireOuter: mix(t.warning, t.danger, 0.3),
+      fireInner: mix(faith.glow, t.gold, 0.25),
       starCore: faith.glow,
       starCorona: faith.surface,
-      labelPrayed: mix(faith.glow, warmWhite, 0.35),
+      // Engraved gold, not white UI text: prayed names burn brightest.
+      labelPrayed: light ? mix(faith.glow, t.space0, 0.2) : mix(faith.glow, t.gold, 0.3),
       labelDue: light ? mix(faith.surface, t.space0, 0.3) : mix(t.gold, faith.glow, 0.4),
       labelUpcoming: light ? mix(t.gold, t.space0, 0.4) : mix(t.gold, enamelMid, 0.12),
       labelMissed: light ? mix(t.textTertiary, t.space2, 0.3) : mix(t.textTertiary, enamelMid, 0.3),
       sun: mix(faith.surface, t.gold, 0.3),
       sunGlow: faith.glow,
+      bevelLight: brassHi.withValues(alpha: light ? 0.55 : 0.5),
+      bevelDark: mix(t.brassDark, t.space0, light ? 0.2 : 0.5).withValues(alpha: 0.45),
     );
   }
 
@@ -133,10 +147,46 @@ class AstrolabePalette {
   /// Sun marker glyph and glow.
   final Color sun, sunGlow;
 
+  /// Chamfered metal edges: facing the light / facing away.
+  final Color bevelLight, bevelDark;
+
+  /// A copy with other metal colours.
+  AstrolabePalette withMetal({Color? brass, Color? brassHi, Color? brassLow}) => AstrolabePalette(
+    light: light,
+    brass: brass ?? this.brass,
+    brassHi: brassHi ?? this.brassHi,
+    brassLow: brassLow ?? this.brassLow,
+    ink: ink,
+    engraveHi: engraveHi,
+    enamelCenter: enamelCenter,
+    enamelMid: enamelMid,
+    enamelEdge: enamelEdge,
+    enamelSheen: enamelSheen,
+    plateLine: plateLine,
+    daySky: daySky,
+    twilight: twilight,
+    halo: halo,
+    shadow: shadow,
+    litArc: litArc,
+    litHead: litHead,
+    fireOuter: fireOuter,
+    fireInner: fireInner,
+    starCore: starCore,
+    starCorona: starCorona,
+    labelPrayed: labelPrayed,
+    labelDue: labelDue,
+    labelUpcoming: labelUpcoming,
+    labelMissed: labelMissed,
+    sun: sun,
+    sunGlow: sunGlow,
+    bevelLight: bevelLight,
+    bevelDark: bevelDark,
+  );
+
   List<Color> get _all => [
     brass, brassHi, brassLow, ink, engraveHi, enamelCenter, enamelMid, enamelEdge, enamelSheen, plateLine, //
     daySky, twilight, halo, shadow, litArc, litHead, fireOuter, fireInner, starCore, starCorona, //
-    labelPrayed, labelDue, labelUpcoming, labelMissed, sun, sunGlow,
+    labelPrayed, labelDue, labelUpcoming, labelMissed, sun, sunGlow, bevelLight, bevelDark,
   ];
 
   @override

@@ -2244,7 +2244,7 @@ class L10nAr extends L10n {
   String get orbitSourceAppointments => 'المواعيد الطبية';
 
   @override
-  String get orbitSourceContacts => 'صلة الناس';
+  String get orbitSourceContacts => 'التواصل مع الناس';
 
   @override
   String get orbitSourceTasks => 'المهام';
@@ -2287,6 +2287,9 @@ class L10nAr extends L10n {
 
   @override
   String get orbitSourceTrips => 'الرحلات';
+
+  @override
+  String get orbitSourceActivity => 'النشاط المسجَّل';
 
   @override
   String get orbitArchetypeFaith => 'قبّة ذهبية منقوشة';
@@ -2355,8 +2358,8 @@ class L10nAr extends L10n {
   }
 
   @override
-  String orbitCountdown(String prayer, String duration) {
-    return '$prayer بعد $duration';
+  String orbitMoonSemantics(String name, String planet) {
+    return '$name، قمرٌ يدور حول $planet';
   }
 
   @override
@@ -2364,6 +2367,15 @@ class L10nAr extends L10n {
 
   @override
   String get orbitBuiltInCannotDelete => 'الكواكب الأساسية تُخفى ولا تُحذف';
+
+  @override
+  String get orbitPlanetNeedsName => 'اكتب اسمًا للكوكب';
+
+  @override
+  String get orbitUnknownSource => 'مصدر البيانات هذا غير متاح';
+
+  @override
+  String get orbitPlanetGone => 'لم يعُد هذا الكوكب في مدارك';
 
   @override
   String get orbitUndoRenamed => 'تغيّر اسم الكوكب';
@@ -2463,4 +2475,509 @@ class L10nAr extends L10n {
 
   @override
   String get astrolabeMakersMark => 'مَدار';
+
+  @override
+  String get astrolabeStarDenebKaitos => 'ذنب قيطس';
+
+  @override
+  String get astrolabeStarMenkar => 'منخر قيطس';
+
+  @override
+  String get astrolabeStarAldebaran => 'الدبران';
+
+  @override
+  String get astrolabeStarRigel => 'رجل الجبار';
+
+  @override
+  String get astrolabeStarBetelgeuse => 'يد الجوزاء';
+
+  @override
+  String get astrolabeStarSirius => 'الشعرى اليمانية';
+
+  @override
+  String get astrolabeStarProcyon => 'الشعرى الشامية';
+
+  @override
+  String get astrolabeStarAlphard => 'فرد الشجاع';
+
+  @override
+  String get astrolabeStarRegulus => 'قلب الأسد';
+
+  @override
+  String get astrolabeStarDenebola => 'ذنب الأسد';
+
+  @override
+  String get astrolabeStarSpica => 'السماك الأعزل';
+
+  @override
+  String get astrolabeStarArcturus => 'السماك الرامح';
+
+  @override
+  String get astrolabeStarUnukalhai => 'عنق الحية';
+
+  @override
+  String get astrolabeStarRasAlhague => 'رأس الحوّاء';
+
+  @override
+  String get astrolabeStarAltair => 'النسر الطائر';
+
+  @override
+  String get astrolabeStarDenebAlgedi => 'ذنب الجدي';
+
+  @override
+  String get astrolabeStarMarkab => 'مركب الفرس';
+
+  @override
+  String get astrolabeZodiacAries => 'الحمل';
+
+  @override
+  String get astrolabeZodiacTaurus => 'الثور';
+
+  @override
+  String get astrolabeZodiacGemini => 'الجوزاء';
+
+  @override
+  String get astrolabeZodiacCancer => 'السرطان';
+
+  @override
+  String get astrolabeZodiacLeo => 'الأسد';
+
+  @override
+  String get astrolabeZodiacVirgo => 'السنبلة';
+
+  @override
+  String get astrolabeZodiacLibra => 'الميزان';
+
+  @override
+  String get astrolabeZodiacScorpio => 'العقرب';
+
+  @override
+  String get astrolabeZodiacSagittarius => 'القوس';
+
+  @override
+  String get astrolabeZodiacCapricorn => 'الجدي';
+
+  @override
+  String get astrolabeZodiacAquarius => 'الدلو';
+
+  @override
+  String get astrolabeZodiacPisces => 'الحوت';
+
+  @override
+  String astrolabeCountdownUntil(String prayer) {
+    return 'حتى $prayer';
+  }
+
+  @override
+  String get astrolabeCountdownNowBand => 'حان وقتها';
+
+  @override
+  String skySemantics(String sky, String moon) {
+    return 'السماء الآن: $sky. $moon';
+  }
+
+  @override
+  String get skyMoodNight => 'ليل';
+
+  @override
+  String get skyMoodDawn => 'فجر';
+
+  @override
+  String get skyMoodSunrise => 'شروق';
+
+  @override
+  String get skyMoodDay => 'نهار صافٍ';
+
+  @override
+  String get skyMoodGoldenHour => 'الساعة الذهبية';
+
+  @override
+  String get skyMoodSunset => 'غروب';
+
+  @override
+  String get skyMoodDusk => 'شفق المغرب';
+
+  @override
+  String get skyMoonBelow => 'القمر تحت الأفق';
+
+  @override
+  String skyMoonPhase(String phase, String percent) {
+    return 'القمر $phase، مضاء بنسبة $percent';
+  }
+
+  @override
+  String get skyMoonNew => 'محاق';
+
+  @override
+  String get skyMoonWaxingCrescent => 'هلال متزايد';
+
+  @override
+  String get skyMoonFirstQuarter => 'تربيع أول';
+
+  @override
+  String get skyMoonWaxingGibbous => 'أحدب متزايد';
+
+  @override
+  String get skyMoonFull => 'بدر';
+
+  @override
+  String get skyMoonWaningGibbous => 'أحدب متناقص';
+
+  @override
+  String get skyMoonLastQuarter => 'تربيع أخير';
+
+  @override
+  String get skyMoonWaningCrescent => 'هلال متناقص';
+
+  @override
+  String get skyStarNames => 'أسماء النجوم';
+
+  @override
+  String get skyStarNamesHint =>
+      'تُنقش الأسماء العربية لألمع النجوم في سماء الليل';
+
+  @override
+  String planetsSystemSemantics(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'مدار حياتك: $n عالم يدور حول نجمك',
+      many: 'مدار حياتك: $n عالمًا يدور حول نجمك',
+      few: 'مدار حياتك: $n عوالم تدور حول نجمك',
+      two: 'مدار حياتك: عالمان يدوران حول نجمك',
+      one: 'مدار حياتك: عالم واحد يدور حول نجمك',
+      zero: 'مدار حياتك بلا عوالم ظاهرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get planetsOpenHint => 'ادخل إلى هذا العالم';
+
+  @override
+  String get planetsCustomizeHint => 'خصّص هذا العالم';
+
+  @override
+  String get planetsMoonOpenHint => 'افتح';
+
+  @override
+  String planetsMoonsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n قمر',
+      many: '$n قمرًا',
+      few: '$n أقمار',
+      two: 'قمران',
+      one: 'قمر واحد',
+      zero: 'بلا أقمار',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get orbitUiSceneHint =>
+      'اسحب لتدوير المدار، وباعد بإصبعين للاقتراب من عالم';
+
+  @override
+  String get orbitUiRecenter => 'العودة إلى المدار كاملًا';
+
+  @override
+  String get orbitUiRadarClear =>
+      'عوالمك كلها في توازن — لا شيء يحتاج انتباهك الآن';
+
+  @override
+  String get orbitUiRadarWaiting => 'سيبدأ الرادار عمله حين تسجّل أول أنشطتك';
+
+  @override
+  String orbitUiRadarEntrySemantics(String planet, String reason) {
+    return '$planet: $reason';
+  }
+
+  @override
+  String get orbitUiRadarOpenHint => 'انتقل إلى هذا العالم';
+
+  @override
+  String get orbitUiBalanceLabel => 'التوازن';
+
+  @override
+  String orbitUiPlanetWeight(String weight) {
+    return 'وزنه في توازنك ×$weight';
+  }
+
+  @override
+  String get orbitUiPlanetNotCounted => 'لا يُحتسب في توازنك';
+
+  @override
+  String get orbitUiReasonsTitle => 'ما يحتاج عنايتك';
+
+  @override
+  String get orbitUiReasonsNone => 'لا شيء متأخر هنا — أحسنت';
+
+  @override
+  String get orbitUiReasonsDormant => 'هذا العالم هادئ بانتظار أول بياناتك';
+
+  @override
+  String get orbitUiSourcesTitle => 'ما يغذّي هذا التوازن';
+
+  @override
+  String get orbitUiMoonsTitle => 'الأقمار';
+
+  @override
+  String get orbitUiMoonsNone => 'لا أقمار تدور حول هذا العالم بعد';
+
+  @override
+  String get orbitUiMoonKindPerson => 'شخص';
+
+  @override
+  String get orbitUiMoonKindWallet => 'محفظة';
+
+  @override
+  String get orbitUiMoonKindBoard => 'لوحة عمل';
+
+  @override
+  String get orbitUiMoonKindTrip => 'رحلة';
+
+  @override
+  String get orbitUiMoonKindModule => 'وحدة';
+
+  @override
+  String orbitUiMoonFreshness(String percent) {
+    return 'حيويته $percent';
+  }
+
+  @override
+  String get orbitUiMoonSelected => 'القمر الذي اخترته';
+
+  @override
+  String get orbitUiCustomize => 'تخصيص';
+
+  @override
+  String orbitUiCustomizeTitle(String planet) {
+    return 'تخصيص $planet';
+  }
+
+  @override
+  String get orbitUiCustomizeSubtitle => 'كل تغيير يمكن التراجع عنه';
+
+  @override
+  String get orbitUiEditLook => 'الاسم والمظهر';
+
+  @override
+  String get orbitUiEditWeight => 'أهميته في التوازن';
+
+  @override
+  String get orbitUiEditSources => 'مصادر البيانات';
+
+  @override
+  String get orbitUiMoveOrbit => 'نقل مداره';
+
+  @override
+  String get orbitUiHide => 'إخفاء من المدار';
+
+  @override
+  String get orbitUiReset => 'استعادة الإعدادات الأصلية';
+
+  @override
+  String get orbitUiDelete => 'حذف هذا العالم';
+
+  @override
+  String get orbitUiAddPlanet => 'إضافة عالم جديد';
+
+  @override
+  String get orbitUiHiddenWorlds => 'العوالم المخفية';
+
+  @override
+  String get orbitUiFieldName => 'الاسم';
+
+  @override
+  String get orbitUiFieldColor => 'اللون';
+
+  @override
+  String get orbitUiFieldStyle => 'طراز العالم';
+
+  @override
+  String get orbitUiFieldWeight => 'الأهمية';
+
+  @override
+  String get orbitUiWeightNone => 'لا يُحتسب';
+
+  @override
+  String get orbitUiWeightNormal => 'عادي';
+
+  @override
+  String get orbitUiWeightMost => 'الأهم';
+
+  @override
+  String get orbitUiSourcesHint => 'حرّك المصدر إلى الصفر لإيقافه';
+
+  @override
+  String get orbitUiSourceOff => 'متوقف';
+
+  @override
+  String get orbitUiMoveTitle => 'موضع المدار';
+
+  @override
+  String get orbitUiMoveSubtitle => 'الأقرب إلى نجمك أولًا';
+
+  @override
+  String orbitUiMoveBefore(String planet) {
+    return 'قبل $planet';
+  }
+
+  @override
+  String get orbitUiMoveLast => 'المدار الأبعد';
+
+  @override
+  String orbitUiOrbitNumber(String n) {
+    return 'المدار $n';
+  }
+
+  @override
+  String orbitUiPrayerAt(String time) {
+    return 'وقتها $time';
+  }
+
+  @override
+  String get orbitUiPrayerPrayed => 'صلّيتها';
+
+  @override
+  String get orbitUiPrayerLate => 'صلّيتها متأخرة';
+
+  @override
+  String get orbitUiPrayerMissed => 'فاتتني';
+
+  @override
+  String get orbitUiPrayerClear => 'إلغاء التسجيل';
+
+  @override
+  String get orbitUiPrayerNotYet => 'لم يدخل وقتها بعد';
+
+  @override
+  String orbitUiPrayerLogged(String prayer) {
+    return 'سُجّلت صلاة $prayer';
+  }
+
+  @override
+  String orbitUiPrayerCleared(String prayer) {
+    return 'أُلغي تسجيل $prayer';
+  }
+
+  @override
+  String get orbitUiPrayerHint => 'سجّل هذه الصلاة';
+
+  @override
+  String get orbitUiPlanetMissing => 'هذا العالم لم يعد في مدارك';
+
+  @override
+  String get orbitUiBackToOrbit => 'العودة إلى المدار';
+
+  @override
+  String orbitUiInDuration(String duration) {
+    return 'بعد $duration';
+  }
+
+  @override
+  String orbitUiPrayerPrayedAt(String time) {
+    return 'صُلّيت $time';
+  }
+
+  @override
+  String orbitUiPrayerLateAt(String time) {
+    return 'صُلّيت متأخرة $time';
+  }
+
+  @override
+  String orbitUiMoonOf(String kind, String planet) {
+    return '$kind في $planet';
+  }
+
+  @override
+  String get orbitUiMoonInTouch => 'تواصلت اليوم';
+
+  @override
+  String orbitUiMoonInTouchLogged(String name) {
+    return 'سُجّل تواصلك مع $name';
+  }
+
+  @override
+  String get orbitUiMoonRename => 'إعادة التسمية';
+
+  @override
+  String get orbitUiMoonRenamed => 'تمت إعادة التسمية';
+
+  @override
+  String orbitUiMoonLastContact(String when) {
+    return 'آخر تواصل: $when';
+  }
+
+  @override
+  String orbitUiMoonTripStarts(String date) {
+    return 'تبدأ في $date';
+  }
+
+  @override
+  String get orbitUiMoonNever => 'لم يُسجَّل بعد';
+
+  @override
+  String orbitUiListSeparator(String a, String b) {
+    return '$a · $b';
+  }
+
+  @override
+  String orbitUiFraction(String done, String total) {
+    return '$done/$total';
+  }
+
+  @override
+  String get orbitUiPrayerDone => 'صُلّيت';
+
+  @override
+  String get orbitUiPrayerLateDone => 'صُلّيت متأخرة';
+
+  @override
+  String get orbitUiPanelExpand => 'عرض مهام هذا الوقت ورادار الإهمال';
+
+  @override
+  String get orbitUiPanelCollapse => 'طيّ اللوحة وإظهار المدار';
+
+  @override
+  String get orbitUiRadarLineJoin => ' — ';
+
+  @override
+  String get orbitUiTodayPrayersTitle => 'صلوات اليوم';
+
+  @override
+  String orbitUiPrayersProgress(String done, String total) {
+    return 'صلّيت $done من $total';
+  }
+
+  @override
+  String get orbitUiPrayerStatusPrayed => 'صُلّيت';
+
+  @override
+  String get orbitUiPrayerStatusDue => 'حان وقتها';
+
+  @override
+  String get orbitUiPrayerStatusMissed => 'فاتت';
+
+  @override
+  String get orbitUiPrayerStatusUpcoming => 'قادمة';
+
+  @override
+  String get orbitUiWirdTitle => 'الورد والأذكار';
+
+  @override
+  String get orbitUiWorldTasksTitle => 'اليوم في هذا العالم';
+
+  @override
+  String get orbitUiWorldTasksNone => 'لا شيء مخطّط لهذا العالم اليوم';
+
+  @override
+  String orbitUiSourceSemantics(String source, String value) {
+    return '$source: $value';
+  }
+
+  @override
+  String get orbitUiMoonWaiting => 'بانتظارك';
 }

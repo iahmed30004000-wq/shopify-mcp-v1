@@ -36,10 +36,13 @@ class AstrolabePrograms {
   static Future<AstrolabePrograms> load() {
     final existing = _instance;
     if (existing != null) return Future.value(existing);
-    return _loading ??= _load().then((p) => _instance = p, onError: (Object e, StackTrace s) {
-      _loading = null;
-      throw e;
-    });
+    return _loading ??= _load().then(
+      (p) => _instance = p,
+      onError: (Object e, StackTrace s) {
+        _loading = null;
+        throw e;
+      },
+    );
   }
 
   static Future<AstrolabePrograms> _load() async {

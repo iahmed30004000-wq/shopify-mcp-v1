@@ -32,15 +32,15 @@ class PrayerSettings {
   final bool useJordanPreset;
 
   Map<String, Object?> toJson() => {
-        'latitude': latitude,
-        'longitude': longitude,
-        'cityName': cityName,
-        'fajrAngle': fajrAngle,
-        'ishaAngle': ishaAngle,
-        'hanafiAsr': hanafiAsr,
-        'adjustmentsMin': adjustmentsMin,
-        'useJordanPreset': useJordanPreset,
-      };
+    'latitude': latitude,
+    'longitude': longitude,
+    'cityName': cityName,
+    'fajrAngle': fajrAngle,
+    'ishaAngle': ishaAngle,
+    'hanafiAsr': hanafiAsr,
+    'adjustmentsMin': adjustmentsMin,
+    'useJordanPreset': useJordanPreset,
+  };
 
   factory PrayerSettings.fromJson(Map<String, Object?> j) {
     const d = PrayerSettings();
@@ -81,12 +81,12 @@ class DayTimes {
   final DateTime fajr, sunrise, dhuhr, asr, maghrib, isha;
 
   List<(Prayer, DateTime)> get obligatory => [
-        (Prayer.fajr, fajr),
-        (Prayer.dhuhr, dhuhr),
-        (Prayer.asr, asr),
-        (Prayer.maghrib, maghrib),
-        (Prayer.isha, isha),
-      ];
+    (Prayer.fajr, fajr),
+    (Prayer.dhuhr, dhuhr),
+    (Prayer.asr, asr),
+    (Prayer.maghrib, maghrib),
+    (Prayer.isha, isha),
+  ];
 }
 
 /// Where "now" sits in the prayer-anchored day.
@@ -165,6 +165,17 @@ class PrayerSchedule {
     final tomorrow = timesFor(now.add(const Duration(days: 1)));
     final yesterday = timesFor(now.subtract(const Duration(days: 1)));
     if (now.isBefore(today.fajr)) {
+      // A high-latitude summer: yesterday's Isha may fall after midnight –
+      // until it begins, yesterday's Maghrib window is still running.
+      if (now.isBefore(yesterday.isha)) {
+        return WindowState(
+          window: PrayerWindow.maghrib,
+          start: yesterday.maghrib,
+          end: yesterday.isha,
+          nextPrayer: Prayer.isha,
+          nextPrayerAt: yesterday.isha,
+        );
+      }
       return WindowState(
         window: PrayerWindow.isha,
         start: yesterday.isha,
@@ -249,6 +260,5 @@ class PrayerSchedule {
   }
 
   /// Fraction of the 24-hour dial (0 = local midnight, 0.5 = noon).
-  static double dialFraction(DateTime t) =>
-      (t.hour * 3600 + t.minute * 60 + t.second + t.millisecond / 1000) / 86400.0;
+  static double dialFraction(DateTime t) => (t.hour * 3600 + t.minute * 60 + t.second + t.millisecond / 1000) / 86400.0;
 }

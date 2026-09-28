@@ -30,6 +30,12 @@
 // highways off their great circle); the next city is carried between loop
 // iterations (one cos/sin pair per board); no inclined traffic arcs.
 //
+// Round 2 identity: never "blue camo" – the plating is DARK GUNMETAL with a
+// visible panel grid (dark seams between plates at two scales, per-panel
+// tone), the arterial traces are glowing TRENCH LINES (amber, lit by day
+// too), the seas are dark oil-slate, and the orbital station chain shows
+// from a steady world up (brighter stations).
+//
 // uExtra: x = number of country boards (0..8) → that many metropolises
 //         y = activity 0..1 → light density/brightness (0.6 is a good default)
 //         z, w unused.
@@ -194,7 +200,7 @@ void main() {
   vec3 auC = mix(auBase, auTop, saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.13;
 
   // Orbital station chain (equatorial), lit when working.
-  float ringVis = smoothstep(0.5, 0.9, uScore) + uPulse * 0.6;
+  float ringVis = smoothstep(0.3, 0.8, uScore) + uPulse * 0.6;
   vec3 axis = vec3(0.0, cos(tilt), -sin(tilt));          // spin axis in view space (q.y = dot(n, axis))
   vec3 ring = vec3(0.0, 0.0, 1.0);
   if (ringVis > 0.001 && r < 1.34) {
@@ -295,12 +301,20 @@ void main() {
     float resolveA = smoothstep(1.0, 3.5, 1.0 / (14.0 * pxUv));
     float blockPx = 1.0 / (14.0 * pxUv);                          // arterial block size in px
     float roofRes = smoothstep(2.5, 6.0, 1.0 / (56.0 * pxUv));    // fine blocks resolvable (albedo)
+    // The road grid lives on cube faces: it fades out toward the face edges
+    // (no seam where two grids meet) and only shows on the day side at a
+    // high level of detail – at overview size it read as tiles.
+    float faceEdge = max(abs(uv.x), abs(uv.y));
+    float seamFade = 1.0 - smoothstep(0.82, 0.99, faceEdge);
+    float gridLod = smoothstep(5.0, 12.0, blockPx) * seamFade;
+    roofRes *= seamFade;
     float roof = mix(0.5, blk, roofRes);
     float nT6 = noise3(x * 6.0 + 3.0);                            // shared: bedrock tone + night towns
     float n11 = noise3(x * 11.0);                                 // shared: dust tone + urban lights
 
-    vec3 steel = cA * vec3(0.4, 0.66, 0.92);                      // blue steel plating (saturated in linear: ACES desaturates)
-    vec3 sea = mix(cC, cA, 0.25) * 0.7;
+    // dark gunmetal plating (a cool metal, not a blue fabric)
+    vec3 steel = mix(cA * vec3(0.34, 0.42, 0.52), vec3(0.075, 0.08, 0.09), 0.3);
+    vec3 sea = mix(cC, cA, 0.18) * 0.42;
     vec3 albedo = sea;
     float distr = 0.0, heavy = 0.0, trace = 0.0;
     if (land > 0.001) {
@@ -334,18 +348,18 @@ void main() {
       //      so the 22 px average stays steel-blue, never pink or tan),
       //      darker street canyons, soot-dark heavy industry; basalt bedrock
       //      with dusty flats; deep slate seas. ----
-      float plan = smoothstep(2.5, 6.0, blockPx);                 // per-block tone once blocks are resolvable
+      float plan = smoothstep(2.5, 6.0, blockPx) * seamFade;      // per-block tone once blocks are resolvable
       // mottling (city fabric and bedrock) from the district scale down to
       // the block scale; each octave fades out before it would alias
       float n9 = noise3(x * 9.0 + 2.0);
-      float m1 = (n9 - 0.5) * smoothstep(2.0, 5.0, 1.0 / (9.0 * pxObj));
+      float m1 = (n9 - 0.5) * smoothstep(2.0, 5.0, 1.0 / (9.0 * pxObj)) * 0.4;   // no large camo blotches
       float m2 = (n24 - 0.5) * smoothstep(2.5, 6.0, 1.0 / (24.0 * pxObj));
       vec3 basalt = mix(cC, cA, 0.4) * vec3(0.6, 0.85, 1.12) * (0.72 + 0.5 * nT6) * (1.0 + m1 * 0.4 + m2 * 0.45);
       vec3 dust = toLinear(vec3(0.46, 0.43, 0.39)) * (0.8 + 0.35 * n11) * (1.0 + m2 * 0.3);
       vec3 ground = mix(basalt, dust, smoothstep(0.52, 0.72, warp) * 0.4);
       float plateK = mix(0.5, blkA, plan);                        // per-block tone (city mottling)
       float mott = 1.0 + m1 * 0.5 + m2 * 0.45;
-      vec3 concrete = toLinear(vec3(0.46, 0.5, 0.53));
+      vec3 concrete = toLinear(vec3(0.3, 0.32, 0.34));
       vec3 copper = toLinear(vec3(0.6, 0.44, 0.34));              // weathered copper / bronze roofs
       vec3 tar = cC * 3.0;
       // roof mix per fine block when resolved (steel 64 %, concrete 22 %,
@@ -361,9 +375,12 @@ void main() {
       // steel TRACES broken into fragments (a circuit, not a graph-paper
       // lattice); they carry the amber light at night
       float frag0 = smoothstep(0.4, 0.62, n9);
-      trace = roadA * frag0 * distr * (1.0 - heavy);
-      landCol *= 1.0 - (mix(0.12, roadB, roofRes) * 0.45 + roadA * (1.0 - frag0) * 0.3) * distr;
-      landCol = mix(landCol, steel * 1.9, trace * 0.6);
+      trace = roadA * frag0 * distr * (1.0 - heavy) * gridLod;
+      landCol *= 1.0 - (mix(0.12, roadB, roofRes) * 0.45 * gridLod + roadA * (1.0 - frag0) * 0.3 * gridLod) * distr;
+      // the panel grid: dark seams between the plates, over land and districts
+      float seams = (roadA * 0.55 * resolveA + roadB * 0.3 * roofRes) * seamFade;
+      landCol *= 1.0 - seams;
+      landCol = mix(landCol, steel * 1.6, trace * 0.4);
       albedo = mix(sea, landCol, land);
     }
 
@@ -431,8 +448,8 @@ void main() {
       float urban = land * (distr * (0.15 + 0.5 * towns) + citySprawl * (0.6 + 0.5 * n11));
       float U = saturate(urban * density);
       float frag1 = smoothstep(0.35, 0.65, noise3(x * 26.0 + 8.0));             // streets lit in fragments
-      float streets = roadA * smoothstep(0.2, 0.7, U) * (0.3 + 0.7 * frag1) * 1.1
-                    + roadB * smoothstep(0.45, 0.95, U) * (0.4 + 0.6 * frag1) * 0.9;
+      float streets = (roadA * smoothstep(0.2, 0.7, U) * (0.3 + 0.7 * frag1) * 1.1
+                    + roadB * smoothstep(0.45, 0.95, U) * (0.4 + 0.6 * frag1) * 0.9) * seamFade;
       float blockOn = smoothstep(blk, blk + 0.05, U * 1.2);
       vec2 cellF = fract((uv + 0.013) * 56.0) - 0.5;
       float dotS = max(0.0014, pxUv * 0.6);
@@ -448,9 +465,18 @@ void main() {
       float resolveT = smoothstep(1.0, 3.0, 1.0 / (18.0 * pxUv));
       float townPt = exp(-td * td / (tS * tS)) * (0.0022 * 0.0022) / (tS * tS) * tOn * (0.5 + th2.y);
       townPt = mix(U * 0.12, townPt, resolveT);
-      float haze = U * U * 0.18;                                                // light pollution
-      float lodPts = U * 0.14 * (0.6 + 0.8 * frag1);                            // average of the block points
-      float grid = haze + townPt * 1.4 + mix(lodPts, blockLight * 1.4, resolveB) + mix(U * 0.06, streets, resolveA);
+      // clusters: a coarse layer of sharp light points (≥ ~1 px) that reads
+      // as city lights even on a 25 px world – never a smeared amber glow
+      vec3 cg = q * 9.0 + uSeed * 3.1;
+      vec3 cid = floor(cg);
+      vec3 ch = hash33(cid + 11.0);
+      float cOn = smoothstep(ch.x * 0.75, ch.x * 0.75 + 0.1, U) * step(0.25, ch.y);
+      float cS = max(0.012, pxObj * 0.6);
+      float cd = length(fract(cg) - 0.2 - 0.6 * ch) / 9.0;
+      float clusterPt = exp(-cd * cd / (cS * cS)) * min(1.0, (0.02 * 0.02) / (cS * cS) * 3.0) * cOn * (0.6 + 0.8 * ch.z);
+      float haze = U * U * 0.08;                                                // light pollution
+      float lodPts = U * 0.05 * (0.6 + 0.8 * frag1);                            // average of the block points
+      float grid = haze + clusterPt * 1.3 + townPt * 1.2 * seamFade + mix(lodPts, blockLight * 1.4 * seamFade, resolveB) + mix(U * 0.03, streets, resolveA);
       // failing lights: whole districts drop out / flicker (neglect)
       float failKey = hash12(idA + face * 9.0 + floor(t * 5.0 + blkA * 7.0) * 0.01);
       float alive = 1.0 - ng * 0.85 * step(blkA, 0.75) * (0.6 + 0.4 * step(0.5, hash12(idA + floor(t * 7.0 + blkA * 13.0))));
@@ -459,7 +485,11 @@ void main() {
       emit = lightsCol * (1.0 + uPulse * 1.2) * nightVis * (1.0 - smog * 0.55) * (1.0 - steam * 0.4);
     }
     // day side: metropolis cores and arterial filaments still read (a working world)
-    emit += cB * (cityCore * 0.1 + filaments * 0.03) * (1.0 - nightVis) * live;
+    emit += cB * (cityCore * 0.03 + filaments * 0.01) * (1.0 - nightVis) * live;
+    // glowing trench lines: the arterial traces and the highways burn amber
+    // by day too (brighter at night), dim and flicker when neglected
+    float trench = trace * 1.0 + highways * 0.35 * (0.35 + 0.65 * land);
+    emit += cB * trench * mix(0.02, 0.09, live) * (1.0 + 2.5 * nightVis) * (1.0 - ng * 0.7);
     // furnaces in the heavy-industry quarters: a warm glow that reads by day
     // when the world is working (the low-frequency thriving cue), embers by night
     float hot = mix(0.3, smoothstep(0.62, 0.9, blk) * 2.0, roofRes);          // furnace blocks, averaged when tiny
@@ -493,7 +523,7 @@ void main() {
     col += auC;
     col += distressColor() * distressRim(mu, pulseD);
     // celebration flourish: the whole limb flares amber
-    col += cB * uPulse * fr3 * fr3 * 1.1;
+    col += cB * uPulse * fr3 * 0.45;
   }
 
   // ---- halo (shared family model) ----

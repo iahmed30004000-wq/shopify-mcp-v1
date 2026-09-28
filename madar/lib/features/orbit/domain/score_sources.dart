@@ -36,6 +36,12 @@ abstract final class ScoreSources {
   /// Prefix of the per-module sources (`module:<customModuleId>`).
   static const modulePrefix = 'module:';
 
+  /// Implicit fallback: how recently anything was logged for the planet in
+  /// the activity stream. Only scored when the planet has no other source
+  /// (a fresh custom planet fed by recorded completions); a weight of 0
+  /// switches it off. Not listed in [all].
+  static const activity = 'activity';
+
   /// Every source the engine can compute, in the order a settings screen
   /// lists them (grouped by life area).
   static const all = <String>[
@@ -100,7 +106,7 @@ abstract final class ScoreSources {
   static String canonical(String key) => aliases[key] ?? key;
 
   /// Whether [key] is a source the engine knows how to compute.
-  static bool isKnown(String key) => all.contains(canonical(key)) || key.startsWith(modulePrefix);
+  static bool isKnown(String key) => all.contains(canonical(key)) || key == activity || key.startsWith(modulePrefix);
 
   /// Stored weights (any JSON map) → canonical weights. Aliases are merged
   /// into their canonical key (summed), non-numeric and negative values are
@@ -120,6 +126,11 @@ abstract final class ScoreSources {
   /// built-in ones first, then everything else.
   static List<String> suggestedFor(String planetKey) {
     final first = builtIn[planetKey] ?? const <String>[];
-    return [...first, tasks, for (final s in all) if (!first.contains(s) && s != tasks) s];
+    return [
+      ...first,
+      tasks,
+      for (final s in all)
+        if (!first.contains(s) && s != tasks) s,
+    ];
   }
 }

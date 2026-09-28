@@ -6,10 +6,12 @@ import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/import/import_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
+import '../../features/orbit/presentation/planet/planet_route.dart';
 import '../../features/settings/appearance_screen.dart';
 import '../../features/settings/licenses_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/settings/sound_settings_screen.dart';
+import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
 import 'routes.dart';
@@ -47,7 +49,8 @@ final routerProvider = Provider<GoRouter>((ref) {
 ///
 /// Transitions: home and onboarding fade through; settings pages move along
 /// the reading direction (shared axis); the importer rises as a sheet; the
-/// design gallery zooms in.
+/// design gallery zooms in; a planet page is a transparent route whose
+/// animation drives the orbit's fly-in / fly-out underneath it.
 List<RouteBase> madarRoutes() => [
   GoRoute(
     path: AppRoutes.home,
@@ -86,6 +89,16 @@ List<RouteBase> madarRoutes() => [
         path: 'import',
         pageBuilder: (context, state) =>
             MadarTransitions.sheetRise<void>(context: context, key: state.pageKey, child: const ImportScreen()),
+      ),
+      GoRoute(
+        path: 'planet/:key',
+        pageBuilder: (context, state) => PlanetRoutePage(
+          key: state.pageKey,
+          name: state.uri.toString(),
+          planetKey: state.pathParameters['key']!,
+          item: state.uri.queryParameters['item'],
+          reducedMotion: context.reducedMotion,
+        ),
       ),
       GoRoute(
         path: 'gallery',

@@ -17,7 +17,7 @@ import 'package:madar/features/orbit/domain/prayer_schedule.dart';
 
 import 'orbit_fixtures.dart';
 
-const _fsi = '⁨', _pdi = '⁩';
+const _fsi = '\u2068', _pdi = '\u2069';
 String iso(String s) => '$_fsi$s$_pdi';
 
 void main() {
@@ -35,8 +35,26 @@ void main() {
   group('fresh install', () {
     test('eight dormant planets in seeded order, calm balance, empty radar', () async {
       final snap = await repo.snapshot();
-      expect(snap.planets.map((p) => p.key), ['faith', 'health', 'family', 'work', 'money', 'growth', 'body', 'travel']);
-      expect(snap.planets.map((p) => p.name), ['الإيمان', 'الصحة', 'العائلة', 'العمل', 'المال', 'النمو', 'الجسد', 'السفر']);
+      expect(snap.planets.map((p) => p.key), [
+        'faith',
+        'health',
+        'family',
+        'work',
+        'money',
+        'growth',
+        'body',
+        'travel',
+      ]);
+      expect(snap.planets.map((p) => p.name), [
+        'الإيمان',
+        'الصحة',
+        'العائلة',
+        'العمل',
+        'المال',
+        'النمو',
+        'الجسد',
+        'السفر',
+      ]);
       expect(snap.planets.every((p) => p.state == PlanetState.dormant), isTrue);
       expect(snap.balanceDormant, isTrue);
       expect(snap.balance, 0.6);
@@ -74,31 +92,39 @@ void main() {
     });
 
     test('doses logged without a scheduled time match the nearest slot', () async {
-      final med = await repos.medications.insert(MedicationsCompanion.insert(
-        name: 'Iron',
-        times: const Value(['10:00']),
-        createdAt: Value(fixtureNow.subtract(const Duration(days: 5))),
-      ));
-      await repos.medDoses.insert(MedDosesCompanion.insert(
-        medicationId: med.id,
-        takenAt: Value(DateTime(2026, 9, 27, 11, 40)),
-        status: DoseStatus.taken,
-      ));
-      await repos.medDoses.insert(MedDosesCompanion.insert(
-        medicationId: med.id,
-        scheduledAt: Value(DateTime(2026, 9, 26, 10)),
-        status: DoseStatus.missed,
-      ));
+      final med = await repos.medications.insert(
+        MedicationsCompanion.insert(
+          name: 'Iron',
+          times: const Value(['10:00']),
+          createdAt: Value(fixtureNow.subtract(const Duration(days: 5))),
+        ),
+      );
+      await repos.medDoses.insert(
+        MedDosesCompanion.insert(
+          medicationId: med.id,
+          takenAt: Value(DateTime(2026, 9, 27, 11, 40)),
+          status: DoseStatus.taken,
+        ),
+      );
+      await repos.medDoses.insert(
+        MedDosesCompanion.insert(
+          medicationId: med.id,
+          scheduledAt: Value(DateTime(2026, 9, 26, 10)),
+          status: DoseStatus.missed,
+        ),
+      );
       final doses = (await repo.scoreInputs()).doses3d;
       expect(doses.map((d) => (d.scheduledAt.day, d.taken)), [(25, false), (26, false), (27, true)]);
     });
 
     test('a medication added today does not owe the morning dose', () async {
-      await repos.medications.insert(MedicationsCompanion.insert(
-        name: 'New',
-        times: const Value(['08:00', '15:00']),
-        createdAt: Value(DateTime(2026, 9, 27, 12)),
-      ));
+      await repos.medications.insert(
+        MedicationsCompanion.insert(
+          name: 'New',
+          times: const Value(['08:00', '15:00']),
+          createdAt: Value(DateTime(2026, 9, 27, 12)),
+        ),
+      );
       final doses = (await repo.scoreInputs()).doses3d;
       expect(doses.map((d) => d.scheduledAt.hour), [15]);
     });
@@ -210,19 +236,29 @@ void main() {
     });
 
     test('neglected radar: the three weakest planets with natural Arabic reasons', () async {
-      await seedLivedIn(repos, thriving: false);
+      final ids = await seedLivedIn(repos, thriving: false);
       final snap = await repo.snapshot();
-      expect(snap.radar.map((r) => r.planetKey), ['faith', 'body', 'travel']);
+      expect(snap.radar.map((r) => r.planetKey), ['faith', 'body', 'work']);
       expect(snap.radar.map((r) => r.text), [
         '٣١ صلاةً لم تُسجَّل هذا الأسبوع',
         '٨ تمارين فائتة هذا الأسبوع',
-        '${iso('جواز السفر')} — انتهاء الصلاحية خلال ٩ أيام',
+        '${iso('الأردن')} — بطاقتان متأخرتان',
       ]);
       for (var i = 1; i < snap.radar.length; i++) {
         expect(snap.radar[i - 1].score, lessThanOrEqualTo(snap.radar[i].score));
       }
-      expect(snap.radar.last.refTable, 'travel_documents');
+      // Tapping a reason opens its record (the Jordan board), or the planet.
+      expect((snap.radar.last.refTable, snap.radar.last.refId), ('boards', ids.boardJo));
       expect(snap.radar.first.opensPlanet, isTrue);
+      // The travel world's own reasons, most urgent first, on calendar days.
+      final travel = snap.planet('travel')!.score.reasons;
+      expect(
+        [for (final r in travel) neglectReasonText(lookupL10n(const Locale('ar')), r, const MadarFormatter())],
+        [
+          '${iso('جواز السفر')} — انتهاء الصلاحية خلال ١٠ أيام',
+          '${iso('إسطنبول')} — السفر بعد ٥ أيام، والتجهيز ١٠٪ فقط',
+        ],
+      );
     });
 
     test('every reason of a neglected world reads naturally in Arabic and English', () async {
@@ -243,11 +279,15 @@ void main() {
       expect(textOf('money', ReasonCode.budgetOverspent, en, enFmt), '${iso('Fuel')} — 50% over budget');
       expect(textOf('money', ReasonCode.budgetOverspent, ar, arFmt), '${iso('Fuel')} — تجاوز الميزانية بنسبة ٥٠٪');
       expect(textOf('money', ReasonCode.obligationOverdue, en, enFmt), '${iso('Internet')} — 4 days overdue');
-      expect(textOf('travel', ReasonCode.tripUnpacked, en, enFmt), '${iso('Istanbul')} — leaving in 4 days, only 10% packed');
+      expect(
+        textOf('travel', ReasonCode.tripUnpacked, en, enFmt),
+        '${iso('Istanbul')} — leaving in 5 days, only 10% packed',
+      );
       expect(
         textOf('travel', ReasonCode.tripUnpacked, ar, arFmt),
-        '${iso('Istanbul')} — السفر بعد ٤ أيام، والتجهيز ١٠٪ فقط',
+        '${iso('Istanbul')} — السفر بعد ٥ أيام، والتجهيز ١٠٪ فقط',
       );
+      expect(textOf('travel', ReasonCode.documentExpiring, en, enFmt), '${iso('Passport')} — expires in 10 days');
       expect(textOf('work', ReasonCode.cardsOverdue, en, enFmt), '${iso('Jordan')} — 2 cards overdue');
       expect(textOf('work', ReasonCode.cardsOverdue, ar, arFmt), '${iso('Jordan')} — بطاقتان متأخرتان');
       expect(textOf('growth', ReasonCode.moduleStale, en, enFmt), '${iso('Reading')} — no entry for 6 days');
@@ -301,12 +341,14 @@ void main() {
       final created = fixtureNow.subtract(const Duration(days: 40));
       final overdueIds = <String>[];
       for (var i = 0; i < 15; i++) {
-        final p = await repos.people.insert(PeopleCompanion.insert(
-          name: 'P$i',
-          rhythmDays: const Value(7),
-          lastContact: Value(fixtureNow.subtract(Duration(days: i < 3 ? 20 : 1))),
-          createdAt: Value(created),
-        ));
+        final p = await repos.people.insert(
+          PeopleCompanion.insert(
+            name: 'P$i',
+            rhythmDays: const Value(7),
+            lastContact: Value(fixtureNow.subtract(Duration(days: i < 3 ? 20 : 1))),
+            createdAt: Value(created),
+          ),
+        );
         if (i < 3) overdueIds.add(p.id);
       }
       final family = (await repo.snapshot()).planet('family')!;
@@ -338,14 +380,16 @@ void main() {
       await seedLivedIn(repos, thriving: false);
       final growth = (await repos.planets.getAll(where: (p) => p.key.equals('growth'))).single;
       await repos.planets.setColumn(growth.id, 'hidden', true);
-      await repos.planets.insert(PlanetsCompanion.insert(
-        key: 'custom_sport',
-        nameAr: 'الرياضة',
-        nameEn: 'Sport',
-        color: 0xFF88CCEE,
-        archetype: PlanetArchetype.ice,
-        sources: const Value({'workouts': 1.0}),
-      ));
+      await repos.planets.insert(
+        PlanetsCompanion.insert(
+          key: 'custom_sport',
+          nameAr: 'الرياضة',
+          nameEn: 'Sport',
+          color: 0xFF88CCEE,
+          archetype: PlanetArchetype.ice,
+          sources: const Value({'workouts': 1.0}),
+        ),
+      );
       final snap = await repo.snapshot();
       expect(snap.planet('growth'), isNull);
       final sport = snap.planet('custom_sport')!;

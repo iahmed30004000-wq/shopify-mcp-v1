@@ -3,9 +3,9 @@
 A personal life operating system whose day orbits the five prayers.
 Arabic-first (RTL), offline-first, encrypted on device, built in Flutter.
 
-> Status: **Phase 0 (foundation) + Phase 1 groundwork** — see
-> [Feature checklist](#feature-checklist). This README is updated at the end of
-> every phase.
+> Status: **Phase 0 (foundation) and Phase 1 (The Astrolabe Orbit) complete** —
+> see [Feature checklist](#feature-checklist). This README is updated at the
+> end of every phase.
 
 ---
 
@@ -106,7 +106,11 @@ lib/
     settings/          UI preferences readable before unlock
     sound/             procedural synthesiser, per-theme sound kits, ambient, haptics
   features/
-    orbit/             The Astrolabe Orbit (home scene): scene math, planet scores, rendering
+    orbit/             The Astrolabe Orbit (home scene)
+      domain/          scene math, prayer schedule (adhan, Jordan preset), planet scores, moons, neglect reasons
+      data/            OrbitRepository (DB → scene snapshot), providers, customisation, completion pulses
+      render/          astrolabe (brass, rete, fire, ring text), sky (real sky + stars), planets + moons, shaders
+      presentation/    OrbitScene, camera/gestures/gyro, fly-in, planet pages, prayer & customise sheets, governor
     home/ settings/ onboarding/ import/ gallery/
 shaders/               GLSL fragment shaders (Flutter FragmentProgram)
   orbit/lib/common.glsl  shared noise / lighting / living-state library
@@ -167,8 +171,8 @@ Legend: ✅ done · 🟡 partial · ⏳ planned phase
 
 | Area | Status |
 | --- | --- |
-| Phase 0 – setup, architecture, design system, motion, sound, interaction kit, encrypted DB, JSON import | 🟡 in progress |
-| Phase 1 – The Astrolabe Orbit | 🟡 groundwork (astronomy, star catalog, scene math, planet scores, shader library) |
+| Phase 0 – setup, architecture, design system, motion, sound, interaction kit, encrypted DB, JSON import | ✅ |
+| Phase 1 – The Astrolabe Orbit: astrolabe prayer dial, 8 living procedural worlds + data moons, real sky (sun, moon phase, 2,068 real stars, Milky Way), camera & gestures, fly-in pages, glass panel with windows / tasks / Neglect Radar, performance & power modes | ✅ (device profiling pending) |
 | Phase 2 – lock screen, themes, i18n, prayer times, adhan, tracker, adhkar | ⏳ |
 | Phase 3 – Quran, wird, Hifz, Qibla | ⏳ |
 | Phase 4 – Health | ⏳ |

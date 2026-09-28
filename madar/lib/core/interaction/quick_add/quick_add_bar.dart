@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../design/themes.dart';
 import '../../design/tokens.dart';
+import '../../i18n/formatters.dart';
 import '../../i18n/gen/app_localizations.dart';
 import '../../motion/motion.dart';
 import '../../sound/sound_api.dart';
@@ -314,11 +315,11 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
                     children: [
                       for (final (i, f) in facets.indexed)
                         _PopIn(
-                          key: ValueKey('$f:${_facetText(context, intent!, f)}'),
+                          key: ValueKey('$f:${_facetText(context, intent!, f, _now())}'),
                           delay: MadarMotion.staggerStep * i,
                           child: _PreviewChip(
                             icon: _facetIcon(intent, f),
-                            label: _facetText(context, intent, f),
+                            label: _facetText(context, intent, f, _now()),
                             primary: f == QuickAddFacet.kind,
                             dot: f == QuickAddFacet.planet ? PlanetPalettes.byKey[intent.planetKey]?.surface : null,
                           ),
@@ -383,7 +384,7 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
     QuickAddFacet.planet => Icons.public_rounded,
   };
 
-  static String _facetText(BuildContext context, QuickAddIntent i, QuickAddFacet f) {
+  static String _facetText(BuildContext context, QuickAddIntent i, QuickAddFacet f, DateTime now) {
     final l = L10n.of(context);
     switch (f) {
       case QuickAddFacet.kind:
@@ -395,9 +396,12 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
       case QuickAddFacet.water:
         return l.interactionQuickAddMl('${i.ml}');
       case QuickAddFacet.score:
-        return l.interactionQuickAddScore('${i.score}', i.kind == QuickAddKind.pain ? 10 : 5);
+        // The user's digit style for the score and its scale (never raw
+        // Western digits in Arabic).
+        return MadarFormatter.of(context)
+            .localizeDigits(l.interactionQuickAddScore('${i.score}', i.kind == QuickAddKind.pain ? 10 : 5));
       case QuickAddFacet.date:
-        return KitLabels.date(context, i.date!);
+        return KitLabels.date(context, i.date!, now: now);
       case QuickAddFacet.time:
         return l.interactionQuickAddAt(KitLabels.time(context, i.time!));
       case QuickAddFacet.window:

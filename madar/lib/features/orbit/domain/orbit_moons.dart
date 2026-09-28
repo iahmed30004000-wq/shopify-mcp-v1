@@ -84,7 +84,8 @@ class OrbitMoon {
   int get hashCode => Object.hash(planetKey, refTable, refId, label, color, kind, score, size);
 
   @override
-  String toString() => 'OrbitMoon($id "$label" ${kind.name} score ${score.toStringAsFixed(2)} size ${size.toStringAsFixed(2)})';
+  String toString() =>
+      'OrbitMoon($id "$label" ${kind.name} score ${score.toStringAsFixed(2)} size ${size.toStringAsFixed(2)})';
 }
 
 /// The moons of one planet, capped, plus how many did not fit.
@@ -232,12 +233,7 @@ abstract final class MoonRules {
   static const maxPerPlanet = 12;
 
   /// Which planet hosts which kind of record.
-  static const hostOf = <String, String>{
-    'people': 'family',
-    'wallets': 'money',
-    'boards': 'work',
-    'trips': 'travel',
-  };
+  static const hostOf = <String, String>{'people': 'family', 'wallets': 'money', 'boards': 'work', 'trips': 'travel'};
 
   /// Fresh until half the rhythm has passed, 0.6 when the rhythm is due,
   /// fading to 0 at twice the rhythm. Without a rhythm: calm 0.85.
@@ -270,8 +266,10 @@ abstract final class MoonRules {
   static double tripScore(TripMoonIn t, DateTime now) {
     if (t.status == TripStatus.done) return 0.6;
     final start = t.startDate;
-    if (start == null || !start.isAfter(now)) return 0.9;
-    final days = start.difference(now).inDays;
+    if (start == null) return 0.9;
+    // Calendar days until departure (0 = leaving today, still packing).
+    final days = _days(now, start);
+    if (days < 0) return 0.9;
     if (days > 14) return 0.95;
     final packed = t.itemsTotal == 0 ? 1.0 : t.itemsPacked / t.itemsTotal;
     final expected = ((7 - days) / 7).clamp(0.0, 1.0);
@@ -335,7 +333,9 @@ abstract final class MoonBuilder {
 
     // People around Family.
     final family = MoonRules.hostOf['people']!;
-    final people = palettes.containsKey(family) ? inp.people.where((p) => p.showAsMoon).toList() : const <PersonMoonIn>[];
+    final people = palettes.containsKey(family)
+        ? inp.people.where((p) => p.showAsMoon).toList()
+        : const <PersonMoonIn>[];
     for (var i = 0; i < people.length; i++) {
       final p = people[i];
       final rhythm = p.rhythmDays ?? 0;
@@ -419,7 +419,9 @@ abstract final class MoonBuilder {
     final travel = MoonRules.hostOf['trips']!;
     final today = DateTime(now.year, now.month, now.day);
     final trips = palettes.containsKey(travel)
-        ? inp.trips.where((t) => t.status != TripStatus.done && (t.endDate == null || !t.endDate!.isBefore(today))).toList()
+        ? inp.trips
+              .where((t) => t.status != TripStatus.done && (t.endDate == null || !t.endDate!.isBefore(today)))
+              .toList()
         : const <TripMoonIn>[];
     final ordered = [
       ...trips.where((t) => t.startDate != null && !t.startDate!.isBefore(today)).toList()
@@ -449,7 +451,9 @@ abstract final class MoonBuilder {
       );
     }
 
-    // Custom modules around the planet they are attached to.
+    // Custom modules around the planet they are attached to. The user
+    // attached them on purpose, so under the cap they are kept before any
+    // person / wallet / board / trip (stale trackers first).
     for (var i = 0; i < inp.modules.length; i++) {
       final m = inp.modules[i];
       final score = MoonRules.moduleScore(m, now);
@@ -457,7 +461,7 @@ abstract final class MoonBuilder {
         m.planetKey,
         _Candidate(
           order: 1000 + i,
-          priority: score,
+          priority: 10 + (1 - score),
           moon: OrbitMoon(
             planetKey: m.planetKey,
             refTable: 'custom_modules',
@@ -473,20 +477,19 @@ abstract final class MoonBuilder {
       );
     }
 
-    return {
-      for (final e in byPlanet.entries) e.key: _cap(e.value, cap),
-    };
+    return {for (final e in byPlanet.entries) e.key: _cap(e.value, cap)};
   }
 
   static MoonSet _cap(List<_Candidate> all, int cap) {
     if (all.length <= cap) return MoonSet([for (final c in all) c.moon]);
-    final kept = ([...all]..sort((a, b) {
-            final p = b.priority.compareTo(a.priority);
-            return p != 0 ? p : a.order.compareTo(b.order);
-          }))
-        .take(cap)
-        .toList()
-      ..sort((a, b) => a.order.compareTo(b.order));
+    final kept =
+        ([...all]..sort((a, b) {
+              final p = b.priority.compareTo(a.priority);
+              return p != 0 ? p : a.order.compareTo(b.order);
+            }))
+            .take(cap)
+            .toList()
+          ..sort((a, b) => a.order.compareTo(b.order));
     return MoonSet([for (final c in kept) c.moon], overflow: all.length - cap);
   }
 

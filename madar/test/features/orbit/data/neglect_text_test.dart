@@ -7,7 +7,7 @@ import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/features/orbit/domain/neglect_text.dart';
 import 'package:madar/features/orbit/domain/planet_scores.dart';
 
-const _fsi = '⁨', _pdi = '⁩';
+const _fsi = '\u2068', _pdi = '\u2069';
 String iso(String s) => '$_fsi$s$_pdi';
 
 void main() {
@@ -97,7 +97,10 @@ void main() {
   });
 
   test('specific sentences', () {
-    expect(tAr(ReasonCode.budgetOverspent, {'item': 'الوقود', 'percent': 30}), '${iso('الوقود')} — تجاوز الميزانية بنسبة ٣٠٪');
+    expect(
+      tAr(ReasonCode.budgetOverspent, {'item': 'الوقود', 'percent': 30}),
+      '${iso('الوقود')} — تجاوز الميزانية بنسبة ٣٠٪',
+    );
     expect(tEn(ReasonCode.budgetOverspent, {'item': 'Fuel', 'percent': 30}), '${iso('Fuel')} — 30% over budget');
     expect(tAr(ReasonCode.obligationOverdue, {'name': 'الإيجار', 'days': 2}), '${iso('الإيجار')} — تأخّر السداد يومين');
     expect(tAr(ReasonCode.debtOverdue, {'person': 'أحمد', 'days': 5}), 'دَين ${iso('أحمد')} — تأخّر السداد ٥ أيام');
@@ -105,13 +108,31 @@ void main() {
     expect(tAr(ReasonCode.documentExpiring, {'name': 'الهوية', 'days': 0}), '${iso('الهوية')} — انتهاء الصلاحية اليوم');
     expect(tAr(ReasonCode.documentExpiring, {'name': 'الهوية', 'days': -3}), '${iso('الهوية')} — انتهت الصلاحية');
     expect(tEn(ReasonCode.documentExpiring, {'name': 'Visa', 'days': 1}), '${iso('Visa')} — expires in a day');
-    expect(tAr(ReasonCode.tripUnpacked, {'destination': 'عمّان', 'days': 1, 'percent': 40}), '${iso('عمّان')} — السفر غدًا، والتجهيز ٤٠٪ فقط');
-    expect(tEn(ReasonCode.tripUnpacked, {'destination': 'Amman', 'days': 0, 'percent': 40}), '${iso('Amman')} — leaving today, only 40% packed');
-    expect(tAr(ReasonCode.goalBehind, {'name': 'دورة', 'percent': 40}), '${iso('دورة')} — أنجزتَ ٤٠٪ من المتوقَّع حتى الآن');
-    expect(tEn(ReasonCode.goalBehind, {'name': 'Course', 'percent': 40, 'days': 9}), '${iso('Course')} — no progress for 9 days');
+    expect(
+      tAr(ReasonCode.tripUnpacked, {'destination': 'عمّان', 'days': 1, 'percent': 40}),
+      '${iso('عمّان')} — السفر غدًا، والتجهيز ٤٠٪ فقط',
+    );
+    expect(
+      tEn(ReasonCode.tripUnpacked, {'destination': 'Amman', 'days': 0, 'percent': 40}),
+      '${iso('Amman')} — leaving today, only 40% packed',
+    );
+    expect(
+      tAr(ReasonCode.goalBehind, {'name': 'دورة', 'percent': 40}),
+      '${iso('دورة')} — أنجزتَ ٤٠٪ من المتوقَّع حتى الآن',
+    );
+    expect(
+      tEn(ReasonCode.goalBehind, {'name': 'Course', 'percent': 40, 'days': 9}),
+      '${iso('Course')} — no progress for 9 days',
+    );
     expect(tAr(ReasonCode.sourceStale, {'source': 'adhkar', 'days': 4}), 'الأذكار — لا تسجيل منذ ٤ أيام');
-    expect(tEn(ReasonCode.sourceStale, {'source': 'transactions', 'days': 6}), 'Spending log — nothing logged for 6 days');
-    expect(tAr(ReasonCode.habitsSlipping, {'count': 1, 'name': 'المشي', 'days': 4}), '${iso('المشي')} — لم تُنجَز منذ ٤ أيام');
+    expect(
+      tEn(ReasonCode.sourceStale, {'source': 'transactions', 'days': 6}),
+      'Spending log — nothing logged for 6 days',
+    );
+    expect(
+      tAr(ReasonCode.habitsSlipping, {'count': 1, 'name': 'المشي', 'days': 4}),
+      '${iso('المشي')} — لم تُنجَز منذ ٤ أيام',
+    );
     expect(tAr(ReasonCode.habitsSlipping, {'count': 2}), 'عادتان متعثّرتان هذا الأسبوع');
     expect(tEn(ReasonCode.dosesPastDue, {'count': 1, 'name': 'Metformin'}), '${iso('Metformin')} — 1 dose past due');
     expect(tAr(ReasonCode.noActivity, {'days': 12}), 'لا نشاط منذ ١٢ يومًا');

@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:drift/drift.dart' hide isNull, isNotNull;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/open.dart';
@@ -29,13 +28,14 @@ void main() {
   });
   tearDown(() => db.close());
 
-  SceneSnapshotWatcher watcher({Duration? tick}) => SceneSnapshotWatcher.forTables(
+  SceneSnapshotWatcher watcher({Duration? tick, ValueListenable<bool>? active}) => SceneSnapshotWatcher.forTables(
     db,
     repo.watchedTables,
     clock: () => clock,
     debounce: const Duration(milliseconds: 30),
     maxWait: const Duration(milliseconds: 200),
     tick: tick,
+    active: active,
     compute: (now) {
       computes++;
       return repo.snapshot(now: now);
@@ -52,16 +52,51 @@ void main() {
     expect(seen, hasLength(1));
     expect(seen.single.planet('family')!.state, PlanetState.dormant);
 
-    await repos.people.insert(PeopleCompanion.insert(
-      name: 'أبي',
-      rhythmDays: const Value(2),
-      lastContact: Value(fixtureNow.subtract(const Duration(days: 6))),
-    ));
+    await repos.people.insert(
+      PeopleCompanion.insert(
+        name: 'أبي',
+        rhythmDays: const Value(2),
+        lastContact: Value(fixtureNow.subtract(const Duration(days: 6))),
+      ),
+    );
     await settle();
     expect(seen, hasLength(2));
     expect(seen.last.planet('family')!.state, PlanetState.neglected);
     expect(seen.last.planet('family')!.moons.single.label, 'أبي');
     expect(seen.last.radar.single.text, contains('متأخر ٤ أيام'));
+  });
+
+  test('paused (or in the background) it does no work; resuming catches up once', () async {
+    final seen = <SceneSnapshot>[];
+    final sub = watcher(tick: const Duration(milliseconds: 40)).watch().listen(seen.add);
+    addTearDown(sub.cancel);
+    await settle();
+    sub.pause();
+    final paused = computes;
+    await repos.boards.insert(BoardsCompanion.insert(name: 'While paused'));
+    await settle(300);
+    expect(computes, paused, reason: 'no ticks and no table-driven queries while paused');
+    sub.resume();
+    await settle();
+    expect(computes, greaterThan(paused));
+    expect(seen.last.planet('work')!.moons.map((m) => m.label), contains('While paused'));
+  });
+
+  test('the app in the background stops the watch until it returns', () async {
+    final foreground = ValueNotifier(true);
+    addTearDown(foreground.dispose);
+    final seen = <SceneSnapshot>[];
+    final sub = watcher(tick: const Duration(milliseconds: 40), active: foreground).watch().listen(seen.add);
+    addTearDown(sub.cancel);
+    await settle();
+    foreground.value = false;
+    final before = computes;
+    await repos.boards.insert(BoardsCompanion.insert(name: 'In the background'));
+    await settle(300);
+    expect(computes, before);
+    foreground.value = true;
+    await settle();
+    expect(seen.last.planet('work')!.moons.map((m) => m.label), contains('In the background'));
   });
 
   test('a burst of writes costs one recomputation', () async {
@@ -85,7 +120,9 @@ void main() {
     await settle();
     final before = computes;
     await repos.worries.insert(WorriesCompanion.insert(body: 'x'));
-    await repos.reminders.insert(RemindersCompanion.insert(ownerTable: 'tasks', ownerId: 't', rule: const {'kind': 'once'}));
+    await repos.reminders.insert(
+      RemindersCompanion.insert(ownerTable: 'tasks', ownerId: 't', rule: const {'kind': 'once'}),
+    );
     await settle();
     expect(computes, before);
     // A relevant write that changes nothing visible: recomputed, not emitted.
@@ -97,16 +134,20 @@ void main() {
   });
 
   test('the clock tick refreshes time-based state', () async {
-    final med = await repos.medications.insert(MedicationsCompanion.insert(
-      name: 'Metformin',
-      times: const Value(['16:10']),
-      createdAt: Value(fixtureNow.subtract(const Duration(days: 1))),
-    ));
-    await repos.medDoses.insert(MedDosesCompanion.insert(
-      medicationId: med.id,
-      scheduledAt: Value(DateTime(2026, 9, 26, 16, 10)),
-      status: DoseStatus.taken,
-    ));
+    final med = await repos.medications.insert(
+      MedicationsCompanion.insert(
+        name: 'Metformin',
+        times: const Value(['16:10']),
+        createdAt: Value(fixtureNow.subtract(const Duration(days: 1))),
+      ),
+    );
+    await repos.medDoses.insert(
+      MedDosesCompanion.insert(
+        medicationId: med.id,
+        scheduledAt: Value(DateTime(2026, 9, 26, 16, 10)),
+        status: DoseStatus.taken,
+      ),
+    );
     final seen = <SceneSnapshot>[];
     final sub = watcher(tick: const Duration(milliseconds: 40)).watch().listen(seen.add);
     addTearDown(sub.cancel);

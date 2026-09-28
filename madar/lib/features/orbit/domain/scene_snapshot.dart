@@ -101,6 +101,27 @@ class OrbitPlanet {
   double get uScore => score.score;
   PlanetState get state => score.state;
 
+  /// The sources feeding this world's score as the planet page lists them
+  /// (weakest first): each with its label – a custom module's by the
+  /// module's name (its moon); a module that cannot be named is left out
+  /// rather than shown as a raw id.
+  List<({String key, double value, String label})> sourceRows(L10n l) {
+    String? name(String key) {
+      if (!key.startsWith(ScoreSources.modulePrefix)) return scoreSourceLabel(l, key);
+      final id = key.substring(ScoreSources.modulePrefix.length);
+      return moons.where((m) => m.refTable == 'custom_modules' && m.refId == id).firstOrNull?.label;
+    }
+
+    return [
+      for (final e in score.sources.entries)
+        if (ScoreSources.isKnown(e.key))
+          if (name(e.key) case final label?) (key: e.key, value: e.value, label: label),
+    ]..sort((a, b) => a.value.compareTo(b.value));
+  }
+
+  /// Everything the scene or the planet page shows of this world: a change
+  /// in any of it (the weight or the data sources chosen in the customise
+  /// sheet included) reaches the screen.
   int get contentHash => Object.hash(
     key,
     name,
@@ -112,6 +133,23 @@ class OrbitPlanet {
     Object.hashAll(extras),
     Object.hashAll(moons),
     moonOverflow,
+    (config.weight * 1e3).round(),
+    _mapHash(config.sources, (v) => (v * 1e3).round()),
+    _mapHash(score.sources, (v) => (v * 1e3).round()),
+    Object.hashAll(score.reasons.map(_reasonHash)),
+    score.dormant,
+  );
+
+  /// Order-independent hash of a map (entries hashed as key + [value]).
+  static int _mapHash(Map<String, double> m, int Function(double) value) =>
+      Object.hashAllUnordered(m.entries.map((e) => Object.hash(e.key, value(e.value))));
+
+  static int _reasonHash(NeglectReason r) => Object.hash(
+    r.code,
+    (r.severity * 1e3).round(),
+    Object.hashAllUnordered(r.args.entries.map((e) => Object.hash(e.key, e.value))),
+    r.refTable,
+    r.refId,
   );
 }
 
@@ -185,12 +223,25 @@ class PrayerState {
       if (e.value != PrayerStatus.missed) e.key,
   };
 
+  /// Changes whenever anything the dial shows changes – every time of the
+  /// day, the window and its end, the next prayer, and the calculation
+  /// settings (a new Asr madhab or adjustment must reach the pointers).
   int get contentHash => Object.hash(
-    settings.latitude,
-    settings.longitude,
-    times.fajr,
+    Object.hash(
+      settings.latitude,
+      settings.longitude,
+      settings.fajrAngle,
+      settings.ishaAngle,
+      settings.hanafiAsr,
+      settings.useJordanPreset,
+      Object.hashAllUnordered(settings.adjustmentsMin.entries.map((e) => Object.hash(e.key, e.value))),
+    ),
+    Object.hash(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha),
     window.window,
     window.start,
+    window.end,
+    window.nextPrayer,
+    window.nextPrayerAt,
     prayerDay,
     Object.hashAllUnordered(logged.entries.map((e) => Object.hash(e.key, e.value))),
   );
@@ -294,7 +345,10 @@ abstract final class SceneSnapshotBuilder {
     int radarCount = 3,
   }) {
     final languageCode = formatter.languageCode;
-    final visible = [for (final p in data.planets) if (!p.hidden) p];
+    final visible = [
+      for (final p in data.planets)
+        if (!p.hidden) p,
+    ];
     final scores = engine.compute(
       data.scoreInputs,
       planetKeys: [for (final p in visible) p.key],
@@ -336,14 +390,16 @@ abstract final class SceneSnapshotBuilder {
       // source); list it once.
       final identity = '${reason.code.name}|${reason.refTable}|${reason.refId}|${reason.args}';
       if (!seen.add(identity)) continue;
-      radar.add(RadarEntry(
-        planetKey: p.key,
-        planetName: p.name,
-        palette: p.palette,
-        score: score.score,
-        reason: reason,
-        text: neglectReasonText(l10n, reason, formatter),
-      ));
+      radar.add(
+        RadarEntry(
+          planetKey: p.key,
+          planetName: p.name,
+          palette: p.palette,
+          score: score.score,
+          reason: reason,
+          text: neglectReasonText(l10n, reason, formatter),
+        ),
+      );
     }
 
     final prayer = PrayerState(

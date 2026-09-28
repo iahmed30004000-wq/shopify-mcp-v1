@@ -88,6 +88,10 @@ class PrayerDayTimes {
   /// The window containing [time] (local clock).
   PrayerWindow windowAt(DateTime time) {
     final t = sinceMidnight(time);
+    // A high-latitude summer: Isha after midnight (an offset beyond 24 h).
+    // In the small hours before (yesterday's ≈ same) Isha, yesterday's
+    // Maghrib window is still running.
+    if (t < fajr && isha > const Duration(days: 1) && t + const Duration(days: 1) < isha) return PrayerWindow.maghrib;
     if (t < fajr || t >= isha) return PrayerWindow.isha;
     if (t < sunrise) return PrayerWindow.fajr;
     if (t < dhuhr) return PrayerWindow.duha;

@@ -11,6 +11,17 @@ abstract final class AppRoutes {
   static const String import = '/import';
   static const String gallery = '/gallery';
 
+  /// A planet's page over the orbit (`/planet/faith?item=people:<id>`); the
+  /// orbit scene flies in underneath it.
+  static const String planet = '/planet/:key';
+
+  /// Location of [key]'s planet page, optionally highlighting the moon or
+  /// record [item] (`refTable:refId`).
+  static String planetOf(String key, {String? item}) => Uri(
+    path: '/planet/${Uri.encodeComponent(key)}',
+    queryParameters: item == null ? null : {'item': item},
+  ).toString();
+
   /// Locations reachable before onboarding is finished (onboarding can hand
   /// over to the importer).
   static const Set<String> beforeOnboarding = {onboarding, import};

@@ -88,10 +88,10 @@ class PlanetScore {
   PlanetState get state => dormant
       ? PlanetState.dormant
       : score >= 0.75
-          ? PlanetState.thriving
-          : score >= 0.45
-              ? PlanetState.steady
-              : PlanetState.neglected;
+      ? PlanetState.thriving
+      : score >= 0.45
+      ? PlanetState.steady
+      : PlanetState.neglected;
 }
 
 enum PlanetState { thriving, steady, neglected, dormant }
@@ -138,7 +138,14 @@ class TaskIn {
 }
 
 class CardIn {
-  const CardIn({required this.id, required this.boardName, required this.done, this.dueDate, this.doneAt, this.boardId});
+  const CardIn({
+    required this.id,
+    required this.boardName,
+    required this.done,
+    this.dueDate,
+    this.doneAt,
+    this.boardId,
+  });
   final String id;
   final String boardName;
 
@@ -201,7 +208,13 @@ class DocumentIn {
 }
 
 class TripIn {
-  const TripIn({required this.id, required this.destination, this.startDate, required this.itemsTotal, required this.itemsPacked});
+  const TripIn({
+    required this.id,
+    required this.destination,
+    this.startDate,
+    required this.itemsTotal,
+    required this.itemsPacked,
+  });
   final String id;
   final String destination;
   final DateTime? startDate;
@@ -210,7 +223,13 @@ class TripIn {
 }
 
 class ModuleIn {
-  const ModuleIn({required this.id, required this.name, required this.planetKey, this.lastEntry, required this.createdAt});
+  const ModuleIn({
+    required this.id,
+    required this.name,
+    required this.planetKey,
+    this.lastEntry,
+    required this.createdAt,
+  });
   final String id;
   final String name;
   final String planetKey;
@@ -438,10 +457,18 @@ class PlanetScoreEngine {
       final reasons = <NeglectReason>[];
       final w = {...?kDefaultSourceWeights[key], ...ScoreSources.canonicalWeights(weights[key] ?? const {})};
       _collect(key, inp, w, sources, reasons);
+      final last = inp.lastActivity[key];
+      // A planet fed only by completions logged for it (a new custom planet,
+      // or a built-in whose sources are all switched off) is scored by how
+      // recently something was done for it, so recording a completion wakes
+      // it up and a quiet spell lets it fade.
+      if (last != null && (w[ScoreSources.activity] ?? 1) > 0 && !_hasWeightedSource(sources, w)) {
+        sources[ScoreSources.activity] = _decay(_daysBetween(last, inp.now), halfLifeDays: 5);
+      }
 
       var sum = 0.0, wsum = 0.0;
       for (final e in sources.entries) {
-        final wi = w[e.key] ?? (e.key.startsWith(ScoreSources.modulePrefix) ? 0.3 : 0.2);
+        final wi = _weightOf(e.key, w);
         if (wi <= 0) continue;
         sum += e.value * wi;
         wsum += wi;
@@ -449,19 +476,20 @@ class PlanetScoreEngine {
       final dormant = wsum == 0;
       var score = dormant ? 0.6 : sum / wsum;
       // Freshness: something done for this planet today lifts it slightly.
-      final last = inp.lastActivity[key];
       if (!dormant && last != null && inp.now.difference(last) < _day) {
         score = math.min(1.0, score + 0.05);
       }
       if (!dormant && last != null) {
         final quiet = _daysBetween(last, inp.now);
         if (quiet >= quietDays) {
-          reasons.add(NeglectReason(
-            planetKey: key,
-            code: ReasonCode.noActivity,
-            severity: math.min(0.6, 0.2 + quiet / 30),
-            args: {'days': quiet},
-          ));
+          reasons.add(
+            NeglectReason(
+              planetKey: key,
+              code: ReasonCode.noActivity,
+              severity: math.min(0.6, 0.2 + quiet / 30),
+              args: {'days': quiet},
+            ),
+          );
         }
       }
       reasons.sort((a, b) => b.severity.compareTo(a.severity));
@@ -508,14 +536,16 @@ class PlanetScoreEngine {
       final days = _daysBetween(last, inp.now);
       src[id] = _decay(days, halfLifeDays: 4);
       if (days >= 3) {
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.moduleStale,
-          severity: math.min(1, days / 10),
-          args: {'name': m.name, 'days': days},
-          refTable: 'custom_modules',
-          refId: m.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.moduleStale,
+            severity: math.min(1, days / 10),
+            args: {'name': m.name, 'days': days},
+            refTable: 'custom_modules',
+            refId: m.id,
+          ),
+        );
       }
     }
     final requested = <String>{
@@ -576,29 +606,35 @@ class PlanetScoreEngine {
     if (mine.isEmpty) return;
     final today = _startOfDay(inp.now);
     final overdue = mine.where((t) => !t.done && t.date != null && t.date!.isBefore(today)).toList();
-    final recentDone = mine.where((t) => t.done && t.doneAt != null && inp.now.difference(t.doneAt!) <= const Duration(days: 7)).length;
+    final recentDone = mine
+        .where((t) => t.done && t.doneAt != null && inp.now.difference(t.doneAt!) <= const Duration(days: 7))
+        .length;
     final open = mine.where((t) => !t.done).length;
     final denom = recentDone + overdue.length;
     final momentum = denom == 0 ? (open == 0 ? 1.0 : 0.7) : recentDone / denom;
     src[ScoreSources.tasks] = momentum.clamp(0.0, 1.0);
     if (overdue.isNotEmpty) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.tasksOverdue,
-        severity: math.min(1, 0.3 + overdue.length * 0.15),
-        args: {'count': overdue.length},
-        refTable: 'tasks',
-        refId: overdue.length == 1 ? overdue.first.id : null,
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.tasksOverdue,
+          severity: math.min(1, 0.3 + overdue.length * 0.15),
+          args: {'count': overdue.length},
+          refTable: 'tasks',
+          refId: overdue.length == 1 ? overdue.first.id : null,
+        ),
+      );
     }
   }
 
   void _habits(String key, ScoreInputs inp, Map<String, double> src, List<NeglectReason> reasons) {
     final tracked = inp.habits
-        .where((h) =>
-            (h.planetKey ?? ScoreSources.attachedFallback[ScoreSources.habits]) == key &&
-            h.lastDone != null &&
-            _daysBetween(h.lastDone!, inp.now) <= 30)
+        .where(
+          (h) =>
+              (h.planetKey ?? ScoreSources.attachedFallback[ScoreSources.habits]) == key &&
+              h.lastDone != null &&
+              _daysBetween(h.lastDone!, inp.now) <= 30,
+        )
         .toList();
     if (tracked.isEmpty) return;
     var adherence = 0.0;
@@ -610,18 +646,20 @@ class PlanetScoreEngine {
     final slipping = tracked.where((h) => _daysBetween(h.lastDone!, inp.now) >= 3).toList();
     if (slipping.isNotEmpty) {
       final single = slipping.length == 1 ? slipping.first : null;
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.habitsSlipping,
-        severity: math.min(0.8, 0.25 + slipping.length * 0.1),
-        args: {
-          'count': slipping.length,
-          if (single != null) 'name': single.name,
-          if (single != null) 'days': _daysBetween(single.lastDone!, inp.now),
-        },
-        refTable: 'habits',
-        refId: single?.id,
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.habitsSlipping,
+          severity: math.min(0.8, 0.25 + slipping.length * 0.1),
+          args: {
+            'count': slipping.length,
+            if (single != null) 'name': single.name,
+            if (single != null) 'days': _daysBetween(single.lastDone!, inp.now),
+          },
+          refTable: 'habits',
+          refId: single?.id,
+        ),
+      );
     }
   }
 
@@ -632,7 +670,9 @@ class PlanetScoreEngine {
     if (mine.isEmpty) return;
     final today = _startOfDay(inp.now);
     final overdue = mine.where((i) => !i.done && i.dueDate != null && i.dueDate!.isBefore(today)).toList();
-    final recentDone = mine.where((i) => i.done && i.doneAt != null && inp.now.difference(i.doneAt!) <= const Duration(days: 7)).length;
+    final recentDone = mine
+        .where((i) => i.done && i.doneAt != null && inp.now.difference(i.doneAt!) <= const Duration(days: 7))
+        .length;
     final open = mine.where((i) => !i.done).length;
     final denom = recentDone + overdue.length;
     final momentum = denom == 0 ? (open == 0 ? 1.0 : 0.7) : recentDone / denom;
@@ -642,14 +682,16 @@ class PlanetScoreEngine {
       (byProject[i.projectId] ??= []).add(i);
     }
     for (final items in byProject.values) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.projectItemsOverdue,
-        severity: math.min(1, 0.3 + items.length * 0.12),
-        args: {'count': items.length, 'project': items.first.projectName},
-        refTable: 'projects',
-        refId: items.first.projectId,
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.projectItemsOverdue,
+          severity: math.min(1, 0.3 + items.length * 0.12),
+          args: {'count': items.length, 'project': items.first.projectName},
+          refTable: 'projects',
+          refId: items.first.projectId,
+        ),
+      );
     }
   }
 
@@ -659,7 +701,12 @@ class PlanetScoreEngine {
     var credit = 0.0;
     var jamaah = 0;
     for (final l in inp.prayerLogs7d) {
-      credit += switch (l.status) { 'prayed' => 1.0, 'late' => 0.7, 'qada' => 0.5, _ => 0.0 };
+      credit += switch (l.status) {
+        'prayed' => 1.0,
+        'late' => 0.7,
+        'qada' => 0.5,
+        _ => 0.0,
+      };
       if (l.inJamaah && l.status != 'missed') jamaah++;
     }
     final denom = math.max(expected, inp.prayerLogs7d.length);
@@ -669,12 +716,14 @@ class PlanetScoreEngine {
     final logged = inp.prayerLogs7d.where((l) => l.status != 'missed').length;
     final missed = math.max(0, expected - logged);
     if (missed > 0) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.prayersMissed,
-        severity: math.min(1, 0.35 + missed / math.max(1, expected) * 1.5),
-        args: {'count': missed},
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.prayersMissed,
+          severity: math.min(1, 0.35 + missed / math.max(1, expected) * 1.5),
+          args: {'count': missed},
+        ),
+      );
     }
   }
 
@@ -689,14 +738,16 @@ class PlanetScoreEngine {
     if (pastDueToday.isNotEmpty) {
       final meds = {for (final d in pastDueToday) d.medId};
       final single = meds.length == 1 ? pastDueToday.first : null;
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.dosesPastDue,
-        severity: math.min(1, 0.6 + pastDueToday.length * 0.15),
-        args: {'count': pastDueToday.length, if (single != null) 'name': single.medName},
-        refTable: 'medications',
-        refId: single?.medId,
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.dosesPastDue,
+          severity: math.min(1, 0.6 + pastDueToday.length * 0.15),
+          args: {'count': pastDueToday.length, if (single != null) 'name': single.medName},
+          refTable: 'medications',
+          refId: single?.medId,
+        ),
+      );
     }
   }
 
@@ -710,14 +761,16 @@ class PlanetScoreEngine {
       final overdue = since - rhythm;
       if (overdue > 0) {
         total += (1 - overdue / rhythm).clamp(0.0, 1.0);
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.personOverdue,
-          severity: math.min(1, 0.4 + overdue / rhythm * 0.6),
-          args: {'name': p.name, 'days': overdue},
-          refTable: 'people',
-          refId: p.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.personOverdue,
+            severity: math.min(1, 0.4 + overdue / rhythm * 0.6),
+            args: {'name': p.name, 'days': overdue},
+            refTable: 'people',
+            refId: p.id,
+          ),
+        );
       } else {
         total += 1;
       }
@@ -729,7 +782,9 @@ class PlanetScoreEngine {
     if (inp.cards.isEmpty) return;
     final today = _startOfDay(inp.now);
     final overdue = inp.cards.where((c) => !c.done && c.dueDate != null && c.dueDate!.isBefore(today)).toList();
-    final doneRecent = inp.cards.where((c) => c.done && c.doneAt != null && inp.now.difference(c.doneAt!) <= const Duration(days: 7)).length;
+    final doneRecent = inp.cards
+        .where((c) => c.done && c.doneAt != null && inp.now.difference(c.doneAt!) <= const Duration(days: 7))
+        .length;
     final open = inp.cards.where((c) => !c.done).length;
     final base = open == 0 ? 1.0 : 1 - overdue.length / open;
     final momentum = doneRecent == 0 ? 0.0 : math.min(0.2, doneRecent * 0.04);
@@ -739,14 +794,16 @@ class PlanetScoreEngine {
       (byBoard[c.boardId ?? c.boardName] ??= []).add(c);
     }
     for (final cards in byBoard.values) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.cardsOverdue,
-        severity: math.min(1, 0.35 + cards.length * 0.12),
-        args: {'count': cards.length, 'board': cards.first.boardName},
-        refTable: 'boards',
-        refId: cards.first.boardId,
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.cardsOverdue,
+          severity: math.min(1, 0.35 + cards.length * 0.12),
+          args: {'count': cards.length, 'board': cards.first.boardName},
+          refTable: 'boards',
+          refId: cards.first.boardId,
+        ),
+      );
     }
   }
 
@@ -760,14 +817,16 @@ class PlanetScoreEngine {
         okPlan += b.planMilli;
       } else {
         final pct = ((b.spentMilli - b.planMilli) * 100 / b.planMilli).round();
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.budgetOverspent,
-          severity: math.min(1, 0.4 + pct / 100),
-          args: {'item': b.name, 'percent': pct},
-          refTable: 'budget_items',
-          refId: b.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.budgetOverspent,
+            severity: math.min(1, 0.4 + pct / 100),
+            args: {'item': b.name, 'percent': pct},
+            refTable: 'budget_items',
+            refId: b.id,
+          ),
+        );
       }
     }
     src[ScoreSources.budget] = totalPlan == 0 ? 1 : okPlan / totalPlan;
@@ -780,14 +839,16 @@ class PlanetScoreEngine {
       final days = _daysBetween(o.nextDue, inp.now);
       if (o.nextDue.isBefore(inp.now) && days >= 1) {
         overdueCount++;
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.obligationOverdue,
-          severity: math.min(1, 0.55 + days * 0.05),
-          args: {'name': o.name, 'days': days},
-          refTable: 'obligations',
-          refId: o.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.obligationOverdue,
+            severity: math.min(1, 0.55 + days * 0.05),
+            args: {'name': o.name, 'days': days},
+            refTable: 'obligations',
+            refId: o.id,
+          ),
+        );
       }
     }
     src[ScoreSources.obligations] = 1 - overdueCount / inp.obligations.length;
@@ -801,14 +862,16 @@ class PlanetScoreEngine {
       final days = _daysBetween(d.dueDate!, inp.now);
       if (d.dueDate!.isBefore(inp.now) && days >= 1) {
         overdueCount++;
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.debtOverdue,
-          severity: math.min(1, 0.5 + days * 0.05),
-          args: {'person': d.person, 'days': days},
-          refTable: 'debts',
-          refId: d.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.debtOverdue,
+            severity: math.min(1, 0.5 + days * 0.05),
+            args: {'person': d.person, 'days': days},
+            refTable: 'debts',
+            refId: d.id,
+          ),
+        );
       }
     }
     src[ScoreSources.debts] = 1 - overdueCount / myDebts.length;
@@ -833,14 +896,16 @@ class PlanetScoreEngine {
       }
       total += v;
       if (v < 0.7 && actual < 1) {
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.goalBehind,
-          severity: (1 - v).clamp(0.0, 1.0),
-          args: {'name': g.name, 'percent': (v * 100).round(), 'days': ?quietDays},
-          refTable: 'learning_goals',
-          refId: g.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.goalBehind,
+            severity: (1 - v).clamp(0.0, 1.0),
+            args: {'name': g.name, 'percent': (v * 100).round(), 'days': ?quietDays},
+            refTable: 'learning_goals',
+            refId: g.id,
+          ),
+        );
       }
     }
     src[ScoreSources.goals] = total / inp.goals.length;
@@ -851,13 +916,15 @@ class PlanetScoreEngine {
     src[ScoreSources.workouts] = (inp.workoutsDone7d / inp.workoutsExpected7d).clamp(0.0, 1.0);
     final missed = inp.workoutsExpected7d - inp.workoutsDone7d;
     if (missed > 0) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.workoutsMissed,
-        severity: math.min(1, 0.3 + missed / inp.workoutsExpected7d),
-        args: {'count': missed},
-        refTable: 'exercises',
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.workoutsMissed,
+          severity: math.min(1, 0.3 + missed / inp.workoutsExpected7d),
+          args: {'count': missed},
+          refTable: 'exercises',
+        ),
+      );
     }
   }
 
@@ -875,12 +942,14 @@ class PlanetScoreEngine {
     final v = (actual / expectedFraction).clamp(0.0, 1.0);
     src[ScoreSources.water] = v;
     if (v < 0.6) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.waterLow,
-        severity: (0.9 - v).clamp(0.1, 0.8),
-        args: {'percent': (actual * 100).round()},
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.waterLow,
+          severity: (0.9 - v).clamp(0.1, 0.8),
+          args: {'percent': (actual * 100).round()},
+        ),
+      );
     }
   }
 
@@ -889,44 +958,57 @@ class PlanetScoreEngine {
     if (docs.isEmpty) return;
     var expiring = 0;
     for (final d in docs) {
-      final days = d.expiry!.difference(inp.now).inDays;
+      // Calendar days (a passport expiring on the 7th is "in 10 days" all
+      // day on the 27th; negative = already expired).
+      final days = _daysBetween(inp.now, d.expiry!);
       if (days <= d.remindDaysBefore) {
         expiring++;
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.documentExpiring,
-          severity: days <= 0 ? 1.0 : math.min(1, 0.4 + (d.remindDaysBefore - days) / math.max(1, d.remindDaysBefore)),
-          args: {'name': d.name, 'days': days},
-          refTable: 'travel_documents',
-          refId: d.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.documentExpiring,
+            severity: days <= 0
+                ? 1.0
+                : math.min(1, 0.4 + (d.remindDaysBefore - days) / math.max(1, d.remindDaysBefore)),
+            args: {'name': d.name, 'days': days},
+            refTable: 'travel_documents',
+            refId: d.id,
+          ),
+        );
       }
     }
     src[ScoreSources.documents] = 1 - expiring / docs.length;
   }
 
   void _trips(String key, ScoreInputs inp, Map<String, double> src, List<NeglectReason> reasons) {
-    final upcoming = inp.trips
-        .where((t) => t.startDate != null && t.startDate!.isAfter(inp.now) && t.startDate!.difference(inp.now).inDays <= 14)
-        .toList();
+    // Trips departing today … in 14 calendar days (a trip dated today is
+    // still being packed for, even when its date is stored as midnight).
+    final upcoming = inp.trips.where((t) {
+      final start = t.startDate;
+      if (start == null) return false;
+      final days = _daysBetween(inp.now, start);
+      return days >= 0 && days <= 14;
+    }).toList();
     if (upcoming.isEmpty) return;
     var total = 0.0;
     for (final t in upcoming) {
       final packed = t.itemsTotal == 0 ? 1.0 : t.itemsPacked / t.itemsTotal;
-      final days = t.startDate!.difference(inp.now).inDays;
+      final days = _daysBetween(inp.now, t.startDate!);
       // Expect packing to ramp up over the last 7 days.
       final expected = ((7 - days) / 7).clamp(0.0, 1.0);
       final v = expected == 0 ? 1.0 : (packed / expected).clamp(0.0, 1.0);
       total += v;
       if (v < 0.6) {
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.tripUnpacked,
-          severity: (1 - v).clamp(0.2, 0.9),
-          args: {'destination': t.destination, 'days': days, 'percent': (packed * 100).round()},
-          refTable: 'trips',
-          refId: t.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.tripUnpacked,
+            severity: (1 - v).clamp(0.2, 0.9),
+            args: {'destination': t.destination, 'days': days, 'percent': (packed * 100).round()},
+            refTable: 'trips',
+            refId: t.id,
+          ),
+        );
       }
     }
     src[ScoreSources.trips] = total / upcoming.length;
@@ -962,7 +1044,9 @@ class PlanetScoreEngine {
   }
 
   void _jars(String key, ScoreInputs inp, Map<String, double> src, List<NeglectReason> reasons) {
-    final withPlan = inp.jars.where((j) => j.targetMilli > 0 && j.deadline != null && j.deadline!.isAfter(j.start)).toList();
+    final withPlan = inp.jars
+        .where((j) => j.targetMilli > 0 && j.deadline != null && j.deadline!.isAfter(j.start))
+        .toList();
     if (withPlan.isEmpty) return;
     var total = 0.0;
     for (final j in withPlan) {
@@ -973,14 +1057,16 @@ class PlanetScoreEngine {
       final v = expected <= 0.02 ? 1.0 : (actual / expected).clamp(0.0, 1.0);
       total += v;
       if (v < 0.7 && actual < 1) {
-        reasons.add(NeglectReason(
-          planetKey: key,
-          code: ReasonCode.jarBehind,
-          severity: ((1 - v) * 0.8).clamp(0.1, 0.8),
-          args: {'name': j.name, 'percent': (v * 100).round()},
-          refTable: 'jars',
-          refId: j.id,
-        ));
+        reasons.add(
+          NeglectReason(
+            planetKey: key,
+            code: ReasonCode.jarBehind,
+            severity: ((1 - v) * 0.8).clamp(0.1, 0.8),
+            args: {'name': j.name, 'percent': (v * 100).round()},
+            refTable: 'jars',
+            refId: j.id,
+          ),
+        );
       }
     }
     src[ScoreSources.jars] = total / withPlan.length;
@@ -992,13 +1078,15 @@ class PlanetScoreEngine {
     final days = _daysBetween(last, inp.now);
     src[ScoreSources.transactions] = _decay(days, halfLifeDays: 5);
     if (days >= 5) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.sourceStale,
-        severity: math.min(0.7, 0.2 + days / 20),
-        args: {'source': ScoreSources.transactions, 'days': days},
-        refTable: 'transactions',
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.sourceStale,
+          severity: math.min(0.7, 0.2 + days / 20),
+          args: {'source': ScoreSources.transactions, 'days': days},
+          refTable: 'transactions',
+        ),
+      );
     }
   }
 
@@ -1011,22 +1099,31 @@ class PlanetScoreEngine {
     // Five days a week is full marks.
     src[source] = (p.daysDone7d / 5).clamp(0.0, 1.0);
     if (days >= 3) {
-      reasons.add(NeglectReason(
-        planetKey: key,
-        code: ReasonCode.sourceStale,
-        severity: math.min(0.8, 0.25 + days / 15),
-        args: {'source': source, 'days': days},
-      ));
+      reasons.add(
+        NeglectReason(
+          planetKey: key,
+          code: ReasonCode.sourceStale,
+          severity: math.min(0.8, 0.25 + days / 15),
+          args: {'source': source, 'days': days},
+        ),
+      );
     }
   }
 
   // ------------------------------------------------------------- helpers ---
 
+  /// The weight a computed source counts with: the planet's (merged) weight,
+  /// else 0.3 for its custom modules and 0.2 for anything else.
+  static double _weightOf(String source, Map<String, double> w) =>
+      w[source] ?? (source.startsWith(ScoreSources.modulePrefix) ? 0.3 : 0.2);
+
+  static bool _hasWeightedSource(Map<String, double> sources, Map<String, double> w) =>
+      sources.keys.any((s) => _weightOf(s, w) > 0);
+
   static DateTime _startOfDay(DateTime t) => DateTime(t.year, t.month, t.day);
 
   /// Whole calendar days from [a] to [b] (local dates).
-  static int _daysBetween(DateTime a, DateTime b) =>
-      (_startOfDay(b).difference(_startOfDay(a)).inHours / 24).round();
+  static int _daysBetween(DateTime a, DateTime b) => (_startOfDay(b).difference(_startOfDay(a)).inHours / 24).round();
 
   /// 1.0 today, halving every [halfLifeDays].
   static double _decay(int days, {required double halfLifeDays}) =>

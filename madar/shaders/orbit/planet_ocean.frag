@@ -16,8 +16,10 @@
 // Heart rate never multiplies uTime by a score-dependent rate (that strobes
 // while uScore animates): a resting (~42 bpm) and a lively (~72 bpm) beat are
 // cross-faded instead, so every uniform can animate continuously.
-// Identity vs Growth (verdant): Health is GLOWING WATER – small archipelagos,
-// luminous cyan-teal seas, currents that glow by day too; Growth is green land.
+// Identity vs Growth (verdant): Health is GLOWING WATER – round 2: a
+// continent-free ocean (turquoise shallows over reefs, never land), thin
+// high cloud wisps instead of Earth-like decks, and cyan currents that glow
+// by day and blaze on the night side; Growth is green land.
 //
 // FAMILY LOOK (common.glsl): lifeGrade (thriveGrade + neglectGrade) on the lit
 // surface, the shared forward-scatter haze/halo (density × haloGain, and ×
@@ -85,10 +87,12 @@ vec3 oc_streams(vec3 x, vec3 q, float t, float aa, float warp) {
   float hsh = hash12(vec2(id, 11.0 + uSeed));
   float d = abs(s - id) / bands / gl;                 // surface distance to the streamline
   float keep = step(0.35, hsh) * smoothstep(0.25, 0.6, gl);   // no eyes around extrema
-  float wid = mix(0.0022, 0.0055, fract(hsh * 7.3));
+  // at least ~1.5 px wide on screen (aa is ≈ 0.7 px of surface): streams
+  // stay visible lines on a small world instead of dissolving
+  float wid = max(mix(0.0028, 0.006, fract(hsh * 7.3)), aa * 1.1);
   float fade = smoothstep(0.42, 0.68, noise3(x * 2.6 + id * 1.7));
-  float ww = wid + aa;
-  float core = exp(-d * d / (ww * ww)) * (wid / ww) * keep * fade;
+  float ww = wid + aa * 0.5;
+  float core = exp(-d * d / (ww * ww)) * pow(wid / ww, 0.5) * keep * fade;
   float glow = exp(-d * d / (ww * ww * 16.0)) * keep * fade;
   // travelling packets: along-stream coordinate ≈ longitude (currents are zonal)
   float lon = atan(q.z, q.x);
@@ -179,19 +183,20 @@ void main() {
     // ---- islands & sea floor: small archipelagos in luminous cyan-teal seas ----
     float warp = fbm3lo(x * 1.5 + vec3(0.0, t * 0.006, 0.0));
     float h = fbm3(x * 2.1 + warp * 1.2);
-    const float coast = 0.67;
-    float coastW = max(0.004, pxObj * 1.2);
-    float land = smoothstep(coast - coastW, coast + coastW, h);
-    float shallow = smoothstep(0.52, 0.665, h);
+    // all ocean: no land at all (Growth owns land); the highest sea floor
+    // becomes luminous reef shallows
+    const float coast = 0.73;
+    const float land = 0.0;
+    float shallow = smoothstep(0.56, 0.725, h);
     vec3 deep = mix(cC, cA, 0.22) * 0.6;
     vec3 reef = mix(cA, vec3(0.55, 0.95, 0.9), 0.25) * 0.85;
-    vec3 water = mix(deep, mix(cA * 0.55, reef, smoothstep(0.605, 0.665, h)), shallow);
+    vec3 water = mix(deep, mix(cA * 0.55, reef, smoothstep(0.66, 0.725, h)), shallow);
     vec3 sand = toLinear(vec3(0.86, 0.8, 0.62));
     // muted, blue-leaning jungle (Growth owns saturated green land)
     vec3 jungle = toLinear(vec3(0.2, 0.31, 0.27));
     vec3 highland = toLinear(vec3(0.34, 0.38, 0.33));
-    vec3 ground = mix(sand, jungle, smoothstep(0.68, 0.705, h));
-    ground = mix(ground, highland, smoothstep(0.76, 0.82, h));
+    vec3 ground = mix(sand, jungle, smoothstep(0.74, 0.765, h));
+    ground = mix(ground, highland, smoothstep(0.8, 0.86, h));
     if (fine > 0.0) ground *= 1.0 + (noise3(x * 30.0) - 0.5) * 0.3 * smoothstep(2.0, 5.0, 1.0 / (30.0 * pxObj));
     vec3 albedo = mix(water, ground, land);
 
@@ -218,16 +223,19 @@ void main() {
     float nh = saturate(dot(n, hv));
     float fres = pow(1.0 - saturate(mu), 5.0);
     float waves = mix(0.5, fine > 0.0 ? noise3(x * 60.0 + vec3(t * 0.15, 0.0, 0.0)) : 0.5, smoothstep(2.0, 5.0, 1.0 / (60.0 * pxObj)));
-    float spec = (pow(nh, 300.0) * 2.2 * (0.4 + 1.2 * waves) + pow(nh, 45.0) * 0.08) * (1.0 - land) * (1.0 - murk * 0.7);
+    // a soft, wide sheen on the water (not a hard plastic dot); the glitter
+    // comes from the sparkles below
+    float spec = (pow(nh, 70.0) * 0.32 * (0.5 + 1.0 * waves) + pow(nh, 14.0) * 0.07) * (1.0 - land) * (1.0 - murk * 0.7);
     lit += sunCol * spec * smoothstep(0.0, 0.15, ndl);
     lit += atmoCol * fres * 0.12 * (1.0 - land) * smoothstep(-0.1, 0.3, ndl);
 
     // ---- clouds: warped decks with soft self-shadow ----
     vec3 cq = x * 2.6 + vec3(t * 0.01, 0.0, -t * 0.006) + warp * 1.4;
     float cn = fine > 0.0 ? fbm3(cq) : fbm3lo(cq);
-    float cl = smoothstep(0.56, 0.78, cn) * (1.0 - ng * 0.4);
-    float clSh = smoothstep(0.56, 0.78, fbm3lo(cq + ql * 0.09));
-    lit *= 1.0 - clSh * 0.4 * smoothstep(0.0, 0.2, ndl);
+    // thin high wisps, streaked along the winds (not Earth's cloud decks)
+    float cl = smoothstep(0.64, 0.84, cn) * 0.55 * (1.0 - ng * 0.4);
+    float clSh = smoothstep(0.64, 0.84, fbm3lo(cq + ql * 0.09)) * 0.55;
+    lit *= 1.0 - clSh * 0.3 * smoothstep(0.0, 0.2, ndl);
     vec3 cloudCol = vec3(0.96, 0.98, 1.0) * (sunCol * saturate(ndl * 1.1 + 0.08) * (0.8 + 0.3 * (cn - 0.5)) + sky * 1.5);
     lit = mix(lit, cloudCol, cl * 0.92);
 
@@ -258,8 +266,10 @@ void main() {
     float rimW = max(0.006, pxObj * 1.5);
     float rimD = (coast - h) / rimW;
     float rim = exp(-rimD * rimD) * (1.0 - land) * th * (0.4 + 0.6 * beat);
-    vec3 bioCol = mix(cB, vec3(0.7, 1.0, 0.95), 0.2);
-    vec3 emit = bioCol * (bio * (0.7 + 1.6 * night) + rim * 0.2 * (0.2 + night));
+    // cyan bioluminescence
+    vec3 bioCol = mix(cB, vec3(0.2, 0.92, 1.0), 0.55);
+    // clearly visible on the night side: the currents are the world's pulse
+    vec3 emit = bioCol * (bio * (0.7 + 2.6 * night) + rim * 0.2 * (0.2 + night));
     // firefly glades: sparse, clustered twinkles over the night-side jungle (thriving)
     float face;
     vec2 uv = oc_cube(q, face);
@@ -303,7 +313,7 @@ void main() {
     col = (lit + emit) * T + S;
     col += auC;
     col += distressColor() * distressRim(mu, pulseD);
-    col += cB * uPulse * pow(1.0 - saturate(mu), 6.0) * 1.2;       // celebration flourish: rim flash
+    col += cB * uPulse * pow(1.0 - saturate(mu), 3.0) * 0.45;       // celebration flourish: rim flash
   }
 
   // ---- halo: shared forward-scatter halo (heartbeat-breathing) + aurora + shock + distress ----

@@ -1,9 +1,6 @@
-import 'dart:math' as math;
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/features/home/domain/prayer_day.dart';
-import 'package:madar/features/home/widgets/astrolabe_dial.dart';
 
 void main() {
   const times = PrayerDayTimes.placeholder;
@@ -26,6 +23,22 @@ void main() {
       expect(times.windowAt(at(18, 45)), PrayerWindow.maghrib);
       expect(times.windowAt(at(21, 0)), PrayerWindow.isha);
       expect(times.windowAt(at(23, 59)), PrayerWindow.isha);
+    });
+
+    test('an Isha after midnight keeps the Maghrib window running until it begins', () {
+      const late = PrayerDayTimes(
+        fajr: Duration(hours: 3),
+        sunrise: Duration(hours: 4, minutes: 40),
+        dhuhr: Duration(hours: 13, minutes: 20),
+        asr: Duration(hours: 17, minutes: 30),
+        maghrib: Duration(hours: 21, minutes: 50),
+        isha: Duration(hours: 24, minutes: 30),
+      );
+      expect(late.windowAt(at(23, 0)), PrayerWindow.maghrib);
+      expect(late.windowAt(at(0, 15)), PrayerWindow.maghrib);
+      expect(late.windowAt(at(0, 45)), PrayerWindow.isha);
+      expect(late.windowAt(at(3, 5)), PrayerWindow.fajr);
+      expect(times.windowAt(at(0, 15)), PrayerWindow.isha, reason: 'an ordinary evening is unchanged');
     });
 
     test('each window ends where the next begins; after Isha ends at the next Fajr', () {
@@ -57,23 +70,6 @@ void main() {
       final midIsha = times.progressAt(at(0, 17));
       expect(midIsha, greaterThan(0.4));
       expect(midIsha, lessThan(0.6));
-    });
-  });
-
-  group('DialGeometry', () {
-    test('noon is at the top, midnight at the bottom, clockwise', () {
-      expect(DialGeometry.angleOf(const Duration(hours: 12)), closeTo(-math.pi / 2, 1e-9));
-      expect(math.sin(DialGeometry.angleOf(Duration.zero)), closeTo(1, 1e-9));
-      expect(math.cos(DialGeometry.angleOf(const Duration(hours: 18))), closeTo(1, 1e-9));
-      expect(math.cos(DialGeometry.angleOf(const Duration(hours: 6))), closeTo(-1, 1e-9));
-    });
-
-    test('spread pushes crowded labels apart and leaves spaced ones alone', () {
-      final spaced = DialGeometry.spread([0, 1, 2], [0.5, 0.5]);
-      expect(spaced, [0, 1, 2]);
-      final crowded = DialGeometry.spread([0.0, 0.1], [0.5]);
-      expect(crowded[1] - crowded[0], closeTo(0.5, 1e-6));
-      expect((crowded[0] + crowded[1]) / 2, closeTo(0.05, 1e-6));
     });
   });
 }

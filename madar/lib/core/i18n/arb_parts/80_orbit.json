@@ -366,7 +366,7 @@
     "en": "Appointments"
   },
   "orbitSourceContacts": {
-    "ar": "صلة الناس",
+    "ar": "التواصل مع الناس",
     "en": "Keeping in touch"
   },
   "orbitSourceTasks": {
@@ -424,6 +424,11 @@
   "orbitSourceTrips": {
     "ar": "الرحلات",
     "en": "Trips"
+  },
+  "orbitSourceActivity": {
+    "ar": "النشاط المسجَّل",
+    "en": "Logged activity",
+    "description": "Implicit score source: how recently anything was done for a planet that has no other data"
   },
   "orbitArchetypeFaith": {
     "ar": "قبّة ذهبية منقوشة",
@@ -520,15 +525,15 @@
       }
     }
   },
-  "orbitCountdown": {
-    "ar": "{prayer} بعد {duration}",
-    "en": "{prayer} in {duration}",
-    "description": "Countdown to the next prayer engraved on the astrolabe's inner ring",
+  "orbitMoonSemantics": {
+    "ar": "{name}، قمرٌ يدور حول {planet}",
+    "en": "{name}, a moon of {planet}",
+    "description": "Screen-reader label of a data moon (a person, wallet, board, trip or module orbiting its planet)",
     "placeholders": {
-      "prayer": {
+      "name": {
         "type": "String"
       },
-      "duration": {
+      "planet": {
         "type": "String"
       }
     }
@@ -540,6 +545,21 @@
   "orbitBuiltInCannotDelete": {
     "ar": "الكواكب الأساسية تُخفى ولا تُحذف",
     "en": "Built-in planets can be hidden, not deleted"
+  },
+  "orbitPlanetNeedsName": {
+    "ar": "اكتب اسمًا للكوكب",
+    "en": "Give the planet a name",
+    "description": "Customisation error: empty planet name"
+  },
+  "orbitUnknownSource": {
+    "ar": "مصدر البيانات هذا غير متاح",
+    "en": "This data source isn't available",
+    "description": "Customisation error: a score source that does not exist"
+  },
+  "orbitPlanetGone": {
+    "ar": "لم يعُد هذا الكوكب في مدارك",
+    "en": "This planet is no longer in your orbit",
+    "description": "Customisation error: the planet was deleted meanwhile (a stale sheet)"
   },
   "orbitUndoRenamed": {
     "ar": "تغيّر اسم الكوكب",

@@ -1567,7 +1567,7 @@
   "orbitSourceMood": "المزاج",
   "orbitSourcePain": "الألم",
   "orbitSourceAppointments": "المواعيد الطبية",
-  "orbitSourceContacts": "صلة الناس",
+  "orbitSourceContacts": "التواصل مع الناس",
   "orbitSourceTasks": "المهام",
   "orbitSourceCards": "لوحات العمل",
   "orbitSourceProjects": "المشاريع",
@@ -1582,6 +1582,10 @@
   "orbitSourceWater": "شرب الماء",
   "orbitSourceDocuments": "وثائق السفر",
   "orbitSourceTrips": "الرحلات",
+  "orbitSourceActivity": "النشاط المسجَّل",
+  "@orbitSourceActivity": {
+    "description": "Implicit score source: how recently anything was done for a planet that has no other data"
+  },
   "orbitArchetypeFaith": "قبّة ذهبية منقوشة",
   "orbitArchetypeOcean": "محيط حيّ",
   "orbitArchetypeTerracotta": "أرض فخّارية دافئة",
@@ -1632,20 +1636,32 @@
       }
     }
   },
-  "orbitCountdown": "{prayer} بعد {duration}",
-  "@orbitCountdown": {
-    "description": "Countdown to the next prayer engraved on the astrolabe's inner ring",
+  "orbitMoonSemantics": "{name}، قمرٌ يدور حول {planet}",
+  "@orbitMoonSemantics": {
+    "description": "Screen-reader label of a data moon (a person, wallet, board, trip or module orbiting its planet)",
     "placeholders": {
-      "prayer": {
+      "name": {
         "type": "String"
       },
-      "duration": {
+      "planet": {
         "type": "String"
       }
     }
   },
   "orbitNewPlanetName": "كوكب جديد",
   "orbitBuiltInCannotDelete": "الكواكب الأساسية تُخفى ولا تُحذف",
+  "orbitPlanetNeedsName": "اكتب اسمًا للكوكب",
+  "@orbitPlanetNeedsName": {
+    "description": "Customisation error: empty planet name"
+  },
+  "orbitUnknownSource": "مصدر البيانات هذا غير متاح",
+  "@orbitUnknownSource": {
+    "description": "Customisation error: a score source that does not exist"
+  },
+  "orbitPlanetGone": "لم يعُد هذا الكوكب في مدارك",
+  "@orbitPlanetGone": {
+    "description": "Customisation error: the planet was deleted meanwhile (a stale sheet)"
+  },
   "orbitUndoRenamed": "تغيّر اسم الكوكب",
   "orbitUndoRecolored": "تغيّر لون {name}",
   "@orbitUndoRecolored": {
@@ -1806,5 +1822,736 @@
   "astrolabeMakersMark": "مَدار",
   "@astrolabeMakersMark": {
     "description": "Maker's mark engraved on the lower half of the astrolabe's inner ring (like a signed museum astrolabe)"
+  },
+  "astrolabeStarDenebKaitos": "ذنب قيطس",
+  "@astrolabeStarDenebKaitos": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarMenkar": "منخر قيطس",
+  "@astrolabeStarMenkar": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarAldebaran": "الدبران",
+  "@astrolabeStarAldebaran": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarRigel": "رجل الجبار",
+  "@astrolabeStarRigel": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarBetelgeuse": "يد الجوزاء",
+  "@astrolabeStarBetelgeuse": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarSirius": "الشعرى اليمانية",
+  "@astrolabeStarSirius": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarProcyon": "الشعرى الشامية",
+  "@astrolabeStarProcyon": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarAlphard": "فرد الشجاع",
+  "@astrolabeStarAlphard": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarRegulus": "قلب الأسد",
+  "@astrolabeStarRegulus": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarDenebola": "ذنب الأسد",
+  "@astrolabeStarDenebola": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarSpica": "السماك الأعزل",
+  "@astrolabeStarSpica": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarArcturus": "السماك الرامح",
+  "@astrolabeStarArcturus": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarUnukalhai": "عنق الحية",
+  "@astrolabeStarUnukalhai": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarRasAlhague": "رأس الحوّاء",
+  "@astrolabeStarRasAlhague": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarAltair": "النسر الطائر",
+  "@astrolabeStarAltair": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarDenebAlgedi": "ذنب الجدي",
+  "@astrolabeStarDenebAlgedi": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarMarkab": "مركب الفرس",
+  "@astrolabeStarMarkab": {
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeZodiacAries": "الحمل",
+  "@astrolabeZodiacAries": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacTaurus": "الثور",
+  "@astrolabeZodiacTaurus": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacGemini": "الجوزاء",
+  "@astrolabeZodiacGemini": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacCancer": "السرطان",
+  "@astrolabeZodiacCancer": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacLeo": "الأسد",
+  "@astrolabeZodiacLeo": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacVirgo": "السنبلة",
+  "@astrolabeZodiacVirgo": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacLibra": "الميزان",
+  "@astrolabeZodiacLibra": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacScorpio": "العقرب",
+  "@astrolabeZodiacScorpio": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacSagittarius": "القوس",
+  "@astrolabeZodiacSagittarius": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacCapricorn": "الجدي",
+  "@astrolabeZodiacCapricorn": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacAquarius": "الدلو",
+  "@astrolabeZodiacAquarius": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacPisces": "الحوت",
+  "@astrolabeZodiacPisces": {
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeCountdownUntil": "حتى {prayer}",
+  "@astrolabeCountdownUntil": {
+    "description": "Lower band of a small astrolabe hub under the engraved clock: which prayer the countdown runs to, e.g. «حتى العصر»",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdownNowBand": "حان وقتها",
+  "@astrolabeCountdownNowBand": {
+    "description": "Lower band of a small astrolabe hub (under the prayer name) the moment the prayer begins"
+  },
+  "skySemantics": "السماء الآن: {sky}. {moon}",
+  "@skySemantics": {
+    "description": "Screen-reader description of the living sky behind the orbit, e.g. «السماء الآن: ليل. القمر بدر، مضاء بنسبة ٩٨٪»",
+    "placeholders": {
+      "sky": {
+        "type": "String"
+      },
+      "moon": {
+        "type": "String"
+      }
+    }
+  },
+  "skyMoodNight": "ليل",
+  "@skyMoodNight": {
+    "description": "Look of the sky: full night"
+  },
+  "skyMoodDawn": "فجر",
+  "@skyMoodDawn": {
+    "description": "Look of the sky: morning twilight (from Fajr)"
+  },
+  "skyMoodSunrise": "شروق",
+  "@skyMoodSunrise": {
+    "description": "Look of the sky: the sun rising"
+  },
+  "skyMoodDay": "نهار صافٍ",
+  "@skyMoodDay": {
+    "description": "Look of the sky: daylight"
+  },
+  "skyMoodGoldenHour": "الساعة الذهبية",
+  "@skyMoodGoldenHour": {
+    "description": "Look of the sky: the low warm sun before sunset"
+  },
+  "skyMoodSunset": "غروب",
+  "@skyMoodSunset": {
+    "description": "Look of the sky: the sun setting (Maghrib)"
+  },
+  "skyMoodDusk": "شفق المغرب",
+  "@skyMoodDusk": {
+    "description": "Look of the sky: evening twilight after Maghrib"
+  },
+  "skyMoonBelow": "القمر تحت الأفق",
+  "@skyMoonBelow": {
+    "description": "Screen-reader note when the moon has not risen"
+  },
+  "skyMoonPhase": "القمر {phase}، مضاء بنسبة {percent}",
+  "@skyMoonPhase": {
+    "description": "Moon phase and illuminated fraction, e.g. «القمر بدر، مضاء بنسبة ٩٨٪»",
+    "placeholders": {
+      "phase": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "skyMoonNew": "محاق",
+  "@skyMoonNew": {
+    "description": "Moon phase name"
+  },
+  "skyMoonWaxingCrescent": "هلال متزايد",
+  "@skyMoonWaxingCrescent": {
+    "description": "Moon phase name"
+  },
+  "skyMoonFirstQuarter": "تربيع أول",
+  "@skyMoonFirstQuarter": {
+    "description": "Moon phase name"
+  },
+  "skyMoonWaxingGibbous": "أحدب متزايد",
+  "@skyMoonWaxingGibbous": {
+    "description": "Moon phase name"
+  },
+  "skyMoonFull": "بدر",
+  "@skyMoonFull": {
+    "description": "Moon phase name"
+  },
+  "skyMoonWaningGibbous": "أحدب متناقص",
+  "@skyMoonWaningGibbous": {
+    "description": "Moon phase name"
+  },
+  "skyMoonLastQuarter": "تربيع أخير",
+  "@skyMoonLastQuarter": {
+    "description": "Moon phase name"
+  },
+  "skyMoonWaningCrescent": "هلال متناقص",
+  "@skyMoonWaningCrescent": {
+    "description": "Moon phase name"
+  },
+  "skyStarNames": "أسماء النجوم",
+  "@skyStarNames": {
+    "description": "Toggle: show the traditional names of the brightest stars in the sky"
+  },
+  "skyStarNamesHint": "تُنقش الأسماء العربية لألمع النجوم في سماء الليل",
+  "@skyStarNamesHint": {
+    "description": "Explanation under the star-names toggle"
+  },
+  "planetsSystemSemantics": "{count, plural, =0{مدار حياتك بلا عوالم ظاهرة} =1{مدار حياتك: عالم واحد يدور حول نجمك} =2{مدار حياتك: عالمان يدوران حول نجمك} few{مدار حياتك: {n} عوالم تدور حول نجمك} many{مدار حياتك: {n} عالمًا يدور حول نجمك} other{مدار حياتك: {n} عالم يدور حول نجمك}}",
+  "@planetsSystemSemantics": {
+    "description": "Screen-reader label of the planet layer of the orbit (n = count formatted with the user's digits)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "planetsOpenHint": "ادخل إلى هذا العالم",
+  "@planetsOpenHint": {
+    "description": "Screen-reader hint for tapping a planet (a cinematic fly-in opens its module)"
+  },
+  "planetsCustomizeHint": "خصّص هذا العالم",
+  "@planetsCustomizeHint": {
+    "description": "Screen-reader hint for long-pressing a planet (opens its customisation sheet)"
+  },
+  "planetsMoonOpenHint": "افتح",
+  "@planetsMoonOpenHint": {
+    "description": "Screen-reader hint for tapping a data moon (opens that person, wallet, board or trip)"
+  },
+  "planetsMoonsCount": "{count, plural, =0{بلا أقمار} =1{قمر واحد} =2{قمران} few{{n} أقمار} many{{n} قمرًا} other{{n} قمر}}",
+  "@planetsMoonsCount": {
+    "description": "How many data moons orbit a planet, read after the planet's label (n = count formatted with the user's digits)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiSceneHint": "اسحب لتدوير المدار، وباعد بإصبعين للاقتراب من عالم",
+  "@orbitUiSceneHint": {
+    "description": "Screen-reader hint of the whole orbit scene on home"
+  },
+  "orbitUiRecenter": "العودة إلى المدار كاملًا",
+  "@orbitUiRecenter": {
+    "description": "Button shown after rotating or zooming the orbit; returns the camera to the overview"
+  },
+  "orbitUiRadarClear": "عوالمك كلها في توازن — لا شيء يحتاج انتباهك الآن",
+  "@orbitUiRadarClear": {
+    "description": "Neglect Radar when no planet has a neglect reason"
+  },
+  "orbitUiRadarWaiting": "سيبدأ الرادار عمله حين تسجّل أول أنشطتك",
+  "@orbitUiRadarWaiting": {
+    "description": "Neglect Radar before any planet has data"
+  },
+  "orbitUiRadarEntrySemantics": "{planet}: {reason}",
+  "@orbitUiRadarEntrySemantics": {
+    "description": "Screen-reader label of one Neglect Radar entry",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiRadarOpenHint": "انتقل إلى هذا العالم",
+  "@orbitUiRadarOpenHint": {
+    "description": "Screen-reader hint of a Neglect Radar entry"
+  },
+  "orbitUiBalanceLabel": "التوازن",
+  "@orbitUiBalanceLabel": {
+    "description": "Caption under a planet's score ring"
+  },
+  "orbitUiPlanetWeight": "وزنه في توازنك ×{weight}",
+  "@orbitUiPlanetWeight": {
+    "description": "How much a planet counts in the overall balance (weight already formatted)",
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPlanetNotCounted": "لا يُحتسب في توازنك",
+  "@orbitUiPlanetNotCounted": {
+    "description": "Planet with weight 0"
+  },
+  "orbitUiReasonsTitle": "ما يحتاج عنايتك",
+  "@orbitUiReasonsTitle": {
+    "description": "Section title on a planet page listing its neglect reasons"
+  },
+  "orbitUiReasonsNone": "لا شيء متأخر هنا — أحسنت",
+  "@orbitUiReasonsNone": {
+    "description": "Planet page when the planet has no neglect reasons"
+  },
+  "orbitUiReasonsDormant": "هذا العالم هادئ بانتظار أول بياناتك",
+  "@orbitUiReasonsDormant": {
+    "description": "Planet page when the planet has no data yet"
+  },
+  "orbitUiSourcesTitle": "ما يغذّي هذا التوازن",
+  "@orbitUiSourcesTitle": {
+    "description": "Section title listing the score sources of a planet"
+  },
+  "orbitUiMoonsTitle": "الأقمار",
+  "@orbitUiMoonsTitle": {
+    "description": "Section title listing the data moons of a planet"
+  },
+  "orbitUiMoonsNone": "لا أقمار تدور حول هذا العالم بعد",
+  "@orbitUiMoonsNone": {
+    "description": "Planet page with no data moons"
+  },
+  "orbitUiMoonKindPerson": "شخص",
+  "@orbitUiMoonKindPerson": {
+    "description": "Kind of a data moon: a person around Family"
+  },
+  "orbitUiMoonKindWallet": "محفظة",
+  "@orbitUiMoonKindWallet": {
+    "description": "Kind of a data moon: a wallet around Money"
+  },
+  "orbitUiMoonKindBoard": "لوحة عمل",
+  "@orbitUiMoonKindBoard": {
+    "description": "Kind of a data moon: a work board around Work"
+  },
+  "orbitUiMoonKindTrip": "رحلة",
+  "@orbitUiMoonKindTrip": {
+    "description": "Kind of a data moon: a trip around Travel"
+  },
+  "orbitUiMoonKindModule": "وحدة",
+  "@orbitUiMoonKindModule": {
+    "description": "Kind of a data moon: a custom module"
+  },
+  "orbitUiMoonFreshness": "حيويته {percent}",
+  "@orbitUiMoonFreshness": {
+    "description": "How fresh / attended a data moon is (percent formatted)",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonSelected": "القمر الذي اخترته",
+  "@orbitUiMoonSelected": {
+    "description": "Badge on the moon row that was tapped in the orbit"
+  },
+  "orbitUiCustomize": "تخصيص",
+  "@orbitUiCustomize": {
+    "description": "Button opening the planet customisation sheet"
+  },
+  "orbitUiCustomizeTitle": "تخصيص {planet}",
+  "@orbitUiCustomizeTitle": {
+    "description": "Title of the planet customisation sheet",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiCustomizeSubtitle": "كل تغيير يمكن التراجع عنه",
+  "@orbitUiCustomizeSubtitle": {
+    "description": "Subtitle of the planet customisation sheet"
+  },
+  "orbitUiEditLook": "الاسم والمظهر",
+  "@orbitUiEditLook": {
+    "description": "Customisation action: rename, recolour, restyle"
+  },
+  "orbitUiEditWeight": "أهميته في التوازن",
+  "@orbitUiEditWeight": {
+    "description": "Customisation action: planet weight"
+  },
+  "orbitUiEditSources": "مصادر البيانات",
+  "@orbitUiEditSources": {
+    "description": "Customisation action: which data feeds the score and how much"
+  },
+  "orbitUiMoveOrbit": "نقل مداره",
+  "@orbitUiMoveOrbit": {
+    "description": "Customisation action: reorder the planet among the orbits"
+  },
+  "orbitUiHide": "إخفاء من المدار",
+  "@orbitUiHide": {
+    "description": "Customisation action: hide the planet (its data stays)"
+  },
+  "orbitUiReset": "استعادة الإعدادات الأصلية",
+  "@orbitUiReset": {
+    "description": "Customisation action: reset a built-in planet"
+  },
+  "orbitUiDelete": "حذف هذا العالم",
+  "@orbitUiDelete": {
+    "description": "Customisation action: delete a user-added planet"
+  },
+  "orbitUiAddPlanet": "إضافة عالم جديد",
+  "@orbitUiAddPlanet": {
+    "description": "Customisation action: add a planet"
+  },
+  "orbitUiHiddenWorlds": "العوالم المخفية",
+  "@orbitUiHiddenWorlds": {
+    "description": "Customisation action / sheet title: show a hidden planet again"
+  },
+  "orbitUiFieldName": "الاسم",
+  "@orbitUiFieldName": {
+    "description": "Field: planet name"
+  },
+  "orbitUiFieldColor": "اللون",
+  "@orbitUiFieldColor": {
+    "description": "Field: planet colour"
+  },
+  "orbitUiFieldStyle": "طراز العالم",
+  "@orbitUiFieldStyle": {
+    "description": "Field: planet archetype (surface look)"
+  },
+  "orbitUiFieldWeight": "الأهمية",
+  "@orbitUiFieldWeight": {
+    "description": "Field: planet weight slider"
+  },
+  "orbitUiWeightNone": "لا يُحتسب",
+  "@orbitUiWeightNone": {
+    "description": "Weight slider label at 0"
+  },
+  "orbitUiWeightNormal": "عادي",
+  "@orbitUiWeightNormal": {
+    "description": "Weight slider label at 1×"
+  },
+  "orbitUiWeightMost": "الأهم",
+  "@orbitUiWeightMost": {
+    "description": "Weight slider label at the maximum"
+  },
+  "orbitUiSourcesHint": "حرّك المصدر إلى الصفر لإيقافه",
+  "@orbitUiSourcesHint": {
+    "description": "Subtitle of the data sources sheet"
+  },
+  "orbitUiSourceOff": "متوقف",
+  "@orbitUiSourceOff": {
+    "description": "Source weight slider label at 0"
+  },
+  "orbitUiMoveTitle": "موضع المدار",
+  "@orbitUiMoveTitle": {
+    "description": "Title of the move-orbit sheet"
+  },
+  "orbitUiMoveSubtitle": "الأقرب إلى نجمك أولًا",
+  "@orbitUiMoveSubtitle": {
+    "description": "Subtitle of the move-orbit sheet"
+  },
+  "orbitUiMoveBefore": "قبل {planet}",
+  "@orbitUiMoveBefore": {
+    "description": "Move-orbit target: put the planet just inside another one",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoveLast": "المدار الأبعد",
+  "@orbitUiMoveLast": {
+    "description": "Move-orbit target: the last orbit"
+  },
+  "orbitUiOrbitNumber": "المدار {n}",
+  "@orbitUiOrbitNumber": {
+    "description": "Subtitle of a move target: its orbit number (n formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerAt": "وقتها {time}",
+  "@orbitUiPrayerAt": {
+    "description": "Subtitle of the prayer sheet (time formatted)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerPrayed": "صلّيتها",
+  "@orbitUiPrayerPrayed": {
+    "description": "Prayer sheet action: log as prayed on time"
+  },
+  "orbitUiPrayerLate": "صلّيتها متأخرة",
+  "@orbitUiPrayerLate": {
+    "description": "Prayer sheet action: log as prayed late"
+  },
+  "orbitUiPrayerMissed": "فاتتني",
+  "@orbitUiPrayerMissed": {
+    "description": "Prayer sheet action: log as missed"
+  },
+  "orbitUiPrayerClear": "إلغاء التسجيل",
+  "@orbitUiPrayerClear": {
+    "description": "Prayer sheet action: remove today's log of this prayer"
+  },
+  "orbitUiPrayerNotYet": "لم يدخل وقتها بعد",
+  "@orbitUiPrayerNotYet": {
+    "description": "Prayer sheet: the prayer is still upcoming"
+  },
+  "orbitUiPrayerLogged": "سُجّلت صلاة {prayer}",
+  "@orbitUiPrayerLogged": {
+    "description": "Undo toast after logging a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerCleared": "أُلغي تسجيل {prayer}",
+  "@orbitUiPrayerCleared": {
+    "description": "Undo toast after clearing a prayer log",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerHint": "سجّل هذه الصلاة",
+  "@orbitUiPrayerHint": {
+    "description": "Screen-reader hint of a prayer pointer on the astrolabe"
+  },
+  "orbitUiPlanetMissing": "هذا العالم لم يعد في مدارك",
+  "@orbitUiPlanetMissing": {
+    "description": "Planet page opened for a planet that was hidden or deleted"
+  },
+  "orbitUiBackToOrbit": "العودة إلى المدار",
+  "@orbitUiBackToOrbit": {
+    "description": "Back button of a planet page (screen reader and missing-planet state)"
+  },
+  "orbitUiInDuration": "بعد {duration}",
+  "@orbitUiInDuration": {
+    "description": "Countdown on the next prayer's window chip (duration formatted, e.g. ١ س ٢٣ د)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerPrayedAt": "صُلّيت {time}",
+  "@orbitUiPrayerPrayedAt": {
+    "description": "Prayer sheet: the achieved state of a prayer already logged as prayed (shown with a lit flame and a check)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerLateAt": "صُلّيت متأخرة {time}",
+  "@orbitUiPrayerLateAt": {
+    "description": "Prayer sheet: the achieved state of a prayer logged as prayed late",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonOf": "{kind} في {planet}",
+  "@orbitUiMoonOf": {
+    "description": "Moon sheet subtitle: what the record is and which world it orbits",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonInTouch": "تواصلت اليوم",
+  "@orbitUiMoonInTouch": {
+    "description": "Moon sheet action for a person: log that you were in touch today"
+  },
+  "orbitUiMoonInTouchLogged": "سُجّل تواصلك مع {name}",
+  "@orbitUiMoonInTouchLogged": {
+    "description": "Undo toast after logging contact with a person",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonRename": "إعادة التسمية",
+  "@orbitUiMoonRename": {
+    "description": "Moon sheet action: rename the record"
+  },
+  "orbitUiMoonRenamed": "تمت إعادة التسمية",
+  "@orbitUiMoonRenamed": {
+    "description": "Undo toast after renaming a record from its moon"
+  },
+  "orbitUiMoonLastContact": "آخر تواصل: {when}",
+  "@orbitUiMoonLastContact": {
+    "description": "Moon sheet detail line for a person",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonTripStarts": "تبدأ في {date}",
+  "@orbitUiMoonTripStarts": {
+    "description": "Moon sheet detail line for a trip",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonNever": "لم يُسجَّل بعد",
+  "@orbitUiMoonNever": {
+    "description": "Moon sheet: no last-contact date yet"
+  },
+  "orbitUiListSeparator": "{a} · {b}",
+  "@orbitUiListSeparator": {
+    "description": "Joins two short parts of one line (e.g. a state and a percentage); keeps the separator translatable",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiFraction": "{done}/{total}",
+  "@orbitUiFraction": {
+    "description": "Compact progress inside a small ring, e.g. «١/٢» tasks done",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerDone": "صُلّيت",
+  "@orbitUiPrayerDone": {
+    "description": "Prayer sheet: the achieved state of a prayer logged as prayed when the log time is unknown (imported or back-filled)"
+  },
+  "orbitUiPrayerLateDone": "صُلّيت متأخرة",
+  "@orbitUiPrayerLateDone": {
+    "description": "Prayer sheet: the achieved state of a prayer logged as prayed late when the log time is unknown"
+  },
+  "orbitUiPanelExpand": "عرض مهام هذا الوقت ورادار الإهمال",
+  "@orbitUiPanelExpand": {
+    "description": "Screen-reader label of the home panel's grabber while the panel peeks (tap expands it)"
+  },
+  "orbitUiPanelCollapse": "طيّ اللوحة وإظهار المدار",
+  "@orbitUiPanelCollapse": {
+    "description": "Screen-reader label of the home panel's grabber while the panel is expanded (tap folds it)"
+  },
+  "orbitUiRadarLineJoin": " — ",
+  "@orbitUiRadarLineJoin": {
+    "description": "Joins a planet's name and its neglect reason on the one-line Neglect Radar (keep the spaces)"
+  },
+  "orbitUiTodayPrayersTitle": "صلوات اليوم",
+  "@orbitUiTodayPrayersTitle": {
+    "description": "Section on the Faith planet page: today's five prayers on a small dial"
+  },
+  "orbitUiPrayersProgress": "صلّيت {done} من {total}",
+  "@orbitUiPrayersProgress": {
+    "description": "Centre of the Faith page's prayer dial / its screen-reader summary (numbers already formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerStatusPrayed": "صُلّيت",
+  "@orbitUiPrayerStatusPrayed": {
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiPrayerStatusDue": "حان وقتها",
+  "@orbitUiPrayerStatusDue": {
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiPrayerStatusMissed": "فاتت",
+  "@orbitUiPrayerStatusMissed": {
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiPrayerStatusUpcoming": "قادمة",
+  "@orbitUiPrayerStatusUpcoming": {
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiWirdTitle": "الورد والأذكار",
+  "@orbitUiWirdTitle": {
+    "description": "Section on the Faith planet page: Quran wird and adhkar progress"
+  },
+  "orbitUiWorldTasksTitle": "اليوم في هذا العالم",
+  "@orbitUiWorldTasksTitle": {
+    "description": "Section on a planet page listing today's tasks attached to the planet"
+  },
+  "orbitUiWorldTasksNone": "لا شيء مخطّط لهذا العالم اليوم",
+  "@orbitUiWorldTasksNone": {
+    "description": "A planet page with no tasks today"
+  },
+  "orbitUiSourceSemantics": "{source}: {value}",
+  "@orbitUiSourceSemantics": {
+    "description": "Screen-reader label of one score source bar on a planet page (value already formatted)",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonWaiting": "بانتظارك",
+  "@orbitUiMoonWaiting": {
+    "description": "A data moon's meter when it has had no attention at all (instead of a lone 0 %)"
   }
 }

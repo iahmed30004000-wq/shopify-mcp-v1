@@ -101,6 +101,7 @@ String scoreSourceLabel(L10n l, String source) => switch (ScoreSources.canonical
   ScoreSources.water => l.orbitSourceWater,
   ScoreSources.documents => l.orbitSourceDocuments,
   ScoreSources.trips => l.orbitSourceTrips,
+  ScoreSources.activity => l.orbitSourceActivity,
   final other => other,
 };
 

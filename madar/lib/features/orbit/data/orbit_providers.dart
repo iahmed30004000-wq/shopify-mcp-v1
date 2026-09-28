@@ -6,7 +6,7 @@ import '../../../core/db/repositories/repositories.dart';
 import '../../../core/i18n/formatters.dart';
 import '../../../core/settings/app_settings.dart';
 import '../../home/domain/prayer_day.dart';
-import '../../home/home_providers.dart' show homeClockProvider;
+import '../../home/home_providers.dart' show appForegroundProvider, homeClockProvider;
 import '../domain/planet_pulse.dart';
 import '../domain/prayer_schedule.dart';
 import '../domain/scene_snapshot.dart';
@@ -42,7 +42,9 @@ final prayerScheduleProvider = Provider<PrayerSchedule>((ref) {
   return ref.watch(orbitRepositoryProvider).scheduleFor(settings);
 });
 
-/// Today's calendar day, refreshed at local midnight.
+/// Today's calendar day, refreshed at local midnight (and re-armed against
+/// the wall clock when the app comes back from the background: the timer
+/// does not run while the device sleeps).
 final orbitTodayProvider = NotifierProvider<OrbitToday, DateTime>(OrbitToday.new);
 
 class OrbitToday extends Notifier<DateTime> {
@@ -51,7 +53,18 @@ class OrbitToday extends Notifier<DateTime> {
   @override
   DateTime build() {
     final clock = ref.watch(orbitClockProvider);
-    ref.onDispose(() => _timer?.cancel());
+    final foreground = ref.watch(appForegroundProvider);
+    void onForeground() {
+      if (!foreground.value) return;
+      final today = _arm(clock);
+      if (today != state) state = today;
+    }
+
+    foreground.addListener(onForeground);
+    ref.onDispose(() {
+      _timer?.cancel();
+      foreground.removeListener(onForeground);
+    });
     return _arm(clock);
   }
 
@@ -65,28 +78,43 @@ class OrbitToday extends Notifier<DateTime> {
   }
 }
 
-/// Real prayer-window times for home's dial and task windows: the app
-/// shell swaps the placeholder with
-/// `prayerDayProvider.overrideWith((ref) => ref.watch(orbitPrayerDayProvider))`.
+/// Real prayer-window times for home's dial and task windows (home's
+/// `prayerDayProvider` reads it).
 final orbitPrayerDayProvider = Provider<PrayerDayTimes>(
   (ref) => prayerDayTimesOf(ref.watch(prayerScheduleProvider).timesFor(ref.watch(orbitTodayProvider))),
 );
 
-/// [DayTimes] as home's [PrayerDayTimes] (offsets from local midnight).
-PrayerDayTimes prayerDayTimesOf(DayTimes t) => PrayerDayTimes(
-  fajr: PrayerDayTimes.sinceMidnight(t.fajr),
-  sunrise: PrayerDayTimes.sinceMidnight(t.sunrise),
-  dhuhr: PrayerDayTimes.sinceMidnight(t.dhuhr),
-  asr: PrayerDayTimes.sinceMidnight(t.asr),
-  maghrib: PrayerDayTimes.sinceMidnight(t.maghrib),
-  isha: PrayerDayTimes.sinceMidnight(t.isha),
-);
+/// [DayTimes] as home's [PrayerDayTimes]: wall-clock offsets from the day's
+/// local midnight. A time on the next calendar day (Isha after midnight in a
+/// high-latitude summer) becomes an offset beyond 24 h, so it still follows
+/// Maghrib and the window order holds.
+PrayerDayTimes prayerDayTimesOf(DayTimes t) {
+  final day = DateTime.utc(t.day.year, t.day.month, t.day.day);
+  Duration offset(DateTime at) {
+    final days = DateTime.utc(at.year, at.month, at.day).difference(day).inDays;
+    final d = Duration(days: days) + PrayerDayTimes.sinceMidnight(at);
+    return d.isNegative ? Duration.zero : d;
+  }
+
+  return PrayerDayTimes(
+    fajr: offset(t.fajr),
+    sunrise: offset(t.sunrise),
+    dhuhr: offset(t.dhuhr),
+    asr: offset(t.asr),
+    maghrib: offset(t.maghrib),
+    isha: offset(t.isha),
+  );
+}
 
 /// Tuning of the live snapshot stream (tests shorten it).
 typedef SnapshotTiming = ({Duration debounce, Duration maxWait, Duration? tick});
 
 final sceneSnapshotTimingProvider = Provider<SnapshotTiming>(
-  (ref) => (debounce: const Duration(milliseconds: 250), maxWait: const Duration(seconds: 1), tick: const Duration(seconds: 60)),
+  (ref) => (
+    debounce: const Duration(milliseconds: 250),
+    maxWait: const Duration(seconds: 1),
+    tick: const Duration(seconds: 60),
+  ),
 );
 
 /// The live [SceneSnapshot]: recomputed when any relevant table changes
@@ -103,6 +131,7 @@ final sceneSnapshotProvider = StreamProvider.autoDispose<SceneSnapshot>((ref) {
     debounce: timing.debounce,
     maxWait: timing.maxWait,
     tick: timing.tick,
+    active: ref.watch(appForegroundProvider),
     compute: (now) => repo.snapshot(now: now, languageCode: fmt.languageCode, digits: fmt.digits),
   );
   return watcher.watch();

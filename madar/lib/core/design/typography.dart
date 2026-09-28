@@ -21,13 +21,17 @@ abstract final class MadarTypography {
           height: height ?? h,
           letterSpacing: arabic ? 0 : spacing,
         );
+    // Reem Kufi is a variable font: the weight must be set on its axis (a
+    // bare w600 is synthesised – smeared, blobby Kufi). Latin headings keep
+    // normal tracking (tight tracking ran the words together).
     TextStyle display(double size, Color c) => TextStyle(
           fontFamily: displayFamily,
           fontSize: size,
           fontWeight: FontWeight.w600,
+          fontVariations: const [FontVariation.weight(600)],
           color: c,
           height: arabic ? 1.35 : 1.15,
-          letterSpacing: arabic ? 0 : -0.5,
+          letterSpacing: 0,
         );
     return TextTheme(
       displayLarge: display(52, t.textPrimary),

@@ -40,7 +40,10 @@ void main() {
     await settle();
     expect(pulses, hasLength(1));
     final p = pulses.single;
-    expect((p.planetKey, p.kind, p.refTable, p.refId, p.origin), ('family', 'contact.logged', 'people', 'p1', PulseOrigin.recorded));
+    expect(
+      (p.planetKey, p.kind, p.refTable, p.refId, p.origin),
+      ('family', 'contact.logged', 'people', 'p1', PulseOrigin.recorded),
+    );
     final rows = await repos.activity.since(DateTime(2026));
     expect(rows.single.planetKey, 'family');
     expect(rows.single.at, fixtureNow);
@@ -66,6 +69,19 @@ void main() {
     expect(pulses.single.kind, HomeTasksService.doneKind);
     expect(pulses.single.origin, PulseOrigin.observed);
     expect(pulses.single.refId, task.id);
+  });
+
+  test('a cancel and re-listen while starting subscribes once (no doubled pulses)', () async {
+    // Listen → cancel → listen again before the first start read its
+    // watermark: only the newest start subscribes.
+    final first = hub.pulses.listen((_) {});
+    await first.cancel();
+    hub.pulses.listen(pulses.add);
+    await settle();
+    await repos.activity.log(planetKey: 'body', kind: 'workout.logged', at: fixtureNow);
+    await settle();
+    expect(pulses, hasLength(1));
+    expect(pulses.single.planetKey, 'body');
   });
 
   test('a batch pulses each planet once with the count', () async {

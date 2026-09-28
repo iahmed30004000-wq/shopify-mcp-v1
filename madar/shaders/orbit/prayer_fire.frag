@@ -3,31 +3,27 @@
 #include "lib/common.glsl"
 
 // ---------------------------------------------------------------------------
-// Prayer fire — a small golden oil-lamp flame burning on the tip of a prayer
-// pointer once that prayer is prayed. Teardrop body with a white-gold heart,
-// a faint blue root, swaying/flickering tip, detached tongues that lick
-// upward, rising embers and a warm glow that spills onto the brass below.
-// Tuned for 20–60 px tall flames.
+// Prayer fire — a crown of golden fire around a prayer's star-point once the
+// prayer is prayed: a ring of thin flame filaments (gold at the root, orange
+// toward their flickering tips) radiating from the star, bending in a heat
+// shimmer, tallest on the side they rise toward, with embers drifting off
+// and a soft glow pooling on the brass. Never a candle – a jewel on fire.
 //
-// Uniforms (after common.glsl; sampler 0 = uNoise, the shared noise texture):
+// Uniforms (after common.glsl; sampler 0 = uNoise, the shared noise texture;
+// the contract is unchanged, the meaning of two of them refined):
 //   uSize       canvas size (px) — unused, kept for API symmetry.
-//   uBase       flame root in px (the pointer tip), local canvas coords.
-//   uAngle      direction the flame grows, radians in Flutter canvas space
-//               (same convention as Offset.fromDirection: 0 = +x/right,
-//               -pi/2 = up on screen).
-//   uHeight     full flame height in px (at uIntensity = 1).
+//   uBase       centre of the star-point (px, local canvas coords).
+//   uAngle      direction the fire leans / rises (radians, Flutter canvas
+//               space: 0 = +x, -pi/2 = up on screen).
+//   uHeight     crown size (px): filaments start at 0.3 H and reach up to
+//               ~0.85 H. The painter sizes it by the dial's detail level.
 //   uTime       seconds.
-//   uIntensity  0 = unlit (fully transparent), 0..1 = igniting (a blue bead
-//               with a spark flash grows into the golden flame), 1 = full.
-//   uColorA     outer flame colour (straight sRGB), e.g. #FFA43A.
-//   uColorB     inner heart colour (straight sRGB), e.g. #FFF1C4.
-// Draw rect: Rect.fromCircle(center: uBase + dir * uHeight * 0.4,
-//                            radius: uHeight * 0.95).
+//   uIntensity  0 = unlit (fully transparent), 0..1 = igniting (a spark ring
+//               kindles, the filaments grow), 1 = full.
+//   uColorA     outer / tip colour (straight sRGB), e.g. #F28A3A.
+//   uColorB     root / heart colour (straight sRGB), e.g. #FFE7A3.
+// Draw rect: Rect.fromCircle(center: uBase, radius: uHeight).
 // Output: premultiplied, alpha = max(rgb) → composites like "screen".
-// Look: a golden heart inside a saturated orange-red envelope with visible
-// torn tongues (not a white teardrop); the ignition spark is a small glint
-// (arms 0.18 H) that never reads as a lens flare; 3 embers below 40 px
-// (6 above), spread sideways so they never stack into a dotted line.
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -41,18 +37,9 @@ uniform vec4 uColorB;
 
 out vec4 fragColor;
 
-float pf_sq(float x) { return x * x; }
+const float PF_N = 12.0;       // filaments round the crown
 
-// Teardrop distance (units of flame height). q: x across, y along, measured
-// from the bulb centre; w = bulb radius, h = tip height above the bulb centre.
-float pf_flame(vec2 q, float w, float h) {
-  if (q.y <= 0.0) return length(q) - w;
-  float k = saturate(q.y / h);
-  float hw = w * pow(1.0 - k, 0.85) * (1.0 + 0.35 * k);
-  float slope = w / h;
-  float d = (abs(q.x) - hw) * inversesqrt(1.0 + slope * slope);
-  return q.y > h ? length(vec2(q.x, q.y - h)) : d;
-}
+float pf_sq(float x) { return x * x; }
 
 void main() {
   vec2 frag = FlutterFragCoord().xy;
@@ -61,125 +48,86 @@ void main() {
 
   float t = uTime;
   float H = max(uHeight, 1.0);
-  vec2 dir = vec2(cos(uAngle), sin(uAngle));
-  vec2 dp = frag - uBase;
-  float u = dot(dp, dir) / H;                        // along the flame, 0 at the root
-  float v = (dp.x * dir.y - dp.y * dir.x) / H;       // across
-  float px = 1.0 / H;
+  vec2 p = frag - uBase;                          // px
+  float r = length(p);
+  vec2 n = p / max(r, 1e-4);
+  vec2 rise = vec2(cos(uAngle), sin(uAngle));
+  float up = dot(n, rise);                        // 1 toward where the fire rises
+  float a = atan(p.y, p.x);
 
-  vec3 outer = toLinear(uColorA.rgb);
-  vec3 inner = toLinear(uColorB.rgb);
+  vec3 tipC = toLinear(uColorA.rgb);
+  vec3 rootC = toLinear(uColorB.rgb);
+  float grow = smoothstep(0.1, 0.9, ign);
 
-  // --- growth & flicker ---
-  float grow = smoothstep(0.0, 0.85, ign);
-  float unsteady = 1.0 + (1.0 - grow) * 2.0;        // a young flame is restless
-  float fl1 = noise2(vec2(t * 5.3, 1.1)) - 0.5;
-  float fl2 = noise2(vec2(t * 11.7, 9.3)) - 0.5;
-  float hF = mix(0.22, 0.86, grow) * (1.0 + (fl1 * 0.14 + fl2 * 0.06) * unsteady);
-  float w = mix(0.075, 0.165, grow);
-  float bulbC = w + 0.035;
-  float sway = ((noise2(vec2(t * 1.3, 3.1)) - 0.5) * 0.16 + fl2 * 0.05) * unsteady;
-  float kk = saturate((u - bulbC) / max(hF - bulbC, 0.05));
-  // Ripples travelling up the body make the silhouette breathe.
-  float rip = (noise3(vec3(v * 3.0, u * 5.0 - t * 7.0, t * 0.6)) - 0.5) * 0.05 * kk;
-  vec2 q = vec2(v - sway * kk * kk - rip, u - bulbC);
-  float d = pf_flame(q, w, hF - bulbC);
+  float r0 = 0.3 * H;                             // the star-point's rim
+  // A crown: tall filaments on the side the fire rises toward, short
+  // licks below (never a symmetric sunburst).
+  float reach = 0.62 * H * mix(0.35, 1.0, grow) * (0.22 + 0.78 * smoothstep(-0.45, 0.85, up));
+  float along = (r - r0) / reach;                 // 0 at the root … 1 at full length
 
-  // Heart: smaller, lower, steadier.
-  vec2 qc = vec2(v - sway * kk * kk * 0.6, u - bulbC * 0.95);
-  float dc = pf_flame(qc, w * 0.52, (hF - bulbC) * 0.5);
+  // --- filaments ---
+  // Heat shimmer: the angular coordinate wavers, more toward the tips.
+  float sh = (noise3(vec3(along * 2.4 - t * 3.1, a * 1.7, t * 0.7)) - 0.5) * 0.9 * saturate(along);
+  float fa = a * PF_N / TAU + sh * 0.5;
+  float cell = floor(fa + 0.5);
+  float da = fa - cell;                           // -0.5 … 0.5 across a filament's sector
+  vec3 hc = hash33(vec3(cell, 3.7, 1.1));
+  // Each filament curls a little to one side and flickers in length.
+  da -= (hc.x - 0.5) * 0.5 * pf_sq(saturate(along));
+  float flick = 0.55 + 0.45 * noise2(vec2(t * (2.3 + hc.y * 2.0), cell * 7.1));
+  float len = mix(0.45, 1.0, hc.z) * flick;
+  float lateral = abs(da) * TAU / PF_N * max(r, r0);        // px from the filament's axis
+  float width = max(0.55, H * 0.028) * (1.0 - 0.75 * saturate(along / max(len, 0.05)));
+  float fil = exp(-pf_sq(lateral / width))
+            * smoothstep(-0.05, 0.08, along)
+            * (1.0 - smoothstep(len * 0.55, len, along));
+  vec3 filC = mix(rootC * 1.3, tipC, smoothstep(0.05, 0.85, along / max(len, 0.05)));
 
-  // Two detached tongues licking upward off the tip.
-  float tongue = 0.0;
-  for (int i = 0; i < 2; i++) {
-    float fi = float(i);
-    float per = 0.55 + fi * 0.23;
-    float ph = fract(t / per + fi * 0.5);
-    // Elongated slivers that tear off the tip, stretch and thin as they rise.
-    vec2 tq = vec2(v - sway * 1.2 - (fi - 0.5) * 0.06 * ph, u - (hF * (0.66 + 0.4 * ph)));
-    float td = pf_flame(tq, w * 0.22 * (1.0 - ph * 0.55), 0.2 + 0.12 * ph);
-    tongue += (1.0 - smoothstep(-0.012, 0.018, td)) * pf_sq(1.0 - ph) * smoothstep(0.0, 0.2, ph);
-  }
-  tongue *= grow;
+  // --- the ring of fire hugging the star-point ---
+  float ring = exp(-abs(r - r0) / max(0.8, H * 0.035)) * (0.55 + 0.25 * noise2(vec2(a * 5.0, t * 2.2)));
+  // --- glow pooling on the brass ---
+  float glow = exp(-max(r - r0 * 0.6, 0.0) / (H * 0.2)) * 0.28;
 
-  // --- colour ---
-  float aa = max(px * 1.2, 0.012);
-  // Soft envelope: crisp low on the body, feathered toward the tip.
-  float feather = mix(aa, 0.05, kk);
-  float body = 1.0 - smoothstep(-feather - 0.01, feather, d);
-  float soft = 1.0 - smoothstep(-0.07, 0.0, d);
-  float heart = 1.0 - smoothstep(-0.035, 0.02, dc);
-  // Along the body: luminous gold low, deep orange-red at the flickering tip.
-  vec3 tipC = outer * vec3(1.0, 0.3, 0.1);
-  vec3 bodyC = mix(outer * vec3(1.0, 0.84, 0.55), tipC, smoothstep(0.12, 0.9, kk));
-  // Edge envelope is thinner and redder than the core of the body.
-  vec3 edgeC = outer * vec3(1.0, 0.38, 0.14);
-  vec3 col = mix(edgeC * 0.85, bodyC * 1.05, soft) * body;
-  col += inner * heart * mix(1.5, 0.9, kk);
-  // Faint blue root (hot, oxygen-rich base of a real flame).
-  float root = (1.0 - smoothstep(-0.02, 0.03, d)) * smoothstep(0.02, -0.05, q.y + w * 0.25)
-             * smoothstep(-0.05, 0.0, -dc);
-  col += vec3(0.15, 0.35, 1.0) * root * 0.9 * (0.4 + 0.6 * grow);
-  col += mix(outer * vec3(1.0, 0.6, 0.3), tipC, 0.4) * tongue * (1.0 - body * 0.7) * 1.4;
-
-  // Ignition: begins as a small blue bead, warming to gold.
-  float blueStage = 1.0 - smoothstep(0.08, 0.55, ign);
-  col = mix(col, vec3(0.2, 0.45, 1.0) * luma(col) * 1.6 + inner * heart * 0.35, blueStage * 0.85);
-
-  // --- glow ---
-  float dd = max(d, 0.0);
-  vec3 glowC = mix(outer, inner, 0.25);
-  // (the near glow belongs OUTSIDE the body: on top of it, it bleached the
-  // orange envelope to pale yellow after tonemapping)
-  vec3 glow = glowC * (exp(-dd / 0.045) * 0.45 * (1.0 - body * 0.8) + exp(-dd / 0.13) * 0.16) * (0.4 + 0.6 * grow);
-  // Warm light pooling on the pointer tip.
-  float rb = length(vec2(v, u + 0.02));
-  glow += outer * exp(-rb / 0.1) * 0.3 * grow;
-  // Breathing brightness.
-  float breathe = 1.0 + fl1 * 0.18 + fl2 * 0.08;
-
-  // Ignition spark: a brief 4+4 point glint at the wick while igniting.
-  float spark = exp(-pf_sq((ign - 0.14) / 0.09));
-  if (spark > 0.01) {
-    vec2 sp = vec2(v, u - 0.05) * H;               // px from the spark
-    vec2 a = abs(sp);
-    float armL = H * 0.18;
-    float g = exp(-a.y / 0.7) * saturate(1.0 - a.x / armL) + exp(-a.x / 0.7) * saturate(1.0 - a.y / armL)
-            + exp(-dot(sp, sp) / (H * H * 0.004));
-    glow += vec3(1.0, 0.92, 0.75) * g * spark * 0.9;
-  }
-
-  // --- embers ---
+  // --- embers drifting off the crown ---
   vec3 emb = vec3(0.0);
-  float emberAmt = smoothstep(0.45, 1.0, ign);
-  float nEmb = H < 40.0 ? 3.0 : 6.0;             // few embers on a tiny flame
-  if (emberAmt > 0.0) {
-    for (int i = 0; i < 6; i++) {
-      float fi = float(i);
-      vec3 h = hash33(vec3(fi * 7.3 + 1.7, fi * 3.1 + 0.4, 5.9));
-      float per = 1.4 + h.x * 1.3;
-      float ph = fract(t / per + h.y);
-      float cyc = floor(t / per + h.y);
-      vec3 h2 = hash33(vec3(cyc, fi, 2.3));          // fresh path every cycle
-      float eu = hF * 1.02 + ph * (0.4 + 0.35 * h2.x);
-      float ev = (h2.y - 0.5) * 0.3 * ph + sin(t * (2.0 + h.z * 2.0) + fi) * 0.025 * ph + sway * 0.8;
-      vec2 e = (vec2(v, u) - vec2(ev, eu)) * H;      // px
-      float sz = max(0.9, H * 0.018);
-      float b = exp(-dot(e, e) / (sz * sz)) * pf_sq(1.0 - ph) * smoothstep(0.0, 0.08, ph);
-      b *= 0.6 + 0.4 * sin(t * 17.0 + fi * 3.0);    // twinkle
-      b *= step(fi, nEmb - 0.5);                     // 3 or 6 embers
-      emb += mix(inner * 1.2, outer * vec3(1.0, 0.45, 0.2), ph) * b * 2.2;
-    }
+  float emberAmt = smoothstep(0.5, 1.0, ign);
+  float nEmb = H < 20.0 ? 3.0 : 5.0;
+  for (int i = 0; i < 5; i++) {
+    float fi = float(i);
+    vec3 h = hash33(vec3(fi * 7.3 + 1.7, fi * 3.1 + 0.4, 5.9));
+    float per = 1.3 + h.x * 1.2;
+    float ph = fract(t / per + h.y);
+    float cyc = floor(t / per + h.y);
+    vec3 h2 = hash33(vec3(cyc, fi, 2.3));
+    // leave the crown toward the rising side, spread around it
+    float ea = uAngle + (h2.x - 0.5) * 2.4;
+    vec2 ed = vec2(cos(ea), sin(ea));
+    vec2 epos = ed * (r0 + ph * H * (0.55 + 0.35 * h2.y)) + rise * ph * H * 0.12;
+    vec2 e = p - epos;
+    float sz = max(0.7, H * 0.022);
+    float b = exp(-dot(e, e) / (sz * sz)) * pf_sq(1.0 - ph) * smoothstep(0.0, 0.1, ph);
+    b *= 0.6 + 0.4 * sin(t * 17.0 + fi * 3.0);
+    b *= step(fi, nEmb - 0.5);
+    emb += mix(rootC * 1.2, tipC, ph) * b * 2.0;
   }
 
-  vec3 total = (col + glow) * breathe + emb * emberAmt * (1.0 - body);
-  total *= smoothstep(0.0, 0.12, ign);
-  // Fade out before the draw rect edge (rect = centre ± 0.95 H).
-  float rc = length(vec2(v, u - 0.4));
-  total *= 1.0 - smoothstep(0.72, 0.93, rc);
+  // --- ignition: a spark ring kindling ---
+  float spark = exp(-pf_sq((ign - 0.2) / 0.12));
+  float sparkRing = exp(-pf_sq((r - r0 * (0.8 + ign * 1.2)) / max(0.8, H * 0.04))) * spark;
 
-  vec3 g = toGamma(tonemapACES(total));
-  float a = saturate(max(g.r, max(g.g, g.b)));
-  g = dither(frag, g) * step(0.002, a);
-  fragColor = vec4(min(g, vec3(a)), a);
+  float breathe = 1.0 + (noise2(vec2(t * 4.1, 2.3)) - 0.5) * 0.25;
+  vec3 col = filC * fil * 1.25 * grow
+           + mix(rootC, tipC, 0.35) * ring * (0.4 + 0.6 * grow)
+           + mix(tipC, rootC, 0.3) * glow * grow
+           + emb * emberAmt
+           + rootC * sparkRing * 1.2;
+  col *= breathe * smoothstep(0.0, 0.1, ign);
+  // Nothing inside the star-point itself (the brass star shows), nothing at
+  // the draw rect's edge.
+  col *= smoothstep(r0 * 0.55, r0 * 0.9, r) * (1.0 - smoothstep(0.82 * H, 0.98 * H, r));
+
+  vec3 g = toGamma(tonemapACES(col));
+  float alpha = saturate(max(g.r, max(g.g, g.b)));
+  g = dither(frag, g) * step(0.002, alpha);
+  fragColor = vec4(min(g, vec3(alpha)), alpha);
 }

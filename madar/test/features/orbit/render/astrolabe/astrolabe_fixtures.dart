@@ -17,8 +17,14 @@ abstract final class AmmanDay {
   /// Amman clock time on the fixture day (as a local DateTime).
   static DateTime at(int h, int m, [int s = 0]) => DateTime(2026, 9, 27, h, m, s);
 
-  static DateTime _instant(DateTime clock) =>
-      DateTime.utc(clock.year, clock.month, clock.day, clock.hour, clock.minute, clock.second).subtract(const Duration(hours: 3));
+  static DateTime _instant(DateTime clock) => DateTime.utc(
+    clock.year,
+    clock.month,
+    clock.day,
+    clock.hour,
+    clock.minute,
+    clock.second,
+  ).subtract(const Duration(hours: 3));
 
   static final DayTimes times = DayTimes(
     day: DateTime(2026, 9, 27),
@@ -34,24 +40,66 @@ abstract final class AmmanDay {
     final t = times;
     final nextFajr = t.fajr.add(const Duration(days: 1));
     if (now.isBefore(t.fajr)) {
-      return WindowState(window: PrayerWindow.isha, start: t.isha.subtract(const Duration(days: 1)), end: t.fajr, nextPrayer: Prayer.fajr, nextPrayerAt: t.fajr);
+      return WindowState(
+        window: PrayerWindow.isha,
+        start: t.isha.subtract(const Duration(days: 1)),
+        end: t.fajr,
+        nextPrayer: Prayer.fajr,
+        nextPrayerAt: t.fajr,
+      );
     }
     if (now.isBefore(t.sunrise)) {
-      return WindowState(window: PrayerWindow.fajr, start: t.fajr, end: t.sunrise, nextPrayer: Prayer.dhuhr, nextPrayerAt: t.dhuhr);
+      return WindowState(
+        window: PrayerWindow.fajr,
+        start: t.fajr,
+        end: t.sunrise,
+        nextPrayer: Prayer.dhuhr,
+        nextPrayerAt: t.dhuhr,
+      );
     }
     if (now.isBefore(t.dhuhr)) {
-      return WindowState(window: PrayerWindow.duha, start: t.sunrise, end: t.dhuhr, nextPrayer: Prayer.dhuhr, nextPrayerAt: t.dhuhr);
+      return WindowState(
+        window: PrayerWindow.duha,
+        start: t.sunrise,
+        end: t.dhuhr,
+        nextPrayer: Prayer.dhuhr,
+        nextPrayerAt: t.dhuhr,
+      );
     }
     if (now.isBefore(t.asr)) {
-      return WindowState(window: PrayerWindow.dhuhr, start: t.dhuhr, end: t.asr, nextPrayer: Prayer.asr, nextPrayerAt: t.asr);
+      return WindowState(
+        window: PrayerWindow.dhuhr,
+        start: t.dhuhr,
+        end: t.asr,
+        nextPrayer: Prayer.asr,
+        nextPrayerAt: t.asr,
+      );
     }
     if (now.isBefore(t.maghrib)) {
-      return WindowState(window: PrayerWindow.asr, start: t.asr, end: t.maghrib, nextPrayer: Prayer.maghrib, nextPrayerAt: t.maghrib);
+      return WindowState(
+        window: PrayerWindow.asr,
+        start: t.asr,
+        end: t.maghrib,
+        nextPrayer: Prayer.maghrib,
+        nextPrayerAt: t.maghrib,
+      );
     }
     if (now.isBefore(t.isha)) {
-      return WindowState(window: PrayerWindow.maghrib, start: t.maghrib, end: t.isha, nextPrayer: Prayer.isha, nextPrayerAt: t.isha);
+      return WindowState(
+        window: PrayerWindow.maghrib,
+        start: t.maghrib,
+        end: t.isha,
+        nextPrayer: Prayer.isha,
+        nextPrayerAt: t.isha,
+      );
     }
-    return WindowState(window: PrayerWindow.isha, start: t.isha, end: nextFajr, nextPrayer: Prayer.fajr, nextPrayerAt: nextFajr);
+    return WindowState(
+      window: PrayerWindow.isha,
+      start: t.isha,
+      end: nextFajr,
+      nextPrayer: Prayer.fajr,
+      nextPrayerAt: nextFajr,
+    );
   }
 
   static AstrolabeSky skyAt(DateTime clock) {
@@ -72,7 +120,7 @@ abstract final class AmmanDay {
     DateTime now, {
     String lang = 'ar',
     Set<Prayer> prayed = const {},
-    Set<Prayer>? missed,
+    Set<Prayer> missed = const {},
     double balance = 0.85,
     DigitStyle digits = DigitStyle.auto,
   }) => AstrolabeState(

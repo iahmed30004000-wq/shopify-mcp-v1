@@ -32,6 +32,7 @@ class OrbitPulseHub {
   StreamSubscription<Set<TableUpdate>>? _inserts;
   int _watermark = 0;
   bool _started = false;
+  int _generation = 0;
   bool _polling = false;
   bool _pollAgain = false;
   bool _disposed = false;
@@ -74,14 +75,16 @@ class OrbitPulseHub {
       if (_recorded.length > 512) _recorded.clear();
       _recorded.add(row.id);
       if (!_disposed) {
-        _controller.add(PlanetPulse(
-          planetKey: planetKey,
-          kind: kind,
-          at: row.at,
-          refTable: refTable,
-          refId: refId,
-          activityId: row.id,
-        ));
+        _controller.add(
+          PlanetPulse(
+            planetKey: planetKey,
+            kind: kind,
+            at: row.at,
+            refTable: refTable,
+            refId: refId,
+            activityId: row.id,
+          ),
+        );
       }
     } finally {
       final left = (_pending[signature] ?? 1) - 1;
@@ -96,10 +99,14 @@ class OrbitPulseHub {
   Future<void> _start() async {
     if (_started || _disposed) return;
     _started = true;
+    // A cancel + re-listen while the watermark is read starts a newer
+    // generation: only the newest one subscribes (never two).
+    final generation = ++_generation;
     final maxId = _db.activityLog.rowId.max();
-    _watermark =
+    final watermark =
         await (_db.selectOnly(_db.activityLog)..addColumns([maxId])).map((r) => r.read(maxId)).getSingleOrNull() ?? 0;
-    if (!_started || _disposed) return;
+    if (!_started || _disposed || generation != _generation) return;
+    _watermark = watermark;
     _inserts = _db
         .tableUpdates(TableUpdateQuery.onTable(_db.activityLog, limitUpdateKind: UpdateKind.insert))
         .listen((_) => unawaited(_poll()));
@@ -107,6 +114,7 @@ class OrbitPulseHub {
 
   Future<void> _stop() async {
     _started = false;
+    _generation++;
     await _inserts?.cancel();
     _inserts = null;
   }
@@ -140,16 +148,18 @@ class OrbitPulseHub {
         }
         for (final e in byPlanet.entries) {
           final latest = e.value.last;
-          _controller.add(PlanetPulse(
-            planetKey: e.key,
-            kind: latest.kind,
-            at: latest.at,
-            refTable: latest.refTable,
-            refId: latest.refId,
-            count: e.value.length,
-            origin: PulseOrigin.observed,
-            activityId: latest.id,
-          ));
+          _controller.add(
+            PlanetPulse(
+              planetKey: e.key,
+              kind: latest.kind,
+              at: latest.at,
+              refTable: latest.refTable,
+              refId: latest.refId,
+              count: e.value.length,
+              origin: PulseOrigin.observed,
+              activityId: latest.id,
+            ),
+          );
         }
       } while (_pollAgain && _started && !_disposed);
     } finally {

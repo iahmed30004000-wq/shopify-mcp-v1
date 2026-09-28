@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart' show ValueListenable;
 
 import '../domain/scene_snapshot.dart';
 
@@ -22,7 +23,10 @@ typedef SnapshotCompute = Future<SceneSnapshot> Function(DateTime now);
 /// Only one computation runs at a time; changes during a run schedule one
 /// more. Snapshots whose [SceneSnapshot.contentHash] equals the previous
 /// one are not emitted, so listeners only hear real changes. Cancelling the
-/// subscription stops every timer.
+/// subscription stops every timer; pausing it (or [active] turning false –
+/// the app in the background) stops them too and drops the table
+/// subscription, and resuming recomputes once and re-arms them: nothing
+/// queries the database while nobody can see the result.
 class SceneSnapshotWatcher {
   SceneSnapshotWatcher({
     required this.updates,
@@ -31,6 +35,7 @@ class SceneSnapshotWatcher {
     this.debounce = const Duration(milliseconds: 250),
     this.maxWait = const Duration(seconds: 1),
     this.tick = const Duration(seconds: 60),
+    this.active,
   }) : _clock = clock ?? DateTime.now;
 
   /// Watches [tables] of [db].
@@ -42,6 +47,7 @@ class SceneSnapshotWatcher {
     Duration debounce = const Duration(milliseconds: 250),
     Duration maxWait = const Duration(seconds: 1),
     Duration? tick = const Duration(seconds: 60),
+    ValueListenable<bool>? active,
   }) => SceneSnapshotWatcher(
     updates: db.tableUpdates(TableUpdateQuery.onAllTables(tables)),
     compute: compute,
@@ -49,6 +55,7 @@ class SceneSnapshotWatcher {
     debounce: debounce,
     maxWait: maxWait,
     tick: tick,
+    active: active,
   );
 
   /// Change notifications (any event triggers a debounced recomputation).
@@ -61,6 +68,10 @@ class SceneSnapshotWatcher {
   /// Longest wait between time-based refreshes (null = no ticking).
   final Duration? tick;
 
+  /// Whether anyone can see the result (the app is in the foreground); null
+  /// = always.
+  final ValueListenable<bool>? active;
+
   /// The snapshot stream. Each listen starts its own watch.
   Stream<SceneSnapshot> watch() {
     late final StreamController<SceneSnapshot> controller;
@@ -72,10 +83,13 @@ class SceneSnapshotWatcher {
     var running = false;
     var dirty = false;
     var closed = false;
+    var paused = false;
+    var asleep = !(active?.value ?? true);
     int? lastHash;
+    bool idle() => closed || paused || asleep;
 
     Future<void> run() async {
-      if (closed) return;
+      if (idle()) return;
       if (running) {
         dirty = true;
         return;
@@ -114,7 +128,7 @@ class SceneSnapshotWatcher {
 
     void scheduleTick() {
       final every = tick;
-      if (every == null || closed) return;
+      if (every == null || idle()) return;
       tickTimer?.cancel();
       final now = _clock();
       // Just after the next minute boundary …
@@ -132,18 +146,55 @@ class SceneSnapshotWatcher {
       });
     }
 
+    void start() {
+      if (idle()) return;
+      changes ??= updates.listen(
+        onChange,
+        onError: (Object e, StackTrace st) {
+          if (!closed) controller.addError(e, st);
+        },
+      );
+      unawaited(run().then((_) => scheduleTick()));
+    }
+
+    void stop() {
+      debounceTimer?.cancel();
+      tickTimer?.cancel();
+      debounceTimer = tickTimer = null;
+      firstPending = null;
+      final c = changes;
+      changes = null;
+      if (c != null) unawaited(c.cancel());
+    }
+
+    void onActive() {
+      final sleeping = !(active?.value ?? true);
+      if (sleeping == asleep) return;
+      asleep = sleeping;
+      if (asleep) {
+        stop();
+      } else {
+        start();
+      }
+    }
+
     controller = StreamController<SceneSnapshot>(
       onListen: () {
-        changes = updates.listen(onChange, onError: (Object e, StackTrace st) {
-          if (!closed) controller.addError(e, st);
-        });
-        unawaited(run().then((_) => scheduleTick()));
+        active?.addListener(onActive);
+        start();
+      },
+      onPause: () {
+        paused = true;
+        stop();
+      },
+      onResume: () {
+        paused = false;
+        start();
       },
       onCancel: () async {
         closed = true;
-        debounceTimer?.cancel();
-        tickTimer?.cancel();
-        await changes?.cancel();
+        active?.removeListener(onActive);
+        stop();
       },
     );
     return controller.stream;

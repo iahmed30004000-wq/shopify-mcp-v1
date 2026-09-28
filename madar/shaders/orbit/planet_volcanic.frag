@@ -91,7 +91,9 @@ void main() {
   float act = smoothstep(0.02, 1.0, uScore);
   float fasting = saturate(uExtra.x);
   float train = saturate(uExtra.y);
-  float detail = saturate(uDetail);
+  // Small worlds keep more of their structure (thin veins, cooling
+  // cracks) instead of melting into a glowing blob.
+  float detail = saturate(max(uDetail, sqrt(max(uDetail, 0.0)) * 0.9));
 
   vec3 surf = toLinear(uColorA.rgb);
   vec3 glow = toLinear(uColorB.rgb);
@@ -156,17 +158,20 @@ void main() {
     // Pixel footprint on the surface (planet radii) for band-limiting.
     float pxq = px / max(n.z, 0.2);
     float wM0 = mix(0.045, 0.13, wide) * mix(0.9, 1.3, th);   // thriving rivers swell
-    float wM = max(wM0, pxq * 6.5);                      // ≥ ~1 px wide channels
-    // Widened (small) channels keep most of their energy but not all of it:
-    // a 22–40 px world shows glowing veins on dark crust, not a molten ball.
-    float lodE = pow(wM0 / wM, 0.7);
+    // ≥ ~1 px wide channels, but never wider than 0.1 in contour space: the
+    // lava keeps to ≈ 30 % of the surface at any size (a small world shows
+    // thin glowing veins on near-black crust, not a molten yellow ball).
+    float wMpx = max(wM0, pxq * 6.5);
+    float wM = min(wMpx, 0.085);
+    // Widened channels keep most of their energy but not all of it.
+    float lodE = pow(wM0 / wMpx, 0.7);
     float coreM = smoothstep(1.0 - wM, 1.0 - wM * 0.3, major);
-    float bank = smoothstep(1.0 - wM * 4.5, 1.0 - wM * 0.5, major);
+    float bank = smoothstep(1.0 - wM * 2.6, 1.0 - wM * 0.5, major);
     // Tributaries: |v2 - 0.5| / |grad v2| is the distance to the contour, so the
     // line has a constant width, and the tiny closed loops that value noise
     // draws around its extrema (where the gradient vanishes) fade out instead
     // of reading as procedural 'O' rings.
-    float tribBand = smoothstep(1.0 - wM * 7.0, 1.0 - wM * 1.5, major) * smoothstep(0.02, 0.008, pxq);
+    float tribBand = smoothstep(1.0 - wM * 6.0, 1.0 - wM * 1.5, major) * smoothstep(0.03, 0.012, pxq);
     float trib = 0.0;
     if (tribBand > 0.001) {
       vec3 tq = wq * 3.4 + 5.1;
@@ -259,14 +264,15 @@ void main() {
     float dayside = smoothstep(-0.3, 0.4, ndl);
 
     // Glassy obsidian highlight (dulled by ash).
-    vec3 lit = basalt * diff * 2.4;
+    // near-black crust: the light is in the rivers
+    vec3 lit = basalt * diff * 1.5;
     lit += vec3(1.0, 0.88, 0.75) * gloss * (0.04 + 0.1 * grain) * saturate(1.0 + relief) * (1.0 - chan) * (1.0 - ng * 0.8);
 
     // Emission.
     vec3 emit = volHeat(T, surf, glow, deep) * saturate(T * 5.0);
     emit *= 0.8 + 0.55 * night;
     // Warm light spilling from the channels onto the surrounding crust.
-    emit += surf * pow(smoothstep(1.0 - wM * 8.0, 1.0, major), 3.0) * hot * mix(0.03, 0.06, th) * (0.5 + night);
+    emit += surf * pow(smoothstep(1.0 - wM * 6.0, 1.0, major), 3.0) * hot * mix(0.02, 0.045, th) * (0.5 + night);
     emit += mix(glow, vec3(1.0, 0.72, 0.22), 0.5) * (fastWave * (coreM * 2.0 + trib * 0.8 + bank * 0.35) + fastBreath * coreM * 0.25);
     emit += mix(glow, vec3(1.0, 0.9, 0.7), 0.35) * vent * (1.2 + 1.8 * night);
 

@@ -2198,6 +2198,9 @@ class L10nEn extends L10n {
   String get orbitSourceTrips => 'Trips';
 
   @override
+  String get orbitSourceActivity => 'Logged activity';
+
+  @override
   String get orbitArchetypeFaith => 'Engraved gold dome';
 
   @override
@@ -2261,8 +2264,8 @@ class L10nEn extends L10n {
   }
 
   @override
-  String orbitCountdown(String prayer, String duration) {
-    return '$prayer in $duration';
+  String orbitMoonSemantics(String name, String planet) {
+    return '$name, a moon of $planet';
   }
 
   @override
@@ -2271,6 +2274,15 @@ class L10nEn extends L10n {
   @override
   String get orbitBuiltInCannotDelete =>
       'Built-in planets can be hidden, not deleted';
+
+  @override
+  String get orbitPlanetNeedsName => 'Give the planet a name';
+
+  @override
+  String get orbitUnknownSource => 'This data source isn\'t available';
+
+  @override
+  String get orbitPlanetGone => 'This planet is no longer in your orbit';
 
   @override
   String get orbitUndoRenamed => 'Planet renamed';
@@ -2370,4 +2382,506 @@ class L10nEn extends L10n {
 
   @override
   String get astrolabeMakersMark => 'MADAR';
+
+  @override
+  String get astrolabeStarDenebKaitos => 'Deneb Kaitos';
+
+  @override
+  String get astrolabeStarMenkar => 'Menkar';
+
+  @override
+  String get astrolabeStarAldebaran => 'Aldebaran';
+
+  @override
+  String get astrolabeStarRigel => 'Rigel';
+
+  @override
+  String get astrolabeStarBetelgeuse => 'Betelgeuse';
+
+  @override
+  String get astrolabeStarSirius => 'Sirius';
+
+  @override
+  String get astrolabeStarProcyon => 'Procyon';
+
+  @override
+  String get astrolabeStarAlphard => 'Alphard';
+
+  @override
+  String get astrolabeStarRegulus => 'Regulus';
+
+  @override
+  String get astrolabeStarDenebola => 'Denebola';
+
+  @override
+  String get astrolabeStarSpica => 'Spica';
+
+  @override
+  String get astrolabeStarArcturus => 'Arcturus';
+
+  @override
+  String get astrolabeStarUnukalhai => 'Unukalhai';
+
+  @override
+  String get astrolabeStarRasAlhague => 'Rasalhague';
+
+  @override
+  String get astrolabeStarAltair => 'Altair';
+
+  @override
+  String get astrolabeStarDenebAlgedi => 'Deneb Algedi';
+
+  @override
+  String get astrolabeStarMarkab => 'Markab';
+
+  @override
+  String get astrolabeZodiacAries => 'Aries';
+
+  @override
+  String get astrolabeZodiacTaurus => 'Taurus';
+
+  @override
+  String get astrolabeZodiacGemini => 'Gemini';
+
+  @override
+  String get astrolabeZodiacCancer => 'Cancer';
+
+  @override
+  String get astrolabeZodiacLeo => 'Leo';
+
+  @override
+  String get astrolabeZodiacVirgo => 'Virgo';
+
+  @override
+  String get astrolabeZodiacLibra => 'Libra';
+
+  @override
+  String get astrolabeZodiacScorpio => 'Scorpio';
+
+  @override
+  String get astrolabeZodiacSagittarius => 'Sagittarius';
+
+  @override
+  String get astrolabeZodiacCapricorn => 'Capricorn';
+
+  @override
+  String get astrolabeZodiacAquarius => 'Aquarius';
+
+  @override
+  String get astrolabeZodiacPisces => 'Pisces';
+
+  @override
+  String astrolabeCountdownUntil(String prayer) {
+    return 'to $prayer';
+  }
+
+  @override
+  String get astrolabeCountdownNowBand => 'it is time';
+
+  @override
+  String skySemantics(String sky, String moon) {
+    return 'Sky now: $sky. $moon';
+  }
+
+  @override
+  String get skyMoodNight => 'night';
+
+  @override
+  String get skyMoodDawn => 'dawn';
+
+  @override
+  String get skyMoodSunrise => 'sunrise';
+
+  @override
+  String get skyMoodDay => 'clear day';
+
+  @override
+  String get skyMoodGoldenHour => 'golden hour';
+
+  @override
+  String get skyMoodSunset => 'sunset';
+
+  @override
+  String get skyMoodDusk => 'dusk';
+
+  @override
+  String get skyMoonBelow => 'The moon is below the horizon';
+
+  @override
+  String skyMoonPhase(String phase, String percent) {
+    return 'Moon: $phase, $percent lit';
+  }
+
+  @override
+  String get skyMoonNew => 'new moon';
+
+  @override
+  String get skyMoonWaxingCrescent => 'waxing crescent';
+
+  @override
+  String get skyMoonFirstQuarter => 'first quarter';
+
+  @override
+  String get skyMoonWaxingGibbous => 'waxing gibbous';
+
+  @override
+  String get skyMoonFull => 'full moon';
+
+  @override
+  String get skyMoonWaningGibbous => 'waning gibbous';
+
+  @override
+  String get skyMoonLastQuarter => 'last quarter';
+
+  @override
+  String get skyMoonWaningCrescent => 'waning crescent';
+
+  @override
+  String get skyStarNames => 'Star names';
+
+  @override
+  String get skyStarNamesHint =>
+      'Engraves the traditional Arabic names of the brightest stars in the night sky';
+
+  @override
+  String planetsSystemSemantics(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Your life\'s orbit: $n worlds circling your star',
+      one: 'Your life\'s orbit: 1 world circling your star',
+      zero: 'Your life\'s orbit, no worlds shown',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get planetsOpenHint => 'Fly into this world';
+
+  @override
+  String get planetsCustomizeHint => 'Customise this world';
+
+  @override
+  String get planetsMoonOpenHint => 'Open';
+
+  @override
+  String planetsMoonsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n moons',
+      one: '1 moon',
+      zero: 'no moons',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get orbitUiSceneHint =>
+      'Drag to turn the orbit, pinch to zoom into a world';
+
+  @override
+  String get orbitUiRecenter => 'Back to the whole orbit';
+
+  @override
+  String get orbitUiRadarClear =>
+      'All your worlds are in balance — nothing needs you right now';
+
+  @override
+  String get orbitUiRadarWaiting =>
+      'The radar wakes up once you log your first activities';
+
+  @override
+  String orbitUiRadarEntrySemantics(String planet, String reason) {
+    return '$planet: $reason';
+  }
+
+  @override
+  String get orbitUiRadarOpenHint => 'Fly to this world';
+
+  @override
+  String get orbitUiBalanceLabel => 'Balance';
+
+  @override
+  String orbitUiPlanetWeight(String weight) {
+    return 'Weight in your balance ×$weight';
+  }
+
+  @override
+  String get orbitUiPlanetNotCounted => 'Not counted in your balance';
+
+  @override
+  String get orbitUiReasonsTitle => 'What needs your care';
+
+  @override
+  String get orbitUiReasonsNone => 'Nothing is overdue here — well done';
+
+  @override
+  String get orbitUiReasonsDormant =>
+      'This world is calm, waiting for your first entries';
+
+  @override
+  String get orbitUiSourcesTitle => 'What feeds this balance';
+
+  @override
+  String get orbitUiMoonsTitle => 'Moons';
+
+  @override
+  String get orbitUiMoonsNone => 'No moons circle this world yet';
+
+  @override
+  String get orbitUiMoonKindPerson => 'Person';
+
+  @override
+  String get orbitUiMoonKindWallet => 'Wallet';
+
+  @override
+  String get orbitUiMoonKindBoard => 'Board';
+
+  @override
+  String get orbitUiMoonKindTrip => 'Trip';
+
+  @override
+  String get orbitUiMoonKindModule => 'Module';
+
+  @override
+  String orbitUiMoonFreshness(String percent) {
+    return 'Freshness $percent';
+  }
+
+  @override
+  String get orbitUiMoonSelected => 'The moon you picked';
+
+  @override
+  String get orbitUiCustomize => 'Customise';
+
+  @override
+  String orbitUiCustomizeTitle(String planet) {
+    return 'Customise $planet';
+  }
+
+  @override
+  String get orbitUiCustomizeSubtitle => 'Every change can be undone';
+
+  @override
+  String get orbitUiEditLook => 'Name and look';
+
+  @override
+  String get orbitUiEditWeight => 'Weight in the balance';
+
+  @override
+  String get orbitUiEditSources => 'Data sources';
+
+  @override
+  String get orbitUiMoveOrbit => 'Move its orbit';
+
+  @override
+  String get orbitUiHide => 'Hide from the orbit';
+
+  @override
+  String get orbitUiReset => 'Restore the original';
+
+  @override
+  String get orbitUiDelete => 'Delete this world';
+
+  @override
+  String get orbitUiAddPlanet => 'Add a new world';
+
+  @override
+  String get orbitUiHiddenWorlds => 'Hidden worlds';
+
+  @override
+  String get orbitUiFieldName => 'Name';
+
+  @override
+  String get orbitUiFieldColor => 'Colour';
+
+  @override
+  String get orbitUiFieldStyle => 'World style';
+
+  @override
+  String get orbitUiFieldWeight => 'Weight';
+
+  @override
+  String get orbitUiWeightNone => 'Not counted';
+
+  @override
+  String get orbitUiWeightNormal => 'Normal';
+
+  @override
+  String get orbitUiWeightMost => 'Most important';
+
+  @override
+  String get orbitUiSourcesHint => 'Slide a source to zero to switch it off';
+
+  @override
+  String get orbitUiSourceOff => 'Off';
+
+  @override
+  String get orbitUiMoveTitle => 'Orbit position';
+
+  @override
+  String get orbitUiMoveSubtitle => 'Closest to your star first';
+
+  @override
+  String orbitUiMoveBefore(String planet) {
+    return 'Before $planet';
+  }
+
+  @override
+  String get orbitUiMoveLast => 'Outermost orbit';
+
+  @override
+  String orbitUiOrbitNumber(String n) {
+    return 'Orbit $n';
+  }
+
+  @override
+  String orbitUiPrayerAt(String time) {
+    return 'At $time';
+  }
+
+  @override
+  String get orbitUiPrayerPrayed => 'Prayed';
+
+  @override
+  String get orbitUiPrayerLate => 'Prayed late';
+
+  @override
+  String get orbitUiPrayerMissed => 'Missed it';
+
+  @override
+  String get orbitUiPrayerClear => 'Clear the log';
+
+  @override
+  String get orbitUiPrayerNotYet => 'Its time hasn\'t come yet';
+
+  @override
+  String orbitUiPrayerLogged(String prayer) {
+    return '$prayer logged';
+  }
+
+  @override
+  String orbitUiPrayerCleared(String prayer) {
+    return '$prayer log cleared';
+  }
+
+  @override
+  String get orbitUiPrayerHint => 'Log this prayer';
+
+  @override
+  String get orbitUiPlanetMissing => 'This world is no longer in your orbit';
+
+  @override
+  String get orbitUiBackToOrbit => 'Back to the orbit';
+
+  @override
+  String orbitUiInDuration(String duration) {
+    return 'in $duration';
+  }
+
+  @override
+  String orbitUiPrayerPrayedAt(String time) {
+    return 'Prayed at $time';
+  }
+
+  @override
+  String orbitUiPrayerLateAt(String time) {
+    return 'Prayed late at $time';
+  }
+
+  @override
+  String orbitUiMoonOf(String kind, String planet) {
+    return '$kind in $planet';
+  }
+
+  @override
+  String get orbitUiMoonInTouch => 'In touch today';
+
+  @override
+  String orbitUiMoonInTouchLogged(String name) {
+    return 'Logged: in touch with $name';
+  }
+
+  @override
+  String get orbitUiMoonRename => 'Rename';
+
+  @override
+  String get orbitUiMoonRenamed => 'Renamed';
+
+  @override
+  String orbitUiMoonLastContact(String when) {
+    return 'Last in touch: $when';
+  }
+
+  @override
+  String orbitUiMoonTripStarts(String date) {
+    return 'Starts $date';
+  }
+
+  @override
+  String get orbitUiMoonNever => 'Not logged yet';
+
+  @override
+  String orbitUiListSeparator(String a, String b) {
+    return '$a · $b';
+  }
+
+  @override
+  String orbitUiFraction(String done, String total) {
+    return '$done/$total';
+  }
+
+  @override
+  String get orbitUiPrayerDone => 'Prayed';
+
+  @override
+  String get orbitUiPrayerLateDone => 'Prayed late';
+
+  @override
+  String get orbitUiPanelExpand =>
+      'Show this window\'s tasks and the Neglect Radar';
+
+  @override
+  String get orbitUiPanelCollapse => 'Fold the panel and show the orbit';
+
+  @override
+  String get orbitUiRadarLineJoin => ' — ';
+
+  @override
+  String get orbitUiTodayPrayersTitle => 'Today\'s prayers';
+
+  @override
+  String orbitUiPrayersProgress(String done, String total) {
+    return '$done of $total prayed';
+  }
+
+  @override
+  String get orbitUiPrayerStatusPrayed => 'Prayed';
+
+  @override
+  String get orbitUiPrayerStatusDue => 'Due now';
+
+  @override
+  String get orbitUiPrayerStatusMissed => 'Missed';
+
+  @override
+  String get orbitUiPrayerStatusUpcoming => 'Upcoming';
+
+  @override
+  String get orbitUiWirdTitle => 'Wird and adhkar';
+
+  @override
+  String get orbitUiWorldTasksTitle => 'Today on this world';
+
+  @override
+  String get orbitUiWorldTasksNone => 'Nothing planned for this world today';
+
+  @override
+  String orbitUiSourceSemantics(String source, String value) {
+    return '$source: $value';
+  }
+
+  @override
+  String get orbitUiMoonWaiting => 'Waiting on you';
 }

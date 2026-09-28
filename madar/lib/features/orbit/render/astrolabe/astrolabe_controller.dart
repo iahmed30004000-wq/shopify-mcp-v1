@@ -60,15 +60,21 @@ class AstrolabeController extends ChangeNotifier {
   set tilt(AstrolabeTilt value) {
     if (value == _tilt) return;
     _tilt = value;
+    _light = lightFor(value);
     notifyListeners();
   }
+
+  Offset _light = lightFor(AstrolabeTilt.flat);
 
   /// Unit light direction in the screen plane for the brushed brass: from
   /// the upper left, swinging with the tilt (the highlight slides across the
   /// metal as the phone turns).
-  Offset get light {
-    final x = -0.52 + _tilt.yaw * 2.4;
-    final y = -0.85 + _tilt.pitch * 2.4;
+  Offset get light => _light;
+
+  /// The brass light direction for a disc [tilt].
+  static Offset lightFor(AstrolabeTilt tilt) {
+    final x = -0.52 + tilt.yaw * 2.4;
+    final y = -0.85 + tilt.pitch * 2.4;
     final len = math.sqrt(x * x + y * y);
     return len < 1e-6 ? const Offset(0, -1) : Offset(x / len, y / len);
   }
@@ -99,12 +105,13 @@ class AstrolabeController extends ChangeNotifier {
   void addIgniteListener(AstrolabeIgniteListener l) => _igniteListeners.add(l);
   void removeIgniteListener(AstrolabeIgniteListener l) => _igniteListeners.remove(l);
 
-  /// Pushes a new [state]. Prayers that became logged ignite (0 → 1 over
-  /// [igniteDuration], ignite listeners are told and the core star pulses)
-  /// unless [animate] is false or reduced motion is on; un-logged ones go
-  /// out quickly. Returns the prayers that started igniting.
+  /// Pushes a new [state]. Prayers that became logged ignite: ignite
+  /// listeners are told, the core star pulses and the fire grows 0 → 1 over
+  /// [igniteDuration] (at once under reduced motion). Un-logged ones go out
+  /// quickly. The first state, and any pushed with [animate] false, is shown
+  /// as it is without celebrating. Returns the prayers that ignited.
   List<Prayer> update(AstrolabeState next, {bool animate = true}) {
-    final first = _state == null;
+    final quiet = _state == null || !animate;
     _state = next;
     final lit = <Prayer>[];
     for (var i = 0; i < 5; i++) {
@@ -113,18 +120,18 @@ class AstrolabeController extends ChangeNotifier {
       if (on == _target[i]) continue;
       _target[i] = on;
       if (on == 1) {
-        if (first || !animate || _reducedMotion) {
+        if (quiet) {
           _ignition[i] = 1;
         } else {
-          _ignition[i] = math.min(_ignition[i], 0.001);
+          _ignition[i] = _reducedMotion ? 1 : math.min(_ignition[i], 0.001);
           lit.add(p);
         }
-      } else if (first || !animate || _reducedMotion) {
+      } else if (quiet || _reducedMotion) {
         _ignition[i] = 0;
       }
     }
     if (lit.isNotEmpty) {
-      celebrate(strength: 0.85);
+      _flare(0.85);
       for (final p in lit) {
         for (final l in List<AstrolabeIgniteListener>.of(_igniteListeners)) {
           l(p);
@@ -137,9 +144,13 @@ class AstrolabeController extends ChangeNotifier {
 
   /// Flares the core star (a completed task, a lit prayer, …).
   void celebrate({double strength = 1}) {
-    if (_reducedMotion) return;
+    if (_flare(strength)) notifyListeners();
+  }
+
+  bool _flare(double strength) {
+    if (_reducedMotion) return false;
     _pulse = math.max(_pulse, strength.clamp(0.0, 1.0));
-    notifyListeners();
+    return true;
   }
 
   /// Advances every animation by [dt] and repaints.

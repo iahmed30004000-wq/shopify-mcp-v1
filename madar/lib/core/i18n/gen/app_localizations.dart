@@ -3555,7 +3555,7 @@ abstract class L10n {
   /// No description provided for @orbitSourceContacts.
   ///
   /// In ar, this message translates to:
-  /// **'صلة الناس'**
+  /// **'التواصل مع الناس'**
   String get orbitSourceContacts;
 
   /// No description provided for @orbitSourceTasks.
@@ -3641,6 +3641,12 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الرحلات'**
   String get orbitSourceTrips;
+
+  /// Implicit score source: how recently anything was done for a planet that has no other data
+  ///
+  /// In ar, this message translates to:
+  /// **'النشاط المسجَّل'**
+  String get orbitSourceActivity;
 
   /// No description provided for @orbitArchetypeFaith.
   ///
@@ -3744,11 +3750,11 @@ abstract class L10n {
   /// **'{count, plural, =1{وقمر آخر} =2{وقمران آخران} few{و{n} أقمار أخرى} many{و{n} قمرًا آخر} other{و{n} قمر آخر}}'**
   String orbitMoonsMore(int count, String n);
 
-  /// Countdown to the next prayer engraved on the astrolabe's inner ring
+  /// Screen-reader label of a data moon (a person, wallet, board, trip or module orbiting its planet)
   ///
   /// In ar, this message translates to:
-  /// **'{prayer} بعد {duration}'**
-  String orbitCountdown(String prayer, String duration);
+  /// **'{name}، قمرٌ يدور حول {planet}'**
+  String orbitMoonSemantics(String name, String planet);
 
   /// No description provided for @orbitNewPlanetName.
   ///
@@ -3761,6 +3767,24 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الكواكب الأساسية تُخفى ولا تُحذف'**
   String get orbitBuiltInCannotDelete;
+
+  /// Customisation error: empty planet name
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا للكوكب'**
+  String get orbitPlanetNeedsName;
+
+  /// Customisation error: a score source that does not exist
+  ///
+  /// In ar, this message translates to:
+  /// **'مصدر البيانات هذا غير متاح'**
+  String get orbitUnknownSource;
+
+  /// Customisation error: the planet was deleted meanwhile (a stale sheet)
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يعُد هذا الكوكب في مدارك'**
+  String get orbitPlanetGone;
 
   /// No description provided for @orbitUndoRenamed.
   ///
@@ -3886,6 +3910,870 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'مَدار'**
   String get astrolabeMakersMark;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'ذنب قيطس'**
+  String get astrolabeStarDenebKaitos;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'منخر قيطس'**
+  String get astrolabeStarMenkar;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الدبران'**
+  String get astrolabeStarAldebaran;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'رجل الجبار'**
+  String get astrolabeStarRigel;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'يد الجوزاء'**
+  String get astrolabeStarBetelgeuse;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشعرى اليمانية'**
+  String get astrolabeStarSirius;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشعرى الشامية'**
+  String get astrolabeStarProcyon;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'فرد الشجاع'**
+  String get astrolabeStarAlphard;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'قلب الأسد'**
+  String get astrolabeStarRegulus;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'ذنب الأسد'**
+  String get astrolabeStarDenebola;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'السماك الأعزل'**
+  String get astrolabeStarSpica;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'السماك الرامح'**
+  String get astrolabeStarArcturus;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'عنق الحية'**
+  String get astrolabeStarUnukalhai;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'رأس الحوّاء'**
+  String get astrolabeStarRasAlhague;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'النسر الطائر'**
+  String get astrolabeStarAltair;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'ذنب الجدي'**
+  String get astrolabeStarDenebAlgedi;
+
+  /// Star name engraved on the astrolabe rete pointer (traditional Arabic star name)
+  ///
+  /// In ar, this message translates to:
+  /// **'مركب الفرس'**
+  String get astrolabeStarMarkab;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحمل'**
+  String get astrolabeZodiacAries;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الثور'**
+  String get astrolabeZodiacTaurus;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجوزاء'**
+  String get astrolabeZodiacGemini;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'السرطان'**
+  String get astrolabeZodiacCancer;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسد'**
+  String get astrolabeZodiacLeo;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'السنبلة'**
+  String get astrolabeZodiacVirgo;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزان'**
+  String get astrolabeZodiacLibra;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'العقرب'**
+  String get astrolabeZodiacScorpio;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'القوس'**
+  String get astrolabeZodiacSagittarius;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجدي'**
+  String get astrolabeZodiacCapricorn;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الدلو'**
+  String get astrolabeZodiacAquarius;
+
+  /// Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحوت'**
+  String get astrolabeZodiacPisces;
+
+  /// Lower band of a small astrolabe hub under the engraved clock: which prayer the countdown runs to, e.g. «حتى العصر»
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {prayer}'**
+  String astrolabeCountdownUntil(String prayer);
+
+  /// Lower band of a small astrolabe hub (under the prayer name) the moment the prayer begins
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقتها'**
+  String get astrolabeCountdownNowBand;
+
+  /// Screen-reader description of the living sky behind the orbit, e.g. «السماء الآن: ليل. القمر بدر، مضاء بنسبة ٩٨٪»
+  ///
+  /// In ar, this message translates to:
+  /// **'السماء الآن: {sky}. {moon}'**
+  String skySemantics(String sky, String moon);
+
+  /// Look of the sky: full night
+  ///
+  /// In ar, this message translates to:
+  /// **'ليل'**
+  String get skyMoodNight;
+
+  /// Look of the sky: morning twilight (from Fajr)
+  ///
+  /// In ar, this message translates to:
+  /// **'فجر'**
+  String get skyMoodDawn;
+
+  /// Look of the sky: the sun rising
+  ///
+  /// In ar, this message translates to:
+  /// **'شروق'**
+  String get skyMoodSunrise;
+
+  /// Look of the sky: daylight
+  ///
+  /// In ar, this message translates to:
+  /// **'نهار صافٍ'**
+  String get skyMoodDay;
+
+  /// Look of the sky: the low warm sun before sunset
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة الذهبية'**
+  String get skyMoodGoldenHour;
+
+  /// Look of the sky: the sun setting (Maghrib)
+  ///
+  /// In ar, this message translates to:
+  /// **'غروب'**
+  String get skyMoodSunset;
+
+  /// Look of the sky: evening twilight after Maghrib
+  ///
+  /// In ar, this message translates to:
+  /// **'شفق المغرب'**
+  String get skyMoodDusk;
+
+  /// Screen-reader note when the moon has not risen
+  ///
+  /// In ar, this message translates to:
+  /// **'القمر تحت الأفق'**
+  String get skyMoonBelow;
+
+  /// Moon phase and illuminated fraction, e.g. «القمر بدر، مضاء بنسبة ٩٨٪»
+  ///
+  /// In ar, this message translates to:
+  /// **'القمر {phase}، مضاء بنسبة {percent}'**
+  String skyMoonPhase(String phase, String percent);
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'محاق'**
+  String get skyMoonNew;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'هلال متزايد'**
+  String get skyMoonWaxingCrescent;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'تربيع أول'**
+  String get skyMoonFirstQuarter;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'أحدب متزايد'**
+  String get skyMoonWaxingGibbous;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'بدر'**
+  String get skyMoonFull;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'أحدب متناقص'**
+  String get skyMoonWaningGibbous;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'تربيع أخير'**
+  String get skyMoonLastQuarter;
+
+  /// Moon phase name
+  ///
+  /// In ar, this message translates to:
+  /// **'هلال متناقص'**
+  String get skyMoonWaningCrescent;
+
+  /// Toggle: show the traditional names of the brightest stars in the sky
+  ///
+  /// In ar, this message translates to:
+  /// **'أسماء النجوم'**
+  String get skyStarNames;
+
+  /// Explanation under the star-names toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'تُنقش الأسماء العربية لألمع النجوم في سماء الليل'**
+  String get skyStarNamesHint;
+
+  /// Screen-reader label of the planet layer of the orbit (n = count formatted with the user's digits)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{مدار حياتك بلا عوالم ظاهرة} =1{مدار حياتك: عالم واحد يدور حول نجمك} =2{مدار حياتك: عالمان يدوران حول نجمك} few{مدار حياتك: {n} عوالم تدور حول نجمك} many{مدار حياتك: {n} عالمًا يدور حول نجمك} other{مدار حياتك: {n} عالم يدور حول نجمك}}'**
+  String planetsSystemSemantics(int count, String n);
+
+  /// Screen-reader hint for tapping a planet (a cinematic fly-in opens its module)
+  ///
+  /// In ar, this message translates to:
+  /// **'ادخل إلى هذا العالم'**
+  String get planetsOpenHint;
+
+  /// Screen-reader hint for long-pressing a planet (opens its customisation sheet)
+  ///
+  /// In ar, this message translates to:
+  /// **'خصّص هذا العالم'**
+  String get planetsCustomizeHint;
+
+  /// Screen-reader hint for tapping a data moon (opens that person, wallet, board or trip)
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح'**
+  String get planetsMoonOpenHint;
+
+  /// How many data moons orbit a planet, read after the planet's label (n = count formatted with the user's digits)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا أقمار} =1{قمر واحد} =2{قمران} few{{n} أقمار} many{{n} قمرًا} other{{n} قمر}}'**
+  String planetsMoonsCount(int count, String n);
+
+  /// Screen-reader hint of the whole orbit scene on home
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب لتدوير المدار، وباعد بإصبعين للاقتراب من عالم'**
+  String get orbitUiSceneHint;
+
+  /// Button shown after rotating or zooming the orbit; returns the camera to the overview
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة إلى المدار كاملًا'**
+  String get orbitUiRecenter;
+
+  /// Neglect Radar when no planet has a neglect reason
+  ///
+  /// In ar, this message translates to:
+  /// **'عوالمك كلها في توازن — لا شيء يحتاج انتباهك الآن'**
+  String get orbitUiRadarClear;
+
+  /// Neglect Radar before any planet has data
+  ///
+  /// In ar, this message translates to:
+  /// **'سيبدأ الرادار عمله حين تسجّل أول أنشطتك'**
+  String get orbitUiRadarWaiting;
+
+  /// Screen-reader label of one Neglect Radar entry
+  ///
+  /// In ar, this message translates to:
+  /// **'{planet}: {reason}'**
+  String orbitUiRadarEntrySemantics(String planet, String reason);
+
+  /// Screen-reader hint of a Neglect Radar entry
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقل إلى هذا العالم'**
+  String get orbitUiRadarOpenHint;
+
+  /// Caption under a planet's score ring
+  ///
+  /// In ar, this message translates to:
+  /// **'التوازن'**
+  String get orbitUiBalanceLabel;
+
+  /// How much a planet counts in the overall balance (weight already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'وزنه في توازنك ×{weight}'**
+  String orbitUiPlanetWeight(String weight);
+
+  /// Planet with weight 0
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُحتسب في توازنك'**
+  String get orbitUiPlanetNotCounted;
+
+  /// Section title on a planet page listing its neglect reasons
+  ///
+  /// In ar, this message translates to:
+  /// **'ما يحتاج عنايتك'**
+  String get orbitUiReasonsTitle;
+
+  /// Planet page when the planet has no neglect reasons
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء متأخر هنا — أحسنت'**
+  String get orbitUiReasonsNone;
+
+  /// Planet page when the planet has no data yet
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا العالم هادئ بانتظار أول بياناتك'**
+  String get orbitUiReasonsDormant;
+
+  /// Section title listing the score sources of a planet
+  ///
+  /// In ar, this message translates to:
+  /// **'ما يغذّي هذا التوازن'**
+  String get orbitUiSourcesTitle;
+
+  /// Section title listing the data moons of a planet
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقمار'**
+  String get orbitUiMoonsTitle;
+
+  /// Planet page with no data moons
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أقمار تدور حول هذا العالم بعد'**
+  String get orbitUiMoonsNone;
+
+  /// Kind of a data moon: a person around Family
+  ///
+  /// In ar, this message translates to:
+  /// **'شخص'**
+  String get orbitUiMoonKindPerson;
+
+  /// Kind of a data moon: a wallet around Money
+  ///
+  /// In ar, this message translates to:
+  /// **'محفظة'**
+  String get orbitUiMoonKindWallet;
+
+  /// Kind of a data moon: a work board around Work
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة عمل'**
+  String get orbitUiMoonKindBoard;
+
+  /// Kind of a data moon: a trip around Travel
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلة'**
+  String get orbitUiMoonKindTrip;
+
+  /// Kind of a data moon: a custom module
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة'**
+  String get orbitUiMoonKindModule;
+
+  /// How fresh / attended a data moon is (percent formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'حيويته {percent}'**
+  String orbitUiMoonFreshness(String percent);
+
+  /// Badge on the moon row that was tapped in the orbit
+  ///
+  /// In ar, this message translates to:
+  /// **'القمر الذي اخترته'**
+  String get orbitUiMoonSelected;
+
+  /// Button opening the planet customisation sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'تخصيص'**
+  String get orbitUiCustomize;
+
+  /// Title of the planet customisation sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'تخصيص {planet}'**
+  String orbitUiCustomizeTitle(String planet);
+
+  /// Subtitle of the planet customisation sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'كل تغيير يمكن التراجع عنه'**
+  String get orbitUiCustomizeSubtitle;
+
+  /// Customisation action: rename, recolour, restyle
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم والمظهر'**
+  String get orbitUiEditLook;
+
+  /// Customisation action: planet weight
+  ///
+  /// In ar, this message translates to:
+  /// **'أهميته في التوازن'**
+  String get orbitUiEditWeight;
+
+  /// Customisation action: which data feeds the score and how much
+  ///
+  /// In ar, this message translates to:
+  /// **'مصادر البيانات'**
+  String get orbitUiEditSources;
+
+  /// Customisation action: reorder the planet among the orbits
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل مداره'**
+  String get orbitUiMoveOrbit;
+
+  /// Customisation action: hide the planet (its data stays)
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء من المدار'**
+  String get orbitUiHide;
+
+  /// Customisation action: reset a built-in planet
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة الإعدادات الأصلية'**
+  String get orbitUiReset;
+
+  /// Customisation action: delete a user-added planet
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف هذا العالم'**
+  String get orbitUiDelete;
+
+  /// Customisation action: add a planet
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة عالم جديد'**
+  String get orbitUiAddPlanet;
+
+  /// Customisation action / sheet title: show a hidden planet again
+  ///
+  /// In ar, this message translates to:
+  /// **'العوالم المخفية'**
+  String get orbitUiHiddenWorlds;
+
+  /// Field: planet name
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get orbitUiFieldName;
+
+  /// Field: planet colour
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get orbitUiFieldColor;
+
+  /// Field: planet archetype (surface look)
+  ///
+  /// In ar, this message translates to:
+  /// **'طراز العالم'**
+  String get orbitUiFieldStyle;
+
+  /// Field: planet weight slider
+  ///
+  /// In ar, this message translates to:
+  /// **'الأهمية'**
+  String get orbitUiFieldWeight;
+
+  /// Weight slider label at 0
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُحتسب'**
+  String get orbitUiWeightNone;
+
+  /// Weight slider label at 1×
+  ///
+  /// In ar, this message translates to:
+  /// **'عادي'**
+  String get orbitUiWeightNormal;
+
+  /// Weight slider label at the maximum
+  ///
+  /// In ar, this message translates to:
+  /// **'الأهم'**
+  String get orbitUiWeightMost;
+
+  /// Subtitle of the data sources sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'حرّك المصدر إلى الصفر لإيقافه'**
+  String get orbitUiSourcesHint;
+
+  /// Source weight slider label at 0
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف'**
+  String get orbitUiSourceOff;
+
+  /// Title of the move-orbit sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'موضع المدار'**
+  String get orbitUiMoveTitle;
+
+  /// Subtitle of the move-orbit sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقرب إلى نجمك أولًا'**
+  String get orbitUiMoveSubtitle;
+
+  /// Move-orbit target: put the planet just inside another one
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل {planet}'**
+  String orbitUiMoveBefore(String planet);
+
+  /// Move-orbit target: the last orbit
+  ///
+  /// In ar, this message translates to:
+  /// **'المدار الأبعد'**
+  String get orbitUiMoveLast;
+
+  /// Subtitle of a move target: its orbit number (n formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'المدار {n}'**
+  String orbitUiOrbitNumber(String n);
+
+  /// Subtitle of the prayer sheet (time formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'وقتها {time}'**
+  String orbitUiPrayerAt(String time);
+
+  /// Prayer sheet action: log as prayed on time
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها'**
+  String get orbitUiPrayerPrayed;
+
+  /// Prayer sheet action: log as prayed late
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها متأخرة'**
+  String get orbitUiPrayerLate;
+
+  /// Prayer sheet action: log as missed
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتتني'**
+  String get orbitUiPrayerMissed;
+
+  /// Prayer sheet action: remove today's log of this prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء التسجيل'**
+  String get orbitUiPrayerClear;
+
+  /// Prayer sheet: the prayer is still upcoming
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يدخل وقتها بعد'**
+  String get orbitUiPrayerNotYet;
+
+  /// Undo toast after logging a prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت صلاة {prayer}'**
+  String orbitUiPrayerLogged(String prayer);
+
+  /// Undo toast after clearing a prayer log
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي تسجيل {prayer}'**
+  String orbitUiPrayerCleared(String prayer);
+
+  /// Screen-reader hint of a prayer pointer on the astrolabe
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل هذه الصلاة'**
+  String get orbitUiPrayerHint;
+
+  /// Planet page opened for a planet that was hidden or deleted
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا العالم لم يعد في مدارك'**
+  String get orbitUiPlanetMissing;
+
+  /// Back button of a planet page (screen reader and missing-planet state)
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة إلى المدار'**
+  String get orbitUiBackToOrbit;
+
+  /// Countdown on the next prayer's window chip (duration formatted, e.g. ١ س ٢٣ د)
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {duration}'**
+  String orbitUiInDuration(String duration);
+
+  /// Prayer sheet: the achieved state of a prayer already logged as prayed (shown with a lit flame and a check)
+  ///
+  /// In ar, this message translates to:
+  /// **'صُلّيت {time}'**
+  String orbitUiPrayerPrayedAt(String time);
+
+  /// Prayer sheet: the achieved state of a prayer logged as prayed late
+  ///
+  /// In ar, this message translates to:
+  /// **'صُلّيت متأخرة {time}'**
+  String orbitUiPrayerLateAt(String time);
+
+  /// Moon sheet subtitle: what the record is and which world it orbits
+  ///
+  /// In ar, this message translates to:
+  /// **'{kind} في {planet}'**
+  String orbitUiMoonOf(String kind, String planet);
+
+  /// Moon sheet action for a person: log that you were in touch today
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصلت اليوم'**
+  String get orbitUiMoonInTouch;
+
+  /// Undo toast after logging contact with a person
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل تواصلك مع {name}'**
+  String orbitUiMoonInTouchLogged(String name);
+
+  /// Moon sheet action: rename the record
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التسمية'**
+  String get orbitUiMoonRename;
+
+  /// Undo toast after renaming a record from its moon
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت إعادة التسمية'**
+  String get orbitUiMoonRenamed;
+
+  /// Moon sheet detail line for a person
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر تواصل: {when}'**
+  String orbitUiMoonLastContact(String when);
+
+  /// Moon sheet detail line for a trip
+  ///
+  /// In ar, this message translates to:
+  /// **'تبدأ في {date}'**
+  String orbitUiMoonTripStarts(String date);
+
+  /// Moon sheet: no last-contact date yet
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُسجَّل بعد'**
+  String get orbitUiMoonNever;
+
+  /// Joins two short parts of one line (e.g. a state and a percentage); keeps the separator translatable
+  ///
+  /// In ar, this message translates to:
+  /// **'{a} · {b}'**
+  String orbitUiListSeparator(String a, String b);
+
+  /// Compact progress inside a small ring, e.g. «١/٢» tasks done
+  ///
+  /// In ar, this message translates to:
+  /// **'{done}/{total}'**
+  String orbitUiFraction(String done, String total);
+
+  /// Prayer sheet: the achieved state of a prayer logged as prayed when the log time is unknown (imported or back-filled)
+  ///
+  /// In ar, this message translates to:
+  /// **'صُلّيت'**
+  String get orbitUiPrayerDone;
+
+  /// Prayer sheet: the achieved state of a prayer logged as prayed late when the log time is unknown
+  ///
+  /// In ar, this message translates to:
+  /// **'صُلّيت متأخرة'**
+  String get orbitUiPrayerLateDone;
+
+  /// Screen-reader label of the home panel's grabber while the panel peeks (tap expands it)
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض مهام هذا الوقت ورادار الإهمال'**
+  String get orbitUiPanelExpand;
+
+  /// Screen-reader label of the home panel's grabber while the panel is expanded (tap folds it)
+  ///
+  /// In ar, this message translates to:
+  /// **'طيّ اللوحة وإظهار المدار'**
+  String get orbitUiPanelCollapse;
+
+  /// Joins a planet's name and its neglect reason on the one-line Neglect Radar (keep the spaces)
+  ///
+  /// In ar, this message translates to:
+  /// **' — '**
+  String get orbitUiRadarLineJoin;
+
+  /// Section on the Faith planet page: today's five prayers on a small dial
+  ///
+  /// In ar, this message translates to:
+  /// **'صلوات اليوم'**
+  String get orbitUiTodayPrayersTitle;
+
+  /// Centre of the Faith page's prayer dial / its screen-reader summary (numbers already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {done} من {total}'**
+  String orbitUiPrayersProgress(String done, String total);
+
+  /// Status of one prayer on the Faith page
+  ///
+  /// In ar, this message translates to:
+  /// **'صُلّيت'**
+  String get orbitUiPrayerStatusPrayed;
+
+  /// Status of one prayer on the Faith page
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقتها'**
+  String get orbitUiPrayerStatusDue;
+
+  /// Status of one prayer on the Faith page
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتت'**
+  String get orbitUiPrayerStatusMissed;
+
+  /// Status of one prayer on the Faith page
+  ///
+  /// In ar, this message translates to:
+  /// **'قادمة'**
+  String get orbitUiPrayerStatusUpcoming;
+
+  /// Section on the Faith planet page: Quran wird and adhkar progress
+  ///
+  /// In ar, this message translates to:
+  /// **'الورد والأذكار'**
+  String get orbitUiWirdTitle;
+
+  /// Section on a planet page listing today's tasks attached to the planet
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم في هذا العالم'**
+  String get orbitUiWorldTasksTitle;
+
+  /// A planet page with no tasks today
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مخطّط لهذا العالم اليوم'**
+  String get orbitUiWorldTasksNone;
+
+  /// Screen-reader label of one score source bar on a planet page (value already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{source}: {value}'**
+  String orbitUiSourceSemantics(String source, String value);
+
+  /// A data moon's meter when it has had no attention at all (instead of a lone 0 %)
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظارك'**
+  String get orbitUiMoonWaiting;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

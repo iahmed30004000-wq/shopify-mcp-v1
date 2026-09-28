@@ -69,10 +69,12 @@ abstract final class OrbitArchetypes {
     PlanetArchetype.verdant => PlanetPalettes.growth.surface,
     PlanetArchetype.volcanic => PlanetPalettes.body.surface,
     PlanetArchetype.gasGiant => PlanetPalettes.travel.surface,
-    PlanetArchetype.ice =>
-      HSLColor.fromColor(PlanetPalettes.health.surface).withSaturation(0.55).withLightness(0.8).toColor(),
-    PlanetArchetype.desert =>
-      HSLColor.fromColor(PlanetPalettes.faith.surface).withSaturation(0.45).withLightness(0.66).toColor(),
+    PlanetArchetype.ice => HSLColor.fromColor(
+      PlanetPalettes.health.surface,
+    ).withSaturation(0.55).withLightness(0.8).toColor(),
+    PlanetArchetype.desert => HSLColor.fromColor(
+      PlanetPalettes.faith.surface,
+    ).withSaturation(0.45).withLightness(0.66).toColor(),
   };
 
   /// The palette of a planet: the curated palette when a built-in planet

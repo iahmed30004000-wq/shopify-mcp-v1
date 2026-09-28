@@ -8,16 +8,19 @@ import '../../../core/db/repositories/repositories.dart';
 import '../../../core/db/seed/defaults.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
+import '../domain/orbit_labels.dart' show PlanetEditError;
 import '../domain/planet_archetypes.dart';
 import '../domain/score_sources.dart';
 
 /// Restores the state before a customisation (wrap it in an undo toast).
 typedef OrbitUndo = Future<void> Function();
 
-/// Why a customisation was refused.
+/// Why a customisation was refused. Show [error] to the user with
+/// `planetEditErrorText`; [message] is for logs.
 class PlanetCustomizationException implements Exception {
-  const PlanetCustomizationException(this.message);
+  const PlanetCustomizationException(this.message, {this.error = PlanetEditError.notFound});
   final String message;
+  final PlanetEditError error;
   @override
   String toString() => 'PlanetCustomizationException: $message';
 }
@@ -50,13 +53,16 @@ class PlanetCustomizationService {
   }
 
   /// Undo that writes [before] back (every column but sort order).
-  OrbitUndo _restore(PlanetRow before) => () => _planets.update(before);
+  OrbitUndo _restore(PlanetRow before) =>
+      () => _planets.update(before);
 
   /// Renames the planet in [languageCode]. When both names were the same
   /// (a custom planet named once), both follow.
   Future<OrbitUndo> rename(String key, String name, {required String languageCode}) async {
     final trimmed = name.trim();
-    if (trimmed.isEmpty) throw const PlanetCustomizationException('A planet needs a name');
+    if (trimmed.isEmpty) {
+      throw const PlanetCustomizationException('A planet needs a name', error: PlanetEditError.needsName);
+    }
     final row = await _row(key);
     final english = languageCode == 'en';
     final current = english ? row.nameEn : row.nameAr;
@@ -110,7 +116,9 @@ class PlanetCustomizationService {
   Future<OrbitUndo> setSourceWeight(String key, String source, double weight) async {
     final row = await _row(key);
     final canonical = ScoreSources.canonical(source);
-    if (!ScoreSources.isKnown(canonical)) throw PlanetCustomizationException('Unknown source "$source"');
+    if (!ScoreSources.isKnown(canonical)) {
+      throw PlanetCustomizationException('Unknown source "$source"', error: PlanetEditError.unknownSource);
+    }
     final sources = <String, Object?>{};
     for (final e in row.sources.entries) {
       final k = ScoreSources.canonical(e.key);
@@ -126,7 +134,9 @@ class PlanetCustomizationService {
   Future<OrbitUndo> setSources(String key, Map<String, double> sources) async {
     final row = await _row(key);
     for (final s in sources.keys) {
-      if (!ScoreSources.isKnown(s)) throw PlanetCustomizationException('Unknown source "$s"');
+      if (!ScoreSources.isKnown(s)) {
+        throw PlanetCustomizationException('Unknown source "$s"', error: PlanetEditError.unknownSource);
+      }
     }
     await _planets.setColumn(row.id, 'sources', ScoreSources.canonicalWeights(sources));
     return _restore(row);
@@ -155,22 +165,26 @@ class PlanetCustomizationService {
     Map<String, double>? sources,
   }) async {
     final trimmed = name.trim();
-    if (trimmed.isEmpty) throw const PlanetCustomizationException('A planet needs a name');
+    if (trimmed.isEmpty) {
+      throw const PlanetCustomizationException('A planet needs a name', error: PlanetEditError.needsName);
+    }
     final existing = {for (final p in await _planets.getAll()) p.key};
     var key = 'custom_${newId().replaceAll('-', '').substring(0, 10)}';
     while (existing.contains(key)) {
       key = 'custom_${newId().replaceAll('-', '').substring(0, 10)}';
     }
-    final row = await _planets.insert(PlanetsCompanion.insert(
-      key: key,
-      nameAr: trimmed,
-      nameEn: trimmed,
-      color: (color ?? OrbitArchetypes.defaultColor(archetype)).toARGB32(),
-      archetype: archetype,
-      icon: Value(icon),
-      weight: Value(weight.isFinite ? weight.clamp(0.0, maxWeight) : 1.0),
-      sources: Value(ScoreSources.canonicalWeights(sources ?? defaultCustomSources)),
-    ));
+    final row = await _planets.insert(
+      PlanetsCompanion.insert(
+        key: key,
+        nameAr: trimmed,
+        nameEn: trimmed,
+        color: (color ?? OrbitArchetypes.defaultColor(archetype)).toARGB32(),
+        archetype: archetype,
+        icon: Value(icon),
+        weight: Value(weight.isFinite ? weight.clamp(0.0, maxWeight) : 1.0),
+        sources: Value(ScoreSources.canonicalWeights(sources ?? defaultCustomSources)),
+      ),
+    );
     return (row, () async => _planets.delete(row.id).then((_) {}));
   }
 
@@ -179,7 +193,12 @@ class PlanetCustomizationService {
   /// planets can only be hidden.
   Future<OrbitUndo> deletePlanet(String key) async {
     final row = await _row(key);
-    if (!isCustomKey(row.key)) throw PlanetCustomizationException('Built-in planet "$key" can only be hidden');
+    if (!isCustomKey(row.key)) {
+      throw PlanetCustomizationException(
+        'Built-in planet "$key" can only be hidden',
+        error: PlanetEditError.builtInDelete,
+      );
+    }
     late final List<String> tasks, habits, projects, modules;
     await _db.transaction(() async {
       tasks = await _detach(_db.tasks, _db.tasks.id, _db.tasks.planetKey, key);
@@ -225,11 +244,12 @@ class PlanetCustomizationService {
     GeneratedColumn<String> planetKey,
     String key,
   ) async {
-    final ids = await (_db.selectOnly(table)
-          ..addColumns([id])
-          ..where(planetKey.equals(key)))
-        .map((r) => r.read(id)!)
-        .get();
+    final ids =
+        await (_db.selectOnly(table)
+              ..addColumns([id])
+              ..where(planetKey.equals(key)))
+            .map((r) => r.read(id)!)
+            .get();
     if (ids.isNotEmpty) {
       await _db.customUpdate(
         'UPDATE ${table.actualTableName} SET ${planetKey.name} = NULL WHERE ${planetKey.name} = ?',

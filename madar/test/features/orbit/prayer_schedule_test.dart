@@ -50,6 +50,24 @@ void main() {
     expect(m.progressAt(t.maghrib), 0);
   });
 
+  test('an Isha after midnight: yesterday\'s Maghrib window runs until it begins', () {
+    // Isha pushed to ≈ 00:30 the next (local) day, as in a high-latitude
+    // summer.
+    final base = schedule.timesFor(day).isha;
+    final shift = DateTime(2026, 9, 28, 0, 30).difference(base).inMinutes;
+    final late = PrayerSchedule(PrayerSettings(adjustmentsMin: {'isha': shift}));
+    final isha = late.timesFor(day).isha;
+    expect(isha.day, 28, reason: 'the fixture needs an Isha after midnight');
+    final before = late.windowAt(isha.subtract(const Duration(minutes: 10)));
+    expect(before.window, PrayerWindow.maghrib);
+    expect(before.nextPrayer, Prayer.isha);
+    expect(before.nextPrayerAt, isha);
+    expect(before.start, late.timesFor(day).maghrib);
+    final after = late.windowAt(isha.add(const Duration(minutes: 10)));
+    expect(after.window, PrayerWindow.isha);
+    expect(after.nextPrayer, Prayer.fajr);
+  });
+
   test('obligatory prayers counted over the last 7 days', () {
     final t = schedule.timesFor(day);
     final n = schedule.obligatoryStartedInLast(t.asr.add(const Duration(minutes: 1)));
@@ -59,7 +77,13 @@ void main() {
   });
 
   test('settings round-trip through JSON', () {
-    const s = PrayerSettings(latitude: 33.5, longitude: 36.3, cityName: 'Damascus', hanafiAsr: true, adjustmentsMin: {'fajr': 2});
+    const s = PrayerSettings(
+      latitude: 33.5,
+      longitude: 36.3,
+      cityName: 'Damascus',
+      hanafiAsr: true,
+      adjustmentsMin: {'fajr': 2},
+    );
     final back = PrayerSettings.fromJson(s.toJson());
     expect(back.latitude, 33.5);
     expect(back.hanafiAsr, isTrue);

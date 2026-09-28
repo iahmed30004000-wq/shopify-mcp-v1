@@ -4,6 +4,7 @@ import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/features/home/domain/home_tasks.dart';
+import 'package:madar/features/home/domain/prayer_day.dart';
 
 import '../../helpers/test_app.dart';
 
@@ -46,6 +47,17 @@ void main() {
       expect(TaskDayFilter.includes(task(), today), isTrue);
       expect(TaskDayFilter.includes(task(done: true, doneAt: now), today), isTrue);
       expect(TaskDayFilter.includes(task(done: true, doneAt: now.subtract(const Duration(days: 2))), today), isFalse);
+    });
+
+    test('a task done at 00:30 stays on the prayer day still on screen (after Isha)', () {
+      final day = DateTime(2026, 9, 28);
+      final at = DateTime(2026, 9, 29, 0, 30);
+      final t = task(done: true, doneAt: at);
+      expect(TaskDayFilter.includes(t, day, times: PrayerDayTimes.placeholder), isTrue);
+      expect(TaskDayFilter.includes(t, DateTime(2026, 9, 29), times: PrayerDayTimes.placeholder), isFalse);
+      // after Fajr it belongs to the new day
+      final later = task(done: true, doneAt: DateTime(2026, 9, 29, 7));
+      expect(TaskDayFilter.includes(later, DateTime(2026, 9, 29), times: PrayerDayTimes.placeholder), isTrue);
     });
   });
 

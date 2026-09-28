@@ -329,7 +329,7 @@ void main() {
     // shared aurora, distress rim, celebration flourish (rim flash)
     col += auC;
     col += distressColor() * distressRim(mu, pulseD);
-    col += flareCol * uPulse * pow(1.0 - saturate(mu), 6.0) * 1.2;
+    col += flareCol * uPulse * pow(1.0 - saturate(mu), 3.0) * 0.45;
   }
 
   // ---- halo: shared forward-scatter halo + aurora + limb shock + distress ----

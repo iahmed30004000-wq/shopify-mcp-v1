@@ -44,7 +44,10 @@ abstract final class AstrolabeRadii {
   static const coreStar = 0.094;
 
   /// Half-size of a prayer pointer's 8-point star.
-  static const pointerStar = 0.04;
+  static const pointerStar = 0.046;
+
+  /// Disc of the sun marker on the rete.
+  static const sun = 0.034;
 }
 
 /// How much engraving detail is drawn, chosen by the on-screen radius.
@@ -258,22 +261,22 @@ abstract final class AstrolabeGeometry {
     return {for (var i = 0; i < order.length; i++) order[i].key: angleForFraction(spreadOut[i] / tau)};
   }
 
-  /// Status of [prayer] at [now] given today's [times], the prayers logged
-  /// today and optionally the ones explicitly logged as missed.
+  /// Status of [prayer] at [now] on the prayer day [times]: logged ([prayed])
+  /// → prayed; logged as [missed], or its own time ended without a log →
+  /// missed; its time has come → due; otherwise upcoming.
   static AstrolabePrayerStatus statusOf(
     Prayer prayer,
     DayTimes times,
     DateTime now, {
     required Set<Prayer> prayed,
-    Set<Prayer>? missed,
+    Set<Prayer> missed = const {},
+    DateTime? nextFajr,
   }) {
     if (prayed.contains(prayer)) return AstrolabePrayerStatus.prayed;
-    if (missed != null && missed.contains(prayer)) return AstrolabePrayerStatus.missed;
-    final start = timeOf(prayer, times);
-    if (now.isBefore(start)) return AstrolabePrayerStatus.upcoming;
-    final end = windowEndOf(prayer, times);
-    if (now.isBefore(end)) return AstrolabePrayerStatus.due;
-    return missed == null ? AstrolabePrayerStatus.missed : AstrolabePrayerStatus.due;
+    if (missed.contains(prayer)) return AstrolabePrayerStatus.missed;
+    if (now.isBefore(timeOf(prayer, times))) return AstrolabePrayerStatus.upcoming;
+    if (now.isBefore(windowEndOf(prayer, times, nextFajr: nextFajr))) return AstrolabePrayerStatus.due;
+    return AstrolabePrayerStatus.missed;
   }
 
   /// Start time of an obligatory prayer on [times]' day.
@@ -287,14 +290,20 @@ abstract final class AstrolabeGeometry {
   };
 
   /// When an obligatory prayer's own time ends (Fajr at sunrise, Isha at
-  /// the next Fajr, the others at the next prayer).
-  static DateTime windowEndOf(Prayer prayer, DayTimes times) => switch (prayer) {
+  /// the next day's Fajr – [nextFajr] when known, else the same wall-clock
+  /// time a calendar day later, never "+ 24 h" across a DST change – the
+  /// others at the next prayer).
+  static DateTime windowEndOf(Prayer prayer, DayTimes times, {DateTime? nextFajr}) => switch (prayer) {
     Prayer.fajr => times.sunrise,
     Prayer.dhuhr => times.asr,
     Prayer.asr => times.maghrib,
     Prayer.maghrib => times.isha,
-    _ => times.fajr.add(const Duration(days: 1)),
+    _ => nextFajr ?? _nextDay(times.fajr),
   };
+
+  static DateTime _nextDay(DateTime t) => t.isUtc
+      ? DateTime.utc(t.year, t.month, t.day + 1, t.hour, t.minute, t.second, t.millisecond)
+      : DateTime(t.year, t.month, t.day + 1, t.hour, t.minute, t.second, t.millisecond);
 
   // --- tilt ------------------------------------------------------------------
 
@@ -341,13 +350,14 @@ abstract final class AstrolabeGeometry {
 
   /// The prayer pointer (or its engraved name) under [local] (a position in
   /// the paint box), or null. [fractions] are the prayers' dial fractions;
-  /// [labelAngles] the angles of their names (see [labelAngles]). A tilted
-  /// disc is un-projected first.
+  /// [labelCenters] the centres of their engraved names in units of the limb
+  /// radius around the dial's centre. A tilted disc is un-projected first.
+  /// Touch targets are at least [minTouchRadius] logical pixels.
   static Prayer? hitTestPrayer(
     Offset local, {
     required Size size,
     required Map<Prayer, double> fractions,
-    Map<Prayer, double> labelAngles = const {},
+    Map<Prayer, Offset> labelCenters = const {},
     AstrolabeTilt tilt = AstrolabeTilt.flat,
     double minTouchRadius = 22,
   }) {
@@ -373,8 +383,8 @@ abstract final class AstrolabeGeometry {
     }
     if (best != null) return best;
     // The engraved names (a smaller target around each name's centre).
-    for (final e in labelAngles.entries) {
-      final c = center + Offset(math.cos(e.value), math.sin(e.value)) * (radius * AstrolabeRadii.labels);
+    for (final e in labelCenters.entries) {
+      final c = center + e.value * radius;
       final d = (p - c).distance;
       if (d < touch * 0.9 && d < bestD) {
         best = e.key;
@@ -452,8 +462,7 @@ abstract final class AstrolabeProjection {
   }
 
   /// The zenith on the plate (plate-local).
-  static Offset zenith(double latitudeDeg) =>
-      Offset(0, -radiusForDec(latitudeDeg.abs().clamp(5.0, 70.0).toDouble()));
+  static Offset zenith(double latitudeDeg) => Offset(0, -radiusForDec(latitudeDeg.abs().clamp(5.0, 70.0).toDouble()));
 
   /// Plate rotation (canvas radians) that lines the plate's meridian up with
   /// the local clock: clock time minus apparent solar time.

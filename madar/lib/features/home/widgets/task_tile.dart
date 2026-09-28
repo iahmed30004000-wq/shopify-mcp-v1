@@ -11,17 +11,12 @@ import '../../../core/motion/motion.dart';
 /// one line of detail (reminder / notes / planet) and the drag handle.
 /// Pure presentation – actions are wired by the panel.
 class TaskTile extends StatelessWidget {
-  const TaskTile({
-    super.key,
-    required this.task,
-    required this.dragHandle,
-    this.planet,
-    this.planetName,
-    this.reminder,
-  });
+  const TaskTile({super.key, required this.task, this.dragHandle, this.planet, this.planetName, this.reminder});
 
   final TaskRow task;
-  final Widget dragHandle;
+
+  /// The reorder handle (null: none, e.g. on a world's page).
+  final Widget? dragHandle;
   final PlanetRow? planet;
   final String? planetName;
 
@@ -86,7 +81,7 @@ class TaskTile extends StatelessWidget {
               ),
             ),
           ),
-          dragHandle,
+          dragHandle ?? const SizedBox(width: Space.s),
         ],
       ),
     );

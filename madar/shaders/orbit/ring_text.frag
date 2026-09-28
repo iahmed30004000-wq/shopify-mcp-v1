@@ -23,9 +23,10 @@ float sampleText(vec2 frag) {
   d.y = -d.y;
   float r = length(d);
   float a = atan(d.y, d.x);
-  float t = (uStart - a);
-  // wrap into the sweep direction
-  t = mod(t + 3.14159265 * 3.0, 6.28318531) - 3.14159265;
+  // Clockwise distance from the image's left edge, wrapped into [0, 2π) so
+  // any sweep up to a full turn reads without a seam (a ±π wrap cut every
+  // sweep over 180°).
+  float t = mod(uStart - a, 6.28318531);
   float u = t / uSweep;
   float v = (uROuter - r) / (uROuter - uRInner);
   if (u < 0.0 || u > 1.0 || v < 0.0 || v > 1.0) return 0.0;

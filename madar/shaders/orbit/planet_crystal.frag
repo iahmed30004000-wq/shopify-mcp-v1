@@ -39,6 +39,10 @@
 //       drives vein brightness and how many facets are lantern-lit.
 //   z, w : unused.
 // Draw rect: centre ± uRadius × 1.35 (haloFactor 1.35).
+// Round 2: crisper cut (sharper facet normals, a narrow bevel – never a
+// soft low-poly ball at hero size), internal refraction sparkle (points of
+// light deep in the stone that shift with the refracted view), and thicker
+// emissive gold veins.
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -172,14 +176,14 @@ void main() {
     float e3 = dot(0.5 * (r1 + r3), normalize(r3 - r1));
     vec3 h1 = hash33(k1 + 31.7);
     vec3 h2 = hash33(k2 + 31.7);
-    vec3 nf1 = normalize(normalize(x + r1 - seedOff) + (h1 - 0.5) * 0.35) * rot;
-    vec3 nf2 = normalize(normalize(x + r2 - seedOff) + (h2 - 0.5) * 0.35) * rot;
+    vec3 nf1 = normalize(normalize(x + r1 - seedOff) + (h1 - 0.5) * 0.55) * rot;
+    vec3 nf2 = normalize(normalize(x + r2 - seedOff) + (h2 - 0.5) * 0.55) * rot;
     // Frost rounds the cut away.
     nf1 = normalize(mix(nf1, n, ng * 0.55));
     nf2 = normalize(mix(nf2, n, ng * 0.55));
     // Bevel: the normal rolls from the facet to the edge bisector.
     float pxV = F * px / mix(1.0, max(n.z, 0.12), 0.5);     // one pixel in cell units
-    float bevel = max(0.06, pxV * 1.5);
+    float bevel = max(0.02, pxV * 1.3);
     float s = saturate(e / bevel);
     vec3 nb = normalize(nf1 + nf2);
     vec3 ns = normalize(mix(nb, nf1, s));
@@ -197,7 +201,7 @@ void main() {
     float vf = fbm3lo(vq + warp * 1.1);
     float vl = abs(vf - 0.5);
     float nW = noise3(vq * 2.3 + 3.0);                          // vein width AND strength along its length
-    float vw0 = 0.006 * mix(0.4, 1.45, smoothstep(0.3, 0.7, nW));
+    float vw0 = 0.011 * mix(0.45, 1.45, smoothstep(0.3, 0.7, nW));
     float vw = max(vw0, px * 1.3);
     float veinAmt = sqrt(vw0 / vw);                            // energy kept when blurred
     float vein = (1.0 - smoothstep(vw * 0.5, vw, vl)) * veinAmt;
@@ -249,11 +253,13 @@ void main() {
     float gloss = mix(1.0, 0.2, ng);
     float rl8 = cr_p8(rl), rl16 = rl8 * rl8, rl64 = rl16 * rl16 * rl16 * rl16;
     float rl256 = rl64 * rl64 * rl64 * rl64;
-    float spec = (rl16 * 0.5 + rl64 * 2.0 + rl256 * 10.0) * gloss + rl * rl * rl * rl * rl * 0.1;
+    // (capped: with the crisper facet normals a facet facing the star exactly
+    // must flash, not turn into a flat white tile)
+    float spec = min((rl16 * 0.4 + rl64 * 1.4 + rl256 * 4.0) * gloss + rl * rl * rl * rl * rl * 0.1, 1.1);
     // reflected sky: the atmosphere is only bright where the star lights it
     // (an unlit sky reflection drew a full mint ring round the night limb)
     vec3 sky = mix(cDeep * 0.6, atmoCol * 0.45, saturate(R.y * 0.5 + 0.5)) * 0.3 * (0.08 + 0.92 * smoothstep(-0.3, 0.3, ndl));
-    vec3 c = inner * (1.0 - fres * 0.7) + sky * fres + vec3(1.0, 0.95, 0.85) * spec * starVis * (0.4 + fres);
+    vec3 c = inner * (1.0 - fres * 0.7) + sky * fres + mix(vec3(1.0, 0.95, 0.85), cSurf, 0.3) * spec * starVis * (0.3 + fres);
 
     // Bevel glints with dispersion (red/blue split across the edge), faded
     // where a third facet takes over (no hard diagonal cut at junctions).
@@ -325,8 +331,20 @@ void main() {
     vec3 lit = lifeGrade(c, th, ng);
 
     // --- emission (after the grade) ------------------------------------------
-    vec3 emit = cGold * (veinGlow * 0.1 + vein * 0.25 + veinCore * 0.9) * veinE
-              * (0.08 + 0.3 * th + 1.1 * night) * (0.7 + 0.8 * flow * th);
+    vec3 emit = cGold * (veinGlow * 0.14 + vein * 0.4 + veinCore * 1.2) * veinE
+              * (0.14 + 0.4 * th + 1.1 * night) * (0.7 + 0.8 * flow * th);
+    // Internal refraction sparkle: points of light deep in the stone (seen
+    // through the facet, so they jump from facet to facet as it turns).
+    {
+      vec3 sq = qv * F * 5.0 + seedOff * 2.3;
+      vec3 sid = floor(sq);
+      vec3 sh = hash33(sid + 17.0);
+      vec3 sd = fract(sq) - 0.2 - 0.6 * sh;
+      float sz = max(0.05, F * 5.0 * px * 0.9);
+      float tw = pow(0.5 + 0.5 * sin(t * (1.2 + sh.x * 2.5) + sh.y * 40.0), 6.0);
+      float spark = exp(-dot(sd, sd) / (sz * sz)) * min(1.0, 0.0025 / (sz * sz)) * step(0.72, sh.z) * tw;
+      emit += vec3(1.0, 0.95, 0.82) * spark * (0.15 + 0.85 * lightMask) * clarity * (0.2 + 1.2 * th) * 1.6 * (1.0 - fp);
+    }
     // Settlements strung along the veins: tiny lights on the night side.
     if (fp < 0.99) {
       float town = smoothstep(0.78, 0.93, noise3(q * 60.0 + seedOff)) * smoothstep(0.035, 0.008, vl);
@@ -362,7 +380,7 @@ void main() {
     float cascade = (1.0 - smoothstep(0.0, 0.12, abs(h1.z - (1.0 - pls)))) * pls;
     vec3 flash = mix(cSurf * 1.3, cGold, 0.45) * (0.45 + 0.9 * saturate(0.5 + grad)) * (1.0 + (1.0 - s) * 1.5);
     col += flash * cascade * (0.4 + 0.5 * lightMask);
-    col += cGold * pls * (0.03 + pow(1.0 - saturate(mu), 4.0) * 1.0 + vein * 1.4 + ember * 1.6) + fire * pls * 2.0;
+    col += cGold * pls * (0.03 + pow(1.0 - saturate(mu), 3.0) * 0.45 + vein * 1.4 + ember * 1.6) + fire * pls * 2.0;
   }
 
   // --- halo (shared family model) -------------------------------------------

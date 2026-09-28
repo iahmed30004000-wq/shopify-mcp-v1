@@ -14,6 +14,7 @@ import '../core/sound/haptics.dart';
 import '../core/sound/profiles.dart';
 import '../core/sound/soloud_sound_service.dart';
 import '../core/sound/sound_api.dart';
+import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
 import 'app.dart';
 import 'app_preferences.dart';
 
@@ -21,7 +22,9 @@ import 'app_preferences.dart';
 ///
 /// 1. Error hooks (log in debug builds only – nothing leaves the device).
 /// 2. Edge-to-edge system UI with transparent bars; portrait only for now.
-/// 3. Shader programs start loading (surfaces paint a gradient until then).
+/// 3. Shader programs start loading (surfaces paint a gradient until then)
+///    and the Astrolabe Orbit's programs are compiled and warmed up, so the
+///    splash hides the work and the first orbit frame never stutters.
 /// 4. UI preferences are read from SharedPreferences (theme, language …) –
 ///    the encrypted database opens later, behind the splash (see AppGate).
 /// 5. The sound engine and haptics are constructed and [Fx] is installed;
@@ -32,6 +35,8 @@ Future<void> bootstrap() async {
   installErrorHooks();
   await _configureSystemUi();
   unawaited(MadarShaders.preload());
+  // Orbit shaders compile while the database unlocks behind the splash.
+  unawaited(OrbitWarmUp.start());
 
   final prefs = await SharedPreferences.getInstance();
   final settings = _readSettings(prefs);

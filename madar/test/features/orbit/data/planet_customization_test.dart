@@ -8,6 +8,7 @@ import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/features/orbit/data/orbit_repository.dart';
 import 'package:madar/features/orbit/data/planet_customization_service.dart';
+import 'package:madar/features/orbit/domain/orbit_labels.dart';
 import 'package:madar/features/orbit/domain/planet_archetypes.dart';
 import 'package:madar/features/orbit/domain/planet_scores.dart';
 
@@ -145,8 +146,17 @@ void main() {
     expect((await orbit.snapshot()).planet(row.key)!.moons.single.refId, module.id);
   });
 
-  test('built-in planets cannot be deleted', () async {
-    await expectLater(service.deletePlanet('faith'), throwsA(isA<PlanetCustomizationException>()));
+  test('built-in planets cannot be deleted; refusals carry a typed error', () async {
+    Matcher refused(PlanetEditError e) =>
+        throwsA(isA<PlanetCustomizationException>().having((x) => x.error, 'error', e));
+    await expectLater(service.deletePlanet('faith'), refused(PlanetEditError.builtInDelete));
+    await expectLater(service.rename('faith', '   ', languageCode: 'ar'), refused(PlanetEditError.needsName));
+    await expectLater(service.addPlanet(name: '', archetype: PlanetArchetype.ice), refused(PlanetEditError.needsName));
+    await expectLater(service.setSourceWeight('faith', 'horoscope', 1), refused(PlanetEditError.unknownSource));
+    await expectLater(service.setHidden('nowhere', true), refused(PlanetEditError.notFound));
+    // The activity fallback can be switched off like any source.
+    await service.setSourceWeight('faith', 'activity', 0);
+    expect((await planet('faith')).sources['activity'], 0);
     expect(PlanetCustomizationService.isCustomKey('faith'), isFalse);
     expect(PlanetCustomizationService.isCustomKey('custom_1'), isTrue);
   });

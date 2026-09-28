@@ -123,16 +123,15 @@ class OrbitCamera {
     double? roll,
     double? fovY,
     Offset? principal,
-  }) =>
-      OrbitCamera(
-        target: target ?? this.target,
-        azimuth: azimuth ?? this.azimuth,
-        elevation: elevation ?? this.elevation,
-        distance: distance ?? this.distance,
-        roll: roll ?? this.roll,
-        fovY: fovY ?? this.fovY,
-        principal: principal ?? this.principal,
-      );
+  }) => OrbitCamera(
+    target: target ?? this.target,
+    azimuth: azimuth ?? this.azimuth,
+    elevation: elevation ?? this.elevation,
+    distance: distance ?? this.distance,
+    roll: roll ?? this.roll,
+    fovY: fovY ?? this.fovY,
+    principal: principal ?? this.principal,
+  );
 
   /// Interpolates every parameter (azimuth along the shortest arc).
   static OrbitCamera lerp(OrbitCamera a, OrbitCamera b, double t) {

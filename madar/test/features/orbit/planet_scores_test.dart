@@ -12,10 +12,27 @@ void main() {
   });
 
   test('overdue person produces a concrete reason with days overdue', () {
-    final scores = engine.compute(ScoreInputs(now: now, people: [
-      PersonIn(id: 'p1', name: 'Father', rhythmDays: 2, lastContact: now.subtract(const Duration(days: 5)), createdAt: DateTime(2026)),
-      PersonIn(id: 'p2', name: 'Sister', rhythmDays: 7, lastContact: now.subtract(const Duration(days: 1)), createdAt: DateTime(2026)),
-    ]));
+    final scores = engine.compute(
+      ScoreInputs(
+        now: now,
+        people: [
+          PersonIn(
+            id: 'p1',
+            name: 'Father',
+            rhythmDays: 2,
+            lastContact: now.subtract(const Duration(days: 5)),
+            createdAt: DateTime(2026),
+          ),
+          PersonIn(
+            id: 'p2',
+            name: 'Sister',
+            rhythmDays: 7,
+            lastContact: now.subtract(const Duration(days: 1)),
+            createdAt: DateTime(2026),
+          ),
+        ],
+      ),
+    );
     final family = scores['family']!;
     expect(family.dormant, isFalse);
     expect(family.reasons.single.code, ReasonCode.personOverdue);
@@ -26,12 +43,22 @@ void main() {
 
   test('past-due doses today are flagged; taken doses count', () {
     final today = DateTime(2026, 9, 27);
-    final scores = engine.compute(ScoreInputs(now: now, doses3d: [
-      DoseIn(medId: 'm1', medName: 'A', scheduledAt: today.add(const Duration(hours: 8)), taken: true),
-      DoseIn(medId: 'm2', medName: 'B', scheduledAt: today.add(const Duration(hours: 9)), taken: false),
-      DoseIn(medId: 'm3', medName: 'C', scheduledAt: today.add(const Duration(hours: 13)), taken: false),
-      DoseIn(medId: 'm4', medName: 'D', scheduledAt: today.add(const Duration(hours: 15, minutes: 50)), taken: false), // within grace
-    ]));
+    final scores = engine.compute(
+      ScoreInputs(
+        now: now,
+        doses3d: [
+          DoseIn(medId: 'm1', medName: 'A', scheduledAt: today.add(const Duration(hours: 8)), taken: true),
+          DoseIn(medId: 'm2', medName: 'B', scheduledAt: today.add(const Duration(hours: 9)), taken: false),
+          DoseIn(medId: 'm3', medName: 'C', scheduledAt: today.add(const Duration(hours: 13)), taken: false),
+          DoseIn(
+            medId: 'm4',
+            medName: 'D',
+            scheduledAt: today.add(const Duration(hours: 15, minutes: 50)),
+            taken: false,
+          ), // within grace
+        ],
+      ),
+    );
     final health = scores['health']!;
     expect(health.sources['doses'], closeTo(1 / 3, 1e-9));
     expect(health.reasons.first.code, ReasonCode.dosesPastDue);
@@ -53,12 +80,16 @@ void main() {
   });
 
   test('budget overspend reason with percent; obligations overdue', () {
-    final scores = engine.compute(ScoreInputs(now: now, budget: const [
-      BudgetStatusIn(id: 'b1', name: 'Fuel', planMilli: 100000, spentMilli: 130000),
-      BudgetStatusIn(id: 'b2', name: 'Food', planMilli: 200000, spentMilli: 150000),
-    ], obligations: [
-      ObligationIn(id: 'o1', name: 'Internet', nextDue: now.subtract(const Duration(days: 4))),
-    ]));
+    final scores = engine.compute(
+      ScoreInputs(
+        now: now,
+        budget: const [
+          BudgetStatusIn(id: 'b1', name: 'Fuel', planMilli: 100000, spentMilli: 130000),
+          BudgetStatusIn(id: 'b2', name: 'Food', planMilli: 200000, spentMilli: 150000),
+        ],
+        obligations: [ObligationIn(id: 'o1', name: 'Internet', nextDue: now.subtract(const Duration(days: 4)))],
+      ),
+    );
     final money = scores['money']!;
     expect(money.sources['budget'], closeTo(200 / 300, 1e-9));
     expect(money.sources['obligations'], 0);
@@ -69,15 +100,34 @@ void main() {
   });
 
   test('neglect radar returns the three weakest planets with their top reason', () {
-    final scores = engine.compute(ScoreInputs(
-      now: now,
-      people: [PersonIn(id: 'p', name: 'Mother', rhythmDays: 3, lastContact: now.subtract(const Duration(days: 9)), createdAt: DateTime(2026))],
-      obligations: [ObligationIn(id: 'o', name: 'Rent', nextDue: now.subtract(const Duration(days: 2)))],
-      workoutsExpected7d: 4,
-      workoutsDone7d: 1,
-      documents: [DocumentIn(id: 'd', name: 'Passport', expiry: now.add(const Duration(days: 10)))],
-      goals: [GoalIn(id: 'g', name: 'Course', target: 10, progress: 9, start: DateTime(2026, 9), deadline: DateTime(2026, 10, 30))],
-    ));
+    final scores = engine.compute(
+      ScoreInputs(
+        now: now,
+        people: [
+          PersonIn(
+            id: 'p',
+            name: 'Mother',
+            rhythmDays: 3,
+            lastContact: now.subtract(const Duration(days: 9)),
+            createdAt: DateTime(2026),
+          ),
+        ],
+        obligations: [ObligationIn(id: 'o', name: 'Rent', nextDue: now.subtract(const Duration(days: 2)))],
+        workoutsExpected7d: 4,
+        workoutsDone7d: 1,
+        documents: [DocumentIn(id: 'd', name: 'Passport', expiry: now.add(const Duration(days: 10)))],
+        goals: [
+          GoalIn(
+            id: 'g',
+            name: 'Course',
+            target: 10,
+            progress: 9,
+            start: DateTime(2026, 9),
+            deadline: DateTime(2026, 10, 30),
+          ),
+        ],
+      ),
+    );
     final radar = engine.neglectRadar(scores);
     expect(radar, hasLength(3));
     for (var i = 1; i < radar.length; i++) {
@@ -87,9 +137,22 @@ void main() {
   });
 
   test('custom weights override defaults', () {
-    final inputs = ScoreInputs(now: now, workoutsExpected7d: 4, workoutsDone7d: 4, waterTargetMl: 2000, waterTodayMl: 0);
+    final inputs = ScoreInputs(
+      now: now,
+      workoutsExpected7d: 4,
+      workoutsDone7d: 4,
+      waterTargetMl: 2000,
+      waterTodayMl: 0,
+    );
     final a = engine.compute(inputs)['body']!.score;
-    final b = engine.compute(inputs, weights: {'body': {'water': 0.0}})['body']!.score;
+    final b = engine
+        .compute(
+          inputs,
+          weights: {
+            'body': {'water': 0.0},
+          },
+        )['body']!
+        .score;
     expect(b, greaterThan(a));
     expect(b, closeTo(1.0, 1e-9));
   });

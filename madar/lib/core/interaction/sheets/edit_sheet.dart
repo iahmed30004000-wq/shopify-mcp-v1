@@ -34,13 +34,25 @@ Future<Map<String, Object?>?> showEditSheet(
   String? saveLabel,
   String? subtitle,
   IconData? icon,
+  EditSheetPreview? preview,
 }) {
   return showInteractionSheet<Map<String, Object?>>(
     context,
-    builder: (_) =>
-        EditSheet(title: title, fields: fields, initial: initial, saveLabel: saveLabel, subtitle: subtitle, icon: icon),
+    builder: (_) => EditSheet(
+      title: title,
+      fields: fields,
+      initial: initial,
+      saveLabel: saveLabel,
+      subtitle: subtitle,
+      icon: icon,
+      preview: preview,
+    ),
   );
 }
+
+/// A live preview above an [EditSheet]'s fields, rebuilt with the values
+/// being edited (normalised as [EditSheet] would return them).
+typedef EditSheetPreview = Widget Function(BuildContext context, Map<String, Object?> values);
 
 /// The body of [showEditSheet] (public for embedding / tests).
 class EditSheet extends StatefulWidget {
@@ -52,6 +64,7 @@ class EditSheet extends StatefulWidget {
     this.saveLabel,
     this.subtitle,
     this.icon,
+    this.preview,
   });
 
   final String title;
@@ -60,6 +73,9 @@ class EditSheet extends StatefulWidget {
   final String? saveLabel;
   final String? subtitle;
   final IconData? icon;
+
+  /// Optional live preview above the fields.
+  final EditSheetPreview? preview;
 
   @override
   State<EditSheet> createState() => _EditSheetState();
@@ -156,6 +172,12 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
         if (f.isTextEntry) f.key,
     ];
     final children = <Widget>[];
+    final preview = widget.preview;
+    if (preview != null) {
+      children
+        ..add(KitStaggerIn(index: 0, child: preview(context, _model.result())))
+        ..add(const SizedBox(height: Space.l));
+    }
     for (final (i, f) in widget.fields.indexed) {
       if (i > 0) children.add(const SizedBox(height: Space.xl));
       children.add(

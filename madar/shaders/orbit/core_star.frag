@@ -28,6 +28,11 @@
 // Balance reads: the white-hot centre is kept modest so the outer third of a
 // balanced star stays visibly gold, and an ailing star's diffraction spikes
 // shrink and soften (0.35× at balance 0) instead of staying long and crisp.
+// Round 2: never a blown-out white disc – a warm-white core (#FFF4DC)
+// darkening to an orange limb with visible, slowly boiling granulation,
+// exposed below clipping; fine corona filaments; the bloom is capped at
+// ~2 radii so it stays inside the hub's window (the countdown engraved on
+// the hub ring is never washed out).
 // ---------------------------------------------------------------------------
 
 uniform vec2 uSize;
@@ -100,18 +105,20 @@ void main() {
     float spotN = fbm3lo(q * 2.6 + vec3(7.1, t * 0.01, 3.3));
     float spots = smoothstep(0.66, 0.74, spotN) * turb;
     float pen = smoothstep(0.58, 0.68, spotN) * turb;
-    vec3 limbC = mix(hot, cs_temp(temp * 0.55) * tintA, 0.75);
-    vec3 photo = mix(limbC, hot, smoothstep(0.05, 1.0, mu));
-    float bright = ld * (1.0 + cells * mix(0.35, 0.8, turb));
+    // Warm white (#FFF4DC) at the centre, an orange limb; an ailing star
+    // runs cooler and redder throughout.
+    vec3 coreC = mix(cs_temp(temp * 0.9), vec3(1.0, 0.905, 0.71), bal) * mix(vec3(1.0), tintA * 1.1, 0.25);
+    vec3 limbC = mix(vec3(0.9, 0.2, 0.04), vec3(1.0, 0.42, 0.1), bal);
+    vec3 photo = mix(limbC, coreC, smoothstep(0.0, 0.9, mu));
+    float bright = ld * (1.0 + cells * mix(0.55, 0.85, turb));
     bright *= 1.0 - pen * 0.35 - spots * 0.55;
     // Faculae: bright filigree near the limb.
-    bright += smoothstep(0.62, 0.8, gran2) * (1.0 - mu) * 0.25;
-    disc = photo * bright * mix(1.7, 2.0, bal) * exposure;
-    // Hot white centre (only a balanced star burns white); the outer third of
-    // the disc stays visibly gold so the star reads white-GOLD, not blank white.
-    disc += vec3(1.0, 0.97, 0.9) * pow(mu, 3.0) * 1.6 * bal * bal * exposure;
+    bright += smoothstep(0.62, 0.8, gran2) * (1.0 - mu) * 0.3;
+    disc = photo * bright * mix(0.75, 1.0, bal) * exposure;
+    // A gentle hot centre (never clipped white).
+    disc += vec3(1.0, 0.93, 0.8) * pow(mu, 4.0) * 0.28 * bal * exposure;
     // An ailing star still smoulders: a deep ember glow from within.
-    disc += vec3(1.0, 0.36, 0.08) * pow(mu, 1.5) * 0.9 * turb * exposure;
+    disc += vec3(1.0, 0.36, 0.08) * pow(mu, 1.5) * 0.45 * turb * exposure;
   }
 
   // ---------------- corona ----------------
@@ -131,7 +138,7 @@ void main() {
                   + smoothstep(0.5, 0.95, s3) * 0.6 * bal * (0.4 + s1);
   float reach = mix(0.8, 1.35, turb) * (1.0 + uPulse * 0.6);
   float coronaFall = exp(-(rr - 1.0) / (0.36 * reach));
-  float coronaI = coronaFall * (0.12 + streamers * mix(1.0, 1.9, turb));
+  float coronaI = coronaFall * (0.06 + streamers * mix(0.8, 1.9, turb));
   // Chromosphere: fine spicule fringe hugging the limb.
   float spic = noise3(vec3(dir * 38.0, lr * 22.0 - t * 1.2 * speed));
   float chromo = exp(-(rr - 1.0) / (0.035 + 0.03 * turb)) * (0.6 + 0.8 * spic);
@@ -158,7 +165,7 @@ void main() {
 
   // ---------------- bloom halo ----------------
   float dr = rr - 1.0;
-  float bloom = exp(-dr / 0.1) * 0.55 + exp(-dr / 0.4) * 0.3 + 0.12 / (1.0 + cs_sq(dr * 2.5));
+  float bloom = exp(-dr / 0.08) * 0.4 + exp(-dr / 0.3) * 0.16;
 
   // ---------------- 8-point diffraction spikes ----------------
   float sLong = 1.15 * mix(0.7, 1.0, bal) * (1.0 + uPulse * 0.8);
@@ -193,9 +200,9 @@ void main() {
             + mix(hot, coronaC, 0.6) * bloom * 1.5
             + mix(vec3(1.0, 0.95, 0.85), hot, 0.4) * spikes * 2.2
             + mix(coronaC, vec3(1.0, 0.9, 0.7), 0.5) * ring * 1.5;
-  glow *= exposure;
-  // Fade to nothing well inside the draw rect.
-  glow *= 1.0 - smoothstep(CS_EXTENT * 0.72, CS_EXTENT * 0.98, r);
+  glow *= exposure * 0.8;
+  // The bloom stays inside the hub's window (~2 radii).
+  glow *= 1.0 - smoothstep(1.45, 2.1, r);
 
   float discA = discMask(p, uRadius);
   // Blend the glow in toward the limb so the disc edge meets the chromosphere

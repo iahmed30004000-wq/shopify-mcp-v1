@@ -52,12 +52,19 @@ class WindowChips extends StatefulWidget {
     required this.focused,
     required this.current,
     required this.onSelected,
+    this.nextWindow,
+    this.countdown,
   });
 
   final PrayerDayTimes times;
   final PrayerWindow focused;
   final PrayerWindow current;
   final ValueChanged<PrayerWindow> onSelected;
+
+  /// The window of the next obligatory prayer: its chip shows [countdown]
+  /// («بعد ١ س ٢٣ د») in place of its start time.
+  final PrayerWindow? nextWindow;
+  final String? countdown;
 
   @override
   State<WindowChips> createState() => _WindowChipsState();
@@ -95,30 +102,44 @@ class _WindowChipsState extends State<WindowChips> {
   Widget build(BuildContext context) {
     final l = L10n.of(context);
     final fmt = MadarFormatter.of(context);
+    // Large text: the chips grow with it instead of clipping.
+    final height = MediaQuery.textScalerOf(context).scale(58).clamp(58.0, 96.0);
+    // Six chips only: built eagerly (not lazily) so the focused one can
+    // always be scrolled into view, even at the far end.
     return SizedBox(
-      height: 58,
-      child: ListView.separated(
+      height: height,
+      child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.l),
-        itemCount: PrayerDayTimes.windows.length,
-        separatorBuilder: (_, _) => const SizedBox(width: Space.s),
-        itemBuilder: (context, i) {
-          final w = PrayerDayTimes.windows[i];
-          final start = widget.times.startOf(w);
-          final time = fmt.formatClock(start.inHours, start.inMinutes.remainder(60));
-          return _WindowChip(
-            key: _keys[w],
-            label: windowLabel(l, w),
-            time: time,
-            icon: windowIcon(w),
-            selected: w == widget.focused,
-            isNow: w == widget.current,
-            nowLabel: l.homeNow,
-            semanticLabel: l.homeWindowStarts(windowLabel(l, w), time),
-            onTap: () => widget.onSelected(w),
-          );
-        },
+        child: Row(
+          children: [
+            for (var i = 0; i < PrayerDayTimes.windows.length; i++) ...[
+              if (i > 0) const SizedBox(width: Space.s),
+              _chip(l, fmt, PrayerDayTimes.windows[i]),
+            ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _chip(L10n l, MadarFormatter fmt, PrayerWindow w) {
+    final start = widget.times.startOf(w);
+    final time = fmt.formatClock(start.inHours % 24, start.inMinutes.remainder(60));
+    final countdown = w == widget.nextWindow && w != widget.current ? widget.countdown : null;
+    return _WindowChip(
+      key: _keys[w],
+      label: windowLabel(l, w),
+      time: countdown ?? time,
+      countdown: countdown != null,
+      icon: windowIcon(w),
+      selected: w == widget.focused,
+      isNow: w == widget.current,
+      nowLabel: l.homeNow,
+      semanticLabel: countdown == null
+          ? l.homeWindowStarts(windowLabel(l, w), time)
+          : l.orbitUiListSeparator(l.homeWindowStarts(windowLabel(l, w), time), countdown),
+      onTap: () => widget.onSelected(w),
     );
   }
 }
@@ -128,6 +149,7 @@ class _WindowChip extends StatelessWidget {
     super.key,
     required this.label,
     required this.time,
+    this.countdown = false,
     required this.icon,
     required this.selected,
     required this.isNow,
@@ -138,6 +160,9 @@ class _WindowChip extends StatelessWidget {
 
   final String label;
   final String time;
+
+  /// [time] is the next prayer's countdown (drawn in the accent).
+  final bool countdown;
   final IconData icon;
   final bool selected;
   final bool isNow;
@@ -153,7 +178,7 @@ class _WindowChip extends StatelessWidget {
       onTap: selected ? null : onTap,
       sfx: Sfx.tap,
       selected: selected,
-      semanticLabel: isNow ? '$semanticLabel · $nowLabel' : semanticLabel,
+      semanticLabel: isNow ? L10n.of(context).orbitUiListSeparator(semanticLabel, nowLabel) : semanticLabel,
       excludeChildSemantics: true,
       focusRadius: BorderRadius.circular(t.radiusM),
       child: TweenAnimationBuilder<double>(
@@ -187,7 +212,7 @@ class _WindowChip extends StatelessWidget {
                           Text(
                             time,
                             style: text.labelSmall!.copyWith(
-                              color: Color.lerp(t.textTertiary, t.accent, v),
+                              color: countdown ? t.gold : Color.lerp(t.textTertiary, t.accent, v),
                               height: 1.1,
                               fontFeatures: const [FontFeature.tabularFigures()],
                             ),

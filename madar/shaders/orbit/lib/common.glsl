@@ -163,14 +163,21 @@ vec3 atmosphere(vec2 p, vec3 n, vec3 l, vec3 color, float density, float haloWid
 
 // --- living state -----------------------------------------------------------
 // uScore in [0,1]: 0 neglected … 1 thriving.
-float thrive(float score) { return smoothstep(0.55, 0.95, score); }
-float neglect(float score) { return 1.0 - smoothstep(0.15, 0.55, score); }
+// Round 2: a perceptual curve – the two grades overlap a little in the
+// middle and each runs over a wide span, so saturation, dust and emission
+// change about linearly from 30 % to 80 % (37 % reads clearly neglected,
+// 50 % steady, 65 % warming, 80 % thriving) instead of a flat "steady"
+// plateau between two switches.
+float thrive(float score) { return smoothstep(0.42, 0.92, score); }
+float neglect(float score) { return 1.0 - smoothstep(0.1, 0.62, score); }
 
-// Swirling dust storm density over a surface point (object space).
+// Dust storm density over a surface point (object space): dense storm
+// belts streaked along the latitudes (dragged out by the winds), not a
+// uniform blur – directional haze that reads as weather.
 float dustStorm(vec3 q, float t) {
-  vec3 w = q * 2.2 + vec3(t * 0.05, 0.0, -t * 0.03);
-  float d = fbm3lo(w + fbm3lo(w * 1.7 + t * 0.02) * 1.3);
-  return smoothstep(0.35, 0.8, d);
+  vec3 w = q * vec3(1.7, 5.6, 1.7) + vec3(t * 0.05, 0.0, -t * 0.03);
+  float d = fbm3lo(w + fbm3lo(w * vec3(1.6, 0.5, 1.6) + t * 0.02) * 1.3);
+  return smoothstep(0.26, 0.68, d);
 }
 
 // Faint crack network (cellular edges) – returns 0..1 crack intensity.
@@ -179,8 +186,8 @@ float cracks(vec3 q) {
   return 1.0 - smoothstep(0.0, 0.05, v.y - v.x);
 }
 
-// Slow "distress" pulse for neglected worlds (period ~3.2 s).
-float distressPulse(float t) { return 0.5 + 0.5 * sin(t * 1.96); }
+// Slow "distress" pulse for neglected worlds (0.25 Hz: a 4 s breath).
+float distressPulse(float t) { return 0.5 + 0.5 * sin(t * 1.5707963); }
 
 // ===========================================================================
 // FAMILY LOOK (shared by the eight life-area planets; opt-in, additive).
@@ -205,8 +212,10 @@ float distressPulse(float t) { return 0.5 + 0.5 * sin(t * 1.96); }
 // they can still flicker / fail on their own terms). Target: neglected /
 // thriving mean lit-disc luminance ≤ 0.6 — do not add per-world brighteners.
 vec3 neglectGrade(vec3 col, float ng) {
-  float k = 0.45 * saturate(ng);
-  return desaturate(col, k) * (1.0 - k);
+  // Round 2: a neglected world keeps its hue family (tarnish and dust sit
+  // OVER its colour, they do not replace it): 22 % desaturated, 34 % dimmer.
+  float k = saturate(ng);
+  return desaturate(col, 0.22 * k) * (1.0 - 0.34 * k);
 }
 
 // Thriving: a day-side, low-frequency cue that survives at 22 px. Saturation
@@ -283,98 +292,98 @@ vec3 atmoHalo(vec2 p, vec3 l, vec3 atmoCol, float tau0, float scaleH, float gain
 }
 
 // --- aurora: one soft curtain model for every world -------------------------
-// Emissive sheets rising AURORA_H radii above both auroral ovals (the double
-// cone |X·axis| = c·|X|), intersected analytically with the orthographic view
-// ray, so the SAME call serves the disc (curtains in front of the surface)
-// and the halo (curtains standing above the limb). Fixes relative to the old
-// per-world curtains/ribbons:
-//   * grazing boost capped at 1 / max(|n.z|, 0.4) (≤ 2.5×): no fur past the limb
-//   * soft base smoothstep(0, 0.3, u) and a long faded top (broad hump over
-//     the curtain height, not a bright line at the foot): no hard ellipse
-//   * rays never finer than ~6 px (frequency follows uRadius)
-//   * low-frequency arcs break the oval into separate curtains with real gaps
-//     (about 8 arcs around the oval, no emission floor): never a closed ring.
-//     A closed oval read as a glowing saucer under every thriving world at
-//     the always-visible south pole (stage-3 review).
-//   * day-side factor 0.2 + 1.1 * night, evaluated at the curtain point
-//   * edge-on silhouette softened: emission fades over a 0.5 R depth gap
-//     where the view ray grazes the cone (no hard vertical 'bowl' sides)
+// Round 2: a robust glow model instead of analytic sheet/cone intersections
+// (those produced clipped hooks and slivers at grazing angles). The auroral
+// oval is a narrow band of latitude around the spin axis (|cos colatitude| =
+// ovalY ± AURORA_BAND, a smooth window – so the callers' conservative
+// *_auroraNear() bounds, built for ovalY ± 0.031 up to AURORA_H above the
+// surface, still contain every lit fragment):
+//   * on the disc: the band glows over the surface, faint by day, brighter
+//     on the night side and toward the limb (where the curtains are seen
+//     edge-on), streaked along the oval by vertical rays;
+//   * in the halo: above each limb point on the band stands a curtain – a
+//     Gaussian base glow at the limb fading up to AURORA_H, the same rays
+//     now running vertically.
+// Purely additive (never darker than what is behind it), soft everywhere,
+// broken into ~8 separate arcs round the oval (never a closed ring).
 #define AURORA_H 0.12
+#define AURORA_BAND 0.028
 
-vec2 _auroraSheet(vec3 X, float dz, vec3 axis, float c, float zs, mat3 rot, vec3 l, float t, float px, float rayF) {
-  float rX = length(X);
-  float h = rX - 1.0;
-  if (h <= 0.0 || h >= AURORA_H || X.z < zs) return vec2(0.0);
-  vec3 Xo = rot * X;
-  vec2 dir = normalize(Xo.xz + 1e-5);
-  float hemi = Xo.y > 0.0 ? 1.0 : -1.0;
-  float u = h / AURORA_H;
+float _auroraWindow(float c, float ovalY) {
+  float d = abs(abs(c) - ovalY) / AURORA_BAND;
+  return 1.0 - smoothstep(0.3, 1.0, d);
+}
+
+// Rays and arcs along the oval at object-space direction qd (x, z), for
+// hemisphere hemi; rayF follows the planet's size (never finer than ~6 px).
+float _auroraRays(vec2 qd, float hemi, float t, float rayF, float u) {
+  vec2 dir = normalize(qd + 1e-5);
   float rays = noise3(vec3(dir * rayF, t * 0.35 + hemi * 9.0 + u * 0.4));
   float folds = noise3(vec3(dir * 3.2, t * 0.12 - hemi * 4.0));
-  float arcs = smoothstep(0.45, 0.72, noise3(vec3(dir * 2.1 + t * 0.02, hemi * 7.0 + 3.0)));
-  // broad soft hump: soft base (0 → 0.3), long soft top (0.35 → 1): no thin bright line
-  float prof = smoothstep(0.0, 0.3, u) * (1.0 - smoothstep(0.35, 1.0, u));
-  vec3 nrm = normalize(dot(X, axis) * axis - c * c * X);
-  float graze = 1.0 / max(abs(nrm.z), 0.4);
-  float vis = smoothstep(0.6, 2.5, AURORA_H * length(X.xy) / rX / px);
-  float night = 1.0 - smoothstep(-0.25, 0.15, dot(X / rX, l));
-  float e = (0.5 + 0.5 * rays) * (0.35 + 0.65 * folds) * arcs
-          * prof * graze * vis * (0.2 + 1.1 * night) * smoothstep(0.0, 0.5, dz);
-  return vec2(e, e * u);
+  float arcs = smoothstep(0.42, 0.7, noise3(vec3(dir * 2.1 + t * 0.02, hemi * 7.0 + 3.0)));
+  return (0.45 + 0.55 * rays) * (0.35 + 0.65 * folds) * arcs;
 }
+
+float _auroraRayFreq(float px) { return clamp(0.08 / max(px, 1e-4), 4.0, 30.0); }
 
 // p    = fragment position in planet radii (y up; disc AND halo fragments)
 // rot  = the planet's view→object rotation (q = rot * n); the spin axis is
-//        object +y, so any rotY(spin) * rotX(tilt) works
+//        object +y
 // l    = light direction (view space, normalised)
 // ovalY = cosine of the oval's colatitude: 0.86 (wide) … 0.92 (tight polar)
 // t    = uTime, px = 1 / uRadius
-// Returns x = emission (≈ 0.3–0.6 typical at night, ≤ ~0.35 by day, peaks
-// ~1.5 where a sheet is seen edge-on), y = emission × relative height (0 base
-// … 1 top) — use y / x to grade base → top colour. Caller supplies colour and
-// gain; gate the call with the thrive/pulse gain (it costs 7 noise taps where
-// curtains exist, nothing elsewhere). Evaluate ONCE per fragment, above the
-// disc/halo branches, and add the same value to both:
+// Returns x = emission (≈ 0.3–0.5 at night on the disc, ~0.8 at the base of
+// a limb curtain, ≤ ~0.12 by day), y = emission × relative height (0 base …
+// 1 top) — use y / x to grade base → top colour. Evaluate ONCE per fragment
+// and add the same value to disc and halo:
 //   vec2 au = (auK > 0.001) ? auroraCurtains(p, rot, l, 0.9, t, px) * auK : vec2(0.0);
 //   vec3 auC = mix(auroraBase, auroraTop, saturate(au.y / max(au.x, 1e-4) * 2.0)) * au.x * 0.3;
 //   col += auC; halo += auC;
-float _auroraRayFreq(float px) { return clamp(0.08 / max(px, 1e-4), 4.0, 30.0); }
-
 vec2 auroraCurtains(vec2 p, mat3 rot, vec3 l, float ovalY, float t, float px) {
-  float pp = dot(p, p);
-  if (pp > (1.0 + AURORA_H) * (1.0 + AURORA_H)) return vec2(0.0);
-  vec3 axis = vec3(0.0, 1.0, 0.0) * rot;          // object +y in view space
-  float zs = pp < 1.0 ? sqrt(1.0 - pp) : -9.0;    // occluding surface depth
-  float c = ovalY + (noise3(vec3(p * 2.2, t * 0.08)) - 0.5) * 0.06;
-  float k = dot(axis.xy, p);
-  float A = axis.z * axis.z - c * c;
-  A = A < 0.0 ? min(A, -1e-4) : max(A, 1e-4);
-  float B = 2.0 * k * axis.z;
-  float C = k * k - c * c * pp;
-  float D = B * B - 4.0 * A * C;
-  if (D <= 0.0) return vec2(0.0);
-  float sD = sqrt(D);
-  float dz = sD / abs(A);                          // depth gap between the two crossings
+  float r = length(p);
+  if (r > 1.0 + AURORA_H) return vec2(0.0);
   float rayF = _auroraRayFreq(px);
-  return _auroraSheet(vec3(p, (-B + sD) / (2.0 * A)), dz, axis, c, zs, rot, l, t, px, rayF)
-       + _auroraSheet(vec3(p, (-B - sD) / (2.0 * A)), dz, axis, c, zs, rot, l, t, px, rayF);
+  if (r < 1.0) {
+    vec3 n = vec3(p, sqrt(max(0.0, 1.0 - r * r)));
+    vec3 q = rot * n;
+    float w = _auroraWindow(q.y, ovalY);
+    if (w <= 0.0) return vec2(0.0);
+    float night = 1.0 - smoothstep(-0.25, 0.2, dot(n, l));
+    float limb = 0.35 + 1.1 * pow(1.0 - n.z, 2.0);
+    float e = w * _auroraRays(q.xz, sign(q.y), t, rayF, 0.2) * limb * (0.12 + 0.88 * night) * 0.55;
+    return vec2(e, e * 0.25);
+  }
+  // Halo: the curtain standing above the limb point beneath the fragment.
+  vec3 n0 = vec3(p / r, 0.0);
+  vec3 q0 = rot * n0;
+  float w = _auroraWindow(q0.y, ovalY);
+  if (w <= 0.0) return vec2(0.0);
+  float h = r - 1.0;
+  float u = h / AURORA_H;
+  float base = exp(-(h * h) / (0.045 * 0.045)) * 0.75 + exp(-h / 0.055) * 0.35;
+  float top = 1.0 - smoothstep(0.6, 1.0, u);
+  float vis = smoothstep(0.6, 2.5, AURORA_H / px);        // sub-pixel curtains fade
+  float night = 1.0 - smoothstep(-0.3, 0.2, dot(n0, l));
+  float e = w * _auroraRays(q0.xz, sign(q0.y), t, rayF, u) * base * top * vis * (0.12 + 0.88 * night);
+  return vec2(e, e * u);
 }
 
-// --- celebration: limb shock ring -----------------------------------------------
-// The one celebration language: a ring is born at the limb and expands to
-// r = 1.26 as uPulse decays 1 → 0 (drive uPulse as a 1 → 0 burst over ~1–1.5 s;
-// animating 0 → 1 → 0 makes it travel out and back). Thin and bright at
-// birth, wider and fainter as it travels. Antialiased: the width is floored at
-// 0.7 px with energy kept constant. Zero over the disc (r ≤ 1). Add to the
-// HALO with the world's glow colour; keep per-world flourishes on the disc:
+// --- celebration: a soft shockwave ----------------------------------------------
+// Round 2: not a stroked outline ring. A broad, faint shell of light swells
+// out of the limb to r ≈ 1.3 as uPulse decays 1 → 0 – a refraction-like
+// swell of the halo, soft on both sides – while the particle burst (drawn by
+// the app) carries the celebration. Zero over the disc (r ≤ 1). Add to the
+// HALO with the world's glow colour (same call sites as before):
 //   halo += glowCol * limbShock(r, uPulse, 1.0 / uRadius) * 0.6;
 float limbShock(float r, float pulse, float px) {
   float pl = saturate(pulse);
-  float ringR = 1.0 + (1.0 - pl) * 0.26;
-  float w0 = 0.012 + 0.03 * (1.0 - pl);
-  float w = max(w0, 0.7 * px);
+  float ringR = 1.0 + (1.0 - pl) * 0.3;
+  float w = max(0.06 + 0.1 * (1.0 - pl), 3.0 * px);
   float rd = (r - ringR) / w;
-  return pl * exp(-rd * rd) * (w0 / w) * smoothstep(1.0, 1.0 + max(0.02, px), r);
+  // a lifted, feathered shell and a faint fill between it and the limb
+  float shell = exp(-rd * rd) * 0.32;
+  float fill = (1.0 - smoothstep(1.0, ringR + w, r)) * 0.08;
+  return pl * pl * (shell + fill) * smoothstep(1.0, 1.0 + max(0.02, px), r);
 }
 
 // --- distress (neglect) -----------------------------------------------------------
@@ -382,10 +391,14 @@ float limbShock(float r, float pulse, float px) {
 // pulseD = distressPulse(uTime) * ng — never offset the phase (moons included)
 // so a neglected planet and its satellites breathe together. Strengths are a
 // little lower than the old per-world 0.65 / 0.4 (the peak read as an alarm).
-vec3 distressColor() { return vec3(1.0, 0.035, 0.015); }                 // linear
-float distressRim(float mu, float pulseD) { return pow(1.0 - saturate(mu), 3.0) * pulseD * 0.5; }
+// An EMBER, not an alarm: a dull orange glow breathing just OUTSIDE the
+// limb (≤ 35 %), with only a trace on the disc itself – a hard red outline
+// read as a UI error.
+vec3 distressColor() { return vec3(1.0, 0.3, 0.06); }                    // linear
+float distressRim(float mu, float pulseD) { return pow(1.0 - saturate(mu), 6.0) * pulseD * 0.05; }
 float distressHalo(float r, float pulseD, float px) {
-  return exp(-max(r - 1.0, 0.0) / max(0.035, 1.2 * px)) * pulseD * 0.3;
+  float outside = smoothstep(1.0, 1.0 + 1.5 * px, r);
+  return outside * exp(-max(r - 1.0, 0.0) / max(0.08, 2.5 * px)) * pulseD * 0.22;
 }
 
 // --- the ONE compositing convention -----------------------------------------------

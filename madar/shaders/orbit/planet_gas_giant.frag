@@ -23,6 +23,9 @@
 // uSpin.x spin angle, uSpin.y axial tilt = ring opening toward the viewer
 // (its magnitude is clamped to ≥ 0.2 rad so the rings always read).
 // haloFactor: 2.3 (main rings to 2.04 R, F ring 2.10 R, ship lanes to 2.17 R).
+// Round 2: the ships are ships – 3–5 px gold arrowhead (chevron) silhouettes
+// pointing along their course with a comet wake behind, never sparkles; a
+// neglected giant stays a desaturated VIOLET (never a grey ball).
 //
 // FAMILY LOOK (common.glsl): lifeGrade on the lit clouds (before the night
 // lights), the shared forward-scatter haze/halo, ONE aurora evaluation
@@ -30,8 +33,8 @@
 // through the rings for celebrations, the shared distress rim/halo, and
 // compositeDiscHalo for disc + halo (the rings are layered around it: back
 // ring under, front ring over, ships on top).
-// Ships are warm gold beads (≥ 1.6 px) with a readable wake; below 40 px they
-// become bright beads with a short lane arc so 0 / 2 / 6 trips stay countable.
+// Ships are warm gold beads (≥ 2.5 px) with a readable wake; below 40 px they
+// become bright beads with a lane arc so 0 / 2 / 6 trips stay countable.
 // ---------------------------------------------------------------------------
 uniform vec2 uSize;
 uniform vec2 uCenter;
@@ -284,11 +287,13 @@ void main() {
     float band = smoothstep(0.3, 0.7, bandL);
     // Band contrast fades with neglect only (steady keeps its structure; the
     // thriving cue is vividness + brightness, below).
-    float contrast = mix(0.4, 1.0, smoothstep(0.02, 0.6, uScore)) * (1.0 - ng * 0.5);
+    float contrast = mix(0.55, 1.0, smoothstep(0.02, 0.6, uScore)) * (1.0 - ng * 0.35);
     vec3 cream = toLinear(vec3(0.98, 0.93, 0.9));
     vec3 beltC = mix(surf, deep, 0.6);
     vec3 zoneC = mix(glow, cream, 0.35);
-    float v = saturate(band * 0.85 + (turb - 0.5) * 0.5 + (st - 0.5) * 0.2);
+    // close up the jets' fine streaks and eddies carry more contrast (the
+    // bands must not read as soft smears at hero scale)
+    float v = saturate(band * 0.85 + (turb - 0.5) * mix(0.5, 0.72, smoothstep(0.55, 0.9, detail)) + (st - 0.5) * 0.38);
     vec3 albedo = mix(beltC, surf, smoothstep(0.0, 0.42, v));
     albedo = mix(albedo, glow * 0.9, smoothstep(0.38, 0.7, v));
     albedo = mix(albedo, zoneC, smoothstep(0.68, 0.95, v));
@@ -316,9 +321,10 @@ void main() {
     // Thriving: vivid, saturated bands (a low-frequency day-side read at 22 px).
     albedo = max(mix(vec3(luma(albedo)), albedo, 1.0 + 0.5 * th), 0.0);
 
-    // Neglect: faded, hazy, dusty bands (the shared grade does the dimming).
-    albedo = desaturate(albedo, ng * 0.35);
-    albedo = mix(albedo, dustC * 0.6, ng * 0.3);
+    // Neglect: faded, hazy, dusty bands – still violet (the shared grade
+    // does the dimming; the dust is tinted with the world's own hue).
+    albedo = desaturate(albedo, ng * 0.2);
+    albedo = mix(albedo, mix(dustC, surf, 0.55) * 0.6, ng * 0.2);
 
     // Lighting: soft terminator (thick atmosphere) and gentle limb darkening.
     float ndl = dot(n, l);
@@ -405,11 +411,11 @@ void main() {
   vec3 shipCol = vec3(0.0);
   float trips = clamp(uExtra.x, 0.0, 6.0);
   if (trips > 0.001) {
-    float sizePx = clamp(uRadius * 0.012, 1.6, 3.2);
-    // Small planets: each ship is a bright bead (bigger core, short lane arc)
+    float sizePx = clamp(uRadius * 0.012, 2.5, 3.6);
+    // Small planets: each ship is a bright bead (bigger core, a lane arc)
     // so the number of upcoming trips can still be counted at a glance.
     float small = 1.0 - smoothstep(28.0, 40.0, uRadius);
-    float beadPx = mix(sizePx, 1.9, small);
+    float beadPx = mix(sizePx, 2.6, small);
     float phiP = atan(dot(PR, E2), dot(PR, E1));
     float zs = sqrt(max(1.0 - r * r, 0.0));
     float trailVis = (r < 1.0 && zr < zs) ? 0.0 : 1.0;
@@ -435,22 +441,32 @@ void main() {
         float hidden = (sr2 < 1.0 && SP.z < sqrt(max(1.0 - sr2, 0.0))) ? 1.0 : 0.0;
         vec2 dv = (p - SP.xy) / px;
         float d = length(dv);
-        float core = exp(-d * d / (beadPx * beadPx * 0.35));
+        // The hull: a chevron pointing along the course (screen-space
+        // tangent of the lane at the ship), 3–5 px long.
+        vec3 tang = -sin(ang) * E1 + cos(ang) * E2;
+        vec2 hd = normalize(tang.xy + vec2(1e-5, 0.0));
+        vec2 hp = vec2(-hd.y, hd.x);
+        float al = dot(dv, hd), ac = abs(dot(dv, hp));
+        float L = mix(max(3.4, sizePx * 1.4), 3.2, small);
+        float Wd = L * 0.44;
+        float d1 = 0.55 * L - al;                                         // behind the tip
+        float d2 = (Wd * (0.55 * L - al) / L - ac) / 1.1;                 // inside the flanks
+        float d3 = (al + 0.12 * L + (0.33 * L / Wd) * ac) / 1.3;          // ahead of the notched stern
+        float hull = smoothstep(-0.55, 0.55, min(d1, min(d2, d3)));
+        float core = hull;
         // (finite support: gamma would lift an exponential tail into a visible box)
-        float bloom = (exp(-d / (beadPx * 1.6)) * 0.35 + exp(-d / (beadPx * 4.0)) * 0.14 * (1.0 - 0.85 * small))
-                    * smoothstep(beadPx * mix(10.0, 4.0, small), beadPx * mix(5.0, 2.0, small), d);
-        // Four-point glint (twinkles gently; large planets only).
-        vec2 ad = abs(dv);
-        float glint = (exp(-ad.y * ad.y / 0.5) * exp(-ad.x / (sizePx * 3.0)) + exp(-ad.x * ad.x / 0.5) * exp(-ad.y / (sizePx * 3.0)));
-        glint *= 0.35 * (0.7 + 0.3 * sin(t * 3.0 + fi * 1.7)) * smoothstep(1.8, 2.6, sizePx);
+        float bloom = (exp(-d / (beadPx * 1.0)) * 0.12) * smoothstep(beadPx * 5.0, beadPx * 2.5, d);
+        // engine glow at the stern (behind the hull, into the wake)
+        float engine = exp(-dot(dv + hd * L * 0.35, dv + hd * L * 0.35) / (L * L * 0.08)) * 0.5;
+        float glint = engine;
         // Wake: a luminous arc behind the ship on its lane, brightest at the head.
         float dth = mod(ang - phiP, TAU);
-        float tLen = mix(0.9, 0.22, small);
+        float tLen = mix(0.9, 0.45, small);
         float trail = exp(-radPx * radPx / (tw * tw)) * (exp(-dth / tLen) + exp(-dth / 0.12) * 0.8) * smoothstep(2.8, 1.6, dth) * trailVis;
         trail *= step(radPx, tw * 3.5);
         trail *= smoothstep(0.0, 0.03, dth);
         vec3 hue = mix(warm, vec3(1.0, 0.93, 0.8), 0.25 + 0.15 * sin(fi * 2.1));
-        float I = (core * mix(2.6, 3.4, small) + bloom + glint) * (1.0 - hidden);
+        float I = (core * mix(1.6, 2.2, small) + bloom + glint) * (1.0 - hidden);
         I *= vis * (1.0 + uPulse * 1.5);
         shipCol += hue * I + mix(warm, hue, exp(-dth / 0.25)) * trail * mix(0.9, 0.45, small) * vis;
       }

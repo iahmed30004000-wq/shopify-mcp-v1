@@ -57,12 +57,7 @@ String _dayKey(DateTime d) =>
 /// Fills [r] with a realistic week of life. [thriving] = everything kept up;
 /// otherwise the same records slipping (overdue people, missed doses,
 /// overspent fuel, late bill, expiring passport, unpacked trip …).
-Future<FixtureIds> seedLivedIn(
-  Repositories r, {
-  DateTime? now,
-  required bool thriving,
-  bool arabic = true,
-}) async {
+Future<FixtureIds> seedLivedIn(Repositories r, {DateTime? now, required bool thriving, bool arabic = true}) async {
   final at = now ?? fixtureNow;
   final n = FixtureNames(arabic);
   final ids = FixtureIds();
@@ -78,12 +73,16 @@ Future<FixtureIds> seedLivedIn(
       if (t.isAfter(at)) continue;
       // Neglected: only Fajr gets logged (and not every day).
       if (!thriving && (p != Prayer.fajr || d.isOdd)) continue;
-      await r.prayerLogs.insert(PrayerLogsCompanion.insert(
-        day: _dayKey(day),
-        prayer: p,
-        status: Value(thriving ? PrayerStatus.prayed : PrayerStatus.late),
-        inJamaah: Value(thriving && (p == Prayer.maghrib || p == Prayer.isha)),
-      ));
+      await r.prayerLogs.insert(
+        PrayerLogsCompanion.insert(
+          day: _dayKey(day),
+          prayer: p,
+          status: Value(thriving ? PrayerStatus.prayed : PrayerStatus.late),
+          inJamaah: Value(thriving && (p == Prayer.maghrib || p == Prayer.isha)),
+          // Logged a few minutes after its time (never after "now").
+          loggedAt: Value(_minTime(t.add(Duration(minutes: thriving ? 6 : 50)), at)),
+        ),
+      );
     }
     if (d == -8 && !thriving) {
       // Tracking started 8 days ago.
@@ -95,17 +94,17 @@ Future<FixtureIds> seedLivedIn(
   }
 
   // ---- Health: two medications, doses logged (or not).
-  final metformin = await r.medications.insert(MedicationsCompanion.insert(
-    name: 'Metformin',
-    times: const Value(['08:00', '20:00']),
-    createdAt: Value(created),
-  ));
-  final vitD = await r.medications.insert(MedicationsCompanion.insert(
-    name: arabic ? 'فيتامين د' : 'Vitamin D',
-    kind: const Value(MedKind.supplement),
-    times: const Value(['09:00']),
-    createdAt: Value(created),
-  ));
+  final metformin = await r.medications.insert(
+    MedicationsCompanion.insert(name: 'Metformin', times: const Value(['08:00', '20:00']), createdAt: Value(created)),
+  );
+  final vitD = await r.medications.insert(
+    MedicationsCompanion.insert(
+      name: arabic ? 'فيتامين د' : 'Vitamin D',
+      kind: const Value(MedKind.supplement),
+      times: const Value(['09:00']),
+      createdAt: Value(created),
+    ),
+  );
   ids
     ..metformin = metformin.id
     ..vitaminD = vitD.id;
@@ -116,27 +115,36 @@ Future<FixtureIds> seedLivedIn(
       if (slot.isAfter(at)) continue;
       // Neglected: nothing logged since the day before yesterday.
       if (!thriving && d > -2) continue;
-      await r.medDoses.insert(MedDosesCompanion.insert(
-        medicationId: med.id,
-        scheduledAt: Value(slot),
-        takenAt: Value(slot.add(const Duration(minutes: 7))),
-        status: DoseStatus.taken,
-      ));
+      await r.medDoses.insert(
+        MedDosesCompanion.insert(
+          medicationId: med.id,
+          scheduledAt: Value(slot),
+          takenAt: Value(slot.add(const Duration(minutes: 7))),
+          status: DoseStatus.taken,
+        ),
+      );
     }
   }
 
   // ---- Family: people with contact rhythms (+ one not shown as a moon).
   Future<String> person(String name, int rhythm, int daysSince, {bool moon = true, int? color}) async {
-    final p = await r.people.insert(PeopleCompanion.insert(
-      name: name,
-      rhythmDays: Value(rhythm),
-      lastContact: Value(at.subtract(Duration(days: daysSince + 1))),
-      showAsMoon: Value(moon),
-      color: Value(color),
-      createdAt: Value(created),
-    ));
+    final p = await r.people.insert(
+      PeopleCompanion.insert(
+        name: name,
+        rhythmDays: Value(rhythm),
+        lastContact: Value(at.subtract(Duration(days: daysSince + 1))),
+        showAsMoon: Value(moon),
+        color: Value(color),
+        createdAt: Value(created),
+      ),
+    );
     // The latest contact lives in the contact log.
-    await r.contactLogs.insert(ContactLogsCompanion.insert(personId: p.id, at: at.subtract(Duration(days: daysSince))));
+    await r.contactLogs.insert(
+      ContactLogsCompanion.insert(
+        personId: p.id,
+        at: at.subtract(Duration(days: daysSince)),
+      ),
+    );
     return p.id;
   }
 
@@ -153,12 +161,14 @@ Future<FixtureIds> seedLivedIn(
     ..boardJo = jo.id
     ..boardSy = sy.id;
   Future<void> card(String board, String title, {String column = 'todo', int? dueIn}) async {
-    await r.boardCards.insert(BoardCardsCompanion.insert(
-      boardId: board,
-      title: title,
-      columnId: Value(column),
-      dueDate: Value(dueIn == null ? null : _day(at, dueIn)),
-    ));
+    await r.boardCards.insert(
+      BoardCardsCompanion.insert(
+        boardId: board,
+        title: title,
+        columnId: Value(column),
+        dueDate: Value(dueIn == null ? null : _day(at, dueIn)),
+      ),
+    );
   }
 
   if (thriving) {
@@ -176,8 +186,12 @@ Future<FixtureIds> seedLivedIn(
   }
 
   // ---- Money: wallets, a nested budget, this month's spending, a bill, a jar.
-  final cash = await r.wallets.insert(WalletsCompanion.insert(name: n.cash, currency: 'JOD', openingMilli: const Value(150000)));
-  final bank = await r.wallets.insert(WalletsCompanion.insert(name: n.bank, currency: 'USD', openingMilli: const Value(2000000)));
+  final cash = await r.wallets.insert(
+    WalletsCompanion.insert(name: n.cash, currency: 'JOD', openingMilli: const Value(150000)),
+  );
+  final bank = await r.wallets.insert(
+    WalletsCompanion.insert(name: n.bank, currency: 'USD', openingMilli: const Value(2000000)),
+  );
   ids
     ..cash = cash.id
     ..bank = bank.id;
@@ -185,132 +199,186 @@ Future<FixtureIds> seedLivedIn(
   final groceries = await r.budgetItems.insert(
     BudgetItemsCompanion.insert(name: n.groceries, parentId: Value(food.id), amountMilli: const Value(150000)),
   );
-  await r.budgetItems.insert(BudgetItemsCompanion.insert(name: n.eatingOut, parentId: Value(food.id), amountMilli: const Value(50000)));
+  await r.budgetItems.insert(
+    BudgetItemsCompanion.insert(name: n.eatingOut, parentId: Value(food.id), amountMilli: const Value(50000)),
+  );
   final fuel = await r.budgetItems.insert(BudgetItemsCompanion.insert(name: n.fuel, amountMilli: const Value(60000)));
   ids
     ..fuel = fuel.id
     ..food = food.id;
   Future<void> spend(String item, int milli, int day, {String? wallet}) async {
-    await r.transactions.insert(TransactionsCompanion.insert(
-      walletId: wallet ?? cash.id,
-      kind: TxKind.expense,
-      amountMilli: milli,
-      date: DateTime(at.year, at.month, day, 12),
-      budgetItemId: Value(item),
-    ));
+    await r.transactions.insert(
+      TransactionsCompanion.insert(
+        walletId: wallet ?? cash.id,
+        kind: TxKind.expense,
+        amountMilli: milli,
+        date: DateTime(at.year, at.month, day, 12),
+        budgetItemId: Value(item),
+      ),
+    );
   }
 
   await spend(groceries.id, 90000, 5);
   await spend(fuel.id, thriving ? 40000 : 90000, 10);
   if (thriving) await spend(groceries.id, 12500, at.day - 1);
-  await r.transactions.insert(TransactionsCompanion.insert(
-    walletId: cash.id,
-    kind: TxKind.income,
-    amountMilli: 100000,
-    date: DateTime(at.year, at.month, 1, 9),
-  ));
-  final internet = await r.obligations.insert(ObligationsCompanion.insert(
-    name: n.internet,
-    amountMilli: 25000,
-    currency: 'JOD',
-    frequency: Recurrence.monthly,
-    nextDue: thriving ? _day(at, 6) : _day(at, -4),
-  ));
+  await r.transactions.insert(
+    TransactionsCompanion.insert(
+      walletId: cash.id,
+      kind: TxKind.income,
+      amountMilli: 100000,
+      date: DateTime(at.year, at.month, 1, 9),
+    ),
+  );
+  final internet = await r.obligations.insert(
+    ObligationsCompanion.insert(
+      name: n.internet,
+      amountMilli: 25000,
+      currency: 'JOD',
+      frequency: Recurrence.monthly,
+      nextDue: thriving ? _day(at, 6) : _day(at, -4),
+    ),
+  );
   ids.internet = internet.id;
-  final jar = await r.jars.insert(JarsCompanion.insert(
-    name: n.travelJar,
-    targetMilli: 1000000,
-    currency: 'JOD',
-    deadline: Value(_day(at, 60)),
-    createdAt: Value(_day(at, -30)),
-  ));
-  await r.jarDeposits.insert(JarDepositsCompanion.insert(jarId: jar.id, amountMilli: thriving ? 400000 : 20000, date: _day(at, -10)));
+  final jar = await r.jars.insert(
+    JarsCompanion.insert(
+      name: n.travelJar,
+      targetMilli: 1000000,
+      currency: 'JOD',
+      deadline: Value(_day(at, 60)),
+      createdAt: Value(_day(at, -30)),
+    ),
+  );
+  await r.jarDeposits.insert(
+    JarDepositsCompanion.insert(jarId: jar.id, amountMilli: thriving ? 400000 : 20000, date: _day(at, -10)),
+  );
 
   // ---- Growth: a learning goal with a deadline, and a tracker module.
-  final goal = await r.learningGoals.insert(LearningGoalsCompanion.insert(
-    name: n.course,
-    target: 30,
-    deadline: Value(_day(at, 40)),
-    createdAt: Value(_day(at, -20)),
-  ));
+  final goal = await r.learningGoals.insert(
+    LearningGoalsCompanion.insert(
+      name: n.course,
+      target: 30,
+      deadline: Value(_day(at, 40)),
+      createdAt: Value(_day(at, -20)),
+    ),
+  );
   ids.goal = goal.id;
-  await r.goalLogs.insert(GoalLogsCompanion.insert(goalId: goal.id, amount: thriving ? 14 : 2, at: _day(at, thriving ? -1 : -15)));
-  final reading = await r.customModules.insert(CustomModulesCompanion.insert(
-    name: n.reading,
-    color: 0xFF4CC96B,
-    planetKey: const Value('growth'),
-    createdAt: Value(created),
-  ));
+  await r.goalLogs.insert(
+    GoalLogsCompanion.insert(goalId: goal.id, amount: thriving ? 14 : 2, at: _day(at, thriving ? -1 : -15)),
+  );
+  final reading = await r.customModules.insert(
+    CustomModulesCompanion.insert(
+      name: n.reading,
+      color: 0xFF4CC96B,
+      planetKey: const Value('growth'),
+      createdAt: Value(created),
+    ),
+  );
   ids.moduleReading = reading.id;
-  await r.customEntries.insert(CustomEntriesCompanion.insert(moduleId: reading.id, at: Value(_day(at, thriving ? -1 : -6))));
+  await r.customEntries.insert(
+    CustomEntriesCompanion.insert(moduleId: reading.id, at: Value(_day(at, thriving ? -1 : -6))),
+  );
 
   // ---- Body: two scheduled exercises, logs, water, a fast.
-  final pushUps = await r.exercises.insert(ExercisesCompanion.insert(
-    name: 'Push-ups',
-    weekdays: const Value([1, 3, 5, 7]),
-    createdAt: Value(created),
-  ));
-  final walk = await r.exercises.insert(ExercisesCompanion.insert(
-    name: 'Walk',
-    weekdays: const Value([1, 2, 3, 4, 5, 6, 7]),
-    durationMin: const Value(30),
-    createdAt: Value(created),
-  ));
+  final pushUps = await r.exercises.insert(
+    ExercisesCompanion.insert(name: 'Push-ups', weekdays: const Value([1, 3, 5, 7]), createdAt: Value(created)),
+  );
+  final walk = await r.exercises.insert(
+    ExercisesCompanion.insert(
+      name: 'Walk',
+      weekdays: const Value([1, 2, 3, 4, 5, 6, 7]),
+      durationMin: const Value(30),
+      createdAt: Value(created),
+    ),
+  );
   if (thriving) {
     for (var d = -6; d <= 0; d++) {
       final day = _day(at, d);
       final when = DateTime(day.year, day.month, day.day, 7);
-      await r.workoutLogs.insert(WorkoutLogsCompanion.insert(exerciseId: Value(walk.id), name: 'Walk', at: when, durationMin: const Value(30)));
+      await r.workoutLogs.insert(
+        WorkoutLogsCompanion.insert(exerciseId: Value(walk.id), name: 'Walk', at: when, durationMin: const Value(30)),
+      );
       if ([1, 3, 5, 7].contains(day.weekday)) {
-        await r.workoutLogs.insert(WorkoutLogsCompanion.insert(exerciseId: Value(pushUps.id), name: 'Push-ups', at: when));
+        await r.workoutLogs.insert(
+          WorkoutLogsCompanion.insert(exerciseId: Value(pushUps.id), name: 'Push-ups', at: when),
+        );
       }
     }
-    await r.fastingSessions.insert(FastingSessionsCompanion.insert(start: _day(at, -3).add(const Duration(hours: 4)), end: Value(_day(at, -3).add(const Duration(hours: 18, minutes: 30))), targetHours: 14));
-    await r.fastingSessions.insert(FastingSessionsCompanion.insert(start: _day(at, 0).add(const Duration(hours: 4)), targetHours: 14));
+    await r.fastingSessions.insert(
+      FastingSessionsCompanion.insert(
+        start: _day(at, -3).add(const Duration(hours: 4)),
+        end: Value(_day(at, -3).add(const Duration(hours: 18, minutes: 30))),
+        targetHours: 14,
+      ),
+    );
+    await r.fastingSessions.insert(
+      FastingSessionsCompanion.insert(start: _day(at, 0).add(const Duration(hours: 4)), targetHours: 14),
+    );
   } else {
-    await r.workoutLogs.insert(WorkoutLogsCompanion.insert(exerciseId: Value(walk.id), name: 'Walk', at: _day(at, -5).add(const Duration(hours: 7))));
-    await r.fastingSessions.insert(FastingSessionsCompanion.insert(start: _day(at, -2).add(const Duration(hours: 4)), end: Value(_day(at, -2).add(const Duration(hours: 9))), targetHours: 14));
+    await r.workoutLogs.insert(
+      WorkoutLogsCompanion.insert(
+        exerciseId: Value(walk.id),
+        name: 'Walk',
+        at: _day(at, -5).add(const Duration(hours: 7)),
+      ),
+    );
+    await r.fastingSessions.insert(
+      FastingSessionsCompanion.insert(
+        start: _day(at, -2).add(const Duration(hours: 4)),
+        end: Value(_day(at, -2).add(const Duration(hours: 9))),
+        targetHours: 14,
+      ),
+    );
   }
   for (final (hour, ml) in thriving ? [(8, 500), (11, 500), (14, 600)] : [(9, 250)]) {
-    await r.waterLogs.insert(WaterLogsCompanion.insert(at: _day(at, 0).add(Duration(hours: hour)), ml: ml));
+    await r.waterLogs.insert(
+      WaterLogsCompanion.insert(
+        at: _day(at, 0).add(Duration(hours: hour)),
+        ml: ml,
+      ),
+    );
   }
 
   // ---- Travel: a passport, an upcoming trip being packed, a finished trip.
-  final passport = await r.travelDocuments.insert(TravelDocumentsCompanion.insert(
-    name: n.passport,
-    expiry: Value(thriving ? _day(at, 700) : _day(at, 10)),
-  ));
+  final passport = await r.travelDocuments.insert(
+    TravelDocumentsCompanion.insert(name: n.passport, expiry: Value(thriving ? _day(at, 700) : _day(at, 10))),
+  );
   ids.passport = passport.id;
-  final ist = await r.trips.insert(TripsCompanion.insert(
-    destination: n.istanbul,
-    startDate: Value(_day(at, 5)),
-    endDate: Value(_day(at, 12)),
-  ));
+  final ist = await r.trips.insert(
+    TripsCompanion.insert(destination: n.istanbul, startDate: Value(_day(at, 5)), endDate: Value(_day(at, 12))),
+  );
   ids.tripIstanbul = ist.id;
   for (var i = 0; i < 10; i++) {
-    await r.tripItems.insert(TripItemsCompanion.insert(tripId: ist.id, body: 'item $i', packed: Value(i < (thriving ? 8 : 1))));
+    await r.tripItems.insert(
+      TripItemsCompanion.insert(tripId: ist.id, body: 'item $i', packed: Value(i < (thriving ? 8 : 1))),
+    );
   }
-  final done = await r.trips.insert(TripsCompanion.insert(
-    destination: n.cairo,
-    startDate: Value(_day(at, -60)),
-    endDate: Value(_day(at, -50)),
-    status: const Value(TripStatus.done),
-  ));
+  final done = await r.trips.insert(
+    TripsCompanion.insert(
+      destination: n.cairo,
+      startDate: Value(_day(at, -60)),
+      endDate: Value(_day(at, -50)),
+      status: const Value(TripStatus.done),
+    ),
+  );
   ids.tripDone = done.id;
 
   // ---- Tasks attached to planets.
-  await r.tasks.insert(TasksCompanion.insert(
-    title: 'Call the bank',
-    planetKey: const Value('money'),
-    date: Value(_day(at, thriving ? 1 : -3)),
-  ));
-  if (thriving) {
-    await r.tasks.insert(TasksCompanion.insert(
-      title: 'Pay zakat al-fitr reminder',
+  await r.tasks.insert(
+    TasksCompanion.insert(
+      title: 'Call the bank',
       planetKey: const Value('money'),
-      done: const Value(true),
-      doneAt: Value(at.subtract(const Duration(days: 1))),
-    ));
+      date: Value(_day(at, thriving ? 1 : -3)),
+    ),
+  );
+  if (thriving) {
+    await r.tasks.insert(
+      TasksCompanion.insert(
+        title: 'Pay zakat al-fitr reminder',
+        planetKey: const Value('money'),
+        done: const Value(true),
+        doneAt: Value(at.subtract(const Duration(days: 1))),
+      ),
+    );
     // Recent activity on every planet.
     for (final key in ['faith', 'health', 'family', 'work', 'money', 'growth', 'body', 'travel']) {
       await r.activity.log(planetKey: key, kind: 'fixture.done', at: at.subtract(const Duration(hours: 3)));
@@ -318,3 +386,5 @@ Future<FixtureIds> seedLivedIn(
   }
   return ids;
 }
+
+DateTime _minTime(DateTime a, DateTime b) => a.isAfter(b) ? b : a;

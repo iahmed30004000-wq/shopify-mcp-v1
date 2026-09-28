@@ -8,18 +8,32 @@ import 'prayer_day.dart';
 /// Reverts a change made by [HomeTasksService].
 typedef TaskUndo = Future<void> Function();
 
+/// Records a completion for a planet (the orbit's completion hook: logs the
+/// activity and pulses the planet).
+typedef CompletionRecorder = Future<void> Function(
+  String planetKey,
+  String kind,
+  String? refTable,
+  String? refId,
+  DateTime at,
+);
+
 /// Which tasks belong to a prayer window's list on a given day. Pure.
 abstract final class TaskDayFilter {
   /// A task shows on [day] when it is dated that day, or when it is undated
   /// (inbox / imported without a day) and either still open or completed
-  /// on [day].
-  static bool includes(TaskRow task, DateTime day) {
+  /// on [day] – the prayer-anchored day when [times] are given (a task
+  /// swiped done at 00:30 belongs to the "after Isha" list still on screen,
+  /// not to tomorrow).
+  static bool includes(TaskRow task, DateTime day, {PrayerDayTimes? times}) {
     final d = PrayerDayTimes.dateOnly(day);
     final date = task.date;
     if (date != null) return _sameDay(date, d);
     if (!task.done) return true;
     final doneAt = task.doneAt;
-    return doneAt != null && _sameDay(doneAt, d);
+    if (doneAt == null) return false;
+    if (times != null) return _sameDay(times.prayerDayOf(doneAt.toLocal()), d);
+    return _sameDay(doneAt, d);
   }
 
   static bool _sameDay(DateTime a, DateTime b) {
@@ -34,10 +48,13 @@ abstract final class TaskDayFilter {
 /// activity entries and reminders). No Flutter dependencies; the widgets
 /// turn undos into undo toasts.
 class HomeTasksService {
-  HomeTasksService(this.repos, {DateTime Function()? clock}) : _clock = clock ?? DateTime.now;
+  HomeTasksService(this.repos, {DateTime Function()? clock, CompletionRecorder? recordCompletion})
+    : _clock = clock ?? DateTime.now,
+      _record = recordCompletion;
 
   final Repositories repos;
   final DateTime Function() _clock;
+  final CompletionRecorder? _record;
 
   static const String table = 'tasks';
 
@@ -50,21 +67,41 @@ class HomeTasksService {
   // ------------------------------------------------------------------ reads
 
   /// Live, ordered tasks of [window] on [day] (see [TaskDayFilter]).
-  Stream<List<TaskRow>> watchWindow(PrayerWindow window, DateTime day) => _tasks
+  /// One world's tasks on [day] (its planet page's module), in the order of
+  /// the day's windows, then the user's order within a window.
+  Stream<List<TaskRow>> watchPlanet(String planetKey, DateTime day, {PrayerDayTimes? times}) =>
+      _tasks.watchAll(where: (t) => t.planetKey.equals(planetKey)).map((rows) {
+        final out = [
+          for (final r in rows)
+            if (TaskDayFilter.includes(r, day, times: times)) r,
+        ];
+        int rank(PrayerWindow w) {
+          final i = PrayerDayTimes.windows.indexOf(w);
+          return i < 0 ? PrayerDayTimes.windows.length : i;
+        }
+
+        out.sort((a, b) {
+          final c = rank(a.window).compareTo(rank(b.window));
+          return c != 0 ? c : a.sortOrder.compareTo(b.sortOrder);
+        });
+        return out;
+      });
+
+  Stream<List<TaskRow>> watchWindow(PrayerWindow window, DateTime day, {PrayerDayTimes? times}) => _tasks
       .watchAll(where: (t) => t.window.equalsValue(window))
       .map(
         (rows) => [
           for (final r in rows)
-            if (TaskDayFilter.includes(r, day)) r,
+            if (TaskDayFilter.includes(r, day, times: times)) r,
         ],
       );
 
   /// Tasks of [window] on [day], once.
-  Future<List<TaskRow>> tasksIn(PrayerWindow window, DateTime day) async {
+  Future<List<TaskRow>> tasksIn(PrayerWindow window, DateTime day, {PrayerDayTimes? times}) async {
     final rows = await _tasks.getAll(where: (t) => t.window.equalsValue(window));
     return [
       for (final r in rows)
-        if (TaskDayFilter.includes(r, day)) r,
+        if (TaskDayFilter.includes(r, day, times: times)) r,
     ];
   }
 
@@ -134,7 +171,12 @@ class HomeTasksService {
     await _tasks.setColumns(task.id, {'done': true, 'doneAt': now});
     final planet = task.planetKey;
     if (planet != null) {
-      await repos.activity.log(planetKey: planet, kind: doneKind, refTable: table, refId: task.id, at: now);
+      final record = _record;
+      if (record != null) {
+        await record(planet, doneKind, table, task.id, now);
+      } else {
+        await repos.activity.log(planetKey: planet, kind: doneKind, refTable: table, refId: task.id, at: now);
+      }
     }
     return () async {
       await _tasks.setColumns(task.id, {'done': false, 'doneAt': null});

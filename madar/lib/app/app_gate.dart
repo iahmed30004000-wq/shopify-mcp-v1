@@ -14,6 +14,7 @@ import '../core/i18n/gen/app_localizations.dart';
 import '../core/motion/motion.dart';
 import '../core/settings/app_settings.dart';
 import '../core/sound/sound_api.dart';
+import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
 import 'lock_gate.dart';
 import 'splash.dart';
 
@@ -93,6 +94,12 @@ class _AppGateState extends ConsumerState<AppGate> {
   Timer? _hold;
   bool _holding = false;
 
+  /// The orbit's shaders are still being compiled behind the splash (the
+  /// first orbit frame must never compile a pipeline); capped by
+  /// [maxWarmUp] so a failing shader never keeps the splash up.
+  bool _warming = false;
+  static const maxWarmUp = Duration(seconds: 4);
+
   @override
   void initState() {
     super.initState();
@@ -102,6 +109,14 @@ class _AppGateState extends ConsumerState<AppGate> {
   void _startHold() {
     _hold?.cancel();
     if (widget.minSplash <= Duration.zero) return;
+    if (OrbitWarmUp.gatesSplash && !OrbitWarmUp.isDone) {
+      _warming = true;
+      unawaited(
+        OrbitWarmUp.start().timeout(maxWarmUp, onTimeout: () {}).whenComplete(() {
+          if (mounted && _warming) setState(() => _warming = false);
+        }),
+      );
+    }
     _holding = true;
     _hold = Timer(widget.minSplash, () {
       if (mounted) setState(() => _holding = false);
@@ -123,7 +138,7 @@ class _AppGateState extends ConsumerState<AppGate> {
   Widget build(BuildContext context) {
     final unlock = ref.watch(databaseUnlockProvider);
     final batterySaver = ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver));
-    final holding = _holding && !context.reducedMotion;
+    final holding = (_holding && !context.reducedMotion) || _warming;
     final Widget content;
     if (unlock.hasValue && !unlock.isLoading && !holding) {
       content = KeyedSubtree(

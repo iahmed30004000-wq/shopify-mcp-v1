@@ -28,9 +28,14 @@ class TaskActions {
   HomeTasksService get _service => ref.read(homeTasksServiceProvider);
   L10n get _l => L10n.of(context);
 
-  /// Opens the edit sheet for a new task in [window] on [day].
-  Future<void> add({required PrayerWindow window, required DateTime day}) async {
-    final values = await _openSheet(title: _l.homeAddTask, initial: {'window': window, 'date': day}, autofocus: true);
+  /// Opens the edit sheet for a new task in [window] on [day] (for the
+  /// world [planetKey] when given, e.g. from its page).
+  Future<void> add({required PrayerWindow window, required DateTime day, String? planetKey}) async {
+    final values = await _openSheet(
+      title: _l.homeAddTask,
+      initial: {'window': window, 'date': day, 'planet': ?planetKey},
+      autofocus: true,
+    );
     if (values == null) return;
     await _service.add(
       title: values['title']! as String,

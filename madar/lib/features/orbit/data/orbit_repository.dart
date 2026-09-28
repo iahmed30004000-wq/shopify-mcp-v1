@@ -92,7 +92,8 @@ class OrbitRepository {
   // ------------------------------------------------------------ settings --
 
   /// The stored prayer settings, or the defaults (Amman, Jordan preset).
-  Future<PrayerSettings> prayerSettings() async => await repos.keyValues.get(prayerSettingsKv) ?? const PrayerSettings();
+  Future<PrayerSettings> prayerSettings() async =>
+      await repos.keyValues.get(prayerSettingsKv) ?? const PrayerSettings();
 
   /// Live [prayerSettings].
   Stream<PrayerSettings> watchPrayerSettings() =>
@@ -196,9 +197,7 @@ typedef _PrayerData = ({
 typedef _Inputs = ({ScoreInputs score, MoonInputs moons, ExtrasInputs extras});
 
 class _Gatherer {
-  _Gatherer(this.repo, this.now, this.schedule)
-    : today = DateTime(now.year, now.month, now.day),
-      db = repo.db;
+  _Gatherer(this.repo, this.now, this.schedule) : today = DateTime(now.year, now.month, now.day), db = repo.db;
 
   final OrbitRepository repo;
   final DateTime now;
@@ -217,6 +216,8 @@ class _Gatherer {
 
   static String _dayKey(DateTime d) =>
       '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  static DateTime _earlier(DateTime a, DateTime b) => a.isBefore(b) ? a : b;
 
   static DateTime? _parseDay(String s) {
     final d = DateTime.tryParse(s);
@@ -256,17 +257,24 @@ class _Gatherer {
   /// behind"), and a tracker started three days ago expects three days.
   Future<_PrayerData> prayers() async {
     final firstDay = db.prayerLogs.day.min();
-    final first = await (db.selectOnly(db.prayerLogs)
-          ..addColumns([firstDay])
-          ..where(db.prayerLogs.prayer.isInValues(_obligatory)))
-        .map((r) => r.read(firstDay))
-        .getSingleOrNull();
+    final first =
+        await (db.selectOnly(db.prayerLogs)
+              ..addColumns([firstDay])
+              ..where(db.prayerLogs.prayer.isInValues(_obligatory)))
+            .map((r) => r.read(firstDay))
+            .getSingleOrNull();
     final started = first == null ? null : _parseDay(first);
+    // Tracking starts with the first logged day's Fajr (or its midnight,
+    // whichever is earlier – far from the configured location the day's
+    // Fajr can fall on the previous local evening).
+    final startedAt = started == null ? null : _earlier(started, schedule.timesFor(started).fajr);
     final weekAgo = now.subtract(const Duration(days: 7));
-    final from = started == null || started.isBefore(weekAgo) ? weekAgo : started.subtract(const Duration(milliseconds: 1));
-    final rows = await (db.select(db.prayerLogs)
-          ..where((t) => t.day.isBiggerOrEqualValue(_dayKey(_day(-8))) & t.prayer.isInValues(_obligatory)))
-        .get();
+    final from = startedAt == null || startedAt.isBefore(weekAgo)
+        ? weekAgo
+        : startedAt.subtract(const Duration(milliseconds: 1));
+    final rows = await (db.select(
+      db.prayerLogs,
+    )..where((t) => t.day.isBiggerOrEqualValue(_dayKey(_day(-8))) & t.prayer.isInValues(_obligatory))).get();
     final prayerDay = schedule.prayerDayOf(now);
     final logs = <PrayerLogIn>[];
     final logged = <Prayer, PrayerStatus>{};
@@ -325,9 +333,9 @@ class _Gatherer {
     ];
 
     // Tasks attached to a planet: open ones and recently completed ones.
-    final taskRows = await (db.select(db.tasks)
-          ..where((t) => t.planetKey.isNotNull() & (t.done.equals(false) | _since(t.doneAt, recent))))
-        .get();
+    final taskRows = await (db.select(
+      db.tasks,
+    )..where((t) => t.planetKey.isNotNull() & (t.done.equals(false) | _since(t.doneAt, recent)))).get();
     final tasks = [
       for (final t in taskRows)
         TaskIn(
@@ -343,9 +351,9 @@ class _Gatherer {
     // Boards and cards (done = the `done` column; doneAt = updatedAt).
     final boardRows = await repo.repos.boards.getAll();
     final boardName = {for (final b in boardRows) b.id: b.name};
-    final cardRows = await (db.select(db.boardCards)
-          ..where((c) => c.columnId.equals('done').not() | _since(c.updatedAt, recent)))
-        .get();
+    final cardRows = await (db.select(
+      db.boardCards,
+    )..where((c) => c.columnId.equals('done').not() | _since(c.updatedAt, recent))).get();
     final cards = <CardIn>[];
     final boardStats = {for (final b in boardRows) b.id: _BoardStats()};
     var touched7d = 0, done7d = 0;
@@ -353,14 +361,16 @@ class _Gatherer {
       final done = c.columnId == 'done';
       final name = boardName[c.boardId];
       if (name == null) continue;
-      cards.add(CardIn(
-        id: c.id,
-        boardName: name,
-        boardId: c.boardId,
-        done: done,
-        dueDate: c.dueDate,
-        doneAt: done ? c.updatedAt : null,
-      ));
+      cards.add(
+        CardIn(
+          id: c.id,
+          boardName: name,
+          boardId: c.boardId,
+          done: done,
+          dueDate: c.dueDate,
+          doneAt: done ? c.updatedAt : null,
+        ),
+      );
       final s = boardStats[c.boardId]!;
       final fresh = !c.updatedAt.isBefore(week);
       if (fresh) {
@@ -511,7 +521,13 @@ class _Gatherer {
     final modules = [
       for (final m in moduleRows)
         if (m.planetKey != null && m.kind == CustomModuleKind.tracker)
-          ModuleIn(id: m.id, name: m.name, planetKey: m.planetKey!, lastEntry: moduleLast[m.id], createdAt: m.createdAt),
+          ModuleIn(
+            id: m.id,
+            name: m.name,
+            planetKey: m.planetKey!,
+            lastEntry: moduleLast[m.id],
+            createdAt: m.createdAt,
+          ),
     ];
     final moduleMoons = [
       for (final m in moduleRows)
@@ -540,11 +556,13 @@ class _Gatherer {
         PainIn(at: p.at, score: p.score),
     ];
     final appointments = [
-      for (final a in await (db.select(db.appointments)
-            ..where((t) =>
-                _since(t.at, now.subtract(const Duration(days: 30))) &
-                t.at.julianday.isSmallerOrEqual(Variable<DateTime>(now.add(const Duration(days: 14))).julianday)))
-          .get())
+      for (final a
+          in await (db.select(db.appointments)..where(
+                (t) =>
+                    _since(t.at, now.subtract(const Duration(days: 30))) &
+                    t.at.julianday.isSmallerOrEqual(Variable<DateTime>(now.add(const Duration(days: 14))).julianday),
+              ))
+              .get())
         AppointmentIn(id: a.id, title: a.title, at: a.at, done: a.done),
     ];
 
@@ -553,9 +571,11 @@ class _Gatherer {
     final projectById = {for (final p in projectRows) p.id: p};
     final projectItems = [
       if (projectRows.isNotEmpty)
-        for (final i in await (db.select(db.projectItems)
-              ..where((t) => t.projectId.isIn(projectById.keys) & (t.done.equals(false) | _since(t.updatedAt, recent))))
-            .get())
+        for (final i
+            in await (db.select(db.projectItems)..where(
+                  (t) => t.projectId.isIn(projectById.keys) & (t.done.equals(false) | _since(t.updatedAt, recent)),
+                ))
+                .get())
           ProjectItemIn(
             id: i.id,
             projectId: i.projectId,
@@ -664,12 +684,14 @@ class _Gatherer {
     final withTimes = meds.where((m) => m.times.isNotEmpty).toList();
     if (withTimes.isEmpty) return const [];
     final from = _day(-2);
-    final logs = await (db.select(db.medDoses)
-          ..where((d) =>
-              d.medicationId.isIn(withTimes.map((m) => m.id)) &
-              (_since(d.scheduledAt, from.subtract(const Duration(hours: 3))) |
-                  (d.scheduledAt.isNull() & _since(d.takenAt, from.subtract(const Duration(hours: 3)))))))
-        .get();
+    final logs =
+        await (db.select(db.medDoses)..where(
+              (d) =>
+                  d.medicationId.isIn(withTimes.map((m) => m.id)) &
+                  (_since(d.scheduledAt, from.subtract(const Duration(hours: 3))) |
+                      (d.scheduledAt.isNull() & _since(d.takenAt, from.subtract(const Duration(hours: 3))))),
+            ))
+            .get();
     final byMed = <String, List<MedDoseRow>>{};
     for (final l in logs) {
       (byMed[l.medicationId] ??= []).add(l);
@@ -685,7 +707,9 @@ class _Gatherer {
           if (hm == null) continue;
           final slot = DateTime(day.year, day.month, day.day, hm.$1, hm.$2);
           if (slot.isAfter(now) || slot.isBefore(m.createdAt)) continue;
-          final exact = mine.where((l) => l.scheduledAt != null && l.scheduledAt!.difference(slot).inMinutes.abs() < 1).toList();
+          final exact = mine
+              .where((l) => l.scheduledAt != null && l.scheduledAt!.difference(slot).inMinutes.abs() < 1)
+              .toList();
           var handled = exact.any((l) => l.status == DoseStatus.taken || l.status == DoseStatus.skipped);
           if (!handled && exact.isEmpty) {
             MedDoseRow? best;
@@ -792,25 +816,24 @@ class _Gatherer {
       ),
     );
     final window = BudgetWindow.month(now);
-    final txRows = await (db.select(db.transactions)
-          ..where((t) =>
-              t.kind.equalsValue(TxKind.expense) &
-              _since(t.date, window.start) &
-              t.date.julianday.isSmallerThan(Variable<DateTime>(window.end).julianday)))
-        .get();
-    final report = math.spend(
-      [
-        for (final t in txRows)
-          BudgetTx(
-            budgetItemId: t.budgetItemId,
-            amountMilli: t.amountMilli,
-            date: t.date,
-            currency: walletCurrency[t.walletId],
-            kind: t.kind,
-          ),
-      ],
-      window,
-    );
+    final txRows =
+        await (db.select(db.transactions)..where(
+              (t) =>
+                  t.kind.equalsValue(TxKind.expense) &
+                  _since(t.date, window.start) &
+                  t.date.julianday.isSmallerThan(Variable<DateTime>(window.end).julianday),
+            ))
+            .get();
+    final report = math.spend([
+      for (final t in txRows)
+        BudgetTx(
+          budgetItemId: t.budgetItemId,
+          amountMilli: t.amountMilli,
+          date: t.date,
+          currency: walletCurrency[t.walletId],
+          kind: t.kind,
+        ),
+    ], window);
     return [
       for (final r in math.results.values)
         if (!r.hasChildren)
@@ -884,9 +907,9 @@ class _Gatherer {
         }
       }
     }
-    final fasts = await (db.select(db.fastingSessions)
-          ..where((t) => _since(t.start, now.subtract(const Duration(days: 7))) | t.end.isNull()))
-        .get();
+    final fasts = await (db.select(
+      db.fastingSessions,
+    )..where((t) => _since(t.start, now.subtract(const Duration(days: 7))) | t.end.isNull())).get();
     var planned = 0, completed = 0;
     var fastingNow = false;
     for (final f in fasts) {
@@ -922,7 +945,9 @@ class _Gatherer {
     if (habits.isEmpty) return const [];
     final from = _dayKey(_day(-30));
     final weekFrom = _day(-6);
-    final logs = await (db.select(db.habitLogs)..where((t) => t.day.isBiggerOrEqualValue(from) & t.done.equals(true))).get();
+    final logs = await (db.select(
+      db.habitLogs,
+    )..where((t) => t.day.isBiggerOrEqualValue(from) & t.done.equals(true))).get();
     final days7 = <String, Set<String>>{};
     final last = <String, DateTime>{};
     for (final l in logs) {
@@ -934,7 +959,13 @@ class _Gatherer {
     }
     return [
       for (final h in habits)
-        HabitIn(id: h.id, name: h.name, planetKey: h.planetKey, doneDays7d: days7[h.id]?.length ?? 0, lastDone: last[h.id]),
+        HabitIn(
+          id: h.id,
+          name: h.name,
+          planetKey: h.planetKey,
+          doneDays7d: days7[h.id]?.length ?? 0,
+          lastDone: last[h.id],
+        ),
     ];
   }
 
@@ -942,17 +973,21 @@ class _Gatherer {
   /// `adhkar.*`, `faith.adhkar*` (same for `quran`).
   Future<Map<String, PracticeIn>> _practices() async {
     final a = db.activityLog;
-    final rows = await (db.select(a)
-          ..where((t) =>
-              _since(t.at, _day(-30)) &
-              (t.kind.like('%${ScoreSources.adhkar}%') | t.kind.like('%${ScoreSources.quran}%'))))
-        .get();
+    final rows =
+        await (db.select(a)..where(
+              (t) =>
+                  _since(t.at, _day(-30)) &
+                  (t.kind.like('%${ScoreSources.adhkar}%') | t.kind.like('%${ScoreSources.quran}%')),
+            ))
+            .get();
     final out = <String, PracticeIn>{};
     for (final source in const [ScoreSources.adhkar, ScoreSources.quran]) {
-      final mine = rows.where((r) {
-        final k = r.kind;
-        return k == source || k.startsWith('$source.') || k.startsWith('faith.$source');
-      }).where((r) => !r.at.isAfter(now));
+      final mine = rows
+          .where((r) {
+            final k = r.kind;
+            return k == source || k.startsWith('$source.') || k.startsWith('faith.$source');
+          })
+          .where((r) => !r.at.isAfter(now));
       if (mine.isEmpty) continue;
       final weekFrom = _day(-6);
       final days = <int>{};
