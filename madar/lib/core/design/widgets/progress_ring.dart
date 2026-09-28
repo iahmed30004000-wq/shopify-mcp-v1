@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
 
+import '../../i18n/formatters.dart';
 import '../../motion/motion.dart';
 import '../tokens.dart';
 
@@ -65,7 +66,8 @@ class ProgressRing extends StatelessWidget {
     final arc = color ?? t.accent;
     return Semantics(
       label: semanticLabel,
-      value: semanticValue ?? '${(v * 100).round()}%',
+      // Read in the user's digits (٤٢٪ / 42%).
+      value: semanticValue ?? MadarFormatter.of(context).formatPercent(v),
       child: TweenAnimationBuilder<double>(
         tween: Tween(end: v),
         duration: context.motion(MadarMotion.long),

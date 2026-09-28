@@ -477,7 +477,7 @@
       }
     }
   },
-  "interactionFieldTooLong": "Keep it under {max} characters",
+  "interactionFieldTooLong": "{max, plural, =1{Keep it to one character} other{Keep it to {max} characters or fewer}}",
   "@interactionFieldTooLong": {
     "placeholders": {
       "max": {
@@ -1151,9 +1151,34 @@
   "settingsThemeSelected": "Current theme",
   "settingsFollowSystem": "Follow the device",
   "settingsFollowSystemHint": "Pearl in light mode, your chosen theme in dark mode",
+  "settingsThemeLightMode": "Light mode",
+  "@settingsThemeLightMode": {
+    "description": "Badge on the theme used while the device is in light mode (follow the device)"
+  },
+  "settingsThemeDarkMode": "Dark mode",
+  "@settingsThemeDarkMode": {
+    "description": "Badge on the theme used while the device is in dark mode (follow the device)"
+  },
   "settingsAccent": "Accent colour",
   "settingsAccentDefault": "Theme colour",
   "settingsAccentCustom": "Custom colour",
+  "settingsAccentCustomHint": "Slide along the spectrum for any colour; its brightness adapts so it stays readable in every theme.",
+  "settingsAccentPlanet": "{planet} colour",
+  "@settingsAccentPlanet": {
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccentHueValue": "Hue {degrees}°",
+  "@settingsAccentHueValue": {
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
   "settingsLanguage": "Language",
   "settingsLanguageArabic": "العربية",
   "@settingsLanguageArabic": {
@@ -1202,7 +1227,14 @@
     }
   },
   "settingsFonts": "Fonts",
-  "settingsFontsBody": "Open fonts under the SIL Open Font License 1.1",
+  "settingsFontsBody": "Open fonts under the SIL Open Font License {version}",
+  "@settingsFontsBody": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "settingsLicenses": "Open-source licences",
   "settingsLicensesBody": "SQLCipher, OpenSSL, Flutter and every package Madar is built with",
   "settingsFontRoleUi": "Interface",
@@ -1259,6 +1291,171 @@
         "type": "String"
       }
     }
+  },
+  "settingsPrayerSection": "Prayer",
+  "@settingsPrayerSection": {
+    "description": "Settings section: prayer times, adhan and permissions"
+  },
+  "settingsPrayerTimes": "Prayer times & calculation",
+  "@settingsPrayerTimes": {
+    "description": "Settings entry opening the prayer-time settings"
+  },
+  "settingsAdhan": "Adhan & notifications",
+  "@settingsAdhan": {
+    "description": "Settings entry opening the adhan settings"
+  },
+  "settingsAdhkarReminders": "Adhkar reminders",
+  "@settingsAdhkarReminders": {
+    "description": "Settings section title"
+  },
+  "settingsAdhkarMorning": "Morning adhkar after Fajr",
+  "@settingsAdhkarMorning": {
+    "description": "Switch: remind of the morning adhkar after Fajr"
+  },
+  "settingsAdhkarEvening": "Evening adhkar after Asr",
+  "@settingsAdhkarEvening": {
+    "description": "Switch: remind of the evening adhkar after Asr"
+  },
+  "settingsAdhkarAfter": "{offset} after the adhan",
+  "@settingsAdhkarAfter": {
+    "description": "Subtitle of an enabled adhkar reminder; offset is e.g. \"20 min\"",
+    "placeholders": {
+      "offset": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAdhkarOff": "No reminder",
+  "@settingsAdhkarOff": {
+    "description": "Subtitle of a disabled adhkar reminder"
+  },
+  "settingsSecuritySection": "Privacy & security",
+  "@settingsSecuritySection": {
+    "description": "Settings section title"
+  },
+  "settingsAppLock": "App lock",
+  "@settingsAppLock": {
+    "description": "Settings entry opening the security page"
+  },
+  "settingsAppLockOff": "Off – set a PIN to protect Madar",
+  "@settingsAppLockOff": {
+    "description": "App lock entry subtitle when no lock is set"
+  },
+  "settingsAppLockOn": "On, with your PIN",
+  "@settingsAppLockOn": {
+    "description": "App lock entry subtitle: PIN only"
+  },
+  "settingsAppLockOnBio": "On, with fingerprint and PIN",
+  "@settingsAppLockOnBio": {
+    "description": "App lock entry subtitle: fingerprint and PIN"
+  },
+  "settingsSecurityNote": "The lock hides what is on screen whenever you step away; your data is always encrypted on your device, locked or not.",
+  "@settingsSecurityNote": {
+    "description": "Note on the security page"
+  },
+  "settingsCredits": "Fonts & sources",
+  "@settingsCredits": {
+    "description": "Settings entry / page listing the bundled fonts and content sources"
+  },
+  "settingsCreditsBody": "Open fonts, and the sources of the adhkar, cities and tones",
+  "@settingsCreditsBody": {
+    "description": "Subtitle of the fonts & sources entry"
+  },
+  "settingsCreditsContent": "Content and its sources",
+  "@settingsCreditsContent": {
+    "description": "Section header on the credits page"
+  },
+  "settingsCreditsContentBody": "Every text, dataset and sound in Madar is openly licensed or its own work – here are the full sources.",
+  "@settingsCreditsContentBody": {
+    "description": "Intro of the content credits"
+  },
+  "settingsCreditAdhkar": "Adhkar – Hisn al-Muslim",
+  "@settingsCreditAdhkar": {
+    "description": "Content credit title"
+  },
+  "settingsCreditAdhkarRole": "Open datasets (MIT), the Quran text from quran-api",
+  "@settingsCreditAdhkarRole": {
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditCities": "City list",
+  "@settingsCreditCities": {
+    "description": "Content credit title"
+  },
+  "settingsCreditCitiesRole": "Natural Earth, GeoNames, IANA and Unicode CLDR",
+  "@settingsCreditCitiesRole": {
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditAdhan": "Adhan tones",
+  "@settingsCreditAdhan": {
+    "description": "Content credit title"
+  },
+  "settingsCreditAdhanRole": "Madar’s own – no recordings bundled",
+  "@settingsCreditAdhanRole": {
+    "description": "Content credit subtitle"
+  },
+  "onboardingLocationTitle": "Where do you pray?",
+  "@onboardingLocationTitle": {
+    "description": "Onboarding step: location for prayer times"
+  },
+  "onboardingLocationBody": "Prayer times are calculated on your device from your location, offline. Pick your city, or use your approximate location once.",
+  "onboardingLocationSet": "Choose your location",
+  "@onboardingLocationSet": {
+    "description": "Button opening the location sheet"
+  },
+  "onboardingLocationChange": "Change location",
+  "@onboardingLocationChange": {
+    "description": "Button opening the location sheet once a place is set"
+  },
+  "onboardingLocationFor": "Your times are for {place}",
+  "@onboardingLocationFor": {
+    "description": "The place prayer times are calculated for",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingAdhanTitle": "The adhan, on time",
+  "@onboardingAdhanTitle": {
+    "description": "Onboarding step: adhan permissions"
+  },
+  "onboardingAdhanBody": "For the adhan to sound at its minute, even with the phone locked, Madar needs a few Android permissions. Grant them now or later in Settings.",
+  "onboardingLockTitle": "Protect Madar",
+  "@onboardingLockTitle": {
+    "description": "Onboarding step: optional app lock"
+  },
+  "onboardingLockBody": "A lock with a PIN and your fingerprint closes Madar whenever you step away. No account, no server – the PIN stays on your device.",
+  "onboardingLockSet": "Set a PIN",
+  "@onboardingLockSet": {
+    "description": "Button opening the PIN setup sheet"
+  },
+  "onboardingLockOn": "The lock is on, with your PIN",
+  "@onboardingLockOn": {
+    "description": "Shown once a PIN is set during onboarding"
+  },
+  "onboardingLockOnBio": "The lock is on, with fingerprint and PIN",
+  "@onboardingLockOnBio": {
+    "description": "Shown once a PIN and fingerprint are set during onboarding"
+  },
+  "onboardingOptional": "Optional – you can set this later in Settings",
+  "@onboardingOptional": {
+    "description": "Hint under optional onboarding steps"
+  },
+  "homeDateWithHijri": "{gregorian} · {hijri}",
+  "@homeDateWithHijri": {
+    "description": "Home header: the Gregorian date then the Hijri date",
+    "placeholders": {
+      "gregorian": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAllTimes": "All times",
+  "@homeAllTimes": {
+    "description": "Chip after the prayer windows opening the prayer times page"
   },
   "orbitReasonPersonOverdue": "{name} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
   "@orbitReasonPersonOverdue": {
@@ -2564,5 +2761,2382 @@
   "orbitUiMoonWaiting": "Waiting on you",
   "@orbitUiMoonWaiting": {
     "description": "A data moon's meter when it has had no attention at all (instead of a lone 0 %)"
+  },
+  "lockScreenSubtitle": "Your data is encrypted on this phone",
+  "@lockScreenSubtitle": {
+    "description": "Line under the app name on the lock screen"
+  },
+  "lockHoldHint": "Press and hold the astrolabe to unlock",
+  "lockHoldingHint": "Keep holding… the astrolabe is coming together",
+  "lockReadingHint": "Touch the fingerprint sensor",
+  "lockReleasedEarly": "Hold until the astrolabe is complete",
+  "lockWelcome": "Welcome back",
+  "lockPinHint": "Enter your Madar PIN",
+  "lockPinChecking": "Checking…",
+  "lockPinWrong": "{count, plural, =0{Wrong PIN} =1{Wrong PIN · 1 try left before a pause} other{Wrong PIN · {n} tries left before a pause}}",
+  "@lockPinWrong": {
+    "description": "count selects the plural; n is the same number formatted for display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lockLockedOut": "Too many attempts. Try again in {time}",
+  "@lockLockedOut": {
+    "description": "time is a pre-formatted m:ss countdown",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lockSeconds": "{count, plural, =1{1 second} other{{n} seconds}}",
+  "@lockSeconds": {
+    "description": "count selects the plural; n is the same number formatted for display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lockUsePin": "Use PIN",
+  "lockUseFingerprint": "Use fingerprint",
+  "lockForgotPin": "Forgot PIN?",
+  "lockPromptTitle": "Unlock Madar",
+  "@lockPromptTitle": {
+    "description": "Title of the system fingerprint prompt (max 60 characters)"
+  },
+  "lockPromptHint": "Use your fingerprint",
+  "@lockPromptHint": {
+    "description": "Subtitle of the system fingerprint prompt (max 60 characters)"
+  },
+  "lockPromptReason": "Confirm it's you to open your data",
+  "lockPromptSettingsReason": "Confirm it's you to change the lock settings",
+  "lockPromptCancel": "Use PIN",
+  "@lockPromptCancel": {
+    "description": "Negative button of the system fingerprint prompt (max 30 characters)"
+  },
+  "lockPromptCancelPlain": "Cancel",
+  "@lockPromptCancelPlain": {
+    "description": "Negative button of the fingerprint prompt in settings (max 30 characters)"
+  },
+  "lockStorageError": "Couldn't read this phone's secure vault.",
+  "lockRetry": "Try again",
+  "lockAstrolabeSemantics": "Astrolabe. Press and hold to unlock with your fingerprint",
+  "lockAstrolabeAction": "Unlock with fingerprint",
+  "lockPinProgress": "{count} of {total} digits entered",
+  "@lockPinProgress": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "lockPinProgressOpen": "{count} digits entered",
+  "@lockPinProgressOpen": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "lockKeyDelete": "Delete",
+  "lockKeyFingerprint": "Fingerprint",
+  "lockKeyDone": "Done",
+  "lockShieldSemantics": "Madar is hidden until you return",
+  "lockForgotTitle": "Forgot your PIN?",
+  "lockForgotBody": "Madar has no account and no server: your data is encrypted and kept on this phone alone, so the PIN can't be recovered or reset remotely.",
+  "lockForgotBiometric": "Confirm with your fingerprint, then choose a new PIN.",
+  "lockForgotBiometricAction": "Confirm with fingerprint",
+  "lockForgotNoBiometric": "Without the PIN, Madar stays locked. If you can't recall it, the only way out is to clear Madar's data in the phone's settings (Apps → Madar → Storage → Clear data) and start fresh; anything not in a backup will be lost.",
+  "lockForgotBack": "Back",
+  "lockNewPinTitle": "Choose a new PIN",
+  "lockPinCreateTitle": "Choose a PIN for Madar",
+  "lockPinCreateBody": "{min} to {max} digits. It opens Madar whenever your fingerprint can't.",
+  "@lockPinCreateBody": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "lockPinConfirmTitle": "Confirm your PIN",
+  "lockPinConfirmBody": "Enter it once more to be sure.",
+  "lockPinMismatch": "Those PINs don't match. Let's start again.",
+  "lockPinWeak": "That PIN is easy to guess. Consider another.",
+  "lockPinCurrentTitle": "Enter your current PIN",
+  "lockPinSaved": "PIN saved. Madar is now locked for you alone.",
+  "lockPinChanged": "PIN changed",
+  "lockConfirmTitle": "Confirm it's you",
+  "lockConfirmBody": "Enter your Madar PIN to continue.",
+  "lockBioOfferTitle": "Unlock with your fingerprint too?",
+  "lockBioOfferBody": "Quicker every time, and your PIN is always there as a fallback.",
+  "lockBioOfferEnable": "Use fingerprint",
+  "lockBioOfferSkip": "Not now",
+  "lockSettingsTitle": "Security",
+  "lockSettingsLock": "App lock",
+  "lockSettingsLockOn": "Asked on every launch and after time away",
+  "lockSettingsLockOff": "Protect your data with a PIN and fingerprint",
+  "lockSettingsBiometric": "Fingerprint unlock",
+  "lockSettingsBiometricHint": "Your PIN always stays as a fallback",
+  "lockSettingsBiometricNotEnrolled": "Add a fingerprint in the phone's settings first",
+  "lockSettingsBiometricUnavailable": "The fingerprint sensor isn't available right now",
+  "lockSettingsChangePin": "Change PIN",
+  "lockSettingsChangePinHint": "A PIN of {min} to {max} digits",
+  "@lockSettingsChangePinHint": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "lockSettingsLockAfter": "Lock after leaving the app",
+  "lockSettingsLockAfterHint": "And always on a fresh launch",
+  "lockAfterImmediately": "Immediately",
+  "lockAfterMinutes": "{count, plural, =1{1 minute} other{{n} minutes}}",
+  "@lockAfterMinutes": {
+    "description": "count selects the plural; n is the same number formatted for display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lockSettingsRemovePin": "Remove PIN",
+  "lockSettingsRemovePinHint": "Turns off the app lock and fingerprint unlock",
+  "lockRemoveTitle": "Remove your PIN?",
+  "lockRemoveBody": "Madar will open without a lock until you choose a new PIN.",
+  "lockRemoveConfirm": "Remove PIN",
+  "lockSettingsNote": "No account, no server: your data is encrypted on this phone alone and the PIN can't be recovered remotely, so keep it safe.",
+  "lockSettingsSaveFailed": "Couldn't save to the secure vault. Please try again.",
+  "lockBioLockedOut": "Fingerprint is paused after too many tries. Use your PIN.",
+  "lockBioLockedOutPermanently": "Fingerprint is locked until you unlock the phone with its screen lock. Use your Madar PIN for now.",
+  "lockBioNotEnrolled": "No fingerprint is enrolled on this phone. Use your PIN.",
+  "lockBioNoHardware": "This phone has no fingerprint sensor. Use your PIN.",
+  "lockBioUnavailable": "The fingerprint sensor isn't available right now. Use your PIN.",
+  "lockBioError": "Couldn't verify your fingerprint. Try again or use your PIN.",
+  "lockBioInterrupted": "Verification was interrupted. Press and hold to try again.",
+  "ptTitle": "Prayer times",
+  "@ptTitle": {
+    "description": "Prayer times screen title"
+  },
+  "ptSettingsTitle": "Prayer time settings",
+  "ptOpenSettings": "Prayer time settings",
+  "@ptOpenSettings": {
+    "description": "Tooltip of the settings button on the prayer times screen"
+  },
+  "ptFajr": "Fajr",
+  "ptSunrise": "Sunrise",
+  "ptDuha": "Duha",
+  "ptDhuhr": "Dhuhr",
+  "ptJumuah": "Jumu’ah",
+  "@ptJumuah": {
+    "description": "Dhuhr on Fridays"
+  },
+  "ptAsr": "Asr",
+  "ptMaghrib": "Maghrib",
+  "ptIsha": "Isha",
+  "ptMidnight": "Midnight",
+  "ptLastThird": "Last third",
+  "ptSunriseHint": "Fajr time ends",
+  "ptDuhaHint": "A quarter hour after sunrise",
+  "ptMidnightHint": "Halfway from Maghrib to Fajr",
+  "ptLastThirdHint": "The time for Qiyam",
+  "ptNightSection": "The night & Qiyam",
+  "ptNow": "Now",
+  "ptNextPrayer": "Next prayer",
+  "ptNextIn": "{prayer} in",
+  "@ptNextIn": {
+    "description": "Followed by a live countdown",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAtTime": "at {time}",
+  "@ptAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ptItsTime": "It's time for {prayer}",
+  "@ptItsTime": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCurrentWindow": "Now: {window}",
+  "@ptCurrentWindow": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCountdownSemantics": "{prayer} in {duration}",
+  "@ptCountdownSemantics": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ptToday": "Today",
+  "ptTomorrow": "Tomorrow",
+  "ptYesterday": "Yesterday",
+  "ptTonight": "Tonight",
+  "@ptTonight": {
+    "description": "Day-view title of the night still running after midnight (the previous date's prayer day, until Fajr)"
+  },
+  "ptPrevDay": "Previous day",
+  "ptNextDay": "Next day",
+  "ptBackToToday": "Back to today",
+  "ptViewDay": "Day",
+  "@ptViewDay": {
+    "description": "Segment: one day's times"
+  },
+  "ptViewMonth": "Month",
+  "@ptViewMonth": {
+    "description": "Segment: the month table"
+  },
+  "ptPrevMonth": "Previous month",
+  "ptNextMonth": "Next month",
+  "ptMonthDay": "Day",
+  "@ptMonthDay": {
+    "description": "Month table: the date column"
+  },
+  "ptMonthHijriSpan": "{from} – {to}",
+  "@ptMonthHijriSpan": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAm": "AM",
+  "ptPm": "PM",
+  "ptClockHours": "{hours}-hour",
+  "@ptClockHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "ptMinutesSigned": "{minutes} min",
+  "@ptMinutesSigned": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptHijriDate": "{day} {month} {year} AH",
+  "@ptHijriDate": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "ptHijriDayMonth": "{day} {month}",
+  "@ptHijriDayMonth": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "ptHijriMonth1": "Muharram",
+  "ptHijriMonth2": "Safar",
+  "ptHijriMonth3": "Rabi’ al-Awwal",
+  "ptHijriMonth4": "Rabi’ al-Akhir",
+  "ptHijriMonth5": "Jumada al-Ula",
+  "ptHijriMonth6": "Jumada al-Akhirah",
+  "ptHijriMonth7": "Rajab",
+  "ptHijriMonth8": "Sha’ban",
+  "ptHijriMonth9": "Ramadan",
+  "ptHijriMonth10": "Shawwal",
+  "ptHijriMonth11": "Dhu al-Qa’dah",
+  "ptHijriMonth12": "Dhu al-Hijjah",
+  "ptLocationTitle": "Your location",
+  "ptLocationSubtitle": "Times are calculated on your device, offline",
+  "ptLocationDefault": "{city} (default)",
+  "@ptLocationDefault": {
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "ptLocationNear": "Near {city}",
+  "@ptLocationNear": {
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "ptPlaceWithCountry": "{city}, {country}",
+  "@ptPlaceWithCountry": {
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "ptPinnedLocation": "Pinned location",
+  "ptDefaultCityName": "Amman",
+  "@ptDefaultCityName": {
+    "description": "Name of the generic default location"
+  },
+  "ptSourceGps": "From your current location",
+  "ptSourceCity": "Chosen city",
+  "ptSourceDefault": "Default location – choose yours",
+  "ptCoordinates": "{lat}, {lon}",
+  "@ptCoordinates": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
+  "ptTimeZoneLabel": "Time zone: {zone}",
+  "@ptTimeZoneLabel": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "ptTimeZoneDevice": "Device time",
+  "ptZoneOffset": "GMT{offset}",
+  "@ptZoneOffset": {
+    "placeholders": {
+      "offset": {
+        "type": "String"
+      }
+    }
+  },
+  "ptZoneDiffers": "Times in {place} time",
+  "@ptZoneDiffers": {
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "ptUseCurrentLocation": "Use my current location",
+  "ptUseCurrentLocationHint": "A one-time approximate fix that stays on your device",
+  "ptChooseCity": "Choose a city",
+  "ptChooseCityHint": "Search in Arabic or English, offline",
+  "ptRationaleTitle": "We need your approximate location",
+  "ptRationaleBody": "To calculate prayer times precisely, Madar asks for your location once. It is stored encrypted on your device and never sent anywhere.",
+  "ptRationaleAllow": "Allow location",
+  "ptRequesting": "Waiting for your permission…",
+  "ptLocating": "Finding your location…",
+  "ptDeniedTitle": "Location permission not granted",
+  "ptDeniedBody": "You can try again, or choose your city from the list.",
+  "ptTryAgain": "Try again",
+  "ptDeniedForeverTitle": "Location permission is off",
+  "ptDeniedForeverBody": "Turn it on in the app's system settings, or choose your city manually.",
+  "ptOpenAppSettings": "Open app settings",
+  "ptServiceOffTitle": "Location services are off",
+  "ptServiceOffBody": "Turn on location in the device settings and come back, or choose your city.",
+  "ptOpenLocationSettings": "Location settings",
+  "ptUnsupportedBody": "Location isn't available on this device. Choose your city from the list.",
+  "ptFailedTitle": "Couldn't find your location",
+  "ptFailedBody": "The signal may be weak. Try again in the open, or choose your city.",
+  "ptLocationChanged": "Location set to {place}",
+  "@ptLocationChanged": {
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCitySearchHint": "Search for a city…",
+  "ptCitySearchEmpty": "No city by that name",
+  "ptCitySearchEmptyHint": "Try another name or a shorter spelling",
+  "ptCitySuggestions": "Suggested cities",
+  "ptCityResults": "Results",
+  "ptCitySelected": "Selected",
+  "ptSectionLocation": "Location",
+  "ptSectionMethod": "Calculation method",
+  "ptSectionMethodHint": "Methods differ mainly in the Fajr and Isha angles",
+  "ptSectionAsr": "Asr",
+  "ptAsrStandard": "Standard",
+  "ptAsrHanafi": "Hanafi",
+  "ptAsrNote": "Standard (Shafi’i, Maliki, Hanbali): Asr begins when an object's shadow equals its length; Hanafi: twice its length.",
+  "ptSectionHighLat": "High latitudes",
+  "ptHighLatAuto": "Automatic",
+  "ptHighLatMiddle": "Middle of the night",
+  "ptHighLatSeventh": "One-seventh of the night",
+  "ptHighLatAngle": "Twilight angle",
+  "ptHighLatNote": "Where twilight never ends in summer, Fajr and Isha are estimated from a portion of the night. Automatic uses one-seventh above about {degrees} latitude.",
+  "@ptHighLatNote": {
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSectionAdjustments": "Manual adjustments",
+  "ptAdjustmentsNote": "Add or subtract minutes to match your mosque's timetable.",
+  "ptResetAdjustments": "Reset",
+  "ptAdjustmentsReset": "Manual adjustments reset",
+  "ptSectionHijri": "Hijri date",
+  "ptHijriOffset": "Hijri day adjustment",
+  "ptHijriOffsetNote": "Based on the Umm al-Qura calendar; shift it by a day or two to match the moon sighting where you live.",
+  "ptHijriAtMaghrib": "Hijri day begins at Maghrib",
+  "ptHijriAtMaghribHint": "The Islamic day runs from sunset to sunset",
+  "ptSectionDisplay": "Display",
+  "ptClockFormat": "Clock",
+  "ptPreviewTitle": "Today's times",
+  "ptPreviewHint": "Updates with every change",
+  "ptMethodSheetTitle": "Calculation method",
+  "ptMethodSuggested": "Suggested for your location",
+  "ptMethodDefault": "Default",
+  "ptMethodChanged": "Method set to {method}",
+  "@ptMethodChanged": {
+    "description": "Undo toast after picking a calculation method",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "ptMethodJordan": "Jordan – Ministry of Awqaf",
+  "ptMethodMuslimWorldLeague": "Muslim World League",
+  "ptMethodUmmAlQura": "Umm al-Qura – Makkah",
+  "ptMethodEgyptian": "Egyptian General Authority of Survey",
+  "ptMethodKarachi": "University of Islamic Sciences, Karachi",
+  "ptMethodNorthAmerica": "ISNA – North America",
+  "ptMethodDubai": "Dubai – UAE",
+  "ptMethodKuwait": "Kuwait",
+  "ptMethodQatar": "Qatar",
+  "ptMethodTurkiye": "Türkiye – Diyanet",
+  "ptMethodSingapore": "Singapore",
+  "ptMethodTehran": "Institute of Geophysics, Tehran",
+  "ptMethodGulfRegion": "Gulf region",
+  "ptMethodMoonsightingCommittee": "Moonsighting Committee",
+  "ptMethodAlgerian": "Algeria – Ministry of Religious Affairs",
+  "ptMethodMorocco": "Morocco – Ministry of Habous",
+  "ptMethodTunisia": "Tunisia – Ministry of Religious Affairs",
+  "ptMethodFrance": "France – UOIF",
+  "ptMethodRussia": "Russia – Spiritual Administration",
+  "ptMethodIndonesian": "Indonesia – KEMENAG",
+  "ptMethodJafari": "Jafari – Leva Institute, Qum",
+  "ptMethodCustom": "Custom angles",
+  "ptMethodCustomHint": "Set the Fajr and Isha angles yourself",
+  "ptSummaryAngle": "{prayer} {angle}",
+  "@ptSummaryAngle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "angle": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryIshaInterval": "Isha {minutes} min after Maghrib",
+  "@ptSummaryIshaInterval": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryRamadan": "{minutes} min in Ramadan",
+  "@ptSummaryRamadan": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryOffset": "{prayer} {minutes} min",
+  "@ptSummaryOffset": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryMaghribAngle": "Maghrib {angle}",
+  "@ptSummaryMaghribAngle": {
+    "placeholders": {
+      "angle": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCustomFajrAngle": "Fajr angle",
+  "ptCustomIshaAngle": "Isha angle",
+  "ptCustomIshaByInterval": "Isha a fixed time after Maghrib",
+  "ptCustomIshaInterval": "Time after Maghrib",
+  "ptIncrease": "Increase",
+  "ptDecrease": "Decrease",
+  "ptUndoSettings": "Previous settings restored",
+  "ptAsrRule": "When Asr begins",
+  "ptHighLatRule": "Estimation rule",
+  "ptNoAdjustment": "None",
+  "@ptNoAdjustment": {
+    "description": "Hijri day offset of zero"
+  },
+  "ptDayUnit": "{days} d",
+  "@ptDayUnit": {
+    "description": "A signed day offset, e.g. +1",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAdjustTitle": "Adjust {prayer}",
+  "@ptAdjustTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAdjustHint": "Long-press any time to adjust it by minutes",
+  "ptAdjustCalculated": "Calculated: {time}",
+  "@ptAdjustCalculated": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAdjustDone": "Done",
+  "ptAdjusted": "{prayer} adjusted",
+  "@ptAdjusted": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanSettingsTitle": "Adhan",
+  "@adhanSettingsTitle": {
+    "description": "Adhan settings screen title / settings entry"
+  },
+  "adhanSettingsSubtitle": "The adhan on time, the muezzin and reminders",
+  "@adhanSettingsSubtitle": {
+    "description": "Subtitle of the Adhan entry in Settings"
+  },
+  "adhanMinutes": "{count, plural, =0{now} =1{1 minute} other{{count} minutes}}",
+  "@adhanMinutes": {
+    "description": "A number of minutes after 'in' / 'before' (genitive in Arabic)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhanMinutesShort": "{minutes} min",
+  "@adhanMinutesShort": {
+    "description": "Compact minutes on a chip; number pre-formatted",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanSeconds": "{count, plural, =0{a moment} =1{1 second} other{{count} seconds}}",
+  "@adhanSeconds": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhanNotifCallTitle": "It's time for {prayer}",
+  "@adhanNotifCallTitle": {
+    "description": "Adhan notification title",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifCallBody": "{time} · Come to prayer",
+  "@adhanNotifCallBody": {
+    "description": "Adhan notification body; time pre-formatted",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifPreTitle": "{prayer} in {minutes}",
+  "@adhanNotifPreTitle": {
+    "description": "Pre-adhan reminder title, e.g. Maghrib in 10 minutes",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifPreBody": "Get ready – the adhan is at {time}",
+  "@adhanNotifPreBody": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifSunriseTitle": "The sun has risen",
+  "adhanNotifSunriseBody": "The time for Fajr has ended",
+  "adhanNotifSunriseSoonTitle": "Sunrise in {minutes}",
+  "@adhanNotifSunriseSoonTitle": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifSunriseSoonBody": "Fajr time is ending – pray before {time}",
+  "@adhanNotifSunriseSoonBody": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifTestTitle": "Test: {prayer} adhan",
+  "@adhanNotifTestTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNotifTestBody": "This is how the adhan will look and sound",
+  "adhanChannelGroup": "Prayer & adhan",
+  "@adhanChannelGroup": {
+    "description": "Android notification channel group"
+  },
+  "adhanChannelCall": "Adhan · {sound}",
+  "@adhanChannelCall": {
+    "description": "Android channel name of an adhan sound",
+    "placeholders": {
+      "sound": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanChannelCallHint": "The adhan as each prayer time begins",
+  "adhanChannelReminder": "Before the adhan",
+  "adhanChannelSunrise": "Sunrise",
+  "adhanToneDawn": "Dawn light",
+  "adhanToneDawnHint": "A crystal glow rising over a warm drone, like first light",
+  "adhanToneBrass": "Astrolabe brass",
+  "adhanToneBrassHint": "Quiet bells, like a distant tower clock",
+  "adhanToneBowl": "Serenity",
+  "adhanToneBowlHint": "Three strikes of a singing bowl",
+  "adhanToneChime": "Reminder chime",
+  "adhanToneSunrise": "Sunrise crystal",
+  "adhanToneChimeHint": "A short glass chime",
+  "adhanSilent": "Silent",
+  "adhanSilentHint": "Notification and vibration, no sound",
+  "adhanScreenOverlineCall": "It is now time for",
+  "@adhanScreenOverlineCall": {
+    "description": "Small line above the big prayer name on the adhan screen"
+  },
+  "adhanScreenOverlinePre": "Get ready for",
+  "adhanScreenOverlineSunrise": "Fajr time has ended",
+  "adhanScreenOverlineSunriseSoon": "Fajr time is ending",
+  "adhanScreenSunriseIn": "Sunrise in {duration}",
+  "@adhanScreenSunriseIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanScreenOverlineTest": "Adhan test",
+  "adhanScreenAdhanIn": "Adhan in {duration}",
+  "@adhanScreenAdhanIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanScreenAdhanAt": "The adhan is at {time}",
+  "@adhanScreenAdhanAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanScreenSoundingCall": "The adhan is sounding",
+  "adhanScreenSoundingTone": "The alert is sounding",
+  "adhanScreenSilent": "Silent adhan",
+  "adhanScreenSemantics": "{prayer} adhan, {time}",
+  "@adhanScreenSemantics": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanDuaTitle": "Supplication after the adhan",
+  "adhanDuaMeaning": "O Allah, Lord of this perfect call and of the prayer about to be established, grant Muhammad the Wasilah and virtue, and raise him to the praised station You promised him.",
+  "@adhanDuaMeaning": {
+    "description": "Arabic: when it is said; English: a translation of the supplication (the Arabic text itself is shown from code)"
+  },
+  "adhanDuaSource": "Sahih al-Bukhari, {number}",
+  "@adhanDuaSource": {
+    "description": "Hadith reference; number pre-formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanStop": "Stop adhan",
+  "adhanPrayed": "I prayed",
+  "adhanPrayedNamed": "I prayed {prayer}",
+  "@adhanPrayedNamed": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanPrayedDone": "May Allah accept it",
+  "adhanPrayedFailed": "Couldn't log the prayer",
+  "adhanClose": "Close",
+  "adhanSnooze": "Remind me in {minutes}",
+  "@adhanSnooze": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanSnoozed": "I'll remind you in {minutes}",
+  "@adhanSnoozed": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNextTitle": "Next adhan",
+  "adhanNextIn": "in {duration}",
+  "@adhanNextIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanNextNone": "No adhan is on",
+  "adhanScheduledCount": "{count, plural, =0{No alerts scheduled} =1{1 alert scheduled} other{{count} alerts scheduled}}",
+  "@adhanScheduledCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhanScheduleWeek": "Keeps calling for a whole week without opening Madar, and after a restart",
+  "adhanScheduleInexact": "Exact alarms aren't allowed – the adhan may be minutes late",
+  "adhanSectionPrayers": "Prayers",
+  "adhanSectionPrayersHint": "The adhan as each time begins, and a reminder before it if you like",
+  "adhanPrayerOff": "Adhan off",
+  "adhanPrayerReminder": "Reminder {minutes} before",
+  "@adhanPrayerReminder": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanPrayerToggle": "{prayer} adhan",
+  "@adhanPrayerToggle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertSheetTitle": "{prayer} adhan",
+  "@adhanAlertSheetTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanAlertCall": "Call the adhan at the prayer time",
+  "adhanAlertReminder": "Reminder before the adhan",
+  "adhanReminderNone": "None",
+  "adhanTestThis": "Test this adhan",
+  "adhanSunrise": "Sunrise alert",
+  "adhanSunriseHint": "A gentle alert as Fajr time ends",
+  "adhanSunriseAt": "At sunrise",
+  "adhanSunriseBefore": "{minutes} before",
+  "@adhanSunriseBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanSectionMuezzin": "Muezzin",
+  "adhanSectionMuezzinHint": "Fajr can have a voice of its own",
+  "adhanMuezzinFajr": "Fajr",
+  "adhanMuezzinOthers": "Dhuhr, Asr, Maghrib and Isha",
+  "adhanPickerTitleFajr": "Fajr adhan sound",
+  "adhanPickerTitleOthers": "Adhan sound",
+  "adhanPickerTones": "Madar tones",
+  "adhanPickerTonesHint": "Procedurally synthesised alerts – bells and singing bowls, never a voice or an adhan melody",
+  "adhanPickerYours": "Your recordings",
+  "adhanPickerYoursHint": "Attach an adhan recording you love – it is copied into Madar and stays on your device",
+  "adhanPickerEmpty": "No recordings attached yet",
+  "adhanPickerAttach": "Attach a recording",
+  "adhanPickerNote": "Madar ships no recordings of human voices: none with a verifiable open licence could be found",
+  "adhanListen": "Listen",
+  "adhanListenStop": "Stop listening",
+  "adhanSelected": "Selected",
+  "adhanDone": "Done",
+  "adhanTestSlotHint": "With {sound}",
+  "@adhanTestSlotHint": {
+    "placeholders": {
+      "sound": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanMuezzinRename": "Rename",
+  "adhanMuezzinRenameTitle": "Recording name",
+  "adhanMuezzinNameField": "Name",
+  "adhanMuezzinAdded": "Added “{name}”",
+  "@adhanMuezzinAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanMuezzinDeleted": "Deleted “{name}”",
+  "@adhanMuezzinDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanMuezzinUnsupported": "Unsupported format – pick a common audio file",
+  "adhanMuezzinTooLarge": "That file is too large",
+  "adhanMuezzinUnreadable": "Couldn't read that file",
+  "adhanMuezzinNoPreview": "This format plays with the adhan itself – try it with “Test adhan now”",
+  "adhanMuezzinMissing": "Deleted recording",
+  "adhanSectionAlert": "Alert",
+  "adhanVibrate": "Vibration",
+  "adhanVibrateHint": "The phone vibrates with the adhan and reminders",
+  "adhanFullScreen": "Full-screen adhan",
+  "adhanFullScreenHint": "Appears over the lock screen and wakes the display at the adhan",
+  "adhanQuiet": "Prayer quiet",
+  "adhanQuietHint": "Game music and ambient sounds fall silent with the adhan and during the prayer",
+  "adhanQuietAdhanOnly": "Adhan only",
+  "adhanSnoozeLength": "Snooze length",
+  "adhanAlarmVolume": "Alarm volume",
+  "adhanAlarmVolumeHint": "The adhan plays at your phone's alarm volume",
+  "adhanAlarmMuted": "Alarm volume is off – the adhan won't be heard",
+  "adhanOpenSoundSettings": "Sound settings",
+  "adhanSectionTry": "Try it",
+  "adhanTestNow": "Test adhan now",
+  "adhanTestHint": "A real adhan in a moment – lock the screen to see it full-screen",
+  "adhanTestScheduled": "The adhan sounds in {seconds}",
+  "@adhanTestScheduled": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "adhanTestFailed": "Couldn't schedule the test – check the permissions",
+  "adhanPermTitle": "So the adhan sounds on time",
+  "adhanPermSubtitle": "A few Android permissions – nothing leaves your device",
+  "adhanPermReady": "The adhan is ready – everything it needs is allowed",
+  "adhanPermNotifications": "Notifications",
+  "adhanPermNotificationsHint": "So the adhan can sound and show",
+  "adhanPermExact": "Exact alarms",
+  "adhanPermExactHint": "So the adhan fires at the exact minute, not after it",
+  "adhanPermFullScreen": "Over the lock screen",
+  "adhanPermFullScreenHint": "So the adhan screen appears while the phone is locked",
+  "adhanPermBattery": "Battery optimisation exemption",
+  "adhanPermBatteryHint": "So the system never stops the adhan to save power",
+  "adhanPermAllow": "Allow",
+  "adhanPermAllowed": "Allowed",
+  "adhanPermOpenSettings": "Settings",
+  "@adhanPermOpenSettings": {
+    "description": "Button on a permission the user refused in the system dialog: opens the system settings page for it"
+  },
+  "adhanPermRefusedHint": "You declined it in Android's dialog – turn it on in Settings whenever you like",
+  "@adhanPermRefusedHint": {
+    "description": "Line under a permission the user refused in the system dialog"
+  },
+  "adhanPermRequired": "Required",
+  "adhanPermDeniedHint": "If you refused it before, turn it on in the app's settings",
+  "trackerTitle": "Prayer tracker",
+  "@trackerTitle": {
+    "description": "Title of the prayer tracker screen"
+  },
+  "trackerTabToday": "Today",
+  "@trackerTabToday": {
+    "description": "Prayer tracker tab: today's prayers"
+  },
+  "trackerTabHistory": "History",
+  "@trackerTabHistory": {
+    "description": "Prayer tracker tab: history, streaks and the qada ledger"
+  },
+  "trackerTodayLabel": "Today",
+  "@trackerTodayLabel": {
+    "description": "Marks today in the week strip"
+  },
+  "trackerObligatory": "Obligatory prayers",
+  "@trackerObligatory": {
+    "description": "Section title: the five obligatory prayers"
+  },
+  "trackerObligatoryHint": "Tap to change the status, swipe right to log it on time",
+  "@trackerObligatoryHint": {
+    "description": "Hint under the obligatory prayers section"
+  },
+  "trackerVoluntary": "Voluntary prayers",
+  "@trackerVoluntary": {
+    "description": "Section title: Duha, Witr and Qiyam"
+  },
+  "trackerTodayPrayed": "Today's prayers",
+  "@trackerTodayPrayed": {
+    "description": "Title of today's summary / the compact card"
+  },
+  "trackerOfTotal": "of {total}",
+  "@trackerOfTotal": {
+    "description": "Under the big count in the progress ring (number already formatted)",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerProgress": "{done} of {total} prayed",
+  "@trackerProgress": {
+    "description": "Progress of the obligatory prayers (numbers already formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerAllDone": "All five prayed – may Allah accept",
+  "@trackerAllDone": {
+    "description": "Banner when all five obligatory prayers of the day are prayed"
+  },
+  "trackerNextIn": "{prayer} in {duration}",
+  "@trackerNextIn": {
+    "description": "Countdown to the next prayer (duration already formatted)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerNightLeft": "All five prayers are due – the night is for voluntary prayer",
+  "@trackerNightLeft": {
+    "description": "Summary line after Isha when nothing is upcoming"
+  },
+  "trackerStreakDays": "{count, plural, =0{No streak yet} =1{1 day} other{{count} days}}",
+  "@trackerStreakDays": {
+    "description": "A streak length in days",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerStreakChip": "{count, plural, =0{Start your streak today} =1{1-day streak} other{{count}-day streak}}",
+  "@trackerStreakChip": {
+    "description": "Streak chip on the Today view and the compact card",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerDaysUnit": "{count, plural, =1{day} other{days}}",
+  "@trackerDaysUnit": {
+    "description": "The unit next to a big streak number (the number is shown separately)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerJamaahCount": "{count} in jamaah",
+  "@trackerJamaahCount": {
+    "description": "How many of today's prayers were in jamaah (number already formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerStatusPrayed": "On time",
+  "@trackerStatusPrayed": {
+    "description": "Status: prayed on time"
+  },
+  "trackerStatusLate": "Late",
+  "@trackerStatusLate": {
+    "description": "Status: prayed late"
+  },
+  "trackerStatusMissed": "Missed",
+  "@trackerStatusMissed": {
+    "description": "Status: missed"
+  },
+  "trackerStatusQada": "Made up",
+  "@trackerStatusQada": {
+    "description": "Status: a missed prayer made up (qada)"
+  },
+  "trackerStatusDue": "Due now",
+  "@trackerStatusDue": {
+    "description": "Status: its time is running and it is not logged yet"
+  },
+  "trackerStatusUnlogged": "Not logged",
+  "@trackerStatusUnlogged": {
+    "description": "Status: its time ended without a log"
+  },
+  "trackerStatusUpcoming": "Not yet due",
+  "@trackerStatusUpcoming": {
+    "description": "Status: its time has not come yet"
+  },
+  "trackerStatusVoluntaryDone": "Prayed",
+  "@trackerStatusVoluntaryDone": {
+    "description": "Status of a voluntary prayer that was prayed"
+  },
+  "trackerStatusVoluntaryOpen": "Not prayed yet",
+  "@trackerStatusVoluntaryOpen": {
+    "description": "Status of a voluntary prayer not logged"
+  },
+  "trackerUpcomingIn": "in {duration}",
+  "@trackerUpcomingIn": {
+    "description": "How long until a prayer is due (duration already formatted)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerTimeLeft": "{duration} left",
+  "@trackerTimeLeft": {
+    "description": "How long the current prayer's time still runs (duration already formatted)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerActionPrayed": "Prayed on time",
+  "@trackerActionPrayed": {
+    "description": "Menu action: log as prayed on time"
+  },
+  "trackerActionLate": "Prayed late",
+  "@trackerActionLate": {
+    "description": "Menu action: log as prayed late"
+  },
+  "trackerActionMissed": "Missed it",
+  "@trackerActionMissed": {
+    "description": "Menu action: log as missed"
+  },
+  "trackerActionMadeUp": "Made it up",
+  "@trackerActionMadeUp": {
+    "description": "Action: record that a missed prayer was made up"
+  },
+  "trackerActionClear": "Clear the log",
+  "@trackerActionClear": {
+    "description": "Menu action: remove the log"
+  },
+  "trackerActionJamaahOn": "Prayed in jamaah",
+  "@trackerActionJamaahOn": {
+    "description": "Menu action: mark as prayed in congregation"
+  },
+  "trackerActionJamaahOff": "Not in jamaah",
+  "@trackerActionJamaahOff": {
+    "description": "Menu action: unmark congregation"
+  },
+  "trackerActionMosqueOn": "Prayed at the mosque",
+  "@trackerActionMosqueOn": {
+    "description": "Menu action: mark as prayed at the mosque"
+  },
+  "trackerActionMosqueOff": "Not at the mosque",
+  "@trackerActionMosqueOff": {
+    "description": "Menu action: unmark mosque"
+  },
+  "trackerActionMakeUpAll": "{count, plural, =1{Made it up} other{Made them all up}}",
+  "@trackerActionMakeUpAll": {
+    "description": "Qada ledger: record every listed prayer as made up",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerJamaah": "Jamaah",
+  "@trackerJamaah": {
+    "description": "Toggle chip: prayed in congregation"
+  },
+  "trackerMosque": "Mosque",
+  "@trackerMosque": {
+    "description": "Toggle chip: prayed at the mosque"
+  },
+  "trackerSwipePrayed": "Prayed",
+  "@trackerSwipePrayed": {
+    "description": "Screen-reader label of the swipe-to-log action"
+  },
+  "trackerUndoStatus": "{prayer}: {status}",
+  "@trackerUndoStatus": {
+    "description": "Undo toast after changing a prayer's status",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoCleared": "{prayer} log cleared",
+  "@trackerUndoCleared": {
+    "description": "Undo toast after clearing a log",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoJamaahOn": "{prayer} in jamaah",
+  "@trackerUndoJamaahOn": {
+    "description": "Undo toast after marking jamaah",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoJamaahOff": "{prayer} not in jamaah",
+  "@trackerUndoJamaahOff": {
+    "description": "Undo toast after unmarking jamaah",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMosqueOn": "{prayer} at the mosque",
+  "@trackerUndoMosqueOn": {
+    "description": "Undo toast after marking mosque",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMosqueOff": "{prayer} not at the mosque",
+  "@trackerUndoMosqueOff": {
+    "description": "Undo toast after unmarking mosque",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoVoluntaryOn": "{prayer} logged",
+  "@trackerUndoVoluntaryOn": {
+    "description": "Undo toast after logging a voluntary prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoVoluntaryOff": "{prayer} removed",
+  "@trackerUndoVoluntaryOff": {
+    "description": "Undo toast after removing a voluntary prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMadeUp": "{prayer} of {date} made up",
+  "@trackerUndoMadeUp": {
+    "description": "Undo toast after making up a missed prayer (date already formatted)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMadeUpAll": "{count, plural, =1{1 prayer made up} other{{count} prayers made up}}",
+  "@trackerUndoMadeUpAll": {
+    "description": "Undo toast after making up several prayers",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerNotYet": "It isn't time for {prayer} yet",
+  "@trackerNotYet": {
+    "description": "Feedback when tapping a prayer whose time has not come",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerSunnahFajr": "Fajr sunnah",
+  "@trackerSunnahFajr": {
+    "description": "The two rak'ahs before Fajr"
+  },
+  "trackerSunnahDhuhr": "Dhuhr sunnah",
+  "@trackerSunnahDhuhr": {
+    "description": "The rawatib of Dhuhr"
+  },
+  "trackerSunnahMaghrib": "Maghrib sunnah",
+  "@trackerSunnahMaghrib": {
+    "description": "The rawatib of Maghrib"
+  },
+  "trackerSunnahIsha": "Isha sunnah",
+  "@trackerSunnahIsha": {
+    "description": "The rawatib of Isha"
+  },
+  "trackerDuha": "Duha",
+  "@trackerDuha": {
+    "description": "The forenoon prayer"
+  },
+  "trackerWitr": "Witr",
+  "@trackerWitr": {
+    "description": "The odd-numbered night prayer"
+  },
+  "trackerQiyam": "Night prayer",
+  "@trackerQiyam": {
+    "description": "Qiyam al-layl"
+  },
+  "trackerSunnahLabel": "Sunnah",
+  "@trackerSunnahLabel": {
+    "description": "Title of the sunnah chip under a fard"
+  },
+  "trackerRakahBefore": "{count, plural, =1{1 before} other{{count} before}}",
+  "@trackerRakahBefore": {
+    "description": "Rak'ahs of a sunnah before its fard",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerRakahAfter": "{count, plural, =1{1 after} other{{count} after}}",
+  "@trackerRakahAfter": {
+    "description": "Rak'ahs of a sunnah after its fard",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerRakahBoth": "{before}, {after}",
+  "@trackerRakahBoth": {
+    "description": "Joins the rak'ahs before and after (both already formatted)",
+    "placeholders": {
+      "before": {
+        "type": "String"
+      },
+      "after": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerDuhaWindow": "From mid-morning until Dhuhr",
+  "@trackerDuhaWindow": {
+    "description": "When Duha is prayed"
+  },
+  "trackerNightWindow": "From Isha until Fajr",
+  "@trackerNightWindow": {
+    "description": "When Witr and the night prayer are prayed"
+  },
+  "trackerStreakCurrent": "Current streak",
+  "@trackerStreakCurrent": {
+    "description": "History: the current streak"
+  },
+  "trackerStreakBest": "Best streak",
+  "@trackerStreakBest": {
+    "description": "History: the longest streak"
+  },
+  "trackerStreakRule": "A day counts when all five are prayed or made up",
+  "@trackerStreakRule": {
+    "description": "How streaks are counted"
+  },
+  "trackerWeekTitle": "The last seven days",
+  "@trackerWeekTitle": {
+    "description": "History: the week strip"
+  },
+  "trackerHeatmapTitle": "The month",
+  "@trackerHeatmapTitle": {
+    "description": "History: the month heatmap"
+  },
+  "trackerLegendLess": "Less",
+  "@trackerLegendLess": {
+    "description": "Heatmap legend: fewer prayers"
+  },
+  "trackerLegendMore": "All five",
+  "@trackerLegendMore": {
+    "description": "Heatmap legend: all five prayed"
+  },
+  "trackerLegendJamaah": "Dots: prayers in jamaah",
+  "@trackerLegendJamaah": {
+    "description": "Heatmap legend: the dots in a cell count the prayers in jamaah"
+  },
+  "trackerPrevMonth": "Previous month",
+  "@trackerPrevMonth": {
+    "description": "Heatmap navigation"
+  },
+  "trackerNextMonth": "Next month",
+  "@trackerNextMonth": {
+    "description": "Heatmap navigation"
+  },
+  "trackerDaySemantics": "{date}: {done} of {total} prayed, {jamaah} in jamaah",
+  "@trackerDaySemantics": {
+    "description": "Screen-reader label of a day cell (all values already formatted)",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      },
+      "jamaah": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerTotalsTitle": "{month} at a glance",
+  "@trackerTotalsTitle": {
+    "description": "History: totals of the shown month (month name already formatted)",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerTotalOnTime": "On time",
+  "@trackerTotalOnTime": {
+    "description": "Total: share prayed on time"
+  },
+  "trackerTotalJamaah": "In jamaah",
+  "@trackerTotalJamaah": {
+    "description": "Total: share prayed in jamaah"
+  },
+  "trackerTotalMosque": "At the mosque",
+  "@trackerTotalMosque": {
+    "description": "Total: share prayed at the mosque"
+  },
+  "trackerTotalCompleteDays": "Complete days",
+  "@trackerTotalCompleteDays": {
+    "description": "Total: days with all five prayed"
+  },
+  "trackerTotalRawatib": "Rawatib",
+  "@trackerTotalRawatib": {
+    "description": "Total: sunnah rawatib prayed"
+  },
+  "trackerTotalSunnahTitle": "Sunnah and voluntary",
+  "@trackerTotalSunnahTitle": {
+    "description": "Heading of the sunnah counts"
+  },
+  "trackerBreakdownTitle": "Prayer by prayer",
+  "@trackerBreakdownTitle": {
+    "description": "History: stacked bars per obligatory prayer"
+  },
+  "trackerNoMonthData": "Nothing logged this month yet",
+  "@trackerNoMonthData": {
+    "description": "History: empty month"
+  },
+  "trackerQadaTitle": "Qada ledger",
+  "@trackerQadaTitle": {
+    "description": "History: missed prayers waiting to be made up"
+  },
+  "trackerQadaOutstanding": "{count, plural, =0{Nothing to make up} =1{1 prayer to make up} other{{count} prayers to make up}}",
+  "@trackerQadaOutstanding": {
+    "description": "Qada ledger summary",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerQadaMadeUpSoFar": "Made up so far: {count}",
+  "@trackerQadaMadeUpSoFar": {
+    "description": "Qada ledger: prayers already made up (number already formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerQadaEmpty": "No missed prayers waiting – well done",
+  "@trackerQadaEmpty": {
+    "description": "Qada ledger: empty"
+  },
+  "trackerQadaEmptyFiltered": "Nothing to make up for {prayer}",
+  "@trackerQadaEmptyFiltered": {
+    "description": "Qada ledger: empty for the selected prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerQadaMissedOn": "Missed {date}",
+  "@trackerQadaMissedOn": {
+    "description": "Qada ledger row: the day it was missed (date already formatted)",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerQadaShowMore": "{count, plural, =1{Show 1 more} other{Show {count} more}}",
+  "@trackerQadaShowMore": {
+    "description": "Qada ledger: reveals the next rows of a long backlog",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerFilterAll": "All",
+  "@trackerFilterAll": {
+    "description": "Qada ledger filter: every prayer"
+  },
+  "trackerCardOpen": "Open the tracker",
+  "@trackerCardOpen": {
+    "description": "Compact card: open the prayer tracker"
+  },
+  "trackerSlotSemantics": "{prayer}, {time}, {status}",
+  "@trackerSlotSemantics": {
+    "description": "Screen-reader label of a prayer row (all parts already formatted)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerMarks": "{first}, {second}",
+  "@trackerMarks": {
+    "description": "Joins two short labels",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUntil": "until {time}",
+  "@trackerUntil": {
+    "description": "When a voluntary prayer's time ends (time already formatted)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerDueNow": "Due now · {duration} left",
+  "@trackerDueNow": {
+    "description": "Status of a prayer whose time is running (duration already formatted)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerValueOf": "{label}: {value}",
+  "@trackerValueOf": {
+    "description": "Screen-reader label of a figure (value already formatted)",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTitle": "Adhkar",
+  "@adhkarTitle": {
+    "description": "Title of the adhkar home screen"
+  },
+  "adhkarTodayTitle": "Today's adhkar",
+  "@adhkarTodayTitle": {
+    "description": "Header of today's adhkar progress (home hero and the Faith card)"
+  },
+  "adhkarSetsDoneOf": "{done} of {total}",
+  "@adhkarSetsDoneOf": {
+    "description": "Sets finished today, e.g. 2 of 5 (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSetsDoneCaption": "sets complete",
+  "@adhkarSetsDoneCaption": {
+    "description": "Caption under the sets-done count in the hero ring"
+  },
+  "adhkarCategoryMorning": "Morning adhkar",
+  "@adhkarCategoryMorning": {
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryEvening": "Evening adhkar",
+  "@adhkarCategoryEvening": {
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryAfterPrayer": "After-prayer adhkar",
+  "@adhkarCategoryAfterPrayer": {
+    "description": "Adhkar set name"
+  },
+  "adhkarCategorySleep": "Before-sleep adhkar",
+  "@adhkarCategorySleep": {
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryWaking": "On-waking adhkar",
+  "@adhkarCategoryWaking": {
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryMorningHint": "From Fajr until mid-morning",
+  "@adhkarCategoryMorningHint": {
+    "description": "When the morning adhkar are said"
+  },
+  "adhkarCategoryEveningHint": "From Asr until after Maghrib",
+  "@adhkarCategoryEveningHint": {
+    "description": "When the evening adhkar are said"
+  },
+  "adhkarCategoryAfterPrayerHint": "After the salam of every obligatory prayer",
+  "@adhkarCategoryAfterPrayerHint": {
+    "description": "When the after-prayer adhkar are said"
+  },
+  "adhkarCategorySleepHint": "As you go to bed",
+  "@adhkarCategorySleepHint": {
+    "description": "When the sleep adhkar are said"
+  },
+  "adhkarCategoryWakingHint": "When you wake up",
+  "@adhkarCategoryWakingHint": {
+    "description": "When the waking adhkar are said"
+  },
+  "adhkarSuggestMorning": "Time for your morning adhkar",
+  "@adhkarSuggestMorning": {
+    "description": "Suggestion in the morning windows"
+  },
+  "adhkarSuggestEvening": "Time for your evening adhkar",
+  "@adhkarSuggestEvening": {
+    "description": "Suggestion in the Asr and Maghrib windows"
+  },
+  "adhkarSuggestSleep": "Your before-sleep adhkar, before you rest",
+  "@adhkarSuggestSleep": {
+    "description": "Suggestion after Isha"
+  },
+  "adhkarSuggestWaking": "Your on-waking adhkar",
+  "@adhkarSuggestWaking": {
+    "description": "Suggestion for the waking set"
+  },
+  "adhkarSuggestAfterPrayer": "The adhkar after {prayer}",
+  "@adhkarSuggestAfterPrayer": {
+    "description": "Suggestion after an obligatory prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSuggestAllDone": "You've said all of today's adhkar — may Allah accept",
+  "@adhkarSuggestAllDone": {
+    "description": "Hero line when every set is done"
+  },
+  "adhkarStart": "Begin",
+  "@adhkarStart": {
+    "description": "Opens a set from the start"
+  },
+  "adhkarContinue": "Continue",
+  "@adhkarContinue": {
+    "description": "Resumes a started set"
+  },
+  "adhkarContinueAt": "Continue from dhikr {position}",
+  "@adhkarContinueAt": {
+    "description": "Resume hint on a set card (position pre-formatted)",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarDoneToday": "Done today",
+  "@adhkarDoneToday": {
+    "description": "Badge on a finished set"
+  },
+  "adhkarAfterPrayerProgress": "{done} of {total} prayers",
+  "@adhkarAfterPrayerProgress": {
+    "description": "After-prayer sets finished today (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarItemsCount": "{count, plural, =1{1 dhikr} other{{count} adhkar}}",
+  "@adhkarItemsCount": {
+    "description": "Number of adhkar in a set",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarMarkDone": "Mark as done",
+  "@adhkarMarkDone": {
+    "description": "Long-press / swipe action on a set card"
+  },
+  "adhkarMarkedDone": "{name} marked done",
+  "@adhkarMarkedDone": {
+    "description": "Undo toast after marking a set done",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRestart": "Start over",
+  "@adhkarRestart": {
+    "description": "Action that clears today's progress of a set"
+  },
+  "adhkarRestarted": "{name} restarted",
+  "@adhkarRestarted": {
+    "description": "Undo toast after restarting a set",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSourceCredit": "From “Hisn al-Muslim” by Sa'id ibn Wahf al-Qahtani",
+  "@adhkarSourceCredit": {
+    "description": "Content credit at the foot of the adhkar home"
+  },
+  "adhkarLoadError": "Couldn't load the adhkar",
+  "@adhkarLoadError": {
+    "description": "Shown if the bundled adhkar cannot be read"
+  },
+  "adhkarTasbeehTitle": "Tasbeeh",
+  "@adhkarTasbeehTitle": {
+    "description": "Title of the tasbeeh counter"
+  },
+  "adhkarTasbeehCardSubtitle": "A ring of beads that moves with every glorification",
+  "@adhkarTasbeehCardSubtitle": {
+    "description": "Subtitle of the tasbeeh entry card"
+  },
+  "adhkarTasbeehToday": "Today: {count}",
+  "@adhkarTasbeehToday": {
+    "description": "Tasbeeh total today (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRemindersTitle": "Reminders",
+  "@adhkarRemindersTitle": {
+    "description": "Section header of the adhkar reminders"
+  },
+  "adhkarReminderMorningLabel": "Remind me of the morning adhkar after Fajr",
+  "@adhkarReminderMorningLabel": {
+    "description": "Switch"
+  },
+  "adhkarReminderEveningLabel": "Remind me of the evening adhkar after Asr",
+  "@adhkarReminderEveningLabel": {
+    "description": "Switch"
+  },
+  "adhkarReminderOffset": "{minutes, plural, =0{At the adhan} =1{1 min} other{{minutes} min}}",
+  "@adhkarReminderOffset": {
+    "description": "Reminder offset pill: how long after the adhan (shown under the caption adhkarReminderOffsetCaption)",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarReminderOffsetCaption": "How long after the adhan",
+  "@adhkarReminderOffsetCaption": {
+    "description": "Caption above the reminder offset pills"
+  },
+  "adhkarReminderNote": "Reminders stay on this device and arrive once Madar may send notifications.",
+  "@adhkarReminderNote": {
+    "description": "Footnote of the reminders section"
+  },
+  "adhkarReminderMorningTitle": "Morning adhkar",
+  "@adhkarReminderMorningTitle": {
+    "description": "Notification title"
+  },
+  "adhkarReminderMorningBody": "Time for your morning adhkar — begin your day with the remembrance of Allah",
+  "@adhkarReminderMorningBody": {
+    "description": "Notification body"
+  },
+  "adhkarReminderEveningTitle": "Evening adhkar",
+  "@adhkarReminderEveningTitle": {
+    "description": "Notification title"
+  },
+  "adhkarReminderEveningBody": "Time for your evening adhkar — a calm close to your day",
+  "@adhkarReminderEveningBody": {
+    "description": "Notification body"
+  },
+  "adhkarReaderPosition": "{index} of {total}",
+  "@adhkarReaderPosition": {
+    "description": "Position of the dhikr in its set (numbers pre-formatted)",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRemaining": "to go",
+  "@adhkarRemaining": {
+    "description": "Caption under the remaining count in the counter ring"
+  },
+  "adhkarCounterDone": "Done",
+  "@adhkarCounterDone": {
+    "description": "Caption in the counter ring when the dhikr is finished"
+  },
+  "adhkarCounterHint": "Tap anywhere to count",
+  "@adhkarCounterHint": {
+    "description": "Hint under the counter"
+  },
+  "adhkarCounterSemantics": "Count once — {done} of {total}",
+  "@adhkarCounterSemantics": {
+    "description": "Screen-reader label of the counter ring",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRepeat": "{count, plural, =1{Once} =2{Twice} other{{count} times}}",
+  "@adhkarRepeat": {
+    "description": "How many times a dhikr is said",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarReadingDone": "I've read them",
+  "@adhkarReadingDone": {
+    "description": "Button that ticks off a reading item (whole surahs)"
+  },
+  "adhkarVirtue": "Its virtue",
+  "@adhkarVirtue": {
+    "description": "Label of the virtue under a dhikr"
+  },
+  "adhkarReference": "Source",
+  "@adhkarReference": {
+    "description": "Label of the hadith reference"
+  },
+  "adhkarMeaning": "Meaning",
+  "@adhkarMeaning": {
+    "description": "Label of the English meaning"
+  },
+  "adhkarQuranRef": "Surat {surah} · {ayahs}",
+  "@adhkarQuranRef": {
+    "description": "Quran reference under verses, e.g. Surat al-Baqarah · 255 (ayahs pre-formatted)",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayahs": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSurah2": "al-Baqarah",
+  "@adhkarSurah2": {
+    "description": "Surah name"
+  },
+  "adhkarSurah3": "Al Imran",
+  "@adhkarSurah3": {
+    "description": "Surah name"
+  },
+  "adhkarSurah112": "al-Ikhlas",
+  "@adhkarSurah112": {
+    "description": "Surah name"
+  },
+  "adhkarSurah113": "al-Falaq",
+  "@adhkarSurah113": {
+    "description": "Surah name"
+  },
+  "adhkarSurah114": "an-Nas",
+  "@adhkarSurah114": {
+    "description": "Surah name"
+  },
+  "adhkarSurahNumber": "no. {number}",
+  "@adhkarSurahNumber": {
+    "description": "Fallback surah label (number pre-formatted)",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarPrevious": "Previous dhikr",
+  "@adhkarPrevious": {
+    "description": "Button"
+  },
+  "adhkarNext": "Next dhikr",
+  "@adhkarNext": {
+    "description": "Button"
+  },
+  "adhkarDhikrSemantics": "Dhikr {index} of {total}",
+  "@adhkarDhikrSemantics": {
+    "description": "Screen-reader label of a progress dot (numbers pre-formatted)",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarOptionsTitle": "Reading options",
+  "@adhkarOptionsTitle": {
+    "description": "Title of the reader options sheet"
+  },
+  "adhkarTextSize": "Text size",
+  "@adhkarTextSize": {
+    "description": "Reader option"
+  },
+  "adhkarTextSizeSmaller": "Smaller text",
+  "@adhkarTextSizeSmaller": {
+    "description": "Button"
+  },
+  "adhkarTextSizeLarger": "Larger text",
+  "@adhkarTextSizeLarger": {
+    "description": "Button"
+  },
+  "adhkarShowTranslation": "Show the English meaning",
+  "@adhkarShowTranslation": {
+    "description": "Reader option (English UI only)"
+  },
+  "adhkarShowVirtue": "Show virtue and source",
+  "@adhkarShowVirtue": {
+    "description": "Reader option"
+  },
+  "adhkarRecountCurrent": "Recount this dhikr",
+  "@adhkarRecountCurrent": {
+    "description": "Reader option"
+  },
+  "adhkarRestartSet": "Restart the set",
+  "@adhkarRestartSet": {
+    "description": "Reader option"
+  },
+  "adhkarMarkSetDone": "I've said the whole set",
+  "@adhkarMarkSetDone": {
+    "description": "Reader option that marks the set done"
+  },
+  "adhkarAfterPrayerFor": "After {prayer}",
+  "@adhkarAfterPrayerFor": {
+    "description": "Prayer chip of the after-prayer reader",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarChoosePrayer": "After which prayer?",
+  "@adhkarChoosePrayer": {
+    "description": "Title of the prayer picker of the after-prayer reader"
+  },
+  "adhkarSetCompleteTitle": "May Allah accept it from you",
+  "@adhkarSetCompleteTitle": {
+    "description": "Title of the set-complete view"
+  },
+  "adhkarSetCompleteBody": "{name} complete",
+  "@adhkarSetCompleteBody": {
+    "description": "Body of the set-complete view",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSetCompleteReview": "Review",
+  "@adhkarSetCompleteReview": {
+    "description": "Button on the set-complete view"
+  },
+  "adhkarAudioTitle": "Recording",
+  "@adhkarAudioTitle": {
+    "description": "Title of the per-dhikr audio sheet"
+  },
+  "adhkarAudioAttach": "Attach a recording",
+  "@adhkarAudioAttach": {
+    "description": "Button"
+  },
+  "adhkarAudioReplace": "Replace",
+  "@adhkarAudioReplace": {
+    "description": "Button"
+  },
+  "adhkarAudioRemove": "Remove",
+  "@adhkarAudioRemove": {
+    "description": "Button"
+  },
+  "adhkarAudioRemoved": "Recording removed",
+  "@adhkarAudioRemoved": {
+    "description": "Undo toast"
+  },
+  "adhkarAudioAttached": "Recording attached",
+  "@adhkarAudioAttached": {
+    "description": "Toast after attaching"
+  },
+  "adhkarAudioPlay": "Play the recording",
+  "@adhkarAudioPlay": {
+    "description": "Button"
+  },
+  "adhkarAudioStop": "Stop the recording",
+  "@adhkarAudioStop": {
+    "description": "Button"
+  },
+  "adhkarAudioNone": "No recording for this dhikr yet. Attach an audio file from your device (MP3, WAV or FLAC) to hear it here.",
+  "@adhkarAudioNone": {
+    "description": "Empty state of the audio sheet"
+  },
+  "adhkarAudioPolicy": "Madar never uses generated voices for Quran or adhkar — attach a recording you trust; it stays on your device.",
+  "@adhkarAudioPolicy": {
+    "description": "Policy note on the audio sheet"
+  },
+  "adhkarAudioUnsupported": "This file isn't in a supported format (MP3, WAV or FLAC)",
+  "@adhkarAudioUnsupported": {
+    "description": "Error"
+  },
+  "adhkarAudioTooLarge": "The file is larger than 30 MB",
+  "@adhkarAudioTooLarge": {
+    "description": "Error"
+  },
+  "adhkarAudioUnavailable": "Audio can't play on this device",
+  "@adhkarAudioUnavailable": {
+    "description": "Error"
+  },
+  "adhkarAudioFile": "{name} · {duration}",
+  "@adhkarAudioFile": {
+    "description": "Attached file line (duration pre-formatted)",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehTarget": "Round of",
+  "@adhkarTasbeehTarget": {
+    "description": "Label of the target choice"
+  },
+  "adhkarTasbeehCustom": "Custom",
+  "@adhkarTasbeehCustom": {
+    "description": "Custom target choice"
+  },
+  "adhkarTasbeehCustomTitle": "Custom round",
+  "@adhkarTasbeehCustomTitle": {
+    "description": "Title of the custom target sheet"
+  },
+  "adhkarTasbeehCustomField": "Count per round",
+  "@adhkarTasbeehCustomField": {
+    "description": "Field label"
+  },
+  "adhkarTasbeehCustomInvalid": "Enter a number from 1 to 9999",
+  "@adhkarTasbeehCustomInvalid": {
+    "description": "Validation"
+  },
+  "adhkarTasbeehRound": "Round {round}",
+  "@adhkarTasbeehRound": {
+    "description": "Current round (number pre-formatted)",
+    "placeholders": {
+      "round": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehOf": "of {target}",
+  "@adhkarTasbeehOf": {
+    "description": "Under the count (number pre-formatted)",
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehTotal": "Total {count}",
+  "@adhkarTasbeehTotal": {
+    "description": "Total taps of the session (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehTapHint": "Tap to count · long-press to reset",
+  "@adhkarTasbeehTapHint": {
+    "description": "Hint under the ring"
+  },
+  "adhkarTasbeehCountSemantics": "{phrase}: {count} of {target}, round {round}",
+  "@adhkarTasbeehCountSemantics": {
+    "description": "Screen-reader label of the ring (numbers pre-formatted)",
+    "placeholders": {
+      "phrase": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "round": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehCountHint": "Double-tap to count",
+  "@adhkarTasbeehCountHint": {
+    "description": "Screen-reader hint of the ring"
+  },
+  "adhkarTasbeehResetTitle": "Reset the count?",
+  "@adhkarTasbeehResetTitle": {
+    "description": "Title of the reset confirmation"
+  },
+  "adhkarTasbeehResetBody": "Your count ({count}) is saved to your history, then counting starts again from zero.",
+  "@adhkarTasbeehResetBody": {
+    "description": "Body of the reset confirmation (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehReset": "Reset",
+  "@adhkarTasbeehReset": {
+    "description": "Button"
+  },
+  "adhkarTasbeehPhrases": "Tasbeeh phrases",
+  "@adhkarTasbeehPhrases": {
+    "description": "Title of the phrase editor"
+  },
+  "adhkarTasbeehEditPhrases": "Edit phrases",
+  "@adhkarTasbeehEditPhrases": {
+    "description": "Button"
+  },
+  "adhkarTasbeehAddPhrase": "Add a phrase",
+  "@adhkarTasbeehAddPhrase": {
+    "description": "Button / sheet title"
+  },
+  "adhkarTasbeehEditPhrase": "Edit phrase",
+  "@adhkarTasbeehEditPhrase": {
+    "description": "Sheet title"
+  },
+  "adhkarTasbeehPhraseField": "Phrase",
+  "@adhkarTasbeehPhraseField": {
+    "description": "Field label"
+  },
+  "adhkarTasbeehPhraseDeleted": "Phrase removed",
+  "@adhkarTasbeehPhraseDeleted": {
+    "description": "Undo toast"
+  },
+  "adhkarTasbeehNoPhrases": "Add a phrase to start counting",
+  "@adhkarTasbeehNoPhrases": {
+    "description": "Empty state"
+  },
+  "adhkarTasbeehHistory": "Tasbeeh history",
+  "@adhkarTasbeehHistory": {
+    "description": "Title of the history sheet"
+  },
+  "adhkarTasbeehHistoryEmpty": "No sessions yet",
+  "@adhkarTasbeehHistoryEmpty": {
+    "description": "Empty history"
+  },
+  "adhkarTasbeehSessionDeleted": "Session removed",
+  "@adhkarTasbeehSessionDeleted": {
+    "description": "Undo toast"
+  },
+  "adhkarTasbeehRounds": "{count, plural, =0{No full round} =1{1 round} other{{count} rounds}}",
+  "@adhkarTasbeehRounds": {
+    "description": "Rounds of a history session",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarPhraseSubhanallah": "Glory be to Allah",
+  "@adhkarPhraseSubhanallah": {
+    "description": "English meaning of a built-in tasbeeh phrase (shown in the English UI)"
+  },
+  "adhkarPhraseAlhamdulillah": "Praise be to Allah",
+  "@adhkarPhraseAlhamdulillah": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseAllahuakbar": "Allah is the Greatest",
+  "@adhkarPhraseAllahuakbar": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseTahlil": "There is no god but Allah",
+  "@adhkarPhraseTahlil": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseIstighfar": "I seek Allah's forgiveness",
+  "@adhkarPhraseIstighfar": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseSubhanallahWaBihamdihi": "Glory be to Allah, and praise be to Him",
+  "@adhkarPhraseSubhanallahWaBihamdihi": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseSubhanallahilAzim": "Glory be to Allah, the Magnificent",
+  "@adhkarPhraseSubhanallahilAzim": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseHawqala": "There is no might and no power except by Allah",
+  "@adhkarPhraseHawqala": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseSalawat": "O Allah, send blessings and peace upon our Prophet Muhammad",
+  "@adhkarPhraseSalawat": {
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarAllAdhkar": "All adhkar",
+  "@adhkarAllAdhkar": {
+    "description": "Link from the Faith card to the adhkar home"
+  },
+  "adhkarShortMorning": "Morning",
+  "@adhkarShortMorning": {
+    "description": "Short set label under a small ring (Faith card)"
+  },
+  "adhkarShortEvening": "Evening",
+  "@adhkarShortEvening": {
+    "description": "Short set label"
+  },
+  "adhkarShortAfterPrayer": "After prayer",
+  "@adhkarShortAfterPrayer": {
+    "description": "Short set label"
+  },
+  "adhkarShortSleep": "Sleep",
+  "@adhkarShortSleep": {
+    "description": "Short set label"
+  },
+  "adhkarShortWaking": "Waking",
+  "@adhkarShortWaking": {
+    "description": "Short set label"
+  },
+  "adhkarJoin": "{first} · {second}",
+  "@adhkarJoin": {
+    "description": "Joins two short facts on one line. Arabic uses a comma because a middle dot reads like the Arabic-Indic zero",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehChip": "Tasbeeh: {count}",
+  "@adhkarTasbeehChip": {
+    "description": "Chip on the Faith card with today's tasbeeh total (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTodayLine": "{suggestion} ({done} of {total} done)",
+  "@adhkarTodayLine": {
+    "description": "Faith card line: the suggested set plus how many sets are finished (numbers pre-formatted)",
+    "placeholders": {
+      "suggestion": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarReminderChannelName": "Adhkar reminders",
+  "@adhkarReminderChannelName": {
+    "description": "Android notification channel name (system settings) of the adhkar reminders"
+  },
+  "adhkarReminderChannelDescription": "Morning adhkar after Fajr and evening adhkar after Asr",
+  "@adhkarReminderChannelDescription": {
+    "description": "Android notification channel description of the adhkar reminders"
+  },
+  "adhkarReminderPermissionDenied": "Notifications are off for Madar, so reminders can’t arrive. You can turn them on in your phone’s settings.",
+  "@adhkarReminderPermissionDenied": {
+    "description": "Shown in the reminders card when a reminder is on but notifications were refused"
+  },
+  "adhkarSuggestDone": "{set, select, morning{Morning adhkar said — may Allah accept} evening{Evening adhkar said — may Allah accept} sleep{Before-sleep adhkar said — rest well} waking{On-waking adhkar said — a blessed day to you} other{Adhkar said — may Allah accept}}",
+  "@adhkarSuggestDone": {
+    "description": "Hero line when the set that fits the moment is already finished (set = morning | evening | sleep | waking | afterPrayer)",
+    "placeholders": {
+      "set": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSuggestAfterPrayerDone": "Adhkar after {prayer} said — may Allah accept",
+  "@adhkarSuggestAfterPrayerDone": {
+    "description": "Hero line when the after-prayer adhkar of the prayer just due are finished",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "faithHubAt": "at {time}",
+  "@faithHubAt": {
+    "description": "Next prayer card: the prayer time",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "faithHubLinksTitle": "Quick links",
+  "@faithHubLinksTitle": {
+    "description": "Faith page: section of links"
+  },
+  "faithHubTimesHint": "Day, month and Hijri date",
+  "@faithHubTimesHint": {
+    "description": "Link hint: prayer times"
+  },
+  "faithHubHistory": "Prayer history",
+  "@faithHubHistory": {
+    "description": "Link: the tracker history tab"
+  },
+  "faithHubHistoryHint": "Streaks, make-ups and totals",
+  "@faithHubHistoryHint": {
+    "description": "Link hint: tracker history"
+  },
+  "faithHubAdhkarHint": "Hisn al-Muslim",
+  "@faithHubAdhkarHint": {
+    "description": "Link hint: adhkar"
+  },
+  "faithHubTasbeehHint": "A bead counter",
+  "@faithHubTasbeehHint": {
+    "description": "Link hint: tasbeeh"
+  },
+  "faithHubAdhanHint": "Muezzin, reminders and permissions",
+  "@faithHubAdhanHint": {
+    "description": "Link hint: adhan settings"
   }
 }

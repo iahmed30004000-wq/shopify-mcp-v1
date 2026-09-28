@@ -155,4 +155,27 @@ void main() {
     await tester.pump();
     expect(f, const MadarFormatter(languageCode: 'ar', digits: DigitStyle.western));
   });
+
+  group('version numbers and codes', () {
+    test('digits only are converted – the dots stay dots', () {
+      expect(Digits.toArabicIndicDigitsOnly('0.1.0'), '٠.١.٠');
+      expect(Digits.toArabicIndicDigitsOnly('v2.10-b3'), 'v٢.١٠-b٣');
+      expect(Digits.toArabicIndicDigitsOnly(''), '');
+      // …unlike numbers, whose separators become Arabic ones.
+      expect(Digits.toArabicIndic('0.1'), '٠٫١');
+    });
+
+    test('formatVersion follows the digit style and is forced left-to-right', () {
+      const ar = MadarFormatter();
+      const arWestern = MadarFormatter(digits: DigitStyle.western);
+      const en = MadarFormatter(languageCode: 'en');
+      const enEastern = MadarFormatter(languageCode: 'en', digits: DigitStyle.arabicIndic);
+      expect(ar.formatVersion('0.1.0'), '${BidiIsolate.lri}٠.١.٠${BidiIsolate.pdi}');
+      expect(arWestern.formatVersion('0.1.0'), '${BidiIsolate.lri}0.1.0${BidiIsolate.pdi}');
+      expect(en.formatVersion('1.1'), '${BidiIsolate.lri}1.1${BidiIsolate.pdi}');
+      expect(enEastern.formatVersion('1.1'), '${BidiIsolate.lri}١.١${BidiIsolate.pdi}');
+      // A version already in Eastern digits comes back Western when asked.
+      expect(arWestern.formatVersion('١.٢'), '${BidiIsolate.lri}1.2${BidiIsolate.pdi}');
+    });
+  });
 }

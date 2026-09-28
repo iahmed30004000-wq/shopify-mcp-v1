@@ -18,7 +18,7 @@ final _ar = lookupL10n(const Locale('ar'));
 final _en = lookupL10n(const Locale('en'));
 
 void main() {
-  testWidgets('three steps, live language + theme, start fresh → home', (tester) async {
+  testWidgets('every step in order, live language + theme, start fresh → home', (tester) async {
     final app = await pumpMadarApp(tester, settings: const AppSettings());
     expect(find.byType(OnboardingScreen), findsOneWidget);
     expect(find.text(_ar.onboardingWelcomeTagline), findsOneWidget);
@@ -39,6 +39,12 @@ void main() {
     await settleApp(tester);
     expect(app.settings.themeId, MadarThemeId.aurora);
 
+    // The faith steps – location, adhan, lock – may each be passed by.
+    for (final title in [_en.onboardingLocationTitle, _en.onboardingAdhanTitle, _en.onboardingLockTitle]) {
+      await tester.tap(find.text(_en.actionContinue));
+      await settleApp(tester);
+      expect(find.text(title), findsOneWidget);
+    }
     await tester.tap(find.text(_en.actionContinue));
     await settleApp(tester);
     expect(find.text(_en.onboardingStartTitle), findsOneWidget);
@@ -58,10 +64,11 @@ void main() {
       () => (app.db.select(app.db.habits)..orderBy([(t) => OrderingTerm.asc(t.sortOrder)])).get(),
     ))!.map((h) => h.name).toList();
     Future<List<String>> painLocations() async => (await tester.runAsync(
-      () => (app.db.select(app.db.tagOptions)
-            ..where((t) => t.kind.equalsValue(TagKind.painLocation))
-            ..orderBy([(t) => OrderingTerm.asc(t.sortOrder)]))
-          .get(),
+      () =>
+          (app.db.select(app.db.tagOptions)
+                ..where((t) => t.kind.equalsValue(TagKind.painLocation))
+                ..orderBy([(t) => OrderingTerm.asc(t.sortOrder)]))
+              .get(),
     ))!.map((t) => t.label).toList();
     expect((await habits()).first, _ar.dbSeedHabitBreathing);
 
@@ -69,8 +76,10 @@ void main() {
     await settleApp(tester);
     await tester.tap(find.text(_ar.settingsLanguageEnglish));
     await settleApp(tester);
-    await tester.tap(find.text(_en.actionContinue));
-    await settleApp(tester);
+    for (var step = OnboardingScreen.styleStep; step < OnboardingScreen.startStep; step++) {
+      await tester.tap(find.text(_en.actionContinue));
+      await settleApp(tester);
+    }
     await tester.tap(find.text(_en.onboardingStartFresh));
     await settleApp(tester);
     await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));

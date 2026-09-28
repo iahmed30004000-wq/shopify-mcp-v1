@@ -148,7 +148,12 @@ Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) 
             hub.recordCompletion(planetKey, kind, refTable, refId, at: at),
       );
       if (!context.mounted) return;
-      unawaited(showUndoToast(context, UndoableAction(label: l.orbitUiMoonInTouchLogged(moon.label), undo: undo)));
+      unawaited(
+        showUndoToast(
+          context,
+          UndoableAction(label: l.orbitUiMoonInTouchLogged(BidiIsolate.isolate(moon.label.trim())), undo: undo),
+        ),
+      );
     case _MoonAction.rename:
       final values = await showEditSheet(
         context,

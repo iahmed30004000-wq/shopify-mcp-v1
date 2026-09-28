@@ -108,14 +108,18 @@ void main() {
       await settleApp(tester);
       final t = tester.element(find.byType(HomeScreen)).tokens;
       expect(t.brightness, Brightness.light);
-      expect(t.accent, accent);
+      // The pick is deepened just enough to stay legible on Pearl (AA),
+      // keeping its hue.
+      expect(t.accent, MadarPalettes.resolve(MadarThemeId.pearl, accent: accent).accent);
+      expect(HSLColor.fromColor(t.accent).hue, closeTo(HSLColor.fromColor(accent).hue, 3));
     });
 
     testWidgets('with a custom accent, unrelated settings changes never replay the theme animation', (tester) async {
       final app = await pumpMadarApp(tester);
       app.updateSettings((s) => s.copyWith(customAccent: const Color(0xFF00AA88)));
       await settleApp(tester);
-      bool animating() => ((tester.state(find.byType(AnimatedTheme)) as dynamic).controller as AnimationController).isAnimating;
+      bool animating() =>
+          ((tester.state(find.byType(AnimatedTheme)) as dynamic).controller as AnimationController).isAnimating;
       final theme = Theme.of(tester.element(find.byType(HomeScreen)));
 
       app.updateSettings((s) => s.copyWith(soundEnabled: !s.soundEnabled));

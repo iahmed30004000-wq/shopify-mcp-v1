@@ -1,9 +1,48 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Network: only for Quran text/audio fetch, optional downloads and user-initiated AI calls. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Adhan (lib/features/adhan, lib/core/notifications) ======================
+         * RECEIVE_BOOT_COMPLETED – flutter_local_notifications re-arms the adhan
+           alarms after a reboot / app update (alarms do not survive either).
+         * Exact alarms – the adhan must sound at the exact minute:
+           USE_EXACT_ALARM (Android 13+) is granted at install and cannot be
+           revoked – right for an alarm-clock-like core feature (Madar is not
+           distributed through Google Play; if it ever is, Play restricts
+           USE_EXACT_ALARM to alarm / calendar apps – then drop it and remove
+           maxSdkVersion from SCHEDULE_EXACT_ALARM; the in-app permission card
+           already asks for it). SCHEDULE_EXACT_ALARM covers Android 12 / 12L,
+           where it is granted by default.
+         * USE_FULL_SCREEN_INTENT – the adhan screen over the lock screen
+           (Android 14+ lets the user revoke it; the permission card checks).
+         * WAKE_LOCK – keep the CPU up while an alarm is delivered.
+         * REQUEST_IGNORE_BATTERY_OPTIMIZATIONS – the permission card asks for
+           the battery-optimisation exemption (OEM task killers). -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- Prayer times: location for the offline calculation (one fix, only when
+         the user asks; a manual city works without it). Approximate location
+         is all prayer times and the qibla need (a few km), so only
+         ACCESS_COARSE_LOCATION is declared: geolocator then asks for
+         approximate location only (geolocator_android PermissionManager
+         requests exactly the location permissions the manifest lists), which
+         matches the in-app rationale ("your approximate location"). -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- geolocator_android declares a location foreground service (and its
+         permission) for background tracking; Madar only takes one
+         approximate fix in the foreground and never starts it, so the
+         permission is dropped from the merged manifest (privacy). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" tools:node="remove" />
+
     <application
         android:label="@string/app_name"
         android:allowBackup="false"
@@ -12,6 +51,10 @@
         android:enableOnBackInvokedCallback="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- showWhenLocked / turnScreenOn are set at run time by MainActivity,
+             only while one of Madar's own adhan notifications launches it
+             full-screen – never for the whole activity, which would expose the
+             app over the lock screen whenever it was left open. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -34,6 +77,41 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- flutter_local_notifications 21 (README › AndroidManifest.xml setup):
+             scheduled notifications, their reboot restore and action buttons. -->
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+
+        <!-- Runs before the plugin's boot receiver (higher priority, same
+             process): drops adhan alarms that passed while the phone was off
+             (so Fajr never sounds at 9:00) and re-grants the muezzin
+             recordings to the system. -->
+        <receiver android:exported="false" android:name=".AdhanBootGuard">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Read-only access for the system to the muezzin recordings the user
+             attached (notification channel sounds); per-URI grants only. -->
+        <provider
+            android:name=".AdhanSoundProvider"
+            android:authorities="${applicationId}.adhansounds"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -50,5 +128,8 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
+        <!-- SystemUI plays notification sounds: it must be visible to grant it
+             read access to the muezzin recordings (AdhanSoundProvider). -->
+        <package android:name="com.android.systemui" />
     </queries>
 </manifest>

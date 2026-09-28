@@ -1,0 +1,47 @@
+{
+  "faithHubAt": {
+    "ar": "عند {time}",
+    "en": "at {time}",
+    "description": "Next prayer card: the prayer time",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "faithHubLinksTitle": {
+    "ar": "روابط سريعة",
+    "en": "Quick links",
+    "description": "Faith page: section of links"
+  },
+  "faithHubTimesHint": {
+    "ar": "اليوم والشهر والتاريخ الهجري",
+    "en": "Day, month and Hijri date",
+    "description": "Link hint: prayer times"
+  },
+  "faithHubHistory": {
+    "ar": "سجلّ الصلوات",
+    "en": "Prayer history",
+    "description": "Link: the tracker history tab"
+  },
+  "faithHubHistoryHint": {
+    "ar": "السلاسل والقضاء والإحصاءات",
+    "en": "Streaks, make-ups and totals",
+    "description": "Link hint: tracker history"
+  },
+  "faithHubAdhkarHint": {
+    "ar": "حصن المسلم",
+    "en": "Hisn al-Muslim",
+    "description": "Link hint: adhkar"
+  },
+  "faithHubTasbeehHint": {
+    "ar": "عدّاد بالخرز",
+    "en": "A bead counter",
+    "description": "Link hint: tasbeeh"
+  },
+  "faithHubAdhanHint": {
+    "ar": "المؤذّن والتذكير والأذونات",
+    "en": "Muezzin, reminders and permissions",
+    "description": "Link hint: adhan settings"
+  }
+}

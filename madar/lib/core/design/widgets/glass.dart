@@ -239,11 +239,17 @@ class GlassFillStyle {
     required this.grain,
   });
 
+  /// Opacity of the night veil under a dark theme's panel tint.
+  static const double nightVeil = 0.45;
+
   /// Translucent fill for real (blurred) glass.
   factory GlassFillStyle.panel(MadarTokens t, {Color? tint}) {
     final base = tint ?? t.glassFill;
     return GlassFillStyle(
-      base: base,
+      // Night glass is smoked: a veil of the theme's night under the tint
+      // keeps a bright nebula (or planet) behind the panel from lifting its
+      // ground past what secondary / tertiary text can read on (AA).
+      base: t.isDark ? Color.alphaBlend(base, t.space1.withValues(alpha: nightVeil)) : base,
       top: t.glassHighlight.withValues(alpha: t.glassHighlight.a * (t.isDark ? 0.12 : 0.25)),
       bottom: t.glassShadow.withValues(alpha: t.glassShadow.a * (t.isDark ? 0.18 : 0.08)),
       sheen: t.glassHighlight.withValues(alpha: t.glassHighlight.a * 0.10),

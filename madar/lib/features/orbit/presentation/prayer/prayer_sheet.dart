@@ -8,14 +8,16 @@ import '../../../../core/design/tokens.dart';
 import '../../../../core/domain/enums.dart';
 import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
+import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/interaction/interaction.dart';
+import '../../../../core/routing/route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../data/orbit_providers.dart';
 import '../../render/astrolabe/astrolabe_geometry.dart';
 import 'prayer_log_service.dart';
 
-/// What the prayer sheet asks for.
-enum PrayerChoice { prayed, late, missed, clear }
+/// What the prayer sheet asks for (or where it leads).
+enum PrayerChoice { prayed, late, missed, clear, openTimes, openTracker }
 
 /// The prayer log service of the running app.
 final prayerLogServiceProvider = Provider<PrayerLogService>(
@@ -28,8 +30,9 @@ final prayerLogServiceProvider = Provider<PrayerLogService>(
 
 /// Tap on a prayer pointer of the astrolabe: log it as prayed (its pointer
 /// ignites with golden fire and the Faith world pulses), prayed late,
-/// missed, or clear the log – with undo.
-Future<void> showPrayerSheet(BuildContext context, WidgetRef ref, Prayer prayer) async {
+/// missed, or clear the log – with undo. With [links] (home) its footer also
+/// leads to the prayer times and the prayer tracker.
+Future<void> showPrayerSheet(BuildContext context, WidgetRef ref, Prayer prayer, {bool links = false}) async {
   final schedule = ref.read(prayerScheduleProvider);
   final now = ref.read(orbitClockProvider)();
   final day = schedule.prayerDayOf(now);
@@ -45,9 +48,12 @@ Future<void> showPrayerSheet(BuildContext context, WidgetRef ref, Prayer prayer)
       upcoming: at.isAfter(now),
       current: existing?.status,
       loggedAt: PrayerLogService.plausibleLoggedAt(existing?.loggedAt, at),
+      links: links,
     ),
   );
   if (choice == null || !context.mounted) return;
+  if (choice == PrayerChoice.openTimes) return FaithNav.prayerTimes(context);
+  if (choice == PrayerChoice.openTracker) return FaithNav.tracker(context);
   final l = L10n.of(context);
   final name = _prayerName(l, prayer);
   final PrayerUndo undo;
@@ -57,6 +63,8 @@ Future<void> showPrayerSheet(BuildContext context, WidgetRef ref, Prayer prayer)
       undo = await service.clear(day, prayer);
       label = l.orbitUiPrayerCleared(name);
       Fx.fire(Sfx.toggleOff);
+    case PrayerChoice.openTimes || PrayerChoice.openTracker:
+      return;
     case PrayerChoice.prayed || PrayerChoice.late || PrayerChoice.missed:
       final status = switch (choice) {
         PrayerChoice.prayed => PrayerStatus.prayed,
@@ -86,12 +94,16 @@ class _PrayerSheet extends StatelessWidget {
     required this.upcoming,
     required this.current,
     this.loggedAt,
+    this.links = false,
   });
 
   final Prayer prayer;
   final DateTime at;
   final bool upcoming;
   final PrayerStatus? current;
+
+  /// Footer links to the prayer times and the tracker.
+  final bool links;
 
   /// When it was logged (only a believable time – see
   /// [PrayerLogService.plausibleLoggedAt]).
@@ -108,6 +120,33 @@ class _PrayerSheet extends StatelessWidget {
       title: _prayerName(l, prayer),
       subtitle: l.orbitUiPrayerAt(fmt.formatTime(at)),
       icon: Icons.mosque_outlined,
+      footer: !links
+          ? null
+          : Row(
+              children: [
+                Expanded(
+                  child: MadarButton(
+                    label: l.ptTitle,
+                    icon: Icons.schedule_rounded,
+                    variant: MadarButtonVariant.ghost,
+                    size: MadarButtonSize.small,
+                    sfx: Sfx.navigate,
+                    onPressed: () => pick(PrayerChoice.openTimes),
+                  ),
+                ),
+                const SizedBox(width: Space.s),
+                Expanded(
+                  child: MadarButton(
+                    label: l.trackerTitle,
+                    icon: Icons.insights_rounded,
+                    variant: MadarButtonVariant.ghost,
+                    size: MadarButtonSize.small,
+                    sfx: Sfx.navigate,
+                    onPressed: () => pick(PrayerChoice.openTracker),
+                  ),
+                ),
+              ],
+            ),
       body: upcoming
           ? Padding(
               padding: const EdgeInsetsDirectional.symmetric(vertical: Space.l),

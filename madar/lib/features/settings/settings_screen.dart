@@ -12,13 +12,21 @@ import '../../core/motion/motion_kit.dart';
 import '../../core/routing/routes.dart';
 import '../../core/settings/app_settings.dart';
 import '../../core/sound/sound.dart';
+import '../adhan/presentation/adhan_permissions_card.dart';
+import '../lock/application/lock_controller.dart';
+import '../orbit/data/orbit_providers.dart' show prayerSettingsProvider;
+import '../prayer/prayer.dart' show PrayerLabels, cityDatabaseProvider;
 import 'settings_controller.dart';
+import 'widgets/adhkar_reminder_settings.dart';
 import 'widgets/appearance_pickers.dart';
 import 'widgets/settings_widgets.dart';
 
-/// Settings hub: appearance and sound (own pages), motion and power (inline),
-/// data (import), about (version, font credits and licences) and the design
-/// gallery. Every change applies instantly.
+/// Settings hub: appearance and sound (own pages); prayer – times and
+/// calculation, the adhan (own pages) with the adhan's permissions card;
+/// adhkar reminders (inline); motion and power (inline); privacy and security
+/// (the app lock's page); data (import); about (version, fonts and content
+/// sources, licences) and the design gallery. Every change applies
+/// instantly.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
@@ -31,6 +39,7 @@ class SettingsScreen extends ConsumerWidget {
     final theme = settings.effectiveTheme(brightness);
     final profile = SoundProfiles.idForTheme(theme);
     final languageName = settings.isArabic ? l.settingsLanguageArabic : l.settingsLanguageEnglish;
+    final fmt = MadarFormatter.of(context);
 
     return MadarScaffold(
       title: l.settingsTitle,
@@ -69,6 +78,32 @@ class SettingsScreen extends ConsumerWidget {
                 ],
               ),
               SettingsSection(
+                title: l.settingsPrayerSection,
+                seed: 0.2,
+                children: [
+                  SettingsTile(
+                    icon: Icons.mosque_rounded,
+                    iconColor: t.gold,
+                    title: l.settingsPrayerTimes,
+                    subtitle: _prayerSummary(l, ref),
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.prayerSettings),
+                  ),
+                  SettingsTile(
+                    icon: Icons.notifications_active_rounded,
+                    title: l.settingsAdhan,
+                    subtitle: l.adhanSettingsSubtitle,
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.adhanSettings),
+                  ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsetsDirectional.only(top: Space.m),
+                child: AdhanPermissionsCard(),
+              ),
+              const AdhkarReminderSettingsSection(seed: 0.25),
+              SettingsSection(
                 title: l.settingsMotion,
                 seed: 0.3,
                 children: [
@@ -98,6 +133,19 @@ class SettingsScreen extends ConsumerWidget {
                 ],
               ),
               SettingsSection(
+                title: l.settingsSecuritySection,
+                seed: 0.45,
+                children: [
+                  SettingsTile(
+                    icon: Icons.fingerprint_rounded,
+                    title: l.settingsAppLock,
+                    subtitle: _lockSummary(l, ref.watch(lockControllerProvider)),
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.security),
+                  ),
+                ],
+              ),
+              SettingsSection(
                 title: l.settingsData,
                 seed: 0.5,
                 children: [
@@ -121,12 +169,12 @@ class SettingsScreen extends ConsumerWidget {
                     icon: Icons.brightness_7_rounded,
                     iconColor: t.gold,
                     title: l.appName,
-                    subtitle: '${l.appTagline} · ${l.settingsVersion(BidiIsolate.ltr(madarVersion))}',
+                    subtitle: '${l.appTagline} · ${l.settingsVersion(fmt.formatVersion(madarVersion))}',
                   ),
                   SettingsTile(
                     icon: Icons.font_download_rounded,
-                    title: l.settingsFonts,
-                    subtitle: l.settingsFontsBody,
+                    title: l.settingsCredits,
+                    subtitle: l.settingsCreditsBody,
                     navigates: true,
                     onTap: () => context.go(AppRoutes.licenses),
                   ),
@@ -161,6 +209,23 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// "Off", "On, with your PIN" or "On, with fingerprint and PIN".
+String _lockSummary(L10n l, AppLockState lock) {
+  if (!lock.armed) return l.settingsAppLockOff;
+  return lock.biometrics ? l.settingsAppLockOnBio : l.settingsAppLockOn;
+}
+
+/// "Amman · Jordan (Ministry of Awqaf)" – where the prayer times are
+/// calculated for, and how.
+String _prayerSummary(L10n l, WidgetRef ref) {
+  final settings = ref.watch(prayerSettingsProvider).value;
+  if (settings == null) return l.ptLocationSubtitle;
+  final lang = ref.watch(appSettingsProvider.select((s) => s.languageCode));
+  final cities = ref.watch(cityDatabaseProvider).value;
+  final place = l.placeLabel(settings, lang, cities: cities, withCountry: false);
+  return l.orbitUiListSeparator(place, l.methodName(settings.method));
 }
 
 /// A tiny orb in the active accent over the theme's deep-space colour.

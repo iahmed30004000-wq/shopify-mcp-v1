@@ -85,6 +85,9 @@ class InteractionSheetRoute<T> extends PopupRoute<T> {
           child: AnimatedBuilder(
             animation: anim,
             builder: (context, _) {
+              // The live theme (a theme change while the sheet is open
+              // re-tints the scrim); [tokens] is only the fallback.
+              final tokens = Theme.of(context).extension<MadarTokens>() ?? this.tokens;
               final t = Curves.easeOut.transform(anim.value.clamp(0.0, 1.0));
               final scrim = ColoredBox(color: tokens.space0.withValues(alpha: (tokens.isDark ? 0.5 : 0.25) * t));
               if (t <= 0.01) return scrim;
@@ -96,7 +99,14 @@ class InteractionSheetRoute<T> extends PopupRoute<T> {
             },
           ),
         ),
-        ModalBarrier(dismissible: true, semanticsLabel: barrierText, barrierSemanticsDismissible: true),
+        // The label follows a language switch while the sheet is open.
+        Builder(
+          builder: (context) => ModalBarrier(
+            dismissible: true,
+            semanticsLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierSemanticsDismissible: true,
+          ),
+        ),
       ],
     );
   }

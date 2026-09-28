@@ -1,0 +1,140 @@
+Madar – adhkar content credits (assets/adhkar/hisn_al_muslim.json)
+=====================================================================
+
+The adhkar are from "Hisn al-Muslim" (Fortress of the Muslim) by Sa'id ibn
+'Ali ibn Wahf al-Qahtani: supplications and remembrances from the Quran and
+the Sunnah, with their hadith references. Madar bundles the morning,
+evening, after-prayer, before-sleep and on-waking sets (79 entries).
+
+The text was taken from openly licensed datasets, corrected and
+normalised (see assets/adhkar/source/build_adhkar.py – every change is
+listed there – and assets/adhkar/source/verification_log.txt):
+
+1. Morning and evening adhkar (Arabic text, repetition counts, Arabic
+   virtues and the hadith references)
+   Seen-Arabic/Morning-And-Evening-Adhkar-DB
+   https://github.com/Seen-Arabic/Morning-And-Evening-Adhkar-DB
+   commit 29d7623fede52eca835a789025dfda866e8cfe44 – MIT License (below)
+
+2. After-prayer, before-sleep and on-waking adhkar (Arabic text and
+   counts)
+   YousefAsalya/Islamic-Pro-azkar-API (data/ar.json)
+   https://github.com/YousefAsalya/Islamic-Pro-azkar-API
+   commit d793023e3b69c91674023f692425950c8ebbb64d – MIT License (below)
+   The dataset states it was collected from hisnmuslim.com. Its audio
+   files are NOT bundled (their licence is not stated), nor is its English.
+
+3. Quran verses quoted in the adhkar (Ayat al-Kursi, al-Baqarah 285-286,
+   Al Imran 190-200, al-Ikhlas, al-Falaq, an-Nas): the fully vowelled
+   imla'i text "ara-quranspelled" (itself from Arabic Wikisource), cross-
+   checked word by word against "ara-quransimple" (Tanzil "simple", via
+   alquran.cloud)
+   fawazahmed0/quran-api
+   https://github.com/fawazahmed0/quran-api
+   commit 47ca096b0976443ba2eab2e45cdf0fb4096a2610 – The Unlicense (public
+   domain dedication, below)
+
+English meanings and English virtues were written for Madar from the
+Arabic. The two datasets' own English is NOT used: their README (Seen-
+Arabic) and fetch script (Islamic-Pro) show it was copied from
+hisnmuslim.com and sunnah.com, whose translations carry no open licence
+of their own – an MIT file on a copy cannot license someone else's
+translation. The English references are the datasets' bibliographic
+citations (collection, volume, page, hadith number).
+
+Hadith references for the after-prayer, sleep and waking sets were written
+out by Madar in the standard numbering (al-Bukhari / Muslim: Fath al-Bari
+and Fu'ad 'Abd al-Baqi numbering); the collections cited match the
+footnotes of an older Hisn al-Muslim edition (which cites volume/page). Short notes and a few virtues were worded by
+Madar from the hadith. English translations of Quran verses are NOT
+bundled (the datasets carried published Quran translations whose own
+licences are not open), so Quran-only entries show the Arabic in both
+languages with the surah and ayah numbers.
+
+Verification only (never bundled): rn0x/hisn_almuslim_json (older edition,
+independent typing; no licence file), fitrahive/dua-dhikr (MIT, an
+independent compilation), osamayy/azkar-db (no licence file).
+
+Tasbeeh phrases are single well-known words of remembrance (public domain);
+their English meanings were written for Madar.
+
+Audio: Madar bundles no recordings. Users may attach their own recordings
+per dhikr; Madar never uses generated voices for Quran or adhkar.
+
+---------------------------------------------------------------------
+Seen-Arabic/Morning-And-Evening-Adhkar-DB – LICENSE
+---------------------------------------------------------------------
+MIT License
+
+Copyright (c) 2024 Seen Arabic
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------
+YousefAsalya/Islamic-Pro-azkar-API – LICENSE
+---------------------------------------------------------------------
+MIT License
+
+Copyright (c) 2026 Islamic Pro - Azkar API Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------
+fawazahmed0/quran-api – LICENSE
+---------------------------------------------------------------------
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>

@@ -17,6 +17,7 @@ import '../../core/settings/app_settings.dart';
 import '../../core/sound/sound_api.dart';
 import '../settings/settings_controller.dart';
 import '../settings/widgets/appearance_pickers.dart';
+import 'widgets/faith_steps.dart';
 import 'widgets/orbit_emblem.dart';
 
 /// Where onboarding hands over.
@@ -29,15 +30,25 @@ enum OnboardingExit { home, import }
   location: exit == OnboardingExit.import ? AppRoutes.import : AppRoutes.home,
 );
 
-/// First launch, three cinematic steps over the cosmos:
+/// First launch, cinematic steps over the cosmos:
 /// 1. Welcome – "your day orbits the five prayers".
 /// 2. Language and look – both apply live (the layout flips direction and
 ///    the whole screen re-themes as you tap).
-/// 3. Start empty, or import the prototype's JSON export.
+/// 3. Where you pray – GPS or a city, for the offline prayer times.
+/// 4. The adhan on time – Android's permissions, live.
+/// 5. Protect Madar – an optional PIN / fingerprint lock.
+/// 6. Start empty, or import the prototype's JSON export.
+///
+/// Steps 3–5 are skippable (Continue without acting; Skip jumps to the last
+/// step) and everything they set can be changed later in Settings. Back
+/// (button, system or predictive) walks the steps backwards.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
-  static const int stepCount = 3;
+  static const int stepCount = 6;
+
+  /// Index of each step.
+  static const int welcomeStep = 0, styleStep = 1, locationStep = 2, adhanStep = 3, lockStep = 4, startStep = 5;
 
   @override
   ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -103,9 +114,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.m, Space.m, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.m, 0),
                       child: SizedBox(
-                        height: 40,
+                        // The Skip button's full 48 dp touch target.
+                        height: 48,
                         child: Row(
                           children: [
                             _StepStars(
@@ -143,6 +155,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         children: [
                           _WelcomeStep(animate: !batterySaver),
                           const _StyleStep(),
+                          const OnboardingLocationStep(),
+                          const OnboardingAdhanStep(),
+                          const OnboardingLockStep(),
                           _StartStep(onFinish: _finish),
                         ],
                       ),
@@ -237,28 +252,6 @@ class _StepStars extends StatelessWidget {
   }
 }
 
-class _StepFrame extends StatelessWidget {
-  const _StepFrame({required this.id, required this.children});
-
-  final String id;
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, box) => SingleChildScrollView(
-        padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: box.maxHeight),
-          child: Center(
-            child: StaggerIn(id: id, crossAxisAlignment: CrossAxisAlignment.center, children: children),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _WelcomeStep extends StatelessWidget {
   const _WelcomeStep({required this.animate});
 
@@ -270,7 +263,7 @@ class _WelcomeStep extends StatelessWidget {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
     final size = math.min(MediaQuery.sizeOf(context).width * 0.66, 280.0);
-    return _StepFrame(
+    return OnboardingStepFrame(
       id: 'onboarding-welcome',
       children: [
         OrbitEmblem(size: size, animate: animate),
@@ -314,7 +307,7 @@ class _StyleStep extends ConsumerWidget {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
     final settings = ref.watch(appSettingsProvider);
-    return _StepFrame(
+    return OnboardingStepFrame(
       id: 'onboarding-style',
       children: [
         Semantics(
@@ -381,7 +374,7 @@ class _StartStep extends StatelessWidget {
     final l = L10n.of(context);
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    return _StepFrame(
+    return OnboardingStepFrame(
       id: 'onboarding-start',
       children: [
         const GirihRosette(size: 110, folds: 8),

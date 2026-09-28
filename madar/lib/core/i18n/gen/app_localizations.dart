@@ -1288,7 +1288,7 @@ abstract class L10n {
   /// No description provided for @interactionFieldTooLong.
   ///
   /// In ar, this message translates to:
-  /// **'النص أطول من {max} حرفًا'**
+  /// **'{max, plural, =1{الحدّ الأقصى حرف واحد} =2{الحدّ الأقصى حرفان} few{الحدّ الأقصى {max} أحرف} many{الحدّ الأقصى {max} حرفًا} other{الحدّ الأقصى {max} حرف}}'**
   String interactionFieldTooLong(int max);
 
   /// No description provided for @interactionFieldSelectAtLeast.
@@ -2971,6 +2971,18 @@ abstract class L10n {
   /// **'اللؤلؤ في الوضع الفاتح، وسمتك المختارة في الداكن'**
   String get settingsFollowSystemHint;
 
+  /// Badge on the theme used while the device is in light mode (follow the device)
+  ///
+  /// In ar, this message translates to:
+  /// **'للوضع الفاتح'**
+  String get settingsThemeLightMode;
+
+  /// Badge on the theme used while the device is in dark mode (follow the device)
+  ///
+  /// In ar, this message translates to:
+  /// **'للوضع الداكن'**
+  String get settingsThemeDarkMode;
+
   /// No description provided for @settingsAccent.
   ///
   /// In ar, this message translates to:
@@ -2988,6 +3000,24 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'لون مخصّص'**
   String get settingsAccentCustom;
+
+  /// No description provided for @settingsAccentCustomHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب على الطيف لاختيار أي لون؛ يُضبط سطوعه تلقائيًا ليبقى مقروءًا في كل سمة.'**
+  String get settingsAccentCustomHint;
+
+  /// No description provided for @settingsAccentPlanet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون {planet}'**
+  String settingsAccentPlanet(String planet);
+
+  /// No description provided for @settingsAccentHueValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'درجة اللون {degrees}°'**
+  String settingsAccentHueValue(String degrees);
 
   /// No description provided for @settingsLanguage.
   ///
@@ -3202,8 +3232,8 @@ abstract class L10n {
   /// No description provided for @settingsFontsBody.
   ///
   /// In ar, this message translates to:
-  /// **'خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1'**
-  String get settingsFontsBody;
+  /// **'خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة {version}'**
+  String settingsFontsBody(String version);
 
   /// No description provided for @settingsLicenses.
   ///
@@ -3372,6 +3402,240 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الخطوة {current} من {total}'**
   String onboardingStep(String current, String total);
+
+  /// Settings section: prayer times, adhan and permissions
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة'**
+  String get settingsPrayerSection;
+
+  /// Settings entry opening the prayer-time settings
+  ///
+  /// In ar, this message translates to:
+  /// **'المواقيت وطريقة الحساب'**
+  String get settingsPrayerTimes;
+
+  /// Settings entry opening the adhan settings
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان والإشعارات'**
+  String get settingsAdhan;
+
+  /// Settings section title
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الأذكار'**
+  String get settingsAdhkarReminders;
+
+  /// Switch: remind of the morning adhkar after Fajr
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الصباح بعد الفجر'**
+  String get settingsAdhkarMorning;
+
+  /// Switch: remind of the evening adhkar after Asr
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار المساء بعد العصر'**
+  String get settingsAdhkarEvening;
+
+  /// Subtitle of an enabled adhkar reminder; offset is e.g. "20 min"
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الأذان بـ{offset}'**
+  String settingsAdhkarAfter(String offset);
+
+  /// Subtitle of a disabled adhkar reminder
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تذكير'**
+  String get settingsAdhkarOff;
+
+  /// Settings section title
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصوصية والأمان'**
+  String get settingsSecuritySection;
+
+  /// Settings entry opening the security page
+  ///
+  /// In ar, this message translates to:
+  /// **'قفل التطبيق'**
+  String get settingsAppLock;
+
+  /// App lock entry subtitle when no lock is set
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف؛ اضبط رمزًا ليحمي مَدار'**
+  String get settingsAppLockOff;
+
+  /// App lock entry subtitle: PIN only
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل بالرمز'**
+  String get settingsAppLockOn;
+
+  /// App lock entry subtitle: fingerprint and PIN
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل بالبصمة والرمز'**
+  String get settingsAppLockOnBio;
+
+  /// Note on the security page
+  ///
+  /// In ar, this message translates to:
+  /// **'يحجب القفلُ ما على الشاشة كلما غبت عن مَدار، أمّا بياناتك فمشفّرة على جهازك دائمًا، مقفلًا كان أو مفتوحًا.'**
+  String get settingsSecurityNote;
+
+  /// Settings entry / page listing the bundled fonts and content sources
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوط والمصادر'**
+  String get settingsCredits;
+
+  /// Subtitle of the fonts & sources entry
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوط المفتوحة، ومصادر الأذكار والمدن والنغمات'**
+  String get settingsCreditsBody;
+
+  /// Section header on the credits page
+  ///
+  /// In ar, this message translates to:
+  /// **'المحتوى ومصادره'**
+  String get settingsCreditsContent;
+
+  /// Intro of the content credits
+  ///
+  /// In ar, this message translates to:
+  /// **'كل نصّ وبيانات وصوت في مَدار مرخّصٌ ترخيصًا مفتوحًا أو من صنعه، وهذه مصادره كاملة.'**
+  String get settingsCreditsContentBody;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذكار — حصن المسلم'**
+  String get settingsCreditAdhkar;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات مفتوحة (MIT)، ونص القرآن من quran-api'**
+  String get settingsCreditAdhkarRole;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة المدن'**
+  String get settingsCreditCities;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'Natural Earth وGeoNames وIANA وUnicode CLDR'**
+  String get settingsCreditCitiesRole;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'نغمات الأذان'**
+  String get settingsCreditAdhan;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'من صنع مَدار، ولا تسجيلات صوتية مضمّنة'**
+  String get settingsCreditAdhanRole;
+
+  /// Onboarding step: location for prayer times
+  ///
+  /// In ar, this message translates to:
+  /// **'أين تصلّي؟'**
+  String get onboardingLocationTitle;
+
+  /// No description provided for @onboardingLocationBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحسب مواقيت الصلاة على جهازك من موقعك، دون إنترنت. اختر مدينتك، أو استخدم موقعك التقريبي مرة واحدة.'**
+  String get onboardingLocationBody;
+
+  /// Button opening the location sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر موقعك'**
+  String get onboardingLocationSet;
+
+  /// Button opening the location sheet once a place is set
+  ///
+  /// In ar, this message translates to:
+  /// **'غيّر الموقع'**
+  String get onboardingLocationChange;
+
+  /// The place prayer times are calculated for
+  ///
+  /// In ar, this message translates to:
+  /// **'مواقيتك في {place}'**
+  String onboardingLocationFor(String place);
+
+  /// Onboarding step: adhan permissions
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان في وقته'**
+  String get onboardingAdhanTitle;
+
+  /// No description provided for @onboardingAdhanBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليُرفَع الأذان في دقيقته ولو كان الهاتف مقفلًا، يحتاج مَدار بعض أذونات أندرويد. امنحها الآن أو لاحقًا من الإعدادات.'**
+  String get onboardingAdhanBody;
+
+  /// Onboarding step: optional app lock
+  ///
+  /// In ar, this message translates to:
+  /// **'احمِ مَدار'**
+  String get onboardingLockTitle;
+
+  /// No description provided for @onboardingLockBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قفلٌ برمز وبصمة يُغلق مَدار كلما غبت عنه. لا حساب ولا خادم؛ يبقى الرمز على جهازك وحده.'**
+  String get onboardingLockBody;
+
+  /// Button opening the PIN setup sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'اضبط رمزًا'**
+  String get onboardingLockSet;
+
+  /// Shown once a PIN is set during onboarding
+  ///
+  /// In ar, this message translates to:
+  /// **'القفل مفعّل بالرمز'**
+  String get onboardingLockOn;
+
+  /// Shown once a PIN and fingerprint are set during onboarding
+  ///
+  /// In ar, this message translates to:
+  /// **'القفل مفعّل بالبصمة والرمز'**
+  String get onboardingLockOnBio;
+
+  /// Hint under optional onboarding steps
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوة اختيارية، ويمكنك ضبطها لاحقًا من الإعدادات'**
+  String get onboardingOptional;
+
+  /// Home header: the Gregorian date then the Hijri date
+  ///
+  /// In ar, this message translates to:
+  /// **'{gregorian} — {hijri}'**
+  String homeDateWithHijri(String gregorian, String hijri);
+
+  /// Chip after the prayer windows opening the prayer times page
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المواقيت'**
+  String get homeAllTimes;
 
   /// Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits
   ///
@@ -4792,6 +5056,3844 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'بانتظارك'**
   String get orbitUiMoonWaiting;
+
+  /// Line under the app name on the lock screen
+  ///
+  /// In ar, this message translates to:
+  /// **'بياناتك مشفّرة ومحفوظة على هاتفك'**
+  String get lockScreenSubtitle;
+
+  /// No description provided for @lockHoldHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط مطوّلًا على الأسطرلاب لتفتح مَدار'**
+  String get lockHoldHint;
+
+  /// No description provided for @lockHoldingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبقِ إصبعك… الأسطرلاب يكتمل'**
+  String get lockHoldingHint;
+
+  /// No description provided for @lockReadingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المس مستشعر البصمة'**
+  String get lockReadingHint;
+
+  /// No description provided for @lockReleasedEarly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبقِ إصبعك حتى يكتمل الأسطرلاب'**
+  String get lockReleasedEarly;
+
+  /// No description provided for @lockWelcome.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهلًا بعودتك'**
+  String get lockWelcome;
+
+  /// No description provided for @lockPinHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رمز مَدار'**
+  String get lockPinHint;
+
+  /// No description provided for @lockPinChecking.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتحقّق…'**
+  String get lockPinChecking;
+
+  /// count selects the plural; n is the same number formatted for display
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{رمز غير صحيح} =1{رمز غير صحيح · تبقّت محاولة واحدة قبل الإيقاف المؤقت} =2{رمز غير صحيح · تبقّت محاولتان قبل الإيقاف المؤقت} few{رمز غير صحيح · تبقّت {n} محاولات قبل الإيقاف المؤقت} many{رمز غير صحيح · تبقّت {n} محاولة قبل الإيقاف المؤقت} other{رمز غير صحيح · تبقّت {n} محاولة قبل الإيقاف المؤقت}}'**
+  String lockPinWrong(int count, String n);
+
+  /// time is a pre-formatted m:ss countdown
+  ///
+  /// In ar, this message translates to:
+  /// **'محاولات كثيرة. حاول مجددًا بعد {time}'**
+  String lockLockedOut(String time);
+
+  /// count selects the plural; n is the same number formatted for display
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ثانية واحدة} =2{ثانيتين} few{{n} ثوانٍ} many{{n} ثانية} other{{n} ثانية}}'**
+  String lockSeconds(int count, String n);
+
+  /// No description provided for @lockUsePin.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم الرمز'**
+  String get lockUsePin;
+
+  /// No description provided for @lockUseFingerprint.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم البصمة'**
+  String get lockUseFingerprint;
+
+  /// No description provided for @lockForgotPin.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيت الرمز؟'**
+  String get lockForgotPin;
+
+  /// Title of the system fingerprint prompt (max 60 characters)
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مَدار'**
+  String get lockPromptTitle;
+
+  /// Subtitle of the system fingerprint prompt (max 60 characters)
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم بصمتك'**
+  String get lockPromptHint;
+
+  /// No description provided for @lockPromptReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق من هويتك لتفتح بياناتك'**
+  String get lockPromptReason;
+
+  /// No description provided for @lockPromptSettingsReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق من هويتك لتغيير إعدادات القفل'**
+  String get lockPromptSettingsReason;
+
+  /// Negative button of the system fingerprint prompt (max 30 characters)
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم الرمز'**
+  String get lockPromptCancel;
+
+  /// Negative button of the fingerprint prompt in settings (max 30 characters)
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get lockPromptCancelPlain;
+
+  /// No description provided for @lockStorageError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت قراءة الخزنة الآمنة على هاتفك.'**
+  String get lockStorageError;
+
+  /// No description provided for @lockRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعِد المحاولة'**
+  String get lockRetry;
+
+  /// No description provided for @lockAstrolabeSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسطرلاب. اضغط مطوّلًا لتفتح القفل بالبصمة'**
+  String get lockAstrolabeSemantics;
+
+  /// No description provided for @lockAstrolabeAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح بالبصمة'**
+  String get lockAstrolabeAction;
+
+  /// No description provided for @lockPinProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُدخل {count} من {total}'**
+  String lockPinProgress(String count, String total);
+
+  /// No description provided for @lockPinProgressOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُدخل {count}'**
+  String lockPinProgressOpen(String count);
+
+  /// No description provided for @lockKeyDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get lockKeyDelete;
+
+  /// No description provided for @lockKeyFingerprint.
+  ///
+  /// In ar, this message translates to:
+  /// **'البصمة'**
+  String get lockKeyFingerprint;
+
+  /// No description provided for @lockKeyDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get lockKeyDone;
+
+  /// No description provided for @lockShieldSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'مَدار مخفيّ حتى تعود'**
+  String get lockShieldSemantics;
+
+  /// No description provided for @lockForgotTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيت الرمز؟'**
+  String get lockForgotTitle;
+
+  /// No description provided for @lockForgotBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حساب في مَدار ولا خادم: بياناتك مشفّرة ومحفوظة على هذا الهاتف وحده، لذلك لا يمكن استرجاع الرمز ولا إعادة تعيينه عن بُعد.'**
+  String get lockForgotBody;
+
+  /// No description provided for @lockForgotBiometric.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق ببصمتك، ثم اختر رمزًا جديدًا.'**
+  String get lockForgotBiometric;
+
+  /// No description provided for @lockForgotBiometricAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق بالبصمة'**
+  String get lockForgotBiometricAction;
+
+  /// No description provided for @lockForgotNoBiometric.
+  ///
+  /// In ar, this message translates to:
+  /// **'من دون الرمز يبقى مَدار مقفلًا. إن تعذّر عليك تذكّره فالسبيل الوحيد مسح بيانات مَدار من إعدادات الهاتف (التطبيقات ← مَدار ← التخزين ← مسح البيانات) والبدء من جديد، وسيضيع كل ما ليس في نسخة احتياطية.'**
+  String get lockForgotNoBiometric;
+
+  /// No description provided for @lockForgotBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع'**
+  String get lockForgotBack;
+
+  /// No description provided for @lockNewPinTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر رمزًا جديدًا'**
+  String get lockNewPinTitle;
+
+  /// No description provided for @lockPinCreateTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر رمزًا لمَدار'**
+  String get lockPinCreateTitle;
+
+  /// No description provided for @lockPinCreateBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {min} إلى {max} أرقام، يفتح مَدار متى تعذّرت البصمة.'**
+  String lockPinCreateBody(String min, String max);
+
+  /// No description provided for @lockPinConfirmTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكّد الرمز'**
+  String get lockPinConfirmTitle;
+
+  /// No description provided for @lockPinConfirmBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخله مرة أخرى للتأكّد.'**
+  String get lockPinConfirmBody;
+
+  /// No description provided for @lockPinMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرمزان مختلفان. لنبدأ من جديد.'**
+  String get lockPinMismatch;
+
+  /// No description provided for @lockPinWeak.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الرمز سهل التخمين. يُفضَّل اختيار غيره.'**
+  String get lockPinWeak;
+
+  /// No description provided for @lockPinCurrentTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل الرمز الحالي'**
+  String get lockPinCurrentTitle;
+
+  /// No description provided for @lockPinSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ الرمز، وصار مَدار مقفلًا لك وحدك.'**
+  String get lockPinSaved;
+
+  /// No description provided for @lockPinChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر الرمز'**
+  String get lockPinChanged;
+
+  /// No description provided for @lockConfirmTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق من هويتك'**
+  String get lockConfirmTitle;
+
+  /// No description provided for @lockConfirmBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رمز مَدار للمتابعة.'**
+  String get lockConfirmBody;
+
+  /// No description provided for @lockBioOfferTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'والفتح بالبصمة أيضًا؟'**
+  String get lockBioOfferTitle;
+
+  /// No description provided for @lockBioOfferBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسرع في كل مرة، ويبقى الرمز بديلًا متى احتجت إليه.'**
+  String get lockBioOfferBody;
+
+  /// No description provided for @lockBioOfferEnable.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل البصمة'**
+  String get lockBioOfferEnable;
+
+  /// No description provided for @lockBioOfferSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليس الآن'**
+  String get lockBioOfferSkip;
+
+  /// No description provided for @lockSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأمان'**
+  String get lockSettingsTitle;
+
+  /// No description provided for @lockSettingsLock.
+  ///
+  /// In ar, this message translates to:
+  /// **'قفل التطبيق'**
+  String get lockSettingsLock;
+
+  /// No description provided for @lockSettingsLockOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُطلب عند كل تشغيل وبعد الغياب'**
+  String get lockSettingsLockOn;
+
+  /// No description provided for @lockSettingsLockOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'احمِ بياناتك برمز وبصمة'**
+  String get lockSettingsLockOff;
+
+  /// No description provided for @lockSettingsBiometric.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفتح بالبصمة'**
+  String get lockSettingsBiometric;
+
+  /// No description provided for @lockSettingsBiometricHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ويبقى الرمز بديلًا دائمًا'**
+  String get lockSettingsBiometricHint;
+
+  /// No description provided for @lockSettingsBiometricNotEnrolled.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل بصمة في إعدادات الهاتف أولًا'**
+  String get lockSettingsBiometricNotEnrolled;
+
+  /// No description provided for @lockSettingsBiometricUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستشعر البصمة غير متاح الآن'**
+  String get lockSettingsBiometricUnavailable;
+
+  /// No description provided for @lockSettingsChangePin.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير الرمز'**
+  String get lockSettingsChangePin;
+
+  /// No description provided for @lockSettingsChangePinHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز من {min} إلى {max} أرقام'**
+  String lockSettingsChangePinHint(String min, String max);
+
+  /// No description provided for @lockSettingsLockAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'القفل بعد مغادرة التطبيق'**
+  String get lockSettingsLockAfter;
+
+  /// No description provided for @lockSettingsLockAfterHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'وعند كل تشغيل جديد دائمًا'**
+  String get lockSettingsLockAfterHint;
+
+  /// No description provided for @lockAfterImmediately.
+  ///
+  /// In ar, this message translates to:
+  /// **'فورًا'**
+  String get lockAfterImmediately;
+
+  /// count selects the plural; n is the same number formatted for display
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتان} few{{n} دقائق} many{{n} دقيقة} other{{n} دقيقة}}'**
+  String lockAfterMinutes(int count, String n);
+
+  /// No description provided for @lockSettingsRemovePin.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة الرمز'**
+  String get lockSettingsRemovePin;
+
+  /// No description provided for @lockSettingsRemovePinHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوقف قفل التطبيق والفتح بالبصمة'**
+  String get lockSettingsRemovePinHint;
+
+  /// No description provided for @lockRemoveTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة الرمز؟'**
+  String get lockRemoveTitle;
+
+  /// No description provided for @lockRemoveBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُفتح مَدار دون قفل حتى تختار رمزًا جديدًا.'**
+  String get lockRemoveBody;
+
+  /// No description provided for @lockRemoveConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'أزِل الرمز'**
+  String get lockRemoveConfirm;
+
+  /// No description provided for @lockSettingsNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حساب ولا خادم: بياناتك مشفّرة على هذا الهاتف وحده، ولا يمكن استرجاع الرمز عن بُعد، فاحفظه جيدًا.'**
+  String get lockSettingsNote;
+
+  /// No description provided for @lockSettingsSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الحفظ في الخزنة الآمنة. حاول مجددًا.'**
+  String get lockSettingsSaveFailed;
+
+  /// No description provided for @lockBioLockedOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّفت البصمة مؤقتًا بعد محاولات كثيرة. استخدم الرمز.'**
+  String get lockBioLockedOut;
+
+  /// No description provided for @lockBioLockedOutPermanently.
+  ///
+  /// In ar, this message translates to:
+  /// **'البصمة مقفلة حتى تفتح هاتفك بقفل شاشته. استخدم رمز مَدار الآن.'**
+  String get lockBioLockedOutPermanently;
+
+  /// No description provided for @lockBioNotEnrolled.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بصمة مسجّلة على هذا الهاتف. استخدم الرمز.'**
+  String get lockBioNotEnrolled;
+
+  /// No description provided for @lockBioNoHardware.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يدعم هذا الهاتف البصمة. استخدم الرمز.'**
+  String get lockBioNoHardware;
+
+  /// No description provided for @lockBioUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستشعر البصمة غير متاح الآن. استخدم الرمز.'**
+  String get lockBioUnavailable;
+
+  /// No description provided for @lockBioError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر التحقّق بالبصمة. حاول مجددًا أو استخدم الرمز.'**
+  String get lockBioError;
+
+  /// No description provided for @lockBioInterrupted.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقطع التحقّق. اضغط مطوّلًا لتعيد المحاولة.'**
+  String get lockBioInterrupted;
+
+  /// Prayer times screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'مواقيت الصلاة'**
+  String get ptTitle;
+
+  /// No description provided for @ptSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المواقيت'**
+  String get ptSettingsTitle;
+
+  /// Tooltip of the settings button on the prayer times screen
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المواقيت'**
+  String get ptOpenSettings;
+
+  /// No description provided for @ptFajr.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفجر'**
+  String get ptFajr;
+
+  /// No description provided for @ptSunrise.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشروق'**
+  String get ptSunrise;
+
+  /// No description provided for @ptDuha.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضحى'**
+  String get ptDuha;
+
+  /// No description provided for @ptDhuhr.
+  ///
+  /// In ar, this message translates to:
+  /// **'الظهر'**
+  String get ptDhuhr;
+
+  /// Dhuhr on Fridays
+  ///
+  /// In ar, this message translates to:
+  /// **'الجمعة'**
+  String get ptJumuah;
+
+  /// No description provided for @ptAsr.
+  ///
+  /// In ar, this message translates to:
+  /// **'العصر'**
+  String get ptAsr;
+
+  /// No description provided for @ptMaghrib.
+  ///
+  /// In ar, this message translates to:
+  /// **'المغرب'**
+  String get ptMaghrib;
+
+  /// No description provided for @ptIsha.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشاء'**
+  String get ptIsha;
+
+  /// No description provided for @ptMidnight.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتصف الليل'**
+  String get ptMidnight;
+
+  /// No description provided for @ptLastThird.
+  ///
+  /// In ar, this message translates to:
+  /// **'الثلث الأخير'**
+  String get ptLastThird;
+
+  /// No description provided for @ptSunriseHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ينتهي وقت الفجر'**
+  String get ptSunriseHint;
+
+  /// No description provided for @ptDuhaHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الشروق بربع ساعة'**
+  String get ptDuhaHint;
+
+  /// No description provided for @ptMidnightHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتصف ما بين المغرب والفجر'**
+  String get ptMidnightHint;
+
+  /// No description provided for @ptLastThirdHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت قيام الليل'**
+  String get ptLastThirdHint;
+
+  /// No description provided for @ptNightSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الليل وقيامه'**
+  String get ptNightSection;
+
+  /// No description provided for @ptNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get ptNow;
+
+  /// No description provided for @ptNextPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة القادمة'**
+  String get ptNextPrayer;
+
+  /// Followed by a live countdown
+  ///
+  /// In ar, this message translates to:
+  /// **'يحين وقت {prayer} بعد'**
+  String ptNextIn(String prayer);
+
+  /// No description provided for @ptAtTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند {time}'**
+  String ptAtTime(String time);
+
+  /// No description provided for @ptItsTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت {prayer}'**
+  String ptItsTime(String prayer);
+
+  /// No description provided for @ptCurrentWindow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت الحالي: {window}'**
+  String ptCurrentWindow(String window);
+
+  /// No description provided for @ptCountdownSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحين وقت {prayer} بعد {duration}'**
+  String ptCountdownSemantics(String prayer, String duration);
+
+  /// No description provided for @ptToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get ptToday;
+
+  /// No description provided for @ptTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا'**
+  String get ptTomorrow;
+
+  /// No description provided for @ptYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get ptYesterday;
+
+  /// Day-view title of the night still running after midnight (the previous date's prayer day, until Fajr)
+  ///
+  /// In ar, this message translates to:
+  /// **'الليلة'**
+  String get ptTonight;
+
+  /// No description provided for @ptPrevDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم السابق'**
+  String get ptPrevDay;
+
+  /// No description provided for @ptNextDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم التالي'**
+  String get ptNextDay;
+
+  /// No description provided for @ptBackToToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة إلى اليوم'**
+  String get ptBackToToday;
+
+  /// Segment: one day's times
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get ptViewDay;
+
+  /// Segment: the month table
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر'**
+  String get ptViewMonth;
+
+  /// No description provided for @ptPrevMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر السابق'**
+  String get ptPrevMonth;
+
+  /// No description provided for @ptNextMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر التالي'**
+  String get ptNextMonth;
+
+  /// Month table: the date column
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get ptMonthDay;
+
+  /// No description provided for @ptMonthHijriSpan.
+  ///
+  /// In ar, this message translates to:
+  /// **'{from} – {to}'**
+  String ptMonthHijriSpan(String from, String to);
+
+  /// No description provided for @ptAm.
+  ///
+  /// In ar, this message translates to:
+  /// **'ص'**
+  String get ptAm;
+
+  /// No description provided for @ptPm.
+  ///
+  /// In ar, this message translates to:
+  /// **'م'**
+  String get ptPm;
+
+  /// No description provided for @ptClockHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} ساعة'**
+  String ptClockHours(String hours);
+
+  /// No description provided for @ptMinutesSigned.
+  ///
+  /// In ar, this message translates to:
+  /// **'{minutes} د'**
+  String ptMinutesSigned(String minutes);
+
+  /// No description provided for @ptHijriDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'{day} {month} {year} هـ'**
+  String ptHijriDate(String day, String month, String year);
+
+  /// No description provided for @ptHijriDayMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'{day} {month}'**
+  String ptHijriDayMonth(String day, String month);
+
+  /// No description provided for @ptHijriMonth1.
+  ///
+  /// In ar, this message translates to:
+  /// **'محرّم'**
+  String get ptHijriMonth1;
+
+  /// No description provided for @ptHijriMonth2.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفر'**
+  String get ptHijriMonth2;
+
+  /// No description provided for @ptHijriMonth3.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربيع الأول'**
+  String get ptHijriMonth3;
+
+  /// No description provided for @ptHijriMonth4.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربيع الآخر'**
+  String get ptHijriMonth4;
+
+  /// No description provided for @ptHijriMonth5.
+  ///
+  /// In ar, this message translates to:
+  /// **'جمادى الأولى'**
+  String get ptHijriMonth5;
+
+  /// No description provided for @ptHijriMonth6.
+  ///
+  /// In ar, this message translates to:
+  /// **'جمادى الآخرة'**
+  String get ptHijriMonth6;
+
+  /// No description provided for @ptHijriMonth7.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجب'**
+  String get ptHijriMonth7;
+
+  /// No description provided for @ptHijriMonth8.
+  ///
+  /// In ar, this message translates to:
+  /// **'شعبان'**
+  String get ptHijriMonth8;
+
+  /// No description provided for @ptHijriMonth9.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان'**
+  String get ptHijriMonth9;
+
+  /// No description provided for @ptHijriMonth10.
+  ///
+  /// In ar, this message translates to:
+  /// **'شوّال'**
+  String get ptHijriMonth10;
+
+  /// No description provided for @ptHijriMonth11.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذو القعدة'**
+  String get ptHijriMonth11;
+
+  /// No description provided for @ptHijriMonth12.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذو الحجة'**
+  String get ptHijriMonth12;
+
+  /// No description provided for @ptLocationTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقعك'**
+  String get ptLocationTitle;
+
+  /// No description provided for @ptLocationSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحسب المواقيت على جهازك، دون إنترنت'**
+  String get ptLocationSubtitle;
+
+  /// No description provided for @ptLocationDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'{city} (افتراضي)'**
+  String ptLocationDefault(String city);
+
+  /// No description provided for @ptLocationNear.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرب {city}'**
+  String ptLocationNear(String city);
+
+  /// No description provided for @ptPlaceWithCountry.
+  ///
+  /// In ar, this message translates to:
+  /// **'{city}، {country}'**
+  String ptPlaceWithCountry(String city, String country);
+
+  /// No description provided for @ptPinnedLocation.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقع محدّد'**
+  String get ptPinnedLocation;
+
+  /// Name of the generic default location
+  ///
+  /// In ar, this message translates to:
+  /// **'عمّان'**
+  String get ptDefaultCityName;
+
+  /// No description provided for @ptSourceGps.
+  ///
+  /// In ar, this message translates to:
+  /// **'من موقعك الحالي'**
+  String get ptSourceGps;
+
+  /// No description provided for @ptSourceCity.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدينة مختارة'**
+  String get ptSourceCity;
+
+  /// No description provided for @ptSourceDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموقع الافتراضي – اختر موقعك'**
+  String get ptSourceDefault;
+
+  /// No description provided for @ptCoordinates.
+  ///
+  /// In ar, this message translates to:
+  /// **'{lat}، {lon}'**
+  String ptCoordinates(String lat, String lon);
+
+  /// No description provided for @ptTimeZoneLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنطقة الزمنية: {zone}'**
+  String ptTimeZoneLabel(String zone);
+
+  /// No description provided for @ptTimeZoneDevice.
+  ///
+  /// In ar, this message translates to:
+  /// **'توقيت الجهاز'**
+  String get ptTimeZoneDevice;
+
+  /// No description provided for @ptZoneOffset.
+  ///
+  /// In ar, this message translates to:
+  /// **'غرينتش {offset}'**
+  String ptZoneOffset(String offset);
+
+  /// No description provided for @ptZoneDiffers.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواقيت بتوقيت {place}'**
+  String ptZoneDiffers(String place);
+
+  /// No description provided for @ptUseCurrentLocation.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم موقعي الحالي'**
+  String get ptUseCurrentLocation;
+
+  /// No description provided for @ptUseCurrentLocationHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديد تقريبي لمرة واحدة، يبقى على جهازك'**
+  String get ptUseCurrentLocationHint;
+
+  /// No description provided for @ptChooseCity.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر مدينة'**
+  String get ptChooseCity;
+
+  /// No description provided for @ptChooseCityHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث بالعربية أو الإنجليزية، دون إنترنت'**
+  String get ptChooseCityHint;
+
+  /// No description provided for @ptRationaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نحتاج موقعك التقريبي'**
+  String get ptRationaleTitle;
+
+  /// No description provided for @ptRationaleBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليحسب مَدار مواقيت الصلاة بدقة يطلب موقعك مرة واحدة. يُحفظ مشفّرًا على جهازك ولا يُرسَل إلى أي مكان.'**
+  String get ptRationaleBody;
+
+  /// No description provided for @ptRationaleAllow.
+  ///
+  /// In ar, this message translates to:
+  /// **'السماح بالموقع'**
+  String get ptRationaleAllow;
+
+  /// No description provided for @ptRequesting.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار إذنك…'**
+  String get ptRequesting;
+
+  /// No description provided for @ptLocating.
+  ///
+  /// In ar, this message translates to:
+  /// **'نحدّد موقعك…'**
+  String get ptLocating;
+
+  /// No description provided for @ptDeniedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُمنح إذن الموقع'**
+  String get ptDeniedTitle;
+
+  /// No description provided for @ptDeniedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكنك المحاولة مجددًا، أو اختيار مدينتك من القائمة.'**
+  String get ptDeniedBody;
+
+  /// No description provided for @ptTryAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'حاول مجددًا'**
+  String get ptTryAgain;
+
+  /// No description provided for @ptDeniedForeverTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذن الموقع مغلق'**
+  String get ptDeniedForeverTitle;
+
+  /// No description provided for @ptDeniedForeverBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّله من إعدادات التطبيق في النظام، أو اختر مدينتك يدويًا.'**
+  String get ptDeniedForeverBody;
+
+  /// No description provided for @ptOpenAppSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح إعدادات التطبيق'**
+  String get ptOpenAppSettings;
+
+  /// No description provided for @ptServiceOffTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمة الموقع متوقفة'**
+  String get ptServiceOffTitle;
+
+  /// No description provided for @ptServiceOffBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّل الموقع من إعدادات الجهاز ثم عُد إلى هنا، أو اختر مدينتك.'**
+  String get ptServiceOffBody;
+
+  /// No description provided for @ptOpenLocationSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الموقع'**
+  String get ptOpenLocationSettings;
+
+  /// No description provided for @ptUnsupportedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديد الموقع غير متاح على هذا الجهاز. اختر مدينتك من القائمة.'**
+  String get ptUnsupportedBody;
+
+  /// No description provided for @ptFailedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحديد الموقع'**
+  String get ptFailedTitle;
+
+  /// No description provided for @ptFailedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قد تكون الإشارة ضعيفة. حاول مجددًا في مكان مكشوف، أو اختر مدينتك.'**
+  String get ptFailedBody;
+
+  /// No description provided for @ptLocationChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'صار الموقع: {place}'**
+  String ptLocationChanged(String place);
+
+  /// No description provided for @ptCitySearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث عن مدينة…'**
+  String get ptCitySearchHint;
+
+  /// No description provided for @ptCitySearchEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مدينة بهذا الاسم'**
+  String get ptCitySearchEmpty;
+
+  /// No description provided for @ptCitySearchEmptyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب اسمًا آخر أو كتابة أقصر'**
+  String get ptCitySearchEmptyHint;
+
+  /// No description provided for @ptCitySuggestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدن مقترحة'**
+  String get ptCitySuggestions;
+
+  /// No description provided for @ptCityResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتائج'**
+  String get ptCityResults;
+
+  /// No description provided for @ptCitySelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'المختارة'**
+  String get ptCitySelected;
+
+  /// No description provided for @ptSectionLocation.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموقع'**
+  String get ptSectionLocation;
+
+  /// No description provided for @ptSectionMethod.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة الحساب'**
+  String get ptSectionMethod;
+
+  /// No description provided for @ptSectionMethodHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تختلف الطرق أساسًا في زاويتي الفجر والعشاء'**
+  String get ptSectionMethodHint;
+
+  /// No description provided for @ptSectionAsr.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلاة العصر'**
+  String get ptSectionAsr;
+
+  /// No description provided for @ptAsrStandard.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجمهور'**
+  String get ptAsrStandard;
+
+  /// No description provided for @ptAsrHanafi.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحنفي'**
+  String get ptAsrHanafi;
+
+  /// No description provided for @ptAsrNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الجمهور (الشافعية والمالكية والحنابلة) يبدأ العصر حين يصير ظل الشيء مثله، وعند الحنفية مثليه.'**
+  String get ptAsrNote;
+
+  /// No description provided for @ptSectionHighLat.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوط العرض العليا'**
+  String get ptSectionHighLat;
+
+  /// No description provided for @ptHighLatAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get ptHighLatAuto;
+
+  /// No description provided for @ptHighLatMiddle.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتصف الليل'**
+  String get ptHighLatMiddle;
+
+  /// No description provided for @ptHighLatSeventh.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُبع الليل'**
+  String get ptHighLatSeventh;
+
+  /// No description provided for @ptHighLatAngle.
+  ///
+  /// In ar, this message translates to:
+  /// **'زاوية الشفق'**
+  String get ptHighLatAngle;
+
+  /// No description provided for @ptHighLatNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'حيث لا يغيب الشفق صيفًا يُقدَّر الفجر والعشاء بجزء من الليل. التلقائي يختار سُبع الليل شمال خط العرض {degrees} تقريبًا.'**
+  String ptHighLatNote(String degrees);
+
+  /// No description provided for @ptSectionAdjustments.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديلات يدوية'**
+  String get ptSectionAdjustments;
+
+  /// No description provided for @ptAdjustmentsNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضِف دقائق أو اطرحها لتوافق تقويم مسجدك.'**
+  String get ptAdjustmentsNote;
+
+  /// No description provided for @ptResetAdjustments.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفير'**
+  String get ptResetAdjustments;
+
+  /// No description provided for @ptAdjustmentsReset.
+  ///
+  /// In ar, this message translates to:
+  /// **'صُفّرت التعديلات اليدوية'**
+  String get ptAdjustmentsReset;
+
+  /// No description provided for @ptSectionHijri.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ الهجري'**
+  String get ptSectionHijri;
+
+  /// No description provided for @ptHijriOffset.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل اليوم الهجري'**
+  String get ptHijriOffset;
+
+  /// No description provided for @ptHijriOffsetNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب تقويم أم القرى؛ عدّله يومًا أو يومين ليوافق رؤية الهلال في بلدك.'**
+  String get ptHijriOffsetNote;
+
+  /// No description provided for @ptHijriAtMaghrib.
+  ///
+  /// In ar, this message translates to:
+  /// **'يبدأ اليوم الهجري عند المغرب'**
+  String get ptHijriAtMaghrib;
+
+  /// No description provided for @ptHijriAtMaghribHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كما يُحسب اليوم شرعًا، من غروب إلى غروب'**
+  String get ptHijriAtMaghribHint;
+
+  /// No description provided for @ptSectionDisplay.
+  ///
+  /// In ar, this message translates to:
+  /// **'العرض'**
+  String get ptSectionDisplay;
+
+  /// No description provided for @ptClockFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام الساعة'**
+  String get ptClockFormat;
+
+  /// No description provided for @ptPreviewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواقيت اليوم'**
+  String get ptPreviewTitle;
+
+  /// No description provided for @ptPreviewHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتحدّث مع كل تغيير'**
+  String get ptPreviewHint;
+
+  /// No description provided for @ptMethodSheetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة الحساب'**
+  String get ptMethodSheetTitle;
+
+  /// No description provided for @ptMethodSuggested.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقترحة لموقعك'**
+  String get ptMethodSuggested;
+
+  /// No description provided for @ptMethodDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'الافتراضية'**
+  String get ptMethodDefault;
+
+  /// Undo toast after picking a calculation method
+  ///
+  /// In ar, this message translates to:
+  /// **'صارت طريقة الحساب: {method}'**
+  String ptMethodChanged(String method);
+
+  /// No description provided for @ptMethodJordan.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزارة الأوقاف الأردنية'**
+  String get ptMethodJordan;
+
+  /// No description provided for @ptMethodMuslimWorldLeague.
+  ///
+  /// In ar, this message translates to:
+  /// **'رابطة العالم الإسلامي'**
+  String get ptMethodMuslimWorldLeague;
+
+  /// No description provided for @ptMethodUmmAlQura.
+  ///
+  /// In ar, this message translates to:
+  /// **'أم القرى – مكة المكرمة'**
+  String get ptMethodUmmAlQura;
+
+  /// No description provided for @ptMethodEgyptian.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهيئة المصرية العامة للمساحة'**
+  String get ptMethodEgyptian;
+
+  /// No description provided for @ptMethodKarachi.
+  ///
+  /// In ar, this message translates to:
+  /// **'جامعة العلوم الإسلامية – كراتشي'**
+  String get ptMethodKarachi;
+
+  /// No description provided for @ptMethodNorthAmerica.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجمعية الإسلامية لأمريكا الشمالية'**
+  String get ptMethodNorthAmerica;
+
+  /// No description provided for @ptMethodDubai.
+  ///
+  /// In ar, this message translates to:
+  /// **'دبي – الإمارات'**
+  String get ptMethodDubai;
+
+  /// No description provided for @ptMethodKuwait.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكويت'**
+  String get ptMethodKuwait;
+
+  /// No description provided for @ptMethodQatar.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطر'**
+  String get ptMethodQatar;
+
+  /// No description provided for @ptMethodTurkiye.
+  ///
+  /// In ar, this message translates to:
+  /// **'رئاسة الشؤون الدينية التركية'**
+  String get ptMethodTurkiye;
+
+  /// No description provided for @ptMethodSingapore.
+  ///
+  /// In ar, this message translates to:
+  /// **'سنغافورة'**
+  String get ptMethodSingapore;
+
+  /// No description provided for @ptMethodTehran.
+  ///
+  /// In ar, this message translates to:
+  /// **'معهد الجيوفيزياء – طهران'**
+  String get ptMethodTehran;
+
+  /// No description provided for @ptMethodGulfRegion.
+  ///
+  /// In ar, this message translates to:
+  /// **'منطقة الخليج'**
+  String get ptMethodGulfRegion;
+
+  /// No description provided for @ptMethodMoonsightingCommittee.
+  ///
+  /// In ar, this message translates to:
+  /// **'لجنة رؤية الهلال'**
+  String get ptMethodMoonsightingCommittee;
+
+  /// No description provided for @ptMethodAlgerian.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزارة الشؤون الدينية الجزائرية'**
+  String get ptMethodAlgerian;
+
+  /// No description provided for @ptMethodMorocco.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزارة الأوقاف المغربية'**
+  String get ptMethodMorocco;
+
+  /// No description provided for @ptMethodTunisia.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزارة الشؤون الدينية التونسية'**
+  String get ptMethodTunisia;
+
+  /// No description provided for @ptMethodFrance.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتحاد المنظمات الإسلامية في فرنسا'**
+  String get ptMethodFrance;
+
+  /// No description provided for @ptMethodRussia.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدارة الدينية لمسلمي روسيا'**
+  String get ptMethodRussia;
+
+  /// No description provided for @ptMethodIndonesian.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزارة الشؤون الدينية الإندونيسية'**
+  String get ptMethodIndonesian;
+
+  /// No description provided for @ptMethodJafari.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجعفري – معهد ليفا، قم'**
+  String get ptMethodJafari;
+
+  /// No description provided for @ptMethodCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'زوايا مخصّصة'**
+  String get ptMethodCustom;
+
+  /// No description provided for @ptMethodCustomHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّد زاويتي الفجر والعشاء بنفسك'**
+  String get ptMethodCustomHint;
+
+  /// No description provided for @ptSummaryAngle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} {angle}'**
+  String ptSummaryAngle(String prayer, String angle);
+
+  /// No description provided for @ptSummaryIshaInterval.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشاء بعد المغرب بـ{minutes} د'**
+  String ptSummaryIshaInterval(String minutes);
+
+  /// No description provided for @ptSummaryRamadan.
+  ///
+  /// In ar, this message translates to:
+  /// **'في رمضان بعد المغرب بـ{minutes} د'**
+  String ptSummaryRamadan(String minutes);
+
+  /// No description provided for @ptSummaryOffset.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} {minutes} د'**
+  String ptSummaryOffset(String prayer, String minutes);
+
+  /// No description provided for @ptSummaryMaghribAngle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المغرب {angle}'**
+  String ptSummaryMaghribAngle(String angle);
+
+  /// No description provided for @ptCustomFajrAngle.
+  ///
+  /// In ar, this message translates to:
+  /// **'زاوية الفجر'**
+  String get ptCustomFajrAngle;
+
+  /// No description provided for @ptCustomIshaAngle.
+  ///
+  /// In ar, this message translates to:
+  /// **'زاوية العشاء'**
+  String get ptCustomIshaAngle;
+
+  /// No description provided for @ptCustomIshaByInterval.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشاء بعد المغرب بمدة ثابتة'**
+  String get ptCustomIshaByInterval;
+
+  /// No description provided for @ptCustomIshaInterval.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة بعد المغرب'**
+  String get ptCustomIshaInterval;
+
+  /// No description provided for @ptIncrease.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة'**
+  String get ptIncrease;
+
+  /// No description provided for @ptDecrease.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنقاص'**
+  String get ptDecrease;
+
+  /// No description provided for @ptUndoSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيدت الإعدادات السابقة'**
+  String get ptUndoSettings;
+
+  /// No description provided for @ptAsrRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية وقت العصر'**
+  String get ptAsrRule;
+
+  /// No description provided for @ptHighLatRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة التقدير'**
+  String get ptHighLatRule;
+
+  /// Hijri day offset of zero
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تعديل'**
+  String get ptNoAdjustment;
+
+  /// A signed day offset, e.g. +1
+  ///
+  /// In ar, this message translates to:
+  /// **'{days} يوم'**
+  String ptDayUnit(String days);
+
+  /// No description provided for @ptAdjustTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضبط وقت {prayer}'**
+  String ptAdjustTitle(String prayer);
+
+  /// No description provided for @ptAdjustHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط مطوّلًا على أي وقت لضبطه بالدقائق'**
+  String get ptAdjustHint;
+
+  /// No description provided for @ptAdjustCalculated.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحسوب: {time}'**
+  String ptAdjustCalculated(String time);
+
+  /// No description provided for @ptAdjustDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get ptAdjustDone;
+
+  /// No description provided for @ptAdjusted.
+  ///
+  /// In ar, this message translates to:
+  /// **'عُدّل وقت {prayer}'**
+  String ptAdjusted(String prayer);
+
+  /// Adhan settings screen title / settings entry
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان'**
+  String get adhanSettingsTitle;
+
+  /// Subtitle of the Adhan entry in Settings
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان في وقته، والمؤذّن، والتذكير قبله'**
+  String get adhanSettingsSubtitle;
+
+  /// A number of minutes after 'in' / 'before' (genitive in Arabic)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{الآن} =1{دقيقة} =2{دقيقتين} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String adhanMinutes(int count);
+
+  /// Compact minutes on a chip; number pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{minutes} د'**
+  String adhanMinutesShort(String minutes);
+
+  /// No description provided for @adhanSeconds.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لحظات} =1{ثانية} =2{ثانيتين} few{{count} ثوانٍ} many{{count} ثانية} other{{count} ثانية}}'**
+  String adhanSeconds(int count);
+
+  /// Adhan notification title
+  ///
+  /// In ar, this message translates to:
+  /// **'حان الآن وقت صلاة {prayer}'**
+  String adhanNotifCallTitle(String prayer);
+
+  /// Adhan notification body; time pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{time} · حيّ على الصلاة'**
+  String adhanNotifCallBody(String time);
+
+  /// Pre-adhan reminder title, e.g. Maghrib in 10 minutes
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {minutes}'**
+  String adhanNotifPreTitle(String prayer, String minutes);
+
+  /// No description provided for @adhanNotifPreBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعدّ للصلاة؛ يُرفَع الأذان عند {time}'**
+  String adhanNotifPreBody(String time);
+
+  /// No description provided for @adhanNotifSunriseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أشرقت الشمس'**
+  String get adhanNotifSunriseTitle;
+
+  /// No description provided for @adhanNotifSunriseBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى وقت صلاة الفجر'**
+  String get adhanNotifSunriseBody;
+
+  /// No description provided for @adhanNotifSunriseSoonTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشروق بعد {minutes}'**
+  String adhanNotifSunriseSoonTitle(String minutes);
+
+  /// No description provided for @adhanNotifSunriseSoonBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوشك وقت الفجر أن ينتهي؛ صلِّ قبل {time}'**
+  String adhanNotifSunriseSoonBody(String time);
+
+  /// No description provided for @adhanNotifTestTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربة: أذان {prayer}'**
+  String adhanNotifTestTitle(String prayer);
+
+  /// No description provided for @adhanNotifTestBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'هكذا سيبدو الأذان ويُسمَع في وقته'**
+  String get adhanNotifTestBody;
+
+  /// Android notification channel group
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة والأذان'**
+  String get adhanChannelGroup;
+
+  /// Android channel name of an adhan sound
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان · {sound}'**
+  String adhanChannelCall(String sound);
+
+  /// No description provided for @adhanChannelCallHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان عند دخول وقت كل صلاة'**
+  String get adhanChannelCallHint;
+
+  /// No description provided for @adhanChannelReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل الأذان'**
+  String get adhanChannelReminder;
+
+  /// No description provided for @adhanChannelSunrise.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشروق'**
+  String get adhanChannelSunrise;
+
+  /// No description provided for @adhanToneDawn.
+  ///
+  /// In ar, this message translates to:
+  /// **'نور الفجر'**
+  String get adhanToneDawn;
+
+  /// No description provided for @adhanToneDawnHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'توهّج بلّوري يعلو فوق نغمة دافئة، كأول الضوء'**
+  String get adhanToneDawnHint;
+
+  /// No description provided for @adhanToneBrass.
+  ///
+  /// In ar, this message translates to:
+  /// **'نحاس الأسطرلاب'**
+  String get adhanToneBrass;
+
+  /// No description provided for @adhanToneBrassHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجراس هادئة كساعة برجٍ بعيدة'**
+  String get adhanToneBrassHint;
+
+  /// No description provided for @adhanToneBowl.
+  ///
+  /// In ar, this message translates to:
+  /// **'سكينة'**
+  String get adhanToneBowl;
+
+  /// No description provided for @adhanToneBowlHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثلاث قرعات على وعاءٍ غنائي'**
+  String get adhanToneBowlHint;
+
+  /// No description provided for @adhanToneChime.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرس التذكير'**
+  String get adhanToneChime;
+
+  /// No description provided for @adhanToneSunrise.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلّور الشروق'**
+  String get adhanToneSunrise;
+
+  /// No description provided for @adhanToneChimeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رنّة زجاجية قصيرة'**
+  String get adhanToneChimeHint;
+
+  /// No description provided for @adhanSilent.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا صوت'**
+  String get adhanSilent;
+
+  /// No description provided for @adhanSilentHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار واهتزاز دون صوت'**
+  String get adhanSilentHint;
+
+  /// Small line above the big prayer name on the adhan screen
+  ///
+  /// In ar, this message translates to:
+  /// **'حان الآن وقت صلاة'**
+  String get adhanScreenOverlineCall;
+
+  /// No description provided for @adhanScreenOverlinePre.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعدّ لصلاة'**
+  String get adhanScreenOverlinePre;
+
+  /// No description provided for @adhanScreenOverlineSunrise.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى وقت الفجر'**
+  String get adhanScreenOverlineSunrise;
+
+  /// No description provided for @adhanScreenOverlineSunriseSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوشك وقت الفجر أن ينتهي'**
+  String get adhanScreenOverlineSunriseSoon;
+
+  /// No description provided for @adhanScreenSunriseIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشروق بعد {duration}'**
+  String adhanScreenSunriseIn(String duration);
+
+  /// No description provided for @adhanScreenOverlineTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربة أذان'**
+  String get adhanScreenOverlineTest;
+
+  /// No description provided for @adhanScreenAdhanIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان بعد {duration}'**
+  String adhanScreenAdhanIn(String duration);
+
+  /// No description provided for @adhanScreenAdhanAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُرفَع الأذان عند {time}'**
+  String adhanScreenAdhanAt(String time);
+
+  /// No description provided for @adhanScreenSoundingCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُرفَع الأذان الآن'**
+  String get adhanScreenSoundingCall;
+
+  /// No description provided for @adhanScreenSoundingTone.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنبيه يصدح الآن'**
+  String get adhanScreenSoundingTone;
+
+  /// No description provided for @adhanScreenSilent.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان صامت'**
+  String get adhanScreenSilent;
+
+  /// No description provided for @adhanScreenSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان {prayer}، {time}'**
+  String adhanScreenSemantics(String prayer, String time);
+
+  /// No description provided for @adhanDuaTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دعاء ما بعد الأذان'**
+  String get adhanDuaTitle;
+
+  /// Arabic: when it is said; English: a translation of the supplication (the Arabic text itself is shown from code)
+  ///
+  /// In ar, this message translates to:
+  /// **'يُقال بعد الأذان، مع الصلاة على النبي ﷺ'**
+  String get adhanDuaMeaning;
+
+  /// Hadith reference; number pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'رواه البخاري ({number})'**
+  String adhanDuaSource(String number);
+
+  /// No description provided for @adhanStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف الأذان'**
+  String get adhanStop;
+
+  /// No description provided for @adhanPrayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتُ'**
+  String get adhanPrayed;
+
+  /// No description provided for @adhanPrayedNamed.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتُ {prayer}'**
+  String adhanPrayedNamed(String prayer);
+
+  /// No description provided for @adhanPrayedDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقبّل الله منك'**
+  String get adhanPrayedDone;
+
+  /// No description provided for @adhanPrayedFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تسجيل الصلاة'**
+  String get adhanPrayedFailed;
+
+  /// No description provided for @adhanClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get adhanClose;
+
+  /// No description provided for @adhanSnooze.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني بعد {minutes}'**
+  String adhanSnooze(String minutes);
+
+  /// No description provided for @adhanSnoozed.
+  ///
+  /// In ar, this message translates to:
+  /// **'سأذكّرك بعد {minutes}'**
+  String adhanSnoozed(String minutes);
+
+  /// No description provided for @adhanNextTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان القادم'**
+  String get adhanNextTitle;
+
+  /// No description provided for @adhanNextIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {duration}'**
+  String adhanNextIn(String duration);
+
+  /// No description provided for @adhanNextNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أذان مفعّل'**
+  String get adhanNextNone;
+
+  /// No description provided for @adhanScheduledCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا تنبيهات مجدولة} =1{تنبيه واحد مجدول} =2{تنبيهان مجدولان} few{{count} تنبيهات مجدولة} many{{count} تنبيهًا مجدولًا} other{{count} تنبيه مجدول}}'**
+  String adhanScheduledCount(int count);
+
+  /// No description provided for @adhanScheduleWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'يبقى الأذان يعمل أسبوعًا كاملًا دون فتح مَدار، وبعد إعادة التشغيل'**
+  String get adhanScheduleWeek;
+
+  /// No description provided for @adhanScheduleInexact.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنبّهات الدقيقة غير مسموحة؛ قد يتأخر الأذان دقائق'**
+  String get adhanScheduleInexact;
+
+  /// No description provided for @adhanSectionPrayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلوات'**
+  String get adhanSectionPrayers;
+
+  /// No description provided for @adhanSectionPrayersHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان عند دخول الوقت، وتذكير قبله إن شئت'**
+  String get adhanSectionPrayersHint;
+
+  /// No description provided for @adhanPrayerOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان متوقف'**
+  String get adhanPrayerOff;
+
+  /// No description provided for @adhanPrayerReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل {minutes}'**
+  String adhanPrayerReminder(String minutes);
+
+  /// No description provided for @adhanPrayerToggle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان {prayer}'**
+  String adhanPrayerToggle(String prayer);
+
+  /// No description provided for @adhanAlertSheetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان {prayer}'**
+  String adhanAlertSheetTitle(String prayer);
+
+  /// No description provided for @adhanAlertCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفع الأذان عند دخول الوقت'**
+  String get adhanAlertCall;
+
+  /// No description provided for @adhanAlertReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل الأذان'**
+  String get adhanAlertReminder;
+
+  /// No description provided for @adhanReminderNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا'**
+  String get adhanReminderNone;
+
+  /// No description provided for @adhanTestThis.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب هذا الأذان'**
+  String get adhanTestThis;
+
+  /// No description provided for @adhanSunrise.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه الشروق'**
+  String get adhanSunrise;
+
+  /// No description provided for @adhanSunriseHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه لطيف حين ينتهي وقت الفجر'**
+  String get adhanSunriseHint;
+
+  /// No description provided for @adhanSunriseAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الشروق'**
+  String get adhanSunriseAt;
+
+  /// No description provided for @adhanSunriseBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبله بـ{minutes}'**
+  String adhanSunriseBefore(String minutes);
+
+  /// No description provided for @adhanSectionMuezzin.
+  ///
+  /// In ar, this message translates to:
+  /// **'المؤذّن'**
+  String get adhanSectionMuezzin;
+
+  /// No description provided for @adhanSectionMuezzinHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'للفجر صوتٌ خاص إن شئت'**
+  String get adhanSectionMuezzinHint;
+
+  /// No description provided for @adhanMuezzinFajr.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان الفجر'**
+  String get adhanMuezzinFajr;
+
+  /// No description provided for @adhanMuezzinOthers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الظهر والعصر والمغرب والعشاء'**
+  String get adhanMuezzinOthers;
+
+  /// No description provided for @adhanPickerTitleFajr.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت أذان الفجر'**
+  String get adhanPickerTitleFajr;
+
+  /// No description provided for @adhanPickerTitleOthers.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت الأذان'**
+  String get adhanPickerTitleOthers;
+
+  /// No description provided for @adhanPickerTones.
+  ///
+  /// In ar, this message translates to:
+  /// **'نغمات مَدار'**
+  String get adhanPickerTones;
+
+  /// No description provided for @adhanPickerTonesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات مركّبة إجرائيًا من أجراس وأوعية غنائية؛ لا صوت بشري فيها ولا لحن أذان'**
+  String get adhanPickerTonesHint;
+
+  /// No description provided for @adhanPickerYours.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيلاتك'**
+  String get adhanPickerYours;
+
+  /// No description provided for @adhanPickerYoursHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرفِق تسجيل أذانٍ تحبّه؛ يُنسخ إلى مَدار ويبقى على جهازك وحده'**
+  String get adhanPickerYoursHint;
+
+  /// No description provided for @adhanPickerEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُرفِق أي تسجيل بعد'**
+  String get adhanPickerEmpty;
+
+  /// No description provided for @adhanPickerAttach.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرفاق تسجيل'**
+  String get adhanPickerAttach;
+
+  /// No description provided for @adhanPickerNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يأتي مَدار بتسجيلات أذانٍ بأصوات بشرية، إذ لم نجد تسجيلًا بترخيصٍ مفتوح يمكن التحقّق منه'**
+  String get adhanPickerNote;
+
+  /// No description provided for @adhanListen.
+  ///
+  /// In ar, this message translates to:
+  /// **'استماع'**
+  String get adhanListen;
+
+  /// No description provided for @adhanListenStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف الاستماع'**
+  String get adhanListenStop;
+
+  /// No description provided for @adhanSelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'مختار'**
+  String get adhanSelected;
+
+  /// No description provided for @adhanDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get adhanDone;
+
+  /// No description provided for @adhanTestSlotHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بصوت {sound}'**
+  String adhanTestSlotHint(String sound);
+
+  /// No description provided for @adhanMuezzinRename.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التسمية'**
+  String get adhanMuezzinRename;
+
+  /// No description provided for @adhanMuezzinRenameTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم التسجيل'**
+  String get adhanMuezzinRenameTitle;
+
+  /// No description provided for @adhanMuezzinNameField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get adhanMuezzinNameField;
+
+  /// No description provided for @adhanMuezzinAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف «{name}»'**
+  String adhanMuezzinAdded(String name);
+
+  /// No description provided for @adhanMuezzinDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف «{name}»'**
+  String adhanMuezzinDeleted(String name);
+
+  /// No description provided for @adhanMuezzinUnsupported.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة غير مدعومة؛ اختر ملفًا صوتيًا شائعًا'**
+  String get adhanMuezzinUnsupported;
+
+  /// No description provided for @adhanMuezzinTooLarge.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف كبير جدًا'**
+  String get adhanMuezzinTooLarge;
+
+  /// No description provided for @adhanMuezzinUnreadable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت قراءة الملف'**
+  String get adhanMuezzinUnreadable;
+
+  /// No description provided for @adhanMuezzinNoPreview.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُسمَع هذه الصيغة مع الأذان نفسه؛ جرّبها بـ«جرّب الأذان الآن»'**
+  String get adhanMuezzinNoPreview;
+
+  /// No description provided for @adhanMuezzinMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل محذوف'**
+  String get adhanMuezzinMissing;
+
+  /// No description provided for @adhanSectionAlert.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنبيه'**
+  String get adhanSectionAlert;
+
+  /// No description provided for @adhanVibrate.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاهتزاز'**
+  String get adhanVibrate;
+
+  /// No description provided for @adhanVibrateHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يهتزّ الهاتف مع الأذان والتذكير'**
+  String get adhanVibrateHint;
+
+  /// No description provided for @adhanFullScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاشة الأذان الكاملة'**
+  String get adhanFullScreen;
+
+  /// No description provided for @adhanFullScreenHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تظهر فوق شاشة القفل وتوقظ الشاشة عند الأذان'**
+  String get adhanFullScreenHint;
+
+  /// No description provided for @adhanQuiet.
+  ///
+  /// In ar, this message translates to:
+  /// **'سكون الصلاة'**
+  String get adhanQuiet;
+
+  /// No description provided for @adhanQuietHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصمت موسيقى الألعاب وأصوات الأجواء مع الأذان وأثناء الصلاة'**
+  String get adhanQuietHint;
+
+  /// No description provided for @adhanQuietAdhanOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الأذان فقط'**
+  String get adhanQuietAdhanOnly;
+
+  /// No description provided for @adhanSnoozeLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة التأجيل'**
+  String get adhanSnoozeLength;
+
+  /// No description provided for @adhanAlarmVolume.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستوى صوت المنبّه'**
+  String get adhanAlarmVolume;
+
+  /// No description provided for @adhanAlarmVolumeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُرفَع الأذان على مستوى صوت المنبّه في هاتفك'**
+  String get adhanAlarmVolumeHint;
+
+  /// No description provided for @adhanAlarmMuted.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت المنبّه مكتوم؛ لن يُسمَع الأذان'**
+  String get adhanAlarmMuted;
+
+  /// No description provided for @adhanOpenSoundSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الصوت'**
+  String get adhanOpenSoundSettings;
+
+  /// No description provided for @adhanSectionTry.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربة'**
+  String get adhanSectionTry;
+
+  /// No description provided for @adhanTestNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب الأذان الآن'**
+  String get adhanTestNow;
+
+  /// No description provided for @adhanTestHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذانٌ حقيقي بعد لحظات؛ أقفل الشاشة لترى عرضه الكامل'**
+  String get adhanTestHint;
+
+  /// No description provided for @adhanTestScheduled.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُرفَع الأذان بعد {seconds}'**
+  String adhanTestScheduled(String seconds);
+
+  /// No description provided for @adhanTestFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت جدولة التجربة؛ تحقّق من الأذونات'**
+  String get adhanTestFailed;
+
+  /// No description provided for @adhanPermTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليُرفَع الأذان في وقته'**
+  String get adhanPermTitle;
+
+  /// No description provided for @adhanPermSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بضعة أذونات من أندرويد؛ لا يغادر شيءٌ جهازك'**
+  String get adhanPermSubtitle;
+
+  /// No description provided for @adhanPermReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان جاهز؛ كل ما يحتاجه مسموح'**
+  String get adhanPermReady;
+
+  /// No description provided for @adhanPermNotifications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإشعارات'**
+  String get adhanPermNotifications;
+
+  /// No description provided for @adhanPermNotificationsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليُسمَع الأذان ويظهر'**
+  String get adhanPermNotificationsHint;
+
+  /// No description provided for @adhanPermExact.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنبّهات الدقيقة'**
+  String get adhanPermExact;
+
+  /// No description provided for @adhanPermExactHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليُرفَع الأذان في الدقيقة نفسها، لا بعدها'**
+  String get adhanPermExactHint;
+
+  /// No description provided for @adhanPermFullScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'الظهور فوق شاشة القفل'**
+  String get adhanPermFullScreen;
+
+  /// No description provided for @adhanPermFullScreenHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لتظهر شاشة الأذان والهاتف مقفل'**
+  String get adhanPermFullScreenHint;
+
+  /// No description provided for @adhanPermBattery.
+  ///
+  /// In ar, this message translates to:
+  /// **'استثناء من توفير البطارية'**
+  String get adhanPermBattery;
+
+  /// No description provided for @adhanPermBatteryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كي لا يوقف النظامُ الأذانَ لتوفير الطاقة'**
+  String get adhanPermBatteryHint;
+
+  /// No description provided for @adhanPermAllow.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمح'**
+  String get adhanPermAllow;
+
+  /// No description provided for @adhanPermAllowed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسموح'**
+  String get adhanPermAllowed;
+
+  /// Button on a permission the user refused in the system dialog: opens the system settings page for it
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات'**
+  String get adhanPermOpenSettings;
+
+  /// Line under a permission the user refused in the system dialog
+  ///
+  /// In ar, this message translates to:
+  /// **'رفضتَه في نافذة أندرويد؛ فعّله من الإعدادات متى شئت'**
+  String get adhanPermRefusedHint;
+
+  /// No description provided for @adhanPermRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضروري'**
+  String get adhanPermRequired;
+
+  /// No description provided for @adhanPermDeniedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إن رفضتَ الطلب من قبل، فعّله من إعدادات التطبيق'**
+  String get adhanPermDeniedHint;
+
+  /// Title of the prayer tracker screen
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّع الصلاة'**
+  String get trackerTitle;
+
+  /// Prayer tracker tab: today's prayers
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get trackerTabToday;
+
+  /// Prayer tracker tab: history, streaks and the qada ledger
+  ///
+  /// In ar, this message translates to:
+  /// **'السجلّ'**
+  String get trackerTabHistory;
+
+  /// Marks today in the week strip
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get trackerTodayLabel;
+
+  /// Section title: the five obligatory prayers
+  ///
+  /// In ar, this message translates to:
+  /// **'الفرائض'**
+  String get trackerObligatory;
+
+  /// Hint under the obligatory prayers section
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط لتبديل الحالة، واسحب يمينًا لتسجيلها في وقتها'**
+  String get trackerObligatoryHint;
+
+  /// Section title: Duha, Witr and Qiyam
+  ///
+  /// In ar, this message translates to:
+  /// **'النوافل'**
+  String get trackerVoluntary;
+
+  /// Title of today's summary / the compact card
+  ///
+  /// In ar, this message translates to:
+  /// **'صلوات اليوم'**
+  String get trackerTodayPrayed;
+
+  /// Under the big count in the progress ring (number already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'من {total}'**
+  String trackerOfTotal(String total);
+
+  /// Progress of the obligatory prayers (numbers already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {done} من {total}'**
+  String trackerProgress(String done, String total);
+
+  /// Banner when all five obligatory prayers of the day are prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت صلواتك الخمس، تقبّل الله'**
+  String get trackerAllDone;
+
+  /// Countdown to the next prayer (duration already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {duration}'**
+  String trackerNextIn(String prayer, String duration);
+
+  /// Summary line after Isha when nothing is upcoming
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت الصلوات الخمس كلها، والليل للنوافل'**
+  String get trackerNightLeft;
+
+  /// A streak length in days
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا سلسلة بعد} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String trackerStreakDays(int count);
+
+  /// Streak chip on the Today view and the compact card
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ابدأ سلسلتك اليوم} =1{سلسلة يوم واحد} =2{سلسلة يومين} few{سلسلة {count} أيام} many{سلسلة {count} يومًا} other{سلسلة {count} يوم}}'**
+  String trackerStreakChip(int count);
+
+  /// The unit next to a big streak number (the number is shown separately)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{يوم} =1{يوم} =2{يومان} few{أيام} many{يومًا} other{يوم}}'**
+  String trackerDaysUnit(int count);
+
+  /// How many of today's prayers were in jamaah (number already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} في جماعة'**
+  String trackerJamaahCount(String count);
+
+  /// Status: prayed on time
+  ///
+  /// In ar, this message translates to:
+  /// **'في وقتها'**
+  String get trackerStatusPrayed;
+
+  /// Status: prayed late
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get trackerStatusLate;
+
+  /// Status: missed
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتت'**
+  String get trackerStatusMissed;
+
+  /// Status: a missed prayer made up (qada)
+  ///
+  /// In ar, this message translates to:
+  /// **'قُضيت'**
+  String get trackerStatusQada;
+
+  /// Status: its time is running and it is not logged yet
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقتها'**
+  String get trackerStatusDue;
+
+  /// Status: its time ended without a log
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل'**
+  String get trackerStatusUnlogged;
+
+  /// Status: its time has not come yet
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يحن وقتها'**
+  String get trackerStatusUpcoming;
+
+  /// Status of a voluntary prayer that was prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها'**
+  String get trackerStatusVoluntaryDone;
+
+  /// Status of a voluntary prayer not logged
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُصلَّ بعد'**
+  String get trackerStatusVoluntaryOpen;
+
+  /// How long until a prayer is due (duration already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {duration}'**
+  String trackerUpcomingIn(String duration);
+
+  /// How long the current prayer's time still runs (duration already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'يبقى {duration}'**
+  String trackerTimeLeft(String duration);
+
+  /// Menu action: log as prayed on time
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها في وقتها'**
+  String get trackerActionPrayed;
+
+  /// Menu action: log as prayed late
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها متأخرة'**
+  String get trackerActionLate;
+
+  /// Menu action: log as missed
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتتني'**
+  String get trackerActionMissed;
+
+  /// Action: record that a missed prayer was made up
+  ///
+  /// In ar, this message translates to:
+  /// **'قضيتها'**
+  String get trackerActionMadeUp;
+
+  /// Menu action: remove the log
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء التسجيل'**
+  String get trackerActionClear;
+
+  /// Menu action: mark as prayed in congregation
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها في جماعة'**
+  String get trackerActionJamaahOn;
+
+  /// Menu action: unmark congregation
+  ///
+  /// In ar, this message translates to:
+  /// **'لم أصلّها في جماعة'**
+  String get trackerActionJamaahOff;
+
+  /// Menu action: mark as prayed at the mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها في المسجد'**
+  String get trackerActionMosqueOn;
+
+  /// Menu action: unmark mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'لم أصلّها في المسجد'**
+  String get trackerActionMosqueOff;
+
+  /// Qada ledger: record every listed prayer as made up
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قضيتها} =2{قضيتهما} other{قضيتها كلها}}'**
+  String trackerActionMakeUpAll(int count);
+
+  /// Toggle chip: prayed in congregation
+  ///
+  /// In ar, this message translates to:
+  /// **'جماعة'**
+  String get trackerJamaah;
+
+  /// Toggle chip: prayed at the mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'المسجد'**
+  String get trackerMosque;
+
+  /// Screen-reader label of the swipe-to-log action
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها'**
+  String get trackerSwipePrayed;
+
+  /// Undo toast after changing a prayer's status
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer}: {status}'**
+  String trackerUndoStatus(String prayer, String status);
+
+  /// Undo toast after clearing a log
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي تسجيل {prayer}'**
+  String trackerUndoCleared(String prayer);
+
+  /// Undo toast after marking jamaah
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} في جماعة'**
+  String trackerUndoJamaahOn(String prayer);
+
+  /// Undo toast after unmarking jamaah
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} من غير جماعة'**
+  String trackerUndoJamaahOff(String prayer);
+
+  /// Undo toast after marking mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} في المسجد'**
+  String trackerUndoMosqueOn(String prayer);
+
+  /// Undo toast after unmarking mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} خارج المسجد'**
+  String trackerUndoMosqueOff(String prayer);
+
+  /// Undo toast after logging a voluntary prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ تسجيل {prayer}'**
+  String trackerUndoVoluntaryOn(String prayer);
+
+  /// Undo toast after removing a voluntary prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي تسجيل {prayer}'**
+  String trackerUndoVoluntaryOff(String prayer);
+
+  /// Undo toast after making up a missed prayer (date already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'قُضيت صلاة {prayer} ليوم {date}'**
+  String trackerUndoMadeUp(String prayer, String date);
+
+  /// Undo toast after making up several prayers
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قُضيت صلاة واحدة} =2{قُضيت صلاتان} few{قُضيت {count} صلوات} many{قُضيت {count} صلاة} other{قُضيت {count} صلاة}}'**
+  String trackerUndoMadeUpAll(int count);
+
+  /// Feedback when tapping a prayer whose time has not come
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يدخل وقت {prayer} بعد'**
+  String trackerNotYet(String prayer);
+
+  /// The two rak'ahs before Fajr
+  ///
+  /// In ar, this message translates to:
+  /// **'سنّة الفجر'**
+  String get trackerSunnahFajr;
+
+  /// The rawatib of Dhuhr
+  ///
+  /// In ar, this message translates to:
+  /// **'راتبة الظهر'**
+  String get trackerSunnahDhuhr;
+
+  /// The rawatib of Maghrib
+  ///
+  /// In ar, this message translates to:
+  /// **'راتبة المغرب'**
+  String get trackerSunnahMaghrib;
+
+  /// The rawatib of Isha
+  ///
+  /// In ar, this message translates to:
+  /// **'راتبة العشاء'**
+  String get trackerSunnahIsha;
+
+  /// The forenoon prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'الضحى'**
+  String get trackerDuha;
+
+  /// The odd-numbered night prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'الوتر'**
+  String get trackerWitr;
+
+  /// Qiyam al-layl
+  ///
+  /// In ar, this message translates to:
+  /// **'قيام الليل'**
+  String get trackerQiyam;
+
+  /// Title of the sunnah chip under a fard
+  ///
+  /// In ar, this message translates to:
+  /// **'السنّة الراتبة'**
+  String get trackerSunnahLabel;
+
+  /// Rak'ahs of a sunnah before its fard
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ركعة قبلها} =2{ركعتان قبلها} few{{count} ركعات قبلها} many{{count} ركعة قبلها} other{{count} ركعة قبلها}}'**
+  String trackerRakahBefore(int count);
+
+  /// Rak'ahs of a sunnah after its fard
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ركعة بعدها} =2{ركعتان بعدها} few{{count} ركعات بعدها} many{{count} ركعة بعدها} other{{count} ركعة بعدها}}'**
+  String trackerRakahAfter(int count);
+
+  /// Joins the rak'ahs before and after (both already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{before} و{after}'**
+  String trackerRakahBoth(String before, String after);
+
+  /// When Duha is prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'من ارتفاع الشمس إلى الظهر'**
+  String get trackerDuhaWindow;
+
+  /// When Witr and the night prayer are prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'من العشاء إلى الفجر'**
+  String get trackerNightWindow;
+
+  /// History: the current streak
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة الحالية'**
+  String get trackerStreakCurrent;
+
+  /// History: the longest streak
+  ///
+  /// In ar, this message translates to:
+  /// **'أطول سلسلة'**
+  String get trackerStreakBest;
+
+  /// How streaks are counted
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحتسب اليوم في السلسلة حين تُصلّى الفرائض الخمس أو تُقضى'**
+  String get trackerStreakRule;
+
+  /// History: the week strip
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر سبعة أيام'**
+  String get trackerWeekTitle;
+
+  /// History: the month heatmap
+  ///
+  /// In ar, this message translates to:
+  /// **'خريطة الشهر'**
+  String get trackerHeatmapTitle;
+
+  /// Heatmap legend: fewer prayers
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل'**
+  String get trackerLegendLess;
+
+  /// Heatmap legend: all five prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'الخمس'**
+  String get trackerLegendMore;
+
+  /// Heatmap legend: the dots in a cell count the prayers in jamaah
+  ///
+  /// In ar, this message translates to:
+  /// **'النقاط: صلوات الجماعة'**
+  String get trackerLegendJamaah;
+
+  /// Heatmap navigation
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر السابق'**
+  String get trackerPrevMonth;
+
+  /// Heatmap navigation
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر التالي'**
+  String get trackerNextMonth;
+
+  /// Screen-reader label of a day cell (all values already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{date}: صلّيت {done} من {total}، منها {jamaah} في جماعة'**
+  String trackerDaySemantics(
+    String date,
+    String done,
+    String total,
+    String jamaah,
+  );
+
+  /// History: totals of the shown month (month name already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'حصاد {month}'**
+  String trackerTotalsTitle(String month);
+
+  /// Total: share prayed on time
+  ///
+  /// In ar, this message translates to:
+  /// **'في وقتها'**
+  String get trackerTotalOnTime;
+
+  /// Total: share prayed in jamaah
+  ///
+  /// In ar, this message translates to:
+  /// **'في جماعة'**
+  String get trackerTotalJamaah;
+
+  /// Total: share prayed at the mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'في المسجد'**
+  String get trackerTotalMosque;
+
+  /// Total: days with all five prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام مكتملة'**
+  String get trackerTotalCompleteDays;
+
+  /// Total: sunnah rawatib prayed
+  ///
+  /// In ar, this message translates to:
+  /// **'الرواتب'**
+  String get trackerTotalRawatib;
+
+  /// Heading of the sunnah counts
+  ///
+  /// In ar, this message translates to:
+  /// **'النوافل والسنن'**
+  String get trackerTotalSunnahTitle;
+
+  /// History: stacked bars per obligatory prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'كل صلاة على حدة'**
+  String get trackerBreakdownTitle;
+
+  /// History: empty month
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سجلات في هذا الشهر بعد'**
+  String get trackerNoMonthData;
+
+  /// History: missed prayers waiting to be made up
+  ///
+  /// In ar, this message translates to:
+  /// **'دفتر القضاء'**
+  String get trackerQadaTitle;
+
+  /// Qada ledger summary
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا صلوات بانتظار القضاء} =1{صلاة واحدة بانتظار القضاء} =2{صلاتان بانتظار القضاء} few{{count} صلوات بانتظار القضاء} many{{count} صلاة بانتظار القضاء} other{{count} صلاة بانتظار القضاء}}'**
+  String trackerQadaOutstanding(int count);
+
+  /// Qada ledger: prayers already made up (number already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'قُضيت حتى الآن: {count}'**
+  String trackerQadaMadeUpSoFar(String count);
+
+  /// Qada ledger: empty
+  ///
+  /// In ar, this message translates to:
+  /// **'لا صلوات فائتة تنتظر القضاء، بارك الله فيك'**
+  String get trackerQadaEmpty;
+
+  /// Qada ledger: empty for the selected prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'لا قضاء لصلاة {prayer}'**
+  String trackerQadaEmptyFiltered(String prayer);
+
+  /// Qada ledger row: the day it was missed (date already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتت يوم {date}'**
+  String trackerQadaMissedOn(String date);
+
+  /// Qada ledger: reveals the next rows of a long backlog
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{اعرض صلاة أخرى} =2{اعرض صلاتين أخريين} few{اعرض {count} صلوات أخرى} many{اعرض {count} صلاة أخرى} other{اعرض {count} صلاة أخرى}}'**
+  String trackerQadaShowMore(int count);
+
+  /// Qada ledger filter: every prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get trackerFilterAll;
+
+  /// Compact card: open the prayer tracker
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح المتتبّع'**
+  String get trackerCardOpen;
+
+  /// Screen-reader label of a prayer row (all parts already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer}، {time}، {status}'**
+  String trackerSlotSemantics(String prayer, String time, String status);
+
+  /// Joins two short labels
+  ///
+  /// In ar, this message translates to:
+  /// **'{first}، {second}'**
+  String trackerMarks(String first, String second);
+
+  /// When a voluntary prayer's time ends (time already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {time}'**
+  String trackerUntil(String time);
+
+  /// Status of a prayer whose time is running (duration already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقتها · يبقى {duration}'**
+  String trackerDueNow(String duration);
+
+  /// Screen-reader label of a figure (value already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{label}: {value}'**
+  String trackerValueOf(String label, String value);
+
+  /// Title of the adhkar home screen
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذكار'**
+  String get adhkarTitle;
+
+  /// Header of today's adhkar progress (home hero and the Faith card)
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار اليوم'**
+  String get adhkarTodayTitle;
+
+  /// Sets finished today, e.g. 2 of 5 (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String adhkarSetsDoneOf(String done, String total);
+
+  /// Caption under the sets-done count in the hero ring
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعات مكتملة'**
+  String get adhkarSetsDoneCaption;
+
+  /// Adhkar set name
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الصباح'**
+  String get adhkarCategoryMorning;
+
+  /// Adhkar set name
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار المساء'**
+  String get adhkarCategoryEvening;
+
+  /// Adhkar set name
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار بعد الصلاة'**
+  String get adhkarCategoryAfterPrayer;
+
+  /// Adhkar set name
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار النوم'**
+  String get adhkarCategorySleep;
+
+  /// Adhkar set name
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الاستيقاظ'**
+  String get adhkarCategoryWaking;
+
+  /// When the morning adhkar are said
+  ///
+  /// In ar, this message translates to:
+  /// **'من الفجر حتى الضحى'**
+  String get adhkarCategoryMorningHint;
+
+  /// When the evening adhkar are said
+  ///
+  /// In ar, this message translates to:
+  /// **'من العصر إلى ما بعد المغرب'**
+  String get adhkarCategoryEveningHint;
+
+  /// When the after-prayer adhkar are said
+  ///
+  /// In ar, this message translates to:
+  /// **'عقب السلام من كل فريضة'**
+  String get adhkarCategoryAfterPrayerHint;
+
+  /// When the sleep adhkar are said
+  ///
+  /// In ar, this message translates to:
+  /// **'حين تأوي إلى فراشك'**
+  String get adhkarCategorySleepHint;
+
+  /// When the waking adhkar are said
+  ///
+  /// In ar, this message translates to:
+  /// **'حين تستيقظ من نومك'**
+  String get adhkarCategoryWakingHint;
+
+  /// Suggestion in the morning windows
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت أذكار الصباح'**
+  String get adhkarSuggestMorning;
+
+  /// Suggestion in the Asr and Maghrib windows
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت أذكار المساء'**
+  String get adhkarSuggestEvening;
+
+  /// Suggestion after Isha
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار النوم قبل أن تأوي إلى فراشك'**
+  String get adhkarSuggestSleep;
+
+  /// Suggestion for the waking set
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الاستيقاظ'**
+  String get adhkarSuggestWaking;
+
+  /// Suggestion after an obligatory prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار ما بعد صلاة {prayer}'**
+  String adhkarSuggestAfterPrayer(String prayer);
+
+  /// Hero line when every set is done
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتَ أذكار يومك — تقبّل الله'**
+  String get adhkarSuggestAllDone;
+
+  /// Opens a set from the start
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ'**
+  String get adhkarStart;
+
+  /// Resumes a started set
+  ///
+  /// In ar, this message translates to:
+  /// **'تابِع'**
+  String get adhkarContinue;
+
+  /// Resume hint on a set card (position pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'تابِع من الذكر {position}'**
+  String adhkarContinueAt(String position);
+
+  /// Badge on a finished set
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّت اليوم'**
+  String get adhkarDoneToday;
+
+  /// After-prayer sets finished today (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total} صلوات'**
+  String adhkarAfterPrayerProgress(String done, String total);
+
+  /// Number of adhkar in a set
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ذكر واحد} =2{ذكران} few{{count} أذكار} many{{count} ذكرًا} other{{count} ذكر}}'**
+  String adhkarItemsCount(int count);
+
+  /// Long-press / swipe action on a set card
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّت قراءتها'**
+  String get adhkarMarkDone;
+
+  /// Undo toast after marking a set done
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}: تمّت — تقبّل الله'**
+  String adhkarMarkedDone(String name);
+
+  /// Action that clears today's progress of a set
+  ///
+  /// In ar, this message translates to:
+  /// **'البدء من جديد'**
+  String get adhkarRestart;
+
+  /// Undo toast after restarting a set
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأت {name} من جديد'**
+  String adhkarRestarted(String name);
+
+  /// Content credit at the foot of the adhkar home
+  ///
+  /// In ar, this message translates to:
+  /// **'من «حصن المسلم» لسعيد بن علي بن وهف القحطاني'**
+  String get adhkarSourceCredit;
+
+  /// Shown if the bundled adhkar cannot be read
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل الأذكار'**
+  String get adhkarLoadError;
+
+  /// Title of the tasbeeh counter
+  ///
+  /// In ar, this message translates to:
+  /// **'المسبحة'**
+  String get adhkarTasbeehTitle;
+
+  /// Subtitle of the tasbeeh entry card
+  ///
+  /// In ar, this message translates to:
+  /// **'حلقة من الخرز تتقدّم مع كل تسبيحة'**
+  String get adhkarTasbeehCardSubtitle;
+
+  /// Tasbeeh total today (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم: {count}'**
+  String adhkarTasbeehToday(String count);
+
+  /// Section header of the adhkar reminders
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير'**
+  String get adhkarRemindersTitle;
+
+  /// Switch
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني بأذكار الصباح بعد الفجر'**
+  String get adhkarReminderMorningLabel;
+
+  /// Switch
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني بأذكار المساء بعد العصر'**
+  String get adhkarReminderEveningLabel;
+
+  /// Reminder offset pill: how long after the adhan (shown under the caption adhkarReminderOffsetCaption)
+  ///
+  /// In ar, this message translates to:
+  /// **'{minutes, plural, =0{مع الأذان} =1{دقيقة} =2{دقيقتان} few{{minutes} دقائق} many{{minutes} دقيقة} other{{minutes} دقيقة}}'**
+  String adhkarReminderOffset(int minutes);
+
+  /// Caption above the reminder offset pills
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد التذكير بعد الأذان'**
+  String get adhkarReminderOffsetCaption;
+
+  /// Footnote of the reminders section
+  ///
+  /// In ar, this message translates to:
+  /// **'تصلك التذكيرات على الجهاز فقط، متى سمحتَ لمَدار بالإشعارات.'**
+  String get adhkarReminderNote;
+
+  /// Notification title
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الصباح'**
+  String get adhkarReminderMorningTitle;
+
+  /// Notification body
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت أذكار الصباح — ابدأ يومك بذكر الله'**
+  String get adhkarReminderMorningBody;
+
+  /// Notification title
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار المساء'**
+  String get adhkarReminderEveningTitle;
+
+  /// Notification body
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت أذكار المساء — طمأنينةٌ تختم بها نهارك'**
+  String get adhkarReminderEveningBody;
+
+  /// Position of the dhikr in its set (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{index} من {total}'**
+  String adhkarReaderPosition(String index, String total);
+
+  /// Caption under the remaining count in the counter ring
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ'**
+  String get adhkarRemaining;
+
+  /// Caption in the counter ring when the dhikr is finished
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get adhkarCounterDone;
+
+  /// Hint under the counter
+  ///
+  /// In ar, this message translates to:
+  /// **'انقر في أي مكان للعدّ'**
+  String get adhkarCounterHint;
+
+  /// Screen-reader label of the counter ring
+  ///
+  /// In ar, this message translates to:
+  /// **'عُدّ مرة — {done} من {total}'**
+  String adhkarCounterSemantics(String done, String total);
+
+  /// How many times a dhikr is said
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String adhkarRepeat(int count);
+
+  /// Button that ticks off a reading item (whole surahs)
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأتُها'**
+  String get adhkarReadingDone;
+
+  /// Label of the virtue under a dhikr
+  ///
+  /// In ar, this message translates to:
+  /// **'فضلها'**
+  String get adhkarVirtue;
+
+  /// Label of the hadith reference
+  ///
+  /// In ar, this message translates to:
+  /// **'المصدر'**
+  String get adhkarReference;
+
+  /// Label of the English meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'المعنى'**
+  String get adhkarMeaning;
+
+  /// Quran reference under verses, e.g. Surat al-Baqarah · 255 (ayahs pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة {surah}: {ayahs}'**
+  String adhkarQuranRef(String surah, String ayahs);
+
+  /// Surah name
+  ///
+  /// In ar, this message translates to:
+  /// **'البقرة'**
+  String get adhkarSurah2;
+
+  /// Surah name
+  ///
+  /// In ar, this message translates to:
+  /// **'آل عمران'**
+  String get adhkarSurah3;
+
+  /// Surah name
+  ///
+  /// In ar, this message translates to:
+  /// **'الإخلاص'**
+  String get adhkarSurah112;
+
+  /// Surah name
+  ///
+  /// In ar, this message translates to:
+  /// **'الفلق'**
+  String get adhkarSurah113;
+
+  /// Surah name
+  ///
+  /// In ar, this message translates to:
+  /// **'الناس'**
+  String get adhkarSurah114;
+
+  /// Fallback surah label (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم {number}'**
+  String adhkarSurahNumber(String number);
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'الذكر السابق'**
+  String get adhkarPrevious;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'الذكر التالي'**
+  String get adhkarNext;
+
+  /// Screen-reader label of a progress dot (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الذكر {index} من {total}'**
+  String adhkarDhikrSemantics(String index, String total);
+
+  /// Title of the reader options sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات القراءة'**
+  String get adhkarOptionsTitle;
+
+  /// Reader option
+  ///
+  /// In ar, this message translates to:
+  /// **'حجم الخط'**
+  String get adhkarTextSize;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تصغير الخط'**
+  String get adhkarTextSizeSmaller;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تكبير الخط'**
+  String get adhkarTextSizeLarger;
+
+  /// Reader option (English UI only)
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار المعنى بالإنجليزية'**
+  String get adhkarShowTranslation;
+
+  /// Reader option
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار الفضل والمصدر'**
+  String get adhkarShowVirtue;
+
+  /// Reader option
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة عدّ هذا الذكر'**
+  String get adhkarRecountCurrent;
+
+  /// Reader option
+  ///
+  /// In ar, this message translates to:
+  /// **'البدء من أول المجموعة'**
+  String get adhkarRestartSet;
+
+  /// Reader option that marks the set done
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأتُ المجموعة كلّها'**
+  String get adhkarMarkSetDone;
+
+  /// Prayer chip of the after-prayer reader
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد صلاة {prayer}'**
+  String adhkarAfterPrayerFor(String prayer);
+
+  /// Title of the prayer picker of the after-prayer reader
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد أي صلاة؟'**
+  String get adhkarChoosePrayer;
+
+  /// Title of the set-complete view
+  ///
+  /// In ar, this message translates to:
+  /// **'تقبّل الله منك'**
+  String get adhkarSetCompleteTitle;
+
+  /// Body of the set-complete view
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت {name}'**
+  String adhkarSetCompleteBody(String name);
+
+  /// Button on the set-complete view
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة الأذكار'**
+  String get adhkarSetCompleteReview;
+
+  /// Title of the per-dhikr audio sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'التسجيل الصوتي'**
+  String get adhkarAudioTitle;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'إرفاق تسجيل'**
+  String get adhkarAudioAttach;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'استبدال'**
+  String get adhkarAudioReplace;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة'**
+  String get adhkarAudioRemove;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيل التسجيل'**
+  String get adhkarAudioRemoved;
+
+  /// Toast after attaching
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرفق التسجيل'**
+  String get adhkarAudioAttached;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل التسجيل'**
+  String get adhkarAudioPlay;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف التسجيل'**
+  String get adhkarAudioStop;
+
+  /// Empty state of the audio sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تسجيل لهذا الذكر بعد. أرفق ملفًا صوتيًا من جهازك (MP3 أو WAV أو FLAC) لتسمعه هنا.'**
+  String get adhkarAudioNone;
+
+  /// Policy note on the audio sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يستخدم مَدار أصواتًا مولّدة آليًّا للقرآن أو الأذكار؛ أرفق تسجيلًا تثق به، ويبقى على جهازك.'**
+  String get adhkarAudioPolicy;
+
+  /// Error
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الملف ليس بصيغة مدعومة (MP3 أو WAV أو FLAC)'**
+  String get adhkarAudioUnsupported;
+
+  /// Error
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف أكبر من ٣٠ ميغابايت'**
+  String get adhkarAudioTooLarge;
+
+  /// Error
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تشغيل الصوت على هذا الجهاز'**
+  String get adhkarAudioUnavailable;
+
+  /// Attached file line (duration pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}، {duration}'**
+  String adhkarAudioFile(String name, String duration);
+
+  /// Label of the target choice
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الدورة'**
+  String get adhkarTasbeehTarget;
+
+  /// Custom target choice
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصّص'**
+  String get adhkarTasbeehCustom;
+
+  /// Title of the custom target sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد مخصّص للدورة'**
+  String get adhkarTasbeehCustomTitle;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'العدد في كل دورة'**
+  String get adhkarTasbeehCustomField;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل عددًا من ١ إلى ٩٩٩٩'**
+  String get adhkarTasbeehCustomInvalid;
+
+  /// Current round (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورة {round}'**
+  String adhkarTasbeehRound(String round);
+
+  /// Under the count (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'من {target}'**
+  String adhkarTasbeehOf(String target);
+
+  /// Total taps of the session (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع {count}'**
+  String adhkarTasbeehTotal(String count);
+
+  /// Hint under the ring
+  ///
+  /// In ar, this message translates to:
+  /// **'انقر للتسبيح، واضغط مطوّلًا لإعادة العدّ'**
+  String get adhkarTasbeehTapHint;
+
+  /// Screen-reader label of the ring (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{phrase}: {count} من {target}، الدورة {round}'**
+  String adhkarTasbeehCountSemantics(
+    String phrase,
+    String count,
+    String target,
+    String round,
+  );
+
+  /// Screen-reader hint of the ring
+  ///
+  /// In ar, this message translates to:
+  /// **'انقر نقرتين للتسبيح'**
+  String get adhkarTasbeehCountHint;
+
+  /// Title of the reset confirmation
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة العدّ؟'**
+  String get adhkarTasbeehResetTitle;
+
+  /// Body of the reset confirmation (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحفظ عددك ({count}) في السجل، ثم يبدأ العدّ من الصفر.'**
+  String adhkarTasbeehResetBody(String count);
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة العدّ'**
+  String get adhkarTasbeehReset;
+
+  /// Title of the phrase editor
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار المسبحة'**
+  String get adhkarTasbeehPhrases;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الأذكار'**
+  String get adhkarTasbeehEditPhrases;
+
+  /// Button / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة ذكر'**
+  String get adhkarTasbeehAddPhrase;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الذكر'**
+  String get adhkarTasbeehEditPhrase;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'نص الذكر'**
+  String get adhkarTasbeehPhraseField;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الذكر'**
+  String get adhkarTasbeehPhraseDeleted;
+
+  /// Empty state
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ذكرًا لتبدأ التسبيح'**
+  String get adhkarTasbeehNoPhrases;
+
+  /// Title of the history sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ التسبيح'**
+  String get adhkarTasbeehHistory;
+
+  /// Empty history
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل جلسات بعد'**
+  String get adhkarTasbeehHistoryEmpty;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الجلسة'**
+  String get adhkarTasbeehSessionDeleted;
+
+  /// Rounds of a history session
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{دون دورة كاملة} =1{دورة واحدة} =2{دورتان} few{{count} دورات} many{{count} دورة} other{{count} دورة}}'**
+  String adhkarTasbeehRounds(int count);
+
+  /// English meaning of a built-in tasbeeh phrase (shown in the English UI)
+  ///
+  /// In ar, this message translates to:
+  /// **'سبحان الله'**
+  String get adhkarPhraseSubhanallah;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'الحمد لله'**
+  String get adhkarPhraseAlhamdulillah;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'الله أكبر'**
+  String get adhkarPhraseAllahuakbar;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'لا إله إلا الله'**
+  String get adhkarPhraseTahlil;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'أستغفر الله'**
+  String get adhkarPhraseIstighfar;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'سبحان الله وبحمده'**
+  String get adhkarPhraseSubhanallahWaBihamdihi;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'سبحان الله العظيم'**
+  String get adhkarPhraseSubhanallahilAzim;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حول ولا قوة إلا بالله'**
+  String get adhkarPhraseHawqala;
+
+  /// English meaning of a built-in tasbeeh phrase
+  ///
+  /// In ar, this message translates to:
+  /// **'اللهم صل وسلم على نبينا محمد'**
+  String get adhkarPhraseSalawat;
+
+  /// Link from the Faith card to the adhkar home
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الأذكار'**
+  String get adhkarAllAdhkar;
+
+  /// Short set label under a small ring (Faith card)
+  ///
+  /// In ar, this message translates to:
+  /// **'الصباح'**
+  String get adhkarShortMorning;
+
+  /// Short set label
+  ///
+  /// In ar, this message translates to:
+  /// **'المساء'**
+  String get adhkarShortEvening;
+
+  /// Short set label
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الصلاة'**
+  String get adhkarShortAfterPrayer;
+
+  /// Short set label
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم'**
+  String get adhkarShortSleep;
+
+  /// Short set label
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستيقاظ'**
+  String get adhkarShortWaking;
+
+  /// Joins two short facts on one line. Arabic uses a comma because a middle dot reads like the Arabic-Indic zero
+  ///
+  /// In ar, this message translates to:
+  /// **'{first}، {second}'**
+  String adhkarJoin(String first, String second);
+
+  /// Chip on the Faith card with today's tasbeeh total (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'المسبحة: {count}'**
+  String adhkarTasbeehChip(String count);
+
+  /// Faith card line: the suggested set plus how many sets are finished (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{suggestion} (أُنجز {done} من {total})'**
+  String adhkarTodayLine(String suggestion, String done, String total);
+
+  /// Android notification channel name (system settings) of the adhkar reminders
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الأذكار'**
+  String get adhkarReminderChannelName;
+
+  /// Android notification channel description of the adhkar reminders
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكيرٌ بأذكار الصباح بعد الفجر وبأذكار المساء بعد العصر'**
+  String get adhkarReminderChannelDescription;
+
+  /// Shown in the reminders card when a reminder is on but notifications were refused
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعارات مَدار متوقفة، فلن يصلك التذكير. يمكنك تفعيلها من إعدادات الجهاز.'**
+  String get adhkarReminderPermissionDenied;
+
+  /// Hero line when the set that fits the moment is already finished (set = morning | evening | sleep | waking | afterPrayer)
+  ///
+  /// In ar, this message translates to:
+  /// **'{set, select, morning{أتممتَ أذكار الصباح — تقبّل الله} evening{أتممتَ أذكار المساء — تقبّل الله} sleep{أتممتَ أذكار النوم — تصبح على خير} waking{أتممتَ أذكار الاستيقاظ — يومٌ مبارك} other{أتممتَ الأذكار — تقبّل الله}}'**
+  String adhkarSuggestDone(String set);
+
+  /// Hero line when the after-prayer adhkar of the prayer just due are finished
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتَ أذكار ما بعد صلاة {prayer} — تقبّل الله'**
+  String adhkarSuggestAfterPrayerDone(String prayer);
+
+  /// Next prayer card: the prayer time
+  ///
+  /// In ar, this message translates to:
+  /// **'عند {time}'**
+  String faithHubAt(String time);
+
+  /// Faith page: section of links
+  ///
+  /// In ar, this message translates to:
+  /// **'روابط سريعة'**
+  String get faithHubLinksTitle;
+
+  /// Link hint: prayer times
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم والشهر والتاريخ الهجري'**
+  String get faithHubTimesHint;
+
+  /// Link: the tracker history tab
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ الصلوات'**
+  String get faithHubHistory;
+
+  /// Link hint: tracker history
+  ///
+  /// In ar, this message translates to:
+  /// **'السلاسل والقضاء والإحصاءات'**
+  String get faithHubHistoryHint;
+
+  /// Link hint: adhkar
+  ///
+  /// In ar, this message translates to:
+  /// **'حصن المسلم'**
+  String get faithHubAdhkarHint;
+
+  /// Link hint: tasbeeh
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّاد بالخرز'**
+  String get faithHubTasbeehHint;
+
+  /// Link hint: adhan settings
+  ///
+  /// In ar, this message translates to:
+  /// **'المؤذّن والتذكير والأذونات'**
+  String get faithHubAdhanHint;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

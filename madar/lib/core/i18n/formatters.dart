@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart' show MaterialLocalizations;
+import 'package:flutter/foundation.dart' show SynchronousFuture;
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 import '../settings/app_settings.dart' show DigitStyle;
 import 'gen/app_localizations.dart';
@@ -37,6 +40,17 @@ abstract final class Digits {
       } else {
         out.writeCharCode(c);
       }
+    }
+    return out.toString();
+  }
+
+  /// Western → Arabic-Indic digits only; every other character – dots
+  /// included – is kept (version numbers and codes: `0.1.0` → `٠.١.٠`).
+  static String toArabicIndicDigitsOnly(String input) {
+    if (input.isEmpty) return input;
+    final out = StringBuffer();
+    for (final c in input.codeUnits) {
+      out.writeCharCode(_isWestern(c) ? arabicIndic.codeUnitAt(c - 0x30) : c);
     }
     return out.toString();
   }
@@ -100,6 +114,52 @@ abstract final class BidiIsolate {
   /// Removes every isolate / embedding control character (for comparisons,
   /// search and clipboard text).
   static String strip(String text) => text.replaceAll(_controls, '');
+
+  /// The direction of [text]'s first strong character – what HTML's
+  /// `dir="auto"` picks – or null when it has none (digits, symbols, empty).
+  ///
+  /// Follows the Unicode bidi rule P2: only letters are strong (Arabic-Indic
+  /// digits, harakat, punctuation and emoji are not), LRM / RLM / ALM count,
+  /// and text inside an isolate (FSI / LRI / RLI … PDI) is skipped – unless
+  /// nothing outside one is strong, then the isolate's own text decides.
+  ///
+  /// Give it to a [Text] that shows the user's own words (task titles,
+  /// names, notes), together with a `textAlign` that follows the UI, so that
+  /// "Call Mum!" in an Arabic layout keeps its "!" at the end and an Arabic
+  /// note in an English layout reads right to left.
+  static TextDirection? directionOf(String text) => _firstStrong(text, skipIsolates: true) ?? _firstStrong(text);
+
+  static TextDirection? _firstStrong(String text, {bool skipIsolates = false}) {
+    var depth = 0;
+    for (final rune in text.runes) {
+      if (rune >= 0x2066 && rune <= 0x2068) {
+        depth++;
+        continue;
+      }
+      if (rune == 0x2069) {
+        if (depth > 0) depth--;
+        continue;
+      }
+      if (skipIsolates && depth > 0) continue;
+      if (rune == 0x200F || rune == 0x061C) return TextDirection.rtl; // RLM, ALM
+      if (rune == 0x200E) return TextDirection.ltr; // LRM
+      if (rune < 0x41) continue; // ASCII digits, spaces and punctuation
+      final c = String.fromCharCode(rune);
+      if (!_letter.hasMatch(c)) continue;
+      return _rtlScript.hasMatch(c) ? TextDirection.rtl : TextDirection.ltr;
+    }
+    return null;
+  }
+
+  /// Any letter (the strong bidi classes L, R and AL are letters).
+  static final RegExp _letter = RegExp(r'\p{L}', unicode: true);
+
+  /// Scripts written right to left.
+  static final RegExp _rtlScript = RegExp(
+    r'[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Script=Thaana}\p{Script=Nko}'
+    r'\p{Script=Samaritan}\p{Script=Mandaic}\p{Script=Adlam}\p{Script=Hanifi_Rohingya}]',
+    unicode: true,
+  );
 
   static final RegExp _controls = RegExp('[\u2066-\u2069\u202A-\u202E\u200E\u200F]');
 }
@@ -234,6 +294,11 @@ class MadarFormatter {
   /// Wraps [text] in a first-strong isolate (see [BidiIsolate.isolate]).
   String isolate(String text) => BidiIsolate.isolate(text);
 
+  /// A version number or dotted code in the active digits, separators kept
+  /// and forced left-to-right (LRI … PDI): `0.1.0` → `٠.١.٠` / `0.1.0`.
+  String formatVersion(String version) =>
+      BidiIsolate.ltr(arabicIndic ? Digits.toArabicIndicDigitsOnly(version) : Digits.toWestern(version));
+
   DateFormat _dateFormat(DateFormat Function(String locale) build) {
     try {
       return build(languageCode);
@@ -269,16 +334,95 @@ class MadarFormatter {
 
 /// Provides the user's [DigitStyle] to [MadarFormatter.of]. The app shell
 /// inserts it once above the navigator.
-class MadarFormatScope extends InheritedWidget {
-  const MadarFormatScope({super.key, required this.digits, required super.child});
+class MadarFormatScope extends StatelessWidget {
+  const MadarFormatScope({super.key, required this.digits, required this.child});
+
+  final DigitStyle digits;
+  final Widget child;
+
+  static DigitStyle digitsOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_MadarFormatInherited>()?.digits ?? DigitStyle.auto;
+
+  @override
+  Widget build(BuildContext context) {
+    final scoped = _MadarFormatInherited(digits: digits, child: child);
+    // Material's own number and date text – the calendar of a date field,
+    // its month header – follows the digit style too (left to intl's `ar`
+    // data, Material heads an Arabic calendar "سبتمبر ٢٠٢٦" over days
+    // 1 … 30, whatever the user chose).
+    final locale = Localizations.maybeLocaleOf(context);
+    if (locale == null) return scoped;
+    return Localizations.override(
+      context: context,
+      delegates: [
+        MadarMaterialDigitsDelegate(
+          arabicIndic: MadarFormatter(languageCode: locale.languageCode, digits: digits).arabicIndic,
+        ),
+      ],
+      child: scoped,
+    );
+  }
+}
+
+class _MadarFormatInherited extends InheritedWidget {
+  const _MadarFormatInherited({required this.digits, required super.child});
 
   final DigitStyle digits;
 
-  static DigitStyle digitsOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<MadarFormatScope>()?.digits ?? DigitStyle.auto;
+  @override
+  bool updateShouldNotify(_MadarFormatInherited oldWidget) => oldWidget.digits != digits;
+}
+
+/// Material localisations whose digits follow the user's style. Material
+/// formats with intl's plain language data – for Arabic that is Arabic-Indic
+/// dates but Western numbers (a calendar headed "سبتمبر ٢٠٢٦" over days
+/// 1 … 30) – so this rebuilds its formats with the digits chosen: dates with
+/// or without native digits, numbers from Egyptian Arabic data (the same
+/// grouping, with ٠–٩) or the plain language. An English UI with
+/// Arabic-Indic digits keeps Western digits here (no English locale data
+/// writes ٠–٩).
+class MadarMaterialDigitsDelegate extends LocalizationsDelegate<MaterialLocalizations> {
+  const MadarMaterialDigitsDelegate({required this.arabicIndic});
+
+  final bool arabicIndic;
+
+  /// The intl locale Material's numbers are formatted with for [locale].
+  Locale localeFor(Locale locale) =>
+      arabicIndic && locale.languageCode == 'ar' ? const Locale('ar', 'EG') : Locale(locale.languageCode);
+
+  static final Map<(String, bool), MaterialLocalizations> _cache = {};
 
   @override
-  bool updateShouldNotify(MadarFormatScope oldWidget) => oldWidget.digits != digits;
+  bool isSupported(Locale locale) => GlobalMaterialLocalizations.delegate.isSupported(locale);
+
+  @override
+  Future<MaterialLocalizations> load(Locale locale) {
+    final lang = locale.languageCode;
+    final hit = _cache[(lang, arabicIndic)];
+    if (hit != null) return SynchronousFuture(hit);
+    // Loads intl's date data (synchronously) and is the fallback.
+    final plain = GlobalMaterialLocalizations.delegate.load(Locale(lang));
+    final numbers = localeFor(locale).toString();
+    if (!DateFormat.localeExists(lang) || !NumberFormat.localeExists(numbers)) return plain;
+    DateFormat d(DateFormat f) => f..useNativeDigits = arabicIndic;
+    final built = getMaterialTranslation(
+      Locale(lang),
+      d(DateFormat.y(lang)),
+      d(DateFormat.yMd(lang)),
+      d(DateFormat.yMMMd(lang)),
+      d(DateFormat.MMMEd(lang)),
+      d(DateFormat.yMMMMEEEEd(lang)),
+      d(DateFormat.yMMMM(lang)),
+      d(DateFormat.MMMd(lang)),
+      NumberFormat.decimalPattern(numbers),
+      NumberFormat('00', numbers),
+    );
+    if (built == null) return plain;
+    return SynchronousFuture(_cache[(lang, arabicIndic)] = built);
+  }
+
+  @override
+  bool shouldReload(MadarMaterialDigitsDelegate old) => old.arabicIndic != arabicIndic;
 }
 
 extension MadarFormatterContext on BuildContext {

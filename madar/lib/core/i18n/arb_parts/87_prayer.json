@@ -1,0 +1,878 @@
+{
+  "ptTitle": {
+    "ar": "مواقيت الصلاة",
+    "en": "Prayer times",
+    "description": "Prayer times screen title"
+  },
+  "ptSettingsTitle": {
+    "ar": "إعدادات المواقيت",
+    "en": "Prayer time settings"
+  },
+  "ptOpenSettings": {
+    "ar": "إعدادات المواقيت",
+    "en": "Prayer time settings",
+    "description": "Tooltip of the settings button on the prayer times screen"
+  },
+  "ptFajr": {
+    "ar": "الفجر",
+    "en": "Fajr"
+  },
+  "ptSunrise": {
+    "ar": "الشروق",
+    "en": "Sunrise"
+  },
+  "ptDuha": {
+    "ar": "الضحى",
+    "en": "Duha"
+  },
+  "ptDhuhr": {
+    "ar": "الظهر",
+    "en": "Dhuhr"
+  },
+  "ptJumuah": {
+    "ar": "الجمعة",
+    "en": "Jumu’ah",
+    "description": "Dhuhr on Fridays"
+  },
+  "ptAsr": {
+    "ar": "العصر",
+    "en": "Asr"
+  },
+  "ptMaghrib": {
+    "ar": "المغرب",
+    "en": "Maghrib"
+  },
+  "ptIsha": {
+    "ar": "العشاء",
+    "en": "Isha"
+  },
+  "ptMidnight": {
+    "ar": "منتصف الليل",
+    "en": "Midnight"
+  },
+  "ptLastThird": {
+    "ar": "الثلث الأخير",
+    "en": "Last third"
+  },
+  "ptSunriseHint": {
+    "ar": "ينتهي وقت الفجر",
+    "en": "Fajr time ends"
+  },
+  "ptDuhaHint": {
+    "ar": "بعد الشروق بربع ساعة",
+    "en": "A quarter hour after sunrise"
+  },
+  "ptMidnightHint": {
+    "ar": "منتصف ما بين المغرب والفجر",
+    "en": "Halfway from Maghrib to Fajr"
+  },
+  "ptLastThirdHint": {
+    "ar": "وقت قيام الليل",
+    "en": "The time for Qiyam"
+  },
+  "ptNightSection": {
+    "ar": "الليل وقيامه",
+    "en": "The night & Qiyam"
+  },
+  "ptNow": {
+    "ar": "الآن",
+    "en": "Now"
+  },
+  "ptNextPrayer": {
+    "ar": "الصلاة القادمة",
+    "en": "Next prayer"
+  },
+  "ptNextIn": {
+    "ar": "يحين وقت {prayer} بعد",
+    "en": "{prayer} in",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    },
+    "description": "Followed by a live countdown"
+  },
+  "ptAtTime": {
+    "ar": "عند {time}",
+    "en": "at {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ptItsTime": {
+    "ar": "حان وقت {prayer}",
+    "en": "It's time for {prayer}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCurrentWindow": {
+    "ar": "الوقت الحالي: {window}",
+    "en": "Now: {window}",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCountdownSemantics": {
+    "ar": "يحين وقت {prayer} بعد {duration}",
+    "en": "{prayer} in {duration}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ptToday": {
+    "ar": "اليوم",
+    "en": "Today"
+  },
+  "ptTomorrow": {
+    "ar": "غدًا",
+    "en": "Tomorrow"
+  },
+  "ptYesterday": {
+    "ar": "أمس",
+    "en": "Yesterday"
+  },
+  "ptTonight": {
+    "ar": "الليلة",
+    "en": "Tonight",
+    "description": "Day-view title of the night still running after midnight (the previous date's prayer day, until Fajr)"
+  },
+  "ptPrevDay": {
+    "ar": "اليوم السابق",
+    "en": "Previous day"
+  },
+  "ptNextDay": {
+    "ar": "اليوم التالي",
+    "en": "Next day"
+  },
+  "ptBackToToday": {
+    "ar": "العودة إلى اليوم",
+    "en": "Back to today"
+  },
+  "ptViewDay": {
+    "ar": "اليوم",
+    "en": "Day",
+    "description": "Segment: one day's times"
+  },
+  "ptViewMonth": {
+    "ar": "الشهر",
+    "en": "Month",
+    "description": "Segment: the month table"
+  },
+  "ptPrevMonth": {
+    "ar": "الشهر السابق",
+    "en": "Previous month"
+  },
+  "ptNextMonth": {
+    "ar": "الشهر التالي",
+    "en": "Next month"
+  },
+  "ptMonthDay": {
+    "ar": "اليوم",
+    "en": "Day",
+    "description": "Month table: the date column"
+  },
+  "ptMonthHijriSpan": {
+    "ar": "{from} – {to}",
+    "en": "{from} – {to}",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAm": {
+    "ar": "ص",
+    "en": "AM"
+  },
+  "ptPm": {
+    "ar": "م",
+    "en": "PM"
+  },
+  "ptClockHours": {
+    "ar": "{hours} ساعة",
+    "en": "{hours}-hour",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "ptMinutesSigned": {
+    "ar": "{minutes} د",
+    "en": "{minutes} min",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptHijriDate": {
+    "ar": "{day} {month} {year} هـ",
+    "en": "{day} {month} {year} AH",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "ptHijriDayMonth": {
+    "ar": "{day} {month}",
+    "en": "{day} {month}",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "ptHijriMonth1": {
+    "ar": "محرّم",
+    "en": "Muharram"
+  },
+  "ptHijriMonth2": {
+    "ar": "صفر",
+    "en": "Safar"
+  },
+  "ptHijriMonth3": {
+    "ar": "ربيع الأول",
+    "en": "Rabi’ al-Awwal"
+  },
+  "ptHijriMonth4": {
+    "ar": "ربيع الآخر",
+    "en": "Rabi’ al-Akhir"
+  },
+  "ptHijriMonth5": {
+    "ar": "جمادى الأولى",
+    "en": "Jumada al-Ula"
+  },
+  "ptHijriMonth6": {
+    "ar": "جمادى الآخرة",
+    "en": "Jumada al-Akhirah"
+  },
+  "ptHijriMonth7": {
+    "ar": "رجب",
+    "en": "Rajab"
+  },
+  "ptHijriMonth8": {
+    "ar": "شعبان",
+    "en": "Sha’ban"
+  },
+  "ptHijriMonth9": {
+    "ar": "رمضان",
+    "en": "Ramadan"
+  },
+  "ptHijriMonth10": {
+    "ar": "شوّال",
+    "en": "Shawwal"
+  },
+  "ptHijriMonth11": {
+    "ar": "ذو القعدة",
+    "en": "Dhu al-Qa’dah"
+  },
+  "ptHijriMonth12": {
+    "ar": "ذو الحجة",
+    "en": "Dhu al-Hijjah"
+  },
+  "ptLocationTitle": {
+    "ar": "موقعك",
+    "en": "Your location"
+  },
+  "ptLocationSubtitle": {
+    "ar": "تُحسب المواقيت على جهازك، دون إنترنت",
+    "en": "Times are calculated on your device, offline"
+  },
+  "ptLocationDefault": {
+    "ar": "{city} (افتراضي)",
+    "en": "{city} (default)",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "ptLocationNear": {
+    "ar": "قرب {city}",
+    "en": "Near {city}",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "ptPlaceWithCountry": {
+    "ar": "{city}، {country}",
+    "en": "{city}, {country}",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "ptPinnedLocation": {
+    "ar": "موقع محدّد",
+    "en": "Pinned location"
+  },
+  "ptDefaultCityName": {
+    "ar": "عمّان",
+    "en": "Amman",
+    "description": "Name of the generic default location"
+  },
+  "ptSourceGps": {
+    "ar": "من موقعك الحالي",
+    "en": "From your current location"
+  },
+  "ptSourceCity": {
+    "ar": "مدينة مختارة",
+    "en": "Chosen city"
+  },
+  "ptSourceDefault": {
+    "ar": "الموقع الافتراضي – اختر موقعك",
+    "en": "Default location – choose yours"
+  },
+  "ptCoordinates": {
+    "ar": "{lat}، {lon}",
+    "en": "{lat}, {lon}",
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
+  "ptTimeZoneLabel": {
+    "ar": "المنطقة الزمنية: {zone}",
+    "en": "Time zone: {zone}",
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "ptTimeZoneDevice": {
+    "ar": "توقيت الجهاز",
+    "en": "Device time"
+  },
+  "ptZoneOffset": {
+    "ar": "غرينتش {offset}",
+    "en": "GMT{offset}",
+    "placeholders": {
+      "offset": {
+        "type": "String"
+      }
+    }
+  },
+  "ptZoneDiffers": {
+    "ar": "المواقيت بتوقيت {place}",
+    "en": "Times in {place} time",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "ptUseCurrentLocation": {
+    "ar": "استخدم موقعي الحالي",
+    "en": "Use my current location"
+  },
+  "ptUseCurrentLocationHint": {
+    "ar": "تحديد تقريبي لمرة واحدة، يبقى على جهازك",
+    "en": "A one-time approximate fix that stays on your device"
+  },
+  "ptChooseCity": {
+    "ar": "اختر مدينة",
+    "en": "Choose a city"
+  },
+  "ptChooseCityHint": {
+    "ar": "بحث بالعربية أو الإنجليزية، دون إنترنت",
+    "en": "Search in Arabic or English, offline"
+  },
+  "ptRationaleTitle": {
+    "ar": "نحتاج موقعك التقريبي",
+    "en": "We need your approximate location"
+  },
+  "ptRationaleBody": {
+    "ar": "ليحسب مَدار مواقيت الصلاة بدقة يطلب موقعك مرة واحدة. يُحفظ مشفّرًا على جهازك ولا يُرسَل إلى أي مكان.",
+    "en": "To calculate prayer times precisely, Madar asks for your location once. It is stored encrypted on your device and never sent anywhere."
+  },
+  "ptRationaleAllow": {
+    "ar": "السماح بالموقع",
+    "en": "Allow location"
+  },
+  "ptRequesting": {
+    "ar": "بانتظار إذنك…",
+    "en": "Waiting for your permission…"
+  },
+  "ptLocating": {
+    "ar": "نحدّد موقعك…",
+    "en": "Finding your location…"
+  },
+  "ptDeniedTitle": {
+    "ar": "لم يُمنح إذن الموقع",
+    "en": "Location permission not granted"
+  },
+  "ptDeniedBody": {
+    "ar": "يمكنك المحاولة مجددًا، أو اختيار مدينتك من القائمة.",
+    "en": "You can try again, or choose your city from the list."
+  },
+  "ptTryAgain": {
+    "ar": "حاول مجددًا",
+    "en": "Try again"
+  },
+  "ptDeniedForeverTitle": {
+    "ar": "إذن الموقع مغلق",
+    "en": "Location permission is off"
+  },
+  "ptDeniedForeverBody": {
+    "ar": "فعّله من إعدادات التطبيق في النظام، أو اختر مدينتك يدويًا.",
+    "en": "Turn it on in the app's system settings, or choose your city manually."
+  },
+  "ptOpenAppSettings": {
+    "ar": "فتح إعدادات التطبيق",
+    "en": "Open app settings"
+  },
+  "ptServiceOffTitle": {
+    "ar": "خدمة الموقع متوقفة",
+    "en": "Location services are off"
+  },
+  "ptServiceOffBody": {
+    "ar": "شغّل الموقع من إعدادات الجهاز ثم عُد إلى هنا، أو اختر مدينتك.",
+    "en": "Turn on location in the device settings and come back, or choose your city."
+  },
+  "ptOpenLocationSettings": {
+    "ar": "إعدادات الموقع",
+    "en": "Location settings"
+  },
+  "ptUnsupportedBody": {
+    "ar": "تحديد الموقع غير متاح على هذا الجهاز. اختر مدينتك من القائمة.",
+    "en": "Location isn't available on this device. Choose your city from the list."
+  },
+  "ptFailedTitle": {
+    "ar": "تعذّر تحديد الموقع",
+    "en": "Couldn't find your location"
+  },
+  "ptFailedBody": {
+    "ar": "قد تكون الإشارة ضعيفة. حاول مجددًا في مكان مكشوف، أو اختر مدينتك.",
+    "en": "The signal may be weak. Try again in the open, or choose your city."
+  },
+  "ptLocationChanged": {
+    "ar": "صار الموقع: {place}",
+    "en": "Location set to {place}",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCitySearchHint": {
+    "ar": "ابحث عن مدينة…",
+    "en": "Search for a city…"
+  },
+  "ptCitySearchEmpty": {
+    "ar": "لا مدينة بهذا الاسم",
+    "en": "No city by that name"
+  },
+  "ptCitySearchEmptyHint": {
+    "ar": "جرّب اسمًا آخر أو كتابة أقصر",
+    "en": "Try another name or a shorter spelling"
+  },
+  "ptCitySuggestions": {
+    "ar": "مدن مقترحة",
+    "en": "Suggested cities"
+  },
+  "ptCityResults": {
+    "ar": "النتائج",
+    "en": "Results"
+  },
+  "ptCitySelected": {
+    "ar": "المختارة",
+    "en": "Selected"
+  },
+  "ptSectionLocation": {
+    "ar": "الموقع",
+    "en": "Location"
+  },
+  "ptSectionMethod": {
+    "ar": "طريقة الحساب",
+    "en": "Calculation method"
+  },
+  "ptSectionMethodHint": {
+    "ar": "تختلف الطرق أساسًا في زاويتي الفجر والعشاء",
+    "en": "Methods differ mainly in the Fajr and Isha angles"
+  },
+  "ptSectionAsr": {
+    "ar": "صلاة العصر",
+    "en": "Asr"
+  },
+  "ptAsrStandard": {
+    "ar": "الجمهور",
+    "en": "Standard"
+  },
+  "ptAsrHanafi": {
+    "ar": "الحنفي",
+    "en": "Hanafi"
+  },
+  "ptAsrNote": {
+    "ar": "عند الجمهور (الشافعية والمالكية والحنابلة) يبدأ العصر حين يصير ظل الشيء مثله، وعند الحنفية مثليه.",
+    "en": "Standard (Shafi’i, Maliki, Hanbali): Asr begins when an object's shadow equals its length; Hanafi: twice its length."
+  },
+  "ptSectionHighLat": {
+    "ar": "خطوط العرض العليا",
+    "en": "High latitudes"
+  },
+  "ptHighLatAuto": {
+    "ar": "تلقائي",
+    "en": "Automatic"
+  },
+  "ptHighLatMiddle": {
+    "ar": "منتصف الليل",
+    "en": "Middle of the night"
+  },
+  "ptHighLatSeventh": {
+    "ar": "سُبع الليل",
+    "en": "One-seventh of the night"
+  },
+  "ptHighLatAngle": {
+    "ar": "زاوية الشفق",
+    "en": "Twilight angle"
+  },
+  "ptHighLatNote": {
+    "ar": "حيث لا يغيب الشفق صيفًا يُقدَّر الفجر والعشاء بجزء من الليل. التلقائي يختار سُبع الليل شمال خط العرض {degrees} تقريبًا.",
+    "en": "Where twilight never ends in summer, Fajr and Isha are estimated from a portion of the night. Automatic uses one-seventh above about {degrees} latitude.",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSectionAdjustments": {
+    "ar": "تعديلات يدوية",
+    "en": "Manual adjustments"
+  },
+  "ptAdjustmentsNote": {
+    "ar": "أضِف دقائق أو اطرحها لتوافق تقويم مسجدك.",
+    "en": "Add or subtract minutes to match your mosque's timetable."
+  },
+  "ptResetAdjustments": {
+    "ar": "تصفير",
+    "en": "Reset"
+  },
+  "ptAdjustmentsReset": {
+    "ar": "صُفّرت التعديلات اليدوية",
+    "en": "Manual adjustments reset"
+  },
+  "ptSectionHijri": {
+    "ar": "التاريخ الهجري",
+    "en": "Hijri date"
+  },
+  "ptHijriOffset": {
+    "ar": "تعديل اليوم الهجري",
+    "en": "Hijri day adjustment"
+  },
+  "ptHijriOffsetNote": {
+    "ar": "حسب تقويم أم القرى؛ عدّله يومًا أو يومين ليوافق رؤية الهلال في بلدك.",
+    "en": "Based on the Umm al-Qura calendar; shift it by a day or two to match the moon sighting where you live."
+  },
+  "ptHijriAtMaghrib": {
+    "ar": "يبدأ اليوم الهجري عند المغرب",
+    "en": "Hijri day begins at Maghrib"
+  },
+  "ptHijriAtMaghribHint": {
+    "ar": "كما يُحسب اليوم شرعًا، من غروب إلى غروب",
+    "en": "The Islamic day runs from sunset to sunset"
+  },
+  "ptSectionDisplay": {
+    "ar": "العرض",
+    "en": "Display"
+  },
+  "ptClockFormat": {
+    "ar": "نظام الساعة",
+    "en": "Clock"
+  },
+  "ptPreviewTitle": {
+    "ar": "مواقيت اليوم",
+    "en": "Today's times"
+  },
+  "ptPreviewHint": {
+    "ar": "تتحدّث مع كل تغيير",
+    "en": "Updates with every change"
+  },
+  "ptMethodSheetTitle": {
+    "ar": "طريقة الحساب",
+    "en": "Calculation method"
+  },
+  "ptMethodSuggested": {
+    "ar": "مقترحة لموقعك",
+    "en": "Suggested for your location"
+  },
+  "ptMethodDefault": {
+    "ar": "الافتراضية",
+    "en": "Default"
+  },
+  "ptMethodChanged": {
+    "ar": "صارت طريقة الحساب: {method}",
+    "en": "Method set to {method}",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    },
+    "description": "Undo toast after picking a calculation method"
+  },
+  "ptMethodJordan": {
+    "ar": "وزارة الأوقاف الأردنية",
+    "en": "Jordan – Ministry of Awqaf"
+  },
+  "ptMethodMuslimWorldLeague": {
+    "ar": "رابطة العالم الإسلامي",
+    "en": "Muslim World League"
+  },
+  "ptMethodUmmAlQura": {
+    "ar": "أم القرى – مكة المكرمة",
+    "en": "Umm al-Qura – Makkah"
+  },
+  "ptMethodEgyptian": {
+    "ar": "الهيئة المصرية العامة للمساحة",
+    "en": "Egyptian General Authority of Survey"
+  },
+  "ptMethodKarachi": {
+    "ar": "جامعة العلوم الإسلامية – كراتشي",
+    "en": "University of Islamic Sciences, Karachi"
+  },
+  "ptMethodNorthAmerica": {
+    "ar": "الجمعية الإسلامية لأمريكا الشمالية",
+    "en": "ISNA – North America"
+  },
+  "ptMethodDubai": {
+    "ar": "دبي – الإمارات",
+    "en": "Dubai – UAE"
+  },
+  "ptMethodKuwait": {
+    "ar": "الكويت",
+    "en": "Kuwait"
+  },
+  "ptMethodQatar": {
+    "ar": "قطر",
+    "en": "Qatar"
+  },
+  "ptMethodTurkiye": {
+    "ar": "رئاسة الشؤون الدينية التركية",
+    "en": "Türkiye – Diyanet"
+  },
+  "ptMethodSingapore": {
+    "ar": "سنغافورة",
+    "en": "Singapore"
+  },
+  "ptMethodTehran": {
+    "ar": "معهد الجيوفيزياء – طهران",
+    "en": "Institute of Geophysics, Tehran"
+  },
+  "ptMethodGulfRegion": {
+    "ar": "منطقة الخليج",
+    "en": "Gulf region"
+  },
+  "ptMethodMoonsightingCommittee": {
+    "ar": "لجنة رؤية الهلال",
+    "en": "Moonsighting Committee"
+  },
+  "ptMethodAlgerian": {
+    "ar": "وزارة الشؤون الدينية الجزائرية",
+    "en": "Algeria – Ministry of Religious Affairs"
+  },
+  "ptMethodMorocco": {
+    "ar": "وزارة الأوقاف المغربية",
+    "en": "Morocco – Ministry of Habous"
+  },
+  "ptMethodTunisia": {
+    "ar": "وزارة الشؤون الدينية التونسية",
+    "en": "Tunisia – Ministry of Religious Affairs"
+  },
+  "ptMethodFrance": {
+    "ar": "اتحاد المنظمات الإسلامية في فرنسا",
+    "en": "France – UOIF"
+  },
+  "ptMethodRussia": {
+    "ar": "الإدارة الدينية لمسلمي روسيا",
+    "en": "Russia – Spiritual Administration"
+  },
+  "ptMethodIndonesian": {
+    "ar": "وزارة الشؤون الدينية الإندونيسية",
+    "en": "Indonesia – KEMENAG"
+  },
+  "ptMethodJafari": {
+    "ar": "الجعفري – معهد ليفا، قم",
+    "en": "Jafari – Leva Institute, Qum"
+  },
+  "ptMethodCustom": {
+    "ar": "زوايا مخصّصة",
+    "en": "Custom angles"
+  },
+  "ptMethodCustomHint": {
+    "ar": "حدّد زاويتي الفجر والعشاء بنفسك",
+    "en": "Set the Fajr and Isha angles yourself"
+  },
+  "ptSummaryAngle": {
+    "ar": "{prayer} {angle}",
+    "en": "{prayer} {angle}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "angle": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryIshaInterval": {
+    "ar": "العشاء بعد المغرب بـ{minutes} د",
+    "en": "Isha {minutes} min after Maghrib",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryRamadan": {
+    "ar": "في رمضان بعد المغرب بـ{minutes} د",
+    "en": "{minutes} min in Ramadan",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryOffset": {
+    "ar": "{prayer} {minutes} د",
+    "en": "{prayer} {minutes} min",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ptSummaryMaghribAngle": {
+    "ar": "المغرب {angle}",
+    "en": "Maghrib {angle}",
+    "placeholders": {
+      "angle": {
+        "type": "String"
+      }
+    }
+  },
+  "ptCustomFajrAngle": {
+    "ar": "زاوية الفجر",
+    "en": "Fajr angle"
+  },
+  "ptCustomIshaAngle": {
+    "ar": "زاوية العشاء",
+    "en": "Isha angle"
+  },
+  "ptCustomIshaByInterval": {
+    "ar": "العشاء بعد المغرب بمدة ثابتة",
+    "en": "Isha a fixed time after Maghrib"
+  },
+  "ptCustomIshaInterval": {
+    "ar": "المدة بعد المغرب",
+    "en": "Time after Maghrib"
+  },
+  "ptIncrease": {
+    "ar": "زيادة",
+    "en": "Increase"
+  },
+  "ptDecrease": {
+    "ar": "إنقاص",
+    "en": "Decrease"
+  },
+  "ptUndoSettings": {
+    "ar": "أُعيدت الإعدادات السابقة",
+    "en": "Previous settings restored"
+  },
+  "ptAsrRule": {
+    "ar": "بداية وقت العصر",
+    "en": "When Asr begins"
+  },
+  "ptHighLatRule": {
+    "ar": "طريقة التقدير",
+    "en": "Estimation rule"
+  },
+  "ptNoAdjustment": {
+    "ar": "بلا تعديل",
+    "en": "None",
+    "description": "Hijri day offset of zero"
+  },
+  "ptDayUnit": {
+    "ar": "{days} يوم",
+    "en": "{days} d",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    },
+    "description": "A signed day offset, e.g. +1"
+  },
+  "ptAdjustTitle": {
+    "ar": "ضبط وقت {prayer}",
+    "en": "Adjust {prayer}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAdjustHint": {
+    "ar": "اضغط مطوّلًا على أي وقت لضبطه بالدقائق",
+    "en": "Long-press any time to adjust it by minutes"
+  },
+  "ptAdjustCalculated": {
+    "ar": "المحسوب: {time}",
+    "en": "Calculated: {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ptAdjustDone": {
+    "ar": "تم",
+    "en": "Done"
+  },
+  "ptAdjusted": {
+    "ar": "عُدّل وقت {prayer}",
+    "en": "{prayer} adjusted",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  }
+}

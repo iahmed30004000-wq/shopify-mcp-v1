@@ -217,7 +217,8 @@ class ImportFormats {
   /// One budget check as a sentence.
   String budgetIssue(L10n l, ImportIssue issue) {
     final a = issue.args;
-    final name = a['name'] as String? ?? l.importBudgetWhole;
+    // Budget lines are the user's own names, in either script.
+    final name = BidiIsolate.isolate(a['name'] as String? ?? l.importBudgetWhole);
     final currency = a['currency'] as String? ?? 'JOD';
     final kind = BudgetWarningKind.values.where((k) => k.name == a['kind']).firstOrNull;
     final milli = a['milli'] as int?;

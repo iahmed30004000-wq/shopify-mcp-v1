@@ -661,7 +661,13 @@ class L10nEn extends L10n {
 
   @override
   String interactionFieldTooLong(int max) {
-    return 'Keep it under $max characters';
+    String _temp0 = intl.Intl.pluralLogic(
+      max,
+      locale: localeName,
+      other: 'Keep it to $max characters or fewer',
+      one: 'Keep it to one character',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1687,6 +1693,12 @@ class L10nEn extends L10n {
       'Pearl in light mode, your chosen theme in dark mode';
 
   @override
+  String get settingsThemeLightMode => 'Light mode';
+
+  @override
+  String get settingsThemeDarkMode => 'Dark mode';
+
+  @override
   String get settingsAccent => 'Accent colour';
 
   @override
@@ -1694,6 +1706,20 @@ class L10nEn extends L10n {
 
   @override
   String get settingsAccentCustom => 'Custom colour';
+
+  @override
+  String get settingsAccentCustomHint =>
+      'Slide along the spectrum for any colour; its brightness adapts so it stays readable in every theme.';
+
+  @override
+  String settingsAccentPlanet(String planet) {
+    return '$planet colour';
+  }
+
+  @override
+  String settingsAccentHueValue(String degrees) {
+    return 'Hue $degrees°';
+  }
 
   @override
   String get settingsLanguage => 'Language';
@@ -1809,8 +1835,9 @@ class L10nEn extends L10n {
   String get settingsFonts => 'Fonts';
 
   @override
-  String get settingsFontsBody =>
-      'Open fonts under the SIL Open Font License 1.1';
+  String settingsFontsBody(String version) {
+    return 'Open fonts under the SIL Open Font License $version';
+  }
 
   @override
   String get settingsLicenses => 'Open-source licences';
@@ -1905,6 +1932,138 @@ class L10nEn extends L10n {
   String onboardingStep(String current, String total) {
     return 'Step $current of $total';
   }
+
+  @override
+  String get settingsPrayerSection => 'Prayer';
+
+  @override
+  String get settingsPrayerTimes => 'Prayer times & calculation';
+
+  @override
+  String get settingsAdhan => 'Adhan & notifications';
+
+  @override
+  String get settingsAdhkarReminders => 'Adhkar reminders';
+
+  @override
+  String get settingsAdhkarMorning => 'Morning adhkar after Fajr';
+
+  @override
+  String get settingsAdhkarEvening => 'Evening adhkar after Asr';
+
+  @override
+  String settingsAdhkarAfter(String offset) {
+    return '$offset after the adhan';
+  }
+
+  @override
+  String get settingsAdhkarOff => 'No reminder';
+
+  @override
+  String get settingsSecuritySection => 'Privacy & security';
+
+  @override
+  String get settingsAppLock => 'App lock';
+
+  @override
+  String get settingsAppLockOff => 'Off – set a PIN to protect Madar';
+
+  @override
+  String get settingsAppLockOn => 'On, with your PIN';
+
+  @override
+  String get settingsAppLockOnBio => 'On, with fingerprint and PIN';
+
+  @override
+  String get settingsSecurityNote =>
+      'The lock hides what is on screen whenever you step away; your data is always encrypted on your device, locked or not.';
+
+  @override
+  String get settingsCredits => 'Fonts & sources';
+
+  @override
+  String get settingsCreditsBody =>
+      'Open fonts, and the sources of the adhkar, cities and tones';
+
+  @override
+  String get settingsCreditsContent => 'Content and its sources';
+
+  @override
+  String get settingsCreditsContentBody =>
+      'Every text, dataset and sound in Madar is openly licensed or its own work – here are the full sources.';
+
+  @override
+  String get settingsCreditAdhkar => 'Adhkar – Hisn al-Muslim';
+
+  @override
+  String get settingsCreditAdhkarRole =>
+      'Open datasets (MIT), the Quran text from quran-api';
+
+  @override
+  String get settingsCreditCities => 'City list';
+
+  @override
+  String get settingsCreditCitiesRole =>
+      'Natural Earth, GeoNames, IANA and Unicode CLDR';
+
+  @override
+  String get settingsCreditAdhan => 'Adhan tones';
+
+  @override
+  String get settingsCreditAdhanRole => 'Madar’s own – no recordings bundled';
+
+  @override
+  String get onboardingLocationTitle => 'Where do you pray?';
+
+  @override
+  String get onboardingLocationBody =>
+      'Prayer times are calculated on your device from your location, offline. Pick your city, or use your approximate location once.';
+
+  @override
+  String get onboardingLocationSet => 'Choose your location';
+
+  @override
+  String get onboardingLocationChange => 'Change location';
+
+  @override
+  String onboardingLocationFor(String place) {
+    return 'Your times are for $place';
+  }
+
+  @override
+  String get onboardingAdhanTitle => 'The adhan, on time';
+
+  @override
+  String get onboardingAdhanBody =>
+      'For the adhan to sound at its minute, even with the phone locked, Madar needs a few Android permissions. Grant them now or later in Settings.';
+
+  @override
+  String get onboardingLockTitle => 'Protect Madar';
+
+  @override
+  String get onboardingLockBody =>
+      'A lock with a PIN and your fingerprint closes Madar whenever you step away. No account, no server – the PIN stays on your device.';
+
+  @override
+  String get onboardingLockSet => 'Set a PIN';
+
+  @override
+  String get onboardingLockOn => 'The lock is on, with your PIN';
+
+  @override
+  String get onboardingLockOnBio => 'The lock is on, with fingerprint and PIN';
+
+  @override
+  String get onboardingOptional =>
+      'Optional – you can set this later in Settings';
+
+  @override
+  String homeDateWithHijri(String gregorian, String hijri) {
+    return '$gregorian · $hijri';
+  }
+
+  @override
+  String get homeAllTimes => 'All times';
 
   @override
   String orbitReasonPersonOverdue(String name, int days, String n) {
@@ -2896,4 +3055,2403 @@ class L10nEn extends L10n {
 
   @override
   String get orbitUiMoonWaiting => 'Waiting on you';
+
+  @override
+  String get lockScreenSubtitle => 'Your data is encrypted on this phone';
+
+  @override
+  String get lockHoldHint => 'Press and hold the astrolabe to unlock';
+
+  @override
+  String get lockHoldingHint =>
+      'Keep holding… the astrolabe is coming together';
+
+  @override
+  String get lockReadingHint => 'Touch the fingerprint sensor';
+
+  @override
+  String get lockReleasedEarly => 'Hold until the astrolabe is complete';
+
+  @override
+  String get lockWelcome => 'Welcome back';
+
+  @override
+  String get lockPinHint => 'Enter your Madar PIN';
+
+  @override
+  String get lockPinChecking => 'Checking…';
+
+  @override
+  String lockPinWrong(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wrong PIN · $n tries left before a pause',
+      one: 'Wrong PIN · 1 try left before a pause',
+      zero: 'Wrong PIN',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String lockLockedOut(String time) {
+    return 'Too many attempts. Try again in $time';
+  }
+
+  @override
+  String lockSeconds(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n seconds',
+      one: '1 second',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get lockUsePin => 'Use PIN';
+
+  @override
+  String get lockUseFingerprint => 'Use fingerprint';
+
+  @override
+  String get lockForgotPin => 'Forgot PIN?';
+
+  @override
+  String get lockPromptTitle => 'Unlock Madar';
+
+  @override
+  String get lockPromptHint => 'Use your fingerprint';
+
+  @override
+  String get lockPromptReason => 'Confirm it\'s you to open your data';
+
+  @override
+  String get lockPromptSettingsReason =>
+      'Confirm it\'s you to change the lock settings';
+
+  @override
+  String get lockPromptCancel => 'Use PIN';
+
+  @override
+  String get lockPromptCancelPlain => 'Cancel';
+
+  @override
+  String get lockStorageError => 'Couldn\'t read this phone\'s secure vault.';
+
+  @override
+  String get lockRetry => 'Try again';
+
+  @override
+  String get lockAstrolabeSemantics =>
+      'Astrolabe. Press and hold to unlock with your fingerprint';
+
+  @override
+  String get lockAstrolabeAction => 'Unlock with fingerprint';
+
+  @override
+  String lockPinProgress(String count, String total) {
+    return '$count of $total digits entered';
+  }
+
+  @override
+  String lockPinProgressOpen(String count) {
+    return '$count digits entered';
+  }
+
+  @override
+  String get lockKeyDelete => 'Delete';
+
+  @override
+  String get lockKeyFingerprint => 'Fingerprint';
+
+  @override
+  String get lockKeyDone => 'Done';
+
+  @override
+  String get lockShieldSemantics => 'Madar is hidden until you return';
+
+  @override
+  String get lockForgotTitle => 'Forgot your PIN?';
+
+  @override
+  String get lockForgotBody =>
+      'Madar has no account and no server: your data is encrypted and kept on this phone alone, so the PIN can\'t be recovered or reset remotely.';
+
+  @override
+  String get lockForgotBiometric =>
+      'Confirm with your fingerprint, then choose a new PIN.';
+
+  @override
+  String get lockForgotBiometricAction => 'Confirm with fingerprint';
+
+  @override
+  String get lockForgotNoBiometric =>
+      'Without the PIN, Madar stays locked. If you can\'t recall it, the only way out is to clear Madar\'s data in the phone\'s settings (Apps → Madar → Storage → Clear data) and start fresh; anything not in a backup will be lost.';
+
+  @override
+  String get lockForgotBack => 'Back';
+
+  @override
+  String get lockNewPinTitle => 'Choose a new PIN';
+
+  @override
+  String get lockPinCreateTitle => 'Choose a PIN for Madar';
+
+  @override
+  String lockPinCreateBody(String min, String max) {
+    return '$min to $max digits. It opens Madar whenever your fingerprint can\'t.';
+  }
+
+  @override
+  String get lockPinConfirmTitle => 'Confirm your PIN';
+
+  @override
+  String get lockPinConfirmBody => 'Enter it once more to be sure.';
+
+  @override
+  String get lockPinMismatch => 'Those PINs don\'t match. Let\'s start again.';
+
+  @override
+  String get lockPinWeak => 'That PIN is easy to guess. Consider another.';
+
+  @override
+  String get lockPinCurrentTitle => 'Enter your current PIN';
+
+  @override
+  String get lockPinSaved => 'PIN saved. Madar is now locked for you alone.';
+
+  @override
+  String get lockPinChanged => 'PIN changed';
+
+  @override
+  String get lockConfirmTitle => 'Confirm it\'s you';
+
+  @override
+  String get lockConfirmBody => 'Enter your Madar PIN to continue.';
+
+  @override
+  String get lockBioOfferTitle => 'Unlock with your fingerprint too?';
+
+  @override
+  String get lockBioOfferBody =>
+      'Quicker every time, and your PIN is always there as a fallback.';
+
+  @override
+  String get lockBioOfferEnable => 'Use fingerprint';
+
+  @override
+  String get lockBioOfferSkip => 'Not now';
+
+  @override
+  String get lockSettingsTitle => 'Security';
+
+  @override
+  String get lockSettingsLock => 'App lock';
+
+  @override
+  String get lockSettingsLockOn => 'Asked on every launch and after time away';
+
+  @override
+  String get lockSettingsLockOff =>
+      'Protect your data with a PIN and fingerprint';
+
+  @override
+  String get lockSettingsBiometric => 'Fingerprint unlock';
+
+  @override
+  String get lockSettingsBiometricHint => 'Your PIN always stays as a fallback';
+
+  @override
+  String get lockSettingsBiometricNotEnrolled =>
+      'Add a fingerprint in the phone\'s settings first';
+
+  @override
+  String get lockSettingsBiometricUnavailable =>
+      'The fingerprint sensor isn\'t available right now';
+
+  @override
+  String get lockSettingsChangePin => 'Change PIN';
+
+  @override
+  String lockSettingsChangePinHint(String min, String max) {
+    return 'A PIN of $min to $max digits';
+  }
+
+  @override
+  String get lockSettingsLockAfter => 'Lock after leaving the app';
+
+  @override
+  String get lockSettingsLockAfterHint => 'And always on a fresh launch';
+
+  @override
+  String get lockAfterImmediately => 'Immediately';
+
+  @override
+  String lockAfterMinutes(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n minutes',
+      one: '1 minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get lockSettingsRemovePin => 'Remove PIN';
+
+  @override
+  String get lockSettingsRemovePinHint =>
+      'Turns off the app lock and fingerprint unlock';
+
+  @override
+  String get lockRemoveTitle => 'Remove your PIN?';
+
+  @override
+  String get lockRemoveBody =>
+      'Madar will open without a lock until you choose a new PIN.';
+
+  @override
+  String get lockRemoveConfirm => 'Remove PIN';
+
+  @override
+  String get lockSettingsNote =>
+      'No account, no server: your data is encrypted on this phone alone and the PIN can\'t be recovered remotely, so keep it safe.';
+
+  @override
+  String get lockSettingsSaveFailed =>
+      'Couldn\'t save to the secure vault. Please try again.';
+
+  @override
+  String get lockBioLockedOut =>
+      'Fingerprint is paused after too many tries. Use your PIN.';
+
+  @override
+  String get lockBioLockedOutPermanently =>
+      'Fingerprint is locked until you unlock the phone with its screen lock. Use your Madar PIN for now.';
+
+  @override
+  String get lockBioNotEnrolled =>
+      'No fingerprint is enrolled on this phone. Use your PIN.';
+
+  @override
+  String get lockBioNoHardware =>
+      'This phone has no fingerprint sensor. Use your PIN.';
+
+  @override
+  String get lockBioUnavailable =>
+      'The fingerprint sensor isn\'t available right now. Use your PIN.';
+
+  @override
+  String get lockBioError =>
+      'Couldn\'t verify your fingerprint. Try again or use your PIN.';
+
+  @override
+  String get lockBioInterrupted =>
+      'Verification was interrupted. Press and hold to try again.';
+
+  @override
+  String get ptTitle => 'Prayer times';
+
+  @override
+  String get ptSettingsTitle => 'Prayer time settings';
+
+  @override
+  String get ptOpenSettings => 'Prayer time settings';
+
+  @override
+  String get ptFajr => 'Fajr';
+
+  @override
+  String get ptSunrise => 'Sunrise';
+
+  @override
+  String get ptDuha => 'Duha';
+
+  @override
+  String get ptDhuhr => 'Dhuhr';
+
+  @override
+  String get ptJumuah => 'Jumu’ah';
+
+  @override
+  String get ptAsr => 'Asr';
+
+  @override
+  String get ptMaghrib => 'Maghrib';
+
+  @override
+  String get ptIsha => 'Isha';
+
+  @override
+  String get ptMidnight => 'Midnight';
+
+  @override
+  String get ptLastThird => 'Last third';
+
+  @override
+  String get ptSunriseHint => 'Fajr time ends';
+
+  @override
+  String get ptDuhaHint => 'A quarter hour after sunrise';
+
+  @override
+  String get ptMidnightHint => 'Halfway from Maghrib to Fajr';
+
+  @override
+  String get ptLastThirdHint => 'The time for Qiyam';
+
+  @override
+  String get ptNightSection => 'The night & Qiyam';
+
+  @override
+  String get ptNow => 'Now';
+
+  @override
+  String get ptNextPrayer => 'Next prayer';
+
+  @override
+  String ptNextIn(String prayer) {
+    return '$prayer in';
+  }
+
+  @override
+  String ptAtTime(String time) {
+    return 'at $time';
+  }
+
+  @override
+  String ptItsTime(String prayer) {
+    return 'It\'s time for $prayer';
+  }
+
+  @override
+  String ptCurrentWindow(String window) {
+    return 'Now: $window';
+  }
+
+  @override
+  String ptCountdownSemantics(String prayer, String duration) {
+    return '$prayer in $duration';
+  }
+
+  @override
+  String get ptToday => 'Today';
+
+  @override
+  String get ptTomorrow => 'Tomorrow';
+
+  @override
+  String get ptYesterday => 'Yesterday';
+
+  @override
+  String get ptTonight => 'Tonight';
+
+  @override
+  String get ptPrevDay => 'Previous day';
+
+  @override
+  String get ptNextDay => 'Next day';
+
+  @override
+  String get ptBackToToday => 'Back to today';
+
+  @override
+  String get ptViewDay => 'Day';
+
+  @override
+  String get ptViewMonth => 'Month';
+
+  @override
+  String get ptPrevMonth => 'Previous month';
+
+  @override
+  String get ptNextMonth => 'Next month';
+
+  @override
+  String get ptMonthDay => 'Day';
+
+  @override
+  String ptMonthHijriSpan(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get ptAm => 'AM';
+
+  @override
+  String get ptPm => 'PM';
+
+  @override
+  String ptClockHours(String hours) {
+    return '$hours-hour';
+  }
+
+  @override
+  String ptMinutesSigned(String minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String ptHijriDate(String day, String month, String year) {
+    return '$day $month $year AH';
+  }
+
+  @override
+  String ptHijriDayMonth(String day, String month) {
+    return '$day $month';
+  }
+
+  @override
+  String get ptHijriMonth1 => 'Muharram';
+
+  @override
+  String get ptHijriMonth2 => 'Safar';
+
+  @override
+  String get ptHijriMonth3 => 'Rabi’ al-Awwal';
+
+  @override
+  String get ptHijriMonth4 => 'Rabi’ al-Akhir';
+
+  @override
+  String get ptHijriMonth5 => 'Jumada al-Ula';
+
+  @override
+  String get ptHijriMonth6 => 'Jumada al-Akhirah';
+
+  @override
+  String get ptHijriMonth7 => 'Rajab';
+
+  @override
+  String get ptHijriMonth8 => 'Sha’ban';
+
+  @override
+  String get ptHijriMonth9 => 'Ramadan';
+
+  @override
+  String get ptHijriMonth10 => 'Shawwal';
+
+  @override
+  String get ptHijriMonth11 => 'Dhu al-Qa’dah';
+
+  @override
+  String get ptHijriMonth12 => 'Dhu al-Hijjah';
+
+  @override
+  String get ptLocationTitle => 'Your location';
+
+  @override
+  String get ptLocationSubtitle =>
+      'Times are calculated on your device, offline';
+
+  @override
+  String ptLocationDefault(String city) {
+    return '$city (default)';
+  }
+
+  @override
+  String ptLocationNear(String city) {
+    return 'Near $city';
+  }
+
+  @override
+  String ptPlaceWithCountry(String city, String country) {
+    return '$city, $country';
+  }
+
+  @override
+  String get ptPinnedLocation => 'Pinned location';
+
+  @override
+  String get ptDefaultCityName => 'Amman';
+
+  @override
+  String get ptSourceGps => 'From your current location';
+
+  @override
+  String get ptSourceCity => 'Chosen city';
+
+  @override
+  String get ptSourceDefault => 'Default location – choose yours';
+
+  @override
+  String ptCoordinates(String lat, String lon) {
+    return '$lat, $lon';
+  }
+
+  @override
+  String ptTimeZoneLabel(String zone) {
+    return 'Time zone: $zone';
+  }
+
+  @override
+  String get ptTimeZoneDevice => 'Device time';
+
+  @override
+  String ptZoneOffset(String offset) {
+    return 'GMT$offset';
+  }
+
+  @override
+  String ptZoneDiffers(String place) {
+    return 'Times in $place time';
+  }
+
+  @override
+  String get ptUseCurrentLocation => 'Use my current location';
+
+  @override
+  String get ptUseCurrentLocationHint =>
+      'A one-time approximate fix that stays on your device';
+
+  @override
+  String get ptChooseCity => 'Choose a city';
+
+  @override
+  String get ptChooseCityHint => 'Search in Arabic or English, offline';
+
+  @override
+  String get ptRationaleTitle => 'We need your approximate location';
+
+  @override
+  String get ptRationaleBody =>
+      'To calculate prayer times precisely, Madar asks for your location once. It is stored encrypted on your device and never sent anywhere.';
+
+  @override
+  String get ptRationaleAllow => 'Allow location';
+
+  @override
+  String get ptRequesting => 'Waiting for your permission…';
+
+  @override
+  String get ptLocating => 'Finding your location…';
+
+  @override
+  String get ptDeniedTitle => 'Location permission not granted';
+
+  @override
+  String get ptDeniedBody =>
+      'You can try again, or choose your city from the list.';
+
+  @override
+  String get ptTryAgain => 'Try again';
+
+  @override
+  String get ptDeniedForeverTitle => 'Location permission is off';
+
+  @override
+  String get ptDeniedForeverBody =>
+      'Turn it on in the app\'s system settings, or choose your city manually.';
+
+  @override
+  String get ptOpenAppSettings => 'Open app settings';
+
+  @override
+  String get ptServiceOffTitle => 'Location services are off';
+
+  @override
+  String get ptServiceOffBody =>
+      'Turn on location in the device settings and come back, or choose your city.';
+
+  @override
+  String get ptOpenLocationSettings => 'Location settings';
+
+  @override
+  String get ptUnsupportedBody =>
+      'Location isn\'t available on this device. Choose your city from the list.';
+
+  @override
+  String get ptFailedTitle => 'Couldn\'t find your location';
+
+  @override
+  String get ptFailedBody =>
+      'The signal may be weak. Try again in the open, or choose your city.';
+
+  @override
+  String ptLocationChanged(String place) {
+    return 'Location set to $place';
+  }
+
+  @override
+  String get ptCitySearchHint => 'Search for a city…';
+
+  @override
+  String get ptCitySearchEmpty => 'No city by that name';
+
+  @override
+  String get ptCitySearchEmptyHint => 'Try another name or a shorter spelling';
+
+  @override
+  String get ptCitySuggestions => 'Suggested cities';
+
+  @override
+  String get ptCityResults => 'Results';
+
+  @override
+  String get ptCitySelected => 'Selected';
+
+  @override
+  String get ptSectionLocation => 'Location';
+
+  @override
+  String get ptSectionMethod => 'Calculation method';
+
+  @override
+  String get ptSectionMethodHint =>
+      'Methods differ mainly in the Fajr and Isha angles';
+
+  @override
+  String get ptSectionAsr => 'Asr';
+
+  @override
+  String get ptAsrStandard => 'Standard';
+
+  @override
+  String get ptAsrHanafi => 'Hanafi';
+
+  @override
+  String get ptAsrNote =>
+      'Standard (Shafi’i, Maliki, Hanbali): Asr begins when an object\'s shadow equals its length; Hanafi: twice its length.';
+
+  @override
+  String get ptSectionHighLat => 'High latitudes';
+
+  @override
+  String get ptHighLatAuto => 'Automatic';
+
+  @override
+  String get ptHighLatMiddle => 'Middle of the night';
+
+  @override
+  String get ptHighLatSeventh => 'One-seventh of the night';
+
+  @override
+  String get ptHighLatAngle => 'Twilight angle';
+
+  @override
+  String ptHighLatNote(String degrees) {
+    return 'Where twilight never ends in summer, Fajr and Isha are estimated from a portion of the night. Automatic uses one-seventh above about $degrees latitude.';
+  }
+
+  @override
+  String get ptSectionAdjustments => 'Manual adjustments';
+
+  @override
+  String get ptAdjustmentsNote =>
+      'Add or subtract minutes to match your mosque\'s timetable.';
+
+  @override
+  String get ptResetAdjustments => 'Reset';
+
+  @override
+  String get ptAdjustmentsReset => 'Manual adjustments reset';
+
+  @override
+  String get ptSectionHijri => 'Hijri date';
+
+  @override
+  String get ptHijriOffset => 'Hijri day adjustment';
+
+  @override
+  String get ptHijriOffsetNote =>
+      'Based on the Umm al-Qura calendar; shift it by a day or two to match the moon sighting where you live.';
+
+  @override
+  String get ptHijriAtMaghrib => 'Hijri day begins at Maghrib';
+
+  @override
+  String get ptHijriAtMaghribHint =>
+      'The Islamic day runs from sunset to sunset';
+
+  @override
+  String get ptSectionDisplay => 'Display';
+
+  @override
+  String get ptClockFormat => 'Clock';
+
+  @override
+  String get ptPreviewTitle => 'Today\'s times';
+
+  @override
+  String get ptPreviewHint => 'Updates with every change';
+
+  @override
+  String get ptMethodSheetTitle => 'Calculation method';
+
+  @override
+  String get ptMethodSuggested => 'Suggested for your location';
+
+  @override
+  String get ptMethodDefault => 'Default';
+
+  @override
+  String ptMethodChanged(String method) {
+    return 'Method set to $method';
+  }
+
+  @override
+  String get ptMethodJordan => 'Jordan – Ministry of Awqaf';
+
+  @override
+  String get ptMethodMuslimWorldLeague => 'Muslim World League';
+
+  @override
+  String get ptMethodUmmAlQura => 'Umm al-Qura – Makkah';
+
+  @override
+  String get ptMethodEgyptian => 'Egyptian General Authority of Survey';
+
+  @override
+  String get ptMethodKarachi => 'University of Islamic Sciences, Karachi';
+
+  @override
+  String get ptMethodNorthAmerica => 'ISNA – North America';
+
+  @override
+  String get ptMethodDubai => 'Dubai – UAE';
+
+  @override
+  String get ptMethodKuwait => 'Kuwait';
+
+  @override
+  String get ptMethodQatar => 'Qatar';
+
+  @override
+  String get ptMethodTurkiye => 'Türkiye – Diyanet';
+
+  @override
+  String get ptMethodSingapore => 'Singapore';
+
+  @override
+  String get ptMethodTehran => 'Institute of Geophysics, Tehran';
+
+  @override
+  String get ptMethodGulfRegion => 'Gulf region';
+
+  @override
+  String get ptMethodMoonsightingCommittee => 'Moonsighting Committee';
+
+  @override
+  String get ptMethodAlgerian => 'Algeria – Ministry of Religious Affairs';
+
+  @override
+  String get ptMethodMorocco => 'Morocco – Ministry of Habous';
+
+  @override
+  String get ptMethodTunisia => 'Tunisia – Ministry of Religious Affairs';
+
+  @override
+  String get ptMethodFrance => 'France – UOIF';
+
+  @override
+  String get ptMethodRussia => 'Russia – Spiritual Administration';
+
+  @override
+  String get ptMethodIndonesian => 'Indonesia – KEMENAG';
+
+  @override
+  String get ptMethodJafari => 'Jafari – Leva Institute, Qum';
+
+  @override
+  String get ptMethodCustom => 'Custom angles';
+
+  @override
+  String get ptMethodCustomHint => 'Set the Fajr and Isha angles yourself';
+
+  @override
+  String ptSummaryAngle(String prayer, String angle) {
+    return '$prayer $angle';
+  }
+
+  @override
+  String ptSummaryIshaInterval(String minutes) {
+    return 'Isha $minutes min after Maghrib';
+  }
+
+  @override
+  String ptSummaryRamadan(String minutes) {
+    return '$minutes min in Ramadan';
+  }
+
+  @override
+  String ptSummaryOffset(String prayer, String minutes) {
+    return '$prayer $minutes min';
+  }
+
+  @override
+  String ptSummaryMaghribAngle(String angle) {
+    return 'Maghrib $angle';
+  }
+
+  @override
+  String get ptCustomFajrAngle => 'Fajr angle';
+
+  @override
+  String get ptCustomIshaAngle => 'Isha angle';
+
+  @override
+  String get ptCustomIshaByInterval => 'Isha a fixed time after Maghrib';
+
+  @override
+  String get ptCustomIshaInterval => 'Time after Maghrib';
+
+  @override
+  String get ptIncrease => 'Increase';
+
+  @override
+  String get ptDecrease => 'Decrease';
+
+  @override
+  String get ptUndoSettings => 'Previous settings restored';
+
+  @override
+  String get ptAsrRule => 'When Asr begins';
+
+  @override
+  String get ptHighLatRule => 'Estimation rule';
+
+  @override
+  String get ptNoAdjustment => 'None';
+
+  @override
+  String ptDayUnit(String days) {
+    return '$days d';
+  }
+
+  @override
+  String ptAdjustTitle(String prayer) {
+    return 'Adjust $prayer';
+  }
+
+  @override
+  String get ptAdjustHint => 'Long-press any time to adjust it by minutes';
+
+  @override
+  String ptAdjustCalculated(String time) {
+    return 'Calculated: $time';
+  }
+
+  @override
+  String get ptAdjustDone => 'Done';
+
+  @override
+  String ptAdjusted(String prayer) {
+    return '$prayer adjusted';
+  }
+
+  @override
+  String get adhanSettingsTitle => 'Adhan';
+
+  @override
+  String get adhanSettingsSubtitle =>
+      'The adhan on time, the muezzin and reminders';
+
+  @override
+  String adhanMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+      zero: 'now',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adhanMinutesShort(String minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String adhanSeconds(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seconds',
+      one: '1 second',
+      zero: 'a moment',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adhanNotifCallTitle(String prayer) {
+    return 'It\'s time for $prayer';
+  }
+
+  @override
+  String adhanNotifCallBody(String time) {
+    return '$time · Come to prayer';
+  }
+
+  @override
+  String adhanNotifPreTitle(String prayer, String minutes) {
+    return '$prayer in $minutes';
+  }
+
+  @override
+  String adhanNotifPreBody(String time) {
+    return 'Get ready – the adhan is at $time';
+  }
+
+  @override
+  String get adhanNotifSunriseTitle => 'The sun has risen';
+
+  @override
+  String get adhanNotifSunriseBody => 'The time for Fajr has ended';
+
+  @override
+  String adhanNotifSunriseSoonTitle(String minutes) {
+    return 'Sunrise in $minutes';
+  }
+
+  @override
+  String adhanNotifSunriseSoonBody(String time) {
+    return 'Fajr time is ending – pray before $time';
+  }
+
+  @override
+  String adhanNotifTestTitle(String prayer) {
+    return 'Test: $prayer adhan';
+  }
+
+  @override
+  String get adhanNotifTestBody => 'This is how the adhan will look and sound';
+
+  @override
+  String get adhanChannelGroup => 'Prayer & adhan';
+
+  @override
+  String adhanChannelCall(String sound) {
+    return 'Adhan · $sound';
+  }
+
+  @override
+  String get adhanChannelCallHint => 'The adhan as each prayer time begins';
+
+  @override
+  String get adhanChannelReminder => 'Before the adhan';
+
+  @override
+  String get adhanChannelSunrise => 'Sunrise';
+
+  @override
+  String get adhanToneDawn => 'Dawn light';
+
+  @override
+  String get adhanToneDawnHint =>
+      'A crystal glow rising over a warm drone, like first light';
+
+  @override
+  String get adhanToneBrass => 'Astrolabe brass';
+
+  @override
+  String get adhanToneBrassHint => 'Quiet bells, like a distant tower clock';
+
+  @override
+  String get adhanToneBowl => 'Serenity';
+
+  @override
+  String get adhanToneBowlHint => 'Three strikes of a singing bowl';
+
+  @override
+  String get adhanToneChime => 'Reminder chime';
+
+  @override
+  String get adhanToneSunrise => 'Sunrise crystal';
+
+  @override
+  String get adhanToneChimeHint => 'A short glass chime';
+
+  @override
+  String get adhanSilent => 'Silent';
+
+  @override
+  String get adhanSilentHint => 'Notification and vibration, no sound';
+
+  @override
+  String get adhanScreenOverlineCall => 'It is now time for';
+
+  @override
+  String get adhanScreenOverlinePre => 'Get ready for';
+
+  @override
+  String get adhanScreenOverlineSunrise => 'Fajr time has ended';
+
+  @override
+  String get adhanScreenOverlineSunriseSoon => 'Fajr time is ending';
+
+  @override
+  String adhanScreenSunriseIn(String duration) {
+    return 'Sunrise in $duration';
+  }
+
+  @override
+  String get adhanScreenOverlineTest => 'Adhan test';
+
+  @override
+  String adhanScreenAdhanIn(String duration) {
+    return 'Adhan in $duration';
+  }
+
+  @override
+  String adhanScreenAdhanAt(String time) {
+    return 'The adhan is at $time';
+  }
+
+  @override
+  String get adhanScreenSoundingCall => 'The adhan is sounding';
+
+  @override
+  String get adhanScreenSoundingTone => 'The alert is sounding';
+
+  @override
+  String get adhanScreenSilent => 'Silent adhan';
+
+  @override
+  String adhanScreenSemantics(String prayer, String time) {
+    return '$prayer adhan, $time';
+  }
+
+  @override
+  String get adhanDuaTitle => 'Supplication after the adhan';
+
+  @override
+  String get adhanDuaMeaning =>
+      'O Allah, Lord of this perfect call and of the prayer about to be established, grant Muhammad the Wasilah and virtue, and raise him to the praised station You promised him.';
+
+  @override
+  String adhanDuaSource(String number) {
+    return 'Sahih al-Bukhari, $number';
+  }
+
+  @override
+  String get adhanStop => 'Stop adhan';
+
+  @override
+  String get adhanPrayed => 'I prayed';
+
+  @override
+  String adhanPrayedNamed(String prayer) {
+    return 'I prayed $prayer';
+  }
+
+  @override
+  String get adhanPrayedDone => 'May Allah accept it';
+
+  @override
+  String get adhanPrayedFailed => 'Couldn\'t log the prayer';
+
+  @override
+  String get adhanClose => 'Close';
+
+  @override
+  String adhanSnooze(String minutes) {
+    return 'Remind me in $minutes';
+  }
+
+  @override
+  String adhanSnoozed(String minutes) {
+    return 'I\'ll remind you in $minutes';
+  }
+
+  @override
+  String get adhanNextTitle => 'Next adhan';
+
+  @override
+  String adhanNextIn(String duration) {
+    return 'in $duration';
+  }
+
+  @override
+  String get adhanNextNone => 'No adhan is on';
+
+  @override
+  String adhanScheduledCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count alerts scheduled',
+      one: '1 alert scheduled',
+      zero: 'No alerts scheduled',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get adhanScheduleWeek =>
+      'Keeps calling for a whole week without opening Madar, and after a restart';
+
+  @override
+  String get adhanScheduleInexact =>
+      'Exact alarms aren\'t allowed – the adhan may be minutes late';
+
+  @override
+  String get adhanSectionPrayers => 'Prayers';
+
+  @override
+  String get adhanSectionPrayersHint =>
+      'The adhan as each time begins, and a reminder before it if you like';
+
+  @override
+  String get adhanPrayerOff => 'Adhan off';
+
+  @override
+  String adhanPrayerReminder(String minutes) {
+    return 'Reminder $minutes before';
+  }
+
+  @override
+  String adhanPrayerToggle(String prayer) {
+    return '$prayer adhan';
+  }
+
+  @override
+  String adhanAlertSheetTitle(String prayer) {
+    return '$prayer adhan';
+  }
+
+  @override
+  String get adhanAlertCall => 'Call the adhan at the prayer time';
+
+  @override
+  String get adhanAlertReminder => 'Reminder before the adhan';
+
+  @override
+  String get adhanReminderNone => 'None';
+
+  @override
+  String get adhanTestThis => 'Test this adhan';
+
+  @override
+  String get adhanSunrise => 'Sunrise alert';
+
+  @override
+  String get adhanSunriseHint => 'A gentle alert as Fajr time ends';
+
+  @override
+  String get adhanSunriseAt => 'At sunrise';
+
+  @override
+  String adhanSunriseBefore(String minutes) {
+    return '$minutes before';
+  }
+
+  @override
+  String get adhanSectionMuezzin => 'Muezzin';
+
+  @override
+  String get adhanSectionMuezzinHint => 'Fajr can have a voice of its own';
+
+  @override
+  String get adhanMuezzinFajr => 'Fajr';
+
+  @override
+  String get adhanMuezzinOthers => 'Dhuhr, Asr, Maghrib and Isha';
+
+  @override
+  String get adhanPickerTitleFajr => 'Fajr adhan sound';
+
+  @override
+  String get adhanPickerTitleOthers => 'Adhan sound';
+
+  @override
+  String get adhanPickerTones => 'Madar tones';
+
+  @override
+  String get adhanPickerTonesHint =>
+      'Procedurally synthesised alerts – bells and singing bowls, never a voice or an adhan melody';
+
+  @override
+  String get adhanPickerYours => 'Your recordings';
+
+  @override
+  String get adhanPickerYoursHint =>
+      'Attach an adhan recording you love – it is copied into Madar and stays on your device';
+
+  @override
+  String get adhanPickerEmpty => 'No recordings attached yet';
+
+  @override
+  String get adhanPickerAttach => 'Attach a recording';
+
+  @override
+  String get adhanPickerNote =>
+      'Madar ships no recordings of human voices: none with a verifiable open licence could be found';
+
+  @override
+  String get adhanListen => 'Listen';
+
+  @override
+  String get adhanListenStop => 'Stop listening';
+
+  @override
+  String get adhanSelected => 'Selected';
+
+  @override
+  String get adhanDone => 'Done';
+
+  @override
+  String adhanTestSlotHint(String sound) {
+    return 'With $sound';
+  }
+
+  @override
+  String get adhanMuezzinRename => 'Rename';
+
+  @override
+  String get adhanMuezzinRenameTitle => 'Recording name';
+
+  @override
+  String get adhanMuezzinNameField => 'Name';
+
+  @override
+  String adhanMuezzinAdded(String name) {
+    return 'Added “$name”';
+  }
+
+  @override
+  String adhanMuezzinDeleted(String name) {
+    return 'Deleted “$name”';
+  }
+
+  @override
+  String get adhanMuezzinUnsupported =>
+      'Unsupported format – pick a common audio file';
+
+  @override
+  String get adhanMuezzinTooLarge => 'That file is too large';
+
+  @override
+  String get adhanMuezzinUnreadable => 'Couldn\'t read that file';
+
+  @override
+  String get adhanMuezzinNoPreview =>
+      'This format plays with the adhan itself – try it with “Test adhan now”';
+
+  @override
+  String get adhanMuezzinMissing => 'Deleted recording';
+
+  @override
+  String get adhanSectionAlert => 'Alert';
+
+  @override
+  String get adhanVibrate => 'Vibration';
+
+  @override
+  String get adhanVibrateHint =>
+      'The phone vibrates with the adhan and reminders';
+
+  @override
+  String get adhanFullScreen => 'Full-screen adhan';
+
+  @override
+  String get adhanFullScreenHint =>
+      'Appears over the lock screen and wakes the display at the adhan';
+
+  @override
+  String get adhanQuiet => 'Prayer quiet';
+
+  @override
+  String get adhanQuietHint =>
+      'Game music and ambient sounds fall silent with the adhan and during the prayer';
+
+  @override
+  String get adhanQuietAdhanOnly => 'Adhan only';
+
+  @override
+  String get adhanSnoozeLength => 'Snooze length';
+
+  @override
+  String get adhanAlarmVolume => 'Alarm volume';
+
+  @override
+  String get adhanAlarmVolumeHint =>
+      'The adhan plays at your phone\'s alarm volume';
+
+  @override
+  String get adhanAlarmMuted =>
+      'Alarm volume is off – the adhan won\'t be heard';
+
+  @override
+  String get adhanOpenSoundSettings => 'Sound settings';
+
+  @override
+  String get adhanSectionTry => 'Try it';
+
+  @override
+  String get adhanTestNow => 'Test adhan now';
+
+  @override
+  String get adhanTestHint =>
+      'A real adhan in a moment – lock the screen to see it full-screen';
+
+  @override
+  String adhanTestScheduled(String seconds) {
+    return 'The adhan sounds in $seconds';
+  }
+
+  @override
+  String get adhanTestFailed =>
+      'Couldn\'t schedule the test – check the permissions';
+
+  @override
+  String get adhanPermTitle => 'So the adhan sounds on time';
+
+  @override
+  String get adhanPermSubtitle =>
+      'A few Android permissions – nothing leaves your device';
+
+  @override
+  String get adhanPermReady =>
+      'The adhan is ready – everything it needs is allowed';
+
+  @override
+  String get adhanPermNotifications => 'Notifications';
+
+  @override
+  String get adhanPermNotificationsHint => 'So the adhan can sound and show';
+
+  @override
+  String get adhanPermExact => 'Exact alarms';
+
+  @override
+  String get adhanPermExactHint =>
+      'So the adhan fires at the exact minute, not after it';
+
+  @override
+  String get adhanPermFullScreen => 'Over the lock screen';
+
+  @override
+  String get adhanPermFullScreenHint =>
+      'So the adhan screen appears while the phone is locked';
+
+  @override
+  String get adhanPermBattery => 'Battery optimisation exemption';
+
+  @override
+  String get adhanPermBatteryHint =>
+      'So the system never stops the adhan to save power';
+
+  @override
+  String get adhanPermAllow => 'Allow';
+
+  @override
+  String get adhanPermAllowed => 'Allowed';
+
+  @override
+  String get adhanPermOpenSettings => 'Settings';
+
+  @override
+  String get adhanPermRefusedHint =>
+      'You declined it in Android\'s dialog – turn it on in Settings whenever you like';
+
+  @override
+  String get adhanPermRequired => 'Required';
+
+  @override
+  String get adhanPermDeniedHint =>
+      'If you refused it before, turn it on in the app\'s settings';
+
+  @override
+  String get trackerTitle => 'Prayer tracker';
+
+  @override
+  String get trackerTabToday => 'Today';
+
+  @override
+  String get trackerTabHistory => 'History';
+
+  @override
+  String get trackerTodayLabel => 'Today';
+
+  @override
+  String get trackerObligatory => 'Obligatory prayers';
+
+  @override
+  String get trackerObligatoryHint =>
+      'Tap to change the status, swipe right to log it on time';
+
+  @override
+  String get trackerVoluntary => 'Voluntary prayers';
+
+  @override
+  String get trackerTodayPrayed => 'Today\'s prayers';
+
+  @override
+  String trackerOfTotal(String total) {
+    return 'of $total';
+  }
+
+  @override
+  String trackerProgress(String done, String total) {
+    return '$done of $total prayed';
+  }
+
+  @override
+  String get trackerAllDone => 'All five prayed – may Allah accept';
+
+  @override
+  String trackerNextIn(String prayer, String duration) {
+    return '$prayer in $duration';
+  }
+
+  @override
+  String get trackerNightLeft =>
+      'All five prayers are due – the night is for voluntary prayer';
+
+  @override
+  String trackerStreakDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+      zero: 'No streak yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerStreakChip(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count-day streak',
+      one: '1-day streak',
+      zero: 'Start your streak today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerDaysUnit(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'days',
+      one: 'day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerJamaahCount(String count) {
+    return '$count in jamaah';
+  }
+
+  @override
+  String get trackerStatusPrayed => 'On time';
+
+  @override
+  String get trackerStatusLate => 'Late';
+
+  @override
+  String get trackerStatusMissed => 'Missed';
+
+  @override
+  String get trackerStatusQada => 'Made up';
+
+  @override
+  String get trackerStatusDue => 'Due now';
+
+  @override
+  String get trackerStatusUnlogged => 'Not logged';
+
+  @override
+  String get trackerStatusUpcoming => 'Not yet due';
+
+  @override
+  String get trackerStatusVoluntaryDone => 'Prayed';
+
+  @override
+  String get trackerStatusVoluntaryOpen => 'Not prayed yet';
+
+  @override
+  String trackerUpcomingIn(String duration) {
+    return 'in $duration';
+  }
+
+  @override
+  String trackerTimeLeft(String duration) {
+    return '$duration left';
+  }
+
+  @override
+  String get trackerActionPrayed => 'Prayed on time';
+
+  @override
+  String get trackerActionLate => 'Prayed late';
+
+  @override
+  String get trackerActionMissed => 'Missed it';
+
+  @override
+  String get trackerActionMadeUp => 'Made it up';
+
+  @override
+  String get trackerActionClear => 'Clear the log';
+
+  @override
+  String get trackerActionJamaahOn => 'Prayed in jamaah';
+
+  @override
+  String get trackerActionJamaahOff => 'Not in jamaah';
+
+  @override
+  String get trackerActionMosqueOn => 'Prayed at the mosque';
+
+  @override
+  String get trackerActionMosqueOff => 'Not at the mosque';
+
+  @override
+  String trackerActionMakeUpAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Made them all up',
+      one: 'Made it up',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trackerJamaah => 'Jamaah';
+
+  @override
+  String get trackerMosque => 'Mosque';
+
+  @override
+  String get trackerSwipePrayed => 'Prayed';
+
+  @override
+  String trackerUndoStatus(String prayer, String status) {
+    return '$prayer: $status';
+  }
+
+  @override
+  String trackerUndoCleared(String prayer) {
+    return '$prayer log cleared';
+  }
+
+  @override
+  String trackerUndoJamaahOn(String prayer) {
+    return '$prayer in jamaah';
+  }
+
+  @override
+  String trackerUndoJamaahOff(String prayer) {
+    return '$prayer not in jamaah';
+  }
+
+  @override
+  String trackerUndoMosqueOn(String prayer) {
+    return '$prayer at the mosque';
+  }
+
+  @override
+  String trackerUndoMosqueOff(String prayer) {
+    return '$prayer not at the mosque';
+  }
+
+  @override
+  String trackerUndoVoluntaryOn(String prayer) {
+    return '$prayer logged';
+  }
+
+  @override
+  String trackerUndoVoluntaryOff(String prayer) {
+    return '$prayer removed';
+  }
+
+  @override
+  String trackerUndoMadeUp(String prayer, String date) {
+    return '$prayer of $date made up';
+  }
+
+  @override
+  String trackerUndoMadeUpAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count prayers made up',
+      one: '1 prayer made up',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerNotYet(String prayer) {
+    return 'It isn\'t time for $prayer yet';
+  }
+
+  @override
+  String get trackerSunnahFajr => 'Fajr sunnah';
+
+  @override
+  String get trackerSunnahDhuhr => 'Dhuhr sunnah';
+
+  @override
+  String get trackerSunnahMaghrib => 'Maghrib sunnah';
+
+  @override
+  String get trackerSunnahIsha => 'Isha sunnah';
+
+  @override
+  String get trackerDuha => 'Duha';
+
+  @override
+  String get trackerWitr => 'Witr';
+
+  @override
+  String get trackerQiyam => 'Night prayer';
+
+  @override
+  String get trackerSunnahLabel => 'Sunnah';
+
+  @override
+  String trackerRakahBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count before',
+      one: '1 before',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerRakahAfter(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count after',
+      one: '1 after',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerRakahBoth(String before, String after) {
+    return '$before, $after';
+  }
+
+  @override
+  String get trackerDuhaWindow => 'From mid-morning until Dhuhr';
+
+  @override
+  String get trackerNightWindow => 'From Isha until Fajr';
+
+  @override
+  String get trackerStreakCurrent => 'Current streak';
+
+  @override
+  String get trackerStreakBest => 'Best streak';
+
+  @override
+  String get trackerStreakRule =>
+      'A day counts when all five are prayed or made up';
+
+  @override
+  String get trackerWeekTitle => 'The last seven days';
+
+  @override
+  String get trackerHeatmapTitle => 'The month';
+
+  @override
+  String get trackerLegendLess => 'Less';
+
+  @override
+  String get trackerLegendMore => 'All five';
+
+  @override
+  String get trackerLegendJamaah => 'Dots: prayers in jamaah';
+
+  @override
+  String get trackerPrevMonth => 'Previous month';
+
+  @override
+  String get trackerNextMonth => 'Next month';
+
+  @override
+  String trackerDaySemantics(
+    String date,
+    String done,
+    String total,
+    String jamaah,
+  ) {
+    return '$date: $done of $total prayed, $jamaah in jamaah';
+  }
+
+  @override
+  String trackerTotalsTitle(String month) {
+    return '$month at a glance';
+  }
+
+  @override
+  String get trackerTotalOnTime => 'On time';
+
+  @override
+  String get trackerTotalJamaah => 'In jamaah';
+
+  @override
+  String get trackerTotalMosque => 'At the mosque';
+
+  @override
+  String get trackerTotalCompleteDays => 'Complete days';
+
+  @override
+  String get trackerTotalRawatib => 'Rawatib';
+
+  @override
+  String get trackerTotalSunnahTitle => 'Sunnah and voluntary';
+
+  @override
+  String get trackerBreakdownTitle => 'Prayer by prayer';
+
+  @override
+  String get trackerNoMonthData => 'Nothing logged this month yet';
+
+  @override
+  String get trackerQadaTitle => 'Qada ledger';
+
+  @override
+  String trackerQadaOutstanding(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count prayers to make up',
+      one: '1 prayer to make up',
+      zero: 'Nothing to make up',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trackerQadaMadeUpSoFar(String count) {
+    return 'Made up so far: $count';
+  }
+
+  @override
+  String get trackerQadaEmpty => 'No missed prayers waiting – well done';
+
+  @override
+  String trackerQadaEmptyFiltered(String prayer) {
+    return 'Nothing to make up for $prayer';
+  }
+
+  @override
+  String trackerQadaMissedOn(String date) {
+    return 'Missed $date';
+  }
+
+  @override
+  String trackerQadaShowMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Show $count more',
+      one: 'Show 1 more',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trackerFilterAll => 'All';
+
+  @override
+  String get trackerCardOpen => 'Open the tracker';
+
+  @override
+  String trackerSlotSemantics(String prayer, String time, String status) {
+    return '$prayer, $time, $status';
+  }
+
+  @override
+  String trackerMarks(String first, String second) {
+    return '$first, $second';
+  }
+
+  @override
+  String trackerUntil(String time) {
+    return 'until $time';
+  }
+
+  @override
+  String trackerDueNow(String duration) {
+    return 'Due now · $duration left';
+  }
+
+  @override
+  String trackerValueOf(String label, String value) {
+    return '$label: $value';
+  }
+
+  @override
+  String get adhkarTitle => 'Adhkar';
+
+  @override
+  String get adhkarTodayTitle => 'Today\'s adhkar';
+
+  @override
+  String adhkarSetsDoneOf(String done, String total) {
+    return '$done of $total';
+  }
+
+  @override
+  String get adhkarSetsDoneCaption => 'sets complete';
+
+  @override
+  String get adhkarCategoryMorning => 'Morning adhkar';
+
+  @override
+  String get adhkarCategoryEvening => 'Evening adhkar';
+
+  @override
+  String get adhkarCategoryAfterPrayer => 'After-prayer adhkar';
+
+  @override
+  String get adhkarCategorySleep => 'Before-sleep adhkar';
+
+  @override
+  String get adhkarCategoryWaking => 'On-waking adhkar';
+
+  @override
+  String get adhkarCategoryMorningHint => 'From Fajr until mid-morning';
+
+  @override
+  String get adhkarCategoryEveningHint => 'From Asr until after Maghrib';
+
+  @override
+  String get adhkarCategoryAfterPrayerHint =>
+      'After the salam of every obligatory prayer';
+
+  @override
+  String get adhkarCategorySleepHint => 'As you go to bed';
+
+  @override
+  String get adhkarCategoryWakingHint => 'When you wake up';
+
+  @override
+  String get adhkarSuggestMorning => 'Time for your morning adhkar';
+
+  @override
+  String get adhkarSuggestEvening => 'Time for your evening adhkar';
+
+  @override
+  String get adhkarSuggestSleep => 'Your before-sleep adhkar, before you rest';
+
+  @override
+  String get adhkarSuggestWaking => 'Your on-waking adhkar';
+
+  @override
+  String adhkarSuggestAfterPrayer(String prayer) {
+    return 'The adhkar after $prayer';
+  }
+
+  @override
+  String get adhkarSuggestAllDone =>
+      'You\'ve said all of today\'s adhkar — may Allah accept';
+
+  @override
+  String get adhkarStart => 'Begin';
+
+  @override
+  String get adhkarContinue => 'Continue';
+
+  @override
+  String adhkarContinueAt(String position) {
+    return 'Continue from dhikr $position';
+  }
+
+  @override
+  String get adhkarDoneToday => 'Done today';
+
+  @override
+  String adhkarAfterPrayerProgress(String done, String total) {
+    return '$done of $total prayers';
+  }
+
+  @override
+  String adhkarItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count adhkar',
+      one: '1 dhikr',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get adhkarMarkDone => 'Mark as done';
+
+  @override
+  String adhkarMarkedDone(String name) {
+    return '$name marked done';
+  }
+
+  @override
+  String get adhkarRestart => 'Start over';
+
+  @override
+  String adhkarRestarted(String name) {
+    return '$name restarted';
+  }
+
+  @override
+  String get adhkarSourceCredit =>
+      'From “Hisn al-Muslim” by Sa\'id ibn Wahf al-Qahtani';
+
+  @override
+  String get adhkarLoadError => 'Couldn\'t load the adhkar';
+
+  @override
+  String get adhkarTasbeehTitle => 'Tasbeeh';
+
+  @override
+  String get adhkarTasbeehCardSubtitle =>
+      'A ring of beads that moves with every glorification';
+
+  @override
+  String adhkarTasbeehToday(String count) {
+    return 'Today: $count';
+  }
+
+  @override
+  String get adhkarRemindersTitle => 'Reminders';
+
+  @override
+  String get adhkarReminderMorningLabel =>
+      'Remind me of the morning adhkar after Fajr';
+
+  @override
+  String get adhkarReminderEveningLabel =>
+      'Remind me of the evening adhkar after Asr';
+
+  @override
+  String adhkarReminderOffset(int minutes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      minutes,
+      locale: localeName,
+      other: '$minutes min',
+      one: '1 min',
+      zero: 'At the adhan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get adhkarReminderOffsetCaption => 'How long after the adhan';
+
+  @override
+  String get adhkarReminderNote =>
+      'Reminders stay on this device and arrive once Madar may send notifications.';
+
+  @override
+  String get adhkarReminderMorningTitle => 'Morning adhkar';
+
+  @override
+  String get adhkarReminderMorningBody =>
+      'Time for your morning adhkar — begin your day with the remembrance of Allah';
+
+  @override
+  String get adhkarReminderEveningTitle => 'Evening adhkar';
+
+  @override
+  String get adhkarReminderEveningBody =>
+      'Time for your evening adhkar — a calm close to your day';
+
+  @override
+  String adhkarReaderPosition(String index, String total) {
+    return '$index of $total';
+  }
+
+  @override
+  String get adhkarRemaining => 'to go';
+
+  @override
+  String get adhkarCounterDone => 'Done';
+
+  @override
+  String get adhkarCounterHint => 'Tap anywhere to count';
+
+  @override
+  String adhkarCounterSemantics(String done, String total) {
+    return 'Count once — $done of $total';
+  }
+
+  @override
+  String adhkarRepeat(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      two: 'Twice',
+      one: 'Once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get adhkarReadingDone => 'I\'ve read them';
+
+  @override
+  String get adhkarVirtue => 'Its virtue';
+
+  @override
+  String get adhkarReference => 'Source';
+
+  @override
+  String get adhkarMeaning => 'Meaning';
+
+  @override
+  String adhkarQuranRef(String surah, String ayahs) {
+    return 'Surat $surah · $ayahs';
+  }
+
+  @override
+  String get adhkarSurah2 => 'al-Baqarah';
+
+  @override
+  String get adhkarSurah3 => 'Al Imran';
+
+  @override
+  String get adhkarSurah112 => 'al-Ikhlas';
+
+  @override
+  String get adhkarSurah113 => 'al-Falaq';
+
+  @override
+  String get adhkarSurah114 => 'an-Nas';
+
+  @override
+  String adhkarSurahNumber(String number) {
+    return 'no. $number';
+  }
+
+  @override
+  String get adhkarPrevious => 'Previous dhikr';
+
+  @override
+  String get adhkarNext => 'Next dhikr';
+
+  @override
+  String adhkarDhikrSemantics(String index, String total) {
+    return 'Dhikr $index of $total';
+  }
+
+  @override
+  String get adhkarOptionsTitle => 'Reading options';
+
+  @override
+  String get adhkarTextSize => 'Text size';
+
+  @override
+  String get adhkarTextSizeSmaller => 'Smaller text';
+
+  @override
+  String get adhkarTextSizeLarger => 'Larger text';
+
+  @override
+  String get adhkarShowTranslation => 'Show the English meaning';
+
+  @override
+  String get adhkarShowVirtue => 'Show virtue and source';
+
+  @override
+  String get adhkarRecountCurrent => 'Recount this dhikr';
+
+  @override
+  String get adhkarRestartSet => 'Restart the set';
+
+  @override
+  String get adhkarMarkSetDone => 'I\'ve said the whole set';
+
+  @override
+  String adhkarAfterPrayerFor(String prayer) {
+    return 'After $prayer';
+  }
+
+  @override
+  String get adhkarChoosePrayer => 'After which prayer?';
+
+  @override
+  String get adhkarSetCompleteTitle => 'May Allah accept it from you';
+
+  @override
+  String adhkarSetCompleteBody(String name) {
+    return '$name complete';
+  }
+
+  @override
+  String get adhkarSetCompleteReview => 'Review';
+
+  @override
+  String get adhkarAudioTitle => 'Recording';
+
+  @override
+  String get adhkarAudioAttach => 'Attach a recording';
+
+  @override
+  String get adhkarAudioReplace => 'Replace';
+
+  @override
+  String get adhkarAudioRemove => 'Remove';
+
+  @override
+  String get adhkarAudioRemoved => 'Recording removed';
+
+  @override
+  String get adhkarAudioAttached => 'Recording attached';
+
+  @override
+  String get adhkarAudioPlay => 'Play the recording';
+
+  @override
+  String get adhkarAudioStop => 'Stop the recording';
+
+  @override
+  String get adhkarAudioNone =>
+      'No recording for this dhikr yet. Attach an audio file from your device (MP3, WAV or FLAC) to hear it here.';
+
+  @override
+  String get adhkarAudioPolicy =>
+      'Madar never uses generated voices for Quran or adhkar — attach a recording you trust; it stays on your device.';
+
+  @override
+  String get adhkarAudioUnsupported =>
+      'This file isn\'t in a supported format (MP3, WAV or FLAC)';
+
+  @override
+  String get adhkarAudioTooLarge => 'The file is larger than 30 MB';
+
+  @override
+  String get adhkarAudioUnavailable => 'Audio can\'t play on this device';
+
+  @override
+  String adhkarAudioFile(String name, String duration) {
+    return '$name · $duration';
+  }
+
+  @override
+  String get adhkarTasbeehTarget => 'Round of';
+
+  @override
+  String get adhkarTasbeehCustom => 'Custom';
+
+  @override
+  String get adhkarTasbeehCustomTitle => 'Custom round';
+
+  @override
+  String get adhkarTasbeehCustomField => 'Count per round';
+
+  @override
+  String get adhkarTasbeehCustomInvalid => 'Enter a number from 1 to 9999';
+
+  @override
+  String adhkarTasbeehRound(String round) {
+    return 'Round $round';
+  }
+
+  @override
+  String adhkarTasbeehOf(String target) {
+    return 'of $target';
+  }
+
+  @override
+  String adhkarTasbeehTotal(String count) {
+    return 'Total $count';
+  }
+
+  @override
+  String get adhkarTasbeehTapHint => 'Tap to count · long-press to reset';
+
+  @override
+  String adhkarTasbeehCountSemantics(
+    String phrase,
+    String count,
+    String target,
+    String round,
+  ) {
+    return '$phrase: $count of $target, round $round';
+  }
+
+  @override
+  String get adhkarTasbeehCountHint => 'Double-tap to count';
+
+  @override
+  String get adhkarTasbeehResetTitle => 'Reset the count?';
+
+  @override
+  String adhkarTasbeehResetBody(String count) {
+    return 'Your count ($count) is saved to your history, then counting starts again from zero.';
+  }
+
+  @override
+  String get adhkarTasbeehReset => 'Reset';
+
+  @override
+  String get adhkarTasbeehPhrases => 'Tasbeeh phrases';
+
+  @override
+  String get adhkarTasbeehEditPhrases => 'Edit phrases';
+
+  @override
+  String get adhkarTasbeehAddPhrase => 'Add a phrase';
+
+  @override
+  String get adhkarTasbeehEditPhrase => 'Edit phrase';
+
+  @override
+  String get adhkarTasbeehPhraseField => 'Phrase';
+
+  @override
+  String get adhkarTasbeehPhraseDeleted => 'Phrase removed';
+
+  @override
+  String get adhkarTasbeehNoPhrases => 'Add a phrase to start counting';
+
+  @override
+  String get adhkarTasbeehHistory => 'Tasbeeh history';
+
+  @override
+  String get adhkarTasbeehHistoryEmpty => 'No sessions yet';
+
+  @override
+  String get adhkarTasbeehSessionDeleted => 'Session removed';
+
+  @override
+  String adhkarTasbeehRounds(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rounds',
+      one: '1 round',
+      zero: 'No full round',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get adhkarPhraseSubhanallah => 'Glory be to Allah';
+
+  @override
+  String get adhkarPhraseAlhamdulillah => 'Praise be to Allah';
+
+  @override
+  String get adhkarPhraseAllahuakbar => 'Allah is the Greatest';
+
+  @override
+  String get adhkarPhraseTahlil => 'There is no god but Allah';
+
+  @override
+  String get adhkarPhraseIstighfar => 'I seek Allah\'s forgiveness';
+
+  @override
+  String get adhkarPhraseSubhanallahWaBihamdihi =>
+      'Glory be to Allah, and praise be to Him';
+
+  @override
+  String get adhkarPhraseSubhanallahilAzim =>
+      'Glory be to Allah, the Magnificent';
+
+  @override
+  String get adhkarPhraseHawqala =>
+      'There is no might and no power except by Allah';
+
+  @override
+  String get adhkarPhraseSalawat =>
+      'O Allah, send blessings and peace upon our Prophet Muhammad';
+
+  @override
+  String get adhkarAllAdhkar => 'All adhkar';
+
+  @override
+  String get adhkarShortMorning => 'Morning';
+
+  @override
+  String get adhkarShortEvening => 'Evening';
+
+  @override
+  String get adhkarShortAfterPrayer => 'After prayer';
+
+  @override
+  String get adhkarShortSleep => 'Sleep';
+
+  @override
+  String get adhkarShortWaking => 'Waking';
+
+  @override
+  String adhkarJoin(String first, String second) {
+    return '$first · $second';
+  }
+
+  @override
+  String adhkarTasbeehChip(String count) {
+    return 'Tasbeeh: $count';
+  }
+
+  @override
+  String adhkarTodayLine(String suggestion, String done, String total) {
+    return '$suggestion ($done of $total done)';
+  }
+
+  @override
+  String get adhkarReminderChannelName => 'Adhkar reminders';
+
+  @override
+  String get adhkarReminderChannelDescription =>
+      'Morning adhkar after Fajr and evening adhkar after Asr';
+
+  @override
+  String get adhkarReminderPermissionDenied =>
+      'Notifications are off for Madar, so reminders can’t arrive. You can turn them on in your phone’s settings.';
+
+  @override
+  String adhkarSuggestDone(String set) {
+    String _temp0 = intl.Intl.selectLogic(set, {
+      'morning': 'Morning adhkar said — may Allah accept',
+      'evening': 'Evening adhkar said — may Allah accept',
+      'sleep': 'Before-sleep adhkar said — rest well',
+      'waking': 'On-waking adhkar said — a blessed day to you',
+      'other': 'Adhkar said — may Allah accept',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String adhkarSuggestAfterPrayerDone(String prayer) {
+    return 'Adhkar after $prayer said — may Allah accept';
+  }
+
+  @override
+  String faithHubAt(String time) {
+    return 'at $time';
+  }
+
+  @override
+  String get faithHubLinksTitle => 'Quick links';
+
+  @override
+  String get faithHubTimesHint => 'Day, month and Hijri date';
+
+  @override
+  String get faithHubHistory => 'Prayer history';
+
+  @override
+  String get faithHubHistoryHint => 'Streaks, make-ups and totals';
+
+  @override
+  String get faithHubAdhkarHint => 'Hisn al-Muslim';
+
+  @override
+  String get faithHubTasbeehHint => 'A bead counter';
+
+  @override
+  String get faithHubAdhanHint => 'Muezzin, reminders and permissions';
 }

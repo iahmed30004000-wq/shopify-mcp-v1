@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../i18n/gen/app_localizations.dart';
 import '../../motion/motion.dart';
 import '../../sound/sound_api.dart';
+import '../contrast.dart';
 import '../tokens.dart';
 import 'glass.dart';
 import 'orbit_loader.dart';
@@ -40,13 +41,18 @@ class MadarButtonStyle {
     switch (variant) {
       case MadarButtonVariant.primary:
         final hsl = HSLColor.fromColor(t.accent);
+        // A gentler sheen on light themes: their deep accents would lose the
+        // label's contrast under a brighter top.
+        final lift = t.isDark ? 0.1 : 0.04;
+        final label = t.textOnAccent;
+        // Each end of the sheen keeps the label at AA: a custom accent sits
+        // just past 4.5 : 1, so an unchecked darker (dark ink) or lighter
+        // (light ink) end would drop the label below it.
+        Color end(double dl) =>
+            MadarContrast.ensure(hsl.withLightness((hsl.lightness + dl).clamp(0.05, 0.95)).toColor(), [label]);
         return MadarButtonStyle(
-          foreground: t.textOnAccent,
-          gradient: [
-            hsl.withLightness((hsl.lightness + 0.1).clamp(0.0, 0.95)).toColor(),
-            t.accent,
-            hsl.withLightness((hsl.lightness - 0.08).clamp(0.05, 1.0)).toColor(),
-          ],
+          foreground: label,
+          gradient: [end(lift), t.accent, end(-0.08)],
           border: t.glassHighlight,
           glow: t.accentGlow,
         );
@@ -264,6 +270,8 @@ class _MadarButtonState extends State<MadarButton> {
     surface = MadarPressable(
       onTap: widget.enabled ? widget.onPressed : null,
       sfx: widget.sfx,
+      // A small (36 dp) button still gets a 48 dp touch target.
+      minTapTarget: MadarPressable.minTouchTarget,
       semanticLabel: widget.loading && loadingLabel != null ? '${semantic ?? ''} ($loadingLabel)' : semantic,
       excludeChildSemantics: true,
       focusRadius: radius,

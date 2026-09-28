@@ -77,7 +77,12 @@ class MadarApp extends ConsumerWidget {
       supportedLocales: L10n.supportedLocales,
       localizationsDelegates: L10n.localizationsDelegates,
       routerConfig: router,
-      builder: (context, child) => AppFrame(child: child ?? const SizedBox.shrink()),
+      // Typography follows a language switch in the same frame (the theme
+      // cross-fade would otherwise reflow every text for its duration).
+      builder: (context, child) => MadarTypographyScope(
+        arabic: settings.isArabic,
+        child: AppFrame(child: child ?? const SizedBox.shrink()),
+      ),
     );
   }
 }

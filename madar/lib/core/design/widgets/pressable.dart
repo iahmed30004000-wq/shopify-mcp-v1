@@ -1,5 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../motion/motion.dart';
@@ -31,7 +34,11 @@ class MadarPressable extends StatefulWidget {
     this.autofocus = false,
     this.excludeChildSemantics = false,
     this.focusRadius,
+    this.minTapTarget,
   });
+
+  /// Android's minimum touch target (Material / WCAG 2.5.8 guidance).
+  static const Size minTouchTarget = Size(48, 48);
 
   final Widget child;
   final VoidCallback? onTap;
@@ -57,6 +64,12 @@ class MadarPressable extends StatefulWidget {
 
   /// Corner radius of the keyboard-focus ring (defaults to a pill).
   final BorderRadius? focusRadius;
+
+  /// Grows the touch target (and the screen-reader node) to at least this
+  /// size around a smaller visual, e.g. [minTouchTarget] for a 32 dp chip.
+  /// The child is centred in it; the press, focus ring and painting stay on
+  /// the child. `null` = the child's own size.
+  final Size? minTapTarget;
 
   bool get _interactive => enabled && (onTap != null || onLongPress != null);
 
@@ -174,11 +187,17 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
     final interactive = widget._interactive;
     // The ring is always in the tree (only its decoration changes), so
     // focusing never rebuilds – and never resets – the child's state.
-    final child = _FocusRing(
+    Widget child = _FocusRing(
       visible: _focused,
       radius: widget.focusRadius,
       child: ScaleTransition(scale: _scale, child: widget.child),
     );
+    final min = widget.minTapTarget;
+    if (min != null) {
+      // Inside the gesture detectors (so the margin is touchable) and the
+      // Semantics (so the node is the full target), outside the visual.
+      child = TapTargetBox(minSize: min, child: child);
+    }
     return Semantics(
       button: widget.button,
       enabled: interactive,
@@ -243,5 +262,67 @@ class _FocusRing extends StatelessWidget {
           : const BoxDecoration(),
       child: child,
     );
+  }
+}
+
+/// Grows to at least [minSize] around a smaller child, centring it, without
+/// changing the constraints the child is laid out with (a button stretched
+/// by its parent stays stretched; a 36 dp one gains a 48 dp margin). Like
+/// Material's padded tap targets, but layout-neutral for large children.
+class TapTargetBox extends SingleChildRenderObjectWidget {
+  const TapTargetBox({super.key, required this.minSize, super.child});
+
+  final Size minSize;
+
+  @override
+  RenderTapTargetBox createRenderObject(BuildContext context) => RenderTapTargetBox(minSize);
+
+  @override
+  void updateRenderObject(BuildContext context, RenderTapTargetBox renderObject) => renderObject.minSize = minSize;
+}
+
+class RenderTapTargetBox extends RenderShiftedBox {
+  RenderTapTargetBox(this._minSize) : super(null);
+
+  Size _minSize;
+  Size get minSize => _minSize;
+  set minSize(Size value) {
+    if (value == _minSize) return;
+    _minSize = value;
+    markNeedsLayout();
+  }
+
+  @override
+  double computeMinIntrinsicWidth(double height) => math.max(super.computeMinIntrinsicWidth(height), minSize.width);
+
+  @override
+  double computeMaxIntrinsicWidth(double height) => math.max(super.computeMaxIntrinsicWidth(height), minSize.width);
+
+  @override
+  double computeMinIntrinsicHeight(double width) => math.max(super.computeMinIntrinsicHeight(width), minSize.height);
+
+  @override
+  double computeMaxIntrinsicHeight(double width) => math.max(super.computeMaxIntrinsicHeight(width), minSize.height);
+
+  Size _sizeFor(BoxConstraints constraints, Size childSize) =>
+      constraints.constrain(Size(math.max(childSize.width, minSize.width), math.max(childSize.height, minSize.height)));
+
+  @override
+  Size computeDryLayout(covariant BoxConstraints constraints) {
+    final c = child;
+    if (c == null) return constraints.constrain(minSize);
+    return _sizeFor(constraints, c.getDryLayout(constraints));
+  }
+
+  @override
+  void performLayout() {
+    final c = child;
+    if (c == null) {
+      size = constraints.constrain(minSize);
+      return;
+    }
+    c.layout(constraints, parentUsesSize: true);
+    size = _sizeFor(constraints, c.size);
+    (c.parentData! as BoxParentData).offset = Alignment.center.alongOffset(size - c.size as Offset);
   }
 }

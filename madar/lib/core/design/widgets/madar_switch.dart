@@ -112,6 +112,7 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     final t = context.tokens;
     final accent = widget.activeColor ?? t.accent;
+    final colors = MadarSwitchColors.of(t);
     return Semantics(
       toggled: widget.value,
       enabled: _enabled,
@@ -143,8 +144,8 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
           child: Opacity(
             opacity: _enabled ? 1 : 0.45,
             child: Padding(
-              // Generous hit area around the 54×32 visual.
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              // A 48 dp tall touch target around the 54×32 visual.
+              padding: const EdgeInsets.symmetric(vertical: 8),
               child: RepaintBoundary(
                 child: CustomPaint(
                   size: MadarSwitch.size,
@@ -153,12 +154,12 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
                     press: _press,
                     accent: accent,
                     accentGlow: t.accentGlow,
-                    track: Color.alphaBlend(t.glassFill, t.space2.withValues(alpha: t.isDark ? 0.7 : 0.55)),
-                    border: t.glassBorder,
+                    track: colors.track,
+                    border: colors.border,
                     highlight: t.glassHighlight,
-                    thumbOff: t.isDark ? t.textSecondary : t.space0,
-                    thumbOn: t.isDark ? t.textPrimary : t.space0,
-                    engraveOff: t.textTertiary,
+                    thumbOff: colors.thumbOff,
+                    thumbOn: colors.thumbOn,
+                    engraveOff: colors.engraveOff,
                     shadow: t.glassShadow,
                     rtl: Directionality.of(context) == TextDirection.rtl,
                   ),
@@ -170,6 +171,40 @@ class _MadarSwitchState extends State<MadarSwitch> with TickerProviderStateMixin
       ),
     );
   }
+}
+
+/// The switch's resting colours for a theme (pure – contrast-tested).
+///
+/// Night themes: a glass track with a pale pearl thumb. Pearl: a sand track
+/// with an ink outline and an ink thumb while off – a white thumb on white
+/// glass would vanish – turning into a pearl thumb on the accent when on.
+@immutable
+class MadarSwitchColors {
+  const MadarSwitchColors({
+    required this.track,
+    required this.border,
+    required this.thumbOff,
+    required this.thumbOn,
+    required this.engraveOff,
+  });
+
+  factory MadarSwitchColors.of(MadarTokens t) => t.isDark
+      ? MadarSwitchColors(
+          track: Color.alphaBlend(t.glassFill, t.space2.withValues(alpha: 0.7)),
+          border: t.glassBorder,
+          thumbOff: t.textSecondary,
+          thumbOn: t.textPrimary,
+          engraveOff: t.textTertiary,
+        )
+      : MadarSwitchColors(
+          track: t.space2,
+          border: t.textTertiary.withValues(alpha: 0.7),
+          thumbOff: t.textTertiary,
+          thumbOn: t.space0,
+          engraveOff: t.space0,
+        );
+
+  final Color track, border, thumbOff, thumbOn, engraveOff;
 }
 
 class MadarSwitchPainter extends CustomPainter {

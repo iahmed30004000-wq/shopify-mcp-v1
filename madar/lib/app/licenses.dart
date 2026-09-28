@@ -8,7 +8,11 @@ import 'package:flutter/services.dart';
 /// * SQLCipher 4.19.0 (BSD-style, Zetetic LLC) – the encrypted SQLite build
 ///   the `sqlite3` package's build hook links on Android;
 /// * OpenSSL 3.6.4 (Apache 2.0) – linked by that SQLCipher build;
-/// * the four bundled font families (SIL OFL 1.1).
+/// * the four bundled font families (SIL OFL 1.1);
+/// * the bundled content and its sources ([content]): the adhkar (Hisn
+///   al-Muslim datasets, MIT / Unlicense), the offline city list (Natural
+///   Earth, GeoNames CC BY 4.0, IANA, Unicode CLDR) and the adhan tones
+///   (Madar's own, with the record of the recordings search).
 abstract final class MadarLicenses {
   static bool _registered = false;
 
@@ -23,6 +27,14 @@ abstract final class MadarLicenses {
     'Amiri Quran': 'assets/fonts/licenses/amiriquran-OFL.txt',
   };
 
+  /// Bundled content → its credits file (also listed on Settings › About ›
+  /// Fonts & credits).
+  static const content = {
+    'Adhkar – Hisn al-Muslim': 'assets/licenses/adhkar_credits.txt',
+    'Madar city list': 'assets/licenses/geo_cities.txt',
+    'Madar adhan tones': 'assets/licenses/adhan_sounds.txt',
+  };
+
   /// Lets a test register again after `LicenseRegistry.reset()`.
   @visibleForTesting
   static void debugReset() => _registered = false;
@@ -33,7 +45,7 @@ abstract final class MadarLicenses {
     _registered = true;
     LicenseRegistry.addLicense(() async* {
       final assets = bundle ?? rootBundle;
-      for (final e in {...native, ...fonts}.entries) {
+      for (final e in {...native, ...fonts, ...content}.entries) {
         try {
           yield LicenseEntryWithLineBreaks([e.key], await assets.loadString(e.value));
         } catch (err) {

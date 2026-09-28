@@ -44,6 +44,9 @@ class MadarTokens extends ThemeExtension<MadarTokens> {
     this.radiusXL = 34,
     this.blurSigma = 22,
     this.grainOpacity = 0.06,
+    this._metalGold,
+    this._metalBrass,
+    this._glassLit,
   });
 
   final Brightness brightness;
@@ -62,8 +65,27 @@ class MadarTokens extends ThemeExtension<MadarTokens> {
   /// Secondary brand hue of the theme and a cool/contrasting highlight.
   final Color secondary, highlight;
 
-  /// Astrolabe metals.
+  /// Astrolabe metals. [gold] is also a text colour on every surface (a
+  /// deep "ink" gold on a light theme); [brass] draws rings and rules
+  /// (graphic contrast, 3:1), never text.
   final Color gold, brass, brassDark;
+
+  final Color? _metalGold, _metalBrass;
+
+  /// The polished metal of rendered objects (the astrolabe's brass body and
+  /// highlights). Same as [gold] / [brass] on the night themes; brighter than
+  /// the text-safe [gold] / [brass] on a light theme. Never use for text.
+  Color get metalGold => _metalGold ?? gold;
+  Color get metalBrass => _metalBrass ?? brass;
+
+  final Color? _glassLit;
+
+  /// The hardest ground text really meets on this theme: on the night
+  /// themes, glass lit by the nebula behind it (its rim light and a passing
+  /// sheen included) – measured on rendered screens, far brighter than the
+  /// token surfaces; on Pearl, the raised [space2]. For contrast checks
+  /// only (custom accents are fitted to it); never paint with it.
+  Color get glassLit => _glassLit ?? space2;
 
   final Color success, warning, danger, info;
 
@@ -119,6 +141,9 @@ class MadarTokens extends ThemeExtension<MadarTokens> {
       radiusXL: radiusXL,
       blurSigma: blurSigma,
       grainOpacity: grainOpacity,
+      metalGold: _metalGold,
+      metalBrass: _metalBrass,
+      glassLit: _glassLit,
     );
   }
 
@@ -163,6 +188,9 @@ class MadarTokens extends ThemeExtension<MadarTokens> {
       radiusXL: d(radiusXL, other.radiusXL),
       blurSigma: d(blurSigma, other.blurSigma),
       grainOpacity: d(grainOpacity, other.grainOpacity),
+      metalGold: c(metalGold, other.metalGold),
+      metalBrass: c(metalBrass, other.metalBrass),
+      glassLit: c(glassLit, other.glassLit),
     );
   }
 
@@ -178,6 +206,7 @@ class MadarTokens extends ThemeExtension<MadarTokens> {
     nebulaA, nebulaB, starTint, dust,
     radiusS, radiusM, radiusL, radiusXL,
     blurSigma, grainOpacity,
+    metalGold, metalBrass, glassLit,
   ];
 
   /// Value equality: `ThemeData ==` compares extensions, so two themes built

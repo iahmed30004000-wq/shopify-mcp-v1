@@ -240,7 +240,7 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
       style: text.bodyLarge?.copyWith(color: t.textPrimary),
       cursorColor: t.accent,
       decoration: InputDecoration(
-        hintText: widget.hint ?? l10n.interactionQuickAddHint,
+        hintText: widget.hint ?? MadarFormatter.of(context).localizeDigits(l10n.interactionQuickAddHint),
         hintStyle: text.bodyMedium?.copyWith(color: t.textTertiary),
         hintMaxLines: 1,
         border: InputBorder.none,

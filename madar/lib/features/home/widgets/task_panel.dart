@@ -15,6 +15,7 @@ import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
+import '../../../core/routing/route_pages.dart';
 import '../../../core/settings/app_settings.dart';
 import '../home_providers.dart';
 import 'neglect_radar_card.dart';
@@ -75,6 +76,7 @@ class TaskPanel extends ConsumerWidget {
           nextWindow: nextWindow,
           countdown: l.orbitUiInDuration(fmt.formatDurationWords(l, next.at.difference(now))),
           onSelected: (w) => ref.read(homeWindowProvider.notifier).focus(w == current ? null : w),
+          onOpenTimes: () => FaithNav.prayerTimes(context),
         ),
         if (onOpenPlanet != null) ...[
           const SizedBox(height: Space.s + 2),

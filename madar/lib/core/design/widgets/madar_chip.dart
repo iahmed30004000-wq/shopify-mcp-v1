@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../motion/motion.dart';
@@ -69,6 +71,7 @@ class MadarChip extends StatelessWidget {
     final accent = color ?? t.accent;
     final text = Theme.of(context).textTheme.labelLarge!;
     final h = dense ? 32.0 : 38.0;
+    final maxWidth = math.max(96.0, (MediaQuery.maybeSizeOf(context)?.width ?? 600) - 2 * Space.gutter);
     return MadarPressable(
       onTap: onSelected == null ? null : () => onSelected!(!selected),
       sfx: sfx,
@@ -76,6 +79,8 @@ class MadarChip extends StatelessWidget {
       semanticLabel: label,
       excludeChildSemantics: true,
       focusRadius: BorderRadius.circular(h / 2),
+      // Tappable chips get a 48 dp touch target around the 32/38 dp pill.
+      minTapTarget: onSelected == null ? null : MadarPressable.minTouchTarget,
       child: TweenAnimationBuilder<double>(
         tween: Tween(end: selected ? 1 : 0),
         duration: context.motion(MadarMotion.short),
@@ -113,22 +118,30 @@ class MadarChip extends StatelessWidget {
               accent: accent,
               highlight: t.glassHighlight,
             ),
-            child: SizedBox(
-              height: h,
+            child: ConstrainedBox(
+              // Never wider than the screen, even in a horizontally scrolling
+              // row (so the label below can always ellipsise).
+              constraints: BoxConstraints(minHeight: h, maxHeight: h, maxWidth: maxWidth),
               child: Padding(
                 padding: EdgeInsetsDirectional.symmetric(horizontal: dense ? Space.m : Space.l - 2),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ...leading,
-                    Text(
-                      label,
-                      maxLines: 1,
-                      style: text.copyWith(
-                        color: fg,
-                        fontSize: dense ? 12.5 : 13.5,
-                        fontWeight: v > 0.5 ? FontWeight.w600 : FontWeight.w500,
-                        height: 1.2,
+                    // Ellipsised rather than overflowing when large text makes
+                    // a chip wider than its row.
+                    Flexible(
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: text.copyWith(
+                          color: fg,
+                          fontSize: dense ? 12.5 : 13.5,
+                          fontWeight: v > 0.5 ? FontWeight.w600 : FontWeight.w500,
+                          height: 1.2,
+                        ),
                       ),
                     ),
                   ],
@@ -172,6 +185,9 @@ class ChipPainter extends CustomPainter {
     required this.highlight,
   });
 
+  /// Opacity of the accent wash on a selected chip.
+  static const double selectedTint = 0.1;
+
   final double selection;
   final Color fill;
   final Color border;
@@ -188,7 +204,10 @@ class ChipPainter extends CustomPainter {
     }
     canvas.drawRRect(
       rrect,
-      Paint()..color = Color.lerp(fill, Color.alphaBlend(accent.withValues(alpha: 0.22), fill), v)!,
+      // A light tint: accent-coloured text on a selected chip (a prayer
+      // chip's time, a check) must keep 4.5 : 1 on it – the rim and glow
+      // carry the selection.
+      Paint()..color = Color.lerp(fill, Color.alphaBlend(accent.withValues(alpha: selectedTint), fill), v)!,
     );
     canvas.drawRRect(
       rrect,
@@ -290,6 +309,10 @@ class ChoicePills<T> extends StatelessWidget {
   final bool dense;
   final EdgeInsetsGeometry padding;
 
+  /// Rows of chips already sit 48 dp apart (their touch targets), so the
+  /// visible gap needs little or no extra run spacing.
+  double get _runSpacing => math.max(0.0, runSpacing - (MadarPressable.minTouchTarget.height - (dense ? 32 : 38)));
+
   final T? _selected;
   final ValueChanged<T?>? _onSingle;
   final Set<T>? _selectedSet;
@@ -348,7 +371,7 @@ class ChoicePills<T> extends StatelessWidget {
     } else {
       body = Padding(
         padding: padding,
-        child: Wrap(spacing: spacing, runSpacing: runSpacing, children: chips),
+        child: Wrap(spacing: spacing, runSpacing: _runSpacing, children: chips),
       );
     }
     return Semantics(container: true, explicitChildNodes: true, child: body);

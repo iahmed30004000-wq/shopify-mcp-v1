@@ -330,13 +330,17 @@ void main() {
   });
 
   group('Indicators', () {
-    testWidgets('ProgressRing reports a clamped percentage', (tester) async {
-      await pumpMadar(tester, const ProgressRing(value: 0.724, semanticLabel: 'Goal'));
+    testWidgets('ProgressRing reports a clamped percentage in the UI digits', (tester) async {
+      await pumpMadar(tester, const ProgressRing(value: 0.724, semanticLabel: 'Goal'), locale: const Locale('en'));
       await tester.pump(const Duration(seconds: 1));
       expect(tester.getSemantics(find.byType(ProgressRing)), matchesSemantics(label: 'Goal', value: '72%'));
-      await pumpMadar(tester, const ProgressRing(value: 3, semanticLabel: 'Goal'));
+      await pumpMadar(tester, const ProgressRing(value: 3, semanticLabel: 'Goal'), locale: const Locale('en'));
       await tester.pump(const Duration(seconds: 1));
       expect(tester.getSemantics(find.byType(ProgressRing)), matchesSemantics(label: 'Goal', value: '100%'));
+      // Arabic reads Arabic-Indic digits by default.
+      await pumpMadar(tester, const ProgressRing(value: 0.724, semanticLabel: 'Goal'));
+      await tester.pump(const Duration(seconds: 1));
+      expect(tester.getSemantics(find.byType(ProgressRing)), matchesSemantics(label: 'Goal', value: '٧٢٪'));
     });
 
     testWidgets('OrbitLoader is announced as loading (localised)', (tester) async {

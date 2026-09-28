@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/design/contrast.dart';
 import '../../../../core/design/themes.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/typography.dart';
@@ -24,6 +25,7 @@ import '../scene/orbit_flight.dart';
 import '../scene/scene_composition.dart';
 import '../scene/scene_controller.dart';
 import 'customize_sheet.dart';
+import 'faith_hub.dart';
 import 'moon_sheet.dart';
 import 'planet_modules.dart';
 import 'record_open.dart';
@@ -341,7 +343,11 @@ Color _sheetTint(MadarTokens t, PlanetPalette? palette) {
     return palette == null ? base : Color.alphaBlend(palette.surface.withValues(alpha: 0.1), base);
   }
   final navy = Color.alphaBlend(t.space0.withValues(alpha: 0.55), t.space1).withValues(alpha: 0.8);
-  return palette == null ? navy : Color.alphaBlend(palette.deep.withValues(alpha: 0.42), navy);
+  if (palette == null) return navy;
+  // A bright world colour (Faith's gold) is deepened first: measured on
+  // renders, it lifted the sheet until secondary text read at ~4 : 1.
+  final deep = MadarContrast.ensure(palette.deep, [t.textPrimary], min: 10);
+  return Color.alphaBlend(deep.withValues(alpha: 0.42), navy);
 }
 
 /// Deepens the sheet toward its bottom edge: the blurred worlds far below
@@ -547,14 +553,10 @@ class _Sheet extends StatelessWidget {
               child: _ScoreRow(planet: planet),
             ),
           ),
-          // The world's own module first: Faith's prayers of the day …
-          if (planet.key == 'faith') ...[
-            StaggerItem(index: 1, child: section(l.orbitUiTodayPrayersTitle)),
-            StaggerItem(
-              index: 1,
-              child: FaithTodayModule(snapshot: snapshot, planet: planet),
-            ),
-          ],
+          // The world's own module first: Faith's hub of the day – the next
+          // prayer, today's prayers (tracker) and adhkar, and links to the
+          // faith pages …
+          if (planet.key == 'faith') ...[const SizedBox(height: Space.l), const FaithHub(firstIndex: 1)],
           // … and every world's tasks of the day.
           StaggerItem(index: 1, child: section(l.orbitUiWorldTasksTitle)),
           StaggerItem(index: 1, child: WorldTasksModule(planetKey: planet.key)),

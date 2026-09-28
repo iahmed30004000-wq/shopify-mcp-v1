@@ -12,6 +12,7 @@ import '../../core/i18n/formatters.dart';
 import '../../core/i18n/gen/app_localizations.dart';
 import '../../core/interaction/interaction.dart';
 import '../../core/motion/motion_kit.dart';
+import '../../core/routing/route_pages.dart';
 import '../../core/routing/routes.dart';
 import '../../core/sound/sound_api.dart';
 import '../orbit/presentation/orbit_ui_providers.dart';
@@ -19,6 +20,7 @@ import '../orbit/presentation/planet/customize_sheet.dart';
 import '../orbit/presentation/prayer/prayer_sheet.dart';
 import '../orbit/presentation/scene/flight.dart';
 import '../orbit/presentation/scene/orbit_scene.dart';
+import '../prayer/prayer.dart' show PrayerLabels, hijriDateProvider;
 import 'home_providers.dart';
 import 'widgets/task_panel.dart';
 
@@ -272,7 +274,7 @@ class _Scene extends ConsumerWidget {
     onPlanetTap: (key, _) => onOpenPlanet(key),
     onMoonTap: (moon, key, _) => onOpenPlanet(key, item: moon.id),
     onPlanetLongPress: (key, _) => showPlanetCustomizeSheet(context, ref, key),
-    onPrayerTap: (prayer) => showPrayerSheet(context, ref, prayer),
+    onPrayerTap: (prayer) => showPrayerSheet(context, ref, prayer, links: true),
   );
 }
 
@@ -323,6 +325,15 @@ class _HomeHeader extends ConsumerWidget {
     final text = Theme.of(context).textTheme;
     final now = ref.watch(homeNowProvider);
     final fmt = MadarFormatter.of(context);
+    // The header sits on the real sky, not on a theme surface: on a light
+    // theme's night sky (deep slate) dark ink read at 2 : 1, so it turns
+    // pearl over a halo of the theme's ink – as the planet labels do.
+    final nightSky = !t.isDark && ref.watch(homeSkyDaylightProvider) < 0.5;
+    final halo = nightSky ? t.textPrimary : t.space0;
+    final date = l.homeDateWithHijri(
+      fmt.formatDate(now, style: MadarDateStyle.weekdayDayMonth),
+      l.hijriDayMonth(ref.watch(hijriDateProvider(now)), fmt),
+    );
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.l, 0),
       child: Row(
@@ -340,20 +351,27 @@ class _HomeHeader extends ConsumerWidget {
                     l.appName,
                     maxLines: 1,
                     style: text.headlineSmall!.copyWith(
-                      color: t.gold,
+                      color: nightSky ? t.space0 : t.gold,
                       height: 1.15,
-                      shadows: [Shadow(color: t.space0.withValues(alpha: 0.8), blurRadius: 12)],
+                      shadows: _halo(halo, wide: 12),
                     ),
                   ),
                 ),
-                Text(
-                  fmt.formatDate(now, style: MadarDateStyle.weekdayDayMonth),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: text.bodySmall!.copyWith(
-                    color: t.textSecondary,
-                    height: 1.3,
-                    shadows: [Shadow(color: t.space0.withValues(alpha: 0.9), blurRadius: 8)],
+                // The day in both calendars; opens the prayer times.
+                MadarPressable(
+                  onTap: () => FaithNav.prayerTimes(context),
+                  sfx: Sfx.navigate,
+                  semanticLabel: l.orbitUiListSeparator(date, l.ptTitle),
+                  excludeChildSemantics: true,
+                  child: Text(
+                    date,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: text.bodySmall!.copyWith(
+                      color: nightSky ? t.space0 : t.textSecondary,
+                      height: 1.3,
+                      shadows: _halo(halo, wide: 8),
+                    ),
                   ),
                 ),
               ],
@@ -371,6 +389,15 @@ class _HomeHeader extends ConsumerWidget {
     );
   }
 }
+
+/// The header's halo on the open sky: a wide glow and a tight rim that
+/// gives every glyph its own ground – the sky passes through bright day
+/// blues and mid dusk greys that neither ink clears on its own (light ink
+/// read at 3.3 : 1 on the noon sky, dark ink at 2 : 1 on Pearl's night).
+List<Shadow> _halo(Color c, {required double wide}) => [
+  Shadow(color: c.withValues(alpha: 0.85), blurRadius: 2.5),
+  Shadow(color: c.withValues(alpha: 0.85), blurRadius: wide),
+];
 
 /// Glass tint for the home panel: the theme's glass at night, deepening toward
 /// an opaque night-sky tone as the real sky brightens so light text stays

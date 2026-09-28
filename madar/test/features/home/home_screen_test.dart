@@ -379,8 +379,15 @@ void main() {
       await settleApp(tester);
       expect(app.location, startsWith('/planet/${radar.first.planetKey}'));
       expect(find.byType(PlanetModulePage), findsOneWidget);
-      // The reason is listed on the planet's page too.
-      expect(find.descendant(of: find.byType(PlanetModulePage), matching: find.text(radar.first.text)), findsOneWidget);
+      // The reason is listed on the planet's page too (below the world's own
+      // module – Faith's hub is tall).
+      final reason = find.descendant(of: find.byType(PlanetModulePage), matching: find.text(radar.first.text));
+      await tester.scrollUntilVisible(
+        reason,
+        300,
+        scrollable: find.descendant(of: find.byType(PlanetModulePage), matching: find.byType(Scrollable)).first,
+      );
+      expect(reason, findsOneWidget);
     });
 
     testWidgets('a moon opens its planet page with that record highlighted', (tester) async {

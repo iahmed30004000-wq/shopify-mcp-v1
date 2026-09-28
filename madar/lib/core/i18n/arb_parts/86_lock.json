@@ -1,0 +1,389 @@
+{
+  "lockScreenSubtitle": {
+    "ar": "بياناتك مشفّرة ومحفوظة على هاتفك",
+    "en": "Your data is encrypted on this phone",
+    "description": "Line under the app name on the lock screen"
+  },
+  "lockHoldHint": {
+    "ar": "اضغط مطوّلًا على الأسطرلاب لتفتح مَدار",
+    "en": "Press and hold the astrolabe to unlock"
+  },
+  "lockHoldingHint": {
+    "ar": "أبقِ إصبعك… الأسطرلاب يكتمل",
+    "en": "Keep holding… the astrolabe is coming together"
+  },
+  "lockReadingHint": {
+    "ar": "المس مستشعر البصمة",
+    "en": "Touch the fingerprint sensor"
+  },
+  "lockReleasedEarly": {
+    "ar": "أبقِ إصبعك حتى يكتمل الأسطرلاب",
+    "en": "Hold until the astrolabe is complete"
+  },
+  "lockWelcome": {
+    "ar": "أهلًا بعودتك",
+    "en": "Welcome back"
+  },
+  "lockPinHint": {
+    "ar": "أدخل رمز مَدار",
+    "en": "Enter your Madar PIN"
+  },
+  "lockPinChecking": {
+    "ar": "نتحقّق…",
+    "en": "Checking…"
+  },
+  "lockPinWrong": {
+    "ar": "{count, plural, =0{رمز غير صحيح} =1{رمز غير صحيح · تبقّت محاولة واحدة قبل الإيقاف المؤقت} =2{رمز غير صحيح · تبقّت محاولتان قبل الإيقاف المؤقت} few{رمز غير صحيح · تبقّت {n} محاولات قبل الإيقاف المؤقت} many{رمز غير صحيح · تبقّت {n} محاولة قبل الإيقاف المؤقت} other{رمز غير صحيح · تبقّت {n} محاولة قبل الإيقاف المؤقت}}",
+    "en": "{count, plural, =0{Wrong PIN} =1{Wrong PIN · 1 try left before a pause} other{Wrong PIN · {n} tries left before a pause}}",
+    "description": "count selects the plural; n is the same number formatted for display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lockLockedOut": {
+    "ar": "محاولات كثيرة. حاول مجددًا بعد {time}",
+    "en": "Too many attempts. Try again in {time}",
+    "description": "time is a pre-formatted m:ss countdown",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lockSeconds": {
+    "ar": "{count, plural, =1{ثانية واحدة} =2{ثانيتين} few{{n} ثوانٍ} many{{n} ثانية} other{{n} ثانية}}",
+    "en": "{count, plural, =1{1 second} other{{n} seconds}}",
+    "description": "count selects the plural; n is the same number formatted for display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lockUsePin": {
+    "ar": "استخدم الرمز",
+    "en": "Use PIN"
+  },
+  "lockUseFingerprint": {
+    "ar": "استخدم البصمة",
+    "en": "Use fingerprint"
+  },
+  "lockForgotPin": {
+    "ar": "نسيت الرمز؟",
+    "en": "Forgot PIN?"
+  },
+  "lockPromptTitle": {
+    "ar": "افتح مَدار",
+    "en": "Unlock Madar",
+    "description": "Title of the system fingerprint prompt (max 60 characters)"
+  },
+  "lockPromptHint": {
+    "ar": "استخدم بصمتك",
+    "en": "Use your fingerprint",
+    "description": "Subtitle of the system fingerprint prompt (max 60 characters)"
+  },
+  "lockPromptReason": {
+    "ar": "تحقّق من هويتك لتفتح بياناتك",
+    "en": "Confirm it's you to open your data"
+  },
+  "lockPromptSettingsReason": {
+    "ar": "تحقّق من هويتك لتغيير إعدادات القفل",
+    "en": "Confirm it's you to change the lock settings"
+  },
+  "lockPromptCancel": {
+    "ar": "استخدم الرمز",
+    "en": "Use PIN",
+    "description": "Negative button of the system fingerprint prompt (max 30 characters)"
+  },
+  "lockPromptCancelPlain": {
+    "ar": "إلغاء",
+    "en": "Cancel",
+    "description": "Negative button of the fingerprint prompt in settings (max 30 characters)"
+  },
+  "lockStorageError": {
+    "ar": "تعذّرت قراءة الخزنة الآمنة على هاتفك.",
+    "en": "Couldn't read this phone's secure vault."
+  },
+  "lockRetry": {
+    "ar": "أعِد المحاولة",
+    "en": "Try again"
+  },
+  "lockAstrolabeSemantics": {
+    "ar": "الأسطرلاب. اضغط مطوّلًا لتفتح القفل بالبصمة",
+    "en": "Astrolabe. Press and hold to unlock with your fingerprint"
+  },
+  "lockAstrolabeAction": {
+    "ar": "افتح بالبصمة",
+    "en": "Unlock with fingerprint"
+  },
+  "lockPinProgress": {
+    "ar": "أُدخل {count} من {total}",
+    "en": "{count} of {total} digits entered",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "lockPinProgressOpen": {
+    "ar": "أُدخل {count}",
+    "en": "{count} digits entered",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "lockKeyDelete": {
+    "ar": "حذف",
+    "en": "Delete"
+  },
+  "lockKeyFingerprint": {
+    "ar": "البصمة",
+    "en": "Fingerprint"
+  },
+  "lockKeyDone": {
+    "ar": "تم",
+    "en": "Done"
+  },
+  "lockShieldSemantics": {
+    "ar": "مَدار مخفيّ حتى تعود",
+    "en": "Madar is hidden until you return"
+  },
+  "lockForgotTitle": {
+    "ar": "نسيت الرمز؟",
+    "en": "Forgot your PIN?"
+  },
+  "lockForgotBody": {
+    "ar": "لا حساب في مَدار ولا خادم: بياناتك مشفّرة ومحفوظة على هذا الهاتف وحده، لذلك لا يمكن استرجاع الرمز ولا إعادة تعيينه عن بُعد.",
+    "en": "Madar has no account and no server: your data is encrypted and kept on this phone alone, so the PIN can't be recovered or reset remotely."
+  },
+  "lockForgotBiometric": {
+    "ar": "تحقّق ببصمتك، ثم اختر رمزًا جديدًا.",
+    "en": "Confirm with your fingerprint, then choose a new PIN."
+  },
+  "lockForgotBiometricAction": {
+    "ar": "تحقّق بالبصمة",
+    "en": "Confirm with fingerprint"
+  },
+  "lockForgotNoBiometric": {
+    "ar": "من دون الرمز يبقى مَدار مقفلًا. إن تعذّر عليك تذكّره فالسبيل الوحيد مسح بيانات مَدار من إعدادات الهاتف (التطبيقات ← مَدار ← التخزين ← مسح البيانات) والبدء من جديد، وسيضيع كل ما ليس في نسخة احتياطية.",
+    "en": "Without the PIN, Madar stays locked. If you can't recall it, the only way out is to clear Madar's data in the phone's settings (Apps → Madar → Storage → Clear data) and start fresh; anything not in a backup will be lost."
+  },
+  "lockForgotBack": {
+    "ar": "رجوع",
+    "en": "Back"
+  },
+  "lockNewPinTitle": {
+    "ar": "اختر رمزًا جديدًا",
+    "en": "Choose a new PIN"
+  },
+  "lockPinCreateTitle": {
+    "ar": "اختر رمزًا لمَدار",
+    "en": "Choose a PIN for Madar"
+  },
+  "lockPinCreateBody": {
+    "ar": "من {min} إلى {max} أرقام، يفتح مَدار متى تعذّرت البصمة.",
+    "en": "{min} to {max} digits. It opens Madar whenever your fingerprint can't.",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "lockPinConfirmTitle": {
+    "ar": "أكّد الرمز",
+    "en": "Confirm your PIN"
+  },
+  "lockPinConfirmBody": {
+    "ar": "أدخله مرة أخرى للتأكّد.",
+    "en": "Enter it once more to be sure."
+  },
+  "lockPinMismatch": {
+    "ar": "الرمزان مختلفان. لنبدأ من جديد.",
+    "en": "Those PINs don't match. Let's start again."
+  },
+  "lockPinWeak": {
+    "ar": "هذا الرمز سهل التخمين. يُفضَّل اختيار غيره.",
+    "en": "That PIN is easy to guess. Consider another."
+  },
+  "lockPinCurrentTitle": {
+    "ar": "أدخل الرمز الحالي",
+    "en": "Enter your current PIN"
+  },
+  "lockPinSaved": {
+    "ar": "حُفظ الرمز، وصار مَدار مقفلًا لك وحدك.",
+    "en": "PIN saved. Madar is now locked for you alone."
+  },
+  "lockPinChanged": {
+    "ar": "تغيّر الرمز",
+    "en": "PIN changed"
+  },
+  "lockConfirmTitle": {
+    "ar": "تحقّق من هويتك",
+    "en": "Confirm it's you"
+  },
+  "lockConfirmBody": {
+    "ar": "أدخل رمز مَدار للمتابعة.",
+    "en": "Enter your Madar PIN to continue."
+  },
+  "lockBioOfferTitle": {
+    "ar": "والفتح بالبصمة أيضًا؟",
+    "en": "Unlock with your fingerprint too?"
+  },
+  "lockBioOfferBody": {
+    "ar": "أسرع في كل مرة، ويبقى الرمز بديلًا متى احتجت إليه.",
+    "en": "Quicker every time, and your PIN is always there as a fallback."
+  },
+  "lockBioOfferEnable": {
+    "ar": "فعّل البصمة",
+    "en": "Use fingerprint"
+  },
+  "lockBioOfferSkip": {
+    "ar": "ليس الآن",
+    "en": "Not now"
+  },
+  "lockSettingsTitle": {
+    "ar": "الأمان",
+    "en": "Security"
+  },
+  "lockSettingsLock": {
+    "ar": "قفل التطبيق",
+    "en": "App lock"
+  },
+  "lockSettingsLockOn": {
+    "ar": "يُطلب عند كل تشغيل وبعد الغياب",
+    "en": "Asked on every launch and after time away"
+  },
+  "lockSettingsLockOff": {
+    "ar": "احمِ بياناتك برمز وبصمة",
+    "en": "Protect your data with a PIN and fingerprint"
+  },
+  "lockSettingsBiometric": {
+    "ar": "الفتح بالبصمة",
+    "en": "Fingerprint unlock"
+  },
+  "lockSettingsBiometricHint": {
+    "ar": "ويبقى الرمز بديلًا دائمًا",
+    "en": "Your PIN always stays as a fallback"
+  },
+  "lockSettingsBiometricNotEnrolled": {
+    "ar": "سجّل بصمة في إعدادات الهاتف أولًا",
+    "en": "Add a fingerprint in the phone's settings first"
+  },
+  "lockSettingsBiometricUnavailable": {
+    "ar": "مستشعر البصمة غير متاح الآن",
+    "en": "The fingerprint sensor isn't available right now"
+  },
+  "lockSettingsChangePin": {
+    "ar": "تغيير الرمز",
+    "en": "Change PIN"
+  },
+  "lockSettingsChangePinHint": {
+    "ar": "رمز من {min} إلى {max} أرقام",
+    "en": "A PIN of {min} to {max} digits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "lockSettingsLockAfter": {
+    "ar": "القفل بعد مغادرة التطبيق",
+    "en": "Lock after leaving the app"
+  },
+  "lockSettingsLockAfterHint": {
+    "ar": "وعند كل تشغيل جديد دائمًا",
+    "en": "And always on a fresh launch"
+  },
+  "lockAfterImmediately": {
+    "ar": "فورًا",
+    "en": "Immediately"
+  },
+  "lockAfterMinutes": {
+    "ar": "{count, plural, =1{دقيقة} =2{دقيقتان} few{{n} دقائق} many{{n} دقيقة} other{{n} دقيقة}}",
+    "en": "{count, plural, =1{1 minute} other{{n} minutes}}",
+    "description": "count selects the plural; n is the same number formatted for display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lockSettingsRemovePin": {
+    "ar": "إزالة الرمز",
+    "en": "Remove PIN"
+  },
+  "lockSettingsRemovePinHint": {
+    "ar": "يوقف قفل التطبيق والفتح بالبصمة",
+    "en": "Turns off the app lock and fingerprint unlock"
+  },
+  "lockRemoveTitle": {
+    "ar": "إزالة الرمز؟",
+    "en": "Remove your PIN?"
+  },
+  "lockRemoveBody": {
+    "ar": "سيُفتح مَدار دون قفل حتى تختار رمزًا جديدًا.",
+    "en": "Madar will open without a lock until you choose a new PIN."
+  },
+  "lockRemoveConfirm": {
+    "ar": "أزِل الرمز",
+    "en": "Remove PIN"
+  },
+  "lockSettingsNote": {
+    "ar": "لا حساب ولا خادم: بياناتك مشفّرة على هذا الهاتف وحده، ولا يمكن استرجاع الرمز عن بُعد، فاحفظه جيدًا.",
+    "en": "No account, no server: your data is encrypted on this phone alone and the PIN can't be recovered remotely, so keep it safe."
+  },
+  "lockSettingsSaveFailed": {
+    "ar": "تعذّر الحفظ في الخزنة الآمنة. حاول مجددًا.",
+    "en": "Couldn't save to the secure vault. Please try again."
+  },
+  "lockBioLockedOut": {
+    "ar": "توقّفت البصمة مؤقتًا بعد محاولات كثيرة. استخدم الرمز.",
+    "en": "Fingerprint is paused after too many tries. Use your PIN."
+  },
+  "lockBioLockedOutPermanently": {
+    "ar": "البصمة مقفلة حتى تفتح هاتفك بقفل شاشته. استخدم رمز مَدار الآن.",
+    "en": "Fingerprint is locked until you unlock the phone with its screen lock. Use your Madar PIN for now."
+  },
+  "lockBioNotEnrolled": {
+    "ar": "لا توجد بصمة مسجّلة على هذا الهاتف. استخدم الرمز.",
+    "en": "No fingerprint is enrolled on this phone. Use your PIN."
+  },
+  "lockBioNoHardware": {
+    "ar": "لا يدعم هذا الهاتف البصمة. استخدم الرمز.",
+    "en": "This phone has no fingerprint sensor. Use your PIN."
+  },
+  "lockBioUnavailable": {
+    "ar": "مستشعر البصمة غير متاح الآن. استخدم الرمز.",
+    "en": "The fingerprint sensor isn't available right now. Use your PIN."
+  },
+  "lockBioError": {
+    "ar": "تعذّر التحقّق بالبصمة. حاول مجددًا أو استخدم الرمز.",
+    "en": "Couldn't verify your fingerprint. Try again or use your PIN."
+  },
+  "lockBioInterrupted": {
+    "ar": "انقطع التحقّق. اضغط مطوّلًا لتعيد المحاولة.",
+    "en": "Verification was interrupted. Press and hold to try again."
+  }
+}

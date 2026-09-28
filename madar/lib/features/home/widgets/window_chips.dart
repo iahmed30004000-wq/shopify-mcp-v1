@@ -44,7 +44,8 @@ IconData windowIcon(PrayerWindow w) => switch (w) {
 /// The six prayer-window chips of the home panel: start time above the
 /// window's name; the focused one fills with the accent, the current one
 /// carries a glowing "now" dot. Scrolls horizontally and keeps the focused
-/// chip in view.
+/// chip in view. With [onOpenTimes] a last chip ("All times") opens the
+/// prayer times page.
 class WindowChips extends StatefulWidget {
   const WindowChips({
     super.key,
@@ -54,6 +55,7 @@ class WindowChips extends StatefulWidget {
     required this.onSelected,
     this.nextWindow,
     this.countdown,
+    this.onOpenTimes,
   });
 
   final PrayerDayTimes times;
@@ -65,6 +67,9 @@ class WindowChips extends StatefulWidget {
   /// («بعد ١ س ٢٣ د») in place of its start time.
   final PrayerWindow? nextWindow;
   final String? countdown;
+
+  /// Opens the prayer times page (the trailing chip).
+  final VoidCallback? onOpenTimes;
 
   @override
   State<WindowChips> createState() => _WindowChipsState();
@@ -116,6 +121,10 @@ class _WindowChipsState extends State<WindowChips> {
             for (var i = 0; i < PrayerDayTimes.windows.length; i++) ...[
               if (i > 0) const SizedBox(width: Space.s),
               _chip(l, fmt, PrayerDayTimes.windows[i]),
+            ],
+            if (widget.onOpenTimes case final open?) ...[
+              const SizedBox(width: Space.s),
+              _TimesChip(label: l.homeAllTimes, semanticLabel: l.settingsOpen(l.ptTitle), onTap: open),
             ],
           ],
         ),
@@ -237,6 +246,50 @@ class _WindowChip extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+/// "All times": opens the prayer times page (same glass as the windows).
+class _TimesChip extends StatelessWidget {
+  const _TimesChip({required this.label, required this.semanticLabel, required this.onTap});
+
+  final String label;
+  final String semanticLabel;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return MadarPressable(
+      onTap: onTap,
+      sfx: Sfx.navigate,
+      semanticLabel: semanticLabel,
+      excludeChildSemantics: true,
+      focusRadius: BorderRadius.circular(t.radiusM),
+      child: CustomPaint(
+        painter: ChipPainter(
+          selection: 0,
+          fill: Color.alphaBlend(t.glassFill, t.space2.withValues(alpha: t.isDark ? 0.45 : 0.4)),
+          border: t.glassBorder,
+          accent: t.accent,
+          highlight: t.glassHighlight,
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.xs + 2, Space.l, Space.xs + 2),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.schedule_rounded, size: 18, color: t.gold),
+              const SizedBox(width: Space.s),
+              Text(label, maxLines: 1, style: text.labelLarge!.copyWith(color: t.textPrimary, height: 1.15)),
+              const SizedBox(width: Space.xs),
+              Icon(Icons.chevron_right_rounded, size: 18, color: t.textSecondary),
+            ],
+          ),
+        ),
       ),
     );
   }

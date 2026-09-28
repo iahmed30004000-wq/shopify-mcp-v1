@@ -1,0 +1,891 @@
+{
+  "adhkarTitle": {
+    "ar": "الأذكار",
+    "en": "Adhkar",
+    "description": "Title of the adhkar home screen"
+  },
+  "adhkarTodayTitle": {
+    "ar": "أذكار اليوم",
+    "en": "Today's adhkar",
+    "description": "Header of today's adhkar progress (home hero and the Faith card)"
+  },
+  "adhkarSetsDoneOf": {
+    "ar": "{done} من {total}",
+    "en": "{done} of {total}",
+    "description": "Sets finished today, e.g. 2 of 5 (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSetsDoneCaption": {
+    "ar": "مجموعات مكتملة",
+    "en": "sets complete",
+    "description": "Caption under the sets-done count in the hero ring"
+  },
+  "adhkarCategoryMorning": {
+    "ar": "أذكار الصباح",
+    "en": "Morning adhkar",
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryEvening": {
+    "ar": "أذكار المساء",
+    "en": "Evening adhkar",
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryAfterPrayer": {
+    "ar": "أذكار بعد الصلاة",
+    "en": "After-prayer adhkar",
+    "description": "Adhkar set name"
+  },
+  "adhkarCategorySleep": {
+    "ar": "أذكار النوم",
+    "en": "Before-sleep adhkar",
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryWaking": {
+    "ar": "أذكار الاستيقاظ",
+    "en": "On-waking adhkar",
+    "description": "Adhkar set name"
+  },
+  "adhkarCategoryMorningHint": {
+    "ar": "من الفجر حتى الضحى",
+    "en": "From Fajr until mid-morning",
+    "description": "When the morning adhkar are said"
+  },
+  "adhkarCategoryEveningHint": {
+    "ar": "من العصر إلى ما بعد المغرب",
+    "en": "From Asr until after Maghrib",
+    "description": "When the evening adhkar are said"
+  },
+  "adhkarCategoryAfterPrayerHint": {
+    "ar": "عقب السلام من كل فريضة",
+    "en": "After the salam of every obligatory prayer",
+    "description": "When the after-prayer adhkar are said"
+  },
+  "adhkarCategorySleepHint": {
+    "ar": "حين تأوي إلى فراشك",
+    "en": "As you go to bed",
+    "description": "When the sleep adhkar are said"
+  },
+  "adhkarCategoryWakingHint": {
+    "ar": "حين تستيقظ من نومك",
+    "en": "When you wake up",
+    "description": "When the waking adhkar are said"
+  },
+  "adhkarSuggestMorning": {
+    "ar": "حان وقت أذكار الصباح",
+    "en": "Time for your morning adhkar",
+    "description": "Suggestion in the morning windows"
+  },
+  "adhkarSuggestEvening": {
+    "ar": "حان وقت أذكار المساء",
+    "en": "Time for your evening adhkar",
+    "description": "Suggestion in the Asr and Maghrib windows"
+  },
+  "adhkarSuggestSleep": {
+    "ar": "أذكار النوم قبل أن تأوي إلى فراشك",
+    "en": "Your before-sleep adhkar, before you rest",
+    "description": "Suggestion after Isha"
+  },
+  "adhkarSuggestWaking": {
+    "ar": "أذكار الاستيقاظ",
+    "en": "Your on-waking adhkar",
+    "description": "Suggestion for the waking set"
+  },
+  "adhkarSuggestAfterPrayer": {
+    "ar": "أذكار ما بعد صلاة {prayer}",
+    "en": "The adhkar after {prayer}",
+    "description": "Suggestion after an obligatory prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSuggestAllDone": {
+    "ar": "أتممتَ أذكار يومك — تقبّل الله",
+    "en": "You've said all of today's adhkar — may Allah accept",
+    "description": "Hero line when every set is done"
+  },
+  "adhkarStart": {
+    "ar": "ابدأ",
+    "en": "Begin",
+    "description": "Opens a set from the start"
+  },
+  "adhkarContinue": {
+    "ar": "تابِع",
+    "en": "Continue",
+    "description": "Resumes a started set"
+  },
+  "adhkarContinueAt": {
+    "ar": "تابِع من الذكر {position}",
+    "en": "Continue from dhikr {position}",
+    "description": "Resume hint on a set card (position pre-formatted)",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarDoneToday": {
+    "ar": "تمّت اليوم",
+    "en": "Done today",
+    "description": "Badge on a finished set"
+  },
+  "adhkarAfterPrayerProgress": {
+    "ar": "{done} من {total} صلوات",
+    "en": "{done} of {total} prayers",
+    "description": "After-prayer sets finished today (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarItemsCount": {
+    "ar": "{count, plural, =1{ذكر واحد} =2{ذكران} few{{count} أذكار} many{{count} ذكرًا} other{{count} ذكر}}",
+    "en": "{count, plural, =1{1 dhikr} other{{count} adhkar}}",
+    "description": "Number of adhkar in a set",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarMarkDone": {
+    "ar": "تمّت قراءتها",
+    "en": "Mark as done",
+    "description": "Long-press / swipe action on a set card"
+  },
+  "adhkarMarkedDone": {
+    "ar": "{name}: تمّت — تقبّل الله",
+    "en": "{name} marked done",
+    "description": "Undo toast after marking a set done",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRestart": {
+    "ar": "البدء من جديد",
+    "en": "Start over",
+    "description": "Action that clears today's progress of a set"
+  },
+  "adhkarRestarted": {
+    "ar": "بدأت {name} من جديد",
+    "en": "{name} restarted",
+    "description": "Undo toast after restarting a set",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSourceCredit": {
+    "ar": "من «حصن المسلم» لسعيد بن علي بن وهف القحطاني",
+    "en": "From “Hisn al-Muslim” by Sa'id ibn Wahf al-Qahtani",
+    "description": "Content credit at the foot of the adhkar home"
+  },
+  "adhkarLoadError": {
+    "ar": "تعذّر تحميل الأذكار",
+    "en": "Couldn't load the adhkar",
+    "description": "Shown if the bundled adhkar cannot be read"
+  },
+  "adhkarTasbeehTitle": {
+    "ar": "المسبحة",
+    "en": "Tasbeeh",
+    "description": "Title of the tasbeeh counter"
+  },
+  "adhkarTasbeehCardSubtitle": {
+    "ar": "حلقة من الخرز تتقدّم مع كل تسبيحة",
+    "en": "A ring of beads that moves with every glorification",
+    "description": "Subtitle of the tasbeeh entry card"
+  },
+  "adhkarTasbeehToday": {
+    "ar": "اليوم: {count}",
+    "en": "Today: {count}",
+    "description": "Tasbeeh total today (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRemindersTitle": {
+    "ar": "التذكير",
+    "en": "Reminders",
+    "description": "Section header of the adhkar reminders"
+  },
+  "adhkarReminderMorningLabel": {
+    "ar": "ذكّرني بأذكار الصباح بعد الفجر",
+    "en": "Remind me of the morning adhkar after Fajr",
+    "description": "Switch"
+  },
+  "adhkarReminderEveningLabel": {
+    "ar": "ذكّرني بأذكار المساء بعد العصر",
+    "en": "Remind me of the evening adhkar after Asr",
+    "description": "Switch"
+  },
+  "adhkarReminderOffset": {
+    "ar": "{minutes, plural, =0{مع الأذان} =1{دقيقة} =2{دقيقتان} few{{minutes} دقائق} many{{minutes} دقيقة} other{{minutes} دقيقة}}",
+    "en": "{minutes, plural, =0{At the adhan} =1{1 min} other{{minutes} min}}",
+    "description": "Reminder offset pill: how long after the adhan (shown under the caption adhkarReminderOffsetCaption)",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarReminderOffsetCaption": {
+    "ar": "موعد التذكير بعد الأذان",
+    "en": "How long after the adhan",
+    "description": "Caption above the reminder offset pills"
+  },
+  "adhkarReminderNote": {
+    "ar": "تصلك التذكيرات على الجهاز فقط، متى سمحتَ لمَدار بالإشعارات.",
+    "en": "Reminders stay on this device and arrive once Madar may send notifications.",
+    "description": "Footnote of the reminders section"
+  },
+  "adhkarReminderMorningTitle": {
+    "ar": "أذكار الصباح",
+    "en": "Morning adhkar",
+    "description": "Notification title"
+  },
+  "adhkarReminderMorningBody": {
+    "ar": "حان وقت أذكار الصباح — ابدأ يومك بذكر الله",
+    "en": "Time for your morning adhkar — begin your day with the remembrance of Allah",
+    "description": "Notification body"
+  },
+  "adhkarReminderEveningTitle": {
+    "ar": "أذكار المساء",
+    "en": "Evening adhkar",
+    "description": "Notification title"
+  },
+  "adhkarReminderEveningBody": {
+    "ar": "حان وقت أذكار المساء — طمأنينةٌ تختم بها نهارك",
+    "en": "Time for your evening adhkar — a calm close to your day",
+    "description": "Notification body"
+  },
+  "adhkarReaderPosition": {
+    "ar": "{index} من {total}",
+    "en": "{index} of {total}",
+    "description": "Position of the dhikr in its set (numbers pre-formatted)",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRemaining": {
+    "ar": "متبقٍّ",
+    "en": "to go",
+    "description": "Caption under the remaining count in the counter ring"
+  },
+  "adhkarCounterDone": {
+    "ar": "تمّ",
+    "en": "Done",
+    "description": "Caption in the counter ring when the dhikr is finished"
+  },
+  "adhkarCounterHint": {
+    "ar": "انقر في أي مكان للعدّ",
+    "en": "Tap anywhere to count",
+    "description": "Hint under the counter"
+  },
+  "adhkarCounterSemantics": {
+    "ar": "عُدّ مرة — {done} من {total}",
+    "en": "Count once — {done} of {total}",
+    "description": "Screen-reader label of the counter ring",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarRepeat": {
+    "ar": "{count, plural, =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =1{Once} =2{Twice} other{{count} times}}",
+    "description": "How many times a dhikr is said",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarReadingDone": {
+    "ar": "قرأتُها",
+    "en": "I've read them",
+    "description": "Button that ticks off a reading item (whole surahs)"
+  },
+  "adhkarVirtue": {
+    "ar": "فضلها",
+    "en": "Its virtue",
+    "description": "Label of the virtue under a dhikr"
+  },
+  "adhkarReference": {
+    "ar": "المصدر",
+    "en": "Source",
+    "description": "Label of the hadith reference"
+  },
+  "adhkarMeaning": {
+    "ar": "المعنى",
+    "en": "Meaning",
+    "description": "Label of the English meaning"
+  },
+  "adhkarQuranRef": {
+    "ar": "سورة {surah}: {ayahs}",
+    "en": "Surat {surah} · {ayahs}",
+    "description": "Quran reference under verses, e.g. Surat al-Baqarah · 255 (ayahs pre-formatted)",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayahs": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSurah2": {
+    "ar": "البقرة",
+    "en": "al-Baqarah",
+    "description": "Surah name"
+  },
+  "adhkarSurah3": {
+    "ar": "آل عمران",
+    "en": "Al Imran",
+    "description": "Surah name"
+  },
+  "adhkarSurah112": {
+    "ar": "الإخلاص",
+    "en": "al-Ikhlas",
+    "description": "Surah name"
+  },
+  "adhkarSurah113": {
+    "ar": "الفلق",
+    "en": "al-Falaq",
+    "description": "Surah name"
+  },
+  "adhkarSurah114": {
+    "ar": "الناس",
+    "en": "an-Nas",
+    "description": "Surah name"
+  },
+  "adhkarSurahNumber": {
+    "ar": "رقم {number}",
+    "en": "no. {number}",
+    "description": "Fallback surah label (number pre-formatted)",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarPrevious": {
+    "ar": "الذكر السابق",
+    "en": "Previous dhikr",
+    "description": "Button"
+  },
+  "adhkarNext": {
+    "ar": "الذكر التالي",
+    "en": "Next dhikr",
+    "description": "Button"
+  },
+  "adhkarDhikrSemantics": {
+    "ar": "الذكر {index} من {total}",
+    "en": "Dhikr {index} of {total}",
+    "description": "Screen-reader label of a progress dot (numbers pre-formatted)",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarOptionsTitle": {
+    "ar": "خيارات القراءة",
+    "en": "Reading options",
+    "description": "Title of the reader options sheet"
+  },
+  "adhkarTextSize": {
+    "ar": "حجم الخط",
+    "en": "Text size",
+    "description": "Reader option"
+  },
+  "adhkarTextSizeSmaller": {
+    "ar": "تصغير الخط",
+    "en": "Smaller text",
+    "description": "Button"
+  },
+  "adhkarTextSizeLarger": {
+    "ar": "تكبير الخط",
+    "en": "Larger text",
+    "description": "Button"
+  },
+  "adhkarShowTranslation": {
+    "ar": "إظهار المعنى بالإنجليزية",
+    "en": "Show the English meaning",
+    "description": "Reader option (English UI only)"
+  },
+  "adhkarShowVirtue": {
+    "ar": "إظهار الفضل والمصدر",
+    "en": "Show virtue and source",
+    "description": "Reader option"
+  },
+  "adhkarRecountCurrent": {
+    "ar": "إعادة عدّ هذا الذكر",
+    "en": "Recount this dhikr",
+    "description": "Reader option"
+  },
+  "adhkarRestartSet": {
+    "ar": "البدء من أول المجموعة",
+    "en": "Restart the set",
+    "description": "Reader option"
+  },
+  "adhkarMarkSetDone": {
+    "ar": "قرأتُ المجموعة كلّها",
+    "en": "I've said the whole set",
+    "description": "Reader option that marks the set done"
+  },
+  "adhkarAfterPrayerFor": {
+    "ar": "بعد صلاة {prayer}",
+    "en": "After {prayer}",
+    "description": "Prayer chip of the after-prayer reader",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarChoosePrayer": {
+    "ar": "بعد أي صلاة؟",
+    "en": "After which prayer?",
+    "description": "Title of the prayer picker of the after-prayer reader"
+  },
+  "adhkarSetCompleteTitle": {
+    "ar": "تقبّل الله منك",
+    "en": "May Allah accept it from you",
+    "description": "Title of the set-complete view"
+  },
+  "adhkarSetCompleteBody": {
+    "ar": "اكتملت {name}",
+    "en": "{name} complete",
+    "description": "Body of the set-complete view",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSetCompleteReview": {
+    "ar": "مراجعة الأذكار",
+    "en": "Review",
+    "description": "Button on the set-complete view"
+  },
+  "adhkarAudioTitle": {
+    "ar": "التسجيل الصوتي",
+    "en": "Recording",
+    "description": "Title of the per-dhikr audio sheet"
+  },
+  "adhkarAudioAttach": {
+    "ar": "إرفاق تسجيل",
+    "en": "Attach a recording",
+    "description": "Button"
+  },
+  "adhkarAudioReplace": {
+    "ar": "استبدال",
+    "en": "Replace",
+    "description": "Button"
+  },
+  "adhkarAudioRemove": {
+    "ar": "إزالة",
+    "en": "Remove",
+    "description": "Button"
+  },
+  "adhkarAudioRemoved": {
+    "ar": "أُزيل التسجيل",
+    "en": "Recording removed",
+    "description": "Undo toast"
+  },
+  "adhkarAudioAttached": {
+    "ar": "أُرفق التسجيل",
+    "en": "Recording attached",
+    "description": "Toast after attaching"
+  },
+  "adhkarAudioPlay": {
+    "ar": "تشغيل التسجيل",
+    "en": "Play the recording",
+    "description": "Button"
+  },
+  "adhkarAudioStop": {
+    "ar": "إيقاف التسجيل",
+    "en": "Stop the recording",
+    "description": "Button"
+  },
+  "adhkarAudioNone": {
+    "ar": "لا تسجيل لهذا الذكر بعد. أرفق ملفًا صوتيًا من جهازك (MP3 أو WAV أو FLAC) لتسمعه هنا.",
+    "en": "No recording for this dhikr yet. Attach an audio file from your device (MP3, WAV or FLAC) to hear it here.",
+    "description": "Empty state of the audio sheet"
+  },
+  "adhkarAudioPolicy": {
+    "ar": "لا يستخدم مَدار أصواتًا مولّدة آليًّا للقرآن أو الأذكار؛ أرفق تسجيلًا تثق به، ويبقى على جهازك.",
+    "en": "Madar never uses generated voices for Quran or adhkar — attach a recording you trust; it stays on your device.",
+    "description": "Policy note on the audio sheet"
+  },
+  "adhkarAudioUnsupported": {
+    "ar": "هذا الملف ليس بصيغة مدعومة (MP3 أو WAV أو FLAC)",
+    "en": "This file isn't in a supported format (MP3, WAV or FLAC)",
+    "description": "Error"
+  },
+  "adhkarAudioTooLarge": {
+    "ar": "الملف أكبر من ٣٠ ميغابايت",
+    "en": "The file is larger than 30 MB",
+    "description": "Error"
+  },
+  "adhkarAudioUnavailable": {
+    "ar": "تعذّر تشغيل الصوت على هذا الجهاز",
+    "en": "Audio can't play on this device",
+    "description": "Error"
+  },
+  "adhkarAudioFile": {
+    "ar": "{name}، {duration}",
+    "en": "{name} · {duration}",
+    "description": "Attached file line (duration pre-formatted)",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehTarget": {
+    "ar": "عدد الدورة",
+    "en": "Round of",
+    "description": "Label of the target choice"
+  },
+  "adhkarTasbeehCustom": {
+    "ar": "مخصّص",
+    "en": "Custom",
+    "description": "Custom target choice"
+  },
+  "adhkarTasbeehCustomTitle": {
+    "ar": "عدد مخصّص للدورة",
+    "en": "Custom round",
+    "description": "Title of the custom target sheet"
+  },
+  "adhkarTasbeehCustomField": {
+    "ar": "العدد في كل دورة",
+    "en": "Count per round",
+    "description": "Field label"
+  },
+  "adhkarTasbeehCustomInvalid": {
+    "ar": "أدخل عددًا من ١ إلى ٩٩٩٩",
+    "en": "Enter a number from 1 to 9999",
+    "description": "Validation"
+  },
+  "adhkarTasbeehRound": {
+    "ar": "الدورة {round}",
+    "en": "Round {round}",
+    "description": "Current round (number pre-formatted)",
+    "placeholders": {
+      "round": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehOf": {
+    "ar": "من {target}",
+    "en": "of {target}",
+    "description": "Under the count (number pre-formatted)",
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehTotal": {
+    "ar": "المجموع {count}",
+    "en": "Total {count}",
+    "description": "Total taps of the session (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehTapHint": {
+    "ar": "انقر للتسبيح، واضغط مطوّلًا لإعادة العدّ",
+    "en": "Tap to count · long-press to reset",
+    "description": "Hint under the ring"
+  },
+  "adhkarTasbeehCountSemantics": {
+    "ar": "{phrase}: {count} من {target}، الدورة {round}",
+    "en": "{phrase}: {count} of {target}, round {round}",
+    "description": "Screen-reader label of the ring (numbers pre-formatted)",
+    "placeholders": {
+      "phrase": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "round": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehCountHint": {
+    "ar": "انقر نقرتين للتسبيح",
+    "en": "Double-tap to count",
+    "description": "Screen-reader hint of the ring"
+  },
+  "adhkarTasbeehResetTitle": {
+    "ar": "إعادة العدّ؟",
+    "en": "Reset the count?",
+    "description": "Title of the reset confirmation"
+  },
+  "adhkarTasbeehResetBody": {
+    "ar": "يُحفظ عددك ({count}) في السجل، ثم يبدأ العدّ من الصفر.",
+    "en": "Your count ({count}) is saved to your history, then counting starts again from zero.",
+    "description": "Body of the reset confirmation (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehReset": {
+    "ar": "إعادة العدّ",
+    "en": "Reset",
+    "description": "Button"
+  },
+  "adhkarTasbeehPhrases": {
+    "ar": "أذكار المسبحة",
+    "en": "Tasbeeh phrases",
+    "description": "Title of the phrase editor"
+  },
+  "adhkarTasbeehEditPhrases": {
+    "ar": "تعديل الأذكار",
+    "en": "Edit phrases",
+    "description": "Button"
+  },
+  "adhkarTasbeehAddPhrase": {
+    "ar": "إضافة ذكر",
+    "en": "Add a phrase",
+    "description": "Button / sheet title"
+  },
+  "adhkarTasbeehEditPhrase": {
+    "ar": "تعديل الذكر",
+    "en": "Edit phrase",
+    "description": "Sheet title"
+  },
+  "adhkarTasbeehPhraseField": {
+    "ar": "نص الذكر",
+    "en": "Phrase",
+    "description": "Field label"
+  },
+  "adhkarTasbeehPhraseDeleted": {
+    "ar": "حُذف الذكر",
+    "en": "Phrase removed",
+    "description": "Undo toast"
+  },
+  "adhkarTasbeehNoPhrases": {
+    "ar": "أضف ذكرًا لتبدأ التسبيح",
+    "en": "Add a phrase to start counting",
+    "description": "Empty state"
+  },
+  "adhkarTasbeehHistory": {
+    "ar": "سجلّ التسبيح",
+    "en": "Tasbeeh history",
+    "description": "Title of the history sheet"
+  },
+  "adhkarTasbeehHistoryEmpty": {
+    "ar": "لم تُسجَّل جلسات بعد",
+    "en": "No sessions yet",
+    "description": "Empty history"
+  },
+  "adhkarTasbeehSessionDeleted": {
+    "ar": "حُذفت الجلسة",
+    "en": "Session removed",
+    "description": "Undo toast"
+  },
+  "adhkarTasbeehRounds": {
+    "ar": "{count, plural, =0{دون دورة كاملة} =1{دورة واحدة} =2{دورتان} few{{count} دورات} many{{count} دورة} other{{count} دورة}}",
+    "en": "{count, plural, =0{No full round} =1{1 round} other{{count} rounds}}",
+    "description": "Rounds of a history session",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adhkarPhraseSubhanallah": {
+    "ar": "سبحان الله",
+    "en": "Glory be to Allah",
+    "description": "English meaning of a built-in tasbeeh phrase (shown in the English UI)"
+  },
+  "adhkarPhraseAlhamdulillah": {
+    "ar": "الحمد لله",
+    "en": "Praise be to Allah",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseAllahuakbar": {
+    "ar": "الله أكبر",
+    "en": "Allah is the Greatest",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseTahlil": {
+    "ar": "لا إله إلا الله",
+    "en": "There is no god but Allah",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseIstighfar": {
+    "ar": "أستغفر الله",
+    "en": "I seek Allah's forgiveness",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseSubhanallahWaBihamdihi": {
+    "ar": "سبحان الله وبحمده",
+    "en": "Glory be to Allah, and praise be to Him",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseSubhanallahilAzim": {
+    "ar": "سبحان الله العظيم",
+    "en": "Glory be to Allah, the Magnificent",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseHawqala": {
+    "ar": "لا حول ولا قوة إلا بالله",
+    "en": "There is no might and no power except by Allah",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarPhraseSalawat": {
+    "ar": "اللهم صل وسلم على نبينا محمد",
+    "en": "O Allah, send blessings and peace upon our Prophet Muhammad",
+    "description": "English meaning of a built-in tasbeeh phrase"
+  },
+  "adhkarAllAdhkar": {
+    "ar": "كل الأذكار",
+    "en": "All adhkar",
+    "description": "Link from the Faith card to the adhkar home"
+  },
+  "adhkarShortMorning": {
+    "ar": "الصباح",
+    "en": "Morning",
+    "description": "Short set label under a small ring (Faith card)"
+  },
+  "adhkarShortEvening": {
+    "ar": "المساء",
+    "en": "Evening",
+    "description": "Short set label"
+  },
+  "adhkarShortAfterPrayer": {
+    "ar": "بعد الصلاة",
+    "en": "After prayer",
+    "description": "Short set label"
+  },
+  "adhkarShortSleep": {
+    "ar": "النوم",
+    "en": "Sleep",
+    "description": "Short set label"
+  },
+  "adhkarShortWaking": {
+    "ar": "الاستيقاظ",
+    "en": "Waking",
+    "description": "Short set label"
+  },
+  "adhkarJoin": {
+    "ar": "{first}، {second}",
+    "en": "{first} · {second}",
+    "description": "Joins two short facts on one line. Arabic uses a comma because a middle dot reads like the Arabic-Indic zero",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTasbeehChip": {
+    "ar": "المسبحة: {count}",
+    "en": "Tasbeeh: {count}",
+    "description": "Chip on the Faith card with today's tasbeeh total (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarTodayLine": {
+    "ar": "{suggestion} (أُنجز {done} من {total})",
+    "en": "{suggestion} ({done} of {total} done)",
+    "description": "Faith card line: the suggested set plus how many sets are finished (numbers pre-formatted)",
+    "placeholders": {
+      "suggestion": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarReminderChannelName": {
+    "ar": "تذكير الأذكار",
+    "en": "Adhkar reminders",
+    "description": "Android notification channel name (system settings) of the adhkar reminders"
+  },
+  "adhkarReminderChannelDescription": {
+    "ar": "تذكيرٌ بأذكار الصباح بعد الفجر وبأذكار المساء بعد العصر",
+    "en": "Morning adhkar after Fajr and evening adhkar after Asr",
+    "description": "Android notification channel description of the adhkar reminders"
+  },
+  "adhkarReminderPermissionDenied": {
+    "ar": "إشعارات مَدار متوقفة، فلن يصلك التذكير. يمكنك تفعيلها من إعدادات الجهاز.",
+    "en": "Notifications are off for Madar, so reminders can’t arrive. You can turn them on in your phone’s settings.",
+    "description": "Shown in the reminders card when a reminder is on but notifications were refused"
+  },
+  "adhkarSuggestDone": {
+    "ar": "{set, select, morning{أتممتَ أذكار الصباح — تقبّل الله} evening{أتممتَ أذكار المساء — تقبّل الله} sleep{أتممتَ أذكار النوم — تصبح على خير} waking{أتممتَ أذكار الاستيقاظ — يومٌ مبارك} other{أتممتَ الأذكار — تقبّل الله}}",
+    "en": "{set, select, morning{Morning adhkar said — may Allah accept} evening{Evening adhkar said — may Allah accept} sleep{Before-sleep adhkar said — rest well} waking{On-waking adhkar said — a blessed day to you} other{Adhkar said — may Allah accept}}",
+    "description": "Hero line when the set that fits the moment is already finished (set = morning | evening | sleep | waking | afterPrayer)",
+    "placeholders": {
+      "set": {
+        "type": "String"
+      }
+    }
+  },
+  "adhkarSuggestAfterPrayerDone": {
+    "ar": "أتممتَ أذكار ما بعد صلاة {prayer} — تقبّل الله",
+    "en": "Adhkar after {prayer} said — may Allah accept",
+    "description": "Hero line when the after-prayer adhkar of the prayer just due are finished",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  }
+}

@@ -125,5 +125,25 @@ void main() {
         expect(GlassFillStyle.panel(t).light, !t.isDark);
       }
     });
+
+    test('night glass is smoked: a veil of the night under the tint keeps a bright nebula from lifting the ground', () {
+      for (final id in MadarThemeId.values) {
+        final t = MadarPalettes.tokensFor(id);
+        final base = GlassFillStyle.panel(t).base;
+        if (t.isDark) {
+          expect(base, Color.alphaBlend(t.glassFill, t.space1.withValues(alpha: GlassFillStyle.nightVeil)));
+          expect(base.a, greaterThan(0.5));
+          // A tint handed in (a planet's sheet) is veiled the same way.
+          final tint = t.accent.withValues(alpha: 0.3);
+          expect(
+            GlassFillStyle.panel(t, tint: tint).base,
+            Color.alphaBlend(tint, t.space1.withValues(alpha: GlassFillStyle.nightVeil)),
+          );
+        } else {
+          // Pearl's milk glass is untouched.
+          expect(base, t.glassFill);
+        }
+      }
+    });
   });
 }

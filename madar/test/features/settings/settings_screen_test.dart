@@ -30,9 +30,13 @@ void main() {
 
   testWidgets('motion and power pills change settings instantly', (tester) async {
     final app = await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
+    await tester.ensureVisible(find.text(_ar.settingsMotionReduced));
+    await tester.pump();
     await tester.tap(find.text(_ar.settingsMotionReduced));
     await tester.pump();
     expect(app.settings.motion, MotionPreference.reduced);
+    await tester.ensureVisible(find.text(_ar.settingsPowerSaver));
+    await tester.pump();
     await tester.tap(find.text(_ar.settingsPowerSaver));
     await tester.pump();
     expect(app.settings.powerMode, PowerMode.batterySaver);

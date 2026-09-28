@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/app_preferences.dart';
+import '../../core/design/themes.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/widgets/widgets.dart';
 import '../../core/i18n/formatters.dart';
@@ -11,6 +12,16 @@ import '../../core/settings/app_settings.dart';
 import 'settings_controller.dart';
 import 'widgets/appearance_pickers.dart';
 import 'widgets/settings_widgets.dart';
+
+/// A theme card tapped on the Appearance page. While following the device,
+/// a dark theme becomes the dark-mode pairing; picking Pearl – which already
+/// serves light mode – means "Pearl always", so following stops. Pure.
+AppSettings pickTheme(AppSettings s, MadarThemeId id) {
+  if (s.followSystem && id == MadarThemeId.pearl) {
+    return SettingsChanges.followSystem(SettingsChanges.theme(s, id), false);
+  }
+  return SettingsChanges.theme(s, id);
+}
 
 /// Theme (five live miniatures), follow-the-device, accent colour, language
 /// and digit style. Every tap re-themes / re-lays-out the app at once.
@@ -52,10 +63,15 @@ class AppearanceScreen extends ConsumerWidget {
                 ),
               ),
               ThemeCarousel(
-                selected: settings.themeId,
+                // Following the device, the ring marks the dark-mode pick
+                // (Pearl always serves light mode).
+                selected: settings.followSystem && settings.themeId == MadarThemeId.pearl
+                    ? MadarThemeId.lapis
+                    : settings.themeId,
+                followSystem: settings.followSystem,
                 customAccent: settings.customAccent,
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
-                onSelected: (id) => ref.updateSettings((s) => SettingsChanges.theme(s, id)),
+                onSelected: (id) => ref.updateSettings((s) => pickTheme(s, id)),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.m, Space.gutter, 0),
@@ -108,15 +124,21 @@ class AppearanceScreen extends ConsumerWidget {
                         onChanged: (d) => ref.updateSettings((s) => SettingsChanges.digits(s, d)),
                       ),
                       const SizedBox(height: Space.m),
-                      AnimatedSwitcher(
-                        duration: context.motion(MadarMotion.short),
-                        child: Text(
-                          sample,
-                          key: ValueKey(sample),
-                          textAlign: TextAlign.center,
-                          style: text.titleMedium!.copyWith(
-                            color: t.accent,
-                            fontFeatures: const [FontFeature.tabularFigures()],
+                      // Cross-fades when the digit style changes; a new
+                      // language swaps it at once (keyed by language, so
+                      // no Arabic sample lingers in an English layout).
+                      KeyedSubtree(
+                        key: ValueKey(settings.languageCode),
+                        child: AnimatedSwitcher(
+                          duration: context.motion(MadarMotion.short),
+                          child: Text(
+                            sample,
+                            key: ValueKey(sample),
+                            textAlign: TextAlign.center,
+                            style: text.titleMedium!.copyWith(
+                              color: t.accent,
+                              fontFeatures: const [FontFeature.tabularFigures()],
+                            ),
                           ),
                         ),
                       ),

@@ -75,7 +75,8 @@ class _CustomizeSheet extends ConsumerWidget {
     final planet = snapshot?.planet(config.key);
     void pick(PlanetCustomizeAction a) => Navigator.of(context).pop(a);
     return InteractionSheetFrame(
-      title: l.orbitUiCustomizeTitle(name),
+      // A name typed in the other script stays whole inside the title.
+      title: l.orbitUiCustomizeTitle(BidiIsolate.isolate(name)),
       subtitle: l.orbitUiCustomizeSubtitle,
       icon: Icons.tune_rounded,
       body: Column(
@@ -439,7 +440,7 @@ class _PlanetActions {
         if (ordered[i].key != config.key)
           MoveTarget(
             id: ordered[i].key,
-            label: _l.orbitUiMoveBefore(nameOf(ordered[i])),
+            label: _l.orbitUiMoveBefore(BidiIsolate.isolate(nameOf(ordered[i]))),
             subtitle: _l.orbitUiOrbitNumber(_fmt.formatInt(i < index ? i + 1 : i)),
             color: PlanetPalettes.byKey[ordered[i].key]?.surface ?? Color(ordered[i].color),
             icon: InteractionIcons.resolve(ordered[i].icon),

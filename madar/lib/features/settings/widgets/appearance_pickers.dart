@@ -36,6 +36,8 @@ class ThemePreviewCard extends StatelessWidget {
     required this.onTap,
     this.customAccent,
     this.width = 104,
+    this.modeBadge,
+    this.modeLabel,
   });
 
   final MadarThemeId id;
@@ -45,24 +47,22 @@ class ThemePreviewCard extends StatelessWidget {
   final Color? customAccent;
   final double width;
 
+  /// While following the device: a sun on the light-mode theme and a moon on
+  /// the dark-mode one, with [modeLabel] for screen readers.
+  final IconData? modeBadge;
+  final String? modeLabel;
+
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    var preview = MadarPalettes.tokensFor(id);
-    final accent = customAccent;
-    if (accent != null) {
-      preview = preview.copyWith(
-        accent: accent,
-        accentSoft: accent.withValues(alpha: 0.2),
-        accentGlow: accent.withValues(alpha: 0.6),
-      );
-    }
+    // Exactly what the theme would install, custom accent included.
+    final preview = MadarPalettes.resolve(id, accent: customAccent);
     final height = width * 1.45;
     return MadarPressable(
       onTap: selected ? null : onTap,
       selected: selected,
-      semanticLabel: label,
+      semanticLabel: modeLabel == null ? label : '$label${L10n.of(context).interactionListSeparator}$modeLabel',
       excludeChildSemantics: true,
       focusRadius: BorderRadius.circular(t.radiusL),
       child: SizedBox(
@@ -83,14 +83,25 @@ class ThemePreviewCard extends StatelessWidget {
                 ),
                 child: child,
               ),
-              child: RepaintBoundary(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(t.radiusL),
-                  child: CustomPaint(
-                    size: Size(width, height),
-                    painter: ThemeMiniPainter(preview, rtl: Directionality.of(context) == TextDirection.rtl),
+              child: Stack(
+                children: [
+                  RepaintBoundary(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(t.radiusL),
+                      child: CustomPaint(
+                        size: Size(width, height),
+                        painter: ThemeMiniPainter(preview, rtl: Directionality.of(context) == TextDirection.rtl),
+                      ),
+                    ),
                   ),
-                ),
+                  // Opposite the selection check (top right).
+                  if (modeBadge != null)
+                    Positioned(
+                      left: 7,
+                      top: 7,
+                      child: _ModeBadge(icon: modeBadge!, tokens: preview),
+                    ),
+                ],
               ),
             ),
             const SizedBox(height: Space.s),
@@ -105,6 +116,28 @@ class ThemePreviewCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// A small glass disc with a sun / moon, drawn in the previewed theme.
+class _ModeBadge extends StatelessWidget {
+  const _ModeBadge({required this.icon, required this.tokens});
+
+  final IconData icon;
+  final MadarTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 22,
+      height: 22,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Color.alphaBlend(tokens.glassFill, tokens.space1),
+        border: Border.all(color: tokens.gold.withValues(alpha: 0.7), width: 0.8),
+      ),
+      child: Icon(icon, size: 13, color: tokens.gold),
     );
   }
 }
@@ -285,8 +318,10 @@ class ThemeMiniPainter extends CustomPainter {
   bool shouldRepaint(ThemeMiniPainter old) => old.tokens != tokens || old.rtl != rtl;
 }
 
-/// The five theme cards in a horizontally scrolling row.
-class ThemeCarousel extends StatelessWidget {
+/// The five theme cards in a horizontally scrolling row. The selected card
+/// is always brought into view – on first build (Pearl and Aurora sit past
+/// the fold on a phone) and whenever the selection changes.
+class ThemeCarousel extends StatefulWidget {
   const ThemeCarousel({
     super.key,
     required this.selected,
@@ -294,6 +329,7 @@ class ThemeCarousel extends StatelessWidget {
     this.customAccent,
     this.padding = const EdgeInsetsDirectional.symmetric(horizontal: Space.l),
     this.cardWidth = 104,
+    this.followSystem = false,
   });
 
   final MadarThemeId selected;
@@ -302,29 +338,113 @@ class ThemeCarousel extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final double cardWidth;
 
+  /// Following the device: Pearl carries a sun (light mode) and the chosen
+  /// theme a moon (dark mode).
+  final bool followSystem;
+
+  static const double spacing = Space.m;
+
+  /// Scroll offset that centres card [index] in a [viewport]-wide row
+  /// (clamped to the scroll range). Pure – unit-tested.
+  static double offsetFor(
+    int index, {
+    required int count,
+    required double cardWidth,
+    required double viewport,
+    required double paddingStart,
+    required double paddingEnd,
+  }) {
+    final content = paddingStart + paddingEnd + count * cardWidth + (count - 1) * spacing;
+    final max = math.max(0.0, content - viewport);
+    final cardStart = paddingStart + index * (cardWidth + spacing);
+    return (cardStart + cardWidth / 2 - viewport / 2).clamp(0.0, max);
+  }
+
+  @override
+  State<ThemeCarousel> createState() => _ThemeCarouselState();
+}
+
+class _ThemeCarouselState extends State<ThemeCarousel> {
+  ScrollController? _scroll;
+  double _viewport = 0;
+
+  double _target(BuildContext context) {
+    final padding = widget.padding.resolve(Directionality.of(context));
+    final rtl = Directionality.of(context) == TextDirection.rtl;
+    return ThemeCarousel.offsetFor(
+      MadarThemeId.values.indexOf(widget.selected),
+      count: MadarThemeId.values.length,
+      cardWidth: widget.cardWidth,
+      viewport: _viewport,
+      // The list scrolls from the reading start.
+      paddingStart: rtl ? padding.right : padding.left,
+      paddingEnd: rtl ? padding.left : padding.right,
+    );
+  }
+
+  @override
+  void didUpdateWidget(ThemeCarousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final scroll = _scroll;
+    if (oldWidget.selected != widget.selected && scroll != null && scroll.hasClients) {
+      final target = _target(context);
+      if (context.reducedMotion) {
+        scroll.jumpTo(target);
+      } else {
+        scroll.animateTo(target, duration: MadarMotion.long, curve: MadarMotion.standard);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _scroll?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = L10n.of(context);
+    // Card + gap + one line of label, grown with the user's text size.
+    final label = Theme.of(context).textTheme.labelLarge!;
+    final labelHeight = MediaQuery.textScalerOf(context).scale(label.fontSize!) * (label.height ?? 1.3);
     return SizedBox(
-      height: cardWidth * 1.45 + 34,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: padding,
-        clipBehavior: Clip.none,
-        itemCount: MadarThemeId.values.length,
-        separatorBuilder: (_, _) => const SizedBox(width: Space.m),
-        itemBuilder: (context, i) {
-          final id = MadarThemeId.values[i];
-          return Padding(
-            padding: const EdgeInsetsDirectional.only(top: Space.xs),
-            child: ThemePreviewCard(
-              id: id,
-              width: cardWidth,
-              label: themeName(l, id),
-              selected: id == selected,
-              customAccent: customAccent,
-              onTap: () => onSelected(id),
-            ),
+      height: widget.cardWidth * 1.45 + Space.xs + Space.s + labelHeight.ceilToDouble() + 2,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          _viewport = constraints.maxWidth;
+          final scroll = _scroll ??= ScrollController(initialScrollOffset: _target(context));
+          return ListView.separated(
+            controller: scroll,
+            scrollDirection: Axis.horizontal,
+            padding: widget.padding,
+            clipBehavior: Clip.none,
+            itemCount: MadarThemeId.values.length,
+            separatorBuilder: (_, _) => const SizedBox(width: ThemeCarousel.spacing),
+            itemBuilder: (context, i) {
+              final id = MadarThemeId.values[i];
+              return Padding(
+                padding: const EdgeInsetsDirectional.only(top: Space.xs),
+                child: ThemePreviewCard(
+                  id: id,
+                  width: widget.cardWidth,
+                  label: themeName(l, id),
+                  selected: id == widget.selected,
+                  customAccent: widget.customAccent,
+                  onTap: () => widget.onSelected(id),
+                  modeBadge: !widget.followSystem
+                      ? null
+                      : id == MadarThemeId.pearl
+                      ? Icons.light_mode_rounded
+                      : (id == widget.selected ? Icons.dark_mode_rounded : null),
+                  modeLabel: !widget.followSystem
+                      ? null
+                      : id == MadarThemeId.pearl
+                      ? l.settingsThemeLightMode
+                      : (id == widget.selected ? l.settingsThemeDarkMode : null),
+                ),
+              );
+            },
           );
         },
       ),
@@ -355,7 +475,11 @@ class LanguagePicker extends StatelessWidget {
   }
 }
 
-/// Theme accent or a planet colour, as glowing swatches.
+/// Theme accent, a planet colour or any hue, as glowing swatches over a hue
+/// rail. Every swatch shows the colour *as it will be used* in [theme]: a
+/// custom accent is adjusted per theme so it stays legible (see
+/// `MadarPalettes.withAccent`), and the stored value stays the user's raw
+/// pick so another theme can adapt it again.
 class AccentPicker extends StatelessWidget {
   const AccentPicker({super.key, required this.theme, required this.value, required this.onChanged});
 
@@ -366,82 +490,335 @@ class AccentPicker extends StatelessWidget {
   final Color? value;
   final ValueChanged<Color?> onChanged;
 
+  /// Swatch planets, in the planets' orbit order.
+  static const List<String> planetKeys = ['faith', 'health', 'family', 'work', 'money', 'growth', 'body', 'travel'];
+
+  /// Saturation and lightness of colours picked on the hue rail (the raw
+  /// pick – the theme then adjusts the lightness).
+  static const double railSaturation = 0.72;
+  static const double railLightness = 0.6;
+
+  /// The raw accent for [hue] on the rail.
+  static Color colorForHue(double hue) => HSLColor.fromAHSL(1, hue % 360, railSaturation, railLightness).toColor();
+
   @override
   Widget build(BuildContext context) {
     final l = L10n.of(context);
+    final base = MadarPalettes.tokensFor(theme);
+    final shown = MadarPalettes.resolve(theme, accent: value).accent;
+    final isPlanet = value != null && accentChoices.any((c) => c.toARGB32() == value!.toARGB32());
     return Semantics(
       container: true,
       label: l.settingsAccent,
-      child: Wrap(
-        spacing: Space.m,
-        runSpacing: Space.m,
+      explicitChildNodes: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          _Swatch(
-            color: MadarPalettes.tokensFor(theme).accent,
-            selected: value == null,
-            label: l.settingsAccentDefault,
-            icon: Icons.auto_awesome_rounded,
-            onTap: () => onChanged(null),
+          Wrap(
+            spacing: Space.xs,
+            runSpacing: Space.xs,
+            children: [
+              _Swatch(
+                raw: base.accent,
+                theme: theme,
+                selected: value == null,
+                label: l.settingsAccentDefault,
+                icon: Icons.auto_awesome_rounded,
+                onTap: () => onChanged(null),
+              ),
+              for (final key in planetKeys)
+                _Swatch(
+                  raw: PlanetPalettes.byKey[key]!.surface,
+                  theme: theme,
+                  selected: value?.toARGB32() == PlanetPalettes.byKey[key]!.surface.toARGB32(),
+                  label: l.settingsAccentPlanet(planetName(l, key)),
+                  onTap: () => onChanged(PlanetPalettes.byKey[key]!.surface),
+                ),
+            ],
           ),
-          for (final c in accentChoices)
-            _Swatch(
-              color: c,
-              selected: value?.toARGB32() == c.toARGB32(),
-              label: l.settingsAccentCustom,
-              onTap: () => onChanged(c),
-            ),
+          const SizedBox(height: Space.m),
+          AccentHueRail(
+            theme: theme,
+            // The raw pick's hue (the theme may nudge the shown colour's hue
+            // by a degree or two; the thumb stays where the finger left it).
+            hue: HSLColor.fromColor(value ?? shown).hue,
+            color: shown,
+            custom: value != null && !isPlanet,
+            onChanged: (h) => onChanged(colorForHue(h)),
+          ),
         ],
       ),
     );
   }
 }
 
-class _Swatch extends StatelessWidget {
-  const _Swatch({required this.color, required this.selected, required this.label, required this.onTap, this.icon});
+/// Localised planet name for the accent swatches' labels.
+String planetName(L10n l, String key) => switch (key) {
+  'faith' => l.planetFaith,
+  'health' => l.planetHealth,
+  'family' => l.planetFamily,
+  'work' => l.planetWork,
+  'money' => l.planetMoney,
+  'growth' => l.planetGrowth,
+  'body' => l.planetBody,
+  'travel' => l.planetTravel,
+  _ => key,
+};
 
-  final Color color;
+class _Swatch extends StatelessWidget {
+  const _Swatch({
+    required this.raw,
+    required this.theme,
+    required this.selected,
+    required this.label,
+    required this.onTap,
+    this.icon,
+  });
+
+  /// The colour as picked; shown as [theme] will use it.
+  final Color raw;
+  final MadarThemeId theme;
   final bool selected;
   final String label;
   final IconData? icon;
   final VoidCallback onTap;
 
+  /// Visual diameter; the tap target is [target] square.
+  static const double size = 38;
+  static const double target = 48;
+
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final onColor = ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? t.starTint : t.space0;
+    final resolved = MadarPalettes.resolve(theme, accent: raw);
+    final color = resolved.accent;
+    final onColor = resolved.textOnAccent;
     return MadarPressable(
       onTap: selected ? null : onTap,
       selected: selected,
       semanticLabel: label,
       excludeChildSemantics: true,
       sfx: Sfx.tap,
-      child: AnimatedContainer(
-        duration: context.motion(MadarMotion.short),
-        curve: MadarMotion.standard,
-        width: 38,
-        height: 38,
-        padding: EdgeInsets.all(selected ? 3 : 0),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: selected ? color : t.glassBorder, width: selected ? 2 : 1),
-          boxShadow: selected ? [BoxShadow(color: color.withValues(alpha: 0.55), blurRadius: 12)] : null,
-        ),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: RadialGradient(
-              center: const Alignment(-0.3, -0.35),
-              colors: [Color.lerp(color, t.starTint, 0.35)!, color],
+      child: SizedBox.square(
+        dimension: target,
+        child: Center(
+          child: AnimatedContainer(
+            duration: context.motion(MadarMotion.short),
+            curve: MadarMotion.standard,
+            width: size,
+            height: size,
+            padding: EdgeInsets.all(selected ? 3 : 0),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: selected ? color : t.glassBorder, width: selected ? 2 : 1),
+              boxShadow: selected ? [BoxShadow(color: color.withValues(alpha: 0.55), blurRadius: 12)] : null,
             ),
-          ),
-          child: Center(
-            child: selected
-                ? Icon(Icons.check_rounded, size: 16, color: onColor)
-                : (icon == null ? null : Icon(icon, size: 14, color: onColor)),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  center: const Alignment(-0.3, -0.35),
+                  colors: [Color.lerp(color, onColor, 0.3)!, color],
+                ),
+              ),
+              child: Center(
+                child: selected
+                    ? Icon(Icons.check_rounded, size: 16, color: onColor)
+                    : (icon == null ? null : Icon(icon, size: 14, color: onColor)),
+              ),
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+/// A rainbow rail for any accent hue. The rail is painted in the colours the
+/// theme will really use (each hue already adjusted for legibility), the
+/// thumb wears the current accent, and dragging clicks softly every 30°.
+class AccentHueRail extends StatefulWidget {
+  const AccentHueRail({
+    super.key,
+    required this.theme,
+    required this.hue,
+    required this.color,
+    required this.custom,
+    required this.onChanged,
+  });
+
+  final MadarThemeId theme;
+
+  /// Hue (0–360) of the current accent.
+  final double hue;
+
+  /// The current accent as the theme uses it (the thumb).
+  final Color color;
+
+  /// Whether the current accent came from this rail (highlights the rail).
+  final bool custom;
+  final ValueChanged<double> onChanged;
+
+  /// The rail's gradient: [steps] hues, each as [theme] would show it
+  /// (computed once per theme – each colour runs a contrast search).
+  static List<Color> railColors(MadarThemeId theme, {int steps = 13}) => _railCache.putIfAbsent(
+    (theme, steps),
+    () => [
+      for (var i = 0; i < steps; i++)
+        MadarPalettes.resolve(theme, accent: AccentPicker.colorForHue(360.0 * i / (steps - 1))).accent,
+    ],
+  );
+
+  static final Map<(MadarThemeId, int), List<Color>> _railCache = {};
+
+  @override
+  State<AccentHueRail> createState() => _AccentHueRailState();
+}
+
+class _AccentHueRailState extends State<AccentHueRail> {
+  /// The hue under the finger while dragging: previewed on the thumb only.
+  /// The accent is saved once, on release – saving on every pointer move
+  /// would write the settings to disk and re-theme (and animate) the whole
+  /// app up to 60 times a second.
+  double? _dragHue;
+
+  void _onChanged(double hue) {
+    final previous = _dragHue ?? widget.hue;
+    if ((previous / 30).floor() != (hue / 30).floor()) Fx.fire(Sfx.countTick);
+    setState(() => _dragHue = hue);
+  }
+
+  void _onEnd(double hue) {
+    Fx.fire(Sfx.drop);
+    widget.onChanged(hue);
+    setState(() => _dragHue = null);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final fmt = MadarFormatter.of(context);
+    final dragging = _dragHue;
+    final hue = (dragging ?? widget.hue).clamp(0.0, 360.0);
+    final thumb = dragging == null
+        ? widget.color
+        : MadarPalettes.resolve(widget.theme, accent: AccentPicker.colorForHue(dragging)).accent;
+    final custom = widget.custom || dragging != null;
+    final rail = AccentHueRail.railColors(widget.theme);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            Icon(Icons.colorize_rounded, size: 16, color: custom ? thumb : t.textSecondary),
+            const SizedBox(width: Space.s),
+            Expanded(
+              child: Text(
+                l.settingsAccentCustom,
+                style: text.labelLarge!.copyWith(color: custom ? t.textPrimary : t.textSecondary),
+              ),
+            ),
+          ],
+        ),
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            trackHeight: 10,
+            trackShape: _HueTrackShape(rail, border: t.glassBorder),
+            thumbColor: thumb,
+            overlayColor: thumb.withValues(alpha: 0.18),
+            thumbShape: _HueThumbShape(ring: t.textPrimary, shadow: t.glassShadow),
+            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
+          ),
+          child: Slider(
+            value: hue,
+            max: 360,
+            label: l.settingsAccentCustom,
+            onChanged: _onChanged,
+            onChangeEnd: _onEnd,
+            semanticFormatterCallback: (v) => l.settingsAccentHueValue(fmt.formatInt(v.round())),
+          ),
+        ),
+        Text(l.settingsAccentCustomHint, style: text.bodySmall!.copyWith(color: t.textTertiary, height: 1.4)),
+      ],
+    );
+  }
+}
+
+/// The rainbow track (no active / inactive split).
+class _HueTrackShape extends RoundedRectSliderTrackShape {
+  const _HueTrackShape(this.colors, {required this.border});
+
+  final List<Color> colors;
+  final Color border;
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset offset, {
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required Animation<double> enableAnimation,
+    required TextDirection textDirection,
+    required Offset thumbCenter,
+    Offset? secondaryOffset,
+    bool isDiscrete = false,
+    bool isEnabled = false,
+    double additionalActiveTrackHeight = 2,
+  }) {
+    final rect = getPreferredRect(parentBox: parentBox, offset: offset, sliderTheme: sliderTheme);
+    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(rect.height / 2));
+    // The slider runs from the reading start: mirror the rainbow in RTL so
+    // the thumb always sits on its own colour.
+    final stops = textDirection == TextDirection.rtl ? colors.reversed.toList() : colors;
+    context.canvas
+      ..drawRRect(rrect, Paint()..shader = LinearGradient(colors: stops).createShader(rect))
+      ..drawRRect(
+        rrect,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1
+          ..color = border,
+      );
+  }
+}
+
+/// A jewel thumb: the accent itself inside a light ring.
+class _HueThumbShape extends SliderComponentShape {
+  const _HueThumbShape({required this.ring, required this.shadow});
+
+  final Color ring;
+  final Color shadow;
+
+  static const double radius = 12;
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) => const Size.fromRadius(radius);
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    final canvas = context.canvas;
+    final r = radius + 2 * activationAnimation.value;
+    canvas
+      ..drawCircle(center.translate(0, 1.5), r, Paint()..color = shadow)
+      ..drawCircle(center, r, Paint()..color = ring)
+      ..drawCircle(center, r - 3, Paint()..color = sliderTheme.thumbColor ?? ring);
   }
 }
 

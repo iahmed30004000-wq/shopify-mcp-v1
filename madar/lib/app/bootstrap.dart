@@ -17,7 +17,9 @@ import '../core/sound/sound_api.dart';
 import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
 import 'app.dart';
 import 'app_preferences.dart';
+import 'app_services.dart';
 import 'licenses.dart';
+import 'suspending_flows.dart';
 
 /// Starts Madar.
 ///
@@ -31,6 +33,13 @@ import 'licenses.dart';
 /// 5. The sound engine and haptics are constructed and [Fx] is installed;
 ///    the audio device opens after the first frame so it never delays it
 ///    (the service falls back to silence if audio is unavailable).
+/// 6. After the first frame, while the splash is up: the time-zone database
+///    and the notifications plugin (launch details – was Madar opened by an
+///    adhan?) are prepared ([warmUpServices]). Failures only log: without
+///    notifications the app still runs. The adhan planner, prayer quiet,
+///    adhkar reminders and notification routing start once the encrypted
+///    database is open (`AppGate`); the app lock is the default
+///    `lockGateProvider` (`BiometricLockGate`).
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   installErrorHooks();
@@ -49,16 +58,19 @@ Future<void> bootstrap() async {
   sound.enabled = settings.soundEnabled;
   Fx.install(FeedbackService(sound, haptics));
 
-  runApp(
-    ProviderScope(
-      overrides: madarAppOverrides(prefs: prefs, sound: sound, haptics: haptics),
-      child: const MadarApp(),
-    ),
+  final container = ProviderContainer(
+    overrides: [
+      ...madarAppOverrides(prefs: prefs, sound: sound, haptics: haptics),
+      // System dialogs and pickers the app opens never trip the app lock.
+      ...suspendingFlowOverrides(),
+    ],
   );
+  runApp(UncontrolledProviderScope(container: container, child: const MadarApp()));
 
   WidgetsBinding.instance.addPostFrameCallback((_) {
     unawaited(sound.init().catchError((Object e, StackTrace s) => _log('sound init', e, s)));
     unawaited(_preferHighRefreshRate());
+    unawaited(warmUpServices(container));
   });
 }
 

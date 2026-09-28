@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/astro/astronomy.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/features/orbit/domain/prayer_schedule.dart';
+import 'package:madar/features/prayer/domain/time_zones.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   final schedule = PrayerSchedule(const PrayerSettings()); // Amman, Jordan preset
@@ -89,5 +91,37 @@ void main() {
     expect(back.hanafiAsr, isTrue);
     expect(back.adjustmentsMin['fajr'], 2);
     expect(back.cityName, 'Damascus');
+  });
+
+  group('Phase 2 settings', () {
+    setUpAll(MadarTimeZones.ensure);
+
+    test('with the location zone stored, windows follow Amman whatever the device zone', () {
+      final amman = tz.getLocation('Asia/Amman');
+      final zoned = PrayerSchedule(const PrayerSettings(timeZone: 'Asia/Amman'));
+      final t = zoned.timesFor(DateTime(2026, 9, 27));
+      WindowState at(DateTime x) => zoned.windowAt(x);
+      expect(at(t.fajr.subtract(const Duration(minutes: 5))).window, PrayerWindow.isha);
+      expect(at(t.fajr.add(const Duration(minutes: 5))).window, PrayerWindow.fajr);
+      expect(at(t.sunrise.add(const Duration(minutes: 5))).window, PrayerWindow.duha);
+      expect(at(t.maghrib.add(const Duration(minutes: 5))).nextPrayer, Prayer.isha);
+      expect(zoned.prayerDayOf(tz.TZDateTime(amman, 2026, 9, 28, 2)), DateTime(2026, 9, 27));
+      final dhuhr = zoned.wallClock(t.dhuhr);
+      expect((dhuhr.hour, dhuhr.day), (12, 27));
+    });
+
+    test('Phase 1 JSON decodes into the same schedule parameters', () {
+      final phase1 = PrayerSettings.fromJson(const {
+        'latitude': 31.9539,
+        'longitude': 35.9106,
+        'fajrAngle': 18,
+        'ishaAngle': 18,
+        'hanafiAsr': false,
+        'adjustmentsMin': <String, Object?>{},
+        'useJordanPreset': true,
+      });
+      expect(phase1, const PrayerSettings());
+      expect(PrayerSchedule(phase1).timesFor(day).maghrib, schedule.timesFor(day).maghrib);
+    });
   });
 }

@@ -4,6 +4,7 @@ import '../../../core/db/database.dart';
 import '../../../core/design/themes.dart';
 import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
+import '../../../core/i18n/formatters.dart';
 import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion.dart';
 
@@ -44,6 +45,8 @@ class TaskTile extends StatelessWidget {
       else if (planetName != null)
         TextSpan(text: planetName),
     ];
+    final uiStart = Directionality.of(context) == TextDirection.rtl ? TextAlign.right : TextAlign.left;
+    final detailText = (notes != null && notes.isNotEmpty) ? notes.split('\n').first : (planetName ?? '');
     return GlassCard(
       padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.xs, Space.m),
       glow: false,
@@ -63,6 +66,11 @@ class TaskTile extends StatelessWidget {
                     task.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
+                    // The title reads in its own script's direction ("Call
+                    // Mum!" keeps its "!" in an Arabic list) but aligns with
+                    // the UI.
+                    textDirection: BidiIsolate.directionOf(task.title),
+                    textAlign: uiStart,
                     style: text.titleMedium!.copyWith(
                       decoration: done ? TextDecoration.lineThrough : null,
                       decorationColor: t.textTertiary,
@@ -75,6 +83,8 @@ class TaskTile extends StatelessWidget {
                       TextSpan(children: detail),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      textDirection: reminder == null ? BidiIsolate.directionOf(detailText) : null,
+                      textAlign: uiStart,
                       style: text.bodySmall!.copyWith(color: t.textTertiary, height: 1.35),
                     ),
                 ],

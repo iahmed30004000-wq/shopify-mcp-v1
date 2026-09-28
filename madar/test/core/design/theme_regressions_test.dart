@@ -38,6 +38,33 @@ void main() {
     });
   });
 
+  group('typography pinned to the language (no reflow after a switch)', () {
+    test('withMadarTypography swaps the script metrics and keeps the colours', () {
+      for (final id in MadarThemeId.values) {
+        final arabic = buildMadarTheme(id, arabic: true);
+        final latin = withMadarTypography(arabic, arabic: false);
+        expect(latin.textTheme, buildMadarTheme(id, arabic: false).textTheme);
+        expect(latin.textTheme.bodyMedium!.height, 1.3);
+        expect(latin.textTheme.bodyMedium!.color, arabic.textTheme.bodyMedium!.color);
+        expect(latin.appBarTheme.titleTextStyle, latin.textTheme.titleLarge);
+        expect(latin.inputDecorationTheme.hintStyle!.height, 1.3);
+        expect(latin.extension<MadarTokens>(), arabic.extension<MadarTokens>());
+        // Nothing to pin: the very same theme comes back.
+        expect(identical(withMadarTypography(arabic, arabic: true), arabic), isTrue);
+      }
+    });
+
+    test('mid-cross-fade, the metrics follow the language while the colours follow the fade', () {
+      final from = buildMadarTheme(MadarThemeId.lapis, arabic: true);
+      final to = buildMadarTheme(MadarThemeId.pearl, arabic: false);
+      final mid = ThemeData.lerp(from, to, 0.3);
+      final pinned = withMadarTypography(mid, arabic: false);
+      final tokens = mid.extension<MadarTokens>()!;
+      expect(pinned.textTheme.bodyMedium!.height, 1.3);
+      expect(pinned.textTheme.bodyMedium!.color, tokens.textPrimary);
+    });
+  });
+
   test('tooltips never vibrate on their own (haptics go through Fx)', () {
     expect(buildMadarTheme(MadarThemeId.lapis, arabic: true).tooltipTheme.enableFeedback, isFalse);
   });

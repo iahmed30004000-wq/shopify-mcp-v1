@@ -75,6 +75,11 @@ android {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+    // App lock: the launch / normal themes derive from Theme.AppCompat
+    // (res/values*/styles.xml) as local_auth requires for its biometric
+    // dialog on Android 8.x; no plugin brings AppCompat's resources in, so
+    // the app declares it itself.
+    implementation("androidx.appcompat:appcompat:1.7.0")
 }
 
 kotlin {

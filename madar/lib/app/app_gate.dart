@@ -12,9 +12,12 @@ import '../core/design/tokens.dart';
 import '../core/design/widgets/widgets.dart';
 import '../core/i18n/gen/app_localizations.dart';
 import '../core/motion/motion.dart';
+import '../core/routing/router.dart';
 import '../core/settings/app_settings.dart';
 import '../core/sound/sound_api.dart';
+import '../features/adhan/presentation/adhan_host.dart';
 import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
+import 'app_services.dart';
 import 'lock_gate.dart';
 import 'splash.dart';
 
@@ -82,7 +85,19 @@ bool canResetAfter(Object error, {int failedRetries = 0}) => switch (rootCauseOf
 /// Sits between the navigator and the rest of the shell: shows the
 /// [AstrolabeSplash] while the database unlocks (at least [minSplash] once
 /// the splash is on screen, so it never flashes), a recovery view when
-/// unlocking fails, and otherwise the app wrapped in the [LockGate].
+/// unlocking fails, and otherwise the app – layered, from the outside in:
+///
+/// 1. [AppServices] – adhkar reminders planned, notification taps routed
+///    (they run while the app is locked);
+/// 2. [AdhanHost] – the adhan's alarms and prayer quiet, and the full-screen
+///    adhan presented **above the app lock**: the adhan screen shows nothing
+///    personal, and while one that came from a notification is up (possibly
+///    over the phone's keyguard) everything beneath it – lock screen and app
+///    – is not painted; after it closes the app stays veiled until the phone
+///    is unlocked, and the app lock is in front again whenever it is armed;
+/// 3. the [LockGate] around the navigator – nothing of the app is painted
+///    before the owner unlocks, deep links (an adhkar reminder) move the
+///    router underneath it.
 ///
 /// When the database is already available on the first frame (tests,
 /// previews) the app shows immediately without a splash.
@@ -163,7 +178,12 @@ class _AppGateState extends ConsumerState<AppGate> {
     if (unlock.hasValue && !unlock.isLoading && !holding) {
       content = KeyedSubtree(
         key: const ValueKey('app'),
-        child: ref.watch(lockGateProvider).wrap(context, widget.child),
+        child: AppServices(
+          child: AdhanHost(
+            backButtonDispatcher: ref.watch(routerProvider).backButtonDispatcher,
+            child: ref.watch(lockGateProvider).wrap(context, widget.child),
+          ),
+        ),
       );
     } else if (unlock.hasError && !unlock.isLoading) {
       content = _GateError(
