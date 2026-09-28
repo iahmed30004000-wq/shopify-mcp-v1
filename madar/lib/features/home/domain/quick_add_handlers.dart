@@ -231,7 +231,10 @@ class ContactQuickAdd extends QuickAddHandler {
     final name = intent.title.trim();
     if (name.isEmpty) return false;
     final repos = c.repositories();
-    final at = intent.dateTime ?? c.clock();
+    final now = c.clock();
+    final at = intent.dateTime ?? now;
+    // A contact planned for later ("زيارة بكرا") is a task, not a log.
+    if (at.isAfter(now)) return TaskQuickAdd(c).handle(intent);
     final key = name.toLowerCase();
     final people = await repos.people.getAll();
     final person =

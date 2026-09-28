@@ -47,7 +47,17 @@ abstract final class MadarShaders {
   }
 
   /// Loads every Madar shader. Safe to call repeatedly.
-  static Future<void> preload() => Future.wait([load(glassAsset), load(cosmosAsset)]);
+  ///
+  /// Not `Future.wait`: [load] answers a loaded program with a
+  /// [SynchronousFuture], whose callbacks run inside `Future.wait`'s
+  /// registration loop and break it. Both loads still start before either
+  /// is awaited, so they run in parallel.
+  static Future<void> preload() async {
+    final glass = load(glassAsset);
+    final cosmos = load(cosmosAsset);
+    await glass;
+    await cosmos;
+  }
 
   /// Test hook: forget loaded programs so a test can exercise the fallback.
   @visibleForTesting

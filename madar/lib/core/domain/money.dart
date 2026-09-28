@@ -190,28 +190,41 @@ abstract final class CurrencyCatalog {
   /// Whether the Latin symbol is a single sign written before the number.
   static bool isPrefixSign(String code) => _latinSymbols.containsKey(code.toUpperCase());
 
-  // Longest patterns first so "US$" wins over "$" and "E£" over "£".
+  /// No letter before an Arabic abbreviation (`للولد` is not `ل.د`).
+  static const _arStart = r'(?<!\p{L})';
+
+  /// No letter or digit after an Arabic abbreviation. Dart's `\b` only
+  /// knows ASCII word characters, so it never matches after `د` / `ك`.
+  static const _arEnd = r'(?![\p{L}\p{N}])';
+
+  /// A Latin token standing on its own (`LE` but not `Table`/`Sale`).
+  static String _latin(String token) => '(?<![A-Za-z])(?:$token)(?![A-Za-z])';
+
+  // Longest patterns first so "US$" wins over "$" and "E£" over "£". Latin
+  // tokens are case-sensitive and ASCII-bounded; Arabic abbreviations are
+  // bounded by any letter.
   static final List<(RegExp, String)> _detectors = [
-    for (final (pattern, code) in const [
+    for (final (pattern, code) in [
       (r'US\$', 'USD'),
-      (r'E£|LE\b|L\.E\.?', 'EGP'),
-      (r'دولار', 'USD'),
-      (r'دينار\s*ليبي|ل\.?\s?د\b|LD\b', 'LYD'),
-      (r'دينار\s*كويتي|د\.?\s?ك\b', 'KWD'),
-      (r'دينار(\s*أردني)?|د\.?\s?أ|JD\b', 'JOD'),
-      (r'جنيه(\s*مصري)?|ج\.?\s?م', 'EGP'),
-      (r'ليرة\s*تركية|₺', 'TRY'),
-      (r'ليرة(\s*سورية)?|ل\.?\s?س|S\.?P\.?\b', 'SYP'),
-      (r'ريال(\s*سعودي)?|ر\.?\s?س', 'SAR'),
-      (r'درهم(\s*إماراتي)?|د\.?\s?إ', 'AED'),
-      (r'يورو|€', 'EUR'),
-      (r'£', 'GBP'),
+      ('E£|${_latin(r'LE|L\.E\.?')}', 'EGP'),
+      ('دولار', 'USD'),
+      ('دينار\\s*ليبي|$_arStartل\\.?\\s?د$_arEnd|${_latin('LD')}', 'LYD'),
+      ('دينار\\s*كويتي|$_arStartد\\.?\\s?ك$_arEnd', 'KWD'),
+      ('دينار(\\s*أردني)?|$_arStartد\\.?\\s?أ$_arEnd|${_latin('JD')}', 'JOD'),
+      ('جنيه(\\s*مصري)?|$_arStartج\\.?\\s?م$_arEnd', 'EGP'),
+      ('ليرة\\s*تركية|₺', 'TRY'),
+      ('ليرة(\\s*سورية)?|$_arStartل\\.?\\s?س$_arEnd|${_latin(r'S\.?P\.?')}', 'SYP'),
+      ('ريال(\\s*سعودي)?|$_arStartر\\.?\\s?س$_arEnd', 'SAR'),
+      ('درهم(\\s*إماراتي)?|$_arStartد\\.?\\s?إ$_arEnd', 'AED'),
+      ('يورو|€', 'EUR'),
+      ('£', 'GBP'),
       (r'\$', 'USD'),
     ])
-      (RegExp(pattern, caseSensitive: false), code),
+      (RegExp(pattern, unicode: true), code),
   ];
 
-  static final RegExp _isoCode = RegExp(r'(?<![A-Za-z])([A-Za-z]{3})(?![A-Za-z])');
+  /// An upper-case three-letter token (`try 5` is not a currency).
+  static final RegExp _isoCode = RegExp(r'(?<![A-Za-z])([A-Z]{3})(?![A-Za-z])');
 
   /// Recognised ISO codes when they appear in free text.
   static const knownCodes = {
@@ -220,27 +233,48 @@ abstract final class CurrencyCatalog {
   };
 
   /// Detects a currency written in [text] (`"200 JOD"`, `"$12"`, `"١٢ د.أ"`,
-  /// `"5 دنانير"`), or null.
+  /// `"12 ل.د"`, `"5 دنانير"`), or null. Only upper-case [knownCodes] count
+  /// as ISO codes in free text.
   static String? detect(String text) {
     for (final m in _isoCode.allMatches(text)) {
-      final code = m.group(1)!.toUpperCase();
+      final code = m.group(1)!;
       if (knownCodes.contains(code)) return code;
     }
-    if (RegExp('دنانير').hasMatch(text)) return 'JOD';
+    if (text.contains('دنانير')) return 'JOD';
     for (final (re, code) in _detectors) {
       if (re.hasMatch(text)) return code;
     }
     return null;
   }
 
-  /// Normalises a currency field value (`"jd"`, `"دينار"`, `"$"`, `"usd"`) to
-  /// an ISO code, or null.
+  /// The currency a whole value names: a known code in any case (`"usd"`),
+  /// a symbol or abbreviation (`"$"`, `"ل.د"`, `"jd"`) or an Arabic name
+  /// (`"دينار"`). Unlike [detect] it never picks a code out of longer text
+  /// (a wallet group called `"Mobile"` or `"try"` is not a currency).
+  static String? exact(Object? value) {
+    if (value is! String) return null;
+    final t = value.trim();
+    if (t.isEmpty) return null;
+    final up = t.toUpperCase();
+    if (knownCodes.contains(up)) return up;
+    if (t == 'دنانير') return 'JOD';
+    for (final candidate in {t, up}) {
+      for (final (re, code) in _detectors) {
+        final m = re.firstMatch(candidate);
+        if (m != null && m.start == 0 && m.end == candidate.length) return code;
+      }
+    }
+    return null;
+  }
+
+  /// Normalises a currency field value (`"jd"`, `"دينار"`, `"$"`, `"usd"`,
+  /// `"ل.د"`) to an ISO code, or null.
   static String? normalize(Object? value) {
     if (value is! String) return null;
     final t = value.trim();
     if (t.isEmpty) return null;
     if (RegExp(r'^[A-Za-z]{3}$').hasMatch(t)) return t.toUpperCase();
-    return detect(t);
+    return exact(t) ?? detect(t);
   }
 }
 

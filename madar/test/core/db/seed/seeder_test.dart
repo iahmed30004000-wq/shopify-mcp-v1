@@ -149,6 +149,52 @@ void main() {
     expect(faith.nameEn, 'Faith');
   });
 
+  group('relocalizeDefaults', () {
+    test('rewrites untouched Arabic defaults into English, leaves user edits alone', () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      final en = lookupL10n(const Locale('en'));
+      final seeded = await (db.select(db.habits)..orderBy([(t) => OrderingTerm.asc(t.sortOrder)])).get();
+      // The user renamed one habit and added another before switching.
+      await (db.update(db.habits)..where((t) => t.id.equals(seeded[1].id))).write(const HabitsCompanion(name: Value('My walk')));
+      await db.into(db.habits).insert(HabitsCompanion.insert(name: 'قراءة', sortOrder: const Value(99)));
+
+      final changed = await MadarSeeder(db).relocalizeDefaults('en');
+      final habits = await (db.select(db.habits)..orderBy([(t) => OrderingTerm.asc(t.sortOrder)])).get();
+      final defaults = MadarDefaults.stressHabits(en);
+      expect(habits.first.name, defaults.first.name);
+      expect(habits[1].name, 'My walk');
+      expect(habits[2].name, defaults[2].name);
+      expect(habits.last.name, 'قراءة');
+      final tags = await (db.select(db.tagOptions)
+            ..where((t) => t.kind.equalsValue(TagKind.moodFactor))
+            ..orderBy([(t) => OrderingTerm.asc(t.sortOrder)]))
+          .get();
+      expect(tags.map((t) => t.label), MadarDefaults.moodFactors(en));
+      expect(changed, greaterThan(20));
+
+      // Idempotent; and back to Arabic works the same way.
+      expect(await MadarSeeder(db).relocalizeDefaults('en'), 0);
+      await MadarSeeder(db).relocalizeDefaults('ar');
+      expect((await (db.select(db.habits)..orderBy([(t) => OrderingTerm.asc(t.sortOrder)])).get()).first.name, _ar.dbSeedHabitBreathing);
+    });
+
+    test('the seed language is recorded', () async {
+      final db = await openInMemoryMadarDatabase(seed: const SeedOptions(languageCode: 'en'));
+      addTearDown(db.close);
+      final row = await (db.select(db.keyValues)..where((t) => t.key.equals(SeedKeys.language))).getSingle();
+      expect(jsonDecode(row.value), 'en');
+      expect(await MadarSeeder(db).relocalizeDefaults('en'), 0);
+    });
+
+    test('an unseeded database is left alone', () async {
+      final db = MadarDatabase(NativeDatabase.memory());
+      addTearDown(db.close);
+      expect(await MadarSeeder(db).relocalizeDefaults('en'), 0);
+      expect(await db.select(db.keyValues).get(), isEmpty);
+    });
+  });
+
   test('seed: null opens an empty database', () async {
     final db = await openInMemoryMadarDatabase(seed: null);
     addTearDown(db.close);

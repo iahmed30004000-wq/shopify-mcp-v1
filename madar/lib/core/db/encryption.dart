@@ -12,6 +12,11 @@ abstract interface class SecretStore {
   Future<String?> read(String key);
   Future<void> write(String key, String value);
   Future<void> delete(String key);
+
+  /// Erases every entry, even when the store can no longer decrypt them
+  /// (its Keystore key was lost to a device transfer or a Keystore reset).
+  /// Only used by "delete all data" after a normal [delete] failed.
+  Future<void> forceClear();
 }
 
 /// Android Keystore-backed options for flutter_secure_storage v11.
@@ -46,6 +51,12 @@ class FlutterSecretStore implements SecretStore {
 
   @override
   Future<void> delete(String key) => storage.delete(key: key);
+
+  /// The same namespace with `resetOnError: true`: the plugin may then drop
+  /// entries it cannot decrypt instead of failing every call.
+  @override
+  Future<void> forceClear() =>
+      FlutterSecureStorage(aOptions: madarAndroidSecureOptions.copyWith(resetOnError: true)).deleteAll();
 }
 
 /// In-memory [SecretStore] for tests and previews.
@@ -62,6 +73,9 @@ class MemorySecretStore implements SecretStore {
 
   @override
   Future<void> delete(String key) async => values.remove(key);
+
+  @override
+  Future<void> forceClear() async => values.clear();
 }
 
 /// Owns the 256-bit SQLCipher key of the Madar database.
@@ -146,9 +160,20 @@ class DatabaseKeyStore {
 
   /// Forgets the key ("delete all data"). The database file becomes
   /// unreadable, so delete it too (see `deleteMadarDatabaseFiles`).
+  ///
+  /// When secure storage cannot even delete (it can no longer decrypt its
+  /// own entries), the whole store is force-cleared so a fresh key can be
+  /// created; only when that fails too is [DatabaseKeyProblem.storageUnavailable]
+  /// thrown.
   Future<void> wipe() async {
     try {
       await _store.delete(storageKey);
+      return;
+    } catch (_) {
+      // Fall through to the forced clear.
+    }
+    try {
+      await _store.forceClear();
     } catch (e) {
       throw DatabaseKeyException(DatabaseKeyProblem.storageUnavailable, 'Deleting the database key failed', e);
     }

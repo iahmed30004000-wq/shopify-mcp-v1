@@ -117,10 +117,16 @@ class _Fields {
     return m;
   }
 
-  /// An ISO currency code from a field (`"usd"`, `"دينار"`, `"$"`).
+  /// An ISO currency code from a field (`"usd"`, `"دينار"`, `"$"`, `"ل.د"`).
+  /// A value that names no currency is reported, never guessed.
   String? currency() {
+    final p = path(ImportAliases.currency);
     final v = raw(ImportAliases.currency);
-    return CurrencyCatalog.normalize(v);
+    final code = CurrencyCatalog.normalize(v);
+    if (code == null && ImportValues.string(v) != null) {
+      _mapper._issue(ImportIssueCode.unknownValue, rec.section, p, ImportValues.string(v));
+    }
+    return code;
   }
 
   /// Date + optional separate clock, falling back to the record's day.
@@ -819,10 +825,17 @@ class ImportMapper {
         day: r.day,
       );
       _idOf(reading);
+      // Mapped with the other readings (run() maps labReadings after
+      // labTests), so it is counted and mapped exactly once.
       (located.records[ImportSection.labReadings] ??= []).add(reading);
-      _map(reading);
     }
   }
+
+  /// The day the file was exported (its `exportedAt` / `exportDate` meta),
+  /// or today: the date of values the file gives without one.
+  DateTime get _fileDay =>
+      ImportValues.date(located.meta.entries.where((e) => ImportText.key(e.key).contains('export')).firstOrNull?.value) ??
+      DateTime(now.year, now.month, now.day);
 
   void _labReading(RawRecord r, _Fields f) {
     var testId = _parentIdIf(r, ImportSection.labTests);
@@ -852,8 +865,13 @@ class ImportMapper {
       testId = _refOrCreate(ImportSection.labTests, f.raw(refKeys), r);
     }
     if (testId == null) return _skip(r, 'test');
-    final at = f.at();
-    if (at == null) return _skip(r, 'date');
+    var at = f.at();
+    if (at == null) {
+      // A current value without a date (`{"name": "HbA1c", "value": 5.4}`)
+      // is still a reading: dated the day the file was exported.
+      at = _fileDay;
+      _issue(ImportIssueCode.assumedDate, r.section, r.path, ImportValues.dayKey(at));
+    }
     final valuePath = f.path(_valueKeys);
     final raw = f.raw(_valueKeys);
     final number = ImportValues.number(raw);
@@ -1039,11 +1057,19 @@ class ImportMapper {
     return null;
   }
 
+  static const _openingKeys = ['opening', 'openingBalance', 'initial', 'initialBalance', 'start', 'startBalance', 'رصيد افتتاحي', 'الرصيد الافتتاحي'];
+  static const _balanceKeys = ['balance', 'amount', 'current', 'total', 'رصيد', 'الرصيد', 'المبلغ'];
+
   void _wallet(RawRecord r, _Fields f) {
-    final currency = _useCurrency(f.currency() ?? CurrencyCatalog.normalize(f.group) ?? baseCurrency);
+    // Currency: the field, else a group named exactly like one, else the one
+    // written in the balance (`"12 د.ك"`), else the base.
+    final written = ImportValues.string(f.peek(_openingKeys) ?? f.peek(_balanceKeys));
+    final currency = _useCurrency(
+      f.currency() ?? CurrencyCatalog.exact(f.group) ?? (written == null ? null : CurrencyCatalog.detect(written)) ?? baseCurrency,
+    );
     final name = f.str(_namesFor(r.section)) ?? currency;
-    final opening = f.money(['opening', 'openingBalance', 'initial', 'initialBalance', 'start', 'startBalance', 'رصيد افتتاحي', 'الرصيد الافتتاحي'], currency);
-    final balance = opening == null ? f.money(['balance', 'amount', 'current', 'total', 'رصيد', 'الرصيد', 'المبلغ'], currency) : null;
+    final opening = f.money(_openingKeys, currency);
+    final balance = opening == null ? f.money(_balanceKeys, currency) : null;
     _walletCurrency[r.id!] = currency;
     _walletName[r.id!] = name;
     if (balance != null) _walletBalances[r.id!] = (rec: r, balanceMilli: balance.milli);
@@ -1241,7 +1267,9 @@ class ImportMapper {
         id: Value(r.id!),
         walletId: walletId,
         kind: kind,
-        amountMilli: milli,
+        // Adjustments are the one kind whose direction the kind cannot
+        // express, so they keep their sign (see Transactions.amountMilli).
+        amountMilli: kind == TxKind.adjustment ? amount.milli : milli,
         date: at,
         budgetItemId: _v(budgetItemId),
         toWalletId: _v(toWallet),
@@ -1273,13 +1301,12 @@ class ImportMapper {
     );
     final hasDeposits = (located.records[ImportSection.jarDeposits] ?? const <RawRecord>[]).any((d) => d.parent == r);
     if (saved != null && saved.milli != 0 && !hasDeposits) {
-      final exported = ImportValues.date(located.meta.entries.where((e) => ImportText.key(e.key).contains('export')).firstOrNull?.value);
       rows.jarDeposits.rows.add(
         JarDepositsCompanion.insert(
           id: Value(_claim('${r.id}.opening')),
           jarId: r.id!,
           amountMilli: saved.milli,
-          date: exported ?? DateTime(now.year, now.month, now.day),
+          date: _fileDay,
           note: Value(labels.openingBalance),
         ),
       );
@@ -1308,14 +1335,31 @@ class ImportMapper {
     );
   }
 
+  static const _debtDirectionKeys = ['direction', 'type', 'kind', 'side', 'owe', 'اتجاه', 'نوع'];
+  static const _debtAmountKeys = ['amount', 'value', 'sum', 'total', 'مبلغ', 'قيمة', 'المبلغ'];
+
+  bool? _signedDebts;
+
+  /// A debt list without directions whose amounts carry signs: negative =
+  /// I owe, positive = owed to me.
+  bool get _isSignedDebts => _signedDebts ??= (located.records[ImportSection.debts] ?? const <RawRecord>[]).any((d) {
+    final f = _Fields(d, this);
+    if (f.has(_debtDirectionKeys)) return false;
+    final a = ImportValues.number(f.peek(_debtAmountKeys));
+    return a != null && a < 0;
+  });
+
   void _debt(RawRecord r, _Fields f) {
     final person = f.str(_namesFor(r.section));
     if (person == null) return _skip(r, 'person');
     final currency = _useCurrency(f.currency() ?? baseCurrency);
-    final amount = f.money(['amount', 'value', 'sum', 'total', 'مبلغ', 'قيمة', 'المبلغ'], currency);
+    final amount = f.money(_debtAmountKeys, currency);
     if (amount == null) return _skip(r, 'amount');
-    final direction = f.enumOf(['direction', 'type', 'kind', 'side', 'owe', 'اتجاه', 'نوع'], ImportAliases.debtDirection) ??
-        (amount.isNegative ? DebtDirection.iOwe : DebtDirection.iOwe);
+    var direction = f.enumOf(_debtDirectionKeys, ImportAliases.debtDirection);
+    if (direction == null) {
+      direction = _isSignedDebts && !amount.isNegative ? DebtDirection.owedToMe : DebtDirection.iOwe;
+      _issue(ImportIssueCode.assumedValue, r.section, r.path, 'direction=${direction.name}');
+    }
     final settled = f.boolean(['settled', 'paid', 'closed', 'done', 'repaid', 'مسدد', 'تم', 'مدفوع']);
     rows.debts.rows.add(
       DebtsCompanion.insert(

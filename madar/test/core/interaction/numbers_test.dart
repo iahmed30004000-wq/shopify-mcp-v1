@@ -20,6 +20,12 @@ void main() {
       expect(out.length, input.length);
     });
     test('empty stays empty', () => expect(LocalizedNumbers.normalizeDigits(''), ''));
+    test('the Arabic comma is a decimal comma, like in quick add', () {
+      expect(LocalizedNumbers.normalizeDigits('١٢،٥'), '12,5');
+      expect(LocalizedNumbers.parse('١٢،٥'), 12.5);
+      expect(LocalizedNumbers.parse('12،5'), 12.5);
+      expect(LocalizedNumbers.parse('١٬٢٥٠'), 1250);
+    });
   });
 
   group('canonical / parse', () {

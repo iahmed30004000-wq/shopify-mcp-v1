@@ -489,6 +489,14 @@ class BudgetMath {
 
   static Rational _pct(BudgetNode n) => Rational.fromNum(n.percent ?? 0) / Rational.hundred;
 
+  /// Tolerance for sums of stored (binary-float) percents: three items at
+  /// `100 / 3` = 33.333333333333336 % add up to 100.00000000000001 %, which
+  /// is exactly 100 % for the user. Percents are never rounded; only the
+  /// "over 100 %" / "exactly 100 %" checks use this band of 10⁻⁹.
+  static final Rational _eps = Rational(BigInt.one, BigInt.from(10).pow(9));
+  static final Rational _almostOne = Rational.one - _eps;
+  static final Rational _overOne = Rational.one + _eps;
+
   bool _dependsOnParent(BudgetNode n) =>
       n.mode == BudgetMode.percent && n.percentOf == PercentBase.parent && _parent[n.id] != null;
 
@@ -549,15 +557,16 @@ class BudgetMath {
       sum += _affine(r);
     }
     final bSum = sum.b;
+    final unsolvable = bSum >= _almostOne;
     final Rational solved;
-    if (bSum >= Rational.one) {
+    if (unsolvable) {
       // Σ percent-of-total ≥ 100 %: T = A + p·T has no (finite, unique)
       // solution. Exactly 100 % is circular; more is over-allocated. The
       // percent items are then valued against the fixed part A and the
       // total is the plain sum of the roots.
       _warnings.add(
         BudgetWarning(
-          bSum > Rational.one ? BudgetWarningKind.percentOver100 : BudgetWarningKind.circularPercent,
+          bSum > _overOne ? BudgetWarningKind.percentOver100 : BudgetWarningKind.circularPercent,
           percent: (bSum * Rational.hundred).toDouble(),
         ),
       );
@@ -568,7 +577,7 @@ class BudgetMath {
     for (final id in _byId.keys) {
       _value[id] = _affine(id).at(solved);
     }
-    _total = bSum >= Rational.one ? _roots.fold(Rational.zero, (a, r) => a + _value[r]!) : solved;
+    _total = unsolvable ? _roots.fold(Rational.zero, (a, r) => a + _value[r]!) : solved;
 
     // Percent-of-parent siblings that together claim more than their parent
     // (a derived parent reports this from `_rollup` instead).
@@ -579,7 +588,7 @@ class BudgetMath {
       for (final c in entry.value) {
         if (_dependsOnParent(_byId[c]!)) p += _pct(_byId[c]!);
       }
-      if (p > Rational.one) {
+      if (p > _overOne) {
         _warnings.add(
           BudgetWarning(
             BudgetWarningKind.percentOver100,
@@ -656,7 +665,7 @@ class BudgetMath {
     final _Aff result;
     if (n.mode == BudgetMode.percent) {
       final pct = _pct(n);
-      if (pct > Rational.one) {
+      if (pct > _overOne) {
         _warnings.add(BudgetWarning(BudgetWarningKind.percentOver100, nodeId: id, percent: n.percent));
       }
       final parent = _parent[id];
@@ -690,10 +699,10 @@ class BudgetMath {
       }
     }
     if (p.isZero) return independent;
-    if (p >= Rational.one) {
+    if (p >= _almostOne) {
       _warnings.add(
         BudgetWarning(
-          p > Rational.one ? BudgetWarningKind.percentOver100 : BudgetWarningKind.circularPercent,
+          p > _overOne ? BudgetWarningKind.percentOver100 : BudgetWarningKind.circularPercent,
           nodeId: n.id,
           percent: (p * Rational.hundred).toDouble(),
         ),

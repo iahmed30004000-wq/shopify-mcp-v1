@@ -1381,6 +1381,12 @@ abstract class L10n {
   /// **'لون {index}'**
   String interactionFieldColor(int index);
 
+  /// Spoken label of the n-th icon in the icon picker
+  ///
+  /// In ar, this message translates to:
+  /// **'أيقونة {index}'**
+  String interactionFieldIcon(int index);
+
   /// No description provided for @interactionFieldAmount.
   ///
   /// In ar, this message translates to:
@@ -1486,7 +1492,7 @@ abstract class L10n {
   /// No description provided for @interactionCurrencySymbolLYD.
   ///
   /// In ar, this message translates to:
-  /// **'د.ل'**
+  /// **'ل.د'**
   String get interactionCurrencySymbolLYD;
 
   /// No description provided for @interactionMoveSearch.
@@ -3198,6 +3204,18 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1'**
   String get settingsFontsBody;
+
+  /// No description provided for @settingsLicenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'تراخيص البرمجيات المفتوحة'**
+  String get settingsLicenses;
+
+  /// No description provided for @settingsLicensesBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'SQLCipher وOpenSSL وFlutter وكل حزمة بُني بها مَدار'**
+  String get settingsLicensesBody;
 
   /// No description provided for @settingsFontRoleUi.
   ///

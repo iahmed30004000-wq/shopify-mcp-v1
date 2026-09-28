@@ -352,6 +352,17 @@ class _MadarPageRoute<T> extends PageRoute<T> {
   @override
   DelegatedTransitionBuilder? get delegatedTransition => _page.delegatedTransition;
 
+  /// Every pop is heard and felt – the system back button / gesture and a
+  /// tap on a sheet's barrier too, not only Madar's own back buttons (their
+  /// duplicate is absorbed by the sound retrigger interval and the haptic
+  /// rate limiter).
+  @override
+  bool didPop(T? result) {
+    final popped = super.didPop(result);
+    if (popped) Fx.fire(opaque ? Sfx.back : Sfx.sheetClose);
+    return popped;
+  }
+
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
       Semantics(scopesRoute: true, explicitChildNodes: true, child: _page.child);

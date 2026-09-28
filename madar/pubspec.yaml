@@ -105,3 +105,6 @@ flutter:
 
   assets:
     - assets/fonts/licenses/
+    # Native code linked into the app (SQLCipher links OpenSSL on Android):
+    # shown on Settings › About › Open-source licences.
+    - assets/licenses/

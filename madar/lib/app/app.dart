@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/design/themes.dart';
+import '../core/design/widgets/ambient_motion.dart';
 import '../core/design/tokens.dart';
 import '../core/i18n/formatters.dart';
 import '../core/i18n/gen/app_localizations.dart';
@@ -38,6 +39,16 @@ List<Override> madarAppOverrides({
   quickAddHandlerProvider.overrideWith((ref) => ref.watch(shellQuickAddHandlerProvider)),
 ];
 
+/// The app's [ThemeData], rebuilt only when an input of the theme changes
+/// (theme id for the platform brightness, custom accent, script). Watching
+/// the whole settings would hand MaterialApp a new theme on every unrelated
+/// change (a volume drag, the digit style …) and replay the theme animation.
+final madarThemeDataProvider = Provider<ThemeData>((ref) {
+  final brightness = ref.watch(platformBrightnessProvider);
+  final k = ref.watch(appSettingsProvider.select((s) => (s.effectiveTheme(brightness), s.customAccent, s.isArabic)));
+  return buildMadarTheme(k.$1, customAccent: k.$2, arabic: k.$3);
+});
+
 /// The Madar app: router, theme (smoothly cross-faded on every change through
 /// [MadarTokens.lerp]), locale (switches instantly – no restart – and flips
 /// the whole layout between RTL and LTR), and the shell layers every screen
@@ -50,7 +61,6 @@ class MadarApp extends ConsumerWidget {
     // Applies settings to the audio engine / haptics and installs Fx.
     ref.watch(soundSettingsSyncProvider);
     final settings = ref.watch(appSettingsProvider);
-    final brightness = ref.watch(platformBrightnessProvider);
     final router = ref.watch(routerProvider);
     final reduced = resolveReducedMotion(
       settings.motion,
@@ -59,11 +69,7 @@ class MadarApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => L10n.of(context).appName,
-      theme: buildMadarTheme(
-        settings.effectiveTheme(brightness),
-        customAccent: settings.customAccent,
-        arabic: settings.isArabic,
-      ),
+      theme: ref.watch(madarThemeDataProvider),
       themeMode: ThemeMode.light,
       themeAnimationDuration: reduced ? MadarMotion.reduced : MadarMotion.long,
       themeAnimationCurve: MadarMotion.standard,
@@ -97,7 +103,12 @@ class AppFrame extends ConsumerWidget {
           digits: settings.digits,
           child: MotionScope(
             reduced: reduced,
-            child: CelebrationOverlay(child: AppGate(child: child)),
+            // Battery saver: every decorative loop (cosmos, glass sheens,
+            // empty states) renders one static frame.
+            child: AmbientMotionScope(
+              enabled: settings.powerMode != PowerMode.batterySaver,
+              child: CelebrationOverlay(child: AppGate(child: child)),
+            ),
           ),
         ),
       ),

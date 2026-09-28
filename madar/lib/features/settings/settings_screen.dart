@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/app_preferences.dart';
+import '../../app/licenses.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/widgets/widgets.dart';
 import '../../core/i18n/formatters.dart';
@@ -40,8 +41,11 @@ class SettingsScreen extends ConsumerWidget {
         horizontal: Space.gutter,
         top: Space.xs,
         children: [
+          // Glass panels only slide in: a fade is a save layer, and the
+          // panels' backdrop blur would sample nothing until it ends.
           StaggerIn(
             id: 'settings',
+            fade: false,
             children: [
               SettingsSection(
                 title: l.settingsPersonal,
@@ -102,7 +106,9 @@ class SettingsScreen extends ConsumerWidget {
                     title: l.settingsImport,
                     subtitle: l.settingsImportHint,
                     navigates: true,
-                    onTap: () => context.go(AppRoutes.import),
+                    // push: back returns here, not to Home (/import is
+                    // not nested under /settings).
+                    onTap: () => context.push(AppRoutes.import),
                   ),
                   SettingsNote(l.settingsPrivacyNote, icon: Icons.lock_rounded),
                 ],
@@ -124,6 +130,16 @@ class SettingsScreen extends ConsumerWidget {
                     navigates: true,
                     onTap: () => context.go(AppRoutes.licenses),
                   ),
+                  SettingsTile(
+                    icon: Icons.gavel_rounded,
+                    title: l.settingsLicenses,
+                    subtitle: l.settingsLicensesBody,
+                    navigates: true,
+                    onTap: () {
+                      MadarLicenses.register();
+                      showLicensePage(context: context, applicationName: l.appName, applicationVersion: madarVersion);
+                    },
+                  ),
                 ],
               ),
               SettingsSection(
@@ -135,7 +151,7 @@ class SettingsScreen extends ConsumerWidget {
                     title: l.designGalleryTitle,
                     subtitle: l.settingsGalleryHint,
                     navigates: true,
-                    onTap: () => context.go(AppRoutes.gallery),
+                    onTap: () => context.push(AppRoutes.gallery),
                   ),
                 ],
               ),

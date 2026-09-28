@@ -32,6 +32,9 @@ abstract final class MadarTypography {
           color: c,
           height: arabic ? 1.35 : 1.15,
           letterSpacing: 0,
+          // Reem Kufi's space is only 0.13 em ("Designgallery"); widen the
+          // Latin word gap to ~0.25 em. Arabic keeps the font's own spacing.
+          wordSpacing: arabic ? null : size * 0.12,
         );
     return TextTheme(
       displayLarge: display(52, t.textPrimary),

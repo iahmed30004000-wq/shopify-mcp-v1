@@ -48,6 +48,54 @@ void main() {
       expect(_scaleOf(tester, button), closeTo(1, 0.005));
     });
 
+    testWidgets('a quick tap inside a scrollable still shows its press', (tester) async {
+      await pumpMadar(
+        tester,
+        ListView(
+          children: [
+            MadarButton(label: 'OK', onPressed: () {}),
+            GlassCard(onTap: () {}, onLongPress: () {}, child: const SizedBox(height: 60, child: Text('card'))),
+          ],
+        ),
+      );
+      for (final target in [find.byType(MadarButton), find.byType(GlassCard)]) {
+        final gesture = await tester.startGesture(tester.getCenter(target));
+        var lowest = 1.0;
+        for (var i = 0; i < 4; i++) {
+          await tester.pump(const Duration(milliseconds: 16));
+          lowest = lowest < _scaleOf(tester, target) ? lowest : _scaleOf(tester, target);
+        }
+        await gesture.up(); // a 64 ms tap – shorter than kPressTimeout
+        expect(lowest, lessThan(0.995), reason: '$target');
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 900));
+        expect(_scaleOf(tester, target), closeTo(1, 0.005));
+      }
+      expect(fx.sound.played, [Sfx.tap, Sfx.tap]);
+    });
+
+    testWidgets('dragging a list from a button is not a press', (tester) async {
+      await pumpMadar(
+        tester,
+        ListView(
+          children: [
+            MadarButton(label: 'OK', onPressed: () {}),
+            const SizedBox(height: 2000),
+          ],
+        ),
+      );
+      final button = find.byType(MadarButton);
+      final gesture = await tester.startGesture(tester.getCenter(button));
+      await tester.pump(const Duration(milliseconds: 16));
+      await gesture.moveBy(const Offset(0, -60));
+      await tester.pump(const Duration(milliseconds: 16));
+      await tester.pump(const Duration(milliseconds: 600));
+      expect(_scaleOf(tester, button), closeTo(1, 0.01));
+      await gesture.up();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(fx.sound.played, isEmpty);
+    });
+
     testWidgets('reduced motion: no press scale', (tester) async {
       await pumpMadar(tester, MadarButton(label: 'OK', onPressed: () {}), reducedMotion: true);
       final button = find.byType(MadarButton);
@@ -381,10 +429,17 @@ void main() {
     setUp(() => AmbientMotion.debugOverride = true);
     tearDown(() => AmbientMotion.debugOverride = null);
 
-    testWidgets('animates while visible', (tester) async {
+    testWidgets('animates while visible (on the shared ambient clock)', (tester) async {
       await pumpMadar(tester, const CosmosBackdrop(), scaffold: false);
+      final painter = tester
+          .widgetList<CustomPaint>(find.byType(CustomPaint))
+          .map((c) => c.painter)
+          .whereType<CosmosBackdropPainter>()
+          .single;
+      final t0 = painter.time.value;
       await tester.pump(const Duration(milliseconds: 100));
-      expect(tester.binding.hasScheduledFrame, isTrue);
+      expect(AmbientClock.instance.debugRunning, isTrue);
+      expect(painter.time.value, greaterThan(t0));
     });
 
     testWidgets('reduced motion renders one static frame (no ticker)', (tester) async {

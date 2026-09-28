@@ -263,6 +263,62 @@ void main() {
       expect(engine.voices[gv]!.volume, greaterThan(0));
     });
 
+    test('a failed start is retried on return to the foreground (with backoff, capped)', () async {
+      engine = FakeAudioEngine(failingInits: 1);
+      final s = make();
+      await s.init();
+      expect(s.status, SoundEngineStatus.silent);
+      expect(s.initAttempts, 1);
+
+      // Too soon: no retry yet.
+      s.onAppLifecycleChanged(foreground: false);
+      s.onAppLifecycleChanged(foreground: true);
+      await Future<void>.delayed(Duration.zero);
+      expect(s.initAttempts, 1);
+
+      time.advance(SoloudSoundService.initRetryBackoff);
+      s.onAppLifecycleChanged(foreground: false);
+      s.onAppLifecycleChanged(foreground: true);
+      await s.init();
+      await s.kitReady;
+      expect(s.initAttempts, 2);
+      expect(s.status, SoundEngineStatus.ready);
+      s.play(Sfx.tap);
+      expect(engine.voicesOf('tap'), hasLength(1));
+    });
+
+    test('retries stop after the cap', () async {
+      engine = FakeAudioEngine(failingInits: 99);
+      final s = make();
+      await s.init();
+      for (var i = 0; i < 5; i++) {
+        time.advance(SoloudSoundService.initRetryBackoff);
+        s.onAppLifecycleChanged(foreground: false);
+        s.onAppLifecycleChanged(foreground: true);
+        await s.init();
+      }
+      expect(s.initAttempts, SoloudSoundService.maxInitAttempts);
+      expect(s.status, SoundEngineStatus.silent);
+    });
+
+    test('a start that finishes after the timeout releases the device', () async {
+      engine = FakeAudioEngine()..initGate = Completer<void>();
+      final s = SoloudSoundService(
+        engine: engine,
+        nativeAudio: true,
+        clock: time.clock,
+        timer: time.timer,
+        renderKit: (id) async => tinyKit(id),
+        initTimeout: const Duration(milliseconds: 10),
+      );
+      await s.init();
+      expect(s.status, SoundEngineStatus.silent);
+      engine.initGate!.complete();
+      await Future<void>.delayed(Duration.zero);
+      await Future<void>.delayed(Duration.zero);
+      expect(engine.shutDown, isTrue);
+    });
+
     test('app lifecycle pauses the bed in background and pre-warms on return', () async {
       final s = make();
       await s.init();

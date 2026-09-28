@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/design/themes.dart';
+import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/motion/motion.dart';
+import 'package:madar/core/settings/app_settings.dart' show DigitStyle;
 import 'package:madar/core/sound/sound_api.dart';
 
 /// Records haptics fired through [Fx].
@@ -32,6 +34,7 @@ Widget interactionApp(
   MadarThemeId theme = MadarThemeId.lapis,
   bool scaffold = true,
   List<Override> overrides = const [],
+  DigitStyle digits = DigitStyle.auto,
 }) {
   final arabic = locale.languageCode == 'ar';
   return ProviderScope(
@@ -42,7 +45,10 @@ Widget interactionApp(
       locale: locale,
       supportedLocales: L10n.supportedLocales,
       localizationsDelegates: L10n.localizationsDelegates,
-      builder: (context, child) => MotionScope(reduced: reduced, child: child!),
+      builder: (context, child) => MadarFormatScope(
+        digits: digits,
+        child: MotionScope(reduced: reduced, child: child!),
+      ),
       home: scaffold ? Scaffold(body: home) : home,
     ),
   );

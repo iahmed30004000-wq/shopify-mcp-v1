@@ -128,7 +128,8 @@ void main() {
     await _tap(tester, find.text('المغرب'));
     await _tap(tester, find.byKey(const ValueKey('rel-before')));
     await _tap(tester, find.byKey(const ValueKey('offset-15')));
-    expect(find.text('قبل المغرب بـ15 دقيقة'), findsOneWidget);
+    expect(find.text('قبل المغرب بـ١٥ دقيقة'), findsOneWidget);
+    expect(find.text('١٥ دقيقة'), findsOneWidget);
     await _save(tester);
     expect(host.result, {'kind': 'prayer', 'window': 'maghrib', 'offsetMin': -15});
   });

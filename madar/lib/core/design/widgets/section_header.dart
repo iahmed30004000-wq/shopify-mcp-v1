@@ -51,7 +51,8 @@ class SectionHeader extends StatelessWidget {
                 if (subtitle != null)
                   Text(
                     subtitle!,
-                    style: text.bodySmall!.copyWith(color: t.textTertiary),
+                    // On the bare backdrop: secondary, not tertiary, contrast.
+                    style: text.bodySmall!.copyWith(color: t.textSecondary),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

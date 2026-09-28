@@ -37,8 +37,11 @@ class AppearanceScreen extends ConsumerWidget {
         horizontal: 0,
         top: Space.xs,
         children: [
+          // Glass panels only slide in: a fade is a save layer, and the
+          // panels' backdrop blur would sample nothing until it ends.
           StaggerIn(
             id: 'appearance',
+            fade: false,
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),

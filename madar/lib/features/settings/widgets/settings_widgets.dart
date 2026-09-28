@@ -123,12 +123,9 @@ class SettingsTile extends StatelessWidget {
           if (trailing != null) ...[const SizedBox(width: Space.s), trailing!],
           if (navigates) ...[
             const SizedBox(width: Space.xs),
-            Icon(
-              Directionality.of(context) == TextDirection.rtl
-                  ? Icons.chevron_left_rounded
-                  : Icons.chevron_right_rounded,
-              color: t.textTertiary,
-            ),
+            // chevron_right is declared matchTextDirection: Icon mirrors it
+            // under RTL by itself.
+            Icon(Icons.chevron_right_rounded, color: t.textTertiary),
           ],
         ],
       ),

@@ -5,6 +5,7 @@ import '../../core/design/themes.dart';
 import '../../core/design/tokens.dart';
 import '../../core/domain/budget_math.dart';
 import '../../core/domain/money.dart';
+import '../../core/i18n/formatters.dart';
 import '../../core/i18n/gen/app_localizations.dart';
 import '../../core/import/import.dart';
 import '../../core/settings/app_settings.dart';
@@ -195,7 +196,9 @@ class ImportFormats {
     DigitStyle.arabicIndic => MoneyDigits.arabicIndic,
   };
 
-  String digitsOf(String ascii) => _indic ? MoneyText.toArabicIndic(ascii) : ascii;
+  /// [text] in the user's digit style; with Arabic-Indic digits a `.` / `,`
+  /// between digits becomes `٫` / `٬` and a `%` after a digit `٪`.
+  String digitsOf(String text) => _indic ? Digits.toArabicIndic(text) : Digits.toWestern(text);
 
   /// A grouped integer (`1,234` / `١٬٢٣٤`).
   String count(int n) {
@@ -203,6 +206,7 @@ class ImportFormats {
     return _indic ? MoneyText.toArabicIndic(s.replaceAll(',', '٬')) : s;
   }
 
+  /// `33.3%` / `٣٣٫٣٪`, `50%` / `٥٠٪`.
   String percent(double value) => digitsOf('${value.toStringAsFixed(value == value.roundToDouble() ? 0 : 1)}%');
 
   String money(int milli, String currency) =>

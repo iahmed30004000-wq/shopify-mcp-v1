@@ -95,6 +95,35 @@ void main() {
       });
     }
 
+    testWidgets('fade: false (glass panels) only moves – no save layers mid-entrance', (tester) async {
+      await tester.pumpWidget(
+        motionApp(
+          Scaffold(
+            body: StaggerIn(
+              fade: false,
+              children: [for (var i = 0; i < 3; i++) SizedBox(height: 40, child: Center(child: Text('glass $i')))],
+            ),
+          ),
+        ),
+      );
+      var moved = false;
+      for (final ms in [16, 40, 60, 120, 200]) {
+        await tester.pump(Duration(milliseconds: ms == 16 ? 16 : 24));
+        expect(find.byType(ImageFiltered), findsNothing);
+        for (var i = 0; i < 3; i++) {
+          final o = _opacityOf(tester, 'glass $i');
+          expect(o == 0 || o == 1, isTrue, reason: 'opacity $o at $ms ms creates a layer');
+        }
+        final t = tester.widget<Transform>(
+          find.ancestor(of: find.text('glass 0'), matching: find.byType(Transform)).first,
+        );
+        if (t.transform.getTranslation().x != 0) moved = true;
+      }
+      expect(moved, isTrue, reason: 'it still slides in');
+      await tester.pumpAndSettle();
+      expect(_opacityOf(tester, 'glass 2'), 1);
+    });
+
     testWidgets('later items start later', (tester) async {
       await tester.pumpWidget(motionApp(Scaffold(body: _items(count: 6))));
       await tester.pump(const Duration(milliseconds: 60));

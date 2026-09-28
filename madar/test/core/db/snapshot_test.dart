@@ -83,7 +83,8 @@ void main() {
       'weekdays': [5],
     });
     expect(task.date, original.date);
-    expect(task.date!.isAtSameMomentAs(tLocal), isTrue);
+    // A calendar-day column: the day survives, the time of day is dropped.
+    expect(task.date, DateTime(tLocal.year, tLocal.month, tLocal.day));
     expect(task.doneAt!.microsecond, tMicros.microsecond);
     expect(task.notes, original.notes);
     expect(task.title, 'مهمة كاملة');
@@ -171,6 +172,20 @@ void main() {
     test('invalid value', () async {
       await expectRefused(
         mutate((t) => ((t['tasks'] as List).first as Map)['title'] = {'nested': true}),
+        SnapshotProblem.invalidValue,
+      );
+    });
+
+    test('bogus enum name', () async {
+      await expectRefused(
+        mutate((t) => ((t['tasks'] as List).first as Map)['window'] = 'bogus'),
+        SnapshotProblem.invalidValue,
+      );
+    });
+
+    test('invalid JSON text', () async {
+      await expectRefused(
+        mutate((t) => ((t['tasks'] as List).first as Map)['recurrence'] = '{'),
         SnapshotProblem.invalidValue,
       );
     });

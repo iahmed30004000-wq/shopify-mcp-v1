@@ -732,6 +732,11 @@ class L10nEn extends L10n {
   }
 
   @override
+  String interactionFieldIcon(int index) {
+    return 'Icon $index';
+  }
+
+  @override
   String get interactionFieldAmount => 'Amount';
 
   @override
@@ -1806,6 +1811,13 @@ class L10nEn extends L10n {
   @override
   String get settingsFontsBody =>
       'Open fonts under the SIL Open Font License 1.1';
+
+  @override
+  String get settingsLicenses => 'Open-source licences';
+
+  @override
+  String get settingsLicensesBody =>
+      'SQLCipher, OpenSSL, Flutter and every package Madar is built with';
 
   @override
   String get settingsFontRoleUi => 'Interface';

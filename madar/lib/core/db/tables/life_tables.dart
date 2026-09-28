@@ -14,7 +14,7 @@ class People extends Table with Entity, Ordered {
   IntColumn get rhythmDays => integer().nullable()();
   DateTimeColumn get lastContact => dateTime().nullable()();
   TextColumn get phone => text().nullable()();
-  DateTimeColumn get birthday => dateTime().nullable()();
+  DateTimeColumn get birthday => dateTime().map(const CalendarDayConverter()).nullable()();
   TextColumn get notes => text().nullable()();
   IntColumn get color => integer().nullable()();
 
@@ -36,7 +36,7 @@ class ContactLogs extends Table with Entity {
 class Projects extends Table with Entity, Ordered {
   TextColumn get name => text()();
   TextColumn get description => text().nullable()();
-  DateTimeColumn get deadline => dateTime().nullable()();
+  DateTimeColumn get deadline => dateTime().map(const CalendarDayConverter()).nullable()();
   TextColumn get status => textEnum<ProjectStatus>().withDefault(Constant(ProjectStatus.active.name))();
   TextColumn get planetKey => text().nullable()();
   IntColumn get color => integer().nullable()();
@@ -47,7 +47,7 @@ class ProjectItems extends Table with Entity, Ordered {
   TextColumn get projectId => text()();
   TextColumn get body => text()();
   BoolColumn get done => boolean().withDefault(const Constant(false))();
-  DateTimeColumn get dueDate => dateTime().nullable()();
+  DateTimeColumn get dueDate => dateTime().map(const CalendarDayConverter()).nullable()();
 }
 
 // ------------------------------------------------------------------ Work ----
@@ -71,7 +71,7 @@ class BoardCards extends Table with Entity, Ordered {
   TextColumn get title => text()();
   TextColumn get notes => text().nullable()();
   TextColumn get assignee => text().nullable()();
-  DateTimeColumn get dueDate => dateTime().nullable()();
+  DateTimeColumn get dueDate => dateTime().map(const CalendarDayConverter()).nullable()();
   BoolColumn get isTop3 => boolean().withDefault(const Constant(false))();
   TextColumn get window => textEnum<PrayerWindow>().nullable()();
 }
@@ -84,8 +84,8 @@ class Trips extends Table with Entity, Ordered {
   TextColumn get country => text().nullable()();
   RealColumn get latitude => real().nullable()();
   RealColumn get longitude => real().nullable()();
-  DateTimeColumn get startDate => dateTime().nullable()();
-  DateTimeColumn get endDate => dateTime().nullable()();
+  DateTimeColumn get startDate => dateTime().map(const CalendarDayConverter()).nullable()();
+  DateTimeColumn get endDate => dateTime().map(const CalendarDayConverter()).nullable()();
   TextColumn get status => textEnum<TripStatus>().withDefault(Constant(TripStatus.planned.name))();
   TextColumn get notes => text().nullable()();
   IntColumn get color => integer().nullable()();
@@ -111,7 +111,7 @@ class TravelDocuments extends Table with Entity, Ordered {
   TextColumn get name => text()();
   TextColumn get holder => text().nullable()();
   TextColumn get number => text().nullable()();
-  DateTimeColumn get expiry => dateTime().nullable()();
+  DateTimeColumn get expiry => dateTime().map(const CalendarDayConverter()).nullable()();
   IntColumn get remindDaysBefore => integer().withDefault(const Constant(30))();
   TextColumn get notes => text().nullable()();
 }
@@ -124,7 +124,7 @@ class LearningGoals extends Table with Entity, Ordered {
   TextColumn get unit => text().withDefault(const Constant(''))();
   RealColumn get target => real()();
   RealColumn get initial => real().withDefault(const Constant(0.0))();
-  DateTimeColumn get deadline => dateTime().nullable()();
+  DateTimeColumn get deadline => dateTime().map(const CalendarDayConverter()).nullable()();
   IntColumn get color => integer().nullable()();
   BoolColumn get active => boolean().withDefault(const Constant(true))();
 }

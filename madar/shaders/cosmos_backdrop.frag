@@ -180,6 +180,13 @@ void main() {
     col += mix(uNebulaA.rgb, uStar.rgb, 0.5) * pow(cA, 2.6) * 0.38 * intensity;
     col += mix(uNebulaB.rgb, uStar.rgb, 0.45) * pow(cB, 2.6) * 0.32 * intensity;
 
+    // Keep the sky behind text dark enough to read: cap the luma of the
+    // (sRGB-encoded) sky at ~0.24, i.e. relative luminance ~0.05, which keeps
+    // secondary text (L ~0.49) at >= 5:1 over the brightest nebula. Stars are
+    // added afterwards and stay bright.
+    float skyLuma = dot(col, vec3(0.2126, 0.7152, 0.0722));
+    col *= min(1.0, 0.24 / max(skyLuma, 1e-4));
+
     // Starfield: fine dust stars, a mid layer and rare bright stars.
     vec3 s1 = starLayer(frag, 6.0, 0.10, 0.30, ph, seed + 1.0, 0.28, 0.7, 0.0, 0.0, 0.5);
     vec3 s2 = starLayer(frag + 131.0, 21.0, 0.26, 0.20, ph, seed + 5.0, 0.55, 1.3, 0.35, 0.0, 0.6);

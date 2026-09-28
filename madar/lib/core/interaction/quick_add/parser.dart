@@ -5,7 +5,8 @@
 ///
 /// * "صرفت 12.5 دينار بنزين" → expense 12.5 JOD "بنزين"
 /// * "بكرا بعد المغرب اجتماع مع فريق مصر" → task tomorrow, Maghrib window
-/// * "tomorrow after isha call supplier" → contact (call) "supplier"
+/// * "tomorrow after isha call supplier" → task "call supplier" (imperatives
+///   are to-dos; only past tense – "called supplier" – logs a contact)
 /// * "شرب ماء 500 مل", "ألم ظهر 6", "مزاجي 4" …
 library;
 
@@ -139,6 +140,9 @@ class QuickAddIntent {
   String toString() => 'QuickAddIntent(${toJson()..removeWhere((k, v) => v == null || k == 'raw')})';
 }
 
+/// A clock time as typed (see `QuickAddParser._extractTime`).
+typedef _RawTime = ({int h, int min, int minus, String? marker, bool keepAsTyped});
+
 /// Parses free text typed into the quick-add bar.
 abstract final class QuickAddParser {
   static QuickAddIntent parse(String input, {DateTime? now}) {
@@ -180,19 +184,47 @@ abstract final class QuickAddParser {
     // Scores like "7/10" are not dates when logging pain or mood.
     final date = _extractDate(s, today, scores: prelim != null);
     var window = date.tonight ? PrayerWindow.isha : null;
-    var time = _extractTime(s);
-    if (time != null && date.tonight && time.guessed) {
-      final (h, m) = (int.parse(time.hhmm.substring(0, 2)), int.parse(time.hhmm.substring(3)));
-      if (h < 12) time = (hhmm: _hhmm(h + 12, m), guessed: false);
+    final rawTime = _extractTime(s);
+    var time = rawTime == null ? null : _resolveTime(rawTime);
+    if (rawTime != null) {
+      // A time-of-day word apart from the clock time ("evening at 7",
+      // "المسا الساعة 7") settles a guessed hour and leaves the title.
+      final qualifier = _takeQualifier(s);
+      if (qualifier != null && time!.guessed) time = _resolveTime(rawTime, marker: qualifier);
     }
+    if (time != null && date.tonight && time.guessed) time = _toEvening(time);
     window = _extractWindow(s, strict: prelim == QuickAddKind.pain, timeFound: time != null) ?? window;
 
     // 4. Money with an explicit currency.
     final money = _extractMoney(s);
 
-    // 5. Resolve the kind.
-    final resolved = _resolveKind(explicit, hits, money != null);
+    // 5. Resolve the kind ("شربت لترين" – a drink verb with a volume – is
+    // water).
+    final drinkVolume = hits.any((h) => h.rule.drinkVerb) && s.first(_otherDrinks) == null && _hasWaterVolume(s);
+    final resolved = _resolveKind(explicit, hits, money != null, drinkVolume: drinkVolume);
     final kind = resolved.kind;
+
+    // 5b. "tomorrow 9 dentist" / "بكرا 9 اجتماع": a bare hour right after the
+    // day is a (guessed) time for to-dos, notes and contacts.
+    if (time == null &&
+        date.end != null &&
+        (kind == QuickAddKind.task || kind == QuickAddKind.note || kind == QuickAddKind.contact)) {
+      final h = _bareHourAfter(s, date.end!);
+      if (h != null) {
+        final r = _resolveHour(h, date.tonight ? 'pm' : null);
+        time = (hhmm: _hhmm(r.$1 % 24, 0), guessed: true);
+      }
+    }
+    // An explicit prayer window settles a guessed hour: next to Asr,
+    // Maghrib or Isha it is in the evening ("بعد المغرب الساعة 7" → 19:00),
+    // next to Fajr or Duha in the morning ("بعد الفجر الساعة 5" → 05:00).
+    if (time != null && time.guessed) {
+      if (window == PrayerWindow.asr || window == PrayerWindow.maghrib || window == PrayerWindow.isha) {
+        time = _toEvening(time);
+      } else if (window == PrayerWindow.fajr || window == PrayerWindow.duha) {
+        time = _toMorning(time);
+      }
+    }
 
     // 6. Kind-specific quantities.
     int? amountMilli = money?.milli;
@@ -347,7 +379,7 @@ abstract final class QuickAddParser {
     // Money – strong past-tense verbs.
     _Rule(
       QuickAddKind.expense,
-      _re('$_b(?:و)?(?:صرفت|صرفنا|دفعت|دفعنا|اشتريت|اشترينا|شريت|شرينا|سددت|سددنا|spent|paid|bought|purchased)$_e'),
+      _re('$_b(?:و)?(?:صرفت|صرفنا|دفعت|دفعنا|اشتريت|اشترينا|شريت|شرينا|سددت|سددنا|spent|(?<!got )paid|bought|purchased)$_e'),
       strength: 3,
     ),
     _Rule(QuickAddKind.expense, _re('$_b(?:مصروف|مصاريف|مصروفات|expense|expenses)$_e'), strength: 2),
@@ -383,26 +415,52 @@ abstract final class QuickAddParser {
     _Rule(QuickAddKind.water, _re('$_b(?:شربت|شرب|اشرب|نشرب|drank|drink|drinking)$_e'), strength: -1, drinkVerb: true),
     _Rule(
       QuickAddKind.water,
-      _re('$_b(?:ال|و)?(?:ماء|مي|مية|مويه|موية|مياه|water)$_e(?!\\s*(?:$_curWords))'),
+      _re(
+        '$_b(?:ال|و)?(?:ماء|مي|مية|مويه|موية|مياه|water(?! (?:the |my |our )?(?:plants?|garden|flowers|lawn|trees?|grass)$_e))'
+        '$_e(?!\\s*(?:$_curWords))',
+      ),
       strength: 2,
     ),
-    // Contact.
+    // Contact – past tense (and the nouns) log a contact that happened.
     _Rule(
       QuickAddKind.contact,
-      _re('$_b(?:و)?(?:اتصل|اتصلت|اتصال|تصل|رن|رنيت|رني|كلم|كلمت|حاكي|احكي مع|احكي|call|called|phone|ring)$_e'),
+      _re('$_b(?:و)?(?:اتصلت|اتصال|رنيت|كلمت|حكيت مع|حكيت|called|phoned|rang)$_e'),
       strength: 2,
       channel: ContactChannel.call,
     ),
     _Rule(
       QuickAddKind.contact,
-      _re('$_b(?:و)?(?:زور|زرت|زيارة|visit|visited)$_e'),
+      _re('$_b(?:و)?(?:زرت|زيارة|visited)$_e'),
       strength: 2,
       channel: ContactChannel.visit,
     ),
     _Rule(
       QuickAddKind.contact,
-      _re('$_b(?:و)?(?:ابعث|ابعتل|بعتت|ارسل|راسل|راسلت|text|texted|message|msg|email|whatsapp|واتساب|واتس)$_e'),
+      _re('$_b(?:و)?(?:بعتت|بعثت|ارسلت|راسلت|texted|messaged|emailed|whatsapped)$_e'),
       strength: 2,
+      channel: ContactChannel.message,
+    ),
+    // Contact imperatives are to-dos ("اتصل بأبوي بكرا", "call supplier"):
+    // the verb stays in the title and nothing is logged yet.
+    _Rule(
+      QuickAddKind.task,
+      _re('$_b(?:و)?(?:اتصل|تصل|رن|رني|كلم|حاكي|احكي مع|احكي|call|phone|ring)$_e'),
+      strength: 2,
+      consume: false,
+      channel: ContactChannel.call,
+    ),
+    _Rule(
+      QuickAddKind.task,
+      _re('$_b(?:و)?(?:زور|visit)$_e'),
+      strength: 2,
+      consume: false,
+      channel: ContactChannel.visit,
+    ),
+    _Rule(
+      QuickAddKind.task,
+      _re('$_b(?:و)?(?:ابعث|ابعتل|ارسل|راسل|text|message|msg|email|whatsapp|واتساب|واتس)$_e'),
+      strength: 2,
+      consume: false,
       channel: ContactChannel.message,
     ),
   ];
@@ -410,8 +468,9 @@ abstract final class QuickAddParser {
   static ({QuickAddKind kind, double base, _Hit? hit}) _resolveKind(
     QuickAddKind? explicit,
     List<_Hit> hits,
-    bool hasCurrency,
-  ) {
+    bool hasCurrency, {
+    bool drinkVolume = false,
+  }) {
     if (explicit != null) return (kind: explicit, base: 0.92, hit: null);
     _Hit? find(QuickAddKind k, {int minStrength = 1}) =>
         hits.firstWhereOrNull((h) => h.rule.kind == k && h.rule.strength >= minStrength);
@@ -425,6 +484,9 @@ abstract final class QuickAddParser {
       final income = find(QuickAddKind.income, minStrength: 0);
       return (kind: income != null ? QuickAddKind.income : QuickAddKind.expense, base: 0.74, hit: income);
     }
+    // "شربت لترين", "drank 3 cups": a drink verb with a volume is water.
+    final drink = hits.firstWhereOrNull((h) => h.rule.drinkVerb);
+    if (drink != null && drinkVolume) return (kind: QuickAddKind.water, base: 0.8, hit: drink);
     for (final k in const [QuickAddKind.pain, QuickAddKind.mood, QuickAddKind.contact, QuickAddKind.water]) {
       final h = find(k);
       if (h != null) return (kind: k, base: 0.8, hit: h);
@@ -452,7 +514,12 @@ abstract final class QuickAddParser {
   static final RegExp _tomorrow = _re(
     '$_b(?:و)?(?:بكرا|بكرة|بكره|بكرى|غدا|الغد|tomorrow|tmrw|tmr|tomorow|tommorow)$_e',
   );
-  static final RegExp _today = _re('$_b(?:و)?(?:اليوم|هاليوم|النهارده|النهاردة|today|tonight|tonite)$_e');
+  static final RegExp _today = _re(
+    '$_b(?:و)?(?:هالليلة|هالليله|الليلة|الليله|اليوم|هاليوم|النهارده|النهاردة|today|tonight|tonite)$_e',
+  );
+
+  /// Folded words of [_today] that mean this evening.
+  static final Set<String> _tonightWords = {for (final w in const ['tonight', 'tonite', 'الليلة', 'هالليلة']) _fold(w)};
   static final RegExp _yesterday = _re('$_b(?:و)?(?:امبارح|مبارح|أمس|البارحة|yesterday)$_e');
   static final RegExp _inDays = _re('$_b(?:بعد|in|within) (\\d{1,3}) ?(?:يوم|ايام|أيام|days?)$_e');
   static final RegExp _inTwoDays = _re('$_b(?:بعد يومين|in two days)$_e');
@@ -500,19 +567,27 @@ abstract final class QuickAddParser {
     'fri': DateTime.friday,
   };
 
-  static ({DateTime? value, bool tonight}) _extractDate(_Scan s, DateTime today, {bool scores = false}) {
+  /// The stated day; [end] is where a day word ("tomorrow", "الليلة",
+  /// "الجمعة") ends, for a bare hour right after it.
+  static ({DateTime? value, bool tonight, int? end}) _extractDate(_Scan s, DateTime today, {bool scores = false}) {
     DateTime plus(int days) => DateTime(today.year, today.month, today.day + days);
-    for (final (re, days) in [(_dayAfter, 2), (_inTwoDays, 2), (_nextWeek, 7), (_tomorrow, 1), (_yesterday, -1)]) {
+    for (final (re, days, word) in [
+      (_dayAfter, 2, true),
+      (_inTwoDays, 2, false),
+      (_nextWeek, 7, false),
+      (_tomorrow, 1, true),
+      (_yesterday, -1, true),
+    ]) {
       final m = s.first(re);
       if (m != null) {
         s.take(m.start, m.end);
-        return (value: plus(days), tonight: false);
+        return (value: plus(days), tonight: false, end: word ? m.end : null);
       }
     }
     final inDays = s.first(_inDays);
     if (inDays != null) {
       s.take(inDays.start, inDays.end);
-      return (value: plus(int.parse(inDays.group(1)!)), tonight: false);
+      return (value: plus(int.parse(inDays.group(1)!)), tonight: false, end: null);
     }
     final wd = s.first(_weekday, (m) {
       final name = m.namedGroup('d')!;
@@ -528,14 +603,14 @@ abstract final class QuickAddParser {
       var delta = (target - today.weekday + 7) % 7;
       final next = wd.namedGroup('post') != null || wd.namedGroup('pre') == 'next';
       if (delta == 0 && next) delta = 7;
-      return (value: plus(delta), tonight: false);
+      return (value: plus(delta), tonight: false, end: wd.end);
     }
     final iso = s.first(_iso);
     if (iso != null) {
       final d = _validDate(int.parse(iso.group(1)!), int.parse(iso.group(2)!), int.parse(iso.group(3)!));
       if (d != null) {
         s.take(iso.start, iso.end);
-        return (value: d, tonight: false);
+        return (value: d, tonight: false, end: null);
       }
     }
     final dmy = s.first(_dmy, (m) => !scores || m.group(3) != null);
@@ -544,16 +619,55 @@ abstract final class QuickAddParser {
       final d = _validDate(y < 100 ? 2000 + y : y, int.parse(dmy.group(2)!), int.parse(dmy.group(1)!));
       if (d != null) {
         s.take(dmy.start, dmy.end);
-        return (value: d, tonight: false);
+        return (value: d, tonight: false, end: null);
       }
     }
     final t = s.first(_today);
     if (t != null) {
       s.take(t.start, t.end);
-      final word = t.group(0)!.trim();
-      return (value: plus(0), tonight: word.contains('tonight') || word.contains('tonite'));
+      var word = t.group(0)!.trim();
+      if (word.startsWith('و') && !_tonightWords.contains(word)) word = word.substring(1);
+      return (value: plus(0), tonight: _tonightWords.contains(word), end: t.end);
     }
-    return (value: null, tonight: false);
+    return (value: null, tonight: false, end: null);
+  }
+
+  static final RegExp _bareHour = RegExp(r'^ (?<h>\d{1,2})(?![\p{N}.,:/])(?: (?<next>\S+))?', unicode: true);
+
+  /// Counted things after a number ("tomorrow 3 meetings", "بكرا 5 صفحات")
+  /// – the number is not an hour then.
+  static final Set<String> _countWords = {
+    for (final w in const [
+      'ساعة', 'ساعات', 'دقيقة', 'دقايق', 'دقائق', 'يوم', 'ايام', 'أيام', 'مرة', 'مرات', 'كيلو', 'كغ', 'غرام', 'لتر', //
+      'حبة', 'حبات', 'صفحة', 'صفحات', 'كتب', 'ركعة', 'ركعات', 'نقاط', 'نقطة', 'شخص', 'اشخاص', 'أشخاص', 'ناس', 'مل',
+      'كاسات', 'كاسة', 'كوب', 'اكواب', 'أكواب', 'دينار', 'دنانير', 'دولار', 'ليرة', 'جنيه',
+      'kg', 'km', 'min', 'h', 'hr', 'x', 'pcs', 'ml', 'l', 'k',
+    ])
+      _fold(w),
+  };
+
+  static bool _isCountWord(String word) {
+    final w = _fold(word).replaceAll(RegExp(r'[\s,.:;!?،؛]+$'), '');
+    if (w.isEmpty) return false;
+    if (_countWords.contains(w)) return true;
+    if (RegExp(r'^[a-z]{4,}s$').hasMatch(w)) return true; // English plural
+    return w.length > 3 && w.endsWith('ات'); // Arabic sound feminine plural
+  }
+
+  /// A free 1–2 digit number right after the day word ending at [end] –
+  /// "tomorrow 9", "بكرا 9 اجتماع" – taken as an hour (1–23).
+  static int? _bareHourAfter(_Scan s, int end) {
+    final m = _bareHour.firstMatch(s.norm.substring(end));
+    if (m == null) return null;
+    final text = m.namedGroup('h')!;
+    final start = end + 1;
+    if (!s._free(start, start + text.length)) return null;
+    final h = int.parse(text);
+    if (h < 1 || h > 23) return null;
+    final next = m.namedGroup('next');
+    if (next != null && _isCountWord(next)) return null;
+    s.take(start, start + text.length);
+    return h;
   }
 
   static DateTime? _validDate(int y, int m, int d) {
@@ -586,31 +700,68 @@ abstract final class QuickAddParser {
   );
   static final RegExp _timeMarked = _re('(?<![\\p{N}.:/])(?<h>\\d{1,2})(?:[.:](?<m>\\d{2}))? ?(?<mk>$_markers|ص|م)$_e');
 
-  static ({String hhmm, bool guessed})? _extractTime(_Scan s) {
+  /// A clock time as typed: the hour before any 12-hour resolution,
+  /// minutes, minutes *to* the hour ("الا ربع") and the marker after it.
+  static _RawTime? _extractTime(_Scan s) {
     for (final re in [_timeColon, _timeArabic, _timeAt, _timeMarked]) {
       final m = s.first(re, (m) => int.parse(m.namedGroup('h')!) <= 24);
       if (m == null) continue;
-      var h = int.parse(m.namedGroup('h')!);
+      final h = int.parse(m.namedGroup('h')!);
       var min = 0;
+      var minus = 0;
       if (re == _timeColon || re == _timeAt || re == _timeMarked) {
         final mm = m.namedGroup('m');
         if (mm != null) min = int.parse(mm);
       }
       if (re == _timeArabic) {
         final frac = m.namedGroup('frac');
-        final minus = m.namedGroup('minus');
+        final minusWord = m.namedGroup('minus');
         final mm = m.namedGroup('mm');
         if (frac != null) min = _fraction(frac);
         if (mm != null) min = int.parse(mm).clamp(0, 59);
-        if (minus != null) {
-          h = (h - 1) % 24;
-          min = 60 - _fraction(minus);
+        if (minusWord != null) {
+          min = 0;
+          minus = _fraction(minusWord);
         }
       }
       final zeroPadded = re == _timeColon && m.namedGroup('h')!.length == 2 && h < 10;
-      final resolved = _resolveHour(h, m.namedGroup('mk'), keepAsTyped: zeroPadded);
       s.take(m.start, m.end);
-      return (hhmm: _hhmm(resolved.$1 % 24, min), guessed: resolved.$2);
+      return (h: h, min: min, minus: minus, marker: m.namedGroup('mk'), keepAsTyped: zeroPadded);
+    }
+    return null;
+  }
+
+  /// Resolves the typed hour (with [marker] instead of the typed one when
+  /// given) *before* subtracting "الا ربع" minutes, so "1 الا ربع" is 12:45
+  /// and "7 الا ربع" is guessed like "7".
+  static ({String hhmm, bool guessed}) _resolveTime(_RawTime t, {String? marker}) {
+    final r = _resolveHour(t.h, marker ?? t.marker, keepAsTyped: t.keepAsTyped);
+    final base = (r.$1 % 24) * 60;
+    final total = t.minus > 0 ? (base - t.minus) % 1440 : base + t.min;
+    return (hhmm: _hhmm(total ~/ 60, total % 60), guessed: r.$2);
+  }
+
+  /// A guessed morning hour moved to the evening (+12 h).
+  static ({String hhmm, bool guessed}) _toEvening(({String hhmm, bool guessed}) t) {
+    final (h, m) = (int.parse(t.hhmm.substring(0, 2)), int.parse(t.hhmm.substring(3)));
+    return h < 12 ? (hhmm: _hhmm(h + 12, m), guessed: false) : t;
+  }
+
+  /// A guessed afternoon hour moved to the morning (−12 h).
+  static ({String hhmm, bool guessed}) _toMorning(({String hhmm, bool guessed}) t) {
+    final (h, m) = (int.parse(t.hhmm.substring(0, 2)), int.parse(t.hhmm.substring(3)));
+    return h >= 13 ? (hhmm: _hhmm(h - 12, m), guessed: false) : (hhmm: t.hhmm, guessed: false);
+  }
+
+  /// Takes a free time-of-day word ("evening", "بالليل", "الصبح") and returns
+  /// it as a marker for [_resolveHour].
+  static String? _takeQualifier(_Scan s) {
+    for (final (re, marker) in [(_evening, 'pm'), (_nightWords, 'night'), (_noonWords, 'الظهر'), (_morning, 'am')]) {
+      final m = s.first(re);
+      if (m != null) {
+        s.take(m.start, m.end);
+        return marker;
+      }
     }
     return null;
   }
@@ -726,7 +877,7 @@ abstract final class QuickAddParser {
   // ------------------------------------------------------------- money ----
 
   static final List<_Currency> _currencies = [
-    _Currency('LYD', r'دينار ليبي|دنانير ليبية|د\. ?ل|lyd|libyan dinars?'),
+    _Currency('LYD', r'دينار ليبي|دنانير ليبية|ل\. ?د|د\. ?ل|lyd|libyan dinars?'),
     _Currency('EGP', r'جنيه مصري|جنيهات مصرية|جنيهات|جنيه|ج\. ?م|egp|egyptian pounds?'),
     _Currency('SYP', r'ليرة سورية|ليرات سورية|ليرات|ليرة|ل\. ?س|syp|syrian pounds?|liras?|lira'),
     _Currency('USD', r'دولار أمريكي|دولار امريكي|دولارات|دولار|usd|us\$|dollars?|bucks?|\$'),
@@ -812,12 +963,30 @@ abstract final class QuickAddParser {
   static final RegExp _moneyWords = _re('$_b(?:و|ب)?(?<w>$_words) ?$_curGroup$_e');
   static final RegExp _moneyDual = _re('$_b(?:و|ب)?(?<d>${_duals.keys.join('|')})$_e');
 
+  /// "… و ٥٠ قرش" / "… و 250 فلس" right after a dinar amount.
+  static final RegExp _minorAfter = _re(
+    '^ ?و ?(?:(?<num>$_num)|(?<w>$_words)) ?(?<cur>قروش|قرش|قرشا|piasters?|piastres?|فلس|fils)$_e',
+  );
+
   static ({int milli, String currency})? _extractMoney(_Scan s) {
-    ({int milli, String currency})? build(num n, String curText, String? k) {
+    ({int milli, String currency, num factor})? build(num n, String curText, String? k) {
       final c = _currencies.firstWhereOrNull((c) => c.exact.hasMatch(curText.trim()));
       if (c == null) return null;
       final mult = (k != null && k.isNotEmpty) ? 1000 : 1;
-      return (milli: LocalizedNumbers.toMilli(n * mult * c.factor), currency: c.code);
+      return (milli: LocalizedNumbers.toMilli(n * mult * c.factor), currency: c.code, factor: c.factor);
+    }
+
+    // Jordanian prices are often said in two parts: "٢ دينار و ٥٠ قرش".
+    ({int milli, String currency}) withMinor(({int milli, String currency, num factor}) r, int end) {
+      if (r.currency != 'JOD' || r.factor != 1) return (milli: r.milli, currency: r.currency);
+      final m = _minorAfter.firstMatch(s.norm.substring(end));
+      if (m == null || !s._free(end, end + m.end)) return (milli: r.milli, currency: r.currency);
+      final numText = m.namedGroup('num');
+      final n = numText != null ? LocalizedNumbers.parse(numText) : _numberWords[m.namedGroup('w')!];
+      final minor = _currencies.firstWhereOrNull((c) => c.code == 'JOD' && c.exact.hasMatch(m.namedGroup('cur')!));
+      if (n == null || minor == null) return (milli: r.milli, currency: r.currency);
+      s.take(end, end + m.end);
+      return (milli: r.milli + LocalizedNumbers.toMilli(n * minor.factor), currency: r.currency);
     }
 
     for (final re in [_moneyAfter, _moneyBefore]) {
@@ -828,14 +997,14 @@ abstract final class QuickAddParser {
       final r = build(n, m.namedGroup('cur')!, m.namedGroup('k'));
       if (r == null) continue;
       s.take(m.start, m.end);
-      return r;
+      return withMinor(r, m.end);
     }
     final w = s.first(_moneyWords);
     if (w != null) {
       final r = build(_numberWords[w.namedGroup('w')!]!, w.namedGroup('cur')!, null);
       if (r != null) {
         s.take(w.start, w.end);
-        return r;
+        return withMinor(r, w.end);
       }
     }
     final d = s.first(_moneyDual);
@@ -852,7 +1021,7 @@ abstract final class QuickAddParser {
       final r = build(1, lone.namedGroup('cur')!, null);
       if (r != null) {
         s.take(lone.start, lone.end);
-        return r;
+        return (milli: r.milli, currency: r.currency);
       }
     }
     return null;
@@ -876,10 +1045,23 @@ abstract final class QuickAddParser {
   static const _glass = r'كاسة|كاسات|كاس|كوب|أكواب|اكواب|كوباية|كباية|glass|glasses|cups?';
   static const _bottle = r'قنينة|قناني|علبة|زجاجة|bottles?';
   static final RegExp _waterAmount = _re(
-    '(?:(?<![\\p{N}.,])(?<num>$_num)|$_b(?<w>$_words|a|an)) ?(?<u>$_ml|$_litre|$_glass|$_bottle)$_e',
+    '(?:(?<![\\p{N}.,])(?<num>$_num)|$_b(?<w>$_words|a|an)(?: an?)?) ?(?<u>$_ml|$_litre|$_glass|$_bottle)$_e',
   );
   static final RegExp _waterDual = _re('$_b(?<d>لترين|ليترين|كاستين|كاسين|كوبين|قنينتين)$_e');
   static final RegExp _waterUnitAlone = _re('$_b(?:ب)?(?<u>$_litre|$_glass|$_bottle)$_e');
+
+  /// Drinks that are not water ("شربت 2 كاسة شاي").
+  static final RegExp _otherDrinks = _re(
+    '$_b(?:و|ب)?(?:ال)?(?:شاي|شاهي|قهوة|قهوه|نسكافيه|كابتشينو|عصير|حليب|لبن|كولا|بيبسي|مشروب|بيرة|'
+    'tea|coffee|latte|espresso|cappuccino|juice|milk|soda|coke|cola|pepsi|beer|smoothie|shake)$_e',
+  );
+
+  /// Whether a water volume is written anywhere free ("لترين", "3 كاسات",
+  /// "قنينة", "500 ml").
+  static bool _hasWaterVolume(_Scan s) =>
+      s.first(_waterAmount, (m) => m.namedGroup('num') != null || m.namedGroup('w') != null) != null ||
+      s.first(_waterDual) != null ||
+      s.first(_waterUnitAlone) != null;
 
   static int _unitMl(String unit) {
     if (_in(unit, _ml)) return 1;
@@ -928,7 +1110,9 @@ abstract final class QuickAddParser {
 
   // ------------------------------------------------------------ scores ----
 
-  static final RegExp _score = _re('(?<![\\p{N}.,:/])(?<n>\\d{1,2})(?:\\.\\d+)?(?: ?/ ?(?<of>10|5))?(?![\\p{N}])');
+  static final RegExp _score = _re(
+    '(?<![\\p{N}.,:/])(?<n>\\d{1,2})(?:\\.\\d+)?(?: ?(?:/|من|out of|of) ?(?<of>10|5))?(?![\\p{N}])',
+  );
 
   static (int, bool)? _extractScore(_Scan s, {required int max}) {
     final m = s.first(_score, (m) => int.parse(m.namedGroup('n')!) <= max);

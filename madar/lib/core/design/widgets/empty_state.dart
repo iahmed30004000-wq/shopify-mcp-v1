@@ -83,7 +83,7 @@ class _AnimatedEmptyStateState extends State<AnimatedEmptyState> with TickerProv
       _entrance.duration = context.motion(MadarMotion.long);
       _entrance.forward();
     }
-    if (reduced || !AmbientMotion.enabled) {
+    if (reduced || !context.ambientMotion) {
       _loop.stop();
     } else if (!_loop.isAnimating) {
       _loop.repeat();

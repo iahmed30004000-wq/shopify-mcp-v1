@@ -446,6 +446,14 @@
     "ar": "خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1",
     "en": "Open fonts under the SIL Open Font License 1.1"
   },
+  "settingsLicenses": {
+    "ar": "تراخيص البرمجيات المفتوحة",
+    "en": "Open-source licences"
+  },
+  "settingsLicensesBody": {
+    "ar": "SQLCipher وOpenSSL وFlutter وكل حزمة بُني بها مَدار",
+    "en": "SQLCipher, OpenSSL, Flutter and every package Madar is built with"
+  },
   "settingsFontRoleUi": {
     "ar": "خط الواجهة",
     "en": "Interface"

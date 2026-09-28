@@ -11,7 +11,25 @@ class FakeSecretStore extends MemorySecretStore {
   bool failReads = false;
   bool failWrites = false;
   bool dropWrites = false;
+  bool failDeletes = false;
+  bool failClears = false;
   int writes = 0;
+  int clears = 0;
+
+  @override
+  Future<void> delete(String key) async {
+    if (failDeletes) throw StateError('keystore cannot decrypt');
+    await super.delete(key);
+  }
+
+  @override
+  Future<void> forceClear() async {
+    clears++;
+    if (failClears) throw StateError('keystore gone');
+    await super.forceClear();
+    failReads = false;
+    failDeletes = false;
+  }
 
   @override
   Future<String?> read(String key) async {
@@ -71,6 +89,31 @@ void main() {
     await keys.wipe();
     expect(await keys.readKey(), isNull);
     expect(await keys.obtainKey(), isNot(first));
+  });
+
+  test('wipe force-clears a store that can no longer delete', () async {
+    await keys.obtainKey();
+    store
+      ..failReads = true
+      ..failDeletes = true;
+    await keys.wipe();
+    expect(store.clears, 1);
+    expect(await keys.readKey(), isNull);
+    expect(await keys.obtainKey(), hasLength(64));
+  });
+
+  test('wipe reports storageUnavailable only when the forced clear fails too', () async {
+    await keys.obtainKey();
+    store
+      ..failDeletes = true
+      ..failClears = true;
+    await expectLater(keys.wipe(), throwsKeyProblem(DatabaseKeyProblem.storageUnavailable));
+  });
+
+  test('a normal wipe never force-clears', () async {
+    await keys.obtainKey();
+    await keys.wipe();
+    expect(store.clears, 0);
   });
 
   test('a malformed stored key is reported, never replaced', () async {

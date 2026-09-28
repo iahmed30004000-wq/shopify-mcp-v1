@@ -159,6 +159,16 @@ class SoloudSoundService implements SoundService, SoundLifecycleAware {
   SoundEngineStatus _status = SoundEngineStatus.idle;
   Future<void>? _initFuture;
 
+  /// Engine starts tried so far, and when the last one failed: a failed or
+  /// timed-out start is retried when the app returns to the foreground
+  /// (at most [maxInitAttempts] times, [initRetryBackoff] apart).
+  int _initAttempts = 0;
+  Duration? _lastInitFailure;
+  static const maxInitAttempts = 3;
+  static const initRetryBackoff = Duration(seconds: 10);
+
+  int get initAttempts => _initAttempts;
+
   bool _enabled = true;
   bool _prayerMuted = false;
   bool _foreground = true;
@@ -223,11 +233,26 @@ class SoloudSoundService implements SoundService, SoundLifecycleAware {
       return;
     }
     _status = SoundEngineStatus.starting;
+    _initAttempts++;
+    final start = _engine.init();
     try {
-      await _engine.init().timeout(initTimeout);
+      await start.timeout(initTimeout);
     } catch (e) {
       _log('engine unavailable, running silent', e);
       _status = _status == SoundEngineStatus.disposed ? SoundEngineStatus.disposed : SoundEngineStatus.silent;
+      _lastInitFailure = _clock();
+      if (e is TimeoutException) {
+        // A start that finishes after the timeout must not keep holding the
+        // audio device while the service is silent; a later retry starts
+        // (or adopts) the engine again.
+        unawaited(
+          start.then((_) async {
+            if (_status == SoundEngineStatus.silent || _status == SoundEngineStatus.disposed) {
+              await _safe(_engine.shutdown);
+            }
+          }, onError: (Object _) {}),
+        );
+      }
       return;
     }
     if (_status == SoundEngineStatus.disposed) {
@@ -263,6 +288,22 @@ class SoloudSoundService implements SoundService, SoundLifecycleAware {
     _foreground = foreground;
     _applyAmbientGain(foreground ? const Duration(milliseconds: 1200) : const Duration(milliseconds: 300));
     if (foreground && _status == SoundEngineStatus.ready) unawaited(_safe(_engine.prewarm));
+    if (foreground && _shouldRetryInit) {
+      _initFuture = null;
+      unawaited(init());
+    }
+  }
+
+  /// A failed or timed-out start (busy audio device, restarted audio
+  /// server) is retried on return to the foreground instead of leaving the
+  /// whole session silent.
+  bool get _shouldRetryInit {
+    final failed = _lastInitFailure;
+    return _status == SoundEngineStatus.silent &&
+        _nativeAudio &&
+        failed != null &&
+        _initAttempts < maxInitAttempts &&
+        _clock() - failed >= initRetryBackoff;
   }
 
   // ---------------------------------------------------------------------------

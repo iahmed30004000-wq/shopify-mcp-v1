@@ -390,11 +390,11 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
       case QuickAddFacet.kind:
         return KitLabels.kind(l, i.kind);
       case QuickAddFacet.amount:
-        final amount = LocalizedNumbers.formatMilli(i.amountMilli!);
+        final amount = MadarFormatter.of(context).localizeDigits(LocalizedNumbers.formatMilli(i.amountMilli!));
         final cur = i.currency;
         return cur == null ? amount : '$amount ${KitLabels.currencySymbol(l, cur)}';
       case QuickAddFacet.water:
-        return l.interactionQuickAddMl('${i.ml}');
+        return MadarFormatter.of(context).localizeDigits(l.interactionQuickAddMl('${i.ml}'));
       case QuickAddFacet.score:
         // The user's digit style for the score and its scale (never raw
         // Western digits in Arabic).

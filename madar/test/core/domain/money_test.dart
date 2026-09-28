@@ -172,6 +172,53 @@ void main() {
       expect(CurrencyCatalog.normalize(''), isNull);
       expect(CurrencyCatalog.detect('no currency here 12'), isNull);
     });
+
+    test('Arabic abbreviations are detected at the end of the text (Unicode bounds)', () {
+      expect(CurrencyCatalog.detect('12 ل.د'), 'LYD');
+      expect(CurrencyCatalog.detect('١٢ ل.د'), 'LYD');
+      expect(CurrencyCatalog.detect('12 د.ك'), 'KWD');
+      expect(CurrencyCatalog.detect('١٢٫٥ د.ك'), 'KWD');
+      expect(CurrencyCatalog.detect('ل.د 12'), 'LYD');
+      expect(CurrencyCatalog.normalize('ل.د'), 'LYD');
+      expect(CurrencyCatalog.normalize('د.ك'), 'KWD');
+      expect(Money.tryParse('12 ل.د'), const Money(12000, 'LYD'));
+      expect(Money.tryParse('١٢ د.ك', currency: 'USD'), const Money(12000, 'KWD'));
+      expect(Money.tryParse('٣٠٠ ج.م'), const Money(300000, 'EGP'));
+    });
+
+    test('abbreviations inside Arabic words are not currencies', () {
+      expect(CurrencyCatalog.detect('هدية للولد 20'), isNull); // …لد
+      expect(CurrencyCatalog.detect('بدك 5'), isNull); // …دك
+      expect(CurrencyCatalog.detect('جلسة 30'), isNull); // …لس
+      expect(CurrencyCatalog.detect('رسوم 30'), isNull); // رس…
+    });
+
+    test('English words are not currencies', () {
+      expect(CurrencyCatalog.detect('Table 5'), isNull);
+      expect(CurrencyCatalog.detect('bicycle 200'), isNull);
+      expect(CurrencyCatalog.detect('Sale 30'), isNull);
+      expect(CurrencyCatalog.detect('Mobile'), isNull);
+      expect(CurrencyCatalog.detect('try 5'), isNull);
+      expect(CurrencyCatalog.detect('usd 5'), isNull);
+      expect(Money.tryParse('Table 5'), const Money(5000, 'JOD'));
+      expect(CurrencyCatalog.detect('5 LE'), 'EGP');
+      expect(CurrencyCatalog.detect('5 L.E.'), 'EGP');
+      expect(CurrencyCatalog.detect('30 LD'), 'LYD');
+      expect(CurrencyCatalog.detect('7 JD'), 'JOD');
+      expect(CurrencyCatalog.detect('TRY 5'), 'TRY');
+    });
+
+    test('exact: a whole value naming a currency, never a word containing one', () {
+      expect(CurrencyCatalog.exact('usd'), 'USD');
+      expect(CurrencyCatalog.exact('jd'), 'JOD');
+      expect(CurrencyCatalog.exact('ل.د'), 'LYD');
+      expect(CurrencyCatalog.exact('دينار'), 'JOD');
+      expect(CurrencyCatalog.exact(r'$'), 'USD');
+      expect(CurrencyCatalog.exact('Mobile'), isNull);
+      expect(CurrencyCatalog.exact('Cash'), isNull);
+      expect(CurrencyCatalog.exact('Car'), isNull);
+      expect(CurrencyCatalog.exact('Dollar wallet'), isNull);
+    });
   });
 
   group('Money formatting', () {

@@ -111,6 +111,37 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
     _springTo(value ? widget.pressScale : 1, value ? MadarMotion.snappy : MadarMotion.bouncy);
   }
 
+  // The press follows the raw pointer: a tap recognizer that competes in the
+  // gesture arena (any scrollable, or onTap + onLongPress) reports tap-down
+  // only after kPressTimeout or on pointer-up, so a quick tap would never
+  // show its press.
+  int? _pointer;
+  Offset? _downAt;
+
+  void _onPointerDown(PointerDownEvent e) {
+    if (!widget._interactive || _pointer != null || (e.buttons & kPrimaryButton) == 0) return;
+    _pointer = e.pointer;
+    _downAt = e.position;
+    _setPressed(true);
+  }
+
+  void _onPointerMove(PointerMoveEvent e) {
+    final down = _downAt;
+    if (e.pointer != _pointer || down == null) return;
+    // A drag (scrolling the list) is not a press.
+    if ((e.position - down).distance > kTouchSlop) _release();
+  }
+
+  void _onPointerEnd(PointerEvent e) {
+    if (e.pointer == _pointer) _release();
+  }
+
+  void _release() {
+    _pointer = null;
+    _downAt = null;
+    _setPressed(false);
+  }
+
   void _handleTap() {
     if (!widget._interactive || widget.onTap == null) return;
     final sfx = widget.sfx;
@@ -120,7 +151,7 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
 
   void _handleLongPress() {
     if (!widget._interactive || widget.onLongPress == null) return;
-    _setPressed(false);
+    _release();
     final sfx = widget.longPressSfx;
     if (sfx != null) Fx.fire(sfx);
     widget.onLongPress!();
@@ -129,7 +160,7 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
   @override
   void didUpdateWidget(MadarPressable oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!widget._interactive && _pressed) _setPressed(false);
+    if (!widget._interactive && _pressed) _release();
   }
 
   @override
@@ -169,16 +200,22 @@ class _MadarPressableState extends State<MadarPressable> with SingleTickerProvid
         // into this node.
         child: ExcludeSemantics(
           excluding: widget.excludeChildSemantics,
-          child: GestureDetector(
+          child: Listener(
             behavior: widget.behavior,
-            excludeFromSemantics: true,
-            onTapDown: interactive ? (_) => _setPressed(true) : null,
-            onTapUp: interactive ? (_) => _setPressed(false) : null,
-            onTapCancel: interactive ? () => _setPressed(false) : null,
-            onTap: interactive && widget.onTap != null ? _handleTap : null,
-            onLongPress: interactive && widget.onLongPress != null ? _handleLongPress : null,
-            dragStartBehavior: DragStartBehavior.down,
-            child: child,
+            onPointerDown: interactive ? _onPointerDown : null,
+            onPointerMove: interactive ? _onPointerMove : null,
+            onPointerUp: _onPointerEnd,
+            onPointerCancel: _onPointerEnd,
+            child: GestureDetector(
+              behavior: widget.behavior,
+              excludeFromSemantics: true,
+              // A harmless extra release when the arena rejects the tap.
+              onTapCancel: interactive ? _release : null,
+              onTap: interactive && widget.onTap != null ? _handleTap : null,
+              onLongPress: interactive && widget.onLongPress != null ? _handleLongPress : null,
+              dragStartBehavior: DragStartBehavior.down,
+              child: child,
+            ),
           ),
         ),
       ),

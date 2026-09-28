@@ -2,10 +2,8 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../motion/motion.dart';
 import '../tokens.dart';
 import 'ambient_motion.dart';
 import 'shader_cache.dart';
@@ -51,17 +49,20 @@ abstract final class CosmosUniforms {
 ///
 /// Rendered by `shaders/cosmos_backdrop.frag`: deep-space gradient, two
 /// drifting nebulae, a twinkling starfield, dust and film grain – or, in the
-/// light Pearl theme, a soft mother-of-pearl haze. Animates at ~30 fps (the
-/// drift is slow, so this halves GPU cost for no visible loss), pauses when
-/// [TickerMode] is off and renders one static frame under reduced motion.
-/// Falls back to a painted gradient while (or if) the shader is unavailable.
+/// light Pearl theme, a soft mother-of-pearl haze. Drifts on the shared
+/// [AmbientClock] at ~30 fps: frames are only requested when the clock
+/// ticks (a running Ticker would request one every vsync, 90/120 Hz, and
+/// re-run the full-screen shader and every blur above it each time). It
+/// pauses when [TickerMode] is off and renders one static frame under
+/// reduced motion or battery saver ([AmbientMotionScope]). Falls back to a
+/// painted gradient while (or if) the shader is unavailable.
 class CosmosBackdrop extends StatefulWidget {
   const CosmosBackdrop({super.key, this.intensity = 1, this.animate = true, this.seed = 0, this.child});
 
   /// Nebula strength (0 = bare sky, 1 = default, up to 2).
   final double intensity;
 
-  /// Set false for battery saver: one static frame, no ticker.
+  /// Set false for one static frame (no clock subscription).
   final bool animate;
 
   /// Varies the nebula layout so neighbouring screens don't look identical.
@@ -74,15 +75,15 @@ class CosmosBackdrop extends StatefulWidget {
   State<CosmosBackdrop> createState() => _CosmosBackdropState();
 }
 
-class _CosmosBackdropState extends State<CosmosBackdrop> with SingleTickerProviderStateMixin {
-  static const _frameInterval = 1 / 30;
-
-  late final Ticker _ticker = createTicker(_onTick);
+class _CosmosBackdropState extends State<CosmosBackdrop> {
   final ValueNotifier<double> _time = ValueNotifier<double>(CosmosUniforms.staticTime);
   late final ValueListenable<ui.FragmentProgram?> _program = MadarShaders.cosmos;
   ui.FragmentShader? _shader;
+
+  /// Backdrop time minus clock time while subscribed.
   double _base = CosmosUniforms.staticTime;
-  double _lastEmitted = -1;
+  bool _subscribed = false;
+  bool _animating = false;
 
   @override
   void initState() {
@@ -100,40 +101,35 @@ class _CosmosBackdropState extends State<CosmosBackdrop> with SingleTickerProvid
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _syncTicker();
+    _sync();
   }
 
   @override
   void didUpdateWidget(CosmosBackdrop oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.animate != widget.animate) _syncTicker();
+    if (oldWidget.animate != widget.animate) _sync();
   }
 
-  bool get _shouldAnimate => widget.animate && AmbientMotion.enabled && !context.reducedMotion;
-
-  void _syncTicker() {
-    if (_shouldAnimate) {
-      if (!_ticker.isActive) {
-        _lastEmitted = -1;
-        _ticker.start();
-      }
-    } else if (_ticker.isActive) {
-      _base = _time.value;
-      _ticker.stop();
+  void _sync() {
+    final run = widget.animate && context.ambientMotion && TickerMode.valuesOf(context).enabled;
+    final clock = AmbientClock.instance;
+    if (run && !_subscribed) {
+      _base = _time.value - clock.seconds;
+      clock.addListener(_onTick);
+      _subscribed = true;
+    } else if (!run && _subscribed) {
+      clock.removeListener(_onTick);
+      _subscribed = false;
     }
+    _animating = run;
   }
 
-  void _onTick(Duration elapsed) {
-    final t = _base + elapsed.inMicroseconds / Duration.microsecondsPerSecond;
-    if (_lastEmitted >= 0 && t - _lastEmitted < _frameInterval) return;
-    _lastEmitted = t;
-    _time.value = t % CosmosUniforms.period;
-  }
+  void _onTick() => _time.value = (_base + AmbientClock.instance.seconds) % CosmosUniforms.period;
 
   @override
   void dispose() {
+    if (_subscribed) AmbientClock.instance.removeListener(_onTick);
     _program.removeListener(_onProgram);
-    _ticker.dispose();
     _time.dispose();
     _shader?.dispose();
     super.dispose();
@@ -144,7 +140,7 @@ class _CosmosBackdropState extends State<CosmosBackdrop> with SingleTickerProvid
     final backdrop = RepaintBoundary(
       child: CustomPaint(
         isComplex: true,
-        willChange: _shouldAnimate,
+        willChange: _animating,
         painter: CosmosBackdropPainter(
           shader: _shader,
           tokens: context.tokens,

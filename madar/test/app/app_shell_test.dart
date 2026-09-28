@@ -8,6 +8,7 @@ import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/db_errors.dart';
 import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/design/tokens.dart';
+import 'package:madar/core/design/widgets/ambient_motion.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/motion/motion.dart';
 import 'package:madar/core/routing/routes.dart';
@@ -110,6 +111,44 @@ void main() {
       expect(t.accent, accent);
     });
 
+    testWidgets('with a custom accent, unrelated settings changes never replay the theme animation', (tester) async {
+      final app = await pumpMadarApp(tester);
+      app.updateSettings((s) => s.copyWith(customAccent: const Color(0xFF00AA88)));
+      await settleApp(tester);
+      bool animating() => ((tester.state(find.byType(AnimatedTheme)) as dynamic).controller as AnimationController).isAnimating;
+      final theme = Theme.of(tester.element(find.byType(HomeScreen)));
+
+      app.updateSettings((s) => s.copyWith(soundEnabled: !s.soundEnabled));
+      await tester.pump();
+      expect(animating(), isFalse);
+      app.updateSettings((s) => s.copyWith(digits: DigitStyle.western));
+      await tester.pump();
+      expect(animating(), isFalse);
+      expect(identical(Theme.of(tester.element(find.byType(HomeScreen))), theme), isTrue);
+
+      // A real theme change still animates.
+      app.updateSettings((s) => s.copyWith(themeId: MadarThemeId.desert));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 16));
+      expect(animating(), isTrue);
+      await settleApp(tester);
+    });
+
+    testWidgets('battery saver turns the ambient loops off app-wide', (tester) async {
+      final app = await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
+      bool ambientOf() => tester.element(find.byType(SettingsScreen)).ambientMotion;
+      AmbientMotion.debugOverride = true;
+      addTearDown(() => AmbientMotion.debugOverride = null);
+      app.updateSettings((s) => s.copyWith(powerMode: PowerMode.batterySaver));
+      await tester.pump();
+      expect(ambientOf(), isFalse);
+      app.updateSettings((s) => s.copyWith(powerMode: PowerMode.auto));
+      await tester.pump();
+      expect(ambientOf(), isTrue);
+      AmbientMotion.debugOverride = null;
+      await settleApp(tester);
+    });
+
     testWidgets('reduced motion setting reaches MotionScope', (tester) async {
       final app = await pumpMadarApp(tester);
       expect(tester.element(find.byType(HomeScreen)).reducedMotion, isFalse);
@@ -187,6 +226,50 @@ void main() {
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
+    testWidgets('a malformed key offers start-fresh right away', (tester) async {
+      await pumpMadarApp(
+        tester,
+        database: false,
+        settle: false,
+        overrides: [
+          databaseOpenerProvider.overrideWithValue(
+            (_) async => throw const DatabaseKeyException(DatabaseKeyProblem.malformed, 'bad'),
+          ),
+        ],
+      );
+      await tester.pump(AstrolabeSplash.assembly);
+      await settleApp(tester);
+      expect(find.text(_ar.dbErrorKeyMalformed), findsOneWidget);
+      expect(find.text(_ar.shellGateReset), findsOneWidget);
+    });
+
+    testWidgets('unavailable secure storage offers start-fresh after a failed retry', (tester) async {
+      var attempts = 0;
+      await pumpMadarApp(
+        tester,
+        database: false,
+        settle: false,
+        overrides: [
+          databaseOpenerProvider.overrideWithValue((_) async {
+            attempts++;
+            throw const DatabaseKeyException(DatabaseKeyProblem.storageUnavailable, 'keystore');
+          }),
+        ],
+      );
+      await tester.pump(AstrolabeSplash.assembly);
+      await settleApp(tester);
+      expect(find.text(_ar.dbErrorKeyStorage), findsOneWidget);
+      expect(find.text(_ar.shellGateReset), findsNothing);
+
+      await tester.tap(find.text(_ar.shellGateRetry));
+      await tester.pump();
+      await tester.pump(AstrolabeSplash.assembly);
+      await settleApp(tester);
+      expect(attempts, 2);
+      expect(find.text(_ar.dbErrorKeyStorage), findsOneWidget);
+      expect(find.text(_ar.shellGateReset), findsOneWidget);
+    });
+
     testWidgets('a broken build (no cipher) offers retry only', (tester) async {
       await pumpMadarApp(
         tester,
@@ -205,7 +288,13 @@ void main() {
   test('canResetAfter only for unreadable files', () {
     expect(canResetAfter(const DatabaseKeyException(DatabaseKeyProblem.missing, '')), isTrue);
     expect(canResetAfter(const DatabaseKeyException(DatabaseKeyProblem.wrongKey, '')), isTrue);
+    expect(canResetAfter(const DatabaseKeyException(DatabaseKeyProblem.malformed, '')), isTrue);
     expect(canResetAfter(const DatabaseKeyException(DatabaseKeyProblem.storageUnavailable, '')), isFalse);
+    expect(
+      canResetAfter(const DatabaseKeyException(DatabaseKeyProblem.storageUnavailable, ''), failedRetries: 1),
+      isTrue,
+    );
     expect(canResetAfter(CipherUnavailableError('x')), isFalse);
+    expect(canResetAfter(CipherUnavailableError('x'), failedRetries: 3), isFalse);
   });
 }

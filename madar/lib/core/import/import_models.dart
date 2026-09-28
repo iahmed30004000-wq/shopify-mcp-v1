@@ -384,6 +384,11 @@ final class ImportTableRows<T extends Table, D> {
 
   /// Inserts every row, keeping rows that already exist (same primary or
   /// unique key) untouched. Returns how many were actually written.
+  ///
+  /// Ordered tables get the imported rows *after* the rows already there:
+  /// every planned `sort_order` (numbered from 0 per parent by the mapper)
+  /// is shifted by `MAX(sort_order) + 1`, which keeps the imported relative
+  /// order without interleaving with existing rows.
   Future<int> write(MadarDatabase db) async {
     if (rows.isEmpty) return 0;
     final table = _table(db);
@@ -393,7 +398,29 @@ final class ImportTableRows<T extends Table, D> {
     }
 
     final before = await count();
-    await db.batch((b) => b.insertAll(table, rows, mode: InsertMode.insertOrIgnore));
+    var toInsert = rows;
+    if (table.columnsByName['sort_order'] != null) {
+      final r = await db
+          .customSelect('SELECT COALESCE(MAX(sort_order), -1) + 1 AS o FROM "${table.actualTableName}"')
+          .getSingle();
+      final offset = r.read<int>('o');
+      if (offset != 0) {
+        toInsert = [
+          for (final row in rows)
+            () {
+              final cols = row.toColumns(false);
+              return RawValuesInsertable<D>({...cols, 'sort_order': Variable<int>(_intOf(cols['sort_order']) + offset)});
+            }(),
+        ];
+      }
+    }
+    await db.batch((b) => b.insertAll(table, toInsert, mode: InsertMode.insertOrIgnore));
     return await count() - before;
   }
+
+  static int _intOf(Expression<Object>? e) => switch (e) {
+    Variable(:final int value) => value,
+    Constant(:final int value) => value,
+    _ => 0,
+  };
 }

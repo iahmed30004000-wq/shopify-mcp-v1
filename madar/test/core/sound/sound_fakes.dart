@@ -9,10 +9,16 @@ import 'package:madar/core/sound/synth/synth.dart';
 
 /// Records every engine call; voices/sources are sequential ints.
 class FakeAudioEngine implements AudioEngine {
-  FakeAudioEngine({this.initError, this.initHangs = false});
+  FakeAudioEngine({this.initError, this.initHangs = false, this.failingInits = 0});
 
   final Object? initError;
   final bool initHangs;
+
+  /// The first [failingInits] starts throw; later ones succeed.
+  int failingInits;
+
+  /// When set, `init` waits for it (a start that finishes late).
+  Completer<void>? initGate;
 
   bool initialized = false;
   bool shutDown = false;
@@ -29,8 +35,14 @@ class FakeAudioEngine implements AudioEngine {
   Future<void> init() async {
     calls.add('init');
     if (initHangs) await Completer<void>().future;
+    if (initGate != null) await initGate!.future;
     if (initError != null) throw initError!;
+    if (failingInits > 0) {
+      failingInits--;
+      throw StateError('audio device busy');
+    }
     initialized = true;
+    shutDown = false;
   }
 
   @override

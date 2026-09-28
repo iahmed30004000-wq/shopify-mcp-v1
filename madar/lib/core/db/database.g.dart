@@ -2186,15 +2186,15 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
         requiredDuringInsert: false,
         defaultValue: Constant(PrayerWindow.anytime.name),
       ).withConverter<PrayerWindow>($TasksTable.$converterwindow);
-  static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
-  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
-    'date',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> date =
+      GeneratedColumn<DateTime>(
+        'date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($TasksTable.$converterdaten);
   @override
   late final GeneratedColumnWithTypeConverter<Map<String, Object?>?, String>
   recurrence = GeneratedColumn<String>(
@@ -2348,12 +2348,6 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
         notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
       );
     }
-    if (data.containsKey('date')) {
-      context.handle(
-        _dateMeta,
-        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
-      );
-    }
     if (data.containsKey('done')) {
       context.handle(
         _doneMeta,
@@ -2435,9 +2429,11 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
           data['${effectivePrefix}window'],
         )!,
       ),
-      date: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}date'],
+      date: $TasksTable.$converterdaten.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}date'],
+        ),
       ),
       recurrence: $TasksTable.$converterrecurrencen.fromSql(
         attachedDatabase.typeMapping.read(
@@ -2483,6 +2479,10 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
 
   static JsonTypeConverter2<PrayerWindow, String, String> $converterwindow =
       const EnumNameConverter<PrayerWindow>(PrayerWindow.values);
+  static TypeConverter<DateTime, DateTime> $converterdate =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdaten =
+      NullAwareTypeConverter.wrap($converterdate);
   static TypeConverter<Map<String, Object?>, String> $converterrecurrence =
       const JsonMapConverter();
   static TypeConverter<Map<String, Object?>?, String?> $converterrecurrencen =
@@ -2545,7 +2545,7 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
       );
     }
     if (!nullToAbsent || date != null) {
-      map['date'] = Variable<DateTime>(date);
+      map['date'] = Variable<DateTime>($TasksTable.$converterdaten.toSql(date));
     }
     if (!nullToAbsent || recurrence != null) {
       map['recurrence'] = Variable<String>(
@@ -2941,7 +2941,9 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
       );
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime>(
+        $TasksTable.$converterdaten.toSql(date.value),
+      );
     }
     if (recurrence.present) {
       map['recurrence'] = Variable<String>(
@@ -4490,15 +4492,15 @@ class $ConditionsTable extends Conditions
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _sinceMeta = const VerificationMeta('since');
   @override
-  late final GeneratedColumn<DateTime> since = GeneratedColumn<DateTime>(
-    'since',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> since =
+      GeneratedColumn<DateTime>(
+        'since',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($ConditionsTable.$convertersincen);
   static const VerificationMeta _activeMeta = const VerificationMeta('active');
   @override
   late final GeneratedColumn<bool> active = GeneratedColumn<bool>(
@@ -4570,12 +4572,6 @@ class $ConditionsTable extends Conditions
         notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
       );
     }
-    if (data.containsKey('since')) {
-      context.handle(
-        _sinceMeta,
-        since.isAcceptableOrUnknown(data['since']!, _sinceMeta),
-      );
-    }
     if (data.containsKey('active')) {
       context.handle(
         _activeMeta,
@@ -4615,9 +4611,11 @@ class $ConditionsTable extends Conditions
         DriftSqlType.string,
         data['${effectivePrefix}notes'],
       ),
-      since: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}since'],
+      since: $ConditionsTable.$convertersincen.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}since'],
+        ),
       ),
       active: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
@@ -4630,6 +4628,11 @@ class $ConditionsTable extends Conditions
   $ConditionsTable createAlias(String alias) {
     return $ConditionsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $convertersince =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $convertersincen =
+      NullAwareTypeConverter.wrap($convertersince);
 }
 
 class ConditionRow extends DataClass implements Insertable<ConditionRow> {
@@ -4663,7 +4666,9 @@ class ConditionRow extends DataClass implements Insertable<ConditionRow> {
       map['notes'] = Variable<String>(notes);
     }
     if (!nullToAbsent || since != null) {
-      map['since'] = Variable<DateTime>(since);
+      map['since'] = Variable<DateTime>(
+        $ConditionsTable.$convertersincen.toSql(since),
+      );
     }
     map['active'] = Variable<bool>(active);
     return map;
@@ -4891,7 +4896,9 @@ class ConditionsCompanion extends UpdateCompanion<ConditionRow> {
       map['notes'] = Variable<String>(notes.value);
     }
     if (since.present) {
-      map['since'] = Variable<DateTime>(since.value);
+      map['since'] = Variable<DateTime>(
+        $ConditionsTable.$convertersincen.toSql(since.value),
+      );
     }
     if (active.present) {
       map['active'] = Variable<bool>(active.value);
@@ -6045,17 +6052,15 @@ class $MedCoursesTable extends MedCourses
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _startDateMeta = const VerificationMeta(
-    'startDate',
-  );
   @override
-  late final GeneratedColumn<DateTime> startDate = GeneratedColumn<DateTime>(
-    'start_date',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> startDate =
+      GeneratedColumn<DateTime>(
+        'start_date',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($MedCoursesTable.$converterstartDate);
   @override
   late final GeneratedColumnWithTypeConverter<List<Object?>, String> phases =
       GeneratedColumn<String>(
@@ -6151,14 +6156,6 @@ class $MedCoursesTable extends MedCourses
         ),
       );
     }
-    if (data.containsKey('start_date')) {
-      context.handle(
-        _startDateMeta,
-        startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_startDateMeta);
-    }
     if (data.containsKey('notes')) {
       context.handle(
         _notesMeta,
@@ -6204,10 +6201,12 @@ class $MedCoursesTable extends MedCourses
         DriftSqlType.string,
         data['${effectivePrefix}medication_id'],
       ),
-      startDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}start_date'],
-      )!,
+      startDate: $MedCoursesTable.$converterstartDate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}start_date'],
+        )!,
+      ),
       phases: $MedCoursesTable.$converterphases.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.string,
@@ -6230,6 +6229,8 @@ class $MedCoursesTable extends MedCourses
     return $MedCoursesTable(attachedDatabase, alias);
   }
 
+  static TypeConverter<DateTime, DateTime> $converterstartDate =
+      const CalendarDayConverter();
   static TypeConverter<List<Object?>, String> $converterphases =
       const JsonListConverter();
 }
@@ -6268,7 +6269,11 @@ class MedCourseRow extends DataClass implements Insertable<MedCourseRow> {
     if (!nullToAbsent || medicationId != null) {
       map['medication_id'] = Variable<String>(medicationId);
     }
-    map['start_date'] = Variable<DateTime>(startDate);
+    {
+      map['start_date'] = Variable<DateTime>(
+        $MedCoursesTable.$converterstartDate.toSql(startDate),
+      );
+    }
     {
       map['phases'] = Variable<String>(
         $MedCoursesTable.$converterphases.toSql(phases),
@@ -6538,7 +6543,9 @@ class MedCoursesCompanion extends UpdateCompanion<MedCourseRow> {
       map['medication_id'] = Variable<String>(medicationId.value);
     }
     if (startDate.present) {
-      map['start_date'] = Variable<DateTime>(startDate.value);
+      map['start_date'] = Variable<DateTime>(
+        $MedCoursesTable.$converterstartDate.toSql(startDate.value),
+      );
     }
     if (phases.present) {
       map['phases'] = Variable<String>(
@@ -8326,15 +8333,15 @@ class $LabReadingsTable extends LabReadings
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
-  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
-    'date',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> date =
+      GeneratedColumn<DateTime>(
+        'date',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($LabReadingsTable.$converterdate);
   static const VerificationMeta _valueMeta = const VerificationMeta('value');
   @override
   late final GeneratedColumn<double> value = GeneratedColumn<double>(
@@ -8410,14 +8417,6 @@ class $LabReadingsTable extends LabReadings
     } else if (isInserting) {
       context.missing(_testIdMeta);
     }
-    if (data.containsKey('date')) {
-      context.handle(
-        _dateMeta,
-        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dateMeta);
-    }
     if (data.containsKey('value')) {
       context.handle(
         _valueMeta,
@@ -8461,10 +8460,12 @@ class $LabReadingsTable extends LabReadings
         DriftSqlType.string,
         data['${effectivePrefix}test_id'],
       )!,
-      date: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}date'],
-      )!,
+      date: $LabReadingsTable.$converterdate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}date'],
+        )!,
+      ),
       value: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}value'],
@@ -8484,6 +8485,9 @@ class $LabReadingsTable extends LabReadings
   $LabReadingsTable createAlias(String alias) {
     return $LabReadingsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdate =
+      const CalendarDayConverter();
 }
 
 class LabReadingRow extends DataClass implements Insertable<LabReadingRow> {
@@ -8514,7 +8518,11 @@ class LabReadingRow extends DataClass implements Insertable<LabReadingRow> {
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     map['test_id'] = Variable<String>(testId);
-    map['date'] = Variable<DateTime>(date);
+    {
+      map['date'] = Variable<DateTime>(
+        $LabReadingsTable.$converterdate.toSql(date),
+      );
+    }
     if (!nullToAbsent || value != null) {
       map['value'] = Variable<double>(value);
     }
@@ -8744,7 +8752,9 @@ class LabReadingsCompanion extends UpdateCompanion<LabReadingRow> {
       map['test_id'] = Variable<String>(testId.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime>(
+        $LabReadingsTable.$converterdate.toSql(date.value),
+      );
     }
     if (value.present) {
       map['value'] = Variable<double>(value.value);
@@ -14935,15 +14945,15 @@ class $TransactionsTable extends Transactions
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
-  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
-    'date',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> date =
+      GeneratedColumn<DateTime>(
+        'date',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($TransactionsTable.$converterdate);
   static const VerificationMeta _budgetItemIdMeta = const VerificationMeta(
     'budgetItemId',
   );
@@ -15057,14 +15067,6 @@ class $TransactionsTable extends Transactions
     } else if (isInserting) {
       context.missing(_amountMilliMeta);
     }
-    if (data.containsKey('date')) {
-      context.handle(
-        _dateMeta,
-        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dateMeta);
-    }
     if (data.containsKey('budget_item_id')) {
       context.handle(
         _budgetItemIdMeta,
@@ -15133,10 +15135,12 @@ class $TransactionsTable extends Transactions
         DriftSqlType.int,
         data['${effectivePrefix}amount_milli'],
       )!,
-      date: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}date'],
-      )!,
+      date: $TransactionsTable.$converterdate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}date'],
+        )!,
+      ),
       budgetItemId: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}budget_item_id'],
@@ -15169,6 +15173,8 @@ class $TransactionsTable extends Transactions
 
   static JsonTypeConverter2<TxKind, String, String> $converterkind =
       const EnumNameConverter<TxKind>(TxKind.values);
+  static TypeConverter<DateTime, DateTime> $converterdate =
+      const CalendarDayConverter();
   static TypeConverter<List<String>, String> $convertertags =
       const StringListConverter();
 }
@@ -15180,7 +15186,9 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
   final String walletId;
   final TxKind kind;
 
-  /// Always positive; direction comes from [kind].
+  /// Positive, with the direction coming from [kind] – except for
+  /// [TxKind.adjustment], whose amount is signed (a negative adjustment
+  /// lowers the wallet balance).
   final int amountMilli;
   final DateTime date;
   final String? budgetItemId;
@@ -15218,7 +15226,11 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
       );
     }
     map['amount_milli'] = Variable<int>(amountMilli);
-    map['date'] = Variable<DateTime>(date);
+    {
+      map['date'] = Variable<DateTime>(
+        $TransactionsTable.$converterdate.toSql(date),
+      );
+    }
     if (!nullToAbsent || budgetItemId != null) {
       map['budget_item_id'] = Variable<String>(budgetItemId);
     }
@@ -15546,7 +15558,9 @@ class TransactionsCompanion extends UpdateCompanion<TransactionRow> {
       map['amount_milli'] = Variable<int>(amountMilli.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime>(
+        $TransactionsTable.$converterdate.toSql(date.value),
+      );
     }
     if (budgetItemId.present) {
       map['budget_item_id'] = Variable<String>(budgetItemId.value);
@@ -15674,17 +15688,15 @@ class $JarsTable extends Jars with TableInfo<$JarsTable, JarRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _deadlineMeta = const VerificationMeta(
-    'deadline',
-  );
   @override
-  late final GeneratedColumn<DateTime> deadline = GeneratedColumn<DateTime>(
-    'deadline',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> deadline =
+      GeneratedColumn<DateTime>(
+        'deadline',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($JarsTable.$converterdeadlinen);
   static const VerificationMeta _colorMeta = const VerificationMeta('color');
   @override
   late final GeneratedColumn<int> color = GeneratedColumn<int>(
@@ -15792,12 +15804,6 @@ class $JarsTable extends Jars with TableInfo<$JarsTable, JarRow> {
     } else if (isInserting) {
       context.missing(_currencyMeta);
     }
-    if (data.containsKey('deadline')) {
-      context.handle(
-        _deadlineMeta,
-        deadline.isAcceptableOrUnknown(data['deadline']!, _deadlineMeta),
-      );
-    }
     if (data.containsKey('color')) {
       context.handle(
         _colorMeta,
@@ -15853,9 +15859,11 @@ class $JarsTable extends Jars with TableInfo<$JarsTable, JarRow> {
         DriftSqlType.string,
         data['${effectivePrefix}currency'],
       )!,
-      deadline: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}deadline'],
+      deadline: $JarsTable.$converterdeadlinen.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}deadline'],
+        ),
       ),
       color: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -15876,6 +15884,11 @@ class $JarsTable extends Jars with TableInfo<$JarsTable, JarRow> {
   $JarsTable createAlias(String alias) {
     return $JarsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdeadline =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdeadlinen =
+      NullAwareTypeConverter.wrap($converterdeadline);
 }
 
 class JarRow extends DataClass implements Insertable<JarRow> {
@@ -15914,7 +15927,9 @@ class JarRow extends DataClass implements Insertable<JarRow> {
     map['target_milli'] = Variable<int>(targetMilli);
     map['currency'] = Variable<String>(currency);
     if (!nullToAbsent || deadline != null) {
-      map['deadline'] = Variable<DateTime>(deadline);
+      map['deadline'] = Variable<DateTime>(
+        $JarsTable.$converterdeadlinen.toSql(deadline),
+      );
     }
     if (!nullToAbsent || color != null) {
       map['color'] = Variable<int>(color);
@@ -16203,7 +16218,9 @@ class JarsCompanion extends UpdateCompanion<JarRow> {
       map['currency'] = Variable<String>(currency.value);
     }
     if (deadline.present) {
-      map['deadline'] = Variable<DateTime>(deadline.value);
+      map['deadline'] = Variable<DateTime>(
+        $JarsTable.$converterdeadlinen.toSql(deadline.value),
+      );
     }
     if (color.present) {
       map['color'] = Variable<int>(color.value);
@@ -16300,15 +16317,15 @@ class $JarDepositsTable extends JarDeposits
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
-  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
-    'date',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> date =
+      GeneratedColumn<DateTime>(
+        'date',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($JarDepositsTable.$converterdate);
   static const VerificationMeta _walletIdMeta = const VerificationMeta(
     'walletId',
   );
@@ -16386,14 +16403,6 @@ class $JarDepositsTable extends JarDeposits
     } else if (isInserting) {
       context.missing(_amountMilliMeta);
     }
-    if (data.containsKey('date')) {
-      context.handle(
-        _dateMeta,
-        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dateMeta);
-    }
     if (data.containsKey('wallet_id')) {
       context.handle(
         _walletIdMeta,
@@ -16435,10 +16444,12 @@ class $JarDepositsTable extends JarDeposits
         DriftSqlType.int,
         data['${effectivePrefix}amount_milli'],
       )!,
-      date: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}date'],
-      )!,
+      date: $JarDepositsTable.$converterdate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}date'],
+        )!,
+      ),
       walletId: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}wallet_id'],
@@ -16454,6 +16465,9 @@ class $JarDepositsTable extends JarDeposits
   $JarDepositsTable createAlias(String alias) {
     return $JarDepositsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdate =
+      const CalendarDayConverter();
 }
 
 class JarDepositRow extends DataClass implements Insertable<JarDepositRow> {
@@ -16485,7 +16499,11 @@ class JarDepositRow extends DataClass implements Insertable<JarDepositRow> {
     map['updated_at'] = Variable<DateTime>(updatedAt);
     map['jar_id'] = Variable<String>(jarId);
     map['amount_milli'] = Variable<int>(amountMilli);
-    map['date'] = Variable<DateTime>(date);
+    {
+      map['date'] = Variable<DateTime>(
+        $JarDepositsTable.$converterdate.toSql(date),
+      );
+    }
     if (!nullToAbsent || walletId != null) {
       map['wallet_id'] = Variable<String>(walletId);
     }
@@ -16716,7 +16734,9 @@ class JarDepositsCompanion extends UpdateCompanion<JarDepositRow> {
       map['amount_milli'] = Variable<int>(amountMilli.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime>(
+        $JarDepositsTable.$converterdate.toSql(date.value),
+      );
     }
     if (walletId.present) {
       map['wallet_id'] = Variable<String>(walletId.value);
@@ -16838,17 +16858,15 @@ class $DebtsTable extends Debts with TableInfo<$DebtsTable, DebtRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _dueDateMeta = const VerificationMeta(
-    'dueDate',
-  );
   @override
-  late final GeneratedColumn<DateTime> dueDate = GeneratedColumn<DateTime>(
-    'due_date',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> dueDate =
+      GeneratedColumn<DateTime>(
+        'due_date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($DebtsTable.$converterdueDaten);
   static const VerificationMeta _noteMeta = const VerificationMeta('note');
   @override
   late final GeneratedColumn<String> note = GeneratedColumn<String>(
@@ -16943,12 +16961,6 @@ class $DebtsTable extends Debts with TableInfo<$DebtsTable, DebtRow> {
     } else if (isInserting) {
       context.missing(_currencyMeta);
     }
-    if (data.containsKey('due_date')) {
-      context.handle(
-        _dueDateMeta,
-        dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta),
-      );
-    }
     if (data.containsKey('note')) {
       context.handle(
         _noteMeta,
@@ -17004,9 +17016,11 @@ class $DebtsTable extends Debts with TableInfo<$DebtsTable, DebtRow> {
         DriftSqlType.string,
         data['${effectivePrefix}currency'],
       )!,
-      dueDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}due_date'],
+      dueDate: $DebtsTable.$converterdueDaten.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}due_date'],
+        ),
       ),
       note: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -17026,6 +17040,10 @@ class $DebtsTable extends Debts with TableInfo<$DebtsTable, DebtRow> {
 
   static JsonTypeConverter2<DebtDirection, String, String> $converterdirection =
       const EnumNameConverter<DebtDirection>(DebtDirection.values);
+  static TypeConverter<DateTime, DateTime> $converterdueDate =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdueDaten =
+      NullAwareTypeConverter.wrap($converterdueDate);
 }
 
 class DebtRow extends DataClass implements Insertable<DebtRow> {
@@ -17069,7 +17087,9 @@ class DebtRow extends DataClass implements Insertable<DebtRow> {
     map['amount_milli'] = Variable<int>(amountMilli);
     map['currency'] = Variable<String>(currency);
     if (!nullToAbsent || dueDate != null) {
-      map['due_date'] = Variable<DateTime>(dueDate);
+      map['due_date'] = Variable<DateTime>(
+        $DebtsTable.$converterdueDaten.toSql(dueDate),
+      );
     }
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
@@ -17367,7 +17387,9 @@ class DebtsCompanion extends UpdateCompanion<DebtRow> {
       map['currency'] = Variable<String>(currency.value);
     }
     if (dueDate.present) {
-      map['due_date'] = Variable<DateTime>(dueDate.value);
+      map['due_date'] = Variable<DateTime>(
+        $DebtsTable.$converterdueDaten.toSql(dueDate.value),
+      );
     }
     if (note.present) {
       map['note'] = Variable<String>(note.value);
@@ -17461,15 +17483,15 @@ class $DebtPaymentsTable extends DebtPayments
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
-  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
-    'date',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> date =
+      GeneratedColumn<DateTime>(
+        'date',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($DebtPaymentsTable.$converterdate);
   static const VerificationMeta _noteMeta = const VerificationMeta('note');
   @override
   late final GeneratedColumn<String> note = GeneratedColumn<String>(
@@ -17535,14 +17557,6 @@ class $DebtPaymentsTable extends DebtPayments
     } else if (isInserting) {
       context.missing(_amountMilliMeta);
     }
-    if (data.containsKey('date')) {
-      context.handle(
-        _dateMeta,
-        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dateMeta);
-    }
     if (data.containsKey('note')) {
       context.handle(
         _noteMeta,
@@ -17578,10 +17592,12 @@ class $DebtPaymentsTable extends DebtPayments
         DriftSqlType.int,
         data['${effectivePrefix}amount_milli'],
       )!,
-      date: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}date'],
-      )!,
+      date: $DebtPaymentsTable.$converterdate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}date'],
+        )!,
+      ),
       note: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}note'],
@@ -17593,6 +17609,9 @@ class $DebtPaymentsTable extends DebtPayments
   $DebtPaymentsTable createAlias(String alias) {
     return $DebtPaymentsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdate =
+      const CalendarDayConverter();
 }
 
 class DebtPaymentRow extends DataClass implements Insertable<DebtPaymentRow> {
@@ -17620,7 +17639,11 @@ class DebtPaymentRow extends DataClass implements Insertable<DebtPaymentRow> {
     map['updated_at'] = Variable<DateTime>(updatedAt);
     map['debt_id'] = Variable<String>(debtId);
     map['amount_milli'] = Variable<int>(amountMilli);
-    map['date'] = Variable<DateTime>(date);
+    {
+      map['date'] = Variable<DateTime>(
+        $DebtPaymentsTable.$converterdate.toSql(date),
+      );
+    }
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
     }
@@ -17823,7 +17846,9 @@ class DebtPaymentsCompanion extends UpdateCompanion<DebtPaymentRow> {
       map['amount_milli'] = Variable<int>(amountMilli.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime>(
+        $DebtPaymentsTable.$converterdate.toSql(date.value),
+      );
     }
     if (note.present) {
       map['note'] = Variable<String>(note.value);
@@ -17976,17 +18001,15 @@ class $ObligationsTable extends Obligations
     requiredDuringInsert: false,
     defaultValue: const Constant(1),
   );
-  static const VerificationMeta _nextDueMeta = const VerificationMeta(
-    'nextDue',
-  );
   @override
-  late final GeneratedColumn<DateTime> nextDue = GeneratedColumn<DateTime>(
-    'next_due',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> nextDue =
+      GeneratedColumn<DateTime>(
+        'next_due',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($ObligationsTable.$converternextDue);
   static const VerificationMeta _noteMeta = const VerificationMeta('note');
   @override
   late final GeneratedColumn<String> note = GeneratedColumn<String>(
@@ -18107,14 +18130,6 @@ class $ObligationsTable extends Obligations
         interval.isAcceptableOrUnknown(data['interval']!, _intervalMeta),
       );
     }
-    if (data.containsKey('next_due')) {
-      context.handle(
-        _nextDueMeta,
-        nextDue.isAcceptableOrUnknown(data['next_due']!, _nextDueMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_nextDueMeta);
-    }
     if (data.containsKey('note')) {
       context.handle(
         _noteMeta,
@@ -18182,10 +18197,12 @@ class $ObligationsTable extends Obligations
         DriftSqlType.int,
         data['${effectivePrefix}interval'],
       )!,
-      nextDue: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}next_due'],
-      )!,
+      nextDue: $ObligationsTable.$converternextDue.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}next_due'],
+        )!,
+      ),
       note: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}note'],
@@ -18204,6 +18221,8 @@ class $ObligationsTable extends Obligations
 
   static JsonTypeConverter2<Recurrence, String, String> $converterfrequency =
       const EnumNameConverter<Recurrence>(Recurrence.values);
+  static TypeConverter<DateTime, DateTime> $converternextDue =
+      const CalendarDayConverter();
 }
 
 class ObligationRow extends DataClass implements Insertable<ObligationRow> {
@@ -18259,7 +18278,11 @@ class ObligationRow extends DataClass implements Insertable<ObligationRow> {
       );
     }
     map['interval'] = Variable<int>(interval);
-    map['next_due'] = Variable<DateTime>(nextDue);
+    {
+      map['next_due'] = Variable<DateTime>(
+        $ObligationsTable.$converternextDue.toSql(nextDue),
+      );
+    }
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
     }
@@ -18614,7 +18637,9 @@ class ObligationsCompanion extends UpdateCompanion<ObligationRow> {
       map['interval'] = Variable<int>(interval.value);
     }
     if (nextDue.present) {
-      map['next_due'] = Variable<DateTime>(nextDue.value);
+      map['next_due'] = Variable<DateTime>(
+        $ObligationsTable.$converternextDue.toSql(nextDue.value),
+      );
     }
     if (note.present) {
       map['note'] = Variable<String>(note.value);
@@ -18702,17 +18727,15 @@ class $ObligationPaymentsTable extends ObligationPayments
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _dueDateMeta = const VerificationMeta(
-    'dueDate',
-  );
   @override
-  late final GeneratedColumn<DateTime> dueDate = GeneratedColumn<DateTime>(
-    'due_date',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> dueDate =
+      GeneratedColumn<DateTime>(
+        'due_date',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($ObligationPaymentsTable.$converterdueDate);
   static const VerificationMeta _paidAtMeta = const VerificationMeta('paidAt');
   @override
   late final GeneratedColumn<DateTime> paidAt = GeneratedColumn<DateTime>(
@@ -18793,14 +18816,6 @@ class $ObligationPaymentsTable extends ObligationPayments
     } else if (isInserting) {
       context.missing(_obligationIdMeta);
     }
-    if (data.containsKey('due_date')) {
-      context.handle(
-        _dueDateMeta,
-        dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dueDateMeta);
-    }
     if (data.containsKey('paid_at')) {
       context.handle(
         _paidAtMeta,
@@ -18854,10 +18869,12 @@ class $ObligationPaymentsTable extends ObligationPayments
         DriftSqlType.string,
         data['${effectivePrefix}obligation_id'],
       )!,
-      dueDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}due_date'],
-      )!,
+      dueDate: $ObligationPaymentsTable.$converterdueDate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}due_date'],
+        )!,
+      ),
       paidAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}paid_at'],
@@ -18877,6 +18894,9 @@ class $ObligationPaymentsTable extends ObligationPayments
   $ObligationPaymentsTable createAlias(String alias) {
     return $ObligationPaymentsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdueDate =
+      const CalendarDayConverter();
 }
 
 class ObligationPaymentRow extends DataClass
@@ -18906,7 +18926,11 @@ class ObligationPaymentRow extends DataClass
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     map['obligation_id'] = Variable<String>(obligationId);
-    map['due_date'] = Variable<DateTime>(dueDate);
+    {
+      map['due_date'] = Variable<DateTime>(
+        $ObligationPaymentsTable.$converterdueDate.toSql(dueDate),
+      );
+    }
     map['paid_at'] = Variable<DateTime>(paidAt);
     map['amount_milli'] = Variable<int>(amountMilli);
     if (!nullToAbsent || transactionId != null) {
@@ -19141,7 +19165,9 @@ class ObligationPaymentsCompanion
       map['obligation_id'] = Variable<String>(obligationId.value);
     }
     if (dueDate.present) {
-      map['due_date'] = Variable<DateTime>(dueDate.value);
+      map['due_date'] = Variable<DateTime>(
+        $ObligationPaymentsTable.$converterdueDate.toSql(dueDate.value),
+      );
     }
     if (paidAt.present) {
       map['paid_at'] = Variable<DateTime>(paidAt.value);
@@ -19277,17 +19303,15 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PersonRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _birthdayMeta = const VerificationMeta(
-    'birthday',
-  );
   @override
-  late final GeneratedColumn<DateTime> birthday = GeneratedColumn<DateTime>(
-    'birthday',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> birthday =
+      GeneratedColumn<DateTime>(
+        'birthday',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($PeopleTable.$converterbirthdayn);
   static const VerificationMeta _notesMeta = const VerificationMeta('notes');
   @override
   late final GeneratedColumn<String> notes = GeneratedColumn<String>(
@@ -19405,12 +19429,6 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PersonRow> {
         phone.isAcceptableOrUnknown(data['phone']!, _phoneMeta),
       );
     }
-    if (data.containsKey('birthday')) {
-      context.handle(
-        _birthdayMeta,
-        birthday.isAcceptableOrUnknown(data['birthday']!, _birthdayMeta),
-      );
-    }
     if (data.containsKey('notes')) {
       context.handle(
         _notesMeta,
@@ -19477,9 +19495,11 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PersonRow> {
         DriftSqlType.string,
         data['${effectivePrefix}phone'],
       ),
-      birthday: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}birthday'],
+      birthday: $PeopleTable.$converterbirthdayn.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}birthday'],
+        ),
       ),
       notes: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -19500,6 +19520,11 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PersonRow> {
   $PeopleTable createAlias(String alias) {
     return $PeopleTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterbirthday =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterbirthdayn =
+      NullAwareTypeConverter.wrap($converterbirthday);
 }
 
 class PersonRow extends DataClass implements Insertable<PersonRow> {
@@ -19556,7 +19581,9 @@ class PersonRow extends DataClass implements Insertable<PersonRow> {
       map['phone'] = Variable<String>(phone);
     }
     if (!nullToAbsent || birthday != null) {
-      map['birthday'] = Variable<DateTime>(birthday);
+      map['birthday'] = Variable<DateTime>(
+        $PeopleTable.$converterbirthdayn.toSql(birthday),
+      );
     }
     if (!nullToAbsent || notes != null) {
       map['notes'] = Variable<String>(notes);
@@ -19895,7 +19922,9 @@ class PeopleCompanion extends UpdateCompanion<PersonRow> {
       map['phone'] = Variable<String>(phone.value);
     }
     if (birthday.present) {
-      map['birthday'] = Variable<DateTime>(birthday.value);
+      map['birthday'] = Variable<DateTime>(
+        $PeopleTable.$converterbirthdayn.toSql(birthday.value),
+      );
     }
     if (notes.present) {
       map['notes'] = Variable<String>(notes.value);
@@ -20454,17 +20483,15 @@ class $ProjectsTable extends Projects
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _deadlineMeta = const VerificationMeta(
-    'deadline',
-  );
   @override
-  late final GeneratedColumn<DateTime> deadline = GeneratedColumn<DateTime>(
-    'deadline',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> deadline =
+      GeneratedColumn<DateTime>(
+        'deadline',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($ProjectsTable.$converterdeadlinen);
   @override
   late final GeneratedColumnWithTypeConverter<ProjectStatus, String> status =
       GeneratedColumn<String>(
@@ -20558,12 +20585,6 @@ class $ProjectsTable extends Projects
         ),
       );
     }
-    if (data.containsKey('deadline')) {
-      context.handle(
-        _deadlineMeta,
-        deadline.isAcceptableOrUnknown(data['deadline']!, _deadlineMeta),
-      );
-    }
     if (data.containsKey('planet_key')) {
       context.handle(
         _planetKeyMeta,
@@ -20609,9 +20630,11 @@ class $ProjectsTable extends Projects
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      deadline: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}deadline'],
+      deadline: $ProjectsTable.$converterdeadlinen.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}deadline'],
+        ),
       ),
       status: $ProjectsTable.$converterstatus.fromSql(
         attachedDatabase.typeMapping.read(
@@ -20635,6 +20658,10 @@ class $ProjectsTable extends Projects
     return $ProjectsTable(attachedDatabase, alias);
   }
 
+  static TypeConverter<DateTime, DateTime> $converterdeadline =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdeadlinen =
+      NullAwareTypeConverter.wrap($converterdeadline);
   static JsonTypeConverter2<ProjectStatus, String, String> $converterstatus =
       const EnumNameConverter<ProjectStatus>(ProjectStatus.values);
 }
@@ -20674,7 +20701,9 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
       map['description'] = Variable<String>(description);
     }
     if (!nullToAbsent || deadline != null) {
-      map['deadline'] = Variable<DateTime>(deadline);
+      map['deadline'] = Variable<DateTime>(
+        $ProjectsTable.$converterdeadlinen.toSql(deadline),
+      );
     }
     {
       map['status'] = Variable<String>(
@@ -20954,7 +20983,9 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
       map['description'] = Variable<String>(description.value);
     }
     if (deadline.present) {
-      map['deadline'] = Variable<DateTime>(deadline.value);
+      map['deadline'] = Variable<DateTime>(
+        $ProjectsTable.$converterdeadlinen.toSql(deadline.value),
+      );
     }
     if (status.present) {
       map['status'] = Variable<String>(
@@ -21077,17 +21108,15 @@ class $ProjectItemsTable extends ProjectItems
     ),
     defaultValue: const Constant(false),
   );
-  static const VerificationMeta _dueDateMeta = const VerificationMeta(
-    'dueDate',
-  );
   @override
-  late final GeneratedColumn<DateTime> dueDate = GeneratedColumn<DateTime>(
-    'due_date',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> dueDate =
+      GeneratedColumn<DateTime>(
+        'due_date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($ProjectItemsTable.$converterdueDaten);
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -21154,12 +21183,6 @@ class $ProjectItemsTable extends ProjectItems
         done.isAcceptableOrUnknown(data['done']!, _doneMeta),
       );
     }
-    if (data.containsKey('due_date')) {
-      context.handle(
-        _dueDateMeta,
-        dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta),
-      );
-    }
     return context;
   }
 
@@ -21197,9 +21220,11 @@ class $ProjectItemsTable extends ProjectItems
         DriftSqlType.bool,
         data['${effectivePrefix}done'],
       )!,
-      dueDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}due_date'],
+      dueDate: $ProjectItemsTable.$converterdueDaten.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}due_date'],
+        ),
       ),
     );
   }
@@ -21208,6 +21233,11 @@ class $ProjectItemsTable extends ProjectItems
   $ProjectItemsTable createAlias(String alias) {
     return $ProjectItemsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdueDate =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdueDaten =
+      NullAwareTypeConverter.wrap($converterdueDate);
 }
 
 class ProjectItemRow extends DataClass implements Insertable<ProjectItemRow> {
@@ -21240,7 +21270,9 @@ class ProjectItemRow extends DataClass implements Insertable<ProjectItemRow> {
     map['body'] = Variable<String>(body);
     map['done'] = Variable<bool>(done);
     if (!nullToAbsent || dueDate != null) {
-      map['due_date'] = Variable<DateTime>(dueDate);
+      map['due_date'] = Variable<DateTime>(
+        $ProjectItemsTable.$converterdueDaten.toSql(dueDate),
+      );
     }
     return map;
   }
@@ -21469,7 +21501,9 @@ class ProjectItemsCompanion extends UpdateCompanion<ProjectItemRow> {
       map['done'] = Variable<bool>(done.value);
     }
     if (dueDate.present) {
-      map['due_date'] = Variable<DateTime>(dueDate.value);
+      map['due_date'] = Variable<DateTime>(
+        $ProjectItemsTable.$converterdueDaten.toSql(dueDate.value),
+      );
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -22102,17 +22136,15 @@ class $BoardCardsTable extends BoardCards
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _dueDateMeta = const VerificationMeta(
-    'dueDate',
-  );
   @override
-  late final GeneratedColumn<DateTime> dueDate = GeneratedColumn<DateTime>(
-    'due_date',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> dueDate =
+      GeneratedColumn<DateTime>(
+        'due_date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($BoardCardsTable.$converterdueDaten);
   static const VerificationMeta _isTop3Meta = const VerificationMeta('isTop3');
   @override
   late final GeneratedColumn<bool> isTop3 = GeneratedColumn<bool>(
@@ -22217,12 +22249,6 @@ class $BoardCardsTable extends BoardCards
         assignee.isAcceptableOrUnknown(data['assignee']!, _assigneeMeta),
       );
     }
-    if (data.containsKey('due_date')) {
-      context.handle(
-        _dueDateMeta,
-        dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta),
-      );
-    }
     if (data.containsKey('is_top3')) {
       context.handle(
         _isTop3Meta,
@@ -22274,9 +22300,11 @@ class $BoardCardsTable extends BoardCards
         DriftSqlType.string,
         data['${effectivePrefix}assignee'],
       ),
-      dueDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}due_date'],
+      dueDate: $BoardCardsTable.$converterdueDaten.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}due_date'],
+        ),
       ),
       isTop3: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
@@ -22296,6 +22324,10 @@ class $BoardCardsTable extends BoardCards
     return $BoardCardsTable(attachedDatabase, alias);
   }
 
+  static TypeConverter<DateTime, DateTime> $converterdueDate =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdueDaten =
+      NullAwareTypeConverter.wrap($converterdueDate);
   static JsonTypeConverter2<PrayerWindow, String, String> $converterwindow =
       const EnumNameConverter<PrayerWindow>(PrayerWindow.values);
   static JsonTypeConverter2<PrayerWindow?, String?, String?> $converterwindown =
@@ -22346,7 +22378,9 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
       map['assignee'] = Variable<String>(assignee);
     }
     if (!nullToAbsent || dueDate != null) {
-      map['due_date'] = Variable<DateTime>(dueDate);
+      map['due_date'] = Variable<DateTime>(
+        $BoardCardsTable.$converterdueDaten.toSql(dueDate),
+      );
     }
     map['is_top3'] = Variable<bool>(isTop3);
     if (!nullToAbsent || window != null) {
@@ -22661,7 +22695,9 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
       map['assignee'] = Variable<String>(assignee.value);
     }
     if (dueDate.present) {
-      map['due_date'] = Variable<DateTime>(dueDate.value);
+      map['due_date'] = Variable<DateTime>(
+        $BoardCardsTable.$converterdueDaten.toSql(dueDate.value),
+      );
     }
     if (isTop3.present) {
       map['is_top3'] = Variable<bool>(isTop3.value);
@@ -22793,28 +22829,24 @@ class $TripsTable extends Trips with TableInfo<$TripsTable, TripRow> {
     type: DriftSqlType.double,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _startDateMeta = const VerificationMeta(
-    'startDate',
-  );
   @override
-  late final GeneratedColumn<DateTime> startDate = GeneratedColumn<DateTime>(
-    'start_date',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _endDateMeta = const VerificationMeta(
-    'endDate',
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> startDate =
+      GeneratedColumn<DateTime>(
+        'start_date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($TripsTable.$converterstartDaten);
   @override
-  late final GeneratedColumn<DateTime> endDate = GeneratedColumn<DateTime>(
-    'end_date',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> endDate =
+      GeneratedColumn<DateTime>(
+        'end_date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($TripsTable.$converterendDaten);
   @override
   late final GeneratedColumnWithTypeConverter<TripStatus, String> status =
       GeneratedColumn<String>(
@@ -22921,18 +22953,6 @@ class $TripsTable extends Trips with TableInfo<$TripsTable, TripRow> {
         longitude.isAcceptableOrUnknown(data['longitude']!, _longitudeMeta),
       );
     }
-    if (data.containsKey('start_date')) {
-      context.handle(
-        _startDateMeta,
-        startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta),
-      );
-    }
-    if (data.containsKey('end_date')) {
-      context.handle(
-        _endDateMeta,
-        endDate.isAcceptableOrUnknown(data['end_date']!, _endDateMeta),
-      );
-    }
     if (data.containsKey('notes')) {
       context.handle(
         _notesMeta,
@@ -22986,13 +23006,17 @@ class $TripsTable extends Trips with TableInfo<$TripsTable, TripRow> {
         DriftSqlType.double,
         data['${effectivePrefix}longitude'],
       ),
-      startDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}start_date'],
+      startDate: $TripsTable.$converterstartDaten.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}start_date'],
+        ),
       ),
-      endDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}end_date'],
+      endDate: $TripsTable.$converterendDaten.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}end_date'],
+        ),
       ),
       status: $TripsTable.$converterstatus.fromSql(
         attachedDatabase.typeMapping.read(
@@ -23016,6 +23040,14 @@ class $TripsTable extends Trips with TableInfo<$TripsTable, TripRow> {
     return $TripsTable(attachedDatabase, alias);
   }
 
+  static TypeConverter<DateTime, DateTime> $converterstartDate =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterstartDaten =
+      NullAwareTypeConverter.wrap($converterstartDate);
+  static TypeConverter<DateTime, DateTime> $converterendDate =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterendDaten =
+      NullAwareTypeConverter.wrap($converterendDate);
   static JsonTypeConverter2<TripStatus, String, String> $converterstatus =
       const EnumNameConverter<TripStatus>(TripStatus.values);
 }
@@ -23067,10 +23099,14 @@ class TripRow extends DataClass implements Insertable<TripRow> {
       map['longitude'] = Variable<double>(longitude);
     }
     if (!nullToAbsent || startDate != null) {
-      map['start_date'] = Variable<DateTime>(startDate);
+      map['start_date'] = Variable<DateTime>(
+        $TripsTable.$converterstartDaten.toSql(startDate),
+      );
     }
     if (!nullToAbsent || endDate != null) {
-      map['end_date'] = Variable<DateTime>(endDate);
+      map['end_date'] = Variable<DateTime>(
+        $TripsTable.$converterendDaten.toSql(endDate),
+      );
     }
     {
       map['status'] = Variable<String>(
@@ -23410,10 +23446,14 @@ class TripsCompanion extends UpdateCompanion<TripRow> {
       map['longitude'] = Variable<double>(longitude.value);
     }
     if (startDate.present) {
-      map['start_date'] = Variable<DateTime>(startDate.value);
+      map['start_date'] = Variable<DateTime>(
+        $TripsTable.$converterstartDaten.toSql(startDate.value),
+      );
     }
     if (endDate.present) {
-      map['end_date'] = Variable<DateTime>(endDate.value);
+      map['end_date'] = Variable<DateTime>(
+        $TripsTable.$converterendDaten.toSql(endDate.value),
+      );
     }
     if (status.present) {
       map['status'] = Variable<String>(
@@ -24435,15 +24475,15 @@ class $TravelDocumentsTable extends TravelDocuments
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _expiryMeta = const VerificationMeta('expiry');
   @override
-  late final GeneratedColumn<DateTime> expiry = GeneratedColumn<DateTime>(
-    'expiry',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> expiry =
+      GeneratedColumn<DateTime>(
+        'expiry',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($TravelDocumentsTable.$converterexpiryn);
   static const VerificationMeta _remindDaysBeforeMeta = const VerificationMeta(
     'remindDaysBefore',
   );
@@ -24531,12 +24571,6 @@ class $TravelDocumentsTable extends TravelDocuments
         number.isAcceptableOrUnknown(data['number']!, _numberMeta),
       );
     }
-    if (data.containsKey('expiry')) {
-      context.handle(
-        _expiryMeta,
-        expiry.isAcceptableOrUnknown(data['expiry']!, _expiryMeta),
-      );
-    }
     if (data.containsKey('remind_days_before')) {
       context.handle(
         _remindDaysBeforeMeta,
@@ -24589,9 +24623,11 @@ class $TravelDocumentsTable extends TravelDocuments
         DriftSqlType.string,
         data['${effectivePrefix}number'],
       ),
-      expiry: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}expiry'],
+      expiry: $TravelDocumentsTable.$converterexpiryn.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}expiry'],
+        ),
       ),
       remindDaysBefore: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -24608,6 +24644,11 @@ class $TravelDocumentsTable extends TravelDocuments
   $TravelDocumentsTable createAlias(String alias) {
     return $TravelDocumentsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterexpiry =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterexpiryn =
+      NullAwareTypeConverter.wrap($converterexpiry);
 }
 
 class TravelDocumentRow extends DataClass
@@ -24649,7 +24690,9 @@ class TravelDocumentRow extends DataClass
       map['number'] = Variable<String>(number);
     }
     if (!nullToAbsent || expiry != null) {
-      map['expiry'] = Variable<DateTime>(expiry);
+      map['expiry'] = Variable<DateTime>(
+        $TravelDocumentsTable.$converterexpiryn.toSql(expiry),
+      );
     }
     map['remind_days_before'] = Variable<int>(remindDaysBefore);
     if (!nullToAbsent || notes != null) {
@@ -24921,7 +24964,9 @@ class TravelDocumentsCompanion extends UpdateCompanion<TravelDocumentRow> {
       map['number'] = Variable<String>(number.value);
     }
     if (expiry.present) {
-      map['expiry'] = Variable<DateTime>(expiry.value);
+      map['expiry'] = Variable<DateTime>(
+        $TravelDocumentsTable.$converterexpiryn.toSql(expiry.value),
+      );
     }
     if (remindDaysBefore.present) {
       map['remind_days_before'] = Variable<int>(remindDaysBefore.value);
@@ -25046,17 +25091,15 @@ class $LearningGoalsTable extends LearningGoals
     requiredDuringInsert: false,
     defaultValue: const Constant(0.0),
   );
-  static const VerificationMeta _deadlineMeta = const VerificationMeta(
-    'deadline',
-  );
   @override
-  late final GeneratedColumn<DateTime> deadline = GeneratedColumn<DateTime>(
-    'deadline',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> deadline =
+      GeneratedColumn<DateTime>(
+        'deadline',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($LearningGoalsTable.$converterdeadlinen);
   static const VerificationMeta _colorMeta = const VerificationMeta('color');
   @override
   late final GeneratedColumn<int> color = GeneratedColumn<int>(
@@ -25154,12 +25197,6 @@ class $LearningGoalsTable extends LearningGoals
         initial.isAcceptableOrUnknown(data['initial']!, _initialMeta),
       );
     }
-    if (data.containsKey('deadline')) {
-      context.handle(
-        _deadlineMeta,
-        deadline.isAcceptableOrUnknown(data['deadline']!, _deadlineMeta),
-      );
-    }
     if (data.containsKey('color')) {
       context.handle(
         _colorMeta,
@@ -25213,9 +25250,11 @@ class $LearningGoalsTable extends LearningGoals
         DriftSqlType.double,
         data['${effectivePrefix}initial'],
       )!,
-      deadline: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}deadline'],
+      deadline: $LearningGoalsTable.$converterdeadlinen.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}deadline'],
+        ),
       ),
       color: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -25232,6 +25271,11 @@ class $LearningGoalsTable extends LearningGoals
   $LearningGoalsTable createAlias(String alias) {
     return $LearningGoalsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<DateTime, DateTime> $converterdeadline =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterdeadlinen =
+      NullAwareTypeConverter.wrap($converterdeadline);
 }
 
 class LearningGoalRow extends DataClass implements Insertable<LearningGoalRow> {
@@ -25271,7 +25315,9 @@ class LearningGoalRow extends DataClass implements Insertable<LearningGoalRow> {
     map['target'] = Variable<double>(target);
     map['initial'] = Variable<double>(initial);
     if (!nullToAbsent || deadline != null) {
-      map['deadline'] = Variable<DateTime>(deadline);
+      map['deadline'] = Variable<DateTime>(
+        $LearningGoalsTable.$converterdeadlinen.toSql(deadline),
+      );
     }
     if (!nullToAbsent || color != null) {
       map['color'] = Variable<int>(color);
@@ -25557,7 +25603,9 @@ class LearningGoalsCompanion extends UpdateCompanion<LearningGoalRow> {
       map['initial'] = Variable<double>(initial.value);
     }
     if (deadline.present) {
-      map['deadline'] = Variable<DateTime>(deadline.value);
+      map['deadline'] = Variable<DateTime>(
+        $LearningGoalsTable.$converterdeadlinen.toSql(deadline.value),
+      );
     }
     if (color.present) {
       map['color'] = Variable<int>(color.value);

@@ -211,6 +211,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                         index: 1,
                         from: EntranceFrom.bottom,
                         distance: 36,
+                        // A fading ancestor would hide the backdrop blur until the end.
+                        fade: false,
                         child: BackdropGroup(
                           child: Consumer(
                             // Only the glass tint follows the sky (once a minute); the

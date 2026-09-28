@@ -98,4 +98,62 @@ void main() {
       expect(find.text(credit.name(_ar)), findsOneWidget);
     }
   });
+
+  testWidgets('Settings › Import and › Design gallery return to Settings on back', (tester) async {
+    final app = await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
+    await tester.ensureVisible(find.text(_ar.settingsImport));
+    await tester.pump();
+    await tester.tap(find.text(_ar.settingsImport));
+    await settleApp(tester);
+    expect(app.location, AppRoutes.import);
+    await tester.binding.handlePopRoute();
+    await settleApp(tester);
+    expect(app.location, AppRoutes.settings);
+
+    await tester.ensureVisible(find.text(_ar.designGalleryTitle));
+    await tester.pump();
+    await tester.tap(find.text(_ar.designGalleryTitle));
+    // The gallery animates forever: pump instead of settling.
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(app.location, AppRoutes.gallery);
+    await tester.binding.handlePopRoute();
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(app.location, AppRoutes.settings);
+    await settleApp(tester);
+  });
+
+  testWidgets('a system back from a settings page is heard (Sfx.back)', (tester) async {
+    final app = await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
+    await tester.tap(find.text(_ar.settingsAppearance).last);
+    await settleApp(tester);
+    expect(app.location, AppRoutes.appearance);
+    app.sound.played.clear();
+    await tester.binding.handlePopRoute();
+    await settleApp(tester);
+    expect(app.location, AppRoutes.settings);
+    expect(app.sound.played, contains(Sfx.back));
+  });
+
+  testWidgets('About opens the open-source licence page', (tester) async {
+    await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
+    await tester.ensureVisible(find.text(_ar.settingsLicenses));
+    await tester.pump();
+    await tester.tap(find.text(_ar.settingsLicenses));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+    expect(find.byType(LicensePage), findsOneWidget);
+  });
+
+  testWidgets('navigating rows use the self-mirroring chevron (points left in Arabic)', (tester) async {
+    await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
+    // chevron_right is declared matchTextDirection: Icon mirrors it under
+    // RTL. Picking chevron_left for RTL flipped it back to '>'.
+    expect(Icons.chevron_right_rounded.matchTextDirection, isTrue);
+    expect(find.byIcon(Icons.chevron_left_rounded), findsNothing);
+    expect(find.byIcon(Icons.chevron_right_rounded), findsWidgets);
+    final icon = tester.element(find.byIcon(Icons.chevron_right_rounded).first);
+    expect(Directionality.of(icon), TextDirection.rtl);
+  });
 }

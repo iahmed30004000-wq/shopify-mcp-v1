@@ -1,14 +1,17 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/db/seed/seeder.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/widgets/widgets.dart';
 import '../../core/i18n/formatters.dart';
 import '../../core/i18n/gen/app_localizations.dart';
 import '../../core/motion/motion_kit.dart';
+import '../../core/providers.dart';
 import '../../core/routing/routes.dart';
 import '../../core/settings/app_settings.dart';
 import '../../core/sound/sound_api.dart';
@@ -63,6 +66,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final next = completeOnboarding(ref.read(appSettingsProvider), exit);
     Fx.fire(exit == OnboardingExit.home ? Sfx.levelUp : Sfx.navigate);
     ref.updateSettings((_) => next.settings);
+    // The database was seeded on first launch, before the language was
+    // picked: move the untouched default lists into the chosen language.
+    unawaited(
+      MadarSeeder(ref.read(databaseProvider))
+          .relocalizeDefaults(next.settings.languageCode)
+          .then((_) {}, onError: (Object e, StackTrace st) => debugPrint('Relocalising the defaults failed: $e')),
+    );
     context.go(next.location);
   }
 
@@ -73,108 +83,118 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final fmt = MadarFormatter.of(context);
     final batterySaver = ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver));
     final last = _step == OnboardingScreen.stepCount - 1;
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        CosmosBackdrop(intensity: 1.25, seed: 0.11, animate: !batterySaver),
-        Scaffold(
-          backgroundColor: t.space0.withValues(alpha: 0),
-          body: SafeArea(
-            child: BackdropGroup(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.m, Space.m, 0),
-                    child: SizedBox(
-                      height: 40,
-                      child: Row(
-                        children: [
-                          _StepStars(
-                            step: _step,
-                            label: l.onboardingStep(
-                              fmt.formatInt(_step + 1),
-                              fmt.formatInt(OnboardingScreen.stepCount),
-                            ),
-                          ),
-                          const Spacer(),
-                          AnimatedOpacity(
-                            opacity: last ? 0 : 1,
-                            duration: context.motion(MadarMotion.short),
-                            child: IgnorePointer(
-                              ignoring: last,
-                              child: MadarButton(
-                                label: l.onboardingSkip,
-                                variant: MadarButtonVariant.ghost,
-                                size: MadarButtonSize.small,
-                                onPressed: () => _goTo(OnboardingScreen.stepCount - 1),
+    // System / predictive back walks the steps like the on-screen arrow;
+    // only step 1 lets the route (and so the app) close.
+    return PopScope<void>(
+      canPop: _step == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        Fx.fire(Sfx.back);
+        _goTo(_step - 1);
+      },
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          CosmosBackdrop(intensity: 1.25, seed: 0.11, animate: !batterySaver),
+          Scaffold(
+            backgroundColor: t.space0.withValues(alpha: 0),
+            body: SafeArea(
+              child: BackdropGroup(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.m, Space.m, 0),
+                      child: SizedBox(
+                        height: 40,
+                        child: Row(
+                          children: [
+                            _StepStars(
+                              step: _step,
+                              label: l.onboardingStep(
+                                fmt.formatInt(_step + 1),
+                                fmt.formatInt(OnboardingScreen.stepCount),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: PageView(
-                      controller: _pages,
-                      onPageChanged: (i) {
-                        Fx.fire(Sfx.swipe);
-                        setState(() => _step = i);
-                      },
-                      children: [
-                        _WelcomeStep(animate: !batterySaver),
-                        const _StyleStep(),
-                        _StartStep(onFinish: _finish),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.l),
-                    child: SizedBox(
-                      height: MadarButton.heightFor(MadarButtonSize.large),
-                      child: Row(
-                        children: [
-                          AnimatedSwitcher(
-                            duration: context.motion(MadarMotion.short),
-                            child: _step == 0
-                                ? const SizedBox.shrink()
-                                : MadarButton.icon(
-                                    key: const ValueKey('back'),
-                                    icon: Icons.arrow_back_rounded,
-                                    semanticLabel: l.actionBack,
-                                    size: MadarButtonSize.large,
-                                    sfx: Sfx.back,
-                                    onPressed: () => _goTo(_step - 1),
-                                  ),
-                          ),
-                          if (_step > 0) const SizedBox(width: Space.m),
-                          Expanded(
-                            child: AnimatedOpacity(
+                            const Spacer(),
+                            AnimatedOpacity(
                               opacity: last ? 0 : 1,
                               duration: context.motion(MadarMotion.short),
                               child: IgnorePointer(
                                 ignoring: last,
                                 child: MadarButton(
-                                  label: _step == 0 ? l.onboardingBegin : l.actionContinue,
-                                  trailingIcon: Icons.arrow_forward_rounded,
-                                  size: MadarButtonSize.large,
-                                  expand: true,
-                                  sfx: Sfx.navigate,
-                                  onPressed: () => _goTo(_step + 1),
+                                  label: l.onboardingSkip,
+                                  variant: MadarButtonVariant.ghost,
+                                  size: MadarButtonSize.small,
+                                  onPressed: () => _goTo(OnboardingScreen.stepCount - 1),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: PageView(
+                        controller: _pages,
+                        onPageChanged: (i) {
+                          Fx.fire(Sfx.swipe);
+                          setState(() => _step = i);
+                        },
+                        children: [
+                          _WelcomeStep(animate: !batterySaver),
+                          const _StyleStep(),
+                          _StartStep(onFinish: _finish),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.l),
+                      child: SizedBox(
+                        height: MadarButton.heightFor(MadarButtonSize.large),
+                        child: Row(
+                          children: [
+                            AnimatedSwitcher(
+                              duration: context.motion(MadarMotion.short),
+                              child: _step == 0
+                                  ? const SizedBox.shrink()
+                                  : MadarButton.icon(
+                                      key: const ValueKey('back'),
+                                      icon: Icons.arrow_back_rounded,
+                                      semanticLabel: l.actionBack,
+                                      size: MadarButtonSize.large,
+                                      sfx: Sfx.back,
+                                      onPressed: () => _goTo(_step - 1),
+                                    ),
+                            ),
+                            if (_step > 0) const SizedBox(width: Space.m),
+                            Expanded(
+                              child: AnimatedOpacity(
+                                opacity: last ? 0 : 1,
+                                duration: context.motion(MadarMotion.short),
+                                child: IgnorePointer(
+                                  ignoring: last,
+                                  child: MadarButton(
+                                    label: _step == 0 ? l.onboardingBegin : l.actionContinue,
+                                    trailingIcon: Icons.arrow_forward_rounded,
+                                    size: MadarButtonSize.large,
+                                    expand: true,
+                                    sfx: Sfx.navigate,
+                                    onPressed: () => _goTo(_step + 1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -429,9 +449,8 @@ class _ChoiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    final chevron = Directionality.of(context) == TextDirection.rtl
-        ? Icons.chevron_left_rounded
-        : Icons.chevron_right_rounded;
+    // matchTextDirection: Icon mirrors it under RTL by itself.
+    const chevron = Icons.chevron_right_rounded;
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 420),
       child: GlassCard(

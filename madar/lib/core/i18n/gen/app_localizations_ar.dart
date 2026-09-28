@@ -749,6 +749,11 @@ class L10nAr extends L10n {
   }
 
   @override
+  String interactionFieldIcon(int index) {
+    return 'أيقونة $index';
+  }
+
+  @override
   String get interactionFieldAmount => 'المبلغ';
 
   @override
@@ -800,7 +805,7 @@ class L10nAr extends L10n {
   String get interactionCurrencySymbolEGP => 'ج.م';
 
   @override
-  String get interactionCurrencySymbolLYD => 'د.ل';
+  String get interactionCurrencySymbolLYD => 'ل.د';
 
   @override
   String get interactionMoveSearch => 'ابحث عن وجهة';
@@ -1846,6 +1851,13 @@ class L10nAr extends L10n {
   @override
   String get settingsFontsBody =>
       'خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1';
+
+  @override
+  String get settingsLicenses => 'تراخيص البرمجيات المفتوحة';
+
+  @override
+  String get settingsLicensesBody =>
+      'SQLCipher وOpenSSL وFlutter وكل حزمة بُني بها مَدار';
 
   @override
   String get settingsFontRoleUi => 'خط الواجهة';

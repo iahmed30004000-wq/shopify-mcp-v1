@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../../design/tokens.dart';
 import '../../design/typography.dart';
 import '../../domain/enums.dart';
+import '../../i18n/formatters.dart';
 import '../../i18n/gen/app_localizations.dart';
 import '../../motion/motion.dart';
 import '../../sound/sound_api.dart';
@@ -139,7 +140,7 @@ InputDecoration kitInputDecoration(
 
 /// Allows digits of every script, separators and a minus sign.
 final TextInputFormatter kitNumberFormatter = FilteringTextInputFormatter.allow(
-  RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9.,\u066B\u066C\-\u2212]', unicode: true),
+  RegExp(r'[0-9\u0660-\u0669\u06F0-\u06F9.,\u060C\u066B\u066C\-\u2212]', unicode: true),
 );
 
 /// Tappable glass "field" that opens an inline picker.
@@ -406,6 +407,8 @@ class _TimeWheelState extends State<TimeWheel> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l10n = L10n.of(context);
+    final fmt = MadarFormatter.of(context);
+    String two(int v) => fmt.localizeDigits(v.toString().padLeft(2, '0'));
     Widget wheel({
       required FixedExtentScrollController controller,
       required int count,
@@ -418,9 +421,9 @@ class _TimeWheelState extends State<TimeWheel> {
     }) {
       return Semantics(
         label: label,
-        value: current.toString().padLeft(2, '0'),
-        increasedValue: ((current + step) % modulo).toString().padLeft(2, '0'),
-        decreasedValue: ((current - step + modulo) % modulo).toString().padLeft(2, '0'),
+        value: two(current),
+        increasedValue: two((current + step) % modulo),
+        decreasedValue: two((current - step + modulo) % modulo),
         onIncrease: () => controller.animateToItem(
           controller.selectedItem + 1,
           duration: MadarMotion.short,
@@ -446,9 +449,7 @@ class _TimeWheelState extends State<TimeWheel> {
             childDelegate: ListWheelChildLoopingListDelegate(
               children: [
                 for (var i = 0; i < count; i++)
-                  Center(
-                    child: Text(valueAt(i).toString().padLeft(2, '0'), style: MadarTypography.numerals(t, size: 24)),
-                  ),
+                  Center(child: Text(two(valueAt(i)), style: MadarTypography.numerals(t, size: 24))),
               ],
             ),
           ),
@@ -740,6 +741,7 @@ class LabeledSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
+    final fmt = MadarFormatter.of(context);
     final span = math.max(1, max - min);
     final fraction = (value - min) / span;
     final tone = Color.lerp(t.success, t.danger, fraction) ?? t.accent;
@@ -765,9 +767,9 @@ class LabeledSlider extends StatelessWidget {
             min: min.toDouble(),
             max: max.toDouble(),
             divisions: span,
-            label: '$value',
+            label: fmt.formatInt(value),
             semanticFormatterCallback: (v) =>
-                '${v.round()}${labels[v.round()] != null ? ' – ${labels[v.round()]}' : ''}',
+                '${fmt.formatInt(v.round())}${labels[v.round()] != null ? ' – ${labels[v.round()]}' : ''}',
             onChanged: (v) {
               final r = v.round();
               if (r == value) return;
@@ -822,7 +824,7 @@ class SwatchPicker extends StatelessWidget {
           KitPressable(
             sfx: Sfx.tap,
             selected: c.toARGB32() == value,
-            semanticLabel: l10n.interactionFieldColor(i + 1),
+            semanticLabel: MadarFormatter.of(context).localizeDigits(l10n.interactionFieldColor(i + 1)),
             onTap: () => onChanged(c.toARGB32()),
             child: AnimatedScale(
               duration: motion,
@@ -871,32 +873,40 @@ class IconGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    final l10n = L10n.of(context);
+    final fmt = MadarFormatter.of(context);
     final motion = context.motion(MadarMotion.short);
+    final entries = icons.entries.toList();
     return Wrap(
       spacing: Space.s,
       runSpacing: Space.s,
       children: [
-        for (final e in icons.entries)
-          KitPressable(
-            sfx: Sfx.tap,
-            selected: e.key == value,
-            semanticLabel: e.key,
-            onTap: () => onChanged(e.key),
-            child: AnimatedContainer(
-              duration: motion,
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(t.radiusM),
-                color: e.key == value ? t.accentSoft : t.glassFill,
-                border: Border.all(color: e.key == value ? t.accent : t.glassBorder, width: e.key == value ? 1.4 : 0.8),
-                boxShadow: e.key == value
-                    ? [BoxShadow(color: t.accentGlow.withValues(alpha: 0.35), blurRadius: 12)]
-                    : null,
+        for (var i = 0; i < entries.length; i++)
+          for (final e in [entries[i]])
+            KitPressable(
+              sfx: Sfx.tap,
+              selected: e.key == value,
+              // The key is a stable English DB id – never speak it.
+              semanticLabel: fmt.localizeDigits(l10n.interactionFieldIcon(i + 1)),
+              onTap: () => onChanged(e.key),
+              child: AnimatedContainer(
+                duration: motion,
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(t.radiusM),
+                  color: e.key == value ? t.accentSoft : t.glassFill,
+                  border: Border.all(
+                    color: e.key == value ? t.accent : t.glassBorder,
+                    width: e.key == value ? 1.4 : 0.8,
+                  ),
+                  boxShadow: e.key == value
+                      ? [BoxShadow(color: t.accentGlow.withValues(alpha: 0.35), blurRadius: 12)]
+                      : null,
+                ),
+                child: Icon(e.value, size: 22, color: e.key == value ? t.accent : t.textSecondary),
               ),
-              child: Icon(e.value, size: 22, color: e.key == value ? t.accent : t.textSecondary),
             ),
-          ),
       ],
     );
   }

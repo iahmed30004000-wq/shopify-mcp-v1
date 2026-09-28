@@ -41,10 +41,10 @@ void main() {
     await pumpFrames(tester, 20);
     expect(find.text('حُذفت المهمة'), findsOneWidget);
     expect(find.text('تراجع'), findsOneWidget);
-    expect(find.text('5'), findsOneWidget);
+    expect(find.text('٥'), findsOneWidget);
 
     await tester.pump(const Duration(milliseconds: 1500));
-    expect(find.text('4'), findsOneWidget);
+    expect(find.text('٤'), findsOneWidget);
 
     bool? outcome;
     result!.then((v) => outcome = v);

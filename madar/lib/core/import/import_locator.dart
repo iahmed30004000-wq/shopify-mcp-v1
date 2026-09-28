@@ -355,11 +355,53 @@ class ImportLocator {
   /// A map under a section key that is really that section's data (records,
   /// keyed records, a budget tree) rather than a domain container.
   static bool _looksLikeSection(ImportSection s, Map v) {
+    if (s == ImportSection.budgetItems) return _looksLikeBudget(v);
     for (final k in v.keys) {
       final m = ImportAliases.sectionFor('$k');
       if (m != null && m.section != s && ImportAliases.childFor(s, '$k') == null) return false;
     }
     return true;
+  }
+
+  /// Budget category names often collide with section aliases (`Savings`,
+  /// `Bills`, `ادخار`, `فواتير`, `علاج`, `سفر` …), so a budget map is only a
+  /// money container (`{"budget": {"wallets": [...], "transactions": [...]}}`)
+  /// when it has no plain category key and every non-scalar key names
+  /// another section.
+  static bool _looksLikeBudget(Map v) {
+    var foreignOnly = true;
+    for (final e in v.entries) {
+      final k = '${e.key}';
+      final n = ImportText.key(k);
+      final m = ImportAliases.sectionFor(k);
+      final foreign = m != null && m.section != ImportSection.budgetItems && ImportAliases.childFor(ImportSection.budgetItems, k) == null;
+      if (_isBudgetCategoryKey(k, n, m) || (foreign && _isBudgetLine(e.value))) return true;
+      if (!_isScalar(e.value) && !foreign) foreignOnly = false;
+    }
+    return !foreignOnly;
+  }
+
+  /// A key that can only be a budget category: no section, domain, meta,
+  /// setting, container or reserved budget field.
+  static bool _isBudgetCategoryKey(String k, String n, SectionMatch? m) =>
+      n.isNotEmpty &&
+      m == null &&
+      ImportAliases.domainFor(k) == null &&
+      !ImportAliases.metaKeys.contains(n) &&
+      !ImportAliases.dataContainers.contains(n) &&
+      !ImportAliases.logContainers.contains(n) &&
+      !ImportAliases.genericContainers.contains(n) &&
+      !_budgetReserved.contains(n) &&
+      !ImportAliases.weeksPerMonth.any((a) => ImportText.key(a) == n) &&
+      !ImportAliases.baseCurrency.any((a) => ImportText.key(a) == n) &&
+      n != 'rates';
+
+  /// `{"amount": 50}` / `{"نسبة": 10}` – a single budget line (only scalar
+  /// fields, one of them an amount or percent), not a list of records.
+  static bool _isBudgetLine(Object? v) {
+    if (v is! Map || v.isEmpty || !v.values.every(_isScalar)) return false;
+    final f = _fields(v);
+    return _hasAny(f, ImportAliases.amount) || _hasAny(f, ImportAliases.percent);
   }
 
   /// A list under a key that is not a section: typed events or unknown.
@@ -520,7 +562,30 @@ class ImportLocator {
       return;
     }
 
-    // Kanban tasks per country / window lists / named groups: {"Jordan": [...]}.
+    // Boards keyed by country / business: {"Jordan": [cards…], "Egypt": {"todo": [...]}}.
+    // Runs before the all-lists branch: a list under a board key is always
+    // that board's cards, never a group of boards.
+    if (section == ImportSection.boards && v.values.every((x) => x is List || x is Map)) {
+      for (final e in v.entries) {
+        final key = '${e.key}';
+        final p = _join(path, key);
+        final val = e.value;
+        if (val is List) {
+          final rec = _item(section, <String, Object?>{'name': key, 'country': key}, p, ctx, sourceId: key);
+          if (rec != null) _section((section: ImportSection.boardCards, hint: null), val, p, ctx.child(rec));
+        } else {
+          final fields = _fields(val as Map);
+          if (!_hasAny(fields, ImportAliases.name)) {
+            fields['name'] = key;
+            fields['country'] = key;
+          }
+          _item(section, fields, p, ctx, sourceId: _idOf(fields) ?? key);
+        }
+      }
+      return;
+    }
+
+    // Window lists / named groups / parents with children: {"morning": [...]}.
     if (v.values.every((x) => x is List)) {
       if (section == ImportSection.tasks) {
         for (final e in v.entries) {
@@ -537,10 +602,9 @@ class ImportLocator {
         final p = _join(path, '${e.key}');
         final list = e.value as List;
         if (child != null && !_looksLikeOwnRecords(list)) {
-          // {"HbA1c": [readings…]}, {"Jordan": [cards…]} – key = parent name.
+          // {"HbA1c": [readings…]}, {"Home": [lines…]} – key = parent name.
           final rec = _item(section, <String, Object?>{'name': '${e.key}'}, p, ctx, hint: hint, sourceId: '${e.key}');
           if (rec == null) continue;
-          if (section == ImportSection.boards) rec.fields['country'] = '${e.key}';
           _section((section: child, hint: null), list, p, ctx.child(rec));
         } else {
           // {"morning": [meds…]}, {"family": [people…]} – key = a group.
@@ -554,27 +618,6 @@ class ImportLocator {
                 : item;
             _item(section, grouped, '$p[$i]', ctx, hint: hint, sourceId: item is Map ? _idOf(item) : null);
           }
-        }
-      }
-      return;
-    }
-
-    // Boards keyed by country / business: {"Jordan": [cards…], "Egypt": {"todo": [...]}}.
-    if (section == ImportSection.boards && v.values.every((x) => x is List || x is Map)) {
-      for (final e in v.entries) {
-        final key = '${e.key}';
-        final p = _join(path, key);
-        final val = e.value;
-        if (val is List) {
-          final rec = _item(section, <String, Object?>{'name': key, 'country': key}, p, ctx, sourceId: key);
-          if (rec != null) _section((section: ImportSection.boardCards, hint: null), val, p, ctx.child(rec));
-        } else {
-          final fields = _fields(val as Map);
-          if (!_hasAny(fields, ImportAliases.name)) {
-            fields['name'] = key;
-            fields['country'] = key;
-          }
-          _item(section, fields, p, ctx, sourceId: _idOf(fields) ?? key);
         }
       }
       return;
@@ -813,6 +856,7 @@ class ImportLocator {
 
     // Nested children.
     final childCtx = ctx.child(rec);
+    if (section == ImportSection.labTests) _labHistoryFields(rec, childCtx);
     for (final e in fields.entries.toList()) {
       final k = e.key;
       final v = e.value;
@@ -830,6 +874,19 @@ class ImportLocator {
     }
     if (section == ImportSection.budgetItems) _budgetChildren(rec, childCtx);
     return rec;
+  }
+
+  /// A lab test written with its readings as day keys:
+  /// `{"name": "LDL", "unit": "mg/dL", "2026-01-01": 120, "2026-02-01": 110}`
+  /// – the dated values are read like a `history` map of readings.
+  void _labHistoryFields(RawRecord test, _Ctx ctx) {
+    final history = <String, Object?>{
+      for (final e in test.fields.entries)
+        if (ImportValues.isDateKey(e.key) && _isScalar(e.value) && e.value != null) e.key: e.value,
+    };
+    if (history.isEmpty) return;
+    test.consumed.addAll(history.keys);
+    _section((section: ImportSection.labReadings, hint: null), history, test.path, ctx);
   }
 
   /// Kanban columns inside a board: `"todo": [...]` or

@@ -227,6 +227,70 @@ void main() {
       ]);
       expect(over.warnings.map((w) => w.kind), contains(BudgetWarningKind.percentOver100));
     });
+
+    test('float thirds of an amount parent are exactly 100 % (no warning)', () {
+      const third = 100 / 3; // 33.333333333333336
+      final m = BudgetMath(const [
+        BudgetNode(id: 'home', name: 'Home', amountMilli: 100000),
+        BudgetNode(id: 'a', name: 'A', parentId: 'home', mode: BudgetMode.percent, percent: third),
+        BudgetNode(id: 'b', name: 'B', parentId: 'home', mode: BudgetMode.percent, percent: third, sortOrder: 1),
+        BudgetNode(id: 'c', name: 'C', parentId: 'home', mode: BudgetMode.percent, percent: third, sortOrder: 2),
+      ]);
+      expect(m.warnings, isEmpty);
+      expect(m['a']!.monthlyMilli, 33333);
+      expect(m.totalMonthlyMilli, 100000);
+    });
+
+    test('float thirds of the total are circular, not over 100 %', () {
+      const third = 100 / 3;
+      final m = BudgetMath(const [
+        BudgetNode(id: 'a', name: 'A', mode: BudgetMode.percent, percent: third, percentOf: PercentBase.total),
+        BudgetNode(id: 'b', name: 'B', mode: BudgetMode.percent, percent: third, percentOf: PercentBase.total),
+        BudgetNode(id: 'c', name: 'C', mode: BudgetMode.percent, percent: third, percentOf: PercentBase.total),
+      ]);
+      expect(m.warnings.single.kind, BudgetWarningKind.circularPercent);
+    });
+
+    test('float thirds of a derived parent are circular, not over 100 %', () {
+      const third = 100 / 3;
+      final m = BudgetMath(const [
+        BudgetNode(id: 'home', name: 'Home'),
+        BudgetNode(id: 'a', name: 'A', parentId: 'home', mode: BudgetMode.percent, percent: third),
+        BudgetNode(id: 'b', name: 'B', parentId: 'home', mode: BudgetMode.percent, percent: third, sortOrder: 1),
+        BudgetNode(id: 'c', name: 'C', parentId: 'home', mode: BudgetMode.percent, percent: third, sortOrder: 2),
+      ]);
+      expect(m.warnings.map((w) => w.kind).toSet(), {BudgetWarningKind.circularPercent});
+    });
+
+    test('90 split by amount, then switched to percent, gives no warning', () {
+      var m = BudgetMath(const [
+        BudgetNode(id: 'home', name: 'Home', amountMilli: 90000),
+        BudgetNode(id: 'a', name: 'A', parentId: 'home', amountMilli: 10000),
+        BudgetNode(id: 'b', name: 'B', parentId: 'home', amountMilli: 10000, sortOrder: 1),
+        BudgetNode(id: 'c', name: 'C', parentId: 'home', amountMilli: 10000, sortOrder: 2),
+      ]);
+      for (final id in ['a', 'b', 'c']) {
+        m = m.replace(m.setAmount(id, 30000));
+      }
+      expect(m.warnings, isEmpty);
+      for (final id in ['a', 'b', 'c']) {
+        final n = m[id]!.node;
+        m = m.replace(n.copyWith(mode: BudgetMode.percent));
+      }
+      expect([for (final id in ['a', 'b', 'c']) m[id]!.node.mode], everyElement(BudgetMode.percent));
+      expect(m.warnings, isEmpty);
+      expect(m['a']!.monthlyMilli, 30000);
+      expect(m['home']!.childrenDeltaMilli, 0);
+    });
+
+    test('a real overshoot above the tolerance still warns', () {
+      final m = BudgetMath(const [
+        BudgetNode(id: 'home', name: 'Home', amountMilli: 100000),
+        BudgetNode(id: 'a', name: 'A', parentId: 'home', mode: BudgetMode.percent, percent: 50.0001),
+        BudgetNode(id: 'b', name: 'B', parentId: 'home', mode: BudgetMode.percent, percent: 50, sortOrder: 1),
+      ]);
+      expect(m.warnings.map((w) => w.kind), contains(BudgetWarningKind.percentOver100));
+    });
   });
 
   group('structure problems', () {

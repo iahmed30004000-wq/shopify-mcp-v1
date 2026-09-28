@@ -156,7 +156,7 @@ class _AstrolabeLayerState extends State<AstrolabeLayer> with SingleTickerProvid
   }
 
   void _syncTicker() {
-    final run = _ownsController && widget.animate && AmbientMotion.enabled && !context.reducedMotion;
+    final run = _ownsController && widget.animate && context.ambientMotion;
     if (run) {
       _ticker ??= createTicker(_tick);
       if (!_ticker!.isActive) {

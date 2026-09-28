@@ -71,10 +71,10 @@ String describeReminderRule(BuildContext context, ReminderRule rule, {DateTime? 
     case PrayerReminder(:final window, :final offsetMin):
       final prayer = KitLabels.prayer(l, window);
       if (offsetMin == 0) return l.interactionReminderPrayerAt(prayer);
-      final d = KitLabels.duration(l, offsetMin.abs());
+      final d = KitLabels.duration(context, offsetMin.abs());
       return offsetMin < 0 ? l.interactionReminderPrayerBefore(prayer, d) : l.interactionReminderPrayerAfter(prayer, d);
     case BeforeDueReminder(:final minutes):
-      return l.interactionReminderBefore(KitLabels.duration(l, minutes));
+      return l.interactionReminderBefore(KitLabels.duration(context, minutes));
   }
 }
 
@@ -424,7 +424,7 @@ class _ReminderSheetState extends State<ReminderSheet> {
                                   KitChip(
                                     key: ValueKey('offset-$m'),
                                     dense: true,
-                                    label: KitLabels.duration(l10n, m),
+                                    label: KitLabels.duration(context, m),
                                     selected: _draft.offsetMinutes == m,
                                     sfx: Sfx.tap,
                                     onTap: () => _draft.offsetMinutes = m,
@@ -450,7 +450,7 @@ class _ReminderSheetState extends State<ReminderSheet> {
               for (final m in ReminderDraft.leadChoices)
                 KitChip(
                   key: ValueKey('lead-$m'),
-                  label: KitLabels.duration(l10n, m),
+                  label: KitLabels.duration(context, m),
                   selected: _draft.leadMinutes == m,
                   sfx: Sfx.tap,
                   onTap: () => _draft.leadMinutes = m,

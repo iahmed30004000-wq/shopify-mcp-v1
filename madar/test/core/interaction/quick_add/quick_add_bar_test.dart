@@ -5,6 +5,7 @@ import 'package:madar/core/interaction/quick_add/parser.dart';
 import 'package:madar/core/interaction/quick_add/preview.dart';
 import 'package:madar/core/interaction/quick_add/quick_add_bar.dart';
 import 'package:madar/core/interaction/quick_add/quick_add_handler.dart';
+import 'package:madar/core/settings/app_settings.dart' show DigitStyle;
 import 'package:madar/core/sound/sound_api.dart';
 
 import '../interaction_test_utils.dart';
@@ -99,7 +100,8 @@ void main() {
     await tester.enterText(find.byType(TextField), 'صرفت 12.5 دينار بنزين');
     await tester.pumpAndSettle();
     expect(find.text('مصروف'), findsOneWidget);
-    expect(find.text('12.5 د.أ'), findsOneWidget);
+    // Amounts follow the user's digit style (Arabic-Indic in Arabic).
+    expect(find.text('١٢٫٥ د.أ'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), 'بكرا بعد المغرب اجتماع مع فريق مصر');
     await tester.pumpAndSettle();
@@ -108,6 +110,33 @@ void main() {
     expect(find.text('المغرب ← العشاء'), findsOneWidget);
     expect(find.text('العمل'), findsOneWidget);
     expect(find.text('مصروف'), findsNothing);
+  });
+
+  testWidgets('every chip of one preview uses one digit style', (tester) async {
+    usePhoneSurface(tester);
+    await tester.pumpWidget(interactionApp(_bar()));
+    await tester.enterText(find.byType(TextField), 'صرفت 12.5 دينار بنزين 15/10 الساعة 5');
+    await tester.pumpAndSettle();
+    // Chip texts only (not the field's own hint / typed text).
+    Iterable<String> chipTexts() {
+      final field = tester.widgetList<Text>(find.descendant(of: find.byType(TextField), matching: find.byType(Text))).toSet();
+      return tester
+          .widgetList<Text>(find.byType(Text))
+          .where((t) => !field.contains(t))
+          .map((t) => t.data ?? '')
+          .where((s) => s.isNotEmpty);
+    }
+
+    final chips = chipTexts();
+    expect(chips, contains('١٢٫٥ د.أ'));
+    expect(chips.where((s) => RegExp('[0-9]').hasMatch(s)), isEmpty, reason: '$chips');
+
+    await tester.pumpWidget(interactionApp(_bar(), digits: DigitStyle.western));
+    await tester.enterText(find.byType(TextField), 'صرفت 12.5 دينار بنزين 15/10 الساعة 5');
+    await tester.pumpAndSettle();
+    final western = chipTexts();
+    expect(western, contains('12.5 د.أ'));
+    expect(western.where((s) => RegExp('[٠-٩]').hasMatch(s)), isEmpty, reason: '$western');
   });
 
   testWidgets('submits through quickAddHandlerProvider, clears and confirms', (tester) async {
@@ -119,7 +148,7 @@ void main() {
     );
     await tester.enterText(find.byType(TextField), 'شرب ماء 500 مل');
     await tester.pumpAndSettle();
-    expect(find.text('500 مل'), findsOneWidget);
+    expect(find.text('٥٠٠ مل'), findsOneWidget);
     await tester.testTextInput.receiveAction(TextInputAction.send);
     await tester.pumpAndSettle();
 
@@ -148,7 +177,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(provided.seen, isEmpty);
     final intent = explicit.seen.single;
-    expect(intent.kind, QuickAddKind.contact);
+    // An imperative ("call supplier") is a to-do, not a logged call.
+    expect(intent.kind, QuickAddKind.task);
+    expect(intent.title, 'call supplier');
     expect(intent.window, PrayerWindow.isha);
     expect(intent.date, DateTime(2026, 9, 28));
   });

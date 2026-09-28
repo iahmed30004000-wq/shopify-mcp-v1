@@ -4,6 +4,7 @@ import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/interaction/sheets/edit_sheet.dart';
 import 'package:madar/core/interaction/sheets/field_spec.dart';
 import 'package:madar/core/interaction/sheets/sheet.dart';
+import 'package:madar/core/settings/app_settings.dart' show DigitStyle;
 import 'package:madar/core/sound/sound_api.dart';
 
 import '../interaction_test_utils.dart';
@@ -44,12 +45,14 @@ Future<_HostState> _open(
   List<FieldSpec> fields, {
   Map<String, Object?> initial = const {},
   Locale locale = const Locale('ar'),
+  DigitStyle digits = DigitStyle.auto,
 }) async {
   usePhoneSurface(tester);
   await tester.pumpWidget(
     interactionApp(
       _Host(fields: fields, initial: initial),
       locale: locale,
+      digits: digits,
     ),
   );
   await tester.tap(find.text('open'));
@@ -110,6 +113,15 @@ void main() {
     expect(host.result!['count'], isA<int>());
   });
 
+  testWidgets('the Arabic comma survives typing: ١٢،٥ is 12.5, not 125', (tester) async {
+    final host = await _open(tester, [FieldSpec.number('weight', 'الوزن', decimals: 2)]);
+    await tester.enterText(_input('الوزن'), '١٢،٥');
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('حفظ'));
+    await tester.pumpAndSettle();
+    expect(host.result, {'weight': 12.5});
+  });
+
   testWidgets('number validation: decimals, min and max show inline errors', (tester) async {
     await _open(tester, [FieldSpec.number('pages', 'الصفحات', min: 1, max: 600)]);
     await tester.enterText(find.byType(TextField), '2.5');
@@ -117,10 +129,11 @@ void main() {
     expect(find.text('أدخل عددًا صحيحًا دون كسور'), findsOneWidget);
     await tester.enterText(find.byType(TextField), '0');
     await tester.pumpAndSettle();
-    expect(find.text('لا يقلّ عن 1'), findsOneWidget);
+    // Limits in the user's digit style (Arabic-Indic in Arabic by default).
+    expect(find.text('لا يقلّ عن ١'), findsOneWidget);
     await tester.enterText(find.byType(TextField), '٧٠٠');
     await tester.pumpAndSettle();
-    expect(find.text('لا يزيد على 600'), findsOneWidget);
+    expect(find.text('لا يزيد على ٦٠٠'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'abc');
     await tester.pumpAndSettle();
     // Letters are filtered by the input formatter.
@@ -242,8 +255,8 @@ void main() {
     await tester.ensureVisible(find.text('بعد العشاء'));
     await tester.tap(find.text('بعد العشاء'));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.bySemanticsLabel('لون 2'));
-    await tester.tap(find.bySemanticsLabel('لون 2'));
+    await tester.ensureVisible(find.bySemanticsLabel('لون ٢'));
+    await tester.tap(find.bySemanticsLabel('لون ٢'));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.byIcon(Icons.dark_mode_rounded));
     await tester.tap(find.byIcon(Icons.dark_mode_rounded));
@@ -259,6 +272,55 @@ void main() {
       'icon': 'moon',
     });
     expect(played, contains(Sfx.toggleOn));
+  });
+
+  testWidgets('Western digit style keeps limits in Western digits', (tester) async {
+    await _open(tester, [FieldSpec.number('pages', 'الصفحات', min: 1, max: 600)], digits: DigitStyle.western);
+    await tester.enterText(find.byType(TextField), '٧٠٠');
+    await tester.pumpAndSettle();
+    expect(find.text('لا يزيد على 600'), findsOneWidget);
+    await tester.enterText(find.byType(TextField), '2.5');
+    await tester.pumpAndSettle();
+    expect(find.text('أدخل عددًا صحيحًا دون كسور'), findsOneWidget);
+  });
+
+  testWidgets('decimal-place limits are localised too', (tester) async {
+    await _open(tester, [FieldSpec.number('w', 'الوزن', decimals: 3)]);
+    await tester.enterText(find.byType(TextField), '1.23456');
+    await tester.pumpAndSettle();
+    expect(find.text('٣ منازل عشرية كحدّ أقصى'), findsOneWidget);
+  });
+
+  testWidgets('a toggle is one labelled, toggled node for screen readers', (tester) async {
+    final handle = tester.ensureSemantics();
+    await _open(tester, [FieldSpec.toggle('fav', 'Pin to top')], locale: const Locale('en'));
+    expect(
+      find.bySemanticsLabel('Pin to top'),
+      findsOneWidget,
+    );
+    expect(
+      tester.getSemantics(find.bySemanticsLabel('Pin to top')),
+      isSemantics(label: 'Pin to top', hasToggledState: true, isToggled: false, hasTapAction: true),
+    );
+    await tester.tap(find.text('Pin to top'));
+    await tester.pumpAndSettle();
+    expect(
+      tester.getSemantics(find.bySemanticsLabel('Pin to top')),
+      isSemantics(label: 'Pin to top', hasToggledState: true, isToggled: true),
+    );
+    handle.dispose();
+  });
+
+  testWidgets('icon picker speaks localised labels, never the stored keys', (tester) async {
+    final handle = tester.ensureSemantics();
+    await _open(tester, [
+      FieldSpec.icon('icon', 'الأيقونة', icons: const {'briefcase': Icons.work_rounded, 'book': Icons.book_rounded}),
+    ]);
+    expect(find.bySemanticsLabel('أيقونة ١'), findsOneWidget);
+    expect(find.bySemanticsLabel('أيقونة ٢'), findsOneWidget);
+    expect(find.bySemanticsLabel('briefcase'), findsNothing);
+    expect(find.bySemanticsLabel('book'), findsNothing);
+    handle.dispose();
   });
 
   testWidgets('multi-select can add an option inline', (tester) async {

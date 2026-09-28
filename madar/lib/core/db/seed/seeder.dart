@@ -27,8 +27,13 @@ abstract final class SeedKeys {
   static const version = 'madar.seed.version';
 
   /// JSON `true` while the currency rates are still the generic defaults.
-  /// Cleared by `CurrencyRepository.setRate`.
+  /// Cleared by `CurrencyRepository.setRate` and by an import that writes the
+  /// file's rates over them.
   static const currencyRatesAreDefaults = 'money.currencyRatesAreDefaults';
+
+  /// Language (`"ar"` / `"en"`) the single-language defaults (tag options,
+  /// habits) were written in; see [MadarSeeder.relocalizeDefaults].
+  static const language = 'madar.seed.language';
 }
 
 /// Seeds the generic first-run content exactly once per database.
@@ -62,12 +67,67 @@ class MadarSeeder {
     return db.transaction(() async {
       final ar = lookupL10n(const Locale('ar'));
       final en = lookupL10n(const Locale('en'));
-      final local = options.languageCode == 'en' ? en : ar;
+      final language = _language(options.languageCode);
+      final local = language == 'en' ? en : ar;
       await _seedPlanets(ar, en);
       await _seedCurrencies(ar, en);
       await _seedTagOptions(local);
       await _seedHabits(local);
       await _put(SeedKeys.version, version);
+      await _put(SeedKeys.language, language);
+    });
+  }
+
+  static String _language(String code) => code == 'en' ? 'en' : 'ar';
+
+  static const _languages = ['ar', 'en'];
+
+  /// Rewrites the seeded tag options and habits into [languageCode] when they
+  /// were seeded in another language – the database is seeded on first
+  /// launch, before onboarding lets the user pick English. Only rows that
+  /// still hold the untouched default of another language at the same
+  /// position are changed; anything the user added, renamed or reordered is
+  /// left alone. Returns how many rows were rewritten.
+  Future<int> relocalizeDefaults(String languageCode) {
+    return db.transaction(() async {
+      final target = _language(languageCode);
+      final stored = await (db.select(db.keyValues)..where((t) => t.key.equals(SeedKeys.language))).getSingleOrNull();
+      if (stored != null && jsonDecode(stored.value) == target) return 0;
+      if (await _storedVersion() == 0) return 0;
+      final to = lookupL10n(Locale(target));
+      final others = [for (final code in _languages) if (code != target) lookupL10n(Locale(code))];
+      var changed = 0;
+
+      List<List<String>> tagLists(L10n l) => [
+        MadarDefaults.painLocations(l),
+        MadarDefaults.painTriggers(l),
+        MadarDefaults.moodFactors(l),
+      ];
+      const kinds = [TagKind.painLocation, TagKind.painTrigger, TagKind.moodFactor];
+      final targetTags = tagLists(to);
+      for (var k = 0; k < kinds.length; k++) {
+        final rows = await (db.select(db.tagOptions)..where((t) => t.kind.equalsValue(kinds[k]))).get();
+        for (final row in rows) {
+          final i = row.sortOrder;
+          if (i < 0 || i >= targetTags[k].length) continue;
+          if (!others.any((o) => tagLists(o)[k][i] == row.label)) continue;
+          await (db.update(db.tagOptions)..where((t) => t.id.equals(row.id)))
+              .write(TagOptionsCompanion(label: Value(targetTags[k][i])));
+          changed++;
+        }
+      }
+
+      final targetHabits = MadarDefaults.stressHabits(to);
+      for (final row in await db.select(db.habits).get()) {
+        final i = row.sortOrder;
+        if (i < 0 || i >= targetHabits.length) continue;
+        if (!others.any((o) => MadarDefaults.stressHabits(o)[i].name == row.name)) continue;
+        await (db.update(db.habits)..where((t) => t.id.equals(row.id))).write(HabitsCompanion(name: Value(targetHabits[i].name)));
+        changed++;
+      }
+
+      await _put(SeedKeys.language, target);
+      return changed;
     });
   }
 

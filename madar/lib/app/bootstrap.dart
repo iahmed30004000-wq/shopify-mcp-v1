@@ -17,6 +17,7 @@ import '../core/sound/sound_api.dart';
 import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
 import 'app.dart';
 import 'app_preferences.dart';
+import 'licenses.dart';
 
 /// Starts Madar.
 ///
@@ -33,6 +34,7 @@ import 'app_preferences.dart';
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   installErrorHooks();
+  MadarLicenses.register();
   await _configureSystemUi();
   unawaited(MadarShaders.preload());
   // Orbit shaders compile while the database unlocks behind the splash.

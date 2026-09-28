@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../../core/design/themes.dart';
 import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
-import '../../../core/motion/motion.dart';
 
 /// "Your day orbits the five prayers": a brass astrolabe ring around a
 /// glowing central star, the five prayer lights on the inner orbit and the
@@ -37,7 +36,7 @@ class _OrbitEmblemState extends State<OrbitEmblem> with SingleTickerProviderStat
   }
 
   void _sync() {
-    final run = widget.animate && AmbientMotion.enabled && !context.reducedMotion;
+    final run = widget.animate && context.ambientMotion;
     if (run && !_turn.isAnimating) {
       _turn.repeat();
     } else if (!run && _turn.isAnimating) {

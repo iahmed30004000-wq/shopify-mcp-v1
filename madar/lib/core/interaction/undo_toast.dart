@@ -6,6 +6,7 @@ import 'package:flutter/physics.dart';
 
 import '../design/tokens.dart';
 import '../design/typography.dart';
+import '../i18n/formatters.dart';
 import '../i18n/gen/app_localizations.dart';
 import '../motion/motion.dart';
 import '../sound/sound_api.dart';
@@ -468,7 +469,10 @@ class _CountdownRing extends StatelessWidget {
               glow: t.accentGlow,
             ),
             child: Center(
-              child: Text('$seconds', style: MadarTypography.numerals(t, size: 13, color: t.textPrimary)),
+              child: Text(
+                MadarFormatter.of(context).formatInt(seconds),
+                style: MadarTypography.numerals(t, size: 13, color: t.textPrimary),
+              ),
             ),
           );
         },

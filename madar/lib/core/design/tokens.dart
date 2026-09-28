@@ -165,6 +165,39 @@ class MadarTokens extends ThemeExtension<MadarTokens> {
       grainOpacity: d(grainOpacity, other.grainOpacity),
     );
   }
+
+  List<Object> get _props => [
+    brightness,
+    space0, space1, space2, space3, //
+    glassFill, glassBorder, glassHighlight, glassShadow,
+    textPrimary, textSecondary, textTertiary, textOnAccent,
+    accent, accentSoft, accentGlow,
+    secondary, highlight,
+    gold, brass, brassDark,
+    success, warning, danger, info,
+    nebulaA, nebulaB, starTint, dust,
+    radiusS, radiusM, radiusL, radiusXL,
+    blurSigma, grainOpacity,
+  ];
+
+  /// Value equality: `ThemeData ==` compares extensions, so two themes built
+  /// from the same inputs (a custom accent makes a new instance through
+  /// [copyWith]) must be equal, or every rebuild restarts the app-wide
+  /// theme animation.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! MadarTokens || other.runtimeType != runtimeType) return false;
+    final a = _props;
+    final b = other._props;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode => Object.hashAll(_props);
 }
 
 /// Spacing scale (logical pixels). Use `Gap.m` etc. or the `Gaps` widgets.

@@ -5,7 +5,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../../core/design/widgets/ambient_motion.dart';
-import '../../../../core/motion/motion.dart';
 import '../../domain/scene_math.dart';
 import '../orbit_shaders.dart';
 import 'planet_body.dart';
@@ -116,7 +115,7 @@ class _PlanetPortraitState extends State<PlanetPortrait> with SingleTickerProvid
   }
 
   void _syncTicker() {
-    final want = widget.animate && AmbientMotion.enabled && !context.reducedMotion;
+    final want = widget.animate && context.ambientMotion;
     if (want && _ticker == null) {
       var last = Duration.zero;
       _ticker = createTicker((elapsed) {

@@ -273,7 +273,15 @@ class _MadarButtonState extends State<MadarButton> {
       child: AnimatedOpacity(opacity: widget.onPressed == null ? 0.72 : 1, duration: duration, child: surface),
     );
     if (widget.isIconOnly && widget.semanticLabel != null) {
-      surface = Tooltip(message: widget.semanticLabel!, excludeFromSemantics: true, child: surface);
+      // No platform vibration (it bypasses the haptics setting); the
+      // tooltip is paired with Madar's own tap sound + haptic instead.
+      surface = Tooltip(
+        message: widget.semanticLabel!,
+        excludeFromSemantics: true,
+        enableFeedback: false,
+        onTriggered: () => Fx.fire(Sfx.tap),
+        child: surface,
+      );
     }
     return surface;
   }

@@ -538,6 +538,15 @@
       }
     }
   },
+  "interactionFieldIcon": "أيقونة {index}",
+  "@interactionFieldIcon": {
+    "description": "Spoken label of the n-th icon in the icon picker",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
   "interactionFieldAmount": "المبلغ",
   "interactionFieldCurrency": "العملة",
   "interactionTimeHour": "الساعة",
@@ -555,7 +564,7 @@
   "interactionCurrencySymbolUSD": "$",
   "interactionCurrencySymbolSYP": "ل.س",
   "interactionCurrencySymbolEGP": "ج.م",
-  "interactionCurrencySymbolLYD": "د.ل",
+  "interactionCurrencySymbolLYD": "ل.د",
   "interactionMoveSearch": "ابحث عن وجهة",
   "interactionMoveCurrent": "الحالي",
   "interactionMoveEmpty": "لا وجهة تطابق بحثك",
@@ -1194,6 +1203,8 @@
   },
   "settingsFonts": "الخطوط",
   "settingsFontsBody": "خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة 1.1",
+  "settingsLicenses": "تراخيص البرمجيات المفتوحة",
+  "settingsLicensesBody": "SQLCipher وOpenSSL وFlutter وكل حزمة بُني بها مَدار",
   "settingsFontRoleUi": "خط الواجهة",
   "settingsFontRoleDisplay": "خط العناوين",
   "settingsFontRoleQuran": "نص القرآن الكريم",

@@ -57,7 +57,8 @@ Map<String, int> snapshotRowCounts(Map<String, Object?> snapshot) {
 /// Replaces ALL data with [snapshot] in one transaction.
 ///
 /// Validates the envelope, schema version, table and column names and value
-/// types first. Snapshots from an older schema are accepted (missing columns
+/// types first, and reads every restored table back through its typed row
+/// class (enum names, JSON text, dates) before committing. Snapshots from an older schema are accepted (missing columns
 /// take their defaults, missing tables end up empty); newer ones are refused.
 /// Any failure – including SQLite constraint violations – rolls everything
 /// back and throws [SnapshotException]; the current data is then untouched.
@@ -76,6 +77,19 @@ Future<void> restoreSnapshot(MadarDatabase db, Map<String, Object?> snapshot) as
           }
         }
       });
+      // SQLite accepts any text in enum / JSON / date columns; make sure the
+      // app can read every restored row back before the old data is gone.
+      for (final (table, _) in plan) {
+        try {
+          await db.select(table).get();
+        } catch (e) {
+          throw SnapshotException(
+            SnapshotProblem.invalidValue,
+            'Table "${table.actualTableName}" holds values the app cannot read',
+            unwrapDatabaseError(e),
+          );
+        }
+      }
     });
   } on SnapshotException {
     rethrow;

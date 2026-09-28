@@ -314,7 +314,14 @@ class PrototypeImporter {
 
   /// Missing currencies get the file's rate (or 1 + a warning); the file's
   /// rates also replace the seeded placeholder rates while the user has not
-  /// set any. A database without a base currency adopts the plan's base.
+  /// set any (and the placeholder marker is then cleared). A database
+  /// without a base currency adopts the plan's base.
+  ///
+  /// The file's rates are relative to the file's base currency. When that
+  /// differs from the database's base they are rebased with
+  /// `k = rate(fileBase → dbBase)` (the user's stored rate for the file's
+  /// base, or `1 / rates[dbBase]` from the file); when `k` is unknown the
+  /// affected currencies get rate 1 and a missing-rate warning.
   Future<void> _prepareCurrencies(MadarDatabase db, ImportPlan plan, List<ImportIssue> issues) async {
     final existing = {for (final c in await db.select(db.currencies).get()) c.code: c};
     final dbBase = existing.values.where((c) => c.isBase).firstOrNull?.code;
@@ -323,10 +330,32 @@ class PrototypeImporter {
     final rates = <String, double>{
       if (fileRates is Map)
         for (final e in fileRates.entries)
-          if (e.value is num) '${e.key}': (e.value as num).toDouble(),
+          if (e.value is num && (e.value as num) > 0) '${e.key}': (e.value as num).toDouble(),
     };
     final ratesAreDefaults =
         await (db.select(db.keyValues)..where((t) => t.key.equals(SeedKeys.currencyRatesAreDefaults))).getSingleOrNull() != null;
+
+    // rate(planBase → dbBase): 1 unit of the file's base in database-base units.
+    // The user's own rate for the file's base wins over the file; the
+    // file's rate for the database base wins over a seeded placeholder.
+    double? k;
+    var kFromFile = false;
+    if (dbBase == null || dbBase == planBase) {
+      k = 1.0;
+    } else {
+      final stored = existing[planBase]?.rateToBase;
+      final fromFile = rates[dbBase] == null ? null : 1 / rates[dbBase]!;
+      kFromFile = fromFile != null && (ratesAreDefaults || stored == null);
+      k = kFromFile ? fromFile : stored;
+      if (k != null && (k.isNaN || k.isInfinite || k <= 0)) {
+        k = null;
+        kFromFile = false;
+      }
+    }
+
+    void missing(String code) =>
+        issues.add(ImportIssue(ImportIssueCode.missingRate, section: ImportSection.currencies, detail: code));
+
     final batch = plan.rows.currencies;
     for (var i = 0; i < batch.rows.length; i++) {
       final row = batch.rows[i] as CurrenciesCompanion;
@@ -334,15 +363,33 @@ class PrototypeImporter {
       if (existing.containsKey(code)) continue;
       if (dbBase == null && code == planBase) {
         batch.rows[i] = row.copyWith(isBase: const Value(true), rateToBase: const Value(1.0));
-      } else if (!rates.containsKey(code) && code != (dbBase ?? planBase)) {
-        issues.add(ImportIssue(ImportIssueCode.missingRate, section: ImportSection.currencies, detail: code));
+      } else if (code == planBase) {
+        // The file's base itself: 1 file-base unit = k database-base units.
+        if (k == null) missing(code);
+        batch.rows[i] = row.copyWith(rateToBase: Value(k ?? 1.0));
+      } else if (rates.containsKey(code)) {
+        if (k == null) missing(code);
+        batch.rows[i] = row.copyWith(rateToBase: Value(k == null ? 1.0 : rates[code]! * k));
+      } else {
+        missing(code);
       }
     }
-    if (ratesAreDefaults && rates.isNotEmpty && (dbBase == null || dbBase == planBase)) {
-      for (final e in rates.entries) {
-        if (existing.containsKey(e.key) && e.value > 0 && e.key != dbBase) {
+
+    if (ratesAreDefaults && rates.isNotEmpty && k != null) {
+      var replaced = false;
+      final updates = <String, double>{
+        for (final e in rates.entries) e.key: e.value * k,
+        if (kFromFile) planBase: k,
+      };
+      for (final e in updates.entries) {
+        if (existing.containsKey(e.key) && e.key != dbBase) {
           await (db.update(db.currencies)..where((t) => t.code.equals(e.key))).write(CurrenciesCompanion(rateToBase: Value(e.value)));
+          replaced = true;
         }
+      }
+      // The table now holds the file's rates, not the generic placeholders.
+      if (replaced) {
+        await (db.delete(db.keyValues)..where((t) => t.key.equals(SeedKeys.currencyRatesAreDefaults))).go();
       }
     }
   }

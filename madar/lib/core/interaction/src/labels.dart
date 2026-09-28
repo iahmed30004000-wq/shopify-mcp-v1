@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/enums.dart';
+import '../../i18n/formatters.dart';
 import '../../i18n/gen/app_localizations.dart';
 import '../numbers.dart';
 import '../quick_add/parser.dart';
@@ -68,16 +69,29 @@ abstract final class KitLabels {
     _ => l.interactionWeekdaySun,
   };
 
-  /// Human duration: "10 minutes", "2 hours", "1 day", "1 week".
-  static String duration(L10n l, int minutes) {
+  /// Human duration: "10 minutes", "2 hours", "1 day", "1 week", in the
+  /// user's digit style (`١٥ دقيقة`).
+  static String duration(BuildContext context, int minutes) {
+    final l = L10n.of(context);
     final m = minutes.abs();
-    if (m != 0 && m % 10080 == 0) return l.interactionDurationWeeks(m ~/ 10080);
-    if (m != 0 && m % 1440 == 0) return l.interactionDurationDays(m ~/ 1440);
-    if (m != 0 && m % 60 == 0) return l.interactionDurationHours(m ~/ 60);
-    return l.interactionDurationMinutes(m);
+    final String s;
+    if (m != 0 && m % 10080 == 0) {
+      s = l.interactionDurationWeeks(m ~/ 10080);
+    } else if (m != 0 && m % 1440 == 0) {
+      s = l.interactionDurationDays(m ~/ 1440);
+    } else if (m != 0 && m % 60 == 0) {
+      s = l.interactionDurationHours(m ~/ 60);
+    } else {
+      s = l.interactionDurationMinutes(m);
+    }
+    return MadarFormatter.of(context).localizeDigits(s);
   }
 
-  static String issue(L10n l, FieldIssue issue) {
+  /// A validation message, its numbers in the user's digit style.
+  static String issue(BuildContext context, FieldIssue issue) =>
+      MadarFormatter.of(context).localizeDigits(_issue(L10n.of(context), issue));
+
+  static String _issue(L10n l, FieldIssue issue) {
     String n(num? v) => v == null ? '' : LocalizedNumbers.formatNum(v);
     return switch (issue.code) {
       FieldIssueCode.required => l.fieldRequired,
@@ -128,7 +142,7 @@ abstract final class KitLabels {
   };
 
   /// "Today" / "Tomorrow" / "Yesterday" / "Day after tomorrow" or a medium
-  /// date.
+  /// date, its digits in the user's digit style.
   static String date(BuildContext context, DateTime date, {DateTime? now}) {
     final l = L10n.of(context);
     final n = now ?? DateTime.now();
@@ -141,16 +155,19 @@ abstract final class KitLabels {
       1 => l.interactionDateTomorrow,
       2 => l.interactionDateDayAfter,
       -1 => l.interactionDateYesterday,
-      _ => MaterialLocalizations.of(context).formatMediumDate(d),
+      _ => MadarFormatter.of(context).localizeDigits(MaterialLocalizations.of(context).formatMediumDate(d)),
     };
   }
 
-  /// Formats `"HH:mm"` for display (12/24 h per the platform setting).
+  /// Formats `"HH:mm"` for display (12/24 h per the platform setting) in the
+  /// user's digit style – intl's `ar` data formats times with Western digits.
   static String time(BuildContext context, String hhmm) {
     final (h, m) = ClockTime.parts(hhmm);
-    return MaterialLocalizations.of(context).formatTimeOfDay(
-      TimeOfDay(hour: h, minute: m),
-      alwaysUse24HourFormat: MediaQuery.alwaysUse24HourFormatOf(context),
+    return MadarFormatter.of(context).localizeDigits(
+      MaterialLocalizations.of(context).formatTimeOfDay(
+        TimeOfDay(hour: h, minute: m),
+        alwaysUse24HourFormat: MediaQuery.alwaysUse24HourFormatOf(context),
+      ),
     );
   }
 }

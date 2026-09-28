@@ -5,6 +5,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter/widgets.dart' show Locale;
 
 import '../../../core/db/database.dart';
+import '../../../core/db/tables/converters.dart' show CalendarDayConverter;
 import '../../../core/db/repositories/repositories.dart';
 import '../../../core/domain/budget_math.dart';
 import '../../../core/domain/enums.dart';
@@ -820,8 +821,10 @@ class _Gatherer {
         await (db.select(db.transactions)..where(
               (t) =>
                   t.kind.equalsValue(TxKind.expense) &
-                  _since(t.date, window.start) &
-                  t.date.julianday.isSmallerThan(Variable<DateTime>(window.end).julianday),
+                  _since(t.date, CalendarDayConverter.startOf(window.start)) &
+                  t.date.julianday.isSmallerThan(
+                    Variable<DateTime>(CalendarDayConverter.startOf(window.end)).julianday,
+                  ),
             ))
             .get();
     final report = math.spend([

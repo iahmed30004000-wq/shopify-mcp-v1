@@ -1,10 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../motion/motion.dart';
 import '../tokens.dart';
 import 'ambient_motion.dart';
 import 'pressable.dart';
@@ -48,6 +46,13 @@ abstract final class GlassUniforms {
 /// Uses [BackdropFilter.grouped], so wrapping many panels in a
 /// [BackdropGroup] (MadarScaffold does) shares one backdrop capture.
 /// For list rows use [GlassCard] – never put a BackdropFilter in a list row.
+///
+/// Never put a GlassPanel under an [Opacity], [FadeTransition] or
+/// [ImageFiltered] (or an entrance that uses them – pass `fade: false` to
+/// `StaggerItem` / `StaggerIn` / `AnimatedReveal`): those are save layers,
+/// and a backdrop filter inside one only sees the layer's own (empty)
+/// content, so the glass shows the sky sharp until the fade ends and then
+/// snaps to frosted. Fade the panel's *content* instead.
 class GlassPanel extends StatelessWidget {
   const GlassPanel({
     super.key,
@@ -86,7 +91,8 @@ class GlassPanel extends StatelessWidget {
   /// highlighted panel).
   final Color? glowColor;
 
-  /// Drift the specular sheen (paused under reduced motion / TickerMode off).
+  /// Drift the specular sheen (paused under reduced motion, battery saver
+  /// and TickerMode off).
   final bool animateSheen;
 
   /// Join the nearest [BackdropGroup]. Turn off for a panel that overlaps
@@ -304,20 +310,18 @@ class _GlassSurface extends StatefulWidget {
   State<_GlassSurface> createState() => _GlassSurfaceState();
 }
 
-class _GlassSurfaceState extends State<_GlassSurface> with SingleTickerProviderStateMixin {
-  static const _frameInterval = 1 / 20;
-
+class _GlassSurfaceState extends State<_GlassSurface> {
   late final ValueListenable<ui.FragmentProgram?> _program = MadarShaders.glass;
   ui.FragmentShader? _shader;
-  Ticker? _ticker;
   late final ValueNotifier<double> _time = ValueNotifier<double>(7 + widget.seed * 11);
+
+  /// Sheen time minus clock time while subscribed.
   double _base = 0;
-  double _last = -1;
+  bool _subscribed = false;
 
   @override
   void initState() {
     super.initState();
-    _base = _time.value;
     _shader = _program.value?.fragmentShader();
     _program.addListener(_onProgram);
   }
@@ -331,40 +335,43 @@ class _GlassSurfaceState extends State<_GlassSurface> with SingleTickerProviderS
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _syncTicker();
+    _sync();
   }
 
   @override
   void didUpdateWidget(_GlassSurface oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.animate != widget.animate) _syncTicker();
+    if (oldWidget.animate != widget.animate) _sync();
   }
 
-  void _syncTicker() {
-    final run = widget.animate && AmbientMotion.enabled && !context.reducedMotion;
-    if (run) {
-      final ticker = _ticker ??= createTicker(_onTick);
-      if (!ticker.isActive) {
-        _last = -1;
-        ticker.start();
-      }
-    } else if (_ticker?.isActive ?? false) {
-      _base = _time.value;
-      _ticker!.stop();
+  /// The sheen drifts on the shared [AmbientClock] (no per-surface Ticker,
+  /// which would request a frame every vsync), only while ambient motion is
+  /// allowed here (not reduced motion / battery saver) and tickers run.
+  void _sync() {
+    final run = widget.animate && context.ambientMotion && TickerMode.valuesOf(context).enabled;
+    final clock = AmbientClock.instance;
+    if (run && !_subscribed) {
+      _base = _time.value - clock.seconds;
+      clock.addListener(_onTick);
+      _subscribed = true;
+    } else if (!run && _subscribed) {
+      clock.removeListener(_onTick);
+      _subscribed = false;
     }
   }
 
-  void _onTick(Duration elapsed) {
-    final t = _base + elapsed.inMicroseconds / Duration.microsecondsPerSecond;
-    if (_last >= 0 && t - _last < _frameInterval) return;
-    _last = t;
-    _time.value = t % GlassUniforms.period;
+  void _onTick() {
+    final clock = AmbientClock.instance;
+    // 20 Hz from the 30 Hz clock: skip every third tick. The sheen repaints
+    // in the same frames as the cosmos.
+    if (clock.tick % 3 == 2) return;
+    _time.value = (_base + clock.seconds) % GlassUniforms.period;
   }
 
   @override
   void dispose() {
+    if (_subscribed) AmbientClock.instance.removeListener(_onTick);
     _program.removeListener(_onProgram);
-    _ticker?.dispose();
     _time.dispose();
     _shader?.dispose();
     super.dispose();

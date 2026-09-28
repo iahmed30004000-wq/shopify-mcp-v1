@@ -62,9 +62,11 @@ class Transactions extends Table with Entity {
   TextColumn get walletId => text()();
   TextColumn get kind => textEnum<TxKind>()();
 
-  /// Always positive; direction comes from [kind].
+  /// Positive, with the direction coming from [kind] – except for
+  /// [TxKind.adjustment], whose amount is signed (a negative adjustment
+  /// lowers the wallet balance).
   IntColumn get amountMilli => integer()();
-  DateTimeColumn get date => dateTime()();
+  DateTimeColumn get date => dateTime().map(const CalendarDayConverter())();
   TextColumn get budgetItemId => text().nullable()();
 
   /// Transfers: destination wallet and the amount received there (may differ
@@ -81,7 +83,7 @@ class Jars extends Table with Entity, Ordered {
   TextColumn get name => text()();
   IntColumn get targetMilli => integer()();
   TextColumn get currency => text()();
-  DateTimeColumn get deadline => dateTime().nullable()();
+  DateTimeColumn get deadline => dateTime().map(const CalendarDayConverter()).nullable()();
   IntColumn get color => integer().nullable()();
   TextColumn get icon => text().nullable()();
   BoolColumn get archived => boolean().withDefault(const Constant(false))();
@@ -93,7 +95,7 @@ class JarDeposits extends Table with Entity {
 
   /// Negative for withdrawals.
   IntColumn get amountMilli => integer()();
-  DateTimeColumn get date => dateTime()();
+  DateTimeColumn get date => dateTime().map(const CalendarDayConverter())();
   TextColumn get walletId => text().nullable()();
   TextColumn get note => text().nullable()();
 }
@@ -104,7 +106,7 @@ class Debts extends Table with Entity, Ordered {
   TextColumn get person => text()();
   IntColumn get amountMilli => integer()();
   TextColumn get currency => text()();
-  DateTimeColumn get dueDate => dateTime().nullable()();
+  DateTimeColumn get dueDate => dateTime().map(const CalendarDayConverter()).nullable()();
   TextColumn get note => text().nullable()();
   DateTimeColumn get settledAt => dateTime().nullable()();
 }
@@ -113,7 +115,7 @@ class Debts extends Table with Entity, Ordered {
 class DebtPayments extends Table with Entity {
   TextColumn get debtId => text()();
   IntColumn get amountMilli => integer()();
-  DateTimeColumn get date => dateTime()();
+  DateTimeColumn get date => dateTime().map(const CalendarDayConverter())();
   TextColumn get note => text().nullable()();
 }
 
@@ -127,7 +129,7 @@ class Obligations extends Table with Entity, Ordered {
   TextColumn get budgetItemId => text().nullable()();
   TextColumn get frequency => textEnum<Recurrence>()();
   IntColumn get interval => integer().withDefault(const Constant(1))();
-  DateTimeColumn get nextDue => dateTime()();
+  DateTimeColumn get nextDue => dateTime().map(const CalendarDayConverter())();
   TextColumn get note => text().nullable()();
   BoolColumn get active => boolean().withDefault(const Constant(true))();
 }
@@ -135,7 +137,7 @@ class Obligations extends Table with Entity, Ordered {
 @DataClassName('ObligationPaymentRow')
 class ObligationPayments extends Table with Entity {
   TextColumn get obligationId => text()();
-  DateTimeColumn get dueDate => dateTime()();
+  DateTimeColumn get dueDate => dateTime().map(const CalendarDayConverter())();
   DateTimeColumn get paidAt => dateTime()();
   IntColumn get amountMilli => integer()();
   TextColumn get transactionId => text().nullable()();

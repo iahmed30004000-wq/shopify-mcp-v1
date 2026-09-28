@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../../design/tokens.dart';
 import '../../design/typography.dart';
 import '../../domain/enums.dart';
+import '../../i18n/formatters.dart';
 import '../../i18n/gen/app_localizations.dart';
 import '../../motion/motion.dart';
 import '../../sound/sound_api.dart';
@@ -312,7 +313,7 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
   Widget _field(FieldSpec f, List<String> textKeys) {
     final l10n = L10n.of(context);
     final issue = _model.visibleIssueOf(f.key);
-    final error = issue == null ? null : KitLabels.issue(l10n, issue);
+    final error = issue == null ? null : KitLabels.issue(context, issue);
     final optional = !f.required && f.kind != FieldKind.toggle && f.kind != FieldKind.slider;
     Widget shell(Widget child, {Widget? trailing}) =>
         FieldShell(label: f.label, icon: f.icon, optional: optional, error: error, trailing: trailing, child: child);
@@ -474,7 +475,7 @@ class _EditSheetState extends State<EditSheet> with SingleTickerProviderStateMix
               child: FadeTransition(opacity: a, child: child),
             ),
             child: Text(
-              '$v',
+              MadarFormatter.of(context).formatInt(v),
               key: ValueKey(v),
               style: MadarTypography.numerals(t, size: 20, color: t.accent).copyWith(fontWeight: FontWeight.w600),
             ),
@@ -722,38 +723,44 @@ class _ToggleRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
+    // One node: "label, description", a toggle with its state. The children
+    // are excluded so the label is not announced twice (Text + switch).
     return MergeSemantics(
-      child: KitPressable(
-        onTap: () => onChanged(!value),
-        sfx: value ? Sfx.toggleOff : Sfx.toggleOn,
-        pressScale: 0.99,
-        excludeSemantics: true,
-        child: Container(
-          padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.l, vertical: Space.m),
-          decoration: BoxDecoration(
-            color: t.glassFill,
-            borderRadius: BorderRadius.circular(t.radiusM),
-            border: Border.all(color: t.glassBorder),
-          ),
-          child: Row(
-            children: [
-              if (icon != null) ...[
-                Icon(icon, size: 20, color: value ? t.accent : t.textSecondary),
-                const SizedBox(width: Space.m),
-              ],
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(label, style: text.titleMedium),
-                    if (description != null) Text(description!, style: text.bodySmall),
-                  ],
+      child: Semantics(
+        toggled: value,
+        child: KitPressable(
+          onTap: () => onChanged(!value),
+          sfx: value ? Sfx.toggleOff : Sfx.toggleOn,
+          pressScale: 0.99,
+          excludeSemantics: true,
+          semanticLabel: description == null ? label : '$label, $description',
+          child: Container(
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.l, vertical: Space.m),
+            decoration: BoxDecoration(
+              color: t.glassFill,
+              borderRadius: BorderRadius.circular(t.radiusM),
+              border: Border.all(color: t.glassBorder),
+            ),
+            child: Row(
+              children: [
+                if (icon != null) ...[
+                  Icon(icon, size: 20, color: value ? t.accent : t.textSecondary),
+                  const SizedBox(width: Space.m),
+                ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(label, style: text.titleMedium),
+                      if (description != null) Text(description!, style: text.bodySmall),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: Space.m),
-              GlassSwitch(value: value, onChanged: onChanged, semanticLabel: label),
-            ],
+                const SizedBox(width: Space.m),
+                GlassSwitch(value: value, onChanged: onChanged, semanticLabel: label),
+              ],
+            ),
           ),
         ),
       ),

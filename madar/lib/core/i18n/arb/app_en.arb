@@ -538,6 +538,15 @@
       }
     }
   },
+  "interactionFieldIcon": "Icon {index}",
+  "@interactionFieldIcon": {
+    "description": "Spoken label of the n-th icon in the icon picker",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
   "interactionFieldAmount": "Amount",
   "interactionFieldCurrency": "Currency",
   "interactionTimeHour": "Hour",
@@ -1194,6 +1203,8 @@
   },
   "settingsFonts": "Fonts",
   "settingsFontsBody": "Open fonts under the SIL Open Font License 1.1",
+  "settingsLicenses": "Open-source licences",
+  "settingsLicensesBody": "SQLCipher, OpenSSL, Flutter and every package Madar is built with",
   "settingsFontRoleUi": "Interface",
   "settingsFontRoleDisplay": "Headings",
   "settingsFontRoleQuran": "Quran text",

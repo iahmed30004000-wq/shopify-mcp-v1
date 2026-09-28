@@ -33,7 +33,7 @@ class _ImportEmblemState extends State<ImportEmblem> with SingleTickerProviderSt
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final run = AmbientMotion.enabled && !context.reducedMotion;
+    final run = context.ambientMotion;
     if (run && !_loop.isAnimating) {
       _loop.repeat();
     } else if (!run && _loop.isAnimating) {

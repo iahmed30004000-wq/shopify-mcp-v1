@@ -482,9 +482,6 @@ class TaskItem extends ConsumerStatefulWidget {
 class _TaskItemState extends ConsumerState<TaskItem> {
   final GlobalKey _tileKey = GlobalKey();
 
-  static String? _localized(BuildContext context, String? text) =>
-      text == null ? null : MadarFormatter.of(context).localizeDigits(text);
-
   /// Stardust from the task's orb (at the reading start of the row).
   void _celebrate() {
     final box = _tileKey.currentContext?.findRenderObject();
@@ -544,8 +541,7 @@ class _TaskItemState extends ConsumerState<TaskItem> {
         dragHandle: widget.dragHandle,
         planet: planet,
         planetName: planet == null ? null : (arabic ? planet.nameAr : planet.nameEn),
-        // The kit formats with Western digits; follow the user's digit style.
-        reminder: rule == null ? null : _localized(context, describeReminder(context, rule)),
+        reminder: rule == null ? null : describeReminder(context, rule),
       ),
     );
   }

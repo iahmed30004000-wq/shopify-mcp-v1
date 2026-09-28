@@ -50,8 +50,11 @@ class SoundSettingsScreen extends ConsumerWidget {
         horizontal: Space.gutter,
         top: Space.xs,
         children: [
+          // Glass panels only slide in: a fade is a save layer, and the
+          // panels' backdrop blur would sample nothing until it ends.
           StaggerIn(
             id: 'sound',
+            fade: false,
             children: [
               SettingsSection(
                 title: l.settingsGeneral,

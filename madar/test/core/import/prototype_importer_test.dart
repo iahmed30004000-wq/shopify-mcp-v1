@@ -5,6 +5,7 @@ import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/open.dart';
+import 'package:madar/core/db/seed/seeder.dart' show SeedKeys;
 import 'package:madar/core/domain/budget_math.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/import/import.dart';
@@ -165,9 +166,11 @@ void main() {
         (DateTime(2026, 7, 15), 5.3),
       ]);
       expect(await readings(tests['Vitamin D (25-OH)']!.id), [(DateTime(2026, 2, 1), 22.0), (DateTime(2026, 6, 1), 34.0)]);
+      // Readings are calendar days: an epoch timestamp keeps its local day.
+      final epoch = DateTime.fromMillisecondsSinceEpoch(1780000000000);
       expect(await readings(tests['Ferritin']!.id), [
         (DateTime(2026, 3, 5), 18.0),
-        (DateTime.fromMillisecondsSinceEpoch(1780000000000), 45.0),
+        (DateTime(epoch.year, epoch.month, epoch.day), 45.0),
       ]);
     });
 
@@ -584,6 +587,273 @@ void main() {
       expect(report.archiveId, isNotNull);
       expect(await countOf(db, db.importArchive), 1);
       expect(await countOf(db, db.customEntries), 1);
+    });
+  });
+
+  group('regressions – locator', () {
+    test('a budget category named like another section stays in the budget (Arabic)', () {
+      final plan = analyze('{"الميزانية": {"طعام البيت": {"المبلغ": 200, "بروتينات": 100}, "ادخار": {"المبلغ": 50}}}');
+      final r = plan.report;
+      expect(r.count(ImportSection.budgetItems), 3);
+      expect(r.count(ImportSection.jars), 0);
+      expect(r.issues.where((i) => i.code == ImportIssueCode.missingRequired), isEmpty);
+      final byName = {for (final x in plan.budget.results.values) x.node.name: x};
+      expect(byName.keys, containsAll(['طعام البيت', 'بروتينات', 'ادخار']));
+      expect(byName['ادخار']!.monthlyMilli, 50000);
+      expect(byName['بروتينات']!.node.parentId, byName['طعام البيت']!.node.id);
+      expect(plan.budget.totalMonthlyMilli, 250000);
+    });
+
+    test('a budget category named like another section stays in the budget (English)', () {
+      final plan = analyze('{"budget": {"Bills": {"amount": 50}, "Food": 100}}');
+      final r = plan.report;
+      expect(r.count(ImportSection.budgetItems), 2);
+      expect(r.count(ImportSection.obligations), 0);
+      expect(plan.budget.totalMonthlyMilli, 150000);
+    });
+
+    test('only colliding category names with amounts are still a budget', () {
+      final plan = analyze('{"budget": {"Bills": {"amount": 50}, "Savings": {"amount": 20}}}');
+      expect(plan.report.count(ImportSection.budgetItems), 2);
+      expect(plan.report.count(ImportSection.jars), 0);
+      expect(plan.budget.totalMonthlyMilli, 70000);
+    });
+
+    test('a budget key holding other sections is still walked as a container', () {
+      final plan = analyze('''
+        {"budget": {
+          "wallets": [{"name": "Cash", "currency": "JOD", "balance": 10}],
+          "transactions": [{"wallet": "Cash", "amount": 5, "date": "2026-01-01", "type": "expense"}]
+        }}''');
+      final r = plan.report;
+      expect(r.count(ImportSection.wallets), 1);
+      expect(r.count(ImportSection.transactions), 1);
+      expect(r.count(ImportSection.budgetItems), 0);
+    });
+
+    test('boards keyed by country with only card lists (English)', () {
+      final plan = analyze('''
+        {"work": {"Jordan": [{"title": "A", "status": "todo"}], "Egypt": [{"title": "B"}]}}''');
+      final r = plan.report;
+      expect(r.count(ImportSection.boards), 2);
+      expect(r.count(ImportSection.boardCards), 2);
+      final boards = plan.rows.boards.rows.cast<BoardsCompanion>();
+      expect(boards.map((b) => b.name.value), ['Jordan', 'Egypt']);
+      expect(boards.map((b) => b.country.value), ['Jordan', 'Egypt']);
+      final cards = plan.rows.boardCards.rows.cast<BoardCardsCompanion>();
+      expect(cards.map((c) => c.title.value), ['A', 'B']);
+      final byId = {for (final b in boards) b.id.value: b.name.value};
+      expect(cards.map((c) => byId[c.boardId.value]), ['Jordan', 'Egypt']);
+      expect(r.issues.where((i) => i.code == ImportIssueCode.missingRequired), isEmpty);
+    });
+
+    test('boards keyed by country with only card lists (Arabic)', () {
+      final plan = analyze('''
+        {"عمل": {"الأردن": [{"العنوان": "تجديد الرخصة", "الحالة": "جديد"}, {"العنوان": "فتح حساب"}]}}''');
+      final r = plan.report;
+      expect(r.count(ImportSection.boards), 1);
+      expect(r.count(ImportSection.boardCards), 2);
+      final board = plan.rows.boards.rows.cast<BoardsCompanion>().single;
+      expect((board.name.value, board.country.value), ('الأردن', 'الأردن'));
+      expect(r.issues.where((i) => i.code == ImportIssueCode.missingRequired), isEmpty);
+    });
+  });
+
+  group('regressions – mapping and commit', () {
+    test('Libyan and Kuwaiti dinar symbols pick the right wallet currency', () {
+      final plan = analyze('''
+        {"wallets": [
+          {"name": "Tripoli", "currency": "ل.د", "balance": "100 ل.د"},
+          {"name": "Kuwait", "balance": "12 د.ك"}
+        ]}''');
+      final wallets = {for (final w in plan.rows.wallets.rows.cast<WalletsCompanion>()) w.name.value: w};
+      expect(wallets['Tripoli']!.currency.value, 'LYD');
+      expect(wallets['Tripoli']!.openingMilli.value, 100000);
+      expect(plan.rows.currencies.rows.cast<CurrenciesCompanion>().map((c) => c.code.value), containsAll(['LYD', 'KWD']));
+    });
+
+    test('an unknown currency value is reported, never guessed', () {
+      final plan = analyze('{"wallets": [{"name": "Box", "currency": "Table"}]}');
+      final w = plan.rows.wallets.rows.cast<WalletsCompanion>().single;
+      expect(w.currency.value, 'JOD');
+      expect(
+        plan.report.issues.where((i) => i.code == ImportIssueCode.unknownValue).map((i) => i.detail),
+        contains('Table'),
+      );
+    });
+
+    test('a wallet group name is only a currency when it is exactly one', () {
+      final plan = analyze('{"wallets": {"Mobile": [{"name": "Phone wallet"}], "USD": [{"name": "Dollars"}]}}');
+      final wallets = {for (final w in plan.rows.wallets.rows.cast<WalletsCompanion>()) w.name.value: w.currency.value};
+      expect(wallets, {'Phone wallet': 'JOD', 'Dollars': 'USD'});
+    });
+
+    test('negative adjustments keep their sign: opening 120, balance 100', () async {
+      final db = MadarDatabase(NativeDatabase.memory());
+      addTearDown(db.close);
+      final plan = analyze('''
+        {"wallets": [{"id": "w", "name": "Cash", "currency": "JOD", "balance": 100}],
+         "transactions": [{"wallet": "w", "type": "adjustment", "amount": -20, "date": "2026-01-01"}]}''');
+      await _importer.commit(db, plan);
+      final wallet = await db.select(db.wallets).getSingle();
+      final tx = await db.select(db.transactions).getSingle();
+      expect(tx.kind, TxKind.adjustment);
+      expect(tx.amountMilli, -20000);
+      expect(wallet.openingMilli, 120000);
+      // The app's balance: opening + income + adjustments − expenses − transfers out.
+      final txs = await db.select(db.transactions).get();
+      final net = txs.fold<int>(
+        0,
+        (a, t) =>
+            a +
+            switch (t.kind) {
+              TxKind.income || TxKind.adjustment => t.amountMilli,
+              TxKind.expense || TxKind.transfer => -t.amountMilli,
+            },
+      );
+      expect(wallet.openingMilli + net, 100000);
+    });
+
+    test('positive adjustments stay positive', () {
+      final plan = analyze('{"transactions": [{"type": "adjustment", "amount": 20, "date": "2026-01-01"}]}');
+      expect(plan.rows.transactions.rows.cast<TransactionsCompanion>().single.amountMilli.value, 20000);
+    });
+
+    test('a signed debt list keeps its directions', () {
+      final plan = analyze('{"debts": [{"person": "Ali", "amount": -50}, {"person": "Omar", "amount": 70}]}');
+      final debts = {for (final d in plan.rows.debts.rows.cast<DebtsCompanion>()) d.person.value: d};
+      expect(debts['Ali']!.direction.value, DebtDirection.iOwe);
+      expect(debts['Omar']!.direction.value, DebtDirection.owedToMe);
+      expect(debts['Ali']!.amountMilli.value, 50000);
+      expect(debts['Omar']!.amountMilli.value, 70000);
+      expect(
+        plan.report.issues.where((i) => i.code == ImportIssueCode.assumedValue && i.section == ImportSection.debts),
+        hasLength(2),
+      );
+    });
+
+    test('unsigned debts without a direction default to "I owe"; explicit directions win', () {
+      final plan = analyze('''
+        {"debts": [{"person": "Ali", "amount": 50}, {"person": "Omar", "amount": -70, "direction": "owed to me"}]}''');
+      final debts = {for (final d in plan.rows.debts.rows.cast<DebtsCompanion>()) d.person.value: d.direction.value};
+      expect(debts, {'Ali': DebtDirection.iOwe, 'Omar': DebtDirection.owedToMe});
+    });
+
+    test('a test value without a date becomes a reading dated the export day', () {
+      final plan = analyze('''
+        {"exportedAt": "2026-03-01",
+         "labs": [{"name": "HbA1c", "value": 5.4}, {"name": "LDL", "value": 120, "date": "2026-01-01"}]}''');
+      final r = plan.report;
+      expect(r.count(ImportSection.labTests), 2);
+      expect(r.count(ImportSection.labReadings), 2);
+      expect(r.issues.where((i) => i.code == ImportIssueCode.missingRequired), isEmpty);
+      expect(
+        r.issues.where((i) => i.code == ImportIssueCode.assumedDate && i.section == ImportSection.labReadings),
+        hasLength(1),
+      );
+      final readings = plan.rows.labReadings.rows.cast<LabReadingsCompanion>().toList();
+      final hba1c = readings.firstWhere((x) => x.value.value == 5.4);
+      expect((hba1c.date.value.year, hba1c.date.value.month, hba1c.date.value.day), (2026, 3, 1));
+    });
+
+    test('a test value without any date uses today', () {
+      final plan = analyze('{"labs": [{"name": "HbA1c", "value": 5.4}]}');
+      final reading = plan.rows.labReadings.rows.cast<LabReadingsCompanion>().single;
+      expect((reading.date.value.year, reading.date.value.month, reading.date.value.day), (_now.year, _now.month, _now.day));
+    });
+
+    test('labs keyed by name with day-keyed values keep every reading', () {
+      final plan = analyze('{"labs": {"LDL": {"unit": "mg/dL", "2026-01-01": 120, "2026-02-01": 110}}}');
+      final r = plan.report;
+      expect(r.count(ImportSection.labTests), 1);
+      expect(r.count(ImportSection.labReadings), 2);
+      expect(r.unmapped, isEmpty);
+      final test = plan.rows.labTests.rows.cast<LabTestsCompanion>().single;
+      expect((test.name.value, test.unit.value), ('LDL', 'mg/dL'));
+      final readings = plan.rows.labReadings.rows.cast<LabReadingsCompanion>().toList();
+      expect(readings.map((x) => x.value.value), [120, 110]);
+      expect(readings.every((x) => x.testId.value == test.id.value), isTrue);
+    });
+
+    test('a file based on another currency is rebased to the database base', () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      final plan = analyze(
+        '{"settings": {"baseCurrency": "USD", "rates": {"SAR": 0.2667}}, "wallets": [{"name": "R", "currency": "SAR"}]}',
+      );
+      final report = await _importer.commit(db, plan);
+      final currencies = {for (final c in await db.select(db.currencies).get()) c.code: c};
+      expect(currencies['JOD']!.isBase, isTrue);
+      expect(currencies['SAR']!.rateToBase, closeTo(0.2667 * 0.709, 1e-9));
+      expect(report.issues.where((i) => i.code == ImportIssueCode.missingRate), isEmpty);
+    });
+
+    test("rebasing uses the file's own rate for the database base", () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      final plan = analyze(
+        '{"settings": {"baseCurrency": "EUR", "rates": {"JOD": 1.25, "SAR": 0.25}}, "wallets": [{"name": "R", "currency": "SAR"}]}',
+      );
+      final report = await _importer.commit(db, plan);
+      final currencies = {for (final c in await db.select(db.currencies).get()) c.code: c};
+      expect(currencies['EUR']!.rateToBase, closeTo(0.8, 1e-9));
+      expect(currencies['SAR']!.rateToBase, closeTo(0.2, 1e-9));
+      expect(currencies['JOD']!.rateToBase, 1.0);
+      expect(report.issues.where((i) => i.code == ImportIssueCode.missingRate), isEmpty);
+    });
+
+    test('an unknown rebase factor warns for every affected currency', () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      final plan = analyze(
+        '{"settings": {"baseCurrency": "EUR", "rates": {"SAR": 0.25}}, "wallets": [{"name": "R", "currency": "SAR"}]}',
+      );
+      final report = await _importer.commit(db, plan);
+      final currencies = {for (final c in await db.select(db.currencies).get()) c.code: c};
+      expect(currencies['SAR']!.rateToBase, 1.0);
+      expect(currencies['EUR']!.rateToBase, 1.0);
+      expect(report.issues.where((i) => i.code == ImportIssueCode.missingRate).map((i) => i.detail).toSet(), {'SAR', 'EUR'});
+    });
+
+    test('file rates written over the placeholders clear the placeholder marker', () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      Future<bool> flagged() async =>
+          await (db.select(db.keyValues)..where((t) => t.key.equals(SeedKeys.currencyRatesAreDefaults))).getSingleOrNull() !=
+          null;
+      expect(await flagged(), isTrue);
+      await _importer.commit(db, analyze('{"settings": {"rates": {"USD": 0.71}}}'));
+      expect(await flagged(), isFalse);
+      // A later file no longer overwrites the (now real) rates.
+      await _importer.commit(db, analyze('{"settings": {"rates": {"USD": 0.5}}}'));
+      final usd = await (db.select(db.currencies)..where((t) => t.code.equals('USD'))).getSingle();
+      expect(usd.rateToBase, 0.71);
+    });
+
+    test('imported rows are appended after the rows already there', () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      final seeded = await db.select(db.habits).get();
+      expect(seeded, isNotEmpty);
+      await _importer.commit(db, analyze('{"habits": ["Read Quran", "Walk 10k", "No sugar"]}'));
+      final all = await (db.select(db.habits)
+            ..orderBy([(t) => OrderingTerm.asc(t.sortOrder), (t) => OrderingTerm.asc(t.createdAt)]))
+          .get();
+      expect(all.map((h) => h.name).skip(seeded.length), ['Read Quran', 'Walk 10k', 'No sugar']);
+      expect(all.map((h) => h.sortOrder).toSet(), hasLength(all.length));
+    });
+
+    test('imported children keep their order under their parent', () async {
+      final db = await openInMemoryMadarDatabase();
+      addTearDown(db.close);
+      await _importer.commit(db, analyze('{"budget": [{"name": "Old", "amount": 1}]}'));
+      await _importer.commit(
+        db,
+        analyze('{"budget": [{"name": "Home", "children": [{"name": "A", "amount": 1}, {"name": "B", "amount": 2}]}]}'),
+      );
+      final byName = {for (final r in await db.select(db.budgetItems).get()) r.name: r};
+      expect(byName['Home']!.sortOrder, greaterThan(byName['Old']!.sortOrder));
+      expect(byName['A']!.sortOrder, lessThan(byName['B']!.sortOrder));
     });
   });
 }

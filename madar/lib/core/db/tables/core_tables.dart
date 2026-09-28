@@ -75,7 +75,7 @@ class Tasks extends Table with Entity, Ordered {
   TextColumn get window => textEnum<PrayerWindow>().withDefault(Constant(PrayerWindow.anytime.name))();
 
   /// Day the task belongs to; null = inbox / someday.
-  DateTimeColumn get date => dateTime().nullable()();
+  DateTimeColumn get date => dateTime().map(const CalendarDayConverter()).nullable()();
 
   /// Optional repeat rule, e.g. `{"every":"day"}` / `{"every":"week","weekdays":[5]}`.
   TextColumn get recurrence => text().map(const JsonMapConverter()).nullable()();

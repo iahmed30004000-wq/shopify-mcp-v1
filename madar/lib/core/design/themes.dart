@@ -154,7 +154,7 @@ abstract final class MadarPalettes {
     warning: Color(0xFFFFD166),
     danger: Color(0xFFFF6B8B),
     info: Color(0xFF8FB8FF),
-    nebulaA: Color(0xFF1FAF8F),
+    nebulaA: Color(0xFF137A63),
     nebulaB: Color(0xFF7B3FD6),
     starTint: Color(0xFFE8F4FF),
     dust: Color(0xFF8D93C9),
@@ -290,6 +290,9 @@ ThemeData buildMadarTheme(MadarThemeId id, {Color? customAccent, required bool a
     splashFactory: InkSparkle.splashFactory,
     extensions: [tokens],
     iconTheme: IconThemeData(color: tokens.textPrimary, size: 22),
+    // Material's tooltip long-press vibrates through HapticFeedback directly,
+    // bypassing the user's haptics setting and without a Madar sound.
+    tooltipTheme: const TooltipThemeData(enableFeedback: false),
     dividerTheme: DividerThemeData(color: tokens.glassBorder.withValues(alpha: 0.18), thickness: 0.6),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,

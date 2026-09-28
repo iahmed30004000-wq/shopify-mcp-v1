@@ -157,7 +157,9 @@ class _Label extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.only(bottom: Space.s),
-      child: Text(text, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: context.tokens.textTertiary)),
+      // Drawn straight on the cosmos: textSecondary keeps >= 5:1 over the
+      // brightest nebula (textTertiary fell to ~1:1 on Aurora).
+      child: Text(text, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: context.tokens.textSecondary)),
     );
   }
 }

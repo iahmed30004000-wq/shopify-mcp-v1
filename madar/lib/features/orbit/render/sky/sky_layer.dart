@@ -176,7 +176,7 @@ class _SkyLayerState extends State<SkyLayer> with SingleTickerProviderStateMixin
   }
 
   void _syncTicker() {
-    final run = _owns && widget.animate && AmbientMotion.enabled && !context.reducedMotion;
+    final run = _owns && widget.animate && context.ambientMotion;
     if (run) {
       _ticker ??= createTicker(_tick);
       if (!_ticker!.isActive) {

@@ -15,7 +15,7 @@ class HealthAlerts extends Table with Entity, Ordered {
 class Conditions extends Table with Entity, Ordered {
   TextColumn get name => text()();
   TextColumn get notes => text().nullable()();
-  DateTimeColumn get since => dateTime().nullable()();
+  DateTimeColumn get since => dateTime().map(const CalendarDayConverter()).nullable()();
   BoolColumn get active => boolean().withDefault(const Constant(true))();
 }
 
@@ -54,7 +54,7 @@ class Medications extends Table with Entity, Ordered {
 class MedCourses extends Table with Entity, Ordered {
   TextColumn get name => text()();
   TextColumn get medicationId => text().nullable()();
-  DateTimeColumn get startDate => dateTime()();
+  DateTimeColumn get startDate => dateTime().map(const CalendarDayConverter())();
   TextColumn get phases => text().map(const JsonListConverter()).withDefault(const Constant('[]'))();
   TextColumn get notes => text().nullable()();
   BoolColumn get active => boolean().withDefault(const Constant(true))();
@@ -95,7 +95,7 @@ class LabTests extends Table with Entity, Ordered {
 @DataClassName('LabReadingRow')
 class LabReadings extends Table with Entity {
   TextColumn get testId => text()();
-  DateTimeColumn get date => dateTime()();
+  DateTimeColumn get date => dateTime().map(const CalendarDayConverter())();
   RealColumn get value => real().nullable()();
 
   /// Qualitative results ("negative", "trace").

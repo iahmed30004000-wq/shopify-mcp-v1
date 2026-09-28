@@ -343,6 +343,7 @@ class StaggerItem extends StatelessWidget {
     this.from = EntranceFrom.start,
     this.distance = 18,
     this.blur = true,
+    this.fade = true,
     this.extraDelay = Duration.zero,
   });
 
@@ -355,6 +356,12 @@ class StaggerItem extends StatelessWidget {
 
   /// Blur 6 → 0 while entering. Turn off for very large or text-dense items.
   final bool blur;
+
+  /// Fade (and blur) in. Pass false for items that are or contain a
+  /// `GlassPanel`: opacity and blur are save layers, and a backdrop filter
+  /// inside one samples nothing – the glass would show the sky sharp and
+  /// snap to frosted at the end. Without fade the item only moves.
+  final bool fade;
   final Duration extraDelay;
 
   @override
@@ -367,6 +374,7 @@ class StaggerItem extends StatelessWidget {
       from: from,
       distance: distance,
       blur: blur,
+      fade: fade,
       extraDelay: extraDelay,
       child: child,
     );
@@ -380,6 +388,7 @@ class _EntranceTransition extends AnimatedWidget {
     required this.from,
     required this.distance,
     required this.blur,
+    required this.fade,
     required this.extraDelay,
     required this.child,
   }) : super(listenable: clock);
@@ -388,6 +397,7 @@ class _EntranceTransition extends AnimatedWidget {
   final EntranceFrom from;
   final double distance;
   final bool blur;
+  final bool fade;
   final Duration extraDelay;
   final Widget child;
 
@@ -409,18 +419,23 @@ class _EntranceTransition extends AnimatedWidget {
               blur: blur ? 6 : 0,
             );
     }
-    return EntranceFrameView(frame: frame, child: child);
+    return EntranceFrameView(frame: frame, fade: fade, child: child);
   }
 }
 
 /// Paints [child] in an [EntranceFrame]. The widget structure never changes
 /// between frames, so the child's state survives the entrance, and a settled
 /// frame costs nothing (no layers).
+///
+/// With [fade] false only the transform is applied (a TransformLayer, not a
+/// save layer), so backdrop filters inside keep sampling the real backdrop;
+/// the child is simply not painted while the frame is fully transparent.
 class EntranceFrameView extends StatelessWidget {
-  const EntranceFrameView({super.key, required this.frame, required this.child});
+  const EntranceFrameView({super.key, required this.frame, required this.child, this.fade = true});
 
   final EntranceFrame frame;
   final Widget child;
+  final bool fade;
 
   @override
   Widget build(BuildContext context) {
@@ -429,6 +444,13 @@ class EntranceFrameView extends StatelessWidget {
     final s = f.scale;
     // Column-major: scale, then translate.
     final matrix = Matrix4(s, 0, 0, 0, 0, s, 0, 0, 0, 0, 1, 0, f.offset.dx, f.offset.dy, 0, 1);
+    if (!fade) {
+      // Opacity 0 or 1 never creates a layer (0 skips painting).
+      return Opacity(
+        opacity: f.opacity > 0 ? 1 : 0,
+        child: Transform(transform: matrix, alignment: Alignment.center, child: child),
+      );
+    }
     return Opacity(
       opacity: f.opacity,
       child: Transform(
@@ -468,6 +490,7 @@ class StaggerIn extends StatelessWidget {
     this.from = EntranceFrom.start,
     this.distance = 18,
     this.blur = true,
+    this.fade = true,
     this.startIndex = 0,
     this.delay = Duration.zero,
     this.id,
@@ -482,6 +505,9 @@ class StaggerIn extends StatelessWidget {
   final EntranceFrom from;
   final double distance;
   final bool blur;
+
+  /// See [StaggerItem.fade] – false for children that are glass panels.
+  final bool fade;
 
   /// Index of the first child in an enclosing choreography.
   final int startIndex;
@@ -499,8 +525,15 @@ class StaggerIn extends StatelessWidget {
     var index = startIndex;
     Widget wrap(Widget child) {
       if (child is Spacer) return child;
-      StaggerItem item(Widget c) =>
-          StaggerItem(index: index++, from: from, distance: distance, blur: blur, extraDelay: extra, child: c);
+      StaggerItem item(Widget c) => StaggerItem(
+        index: index++,
+        from: from,
+        distance: distance,
+        blur: blur,
+        fade: fade,
+        extraDelay: extra,
+        child: c,
+      );
       if (child is Flexible) {
         return Flexible(key: child.key, flex: child.flex, fit: child.fit, child: item(child.child));
       }
@@ -536,6 +569,7 @@ class AnimatedReveal extends StatefulWidget {
     this.from = EntranceFrom.bottom,
     this.distance = 16,
     this.blur = true,
+    this.fade = true,
     this.spring,
     this.onRevealed,
   });
@@ -549,6 +583,9 @@ class AnimatedReveal extends StatefulWidget {
   final EntranceFrom from;
   final double distance;
   final bool blur;
+
+  /// See [StaggerItem.fade] – false when the child is a glass panel.
+  final bool fade;
 
   /// Defaults to [MadarMotion.gentle].
   final SpringDescription? spring;
@@ -623,7 +660,7 @@ class _AnimatedRevealState extends State<AnimatedReveal> with SingleTickerProvid
                     distance: widget.distance,
                     blur: widget.blur ? 6 : 0,
                   );
-            return EntranceFrameView(frame: frame, child: child!);
+            return EntranceFrameView(frame: frame, fade: widget.fade, child: child!);
           },
           child: widget.child,
         ),

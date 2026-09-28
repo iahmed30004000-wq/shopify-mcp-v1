@@ -67,9 +67,15 @@ Object rootCauseOf(Object error) {
 }
 
 /// Whether "start fresh" (delete all data) is offered for [error]: only when
-/// the existing file can never be opened again.
-bool canResetAfter(Object error) => switch (rootCauseOf(error)) {
-  DatabaseKeyException(problem: DatabaseKeyProblem.missing || DatabaseKeyProblem.wrongKey) => true,
+/// the existing file can never be opened again – the key is gone, wrong or
+/// damaged – or when secure storage stayed unavailable after at least one
+/// retry ([failedRetries]), e.g. its Keystore key was lost.
+bool canResetAfter(Object error, {int failedRetries = 0}) => switch (rootCauseOf(error)) {
+  DatabaseKeyException(
+    problem: DatabaseKeyProblem.missing || DatabaseKeyProblem.wrongKey || DatabaseKeyProblem.malformed,
+  ) =>
+    true,
+  DatabaseKeyException(problem: DatabaseKeyProblem.storageUnavailable) => failedRetries >= 1,
   _ => false,
 };
 
@@ -99,6 +105,10 @@ class _AppGateState extends ConsumerState<AppGate> {
   /// [maxWarmUp] so a failing shader never keeps the splash up.
   bool _warming = false;
   static const maxWarmUp = Duration(seconds: 4);
+
+  /// Retries that ended in an error again (reset when the unlock succeeds).
+  int _failedRetries = 0;
+  bool _retrying = false;
 
   @override
   void initState() {
@@ -130,12 +140,22 @@ class _AppGateState extends ConsumerState<AppGate> {
   }
 
   void _retry() {
+    _retrying = true;
     _startHold();
     ref.invalidate(databaseUnlockProvider);
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(databaseUnlockProvider, (_, next) {
+      if (next.isLoading) return;
+      if (next.hasValue) {
+        _failedRetries = 0;
+      } else if (next.hasError && _retrying) {
+        setState(() => _failedRetries++);
+      }
+      _retrying = false;
+    });
     final unlock = ref.watch(databaseUnlockProvider);
     final batterySaver = ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver));
     final holding = (_holding && !context.reducedMotion) || _warming;
@@ -150,7 +170,7 @@ class _AppGateState extends ConsumerState<AppGate> {
         key: const ValueKey('error'),
         error: unlock.error!,
         onRetry: _retry,
-        onReset: canResetAfter(unlock.error!)
+        onReset: canResetAfter(unlock.error!, failedRetries: _failedRetries)
             ? () async {
                 await ref.read(databaseResetProvider)();
                 _retry();

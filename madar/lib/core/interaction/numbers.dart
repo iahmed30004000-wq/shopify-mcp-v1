@@ -12,9 +12,9 @@ abstract final class LocalizedNumbers {
   static const int _persianZero = 0x06F0;
 
   /// Replaces Arabic-Indic / Persian digits with ASCII digits, `٫` with `.`,
-  /// `٬` with `,` and the unicode minus sign with `-`. Every other character is
-  /// kept, and the result has exactly the same length as [input] (callers rely
-  /// on indexes staying aligned).
+  /// `٬` and the Arabic comma `،` with `,` and the unicode minus sign with
+  /// `-`. Every other character is kept, and the result has exactly the same
+  /// length as [input] (callers rely on indexes staying aligned).
   static String normalizeDigits(String input) {
     if (input.isEmpty) return input;
     final out = StringBuffer();
@@ -30,6 +30,7 @@ abstract final class LocalizedNumbers {
     return switch (c) {
       0x066B => 0x2E, // ٫ Arabic decimal separator
       0x066C => 0x2C, // ٬ Arabic thousands separator
+      0x060C => 0x2C, // ، Arabic comma (typed as a decimal comma: "١٢،٥")
       0x2212 => 0x2D, // − minus sign
       0x2013 => 0x2D, // – en dash typed as minus
       _ => c,

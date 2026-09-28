@@ -229,18 +229,18 @@ Only the most important columns are listed; the full lists live in
 | lab range | `low`/`min`/`refLow`/`lower`/`minimum`/`الأدنى`, `high`/`max`/`refHigh`/`upper`/`الأعلى`, or `range`/`ref`/`reference`/`normal`/`normalRange`/`المعدل الطبيعي` as `"3.5-5"`, `"< 5.7"`, `"> 40"`, `[lo, hi]`, `{low, high}` |
 | lab unit / category | `unit`, `units`, `uom`, `وحدة`; `category`, `group`, `panel`, `فئة` |
 | reading value | `value`, `result`, `reading`, `val`, `level`, `amount`, `قيمة`, `النتيجة` (numbers → `value`, words such as "negative" → `valueText`) |
-| reading's test | nested, or `test`, `testId`, `testName`, `lab`, `analysis`, `marker`, `name`, `تحليل`, `فحص`; a missing test is created by name. Panels `{"date": …, "values": {"HbA1c": 5.4, "LDL": 120}}` fan out into one reading per test |
+| reading's test | nested, or `test`, `testId`, `testName`, `lab`, `analysis`, `marker`, `name`, `تحليل`, `فحص`; a missing test is created by name. Panels `{"date": …, "values": {"HbA1c": 5.4, "LDL": 120}}` fan out into one reading per test. A test's own `value` becomes a reading; day keys inside a test (`{"LDL": {"unit": "mg/dL", "2026-01-01": 120}}`) are readings too. A reading without any date is dated the file's export day (`exportedAt`), else today, and reported as an assumed date |
 | pain | `score`/`pain`/`level`/`value`/`intensity`/`severity`/`rating`/`شدة`/`درجة`; `locations`/`location`/`where`/`area`/`site`/`bodyPart`/`مكان`/`موضع`; `triggers`/`trigger`/`cause`/`reason`/`محفز`/`سبب` |
 | mood | `mood`/`feeling`/`مزاج` (1–5 or words: great/good/ok/bad/awful, ممتاز/جيد/عادي/سيء), `stress`/`توتر`/`ضغط`, `anxiety`/`قلق`, `energy`/`طاقة`, `sleep`/`sleepHours`/`نوم`, `caffeine`/`coffee`/`قهوة`, `factors`/`tags`/`عوامل` |
 | amount (money) | `amount`, `value`, `sum`, `total`, `price`, `cost`, `planned`, `limit`, `budget`, `مبلغ`, `قيمة`, `السعر` |
-| currency | `currency`, `cur`, `ccy`, `currencyCode`, `عملة` (or written in the amount: `"200 JOD"`, `"$12"`, `"١٢٫٥ د.أ"`, `"300 ج.م"`) |
+| currency | `currency`, `cur`, `ccy`, `currencyCode`, `عملة` (or written in the amount: `"200 JOD"`, `"$12"`, `"١٢٫٥ د.أ"`, `"300 ج.م"`, `"12 ل.د"`, `"5 د.ك"`); in free text only upper-case ISO codes count (`"try 5"`, `"Table 5"` name no currency); a value that names no currency is reported, never guessed; a wallet without one takes the currency written in its balance, or a group key that is exactly a currency (`{"USD": [...]}`) |
 | budget percent | `percent`, `pct`, `%`, `percentage`, `share`, `ratio`, `نسبة`, or an amount written `"50%"`; base `percentOf`/`of`/`base`/`من`: `parent`/`total` (default: parent for children, total for roots) |
 | budget parent | nested (`children`, `items`, `sub`, `subcategories`, `بنود`, `فرعية`) or `parent`, `parentId`, `parentName`, `group`, `under`, `الأب`, `تابع`, `ضمن` (id or name) |
 | budget period | `period`, `per`, `frequency`, `cycle`, `every`, `الفترة`, `دورة`: `weekly`/`week`/`أسبوعي`, `monthly`/`شهري`; also `weekly: true` or an amount such as `"5/week"`, `"5 per week"`, `"5 أسبوعيًا"` |
-| transaction | kind `type`/`kind`/`direction`/`نوع` (expense/income/transfer/adjustment, مصروف/دخل/تحويل/تسوية – without one: negative = expense, and in a signed ledger positive = income); wallet `wallet`/`walletId`/`account`/`from`/`محفظة`/`حساب`; category `category`/`budget`/`budgetItem`/`envelope`/`item`/`بند`/`فئة` (id or name; unknown ones become a tag); `toWallet`/`to`, `toAmount`; note `note`/`description`/`payee`/`merchant`/`البيان` |
+| transaction | kind `type`/`kind`/`direction`/`نوع` (expense/income/transfer/adjustment, مصروف/دخل/تحويل/تسوية – without one: negative = expense, and in a signed ledger positive = income; adjustments keep their sign, every other kind is stored unsigned); wallet `wallet`/`walletId`/`account`/`from`/`محفظة`/`حساب`; category `category`/`budget`/`budgetItem`/`envelope`/`item`/`بند`/`فئة` (id or name; unknown ones become a tag); `toWallet`/`to`, `toAmount`; note `note`/`description`/`payee`/`merchant`/`البيان` |
 | wallet | `currency`; opening `opening`/`openingBalance`/`initial`/`start`/`رصيد افتتاحي`; or `balance`/`current`/`رصيد` = balance **after** the file's transactions (opening = balance − their net) |
 | jar | `target`/`goal`/`targetAmount`/`هدف`; `saved`/`current`/`balance`/`progress`/`المدخر` (becomes an "Opening balance" deposit when there are no deposits); `deadline`/`due`/`by` |
-| debt | person `person`/`name`/`who`/`with`/`شخص`; direction `direction`/`type`/`side`: *i owe*/owe/borrowed/علي/اقترضت, *owed to me*/lent/لي/أقرضت; `settled`/`paid` or `settledAt`; `dueDate`/`due` |
+| debt | person `person`/`name`/`who`/`with`/`شخص`; direction `direction`/`type`/`side`: *i owe*/owe/borrowed/علي/اقترضت, *owed to me*/lent/لي/أقرضت (without one: *i owe*, except in a signed debt list – any amount negative – where negative = I owe and positive = owed to me; either way reported as an assumed value); amounts are stored unsigned; `settled`/`paid` or `settledAt`; `dueDate`/`due` |
 | obligation | `frequency`/`period`/`recurrence`/`repeat`/`تكرار` (weekly/monthly/yearly); `nextDue`/`due`/`dueDate`/`next`, or `dayOfMonth`/`day`/`يوم` (next occurrence); `interval` |
 | person | `relation`/`relationship`/`role`/`صلة القرابة`; rhythm `rhythmDays`/`rhythm`/`every`/`everyDays`/`contactEvery`/`frequency`/`التواصل كل` (days, or daily/weekly/biweekly/monthly/yearly); `lastContact`/`آخر تواصل`; `phone`/`mobile`/`هاتف`/`جوال`; `birthday`/`dob`/`تاريخ الميلاد` |
 | contact log | `channel`/`type`/`via`/`how`/`method`: call/visit/message (اتصال/زيارة/رسالة/واتساب) |
@@ -256,6 +256,11 @@ Only the most important columns are listed; the full lists live in
 | colour / icon | `color`/`colour`/`لون` (ARGB int or `#RRGGBB`), `icon`/`emoji` |
 
 ## 6. Value formats
+
+**Calendar days** – day columns (a task's day, transaction, lab reading,
+jar deposit and debt payment dates, due dates, deadlines, birthdays, trip
+dates, expiries …) keep only the day and are stored zone-free (12:00 UTC of
+that day), so they never move when the device changes time zone.
 
 **Dates** – ISO 8601 (`2026-01-10`, `2026-01-10T08:30`, `…Z` → local time),
 epoch milliseconds or seconds (numbers or digit strings), `yyyyMMdd`,
@@ -319,6 +324,18 @@ set yet).
 
 Both give a monthly total of 350.000 with *Proteins* = 50 % of *Home food*.
 
+Category names may collide with other sections (`ادخار`/`Savings`, `فواتير`/
+`Bills`, `علاج`, `سفر` …): a budget map stays a budget as long as it has one
+plain category key, or its colliding keys hold budget lines
+(`{"Bills": {"amount": 50}}`). Only a budget key whose object values are all
+other sections (`{"budget": {"wallets": [...], "transactions": [...]}}`) is
+read as a container. Percent checks allow for binary rounding: three thirds
+(`100 / 3` each) are exactly 100 %.
+
+Kanban boards keyed by country or business take the key as the board's name
+and country, whether the value is a list of cards
+(`{"work": {"Jordan": [cards…]}}`) or an object with columns.
+
 ## 8. Currencies and wallets
 
 * Amounts without a currency use the file's `baseCurrency` (settings keys
@@ -326,9 +343,14 @@ Both give a monthly total of 350.000 with *Proteins* = 50 % of *Home food*.
   `العملة الأساسية`) or else the database's base currency.
 * Rates: `"rates"` / `"exchangeRates"` / `"currencies"` as
   `{"USD": 0.709}` or `[{"code": "USD", "rate": 0.709}]` (1 unit = rate
-  base units). Missing currencies are added with the file's rate, or with 1
-  and a *missing rate* warning. The file's rates replace the seeded
-  placeholder rates only while the user has never set a rate.
+  units of the **file's** base). Missing currencies are added with the
+  file's rate, or with 1 and a *missing rate* warning. When the file's base
+  differs from the database's, its rates are rebased with the rate of the
+  file's base (the user's stored rate, or `1 / rates[database base]` from the
+  file); without one they get 1 and a *missing rate* warning each (the
+  file's base included). The file's rates replace the seeded placeholder
+  rates only while the user has never set a rate – after that the rates are
+  no longer marked as placeholders.
 * Nothing is ever converted silently: a transaction in another currency than
   its wallet goes to a companion wallet "‹wallet› · USD"; transactions without
   a wallet go to a "Main wallet" per currency (names are localised).
@@ -339,6 +361,9 @@ Both give a monthly total of 350.000 with *Proteins* = 50 % of *Home food*.
   gets the id `imp.<table>.<source id>` – e.g. `imp.medications.m1`. A second
   record with the same source id in the same table gets a `~2` suffix (and a
   warning).
+* Imported rows of ordered tables (habits, tasks, medications, budget
+  items …) are appended **after** the rows already there, keeping their own
+  order (per parent).
 * A record without one gets `imp.<table>.<fingerprint>`: a SHA-256 of the
   table, its parent and its **name** for things (medications, tests, people,
   budget items …), or of its **content** for log entries – stable across
