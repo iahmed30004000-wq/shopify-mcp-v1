@@ -71,6 +71,11 @@ class Repositories {
       waterLogs = EntityRepository(db, db.waterLogs),
       customModules = EntityRepository(db, db.customModules),
       customEntries = EntityRepository(db, db.customEntries),
+      quranBookmarks = EntityRepository(db, db.quranBookmarks),
+      quranSessions = EntityRepository(db, db.quranSessions),
+      wirdPlans = EntityRepository(db, db.wirdPlans),
+      hifzItems = EntityRepository(db, db.hifzItems),
+      hifzReviews = EntityRepository(db, db.hifzReviews),
       keyValues = KeyValueRepository(db),
       activity = ActivityRepository(db),
       currencies = CurrencyRepository(db);
@@ -135,6 +140,13 @@ class Repositories {
   final EntityRepository<$CustomModulesTable, CustomModuleRow> customModules;
   final EntityRepository<$CustomEntriesTable, CustomEntryRow> customEntries;
 
+  // Quran, wird, Hifz
+  final EntityRepository<$QuranBookmarksTable, QuranBookmarkRow> quranBookmarks;
+  final EntityRepository<$QuranSessionsTable, QuranSessionRow> quranSessions;
+  final EntityRepository<$WirdPlansTable, WirdPlanRow> wirdPlans;
+  final EntityRepository<$HifzItemsTable, HifzItemRow> hifzItems;
+  final EntityRepository<$HifzReviewsTable, HifzReviewRow> hifzReviews;
+
   // Special-purpose
   final KeyValueRepository keyValues;
   final ActivityRepository activity;
@@ -194,6 +206,11 @@ class Repositories {
       waterLogs,
       customModules,
       customEntries,
+      quranBookmarks,
+      quranSessions,
+      wirdPlans,
+      hifzItems,
+      hifzReviews,
     ])
       r.tableName: r,
   };

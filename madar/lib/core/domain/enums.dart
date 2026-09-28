@@ -87,3 +87,12 @@ enum PlanetArchetype {
   ice, // extra styles for user-added planets
   desert,
 }
+
+/// How a Quran session was spent (feeds the daily wird and the Faith planet).
+enum QuranSessionMode { read, listen, review }
+
+/// Unit a daily wird is measured in.
+enum WirdUnit { pages, juz, hizb, ayat }
+
+/// What a Hifz item holds: a Quran ayah range, a hadith, or free text.
+enum HifzKind { ayat, hadith, custom }

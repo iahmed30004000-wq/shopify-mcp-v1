@@ -38,6 +38,8 @@ dependencies:
   geolocator: ^14.0.1
   permission_handler: ^12.0.3 # 13.x needs compileSdk 37, above AGP 9.1's supported 36
   hijri: ^3.0.1
+  just_audio: ^0.10.6
+  audio_service: ^0.18.19
 
 dev_dependencies:
   flutter_test:
@@ -119,3 +121,6 @@ flutter:
     - assets/adhkar/
     - assets/geo/
     - assets/audio/
+    # Phase 3 content (openly licensed Quran text / tajweed data, hadith).
+    - assets/quran/
+    - assets/hadith/

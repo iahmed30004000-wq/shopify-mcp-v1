@@ -581,5 +581,61 @@ Future<void> populateAllTables(MadarDatabase db) async {
       ),
       CustomEntriesCompanion.insert(moduleId: 'module-1'),
     ]);
+    // Schema v2: Quran, wird, Hifz.
+    b.insertAll(db.quranBookmarks, [
+      QuranBookmarksCompanion.insert(surah: 2, ayah: 255, label: const Value('آية الكرسي'), note: const Value('note'), color: const Value(0xFFD4AF37)),
+      QuranBookmarksCompanion.insert(surah: 1, ayah: 1),
+    ]);
+    b.insertAll(db.quranSessions, [
+      QuranSessionsCompanion.insert(
+        day: DateTime(2026, 9, 1),
+        mode: const Value(QuranSessionMode.listen),
+        fromSurah: 2,
+        fromAyah: 1,
+        toSurah: 2,
+        toAyah: 141,
+        ayahCount: const Value(141),
+        pages: const Value(20.5),
+        seconds: const Value(3600),
+        planId: const Value('plan-1'),
+      ),
+      QuranSessionsCompanion.insert(day: DateTime(2026, 9, 2), fromSurah: 1, fromAyah: 1, toSurah: 1, toAyah: 7),
+    ]);
+    b.insertAll(db.wirdPlans, [
+      WirdPlansCompanion.insert(
+        id: const Value('plan-1'),
+        name: 'ختمة شهرية',
+        unit: const Value(WirdUnit.juz),
+        amountPerDay: 1,
+        startSurah: const Value(2),
+        startAyah: const Value(142),
+        startDate: DateTime(2026, 9, 1),
+        targetDate: Value(DateTime(2026, 9, 30)),
+        window: const Value(PrayerWindow.fajr),
+        active: const Value(false),
+      ),
+      WirdPlansCompanion.insert(name: 'sparse', amountPerDay: 2, startDate: DateTime(2026, 9, 1)),
+    ]);
+    b.insertAll(db.hifzItems, [
+      HifzItemsCompanion.insert(
+        id: const Value('hifz-1'),
+        kind: const Value(HifzKind.hadith),
+        title: const Value('إنما الأعمال بالنيات'),
+        body: const Value('text'),
+        source: const Value('Bukhari 1'),
+        easeFactor: const Value(2.36),
+        intervalDays: const Value(6),
+        repetitions: const Value(2),
+        lapses: const Value(1),
+        due: Value(DateTime(2026, 9, 7)),
+        lastReviewedAt: Value(tLocal),
+        suspended: const Value(true),
+      ),
+      HifzItemsCompanion.insert(surah: const Value(112), ayahFrom: const Value(1), ayahTo: const Value(4)),
+    ]);
+    b.insertAll(db.hifzReviews, [
+      HifzReviewsCompanion.insert(itemId: 'hifz-1', at: tLocal, grade: 4, intervalBefore: 1, intervalAfter: 6, easeAfter: 2.36),
+      HifzReviewsCompanion.insert(itemId: 'hifz-1', at: tLocal, grade: 0, intervalBefore: 6, intervalAfter: 1, easeAfter: 2.16),
+    ]);
   });
 }

@@ -4,6 +4,7 @@ import 'indexes.dart';
 import 'seed/seeder.dart';
 import 'tables/converters.dart';
 import 'tables/core_tables.dart';
+import 'tables/faith_tables.dart';
 import 'tables/health_tables.dart';
 import 'tables/life_tables.dart';
 import 'tables/money_tables.dart';
@@ -25,6 +26,7 @@ part 'database.g.dart';
   TripItems, PackingTemplates, TravelDocuments, LearningGoals, GoalLogs,
   Exercises, WorkoutLogs, AvoidItems, FastingSessions, WaterLogs,
   CustomModules, CustomEntries,
+  QuranBookmarks, QuranSessions, WirdPlans, HifzItems, HifzReviews,
 ])
 class MadarDatabase extends _$MadarDatabase {
   /// Wraps an executor. Pass [seed] to seed the generic defaults (planets,
@@ -37,12 +39,22 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (m) async {
           await m.createAll();
+        },
+        onUpgrade: (m, from, to) async {
+          // v2: Quran bookmarks + sessions, daily wird plans, Hifz.
+          if (from < 2) {
+            await m.createTable(quranBookmarks);
+            await m.createTable(quranSessions);
+            await m.createTable(wirdPlans);
+            await m.createTable(hifzItems);
+            await m.createTable(hifzReviews);
+          }
         },
         beforeOpen: (details) async {
           await customStatement('PRAGMA foreign_keys = ON');

@@ -28,5 +28,8 @@ const madarIndexStatements = <String>[
   'CREATE INDEX IF NOT EXISTS idx_goal_logs_goal_at ON goal_logs (goal_id, "at")',
   'CREATE INDEX IF NOT EXISTS idx_workout_logs_at ON workout_logs ("at")',
   'CREATE INDEX IF NOT EXISTS idx_water_logs_at ON water_logs ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_quran_sessions_day ON quran_sessions (day)',
+  'CREATE INDEX IF NOT EXISTS idx_hifz_items_due ON hifz_items (due)',
+  'CREATE INDEX IF NOT EXISTS idx_hifz_reviews_item_at ON hifz_reviews (item_id, "at")',
   'CREATE INDEX IF NOT EXISTS idx_custom_entries_module_at ON custom_entries (module_id, "at")',
 ];
