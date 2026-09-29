@@ -183,7 +183,10 @@ abstract final class NotificationNamespaces {
   /// The daily wird's reminders (after the plan's prayer).
   static const wird = NotificationNamespace('wird', 140000, 140999);
 
-  static const all = [adhan, adhkar, meds, reminders, wird];
+  /// Health besides doses: appointments, refills, the worry window.
+  static const health = NotificationNamespace('health', 150000, 150999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird, health];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {
