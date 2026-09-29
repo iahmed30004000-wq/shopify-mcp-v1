@@ -1,0 +1,311 @@
+{
+  "healthHubTodayTitle": {
+    "ar": "عنايتك اليوم",
+    "en": "Today's care",
+    "description": "Health page: section of today's doses, wellbeing and pain"
+  },
+  "healthHubDoctorTitle": {
+    "ar": "مع طبيبك",
+    "en": "With your doctor",
+    "description": "Health page: section of appointments, questions and lab results"
+  },
+  "healthHubRecordAction": {
+    "ar": "السجل",
+    "en": "Record",
+    "description": "Health page: action opening the whole medical record"
+  },
+  "healthHubToolsTitle": {
+    "ar": "أدوات الصحة",
+    "en": "Health tools",
+    "description": "Health page: section of links to the health screens"
+  },
+  "healthHubPainTitle": {
+    "ar": "الألم الآن",
+    "en": "Pain right now",
+    "description": "Health page: quick pain log card title"
+  },
+  "healthHubPainNone": {
+    "ar": "لا ألم مسجّل اليوم",
+    "en": "No pain logged today",
+    "description": "Pain card: nothing logged today"
+  },
+  "healthHubPainToday": {
+    "ar": "{count, plural, =1{تسجيل واحد اليوم: {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}",
+    "en": "{count, plural, =1{1 entry today: {max}} other{{n} entries today, highest {max}}}",
+    "description": "Pain card: today's entries and the highest score (numbers only)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubPainWhere": {
+    "ar": "تفاصيل",
+    "en": "Details",
+    "description": "Pain card: button opening the full pain log (body map, triggers, notes)"
+  },
+  "healthHubPainWhereHint": {
+    "ar": "تسجيل كامل: موضع الألم على الجسم والمحفّزات والملاحظات",
+    "en": "Full log: where it hurts on the body, triggers and notes",
+    "description": "Pain card: screen-reader label of the details button"
+  },
+  "healthHubPainLow": {
+    "ar": "لا ألم",
+    "en": "No pain",
+    "description": "Pain card: label under score 0"
+  },
+  "healthHubPainHigh": {
+    "ar": "أشدّ ألم",
+    "en": "Worst pain",
+    "description": "Pain card: label under score 10"
+  },
+  "healthHubPainLogScore": {
+    "ar": "سجّل ألمًا بدرجة {score} من {max}",
+    "en": "Log pain {score} of {max}",
+    "description": "Pain card: screen-reader label of one score bead",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubQuestionsTitle": {
+    "ar": "أسئلة لطبيبك",
+    "en": "Questions for your doctor",
+    "description": "Health page: open questions card title"
+  },
+  "healthHubQuestionsCount": {
+    "ar": "{count, plural, =1{سؤال واحد بانتظار الإجابة} =2{سؤالان بانتظار الإجابة} few{{n} أسئلة بانتظار الإجابة} many{{n} سؤالًا بانتظار الإجابة} other{{n} سؤال بانتظار الإجابة}}",
+    "en": "{count, plural, =1{1 open question} other{{n} open questions}}",
+    "description": "Questions card: how many are still open",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubQuestionFor": {
+    "ar": "لموعد {title}",
+    "en": "For {title}",
+    "description": "Questions card: the appointment a question is for",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubToolMeds": {
+    "ar": "الأدوية",
+    "en": "Medications",
+    "description": "Health tool: medications & supplements"
+  },
+  "healthHubToolMedsHint": {
+    "ar": "الجرعات والدورات وقواعد التوقيت",
+    "en": "Doses, courses and timing rules",
+    "description": "Health tool hint: medications"
+  },
+  "healthHubToolLabs": {
+    "ar": "التحاليل",
+    "en": "Labs",
+    "description": "Health tool: lab results (the record)"
+  },
+  "healthHubToolLabsHint": {
+    "ar": "النتائج ومساراتها ومداك المرجعي",
+    "en": "Results, trends and your reference ranges",
+    "description": "Health tool hint: labs"
+  },
+  "healthHubToolAppointments": {
+    "ar": "المواعيد",
+    "en": "Appointments",
+    "description": "Health tool: appointments"
+  },
+  "healthHubToolAppointmentsHint": {
+    "ar": "المواعيد القادمة والسابقة وأسئلتها",
+    "en": "Upcoming and past appointments and their questions",
+    "description": "Health tool hint: appointments"
+  },
+  "healthHubToolWellbeing": {
+    "ar": "العافية",
+    "en": "Wellbeing",
+    "description": "Health tool: wellbeing"
+  },
+  "healthHubToolWellbeingHint": {
+    "ar": "المزاج والألم والعادات والهموم",
+    "en": "Mood, pain, habits and worries",
+    "description": "Health tool hint: wellbeing"
+  },
+  "healthHubToolBreathe": {
+    "ar": "تنفّس",
+    "en": "Breathe",
+    "description": "Health tool: guided breathing"
+  },
+  "healthHubToolBreatheHint": {
+    "ar": "تنفّس موجَّه بإيقاع هادئ",
+    "en": "Guided breathing at a calm pace",
+    "description": "Health tool hint: breathing"
+  },
+  "healthHubToolReport": {
+    "ar": "ملخّص للطبيب",
+    "en": "Doctor summary",
+    "description": "Health tool: the doctor report (PDF)"
+  },
+  "healthHubToolReportHint": {
+    "ar": "ملف PDF تطبعه أو تشاركه",
+    "en": "A PDF to print or share",
+    "description": "Health tool hint: doctor report"
+  },
+  "healthHubSettingsSection": {
+    "ar": "الصحة",
+    "en": "Health",
+    "description": "Settings section: health"
+  },
+  "healthHubSettingsSectionHint": {
+    "ar": "الأدوية والمواعيد والعافية، وكلها على جهازك",
+    "en": "Medications, appointments and wellbeing – all on your device",
+    "description": "Settings section hint: health"
+  },
+  "healthHubSettingsTitle": {
+    "ar": "إعدادات الصحة",
+    "en": "Health settings",
+    "description": "Settings › Health page title and entry"
+  },
+  "healthHubSettingsRemindersOn": {
+    "ar": "{count, plural, =0{تذكيرات الصحة متوقفة} =1{تذكير واحد مفعّل} =2{تذكيران مفعّلان} few{{n} تذكيرات مفعّلة} many{{n} تذكيرًا مفعّلًا} other{{n} تذكير مفعّل}}",
+    "en": "{count, plural, =0{Health reminders off} =1{1 reminder on} other{{n} reminders on}}",
+    "description": "Settings entry: how many health reminders are on (doses, appointments, worry window)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubSettingsEntrySummary": {
+    "ar": "{reminders}، والطوارئ {number}",
+    "en": "{reminders} – emergency {number}",
+    "description": "Settings entry subtitle: reminders on and the emergency number",
+    "placeholders": {
+      "reminders": {
+        "type": "String"
+      },
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubSettingsRecordSection": {
+    "ar": "المواعيد والتحاليل",
+    "en": "Appointments & labs",
+    "description": "Settings › Health: section of appointment reminders and lab flags"
+  },
+  "healthHubSettingsMarginHint": {
+    "ar": "جزء من عرض المدى الذي أدخلته لكل تحليل؛ النتيجة ضمنه قرب أحد الحدّين تُعلَّم «حدّية».",
+    "en": "A share of the range you entered for each test; a result within it next to a limit is marked “borderline”.",
+    "description": "Settings › Health: what the borderline margin means (no advice)"
+  },
+  "healthHubSettingsReportSection": {
+    "ar": "ملخّص الطبيب",
+    "en": "Doctor summary",
+    "description": "Settings › Health: section of the PDF report defaults"
+  },
+  "healthHubSettingsReportPeriod": {
+    "ar": "الفترة المعتادة",
+    "en": "Usual period",
+    "description": "Settings › Health: the report's default look-back period"
+  },
+  "healthHubSettingsReportSections": {
+    "ar": "الأقسام المضمّنة",
+    "en": "Sections included",
+    "description": "Settings › Health: the report's default sections"
+  },
+  "healthHubSettingsReportSectionsSome": {
+    "ar": "{n} من {total}",
+    "en": "{n} of {total}",
+    "description": "Settings › Health: some report sections selected",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubSettingsReportSectionsAll": {
+    "ar": "كل الأقسام",
+    "en": "All sections",
+    "description": "Settings › Health: every report section selected"
+  },
+  "healthHubSettingsReportNameNone": {
+    "ar": "لا يُحفظ اسم، يُكتب عند كل تقرير",
+    "en": "No name kept – typed for each report",
+    "description": "Settings › Health: no name remembered for the report"
+  },
+  "healthHubSettingsReportNameKept": {
+    "ar": "{name}، على هذا الجهاز فقط",
+    "en": "{name} – on this device only",
+    "description": "Settings › Health: the remembered report name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubSettingsReportNameHint": {
+    "ar": "اتركه فارغًا كي لا يُحفظ أي اسم",
+    "en": "Leave it empty to keep no name",
+    "description": "Settings › Health: hint of the report name field"
+  },
+  "healthHubSettingsEmergencyHint": {
+    "ar": "{number}، ويظهر في رسالة الدعم حين يتكرّر المزاج المنخفض",
+    "en": "{number} – shown in the support note when low moods repeat",
+    "description": "Settings › Health: the emergency number and where it appears",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "healthHubSettingsDenied": {
+    "ar": "إشعارات مَدار متوقفة في إعدادات الهاتف، فلن تصل التذكيرات.",
+    "en": "Madar's notifications are off in the phone's settings, so reminders won't arrive.",
+    "description": "Settings › Health: notification permission refused"
+  },
+  "healthHubSettingsPrivacy": {
+    "ar": "كل ما في الصحة يبقى على هذا الجهاز مشفّرًا. مَدار يسجّل ويعرض فقط؛ لا يشخّص ولا ينصح بعلاج.",
+    "en": "Everything in Health stays on this device, encrypted. Madar records and shows – it never diagnoses or advises treatment.",
+    "description": "Settings › Health: privacy and tracking-only note"
+  },
+  "healthHubSettingsOff": {
+    "ar": "متوقفة",
+    "en": "Off",
+    "description": "Settings › Health: appointment reminders are off"
+  },
+  "healthHubSettingsWorrySummary": {
+    "ar": "يوميًا عند {time}، لمدة {length}",
+    "en": "Daily at {time}, for {length}",
+    "description": "Settings › Health: the worry window's time and length (no middle dot: it reads as a zero next to Arabic digits)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "length": {
+        "type": "String"
+      }
+    }
+  }
+}

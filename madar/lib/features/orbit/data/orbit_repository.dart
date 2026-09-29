@@ -19,6 +19,9 @@ import '../domain/prayer_schedule.dart';
 import '../domain/scene_snapshot.dart';
 import '../domain/score_sources.dart';
 
+/// Plans the Health world's dose slots (see [OrbitRepository.doseSlots]).
+typedef DoseSlotSource = Future<List<DoseIn>> Function({required DateTime from, required DateTime now});
+
 /// Reads everything the Astrolabe Orbit shows from the real tables: the
 /// planet list, the inputs of the balance engine, the moons, the shader
 /// extras and the prayer state.
@@ -27,10 +30,16 @@ import '../domain/score_sources.dart';
 /// tables (logs, transactions, activity) are read through time windows or
 /// SQL aggregates; small ones (people, boards, trips …) are read whole.
 class OrbitRepository {
-  OrbitRepository(this.repos, {DateTime Function()? clock}) : _clock = clock ?? DateTime.now;
+  OrbitRepository(this.repos, {DateTime Function()? clock, this.doseSlots}) : _clock = clock ?? DateTime.now;
 
   final Repositories repos;
   final DateTime Function() _clock;
+
+  /// The Health world's dose slots from [from] (start of the day two days
+  /// ago) up to [now], as the medication tracker plans them (courses on
+  /// their own days, titration, anchors, timing rules, snoozes); the app
+  /// installs it. Null: every `HH:mm` of every active medication, every day.
+  final DoseSlotSource? doseSlots;
 
   MadarDatabase get db => repos.db;
 
@@ -679,8 +688,11 @@ class _Gatherer {
   /// last three days, up to now, not before the medication existed) matched
   /// against the dose log. A slot is handled when a log for it says taken or
   /// skipped: first by its exact `scheduledAt`, else by a `takenAt` within
-  /// three hours of the slot.
+  /// three hours of the slot. The app plans them with the medication
+  /// tracker instead ([OrbitRepository.doseSlots]).
   Future<List<DoseIn>> _doses() async {
+    final source = repo.doseSlots;
+    if (source != null) return source(from: _day(-2), now: now);
     final meds = await repo.repos.medications.getAll(where: (m) => m.active.equals(true));
     final withTimes = meds.where((m) => m.times.isNotEmpty).toList();
     if (withTimes.isEmpty) return const [];

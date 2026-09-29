@@ -22,10 +22,21 @@ void madarNotificationBackgroundTap(NotificationResponse response) {}
 ///   audio usage are exactly the [NotificationChannelSpec]'s.
 /// * On other platforms (desktop tests) every call is a harmless no-op.
 class FlutterLocalNotificationsPlatform implements NotificationPlatform {
-  FlutterLocalNotificationsPlatform({FlutterLocalNotificationsPlugin? plugin, this.defaultIcon = 'ic_stat_madar'})
-    : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlatform({
+    FlutterLocalNotificationsPlugin? plugin,
+    this.defaultIcon = 'ic_stat_madar',
+    this.backgroundHandler = madarNotificationBackgroundTap,
+  }) : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
 
   final FlutterLocalNotificationsPlugin _plugin;
+
+  /// Runs, in a background isolate, the action buttons that do not open the
+  /// app (`NotificationActionSpec.opensApp == false`). Must be a top-level
+  /// or static function annotated `@pragma('vm:entry-point')`; one per app
+  /// (the plugin keeps a single callback), so an app whose features record
+  /// answers in the background passes an entry point that dispatches to
+  /// them (e.g. the medication tracker's `medsNotificationBackgroundTap`).
+  final DidReceiveBackgroundNotificationResponseCallback backgroundHandler;
 
   /// Drawable resource of the status-bar icon
   /// (`android/app/src/main/res/drawable/ic_stat_madar.xml`).
@@ -45,7 +56,7 @@ class FlutterLocalNotificationsPlatform implements NotificationPlatform {
     await _plugin.initialize(
       settings: InitializationSettings(android: AndroidInitializationSettings(defaultIcon)),
       onDidReceiveNotificationResponse: (r) => onTap(_raw(r, fromLaunch: false)),
-      onDidReceiveBackgroundNotificationResponse: madarNotificationBackgroundTap,
+      onDidReceiveBackgroundNotificationResponse: backgroundHandler,
     );
     _ready = true;
   }
