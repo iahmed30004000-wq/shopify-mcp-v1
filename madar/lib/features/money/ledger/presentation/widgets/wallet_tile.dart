@@ -43,7 +43,7 @@ class WalletTileBody extends StatelessWidget {
     final caption = [l.walletKind(wallet.kind), LedgerMoneyFormat.isolate(currencyName)].join(' · ');
     return LayoutBuilder(
       builder: (context, constraints) {
-        final maxAmountWidth = constraints.maxWidth.isFinite ? constraints.maxWidth * 0.46 : 200.0;
+        final maxAmountWidth = constraints.maxWidth.isFinite ? constraints.maxWidth * 0.44 : 200.0;
         return Row(
           children: [
             LedgerMedallion(icon: LedgerStyle.walletIcon(wallet), color: color, size: dense ? 36 : 44),
@@ -55,7 +55,7 @@ class WalletTileBody extends StatelessWidget {
                 children: [
                   Text(
                     wallet.name,
-                    maxLines: 1,
+                    maxLines: dense ? 1 : 2,
                     overflow: TextOverflow.ellipsis,
                     textDirection: BidiIsolate.directionOf(wallet.name),
                     textAlign: TextAlign.start,

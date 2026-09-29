@@ -247,7 +247,10 @@ class GoalPaceCard extends StatelessWidget {
         return texts.weekly(u, perDay, needed: needed);
       }
 
-      final actualCaption = [?weekly(s.actualPerDay), l.growthActualWindow(texts.days(s.paceWindow))].join(l.growthSep);
+      final actualCaption = [
+        ?weekly(s.actualPerDay),
+        l.growthActualWindow(GrowthTexts.keepTogether(texts.days(s.paceWindow))),
+      ].join(l.growthSep);
       final deadline = s.deadline;
       if (deadline == null) {
         children.add(
@@ -268,7 +271,7 @@ class GoalPaceCard extends StatelessWidget {
             ? l.growthOverdueBy(texts.days(s.daysOverdue))
             : [
                 ?weekly(s.neededPerDay ?? 0, needed: true),
-                l.growthNeededUntil(texts.date(deadline, today: today)),
+                l.growthNeededUntil(GrowthTexts.keepTogether(texts.date(deadline, today: today))),
               ].join(l.growthSep);
         children
           ..add(

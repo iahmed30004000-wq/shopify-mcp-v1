@@ -833,7 +833,7 @@
     "description": "Label"
   },
   "ledgerBaseHint": {
-    "ar": "تُعرض بها كل المجاميع والرسوم",
+    "ar": "تُعرض بها كل المجاميع والرسوم البيانية",
     "en": "Every total and chart is shown in it",
     "description": "Base currency explanation"
   },

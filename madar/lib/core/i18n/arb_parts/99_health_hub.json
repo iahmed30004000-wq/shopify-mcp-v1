@@ -232,19 +232,6 @@
     "en": "Sections included",
     "description": "Settings › Health: the report's default sections"
   },
-  "healthHubSettingsReportSectionsSome": {
-    "ar": "{n} من {total}",
-    "en": "{n} of {total}",
-    "description": "Settings › Health: some report sections selected",
-    "placeholders": {
-      "n": {
-        "type": "String"
-      },
-      "total": {
-        "type": "String"
-      }
-    }
-  },
   "healthHubSettingsReportSectionsAll": {
     "ar": "كل الأقسام",
     "en": "All sections",

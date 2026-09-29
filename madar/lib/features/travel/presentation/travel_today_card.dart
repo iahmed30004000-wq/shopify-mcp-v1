@@ -80,8 +80,13 @@ class TravelTodayCard extends ConsumerWidget {
     } else {
       final focus = overview.focus;
       final today = TravelDates.day(now);
-      final attention = overview.attention(today).take(maxDocuments).toList();
+      final allAttention = overview.attention(today);
+      final attention = allAttention.take(maxDocuments).toList();
       final warnings = focus == null ? const [] : overview.warningsFor(focus.id);
+      // While a trip is under way, the next dated one still counts down.
+      final next = focus?.phase == TripPhase.current
+          ? overview.upcoming.where((u) => u.phase == TripPhase.upcoming).firstOrNull
+          : null;
       body = Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -148,6 +153,18 @@ class TravelTodayCard extends ConsumerWidget {
                 ],
               ),
             ),
+          if (next != null) ...[
+            const SizedBox(height: Space.s),
+            MadarPressable(
+              onTap: () => _openTrip(context, next.id),
+              sfx: null,
+              semanticLabel: l.travelOpenTrip(next.displayName(lang)),
+              child: TravelMetaLine(
+                icon: Icons.flight_takeoff_rounded,
+                text: l.travelCardNext(tx.name(next.displayName(lang)), tx.countdown(next.countdown)),
+              ),
+            ),
+          ],
           if (warnings.isNotEmpty) ...[
             const SizedBox(height: Space.s),
             TravelMetaLine(
@@ -161,6 +178,11 @@ class TravelTodayCard extends ConsumerWidget {
             const SizedBox(height: Space.s),
             Container(height: 1, color: t.glassBorder.withValues(alpha: 0.5)),
             const SizedBox(height: Space.s),
+            if (allAttention.length > attention.length)
+              Text(
+                l.travelCardDocsAttention(allAttention.length, tx.n(allAttention.length)),
+                style: text.labelMedium!.copyWith(color: t.textSecondary),
+              ),
             for (final (d, e) in attention)
               Padding(
                 padding: const EdgeInsetsDirectional.only(top: Space.xs),

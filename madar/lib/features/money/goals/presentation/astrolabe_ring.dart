@@ -173,7 +173,8 @@ class AstrolabeProgressRingPainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = stroke
-        ..color = track.withValues(alpha: dark ? 0.38 : 0.6),
+        // Quiet enough that a gold arc still reads clearly against it.
+        ..color = track.withValues(alpha: dark ? 0.22 : 0.5),
     );
 
     final p = progress.clamp(0.0, 1.0);

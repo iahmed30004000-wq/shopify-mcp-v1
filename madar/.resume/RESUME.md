@@ -1,4 +1,4 @@
-# Resume point (usage limit checkpoint, 2026-09-29 ~07:20 UTC)
+# Resume point (usage-limit checkpoint 07:20 UTC; refreshed after a container restart)
 
 All agents were stopped deliberately at ~95 % of the 5-hour usage limit.
 This commit is a WORK-IN-PROGRESS checkpoint (`[skip ci]`): several

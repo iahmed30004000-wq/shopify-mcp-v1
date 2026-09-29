@@ -57,7 +57,9 @@ class DebtState {
       final d = CalendarDays.of(p.date);
       if (last == null || d.isAfter(last)) last = d;
     }
-    final paidInFull = amount > 0 && paid >= amount;
+    // Same rule as the Money planet: payments that cover the amount (a
+    // zero-amount debt has nothing left to pay).
+    final paidInFull = paid >= amount;
     final settled = settledAt != null || paidInFull;
     final due = dueDate == null ? null : CalendarDays.of(dueDate);
     final day = CalendarDays.of(today);

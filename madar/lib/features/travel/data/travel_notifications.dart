@@ -36,7 +36,7 @@ class TravelDocumentNotifier {
         id: channelId,
         name: c.name,
         description: c.description,
-        importance: NotificationImportance.high,
+        importance: NotificationImportance.normal,
         groupId: groupId,
       ),
     ], prunePrefix: channelPrefix);

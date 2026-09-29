@@ -203,7 +203,7 @@ class _JarHero extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(GoalsIcons.jar(jar.jar.icon), color: plan.reached ? t.gold : color, size: 22),
+                GoalsJarGlyph(icon: jar.jar.icon, color: plan.reached ? t.gold : color),
                 const SizedBox(height: 2),
                 Text(
                   plan.targetMilli > 0 ? texts.percent(plan.rawProgress) : texts.money(plan.savedMilli, currency),

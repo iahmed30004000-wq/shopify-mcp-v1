@@ -194,7 +194,7 @@ class WeekdayDots extends ConsumerWidget {
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 3),
               child: _DayDot(
-                letter: tx.weekdayShort(d),
+                letter: tx.weekdayTiny(d),
                 on: weekdays.contains(d),
                 today: d == today,
                 color: dimmed ? t.textTertiary : color,

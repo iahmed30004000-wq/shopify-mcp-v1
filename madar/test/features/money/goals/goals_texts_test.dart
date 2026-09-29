@@ -105,5 +105,25 @@ void main() {
       expect(texts('ar').nothingDue(14), 'لا شيء مستحق خلال ١٤ يومًا');
       expect(texts('en').nothingDue(14), 'Nothing due in the next 14 days');
     });
+
+    test('counts read naturally in Arabic', () {
+      final l = lookupL10n(const Locale('ar'));
+      expect(l.goalsDueSoonCount(2, '٢'), 'مستحقان خلال أسبوع');
+      expect(l.goalsDueSoonCount(1, '١'), 'مستحق خلال أسبوع');
+      expect(l.goalsOverdueCount(2, '٢'), 'متأخران');
+    });
+  });
+
+  group('jar icons', () {
+    test('an imported emoji is kept; curated keys and words are not emoji', () {
+      expect(GoalsIcons.jarEmoji('✈️'), '✈️');
+      expect(GoalsIcons.jarEmoji(' 🏠 '), '🏠');
+      expect(GoalsIcons.jarEmoji('plane'), isNull);
+      expect(GoalsIcons.jarEmoji('savings'), isNull);
+      expect(GoalsIcons.jarEmoji('سفر'), isNull);
+      expect(GoalsIcons.jarEmoji(''), isNull);
+      expect(GoalsIcons.jarEmoji(null), isNull);
+      expect(GoalsIcons.jar('unknown-key'), GoalsIcons.jars);
+    });
   });
 }

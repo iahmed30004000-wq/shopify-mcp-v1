@@ -11115,11 +11115,6 @@ class L10nAr extends L10n {
   String get healthHubSettingsReportSections => 'الأقسام المضمّنة';
 
   @override
-  String healthHubSettingsReportSectionsSome(String n, String total) {
-    return '$n من $total';
-  }
-
-  @override
   String get healthHubSettingsReportSectionsAll => 'كل الأقسام';
 
   @override
@@ -11664,7 +11659,7 @@ class L10nAr extends L10n {
   String get ledgerBaseCurrency => 'العملة الأساسية';
 
   @override
-  String get ledgerBaseHint => 'تُعرض بها كل المجاميع والرسوم';
+  String get ledgerBaseHint => 'تُعرض بها كل المجاميع والرسوم البيانية';
 
   @override
   String get ledgerChangeBase => 'تغيير العملة الأساسية';
@@ -12882,7 +12877,7 @@ class L10nAr extends L10n {
       other: '$n متأخر',
       many: '$n متأخرًا',
       few: '$n متأخرة',
-      two: 'اثنان متأخران',
+      two: 'متأخران',
       one: 'متأخر واحد',
     );
     return '$_temp0';
@@ -13026,11 +13021,11 @@ class L10nAr extends L10n {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$n خلال أسبوع',
-      many: '$n خلال أسبوع',
-      few: '$n خلال أسبوع',
-      two: 'اثنان خلال أسبوع',
-      one: 'واحد خلال أسبوع',
+      other: '$n مستحق خلال أسبوع',
+      many: '$n مستحقًا خلال أسبوع',
+      few: '$n مستحقة خلال أسبوع',
+      two: 'مستحقان خلال أسبوع',
+      one: 'مستحق خلال أسبوع',
     );
     return '$_temp0';
   }
@@ -14201,9 +14196,6 @@ class L10nAr extends L10n {
   String get familyDelete => 'حذف';
 
   @override
-  String get familyNeverContacted => 'لم يُسجَّل بعد';
-
-  @override
   String familyContactedToast(String name) {
     return 'سُجِّل تواصلك مع $name';
   }
@@ -14233,9 +14225,6 @@ class L10nAr extends L10n {
   String familyMoonHiddenToast(String name) {
     return 'أُخفي $name من المدار';
   }
-
-  @override
-  String get familyReorderedToast => 'حُفظ ترتيبك';
 
   @override
   String get familyNewPerson => 'شخص جديد';
@@ -14345,9 +14334,6 @@ class L10nAr extends L10n {
 
   @override
   String get familyFieldWhen => 'متى';
-
-  @override
-  String get familyFieldTime => 'الساعة';
 
   @override
   String get familyFieldNote => 'ملاحظة';
@@ -15044,7 +15030,7 @@ class L10nAr extends L10n {
 
   @override
   String travelWarnValidity(String doc, String months) {
-    return '$doc: الصلاحية تنتهي خلال $months أشهر من عودتك، ودول كثيرة تشترط ذلك';
+    return '$doc: تنتهي الصلاحية بعد عودتك بأقل من $months أشهر، ودول كثيرة تشترط مدة أطول';
   }
 
   @override
@@ -15435,6 +15421,11 @@ class L10nAr extends L10n {
   String get travelCardNoPacking => 'لم تبدأ قائمة التجهيز';
 
   @override
+  String travelCardNext(String destination, String countdown) {
+    return 'الرحلة التالية: $destination · $countdown';
+  }
+
+  @override
   String travelCardDocsAttention(int count, String n) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -15583,7 +15574,7 @@ class L10nAr extends L10n {
   String get growthNothingToday => 'لم تسجّل شيئًا اليوم بعد';
 
   @override
-  String get growthAverageLabel => 'متوسط الإنجاز';
+  String get growthAverageLabel => 'المتوسط';
 
   @override
   String get growthLastSevenDays => 'الأيام السبعة الأخيرة';
@@ -16358,9 +16349,6 @@ class L10nAr extends L10n {
   String get bodyDelete => 'حذف';
 
   @override
-  String get bodyEdit => 'تعديل';
-
-  @override
   String get bodyNameRequired => 'اكتب اسمًا';
 
   @override
@@ -16521,9 +16509,6 @@ class L10nAr extends L10n {
   String get bodyPlanWeek => 'هذا الأسبوع';
 
   @override
-  String get bodyPlanWeekEmpty => 'لا تمارين مجدولة في هذا الأسبوع.';
-
-  @override
   String get bodyPlanHint =>
       'اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لبقية الخيارات.';
 
@@ -16557,6 +16542,17 @@ class L10nAr extends L10n {
 
   @override
   String get bodyClearDays => 'مسح';
+
+  @override
+  String bodyListAnd(String head, String last) {
+    return '$head و$last';
+  }
+
+  @override
+  String get bodyListSep => '، ';
+
+  @override
+  String get bodyPartsSep => '، ';
 
   @override
   String get bodyNoDays => 'بلا أيام محددة — لن يظهر في «اليوم».';
@@ -16620,9 +16616,6 @@ class L10nAr extends L10n {
   String get bodyPaused => 'متوقف مؤقتًا';
 
   @override
-  String get bodyDuplicate => 'نسخة';
-
-  @override
   String bodyCopyName(String name) {
     return '$name (نسخة)';
   }
@@ -16645,11 +16638,6 @@ class L10nAr extends L10n {
   @override
   String bodyResumedName(String name) {
     return 'عاد «$name» إلى الخطة';
-  }
-
-  @override
-  String bodySavedName(String name) {
-    return 'حُفظ «$name»';
   }
 
   @override
@@ -16710,9 +16698,6 @@ class L10nAr extends L10n {
   String get bodySessions => 'الجلسات';
 
   @override
-  String get bodyLastDone => 'آخر مرة';
-
-  @override
   String get bodyVolumeHint => 'الحجم = المجموعات × التكرارات × الوزن';
 
   @override
@@ -16735,9 +16720,6 @@ class L10nAr extends L10n {
 
   @override
   String get bodyFastPhaseWaiting => 'خارج الصيام';
-
-  @override
-  String get bodyFastElapsed => 'مضى من صيامك';
 
   @override
   String bodyFastRemaining(String time) {
@@ -16773,11 +16755,6 @@ class L10nAr extends L10n {
   @override
   String bodyNextFastAt(String time) {
     return 'الصيام القادم $time';
-  }
-
-  @override
-  String bodyFastMissed(String time) {
-    return 'حان وقت صيامك — كان مخططًا $time';
   }
 
   @override
@@ -16875,9 +16852,6 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get bodyFastInProgress => 'جارٍ الآن';
-
-  @override
   String get bodyFastEditTitle => 'تعديل الصيام';
 
   @override
@@ -16912,9 +16886,6 @@ class L10nAr extends L10n {
 
   @override
   String get bodyFastUpdated => 'حُدّث الصيام';
-
-  @override
-  String get bodyFastPlanSaved => 'حُفظت خطة الصيام';
 
   @override
   String bodyFastRingSemantics(String phase, String detail) {
@@ -16999,12 +16970,6 @@ class L10nAr extends L10n {
   String get bodyWaterUpdated => 'حُدّثت الكمية';
 
   @override
-  String get bodyWaterGlass => 'كوب';
-
-  @override
-  String get bodyWaterBottle => 'قارورة';
-
-  @override
   String get bodyAvoidTitle => 'قائمة التجنّب';
 
   @override
@@ -17053,9 +17018,6 @@ class L10nAr extends L10n {
 
   @override
   String get bodyCardWater => 'الماء';
-
-  @override
-  String get bodyCardOpen => 'افتح الجسد';
 
   @override
   String get bodyNotifyGroup => 'الجسد';

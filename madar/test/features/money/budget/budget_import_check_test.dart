@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
-import 'package:madar/core/domain/budget_math.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations_ar.dart';

@@ -146,7 +146,7 @@
 
   "travelWarnBeforeTrip": {"ar": "{doc}: الصلاحية تنتهي قبل السفر ({date})", "en": "{doc} expires before you leave ({date})", "placeholders": {"doc": {"type": "String"}, "date": {"type": "String"}}},
   "travelWarnDuringTrip": {"ar": "{doc}: الصلاحية تنتهي أثناء الرحلة ({date})", "en": "{doc} expires during the trip ({date})", "placeholders": {"doc": {"type": "String"}, "date": {"type": "String"}}},
-  "travelWarnValidity": {"ar": "{doc}: الصلاحية تنتهي خلال {months} أشهر من عودتك، ودول كثيرة تشترط ذلك", "en": "{doc} expires within {months} months of your return, which many countries require", "placeholders": {"doc": {"type": "String"}, "months": {"type": "String"}}},
+  "travelWarnValidity": {"ar": "{doc}: تنتهي الصلاحية بعد عودتك بأقل من {months} أشهر، ودول كثيرة تشترط مدة أطول", "en": "{doc} expires less than {months} months after your return – many countries ask for more", "placeholders": {"doc": {"type": "String"}, "months": {"type": "String"}}},
   "travelWarnTrip": {"ar": "رحلة {destination}", "en": "Trip to {destination}", "placeholders": {"destination": {"type": "String"}}},
 
   "travelDocsEmptyTitle": {"ar": "لا وثائق بعد", "en": "No documents yet"},
@@ -273,6 +273,7 @@
   "travelCardNoTrips": {"ar": "لا رحلات قادمة", "en": "No trips coming up"},
   "travelCardPacked": {"ar": "{packed}/{total} في الحقيبة", "en": "{packed}/{total} packed", "placeholders": {"packed": {"type": "String"}, "total": {"type": "String"}}},
   "travelCardNoPacking": {"ar": "لم تبدأ قائمة التجهيز", "en": "Packing list not started"},
+  "travelCardNext": {"ar": "الرحلة التالية: {destination} · {countdown}", "en": "Next trip: {destination} · {countdown}", "description": "Hub card line under the trip under way: the next trip and its countdown", "placeholders": {"destination": {"type": "String"}, "countdown": {"type": "String"}}},
   "travelCardDocsAttention": {
     "ar": "{count, plural, =1{وثيقة تحتاج انتباهك} =2{وثيقتان تحتاجان انتباهك} few{{n} وثائق تحتاج انتباهك} many{{n} وثيقة تحتاج انتباهك} other{{n} وثيقة تحتاج انتباهك}}",
     "en": "{count, plural, =1{1 document needs attention} other{{n} documents need attention}}",

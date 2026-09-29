@@ -327,7 +327,8 @@ class TrendBars extends StatelessWidget {
         reservedSize: 40,
         interval: scale.interval,
         getTitlesWidget: (value, meta) {
-          if (value == meta.min) return const SizedBox.shrink();
+          // The zero line and the padded top edge carry no label.
+          if (value == meta.min || value == meta.max) return const SizedBox.shrink();
           return SideTitleWidget(
             meta: meta,
             space: 4,
@@ -348,8 +349,12 @@ class TrendBars extends StatelessWidget {
           height: height,
           child: BarChart(
             BarChartData(
-              maxY: scale.max,
+              // A hair above the top tick, so its grid line is drawn too.
+              maxY: scale.max + scale.interval * 0.002,
               minY: 0,
+              extraLinesData: ExtraLinesData(
+                horizontalLines: [HorizontalLine(y: 0, color: t.glassBorder.withValues(alpha: 0.8), strokeWidth: 1)],
+              ),
               alignment: BarChartAlignment.spaceAround,
               barTouchData: BarTouchData(
                 touchTooltipData: BarTouchTooltipData(
@@ -504,8 +509,11 @@ class BalanceLine extends StatelessWidget {
               minX: 0,
               maxX: math.max(1, n - 1).toDouble(),
               minY: scale.min,
-              maxY: scale.max,
-              clipData: const FlClipData.all(),
+              // A hair above the top tick, so its grid line and label show.
+              maxY: scale.max + scale.interval * 0.002,
+              // No clipping: the scale always contains the data, and today's
+              // dot sits on the edge (fl_chart clips every side otherwise).
+              clipData: const FlClipData.none(),
               lineBarsData: [
                 LineChartBarData(
                   spots: spots,

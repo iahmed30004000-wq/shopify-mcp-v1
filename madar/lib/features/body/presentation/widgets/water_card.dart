@@ -82,9 +82,9 @@ class _FullWater extends ConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    RollingNumber(
-                      value: total,
-                      formatter: (v) => tx.fmt.formatInt(v.round(), grouping: false),
+                    _RingTotal(
+                      total: total,
+                      tx: tx,
                       style: text.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w600),
                     ),
                     Text(l.bodyWaterOf(tx.ml(target)), style: text.labelSmall?.copyWith(color: t.textTertiary)),
@@ -148,6 +148,30 @@ class _FullWater extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// The ring's total: an odometer roll with Western digits; with
+/// Arabic-Indic digits (whose narrow ١ and ٠ would sit in wide tabular
+/// columns and read as "١ ٢٥ ٠") a quick count to the new value instead.
+class _RingTotal extends StatelessWidget {
+  const _RingTotal({required this.total, required this.tx, this.style});
+
+  final int total;
+  final BodyTexts tx;
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!tx.fmt.arabicIndic) {
+      return RollingNumber(value: total, formatter: (v) => tx.fmt.formatInt(v.round(), grouping: false), style: style);
+    }
+    return TweenAnimationBuilder<double>(
+      tween: Tween(end: total.toDouble()),
+      duration: context.motion(MadarMotion.medium),
+      curve: MadarMotion.decelerate,
+      builder: (context, v, _) => Text(tx.fmt.formatInt(v.round()), style: style, maxLines: 1),
     );
   }
 }

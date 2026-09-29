@@ -5,11 +5,11 @@ import '../../../../core/notifications/notification_service.dart';
 import '../domain/due_reminders.dart';
 
 /// The goals package's slice of the shared `reminders` notification
-/// namespace: ids 136000–136999 (offsets 6000–6999). Syncing touches only
+/// namespace: ids 132000–132999 (offsets 2000–2999). Syncing touches only
 /// this block, so other features may use the rest of the namespace.
 abstract final class GoalsReminderIds {
   static const NotificationNamespace namespace = NotificationNamespaces.reminders;
-  static const int firstOffset = 6000;
+  static const int firstOffset = 2000;
   static const int size = 1000;
 
   static int get first => namespace.first + firstOffset;

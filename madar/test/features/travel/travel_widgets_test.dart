@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
 import 'package:madar/core/domain/enums.dart';
+import 'package:madar/core/i18n/formatters.dart' show BidiIsolate;
 import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/travel/travel.dart';
 
@@ -211,7 +212,13 @@ void main() {
       expect(find.textContaining('Cairo'), findsOneWidget);
       expect(find.text('Day 3 of 6'), findsOneWidget);
       expect(find.text('3/3 packed'), findsOneWidget);
-      expect(find.textContaining('Passport'), findsOneWidget);
+      // The next trip still counts down while one is under way.
+      Finder plain(String text) =>
+          find.byWidgetPredicate((w) => w is Text && BidiIsolate.strip(w.data ?? '') == text);
+      expect(plain('Next trip: Istanbul · In 9 days'), findsOneWidget);
+      // The passport: a warning for this trip, and a document needing attention.
+      expect(find.textContaining('expires less than 6 months after your return'), findsOneWidget);
+      expect(plain('Passport (Me)'), findsOneWidget);
       await idle(tester);
     });
 

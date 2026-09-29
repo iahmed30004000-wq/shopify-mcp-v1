@@ -7,6 +7,7 @@ import 'package:madar/core/db/seed/seeder.dart';
 import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/domain/money.dart';
 import 'package:madar/features/money/ledger/data/ledger_service.dart';
+import 'package:madar/features/money/ledger/domain/currency_math.dart';
 import 'package:madar/features/money/ledger/domain/ledger_models.dart';
 import 'package:madar/features/money/ledger/domain/tx_draft.dart';
 
@@ -107,6 +108,21 @@ void main() {
     expect((await repos.transactions.byId(t.id))!.walletId, cash.id);
   });
 
+  test('moving the source of a same-currency transfer keeps what arrived', () async {
+    final cash = await service.addWallet(name: 'Cash', currency: 'JOD');
+    final bank = await service.addWallet(name: 'Bank', currency: 'JOD');
+    final usd = await service.addWallet(name: 'USD', currency: 'USD');
+    final t = await service.add(
+      TxWrite(walletId: cash.id, kind: TxKind.transfer, amountMilli: 70900, date: DateTime(2026, 9, 28), toWalletId: bank.id),
+    );
+    expect((await service.book()).balanceOf(bank.id), 70900);
+    await service.move(t.id, usd.id, await service.book());
+    final book = await service.book();
+    expect(book.balanceOf(usd.id), -100000);
+    expect(book.balanceOf(bank.id), 70900);
+    expect(book.balanceOf(cash.id), 0);
+  });
+
   test('the wallet currency locks once entries exist', () async {
     final w = await service.addWallet(name: 'W', currency: 'JOD');
     await service.updateWallet(w.id, name: 'W2', currency: 'USD', openingMilli: 0, kind: WalletKind.personal);
@@ -155,6 +171,20 @@ void main() {
     expect(await repos.keyValues.getJson(SeedKeys.currencyRatesAreDefaults), isNull);
     await undo();
     expect(await repos.currencies.byCode('USDT'), isNull);
+  });
+
+  test('setRate stores the shortest exact decimal, clears the defaults flag, undo restores', () async {
+    final seeded = (await repos.currencies.byCode('EGP'))!.rateToBase;
+    final undo = await service.setRate('EGP', RateMath.inverse(RateOf.parse('68.9')));
+    final row = (await repos.currencies.byCode('EGP'))!;
+    expect(row.rateToBase, RateMath.storable(RateMath.inverse(RateOf.parse('68.9'))));
+    expect(RateMath.inverse(Rational.fromNum(row.rateToBase)).toDouble(), closeTo(68.9, 1e-9));
+    expect(await repos.keyValues.getJson(SeedKeys.currencyRatesAreDefaults), isNull);
+    // The base currency keeps exactly 1.
+    await service.setRate('JOD', RateOf.parse('2'));
+    expect((await repos.currencies.byCode('JOD'))!.rateToBase, 1.0);
+    await undo();
+    expect((await repos.currencies.byCode('EGP'))!.rateToBase, seeded);
   });
 
   test('rebase is exact, keeps converted totals and can be undone', () async {

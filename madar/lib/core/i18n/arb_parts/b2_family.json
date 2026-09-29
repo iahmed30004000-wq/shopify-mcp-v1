@@ -94,7 +94,6 @@
   "familyOpenProfile": {"ar": "فتح الملف", "en": "Open profile"},
   "familyEdit": {"ar": "تعديل", "en": "Edit"},
   "familyDelete": {"ar": "حذف", "en": "Delete"},
-  "familyNeverContacted": {"ar": "لم يُسجَّل بعد", "en": "Not yet"},
 
   "familyContactedToast": {
     "ar": "سُجِّل تواصلك مع {name}",
@@ -107,7 +106,6 @@
   "familyContactUpdatedToast": {"ar": "عُدِّل التواصل", "en": "Contact updated"},
   "familyMoonShownToast": {"ar": "أُضيف {name} إلى المدار", "en": "{name} now orbits the Family planet", "placeholders": {"name": {"type": "String"}}},
   "familyMoonHiddenToast": {"ar": "أُخفي {name} من المدار", "en": "{name} hidden from the orbit", "placeholders": {"name": {"type": "String"}}},
-  "familyReorderedToast": {"ar": "حُفظ ترتيبك", "en": "Your order is saved"},
 
   "familyNewPerson": {"ar": "شخص جديد", "en": "New person"},
   "familyNewPersonSubtitle": {"ar": "من تحبّ أن تبقى قريبًا منه", "en": "Someone you want to stay close to"},
@@ -146,7 +144,6 @@
   "familyEditContactTitle": {"ar": "تعديل التواصل", "en": "Edit contact"},
   "familyFieldChannel": {"ar": "الطريقة", "en": "How"},
   "familyFieldWhen": {"ar": "متى", "en": "When"},
-  "familyFieldTime": {"ar": "الساعة", "en": "Time"},
   "familyFieldNote": {"ar": "ملاحظة", "en": "Note"},
   "familyFieldNoteHint": {"ar": "عمّ تحدّثتما؟", "en": "What did you talk about?"},
   "familyFutureError": {"ar": "لا يمكن تسجيل تواصل في المستقبل", "en": "A contact can't be in the future"},

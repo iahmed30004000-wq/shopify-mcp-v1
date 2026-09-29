@@ -98,6 +98,28 @@ void main() {
     );
   });
 
+  testWidgets('hub – Arabic, Pearl, charts', (tester) async {
+    await shot(
+      tester,
+      'hub_ar_pearl_charts',
+      const MoneyLedgerScreen(),
+      theme: MadarThemeId.pearl,
+      before: (t) => _scrollBy(t, 1050),
+    );
+  });
+
+  testWidgets('hub – English, Lapis', (tester) async {
+    await shot(tester, 'hub_en_lapis', const MoneyLedgerScreen(), locale: _en);
+  });
+
+  testWidgets('wallet – Arabic, Pearl', (tester) async {
+    await shot(tester, 'wallet_ar_pearl', const WalletScreen(walletId: Ex.cash), theme: MadarThemeId.pearl);
+  });
+
+  testWidgets('transactions – English, Lapis', (tester) async {
+    await shot(tester, 'transactions_en_lapis', const TransactionsScreen(), locale: _en);
+  });
+
   testWidgets('hub – Arabic, Emerald, empty', (tester) async {
     await shot(tester, 'hub_ar_emerald_empty', const MoneyLedgerScreen(), theme: MadarThemeId.emerald, data: false);
   });

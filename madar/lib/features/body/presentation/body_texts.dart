@@ -27,6 +27,14 @@ class BodyTexts {
   String weekdayShort(int iso) =>
       DateFormat(fmt.isArabic ? 'EEEEE' : 'E', fmt.languageCode).format(_isoDay(iso));
 
+  /// For small day dots: one letter in Arabic ("س"), two elsewhere ("Sa" –
+  /// three letters do not fit a 20 px circle and one is ambiguous).
+  String weekdayTiny(int iso) {
+    if (fmt.isArabic) return weekdayShort(iso);
+    final s = weekdayShort(iso);
+    return s.length <= 2 ? s : s.substring(0, 2);
+  }
+
   /// "السبت" / "Saturday".
   String weekdayName(int iso) => DateFormat('EEEE', fmt.languageCode).format(_isoDay(iso));
 
@@ -35,14 +43,12 @@ class BodyTexts {
     final names = [for (final d in ordered) weekdayName(d)];
     if (names.isEmpty) return '';
     if (names.length == 1) return names.first;
-    final and = fmt.isArabic ? ' و' : ' and ';
-    final sep = fmt.isArabic ? '، ' : ', ';
-    return '${names.sublist(0, names.length - 1).join(sep)}$and${names.last}';
+    return l.bodyListAnd(names.sublist(0, names.length - 1).join(l.bodyListSep), names.last);
   }
 
   /// Between parts of a summary: an Arabic comma in Arabic (a middle dot
   /// beside Arabic-Indic digits reads as a zero: "٨ · ٦٠" ≈ "٨٠ ٦٠").
-  String get sep => fmt.isArabic ? '، ' : ' · ';
+  String get sep => l.bodyPartsSep;
 
   /// A signed change: "+2.5 kg" / "؜+٢٫٥ كغ" (the Arabic letter mark keeps
   /// the sign at the reading start, as CLDR does).

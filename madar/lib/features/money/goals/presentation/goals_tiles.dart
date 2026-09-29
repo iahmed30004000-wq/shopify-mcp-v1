@@ -144,7 +144,7 @@ class JarTile extends ConsumerWidget {
                 dense: true,
                 color: color,
                 reached: plan.reached,
-                child: Icon(GoalsIcons.jar(jar.jar.icon), size: 22, color: plan.reached ? t.gold : color),
+                child: GoalsJarGlyph(icon: jar.jar.icon, color: plan.reached ? t.gold : color),
               ),
               const SizedBox(width: Space.m),
               Expanded(

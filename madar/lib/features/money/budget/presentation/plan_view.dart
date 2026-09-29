@@ -147,8 +147,10 @@ class _SummaryCard extends StatelessWidget {
               child: BudgetAmountText(f.money(total), size: 32, color: t.gold, weight: FontWeight.w700),
             ),
           ),
-          const SizedBox(height: Space.xxs),
-          Text(l.budgetWeeklyEquivalent(f.money(plan.totalWeeklyMilli)), style: text.bodySmall),
+          if (total != 0) ...[
+            const SizedBox(height: Space.xxs),
+            Text(l.budgetWeeklyEquivalent(f.money(plan.totalWeeklyMilli)), style: text.bodySmall),
+          ],
           if (roots.isNotEmpty && total > 0) ...[
             const SizedBox(height: Space.l),
             AllocationStrip(

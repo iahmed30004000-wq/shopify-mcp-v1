@@ -192,6 +192,14 @@ void main() {
       expect(s.dueState, DueState.none);
     });
 
+    test('a zero-amount debt (an import without a sum) is closed, as the Money planet counts it', () {
+      final s = state(amount: 0, due: d(2026, 9, 1));
+      expect(s.settled, isTrue);
+      expect(s.remainingMilli, 0);
+      expect(s.overdue, isFalse);
+      expect(s.paidRatio, 1);
+    });
+
     test('settling by hand writes off the rest', () {
       final s = state(pays: [DebtPaymentIn(100000, d(2026, 9, 1))], settledAt: DateTime(2026, 9, 25, 18, 30));
       expect(s.settled, isTrue);

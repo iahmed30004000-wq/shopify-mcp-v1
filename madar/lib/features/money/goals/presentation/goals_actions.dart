@@ -629,6 +629,7 @@ class GoalsActions {
         FieldSpec.singleSelect(
           'lead',
           l.goalsRemindersLead,
+          required: true,
           icon: Icons.schedule_rounded,
           options: [
             for (final d in GoalsReminderSettings.leadChoices)
@@ -641,7 +642,7 @@ class GoalsActions {
           ],
         ),
         FieldSpec.toggle('onDue', l.goalsRemindersOnDueDay),
-        FieldSpec.time('time', l.goalsRemindersTime),
+        FieldSpec.time('time', l.goalsRemindersTime, required: true, icon: Icons.alarm_rounded),
       ],
       initial: {
         'enabled': current.enabled,
@@ -735,7 +736,7 @@ class _JarEditorPreview extends StatelessWidget {
                 dense: true,
                 color: color,
                 reached: plan.reached,
-                child: Icon(GoalsIcons.jar(values['icon'] as String?), size: 22, color: color),
+                child: GoalsJarGlyph(icon: values['icon'] as String?, color: color),
               ),
               const SizedBox(width: Space.m),
               Expanded(

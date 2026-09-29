@@ -248,8 +248,17 @@ class LedgerService {
       if (converted == null) return null;
       amount = converted;
     }
+    // A transfer that stored no separate received amount received the same
+    // number; keep what arrived once the source changes currency.
+    final keepReceived =
+        before.kind == TxKind.transfer && before.toWalletId != null && before.toAmountMilli == null && amount != before.amountMilli;
     await repos.transactions.update(
-      TransactionsCompanion(id: Value(id), walletId: Value(walletId), amountMilli: Value(amount)),
+      TransactionsCompanion(
+        id: Value(id),
+        walletId: Value(walletId),
+        amountMilli: Value(amount),
+        toAmountMilli: keepReceived ? Value(before.amountMilli.abs()) : const Value.absent(),
+      ),
     );
     return () => repos.transactions.restore(before);
   }
@@ -379,7 +388,10 @@ class LedgerService {
     final before = await repos.currencies.byCode(code);
     if (before == null) throw StateError('Unknown currency $code');
     if (before.isBase) return () async {};
-    await repos.currencies.setRate(code, RateMath.storable(rate));
+    final stored = RateMath.storable(rate);
+    await repos.currencies.setRate(code, stored);
+    // The user has now set a rate of their own.
+    if (before.rateToBase != stored) await _clearDefaultRatesFlag();
     return () => repos.currencies.restore(before);
   }
 

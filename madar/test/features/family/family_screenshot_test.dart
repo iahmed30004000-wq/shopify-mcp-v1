@@ -1,4 +1,7 @@
 @Tags(['screenshot'])
+// Rendering glass + cosmos shaders on a shared, loaded CI box can take
+// minutes per shot; the default 10-minute timeout is too tight there.
+@Timeout(Duration(minutes: 30))
 library;
 
 import 'dart:async';

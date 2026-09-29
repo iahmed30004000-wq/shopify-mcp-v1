@@ -10773,18 +10773,6 @@
   "@healthHubSettingsReportSections": {
     "description": "Settings › Health: the report's default sections"
   },
-  "healthHubSettingsReportSectionsSome": "{n} of {total}",
-  "@healthHubSettingsReportSectionsSome": {
-    "description": "Settings › Health: some report sections selected",
-    "placeholders": {
-      "n": {
-        "type": "String"
-      },
-      "total": {
-        "type": "String"
-      }
-    }
-  },
   "healthHubSettingsReportSectionsAll": "All sections",
   "@healthHubSettingsReportSectionsAll": {
     "description": "Settings › Health: every report section selected"
@@ -14291,7 +14279,6 @@
   "familyOpenProfile": "Open profile",
   "familyEdit": "Edit",
   "familyDelete": "Delete",
-  "familyNeverContacted": "Not yet",
   "familyContactedToast": "Logged: you reached out to {name}",
   "@familyContactedToast": {
     "placeholders": {
@@ -14334,7 +14321,6 @@
       }
     }
   },
-  "familyReorderedToast": "Your order is saved",
   "familyNewPerson": "New person",
   "familyNewPersonSubtitle": "Someone you want to stay close to",
   "familyEditTitle": "Edit {name}",
@@ -14384,7 +14370,6 @@
   "familyEditContactTitle": "Edit contact",
   "familyFieldChannel": "How",
   "familyFieldWhen": "When",
-  "familyFieldTime": "Time",
   "familyFieldNote": "Note",
   "familyFieldNoteHint": "What did you talk about?",
   "familyFutureError": "A contact can't be in the future",
@@ -14858,7 +14843,7 @@
       }
     }
   },
-  "travelWarnValidity": "{doc} expires within {months} months of your return, which many countries require",
+  "travelWarnValidity": "{doc} expires less than {months} months after your return – many countries ask for more",
   "@travelWarnValidity": {
     "placeholders": {
       "doc": {
@@ -15112,6 +15097,18 @@
     }
   },
   "travelCardNoPacking": "Packing list not started",
+  "travelCardNext": "Next trip: {destination} · {countdown}",
+  "@travelCardNext": {
+    "description": "Hub card line under the trip under way: the next trip and its countdown",
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      },
+      "countdown": {
+        "type": "String"
+      }
+    }
+  },
   "travelCardDocsAttention": "{count, plural, =1{1 document needs attention} other{{n} documents need attention}}",
   "@travelCardDocsAttention": {
     "placeholders": {
@@ -15247,7 +15244,7 @@
   "@growthNothingToday": {
     "description": "Overview: no log today"
   },
-  "growthAverageLabel": "Average progress",
+  "growthAverageLabel": "Average",
   "@growthAverageLabel": {
     "description": "Overview ring label"
   },
@@ -15645,7 +15642,7 @@
       }
     }
   },
-  "growthLineAhead": "Your pace: {rate} · ahead of schedule",
+  "growthLineAhead": "At {rate} · ahead of schedule",
   "@growthLineAhead": {
     "description": "Pace line when ahead",
     "placeholders": {
@@ -15679,7 +15676,7 @@
       }
     }
   },
-  "growthLineOpenFinish": "Your pace: {rate} · done by {date}",
+  "growthLineOpenFinish": "At {rate} · done by {date}",
   "@growthLineOpenFinish": {
     "description": "Pace line without a deadline, with a projection",
     "placeholders": {
@@ -15885,7 +15882,7 @@
       }
     }
   },
-  "growthDayTotal": "{amount} this day",
+  "growthDayTotal": "{amount} logged",
   "@growthDayTotal": {
     "description": "Sum of a day's logs",
     "placeholders": {
@@ -16276,7 +16273,6 @@
   "bodySave": "Save",
   "bodyCancel": "Cancel",
   "bodyDelete": "Delete",
-  "bodyEdit": "Edit",
   "bodyNameRequired": "Enter a name",
   "bodyKg": "{value} kg",
   "@bodyKg": {
@@ -16430,7 +16426,6 @@
   "bodyStateDone": "done",
   "bodyStateOpen": "not done yet",
   "bodyPlanWeek": "This week",
-  "bodyPlanWeekEmpty": "Nothing scheduled this week.",
   "bodyPlanHint": "Drag the handle to reorder; long-press for more options.",
   "bodyPlanEmptyTitle": "Your plan is empty",
   "bodyPlanEmptyBody": "Add your exercises and their days — e.g. push-ups on Sat, Mon and Wed, 3 × 12.",
@@ -16442,6 +16437,26 @@
   "bodyWeekdays": "Training days",
   "bodyEveryDay": "Every day",
   "bodyClearDays": "Clear",
+  "bodyListAnd": "{head} and {last}",
+  "@bodyListAnd": {
+    "description": "Joins the last item of a list (weekday names)",
+    "placeholders": {
+      "head": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      }
+    }
+  },
+  "bodyListSep": ", ",
+  "@bodyListSep": {
+    "description": "Between list items (keep the trailing space)"
+  },
+  "bodyPartsSep": " · ",
+  "@bodyPartsSep": {
+    "description": "Between parts of a summary like 3 × 12 · 20 kg (keep the spaces; a middle dot beside Arabic-Indic digits reads as a zero)"
+  },
   "bodyNoDays": "No set days — it won't show up in Today.",
   "bodyTarget": "Each time",
   "bodySets": "Sets",
@@ -16475,7 +16490,6 @@
   "bodyPause": "Pause",
   "bodyResume": "Resume",
   "bodyPaused": "Paused",
-  "bodyDuplicate": "Duplicate",
   "bodyCopyName": "{name} (copy)",
   "@bodyCopyName": {
     "placeholders": {
@@ -16516,14 +16530,6 @@
       }
     }
   },
-  "bodySavedName": "Saved “{name}”",
-  "@bodySavedName": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "bodyLogTitle": "Log workout",
   "bodyLogEditTitle": "Edit log",
   "bodyLogSubtitle": "Prefilled from your plan — adjust to what you actually did.",
@@ -16549,7 +16555,6 @@
   "bodyBest": "Best",
   "bodyChange": "Change",
   "bodySessions": "Sessions",
-  "bodyLastDone": "Last time",
   "bodyVolumeHint": "Volume = sets × reps × weight",
   "bodyLogs": "Logs",
   "bodyLogDeleted": "Log deleted",
@@ -16558,7 +16563,6 @@
   "bodyFastPhaseFasting": "Fasting",
   "bodyFastPhaseEating": "Eating window",
   "bodyFastPhaseWaiting": "Not fasting",
-  "bodyFastElapsed": "Fasted so far",
   "bodyFastRemaining": "{time} left",
   "@bodyFastRemaining": {
     "placeholders": {
@@ -16603,14 +16607,6 @@
   },
   "bodyNextFastAt": "Next fast {time}",
   "@bodyNextFastAt": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "bodyFastMissed": "Time to fast — planned for {time}",
-  "@bodyFastMissed": {
     "placeholders": {
       "time": {
         "type": "String"
@@ -16689,7 +16685,6 @@
       }
     }
   },
-  "bodyFastInProgress": "In progress",
   "bodyFastEditTitle": "Edit fast",
   "bodyFastStartDate": "Start date",
   "bodyFastStartTime": "Start time",
@@ -16702,7 +16697,6 @@
   "bodyFastInFuture": "That time hasn't come yet",
   "bodyFastDeleted": "Fast deleted",
   "bodyFastUpdated": "Fast updated",
-  "bodyFastPlanSaved": "Fasting plan saved",
   "bodyFastRingSemantics": "{phase}: {detail}",
   "@bodyFastRingSemantics": {
     "placeholders": {
@@ -16790,8 +16784,6 @@
   },
   "bodyWaterEditTitle": "Edit amount",
   "bodyWaterUpdated": "Amount updated",
-  "bodyWaterGlass": "Glass",
-  "bodyWaterBottle": "Bottle",
   "bodyAvoidTitle": "Avoid list",
   "bodyAvoidSubtitle": "Movements and foods you've chosen to stay away from, with your own reasons.",
   "bodyAvoidAdd": "Add to the list",
@@ -16808,7 +16800,6 @@
   "bodyCardTraining": "Training",
   "bodyCardFasting": "Fasting",
   "bodyCardWater": "Water",
-  "bodyCardOpen": "Open Body",
   "bodyNotifyGroup": "Body",
   "bodyNotifyChannel": "Fasting reminders",
   "bodyNotifyChannelDescription": "Fasting goal reached and eating window closing",

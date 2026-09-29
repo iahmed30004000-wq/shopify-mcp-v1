@@ -216,6 +216,7 @@ class _TripSheetState extends ConsumerState<TripSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: _LabeledPicker(

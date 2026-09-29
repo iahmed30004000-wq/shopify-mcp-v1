@@ -804,7 +804,7 @@
     }
   },
   "goalsOverdueCount": {
-    "ar": "{count, plural, =1{متأخر واحد} =2{اثنان متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}",
+    "ar": "{count, plural, =1{متأخر واحد} =2{متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}",
     "en": "{count, plural, =1{1 overdue} other{{n} overdue}}",
     "placeholders": {
       "count": {
@@ -993,7 +993,7 @@
     }
   },
   "goalsDueSoonCount": {
-    "ar": "{count, plural, =1{واحد خلال أسبوع} =2{اثنان خلال أسبوع} few{{n} خلال أسبوع} many{{n} خلال أسبوع} other{{n} خلال أسبوع}}",
+    "ar": "{count, plural, =1{مستحق خلال أسبوع} =2{مستحقان خلال أسبوع} few{{n} مستحقة خلال أسبوع} many{{n} مستحقًا خلال أسبوع} other{{n} مستحق خلال أسبوع}}",
     "en": "{count, plural, =1{1 within a week} other{{n} within a week}}",
     "placeholders": {
       "count": {

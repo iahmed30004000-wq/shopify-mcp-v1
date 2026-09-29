@@ -1,3 +1,16 @@
+diff --git a/madar/README.md b/madar/README.md
+index d607046..1f97b35 100644
+--- a/madar/README.md
++++ b/madar/README.md
+@@ -174,7 +174,7 @@ Legend: ✅ done · 🟡 partial · ⏳ planned phase
+ | --- | --- |
+ | Phase 0 – setup, architecture, design system, motion, sound, interaction kit, encrypted DB, JSON import | ✅ |
+ | Phase 1 – The Astrolabe Orbit: astrolabe prayer dial, 8 living procedural worlds + data moons, real sky (sun, moon phase, 2,068 real stars, Milky Way), camera & gestures, fly-in pages, glass panel with windows / tasks / Neglect Radar, performance & power modes | ✅ (device profiling pending) |
+-| Phase 2 – app lock (fingerprint + PIN, astrolabe hold-to-unlock), themes + i18n audit, prayer times (21 methods, GPS or 809 offline cities, Hijri, time zones), exact full-screen adhan (alarm-clock alarms a week ahead, per-prayer sounds, pre-adhan reminders, permissions card), prayer tracker (sunnah, Duha, Witr, Qiyam, jamaah, mosque, streaks, qada), adhkar (Hisn al-Muslim) + tasbeeh, Faith hub | ✅ (device checks pending: adhan on a locked phone, after reboot, in battery saver) |
++| Phase 2 – app lock (fingerprint + PIN; the fingerprint prompt opens by itself while the astrolabe assembles), themes + i18n audit, prayer times (21 methods, GPS or 809 offline cities, Hijri, time zones), exact full-screen adhan (alarm-clock alarms a week ahead, per-prayer sounds, pre-adhan reminders, permissions card), prayer tracker (sunnah, Duha, Witr, Qiyam, jamaah, mosque, streaks, qada), adhkar (Hisn al-Muslim) + tasbeeh, Faith hub | ✅ (device checks pending: adhan on a locked phone, after reboot, in battery saver) |
+ | Phase 3 – Quran (offline Tanzil Uthmani text, 18-rule tajweed colouring, mushaf pages + verse list, search, bookmarks, Quran.com v4 on demand), recitation (19 EveryAyah reciters, per-ayah highlighting, repeats, background playback, offline downloads), daily wird plans, Hifz with SM-2 (ayat + An-Nawawi's 40), Qibla astrolabe compass (WMM declination, sun-compass fallback) | ✅ (device checks pending: streaming, background playback, compass) |
+ | Phase 4 – Health | ⏳ |
+ | Phase 5 – Money | ⏳ |
 diff --git a/madar/lib/app/lock_gate.dart b/madar/lib/app/lock_gate.dart
 index eea65b0..1940333 100644
 --- a/madar/lib/app/lock_gate.dart
@@ -777,7 +790,7 @@ index ddbf3b1..c43cd83 100644
  
    /// The system prompt confirming a change in Settings.
 diff --git a/madar/lib/features/orbit/presentation/scene/camera_rig.dart b/madar/lib/features/orbit/presentation/scene/camera_rig.dart
-index f754fea..df5dea3 100644
+index f754fea..9736224 100644
 --- a/madar/lib/features/orbit/presentation/scene/camera_rig.dart
 +++ b/madar/lib/features/orbit/presentation/scene/camera_rig.dart
 @@ -8,7 +8,8 @@ import '../../domain/scene_math.dart';
@@ -815,7 +828,7 @@ index f754fea..df5dea3 100644
  
    /// User azimuth offset from the overview (radians, unbounded).
    double get yaw => _yaw.value;
-@@ -66,20 +80,28 @@ class CameraRig {
+@@ -66,20 +80,26 @@ class CameraRig {
    /// A finger is on the scene or it is still spinning from a fling.
    bool get interacting => _dragging || _pinching || _velocity.abs() > restSpeed;
  
@@ -823,20 +836,18 @@ index f754fea..df5dea3 100644
 +  /// Something moves: interaction, inertia or a spring (reset / zoom
    /// settle).
 -  bool get isMoving => interacting || !_yaw.isAtRest || !_tilt.isAtRest || !_zoom.isAtRest;
-+  bool get isMoving =>
-+      interacting || !_yaw.isAtRest || !_tilt.isAtRest || !_zoom.isAtRest || !_roll.isAtRest;
-+
-+  /// A [reset] is springing home (no touch has interrupted it yet).
-+  bool get isHoming => _homing;
++  bool get isMoving => interacting || !_yaw.isAtRest || !_tilt.isAtRest || !_zoom.isAtRest || !_roll.isAtRest;
  
 -  /// The camera is away from the overview (show a "back to the orbit"
 -  /// control).
 -  bool get isAway => yaw.abs() > 0.12 || tilt.abs() > 0.06 || zoom > 0.04;
++  /// A [reset] is springing home (no touch has interrupted it yet).
++  bool get isHoming => _homing;
++
 +  /// The camera is visibly away from the overview – turned more than ~3°,
 +  /// tilted more than ~2°, zoomed at all or still spinning (show the "reset
 +  /// view" control).
-+  bool get isAway =>
-+      yaw.abs() > 0.05 || tilt.abs() > 0.035 || zoom > 0.02 || _velocity.abs() > restSpeed;
++  bool get isAway => yaw.abs() > 0.05 || tilt.abs() > 0.035 || zoom > 0.02 || _velocity.abs() > restSpeed;
  
    // ------------------------------------------------------------- gestures --
  
@@ -850,7 +861,7 @@ index f754fea..df5dea3 100644
      _yaw.jumpTo(_yaw.value);
      _tilt.jumpTo(_tilt.value);
      if (pinch) startPinch(zoomKey: zoomKey);
-@@ -125,28 +147,69 @@ class CameraRig {
+@@ -125,28 +145,74 @@ class CameraRig {
      }
    }
  
@@ -895,9 +906,6 @@ index f754fea..df5dea3 100644
    }
  
 -  /// Jumps straight to the overview (reduced motion, tests).
-+  /// [reset] (kept for callers of the old name).
-+  void recenter() => reset();
-+
 +  /// Jumps straight to the exact overview of a fresh start (reduced
 +  /// motion, tests).
    void snapHome() {
@@ -907,26 +915,34 @@ index f754fea..df5dea3 100644
      _tilt.jumpTo(0);
      _zoom.jumpTo(0);
 +    _roll.jumpTo(0);
-+    _zoomKey = null;
+     _zoomKey = null;
 +    _drift = 0;
 +    _homing = false;
-+  }
-+
+   }
+ 
 +  /// Drops the pinch zoom at once (a world the pinch opened is now its
 +  /// page: the scene must not come back zoomed into it).
 +  void clearZoom() {
 +    if (_pinching) return;
 +    _zoom.jumpTo(0);
-     _zoomKey = null;
-   }
- 
++    _zoomKey = null;
++  }
++
++  /// Springs the pinch zoom back out to the whole system (turn and tilt
++  /// stay): a world a pinch opened whose page closed before it landed must
++  /// not stay filling the scene.
++  void releaseZoom() {
++    if (_pinching) return;
++    _zoom.retarget(0, time: _time);
++  }
++
 +  /// How much of the gyro parallax turns / tilts the camera (see [user]).
 +  static const double gyroYawGain = 0.9, gyroPitchGain = 0.7;
 +
    // ------------------------------------------------------------- animation --
  
    /// Advances inertia, springs and (unless [drift] is false) the drift.
-@@ -162,21 +225,27 @@ class CameraRig {
+@@ -162,21 +228,27 @@ class CameraRig {
      _yaw.advanceTo(_time);
      _tilt.advanceTo(_time);
      _zoom.advanceTo(_time);
@@ -961,7 +977,7 @@ index f754fea..df5dea3 100644
    }
  }
 diff --git a/madar/lib/features/orbit/presentation/scene/orbit_scene.dart b/madar/lib/features/orbit/presentation/scene/orbit_scene.dart
-index fb2c98b..4b4bbc6 100644
+index fb2c98b..cc415f7 100644
 --- a/madar/lib/features/orbit/presentation/scene/orbit_scene.dart
 +++ b/madar/lib/features/orbit/presentation/scene/orbit_scene.dart
 @@ -1,6 +1,7 @@
@@ -1136,8 +1152,7 @@ index fb2c98b..4b4bbc6 100644
 +
 +  /// Where the reset pill sits (scene coordinates; measured after layout).
 +  Rect _resetRect = Rect.zero;
- 
--  /// Labels keep clear of the recenter button while it shows.
++
 +  void _measureReset() {
 +    if (!mounted) return;
 +    final button = _resetKey.currentContext?.findRenderObject();
@@ -1148,7 +1163,8 @@ index fb2c98b..4b4bbc6 100644
 +    _resetRect = rect;
 +    _syncKeepOut();
 +  }
-+
+ 
+-  /// Labels keep clear of the recenter button while it shows.
 +  /// Labels keep clear of the reset pill while it shows.
    void _syncKeepOut() {
 -    _c.planets.labelKeepOut = _away.value && !_recenterRect.isEmpty ? [_recenterRect.inflate(6)] : const [];
@@ -1174,7 +1190,7 @@ index fb2c98b..4b4bbc6 100644
          final live = RepaintBoundary(
            key: _liveKey,
            child: ColoredBox(
-@@ -915,23 +954,32 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
+@@ -915,23 +954,37 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
                  ),
                  PositionedDirectional(
                    end: Space.gutter,
@@ -1198,21 +1214,25 @@ index fb2c98b..4b4bbc6 100644
 -                          size: MadarButtonSize.small,
 -                          sfx: Sfx.navigate,
 -                          onPressed: _recenter,
--                        ),
 +                        ignoring: !shown,
-+                        // Its own node: never merged into the scene's (whose
-+                        // double tap would otherwise reset the view).
-+                        child: Semantics(container: true, child: child),
++                        // Screen readers only meet it while it is offered;
++                        // then as its own node, never merged into the
++                        // scene's (whose double tap would otherwise reset
++                        // the view).
++                        child: ExcludeSemantics(
++                          excluding: !shown,
++                          child: Semantics(container: true, child: child),
+                         ),
                        ),
                      ),
-+                    // A labelled glass pill (48 dp touch target): what it
-+                    // does is written on it.
++                    // A labelled glass pill, 48 dp tall (a full touch
++                    // target you can see): what it does is written on it.
 +                    child: MadarButton(
 +                      key: _resetKey,
 +                      label: l10n.orbitUiRecenter,
 +                      icon: Icons.restart_alt_rounded,
 +                      variant: MadarButtonVariant.secondary,
-+                      size: MadarButtonSize.small,
++                      size: MadarButtonSize.medium,
 +                      // The same sound as a double tap on the sky.
 +                      sfx: Sfx.navigate,
 +                      onPressed: () => _resetView(sound: false),
@@ -1221,21 +1241,25 @@ index fb2c98b..4b4bbc6 100644
                  ),
                ],
 diff --git a/madar/lib/features/orbit/presentation/scene/scene_controller.dart b/madar/lib/features/orbit/presentation/scene/scene_controller.dart
-index bfb14c7..0468a43 100644
+index bfb14c7..80ce885 100644
 --- a/madar/lib/features/orbit/presentation/scene/scene_controller.dart
 +++ b/madar/lib/features/orbit/presentation/scene/scene_controller.dart
-@@ -274,6 +274,10 @@ class SceneController extends ChangeNotifier {
+@@ -274,6 +274,14 @@ class SceneController extends ChangeNotifier {
        _flightSide = null;
        _flightT = 0;
        planets.setFocus(null, 0);
-+      // Reduced motion never flew the camera: a page opened by pinching deep
-+      // into a world must not leave the scene zoomed into it (a cut, like
-+      // the page's cross-fade).
-+      if (_reducedMotion && rig.zoom >= pinchOpenZoom) rig.clearZoom();
++      // A page opened by pinching deep into a world must not leave the scene
++      // zoomed into it. A page that landed already let the zoom go (see
++      // [tick]); one closed before it landed (a cancelled fly-in) flew back
++      // to the zoomed view: spring out from there. Reduced motion never
++      // flew the camera: a cut, like the page's cross-fade.
++      if (rig.zoom >= pinchOpenZoom && !rig.interacting) {
++        _reducedMotion ? rig.clearZoom() : rig.releaseZoom();
++      }
        _apply();
        return;
      }
-@@ -553,6 +557,81 @@ class SceneController extends ChangeNotifier {
+@@ -553,6 +561,85 @@ class SceneController extends ChangeNotifier {
      return _keepOut;
    }
  
@@ -1261,6 +1285,9 @@ index bfb14c7..0468a43 100644
 +
 +  /// A reset is springing home: its labels are placed afresh once it lands.
 +  bool _resetSettling = false;
++
++  /// The opening's labels have been placed afresh (see [tick]).
++  bool _openingLabelsPlaced = false;
 +
 +  /// Whether the scene offers its "reset view" control: the camera is away
 +  /// from the default overview (turned, tilted, zoomed, spinning), or the
@@ -1310,6 +1337,7 @@ index bfb14c7..0468a43 100644
 +    // has landed – so they end up exactly where a fresh start puts them.
 +    planets.relayoutLabels();
 +    _resetSettling = rig.isHoming || planets.respreading;
++    _openingLabelsPlaced = true;
 +    _apply();
 +    notifyListeners();
 +  }
@@ -1317,7 +1345,7 @@ index bfb14c7..0468a43 100644
    // -------------------------------------------------------------------- tick --
  
    /// Something animates (fly-in/out, rig spring or spin, morph, pulse,
-@@ -577,6 +656,10 @@ class SceneController extends ChangeNotifier {
+@@ -577,6 +664,10 @@ class SceneController extends ChangeNotifier {
      if (gyroEnabled) gyro.advance(dt);
      final anim = _flight;
      if (anim != null) _flightT = anim.value.clamp(0.0, 1.0);
@@ -1328,13 +1356,24 @@ index bfb14c7..0468a43 100644
      // The worlds move first: the camera (which follows a world in flight)
      // and the frame painted this vsync then agree on where it is – no
      // one-frame lag, no jitter on the hero.
-@@ -584,6 +667,11 @@ class SceneController extends ChangeNotifier {
+@@ -584,6 +675,22 @@ class SceneController extends ChangeNotifier {
      astrolabe.advanceSeconds(dt);
      sky.advanceSeconds(dt);
      _apply();
 +    if (_resetSettling && !rig.isHoming && !planets.respreading) {
 +      _resetSettling = false;
 +      planets.relayoutLabels();
++    }
++    // The opening: once the worlds have orbited for as long as a reset's
++    // glide takes, every label chooses its spot afresh – against exactly the
++    // frame a reset lands on – so the names sit where a reset puts them,
++    // whatever the first frames (data still arriving, moons appearing) made
++    // of them.
++    if (!_openingLabelsPlaced &&
++        planets.bodies.isNotEmpty &&
++        planets.secondsSinceHome >= PlanetSceneController.respreadSeconds) {
++      _openingLabelsPlaced = true;
++      if (_flightKey == null && !rig.isAway && !_resetSettling) planets.relayoutLabels();
 +    }
 +    _updateCrowding(dt);
      notifyListeners();
@@ -1368,7 +1407,7 @@ index e93d3d4..69fe52c 100644
      final t = controller.time;
      final dt = cache.lastTime.isNaN ? 0.0 : (t - cache.lastTime).clamp(0.0, 0.1);
 diff --git a/madar/lib/features/orbit/render/planets/planet_scene_controller.dart b/madar/lib/features/orbit/render/planets/planet_scene_controller.dart
-index 10c67d0..2557ff8 100644
+index 10c67d0..5d8e3ab 100644
 --- a/madar/lib/features/orbit/render/planets/planet_scene_controller.dart
 +++ b/madar/lib/features/orbit/render/planets/planet_scene_controller.dart
 @@ -1,6 +1,7 @@
@@ -1419,7 +1458,7 @@ index 10c67d0..2557ff8 100644
        planetLabels.settle();
        moonLabels.settle();
      }
-@@ -355,13 +368,138 @@ class PlanetSceneController extends ChangeNotifier {
+@@ -355,13 +368,139 @@ class PlanetSceneController extends ChangeNotifier {
  
    double _time;
  
@@ -1487,7 +1526,8 @@ index 10c67d0..2557ff8 100644
 +      for (var j = 0; j < moons.length; j++) {
 +        final ms = moons[j];
 +        final lane = MoonLayout.laneOf(j, moons.length, st.body.archetype);
-+        final home = MoonLayout.initialAngle(j, moons.length, ms.moon.seed) + _tau * _startTime / MoonLayout.periodOf(lane);
++        final home =
++            MoonLayout.initialAngle(j, moons.length, ms.moon.seed) + _tau * _startTime / MoonLayout.periodOf(lane);
 +        ms
 +          ..homeDelta = _arc(ms.angle, home)
 +          ..homeApplied = 0;
@@ -1559,7 +1599,7 @@ index 10c67d0..2557ff8 100644
      for (final b in _bodies) {
        if (!b.lane.isAtRest) return true;
        for (final m in b.moons.values) {
-@@ -395,6 +533,8 @@ class PlanetSceneController extends ChangeNotifier {
+@@ -395,6 +534,8 @@ class PlanetSceneController extends ChangeNotifier {
          if (m.appear < 1) m.appear = math.min(1, m.appear + dt / 0.5);
        }
      }
@@ -1569,10 +1609,10 @@ index 10c67d0..2557ff8 100644
      planetLabels.advance(dt);
      moonLabels.advance(dt);
 diff --git a/madar/test/features/home/home_screen_test.dart b/madar/test/features/home/home_screen_test.dart
-index 557777b..785f5b7 100644
+index 557777b..c36611e 100644
 --- a/madar/test/features/home/home_screen_test.dart
 +++ b/madar/test/features/home/home_screen_test.dart
-@@ -576,6 +576,188 @@ void main() {
+@@ -576,6 +576,190 @@ void main() {
      });
    });
  
@@ -1623,6 +1663,7 @@ index 557777b..785f5b7 100644
 +      final c = _scene(tester);
 +      final overview = c.camera;
 +      expect(pillShown(tester), isFalse, reason: 'nothing to reset on a fresh start');
++      expect(find.semantics.byLabel(_ar.orbitUiRecenter), findsNothing);
 +
 +      // Turn and tilt the orbit.
 +      final g = await tester.startGesture(emptySky(tester));
@@ -1652,6 +1693,7 @@ index 557777b..785f5b7 100644
 +      expect(c.camera.distance, closeTo(overview.distance, 1e-9));
 +      expect(c.camera.elevation, closeTo(overview.elevation, 0.02), reason: 'only the drift’s breath differs');
 +      expect(pillShown(tester), isFalse);
++      expect(find.semantics.byLabel(_ar.orbitUiRecenter), findsNothing, reason: 'screen readers no longer meet it');
 +      expect(c.planets.labelKeepOut, isEmpty);
 +    });
 +
@@ -1796,10 +1838,10 @@ index 5173611..3a01c60 100644
      final c = await _container(fx);
 diff --git a/madar/test/features/lock/lock_hotfix_screenshot_test.dart b/madar/test/features/lock/lock_hotfix_screenshot_test.dart
 new file mode 100644
-index 0000000..4aa4266
+index 0000000..16b23c0
 --- /dev/null
 +++ b/madar/test/features/lock/lock_hotfix_screenshot_test.dart
-@@ -0,0 +1,93 @@
+@@ -0,0 +1,82 @@
 +// The lock screen's fingerprint face after the hotfix (the prompt opens by
 +// itself; a large "Use fingerprint" button after a cancel), for review:
 +//   flutter test --tags screenshot test/features/lock/lock_hotfix_screenshot_test.dart
@@ -1843,10 +1885,7 @@ index 0000000..4aa4266
 +}
 +
 +void main() {
-+  for (final (theme, locale) in [
-+    (MadarThemeId.lapis, const Locale('ar')),
-+    (MadarThemeId.pearl, const Locale('en')),
-+  ]) {
++  for (final (theme, locale) in [(MadarThemeId.lapis, const Locale('ar')), (MadarThemeId.pearl, const Locale('en'))]) {
 +    final tag = '${locale.languageCode}_${theme.name}';
 +
 +    testWidgets('the prompt opened by itself: the astrolabe assembles – $tag', (tester) async {
@@ -1864,22 +1903,14 @@ index 0000000..4aa4266
 +    testWidgets('after a cancel: the large "Use fingerprint" button – $tag', (tester) async {
 +      final fx = await LockFixture.configured();
 +      fx.bio.fallback = BiometricOutcome.cancelled;
-+      await captureScreen(
-+        tester,
-+        await _app(tester, fx, theme: theme, locale: locale),
-+        '$_dir/lock_after_cancel_$tag',
-+      );
++      await captureScreen(tester, await _app(tester, fx, theme: theme, locale: locale), '$_dir/lock_after_cancel_$tag');
 +      expect(fx.bio.prompts, hasLength(1));
 +    });
 +
 +    testWidgets('after an error – $tag', (tester) async {
 +      final fx = await LockFixture.configured();
 +      fx.bio.fallback = BiometricOutcome.error;
-+      await captureScreen(
-+        tester,
-+        await _app(tester, fx, theme: theme, locale: locale),
-+        '$_dir/lock_after_error_$tag',
-+      );
++      await captureScreen(tester, await _app(tester, fx, theme: theme, locale: locale), '$_dir/lock_after_error_$tag');
 +    });
 +
 +    testWidgets('locked out: straight to the PIN – $tag', (tester) async {
@@ -2309,10 +2340,10 @@ index 183a443..87448e5 100644
      await tester.tap(find.text('Forgot PIN?'));
 diff --git a/madar/test/features/orbit/presentation/reset_view_screenshot_test.dart b/madar/test/features/orbit/presentation/reset_view_screenshot_test.dart
 new file mode 100644
-index 0000000..771ddb8
+index 0000000..9fed956
 --- /dev/null
 +++ b/madar/test/features/orbit/presentation/reset_view_screenshot_test.dart
-@@ -0,0 +1,127 @@
+@@ -0,0 +1,164 @@
 +// "Reset view" on home, rendered for review: the default overview, the view
 +// after a drag + pinch (and after minutes of orbiting, worlds overlapping),
 +// and the view after the reset – which must match the default:
@@ -2321,6 +2352,7 @@ index 0000000..771ddb8
 +library;
 +
 +import 'package:flutter/material.dart';
++import 'package:flutter/semantics.dart' show SemanticsNode;
 +import 'package:flutter_test/flutter_test.dart';
 +import 'package:madar/core/db/database.dart';
 +import 'package:madar/core/db/repositories/repositories.dart';
@@ -2363,6 +2395,9 @@ index 0000000..771ddb8
 +
 +Finder _pill(String lang) => find.bySemanticsLabel(lookupL10n(Locale(lang)).orbitUiRecenter);
 +
++/// The pill in the live semantics tree (what a screen reader meets).
++FinderBase<SemanticsNode> _pillNode(String lang) => find.semantics.byLabel(lookupL10n(Locale(lang)).orbitUiRecenter);
++
 +/// A real one-finger drag, then a real two-finger pinch on the dial.
 +Future<void> _dragAndPinch(WidgetTester tester, SceneShots shots) async {
 +  final c = _scene(tester);
@@ -2387,73 +2422,108 @@ index 0000000..771ddb8
 +  await shots.frames(const Duration(milliseconds: 900));
 +}
 +
++/// Where every world sits on screen (centre, radius).
++Map<String, (Offset, double)> _discs(SceneController c) => {
++  for (final b in c.planets.bodies) b.key: ?c.planetDisc(b.key),
++};
++
 +void main() {
++  for (final theme in [MadarThemeId.lapis, MadarThemeId.pearl]) {
++    for (final lang in ['ar', 'en']) {
++      final tag = '${lang}_${theme.name}';
++
++      testWidgets('default → drag + pinch → reset – $tag', (tester) async {
++        final shots = await _home(tester, theme: theme, lang: lang);
++        try {
++          final c = _scene(tester);
++          await shots.snap('$_dir/orbit_1_default_$tag');
++          final overview = c.camera;
++          final discs = _discs(c);
++          // How long the orbits (and the drift) have run since the start.
++          final sinceStart = c.planets.secondsSinceHome;
++          expect(_pillNode(lang), findsNothing, reason: 'nothing to reset on a fresh start');
++
++          await _dragAndPinch(tester, shots);
++          expect(c.rig.isAway, isTrue);
++          expect(_pill(lang), findsOneWidget);
++          expect(_pillNode(lang), findsOne);
++          expect(tester.getSize(_pill(lang)).height, greaterThanOrEqualTo(44));
++          await shots.snap('$_dir/orbit_2_dragged_pinched_$tag');
++
++          await tester.tap(_pill(lang));
++          final resetAt = c.planets.time;
++          await tester.pump();
++          await shots.frames(const Duration(milliseconds: 500));
++          await shots.snap('$_dir/orbit_3_resetting_$tag');
++          // Shoot after exactly as much orbit time since the reset as the
++          // default had since the start: the two must then show the same sky.
++          for (var i = 0; i < 400 && c.planets.time - resetAt < sinceStart; i++) {
++            await tester.pump(const Duration(milliseconds: 8));
++          }
++          await shots.snap('$_dir/orbit_4_after_reset_$tag');
++          expect((c.rig.yaw, c.rig.tilt, c.rig.zoom), (0, 0, 0));
++          expect(c.camera.distance, closeTo(overview.distance, 1e-9));
++          expect(c.camera.azimuth, closeTo(overview.azimuth, 1e-3));
++          expect(c.camera.elevation, closeTo(overview.elevation, 1e-3));
++          // Every world where the default shot has it.
++          final after = _discs(c);
++          expect(after.keys, unorderedEquals(discs.keys));
++          for (final e in discs.entries) {
++            expect((after[e.key]!.$1 - e.value.$1).distance, lessThan(2), reason: e.key);
++            expect(after[e.key]!.$2, closeTo(e.value.$2, 1), reason: e.key);
++          }
++          expect(_pillNode(lang), findsNothing, reason: 'nothing left to reset');
++          expect(c.resetCue, isFalse);
++        } finally {
++          shots.finish();
++        }
++      }, timeout: const Timeout(Duration(minutes: 40)));
++    }
++  }
++
 +  for (final (theme, lang) in [(MadarThemeId.lapis, 'ar'), (MadarThemeId.pearl, 'en')]) {
 +    final tag = '${lang}_${theme.name}';
 +
-+    testWidgets('default → drag + pinch → reset – $tag', (tester) async {
-+      final shots = await _home(tester, theme: theme, lang: lang);
-+      final c = _scene(tester);
-+      await shots.snap('$_dir/orbit_1_default_$tag');
-+      final overview = c.camera;
-+      // How long the orbits (and the drift) have run since the start.
-+      final sinceStart = c.planets.secondsSinceHome;
-+
-+      await _dragAndPinch(tester, shots);
-+      expect(c.rig.isAway, isTrue);
-+      await shots.snap('$_dir/orbit_2_dragged_pinched_$tag');
-+
-+      await tester.tap(_pill(lang));
-+      final resetAt = c.planets.time;
-+      await tester.pump();
-+      await shots.frames(const Duration(milliseconds: 500));
-+      await shots.snap('$_dir/orbit_3_resetting_$tag');
-+      // Shoot after exactly as much orbit time since the reset as the
-+      // default had since the start: the two must then show the same sky.
-+      for (var i = 0; i < 400 && c.planets.time - resetAt < sinceStart; i++) {
-+        await tester.pump(const Duration(milliseconds: 8));
-+      }
-+      await shots.snap('$_dir/orbit_4_after_reset_$tag');
-+      expect((c.rig.yaw, c.rig.tilt, c.rig.zoom), (0, 0, 0));
-+      expect(c.camera.distance, closeTo(overview.distance, 1e-9));
-+      shots.finish();
-+    }, timeout: const Timeout(Duration(minutes: 40)));
-+
 +    testWidgets('worlds drifted into each other → reset – $tag', (tester) async {
 +      final shots = await _home(tester, theme: theme, lang: lang);
-+      final c = _scene(tester);
-+      for (var s = 0; s < 900 && !c.planets.crowded(c.viewport); s++) {
-+        c.planets.advanceSeconds(1);
++      try {
++        final c = _scene(tester);
++        for (var s = 0; s < 900 && !c.planets.crowded(c.viewport); s++) {
++          c.planets.advanceSeconds(1);
++        }
++        // A little further in, so the overlap is plain to see.
++        c.planets.advanceSeconds(20);
++        c.refresh();
++        await tester.tap(find.byType(OrbitScene), warnIfMissed: false);
++        await shots.frames(const Duration(milliseconds: 1500));
++        await shots.snap('$_dir/orbit_5_drifted_$tag');
++        await tester.tap(_pill(lang));
++        await tester.pump();
++        await shots.frames(_settle);
++        await shots.snap('$_dir/orbit_6_drifted_after_reset_$tag');
++        expect(c.planets.crowded(c.viewport), isFalse);
++      } finally {
++        shots.finish();
 +      }
-+      // A little further in, so the overlap is plain to see.
-+      c.planets.advanceSeconds(20);
-+      c.refresh();
-+      await tester.tap(find.byType(OrbitScene), warnIfMissed: false);
-+      await shots.frames(const Duration(milliseconds: 1500));
-+      await shots.snap('$_dir/orbit_5_drifted_$tag');
-+      await tester.tap(_pill(lang));
-+      await tester.pump();
-+      await shots.frames(_settle);
-+      await shots.snap('$_dir/orbit_6_drifted_after_reset_$tag');
-+      expect(c.planets.crowded(c.viewport), isFalse);
-+      shots.finish();
 +    }, timeout: const Timeout(Duration(minutes: 40)));
 +  }
 +}
 diff --git a/madar/test/features/orbit/presentation/reset_view_test.dart b/madar/test/features/orbit/presentation/reset_view_test.dart
 new file mode 100644
-index 0000000..f34629a
+index 0000000..2071152
 --- /dev/null
 +++ b/madar/test/features/orbit/presentation/reset_view_test.dart
-@@ -0,0 +1,402 @@
+@@ -0,0 +1,522 @@
 +// "Reset view": the camera rig back to the exact pose of a fresh start, the
 +// worlds back to their even starting layout, the control's visibility, and
 +// the pinch-opened page that used to leave its world filling the scene.
 +import 'dart:math' as math;
-+import 'dart:ui' show Locale, Offset, Rect, Size;
++import 'dart:ui' as ui show PictureRecorder;
++import 'dart:ui' show Canvas, Locale, Offset, Rect, Size, TextDirection;
 +
 +import 'package:flutter/animation.dart';
 +import 'package:flutter_test/flutter_test.dart';
++import 'package:madar/core/design/themes.dart';
 +import 'package:madar/core/i18n/formatters.dart';
 +import 'package:madar/core/i18n/gen/app_localizations.dart';
 +import 'package:madar/features/orbit/domain/prayer_schedule.dart';
@@ -2813,6 +2883,73 @@ index 0000000..f34629a
 +    });
 +  });
 +
++  group('labels after a reset', () {
++    /// Paints the scene's name labels (the painter keeps its spots in
++    /// [cache], as the labels view does between frames).
++    void paintLabels(SceneController c, PlanetLabelCache cache) {
++      final recorder = ui.PictureRecorder();
++      PlanetLabelsPainter(
++        controller: c.planets,
++        style: PlanetLayerStyle.fromTokens(MadarPalettes.tokensFor(MadarThemeId.lapis)),
++        cache: cache,
++        textDirection: TextDirection.ltr,
++      ).paint(Canvas(recorder), _phone);
++      recorder.endRecording().dispose();
++    }
++
++    /// Ticks [c] for [seconds], painting its labels every frame.
++    void runPainting(SceneController c, PlanetLabelCache cache, double seconds) {
++      for (var i = 0; i < (seconds * 60).round(); i++) {
++        c.tick(1 / 60);
++        paintLabels(c, cache);
++      }
++    }
++
++    testWidgets('the names sit exactly where a fresh start puts them, whatever the first frames did', (tester) async {
++      // A fresh start whose first frames saw something else (here: a
++      // keep-out over the middle of the band, as data still arriving or
++      // moons appearing would): the spots those frames chose are dropped
++      // once the opening has settled.
++      final fresh = _scene();
++      addTearDown(fresh.dispose);
++      final freshCache = PlanetLabelCache();
++      addTearDown(freshCache.clear);
++      fresh.planets.labelKeepOut = [Rect.fromLTRB(0, 300, 412, 520)];
++      runPainting(fresh, freshCache, 0.4);
++      final early = Map.of(freshCache.slots);
++      fresh.planets.labelKeepOut = const [];
++      runPainting(fresh, freshCache, 2.6);
++
++      // The same system, turned, zoomed and drifted – then reset.
++      final c = _scene();
++      addTearDown(c.dispose);
++      final cache = PlanetLabelCache();
++      addTearDown(cache.clear);
++      runPainting(c, cache, 1.5);
++      c.planets.advanceSeconds(200);
++      c.rig
++        ..begin()
++        ..dragBy(const Offset(-160, 70), _phone, baseElevation: c.baseCamera.elevation)
++        ..end();
++      c.rig
++        ..begin(pinch: true, zoomKey: 'family')
++        ..pinchTo(1.5)
++        ..end();
++      runPainting(c, cache, 1);
++      c.resetView();
++      runPainting(c, cache, 3);
++
++      expect(freshCache.slots, isNotEmpty);
++      expect(early, isNot(equals(freshCache.slots)), reason: 'the first frames did choose other spots');
++      expect(cache.slots, freshCache.slots);
++      for (final e in freshCache.lastRect.entries) {
++        final mine = cache.lastRect[e.key];
++        expect(mine, isNotNull, reason: e.key);
++        expect((mine!.center - e.value.center).distance, lessThan(2), reason: e.key);
++      }
++    });
++  });
++
 +  test('a page opened by pinching deep into a world never leaves that world filling the scene', () {
 +    final c = _scene();
 +    addTearDown(c.dispose);
@@ -2847,4 +2984,75 @@ index 0000000..f34629a
 +    expect(c.camera.distance, closeTo(overview.distance, 1e-6));
 +    expect(c.planetDisc('faith')!.$2, lessThan(40));
 +  });
++
++  test('a pinch-opened page closed before it landed (cancelled fly-in): the world springs back to its size', () {
++    final c = _scene();
++    addTearDown(c.dispose);
++    _run(c, 0.1);
++    final small = c.planetDisc('faith')!.$2;
++    c.rig
++      ..begin(pinch: true, zoomKey: 'faith')
++      ..pinchTo(20)
++      ..end();
++    _run(c, 0.1);
++    final route = AnimationController(
++      vsync: const TestVSync(),
++      duration: FlightTiming.duration,
++      reverseDuration: FlightTiming.duration,
++    );
++    addTearDown(route.dispose);
++    c.bindFlight('faith', route);
++    // Back pressed half way through the fly-in.
++    for (var i = 1; i <= 20; i++) {
++      route.value = i / 45;
++      c.tick(1 / 60);
++    }
++    for (var i = 19; i >= 0; i--) {
++      route.value = i / 45;
++      c.tick(1 / 60);
++    }
++    c.bindFlight(null, null);
++    c.tick(1 / 60);
++    expect(c.rig.isMoving, isTrue, reason: 'springs out from the zoomed view – no jump');
++    expect(c.resetCue, isTrue);
++    _run(c, 3);
++    expect(c.rig.zoom, 0);
++    expect(c.rig.zoomKey, isNull);
++    expect(c.planets.selectedKey, isNull);
++    expect(c.planetDisc('faith')!.$2, closeTo(small, small * 0.25), reason: 'not left enlarged');
++  });
++
++  test('reduced motion: the same cancelled pinch-open is a cut back to the overview', () {
++    final c = _scene()..reducedMotion = true;
++    addTearDown(c.dispose);
++    c.rig
++      ..begin(pinch: true, zoomKey: 'faith')
++      ..pinchTo(20)
++      ..end();
++    c.tick(1 / 60);
++    c.bindFlight('faith', kAlwaysDismissedAnimation);
++    c.bindFlight(null, null);
++    expect(c.rig.zoom, 0);
++    expect(c.rig.isMoving, isFalse);
++  });
 +}
+diff --git a/madar/test/features/orbit/presentation/scene_controller_test.dart b/madar/test/features/orbit/presentation/scene_controller_test.dart
+index 47e538b..5e50cdd 100644
+--- a/madar/test/features/orbit/presentation/scene_controller_test.dart
++++ b/madar/test/features/orbit/presentation/scene_controller_test.dart
+@@ -206,13 +206,13 @@ void main() {
+       expect(rig.zoomKey, isNull);
+     });
+ 
+-    test('recenter springs home the short way round', () {
++    test('reset springs home the short way round', () {
+       final rig = CameraRig()
+         ..begin()
+         ..dragBy(const Offset(-2000, 0), _phone, baseElevation: 0.6)
+         ..end();
+       expect(rig.isAway, isTrue);
+-      rig.recenter();
++      rig.reset();
+       for (var i = 0; i < 60 * 3; i++) {
+         rig.advance(1 / 60);
+       }

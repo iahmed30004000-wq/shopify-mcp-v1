@@ -182,20 +182,25 @@ class _DueRow extends ConsumerWidget {
               ),
             ),
             Text(amount, style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
-            if (o != null) ...[
-              const SizedBox(width: Space.xs),
-              MadarButton.icon(
-                icon: GoalsIcons.paid,
-                semanticLabel: l.goalsMarkPaidFor(entry.title),
-                variant: MadarButtonVariant.ghost,
-                size: MadarButtonSize.small,
-                sfx: Sfx.tap,
-                onPressed: () async {
-                  final action = await GoalsActions(context, ref).pay(o);
-                  if (context.mounted) await goalsUndoToast(context, action);
-                },
-              ),
-            ],
+            const SizedBox(width: Space.xs),
+            // Obligations are marked paid in place; debts take a payment
+            // (both undoable) – one column of actions keeps the amounts aligned.
+            MadarButton.icon(
+              icon: GoalsIcons.paid,
+              semanticLabel: o != null
+                  ? l.goalsMarkPaidFor(entry.title)
+                  : (d!.debt.direction == DebtDirection.iOwe
+                        ? l.goalsPayTo(texts.user(entry.title))
+                        : l.goalsReceiveFrom(texts.user(entry.title))),
+              variant: MadarButtonVariant.ghost,
+              size: MadarButtonSize.small,
+              sfx: o != null ? Sfx.tap : Sfx.sheetOpen,
+              onPressed: () async {
+                final actions = GoalsActions(context, ref);
+                final action = o != null ? await actions.pay(o) : await actions.recordPayment(d!);
+                if (context.mounted) await goalsUndoToast(context, action);
+              },
+            ),
           ],
         ),
       ),

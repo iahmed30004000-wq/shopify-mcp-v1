@@ -227,8 +227,11 @@ class _CurrencyRow extends ConsumerWidget {
     final f = MadarFormatter.of(context);
     final rate = currency.rate;
     final one = fmt.number(1000, decimals: 0);
-    final baseSym = LedgerMoneyFormat.isolate(fmt.symbolOf(book.baseCode));
-    final sym = LedgerMoneyFormat.isolate(fmt.symbolOf(currency.code));
+    // Arabic reads best with the symbols; English with the codes
+    // ("1 JOD = 1.41044 USD", not "… 1.41044 $").
+    String label(String code) => LedgerMoneyFormat.isolate(fmt.arabic ? fmt.symbolOf(code) : code);
+    final baseSym = label(book.baseCode);
+    final sym = label(currency.code);
     final line = rate == null ? l.ledgerNoRate : l.ledgerRateLine(one, sym, fmt.rate(rate), baseSym);
     final inverse = rate == null ? null : l.ledgerRateLine(one, baseSym, fmt.rate(RateMath.inverse(rate)), sym);
     final service = ref.read(ledgerServiceProvider);

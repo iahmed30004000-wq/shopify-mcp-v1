@@ -268,6 +268,19 @@ class _FilterBar extends StatelessWidget {
             padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.l),
             child: Row(
               children: [
+                // Clearing sits first so it is always in reach (the rows
+                // scroll; the end of a row is usually off-screen).
+                if (filter.isActive)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(end: Space.m),
+                    child: MadarChip(
+                      label: l.workFilterClear,
+                      icon: Icons.close_rounded,
+                      dense: true,
+                      sfx: Sfx.toggleOff,
+                      onSelected: (_) => onChanged(CardFilter.all),
+                    ),
+                  ),
                 label(l.workFilterDue),
                 for (final e in dues.entries)
                   Padding(
@@ -278,14 +291,6 @@ class _FilterBar extends StatelessWidget {
                       selected: filter.due == e.key,
                       onSelected: (on) => onChanged(filter.withDue(on ? e.key : DueFilter.any)),
                     ),
-                  ),
-                if (filter.isActive)
-                  MadarChip(
-                    label: l.workFilterClear,
-                    icon: Icons.close_rounded,
-                    dense: true,
-                    sfx: Sfx.toggleOff,
-                    onSelected: (_) => onChanged(CardFilter.all),
                   ),
               ],
             ),

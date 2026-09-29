@@ -249,6 +249,33 @@ void main() {
         theme: MadarThemeId.emerald,
       ),
     );
+    testWidgets(
+      'debt editor – Arabic, Pearl',
+      (t) => shot(
+        t,
+        'debt_editor_ar_pearl',
+        OpenOnStart(
+          behind: const GoalsScreen(initialTab: GoalsTab.debts),
+          open: (context, ref) async {
+            final d = ref.read(goalsDebtProvider(GoalsSeedIds.debtSupplier));
+            if (d != null) await GoalsActions(context, ref).editDebt(d.debt);
+          },
+        ),
+        theme: MadarThemeId.pearl,
+      ),
+    );
+    testWidgets(
+      'reminder settings – English, Lapis',
+      (t) => shot(
+        t,
+        'reminders_sheet_en_lapis',
+        OpenOnStart(
+          behind: const GoalsScreen(initialTab: GoalsTab.obligations),
+          open: (context, ref) => GoalsActions(context, ref).reminderSettings(),
+        ),
+        locale: en,
+      ),
+    );
   });
 
   group('hub cards', () {

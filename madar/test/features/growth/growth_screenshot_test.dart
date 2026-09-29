@@ -235,7 +235,8 @@ void main() {
           await openFirstGoal(tester);
           await tester.tap(find.text(logLabel(tester)).last);
           await pumpFrames(tester);
-          await tester.tap(find.text('+20'));
+          // The goal page behind the sheet has its own +20 chip.
+          await tester.tap(find.text('+20').last);
           await pumpFrames(tester, 6);
         },
       );

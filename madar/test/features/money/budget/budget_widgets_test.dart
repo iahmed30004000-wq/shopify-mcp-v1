@@ -242,9 +242,10 @@ void main() {
       final b = await _pump(tester);
       await tester.tap(find.text('Weeks per month: 4'));
       await b.settle();
+      expect(_textPlain('10.000\u00a0JOD a week = 40.000\u00a0JOD a month'), findsOneWidget);
       await tester.tap(find.text('4.345'));
       await b.settle(4);
-      expect(find.text('5.000 JOD a week = 21.725 JOD a month'.replaceAll(' ', ' ')), findsNothing);
+      expect(_textPlain('10.000\u00a0JOD a week = 43.450\u00a0JOD a month'), findsOneWidget);
       await _tapVisible(b, find.text('Save'));
       await b.settle();
       expect(await b.kv(BudgetSettings.weeksPerMonthKey), 4.345);

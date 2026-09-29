@@ -10773,18 +10773,6 @@
   "@healthHubSettingsReportSections": {
     "description": "Settings › Health: the report's default sections"
   },
-  "healthHubSettingsReportSectionsSome": "{n} من {total}",
-  "@healthHubSettingsReportSectionsSome": {
-    "description": "Settings › Health: some report sections selected",
-    "placeholders": {
-      "n": {
-        "type": "String"
-      },
-      "total": {
-        "type": "String"
-      }
-    }
-  },
   "healthHubSettingsReportSectionsAll": "كل الأقسام",
   "@healthHubSettingsReportSectionsAll": {
     "description": "Settings › Health: every report section selected"
@@ -11534,7 +11522,7 @@
   "@ledgerBaseCurrency": {
     "description": "Label"
   },
-  "ledgerBaseHint": "تُعرض بها كل المجاميع والرسوم",
+  "ledgerBaseHint": "تُعرض بها كل المجاميع والرسوم البيانية",
   "@ledgerBaseHint": {
     "description": "Base currency explanation"
   },
@@ -12976,7 +12964,7 @@
       }
     }
   },
-  "goalsOverdueCount": "{count, plural, =1{متأخر واحد} =2{اثنان متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}",
+  "goalsOverdueCount": "{count, plural, =1{متأخر واحد} =2{متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}",
   "@goalsOverdueCount": {
     "placeholders": {
       "count": {
@@ -13068,7 +13056,7 @@
       }
     }
   },
-  "goalsDueSoonCount": "{count, plural, =1{واحد خلال أسبوع} =2{اثنان خلال أسبوع} few{{n} خلال أسبوع} many{{n} خلال أسبوع} other{{n} خلال أسبوع}}",
+  "goalsDueSoonCount": "{count, plural, =1{مستحق خلال أسبوع} =2{مستحقان خلال أسبوع} few{{n} مستحقة خلال أسبوع} many{{n} مستحقًا خلال أسبوع} other{{n} مستحق خلال أسبوع}}",
   "@goalsDueSoonCount": {
     "placeholders": {
       "count": {
@@ -14291,7 +14279,6 @@
   "familyOpenProfile": "فتح الملف",
   "familyEdit": "تعديل",
   "familyDelete": "حذف",
-  "familyNeverContacted": "لم يُسجَّل بعد",
   "familyContactedToast": "سُجِّل تواصلك مع {name}",
   "@familyContactedToast": {
     "placeholders": {
@@ -14334,7 +14321,6 @@
       }
     }
   },
-  "familyReorderedToast": "حُفظ ترتيبك",
   "familyNewPerson": "شخص جديد",
   "familyNewPersonSubtitle": "من تحبّ أن تبقى قريبًا منه",
   "familyEditTitle": "تعديل {name}",
@@ -14384,7 +14370,6 @@
   "familyEditContactTitle": "تعديل التواصل",
   "familyFieldChannel": "الطريقة",
   "familyFieldWhen": "متى",
-  "familyFieldTime": "الساعة",
   "familyFieldNote": "ملاحظة",
   "familyFieldNoteHint": "عمّ تحدّثتما؟",
   "familyFutureError": "لا يمكن تسجيل تواصل في المستقبل",
@@ -14858,7 +14843,7 @@
       }
     }
   },
-  "travelWarnValidity": "{doc}: الصلاحية تنتهي خلال {months} أشهر من عودتك، ودول كثيرة تشترط ذلك",
+  "travelWarnValidity": "{doc}: تنتهي الصلاحية بعد عودتك بأقل من {months} أشهر، ودول كثيرة تشترط مدة أطول",
   "@travelWarnValidity": {
     "placeholders": {
       "doc": {
@@ -15112,6 +15097,18 @@
     }
   },
   "travelCardNoPacking": "لم تبدأ قائمة التجهيز",
+  "travelCardNext": "الرحلة التالية: {destination} · {countdown}",
+  "@travelCardNext": {
+    "description": "Hub card line under the trip under way: the next trip and its countdown",
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      },
+      "countdown": {
+        "type": "String"
+      }
+    }
+  },
   "travelCardDocsAttention": "{count, plural, =1{وثيقة تحتاج انتباهك} =2{وثيقتان تحتاجان انتباهك} few{{n} وثائق تحتاج انتباهك} many{{n} وثيقة تحتاج انتباهك} other{{n} وثيقة تحتاج انتباهك}}",
   "@travelCardDocsAttention": {
     "placeholders": {
@@ -15247,7 +15244,7 @@
   "@growthNothingToday": {
     "description": "Overview: no log today"
   },
-  "growthAverageLabel": "متوسط الإنجاز",
+  "growthAverageLabel": "المتوسط",
   "@growthAverageLabel": {
     "description": "Overview ring label"
   },
@@ -16276,7 +16273,6 @@
   "bodySave": "حفظ",
   "bodyCancel": "إلغاء",
   "bodyDelete": "حذف",
-  "bodyEdit": "تعديل",
   "bodyNameRequired": "اكتب اسمًا",
   "bodyKg": "{value} كغ",
   "@bodyKg": {
@@ -16430,7 +16426,6 @@
   "bodyStateDone": "أُنجز",
   "bodyStateOpen": "لم يُنجز بعد",
   "bodyPlanWeek": "هذا الأسبوع",
-  "bodyPlanWeekEmpty": "لا تمارين مجدولة في هذا الأسبوع.",
   "bodyPlanHint": "اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لبقية الخيارات.",
   "bodyPlanEmptyTitle": "خطتك فارغة",
   "bodyPlanEmptyBody": "أضف تمارينك وأيامها — مثلًا: تمرين ضغط، السبت والإثنين والأربعاء، ٣ × ١٢.",
@@ -16442,6 +16437,26 @@
   "bodyWeekdays": "أيام التمرين",
   "bodyEveryDay": "كل يوم",
   "bodyClearDays": "مسح",
+  "bodyListAnd": "{head} و{last}",
+  "@bodyListAnd": {
+    "description": "Joins the last item of a list (weekday names)",
+    "placeholders": {
+      "head": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      }
+    }
+  },
+  "bodyListSep": "، ",
+  "@bodyListSep": {
+    "description": "Between list items (keep the trailing space)"
+  },
+  "bodyPartsSep": "، ",
+  "@bodyPartsSep": {
+    "description": "Between parts of a summary like 3 × 12 · 20 kg (keep the spaces; a middle dot beside Arabic-Indic digits reads as a zero)"
+  },
   "bodyNoDays": "بلا أيام محددة — لن يظهر في «اليوم».",
   "bodyTarget": "في كل مرة",
   "bodySets": "المجموعات",
@@ -16475,7 +16490,6 @@
   "bodyPause": "إيقاف مؤقت",
   "bodyResume": "استئناف",
   "bodyPaused": "متوقف مؤقتًا",
-  "bodyDuplicate": "نسخة",
   "bodyCopyName": "{name} (نسخة)",
   "@bodyCopyName": {
     "placeholders": {
@@ -16516,14 +16530,6 @@
       }
     }
   },
-  "bodySavedName": "حُفظ «{name}»",
-  "@bodySavedName": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "bodyLogTitle": "تسجيل التمرين",
   "bodyLogEditTitle": "تعديل السجل",
   "bodyLogSubtitle": "القيم من خطتك — عدّلها لما أنجزته فعلًا.",
@@ -16549,7 +16555,6 @@
   "bodyBest": "الأفضل",
   "bodyChange": "التغيّر",
   "bodySessions": "الجلسات",
-  "bodyLastDone": "آخر مرة",
   "bodyVolumeHint": "الحجم = المجموعات × التكرارات × الوزن",
   "bodyLogs": "السجلات",
   "bodyLogDeleted": "حُذف السجل",
@@ -16558,7 +16563,6 @@
   "bodyFastPhaseFasting": "صائم",
   "bodyFastPhaseEating": "نافذة الأكل",
   "bodyFastPhaseWaiting": "خارج الصيام",
-  "bodyFastElapsed": "مضى من صيامك",
   "bodyFastRemaining": "بقي {time}",
   "@bodyFastRemaining": {
     "placeholders": {
@@ -16603,14 +16607,6 @@
   },
   "bodyNextFastAt": "الصيام القادم {time}",
   "@bodyNextFastAt": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "bodyFastMissed": "حان وقت صيامك — كان مخططًا {time}",
-  "@bodyFastMissed": {
     "placeholders": {
       "time": {
         "type": "String"
@@ -16689,7 +16685,6 @@
       }
     }
   },
-  "bodyFastInProgress": "جارٍ الآن",
   "bodyFastEditTitle": "تعديل الصيام",
   "bodyFastStartDate": "يوم البدء",
   "bodyFastStartTime": "وقت البدء",
@@ -16702,7 +16697,6 @@
   "bodyFastInFuture": "هذا الوقت لم يأتِ بعد",
   "bodyFastDeleted": "حُذف الصيام",
   "bodyFastUpdated": "حُدّث الصيام",
-  "bodyFastPlanSaved": "حُفظت خطة الصيام",
   "bodyFastRingSemantics": "{phase}: {detail}",
   "@bodyFastRingSemantics": {
     "placeholders": {
@@ -16790,8 +16784,6 @@
   },
   "bodyWaterEditTitle": "تعديل الكمية",
   "bodyWaterUpdated": "حُدّثت الكمية",
-  "bodyWaterGlass": "كوب",
-  "bodyWaterBottle": "قارورة",
   "bodyAvoidTitle": "قائمة التجنّب",
   "bodyAvoidSubtitle": "حركات وأطعمة اخترت أن تبتعد عنها، مع أسبابك أنت.",
   "bodyAvoidAdd": "أضف إلى القائمة",
@@ -16808,7 +16800,6 @@
   "bodyCardTraining": "التمرين",
   "bodyCardFasting": "الصيام",
   "bodyCardWater": "الماء",
-  "bodyCardOpen": "افتح الجسد",
   "bodyNotifyGroup": "الجسد",
   "bodyNotifyChannel": "تنبيهات الصيام",
   "bodyNotifyChannelDescription": "بلوغ هدف الصيام واقتراب إغلاق نافذة الأكل",

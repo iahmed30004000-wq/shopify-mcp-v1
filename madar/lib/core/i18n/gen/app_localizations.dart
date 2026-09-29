@@ -17197,12 +17197,6 @@ abstract class L10n {
   /// **'الأقسام المضمّنة'**
   String get healthHubSettingsReportSections;
 
-  /// Settings › Health: some report sections selected
-  ///
-  /// In ar, this message translates to:
-  /// **'{n} من {total}'**
-  String healthHubSettingsReportSectionsSome(String n, String total);
-
   /// Settings › Health: every report section selected
   ///
   /// In ar, this message translates to:
@@ -18096,7 +18090,7 @@ abstract class L10n {
   /// Base currency explanation
   ///
   /// In ar, this message translates to:
-  /// **'تُعرض بها كل المجاميع والرسوم'**
+  /// **'تُعرض بها كل المجاميع والرسوم البيانية'**
   String get ledgerBaseHint;
 
   /// Action
@@ -19872,7 +19866,7 @@ abstract class L10n {
   /// No description provided for @goalsOverdueCount.
   ///
   /// In ar, this message translates to:
-  /// **'{count, plural, =1{متأخر واحد} =2{اثنان متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}'**
+  /// **'{count, plural, =1{متأخر واحد} =2{متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}'**
   String goalsOverdueCount(int count, String n);
 
   /// No description provided for @goalsObligationNew.
@@ -20094,7 +20088,7 @@ abstract class L10n {
   /// No description provided for @goalsDueSoonCount.
   ///
   /// In ar, this message translates to:
-  /// **'{count, plural, =1{واحد خلال أسبوع} =2{اثنان خلال أسبوع} few{{n} خلال أسبوع} many{{n} خلال أسبوع} other{{n} خلال أسبوع}}'**
+  /// **'{count, plural, =1{مستحق خلال أسبوع} =2{مستحقان خلال أسبوع} few{{n} مستحقة خلال أسبوع} many{{n} مستحقًا خلال أسبوع} other{{n} مستحق خلال أسبوع}}'**
   String goalsDueSoonCount(int count, String n);
 
   /// No description provided for @goalsSectionOverdue.
@@ -21771,12 +21765,6 @@ abstract class L10n {
   /// **'حذف'**
   String get familyDelete;
 
-  /// No description provided for @familyNeverContacted.
-  ///
-  /// In ar, this message translates to:
-  /// **'لم يُسجَّل بعد'**
-  String get familyNeverContacted;
-
   /// No description provided for @familyContactedToast.
   ///
   /// In ar, this message translates to:
@@ -21818,12 +21806,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'أُخفي {name} من المدار'**
   String familyMoonHiddenToast(String name);
-
-  /// No description provided for @familyReorderedToast.
-  ///
-  /// In ar, this message translates to:
-  /// **'حُفظ ترتيبك'**
-  String get familyReorderedToast;
 
   /// No description provided for @familyNewPerson.
   ///
@@ -22034,12 +22016,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'متى'**
   String get familyFieldWhen;
-
-  /// No description provided for @familyFieldTime.
-  ///
-  /// In ar, this message translates to:
-  /// **'الساعة'**
-  String get familyFieldTime;
 
   /// No description provided for @familyFieldNote.
   ///
@@ -23100,7 +23076,7 @@ abstract class L10n {
   /// No description provided for @travelWarnValidity.
   ///
   /// In ar, this message translates to:
-  /// **'{doc}: الصلاحية تنتهي خلال {months} أشهر من عودتك، ودول كثيرة تشترط ذلك'**
+  /// **'{doc}: تنتهي الصلاحية بعد عودتك بأقل من {months} أشهر، ودول كثيرة تشترط مدة أطول'**
   String travelWarnValidity(String doc, String months);
 
   /// No description provided for @travelWarnTrip.
@@ -23685,6 +23661,12 @@ abstract class L10n {
   /// **'لم تبدأ قائمة التجهيز'**
   String get travelCardNoPacking;
 
+  /// Hub card line under the trip under way: the next trip and its countdown
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلة التالية: {destination} · {countdown}'**
+  String travelCardNext(String destination, String countdown);
+
   /// No description provided for @travelCardDocsAttention.
   ///
   /// In ar, this message translates to:
@@ -23892,7 +23874,7 @@ abstract class L10n {
   /// Overview ring label
   ///
   /// In ar, this message translates to:
-  /// **'متوسط الإنجاز'**
+  /// **'المتوسط'**
   String get growthAverageLabel;
 
   /// Label of the 7-day activity strip
@@ -24945,12 +24927,6 @@ abstract class L10n {
   /// **'حذف'**
   String get bodyDelete;
 
-  /// No description provided for @bodyEdit.
-  ///
-  /// In ar, this message translates to:
-  /// **'تعديل'**
-  String get bodyEdit;
-
   /// No description provided for @bodyNameRequired.
   ///
   /// In ar, this message translates to:
@@ -25149,12 +25125,6 @@ abstract class L10n {
   /// **'هذا الأسبوع'**
   String get bodyPlanWeek;
 
-  /// No description provided for @bodyPlanWeekEmpty.
-  ///
-  /// In ar, this message translates to:
-  /// **'لا تمارين مجدولة في هذا الأسبوع.'**
-  String get bodyPlanWeekEmpty;
-
   /// No description provided for @bodyPlanHint.
   ///
   /// In ar, this message translates to:
@@ -25220,6 +25190,24 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'مسح'**
   String get bodyClearDays;
+
+  /// Joins the last item of a list (weekday names)
+  ///
+  /// In ar, this message translates to:
+  /// **'{head} و{last}'**
+  String bodyListAnd(String head, String last);
+
+  /// Between list items (keep the trailing space)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get bodyListSep;
+
+  /// Between parts of a summary like 3 × 12 · 20 kg (keep the spaces; a middle dot beside Arabic-Indic digits reads as a zero)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get bodyPartsSep;
 
   /// No description provided for @bodyNoDays.
   ///
@@ -25335,12 +25323,6 @@ abstract class L10n {
   /// **'متوقف مؤقتًا'**
   String get bodyPaused;
 
-  /// No description provided for @bodyDuplicate.
-  ///
-  /// In ar, this message translates to:
-  /// **'نسخة'**
-  String get bodyDuplicate;
-
   /// No description provided for @bodyCopyName.
   ///
   /// In ar, this message translates to:
@@ -25370,12 +25352,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'عاد «{name}» إلى الخطة'**
   String bodyResumedName(String name);
-
-  /// No description provided for @bodySavedName.
-  ///
-  /// In ar, this message translates to:
-  /// **'حُفظ «{name}»'**
-  String bodySavedName(String name);
 
   /// No description provided for @bodyLogTitle.
   ///
@@ -25485,12 +25461,6 @@ abstract class L10n {
   /// **'الجلسات'**
   String get bodySessions;
 
-  /// No description provided for @bodyLastDone.
-  ///
-  /// In ar, this message translates to:
-  /// **'آخر مرة'**
-  String get bodyLastDone;
-
   /// No description provided for @bodyVolumeHint.
   ///
   /// In ar, this message translates to:
@@ -25539,12 +25509,6 @@ abstract class L10n {
   /// **'خارج الصيام'**
   String get bodyFastPhaseWaiting;
 
-  /// No description provided for @bodyFastElapsed.
-  ///
-  /// In ar, this message translates to:
-  /// **'مضى من صيامك'**
-  String get bodyFastElapsed;
-
   /// No description provided for @bodyFastRemaining.
   ///
   /// In ar, this message translates to:
@@ -25592,12 +25556,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الصيام القادم {time}'**
   String bodyNextFastAt(String time);
-
-  /// No description provided for @bodyFastMissed.
-  ///
-  /// In ar, this message translates to:
-  /// **'حان وقت صيامك — كان مخططًا {time}'**
-  String bodyFastMissed(String time);
 
   /// No description provided for @bodyWindowOpensAt.
   ///
@@ -25761,12 +25719,6 @@ abstract class L10n {
   /// **'الهدف {hours} س'**
   String bodyFastGoalBadge(String hours);
 
-  /// No description provided for @bodyFastInProgress.
-  ///
-  /// In ar, this message translates to:
-  /// **'جارٍ الآن'**
-  String get bodyFastInProgress;
-
   /// No description provided for @bodyFastEditTitle.
   ///
   /// In ar, this message translates to:
@@ -25838,12 +25790,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'حُدّث الصيام'**
   String get bodyFastUpdated;
-
-  /// No description provided for @bodyFastPlanSaved.
-  ///
-  /// In ar, this message translates to:
-  /// **'حُفظت خطة الصيام'**
-  String get bodyFastPlanSaved;
 
   /// No description provided for @bodyFastRingSemantics.
   ///
@@ -25971,18 +25917,6 @@ abstract class L10n {
   /// **'حُدّثت الكمية'**
   String get bodyWaterUpdated;
 
-  /// No description provided for @bodyWaterGlass.
-  ///
-  /// In ar, this message translates to:
-  /// **'كوب'**
-  String get bodyWaterGlass;
-
-  /// No description provided for @bodyWaterBottle.
-  ///
-  /// In ar, this message translates to:
-  /// **'قارورة'**
-  String get bodyWaterBottle;
-
   /// No description provided for @bodyAvoidTitle.
   ///
   /// In ar, this message translates to:
@@ -26078,12 +26012,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الماء'**
   String get bodyCardWater;
-
-  /// No description provided for @bodyCardOpen.
-  ///
-  /// In ar, this message translates to:
-  /// **'افتح الجسد'**
-  String get bodyCardOpen;
 
   /// No description provided for @bodyNotifyGroup.
   ///

@@ -65,6 +65,34 @@ abstract final class GoalsIcons {
 
   /// A stored jar icon key (unknown keys fall back to the savings jar).
   static IconData jar(String? key) => InteractionIcons.curated[key] ?? jars;
+
+  /// The emoji an imported jar carries as its icon (`✈️`), or null for a
+  /// curated key, a plain word or nothing.
+  static String? jarEmoji(String? key) {
+    final k = key?.trim();
+    if (k == null || k.isEmpty || InteractionIcons.curated.containsKey(k)) return null;
+    // Short and without letters or digits of any script: a pictograph.
+    if (k.runes.length > 8 || RegExp(r'[\p{L}\p{N}]', unicode: true).hasMatch(k)) return null;
+    return k;
+  }
+}
+
+/// A jar's icon: its curated glyph, or the emoji an import brought along.
+class GoalsJarGlyph extends StatelessWidget {
+  const GoalsJarGlyph({super.key, required this.icon, required this.color, this.size = 22});
+
+  final String? icon;
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final emoji = GoalsIcons.jarEmoji(icon);
+    if (emoji == null) return Icon(GoalsIcons.jar(icon), size: size, color: color);
+    return ExcludeSemantics(
+      child: Text(emoji, style: TextStyle(fontSize: size * 0.9, height: 1.1), textAlign: TextAlign.center),
+    );
+  }
 }
 
 /// Tone of a due state (theme tokens).
@@ -423,19 +451,27 @@ class GoalsSectionTitle extends StatelessWidget {
           children: [
             IslamicStar(size: 10, color: color ?? t.brass),
             const SizedBox(width: Space.s),
-            Flexible(
-              child: Text(
-                title,
-                style: text.titleSmall?.copyWith(color: color ?? t.gold, fontWeight: FontWeight.w600),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            // The title and its count take all the free space, so the
+            // trailing action sits flush at the end (a Flexible title next
+            // to a Spacer would split the space and strand it mid-row).
+            Expanded(
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: text.titleSmall?.copyWith(color: color ?? t.gold, fontWeight: FontWeight.w600),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (count != null) ...[
+                    const SizedBox(width: Space.s),
+                    Text(count!, style: text.labelMedium?.copyWith(color: t.textTertiary)),
+                  ],
+                ],
               ),
             ),
-            if (count != null) ...[
-              const SizedBox(width: Space.s),
-              Text(count!, style: text.labelMedium?.copyWith(color: t.textTertiary)),
-            ],
-            const Spacer(),
             ?trailing,
           ],
         ),

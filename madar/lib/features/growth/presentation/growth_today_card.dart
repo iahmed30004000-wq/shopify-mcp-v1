@@ -169,7 +169,7 @@ class _CardRow extends ConsumerWidget {
                       ),
                       Text(
                         texts.paceLine(goal),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: text.labelMedium!.copyWith(color: paceColor),
                       ),

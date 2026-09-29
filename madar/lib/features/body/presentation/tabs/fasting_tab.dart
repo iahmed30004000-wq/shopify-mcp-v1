@@ -254,6 +254,8 @@ class _FastingStats extends ConsumerWidget {
             value: tx.fmt.localizeDigits(l.bodyFraction(tx.fmt.formatInt(s.completed), tx.fmt.formatInt(s.total))),
             icon: Icons.verified_outlined,
             color: p.eating,
+            // Keeps the three tiles the same height as well.
+            caption: s.total == 0 ? null : tx.fmt.formatPercent(s.completed / s.total),
           ),
         ),
       ],

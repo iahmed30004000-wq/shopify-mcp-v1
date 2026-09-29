@@ -157,8 +157,12 @@ void main() {
       final rent = tester.getTopLeft(find.text('Rent')).dy;
       expect(courier, lessThan(internet));
       expect(internet, lessThan(rent));
-      // The first Paid button belongs to the first obligation: Internet.
-      await tester.tap(find.byIcon(GoalsIcons.paid).first);
+      // Every row has one action (debts take a payment, obligations are
+      // marked paid); Internet's marks it paid in place.
+      expect(find.byIcon(GoalsIcons.paid), findsNWidgets(find.byType(DueLeaf).evaluate().length));
+      await tester.tap(
+        find.byWidgetPredicate((w) => w is MadarButton && w.semanticLabel == 'Mark Internet paid'),
+      );
       for (var i = 0; i < 10; i++) {
         await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
         await tester.pump(const Duration(milliseconds: 50));

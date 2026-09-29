@@ -10821,11 +10821,6 @@ class L10nEn extends L10n {
   String get healthHubSettingsReportSections => 'Sections included';
 
   @override
-  String healthHubSettingsReportSectionsSome(String n, String total) {
-    return '$n of $total';
-  }
-
-  @override
   String get healthHubSettingsReportSectionsAll => 'All sections';
 
   @override
@@ -13780,9 +13775,6 @@ class L10nEn extends L10n {
   String get familyDelete => 'Delete';
 
   @override
-  String get familyNeverContacted => 'Not yet';
-
-  @override
   String familyContactedToast(String name) {
     return 'Logged: you reached out to $name';
   }
@@ -13812,9 +13804,6 @@ class L10nEn extends L10n {
   String familyMoonHiddenToast(String name) {
     return '$name hidden from the orbit';
   }
-
-  @override
-  String get familyReorderedToast => 'Your order is saved';
 
   @override
   String get familyNewPerson => 'New person';
@@ -13925,9 +13914,6 @@ class L10nEn extends L10n {
 
   @override
   String get familyFieldWhen => 'When';
-
-  @override
-  String get familyFieldTime => 'Time';
 
   @override
   String get familyFieldNote => 'Note';
@@ -14601,7 +14587,7 @@ class L10nEn extends L10n {
 
   @override
   String travelWarnValidity(String doc, String months) {
-    return '$doc expires within $months months of your return, which many countries require';
+    return '$doc expires less than $months months after your return – many countries ask for more';
   }
 
   @override
@@ -14975,6 +14961,11 @@ class L10nEn extends L10n {
   String get travelCardNoPacking => 'Packing list not started';
 
   @override
+  String travelCardNext(String destination, String countdown) {
+    return 'Next trip: $destination · $countdown';
+  }
+
+  @override
   String travelCardDocsAttention(int count, String n) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -15114,7 +15105,7 @@ class L10nEn extends L10n {
   String get growthNothingToday => 'Nothing logged yet today';
 
   @override
-  String get growthAverageLabel => 'Average progress';
+  String get growthAverageLabel => 'Average';
 
   @override
   String get growthLastSevenDays => 'Last seven days';
@@ -15422,7 +15413,7 @@ class L10nEn extends L10n {
 
   @override
   String growthLineAhead(String rate) {
-    return 'Your pace: $rate · ahead of schedule';
+    return 'At $rate · ahead of schedule';
   }
 
   @override
@@ -15440,7 +15431,7 @@ class L10nEn extends L10n {
 
   @override
   String growthLineOpenFinish(String rate, String date) {
-    return 'Your pace: $rate · done by $date';
+    return 'At $rate · done by $date';
   }
 
   @override
@@ -15566,7 +15557,7 @@ class L10nEn extends L10n {
 
   @override
   String growthDayTotal(String amount) {
-    return '$amount this day';
+    return '$amount logged';
   }
 
   @override
@@ -15842,9 +15833,6 @@ class L10nEn extends L10n {
   String get bodyDelete => 'Delete';
 
   @override
-  String get bodyEdit => 'Edit';
-
-  @override
   String get bodyNameRequired => 'Enter a name';
 
   @override
@@ -15998,9 +15986,6 @@ class L10nEn extends L10n {
   String get bodyPlanWeek => 'This week';
 
   @override
-  String get bodyPlanWeekEmpty => 'Nothing scheduled this week.';
-
-  @override
   String get bodyPlanHint =>
       'Drag the handle to reorder; long-press for more options.';
 
@@ -16035,6 +16020,17 @@ class L10nEn extends L10n {
 
   @override
   String get bodyClearDays => 'Clear';
+
+  @override
+  String bodyListAnd(String head, String last) {
+    return '$head and $last';
+  }
+
+  @override
+  String get bodyListSep => ', ';
+
+  @override
+  String get bodyPartsSep => ' · ';
 
   @override
   String get bodyNoDays => 'No set days — it won\'t show up in Today.';
@@ -16098,9 +16094,6 @@ class L10nEn extends L10n {
   String get bodyPaused => 'Paused';
 
   @override
-  String get bodyDuplicate => 'Duplicate';
-
-  @override
   String bodyCopyName(String name) {
     return '$name (copy)';
   }
@@ -16123,11 +16116,6 @@ class L10nEn extends L10n {
   @override
   String bodyResumedName(String name) {
     return '“$name” is back in the plan';
-  }
-
-  @override
-  String bodySavedName(String name) {
-    return 'Saved “$name”';
   }
 
   @override
@@ -16189,9 +16177,6 @@ class L10nEn extends L10n {
   String get bodySessions => 'Sessions';
 
   @override
-  String get bodyLastDone => 'Last time';
-
-  @override
   String get bodyVolumeHint => 'Volume = sets × reps × weight';
 
   @override
@@ -16214,9 +16199,6 @@ class L10nEn extends L10n {
 
   @override
   String get bodyFastPhaseWaiting => 'Not fasting';
-
-  @override
-  String get bodyFastElapsed => 'Fasted so far';
 
   @override
   String bodyFastRemaining(String time) {
@@ -16252,11 +16234,6 @@ class L10nEn extends L10n {
   @override
   String bodyNextFastAt(String time) {
     return 'Next fast $time';
-  }
-
-  @override
-  String bodyFastMissed(String time) {
-    return 'Time to fast — planned for $time';
   }
 
   @override
@@ -16354,9 +16331,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get bodyFastInProgress => 'In progress';
-
-  @override
   String get bodyFastEditTitle => 'Edit fast';
 
   @override
@@ -16391,9 +16365,6 @@ class L10nEn extends L10n {
 
   @override
   String get bodyFastUpdated => 'Fast updated';
-
-  @override
-  String get bodyFastPlanSaved => 'Fasting plan saved';
 
   @override
   String bodyFastRingSemantics(String phase, String detail) {
@@ -16478,12 +16449,6 @@ class L10nEn extends L10n {
   String get bodyWaterUpdated => 'Amount updated';
 
   @override
-  String get bodyWaterGlass => 'Glass';
-
-  @override
-  String get bodyWaterBottle => 'Bottle';
-
-  @override
   String get bodyAvoidTitle => 'Avoid list';
 
   @override
@@ -16532,9 +16497,6 @@ class L10nEn extends L10n {
 
   @override
   String get bodyCardWater => 'Water';
-
-  @override
-  String get bodyCardOpen => 'Open Body';
 
   @override
   String get bodyNotifyGroup => 'Body';

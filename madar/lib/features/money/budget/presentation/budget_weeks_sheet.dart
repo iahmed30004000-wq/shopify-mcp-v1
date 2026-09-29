@@ -89,7 +89,8 @@ class _BudgetWeeksSheetState extends State<BudgetWeeksSheet> {
   Widget build(BuildContext context) {
     final l = L10n.of(context);
     final f = widget.format;
-    const weekly = 5000;
+    // A neutral round illustration (10 units of the base currency a week).
+    const weekly = 10000;
     final monthly = BudgetMath.weeklyToMonthly(weekly, _value);
     return InteractionSheetFrame(
       title: l.budgetWeeksTitle,

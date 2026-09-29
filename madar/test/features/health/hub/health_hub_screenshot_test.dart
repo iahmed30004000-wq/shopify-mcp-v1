@@ -7,6 +7,9 @@
 //
 //   TZ=Asia/Amman flutter test --tags screenshot test/features/health/hub/health_hub_screenshot_test.dart
 @Tags(['screenshot'])
+// The whole app renders in software here: a scene of glass cards costs about
+// a second a frame on a busy host.
+@Timeout(Duration(minutes: 40))
 library;
 
 import 'package:flutter/material.dart';
@@ -47,7 +50,7 @@ Future<void> _shot(
   String location = '/planet/health',
   HubSeed? seed = HubSeed.lived,
   Future<void> Function(WidgetTester tester)? beforeCapture,
-  int trailingFrames = 16,
+  int trailingFrames = 8,
 }) async {
   await preloadOrbitShaders(tester);
   final setup = await buildMadarTestApp(
@@ -73,14 +76,24 @@ Future<void> _shot(
   );
 }
 
-/// Scrolls the planet sheet so [target] sits near the top.
+/// Scrolls the planet sheet so [target] sits [below] its top edge. Jumps the
+/// sheet's own scroll position (a drag loses its slop, and cards above that
+/// finish loading grow the page), then aligns again once they have settled.
 Future<void> _sheetTo(WidgetTester tester, Finder target, {double below = 60}) async {
-  final scrollable = find.descendant(of: find.byType(PlanetModulePage), matching: find.byType(Scrollable)).first;
-  await tester.scrollUntilVisible(target, 200, scrollable: scrollable);
-  await _frames(tester, 4);
-  final dy = tester.getTopLeft(target).dy - tester.getTopLeft(scrollable).dy - below;
-  await tester.drag(scrollable, Offset(0, -dy));
-  await _frames(tester, 24);
+  final scrollable = find
+      .descendant(
+        of: find.byType(PlanetModulePage),
+        matching: find.byWidgetPredicate((w) => w is Scrollable && w.axisDirection == AxisDirection.down),
+      )
+      .first;
+  final position = tester.state<ScrollableState>(scrollable).position;
+  for (var pass = 0; pass < 3; pass++) {
+    await _frames(tester, 4);
+    final dy = tester.getTopLeft(target).dy - tester.getTopLeft(scrollable).dy - below;
+    if (dy.abs() < 2) break;
+    position.jumpTo((position.pixels + dy).clamp(position.minScrollExtent, position.maxScrollExtent));
+  }
+  await _frames(tester, 12);
 }
 
 /// Scrolls a settings page by [dy].
@@ -119,7 +132,7 @@ void main() {
           'hub_pain',
           lang: lang,
           theme: theme,
-          beforeCapture: (tester) => _sheetTo(tester, find.byType(HealthPainCard), below: 380),
+          beforeCapture: (tester) => _sheetTo(tester, find.byType(HealthPainCard), below: 300),
         );
       });
 
@@ -139,7 +152,7 @@ void main() {
           'hub_tools',
           lang: lang,
           theme: theme,
-          beforeCapture: (tester) => _sheetTo(tester, find.byType(HealthTools), below: 330),
+          beforeCapture: (tester) => _sheetTo(tester, find.byType(HealthTools), below: 200),
         );
       });
 
