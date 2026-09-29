@@ -94,9 +94,11 @@
         <!-- Runs before the plugin's boot receiver (higher priority, same
              process): drops adhan alarms that passed while the phone was off
              (so Fajr never sounds at 9:00) and re-grants the muezzin
-             recordings to the system. -->
+             recordings to the system. 999: 1000 (SYSTEM_HIGH_PRIORITY) and
+             above are reserved for the system; any value above the plugin's
+             default 0 keeps the order. -->
         <receiver android:exported="false" android:name=".AdhanBootGuard">
-            <intent-filter android:priority="1000">
+            <intent-filter android:priority="999">
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

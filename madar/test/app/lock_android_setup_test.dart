@@ -27,7 +27,11 @@ void main() {
 
   test('MainActivity is a FlutterFragmentActivity and USE_BIOMETRIC is declared', () {
     final activity = File('android/app/src/main/kotlin/app/madar/orbit/MainActivity.kt').readAsStringSync();
-    expect(activity, contains('FlutterFragmentActivity()'));
+    // audio_service's AudioServiceFragmentActivity extends FlutterFragmentActivity.
+    expect(
+      RegExp(r'class MainActivity : (FlutterFragmentActivity|AudioServiceFragmentActivity)\(\)').hasMatch(activity),
+      isTrue,
+    );
     final manifest = File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
     expect(manifest, contains('android.permission.USE_BIOMETRIC'));
   });

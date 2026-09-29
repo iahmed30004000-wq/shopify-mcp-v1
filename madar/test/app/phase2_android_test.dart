@@ -32,6 +32,27 @@ void main() {
     );
   });
 
+  test("MainActivity hosts audio_service's shared engine (no second main() in the process)", () {
+    // audio_service looks its cached engine up whenever it attaches to an
+    // activity and starts another one – running main() a second time – when
+    // the activity does not provide it.
+    final activity = File('android/app/src/main/kotlin/app/madar/orbit/MainActivity.kt').readAsStringSync();
+    expect(activity, contains('class MainActivity : AudioServiceFragmentActivity()'));
+    // The engine outlives the activity: notification launches into a running
+    // app are forwarded like a new intent.
+    expect(activity, contains('activityControlSurface.onNewIntent('));
+  });
+
+  test("the boot guard runs before the plugin's boot receiver without a system-reserved priority", () {
+    final filter = RegExp(
+      r'android:name="\.AdhanBootGuard">\s*<intent-filter android:priority="(\d+)"',
+    ).firstMatch(manifest);
+    expect(filter, isNotNull);
+    final priority = int.parse(filter!.group(1)!);
+    expect(priority, greaterThan(0));
+    expect(priority, lessThan(1000));
+  });
+
   test('the notification receivers the plugin needs are registered', () {
     for (final r in ['ScheduledNotificationReceiver', 'ScheduledNotificationBootReceiver', 'ActionBroadcastReceiver']) {
       expect(manifest, contains('com.dexterous.flutterlocalnotifications.$r'), reason: r);
