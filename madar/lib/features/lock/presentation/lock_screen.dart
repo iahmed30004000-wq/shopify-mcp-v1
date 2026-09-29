@@ -972,7 +972,7 @@ class _Dial extends StatelessWidget {
                 child: Icon(
                   Icons.fingerprint_rounded,
                   size: dialR * 0.36,
-                  color: t.gold,
+                  color: t.metalGold,
                   shadows: t.isDark ? [Shadow(color: t.accentGlow, blurRadius: 18)] : null,
                 ),
               ),

@@ -19,6 +19,9 @@ class L10nEn extends L10n {
   String get actionSave => 'Save';
 
   @override
+  String get commonFactSeparator => ' · ';
+
+  @override
   String get actionCancel => 'Cancel';
 
   @override
@@ -1784,6 +1787,9 @@ class L10nEn extends L10n {
   String get settingsMotion => 'Motion';
 
   @override
+  String get settingsSectionMotionPower => 'Motion & power';
+
+  @override
   String get settingsMotionSystem => 'Device';
 
   @override
@@ -1934,7 +1940,10 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get settingsPrayerSection => 'Prayer';
+  String get settingsFaithSection => 'Faith';
+
+  @override
+  String get settingsFaithSectionHint => 'Prayer, the Quran and reminders';
 
   @override
   String get settingsPrayerTimes => 'Prayer times & calculation';
@@ -1983,7 +1992,7 @@ class L10nEn extends L10n {
 
   @override
   String get settingsCreditsBody =>
-      'Open fonts, and the sources of the adhkar, cities and tones';
+      'Open fonts, and the sources of the Quran, hadith, adhkar, cities and tones';
 
   @override
   String get settingsCreditsContent => 'Content and its sources';
@@ -2064,6 +2073,111 @@ class L10nEn extends L10n {
 
   @override
   String get homeAllTimes => 'All times';
+
+  @override
+  String get settingsQuran => 'Quran reading';
+
+  @override
+  String get settingsQuranTajweedOn => 'with tajweed colours';
+
+  @override
+  String get settingsQuranTajweedOff => 'without tajweed colours';
+
+  @override
+  String get settingsQuranReading => 'Reading';
+
+  @override
+  String get settingsQuranPreviewLabel => 'Text size preview';
+
+  @override
+  String settingsQuranDownloaded(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Downloaded for $count suras',
+      one: 'Downloaded for 1 sura',
+      zero: 'Nothing downloaded yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsQuranDownloadNote =>
+      'The translation and the Quran.com tajweed download one sura at a time from the reader\'s settings – Madar goes online only when you ask.';
+
+  @override
+  String get settingsQuranSourceNote =>
+      'The Uthmani text (Hafs) is Tanzil\'s, bundled with the app and fully offline.';
+
+  @override
+  String get settingsRecitation => 'Recitation & reciters';
+
+  @override
+  String get settingsReminders => 'Reminders';
+
+  @override
+  String settingsRemindersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reminders on',
+      one: '1 reminder on',
+      zero: 'No reminders on',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsWirdReminders => 'Wird reminders';
+
+  @override
+  String get settingsWirdNoPlans =>
+      'No wird plan yet. Start one, and its reminder comes after the prayer you choose.';
+
+  @override
+  String get settingsWirdOpen => 'Wird plans';
+
+  @override
+  String get settingsWirdNoWindow =>
+      'Pick a prayer for this plan to be reminded';
+
+  @override
+  String get settingsWirdPaused => 'Plan paused – no reminder';
+
+  @override
+  String get settingsWirdEditPlan => 'Edit the plan';
+
+  @override
+  String get settingsWirdReminderNote =>
+      'The reminder comes after the plan\'s prayer – not on a day you have already read your portion.';
+
+  @override
+  String get settingsCreditQuran => 'The Quran – Tanzil';
+
+  @override
+  String get settingsCreditQuranRole =>
+      'Uthmani text and metadata, tajweed annotations – Creative Commons';
+
+  @override
+  String get settingsCreditHadith => 'An-Nawawi\'s Forty';
+
+  @override
+  String get settingsCreditHadithRole =>
+      'Arabic text from hadith-api, public domain';
+
+  @override
+  String get settingsCreditRecitation => 'Recitations – EveryAyah';
+
+  @override
+  String get settingsCreditRecitationRole =>
+      'Streamed or downloaded only when you ask – no audio bundled';
+
+  @override
+  String get settingsCreditQibla => 'Qibla compass – World Magnetic Model';
+
+  @override
+  String get settingsCreditQiblaRole =>
+      'The WMM by NOAA and BGS, public domain';
 
   @override
   String orbitReasonPersonOverdue(String name, int days, String n) {
@@ -3496,7 +3610,7 @@ class L10nEn extends L10n {
 
   @override
   String ptHijriDate(String day, String month, String year) {
-    return '$day $month $year AH';
+    return '$day $month $year AH';
   }
 
   @override
@@ -5435,12 +5549,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get faithHubLinksTitle => 'Quick links';
-
-  @override
-  String get faithHubTimesHint => 'Day, month and Hijri date';
-
-  @override
   String get faithHubHistory => 'Prayer history';
 
   @override
@@ -5454,4 +5562,2163 @@ class L10nEn extends L10n {
 
   @override
   String get faithHubAdhanHint => 'Muezzin, reminders and permissions';
+
+  @override
+  String get faithHubTodayTitle => 'Your day';
+
+  @override
+  String get faithHubQuranTitle => 'With the Quran';
+
+  @override
+  String get faithHubQuranIndex => 'Index';
+
+  @override
+  String get faithHubToolsTitle => 'Tools';
+
+  @override
+  String get faithHubMushafHint => 'Index, search and bookmarks';
+
+  @override
+  String get faithHubHifzHint => 'Spaced-repetition review';
+
+  @override
+  String get faithHubRecitationHint => 'Reciters, repeats and downloads';
+
+  @override
+  String get faithHubAdhanTool => 'Adhan';
+
+  @override
+  String get faithHubHifzAlready => 'These ayat are already in your Hifz';
+
+  @override
+  String get quranTitle => 'The Holy Quran';
+
+  @override
+  String quranSurahTitle(String name) {
+    return 'Surah $name';
+  }
+
+  @override
+  String get quranMakki => 'Makki';
+
+  @override
+  String get quranMadani => 'Madani';
+
+  @override
+  String quranAyatCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ayat',
+      one: '1 ayah',
+      zero: 'No ayat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quranPageLabel(String page) {
+    return 'Page $page';
+  }
+
+  @override
+  String quranPageCounter(String page, String total) {
+    return 'Page $page of $total';
+  }
+
+  @override
+  String quranJuzLabel(String juz) {
+    return 'Juz $juz';
+  }
+
+  @override
+  String quranHizbLabel(String hizb) {
+    return 'Hizb $hizb';
+  }
+
+  @override
+  String quranAyahLabel(String ayah) {
+    return 'Ayah $ayah';
+  }
+
+  @override
+  String quranAyahOfSurah(String surah, String ayah) {
+    return '$surah · Ayah $ayah';
+  }
+
+  @override
+  String quranJuzHizb(String juz, String hizb) {
+    return 'Juz $juz · Hizb $hizb';
+  }
+
+  @override
+  String quranQuarter1(String hizb) {
+    return '¼ Hizb $hizb';
+  }
+
+  @override
+  String quranQuarter2(String hizb) {
+    return '½ Hizb $hizb';
+  }
+
+  @override
+  String quranQuarter3(String hizb) {
+    return '¾ Hizb $hizb';
+  }
+
+  @override
+  String quranShareRef(String surah, String ayah) {
+    return '($surah, ayah $ayah)';
+  }
+
+  @override
+  String get quranLoadError => 'Couldn\'t load the mushaf';
+
+  @override
+  String get quranRetry => 'Try again';
+
+  @override
+  String get quranTabSurahs => 'Surahs';
+
+  @override
+  String get quranTabJuz => 'Juz';
+
+  @override
+  String get quranTabBookmarks => 'Bookmarks';
+
+  @override
+  String get quranSearchHint => 'Search the Quran…';
+
+  @override
+  String get quranGoTo => 'Go to';
+
+  @override
+  String get quranGoToTitle => 'Go to';
+
+  @override
+  String quranGoToHint(String a, String b, String c) {
+    return 'e.g. $a, “Baqarah $b” or “page $c”';
+  }
+
+  @override
+  String quranGoToNone(String example) {
+    return 'Nothing matches — try a sura and ayah like $example';
+  }
+
+  @override
+  String get quranGoToOpen => 'Open';
+
+  @override
+  String get quranBookmarksEmptyTitle => 'No bookmarks yet';
+
+  @override
+  String get quranBookmarksEmptyBody =>
+      'Tap an ayah in the reader, then choose “Bookmark” to keep its place.';
+
+  @override
+  String get quranBookmarkDeleted => 'Bookmark removed';
+
+  @override
+  String get quranBookmarkSaved => 'Bookmark saved';
+
+  @override
+  String get quranBookmarkEdit => 'Edit bookmark';
+
+  @override
+  String get quranBookmarkNew => 'New bookmark';
+
+  @override
+  String get quranBookmarkLabel => 'Label';
+
+  @override
+  String get quranBookmarkLabelHint => 'e.g. Fajr wird';
+
+  @override
+  String get quranBookmarkNote => 'Note';
+
+  @override
+  String get quranBookmarkColor => 'Colour';
+
+  @override
+  String get quranBookmarkRemove => 'Remove bookmark';
+
+  @override
+  String get quranJuzQuarters => 'Quarters of this juz';
+
+  @override
+  String get quranContinueTitle => 'Continue reading';
+
+  @override
+  String get quranContinueEmpty => 'Begin your journey with the Book of Allah';
+
+  @override
+  String get quranContinueStart => 'Start with Al-Fatihah';
+
+  @override
+  String get quranContinueAction => 'Continue';
+
+  @override
+  String quranLastReadAt(String when) {
+    return 'Last read $when';
+  }
+
+  @override
+  String get quranModeMushaf => 'Mushaf';
+
+  @override
+  String get quranModeList => 'Verses';
+
+  @override
+  String get quranShowList => 'Show as verses';
+
+  @override
+  String get quranShowMushaf => 'Show as mushaf pages';
+
+  @override
+  String get quranSettingsTitle => 'Reading settings';
+
+  @override
+  String get quranReaderLayout => 'Layout';
+
+  @override
+  String get quranFontSize => 'Text size';
+
+  @override
+  String get quranFontLarger => 'Larger text';
+
+  @override
+  String get quranFontSmaller => 'Smaller text';
+
+  @override
+  String get quranTajweedColors => 'Tajweed colours';
+
+  @override
+  String get quranTajweedSection => 'Tajweed';
+
+  @override
+  String get quranTajweedLegend => 'Colour guide';
+
+  @override
+  String get quranTajweedSource => 'Tajweed source';
+
+  @override
+  String get quranTajweedSourceBundled => 'Built in';
+
+  @override
+  String get quranTajweedSourceQuranCom => 'Quran.com when downloaded';
+
+  @override
+  String get quranDownloadTajweed =>
+      'Download this surah\'s tajweed from Quran.com';
+
+  @override
+  String get quranTranslation => 'Translation';
+
+  @override
+  String get quranTranslationShow => 'Show the translation under each ayah';
+
+  @override
+  String get quranTranslationName => 'English — Saheeh International';
+
+  @override
+  String get quranTranslationMissing =>
+      'This surah\'s translation isn\'t downloaded yet';
+
+  @override
+  String get quranDownloadTranslation => 'Download translation';
+
+  @override
+  String get quranDownloadNote =>
+      'Downloaded once from Quran.com and kept on your device.';
+
+  @override
+  String get quranDownloading => 'Downloading…';
+
+  @override
+  String get quranDownloaded => 'Downloaded';
+
+  @override
+  String get quranDownloadOffline => 'No internet connection — try again later';
+
+  @override
+  String get quranDownloadFailed => 'The download failed, try again';
+
+  @override
+  String quranNextSurah(String name) {
+    return 'Next: $name';
+  }
+
+  @override
+  String quranPrevSurah(String name) {
+    return 'Previous: $name';
+  }
+
+  @override
+  String get quranNowReciting => 'Now reciting';
+
+  @override
+  String get quranSajdah => 'Prostration of recitation';
+
+  @override
+  String quranAyahSemantics(String ayah, String surah) {
+    return 'Ayah $ayah of Surah $surah';
+  }
+
+  @override
+  String get quranActionPlay => 'Play from here';
+
+  @override
+  String get quranActionRepeat => 'Repeat ayah';
+
+  @override
+  String quranRepeatTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      two: 'twice',
+      one: 'once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quranActionBookmark => 'Bookmark';
+
+  @override
+  String get quranActionCopy => 'Copy';
+
+  @override
+  String get quranCopied => 'Ayah copied';
+
+  @override
+  String get quranActionShare => 'Share';
+
+  @override
+  String get quranActionHifz => 'Add to Hifz';
+
+  @override
+  String get quranHifzAdded => 'Added to Hifz';
+
+  @override
+  String get quranActionTafsir => 'Tafsir';
+
+  @override
+  String get quranTafsirSoon => 'Tafsir is coming soon, in sha Allah';
+
+  @override
+  String get quranSoon => 'Soon';
+
+  @override
+  String get quranSearchTitle => 'Search the Quran';
+
+  @override
+  String get quranSearchFieldHint => 'A word or part of an ayah';
+
+  @override
+  String get quranSearchIntro =>
+      'Searches the Arabic text, ignoring diacritics, hamza and the forms of alef.';
+
+  @override
+  String quranSearchResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ayat',
+      one: '1 ayah',
+      zero: 'No results',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quranSearchOccurrences(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count matches',
+      one: '1 match',
+      zero: 'No matches',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quranSearchShowingFirst(String count) {
+    return 'Showing the first $count';
+  }
+
+  @override
+  String get quranSearchTooShort => 'Type at least two letters';
+
+  @override
+  String get quranSearchNoResults => 'No ayah contains these words';
+
+  @override
+  String get quranSearchPreparing => 'Preparing the search index…';
+
+  @override
+  String get quranLegendTitle => 'Tajweed colour guide';
+
+  @override
+  String get quranLegendNote =>
+      'The colours are a learning aid; learning from a qualified reciter comes first.';
+
+  @override
+  String get quranLegendCredits =>
+      'Quran text from the Tanzil Project; tajweed marks from the quran-tajweed project (CC BY).';
+
+  @override
+  String get quranFamilySilent => 'Not pronounced';
+
+  @override
+  String get quranFamilyMadd => 'Prolongation (madd)';
+
+  @override
+  String get quranFamilyGhunnah => 'Nasalisation (ghunnah)';
+
+  @override
+  String get quranFamilyMerge => 'Merging without ghunnah';
+
+  @override
+  String get quranFamilyQalqalah => 'Echo (qalqalah)';
+
+  @override
+  String get quranRuleHamzatWasl => 'Hamzat al-wasl';
+
+  @override
+  String get quranRuleHamzatWaslHint =>
+      'Written, not pronounced when joined to what precedes';
+
+  @override
+  String get quranRuleLamShamsiyyah => 'Lam shamsiyyah';
+
+  @override
+  String get quranRuleLamShamsiyyahHint =>
+      'The lam of the article is silent before a sun letter';
+
+  @override
+  String get quranRuleSilent => 'Silent letter';
+
+  @override
+  String get quranRuleSilentHint => 'Written but not read';
+
+  @override
+  String get quranRuleMaddNatural => 'Natural madd';
+
+  @override
+  String get quranRuleMaddNaturalHint => 'Two counts';
+
+  @override
+  String get quranRuleMaddPermissible => 'Madd \'arid or leen';
+
+  @override
+  String get quranRuleMaddPermissibleHint =>
+      'Two, four or six counts when stopping';
+
+  @override
+  String get quranRuleMaddSeparated => 'Madd munfasil';
+
+  @override
+  String get quranRuleMaddSeparatedHint => 'Four or five counts';
+
+  @override
+  String get quranRuleMaddConnected => 'Madd muttasil';
+
+  @override
+  String get quranRuleMaddConnectedHint => 'Four or five counts';
+
+  @override
+  String get quranRuleMaddNecessary => 'Madd lazim';
+
+  @override
+  String get quranRuleMaddNecessaryHint => 'Six counts';
+
+  @override
+  String get quranRuleQalqalah => 'Qalqalah';
+
+  @override
+  String get quranRuleQalqalahHint =>
+      'An echo on the five qalqalah letters when still';
+
+  @override
+  String get quranRuleGhunnah => 'Ghunnah';
+
+  @override
+  String get quranRuleGhunnahHint =>
+      'Doubled noon or meem, nasalised for two counts';
+
+  @override
+  String get quranRuleIkhfa => 'Ikhfa';
+
+  @override
+  String get quranRuleIkhfaHint =>
+      'Noon sakinah or tanween hidden, with ghunnah';
+
+  @override
+  String get quranRuleIkhfaShafawi => 'Ikhfa shafawi';
+
+  @override
+  String get quranRuleIkhfaShafawiHint => 'Still meem before ba';
+
+  @override
+  String get quranRuleIqlab => 'Iqlab';
+
+  @override
+  String get quranRuleIqlabHint =>
+      'Noon sakinah or tanween turned into meem before ba';
+
+  @override
+  String get quranRuleIdghamGhunnah => 'Idgham with ghunnah';
+
+  @override
+  String get quranRuleIdghamGhunnahHint => 'Into ya, noon, meem or waw';
+
+  @override
+  String get quranRuleIdghamShafawi => 'Idgham shafawi';
+
+  @override
+  String get quranRuleIdghamShafawiHint => 'Still meem into meem';
+
+  @override
+  String get quranRuleIdghamNoGhunnah => 'Idgham without ghunnah';
+
+  @override
+  String get quranRuleIdghamNoGhunnahHint => 'Into lam or ra';
+
+  @override
+  String get quranRuleIdghamMutajanisayn => 'Idgham mutajanisayn';
+
+  @override
+  String get quranRuleIdghamMutajanisaynHint =>
+      'Two letters of one articulation point';
+
+  @override
+  String get quranRuleIdghamMutaqaribayn => 'Idgham mutaqaribayn';
+
+  @override
+  String get quranRuleIdghamMutaqaribaynHint =>
+      'Two letters of nearby articulation points';
+
+  @override
+  String get recitationTitle => 'Recitation';
+
+  @override
+  String get recitationChannelName => 'Quran recitation';
+
+  @override
+  String get recitationAlbum => 'The Noble Quran';
+
+  @override
+  String get recitationReciterLabel => 'Reciter';
+
+  @override
+  String get recitationSectionReciters => 'Reciters';
+
+  @override
+  String get recitationSectionRecitersHint =>
+      'Real reciters from everyayah.com – never a generated voice for the Quran';
+
+  @override
+  String get recitationStyleMujawwad => 'Mujawwad';
+
+  @override
+  String get recitationStyleMurattal => 'Murattal';
+
+  @override
+  String get recitationStyleMuallim => 'Muʿallim';
+
+  @override
+  String get recitationStyleMujawwadHint =>
+      'Slow, melodic, with the full art of tajweed';
+
+  @override
+  String get recitationStyleMurattalHint => 'Measured, flowing recitation';
+
+  @override
+  String get recitationStyleMuallimHint =>
+      'The clear teaching recitation, for memorising';
+
+  @override
+  String recitationBitrate(String kbps) {
+    return '$kbps kbps';
+  }
+
+  @override
+  String get recitationSample => 'Hear a sample';
+
+  @override
+  String get recitationSampleStop => 'Stop the sample';
+
+  @override
+  String recitationSampleOf(String name) {
+    return 'Sample of $name';
+  }
+
+  @override
+  String get recitationChosen => 'Chosen reciter';
+
+  @override
+  String recitationChoose(String name) {
+    return 'Choose $name';
+  }
+
+  @override
+  String recitationSurahsDownloaded(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count surahs downloaded',
+      one: '1 surah downloaded',
+      zero: 'No surahs downloaded',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recitationWholeMushafDownloaded => 'Whole Quran downloaded';
+
+  @override
+  String get recitationSectionPlayback => 'Repeat and playback';
+
+  @override
+  String get recitationSectionPlaybackHint =>
+      'Defaults for every new recitation';
+
+  @override
+  String get recitationRepeatAyah => 'Repeat each ayah';
+
+  @override
+  String get recitationRepeatRange => 'Repeat the passage';
+
+  @override
+  String recitationTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      two: 'Twice',
+      one: 'Once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recitationEndless => 'Until I stop';
+
+  @override
+  String get recitationGap => 'Pause after each recitation';
+
+  @override
+  String get recitationGapHint => 'Time to repeat the ayah after the reciter';
+
+  @override
+  String get recitationGapNone => 'None';
+
+  @override
+  String recitationSeconds(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seconds',
+      one: '1 second',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recitationSpeed => 'Speed';
+
+  @override
+  String recitationSpeedValue(String value) {
+    return '$value×';
+  }
+
+  @override
+  String get recitationBasmala => 'Basmala before each surah';
+
+  @override
+  String get recitationBasmalaHint =>
+      'As in the mushaf – except al-Fatihah (where it is the first ayah) and at-Tawbah';
+
+  @override
+  String get recitationSectionDownloads => 'Listen offline';
+
+  @override
+  String get recitationSectionDownloadsHint =>
+      'Nothing downloads unless you start it';
+
+  @override
+  String recitationStorageUsed(String size) {
+    return 'Storage used: $size';
+  }
+
+  @override
+  String get recitationWifiOnly => 'Download on Wi-Fi only';
+
+  @override
+  String get recitationWifiOnlyHint =>
+      'Downloads wait when you\'re not on Wi-Fi';
+
+  @override
+  String recitationMushafFor(String name) {
+    return 'The whole Quran by $name';
+  }
+
+  @override
+  String recitationAbout(String size) {
+    return 'About $size';
+  }
+
+  @override
+  String get recitationDownloadMushaf => 'Download the Quran';
+
+  @override
+  String get recitationChooseSurahs => 'Choose surahs';
+
+  @override
+  String recitationSurahProgress(String done, String total) {
+    return '$done of $total surahs';
+  }
+
+  @override
+  String recitationFilesProgress(String done, String total) {
+    return '$done of $total files';
+  }
+
+  @override
+  String get recitationPauseDownloads => 'Pause';
+
+  @override
+  String get recitationResumeDownloads => 'Resume';
+
+  @override
+  String get recitationCancelDownload => 'Cancel download';
+
+  @override
+  String get recitationDeleteDownloads => 'Delete downloads';
+
+  @override
+  String recitationDeleteConfirm(String name) {
+    return 'Delete $name\'s recitation from the phone?';
+  }
+
+  @override
+  String recitationDeleteConfirmHint(String size) {
+    return 'Frees $size. You can download it again any time.';
+  }
+
+  @override
+  String recitationDeleteSurahConfirm(String surah) {
+    return 'Delete surah $surah?';
+  }
+
+  @override
+  String get recitationOtherDownloads => 'Other reciters\' downloads';
+
+  @override
+  String recitationDownloadsTitle(String name) {
+    return '$name – downloads';
+  }
+
+  @override
+  String recitationAyatCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ayat',
+      one: '1 ayah',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recitationDownloadSurah => 'Download surah';
+
+  @override
+  String get recitationStatusQueued => 'Queued';
+
+  @override
+  String get recitationStatusDownloading => 'Downloading';
+
+  @override
+  String get recitationStatusPaused => 'Paused';
+
+  @override
+  String get recitationStatusWifi => 'Waiting for Wi-Fi';
+
+  @override
+  String get recitationStatusFailed => 'Download failed';
+
+  @override
+  String get recitationStatusComplete => 'Downloaded';
+
+  @override
+  String get recitationErrorNetwork => 'Check the connection, then resume';
+
+  @override
+  String get recitationErrorNotFound =>
+      'The file isn\'t available at the source';
+
+  @override
+  String get recitationErrorStorage => 'Not enough space on the phone';
+
+  @override
+  String recitationSizeMb(String size) {
+    return '$size MB';
+  }
+
+  @override
+  String recitationSizeGb(String size) {
+    return '$size GB';
+  }
+
+  @override
+  String recitationSizeKb(String size) {
+    return '$size KB';
+  }
+
+  @override
+  String get recitationSourceCredit =>
+      'Recitations from everyayah.com – streamed when you press play or downloaded when you ask';
+
+  @override
+  String recitationSurahNumber(String number) {
+    return 'Surah $number';
+  }
+
+  @override
+  String recitationTitleAyah(String surah, String ayah) {
+    return '$surah · Ayah $ayah';
+  }
+
+  @override
+  String recitationTitleBasmala(String surah) {
+    return '$surah · Basmala';
+  }
+
+  @override
+  String recitationAyahNumber(String ayah) {
+    return 'Ayah $ayah';
+  }
+
+  @override
+  String get recitationBasmalaNow => 'Basmala';
+
+  @override
+  String get recitationNowPlaying => 'Now reciting';
+
+  @override
+  String get recitationPlay => 'Play';
+
+  @override
+  String get recitationPause => 'Pause';
+
+  @override
+  String get recitationNextAyah => 'Next ayah';
+
+  @override
+  String get recitationPreviousAyah => 'Previous ayah';
+
+  @override
+  String get recitationStop => 'Stop recitation';
+
+  @override
+  String get recitationOpenPlayer => 'Open the player';
+
+  @override
+  String get recitationLoading => 'Loading…';
+
+  @override
+  String get recitationPausedPrayer => 'Paused for the adhan – tap to continue';
+
+  @override
+  String get recitationPausedInterruption => 'Paused';
+
+  @override
+  String get recitationPausedNoisy => 'Paused – headphones disconnected';
+
+  @override
+  String get recitationPausedSleep => 'Sleep timer ended';
+
+  @override
+  String get recitationPlaybackNetwork =>
+      'No connection – download the surah to listen offline';
+
+  @override
+  String get recitationPlaybackNotFound =>
+      'This ayah isn\'t available for this reciter';
+
+  @override
+  String get recitationPlaybackFailed => 'Couldn\'t play';
+
+  @override
+  String get recitationRetry => 'Retry';
+
+  @override
+  String get recitationOffline => 'Offline';
+
+  @override
+  String get recitationStreaming => 'Streaming';
+
+  @override
+  String recitationAyahPass(String pass, String total) {
+    return 'Repeat $pass of $total';
+  }
+
+  @override
+  String recitationRangePass(String pass, String total) {
+    return 'Pass $pass of $total';
+  }
+
+  @override
+  String recitationRangePassEndless(String pass) {
+    return 'Pass $pass';
+  }
+
+  @override
+  String get recitationRepeatAyahShort => 'Ayah';
+
+  @override
+  String get recitationRepeatRangeShort => 'Passage';
+
+  @override
+  String get recitationMore => 'More';
+
+  @override
+  String get recitationLess => 'Fewer';
+
+  @override
+  String get recitationSleepTimer => 'Sleep timer';
+
+  @override
+  String get recitationSleepOff => 'Off';
+
+  @override
+  String get recitationSleepAfterAyah => 'After this ayah';
+
+  @override
+  String recitationMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count min',
+      one: '1 min',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recitationSleepUntil(String time) {
+    return 'Stops at $time';
+  }
+
+  @override
+  String get recitationChangeReciter => 'Change reciter';
+
+  @override
+  String recitationProgress(String percent) {
+    return '$percent of the passage';
+  }
+
+  @override
+  String recitationRangeLabel(String from, String to) {
+    return '$from to $to';
+  }
+
+  @override
+  String recitationRangeInSurah(String surah, String from, String to) {
+    return '$surah $from–$to';
+  }
+
+  @override
+  String get recitationBackgroundOff => 'Plays while Madar is open';
+
+  @override
+  String get wirdSep => ' · ';
+
+  @override
+  String get wirdTitle => 'Daily wird';
+
+  @override
+  String get wirdTodayTitle => 'Today\'s wird';
+
+  @override
+  String get wirdReadNow => 'Read now';
+
+  @override
+  String get wirdContinue => 'Continue reading';
+
+  @override
+  String get wirdMarkDone => 'Mark done';
+
+  @override
+  String get wirdStoppedAt => 'I stopped at…';
+
+  @override
+  String get wirdStoppedAtTitle => 'Where did you stop?';
+
+  @override
+  String get wirdStoppedAtHint => 'Move the marker to the last ayah you read';
+
+  @override
+  String get wirdSaveProgress => 'Save';
+
+  @override
+  String get wirdDoneToast => 'Today\'s wird recorded — may Allah accept it';
+
+  @override
+  String wirdPartialToast(String ayah) {
+    return 'Reading recorded up to $ayah';
+  }
+
+  @override
+  String get wirdMetToday => 'Today\'s wird is done — may Allah accept it';
+
+  @override
+  String get wirdRestToday => 'Nothing due today — you\'re ahead of your plan';
+
+  @override
+  String get wirdPausedNote => 'This plan is paused';
+
+  @override
+  String wirdNotStarted(String date) {
+    return 'Starts $date';
+  }
+
+  @override
+  String get wirdKhatmaDone => 'Khatma complete — may Allah accept it';
+
+  @override
+  String wirdBehindSpread(String amount) {
+    return '$amount behind — spread over the coming days';
+  }
+
+  @override
+  String wirdBehindAll(String amount) {
+    return '$amount behind — added to today';
+  }
+
+  @override
+  String wirdAhead(String amount) {
+    return '$amount ahead — well done';
+  }
+
+  @override
+  String wirdBehindShort(String amount) {
+    return '$amount behind';
+  }
+
+  @override
+  String wirdAheadShort(String amount) {
+    return '$amount ahead';
+  }
+
+  @override
+  String wirdTodayLine(String range) {
+    return 'Today: $range';
+  }
+
+  @override
+  String wirdPagePosition(String page) {
+    return 'At p. $page';
+  }
+
+  @override
+  String wirdLeftToday(String amount) {
+    return '$amount to go';
+  }
+
+  @override
+  String wirdAyahRef(String surah, String ayah) {
+    return '$surah $ayah';
+  }
+
+  @override
+  String wirdRangeSameSurah(String surah, String from, String to) {
+    return '$surah $from–$to';
+  }
+
+  @override
+  String wirdRangeCross(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String wirdPageRange(String from, String to) {
+    return 'pp. $from–$to';
+  }
+
+  @override
+  String wirdPageSingle(String page) {
+    return 'p. $page';
+  }
+
+  @override
+  String wirdUnitPages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+      zero: '0 pages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wirdUnitJuz(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count juz',
+      one: '1 juz',
+      zero: '0 juz',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wirdUnitHizb(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hizb',
+      one: '1 hizb',
+      zero: '0 hizb',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wirdUnitAyat(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ayat',
+      one: '1 ayah',
+      zero: '0 ayat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wirdUnitPagesDecimal(String amount) {
+    return '$amount pages';
+  }
+
+  @override
+  String wirdUnitJuzDecimal(String amount) {
+    return '$amount juz';
+  }
+
+  @override
+  String wirdUnitHizbDecimal(String amount) {
+    return '$amount hizb';
+  }
+
+  @override
+  String wirdDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+      zero: '0 days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wirdTemplateKhatma => 'Khatma';
+
+  @override
+  String get wirdTemplatePages => 'Pages';
+
+  @override
+  String get wirdTemplateJuz => 'Juz';
+
+  @override
+  String get wirdTemplateHizb => 'Hizb';
+
+  @override
+  String get wirdTemplateAyat => 'Ayat';
+
+  @override
+  String wirdSummaryKhatma(String days, String amount) {
+    return 'Khatma in $days · $amount a day';
+  }
+
+  @override
+  String wirdSummaryDaily(String amount) {
+    return '$amount a day';
+  }
+
+  @override
+  String wirdDefaultNameKhatma(String days) {
+    return 'Khatma in $days';
+  }
+
+  @override
+  String wirdDefaultNameDaily(String amount) {
+    return '$amount every day';
+  }
+
+  @override
+  String wirdWindowAfter(String prayer) {
+    return 'After $prayer';
+  }
+
+  @override
+  String get wirdWindowDuha => 'Duha time';
+
+  @override
+  String get wirdWindowAnytime => 'Any time';
+
+  @override
+  String get wirdPlansTitle => 'My plans';
+
+  @override
+  String get wirdAddPlan => 'New plan';
+
+  @override
+  String get wirdPrimary => 'Primary';
+
+  @override
+  String get wirdMakePrimary => 'Make primary';
+
+  @override
+  String get wirdPause => 'Pause';
+
+  @override
+  String get wirdResume => 'Resume';
+
+  @override
+  String get wirdPaused => 'Paused';
+
+  @override
+  String get wirdEdit => 'Edit';
+
+  @override
+  String get wirdDelete => 'Delete';
+
+  @override
+  String get wirdDeletedToast => 'Plan deleted';
+
+  @override
+  String get wirdPausedToast => 'Plan paused';
+
+  @override
+  String get wirdResumedToast => 'Plan resumed';
+
+  @override
+  String wirdPrimaryToast(String name) {
+    return '“$name” is now your primary plan';
+  }
+
+  @override
+  String get wirdSavedToast => 'Plan saved';
+
+  @override
+  String wirdCreatedToast(String name) {
+    return '“$name” has begun — may Allah make it easy';
+  }
+
+  @override
+  String get wirdEmptyTitle => 'No wird plan yet';
+
+  @override
+  String get wirdEmptyBody =>
+      'Choose a khatma in thirty days or a daily amount that suits you — we\'ll remind you after the prayer.';
+
+  @override
+  String get wirdEmptyAction => 'Start a plan';
+
+  @override
+  String get wirdStreak => 'Streak';
+
+  @override
+  String wirdBestStreak(String days) {
+    return 'Best: $days';
+  }
+
+  @override
+  String get wirdFinish => 'Projected finish';
+
+  @override
+  String wirdTargetDate(String date) {
+    return 'Target $date';
+  }
+
+  @override
+  String get wirdProgress => 'Progress';
+
+  @override
+  String wirdKhatmas(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count khatmas',
+      one: '1 khatma',
+      zero: 'No khatma yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wirdNoProjection => 'Not yet known';
+
+  @override
+  String wirdProgressOf(String done, String quota) {
+    return '$done of $quota';
+  }
+
+  @override
+  String wirdProgressOfShort(String quota) {
+    return 'of $quota';
+  }
+
+  @override
+  String get wirdHistoryTitle => 'History';
+
+  @override
+  String get wirdLegendMet => 'Done';
+
+  @override
+  String get wirdLegendPartial => 'Partly';
+
+  @override
+  String get wirdLegendMissed => 'Missed';
+
+  @override
+  String get wirdLegendRest => 'Nothing due';
+
+  @override
+  String get wirdLegendPaused => 'Paused';
+
+  @override
+  String get wirdPrevMonth => 'Previous month';
+
+  @override
+  String get wirdNextMonth => 'Next month';
+
+  @override
+  String get wirdNewPlanTitle => 'New wird plan';
+
+  @override
+  String get wirdEditPlanTitle => 'Edit plan';
+
+  @override
+  String get wirdPlanSheetSubtitle =>
+      'A little, done steadily, is better than a lot, abandoned';
+
+  @override
+  String get wirdFieldName => 'Name';
+
+  @override
+  String get wirdFieldType => 'Plan type';
+
+  @override
+  String get wirdFieldDays => 'Duration';
+
+  @override
+  String get wirdFieldCustom => 'Other';
+
+  @override
+  String get wirdFieldAmount => 'Daily amount';
+
+  @override
+  String get wirdFieldStart => 'Start from';
+
+  @override
+  String get wirdFieldStartDate => 'Start date';
+
+  @override
+  String get wirdStartToday => 'Today';
+
+  @override
+  String get wirdStartTomorrow => 'Tomorrow';
+
+  @override
+  String wirdFinishesOn(String date) {
+    return 'Finishes on $date';
+  }
+
+  @override
+  String wirdPerDayPreview(String amount) {
+    return 'About $amount a day';
+  }
+
+  @override
+  String get wirdFieldWindow => 'Wird time';
+
+  @override
+  String get wirdFieldCatchUp => 'If you fall behind';
+
+  @override
+  String get wirdCatchUpSpread => 'Spread it out';
+
+  @override
+  String get wirdCatchUpAll => 'Add it to today';
+
+  @override
+  String get wirdCatchUpSpreadHint =>
+      'What you missed is shared across the coming days, so no single day is heavy';
+
+  @override
+  String get wirdCatchUpAllHint =>
+      'Everything you missed is added to the next day\'s portion';
+
+  @override
+  String get wirdFieldRemind => 'Remind me after the prayer';
+
+  @override
+  String wirdRemindAfter(String minutes) {
+    return '$minutes after';
+  }
+
+  @override
+  String wirdMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count min',
+      one: '1 min',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wirdDecrease => 'Decrease';
+
+  @override
+  String get wirdIncrease => 'Increase';
+
+  @override
+  String get wirdSurah => 'Surah';
+
+  @override
+  String get wirdAyah => 'Ayah';
+
+  @override
+  String get wirdStartJuzShortcut => 'Juz start';
+
+  @override
+  String wirdJuzNumber(String n) {
+    return 'Juz $n';
+  }
+
+  @override
+  String get wirdChooseSurah => 'Choose a surah';
+
+  @override
+  String get wirdSearchSurah => 'Search by name or number';
+
+  @override
+  String get wirdCreate => 'Start plan';
+
+  @override
+  String get wirdSave => 'Save';
+
+  @override
+  String get wirdNameRequired => 'Give the plan a name';
+
+  @override
+  String get wirdReminderChannelName => 'Wird reminders';
+
+  @override
+  String get wirdReminderChannelDescription =>
+      'A reminder for your daily wird after the prayer you choose';
+
+  @override
+  String get wirdReminderTitle => 'Time for your wird';
+
+  @override
+  String wirdReminderBodyToday(String plan, String range) {
+    return '$plan: $range';
+  }
+
+  @override
+  String wirdReminderBody(String plan, String window) {
+    return '$plan — $window';
+  }
+
+  @override
+  String get wirdCatalogError => 'Couldn\'t load the Quran data';
+
+  @override
+  String wirdOverallOf(String percent) {
+    return '$percent of the khatma';
+  }
+
+  @override
+  String wirdPositionIn(String percent) {
+    return '$percent through the mushaf';
+  }
+
+  @override
+  String get wirdOpenAll => 'All plans';
+
+  @override
+  String get wirdStartPlanCta => 'Start a daily wird';
+
+  @override
+  String wirdDayStatusSemantics(String date, String status) {
+    return '$date: $status';
+  }
+
+  @override
+  String get hifzTitle => 'Hifz';
+
+  @override
+  String get hifzTodayTitle => 'Hifz review';
+
+  @override
+  String get hifzStartReview => 'Start review';
+
+  @override
+  String get hifzContinueReview => 'Keep reviewing';
+
+  @override
+  String get hifzNothingDue => 'Nothing to review today';
+
+  @override
+  String get hifzAllCaughtUp => 'All caught up for today — barakAllahu feek';
+
+  @override
+  String hifzDueCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count to review',
+      one: '1 to review',
+      zero: 'Nothing due',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzNewCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new',
+      one: '1 new',
+      zero: 'No new',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hifzTabDue => 'Due';
+
+  @override
+  String get hifzTabNew => 'New';
+
+  @override
+  String get hifzTabLearned => 'Learned';
+
+  @override
+  String get hifzStatDue => 'Today';
+
+  @override
+  String get hifzStatLearned => 'Learned';
+
+  @override
+  String get hifzStatRetention => 'Retention';
+
+  @override
+  String get hifzStatStreak => 'Streak';
+
+  @override
+  String hifzRetentionCaption(String days) {
+    return 'Last $days days';
+  }
+
+  @override
+  String get hifzForecastTitle => 'Reviews in the week ahead';
+
+  @override
+  String get hifzForecastToday => 'Today';
+
+  @override
+  String get hifzKindAyat => 'Ayat';
+
+  @override
+  String get hifzKindHadith => 'Hadith';
+
+  @override
+  String get hifzKindCustom => 'Text';
+
+  @override
+  String hifzDueIn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'in $count days',
+      one: 'tomorrow',
+      zero: 'today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzOverdue(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days overdue',
+      one: '1 day overdue',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzReviews(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reviews',
+      one: '1 review',
+      zero: 'Not reviewed yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzLapses(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'forgotten $count times',
+      one: 'forgotten once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hifzNewBadge => 'New';
+
+  @override
+  String get hifzSuspendedBadge => 'Suspended';
+
+  @override
+  String get hifzAdd => 'Add';
+
+  @override
+  String get hifzAddTitle => 'Add to Hifz';
+
+  @override
+  String get hifzAddSubtitle =>
+      'What you learn today comes back before it fades';
+
+  @override
+  String get hifzAddAyat => 'Ayat of the Quran';
+
+  @override
+  String get hifzAddAyatHint =>
+      'Pick a surah and ayat — split into short chunks';
+
+  @override
+  String get hifzAddHadith => 'A hadith from An-Nawawi\'s Forty';
+
+  @override
+  String get hifzAddHadithHint => 'Forty-two concise, comprehensive hadith';
+
+  @override
+  String get hifzAddCustom => 'Your own text';
+
+  @override
+  String get hifzAddCustomHint =>
+      'A dua, a classical text — anything you want to memorise';
+
+  @override
+  String get hifzFromAyah => 'From ayah';
+
+  @override
+  String get hifzToAyah => 'To ayah';
+
+  @override
+  String get hifzChunkSize => 'Ayat per chunk';
+
+  @override
+  String hifzChunks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count chunks',
+      one: '1 chunk',
+      zero: 'No chunks',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzChunkPreview(String chunks, String ranges) {
+    return '$chunks: $ranges';
+  }
+
+  @override
+  String get hifzAddButton => 'Add to Hifz';
+
+  @override
+  String hifzAdded(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items added to Hifz',
+      one: '1 item added to Hifz',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hifzInHifz => 'In Hifz';
+
+  @override
+  String get hifzCustomTitle => 'Title';
+
+  @override
+  String get hifzCustomTitleHint => 'e.g. The istikhara dua';
+
+  @override
+  String get hifzCustomBody => 'Text';
+
+  @override
+  String get hifzCustomSource => 'Source (optional)';
+
+  @override
+  String get hifzBodyRequired => 'Write the text you want to memorise';
+
+  @override
+  String get hifzEdit => 'Edit';
+
+  @override
+  String get hifzEditTitle => 'Edit item';
+
+  @override
+  String get hifzSuspend => 'Suspend';
+
+  @override
+  String get hifzUnsuspend => 'Back to reviews';
+
+  @override
+  String get hifzResetProgress => 'Start it over';
+
+  @override
+  String get hifzDelete => 'Delete';
+
+  @override
+  String get hifzReviewNow => 'Review now';
+
+  @override
+  String get hifzDeletedToast => 'Removed from Hifz';
+
+  @override
+  String get hifzSuspendedToast => 'Item suspended';
+
+  @override
+  String get hifzUnsuspendedToast => 'Item back in reviews';
+
+  @override
+  String get hifzResetToast => 'Item is new again';
+
+  @override
+  String get hifzSavedToast => 'Changes saved';
+
+  @override
+  String get hifzReviewTitle => 'Review';
+
+  @override
+  String hifzReviewProgress(String done, String total) {
+    return '$done of $total';
+  }
+
+  @override
+  String get hifzRecitePrompt =>
+      'Recite from memory, then reveal the text and grade yourself honestly';
+
+  @override
+  String get hifzRevealFirstLetters => 'First letters';
+
+  @override
+  String get hifzRevealNextWord => 'Next word';
+
+  @override
+  String get hifzRevealAll => 'Show all';
+
+  @override
+  String get hifzRevealHide => 'Hide';
+
+  @override
+  String get hifzListen => 'Listen';
+
+  @override
+  String get hifzListenStop => 'Stop';
+
+  @override
+  String hifzRepeatTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      two: 'twice',
+      one: 'once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hifzRedrill => 'Once more, until it\'s “good”';
+
+  @override
+  String get hifzNewItem => 'New item';
+
+  @override
+  String get hifzGradePrompt => 'How well did you recall it?';
+
+  @override
+  String get hifzGrade0 => 'Blank';
+
+  @override
+  String get hifzGrade0Hint => 'Couldn\'t recall anything';
+
+  @override
+  String get hifzGrade1 => 'Wrong';
+
+  @override
+  String get hifzGrade1Hint => 'Wrong; recognised it when shown';
+
+  @override
+  String get hifzGrade2 => 'Almost';
+
+  @override
+  String get hifzGrade2Hint => 'Wrong, but it seemed easy once shown';
+
+  @override
+  String get hifzGrade3 => 'Hard';
+
+  @override
+  String get hifzGrade3Hint => 'Correct, with serious effort';
+
+  @override
+  String get hifzGrade4 => 'Good';
+
+  @override
+  String get hifzGrade4Hint => 'Correct after a little hesitation';
+
+  @override
+  String get hifzGrade5 => 'Perfect';
+
+  @override
+  String get hifzGrade5Hint => 'Correct, without hesitation';
+
+  @override
+  String get hifzUndoGrade => 'Undo grade';
+
+  @override
+  String hifzNextReview(String when) {
+    return 'Next review $when';
+  }
+
+  @override
+  String get hifzFinish => 'Finish';
+
+  @override
+  String get hifzSummaryTitle => 'Review complete';
+
+  @override
+  String get hifzSummarySubtitle =>
+      '“The best of you are those who learn the Quran and teach it”';
+
+  @override
+  String get hifzSummaryReviewed => 'Reviewed';
+
+  @override
+  String get hifzSummaryNew => 'New';
+
+  @override
+  String get hifzSummaryAgain => 'Repeated';
+
+  @override
+  String get hifzSummaryRecall => 'Recalled';
+
+  @override
+  String hifzSummaryTomorrow(String count) {
+    return 'Tomorrow: $count';
+  }
+
+  @override
+  String get hifzSummaryDone => 'Done';
+
+  @override
+  String get hifzEmptySession => 'Nothing to review right now';
+
+  @override
+  String get hifzEmptyTitle => 'Begin your Hifz';
+
+  @override
+  String get hifzEmptyBody =>
+      'Add ayat or a hadith — spaced repetition brings them back before they fade.';
+
+  @override
+  String get hifzEmptyDue => 'Nothing due today';
+
+  @override
+  String get hifzEmptyNew => 'No new items waiting';
+
+  @override
+  String get hifzEmptyLearned => 'Items appear here after their first review';
+
+  @override
+  String get hifzSettingsTitle => 'Hifz settings';
+
+  @override
+  String get hifzNewPerDay => 'New items a day';
+
+  @override
+  String get hifzListenRepeat => 'Listening repeats per ayah';
+
+  @override
+  String hifzHadithNumber(String n) {
+    return 'Hadith $n';
+  }
+
+  @override
+  String hifzHadithSource(String collection, String n) {
+    return '$collection · $n';
+  }
+
+  @override
+  String get hifzCatalogError => 'Couldn\'t load the Quran data';
+
+  @override
+  String hifzEase(String value) {
+    return 'Ease $value';
+  }
+
+  @override
+  String get hifzEveryDay => 'Every day';
+
+  @override
+  String hifzInterval(String days) {
+    return 'Every $days';
+  }
+
+  @override
+  String get hifzOpenAll => 'All items';
+
+  @override
+  String get hifzStartCta => 'Start memorising';
+
+  @override
+  String get qiblaTitle => 'Qibla';
+
+  @override
+  String get qiblaFacing => 'You\'re facing the qibla';
+
+  @override
+  String qiblaTurnRight(String degrees) {
+    return 'Turn right $degrees';
+  }
+
+  @override
+  String qiblaTurnLeft(String degrees) {
+    return 'Turn left $degrees';
+  }
+
+  @override
+  String get qiblaReading => 'Reading the compass…';
+
+  @override
+  String get qiblaHoldFlat => 'Hold the phone flat in front of you';
+
+  @override
+  String get qiblaBearing => 'Qibla bearing';
+
+  @override
+  String get qiblaDistance => 'To the Kaaba';
+
+  @override
+  String qiblaKm(String distance) {
+    return '$distance km';
+  }
+
+  @override
+  String get qiblaYourHeading => 'Your heading';
+
+  @override
+  String get qiblaSunBearing => 'Sun bearing';
+
+  @override
+  String qiblaDeclination(String value, String direction) {
+    return 'Magnetic declination here is $value $direction; corrected automatically with the World Magnetic Model.';
+  }
+
+  @override
+  String get qiblaEast => 'east';
+
+  @override
+  String get qiblaWest => 'west';
+
+  @override
+  String get qiblaAccuracyHigh => 'High accuracy';
+
+  @override
+  String get qiblaAccuracyMedium => 'Medium accuracy';
+
+  @override
+  String get qiblaAccuracyLow => 'Low accuracy';
+
+  @override
+  String get qiblaAccuracyUnreliable => 'Unreliable reading';
+
+  @override
+  String qiblaAccuracyChip(String level, String error) {
+    return '$level · $error';
+  }
+
+  @override
+  String get qiblaCalibrateTitle => 'Calibrate the compass';
+
+  @override
+  String qiblaCalibrateBody(String eight) {
+    return 'Move the phone through the air in a figure-$eight a few times, away from metal and magnets.';
+  }
+
+  @override
+  String qiblaInterferenceBody(String eight) {
+    return 'The magnetic field here is disturbed: step away from metal, electronics and magnets (magnetic phone cases too), then move the phone in a figure-$eight.';
+  }
+
+  @override
+  String get qiblaCalibrateLater => 'Later';
+
+  @override
+  String get qiblaCalibrated => 'Compass calibrated';
+
+  @override
+  String get qiblaCalibrateAction => 'Calibrate';
+
+  @override
+  String get qiblaSunTitle => 'Sun compass';
+
+  @override
+  String get qiblaSunHowTo =>
+      'Face the sun and point the top of your phone at it, without looking straight at it; the golden needle then points to the qibla.';
+
+  @override
+  String qiblaSunRightOf(String degrees) {
+    return 'Qibla: $degrees right of the sun';
+  }
+
+  @override
+  String qiblaSunLeftOf(String degrees) {
+    return 'Qibla: $degrees left of the sun';
+  }
+
+  @override
+  String get qiblaSunAhead => 'The qibla lies straight toward the sun';
+
+  @override
+  String get qiblaSunHigh =>
+      'The sun is high now, so aiming at it is less precise.';
+
+  @override
+  String get qiblaDiagramTitle => 'Bearing diagram';
+
+  @override
+  String qiblaDiagramHowTo(String degrees) {
+    return 'Find north with a compass, or at night by the Pole Star, then turn $degrees clockwise.';
+  }
+
+  @override
+  String qiblaDiagramHowToSouth(String degrees) {
+    return 'Find north with a compass, or at night from the Southern Cross, which points south; then turn $degrees clockwise from north.';
+  }
+
+  @override
+  String get qiblaNoSensor => 'This phone has no compass (magnetometer).';
+
+  @override
+  String get qiblaSensorError => 'The compass could not be read.';
+
+  @override
+  String get qiblaNoReadings => 'The compass isn\'t responding.';
+
+  @override
+  String get qiblaUseSun => 'Use the sun';
+
+  @override
+  String get qiblaUseCompass => 'Back to the compass';
+
+  @override
+  String get qiblaRetry => 'Try again';
+
+  @override
+  String get qiblaAtKaaba => 'You\'re at the Kaaba itself — face it directly.';
+
+  @override
+  String get qiblaCardTitle => 'Qibla direction';
+
+  @override
+  String get qiblaCardOpen => 'Open the compass';
+
+  @override
+  String qiblaFromPlace(String place) {
+    return 'From $place';
+  }
+
+  @override
+  String get qiblaPointN => 'N';
+
+  @override
+  String get qiblaPointNE => 'NE';
+
+  @override
+  String get qiblaPointE => 'E';
+
+  @override
+  String get qiblaPointSE => 'SE';
+
+  @override
+  String get qiblaPointS => 'S';
+
+  @override
+  String get qiblaPointSW => 'SW';
+
+  @override
+  String get qiblaPointW => 'W';
+
+  @override
+  String get qiblaPointNW => 'NW';
+
+  @override
+  String get qiblaPointNameN => 'north';
+
+  @override
+  String get qiblaPointNameNE => 'north-east';
+
+  @override
+  String get qiblaPointNameE => 'east';
+
+  @override
+  String get qiblaPointNameSE => 'south-east';
+
+  @override
+  String get qiblaPointNameS => 'south';
+
+  @override
+  String get qiblaPointNameSW => 'south-west';
+
+  @override
+  String get qiblaPointNameW => 'west';
+
+  @override
+  String get qiblaPointNameNW => 'north-west';
+
+  @override
+  String qiblaDialLabel(String bearing, String point) {
+    return 'Qibla compass: the qibla is at $bearing, toward the $point.';
+  }
 }

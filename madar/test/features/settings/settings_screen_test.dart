@@ -19,7 +19,7 @@ final _en = lookupL10n(const Locale('en'));
 void main() {
   testWidgets('settings hub lists every section and opens appearance', (tester) async {
     final app = await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
-    for (final title in [_ar.settingsPersonal, _ar.settingsMotion, _ar.settingsData, _ar.settingsAbout]) {
+    for (final title in [_ar.settingsPersonal, _ar.settingsSectionMotionPower, _ar.settingsData, _ar.settingsAbout]) {
       expect(find.text(title), findsWidgets, reason: title);
     }
     await tester.tap(find.text(_ar.settingsAppearance).last);

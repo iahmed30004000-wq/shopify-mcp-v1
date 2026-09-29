@@ -9,16 +9,6 @@
       }
     }
   },
-  "faithHubLinksTitle": {
-    "ar": "روابط سريعة",
-    "en": "Quick links",
-    "description": "Faith page: section of links"
-  },
-  "faithHubTimesHint": {
-    "ar": "اليوم والشهر والتاريخ الهجري",
-    "en": "Day, month and Hijri date",
-    "description": "Link hint: prayer times"
-  },
   "faithHubHistory": {
     "ar": "سجلّ الصلوات",
     "en": "Prayer history",
@@ -43,5 +33,50 @@
     "ar": "المؤذّن والتذكير والأذونات",
     "en": "Muezzin, reminders and permissions",
     "description": "Link hint: adhan settings"
+  },
+  "faithHubTodayTitle": {
+    "ar": "يومك",
+    "en": "Your day",
+    "description": "Faith page: section of today's prayers and adhkar"
+  },
+  "faithHubQuranTitle": {
+    "ar": "مع القرآن",
+    "en": "With the Quran",
+    "description": "Faith page: section of continue reading, the wird and Hifz"
+  },
+  "faithHubQuranIndex": {
+    "ar": "الفهرس",
+    "en": "Index",
+    "description": "Faith page: action opening the Quran's index"
+  },
+  "faithHubToolsTitle": {
+    "ar": "أدوات",
+    "en": "Tools",
+    "description": "Faith page: section of the qibla and the faith tools"
+  },
+  "faithHubMushafHint": {
+    "ar": "الفهرس والبحث والعلامات",
+    "en": "Index, search and bookmarks",
+    "description": "Tool hint: the Quran home"
+  },
+  "faithHubHifzHint": {
+    "ar": "مراجعة بالتكرار المتباعد",
+    "en": "Spaced-repetition review",
+    "description": "Tool hint: Hifz"
+  },
+  "faithHubRecitationHint": {
+    "ar": "القرّاء والتكرار والتنزيل",
+    "en": "Reciters, repeats and downloads",
+    "description": "Tool hint: recitation settings"
+  },
+  "faithHubAdhanTool": {
+    "ar": "الأذان",
+    "en": "Adhan",
+    "description": "Tool: the adhan settings"
+  },
+  "faithHubHifzAlready": {
+    "ar": "هذه الآيات في حفظك من قبل",
+    "en": "These ayat are already in your Hifz",
+    "description": "Toast: add to Hifz found nothing new"
   }
 }

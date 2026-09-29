@@ -11,8 +11,12 @@ import 'package:flutter/services.dart';
 /// * the four bundled font families (SIL OFL 1.1);
 /// * the bundled content and its sources ([content]): the adhkar (Hisn
 ///   al-Muslim datasets, MIT / Unlicense), the offline city list (Natural
-///   Earth, GeoNames CC BY 4.0, IANA, Unicode CLDR) and the adhan tones
-///   (Madar's own, with the record of the recordings search).
+///   Earth, GeoNames CC BY 4.0, IANA, Unicode CLDR), the adhan tones
+///   (Madar's own, with the record of the recordings search), the Quran
+///   (Tanzil text and metadata CC BY 3.0, quran-tajweed CC BY 4.0),
+///   An-Nawawi's Forty (hadith-api, Unlicense), the recitations (EveryAyah,
+///   streamed or downloaded only on the user's request – nothing bundled)
+///   and the qibla compass's magnetic model (WMM2025, public domain).
 abstract final class MadarLicenses {
   static bool _registered = false;
 
@@ -33,6 +37,10 @@ abstract final class MadarLicenses {
     'Adhkar – Hisn al-Muslim': 'assets/licenses/adhkar_credits.txt',
     'Madar city list': 'assets/licenses/geo_cities.txt',
     'Madar adhan tones': 'assets/licenses/adhan_sounds.txt',
+    'Quran – Tanzil text, metadata & quran-tajweed': 'assets/licenses/quran_credits.txt',
+    "Hadith – An-Nawawi's Forty": 'assets/licenses/hadith_credits.txt',
+    'Madar Quran recitation': 'assets/licenses/recitation_credits.txt',
+    'Madar qibla compass (WMM2025)': 'assets/licenses/qibla_wmm.txt',
   };
 
   /// Lets a test register again after `LicenseRegistry.reset()`.

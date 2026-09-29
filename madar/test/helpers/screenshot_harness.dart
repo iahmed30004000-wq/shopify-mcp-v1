@@ -85,7 +85,9 @@ Widget madarScreenshotApp({
 /// for entrance animations and shader loading, and writes the result to
 /// `screenshots/<name>.png`. Returns the written file.
 ///
-/// [beforeCapture] may drive the UI (scroll, tap) before the capture.
+/// [beforeCapture] may drive the UI (scroll, tap) before the capture; the
+/// harness then pumps [trailingFrames] more 50 ms frames (fewer catches an
+/// animation mid-way).
 Future<File> captureScreen(
   WidgetTester tester,
   Widget app,
@@ -94,6 +96,7 @@ Future<File> captureScreen(
   double dpr = 2.625,
   Future<void> Function(WidgetTester tester)? beforeCapture,
   Duration settle = const Duration(milliseconds: 1600),
+  int trailingFrames = 12,
 }) async {
   await tester.runAsync(() async {
     await loadMadarFonts();
@@ -118,7 +121,7 @@ Future<File> captureScreen(
     }
     if (beforeCapture != null) {
       await beforeCapture(tester);
-      for (var i = 0; i < 12; i++) {
+      for (var i = 0; i < trailingFrames; i++) {
         await tester.pump(step);
       }
     }

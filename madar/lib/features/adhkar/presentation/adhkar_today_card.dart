@@ -118,6 +118,8 @@ class AdhkarTodayCard extends ConsumerWidget {
                       ? ''
                       : all
                       ? l.adhkarSuggestAllDone
+                      : done == 0
+                      ? l.adhkarMoment(summary)
                       : l.adhkarTodayLine(l.adhkarMoment(summary), fmt.formatInt(done), fmt.formatInt(total)),
                   style: text.bodySmall!.copyWith(color: all ? t.success : t.textSecondary),
                 ),
@@ -135,7 +137,8 @@ class AdhkarTodayCard extends ConsumerWidget {
                     border: Border.all(color: t.glassBorder),
                   ),
                   child: Text(
-                    l.adhkarTasbeehChip(fmt.formatInt(tasbeeh)),
+                    // Zero is shown as the bare name ("٠" alone reads as a dot).
+                    tasbeeh > 0 ? l.adhkarTasbeehChip(fmt.formatInt(tasbeeh)) : l.adhkarTasbeehTitle,
                     style: text.labelMedium!.copyWith(color: t.accent),
                   ),
                 ),

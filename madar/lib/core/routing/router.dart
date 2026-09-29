@@ -5,19 +5,25 @@ import 'package:go_router/go_router.dart';
 import '../../features/adhan/presentation/adhan_settings_screen.dart';
 import '../../features/adhkar/adhkar.dart' show AdhkarCategoryId, TasbeehScreen;
 import '../../features/gallery/design_gallery_screen.dart';
+import '../../features/hifz/hifz.dart' show HifzCard;
 import '../../features/home/home_screen.dart';
 import '../../features/import/import_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/orbit/presentation/planet/planet_route.dart';
 import '../../features/prayer/presentation/prayer_settings_screen.dart';
+import '../../features/qibla/qibla.dart' show QiblaScreen;
+import '../../features/recitation/recitation.dart' show RecitationSettingsScreen;
 import '../../features/settings/appearance_screen.dart';
 import '../../features/settings/licenses_screen.dart';
+import '../../features/settings/quran_settings_screen.dart';
+import '../../features/settings/reminders_settings_screen.dart';
 import '../../features/settings/security_settings_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/settings/sound_settings_screen.dart';
 import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
+import 'now_playing_dock.dart';
 import 'route_pages.dart';
 import 'routes.dart';
 
@@ -53,11 +59,14 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// always leaves home underneath (back returns there).
 ///
 /// Transitions: home and onboarding fade through; settings pages and the
-/// faith pages (prayer times, tracker, adhkar) move along the reading
-/// direction (shared axis); the tasbeeh and the design gallery zoom in
-/// (scaled shared axis); the importer rises as a sheet; a planet page is a
-/// transparent route whose animation drives the orbit's fly-in / fly-out
-/// underneath it.
+/// faith pages (prayer times, tracker, adhkar, the Quran's home, reader and
+/// search, the wird, Hifz and its reviews, recitation and its downloads)
+/// move along the reading direction (shared axis); the tasbeeh, the qibla
+/// compass and the design gallery zoom in (scaled shared axis); the
+/// importer rises as a sheet, and the full recitation player
+/// (`/now-playing`) as an interaction sheet over the page beneath; a planet
+/// page is a transparent route whose animation drives the orbit's fly-in /
+/// fly-out underneath it.
 ///
 /// The full-screen adhan is not a route: `AdhanHost` presents it above the
 /// router and the app lock (see `AppGate`).
@@ -117,6 +126,46 @@ List<RouteBase> madarRoutes() => [
               child: const SecuritySettingsScreen(),
             ),
           ),
+          GoRoute(
+            path: 'quran',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const QuranSettingsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'recitation',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const RecitationSettingsScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'downloads',
+                redirect: (context, state) =>
+                    RecitationDownloadsRoutePage.reciterOf(state.uri.queryParameters['reciter']) == null
+                    ? AppRoutes.recitationSettings
+                    : null,
+                pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+                  context: context,
+                  key: state.pageKey,
+                  child: RecitationDownloadsRoutePage(
+                    reciter: RecitationDownloadsRoutePage.reciterOf(state.uri.queryParameters['reciter'])!,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'reminders',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const RemindersSettingsScreen(),
+            ),
+          ),
         ],
       ),
       GoRoute(
@@ -164,6 +213,71 @@ List<RouteBase> madarRoutes() => [
             ),
           ),
         ],
+      ),
+      GoRoute(
+        path: 'quran',
+        pageBuilder: (context, state) =>
+            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const QuranHomeRoutePage()),
+        routes: [
+          GoRoute(
+            path: 'read',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: QuranReaderRoutePage(
+                ayah: QuranReaderRoutePage.ayahOf(state.uri.queryParameters['ayah']),
+                page: QuranReaderRoutePage.pageOf(state.uri.queryParameters['page']),
+              ),
+            ),
+          ),
+          GoRoute(
+            path: 'search',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: QuranSearchRoutePage(query: state.uri.queryParameters['q'] ?? ''),
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: 'wird',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: WirdRoutePage(planId: state.uri.queryParameters['plan']),
+        ),
+      ),
+      GoRoute(
+        path: 'hifz',
+        pageBuilder: (context, state) =>
+            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const HifzRoutePage()),
+        routes: [
+          GoRoute(
+            path: 'review',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: HifzReviewRoutePage(
+                cardId: state.uri.queryParameters['card'],
+                card: state.extra is HifzCard ? state.extra! as HifzCard : null,
+              ),
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: 'qibla',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          axis: MadarSharedAxis.scaled,
+          child: const QiblaScreen(),
+        ),
+      ),
+      GoRoute(
+        path: 'now-playing',
+        pageBuilder: (context, state) => NowPlayingSheetPage(key: state.pageKey, name: state.uri.toString()),
       ),
       GoRoute(
         path: 'import',

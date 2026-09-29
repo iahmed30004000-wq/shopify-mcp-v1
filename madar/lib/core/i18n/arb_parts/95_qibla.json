@@ -1,0 +1,381 @@
+{
+  "qiblaTitle": {
+    "ar": "القبلة",
+    "en": "Qibla",
+    "description": "Qibla screen title"
+  },
+  "qiblaFacing": {
+    "ar": "اتجاهك الآن إلى القبلة",
+    "en": "You're facing the qibla",
+    "description": "Status: the phone points at the qibla (±3°)"
+  },
+  "qiblaTurnRight": {
+    "ar": "استدر يمينًا {degrees}",
+    "en": "Turn right {degrees}",
+    "description": "Status: turn clockwise by degrees (pre-formatted, e.g. ٤٥°)",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaTurnLeft": {
+    "ar": "استدر يسارًا {degrees}",
+    "en": "Turn left {degrees}",
+    "description": "Status: turn counter-clockwise by degrees",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaReading": {
+    "ar": "جارٍ قراءة البوصلة…",
+    "en": "Reading the compass…",
+    "description": "Status: waiting for the first compass reading"
+  },
+  "qiblaHoldFlat": {
+    "ar": "أمسك الهاتف مستويًا أمامك",
+    "en": "Hold the phone flat in front of you",
+    "description": "Hint when the phone points at the ground"
+  },
+  "qiblaBearing": {
+    "ar": "اتجاه القبلة",
+    "en": "Qibla bearing",
+    "description": "Info tile label: the qibla bearing from true north"
+  },
+  "qiblaDistance": {
+    "ar": "المسافة إلى الكعبة",
+    "en": "To the Kaaba",
+    "description": "Info tile label"
+  },
+  "qiblaKm": {
+    "ar": "{distance} كم",
+    "en": "{distance} km",
+    "description": "Distance in kilometres (number pre-formatted)",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaYourHeading": {
+    "ar": "اتجاهك",
+    "en": "Your heading",
+    "description": "Info tile label: where the phone points (true north)"
+  },
+  "qiblaSunBearing": {
+    "ar": "اتجاه الشمس",
+    "en": "Sun bearing",
+    "description": "Info tile label: the sun's azimuth"
+  },
+  "qiblaDeclination": {
+    "ar": "الانحراف المغناطيسي هنا {value} {direction}، ويُصحَّح تلقائيًّا بنموذج المجال المغناطيسي العالمي.",
+    "en": "Magnetic declination here is {value} {direction}; corrected automatically with the World Magnetic Model.",
+    "description": "Footnote: magnetic declination (value pre-formatted, direction = qiblaEast/qiblaWest)",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaEast": {
+    "ar": "شرقًا",
+    "en": "east",
+    "description": "Declination direction: east"
+  },
+  "qiblaWest": {
+    "ar": "غربًا",
+    "en": "west",
+    "description": "Declination direction: west"
+  },
+  "qiblaAccuracyHigh": {
+    "ar": "دقة عالية",
+    "en": "High accuracy",
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyMedium": {
+    "ar": "دقة متوسطة",
+    "en": "Medium accuracy",
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyLow": {
+    "ar": "دقة منخفضة",
+    "en": "Low accuracy",
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyUnreliable": {
+    "ar": "قراءة غير موثوقة",
+    "en": "Unreliable reading",
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyChip": {
+    "ar": "{level}، {error}",
+    "en": "{level} · {error}",
+    "description": "Accuracy chip: level and the estimated error, pre-formatted (e.g. ±٤°)",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaCalibrateTitle": {
+    "ar": "عايِر البوصلة",
+    "en": "Calibrate the compass",
+    "description": "Calibration prompt title"
+  },
+  "qiblaCalibrateBody": {
+    "ar": "حرّك الهاتف في الهواء على شكل الرقم {eight} مرّاتٍ قليلة، بعيدًا عن المعادن والمغانط.",
+    "en": "Move the phone through the air in a figure-{eight} a few times, away from metal and magnets.",
+    "description": "Calibration prompt body; {eight} is the digit 8 in the user's digits",
+    "placeholders": {
+      "eight": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaInterferenceBody": {
+    "ar": "المجال المغناطيسي هنا مضطرب: ابتعد عن المعادن والأجهزة والمغانط (ومنها أغطية الهاتف المغناطيسية)، ثم حرّك الهاتف على شكل الرقم {eight}.",
+    "en": "The magnetic field here is disturbed: step away from metal, electronics and magnets (magnetic phone cases too), then move the phone in a figure-{eight}.",
+    "description": "Calibration prompt body when the field strength is far off",
+    "placeholders": {
+      "eight": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaCalibrateLater": {
+    "ar": "لاحقًا",
+    "en": "Later",
+    "description": "Button: hide the calibration prompt"
+  },
+  "qiblaCalibrated": {
+    "ar": "تمّت معايرة البوصلة",
+    "en": "Compass calibrated",
+    "description": "Toast when the calibration prompt resolves"
+  },
+  "qiblaCalibrateAction": {
+    "ar": "معايرة",
+    "en": "Calibrate",
+    "description": "Button: show the calibration prompt again"
+  },
+  "qiblaSunTitle": {
+    "ar": "بوصلة الشمس",
+    "en": "Sun compass",
+    "description": "Sun mode title"
+  },
+  "qiblaSunHowTo": {
+    "ar": "قف والشمس أمامك، ووجّه أعلى الهاتف نحوها دون أن تنظر إليها مباشرة؛ عندئذٍ تشير الإبرة الذهبية إلى القبلة.",
+    "en": "Face the sun and point the top of your phone at it, without looking straight at it; the golden needle then points to the qibla.",
+    "description": "Sun mode instructions"
+  },
+  "qiblaSunRightOf": {
+    "ar": "القبلة إلى يمين الشمس بزاوية {degrees}",
+    "en": "Qibla: {degrees} right of the sun",
+    "description": "Sun mode: qibla relative to the sun",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaSunLeftOf": {
+    "ar": "القبلة إلى يسار الشمس بزاوية {degrees}",
+    "en": "Qibla: {degrees} left of the sun",
+    "description": "Sun mode: qibla relative to the sun",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaSunAhead": {
+    "ar": "القبلة في جهة الشمس تمامًا",
+    "en": "The qibla lies straight toward the sun",
+    "description": "Sun mode: qibla within 3° of the sun"
+  },
+  "qiblaSunHigh": {
+    "ar": "الشمس عالية الآن، فالتصويب نحوها أقلّ دقة.",
+    "en": "The sun is high now, so aiming at it is less precise.",
+    "description": "Sun mode caveat near noon"
+  },
+  "qiblaDiagramTitle": {
+    "ar": "مخطط الاتجاه",
+    "en": "Bearing diagram",
+    "description": "Diagram mode title"
+  },
+  "qiblaDiagramHowTo": {
+    "ar": "حدّد الشمال ببوصلة، أو ليلًا بالنجم القطبي (الجُدَيّ)، ثم استدر {degrees} باتجاه عقارب الساعة.",
+    "en": "Find north with a compass, or at night by the Pole Star, then turn {degrees} clockwise.",
+    "description": "Diagram instructions (northern hemisphere)",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaDiagramHowToSouth": {
+    "ar": "حدّد الشمال ببوصلة، أو ليلًا بكوكبة الصليب الجنوبي التي تدلّ على الجنوب، ثم استدر {degrees} من الشمال باتجاه عقارب الساعة.",
+    "en": "Find north with a compass, or at night from the Southern Cross, which points south; then turn {degrees} clockwise from north.",
+    "description": "Diagram instructions (southern hemisphere)",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaNoSensor": {
+    "ar": "لا يحتوي هذا الهاتف على بوصلة (مستشعر مغناطيسي).",
+    "en": "This phone has no compass (magnetometer).",
+    "description": "Fallback reason"
+  },
+  "qiblaSensorError": {
+    "ar": "تعذّرت قراءة البوصلة.",
+    "en": "The compass could not be read.",
+    "description": "Fallback reason"
+  },
+  "qiblaNoReadings": {
+    "ar": "لا تصل قراءات من البوصلة.",
+    "en": "The compass isn't responding.",
+    "description": "Fallback reason"
+  },
+  "qiblaUseSun": {
+    "ar": "استعن بالشمس",
+    "en": "Use the sun",
+    "description": "Button: switch to the sun compass"
+  },
+  "qiblaUseCompass": {
+    "ar": "عُد إلى البوصلة",
+    "en": "Back to the compass",
+    "description": "Button: back to the live compass"
+  },
+  "qiblaRetry": {
+    "ar": "أعد المحاولة",
+    "en": "Try again",
+    "description": "Button: retry the compass"
+  },
+  "qiblaAtKaaba": {
+    "ar": "أنت عند الكعبة المشرّفة، فتوجّه إليها مباشرة.",
+    "en": "You're at the Kaaba itself — face it directly.",
+    "description": "Shown within 200 m of the Kaaba"
+  },
+  "qiblaCardTitle": {
+    "ar": "اتجاه القبلة",
+    "en": "Qibla direction",
+    "description": "Faith hub card title"
+  },
+  "qiblaCardOpen": {
+    "ar": "افتح البوصلة",
+    "en": "Open the compass",
+    "description": "Card action / semantics hint"
+  },
+  "qiblaFromPlace": {
+    "ar": "من {place}",
+    "en": "From {place}",
+    "description": "The place the qibla is computed from",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaPointN": {
+    "ar": "ش",
+    "en": "N",
+    "description": "Compass point abbreviation N (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointNE": {
+    "ar": "ش ق",
+    "en": "NE",
+    "description": "Compass point abbreviation NE (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointE": {
+    "ar": "ق",
+    "en": "E",
+    "description": "Compass point abbreviation E (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointSE": {
+    "ar": "ج ق",
+    "en": "SE",
+    "description": "Compass point abbreviation SE (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointS": {
+    "ar": "ج",
+    "en": "S",
+    "description": "Compass point abbreviation S (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointSW": {
+    "ar": "ج غ",
+    "en": "SW",
+    "description": "Compass point abbreviation SW (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointW": {
+    "ar": "غ",
+    "en": "W",
+    "description": "Compass point abbreviation W (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointNW": {
+    "ar": "ش غ",
+    "en": "NW",
+    "description": "Compass point abbreviation NW (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointNameN": {
+    "ar": "الشمال",
+    "en": "north",
+    "description": "Compass point full name N (screen readers)"
+  },
+  "qiblaPointNameNE": {
+    "ar": "الشمال الشرقي",
+    "en": "north-east",
+    "description": "Compass point full name NE (screen readers)"
+  },
+  "qiblaPointNameE": {
+    "ar": "الشرق",
+    "en": "east",
+    "description": "Compass point full name E (screen readers)"
+  },
+  "qiblaPointNameSE": {
+    "ar": "الجنوب الشرقي",
+    "en": "south-east",
+    "description": "Compass point full name SE (screen readers)"
+  },
+  "qiblaPointNameS": {
+    "ar": "الجنوب",
+    "en": "south",
+    "description": "Compass point full name S (screen readers)"
+  },
+  "qiblaPointNameSW": {
+    "ar": "الجنوب الغربي",
+    "en": "south-west",
+    "description": "Compass point full name SW (screen readers)"
+  },
+  "qiblaPointNameW": {
+    "ar": "الغرب",
+    "en": "west",
+    "description": "Compass point full name W (screen readers)"
+  },
+  "qiblaPointNameNW": {
+    "ar": "الشمال الغربي",
+    "en": "north-west",
+    "description": "Compass point full name NW (screen readers)"
+  },
+  "qiblaDialLabel": {
+    "ar": "بوصلة القبلة: القبلة على {bearing} نحو {point}.",
+    "en": "Qibla compass: the qibla is at {bearing}, toward the {point}.",
+    "description": "Semantics label of the dial",
+    "placeholders": {
+      "bearing": {
+        "type": "String"
+      },
+      "point": {
+        "type": "String"
+      }
+    }
+  }
+}

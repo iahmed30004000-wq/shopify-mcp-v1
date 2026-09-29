@@ -1,3 +1,5 @@
+import '../quran/ayah.dart';
+
 /// Every route location of the app. Navigate with `context.go(AppRoutes.x)`
 /// (routes below `/` are nested, so `go` builds the whole stack and the back
 /// button returns to the parent).
@@ -58,6 +60,67 @@ abstract final class AppRoutes {
     path: '/planet/${Uri.encodeComponent(key)}',
     queryParameters: item == null ? null : {'item': item},
   ).toString();
+
+  // Phase 3 – the Quran, recitation, the wird, Hifz and the qibla.
+
+  /// The Quran's front page: continue reading, search, go to, the index.
+  static const String quran = '/quran';
+
+  /// The reader (`?ayah=2:255` or `?page=42`; neither: where it last
+  /// stopped).
+  static const String quranReader = '/quran/read';
+
+  /// Location of the reader at [ayah] (lit briefly) or at mushaf [page].
+  static String quranReaderOf({AyahRef? ayah, int? page}) => Uri(
+    path: quranReader,
+    queryParameters: ayah != null
+        ? {'ayah': '$ayah'}
+        : page != null
+        ? {'page': '$page'}
+        : null,
+  ).toString();
+
+  /// Search across the Arabic text (`?q=` starts with a query).
+  static const String quranSearch = '/quran/search';
+
+  /// The daily wird (`?plan=<id>` focuses one plan).
+  static const String wird = '/wird';
+
+  /// Location of the wird screen focused on [planId].
+  static String wirdOf(String? planId) =>
+      Uri(path: wird, queryParameters: planId == null ? null : {'plan': planId}).toString();
+
+  /// Hifz: due items, all items, stats.
+  static const String hifz = '/hifz';
+
+  /// A review session (`?card=<id>` reviews one item).
+  static const String hifzReview = '/hifz/review';
+
+  /// Location of a review of the card [cardId] only (all due when null).
+  static String hifzReviewOf(String? cardId) =>
+      Uri(path: hifzReview, queryParameters: cardId == null ? null : {'card': cardId}).toString();
+
+  /// The qibla compass.
+  static const String qibla = '/qibla';
+
+  /// The full recitation player (a sheet over the page underneath).
+  static const String nowPlaying = '/now-playing';
+
+  /// Settings › Quran reading (layout, text size, tajweed, translation).
+  static const String quranSettings = '/settings/quran';
+
+  /// Settings › Recitation (reciter, repeats, speed, downloads).
+  static const String recitationSettings = '/settings/recitation';
+
+  /// One reciter's per-surah downloads (`?reciter=<id>`).
+  static const String recitationDownloads = '/settings/recitation/downloads';
+
+  /// Location of [reciterId]'s downloads.
+  static String recitationDownloadsOf(String reciterId) =>
+      Uri(path: recitationDownloads, queryParameters: {'reciter': reciterId}).toString();
+
+  /// Settings › Reminders (adhkar and wird).
+  static const String reminders = '/settings/reminders';
 
   /// Locations reachable before onboarding is finished (onboarding can hand
   /// over to the importer).

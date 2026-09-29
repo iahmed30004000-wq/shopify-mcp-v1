@@ -19,10 +19,14 @@ import '../data/adhan_permissions.dart';
 /// back from system settings). When everything is allowed it folds into a
 /// single calm line. A muted alarm volume is flagged too.
 class AdhanPermissionsCard extends ConsumerWidget {
-  const AdhanPermissionsCard({super.key, this.compactWhenReady = true});
+  const AdhanPermissionsCard({super.key, this.compactWhenReady = true, this.showHeader = true});
 
   /// Collapse to one line once everything is granted.
   final bool compactWhenReady;
+
+  /// The card's own title and subtitle – off where the page already says
+  /// it (the onboarding step's heading; a sheet's frame never shows it).
+  final bool showHeader;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,8 +36,8 @@ class AdhanPermissionsCard extends ConsumerWidget {
       curve: MadarMotion.standard,
       alignment: AlignmentDirectional.topCenter,
       child: switch (status) {
-        AsyncData(:final value) => _Card(status: value, compactWhenReady: compactWhenReady),
-        AsyncError() => _Card(status: AdhanPermissionStatus.unknown, compactWhenReady: false),
+        AsyncData(:final value) => _Card(status: value, compactWhenReady: compactWhenReady, showHeader: showHeader),
+        AsyncError() => _Card(status: AdhanPermissionStatus.unknown, compactWhenReady: false, showHeader: false),
         _ => const _Loading(),
       },
     );
@@ -66,10 +70,11 @@ class _Loading extends StatelessWidget {
 }
 
 class _Card extends ConsumerWidget {
-  const _Card({required this.status, required this.compactWhenReady});
+  const _Card({required this.status, required this.compactWhenReady, this.showHeader = true});
 
   final AdhanPermissionStatus status;
   final bool compactWhenReady;
+  final bool showHeader;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -112,7 +117,7 @@ class _Card extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (compactWhenReady)
+          if (compactWhenReady && showHeader)
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.m, Space.l, Space.xs),
               child: Row(

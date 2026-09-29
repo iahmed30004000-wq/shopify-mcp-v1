@@ -6,11 +6,12 @@ import '../../../core/i18n/formatters.dart';
 import '../../../core/motion/motion.dart';
 import '../../../core/sound/sound_api.dart';
 
-/// A titled group of settings rows on one glass panel.
+/// A titled group of settings rows on one glass panel. A null [title] leaves
+/// the header out (a page whose app bar already names its only group).
 class SettingsSection extends StatelessWidget {
   const SettingsSection({super.key, required this.title, this.subtitle, required this.children, this.seed = 0});
 
-  final String title;
+  final String? title;
   final String? subtitle;
   final List<Widget> children;
   final double seed;
@@ -22,11 +23,14 @@ class SettingsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SectionHeader(
-          title: title,
-          subtitle: subtitle,
-          padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.xl, Space.xs, Space.m),
-        ),
+        if (title case final title?)
+          SectionHeader(
+            title: title,
+            subtitle: subtitle,
+            padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.xl, Space.xs, Space.m),
+          )
+        else
+          const SizedBox(height: Space.l),
         GlassPanel(
           padding: const EdgeInsetsDirectional.symmetric(vertical: Space.xs),
           seed: seed,

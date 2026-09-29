@@ -82,6 +82,16 @@ void main() {
         ('tasbeeh', '/adhkar/tasbeeh'),
         ('adhan settings', '/settings/adhan'),
         ('security', '/settings/security'),
+        // Phase 3 pages, routed.
+        ('quran', '/quran'),
+        ('quran reader', '/quran/read?ayah=2:255'),
+        ('quran search', '/quran/search'),
+        ('wird', '/wird'),
+        ('hifz', '/hifz'),
+        ('qibla', '/qibla'),
+        ('quran settings', '/settings/quran'),
+        ('recitation settings', '/settings/recitation'),
+        ('reminders', '/settings/reminders'),
       ]) {
         testWidgets(screen, (tester) async {
           await pumpMadarApp(

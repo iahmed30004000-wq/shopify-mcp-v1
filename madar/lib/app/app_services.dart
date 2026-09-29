@@ -9,6 +9,10 @@ import '../core/routing/router.dart';
 import '../core/settings/app_settings.dart';
 import '../features/adhkar/adhkar.dart' show AdhkarReminderTaps, adhkarReminderSyncProvider;
 import '../features/prayer/domain/time_zones.dart';
+import '../features/quran/quran.dart' show quranMetaProvider;
+import '../features/recitation/recitation.dart' show RecitationPlayer, recitationPlayerProvider;
+import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
+import 'faith_services.dart';
 
 /// Prepares the services the app needs soon but never on the first frame:
 /// the full time-zone database (prayer times of a location in another zone,
@@ -17,7 +21,8 @@ import '../features/prayer/domain/time_zones.dart';
 ///
 /// Called right after the first frame (see `bootstrap`); each step fails on
 /// its own and only logs – without notifications Madar still runs, it just
-/// cannot sound the adhan or remind.
+/// cannot sound the adhan or remind. Last, the Quran's small structure file
+/// is read (never the text): the Faith page and the wird need it first.
 Future<void> warmUpServices(ProviderContainer container) async {
   try {
     MadarTimeZones.ensure();
@@ -28,6 +33,14 @@ Future<void> warmUpServices(ProviderContainer container) async {
     await container.read(notificationServiceProvider).init();
   } catch (e, s) {
     _log('notifications', e, s);
+  }
+  // The Quran's structure (sura names, pages, juz – 13 KB) is warm before
+  // the Faith page, the wird and the reader first ask for it; the text
+  // itself stays lazy (the reader, search or Hifz load it on demand).
+  try {
+    await container.read(quranMetaProvider.future);
+  } catch (e, s) {
+    _log('quran structure', e, s);
   }
 }
 
@@ -40,8 +53,9 @@ void _log(String what, Object error, StackTrace stack) {
 /// above everything).
 ///
 /// * An adhkar reminder opens its set in the reader
-///   (`/adhkar/<set>`), whether it launched the app (cold start) or reached
-///   it running (warm).
+///   (`/adhkar/<set>`), a wird reminder the wird page on its plan
+///   (`/wird?plan=<id>`), whether it launched the app (cold start) or
+///   reached it running (warm).
 /// * The router moves underneath the app lock: when Madar is locked the lock
 ///   screen stays in front, and the reader is what the owner sees after
 ///   unlocking – a notification never reveals anything past the lock.
@@ -59,6 +73,8 @@ class AppNotificationRouter {
   static String? locationOf(NotificationTap tap) {
     final set = AdhkarReminderTaps.categoryOf(tap);
     if (set != null) return AppRoutes.adhkarSetOf(set.name);
+    final plan = WirdReminderTaps.planOf(tap);
+    if (plan != null) return AppRoutes.wirdOf(plan);
     return null;
   }
 
@@ -94,19 +110,58 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///
 /// * adhkar reminders stay planned (re-planned on settings, location,
 ///   language and day changes – [adhkarReminderSyncProvider]);
-/// * notification taps open their pages ([AppNotificationRouter]).
+/// * wird reminders likewise, a week ahead after each plan's prayer
+///   ([wirdReminderSyncProvider]), and a wird portion read in the Quran
+///   reader is logged as done ([wirdCompletionSyncProvider]);
+/// * notification taps open their pages ([AppNotificationRouter]), a tap on
+///   the recitation's media notification the full player
+///   ([RecitationNotificationRouter]);
+/// * a listening session still open when the engine detaches from its last
+///   activity is written ([RecitationPlayer.flushSession]).
 ///
 /// The adhan's own services (alarm planning, prayer quiet, the full-screen
 /// adhan) live in `AdhanHost`, directly below this.
-class AppServices extends ConsumerWidget {
+class AppServices extends ConsumerStatefulWidget {
   const AppServices({super.key, required this.child});
 
   final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AppServices> createState() => _AppServicesState();
+}
+
+class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Only a player that exists (never create one to flush nothing).
+    if (state == AppLifecycleState.detached && ref.exists(recitationPlayerProvider)) {
+      unawaited(ref.read(recitationPlayerProvider).flushSession().catchError((Object e) => _logFlush(e)));
+    }
+  }
+
+  static void _logFlush(Object e) {
+    if (kDebugMode) debugPrint('Madar: recitation session flush failed: $e');
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.watch(adhkarReminderSyncProvider);
+    ref.watch(wirdReminderSyncProvider);
+    ref.watch(wirdCompletionSyncProvider);
     ref.watch(appNotificationRouterProvider);
-    return child;
+    ref.watch(recitationNotificationRouterProvider);
+    return widget.child;
   }
 }

@@ -19,15 +19,26 @@
            where it is granted by default.
          * USE_FULL_SCREEN_INTENT – the adhan screen over the lock screen
            (Android 14+ lets the user revoke it; the permission card checks).
-         * WAKE_LOCK – keep the CPU up while an alarm is delivered.
+         * WAKE_LOCK – keep the CPU up while an alarm is delivered (and, for
+           the recitation below, while audio_service's service plays).
          * REQUEST_IGNORE_BATTERY_OPTIMIZATIONS – the permission card asks for
-           the battery-optimisation exemption (OEM task killers). -->
+           the battery-optimisation exemption (OEM task killers; audio_service
+           also needs it to restart its foreground service from the
+           background on Android 12+). -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- Recitation (lib/features/recitation): audio_service's media-playback
+         foreground service keeps a recitation playing with the screen off,
+         with its notification, lock-screen and headset controls.
+         FOREGROUND_SERVICE_MEDIA_PLAYBACK is required for that service type
+         from Android 14 (API 34). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
     <!-- Prayer times: location for the offline calculation (one fix, only when
          the user asks; a manual city works without it). Approximate location
@@ -42,6 +53,12 @@
          approximate fix in the foreground and never starts it, so the
          permission is dropped from the merged manifest (privacy). -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" tools:node="remove" />
+
+    <!-- Qibla (lib/features/qibla): the compass reads the magnetometer and
+         accelerometer (no permission needed) but does not require them – the
+         sun compass and the night diagram cover phones without them. -->
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
 
     <application
         android:label="@string/app_name"
@@ -113,6 +130,33 @@
             android:authorities="${applicationId}.adhansounds"
             android:exported="false"
             android:grantUriPermissions="true" />
+
+        <!-- audio_service 0.18.19 (README › Android setup; the plugin's own
+             manifest is empty): the media service a recitation runs in while
+             Madar is in the background, and the receiver for headset /
+             Bluetooth media buttons and the notification's buttons. Exported:
+             the system's media browser and media-button dispatch bind to them.
+             Same process as MainActivity, whose FlutterEngine the service
+             shares (AudioServiceFragmentActivity). The recitation's Dart side
+             (AudioServiceBackground) starts it only on the user's first play,
+             and falls back to foreground-only playback if it cannot. -->
+        <service
+            android:name="com.ryanheise.audioservice.AudioService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

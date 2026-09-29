@@ -72,18 +72,53 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> {
   bool _programmaticPage = false;
   DateTime? _month;
   Timer? _minute;
+
+  /// Today's row of the month table: opening the month (or returning to
+  /// this month) glides it into view instead of leaving it below the fold.
+  final GlobalKey _todayRow = GlobalKey(debugLabel: 'prayer-month-today');
+
+  /// The month table's column heads; once they scroll under the app bar a
+  /// copy stays pinned there, so the times never lose their names.
+  final GlobalKey _monthHead = GlobalKey(debugLabel: 'prayer-month-head');
+  final ValueNotifier<bool> _pinHead = ValueNotifier(false);
+
+  bool _pinCheckScheduled = false;
+
+  /// Scroll notifications arrive before the frame lays the list out at its
+  /// new offset: measure after it.
+  void _schedulePinCheck(double top) {
+    if (_pinCheckScheduled) return;
+    _pinCheckScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _pinCheckScheduled = false;
+      if (mounted) _updatePinnedHead(top);
+    });
+  }
+
+  void _updatePinnedHead(double top) {
+    final head = _monthHead.currentContext?.findRenderObject();
+    final pinned =
+        _view == PrayerTimesView.month &&
+        head is RenderBox &&
+        head.attached &&
+        head.localToGlobal(Offset.zero).dy < top;
+    if (_pinHead.value != pinned) _pinHead.value = pinned;
+  }
+
   late DateTime _now = ref.read(prayerClockProvider)();
 
   @override
   void initState() {
     super.initState();
     _armMinute();
+    if (_view == PrayerTimesView.month) _revealTodayRow();
   }
 
   @override
   void dispose() {
     _minute?.cancel();
     _pages.dispose();
+    _pinHead.dispose();
     super.dispose();
   }
 
@@ -107,6 +142,21 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> {
       return;
     }
     Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const PrayerSettingsScreen()));
+  }
+
+  void _revealTodayRow() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final row = _todayRow.currentContext;
+      if (!mounted || row == null) return;
+      unawaited(
+        Scrollable.ensureVisible(
+          row,
+          alignment: 0.6,
+          duration: context.reducedMotion ? Duration.zero : MadarMotion.medium,
+          curve: MadarMotion.standard,
+        ),
+      );
+    });
   }
 
   Future<void> _goToPage(int page) async {
@@ -183,7 +233,13 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> {
         ],
         selected: _view,
         onChanged: (v) {
-          if (v != null) setState(() => _view = v);
+          if (v == null) return;
+          setState(() => _view = v);
+          if (v == PrayerTimesView.month) {
+            _revealTodayRow();
+          } else {
+            _pinHead.value = false;
+          }
         },
       ),
     );
@@ -244,10 +300,20 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> {
           onNext: () => setState(() => _month = DateTime(month.year, month.month + 1)),
           onToday: month.year == calendarToday.year && month.month == calendarToday.month
               ? null
-              : () => setState(() => _month = DateTime(calendarToday.year, calendarToday.month)),
+              : () {
+                  setState(() => _month = DateTime(calendarToday.year, calendarToday.month));
+                  _revealTodayRow();
+                },
         ),
         const SizedBox(height: Space.s),
-        _MonthTable(month: month, schedule: schedule, clock: clock, today: calendarToday),
+        _MonthTable(
+          month: month,
+          schedule: schedule,
+          clock: clock,
+          today: calendarToday,
+          todayKey: _todayRow,
+          headKey: _monthHead,
+        ),
       ];
     }
 
@@ -268,41 +334,96 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> {
       ],
       // The insets (app bar included) are only known inside the scaffold.
       body: Builder(
-        builder: (context) => ListView(
-          padding: EdgeInsetsDirectional.fromSTEB(
-            Space.gutter,
-            MediaQuery.paddingOf(context).top + Space.s,
-            Space.gutter,
-            MediaQuery.paddingOf(context).bottom + Space.xxxl,
-          ),
-          children: [
-            StaggerIn(
-              id: 'prayer-times',
-              fade: false,
-              spacing: Space.l,
-              children: [
-                header,
-                _NextPrayerHero(schedule: schedule, clock: clock),
-                segments,
-                AnimatedSwitcher(
-                  duration: context.motion(MadarMotion.medium),
-                  switchInCurve: MadarMotion.decelerate,
-                  transitionBuilder: (child, anim) => FadeTransition(
-                    opacity: anim,
-                    child: SlideTransition(
-                      position: Tween(begin: const Offset(0, 0.03), end: Offset.zero).animate(anim),
-                      child: child,
+        builder: (context) {
+          final top = MediaQuery.paddingOf(context).top;
+          final list = ListView(
+            padding: EdgeInsetsDirectional.fromSTEB(
+              Space.gutter,
+              MediaQuery.paddingOf(context).top + Space.s,
+              Space.gutter,
+              MediaQuery.paddingOf(context).bottom + Space.xxxl,
+            ),
+            children: [
+              StaggerIn(
+                id: 'prayer-times',
+                fade: false,
+                spacing: Space.l,
+                children: [
+                  header,
+                  _NextPrayerHero(schedule: schedule, clock: clock),
+                  segments,
+                  AnimatedSwitcher(
+                    duration: context.motion(MadarMotion.medium),
+                    switchInCurve: MadarMotion.decelerate,
+                    transitionBuilder: (child, anim) => FadeTransition(
+                      opacity: anim,
+                      child: SlideTransition(
+                        position: Tween(begin: const Offset(0, 0.03), end: Offset.zero).animate(anim),
+                        child: child,
+                      ),
+                    ),
+                    child: Column(
+                      key: ValueKey(_view),
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: content,
                     ),
                   ),
-                  child: Column(
-                    key: ValueKey(_view),
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: content,
+                ],
+              ),
+            ],
+          );
+          return Stack(
+            children: [
+              NotificationListener<ScrollNotification>(
+                onNotification: (_) {
+                  _schedulePinCheck(top);
+                  return false;
+                },
+                child: list,
+              ),
+              PositionedDirectional(
+                top: top,
+                start: Space.gutter,
+                end: Space.gutter,
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: _pinHead,
+                  builder: (context, pinned, _) => IgnorePointer(
+                    child: AnimatedSwitcher(
+                      duration: context.motion(MadarMotion.short),
+                      child: pinned
+                          ? const _MonthColumnsBar(key: ValueKey('prayer-month-pinned-head'))
+                          : const SizedBox.shrink(),
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// The month table's column heads, pinned under the app bar while the
+/// table scrolls beneath it (same columns and insets as [_MonthTable]).
+class _MonthColumnsBar extends StatelessWidget {
+  const _MonthColumnsBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ExcludeSemantics(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Color.alphaBlend(t.glassFill, t.space1).withValues(alpha: 0.94),
+          borderRadius: BorderRadius.circular(t.radiusS),
+          border: Border.all(color: t.glassBorder.withValues(alpha: 0.6), width: 0.8),
+          boxShadow: [BoxShadow(color: t.glassShadow, blurRadius: 12, offset: const Offset(0, 4))],
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.xs),
+          child: _MonthTable.headRow(context),
         ),
       ),
     );
@@ -408,11 +529,11 @@ class _NextPrayerHeroState extends ConsumerState<_NextPrayerHero> {
                     const SizedBox(height: 2),
                     Padding(
                       padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.s),
-                      child: Text(
-                        windowName,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: text.labelSmall!.copyWith(color: t.textSecondary),
+                      // "Dhuhr → Asr" shrinks to fit the ring instead of
+                      // losing its second name under large text.
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(windowName, maxLines: 1, style: text.labelSmall!.copyWith(color: t.textSecondary)),
                       ),
                     ),
                   ],
@@ -491,7 +612,8 @@ class _DayHeader extends StatelessWidget {
     final fmt = MadarFormatter.of(context);
     final title = prayerDayTitle(l, Localizations.localeOf(context).languageCode, date, prayerDay, calendarToday);
     final hijri = hijriOfDate(settings, date);
-    final sub = '${fmt.formatDate(date, style: MadarDateStyle.dayMonth)} · ${l.hijriDayMonth(hijri, fmt)}';
+    final sub =
+        '${fmt.formatDate(date, style: MadarDateStyle.dayMonth)}${l.commonFactSeparator}${l.hijriDayMonth(hijri, fmt)}';
     return Row(
       children: [
         MadarButton.icon(
@@ -867,12 +989,45 @@ class _MonthHeader extends StatelessWidget {
 /// The month's times as a table: date (with the Hijri day) and the six
 /// daily times; today highlighted, Fridays tinted.
 class _MonthTable extends ConsumerWidget {
-  const _MonthTable({required this.month, required this.schedule, required this.clock, required this.today});
+  const _MonthTable({
+    required this.month,
+    required this.schedule,
+    required this.clock,
+    required this.today,
+    this.todayKey,
+    this.headKey,
+  });
 
   final DateTime month;
   final PrayerSchedule schedule;
   final PrayerClockFormat clock;
   final DateTime today;
+
+  /// Given to today's row (when this month holds today).
+  final Key? todayKey;
+
+  /// Given to the column heads (the screen pins a copy once they scroll
+  /// away).
+  final Key? headKey;
+
+  /// "Day, Fajr, Sunrise …": the column heads, also pinned by the screen.
+  static Widget headRow(BuildContext context, {Key? key}) {
+    final t = context.tokens;
+    final l = L10n.of(context);
+    final head = Theme.of(context).textTheme.labelSmall!.copyWith(color: t.gold, fontWeight: FontWeight.w600);
+    Widget cellBox(Widget child) => Expanded(child: Center(child: child));
+    return SizedBox(
+      key: key,
+      height: 30,
+      child: Row(
+        children: [
+          cellBox(Text(l.ptMonthDay, style: head, maxLines: 1)),
+          for (final m in _moments)
+            cellBox(Text(l.momentName(m), style: head, maxLines: 1, overflow: TextOverflow.fade)),
+        ],
+      ),
+    );
+  }
 
   static const _moments = [
     PrayerMoment.fajr,
@@ -891,7 +1046,6 @@ class _MonthTable extends ConsumerWidget {
     final fmt = MadarFormatter.of(context);
     final settings = ref.watch(prayerSettingsControllerProvider);
     final days = DateTime(month.year, month.month + 1, 0).day;
-    final head = text.labelSmall!.copyWith(color: t.gold, fontWeight: FontWeight.w600);
     final cell = MadarTypography.numerals(t, size: 13.5);
     Widget cellBox(Widget child) => Expanded(child: Center(child: child));
 
@@ -900,16 +1054,7 @@ class _MonthTable extends ConsumerWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.s, Space.xs, Space.s),
       child: Column(
         children: [
-          SizedBox(
-            height: 30,
-            child: Row(
-              children: [
-                cellBox(Text(l.ptMonthDay, style: head, maxLines: 1)),
-                for (final m in _moments)
-                  cellBox(Text(l.momentName(m), style: head, maxLines: 1, overflow: TextOverflow.fade)),
-              ],
-            ),
-          ),
+          headRow(context, key: headKey),
           Container(height: 0.8, color: t.glassBorder),
           for (var d = 1; d <= days; d++)
             Builder(
@@ -921,9 +1066,10 @@ class _MonthTable extends ConsumerWidget {
                 final hijri = hijriOfDate(settings, date);
                 final times = [for (final m in _moments) clock.format(schedule.wallClock(pd.timeOf(m))).clock];
                 return Semantics(
+                  key: isToday ? todayKey : null,
                   label:
                       '${fmt.formatDate(date, style: MadarDateStyle.weekdayDayMonth)}: '
-                      '${[for (var i = 0; i < _moments.length; i++) '${l.momentName(_moments[i])} ${times[i]}'].join('، ')}',
+                      '${[for (var i = 0; i < _moments.length; i++) '${l.momentName(_moments[i])} ${times[i]}'].join(l.interactionListSeparator)}',
                   excludeSemantics: true,
                   child: Container(
                     height: 36 * MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 1.6),

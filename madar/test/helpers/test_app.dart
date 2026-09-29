@@ -22,8 +22,24 @@ import 'package:madar/core/routing/router.dart';
 import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/adhan/adhan.dart';
+import 'package:madar/app/faith_services.dart' show recitationNotificationClicksProvider;
 import 'package:madar/features/home/home_providers.dart';
+import 'package:madar/features/qibla/qibla.dart' show headingSourceProvider;
+import 'package:madar/features/quran/quran.dart'
+    show MemoryQuranCacheStore, QuranStore, quranCacheStoreProvider, quranStoreProvider;
+import 'package:madar/features/recitation/recitation.dart'
+    show
+        NoRecitationBackground,
+        RecitationStorage,
+        recitationAudioFocusProvider,
+        recitationBackgroundProvider,
+        recitationEngineFactoryProvider,
+        recitationStorageProvider;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../features/qibla/qibla_test_app.dart' show FakeHeadingSource, readingAt;
+import '../features/quran/quran_test_data.dart' show FileQuranAssetSource;
+import '../features/recitation/recitation_fakes.dart' show FakeEngine, FakeFocus;
 
 /// Records haptics fired through [Fx].
 class RecordingHaptics implements HapticsService {
@@ -34,9 +50,49 @@ class RecordingHaptics implements HapticsService {
   void fire(Haptic haptic) => fired.add(haptic);
 }
 
+/// Fakes of the Phase 3 platform pieces every full-app test needs:
+///
+/// * the Quran read from assets/quran on disk ([FileQuranAssetSource] –
+///   rootBundle decodes large strings in an isolate, which a fake-async
+///   test never finishes);
+/// * a scripted recitation engine ([engine]; nothing plays), silent audio
+///   focus, no media session, downloads in a temp folder;
+/// * taps on the media notification only when the test sends one
+///   ([recitationClicks]);
+/// * a still compass facing the qibla from Amman ([heading]).
+class FaithFakes {
+  FaithFakes() : recitationRoot = Directory.systemTemp.createTempSync('madar_app_recitation_');
+
+  final FakeEngine engine = FakeEngine();
+  final FakeFocus focus = FakeFocus();
+  final StreamController<bool> recitationClicks = StreamController<bool>.broadcast();
+  final FakeHeadingSource heading = FakeHeadingSource(initial: readingAt(160.7));
+  final Directory recitationRoot;
+
+  List<Override> get overrides => [
+    quranStoreProvider.overrideWith((ref) => QuranStore(const FileQuranAssetSource())),
+    quranCacheStoreProvider.overrideWith((ref) => MemoryQuranCacheStore()),
+    recitationEngineFactoryProvider.overrideWithValue(() => engine),
+    recitationAudioFocusProvider.overrideWithValue(focus),
+    recitationBackgroundProvider.overrideWithValue(const NoRecitationBackground()),
+    recitationStorageProvider.overrideWithValue(RecitationStorage.at(recitationRoot)),
+    recitationNotificationClicksProvider.overrideWithValue(recitationClicks.stream),
+    headingSourceProvider.overrideWithValue(heading),
+  ];
+
+  void dispose() {
+    unawaited(recitationClicks.close());
+    if (recitationRoot.existsSync()) recitationRoot.deleteSync(recursive: true);
+  }
+}
+
 /// Handle on a running test app.
 class TestApp {
-  TestApp(this.tester, this._db, this.sound, this.haptics, this.notifications, this.adhanSystem);
+  TestApp(this.tester, this._db, this.sound, this.haptics, this.notifications, this.adhanSystem, [FaithFakes? faith])
+    : faith = faith ?? FaithFakes();
+
+  /// The Phase 3 platform fakes (recitation engine, media clicks, compass).
+  final FaithFakes faith;
 
   final WidgetTester tester;
   final MadarDatabase? _db;
@@ -96,7 +152,10 @@ Future<MadarDatabase> openTestDatabase(WidgetTester tester, {String languageCode
 
 /// The pieces of a test app before it is pumped.
 class TestAppSetup {
-  TestAppSetup(this.app, this.db, this.sound, this.haptics, this.notifications, this.adhanSystem);
+  TestAppSetup(this.app, this.db, this.sound, this.haptics, this.notifications, this.adhanSystem, this.faith);
+
+  /// The Phase 3 platform fakes.
+  final FaithFakes faith;
 
   /// `ProviderScope(overrides: …, child: MadarApp())`.
   final Widget app;
@@ -164,6 +223,8 @@ Future<TestAppSetup> buildMadarTestApp(
   await tester.runAsync(() => probe.read(appSettingsProvider.notifier).update((_) => settings));
   probe.dispose();
 
+  final faith = FaithFakes();
+  addTearDown(faith.dispose);
   final app = ProviderScope(
     overrides: [
       ...madarAppOverrides(prefs: prefs, sound: sound, haptics: haptics),
@@ -171,11 +232,12 @@ Future<TestAppSetup> buildMadarTestApp(
       routerInitialLocationProvider.overrideWithValue(initialLocation),
       homeClockProvider.overrideWithValue(wall),
       ...platformFakeOverrides(notifications: platform, adhanSystem: system, clock: wall),
+      ...faith.overrides,
       ...overrides,
     ],
     child: const MadarApp(),
   );
-  return TestAppSetup(app, db, sound, haptics, platform, system);
+  return TestAppSetup(app, db, sound, haptics, platform, system, faith);
 }
 
 /// [buildMadarTestApp] + pump (+ settle) on a phone-sized surface.
@@ -210,7 +272,7 @@ Future<TestApp> pumpMadarApp(
   );
   await tester.pumpWidget(setup.app);
   if (settle) await settleApp(tester);
-  return TestApp(tester, setup.db, setup.sound, setup.haptics, setup.notifications, setup.adhanSystem);
+  return TestApp(tester, setup.db, setup.sound, setup.haptics, setup.notifications, setup.adhanSystem, setup.faith);
 }
 
 /// Lets database work (microtasks) and finite animations finish.

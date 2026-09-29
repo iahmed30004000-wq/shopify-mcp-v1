@@ -194,7 +194,11 @@ class OnboardingAdhanStep extends StatelessWidget {
           body: l.onboardingAdhanBody,
         ),
         const SizedBox(height: Space.xl),
-        ConstrainedBox(constraints: const BoxConstraints(maxWidth: 440), child: const AdhanPermissionsCard()),
+        // The heading above already says what the card is for.
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 440),
+          child: const AdhanPermissionsCard(showHeader: false),
+        ),
       ],
     );
   }

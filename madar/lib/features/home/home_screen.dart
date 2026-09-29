@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
+import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,7 @@ import '../orbit/presentation/prayer/prayer_sheet.dart';
 import '../orbit/presentation/scene/flight.dart';
 import '../orbit/presentation/scene/orbit_scene.dart';
 import '../prayer/prayer.dart' show PrayerLabels, hijriDateProvider;
+import '../recitation/recitation.dart' show NowPlayingBar;
 import 'home_providers.dart';
 import 'widgets/task_panel.dart';
 
@@ -195,6 +197,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                   ),
                 ),
               ),
+              // The mini player rides on the panel's top edge while a
+              // recitation plays – above the chips and the quick-add bar,
+              // never over them – and steps aside as the panel opens, for
+              // the keyboard and for a planet page.
+              _NowPlayingPerch(
+                expand: _expand,
+                chrome: _chrome,
+                gone: _gone,
+                height: h,
+                collapsedTop: collapsedTop,
+                expandedTop: expandedTop,
+              ),
               _PanelFrame(
                 expand: _expand,
                 collapsedTop: collapsedTop,
@@ -301,6 +315,57 @@ class _PanelFrame extends StatelessWidget {
         child: child!,
       ),
       child: child,
+    );
+  }
+}
+
+/// Home's place for the mini player ([NowPlayingBar]): just above the
+/// glass panel's top edge, following it while it is dragged, fading out by
+/// a quarter of the way open (an open panel covers the scene it would sit
+/// on), under the keyboard and while the flight to a planet page carries
+/// the chrome away. It takes no space and no touches while nothing plays.
+class _NowPlayingPerch extends StatelessWidget {
+  const _NowPlayingPerch({
+    required this.expand,
+    required this.chrome,
+    required this.gone,
+    required this.height,
+    required this.collapsedTop,
+    required this.expandedTop,
+  });
+
+  final Animation<double> expand;
+  final Animation<double> chrome;
+  final ValueListenable<bool> gone;
+  final double height, collapsedTop, expandedTop;
+
+  @override
+  Widget build(BuildContext context) {
+    if (MediaQuery.viewInsetsOf(context).bottom > 0) return const SizedBox.shrink();
+    return AnimatedBuilder(
+      animation: expand,
+      builder: (context, child) {
+        final e = expand.value.clamp(0.0, 1.0);
+        final top = lerpDouble(collapsedTop, expandedTop, e)!;
+        final opacity = (1 - e * 4).clamp(0.0, 1.0);
+        return PositionedDirectional(
+          start: 0,
+          end: 0,
+          bottom: height - top,
+          child: IgnorePointer(
+            ignoring: opacity < 0.5,
+            child: Opacity(opacity: opacity, child: child),
+          ),
+        );
+      },
+      child: ValueListenableBuilder<bool>(
+        valueListenable: gone,
+        builder: (context, gone, child) => Offstage(offstage: gone, child: child),
+        child: FadeTransition(
+          opacity: ReverseAnimation(chrome),
+          child: const NowPlayingBar(),
+        ),
+      ),
     );
   }
 }

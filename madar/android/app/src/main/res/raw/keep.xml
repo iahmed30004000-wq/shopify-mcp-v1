@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Resources referenced only by name at run time (notification channel
-     sounds and the status-bar icon): never strip them if resource shrinking
-     is ever enabled (flutter_local_notifications README › Release build). -->
+     sounds, the status-bar icon and audio_service's media-notification
+     buttons, which the recitation names as drawable/audio_service_*): never
+     strip them if resource shrinking is ever enabled (flutter_local_notifications
+     README › Release build; audio_service README › Android setup). -->
 <resources xmlns:tools="http://schemas.android.com/tools"
-    tools:keep="@raw/madar_tanbih_*,@drawable/ic_stat_madar" />
+    tools:keep="@raw/madar_tanbih_*,@drawable/ic_stat_madar,@drawable/audio_service_*" />

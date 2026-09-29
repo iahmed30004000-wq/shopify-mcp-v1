@@ -40,6 +40,13 @@ import 'suspending_flows.dart';
 ///    adhkar reminders and notification routing start once the encrypted
 ///    database is open (`AppGate`); the app lock is the default
 ///    `lockGateProvider` (`BiometricLockGate`).
+/// 7. Phase 3 asks for nothing before the first frame: the Quran's 13 KB
+///    structure is read last in [warmUpServices] (the text, tajweed and
+///    search index load when a page first needs them); the wird's reminder
+///    and completion syncs start with the other app services once the
+///    database is open; recitation starts audio_service on the first play
+///    and plays in the foreground only when that fails; the qibla's sensors
+///    run only while its page shows.
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   installErrorHooks();

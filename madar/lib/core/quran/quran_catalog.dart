@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../features/quran/data/quran_providers.dart' show quranStoreProvider;
+import '../../features/quran/data/quran_store.dart' show BundledQuranCatalog;
 import 'ayah.dart';
 
 /// Read-only access to the Quran text and its structure (Hafs, Madani
@@ -46,8 +48,8 @@ abstract class QuranCatalog {
   Future<void> ensureLoaded();
 }
 
-/// The app's [QuranCatalog]. The Quran reader feature replaces the body with
-/// the real implementation; until then it throws so misuse is obvious.
-final quranCatalogProvider = Provider<QuranCatalog>(
-  (ref) => throw UnimplementedError('quranCatalogProvider: wired by lib/features/quran'),
-);
+/// The app's [QuranCatalog]: the bundled Tanzil Uthmani text and Madani
+/// mushaf structure (assets/quran/), loaded by the Quran reader feature's
+/// store (lib/features/quran). Call [QuranCatalog.ensureLoaded] once before
+/// the synchronous getters.
+final quranCatalogProvider = Provider<QuranCatalog>((ref) => BundledQuranCatalog(ref.watch(quranStoreProvider)));

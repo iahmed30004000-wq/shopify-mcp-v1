@@ -91,11 +91,11 @@ void main() {
   group('formatting', () {
     test('Arabic month names and Arabic-Indic digits', () {
       const h = HijriDate(year: 1448, month: 3, day: 12, monthLength: 30);
-      expect(ar.hijriDate(h, fmtAr), '١٢ ربيع الأول ١٤٤٨ هـ');
+      expect(ar.hijriDate(h, fmtAr), '١٢ ربيع الأول ١٤٤٨\u00a0هـ');
       expect(ar.hijriDayMonth(h, fmtAr), '١٢ ربيع الأول');
-      expect(en.hijriDate(h, fmtEn), '12 Rabi’ al-Awwal 1448 AH');
+      expect(en.hijriDate(h, fmtEn), '12 Rabi’ al-Awwal 1448\u00a0AH');
       const western = MadarFormatter(digits: DigitStyle.western);
-      expect(ar.hijriDate(h, western), '12 ربيع الأول 1448 هـ');
+      expect(ar.hijriDate(h, western), '12 ربيع الأول 1448\u00a0هـ');
     });
 
     test('all twelve months are named', () {

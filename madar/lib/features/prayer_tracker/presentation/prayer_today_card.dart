@@ -97,11 +97,9 @@ class _PrayerTodayCardState extends ConsumerState<PrayerTodayCard> {
             ],
           ),
         ),
-        TrackerPill(
-          icon: TrackerIcons.streak,
-          label: fmt.formatInt(streaks.current),
-          color: streaks.current > 0 ? c.onTime : t.textTertiary,
-        ),
+        // No streak yet: no pill (a flame beside a lone "٠" reads as a dot).
+        if (streaks.current > 0)
+          TrackerPill(icon: TrackerIcons.streak, label: fmt.formatInt(streaks.current), color: c.onTime),
         if (widget.onOpen != null) ...[
           const SizedBox(width: Space.xs),
           // "Forward": chevron_right mirrors itself in RTL (matchTextDirection)

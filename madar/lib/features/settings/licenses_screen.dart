@@ -84,6 +84,30 @@ final List<ContentCredit> madarContentCredits = [
     role: (l) => l.settingsCreditAdhanRole,
     licenseAsset: MadarLicenses.content['Madar adhan tones']!,
   ),
+  ContentCredit(
+    icon: Icons.auto_stories_rounded,
+    name: (l) => l.settingsCreditQuran,
+    role: (l) => l.settingsCreditQuranRole,
+    licenseAsset: MadarLicenses.content['Quran – Tanzil text, metadata & quran-tajweed']!,
+  ),
+  ContentCredit(
+    icon: Icons.format_quote_rounded,
+    name: (l) => l.settingsCreditHadith,
+    role: (l) => l.settingsCreditHadithRole,
+    licenseAsset: MadarLicenses.content["Hadith – An-Nawawi's Forty"]!,
+  ),
+  ContentCredit(
+    icon: Icons.graphic_eq_rounded,
+    name: (l) => l.settingsCreditRecitation,
+    role: (l) => l.settingsCreditRecitationRole,
+    licenseAsset: MadarLicenses.content['Madar Quran recitation']!,
+  ),
+  ContentCredit(
+    icon: Icons.explore_rounded,
+    name: (l) => l.settingsCreditQibla,
+    role: (l) => l.settingsCreditQiblaRole,
+    licenseAsset: MadarLicenses.content['Madar qibla compass (WMM2025)']!,
+  ),
 ];
 
 /// Licence text of a bundled asset (overridable in tests).
@@ -92,8 +116,9 @@ final licenseTextProvider = FutureProvider.autoDispose.family<String, String>(
 );
 
 /// Fonts & sources: each font's name set in itself, its role, and its full
-/// licence text on demand; then the bundled content (adhkar, city list,
-/// adhan tones) with the full credits of its sources.
+/// licence text on demand; then the content (the Quran, hadith, adhkar,
+/// city list, adhan tones, recitations, the qibla's magnetic model) with the
+/// full credits of its sources.
 class LicensesScreen extends StatelessWidget {
   const LicensesScreen({super.key});
 

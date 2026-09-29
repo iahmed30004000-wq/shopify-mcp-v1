@@ -32,7 +32,7 @@ class SecuritySettingsScreen extends ConsumerWidget {
             id: 'settings-security',
             fade: false,
             children: [
-              const SecuritySettingsSection(seed: 0.45),
+              const SecuritySettingsSection(seed: 0.45, showTitle: false),
               SettingsNote(l.settingsSecurityNote, icon: Icons.shield_moon_rounded),
             ],
           ),

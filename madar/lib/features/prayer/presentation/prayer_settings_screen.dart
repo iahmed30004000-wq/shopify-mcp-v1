@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -410,9 +411,41 @@ class _StepperTile extends StatelessWidget {
         ],
       ),
     );
-    // Large text: the stepper no longer fits beside the title – it moves
-    // under it, to the row's end.
-    final stacked = MediaQuery.textScalerOf(context).scale(10) > 13;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Large text, or a title that would wrap beside the stepper ("Hijri
+        // day adjustment" + "None"): the stepper moves under the title, to
+        // the row's end.
+        final scaler = MediaQuery.textScalerOf(context);
+        final direction = Directionality.of(context);
+        double widthOf(String s, TextStyle style) {
+          final painter = TextPainter(
+            text: TextSpan(text: s, style: style),
+            textDirection: direction,
+            textScaler: scaler,
+            maxLines: 1,
+          )..layout();
+          final w = painter.width;
+          painter.dispose();
+          return w;
+        }
+
+        final values = [
+          value,
+          if (valueAfter != null) ...[valueAfter!(1), valueAfter!(-1)],
+        ];
+        final valueWidth = values.map((v) => widthOf(v, text.titleMedium!)).reduce(math.max);
+        // Two buttons (48 dp touch targets) around a value box of at least
+        // 64 dp.
+        final stepperWidth = 2 * MadarPressable.minTouchTarget.width + math.max(64.0, valueWidth);
+        final room = constraints.maxWidth - Space.l - Space.s - 36 - Space.m - stepperWidth;
+        final stacked = scaler.scale(10) > 13 || widthOf(title, text.titleMedium!) > room;
+        return _layout(stacked, heading, stepper);
+      },
+    );
+  }
+
+  Widget _layout(bool stacked, Widget heading, Widget stepper) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.s, Space.s, Space.s),
       child: stacked
@@ -471,8 +504,8 @@ class _AdjustmentTile extends ConsumerWidget {
       icon: momentIcon(_moment),
       title: l.momentName(_moment),
       subtitle: time.joined,
-      value: l.ptMinutesSigned(l.signedMinutes(v, fmt)),
-      valueAfter: (d) => l.ptMinutesSigned(l.signedMinutes(v + d, fmt)),
+      value: l.adjustmentValue(v, fmt),
+      valueAfter: (d) => l.adjustmentValue(v + d, fmt),
       canDecrement: v > -PrayerSettingsChanges.maxAdjustment,
       canIncrement: v < PrayerSettingsChanges.maxAdjustment,
       onChanged: (d) => ref.read(prayerSettingsControllerProvider.notifier).setAdjustment(adjustmentKey, v + d),

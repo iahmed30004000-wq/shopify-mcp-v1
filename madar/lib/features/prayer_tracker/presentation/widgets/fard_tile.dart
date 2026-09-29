@@ -343,6 +343,8 @@ class _MarkToggle extends StatelessWidget {
       semanticLabel: semanticLabel,
       excludeChildSemantics: true,
       focusRadius: BorderRadius.circular(t.radiusS),
+      // The label may shrink under large text; the target never does.
+      minTapTarget: MadarPressable.minTouchTarget,
       child: SizedBox(
         width: 52,
         child: Column(
@@ -362,11 +364,14 @@ class _MarkToggle extends StatelessWidget {
               child: Icon(icon, size: 18, color: fg),
             ),
             const SizedBox(height: 3),
-            Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: text.labelSmall!.copyWith(color: on ? color : fg, height: 1.1, fontSize: 10.5),
+            // Shrinks rather than clips ("Jama…") under large text.
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                maxLines: 1,
+                style: text.labelSmall!.copyWith(color: on ? color : fg, height: 1.1, fontSize: 10.5),
+              ),
             ),
           ],
         ),

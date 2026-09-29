@@ -115,6 +115,12 @@ abstract class L10n {
   /// **'حفظ'**
   String get actionSave;
 
+  /// Joins short facts on one line (e.g. a time and a reminder). Arabic uses a comma: a middle dot beside Arabic-Indic digits reads as the zero (٠)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get commonFactSeparator;
+
   /// No description provided for @actionCancel.
   ///
   /// In ar, this message translates to:
@@ -3139,6 +3145,12 @@ abstract class L10n {
   /// **'الحركة'**
   String get settingsMotion;
 
+  /// Settings section holding the motion and power-mode choices (the motion tile keeps its own title)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحركة والطاقة'**
+  String get settingsSectionMotionPower;
+
   /// No description provided for @settingsMotionSystem.
   ///
   /// In ar, this message translates to:
@@ -3403,11 +3415,17 @@ abstract class L10n {
   /// **'الخطوة {current} من {total}'**
   String onboardingStep(String current, String total);
 
-  /// Settings section: prayer times, adhan and permissions
+  /// Settings section: prayer, adhan, Quran, recitation and reminders
   ///
   /// In ar, this message translates to:
-  /// **'الصلاة'**
-  String get settingsPrayerSection;
+  /// **'الإيمان'**
+  String get settingsFaithSection;
+
+  /// Subtitle of the Faith settings section
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة والقرآن والتذكير'**
+  String get settingsFaithSectionHint;
 
   /// Settings entry opening the prayer-time settings
   ///
@@ -3496,7 +3514,7 @@ abstract class L10n {
   /// Subtitle of the fonts & sources entry
   ///
   /// In ar, this message translates to:
-  /// **'الخطوط المفتوحة، ومصادر الأذكار والمدن والنغمات'**
+  /// **'الخطوط المفتوحة، ومصادر القرآن والحديث والأذكار والمدن والنغمات'**
   String get settingsCreditsBody;
 
   /// Section header on the credits page
@@ -3636,6 +3654,162 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'كل المواقيت'**
   String get homeAllTimes;
+
+  /// Settings entry / page: the Quran reader's settings
+  ///
+  /// In ar, this message translates to:
+  /// **'القراءة والمصحف'**
+  String get settingsQuran;
+
+  /// Quran settings entry subtitle part: tajweed colours on
+  ///
+  /// In ar, this message translates to:
+  /// **'بألوان التجويد'**
+  String get settingsQuranTajweedOn;
+
+  /// Quran settings entry subtitle part: tajweed colours off
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا ألوان التجويد'**
+  String get settingsQuranTajweedOff;
+
+  /// Quran settings: section of layout and text size
+  ///
+  /// In ar, this message translates to:
+  /// **'القراءة'**
+  String get settingsQuranReading;
+
+  /// Screen-reader label of the text-size preview
+  ///
+  /// In ar, this message translates to:
+  /// **'معاينة حجم الخط'**
+  String get settingsQuranPreviewLabel;
+
+  /// Quran settings: how many suras have the Quran.com tajweed / translation on the device
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم يُنزَّل شيء بعد} =1{نُزِّل لسورة واحدة} =2{نُزِّل لسورتين} few{نُزِّل لـ{count} سور} many{نُزِّل لـ{count} سورة} other{نُزِّل لـ{count} سورة}}'**
+  String settingsQuranDownloaded(int count);
+
+  /// Quran settings: note on downloads
+  ///
+  /// In ar, this message translates to:
+  /// **'تُنزَّل الترجمة وتجويد Quran.com سورةً سورة من إعدادات القارئ، ولا يتصل مَدار بالإنترنت إلا حين تطلب.'**
+  String get settingsQuranDownloadNote;
+
+  /// Quran settings: where the text comes from
+  ///
+  /// In ar, this message translates to:
+  /// **'نص المصحف العثماني برواية حفص من مشروع تنزيل، مضمَّن في التطبيق ويعمل دون إنترنت.'**
+  String get settingsQuranSourceNote;
+
+  /// Settings entry opening the recitation settings
+  ///
+  /// In ar, this message translates to:
+  /// **'التلاوة والقرّاء'**
+  String get settingsRecitation;
+
+  /// Settings entry / page: adhkar and wird reminders
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات'**
+  String get settingsReminders;
+
+  /// Subtitle of the reminders entry
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا تذكير مفعّل} =1{تذكير واحد مفعّل} =2{تذكيران مفعّلان} few{{count} تذكيرات مفعّلة} many{{count} تذكيرًا مفعّلًا} other{{count} تذكير مفعّل}}'**
+  String settingsRemindersCount(int count);
+
+  /// Settings section title
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الوِرد'**
+  String get settingsWirdReminders;
+
+  /// Wird reminders when there is no plan
+  ///
+  /// In ar, this message translates to:
+  /// **'لا خطة وِرد بعد. ابدأ خطة، ويصلك تذكيرها بعد الصلاة التي تختارها.'**
+  String get settingsWirdNoPlans;
+
+  /// Settings tile opening the wird screen
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الوِرد'**
+  String get settingsWirdOpen;
+
+  /// Wird reminder subtitle: the plan has no prayer window
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر للخطة صلاةً ليصلك تذكيرها'**
+  String get settingsWirdNoWindow;
+
+  /// Wird reminder subtitle: the plan is paused
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة متوقفة، فلا تذكير'**
+  String get settingsWirdPaused;
+
+  /// Button: open the plan editor to pick a prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل الخطة'**
+  String get settingsWirdEditPlan;
+
+  /// Note under the wird reminders
+  ///
+  /// In ar, this message translates to:
+  /// **'يصل التذكير بعد الصلاة التي اخترتها للخطة، ولا يصل يومَ تقرأ وِردك قبله.'**
+  String get settingsWirdReminderNote;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'القرآن الكريم — تنزيل'**
+  String get settingsCreditQuran;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'النص العثماني وبياناته، وعلامات التجويد — تراخيص المشاع الإبداعي'**
+  String get settingsCreditQuranRole;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'الأربعون النووية'**
+  String get settingsCreditHadith;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'النص العربي من hadith-api، ملكٌ عام'**
+  String get settingsCreditHadithRole;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'التلاوات — EveryAyah'**
+  String get settingsCreditRecitation;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'تُبثّ أو تُنزَّل بطلبك فقط، ولا صوت مضمَّن'**
+  String get settingsCreditRecitationRole;
+
+  /// Content credit title
+  ///
+  /// In ar, this message translates to:
+  /// **'بوصلة القبلة — النموذج المغناطيسي العالمي'**
+  String get settingsCreditQibla;
+
+  /// Content credit subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'نموذج WMM من NOAA وBGS، ملكٌ عام'**
+  String get settingsCreditQiblaRole;
 
   /// Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits
   ///
@@ -5792,7 +5966,7 @@ abstract class L10n {
   /// No description provided for @ptHijriDate.
   ///
   /// In ar, this message translates to:
-  /// **'{day} {month} {year} هـ'**
+  /// **'{day} {month} {year} هـ'**
   String ptHijriDate(String day, String month, String year);
 
   /// No description provided for @ptHijriDayMonth.
@@ -6533,7 +6707,7 @@ abstract class L10n {
   /// **'طريقة التقدير'**
   String get ptHighLatRule;
 
-  /// Hijri day offset of zero
+  /// A zero adjustment (Hijri day offset or prayer minutes)
   ///
   /// In ar, this message translates to:
   /// **'بلا تعديل'**
@@ -8853,18 +9027,6 @@ abstract class L10n {
   /// **'عند {time}'**
   String faithHubAt(String time);
 
-  /// Faith page: section of links
-  ///
-  /// In ar, this message translates to:
-  /// **'روابط سريعة'**
-  String get faithHubLinksTitle;
-
-  /// Link hint: prayer times
-  ///
-  /// In ar, this message translates to:
-  /// **'اليوم والشهر والتاريخ الهجري'**
-  String get faithHubTimesHint;
-
   /// Link: the tracker history tab
   ///
   /// In ar, this message translates to:
@@ -8894,6 +9056,3384 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'المؤذّن والتذكير والأذونات'**
   String get faithHubAdhanHint;
+
+  /// Faith page: section of today's prayers and adhkar
+  ///
+  /// In ar, this message translates to:
+  /// **'يومك'**
+  String get faithHubTodayTitle;
+
+  /// Faith page: section of continue reading, the wird and Hifz
+  ///
+  /// In ar, this message translates to:
+  /// **'مع القرآن'**
+  String get faithHubQuranTitle;
+
+  /// Faith page: action opening the Quran's index
+  ///
+  /// In ar, this message translates to:
+  /// **'الفهرس'**
+  String get faithHubQuranIndex;
+
+  /// Faith page: section of the qibla and the faith tools
+  ///
+  /// In ar, this message translates to:
+  /// **'أدوات'**
+  String get faithHubToolsTitle;
+
+  /// Tool hint: the Quran home
+  ///
+  /// In ar, this message translates to:
+  /// **'الفهرس والبحث والعلامات'**
+  String get faithHubMushafHint;
+
+  /// Tool hint: Hifz
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة بالتكرار المتباعد'**
+  String get faithHubHifzHint;
+
+  /// Tool hint: recitation settings
+  ///
+  /// In ar, this message translates to:
+  /// **'القرّاء والتكرار والتنزيل'**
+  String get faithHubRecitationHint;
+
+  /// Tool: the adhan settings
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذان'**
+  String get faithHubAdhanTool;
+
+  /// Toast: add to Hifz found nothing new
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الآيات في حفظك من قبل'**
+  String get faithHubHifzAlready;
+
+  /// Title of the Quran home screen
+  ///
+  /// In ar, this message translates to:
+  /// **'القرآن الكريم'**
+  String get quranTitle;
+
+  /// A sura's title, e.g. Surah Al-Baqarah
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة {name}'**
+  String quranSurahTitle(String name);
+
+  /// Sura revealed in Makkah
+  ///
+  /// In ar, this message translates to:
+  /// **'مكية'**
+  String get quranMakki;
+
+  /// Sura revealed in Madinah
+  ///
+  /// In ar, this message translates to:
+  /// **'مدنية'**
+  String get quranMadani;
+
+  /// Number of ayat (digits localised by the caller)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا آيات} =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}'**
+  String quranAyatCount(int count);
+
+  /// Mushaf page number (pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة {page}'**
+  String quranPageLabel(String page);
+
+  /// Position in the 604-page mushaf
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة {page} من {total}'**
+  String quranPageCounter(String page, String total);
+
+  /// Juz number (pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجزء {juz}'**
+  String quranJuzLabel(String juz);
+
+  /// Hizb number (pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحزب {hizb}'**
+  String quranHizbLabel(String hizb);
+
+  /// Ayah number (pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية {ayah}'**
+  String quranAyahLabel(String ayah);
+
+  /// A place in the Quran: sura name and ayah number
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String quranAyahOfSurah(String surah, String ayah);
+
+  /// Mushaf page header: juz and hizb
+  ///
+  /// In ar, this message translates to:
+  /// **'الجزء {juz}، الحزب {hizb}'**
+  String quranJuzHizb(String juz, String hizb);
+
+  /// Second quarter of a hizb
+  ///
+  /// In ar, this message translates to:
+  /// **'ربع الحزب {hizb}'**
+  String quranQuarter1(String hizb);
+
+  /// Middle of a hizb
+  ///
+  /// In ar, this message translates to:
+  /// **'نصف الحزب {hizb}'**
+  String quranQuarter2(String hizb);
+
+  /// Last quarter of a hizb
+  ///
+  /// In ar, this message translates to:
+  /// **'ثلاثة أرباع الحزب {hizb}'**
+  String quranQuarter3(String hizb);
+
+  /// Reference after a copied / shared ayah: sura name and ayah number (pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'[{surah}: {ayah}]'**
+  String quranShareRef(String surah, String ayah);
+
+  /// The bundled Quran data failed to load
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل المصحف'**
+  String get quranLoadError;
+
+  /// Retry button
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get quranRetry;
+
+  /// Home tab: list of suras
+  ///
+  /// In ar, this message translates to:
+  /// **'السور'**
+  String get quranTabSurahs;
+
+  /// Home tab: juz and hizb list
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجزاء'**
+  String get quranTabJuz;
+
+  /// Home tab: bookmarks
+  ///
+  /// In ar, this message translates to:
+  /// **'العلامات'**
+  String get quranTabBookmarks;
+
+  /// Placeholder of the search entry
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في القرآن…'**
+  String get quranSearchHint;
+
+  /// Button: jump to a sura / ayah / page
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقال'**
+  String get quranGoTo;
+
+  /// Title of the go-to sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقل إلى'**
+  String get quranGoToTitle;
+
+  /// Examples under the go-to field (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل {a} أو «البقرة {b}» أو «صفحة {c}»'**
+  String quranGoToHint(String a, String b, String c);
+
+  /// Go-to found nothing
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتيجة — جرّب رقم سورة وآية مثل {example}'**
+  String quranGoToNone(String example);
+
+  /// Open a go-to result
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح'**
+  String get quranGoToOpen;
+
+  /// Empty bookmarks tab title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا علامات بعد'**
+  String get quranBookmarksEmptyTitle;
+
+  /// Empty bookmarks tab body
+  ///
+  /// In ar, this message translates to:
+  /// **'المس آية في المصحف ثم اختر «علامة» لتحفظ موضعها.'**
+  String get quranBookmarksEmptyBody;
+
+  /// Undo toast after deleting a bookmark
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت العلامة'**
+  String get quranBookmarkDeleted;
+
+  /// Toast after saving a bookmark
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت العلامة'**
+  String get quranBookmarkSaved;
+
+  /// Title / action: edit a bookmark
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل العلامة'**
+  String get quranBookmarkEdit;
+
+  /// Title of the new-bookmark sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'علامة جديدة'**
+  String get quranBookmarkNew;
+
+  /// Bookmark label field
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get quranBookmarkLabel;
+
+  /// Hint of the bookmark label field
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل: وِرد الفجر'**
+  String get quranBookmarkLabelHint;
+
+  /// Bookmark note field
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get quranBookmarkNote;
+
+  /// Bookmark colour field
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get quranBookmarkColor;
+
+  /// Delete a bookmark
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة العلامة'**
+  String get quranBookmarkRemove;
+
+  /// Semantic label: expand a juz into its hizb quarters
+  ///
+  /// In ar, this message translates to:
+  /// **'أرباع الجزء'**
+  String get quranJuzQuarters;
+
+  /// Continue-reading card title
+  ///
+  /// In ar, this message translates to:
+  /// **'تابع القراءة'**
+  String get quranContinueTitle;
+
+  /// Continue card when nothing was read yet
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ رحلتك مع كتاب الله'**
+  String get quranContinueEmpty;
+
+  /// Continue card action when nothing was read yet
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ بالفاتحة'**
+  String get quranContinueStart;
+
+  /// Continue card action
+  ///
+  /// In ar, this message translates to:
+  /// **'تابع'**
+  String get quranContinueAction;
+
+  /// When the reader was last open (a formatted date)
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر قراءة {when}'**
+  String quranLastReadAt(String when);
+
+  /// Reader layout: mushaf pages
+  ///
+  /// In ar, this message translates to:
+  /// **'المصحف'**
+  String get quranModeMushaf;
+
+  /// Reader layout: verse list
+  ///
+  /// In ar, this message translates to:
+  /// **'الآيات'**
+  String get quranModeList;
+
+  /// Switch the reader to the verse list
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الآيات'**
+  String get quranShowList;
+
+  /// Switch the reader to mushaf pages
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض المصحف'**
+  String get quranShowMushaf;
+
+  /// Reader settings sheet title / button
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات القراءة'**
+  String get quranSettingsTitle;
+
+  /// Reader settings: layout
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة العرض'**
+  String get quranReaderLayout;
+
+  /// Reader settings: Quran text size
+  ///
+  /// In ar, this message translates to:
+  /// **'حجم الخط'**
+  String get quranFontSize;
+
+  /// Increase the Quran text size
+  ///
+  /// In ar, this message translates to:
+  /// **'تكبير الخط'**
+  String get quranFontLarger;
+
+  /// Decrease the Quran text size
+  ///
+  /// In ar, this message translates to:
+  /// **'تصغير الخط'**
+  String get quranFontSmaller;
+
+  /// Reader settings: colour tajweed rules
+  ///
+  /// In ar, this message translates to:
+  /// **'ألوان التجويد'**
+  String get quranTajweedColors;
+
+  /// Reader settings: tajweed section title
+  ///
+  /// In ar, this message translates to:
+  /// **'التجويد'**
+  String get quranTajweedSection;
+
+  /// Open the tajweed colour legend
+  ///
+  /// In ar, this message translates to:
+  /// **'دليل الألوان'**
+  String get quranTajweedLegend;
+
+  /// Reader settings: where tajweed colours come from
+  ///
+  /// In ar, this message translates to:
+  /// **'مصدر التجويد'**
+  String get quranTajweedSource;
+
+  /// Tajweed from the bundled offline data
+  ///
+  /// In ar, this message translates to:
+  /// **'مدمج في التطبيق'**
+  String get quranTajweedSourceBundled;
+
+  /// Tajweed from downloaded Quran.com text
+  ///
+  /// In ar, this message translates to:
+  /// **'Quran.com عند تنزيله'**
+  String get quranTajweedSourceQuranCom;
+
+  /// Explicit download of the Quran.com tajweed text
+  ///
+  /// In ar, this message translates to:
+  /// **'تنزيل تجويد هذه السورة من Quran.com'**
+  String get quranDownloadTajweed;
+
+  /// Reader settings: translation section
+  ///
+  /// In ar, this message translates to:
+  /// **'الترجمة'**
+  String get quranTranslation;
+
+  /// Reader settings: translation toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار الترجمة تحت الآيات'**
+  String get quranTranslationShow;
+
+  /// Name of the translation offered
+  ///
+  /// In ar, this message translates to:
+  /// **'الإنجليزية — صحيح إنترناشونال'**
+  String get quranTranslationName;
+
+  /// Verse list: translation not on the device
+  ///
+  /// In ar, this message translates to:
+  /// **'ترجمة هذه السورة غير منزّلة بعد'**
+  String get quranTranslationMissing;
+
+  /// Button: download the translation of this sura
+  ///
+  /// In ar, this message translates to:
+  /// **'تنزيل الترجمة'**
+  String get quranDownloadTranslation;
+
+  /// Explains a download (network only on this tap)
+  ///
+  /// In ar, this message translates to:
+  /// **'يُنزَّل من Quran.com مرة واحدة ويبقى على جهازك.'**
+  String get quranDownloadNote;
+
+  /// A download is running
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التنزيل…'**
+  String get quranDownloading;
+
+  /// A download is on the device
+  ///
+  /// In ar, this message translates to:
+  /// **'مُنزَّل'**
+  String get quranDownloaded;
+
+  /// Download failed: offline
+  ///
+  /// In ar, this message translates to:
+  /// **'لا اتصال بالإنترنت — حاول لاحقًا'**
+  String get quranDownloadOffline;
+
+  /// Download failed: server / format
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر التنزيل، حاول مرة أخرى'**
+  String get quranDownloadFailed;
+
+  /// Button at the end of a sura's verse list
+  ///
+  /// In ar, this message translates to:
+  /// **'التالية: {name}'**
+  String quranNextSurah(String name);
+
+  /// Button at the start of a sura's verse list
+  ///
+  /// In ar, this message translates to:
+  /// **'السابقة: {name}'**
+  String quranPrevSurah(String name);
+
+  /// Marks the ayah being recited
+  ///
+  /// In ar, this message translates to:
+  /// **'تُتلى الآن'**
+  String get quranNowReciting;
+
+  /// Marks a sajdah ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'سجدة تلاوة'**
+  String get quranSajdah;
+
+  /// Screen reader label of an ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية {ayah} من سورة {surah}'**
+  String quranAyahSemantics(String ayah, String surah);
+
+  /// Ayah action: recite from this ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'استمع من هنا'**
+  String get quranActionPlay;
+
+  /// Ayah action: repeat this ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'كرّر الآية'**
+  String get quranActionRepeat;
+
+  /// How many times to repeat an ayah (digits localised by the caller)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String quranRepeatTimes(int count);
+
+  /// Ayah action: bookmark
+  ///
+  /// In ar, this message translates to:
+  /// **'علامة'**
+  String get quranActionBookmark;
+
+  /// Ayah action: copy the text
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ'**
+  String get quranActionCopy;
+
+  /// Toast after copying an ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت الآية'**
+  String get quranCopied;
+
+  /// Ayah action: share the text
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة'**
+  String get quranActionShare;
+
+  /// Ayah action: add to memorisation
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف إلى الحفظ'**
+  String get quranActionHifz;
+
+  /// Toast after adding an ayah to Hifz
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت إلى الحفظ'**
+  String get quranHifzAdded;
+
+  /// Ayah action: tafsir
+  ///
+  /// In ar, this message translates to:
+  /// **'التفسير'**
+  String get quranActionTafsir;
+
+  /// Tafsir is not available yet
+  ///
+  /// In ar, this message translates to:
+  /// **'التفسير قادم قريبًا بإذن الله'**
+  String get quranTafsirSoon;
+
+  /// Badge on a feature that is not ready
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبًا'**
+  String get quranSoon;
+
+  /// Search screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'البحث في القرآن'**
+  String get quranSearchTitle;
+
+  /// Search field placeholder
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة أو جزء من آية'**
+  String get quranSearchFieldHint;
+
+  /// Explains how the search matches
+  ///
+  /// In ar, this message translates to:
+  /// **'يبحث في النص العربي متجاهلًا التشكيل والهمزات وصور الألف.'**
+  String get quranSearchIntro;
+
+  /// Number of ayat found (digits localised by the caller)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا نتائج} =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}'**
+  String quranSearchResults(int count);
+
+  /// Number of places the words occur (digits localised by the caller)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا مواضع} =1{موضع واحد} =2{موضعان} few{{count} مواضع} many{{count} موضعًا} other{{count} موضع}}'**
+  String quranSearchOccurrences(int count);
+
+  /// The result list is capped (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'تُعرض أول {count}'**
+  String quranSearchShowingFirst(String count);
+
+  /// Search query too short
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب حرفين على الأقل'**
+  String get quranSearchTooShort;
+
+  /// Search found nothing
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد آية بهذه الكلمات'**
+  String get quranSearchNoResults;
+
+  /// Search index is being built
+  ///
+  /// In ar, this message translates to:
+  /// **'يُجهَّز فهرس البحث…'**
+  String get quranSearchPreparing;
+
+  /// Legend sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'دليل ألوان التجويد'**
+  String get quranLegendTitle;
+
+  /// Legend sheet note
+  ///
+  /// In ar, this message translates to:
+  /// **'الألوان عون على التعلّم، والتلقي من قارئ متقن هو الأصل.'**
+  String get quranLegendNote;
+
+  /// Credits line in the legend sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'النص القرآني من مشروع تنزيل، وعلامات التجويد من مشروع quran-tajweed (CC BY).'**
+  String get quranLegendCredits;
+
+  /// Legend group
+  ///
+  /// In ar, this message translates to:
+  /// **'ما لا يُنطق'**
+  String get quranFamilySilent;
+
+  /// Legend group
+  ///
+  /// In ar, this message translates to:
+  /// **'المدود'**
+  String get quranFamilyMadd;
+
+  /// Legend group
+  ///
+  /// In ar, this message translates to:
+  /// **'الغنة'**
+  String get quranFamilyGhunnah;
+
+  /// Legend group
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدغام بلا غنة'**
+  String get quranFamilyMerge;
+
+  /// Legend group
+  ///
+  /// In ar, this message translates to:
+  /// **'القلقلة'**
+  String get quranFamilyQalqalah;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'همزة الوصل'**
+  String get quranRuleHamzatWasl;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'تُكتب ولا تُنطق عند وصل الكلام'**
+  String get quranRuleHamzatWaslHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'اللام الشمسية'**
+  String get quranRuleLamShamsiyyah;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'لام «ال» لا تُنطق قبل الحرف الشمسي'**
+  String get quranRuleLamShamsiyyahHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'حرف لا يُنطق'**
+  String get quranRuleSilent;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'يُكتب ولا يُقرأ'**
+  String get quranRuleSilentHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'مد طبيعي'**
+  String get quranRuleMaddNatural;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'حركتان'**
+  String get quranRuleMaddNaturalHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'مد عارض أو لين'**
+  String get quranRuleMaddPermissible;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'حركتان أو أربع أو ست عند الوقف'**
+  String get quranRuleMaddPermissibleHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'مد جائز منفصل'**
+  String get quranRuleMaddSeparated;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'أربع أو خمس حركات'**
+  String get quranRuleMaddSeparatedHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'مد واجب متصل'**
+  String get quranRuleMaddConnected;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'أربع أو خمس حركات'**
+  String get quranRuleMaddConnectedHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'مد لازم'**
+  String get quranRuleMaddNecessary;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'ست حركات'**
+  String get quranRuleMaddNecessaryHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'قلقلة'**
+  String get quranRuleQalqalah;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'اضطراب الصوت في حروف «قطب جد» الساكنة'**
+  String get quranRuleQalqalahHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'غنة'**
+  String get quranRuleGhunnah;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'النون والميم المشددتان بغنة حركتين'**
+  String get quranRuleGhunnahHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء'**
+  String get quranRuleIkhfa;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء النون الساكنة والتنوين مع الغنة'**
+  String get quranRuleIkhfaHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء شفوي'**
+  String get quranRuleIkhfaShafawi;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'الميم الساكنة قبل الباء'**
+  String get quranRuleIkhfaShafawiHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إقلاب'**
+  String get quranRuleIqlab;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'النون الساكنة والتنوين تُقلب ميمًا قبل الباء'**
+  String get quranRuleIqlabHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إدغام بغنة'**
+  String get quranRuleIdghamGhunnah;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'في حروف «ينمو»'**
+  String get quranRuleIdghamGhunnahHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إدغام شفوي'**
+  String get quranRuleIdghamShafawi;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'الميم الساكنة في الميم'**
+  String get quranRuleIdghamShafawiHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إدغام بلا غنة'**
+  String get quranRuleIdghamNoGhunnah;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'في اللام والراء'**
+  String get quranRuleIdghamNoGhunnahHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إدغام متجانسين'**
+  String get quranRuleIdghamMutajanisayn;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'حرفان اتفقا مخرجًا واختلفا صفة'**
+  String get quranRuleIdghamMutajanisaynHint;
+
+  /// Tajweed rule name
+  ///
+  /// In ar, this message translates to:
+  /// **'إدغام متقاربين'**
+  String get quranRuleIdghamMutaqaribayn;
+
+  /// Tajweed rule: short explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'حرفان تقاربا مخرجًا'**
+  String get quranRuleIdghamMutaqaribaynHint;
+
+  /// Recitation settings: screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'التلاوة'**
+  String get recitationTitle;
+
+  /// Android notification channel of the recitation player
+  ///
+  /// In ar, this message translates to:
+  /// **'تلاوة القرآن'**
+  String get recitationChannelName;
+
+  /// Media notification: album line
+  ///
+  /// In ar, this message translates to:
+  /// **'القرآن الكريم'**
+  String get recitationAlbum;
+
+  /// Label above the chosen reciter
+  ///
+  /// In ar, this message translates to:
+  /// **'القارئ'**
+  String get recitationReciterLabel;
+
+  /// Settings section: reciters
+  ///
+  /// In ar, this message translates to:
+  /// **'القرّاء'**
+  String get recitationSectionReciters;
+
+  /// Reciters section subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'أصوات قرّاء حقيقيين من everyayah.com – لا أصوات مولَّدة للقرآن أبدًا'**
+  String get recitationSectionRecitersHint;
+
+  /// Recitation style: mujawwad
+  ///
+  /// In ar, this message translates to:
+  /// **'مجوَّد'**
+  String get recitationStyleMujawwad;
+
+  /// Recitation style: murattal
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتَّل'**
+  String get recitationStyleMurattal;
+
+  /// Recitation style: the teaching recitation
+  ///
+  /// In ar, this message translates to:
+  /// **'معلِّم'**
+  String get recitationStyleMuallim;
+
+  /// Style explanation: mujawwad
+  ///
+  /// In ar, this message translates to:
+  /// **'تلاوة متأنّية منغَّمة بأحكام التجويد كاملة'**
+  String get recitationStyleMujawwadHint;
+
+  /// Style explanation: murattal
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيل متّصل هادئ'**
+  String get recitationStyleMurattalHint;
+
+  /// Style explanation: muallim
+  ///
+  /// In ar, this message translates to:
+  /// **'تلاوة تعليمية واضحة للحفظ'**
+  String get recitationStyleMuallimHint;
+
+  /// Audio quality of a reciter's files
+  ///
+  /// In ar, this message translates to:
+  /// **'{kbps} كيلوبت/ث'**
+  String recitationBitrate(String kbps);
+
+  /// Button: play a short sample of the reciter
+  ///
+  /// In ar, this message translates to:
+  /// **'استمع إلى عيّنة'**
+  String get recitationSample;
+
+  /// Button: stop the sample
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف العيّنة'**
+  String get recitationSampleStop;
+
+  /// Screen reader: sample button of a reciter
+  ///
+  /// In ar, this message translates to:
+  /// **'عيّنة من تلاوة {name}'**
+  String recitationSampleOf(String name);
+
+  /// Screen reader: the selected reciter
+  ///
+  /// In ar, this message translates to:
+  /// **'القارئ المختار'**
+  String get recitationChosen;
+
+  /// Screen reader: choose a reciter
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار {name}'**
+  String recitationChoose(String name);
+
+  /// How many surahs of a reciter are on the phone
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا سور محمّلة} =1{سورة واحدة محمّلة} =2{سورتان محمّلتان} few{{count} سور محمّلة} many{{count} سورة محمّلة} other{{count} سورة محمّلة}}'**
+  String recitationSurahsDownloaded(int count);
+
+  /// All 114 surahs of a reciter are downloaded
+  ///
+  /// In ar, this message translates to:
+  /// **'المصحف كاملًا محمّل'**
+  String get recitationWholeMushafDownloaded;
+
+  /// Settings section: repeats and playback
+  ///
+  /// In ar, this message translates to:
+  /// **'التكرار والتشغيل'**
+  String get recitationSectionPlayback;
+
+  /// Playback section subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات الافتراضية لكل تلاوة جديدة'**
+  String get recitationSectionPlaybackHint;
+
+  /// Setting: times each ayah is recited
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار كل آية'**
+  String get recitationRepeatAyah;
+
+  /// Setting: passes over the whole range
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار المقطع'**
+  String get recitationRepeatRange;
+
+  /// A repeat count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String recitationTimes(int count);
+
+  /// Repeat the passage until stopped
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا توقّف'**
+  String get recitationEndless;
+
+  /// Setting: silence after each ayah (to repeat after the reciter)
+  ///
+  /// In ar, this message translates to:
+  /// **'مهلة بعد كل تلاوة'**
+  String get recitationGap;
+
+  /// Gap setting explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت لتردّد الآية بعد القارئ'**
+  String get recitationGapHint;
+
+  /// No gap
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا مهلة'**
+  String get recitationGapNone;
+
+  /// A number of seconds
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ثانية} =2{ثانيتان} few{{count} ثوانٍ} many{{count} ثانية} other{{count} ثانية}}'**
+  String recitationSeconds(int count);
+
+  /// Setting: playback speed
+  ///
+  /// In ar, this message translates to:
+  /// **'السرعة'**
+  String get recitationSpeed;
+
+  /// A playback speed like 1.25×
+  ///
+  /// In ar, this message translates to:
+  /// **'{value}×'**
+  String recitationSpeedValue(String value);
+
+  /// Setting: play the basmala before ayah 1
+  ///
+  /// In ar, this message translates to:
+  /// **'البسملة قبل السور'**
+  String get recitationBasmala;
+
+  /// Basmala setting explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'كما في المصحف – عدا الفاتحة (البسملة آيتها الأولى) والتوبة'**
+  String get recitationBasmalaHint;
+
+  /// Settings section: downloads
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستماع دون اتصال'**
+  String get recitationSectionDownloads;
+
+  /// Downloads section subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يبدأ أي تنزيل إلا حين تطلبه'**
+  String get recitationSectionDownloadsHint;
+
+  /// Total size of downloads
+  ///
+  /// In ar, this message translates to:
+  /// **'المساحة المستخدمة: {size}'**
+  String recitationStorageUsed(String size);
+
+  /// Setting: downloads only on Wi-Fi
+  ///
+  /// In ar, this message translates to:
+  /// **'التنزيل عبر Wi-Fi فقط'**
+  String get recitationWifiOnly;
+
+  /// Wi-Fi only explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'يتوقف التنزيل حين لا تكون على شبكة Wi-Fi'**
+  String get recitationWifiOnlyHint;
+
+  /// Download card title
+  ///
+  /// In ar, this message translates to:
+  /// **'المصحف كاملًا بصوت {name}'**
+  String recitationMushafFor(String name);
+
+  /// Estimated download size
+  ///
+  /// In ar, this message translates to:
+  /// **'نحو {size}'**
+  String recitationAbout(String size);
+
+  /// Button: download all 114 surahs
+  ///
+  /// In ar, this message translates to:
+  /// **'تنزيل المصحف'**
+  String get recitationDownloadMushaf;
+
+  /// Button: open the per-surah download list
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار السور'**
+  String get recitationChooseSurahs;
+
+  /// Download progress in surahs
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total} سورة'**
+  String recitationSurahProgress(String done, String total);
+
+  /// Download progress in files
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total} ملف'**
+  String recitationFilesProgress(String done, String total);
+
+  /// Button: pause downloads
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get recitationPauseDownloads;
+
+  /// Button: resume downloads
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get recitationResumeDownloads;
+
+  /// Button: cancel and remove a download
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء التنزيل'**
+  String get recitationCancelDownload;
+
+  /// Button: delete downloaded files
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف التنزيلات'**
+  String get recitationDeleteDownloads;
+
+  /// Delete confirmation title
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف تلاوة {name} من الهاتف؟'**
+  String recitationDeleteConfirm(String name);
+
+  /// Delete confirmation body
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحذف {size}. يمكنك تنزيلها مرة أخرى متى شئت.'**
+  String recitationDeleteConfirmHint(String size);
+
+  /// Delete one surah confirmation
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف سورة {surah}؟'**
+  String recitationDeleteSurahConfirm(String surah);
+
+  /// Heading: downloads of reciters not currently chosen
+  ///
+  /// In ar, this message translates to:
+  /// **'تنزيلات قرّاء آخرين'**
+  String get recitationOtherDownloads;
+
+  /// Per-surah downloads screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'تنزيلات {name}'**
+  String recitationDownloadsTitle(String name);
+
+  /// Number of ayat in a surah
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}'**
+  String recitationAyatCount(int count);
+
+  /// Button: download one surah
+  ///
+  /// In ar, this message translates to:
+  /// **'تنزيل السورة'**
+  String get recitationDownloadSurah;
+
+  /// Download status
+  ///
+  /// In ar, this message translates to:
+  /// **'في الانتظار'**
+  String get recitationStatusQueued;
+
+  /// Download status
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التنزيل'**
+  String get recitationStatusDownloading;
+
+  /// Download status
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّف مؤقتًا'**
+  String get recitationStatusPaused;
+
+  /// Download status: Wi-Fi only and not on Wi-Fi
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار Wi-Fi'**
+  String get recitationStatusWifi;
+
+  /// Download status
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر التنزيل'**
+  String get recitationStatusFailed;
+
+  /// Download status: complete
+  ///
+  /// In ar, this message translates to:
+  /// **'محمّلة'**
+  String get recitationStatusComplete;
+
+  /// Download error: network
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق من الاتصال ثم استأنف'**
+  String get recitationErrorNetwork;
+
+  /// Download error: 404
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف غير متوفر لدى المصدر'**
+  String get recitationErrorNotFound;
+
+  /// Download error: storage
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مساحة كافية على الهاتف'**
+  String get recitationErrorStorage;
+
+  /// A size in megabytes
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} ميغابايت'**
+  String recitationSizeMb(String size);
+
+  /// A size in gigabytes
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} غيغابايت'**
+  String recitationSizeGb(String size);
+
+  /// A size in kilobytes
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} كيلوبايت'**
+  String recitationSizeKb(String size);
+
+  /// Credit line under the downloads section
+  ///
+  /// In ar, this message translates to:
+  /// **'التلاوات من everyayah.com – تُبثّ عند التشغيل أو تُنزَّل بطلبك'**
+  String get recitationSourceCredit;
+
+  /// Fallback surah name
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة {number}'**
+  String recitationSurahNumber(String number);
+
+  /// Media title: surah and ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String recitationTitleAyah(String surah, String ayah);
+
+  /// Media title: the basmala before a surah
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، البسملة'**
+  String recitationTitleBasmala(String surah);
+
+  /// The ayah being recited
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية {ayah}'**
+  String recitationAyahNumber(String ayah);
+
+  /// The basmala is being recited
+  ///
+  /// In ar, this message translates to:
+  /// **'البسملة'**
+  String get recitationBasmalaNow;
+
+  /// Full player: title
+  ///
+  /// In ar, this message translates to:
+  /// **'يُتلى الآن'**
+  String get recitationNowPlaying;
+
+  /// Player button
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل'**
+  String get recitationPlay;
+
+  /// Player button
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get recitationPause;
+
+  /// Player button
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية التالية'**
+  String get recitationNextAyah;
+
+  /// Player button
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية السابقة'**
+  String get recitationPreviousAyah;
+
+  /// Player button
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف التلاوة'**
+  String get recitationStop;
+
+  /// Screen reader: mini player opens the full player
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح المشغّل'**
+  String get recitationOpenPlayer;
+
+  /// Player status
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التحميل…'**
+  String get recitationLoading;
+
+  /// Player status: paused because the adhan started
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّفت للأذان – اضغط للمتابعة'**
+  String get recitationPausedPrayer;
+
+  /// Player status: another app took the audio
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّفة مؤقتًا'**
+  String get recitationPausedInterruption;
+
+  /// Player status
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّفت بعد فصل السمّاعات'**
+  String get recitationPausedNoisy;
+
+  /// Player status
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى مؤقّت النوم'**
+  String get recitationPausedSleep;
+
+  /// Player error: network
+  ///
+  /// In ar, this message translates to:
+  /// **'لا اتصال – نزّل السورة للاستماع دون اتصال'**
+  String get recitationPlaybackNetwork;
+
+  /// Player error: 404
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الآية غير متوفرة لهذا القارئ'**
+  String get recitationPlaybackNotFound;
+
+  /// Player error
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر التشغيل'**
+  String get recitationPlaybackFailed;
+
+  /// Player button after an error
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get recitationRetry;
+
+  /// Chip: playing from downloaded files
+  ///
+  /// In ar, this message translates to:
+  /// **'من التنزيلات'**
+  String get recitationOffline;
+
+  /// Chip: streaming from the internet
+  ///
+  /// In ar, this message translates to:
+  /// **'بثّ'**
+  String get recitationStreaming;
+
+  /// Which repetition of the ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'التكرار {pass} من {total}'**
+  String recitationAyahPass(String pass, String total);
+
+  /// Which pass over the passage
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورة {pass} من {total}'**
+  String recitationRangePass(String pass, String total);
+
+  /// Which pass over an endless passage
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورة {pass}'**
+  String recitationRangePassEndless(String pass);
+
+  /// Full player: repeat control label for each ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية'**
+  String get recitationRepeatAyahShort;
+
+  /// Full player: repeat control label for the passage
+  ///
+  /// In ar, this message translates to:
+  /// **'المقطع'**
+  String get recitationRepeatRangeShort;
+
+  /// Stepper: increase
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة'**
+  String get recitationMore;
+
+  /// Stepper: decrease
+  ///
+  /// In ar, this message translates to:
+  /// **'إنقاص'**
+  String get recitationLess;
+
+  /// Full player: sleep timer
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤقّت النوم'**
+  String get recitationSleepTimer;
+
+  /// Sleep timer off
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا'**
+  String get recitationSleepOff;
+
+  /// Sleep timer: stop after the current ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد هذه الآية'**
+  String get recitationSleepAfterAyah;
+
+  /// Sleep timer minutes
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String recitationMinutes(int count);
+
+  /// Sleep timer running
+  ///
+  /// In ar, this message translates to:
+  /// **'يتوقف {time}'**
+  String recitationSleepUntil(String time);
+
+  /// Full player: open the reciter picker
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير القارئ'**
+  String get recitationChangeReciter;
+
+  /// Screen reader: progress ring
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} من المقطع'**
+  String recitationProgress(String percent);
+
+  /// The queued range
+  ///
+  /// In ar, this message translates to:
+  /// **'من {from} إلى {to}'**
+  String recitationRangeLabel(String from, String to);
+
+  /// The queued range inside one surah (e.g. الملك ١–٣٠); numbers pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah} {from}–{to}'**
+  String recitationRangeInSurah(String surah, String from, String to);
+
+  /// Full player: background playback unavailable
+  ///
+  /// In ar, this message translates to:
+  /// **'يعمل ما دام مَدار مفتوحًا'**
+  String get recitationBackgroundOff;
+
+  /// List separator (Arabic comma: a middle dot reads as the digit zero ٠)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get wirdSep;
+
+  /// Wird screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'الوِرد اليومي'**
+  String get wirdTitle;
+
+  /// Card / section: today's portion
+  ///
+  /// In ar, this message translates to:
+  /// **'وِرد اليوم'**
+  String get wirdTodayTitle;
+
+  /// Button: open the reader at today's portion
+  ///
+  /// In ar, this message translates to:
+  /// **'اقرأ الآن'**
+  String get wirdReadNow;
+
+  /// Button: open the reader where the user stopped
+  ///
+  /// In ar, this message translates to:
+  /// **'أكمِل القراءة'**
+  String get wirdContinue;
+
+  /// Button: record today's portion as read
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتُه'**
+  String get wirdMarkDone;
+
+  /// Button: record partial reading
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّفتُ عند…'**
+  String get wirdStoppedAt;
+
+  /// Sheet title: partial reading
+  ///
+  /// In ar, this message translates to:
+  /// **'أين توقّفت؟'**
+  String get wirdStoppedAtTitle;
+
+  /// Sheet subtitle: partial reading
+  ///
+  /// In ar, this message translates to:
+  /// **'حرّك المؤشّر إلى آخر آية قرأتها'**
+  String get wirdStoppedAtHint;
+
+  /// Sheet button: save partial reading
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل'**
+  String get wirdSaveProgress;
+
+  /// Toast after marking done
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل وِرد اليوم، تقبّل الله'**
+  String get wirdDoneToast;
+
+  /// Toast after partial reading
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت قراءتك حتى {ayah}'**
+  String wirdPartialToast(String ayah);
+
+  /// Status: today's portion read
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتَ وِرد اليوم، تقبّل الله منك'**
+  String get wirdMetToday;
+
+  /// Status: ahead, nothing owed
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء عليك اليوم، فأنت متقدّم على خطّتك'**
+  String get wirdRestToday;
+
+  /// Status: plan paused
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة متوقّفة مؤقتًا'**
+  String get wirdPausedNote;
+
+  /// Status: plan starts later
+  ///
+  /// In ar, this message translates to:
+  /// **'تبدأ الخطة {date}'**
+  String wirdNotStarted(String date);
+
+  /// Status: khatma finished
+  ///
+  /// In ar, this message translates to:
+  /// **'ختمتَ القرآن، تقبّل الله منك'**
+  String get wirdKhatmaDone;
+
+  /// Status: behind, spread
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخّر بمقدار {amount}، ووُزِّع على الأيام القادمة'**
+  String wirdBehindSpread(String amount);
+
+  /// Status: behind, all today
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخّر بمقدار {amount}، وأُضيف إلى وِرد اليوم'**
+  String wirdBehindAll(String amount);
+
+  /// Status: ahead
+  ///
+  /// In ar, this message translates to:
+  /// **'متقدّم بمقدار {amount}، أحسنت'**
+  String wirdAhead(String amount);
+
+  /// Short status: behind
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخّر {amount}'**
+  String wirdBehindShort(String amount);
+
+  /// Short status: ahead
+  ///
+  /// In ar, this message translates to:
+  /// **'متقدّم {amount}'**
+  String wirdAheadShort(String amount);
+
+  /// Plan tile: today's portion
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم: {range}'**
+  String wirdTodayLine(String range);
+
+  /// Plan tile: where an open-ended plan stands
+  ///
+  /// In ar, this message translates to:
+  /// **'عند ص {page}'**
+  String wirdPagePosition(String page);
+
+  /// Status: remaining today
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {amount}'**
+  String wirdLeftToday(String amount);
+
+  /// An ayah: surah name and ayah number
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah} {ayah}'**
+  String wirdAyahRef(String surah, String ayah);
+
+  /// Ayah range inside one surah
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah} {from}–{to}'**
+  String wirdRangeSameSurah(String surah, String from, String to);
+
+  /// Ayah range across surahs
+  ///
+  /// In ar, this message translates to:
+  /// **'{from} – {to}'**
+  String wirdRangeCross(String from, String to);
+
+  /// Mushaf page range
+  ///
+  /// In ar, this message translates to:
+  /// **'ص {from}–{to}'**
+  String wirdPageRange(String from, String to);
+
+  /// One mushaf page
+  ///
+  /// In ar, this message translates to:
+  /// **'ص {page}'**
+  String wirdPageSingle(String page);
+
+  /// Whole pages
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا صفحات} =1{صفحة واحدة} =2{صفحتان} few{{count} صفحات} many{{count} صفحة} other{{count} صفحة}}'**
+  String wirdUnitPages(int count);
+
+  /// Whole juz
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أجزاء} =1{جزء واحد} =2{جزآن} few{{count} أجزاء} many{{count} جزءًا} other{{count} جزء}}'**
+  String wirdUnitJuz(int count);
+
+  /// Whole hizb
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أحزاب} =1{حزب واحد} =2{حزبان} few{{count} أحزاب} many{{count} حزبًا} other{{count} حزب}}'**
+  String wirdUnitHizb(int count);
+
+  /// Ayat count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا آيات} =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}'**
+  String wirdUnitAyat(int count);
+
+  /// Fractional pages, e.g. 20.1
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} صفحة'**
+  String wirdUnitPagesDecimal(String amount);
+
+  /// Fractional juz
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} جزء'**
+  String wirdUnitJuzDecimal(String amount);
+
+  /// Fractional hizb
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} حزب'**
+  String wirdUnitHizbDecimal(String amount);
+
+  /// A number of days
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أيام} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String wirdDays(int count);
+
+  /// Plan type: finish the Quran in N days
+  ///
+  /// In ar, this message translates to:
+  /// **'ختمة'**
+  String get wirdTemplateKhatma;
+
+  /// Plan type: N pages a day
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحات'**
+  String get wirdTemplatePages;
+
+  /// Plan type: N juz a day
+  ///
+  /// In ar, this message translates to:
+  /// **'أجزاء'**
+  String get wirdTemplateJuz;
+
+  /// Plan type: N hizb a day
+  ///
+  /// In ar, this message translates to:
+  /// **'أحزاب'**
+  String get wirdTemplateHizb;
+
+  /// Plan type: N ayat a day
+  ///
+  /// In ar, this message translates to:
+  /// **'آيات'**
+  String get wirdTemplateAyat;
+
+  /// Plan summary line (khatma)
+  ///
+  /// In ar, this message translates to:
+  /// **'ختمة في {days}، {amount} يوميًا'**
+  String wirdSummaryKhatma(String days, String amount);
+
+  /// Plan summary line (daily amount)
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} يوميًا'**
+  String wirdSummaryDaily(String amount);
+
+  /// Default plan name (khatma)
+  ///
+  /// In ar, this message translates to:
+  /// **'ختمة في {days}'**
+  String wirdDefaultNameKhatma(String days);
+
+  /// Default plan name (daily amount)
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} كل يوم'**
+  String wirdDefaultNameDaily(String amount);
+
+  /// Plan window: after a prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {prayer}'**
+  String wirdWindowAfter(String prayer);
+
+  /// Plan window: duha
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الضحى'**
+  String get wirdWindowDuha;
+
+  /// Plan window: none
+  ///
+  /// In ar, this message translates to:
+  /// **'أي وقت'**
+  String get wirdWindowAnytime;
+
+  /// Section: the plans list
+  ///
+  /// In ar, this message translates to:
+  /// **'خططي'**
+  String get wirdPlansTitle;
+
+  /// Button: add a plan
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة جديدة'**
+  String get wirdAddPlan;
+
+  /// Badge: the primary plan
+  ///
+  /// In ar, this message translates to:
+  /// **'الأساسية'**
+  String get wirdPrimary;
+
+  /// Action: make a plan primary
+  ///
+  /// In ar, this message translates to:
+  /// **'اجعلها الأساسية'**
+  String get wirdMakePrimary;
+
+  /// Action: pause a plan
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get wirdPause;
+
+  /// Action: resume a plan
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get wirdResume;
+
+  /// Badge: paused plan
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّفة'**
+  String get wirdPaused;
+
+  /// Action: edit a plan
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get wirdEdit;
+
+  /// Action: delete a plan
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get wirdDelete;
+
+  /// Undo toast: plan deleted
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الخطة'**
+  String get wirdDeletedToast;
+
+  /// Undo toast: plan paused
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقفت الخطة مؤقتًا'**
+  String get wirdPausedToast;
+
+  /// Undo toast: plan resumed
+  ///
+  /// In ar, this message translates to:
+  /// **'استُؤنفت الخطة'**
+  String get wirdResumedToast;
+
+  /// Undo toast: primary changed
+  ///
+  /// In ar, this message translates to:
+  /// **'صارت «{name}» خطّتك الأساسية'**
+  String wirdPrimaryToast(String name);
+
+  /// Undo toast: plan edited
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت الخطة'**
+  String get wirdSavedToast;
+
+  /// Undo toast: plan created
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأت خطة «{name}»، يسّر الله لك'**
+  String wirdCreatedToast(String name);
+
+  /// Empty state title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا خطة وِرد بعد'**
+  String get wirdEmptyTitle;
+
+  /// Empty state body
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ختمة في ثلاثين يومًا أو قدرًا يوميًا يناسبك، ونذكّرك به بعد الصلاة.'**
+  String get wirdEmptyBody;
+
+  /// Empty state button
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ خطة'**
+  String get wirdEmptyAction;
+
+  /// Stat label: streak
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة'**
+  String get wirdStreak;
+
+  /// Stat caption: best streak
+  ///
+  /// In ar, this message translates to:
+  /// **'الأطول: {days}'**
+  String wirdBestStreak(String days);
+
+  /// Stat label: projected finish
+  ///
+  /// In ar, this message translates to:
+  /// **'الختم المتوقّع'**
+  String get wirdFinish;
+
+  /// Stat caption: khatma target date
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد {date}'**
+  String wirdTargetDate(String date);
+
+  /// Stat label: overall progress
+  ///
+  /// In ar, this message translates to:
+  /// **'التقدّم'**
+  String get wirdProgress;
+
+  /// Stat caption: khatmas finished
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم تُختم بعد} =1{ختمة واحدة} =2{ختمتان} few{{count} ختمات} many{{count} ختمة} other{{count} ختمة}}'**
+  String wirdKhatmas(int count);
+
+  /// Stat value: no projection
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتّضح بعد'**
+  String get wirdNoProjection;
+
+  /// Progress ring value
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {quota}'**
+  String wirdProgressOf(String done, String quota);
+
+  /// Ring caption under the number read
+  ///
+  /// In ar, this message translates to:
+  /// **'من {quota}'**
+  String wirdProgressOfShort(String quota);
+
+  /// Section: history calendar
+  ///
+  /// In ar, this message translates to:
+  /// **'السجلّ'**
+  String get wirdHistoryTitle;
+
+  /// Calendar legend: met
+  ///
+  /// In ar, this message translates to:
+  /// **'أُتمّ'**
+  String get wirdLegendMet;
+
+  /// Calendar legend: partial
+  ///
+  /// In ar, this message translates to:
+  /// **'بعضه'**
+  String get wirdLegendPartial;
+
+  /// Calendar legend: missed
+  ///
+  /// In ar, this message translates to:
+  /// **'فات'**
+  String get wirdLegendMissed;
+
+  /// Calendar legend: rest
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء عليه'**
+  String get wirdLegendRest;
+
+  /// Calendar legend: paused
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّف'**
+  String get wirdLegendPaused;
+
+  /// Calendar button
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر السابق'**
+  String get wirdPrevMonth;
+
+  /// Calendar button
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر التالي'**
+  String get wirdNextMonth;
+
+  /// Plan sheet title (new)
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة وِرد جديدة'**
+  String get wirdNewPlanTitle;
+
+  /// Plan sheet title (edit)
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الخطة'**
+  String get wirdEditPlanTitle;
+
+  /// Plan sheet subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'قليلٌ دائم خيرٌ من كثيرٍ منقطع'**
+  String get wirdPlanSheetSubtitle;
+
+  /// Plan field
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get wirdFieldName;
+
+  /// Plan field
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الخطة'**
+  String get wirdFieldType;
+
+  /// Plan field: khatma length
+  ///
+  /// In ar, this message translates to:
+  /// **'المدّة'**
+  String get wirdFieldDays;
+
+  /// Choice: custom duration / amount
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get wirdFieldCustom;
+
+  /// Plan field
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدار اليومي'**
+  String get wirdFieldAmount;
+
+  /// Plan field
+  ///
+  /// In ar, this message translates to:
+  /// **'نقطة البداية'**
+  String get wirdFieldStart;
+
+  /// Plan field
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ البدء'**
+  String get wirdFieldStartDate;
+
+  /// Start date choice
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get wirdStartToday;
+
+  /// Start date choice
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا'**
+  String get wirdStartTomorrow;
+
+  /// Plan sheet: computed finish date
+  ///
+  /// In ar, this message translates to:
+  /// **'تختم يوم {date}'**
+  String wirdFinishesOn(String date);
+
+  /// Plan sheet: computed daily amount
+  ///
+  /// In ar, this message translates to:
+  /// **'نحو {amount} كل يوم'**
+  String wirdPerDayPreview(String amount);
+
+  /// Plan field: prayer window
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الوِرد'**
+  String get wirdFieldWindow;
+
+  /// Plan field: catch-up mode
+  ///
+  /// In ar, this message translates to:
+  /// **'إذا فاتك شيء'**
+  String get wirdFieldCatchUp;
+
+  /// Catch-up choice
+  ///
+  /// In ar, this message translates to:
+  /// **'وزّعه على الأيام'**
+  String get wirdCatchUpSpread;
+
+  /// Catch-up choice
+  ///
+  /// In ar, this message translates to:
+  /// **'أضِفه إلى اليوم'**
+  String get wirdCatchUpAll;
+
+  /// Catch-up hint
+  ///
+  /// In ar, this message translates to:
+  /// **'يُقسَّم ما فاتك على الأيام القادمة فلا يثقل عليك يوم'**
+  String get wirdCatchUpSpreadHint;
+
+  /// Catch-up hint
+  ///
+  /// In ar, this message translates to:
+  /// **'يُضاف ما فاتك كلّه إلى وِرد اليوم التالي'**
+  String get wirdCatchUpAllHint;
+
+  /// Plan field: reminder
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني بعد الصلاة'**
+  String get wirdFieldRemind;
+
+  /// Reminder offset choice
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {minutes}'**
+  String wirdRemindAfter(String minutes);
+
+  /// Minutes
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String wirdMinutes(int count);
+
+  /// Stepper button
+  ///
+  /// In ar, this message translates to:
+  /// **'إنقاص'**
+  String get wirdDecrease;
+
+  /// Stepper button
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة'**
+  String get wirdIncrease;
+
+  /// Field: surah
+  ///
+  /// In ar, this message translates to:
+  /// **'السورة'**
+  String get wirdSurah;
+
+  /// Field: ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية'**
+  String get wirdAyah;
+
+  /// Start shortcut label
+  ///
+  /// In ar, this message translates to:
+  /// **'أول الجزء'**
+  String get wirdStartJuzShortcut;
+
+  /// A juz
+  ///
+  /// In ar, this message translates to:
+  /// **'الجزء {n}'**
+  String wirdJuzNumber(String n);
+
+  /// Surah picker title
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر السورة'**
+  String get wirdChooseSurah;
+
+  /// Surah picker search hint
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث باسم السورة أو رقمها'**
+  String get wirdSearchSurah;
+
+  /// Plan sheet button (new)
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الخطة'**
+  String get wirdCreate;
+
+  /// Plan sheet button (edit)
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get wirdSave;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا للخطة'**
+  String get wirdNameRequired;
+
+  /// Notification channel name
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الوِرد'**
+  String get wirdReminderChannelName;
+
+  /// Notification channel description
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بوِردك اليومي بعد الصلاة التي تختارها'**
+  String get wirdReminderChannelDescription;
+
+  /// Reminder title
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت وِردك'**
+  String get wirdReminderTitle;
+
+  /// Reminder body naming today's portion
+  ///
+  /// In ar, this message translates to:
+  /// **'{plan}: {range}'**
+  String wirdReminderBodyToday(String plan, String range);
+
+  /// Reminder body
+  ///
+  /// In ar, this message translates to:
+  /// **'{plan} — {window}'**
+  String wirdReminderBody(String plan, String window);
+
+  /// Error: catalog unavailable
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل بيانات المصحف'**
+  String get wirdCatalogError;
+
+  /// Overall progress caption
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} من الختمة'**
+  String wirdOverallOf(String percent);
+
+  /// Open-ended progress caption
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} من المصحف'**
+  String wirdPositionIn(String percent);
+
+  /// Card link: wird screen
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الخطط'**
+  String get wirdOpenAll;
+
+  /// Card: no plan yet
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ وِردًا يوميًا'**
+  String get wirdStartPlanCta;
+
+  /// Calendar day for screen readers
+  ///
+  /// In ar, this message translates to:
+  /// **'{date}: {status}'**
+  String wirdDayStatusSemantics(String date, String status);
+
+  /// Hifz screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'الحفظ'**
+  String get hifzTitle;
+
+  /// Hifz card title
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة الحفظ'**
+  String get hifzTodayTitle;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ المراجعة'**
+  String get hifzStartReview;
+
+  /// Button when some reviews are done today
+  ///
+  /// In ar, this message translates to:
+  /// **'واصل المراجعة'**
+  String get hifzContinueReview;
+
+  /// Status
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مراجعة اليوم'**
+  String get hifzNothingDue;
+
+  /// Status
+  ///
+  /// In ar, this message translates to:
+  /// **'راجعتَ كلّ ما استحقّ اليوم، بارك الله فيك'**
+  String get hifzAllCaughtUp;
+
+  /// Count of due items
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا مراجعة} =1{مقطع للمراجعة} =2{مقطعان للمراجعة} few{{count} مقاطع للمراجعة} many{{count} مقطعًا للمراجعة} other{{count} مقطع للمراجعة}}'**
+  String hifzDueCount(int count);
+
+  /// Count of new items
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا جديد} =1{مقطع جديد} =2{مقطعان جديدان} few{{count} مقاطع جديدة} many{{count} مقطعًا جديدًا} other{{count} مقطع جديد}}'**
+  String hifzNewCount(int count);
+
+  /// Tab
+  ///
+  /// In ar, this message translates to:
+  /// **'المستحق'**
+  String get hifzTabDue;
+
+  /// Tab
+  ///
+  /// In ar, this message translates to:
+  /// **'الجديد'**
+  String get hifzTabNew;
+
+  /// Tab
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفوظ'**
+  String get hifzTabLearned;
+
+  /// Stat label
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get hifzStatDue;
+
+  /// Stat label
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظ'**
+  String get hifzStatLearned;
+
+  /// Stat label: share of reviews recalled
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكّر'**
+  String get hifzStatRetention;
+
+  /// Stat label
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة'**
+  String get hifzStatStreak;
+
+  /// Stat caption: the retention window (days is a formatted number)
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر {days} يومًا'**
+  String hifzRetentionCaption(String days);
+
+  /// Forecast chart title
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعات في الأسبوع القادم'**
+  String get hifzForecastTitle;
+
+  /// Forecast: today column
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get hifzForecastToday;
+
+  /// Item kind
+  ///
+  /// In ar, this message translates to:
+  /// **'آيات'**
+  String get hifzKindAyat;
+
+  /// Item kind
+  ///
+  /// In ar, this message translates to:
+  /// **'حديث'**
+  String get hifzKindHadith;
+
+  /// Item kind
+  ///
+  /// In ar, this message translates to:
+  /// **'نص'**
+  String get hifzKindCustom;
+
+  /// When an item is due
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{اليوم} =1{غدًا} =2{بعد يومين} few{بعد {count} أيام} many{بعد {count} يومًا} other{بعد {count} يوم}}'**
+  String hifzDueIn(int count);
+
+  /// Overdue item
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{فات موعده أمس} =2{فات موعده منذ يومين} few{فات موعده منذ {count} أيام} many{فات موعده منذ {count} يومًا} other{فات موعده منذ {count} يوم}}'**
+  String hifzOverdue(int count);
+
+  /// Reviews count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم يُراجَع بعد} =1{مراجعة واحدة} =2{مراجعتان} few{{count} مراجعات} many{{count} مراجعة} other{{count} مراجعة}}'**
+  String hifzReviews(int count);
+
+  /// Lapses count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{نُسي مرة} =2{نُسي مرتين} few{نُسي {count} مرات} many{نُسي {count} مرة} other{نُسي {count} مرة}}'**
+  String hifzLapses(int count);
+
+  /// Badge
+  ///
+  /// In ar, this message translates to:
+  /// **'جديد'**
+  String get hifzNewBadge;
+
+  /// Badge
+  ///
+  /// In ar, this message translates to:
+  /// **'معلّق'**
+  String get hifzSuspendedBadge;
+
+  /// Button: add items
+  ///
+  /// In ar, this message translates to:
+  /// **'أضِف'**
+  String get hifzAdd;
+
+  /// Add sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة إلى الحفظ'**
+  String get hifzAddTitle;
+
+  /// Add sheet subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'ما تحفظه اليوم يعود إليك قبل أن يُنسى'**
+  String get hifzAddSubtitle;
+
+  /// Add choice
+  ///
+  /// In ar, this message translates to:
+  /// **'آيات من القرآن'**
+  String get hifzAddAyat;
+
+  /// Add choice hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر سورة وآيات، وتُقسَّم إلى مقاطع قصيرة'**
+  String get hifzAddAyatHint;
+
+  /// Add choice
+  ///
+  /// In ar, this message translates to:
+  /// **'حديث من الأربعين النووية'**
+  String get hifzAddHadith;
+
+  /// Add choice hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اثنان وأربعون حديثًا من جوامع الكلم'**
+  String get hifzAddHadithHint;
+
+  /// Add choice
+  ///
+  /// In ar, this message translates to:
+  /// **'نصّ من اختيارك'**
+  String get hifzAddCustom;
+
+  /// Add choice hint
+  ///
+  /// In ar, this message translates to:
+  /// **'دعاء أو متن أو أيّ نصّ تريد حفظه'**
+  String get hifzAddCustomHint;
+
+  /// Field
+  ///
+  /// In ar, this message translates to:
+  /// **'من الآية'**
+  String get hifzFromAyah;
+
+  /// Field
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى الآية'**
+  String get hifzToAyah;
+
+  /// Field
+  ///
+  /// In ar, this message translates to:
+  /// **'آيات كل مقطع'**
+  String get hifzChunkSize;
+
+  /// Chunk count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا مقاطع} =1{مقطع واحد} =2{مقطعان} few{{count} مقاطع} many{{count} مقطعًا} other{{count} مقطع}}'**
+  String hifzChunks(int count);
+
+  /// Chunk preview line
+  ///
+  /// In ar, this message translates to:
+  /// **'{chunks}: {ranges}'**
+  String hifzChunkPreview(String chunks, String ranges);
+
+  /// Sheet button
+  ///
+  /// In ar, this message translates to:
+  /// **'أضِف إلى الحفظ'**
+  String get hifzAddButton;
+
+  /// Undo toast: items added
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{أُضيف مقطع إلى الحفظ} =2{أُضيف مقطعان إلى الحفظ} few{أُضيفت {count} مقاطع إلى الحفظ} many{أُضيف {count} مقطعًا إلى الحفظ} other{أُضيف {count} مقطع إلى الحفظ}}'**
+  String hifzAdded(int count);
+
+  /// Badge: hadith already added
+  ///
+  /// In ar, this message translates to:
+  /// **'في الحفظ'**
+  String get hifzInHifz;
+
+  /// Field
+  ///
+  /// In ar, this message translates to:
+  /// **'العنوان'**
+  String get hifzCustomTitle;
+
+  /// Field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: دعاء الاستخارة'**
+  String get hifzCustomTitleHint;
+
+  /// Field
+  ///
+  /// In ar, this message translates to:
+  /// **'النص'**
+  String get hifzCustomBody;
+
+  /// Field
+  ///
+  /// In ar, this message translates to:
+  /// **'المصدر (اختياري)'**
+  String get hifzCustomSource;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب النصّ الذي تريد حفظه'**
+  String get hifzBodyRequired;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get hifzEdit;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل المقطع'**
+  String get hifzEditTitle;
+
+  /// Action: stop scheduling an item
+  ///
+  /// In ar, this message translates to:
+  /// **'تعليق'**
+  String get hifzSuspend;
+
+  /// Action: unsuspend
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة إلى المراجعة'**
+  String get hifzUnsuspend;
+
+  /// Action: reset SM-2 state
+  ///
+  /// In ar, this message translates to:
+  /// **'البدء فيه من جديد'**
+  String get hifzResetProgress;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get hifzDelete;
+
+  /// Action: review one item
+  ///
+  /// In ar, this message translates to:
+  /// **'راجِعه الآن'**
+  String get hifzReviewNow;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف من الحفظ'**
+  String get hifzDeletedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'عُلّق المقطع'**
+  String get hifzSuspendedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'عاد المقطع إلى المراجعة'**
+  String get hifzUnsuspendedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'عاد المقطع جديدًا'**
+  String get hifzResetToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت التعديلات'**
+  String get hifzSavedToast;
+
+  /// Review screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعة'**
+  String get hifzReviewTitle;
+
+  /// Review progress
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String hifzReviewProgress(String done, String total);
+
+  /// Review hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اقرأ من حفظك، ثم اكشف النصّ وقيّم نفسك بصدق'**
+  String get hifzRecitePrompt;
+
+  /// Reveal stage
+  ///
+  /// In ar, this message translates to:
+  /// **'أوائل الكلمات'**
+  String get hifzRevealFirstLetters;
+
+  /// Reveal button
+  ///
+  /// In ar, this message translates to:
+  /// **'الكلمة التالية'**
+  String get hifzRevealNextWord;
+
+  /// Reveal button
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهِر النصّ'**
+  String get hifzRevealAll;
+
+  /// Reveal button
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفِ'**
+  String get hifzRevealHide;
+
+  /// Button: play recitation
+  ///
+  /// In ar, this message translates to:
+  /// **'استمع'**
+  String get hifzListen;
+
+  /// Button: stop recitation
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقِف'**
+  String get hifzListenStop;
+
+  /// Repeat count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String hifzRepeatTimes(int count);
+
+  /// Badge: same-session re-drill
+  ///
+  /// In ar, this message translates to:
+  /// **'نعيده حتى يبلغ «جيد»'**
+  String get hifzRedrill;
+
+  /// Badge: first review
+  ///
+  /// In ar, this message translates to:
+  /// **'مقطع جديد'**
+  String get hifzNewItem;
+
+  /// Grade prompt
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف كان استحضارك؟'**
+  String get hifzGradePrompt;
+
+  /// SM-2 grade 0
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيته'**
+  String get hifzGrade0;
+
+  /// SM-2 grade 0 meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'لم أستحضر شيئًا'**
+  String get hifzGrade0Hint;
+
+  /// SM-2 grade 1
+  ///
+  /// In ar, this message translates to:
+  /// **'أخطأت'**
+  String get hifzGrade1;
+
+  /// SM-2 grade 1 meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'أخطأت، وعرفته حين رأيته'**
+  String get hifzGrade1Hint;
+
+  /// SM-2 grade 2
+  ///
+  /// In ar, this message translates to:
+  /// **'قريب'**
+  String get hifzGrade2;
+
+  /// SM-2 grade 2 meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'أخطأت، وبدا سهلًا حين رأيته'**
+  String get hifzGrade2Hint;
+
+  /// SM-2 grade 3
+  ///
+  /// In ar, this message translates to:
+  /// **'بصعوبة'**
+  String get hifzGrade3;
+
+  /// SM-2 grade 3 meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'صحيح بجهدٍ كبير'**
+  String get hifzGrade3Hint;
+
+  /// SM-2 grade 4
+  ///
+  /// In ar, this message translates to:
+  /// **'جيد'**
+  String get hifzGrade4;
+
+  /// SM-2 grade 4 meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'صحيح بعد تردّد يسير'**
+  String get hifzGrade4Hint;
+
+  /// SM-2 grade 5
+  ///
+  /// In ar, this message translates to:
+  /// **'متقَن'**
+  String get hifzGrade5;
+
+  /// SM-2 grade 5 meaning
+  ///
+  /// In ar, this message translates to:
+  /// **'صحيح بلا تردّد'**
+  String get hifzGrade5Hint;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تراجع عن التقييم'**
+  String get hifzUndoGrade;
+
+  /// After grading
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعة القادمة {when}'**
+  String hifzNextReview(String when);
+
+  /// Button: end session early
+  ///
+  /// In ar, this message translates to:
+  /// **'إنهاء'**
+  String get hifzFinish;
+
+  /// Summary title
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتَ المراجعة'**
+  String get hifzSummaryTitle;
+
+  /// Summary subtitle (hadith)
+  ///
+  /// In ar, this message translates to:
+  /// **'«خيرُكم من تعلّم القرآن وعلّمه»'**
+  String get hifzSummarySubtitle;
+
+  /// Summary stat
+  ///
+  /// In ar, this message translates to:
+  /// **'راجعت'**
+  String get hifzSummaryReviewed;
+
+  /// Summary stat
+  ///
+  /// In ar, this message translates to:
+  /// **'جديد'**
+  String get hifzSummaryNew;
+
+  /// Summary stat: re-drills
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد'**
+  String get hifzSummaryAgain;
+
+  /// Summary stat: share graded ≥3
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكّرت'**
+  String get hifzSummaryRecall;
+
+  /// Summary: due tomorrow
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا: {count}'**
+  String hifzSummaryTomorrow(String count);
+
+  /// Summary button
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get hifzSummaryDone;
+
+  /// Review screen empty
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء للمراجعة الآن'**
+  String get hifzEmptySession;
+
+  /// Empty state
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ رحلة الحفظ'**
+  String get hifzEmptyTitle;
+
+  /// Empty state
+  ///
+  /// In ar, this message translates to:
+  /// **'أضِف آيات أو حديثًا، ويعيدها التكرار المتباعد إليك قبل أن تُنسى.'**
+  String get hifzEmptyBody;
+
+  /// Empty tab
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مستحقّ اليوم'**
+  String get hifzEmptyDue;
+
+  /// Empty tab
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مقاطع جديدة تنتظر'**
+  String get hifzEmptyNew;
+
+  /// Empty tab
+  ///
+  /// In ar, this message translates to:
+  /// **'تظهر هنا المقاطع بعد أول مراجعة لها'**
+  String get hifzEmptyLearned;
+
+  /// Settings sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الحفظ'**
+  String get hifzSettingsTitle;
+
+  /// Setting
+  ///
+  /// In ar, this message translates to:
+  /// **'مقاطع جديدة كل يوم'**
+  String get hifzNewPerDay;
+
+  /// Setting
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار الاستماع لكل آية'**
+  String get hifzListenRepeat;
+
+  /// Hadith number
+  ///
+  /// In ar, this message translates to:
+  /// **'الحديث {n}'**
+  String hifzHadithNumber(String n);
+
+  /// Hadith source line
+  ///
+  /// In ar, this message translates to:
+  /// **'{collection}، {n}'**
+  String hifzHadithSource(String collection, String n);
+
+  /// Error
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل بيانات المصحف'**
+  String get hifzCatalogError;
+
+  /// SM-2 ease factor
+  ///
+  /// In ar, this message translates to:
+  /// **'السهولة {value}'**
+  String hifzEase(String value);
+
+  /// SM-2 interval of one day
+  ///
+  /// In ar, this message translates to:
+  /// **'كل يوم'**
+  String get hifzEveryDay;
+
+  /// SM-2 interval
+  ///
+  /// In ar, this message translates to:
+  /// **'كل {days}'**
+  String hifzInterval(String days);
+
+  /// Card link
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المقاطع'**
+  String get hifzOpenAll;
+
+  /// Card: nothing added yet
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الحفظ'**
+  String get hifzStartCta;
+
+  /// Qibla screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'القبلة'**
+  String get qiblaTitle;
+
+  /// Status: the phone points at the qibla (±3°)
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاهك الآن إلى القبلة'**
+  String get qiblaFacing;
+
+  /// Status: turn clockwise by degrees (pre-formatted, e.g. ٤٥°)
+  ///
+  /// In ar, this message translates to:
+  /// **'استدر يمينًا {degrees}'**
+  String qiblaTurnRight(String degrees);
+
+  /// Status: turn counter-clockwise by degrees
+  ///
+  /// In ar, this message translates to:
+  /// **'استدر يسارًا {degrees}'**
+  String qiblaTurnLeft(String degrees);
+
+  /// Status: waiting for the first compass reading
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ قراءة البوصلة…'**
+  String get qiblaReading;
+
+  /// Hint when the phone points at the ground
+  ///
+  /// In ar, this message translates to:
+  /// **'أمسك الهاتف مستويًا أمامك'**
+  String get qiblaHoldFlat;
+
+  /// Info tile label: the qibla bearing from true north
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه القبلة'**
+  String get qiblaBearing;
+
+  /// Info tile label
+  ///
+  /// In ar, this message translates to:
+  /// **'المسافة إلى الكعبة'**
+  String get qiblaDistance;
+
+  /// Distance in kilometres (number pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{distance} كم'**
+  String qiblaKm(String distance);
+
+  /// Info tile label: where the phone points (true north)
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاهك'**
+  String get qiblaYourHeading;
+
+  /// Info tile label: the sun's azimuth
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه الشمس'**
+  String get qiblaSunBearing;
+
+  /// Footnote: magnetic declination (value pre-formatted, direction = qiblaEast/qiblaWest)
+  ///
+  /// In ar, this message translates to:
+  /// **'الانحراف المغناطيسي هنا {value} {direction}، ويُصحَّح تلقائيًّا بنموذج المجال المغناطيسي العالمي.'**
+  String qiblaDeclination(String value, String direction);
+
+  /// Declination direction: east
+  ///
+  /// In ar, this message translates to:
+  /// **'شرقًا'**
+  String get qiblaEast;
+
+  /// Declination direction: west
+  ///
+  /// In ar, this message translates to:
+  /// **'غربًا'**
+  String get qiblaWest;
+
+  /// Compass accuracy level
+  ///
+  /// In ar, this message translates to:
+  /// **'دقة عالية'**
+  String get qiblaAccuracyHigh;
+
+  /// Compass accuracy level
+  ///
+  /// In ar, this message translates to:
+  /// **'دقة متوسطة'**
+  String get qiblaAccuracyMedium;
+
+  /// Compass accuracy level
+  ///
+  /// In ar, this message translates to:
+  /// **'دقة منخفضة'**
+  String get qiblaAccuracyLow;
+
+  /// Compass accuracy level
+  ///
+  /// In ar, this message translates to:
+  /// **'قراءة غير موثوقة'**
+  String get qiblaAccuracyUnreliable;
+
+  /// Accuracy chip: level and the estimated error, pre-formatted (e.g. ±٤°)
+  ///
+  /// In ar, this message translates to:
+  /// **'{level}، {error}'**
+  String qiblaAccuracyChip(String level, String error);
+
+  /// Calibration prompt title
+  ///
+  /// In ar, this message translates to:
+  /// **'عايِر البوصلة'**
+  String get qiblaCalibrateTitle;
+
+  /// Calibration prompt body; {eight} is the digit 8 in the user's digits
+  ///
+  /// In ar, this message translates to:
+  /// **'حرّك الهاتف في الهواء على شكل الرقم {eight} مرّاتٍ قليلة، بعيدًا عن المعادن والمغانط.'**
+  String qiblaCalibrateBody(String eight);
+
+  /// Calibration prompt body when the field strength is far off
+  ///
+  /// In ar, this message translates to:
+  /// **'المجال المغناطيسي هنا مضطرب: ابتعد عن المعادن والأجهزة والمغانط (ومنها أغطية الهاتف المغناطيسية)، ثم حرّك الهاتف على شكل الرقم {eight}.'**
+  String qiblaInterferenceBody(String eight);
+
+  /// Button: hide the calibration prompt
+  ///
+  /// In ar, this message translates to:
+  /// **'لاحقًا'**
+  String get qiblaCalibrateLater;
+
+  /// Toast when the calibration prompt resolves
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّت معايرة البوصلة'**
+  String get qiblaCalibrated;
+
+  /// Button: show the calibration prompt again
+  ///
+  /// In ar, this message translates to:
+  /// **'معايرة'**
+  String get qiblaCalibrateAction;
+
+  /// Sun mode title
+  ///
+  /// In ar, this message translates to:
+  /// **'بوصلة الشمس'**
+  String get qiblaSunTitle;
+
+  /// Sun mode instructions
+  ///
+  /// In ar, this message translates to:
+  /// **'قف والشمس أمامك، ووجّه أعلى الهاتف نحوها دون أن تنظر إليها مباشرة؛ عندئذٍ تشير الإبرة الذهبية إلى القبلة.'**
+  String get qiblaSunHowTo;
+
+  /// Sun mode: qibla relative to the sun
+  ///
+  /// In ar, this message translates to:
+  /// **'القبلة إلى يمين الشمس بزاوية {degrees}'**
+  String qiblaSunRightOf(String degrees);
+
+  /// Sun mode: qibla relative to the sun
+  ///
+  /// In ar, this message translates to:
+  /// **'القبلة إلى يسار الشمس بزاوية {degrees}'**
+  String qiblaSunLeftOf(String degrees);
+
+  /// Sun mode: qibla within 3° of the sun
+  ///
+  /// In ar, this message translates to:
+  /// **'القبلة في جهة الشمس تمامًا'**
+  String get qiblaSunAhead;
+
+  /// Sun mode caveat near noon
+  ///
+  /// In ar, this message translates to:
+  /// **'الشمس عالية الآن، فالتصويب نحوها أقلّ دقة.'**
+  String get qiblaSunHigh;
+
+  /// Diagram mode title
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطط الاتجاه'**
+  String get qiblaDiagramTitle;
+
+  /// Diagram instructions (northern hemisphere)
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّد الشمال ببوصلة، أو ليلًا بالنجم القطبي (الجُدَيّ)، ثم استدر {degrees} باتجاه عقارب الساعة.'**
+  String qiblaDiagramHowTo(String degrees);
+
+  /// Diagram instructions (southern hemisphere)
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّد الشمال ببوصلة، أو ليلًا بكوكبة الصليب الجنوبي التي تدلّ على الجنوب، ثم استدر {degrees} من الشمال باتجاه عقارب الساعة.'**
+  String qiblaDiagramHowToSouth(String degrees);
+
+  /// Fallback reason
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يحتوي هذا الهاتف على بوصلة (مستشعر مغناطيسي).'**
+  String get qiblaNoSensor;
+
+  /// Fallback reason
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت قراءة البوصلة.'**
+  String get qiblaSensorError;
+
+  /// Fallback reason
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تصل قراءات من البوصلة.'**
+  String get qiblaNoReadings;
+
+  /// Button: switch to the sun compass
+  ///
+  /// In ar, this message translates to:
+  /// **'استعن بالشمس'**
+  String get qiblaUseSun;
+
+  /// Button: back to the live compass
+  ///
+  /// In ar, this message translates to:
+  /// **'عُد إلى البوصلة'**
+  String get qiblaUseCompass;
+
+  /// Button: retry the compass
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد المحاولة'**
+  String get qiblaRetry;
+
+  /// Shown within 200 m of the Kaaba
+  ///
+  /// In ar, this message translates to:
+  /// **'أنت عند الكعبة المشرّفة، فتوجّه إليها مباشرة.'**
+  String get qiblaAtKaaba;
+
+  /// Faith hub card title
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه القبلة'**
+  String get qiblaCardTitle;
+
+  /// Card action / semantics hint
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح البوصلة'**
+  String get qiblaCardOpen;
+
+  /// The place the qibla is computed from
+  ///
+  /// In ar, this message translates to:
+  /// **'من {place}'**
+  String qiblaFromPlace(String place);
+
+  /// Compass point abbreviation N (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ش'**
+  String get qiblaPointN;
+
+  /// Compass point abbreviation NE (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ش ق'**
+  String get qiblaPointNE;
+
+  /// Compass point abbreviation E (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ق'**
+  String get qiblaPointE;
+
+  /// Compass point abbreviation SE (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ج ق'**
+  String get qiblaPointSE;
+
+  /// Compass point abbreviation S (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ج'**
+  String get qiblaPointS;
+
+  /// Compass point abbreviation SW (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ج غ'**
+  String get qiblaPointSW;
+
+  /// Compass point abbreviation W (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'غ'**
+  String get qiblaPointW;
+
+  /// Compass point abbreviation NW (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)
+  ///
+  /// In ar, this message translates to:
+  /// **'ش غ'**
+  String get qiblaPointNW;
+
+  /// Compass point full name N (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشمال'**
+  String get qiblaPointNameN;
+
+  /// Compass point full name NE (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشمال الشرقي'**
+  String get qiblaPointNameNE;
+
+  /// Compass point full name E (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشرق'**
+  String get qiblaPointNameE;
+
+  /// Compass point full name SE (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجنوب الشرقي'**
+  String get qiblaPointNameSE;
+
+  /// Compass point full name S (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجنوب'**
+  String get qiblaPointNameS;
+
+  /// Compass point full name SW (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجنوب الغربي'**
+  String get qiblaPointNameSW;
+
+  /// Compass point full name W (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الغرب'**
+  String get qiblaPointNameW;
+
+  /// Compass point full name NW (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشمال الغربي'**
+  String get qiblaPointNameNW;
+
+  /// Semantics label of the dial
+  ///
+  /// In ar, this message translates to:
+  /// **'بوصلة القبلة: القبلة على {bearing} نحو {point}.'**
+  String qiblaDialLabel(String bearing, String point);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

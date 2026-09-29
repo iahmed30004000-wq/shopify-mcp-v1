@@ -1,6 +1,7 @@
 // Settings' Phase 2 entries: prayer times & calculation, the adhan (with its
-// permissions card), adhkar reminders (planned through the notification
-// service), security (the app lock) and the content credits.
+// permissions card), adhkar reminders (Settings › Reminders, planned through
+// the notification service), security (the app lock) and the content
+// credits.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/design/widgets/widgets.dart';
@@ -36,9 +37,9 @@ Future<void> _show(WidgetTester tester, Finder finder) async {
 Finder _switch(String title) => find.byWidgetPredicate((w) => w is MadarSwitch && w.semanticLabel == title);
 
 void main() {
-  testWidgets('the hub lists prayer, adhkar reminders and privacy & security, in Arabic too', (tester) async {
+  testWidgets('the hub lists faith (with the reminders) and privacy & security, in Arabic too', (tester) async {
     await pumpMadarApp(tester, initialLocation: AppRoutes.settings, overrides: LockFixture.empty().overrides);
-    for (final title in [_ar.settingsPrayerSection, _ar.settingsAdhkarReminders, _ar.settingsSecuritySection]) {
+    for (final title in [_ar.settingsFaithSection, _ar.settingsReminders, _ar.settingsSecuritySection]) {
       await _show(tester, find.text(title));
       expect(find.text(title), findsOneWidget, reason: title);
     }
@@ -97,7 +98,7 @@ void main() {
     final app = await pumpMadarApp(
       tester,
       settings: _english,
-      initialLocation: AppRoutes.settings,
+      initialLocation: AppRoutes.reminders,
       overrides: LockFixture.empty().overrides,
     );
     await _show(tester, find.text(_en.settingsAdhkarMorning));
@@ -142,7 +143,7 @@ void main() {
     final app = await pumpMadarApp(
       tester,
       settings: _english,
-      initialLocation: AppRoutes.settings,
+      initialLocation: AppRoutes.reminders,
       notifications: FakeNotificationPlatform(enabled: false),
       overrides: LockFixture.empty().overrides,
     );
@@ -174,6 +175,9 @@ void main() {
     await settleApp(tester);
     expect(find.byType(SecuritySettingsScreen), findsOneWidget);
     expect(app.location, AppRoutes.security);
+    // The app bar names the page; its one group has no second heading.
+    expect(find.text(_en.settingsSecuritySection), findsOneWidget);
+    expect(find.text(_en.lockSettingsTitle), findsNothing);
   });
 
   testWidgets('app lock: the entry says how the lock is set', (tester) async {
@@ -208,6 +212,9 @@ void main() {
       await _show(tester, find.text(c.name(_en)));
       expect(find.text(c.role(_en)), findsOneWidget);
     }
+    await tester.scrollUntilVisible(find.text(_en.settingsCreditAdhkar), -200, scrollable: find.byType(Scrollable).first);
+    await Scrollable.ensureVisible(tester.element(find.text(_en.settingsCreditAdhkar)), alignment: 0.5);
+    await tester.pumpAndSettle();
     await tester.tap(find.text(_en.settingsCreditAdhkar));
     await settleApp(tester);
     expect(find.text('Full credits of assets/licenses/adhkar_credits.txt'), findsOneWidget);

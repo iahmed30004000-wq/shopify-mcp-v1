@@ -213,7 +213,9 @@ class _SetCard extends ConsumerWidget {
     final name = l.adhkarCategoryName(c);
     final prayer = afterPrayer ? summary.suggestedPrayer : null;
     final String meta;
-    if (afterPrayer) {
+    // Before any is said, the after-prayer card counts its adhkar like the
+    // others (a lone «٠ من ٥» reads as a stray dot).
+    if (afterPrayer && summary.afterPrayerDone.isNotEmpty) {
       meta = l.adhkarAfterPrayerProgress(
         fmt.formatInt(summary.afterPrayerDone.length),
         fmt.formatInt(kObligatoryPrayers.length),
@@ -358,8 +360,11 @@ class _TasbeehCard extends ConsumerWidget {
               children: [
                 Text(l.adhkarTasbeehTitle, style: text.titleMedium),
                 Text(l.adhkarTasbeehCardSubtitle, style: text.bodySmall),
-                const SizedBox(height: Space.xxs),
-                Text(l.adhkarTasbeehToday(fmt.formatInt(today)), style: text.labelMedium!.copyWith(color: t.accent)),
+                // A bare "Today: 0" reads as a stray dot in Arabic (٠).
+                if (today > 0) ...[
+                  const SizedBox(height: Space.xxs),
+                  Text(l.adhkarTasbeehToday(fmt.formatInt(today)), style: text.labelMedium!.copyWith(color: t.accent)),
+                ],
               ],
             ),
           ),

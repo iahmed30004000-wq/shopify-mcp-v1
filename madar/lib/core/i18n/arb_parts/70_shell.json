@@ -409,6 +409,11 @@
     "ar": "الحركة",
     "en": "Motion"
   },
+  "settingsSectionMotionPower": {
+    "ar": "الحركة والطاقة",
+    "en": "Motion & power",
+    "description": "Settings section holding the motion and power-mode choices (the motion tile keeps its own title)"
+  },
   "settingsMotionSystem": {
     "ar": "حسب الجهاز",
     "en": "Device"
@@ -612,10 +617,15 @@
       }
     }
   },
-  "settingsPrayerSection": {
-    "ar": "الصلاة",
-    "en": "Prayer",
-    "description": "Settings section: prayer times, adhan and permissions"
+  "settingsFaithSection": {
+    "ar": "الإيمان",
+    "en": "Faith",
+    "description": "Settings section: prayer, adhan, Quran, recitation and reminders"
+  },
+  "settingsFaithSectionHint": {
+    "ar": "الصلاة والقرآن والتذكير",
+    "en": "Prayer, the Quran and reminders",
+    "description": "Subtitle of the Faith settings section"
   },
   "settingsPrayerTimes": {
     "ar": "المواقيت وطريقة الحساب",
@@ -693,8 +703,8 @@
     "description": "Settings entry / page listing the bundled fonts and content sources"
   },
   "settingsCreditsBody": {
-    "ar": "الخطوط المفتوحة، ومصادر الأذكار والمدن والنغمات",
-    "en": "Open fonts, and the sources of the adhkar, cities and tones",
+    "ar": "الخطوط المفتوحة، ومصادر القرآن والحديث والأذكار والمدن والنغمات",
+    "en": "Open fonts, and the sources of the Quran, hadith, adhkar, cities and tones",
     "description": "Subtitle of the fonts & sources entry"
   },
   "settingsCreditsContent": {
@@ -821,5 +831,145 @@
     "ar": "كل المواقيت",
     "en": "All times",
     "description": "Chip after the prayer windows opening the prayer times page"
+  },
+  "settingsQuran": {
+    "ar": "القراءة والمصحف",
+    "en": "Quran reading",
+    "description": "Settings entry / page: the Quran reader's settings"
+  },
+  "settingsQuranTajweedOn": {
+    "ar": "بألوان التجويد",
+    "en": "with tajweed colours",
+    "description": "Quran settings entry subtitle part: tajweed colours on"
+  },
+  "settingsQuranTajweedOff": {
+    "ar": "بلا ألوان التجويد",
+    "en": "without tajweed colours",
+    "description": "Quran settings entry subtitle part: tajweed colours off"
+  },
+  "settingsQuranReading": {
+    "ar": "القراءة",
+    "en": "Reading",
+    "description": "Quran settings: section of layout and text size"
+  },
+  "settingsQuranPreviewLabel": {
+    "ar": "معاينة حجم الخط",
+    "en": "Text size preview",
+    "description": "Screen-reader label of the text-size preview"
+  },
+  "settingsQuranDownloaded": {
+    "ar": "{count, plural, =0{لم يُنزَّل شيء بعد} =1{نُزِّل لسورة واحدة} =2{نُزِّل لسورتين} few{نُزِّل لـ{count} سور} many{نُزِّل لـ{count} سورة} other{نُزِّل لـ{count} سورة}}",
+    "en": "{count, plural, =0{Nothing downloaded yet} =1{Downloaded for 1 sura} other{Downloaded for {count} suras}}",
+    "description": "Quran settings: how many suras have the Quran.com tajweed / translation on the device",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsQuranDownloadNote": {
+    "ar": "تُنزَّل الترجمة وتجويد Quran.com سورةً سورة من إعدادات القارئ، ولا يتصل مَدار بالإنترنت إلا حين تطلب.",
+    "en": "The translation and the Quran.com tajweed download one sura at a time from the reader's settings – Madar goes online only when you ask.",
+    "description": "Quran settings: note on downloads"
+  },
+  "settingsQuranSourceNote": {
+    "ar": "نص المصحف العثماني برواية حفص من مشروع تنزيل، مضمَّن في التطبيق ويعمل دون إنترنت.",
+    "en": "The Uthmani text (Hafs) is Tanzil's, bundled with the app and fully offline.",
+    "description": "Quran settings: where the text comes from"
+  },
+  "settingsRecitation": {
+    "ar": "التلاوة والقرّاء",
+    "en": "Recitation & reciters",
+    "description": "Settings entry opening the recitation settings"
+  },
+  "settingsReminders": {
+    "ar": "التذكيرات",
+    "en": "Reminders",
+    "description": "Settings entry / page: adhkar and wird reminders"
+  },
+  "settingsRemindersCount": {
+    "ar": "{count, plural, =0{لا تذكير مفعّل} =1{تذكير واحد مفعّل} =2{تذكيران مفعّلان} few{{count} تذكيرات مفعّلة} many{{count} تذكيرًا مفعّلًا} other{{count} تذكير مفعّل}}",
+    "en": "{count, plural, =0{No reminders on} =1{1 reminder on} other{{count} reminders on}}",
+    "description": "Subtitle of the reminders entry",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsWirdReminders": {
+    "ar": "تذكير الوِرد",
+    "en": "Wird reminders",
+    "description": "Settings section title"
+  },
+  "settingsWirdNoPlans": {
+    "ar": "لا خطة وِرد بعد. ابدأ خطة، ويصلك تذكيرها بعد الصلاة التي تختارها.",
+    "en": "No wird plan yet. Start one, and its reminder comes after the prayer you choose.",
+    "description": "Wird reminders when there is no plan"
+  },
+  "settingsWirdOpen": {
+    "ar": "خطط الوِرد",
+    "en": "Wird plans",
+    "description": "Settings tile opening the wird screen"
+  },
+  "settingsWirdNoWindow": {
+    "ar": "اختر للخطة صلاةً ليصلك تذكيرها",
+    "en": "Pick a prayer for this plan to be reminded",
+    "description": "Wird reminder subtitle: the plan has no prayer window"
+  },
+  "settingsWirdPaused": {
+    "ar": "الخطة متوقفة، فلا تذكير",
+    "en": "Plan paused – no reminder",
+    "description": "Wird reminder subtitle: the plan is paused"
+  },
+  "settingsWirdEditPlan": {
+    "ar": "عدّل الخطة",
+    "en": "Edit the plan",
+    "description": "Button: open the plan editor to pick a prayer"
+  },
+  "settingsWirdReminderNote": {
+    "ar": "يصل التذكير بعد الصلاة التي اخترتها للخطة، ولا يصل يومَ تقرأ وِردك قبله.",
+    "en": "The reminder comes after the plan's prayer – not on a day you have already read your portion.",
+    "description": "Note under the wird reminders"
+  },
+  "settingsCreditQuran": {
+    "ar": "القرآن الكريم — تنزيل",
+    "en": "The Quran – Tanzil",
+    "description": "Content credit title"
+  },
+  "settingsCreditQuranRole": {
+    "ar": "النص العثماني وبياناته، وعلامات التجويد — تراخيص المشاع الإبداعي",
+    "en": "Uthmani text and metadata, tajweed annotations – Creative Commons",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditHadith": {
+    "ar": "الأربعون النووية",
+    "en": "An-Nawawi's Forty",
+    "description": "Content credit title"
+  },
+  "settingsCreditHadithRole": {
+    "ar": "النص العربي من hadith-api، ملكٌ عام",
+    "en": "Arabic text from hadith-api, public domain",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditRecitation": {
+    "ar": "التلاوات — EveryAyah",
+    "en": "Recitations – EveryAyah",
+    "description": "Content credit title"
+  },
+  "settingsCreditRecitationRole": {
+    "ar": "تُبثّ أو تُنزَّل بطلبك فقط، ولا صوت مضمَّن",
+    "en": "Streamed or downloaded only when you ask – no audio bundled",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditQibla": {
+    "ar": "بوصلة القبلة — النموذج المغناطيسي العالمي",
+    "en": "Qibla compass – World Magnetic Model",
+    "description": "Content credit title"
+  },
+  "settingsCreditQiblaRole": {
+    "ar": "نموذج WMM من NOAA وBGS، ملكٌ عام",
+    "en": "The WMM by NOAA and BGS, public domain",
+    "description": "Content credit subtitle"
   }
 }

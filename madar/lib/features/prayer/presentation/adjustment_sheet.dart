@@ -94,8 +94,8 @@ class _AdjustmentSheet extends ConsumerWidget {
           const SizedBox(height: Space.l),
           Center(
             child: ValueStepper(
-              value: l.ptMinutesSigned(l.signedMinutes(v, fmt)),
-              valueAfter: (d) => l.ptMinutesSigned(l.signedMinutes(v + d, fmt)),
+              value: l.adjustmentValue(v, fmt),
+              valueAfter: (d) => l.adjustmentValue(v + d, fmt),
               label: l.ptAdjustTitle(name),
               minWidth: 110,
               canDecrement: v > -PrayerSettingsChanges.maxAdjustment,

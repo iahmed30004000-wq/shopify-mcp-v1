@@ -222,8 +222,8 @@
     }
   },
   "ptHijriDate": {
-    "ar": "{day} {month} {year} هـ",
-    "en": "{day} {month} {year} AH",
+    "ar": "{day} {month} {year}\u00a0هـ",
+    "en": "{day} {month} {year}\u00a0AH",
     "placeholders": {
       "day": {
         "type": "String"
@@ -828,7 +828,7 @@
   "ptNoAdjustment": {
     "ar": "بلا تعديل",
     "en": "None",
-    "description": "Hijri day offset of zero"
+    "description": "A zero adjustment (Hijri day offset or prayer minutes)"
   },
   "ptDayUnit": {
     "ar": "{days} يوم",

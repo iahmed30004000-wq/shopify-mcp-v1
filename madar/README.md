@@ -3,7 +3,8 @@
 A personal life operating system whose day orbits the five prayers.
 Arabic-first (RTL), offline-first, encrypted on device, built in Flutter.
 
-> Status: **Phase 0 (foundation) and Phase 1 (The Astrolabe Orbit) complete** —
+> Status: **Phases 0–3 complete** (foundation, The Astrolabe Orbit, prayer &
+> faith essentials, Quran) —
 > see [Feature checklist](#feature-checklist). This README is updated at the
 > end of every phase.
 
@@ -173,8 +174,8 @@ Legend: ✅ done · 🟡 partial · ⏳ planned phase
 | --- | --- |
 | Phase 0 – setup, architecture, design system, motion, sound, interaction kit, encrypted DB, JSON import | ✅ |
 | Phase 1 – The Astrolabe Orbit: astrolabe prayer dial, 8 living procedural worlds + data moons, real sky (sun, moon phase, 2,068 real stars, Milky Way), camera & gestures, fly-in pages, glass panel with windows / tasks / Neglect Radar, performance & power modes | ✅ (device profiling pending) |
-| Phase 2 – lock screen, themes, i18n, prayer times, adhan, tracker, adhkar | ⏳ |
-| Phase 3 – Quran, wird, Hifz, Qibla | ⏳ |
+| Phase 2 – app lock (fingerprint + PIN, astrolabe hold-to-unlock), themes + i18n audit, prayer times (21 methods, GPS or 809 offline cities, Hijri, time zones), exact full-screen adhan (alarm-clock alarms a week ahead, per-prayer sounds, pre-adhan reminders, permissions card), prayer tracker (sunnah, Duha, Witr, Qiyam, jamaah, mosque, streaks, qada), adhkar (Hisn al-Muslim) + tasbeeh, Faith hub | ✅ (device checks pending: adhan on a locked phone, after reboot, in battery saver) |
+| Phase 3 – Quran (offline Tanzil Uthmani text, 18-rule tajweed colouring, mushaf pages + verse list, search, bookmarks, Quran.com v4 on demand), recitation (19 EveryAyah reciters, per-ayah highlighting, repeats, background playback, offline downloads), daily wird plans, Hifz with SM-2 (ayat + An-Nawawi's 40), Qibla astrolabe compass (WMM declination, sun-compass fallback) | ✅ (device checks pending: streaming, background playback, compass) |
 | Phase 4 – Health | ⏳ |
 | Phase 5 – Money | ⏳ |
 | Phase 6 – Life + Custom Modules Builder | ⏳ |

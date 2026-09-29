@@ -24,7 +24,10 @@ import 'pin_sheets.dart';
 ///
 /// Drop it into the settings list like any `SettingsSection`.
 class SecuritySettingsSection extends ConsumerStatefulWidget {
-  const SecuritySettingsSection({super.key, this.seed = 0.45});
+  const SecuritySettingsSection({super.key, this.seed = 0.45, this.showTitle = true});
+
+  /// Off on the security page itself, whose app bar already names it.
+  final bool showTitle;
 
   /// Glass sheen seed of the section's panel.
   final double seed;
@@ -148,7 +151,7 @@ class _SecuritySettingsSectionState extends ConsumerState<SecuritySettingsSectio
     final text = Theme.of(context).textTheme;
 
     return SettingsSection(
-      title: l.lockSettingsTitle,
+      title: widget.showTitle ? l.lockSettingsTitle : null,
       seed: widget.seed,
       children: [
         SettingsSwitchTile(

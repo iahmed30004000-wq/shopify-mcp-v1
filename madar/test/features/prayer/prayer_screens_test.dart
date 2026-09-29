@@ -52,7 +52,7 @@ void main() {
     testWidgets('Arabic: dates, times, current window and countdown', (tester) async {
       await pump(tester, const PrayerTimesScreen());
       expect(find.text('مواقيت الصلاة'), findsOneWidget);
-      expect(find.text('١٧ ربيع الآخر ١٤٤٨ هـ'), findsOneWidget);
+      expect(find.text('١٧ ربيع الآخر ١٤٤٨\u00a0هـ'), findsOneWidget);
       expect(find.text('عمّان، الأردن'), findsOneWidget);
       // Amman, 28 Sep 2026 (Ministry of Awqaf: Dhuhr 12:27/28, Asr 15:51/53).
       expect(find.text('١٢:٢٧'), findsOneWidget);
@@ -73,7 +73,7 @@ void main() {
       expect(find.text('3:51'), findsWidgets);
       expect(find.text('PM'), findsWidgets);
       expect(find.text('Now'), findsOneWidget);
-      expect(find.text('17 Rabi’ al-Akhir 1448 AH'), findsOneWidget);
+      expect(find.text('17 Rabi’ al-Akhir 1448\u00a0AH'), findsOneWidget);
       expect(find.text('Amman, Jordan'), findsOneWidget);
     });
 
@@ -202,9 +202,33 @@ void main() {
       await settlePrayer(tester);
       expect(find.text('September 2026'), findsOneWidget);
       expect(find.text('30'), findsWidgets);
+      // Opening the month glides today's row into view; the header is above.
+      await tester.drag(find.byType(Scrollable).first, const Offset(0, 3000));
+      await settlePrayer(tester);
       await tester.tap(find.bySemanticsLabel('Next month'));
       await settlePrayer(tester);
       expect(find.text('October 2026'), findsOneWidget);
+    });
+
+    testWidgets('opening the month brings today\'s row into view', (tester) async {
+      await pump(tester, const PrayerTimesScreen(), locale: const Locale('en'));
+      final today = find.byWidgetPredicate(
+        (w) => w is Semantics && (w.properties.label ?? '').startsWith('Monday, September 28: Fajr 5:07, Sunrise'),
+      );
+      await tester.tap(find.text('Month'));
+      await settlePrayer(tester);
+      final row = tester.getRect(today);
+      final view = tester.view.physicalSize / tester.view.devicePixelRatio;
+      expect(row.top, greaterThan(100), reason: 'clear of the app bar');
+      expect(row.bottom, lessThan(view.height - 40), reason: 'on screen, not below the fold');
+      // The column heads scrolled away with the table's top: a copy is
+      // pinned under the app bar.
+      final pinned = find.byKey(const ValueKey('prayer-month-pinned-head'));
+      expect(pinned, findsOneWidget);
+      // Back at the top the table's own heads show; the copy leaves.
+      await tester.drag(find.byType(Scrollable).first, const Offset(0, 3000));
+      await settlePrayer(tester);
+      expect(pinned, findsNothing);
     });
 
     testWidgets('location chip → choose a city → times of Makkah, with undo', (tester) async {
@@ -364,17 +388,25 @@ void main() {
       expect((await stored(s, tester)).hanafiAsr, isTrue);
 
       await reveal(tester, find.text('Hijri day adjustment'));
-      final hijriRow = find.ancestor(of: find.text('Hijri day adjustment'), matching: find.byType(Row)).first;
+      // The stepper may sit beside the title or under it (a long title).
+      final hijriRow = find.byWidgetPredicate((w) => w is ValueStepper && w.label == 'Hijri day adjustment');
       await tester.tap(find.descendant(of: hijriRow, matching: find.byIcon(Icons.add_rounded)));
       await settlePrayer(tester);
       expect((await stored(s, tester)).hijriOffsetDays, 1);
-      expect(find.text('18 Rabi’ al-Akhir 1448 AH'), findsWidgets);
+      expect(find.text('18 Rabi’ al-Akhir 1448\u00a0AH'), findsWidgets);
 
       await reveal(tester, find.text('24-hour'));
       await tester.tap(find.text('24-hour'));
       await settlePrayer(tester);
       expect((await stored(s, tester)).clock24h, isTrue);
       expect(containerOf(tester).read(prayerSettingsControllerProvider).clock24h, isTrue);
+    });
+
+    testWidgets('a zero adjustment reads as a word, not a lone «٠ د»', (tester) async {
+      await pump(tester, const PrayerSettingsScreen());
+      await reveal(tester, find.text('تعديلات يدوية'));
+      expect(find.text('بلا تعديل'), findsWidgets);
+      expect(find.textContaining('٠ د'), findsNothing);
     });
 
     testWidgets('custom angles appear for the custom method', (tester) async {
@@ -385,7 +417,7 @@ void main() {
         settings: prayerTestSettings.copyWith(method: PrayerMethod.custom, fajrAngle: 18, ishaAngle: 18),
       );
       expect(find.text('Fajr angle'), findsOneWidget);
-      final row = find.ancestor(of: find.text('Fajr angle'), matching: find.byType(Row)).first;
+      final row = find.byWidgetPredicate((w) => w is ValueStepper && w.label == 'Fajr angle');
       await tester.tap(find.descendant(of: row, matching: find.byIcon(Icons.remove_rounded)));
       await settlePrayer(tester);
       expect((await stored(s, tester)).fajrAngle, 17.5);
@@ -417,7 +449,7 @@ void main() {
         const Scaffold(body: Center(child: HijriDateText())),
         settings: prayerTestSettings.copyWith(hijriOffsetDays: -1),
       );
-      expect(find.text('١٦ ربيع الآخر ١٤٤٨ هـ'), findsOneWidget);
+      expect(find.text('١٦ ربيع الآخر ١٤٤٨\u00a0هـ'), findsOneWidget);
     });
 
     testWidgets('after Maghrib with rollover on, the next Hijri day', (tester) async {
@@ -427,7 +459,7 @@ void main() {
         settings: prayerTestSettings.copyWith(hijriAtMaghrib: true),
         now: DateTime.utc(2026, 9, 28, 16, 0).toLocal(), // 19:00 in Amman, after Maghrib
       );
-      expect(find.text('١٨ ربيع الآخر ١٤٤٨ هـ'), findsOneWidget);
+      expect(find.text('١٨ ربيع الآخر ١٤٤٨\u00a0هـ'), findsOneWidget);
     });
   });
 }

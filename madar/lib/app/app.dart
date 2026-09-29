@@ -19,6 +19,7 @@ import '../core/sound/sound_settings_sync.dart';
 import '../features/home/home_providers.dart';
 import 'app_gate.dart';
 import 'app_preferences.dart';
+import 'faith_services.dart';
 
 /// The root overrides of the Madar provider scope – shared by `bootstrap`
 /// and the test harness so both run the same wiring.
@@ -27,6 +28,9 @@ import 'app_preferences.dart';
 /// * `databaseProvider` resolves to the database opened by
 ///   [databaseUnlockProvider] (see [AppGate]).
 /// * The quick-add bar gets the shell's handler (tasks, money, water …).
+/// * The faith features' cross-feature hooks ([faithHookOverrides]): the
+///   reader's "Add to Hifz", the wird's "read now", recitation downloads as
+///   a route.
 List<Override> madarAppOverrides({
   required SharedPreferences prefs,
   required SoundService sound,
@@ -37,6 +41,7 @@ List<Override> madarAppOverrides({
   hapticsServiceProvider.overrideWithValue(haptics),
   databaseProvider.overrideWith((ref) => ref.watch(databaseUnlockProvider).requireValue),
   quickAddHandlerProvider.overrideWith((ref) => ref.watch(shellQuickAddHandlerProvider)),
+  ...faithHookOverrides(),
 ];
 
 /// The app's [ThemeData], rebuilt only when an input of the theme changes

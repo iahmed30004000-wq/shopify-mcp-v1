@@ -2,6 +2,7 @@
   "appName": {"ar": "مَدار", "en": "Madar", "description": "Application name"},
   "appTagline": {"ar": "حياتك تدور حول الصلاة", "en": "A life that orbits the prayer"},
   "actionSave": {"ar": "حفظ", "en": "Save"},
+  "commonFactSeparator": {"ar": "، ", "en": " · ", "description": "Joins short facts on one line (e.g. a time and a reminder). Arabic uses a comma: a middle dot beside Arabic-Indic digits reads as the zero (٠)"},
   "actionCancel": {"ar": "إلغاء", "en": "Cancel"},
   "actionAdd": {"ar": "إضافة", "en": "Add"},
   "actionEdit": {"ar": "تعديل", "en": "Edit"},

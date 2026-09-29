@@ -16,17 +16,19 @@ import '../adhan/presentation/adhan_permissions_card.dart';
 import '../lock/application/lock_controller.dart';
 import '../orbit/data/orbit_providers.dart' show prayerSettingsProvider;
 import '../prayer/prayer.dart' show PrayerLabels, cityDatabaseProvider;
+import '../quran/quran.dart' show QuranReaderMode, quranReaderPrefsProvider;
+import '../recitation/recitation.dart' show recitationSettingsProvider;
+import 'reminders_settings_screen.dart' show faithRemindersOnProvider;
 import 'settings_controller.dart';
-import 'widgets/adhkar_reminder_settings.dart';
 import 'widgets/appearance_pickers.dart';
 import 'widgets/settings_widgets.dart';
 
-/// Settings hub: appearance and sound (own pages); prayer – times and
-/// calculation, the adhan (own pages) with the adhan's permissions card;
-/// adhkar reminders (inline); motion and power (inline); privacy and security
-/// (the app lock's page); data (import); about (version, fonts and content
-/// sources, licences) and the design gallery. Every change applies
-/// instantly.
+/// Settings hub: appearance and sound (own pages); faith – prayer times and
+/// calculation, the adhan, Quran reading, recitation and the reminders
+/// (adhkar and wird), each its own page, with the adhan's permissions card
+/// below them; motion and power (inline); privacy and security (the app
+/// lock's page); data (import); about (version, fonts and content sources,
+/// licences) and the design gallery. Every change applies instantly.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
@@ -78,7 +80,8 @@ class SettingsScreen extends ConsumerWidget {
                 ],
               ),
               SettingsSection(
-                title: l.settingsPrayerSection,
+                title: l.settingsFaithSection,
+                subtitle: l.settingsFaithSectionHint,
                 seed: 0.2,
                 children: [
                   SettingsTile(
@@ -96,15 +99,36 @@ class SettingsScreen extends ConsumerWidget {
                     navigates: true,
                     onTap: () => context.go(AppRoutes.adhanSettings),
                   ),
+                  SettingsTile(
+                    icon: Icons.auto_stories_rounded,
+                    iconColor: t.gold,
+                    title: l.settingsQuran,
+                    subtitle: _quranSummary(l, ref),
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.quranSettings),
+                  ),
+                  SettingsTile(
+                    icon: Icons.graphic_eq_rounded,
+                    title: l.settingsRecitation,
+                    subtitle: ref.watch(recitationSettingsProvider).value?.reciter.name(arabic: fmt.isArabic),
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.recitationSettings),
+                  ),
+                  SettingsTile(
+                    icon: Icons.alarm_rounded,
+                    title: l.settingsReminders,
+                    subtitle: fmt.localizeDigits(l.settingsRemindersCount(ref.watch(faithRemindersOnProvider))),
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.reminders),
+                  ),
                 ],
               ),
               const Padding(
                 padding: EdgeInsetsDirectional.only(top: Space.m),
                 child: AdhanPermissionsCard(),
               ),
-              const AdhkarReminderSettingsSection(seed: 0.25),
               SettingsSection(
-                title: l.settingsMotion,
+                title: l.settingsSectionMotionPower,
                 seed: 0.3,
                 children: [
                   SettingsChoiceTile<MotionPreference>(
@@ -209,6 +233,16 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// "Mushaf · with tajweed colours" – how the reader shows the text.
+String? _quranSummary(L10n l, WidgetRef ref) {
+  final prefs = ref.watch(quranReaderPrefsProvider).value;
+  if (prefs == null) return null;
+  return l.orbitUiListSeparator(
+    prefs.mode == QuranReaderMode.mushaf ? l.quranModeMushaf : l.quranModeList,
+    prefs.tajweed ? l.settingsQuranTajweedOn : l.settingsQuranTajweedOff,
+  );
 }
 
 /// "Off", "On, with your PIN" or "On, with fingerprint and PIN".

@@ -182,7 +182,7 @@ class _PrayersSection extends ConsumerWidget {
         if (!alert.adhan) l.adhanPrayerOff,
         if (alert.hasReminder) l.adhanPrayerReminder(texts.minutes(alert.preMinutes)),
       ];
-      return parts.join(' · ');
+      return parts.join(l.commonFactSeparator);
     }
 
     return SettingsSection(
@@ -230,7 +230,7 @@ class _PrayersSection extends ConsumerWidget {
                   settings.sunriseMinutesBefore == 0
                       ? l.adhanSunriseAt
                       : l.adhanSunriseBefore(texts.minutes(settings.sunriseMinutesBefore)),
-                ].join(' · ')
+                ].join(l.commonFactSeparator)
               : l.adhanSunriseHint,
           onTap: () => unawaited(_editSunrise(context, ref, settings, texts)),
           trailing: MadarSwitch(

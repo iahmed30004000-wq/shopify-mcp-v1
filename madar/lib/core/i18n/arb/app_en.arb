@@ -6,6 +6,10 @@
   },
   "appTagline": "A life that orbits the prayer",
   "actionSave": "Save",
+  "commonFactSeparator": " · ",
+  "@commonFactSeparator": {
+    "description": "Joins short facts on one line (e.g. a time and a reminder). Arabic uses a comma: a middle dot beside Arabic-Indic digits reads as the zero (٠)"
+  },
   "actionCancel": "Cancel",
   "actionAdd": "Add",
   "actionEdit": "Edit",
@@ -1205,6 +1209,10 @@
   "settingsSoundProfile": "Sound character",
   "settingsSoundProfileHint": "Changes with the theme",
   "settingsMotion": "Motion",
+  "settingsSectionMotionPower": "Motion & power",
+  "@settingsSectionMotionPower": {
+    "description": "Settings section holding the motion and power-mode choices (the motion tile keeps its own title)"
+  },
   "settingsMotionSystem": "Device",
   "settingsMotionReduced": "Reduced",
   "settingsMotionFull": "Full",
@@ -1292,9 +1300,13 @@
       }
     }
   },
-  "settingsPrayerSection": "Prayer",
-  "@settingsPrayerSection": {
-    "description": "Settings section: prayer times, adhan and permissions"
+  "settingsFaithSection": "Faith",
+  "@settingsFaithSection": {
+    "description": "Settings section: prayer, adhan, Quran, recitation and reminders"
+  },
+  "settingsFaithSectionHint": "Prayer, the Quran and reminders",
+  "@settingsFaithSectionHint": {
+    "description": "Subtitle of the Faith settings section"
   },
   "settingsPrayerTimes": "Prayer times & calculation",
   "@settingsPrayerTimes": {
@@ -1357,7 +1369,7 @@
   "@settingsCredits": {
     "description": "Settings entry / page listing the bundled fonts and content sources"
   },
-  "settingsCreditsBody": "Open fonts, and the sources of the adhkar, cities and tones",
+  "settingsCreditsBody": "Open fonts, and the sources of the Quran, hadith, adhkar, cities and tones",
   "@settingsCreditsBody": {
     "description": "Subtitle of the fonts & sources entry"
   },
@@ -1456,6 +1468,120 @@
   "homeAllTimes": "All times",
   "@homeAllTimes": {
     "description": "Chip after the prayer windows opening the prayer times page"
+  },
+  "settingsQuran": "Quran reading",
+  "@settingsQuran": {
+    "description": "Settings entry / page: the Quran reader's settings"
+  },
+  "settingsQuranTajweedOn": "with tajweed colours",
+  "@settingsQuranTajweedOn": {
+    "description": "Quran settings entry subtitle part: tajweed colours on"
+  },
+  "settingsQuranTajweedOff": "without tajweed colours",
+  "@settingsQuranTajweedOff": {
+    "description": "Quran settings entry subtitle part: tajweed colours off"
+  },
+  "settingsQuranReading": "Reading",
+  "@settingsQuranReading": {
+    "description": "Quran settings: section of layout and text size"
+  },
+  "settingsQuranPreviewLabel": "Text size preview",
+  "@settingsQuranPreviewLabel": {
+    "description": "Screen-reader label of the text-size preview"
+  },
+  "settingsQuranDownloaded": "{count, plural, =0{Nothing downloaded yet} =1{Downloaded for 1 sura} other{Downloaded for {count} suras}}",
+  "@settingsQuranDownloaded": {
+    "description": "Quran settings: how many suras have the Quran.com tajweed / translation on the device",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsQuranDownloadNote": "The translation and the Quran.com tajweed download one sura at a time from the reader's settings – Madar goes online only when you ask.",
+  "@settingsQuranDownloadNote": {
+    "description": "Quran settings: note on downloads"
+  },
+  "settingsQuranSourceNote": "The Uthmani text (Hafs) is Tanzil's, bundled with the app and fully offline.",
+  "@settingsQuranSourceNote": {
+    "description": "Quran settings: where the text comes from"
+  },
+  "settingsRecitation": "Recitation & reciters",
+  "@settingsRecitation": {
+    "description": "Settings entry opening the recitation settings"
+  },
+  "settingsReminders": "Reminders",
+  "@settingsReminders": {
+    "description": "Settings entry / page: adhkar and wird reminders"
+  },
+  "settingsRemindersCount": "{count, plural, =0{No reminders on} =1{1 reminder on} other{{count} reminders on}}",
+  "@settingsRemindersCount": {
+    "description": "Subtitle of the reminders entry",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsWirdReminders": "Wird reminders",
+  "@settingsWirdReminders": {
+    "description": "Settings section title"
+  },
+  "settingsWirdNoPlans": "No wird plan yet. Start one, and its reminder comes after the prayer you choose.",
+  "@settingsWirdNoPlans": {
+    "description": "Wird reminders when there is no plan"
+  },
+  "settingsWirdOpen": "Wird plans",
+  "@settingsWirdOpen": {
+    "description": "Settings tile opening the wird screen"
+  },
+  "settingsWirdNoWindow": "Pick a prayer for this plan to be reminded",
+  "@settingsWirdNoWindow": {
+    "description": "Wird reminder subtitle: the plan has no prayer window"
+  },
+  "settingsWirdPaused": "Plan paused – no reminder",
+  "@settingsWirdPaused": {
+    "description": "Wird reminder subtitle: the plan is paused"
+  },
+  "settingsWirdEditPlan": "Edit the plan",
+  "@settingsWirdEditPlan": {
+    "description": "Button: open the plan editor to pick a prayer"
+  },
+  "settingsWirdReminderNote": "The reminder comes after the plan's prayer – not on a day you have already read your portion.",
+  "@settingsWirdReminderNote": {
+    "description": "Note under the wird reminders"
+  },
+  "settingsCreditQuran": "The Quran – Tanzil",
+  "@settingsCreditQuran": {
+    "description": "Content credit title"
+  },
+  "settingsCreditQuranRole": "Uthmani text and metadata, tajweed annotations – Creative Commons",
+  "@settingsCreditQuranRole": {
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditHadith": "An-Nawawi's Forty",
+  "@settingsCreditHadith": {
+    "description": "Content credit title"
+  },
+  "settingsCreditHadithRole": "Arabic text from hadith-api, public domain",
+  "@settingsCreditHadithRole": {
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditRecitation": "Recitations – EveryAyah",
+  "@settingsCreditRecitation": {
+    "description": "Content credit title"
+  },
+  "settingsCreditRecitationRole": "Streamed or downloaded only when you ask – no audio bundled",
+  "@settingsCreditRecitationRole": {
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditQibla": "Qibla compass – World Magnetic Model",
+  "@settingsCreditQibla": {
+    "description": "Content credit title"
+  },
+  "settingsCreditQiblaRole": "The WMM by NOAA and BGS, public domain",
+  "@settingsCreditQiblaRole": {
+    "description": "Content credit subtitle"
   },
   "orbitReasonPersonOverdue": "{name} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
   "@orbitReasonPersonOverdue": {
@@ -3061,7 +3187,7 @@
       }
     }
   },
-  "ptHijriDate": "{day} {month} {year} AH",
+  "ptHijriDate": "{day} {month} {year} AH",
   "@ptHijriDate": {
     "placeholders": {
       "day": {
@@ -3331,7 +3457,7 @@
   "ptHighLatRule": "Estimation rule",
   "ptNoAdjustment": "None",
   "@ptNoAdjustment": {
-    "description": "Hijri day offset of zero"
+    "description": "A zero adjustment (Hijri day offset or prayer minutes)"
   },
   "ptDayUnit": "{days} d",
   "@ptDayUnit": {
@@ -5111,14 +5237,6 @@
       }
     }
   },
-  "faithHubLinksTitle": "Quick links",
-  "@faithHubLinksTitle": {
-    "description": "Faith page: section of links"
-  },
-  "faithHubTimesHint": "Day, month and Hijri date",
-  "@faithHubTimesHint": {
-    "description": "Link hint: prayer times"
-  },
   "faithHubHistory": "Prayer history",
   "@faithHubHistory": {
     "description": "Link: the tracker history tab"
@@ -5138,5 +5256,3005 @@
   "faithHubAdhanHint": "Muezzin, reminders and permissions",
   "@faithHubAdhanHint": {
     "description": "Link hint: adhan settings"
+  },
+  "faithHubTodayTitle": "Your day",
+  "@faithHubTodayTitle": {
+    "description": "Faith page: section of today's prayers and adhkar"
+  },
+  "faithHubQuranTitle": "With the Quran",
+  "@faithHubQuranTitle": {
+    "description": "Faith page: section of continue reading, the wird and Hifz"
+  },
+  "faithHubQuranIndex": "Index",
+  "@faithHubQuranIndex": {
+    "description": "Faith page: action opening the Quran's index"
+  },
+  "faithHubToolsTitle": "Tools",
+  "@faithHubToolsTitle": {
+    "description": "Faith page: section of the qibla and the faith tools"
+  },
+  "faithHubMushafHint": "Index, search and bookmarks",
+  "@faithHubMushafHint": {
+    "description": "Tool hint: the Quran home"
+  },
+  "faithHubHifzHint": "Spaced-repetition review",
+  "@faithHubHifzHint": {
+    "description": "Tool hint: Hifz"
+  },
+  "faithHubRecitationHint": "Reciters, repeats and downloads",
+  "@faithHubRecitationHint": {
+    "description": "Tool hint: recitation settings"
+  },
+  "faithHubAdhanTool": "Adhan",
+  "@faithHubAdhanTool": {
+    "description": "Tool: the adhan settings"
+  },
+  "faithHubHifzAlready": "These ayat are already in your Hifz",
+  "@faithHubHifzAlready": {
+    "description": "Toast: add to Hifz found nothing new"
+  },
+  "quranTitle": "The Holy Quran",
+  "@quranTitle": {
+    "description": "Title of the Quran home screen"
+  },
+  "quranSurahTitle": "Surah {name}",
+  "@quranSurahTitle": {
+    "description": "A sura's title, e.g. Surah Al-Baqarah",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quranMakki": "Makki",
+  "@quranMakki": {
+    "description": "Sura revealed in Makkah"
+  },
+  "quranMadani": "Madani",
+  "@quranMadani": {
+    "description": "Sura revealed in Madinah"
+  },
+  "quranAyatCount": "{count, plural, =0{No ayat} =1{1 ayah} other{{count} ayat}}",
+  "@quranAyatCount": {
+    "description": "Number of ayat (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPageLabel": "Page {page}",
+  "@quranPageLabel": {
+    "description": "Mushaf page number (pre-formatted)",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "quranPageCounter": "Page {page} of {total}",
+  "@quranPageCounter": {
+    "description": "Position in the 604-page mushaf",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quranJuzLabel": "Juz {juz}",
+  "@quranJuzLabel": {
+    "description": "Juz number (pre-formatted)",
+    "placeholders": {
+      "juz": {
+        "type": "String"
+      }
+    }
+  },
+  "quranHizbLabel": "Hizb {hizb}",
+  "@quranHizbLabel": {
+    "description": "Hizb number (pre-formatted)",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranAyahLabel": "Ayah {ayah}",
+  "@quranAyahLabel": {
+    "description": "Ayah number (pre-formatted)",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranAyahOfSurah": "{surah} · Ayah {ayah}",
+  "@quranAyahOfSurah": {
+    "description": "A place in the Quran: sura name and ayah number",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranJuzHizb": "Juz {juz} · Hizb {hizb}",
+  "@quranJuzHizb": {
+    "description": "Mushaf page header: juz and hizb",
+    "placeholders": {
+      "juz": {
+        "type": "String"
+      },
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranQuarter1": "¼ Hizb {hizb}",
+  "@quranQuarter1": {
+    "description": "Second quarter of a hizb",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranQuarter2": "½ Hizb {hizb}",
+  "@quranQuarter2": {
+    "description": "Middle of a hizb",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranQuarter3": "¾ Hizb {hizb}",
+  "@quranQuarter3": {
+    "description": "Last quarter of a hizb",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranShareRef": "({surah}, ayah {ayah})",
+  "@quranShareRef": {
+    "description": "Reference after a copied / shared ayah: sura name and ayah number (pre-formatted)",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranLoadError": "Couldn't load the mushaf",
+  "@quranLoadError": {
+    "description": "The bundled Quran data failed to load"
+  },
+  "quranRetry": "Try again",
+  "@quranRetry": {
+    "description": "Retry button"
+  },
+  "quranTabSurahs": "Surahs",
+  "@quranTabSurahs": {
+    "description": "Home tab: list of suras"
+  },
+  "quranTabJuz": "Juz",
+  "@quranTabJuz": {
+    "description": "Home tab: juz and hizb list"
+  },
+  "quranTabBookmarks": "Bookmarks",
+  "@quranTabBookmarks": {
+    "description": "Home tab: bookmarks"
+  },
+  "quranSearchHint": "Search the Quran…",
+  "@quranSearchHint": {
+    "description": "Placeholder of the search entry"
+  },
+  "quranGoTo": "Go to",
+  "@quranGoTo": {
+    "description": "Button: jump to a sura / ayah / page"
+  },
+  "quranGoToTitle": "Go to",
+  "@quranGoToTitle": {
+    "description": "Title of the go-to sheet"
+  },
+  "quranGoToHint": "e.g. {a}, “Baqarah {b}” or “page {c}”",
+  "@quranGoToHint": {
+    "description": "Examples under the go-to field (numbers pre-formatted)",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "quranGoToNone": "Nothing matches — try a sura and ayah like {example}",
+  "@quranGoToNone": {
+    "description": "Go-to found nothing",
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "quranGoToOpen": "Open",
+  "@quranGoToOpen": {
+    "description": "Open a go-to result"
+  },
+  "quranBookmarksEmptyTitle": "No bookmarks yet",
+  "@quranBookmarksEmptyTitle": {
+    "description": "Empty bookmarks tab title"
+  },
+  "quranBookmarksEmptyBody": "Tap an ayah in the reader, then choose “Bookmark” to keep its place.",
+  "@quranBookmarksEmptyBody": {
+    "description": "Empty bookmarks tab body"
+  },
+  "quranBookmarkDeleted": "Bookmark removed",
+  "@quranBookmarkDeleted": {
+    "description": "Undo toast after deleting a bookmark"
+  },
+  "quranBookmarkSaved": "Bookmark saved",
+  "@quranBookmarkSaved": {
+    "description": "Toast after saving a bookmark"
+  },
+  "quranBookmarkEdit": "Edit bookmark",
+  "@quranBookmarkEdit": {
+    "description": "Title / action: edit a bookmark"
+  },
+  "quranBookmarkNew": "New bookmark",
+  "@quranBookmarkNew": {
+    "description": "Title of the new-bookmark sheet"
+  },
+  "quranBookmarkLabel": "Label",
+  "@quranBookmarkLabel": {
+    "description": "Bookmark label field"
+  },
+  "quranBookmarkLabelHint": "e.g. Fajr wird",
+  "@quranBookmarkLabelHint": {
+    "description": "Hint of the bookmark label field"
+  },
+  "quranBookmarkNote": "Note",
+  "@quranBookmarkNote": {
+    "description": "Bookmark note field"
+  },
+  "quranBookmarkColor": "Colour",
+  "@quranBookmarkColor": {
+    "description": "Bookmark colour field"
+  },
+  "quranBookmarkRemove": "Remove bookmark",
+  "@quranBookmarkRemove": {
+    "description": "Delete a bookmark"
+  },
+  "quranJuzQuarters": "Quarters of this juz",
+  "@quranJuzQuarters": {
+    "description": "Semantic label: expand a juz into its hizb quarters"
+  },
+  "quranContinueTitle": "Continue reading",
+  "@quranContinueTitle": {
+    "description": "Continue-reading card title"
+  },
+  "quranContinueEmpty": "Begin your journey with the Book of Allah",
+  "@quranContinueEmpty": {
+    "description": "Continue card when nothing was read yet"
+  },
+  "quranContinueStart": "Start with Al-Fatihah",
+  "@quranContinueStart": {
+    "description": "Continue card action when nothing was read yet"
+  },
+  "quranContinueAction": "Continue",
+  "@quranContinueAction": {
+    "description": "Continue card action"
+  },
+  "quranLastReadAt": "Last read {when}",
+  "@quranLastReadAt": {
+    "description": "When the reader was last open (a formatted date)",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "quranModeMushaf": "Mushaf",
+  "@quranModeMushaf": {
+    "description": "Reader layout: mushaf pages"
+  },
+  "quranModeList": "Verses",
+  "@quranModeList": {
+    "description": "Reader layout: verse list"
+  },
+  "quranShowList": "Show as verses",
+  "@quranShowList": {
+    "description": "Switch the reader to the verse list"
+  },
+  "quranShowMushaf": "Show as mushaf pages",
+  "@quranShowMushaf": {
+    "description": "Switch the reader to mushaf pages"
+  },
+  "quranSettingsTitle": "Reading settings",
+  "@quranSettingsTitle": {
+    "description": "Reader settings sheet title / button"
+  },
+  "quranReaderLayout": "Layout",
+  "@quranReaderLayout": {
+    "description": "Reader settings: layout"
+  },
+  "quranFontSize": "Text size",
+  "@quranFontSize": {
+    "description": "Reader settings: Quran text size"
+  },
+  "quranFontLarger": "Larger text",
+  "@quranFontLarger": {
+    "description": "Increase the Quran text size"
+  },
+  "quranFontSmaller": "Smaller text",
+  "@quranFontSmaller": {
+    "description": "Decrease the Quran text size"
+  },
+  "quranTajweedColors": "Tajweed colours",
+  "@quranTajweedColors": {
+    "description": "Reader settings: colour tajweed rules"
+  },
+  "quranTajweedSection": "Tajweed",
+  "@quranTajweedSection": {
+    "description": "Reader settings: tajweed section title"
+  },
+  "quranTajweedLegend": "Colour guide",
+  "@quranTajweedLegend": {
+    "description": "Open the tajweed colour legend"
+  },
+  "quranTajweedSource": "Tajweed source",
+  "@quranTajweedSource": {
+    "description": "Reader settings: where tajweed colours come from"
+  },
+  "quranTajweedSourceBundled": "Built in",
+  "@quranTajweedSourceBundled": {
+    "description": "Tajweed from the bundled offline data"
+  },
+  "quranTajweedSourceQuranCom": "Quran.com when downloaded",
+  "@quranTajweedSourceQuranCom": {
+    "description": "Tajweed from downloaded Quran.com text"
+  },
+  "quranDownloadTajweed": "Download this surah's tajweed from Quran.com",
+  "@quranDownloadTajweed": {
+    "description": "Explicit download of the Quran.com tajweed text"
+  },
+  "quranTranslation": "Translation",
+  "@quranTranslation": {
+    "description": "Reader settings: translation section"
+  },
+  "quranTranslationShow": "Show the translation under each ayah",
+  "@quranTranslationShow": {
+    "description": "Reader settings: translation toggle"
+  },
+  "quranTranslationName": "English — Saheeh International",
+  "@quranTranslationName": {
+    "description": "Name of the translation offered"
+  },
+  "quranTranslationMissing": "This surah's translation isn't downloaded yet",
+  "@quranTranslationMissing": {
+    "description": "Verse list: translation not on the device"
+  },
+  "quranDownloadTranslation": "Download translation",
+  "@quranDownloadTranslation": {
+    "description": "Button: download the translation of this sura"
+  },
+  "quranDownloadNote": "Downloaded once from Quran.com and kept on your device.",
+  "@quranDownloadNote": {
+    "description": "Explains a download (network only on this tap)"
+  },
+  "quranDownloading": "Downloading…",
+  "@quranDownloading": {
+    "description": "A download is running"
+  },
+  "quranDownloaded": "Downloaded",
+  "@quranDownloaded": {
+    "description": "A download is on the device"
+  },
+  "quranDownloadOffline": "No internet connection — try again later",
+  "@quranDownloadOffline": {
+    "description": "Download failed: offline"
+  },
+  "quranDownloadFailed": "The download failed, try again",
+  "@quranDownloadFailed": {
+    "description": "Download failed: server / format"
+  },
+  "quranNextSurah": "Next: {name}",
+  "@quranNextSurah": {
+    "description": "Button at the end of a sura's verse list",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quranPrevSurah": "Previous: {name}",
+  "@quranPrevSurah": {
+    "description": "Button at the start of a sura's verse list",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quranNowReciting": "Now reciting",
+  "@quranNowReciting": {
+    "description": "Marks the ayah being recited"
+  },
+  "quranSajdah": "Prostration of recitation",
+  "@quranSajdah": {
+    "description": "Marks a sajdah ayah"
+  },
+  "quranAyahSemantics": "Ayah {ayah} of Surah {surah}",
+  "@quranAyahSemantics": {
+    "description": "Screen reader label of an ayah",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      },
+      "surah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranActionPlay": "Play from here",
+  "@quranActionPlay": {
+    "description": "Ayah action: recite from this ayah"
+  },
+  "quranActionRepeat": "Repeat ayah",
+  "@quranActionRepeat": {
+    "description": "Ayah action: repeat this ayah"
+  },
+  "quranRepeatTimes": "{count, plural, =1{once} =2{twice} other{{count} times}}",
+  "@quranRepeatTimes": {
+    "description": "How many times to repeat an ayah (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActionBookmark": "Bookmark",
+  "@quranActionBookmark": {
+    "description": "Ayah action: bookmark"
+  },
+  "quranActionCopy": "Copy",
+  "@quranActionCopy": {
+    "description": "Ayah action: copy the text"
+  },
+  "quranCopied": "Ayah copied",
+  "@quranCopied": {
+    "description": "Toast after copying an ayah"
+  },
+  "quranActionShare": "Share",
+  "@quranActionShare": {
+    "description": "Ayah action: share the text"
+  },
+  "quranActionHifz": "Add to Hifz",
+  "@quranActionHifz": {
+    "description": "Ayah action: add to memorisation"
+  },
+  "quranHifzAdded": "Added to Hifz",
+  "@quranHifzAdded": {
+    "description": "Toast after adding an ayah to Hifz"
+  },
+  "quranActionTafsir": "Tafsir",
+  "@quranActionTafsir": {
+    "description": "Ayah action: tafsir"
+  },
+  "quranTafsirSoon": "Tafsir is coming soon, in sha Allah",
+  "@quranTafsirSoon": {
+    "description": "Tafsir is not available yet"
+  },
+  "quranSoon": "Soon",
+  "@quranSoon": {
+    "description": "Badge on a feature that is not ready"
+  },
+  "quranSearchTitle": "Search the Quran",
+  "@quranSearchTitle": {
+    "description": "Search screen title"
+  },
+  "quranSearchFieldHint": "A word or part of an ayah",
+  "@quranSearchFieldHint": {
+    "description": "Search field placeholder"
+  },
+  "quranSearchIntro": "Searches the Arabic text, ignoring diacritics, hamza and the forms of alef.",
+  "@quranSearchIntro": {
+    "description": "Explains how the search matches"
+  },
+  "quranSearchResults": "{count, plural, =0{No results} =1{1 ayah} other{{count} ayat}}",
+  "@quranSearchResults": {
+    "description": "Number of ayat found (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSearchOccurrences": "{count, plural, =0{No matches} =1{1 match} other{{count} matches}}",
+  "@quranSearchOccurrences": {
+    "description": "Number of places the words occur (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSearchShowingFirst": "Showing the first {count}",
+  "@quranSearchShowingFirst": {
+    "description": "The result list is capped (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "quranSearchTooShort": "Type at least two letters",
+  "@quranSearchTooShort": {
+    "description": "Search query too short"
+  },
+  "quranSearchNoResults": "No ayah contains these words",
+  "@quranSearchNoResults": {
+    "description": "Search found nothing"
+  },
+  "quranSearchPreparing": "Preparing the search index…",
+  "@quranSearchPreparing": {
+    "description": "Search index is being built"
+  },
+  "quranLegendTitle": "Tajweed colour guide",
+  "@quranLegendTitle": {
+    "description": "Legend sheet title"
+  },
+  "quranLegendNote": "The colours are a learning aid; learning from a qualified reciter comes first.",
+  "@quranLegendNote": {
+    "description": "Legend sheet note"
+  },
+  "quranLegendCredits": "Quran text from the Tanzil Project; tajweed marks from the quran-tajweed project (CC BY).",
+  "@quranLegendCredits": {
+    "description": "Credits line in the legend sheet"
+  },
+  "quranFamilySilent": "Not pronounced",
+  "@quranFamilySilent": {
+    "description": "Legend group"
+  },
+  "quranFamilyMadd": "Prolongation (madd)",
+  "@quranFamilyMadd": {
+    "description": "Legend group"
+  },
+  "quranFamilyGhunnah": "Nasalisation (ghunnah)",
+  "@quranFamilyGhunnah": {
+    "description": "Legend group"
+  },
+  "quranFamilyMerge": "Merging without ghunnah",
+  "@quranFamilyMerge": {
+    "description": "Legend group"
+  },
+  "quranFamilyQalqalah": "Echo (qalqalah)",
+  "@quranFamilyQalqalah": {
+    "description": "Legend group"
+  },
+  "quranRuleHamzatWasl": "Hamzat al-wasl",
+  "@quranRuleHamzatWasl": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleHamzatWaslHint": "Written, not pronounced when joined to what precedes",
+  "@quranRuleHamzatWaslHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleLamShamsiyyah": "Lam shamsiyyah",
+  "@quranRuleLamShamsiyyah": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleLamShamsiyyahHint": "The lam of the article is silent before a sun letter",
+  "@quranRuleLamShamsiyyahHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleSilent": "Silent letter",
+  "@quranRuleSilent": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleSilentHint": "Written but not read",
+  "@quranRuleSilentHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddNatural": "Natural madd",
+  "@quranRuleMaddNatural": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddNaturalHint": "Two counts",
+  "@quranRuleMaddNaturalHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddPermissible": "Madd 'arid or leen",
+  "@quranRuleMaddPermissible": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddPermissibleHint": "Two, four or six counts when stopping",
+  "@quranRuleMaddPermissibleHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddSeparated": "Madd munfasil",
+  "@quranRuleMaddSeparated": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddSeparatedHint": "Four or five counts",
+  "@quranRuleMaddSeparatedHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddConnected": "Madd muttasil",
+  "@quranRuleMaddConnected": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddConnectedHint": "Four or five counts",
+  "@quranRuleMaddConnectedHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddNecessary": "Madd lazim",
+  "@quranRuleMaddNecessary": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddNecessaryHint": "Six counts",
+  "@quranRuleMaddNecessaryHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleQalqalah": "Qalqalah",
+  "@quranRuleQalqalah": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleQalqalahHint": "An echo on the five qalqalah letters when still",
+  "@quranRuleQalqalahHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleGhunnah": "Ghunnah",
+  "@quranRuleGhunnah": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleGhunnahHint": "Doubled noon or meem, nasalised for two counts",
+  "@quranRuleGhunnahHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIkhfa": "Ikhfa",
+  "@quranRuleIkhfa": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIkhfaHint": "Noon sakinah or tanween hidden, with ghunnah",
+  "@quranRuleIkhfaHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIkhfaShafawi": "Ikhfa shafawi",
+  "@quranRuleIkhfaShafawi": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIkhfaShafawiHint": "Still meem before ba",
+  "@quranRuleIkhfaShafawiHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIqlab": "Iqlab",
+  "@quranRuleIqlab": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIqlabHint": "Noon sakinah or tanween turned into meem before ba",
+  "@quranRuleIqlabHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamGhunnah": "Idgham with ghunnah",
+  "@quranRuleIdghamGhunnah": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamGhunnahHint": "Into ya, noon, meem or waw",
+  "@quranRuleIdghamGhunnahHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamShafawi": "Idgham shafawi",
+  "@quranRuleIdghamShafawi": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamShafawiHint": "Still meem into meem",
+  "@quranRuleIdghamShafawiHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamNoGhunnah": "Idgham without ghunnah",
+  "@quranRuleIdghamNoGhunnah": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamNoGhunnahHint": "Into lam or ra",
+  "@quranRuleIdghamNoGhunnahHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamMutajanisayn": "Idgham mutajanisayn",
+  "@quranRuleIdghamMutajanisayn": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamMutajanisaynHint": "Two letters of one articulation point",
+  "@quranRuleIdghamMutajanisaynHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamMutaqaribayn": "Idgham mutaqaribayn",
+  "@quranRuleIdghamMutaqaribayn": {
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamMutaqaribaynHint": "Two letters of nearby articulation points",
+  "@quranRuleIdghamMutaqaribaynHint": {
+    "description": "Tajweed rule: short explanation"
+  },
+  "recitationTitle": "Recitation",
+  "@recitationTitle": {
+    "description": "Recitation settings: screen title"
+  },
+  "recitationChannelName": "Quran recitation",
+  "@recitationChannelName": {
+    "description": "Android notification channel of the recitation player"
+  },
+  "recitationAlbum": "The Noble Quran",
+  "@recitationAlbum": {
+    "description": "Media notification: album line"
+  },
+  "recitationReciterLabel": "Reciter",
+  "@recitationReciterLabel": {
+    "description": "Label above the chosen reciter"
+  },
+  "recitationSectionReciters": "Reciters",
+  "@recitationSectionReciters": {
+    "description": "Settings section: reciters"
+  },
+  "recitationSectionRecitersHint": "Real reciters from everyayah.com – never a generated voice for the Quran",
+  "@recitationSectionRecitersHint": {
+    "description": "Reciters section subtitle"
+  },
+  "recitationStyleMujawwad": "Mujawwad",
+  "@recitationStyleMujawwad": {
+    "description": "Recitation style: mujawwad"
+  },
+  "recitationStyleMurattal": "Murattal",
+  "@recitationStyleMurattal": {
+    "description": "Recitation style: murattal"
+  },
+  "recitationStyleMuallim": "Muʿallim",
+  "@recitationStyleMuallim": {
+    "description": "Recitation style: the teaching recitation"
+  },
+  "recitationStyleMujawwadHint": "Slow, melodic, with the full art of tajweed",
+  "@recitationStyleMujawwadHint": {
+    "description": "Style explanation: mujawwad"
+  },
+  "recitationStyleMurattalHint": "Measured, flowing recitation",
+  "@recitationStyleMurattalHint": {
+    "description": "Style explanation: murattal"
+  },
+  "recitationStyleMuallimHint": "The clear teaching recitation, for memorising",
+  "@recitationStyleMuallimHint": {
+    "description": "Style explanation: muallim"
+  },
+  "recitationBitrate": "{kbps} kbps",
+  "@recitationBitrate": {
+    "description": "Audio quality of a reciter's files",
+    "placeholders": {
+      "kbps": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSample": "Hear a sample",
+  "@recitationSample": {
+    "description": "Button: play a short sample of the reciter"
+  },
+  "recitationSampleStop": "Stop the sample",
+  "@recitationSampleStop": {
+    "description": "Button: stop the sample"
+  },
+  "recitationSampleOf": "Sample of {name}",
+  "@recitationSampleOf": {
+    "description": "Screen reader: sample button of a reciter",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationChosen": "Chosen reciter",
+  "@recitationChosen": {
+    "description": "Screen reader: the selected reciter"
+  },
+  "recitationChoose": "Choose {name}",
+  "@recitationChoose": {
+    "description": "Screen reader: choose a reciter",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSurahsDownloaded": "{count, plural, =0{No surahs downloaded} =1{1 surah downloaded} other{{count} surahs downloaded}}",
+  "@recitationSurahsDownloaded": {
+    "description": "How many surahs of a reciter are on the phone",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationWholeMushafDownloaded": "Whole Quran downloaded",
+  "@recitationWholeMushafDownloaded": {
+    "description": "All 114 surahs of a reciter are downloaded"
+  },
+  "recitationSectionPlayback": "Repeat and playback",
+  "@recitationSectionPlayback": {
+    "description": "Settings section: repeats and playback"
+  },
+  "recitationSectionPlaybackHint": "Defaults for every new recitation",
+  "@recitationSectionPlaybackHint": {
+    "description": "Playback section subtitle"
+  },
+  "recitationRepeatAyah": "Repeat each ayah",
+  "@recitationRepeatAyah": {
+    "description": "Setting: times each ayah is recited"
+  },
+  "recitationRepeatRange": "Repeat the passage",
+  "@recitationRepeatRange": {
+    "description": "Setting: passes over the whole range"
+  },
+  "recitationTimes": "{count, plural, =1{Once} =2{Twice} other{{count} times}}",
+  "@recitationTimes": {
+    "description": "A repeat count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationEndless": "Until I stop",
+  "@recitationEndless": {
+    "description": "Repeat the passage until stopped"
+  },
+  "recitationGap": "Pause after each recitation",
+  "@recitationGap": {
+    "description": "Setting: silence after each ayah (to repeat after the reciter)"
+  },
+  "recitationGapHint": "Time to repeat the ayah after the reciter",
+  "@recitationGapHint": {
+    "description": "Gap setting explanation"
+  },
+  "recitationGapNone": "None",
+  "@recitationGapNone": {
+    "description": "No gap"
+  },
+  "recitationSeconds": "{count, plural, =1{1 second} other{{count} seconds}}",
+  "@recitationSeconds": {
+    "description": "A number of seconds",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationSpeed": "Speed",
+  "@recitationSpeed": {
+    "description": "Setting: playback speed"
+  },
+  "recitationSpeedValue": "{value}×",
+  "@recitationSpeedValue": {
+    "description": "A playback speed like 1.25×",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationBasmala": "Basmala before each surah",
+  "@recitationBasmala": {
+    "description": "Setting: play the basmala before ayah 1"
+  },
+  "recitationBasmalaHint": "As in the mushaf – except al-Fatihah (where it is the first ayah) and at-Tawbah",
+  "@recitationBasmalaHint": {
+    "description": "Basmala setting explanation"
+  },
+  "recitationSectionDownloads": "Listen offline",
+  "@recitationSectionDownloads": {
+    "description": "Settings section: downloads"
+  },
+  "recitationSectionDownloadsHint": "Nothing downloads unless you start it",
+  "@recitationSectionDownloadsHint": {
+    "description": "Downloads section subtitle"
+  },
+  "recitationStorageUsed": "Storage used: {size}",
+  "@recitationStorageUsed": {
+    "description": "Total size of downloads",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationWifiOnly": "Download on Wi-Fi only",
+  "@recitationWifiOnly": {
+    "description": "Setting: downloads only on Wi-Fi"
+  },
+  "recitationWifiOnlyHint": "Downloads wait when you're not on Wi-Fi",
+  "@recitationWifiOnlyHint": {
+    "description": "Wi-Fi only explanation"
+  },
+  "recitationMushafFor": "The whole Quran by {name}",
+  "@recitationMushafFor": {
+    "description": "Download card title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationAbout": "About {size}",
+  "@recitationAbout": {
+    "description": "Estimated download size",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationDownloadMushaf": "Download the Quran",
+  "@recitationDownloadMushaf": {
+    "description": "Button: download all 114 surahs"
+  },
+  "recitationChooseSurahs": "Choose surahs",
+  "@recitationChooseSurahs": {
+    "description": "Button: open the per-surah download list"
+  },
+  "recitationSurahProgress": "{done} of {total} surahs",
+  "@recitationSurahProgress": {
+    "description": "Download progress in surahs",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationFilesProgress": "{done} of {total} files",
+  "@recitationFilesProgress": {
+    "description": "Download progress in files",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationPauseDownloads": "Pause",
+  "@recitationPauseDownloads": {
+    "description": "Button: pause downloads"
+  },
+  "recitationResumeDownloads": "Resume",
+  "@recitationResumeDownloads": {
+    "description": "Button: resume downloads"
+  },
+  "recitationCancelDownload": "Cancel download",
+  "@recitationCancelDownload": {
+    "description": "Button: cancel and remove a download"
+  },
+  "recitationDeleteDownloads": "Delete downloads",
+  "@recitationDeleteDownloads": {
+    "description": "Button: delete downloaded files"
+  },
+  "recitationDeleteConfirm": "Delete {name}'s recitation from the phone?",
+  "@recitationDeleteConfirm": {
+    "description": "Delete confirmation title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationDeleteConfirmHint": "Frees {size}. You can download it again any time.",
+  "@recitationDeleteConfirmHint": {
+    "description": "Delete confirmation body",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationDeleteSurahConfirm": "Delete surah {surah}?",
+  "@recitationDeleteSurahConfirm": {
+    "description": "Delete one surah confirmation",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationOtherDownloads": "Other reciters' downloads",
+  "@recitationOtherDownloads": {
+    "description": "Heading: downloads of reciters not currently chosen"
+  },
+  "recitationDownloadsTitle": "{name} – downloads",
+  "@recitationDownloadsTitle": {
+    "description": "Per-surah downloads screen title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationAyatCount": "{count, plural, =1{1 ayah} other{{count} ayat}}",
+  "@recitationAyatCount": {
+    "description": "Number of ayat in a surah",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationDownloadSurah": "Download surah",
+  "@recitationDownloadSurah": {
+    "description": "Button: download one surah"
+  },
+  "recitationStatusQueued": "Queued",
+  "@recitationStatusQueued": {
+    "description": "Download status"
+  },
+  "recitationStatusDownloading": "Downloading",
+  "@recitationStatusDownloading": {
+    "description": "Download status"
+  },
+  "recitationStatusPaused": "Paused",
+  "@recitationStatusPaused": {
+    "description": "Download status"
+  },
+  "recitationStatusWifi": "Waiting for Wi-Fi",
+  "@recitationStatusWifi": {
+    "description": "Download status: Wi-Fi only and not on Wi-Fi"
+  },
+  "recitationStatusFailed": "Download failed",
+  "@recitationStatusFailed": {
+    "description": "Download status"
+  },
+  "recitationStatusComplete": "Downloaded",
+  "@recitationStatusComplete": {
+    "description": "Download status: complete"
+  },
+  "recitationErrorNetwork": "Check the connection, then resume",
+  "@recitationErrorNetwork": {
+    "description": "Download error: network"
+  },
+  "recitationErrorNotFound": "The file isn't available at the source",
+  "@recitationErrorNotFound": {
+    "description": "Download error: 404"
+  },
+  "recitationErrorStorage": "Not enough space on the phone",
+  "@recitationErrorStorage": {
+    "description": "Download error: storage"
+  },
+  "recitationSizeMb": "{size} MB",
+  "@recitationSizeMb": {
+    "description": "A size in megabytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSizeGb": "{size} GB",
+  "@recitationSizeGb": {
+    "description": "A size in gigabytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSizeKb": "{size} KB",
+  "@recitationSizeKb": {
+    "description": "A size in kilobytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSourceCredit": "Recitations from everyayah.com – streamed when you press play or downloaded when you ask",
+  "@recitationSourceCredit": {
+    "description": "Credit line under the downloads section"
+  },
+  "recitationSurahNumber": "Surah {number}",
+  "@recitationSurahNumber": {
+    "description": "Fallback surah name",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationTitleAyah": "{surah} · Ayah {ayah}",
+  "@recitationTitleAyah": {
+    "description": "Media title: surah and ayah",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationTitleBasmala": "{surah} · Basmala",
+  "@recitationTitleBasmala": {
+    "description": "Media title: the basmala before a surah",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationAyahNumber": "Ayah {ayah}",
+  "@recitationAyahNumber": {
+    "description": "The ayah being recited",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationBasmalaNow": "Basmala",
+  "@recitationBasmalaNow": {
+    "description": "The basmala is being recited"
+  },
+  "recitationNowPlaying": "Now reciting",
+  "@recitationNowPlaying": {
+    "description": "Full player: title"
+  },
+  "recitationPlay": "Play",
+  "@recitationPlay": {
+    "description": "Player button"
+  },
+  "recitationPause": "Pause",
+  "@recitationPause": {
+    "description": "Player button"
+  },
+  "recitationNextAyah": "Next ayah",
+  "@recitationNextAyah": {
+    "description": "Player button"
+  },
+  "recitationPreviousAyah": "Previous ayah",
+  "@recitationPreviousAyah": {
+    "description": "Player button"
+  },
+  "recitationStop": "Stop recitation",
+  "@recitationStop": {
+    "description": "Player button"
+  },
+  "recitationOpenPlayer": "Open the player",
+  "@recitationOpenPlayer": {
+    "description": "Screen reader: mini player opens the full player"
+  },
+  "recitationLoading": "Loading…",
+  "@recitationLoading": {
+    "description": "Player status"
+  },
+  "recitationPausedPrayer": "Paused for the adhan – tap to continue",
+  "@recitationPausedPrayer": {
+    "description": "Player status: paused because the adhan started"
+  },
+  "recitationPausedInterruption": "Paused",
+  "@recitationPausedInterruption": {
+    "description": "Player status: another app took the audio"
+  },
+  "recitationPausedNoisy": "Paused – headphones disconnected",
+  "@recitationPausedNoisy": {
+    "description": "Player status"
+  },
+  "recitationPausedSleep": "Sleep timer ended",
+  "@recitationPausedSleep": {
+    "description": "Player status"
+  },
+  "recitationPlaybackNetwork": "No connection – download the surah to listen offline",
+  "@recitationPlaybackNetwork": {
+    "description": "Player error: network"
+  },
+  "recitationPlaybackNotFound": "This ayah isn't available for this reciter",
+  "@recitationPlaybackNotFound": {
+    "description": "Player error: 404"
+  },
+  "recitationPlaybackFailed": "Couldn't play",
+  "@recitationPlaybackFailed": {
+    "description": "Player error"
+  },
+  "recitationRetry": "Retry",
+  "@recitationRetry": {
+    "description": "Player button after an error"
+  },
+  "recitationOffline": "Offline",
+  "@recitationOffline": {
+    "description": "Chip: playing from downloaded files"
+  },
+  "recitationStreaming": "Streaming",
+  "@recitationStreaming": {
+    "description": "Chip: streaming from the internet"
+  },
+  "recitationAyahPass": "Repeat {pass} of {total}",
+  "@recitationAyahPass": {
+    "description": "Which repetition of the ayah",
+    "placeholders": {
+      "pass": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangePass": "Pass {pass} of {total}",
+  "@recitationRangePass": {
+    "description": "Which pass over the passage",
+    "placeholders": {
+      "pass": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangePassEndless": "Pass {pass}",
+  "@recitationRangePassEndless": {
+    "description": "Which pass over an endless passage",
+    "placeholders": {
+      "pass": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRepeatAyahShort": "Ayah",
+  "@recitationRepeatAyahShort": {
+    "description": "Full player: repeat control label for each ayah"
+  },
+  "recitationRepeatRangeShort": "Passage",
+  "@recitationRepeatRangeShort": {
+    "description": "Full player: repeat control label for the passage"
+  },
+  "recitationMore": "More",
+  "@recitationMore": {
+    "description": "Stepper: increase"
+  },
+  "recitationLess": "Fewer",
+  "@recitationLess": {
+    "description": "Stepper: decrease"
+  },
+  "recitationSleepTimer": "Sleep timer",
+  "@recitationSleepTimer": {
+    "description": "Full player: sleep timer"
+  },
+  "recitationSleepOff": "Off",
+  "@recitationSleepOff": {
+    "description": "Sleep timer off"
+  },
+  "recitationSleepAfterAyah": "After this ayah",
+  "@recitationSleepAfterAyah": {
+    "description": "Sleep timer: stop after the current ayah"
+  },
+  "recitationMinutes": "{count, plural, =1{1 min} other{{count} min}}",
+  "@recitationMinutes": {
+    "description": "Sleep timer minutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationSleepUntil": "Stops at {time}",
+  "@recitationSleepUntil": {
+    "description": "Sleep timer running",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationChangeReciter": "Change reciter",
+  "@recitationChangeReciter": {
+    "description": "Full player: open the reciter picker"
+  },
+  "recitationProgress": "{percent} of the passage",
+  "@recitationProgress": {
+    "description": "Screen reader: progress ring",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangeLabel": "{from} to {to}",
+  "@recitationRangeLabel": {
+    "description": "The queued range",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangeInSurah": "{surah} {from}–{to}",
+  "@recitationRangeInSurah": {
+    "description": "The queued range inside one surah (e.g. الملك ١–٣٠); numbers pre-formatted",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationBackgroundOff": "Plays while Madar is open",
+  "@recitationBackgroundOff": {
+    "description": "Full player: background playback unavailable"
+  },
+  "wirdSep": " · ",
+  "@wirdSep": {
+    "description": "List separator (Arabic comma: a middle dot reads as the digit zero ٠)"
+  },
+  "wirdTitle": "Daily wird",
+  "@wirdTitle": {
+    "description": "Wird screen title"
+  },
+  "wirdTodayTitle": "Today's wird",
+  "@wirdTodayTitle": {
+    "description": "Card / section: today's portion"
+  },
+  "wirdReadNow": "Read now",
+  "@wirdReadNow": {
+    "description": "Button: open the reader at today's portion"
+  },
+  "wirdContinue": "Continue reading",
+  "@wirdContinue": {
+    "description": "Button: open the reader where the user stopped"
+  },
+  "wirdMarkDone": "Mark done",
+  "@wirdMarkDone": {
+    "description": "Button: record today's portion as read"
+  },
+  "wirdStoppedAt": "I stopped at…",
+  "@wirdStoppedAt": {
+    "description": "Button: record partial reading"
+  },
+  "wirdStoppedAtTitle": "Where did you stop?",
+  "@wirdStoppedAtTitle": {
+    "description": "Sheet title: partial reading"
+  },
+  "wirdStoppedAtHint": "Move the marker to the last ayah you read",
+  "@wirdStoppedAtHint": {
+    "description": "Sheet subtitle: partial reading"
+  },
+  "wirdSaveProgress": "Save",
+  "@wirdSaveProgress": {
+    "description": "Sheet button: save partial reading"
+  },
+  "wirdDoneToast": "Today's wird recorded — may Allah accept it",
+  "@wirdDoneToast": {
+    "description": "Toast after marking done"
+  },
+  "wirdPartialToast": "Reading recorded up to {ayah}",
+  "@wirdPartialToast": {
+    "description": "Toast after partial reading",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdMetToday": "Today's wird is done — may Allah accept it",
+  "@wirdMetToday": {
+    "description": "Status: today's portion read"
+  },
+  "wirdRestToday": "Nothing due today — you're ahead of your plan",
+  "@wirdRestToday": {
+    "description": "Status: ahead, nothing owed"
+  },
+  "wirdPausedNote": "This plan is paused",
+  "@wirdPausedNote": {
+    "description": "Status: plan paused"
+  },
+  "wirdNotStarted": "Starts {date}",
+  "@wirdNotStarted": {
+    "description": "Status: plan starts later",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdKhatmaDone": "Khatma complete — may Allah accept it",
+  "@wirdKhatmaDone": {
+    "description": "Status: khatma finished"
+  },
+  "wirdBehindSpread": "{amount} behind — spread over the coming days",
+  "@wirdBehindSpread": {
+    "description": "Status: behind, spread",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdBehindAll": "{amount} behind — added to today",
+  "@wirdBehindAll": {
+    "description": "Status: behind, all today",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdAhead": "{amount} ahead — well done",
+  "@wirdAhead": {
+    "description": "Status: ahead",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdBehindShort": "{amount} behind",
+  "@wirdBehindShort": {
+    "description": "Short status: behind",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdAheadShort": "{amount} ahead",
+  "@wirdAheadShort": {
+    "description": "Short status: ahead",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdTodayLine": "Today: {range}",
+  "@wirdTodayLine": {
+    "description": "Plan tile: today's portion",
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPagePosition": "At p. {page}",
+  "@wirdPagePosition": {
+    "description": "Plan tile: where an open-ended plan stands",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdLeftToday": "{amount} to go",
+  "@wirdLeftToday": {
+    "description": "Status: remaining today",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdAyahRef": "{surah} {ayah}",
+  "@wirdAyahRef": {
+    "description": "An ayah: surah name and ayah number",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdRangeSameSurah": "{surah} {from}–{to}",
+  "@wirdRangeSameSurah": {
+    "description": "Ayah range inside one surah",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdRangeCross": "{from} – {to}",
+  "@wirdRangeCross": {
+    "description": "Ayah range across surahs",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPageRange": "pp. {from}–{to}",
+  "@wirdPageRange": {
+    "description": "Mushaf page range",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPageSingle": "p. {page}",
+  "@wirdPageSingle": {
+    "description": "One mushaf page",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdUnitPages": "{count, plural, =0{0 pages} =1{1 page} other{{count} pages}}",
+  "@wirdUnitPages": {
+    "description": "Whole pages",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitJuz": "{count, plural, =0{0 juz} =1{1 juz} other{{count} juz}}",
+  "@wirdUnitJuz": {
+    "description": "Whole juz",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitHizb": "{count, plural, =0{0 hizb} =1{1 hizb} other{{count} hizb}}",
+  "@wirdUnitHizb": {
+    "description": "Whole hizb",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitAyat": "{count, plural, =0{0 ayat} =1{1 ayah} other{{count} ayat}}",
+  "@wirdUnitAyat": {
+    "description": "Ayat count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitPagesDecimal": "{amount} pages",
+  "@wirdUnitPagesDecimal": {
+    "description": "Fractional pages, e.g. 20.1",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdUnitJuzDecimal": "{amount} juz",
+  "@wirdUnitJuzDecimal": {
+    "description": "Fractional juz",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdUnitHizbDecimal": "{amount} hizb",
+  "@wirdUnitHizbDecimal": {
+    "description": "Fractional hizb",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdDays": "{count, plural, =0{0 days} =1{1 day} other{{count} days}}",
+  "@wirdDays": {
+    "description": "A number of days",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdTemplateKhatma": "Khatma",
+  "@wirdTemplateKhatma": {
+    "description": "Plan type: finish the Quran in N days"
+  },
+  "wirdTemplatePages": "Pages",
+  "@wirdTemplatePages": {
+    "description": "Plan type: N pages a day"
+  },
+  "wirdTemplateJuz": "Juz",
+  "@wirdTemplateJuz": {
+    "description": "Plan type: N juz a day"
+  },
+  "wirdTemplateHizb": "Hizb",
+  "@wirdTemplateHizb": {
+    "description": "Plan type: N hizb a day"
+  },
+  "wirdTemplateAyat": "Ayat",
+  "@wirdTemplateAyat": {
+    "description": "Plan type: N ayat a day"
+  },
+  "wirdSummaryKhatma": "Khatma in {days} · {amount} a day",
+  "@wirdSummaryKhatma": {
+    "description": "Plan summary line (khatma)",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdSummaryDaily": "{amount} a day",
+  "@wirdSummaryDaily": {
+    "description": "Plan summary line (daily amount)",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdDefaultNameKhatma": "Khatma in {days}",
+  "@wirdDefaultNameKhatma": {
+    "description": "Default plan name (khatma)",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdDefaultNameDaily": "{amount} every day",
+  "@wirdDefaultNameDaily": {
+    "description": "Default plan name (daily amount)",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdWindowAfter": "After {prayer}",
+  "@wirdWindowAfter": {
+    "description": "Plan window: after a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdWindowDuha": "Duha time",
+  "@wirdWindowDuha": {
+    "description": "Plan window: duha"
+  },
+  "wirdWindowAnytime": "Any time",
+  "@wirdWindowAnytime": {
+    "description": "Plan window: none"
+  },
+  "wirdPlansTitle": "My plans",
+  "@wirdPlansTitle": {
+    "description": "Section: the plans list"
+  },
+  "wirdAddPlan": "New plan",
+  "@wirdAddPlan": {
+    "description": "Button: add a plan"
+  },
+  "wirdPrimary": "Primary",
+  "@wirdPrimary": {
+    "description": "Badge: the primary plan"
+  },
+  "wirdMakePrimary": "Make primary",
+  "@wirdMakePrimary": {
+    "description": "Action: make a plan primary"
+  },
+  "wirdPause": "Pause",
+  "@wirdPause": {
+    "description": "Action: pause a plan"
+  },
+  "wirdResume": "Resume",
+  "@wirdResume": {
+    "description": "Action: resume a plan"
+  },
+  "wirdPaused": "Paused",
+  "@wirdPaused": {
+    "description": "Badge: paused plan"
+  },
+  "wirdEdit": "Edit",
+  "@wirdEdit": {
+    "description": "Action: edit a plan"
+  },
+  "wirdDelete": "Delete",
+  "@wirdDelete": {
+    "description": "Action: delete a plan"
+  },
+  "wirdDeletedToast": "Plan deleted",
+  "@wirdDeletedToast": {
+    "description": "Undo toast: plan deleted"
+  },
+  "wirdPausedToast": "Plan paused",
+  "@wirdPausedToast": {
+    "description": "Undo toast: plan paused"
+  },
+  "wirdResumedToast": "Plan resumed",
+  "@wirdResumedToast": {
+    "description": "Undo toast: plan resumed"
+  },
+  "wirdPrimaryToast": "“{name}” is now your primary plan",
+  "@wirdPrimaryToast": {
+    "description": "Undo toast: primary changed",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdSavedToast": "Plan saved",
+  "@wirdSavedToast": {
+    "description": "Undo toast: plan edited"
+  },
+  "wirdCreatedToast": "“{name}” has begun — may Allah make it easy",
+  "@wirdCreatedToast": {
+    "description": "Undo toast: plan created",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdEmptyTitle": "No wird plan yet",
+  "@wirdEmptyTitle": {
+    "description": "Empty state title"
+  },
+  "wirdEmptyBody": "Choose a khatma in thirty days or a daily amount that suits you — we'll remind you after the prayer.",
+  "@wirdEmptyBody": {
+    "description": "Empty state body"
+  },
+  "wirdEmptyAction": "Start a plan",
+  "@wirdEmptyAction": {
+    "description": "Empty state button"
+  },
+  "wirdStreak": "Streak",
+  "@wirdStreak": {
+    "description": "Stat label: streak"
+  },
+  "wirdBestStreak": "Best: {days}",
+  "@wirdBestStreak": {
+    "description": "Stat caption: best streak",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdFinish": "Projected finish",
+  "@wirdFinish": {
+    "description": "Stat label: projected finish"
+  },
+  "wirdTargetDate": "Target {date}",
+  "@wirdTargetDate": {
+    "description": "Stat caption: khatma target date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdProgress": "Progress",
+  "@wirdProgress": {
+    "description": "Stat label: overall progress"
+  },
+  "wirdKhatmas": "{count, plural, =0{No khatma yet} =1{1 khatma} other{{count} khatmas}}",
+  "@wirdKhatmas": {
+    "description": "Stat caption: khatmas finished",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdNoProjection": "Not yet known",
+  "@wirdNoProjection": {
+    "description": "Stat value: no projection"
+  },
+  "wirdProgressOf": "{done} of {quota}",
+  "@wirdProgressOf": {
+    "description": "Progress ring value",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "quota": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdProgressOfShort": "of {quota}",
+  "@wirdProgressOfShort": {
+    "description": "Ring caption under the number read",
+    "placeholders": {
+      "quota": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdHistoryTitle": "History",
+  "@wirdHistoryTitle": {
+    "description": "Section: history calendar"
+  },
+  "wirdLegendMet": "Done",
+  "@wirdLegendMet": {
+    "description": "Calendar legend: met"
+  },
+  "wirdLegendPartial": "Partly",
+  "@wirdLegendPartial": {
+    "description": "Calendar legend: partial"
+  },
+  "wirdLegendMissed": "Missed",
+  "@wirdLegendMissed": {
+    "description": "Calendar legend: missed"
+  },
+  "wirdLegendRest": "Nothing due",
+  "@wirdLegendRest": {
+    "description": "Calendar legend: rest"
+  },
+  "wirdLegendPaused": "Paused",
+  "@wirdLegendPaused": {
+    "description": "Calendar legend: paused"
+  },
+  "wirdPrevMonth": "Previous month",
+  "@wirdPrevMonth": {
+    "description": "Calendar button"
+  },
+  "wirdNextMonth": "Next month",
+  "@wirdNextMonth": {
+    "description": "Calendar button"
+  },
+  "wirdNewPlanTitle": "New wird plan",
+  "@wirdNewPlanTitle": {
+    "description": "Plan sheet title (new)"
+  },
+  "wirdEditPlanTitle": "Edit plan",
+  "@wirdEditPlanTitle": {
+    "description": "Plan sheet title (edit)"
+  },
+  "wirdPlanSheetSubtitle": "A little, done steadily, is better than a lot, abandoned",
+  "@wirdPlanSheetSubtitle": {
+    "description": "Plan sheet subtitle"
+  },
+  "wirdFieldName": "Name",
+  "@wirdFieldName": {
+    "description": "Plan field"
+  },
+  "wirdFieldType": "Plan type",
+  "@wirdFieldType": {
+    "description": "Plan field"
+  },
+  "wirdFieldDays": "Duration",
+  "@wirdFieldDays": {
+    "description": "Plan field: khatma length"
+  },
+  "wirdFieldCustom": "Other",
+  "@wirdFieldCustom": {
+    "description": "Choice: custom duration / amount"
+  },
+  "wirdFieldAmount": "Daily amount",
+  "@wirdFieldAmount": {
+    "description": "Plan field"
+  },
+  "wirdFieldStart": "Start from",
+  "@wirdFieldStart": {
+    "description": "Plan field"
+  },
+  "wirdFieldStartDate": "Start date",
+  "@wirdFieldStartDate": {
+    "description": "Plan field"
+  },
+  "wirdStartToday": "Today",
+  "@wirdStartToday": {
+    "description": "Start date choice"
+  },
+  "wirdStartTomorrow": "Tomorrow",
+  "@wirdStartTomorrow": {
+    "description": "Start date choice"
+  },
+  "wirdFinishesOn": "Finishes on {date}",
+  "@wirdFinishesOn": {
+    "description": "Plan sheet: computed finish date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPerDayPreview": "About {amount} a day",
+  "@wirdPerDayPreview": {
+    "description": "Plan sheet: computed daily amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdFieldWindow": "Wird time",
+  "@wirdFieldWindow": {
+    "description": "Plan field: prayer window"
+  },
+  "wirdFieldCatchUp": "If you fall behind",
+  "@wirdFieldCatchUp": {
+    "description": "Plan field: catch-up mode"
+  },
+  "wirdCatchUpSpread": "Spread it out",
+  "@wirdCatchUpSpread": {
+    "description": "Catch-up choice"
+  },
+  "wirdCatchUpAll": "Add it to today",
+  "@wirdCatchUpAll": {
+    "description": "Catch-up choice"
+  },
+  "wirdCatchUpSpreadHint": "What you missed is shared across the coming days, so no single day is heavy",
+  "@wirdCatchUpSpreadHint": {
+    "description": "Catch-up hint"
+  },
+  "wirdCatchUpAllHint": "Everything you missed is added to the next day's portion",
+  "@wirdCatchUpAllHint": {
+    "description": "Catch-up hint"
+  },
+  "wirdFieldRemind": "Remind me after the prayer",
+  "@wirdFieldRemind": {
+    "description": "Plan field: reminder"
+  },
+  "wirdRemindAfter": "{minutes} after",
+  "@wirdRemindAfter": {
+    "description": "Reminder offset choice",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdMinutes": "{count, plural, =1{1 min} other{{count} min}}",
+  "@wirdMinutes": {
+    "description": "Minutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdDecrease": "Decrease",
+  "@wirdDecrease": {
+    "description": "Stepper button"
+  },
+  "wirdIncrease": "Increase",
+  "@wirdIncrease": {
+    "description": "Stepper button"
+  },
+  "wirdSurah": "Surah",
+  "@wirdSurah": {
+    "description": "Field: surah"
+  },
+  "wirdAyah": "Ayah",
+  "@wirdAyah": {
+    "description": "Field: ayah"
+  },
+  "wirdStartJuzShortcut": "Juz start",
+  "@wirdStartJuzShortcut": {
+    "description": "Start shortcut label"
+  },
+  "wirdJuzNumber": "Juz {n}",
+  "@wirdJuzNumber": {
+    "description": "A juz",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdChooseSurah": "Choose a surah",
+  "@wirdChooseSurah": {
+    "description": "Surah picker title"
+  },
+  "wirdSearchSurah": "Search by name or number",
+  "@wirdSearchSurah": {
+    "description": "Surah picker search hint"
+  },
+  "wirdCreate": "Start plan",
+  "@wirdCreate": {
+    "description": "Plan sheet button (new)"
+  },
+  "wirdSave": "Save",
+  "@wirdSave": {
+    "description": "Plan sheet button (edit)"
+  },
+  "wirdNameRequired": "Give the plan a name",
+  "@wirdNameRequired": {
+    "description": "Validation"
+  },
+  "wirdReminderChannelName": "Wird reminders",
+  "@wirdReminderChannelName": {
+    "description": "Notification channel name"
+  },
+  "wirdReminderChannelDescription": "A reminder for your daily wird after the prayer you choose",
+  "@wirdReminderChannelDescription": {
+    "description": "Notification channel description"
+  },
+  "wirdReminderTitle": "Time for your wird",
+  "@wirdReminderTitle": {
+    "description": "Reminder title"
+  },
+  "wirdReminderBodyToday": "{plan}: {range}",
+  "@wirdReminderBodyToday": {
+    "description": "Reminder body naming today's portion",
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdReminderBody": "{plan} — {window}",
+  "@wirdReminderBody": {
+    "description": "Reminder body",
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdCatalogError": "Couldn't load the Quran data",
+  "@wirdCatalogError": {
+    "description": "Error: catalog unavailable"
+  },
+  "wirdOverallOf": "{percent} of the khatma",
+  "@wirdOverallOf": {
+    "description": "Overall progress caption",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPositionIn": "{percent} through the mushaf",
+  "@wirdPositionIn": {
+    "description": "Open-ended progress caption",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdOpenAll": "All plans",
+  "@wirdOpenAll": {
+    "description": "Card link: wird screen"
+  },
+  "wirdStartPlanCta": "Start a daily wird",
+  "@wirdStartPlanCta": {
+    "description": "Card: no plan yet"
+  },
+  "wirdDayStatusSemantics": "{date}: {status}",
+  "@wirdDayStatusSemantics": {
+    "description": "Calendar day for screen readers",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzTitle": "Hifz",
+  "@hifzTitle": {
+    "description": "Hifz screen title"
+  },
+  "hifzTodayTitle": "Hifz review",
+  "@hifzTodayTitle": {
+    "description": "Hifz card title"
+  },
+  "hifzStartReview": "Start review",
+  "@hifzStartReview": {
+    "description": "Button"
+  },
+  "hifzContinueReview": "Keep reviewing",
+  "@hifzContinueReview": {
+    "description": "Button when some reviews are done today"
+  },
+  "hifzNothingDue": "Nothing to review today",
+  "@hifzNothingDue": {
+    "description": "Status"
+  },
+  "hifzAllCaughtUp": "All caught up for today — barakAllahu feek",
+  "@hifzAllCaughtUp": {
+    "description": "Status"
+  },
+  "hifzDueCount": "{count, plural, =0{Nothing due} =1{1 to review} other{{count} to review}}",
+  "@hifzDueCount": {
+    "description": "Count of due items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzNewCount": "{count, plural, =0{No new} =1{1 new} other{{count} new}}",
+  "@hifzNewCount": {
+    "description": "Count of new items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzTabDue": "Due",
+  "@hifzTabDue": {
+    "description": "Tab"
+  },
+  "hifzTabNew": "New",
+  "@hifzTabNew": {
+    "description": "Tab"
+  },
+  "hifzTabLearned": "Learned",
+  "@hifzTabLearned": {
+    "description": "Tab"
+  },
+  "hifzStatDue": "Today",
+  "@hifzStatDue": {
+    "description": "Stat label"
+  },
+  "hifzStatLearned": "Learned",
+  "@hifzStatLearned": {
+    "description": "Stat label"
+  },
+  "hifzStatRetention": "Retention",
+  "@hifzStatRetention": {
+    "description": "Stat label: share of reviews recalled"
+  },
+  "hifzStatStreak": "Streak",
+  "@hifzStatStreak": {
+    "description": "Stat label"
+  },
+  "hifzRetentionCaption": "Last {days} days",
+  "@hifzRetentionCaption": {
+    "description": "Stat caption: the retention window (days is a formatted number)",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzForecastTitle": "Reviews in the week ahead",
+  "@hifzForecastTitle": {
+    "description": "Forecast chart title"
+  },
+  "hifzForecastToday": "Today",
+  "@hifzForecastToday": {
+    "description": "Forecast: today column"
+  },
+  "hifzKindAyat": "Ayat",
+  "@hifzKindAyat": {
+    "description": "Item kind"
+  },
+  "hifzKindHadith": "Hadith",
+  "@hifzKindHadith": {
+    "description": "Item kind"
+  },
+  "hifzKindCustom": "Text",
+  "@hifzKindCustom": {
+    "description": "Item kind"
+  },
+  "hifzDueIn": "{count, plural, =0{today} =1{tomorrow} other{in {count} days}}",
+  "@hifzDueIn": {
+    "description": "When an item is due",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzOverdue": "{count, plural, =1{1 day overdue} other{{count} days overdue}}",
+  "@hifzOverdue": {
+    "description": "Overdue item",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzReviews": "{count, plural, =0{Not reviewed yet} =1{1 review} other{{count} reviews}}",
+  "@hifzReviews": {
+    "description": "Reviews count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzLapses": "{count, plural, =1{forgotten once} other{forgotten {count} times}}",
+  "@hifzLapses": {
+    "description": "Lapses count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzNewBadge": "New",
+  "@hifzNewBadge": {
+    "description": "Badge"
+  },
+  "hifzSuspendedBadge": "Suspended",
+  "@hifzSuspendedBadge": {
+    "description": "Badge"
+  },
+  "hifzAdd": "Add",
+  "@hifzAdd": {
+    "description": "Button: add items"
+  },
+  "hifzAddTitle": "Add to Hifz",
+  "@hifzAddTitle": {
+    "description": "Add sheet title"
+  },
+  "hifzAddSubtitle": "What you learn today comes back before it fades",
+  "@hifzAddSubtitle": {
+    "description": "Add sheet subtitle"
+  },
+  "hifzAddAyat": "Ayat of the Quran",
+  "@hifzAddAyat": {
+    "description": "Add choice"
+  },
+  "hifzAddAyatHint": "Pick a surah and ayat — split into short chunks",
+  "@hifzAddAyatHint": {
+    "description": "Add choice hint"
+  },
+  "hifzAddHadith": "A hadith from An-Nawawi's Forty",
+  "@hifzAddHadith": {
+    "description": "Add choice"
+  },
+  "hifzAddHadithHint": "Forty-two concise, comprehensive hadith",
+  "@hifzAddHadithHint": {
+    "description": "Add choice hint"
+  },
+  "hifzAddCustom": "Your own text",
+  "@hifzAddCustom": {
+    "description": "Add choice"
+  },
+  "hifzAddCustomHint": "A dua, a classical text — anything you want to memorise",
+  "@hifzAddCustomHint": {
+    "description": "Add choice hint"
+  },
+  "hifzFromAyah": "From ayah",
+  "@hifzFromAyah": {
+    "description": "Field"
+  },
+  "hifzToAyah": "To ayah",
+  "@hifzToAyah": {
+    "description": "Field"
+  },
+  "hifzChunkSize": "Ayat per chunk",
+  "@hifzChunkSize": {
+    "description": "Field"
+  },
+  "hifzChunks": "{count, plural, =0{No chunks} =1{1 chunk} other{{count} chunks}}",
+  "@hifzChunks": {
+    "description": "Chunk count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzChunkPreview": "{chunks}: {ranges}",
+  "@hifzChunkPreview": {
+    "description": "Chunk preview line",
+    "placeholders": {
+      "chunks": {
+        "type": "String"
+      },
+      "ranges": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzAddButton": "Add to Hifz",
+  "@hifzAddButton": {
+    "description": "Sheet button"
+  },
+  "hifzAdded": "{count, plural, =1{1 item added to Hifz} other{{count} items added to Hifz}}",
+  "@hifzAdded": {
+    "description": "Undo toast: items added",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzInHifz": "In Hifz",
+  "@hifzInHifz": {
+    "description": "Badge: hadith already added"
+  },
+  "hifzCustomTitle": "Title",
+  "@hifzCustomTitle": {
+    "description": "Field"
+  },
+  "hifzCustomTitleHint": "e.g. The istikhara dua",
+  "@hifzCustomTitleHint": {
+    "description": "Field hint"
+  },
+  "hifzCustomBody": "Text",
+  "@hifzCustomBody": {
+    "description": "Field"
+  },
+  "hifzCustomSource": "Source (optional)",
+  "@hifzCustomSource": {
+    "description": "Field"
+  },
+  "hifzBodyRequired": "Write the text you want to memorise",
+  "@hifzBodyRequired": {
+    "description": "Validation"
+  },
+  "hifzEdit": "Edit",
+  "@hifzEdit": {
+    "description": "Action"
+  },
+  "hifzEditTitle": "Edit item",
+  "@hifzEditTitle": {
+    "description": "Sheet title"
+  },
+  "hifzSuspend": "Suspend",
+  "@hifzSuspend": {
+    "description": "Action: stop scheduling an item"
+  },
+  "hifzUnsuspend": "Back to reviews",
+  "@hifzUnsuspend": {
+    "description": "Action: unsuspend"
+  },
+  "hifzResetProgress": "Start it over",
+  "@hifzResetProgress": {
+    "description": "Action: reset SM-2 state"
+  },
+  "hifzDelete": "Delete",
+  "@hifzDelete": {
+    "description": "Action"
+  },
+  "hifzReviewNow": "Review now",
+  "@hifzReviewNow": {
+    "description": "Action: review one item"
+  },
+  "hifzDeletedToast": "Removed from Hifz",
+  "@hifzDeletedToast": {
+    "description": "Undo toast"
+  },
+  "hifzSuspendedToast": "Item suspended",
+  "@hifzSuspendedToast": {
+    "description": "Undo toast"
+  },
+  "hifzUnsuspendedToast": "Item back in reviews",
+  "@hifzUnsuspendedToast": {
+    "description": "Undo toast"
+  },
+  "hifzResetToast": "Item is new again",
+  "@hifzResetToast": {
+    "description": "Undo toast"
+  },
+  "hifzSavedToast": "Changes saved",
+  "@hifzSavedToast": {
+    "description": "Undo toast"
+  },
+  "hifzReviewTitle": "Review",
+  "@hifzReviewTitle": {
+    "description": "Review screen title"
+  },
+  "hifzReviewProgress": "{done} of {total}",
+  "@hifzReviewProgress": {
+    "description": "Review progress",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzRecitePrompt": "Recite from memory, then reveal the text and grade yourself honestly",
+  "@hifzRecitePrompt": {
+    "description": "Review hint"
+  },
+  "hifzRevealFirstLetters": "First letters",
+  "@hifzRevealFirstLetters": {
+    "description": "Reveal stage"
+  },
+  "hifzRevealNextWord": "Next word",
+  "@hifzRevealNextWord": {
+    "description": "Reveal button"
+  },
+  "hifzRevealAll": "Show all",
+  "@hifzRevealAll": {
+    "description": "Reveal button"
+  },
+  "hifzRevealHide": "Hide",
+  "@hifzRevealHide": {
+    "description": "Reveal button"
+  },
+  "hifzListen": "Listen",
+  "@hifzListen": {
+    "description": "Button: play recitation"
+  },
+  "hifzListenStop": "Stop",
+  "@hifzListenStop": {
+    "description": "Button: stop recitation"
+  },
+  "hifzRepeatTimes": "{count, plural, =1{once} =2{twice} other{{count} times}}",
+  "@hifzRepeatTimes": {
+    "description": "Repeat count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzRedrill": "Once more, until it's “good”",
+  "@hifzRedrill": {
+    "description": "Badge: same-session re-drill"
+  },
+  "hifzNewItem": "New item",
+  "@hifzNewItem": {
+    "description": "Badge: first review"
+  },
+  "hifzGradePrompt": "How well did you recall it?",
+  "@hifzGradePrompt": {
+    "description": "Grade prompt"
+  },
+  "hifzGrade0": "Blank",
+  "@hifzGrade0": {
+    "description": "SM-2 grade 0"
+  },
+  "hifzGrade0Hint": "Couldn't recall anything",
+  "@hifzGrade0Hint": {
+    "description": "SM-2 grade 0 meaning"
+  },
+  "hifzGrade1": "Wrong",
+  "@hifzGrade1": {
+    "description": "SM-2 grade 1"
+  },
+  "hifzGrade1Hint": "Wrong; recognised it when shown",
+  "@hifzGrade1Hint": {
+    "description": "SM-2 grade 1 meaning"
+  },
+  "hifzGrade2": "Almost",
+  "@hifzGrade2": {
+    "description": "SM-2 grade 2"
+  },
+  "hifzGrade2Hint": "Wrong, but it seemed easy once shown",
+  "@hifzGrade2Hint": {
+    "description": "SM-2 grade 2 meaning"
+  },
+  "hifzGrade3": "Hard",
+  "@hifzGrade3": {
+    "description": "SM-2 grade 3"
+  },
+  "hifzGrade3Hint": "Correct, with serious effort",
+  "@hifzGrade3Hint": {
+    "description": "SM-2 grade 3 meaning"
+  },
+  "hifzGrade4": "Good",
+  "@hifzGrade4": {
+    "description": "SM-2 grade 4"
+  },
+  "hifzGrade4Hint": "Correct after a little hesitation",
+  "@hifzGrade4Hint": {
+    "description": "SM-2 grade 4 meaning"
+  },
+  "hifzGrade5": "Perfect",
+  "@hifzGrade5": {
+    "description": "SM-2 grade 5"
+  },
+  "hifzGrade5Hint": "Correct, without hesitation",
+  "@hifzGrade5Hint": {
+    "description": "SM-2 grade 5 meaning"
+  },
+  "hifzUndoGrade": "Undo grade",
+  "@hifzUndoGrade": {
+    "description": "Button"
+  },
+  "hifzNextReview": "Next review {when}",
+  "@hifzNextReview": {
+    "description": "After grading",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzFinish": "Finish",
+  "@hifzFinish": {
+    "description": "Button: end session early"
+  },
+  "hifzSummaryTitle": "Review complete",
+  "@hifzSummaryTitle": {
+    "description": "Summary title"
+  },
+  "hifzSummarySubtitle": "“The best of you are those who learn the Quran and teach it”",
+  "@hifzSummarySubtitle": {
+    "description": "Summary subtitle (hadith)"
+  },
+  "hifzSummaryReviewed": "Reviewed",
+  "@hifzSummaryReviewed": {
+    "description": "Summary stat"
+  },
+  "hifzSummaryNew": "New",
+  "@hifzSummaryNew": {
+    "description": "Summary stat"
+  },
+  "hifzSummaryAgain": "Repeated",
+  "@hifzSummaryAgain": {
+    "description": "Summary stat: re-drills"
+  },
+  "hifzSummaryRecall": "Recalled",
+  "@hifzSummaryRecall": {
+    "description": "Summary stat: share graded ≥3"
+  },
+  "hifzSummaryTomorrow": "Tomorrow: {count}",
+  "@hifzSummaryTomorrow": {
+    "description": "Summary: due tomorrow",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzSummaryDone": "Done",
+  "@hifzSummaryDone": {
+    "description": "Summary button"
+  },
+  "hifzEmptySession": "Nothing to review right now",
+  "@hifzEmptySession": {
+    "description": "Review screen empty"
+  },
+  "hifzEmptyTitle": "Begin your Hifz",
+  "@hifzEmptyTitle": {
+    "description": "Empty state"
+  },
+  "hifzEmptyBody": "Add ayat or a hadith — spaced repetition brings them back before they fade.",
+  "@hifzEmptyBody": {
+    "description": "Empty state"
+  },
+  "hifzEmptyDue": "Nothing due today",
+  "@hifzEmptyDue": {
+    "description": "Empty tab"
+  },
+  "hifzEmptyNew": "No new items waiting",
+  "@hifzEmptyNew": {
+    "description": "Empty tab"
+  },
+  "hifzEmptyLearned": "Items appear here after their first review",
+  "@hifzEmptyLearned": {
+    "description": "Empty tab"
+  },
+  "hifzSettingsTitle": "Hifz settings",
+  "@hifzSettingsTitle": {
+    "description": "Settings sheet title"
+  },
+  "hifzNewPerDay": "New items a day",
+  "@hifzNewPerDay": {
+    "description": "Setting"
+  },
+  "hifzListenRepeat": "Listening repeats per ayah",
+  "@hifzListenRepeat": {
+    "description": "Setting"
+  },
+  "hifzHadithNumber": "Hadith {n}",
+  "@hifzHadithNumber": {
+    "description": "Hadith number",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzHadithSource": "{collection} · {n}",
+  "@hifzHadithSource": {
+    "description": "Hadith source line",
+    "placeholders": {
+      "collection": {
+        "type": "String"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzCatalogError": "Couldn't load the Quran data",
+  "@hifzCatalogError": {
+    "description": "Error"
+  },
+  "hifzEase": "Ease {value}",
+  "@hifzEase": {
+    "description": "SM-2 ease factor",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzEveryDay": "Every day",
+  "@hifzEveryDay": {
+    "description": "SM-2 interval of one day"
+  },
+  "hifzInterval": "Every {days}",
+  "@hifzInterval": {
+    "description": "SM-2 interval",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzOpenAll": "All items",
+  "@hifzOpenAll": {
+    "description": "Card link"
+  },
+  "hifzStartCta": "Start memorising",
+  "@hifzStartCta": {
+    "description": "Card: nothing added yet"
+  },
+  "qiblaTitle": "Qibla",
+  "@qiblaTitle": {
+    "description": "Qibla screen title"
+  },
+  "qiblaFacing": "You're facing the qibla",
+  "@qiblaFacing": {
+    "description": "Status: the phone points at the qibla (±3°)"
+  },
+  "qiblaTurnRight": "Turn right {degrees}",
+  "@qiblaTurnRight": {
+    "description": "Status: turn clockwise by degrees (pre-formatted, e.g. ٤٥°)",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaTurnLeft": "Turn left {degrees}",
+  "@qiblaTurnLeft": {
+    "description": "Status: turn counter-clockwise by degrees",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaReading": "Reading the compass…",
+  "@qiblaReading": {
+    "description": "Status: waiting for the first compass reading"
+  },
+  "qiblaHoldFlat": "Hold the phone flat in front of you",
+  "@qiblaHoldFlat": {
+    "description": "Hint when the phone points at the ground"
+  },
+  "qiblaBearing": "Qibla bearing",
+  "@qiblaBearing": {
+    "description": "Info tile label: the qibla bearing from true north"
+  },
+  "qiblaDistance": "To the Kaaba",
+  "@qiblaDistance": {
+    "description": "Info tile label"
+  },
+  "qiblaKm": "{distance} km",
+  "@qiblaKm": {
+    "description": "Distance in kilometres (number pre-formatted)",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaYourHeading": "Your heading",
+  "@qiblaYourHeading": {
+    "description": "Info tile label: where the phone points (true north)"
+  },
+  "qiblaSunBearing": "Sun bearing",
+  "@qiblaSunBearing": {
+    "description": "Info tile label: the sun's azimuth"
+  },
+  "qiblaDeclination": "Magnetic declination here is {value} {direction}; corrected automatically with the World Magnetic Model.",
+  "@qiblaDeclination": {
+    "description": "Footnote: magnetic declination (value pre-formatted, direction = qiblaEast/qiblaWest)",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaEast": "east",
+  "@qiblaEast": {
+    "description": "Declination direction: east"
+  },
+  "qiblaWest": "west",
+  "@qiblaWest": {
+    "description": "Declination direction: west"
+  },
+  "qiblaAccuracyHigh": "High accuracy",
+  "@qiblaAccuracyHigh": {
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyMedium": "Medium accuracy",
+  "@qiblaAccuracyMedium": {
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyLow": "Low accuracy",
+  "@qiblaAccuracyLow": {
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyUnreliable": "Unreliable reading",
+  "@qiblaAccuracyUnreliable": {
+    "description": "Compass accuracy level"
+  },
+  "qiblaAccuracyChip": "{level} · {error}",
+  "@qiblaAccuracyChip": {
+    "description": "Accuracy chip: level and the estimated error, pre-formatted (e.g. ±٤°)",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaCalibrateTitle": "Calibrate the compass",
+  "@qiblaCalibrateTitle": {
+    "description": "Calibration prompt title"
+  },
+  "qiblaCalibrateBody": "Move the phone through the air in a figure-{eight} a few times, away from metal and magnets.",
+  "@qiblaCalibrateBody": {
+    "description": "Calibration prompt body; {eight} is the digit 8 in the user's digits",
+    "placeholders": {
+      "eight": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaInterferenceBody": "The magnetic field here is disturbed: step away from metal, electronics and magnets (magnetic phone cases too), then move the phone in a figure-{eight}.",
+  "@qiblaInterferenceBody": {
+    "description": "Calibration prompt body when the field strength is far off",
+    "placeholders": {
+      "eight": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaCalibrateLater": "Later",
+  "@qiblaCalibrateLater": {
+    "description": "Button: hide the calibration prompt"
+  },
+  "qiblaCalibrated": "Compass calibrated",
+  "@qiblaCalibrated": {
+    "description": "Toast when the calibration prompt resolves"
+  },
+  "qiblaCalibrateAction": "Calibrate",
+  "@qiblaCalibrateAction": {
+    "description": "Button: show the calibration prompt again"
+  },
+  "qiblaSunTitle": "Sun compass",
+  "@qiblaSunTitle": {
+    "description": "Sun mode title"
+  },
+  "qiblaSunHowTo": "Face the sun and point the top of your phone at it, without looking straight at it; the golden needle then points to the qibla.",
+  "@qiblaSunHowTo": {
+    "description": "Sun mode instructions"
+  },
+  "qiblaSunRightOf": "Qibla: {degrees} right of the sun",
+  "@qiblaSunRightOf": {
+    "description": "Sun mode: qibla relative to the sun",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaSunLeftOf": "Qibla: {degrees} left of the sun",
+  "@qiblaSunLeftOf": {
+    "description": "Sun mode: qibla relative to the sun",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaSunAhead": "The qibla lies straight toward the sun",
+  "@qiblaSunAhead": {
+    "description": "Sun mode: qibla within 3° of the sun"
+  },
+  "qiblaSunHigh": "The sun is high now, so aiming at it is less precise.",
+  "@qiblaSunHigh": {
+    "description": "Sun mode caveat near noon"
+  },
+  "qiblaDiagramTitle": "Bearing diagram",
+  "@qiblaDiagramTitle": {
+    "description": "Diagram mode title"
+  },
+  "qiblaDiagramHowTo": "Find north with a compass, or at night by the Pole Star, then turn {degrees} clockwise.",
+  "@qiblaDiagramHowTo": {
+    "description": "Diagram instructions (northern hemisphere)",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaDiagramHowToSouth": "Find north with a compass, or at night from the Southern Cross, which points south; then turn {degrees} clockwise from north.",
+  "@qiblaDiagramHowToSouth": {
+    "description": "Diagram instructions (southern hemisphere)",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaNoSensor": "This phone has no compass (magnetometer).",
+  "@qiblaNoSensor": {
+    "description": "Fallback reason"
+  },
+  "qiblaSensorError": "The compass could not be read.",
+  "@qiblaSensorError": {
+    "description": "Fallback reason"
+  },
+  "qiblaNoReadings": "The compass isn't responding.",
+  "@qiblaNoReadings": {
+    "description": "Fallback reason"
+  },
+  "qiblaUseSun": "Use the sun",
+  "@qiblaUseSun": {
+    "description": "Button: switch to the sun compass"
+  },
+  "qiblaUseCompass": "Back to the compass",
+  "@qiblaUseCompass": {
+    "description": "Button: back to the live compass"
+  },
+  "qiblaRetry": "Try again",
+  "@qiblaRetry": {
+    "description": "Button: retry the compass"
+  },
+  "qiblaAtKaaba": "You're at the Kaaba itself — face it directly.",
+  "@qiblaAtKaaba": {
+    "description": "Shown within 200 m of the Kaaba"
+  },
+  "qiblaCardTitle": "Qibla direction",
+  "@qiblaCardTitle": {
+    "description": "Faith hub card title"
+  },
+  "qiblaCardOpen": "Open the compass",
+  "@qiblaCardOpen": {
+    "description": "Card action / semantics hint"
+  },
+  "qiblaFromPlace": "From {place}",
+  "@qiblaFromPlace": {
+    "description": "The place the qibla is computed from",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "qiblaPointN": "N",
+  "@qiblaPointN": {
+    "description": "Compass point abbreviation N (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointNE": "NE",
+  "@qiblaPointNE": {
+    "description": "Compass point abbreviation NE (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointE": "E",
+  "@qiblaPointE": {
+    "description": "Compass point abbreviation E (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointSE": "SE",
+  "@qiblaPointSE": {
+    "description": "Compass point abbreviation SE (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointS": "S",
+  "@qiblaPointS": {
+    "description": "Compass point abbreviation S (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointSW": "SW",
+  "@qiblaPointSW": {
+    "description": "Compass point abbreviation SW (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointW": "W",
+  "@qiblaPointW": {
+    "description": "Compass point abbreviation W (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointNW": "NW",
+  "@qiblaPointNW": {
+    "description": "Compass point abbreviation NW (Arabic: ش شمال، ق شرق، ج جنوب، غ غرب)"
+  },
+  "qiblaPointNameN": "north",
+  "@qiblaPointNameN": {
+    "description": "Compass point full name N (screen readers)"
+  },
+  "qiblaPointNameNE": "north-east",
+  "@qiblaPointNameNE": {
+    "description": "Compass point full name NE (screen readers)"
+  },
+  "qiblaPointNameE": "east",
+  "@qiblaPointNameE": {
+    "description": "Compass point full name E (screen readers)"
+  },
+  "qiblaPointNameSE": "south-east",
+  "@qiblaPointNameSE": {
+    "description": "Compass point full name SE (screen readers)"
+  },
+  "qiblaPointNameS": "south",
+  "@qiblaPointNameS": {
+    "description": "Compass point full name S (screen readers)"
+  },
+  "qiblaPointNameSW": "south-west",
+  "@qiblaPointNameSW": {
+    "description": "Compass point full name SW (screen readers)"
+  },
+  "qiblaPointNameW": "west",
+  "@qiblaPointNameW": {
+    "description": "Compass point full name W (screen readers)"
+  },
+  "qiblaPointNameNW": "north-west",
+  "@qiblaPointNameNW": {
+    "description": "Compass point full name NW (screen readers)"
+  },
+  "qiblaDialLabel": "Qibla compass: the qibla is at {bearing}, toward the {point}.",
+  "@qiblaDialLabel": {
+    "description": "Semantics label of the dial",
+    "placeholders": {
+      "bearing": {
+        "type": "String"
+      },
+      "point": {
+        "type": "String"
+      }
+    }
   }
 }

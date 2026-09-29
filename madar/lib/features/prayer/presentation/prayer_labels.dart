@@ -90,7 +90,8 @@ extension PrayerLabels on L10n {
     HighLatitudeMode.twilightAngle => ptHighLatAngle,
   };
 
-  /// "Fajr 18° · Isha 18° · Sunrise −7 min · Maghrib +7 min".
+  /// "Fajr 18° · Isha 18° · Sunrise −7 min · Maghrib +7 min" (Arabic joins
+  /// with «،»: a middle dot beside Arabic-Indic digits reads as ٠).
   String methodSummary(PrayerSettings s, MadarFormatter fmt) {
     final p = s.method == PrayerMethod.custom ? null : s.method.parameters();
     // Custom angles keep the offsets / Maghrib angle of the preset they
@@ -124,13 +125,18 @@ extension PrayerLabels on L10n {
     }
     // Each part stays on one line ("Maghrib +7 min" never splits); lines
     // break only between parts.
-    return parts.map((p) => p.replaceAll(' ', '\u00A0')).join(' · ');
+    return parts.map((p) => p.replaceAll(' ', '\u00A0')).join(commonFactSeparator);
   }
 
   /// "18°" / "١٨٫٥°".
   String degrees(double value, MadarFormatter fmt) => '${fmt.formatNumber(value, maxDecimals: 1)}°';
 
   /// "+5" / "−٥" / "0" – a true minus sign, isolated left-to-right.
+  /// A minute adjustment as a stepper shows it: "+٢ د" / "−5 min", and
+  /// «بلا تعديل» / "None" for zero – a lone «٠ د» reads as a dotted «د».
+  String adjustmentValue(int minutes, MadarFormatter fmt) =>
+      minutes == 0 ? ptNoAdjustment : ptMinutesSigned(signedMinutes(minutes, fmt));
+
   String signedMinutes(int minutes, MadarFormatter fmt) {
     final n = fmt.formatInt(minutes.abs(), grouping: false);
     final s = minutes > 0 ? '+$n' : (minutes < 0 ? '−$n' : n);
@@ -174,7 +180,7 @@ extension PrayerLabels on L10n {
     final zone = MadarTimeZones.find(s.timeZone);
     final offset = MadarTimeZones.offsetAt(instant, zone);
     final name = zone == null ? ptTimeZoneDevice : BidiIsolate.ltr(zone.name.replaceAll('_', ' '));
-    return '$name · ${zoneOffset(offset, fmt)}';
+    return '$name$commonFactSeparator${zoneOffset(offset, fmt)}';
   }
 }
 

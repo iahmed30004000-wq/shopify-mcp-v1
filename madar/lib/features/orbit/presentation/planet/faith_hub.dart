@@ -12,68 +12,122 @@ import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/routing/route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../adhkar/adhkar.dart' show AdhkarTodayCard;
+import '../../../hifz/hifz.dart' show HifzTodayCard, hifzStatsProvider;
 import '../../../home/home_providers.dart';
 import '../../../prayer/prayer.dart';
 import '../../../prayer_tracker/prayer_tracker.dart' show PrayerTodayCard;
+import '../../../qibla/qibla.dart' show QiblaCard;
+import '../../../quran/quran.dart' show QuranContinueCard;
+import '../../../wird/wird.dart' show WirdTodayCard;
 import '../../data/orbit_providers.dart';
 
 /// The Faith world's own page content – the hub of the day around the five
-/// prayers:
+/// prayers, in three movements under one hero:
 ///
-/// * the next prayer with a live countdown, under today's Hijri and
-///   Gregorian dates (opens prayer times);
-/// * today's five prayers from the tracker ([PrayerTodayCard]: tap cycles,
-///   long-press for every option; its header opens the tracker);
-/// * today's adhkar ([AdhkarTodayCard]) – each set opens in the reader;
-/// * quick links: prayer times, the tracker's history, adhkar, the tasbeeh
-///   and the adhan settings.
+/// * the hero: today's Hijri and Gregorian dates, the next prayer and a live
+///   countdown ([NextPrayerCard] – opens prayer times);
+/// * **your day** – today's five prayers ([PrayerTodayCard]: tap cycles,
+///   long-press for every option; its header opens the tracker) and today's
+///   adhkar ([AdhkarTodayCard] – each set opens in the reader);
+/// * **with the Quran** – continue reading where the reader stopped
+///   ([QuranContinueCard]), today's wird portion ([WirdTodayCard]: read now,
+///   mark done) and the Hifz reviews due ([HifzTodayCard], once there is
+///   something to memorise); the header's "Index" opens the Quran's front
+///   page;
+/// * **tools** – the qibla ([QiblaCard], a still mini astrolabe: no sensor
+///   runs on this page) over a grid of six: the mushaf, Hifz, recitation,
+///   the tasbeeh, the prayer history and the adhan.
 ///
-/// Every part is a [StaggerItem] of the planet page's entrance, so the hub
-/// rises in step with the rest of the sheet.
-class FaithHub extends StatelessWidget {
+/// Every part is a [StaggerItem] of the planet page's entrance (each
+/// movement's header rises with its first card), so the hub unfolds in step
+/// with the rest of the sheet. Every page opens as a route ([FaithNav]).
+class FaithHub extends ConsumerWidget {
   const FaithHub({super.key, this.firstIndex = 1});
 
   /// Stagger index of the first card.
   final int firstIndex;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = L10n.of(context);
-    Widget pad(Widget child) => Padding(
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
-      child: child,
+    // Hifz joins the Quran once it holds something (the tools grid invites
+    // before that) – no loader, no empty card on a fresh install.
+    final hifz = (ref.watch(hifzStatsProvider).value?.total ?? 0) > 0;
+    var index = firstIndex;
+    final children = <Widget>[];
+    void card(Widget child, {bool gap = true}) {
+      if (gap && children.isNotEmpty && children.last is! _Header) {
+        children.add(const SizedBox(height: Space.m));
+      }
+      children.add(
+        StaggerItem(
+          index: index++,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
+            child: child,
+          ),
+        ),
+      );
+    }
+
+    void header(String title, {String? action, VoidCallback? onAction}) =>
+        children.add(_Header(index: index, title: title, action: action, onAction: onAction));
+
+    card(const NextPrayerCard());
+
+    header(l.faithHubTodayTitle);
+    card(PrayerTodayCard(onOpen: () => FaithNav.tracker(context)));
+    card(AdhkarTodayCard(onOpenSet: FaithNav.adhkarSet, onOpenHome: FaithNav.adhkar, onOpenTasbeeh: FaithNav.tasbeeh));
+
+    header(
+      l.faithHubQuranTitle,
+      action: l.faithHubQuranIndex,
+      onAction: () => FaithNav.quran(context),
     );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        StaggerItem(index: firstIndex, child: pad(const NextPrayerCard())),
-        const SizedBox(height: Space.m),
-        StaggerItem(
-          index: firstIndex + 1,
-          child: pad(PrayerTodayCard(onOpen: () => FaithNav.tracker(context))),
+    card(QuranContinueCard(onOpen: (context, {ayah, page}) => FaithNav.quranReader(context, ayah: ayah, page: page)));
+    card(WirdTodayCard(onOpen: (context) => FaithNav.wird(context)));
+    if (hifz) {
+      card(
+        HifzTodayCard(
+          onOpen: FaithNav.hifz,
+          onStartReview: (context, {only}) => FaithNav.hifzReview(context, only: only),
         ),
-        const SizedBox(height: Space.m),
-        StaggerItem(
-          index: firstIndex + 2,
-          child: pad(
-            AdhkarTodayCard(
-              onOpenSet: FaithNav.adhkarSet,
-              onOpenHome: FaithNav.adhkar,
-              onOpenTasbeeh: FaithNav.tasbeeh,
-            ),
-          ),
-        ),
-        StaggerItem(
-          index: firstIndex + 3,
-          child: SectionHeader(
-            title: l.faithHubLinksTitle,
-            padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.l, Space.gutter, Space.s),
-          ),
-        ),
-        StaggerItem(index: firstIndex + 3, child: pad(const _HubLinks())),
-      ],
+      );
+    }
+
+    header(l.faithHubToolsTitle);
+    card(QiblaCard(onOpen: () => FaithNav.qibla(context)));
+    card(const FaithTools());
+
+    // The planet sheet has no Material above it: the cards the features
+    // bring (their bare numeral styles) would otherwise inherit the debug
+    // fallback text style (a yellow double underline).
+    return Material(
+      type: MaterialType.transparency,
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: children),
     );
   }
+}
+
+/// A movement's title, rising with its first card.
+class _Header extends StatelessWidget {
+  const _Header({required this.index, required this.title, this.action, this.onAction});
+
+  final int index;
+  final String title;
+  final String? action;
+  final VoidCallback? onAction;
+
+  @override
+  Widget build(BuildContext context) => StaggerItem(
+    index: index,
+    child: SectionHeader(
+      title: title,
+      actionLabel: action,
+      onAction: onAction,
+      padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.l, Space.gutter, Space.s),
+    ),
+  );
 }
 
 /// Today's Hijri date over the Gregorian one, then the next obligatory
@@ -211,53 +265,50 @@ class _CountdownState extends ConsumerState<_Countdown> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final now = ref.read(orbitClockProvider)();
+    // The same tabular Plex numerals as the prayer-times hero (Reem Kufi's
+    // geometric ٢ reads as an "r" in a ticking clock).
+    // Built on a theme style: the planet sheet has no Material above it, so
+    // a bare TextStyle would inherit the debug fallback (yellow underline).
     return Text(
       widget.format(widget.target.difference(now)),
-      style: Theme.of(context).textTheme.headlineSmall!
-          .copyWith(color: t.accent, fontFeatures: const [FontFeature.tabularFigures()]),
+      style: Theme.of(context).textTheme.titleLarge!.merge(
+        MadarTypography.numerals(t, size: 22, color: t.accent).copyWith(fontWeight: FontWeight.w600, height: 1.2),
+      ),
     );
   }
 }
 
-/// Two columns of glass links into the faith pages (an odd last one spans
-/// the row).
-class _HubLinks extends StatelessWidget {
-  const _HubLinks();
+/// The faith tools: a grid of three by two glass tiles, each a brass seal
+/// around its icon over its name – the mushaf, Hifz and recitation, then
+/// the tasbeeh, the prayer history and the adhan. Every tile opens its page
+/// with a navigation sound.
+class FaithTools extends StatelessWidget {
+  const FaithTools({super.key});
+
+  static const int columns = 3;
 
   @override
   Widget build(BuildContext context) {
     final l = L10n.of(context);
-    final links = [
-      (Icons.schedule_rounded, l.ptTitle, l.faithHubTimesHint, () => FaithNav.prayerTimes(context)),
-      (
-        Icons.insights_rounded,
-        l.faithHubHistory,
-        l.faithHubHistoryHint,
-        () => FaithNav.tracker(context, history: true),
-      ),
-      (Icons.menu_book_rounded, l.adhkarTitle, l.faithHubAdhkarHint, () => FaithNav.adhkar(context)),
+    final tools = <_Tool>[
+      (Icons.menu_book_rounded, l.quranModeMushaf, l.faithHubMushafHint, () => FaithNav.quran(context)),
+      (Icons.psychology_rounded, l.hifzTitle, l.faithHubHifzHint, () => FaithNav.hifz(context)),
+      (Icons.graphic_eq_rounded, l.recitationTitle, l.faithHubRecitationHint, () => FaithNav.recitation(context)),
       (Icons.blur_circular_rounded, l.adhkarTasbeehTitle, l.faithHubTasbeehHint, () => FaithNav.tasbeeh(context)),
-      (
-        Icons.notifications_active_rounded,
-        l.adhanSettingsTitle,
-        l.faithHubAdhanHint,
-        () => FaithNav.adhanSettings(context),
-      ),
+      (Icons.insights_rounded, l.faithHubHistory, l.faithHubHistoryHint, () => FaithNav.tracker(context, history: true)),
+      (Icons.notifications_active_rounded, l.faithHubAdhanTool, l.faithHubAdhanHint, () => FaithNav.adhanSettings(context)),
     ];
     final rows = <Widget>[];
-    for (var i = 0; i < links.length; i += 2) {
+    for (var i = 0; i < tools.length; i += columns) {
       if (i > 0) rows.add(const SizedBox(height: Space.s));
       rows.add(
         IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (var j = i; j < i + 2; j++) ...[
+              for (var j = i; j < i + columns; j++) ...[
                 if (j > i) const SizedBox(width: Space.s),
-                if (j < links.length)
-                  Expanded(
-                    child: _HubLink(icon: links[j].$1, title: links[j].$2, hint: links[j].$3, onTap: links[j].$4),
-                  ),
+                Expanded(child: j < tools.length ? _ToolTile(tool: tools[j]) : const SizedBox.shrink()),
               ],
             ],
           ),
@@ -268,18 +319,19 @@ class _HubLinks extends StatelessWidget {
   }
 }
 
-class _HubLink extends StatelessWidget {
-  const _HubLink({required this.icon, required this.title, required this.hint, required this.onTap});
+/// Icon, name, hint (for screen readers) and where it leads.
+typedef _Tool = (IconData, String, String, VoidCallback);
 
-  final IconData icon;
-  final String title;
-  final String hint;
-  final VoidCallback onTap;
+class _ToolTile extends StatelessWidget {
+  const _ToolTile({required this.tool});
+
+  final _Tool tool;
 
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
+    final (icon, title, hint, onTap) = tool;
     return MadarPressable(
       onTap: onTap,
       sfx: Sfx.navigate,
@@ -288,28 +340,47 @@ class _HubLink extends StatelessWidget {
       focusRadius: BorderRadius.circular(t.radiusM),
       child: GlassCard(
         glow: false,
-        padding: const EdgeInsetsDirectional.all(Space.m),
-        child: Row(
+        padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.m, Space.xs, Space.m),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 22, color: t.accent),
-            const SizedBox(width: Space.s),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(title, maxLines: 2, overflow: TextOverflow.ellipsis, style: text.titleSmall),
-                  Text(
-                    hint,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: text.bodySmall!.copyWith(color: t.textTertiary),
-                  ),
-                ],
-              ),
+            _Seal(icon: icon),
+            const SizedBox(height: Space.s),
+            Text(
+              title,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: text.titleSmall!.copyWith(color: t.textPrimary, height: 1.25),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// A brass eight-point seal holding a tool's icon (the Quran card's page
+/// seal, in small).
+class _Seal extends StatelessWidget {
+  const _Seal({required this.icon});
+
+  final IconData icon;
+
+  static const double size = 44;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return SizedBox.square(
+      dimension: size,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          IslamicStar(size: size, color: t.accentSoft),
+          IslamicStar(size: size, filled: false, color: t.brass.withValues(alpha: 0.8), strokeWidth: 1.2),
+          Icon(icon, size: 20, color: t.accent),
+        ],
       ),
     );
   }

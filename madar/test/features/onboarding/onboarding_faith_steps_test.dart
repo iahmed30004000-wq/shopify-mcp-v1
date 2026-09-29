@@ -97,6 +97,8 @@ void main() {
     );
     await _walkTo(tester, _en, OnboardingScreen.adhanStep);
     expect(find.text(_en.adhanPermNotifications), findsOneWidget);
+    // The step's heading says what the card is for; the card doesn't repeat it.
+    expect(find.text(_en.adhanPermTitle), findsNothing);
     await tester.tap(find.text(_en.adhanPermAllow).first);
     await settleApp(tester);
     expect(platform.requestNotificationsCalls, 1);

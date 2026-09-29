@@ -180,7 +180,10 @@ abstract final class NotificationNamespaces {
   static const meds = NotificationNamespace('meds', 120000, 129999);
   static const reminders = NotificationNamespace('reminders', 130000, 139999);
 
-  static const all = [adhan, adhkar, meds, reminders];
+  /// The daily wird's reminders (after the plan's prayer).
+  static const wird = NotificationNamespace('wird', 140000, 140999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {
