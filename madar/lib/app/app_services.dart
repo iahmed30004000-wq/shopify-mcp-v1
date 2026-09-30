@@ -14,6 +14,7 @@ import '../features/recitation/recitation.dart' show RecitationPlayer, recitatio
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
 import 'health_services.dart';
+import 'life_services.dart';
 import 'money_services.dart';
 
 /// Prepares the services the app needs soon but never on the first frame:
@@ -60,8 +61,13 @@ void _log(String what, Object error, StackTrace stack) {
 ///   an appointment reminder the appointments with it lit
 ///   (`/record/appointments?highlight=<id>`) and the worry window the
 ///   worries (`/wellbeing?tab=worries`), a debt's or an obligation's due
-///   reminder the goals with its sheet up (`/goals?tab=debts&debt=<id>`) –
-///   whether it launched the app (cold start) or reached it running (warm). A dose's Taken / Snooze / Skip
+///   reminder the goals with its sheet up (`/goals?tab=debts&debt=<id>`),
+///   the family's reach-out digest the Family page (`/family`), a birthday that
+///   person's page (`/family/person/<id>`), a travel document's expiry the
+///   documents (`/travel?tab=documents`), a fasting notice the fasting tab
+///   (`/body?tab=fasting`) and a tracker's reminder that tracker
+///   (`/modules/module/<id>`) – whether it launched the app (cold start) or
+///   reached it running (warm). A dose's Taken / Snooze / Skip
 ///   buttons never navigate: they are recorded ([healthNotificationLocation]).
 /// * The router moves underneath the app lock: when Madar is locked the lock
 ///   screen stays in front, and the reader is what the owner sees after
@@ -82,7 +88,7 @@ class AppNotificationRouter {
     if (set != null) return AppRoutes.adhkarSetOf(set.name);
     final plan = WirdReminderTaps.planOf(tap);
     if (plan != null) return AppRoutes.wirdOf(plan);
-    return healthNotificationLocation(tap) ?? moneyNotificationLocation(tap);
+    return healthNotificationLocation(tap) ?? moneyNotificationLocation(tap) ?? lifeNotificationLocation(tap);
   }
 
   Future<void> _readLaunch(NotificationService service) async {
@@ -129,7 +135,11 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///   the worry window – and a dose answered from its notification is
 ///   recorded ([watchHealthServices]);
 /// * the debts' and obligations' due reminders stay planned
-///   ([watchMoneyServices]).
+///   ([watchMoneyServices]);
+/// * a card placed in a prayer window stays in step with its task, the Top
+///   3 settles at midnight, trips follow their dates, and the family's,
+///   travel documents', fasting and trackers' reminders stay planned
+///   ([watchLifeServices]).
 ///
 /// The adhan's own services (alarm planning, prayer quiet, the full-screen
 /// adhan) live in `AdhanHost`, directly below this.
@@ -169,6 +179,8 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
+    // Slot kept free for the notification centre (Phase 9): it is watched
+    // FIRST, so its policy is in the gate before any sync below re-plans.
     ref.watch(adhkarReminderSyncProvider);
     ref.watch(wirdReminderSyncProvider);
     ref.watch(wirdCompletionSyncProvider);
@@ -176,6 +188,7 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     ref.watch(recitationNotificationRouterProvider);
     watchHealthServices(ref);
     watchMoneyServices(ref);
+    watchLifeServices(ref);
     return widget.child;
   }
 }

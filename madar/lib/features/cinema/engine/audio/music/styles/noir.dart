@@ -48,6 +48,8 @@ final class NoirComposer implements StyleComposer {
         'i9 | iv9 | iiø7 Vb9 | i9 | bVI7 | Vb9 | i9 bVI7 | iiø7 Vb9',
         'i9 | i9 | iv9 | iv9 | bVIM7 | iiø7 | Vb9 | Vb9',
         'i9 | bIIM7 | iiø7 | Vb9 | i9 | iv9 | bVI7 | Vb9',
+        // Minor blues, folded into eight bars.
+        'i9 | iv9 | i9 | i9 | iv9 | iv9 | bVI7 Vb9 | i9 Vb9',
       ]),
       8,
     );

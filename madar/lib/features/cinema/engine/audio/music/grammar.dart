@@ -741,3 +741,37 @@ void addPad(
     }
   }
 }
+
+/// Stride piano left hand: bass octaves on 1 and 3 (root, then the fifth
+/// when the chord holds), close chords on 2 and 4.
+void addStride(
+  List<NoteEvent> out,
+  Inst inst,
+  ChordChart chart,
+  int keyMidi, {
+  required double start,
+  required int bars,
+  int stem = 0,
+  double vel = 0.55,
+  double gain = 1,
+  int chordFloor = 53,
+}) {
+  for (var bar = 0; bar < bars; bar++) {
+    for (var beat = 0; beat < 4; beat++) {
+      final t = start + bar * 4 + beat;
+      final chord = chart.at(t);
+      if (beat.isEven) {
+        final slot = chart.slotAt(t);
+        final fresh = (slot.beat - t).abs() < 1e-6 || beat == 0;
+        var p = chord.rootNear(keyMidi, 43) + (fresh ? 0 : 7);
+        if (p > 50) p -= 12;
+        out.add(NoteEvent(t, 0.6, p.toDouble(), vel + (beat == 0 ? 0.08 : 0), inst, stem: stem, gain: gain));
+        out.add(NoteEvent(t, 0.6, p - 12.0, vel * 0.85, inst, stem: stem, gain: gain));
+      } else {
+        for (final p in chord.closeVoicing(keyMidi, chordFloor, size: 3)) {
+          out.add(NoteEvent(t, 0.4, p.toDouble(), vel * 0.72, inst, stem: stem, fx: Art.staccato, gain: gain));
+        }
+      }
+    }
+  }
+}

@@ -125,28 +125,33 @@ final class CueRenderer {
 
   RenderedCue render(CueScore score, {int seed = 1}) {
     final watch = Stopwatch()..start();
-    var lap = 0;
-    void mark(String phase) {
-      final now = watch.elapsedMilliseconds;
-      profile[phase] = (profile[phase] ?? 0) + now - lap;
-      lap = now;
-    }
+    final stems = [for (var i = 0; i < score.stems.length; i++) renderStem(score, i, seed: seed)];
+    profile['stems'] = (profile['stems'] ?? 0) + watch.elapsedMilliseconds;
+    final lap = watch.elapsedMilliseconds;
+    final cue = finish(score, stems, seed: seed, renderMs: 0);
+    profile['finish'] = (profile['finish'] ?? 0) + watch.elapsedMilliseconds - lap;
+    return RenderedCue(cue.info, cue.stems, renderMs: watch.elapsedMilliseconds);
+  }
 
+  /// Renders stem [index] of [score]: its notes, echo, room and period
+  /// colour (the bed also carries the surface noise). Independent of the
+  /// other stems, so stems can render on parallel isolates; [finish] then
+  /// levels and encodes them together.
+  StemAudio renderStem(CueScore score, int index, {int seed = 1}) {
     final sr = score.sound.sampleRate;
     final loopN = math.max(1, (score.loopSeconds * sr).round());
     final introN = (score.introSeconds * sr).round();
     final tailN = introN > 0 ? (introTailSeconds * sr).round() : 0;
-    final rng = SynthRandom(seed * 7919 + score.mood.index * 131 + score.style.index);
-    final voices = VoiceBox(sr, score.style, seed ^ 0x5eed);
+    final rng = SynthRandom(seed * 7919 + score.mood.index * 131 + score.style.index * 17 + index * 104729);
+    final voices = VoiceBox(sr, score.style, seed ^ 0x5eed ^ (index * 977));
     final cache = <int, Float64List>{};
-
-    final stems = <_StemBuf>[for (final s in score.stems) _StemBuf(s, introN + tailN, loopN, sr)];
-
+    final stem = StemAudio._(score.stems[index], introN + tailN, loopN, sr);
     final introSec = score.introSeconds;
     final loopSec = loopN / sr;
     final trims = [for (final i in Inst.values) math.pow(10.0, instTrimDb(i) / 20.0).toDouble()];
+    final last = score.stems.length - 1;
     for (final e in score.events) {
-      final stem = stems[e.stem.clamp(0, stems.length - 1)];
+      if (e.stem.clamp(0, last) != index) continue;
       final start = score.beatToSeconds(e.beat, straight: e.straight);
       final end = score.beatToSeconds(e.beat + e.dur, straight: e.straight);
       final jitter = _jitter(e.inst) * (rng.nextDouble() - rng.nextDouble()) * (1 + score.sound.lofi * 0.6);
@@ -154,48 +159,38 @@ final class CueRenderer {
       final velQ = (vel * 20).round() / 20;
       final hold = math.max(0.015, end - start);
       final holdQ = (hold * 100).round() / 100;
-      final key = Object.hash(
-        e.inst,
-        (e.pitch * 100).round(),
-        (holdQ * 100).round(),
-        (velQ * 20).round(),
-        e.fx,
-        (e.glideFrom * 100).round(),
-      );
+      final key = Object.hash(e.inst, (e.pitch * 100).round(), (holdQ * 100).round(), (velQ * 20).round(), e.fx, (e.glideFrom * 100).round());
       final voice = cache[key] ??= voices.render(NoteEvent(0, e.dur, e.pitch, velQ, e.inst, fx: e.fx, glideFrom: e.glideFrom), holdQ);
       final t = math.max(0.0, start + jitter);
-      final inIntro = e.beat < score.introBeats - 1e-6;
       final pan = _eventPan(e, stem.spec);
       final trim = trims[e.inst.index] * e.gain;
-      if (inIntro) {
+      if (e.beat < score.introBeats - 1e-6) {
         stem.addLinear(voice, (t * sr).round(), pan, trim);
       } else {
         final lt = (t - introSec) % loopSec;
         stem.addCircular(voice, (lt * sr).round() % loopN, pan, trim);
       }
     }
-
-    mark('voices');
     // Echo, room and period colour (identical for every stem, so the sum
     // behaves like one processed mix).
     final lofi = _Lofi(score.sound, sr, loopN, introN, seed);
     final room = ReverbSpec(roomSize: score.sound.roomSize, damping: score.sound.damping, preDelayMs: 12, width: 0.9);
     final primeN = math.min(loopN, (2.0 * sr).round());
-    for (var si = 0; si < stems.length; si++) {
-      final s = stems[si];
-      if (s.spec.delayBeats > 0) s.applyDelay((s.spec.delayBeats * score.secondsPerBeat * sr).round(), s.spec.delayFeedback, primeN);
-      mark('delay');
-      if (s.spec.reverb > 0 && score.sound.wet > 0) s.applyReverb(room, sr, s.spec.reverb * score.sound.wet, primeN);
-      mark('reverb');
-      lofi.apply(s, primeN);
-      mark('lofi');
-    }
-    if (score.sound.crackle > 0 || score.sound.lofi > 0.3) lofi.addSurface(stems.first);
-    mark('fx');
+    if (stem.spec.delayBeats > 0) stem.applyDelay((stem.spec.delayBeats * score.secondsPerBeat * sr).round(), stem.spec.delayFeedback, primeN);
+    if (stem.spec.reverb > 0 && score.sound.wet > 0) stem.applyReverb(room, sr, stem.spec.reverb * score.sound.wet, primeN);
+    lofi.apply(stem, primeN);
+    if (index == 0 && (score.sound.crackle > 0 || score.sound.lofi > 0.3)) lofi.addSurface(stem);
+    return stem;
+  }
 
-    // Level: the full-intensity sum hits the loudness target; one shared,
-    // stereo-linked limiter gain curve keeps every layer combination under
-    // the ceiling.
+  /// Levels [stems] together (the full-intensity sum hits the loudness
+  /// target; one shared limiter gain curve keeps every layer combination
+  /// under the ceiling), trims the intro tail and encodes the WAVs.
+  RenderedCue finish(CueScore score, List<StemAudio> stems, {int seed = 1, int renderMs = 0}) {
+    final sr = score.sound.sampleRate;
+    final introN = (score.introSeconds * sr).round();
+    final tailN = introN > 0 ? (introTailSeconds * sr).round() : 0;
+    final loopSec = stems.first.loopL.length / sr;
     final measure = score.loops || introN == 0 ? _Region.loop : _Region.intro;
     final mixL = _sum(stems, measure, left: true);
     final mixR = _sum(stems, measure, left: false);
@@ -209,7 +204,6 @@ final class CueRenderer {
     _limit(stems, _Region.loop, ceiling, sr);
     if (introN > 0) _limit(stems, _Region.intro, ceiling, sr);
 
-    mark('level');
     // Trim the intro tail to what is audible.
     var introLen = 0;
     if (introN > 0) {
@@ -231,7 +225,6 @@ final class CueRenderer {
       out.add(RenderedStem(s.spec, intro, s.encodeLoop(seed + si * 31)));
     }
 
-    mark('encode');
     final chords = <ChordMark>[];
     for (final slot in score.chart.slots) {
       final b = slot.beat - score.introBeats;
@@ -251,7 +244,7 @@ final class CueRenderer {
       chords: chords,
       keyPc: score.keyMidi % 12,
     );
-    return RenderedCue(info, out, renderMs: watch.elapsedMilliseconds);
+    return RenderedCue(info, out, renderMs: renderMs);
   }
 
   static double _jitter(Inst i) {
@@ -271,7 +264,7 @@ final class CueRenderer {
     return (s.pan + spread).clamp(-1.0, 1.0);
   }
 
-  static Float64List _sum(List<_StemBuf> stems, _Region r, {required bool left}) {
+  static Float64List _sum(List<StemAudio> stems, _Region r, {required bool left}) {
     final n = r == _Region.loop ? stems.first.loopL.length : stems.first.introL.length;
     final out = Float64List(n);
     for (final s in stems) {
@@ -305,7 +298,7 @@ final class CueRenderer {
   }
 
   /// Look-ahead limiter gain shared by every stem (circular for the loop).
-  void _limit(List<_StemBuf> stems, _Region region, double ceiling, int sr) {
+  void _limit(List<StemAudio> stems, _Region region, double ceiling, int sr) {
     final l = _sum(stems, region, left: true);
     final r = _sum(stems, region, left: false);
     final n = l.length;
@@ -369,15 +362,17 @@ final class CueRenderer {
       }
     }
     for (final s in stems) {
-      s.applyGain(region, gain);
+      s._applyGain(region, gain);
     }
   }
 }
 
 enum _Region { intro, loop }
 
-final class _StemBuf {
-  _StemBuf(this.spec, int introN, int loopN, this.sr)
+/// One stem's float buffers between [CueRenderer.renderStem] and
+/// [CueRenderer.finish] (transferable between isolates).
+final class StemAudio {
+  StemAudio._(this.spec, int introN, int loopN, this.sr)
     : introL = Float64List(introN),
       introR = spec.stereo ? Float64List(introN) : Float64List(0),
       loopL = Float64List(loopN),
@@ -522,7 +517,7 @@ final class _StemBuf {
     }
   }
 
-  void applyGain(_Region r, Float64List gain) {
+  void _applyGain(_Region r, Float64List gain) {
     final bufs = r == _Region.loop ? [loopL, loopR] : [introL, introR];
     for (final b in bufs) {
       if (b.isEmpty) continue;
@@ -573,7 +568,7 @@ final class _Lofi {
 
   Float64List? _wowLoop, _wowIntro;
 
-  void apply(_StemBuf s, int primeN) {
+  void apply(StemAudio s, int primeN) {
     final lofi = sound.lofi.clamp(0.0, 1.0);
     final lpHz = 16000 * math.pow(0.24, lofi).toDouble(); // 16 kHz → ~3.8 kHz
     final hpHz = 40 + 130 * lofi;
@@ -595,7 +590,7 @@ final class _Lofi {
     }
 
     for (final b in [s.loopL, s.loopR]) {
-      if (b.isNotEmpty) _StemBuf._periodic(b, primeN, tone);
+      if (b.isNotEmpty) StemAudio._periodic(b, primeN, tone);
     }
     tone(s.introL);
     if (s.stereo) tone(s.introR);
@@ -651,7 +646,7 @@ final class _Lofi {
   }
 
   /// Surface hiss + crackle into the bed stem (loop: periodic).
-  void addSurface(_StemBuf bed) {
+  void addSurface(StemAudio bed) {
     final rng = SynthRandom(seed ^ 0xC4AC);
     final level = 0.004 + 0.02 * sound.crackle;
     void run(Float64List x, bool circular) {
@@ -797,6 +792,7 @@ List<Uint8List> renderParts(
   double loudnessDb = -16,
   int seed = 1,
   double maxSeconds = 4,
+  List<int>? measure,
 }) {
   final sr = sound.sampleRate;
   final n = (maxSeconds * sr).round();
@@ -831,9 +827,10 @@ List<Uint8List> renderParts(
     if (lp < sr * 0.42) Biquad(BiquadType.lowPass, frequency: lp, sampleRate: sr, q: 0.6).processBuffer(x);
     bufs.add(x);
   }
-  // Shared level.
+  // Shared level, measured on the parts that sound together.
   final sum = Float64List(n);
-  for (final b in bufs) {
+  for (final k in measure ?? [for (var i = 0; i < bufs.length; i++) i]) {
+    final b = bufs[k];
     for (var i = 0; i < n; i++) {
       sum[i] += b[i];
     }

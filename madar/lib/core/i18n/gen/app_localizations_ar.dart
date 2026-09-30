@@ -18294,6 +18294,97 @@ class L10nAr extends L10n {
   String get cmodExportHidden => 'مخفي';
 
   @override
+  String get lifeHubToolsTitle => 'أدوات';
+
+  @override
+  String get lifeHubPeople => 'الأحبّة';
+
+  @override
+  String get lifeHubToolBoardsHint => 'لوحات المهام وأعمدتها';
+
+  @override
+  String get lifeHubToolProjectsHint => 'المشاريع وقوائمها وعدّها التنازلي';
+
+  @override
+  String get lifeHubToolPeopleHint => 'كل من تحبّ أن تبقى قريبًا منه';
+
+  @override
+  String get lifeHubToolRemindersHint => 'الملخّص اليومي وأعياد الميلاد';
+
+  @override
+  String get lifeHubToolTripsHint => 'رحلاتك وعدّها التنازلي';
+
+  @override
+  String get lifeHubToolDocumentsHint => 'الجوازات والتأشيرات وتواريخ انتهائها';
+
+  @override
+  String get lifeHubToolGoalsHint => 'أهداف التعلّم وتقدّمك فيها';
+
+  @override
+  String get lifeHubToolPlanHint => 'تمارين الأسبوع حسب الأيام';
+
+  @override
+  String get lifeHubToolAvoidHint => 'ما اخترت أن تبتعد عنه';
+
+  @override
+  String get lifeHubMoonOpenPerson => 'افتح صفحته';
+
+  @override
+  String get lifeHubMoonOpenBoard => 'افتح اللوحة';
+
+  @override
+  String get lifeHubMoonOpenTrip => 'افتح الرحلة';
+
+  @override
+  String get lifeHubMoonOpenModule => 'افتح المتتبّع';
+
+  @override
+  String get lifeHubSettingsSection => 'الحياة';
+
+  @override
+  String get lifeHubSettingsSectionHint => 'العائلة والجسد والسفر ومتتبّعاتك';
+
+  @override
+  String lifeHubSettingsFamilyOn(String time) {
+    return 'ملخّص يومي الساعة $time';
+  }
+
+  @override
+  String get lifeHubSettingsFamilyBirthdays => 'أعياد الميلاد فقط';
+
+  @override
+  String get lifeHubSettingsFamilyOff => 'متوقّفة';
+
+  @override
+  String lifeHubSettingsWaterValue(String ml) {
+    return '$ml مل يوميًا';
+  }
+
+  @override
+  String get lifeHubSettingsFastingHint => 'الخطة والتنبيهات';
+
+  @override
+  String get lifeHubSettingsTemplatesHint => 'قوائم جاهزة لكل رحلة';
+
+  @override
+  String lifeHubSettingsModulesCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n متتبّع',
+      many: '$n متتبّعًا',
+      few: '$n متتبّعات',
+      two: 'متتبّعان',
+      one: 'متتبّع واحد',
+      zero: 'لا متتبّعات بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get lifeHubPrayerDestination => 'وجهتك';
+
+  @override
   String get cinemaTitle => 'سينما مدار';
 
   @override

@@ -114,7 +114,7 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
                                       paper: _ticketPaper,
                                       admit: l10n.cinemaStageAdmitOne,
                                       scoreLabel: l10n.cinemaStageScore,
-                                      score: fmt.formatInt(shown),
+                                      score: fmt.formatInt(shown, grouping: false),
                                       best: best == null
                                           ? null
                                           : l10n.cinemaBestLine(fmt.formatInt(math.max(best, record ? score : best))),
@@ -282,42 +282,32 @@ class _Ticket extends StatelessWidget {
     final muted = ink.withValues(alpha: 0.7);
     return CustomPaint(
       painter: _TicketPainter(s, paper),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(26, 12, 26, 14),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  admit,
-                  style: s.body(12, color: muted, weight: FontWeight.w700),
-                ),
-                const SizedBox(height: 2),
-                Text(scoreLabel, style: s.body(14, color: muted)),
-                Text(score, style: hudTextStyle(s.skin, 46, ink, glow: s.neon)),
-                if (best != null) Text(best!, style: s.body(14, color: ink)),
-                if (time != null) Text(time!, style: s.body(12.5, color: muted)),
-              ],
-            ),
-          ),
-          if (stamp != null && stampT > 0)
-            PositionedDirectional(
-              top: -16,
-              end: -30,
-              child: Transform.rotate(
-                angle: -0.22,
-                child: Transform.scale(
-                  scale: 2.2 - 1.2 * Curves.easeIn.transform(stampT),
-                  child: Opacity(
-                    opacity: stampT,
-                    child: _Stamp(scene: s, text: stamp!),
-                  ),
-                ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(26, 12, 26, 14),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(admit, style: s.body(12, color: muted, weight: FontWeight.w700)),
+            const SizedBox(height: 2),
+            Text(scoreLabel, style: s.body(14, color: muted)),
+            Text(score, style: hudTextStyle(s.skin, 46, ink, glow: s.neon)),
+            if (stamp != null)
+              SizedBox(
+                height: 32,
+                child: stampT <= 0
+                    ? null
+                    : Transform.rotate(
+                        angle: -0.12,
+                        child: Transform.scale(
+                          scale: 2.2 - 1.2 * Curves.easeIn.transform(stampT),
+                          child: Opacity(opacity: stampT, child: _Stamp(scene: s, text: stamp!)),
+                        ),
+                      ),
               ),
-            ),
-        ],
+            if (best != null) Text(best!, style: s.body(14, color: ink)),
+            if (time != null) Text(time!, style: s.body(12.5, color: muted)),
+          ],
+        ),
       ),
     );
   }

@@ -403,7 +403,9 @@ final class ProceduralMusicDirector implements MusicDirector {
         final c = e.value;
         final n = e.key.name;
         if (c.major != null) loaded.major[e.key] = await mixer.load('stinger-$n-maj', c.major!);
-        if (c.minor != null) loaded.minor[e.key] = await mixer.load('stinger-$n-min', c.minor!);
+        if (c.minor != null) {
+          loaded.minor[e.key] = identical(c.minor, c.major) ? loaded.major[e.key] : await mixer.load('stinger-$n-min', c.minor!);
+        }
         if (c.drums != null) loaded.drums[e.key] = await mixer.load('stinger-$n-drums', c.drums!);
         if (_disposed) break;
       }
@@ -603,10 +605,8 @@ final class _LoadedStingers {
   final Map<Stinger, int?> major = {}, minor = {}, drums = {};
 
   void unload(CinemaMixer mixer) {
-    for (final m in [major, minor, drums]) {
-      for (final id in m.values) {
-        if (id != null) mixer.unload(id);
-      }
+    for (final id in {...major.values, ...minor.values, ...drums.values}) {
+      if (id != null) mixer.unload(id);
     }
   }
 }

@@ -17743,6 +17743,97 @@ class L10nEn extends L10n {
   String get cmodExportHidden => 'hidden';
 
   @override
+  String get lifeHubToolsTitle => 'Tools';
+
+  @override
+  String get lifeHubPeople => 'People';
+
+  @override
+  String get lifeHubToolBoardsHint => 'Your kanban boards and their columns';
+
+  @override
+  String get lifeHubToolProjectsHint =>
+      'Projects, their checklists and countdowns';
+
+  @override
+  String get lifeHubToolPeopleHint => 'Everyone you want to stay close to';
+
+  @override
+  String get lifeHubToolRemindersHint => 'The daily digest and birthdays';
+
+  @override
+  String get lifeHubToolTripsHint => 'Your trips and their countdowns';
+
+  @override
+  String get lifeHubToolDocumentsHint =>
+      'Passports, visas and when they expire';
+
+  @override
+  String get lifeHubToolGoalsHint => 'Your learning goals and progress';
+
+  @override
+  String get lifeHubToolPlanHint => 'The week\'s training by weekday';
+
+  @override
+  String get lifeHubToolAvoidHint => 'What you chose to stay away from';
+
+  @override
+  String get lifeHubMoonOpenPerson => 'Open their page';
+
+  @override
+  String get lifeHubMoonOpenBoard => 'Open board';
+
+  @override
+  String get lifeHubMoonOpenTrip => 'Open trip';
+
+  @override
+  String get lifeHubMoonOpenModule => 'Open tracker';
+
+  @override
+  String get lifeHubSettingsSection => 'Life';
+
+  @override
+  String get lifeHubSettingsSectionHint =>
+      'Family, body, travel and your trackers';
+
+  @override
+  String lifeHubSettingsFamilyOn(String time) {
+    return 'Daily digest at $time';
+  }
+
+  @override
+  String get lifeHubSettingsFamilyBirthdays => 'Birthdays only';
+
+  @override
+  String get lifeHubSettingsFamilyOff => 'Off';
+
+  @override
+  String lifeHubSettingsWaterValue(String ml) {
+    return '$ml ml a day';
+  }
+
+  @override
+  String get lifeHubSettingsFastingHint => 'Plan and notifications';
+
+  @override
+  String get lifeHubSettingsTemplatesHint => 'Ready lists for every trip';
+
+  @override
+  String lifeHubSettingsModulesCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n trackers',
+      one: '$n tracker',
+      zero: 'None yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get lifeHubPrayerDestination => 'your destination';
+
+  @override
   String get cinemaTitle => 'Madar Cinema';
 
   @override

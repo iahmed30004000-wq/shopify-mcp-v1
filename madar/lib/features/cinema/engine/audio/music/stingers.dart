@@ -20,7 +20,7 @@ final class StingerClips {
   /// fixed-key stingers).
   final bool tonal;
 
-  int get bytes => (major?.length ?? 0) + (minor?.length ?? 0) + (drums?.length ?? 0);
+  int get bytes => (major?.length ?? 0) + (identical(minor, major) ? 0 : (minor?.length ?? 0)) + (drums?.length ?? 0);
 }
 
 /// Every stinger of one era, keyed by [Stinger].
@@ -58,11 +58,15 @@ StingerKit renderStingerKit(ScoreStyle style, {int seed = 1}) {
   final sound = cueSoundFor(style, roomSize: 0.5, damping: 0.5, wet: 0.22);
   final clips = <Stinger, StingerClips>{};
   for (final st in Stinger.values) {
-    List<NoteEvent> tonal(bool minor) => _tonal(st, band, key, minor);
     final drums = _drums(st, band, key);
-    final hasTonal = tonal(false).isNotEmpty;
-    if (!hasTonal) {
-      final parts = renderParts([drums], style: style.style, bpm: bpm, sound: sound, loudnessDb: -17, seed: seed + st.index);
+    final major = _tonal(st, band, key, false);
+    final seconds = switch (st) {
+      Stinger.bossIntro => 4.5,
+      Stinger.pickup || Stinger.hit || Stinger.rimshot => 1.6,
+      _ => 3.0,
+    };
+    if (major.isEmpty) {
+      final parts = renderParts([drums], style: style.style, bpm: bpm, sound: sound, loudnessDb: -17, seed: seed + st.index, maxSeconds: seconds);
       clips[st] = StingerClips(drums: parts.first, tonal: false);
       continue;
     }
@@ -71,9 +75,19 @@ StingerKit renderStingerKit(ScoreStyle style, {int seed = 1}) {
       Stinger.hit => -16.0,
       _ => -15.0,
     };
-    final maj = renderParts([tonal(false), drums], style: style.style, bpm: bpm, sound: sound, loudnessDb: loud, seed: seed + st.index);
-    final min = renderParts([tonal(true), drums], style: style.style, bpm: bpm, sound: sound, loudnessDb: loud, seed: seed + st.index);
-    clips[st] = StingerClips(major: maj[0], minor: min[0], drums: drums.isEmpty ? null : maj[1]);
+    // Only chords with a third need a minor twin.
+    final twin = st == Stinger.pickup || st == Stinger.sceneStart || st == Stinger.bossDefeat || st == Stinger.victory;
+    final parts = renderParts(
+      [major, if (twin) _tonal(st, band, key, true), if (drums.isNotEmpty) drums],
+      style: style.style,
+      bpm: bpm,
+      sound: sound,
+      loudnessDb: loud,
+      seed: seed + st.index,
+      maxSeconds: seconds,
+      measure: [0, if (drums.isNotEmpty) (twin ? 2 : 1)],
+    );
+    clips[st] = StingerClips(major: parts[0], minor: twin ? parts[1] : parts[0], drums: drums.isEmpty ? null : parts.last);
   }
   return StingerKit(key % 12, clips);
 }

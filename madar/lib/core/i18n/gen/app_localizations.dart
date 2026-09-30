@@ -28071,6 +28071,156 @@ abstract class L10n {
   /// **'مخفي'**
   String get cmodExportHidden;
 
+  /// Work / Family / Travel / Growth / Body planet pages: title above the row of tool tiles
+  ///
+  /// In ar, this message translates to:
+  /// **'أدوات'**
+  String get lifeHubToolsTitle;
+
+  /// Family planet page: tool tile that opens the list of people
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحبّة'**
+  String get lifeHubPeople;
+
+  /// Work planet page: screen-reader hint of the Boards tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحات المهام وأعمدتها'**
+  String get lifeHubToolBoardsHint;
+
+  /// Work / Growth planet pages: screen-reader hint of the Projects tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع وقوائمها وعدّها التنازلي'**
+  String get lifeHubToolProjectsHint;
+
+  /// Family planet page: screen-reader hint of the People tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'كل من تحبّ أن تبقى قريبًا منه'**
+  String get lifeHubToolPeopleHint;
+
+  /// Family planet page: screen-reader hint of the reach-out reminders tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'الملخّص اليومي وأعياد الميلاد'**
+  String get lifeHubToolRemindersHint;
+
+  /// Travel planet page: screen-reader hint of the Trips tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلاتك وعدّها التنازلي'**
+  String get lifeHubToolTripsHint;
+
+  /// Travel planet page: screen-reader hint of the Documents tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'الجوازات والتأشيرات وتواريخ انتهائها'**
+  String get lifeHubToolDocumentsHint;
+
+  /// Growth planet page: screen-reader hint of the All goals tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف التعلّم وتقدّمك فيها'**
+  String get lifeHubToolGoalsHint;
+
+  /// Body planet page: screen-reader hint of the training plan tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'تمارين الأسبوع حسب الأيام'**
+  String get lifeHubToolPlanHint;
+
+  /// Body planet page: screen-reader hint of the Avoid list tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'ما اخترت أن تبتعد عنه'**
+  String get lifeHubToolAvoidHint;
+
+  /// Moon sheet of a person (Family world): opens the person's own page
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح صفحته'**
+  String get lifeHubMoonOpenPerson;
+
+  /// Moon sheet of a Work board: opens the board
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح اللوحة'**
+  String get lifeHubMoonOpenBoard;
+
+  /// Moon sheet of a trip: opens the trip
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح الرحلة'**
+  String get lifeHubMoonOpenTrip;
+
+  /// Moon sheet of a custom tracker or list: opens it
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح المتتبّع'**
+  String get lifeHubMoonOpenModule;
+
+  /// Settings: title of the Life section (family reminders, water, fasting, packing lists, trackers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحياة'**
+  String get lifeHubSettingsSection;
+
+  /// Settings: subtitle of the Life section
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة والجسد والسفر ومتتبّعاتك'**
+  String get lifeHubSettingsSectionHint;
+
+  /// Settings › Life: the reach-out reminders tile when the daily digest is on
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص يومي الساعة {time}'**
+  String lifeHubSettingsFamilyOn(String time);
+
+  /// Settings › Life: the reach-out reminders tile when the digest is off but birthday reminders are on
+  ///
+  /// In ar, this message translates to:
+  /// **'أعياد الميلاد فقط'**
+  String get lifeHubSettingsFamilyBirthdays;
+
+  /// Settings › Life: the reach-out reminders tile when every family reminder is off
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّفة'**
+  String get lifeHubSettingsFamilyOff;
+
+  /// Settings › Life: the daily water target (pre-formatted number of millilitres)
+  ///
+  /// In ar, this message translates to:
+  /// **'{ml} مل يوميًا'**
+  String lifeHubSettingsWaterValue(String ml);
+
+  /// Settings › Life: subtitle of the intermittent fasting tile (opens Body › Fasting)
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة والتنبيهات'**
+  String get lifeHubSettingsFastingHint;
+
+  /// Settings › Life: subtitle of the packing lists tile; also the Travel page's packing lists tool hint
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم جاهزة لكل رحلة'**
+  String get lifeHubSettingsTemplatesHint;
+
+  /// Settings › Life: how many trackers and lists the user made
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا متتبّعات بعد} =1{متتبّع واحد} =2{متتبّعان} few{{n} متتبّعات} many{{n} متتبّعًا} other{{n} متتبّع}}'**
+  String lifeHubSettingsModulesCount(int count, String n);
+
+  /// Travel: the place named in 'Your prayer times now follow {place}' when a trip's destination is known only by its coordinates
+  ///
+  /// In ar, this message translates to:
+  /// **'وجهتك'**
+  String get lifeHubPrayerDestination;
+
   /// Name of the games hub
   ///
   /// In ar, this message translates to:

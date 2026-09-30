@@ -22,9 +22,18 @@ abstract interface class CueSource {
 final class IsolateCueSource implements CueSource {
   const IsolateCueSource();
 
+  /// Each stem renders on its own isolate (they are independent until the
+  /// final levelling), so a cue is ready about as fast as its busiest stem.
   @override
-  Future<RenderedCue> renderCue(ScoreStyle style, MusicMood mood, int seed) =>
-      Isolate.run(() => CueRenderer().render(composeCue(style, mood, seed), seed: seed), debugName: 'cinema-cue-${mood.name}');
+  Future<RenderedCue> renderCue(ScoreStyle style, MusicMood mood, int seed) => Isolate.run(() async {
+    final watch = Stopwatch()..start();
+    final score = composeCue(style, mood, seed);
+    final stems = await Future.wait([
+      for (var i = 0; i < score.stems.length; i++)
+        Isolate.run(() => CueRenderer().renderStem(composeCue(style, mood, seed), i, seed: seed), debugName: 'cinema-stem-$i'),
+    ]);
+    return CueRenderer().finish(score, stems, seed: seed, renderMs: watch.elapsedMilliseconds);
+  }, debugName: 'cinema-cue-${mood.name}');
 
   @override
   Future<StingerKit> renderStingers(ScoreStyle style, int seed) =>
