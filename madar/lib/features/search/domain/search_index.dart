@@ -838,10 +838,13 @@ class SearchIndex {
       typos = keptTypos;
     }
 
-    // 2. Counts for the filter chips (before the filters), then filters.
+    // 2. Counts for the filter chips (before the filters), then filters,
+    // then the leaders (a bounded heap: the rest is never sorted).
     final counts = <String, Map<String, int>>{};
     final nowMs = (query.now ?? _clock()).millisecondsSinceEpoch;
-    final ranked = <_Ranked>[];
+    final planetFactors = <String, double>{};
+    final top = _TopK(math.max(query.limit * 3, 240));
+    var total = 0;
     for (var i = 0; i < ids.length; i++) {
       final id = ids[i];
       final e = _entries[id]!;
@@ -850,16 +853,17 @@ class SearchIndex {
       byGroup[d.groupKey] = (byGroup[d.groupKey] ?? 0) + 1;
       if (query.planets.isNotEmpty && !query.planets.contains(d.planetKey)) continue;
       if (query.groups.isNotEmpty && !query.groups.contains(d.groupKey)) continue;
+      total++;
       final score =
           sums[i] *
           SearchScoring.recencyFactor(e.dateMs, nowMs) *
-          SearchScoring.planetFactor(query.planetWeights[d.planetKey] ?? 1) *
+          (planetFactors[d.planetKey] ??= SearchScoring.planetFactor(query.planetWeights[d.planetKey] ?? 1)) *
           (query.sourceWeights[d.sourceId] ?? 1);
-      ranked.add(_Ranked(id, score, typos[i], e.dateMs ?? 0));
+      top.offer(id, score, typos[i], e.dateMs ?? 0);
     }
 
     // 3. Title and phrase boosts for the leaders, then the final order.
-    final head = _top(ranked, math.max(query.limit * 3, 240));
+    final head = top.items;
     for (final r in head) {
       r.score *= _boost(_entries[r.id]!.doc, parsed);
     }
@@ -869,52 +873,11 @@ class SearchIndex {
     ];
     return SearchIndexResult(
       hits: hits,
-      total: ranked.length,
+      total: total,
       counts: counts,
       partial: partial,
       elapsedMicros: watch.elapsedMicroseconds,
     );
-  }
-
-  /// The best [k] of [all] (in no particular order), without sorting them
-  /// all: a bounded heap whose root is the weakest kept.
-  static List<_Ranked> _top(List<_Ranked> all, int k) {
-    if (all.length <= k) return List.of(all);
-    final heap = <_Ranked>[];
-    // a before b in the heap: a ranks after b.
-    bool weaker(_Ranked a, _Ranked b) => _Ranked.compare(a, b) > 0;
-    void siftDown(int i) {
-      while (true) {
-        final l = 2 * i + 1, r = l + 1;
-        var m = i;
-        if (l < heap.length && weaker(heap[l], heap[m])) m = l;
-        if (r < heap.length && weaker(heap[r], heap[m])) m = r;
-        if (m == i) return;
-        final t = heap[i];
-        heap[i] = heap[m];
-        heap[m] = t;
-        i = m;
-      }
-    }
-
-    for (final x in all) {
-      if (heap.length < k) {
-        heap.add(x);
-        var i = heap.length - 1;
-        while (i > 0) {
-          final p = (i - 1) >> 1;
-          if (!weaker(heap[i], heap[p])) break;
-          final t = heap[i];
-          heap[i] = heap[p];
-          heap[p] = t;
-          i = p;
-        }
-      } else if (weaker(heap[0], x)) {
-        heap[0] = x;
-        siftDown(0);
-      }
-    }
-    return heap;
   }
 
   double _boost(SearchDoc doc, _ParsedQuery q) {
@@ -1079,5 +1042,55 @@ class _Ranked {
     final c = b.score.compareTo(a.score);
     if (c != 0) return c;
     return b.dateMs.compareTo(a.dateMs);
+  }
+}
+
+/// The best [k] records offered (in no particular order), kept in a heap
+/// whose root is the weakest kept: a record that would not make it costs a
+/// comparison and no allocation.
+class _TopK {
+  _TopK(this.k);
+
+  final int k;
+  final List<_Ranked> items = [];
+
+  /// Whether (typo, score, date) ranks after [r].
+  static bool _after(bool typo, double score, int dateMs, _Ranked r) {
+    if (typo != r.typo) return typo;
+    if (score != r.score) return score < r.score;
+    return dateMs < r.dateMs;
+  }
+
+  static bool _weaker(_Ranked a, _Ranked b) => _Ranked.compare(a, b) > 0;
+
+  void offer(int id, double score, bool typo, int dateMs) {
+    final heap = items;
+    if (heap.length < k) {
+      heap.add(_Ranked(id, score, typo, dateMs));
+      var i = heap.length - 1;
+      while (i > 0) {
+        final p = (i - 1) >> 1;
+        if (!_weaker(heap[i], heap[p])) break;
+        final t = heap[i];
+        heap[i] = heap[p];
+        heap[p] = t;
+        i = p;
+      }
+      return;
+    }
+    if (k == 0 || _after(typo, score, dateMs, heap[0]) || !_after(heap[0].typo, heap[0].score, heap[0].dateMs, _Ranked(id, score, typo, dateMs))) return;
+    heap[0] = _Ranked(id, score, typo, dateMs);
+    var i = 0;
+    while (true) {
+      final l = 2 * i + 1, r = l + 1;
+      var m = i;
+      if (l < heap.length && _weaker(heap[l], heap[m])) m = l;
+      if (r < heap.length && _weaker(heap[r], heap[m])) m = r;
+      if (m == i) return;
+      final t = heap[i];
+      heap[i] = heap[m];
+      heap[m] = t;
+      i = m;
+    }
   }
 }

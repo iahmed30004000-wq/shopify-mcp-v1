@@ -311,16 +311,17 @@ class SearchEngine {
   }
 
   /// Sends records the index dropped at its cap again once removals made
-  /// room for them ([always]: ask even if nothing was removed).
-  Future<void> _readmit({bool always = false}) async {
-    if (!always && !(_mayHaveDropped && _roomMade)) return;
+  /// room for them ([always]: ask even if nothing was removed); whether it
+  /// sent any.
+  Future<bool> _readmit({bool always = false}) async {
+    if (!always && !(_mayHaveDropped && _roomMade)) return false;
     _roomMade = false;
     final worker = _worker;
-    if (worker == null || _disposed) return;
+    if (worker == null || _disposed) return false;
     try {
       final stats = await worker.stats().timeout(workerTimeout);
       _mayHaveDropped = stats.evicted > 0;
-      if (stats.readmit.isEmpty) return;
+      if (stats.readmit.isEmpty) return false;
       final sources = <String>{};
       for (final key in stats.readmit) {
         final sep = key.indexOf('\u0001');
@@ -333,8 +334,10 @@ class SearchEngine {
         final s = _loaded[id];
         if (s != null) await _reload(s);
       }
+      return true;
     } on Object catch (e) {
       debugPrint('Search: could not check dropped records: $e');
+      return false;
     }
   }
 
@@ -383,8 +386,14 @@ class SearchEngine {
         final s = _loaded[id];
         if (s != null) await _reload(s);
       }
-      await _readmit();
       _bump();
+      // Dropped records that fit again follow in a later step, so the
+      // results show the change itself first.
+      if (_mayHaveDropped && _roomMade) {
+        _enqueue(() async {
+          if (await _readmit()) _bump();
+        });
+      }
     });
   }
 
