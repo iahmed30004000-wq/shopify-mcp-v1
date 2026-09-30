@@ -138,6 +138,8 @@ void main() {
       expect((await tester.runAsync(() => SpecialsRepository(env.db).prefs()))!.roundSize, 3);
       await tester.tap(find.text('Player 2').last);
       await tester.pumpAndSettle();
+      print('DBG routes: ${find.byType(KnowMeScreen).evaluate().length} bank=${find.byType(QuestionBankScreen).evaluate().length}');
+      print('DBG buttons: ${find.byType(MadarButton).evaluate().map((e) => e.widget.key).toList()}');
       await _tapKey(tester, 'knowme-start');
       expect(find.byType(KnowMeRoundScreen), findsOneWidget);
       final round = tester.widget<KnowMeRoundScreen>(find.byType(KnowMeRoundScreen)).round;
