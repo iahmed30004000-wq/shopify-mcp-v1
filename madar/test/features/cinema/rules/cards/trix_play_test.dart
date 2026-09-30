@@ -345,7 +345,7 @@ int refereeMatch(TrixOptions o, int seed) {
           expect(withCards, isEmpty);
           expect(post.doubled, isEmpty);
         } else {
-          expect([for (final x in withCards) ...x.cards].toSet(), {for (final a in answers.values) ...a});
+          expect({for (final x in withCards) ...x.cards}, {for (final a in answers.values) ...a});
         }
       } else {
         expect([for (final x in withCards) ...x.cards], m.cards);
