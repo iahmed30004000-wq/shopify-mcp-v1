@@ -265,6 +265,28 @@ void main() {
     expect(parse, isNot(matches(RegExp(r'Log\.\w\([^)]*,\s*e\)'))), reason: 'the exception (and its message) is not logged');
   });
 
+  test('size classes: the preview and Android switch layouts at the same heights, and nothing is squeezed', () {
+    final renderer = _read('$_kotlinDir/MadarWidgetRenderer.kt');
+    int constant(String name) => int.parse(RegExp('const val $name = (\\d+)').firstMatch(renderer)!.group(1)!);
+    final wide = constant('LIST_WIDE_DP');
+    final tall = constant('LIST_TALL_DP');
+    // 3 rows need about 135 dp in Arabic (the header, the next line, 3 × 22 dp,
+    // the "+N more" line, the padding); 6 rows about 200 dp.
+    expect(wide, greaterThanOrEqualTo(135));
+    expect(tall, greaterThanOrEqualTo(200));
+    expect(renderer, contains('SizeF(200f, LIST_WIDE_DP.toFloat()), Variant.WIDE'));
+    expect(renderer, contains('SizeF(200f, LIST_TALL_DP.toFloat()), Variant.TALL'));
+    final preview = _read('lib/features/widgets/presentation/widget_preview.dart');
+    expect(preview, contains('size.height < $wide ? 2 : (size.height < $tall ? 3 : 6)'));
+    // Every layout needs about 100 dp of height (the budget's title, amount,
+    // plan and bar; the prayer's astrolabe and three lines).
+    for (final kind in MadarWidgetKind.values) {
+      final info = _read('$_res/xml/widget_info_${kind.wire}.xml');
+      final minHeight = int.parse(RegExp(r'android:minResizeHeight="(\d+)dp"').firstMatch(info)!.group(1)!);
+      expect(minHeight, greaterThanOrEqualTo(100), reason: kind.wire);
+    }
+  });
+
   test('MainActivity registers the widgets\' plugin', () {
     final activity = _read('$_main/kotlin/app/madar/orbit/MainActivity.kt');
     expect(activity, contains('import app.madar.orbit.widgets.MadarWidgetsChannel'));

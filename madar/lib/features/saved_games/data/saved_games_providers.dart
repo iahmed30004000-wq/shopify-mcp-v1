@@ -36,6 +36,16 @@ final savedGamesIdProvider = Provider<String Function()>(
       () => const Uuid().v4(),
 );
 
+/// One-shot import of the hall's earlier list (`cinema.savedGames`) into
+/// Saved Games; the old row is removed, so later reads return 0. Read it
+/// once (e.g. from the app shell) after the hall switched to
+/// `SavedGamesShelf`.
+final savedGamesLegacyImportProvider = FutureProvider<int>((ref) async {
+  final store = ref.watch(savedWebGamesStoreProvider);
+  if (store is! KvSavedWebGamesStore) return 0;
+  return store.migrateLegacyList(newId: ref.read(savedGamesIdProvider), clock: ref.read(savedGamesClockProvider));
+});
+
 abstract interface class GameWebDataCleaner {
   Future<bool> clearAll();
 }

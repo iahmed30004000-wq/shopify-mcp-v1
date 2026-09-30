@@ -12511,9 +12511,9 @@
       }
     }
   },
-  "goalsTitle": "Savings & commitments",
+  "goalsTitle": "Savings & dues",
   "@goalsTitle": {
-    "description": "Goals screen title (jars, debts, recurring obligations)"
+    "description": "Goals screen title (jars, debts, recurring obligations); short enough for the app bar at a large text size, and in the words of the Money page's \"Dues & savings\" section"
   },
   "goalsTabJars": "Jars",
   "goalsTabDebts": "Debts",
@@ -20699,7 +20699,6 @@
       }
     }
   },
-  "savedGamesPlay": "Play",
   "savedGamesPlayGame": "Play {title}",
   "@savedGamesPlayGame": {
     "placeholders": {
@@ -20754,7 +20753,6 @@
   "savedGamesPrivacyNote": "Each game runs from its original link; its code is never copied. Madar only goes online when you open a game or tap “Fetch”.",
   "savedGamesOpenExternal": "Open in browser",
   "savedGamesEdit": "Edit",
-  "savedGamesMore": "More options",
   "savedGamesClearData": "Clear site data",
   "savedGamesClearDataTitle": "Clear “{title}” data?",
   "@savedGamesClearDataTitle": {
@@ -20764,7 +20762,7 @@
       }
     }
   },
-  "savedGamesClearDataBody": "Removes what the game stored on this device: progress, settings and cookies visible to the page. This can't be undone.",
+  "savedGamesClearDataBody": "Removes what the game's site stored on this device – progress, settings and cookies the page can see – for every game from that site. Content it embeds from other sites is removed by “Clear data of all games”. This can't be undone.",
   "savedGamesClearDataScheduled": "Its data will be cleared the next time it opens",
   "savedGamesClearDataPending": "Data will be cleared on open",
   "savedGamesClearAll": "Clear data of all games",
@@ -20844,7 +20842,9 @@
   },
   "savedGamesAddCardHint": "Paste a web game link",
   "savedGamesShelfEmpty": "Save a web game by its link and it will appear here.",
-  "savedGamesDeleteGame": "Delete",
   "savedGamesOpenAll": "Open saved games",
+  "@savedGamesOpenAll": {
+    "description": "Optional label for an entry point to the Saved Games screen (e.g. a hall tile)"
+  },
   "savedGamesClearDataDone": "Game data cleared"
 }

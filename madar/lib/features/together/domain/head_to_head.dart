@@ -195,16 +195,19 @@ final class TogetherLedger {
   bool get isEmpty => overall.matches == 0;
 
   /// The playing streak as of [now]: alive when the last match was today or
-  /// yesterday, else 0.
+  /// yesterday, else 0. A last day *after* today (the phone's zone moved
+  /// west – Amman to Europe – or its clock went back) counts as today.
   int currentDayStreak(DateTime now) {
     final last = lastDay;
     if (last == null) return 0;
-    final today = TogetherDays.indexOf(now);
-    return last == today || last == today - 1 ? dayStreak : 0;
+    return last >= TogetherDays.indexOf(now) - 1 ? dayStreak : 0;
   }
 
-  /// Whether the couple already played today.
-  bool playedToday(DateTime now) => lastDay == TogetherDays.indexOf(now);
+  /// Whether the couple already played today (see [currentDayStreak]).
+  bool playedToday(DateTime now) {
+    final last = lastDay;
+    return last != null && last >= TogetherDays.indexOf(now);
+  }
 
   GameTally tallyOf(String gameId) => games[gameId] ?? GameTally.empty;
 

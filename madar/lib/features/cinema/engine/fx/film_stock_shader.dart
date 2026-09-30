@@ -77,8 +77,13 @@ class FilmMix {
   /// Exposure flicker (0 under reduced motion).
   double flicker = 1;
 
-  /// Motion effects: weave, shake, line boil (reduced under reduced motion).
+  /// Motion effects: weave, shake, blinds drift (a quarter under reduced
+  /// motion).
   double motion = 1;
+
+  /// The whole-frame 12 fps line boil (0 under reduced motion: lines keep
+  /// still).
+  double boil = 1;
 
   /// film_stock.frag quality level (FilmQuality.shaderLevel).
   double quality = 2;
@@ -158,7 +163,7 @@ abstract final class FilmStockUniforms {
     _f(look.hatchSpacing);
     // 10 uInkFx
     _f(look.screenAngle);
-    _f(look.lineBoil * st * mix.motion);
+    _f(look.lineBoil * st * mix.boil);
     _f(look.softFocus);
     _f(look.toe);
     // 11 uLight

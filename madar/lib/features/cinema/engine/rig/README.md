@@ -4,7 +4,10 @@ Owner: the rig agent. Games import `engine/cinema_engine.dart` (contracts) and
 `engine/rig/rig_kit.dart` (everything below). Every character implements
 `RigCharacter` and goes into a Flame world with `RigComponent`; every prop
 goes in with `PropComponent`. Model sheets live in
-`screenshots/cinema/rig/*.png` (`flutter test --tags screenshot test/features/cinema/rig`).
+`screenshots/cinema/rig/*.png` (`flutter test --tags screenshot test/features/cinema/rig -j 1`):
+`hero_sheet`, `cast_<name>` (turnaround, two expression rows, two action
+rows), `cast_eras`, `body_types`, `pose_cycles`, `props`, and the in-game
+`stage_<name>` composites (stage, HUD and film grade included).
 
 ## Characters
 
@@ -12,7 +15,7 @@ goes in with `PropComponent`. Model sheets live in
 |---|---|---|---|
 | `createRig(spec)` → `ToonRig` | any biped from a `RigSpec` | the standard kit | bean / ball / egg one-piece bodies, pear / tall with a separate head. Optional `ToonLook` (hair, hat, bow tie, ears, buttons, lashes). |
 | `RigCast.bean()` | Habba (حبّة) | demo | the default `ToonRig` look. |
-| `RigCast.starBird()` → `StarBird` | Nujaym (نُجيم) | Flappy Orbit, 1930s | lives in the air: `jump` = one flap (call it on each tap), `fall` = wings up, `run` = dash, `cheer` = loop-the-loop, `hurt` pops feathers. `pitch` (rad, + nose down) can follow the vertical speed. |
+| `RigCast.starBird()` → `StarBird` | Nujaym (نُجيم) | Flappy Orbit, 1930s | heart face mask, stubby beak, goggles up, polka-dot bandana (tails on a rope of springs: `scarf`, `knotX/knotY`). Lives in the air: `jump` = one flap (call it on each tap), `fall` = wings up, `run` = dash, `cheer` = loop-the-loop, `hurt` pops feathers. `pitch` (rad, + nose down) can follow the vertical speed. |
 | `RigCast.clockworkBoss()` → `ClockworkBoss` | Baron Zunbruk (البارون زُنبُرك) | Metropolis Machine, 1920s | `phase` 0..2 (pristine → dented, steam → plating off, gears, spring). `attack = BossAttack.slam/punch/blast` then `act(RigAction.attack)`. `windUp` 0..1 is the tell. Hit boxes: `fistAnchor(i)`, `mouthAnchor`, `coreAnchor` (character space, updated each drawing). |
 | `RigCast.camelCourier()` → `CamelCourier` | Zajil (زاجل) | Caravan Dash, 1950s | quadruped: `walk` is a camel's pace, `run` a gallop; `cheer` rears up, `attack` bucks. Origin under the middle of the body. |
 | `RigCast.detectiveCat()` → `DetectiveCat` | Inspector Mishmish (المفتش مِشمِش) | Noir Rooftops, 1940s | a `ToonRig`: `walk` = tiptoe sneak, `jump` = rooftop leap, `cheer` tips the fedora. |
@@ -80,7 +83,13 @@ shader is replaced by a flat tone.
 * **Era looks.** Colours come from palette roles through `InkColors`: neon
   (1980s) sinks fills toward the dark and turns the ink into glowing
   tubes; eras with a dark backdrop (noir) get a pale rim light on the lit
-  side so black silhouettes read against the night.
+  side so black silhouettes read against the night. Faces must read in
+  every era: `InkColors.skinLight` keeps skin light under neon, and
+  `Face.line` (default: dark ink under neon) draws brows, lids and mouths
+  in a colour that contrasts with the glowing outline.
+* **Small faces.** A character whose face is small next to the era's
+  line width inks it with a finer pen (`b.lw` scaled for `face.draw`, then
+  restored), so pie eyes don't drown in outline.
 * **Rubber hose.** Limbs are one quadratic of fixed length that bows into
   an arc when its ends come closer (sagitta from the arc length) and thins
   when stretched; the middle is pushed by the hand's velocity for

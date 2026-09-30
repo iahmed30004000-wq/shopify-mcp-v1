@@ -155,6 +155,61 @@ void main() {
     });
   });
 
+  group('import of an earlier list (the hall\'s first cinema.savedGames)', () {
+    test('validates every link, upgrades http, skips duplicates and bad entries', () async {
+      final store = MemorySavedWebGamesStore(SavedGamesState(games: [game('a')]));
+      var n = 0;
+      final added = await store.importEntries(
+        [
+          {
+            'id': 'g1',
+            'title': 'Double Feature',
+            'url': 'https://claude.ai/public/artifacts/abc',
+            'addedAt': '2026-09-20T10:00:00.000Z',
+          },
+          {'title': 'Old', 'url': 'http://old.example.com/play'},
+          {'title': 'Dup', 'url': 'https://a.example.com/'},
+          {'title': 'Bad', 'url': 'javascript:alert(1)'},
+          {'title': 'Also bad', 'url': 'file:///sdcard/game.html'},
+          {'title': 'Again', 'url': 'https://claude.ai/public/artifacts/abc'},
+          {'title': '  ', 'url': 'games.example.net/x'},
+          {'title': 'No link'},
+          'junk',
+        ],
+        newId: () => 'm${n++}',
+        now: DateTime(2026, 9, 30),
+      );
+      expect(added, 3);
+      final s = await store.read();
+      expect(s.games.map((g) => g.url.toString()), [
+        'https://a.example.com/',
+        'https://claude.ai/public/artifacts/abc',
+        'https://old.example.com/play',
+        'https://games.example.net/x',
+      ]);
+      expect(s.games.map((g) => g.id), ['a', 'm0', 'm1', 'm2']);
+      expect(s.games[1].title, 'Double Feature');
+      expect(s.games[1].addedAt, DateTime.utc(2026, 9, 20, 10).toLocal());
+      expect(s.games[3].title, 'games.example.net');
+      expect(s.games[3].addedAt, DateTime(2026, 9, 30));
+      expect(await store.importEntries('nope', newId: () => 'x', now: DateTime(2026)), 0);
+    });
+
+    test('never grows past maxGames', () async {
+      final store = MemorySavedWebGamesStore();
+      var n = 0;
+      final added = await store.importEntries(
+        [
+          for (var i = 0; i < SavedGamesLimits.maxGames + 5; i++) {'title': 'G$i', 'url': 'https://g$i.example.com/'},
+        ],
+        newId: () => 'm${n++}',
+        now: DateTime(2026, 9, 30),
+      );
+      expect(added, SavedGamesLimits.maxGames);
+      expect((await store.read()).games, hasLength(SavedGamesLimits.maxGames));
+    });
+  });
+
   group('KvSavedWebGamesStore (encrypted key/value table)', () {
     late MadarDatabase db;
     setUp(() => db = MadarDatabase(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true)));
@@ -171,6 +226,25 @@ void main() {
       expect(((raw as Map)['games'] as List).length, 2);
       final again = KvSavedWebGamesStore(kv);
       expect((await again.read()).games.map((g) => g.id), ['a', 'b']);
+    });
+
+    test('moves the hall\'s earlier list once, then removes the old row', () async {
+      final kv = KeyValueRepository(db);
+      await kv.setJson(KvSavedWebGamesStore.legacyHallKey, [
+        {
+          'id': 'g1',
+          'title': 'Tiles',
+          'url': 'https://claude.ai/public/artifacts/abc',
+          'addedAt': '2026-09-20T10:00:00.000Z',
+        },
+      ]);
+      final store = KvSavedWebGamesStore(kv);
+      var n = 0;
+      expect(await store.migrateLegacyList(newId: () => 'm${n++}'), 1);
+      expect(await kv.contains(KvSavedWebGamesStore.legacyHallKey), isFalse);
+      expect((await store.read()).games.single.title, 'Tiles');
+      expect(await store.migrateLegacyList(newId: () => 'm${n++}'), 0);
+      expect((await store.read()).games, hasLength(1));
     });
 
     test('a corrupt row reads as empty', () async {

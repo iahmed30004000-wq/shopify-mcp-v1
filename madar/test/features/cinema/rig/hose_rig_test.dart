@@ -298,6 +298,67 @@ void main() {
       paintOnce(bird, ctxFor(Era.rubberHose));
       bird.dispose();
     });
+
+    test('the bandana tails whip but never stretch (a rope of springs)', () {
+      final bird = RigCast.starBird();
+      final seg = bird.spec.height * 0.075;
+      void checkRope() {
+        var px = bird.knotX, py = bird.knotY;
+        for (final link in bird.scarf) {
+          final d = Offset(link.x - px, link.y - py).distance;
+          expect(d, lessThanOrEqualTo(seg + 1e-6));
+          px = link.x;
+          py = link.y;
+        }
+      }
+
+      // Violent input: flaps, a dash at full speed, a tumble.
+      for (var i = 0; i < 6; i++) {
+        bird.act(RigAction.jump, restart: true);
+        run(bird, 0.12);
+        checkRope();
+      }
+      bird
+        ..speed = 900
+        ..act(RigAction.run);
+      run(bird, 0.8);
+      checkRope();
+      bird.act(RigAction.defeated);
+      run(bird, 1.5);
+      checkRope();
+      // Streaming behind: the last link trails the knot.
+      bird
+        ..speed = 400
+        ..act(RigAction.run);
+      run(bird, 1.0);
+      expect(bird.scarf.last.x, lessThan(bird.knotX));
+      bird.dispose();
+    });
+  });
+
+  group('neon readability', () {
+    test('faces stay light where neon sinks the fills', () {
+      final colors = InkColors()..update(EraSkins.of(Era.vhs));
+      double lum(Color c) => c.computeLuminance();
+      expect(colors.neon, isTrue);
+      expect(lum(colors.skinLight), greaterThan(lum(colors.fill(PaletteRole.paper)) + 0.15));
+      final film = InkColors()..update(EraSkins.of(Era.rubberHose));
+      expect(film.skinLight, film.fill(PaletteRole.paper));
+    });
+
+    test('a face draws its lines in dark ink under neon and restores the ink', () {
+      final b = InkBuild(seed: 3);
+      final ctx = ctxFor(Era.vhs);
+      b.begin(ctx, size: 100);
+      final glowing = b.colors.ink;
+      final face = Face()
+        ..r = 30
+        ..expression = RigExpression.angry;
+      face.draw(b);
+      expect(b.colors.ink, glowing, reason: 'the era ink is restored after the face');
+      expect(b.list.opCount, greaterThan(4));
+      b.list.dispose();
+    });
   });
 
   group('props', () {

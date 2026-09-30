@@ -418,7 +418,7 @@ class CamelCourier extends HoseRig {
       ..save()
       ..translate(hx, hy)
       ..rotate(headTilt.value);
-    final r = 12.5 * uu;
+    final r = 14 * uu;
     // Ears flop behind.
     b.layer();
     for (var k = 0; k < 2; k++) {
@@ -484,9 +484,13 @@ class CamelCourier extends HoseRig {
       ..skin = hide
       ..drawMouth = false
       ..salt = 400;
+    // A finer pen for the features so the heavy-lidded eyes stay clear.
+    final lw0 = b.lw;
+    b.lw = lw0 * 0.75;
     face.draw(b);
-    // Fez, tilted back.
-    Hats.fez(b, -0.15 * r, -0.78 * r, 1.25 * r, -0.28, fill: red);
+    b.lw = lw0;
+    // Fez, tilted back off the brow.
+    Hats.fez(b, -0.32 * r, -0.86 * r, 1.12 * r, -0.36, fill: red);
     pen.restore();
     // Tassel on its chain (in world design space).
     b.layer();

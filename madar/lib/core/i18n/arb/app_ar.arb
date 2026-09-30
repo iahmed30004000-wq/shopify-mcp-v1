@@ -12513,7 +12513,7 @@
   },
   "goalsTitle": "المدّخرات والالتزامات",
   "@goalsTitle": {
-    "description": "Goals screen title (jars, debts, recurring obligations)"
+    "description": "Goals screen title (jars, debts, recurring obligations); short enough for the app bar at a large text size, and in the words of the Money page's \"Dues & savings\" section"
   },
   "goalsTabJars": "الحصّالات",
   "goalsTabDebts": "الديون",
@@ -20699,7 +20699,6 @@
       }
     }
   },
-  "savedGamesPlay": "العب",
   "savedGamesPlayGame": "العب {title}",
   "@savedGamesPlayGame": {
     "placeholders": {
@@ -20754,7 +20753,6 @@
   "savedGamesPrivacyNote": "تعمل كل لعبة من رابطها الأصلي ولا يُنسخ كودها. لا يتصل مَدار بالشبكة إلا حين تفتح لعبة أو تضغط «جلب».",
   "savedGamesOpenExternal": "فتح في المتصفح",
   "savedGamesEdit": "تعديل",
-  "savedGamesMore": "خيارات أخرى",
   "savedGamesClearData": "مسح بيانات الموقع",
   "savedGamesClearDataTitle": "مسح بيانات «{title}»؟",
   "@savedGamesClearDataTitle": {
@@ -20764,7 +20762,7 @@
       }
     }
   },
-  "savedGamesClearDataBody": "يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.",
+  "savedGamesClearDataBody": "يُحذف ما حفظه موقع اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة، لكل الألعاب من هذا الموقع. ما تضمّنه اللعبة من مواقع أخرى يُمسح بـ«مسح بيانات كل الألعاب». لا يمكن التراجع.",
   "savedGamesClearDataScheduled": "ستُمسح بياناتها عند فتحها في المرة القادمة",
   "savedGamesClearDataPending": "ستُمسح بياناتها عند الفتح",
   "savedGamesClearAll": "مسح بيانات كل الألعاب",
@@ -20844,7 +20842,9 @@
   },
   "savedGamesAddCardHint": "الصق رابط لعبة ويب",
   "savedGamesShelfEmpty": "احفظ لعبة ويب برابطها وستظهر هنا.",
-  "savedGamesDeleteGame": "حذف",
   "savedGamesOpenAll": "فتح ألعابي المحفوظة",
+  "@savedGamesOpenAll": {
+    "description": "Optional label for an entry point to the Saved Games screen (e.g. a hall tile)"
+  },
   "savedGamesClearDataDone": "مُسحت بيانات اللعبة"
 }

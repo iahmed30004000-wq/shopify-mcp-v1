@@ -56,6 +56,32 @@ const _exportEn = '''
 }
 ''';
 
+/// The same plan with Home food's parts written as percents of it (the
+/// prototype allowed amount OR percent): the budget must come out the same.
+const _exportPercent = '''
+{
+  "data": {
+    "money": {
+      "wallets": [{"id": "w1", "name": "Cash", "currency": "JOD", "opening": 500}],
+      "budget": {
+        "weeksPerMonth": 4,
+        "items": [
+          {"name": "Home food", "amount": 200, "children": [
+            {"name": "Proteins", "percent": 50},
+            {"name": "Spices", "percent": "10%"},
+            {"name": "Treats", "percent": 15},
+            {"name": "Fruit & vegetables", "amount": "25%"}
+          ]},
+          {"name": "Car fuel", "amount": 100},
+          {"name": "Emergency", "amount": 30},
+          {"name": "Wife's allowance", "amount": "5 weekly"}
+        ]
+      }
+    }
+  }
+}
+''';
+
 /// The same example as the prototype's Arabic export: Arabic keys, nested
 /// maps, amounts as text ("5 أسبوعيًا").
 const _exportAr = '''
@@ -172,6 +198,35 @@ void main() {
         expect(shown, contains(s), reason: '$name: $s (shown: $shown)');
       }
     });
+    await _drain(tester);
+  });
+
+  testWidgets('parts written as percents: the same totals and percentages', (tester) async {
+    await _pumpBudget(tester, 'en', _exportPercent);
+    final all = _allTexts(tester);
+    for (final s in ['350.000 JOD', '≈ 87.500 JOD a week', '57.1%', '28.6%', '8.6%', '5.7%']) {
+      expect(all, contains(s), reason: s);
+    }
+    // A part set by percent shows its percent first and the amount it
+    // comes to beside it.
+    final rows = <String, List<String>>{
+      'Home food': ['200.000 JOD', '57.14% of the total'],
+      'Proteins': ['50%', 'of Home food', '100.000 JOD a month'],
+      'Spices': ['10%', 'of Home food', '20.000 JOD a month'],
+      'Treats': ['15%', 'of Home food', '30.000 JOD a month'],
+      'Fruit & vegetables': ['25%', 'of Home food', '50.000 JOD a month'],
+      'Car fuel': ['100.000 JOD', '28.57% of the total'],
+      'Emergency': ['30.000 JOD', '8.57% of the total'],
+      "Wife's allowance": ['5.000 JOD', 'Weekly', '5.71% of the total · ≈ 20.000 JOD a month'],
+    };
+    rows.forEach((name, expected) {
+      final shown = _rowTexts(tester, name);
+      for (final s in expected) {
+        expect(shown, contains(s), reason: '$name: $s (shown: $shown)');
+      }
+    });
+    // No warning: the parts add up to their parent exactly.
+    expect(all.where((s) => s.contains('need') && s.contains('attention')), isEmpty);
     await _drain(tester);
   });
 

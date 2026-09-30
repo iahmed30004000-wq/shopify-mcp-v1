@@ -162,6 +162,27 @@ void main() {
     final first = zoned.snapshot.pages[1].from!;
     // Just after 23:30 in Amman the next page is Amman's midnight.
     expect(first.millisecondsSinceEpoch, tz.TZDateTime(amman, 2026, 10, 1).millisecondsSinceEpoch);
+    // So the snapshot carries no phone offsets: Android keeps showing it
+    // after the phone changes time zone (MadarWidgetRenderer.Doc.zoneMatches
+    // lets a snapshot without offsets through) – its times are Amman's.
+    final json = jsonDecode(zoned.snapshot.encode()) as Map<String, Object?>;
+    expect(json.containsKey('untilOff'), isFalse);
+    for (final p in (json['pages'] as List).cast<Map<String, Object?>>()) {
+      expect(p.containsKey('off'), isFalse);
+    }
+    expect(zoned.snapshot.zoneBound, isFalse);
+  });
+
+  test('every page counts down to a prayer after its own start', () {
+    // At a prayer's exact minute the page names the *next* prayer: the
+    // countdown never starts at zero or below.
+    for (final hour in [0, 4, 9, 13, 17, 21]) {
+      final b = build(tz.TZDateTime(amman, 2026, 9, 30, hour, 10));
+      for (final p in b.snapshot.pages) {
+        final start = p.from ?? tz.TZDateTime(amman, 2026, 9, 30, hour, 10);
+        expect(p.countdownTo!.isAfter(start), isTrue, reason: '${p.from} → ${p.countdownTo}');
+      }
+    }
   });
 
   test('Prayer names in both languages come from the prayer feature', () {

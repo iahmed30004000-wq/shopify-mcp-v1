@@ -87,7 +87,12 @@ void main() {
 
   final now = DateTime(2026, 9, 30, 13, 5);
 
-  ProviderContainer container(FakeWidgetPlatform platform, {List<Override> overrides = const [], bool lockOn = true}) {
+  ProviderContainer container(
+    FakeWidgetPlatform platform, {
+    List<Override> overrides = const [],
+    bool lockOn = true,
+    bool fixedNow = true,
+  }) {
     final c = ProviderContainer(
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
@@ -96,7 +101,7 @@ void main() {
           (ref) => WidgetBridge(platform, renderImage: (s, {required dark}) async => Uint8List(1)),
         ),
         widgetSyncDebounceProvider.overrideWithValue(Duration.zero),
-        widgetNowProvider.overrideWith(() => _FixedNow(now)),
+        if (fixedNow) widgetNowProvider.overrideWith(() => _FixedNow(now)),
         widgetAppLockOnProvider.overrideWithValue(lockOn),
         appForegroundProvider.overrideWithValue(ValueNotifier(true)),
         ...overrides,
@@ -152,6 +157,30 @@ void main() {
       c.read(_revProvider.notifier).bump();
       await _settle(c);
       expect(platform.published, hasLength(5), reason: 'nothing written for widgets not on a home screen');
+    });
+
+    test('a widget with nothing to show is rebuilt from a fresh "now", not the last foreground\'s', () async {
+      // The app went to the background at 9:00 and stayed there; at 15:00 a
+      // widget runs out of data (or the phone changed time zone) and
+      // Android asks the running app to write it again.
+      var clock = DateTime(2026, 9, 30, 9);
+      final platform = FakeWidgetPlatform(installed: {MadarWidgetKind.meds});
+      final c = container(
+        platform,
+        fixedNow: false,
+        overrides: [
+          widgetClockProvider.overrideWithValue(() => clock),
+          widgetBuildProvider.overrideWith((ref, kind) => AsyncData(_fakeBuild(kind, ref.watch(widgetNowProvider).hour))),
+        ],
+      );
+      c.listen(widgetSyncProvider, (_, _) {});
+      await _settle(c);
+      expect(platform.stored[MadarWidgetKind.meds], contains('"big":"9"'));
+
+      clock = DateTime(2026, 9, 30, 15);
+      platform.emit(WidgetPlatformEvent.changed);
+      await _settle(c);
+      expect(platform.stored[MadarWidgetKind.meds], contains('"big":"15"'));
     });
 
     test('nothing installed: nothing is built or written', () async {
@@ -340,12 +369,39 @@ void main() {
       c.read(_lockProvider.notifier).set(true);
       expect(shows(MadarWidgetKind.tasks), isTrue);
 
-      // Hidden again under the lock: the default, not a stored choice.
+      // Hidden again under the lock: kept as the user's choice (hiding never
+      // leaks anything, so it is always kept).
       await prefsCtl.setDetails(MadarWidgetKind.tasks, false);
       expect(shows(MadarWidgetKind.tasks), isFalse);
-      expect(c.read(widgetPrefsProvider).details, {MadarWidgetKind.budget: false});
+      expect(c.read(widgetPrefsProvider).details, {MadarWidgetKind.budget: false, MadarWidgetKind.tasks: false});
       // Stored for the next run.
       expect(prefs.getString(WidgetPrefsController.key), contains('"budget":false'));
+    });
+
+    test('details hidden under the lock stay hidden when the lock is turned off', () async {
+      final c = lockable();
+      final prefsCtl = c.read(widgetPrefsProvider.notifier);
+      bool shows(MadarWidgetKind k) => c.read(widgetShowsDetailsProvider(k));
+
+      // The lock is on; the user shows the meds, then hides them again.
+      c.read(_lockProvider.notifier).set(true);
+      await prefsCtl.setDetails(MadarWidgetKind.meds, true);
+      await prefsCtl.setDetails(MadarWidgetKind.meds, false);
+      expect(shows(MadarWidgetKind.meds), isFalse);
+
+      // Turning App Lock off must not put the names back on the home screen:
+      // the user's last word was "hide".
+      c.read(_lockProvider.notifier).set(false);
+      expect(shows(MadarWidgetKind.meds), isFalse);
+      // A widget never touched follows the lock (details without it).
+      expect(shows(MadarWidgetKind.tasks), isTrue);
+
+      // Shown again with the lock off: back to following the lock.
+      await prefsCtl.setDetails(MadarWidgetKind.meds, true);
+      expect(shows(MadarWidgetKind.meds), isTrue);
+      expect(c.read(widgetPrefsProvider).details, isEmpty);
+      c.read(_lockProvider.notifier).set(true);
+      expect(shows(MadarWidgetKind.meds), isFalse);
     });
   });
 

@@ -126,9 +126,12 @@ class WidgetPage {
   /// App location a tap on the widget opens (overrides the snapshot's).
   final String? link;
 
-  Map<String, Object?> toJson() => {
+  /// [offset]: the phone's UTC offset at [from] when the texts were made
+  /// ([WidgetSnapshot.pageOffsets]); taken now when not given. [zoned]
+  /// false: none (see [WidgetSnapshot.zoneBound]).
+  Map<String, Object?> toJson({int? offset, bool zoned = true}) => {
     if (from case final f?) 'from': f.millisecondsSinceEpoch,
-    if (from case final f?) 'off': phoneOffsetMinutes(f),
+    if (zoned && from != null) 'off': offset ?? widgetPhoneOffsetOf(from!),
     'big': ?headline,
     'sub': ?detail,
     'note': ?note,
@@ -183,6 +186,11 @@ class WidgetPage {
 int phoneOffsetMinutes(DateTime at) =>
     DateTime.fromMillisecondsSinceEpoch(at.millisecondsSinceEpoch).timeZoneOffset.inMinutes;
 
+/// What the snapshots read the phone's offsets with ([phoneOffsetMinutes];
+/// tests stand in for a phone that changes time zone).
+@visibleForTesting
+int Function(DateTime at) widgetPhoneOffsetOf = phoneOffsetMinutes;
+
 /// Everything one home-screen widget shows until [until], as the Android
 /// provider reads it (`files/…/widgets/<kind>.bin`, encrypted there).
 ///
@@ -194,9 +202,15 @@ int phoneOffsetMinutes(DateTime at) =>
 ///
 /// Nothing volatile (no "generated at") goes into the JSON: equal content
 /// encodes equally, so the bridge writes only what changed.
+///
+/// The phone's UTC offsets are taken when the snapshot is made – with its
+/// wall-clock texts – not when it is written: a snapshot built before the
+/// phone changed time zone and written after (a widget added while the app
+/// sat in the background) keeps the old zone's offsets, so Android shows
+/// "Open Madar to refresh" instead of the old zone's dose times.
 @immutable
 class WidgetSnapshot {
-  const WidgetSnapshot({
+  WidgetSnapshot({
     required this.kind,
     required this.languageCode,
     required this.private,
@@ -205,7 +219,11 @@ class WidgetSnapshot {
     required this.stale,
     required this.pages,
     this.link,
-  });
+    this.zoneBound = true,
+  }) : untilOffset = zoneBound ? widgetPhoneOffsetOf(until) : null,
+       pageOffsets = List.unmodifiable([
+         for (final p in pages) zoneBound && p.from != null ? widgetPhoneOffsetOf(p.from!) : null,
+       ]);
 
   static const int version = 1;
 
@@ -227,6 +245,19 @@ class WidgetSnapshot {
 
   /// App location a tap on the widget opens.
   final String? link;
+
+  /// Whether the texts are wall-clock times of the phone's zone (dose
+  /// times, the phone's midnights and days): then the phone's offsets go
+  /// into the JSON and Android shows [stale] once the phone is in another
+  /// zone. False for the prayer widget, whose times, midnights and dates
+  /// are the prayer location's whatever zone the phone is in.
+  final bool zoneBound;
+
+  /// The phone's UTC offset (minutes) at [until] and at each page's start
+  /// (null for the first page) when the snapshot was made; null when not
+  /// [zoneBound].
+  final int? untilOffset;
+  final List<int?> pageOffsets;
 
   bool get rtl => languageCode == 'ar';
 
@@ -263,10 +294,10 @@ class WidgetSnapshot {
     'private': private,
     'title': title,
     'until': until.millisecondsSinceEpoch,
-    'untilOff': phoneOffsetMinutes(until),
+    'untilOff': ?untilOffset,
     'stale': stale,
     'link': ?link,
-    'pages': [for (final p in pages) p.toJson()],
+    'pages': [for (var i = 0; i < pages.length; i++) pages[i].toJson(offset: pageOffsets[i], zoned: zoneBound)],
   };
 
   String encode() => jsonEncode(toJson());
@@ -284,6 +315,7 @@ class WidgetSnapshot {
         until: DateTime.fromMillisecondsSinceEpoch((j['until'] as num).toInt()),
         stale: j['stale'] as String? ?? '',
         link: j['link'] as String?,
+        zoneBound: j.containsKey('untilOff'),
         pages: [
           for (final p in (j['pages'] as List?) ?? const [])
             if (p is Map) WidgetPage.fromJson(p.cast<String, Object?>()),

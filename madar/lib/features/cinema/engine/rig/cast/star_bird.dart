@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui';
 
 import '../../core/era_skin.dart';
@@ -15,10 +16,12 @@ import '../ink/ink_pen.dart';
 
 /// **Nujaym** (نُجيم, "little star") – the plucky star-bird of *Flappy
 /// Orbit*. An original design: a round, ink-black bird with a white
-/// heart-shaped face mask and belly, aviator goggles pushed up on the brow,
-/// a scarf that streams behind him, a five-point star bobbing on a spring
-/// crest, rubber-hose wings that end in white feather "gloves", and tiny
-/// spats on hose legs.
+/// heart-shaped face mask (fitted round big pie eyes) and belly, a short
+/// stubby beak with a smile crease, aviator goggles pushed up on the crown,
+/// a polka-dot bandana knotted at the back of the neck whose swallow-tails
+/// stream behind him (white in B&W, the accent colour elsewhere), a
+/// five-point star bobbing on a spring crest, rubber-hose wings that end
+/// in white feather "gloves", and tiny spats on hose legs.
 ///
 /// He lives in the air: [RigAction.idle] is a hover, [RigAction.jump] is
 /// one strong flap (call it on every tap), [RigAction.fall] holds the wings
@@ -44,11 +47,15 @@ class StarBird extends HoseRig {
     for (final w in wings) {
       w.snap(0, -height * 0.7);
     }
-    for (final c in scarf) {
-      c.snap(-height * 0.3, -height * 0.4);
+    for (var i = 0; i < scarf.length; i++) {
+      scarf[i].snap(knotX - height * 0.06 * (i + 1), knotY + height * 0.03 * (i + 1));
     }
     crest.snap(0, -height);
   }
+
+  /// Where the bandana is knotted (design space, standing frame).
+  double get knotX => -spec.height * 0.265;
+  double get knotY => -spec.height * 0.47;
 
   /// Nose-down pitch override (radians); `null` = pose-driven.
   double? pitch;
@@ -196,13 +203,23 @@ class StarBird extends HoseRig {
       final tx = side * 6 * uu - pt * 12 * uu + swing - speed * 0.02;
       feet[i].step(h, tx, (action == RigAction.land ? 0 : -2 * uu) + math.cos(_flap + i) * 1.5 * uu, 22, 0.35);
     }
-    // Scarf streams behind (wind from speed and the flap).
-    var px = -hh * 0.18, py = -hh * 0.36;
-    final wind = 0.5 + (speed.abs() / hh).clamp(0.0, 3.0) * 0.4 + (action == RigAction.run ? 0.6 : 0);
+    // Bandana tails stream from the knot at the back of the neck (wind from
+    // speed and the flap). Each link rides a spring but is tethered to the
+    // one before like a rope, so the tails can whip but never stretch.
+    var px = knotX, py = knotY;
+    final wind = 0.55 + (speed.abs() / hh).clamp(0.0, 3.0) * 0.35 + (action == RigAction.run ? 0.5 : 0);
+    final seg = hh * 0.075;
     for (var i = 0; i < scarf.length; i++) {
       final c = scarf[i];
-      final flutter = math.sin(time * 13 - i * 1.3) * hh * 0.035 * (i + 1) / 4;
-      c.step(h, px - hh * 0.1 * wind, py + hh * 0.05 * (1 - wind * 0.5) + flutter, 30 - i * 3.0, 0.4);
+      final flutter = math.sin(time * 13 - i * 1.3) * hh * 0.03 * (i + 1) / 4;
+      final droop = (1.2 - wind).clamp(0.0, 1.0);
+      c.step(h, px - seg * (0.4 + 0.6 * math.min(1, wind)), py + seg * 0.9 * droop + flutter, 30 - i * 3.0, 0.4);
+      final dx = c.x - px, dy = c.y - py;
+      final d = math.sqrt(dx * dx + dy * dy);
+      if (d > seg) {
+        c.x = px + dx / d * seg;
+        c.y = py + dy / d * seg;
+      }
       px = c.x;
       py = c.y;
     }
@@ -252,7 +269,7 @@ class StarBird extends HoseRig {
       ..rotateAbout(spin, 0, cy);
 
     // Scarf tails (behind).
-    _scarfTails(b, cy);
+    _bandanaTails(b, cy);
     // Far wing, legs.
     _wing(b, 0, cy);
     for (var i = 0; i < 2; i++) {
@@ -365,47 +382,36 @@ class StarBird extends HoseRig {
     final wingUp = tn > 0.3 && wings[1].y < -hh * 0.52;
     if (wingUp) _wing(b, 1, cy);
 
-    final fx = r * (0.06 + 0.34 * tn), fy = cy - r * 0.3;
-    final far = 1 - 0.28 * tn;
+    // Face geometry: the white heart mask is fitted round the eyes exactly
+    // where [Face] puts them, so the pie eyes always sit inside it.
+    final faceR = r * 0.8, es = 1.05;
+    final fx = r * (0.02 + 0.12 * tn), fy = cy - r * 0.28;
+    final ew = faceR * 0.25 * es, eh = faceR * 0.42 * es;
+    final ef = fx + tn * faceR * 0.3;
+    final sp = ew * 1.1;
+    final farX = ef - sp * (1 - 0.3 * tn), nearX = ef + sp;
+    final ey = fy + r * 0.02 - 0.1 * faceR;
     b.layer();
-    // Two lobes round the eyes, a chin, the bib: one white silhouette.
     b.shape(white, ink: 0.75);
     pen
-      ..ellipse(fx - r * 0.3 * far, fy, r * 0.36 * far, r * 0.44)
-      ..ellipse(fx + r * 0.3, fy, r * 0.38, r * 0.44);
+      ..ellipse(farX, ey + r * 0.04, ew * (1 - 0.2 * tn) * 2, eh * 1.25)
+      ..ellipse(nearX, ey + r * 0.04, ew * 2, eh * 1.25);
     b.shape(white, ink: 0.75);
-    pen.ellipse(fx + r * 0.02, fy + r * 0.3, r * 0.5, r * 0.32);
+    pen.ellipse(ef + r * 0.04, ey + r * 0.44, r * 0.46, r * 0.3);
     b.shape(white, ink: 0.75);
-    pen.ellipse(fx * 0.7, cy + r * 0.46, r * 0.5 * (1 - 0.15 * tn), r * 0.42);
+    pen.ellipse(fx * 0.7, cy + r * 0.52, r * 0.56 * (1 - 0.12 * tn), r * 0.42);
     b.endLayer();
 
-    // Scarf: a white knit band with dark stripes between face and bib.
-    b.layer();
-    b.shape(white, ink: 0.9);
-    pen
-      ..moveTo(-r * 0.95, cy + r * 0.02)
-      ..quadTo(r * 0.05, cy + r * 0.3, r * 0.98, cy - r * 0.02)
-      ..lineTo(r * 0.99, cy + r * 0.17)
-      ..quadTo(r * 0.05, cy + r * 0.5, -r * 0.97, cy + r * 0.22)
-      ..close();
-    b.stroke(c.fill(PaletteRole.shadow), r * 0.045);
-    pen
-      ..moveTo(-r * 0.93, cy + r * 0.1)
-      ..quadTo(r * 0.05, cy + r * 0.38, r * 0.97, cy + r * 0.06);
-    b.stroke(c.fill(PaletteRole.shadow), r * 0.045);
-    pen
-      ..moveTo(-r * 0.94, cy + r * 0.16)
-      ..quadTo(r * 0.05, cy + r * 0.45, r * 0.98, cy + r * 0.12);
-    b.endLayer();
+    _bandana(b, cy, r, ef);
 
     face
       ..cx = fx
       ..cy = fy + r * 0.02
-      ..r = r * 0.8
+      ..r = faceR
       ..turn = tn
       ..expression = expression
       ..eyes = RigEyes.pieCut
-      ..eyeScale = 1.18
+      ..eyeScale = es
       ..eyeGap = 0.1
       ..eyeY = -0.1
       ..blink = blinkAmount
@@ -423,9 +429,14 @@ class StarBird extends HoseRig {
       ..skin = white
       ..drawMouth = false
       ..salt = 300;
+    // The face is small on a small bird: ink it with a finer pen so the
+    // pie eyes and the beak read instead of drowning in outline.
+    final lw0 = b.lw;
+    b.lw = lw0 * 0.62;
     face.draw(b);
-    _beakDraw(b, fx + r * (0.14 + 0.38 * tn), fy + r * 0.46, r);
-    _goggles(b, fx * 0.6, cy - r * 0.9, r);
+    _beakDraw(b, ef + r * (0.04 + 0.2 * tn), ey + eh * 1.02, r);
+    b.lw = lw0;
+    _goggles(b, cy, r);
 
     // Near wing on top (down-stroke / front view).
     if (!wingUp) _wing(b, 1, cy);
@@ -488,12 +499,12 @@ class StarBird extends HoseRig {
     b.layer();
     // Four long leaf-shaped primaries fanning from a cuff.
     for (var k = 0; k < 4; k++) {
-      final a = (k - 1.5) * 0.3 + b.j(70 + k + i * 4) * 0.04;
-      final len = 2.2 - (k - 1.5).abs() * 0.35;
+      final a = (k - 1.5) * 0.36 + b.j(70 + k + i * 4) * 0.04;
+      final len = 1.85 - (k - 1.5).abs() * 0.3;
       final ca = math.cos(a), sa = math.sin(a);
       final tx = 0.3 + ca * len, ty = sa * len;
       final mx = 0.3 + ca * len * 0.5, my = sa * len * 0.5;
-      const w = 0.62;
+      const w = 0.82;
       b.shape(white);
       pen
         ..moveTo(0.3 - sa * 0.2, ca * 0.2)
@@ -510,8 +521,8 @@ class StarBird extends HoseRig {
       ..quadTo(0, 0, -0.1, -0.42)
       ..close();
     for (var k = 0; k < 4; k++) {
-      final a = (k - 1.5) * 0.3;
-      final len = 2.2 - (k - 1.5).abs() * 0.35;
+      final a = (k - 1.5) * 0.36;
+      final len = 1.85 - (k - 1.5).abs() * 0.3;
       b.brushQuad(
         3,
         0.55 + math.cos(a) * 0.1,
@@ -543,114 +554,202 @@ class StarBird extends HoseRig {
       ..close();
   }
 
+  /// A short, stubby beak under the eyes (a rounded cone, never a spike),
+  /// with a smile crease at its root that follows the expression.
   void _beakDraw(InkBuild b, double x, double y, double r) {
     final pen = b.pen;
     final fill = b.colors.fill(PaletteRole.midtone);
     final open = _beak.clamp(0.0, 1.0);
-    final len = r * (0.62 + 0.14 * turn);
+    final tn = turn;
+    final len = r * (0.24 + 0.2 * tn);
+    final droop = r * (0.06 + 0.04 * (1 - tn));
     // Lower mandible (drops open), under the upper one.
     b.layer();
     b.shape(fill, ink: 0.85);
     pen
       ..save()
-      ..rotateAbout(open * 0.6, x - r * 0.1, y)
-      ..moveTo(x - r * 0.14, y - r * 0.02)
-      ..quadTo(x + len * 0.5, y, x + len * 0.8, y + r * 0.03)
-      ..quadTo(x + len * 0.35, y + r * 0.2, x - r * 0.1, y + r * 0.14)
+      ..rotateAbout(open * 0.55, x - r * 0.06, y + r * 0.04)
+      ..moveTo(x - r * 0.12, y + r * 0.02)
+      ..quadTo(x + len * 0.55, y + r * 0.04, x + len * 0.78, y + droop + r * 0.02)
+      ..quadTo(x + len * 0.3, y + r * 0.2, x - r * 0.1, y + r * 0.13)
       ..close()
       ..restore();
     if (open > 0.15) {
       b.fill(b.colors.dark);
       pen
-        ..moveTo(x - r * 0.08, y)
-        ..quadTo(x + len * 0.3, y + open * r * 0.2, x + len * 0.6, y + open * r * 0.14)
-        ..lineTo(x + len * 0.6, y)
+        ..moveTo(x - r * 0.06, y + r * 0.03)
+        ..quadTo(x + len * 0.3, y + r * 0.03 + open * r * 0.2, x + len * 0.62, y + r * 0.03 + open * r * 0.16)
+        ..lineTo(x + len * 0.62, y + r * 0.03)
         ..close();
     }
     b.endLayer();
-    // Upper mandible: a curved point with a nostril and a shine.
+    // Upper mandible: plump, rounded at the tip, a nostril and a shine.
     b.layer();
     b.shape(fill, ink: 0.85);
     pen
-      ..moveTo(x - r * 0.18, y - r * 0.2)
-      ..quadTo(x + len * 0.5, y - r * 0.26, x + len, y + r * 0.04)
-      ..quadTo(x + len * 0.45, y + r * 0.06, x - r * 0.16, y + r * 0.04)
+      ..moveTo(x - r * 0.16, y - r * 0.1)
+      ..cubicTo(x + len * 0.3, y - r * 0.22, x + len * 1.02, y - r * 0.08, x + len, y + droop)
+      ..quadTo(x + len * 0.9, y + droop + r * 0.07, x + len * 0.6, y + r * 0.07)
+      ..quadTo(x + len * 0.2, y + r * 0.09, x - r * 0.15, y + r * 0.06)
       ..close();
     b.inkFill();
-    pen.ellipse(x + len * 0.12, y - r * 0.1, r * 0.035, r * 0.025);
+    pen.ellipse(x + len * 0.28, y - r * 0.06, r * 0.03, r * 0.022);
     b.brushQuad(
       3,
-      x + len * 0.2,
+      x + len * 0.05,
+      y - r * 0.11,
+      x + len * 0.4,
       y - r * 0.15,
-      x + len * 0.45,
-      y - r * 0.17,
-      x + len * 0.7,
-      y - r * 0.08,
+      x + len * 0.72,
+      y - r * 0.06,
       b.lw * 0.7,
       color: b.colors.shine,
     );
-    b.endLayer();
-  }
-
-  void _goggles(InkBuild b, double x, double y, double r) {
-    final pen = b.pen;
-    final rim = b.colors.fill(PaletteRole.midtone);
-    final tn = turn;
-    b.layer();
-    // Strap over the crown only.
-    b.shape(rim, ink: 0.7);
-    pen
-      ..moveTo(x - r * 0.62, y + r * 0.16)
-      ..quadTo(x, y - r * 0.12, x + r * 0.62, y + r * 0.14)
-      ..lineTo(x + r * 0.6, y + r * 0.26)
-      ..quadTo(x, y + r * 0.02, x - r * 0.6, y + r * 0.28)
-      ..close();
-    for (var i = 0; i < 2; i++) {
-      final gx = x + (i == 0 ? -r * 0.22 * (1 - 0.3 * tn) : r * 0.24), gy = y + r * 0.05;
-      final gr = r * (i == 0 ? 0.17 * (1 - 0.15 * tn) : 0.18);
-      b.shape(rim, ink: 0.8);
-      pen.circle(gx, gy, gr);
-      b.fill(b.colors.glass);
-      pen.circle(gx, gy, gr * 0.64);
-      b.fill(b.colors.shine);
-      pen.ellipse(gx - gr * 0.22, gy - gr * 0.24, gr * 0.2, gr * 0.14);
+    // Smile crease at the root of the beak.
+    final up = switch (expression) {
+      RigExpression.angry || RigExpression.scared || RigExpression.dizzy => -1.0,
+      RigExpression.surprised => 0.0,
+      _ => 1.0,
+    };
+    if (up != 0) {
+      b.brushQuad(
+        3,
+        x - r * 0.1,
+        y + r * 0.07,
+        x - r * 0.2,
+        y + r * (0.07 + 0.02 * up),
+        x - r * 0.27,
+        y + r * (0.07 - 0.07 * up),
+        b.lw * 0.8,
+        taperIn: 0.2,
+        taperOut: 0.7,
+      );
     }
     b.endLayer();
   }
 
-  void _scarfTails(InkBuild b, double cy) {
+  /// Aviator goggles pushed up on the crown, their strap round the head.
+  void _goggles(InkBuild b, double cy, double r) {
+    final pen = b.pen;
+    final rim = b.colors.fill(PaletteRole.midtone);
+    final tn = turn;
+    final lx = r * (0.04 + 0.26 * tn);
+    b.layer();
+    b.shape(rim, ink: 0.7);
+    pen
+      ..moveTo(-r * 0.78, cy - r * 0.62)
+      ..quadTo(lx - r * 0.1, cy - r * 1.1, r * 0.8, cy - r * 0.6)
+      ..lineTo(r * 0.76, cy - r * 0.5)
+      ..quadTo(lx - r * 0.1, cy - r * 0.97, -r * 0.74, cy - r * 0.51)
+      ..close();
+    for (var i = 0; i < 2; i++) {
+      final far = i == 0;
+      final gx = lx + (far ? -r * 0.19 * (1 - 0.35 * tn) : r * 0.19);
+      final gy = cy - r * (far ? 0.95 : 0.93);
+      final gr = r * (far ? 0.14 * (1 - 0.2 * tn) : 0.15);
+      b.shape(rim, ink: 0.8);
+      pen.circle(gx, gy, gr);
+      b.fill(b.colors.glass);
+      pen.circle(gx, gy, gr * 0.62);
+      b.fill(b.colors.shine);
+      pen.ellipse(gx - gr * 0.2, gy - gr * 0.22, gr * 0.2, gr * 0.14);
+    }
+    b.endLayer();
+  }
+
+  /// The polka-dot bandana: collar under the chin, a flap on the bib and a
+  /// knot at the back of the neck (the tails are drawn behind the body).
+  void _bandana(InkBuild b, double cy, double r, double ef) {
+    final pen = b.pen;
+    final fill = _bandanaFill(b);
+    final dot = _bandanaWhite ? b.colors.ink : b.colors.fill(spec.trim);
+    final by = cy + spec.height * 0.5;
+    b.layer();
+    // Collar: dips under the chin and rises to the back of the neck.
+    b.shape(fill, ink: 0.85);
+    pen
+      ..moveTo(-r * 1.02, cy + r * 0.02)
+      ..quadTo(ef - r * 0.1, cy + r * 0.56, r * 0.98, cy + r * 0.24)
+      ..lineTo(r * 0.93, cy + r * 0.38)
+      ..quadTo(ef - r * 0.1, cy + r * 0.74, -r * 1.0, cy + r * 0.17)
+      ..close();
+    // Flap on the bib.
+    final fx = ef + r * 0.02, fy = cy + r * 0.4;
+    final sw = math.sin(time * 5) * r * 0.03 + squashAmount * r * 0.1;
+    b.shape(fill, ink: 0.85);
+    pen
+      ..moveTo(fx - r * 0.28, fy - r * 0.02)
+      ..quadTo(fx - r * 0.18, fy + r * 0.26, fx + sw, fy + r * 0.44)
+      ..quadTo(fx + r * 0.2, fy + r * 0.22, fx + r * 0.3, fy - r * 0.04)
+      ..close();
+    // Knot at the back of the neck.
+    b.shape(fill, ink: 0.85);
+    pen.ellipse(knotX, knotY + by, r * 0.13, r * 0.11, -0.4);
+    // Polka dots.
+    b.fill(dot);
+    pen
+      ..circle(fx - r * 0.1, fy + r * 0.08, r * 0.045)
+      ..circle(fx + r * 0.1, fy + r * 0.07, r * 0.045)
+      ..circle(fx + r * 0.01, fy + r * 0.24, r * 0.04)
+      ..circle(ef - r * 0.45, cy + r * 0.36, r * 0.04)
+      ..circle(ef + r * 0.52, cy + r * 0.34, r * 0.04)
+      ..circle(knotX + r * 0.02, knotY + by - r * 0.01, r * 0.035);
+    b.endLayer();
+  }
+
+  final Float64List _rib = Float64List(2 * 8);
+  bool _bandanaWhite = false;
+
+  /// The bandana is the accent colour (red in Technicolor); where the
+  /// era's accent is too dark to read on a black bird (1930s B&W) it turns
+  /// white with ink polka dots.
+  Color _bandanaFill(InkBuild b) {
+    final accent = b.colors.fill(spec.accent);
+    _bandanaWhite = accent.computeLuminance() < 0.1;
+    return _bandanaWhite ? b.colors.fill(spec.trim) : accent;
+  }
+
+  /// Two swallow-tailed bandana tails following the rope of springs.
+  void _bandanaTails(InkBuild b, double cy) {
     final pen = b.pen;
     final hh = spec.height;
-    final fill = b.colors.fill(spec.trim);
+    final fill = _bandanaFill(b);
+    final by = cy + hh * 0.5;
+    final m = scarf.length + 1;
     b.layer();
     for (var t = 0; t < 2; t++) {
-      final off = t * hh * 0.05;
-      b.shape(fill);
-      final ox = -hh * 0.22, oy = cy + hh * 0.09 + off;
-      pen.moveTo(ox, oy - hh * 0.035);
-      var px = ox, py = oy;
+      final k = t == 0 ? 1.0 : 0.78;
+      final drop = t == 0 ? 0.0 : hh * 0.018;
+      _rib[0] = knotX;
+      _rib[1] = knotY + by;
       for (var i = 0; i < scarf.length; i++) {
-        final c = scarf[i];
-        final nx = c.x + (i + 1) * hh * 0.005 * t, ny = c.y + (cy + hh * 0.5) + off * (1 + i * 0.3);
-        final w = hh * (0.026 - i * 0.003);
-        pen.quadTo((px + nx) / 2, (py + ny) / 2 - w, nx, ny - w);
-        px = nx;
-        py = ny;
+        _rib[2 + i * 2] = knotX + (scarf[i].x - knotX) * k;
+        _rib[3 + i * 2] = knotY + by + (scarf[i].y - knotY) * k + drop * (i + 1);
       }
-      // Fringe end.
-      pen
-        ..lineTo(px - hh * 0.03, py - hh * 0.02)
-        ..lineTo(px - hh * 0.035, py)
-        ..lineTo(px - hh * 0.03, py + hh * 0.02);
-      for (var i = scarf.length - 1; i >= 0; i--) {
-        final c = scarf[i];
-        final nx = c.x + (i + 1) * hh * 0.005 * t, ny = c.y + (cy + hh * 0.5) + off * (1 + i * 0.3);
-        final w = hh * (0.026 - i * 0.003);
-        pen.lineTo(nx, ny + w);
+      b.shape(fill, ink: 0.85);
+      // Upper edge out, swallowtail notch, lower edge back.
+      for (var pass = 0; pass < 2; pass++) {
+        final side = pass == 0 ? 1.0 : -1.0;
+        for (var n = 0; n < m; n++) {
+          final i = pass == 0 ? n : m - 1 - n;
+          final a = math.max(0, i - 1), c = math.min(m - 1, i + 1);
+          var tx = _rib[c * 2] - _rib[a * 2], ty = _rib[c * 2 + 1] - _rib[a * 2 + 1];
+          final tl = math.max(1e-6, math.sqrt(tx * tx + ty * ty));
+          tx /= tl;
+          ty /= tl;
+          final w = hh * (0.024 + 0.004 * i / (m - 1)) * side;
+          final px = _rib[i * 2] - ty * w, py = _rib[i * 2 + 1] + tx * w;
+          if (pass == 0 && n == 0) {
+            pen.moveTo(px, py);
+          } else {
+            pen.lineTo(px, py);
+          }
+          if (pass == 0 && i == m - 1) {
+            pen.lineTo(_rib[i * 2] - tx * hh * 0.03, _rib[i * 2 + 1] - ty * hh * 0.03);
+          }
+        }
       }
-      pen
-        ..lineTo(ox, oy + hh * 0.035)
-        ..close();
+      pen.close();
     }
     b.endLayer();
   }

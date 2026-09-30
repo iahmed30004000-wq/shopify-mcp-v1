@@ -1,7 +1,8 @@
 // Art-direction matrix of the integrated Money world inside the real app
-// (router, AppGate, app lock, real fonts and shaders): the Money hub, the
-// ledger, a wallet, the transaction sheet, the currencies, the budget plan
-// and spending, the three goals tabs and a jar – in Arabic and English,
+// (router, AppGate, app lock, real fonts and shaders): the Money hub (net
+// worth, then this month's plan and the dues), the ledger, a wallet, the
+// transaction sheet, the currencies, the budget plan and spending, the
+// three goals tabs and a jar – in Arabic and English,
 // across Lapis, Pearl and Aurora – plus every screen at text scale 1.3
 // (a layout overflow fails the test), each checked for WCAG AA on the
 // pixels actually painted. Writes PNGs to
@@ -201,6 +202,12 @@ final List<_Screen> _screens = [
     start: AppRoutes.planetOf('money'),
     go: null,
     before: (tester) => _sheetTo(tester, find.byType(MoneyNetWorthCard), below: 130),
+  ),
+  (
+    name: 'hub_plan',
+    start: AppRoutes.planetOf('money'),
+    go: null,
+    before: (tester) => _sheetTo(tester, find.byType(BudgetStatusCard), below: 110),
   ),
   (name: 'ledger', start: AppRoutes.ledger, go: null, before: null),
   (name: 'wallet', start: AppRoutes.ledger, go: () => AppRoutes.walletOf(_ids.bank), before: null),

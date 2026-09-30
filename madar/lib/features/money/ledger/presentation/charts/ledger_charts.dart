@@ -325,7 +325,8 @@ class TrendBars extends StatelessWidget {
     final valueTitles = AxisTitles(
       sideTitles: SideTitles(
         showTitles: true,
-        reservedSize: 40,
+        // Grows with the text size: "١٫٥ ألف" wrapped at 1.3×.
+        reservedSize: MediaQuery.textScalerOf(context).scale(40),
         interval: scale.interval,
         getTitlesWidget: (value, meta) {
           // The zero line and the padded top edge carry no label.
@@ -336,6 +337,8 @@ class TrendBars extends StatelessWidget {
             child: Text(
               format.compact((value * 1000).round(), thousand: thousand, million: million),
               style: labelStyle,
+              maxLines: 1,
+              softWrap: false,
             ),
           );
         },
@@ -384,7 +387,7 @@ class TrendBars extends StatelessWidget {
                 bottomTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    reservedSize: 26,
+                    reservedSize: MediaQuery.textScalerOf(context).scale(26),
                     getTitlesWidget: (value, meta) {
                       final i = value.toInt();
                       if (i < 0 || i >= ordered.length) return const SizedBox.shrink();
@@ -480,7 +483,8 @@ class BalanceLine extends StatelessWidget {
     final valueTitles = AxisTitles(
       sideTitles: SideTitles(
         showTitles: true,
-        reservedSize: 40,
+        // Grows with the text size: "١٫٥ ألف" wrapped at 1.3×.
+        reservedSize: MediaQuery.textScalerOf(context).scale(40),
         interval: scale.interval,
         getTitlesWidget: (value, meta) {
           if (value == meta.max) return const SizedBox.shrink();
@@ -490,6 +494,8 @@ class BalanceLine extends StatelessWidget {
             child: Text(
               format.compact((value * 1000).round(), thousand: thousand, million: million),
               style: labelStyle,
+              maxLines: 1,
+              softWrap: false,
             ),
           );
         },
@@ -587,7 +593,7 @@ class BalanceLine extends StatelessWidget {
                 bottomTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    reservedSize: 24,
+                    reservedSize: MediaQuery.textScalerOf(context).scale(24),
                     // First, middle and last day: with four labels the last
                     // two collided once the edge date was nudged inside
                     // ("August 29September 29").

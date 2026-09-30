@@ -165,6 +165,56 @@ void main() {
     expect(usd.rateToBase, 0.709);
   });
 
+  test('re-basing keeps the budget: items in the old base stay in it (200 JOD ≠ 200 USD)', () async {
+    final (_, repos, ledger, _) = await _open();
+    final budget = BudgetRepository(repos, clock: () => _now);
+    // Stored with no currency: "the base currency" (JOD today).
+    await budget.add(const BudgetNode(id: 'food', name: 'Home food', amountMilli: 200000));
+    await budget.add(const BudgetNode(id: 'ads', name: 'Ads', amountMilli: 100000, currency: 'USD', sortOrder: 1));
+    Future<BudgetMath> math() async {
+      final c = BudgetCurrencies.fromRows(await repos.currencies.getAll());
+      return BudgetMath([for (final r in await repos.budgetItems.getAll()) budgetNodeOf(r)], settings: c.settings());
+    }
+
+    expect((await math()).totalMonthlyMilli, 270900);
+    final undo = await ledger.rebase('USD');
+    final inUsd = await math();
+    // 200 JOD + 100 USD = 382.087 USD (200 / 0.709 = 282.087…), not 300 USD.
+    expect(inUsd['food']!.monthlyMilli, 282087);
+    expect(inUsd.totalMonthlyMilli, 382087);
+    expect((await repos.budgetItems.byId('food'))!.currency, 'JOD');
+    // Back to JOD: the same plan again.
+    await ledger.rebase('JOD');
+    expect((await math()).totalMonthlyMilli, 270900);
+    // Undo of a re-base puts the rows back as they were.
+    await ledger.rebase('USD');
+    expect((await math()).totalMonthlyMilli, 382087);
+    await undo();
+    expect((await repos.currencies.byCode('JOD'))!.isBase, isTrue);
+    expect((await repos.budgetItems.byId('food'))!.currency, isNull);
+    expect((await math()).totalMonthlyMilli, 270900);
+  });
+
+  test('archiving a jar keeps its money in the net worth (its wallet entry stays)', () async {
+    final (_, repos, ledger, goals) = await _open();
+    final bank = await ledger.addWallet(name: 'Bank', currency: 'JOD', openingMilli: 1000000);
+    final jar = await goals.addJar(JarDraft(name: 'Trip', targetMilli: 300000, currency: 'JOD'));
+    await goals.moveJarMoney(jar.id, amountMilli: 300000, walletId: bank.id);
+    final before = MoneyNetWorth.of(await ledger.book(), await _snapshot(repos));
+    expect(before.totalMilli, 1000000);
+    await goals.setJarArchived(jar.id, true);
+    final book = await ledger.book();
+    expect(book.balanceOf(bank.id), 700000, reason: 'the deposit left the wallet and stays out');
+    final after = MoneyNetWorth.of(book, await _snapshot(repos));
+    expect(after.jarsMilli, 300000);
+    expect(after.totalMilli, 1000000, reason: 'archiving is not spending');
+    // An empty archived jar adds nothing and is not counted.
+    await goals.moveJarMoney(jar.id, amountMilli: 300000, withdraw: true, walletId: bank.id);
+    final emptied = MoneyNetWorth.of(await ledger.book(), await _snapshot(repos));
+    expect(emptied.totalMilli, 1000000);
+    expect(emptied.jarCount, 0);
+  });
+
   test('a currency kept by a jar, debt, bill or budget item cannot be deleted (it would count 1:1)', () async {
     final (_, repos, ledger, goals) = await _open();
     await ledger.saveCurrency(const LedgerCurrency(code: 'EUR', decimals: 2), rate: Rational.tryParse('0.77'));

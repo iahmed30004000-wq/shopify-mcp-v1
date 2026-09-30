@@ -6,6 +6,8 @@
 ///   Tune live: `strength` (0..1), `quality` ([FilmQuality]), `look`
 ///   ([FilmLook]), `adaptive`; force reel events via `events`
 ///   (`cueNow()`, `spliceNow()`).
+/// * [FilmSettings] – the player's quality / strength / battery-saver
+///   choice that `createFilmFx` starts every game with.
 /// * [FilmLook] / `eraLook(era)` – per-era print stylisation and events.
 /// * [IntertitlePainter] – era title cards (ornate, art deco, noir, marquee,
 ///   VHS OSD), Arabic + English, drawn in code.
@@ -20,6 +22,7 @@ library;
 export 'era_looks.dart';
 export 'film_events.dart';
 export 'film_look.dart';
+export 'film_settings.dart';
 export 'film_stock_shader.dart';
 export 'fx_labels.dart';
 export 'reel_film_fx.dart';

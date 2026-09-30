@@ -539,12 +539,17 @@ class JarTrajectoryChart extends ConsumerWidget {
     final valueTitles = AxisTitles(
       sideTitles: SideTitles(
         showTitles: true,
-        reservedSize: 40,
+        reservedSize: MediaQuery.textScalerOf(context).scale(40),
         interval: stepY,
         getTitlesWidget: (value, meta) => SideTitleWidget(
           meta: meta,
           space: 6,
-          child: Text(MoneyGlyphs.legibleGroups(fmt.formatNumber(value, maxDecimals: 0)), style: labelStyle),
+          child: Text(
+            MoneyGlyphs.legibleGroups(fmt.formatNumber(value, maxDecimals: 0)),
+            style: labelStyle,
+            maxLines: 1,
+            softWrap: false,
+          ),
         ),
       ),
     );
@@ -625,7 +630,7 @@ class JarTrajectoryChart extends ConsumerWidget {
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
-                  reservedSize: 24,
+                  reservedSize: MediaQuery.textScalerOf(context).scale(24),
                   interval: span / 2,
                   getTitlesWidget: (value, meta) => SideTitleWidget(
                     meta: meta,

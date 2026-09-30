@@ -1,8 +1,14 @@
 // Baloot: problems found in the adversarial rules review, each proved by a
-// test that failed before its fix (final spec §11, RULES.md §5.6).
+// test that failed before its fix (final spec §11, RULES.md §5.6), plus the
+// AI levels in order.
+import 'dart:convert';
+import 'dart:math' as math;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/rules/cards/cards.dart';
 import 'package:madar/features/cinema/rules/cards/core/determinize.dart';
+
+import 'support.dart';
 
 List<PlayingCard> c(String ids) => PlayingCard.list(ids);
 PlayingCard p(String id) => PlayingCard.parse(id);
@@ -17,6 +23,48 @@ BalootEngine deal(List<String> hands, String up, {BalootOptions options = const 
       : c(stock.join(' '));
   return BalootEngine(BalootState.withDeal(hands: hs, upCard: upCard, stock: rest, options: options));
 }
+
+/// The first trick of a Sun deal bought by seat 0 (who took the up card
+/// A♥): seat 0 leads A♠; seat 1, void in spades, declares a hundred in clubs
+/// and plays the ♣10; seat 2 holds 9-10-J-Q-K♦ (a hundred topped by the
+/// king) and is to act. [seat0], [seat1] and [seat3] are the hidden hands:
+/// the two worlds used below differ only there, so seat 2 sees exactly the
+/// same thing in both (a hundred announced by seat 1, the ♠A and the ♣10).
+BalootState trickOne(String seat0, String seat1, String seat3, BalootDeclareProjects declare) {
+  final s = deal(
+    ['7S JS KS AS 9H', 'TC JC QC KC AC', '9D TD JD QD KD', '7C 8C 8S TS QS'],
+    '9S',
+    options: BalootOptions(declareProjects: declare),
+  ).state;
+  s
+    ..phase = BalootPhase.playing
+    ..mode = BalootMode.sun
+    ..trump = null
+    ..buyer = 0
+    ..bidder = 0
+    ..upCard = null
+    ..turnedUp = p('AH')
+    ..stock = []
+    ..hands = [c(seat0), c(seat1), c('9D TD JD QD KD 7H 9S JH'), c(seat3)]
+    ..projectsDecided = List.filled(4, declare == BalootDeclareProjects.auto)
+    ..trick = Trick(0)
+    ..turn = 0;
+  s.projects = declare == BalootDeclareProjects.auto
+      ? [for (var seat = 0; seat < 4; seat++) ...BalootRules.projectsOf(s, seat)]
+      : [];
+  final e = BalootEngine(s)..apply(BalootMove.play(p('AS')));
+  if (declare == BalootDeclareProjects.manual) e.apply(const BalootMove.declareProjects());
+  e.apply(BalootMove.play(p('TC')));
+  return e.state;
+}
+
+/// Seat 1's hundred is 10-J-Q-K-A♣ (it beats seat 2's king-high hundred).
+BalootState worldA(BalootDeclareProjects d) =>
+    trickOne('7S JS KS AS 9H QH AH 9C', 'TC JC QC KC AC 8H TH 7D', '7C 8C 8S TS QS 8D AD KH', d);
+
+/// Seat 1's hundred is 8-9-10-J-Q♣ (seat 2's king-high hundred beats it).
+BalootState worldB(BalootDeclareProjects d) =>
+    trickOne('7S JS KS AS 9H QH AH AC', '8C 9C TC JC QC 8H TH 7D', '7C KC 8S TS QS 8D AD KH', d);
 
 void main() {
   group('R1 projects: named when play starts, cards shown only after the first trick', () {
@@ -127,9 +175,141 @@ void main() {
       final mine = e.state.projects.where((x) => x.seat == 0).single;
       expect(mine.isCarre, isFalse);
       expect(
-        BalootRules.projectTeam(e.state.projects, e.state.firstPlayer, BalootMode.hokom, trump: Suit.spades, options: o),
+        BalootRules.projectTeam(
+          e.state.projects,
+          e.state.firstPlayer,
+          BalootMode.hokom,
+          trump: Suit.spades,
+          options: o,
+        ),
         0,
       );
+    });
+  });
+  group('R3 manual declaration: the AI decides on what has been announced, not on hidden cards', () {
+    test('an announced hundred of unknown height does not make seat 2 skip its own hundred', () {
+      const manual = BalootDeclareProjects.manual;
+      final a = worldA(manual);
+      final b = worldB(manual);
+      expect(a.turn, 2);
+      expect(BalootEngine(a).legalMoves(2), const [BalootMove.declareProjects(), BalootMove.skipProjects()]);
+      // Only the type and the points of seat 1's project are public so far.
+      expect(a.projects.single.value(BalootMode.sun), b.projects.single.value(BalootMode.sun));
+      final ma = const BalootAi().chooseMove(a, 2, AiLevel.medium, math.Random(1), AiBudget.phone);
+      final mb = const BalootAi().chooseMove(b, 2, AiLevel.medium, math.Random(1), AiBudget.phone);
+      // Before the fix the AI read seat 1's cards: skip in A, declare in B.
+      expect(ma, mb);
+      expect(ma, const BalootMove.declareProjects());
+    });
+
+    test('a project of a higher value announced by an opponent still makes it skip', () {
+      final s = worldB(BalootDeclareProjects.manual);
+      // Seat 2 now holds only a sira (4) against seat 1's hundred (20).
+      s.hands[2] = c('9D TD JD 7H 9S JH AD KH');
+      s.hands[3] = c('7C KC 8S TS QS 8D QD KD');
+      expect(BalootRules.projectsOf(s, 2).single.type, BalootProjectType.sira);
+      final m = const BalootAi().chooseMove(s, 2, AiLevel.medium, math.Random(1), AiBudget.phone);
+      expect(m, const BalootMove.skipProjects());
+    });
+  });
+
+  group('R4 hard AI: before the first trick is complete only the project types are public', () {
+    for (final d in BalootDeclareProjects.values) {
+      test('${d.name}: the sampled world depends only on what seat 2 has seen', () {
+        const ai = BalootAi();
+        final a = worldA(d);
+        final b = worldB(d);
+        expect(a.projectsRevealed, isFalse);
+        for (var k = 0; k < 12; k++) {
+          final wa = ai.determinize(a, 2, math.Random(k));
+          final wb = ai.determinize(b, 2, math.Random(k));
+          // Before the fix the worlds kept seat 1's real project cards.
+          expect(jsonEncode(wa.toJson()), jsonEncode(wb.toJson()), reason: 'sample $k');
+        }
+      });
+
+      test('${d.name}: each announced project is placed, at the announced value, in its owner\'s sampled hand', () {
+        const ai = BalootAi();
+        final real = worldA(d);
+        final own = real.projects.where((x) => x.seat == 2).toList();
+        final heights = <int>{};
+        for (var k = 0; k < 40; k++) {
+          final w = ai.determinize(real, 2, math.Random(k));
+          expect(sortedCards(w.cardsInPlay()), sortedCards(real.cardsInPlay()));
+          expect(w.hands[2], real.hands[2]);
+          expect(w.projects.where((x) => x.seat == 2).map((x) => x.cards), own.map((x) => x.cards));
+          final theirs = w.projects.where((x) => x.seat == 1).single;
+          expect(theirs.type, BalootProjectType.hundred);
+          // Seat 1 is void in spades and has played the ♣10.
+          final held = {...w.hands[1], p('TC')};
+          expect(held.containsAll(theirs.cards), isTrue, reason: '$theirs in ${w.hands[1]}');
+          expect(theirs.cards.any((x) => x.suit == Suit.spades), isFalse);
+          expect(w.hands[1].any((x) => x.suit == Suit.spades), isFalse);
+          heights.add(theirs.topIndex);
+          expect(w.projects.where((x) => x.seat == 0 || x.seat == 3), isEmpty);
+        }
+        // Different heights are sampled (the real one is not favoured).
+        expect(heights.length, greaterThan(1));
+      });
+    }
+
+    test('once the first trick is complete the shown projects are fixed in their owners\' hands', () {
+      final e = BalootEngine(worldA(BalootDeclareProjects.auto));
+      e.apply(BalootMove.play(p('9S')));
+      e.apply(BalootMove.play(p('QS')));
+      expect(e.state.projectsRevealed, isTrue);
+      final w = const BalootAi().determinize(e.state, 2, math.Random(3));
+      expect(
+        jsonEncode(w.projects.map((x) => x.toJson()).toList()),
+        jsonEncode(e.state.projects.map((x) => x.toJson()).toList()),
+      );
+      final seat1 = e.state.projects.singleWhere((x) => x.seat == 1);
+      expect(w.hands[1], containsAll(seat1.cards.where((x) => x != p('TC'))));
+    });
+  });
+
+  group('saving and copying', () {
+    test('copy() and a JSON round trip reproduce the state after every move (default and every option)', () {
+      for (final o in [
+        const BalootOptions(targetScore: 60),
+        const BalootOptions(
+          targetScore: 60,
+          kawesh: true,
+          aceThirdRound: true,
+          ashkalInRound2: true,
+          declareProjects: BalootDeclareProjects.manual,
+          firstLead: BalootFirstLead.taker,
+        ),
+      ]) {
+        for (var seed = 1; seed <= 3; seed++) {
+          final e = BalootEngine.newMatch(seed: seed, options: o);
+          final rng = CardRng(seed);
+          for (var n = 0; !e.isOver && n < 3000; n++) {
+            final j = jsonEncode(e.toJson());
+            expect(jsonEncode(BalootState.fromJson(jsonDecode(j) as Map<String, Object?>).toJson()), j);
+            expect(jsonEncode(e.state.copy().toJson()), j);
+            e.apply(const BalootAi().chooseMove(e.state, e.currentPlayer!, AiLevel.easy, rng, AiBudget.phone));
+          }
+          expect(e.isOver, isTrue);
+        }
+      }
+    });
+  });
+
+  group('AI levels in order', () {
+    test('medium beats easy', () {
+      final k = Kit('baloot', (seed) => BalootEngine.newMatch(seed: seed), BalootEngine.fromJson, const BalootAi());
+      var wins = 0;
+      var edge = 0.0;
+      const matches = 12;
+      for (var m = 0; m < matches; m++) {
+        final levels = [for (var s = 0; s < 4; s++) s % 2 == m % 2 ? AiLevel.medium : AiLevel.easy];
+        final r = playMatch(k, 700 + m, levels);
+        edge += r.scores[m % 2] - r.scores[1 - m % 2];
+        if (r.winners.contains(m % 2)) wins++;
+      }
+      expect(edge / matches, greaterThan(5));
+      expect(wins, greaterThan(matches / 2));
     });
   });
 }

@@ -103,18 +103,35 @@ class _SheetPainter extends CustomPainter {
     canvas.drawRect(Rect.fromLTWH(8, 8, size.width - 16, size.height - 16), frame);
     canvas.drawLine(const Offset(8, 74), Offset(size.width - 8, 74), frame);
 
-    final top = 84.0;
-    final rowH = (size.height - top - 16) / sheet.rows.length;
-    for (var r = 0; r < sheet.rows.length; r++) {
+    // Row heights by need: each row wants the height that its width-limited
+    // scale fills; spare height is shared out, a shortfall shrinks all rows.
+    const top = 84.0, chrome = 44.0;
+    final avail = size.height - top - 16;
+    final n0 = sheet.rows.length;
+    final want = List<double>.filled(n0, 0), wScale = List<double>.filled(n0, 0);
+    for (var r = 0; r < n0; r++) {
+      final row = sheet.rows[r];
+      final cellW = (size.width - 24) / row.cells.length;
+      final maxH = row.cells.fold<double>(1, (m, c) => math.max(m, c.height));
+      wScale[r] = row.scale ?? cellW / (maxH * 0.95);
+      want[r] = maxH * 1.12 * wScale[r] + chrome;
+    }
+    final total = want.fold<double>(0, (a, b) => a + b);
+    final spare = avail - total;
+    var y0 = top;
+    for (var r = 0; r < n0; r++) {
       final row = sheet.rows[r];
       ctx.skin = EraSkins.of(row.era ?? sheet.era);
-      final y0 = top + r * rowH;
+      final rowH = spare >= 0 ? want[r] + spare / n0 : want[r] * avail / total;
       _text(canvas, row.title, Offset(18, y0 + 4), 11, pencil.withValues(alpha: 1), bold: true);
       final n = row.cells.length;
       final cellW = (size.width - 24) / n;
       final maxH = row.cells.fold<double>(1, (m, c) => math.max(m, c.height));
-      final scale = row.scale ?? math.min((rowH - 44) / (maxH * 1.12), cellW / (maxH * 0.95));
-      final base = y0 + rowH - 26;
+      final scale = row.scale ?? math.min((rowH - chrome) / (maxH * 1.12), wScale[r]);
+      // Centre the drawings in a row that has height to spare.
+      final pad = math.max(0.0, (rowH - chrome - maxH * 1.12 * scale) / 2);
+      final base = y0 + rowH - 26 - pad;
+      y0 += rowH;
       for (var i = 0; i < n; i++) {
         final cell = row.cells[i];
         final cx = 12 + cellW * (i + 0.5);

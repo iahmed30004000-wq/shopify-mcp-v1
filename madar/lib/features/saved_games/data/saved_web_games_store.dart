@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import '../../../core/db/repositories/repositories.dart';
+import '../domain/game_url.dart';
 import '../domain/saved_web_game.dart';
 
 /// Everything Saved Games keeps: the games in the user's order and the
@@ -196,6 +197,38 @@ abstract class SavedWebGamesStore {
   });
 
   Future<void> setLayout(SavedGamesLayout layout) => _change((s) => (next: s.copyWith(layout: layout), result: null));
+
+  /// Adds the games of an earlier, simpler list – `[{"title", "url",
+  /// "addedAt"}, …]`, e.g. the hall's first `cinema.savedGames` row. Every
+  /// link goes through [validateGameUrl] (an `http` link is upgraded to
+  /// https); invalid links, links already saved and entries beyond
+  /// [SavedGamesLimits.maxGames] are skipped. Returns how many were added.
+  Future<int> importEntries(Object? json, {required String Function() newId, required DateTime now}) => _change((s) {
+    if (json is! List) return (next: null, result: 0);
+    final games = [...s.games];
+    final links = {for (final g in games) g.url.toString()};
+    var added = 0;
+    for (final e in json) {
+      if (games.length >= SavedGamesLimits.maxGames) break;
+      if (e is! Map) continue;
+      final raw = e['url'];
+      if (raw is! String) continue;
+      final url = validateGameUrl(httpsVersionOf(raw) ?? raw).url;
+      if (url == null || !links.add(url.toString())) continue;
+      final title = e['title'];
+      games.add(
+        SavedWebGame(
+          id: newId(),
+          title: title is String && title.trim().isNotEmpty ? title : url.host,
+          url: url,
+          art: GameArt.seeded(url.toString()),
+          addedAt: DateTime.tryParse('${e['addedAt']}')?.toLocal() ?? now,
+        ).bounded(),
+      );
+      added++;
+    }
+    return (next: added == 0 ? null : s.copyWith(games: games), result: added);
+  });
 }
 
 /// The encrypted key/value table (one JSON row under [key]; no schema
@@ -205,6 +238,29 @@ class KvSavedWebGamesStore extends SavedWebGamesStore {
 
   final KeyValueRepository kv;
   static const String key = 'savedGames.v1';
+
+  /// Where the Cinema hall's first, simpler saved-games list lives.
+  static const String legacyHallKey = 'cinema.savedGames';
+
+  /// One-shot move of the list under [legacyKey] into this store (see
+  /// [importEntries]); the old row is removed afterwards, so calling it
+  /// again is a no-op. Returns how many games were added.
+  Future<int> migrateLegacyList({
+    String legacyKey = legacyHallKey,
+    required String Function() newId,
+    DateTime Function() clock = DateTime.now,
+  }) async {
+    Object? raw;
+    try {
+      raw = await kv.getJson(legacyKey);
+    } on FormatException {
+      raw = null;
+    }
+    if (raw == null && !await kv.contains(legacyKey)) return 0;
+    final added = await importEntries(raw, newId: newId, now: clock());
+    await kv.remove(legacyKey);
+    return added;
+  }
 
   @override
   Future<Object?> readRaw() async {

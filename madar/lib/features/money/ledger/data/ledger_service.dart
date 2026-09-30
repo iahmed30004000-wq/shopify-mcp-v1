@@ -446,11 +446,27 @@ class LedgerService {
 
   /// Makes [code] the base currency, re-expressing every rate exactly
   /// ([RebasePlan]); returns the undo (restores every previous rate).
+  ///
+  /// Budget items kept "in the base currency" (no currency of their own)
+  /// are pinned to the old base first: a 200 JOD food plan stays 200 JOD
+  /// (282.09 USD once USD is the base), never silently 200 USD. The undo
+  /// unpins them again.
   Future<LedgerUndo> rebase(String code) async {
     return db.transaction(() async {
       final rows = await repos.currencies.getAll();
       final plan = RebasePlan.of([for (final r in rows) LedgerRows.currency(r)], code.toUpperCase());
       if (plan == null) throw StateError('Cannot make $code the base currency');
+      final oldBase = rows.where((r) => r.isBase).firstOrNull?.code.toUpperCase();
+      final pinned = <String>[];
+      if (oldBase != null && oldBase != code.toUpperCase()) {
+        final loose = await (db.select(db.budgetItems)..where((b) => b.currency.isNull())).get();
+        pinned.addAll([for (final r in loose) r.id]);
+        if (pinned.isNotEmpty) {
+          await (db.update(db.budgetItems)..where((b) => b.id.isIn(pinned))).write(
+            BudgetItemsCompanion(currency: Value(oldBase), updatedAt: Value(clock())),
+          );
+        }
+      }
       await db.batch((b) {
         for (final r in rows) {
           final next = plan.row(r.code.toUpperCase());
@@ -468,6 +484,13 @@ class LedgerService {
         await db.batch((b) {
           for (final r in rows) {
             b.insert(db.currencies, r, mode: InsertMode.insertOrReplace);
+          }
+          if (pinned.isNotEmpty) {
+            b.update(
+              db.budgetItems,
+              BudgetItemsCompanion(currency: const Value(null), updatedAt: Value(clock())),
+              where: (t) => t.id.isIn(pinned) & t.currency.equals(oldBase!),
+            );
           }
         });
       };

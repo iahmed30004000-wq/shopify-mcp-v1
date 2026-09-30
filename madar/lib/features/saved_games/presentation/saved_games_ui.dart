@@ -15,8 +15,9 @@ import 'game_editor_sheet.dart';
 import 'game_player_screen.dart';
 
 /// The link pattern shown in the empty state (a pattern, not a real game),
-/// isolated left-to-right inside Arabic text.
-final String savedGamesLinkExample = BidiIsolate.ltr('claude.ai/public/artifacts/…');
+/// isolated left-to-right inside Arabic text and kept in one piece (word
+/// joiners) when the line wraps.
+final String savedGamesLinkExample = BidiIsolate.ltr('claude.ai/\u2060public/\u2060artifacts/\u2060…');
 
 /// "Last played …" / "New" for [game] at [now].
 String lastPlayedLabel(L10n l, MadarFormatter f, SavedWebGame game, DateTime now) {
@@ -103,10 +104,10 @@ abstract final class SavedGamesActions {
     switch (result.status) {
       case AddGameStatus.added:
         Fx.fire(Sfx.complete);
-        showGameNote(context, l.savedGamesAdded(draft.title));
+        showGameNote(context, l.savedGamesAdded(BidiIsolate.isolate(draft.title)));
       case AddGameStatus.duplicate:
         Fx.fire(Sfx.error);
-        showGameNote(context, l.savedGamesUrlDuplicate(result.game?.title ?? draft.title));
+        showGameNote(context, l.savedGamesUrlDuplicate(BidiIsolate.isolate(result.game?.title ?? draft.title)));
       case AddGameStatus.full:
         Fx.fire(Sfx.error);
         showGameNote(context, l.savedGamesFull(context.formatter.formatInt(SavedGamesLimits.maxGames)));
@@ -131,7 +132,10 @@ abstract final class SavedGamesActions {
     final store = ref.read(savedWebGamesStoreProvider);
     final removed = await store.remove(game.id);
     if (removed == null) return null;
-    return UndoableAction(label: l.savedGamesDeleted(game.title), undo: () => store.restore(removed));
+    return UndoableAction(
+      label: l.savedGamesDeleted(BidiIsolate.isolate(game.title)),
+      undo: () => store.restore(removed),
+    );
   }
 
   /// Deletes and shows the undo toast (for callers outside [ActionableItem]).
@@ -150,7 +154,7 @@ abstract final class SavedGamesActions {
     final store = ref.read(savedWebGamesStoreProvider);
     final ok = await showGameConfirm(
       context,
-      title: l.savedGamesClearDataTitle(game.title),
+      title: l.savedGamesClearDataTitle(BidiIsolate.isolate(game.title)),
       body: l.savedGamesClearDataBody,
       confirmLabel: l.savedGamesConfirmClear,
       cancelLabel: l.savedGamesCancel,

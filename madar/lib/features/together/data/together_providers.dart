@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers.dart';
+import '../../home/home_providers.dart' show appForegroundProvider, homeClockProvider;
 import '../domain/head_to_head.dart';
 import '../domain/match_record.dart';
 import '../domain/play_modes.dart';
@@ -17,8 +18,9 @@ final togetherRepositoryProvider = Provider<TogetherRepository>(
   (ref) => TogetherRepository(ref.watch(databaseProvider)),
 );
 
-/// The clock used for "played today" / streak checks (tests override it).
-final togetherClockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
+/// The clock used for "played today" / streak checks: the app's wall clock
+/// ([homeClockProvider]); tests override either.
+final togetherClockProvider = Provider<DateTime Function()>((ref) => ref.watch(homeClockProvider));
 
 final togetherProfilesProvider = StreamProvider<TogetherProfiles>(
   (ref) => ref.watch(togetherRepositoryProvider).watchProfiles(),
@@ -107,7 +109,22 @@ final class TogetherOverview {
   int get dayStreak => ledger.currentDayStreak(now);
 }
 
-final togetherOverviewProvider = Provider<AsyncValue<TogetherOverview>>((ref) {
+/// Everything the Together screens show. Its [TogetherOverview.now] is taken
+/// when it is built – so it is disposed with the last screen that shows it
+/// and rebuilt when the app comes back to the foreground: a streak that
+/// lapsed overnight, or "played today", is never shown stale.
+final togetherOverviewProvider = Provider.autoDispose<AsyncValue<TogetherOverview>>((ref) {
+  final foreground = ref.watch(appForegroundProvider);
+  var wasForeground = foreground.value;
+  void onForeground() {
+    final now = foreground.value;
+    if (now && !wasForeground) ref.invalidateSelf();
+    wasForeground = now;
+  }
+
+  foreground.addListener(onForeground);
+  ref.onDispose(() => foreground.removeListener(onForeground));
+
   final profiles = ref.watch(togetherProfilesProvider);
   final ledger = ref.watch(togetherLedgerProvider);
   final history = ref.watch(togetherHistoryProvider);

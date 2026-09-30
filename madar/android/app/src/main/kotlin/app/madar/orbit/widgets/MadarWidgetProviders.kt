@@ -14,16 +14,18 @@ import android.os.Bundle
  * * `onUpdate` (added, the periodic update, after a reboot) and the kind's
  *   alarm ([ACTION_TICK]: the next page) redraw; so do clock and time-zone
  *   changes.
- * * A widget without data shows "Open Madar" and asks a running app to
- *   write it ([MadarWidgetsChannel.notifyChanged]).
+ * * A widget with nothing to show from its data (none yet, unreadable,
+ *   run out, written in another time zone) shows "Open Madar" and asks a
+ *   running app to write it again ([MadarWidgetsChannel.notifyChanged]).
  * * When the last widget of a kind is removed, its data is deleted.
  */
 abstract class MadarWidgetProvider : AppWidgetProvider() {
     abstract val kind: MadarWidgetKind
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        MadarWidgetRenderer.update(context, appWidgetManager, kind, appWidgetIds)
-        if (!MadarWidgetStore.hasSnapshot(context, kind)) MadarWidgetsChannel.notifyChanged()
+        if (!MadarWidgetRenderer.update(context, appWidgetManager, kind, appWidgetIds)) {
+            MadarWidgetsChannel.notifyChanged()
+        }
     }
 
     override fun onAppWidgetOptionsChanged(
@@ -48,7 +50,7 @@ abstract class MadarWidgetProvider : AppWidgetProvider() {
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
             ACTION_TICK, Intent.ACTION_TIME_CHANGED, Intent.ACTION_TIMEZONE_CHANGED ->
-                MadarWidgetRenderer.updateAll(context, kind)
+                if (!MadarWidgetRenderer.updateAll(context, kind)) MadarWidgetsChannel.notifyChanged()
             else -> super.onReceive(context, intent)
         }
     }

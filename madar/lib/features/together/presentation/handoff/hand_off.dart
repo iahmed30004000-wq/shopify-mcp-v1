@@ -218,6 +218,9 @@ class HandOffGate extends ConsumerStatefulWidget {
 class _HandOffGateState extends ConsumerState<HandOffGate> with WidgetsBindingObserver {
   bool _foreground = true;
 
+  /// The last build put the private view on screen.
+  bool _privateShown = false;
+
   @override
   void initState() {
     super.initState();
@@ -244,14 +247,46 @@ class _HandOffGateState extends ConsumerState<HandOffGate> with WidgetsBindingOb
   }
 
   void _changed() {
-    if (mounted) setState(() {});
+    if (!mounted) return;
+    if (_privateShown && !widget.controller.isRevealed) _closeRoutesAbove();
+    setState(() {});
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final foreground = state == AppLifecycleState.resumed;
-    if (!foreground) widget.controller.shield();
+    if (!foreground) {
+      widget.controller.shield();
+      if (_privateShown) _closeRoutesAbove();
+    }
     if (foreground != _foreground) setState(() => _foreground = foreground);
+  }
+
+  /// The private view is going: close whatever it opened on top of the gate
+  /// – a card-detail sheet, an answer dialog – in the gate's navigator and
+  /// every enclosing one, at once and without an exit animation (a sheet
+  /// sliding away for 200 ms is 200 ms of the previous player's cards in the
+  /// next player's hands).
+  void _closeRoutesAbove() {
+    BuildContext at = context;
+    var nav = Navigator.maybeOf(at);
+    while (nav != null) {
+      final own = ModalRoute.of(at);
+      if (own == null) return;
+      for (var guard = 0; guard < 64 && own.isActive && !own.isCurrent; guard++) {
+        Route<dynamic>? top;
+        // Peeks at the top route (the predicate stops at once: nothing pops).
+        nav.popUntil((r) {
+          top = r;
+          return true;
+        });
+        final t = top;
+        if (t == null || t == own) break;
+        nav.removeRoute(t);
+      }
+      at = nav.context;
+      nav = at.findAncestorStateOfType<NavigatorState>();
+    }
   }
 
   @override
@@ -259,6 +294,7 @@ class _HandOffGateState extends ConsumerState<HandOffGate> with WidgetsBindingOb
     final c = widget.controller;
     final viewer = c.viewer;
     final Widget body;
+    _privateShown = viewer != null && c.isRevealed && _foreground;
     if (viewer != null && c.isRevealed && _foreground) {
       body = _RevealIn(key: ValueKey('reveal-${c.reveals}'), child: widget.privateBuilder(context, viewer));
     } else if (viewer == null || !_foreground) {
@@ -326,16 +362,33 @@ class HandOffScreen extends StatefulWidget {
   final bool stillYou;
   final String? publicSummary;
 
+  /// How long the reveal button ignores touches after the screen appears.
+  /// The player who just moved often taps again at once – where their cards
+  /// were, under the big reveal button – and must never reveal the next
+  /// player's hand that way. (A finger already down when the screen
+  /// appears never reaches the button at all.)
+  static const Duration armDelay = Duration(milliseconds: 650);
+
   @override
   State<HandOffScreen> createState() => _HandOffScreenState();
 }
 
-class _HandOffScreenState extends State<HandOffScreen> with SingleTickerProviderStateMixin {
+class _HandOffScreenState extends State<HandOffScreen> with TickerProviderStateMixin {
   late final AnimationController _spin = AnimationController(vsync: this, duration: const Duration(seconds: 90));
+
+  /// Runs once for [HandOffScreen.armDelay] (also under reduced motion: it
+  /// is a safety delay, not decoration); the reveal button takes touches
+  /// once it has completed.
+  late final AnimationController _arm = AnimationController(vsync: this, duration: HandOffScreen.armDelay);
 
   @override
   void initState() {
     super.initState();
+    _arm
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed && mounted) setState(() {});
+      })
+      ..forward();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) Fx.fire(Sfx.swipe);
     });
@@ -354,6 +407,7 @@ class _HandOffScreenState extends State<HandOffScreen> with SingleTickerProvider
 
   @override
   void dispose() {
+    _arm.dispose();
     _spin.dispose();
     super.dispose();
   }
@@ -508,14 +562,19 @@ class _HandOffScreenState extends State<HandOffScreen> with SingleTickerProvider
                     const SizedBox(height: Space.m),
                     stagger(
                       5,
-                      MadarButton(
-                        key: const ValueKey('together-reveal'),
-                        label: widget.stillYou ? l.togetherContinue : l.togetherReveal(tx.name(widget.profile)),
-                        icon: Icons.visibility_rounded,
-                        size: MadarButtonSize.large,
-                        expand: true,
-                        sfx: Sfx.toggleOn,
-                        onPressed: widget.onReveal,
+                      // Absorbs (not ignores) early touches: nothing under
+                      // the gate may receive them either.
+                      AbsorbPointer(
+                        absorbing: !_arm.isCompleted,
+                        child: MadarButton(
+                          key: const ValueKey('together-reveal'),
+                          label: widget.stillYou ? l.togetherContinue : l.togetherReveal(tx.name(widget.profile)),
+                          icon: Icons.visibility_rounded,
+                          size: MadarButtonSize.large,
+                          expand: true,
+                          sfx: Sfx.toggleOn,
+                          onPressed: widget.onReveal,
+                        ),
                       ),
                     ),
                   ],

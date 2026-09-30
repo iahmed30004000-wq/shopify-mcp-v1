@@ -744,7 +744,8 @@ class TogetherSession<S, M> extends ChangeNotifier {
   }
 
   void _onResult(ResultBody b) {
-    if (_state == null || _phase == SessionPhase.finished) return;
+    // The host is the referee (the codec already refuses a guest's result).
+    if (role != SessionRole.guest || _state == null || _phase == SessionPhase.finished) return;
     final o = switch (b.outcome) {
       SeatOutcomeKind.draw => SeatOutcome.draw(scores: b.scores),
       SeatOutcomeKind.loss => SeatOutcome.loss(scores: b.scores),

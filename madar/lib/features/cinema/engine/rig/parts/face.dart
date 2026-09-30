@@ -78,12 +78,26 @@ final class Face {
   /// Eyelashes (count per eye, 0 = none).
   int lashes = 0;
 
+  /// Colour of the face's brush lines (brows, lids, mouth, nose); `null` =
+  /// the era's ink, except in neon where the lines are the dark ink so the
+  /// features read inside the glowing outline.
+  Color? line;
+
   int salt = 0;
 
   // Resolved per draw.
   double _ew = 0, _eh = 0;
 
   void draw(InkBuild b) {
+    final colors = b.colors;
+    final ink = colors.ink;
+    final l = line ?? (colors.neon ? colors.dark : null);
+    if (l != null) colors.ink = l;
+    _draw(b);
+    colors.ink = ink;
+  }
+
+  void _draw(InkBuild b) {
     final e = expression;
     final t = turn.clamp(0.0, 1.0);
     // Eye metrics.

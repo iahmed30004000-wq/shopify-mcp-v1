@@ -50,6 +50,10 @@ final class InkColors {
   /// Rim light behind dark silhouettes on a dark backdrop (noir), or null.
   Color? rim;
 
+  /// A face / skin fill that reads in every era: the paper fill, except in
+  /// neon where fills sink – a face stays light there so its features read.
+  Color skinLight = const Color(0xFFFFFFFF);
+
   /// Palette straight through (for custom art).
   late EraPalette palette;
   late InkStyle style;
@@ -97,6 +101,7 @@ final class InkColors {
       hot = p.footlight;
       glass = Color.lerp(p.highlight, p.midtone, 0.15)!;
     }
+    skinLight = neon ? Color.lerp(p.paper, p.accent, 0.16)! : _fills[PaletteRole.paper.index];
     final bd = p.backdrop;
     final backLum = 0.2126 * bd.r + 0.7152 * bd.g + 0.0722 * bd.b;
     rim = !neon && backLum < 0.3 ? Color.lerp(p.highlight, p.footlight, 0.35)!.withValues(alpha: 0.9) : null;

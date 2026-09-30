@@ -181,6 +181,7 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
         final h = constraints.maxHeight;
         final pad = mq.padding;
         final viewPad = mq.viewPadding;
+        final gestures = mq.systemGestureInsets;
 
         Widget half(int participant, Rect rect, {required bool touchesTop, required bool touchesBottom, required bool touchesLeft, required bool touchesRight, required int turns}) {
           EdgeInsets edges(EdgeInsets p) => EdgeInsets.fromLTRB(
@@ -193,6 +194,9 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
           final size = odd ? Size(rect.height, rect.width) : rect.size;
           final spec = SplitHalf(participant: participant, quarterTurns: turns, size: size);
           return Positioned.fromRect(
+            // Keyed by participant: when the layout changes (the phone is
+            // turned) each half keeps its own state instead of being rebuilt.
+            key: ValueKey('together-split-slot-$participant'),
             rect: rect,
             child: ClipRect(
               child: RotatedBox(
@@ -203,6 +207,9 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
                     size: size,
                     padding: SplitScreenArena.rotateInsets(edges(pad), turns),
                     viewPadding: SplitScreenArena.rotateInsets(edges(viewPad), turns),
+                    // Android's edge-swipe areas (back gesture…), like the
+                    // safe area: only on this half's device edges, turned.
+                    systemGestureInsets: SplitScreenArena.rotateInsets(edges(gestures), turns),
                     viewInsets: EdgeInsets.zero,
                   ),
                   child: _HalfScope(
@@ -230,6 +237,9 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
 
         final List<Widget> halves;
         final Rect divider;
+        // Midline colours at its physical start (top / left) and end.
+        final Color lineStart;
+        final Color lineEnd;
         switch (widget.layout) {
           case SplitLayout.faceToFace:
             final hh = (h - gap) / 2;
@@ -238,6 +248,7 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
               half(0, Rect.fromLTWH(0, hh + gap, w, hh), touchesTop: false, touchesBottom: true, touchesLeft: true, touchesRight: true, turns: 0),
             ];
             divider = Rect.fromLTWH(0, hh, w, gap);
+            (lineStart, lineEnd) = (colors[1], colors[0]);
           case SplitLayout.sideBySide || SplitLayout.endToEnd:
             final hw = (w - gap) / 2;
             // Participant 0 sits at the reading start.
@@ -256,6 +267,7 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
                 ),
             ];
             divider = Rect.fromLTWH(hw, 0, gap, h);
+            (lineStart, lineEnd) = p0Left ? (colors[0], colors[1]) : (colors[1], colors[0]);
         }
 
         return Stack(
@@ -267,8 +279,8 @@ class _SplitScreenArenaState extends State<SplitScreenArena> {
                 child: CustomPaint(
                   painter: _MidlinePainter(
                     horizontal: widget.layout == SplitLayout.faceToFace,
-                    a: colors[1],
-                    b: colors[0],
+                    a: lineStart,
+                    b: lineEnd,
                     gold: tokens.metalGold,
                   ),
                 ),
@@ -349,7 +361,11 @@ class _MidlinePainter extends CustomPainter {
   _MidlinePainter({required this.horizontal, required this.a, required this.b, required this.gold});
 
   final bool horizontal;
+
+  /// Colour at the physical top (horizontal line) or left (vertical line).
   final Color a;
+
+  /// Colour at the physical bottom / right.
   final Color b;
   final Color gold;
 
@@ -357,7 +373,7 @@ class _MidlinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
     final gradient = LinearGradient(
-      begin: horizontal ? Alignment.topCenter : AlignmentDirectional.centerStart.resolve(TextDirection.ltr),
+      begin: horizontal ? Alignment.topCenter : Alignment.centerLeft,
       end: horizontal ? Alignment.bottomCenter : Alignment.centerRight,
       colors: [a, gold, b],
     );

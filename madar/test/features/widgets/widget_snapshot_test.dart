@@ -90,6 +90,25 @@ void main() {
       expect(page['off'], phoneOffset(kiritimati));
     });
 
+    test('keeps the offsets of the zone it was built in, however late it is written', () {
+      // Built at UTC+3 (the dose times are UTC+3 wall-clock texts), written
+      // after the phone moved to UTC+1 (the bridge rewrites a cached build
+      // when a widget is added while the app is in the background): the
+      // JSON must still say UTC+3, so Android refuses the stale times.
+      final saved = widgetPhoneOffsetOf;
+      addTearDown(() => widgetPhoneOffsetOf = saved);
+      widgetPhoneOffsetOf = (_) => 180;
+      final s = snapshot();
+      widgetPhoneOffsetOf = (_) => 60;
+      final j = jsonDecode(s.encode()) as Map<String, Object?>;
+      expect(j['untilOff'], 180);
+      final pages = (j['pages'] as List).cast<Map<String, Object?>>();
+      expect(pages.first.containsKey('off'), isFalse);
+      expect(pages.last['off'], 180);
+      // A snapshot made in the new zone says so.
+      expect(jsonDecode(snapshot().encode())['untilOff'], 60);
+    });
+
     test('picks the last started page, like the Android provider', () {
       final s = snapshot();
       expect(s.pageAt(t0)!.headline, '١/٢');

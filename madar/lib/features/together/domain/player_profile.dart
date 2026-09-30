@@ -54,7 +54,13 @@ final class TogetherAvatar {
 
   TogetherAvatar withSeed(int seed) => TogetherAvatar._(kind, seed % seedCount, emoji);
 
-  Map<String, Object?> toJson() => {'k': kind.name, 's': seed, if (emoji != null) 'e': emoji};
+  /// Bounded however the avatar was built: the seed within [seedCount], an
+  /// over-long emoji dropped (it reads back as the fallback).
+  Map<String, Object?> toJson() => {
+    'k': kind.name,
+    's': TogetherBounds.count(seed, max: seedCount - 1),
+    if (emoji != null && emoji!.length <= TogetherBounds.maxEmojiLength) 'e': emoji,
+  };
 
   /// A stored avatar; [fallback] when missing or corrupt.
   static TogetherAvatar fromJson(Object? json, {required TogetherAvatar fallback}) {
@@ -190,13 +196,18 @@ final class TogetherProfile {
         : TogetherBounds.cleanText(customTitle, TogetherBounds.maxTitleLength),
   );
 
-  Map<String, Object?> toJson() => {
-    'n': name,
-    'a': avatar.toJson(),
-    'c': colorIndex,
-    if (title != null) 't': title!.name,
-    if (customTitle.isNotEmpty) 'ct': customTitle,
-  };
+  /// Cleaned and bounded on the way out too: a profile built with the
+  /// constructor (not [copyWith]) never stores an unbounded value.
+  Map<String, Object?> toJson() {
+    final ct = TogetherBounds.cleanText(customTitle, TogetherBounds.maxTitleLength);
+    return {
+      'n': TogetherBounds.cleanText(name, TogetherBounds.maxNameLength),
+      'a': avatar.toJson(),
+      'c': TogetherPalette.clampIndex(colorIndex),
+      if (title != null) 't': title!.name,
+      if (ct.isNotEmpty) 'ct': ct,
+    };
+  }
 
   /// A stored profile of [slot]; the defaults for anything missing or corrupt.
   static TogetherProfile fromJson(PlayerSlot slot, Object? json) {

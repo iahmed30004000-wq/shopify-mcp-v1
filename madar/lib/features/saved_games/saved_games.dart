@@ -33,9 +33,9 @@ export 'data/game_platform.dart'
         savedGamesHostChannel;
 export 'data/saved_games_providers.dart';
 export 'data/saved_web_games_store.dart';
-export 'domain/game_url.dart';
-export 'domain/navigation_policy.dart';
-export 'domain/saved_web_game.dart';
+export 'domain/game_url.dart' show GameUrlCheck, GameUrlError, isClaudeArtifactUrl, validateGameUrl;
+export 'domain/navigation_policy.dart' show GameOrigins, NavigationVerdict, decideGameNavigation, maxAdoptedOrigins;
+export 'domain/saved_web_game.dart' show GameArt, GameOrientation, SavedGamesLayout, SavedGamesLimits, SavedWebGame;
 export 'presentation/game_editor_sheet.dart' show showGameEditorSheet;
 export 'presentation/game_player_screen.dart' show SavedGamePlayerScreen;
 export 'presentation/saved_games_screen.dart' show SavedGamesScreen;

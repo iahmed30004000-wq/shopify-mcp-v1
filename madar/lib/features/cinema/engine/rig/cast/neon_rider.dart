@@ -365,7 +365,7 @@ class NeonRider extends HoseRig {
       ..lineTo(mx + 0.5 * uu, my - 3 * uu)
       ..close();
     b.endLayer();
-    _riderHead(b, shX + 4 * uu + _head.x, shY - 13 * uu + _head.y);
+    _riderHead(b, shX + 4 * uu + _head.x, shY - 16 * uu + _head.y);
     // Near leg to the peg, boot.
     Hose.draw(
       b,
@@ -441,8 +441,9 @@ class NeonRider extends HoseRig {
   void _riderHead(InkBuild b, double x, double y) {
     final c = b.colors;
     final pen = b.pen;
-    final r = 11 * u;
-    final skin = c.fill(spec.fill), helmet = c.fill(PaletteRole.midtone);
+    // A big rubber-hose head (the face must read at racing size).
+    final r = 14 * u;
+    final skin = c.skinLight, helmet = c.fill(PaletteRole.midtone);
     b.layer();
     final hc = b.contour(1)..clear();
     hc.blob(pen, x, y, r, r * 0.95, samples: 30);
@@ -458,7 +459,7 @@ class NeonRider extends HoseRig {
           ? RigExpression.determined
           : expression
       ..eyes = RigEyes.pieCut
-      ..eyeScale = 1.05
+      ..eyeScale = 1.2
       ..eyeY = -0.02
       ..blink = blinkAmount
       ..lookX = lookSpring.x

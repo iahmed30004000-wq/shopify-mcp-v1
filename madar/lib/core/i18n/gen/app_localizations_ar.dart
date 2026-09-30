@@ -22187,9 +22187,6 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get savedGamesPlay => 'العب';
-
-  @override
   String savedGamesPlayGame(String title) {
     return 'العب $title';
   }
@@ -22276,9 +22273,6 @@ class L10nAr extends L10n {
   String get savedGamesEdit => 'تعديل';
 
   @override
-  String get savedGamesMore => 'خيارات أخرى';
-
-  @override
   String get savedGamesClearData => 'مسح بيانات الموقع';
 
   @override
@@ -22288,7 +22282,7 @@ class L10nAr extends L10n {
 
   @override
   String get savedGamesClearDataBody =>
-      'يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.';
+      'يُحذف ما حفظه موقع اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة، لكل الألعاب من هذا الموقع. ما تضمّنه اللعبة من مواقع أخرى يُمسح بـ«مسح بيانات كل الألعاب». لا يمكن التراجع.';
 
   @override
   String get savedGamesClearDataScheduled =>
@@ -22426,9 +22420,6 @@ class L10nAr extends L10n {
 
   @override
   String get savedGamesShelfEmpty => 'احفظ لعبة ويب برابطها وستظهر هنا.';
-
-  @override
-  String get savedGamesDeleteGame => 'حذف';
 
   @override
   String get savedGamesOpenAll => 'فتح ألعابي المحفوظة';

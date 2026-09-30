@@ -499,7 +499,9 @@ class ToonRig extends HoseRig {
     final shFront = bodyW * 0.44;
     // Shoulder roots, front view → side view.
     _sh0 = Bounce.lerp(-shFront, -bodyW * 0.3, tn);
-    _sh1 = Bounce.lerp(shFront, bodyW * 0.3, tn);
+    // The near arm roots near the front edge in a side view (a shoulder
+    // deep inside the belly draws a hook across it).
+    _sh1 = Bounce.lerp(shFront, bodyW * 0.4, tn);
     _hp0 = Bounce.lerp(-bodyW * 0.2, -bodyW * 0.06, tn);
     _hp1 = Bounce.lerp(bodyW * 0.2, bodyW * 0.08, tn);
 

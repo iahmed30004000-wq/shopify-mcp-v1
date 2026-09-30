@@ -270,4 +270,72 @@ void main() {
   testWidgets('settings sheet – Arabic', (tester) async {
     await shot(tester, 'settings_ar', _SheetHost(showTogetherSettingsSheet));
   });
+
+  // Review matrix: Arabic / English × Lapis / Pearl / Aurora at text scale
+  // 1.3, with a Latin name among Arabic text and an Arabic name among English
+  // (bidi), a custom title and a long history.
+  group('matrix – text scale 1.3', () {
+    Future<void> mixedNames(TogetherRepository repo) async {
+      await repo.saveProfile(
+        TogetherProfile.defaults(PlayerSlot.one).copyWith(name: 'Nova', title: PlayerTitle.strategist),
+      );
+      await repo.saveProfile(
+        TogetherProfile.defaults(PlayerSlot.two).copyWith(
+          name: 'نجمة الصباح',
+          avatar: const TogetherAvatar.emoji('🌙'),
+          customTitle: 'سيدة الباصرة',
+        ),
+      );
+    }
+
+    final screens = <String, (Widget Function(), bool history, Future<void> Function(WidgetTester)?)>{
+      'home': (() => const TogetherHomeScreen(), true, null),
+      'home_scrolled': (
+        () => const TogetherHomeScreen(),
+        true,
+        (tester) => tester.drag(find.byType(Scrollable).first, const Offset(0, -700)),
+      ),
+      'hall': (() => const HallOfFameScreen(), true, null),
+      'launch': (() => _SheetHost((c) => showGameLaunchSheet(c, game: TogetherGames.airHockey)), false, null),
+      'handoff': (
+        () => Scaffold(
+          body: HandOffGate(
+            controller: HandOffController()..passTo(1),
+            profileOf: (p) => TogetherProfile.defaults(p == 0 ? PlayerSlot.one : PlayerSlot.two).copyWith(
+              name: p == 0 ? 'Nova' : 'نجمة الصباح',
+              customTitle: p == 1 ? 'سيدة الباصرة' : null,
+            ),
+            publicSummary: 'e4 → e5',
+            privateBuilder: (context, p) => const SizedBox(),
+          ),
+        ),
+        false,
+        null,
+      ),
+      'split': (() => const _SplitDemo(), false, null),
+      'settings': (() => const _SheetHost(showTogetherSettingsSheet), false, null),
+      'profile': (() => _SheetHost((c) => showTogetherProfileSheet(c, PlayerSlot.two)), false, null),
+    };
+    for (final locale in const [Locale('ar'), Locale('en')]) {
+      for (final theme in const [MadarThemeId.lapis, MadarThemeId.pearl, MadarThemeId.aurora]) {
+        for (final e in screens.entries) {
+          final (build, history, before) = e.value;
+          testWidgets('${e.key} – ${locale.languageCode}, ${theme.name}', (tester) async {
+            tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+            addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+            await shot(
+              tester,
+              'matrix/${e.key}_${locale.languageCode}_${theme.name}',
+              build(),
+              theme: theme,
+              locale: locale,
+              history: history,
+              seed: mixedNames,
+              beforeCapture: before,
+            );
+          });
+        }
+      }
+    }
+  });
 }

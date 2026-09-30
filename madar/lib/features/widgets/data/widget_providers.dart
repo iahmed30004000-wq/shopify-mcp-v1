@@ -66,15 +66,15 @@ class WidgetPrefsController extends Notifier<WidgetPrefs> {
 
   /// [show] null: back to the default (hidden while the app lock is on).
   ///
-  /// A choice equal to what the app lock implies right now is no choice and
-  /// is not kept: "show" picked while the lock is off (the default then)
-  /// must not keep names, times and amounts on the home screen once the
-  /// lock is turned on. Only a real departure from the default is stored –
-  /// hide with the lock off (stays hidden), show with the lock on (the
-  /// user's explicit opt-in).
+  /// "Hide" is always kept: hiding never puts anything on the home screen,
+  /// so a widget hidden under the lock stays hidden when the lock is turned
+  /// off. "Show" is kept only as a departure from the default – the user's
+  /// explicit opt-in while the lock is on; picked while the lock is off (the
+  /// default then) it is no choice and is not kept, so names, times and
+  /// amounts leave the home screen once the lock is turned on.
   Future<void> setDetails(MadarWidgetKind kind, bool? show) {
     final byDefault = const WidgetPrefs().showsDetails(kind, appLockOn: ref.read(widgetAppLockOnProvider));
-    return _save(state.withDetails(kind, show == byDefault ? null : show));
+    return _save(state.withDetails(kind, show == true && byDefault ? null : show));
   }
 
   Future<void> setBudgetPeriod(BudgetPeriod period) => _save(state.withBudgetPeriod(period));
@@ -292,12 +292,18 @@ class WidgetInstalled extends Notifier<Set<MadarWidgetKind>> {
 
   /// Asks Android again. [rewrite]: a widget was added or removed while the
   /// app may not have been watching (Android deletes a kind's data when its
-  /// last widget goes), so every installed kind is written again.
+  /// last widget goes), or a widget has nothing to show (its data ran out,
+  /// or the phone changed time zone), so every installed kind is built again
+  /// from a fresh "now" – the app may have sat in the background since its
+  /// last one – and written again.
   Future<void> refresh({bool rewrite = false}) async {
     try {
       final kinds = await ref.read(widgetPlatformProvider).installed();
       if (!ref.mounted) return;
-      if (rewrite) ref.read(widgetBridgeProvider).forgetAll();
+      if (rewrite) {
+        ref.read(widgetBridgeProvider).forgetAll();
+        ref.invalidate(widgetNowProvider);
+      }
       if (!setEquals(kinds, state)) {
         state = Set.unmodifiable(kinds);
       } else if (rewrite) {

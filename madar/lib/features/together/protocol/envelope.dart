@@ -34,10 +34,10 @@ abstract final class TogetherProtocol {
 /// Every message kind.
 enum TogetherMessageKind {
   /// Guest → host: "I am here, running this game".
-  hello(sequenced: false),
+  hello(sequenced: false, onlyFrom: 1),
 
   /// Host → guest: the shared seed, config and seating; resets ordering.
-  start(sequenced: true, resets: true),
+  start(sequenced: true, resets: true, onlyFrom: 0),
 
   /// A move of a turn-based game.
   move(sequenced: true),
@@ -46,27 +46,32 @@ enum TogetherMessageKind {
   input(sequenced: false),
 
   /// The host's authoritative state; resets ordering.
-  snapshot(sequenced: true, resets: true),
+  snapshot(sequenced: true, resets: true, onlyFrom: 0),
 
   /// "Where I am" after a (re)connection or a gap: turn, state hash, ack.
   sync(sequenced: false),
 
   /// Guest → host: "send me a snapshot".
-  resync(sequenced: false),
+  resync(sequenced: false, onlyFrom: 1),
 
-  /// The match result.
-  result(sequenced: true),
+  /// Host → guest: the match result (the host is the referee).
+  result(sequenced: true, onlyFrom: 0),
 
   /// Leaving the session.
   bye(sequenced: false);
 
-  const TogetherMessageKind({required this.sequenced, this.resets = false});
+  const TogetherMessageKind({required this.sequenced, this.resets = false, this.onlyFrom});
 
   /// Delivered in order, acknowledged and retransmitted.
   final bool sequenced;
 
   /// Processed as soon as it arrives; later messages continue from it.
   final bool resets;
+
+  /// The only participant that may send this kind (0 host, 1 guest), or
+  /// null for both. The codec refuses it from the other side: a guest can
+  /// neither declare the result nor jump the host's ordering with a reset.
+  final int? onlyFrom;
 }
 
 /// How a finished game ended, by seat (the session maps seats to players).
@@ -334,12 +339,14 @@ final class TogetherCodec {
 
   TogetherEnvelope _parse(Object? json) {
     if (json is! Map) throw const TogetherDataRejected(TogetherRejection.notAnEnvelope);
+    if (json['p'] != TogetherProtocol.magic) throw const TogetherDataRejected(TogetherRejection.notAnEnvelope, 'p');
+    // The version first: another version may add fields or kinds, and must
+    // be recognised as such (the session then stops instead of waiting).
+    final v = _int(json, 'v', '');
+    if (v != TogetherProtocol.version) throw const TogetherDataRejected(TogetherRejection.unsupportedVersion, 'v');
     for (final k in json.keys) {
       if (!_top.contains(k)) throw TogetherDataRejected(TogetherRejection.unknownField, '$k');
     }
-    if (json['p'] != TogetherProtocol.magic) throw const TogetherDataRejected(TogetherRejection.notAnEnvelope, 'p');
-    final v = _int(json, 'v', '');
-    if (v != TogetherProtocol.version) throw const TogetherDataRejected(TogetherRejection.unsupportedVersion, 'v');
     final sid = json['sid'];
     if (sid is! String || !_sessionId.hasMatch(sid)) throw const TogetherDataRejected(TogetherRejection.wrongType, 'sid');
     final kind = TogetherMessageKind.values.where((k) => k.name == json['k']).firstOrNull;
@@ -347,6 +354,7 @@ final class TogetherCodec {
     final seq = _int(json, 'seq', '', min: 0);
     final ack = _int(json, 'ack', '', min: 0);
     final from = _int(json, 'from', '', min: 0, max: TogetherProtocol.participants - 1);
+    if (kind.onlyFrom != null && from != kind.onlyFrom) throw const TogetherDataRejected(TogetherRejection.wrongType, 'from');
     if (kind.sequenced != (seq > 0)) throw const TogetherDataRejected(TogetherRejection.wrongType, 'seq');
     final b = json['b'];
     if (b is! Map) throw const TogetherDataRejected(TogetherRejection.missingField, 'b');

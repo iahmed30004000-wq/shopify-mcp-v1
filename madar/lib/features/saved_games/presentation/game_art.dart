@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../../../core/design/painters/painters.dart';
 import '../../../core/design/tokens.dart';
+import '../../../core/i18n/formatters.dart';
 import '../domain/saved_web_game.dart';
+
+/// Aligns user text (a game title, which carries its own direction) to the
+/// reading start of the surrounding UI, so a wrapped English title in an
+/// Arabic card lines up with the Arabic caption under it.
+TextAlign uiStartAlign(BuildContext context) =>
+    Directionality.of(context) == TextDirection.rtl ? TextAlign.right : TextAlign.left;
 
 /// Glyphs and colours of generated game icons (Madar's own, original art).
 abstract final class GameArtPalette {
@@ -222,6 +229,8 @@ class GamePoster extends StatelessWidget {
                               title!,
                               maxLines: titleMaxLines,
                               overflow: TextOverflow.ellipsis,
+                              textDirection: BidiIsolate.directionOf(title!),
+                              textAlign: uiStartAlign(context),
                               style: text.titleMedium?.copyWith(
                                 color: Colors.white,
                                 height: 1.25,

@@ -65,6 +65,16 @@ object MadarWidgetRenderer {
      */
     enum class Variant { SMALL, SHORT, WIDE, TALL }
 
+    /**
+     * Heights (dp) from which a list widget shows 3 rows (WIDE) and 6 rows
+     * (TALL): the header, the next line, the rows (22 dp each), the "+N
+     * more" line and the padding must fit whole – Arabic lines are taller
+     * than Latin ones (the fallback font's line spacing), about 135 dp for
+     * 3 rows and 200 dp for 6.
+     */
+    private const val LIST_WIDE_DP = 136
+    private const val LIST_TALL_DP = 200
+
     private class Row(val container: Int, val open: Int, val done: Int, val time: Int)
 
     private val ROWS = arrayOf(
@@ -148,15 +158,22 @@ object MadarWidgetRenderer {
 
     private class Images(val day: Bitmap, val night: Bitmap)
 
-    fun updateAll(context: Context, kind: MadarWidgetKind) {
+    /** Redraws every widget of [kind]; see [update] for the result. */
+    fun updateAll(context: Context, kind: MadarWidgetKind): Boolean {
         val manager = AppWidgetManager.getInstance(context)
-        update(context, manager, kind, kind.ids(context))
+        return update(context, manager, kind, kind.ids(context))
     }
 
-    fun update(context: Context, manager: AppWidgetManager, kind: MadarWidgetKind, ids: IntArray) {
+    /**
+     * Redraws the widgets [ids] of [kind] and arms the kind's next page.
+     * False when there is nothing to show from the data (none, unreadable,
+     * run out, another time zone): the widgets show "Open Madar" and the
+     * provider asks a running app to write them again.
+     */
+    fun update(context: Context, manager: AppWidgetManager, kind: MadarWidgetKind, ids: IntArray): Boolean {
         if (ids.isEmpty()) {
             MadarWidgetAlarms.cancel(context, kind)
-            return
+            return true
         }
         val now = System.currentTimeMillis()
         val doc = MadarWidgetStore.readSnapshot(context, kind)?.let { Doc.parse(it) }
@@ -181,9 +198,10 @@ object MadarWidgetRenderer {
         }
         if (doc != null && page != null) {
             MadarWidgetAlarms.schedule(context, kind, doc.nextChangeAfter(now))
-        } else {
-            MadarWidgetAlarms.cancel(context, kind)
+            return true
         }
+        MadarWidgetAlarms.cancel(context, kind)
+        return false
     }
 
     private fun build(
@@ -222,21 +240,21 @@ object MadarWidgetRenderer {
         MadarWidgetKind.MEDS, MadarWidgetKind.TASKS -> listOf(
             Pair(SizeF(100f, 80f), Variant.SMALL),
             Pair(SizeF(200f, 80f), Variant.SHORT),
-            Pair(SizeF(200f, 120f), Variant.WIDE),
-            Pair(SizeF(200f, 190f), Variant.TALL),
+            Pair(SizeF(200f, LIST_WIDE_DP.toFloat()), Variant.WIDE),
+            Pair(SizeF(200f, LIST_TALL_DP.toFloat()), Variant.TALL),
         )
     }
 
     /** Before Android 12: the size class of a widget [width] × [height] dp. */
     private fun variantFor(kind: MadarWidgetKind, width: Int, height: Int): Variant {
-        if (width <= 0) {
-            return if (kind == MadarWidgetKind.MEDS || kind == MadarWidgetKind.TASKS) Variant.WIDE else Variant.SMALL
-        }
+        val list = kind == MadarWidgetKind.MEDS || kind == MadarWidgetKind.TASKS
+        if (width <= 0) return if (list) Variant.WIDE else Variant.SMALL
         if (width < 180) return Variant.SMALL
+        val wide = if (list) LIST_WIDE_DP else 120
+        val tall = if (list) LIST_TALL_DP else 190
         return when {
-            height in 1 until 120 -> Variant.SHORT
-            height in 120 until 190 -> Variant.WIDE
-            height >= 190 -> Variant.TALL
+            height in 1 until wide -> Variant.SHORT
+            height >= tall -> Variant.TALL
             else -> Variant.WIDE
         }
     }

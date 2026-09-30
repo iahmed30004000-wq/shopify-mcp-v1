@@ -19119,7 +19119,7 @@ abstract class L10n {
   /// **'{count, plural, =1{تنبيه واحد} =2{تنبيهان} few{{count} تنبيهات} many{{count} تنبيهًا} other{{count} تنبيه}}'**
   String budgetCardWarnings(int count);
 
-  /// Goals screen title (jars, debts, recurring obligations)
+  /// Goals screen title (jars, debts, recurring obligations); short enough for the app bar at a large text size, and in the words of the Money page's "Dues & savings" section
   ///
   /// In ar, this message translates to:
   /// **'المدّخرات والالتزامات'**
@@ -34311,12 +34311,6 @@ abstract class L10n {
   /// **'بلغتَ الحد الأقصى ({max} لعبة)؛ احذف واحدة أولًا'**
   String savedGamesFull(String max);
 
-  /// No description provided for @savedGamesPlay.
-  ///
-  /// In ar, this message translates to:
-  /// **'العب'**
-  String get savedGamesPlay;
-
   /// No description provided for @savedGamesPlayGame.
   ///
   /// In ar, this message translates to:
@@ -34425,12 +34419,6 @@ abstract class L10n {
   /// **'تعديل'**
   String get savedGamesEdit;
 
-  /// No description provided for @savedGamesMore.
-  ///
-  /// In ar, this message translates to:
-  /// **'خيارات أخرى'**
-  String get savedGamesMore;
-
   /// No description provided for @savedGamesClearData.
   ///
   /// In ar, this message translates to:
@@ -34446,7 +34434,7 @@ abstract class L10n {
   /// No description provided for @savedGamesClearDataBody.
   ///
   /// In ar, this message translates to:
-  /// **'يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.'**
+  /// **'يُحذف ما حفظه موقع اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة، لكل الألعاب من هذا الموقع. ما تضمّنه اللعبة من مواقع أخرى يُمسح بـ«مسح بيانات كل الألعاب». لا يمكن التراجع.'**
   String get savedGamesClearDataBody;
 
   /// No description provided for @savedGamesClearDataScheduled.
@@ -34689,13 +34677,7 @@ abstract class L10n {
   /// **'احفظ لعبة ويب برابطها وستظهر هنا.'**
   String get savedGamesShelfEmpty;
 
-  /// No description provided for @savedGamesDeleteGame.
-  ///
-  /// In ar, this message translates to:
-  /// **'حذف'**
-  String get savedGamesDeleteGame;
-
-  /// No description provided for @savedGamesOpenAll.
+  /// Optional label for an entry point to the Saved Games screen (e.g. a hall tile)
   ///
   /// In ar, this message translates to:
   /// **'فتح ألعابي المحفوظة'**

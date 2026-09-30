@@ -56,11 +56,40 @@ void main() {
     await FxShaders.preload();
   });
 
-  test('the standard kit gets the real film stock', () {
-    final fx = createFilmFx(CinemaEnv(skin: EraSkins.of(Era.rubberHose)));
-    expect(fx, isA<ReelFilmFx>());
-    expect(fx.isReady, isTrue);
-    fx.dispose();
+  test('the standard kit gets the real film stock, ready once its programs load', () async {
+    for (final era in Era.values) {
+      final fx = createFilmFx(CinemaEnv(skin: EraSkins.of(era)));
+      expect(fx, isA<ReelFilmFx>());
+      expect(fx.isReady, isFalse, reason: 'nothing loaded yet: CinemaGame draws ungraded');
+      await fx.load();
+      expect(fx.isReady, isTrue, reason: era.name);
+      fx.dispose();
+      expect(fx.isReady, isFalse);
+    }
+  });
+
+  test('createFilmFx starts every game at the player\'s film settings', () {
+    addTearDown(() => FilmSettings.current = const FilmSettings());
+    final env = CinemaEnv(skin: EraSkins.of(Era.noir));
+    final auto = createFilmFx(env) as ReelFilmFx;
+    expect(auto.quality, FilmQuality.balanced);
+    expect(auto.strength, 1);
+
+    FilmSettings.current = const FilmSettings(batterySaver: true, strength: 0.5);
+    final saver = createFilmFx(env) as ReelFilmFx;
+    expect(saver.quality, FilmQuality.lowPower);
+    expect(saver.adaptive, isFalse);
+    expect(saver.strength, 0.5);
+
+    FilmSettings.current = const FilmSettings(quality: FilmQuality.full, strength: 3);
+    final full = createFilmFx(env) as ReelFilmFx;
+    expect(full.quality, FilmQuality.full);
+    expect(full.adaptive, isFalse, reason: 'a fixed choice is respected');
+    expect(full.strength, 1, reason: 'clamped');
+    expect(FilmSettings.current.copyWith(clearQuality: true), const FilmSettings(strength: 3));
+    for (final fx in [auto, saver, full]) {
+      fx.dispose();
+    }
   });
 
   test('film eras grade with film_stock, the 1980s with vhs, and nothing loaded means a plain blit', () async {

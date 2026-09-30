@@ -550,6 +550,9 @@ abstract final class BuiltInSearchSources {
       load: (c) async {
         final items = await c.repos.budgetItems.getAll();
         final names = {for (final b in items) b.id: b.name};
+        // An item with no currency of its own is in the base currency (not
+        // always JOD).
+        final base = (await c.repos.currencies.base())?.code ?? 'JOD';
         return [
           for (final b in items)
             SearchDoc(
@@ -559,7 +562,7 @@ abstract final class BuiltInSearchSources {
               title: b.name,
               subtitle: c.join([
                 names[b.parentId],
-                if (b.amountMilli != null && b.mode == BudgetMode.amount) c.money(b.amountMilli!, b.currency ?? 'JOD'),
+                if (b.amountMilli != null && b.mode == BudgetMode.amount) c.money(b.amountMilli!, b.currency ?? base),
                 if (b.percent != null && b.mode == BudgetMode.percent) c.formatter.formatPercent(b.percent! / 100),
               ]),
               planetKey: 'money',

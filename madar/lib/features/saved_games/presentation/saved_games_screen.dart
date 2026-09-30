@@ -255,7 +255,14 @@ class _GameRow extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(game.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: text.titleMedium),
+                  Text(
+                    game.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textDirection: BidiIsolate.directionOf(game.title),
+                    textAlign: uiStartAlign(context),
+                    style: text.titleMedium,
+                  ),
                   const SizedBox(height: 2),
                   Text(
                     BidiIsolate.ltr(game.host),

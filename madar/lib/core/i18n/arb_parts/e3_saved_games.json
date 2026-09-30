@@ -219,10 +219,6 @@
       }
     }
   },
-  "savedGamesPlay": {
-    "ar": "العب",
-    "en": "Play"
-  },
   "savedGamesPlayGame": {
     "ar": "العب {title}",
     "en": "Play {title}",
@@ -321,10 +317,6 @@
     "ar": "تعديل",
     "en": "Edit"
   },
-  "savedGamesMore": {
-    "ar": "خيارات أخرى",
-    "en": "More options"
-  },
   "savedGamesClearData": {
     "ar": "مسح بيانات الموقع",
     "en": "Clear site data"
@@ -339,8 +331,8 @@
     }
   },
   "savedGamesClearDataBody": {
-    "ar": "يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.",
-    "en": "Removes what the game stored on this device: progress, settings and cookies visible to the page. This can't be undone."
+    "ar": "يُحذف ما حفظه موقع اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة، لكل الألعاب من هذا الموقع. ما تضمّنه اللعبة من مواقع أخرى يُمسح بـ«مسح بيانات كل الألعاب». لا يمكن التراجع.",
+    "en": "Removes what the game's site stored on this device – progress, settings and cookies the page can see – for every game from that site. Content it embeds from other sites is removed by “Clear data of all games”. This can't be undone."
   },
   "savedGamesClearDataScheduled": {
     "ar": "ستُمسح بياناتها عند فتحها في المرة القادمة",
@@ -531,13 +523,10 @@
     "ar": "احفظ لعبة ويب برابطها وستظهر هنا.",
     "en": "Save a web game by its link and it will appear here."
   },
-  "savedGamesDeleteGame": {
-    "ar": "حذف",
-    "en": "Delete"
-  },
   "savedGamesOpenAll": {
     "ar": "فتح ألعابي المحفوظة",
-    "en": "Open saved games"
+    "en": "Open saved games",
+    "description": "Optional label for an entry point to the Saved Games screen (e.g. a hall tile)"
   },
   "savedGamesClearDataDone": {
     "ar": "مُسحت بيانات اللعبة",

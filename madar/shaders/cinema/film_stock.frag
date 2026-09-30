@@ -121,7 +121,7 @@ vec3 toneCurve(vec3 c) {
 // 1930s print screen: an AM halftone of the mid and shadow tones. Returns
 // ink coverage 0..1 for tone l.
 float halftoneScreen(vec2 p, float l, float cell, float angle) {
-  float d = 1.0 - smoothstep(0.1, 0.66, l);
+  float d = 1.0 - smoothstep(0.1, 0.8, l);
   d = d * d * (3.0 - 2.0 * d);
   vec2 q = cn_rotate(p, angle) / max(cell, 1.5);
   float spot = 0.5 + 0.25 * (cos(CN_TAU * q.x) + cos(CN_TAU * q.y));
@@ -130,20 +130,30 @@ float halftoneScreen(vec2 p, float l, float cell, float angle) {
 }
 
 // Pen hatching of the shadows (engraving / noir). Returns ink coverage.
+// Every stroke is its own pen line: it wanders a little (re-inked on the
+// boil frame), presses harder or lighter along its length and lifts off now
+// and then, so the shadow reads as a hand's work, not a screen-door mesh.
 float hatchLayer(vec2 p, float angle, float spacing, float width, float boil) {
   vec2 q = cn_rotate(p, angle);
-  float wob = (cn_noise(vec2(q.x * 0.025, boil * 3.1 + angle * 5.0)) - 0.5) * 1.6;
-  float d = abs(fract((q.y + wob) / spacing) - 0.5) * spacing;
-  float press = 0.75 + 0.5 * cn_noise(vec2(q.x * 0.04 + angle, q.y * 0.01 + boil));
-  return 1.0 - smoothstep(width * press * 0.5, width * press * 0.5 + 0.7, d);
+  float lane = floor(q.y / spacing);
+  float wob = (cn_noise(vec2(q.x * 0.02 + lane * 3.7, boil * 3.1 + angle * 5.0)) - 0.5) * spacing * 0.45;
+  float y = q.y + wob + (cn_hash11(lane * 1.31 + angle) - 0.5) * spacing * 0.3;
+  float row = floor(y / spacing);
+  float d = abs(fract(y / spacing) - 0.5) * spacing;
+  float press = 0.55 + 0.9 * cn_noise(vec2(q.x * 0.03 + row * 1.7, row * 0.31 + angle));
+  float lift = smoothstep(0.2, 0.32, cn_noise(vec2(q.x * 0.012 + row * 5.3, angle * 2.0 + floor(boil * 0.5) * 0.7)));
+  float w = width * press * 0.5;
+  return (1.0 - smoothstep(w, w + 0.7, d)) * lift;
 }
 
+// Three pen layers at open angles (not a 90° mesh): the first lays the
+// shadow, the second darkens it, the third fills the deepest pockets.
 float hatchScreen(vec2 p, float l, float spacing, float angle, float boil) {
   float sp = max(spacing, 2.0);
   float d = 1.0 - smoothstep(0.06, 0.62, l);
-  float a = hatchLayer(p, angle, sp, 0.4 + d * sp * 0.34, boil) * step(0.08, d);
-  a = max(a, hatchLayer(p, angle + 1.5708, sp, 0.3 + (d - 0.45) * sp * 0.4, boil) * step(0.45, d));
-  a = max(a, hatchLayer(p, angle + 0.7854, sp * 0.71, 0.3 + (d - 0.75) * sp * 0.5, boil) * step(0.75, d));
+  float a = hatchLayer(p, angle, sp, 0.45 + d * sp * 0.3, boil) * smoothstep(0.05, 0.14, d);
+  a = max(a, hatchLayer(p, angle + 0.62, sp * 1.08, 0.3 + (d - 0.4) * sp * 0.36, boil) * smoothstep(0.4, 0.5, d));
+  a = max(a, hatchLayer(p, angle - 0.58, sp * 0.8, 0.3 + (d - 0.72) * sp * 0.45, boil) * smoothstep(0.72, 0.8, d));
   return max(a, smoothstep(0.93, 1.0, d));
 }
 
@@ -255,7 +265,15 @@ void main() {
       s = sampleFrame(uv - vec2(0.0, b.y));
       g += s * smoothstep(0.6, 1.0, cn_luma(s));
       g *= 0.125;
-      c += g * (uWear.w * vec3(1.0, 0.45, 0.25) * 0.85 + uDye.w * vec3(1.0, 0.92, 0.78) * 0.7);
+      // Light spreads, it is not created: the halo is what the bright
+      // neighbourhood throws beyond this pixel's own brights (a flat white
+      // card stays white; the sun and the highlights glow into the sky).
+      // Ink lines keep most of their bite (a thin dark stroke on a bright
+      // card would otherwise wash out under the glow).
+      float lc = cn_luma(c);
+      vec3 own = c * smoothstep(0.6, 1.0, lc);
+      vec3 halo = max(g - own, vec3(0.0)) * mix(0.45, 1.6, smoothstep(0.1, 0.6, lc)) + g * 0.1;
+      c += halo * (uWear.w * vec3(1.0, 0.45, 0.25) * 0.85 + uDye.w * vec3(1.0, 0.92, 0.78) * 0.7);
     }
     if (uDye.x > 0.001) {
       // Dye-transfer registration: the cyan (red record) matrix sits a
@@ -279,7 +297,7 @@ void main() {
   float ls = l;
   if (uPrint.x > 0.001) {
     float dots = halftoneScreen(p, l, uPrint.y, uInkFx.x);
-    float band = smoothstep(0.03, 0.12, l) * (1.0 - smoothstep(0.6, 0.72, l));
+    float band = smoothstep(0.03, 0.12, l) * (1.0 - smoothstep(0.72, 0.84, l));
     // The screen prints ink dots over a light wash of the tone itself.
     float wash = mix(l, 1.0, 0.55);
     ls = mix(ls, mix(wash, 0.0, dots), band * uPrint.x * (1.0 - edge));

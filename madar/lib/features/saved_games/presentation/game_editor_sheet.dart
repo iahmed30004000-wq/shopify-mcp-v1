@@ -96,7 +96,7 @@ class _GameEditorSheetState extends ConsumerState<GameEditorSheet> {
     final url = check.url;
     if (url != null) {
       final dup = _duplicateOf(url);
-      return dup == null ? null : l.savedGamesUrlDuplicate(dup.title);
+      return dup == null ? null : l.savedGamesUrlDuplicate(BidiIsolate.isolate(dup.title));
     }
     return switch (check.error!) {
       GameUrlError.empty => l.savedGamesUrlEmpty,
@@ -424,7 +424,14 @@ class _PreviewRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, maxLines: 2, overflow: TextOverflow.ellipsis, style: text.titleLarge),
+              Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textDirection: BidiIsolate.directionOf(title),
+                textAlign: uiStartAlign(context),
+                style: text.titleLarge,
+              ),
               if (host != null)
                 Padding(
                   padding: const EdgeInsets.only(top: Space.xxs),
@@ -577,43 +584,58 @@ class _IconPicker extends StatelessWidget {
           ],
         ),
         const SizedBox(height: Space.m),
-        Wrap(
-          spacing: Space.s,
-          runSpacing: Space.s,
-          children: [
-            for (var i = 0; i < SavedGamesLimits.glyphCount; i++)
-              _Choice(
-                selected: !art.hasFavicon && art.glyph == i,
-                semanticLabel: l.savedGamesGlyph(f.formatInt(i + 1)),
-                onTap: () => onGlyph(i),
-                child: Icon(GameArtPalette.glyph(i), size: 20, color: t.textPrimary),
-              ),
-          ],
-        ),
-        const SizedBox(height: Space.m),
-        Wrap(
-          spacing: Space.s,
-          runSpacing: Space.s,
-          children: [
-            for (var i = 0; i < SavedGamesLimits.hueCount; i++)
-              _Choice(
-                selected: art.hue == i,
-                circle: true,
-                semanticLabel: l.savedGamesColor(f.formatInt(i + 1)),
-                onTap: () => onHue(i),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [GameArtPalette.colors(i).light, GameArtPalette.colors(i).deep],
-                    ),
-                  ),
-                  child: const SizedBox.square(dimension: 26),
+        LayoutBuilder(
+          builder: (context, box) {
+            // Eight chips a row: two even rows of glyphs, one of colours.
+            const perRow = 8;
+            final size = ((box.maxWidth - Space.s * (perRow - 1)) / perRow).floorToDouble().clamp(32.0, 48.0);
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Wrap(
+                  spacing: Space.s,
+                  runSpacing: Space.s,
+                  children: [
+                    for (var i = 0; i < SavedGamesLimits.glyphCount; i++)
+                      _Choice(
+                        size: size,
+                        selected: !art.hasFavicon && art.glyph == i,
+                        semanticLabel: l.savedGamesGlyph(f.formatInt(i + 1)),
+                        onTap: () => onGlyph(i),
+                        child: Icon(GameArtPalette.glyph(i), size: size * 0.5, color: t.textPrimary),
+                      ),
+                  ],
                 ),
-              ),
-          ],
+                const SizedBox(height: Space.m),
+                Wrap(
+                  spacing: Space.s,
+                  runSpacing: Space.s,
+                  children: [
+                    for (var i = 0; i < SavedGamesLimits.hueCount; i++)
+                      _Choice(
+                        size: size,
+                        selected: art.hue == i,
+                        circle: true,
+                        semanticLabel: l.savedGamesColor(f.formatInt(i + 1)),
+                        onTap: () => onHue(i),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [GameArtPalette.colors(i).light, GameArtPalette.colors(i).deep],
+                            ),
+                          ),
+                          child: SizedBox.square(dimension: size * 0.65),
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            );
+          },
         ),
       ],
     );
@@ -627,8 +649,10 @@ class _Choice extends StatelessWidget {
     required this.child,
     required this.semanticLabel,
     this.circle = false,
+    this.size = 40,
   });
 
+  final double size;
   final bool selected;
   final VoidCallback onTap;
   final Widget child;
@@ -646,8 +670,8 @@ class _Choice extends StatelessWidget {
       focusRadius: radius,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
-        width: 40,
-        height: 40,
+        width: size,
+        height: size,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: radius,

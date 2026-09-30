@@ -374,9 +374,9 @@ class DetectiveCat extends ToonRig {
       ..turn = tn
       ..expression = expression
       ..eyes = spec.eyes
-      ..eyeScale = 1.0
+      ..eyeScale = 1.1
       ..eyeGap = 0.12
-      ..eyeY = -0.12
+      ..eyeY = -0.04
       ..blink = blinkAmount
       ..lookX = lookSpring.x
       ..lookY = (lookSpring.y + lookBiasY).clamp(-1.0, 1.0)
@@ -390,7 +390,11 @@ class DetectiveCat extends ToonRig {
       ..mouthY = 0.7
       ..mouthW = 0.55
       ..salt = 200;
+    // A finer pen for the features: the eyes read under the brim.
+    final lw0 = b.lw;
+    b.lw = lw0 * 0.72;
     face.draw(b);
+    b.lw = lw0;
     // Nose and whiskers.
     b.layer();
     b.shape(c.dark, ink: 0.5);
@@ -424,8 +428,8 @@ class DetectiveCat extends ToonRig {
     Hats.fedora(
       b,
       x + r * 0.08 + tip * r * 0.4,
-      y - r * 0.55 - tip * r * 0.9,
-      r * 2.2,
+      y - r * 0.74 - tip * r * 0.9,
+      r * 2.15,
       0.1 - tip * 0.5,
       fill: hat,
       band: c.fill(PaletteRole.accent2),

@@ -8,6 +8,7 @@ import 'dart:math' as math;
 
 import '../core/ai_base.dart';
 import '../core/card_rng.dart';
+import '../core/deck.dart';
 import '../core/determinize.dart';
 import '../core/playing_card.dart';
 import '../core/trick.dart';
@@ -127,17 +128,15 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
   }
 
   /// Manual declaration: declare unless an opponent has already declared a
-  /// better project (then ours would score nothing and only show cards).
+  /// project of a higher value (then ours would score nothing and only show
+  /// cards). Before the first trick is complete only the type and the points
+  /// of a declared project are public, not its cards, so equal values (whose
+  /// winner depends on the hidden top card) are declared.
   BalootMove _declareDecision(BalootState s, int seat) {
-    final mine = BalootRules.projectsOf(s, seat);
-    for (final p in s.projects) {
-      if (p.seat % 2 == seat % 2) continue;
-      final beaten = mine.every(
-        (q) => BalootRules.compareProjects(p, q, s.firstPlayer, s.mode!, trump: s.trump, options: s.options) > 0,
-      );
-      if (beaten) return const BalootMove.skipProjects();
-    }
-    return const BalootMove.declareProjects();
+    final mode = s.mode!;
+    final mine = BalootRules.projectsOf(s, seat).fold<int>(0, (a, q) => math.max(a, q.value(mode)));
+    final beaten = s.projects.any((p) => p.seat % 2 != seat % 2 && p.value(mode) > mine);
+    return beaten ? const BalootMove.skipProjects() : const BalootMove.declareProjects();
   }
 
   // ------------------------------------------------------------------ play
@@ -271,12 +270,18 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
         }
       }
     }
+    final voids = voidsFromTricks([...s.tricks, if (s.trick != null) s.trick!], 4);
+    // Until the first trick is complete the other players' declared projects
+    // are public only by their type and points: sample where they are
+    // instead of copying the real cards.
+    final hiddenProjects =
+        s.phase == BalootPhase.playing && !s.projectsRevealed && s.projects.any((p) => p.seat != observer);
+    final placed = hiddenProjects ? _placeAnnounced(s, observer, seen, fixed, voids, rng) : null;
     final fixedAll = {for (final f in fixed) ...f};
     final pool = [
       for (final c in s.fullDeck())
         if (!seen.contains(c) && !fixedAll.contains(c)) c,
     ];
-    final voids = voidsFromTricks([...s.tricks, if (s.trick != null) s.trick!], 4);
     final counts = [for (final o in others) s.hands[o].length - fixed[o].length, s.stock.length];
     final dealt = dealConstrained(
       pool,
@@ -288,9 +293,103 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
       w.hands[others[i]] = [...fixed[others[i]], ...dealt[i]]..sort();
     }
     w.stock = dealt.last;
+    if (hiddenProjects) {
+      w.projects = [
+        for (final p in s.projects)
+          if (p.seat == observer) p,
+        ...?placed,
+        // No consistent placement found: the announcing players' best
+        // projects in their sampled hands (never the real cards).
+        if (placed == null)
+          for (final seat in {
+            for (final p in s.projects)
+              if (p.seat != observer) p.seat,
+          })
+            ...BalootRules.detectProjects(
+              [...w.hands[seat], ?s.trick!.cardOf(seat)],
+              seat,
+              s.mode!,
+              trump: s.trump,
+              options: s.options,
+            ),
+      ];
+    }
     // Who holds the belote is hidden until it is announced: take it from
     // the sampled hands, not from the real deal.
     if (w.phase != BalootPhase.bidding && w.phase != BalootPhase.over) w.belote = BalootRules.beloteHolder(w);
     return w;
+  }
+
+  /// Every card set a project of [type] can be under [mode].
+  static List<List<PlayingCard>> projectInstances(BalootProjectType type, BalootMode mode) {
+    final len = switch (type) {
+      BalootProjectType.sira => 3,
+      BalootProjectType.fifty => 4,
+      BalootProjectType.hundred => 5,
+      BalootProjectType.fourHundred => 0,
+    };
+    return [
+      if (len > 0)
+        for (final suit in Suit.values)
+          for (var start = 0; start + len <= balootRanks.length; start++)
+            [for (var k = start; k < start + len; k++) PlayingCard(suit, balootRanks[k])],
+      if (type == BalootProjectType.hundred)
+        for (final r in [Rank.ten, Rank.king, Rank.queen, Rank.jack, if (mode == BalootMode.hokom) Rank.ace])
+          [for (final suit in Suit.values) PlayingCard(suit, r)],
+      if (type == BalootProjectType.fourHundred) [for (final suit in Suit.values) PlayingCard(suit, Rank.ace)],
+    ];
+  }
+
+  /// Before the first trick is complete: one random placement of every
+  /// project the other players have declared, of the declared type, among
+  /// the cards each of them may hold (unseen by [observer], not in a suit
+  /// they have shown out of, or already played by them this deal). The pool
+  /// cards used are added to [fixed]. Null when no placement is found.
+  static List<BalootProject>? _placeAnnounced(
+    BalootState s,
+    int observer,
+    Set<PlayingCard> seen,
+    List<Set<PlayingCard>> fixed,
+    List<Set<Suit>> voids,
+    math.Random rng,
+  ) {
+    final mode = s.mode!;
+    final announced = [
+      for (final p in s.projects)
+        if (p.seat != observer) p,
+    ];
+    final fixedAll = {for (final f in fixed) ...f};
+    for (var attempt = 0; attempt < 16; attempt++) {
+      final used = <PlayingCard>{};
+      final extra = [for (var i = 0; i < 4; i++) <PlayingCard>{}];
+      final out = <BalootProject>[];
+      for (final p in announced) {
+        final seat = p.seat;
+        final played = {
+          for (final t in [...s.tricks, ?s.trick]) ?t.cardOf(seat),
+        };
+        bool mayHold(PlayingCard c) =>
+            !used.contains(c) &&
+            (played.contains(c) ||
+                fixed[seat].contains(c) ||
+                (!seen.contains(c) && !fixedAll.contains(c) && !voids[seat].contains(c.suit)));
+        final options = [
+          for (final cards in projectInstances(p.type, mode))
+            if (cards.every(mayHold)) cards,
+        ];
+        if (options.isEmpty) break;
+        final cards = options[rng.nextInt(options.length)];
+        used.addAll(cards);
+        extra[seat].addAll(cards.where((c) => !played.contains(c) && !fixed[seat].contains(c)));
+        if (fixed[seat].length + extra[seat].length > s.hands[seat].length) break;
+        out.add(BalootProject(p.type, seat, cards));
+      }
+      if (out.length < announced.length) continue;
+      for (var seat = 0; seat < 4; seat++) {
+        fixed[seat].addAll(extra[seat]);
+      }
+      return out;
+    }
+    return null;
   }
 }

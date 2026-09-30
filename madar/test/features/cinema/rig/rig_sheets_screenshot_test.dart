@@ -43,15 +43,16 @@ ModelSheet _castSheet(
             run(r, 1.2);
           }),
       ]),
-      SheetRow('EXPRESSIONS', [
-        for (final e in RigExpression.values)
-          cell(e.name, (r) {
-            r
-              ..facing = 0.5
-              ..expression = e;
-            run(r, 0.5);
-          }),
-      ]),
+      for (var half = 0; half < 2; half++)
+        SheetRow(half == 0 ? 'EXPRESSIONS' : '', [
+          for (final e in RigExpression.values.skip(half * 4).take(4))
+            cell(e.name, (r) {
+              r
+                ..facing = 0.5
+                ..expression = e;
+              run(r, 0.5);
+            }),
+        ]),
       SheetRow('ACTIONS I', [
         for (final a in [RigAction.idle, RigAction.walk, RigAction.run, RigAction.jump, RigAction.fall, RigAction.land])
           cell(a.name, (r) {
@@ -81,6 +82,9 @@ ModelSheet _castSheet(
 
 const _sheetSize = Size(1000, 1250);
 
+/// Character sheets (turnaround, two expression rows, two action rows).
+const _castSize = Size(1000, 1500);
+
 void main() {
   setUpAll(() async {
     await loadMadarFonts();
@@ -105,15 +109,16 @@ void main() {
                   run(r, 1.2);
                 }),
             ]),
-            SheetRow('EXPRESSIONS', [
-              for (final e in RigExpression.values)
-                _rig(e.name, mk, (r) {
-                  r
-                    ..facing = 0.4
-                    ..expression = e;
-                  run(r, 0.5);
-                }),
-            ]),
+            for (var half = 0; half < 2; half++)
+              SheetRow(half == 0 ? 'EXPRESSIONS' : '', [
+                for (final e in RigExpression.values.skip(half * 4).take(4))
+                  _rig(e.name, mk, (r) {
+                    r
+                      ..facing = 0.4
+                      ..expression = e;
+                    run(r, 0.5);
+                  }),
+              ]),
             SheetRow('ACTIONS I', [
               for (final a in [
                 RigAction.idle,
@@ -149,7 +154,7 @@ void main() {
       ),
       'cinema/rig/hero_sheet',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: _castSize,
       dpr: 1.5,
     );
   });
@@ -187,7 +192,7 @@ void main() {
       ),
       'cinema/rig/body_types',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: const Size(1000, 720),
       dpr: 1.5,
     );
   });
@@ -205,7 +210,7 @@ void main() {
       ),
       'cinema/rig/cast_nujaym',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: _castSize,
       dpr: 1.5,
     );
   });
@@ -224,7 +229,7 @@ void main() {
       ),
       'cinema/rig/cast_zajil',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: _castSize,
       dpr: 1.5,
     );
   });
@@ -242,7 +247,7 @@ void main() {
       ),
       'cinema/rig/cast_mishmish',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: _castSize,
       dpr: 1.5,
     );
   });
@@ -261,7 +266,7 @@ void main() {
       ),
       'cinema/rig/cast_sarab',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: _castSize,
       dpr: 1.5,
     );
   });
@@ -386,7 +391,7 @@ void main() {
       ),
       'cinema/rig/props',
       settle: const Duration(milliseconds: 100),
-      logicalSize: _sheetSize,
+      logicalSize: const Size(1000, 860),
       dpr: 1.5,
     );
   });

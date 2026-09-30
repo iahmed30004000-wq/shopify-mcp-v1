@@ -30,7 +30,8 @@ class BasraAi extends HeuristicAi<BasraState, BasraMove> {
       // A dropped card may be picked up by the opponents.
       return -BasraRules.cardPoints(card) * 1.0 - (card.rank == Rank.jack ? 3 : 0);
     }
-    final lastCard = s.stock.isEmpty && s.hands.every((h) => h.length <= 1);
+    // The very last card of the deal (no basra unless `basraOnLastCard`).
+    final lastCard = s.stock.isEmpty && s.hands.fold<int>(0, (a, h) => a + h.length) == 1;
     var v = 0.0;
     for (final c in [...cap.cards, card]) {
       v += BasraRules.cardPoints(c) + cardWeight(s.options);
@@ -56,7 +57,8 @@ class BasraAi extends HeuristicAi<BasraState, BasraMove> {
   static double risk(BasraState s, int seat, List<PlayingCard> table, List<PlayingCard> unseenCards) {
     if (table.isEmpty || unseenCards.isEmpty) return 0;
     final next = (seat + 1) % s.playerCount;
-    final handSize = s.hands[next].length;
+    // After the last card of a round every player gets a new hand.
+    final handSize = s.hands[next].isEmpty && s.stock.isNotEmpty ? s.options.cardsPerRound : s.hands[next].length;
     if (handSize == 0) return 0;
     final total = unseenCards.length;
     double chance(int k) => k <= 0 ? 0 : 1 - math.pow(1 - k / total, handSize).toDouble();

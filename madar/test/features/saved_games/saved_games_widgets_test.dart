@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:madar/core/i18n/formatters.dart' show BidiIsolate;
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/sound/prayer_mute.dart';
 import 'package:madar/features/saved_games/player/game_scripts.dart';
@@ -11,6 +13,11 @@ import 'package:madar/features/saved_games/saved_games.dart';
 import 'package:webview_flutter/webview_flutter.dart' show WebResourceErrorType;
 
 import 'saved_games_fakes.dart';
+
+/// A valid 1×1 PNG (stands in for a fetched site icon).
+final Uint8List _onePixelPng = base64Decode(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+);
 
 L10n l10nOf(WidgetTester tester) => L10n.of(tester.element(find.byType(Scaffold).first));
 
@@ -104,7 +111,7 @@ void main() {
         await settle(tester);
         final l = l10nOf(tester);
         expect(find.text('https://claude.ai/public/artifacts/0f1e2d3c-4b5a-6978-8899-aabbccddeeff'), findsOneWidget);
-        expect(find.text(l.savedGamesUrlDuplicate('Double Feature')), findsOneWidget);
+        expect(find.text(l.savedGamesUrlDuplicate(BidiIsolate.isolate('Double Feature'))), findsOneWidget);
         await tester.tap(find.byKey(const ValueKey('savedGames.save')));
         await settle(tester);
         expect((await env.store.read()).games, hasLength(3));
@@ -136,6 +143,51 @@ void main() {
         expect((await env.store.read()).games.map((g) => g.id), ['g1', 'g2', 'g3']);
         await tester.pump(const Duration(seconds: 6));
         await settle(tester);
+      });
+
+      testWidgets('edit via long-press; the site icon is fetched only on tap', (tester) async {
+        usePhone(tester);
+        final (app, env) = buildSavedGamesApp(home: const SavedGamesScreen(), locale: locale, games: sampleGames());
+        env.fetcher.icon = _onePixelPng;
+        await tester.pumpWidget(app);
+        await settle(tester);
+        final l = l10nOf(tester);
+        await tester.longPress(find.byKey(const ValueKey('savedGames.poster.g2')));
+        await settle(tester);
+        await tester.tap(find.text(l.actionEdit).last);
+        await settle(tester);
+        expect(find.text(l.savedGamesEditTitle), findsOneWidget);
+        expect(env.fetcher.calls, isEmpty);
+        await tester.enterText(find.byKey(const ValueKey('savedGames.title')), 'Orbit Puzzle II');
+        await tester.ensureVisible(find.text(l.savedGamesUseSiteIcon));
+        await settle(tester);
+        await tester.tap(find.text(l.savedGamesUseSiteIcon));
+        await settle(tester);
+        expect(env.fetcher.calls, ['icon:https://games.example.org/orbit/']);
+        await tester.tap(find.byKey(const ValueKey('savedGames.save')));
+        await settle(tester);
+        final g = (await env.store.read()).byId('g2')!;
+        expect(g.title, 'Orbit Puzzle II');
+        expect(g.art.favicon, _onePixelPng);
+        expect(g.url.toString(), 'https://games.example.org/orbit/');
+        expect(env.fetcher.calls, hasLength(1), reason: 'saving goes offline');
+      });
+
+      testWidgets('clear site data of one game is asked, then scheduled for its next open', (tester) async {
+        usePhone(tester);
+        final (app, env) = buildSavedGamesApp(home: const SavedGamesScreen(), locale: locale, games: sampleGames());
+        await tester.pumpWidget(app);
+        await settle(tester);
+        final l = l10nOf(tester);
+        await tester.longPress(find.byKey(const ValueKey('savedGames.poster.g1')));
+        await settle(tester);
+        await tester.tap(find.text(l.savedGamesClearData).last);
+        await settle(tester);
+        expect(find.text(l.savedGamesClearDataTitle(BidiIsolate.isolate('Double Feature'))), findsOneWidget);
+        await tester.tap(find.text(l.savedGamesConfirmClear));
+        await settle(tester);
+        expect((await env.store.read()).byId('g1')!.clearDataPending, isTrue);
+        expect(env.web.controllers, isEmpty, reason: 'nothing is loaded until the game opens');
       });
 
       testWidgets('clear data of all games asks first', (tester) async {
@@ -227,12 +279,12 @@ void main() {
       testWidgets('loading veil, then the game; controls: mute, reload, open in browser', (tester) async {
         final env = await openPlayer(tester);
         final l = l10nOf(tester);
-        expect(find.text(l.savedGamesLoading('Double Feature')), findsOneWidget);
+        expect(find.text(l.savedGamesLoading(BidiIsolate.isolate('Double Feature'))), findsOneWidget);
         final web = env.web.last;
         expect(web.channels, isEmpty);
         web.pageFinished(web.loads.single);
         await settle(tester);
-        expect(find.text(l.savedGamesLoading('Double Feature')), findsNothing);
+        expect(find.text(l.savedGamesLoading(BidiIsolate.isolate('Double Feature'))), findsNothing);
 
         await tester.tap(find.byKey(const ValueKey('savedGames.control')));
         await settle(tester);
@@ -315,7 +367,7 @@ void main() {
         await tester.tap(find.text(l.savedGamesRetry));
         await settle(tester);
         expect(env.web.last.loads, hasLength(2));
-        expect(find.text(l.savedGamesLoading('Double Feature')), findsOneWidget);
+        expect(find.text(l.savedGamesLoading(BidiIsolate.isolate('Double Feature'))), findsOneWidget);
       });
     });
   }

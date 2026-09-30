@@ -57,9 +57,9 @@ FilmGrade eraGrade(Era era) => switch (era) {
     halation: 0.35,
   ),
   Era.grindhouse => const FilmGrade(
-    saturation: 0.85,
+    saturation: 0.95,
     tint: Color(0xFFFFC98A),
-    tintStrength: 0.55,
+    tintStrength: 0.42,
     contrast: 1.28,
     brightness: 0.01,
     grain: 0.7,

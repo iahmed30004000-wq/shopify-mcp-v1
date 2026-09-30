@@ -72,8 +72,9 @@ class MadarWidgetPreview extends StatelessWidget {
 
   bool get _small => size.width < 180;
 
-  /// Rows a list widget of this size shows (MadarWidgetRenderer.rowsFor).
-  int get _rows => size.height < 120 ? 2 : (size.height < 190 ? 3 : 6);
+  /// Rows a list widget of this size shows (MadarWidgetRenderer.rowsFor,
+  /// LIST_WIDE_DP / LIST_TALL_DP).
+  int get _rows => size.height < 136 ? 2 : (size.height < 200 ? 3 : 6);
 
   @override
   Widget build(BuildContext context) {

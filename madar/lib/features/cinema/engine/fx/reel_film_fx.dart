@@ -12,6 +12,7 @@ import '../core/shader_uniforms.dart';
 import 'era_looks.dart';
 import 'film_events.dart';
 import 'film_look.dart';
+import 'film_settings.dart';
 import 'film_stock_shader.dart';
 
 /// The Film Reel Engine's real [FilmFx]: one full-frame pass per frame that
@@ -46,6 +47,15 @@ class ReelFilmFx implements FilmFx {
        _quality = quality,
        adaptive = adaptive ?? (kReleaseMode || kProfileMode),
        events = FilmEvents(seed: env.seed);
+
+  /// A FilmFx at the player's [settings] (see `createFilmFx`).
+  factory ReelFilmFx.fromSettings(CinemaEnv env, FilmSettings settings, {FilmLook? look}) => ReelFilmFx(
+    env,
+    look: look,
+    quality: settings.effectiveQuality,
+    strength: settings.strength.clamp(0.0, 1.0),
+    adaptive: settings.adaptive,
+  );
 
   final CinemaEnv env;
 
@@ -102,8 +112,12 @@ class ReelFilmFx implements FilmFx {
   FilmPass get lastPass => _lastPass;
   FilmPass _lastPass = FilmPass.none;
 
+  /// True once [load] found a program for this era's pass (film_stock or
+  /// film_grade for film, vhs for tape). Until then – or if every program
+  /// failed – CinemaGame draws the scene ungraded, without the offscreen
+  /// image (cheaper than grading through a plain blit).
   @override
-  bool get isReady => true;
+  bool get isReady => isVideo ? _vhs != null : (_stock != null || _grade != null);
 
   @override
   Future<void> load() async {
@@ -146,6 +160,7 @@ class ReelFilmFx implements FilmFx {
       ..style = amount
       ..flicker = _reduced ? 0 : 1
       ..motion = _reduced ? 0.25 : 1
+      ..boil = _reduced ? 0 : 1
       ..quality = _quality.shaderLevel;
 
     final grade = skin.grade;

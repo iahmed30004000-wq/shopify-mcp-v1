@@ -12016,7 +12016,7 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get goalsTitle => 'Savings & commitments';
+  String get goalsTitle => 'Savings & dues';
 
   @override
   String get goalsTabJars => 'Jars';
@@ -21594,9 +21594,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get savedGamesPlay => 'Play';
-
-  @override
   String savedGamesPlayGame(String title) {
     return 'Play $title';
   }
@@ -21677,9 +21674,6 @@ class L10nEn extends L10n {
   String get savedGamesEdit => 'Edit';
 
   @override
-  String get savedGamesMore => 'More options';
-
-  @override
   String get savedGamesClearData => 'Clear site data';
 
   @override
@@ -21689,7 +21683,7 @@ class L10nEn extends L10n {
 
   @override
   String get savedGamesClearDataBody =>
-      'Removes what the game stored on this device: progress, settings and cookies visible to the page. This can\'t be undone.';
+      'Removes what the game\'s site stored on this device – progress, settings and cookies the page can see – for every game from that site. Content it embeds from other sites is removed by “Clear data of all games”. This can\'t be undone.';
 
   @override
   String get savedGamesClearDataScheduled =>
@@ -21830,9 +21824,6 @@ class L10nEn extends L10n {
   @override
   String get savedGamesShelfEmpty =>
       'Save a web game by its link and it will appear here.';
-
-  @override
-  String get savedGamesDeleteGame => 'Delete';
 
   @override
   String get savedGamesOpenAll => 'Open saved games';

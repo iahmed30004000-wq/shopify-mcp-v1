@@ -15,8 +15,9 @@ import '../ledger/domain/ledger_models.dart';
 /// (each part summed exactly at the manual rates and rounded once):
 ///
 /// * the open wallets' balances (archived wallets left out);
-/// * what the active savings jars hold (money moved into a jar left its
-///   wallet, so it is counted here once);
+/// * what the savings jars hold, archived ones too (money moved into a jar
+///   left its wallet, so it is counted here once; archiving a jar keeps its
+///   money and its wallet entries – only a withdrawal gives it back);
 /// * what is still owed to the user, minus what the user still owes.
 ///
 /// Amounts in a currency without a rate are left out and named in
@@ -44,6 +45,11 @@ class MoneyNetWorth {
     for (final j in goals?.jars ?? const <JarView>[]) {
       jarCount++;
       jars.add(math.max(0, j.plan.savedMilli), j.jar.currency);
+    }
+    for (final j in goals?.archivedJars ?? const <JarView>[]) {
+      if (j.plan.savedMilli <= 0) continue;
+      jarCount++;
+      jars.add(j.plan.savedMilli, j.jar.currency);
     }
     for (final d in goals?.openDebts ?? const <DebtView>[]) {
       final s = d.state;
@@ -76,6 +82,7 @@ class MoneyNetWorth {
   final int owedToMeMilli;
   final int iOweMilli;
   final int walletCount;
+  /// Active jars, plus archived jars still holding money.
   final int jarCount;
   final int openDebtCount;
 

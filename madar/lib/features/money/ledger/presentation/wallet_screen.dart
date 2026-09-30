@@ -129,7 +129,9 @@ class _WalletBody extends ConsumerWidget {
                   child: SectionHeader(
                     title: l.ledgerTransactions,
                     subtitle: MadarFormatter.of(context).localizeDigits(l.ledgerTxCount(txs.length)),
-                    actionLabel: txs.isEmpty ? null : l.ledgerSearch,
+                    // "Search": the title already says what ("Search transactions"
+                    // cut the title to "Transactio…" at a large text size).
+                    actionLabel: txs.isEmpty ? null : l.actionSearch,
                     onAction: txs.isEmpty
                         ? null
                         : () => LedgerActions.openTransactions(context, ref, filter: TxFilter(walletIds: {wallet.id})),

@@ -125,7 +125,7 @@ class IntertitlePainter {
   };
 
   Color get _subColor => switch (skin.titles.frame) {
-    TitleFrame.artDeco => _pal.shadow,
+    TitleFrame.artDeco => Color.lerp(_pal.shadow, _pal.ink, 0.35)!,
     TitleFrame.marquee => _pal.footlight,
     TitleFrame.osd => _pal.accent2,
     _ => Color.lerp(_pal.paper, _pal.ink, 0.25)!,
@@ -154,7 +154,7 @@ class IntertitlePainter {
     final sub = card.subtitle ?? '';
     _subtitle
       ..textDirection = direction
-      ..text = TextSpan(text: sub, style: style(sub, size * 0.46, FontWeight.w500, _subColor, 2.5))
+      ..text = TextSpan(text: sub, style: style(sub, size * 0.46, FontWeight.w600, _subColor, 2.5))
       ..layout(maxWidth: maxW);
     if (skin.titles.frame == TitleFrame.osd || skin.titles.frame == TitleFrame.marquee) {
       final osd = skin.titles.frame == TitleFrame.osd;
@@ -374,8 +374,13 @@ class IntertitlePainter {
   void _deco(Canvas canvas, Rect bounds, Rect panel, IntertitleCard card, FilmClock clock, double a, bool rebuild) {
     final ink = _pal.ink;
     final colour = !skin.era.isMonochrome;
-    // Card stock over the whole frame, sunburst rays behind the panel.
-    _paper(canvas, bounds, clock, _pal.paper, _pal.shadow, age: 0.4, seed: 9, stains: 0.12);
+    // Behind the panel: card stock (1930s) or a lush velvet ground in the
+    // colour eras (a 1950s main title), with sunburst rays.
+    if (colour) {
+      _velvet(canvas, bounds, panel);
+    } else {
+      _paper(canvas, bounds, clock, _pal.paper, _pal.shadow, age: 0.4, seed: 9, stains: 0.12);
+    }
     if (rebuild) {
       final origin = Offset(panel.center.dx, panel.bottom + panel.height * 0.12);
       const rays = 36;
@@ -392,7 +397,7 @@ class IntertitlePainter {
     }
     _fill
       ..shader = null
-      ..color = (colour ? _pal.accent : ink).withValues(alpha: colour ? 0.1 : 0.07);
+      ..color = colour ? _raysColour : ink.withValues(alpha: 0.07);
     canvas.save();
     canvas.clipRect(bounds);
     canvas.drawPath(_rays, _fill);
@@ -435,7 +440,7 @@ class IntertitlePainter {
     // Panel fill (slightly lighter stock) under the rules.
     _fill
       ..shader = null
-      ..color = Color.lerp(_pal.paper, _pal.highlight, 0.45)!;
+      ..color = Color.lerp(_pal.paper, _pal.highlight, colour ? 0.1 : 0.45)!;
     canvas.drawRect(panel.deflate(4), _fill);
     // Deco friezes: an ink band with a sawtooth of stock along the top and
     // bottom of the panel.
@@ -446,7 +451,7 @@ class IntertitlePainter {
       final band = Rect.fromLTWH(inner.left + 16, y, inner.width - 32, bandH);
       _fill.color = colour ? _pal.accent2 : ink;
       canvas.drawRect(band, _fill);
-      _fill.color = Color.lerp(_pal.paper, _pal.highlight, 0.45)!;
+      _fill.color = Color.lerp(_pal.paper, _pal.highlight, colour ? 0.1 : 0.45)!;
       final n = (band.width / (bandH * 1.2)).floor();
       final step = band.width / n;
       _tri.reset();
@@ -498,6 +503,28 @@ class IntertitlePainter {
     _paintText(canvas, panel);
   }
 
+  // Velvet ground of the colour-era deco card (cached per size).
+  ui.Gradient? _velvetShader;
+  Rect _velvetRect = Rect.zero;
+  late final Color _raysColour = _pal.footlight.withValues(alpha: 0.2);
+
+  void _velvet(Canvas canvas, Rect bounds, Rect panel) {
+    if (_velvetShader == null || bounds != _velvetRect) {
+      _velvetRect = bounds;
+      _velvetShader = ui.Gradient.radial(
+        panel.center,
+        bounds.longestSide * 0.72,
+        [Color.lerp(_pal.curtain, _pal.accent, 0.4)!, _pal.curtain, _pal.curtainShade],
+        const [0, 0.42, 1],
+      );
+    }
+    _fill
+      ..shader = _velvetShader
+      ..color = const Color(0xFFFFFFFF);
+    canvas.drawRect(bounds, _fill);
+    _fill.shader = null;
+  }
+
   void _steppedRect(Rect r, double step) {
     final s = step, h = step / 2;
     _pen
@@ -543,11 +570,11 @@ class IntertitlePainter {
       ..shader = null
       ..color = ink;
     canvas.drawRect(bounds, _fill);
+    if (bounds != _nightRect || panel != _nightPanel) _buildNight(bounds, panel);
     // A pool of light behind the words, cut by blind slats.
-    _fill.shader = ui.Gradient.radial(panel.center, panel.width * 0.75, [
-      Color.lerp(ink, paper, 0.16)!,
-      ink.withValues(alpha: 0),
-    ]);
+    _fill
+      ..shader = _lightPool
+      ..color = const Color(0xFFFFFFFF);
     canvas.drawRect(bounds, _fill);
     _fill.shader = null;
     canvas.save();
@@ -560,6 +587,18 @@ class IntertitlePainter {
       canvas.drawRect(Rect.fromLTWH(-span, y + 30, span * 2, 16), _fill);
     }
     canvas.restore();
+    // Beyond the window: haze over the city, the rooftops against it, a few
+    // windows still lit.
+    _fill
+      ..shader = _haze
+      ..color = const Color(0xFFFFFFFF);
+    canvas.drawRect(bounds, _fill);
+    _fill
+      ..shader = null
+      ..color = ink;
+    canvas.drawPath(_skyline, _fill);
+    _fill.color = _windowColour;
+    canvas.drawPath(_windows, _fill);
     if (rebuild) {
       _pen.begin(_line, _ornFrame);
       final y0 = panel.center.dy - _contentHeight / 2 - panel.width * 0.1;
@@ -582,6 +621,98 @@ class IntertitlePainter {
       ..strokeWidth = 1.2;
     canvas.drawPath(_line, _stroke);
     _paintText(canvas, panel);
+  }
+
+  // The noir card's night: cached per size (never rebuilt per frame).
+  final Path _skyline = Path();
+  final Path _windows = Path();
+  Rect _nightRect = Rect.zero;
+  Rect _nightPanel = Rect.zero;
+  ui.Gradient? _haze;
+  ui.Gradient? _lightPool;
+  late final Color _windowColour = Color.lerp(_pal.paper, _pal.footlight, 0.4)!.withValues(alpha: 0.75);
+
+  double _rnd(int i, int k) => (LineBoil.jitter(97, i * 13 + k, 0) + 1) / 2;
+
+  void _buildNight(Rect b, Rect panel) {
+    _nightRect = b;
+    _nightPanel = panel;
+    final ink = _pal.ink;
+    _lightPool = ui.Gradient.radial(panel.center, panel.width * 0.75, [Color.lerp(ink, _pal.paper, 0.16)!, ink.withValues(alpha: 0)]);
+    // (Bright enough to survive the noir print's crushed toe.)
+    final horizon = b.bottom - b.height * 0.36;
+    _haze = ui.Gradient.linear(Offset(0, horizon), Offset(0, b.bottom), [
+      ink.withValues(alpha: 0),
+      Color.lerp(ink, _pal.paper, 0.78)!,
+      Color.lerp(ink, _pal.paper, 0.5)!,
+    ], const [0, 0.62, 1]);
+    // Rooftops: stepped blocks, water towers and spires, lit windows.
+    _skyline.reset();
+    _windows.reset();
+    final base = b.bottom + 2;
+    final unit = b.width / 412;
+    var x = b.left - 6;
+    var i = 0;
+    _skyline.moveTo(x, base);
+    while (x < b.right + 6) {
+      final w = b.width * (0.08 + 0.1 * _rnd(i, 1));
+      final h = b.height * (0.07 + 0.17 * _rnd(i, 2)) * (i.isEven ? 1 : 0.8);
+      final top = base - h;
+      _skyline.lineTo(x, top);
+      switch ((_rnd(i, 3) * 4).floor()) {
+        case 0: // stepped cornice
+          _skyline
+            ..lineTo(x + w * 0.18, top)
+            ..lineTo(x + w * 0.18, top - h * 0.1)
+            ..lineTo(x + w * 0.82, top - h * 0.1)
+            ..lineTo(x + w * 0.82, top);
+        case 1: // water tower on legs
+          final c = x + w * 0.5;
+          final tw = w * 0.34;
+          _skyline
+            ..lineTo(c - tw * 0.5, top)
+            ..lineTo(c - tw * 0.42, top - 14 * unit)
+            ..lineTo(c - tw * 0.5, top - 14 * unit)
+            ..lineTo(c - tw * 0.5, top - 30 * unit)
+            ..lineTo(c, top - 38 * unit)
+            ..lineTo(c + tw * 0.5, top - 30 * unit)
+            ..lineTo(c + tw * 0.5, top - 14 * unit)
+            ..lineTo(c + tw * 0.42, top - 14 * unit)
+            ..lineTo(c + tw * 0.5, top);
+        case 2: // spire with an aerial
+          final c = x + w * 0.5;
+          _skyline
+            ..lineTo(c - w * 0.2, top)
+            ..lineTo(c - w * 0.08, top - h * 0.3)
+            ..lineTo(c - 1.2 * unit, top - h * 0.3)
+            ..lineTo(c - 0.6 * unit, top - h * 0.55)
+            ..lineTo(c + 0.6 * unit, top - h * 0.55)
+            ..lineTo(c + 1.2 * unit, top - h * 0.3)
+            ..lineTo(c + w * 0.08, top - h * 0.3)
+            ..lineTo(c + w * 0.2, top);
+        default: // flat roof with a chimney
+          _skyline
+            ..lineTo(x + w * 0.7, top)
+            ..lineTo(x + w * 0.7, top - 10 * unit)
+            ..lineTo(x + w * 0.78, top - 10 * unit)
+            ..lineTo(x + w * 0.78, top);
+      }
+      _skyline.lineTo(x + w, top);
+      // Windows: a grid, most of them dark at this hour.
+      final ww = 3.2 * unit, wh = 4.6 * unit, gx = 7.5 * unit, gy = 10 * unit;
+      for (var row = 0; top + 8 * unit + row * gy < base - wh; row++) {
+        for (var col = 0; x + 5 * unit + col * gx < x + w - ww - 3 * unit; col++) {
+          if (_rnd(i * 41 + row * 7 + col, 5) > 0.86) {
+            _windows.addRect(Rect.fromLTWH(x + 5 * unit + col * gx, top + 8 * unit + row * gy, ww, wh));
+          }
+        }
+      }
+      x += w;
+      i++;
+    }
+    _skyline
+      ..lineTo(x, base)
+      ..close();
   }
 
   // ---------------------------------------------------------------------------
@@ -655,6 +786,10 @@ class IntertitlePainter {
   // ---------------------------------------------------------------------------
   // 1980s – OSD / neon.
 
+  Rect _osdRect = Rect.zero;
+  ui.Gradient? _osdGlow;
+  ui.Gradient? _osdSun;
+
   void _osd(Canvas canvas, Rect bounds, Rect panel, IntertitleCard card, FilmClock clock, double a, bool rebuild) {
     final ink = _pal.ink;
     _fill
@@ -663,18 +798,23 @@ class IntertitlePainter {
     canvas.drawRect(bounds, _fill);
     // Perspective grid to the horizon.
     final horizon = bounds.top + bounds.height * 0.7;
-    _fill.shader = ui.Gradient.linear(Offset(0, horizon - bounds.height * 0.25), Offset(0, horizon), [
-      ink.withValues(alpha: 0),
-      _pal.midtone.withValues(alpha: 0.55),
-    ]);
+    final sunR = bounds.width * 0.22;
+    final sun = Offset(bounds.center.dx, horizon);
+    if (bounds != _osdRect) {
+      _osdRect = bounds;
+      _osdGlow = ui.Gradient.linear(Offset(0, horizon - bounds.height * 0.25), Offset(0, horizon), [
+        ink.withValues(alpha: 0),
+        _pal.midtone.withValues(alpha: 0.55),
+      ]);
+      _osdSun = ui.Gradient.linear(sun - Offset(0, sunR), sun, [_pal.footlight, _pal.accent]);
+    }
+    _fill.shader = _osdGlow;
     canvas.drawRect(Rect.fromLTRB(bounds.left, horizon - bounds.height * 0.25, bounds.right, horizon), _fill);
     _fill.shader = null;
     // Striped sun on the horizon.
-    final sunR = bounds.width * 0.22;
-    final sun = Offset(bounds.center.dx, horizon);
     canvas.save();
     canvas.clipRect(Rect.fromLTRB(bounds.left, horizon - sunR, bounds.right, horizon));
-    _fill.shader = ui.Gradient.linear(sun - Offset(0, sunR), sun, [_pal.footlight, _pal.accent]);
+    _fill.shader = _osdSun;
     canvas.drawCircle(sun, sunR, _fill);
     _fill.shader = null;
     _fill.color = ink;

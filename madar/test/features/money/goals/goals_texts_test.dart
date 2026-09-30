@@ -26,30 +26,29 @@ void main() {
   setUpAll(() => initializeDateFormatting());
 
   group('money', () {
-    test('whole amounts drop their decimals; fractions keep at least two', () {
+    test('always the currency\'s own decimals, as on every Money screen', () {
       final ar = texts('ar');
-      expect(plain(ar.money(500000, 'JOD')), '٥٠٠ د.أ');
-      expect(plain(ar.money(1200000, 'JOD')), '١\u202F٢٠٠ د.أ');
-      expect(plain(ar.money(87500, 'JOD')), '٨٧٫٥٠ د.أ');
+      expect(plain(ar.money(500000, 'JOD')), '٥٠٠٫٠٠٠ د.أ');
+      expect(plain(ar.money(1200000, 'JOD')), '١\u202F٢٠٠٫٠٠٠ د.أ');
+      expect(plain(ar.money(87500, 'JOD')), '٨٧٫٥٠٠ د.أ');
       expect(plain(ar.money(282475, 'JOD')), '٢٨٢٫٤٧٥ د.أ');
       expect(plain(ar.money(12500, 'USD')), '١٢٫٥٠ \$');
       final en = texts('en');
-      expect(plain(en.money(500000, 'JOD')), '500 JOD');
-      expect(plain(en.money(87500, 'JOD')), '87.50 JOD');
+      expect(plain(en.money(500000, 'JOD')), '500.000 JOD');
+      expect(plain(en.money(87500, 'JOD')), '87.500 JOD');
       expect(plain(en.money(282475, 'JOD')), '282.475 JOD');
-      expect(plain(en.money(350000, 'USD')), '\$350');
+      expect(plain(en.money(350000, 'USD')), '\$350.00');
       expect(plain(en.money(4990, 'USD')), '\$4.99');
     });
 
-    test('decimalsFor never hides a significant digit', () {
+    test('decimalsFor is the currency\'s own, whatever the amount', () {
       final t = texts('en');
-      expect(t.decimalsFor(1000, 'JOD'), 0);
-      expect(t.decimalsFor(1500, 'JOD'), 2);
-      expect(t.decimalsFor(1550, 'JOD'), 2);
+      expect(t.decimalsFor(1000, 'JOD'), 3);
+      expect(t.decimalsFor(1500, 'JOD'), 3);
       expect(t.decimalsFor(1555, 'JOD'), 3);
-      expect(t.decimalsFor(1001, 'JOD'), 3);
       expect(t.decimalsFor(1010, 'USD'), 2);
-      expect(t.decimalsFor(-2500, 'JOD'), 2);
+      expect(t.decimalsFor(-2500, 'JOD'), 3);
+      expect(t.decimalsFor(3000, 'QQQ'), 2);
     });
 
     test('isolated in the UI direction; negatives and signed amounts', () {
@@ -57,8 +56,8 @@ void main() {
       final s = ar.money(-50000, 'JOD');
       expect(s.startsWith(BidiIsolate.rli), isTrue);
       expect(s.endsWith(BidiIsolate.pdi), isTrue);
-      expect(plain(s), '-٥٠ د.أ');
-      expect(plain(ar.money(50000, 'JOD', signed: true)), '+٥٠ د.أ');
+      expect(plain(s), '-٥٠٫٠٠٠ د.أ');
+      expect(plain(ar.money(50000, 'JOD', signed: true)), '+٥٠٫٠٠٠ د.أ');
       final en = texts('en');
       expect(en.money(1000, 'JOD').startsWith(BidiIsolate.lri), isTrue);
       expect(plain(en.money(-12500, 'USD')), '-\$12.50');
@@ -66,8 +65,8 @@ void main() {
     });
 
     test('Western digits in Arabic and the user\'s own symbol', () {
-      expect(plain(texts('ar', digits: DigitStyle.western).money(1234500, 'JOD')), '1,234.50 د.أ');
-      expect(plain(texts('en').money(3000, 'QQQ')), '3 ¤');
+      expect(plain(texts('ar', digits: DigitStyle.western).money(1234500, 'JOD')), '1,234.500 د.أ');
+      expect(plain(texts('en').money(3000, 'QQQ')), '3.00 ¤');
       expect(texts('ar').symbol('QQQ'), '¤');
       expect(texts('ar').symbol('JOD'), 'د.أ');
     });

@@ -1,8 +1,8 @@
 {
   "goalsTitle": {
     "ar": "المدّخرات والالتزامات",
-    "en": "Savings & commitments",
-    "description": "Goals screen title (jars, debts, recurring obligations)"
+    "en": "Savings & dues",
+    "description": "Goals screen title (jars, debts, recurring obligations); short enough for the app bar at a large text size, and in the words of the Money page's \"Dues & savings\" section"
   },
   "goalsTabJars": {
     "ar": "الحصّالات",

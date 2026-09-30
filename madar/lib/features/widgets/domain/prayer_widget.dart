@@ -79,6 +79,8 @@ abstract final class PrayerWidgetBuilder {
         stale: texts.stale,
         link: WidgetLinks.prayer,
         pages: pages,
+        // Location times, midnights and dates: right in any phone zone.
+        zoneBound: false,
       ),
       images: imagesFor(schedule, today, keys: {for (final p in pages) ?p.image}),
     );

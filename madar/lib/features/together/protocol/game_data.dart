@@ -79,11 +79,12 @@ final class GameDataPolicy {
 
   /// Keys whose string values (directly, or in lists) are machine hashes –
   /// e.g. the Zobrist keys a chess or draughts state keeps for repetition.
-  /// Such a string must be 1–16 lower-case hex digits (at most 64 bits, the
-  /// same information an integer carries) and is not read as text: random
-  /// hex often holds seven decimal digits in a row, which would otherwise be
-  /// refused as a phone / account number. Anything else under these keys is
-  /// refused as [TogetherRejection.personalText].
+  /// Such a string must be 1–16 lower-case hex digits, optionally after a
+  /// minus sign (a signed 64-bit integer's `toRadixString(16)`: at most 64
+  /// bits, the same information an integer carries) and is not read as
+  /// text: random hex often holds seven decimal digits in a row, which would
+  /// otherwise be refused as a phone / account number. Anything else under
+  /// these keys is refused as [TogetherRejection.personalText].
   final Set<String> hashKeys;
   final int maxStringLength;
   final int maxDepth;
@@ -132,7 +133,7 @@ final class GameDataPolicy {
 
   // ASCII, Arabic-Indic, Extended Arabic-Indic and full-width digits.
   static final RegExp _digitRun = RegExp('[0-9\u0660-\u0669\u06F0-\u06F9\uFF10-\uFF19]{7,}');
-  static final RegExp _hash = RegExp(r'^[0-9a-f]{1,16}$');
+  static final RegExp _hash = RegExp(r'^-?[0-9a-f]{1,16}$');
 
   /// The words of a key (lower case).
   static List<String> keyWords(String key) => [for (final m in _wordSplit.allMatches(key)) m[0]!.toLowerCase()];
@@ -143,6 +144,8 @@ final class GameDataPolicy {
     if (keyWords(key).any(forbiddenWords.contains) || forbiddenWords.contains(key.toLowerCase())) {
       throw TogetherDataRejected(TogetherRejection.forbiddenKey, path);
     }
+    // A key is text too: `_0795551234` would carry a phone number.
+    if (_digitRun.hasMatch(key)) throw TogetherDataRejected(TogetherRejection.personalText, path);
     final allowed = allowedKeys;
     if (allowed != null && !allowed.contains(key)) throw TogetherDataRejected(TogetherRejection.keyNotAllowed, path);
   }

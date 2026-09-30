@@ -70,7 +70,7 @@ FilmLook eraLook(Era era) => switch (era) {
   // blacks, colour grain, heavy scratches, splices, slips, stains and cue
   // marks.
   Era.grindhouse => const FilmLook(
-    dyeFade: 0.5,
+    dyeFade: 0.62,
     blackLift: 0.1,
     colourGrain: 0.85,
     hotspot: 0.4,

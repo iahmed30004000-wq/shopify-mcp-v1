@@ -483,7 +483,7 @@ class _HistoryCard extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 24,
+                      reservedSize: MediaQuery.textScalerOf(context).scale(24),
                       getTitlesWidget: (value, meta) {
                         final i = value.round();
                         if (i < 0 || i >= history.length) return const SizedBox.shrink();

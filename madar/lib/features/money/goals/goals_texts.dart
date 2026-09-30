@@ -27,27 +27,14 @@ class GoalsTexts {
 
   MoneyDigits get _digits => fmt.arabicIndic ? MoneyDigits.arabicIndic : MoneyDigits.western;
 
-  /// Decimals shown for [milli] of [code]: none for a whole amount
-  /// (`٥٠٠ د.أ`, `$350`), otherwise the currency's decimals with trailing
-  /// zeros dropped down to two (`٨٧٫٥٠ د.أ`, `٢٨٢٫٤٧٥ د.أ`, `$12.50`).
-  /// Only zeros are dropped, so the amount shown is always exact.
-  int decimalsFor(int milli, String code) {
-    final max = rates.decimalsOf(code);
-    if (milli % 1000 == 0) return 0;
-    var d = max;
-    var rest = milli.abs() % 1000;
-    for (var drop = 3 - max; drop > 0; drop--) {
-      rest ~/= 10;
-    }
-    final floor = max < 2 ? max : 2;
-    while (d > floor && rest % 10 == 0) {
-      rest ~/= 10;
-      d--;
-    }
-    return d;
-  }
+  /// Decimals shown for an amount of [code]: always the currency's own
+  /// (`٥٠٠٫٠٠٠ د.أ`, `87.500 JOD`, `$350.00`, `15,000 SYP`), as on every
+  /// other Money screen: the hub, the ledger and the budget show the same
+  /// amount the same way, and one card never mixes `112.50` with `25.715`.
+  /// [milli] is kept for existing callers.
+  int decimalsFor(int milli, String code) => rates.decimalsOf(code);
 
-  /// `١٢٫٥ د.أ` / `12.50 JOD` / `$12.50`, wrapped in an isolate of the UI
+  /// `١٢٫٥٠٠ د.أ` / `12.500 JOD` / `$12.50`, wrapped in an isolate of the UI
   /// direction (see [decimalsFor]). [signed] adds `+` to positive amounts.
   String money(int milli, String currency, {bool signed = false}) {
     final code = currency.toUpperCase();

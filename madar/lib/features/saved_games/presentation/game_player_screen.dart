@@ -173,7 +173,7 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
     final l = L10n.of(context);
     final ok = await showGameConfirm(
       context,
-      title: l.savedGamesClearDataTitle(_record.title),
+      title: l.savedGamesClearDataTitle(BidiIsolate.isolate(_record.title)),
       body: l.savedGamesClearDataBody,
       confirmLabel: l.savedGamesConfirmClear,
       cancelLabel: l.savedGamesCancel,
@@ -361,7 +361,9 @@ class _Veils extends StatelessWidget {
           key: const ValueKey('loading'),
           game: game,
           progress: controller.progress,
-          label: phase == GamePhase.clearing ? l.savedGamesClearing : l.savedGamesLoading(game.title),
+          label: phase == GamePhase.clearing
+              ? l.savedGamesClearing
+              : l.savedGamesLoading(BidiIsolate.isolate(game.title)),
         ),
         GamePhase.offline => _MessageVeil(
           key: const ValueKey('offline'),
