@@ -188,7 +188,9 @@ class TxTile extends StatelessWidget {
     final detail = detailOf(tx, book, l, showWallet: showWallet, perspectiveWalletId: perspectiveWalletId);
     final amountText = fmt.amount(shownMilli, shownCurrency, sign: sign);
 
-    // A transfer between currencies shows what arrived, too.
+    // Under the amount: the running balance (seen from a wallet), what a
+    // transfer between currencies delivered, or a foreign amount's value in
+    // the base currency.
     String? secondary;
     if (runningBalance != null) {
       secondary = l.ledgerBalanceAfter(fmt.embed(fmt.amount(runningBalance!, shownCurrency)));
@@ -197,6 +199,9 @@ class TxTile extends StatelessWidget {
       if (toCurrency != null && toCurrency != walletCurrency) {
         secondary = fmt.amount(tx.receivedMilli, toCurrency);
       }
+    } else if (!tx.isTransfer && walletCurrency != book.baseCode) {
+      final base = book.rates.toBase(tx.amountMilli.abs(), walletCurrency);
+      if (base != null) secondary = l.ledgerApprox(fmt.embed(fmt.amount(base, book.baseCode)));
     }
 
     final semantic = [

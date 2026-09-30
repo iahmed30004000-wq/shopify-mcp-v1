@@ -345,14 +345,14 @@ abstract final class TravelActions {
 
   static Future<TravelDocumentRow?> addDocument(BuildContext context, WidgetRef ref) async {
     final service = _service(ref);
-    final draft = await showDocumentSheet(context);
+    final draft = await showDocumentSheet(context, today: ref.read(travelNowProvider));
     if (draft == null) return null;
     return service.addDocument(draft);
   }
 
   static Future<UndoableAction?> editDocument(BuildContext context, WidgetRef ref, TravelDocumentRow d) async {
     final service = _service(ref);
-    final draft = await showDocumentSheet(context, document: d);
+    final draft = await showDocumentSheet(context, document: d, today: ref.read(travelNowProvider));
     if (draft == null || !context.mounted) return null;
     final l = L10n.of(context);
     final undo = await service.editDocument(d, draft);

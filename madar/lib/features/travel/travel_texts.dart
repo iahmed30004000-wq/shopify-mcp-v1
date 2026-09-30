@@ -78,7 +78,11 @@ class TravelTexts {
     if (end == null) return '${fmt.formatDate(s, style: style)}${l.commonFactSeparator}${l.travelOpenEnded}';
     if (TravelDates.sameDay(s, end)) return fmt.formatDate(s, style: style);
     if (s.year == end.year && s.month == end.month && style == MadarDateStyle.dayMonth) {
-      // "١٢ – ١٨ أكتوبر": the month once.
+      // The month once: "١٢ – ١٨ أكتوبر" in Arabic, "October 12 – 18" in
+      // English (where the month leads the day).
+      if (!fmt.isArabic) {
+        return '${fmt.formatDate(s, style: MadarDateStyle.dayMonth)} – ${fmt.formatInt(end.day, grouping: false)}';
+      }
       final month = fmt.formatDate(end, style: MadarDateStyle.dayMonth);
       return '${fmt.formatInt(s.day, grouping: false)} – $month';
     }
