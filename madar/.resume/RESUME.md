@@ -33,7 +33,7 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
 | AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | built + security-reviewed (163 tests); needs routes /ai, /ai/chats, /settings/ai, AskAi entries, AiKeyStore.deleteAll() in delete-all-data |
 | Together Mode core + couple specials | lib/features/together, e1_together.json | RUNNING (wf_ab7dcc7b-712) |
-| Saved Games (web games by URL, WebView) | lib/features/saved_games, e3_saved_games.json | RUNNING (wf_1fb242c0-188) |
+| Saved Games (web games by URL, WebView) | lib/features/saved_games, e3_saved_games.json | built + security-reviewed; needs route + SavedGamesShelf in the cinema hall |
 | Home-screen widgets | lib/features/widgets, android .../widgets, res widget_*, e2_widgets.json | built + reviewed (89 tests, kotlinc type-check OK); manifest receivers + MainActivity register line already added; needs watchWidgetServices(ref) in AppServices, clearWidgetData() in delete-all, /settings/widgets route |
 | Global search | lib/features/search, d2_search.json | built + reviewed (26 findings fixed, 183 tests); needs route + opener + launcher |
 | Notification center | lib/features/notification_center, d3_notifications.json | built + safety-reviewed (24 fixes, 138 tests); needs wiring per scratchpad/phase9_packages.md (gate inside Suspending wrapper, meds background gate, AdhanEventHub.withholds, AppServices watch, reserve ids 160000–160999) |

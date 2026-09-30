@@ -262,11 +262,12 @@ class _HandOffGateState extends ConsumerState<HandOffGate> with WidgetsBindingOb
     if (foreground != _foreground) setState(() => _foreground = foreground);
   }
 
-  /// The private view is going: close whatever it opened on top of the gate
-  /// – a card-detail sheet, an answer dialog – in the gate's navigator and
-  /// every enclosing one, at once and without an exit animation (a sheet
-  /// sliding away for 200 ms is 200 ms of the previous player's cards in the
-  /// next player's hands).
+  /// The private view is going: close the popups it opened on top of the
+  /// gate – a card-detail sheet, an answer dialog – in the gate's navigator
+  /// and every enclosing one, at once and without an exit animation (a
+  /// sheet sliding away for 200 ms is 200 ms of the previous player's cards
+  /// in the next player's hands). A full page on top (the adhan screen, a
+  /// screen the app shell opened) is never closed: removal stops there.
   void _closeRoutesAbove() {
     BuildContext at = context;
     var nav = Navigator.maybeOf(at);
@@ -281,7 +282,7 @@ class _HandOffGateState extends ConsumerState<HandOffGate> with WidgetsBindingOb
           return true;
         });
         final t = top;
-        if (t == null || t == own) break;
+        if (t == null || t == own || t is! PopupRoute) return;
         nav.removeRoute(t);
       }
       at = nav.context;

@@ -238,6 +238,37 @@ void main() {
       expect(find.textContaining('هل ما زلت'), findsOneWidget);
     });
 
+    testWidgets('a full page on top (e.g. the adhan screen) is never closed by a hand-off', (tester) async {
+      final controller = HandOffController()..passTo(0);
+      addTearDown(controller.dispose);
+      late BuildContext inner;
+      await pumpTogetherApp(
+        tester,
+        home: Scaffold(
+          body: HandOffGate(
+            controller: controller,
+            profileOf: (p) => TogetherProfile.defaults(p == 0 ? PlayerSlot.one : PlayerSlot.two),
+            privateBuilder: (context, p) {
+              inner = context;
+              return Text('hand of $p');
+            },
+          ),
+        ),
+      );
+      await tester.tap(find.byKey(_reveal));
+      await tester.pumpAndSettle();
+      // The app shell opens a full-screen page over the game (prayer time).
+      Navigator.of(inner).push(
+        MaterialPageRoute<void>(builder: (_) => const Scaffold(body: Text('prayer time'))),
+      );
+      await tester.pumpAndSettle();
+      // An AI move passes the turn while the page is up.
+      controller.passTo(1);
+      await tester.pumpAndSettle();
+      expect(find.text('prayer time'), findsOneWidget);
+      expect(find.text('hand of 0', skipOffstage: false), findsNothing);
+    });
+
     testWidgets('before the reveal, nothing private reaches the semantics tree (TalkBack)', (tester) async {
       final semantics = tester.ensureSemantics();
       final controller = HandOffController()..passTo(1);
