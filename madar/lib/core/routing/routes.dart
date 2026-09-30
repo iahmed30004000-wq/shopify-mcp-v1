@@ -122,6 +122,56 @@ abstract final class AppRoutes {
   /// Settings › Reminders (adhkar and wird).
   static const String reminders = '/settings/reminders';
 
+  // Phase 4 – health (tracking only). The Health world's own page is its
+  // hub (`planetOf('health')`); every health screen below opens from it.
+
+  /// Medications & supplements (`?tab=meds|courses`; none: today's doses).
+  static const String meds = '/meds';
+
+  /// Location of the medications screen on [tab] (`today`, `meds`,
+  /// `courses`; null or `today`: the plain location).
+  static String medsOf({String? tab}) => _withTab(meds, tab, 'today');
+
+  /// The medical record (`?tab=labs|appointments|questions|conditions`).
+  static const String record = '/record';
+
+  /// Location of the record on [tab] (null or `labs`: the plain location).
+  static String recordOf({String? tab}) => _withTab(record, tab, 'labs');
+
+  /// One lab test's readings and trend (`/record/lab/<id>`).
+  static const String labTest = '/record/lab/:id';
+
+  /// Location of the lab test [testId].
+  static String labTestOf(String testId) => '/record/lab/${Uri.encodeComponent(testId)}';
+
+  /// Upcoming and past appointments (`?highlight=<id>` lights one).
+  static const String appointments = '/record/appointments';
+
+  /// Location of the appointments, lighting [highlightId].
+  static String appointmentsOf({String? highlightId}) =>
+      Uri(path: appointments, queryParameters: highlightId == null ? null : {'highlight': highlightId}).toString();
+
+  /// Wellbeing: check-in, pain, habits, worries, insights
+  /// (`?tab=pain|habits|worries|insights`; none: today).
+  static const String wellbeing = '/wellbeing';
+
+  /// Location of wellbeing on [tab] (null or `today`: the plain location).
+  static String wellbeingOf({String? tab}) => _withTab(wellbeing, tab, 'today');
+
+  /// Guided breathing (`?pattern=478|box`; none: the user's last pattern).
+  static const String breathing = '/wellbeing/breathing';
+
+  /// Location of guided breathing with [pattern].
+  static String breathingOf({String? pattern}) =>
+      Uri(path: breathing, queryParameters: pattern == null ? null : {'pattern': pattern}).toString();
+
+  /// Settings › Health (meal times, reminders, worry window, emergency
+  /// number, lab margin, doctor report).
+  static const String healthSettings = '/settings/health';
+
+  static String _withTab(String path, String? tab, String home) =>
+      Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
+
   /// Locations reachable before onboarding is finished (onboarding can hand
   /// over to the importer).
   static const Set<String> beforeOnboarding = {onboarding, import};

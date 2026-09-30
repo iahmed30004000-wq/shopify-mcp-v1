@@ -12428,6 +12428,13710 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'بوصلة القبلة: القبلة على {bearing} نحو {point}.'**
   String qiblaDialLabel(String bearing, String point);
+
+  /// Title of the medications screen
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية والمكمّلات'**
+  String get medsTitle;
+
+  /// No description provided for @medsTabToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get medsTabToday;
+
+  /// No description provided for @medsTabMeds.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدويتي'**
+  String get medsTabMeds;
+
+  /// Tab of treatment / injection courses
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورات'**
+  String get medsTabCourses;
+
+  /// No description provided for @medsSettingsOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الأدوية'**
+  String get medsSettingsOpen;
+
+  /// No description provided for @medsAddMed.
+  ///
+  /// In ar, this message translates to:
+  /// **'دواء جديد'**
+  String get medsAddMed;
+
+  /// No description provided for @medsAddCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'دورة علاجية جديدة'**
+  String get medsAddCourse;
+
+  /// No description provided for @medsAddRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعدة توقيت جديدة'**
+  String get medsAddRule;
+
+  /// No description provided for @medsKindMedication.
+  ///
+  /// In ar, this message translates to:
+  /// **'دواء'**
+  String get medsKindMedication;
+
+  /// No description provided for @medsKindSupplement.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكمّل'**
+  String get medsKindSupplement;
+
+  /// No description provided for @medsKindInjection.
+  ///
+  /// In ar, this message translates to:
+  /// **'حقنة'**
+  String get medsKindInjection;
+
+  /// No description provided for @medsKindOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get medsKindOther;
+
+  /// No description provided for @medsWithEmptyStomach.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الريق'**
+  String get medsWithEmptyStomach;
+
+  /// No description provided for @medsWithBreakfast.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الفطور'**
+  String get medsWithBreakfast;
+
+  /// No description provided for @medsWithLunch.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الغداء'**
+  String get medsWithLunch;
+
+  /// No description provided for @medsWithDinner.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع العشاء'**
+  String get medsWithDinner;
+
+  /// No description provided for @medsWithBedtime.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل النوم'**
+  String get medsWithBedtime;
+
+  /// No description provided for @medsWithOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get medsWithOther;
+
+  /// No description provided for @medsWithPerCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب الدورة'**
+  String get medsWithPerCourse;
+
+  /// No description provided for @medsWithAnytime.
+  ///
+  /// In ar, this message translates to:
+  /// **'في أي وقت'**
+  String get medsWithAnytime;
+
+  /// No description provided for @medsMealBreakfast.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفطور'**
+  String get medsMealBreakfast;
+
+  /// No description provided for @medsMealLunch.
+  ///
+  /// In ar, this message translates to:
+  /// **'الغداء'**
+  String get medsMealLunch;
+
+  /// No description provided for @medsMealDinner.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجبة العشاء'**
+  String get medsMealDinner;
+
+  /// No description provided for @medsMealBedtime.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم'**
+  String get medsMealBedtime;
+
+  /// No description provided for @medsMealBreakfastTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفطور'**
+  String get medsMealBreakfastTitle;
+
+  /// No description provided for @medsMealLunchTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الغداء'**
+  String get medsMealLunchTitle;
+
+  /// No description provided for @medsMealDinnerTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشاء'**
+  String get medsMealDinnerTitle;
+
+  /// No description provided for @medsMealBedtimeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم'**
+  String get medsMealBedtimeTitle;
+
+  /// No description provided for @medsAnchorAtPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند {place}'**
+  String medsAnchorAtPrayer(String place);
+
+  /// No description provided for @medsAnchorWithMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع {place}'**
+  String medsAnchorWithMeal(String place);
+
+  /// No description provided for @medsAnchorBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل {place} بـ{duration}'**
+  String medsAnchorBefore(String place, String duration);
+
+  /// No description provided for @medsAnchorAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {place} بـ{duration}'**
+  String medsAnchorAfter(String place, String duration);
+
+  /// No description provided for @medsAnchorBedtime.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند النوم'**
+  String get medsAnchorBedtime;
+
+  /// No description provided for @medsTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواعيد الجرعات'**
+  String get medsTimes;
+
+  /// No description provided for @medsTimesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت ثابت، أو موعد يتبع صلاة أو وجبة ويتحرّك معها كل يوم'**
+  String get medsTimesHint;
+
+  /// No description provided for @medsAddFixedTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت ثابت'**
+  String get medsAddFixedTime;
+
+  /// No description provided for @medsAddAnchoredTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع صلاة أو وجبة'**
+  String get medsAddAnchoredTime;
+
+  /// No description provided for @medsTimeToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {time}'**
+  String medsTimeToday(String time);
+
+  /// No description provided for @medsRemoveTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة الموعد'**
+  String get medsRemoveTime;
+
+  /// No description provided for @medsOffsetBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل'**
+  String get medsOffsetBefore;
+
+  /// No description provided for @medsOffsetAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند'**
+  String get medsOffsetAt;
+
+  /// No description provided for @medsOffsetAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد'**
+  String get medsOffsetAfter;
+
+  /// No description provided for @medsAnchorPrayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلوات'**
+  String get medsAnchorPrayers;
+
+  /// No description provided for @medsAnchorMeals.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجبات'**
+  String get medsAnchorMeals;
+
+  /// No description provided for @medsAnchorPick.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتبع'**
+  String get medsAnchorPick;
+
+  /// No description provided for @medsAnchorOffset.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوقيت'**
+  String get medsAnchorOffset;
+
+  /// No description provided for @medsAnchorDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get medsAnchorDone;
+
+  /// No description provided for @medsNoTimesAsNeeded.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا مواعيد: تُسجَّل الجرعة عند أخذها'**
+  String get medsNoTimesAsNeeded;
+
+  /// No description provided for @medsEditorNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'دواء جديد'**
+  String get medsEditorNew;
+
+  /// No description provided for @medsEditorEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الدواء'**
+  String get medsEditorEdit;
+
+  /// No description provided for @medsFieldName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get medsFieldName;
+
+  /// No description provided for @medsFieldNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كما هو على العلبة'**
+  String get medsFieldNameHint;
+
+  /// No description provided for @medsFieldNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الاسم'**
+  String get medsFieldNameRequired;
+
+  /// No description provided for @medsFieldKind.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوع'**
+  String get medsFieldKind;
+
+  /// No description provided for @medsFieldDose.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرعة'**
+  String get medsFieldDose;
+
+  /// No description provided for @medsFieldDoseHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كما في الوصفة، مثلًا: ١٠ ملغ أو حبّتان'**
+  String get medsFieldDoseHint;
+
+  /// No description provided for @medsFieldAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get medsFieldAmount;
+
+  /// No description provided for @medsFieldUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get medsFieldUnit;
+
+  /// No description provided for @medsUnitTab.
+  ///
+  /// In ar, this message translates to:
+  /// **'حبة'**
+  String get medsUnitTab;
+
+  /// No description provided for @medsUnitCap.
+  ///
+  /// In ar, this message translates to:
+  /// **'كبسولة'**
+  String get medsUnitCap;
+
+  /// No description provided for @medsUnitMg.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملغ'**
+  String get medsUnitMg;
+
+  /// No description provided for @medsUnitMl.
+  ///
+  /// In ar, this message translates to:
+  /// **'مل'**
+  String get medsUnitMl;
+
+  /// No description provided for @medsUnitIu.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة'**
+  String get medsUnitIu;
+
+  /// No description provided for @medsUnitDrop.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقطة'**
+  String get medsUnitDrop;
+
+  /// No description provided for @medsUnitPuff.
+  ///
+  /// In ar, this message translates to:
+  /// **'بخة'**
+  String get medsUnitPuff;
+
+  /// No description provided for @medsUnitAmp.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمبولة'**
+  String get medsUnitAmp;
+
+  /// No description provided for @medsFieldTakenWith.
+  ///
+  /// In ar, this message translates to:
+  /// **'يؤخذ'**
+  String get medsFieldTakenWith;
+
+  /// No description provided for @medsFieldTakenWithNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'توضيح'**
+  String get medsFieldTakenWithNote;
+
+  /// No description provided for @medsFieldNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get medsFieldNotes;
+
+  /// No description provided for @medsFieldStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get medsFieldStock;
+
+  /// No description provided for @medsFieldRefillAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبّهني عند'**
+  String get medsFieldRefillAt;
+
+  /// No description provided for @medsStockHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ينقص مع كل «أخذتُها» بقدر الجرعة'**
+  String get medsStockHint;
+
+  /// No description provided for @medsFieldColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get medsFieldColor;
+
+  /// No description provided for @medsFieldActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get medsFieldActive;
+
+  /// No description provided for @medsFieldActiveHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقفه مؤقتًا دون أن تفقد سجلّه'**
+  String get medsFieldActiveHint;
+
+  /// No description provided for @medsFieldCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورة العلاجية'**
+  String get medsFieldCourse;
+
+  /// No description provided for @medsNoCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا دورة'**
+  String get medsNoCourse;
+
+  /// No description provided for @medsCourseLinkedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرعاته تتبع مراحل الدورة'**
+  String get medsCourseLinkedHint;
+
+  /// No description provided for @medsTitration.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول التدرّج'**
+  String get medsTitration;
+
+  /// No description provided for @medsTitrationHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرعة التي حدّدها طبيبك لكل فترة، من تاريخ إلى آخر'**
+  String get medsTitrationHint;
+
+  /// No description provided for @medsTitrationAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوة جديدة'**
+  String get medsTitrationAdd;
+
+  /// No description provided for @medsTitrationFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {date}'**
+  String medsTitrationFrom(String date);
+
+  /// No description provided for @medsTitrationStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّف'**
+  String get medsTitrationStop;
+
+  /// No description provided for @medsTitrationStopLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتوقف الجرعات'**
+  String get medsTitrationStopLine;
+
+  /// No description provided for @medsTitrationStepDose.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرعة من هذا التاريخ'**
+  String get medsTitrationStepDose;
+
+  /// No description provided for @medsTitrationStepTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوة تدرّج'**
+  String get medsTitrationStepTitle;
+
+  /// No description provided for @medsTitrationNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالية'**
+  String get medsTitrationNow;
+
+  /// No description provided for @medsSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get medsSave;
+
+  /// No description provided for @medsDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get medsDelete;
+
+  /// No description provided for @medsMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل إضافية'**
+  String get medsMore;
+
+  /// No description provided for @medsTodayHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرعات اليوم'**
+  String get medsTodayHeader;
+
+  /// No description provided for @medsTodayCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخذت {taken} من {total}'**
+  String medsTodayCount(String taken, String total);
+
+  /// No description provided for @medsNextDose.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالية: {name} · {time}'**
+  String medsNextDose(String name, String time);
+
+  /// No description provided for @medsDueNowCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{جرعة تنتظرك الآن} =2{جرعتان تنتظرانك الآن} few{{count} جرعات تنتظرك الآن} many{{count} جرعة تنتظرك الآن} other{{count} جرعة تنتظرك الآن}}'**
+  String medsDueNowCount(int count);
+
+  /// No description provided for @medsAllAnswered.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجبتَ عن كل جرعات اليوم'**
+  String get medsAllAnswered;
+
+  /// No description provided for @medsNoDosesToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا جرعات مجدولة اليوم'**
+  String get medsNoDosesToday;
+
+  /// No description provided for @medsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أدوية بعد'**
+  String get medsEmptyTitle;
+
+  /// No description provided for @medsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف دواءً أو مكمّلًا بمواعيده، وسيرتّب مَدار جرعاتك حول صلواتك ووجباتك.'**
+  String get medsEmptyBody;
+
+  /// No description provided for @medsAsNeeded.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الحاجة'**
+  String get medsAsNeeded;
+
+  /// No description provided for @medsLogNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل جرعة الآن'**
+  String get medsLogNow;
+
+  /// No description provided for @medsAnytimeGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا نافذة'**
+  String get medsAnytimeGroup;
+
+  /// No description provided for @medsStateUpcoming.
+  ///
+  /// In ar, this message translates to:
+  /// **'قادمة'**
+  String get medsStateUpcoming;
+
+  /// No description provided for @medsStateDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقتها'**
+  String get medsStateDue;
+
+  /// No description provided for @medsStateLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get medsStateLate;
+
+  /// No description provided for @medsStateMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتت'**
+  String get medsStateMissed;
+
+  /// No description provided for @medsStateTakenAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخذت {time}'**
+  String medsStateTakenAt(String time);
+
+  /// No description provided for @medsStateSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُخطّيت'**
+  String get medsStateSkipped;
+
+  /// No description provided for @medsStateSnoozedUntil.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤجّلة حتى {time}'**
+  String medsStateSnoozedUntil(String time);
+
+  /// No description provided for @medsTake.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخذتُها'**
+  String get medsTake;
+
+  /// No description provided for @medsSnooze.
+  ///
+  /// In ar, this message translates to:
+  /// **'غفوة'**
+  String get medsSnooze;
+
+  /// No description provided for @medsSnoozeFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'غفوة {duration}'**
+  String medsSnoozeFor(String duration);
+
+  /// No description provided for @medsSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطّي'**
+  String get medsSkip;
+
+  /// No description provided for @medsReset.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الإجابة'**
+  String get medsReset;
+
+  /// No description provided for @medsTookToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت جرعة {name}'**
+  String medsTookToast(String name);
+
+  /// No description provided for @medsSkippedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُخطّيت جرعة {name}'**
+  String medsSkippedToast(String name);
+
+  /// No description provided for @medsSnoozedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرعة {name} مؤجّلة حتى {time}'**
+  String medsSnoozedToast(String name, String time);
+
+  /// No description provided for @medsResetToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغيت الإجابة'**
+  String get medsResetToast;
+
+  /// No description provided for @medsShiftedLater.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخّرت {duration} لقاعدة توقيت'**
+  String medsShiftedLater(String duration);
+
+  /// No description provided for @medsShiftedEarlier.
+  ///
+  /// In ar, this message translates to:
+  /// **'قُدّمت {duration} لقاعدة توقيت'**
+  String medsShiftedEarlier(String duration);
+
+  /// No description provided for @medsPinnedToMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'على موعد الطعام'**
+  String get medsPinnedToMeal;
+
+  /// No description provided for @medsPastMidnight.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد منتصف الليل'**
+  String get medsPastMidnight;
+
+  /// No description provided for @medsPartOfCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضمن {name}'**
+  String medsPartOfCourse(String name);
+
+  /// No description provided for @medsDoseSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}، {dose}، {time}، {state}'**
+  String medsDoseSemantics(String name, String dose, String time, String state);
+
+  /// No description provided for @medsRefillBanner.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {count} من {name} — حان وقت إعادة التعبئة'**
+  String medsRefillBanner(String name, String count);
+
+  /// No description provided for @medsRefilled.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعدتُ التعبئة'**
+  String get medsRefilled;
+
+  /// No description provided for @medsRefillSheetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة تعبئة {name}'**
+  String medsRefillSheetTitle(String name);
+
+  /// No description provided for @medsRefillAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدات المضافة'**
+  String get medsRefillAdded;
+
+  /// No description provided for @medsStockUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُدّث المتبقي من {name}'**
+  String medsStockUpdated(String name);
+
+  /// No description provided for @medsStockLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي {count}'**
+  String medsStockLine(String count);
+
+  /// No description provided for @medsRefillAtLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنبيه عند {count}'**
+  String medsRefillAtLine(String count);
+
+  /// No description provided for @medsLowStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارب على النفاد'**
+  String get medsLowStock;
+
+  /// No description provided for @medsConflictsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قواعد لم تتحقق'**
+  String get medsConflictsTitle;
+
+  /// No description provided for @medsConflictSeparation.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر ترك {required} بين {a} و{b}؛ الفاصل الآن {actual}.'**
+  String medsConflictSeparation(
+    String a,
+    String b,
+    String required,
+    String actual,
+  );
+
+  /// No description provided for @medsConflictNoMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا وجبة متاحة لجرعة إضافية من {name}؛ بقيت في موعدها.'**
+  String medsConflictNoMeal(String name);
+
+  /// No description provided for @medsConflictClash.
+  ///
+  /// In ar, this message translates to:
+  /// **'لدى {name} قاعدتا طعام مختلفتان؛ طُبّقت الأولى.'**
+  String medsConflictClash(String name);
+
+  /// No description provided for @medsAtTheSameTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الوقت نفسه'**
+  String get medsAtTheSameTime;
+
+  /// No description provided for @medsAlertsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات دائمة'**
+  String get medsAlertsTitle;
+
+  /// No description provided for @medsAdherence.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزام'**
+  String get medsAdherence;
+
+  /// No description provided for @medsAdherenceRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخذت {percent} من الجرعات'**
+  String medsAdherenceRate(String percent);
+
+  /// No description provided for @medsLastDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}'**
+  String medsLastDays(int count);
+
+  /// No description provided for @medsNoAdherence.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا جرعات مستحقة في هذه الفترة'**
+  String get medsNoAdherence;
+
+  /// No description provided for @medsStatTaken.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخذت'**
+  String get medsStatTaken;
+
+  /// No description provided for @medsStatSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُخطّيت'**
+  String get medsStatSkipped;
+
+  /// No description provided for @medsStatMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتت'**
+  String get medsStatMissed;
+
+  /// No description provided for @medsStatLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get medsStatLate;
+
+  /// No description provided for @medsStreakDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أيام كاملة متتالية بعد} =1{يوم كامل} =2{يومان كاملان متتاليان} few{{count} أيام كاملة متتالية} many{{count} يومًا كاملًا متتاليًا} other{{count} يوم كامل متتالٍ}}'**
+  String medsStreakDays(int count);
+
+  /// No description provided for @medsDayBarSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'{date}: {taken} من {total}'**
+  String medsDayBarSemantics(String date, String taken, String total);
+
+  /// No description provided for @medsDayNothingDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{date}: لا جرعات'**
+  String medsDayNothingDue(String date);
+
+  /// No description provided for @medsHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل'**
+  String get medsHistory;
+
+  /// No description provided for @medsHistoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل {name}'**
+  String medsHistoryTitle(String name);
+
+  /// No description provided for @medsNoHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سجل بعد'**
+  String get medsNoHistory;
+
+  /// No description provided for @medsOffSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'خارج المواعيد'**
+  String get medsOffSchedule;
+
+  /// No description provided for @medsRecent.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر الجرعات'**
+  String get medsRecent;
+
+  /// No description provided for @medsPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا'**
+  String get medsPaused;
+
+  /// No description provided for @medsPausedSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقفة مؤقتًا'**
+  String get medsPausedSection;
+
+  /// No description provided for @medsPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get medsPause;
+
+  /// No description provided for @medsResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get medsResume;
+
+  /// No description provided for @medsDuplicate.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ'**
+  String get medsDuplicate;
+
+  /// No description provided for @medsEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get medsEdit;
+
+  /// No description provided for @medsDeletedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف {name}'**
+  String medsDeletedToast(String name);
+
+  /// No description provided for @medsPausedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقف {name} مؤقتًا'**
+  String medsPausedToast(String name);
+
+  /// No description provided for @medsResumedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'استُؤنف {name}'**
+  String medsResumedToast(String name);
+
+  /// No description provided for @medsDuplicatedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ {name}'**
+  String medsDuplicatedToast(String name);
+
+  /// No description provided for @medsCopyName.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} (نسخة)'**
+  String medsCopyName(String name);
+
+  /// No description provided for @medsTimesPerDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا مواعيد} =1{مرة يوميًا} =2{مرتان يوميًا} few{{count} مرات يوميًا} many{{count} مرة يوميًا} other{{count} مرة يوميًا}}'**
+  String medsTimesPerDay(int count);
+
+  /// No description provided for @medsRulesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قواعد التوقيت'**
+  String get medsRulesTitle;
+
+  /// No description provided for @medsRulesEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'القواعد تُبقي الجرعات على التوقيت الذي حدّدتَه: فاصل بين دواءين، أو موعد قبل الطعام أو بعده.'**
+  String get medsRulesEmpty;
+
+  /// No description provided for @medsRuleKindSeparate.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاصل بين دواءين'**
+  String get medsRuleKindSeparate;
+
+  /// No description provided for @medsRuleKindNotWith.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يؤخذان معًا'**
+  String get medsRuleKindNotWith;
+
+  /// No description provided for @medsRuleKindBeforeFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل الطعام'**
+  String get medsRuleKindBeforeFood;
+
+  /// No description provided for @medsRuleKindAfterFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الطعام'**
+  String get medsRuleKindAfterFood;
+
+  /// No description provided for @medsRuleKindWithFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الطعام'**
+  String get medsRuleKindWithFood;
+
+  /// No description provided for @medsRuleKindCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get medsRuleKindCustom;
+
+  /// No description provided for @medsRuleSeparateText.
+  ///
+  /// In ar, this message translates to:
+  /// **'{duration} على الأقل بين {a} و{b}'**
+  String medsRuleSeparateText(String a, String b, String duration);
+
+  /// No description provided for @medsRuleBeforeFoodText.
+  ///
+  /// In ar, this message translates to:
+  /// **'{a} قبل الطعام بـ{duration}'**
+  String medsRuleBeforeFoodText(String a, String duration);
+
+  /// No description provided for @medsRuleAfterFoodText.
+  ///
+  /// In ar, this message translates to:
+  /// **'{a} بعد الطعام بـ{duration}'**
+  String medsRuleAfterFoodText(String a, String duration);
+
+  /// No description provided for @medsRuleWithFoodText.
+  ///
+  /// In ar, this message translates to:
+  /// **'{a} مع الطعام'**
+  String medsRuleWithFoodText(String a);
+
+  /// No description provided for @medsRuleCustomText.
+  ///
+  /// In ar, this message translates to:
+  /// **'{a}: {note}'**
+  String medsRuleCustomText(String a, String note);
+
+  /// No description provided for @medsRuleEditorNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعدة توقيت جديدة'**
+  String get medsRuleEditorNew;
+
+  /// No description provided for @medsRuleEditorEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل القاعدة'**
+  String get medsRuleEditorEdit;
+
+  /// No description provided for @medsRuleKind.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع القاعدة'**
+  String get medsRuleKind;
+
+  /// No description provided for @medsRuleMedA.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدواء'**
+  String get medsRuleMedA;
+
+  /// No description provided for @medsRuleMedB.
+  ///
+  /// In ar, this message translates to:
+  /// **'والدواء الآخر'**
+  String get medsRuleMedB;
+
+  /// No description provided for @medsRuleMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة'**
+  String get medsRuleMinutes;
+
+  /// No description provided for @medsRuleNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملاحظة'**
+  String get medsRuleNote;
+
+  /// No description provided for @medsRuleNeedTwo.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر دواءين مختلفين'**
+  String get medsRuleNeedTwo;
+
+  /// No description provided for @medsRuleNeedMed.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الدواء'**
+  String get medsRuleNeedMed;
+
+  /// No description provided for @medsRuleNeedMeds.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف دواءً أولًا'**
+  String get medsRuleNeedMeds;
+
+  /// No description provided for @medsRuleNeedNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الملاحظة'**
+  String get medsRuleNeedNote;
+
+  /// No description provided for @medsRuleFoodHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقات الطعام من «أوقات الوجبات» في الإعدادات'**
+  String get medsRuleFoodHint;
+
+  /// No description provided for @medsRuleDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت القاعدة'**
+  String get medsRuleDeleted;
+
+  /// No description provided for @medsCoursesEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا دورات علاجية'**
+  String get medsCoursesEmptyTitle;
+
+  /// No description provided for @medsCoursesEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'للحقن والعلاجات على مراحل، مثل: يوميًا، ثم أسبوعيًا، ثم شهريًا.'**
+  String get medsCoursesEmptyBody;
+
+  /// No description provided for @medsCourseEditorNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'دورة علاجية جديدة'**
+  String get medsCourseEditorNew;
+
+  /// No description provided for @medsCourseEditorEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الدورة'**
+  String get medsCourseEditorEdit;
+
+  /// No description provided for @medsCourseName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الدورة'**
+  String get medsCourseName;
+
+  /// No description provided for @medsCourseNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسم الدورة'**
+  String get medsCourseNameRequired;
+
+  /// No description provided for @medsCourseMed.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدواء'**
+  String get medsCourseMed;
+
+  /// No description provided for @medsCourseStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ البدء'**
+  String get medsCourseStart;
+
+  /// No description provided for @medsCoursePhases.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراحل'**
+  String get medsCoursePhases;
+
+  /// No description provided for @medsCourseAddPhase.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرحلة جديدة'**
+  String get medsCourseAddPhase;
+
+  /// No description provided for @medsCoursePhaseN.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة {n}'**
+  String medsCoursePhaseN(String n);
+
+  /// No description provided for @medsCourseNeedsPhase.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف مرحلة واحدة على الأقل'**
+  String get medsCourseNeedsPhase;
+
+  /// No description provided for @medsFreqDaily.
+  ///
+  /// In ar, this message translates to:
+  /// **'يومي'**
+  String get medsFreqDaily;
+
+  /// No description provided for @medsFreqWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعي'**
+  String get medsFreqWeekly;
+
+  /// No description provided for @medsFreqMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهري'**
+  String get medsFreqMonthly;
+
+  /// No description provided for @medsEveryDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوميًا} =2{كل يومين} few{كل {count} أيام} many{كل {count} يومًا} other{كل {count} يوم}}'**
+  String medsEveryDays(int count);
+
+  /// No description provided for @medsEveryWeeks.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{أسبوعيًا} =2{كل أسبوعين} few{كل {count} أسابيع} many{كل {count} أسبوعًا} other{كل {count} أسبوع}}'**
+  String medsEveryWeeks(int count);
+
+  /// No description provided for @medsEveryMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{شهريًا} =2{كل شهرين} few{كل {count} أشهر} many{كل {count} شهرًا} other{كل {count} شهر}}'**
+  String medsEveryMonths(int count);
+
+  /// No description provided for @medsPhaseInterval.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل'**
+  String get medsPhaseInterval;
+
+  /// No description provided for @medsPhaseCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الجرعات'**
+  String get medsPhaseCount;
+
+  /// No description provided for @medsPhaseOngoing.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستمرة'**
+  String get medsPhaseOngoing;
+
+  /// No description provided for @medsPhaseDose.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرعة المرحلة'**
+  String get medsPhaseDose;
+
+  /// No description provided for @medsPhaseTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{freq} × {count}'**
+  String medsPhaseTimes(String freq, String count);
+
+  /// No description provided for @medsPhaseOngoingLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'{freq} باستمرار'**
+  String medsPhaseOngoingLine(String freq);
+
+  /// No description provided for @medsCourseDoneOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total} جرعة'**
+  String medsCourseDoneOf(String done, String total);
+
+  /// No description provided for @medsCourseDosesSoFar.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم تبدأ الجرعات} =1{جرعة واحدة حتى الآن} =2{جرعتان حتى الآن} few{{count} جرعات حتى الآن} many{{count} جرعة حتى الآن} other{{count} جرعة حتى الآن}}'**
+  String medsCourseDosesSoFar(int count);
+
+  /// No description provided for @medsCoursePhaseProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة {phase}: {done} من {total}'**
+  String medsCoursePhaseProgress(String phase, String done, String total);
+
+  /// No description provided for @medsCoursePhaseOngoingProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة {phase} (مستمرة)'**
+  String medsCoursePhaseOngoingProgress(String phase);
+
+  /// No description provided for @medsCourseNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرعة التالية {date}'**
+  String medsCourseNext(String date);
+
+  /// No description provided for @medsCourseStarts.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبدأ {date}'**
+  String medsCourseStarts(String date);
+
+  /// No description provided for @medsCourseFinished.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت في {date}'**
+  String medsCourseFinished(String date);
+
+  /// No description provided for @medsCourseNoMed.
+  ///
+  /// In ar, this message translates to:
+  /// **'اربطها بدواء لتظهر جرعاتها في اليوم'**
+  String get medsCourseNoMed;
+
+  /// No description provided for @medsCourseDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الدورة'**
+  String get medsCourseDeleted;
+
+  /// No description provided for @medsCoursePaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقفة'**
+  String get medsCoursePaused;
+
+  /// No description provided for @medsCourseActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورة نشطة'**
+  String get medsCourseActive;
+
+  /// No description provided for @medsCourseTimeline.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواعيد الدورة'**
+  String get medsCourseTimeline;
+
+  /// No description provided for @medsCourseMoreDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وموعد آخر} =2{وموعدان آخران} few{و{count} مواعيد أخرى} many{و{count} موعدًا آخر} other{و{count} موعد آخر}}'**
+  String medsCourseMoreDates(int count);
+
+  /// No description provided for @medsToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get medsToday;
+
+  /// No description provided for @medsSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الأدوية'**
+  String get medsSettingsTitle;
+
+  /// No description provided for @medsMealTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقات الوجبات'**
+  String get medsMealTimes;
+
+  /// No description provided for @medsMealTimesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تربط «مع الفطور» وقواعد الطعام بيومك'**
+  String get medsMealTimesHint;
+
+  /// No description provided for @medsEmptyStomachLead.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة «على الريق» قبل الفطور'**
+  String get medsEmptyStomachLead;
+
+  /// No description provided for @medsReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير بالجرعات'**
+  String get medsReminders;
+
+  /// No description provided for @medsRemindersHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار في موعد كل جرعة، فيه: أخذتُها، غفوة، تخطّي'**
+  String get medsRemindersHint;
+
+  /// No description provided for @medsSnoozeDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'غفوة الإشعار'**
+  String get medsSnoozeDefault;
+
+  /// No description provided for @medsLateAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُعدّ متأخرة بعد'**
+  String get medsLateAfter;
+
+  /// No description provided for @medsNotifyGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية'**
+  String get medsNotifyGroup;
+
+  /// No description provided for @medsNotifyChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواعيد الجرعات'**
+  String get medsNotifyChannel;
+
+  /// No description provided for @medsNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير في موعد كل جرعة، مع أزرار: أخذتُها، غفوة، تخطّي'**
+  String get medsNotifyChannelDescription;
+
+  /// No description provided for @medsNotifyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان موعد {name}'**
+  String medsNotifyTitle(String name);
+
+  /// No description provided for @medsNotifyAgainTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير: {name}'**
+  String medsNotifyAgainTitle(String name);
+
+  /// No description provided for @medsNotifyRefillTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}: الكمية تقارب النفاد'**
+  String medsNotifyRefillTitle(String name);
+
+  /// No description provided for @medsNotifyRefillBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {count}. حان وقت إعادة التعبئة.'**
+  String medsNotifyRefillBody(String count);
+
+  /// No description provided for @medsNotifyFailedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل الجرعة'**
+  String get medsNotifyFailedTitle;
+
+  /// No description provided for @medsNotifyFailedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مَدار لتسجيلها.'**
+  String get medsNotifyFailedBody;
+
+  /// Medical record screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل الطبي'**
+  String get recordTitle;
+
+  /// Record tab
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل'**
+  String get recordTabLabs;
+
+  /// Record tab
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد'**
+  String get recordTabAppointments;
+
+  /// Record tab
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالات'**
+  String get recordTabConditions;
+
+  /// Record tab
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسئلة'**
+  String get recordTabQuestions;
+
+  /// No description provided for @recordAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get recordAdd;
+
+  /// No description provided for @recordSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get recordSave;
+
+  /// No description provided for @recordDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get recordDelete;
+
+  /// No description provided for @recordNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get recordNotes;
+
+  /// No description provided for @recordDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get recordDate;
+
+  /// No description provided for @recordTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get recordTime;
+
+  /// Separator between list items (keep the trailing space)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get recordListSeparator;
+
+  /// No description provided for @recordToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get recordToday;
+
+  /// No description provided for @recordTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا'**
+  String get recordTomorrow;
+
+  /// No description provided for @recordYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get recordYesterday;
+
+  /// Relative future day; n = formatted count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بعد يوم} =2{بعد يومين} few{بعد {n} أيام} many{بعد {n} يومًا} other{بعد {n} يوم}}'**
+  String recordInDays(int count, String n);
+
+  /// Relative past day
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قبل يوم} =2{قبل يومين} few{قبل {n} أيام} many{قبل {n} يومًا} other{قبل {n} يوم}}'**
+  String recordDaysAgo(int count, String n);
+
+  /// Action / sheet title: build the PDF for the doctor
+  ///
+  /// In ar, this message translates to:
+  /// **'تقرير للطبيب'**
+  String get recordDoctorReport;
+
+  /// No description provided for @recordSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات السجل'**
+  String get recordSettingsTitle;
+
+  /// Lab flag: below the user's own low limit (neutral label)
+  ///
+  /// In ar, this message translates to:
+  /// **'منخفض'**
+  String get recordFlagLow;
+
+  /// Lab flag: above the user's own high limit
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتفع'**
+  String get recordFlagHigh;
+
+  /// Short lab flag: within range but close to a limit
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّي'**
+  String get recordFlagBorderline;
+
+  /// Lab flag, full form
+  ///
+  /// In ar, this message translates to:
+  /// **'قرب الحدّ الأدنى'**
+  String get recordFlagBorderlineLow;
+
+  /// Lab flag, full form
+  ///
+  /// In ar, this message translates to:
+  /// **'قرب الحدّ الأعلى'**
+  String get recordFlagBorderlineHigh;
+
+  /// Lab flag: inside the user's own range
+  ///
+  /// In ar, this message translates to:
+  /// **'ضمن المدى'**
+  String get recordFlagInRange;
+
+  /// Lab flag: test has no reference range
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا مدى'**
+  String get recordFlagNoRange;
+
+  /// Lab flag: a qualitative (text) result
+  ///
+  /// In ar, this message translates to:
+  /// **'وصفية'**
+  String get recordFlagQualitative;
+
+  /// Standing alert importance
+  ///
+  /// In ar, this message translates to:
+  /// **'بالغ الأهمية'**
+  String get recordSeverityCritical;
+
+  /// Standing alert importance
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه'**
+  String get recordSeverityWarning;
+
+  /// Standing alert importance
+  ///
+  /// In ar, this message translates to:
+  /// **'للعلم'**
+  String get recordSeverityInfo;
+
+  /// Reference range
+  ///
+  /// In ar, this message translates to:
+  /// **'{low} – {high}'**
+  String recordRangeBetween(String low, String high);
+
+  /// Reference range with only a high limit
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {high}'**
+  String recordRangeUpTo(String high);
+
+  /// Reference range with only a low limit
+  ///
+  /// In ar, this message translates to:
+  /// **'من {low} فأكثر'**
+  String recordRangeAtLeast(String low);
+
+  /// No description provided for @recordTakenWithEmptyStomach.
+  ///
+  /// In ar, this message translates to:
+  /// **'على معدة فارغة'**
+  String get recordTakenWithEmptyStomach;
+
+  /// No description provided for @recordTakenWithBreakfast.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الفطور'**
+  String get recordTakenWithBreakfast;
+
+  /// No description provided for @recordTakenWithLunch.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الغداء'**
+  String get recordTakenWithLunch;
+
+  /// No description provided for @recordTakenWithDinner.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع العشاء'**
+  String get recordTakenWithDinner;
+
+  /// No description provided for @recordTakenWithBedtime.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل النوم'**
+  String get recordTakenWithBedtime;
+
+  /// No description provided for @recordTakenWithOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get recordTakenWithOther;
+
+  /// No description provided for @recordTakenWithPerCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب الكورس'**
+  String get recordTakenWithPerCourse;
+
+  /// No description provided for @recordTakenWithAnytime.
+  ///
+  /// In ar, this message translates to:
+  /// **'في أي وقت'**
+  String get recordTakenWithAnytime;
+
+  /// Period chip
+  ///
+  /// In ar, this message translates to:
+  /// **'شهر'**
+  String get recordPeriod1m;
+
+  /// Period chip: the last n months
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{شهر} =2{شهران} few{{n} أشهر} many{{n} شهرًا} other{{n} شهر}}'**
+  String recordPeriodMonths(int count, String n);
+
+  /// Period chip
+  ///
+  /// In ar, this message translates to:
+  /// **'سنة'**
+  String get recordPeriod12m;
+
+  /// Period chip: every reading
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get recordPeriodAll;
+
+  /// No description provided for @recordSectionAlerts.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات دائمة'**
+  String get recordSectionAlerts;
+
+  /// No description provided for @recordSectionConditions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالات الصحية'**
+  String get recordSectionConditions;
+
+  /// No description provided for @recordSectionMedications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية والمكمّلات الحالية'**
+  String get recordSectionMedications;
+
+  /// No description provided for @recordSectionLabs.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتائج التحاليل'**
+  String get recordSectionLabs;
+
+  /// No description provided for @recordSectionPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص الألم'**
+  String get recordSectionPain;
+
+  /// No description provided for @recordSectionMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص المزاج والتوتر'**
+  String get recordSectionMood;
+
+  /// No description provided for @recordSectionQuestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسئلة للطبيب'**
+  String get recordSectionQuestions;
+
+  /// Reminder offset
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قبل أسبوع} =2{قبل أسبوعين} few{قبل {n} أسابيع} many{قبل {n} أسبوعًا} other{قبل {n} أسبوع}}'**
+  String recordOffsetWeeks(int count, String n);
+
+  /// Reminder offset
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قبل يوم} =2{قبل يومين} few{قبل {n} أيام} many{قبل {n} يومًا} other{قبل {n} يوم}}'**
+  String recordOffsetDays(int count, String n);
+
+  /// Reminder offset
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قبل ساعة} =2{قبل ساعتين} few{قبل {n} ساعات} many{قبل {n} ساعة} other{قبل {n} ساعة}}'**
+  String recordOffsetHours(int count, String n);
+
+  /// Reminder offset
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قبل دقيقة} =2{قبل دقيقتين} few{قبل {n} دقائق} many{قبل {n} دقيقة} other{قبل {n} دقيقة}}'**
+  String recordOffsetMinutes(int count, String n);
+
+  /// PDF title
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص صحي للطبيب'**
+  String get recordReportTitle;
+
+  /// PDF header label
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get recordReportNameLabel;
+
+  /// PDF header
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الإعداد {date}'**
+  String recordReportGenerated(String date);
+
+  /// PDF header
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة من {from} إلى {to}'**
+  String recordReportPeriodLine(String from, String to);
+
+  /// PDF header
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل كاملًا حتى {date}'**
+  String recordReportPeriodAll(String date);
+
+  /// PDF footer
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ شخصي يدوّنه صاحبه على جهازه. لا يتضمّن تشخيصًا ولا توصية علاجية.'**
+  String get recordReportFooter;
+
+  /// PDF footer
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة {page} من {total}'**
+  String recordReportPage(String page, String total);
+
+  /// No description provided for @recordReportNothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مسجّل لهذه الفترة.'**
+  String get recordReportNothing;
+
+  /// No description provided for @recordConditionSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {date}'**
+  String recordConditionSince(String date);
+
+  /// Medication table column
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get recordReportColName;
+
+  /// Medication table column
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرعة'**
+  String get recordReportColDose;
+
+  /// Medication table column
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد'**
+  String get recordReportColTimes;
+
+  /// Medication table column (with food / bedtime …)
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة الأخذ'**
+  String get recordReportColWith;
+
+  /// Medication table: a supplement
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} – مكمّل'**
+  String recordReportSupplementName(String name);
+
+  /// Lab table column
+  ///
+  /// In ar, this message translates to:
+  /// **'التحليل'**
+  String get recordReportColTest;
+
+  /// Lab table column
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نتيجة'**
+  String get recordReportColLatest;
+
+  /// Lab table column
+  ///
+  /// In ar, this message translates to:
+  /// **'المدى المرجعي'**
+  String get recordReportColRange;
+
+  /// Lab table column (sparkline)
+  ///
+  /// In ar, this message translates to:
+  /// **'المسار'**
+  String get recordReportColTrend;
+
+  /// Lab table column
+  ///
+  /// In ar, this message translates to:
+  /// **'نتائج سابقة'**
+  String get recordReportColHistory;
+
+  /// PDF lab legend
+  ///
+  /// In ar, this message translates to:
+  /// **'تُقارَن كل نتيجة بالمدى المرجعي الذي أدخلتُه للتحليل. «حدّي» تعني ضمن المدى وعلى بُعد {margin} من عرضه عن أحد الحدّين.'**
+  String recordReportLabLegend(String margin);
+
+  /// No description provided for @recordReportEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد التسجيلات'**
+  String get recordReportEntries;
+
+  /// No description provided for @recordReportDaysLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام فيها تسجيل'**
+  String get recordReportDaysLogged;
+
+  /// No description provided for @recordReportPainAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط الشدة من {max}'**
+  String recordReportPainAverage(String max);
+
+  /// No description provided for @recordReportPainHighest.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى شدة سُجّلت'**
+  String get recordReportPainHighest;
+
+  /// No description provided for @recordReportTopLocations.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المواضع تكرارًا'**
+  String get recordReportTopLocations;
+
+  /// No description provided for @recordReportTopTriggers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المحفّزات تكرارًا'**
+  String get recordReportTopTriggers;
+
+  /// No description provided for @recordReportMoodAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط المزاج من {max}'**
+  String recordReportMoodAverage(String max);
+
+  /// No description provided for @recordReportStressAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط التوتر من {max}'**
+  String recordReportStressAverage(String max);
+
+  /// No description provided for @recordReportAnxietyAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط القلق من {max}'**
+  String recordReportAnxietyAverage(String max);
+
+  /// No description provided for @recordReportEnergyAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط الطاقة من {max}'**
+  String recordReportEnergyAverage(String max);
+
+  /// No description provided for @recordReportSleepAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط ساعات النوم'**
+  String get recordReportSleepAverage;
+
+  /// No description provided for @recordReportCaffeineAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط أكواب الكافيين'**
+  String get recordReportCaffeineAverage;
+
+  /// No description provided for @recordReportTopFactors.
+  ///
+  /// In ar, this message translates to:
+  /// **'العوامل الأكثر تكرارًا'**
+  String get recordReportTopFactors;
+
+  /// No description provided for @recordReportQuestionFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'لموعد {title} في {date}'**
+  String recordReportQuestionFor(String title, String date);
+
+  /// Lab category heading for tests without a category
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get recordLabUncategorized;
+
+  /// Notification title
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد طبي: {title}'**
+  String recordReminderTitle(String title);
+
+  /// Relative time until the appointment
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {duration}'**
+  String recordReminderIn(String duration);
+
+  /// Notification channel group
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة'**
+  String get recordReminderGroup;
+
+  /// Notification channel name
+  ///
+  /// In ar, this message translates to:
+  /// **'مواعيد الطبيب'**
+  String get recordReminderChannelName;
+
+  /// Notification channel description
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل مواعيدك الطبية'**
+  String get recordReminderChannelDescription;
+
+  /// A day and a time, e.g. "Tuesday, 6 October at 10:30 AM"
+  ///
+  /// In ar, this message translates to:
+  /// **'{date}، الساعة {time}'**
+  String recordDateAtTime(String date, String time);
+
+  /// No description provided for @recordSavedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت التعديلات'**
+  String get recordSavedToast;
+
+  /// No description provided for @recordReorder.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب'**
+  String get recordReorder;
+
+  /// No description provided for @recordReorderDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ الترتيب'**
+  String get recordReorderDone;
+
+  /// No description provided for @recordReordered.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر الترتيب'**
+  String get recordReordered;
+
+  /// No description provided for @recordAlertAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة تنبيه دائم'**
+  String get recordAlertAdd;
+
+  /// No description provided for @recordAlertEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التنبيه'**
+  String get recordAlertEdit;
+
+  /// No description provided for @recordAlertSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما يجب أن يعرفه أي طبيب قبل كل شيء'**
+  String get recordAlertSubtitle;
+
+  /// No description provided for @recordAlertBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص التنبيه'**
+  String get recordAlertBody;
+
+  /// No description provided for @recordAlertBodyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: حساسية من البنسلين'**
+  String get recordAlertBodyHint;
+
+  /// No description provided for @recordAlertSeverity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأهمية'**
+  String get recordAlertSeverity;
+
+  /// No description provided for @recordAlertPinned.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثبّت في أعلى صفحات الصحة'**
+  String get recordAlertPinned;
+
+  /// No description provided for @recordAlertPinnedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يظهر دائمًا فوق شاشات الصحة'**
+  String get recordAlertPinnedHint;
+
+  /// No description provided for @recordAlertUnpin.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء التثبيت'**
+  String get recordAlertUnpin;
+
+  /// No description provided for @recordAlertAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف التنبيه'**
+  String get recordAlertAdded;
+
+  /// No description provided for @recordAlertDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف التنبيه'**
+  String get recordAlertDeleted;
+
+  /// No description provided for @recordAlertPinnedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثُبّت التنبيه في الأعلى'**
+  String get recordAlertPinnedToast;
+
+  /// No description provided for @recordAlertUnpinnedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي تثبيت التنبيه'**
+  String get recordAlertUnpinnedToast;
+
+  /// No description provided for @recordAlertsManage.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة'**
+  String get recordAlertsManage;
+
+  /// No description provided for @recordAlertsManagerSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب لترتيبها، وثبّت ما تريد رؤيته دائمًا'**
+  String get recordAlertsManagerSubtitle;
+
+  /// No description provided for @recordAlertsEmptyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'حساسية، أو دواء لا يناسبك، أو معلومة يجب ألّا تغيب عن أي طبيب.'**
+  String get recordAlertsEmptyHint;
+
+  /// Pill under the banner
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تنبيه آخر} =2{تنبيهان آخران} few{{n} تنبيهات أخرى} many{{n} تنبيهًا آخر} other{{n} تنبيه آخر}}'**
+  String recordAlertsMore(int count, String n);
+
+  /// No description provided for @recordConditionAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة حالة'**
+  String get recordConditionAdd;
+
+  /// No description provided for @recordConditionEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الحالة'**
+  String get recordConditionEdit;
+
+  /// No description provided for @recordConditionName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get recordConditionName;
+
+  /// No description provided for @recordConditionSinceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ'**
+  String get recordConditionSinceLabel;
+
+  /// No description provided for @recordConditionActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشطة حاليًا'**
+  String get recordConditionActive;
+
+  /// No description provided for @recordConditionInactive.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير نشطة'**
+  String get recordConditionInactive;
+
+  /// No description provided for @recordConditionMarkInactive.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعليمها غير نشطة'**
+  String get recordConditionMarkInactive;
+
+  /// No description provided for @recordConditionMarkActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعليمها نشطة'**
+  String get recordConditionMarkActive;
+
+  /// No description provided for @recordConditionMarkedInactive.
+  ///
+  /// In ar, this message translates to:
+  /// **'صارت الحالة غير نشطة'**
+  String get recordConditionMarkedInactive;
+
+  /// No description provided for @recordConditionMarkedActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'صارت الحالة نشطة'**
+  String get recordConditionMarkedActive;
+
+  /// No description provided for @recordConditionAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت الحالة'**
+  String get recordConditionAdded;
+
+  /// No description provided for @recordConditionDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الحالة'**
+  String get recordConditionDeleted;
+
+  /// No description provided for @recordConditionsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حالات مسجّلة'**
+  String get recordConditionsEmpty;
+
+  /// No description provided for @recordConditionsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل حالاتك الصحية مع تاريخ بدايتها وملاحظاتك، لتكون حاضرة في أي زيارة.'**
+  String get recordConditionsEmptyBody;
+
+  /// No description provided for @recordConditionsInactiveHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'حالات غير نشطة'**
+  String get recordConditionsInactiveHeader;
+
+  /// No description provided for @recordLabVisit.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيارة مختبر'**
+  String get recordLabVisit;
+
+  /// No description provided for @recordLabVisitSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتائج عدة تحاليل بتاريخ واحد'**
+  String get recordLabVisitSubtitle;
+
+  /// No description provided for @recordLabVisitDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ التحاليل'**
+  String get recordLabVisitDate;
+
+  /// No description provided for @recordLabVisitSaveNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل نتيجة واحدة على الأقل'**
+  String get recordLabVisitSaveNone;
+
+  /// No description provided for @recordLabVisitSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{حفظ نتيجة واحدة} =2{حفظ نتيجتين} few{حفظ {n} نتائج} many{حفظ {n} نتيجة} other{حفظ {n} نتيجة}}'**
+  String recordLabVisitSave(int count, String n);
+
+  /// No description provided for @recordLabVisitSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{حُفظت نتيجة واحدة} =2{حُفظت نتيجتان} few{حُفظت {n} نتائج} many{حُفظت {n} نتيجة} other{حُفظت {n} نتيجة}}'**
+  String recordLabVisitSaved(int count, String n);
+
+  /// No description provided for @recordLabAddTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل جديد'**
+  String get recordLabAddTest;
+
+  /// No description provided for @recordLabEditTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التحليل'**
+  String get recordLabEditTest;
+
+  /// No description provided for @recordLabTestSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب المدى المرجعي كما في ورقة مختبرك'**
+  String get recordLabTestSubtitle;
+
+  /// No description provided for @recordLabTestName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم التحليل'**
+  String get recordLabTestName;
+
+  /// No description provided for @recordLabUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get recordLabUnit;
+
+  /// No description provided for @recordLabUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا mg/dL'**
+  String get recordLabUnitHint;
+
+  /// No description provided for @recordLabLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحدّ الأدنى للمدى'**
+  String get recordLabLow;
+
+  /// No description provided for @recordLabHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحدّ الأعلى للمدى'**
+  String get recordLabHigh;
+
+  /// No description provided for @recordLabRangeInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحدّ الأدنى أكبر من الأعلى'**
+  String get recordLabRangeInvalid;
+
+  /// No description provided for @recordLabCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get recordLabCategory;
+
+  /// No description provided for @recordLabTestAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف التحليل'**
+  String get recordLabTestAdded;
+
+  /// No description provided for @recordLabTestDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف التحليل مع نتائجه'**
+  String get recordLabTestDeleted;
+
+  /// No description provided for @recordLabTestGone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يعد هذا التحليل موجودًا'**
+  String get recordLabTestGone;
+
+  /// No description provided for @recordLabAddReading.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة نتيجة'**
+  String get recordLabAddReading;
+
+  /// No description provided for @recordLabEditReading.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل النتيجة'**
+  String get recordLabEditReading;
+
+  /// No description provided for @recordLabValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة'**
+  String get recordLabValue;
+
+  /// No description provided for @recordLabValueWithUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة بوحدة {unit}'**
+  String recordLabValueWithUnit(String unit);
+
+  /// No description provided for @recordLabValueHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم، أو نتيجة وصفية مثل «سلبي»'**
+  String get recordLabValueHint;
+
+  /// No description provided for @recordLabNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get recordLabNote;
+
+  /// No description provided for @recordLabReadingAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت النتيجة'**
+  String get recordLabReadingAdded;
+
+  /// No description provided for @recordLabReadingDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت النتيجة'**
+  String get recordLabReadingDeleted;
+
+  /// No description provided for @recordLabsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تحاليل بعد'**
+  String get recordLabsEmpty;
+
+  /// No description provided for @recordLabsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ تحاليلك مرة واحدة بمداها المرجعي، ثم سجّل نتائج كل زيارة لترى مسارها.'**
+  String get recordLabsEmptyBody;
+
+  /// No description provided for @recordLabNoReadings.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج'**
+  String get recordLabNoReadings;
+
+  /// No description provided for @recordLabNoReadingsBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل نتائج لهذا التحليل بعد.'**
+  String get recordLabNoReadingsBody;
+
+  /// No description provided for @recordLabNoRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا مدى مرجعي'**
+  String get recordLabNoRange;
+
+  /// No description provided for @recordLabRangeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدى المرجعي'**
+  String get recordLabRangeLabel;
+
+  /// No description provided for @recordLabLatest.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نتيجة'**
+  String get recordLabLatest;
+
+  /// Neutral difference to the previous reading
+  ///
+  /// In ar, this message translates to:
+  /// **'{delta} عن النتيجة السابقة'**
+  String recordLabChange(String delta);
+
+  /// No description provided for @recordLabHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل النتائج'**
+  String get recordLabHistory;
+
+  /// No description provided for @recordLabChartEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج رقمية في هذه الفترة'**
+  String get recordLabChartEmpty;
+
+  /// Screen-reader label of the chart
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مسار {name}: نتيجة واحدة} =2{مسار {name}: نتيجتان} few{مسار {name}: {n} نتائج} many{مسار {name}: {n} نتيجة} other{مسار {name}: {n} نتيجة}}'**
+  String recordLabChartSemantics(String name, int count, String n);
+
+  /// No description provided for @recordLabReadingsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا نتائج} =1{نتيجة واحدة} =2{نتيجتان} few{{n} نتائج} many{{n} نتيجة} other{{n} نتيجة}}'**
+  String recordLabReadingsCount(int count, String n);
+
+  /// No description provided for @recordLabTestsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تحليل واحد} =2{تحليلان} few{{n} تحاليل} many{{n} تحليلًا} other{{n} تحليل}}'**
+  String recordLabTestsCount(int count, String n);
+
+  /// No description provided for @recordLabMarginNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'«حدّي» يعني: ضمن المدى وعلى بُعد {margin} من عرضه عن أحد الحدّين. يمكنك تغيير النسبة من إعدادات السجل.'**
+  String recordLabMarginNote(String margin);
+
+  /// No description provided for @recordLabFlagsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل'**
+  String get recordLabFlagsTitle;
+
+  /// Hub card: latest results flagged low/high/borderline
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{نتيجة خارج المدى أو قربه} =2{نتيجتان خارج المدى أو قربه} few{{n} نتائج خارج المدى أو قربه} many{{n} نتيجة خارج المدى أو قربه} other{{n} نتيجة خارج المدى أو قربه}}'**
+  String recordLabFlaggedCount(int count, String n);
+
+  /// No description provided for @recordLabAllInRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نتائج تحاليلك كلها ضمن المدى الذي أدخلته.'**
+  String get recordLabAllInRange;
+
+  /// No description provided for @recordAppointmentsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد الطبية'**
+  String get recordAppointmentsTitle;
+
+  /// No description provided for @recordAppointmentAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد جديد'**
+  String get recordAppointmentAdd;
+
+  /// No description provided for @recordAppointmentEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الموعد'**
+  String get recordAppointmentEdit;
+
+  /// No description provided for @recordAppointmentTitleField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد'**
+  String get recordAppointmentTitleField;
+
+  /// No description provided for @recordAppointmentTitleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: مراجعة دورية'**
+  String get recordAppointmentTitleHint;
+
+  /// No description provided for @recordAppointmentDoctor.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطبيب'**
+  String get recordAppointmentDoctor;
+
+  /// No description provided for @recordAppointmentPlace.
+  ///
+  /// In ar, this message translates to:
+  /// **'المكان'**
+  String get recordAppointmentPlace;
+
+  /// No description provided for @recordAppointmentDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get recordAppointmentDone;
+
+  /// No description provided for @recordAppointmentMarkDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ الموعد'**
+  String get recordAppointmentMarkDone;
+
+  /// No description provided for @recordAppointmentMarkUndone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتمّ بعد'**
+  String get recordAppointmentMarkUndone;
+
+  /// No description provided for @recordAppointmentDoneToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل الموعد كمنجز'**
+  String get recordAppointmentDoneToast;
+
+  /// No description provided for @recordAppointmentUndoneToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد الموعد إلى القادمة'**
+  String get recordAppointmentUndoneToast;
+
+  /// No description provided for @recordAppointmentAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف الموعد'**
+  String get recordAppointmentAdded;
+
+  /// No description provided for @recordAppointmentDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الموعد، وبقيت أسئلته'**
+  String get recordAppointmentDeleted;
+
+  /// No description provided for @recordAppointmentUpcoming.
+  ///
+  /// In ar, this message translates to:
+  /// **'القادمة'**
+  String get recordAppointmentUpcoming;
+
+  /// No description provided for @recordAppointmentPast.
+  ///
+  /// In ar, this message translates to:
+  /// **'السابقة'**
+  String get recordAppointmentPast;
+
+  /// No description provided for @recordAppointmentShowAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المواعيد'**
+  String get recordAppointmentShowAll;
+
+  /// No description provided for @recordAppointmentsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مواعيد قادمة'**
+  String get recordAppointmentsEmpty;
+
+  /// No description provided for @recordAppointmentsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف موعدك القادم لتصلك تذكرة قبله، وتبقى أسئلتك للطبيب معه.'**
+  String get recordAppointmentsEmptyBody;
+
+  /// No description provided for @recordNextAppointment.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد القادم'**
+  String get recordNextAppointment;
+
+  /// No description provided for @recordAppointmentQuestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{سؤال واحد بانتظاره} =2{سؤالان بانتظاره} few{{n} أسئلة بانتظاره} many{{n} سؤالًا بانتظاره} other{{n} سؤال بانتظاره}}'**
+  String recordAppointmentQuestions(int count, String n);
+
+  /// No description provided for @recordQuestionAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'سؤال جديد'**
+  String get recordQuestionAdd;
+
+  /// No description provided for @recordQuestionAddForVisit.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف سؤالًا لهذه الزيارة'**
+  String get recordQuestionAddForVisit;
+
+  /// No description provided for @recordQuestionEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل السؤال'**
+  String get recordQuestionEdit;
+
+  /// No description provided for @recordQuestionField.
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال'**
+  String get recordQuestionField;
+
+  /// No description provided for @recordQuestionAppointment.
+  ///
+  /// In ar, this message translates to:
+  /// **'لأي موعد؟'**
+  String get recordQuestionAppointment;
+
+  /// No description provided for @recordQuestionGeneral.
+  ///
+  /// In ar, this message translates to:
+  /// **'سؤال عام'**
+  String get recordQuestionGeneral;
+
+  /// No description provided for @recordQuestionAnswered.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّت الإجابة'**
+  String get recordQuestionAnswered;
+
+  /// No description provided for @recordQuestionAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجابة'**
+  String get recordQuestionAnswer;
+
+  /// No description provided for @recordQuestionAnswerOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجابة (اختياري)'**
+  String get recordQuestionAnswerOptional;
+
+  /// No description provided for @recordQuestionMarkAnswered.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُجيب عنه'**
+  String get recordQuestionMarkAnswered;
+
+  /// No description provided for @recordQuestionReopen.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة فتح السؤال'**
+  String get recordQuestionReopen;
+
+  /// No description provided for @recordQuestionAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف السؤال'**
+  String get recordQuestionAdded;
+
+  /// No description provided for @recordQuestionDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف السؤال'**
+  String get recordQuestionDeleted;
+
+  /// No description provided for @recordQuestionAnsweredToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت الإجابة'**
+  String get recordQuestionAnsweredToast;
+
+  /// No description provided for @recordQuestionReopened.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد فتح السؤال'**
+  String get recordQuestionReopened;
+
+  /// No description provided for @recordQuestionsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أسئلة بعد'**
+  String get recordQuestionsEmpty;
+
+  /// No description provided for @recordQuestionsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'دوّن ما تريد سؤاله حين يخطر لك، حتى لا يضيع في العيادة.'**
+  String get recordQuestionsEmptyBody;
+
+  /// No description provided for @recordQuestionsGeneralHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسئلة عامة'**
+  String get recordQuestionsGeneralHeader;
+
+  /// No description provided for @recordQuestionsAnsweredHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُجيب عنها'**
+  String get recordQuestionsAnsweredHeader;
+
+  /// No description provided for @recordQuestionsMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وسؤال آخر} =2{وسؤالان آخران} few{و{n} أسئلة أخرى} many{و{n} سؤالًا آخر} other{و{n} سؤال آخر}}'**
+  String recordQuestionsMore(int count, String n);
+
+  /// No description provided for @recordReportSheetSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف PDF مرتّب للطباعة أو المشاركة'**
+  String get recordReportSheetSubtitle;
+
+  /// No description provided for @recordReportNameField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم في رأس التقرير'**
+  String get recordReportNameField;
+
+  /// No description provided for @recordReportNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُطبع فقط، ولا يُحفظ'**
+  String get recordReportNameHint;
+
+  /// No description provided for @recordReportRememberName.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكّر الاسم'**
+  String get recordReportRememberName;
+
+  /// No description provided for @recordReportRememberHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحفظ على هذا الجهاز فقط'**
+  String get recordReportRememberHint;
+
+  /// No description provided for @recordReportPeriodField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get recordReportPeriodField;
+
+  /// No description provided for @recordReportSectionsField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقسام'**
+  String get recordReportSectionsField;
+
+  /// No description provided for @recordReportPrivacyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُنشأ التقرير على جهازك، ولا يغادره إلا إذا شاركته بنفسك.'**
+  String get recordReportPrivacyNote;
+
+  /// No description provided for @recordReportShare.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة'**
+  String get recordReportShare;
+
+  /// No description provided for @recordReportSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ ملف'**
+  String get recordReportSave;
+
+  /// No description provided for @recordReportBuilding.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ إعداد التقرير…'**
+  String get recordReportBuilding;
+
+  /// No description provided for @recordReportSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ التقرير'**
+  String get recordReportSaved;
+
+  /// No description provided for @recordReportFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر إعداد التقرير، حاول مجددًا'**
+  String get recordReportFailed;
+
+  /// No description provided for @recordSettingsMargin.
+  ///
+  /// In ar, this message translates to:
+  /// **'هامش «حدّي» قرب كل حدّ'**
+  String get recordSettingsMargin;
+
+  /// No description provided for @recordSettingsReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير المواعيد'**
+  String get recordSettingsReminders;
+
+  /// No description provided for @recordSettingsRemindersHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار قبل كل موعد طبي'**
+  String get recordSettingsRemindersHint;
+
+  /// No description provided for @recordSettingsReminderTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'متى أُذكَّر'**
+  String get recordSettingsReminderTimes;
+
+  /// Wellbeing screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'العافية'**
+  String get wbTitle;
+
+  /// No description provided for @wbTabToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get wbTabToday;
+
+  /// No description provided for @wbTabPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم'**
+  String get wbTabPain;
+
+  /// No description provided for @wbTabHabits.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادات'**
+  String get wbTabHabits;
+
+  /// No description provided for @wbTabWorries.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهموم'**
+  String get wbTabWorries;
+
+  /// No description provided for @wbTabInsights.
+  ///
+  /// In ar, this message translates to:
+  /// **'رؤى'**
+  String get wbTabInsights;
+
+  /// No description provided for @wbAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get wbAdd;
+
+  /// No description provided for @wbCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get wbCancel;
+
+  /// No description provided for @wbSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get wbSave;
+
+  /// No description provided for @wbDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get wbDelete;
+
+  /// No description provided for @wbEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get wbEdit;
+
+  /// No description provided for @wbClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get wbClose;
+
+  /// No description provided for @wbOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح'**
+  String get wbOpen;
+
+  /// No description provided for @wbEditList.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل القائمة'**
+  String get wbEditList;
+
+  /// No description provided for @wbShowAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get wbShowAll;
+
+  /// No description provided for @wbShowLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض أقل'**
+  String get wbShowLess;
+
+  /// No description provided for @wbNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get wbNotes;
+
+  /// No description provided for @wbWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get wbWhen;
+
+  /// No description provided for @wbNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get wbNow;
+
+  /// No description provided for @wbToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get wbToday;
+
+  /// No description provided for @wbYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get wbYesterday;
+
+  /// No description provided for @wbDayAtTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'{day}، {time}'**
+  String wbDayAtTime(String day, String time);
+
+  /// Separator between list items (keep the trailing space)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get wbListSeparator;
+
+  /// No description provided for @wbLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل'**
+  String get wbLess;
+
+  /// No description provided for @wbMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر'**
+  String get wbMore;
+
+  /// A score out of a maximum, e.g. 6 of 10
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} من {max}'**
+  String wbOutOf(String value, String max);
+
+  /// Unit after a number, e.g. of 10
+  ///
+  /// In ar, this message translates to:
+  /// **'من {max}'**
+  String wbOutOfMax(String max);
+
+  /// No description provided for @wbFraction.
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String wbFraction(String done, String total);
+
+  /// No description provided for @wbMetricMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج'**
+  String get wbMetricMood;
+
+  /// No description provided for @wbMetricStress.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوتر'**
+  String get wbMetricStress;
+
+  /// No description provided for @wbMetricAnxiety.
+  ///
+  /// In ar, this message translates to:
+  /// **'القلق'**
+  String get wbMetricAnxiety;
+
+  /// No description provided for @wbMetricEnergy.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطاقة'**
+  String get wbMetricEnergy;
+
+  /// No description provided for @wbMetricSleep.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم'**
+  String get wbMetricSleep;
+
+  /// No description provided for @wbMetricCaffeine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكافيين'**
+  String get wbMetricCaffeine;
+
+  /// No description provided for @wbMetricPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم'**
+  String get wbMetricPain;
+
+  /// A metric as 'your X' inside insight sentences
+  ///
+  /// In ar, this message translates to:
+  /// **'{metric, select, mood{تقييم مزاجك} stress{توترك} anxiety{قلقك} energy{طاقتك} sleep{ساعات نومك} caffeine{أكواب الكافيين} pain{ألمك} other{القيمة}}'**
+  String wbMetricYour(String metric);
+
+  /// Mood 1 of 5 (lowest)
+  ///
+  /// In ar, this message translates to:
+  /// **'ثقيل'**
+  String get wbMood1;
+
+  /// No description provided for @wbMood2.
+  ///
+  /// In ar, this message translates to:
+  /// **'منخفض'**
+  String get wbMood2;
+
+  /// No description provided for @wbMood3.
+  ///
+  /// In ar, this message translates to:
+  /// **'معتدل'**
+  String get wbMood3;
+
+  /// No description provided for @wbMood4.
+  ///
+  /// In ar, this message translates to:
+  /// **'طيّب'**
+  String get wbMood4;
+
+  /// Mood 5 of 5 (highest)
+  ///
+  /// In ar, this message translates to:
+  /// **'مُشرق'**
+  String get wbMood5;
+
+  /// No description provided for @wbMoodQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف حالك اليوم؟'**
+  String get wbMoodQuestion;
+
+  /// No description provided for @wbCheckInPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر وجهًا لتسجيل سريع، أو سجّل التوتر والنوم والطاقة معًا.'**
+  String get wbCheckInPrompt;
+
+  /// No description provided for @wbCheckInFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل كامل'**
+  String get wbCheckInFull;
+
+  /// No description provided for @wbCheckInTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل المزاج والتوتر'**
+  String get wbCheckInTitle;
+
+  /// No description provided for @wbCheckInEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التسجيل'**
+  String get wbCheckInEditTitle;
+
+  /// No description provided for @wbCheckInSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الحقول اختيارية؛ سجّل ما يناسبك.'**
+  String get wbCheckInSubtitle;
+
+  /// No description provided for @wbCheckInAnother.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل آخر'**
+  String get wbCheckInAnother;
+
+  /// No description provided for @wbCheckedIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم التسجيل'**
+  String get wbCheckedIn;
+
+  /// No description provided for @wbTodayCheckIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل اليوم'**
+  String get wbTodayCheckIn;
+
+  /// No description provided for @wbCheckInDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف التسجيل'**
+  String get wbCheckInDeleted;
+
+  /// No description provided for @wbMoodNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما الذي أثّر في يومك؟'**
+  String get wbMoodNotesHint;
+
+  /// No description provided for @wbScaleCalm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هادئ'**
+  String get wbScaleCalm;
+
+  /// No description provided for @wbScaleVeryHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتفع جدًا'**
+  String get wbScaleVeryHigh;
+
+  /// No description provided for @wbScaleNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء'**
+  String get wbScaleNone;
+
+  /// No description provided for @wbScaleDrained.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستنزَف'**
+  String get wbScaleDrained;
+
+  /// No description provided for @wbScaleFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'ممتلئ'**
+  String get wbScaleFull;
+
+  /// No description provided for @wbSleepHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات النوم'**
+  String get wbSleepHours;
+
+  /// No description provided for @wbCaffeine.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكواب الكافيين'**
+  String get wbCaffeine;
+
+  /// No description provided for @wbFactors.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما الذي أثّر'**
+  String get wbFactors;
+
+  /// Hours (sleep), abbreviated
+  ///
+  /// In ar, this message translates to:
+  /// **'{n} س'**
+  String wbHours(String n);
+
+  /// No description provided for @wbCups.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أكواب} =1{كوب واحد} =2{كوبان} few{{n} أكواب} many{{n} كوبًا} other{{n} كوب}}'**
+  String wbCups(int count, String n);
+
+  /// Chart range chip
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم} =2{يومان} few{{n} أيام} many{{n} يومًا} other{{n} يوم}}'**
+  String wbDaysRange(int count, String n);
+
+  /// No description provided for @wbDayCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم واحد} =2{يومان} few{{n} أيام} many{{n} يومًا} other{{n} يوم}}'**
+  String wbDayCount(int count, String n);
+
+  /// No description provided for @wbMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتان} few{{n} دقائق} many{{n} دقيقة} other{{n} دقيقة}}'**
+  String wbMinutes(int count, String n);
+
+  /// No description provided for @wbTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة واحدة} =2{مرتان} few{{n} مرات} many{{n} مرة} other{{n} مرة}}'**
+  String wbTimes(int count, String n);
+
+  /// No description provided for @wbPointsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{نقطة على الخريطة} =2{نقطتان على الخريطة} few{{n} نقاط على الخريطة} many{{n} نقطة على الخريطة} other{{n} نقطة على الخريطة}}'**
+  String wbPointsCount(int count, String n);
+
+  /// No description provided for @wbPainLogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل ألم'**
+  String get wbPainLogTitle;
+
+  /// No description provided for @wbPainEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل تسجيل الألم'**
+  String get wbPainEditTitle;
+
+  /// No description provided for @wbPainLogSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'من «لا ألم» إلى «أشدّ ما يكون»'**
+  String get wbPainLogSubtitle;
+
+  /// No description provided for @wbPainScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'شدة الألم'**
+  String get wbPainScore;
+
+  /// No description provided for @wbPainNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ألم'**
+  String get wbPainNone;
+
+  /// No description provided for @wbPainMild.
+  ///
+  /// In ar, this message translates to:
+  /// **'خفيف'**
+  String get wbPainMild;
+
+  /// No description provided for @wbPainModerate.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط'**
+  String get wbPainModerate;
+
+  /// No description provided for @wbPainSevere.
+  ///
+  /// In ar, this message translates to:
+  /// **'شديد'**
+  String get wbPainSevere;
+
+  /// No description provided for @wbPainWorst.
+  ///
+  /// In ar, this message translates to:
+  /// **'أشدّ ما يكون'**
+  String get wbPainWorst;
+
+  /// No description provided for @wbBodyMap.
+  ///
+  /// In ar, this message translates to:
+  /// **'خريطة الجسم'**
+  String get wbBodyMap;
+
+  /// No description provided for @wbBodyMapHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المس موضع الألم لتضع نقطة، والمسها ثانيةً لإزالتها.'**
+  String get wbBodyMapHint;
+
+  /// No description provided for @wbBodyMapSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{خريطة الجسم من الأمام والخلف، بلا نقاط} =1{خريطة الجسم، عليها نقطة واحدة} =2{خريطة الجسم، عليها نقطتان} few{خريطة الجسم، عليها {count} نقاط} many{خريطة الجسم، عليها {count} نقطة} other{خريطة الجسم، عليها {count} نقطة}}'**
+  String wbBodyMapSemantics(int count);
+
+  /// No description provided for @wbClearPoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح النقاط'**
+  String get wbClearPoints;
+
+  /// No description provided for @wbFront.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمام'**
+  String get wbFront;
+
+  /// No description provided for @wbBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلف'**
+  String get wbBack;
+
+  /// No description provided for @wbLocations.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأماكن'**
+  String get wbLocations;
+
+  /// No description provided for @wbTriggers.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفزات'**
+  String get wbTriggers;
+
+  /// No description provided for @wbPainNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف كان الألم؟ وما الذي سبقه؟'**
+  String get wbPainNotesHint;
+
+  /// No description provided for @wbPainNowQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'كم ألمك الآن؟'**
+  String get wbPainNowQuestion;
+
+  /// No description provided for @wbQuickLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل سريع'**
+  String get wbQuickLog;
+
+  /// No description provided for @wbWithDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع التفاصيل'**
+  String get wbWithDetails;
+
+  /// No description provided for @wbPainLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل ألم بدرجة {score}'**
+  String wbPainLogged(String score);
+
+  /// No description provided for @wbPainDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف تسجيل الألم'**
+  String get wbPainDeleted;
+
+  /// No description provided for @wbPainOverTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم عبر الأيام'**
+  String get wbPainOverTime;
+
+  /// No description provided for @wbPainChartEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'يظهر الرسم بعد تسجيل الألم في يومين على الأقل.'**
+  String get wbPainChartEmpty;
+
+  /// No description provided for @wbPainDailyMax.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى درجة في اليوم'**
+  String get wbPainDailyMax;
+
+  /// No description provided for @wbPainDailyMean.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط اليوم'**
+  String get wbPainDailyMean;
+
+  /// No description provided for @wbPainAvgMax.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط الأعلى'**
+  String get wbPainAvgMax;
+
+  /// No description provided for @wbPainPeak.
+  ///
+  /// In ar, this message translates to:
+  /// **'الذروة'**
+  String get wbPainPeak;
+
+  /// No description provided for @wbPainDaysLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام مسجّلة'**
+  String get wbPainDaysLogged;
+
+  /// No description provided for @wbWhereItHurt.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواضع الألم'**
+  String get wbWhereItHurt;
+
+  /// No description provided for @wbHeatEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نقاط على الخريطة في هذه المدة بعد.'**
+  String get wbHeatEmpty;
+
+  /// No description provided for @wbHeatLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل'**
+  String get wbHeatLess;
+
+  /// No description provided for @wbHeatMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'أشد'**
+  String get wbHeatMore;
+
+  /// No description provided for @wbHeatSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'خريطة الألم؛ أكثر المواضع تكرارًا: {places}'**
+  String wbHeatSemantics(String places);
+
+  /// No description provided for @wbTriggersFrequent.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفزات الأكثر تكرارًا'**
+  String get wbTriggersFrequent;
+
+  /// No description provided for @wbTriggersEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل محفزات في هذه المدة.'**
+  String get wbTriggersEmpty;
+
+  /// No description provided for @wbLocationsFrequent.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأماكن الأكثر تكرارًا'**
+  String get wbLocationsFrequent;
+
+  /// No description provided for @wbLocationsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل أماكن في هذه المدة.'**
+  String get wbLocationsEmpty;
+
+  /// No description provided for @wbManageTriggers.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل قائمة المحفزات'**
+  String get wbManageTriggers;
+
+  /// No description provided for @wbManageLocations.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل قائمة الأماكن'**
+  String get wbManageLocations;
+
+  /// No description provided for @wbHistoryPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الألم'**
+  String get wbHistoryPain;
+
+  /// No description provided for @wbPainHistoryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تسجيلات بعد.'**
+  String get wbPainHistoryEmpty;
+
+  /// No description provided for @wbLogPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل ألمًا'**
+  String get wbLogPain;
+
+  /// No description provided for @wbNoPainToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تسجيل اليوم'**
+  String get wbNoPainToday;
+
+  /// No description provided for @wbLastPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'{score} عند {time}'**
+  String wbLastPain(String score, String time);
+
+  /// No description provided for @wbRegionLegs.
+  ///
+  /// In ar, this message translates to:
+  /// **'الساقان'**
+  String get wbRegionLegs;
+
+  /// No description provided for @wbTagKindLocations.
+  ///
+  /// In ar, this message translates to:
+  /// **'أماكن الألم'**
+  String get wbTagKindLocations;
+
+  /// No description provided for @wbTagKindTriggers.
+  ///
+  /// In ar, this message translates to:
+  /// **'محفزات الألم'**
+  String get wbTagKindTriggers;
+
+  /// No description provided for @wbTagKindFactors.
+  ///
+  /// In ar, this message translates to:
+  /// **'عوامل المزاج'**
+  String get wbTagKindFactors;
+
+  /// No description provided for @wbTagKindGeneric.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوسوم'**
+  String get wbTagKindGeneric;
+
+  /// No description provided for @wbTagAddTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة إلى {list}'**
+  String wbTagAddTitle(String list);
+
+  /// No description provided for @wbTagName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get wbTagName;
+
+  /// No description provided for @wbTagRenameTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التسمية'**
+  String get wbTagRenameTitle;
+
+  /// No description provided for @wbTagDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف «{name}» من القائمة'**
+  String wbTagDeleted(String name);
+
+  /// No description provided for @wbTagManagerSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب لإعادة الترتيب، والمس لإعادة التسمية (تتبعها التسجيلات السابقة)، واضغط مطوّلًا للحذف.'**
+  String get wbTagManagerSubtitle;
+
+  /// No description provided for @wbTagAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة عنصر'**
+  String get wbTagAdd;
+
+  /// No description provided for @wbTagEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة فارغة؛ أضف ما يناسبك.'**
+  String get wbTagEmpty;
+
+  /// No description provided for @wbTrends.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسار الأيام'**
+  String get wbTrends;
+
+  /// No description provided for @wbTrendsNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد بضعة تسجيلات يظهر هنا مسار مزاجك وتوترك ونومك عبر الأيام.'**
+  String get wbTrendsNone;
+
+  /// No description provided for @wbTrendsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'يظهر مسار {metric} بعد تسجيله في يومين على الأقل.'**
+  String wbTrendsEmpty(String metric);
+
+  /// No description provided for @wbChartSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسم {metric} خلال {range}'**
+  String wbChartSemantics(String metric, String range);
+
+  /// No description provided for @wbAverageOver.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط {value} عبر {days}'**
+  String wbAverageOver(String value, String days);
+
+  /// No description provided for @wbFactorsFrequent.
+  ///
+  /// In ar, this message translates to:
+  /// **'العوامل الأكثر حضورًا'**
+  String get wbFactorsFrequent;
+
+  /// No description provided for @wbHistoryCheckIns.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسجيلات السابقة'**
+  String get wbHistoryCheckIns;
+
+  /// No description provided for @wbHistoryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تسجيلات بعد؛ يكفي وجه واحد لتبدأ.'**
+  String get wbHistoryEmpty;
+
+  /// No description provided for @wbHabitsToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادات اليوم'**
+  String get wbHabitsToday;
+
+  /// No description provided for @wbHabitsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوات صغيرة تخفّف الضغط.'**
+  String get wbHabitsSubtitle;
+
+  /// No description provided for @wbHabitsAllDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتها كلها اليوم.'**
+  String get wbHabitsAllDone;
+
+  /// No description provided for @wbBestStreakNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{أطول سلسلة الآن: يوم واحد} =2{أطول سلسلة الآن: يومان} few{أطول سلسلة الآن: {n} أيام} many{أطول سلسلة الآن: {n} يومًا} other{أطول سلسلة الآن: {n} يوم}}'**
+  String wbBestStreakNow(int count, String n);
+
+  /// No description provided for @wbStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم واحد متتالٍ} =2{يومان متتاليان} few{{n} أيام متتالية} many{{n} يومًا متتاليًا} other{{n} يوم متتالٍ}}'**
+  String wbStreak(int count, String n);
+
+  /// No description provided for @wbStreakNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ اليوم'**
+  String get wbStreakNone;
+
+  /// No description provided for @wbHabitDoneState.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجزت اليوم'**
+  String get wbHabitDoneState;
+
+  /// No description provided for @wbHabitOpenState.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُنجز بعد'**
+  String get wbHabitOpenState;
+
+  /// No description provided for @wbHabitPausedState.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقفة مؤقتًا'**
+  String get wbHabitPausedState;
+
+  /// No description provided for @wbHabitMarkDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنجاز'**
+  String get wbHabitMarkDone;
+
+  /// No description provided for @wbHabitUndo.
+  ///
+  /// In ar, this message translates to:
+  /// **'تراجع'**
+  String get wbHabitUndo;
+
+  /// No description provided for @wbHabitDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجزت: {name}'**
+  String wbHabitDone(String name);
+
+  /// No description provided for @wbHabitUndone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي الإنجاز'**
+  String get wbHabitUndone;
+
+  /// No description provided for @wbHabitPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get wbHabitPause;
+
+  /// No description provided for @wbHabitResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get wbHabitResume;
+
+  /// No description provided for @wbHabitPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقفت العادة مؤقتًا'**
+  String get wbHabitPaused;
+
+  /// No description provided for @wbHabitResumed.
+  ///
+  /// In ar, this message translates to:
+  /// **'استُؤنفت العادة'**
+  String get wbHabitResumed;
+
+  /// No description provided for @wbHabitDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت: {name}'**
+  String wbHabitDeleted(String name);
+
+  /// No description provided for @wbHabitEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل العادة'**
+  String get wbHabitEditTitle;
+
+  /// No description provided for @wbHabitAddTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادة جديدة'**
+  String get wbHabitAddTitle;
+
+  /// No description provided for @wbHabitAddSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادة صغيرة تساعدك على الهدوء.'**
+  String get wbHabitAddSubtitle;
+
+  /// No description provided for @wbHabitName.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادة'**
+  String get wbHabitName;
+
+  /// No description provided for @wbHabitsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا عادات بعد'**
+  String get wbHabitsEmptyTitle;
+
+  /// No description provided for @wbHabitsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف عادات صغيرة تودّ متابعتها يوميًا.'**
+  String get wbHabitsEmptyBody;
+
+  /// No description provided for @wbHabitsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المس للإنجاز، واسحب لإعادة الترتيب، واضغط مطوّلًا للمزيد.'**
+  String get wbHabitsHint;
+
+  /// No description provided for @wbHabitsShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادات'**
+  String get wbHabitsShort;
+
+  /// No description provided for @wbWorriesShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'مركونة'**
+  String get wbWorriesShort;
+
+  /// No description provided for @wbWorryWindowTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نافذة القلق'**
+  String get wbWorryWindowTitle;
+
+  /// No description provided for @wbWorryWindowExplain.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت قصير كل يوم تراجع فيه ما يشغل بالك. وحتى يحين، اركن الهموم هنا لتعود إليها في موعدها.'**
+  String get wbWorryWindowExplain;
+
+  /// No description provided for @wbWorryWindowSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّد النافذة'**
+  String get wbWorryWindowSet;
+
+  /// No description provided for @wbWorryWindowEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل النافذة'**
+  String get wbWorryWindowEdit;
+
+  /// No description provided for @wbWorryWindowEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل نافذة القلق'**
+  String get wbWorryWindowEnabled;
+
+  /// No description provided for @wbWorryWindowStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت البدء'**
+  String get wbWorryWindowStart;
+
+  /// No description provided for @wbWorryWindowLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة'**
+  String get wbWorryWindowLength;
+
+  /// No description provided for @wbWorryWindowRemind.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير عند البدء'**
+  String get wbWorryWindowRemind;
+
+  /// No description provided for @wbWorryWindowRemindHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار هادئ حين تُفتح النافذة.'**
+  String get wbWorryWindowRemindHint;
+
+  /// No description provided for @wbWorryWindowAbout.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبقى همومك على هذا الجهاز وحده، مشفّرة.'**
+  String get wbWorryWindowAbout;
+
+  /// No description provided for @wbWorryWindowSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل يوم عند {time} · {length}'**
+  String wbWorryWindowSummary(String time, String length);
+
+  /// No description provided for @wbWorryWindowOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مفعّلة'**
+  String get wbWorryWindowOff;
+
+  /// No description provided for @wbWorryWindowOpenNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'النافذة مفتوحة الآن؛ بقي {left}'**
+  String wbWorryWindowOpenNow(String left);
+
+  /// No description provided for @wbWorryWindowOpensIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُفتح بعد {left}'**
+  String wbWorryWindowOpensIn(String left);
+
+  /// No description provided for @wbWorryReviewStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{راجع همًّا واحدًا} =2{راجع همّين} few{راجع {n} هموم} many{راجع {n} همًّا} other{راجع {n} همّ}}'**
+  String wbWorryReviewStart(int count, String n);
+
+  /// No description provided for @wbWorryReviewNothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا هموم مركونة'**
+  String get wbWorryReviewNothing;
+
+  /// No description provided for @wbWorryParkTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اركن همًّا'**
+  String get wbWorryParkTitle;
+
+  /// No description provided for @wbWorryParkExplain.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتبه كما هو، ثم دعه ينتظر نافذتك. لا حاجة إلى حلّه الآن.'**
+  String get wbWorryParkExplain;
+
+  /// No description provided for @wbWorryParkHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما الذي يشغل بالك؟'**
+  String get wbWorryParkHint;
+
+  /// No description provided for @wbWorryPark.
+  ///
+  /// In ar, this message translates to:
+  /// **'اركنه'**
+  String get wbWorryPark;
+
+  /// No description provided for @wbWorriesParked.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{الهموم المركونة} =1{همّ مركون واحد} =2{همّان مركونان} few{{n} هموم مركونة} many{{n} همًّا مركونًا} other{{n} همّ مركون}}'**
+  String wbWorriesParked(int count, String n);
+
+  /// No description provided for @wbWorriesNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مركون الآن.'**
+  String get wbWorriesNone;
+
+  /// No description provided for @wbWorriesResolved.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{همّ انتهى أمره} =2{همّان انتهى أمرهما} few{{n} هموم انتهى أمرها} many{{n} همًّا انتهى أمرها} other{{n} همّ انتهى أمرها}}'**
+  String wbWorriesResolved(int count, String n);
+
+  /// No description provided for @wbWorryParkedOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'رُكن: {date}'**
+  String wbWorryParkedOn(String date);
+
+  /// No description provided for @wbWorryEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الهمّ'**
+  String get wbWorryEditTitle;
+
+  /// No description provided for @wbWorryBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهمّ'**
+  String get wbWorryBody;
+
+  /// No description provided for @wbWorryDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الهمّ'**
+  String get wbWorryDeleted;
+
+  /// No description provided for @wbWorryMarkedResolved.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى أمره'**
+  String get wbWorryMarkedResolved;
+
+  /// No description provided for @wbWorryReopened.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد إلى المركونة'**
+  String get wbWorryReopened;
+
+  /// No description provided for @wbWorryResolved.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى أمره'**
+  String get wbWorryResolved;
+
+  /// No description provided for @wbWorryReopen.
+  ///
+  /// In ar, this message translates to:
+  /// **'اركنه من جديد'**
+  String get wbWorryReopen;
+
+  /// No description provided for @wbWorryKeep.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبقِه لاحقًا'**
+  String get wbWorryKeep;
+
+  /// No description provided for @wbWorryReviewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة الهموم'**
+  String get wbWorryReviewTitle;
+
+  /// No description provided for @wbWorryReviewSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'واحدًا تلو الآخر، بلا عجلة.'**
+  String get wbWorryReviewSubtitle;
+
+  /// No description provided for @wbWorryReviewProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'{index} من {total}'**
+  String wbWorryReviewProgress(String index, String total);
+
+  /// No description provided for @wbWorryReviewQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل انتهى أمره، أم تبقيه لنافذة قادمة؟'**
+  String get wbWorryReviewQuestion;
+
+  /// No description provided for @wbWorryAddReflection.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف تأمّلًا'**
+  String get wbWorryAddReflection;
+
+  /// No description provided for @wbWorryReflection.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأمّل'**
+  String get wbWorryReflection;
+
+  /// No description provided for @wbWorryReflectionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف تراه الآن؟'**
+  String get wbWorryReflectionHint;
+
+  /// No description provided for @wbWorryEarlierReflection.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأمّل سابق: {text}'**
+  String wbWorryEarlierReflection(String text);
+
+  /// No description provided for @wbWorryReviewEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا هموم مركونة للمراجعة الآن.'**
+  String get wbWorryReviewEmpty;
+
+  /// No description provided for @wbWorryReviewDoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت المراجعة'**
+  String get wbWorryReviewDoneTitle;
+
+  /// No description provided for @wbWorryReviewDoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{راجعت همًّا واحدًا، وانتهى أمر {resolved}.} =2{راجعت همّين، وانتهى أمر {resolved} منهما.} few{راجعت {n} هموم، وانتهى أمر {resolved} منها.} many{راجعت {n} همًّا، وانتهى أمر {resolved} منها.} other{راجعت {n} همّ، وانتهى أمر {resolved} منها.}}'**
+  String wbWorryReviewDoneBody(int count, String n, String resolved);
+
+  /// No description provided for @wbWorryNotifyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت نافذة القلق'**
+  String get wbWorryNotifyTitle;
+
+  /// No description provided for @wbWorryNotifyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{همّ واحد مركون ينتظرك.} =2{همّان مركونان ينتظرانك.} few{{n} هموم مركونة تنتظرك.} many{{n} همًّا مركونًا ينتظرك.} other{{n} همّ مركون ينتظرك.}}'**
+  String wbWorryNotifyBody(int count, String n);
+
+  /// No description provided for @wbWorryNotifyBodyEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مركون اليوم؛ لحظة هدوء لك.'**
+  String get wbWorryNotifyBodyEmpty;
+
+  /// No description provided for @wbNotifyGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة'**
+  String get wbNotifyGroup;
+
+  /// No description provided for @wbNotifyChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نافذة القلق'**
+  String get wbNotifyChannel;
+
+  /// No description provided for @wbNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير هادئ حين يحين وقت مراجعة الهموم المركونة.'**
+  String get wbNotifyChannelDescription;
+
+  /// No description provided for @wbInsightsIntro.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات محايدة تُحسب على جهازك من بياناتك وحدها خلال آخر {days}. هي أرقام للتأمل، لا تشخيص فيها ولا نصيحة، وتزامن أمرين لا يعني أن أحدهما سبب الآخر.'**
+  String wbInsightsIntro(String days);
+
+  /// No description provided for @wbInsightsNotYetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرؤى في الطريق'**
+  String get wbInsightsNotYetTitle;
+
+  /// No description provided for @wbInsightsNotYetBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تظهر الملاحظات حين تتجمّع بيانات {needed} أيام على الأقل. لديك الآن {logged} من {needed}.'**
+  String wbInsightsNotYetBody(String needed, String logged);
+
+  /// No description provided for @wbInsightsNoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أنماط واضحة بعد'**
+  String get wbInsightsNoneTitle;
+
+  /// No description provided for @wbInsightsNoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تظهر في بياناتك حتى الآن فروق أو ارتباطات واضحة بما يكفي، وستظهر هنا إن ظهرت.'**
+  String get wbInsightsNoneBody;
+
+  /// No description provided for @wbInsightBasis.
+  ///
+  /// In ar, this message translates to:
+  /// **'بناءً على {days} من بياناتك'**
+  String wbInsightBasis(String days);
+
+  /// No description provided for @wbInsightCorrelationNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'الارتباط يصف تزامنًا فقط، لا سببًا.'**
+  String get wbInsightCorrelationNote;
+
+  /// No description provided for @wbInsightThoseDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلك الأيام'**
+  String get wbInsightThoseDays;
+
+  /// No description provided for @wbInsightOtherDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقية الأيام'**
+  String get wbInsightOtherDays;
+
+  /// No description provided for @wbCorrelationOpposite.
+  ///
+  /// In ar, this message translates to:
+  /// **'عكسي'**
+  String get wbCorrelationOpposite;
+
+  /// No description provided for @wbCorrelationNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ارتباط'**
+  String get wbCorrelationNone;
+
+  /// No description provided for @wbCorrelationTogether.
+  ///
+  /// In ar, this message translates to:
+  /// **'معًا'**
+  String get wbCorrelationTogether;
+
+  /// No description provided for @wbAverages30.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسطات آخر {days}'**
+  String wbAverages30(String days);
+
+  /// No description provided for @wbInsightSplit.
+  ///
+  /// In ar, this message translates to:
+  /// **'{condition}، {comparison}: {a} مقابل {b} في بقية الأيام.'**
+  String wbInsightSplit(
+    String condition,
+    String comparison,
+    String a,
+    String b,
+  );
+
+  /// No description provided for @wbAvgHigher.
+  ///
+  /// In ar, this message translates to:
+  /// **'كان متوسط {metric} أعلى {amount}'**
+  String wbAvgHigher(String metric, String amount);
+
+  /// No description provided for @wbAvgLower.
+  ///
+  /// In ar, this message translates to:
+  /// **'كان متوسط {metric} أقل {amount}'**
+  String wbAvgLower(String metric, String amount);
+
+  /// No description provided for @wbByPoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بدرجة واحدة} =2{بدرجتين} few{بـ{n} درجات} many{بـ{n} درجة} other{بـ{n} درجة}}'**
+  String wbByPoints(int count, String n);
+
+  /// No description provided for @wbByPointsFraction.
+  ///
+  /// In ar, this message translates to:
+  /// **'بـ{n} درجة'**
+  String wbByPointsFraction(String n);
+
+  /// No description provided for @wbByHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بساعة واحدة} =2{بساعتين} few{بـ{n} ساعات} many{بـ{n} ساعة} other{بـ{n} ساعة}}'**
+  String wbByHours(int count, String n);
+
+  /// No description provided for @wbByHoursFraction.
+  ///
+  /// In ar, this message translates to:
+  /// **'بـ{n} ساعة'**
+  String wbByHoursFraction(String n);
+
+  /// No description provided for @wbWhenSleptUnder.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الأيام التي نمت فيها أقل من {hours} ساعات ({days})'**
+  String wbWhenSleptUnder(String hours, String days);
+
+  /// No description provided for @wbWhenCaffeineAtLeast.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الأيام التي شربت فيها {cups} أكواب كافيين أو أكثر ({days})'**
+  String wbWhenCaffeineAtLeast(String cups, String days);
+
+  /// No description provided for @wbWhenStressAtLeast.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الأيام التي كان توترك فيها {level} فأكثر ({days})'**
+  String wbWhenStressAtLeast(String level, String days);
+
+  /// No description provided for @wbWhenMetricAtLeast.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الأيام التي بلغ فيها {metric} {level} فأكثر ({days})'**
+  String wbWhenMetricAtLeast(String metric, String level, String days);
+
+  /// No description provided for @wbInsightCorrelation.
+  ///
+  /// In ar, this message translates to:
+  /// **'{when}، {then} في الغالب (معامل الارتباط {r} على مدى {days}).'**
+  String wbInsightCorrelation(String when, String then, String r, String days);
+
+  /// No description provided for @wbWhenHigher.
+  ///
+  /// In ar, this message translates to:
+  /// **'{metric, select, mood{في الأيام التي ارتفع فيها تقييم مزاجك} stress{في الأيام التي ارتفع فيها توترك} anxiety{في الأيام التي ارتفع فيها قلقك} energy{في الأيام التي ارتفعت فيها طاقتك} sleep{في الأيام التي طال فيها نومك} caffeine{في الأيام التي زادت فيها أكواب الكافيين} pain{في الأيام التي اشتدّ فيها ألمك} other{في الأيام التي ارتفعت فيها القيمة}}'**
+  String wbWhenHigher(String metric);
+
+  /// No description provided for @wbThenHigher.
+  ///
+  /// In ar, this message translates to:
+  /// **'{metric, select, mood{كان تقييم مزاجك أعلى} stress{كان توترك أعلى} anxiety{كان قلقك أعلى} energy{كانت طاقتك أعلى} sleep{كان نومك أطول} caffeine{كانت أكواب الكافيين أكثر} pain{كان ألمك أشدّ} other{كانت القيمة أعلى}}'**
+  String wbThenHigher(String metric);
+
+  /// No description provided for @wbThenLower.
+  ///
+  /// In ar, this message translates to:
+  /// **'{metric, select, mood{كان تقييم مزاجك أقل} stress{كان توترك أقل} anxiety{كان قلقك أقل} energy{كانت طاقتك أقل} sleep{كان نومك أقصر} caffeine{كانت أكواب الكافيين أقل} pain{كان ألمك أخفّ} other{كانت القيمة أقل}}'**
+  String wbThenLower(String metric);
+
+  /// No description provided for @wbSupportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لست وحدك'**
+  String get wbSupportTitle;
+
+  /// No description provided for @wbSupportBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلت مزاجًا منخفضًا في {low} من آخر {total} تسجيلات. إن احتجت إلى مساعدة عاجلة، فخط الطوارئ متاح على مدار الساعة.'**
+  String wbSupportBody(String low, String total);
+
+  /// No description provided for @wbSupportCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال بـ {number}'**
+  String wbSupportCall(String number);
+
+  /// No description provided for @wbSupportHideWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء لأسبوع'**
+  String get wbSupportHideWeek;
+
+  /// No description provided for @wbSupportCompact.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلت مزاجًا منخفضًا مؤخرًا. الطوارئ متاحة دائمًا.'**
+  String get wbSupportCompact;
+
+  /// No description provided for @wbDialFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح الهاتف. رقم الطوارئ: {number}'**
+  String wbDialFailed(String number);
+
+  /// No description provided for @wbSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات العافية'**
+  String get wbSettingsTitle;
+
+  /// Settings entry subtitle (for the app settings screen)
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الطوارئ، ونافذة القلق، وصوت التنفّس'**
+  String get wbSettingsSubtitle;
+
+  /// No description provided for @wbSettingsSupportNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الطوارئ'**
+  String get wbSettingsSupportNumber;
+
+  /// No description provided for @wbSettingsSupportNumberHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يظهر في لافتة الدعم. في الأردن {number}؛ غيّره إن كنت تقيم في بلد آخر.'**
+  String wbSettingsSupportNumberHint(String number);
+
+  /// No description provided for @wbSettingsNumberInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقمًا صالحًا'**
+  String get wbSettingsNumberInvalid;
+
+  /// No description provided for @wbSettingsResetNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة {number}'**
+  String wbSettingsResetNumber(String number);
+
+  /// No description provided for @wbSettingsBreathingSound.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت هادئ للتنفّس'**
+  String get wbSettingsBreathingSound;
+
+  /// No description provided for @wbSettingsBreathingSoundHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نغمة خفيفة عند كل مرحلة؛ الاهتزاز يعمل دائمًا.'**
+  String get wbSettingsBreathingSoundHint;
+
+  /// No description provided for @wbBreathTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنفّس'**
+  String get wbBreathTitle;
+
+  /// No description provided for @wbBreatheShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنفّس'**
+  String get wbBreatheShort;
+
+  /// Name of the 4-7-8 breathing pattern
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسترخاء'**
+  String get wbBreath478;
+
+  /// Name of box breathing (4-4-4-4)
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get wbBreathBox;
+
+  /// No description provided for @wbBreathIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهيق'**
+  String get wbBreathIn;
+
+  /// No description provided for @wbBreathHold.
+  ///
+  /// In ar, this message translates to:
+  /// **'احبس'**
+  String get wbBreathHold;
+
+  /// No description provided for @wbBreathOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'زفير'**
+  String get wbBreathOut;
+
+  /// No description provided for @wbBreathRest.
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّف'**
+  String get wbBreathRest;
+
+  /// No description provided for @wbBreathReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاع {rhythm} ثوانٍ. ابدأ حين تكون مستعدًا.'**
+  String wbBreathReady(String rhythm);
+
+  /// No description provided for @wbBreathDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت الجلسة'**
+  String get wbBreathDone;
+
+  /// No description provided for @wbBreathDoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{أتممت دورة واحدة.} =2{أتممت دورتين.} few{أتممت {n} دورات.} many{أتممت {n} دورة.} other{أتممت {n} دورة.}}'**
+  String wbBreathDoneBody(int count, String n);
+
+  /// No description provided for @wbBreathCycle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدورة {index} من {total}'**
+  String wbBreathCycle(String index, String total);
+
+  /// No description provided for @wbBreathPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا'**
+  String get wbBreathPaused;
+
+  /// No description provided for @wbBreathCycles.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الدورات'**
+  String get wbBreathCycles;
+
+  /// No description provided for @wbBreathStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ'**
+  String get wbBreathStart;
+
+  /// No description provided for @wbBreathAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرة أخرى'**
+  String get wbBreathAgain;
+
+  /// No description provided for @wbBreathStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنهاء'**
+  String get wbBreathStop;
+
+  /// No description provided for @wbBreathPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get wbBreathPause;
+
+  /// No description provided for @wbBreathResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get wbBreathResume;
+
+  /// No description provided for @wbBreathSoundOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصوت مفعّل'**
+  String get wbBreathSoundOn;
+
+  /// No description provided for @wbBreathSoundOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصوت مغلق'**
+  String get wbBreathSoundOff;
+
+  /// No description provided for @wbBreathGentleNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'خذ الإيقاع بلطف، ويمكنك التوقف في أي لحظة.'**
+  String get wbBreathGentleNote;
+
+  /// No description provided for @wbTodayCardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'العافية اليوم'**
+  String get wbTodayCardTitle;
+
+  /// Health page: section of today's doses, wellbeing and pain
+  ///
+  /// In ar, this message translates to:
+  /// **'عنايتك اليوم'**
+  String get healthHubTodayTitle;
+
+  /// Health page: section of appointments, questions and lab results
+  ///
+  /// In ar, this message translates to:
+  /// **'مع طبيبك'**
+  String get healthHubDoctorTitle;
+
+  /// Health page: action opening the whole medical record
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل'**
+  String get healthHubRecordAction;
+
+  /// Health page: section of links to the health screens
+  ///
+  /// In ar, this message translates to:
+  /// **'أدوات الصحة'**
+  String get healthHubToolsTitle;
+
+  /// Health page: quick pain log card title
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم الآن'**
+  String get healthHubPainTitle;
+
+  /// Pain card: nothing logged today
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ألم مسجّل اليوم'**
+  String get healthHubPainNone;
+
+  /// Pain card: today's entries and the highest score (numbers only)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تسجيل واحد اليوم بدرجة {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}'**
+  String healthHubPainToday(int count, String n, String max);
+
+  /// Pain card: button opening the full pain log (body map, triggers, notes)
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل'**
+  String get healthHubPainWhere;
+
+  /// Pain card: screen-reader label of the details button
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل كامل: موضع الألم على الجسم والمحفّزات والملاحظات'**
+  String get healthHubPainWhereHint;
+
+  /// Pain card: label under score 0
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ألم'**
+  String get healthHubPainLow;
+
+  /// Pain card: label under score 10
+  ///
+  /// In ar, this message translates to:
+  /// **'أشدّ ألم'**
+  String get healthHubPainHigh;
+
+  /// Pain card: screen-reader label of one score bead
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل ألمًا بدرجة {score} من {max}'**
+  String healthHubPainLogScore(String score, String max);
+
+  /// Health page: open questions card title
+  ///
+  /// In ar, this message translates to:
+  /// **'أسئلة لطبيبك'**
+  String get healthHubQuestionsTitle;
+
+  /// Questions card: how many are still open
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{سؤال واحد بانتظار الإجابة} =2{سؤالان بانتظار الإجابة} few{{n} أسئلة بانتظار الإجابة} many{{n} سؤالًا بانتظار الإجابة} other{{n} سؤال بانتظار الإجابة}}'**
+  String healthHubQuestionsCount(int count, String n);
+
+  /// Questions card: the appointment a question is for
+  ///
+  /// In ar, this message translates to:
+  /// **'لموعد {title}'**
+  String healthHubQuestionFor(String title);
+
+  /// Health tool: medications & supplements
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية'**
+  String get healthHubToolMeds;
+
+  /// Health tool hint: medications
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرعات والدورات وقواعد التوقيت'**
+  String get healthHubToolMedsHint;
+
+  /// Health tool: lab results (the record)
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل'**
+  String get healthHubToolLabs;
+
+  /// Health tool hint: labs
+  ///
+  /// In ar, this message translates to:
+  /// **'النتائج ومساراتها ومداك المرجعي'**
+  String get healthHubToolLabsHint;
+
+  /// Health tool: appointments
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد'**
+  String get healthHubToolAppointments;
+
+  /// Health tool hint: appointments
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد القادمة والسابقة وأسئلتها'**
+  String get healthHubToolAppointmentsHint;
+
+  /// Health tool: wellbeing
+  ///
+  /// In ar, this message translates to:
+  /// **'العافية'**
+  String get healthHubToolWellbeing;
+
+  /// Health tool hint: wellbeing
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج والألم والعادات والهموم'**
+  String get healthHubToolWellbeingHint;
+
+  /// Health tool: guided breathing
+  ///
+  /// In ar, this message translates to:
+  /// **'تنفّس'**
+  String get healthHubToolBreathe;
+
+  /// Health tool hint: breathing
+  ///
+  /// In ar, this message translates to:
+  /// **'تنفّس موجَّه بإيقاع هادئ'**
+  String get healthHubToolBreatheHint;
+
+  /// Health tool: the doctor report (PDF)
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص للطبيب'**
+  String get healthHubToolReport;
+
+  /// Health tool hint: doctor report
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف PDF تطبعه أو تشاركه'**
+  String get healthHubToolReportHint;
+
+  /// Settings section: health
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة'**
+  String get healthHubSettingsSection;
+
+  /// Settings section hint: health
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية والمواعيد والعافية، وكلها على جهازك'**
+  String get healthHubSettingsSectionHint;
+
+  /// Settings › Health page title and entry
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الصحة'**
+  String get healthHubSettingsTitle;
+
+  /// Settings entry: how many health reminders are on (doses, appointments, worry window)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{تذكيرات الصحة متوقفة} =1{تذكير واحد مفعّل} =2{تذكيران مفعّلان} few{{n} تذكيرات مفعّلة} many{{n} تذكيرًا مفعّلًا} other{{n} تذكير مفعّل}}'**
+  String healthHubSettingsRemindersOn(int count, String n);
+
+  /// Settings entry subtitle: reminders on and the emergency number
+  ///
+  /// In ar, this message translates to:
+  /// **'{reminders}، والطوارئ {number}'**
+  String healthHubSettingsEntrySummary(String reminders, String number);
+
+  /// Settings › Health: section of appointment reminders and lab flags
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد والتحاليل'**
+  String get healthHubSettingsRecordSection;
+
+  /// Settings › Health: what the borderline margin means (no advice)
+  ///
+  /// In ar, this message translates to:
+  /// **'جزء من عرض المدى الذي أدخلته لكل تحليل؛ النتيجة ضمنه قرب أحد الحدّين تُعلَّم «حدّية».'**
+  String get healthHubSettingsMarginHint;
+
+  /// Settings › Health: section of the PDF report defaults
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص الطبيب'**
+  String get healthHubSettingsReportSection;
+
+  /// Settings › Health: the report's default look-back period
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة المعتادة'**
+  String get healthHubSettingsReportPeriod;
+
+  /// Settings › Health: the report's default sections
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقسام المضمّنة'**
+  String get healthHubSettingsReportSections;
+
+  /// Settings › Health: every report section selected
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الأقسام'**
+  String get healthHubSettingsReportSectionsAll;
+
+  /// Settings › Health: no name remembered for the report
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُحفظ اسم، يُكتب عند كل تقرير'**
+  String get healthHubSettingsReportNameNone;
+
+  /// Settings › Health: the remembered report name
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}، على هذا الجهاز فقط'**
+  String healthHubSettingsReportNameKept(String name);
+
+  /// Settings › Health: hint of the report name field
+  ///
+  /// In ar, this message translates to:
+  /// **'اتركه فارغًا كي لا يُحفظ أي اسم'**
+  String get healthHubSettingsReportNameHint;
+
+  /// Settings › Health: the emergency number and where it appears
+  ///
+  /// In ar, this message translates to:
+  /// **'{number}، ويظهر في رسالة الدعم حين يتكرّر المزاج المنخفض'**
+  String healthHubSettingsEmergencyHint(String number);
+
+  /// Settings › Health: notification permission refused
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعارات مَدار متوقفة في إعدادات الهاتف، فلن تصل التذكيرات.'**
+  String get healthHubSettingsDenied;
+
+  /// Settings › Health: privacy and tracking-only note
+  ///
+  /// In ar, this message translates to:
+  /// **'كل ما في الصحة يبقى على هذا الجهاز مشفّرًا. مَدار يسجّل ويعرض فقط؛ لا يشخّص ولا ينصح بعلاج.'**
+  String get healthHubSettingsPrivacy;
+
+  /// Settings › Health: appointment reminders are off
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقفة'**
+  String get healthHubSettingsOff;
+
+  /// Settings › Health: the worry window's time and length (no middle dot: it reads as a zero next to Arabic digits)
+  ///
+  /// In ar, this message translates to:
+  /// **'يوميًا عند {time}، لمدة {length}'**
+  String healthHubSettingsWorrySummary(String time, String length);
+
+  /// Title of the ledger hub screen
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ والحركات'**
+  String get ledgerTitle;
+
+  /// Label above the total of all wallets in the base currency
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي الرصيد'**
+  String get ledgerNetBalance;
+
+  /// Wallet kind: personal money
+  ///
+  /// In ar, this message translates to:
+  /// **'شخصي'**
+  String get ledgerPersonal;
+
+  /// Wallet kind: business money (the e-commerce side)
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاري'**
+  String get ledgerBusiness;
+
+  /// An amount converted to the base currency
+  ///
+  /// In ar, this message translates to:
+  /// **'≈ {amount}'**
+  String ledgerApprox(String amount);
+
+  /// Section / card title: the wallets
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ'**
+  String get ledgerWallets;
+
+  /// Button: create a wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'محفظة جديدة'**
+  String get ledgerAddWallet;
+
+  /// Collapsed group of archived wallets; count already formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'المؤرشفة ({count})'**
+  String ledgerArchivedCount(String count);
+
+  /// Section title: latest transactions
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر الحركات'**
+  String get ledgerRecent;
+
+  /// Action: open the full transactions list
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get ledgerSeeAll;
+
+  /// Action / screen title: currencies and exchange rates
+  ///
+  /// In ar, this message translates to:
+  /// **'العملات وأسعار الصرف'**
+  String get ledgerCurrencies;
+
+  /// Search field hint / action
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في الحركات'**
+  String get ledgerSearch;
+
+  /// Button / sheet title: add a transaction
+  ///
+  /// In ar, this message translates to:
+  /// **'حركة جديدة'**
+  String get ledgerAddTx;
+
+  /// Empty ledger title
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ بمحفظتك الأولى'**
+  String get ledgerEmptyTitle;
+
+  /// Empty ledger body
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ محفظة لكل مكان يوجد فيه مالك: نقدًا، في البنك، أو عهدة لدى شركة التوصيل.'**
+  String get ledgerEmptyBody;
+
+  /// Empty transactions title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حركات بعد'**
+  String get ledgerNoTxTitle;
+
+  /// Empty transactions body
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل مصروفًا أو دخلًا وسيظهر هنا.'**
+  String get ledgerNoTxBody;
+
+  /// Empty search / filter result title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حركات مطابقة'**
+  String get ledgerNoResults;
+
+  /// Empty search / filter result body
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب كلمة أخرى أو أزل بعض عوامل التصفية.'**
+  String get ledgerNoResultsBody;
+
+  /// Warning: currencies without a rate are excluded from base totals
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا سعر صرف، فلم تُحسب في المجموع: {codes}'**
+  String ledgerMissingRate(String codes);
+
+  /// Banner while seeded rates are unchanged
+  ///
+  /// In ar, this message translates to:
+  /// **'أسعار الصرف ما زالت تقديرية. راجعها لتكون المجاميع دقيقة.'**
+  String get ledgerRatesDefaults;
+
+  /// Banner action: open the currencies screen
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة'**
+  String get ledgerReview;
+
+  /// Transaction kind
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف'**
+  String get ledgerKindExpense;
+
+  /// Transaction kind
+  ///
+  /// In ar, this message translates to:
+  /// **'دخل'**
+  String get ledgerKindIncome;
+
+  /// Transaction kind
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل'**
+  String get ledgerKindTransfer;
+
+  /// Transaction kind: balance correction
+  ///
+  /// In ar, this message translates to:
+  /// **'تسوية'**
+  String get ledgerKindAdjustment;
+
+  /// Day header
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get ledgerToday;
+
+  /// Day header / date chip
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get ledgerYesterday;
+
+  /// Transfer title: source and destination wallet names (already isolated)
+  ///
+  /// In ar, this message translates to:
+  /// **'{from} ← {to}'**
+  String ledgerTransferRoute(String from, String to);
+
+  /// Transfer seen from its source wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل إلى {wallet}'**
+  String ledgerTransferOut(String wallet);
+
+  /// Transfer seen from its destination wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل من {wallet}'**
+  String ledgerTransferIn(String wallet);
+
+  /// Title of an adjustment entry
+  ///
+  /// In ar, this message translates to:
+  /// **'تسوية الرصيد'**
+  String get ledgerAdjustmentTitle;
+
+  /// Expense or income without a budget item
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا بند'**
+  String get ledgerUnassigned;
+
+  /// Running balance after an entry
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد {amount}'**
+  String ledgerBalanceAfter(String amount);
+
+  /// Menu action
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار لليوم'**
+  String get ledgerDuplicateToday;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الحركة'**
+  String get ledgerDeleted;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'تكررت الحركة بتاريخ اليوم'**
+  String get ledgerDuplicated;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'نُقلت إلى {wallet}'**
+  String ledgerMoved(String wallet);
+
+  /// Undo toast when the amount was converted
+  ///
+  /// In ar, this message translates to:
+  /// **'نُقلت إلى {wallet} بمبلغ {amount}'**
+  String ledgerMovedConverted(String wallet, String amount);
+
+  /// Toast after adding
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت الحركة'**
+  String get ledgerSaved;
+
+  /// Toast after editing
+  ///
+  /// In ar, this message translates to:
+  /// **'عُدّلت الحركة'**
+  String get ledgerUpdated;
+
+  /// Move sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل الحركة إلى…'**
+  String get ledgerMoveTitle;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الحركة'**
+  String get ledgerEditTx;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة'**
+  String get ledgerWallet;
+
+  /// Transfer source label
+  ///
+  /// In ar, this message translates to:
+  /// **'من'**
+  String get ledgerFrom;
+
+  /// Transfer destination label
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى'**
+  String get ledgerTo;
+
+  /// Transfer amount leaving the source
+  ///
+  /// In ar, this message translates to:
+  /// **'المُرسَل'**
+  String get ledgerSent;
+
+  /// Transfer amount reaching the destination
+  ///
+  /// In ar, this message translates to:
+  /// **'المستلَم'**
+  String get ledgerReceived;
+
+  /// Reset the received amount to the converted one
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب سعر الصرف'**
+  String get ledgerUseRate;
+
+  /// An exchange rate line; one and rate are formatted numbers, from/to symbols
+  ///
+  /// In ar, this message translates to:
+  /// **'{one} {from} = {rate} {to}'**
+  String ledgerRateLine(String one, String from, String rate, String to);
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'البند'**
+  String get ledgerBudgetItem;
+
+  /// Picker placeholder
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر بندًا'**
+  String get ledgerChooseItem;
+
+  /// Picker when the budget is empty
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بنود في الميزانية بعد'**
+  String get ledgerNoBudget;
+
+  /// Budget picker search hint
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث عن بند'**
+  String get ledgerSearchItems;
+
+  /// Budget item remaining this period
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ {amount}'**
+  String ledgerItemLeft(String amount);
+
+  /// Budget item overspent this period
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز {amount}'**
+  String ledgerItemOver(String amount);
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get ledgerDate;
+
+  /// Date chip opening a calendar
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم آخر'**
+  String get ledgerOtherDay;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get ledgerNote;
+
+  /// Note hint
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: خضار من السوق'**
+  String get ledgerNoteHint;
+
+  /// Field label / filter
+  ///
+  /// In ar, this message translates to:
+  /// **'الوسوم'**
+  String get ledgerTags;
+
+  /// Tag input hint
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف وسمًا'**
+  String get ledgerTagHint;
+
+  /// Adjustment mode: type the real balance
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد الفعلي'**
+  String get ledgerSetBalance;
+
+  /// Adjustment mode / preview: the change
+  ///
+  /// In ar, this message translates to:
+  /// **'الفرق'**
+  String get ledgerDifference;
+
+  /// Adjustment preview
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد الحالي'**
+  String get ledgerCurrentBalance;
+
+  /// Toggle: the typed amount is negative
+  ///
+  /// In ar, this message translates to:
+  /// **'سالب'**
+  String get ledgerNegative;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر محفظة'**
+  String get ledgerErrNoWallet;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل المبلغ'**
+  String get ledgerErrNoAmount;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر المحفظة المستلِمة'**
+  String get ledgerErrNoDestination;
+
+  /// Validation: transfer to itself
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر محفظة مختلفة'**
+  String get ledgerErrSameWallet;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد سعر صرف، أدخل المبلغ المستلَم'**
+  String get ledgerErrNoRate;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد مطابق أصلًا'**
+  String get ledgerErrNoChange;
+
+  /// Transaction sheet without wallets
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ محفظة أولًا لتسجيل الحركات'**
+  String get ledgerNeedWallet;
+
+  /// Keypad key (screen reader)
+  ///
+  /// In ar, this message translates to:
+  /// **'فاصلة عشرية'**
+  String get ledgerKeyDecimal;
+
+  /// Keypad key (screen reader)
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف آخر رقم'**
+  String get ledgerKeyBackspace;
+
+  /// Amount display (screen reader)
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get ledgerAmount;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل المحفظة'**
+  String get ledgerWalletEdit;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get ledgerWalletName;
+
+  /// Wallet name hint
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: الصندوق، البنك، عهدة المندوب'**
+  String get ledgerWalletNameHint;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد الافتتاحي والعملة'**
+  String get ledgerOpening;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع المحفظة'**
+  String get ledgerWalletKind;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get ledgerColor;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيقونة'**
+  String get ledgerIcon;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن تغيير العملة بعد تسجيل حركات في المحفظة'**
+  String get ledgerCurrencyLocked;
+
+  /// Menu action
+  ///
+  /// In ar, this message translates to:
+  /// **'أرشفة'**
+  String get ledgerArchive;
+
+  /// Menu action
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة من الأرشيف'**
+  String get ledgerUnarchive;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرشفت المحفظة'**
+  String get ledgerArchivedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيدت المحفظة'**
+  String get ledgerUnarchivedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{حُذفت المحفظة} =1{حُذفت المحفظة وحركة واحدة} =2{حُذفت المحفظة وحركتان} few{حُذفت المحفظة و{count} حركات} many{حُذفت المحفظة و{count} حركة} other{حُذفت المحفظة و{count} حركة}}'**
+  String ledgerWalletDeleted(int count);
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت المحفظة'**
+  String get ledgerWalletSaved;
+
+  /// Label
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get ledgerBalance;
+
+  /// Chart title
+  ///
+  /// In ar, this message translates to:
+  /// **'تطوّر الرصيد'**
+  String get ledgerBalanceHistory;
+
+  /// Chart range: one month
+  ///
+  /// In ar, this message translates to:
+  /// **'شهر'**
+  String get ledgerRange1M;
+
+  /// Chart range: three months
+  ///
+  /// In ar, this message translates to:
+  /// **'٣ أشهر'**
+  String get ledgerRange3M;
+
+  /// Chart range: one year
+  ///
+  /// In ar, this message translates to:
+  /// **'سنة'**
+  String get ledgerRange1Y;
+
+  /// Chart range: everything
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get ledgerRangeAll;
+
+  /// Screen / section title
+  ///
+  /// In ar, this message translates to:
+  /// **'الحركات'**
+  String get ledgerTransactions;
+
+  /// Wallet screen for a deleted wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نجد هذه المحفظة'**
+  String get ledgerWalletMissing;
+
+  /// Footer of a wallet's list
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد افتتاحي {amount}'**
+  String ledgerOpeningLine(String amount);
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة'**
+  String get ledgerFilterWallet;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'النوع'**
+  String get ledgerFilterKind;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'البند'**
+  String get ledgerFilterItem;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'الوسم'**
+  String get ledgerFilterTag;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get ledgerFilterDate;
+
+  /// Filter chip: personal / business
+  ///
+  /// In ar, this message translates to:
+  /// **'النطاق'**
+  String get ledgerFilterScope;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح التصفية'**
+  String get ledgerFilterClear;
+
+  /// Chip label with several selections; count formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{first} +{count}'**
+  String ledgerFilterMore(String first, String count);
+
+  /// Selection: everything
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get ledgerAll;
+
+  /// Chart scope
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المحافظ'**
+  String get ledgerAllWallets;
+
+  /// Date preset
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get ledgerThisWeek;
+
+  /// Date preset
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الشهر'**
+  String get ledgerThisMonth;
+
+  /// Date preset
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر الماضي'**
+  String get ledgerLastMonth;
+
+  /// Date preset
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}'**
+  String ledgerLastDays(int count);
+
+  /// Date preset
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة مخصّصة'**
+  String get ledgerCustomRange;
+
+  /// A date range (formatted dates)
+  ///
+  /// In ar, this message translates to:
+  /// **'{from} – {to}'**
+  String ledgerRangeLabel(String from, String to);
+
+  /// Totals strip
+  ///
+  /// In ar, this message translates to:
+  /// **'الدخل'**
+  String get ledgerIncomeTotal;
+
+  /// Totals strip
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروف'**
+  String get ledgerExpenseTotal;
+
+  /// Totals strip
+  ///
+  /// In ar, this message translates to:
+  /// **'الصافي'**
+  String get ledgerNet;
+
+  /// Count of transactions
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا حركات} =1{حركة واحدة} =2{حركتان} few{{count} حركات} many{{count} حركة} other{{count} حركة}}'**
+  String ledgerTxCount(int count);
+
+  /// Chart title
+  ///
+  /// In ar, this message translates to:
+  /// **'الإنفاق'**
+  String get ledgerSpending;
+
+  /// Chart toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب البند'**
+  String get ledgerByItem;
+
+  /// Chart toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب المحفظة'**
+  String get ledgerByWallet;
+
+  /// Chart period toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'شهري'**
+  String get ledgerPeriodMonth;
+
+  /// Chart period toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعي'**
+  String get ledgerPeriodWeek;
+
+  /// Button (screen reader)
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة السابقة'**
+  String get ledgerPrevPeriod;
+
+  /// Button (screen reader)
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة التالية'**
+  String get ledgerNextPeriod;
+
+  /// Empty chart
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مصاريف في هذه الفترة'**
+  String get ledgerNoSpending;
+
+  /// Chart title
+  ///
+  /// In ar, this message translates to:
+  /// **'الدخل والإنفاق'**
+  String get ledgerTrend;
+
+  /// Trend chart subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آخر شهر} =2{آخر شهرين} few{آخر {count} أشهر} many{آخر {count} شهرًا} other{آخر {count} شهر}}'**
+  String ledgerTrendSubtitle(int count);
+
+  /// Chart note; code already isolated
+  ///
+  /// In ar, this message translates to:
+  /// **'بالعملة الأساسية {code}'**
+  String ledgerInBase(String code);
+
+  /// Chart centre label
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع'**
+  String get ledgerTotal;
+
+  /// Chart slice grouping small items
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get ledgerOther;
+
+  /// Screen-reader summary of the spending chart
+  ///
+  /// In ar, this message translates to:
+  /// **'الإنفاق {period}: المجموع {total}. {slices}'**
+  String ledgerChartSpendingSemantics(
+    String period,
+    String total,
+    String slices,
+  );
+
+  /// Screen-reader text for one trend bar group
+  ///
+  /// In ar, this message translates to:
+  /// **'{period}: دخل {income}، إنفاق {expense}'**
+  String ledgerChartTrendSemantics(
+    String period,
+    String income,
+    String expense,
+  );
+
+  /// Screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'العملات'**
+  String get ledgerCurrenciesTitle;
+
+  /// Label
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة الأساسية'**
+  String get ledgerBaseCurrency;
+
+  /// Base currency explanation
+  ///
+  /// In ar, this message translates to:
+  /// **'تُعرض بها كل المجاميع والرسوم البيانية'**
+  String get ledgerBaseHint;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير العملة الأساسية'**
+  String get ledgerChangeBase;
+
+  /// Section title
+  ///
+  /// In ar, this message translates to:
+  /// **'عملات أخرى'**
+  String get ledgerOtherCurrencies;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة عملة'**
+  String get ledgerAddCurrency;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'عملة جديدة'**
+  String get ledgerNewCurrency;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل العملة'**
+  String get ledgerEditCurrency;
+
+  /// Field label (ISO-like code)
+  ///
+  /// In ar, this message translates to:
+  /// **'الرمز الدولي'**
+  String get ledgerCode;
+
+  /// Code hint
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل EUR'**
+  String get ledgerCodeHint;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم بالعربية'**
+  String get ledgerNameAr;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم بالإنجليزية'**
+  String get ledgerNameEn;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الرمز المختصر'**
+  String get ledgerSymbol;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'المنازل العشرية'**
+  String get ledgerDecimals;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الصرف'**
+  String get ledgerRate;
+
+  /// Rate field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'يُدخَل يدويًا، دون اتصال بالإنترنت'**
+  String get ledgerRateHint;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم حروفًا لاتينية (مثل EUR)'**
+  String get ledgerErrCode;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه العملة موجودة'**
+  String get ledgerErrCodeExists;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل سعرًا أكبر من صفر'**
+  String get ledgerErrRate;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل اسمًا'**
+  String get ledgerErrName;
+
+  /// Why a currency cannot be deleted
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مستخدمة في محفظة واحدة} =2{مستخدمة في محفظتين} few{مستخدمة في {count} محافظ} many{مستخدمة في {count} محفظة} other{مستخدمة في {count} محفظة}}'**
+  String ledgerCurrencyInUse(int count);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت العملة'**
+  String get ledgerCurrencyDeleted;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت العملة'**
+  String get ledgerCurrencySaved;
+
+  /// Currency without a usable rate
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا سعر'**
+  String get ledgerNoRate;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'عملة أساسية جديدة'**
+  String get ledgerRebaseTitle;
+
+  /// Rebase explanation; code already isolated
+  ///
+  /// In ar, this message translates to:
+  /// **'تُعاد كتابة كل الأسعار نسبةً إلى {code} بدقة، فتبقى القيم المحوّلة كما هي.'**
+  String ledgerRebaseExplain(String code);
+
+  /// Rebase preview column
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get ledgerRebaseNow;
+
+  /// Rebase preview column
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد التغيير'**
+  String get ledgerRebaseAfter;
+
+  /// Confirm button
+  ///
+  /// In ar, this message translates to:
+  /// **'اعتماد {code}'**
+  String ledgerRebaseConfirm(String code);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أصبحت {code} العملة الأساسية'**
+  String ledgerRebaseDone(String code);
+
+  /// Rebase sheet subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر العملة الأساسية الجديدة'**
+  String get ledgerRebaseChoose;
+
+  /// Summary card empty title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا محافظ بعد'**
+  String get ledgerSummaryEmpty;
+
+  /// Summary card footer
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ومحفظة أخرى} =2{ومحفظتان أخريان} few{و{count} محافظ أخرى} many{و{count} محفظة أخرى} other{و{count} محفظة أخرى}}'**
+  String ledgerMoreWallets(int count);
+
+  /// Screen-reader label of a wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}، الرصيد {amount}'**
+  String ledgerWalletSemantics(String name, String amount);
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيق'**
+  String get ledgerApply;
+
+  /// Tag filter without tags
+  ///
+  /// In ar, this message translates to:
+  /// **'لا وسوم بعد'**
+  String get ledgerNoTags;
+
+  /// Suffix of compact chart amounts (thousands)
+  ///
+  /// In ar, this message translates to:
+  /// **'ألف'**
+  String get ledgerCompactThousand;
+
+  /// Suffix of compact chart amounts (millions)
+  ///
+  /// In ar, this message translates to:
+  /// **'مليون'**
+  String get ledgerCompactMillion;
+
+  /// Currency menu action
+  ///
+  /// In ar, this message translates to:
+  /// **'اعتمادها عملة أساسية'**
+  String get ledgerMakeBase;
+
+  /// Currencies screen footnote
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسعار يدوية؛ حدّثها حين يتغيّر السوق'**
+  String get ledgerRatesStale;
+
+  /// Hint of the note field when adding income
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: تحصيل من شركة الشحن'**
+  String get ledgerNoteHintIncome;
+
+  /// Hint of the note field when adding a transfer
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: إيداع في البنك'**
+  String get ledgerNoteHintTransfer;
+
+  /// Hint of the note field when adding a balance adjustment
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: بعد عدّ النقود'**
+  String get ledgerNoteHintAdjust;
+
+  /// Source of a wallet entry written by a savings jar deposit or withdrawal; also the label of its tag
+  ///
+  /// In ar, this message translates to:
+  /// **'حصّالة'**
+  String get ledgerLinkJar;
+
+  /// Source of a wallet entry written by a debt payment; also the label of its tag
+  ///
+  /// In ar, this message translates to:
+  /// **'دَين'**
+  String get ledgerLinkDebt;
+
+  /// Source of a wallet entry written when a recurring obligation is marked paid; also the label of its tag
+  ///
+  /// In ar, this message translates to:
+  /// **'التزام'**
+  String get ledgerLinkObligation;
+
+  /// Menu action on a wallet entry that belongs to a savings jar
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الحصّالة'**
+  String get ledgerOpenJar;
+
+  /// Menu action on a wallet entry that belongs to a debt
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الدَّين'**
+  String get ledgerOpenDebt;
+
+  /// Menu action on a wallet entry that belongs to a recurring obligation
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الالتزام'**
+  String get ledgerOpenObligation;
+
+  /// Accessibility hint: this entry is edited from its savings jar, debt or obligation
+  ///
+  /// In ar, this message translates to:
+  /// **'تُعدَّل من {source}'**
+  String ledgerLinkedHint(String source);
+
+  /// Status shown on an archived wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤرشفة'**
+  String get ledgerArchivedBadge;
+
+  /// Notice on the currencies screen when wallets use currency codes missing from the list (e.g. created by quick add)
+  ///
+  /// In ar, this message translates to:
+  /// **'بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.'**
+  String get ledgerUnknownCurrencies;
+
+  /// Chip adding a missing currency by its code
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة {code}'**
+  String ledgerAddCode(String code);
+
+  /// Action next to the warning that some currencies have no exchange rate
+  ///
+  /// In ar, this message translates to:
+  /// **'ضبط الأسعار'**
+  String get ledgerFixRates;
+
+  /// Title of the budget screen and card
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية'**
+  String get budgetTitle;
+
+  /// Budget tab: the nested plan editor
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get budgetTabPlan;
+
+  /// Budget tab: spend vs plan
+  ///
+  /// In ar, this message translates to:
+  /// **'الإنفاق'**
+  String get budgetTabSpending;
+
+  /// Button / FAB: add a top-level budget item
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة بند'**
+  String get budgetAddItem;
+
+  /// Label above the monthly budget total
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة الشهرية'**
+  String get budgetMonthlyPlan;
+
+  /// Weekly equivalent of the total (amount formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'≈ {amount} في الأسبوع'**
+  String budgetWeeklyEquivalent(String amount);
+
+  /// Chip showing the weeks-per-month setting
+  ///
+  /// In ar, this message translates to:
+  /// **'أسابيع الشهر: {weeks}'**
+  String budgetWeeksPerMonthChip(String weeks);
+
+  /// Semantics / title of the allocation strip
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع الخطة'**
+  String get budgetAllocation;
+
+  /// Shown when the budget has no warnings
+  ///
+  /// In ar, this message translates to:
+  /// **'كل البنود متوازنة'**
+  String get budgetBalanced;
+
+  /// Title of the warnings summary
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{أمر واحد يحتاج انتباهك} =2{أمران يحتاجان انتباهك} few{{count} أمور تحتاج انتباهك} many{{count} أمرًا يحتاج انتباهك} other{{count} أمر يحتاج انتباهك}}'**
+  String budgetWarningsTitle(int count);
+
+  /// Collapsed tail of the warnings summary
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وأمر آخر} =2{وأمران آخران} few{و{count} أمور أخرى} many{و{count} أمرًا آخر} other{و{count} أمر آخر}}'**
+  String budgetWarningsMore(int count);
+
+  /// Collapses the warnings summary
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض أقل'**
+  String get budgetShowLess;
+
+  /// Warning: children sum below the parent
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود «{name}» الفرعية أقلّ منه بـ{amount}'**
+  String budgetIssueChildrenUnder(String name, String amount);
+
+  /// Warning: children sum above the parent
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود «{name}» الفرعية تتجاوزه بـ{amount}'**
+  String budgetIssueChildrenOver(String name, String amount);
+
+  /// Warning: an item set above 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة «{name}» أكبر من أصلها: {percent}'**
+  String budgetIssuePercentSelf(String name, String percent);
+
+  /// Warning: children percentages above 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'نِسب بنود «{name}» الفرعية مجموعها {percent}'**
+  String budgetIssuePercentChildren(String name, String percent);
+
+  /// Warning: root percentages of the total above 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'البنود المحدّدة بنسبة من الإجمالي مجموعها {percent}'**
+  String budgetIssuePercentTotal(String percent);
+
+  /// Warning: circular percentages
+  ///
+  /// In ar, this message translates to:
+  /// **'نِسب «{name}» تعتمد على بعضها فتعذّر حسابها'**
+  String budgetIssueCircular(String name);
+
+  /// Warning: root percentages of the total equal 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'البنود المحدّدة بنسبة من الإجمالي تستهلكه كلّه'**
+  String get budgetIssueCircularTotal;
+
+  /// Warning: parent loop
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» كان داخل نفسه، فيظهر في المستوى الأعلى'**
+  String budgetIssueCircularParent(String name);
+
+  /// Warning: missing parent
+  ///
+  /// In ar, this message translates to:
+  /// **'البند الأب لـ«{name}» غير موجود، فيظهر في المستوى الأعلى'**
+  String budgetIssueOrphan(String name);
+
+  /// Warning: missing exchange rate
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سعر صرف مسجّل لـ{currency}، فاحتُسب واحدًا بواحد'**
+  String budgetIssueMissingRate(String currency);
+
+  /// Warning: overspent this month
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز «{name}» خطّته بـ{amount} هذا الشهر'**
+  String budgetIssueOverspent(String name, String amount);
+
+  /// Badge: children leave this much of the parent unallocated
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} غير موزّع'**
+  String budgetBadgeUnder(String amount);
+
+  /// Badge: children exceed the parent
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة {amount}'**
+  String budgetBadgeOver(String amount);
+
+  /// Badge on an item whose own percentage is above 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} أكبر من الأصل'**
+  String budgetBadgePercent(String percent);
+
+  /// Badge on a parent whose sub-items' percentages add up to more than 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع نِسب الفروع {percent}'**
+  String budgetBadgePercentChildren(String percent);
+
+  /// Badge: circular percentages
+  ///
+  /// In ar, this message translates to:
+  /// **'نِسب متداخلة'**
+  String get budgetBadgeCircular;
+
+  /// Badge: parent missing or loop
+  ///
+  /// In ar, this message translates to:
+  /// **'نُقل للأعلى'**
+  String get budgetBadgeMoved;
+
+  /// Badge: missing exchange rate
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا سعر صرف'**
+  String get budgetBadgeNoRate;
+
+  /// Badge: overspent this month
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز بـ{amount}'**
+  String budgetBadgeOverspent(String amount);
+
+  /// Share of the parent item
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} من «{name}»'**
+  String budgetPercentOf(String percent, String name);
+
+  /// Share of the total budget
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} من الإجمالي'**
+  String budgetPercentOfTotal(String percent);
+
+  /// Amount per month
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} شهريًا'**
+  String budgetPerMonth(String amount);
+
+  /// Amount per week
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} أسبوعيًا'**
+  String budgetPerWeek(String amount);
+
+  /// Monthly equivalent in the base currency
+  ///
+  /// In ar, this message translates to:
+  /// **'≈ {amount} شهريًا'**
+  String budgetApproxMonthly(String amount);
+
+  /// Item whose plan is the sum of its children
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع البنود الفرعية'**
+  String get budgetSumOfChildren;
+
+  /// Children sum vs the parent plan
+  ///
+  /// In ar, this message translates to:
+  /// **'الفروع: {sum} من {plan}'**
+  String budgetChildrenSum(String sum, String plan);
+
+  /// Semantics: item set by an amount
+  ///
+  /// In ar, this message translates to:
+  /// **'محدّد بالمبلغ'**
+  String get budgetSetByAmount;
+
+  /// Semantics: item set by a percentage
+  ///
+  /// In ar, this message translates to:
+  /// **'محدّد بالنسبة'**
+  String get budgetSetByPercent;
+
+  /// Hint under the tree
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب المقبض لترتيب البنود داخل مجموعتها'**
+  String get budgetDragHint;
+
+  /// Menu: add a child item
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة بند فرعي'**
+  String get budgetAddChild;
+
+  /// Menu: add a sibling item right after this one
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة بند مجاور'**
+  String get budgetAddSibling;
+
+  /// Title of the move sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل «{name}»'**
+  String budgetMoveTitle(String name);
+
+  /// Subtitle of the move sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'يبقى مبلغه كما هو'**
+  String get budgetMoveSubtitle;
+
+  /// No parent
+  ///
+  /// In ar, this message translates to:
+  /// **'المستوى الأعلى'**
+  String get budgetTopLevel;
+
+  /// Undo toast after deleting an item with its sub-items
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{حُذف البند} =1{حُذف البند وبند فرعي} =2{حُذف البند وبندان فرعيان} few{حُذف البند و{count} بنود فرعية} many{حُذف البند و{count} بندًا فرعيًا} other{حُذف البند و{count} بند فرعي}}'**
+  String budgetDeletedWithChildren(int count);
+
+  /// Undo toast after editing an item
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ البند'**
+  String get budgetSaved;
+
+  /// Undo toast after adding an item
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف البند'**
+  String get budgetAdded;
+
+  /// Empty plan title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ميزانية بعد'**
+  String get budgetEmptyTitle;
+
+  /// Empty plan body
+  ///
+  /// In ar, this message translates to:
+  /// **'خطّط بالمبلغ أو بالنسبة، وضع البنود داخل بعضها، ثم قارن إنفاقك بالخطة.'**
+  String get budgetEmptyBody;
+
+  /// Empty plan action
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أول بند'**
+  String get budgetEmptyAction;
+
+  /// Title of the weeks-per-month sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'أسابيع الشهر'**
+  String get budgetWeeksTitle;
+
+  /// Subtitle of the weeks-per-month sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'تُضرب البنود الأسبوعية في هذا العدد لحساب خطتها الشهرية'**
+  String get budgetWeeksSubtitle;
+
+  /// Preset: 4 weeks per month
+  ///
+  /// In ar, this message translates to:
+  /// **'أسابيع كاملة'**
+  String get budgetWeeksRound;
+
+  /// Preset: 4.345 weeks per month
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط التقويم'**
+  String get budgetWeeksCalendar;
+
+  /// Custom weeks-per-month field label
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد آخر'**
+  String get budgetWeeksCustom;
+
+  /// Weeks-per-month validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل عددًا بين {min} و{max}'**
+  String budgetWeeksInvalid(String min, String max);
+
+  /// Live example of the conversion
+  ///
+  /// In ar, this message translates to:
+  /// **'{weekly} أسبوعيًا = {monthly} شهريًا'**
+  String budgetWeeksExample(String weekly, String monthly);
+
+  /// Undo toast after changing weeks per month
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر عدد أسابيع الشهر'**
+  String get budgetWeeksSaved;
+
+  /// Item sheet title: new top-level item
+  ///
+  /// In ar, this message translates to:
+  /// **'بند جديد'**
+  String get budgetNewItem;
+
+  /// Item sheet title: new child
+  ///
+  /// In ar, this message translates to:
+  /// **'بند فرعي في «{name}»'**
+  String budgetNewChild(String name);
+
+  /// Item sheet title: edit
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل البند'**
+  String get budgetEditItem;
+
+  /// Item sheet: name field
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get budgetFieldName;
+
+  /// Item sheet: name hint
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل: البقالة'**
+  String get budgetFieldNameHint;
+
+  /// Item sheet: parent picker
+  ///
+  /// In ar, this message translates to:
+  /// **'ضمن'**
+  String get budgetFieldParent;
+
+  /// Item sheet: amount / percent / sum switch
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد بـ'**
+  String get budgetFieldSetBy;
+
+  /// Mode: amount
+  ///
+  /// In ar, this message translates to:
+  /// **'مبلغ'**
+  String get budgetModeAmount;
+
+  /// Mode: percentage
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة'**
+  String get budgetModePercent;
+
+  /// Mode: sum of the sub-items
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع الفروع'**
+  String get budgetModeSum;
+
+  /// Item sheet: amount field
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get budgetFieldAmount;
+
+  /// Item sheet: percentage field
+  ///
+  /// In ar, this message translates to:
+  /// **'النسبة'**
+  String get budgetFieldPercent;
+
+  /// Percent base chip: of the parent
+  ///
+  /// In ar, this message translates to:
+  /// **'من «{name}»'**
+  String budgetOfParent(String name);
+
+  /// Percent base chip: of the total
+  ///
+  /// In ar, this message translates to:
+  /// **'من الإجمالي'**
+  String get budgetOfTotal;
+
+  /// Tag on the value derived from the other one
+  ///
+  /// In ar, this message translates to:
+  /// **'محسوب'**
+  String get budgetCalculated;
+
+  /// Item sheet: period field
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get budgetFieldPeriod;
+
+  /// Period: monthly
+  ///
+  /// In ar, this message translates to:
+  /// **'شهري'**
+  String get budgetMonthly;
+
+  /// Period: weekly
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعي'**
+  String get budgetWeekly;
+
+  /// Item sheet: currency field
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة'**
+  String get budgetFieldCurrency;
+
+  /// Currency chip of the base currency
+  ///
+  /// In ar, this message translates to:
+  /// **'{code} · الأساس'**
+  String budgetBaseCurrency(String code);
+
+  /// Item sheet: live preview header
+  ///
+  /// In ar, this message translates to:
+  /// **'في الميزانية'**
+  String get budgetPreviewTitle;
+
+  /// Item sheet: invalid amount
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغًا صحيحًا، صفرًا أو أكثر'**
+  String get budgetAmountInvalid;
+
+  /// Item sheet: invalid percentage
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل نسبة صحيحة، صفرًا أو أكثر'**
+  String get budgetPercentInvalid;
+
+  /// Item sheet: explanation of the sum mode
+  ///
+  /// In ar, this message translates to:
+  /// **'يساوي مجموع بنوده الفرعية ويتغيّر معها'**
+  String get budgetSumHint;
+
+  /// Budget picker title
+  ///
+  /// In ar, this message translates to:
+  /// **'بند الميزانية'**
+  String get budgetPickerTitle;
+
+  /// Budget picker search hint
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في البنود'**
+  String get budgetPickerSearch;
+
+  /// Budget picker: clear the item
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا بند'**
+  String get budgetPickerNone;
+
+  /// Budget picker: empty budget
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بنود في الميزانية بعد'**
+  String get budgetPickerEmpty;
+
+  /// Budget picker: search found nothing
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بنود مطابقة'**
+  String get budgetPickerNoResults;
+
+  /// Budget picker field placeholder
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر بندًا'**
+  String get budgetPickerPlaceholder;
+
+  /// Remaining amount
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ {amount}'**
+  String budgetLeft(String amount);
+
+  /// Overspent amount
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز {amount}'**
+  String budgetOverBy(String amount);
+
+  /// Marks the current choice in the picker
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالي'**
+  String get budgetCurrentBadge;
+
+  /// Semantics: go to the previous period
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة السابقة'**
+  String get budgetPreviousPeriod;
+
+  /// Semantics: go to the next period
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة التالية'**
+  String get budgetNextPeriod;
+
+  /// Label: spent
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروف'**
+  String get budgetSpent;
+
+  /// Under the spent amount: of the plan
+  ///
+  /// In ar, this message translates to:
+  /// **'من {amount}'**
+  String budgetOfPlan(String amount);
+
+  /// Label: remaining
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get budgetRemaining;
+
+  /// Label: amount over the plan
+  ///
+  /// In ar, this message translates to:
+  /// **'فوق الخطة'**
+  String get budgetOverPlan;
+
+  /// Label: projected end-of-period spend
+  ///
+  /// In ar, this message translates to:
+  /// **'بهذا المعدّل'**
+  String get budgetProjection;
+
+  /// Projected spend by the end of the month
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} بنهاية الشهر'**
+  String budgetProjectionMonth(String amount);
+
+  /// Projected spend by the end of the week
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} بنهاية الأسبوع'**
+  String budgetProjectionWeek(String amount);
+
+  /// Progress through the period
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {day} من {days}'**
+  String budgetDayOf(String day, String days);
+
+  /// Shown for a past period
+  ///
+  /// In ar, this message translates to:
+  /// **'فترة منتهية'**
+  String get budgetPeriodClosed;
+
+  /// Expenses booked to no item
+  ///
+  /// In ar, this message translates to:
+  /// **'خارج الميزانية'**
+  String get budgetUnassigned;
+
+  /// Spend status
+  ///
+  /// In ar, this message translates to:
+  /// **'ضمن الخطة'**
+  String get budgetStatusCalm;
+
+  /// Spend status
+  ///
+  /// In ar, this message translates to:
+  /// **'قارب النفاد'**
+  String get budgetStatusNear;
+
+  /// Spend status
+  ///
+  /// In ar, this message translates to:
+  /// **'في طريقه للتجاوز'**
+  String get budgetStatusAtRisk;
+
+  /// Spend status
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز الخطة'**
+  String get budgetStatusOver;
+
+  /// Spend status
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا خطة'**
+  String get budgetStatusUnplanned;
+
+  /// Spent of planned
+  ///
+  /// In ar, this message translates to:
+  /// **'{spent} من {plan}'**
+  String budgetSpentOf(String spent, String plan);
+
+  /// Section title: per-item bars
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب البند'**
+  String get budgetByItem;
+
+  /// Section title: history of months
+  ///
+  /// In ar, this message translates to:
+  /// **'الأشهر السابقة'**
+  String get budgetHistoryMonths;
+
+  /// Section title: history of weeks
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسابيع السابقة'**
+  String get budgetHistoryWeeks;
+
+  /// Chart legend: plan
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get budgetLegendPlan;
+
+  /// Chart legend: spent
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروف'**
+  String get budgetLegendSpent;
+
+  /// Note under the history chart
+  ///
+  /// In ar, this message translates to:
+  /// **'تُقارن الفترات السابقة بخطة اليوم'**
+  String get budgetHistoryNote;
+
+  /// Spending tab: nothing spent
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مصروفات في هذه الفترة بعد'**
+  String get budgetNoSpending;
+
+  /// Semantics of a history bar
+  ///
+  /// In ar, this message translates to:
+  /// **'{period}: {spent} من {plan}'**
+  String budgetHistoryBar(String period, String spent, String plan);
+
+  /// Status card: spent of plan
+  ///
+  /// In ar, this message translates to:
+  /// **'صُرف {spent} من {plan}'**
+  String budgetCardSpentOf(String spent, String plan);
+
+  /// Status card: no budget yet
+  ///
+  /// In ar, this message translates to:
+  /// **'خطّط ميزانيتك بالمبلغ أو بالنسبة'**
+  String get budgetCardEmpty;
+
+  /// Status card: warnings count
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تنبيه واحد} =2{تنبيهان} few{{count} تنبيهات} many{{count} تنبيهًا} other{{count} تنبيه}}'**
+  String budgetCardWarnings(int count);
+
+  /// Goals screen title (jars, debts, recurring obligations)
+  ///
+  /// In ar, this message translates to:
+  /// **'المدّخرات والالتزامات'**
+  String get goalsTitle;
+
+  /// No description provided for @goalsTabJars.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحصّالات'**
+  String get goalsTabJars;
+
+  /// No description provided for @goalsTabDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get goalsTabDebts;
+
+  /// No description provided for @goalsTabObligations.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات'**
+  String get goalsTabObligations;
+
+  /// No description provided for @goalsDebtsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get goalsDebtsTitle;
+
+  /// No description provided for @goalsObligationsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات الدورية'**
+  String get goalsObligationsTitle;
+
+  /// No description provided for @goalsUpcomingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستحقات قريبة'**
+  String get goalsUpcomingTitle;
+
+  /// No description provided for @goalsSeeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get goalsSeeAll;
+
+  /// No description provided for @goalsCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء'**
+  String get goalsCreate;
+
+  /// No description provided for @goalsGone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يعد هذا العنصر موجودًا.'**
+  String get goalsGone;
+
+  /// No description provided for @goalsShow.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار'**
+  String get goalsShow;
+
+  /// No description provided for @goalsHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء'**
+  String get goalsHide;
+
+  /// No description provided for @goalsFilterAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get goalsFilterAll;
+
+  /// No description provided for @goalsAmountPositive.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغًا أكبر من صفر'**
+  String get goalsAmountPositive;
+
+  /// No description provided for @goalsFieldAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get goalsFieldAmount;
+
+  /// No description provided for @goalsFieldDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get goalsFieldDate;
+
+  /// No description provided for @goalsFieldNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get goalsFieldNote;
+
+  /// No description provided for @goalsFieldFromWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'من محفظة'**
+  String get goalsFieldFromWallet;
+
+  /// No description provided for @goalsFieldToWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى محفظة'**
+  String get goalsFieldToWallet;
+
+  /// No description provided for @goalsNoWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا محفظة'**
+  String get goalsNoWallet;
+
+  /// Between a saved amount and its target: "120 of 500"
+  ///
+  /// In ar, this message translates to:
+  /// **'من'**
+  String get goalsOf;
+
+  /// No description provided for @goalsOfTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {amount}'**
+  String goalsOfTotal(String amount);
+
+  /// No description provided for @goalsSavedOfTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'{saved} من {target}'**
+  String goalsSavedOfTarget(String saved, String target);
+
+  /// A jar deposit taken from a wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'من {name}'**
+  String goalsFromWallet(String name);
+
+  /// A jar withdrawal paid into a wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى {name}'**
+  String goalsToWallet(String name);
+
+  /// No description provided for @goalsMissingRates.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سعر صرف لـ{codes}، فحُسبت بقيمتها الاسمية.'**
+  String goalsMissingRates(String codes);
+
+  /// No description provided for @goalsDueToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get goalsDueToday;
+
+  /// No description provided for @goalsDueTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا'**
+  String get goalsDueTomorrow;
+
+  /// No description provided for @goalsDueInDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بعد يوم} =2{بعد يومين} few{بعد {n} أيام} many{بعد {n} يومًا} other{بعد {n} يوم}}'**
+  String goalsDueInDays(int count, String n);
+
+  /// No description provided for @goalsOverdueDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{متأخر يومًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}'**
+  String goalsOverdueDays(int count, String n);
+
+  /// No description provided for @goalsDueOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'في {date}'**
+  String goalsDueOn(String date);
+
+  /// No description provided for @goalsEveryWeeks.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{كل أسبوع} =2{كل أسبوعين} few{كل {n} أسابيع} many{كل {n} أسبوعًا} other{كل {n} أسبوع}}'**
+  String goalsEveryWeeks(int count, String n);
+
+  /// No description provided for @goalsEveryMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{كل شهر} =2{كل شهرين} few{كل {n} أشهر} many{كل {n} شهرًا} other{كل {n} شهر}}'**
+  String goalsEveryMonths(int count, String n);
+
+  /// No description provided for @goalsEveryYears.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{كل سنة} =2{كل سنتين} few{كل {n} سنوات} many{كل {n} سنةً} other{كل {n} سنة}}'**
+  String goalsEveryYears(int count, String n);
+
+  /// No description provided for @goalsJarNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصّالة جديدة'**
+  String get goalsJarNew;
+
+  /// No description provided for @goalsJarNewSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف ادّخار له مبلغ وموعد'**
+  String get goalsJarNewSubtitle;
+
+  /// No description provided for @goalsJarEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الحصّالة'**
+  String get goalsJarEdit;
+
+  /// No description provided for @goalsFieldJarName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get goalsFieldJarName;
+
+  /// No description provided for @goalsFieldJarNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: السفر'**
+  String get goalsFieldJarNameHint;
+
+  /// No description provided for @goalsFieldTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المستهدف'**
+  String get goalsFieldTarget;
+
+  /// No description provided for @goalsFieldDeadline.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد النهائي'**
+  String get goalsFieldDeadline;
+
+  /// No description provided for @goalsFieldIcon.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرمز'**
+  String get goalsFieldIcon;
+
+  /// No description provided for @goalsFieldColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get goalsFieldColor;
+
+  /// No description provided for @goalsDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get goalsDeposit;
+
+  /// No description provided for @goalsWithdraw.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب'**
+  String get goalsWithdraw;
+
+  /// No description provided for @goalsDepositTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع في {name}'**
+  String goalsDepositTo(String name);
+
+  /// No description provided for @goalsWithdrawFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب من {name}'**
+  String goalsWithdrawFrom(String name);
+
+  /// No description provided for @goalsWithdrawTooMuch.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدّخر {amount} فقط'**
+  String goalsWithdrawTooMuch(String amount);
+
+  /// No description provided for @goalsJarReached.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغت {name} هدفها!'**
+  String goalsJarReached(String name);
+
+  /// No description provided for @goalsDeposited.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُودِع {amount}'**
+  String goalsDeposited(String amount);
+
+  /// No description provided for @goalsWithdrawn.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُحب {amount}'**
+  String goalsWithdrawn(String amount);
+
+  /// No description provided for @goalsJarArchived.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرشفت الحصّالة'**
+  String get goalsJarArchived;
+
+  /// No description provided for @goalsJarRestored.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيدت الحصّالة'**
+  String get goalsJarRestored;
+
+  /// No description provided for @goalsArchive.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرشفة'**
+  String get goalsArchive;
+
+  /// No description provided for @goalsUnarchive.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الأرشفة'**
+  String get goalsUnarchive;
+
+  /// No description provided for @goalsArchivedJars.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصّالات مؤرشفة'**
+  String get goalsArchivedJars;
+
+  /// No description provided for @goalsJarsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حصّالات بعد'**
+  String get goalsJarsEmptyTitle;
+
+  /// No description provided for @goalsJarsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصّص حصّالة لكل هدف – سفر، طوارئ، هدية – وراقبها تمتلئ.'**
+  String get goalsJarsEmptyBody;
+
+  /// No description provided for @goalsJarsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب الحصّالة لإيداع سريع، واضغط مطوّلًا لبقية الخيارات، واسحب المقبض لترتيبها.'**
+  String get goalsJarsHint;
+
+  /// No description provided for @goalsJarsReachedCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{حصّالة بلغت هدفها} =2{حصّالتان بلغتا هدفيهما} few{{n} حصّالات بلغت أهدافها} many{{n} حصّالةً بلغت أهدافها} other{{n} حصّالة بلغت أهدافها}}'**
+  String goalsJarsReachedCount(int count, String n);
+
+  /// No description provided for @goalsSavedInJars.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدّخر في الحصّالات'**
+  String get goalsSavedInJars;
+
+  /// No description provided for @goalsNeededThisMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'المطلوب هذا الشهر'**
+  String get goalsNeededThisMonth;
+
+  /// No description provided for @goalsOfTargets.
+  ///
+  /// In ar, this message translates to:
+  /// **'من الأهداف'**
+  String get goalsOfTargets;
+
+  /// No description provided for @goalsOverallProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقدّم الكلّي {percent}'**
+  String goalsOverallProgress(String percent);
+
+  /// No description provided for @goalsNeedPerMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} شهريًا'**
+  String goalsNeedPerMonth(String amount);
+
+  /// No description provided for @goalsDeadlineOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {date}'**
+  String goalsDeadlineOn(String date);
+
+  /// No description provided for @goalsSurplus.
+  ///
+  /// In ar, this message translates to:
+  /// **'فائض {amount}'**
+  String goalsSurplus(String amount);
+
+  /// No description provided for @goalsTargetOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف {amount}'**
+  String goalsTargetOf(String amount);
+
+  /// No description provided for @goalsNoDeadlineHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف موعدًا لتعرف المطلوب شهريًا'**
+  String get goalsNoDeadlineHint;
+
+  /// No description provided for @goalsPaceReached.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغت الهدف'**
+  String get goalsPaceReached;
+
+  /// No description provided for @goalsPaceOnTrack.
+  ///
+  /// In ar, this message translates to:
+  /// **'على المسار'**
+  String get goalsPaceOnTrack;
+
+  /// No description provided for @goalsPaceBehind.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة عن الخطة'**
+  String get goalsPaceBehind;
+
+  /// No description provided for @goalsPaceOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'فات الموعد'**
+  String get goalsPaceOverdue;
+
+  /// No description provided for @goalsPaceOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get goalsPaceOpen;
+
+  /// No description provided for @goalsBalanceAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد بعدها: {amount}'**
+  String goalsBalanceAfter(String amount);
+
+  /// No description provided for @goalsPercentOfTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent} من الهدف'**
+  String goalsPercentOfTarget(String percent);
+
+  /// No description provided for @goalsWalletAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعملة المحفظة: {amount}'**
+  String goalsWalletAmount(String amount);
+
+  /// No description provided for @goalsTrajectory.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسار الادّخار'**
+  String get goalsTrajectory;
+
+  /// No description provided for @goalsHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجلّ'**
+  String get goalsHistory;
+
+  /// No description provided for @goalsNoMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا إيداعات بعد'**
+  String get goalsNoMovements;
+
+  /// No description provided for @goalsDeleteJar.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الحصّالة'**
+  String get goalsDeleteJar;
+
+  /// No description provided for @goalsAlidadeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المؤشّر الذهبي يدلّ على موضعك المفترض اليوم ({percent})'**
+  String goalsAlidadeHint(String percent);
+
+  /// No description provided for @goalsRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقّي'**
+  String get goalsRemaining;
+
+  /// No description provided for @goalsSurplusLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'فوق الهدف'**
+  String get goalsSurplusLabel;
+
+  /// No description provided for @goalsNeededNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'المطلوب الآن'**
+  String get goalsNeededNow;
+
+  /// No description provided for @goalsPerMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'المطلوب شهريًا'**
+  String get goalsPerMonth;
+
+  /// No description provided for @goalsPerWeekCaption.
+  ///
+  /// In ar, this message translates to:
+  /// **'أو {amount} أسبوعيًا'**
+  String goalsPerWeekCaption(String amount);
+
+  /// No description provided for @goalsDaysLeft.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ينتهي اليوم} =1{باقٍ يوم واحد} =2{باقٍ يومان} few{باقٍ {n} أيام} many{باقٍ {n} يومًا} other{باقٍ {n} يوم}}'**
+  String goalsDaysLeft(int count, String n);
+
+  /// No description provided for @goalsAtYourPace.
+  ///
+  /// In ar, this message translates to:
+  /// **'بوتيرتك الحالية'**
+  String get goalsAtYourPace;
+
+  /// No description provided for @goalsAfterDeadline.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الموعد'**
+  String get goalsAfterDeadline;
+
+  /// No description provided for @goalsBeforeDeadline.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل الموعد'**
+  String get goalsBeforeDeadline;
+
+  /// No description provided for @goalsSavedTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدّخر {amount}'**
+  String goalsSavedTotal(String amount);
+
+  /// No description provided for @goalsDebtNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين جديد'**
+  String get goalsDebtNew;
+
+  /// No description provided for @goalsDebtEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الدين'**
+  String get goalsDebtEdit;
+
+  /// No description provided for @goalsFieldDirection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاتجاه'**
+  String get goalsFieldDirection;
+
+  /// Debt direction: money I owe someone
+  ///
+  /// In ar, this message translates to:
+  /// **'عليّ'**
+  String get goalsIOwe;
+
+  /// Debt direction: money someone owes me
+  ///
+  /// In ar, this message translates to:
+  /// **'لي'**
+  String get goalsOwedToMe;
+
+  /// No description provided for @goalsDebtIOweSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين عليّ'**
+  String get goalsDebtIOweSubtitle;
+
+  /// No description provided for @goalsDebtOwedSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين لي عنده'**
+  String get goalsDebtOwedSubtitle;
+
+  /// No description provided for @goalsFieldPerson.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشخص'**
+  String get goalsFieldPerson;
+
+  /// No description provided for @goalsFieldPersonHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الشخص أو الجهة'**
+  String get goalsFieldPersonHint;
+
+  /// No description provided for @goalsFieldDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الاستحقاق'**
+  String get goalsFieldDueDate;
+
+  /// No description provided for @goalsIOweTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنا مدين لـ{person}'**
+  String goalsIOweTo(String person);
+
+  /// No description provided for @goalsOwedBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'{person} مدين لي'**
+  String goalsOwedBy(String person);
+
+  /// No description provided for @goalsRemainingOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتبقّى {remaining} من {total}'**
+  String goalsRemainingOf(String remaining, String total);
+
+  /// No description provided for @goalsSettle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسوية'**
+  String get goalsSettle;
+
+  /// No description provided for @goalsReopen.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة فتح'**
+  String get goalsReopen;
+
+  /// No description provided for @goalsSettled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُسوّى'**
+  String get goalsSettled;
+
+  /// No description provided for @goalsSettledOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُوّي في {date}'**
+  String goalsSettledOn(String date);
+
+  /// No description provided for @goalsSettledWrittenOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُوّي في {date}، وسُومح بـ{amount}'**
+  String goalsSettledWrittenOff(String date, String amount);
+
+  /// No description provided for @goalsNoDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get goalsNoDueDate;
+
+  /// No description provided for @goalsRecordPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل دفعة'**
+  String get goalsRecordPayment;
+
+  /// No description provided for @goalsPayTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة إلى {person}'**
+  String goalsPayTo(String person);
+
+  /// No description provided for @goalsReceiveFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة من {person}'**
+  String goalsReceiveFrom(String person);
+
+  /// No description provided for @goalsDebtPaidOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُدّد الحساب مع {person} بالكامل'**
+  String goalsDebtPaidOff(String person);
+
+  /// No description provided for @goalsPaymentRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت دفعة {amount}'**
+  String goalsPaymentRecorded(String amount);
+
+  /// No description provided for @goalsDebtSettled.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُوّي الدين مع {person}'**
+  String goalsDebtSettled(String person);
+
+  /// No description provided for @goalsDebtReopened.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد فتح الدين'**
+  String get goalsDebtReopened;
+
+  /// No description provided for @goalsPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفعات'**
+  String get goalsPayments;
+
+  /// No description provided for @goalsNoPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا دفعات بعد'**
+  String get goalsNoPayments;
+
+  /// No description provided for @goalsPaidSoFar.
+  ///
+  /// In ar, this message translates to:
+  /// **'دُفع حتى الآن {amount}'**
+  String goalsPaidSoFar(String amount);
+
+  /// No description provided for @goalsPaysOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الدفعة تُنهي الدين'**
+  String get goalsPaysOff;
+
+  /// No description provided for @goalsRemainingAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتبقّى بعدها {amount}'**
+  String goalsRemainingAfter(String amount);
+
+  /// No description provided for @goalsPaidOfTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'{paid} من {total}'**
+  String goalsPaidOfTotal(String paid, String total);
+
+  /// No description provided for @goalsDebtsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ديون مسجّلة'**
+  String get goalsDebtsEmptyTitle;
+
+  /// No description provided for @goalsDebtsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل ما عليك وما لك عند الآخرين، مع مواعيد السداد والدفعات الجزئية.'**
+  String get goalsDebtsEmptyBody;
+
+  /// No description provided for @goalsNoOpenDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ديون مفتوحة هنا'**
+  String get goalsNoOpenDebts;
+
+  /// No description provided for @goalsSettledDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'ديون مُسوّاة'**
+  String get goalsSettledDebts;
+
+  /// No description provided for @goalsDebtsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب الدين لتسويته فورًا، ويمكنك التراجع.'**
+  String get goalsDebtsHint;
+
+  /// No description provided for @goalsDebtsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا ديون مفتوحة} =1{دين مفتوح واحد} =2{دينان مفتوحان} few{{n} ديون مفتوحة} many{{n} دينًا مفتوحًا} other{{n} دين مفتوح}}'**
+  String goalsDebtsCount(int count, String n);
+
+  /// No description provided for @goalsNetEven.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكفّتان متعادلتان'**
+  String get goalsNetEven;
+
+  /// No description provided for @goalsNetOwedToMe.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصافي لك: {amount}'**
+  String goalsNetOwedToMe(String amount);
+
+  /// No description provided for @goalsNetIOwe.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصافي عليك: {amount}'**
+  String goalsNetIOwe(String amount);
+
+  /// No description provided for @goalsOverdueCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{متأخر واحد} =2{متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}'**
+  String goalsOverdueCount(int count, String n);
+
+  /// No description provided for @goalsObligationNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'التزام جديد'**
+  String get goalsObligationNew;
+
+  /// No description provided for @goalsObligationNewSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيجار، قسط، اشتراك، مصروف… أي دفعة تتكرر'**
+  String get goalsObligationNewSubtitle;
+
+  /// No description provided for @goalsObligationEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الالتزام'**
+  String get goalsObligationEdit;
+
+  /// No description provided for @goalsFieldObligationName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get goalsFieldObligationName;
+
+  /// No description provided for @goalsFieldObligationNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: الإيجار'**
+  String get goalsFieldObligationNameHint;
+
+  /// No description provided for @goalsFieldFrequency.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتكرر'**
+  String get goalsFieldFrequency;
+
+  /// No description provided for @goalsWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعيًا'**
+  String get goalsWeekly;
+
+  /// No description provided for @goalsMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهريًا'**
+  String get goalsMonthly;
+
+  /// No description provided for @goalsYearly.
+  ///
+  /// In ar, this message translates to:
+  /// **'سنويًا'**
+  String get goalsYearly;
+
+  /// No description provided for @goalsFieldInterval.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل كم فترة'**
+  String get goalsFieldInterval;
+
+  /// No description provided for @goalsFieldIntervalHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'واحد: كل فترة، اثنان: كل فترتين…'**
+  String get goalsFieldIntervalHint;
+
+  /// No description provided for @goalsFieldNextDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستحقاق القادم'**
+  String get goalsFieldNextDue;
+
+  /// No description provided for @goalsFieldPayFromWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُدفع من محفظة'**
+  String get goalsFieldPayFromWallet;
+
+  /// No description provided for @goalsFieldBudgetItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'بند الميزانية'**
+  String get goalsFieldBudgetItem;
+
+  /// No description provided for @goalsNoBudgetItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا بند'**
+  String get goalsNoBudgetItem;
+
+  /// No description provided for @goalsFieldPaidOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الدفع'**
+  String get goalsFieldPaidOn;
+
+  /// No description provided for @goalsMarkPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'دُفع'**
+  String get goalsMarkPaid;
+
+  /// No description provided for @goalsMarkPaidFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل دفع {name}'**
+  String goalsMarkPaidFor(String name);
+
+  /// No description provided for @goalsPayOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع بمبلغ آخر'**
+  String get goalsPayOther;
+
+  /// No description provided for @goalsPayOtherShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبلغ آخر'**
+  String get goalsPayOtherShort;
+
+  /// No description provided for @goalsPayObligation.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع {name}'**
+  String goalsPayObligation(String name);
+
+  /// No description provided for @goalsForDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'عن استحقاق {date}'**
+  String goalsForDue(String date);
+
+  /// No description provided for @goalsSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطّي'**
+  String get goalsSkip;
+
+  /// No description provided for @goalsSkippedEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم التخطّي'**
+  String get goalsSkippedEntry;
+
+  /// No description provided for @goalsPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get goalsPause;
+
+  /// No description provided for @goalsResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get goalsResume;
+
+  /// No description provided for @goalsPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقوف'**
+  String get goalsPaused;
+
+  /// No description provided for @goalsObligationPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل الدفع، والموعد القادم {date}'**
+  String goalsObligationPaid(String date);
+
+  /// No description provided for @goalsObligationSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم التخطّي، والموعد القادم {date}'**
+  String goalsObligationSkipped(String date);
+
+  /// No description provided for @goalsObligationPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقف الالتزام مؤقتًا'**
+  String get goalsObligationPaused;
+
+  /// No description provided for @goalsObligationResumed.
+  ///
+  /// In ar, this message translates to:
+  /// **'استُؤنف الالتزام'**
+  String get goalsObligationResumed;
+
+  /// No description provided for @goalsObligationsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا التزامات دورية'**
+  String get goalsObligationsEmptyTitle;
+
+  /// No description provided for @goalsObligationsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ما يتكرر – الإيجار، الأقساط، الاشتراكات – وستصلك تذكرة قبل موعده، ويسجّل «دُفع» المصروف وينقلك إلى الموعد التالي.'**
+  String get goalsObligationsEmptyBody;
+
+  /// No description provided for @goalsObligationsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب الالتزام لتسجيل دفعه، ويمكنك التراجع.'**
+  String get goalsObligationsHint;
+
+  /// No description provided for @goalsMonthlyCommitments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات شهريًا'**
+  String get goalsMonthlyCommitments;
+
+  /// No description provided for @goalsActiveCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا التزامات نشطة} =1{التزام نشط واحد} =2{التزامان نشطان} few{{n} التزامات نشطة} many{{n} التزامًا نشطًا} other{{n} التزام نشط}}'**
+  String goalsActiveCount(int count, String n);
+
+  /// No description provided for @goalsDueSoonCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مستحق خلال أسبوع} =2{مستحقان خلال أسبوع} few{{n} مستحقة خلال أسبوع} many{{n} مستحقًا خلال أسبوع} other{{n} مستحق خلال أسبوع}}'**
+  String goalsDueSoonCount(int count, String n);
+
+  /// No description provided for @goalsSectionOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get goalsSectionOverdue;
+
+  /// No description provided for @goalsSectionThisWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلال أسبوع'**
+  String get goalsSectionThisWeek;
+
+  /// No description provided for @goalsSectionLater.
+  ///
+  /// In ar, this message translates to:
+  /// **'لاحقًا'**
+  String get goalsSectionLater;
+
+  /// No description provided for @goalsSectionPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقوفة'**
+  String get goalsSectionPaused;
+
+  /// No description provided for @goalsNextDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستحقاق القادم'**
+  String get goalsNextDue;
+
+  /// No description provided for @goalsComingUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد التالية'**
+  String get goalsComingUp;
+
+  /// No description provided for @goalsNoHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُسجّل دفع بعد'**
+  String get goalsNoHistory;
+
+  /// No description provided for @goalsPaidOnForDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'دُفع في {paid} عن {due}'**
+  String goalsPaidOnForDue(String paid, String due);
+
+  /// No description provided for @goalsPaidFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُدفع من {wallet}'**
+  String goalsPaidFrom(String wallet);
+
+  /// No description provided for @goalsCountsToward.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحسب على بند {item}'**
+  String goalsCountsToward(String item);
+
+  /// No description provided for @goalsNoWalletHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا محفظة: «دُفع» يسجّل الدفعة دون حركة في المحافظ.'**
+  String get goalsNoWalletHint;
+
+  /// No description provided for @goalsRecordedInLedger.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسجّل في دفتر الحركات'**
+  String get goalsRecordedInLedger;
+
+  /// No description provided for @goalsPeriodsDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{فترة مستحقة} =2{فترتان مستحقتان} few{{n} فترات مستحقة} many{{n} فترةً مستحقة} other{{n} فترة مستحقة}}'**
+  String goalsPeriodsDue(int count, String n);
+
+  /// No description provided for @goalsNextDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي: {dates}'**
+  String goalsNextDates(String dates);
+
+  /// No description provided for @goalsAboutPerMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرابة {amount} شهريًا'**
+  String goalsAboutPerMonth(String amount);
+
+  /// No description provided for @goalsNothingDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{لا شيء مستحق غدًا} =2{لا شيء مستحق خلال يومين} few{لا شيء مستحق خلال {n} أيام} many{لا شيء مستحق خلال {n} يومًا} other{لا شيء مستحق خلال {n} يوم}}'**
+  String goalsNothingDue(int count, String n);
+
+  /// No description provided for @goalsMoreDues.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وواحد آخر} =2{واثنان آخران} few{و{n} أخرى} many{و{n} أخرى} other{و{n} أخرى}}'**
+  String goalsMoreDues(int count, String n);
+
+  /// No description provided for @goalsRemindersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير المستحقات'**
+  String get goalsRemindersTitle;
+
+  /// No description provided for @goalsRemindersSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'للديون والالتزامات الدورية'**
+  String get goalsRemindersSubtitle;
+
+  /// No description provided for @goalsRemindersEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات'**
+  String get goalsRemindersEnabled;
+
+  /// No description provided for @goalsRemindersEnabledHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه هادئ قبل الموعد وفي يومه'**
+  String get goalsRemindersEnabledHint;
+
+  /// No description provided for @goalsRemindersLead.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير مبكر'**
+  String get goalsRemindersLead;
+
+  /// No description provided for @goalsRemindersLeadNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تذكير مبكر'**
+  String get goalsRemindersLeadNone;
+
+  /// No description provided for @goalsRemindersLeadDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{قبل يوم} =2{قبل يومين} few{قبل {n} أيام} many{قبل {n} يومًا} other{قبل {n} يوم}}'**
+  String goalsRemindersLeadDays(int count, String n);
+
+  /// No description provided for @goalsRemindersOnDueDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'وفي يوم الاستحقاق أيضًا'**
+  String get goalsRemindersOnDueDay;
+
+  /// No description provided for @goalsRemindersTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get goalsRemindersTime;
+
+  /// Notification channel group (system settings)
+  ///
+  /// In ar, this message translates to:
+  /// **'المال'**
+  String get goalsNotifyGroup;
+
+  /// Notification channel name (system settings)
+  ///
+  /// In ar, this message translates to:
+  /// **'مواعيد الاستحقاق'**
+  String get goalsNotifyChannel;
+
+  /// No description provided for @goalsNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بالديون والالتزامات الدورية قبل موعدها'**
+  String get goalsNotifyChannelDescription;
+
+  /// No description provided for @goalsNotifyObligationTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استحقاق {name}'**
+  String goalsNotifyObligationTitle(String name);
+
+  /// No description provided for @goalsNotifyObligationBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{when} – المبلغ {amount}'**
+  String goalsNotifyObligationBody(String when, String amount);
+
+  /// No description provided for @goalsNotifyDebtIOweTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سداد لـ{person}'**
+  String goalsNotifyDebtIOweTitle(String person);
+
+  /// No description provided for @goalsNotifyDebtIOweBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{when} – يُستحق عليك {amount}'**
+  String goalsNotifyDebtIOweBody(String when, String amount);
+
+  /// No description provided for @goalsNotifyDebtOwedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين على {person}'**
+  String goalsNotifyDebtOwedTitle(String person);
+
+  /// No description provided for @goalsNotifyDebtOwedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{when} – يُستحق لك {amount}'**
+  String goalsNotifyDebtOwedBody(String when, String amount);
+
+  /// Debt editor: the wallet the lent / borrowed money went through
+  ///
+  /// In ar, this message translates to:
+  /// **'عبر محفظة'**
+  String get goalsFieldDebtWallet;
+
+  /// Debt editor preview (owed to me, with a wallet)
+  ///
+  /// In ar, this message translates to:
+  /// **'خرج المبلغ من {wallet}، فينقص رصيدها {amount}'**
+  String goalsDebtLentFrom(String wallet, String amount);
+
+  /// Debt editor preview (I owe, with a wallet)
+  ///
+  /// In ar, this message translates to:
+  /// **'دخل المبلغ إلى {wallet}، فيزيد رصيدها {amount}'**
+  String goalsDebtBorrowedInto(String wallet, String amount);
+
+  /// Debt editor preview without a wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا محفظة: تبقى أرصدة المحافظ كما هي.'**
+  String get goalsDebtNoWalletHint;
+
+  /// Work planet screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'العمل'**
+  String get workTitle;
+
+  /// Section: kanban boards
+  ///
+  /// In ar, this message translates to:
+  /// **'اللوحات'**
+  String get workBoards;
+
+  /// Section / screen: projects
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع'**
+  String get workProjects;
+
+  /// Link to the projects screen
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المشاريع'**
+  String get workAllProjects;
+
+  /// Compact card link: open the Work screen
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح العمل'**
+  String get workOpenAll;
+
+  /// List separator (Arabic comma: a middle dot reads as the digit zero ٠)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get workSep;
+
+  /// Sheet button: save
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get workSave;
+
+  /// Sheet button: create
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get workCreate;
+
+  /// Day chip / due badge: today
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get workToday;
+
+  /// Day chip / due badge: tomorrow
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا'**
+  String get workTomorrow;
+
+  /// Day chip: open a date picker
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ آخر…'**
+  String get workPickDate;
+
+  /// Day chip: no date
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get workNoDate;
+
+  /// Button: clear a field
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح'**
+  String get workClear;
+
+  /// Button / sheet title: new board
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة جديدة'**
+  String get workNewBoard;
+
+  /// Sheet title / menu: edit a board
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل اللوحة'**
+  String get workEditBoard;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم اللوحة'**
+  String get workBoardName;
+
+  /// Field hint (generic example)
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: المتجر الإلكتروني'**
+  String get workBoardNameHint;
+
+  /// Field label: what the board is for
+  ///
+  /// In ar, this message translates to:
+  /// **'البلد أو النشاط'**
+  String get workBoardCountry;
+
+  /// Field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر بلدًا أو اكتب وصفًا قصيرًا'**
+  String get workBoardCountryHint;
+
+  /// Field label: board colour
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get workBoardColor;
+
+  /// App bar button: board menu
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات اللوحة'**
+  String get workBoardOptions;
+
+  /// Menu: archive a board
+  ///
+  /// In ar, this message translates to:
+  /// **'أرشفة'**
+  String get workArchive;
+
+  /// Menu: unarchive a board
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة من الأرشيف'**
+  String get workUnarchive;
+
+  /// Section title
+  ///
+  /// In ar, this message translates to:
+  /// **'اللوحات المؤرشفة'**
+  String get workArchivedSection;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرشفت اللوحة'**
+  String get workBoardArchived;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'عادت اللوحة من الأرشيف'**
+  String get workBoardRestored;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت اللوحة وبطاقاتها'**
+  String get workBoardDeleted;
+
+  /// Empty state title
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ لوحتك الأولى'**
+  String get workBoardsEmptyTitle;
+
+  /// Empty state body (generic examples)
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة لكل بلد أو نشاط — مثلًا «المتجر الإلكتروني» أو «فريق التوصيل» — بأعمدة: المطلوب، قيد التنفيذ، تمّ.'**
+  String get workBoardsEmptyBody;
+
+  /// Board screen: deleted board
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تعد هذه اللوحة موجودة'**
+  String get workBoardMissing;
+
+  /// Board tile: open cards
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا بطاقات مفتوحة} =1{بطاقة مفتوحة} =2{بطاقتان مفتوحتان} few{{count} بطاقات مفتوحة} many{{count} بطاقة مفتوحة} other{{count} بطاقة مفتوحة}}'**
+  String workOpenCount(int count);
+
+  /// Board tile: done cards
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا منجز} =1{واحدة منجزة} =2{اثنتان منجزتان} few{{count} منجزة} many{{count} منجزة} other{{count} منجزة}}'**
+  String workDoneCount(int count);
+
+  /// Board tile / today card: cards due today
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{واحدة مستحقة اليوم} =2{اثنتان مستحقتان اليوم} few{{count} مستحقة اليوم} many{{count} مستحقة اليوم} other{{count} مستحقة اليوم}}'**
+  String workDueTodayCount(int count);
+
+  /// Board tile / today card: overdue cards
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{واحدة متأخرة} =2{اثنتان متأخرتان} few{{count} متأخرة} many{{count} متأخرة} other{{count} متأخرة}}'**
+  String workOverdueCount(int count);
+
+  /// Column / board: number of cards
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا بطاقات} =1{بطاقة واحدة} =2{بطاقتان} few{{count} بطاقات} many{{count} بطاقة} other{{count} بطاقة}}'**
+  String workCardsCount(int count);
+
+  /// Collapsed archived section
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{لوحة مؤرشفة} =2{لوحتان مؤرشفتان} few{{count} لوحات مؤرشفة} many{{count} لوحة مؤرشفة} other{{count} لوحة مؤرشفة}}'**
+  String workArchivedCount(int count);
+
+  /// Default column: to do
+  ///
+  /// In ar, this message translates to:
+  /// **'المطلوب'**
+  String get workColTodo;
+
+  /// Default column: in progress
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد التنفيذ'**
+  String get workColDoing;
+
+  /// Default column: done
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get workColDone;
+
+  /// Fallback name of an unnamed column
+  ///
+  /// In ar, this message translates to:
+  /// **'عمود'**
+  String get workColumnUntitled;
+
+  /// Menu / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الأعمدة'**
+  String get workEditColumns;
+
+  /// Sheet subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب لإعادة الترتيب، واختر عمود الإنجاز'**
+  String get workEditColumnsHint;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة عمود'**
+  String get workAddColumn;
+
+  /// Field label / hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العمود'**
+  String get workColumnName;
+
+  /// Button: rename a column
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة تسمية'**
+  String get workRenameColumn;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف العمود'**
+  String get workDeleteColumn;
+
+  /// Badge / toggle: the column whose cards count as done
+  ///
+  /// In ar, this message translates to:
+  /// **'عمود الإنجاز'**
+  String get workDoneColumn;
+
+  /// Explanation of the done column
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقات فيه تُعدّ منجزة وتُنعش كوكب العمل'**
+  String get workDoneColumnHint;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'اجعله عمود الإنجاز'**
+  String get workMakeDoneColumn;
+
+  /// Error: cannot delete the last column
+  ///
+  /// In ar, this message translates to:
+  /// **'تحتاج اللوحة عمودًا واحدًا على الأقل'**
+  String get workNeedOneColumn;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف العمود ونُقلت بطاقاته إلى «{column}»'**
+  String workColumnDeleted(String column);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت الأعمدة'**
+  String get workColumnsSaved;
+
+  /// Empty column
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بطاقات هنا بعد'**
+  String get workColumnEmpty;
+
+  /// Drop target hint while dragging
+  ///
+  /// In ar, this message translates to:
+  /// **'أفلِت البطاقة هنا'**
+  String get workDropHere;
+
+  /// Column footer / FAB
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة بطاقة'**
+  String get workAddCard;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقة جديدة'**
+  String get workNewCard;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل البطاقة'**
+  String get workEditCard;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'العنوان'**
+  String get workCardTitle;
+
+  /// Field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'ما المطلوب إنجازه؟'**
+  String get workCardTitleHint;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get workCardNotes;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'المسؤول'**
+  String get workCardAssignee;
+
+  /// Field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'من سيتولّاها؟'**
+  String get workCardAssigneeHint;
+
+  /// Field label / menu
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد الاستحقاق'**
+  String get workCardDue;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'العمود'**
+  String get workCardColumn;
+
+  /// Field label: prayer window placement
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت العمل عليها'**
+  String get workCardWindow;
+
+  /// Field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'تظهر في قائمة ذلك الوقت على الشاشة الرئيسية'**
+  String get workCardWindowHint;
+
+  /// Window chip: not placed in a window
+  ///
+  /// In ar, this message translates to:
+  /// **'غير محدد'**
+  String get workNotPlaced;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت البطاقة'**
+  String get workCardDeleted;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت البطاقة'**
+  String get workCardDuplicated;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'نُقلت إلى «{column}»'**
+  String workCardMovedTo(String column);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'نُقلت إلى لوحة «{board}»'**
+  String workCardMovedBoard(String board);
+
+  /// Undo toast: card completed
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجزت، بارك الله فيك'**
+  String get workCardDoneToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيدت إلى «{column}»'**
+  String workCardReopened(String column);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت البطاقة'**
+  String get workCardSaved;
+
+  /// Menu / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل إلى لوحة'**
+  String get workMoveToBoard;
+
+  /// Menu / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل إلى عمود'**
+  String get workMoveToColumn;
+
+  /// Swipe / action: next column
+  ///
+  /// In ar, this message translates to:
+  /// **'تقديم إلى «{column}»'**
+  String workMoveForward(String column);
+
+  /// Swipe / action: previous column
+  ///
+  /// In ar, this message translates to:
+  /// **'إرجاع إلى «{column}»'**
+  String workMoveBack(String column);
+
+  /// Menu / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'ضعها في وقت صلاة'**
+  String get workPlaceInWindow;
+
+  /// Menu / chip
+  ///
+  /// In ar, this message translates to:
+  /// **'أزلها من وقت الصلاة'**
+  String get workRemoveFromWindow;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'وُضعت في «{window}»'**
+  String workPlacedToast(String window);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيلت من وقت الصلاة'**
+  String get workUnplacedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُدّد موعد الاستحقاق'**
+  String get workDueSetToast;
+
+  /// Screen reader label of a card
+  ///
+  /// In ar, this message translates to:
+  /// **'{title}، في عمود {column}'**
+  String workCardSemantics(String title, String column);
+
+  /// Screen reader hint on a card
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب نحو العمود التالي لتقديمها أو السابق لإرجاعها، واضغط مطوّلًا لسحبها أو لفتح الخيارات'**
+  String get workSwipeHint;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا مسؤول'**
+  String get workUnassigned;
+
+  /// Card badge
+  ///
+  /// In ar, this message translates to:
+  /// **'منجزة'**
+  String get workDoneBadge;
+
+  /// Due badge: overdue by N days
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تأخّر يومًا} =2{تأخّر يومين} few{تأخّر {count} أيام} many{تأخّر {count} يومًا} other{تأخّر {count} يوم}}'**
+  String workLateDays(int count);
+
+  /// Card chip: placed in a window
+  ///
+  /// In ar, this message translates to:
+  /// **'{window}'**
+  String workInWindow(String window);
+
+  /// Card chip: window on a given day
+  ///
+  /// In ar, this message translates to:
+  /// **'{window}، {day}'**
+  String workWindowOnDay(String window, String day);
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية'**
+  String get workFilter;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get workFilterAll;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'المتأخرة'**
+  String get workFilterOverdue;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'مستحقة اليوم'**
+  String get workFilterToday;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get workFilterWeek;
+
+  /// Filter chip
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get workFilterNoDate;
+
+  /// Filter group label
+  ///
+  /// In ar, this message translates to:
+  /// **'المسؤول'**
+  String get workFilterAssignee;
+
+  /// Filter group label
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد'**
+  String get workFilterDue;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء التصفية'**
+  String get workFilterClear;
+
+  /// Empty column while filtering
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بطاقات تطابق التصفية'**
+  String get workFilterNoMatch;
+
+  /// Top 3 card title
+  ///
+  /// In ar, this message translates to:
+  /// **'أهم ثلاث اليوم'**
+  String get workTop3Title;
+
+  /// Top 3 card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'ثلاث أولويات تكفي ليوم مبارك'**
+  String get workTop3Subtitle;
+
+  /// Top 3 empty state
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ما يستحق تركيزك اليوم — ثلاثة أشياء تكفي.'**
+  String get workTop3Empty;
+
+  /// Button: choose Top 3 items
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر'**
+  String get workTop3Choose;
+
+  /// Picker sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر أهم ثلاث'**
+  String get workTop3ChooseTitle;
+
+  /// Picker subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{اكتملت الثلاث} =1{بقي مكان واحد} =2{بقي مكانان} few{بقيت {count} أماكن} many{بقي {count} مكانًا} other{بقي {count} مكان}}'**
+  String workTop3SlotsLeft(int count);
+
+  /// Picker empty
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بطاقات أو مهام مفتوحة لتختار منها'**
+  String get workTop3NoCandidates;
+
+  /// Top 3 progress (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String workTop3Progress(String done, String total);
+
+  /// Top 3 all done
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزت أهم ثلاث اليوم — بارك الله في وقتك'**
+  String get workTop3AllDone;
+
+  /// Menu action
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف إلى أهم ثلاث'**
+  String get workTop3Add;
+
+  /// Menu action
+  ///
+  /// In ar, this message translates to:
+  /// **'أزل من أهم ثلاث'**
+  String get workTop3Remove;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت إلى أهم ثلاث'**
+  String get workTop3Added;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيلت من أهم ثلاث'**
+  String get workTop3Removed;
+
+  /// Card sheet toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'من أهم ثلاث اليوم'**
+  String get workTop3Toggle;
+
+  /// Swap sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'أهم ثلاث مكتملة'**
+  String get workTop3FullTitle;
+
+  /// Swap sheet subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ما تستبدله بـ«{title}»'**
+  String workTop3FullBody(String title);
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'استُبدلت في أهم ثلاث'**
+  String get workTop3Swapped;
+
+  /// Toggle hint when full
+  ///
+  /// In ar, this message translates to:
+  /// **'أهم ثلاث مكتملة'**
+  String get workTop3FullShort;
+
+  /// Carry-over prompt title
+  ///
+  /// In ar, this message translates to:
+  /// **'من تركيز الأمس'**
+  String get workCarryTitle;
+
+  /// Carry-over prompt body
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بقي أمر واحد لم يكتمل. أتنقله إلى اليوم؟} =2{بقي أمران لم يكتملا. أتنقلهما إلى اليوم؟} few{بقيت {count} أمور لم تكتمل. أتنقلها إلى اليوم؟} many{بقي {count} أمرًا لم يكتمل. أتنقلها إلى اليوم؟} other{بقي {count} أمر لم يكتمل. أتنقلها إلى اليوم؟}}'**
+  String workCarryBody(int count);
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'انقلها إلى اليوم'**
+  String get workCarryOver;
+
+  /// Button
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ من جديد'**
+  String get workStartFresh;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقلت إلى تركيز اليوم'**
+  String get workCarriedToast;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية جديدة لليوم'**
+  String get workFreshToast;
+
+  /// Focus item kind: a task
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة'**
+  String get workKindTask;
+
+  /// Undo toast: item completed
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجزت'**
+  String get workItemDoneToast;
+
+  /// Undo toast: item reopened
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد فتحها'**
+  String get workItemReopenedToast;
+
+  /// Compact card title
+  ///
+  /// In ar, this message translates to:
+  /// **'العمل اليوم'**
+  String get workTodayTitle;
+
+  /// Compact card: nothing due
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مستحق اليوم'**
+  String get workTodayAllClear;
+
+  /// Compact card: Top 3 label
+  ///
+  /// In ar, this message translates to:
+  /// **'أهم ثلاث'**
+  String get workTodayTop3;
+
+  /// Compact card: Top 3 progress (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'أهم ثلاث: {done} من {total}'**
+  String workTodayTop3Line(String done, String total);
+
+  /// Button / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'مشروع جديد'**
+  String get workNewProject;
+
+  /// Sheet title / menu
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل المشروع'**
+  String get workEditProject;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المشروع'**
+  String get workProjectName;
+
+  /// Field hint (generic example)
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: إطلاق منتج جديد'**
+  String get workProjectNameHint;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get workProjectDescription;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد النهائي'**
+  String get workProjectDeadline;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get workProjectStatus;
+
+  /// Project status
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get workStatusActive;
+
+  /// Project status
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا'**
+  String get workStatusPaused;
+
+  /// Project status
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتمل'**
+  String get workStatusDone;
+
+  /// Field label: planet the project feeds
+  ///
+  /// In ar, this message translates to:
+  /// **'الكوكب'**
+  String get workProjectPlanet;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get workProjectColor;
+
+  /// Section title
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة الخطوات'**
+  String get workChecklist;
+
+  /// Inline add field hint
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف خطوة…'**
+  String get workAddItemHint;
+
+  /// Button semantics
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة خطوة'**
+  String get workAddItem;
+
+  /// Sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الخطوة'**
+  String get workEditItem;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوة'**
+  String get workItemBody;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد الخطوة'**
+  String get workItemDue;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الخطوة'**
+  String get workItemDeleted;
+
+  /// Empty checklist
+  ///
+  /// In ar, this message translates to:
+  /// **'قسّم المشروع إلى خطوات صغيرة — تبدأ الرحلة بخطوة.'**
+  String get workChecklistEmpty;
+
+  /// Section title
+  ///
+  /// In ar, this message translates to:
+  /// **'مهام المشروع'**
+  String get workProjectTasks;
+
+  /// Empty project tasks
+  ///
+  /// In ar, this message translates to:
+  /// **'المهام التي تضعها للمشروع في أوقات الصلاة تظهر هنا'**
+  String get workProjectTasksEmpty;
+
+  /// Button / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة في وقت صلاة'**
+  String get workAddProjectTask;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'المهمة'**
+  String get workTaskTitle;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get workTaskWindow;
+
+  /// Field label
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get workTaskDay;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف المشروع'**
+  String get workProjectDeleted;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ المشروع'**
+  String get workProjectDuplicated;
+
+  /// Celebration toast at 100 %
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل المشروع، ما شاء الله!'**
+  String get workProjectComplete;
+
+  /// Project screen: deleted
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يعد هذا المشروع موجودًا'**
+  String get workProjectMissing;
+
+  /// Empty state title
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مشاريع بعد'**
+  String get workProjectsEmptyTitle;
+
+  /// Empty state body (generic examples)
+  ///
+  /// In ar, this message translates to:
+  /// **'مشروع بخطوات وموعد نهائي — مثلًا «إطلاق منتج جديد» أو «تجديد الموقع».'**
+  String get workProjectsEmptyBody;
+
+  /// Undo toast
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة: {status}'**
+  String workStatusChanged(String status);
+
+  /// Menu / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير الحالة'**
+  String get workSetStatus;
+
+  /// Countdown: days left (e.g. ١٢ يومًا)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String workDaysLeft(int count);
+
+  /// Countdown caption under the number
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى الموعد النهائي'**
+  String get workDaysLeftCaption;
+
+  /// Countdown: due today
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد النهائي اليوم'**
+  String get workDueTodayCaption;
+
+  /// Countdown: due tomorrow
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد النهائي غدًا'**
+  String get workDueTomorrowCaption;
+
+  /// Countdown: overdue
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{فات الموعد بيوم} =2{فات الموعد بيومين} few{فات الموعد بـ{count} أيام} many{فات الموعد بـ{count} يومًا} other{فات الموعد بـ{count} يوم}}'**
+  String workOverdueDays(int count);
+
+  /// Project without deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد نهائي'**
+  String get workNoDeadline;
+
+  /// Deadline date line
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد: {date}'**
+  String workDeadlineOn(String date);
+
+  /// Checklist progress (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total} خطوات'**
+  String workItemsProgress(String done, String total);
+
+  /// Country name (JO)
+  ///
+  /// In ar, this message translates to:
+  /// **'الأردن'**
+  String get workCountryJO;
+
+  /// Country name (SA)
+  ///
+  /// In ar, this message translates to:
+  /// **'السعودية'**
+  String get workCountrySA;
+
+  /// Country name (AE)
+  ///
+  /// In ar, this message translates to:
+  /// **'الإمارات'**
+  String get workCountryAE;
+
+  /// Country name (KW)
+  ///
+  /// In ar, this message translates to:
+  /// **'الكويت'**
+  String get workCountryKW;
+
+  /// Country name (QA)
+  ///
+  /// In ar, this message translates to:
+  /// **'قطر'**
+  String get workCountryQA;
+
+  /// Country name (BH)
+  ///
+  /// In ar, this message translates to:
+  /// **'البحرين'**
+  String get workCountryBH;
+
+  /// Country name (OM)
+  ///
+  /// In ar, this message translates to:
+  /// **'عُمان'**
+  String get workCountryOM;
+
+  /// Country name (IQ)
+  ///
+  /// In ar, this message translates to:
+  /// **'العراق'**
+  String get workCountryIQ;
+
+  /// Country name (SY)
+  ///
+  /// In ar, this message translates to:
+  /// **'سوريا'**
+  String get workCountrySY;
+
+  /// Country name (LB)
+  ///
+  /// In ar, this message translates to:
+  /// **'لبنان'**
+  String get workCountryLB;
+
+  /// Country name (PS)
+  ///
+  /// In ar, this message translates to:
+  /// **'فلسطين'**
+  String get workCountryPS;
+
+  /// Country name (EG)
+  ///
+  /// In ar, this message translates to:
+  /// **'مصر'**
+  String get workCountryEG;
+
+  /// Country name (LY)
+  ///
+  /// In ar, this message translates to:
+  /// **'ليبيا'**
+  String get workCountryLY;
+
+  /// Country name (TN)
+  ///
+  /// In ar, this message translates to:
+  /// **'تونس'**
+  String get workCountryTN;
+
+  /// Country name (DZ)
+  ///
+  /// In ar, this message translates to:
+  /// **'الجزائر'**
+  String get workCountryDZ;
+
+  /// Country name (MA)
+  ///
+  /// In ar, this message translates to:
+  /// **'المغرب'**
+  String get workCountryMA;
+
+  /// Country name (SD)
+  ///
+  /// In ar, this message translates to:
+  /// **'السودان'**
+  String get workCountrySD;
+
+  /// Country name (YE)
+  ///
+  /// In ar, this message translates to:
+  /// **'اليمن'**
+  String get workCountryYE;
+
+  /// Country name (TR)
+  ///
+  /// In ar, this message translates to:
+  /// **'تركيا'**
+  String get workCountryTR;
+
+  /// Title of the Family screen (people and contact rhythm)
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة والأحبّة'**
+  String get familyTitle;
+
+  /// Title of the compact card on the Family planet
+  ///
+  /// In ar, this message translates to:
+  /// **'صلة اليوم'**
+  String get familyTodayTitle;
+
+  /// No description provided for @familyOpenAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get familyOpenAll;
+
+  /// No description provided for @familyAddPerson.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة شخص'**
+  String get familyAddPerson;
+
+  /// No description provided for @familyEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دائرتك القريبة تبدأ هنا'**
+  String get familyEmptyTitle;
+
+  /// No description provided for @familyEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف من تحبّ أن تبقى على صلة به، واختر كل كم يومًا تتواصل — مثلًا: «أمي، كل يومين».'**
+  String get familyEmptyBody;
+
+  /// No description provided for @familySortUrgency.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب الأولوية'**
+  String get familySortUrgency;
+
+  /// No description provided for @familySortManual.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيبي الخاص'**
+  String get familySortManual;
+
+  /// No description provided for @familySortLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة الترتيب'**
+  String get familySortLabel;
+
+  /// No description provided for @familyRemindersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكيرات الصلة'**
+  String get familyRemindersTitle;
+
+  /// No description provided for @familyGroupOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'فات موعدهم'**
+  String get familyGroupOverdue;
+
+  /// No description provided for @familyGroupDueToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعدهم اليوم'**
+  String get familyGroupDueToday;
+
+  /// No description provided for @familyGroupThisWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلال هذا الأسبوع'**
+  String get familyGroupThisWeek;
+
+  /// No description provided for @familyGroupInTouch.
+  ///
+  /// In ar, this message translates to:
+  /// **'على تواصل'**
+  String get familyGroupInTouch;
+
+  /// No description provided for @familyGroupNoRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد محدّد'**
+  String get familyGroupNoRhythm;
+
+  /// No description provided for @familyHeroWaiting.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أحد ينتظر} =1{شخص واحد ينتظر سؤالك} =2{شخصان ينتظران سؤالك} few{{count} أشخاص ينتظرون سؤالك} many{{count} شخصًا ينتظرون سؤالك} other{{count} شخص ينتظرون سؤالك}}'**
+  String familyHeroWaiting(int count);
+
+  /// No description provided for @familyHeroAllGood.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجميع على تواصل'**
+  String get familyHeroAllGood;
+
+  /// No description provided for @familyHeroBlessing.
+  ///
+  /// In ar, this message translates to:
+  /// **'بارك الله في وصلك'**
+  String get familyHeroBlessing;
+
+  /// No description provided for @familyHeroInTouch.
+  ///
+  /// In ar, this message translates to:
+  /// **'{inTouch} من {total} على تواصل'**
+  String familyHeroInTouch(String inTouch, String total);
+
+  /// No description provided for @familyHeroNoRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّد كل كم تتواصل مع كل شخص لتظهر هنا مواعيدهم'**
+  String get familyHeroNoRhythm;
+
+  /// No description provided for @familyStatusOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{فات الموعد بيوم} =2{فات الموعد بيومين} few{فات الموعد بـ{count} أيام} many{فات الموعد بـ{count} يومًا} other{فات الموعد بـ{count} يوم}}'**
+  String familyStatusOverdue(int count);
+
+  /// No description provided for @familyStatusDueToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد السؤال اليوم'**
+  String get familyStatusDueToday;
+
+  /// No description provided for @familyStatusDueIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{الموعد غدًا} =2{الموعد بعد يومين} few{الموعد بعد {count} أيام} many{الموعد بعد {count} يومًا} other{الموعد بعد {count} يوم}}'**
+  String familyStatusDueIn(int count);
+
+  /// No description provided for @familyStatusNoRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get familyStatusNoRhythm;
+
+  /// No description provided for @familyLastNever.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُسجَّل تواصل بعد'**
+  String get familyLastNever;
+
+  /// No description provided for @familyLastDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{آخر تواصل اليوم} =1{آخر تواصل أمس} =2{آخر تواصل قبل يومين} few{آخر تواصل قبل {count} أيام} many{آخر تواصل قبل {count} يومًا} other{آخر تواصل قبل {count} يوم}}'**
+  String familyLastDaysAgo(int count);
+
+  /// No description provided for @familyInDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{اليوم} =1{غدًا} =2{بعد يومين} few{بعد {count} أيام} many{بعد {count} يومًا} other{بعد {count} يوم}}'**
+  String familyInDays(int count);
+
+  /// No description provided for @familyDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{اليوم} =1{أمس} =2{قبل يومين} few{قبل {count} أيام} many{قبل {count} يومًا} other{قبل {count} يوم}}'**
+  String familyDaysAgo(int count);
+
+  /// No description provided for @familyDaysCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} يوم} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String familyDaysCount(int count);
+
+  /// No description provided for @familyRhythmEvery.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوميًا} =2{كل يومين} few{كل {count} أيام} many{كل {count} يومًا} other{كل {count} يوم}}'**
+  String familyRhythmEvery(int count);
+
+  /// No description provided for @familyRhythmWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعيًا'**
+  String get familyRhythmWeekly;
+
+  /// No description provided for @familyRhythmBiweekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل أسبوعين'**
+  String get familyRhythmBiweekly;
+
+  /// No description provided for @familyRhythmMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهريًا'**
+  String get familyRhythmMonthly;
+
+  /// No description provided for @familyRhythmNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا إيقاع'**
+  String get familyRhythmNone;
+
+  /// No description provided for @familyRhythmCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد آخر'**
+  String get familyRhythmCustom;
+
+  /// No description provided for @familyRhythmCustomLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل كم يومًا؟'**
+  String get familyRhythmCustomLabel;
+
+  /// No description provided for @familyUnitDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم'**
+  String get familyUnitDays;
+
+  /// No description provided for @familyChannelCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكالمة'**
+  String get familyChannelCall;
+
+  /// No description provided for @familyChannelVisit.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيارة'**
+  String get familyChannelVisit;
+
+  /// No description provided for @familyChannelMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة'**
+  String get familyChannelMessage;
+
+  /// No description provided for @familyChannelOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get familyChannelOther;
+
+  /// No description provided for @familyContacted.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصلت'**
+  String get familyContacted;
+
+  /// No description provided for @familyContactedDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصلت… مع التفاصيل'**
+  String get familyContactedDetails;
+
+  /// No description provided for @familyCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال'**
+  String get familyCall;
+
+  /// No description provided for @familySms.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة نصية'**
+  String get familySms;
+
+  /// No description provided for @familyWhatsApp.
+  ///
+  /// In ar, this message translates to:
+  /// **'واتساب'**
+  String get familyWhatsApp;
+
+  /// No description provided for @familyLaunchFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح التطبيق على هذا الجهاز'**
+  String get familyLaunchFailed;
+
+  /// No description provided for @familyMoonShow.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهِر في المدار'**
+  String get familyMoonShow;
+
+  /// No description provided for @familyMoonHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفِ من المدار'**
+  String get familyMoonHide;
+
+  /// No description provided for @familyOpenProfile.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الملف'**
+  String get familyOpenProfile;
+
+  /// No description provided for @familyEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get familyEdit;
+
+  /// No description provided for @familyDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get familyDelete;
+
+  /// No description provided for @familyContactedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجِّل تواصلك مع {name}'**
+  String familyContactedToast(String name);
+
+  /// No description provided for @familyDeletedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف {name}'**
+  String familyDeletedToast(String name);
+
+  /// No description provided for @familySavedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ {name}'**
+  String familySavedToast(String name);
+
+  /// No description provided for @familyContactDeletedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف التواصل من السجل'**
+  String get familyContactDeletedToast;
+
+  /// No description provided for @familyContactUpdatedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'عُدِّل التواصل'**
+  String get familyContactUpdatedToast;
+
+  /// No description provided for @familyMoonShownToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف {name} إلى المدار'**
+  String familyMoonShownToast(String name);
+
+  /// No description provided for @familyMoonHiddenToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخفي {name} من المدار'**
+  String familyMoonHiddenToast(String name);
+
+  /// No description provided for @familyNewPerson.
+  ///
+  /// In ar, this message translates to:
+  /// **'شخص جديد'**
+  String get familyNewPerson;
+
+  /// No description provided for @familyNewPersonSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'من تحبّ أن تبقى قريبًا منه'**
+  String get familyNewPersonSubtitle;
+
+  /// No description provided for @familyEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل {name}'**
+  String familyEditTitle(String name);
+
+  /// No description provided for @familyFieldName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get familyFieldName;
+
+  /// No description provided for @familyFieldNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: أمي، أحمد'**
+  String get familyFieldNameHint;
+
+  /// No description provided for @familyFieldNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الاسم'**
+  String get familyFieldNameRequired;
+
+  /// No description provided for @familyFieldRelation.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلة القرابة'**
+  String get familyFieldRelation;
+
+  /// No description provided for @familyFieldRelationHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر أو اكتب'**
+  String get familyFieldRelationHint;
+
+  /// No description provided for @familyFieldRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل كم تتواصل؟'**
+  String get familyFieldRhythm;
+
+  /// No description provided for @familyFieldLastContact.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر تواصل'**
+  String get familyFieldLastContact;
+
+  /// No description provided for @familyFieldPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف'**
+  String get familyFieldPhone;
+
+  /// No description provided for @familyFieldPhoneHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع رمز الدولة ليعمل واتساب'**
+  String get familyFieldPhoneHint;
+
+  /// No description provided for @familyFieldBirthday.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الميلاد'**
+  String get familyFieldBirthday;
+
+  /// No description provided for @familyBirthdayYearUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'السنة غير معروفة'**
+  String get familyBirthdayYearUnknown;
+
+  /// No description provided for @familyBirthdayNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تاريخ'**
+  String get familyBirthdayNone;
+
+  /// No description provided for @familyFieldNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get familyFieldNotes;
+
+  /// No description provided for @familyFieldNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اهتمامات، مناسبات، أفكار هدايا…'**
+  String get familyFieldNotesHint;
+
+  /// No description provided for @familyFieldColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get familyFieldColor;
+
+  /// No description provided for @familyFieldMoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'قمر في المدار'**
+  String get familyFieldMoon;
+
+  /// No description provided for @familyFieldMoonHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يظهر قمرًا حول كوكب العائلة في الرئيسية'**
+  String get familyFieldMoonHint;
+
+  /// No description provided for @familyMoreDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل أكثر'**
+  String get familyMoreDetails;
+
+  /// No description provided for @familyFewerDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل أقل'**
+  String get familyFewerDetails;
+
+  /// No description provided for @familySave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get familySave;
+
+  /// No description provided for @familyWhenNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get familyWhenNow;
+
+  /// No description provided for @familyWhenToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get familyWhenToday;
+
+  /// No description provided for @familyWhenEarlierToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'في وقت سابق اليوم'**
+  String get familyWhenEarlierToday;
+
+  /// No description provided for @familyWhenYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get familyWhenYesterday;
+
+  /// No description provided for @familyWhenWeekAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل أسبوع'**
+  String get familyWhenWeekAgo;
+
+  /// No description provided for @familyWhenUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أذكر'**
+  String get familyWhenUnknown;
+
+  /// No description provided for @familyWhenPick.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ آخر'**
+  String get familyWhenPick;
+
+  /// No description provided for @familyContactedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصلت مع {name}'**
+  String familyContactedTitle(String name);
+
+  /// No description provided for @familyContactedSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل كيف ومتى — ولو بكلمة'**
+  String get familyContactedSubtitle;
+
+  /// No description provided for @familyEditContactTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التواصل'**
+  String get familyEditContactTitle;
+
+  /// No description provided for @familyFieldChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطريقة'**
+  String get familyFieldChannel;
+
+  /// No description provided for @familyFieldWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'متى'**
+  String get familyFieldWhen;
+
+  /// No description provided for @familyFieldNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get familyFieldNote;
+
+  /// No description provided for @familyFieldNoteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمّ تحدّثتما؟'**
+  String get familyFieldNoteHint;
+
+  /// No description provided for @familyFutureError.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن تسجيل تواصل في المستقبل'**
+  String get familyFutureError;
+
+  /// No description provided for @familyLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل'**
+  String get familyLog;
+
+  /// No description provided for @familyRhythmCardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاع الصلة'**
+  String get familyRhythmCardTitle;
+
+  /// No description provided for @familyStatAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط الفاصل'**
+  String get familyStatAverage;
+
+  /// No description provided for @familyStatOnRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الموعد'**
+  String get familyStatOnRhythm;
+
+  /// No description provided for @familyStatLongestGap.
+  ///
+  /// In ar, this message translates to:
+  /// **'أطول انقطاع'**
+  String get familyStatLongestGap;
+
+  /// No description provided for @familyStatRecent.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر ٩٠ يومًا'**
+  String get familyStatRecent;
+
+  /// No description provided for @familyStatTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا مرّات} =1{مرّة واحدة} =2{مرّتان} few{{count} مرّات} many{{count} مرّة} other{{count} مرّة}}'**
+  String familyStatTimes(int count);
+
+  /// No description provided for @familyVsRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيقاع: {rhythm}'**
+  String familyVsRhythm(String rhythm);
+
+  /// No description provided for @familyChartCaption.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواصل بين آخر مرّات التواصل'**
+  String get familyChartCaption;
+
+  /// No description provided for @familyStatsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد مرّتين أو ثلاث من التواصل تظهر هنا إحصاءاتك'**
+  String get familyStatsEmpty;
+
+  /// No description provided for @familyHistoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل التواصل'**
+  String get familyHistoryTitle;
+
+  /// No description provided for @familyHistoryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تواصل مسجّل بعد. اضغط «تواصلت» بعد كل مكالمة أو زيارة.'**
+  String get familyHistoryEmpty;
+
+  /// No description provided for @familyNotesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get familyNotesTitle;
+
+  /// No description provided for @familyNotesAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ملاحظة'**
+  String get familyNotesAdd;
+
+  /// No description provided for @familyBirthdayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكرى الميلاد'**
+  String get familyBirthdayTitle;
+
+  /// No description provided for @familyBirthdayTodayBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم!'**
+  String get familyBirthdayTodayBadge;
+
+  /// No description provided for @familyAgeTurning.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{عام واحد} =2{عامان} few{{count} أعوام} many{{count} عامًا} other{{count} عام}}'**
+  String familyAgeTurning(int count);
+
+  /// No description provided for @familyBirthdayUpcoming.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكرى ميلاد {name} {when}'**
+  String familyBirthdayUpcoming(String name, String when);
+
+  /// No description provided for @familyCardMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'و{count} غيرهم'**
+  String familyCardMore(String count);
+
+  /// No description provided for @familyCardEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أحبّتك لتبقى على صلة بهم'**
+  String get familyCardEmpty;
+
+  /// No description provided for @familyDigestTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص يومي لطيف'**
+  String get familyDigestTitle;
+
+  /// No description provided for @familyDigestHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار واحد في اليوم بمن حان موعد السؤال عنهم — لا إشعار لكل شخص'**
+  String get familyDigestHint;
+
+  /// No description provided for @familyDigestTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الملخّص'**
+  String get familyDigestTime;
+
+  /// No description provided for @familyBirthdayReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بذكرى الميلاد'**
+  String get familyBirthdayReminders;
+
+  /// No description provided for @familyBirthdayRemindersHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبلها بيوم وفي يومها'**
+  String get familyBirthdayRemindersHint;
+
+  /// No description provided for @familyBirthdayTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت تذكير الميلاد'**
+  String get familyBirthdayTime;
+
+  /// No description provided for @familyNotifyGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة والأحبّة'**
+  String get familyNotifyGroup;
+
+  /// No description provided for @familyNotifyChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكيرات الصلة'**
+  String get familyNotifyChannel;
+
+  /// No description provided for @familyNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص الصلة اليومي وتذكيرات ذكرى الميلاد'**
+  String get familyNotifyChannelDescription;
+
+  /// No description provided for @familyDigestNotifyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{شخص واحد ينتظر سؤالك اليوم} =2{شخصان ينتظران سؤالك اليوم} few{{count} أشخاص ينتظرون سؤالك اليوم} many{{count} شخصًا ينتظرون سؤالك اليوم} other{{count} شخص ينتظرون سؤالك اليوم}}'**
+  String familyDigestNotifyTitle(int count);
+
+  /// No description provided for @familyDigestNotifyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{names} — مكالمة قصيرة تكفي.'**
+  String familyDigestNotifyBody(String names);
+
+  /// No description provided for @familyBirthdayEveTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا ذكرى ميلاد {name}'**
+  String familyBirthdayEveTitle(String name);
+
+  /// No description provided for @familyBirthdayEveBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهّز كلمة طيبة أو هدية صغيرة.'**
+  String get familyBirthdayEveBody;
+
+  /// No description provided for @familyBirthdayDayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم ذكرى ميلاد {name}'**
+  String familyBirthdayDayTitle(String name);
+
+  /// No description provided for @familyBirthdayDayBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بادِر بالتهنئة.'**
+  String get familyBirthdayDayBody;
+
+  /// Separator between names in a list
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get familyListSep;
+
+  /// Separator between facts on one line
+  ///
+  /// In ar, this message translates to:
+  /// **' · '**
+  String get familyDot;
+
+  /// No description provided for @familyRelFather.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبي'**
+  String get familyRelFather;
+
+  /// No description provided for @familyRelMother.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمي'**
+  String get familyRelMother;
+
+  /// No description provided for @familyRelWife.
+  ///
+  /// In ar, this message translates to:
+  /// **'زوجتي'**
+  String get familyRelWife;
+
+  /// No description provided for @familyRelHusband.
+  ///
+  /// In ar, this message translates to:
+  /// **'زوجي'**
+  String get familyRelHusband;
+
+  /// No description provided for @familyRelSon.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابني'**
+  String get familyRelSon;
+
+  /// No description provided for @familyRelDaughter.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابنتي'**
+  String get familyRelDaughter;
+
+  /// No description provided for @familyRelBrother.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخي'**
+  String get familyRelBrother;
+
+  /// No description provided for @familyRelSister.
+  ///
+  /// In ar, this message translates to:
+  /// **'أختي'**
+  String get familyRelSister;
+
+  /// No description provided for @familyRelGrandfather.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدّي'**
+  String get familyRelGrandfather;
+
+  /// No description provided for @familyRelGrandmother.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدّتي'**
+  String get familyRelGrandmother;
+
+  /// No description provided for @familyRelUncle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمّي'**
+  String get familyRelUncle;
+
+  /// No description provided for @familyRelMaternalUncle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خالي'**
+  String get familyRelMaternalUncle;
+
+  /// No description provided for @familyRelAunt.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمّتي'**
+  String get familyRelAunt;
+
+  /// No description provided for @familyRelMaternalAunt.
+  ///
+  /// In ar, this message translates to:
+  /// **'خالتي'**
+  String get familyRelMaternalAunt;
+
+  /// No description provided for @familyRelInLaw.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيبي'**
+  String get familyRelInLaw;
+
+  /// No description provided for @familyRelRelative.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبي'**
+  String get familyRelRelative;
+
+  /// No description provided for @familyRelFriend.
+  ///
+  /// In ar, this message translates to:
+  /// **'صديقي'**
+  String get familyRelFriend;
+
+  /// No description provided for @familyRelColleague.
+  ///
+  /// In ar, this message translates to:
+  /// **'زميلي'**
+  String get familyRelColleague;
+
+  /// No description provided for @familyRelPartner.
+  ///
+  /// In ar, this message translates to:
+  /// **'شريكي'**
+  String get familyRelPartner;
+
+  /// No description provided for @familyRelNeighbour.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري'**
+  String get familyRelNeighbour;
+
+  /// No description provided for @familyRelTeacher.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلّمي'**
+  String get familyRelTeacher;
+
+  /// Title of the travel screen
+  ///
+  /// In ar, this message translates to:
+  /// **'السفر'**
+  String get travelTitle;
+
+  /// No description provided for @travelTabTrips.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات'**
+  String get travelTabTrips;
+
+  /// No description provided for @travelTabDocuments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوثائق'**
+  String get travelTabDocuments;
+
+  /// No description provided for @travelTabTemplates.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم التجهيز'**
+  String get travelTabTemplates;
+
+  /// No description provided for @travelAddTrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلة جديدة'**
+  String get travelAddTrip;
+
+  /// No description provided for @travelAddDocument.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثيقة جديدة'**
+  String get travelAddDocument;
+
+  /// No description provided for @travelAddTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة جديدة'**
+  String get travelAddTemplate;
+
+  /// No description provided for @travelSectionCurrent.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الطريق الآن'**
+  String get travelSectionCurrent;
+
+  /// No description provided for @travelSectionUpcoming.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلات قادمة'**
+  String get travelSectionUpcoming;
+
+  /// No description provided for @travelSectionPast.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلات سابقة'**
+  String get travelSectionPast;
+
+  /// No description provided for @travelTripsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا رحلات بعد'**
+  String get travelTripsEmptyTitle;
+
+  /// No description provided for @travelTripsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطّط لرحلتك القادمة: الوجهة والمواعيد وقائمة التجهيز، وأوقات الصلاة والقبلة هناك.'**
+  String get travelTripsEmptyBody;
+
+  /// No description provided for @travelTripsEmptyExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: عمرة في الشتاء، أو رحلة عمل قصيرة'**
+  String get travelTripsEmptyExample;
+
+  /// No description provided for @travelShowPast.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الرحلات السابقة ({n})'**
+  String travelShowPast(String n);
+
+  /// No description provided for @travelHidePast.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء الرحلات السابقة'**
+  String get travelHidePast;
+
+  /// No description provided for @travelCountdownToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'السفر اليوم'**
+  String get travelCountdownToday;
+
+  /// No description provided for @travelCountdownTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'السفر غدًا'**
+  String get travelCountdownTomorrow;
+
+  /// No description provided for @travelCountdownIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بعد يوم واحد} =2{بعد يومين} few{بعد {n} أيام} many{بعد {n} يومًا} other{بعد {n} يوم}}'**
+  String travelCountdownIn(int count, String n);
+
+  /// No description provided for @travelCountdownDayOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {day} من {total}'**
+  String travelCountdownDayOf(String day, String total);
+
+  /// No description provided for @travelCountdownDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {day}'**
+  String travelCountdownDay(String day);
+
+  /// No description provided for @travelCountdownEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{انتهت أمس} =2{انتهت قبل يومين} few{انتهت قبل {n} أيام} many{انتهت قبل {n} يومًا} other{انتهت قبل {n} يوم}}'**
+  String travelCountdownEnded(int count, String n);
+
+  /// No description provided for @travelCountdownFinished.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت'**
+  String get travelCountdownFinished;
+
+  /// No description provided for @travelCountdownUndated.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد بعد'**
+  String get travelCountdownUndated;
+
+  /// No description provided for @travelDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم واحد} =2{يومان} few{{n} أيام} many{{n} يومًا} other{{n} يوم}}'**
+  String travelDays(int count, String n);
+
+  /// No description provided for @travelOpenEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد عودة'**
+  String get travelOpenEnded;
+
+  /// No description provided for @travelStatusPlanned.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطّط لها'**
+  String get travelStatusPlanned;
+
+  /// No description provided for @travelStatusActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارية'**
+  String get travelStatusActive;
+
+  /// No description provided for @travelStatusDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتهية'**
+  String get travelStatusDone;
+
+  /// No description provided for @travelStatusAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب التواريخ'**
+  String get travelStatusAuto;
+
+  /// No description provided for @travelStatusAutoHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتغيّر الحالة وحدها مع التواريخ: الآن «{status}»'**
+  String travelStatusAutoHint(String status);
+
+  /// No description provided for @travelStatusManualHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'حالة يدوية لا تتبع التواريخ'**
+  String get travelStatusManualHint;
+
+  /// No description provided for @travelMarkDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنهِ الرحلة'**
+  String get travelMarkDone;
+
+  /// No description provided for @travelFollowDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتبع التواريخ'**
+  String get travelFollowDates;
+
+  /// No description provided for @travelSheetNewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلة جديدة'**
+  String get travelSheetNewTitle;
+
+  /// No description provided for @travelSheetEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الرحلة'**
+  String get travelSheetEditTitle;
+
+  /// No description provided for @travelSheetSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجهة والمواعيد، وأوقات الصلاة هناك'**
+  String get travelSheetSubtitle;
+
+  /// No description provided for @travelFieldDestination.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجهة'**
+  String get travelFieldDestination;
+
+  /// No description provided for @travelFieldDestinationHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث عن مدينة أو اكتب أي وجهة'**
+  String get travelFieldDestinationHint;
+
+  /// No description provided for @travelDestinationRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الوجهة'**
+  String get travelDestinationRequired;
+
+  /// No description provided for @travelDestinationFree.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم «{name}» كما كتبتها'**
+  String travelDestinationFree(String name);
+
+  /// No description provided for @travelDestinationFreeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا أوقات صلاة ولا قبلة؛ اختر مدينة من القائمة لتظهر'**
+  String get travelDestinationFreeHint;
+
+  /// No description provided for @travelDestinationChange.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير'**
+  String get travelDestinationChange;
+
+  /// No description provided for @travelDestinationCity.
+  ///
+  /// In ar, this message translates to:
+  /// **'{zone}، القبلة وأوقات الصلاة متاحة'**
+  String travelDestinationCity(String zone);
+
+  /// No description provided for @travelFieldStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'المغادرة'**
+  String get travelFieldStart;
+
+  /// No description provided for @travelFieldEnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة'**
+  String get travelFieldEnd;
+
+  /// No description provided for @travelFieldEndHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتركها فارغة إن لم تحدّد العودة بعد'**
+  String get travelFieldEndHint;
+
+  /// No description provided for @travelEndBeforeStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة قبل المغادرة'**
+  String get travelEndBeforeStart;
+
+  /// No description provided for @travelFieldStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get travelFieldStatus;
+
+  /// No description provided for @travelFieldColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get travelFieldColor;
+
+  /// No description provided for @travelFieldNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get travelFieldNotes;
+
+  /// No description provided for @travelFieldNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحجوزات، العناوين، ما يجب تذكّره…'**
+  String get travelFieldNotesHint;
+
+  /// No description provided for @travelSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get travelSave;
+
+  /// No description provided for @travelCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف الرحلة'**
+  String get travelCreate;
+
+  /// No description provided for @travelNoDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُحدَّد'**
+  String get travelNoDate;
+
+  /// No description provided for @travelLocalTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة هناك'**
+  String get travelLocalTime;
+
+  /// No description provided for @travelTimeAhead.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسبق هاتفك بـ{duration}'**
+  String travelTimeAhead(String duration);
+
+  /// No description provided for @travelTimeBehind.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتأخر عن هاتفك {duration}'**
+  String travelTimeBehind(String duration);
+
+  /// No description provided for @travelTimeSame.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتوقيت هاتفك نفسه'**
+  String get travelTimeSame;
+
+  /// No description provided for @travelHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ساعة} =2{ساعتين} few{{n} ساعات} many{{n} ساعة} other{{n} ساعة}}'**
+  String travelHours(int count, String n);
+
+  /// No description provided for @travelHoursMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hm} ساعة'**
+  String travelHoursMinutes(String hm);
+
+  /// No description provided for @travelTripDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد'**
+  String get travelTripDates;
+
+  /// No description provided for @travelPackingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة التجهيز'**
+  String get travelPackingTitle;
+
+  /// No description provided for @travelPackedCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{packed} من {total}'**
+  String travelPackedCount(String packed, String total);
+
+  /// No description provided for @travelPackingEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء في القائمة بعد'**
+  String get travelPackingEmptyTitle;
+
+  /// No description provided for @travelPackingEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ما ستحتاجه، أو ابدأ من قائمة جاهزة.'**
+  String get travelPackingEmptyBody;
+
+  /// No description provided for @travelPackingAllDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت الحقيبة، سفرًا موفّقًا'**
+  String get travelPackingAllDone;
+
+  /// No description provided for @travelPackingRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{بقي غرض واحد} =2{بقي غرضان} few{بقيت {n} أغراض} many{بقي {n} غرضًا} other{بقي {n} غرض}}'**
+  String travelPackingRemaining(int count, String n);
+
+  /// No description provided for @travelAddItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف غرضًا'**
+  String get travelAddItem;
+
+  /// No description provided for @travelAddItemHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: شاحن الهاتف'**
+  String get travelAddItemHint;
+
+  /// No description provided for @travelAddItemTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف إلى «{category}»…'**
+  String travelAddItemTo(String category);
+
+  /// No description provided for @travelAddItemIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى: {category}'**
+  String travelAddItemIn(String category);
+
+  /// No description provided for @travelFromTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'من قائمة جاهزة'**
+  String get travelFromTemplate;
+
+  /// No description provided for @travelSaveAsTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظها قائمة جاهزة'**
+  String get travelSaveAsTemplate;
+
+  /// No description provided for @travelUnpackAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفرغ الحقيبة'**
+  String get travelUnpackAll;
+
+  /// No description provided for @travelTemplatesApplied.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{كل الأغراض موجودة في القائمة أصلًا} =1{أُضيف غرض واحد} =2{أُضيف غرضان} few{أُضيفت {n} أغراض} many{أُضيف {n} غرضًا} other{أُضيف {n} غرض}}'**
+  String travelTemplatesApplied(int count, String n);
+
+  /// No description provided for @travelPickTemplatesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر قوائم جاهزة'**
+  String get travelPickTemplatesTitle;
+
+  /// No description provided for @travelPickTemplatesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُدمج القوائم دون تكرار ما في حقيبتك'**
+  String get travelPickTemplatesHint;
+
+  /// No description provided for @travelPickTemplatesAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف إلى الرحلة'**
+  String get travelPickTemplatesAdd;
+
+  /// No description provided for @travelTemplateNameTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظها قائمة جاهزة'**
+  String get travelTemplateNameTitle;
+
+  /// No description provided for @travelTemplateSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت «{name}»'**
+  String travelTemplateSaved(String name);
+
+  /// No description provided for @travelItemNewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'غرض جديد'**
+  String get travelItemNewTitle;
+
+  /// No description provided for @travelItemEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الغرض'**
+  String get travelItemEditTitle;
+
+  /// No description provided for @travelFieldItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'الغرض'**
+  String get travelFieldItem;
+
+  /// No description provided for @travelItemRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الغرض'**
+  String get travelItemRequired;
+
+  /// No description provided for @travelFieldCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get travelFieldCategory;
+
+  /// No description provided for @travelMoveToCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقل إلى فئة'**
+  String get travelMoveToCategory;
+
+  /// No description provided for @travelItemPacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الحقيبة'**
+  String get travelItemPacked;
+
+  /// No description provided for @travelItemNotPacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُحزم بعد'**
+  String get travelItemNotPacked;
+
+  /// No description provided for @travelPack.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الحقيبة'**
+  String get travelPack;
+
+  /// No description provided for @travelUnpack.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرِجه'**
+  String get travelUnpack;
+
+  /// No description provided for @travelCatDocuments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأوراق والمال'**
+  String get travelCatDocuments;
+
+  /// No description provided for @travelCatClothes.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملابس'**
+  String get travelCatClothes;
+
+  /// No description provided for @travelCatToiletries.
+  ///
+  /// In ar, this message translates to:
+  /// **'العناية الشخصية'**
+  String get travelCatToiletries;
+
+  /// No description provided for @travelCatHealth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة والأدوية'**
+  String get travelCatHealth;
+
+  /// No description provided for @travelCatElectronics.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجهزة والشواحن'**
+  String get travelCatElectronics;
+
+  /// No description provided for @travelCatPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العبادة'**
+  String get travelCatPrayer;
+
+  /// No description provided for @travelCatMisc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أغراض أخرى'**
+  String get travelCatMisc;
+
+  /// No description provided for @travelCatNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'فئة جديدة'**
+  String get travelCatNew;
+
+  /// No description provided for @travelCatNewHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الفئة'**
+  String get travelCatNewHint;
+
+  /// No description provided for @travelPrayerTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة في {place}'**
+  String travelPrayerTitle(String place);
+
+  /// No description provided for @travelPrayerMethodNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطريقة الحساب في إعداداتك، على توقيت الوجهة'**
+  String get travelPrayerMethodNote;
+
+  /// No description provided for @travelPrayerNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {duration}'**
+  String travelPrayerNext(String prayer, String duration);
+
+  /// No description provided for @travelPrayerUseHere.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعتمدها موقعًا لصلاتي أثناء السفر'**
+  String get travelPrayerUseHere;
+
+  /// No description provided for @travelPrayerIsLocation.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه وجهة صلاتك الآن'**
+  String get travelPrayerIsLocation;
+
+  /// No description provided for @travelPrayerUsed.
+  ///
+  /// In ar, this message translates to:
+  /// **'صارت أوقات صلاتك على توقيت {place}'**
+  String travelPrayerUsed(String place);
+
+  /// No description provided for @travelPrayerNoPlace.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الوجهة من قائمة المدن لتظهر أوقات الصلاة والقبلة هناك.'**
+  String get travelPrayerNoPlace;
+
+  /// No description provided for @travelPrayerPickCity.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر المدينة'**
+  String get travelPrayerPickCity;
+
+  /// No description provided for @travelPrayerToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get travelPrayerToday;
+
+  /// No description provided for @travelQiblaTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القبلة من هناك'**
+  String get travelQiblaTitle;
+
+  /// No description provided for @travelQiblaBearing.
+  ///
+  /// In ar, this message translates to:
+  /// **'{bearing} من الشمال'**
+  String travelQiblaBearing(String bearing);
+
+  /// No description provided for @travelQiblaDistance.
+  ///
+  /// In ar, this message translates to:
+  /// **'{distance} إلى الكعبة'**
+  String travelQiblaDistance(String distance);
+
+  /// No description provided for @travelQiblaAtKaaba.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنت عند الكعبة'**
+  String get travelQiblaAtKaaba;
+
+  /// No description provided for @travelQiblaSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه القبلة {bearing}'**
+  String travelQiblaSemantics(String bearing);
+
+  /// No description provided for @travelWarnBeforeTrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'{doc}: الصلاحية تنتهي قبل السفر ({date})'**
+  String travelWarnBeforeTrip(String doc, String date);
+
+  /// No description provided for @travelWarnDuringTrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'{doc}: الصلاحية تنتهي أثناء الرحلة ({date})'**
+  String travelWarnDuringTrip(String doc, String date);
+
+  /// No description provided for @travelWarnValidity.
+  ///
+  /// In ar, this message translates to:
+  /// **'{doc}: تنتهي الصلاحية بعد عودتك بأقل من {months} أشهر، ودول كثيرة تشترط مدة أطول'**
+  String travelWarnValidity(String doc, String months);
+
+  /// No description provided for @travelWarnTrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلة {destination}'**
+  String travelWarnTrip(String destination);
+
+  /// No description provided for @travelDocsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا وثائق بعد'**
+  String get travelDocsEmptyTitle;
+
+  /// No description provided for @travelDocsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل الجوازات والتأشيرات والرخص ليذكّرك مدار قبل انتهائها، وينبّهك إن انتهت قبل رحلة.'**
+  String get travelDocsEmptyBody;
+
+  /// No description provided for @travelDocNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثيقة جديدة'**
+  String get travelDocNew;
+
+  /// No description provided for @travelDocEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الوثيقة'**
+  String get travelDocEdit;
+
+  /// No description provided for @travelDocSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل الانتهاء بالمدة التي تختارها'**
+  String get travelDocSubtitle;
+
+  /// No description provided for @travelDocName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوثيقة'**
+  String get travelDocName;
+
+  /// No description provided for @travelDocNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'جواز السفر، تأشيرة، رخصة قيادة…'**
+  String get travelDocNameHint;
+
+  /// No description provided for @travelDocNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسم الوثيقة'**
+  String get travelDocNameRequired;
+
+  /// No description provided for @travelDocHolder.
+  ///
+  /// In ar, this message translates to:
+  /// **'صاحبها'**
+  String get travelDocHolder;
+
+  /// No description provided for @travelDocHolderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لمن هذه الوثيقة؟'**
+  String get travelDocHolderHint;
+
+  /// No description provided for @travelDocNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم'**
+  String get travelDocNumber;
+
+  /// No description provided for @travelDocExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الانتهاء'**
+  String get travelDocExpiry;
+
+  /// No description provided for @travelDocRemind.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني'**
+  String get travelDocRemind;
+
+  /// No description provided for @travelDocNumberShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم {last}'**
+  String travelDocNumberShort(String last);
+
+  /// No description provided for @travelRemindOnDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم الانتهاء فقط'**
+  String get travelRemindOnDay;
+
+  /// No description provided for @travelRemindWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل أسبوع'**
+  String get travelRemindWeek;
+
+  /// No description provided for @travelRemindTwoWeeks.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل أسبوعين'**
+  String get travelRemindTwoWeeks;
+
+  /// No description provided for @travelRemindMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل شهر'**
+  String get travelRemindMonth;
+
+  /// No description provided for @travelRemindTwoMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل شهرين'**
+  String get travelRemindTwoMonths;
+
+  /// No description provided for @travelRemindMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل {n} أشهر'**
+  String travelRemindMonths(String n);
+
+  /// No description provided for @travelRemindDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{يوم الانتهاء فقط} =1{قبل يوم} =2{قبل يومين} few{قبل {n} أيام} many{قبل {n} يومًا} other{قبل {n} يوم}}'**
+  String travelRemindDays(int count, String n);
+
+  /// No description provided for @travelRemindSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير: {when}'**
+  String travelRemindSummary(String when);
+
+  /// No description provided for @travelExpiresToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتهاء اليوم'**
+  String get travelExpiresToday;
+
+  /// No description provided for @travelExpiresInDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{الانتهاء غدًا} =2{الانتهاء بعد يومين} few{الانتهاء بعد {n} أيام} many{الانتهاء بعد {n} يومًا} other{الانتهاء بعد {n} يوم}}'**
+  String travelExpiresInDays(int count, String n);
+
+  /// No description provided for @travelExpiresInMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{الانتهاء بعد شهر} =2{الانتهاء بعد شهرين} few{الانتهاء بعد {n} أشهر} many{الانتهاء بعد {n} شهرًا} other{الانتهاء بعد {n} شهر}}'**
+  String travelExpiresInMonths(int count, String n);
+
+  /// No description provided for @travelExpiresInYears.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{الانتهاء بعد سنة} =2{الانتهاء بعد سنتين} few{الانتهاء بعد {n} سنوات} many{الانتهاء بعد {n} سنة} other{الانتهاء بعد {n} سنة}}'**
+  String travelExpiresInYears(int count, String n);
+
+  /// No description provided for @travelExpiredAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{انتهت الصلاحية أمس} =2{انتهت الصلاحية منذ يومين} few{انتهت الصلاحية منذ {n} أيام} many{انتهت الصلاحية منذ {n} يومًا} other{انتهت الصلاحية منذ {n} يوم}}'**
+  String travelExpiredAgo(int count, String n);
+
+  /// No description provided for @travelExpiredOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت الصلاحية في {date}'**
+  String travelExpiredOn(String date);
+
+  /// No description provided for @travelNoExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تاريخ انتهاء'**
+  String get travelNoExpiry;
+
+  /// No description provided for @travelDocKindPassport.
+  ///
+  /// In ar, this message translates to:
+  /// **'جواز سفر'**
+  String get travelDocKindPassport;
+
+  /// No description provided for @travelDocKindVisa.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأشيرة'**
+  String get travelDocKindVisa;
+
+  /// No description provided for @travelDocKindLicence.
+  ///
+  /// In ar, this message translates to:
+  /// **'رخصة'**
+  String get travelDocKindLicence;
+
+  /// No description provided for @travelDocKindId.
+  ///
+  /// In ar, this message translates to:
+  /// **'هوية'**
+  String get travelDocKindId;
+
+  /// No description provided for @travelDocKindInsurance.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأمين'**
+  String get travelDocKindInsurance;
+
+  /// No description provided for @travelDocKindOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثيقة'**
+  String get travelDocKindOther;
+
+  /// No description provided for @travelDocAffects.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمسّ رحلة {destination}'**
+  String travelDocAffects(String destination);
+
+  /// No description provided for @travelNoticeGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'السفر'**
+  String get travelNoticeGroup;
+
+  /// No description provided for @travelNoticeChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء الوثائق'**
+  String get travelNoticeChannel;
+
+  /// No description provided for @travelNoticeChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل انتهاء الجوازات والتأشيرات والرخص'**
+  String get travelNoticeChannelDescription;
+
+  /// No description provided for @travelNoticeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{doc}: {when}'**
+  String travelNoticeTitle(String doc, String when);
+
+  /// No description provided for @travelNoticeAheadBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الانتهاء {date}. ابدأ التجديد مبكرًا حتى لا تتعطّل رحلاتك.'**
+  String travelNoticeAheadBody(String date);
+
+  /// No description provided for @travelNoticeOnDayBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنتهي صلاحيتها اليوم. جدّدها قبل سفرك القادم.'**
+  String get travelNoticeOnDayBody;
+
+  /// No description provided for @travelDocWithHolder.
+  ///
+  /// In ar, this message translates to:
+  /// **'{doc} ({holder})'**
+  String travelDocWithHolder(String doc, String holder);
+
+  /// No description provided for @travelTemplatesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم التجهيز الجاهزة'**
+  String get travelTemplatesTitle;
+
+  /// No description provided for @travelTemplatesEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا قوائم جاهزة بعد'**
+  String get travelTemplatesEmptyTitle;
+
+  /// No description provided for @travelTemplatesEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة الجاهزة تملأ حقيبة أي رحلة بلمسة، وتحفظ ما تنساه عادةً.'**
+  String get travelTemplatesEmptyBody;
+
+  /// No description provided for @travelTemplatesStarter.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف قوائم مقترحة'**
+  String get travelTemplatesStarter;
+
+  /// No description provided for @travelTemplatesStarterAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت القوائم المقترحة، عدّلها كما تشاء'**
+  String get travelTemplatesStarterAdded;
+
+  /// No description provided for @travelTemplateItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أغراض} =1{غرض واحد} =2{غرضان} few{{n} أغراض} many{{n} غرضًا} other{{n} غرض}}'**
+  String travelTemplateItems(int count, String n);
+
+  /// No description provided for @travelTemplateNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة جديدة'**
+  String get travelTemplateNew;
+
+  /// No description provided for @travelTemplateRename.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التسمية'**
+  String get travelTemplateRename;
+
+  /// No description provided for @travelTemplateName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get travelTemplateName;
+
+  /// No description provided for @travelTemplateNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: رحلة عمل'**
+  String get travelTemplateNameHint;
+
+  /// No description provided for @travelTemplateNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا'**
+  String get travelTemplateNameRequired;
+
+  /// No description provided for @travelTemplateEmptyItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أغراض هذه القائمة، ورتّبها بالسحب.'**
+  String get travelTemplateEmptyItems;
+
+  /// No description provided for @travelTemplateCopy.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} (نسخة)'**
+  String travelTemplateCopy(String name);
+
+  /// No description provided for @travelStarterEssentials.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأساسيات'**
+  String get travelStarterEssentials;
+
+  /// No description provided for @travelStarterBusiness.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلة عمل'**
+  String get travelStarterBusiness;
+
+  /// No description provided for @travelStarterUmrah.
+  ///
+  /// In ar, this message translates to:
+  /// **'العمرة'**
+  String get travelStarterUmrah;
+
+  /// No description provided for @travelStarterWinter.
+  ///
+  /// In ar, this message translates to:
+  /// **'سفر الشتاء'**
+  String get travelStarterWinter;
+
+  /// No description provided for @travelSeedPassport.
+  ///
+  /// In ar, this message translates to:
+  /// **'جواز السفر'**
+  String get travelSeedPassport;
+
+  /// No description provided for @travelSeedTickets.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذاكر والحجوزات'**
+  String get travelSeedTickets;
+
+  /// No description provided for @travelSeedWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة والبطاقات'**
+  String get travelSeedWallet;
+
+  /// No description provided for @travelSeedCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقود بعملة البلد'**
+  String get travelSeedCash;
+
+  /// No description provided for @travelSeedClothes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملابس لأيام الرحلة'**
+  String get travelSeedClothes;
+
+  /// No description provided for @travelSeedSleepwear.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملابس النوم'**
+  String get travelSeedSleepwear;
+
+  /// No description provided for @travelSeedToothbrush.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرشاة ومعجون الأسنان'**
+  String get travelSeedToothbrush;
+
+  /// No description provided for @travelSeedMiswak.
+  ///
+  /// In ar, this message translates to:
+  /// **'سواك'**
+  String get travelSeedMiswak;
+
+  /// No description provided for @travelSeedDeodorant.
+  ///
+  /// In ar, this message translates to:
+  /// **'مزيل العرق'**
+  String get travelSeedDeodorant;
+
+  /// No description provided for @travelSeedMeds.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدويتي المعتادة'**
+  String get travelSeedMeds;
+
+  /// No description provided for @travelSeedFirstAid.
+  ///
+  /// In ar, this message translates to:
+  /// **'إسعافات أولية'**
+  String get travelSeedFirstAid;
+
+  /// No description provided for @travelSeedCharger.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاحن الهاتف'**
+  String get travelSeedCharger;
+
+  /// No description provided for @travelSeedPowerBank.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطارية متنقلة'**
+  String get travelSeedPowerBank;
+
+  /// No description provided for @travelSeedAdapter.
+  ///
+  /// In ar, this message translates to:
+  /// **'محوّل كهرباء'**
+  String get travelSeedAdapter;
+
+  /// No description provided for @travelSeedPrayerMat.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجادة صلاة للسفر'**
+  String get travelSeedPrayerMat;
+
+  /// No description provided for @travelSeedQuran.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصحف الجيب'**
+  String get travelSeedQuran;
+
+  /// No description provided for @travelSeedLaptop.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحاسوب وشاحنه'**
+  String get travelSeedLaptop;
+
+  /// No description provided for @travelSeedFormal.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملابس رسمية'**
+  String get travelSeedFormal;
+
+  /// No description provided for @travelSeedCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقات العمل'**
+  String get travelSeedCards;
+
+  /// No description provided for @travelSeedNotebook.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفتر وقلم'**
+  String get travelSeedNotebook;
+
+  /// No description provided for @travelSeedIhram.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملابس الإحرام'**
+  String get travelSeedIhram;
+
+  /// No description provided for @travelSeedIhramBelt.
+  ///
+  /// In ar, this message translates to:
+  /// **'حزام الإحرام'**
+  String get travelSeedIhramBelt;
+
+  /// No description provided for @travelSeedUnscented.
+  ///
+  /// In ar, this message translates to:
+  /// **'صابون بلا عطر'**
+  String get travelSeedUnscented;
+
+  /// No description provided for @travelSeedSandals.
+  ///
+  /// In ar, this message translates to:
+  /// **'نعال مريحة'**
+  String get travelSeedSandals;
+
+  /// No description provided for @travelSeedShoeBag.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيس للأحذية'**
+  String get travelSeedShoeBag;
+
+  /// No description provided for @travelSeedUmbrella.
+  ///
+  /// In ar, this message translates to:
+  /// **'مظلة للشمس'**
+  String get travelSeedUmbrella;
+
+  /// No description provided for @travelSeedDuas.
+  ///
+  /// In ar, this message translates to:
+  /// **'كتيّب الأدعية'**
+  String get travelSeedDuas;
+
+  /// No description provided for @travelSeedWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارورة ماء'**
+  String get travelSeedWater;
+
+  /// No description provided for @travelSeedPermit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصريح العمرة'**
+  String get travelSeedPermit;
+
+  /// No description provided for @travelSeedCoat.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطف ثقيل'**
+  String get travelSeedCoat;
+
+  /// No description provided for @travelSeedScarf.
+  ///
+  /// In ar, this message translates to:
+  /// **'وشاح وقفازات'**
+  String get travelSeedScarf;
+
+  /// No description provided for @travelSeedThermal.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملابس حرارية'**
+  String get travelSeedThermal;
+
+  /// No description provided for @travelSeedLipBalm.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرطّب شفاه'**
+  String get travelSeedLipBalm;
+
+  /// No description provided for @travelCardNoTrips.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا رحلات قادمة'**
+  String get travelCardNoTrips;
+
+  /// No description provided for @travelCardPacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'{packed}/{total} في الحقيبة'**
+  String travelCardPacked(String packed, String total);
+
+  /// No description provided for @travelCardNoPacking.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تبدأ قائمة التجهيز'**
+  String get travelCardNoPacking;
+
+  /// Hub card line under the trip under way: the next trip and its countdown
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلة التالية: {destination} · {countdown}'**
+  String travelCardNext(String destination, String countdown);
+
+  /// No description provided for @travelCardDocsAttention.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وثيقة تحتاج انتباهك} =2{وثيقتان تحتاجان انتباهك} few{{n} وثائق تحتاج انتباهك} many{{n} وثيقة تحتاج انتباهك} other{{n} وثيقة تحتاج انتباهك}}'**
+  String travelCardDocsAttention(int count, String n);
+
+  /// No description provided for @travelUndoTripDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الرحلة'**
+  String get travelUndoTripDeleted;
+
+  /// No description provided for @travelUndoTripDuplicated.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت الرحلة'**
+  String get travelUndoTripDuplicated;
+
+  /// No description provided for @travelUndoItemDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الغرض'**
+  String get travelUndoItemDeleted;
+
+  /// No description provided for @travelUndoPacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الحقيبة'**
+  String get travelUndoPacked;
+
+  /// No description provided for @travelUndoUnpacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخرج من الحقيبة'**
+  String get travelUndoUnpacked;
+
+  /// No description provided for @travelUndoMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُقل إلى {category}'**
+  String travelUndoMoved(String category);
+
+  /// No description provided for @travelUndoDocDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الوثيقة'**
+  String get travelUndoDocDeleted;
+
+  /// No description provided for @travelUndoDocDuplicated.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت الوثيقة'**
+  String get travelUndoDocDuplicated;
+
+  /// No description provided for @travelUndoTemplateDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت القائمة'**
+  String get travelUndoTemplateDeleted;
+
+  /// No description provided for @travelUndoTemplateDuplicated.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت القائمة'**
+  String get travelUndoTemplateDuplicated;
+
+  /// No description provided for @travelUndoStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلة الآن: {status}'**
+  String travelUndoStatus(String status);
+
+  /// No description provided for @travelUndoUnpackedAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُفرغت الحقيبة'**
+  String get travelUndoUnpackedAll;
+
+  /// No description provided for @travelUndoSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت التعديلات'**
+  String get travelUndoSaved;
+
+  /// No description provided for @travelUndoReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير: {when}'**
+  String travelUndoReminder(String when);
+
+  /// No description provided for @travelOpenTrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح رحلة {destination}'**
+  String travelOpenTrip(String destination);
+
+  /// No description provided for @travelMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزيد'**
+  String get travelMore;
+
+  /// No description provided for @travelEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get travelEdit;
+
+  /// No description provided for @travelTripNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تعد هذه الرحلة موجودة'**
+  String get travelTripNotFound;
+
+  /// Growth screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف التعلّم'**
+  String get growthTitle;
+
+  /// Goal sheet title / add button
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف جديد'**
+  String get growthNewGoal;
+
+  /// Goal sheet title when editing
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الهدف'**
+  String get growthEditGoal;
+
+  /// Empty state title
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ رحلة تعلّم'**
+  String get growthEmptyTitle;
+
+  /// Empty state body with generic examples
+  ///
+  /// In ar, this message translates to:
+  /// **'ضع هدفًا تقيسه وسجّل تقدّمك أولًا بأول: كقراءة كتاب من ثلاثمئة صفحة، أو إنهاء دورة من اثني عشر درسًا.'**
+  String get growthEmptyBody;
+
+  /// Empty state button
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أول هدف'**
+  String get growthEmptyAction;
+
+  /// Section: active goals
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد التعلّم'**
+  String get growthSectionActive;
+
+  /// Section: completed goals
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف مكتملة'**
+  String get growthSectionCompleted;
+
+  /// Section: paused goals
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقفة مؤقتًا'**
+  String get growthSectionPaused;
+
+  /// Hint under the active list
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب المقبض لترتيب أهدافك'**
+  String get growthSectionHint;
+
+  /// Overview panel title
+  ///
+  /// In ar, this message translates to:
+  /// **'مسيرة التعلّم'**
+  String get growthOverviewTitle;
+
+  /// Number of active goals
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أهداف نشطة} =1{هدف نشط واحد} =2{هدفان نشطان} few{{count} أهداف نشطة} many{{count} هدفًا نشطًا} other{{count} هدف نشط}}'**
+  String growthActiveGoals(int count);
+
+  /// Number of completed goals
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أهداف مكتملة} =1{هدف مكتمل} =2{هدفان مكتملان} few{{count} أهداف مكتملة} many{{count} هدفًا مكتملًا} other{{count} هدف مكتمل}}'**
+  String growthCompletedGoals(int count);
+
+  /// Overview: goals with a log today (pre-formatted numbers)
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلتَ اليوم في {done} من {total}'**
+  String growthLoggedToday(String done, String total);
+
+  /// Overview: no log today
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تسجّل شيئًا اليوم بعد'**
+  String get growthNothingToday;
+
+  /// Overview ring label
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط'**
+  String get growthAverageLabel;
+
+  /// Label of the 7-day activity strip
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام السبعة الأخيرة'**
+  String get growthLastSevenDays;
+
+  /// Semantics of a lit day in the strip
+  ///
+  /// In ar, this message translates to:
+  /// **'{day}: سُجّل تقدّم'**
+  String growthDayActive(String day);
+
+  /// Semantics of an unlit day in the strip
+  ///
+  /// In ar, this message translates to:
+  /// **'{day}: لا تقدّم'**
+  String growthDayIdle(String day);
+
+  /// Stat label: consecutive days
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة'**
+  String get growthStreakLabel;
+
+  /// Streak length
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا سلسلة بعد} =1{يوم واحد متتالٍ} =2{يومان متتاليان} few{{count} أيام متتالية} many{{count} يومًا متتاليًا} other{{count} يوم متتالٍ}}'**
+  String growthStreakDays(int count);
+
+  /// Longest streak caption
+  ///
+  /// In ar, this message translates to:
+  /// **'الأطول: {days}'**
+  String growthBestStreak(String days);
+
+  /// Streak not yet extended today
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل اليوم لتحافظ على سلسلتك'**
+  String get growthStreakAtRisk;
+
+  /// Stat label: days with any log
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام النشاط'**
+  String get growthActiveDaysLabel;
+
+  /// A number of days
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} يوم} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String growthDays(int count);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحات'**
+  String get growthUnitPagesName;
+
+  /// Whole pages
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} صفحة} =1{صفحة واحدة} =2{صفحتان} few{{count} صفحات} many{{count} صفحة} other{{count} صفحة}}'**
+  String growthUnitPages(int count);
+
+  /// Fractional pages
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} صفحة'**
+  String growthUnitPagesDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'دروس'**
+  String get growthUnitLessonsName;
+
+  /// Whole lessons
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} درس} =1{درس واحد} =2{درسان} few{{count} دروس} many{{count} درسًا} other{{count} درس}}'**
+  String growthUnitLessons(int count);
+
+  /// Fractional lessons
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} درس'**
+  String growthUnitLessonsDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات'**
+  String get growthUnitHoursName;
+
+  /// Whole hours
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} ساعة} =1{ساعة واحدة} =2{ساعتان} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}'**
+  String growthUnitHours(int count);
+
+  /// Fractional hours
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} ساعة'**
+  String growthUnitHoursDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'فصول'**
+  String get growthUnitChaptersName;
+
+  /// Whole chapters
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} فصل} =1{فصل واحد} =2{فصلان} few{{count} فصول} many{{count} فصلًا} other{{count} فصل}}'**
+  String growthUnitChapters(int count);
+
+  /// Fractional chapters
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} فصل'**
+  String growthUnitChaptersDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'دورات'**
+  String get growthUnitCoursesName;
+
+  /// Whole courses
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} دورة} =1{دورة واحدة} =2{دورتان} few{{count} دورات} many{{count} دورة} other{{count} دورة}}'**
+  String growthUnitCourses(int count);
+
+  /// Fractional courses
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} دورة'**
+  String growthUnitCoursesDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمات'**
+  String get growthUnitWordsName;
+
+  /// Whole words
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} كلمة} =1{كلمة واحدة} =2{كلمتان} few{{count} كلمات} many{{count} كلمة} other{{count} كلمة}}'**
+  String growthUnitWords(int count);
+
+  /// Fractional words
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} كلمة'**
+  String growthUnitWordsDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'كتب'**
+  String get growthUnitBooksName;
+
+  /// Whole books
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} كتاب} =1{كتاب واحد} =2{كتابان} few{{count} كتب} many{{count} كتابًا} other{{count} كتاب}}'**
+  String growthUnitBooks(int count);
+
+  /// Fractional books
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} كتاب'**
+  String growthUnitBooksDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'محاضرات'**
+  String get growthUnitLecturesName;
+
+  /// Whole lectures
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} محاضرة} =1{محاضرة واحدة} =2{محاضرتان} few{{count} محاضرات} many{{count} محاضرة} other{{count} محاضرة}}'**
+  String growthUnitLectures(int count);
+
+  /// Fractional lectures
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} محاضرة'**
+  String growthUnitLecturesDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'دقائق'**
+  String get growthUnitMinutesName;
+
+  /// Whole minutes
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} دقيقة} =1{دقيقة واحدة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String growthUnitMinutes(int count);
+
+  /// Fractional minutes
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} دقيقة'**
+  String growthUnitMinutesDecimal(String amount);
+
+  /// Unit name
+  ///
+  /// In ar, this message translates to:
+  /// **'مقالات'**
+  String get growthUnitArticlesName;
+
+  /// Whole articles
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{{count} مقال} =1{مقال واحد} =2{مقالان} few{{count} مقالات} many{{count} مقالًا} other{{count} مقال}}'**
+  String growthUnitArticles(int count);
+
+  /// Fractional articles
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} مقال'**
+  String growthUnitArticlesDecimal(String amount);
+
+  /// An amount in the user's own unit
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} {unit}'**
+  String growthAmountCustom(String amount, String unit);
+
+  /// Progress, e.g. 120 of 300 pages
+  ///
+  /// In ar, this message translates to:
+  /// **'{current} من {target}'**
+  String growthProgressOf(String current, String target);
+
+  /// What is left
+  ///
+  /// In ar, this message translates to:
+  /// **'تبقّى {amount}'**
+  String growthRemaining(String amount);
+
+  /// Overshoot
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوزتَ الهدف بـ{amount}'**
+  String growthExceeded(String amount);
+
+  /// Starting value
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأتَ من {amount}'**
+  String growthStartedFrom(String amount);
+
+  /// A daily rate
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} يوميًا'**
+  String growthRatePerDay(String amount);
+
+  /// A weekly rate
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} أسبوعيًا'**
+  String growthRatePerWeek(String amount);
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتمل'**
+  String get growthPaceCompleted;
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا'**
+  String get growthPacePaused;
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يبدأ بعد'**
+  String get growthPaceNotStarted;
+
+  /// Status pill: no deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get growthPaceNoDeadline;
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'متقدّم'**
+  String get growthPaceAhead;
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'على المسار'**
+  String get growthPaceOnTrack;
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخّر'**
+  String get growthPaceBehind;
+
+  /// Status pill
+  ///
+  /// In ar, this message translates to:
+  /// **'فات الموعد'**
+  String get growthPaceOverdue;
+
+  /// Pace line: needed rate until the deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'تحتاج {rate} حتى {date}'**
+  String growthLineNeed(String rate, String date);
+
+  /// Pace line when ahead
+  ///
+  /// In ar, this message translates to:
+  /// **'وتيرتك {rate}، تسبق موعدك'**
+  String growthLineAhead(String rate);
+
+  /// Pace line before the first log
+  ///
+  /// In ar, this message translates to:
+  /// **'{rate} تكفيك حتى {date}'**
+  String growthLineStart(String rate, String date);
+
+  /// Pace line: no deadline, no log
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل أول تقدّم لتبدأ'**
+  String get growthLineFirstLog;
+
+  /// Pace line without a deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'وتيرتك {rate}'**
+  String growthLineOpen(String rate);
+
+  /// Pace line without a deadline, with a projection
+  ///
+  /// In ar, this message translates to:
+  /// **'وتيرتك {rate}، تُنهيه في {date}'**
+  String growthLineOpenFinish(String rate, String date);
+
+  /// Pace line: no recent pace
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تقدّم في الأسبوعين الأخيرين'**
+  String get growthLineQuiet;
+
+  /// Pace line after the deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'فات الموعد منذ {days}، تبقّى {amount}'**
+  String growthLineOverdue(String days, String amount);
+
+  /// Pace line on the deadline day
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد اليوم، تبقّى {amount}'**
+  String growthLineDueToday(String amount);
+
+  /// Completed goal line
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل في {date}'**
+  String growthLineCompleted(String date);
+
+  /// Paused goal line
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا، استأنفه متى شئت'**
+  String get growthLinePaused;
+
+  /// Pace comparison: needed rate
+  ///
+  /// In ar, this message translates to:
+  /// **'المطلوب'**
+  String get growthNeededLabel;
+
+  /// Pace comparison: actual rate
+  ///
+  /// In ar, this message translates to:
+  /// **'وتيرتك'**
+  String get growthActualLabel;
+
+  /// Window of the actual pace
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر {days}'**
+  String growthActualWindow(String days);
+
+  /// Needed pace caption
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {date}'**
+  String growthNeededUntil(String date);
+
+  /// No recent logs
+  ///
+  /// In ar, this message translates to:
+  /// **'لا وتيرة بعد'**
+  String get growthNoPaceYet;
+
+  /// Projection label
+  ///
+  /// In ar, this message translates to:
+  /// **'الإنهاء المتوقع'**
+  String get growthProjectedLabel;
+
+  /// Projection before the deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل الموعد بـ{days}'**
+  String growthProjectionEarly(String days);
+
+  /// Projection after the deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الموعد بـ{days}'**
+  String growthProjectionLate(String days);
+
+  /// Projection on the deadline day
+  ///
+  /// In ar, this message translates to:
+  /// **'في الموعد تمامًا'**
+  String get growthProjectionOnDay;
+
+  /// No projection
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل تقدّمًا لنتوقّع موعد إنهائك'**
+  String get growthProjectionNone;
+
+  /// Pace card without deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد نهائي، تقدّم بالوتيرة التي تناسبك'**
+  String get growthPaceNoDeadlineHint;
+
+  /// Pace card when completed
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغتَ هدفك، ويمكنك مواصلة التسجيل'**
+  String get growthPaceDoneHint;
+
+  /// Behind the straight-line plan
+  ///
+  /// In ar, this message translates to:
+  /// **'خلف الخطة بـ{amount}'**
+  String growthPlanBehind(String amount);
+
+  /// Ahead of the straight-line plan
+  ///
+  /// In ar, this message translates to:
+  /// **'أمام الخطة بـ{amount}'**
+  String growthPlanAhead(String amount);
+
+  /// Days until the deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {days}'**
+  String growthDaysLeft(String days);
+
+  /// Deadline caption
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد'**
+  String get growthDeadlineLabel;
+
+  /// Chart title
+  ///
+  /// In ar, this message translates to:
+  /// **'المسار'**
+  String get growthChartTitle;
+
+  /// Chart legend
+  ///
+  /// In ar, this message translates to:
+  /// **'التقدّم'**
+  String get growthChartActual;
+
+  /// Chart legend: straight-line plan
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get growthChartPlan;
+
+  /// Chart legend: target line
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف'**
+  String get growthChartTarget;
+
+  /// Chart legend: projection
+  ///
+  /// In ar, this message translates to:
+  /// **'التوقّع'**
+  String get growthChartProjection;
+
+  /// Chart semantics
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطط التقدّم: {current} من {target}'**
+  String growthChartSemantics(String current, String target);
+
+  /// History section title
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ التقدّم'**
+  String get growthHistoryTitle;
+
+  /// History empty
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سجلات بعد. خطوة صغيرة اليوم تصنع الفرق.'**
+  String get growthHistoryEmpty;
+
+  /// Day label
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get growthToday;
+
+  /// Day label
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get growthYesterday;
+
+  /// Running total after a log
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع {amount}'**
+  String growthRunningTotal(String amount);
+
+  /// Sum of a day's logs
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} في هذا اليوم'**
+  String growthDayTotal(String amount);
+
+  /// Button / sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل تقدّمًا'**
+  String get growthLogProgress;
+
+  /// Log sheet title when editing
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل السجل'**
+  String get growthEditLog;
+
+  /// Chip: open the log sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'مقدار آخر'**
+  String get growthLogOther;
+
+  /// Quick log action label
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل {amount}'**
+  String growthLogQuick(String amount);
+
+  /// Log sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدار'**
+  String get growthLogAmount;
+
+  /// Log sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get growthLogWhen;
+
+  /// Log sheet: date picker label
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get growthLogDate;
+
+  /// Log sheet: time picker label
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة'**
+  String get growthLogTime;
+
+  /// Log sheet: reset to now
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get growthLogNow;
+
+  /// Log sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get growthLogNote;
+
+  /// Log note hint
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا تعلّمت؟'**
+  String get growthLogNoteHint;
+
+  /// Log sheet preview
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع بعدها {total} ({percent})'**
+  String growthLogNewTotal(String total, String percent);
+
+  /// Log sheet preview when the target is reached
+  ///
+  /// In ar, this message translates to:
+  /// **'بهذا تُتمّ هدفك!'**
+  String get growthLogWillComplete;
+
+  /// Log sheet save button
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل'**
+  String get growthLogSave;
+
+  /// Stepper minus
+  ///
+  /// In ar, this message translates to:
+  /// **'أنقِص'**
+  String get growthDecrease;
+
+  /// Stepper plus
+  ///
+  /// In ar, this message translates to:
+  /// **'زِد'**
+  String get growthIncrease;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مقدارًا أكبر من صفر'**
+  String get growthErrorAmount;
+
+  /// Goal sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الهدف'**
+  String get growthFieldName;
+
+  /// Generic example
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: قراءة كتاب في الإدارة'**
+  String get growthFieldNameHint;
+
+  /// Goal sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get growthFieldUnit;
+
+  /// Unit hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر أو اكتب وحدتك'**
+  String get growthFieldUnitHint;
+
+  /// Goal sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'المستهدف'**
+  String get growthFieldTarget;
+
+  /// Goal sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'نقطة البداية'**
+  String get growthFieldInitial;
+
+  /// Starting value hint
+  ///
+  /// In ar, this message translates to:
+  /// **'ما أنجزته من قبل'**
+  String get growthFieldInitialHint;
+
+  /// Goal sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد النهائي'**
+  String get growthFieldDeadline;
+
+  /// Deadline placeholder
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get growthFieldNoDeadline;
+
+  /// Goal sheet field
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get growthFieldColor;
+
+  /// Goal sheet toggle
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف نشط'**
+  String get growthFieldActive;
+
+  /// Toggle hint
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقفه مؤقتًا دون أن تخسر تقدّمك'**
+  String get growthFieldActiveHint;
+
+  /// Deadline preset
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد شهر'**
+  String get growthInMonth;
+
+  /// Deadline preset
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد ثلاثة أشهر'**
+  String get growthInThreeMonths;
+
+  /// Deadline preset
+  ///
+  /// In ar, this message translates to:
+  /// **'نهاية السنة'**
+  String get growthEndOfYear;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا للهدف'**
+  String get growthErrorName;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مقدارًا أكبر من صفر'**
+  String get growthErrorTarget;
+
+  /// Validation
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب أن تكون البداية أقل من المستهدف'**
+  String get growthErrorInitial;
+
+  /// Goal sheet preview
+  ///
+  /// In ar, this message translates to:
+  /// **'{rate} تكفيك لتبلغ هدفك في {date}'**
+  String growthPreviewNeed(String rate, String date);
+
+  /// Goal sheet preview
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد: سجّل تقدّمك بالوتيرة التي تناسبك'**
+  String get growthPreviewOpen;
+
+  /// Goal sheet preview
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الموعد مضى؛ اختر موعدًا قادمًا'**
+  String get growthPreviewPast;
+
+  /// Goal sheet save (new)
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ الهدف'**
+  String get growthCreate;
+
+  /// Goal sheet save (edit)
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ'**
+  String get growthSave;
+
+  /// Sheet cancel
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get growthCancel;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get growthPause;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get growthResume;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get growthDelete;
+
+  /// Action
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get growthEdit;
+
+  /// Duplicated goal name
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} (نسخة)'**
+  String growthCopyName(String name);
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل {amount}، {goal}'**
+  String growthLogged(String amount, String goal);
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'عُدّل السجل'**
+  String get growthLogUpdated;
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف السجل'**
+  String get growthLogDeleted;
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف الهدف: {name}'**
+  String growthGoalCreated(String name);
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت التعديلات'**
+  String get growthGoalSaved;
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الهدف: {name}'**
+  String growthGoalDeleted(String name);
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ الهدف'**
+  String get growthGoalDuplicated;
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقف الهدف مؤقتًا'**
+  String get growthGoalPaused;
+
+  /// Toast
+  ///
+  /// In ar, this message translates to:
+  /// **'استُؤنف الهدف'**
+  String get growthGoalResumed;
+
+  /// Goal screen after delete
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يعد هذا الهدف موجودًا'**
+  String get growthGoalMissing;
+
+  /// Celebration title
+  ///
+  /// In ar, this message translates to:
+  /// **'ما شاء الله، أتممتَ هدفك!'**
+  String get growthCelebrateTitle;
+
+  /// Celebration body under the goal name
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} خلال {days}'**
+  String growthCelebrateBody(String amount, String days);
+
+  /// Celebration close
+  ///
+  /// In ar, this message translates to:
+  /// **'الحمد لله'**
+  String get growthCelebrateThanks;
+
+  /// Celebration: new goal
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف جديد'**
+  String get growthCelebrateNext;
+
+  /// Today card title
+  ///
+  /// In ar, this message translates to:
+  /// **'النمو اليوم'**
+  String get growthCardTitle;
+
+  /// Today card link
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الأهداف'**
+  String get growthCardOpenAll;
+
+  /// Today card empty
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أهداف تعلّم بعد. أضف هدفًا وتابِع تقدّمك هنا.'**
+  String get growthCardEmpty;
+
+  /// Today card: all complete
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممتَ كل أهدافك النشطة، بارك الله فيك'**
+  String get growthCardAllDone;
+
+  /// Semantics
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح الهدف'**
+  String get growthOpenGoal;
+
+  /// Goal tile semantics
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}، {progress}، {status}'**
+  String growthGoalSemantics(String name, String progress, String status);
+
+  /// List separator (Arabic comma: a middle dot reads as the digit zero ٠)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get growthSep;
+
+  /// Pace card title
+  ///
+  /// In ar, this message translates to:
+  /// **'الوتيرة'**
+  String get growthPaceTitle;
+
+  /// Stats: no deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا موعد'**
+  String get growthStatsDeadlineNone;
+
+  /// Goal start date
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأ في {date}'**
+  String growthStartedOn(String date);
+
+  /// Growth screen: no active goals left
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أهداف قيد التعلّم الآن. ما خطوتك التالية؟'**
+  String get growthAllActiveDone;
+
+  /// Days past the deadline
+  ///
+  /// In ar, this message translates to:
+  /// **'فات الموعد منذ {days}'**
+  String growthOverdueBy(String days);
+
+  /// Active days out of the goal's days
+  ///
+  /// In ar, this message translates to:
+  /// **'من {days}'**
+  String growthOfDays(String days);
+
+  /// Body planet screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'الجسد'**
+  String get bodyTitle;
+
+  /// No description provided for @bodyTabToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get bodyTabToday;
+
+  /// No description provided for @bodyTabPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get bodyTabPlan;
+
+  /// No description provided for @bodyTabFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام'**
+  String get bodyTabFasting;
+
+  /// No description provided for @bodyTabWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء'**
+  String get bodyTabWater;
+
+  /// No description provided for @bodyTabAvoid.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجنّب'**
+  String get bodyTabAvoid;
+
+  /// No description provided for @bodySave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get bodySave;
+
+  /// No description provided for @bodyCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get bodyCancel;
+
+  /// No description provided for @bodyDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get bodyDelete;
+
+  /// No description provided for @bodyNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا'**
+  String get bodyNameRequired;
+
+  /// No description provided for @bodyKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} كغ'**
+  String bodyKg(String value);
+
+  /// No description provided for @bodyMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} د'**
+  String bodyMinutes(String value);
+
+  /// No description provided for @bodyHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} س'**
+  String bodyHours(String value);
+
+  /// No description provided for @bodyRepsValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} تكرار'**
+  String bodyRepsValue(String value);
+
+  /// No description provided for @bodySetsReps.
+  ///
+  /// In ar, this message translates to:
+  /// **'{sets} × {reps}'**
+  String bodySetsReps(String sets, String reps);
+
+  /// No description provided for @bodyMl.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} مل'**
+  String bodyMl(String value);
+
+  /// No description provided for @bodyLiters.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} لتر'**
+  String bodyLiters(String value);
+
+  /// No description provided for @bodyFraction.
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String bodyFraction(String done, String total);
+
+  /// No description provided for @bodyDaysInRow.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا سلسلة بعد} =1{يوم واحد متتالٍ} =2{يومان متتاليان} few{{n} أيام متتالية} many{{n} يومًا متتاليًا} other{{n} يوم متتالٍ}}'**
+  String bodyDaysInRow(int count, String n);
+
+  /// No description provided for @bodyExercisesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا تمارين} =1{تمرين واحد} =2{تمرينان} few{{n} تمارين} many{{n} تمرينًا} other{{n} تمرين}}'**
+  String bodyExercisesCount(int count, String n);
+
+  /// No description provided for @bodyPerWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا أيام محددة} =1{مرة في الأسبوع} =2{مرتان في الأسبوع} few{{n} مرات في الأسبوع} many{{n} مرة في الأسبوع} other{{n} مرة في الأسبوع}}'**
+  String bodyPerWeek(int count, String n);
+
+  /// No description provided for @bodyTodaySession.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين اليوم'**
+  String get bodyTodaySession;
+
+  /// No description provided for @bodyRestDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم راحة'**
+  String get bodyRestDay;
+
+  /// No description provided for @bodyRestDayBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء في خطة اليوم. خذ قسطك من الراحة.'**
+  String get bodyRestDayBody;
+
+  /// No description provided for @bodyNextSession.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمرين القادم: {day}'**
+  String bodyNextSession(String day);
+
+  /// No description provided for @bodySessionDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنهيت تمرين اليوم — أحسنت!'**
+  String get bodySessionDone;
+
+  /// No description provided for @bodySessionKeepGoing.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوة بخطوة، اسحب التمرين لتسجيله.'**
+  String get bodySessionKeepGoing;
+
+  /// No description provided for @bodyNoPlanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا خطة تمارين بعد'**
+  String get bodyNoPlanTitle;
+
+  /// No description provided for @bodyNoPlanBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف تمارينك وأيامها من تبويب «الخطة»، وستظهر هنا في يومها.'**
+  String get bodyNoPlanBody;
+
+  /// No description provided for @bodyOpenPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى الخطة'**
+  String get bodyOpenPlan;
+
+  /// No description provided for @bodyAlsoToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيضًا اليوم'**
+  String get bodyAlsoToday;
+
+  /// No description provided for @bodyLogExtra.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل تمرينًا'**
+  String get bodyLogExtra;
+
+  /// No description provided for @bodyMarkDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزته'**
+  String get bodyMarkDone;
+
+  /// No description provided for @bodyUnmark.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الإنجاز'**
+  String get bodyUnmark;
+
+  /// No description provided for @bodyLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزت: {summary}'**
+  String bodyLogged(String summary);
+
+  /// No description provided for @bodyLoggedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل «{name}»'**
+  String bodyLoggedToast(String name);
+
+  /// No description provided for @bodyUnloggedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي تسجيل «{name}»'**
+  String bodyUnloggedToast(String name);
+
+  /// No description provided for @bodyLogDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل بالتفاصيل'**
+  String get bodyLogDetails;
+
+  /// No description provided for @bodyAvoidReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكّر أن تتجنّب'**
+  String get bodyAvoidReminder;
+
+  /// No description provided for @bodyStateDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجز'**
+  String get bodyStateDone;
+
+  /// No description provided for @bodyStateOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُنجز بعد'**
+  String get bodyStateOpen;
+
+  /// No description provided for @bodyPlanWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get bodyPlanWeek;
+
+  /// No description provided for @bodyPlanHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لبقية الخيارات.'**
+  String get bodyPlanHint;
+
+  /// No description provided for @bodyPlanEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطتك فارغة'**
+  String get bodyPlanEmptyTitle;
+
+  /// No description provided for @bodyPlanEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف تمارينك وأيامها — مثلًا: تمرين ضغط، السبت والإثنين والأربعاء، ٣ × ١٢.'**
+  String get bodyPlanEmptyBody;
+
+  /// No description provided for @bodyAddExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين جديد'**
+  String get bodyAddExercise;
+
+  /// No description provided for @bodyEditExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التمرين'**
+  String get bodyEditExercise;
+
+  /// No description provided for @bodyExerciseSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّد أيامه وما تريد إنجازه في كل مرة.'**
+  String get bodyExerciseSubtitle;
+
+  /// No description provided for @bodyExerciseName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم التمرين'**
+  String get bodyExerciseName;
+
+  /// No description provided for @bodyExerciseNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: مشي سريع'**
+  String get bodyExerciseNameHint;
+
+  /// No description provided for @bodyWeekdays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام التمرين'**
+  String get bodyWeekdays;
+
+  /// No description provided for @bodyEveryDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل يوم'**
+  String get bodyEveryDay;
+
+  /// No description provided for @bodyClearDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح'**
+  String get bodyClearDays;
+
+  /// Joins the last item of a list (weekday names)
+  ///
+  /// In ar, this message translates to:
+  /// **'{head} و{last}'**
+  String bodyListAnd(String head, String last);
+
+  /// Between list items (keep the trailing space)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get bodyListSep;
+
+  /// Between parts of a summary like 3 × 12 · 20 kg (keep the spaces; a middle dot beside Arabic-Indic digits reads as a zero)
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get bodyPartsSep;
+
+  /// No description provided for @bodyNoDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا أيام محددة — لن يظهر في «اليوم».'**
+  String get bodyNoDays;
+
+  /// No description provided for @bodyTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'في كل مرة'**
+  String get bodyTarget;
+
+  /// No description provided for @bodySets.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموعات'**
+  String get bodySets;
+
+  /// No description provided for @bodyReps.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكرارات'**
+  String get bodyReps;
+
+  /// No description provided for @bodyWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوزن'**
+  String get bodyWeight;
+
+  /// No description provided for @bodyDuration.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة'**
+  String get bodyDuration;
+
+  /// No description provided for @bodyNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get bodyNotes;
+
+  /// No description provided for @bodyNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: ركّز على الوضعية'**
+  String get bodyNotesHint;
+
+  /// No description provided for @bodyUnitKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'كغ'**
+  String get bodyUnitKg;
+
+  /// No description provided for @bodyUnitMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'دقيقة'**
+  String get bodyUnitMin;
+
+  /// No description provided for @bodyUnitMl.
+  ///
+  /// In ar, this message translates to:
+  /// **'مل'**
+  String get bodyUnitMl;
+
+  /// No description provided for @bodyUnitHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعة'**
+  String get bodyUnitHours;
+
+  /// No description provided for @bodyStepperDecrease.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنقاص {label}'**
+  String bodyStepperDecrease(String label);
+
+  /// No description provided for @bodyStepperIncrease.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة {label}'**
+  String bodyStepperIncrease(String label);
+
+  /// No description provided for @bodyNotSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'—'**
+  String get bodyNotSet;
+
+  /// No description provided for @bodyExerciseHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل والتقدّم'**
+  String get bodyExerciseHistory;
+
+  /// No description provided for @bodyPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get bodyPause;
+
+  /// No description provided for @bodyResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف'**
+  String get bodyResume;
+
+  /// No description provided for @bodyPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا'**
+  String get bodyPaused;
+
+  /// No description provided for @bodyCopyName.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} (نسخة)'**
+  String bodyCopyName(String name);
+
+  /// No description provided for @bodyDeletedName.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف «{name}»'**
+  String bodyDeletedName(String name);
+
+  /// No description provided for @bodyDuplicatedName.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ «{name}»'**
+  String bodyDuplicatedName(String name);
+
+  /// No description provided for @bodyPausedName.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقف «{name}» مؤقتًا'**
+  String bodyPausedName(String name);
+
+  /// No description provided for @bodyResumedName.
+  ///
+  /// In ar, this message translates to:
+  /// **'عاد «{name}» إلى الخطة'**
+  String bodyResumedName(String name);
+
+  /// No description provided for @bodyLogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل التمرين'**
+  String get bodyLogTitle;
+
+  /// No description provided for @bodyLogEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل السجل'**
+  String get bodyLogEditTitle;
+
+  /// No description provided for @bodyLogSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيم من خطتك — عدّلها لما أنجزته فعلًا.'**
+  String get bodyLogSubtitle;
+
+  /// No description provided for @bodyLogExtraSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين خارج الخطة؟ سجّله هنا.'**
+  String get bodyLogExtraSubtitle;
+
+  /// No description provided for @bodyLogWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get bodyLogWhen;
+
+  /// No description provided for @bodyLogSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل'**
+  String get bodyLogSave;
+
+  /// No description provided for @bodyWorkoutName.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمرين'**
+  String get bodyWorkoutName;
+
+  /// No description provided for @bodyWorkoutNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: سباحة'**
+  String get bodyWorkoutNameHint;
+
+  /// No description provided for @bodyLogVolume.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحجم: {value}'**
+  String bodyLogVolume(String value);
+
+  /// No description provided for @bodyHistoryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سجلات بعد. عندما تنجز هذا التمرين يظهر تقدّمك هنا.'**
+  String get bodyHistoryEmpty;
+
+  /// No description provided for @bodyHistoryOneDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يظهر المنحنى بعد يومين من السجلات.'**
+  String get bodyHistoryOneDay;
+
+  /// No description provided for @bodyMetricWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوزن'**
+  String get bodyMetricWeight;
+
+  /// No description provided for @bodyMetricVolume.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحجم'**
+  String get bodyMetricVolume;
+
+  /// No description provided for @bodyMetricReps.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكرارات'**
+  String get bodyMetricReps;
+
+  /// No description provided for @bodyMetricMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدقائق'**
+  String get bodyMetricMinutes;
+
+  /// No description provided for @bodyBest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأفضل'**
+  String get bodyBest;
+
+  /// No description provided for @bodyChange.
+  ///
+  /// In ar, this message translates to:
+  /// **'التغيّر'**
+  String get bodyChange;
+
+  /// No description provided for @bodySessions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجلسات'**
+  String get bodySessions;
+
+  /// No description provided for @bodyVolumeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحجم = المجموعات × التكرارات × الوزن'**
+  String get bodyVolumeHint;
+
+  /// No description provided for @bodyLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجلات'**
+  String get bodyLogs;
+
+  /// No description provided for @bodyLogDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف السجل'**
+  String get bodyLogDeleted;
+
+  /// No description provided for @bodyLogUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُدّث السجل'**
+  String get bodyLogUpdated;
+
+  /// No description provided for @bodyFastingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام المتقطّع'**
+  String get bodyFastingTitle;
+
+  /// No description provided for @bodyFastPhaseFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'صائم'**
+  String get bodyFastPhaseFasting;
+
+  /// No description provided for @bodyFastPhaseEating.
+  ///
+  /// In ar, this message translates to:
+  /// **'نافذة الأكل'**
+  String get bodyFastPhaseEating;
+
+  /// No description provided for @bodyFastPhaseWaiting.
+  ///
+  /// In ar, this message translates to:
+  /// **'خارج الصيام'**
+  String get bodyFastPhaseWaiting;
+
+  /// No description provided for @bodyFastRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {time}'**
+  String bodyFastRemaining(String time);
+
+  /// No description provided for @bodyFastGoalAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف {time}'**
+  String bodyFastGoalAt(String time);
+
+  /// No description provided for @bodyFastReached.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغت هدفك!'**
+  String get bodyFastReached;
+
+  /// No description provided for @bodyFastOvertime.
+  ///
+  /// In ar, this message translates to:
+  /// **'{time} فوق الهدف'**
+  String bodyFastOvertime(String time);
+
+  /// No description provided for @bodyFastTimeNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت صيامك'**
+  String get bodyFastTimeNow;
+
+  /// No description provided for @bodyEatingClosesIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُغلق بعد {time}'**
+  String bodyEatingClosesIn(String time);
+
+  /// No description provided for @bodyEatingClosesAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر وجبة {time}'**
+  String bodyEatingClosesAt(String time);
+
+  /// No description provided for @bodyNextFastAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام القادم {time}'**
+  String bodyNextFastAt(String time);
+
+  /// No description provided for @bodyWindowOpensAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُفتح نافذة الأكل {time}'**
+  String bodyWindowOpensAt(String time);
+
+  /// No description provided for @bodyStartFast.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الصيام'**
+  String get bodyStartFast;
+
+  /// No description provided for @bodyEndFast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنهِ الصيام'**
+  String get bodyEndFast;
+
+  /// No description provided for @bodyStartedEarlier.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأت قبل الآن؟'**
+  String get bodyStartedEarlier;
+
+  /// No description provided for @bodyFastStartTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'متى بدأ صيامك؟'**
+  String get bodyFastStartTitle;
+
+  /// No description provided for @bodyFastStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأ صيامك — بالتوفيق'**
+  String get bodyFastStarted;
+
+  /// No description provided for @bodyFastEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى صيامك: {duration}'**
+  String bodyFastEnded(String duration);
+
+  /// No description provided for @bodyFastPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة الصيام'**
+  String get bodyFastPlan;
+
+  /// No description provided for @bodyFastHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات الصيام'**
+  String get bodyFastHours;
+
+  /// No description provided for @bodyFastCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصّص'**
+  String get bodyFastCustom;
+
+  /// No description provided for @bodyFastCustomTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات صيام مخصّصة'**
+  String get bodyFastCustomTitle;
+
+  /// No description provided for @bodyFastCustomHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'من ساعة إلى ٧٢ ساعة'**
+  String get bodyFastCustomHint;
+
+  /// No description provided for @bodyFastRatioHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'{fast} ساعة صيام، ثم {eat} ساعات للأكل'**
+  String bodyFastRatioHint(String fast, String eat);
+
+  /// No description provided for @bodyFastLongHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيام {fast} ساعة، بلا نافذة أكل يومية'**
+  String bodyFastLongHint(String fast);
+
+  /// No description provided for @bodyLastMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر وجبة'**
+  String get bodyLastMeal;
+
+  /// No description provided for @bodyLastMealHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يبدأ صيامك المخطط عندها.'**
+  String get bodyLastMealHint;
+
+  /// No description provided for @bodyNotifyGoal.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبّهني عند بلوغ الهدف'**
+  String get bodyNotifyGoal;
+
+  /// No description provided for @bodyNotifyEating.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني قبل إغلاق نافذة الأكل'**
+  String get bodyNotifyEating;
+
+  /// No description provided for @bodyLeadBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبلها بـ{n} د'**
+  String bodyLeadBefore(String n);
+
+  /// No description provided for @bodyLeadAtTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'في وقتها'**
+  String get bodyLeadAtTime;
+
+  /// No description provided for @bodyStatStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة'**
+  String get bodyStatStreak;
+
+  /// No description provided for @bodyStatLongest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأطول'**
+  String get bodyStatLongest;
+
+  /// No description provided for @bodyStatAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط'**
+  String get bodyStatAverage;
+
+  /// No description provided for @bodyStatCompleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغت الهدف'**
+  String get bodyStatCompleted;
+
+  /// No description provided for @bodyFastHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الصيام'**
+  String get bodyFastHistory;
+
+  /// No description provided for @bodyFastHistoryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا صيام مسجّل بعد. اضغط «ابدأ الصيام» بعد آخر وجبة.'**
+  String get bodyFastHistoryEmpty;
+
+  /// No description provided for @bodyFastGoalBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف {hours} س'**
+  String bodyFastGoalBadge(String hours);
+
+  /// No description provided for @bodyFastEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الصيام'**
+  String get bodyFastEditTitle;
+
+  /// No description provided for @bodyFastStartDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم البدء'**
+  String get bodyFastStartDate;
+
+  /// No description provided for @bodyFastStartTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت البدء'**
+  String get bodyFastStartTime;
+
+  /// No description provided for @bodyFastEndDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم الانتهاء'**
+  String get bodyFastEndDate;
+
+  /// No description provided for @bodyFastEndTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الانتهاء'**
+  String get bodyFastEndTime;
+
+  /// No description provided for @bodyFastGoalHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف'**
+  String get bodyFastGoalHours;
+
+  /// No description provided for @bodyFastNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get bodyFastNote;
+
+  /// No description provided for @bodyFastNoteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: صيام رمضان، صيام تطوّع'**
+  String get bodyFastNoteHint;
+
+  /// No description provided for @bodyFastEndBeforeStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتهاء قبل البدء'**
+  String get bodyFastEndBeforeStart;
+
+  /// No description provided for @bodyFastInFuture.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الوقت لم يأتِ بعد'**
+  String get bodyFastInFuture;
+
+  /// No description provided for @bodyFastDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الصيام'**
+  String get bodyFastDeleted;
+
+  /// No description provided for @bodyFastUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُدّث الصيام'**
+  String get bodyFastUpdated;
+
+  /// No description provided for @bodyFastRingSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'{phase}: {detail}'**
+  String bodyFastRingSemantics(String phase, String detail);
+
+  /// No description provided for @bodyWaterTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء'**
+  String get bodyWaterTitle;
+
+  /// No description provided for @bodyWaterOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {target}'**
+  String bodyWaterOf(String target);
+
+  /// No description provided for @bodyAddAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'+{amount}'**
+  String bodyAddAmount(String amount);
+
+  /// No description provided for @bodyAddWaterSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف {amount}'**
+  String bodyAddWaterSemantics(String amount);
+
+  /// No description provided for @bodyWaterCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية أخرى'**
+  String get bodyWaterCustom;
+
+  /// No description provided for @bodyWaterCustomTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كم شربت؟'**
+  String get bodyWaterCustomTitle;
+
+  /// No description provided for @bodyWaterAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get bodyWaterAmount;
+
+  /// No description provided for @bodyWaterTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف اليومي'**
+  String get bodyWaterTarget;
+
+  /// No description provided for @bodyWaterTargetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف الماء اليومي'**
+  String get bodyWaterTargetTitle;
+
+  /// No description provided for @bodyWaterTargetSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف الآن {amount}'**
+  String bodyWaterTargetSaved(String amount);
+
+  /// No description provided for @bodyWaterGoalMet.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغت هدف اليوم!'**
+  String get bodyWaterGoalMet;
+
+  /// No description provided for @bodyWaterLeft.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {amount}'**
+  String bodyWaterLeft(String amount);
+
+  /// No description provided for @bodyWaterWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسبوع الأخير'**
+  String get bodyWaterWeek;
+
+  /// No description provided for @bodyWaterAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط {amount}'**
+  String bodyWaterAverage(String amount);
+
+  /// No description provided for @bodyWaterToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل اليوم'**
+  String get bodyWaterToday;
+
+  /// No description provided for @bodyWaterEmptyToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تسجّل ماءً اليوم بعد — كوب واحد بداية جيدة.'**
+  String get bodyWaterEmptyToday;
+
+  /// No description provided for @bodyWaterAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف {amount}'**
+  String bodyWaterAdded(String amount);
+
+  /// No description provided for @bodyWaterRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف {amount}'**
+  String bodyWaterRemoved(String amount);
+
+  /// No description provided for @bodyWaterEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الكمية'**
+  String get bodyWaterEditTitle;
+
+  /// No description provided for @bodyWaterUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُدّثت الكمية'**
+  String get bodyWaterUpdated;
+
+  /// No description provided for @bodyAvoidTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة التجنّب'**
+  String get bodyAvoidTitle;
+
+  /// No description provided for @bodyAvoidSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات وأطعمة اخترت أن تبتعد عنها، مع أسبابك أنت.'**
+  String get bodyAvoidSubtitle;
+
+  /// No description provided for @bodyAvoidAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف إلى القائمة'**
+  String get bodyAvoidAdd;
+
+  /// No description provided for @bodyAvoidEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل البند'**
+  String get bodyAvoidEdit;
+
+  /// No description provided for @bodyAvoidWhat.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا تتجنّب؟'**
+  String get bodyAvoidWhat;
+
+  /// No description provided for @bodyAvoidWhatHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: رفع الأثقال فوق الرأس'**
+  String get bodyAvoidWhatHint;
+
+  /// No description provided for @bodyAvoidReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'السبب'**
+  String get bodyAvoidReason;
+
+  /// No description provided for @bodyAvoidReasonHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: بحسب نصيحة المختص'**
+  String get bodyAvoidReasonHint;
+
+  /// No description provided for @bodyAvoidEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة فارغة'**
+  String get bodyAvoidEmptyTitle;
+
+  /// No description provided for @bodyAvoidEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'دوّن ما تريد تجنّبه ولماذا — مثلًا: المشروبات الغازية، أو القرفصاء العميقة.'**
+  String get bodyAvoidEmptyBody;
+
+  /// No description provided for @bodyAvoidRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف من القائمة'**
+  String get bodyAvoidRemoved;
+
+  /// No description provided for @bodyAvoidNoReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا سبب مكتوب'**
+  String get bodyAvoidNoReason;
+
+  /// No description provided for @bodyCardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجسد اليوم'**
+  String get bodyCardTitle;
+
+  /// No description provided for @bodyCardTraining.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمرين'**
+  String get bodyCardTraining;
+
+  /// No description provided for @bodyCardFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام'**
+  String get bodyCardFasting;
+
+  /// No description provided for @bodyCardWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء'**
+  String get bodyCardWater;
+
+  /// No description provided for @bodyNotifyGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجسد'**
+  String get bodyNotifyGroup;
+
+  /// No description provided for @bodyNotifyChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات الصيام'**
+  String get bodyNotifyChannel;
+
+  /// No description provided for @bodyNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلوغ هدف الصيام واقتراب إغلاق نافذة الأكل'**
+  String get bodyNotifyChannelDescription;
+
+  /// No description provided for @bodyNotifyGoalTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغت هدف صيامك'**
+  String get bodyNotifyGoalTitle;
+
+  /// No description provided for @bodyNotifyGoalBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممت {hours} ساعة صيام — أحسنت.'**
+  String bodyNotifyGoalBody(String hours);
+
+  /// No description provided for @bodyNotifyEatingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نافذة الأكل تُغلق قريبًا'**
+  String get bodyNotifyEatingTitle;
+
+  /// No description provided for @bodyNotifyEatingBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر وجبة عند {time}.'**
+  String bodyNotifyEatingBody(String time);
+
+  /// No description provided for @bodyNotifyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحتاج إذن الإشعارات على الهاتف.'**
+  String get bodyNotifyHint;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

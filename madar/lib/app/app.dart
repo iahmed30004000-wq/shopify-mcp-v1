@@ -20,6 +20,7 @@ import '../features/home/home_providers.dart';
 import 'app_gate.dart';
 import 'app_preferences.dart';
 import 'faith_services.dart';
+import 'health_services.dart';
 
 /// The root overrides of the Madar provider scope – shared by `bootstrap`
 /// and the test harness so both run the same wiring.
@@ -31,6 +32,8 @@ import 'faith_services.dart';
 /// * The faith features' cross-feature hooks ([faithHookOverrides]): the
 ///   reader's "Add to Hifz", the wird's "read now", recitation downloads as
 ///   a route.
+/// * The health packages' hooks ([healthHookOverrides]): the medical
+///   record's screens open as routes.
 List<Override> madarAppOverrides({
   required SharedPreferences prefs,
   required SoundService sound,
@@ -42,6 +45,7 @@ List<Override> madarAppOverrides({
   databaseProvider.overrideWith((ref) => ref.watch(databaseUnlockProvider).requireValue),
   quickAddHandlerProvider.overrideWith((ref) => ref.watch(shellQuickAddHandlerProvider)),
   ...faithHookOverrides(),
+  ...healthHookOverrides(),
 ];
 
 /// The app's [ThemeData], rebuilt only when an input of the theme changes

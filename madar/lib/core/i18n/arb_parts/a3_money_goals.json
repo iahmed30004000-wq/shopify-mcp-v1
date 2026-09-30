@@ -1,0 +1,1284 @@
+{
+  "goalsTitle": {
+    "ar": "المدّخرات والالتزامات",
+    "en": "Savings & commitments",
+    "description": "Goals screen title (jars, debts, recurring obligations)"
+  },
+  "goalsTabJars": {
+    "ar": "الحصّالات",
+    "en": "Jars"
+  },
+  "goalsTabDebts": {
+    "ar": "الديون",
+    "en": "Debts"
+  },
+  "goalsTabObligations": {
+    "ar": "الالتزامات",
+    "en": "Recurring"
+  },
+  "goalsDebtsTitle": {
+    "ar": "الديون",
+    "en": "Debts"
+  },
+  "goalsObligationsTitle": {
+    "ar": "الالتزامات الدورية",
+    "en": "Recurring payments"
+  },
+  "goalsUpcomingTitle": {
+    "ar": "مستحقات قريبة",
+    "en": "Coming due"
+  },
+  "goalsSeeAll": {
+    "ar": "عرض الكل",
+    "en": "See all"
+  },
+  "goalsCreate": {
+    "ar": "إنشاء",
+    "en": "Create"
+  },
+  "goalsGone": {
+    "ar": "لم يعد هذا العنصر موجودًا.",
+    "en": "This item no longer exists."
+  },
+  "goalsShow": {
+    "ar": "إظهار",
+    "en": "Show"
+  },
+  "goalsHide": {
+    "ar": "إخفاء",
+    "en": "Hide"
+  },
+  "goalsFilterAll": {
+    "ar": "الكل",
+    "en": "All"
+  },
+  "goalsAmountPositive": {
+    "ar": "أدخل مبلغًا أكبر من صفر",
+    "en": "Enter an amount above zero"
+  },
+  "goalsFieldAmount": {
+    "ar": "المبلغ",
+    "en": "Amount"
+  },
+  "goalsFieldDate": {
+    "ar": "التاريخ",
+    "en": "Date"
+  },
+  "goalsFieldNote": {
+    "ar": "ملاحظة",
+    "en": "Note"
+  },
+  "goalsFieldFromWallet": {
+    "ar": "من محفظة",
+    "en": "From wallet"
+  },
+  "goalsFieldToWallet": {
+    "ar": "إلى محفظة",
+    "en": "To wallet"
+  },
+  "goalsNoWallet": {
+    "ar": "بلا محفظة",
+    "en": "No wallet"
+  },
+  "goalsOf": {
+    "ar": "من",
+    "en": "of",
+    "description": "Between a saved amount and its target: \"120 of 500\""
+  },
+  "goalsOfTotal": {
+    "ar": "من {amount}",
+    "en": "of {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSavedOfTarget": {
+    "ar": "{saved} من {target}",
+    "en": "{saved} of {target}",
+    "placeholders": {
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsFromWallet": {
+    "ar": "من {name}",
+    "en": "from {name}",
+    "description": "A jar deposit taken from a wallet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsToWallet": {
+    "ar": "إلى {name}",
+    "en": "to {name}",
+    "description": "A jar withdrawal paid into a wallet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsMissingRates": {
+    "ar": "لا سعر صرف لـ{codes}، فحُسبت بقيمتها الاسمية.",
+    "en": "No exchange rate for {codes}; counted at face value.",
+    "placeholders": {
+      "codes": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDueToday": {
+    "ar": "اليوم",
+    "en": "Today"
+  },
+  "goalsDueTomorrow": {
+    "ar": "غدًا",
+    "en": "Tomorrow"
+  },
+  "goalsDueInDays": {
+    "ar": "{count, plural, =1{بعد يوم} =2{بعد يومين} few{بعد {n} أيام} many{بعد {n} يومًا} other{بعد {n} يوم}}",
+    "en": "{count, plural, =1{In 1 day} other{In {n} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsOverdueDays": {
+    "ar": "{count, plural, =1{متأخر يومًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}",
+    "en": "{count, plural, =1{1 day overdue} other{{n} days overdue}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDueOn": {
+    "ar": "في {date}",
+    "en": "On {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsEveryWeeks": {
+    "ar": "{count, plural, =1{كل أسبوع} =2{كل أسبوعين} few{كل {n} أسابيع} many{كل {n} أسبوعًا} other{كل {n} أسبوع}}",
+    "en": "{count, plural, =1{Every week} other{Every {n} weeks}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsEveryMonths": {
+    "ar": "{count, plural, =1{كل شهر} =2{كل شهرين} few{كل {n} أشهر} many{كل {n} شهرًا} other{كل {n} شهر}}",
+    "en": "{count, plural, =1{Every month} other{Every {n} months}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsEveryYears": {
+    "ar": "{count, plural, =1{كل سنة} =2{كل سنتين} few{كل {n} سنوات} many{كل {n} سنةً} other{كل {n} سنة}}",
+    "en": "{count, plural, =1{Every year} other{Every {n} years}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsJarNew": {
+    "ar": "حصّالة جديدة",
+    "en": "New jar"
+  },
+  "goalsJarNewSubtitle": {
+    "ar": "هدف ادّخار له مبلغ وموعد",
+    "en": "A savings goal with a target and a date"
+  },
+  "goalsJarEdit": {
+    "ar": "تعديل الحصّالة",
+    "en": "Edit jar"
+  },
+  "goalsFieldJarName": {
+    "ar": "الاسم",
+    "en": "Name"
+  },
+  "goalsFieldJarNameHint": {
+    "ar": "مثلًا: السفر",
+    "en": "e.g. Travel"
+  },
+  "goalsFieldTarget": {
+    "ar": "المبلغ المستهدف",
+    "en": "Target"
+  },
+  "goalsFieldDeadline": {
+    "ar": "الموعد النهائي",
+    "en": "Deadline"
+  },
+  "goalsFieldIcon": {
+    "ar": "الرمز",
+    "en": "Icon"
+  },
+  "goalsFieldColor": {
+    "ar": "اللون",
+    "en": "Colour"
+  },
+  "goalsDeposit": {
+    "ar": "إيداع",
+    "en": "Deposit"
+  },
+  "goalsWithdraw": {
+    "ar": "سحب",
+    "en": "Withdraw"
+  },
+  "goalsDepositTo": {
+    "ar": "إيداع في {name}",
+    "en": "Deposit to {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsWithdrawFrom": {
+    "ar": "سحب من {name}",
+    "en": "Withdraw from {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsWithdrawTooMuch": {
+    "ar": "المدّخر {amount} فقط",
+    "en": "Only {amount} is saved",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsJarReached": {
+    "ar": "بلغت {name} هدفها!",
+    "en": "{name} reached its target!",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDeposited": {
+    "ar": "أُودِع {amount}",
+    "en": "Deposited {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsWithdrawn": {
+    "ar": "سُحب {amount}",
+    "en": "Withdrew {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsJarArchived": {
+    "ar": "أُرشفت الحصّالة",
+    "en": "Jar archived"
+  },
+  "goalsJarRestored": {
+    "ar": "أُعيدت الحصّالة",
+    "en": "Jar restored"
+  },
+  "goalsArchive": {
+    "ar": "أرشفة",
+    "en": "Archive"
+  },
+  "goalsUnarchive": {
+    "ar": "إلغاء الأرشفة",
+    "en": "Unarchive"
+  },
+  "goalsArchivedJars": {
+    "ar": "حصّالات مؤرشفة",
+    "en": "Archived jars"
+  },
+  "goalsJarsEmptyTitle": {
+    "ar": "لا حصّالات بعد",
+    "en": "No jars yet"
+  },
+  "goalsJarsEmptyBody": {
+    "ar": "خصّص حصّالة لكل هدف – سفر، طوارئ، هدية – وراقبها تمتلئ.",
+    "en": "Give each goal its own jar – travel, emergencies, a gift – and watch it fill."
+  },
+  "goalsJarsHint": {
+    "ar": "اسحب الحصّالة لإيداع سريع، واضغط مطوّلًا لبقية الخيارات، واسحب المقبض لترتيبها.",
+    "en": "Swipe a jar for a quick deposit, long-press for more, drag the handle to reorder."
+  },
+  "goalsJarsReachedCount": {
+    "ar": "{count, plural, =1{حصّالة بلغت هدفها} =2{حصّالتان بلغتا هدفيهما} few{{n} حصّالات بلغت أهدافها} many{{n} حصّالةً بلغت أهدافها} other{{n} حصّالة بلغت أهدافها}}",
+    "en": "{count, plural, =1{1 jar reached its target} other{{n} jars reached their targets}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSavedInJars": {
+    "ar": "المدّخر في الحصّالات",
+    "en": "Saved in jars"
+  },
+  "goalsNeededThisMonth": {
+    "ar": "المطلوب هذا الشهر",
+    "en": "Needed this month"
+  },
+  "goalsOfTargets": {
+    "ar": "من الأهداف",
+    "en": "of targets"
+  },
+  "goalsOverallProgress": {
+    "ar": "التقدّم الكلّي {percent}",
+    "en": "Overall progress {percent}",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNeedPerMonth": {
+    "ar": "{amount} شهريًا",
+    "en": "{amount} a month",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDeadlineOn": {
+    "ar": "حتى {date}",
+    "en": "By {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSurplus": {
+    "ar": "فائض {amount}",
+    "en": "{amount} over",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsTargetOf": {
+    "ar": "الهدف {amount}",
+    "en": "Target {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNoDeadlineHint": {
+    "ar": "أضف موعدًا لتعرف المطلوب شهريًا",
+    "en": "Add a deadline to see the monthly amount"
+  },
+  "goalsPaceReached": {
+    "ar": "بلغت الهدف",
+    "en": "Target reached"
+  },
+  "goalsPaceOnTrack": {
+    "ar": "على المسار",
+    "en": "On track"
+  },
+  "goalsPaceBehind": {
+    "ar": "متأخرة عن الخطة",
+    "en": "Behind plan"
+  },
+  "goalsPaceOverdue": {
+    "ar": "فات الموعد",
+    "en": "Past deadline"
+  },
+  "goalsPaceOpen": {
+    "ar": "بلا موعد",
+    "en": "No deadline"
+  },
+  "goalsBalanceAfter": {
+    "ar": "الرصيد بعدها: {amount}",
+    "en": "Balance after: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsPercentOfTarget": {
+    "ar": "{percent} من الهدف",
+    "en": "{percent} of the target",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsWalletAmount": {
+    "ar": "بعملة المحفظة: {amount}",
+    "en": "In the wallet’s currency: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsTrajectory": {
+    "ar": "مسار الادّخار",
+    "en": "Savings trajectory"
+  },
+  "goalsHistory": {
+    "ar": "السجلّ",
+    "en": "History"
+  },
+  "goalsNoMovements": {
+    "ar": "لا إيداعات بعد",
+    "en": "No deposits yet"
+  },
+  "goalsDeleteJar": {
+    "ar": "حذف الحصّالة",
+    "en": "Delete jar"
+  },
+  "goalsAlidadeHint": {
+    "ar": "المؤشّر الذهبي يدلّ على موضعك المفترض اليوم ({percent})",
+    "en": "The gold pointer marks where the plan puts you today ({percent})",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsRemaining": {
+    "ar": "المتبقّي",
+    "en": "Remaining"
+  },
+  "goalsSurplusLabel": {
+    "ar": "فوق الهدف",
+    "en": "Over target"
+  },
+  "goalsNeededNow": {
+    "ar": "المطلوب الآن",
+    "en": "Needed now"
+  },
+  "goalsPerMonth": {
+    "ar": "المطلوب شهريًا",
+    "en": "Per month"
+  },
+  "goalsPerWeekCaption": {
+    "ar": "أو {amount} أسبوعيًا",
+    "en": "or {amount} a week",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDaysLeft": {
+    "ar": "{count, plural, =0{ينتهي اليوم} =1{باقٍ يوم واحد} =2{باقٍ يومان} few{باقٍ {n} أيام} many{باقٍ {n} يومًا} other{باقٍ {n} يوم}}",
+    "en": "{count, plural, =0{Ends today} =1{1 day left} other{{n} days left}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsAtYourPace": {
+    "ar": "بوتيرتك الحالية",
+    "en": "At your pace"
+  },
+  "goalsAfterDeadline": {
+    "ar": "بعد الموعد",
+    "en": "after the deadline"
+  },
+  "goalsBeforeDeadline": {
+    "ar": "قبل الموعد",
+    "en": "before the deadline"
+  },
+  "goalsSavedTotal": {
+    "ar": "مدّخر {amount}",
+    "en": "{amount} saved",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtNew": {
+    "ar": "دين جديد",
+    "en": "New debt"
+  },
+  "goalsDebtEdit": {
+    "ar": "تعديل الدين",
+    "en": "Edit debt"
+  },
+  "goalsFieldDirection": {
+    "ar": "الاتجاه",
+    "en": "Direction"
+  },
+  "goalsIOwe": {
+    "ar": "عليّ",
+    "en": "I owe",
+    "description": "Debt direction: money I owe someone"
+  },
+  "goalsOwedToMe": {
+    "ar": "لي",
+    "en": "Owed to me",
+    "description": "Debt direction: money someone owes me"
+  },
+  "goalsDebtIOweSubtitle": {
+    "ar": "دين عليّ",
+    "en": "I owe them"
+  },
+  "goalsDebtOwedSubtitle": {
+    "ar": "دين لي عنده",
+    "en": "They owe me"
+  },
+  "goalsFieldPerson": {
+    "ar": "الشخص",
+    "en": "Person"
+  },
+  "goalsFieldPersonHint": {
+    "ar": "اسم الشخص أو الجهة",
+    "en": "Person or business"
+  },
+  "goalsFieldDueDate": {
+    "ar": "تاريخ الاستحقاق",
+    "en": "Due date"
+  },
+  "goalsIOweTo": {
+    "ar": "أنا مدين لـ{person}",
+    "en": "I owe {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsOwedBy": {
+    "ar": "{person} مدين لي",
+    "en": "{person} owes me",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsRemainingOf": {
+    "ar": "يتبقّى {remaining} من {total}",
+    "en": "{remaining} left of {total}",
+    "placeholders": {
+      "remaining": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSettle": {
+    "ar": "تسوية",
+    "en": "Settle"
+  },
+  "goalsReopen": {
+    "ar": "إعادة فتح",
+    "en": "Reopen"
+  },
+  "goalsSettled": {
+    "ar": "مُسوّى",
+    "en": "Settled"
+  },
+  "goalsSettledOn": {
+    "ar": "سُوّي في {date}",
+    "en": "Settled {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSettledWrittenOff": {
+    "ar": "سُوّي في {date}، وسُومح بـ{amount}",
+    "en": "Settled {date}; {amount} written off",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNoDueDate": {
+    "ar": "بلا موعد",
+    "en": "No due date"
+  },
+  "goalsRecordPayment": {
+    "ar": "تسجيل دفعة",
+    "en": "Record payment"
+  },
+  "goalsPayTo": {
+    "ar": "دفعة إلى {person}",
+    "en": "Payment to {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsReceiveFrom": {
+    "ar": "دفعة من {person}",
+    "en": "Payment from {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtPaidOff": {
+    "ar": "سُدّد الحساب مع {person} بالكامل",
+    "en": "All paid up with {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsPaymentRecorded": {
+    "ar": "سُجّلت دفعة {amount}",
+    "en": "Recorded {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtSettled": {
+    "ar": "سُوّي الدين مع {person}",
+    "en": "Settled with {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtReopened": {
+    "ar": "أُعيد فتح الدين",
+    "en": "Debt reopened"
+  },
+  "goalsPayments": {
+    "ar": "الدفعات",
+    "en": "Payments"
+  },
+  "goalsNoPayments": {
+    "ar": "لا دفعات بعد",
+    "en": "No payments yet"
+  },
+  "goalsPaidSoFar": {
+    "ar": "دُفع حتى الآن {amount}",
+    "en": "{amount} paid so far",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsPaysOff": {
+    "ar": "هذه الدفعة تُنهي الدين",
+    "en": "This pays it off"
+  },
+  "goalsRemainingAfter": {
+    "ar": "يتبقّى بعدها {amount}",
+    "en": "{amount} left after this",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsPaidOfTotal": {
+    "ar": "{paid} من {total}",
+    "en": "{paid} of {total}",
+    "placeholders": {
+      "paid": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtsEmptyTitle": {
+    "ar": "لا ديون مسجّلة",
+    "en": "No debts"
+  },
+  "goalsDebtsEmptyBody": {
+    "ar": "سجّل ما عليك وما لك عند الآخرين، مع مواعيد السداد والدفعات الجزئية.",
+    "en": "Keep track of what you owe and what others owe you, with due dates and partial payments."
+  },
+  "goalsNoOpenDebts": {
+    "ar": "لا ديون مفتوحة هنا",
+    "en": "Nothing open here"
+  },
+  "goalsSettledDebts": {
+    "ar": "ديون مُسوّاة",
+    "en": "Settled"
+  },
+  "goalsDebtsHint": {
+    "ar": "اسحب الدين لتسويته فورًا، ويمكنك التراجع.",
+    "en": "Swipe a debt to settle it – you can undo."
+  },
+  "goalsDebtsCount": {
+    "ar": "{count, plural, =0{لا ديون مفتوحة} =1{دين مفتوح واحد} =2{دينان مفتوحان} few{{n} ديون مفتوحة} many{{n} دينًا مفتوحًا} other{{n} دين مفتوح}}",
+    "en": "{count, plural, =0{none open} =1{1 open} other{{n} open}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNetEven": {
+    "ar": "الكفّتان متعادلتان",
+    "en": "You’re even"
+  },
+  "goalsNetOwedToMe": {
+    "ar": "الصافي لك: {amount}",
+    "en": "Net owed to you: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNetIOwe": {
+    "ar": "الصافي عليك: {amount}",
+    "en": "Net you owe: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsOverdueCount": {
+    "ar": "{count, plural, =1{متأخر واحد} =2{متأخران} few{{n} متأخرة} many{{n} متأخرًا} other{{n} متأخر}}",
+    "en": "{count, plural, =1{1 overdue} other{{n} overdue}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsObligationNew": {
+    "ar": "التزام جديد",
+    "en": "New recurring payment"
+  },
+  "goalsObligationNewSubtitle": {
+    "ar": "إيجار، قسط، اشتراك، مصروف… أي دفعة تتكرر",
+    "en": "Rent, an instalment, a subscription, an allowance… anything that repeats"
+  },
+  "goalsObligationEdit": {
+    "ar": "تعديل الالتزام",
+    "en": "Edit recurring payment"
+  },
+  "goalsFieldObligationName": {
+    "ar": "الاسم",
+    "en": "Name"
+  },
+  "goalsFieldObligationNameHint": {
+    "ar": "مثلًا: الإيجار",
+    "en": "e.g. Rent"
+  },
+  "goalsFieldFrequency": {
+    "ar": "يتكرر",
+    "en": "Repeats"
+  },
+  "goalsWeekly": {
+    "ar": "أسبوعيًا",
+    "en": "Weekly"
+  },
+  "goalsMonthly": {
+    "ar": "شهريًا",
+    "en": "Monthly"
+  },
+  "goalsYearly": {
+    "ar": "سنويًا",
+    "en": "Yearly"
+  },
+  "goalsFieldInterval": {
+    "ar": "كل كم فترة",
+    "en": "Every how many"
+  },
+  "goalsFieldIntervalHint": {
+    "ar": "واحد: كل فترة، اثنان: كل فترتين…",
+    "en": "1 = every time, 2 = every other…"
+  },
+  "goalsFieldNextDue": {
+    "ar": "الاستحقاق القادم",
+    "en": "Next due"
+  },
+  "goalsFieldPayFromWallet": {
+    "ar": "يُدفع من محفظة",
+    "en": "Paid from wallet"
+  },
+  "goalsFieldBudgetItem": {
+    "ar": "بند الميزانية",
+    "en": "Budget item"
+  },
+  "goalsNoBudgetItem": {
+    "ar": "بلا بند",
+    "en": "No budget item"
+  },
+  "goalsFieldPaidOn": {
+    "ar": "تاريخ الدفع",
+    "en": "Paid on"
+  },
+  "goalsMarkPaid": {
+    "ar": "دُفع",
+    "en": "Paid"
+  },
+  "goalsMarkPaidFor": {
+    "ar": "تسجيل دفع {name}",
+    "en": "Mark {name} paid",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsPayOther": {
+    "ar": "دفع بمبلغ آخر",
+    "en": "Pay a different amount"
+  },
+  "goalsPayOtherShort": {
+    "ar": "مبلغ آخر",
+    "en": "Other amount"
+  },
+  "goalsPayObligation": {
+    "ar": "دفع {name}",
+    "en": "Pay {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsForDue": {
+    "ar": "عن استحقاق {date}",
+    "en": "For {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSkip": {
+    "ar": "تخطّي",
+    "en": "Skip"
+  },
+  "goalsSkippedEntry": {
+    "ar": "تم التخطّي",
+    "en": "Skipped"
+  },
+  "goalsPause": {
+    "ar": "إيقاف مؤقت",
+    "en": "Pause"
+  },
+  "goalsResume": {
+    "ar": "استئناف",
+    "en": "Resume"
+  },
+  "goalsPaused": {
+    "ar": "موقوف",
+    "en": "Paused"
+  },
+  "goalsObligationPaid": {
+    "ar": "سُجّل الدفع، والموعد القادم {date}",
+    "en": "Paid – next due {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsObligationSkipped": {
+    "ar": "تم التخطّي، والموعد القادم {date}",
+    "en": "Skipped – next due {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsObligationPaused": {
+    "ar": "أُوقف الالتزام مؤقتًا",
+    "en": "Paused"
+  },
+  "goalsObligationResumed": {
+    "ar": "استُؤنف الالتزام",
+    "en": "Resumed"
+  },
+  "goalsObligationsEmptyTitle": {
+    "ar": "لا التزامات دورية",
+    "en": "No recurring payments"
+  },
+  "goalsObligationsEmptyBody": {
+    "ar": "أضف ما يتكرر – الإيجار، الأقساط، الاشتراكات – وستصلك تذكرة قبل موعده، ويسجّل «دُفع» المصروف وينقلك إلى الموعد التالي.",
+    "en": "Add what repeats – rent, instalments, subscriptions. You’ll get a reminder before each one, and “Paid” records the expense and moves on to the next date."
+  },
+  "goalsObligationsHint": {
+    "ar": "اسحب الالتزام لتسجيل دفعه، ويمكنك التراجع.",
+    "en": "Swipe to mark paid – you can undo."
+  },
+  "goalsMonthlyCommitments": {
+    "ar": "الالتزامات شهريًا",
+    "en": "Commitments per month"
+  },
+  "goalsActiveCount": {
+    "ar": "{count, plural, =0{لا التزامات نشطة} =1{التزام نشط واحد} =2{التزامان نشطان} few{{n} التزامات نشطة} many{{n} التزامًا نشطًا} other{{n} التزام نشط}}",
+    "en": "{count, plural, =0{none active} =1{1 active} other{{n} active}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDueSoonCount": {
+    "ar": "{count, plural, =1{مستحق خلال أسبوع} =2{مستحقان خلال أسبوع} few{{n} مستحقة خلال أسبوع} many{{n} مستحقًا خلال أسبوع} other{{n} مستحق خلال أسبوع}}",
+    "en": "{count, plural, =1{1 within a week} other{{n} within a week}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsSectionOverdue": {
+    "ar": "متأخرة",
+    "en": "Overdue"
+  },
+  "goalsSectionThisWeek": {
+    "ar": "خلال أسبوع",
+    "en": "Within a week"
+  },
+  "goalsSectionLater": {
+    "ar": "لاحقًا",
+    "en": "Later"
+  },
+  "goalsSectionPaused": {
+    "ar": "موقوفة",
+    "en": "Paused"
+  },
+  "goalsNextDue": {
+    "ar": "الاستحقاق القادم",
+    "en": "Next due"
+  },
+  "goalsComingUp": {
+    "ar": "المواعيد التالية",
+    "en": "After that"
+  },
+  "goalsNoHistory": {
+    "ar": "لم يُسجّل دفع بعد",
+    "en": "Nothing paid yet"
+  },
+  "goalsPaidOnForDue": {
+    "ar": "دُفع في {paid} عن {due}",
+    "en": "Paid {paid} for {due}",
+    "placeholders": {
+      "paid": {
+        "type": "String"
+      },
+      "due": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsPaidFrom": {
+    "ar": "يُدفع من {wallet}",
+    "en": "Paid from {wallet}",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsCountsToward": {
+    "ar": "يُحسب على بند {item}",
+    "en": "Counts toward {item}",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNoWalletHint": {
+    "ar": "بلا محفظة: «دُفع» يسجّل الدفعة دون حركة في المحافظ.",
+    "en": "No wallet: “Paid” records the payment without a wallet transaction."
+  },
+  "goalsRecordedInLedger": {
+    "ar": "مسجّل في دفتر الحركات",
+    "en": "Recorded in the ledger"
+  },
+  "goalsPeriodsDue": {
+    "ar": "{count, plural, =1{فترة مستحقة} =2{فترتان مستحقتان} few{{n} فترات مستحقة} many{{n} فترةً مستحقة} other{{n} فترة مستحقة}}",
+    "en": "{count, plural, =1{1 period due} other{{n} periods due}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNextDates": {
+    "ar": "التالي: {dates}",
+    "en": "Next: {dates}",
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsAboutPerMonth": {
+    "ar": "قرابة {amount} شهريًا",
+    "en": "About {amount} a month",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNothingDue": {
+    "ar": "{count, plural, =1{لا شيء مستحق غدًا} =2{لا شيء مستحق خلال يومين} few{لا شيء مستحق خلال {n} أيام} many{لا شيء مستحق خلال {n} يومًا} other{لا شيء مستحق خلال {n} يوم}}",
+    "en": "{count, plural, =1{Nothing due tomorrow} other{Nothing due in the next {n} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsMoreDues": {
+    "ar": "{count, plural, =1{وواحد آخر} =2{واثنان آخران} few{و{n} أخرى} many{و{n} أخرى} other{و{n} أخرى}}",
+    "en": "{count, plural, =1{and 1 more} other{and {n} more}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsRemindersTitle": {
+    "ar": "تذكير المستحقات",
+    "en": "Due reminders"
+  },
+  "goalsRemindersSubtitle": {
+    "ar": "للديون والالتزامات الدورية",
+    "en": "For debts and recurring payments"
+  },
+  "goalsRemindersEnabled": {
+    "ar": "التذكيرات",
+    "en": "Reminders"
+  },
+  "goalsRemindersEnabledHint": {
+    "ar": "تنبيه هادئ قبل الموعد وفي يومه",
+    "en": "A quiet nudge before and on the due day"
+  },
+  "goalsRemindersLead": {
+    "ar": "تذكير مبكر",
+    "en": "Early reminder"
+  },
+  "goalsRemindersLeadNone": {
+    "ar": "بلا تذكير مبكر",
+    "en": "None"
+  },
+  "goalsRemindersLeadDays": {
+    "ar": "{count, plural, =1{قبل يوم} =2{قبل يومين} few{قبل {n} أيام} many{قبل {n} يومًا} other{قبل {n} يوم}}",
+    "en": "{count, plural, =1{1 day before} other{{n} days before}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsRemindersOnDueDay": {
+    "ar": "وفي يوم الاستحقاق أيضًا",
+    "en": "On the due day too"
+  },
+  "goalsRemindersTime": {
+    "ar": "الوقت",
+    "en": "Time"
+  },
+  "goalsNotifyGroup": {
+    "ar": "المال",
+    "en": "Money",
+    "description": "Notification channel group (system settings)"
+  },
+  "goalsNotifyChannel": {
+    "ar": "مواعيد الاستحقاق",
+    "en": "Due dates",
+    "description": "Notification channel name (system settings)"
+  },
+  "goalsNotifyChannelDescription": {
+    "ar": "تذكير بالديون والالتزامات الدورية قبل موعدها",
+    "en": "Reminders for debts and recurring payments before they are due"
+  },
+  "goalsNotifyObligationTitle": {
+    "ar": "استحقاق {name}",
+    "en": "{name} is due",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNotifyObligationBody": {
+    "ar": "{when} – المبلغ {amount}",
+    "en": "{when} – {amount}",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNotifyDebtIOweTitle": {
+    "ar": "سداد لـ{person}",
+    "en": "Pay back {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNotifyDebtIOweBody": {
+    "ar": "{when} – يُستحق عليك {amount}",
+    "en": "{when} – you owe {amount}",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNotifyDebtOwedTitle": {
+    "ar": "دين على {person}",
+    "en": "{person} owes you",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsNotifyDebtOwedBody": {
+    "ar": "{when} – يُستحق لك {amount}",
+    "en": "{when} – {amount} is due to you",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsFieldDebtWallet": {
+    "ar": "عبر محفظة",
+    "en": "Through a wallet",
+    "description": "Debt editor: the wallet the lent / borrowed money went through"
+  },
+  "goalsDebtLentFrom": {
+    "ar": "خرج المبلغ من {wallet}، فينقص رصيدها {amount}",
+    "en": "Lent from {wallet} – its balance drops by {amount}",
+    "description": "Debt editor preview (owed to me, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtBorrowedInto": {
+    "ar": "دخل المبلغ إلى {wallet}، فيزيد رصيدها {amount}",
+    "en": "Borrowed into {wallet} – its balance rises by {amount}",
+    "description": "Debt editor preview (I owe, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtNoWalletHint": {
+    "ar": "بلا محفظة: تبقى أرصدة المحافظ كما هي.",
+    "en": "No wallet: wallet balances stay as they are.",
+    "description": "Debt editor preview without a wallet"
+  }
+}

@@ -19,9 +19,22 @@ void main() {
   test('a reason opens its moon or its task; other records are not buttons', () {
     expect(RecordOpener.canOpen('people', 'p1', const [dad]), isTrue);
     expect(RecordOpener.canOpen('tasks', 't1', const []), isTrue);
-    expect(RecordOpener.canOpen('medications', 'm1', const [dad]), isFalse);
+    expect(RecordOpener.canOpen('budgets', 'b1', const [dad]), isFalse);
     expect(RecordOpener.canOpen('people', 'p2', const [dad]), isFalse, reason: 'a hidden / missing moon');
     expect(RecordOpener.canOpen(null, null, const [dad]), isFalse);
+  });
+
+  test('a Health record opens its screen (a reason about several doses too)', () {
+    expect(RecordOpener.canOpen('medications', 'm1', const [dad]), isTrue);
+    expect(RecordOpener.canOpen('medications', null, const []), isTrue, reason: 'doses of several medications');
+    expect(RecordOpener.canOpen('lab_tests', 'l1', const []), isTrue);
+    expect(RecordOpener.canOpen('habits', 'h1', const [], planetKey: 'health'), isTrue);
+    expect(RecordOpener.canOpen('habits', 'h1', const [], planetKey: 'growth'), isFalse, reason: "another world's habit");
+    expect(RecordOpener.healthLocation('medications:m1'), '/meds');
+    expect(RecordOpener.healthLocation('medications'), '/meds');
+    expect(RecordOpener.healthLocation('appointments:a1'), '/record/appointments?highlight=a1');
+    expect(RecordOpener.healthLocation('lab_tests:l 1'), '/record/lab/l%201');
+    expect(RecordOpener.healthLocation('people:p1'), isNull);
   });
 
   test('item ids split into table and id (ids may contain colons)', () {

@@ -1,0 +1,1128 @@
+{
+  "ledgerTitle": {
+    "ar": "المحافظ والحركات",
+    "en": "Wallets & ledger",
+    "description": "Title of the ledger hub screen"
+  },
+  "ledgerNetBalance": {
+    "ar": "صافي الرصيد",
+    "en": "Net balance",
+    "description": "Label above the total of all wallets in the base currency"
+  },
+  "ledgerPersonal": {
+    "ar": "شخصي",
+    "en": "Personal",
+    "description": "Wallet kind: personal money"
+  },
+  "ledgerBusiness": {
+    "ar": "تجاري",
+    "en": "Business",
+    "description": "Wallet kind: business money (the e-commerce side)"
+  },
+  "ledgerApprox": {
+    "ar": "≈ {amount}",
+    "en": "≈ {amount}",
+    "description": "An amount converted to the base currency",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerWallets": {
+    "ar": "المحافظ",
+    "en": "Wallets",
+    "description": "Section / card title: the wallets"
+  },
+  "ledgerAddWallet": {
+    "ar": "محفظة جديدة",
+    "en": "New wallet",
+    "description": "Button: create a wallet"
+  },
+  "ledgerArchivedCount": {
+    "ar": "المؤرشفة ({count})",
+    "en": "Archived ({count})",
+    "description": "Collapsed group of archived wallets; count already formatted",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerRecent": {
+    "ar": "آخر الحركات",
+    "en": "Recent activity",
+    "description": "Section title: latest transactions"
+  },
+  "ledgerSeeAll": {
+    "ar": "عرض الكل",
+    "en": "See all",
+    "description": "Action: open the full transactions list"
+  },
+  "ledgerCurrencies": {
+    "ar": "العملات وأسعار الصرف",
+    "en": "Currencies & rates",
+    "description": "Action / screen title: currencies and exchange rates"
+  },
+  "ledgerSearch": {
+    "ar": "ابحث في الحركات",
+    "en": "Search transactions",
+    "description": "Search field hint / action"
+  },
+  "ledgerAddTx": {
+    "ar": "حركة جديدة",
+    "en": "New transaction",
+    "description": "Button / sheet title: add a transaction"
+  },
+  "ledgerEmptyTitle": {
+    "ar": "ابدأ بمحفظتك الأولى",
+    "en": "Start with your first wallet",
+    "description": "Empty ledger title"
+  },
+  "ledgerEmptyBody": {
+    "ar": "أنشئ محفظة لكل مكان يوجد فيه مالك: نقدًا، في البنك، أو عهدة لدى شركة التوصيل.",
+    "en": "Create a wallet for every place your money lives: cash, a bank account, or cash held by a courier.",
+    "description": "Empty ledger body"
+  },
+  "ledgerNoTxTitle": {
+    "ar": "لا حركات بعد",
+    "en": "No transactions yet",
+    "description": "Empty transactions title"
+  },
+  "ledgerNoTxBody": {
+    "ar": "سجّل مصروفًا أو دخلًا وسيظهر هنا.",
+    "en": "Record an expense or income and it shows up here.",
+    "description": "Empty transactions body"
+  },
+  "ledgerNoResults": {
+    "ar": "لا حركات مطابقة",
+    "en": "No matching transactions",
+    "description": "Empty search / filter result title"
+  },
+  "ledgerNoResultsBody": {
+    "ar": "جرّب كلمة أخرى أو أزل بعض عوامل التصفية.",
+    "en": "Try another word or remove some filters.",
+    "description": "Empty search / filter result body"
+  },
+  "ledgerMissingRate": {
+    "ar": "بلا سعر صرف، فلم تُحسب في المجموع: {codes}",
+    "en": "No exchange rate, left out of the total: {codes}",
+    "description": "Warning: currencies without a rate are excluded from base totals",
+    "placeholders": {
+      "codes": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerRatesDefaults": {
+    "ar": "أسعار الصرف ما زالت تقديرية. راجعها لتكون المجاميع دقيقة.",
+    "en": "Exchange rates are still rough defaults. Review them for accurate totals.",
+    "description": "Banner while seeded rates are unchanged"
+  },
+  "ledgerReview": {
+    "ar": "مراجعة",
+    "en": "Review",
+    "description": "Banner action: open the currencies screen"
+  },
+  "ledgerKindExpense": {
+    "ar": "مصروف",
+    "en": "Expense",
+    "description": "Transaction kind"
+  },
+  "ledgerKindIncome": {
+    "ar": "دخل",
+    "en": "Income",
+    "description": "Transaction kind"
+  },
+  "ledgerKindTransfer": {
+    "ar": "تحويل",
+    "en": "Transfer",
+    "description": "Transaction kind"
+  },
+  "ledgerKindAdjustment": {
+    "ar": "تسوية",
+    "en": "Adjustment",
+    "description": "Transaction kind: balance correction"
+  },
+  "ledgerToday": {
+    "ar": "اليوم",
+    "en": "Today",
+    "description": "Day header"
+  },
+  "ledgerYesterday": {
+    "ar": "أمس",
+    "en": "Yesterday",
+    "description": "Day header / date chip"
+  },
+  "ledgerTransferRoute": {
+    "ar": "{from} ← {to}",
+    "en": "{from} → {to}",
+    "description": "Transfer title: source and destination wallet names (already isolated)",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerTransferOut": {
+    "ar": "تحويل إلى {wallet}",
+    "en": "Transfer to {wallet}",
+    "description": "Transfer seen from its source wallet",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerTransferIn": {
+    "ar": "تحويل من {wallet}",
+    "en": "Transfer from {wallet}",
+    "description": "Transfer seen from its destination wallet",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerAdjustmentTitle": {
+    "ar": "تسوية الرصيد",
+    "en": "Balance adjustment",
+    "description": "Title of an adjustment entry"
+  },
+  "ledgerUnassigned": {
+    "ar": "بلا بند",
+    "en": "No budget item",
+    "description": "Expense or income without a budget item"
+  },
+  "ledgerBalanceAfter": {
+    "ar": "الرصيد {amount}",
+    "en": "Balance {amount}",
+    "description": "Running balance after an entry",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerDuplicateToday": {
+    "ar": "تكرار لليوم",
+    "en": "Duplicate to today",
+    "description": "Menu action"
+  },
+  "ledgerDeleted": {
+    "ar": "حُذفت الحركة",
+    "en": "Transaction deleted",
+    "description": "Undo toast"
+  },
+  "ledgerDuplicated": {
+    "ar": "تكررت الحركة بتاريخ اليوم",
+    "en": "Duplicated to today",
+    "description": "Undo toast"
+  },
+  "ledgerMoved": {
+    "ar": "نُقلت إلى {wallet}",
+    "en": "Moved to {wallet}",
+    "description": "Undo toast",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerMovedConverted": {
+    "ar": "نُقلت إلى {wallet} بمبلغ {amount}",
+    "en": "Moved to {wallet} as {amount}",
+    "description": "Undo toast when the amount was converted",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerSaved": {
+    "ar": "حُفظت الحركة",
+    "en": "Transaction saved",
+    "description": "Toast after adding"
+  },
+  "ledgerUpdated": {
+    "ar": "عُدّلت الحركة",
+    "en": "Transaction updated",
+    "description": "Toast after editing"
+  },
+  "ledgerMoveTitle": {
+    "ar": "نقل الحركة إلى…",
+    "en": "Move to…",
+    "description": "Move sheet title"
+  },
+  "ledgerEditTx": {
+    "ar": "تعديل الحركة",
+    "en": "Edit transaction",
+    "description": "Sheet title"
+  },
+  "ledgerWallet": {
+    "ar": "المحفظة",
+    "en": "Wallet",
+    "description": "Field label"
+  },
+  "ledgerFrom": {
+    "ar": "من",
+    "en": "From",
+    "description": "Transfer source label"
+  },
+  "ledgerTo": {
+    "ar": "إلى",
+    "en": "To",
+    "description": "Transfer destination label"
+  },
+  "ledgerSent": {
+    "ar": "المُرسَل",
+    "en": "Sent",
+    "description": "Transfer amount leaving the source"
+  },
+  "ledgerReceived": {
+    "ar": "المستلَم",
+    "en": "Received",
+    "description": "Transfer amount reaching the destination"
+  },
+  "ledgerUseRate": {
+    "ar": "حسب سعر الصرف",
+    "en": "Use the rate",
+    "description": "Reset the received amount to the converted one"
+  },
+  "ledgerRateLine": {
+    "ar": "{one} {from} = {rate} {to}",
+    "en": "{one} {from} = {rate} {to}",
+    "description": "An exchange rate line; one and rate are formatted numbers, from/to symbols",
+    "placeholders": {
+      "one": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerBudgetItem": {
+    "ar": "البند",
+    "en": "Budget item",
+    "description": "Field label"
+  },
+  "ledgerChooseItem": {
+    "ar": "اختر بندًا",
+    "en": "Choose an item",
+    "description": "Picker placeholder"
+  },
+  "ledgerNoBudget": {
+    "ar": "لا بنود في الميزانية بعد",
+    "en": "No budget items yet",
+    "description": "Picker when the budget is empty"
+  },
+  "ledgerSearchItems": {
+    "ar": "ابحث عن بند",
+    "en": "Search items",
+    "description": "Budget picker search hint"
+  },
+  "ledgerItemLeft": {
+    "ar": "متبقٍّ {amount}",
+    "en": "{amount} left",
+    "description": "Budget item remaining this period",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerItemOver": {
+    "ar": "تجاوز {amount}",
+    "en": "{amount} over",
+    "description": "Budget item overspent this period",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerDate": {
+    "ar": "التاريخ",
+    "en": "Date",
+    "description": "Field label"
+  },
+  "ledgerOtherDay": {
+    "ar": "يوم آخر",
+    "en": "Other day",
+    "description": "Date chip opening a calendar"
+  },
+  "ledgerNote": {
+    "ar": "ملاحظة",
+    "en": "Note",
+    "description": "Field label"
+  },
+  "ledgerNoteHint": {
+    "ar": "مثلًا: خضار من السوق",
+    "en": "e.g. vegetables from the market",
+    "description": "Note hint"
+  },
+  "ledgerTags": {
+    "ar": "الوسوم",
+    "en": "Tags",
+    "description": "Field label / filter"
+  },
+  "ledgerTagHint": {
+    "ar": "أضف وسمًا",
+    "en": "Add a tag",
+    "description": "Tag input hint"
+  },
+  "ledgerSetBalance": {
+    "ar": "الرصيد الفعلي",
+    "en": "Actual balance",
+    "description": "Adjustment mode: type the real balance"
+  },
+  "ledgerDifference": {
+    "ar": "الفرق",
+    "en": "Difference",
+    "description": "Adjustment mode / preview: the change"
+  },
+  "ledgerCurrentBalance": {
+    "ar": "الرصيد الحالي",
+    "en": "Current balance",
+    "description": "Adjustment preview"
+  },
+  "ledgerNegative": {
+    "ar": "سالب",
+    "en": "Negative",
+    "description": "Toggle: the typed amount is negative"
+  },
+  "ledgerErrNoWallet": {
+    "ar": "اختر محفظة",
+    "en": "Choose a wallet",
+    "description": "Validation"
+  },
+  "ledgerErrNoAmount": {
+    "ar": "أدخل المبلغ",
+    "en": "Enter an amount",
+    "description": "Validation"
+  },
+  "ledgerErrNoDestination": {
+    "ar": "اختر المحفظة المستلِمة",
+    "en": "Choose the receiving wallet",
+    "description": "Validation"
+  },
+  "ledgerErrSameWallet": {
+    "ar": "اختر محفظة مختلفة",
+    "en": "Pick a different wallet",
+    "description": "Validation: transfer to itself"
+  },
+  "ledgerErrNoRate": {
+    "ar": "لا يوجد سعر صرف، أدخل المبلغ المستلَم",
+    "en": "No exchange rate: enter the received amount",
+    "description": "Validation"
+  },
+  "ledgerErrNoChange": {
+    "ar": "الرصيد مطابق أصلًا",
+    "en": "The balance already matches",
+    "description": "Validation"
+  },
+  "ledgerNeedWallet": {
+    "ar": "أنشئ محفظة أولًا لتسجيل الحركات",
+    "en": "Create a wallet first to record transactions",
+    "description": "Transaction sheet without wallets"
+  },
+  "ledgerKeyDecimal": {
+    "ar": "فاصلة عشرية",
+    "en": "Decimal point",
+    "description": "Keypad key (screen reader)"
+  },
+  "ledgerKeyBackspace": {
+    "ar": "حذف آخر رقم",
+    "en": "Delete last digit",
+    "description": "Keypad key (screen reader)"
+  },
+  "ledgerAmount": {
+    "ar": "المبلغ",
+    "en": "Amount",
+    "description": "Amount display (screen reader)"
+  },
+  "ledgerWalletEdit": {
+    "ar": "تعديل المحفظة",
+    "en": "Edit wallet",
+    "description": "Sheet title"
+  },
+  "ledgerWalletName": {
+    "ar": "الاسم",
+    "en": "Name",
+    "description": "Field label"
+  },
+  "ledgerWalletNameHint": {
+    "ar": "مثلًا: الصندوق، البنك، عهدة المندوب",
+    "en": "e.g. Cash, Bank, Courier float",
+    "description": "Wallet name hint"
+  },
+  "ledgerOpening": {
+    "ar": "الرصيد الافتتاحي والعملة",
+    "en": "Opening balance & currency",
+    "description": "Field label"
+  },
+  "ledgerWalletKind": {
+    "ar": "نوع المحفظة",
+    "en": "Wallet type",
+    "description": "Field label"
+  },
+  "ledgerColor": {
+    "ar": "اللون",
+    "en": "Colour",
+    "description": "Field label"
+  },
+  "ledgerIcon": {
+    "ar": "الأيقونة",
+    "en": "Icon",
+    "description": "Field label"
+  },
+  "ledgerCurrencyLocked": {
+    "ar": "لا يمكن تغيير العملة بعد تسجيل حركات في المحفظة",
+    "en": "The currency can’t change once the wallet has transactions",
+    "description": "Validation"
+  },
+  "ledgerArchive": {
+    "ar": "أرشفة",
+    "en": "Archive",
+    "description": "Menu action"
+  },
+  "ledgerUnarchive": {
+    "ar": "إعادة من الأرشيف",
+    "en": "Unarchive",
+    "description": "Menu action"
+  },
+  "ledgerArchivedToast": {
+    "ar": "أُرشفت المحفظة",
+    "en": "Wallet archived",
+    "description": "Undo toast"
+  },
+  "ledgerUnarchivedToast": {
+    "ar": "أُعيدت المحفظة",
+    "en": "Wallet restored",
+    "description": "Undo toast"
+  },
+  "ledgerWalletDeleted": {
+    "ar": "{count, plural, =0{حُذفت المحفظة} =1{حُذفت المحفظة وحركة واحدة} =2{حُذفت المحفظة وحركتان} few{حُذفت المحفظة و{count} حركات} many{حُذفت المحفظة و{count} حركة} other{حُذفت المحفظة و{count} حركة}}",
+    "en": "{count, plural, =0{Wallet deleted} =1{Wallet and 1 transaction deleted} other{Wallet and {count} transactions deleted}}",
+    "description": "Undo toast",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ledgerWalletSaved": {
+    "ar": "حُفظت المحفظة",
+    "en": "Wallet saved",
+    "description": "Toast"
+  },
+  "ledgerBalance": {
+    "ar": "الرصيد",
+    "en": "Balance",
+    "description": "Label"
+  },
+  "ledgerBalanceHistory": {
+    "ar": "تطوّر الرصيد",
+    "en": "Balance over time",
+    "description": "Chart title"
+  },
+  "ledgerRange1M": {
+    "ar": "شهر",
+    "en": "1M",
+    "description": "Chart range: one month"
+  },
+  "ledgerRange3M": {
+    "ar": "٣ أشهر",
+    "en": "3M",
+    "description": "Chart range: three months"
+  },
+  "ledgerRange1Y": {
+    "ar": "سنة",
+    "en": "1Y",
+    "description": "Chart range: one year"
+  },
+  "ledgerRangeAll": {
+    "ar": "الكل",
+    "en": "All",
+    "description": "Chart range: everything"
+  },
+  "ledgerTransactions": {
+    "ar": "الحركات",
+    "en": "Transactions",
+    "description": "Screen / section title"
+  },
+  "ledgerWalletMissing": {
+    "ar": "لم نجد هذه المحفظة",
+    "en": "This wallet no longer exists",
+    "description": "Wallet screen for a deleted wallet"
+  },
+  "ledgerOpeningLine": {
+    "ar": "رصيد افتتاحي {amount}",
+    "en": "Opening balance {amount}",
+    "description": "Footer of a wallet's list",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerFilterWallet": {
+    "ar": "المحفظة",
+    "en": "Wallet",
+    "description": "Filter chip"
+  },
+  "ledgerFilterKind": {
+    "ar": "النوع",
+    "en": "Type",
+    "description": "Filter chip"
+  },
+  "ledgerFilterItem": {
+    "ar": "البند",
+    "en": "Item",
+    "description": "Filter chip"
+  },
+  "ledgerFilterTag": {
+    "ar": "الوسم",
+    "en": "Tag",
+    "description": "Filter chip"
+  },
+  "ledgerFilterDate": {
+    "ar": "الفترة",
+    "en": "Dates",
+    "description": "Filter chip"
+  },
+  "ledgerFilterScope": {
+    "ar": "النطاق",
+    "en": "Scope",
+    "description": "Filter chip: personal / business"
+  },
+  "ledgerFilterClear": {
+    "ar": "مسح التصفية",
+    "en": "Clear filters",
+    "description": "Filter chip"
+  },
+  "ledgerFilterMore": {
+    "ar": "{first} +{count}",
+    "en": "{first} +{count}",
+    "description": "Chip label with several selections; count formatted",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerAll": {
+    "ar": "الكل",
+    "en": "All",
+    "description": "Selection: everything"
+  },
+  "ledgerAllWallets": {
+    "ar": "كل المحافظ",
+    "en": "All wallets",
+    "description": "Chart scope"
+  },
+  "ledgerThisWeek": {
+    "ar": "هذا الأسبوع",
+    "en": "This week",
+    "description": "Date preset"
+  },
+  "ledgerThisMonth": {
+    "ar": "هذا الشهر",
+    "en": "This month",
+    "description": "Date preset"
+  },
+  "ledgerLastMonth": {
+    "ar": "الشهر الماضي",
+    "en": "Last month",
+    "description": "Date preset"
+  },
+  "ledgerLastDays": {
+    "ar": "{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}",
+    "en": "{count, plural, =1{Last day} other{Last {count} days}}",
+    "description": "Date preset",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ledgerCustomRange": {
+    "ar": "مدة مخصّصة",
+    "en": "Custom range",
+    "description": "Date preset"
+  },
+  "ledgerRangeLabel": {
+    "ar": "{from} – {to}",
+    "en": "{from} – {to}",
+    "description": "A date range (formatted dates)",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerIncomeTotal": {
+    "ar": "الدخل",
+    "en": "Income",
+    "description": "Totals strip"
+  },
+  "ledgerExpenseTotal": {
+    "ar": "المصروف",
+    "en": "Spent",
+    "description": "Totals strip"
+  },
+  "ledgerNet": {
+    "ar": "الصافي",
+    "en": "Net",
+    "description": "Totals strip"
+  },
+  "ledgerTxCount": {
+    "ar": "{count, plural, =0{لا حركات} =1{حركة واحدة} =2{حركتان} few{{count} حركات} many{{count} حركة} other{{count} حركة}}",
+    "en": "{count, plural, =0{No transactions} =1{1 transaction} other{{count} transactions}}",
+    "description": "Count of transactions",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ledgerSpending": {
+    "ar": "الإنفاق",
+    "en": "Spending",
+    "description": "Chart title"
+  },
+  "ledgerByItem": {
+    "ar": "حسب البند",
+    "en": "By item",
+    "description": "Chart toggle"
+  },
+  "ledgerByWallet": {
+    "ar": "حسب المحفظة",
+    "en": "By wallet",
+    "description": "Chart toggle"
+  },
+  "ledgerPeriodMonth": {
+    "ar": "شهري",
+    "en": "Monthly",
+    "description": "Chart period toggle"
+  },
+  "ledgerPeriodWeek": {
+    "ar": "أسبوعي",
+    "en": "Weekly",
+    "description": "Chart period toggle"
+  },
+  "ledgerPrevPeriod": {
+    "ar": "الفترة السابقة",
+    "en": "Previous period",
+    "description": "Button (screen reader)"
+  },
+  "ledgerNextPeriod": {
+    "ar": "الفترة التالية",
+    "en": "Next period",
+    "description": "Button (screen reader)"
+  },
+  "ledgerNoSpending": {
+    "ar": "لا مصاريف في هذه الفترة",
+    "en": "No spending in this period",
+    "description": "Empty chart"
+  },
+  "ledgerTrend": {
+    "ar": "الدخل والإنفاق",
+    "en": "Income vs spending",
+    "description": "Chart title"
+  },
+  "ledgerTrendSubtitle": {
+    "ar": "{count, plural, =1{آخر شهر} =2{آخر شهرين} few{آخر {count} أشهر} many{آخر {count} شهرًا} other{آخر {count} شهر}}",
+    "en": "{count, plural, =1{Last month} other{Last {count} months}}",
+    "description": "Trend chart subtitle",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ledgerInBase": {
+    "ar": "بالعملة الأساسية {code}",
+    "en": "In base currency {code}",
+    "description": "Chart note; code already isolated",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerTotal": {
+    "ar": "المجموع",
+    "en": "Total",
+    "description": "Chart centre label"
+  },
+  "ledgerOther": {
+    "ar": "أخرى",
+    "en": "Other",
+    "description": "Chart slice grouping small items"
+  },
+  "ledgerChartSpendingSemantics": {
+    "ar": "الإنفاق {period}: المجموع {total}. {slices}",
+    "en": "Spending {period}: total {total}. {slices}",
+    "description": "Screen-reader summary of the spending chart",
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      },
+      "slices": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerChartTrendSemantics": {
+    "ar": "{period}: دخل {income}، إنفاق {expense}",
+    "en": "{period}: income {income}, spending {expense}",
+    "description": "Screen-reader text for one trend bar group",
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "income": {
+        "type": "String"
+      },
+      "expense": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerCurrenciesTitle": {
+    "ar": "العملات",
+    "en": "Currencies",
+    "description": "Screen title"
+  },
+  "ledgerBaseCurrency": {
+    "ar": "العملة الأساسية",
+    "en": "Base currency",
+    "description": "Label"
+  },
+  "ledgerBaseHint": {
+    "ar": "تُعرض بها كل المجاميع والرسوم البيانية",
+    "en": "Every total and chart is shown in it",
+    "description": "Base currency explanation"
+  },
+  "ledgerChangeBase": {
+    "ar": "تغيير العملة الأساسية",
+    "en": "Change base currency",
+    "description": "Action"
+  },
+  "ledgerOtherCurrencies": {
+    "ar": "عملات أخرى",
+    "en": "Other currencies",
+    "description": "Section title"
+  },
+  "ledgerAddCurrency": {
+    "ar": "إضافة عملة",
+    "en": "Add currency",
+    "description": "Action"
+  },
+  "ledgerNewCurrency": {
+    "ar": "عملة جديدة",
+    "en": "New currency",
+    "description": "Sheet title"
+  },
+  "ledgerEditCurrency": {
+    "ar": "تعديل العملة",
+    "en": "Edit currency",
+    "description": "Sheet title"
+  },
+  "ledgerCode": {
+    "ar": "الرمز الدولي",
+    "en": "Code",
+    "description": "Field label (ISO-like code)"
+  },
+  "ledgerCodeHint": {
+    "ar": "مثل EUR",
+    "en": "e.g. EUR",
+    "description": "Code hint"
+  },
+  "ledgerNameAr": {
+    "ar": "الاسم بالعربية",
+    "en": "Arabic name",
+    "description": "Field label"
+  },
+  "ledgerNameEn": {
+    "ar": "الاسم بالإنجليزية",
+    "en": "English name",
+    "description": "Field label"
+  },
+  "ledgerSymbol": {
+    "ar": "الرمز المختصر",
+    "en": "Symbol",
+    "description": "Field label"
+  },
+  "ledgerDecimals": {
+    "ar": "المنازل العشرية",
+    "en": "Decimal places",
+    "description": "Field label"
+  },
+  "ledgerRate": {
+    "ar": "سعر الصرف",
+    "en": "Exchange rate",
+    "description": "Field label"
+  },
+  "ledgerRateHint": {
+    "ar": "يُدخَل يدويًا، دون اتصال بالإنترنت",
+    "en": "Entered by hand, never fetched online",
+    "description": "Rate field hint"
+  },
+  "ledgerErrCode": {
+    "ar": "استخدم حروفًا لاتينية (مثل EUR)",
+    "en": "Use Latin letters (e.g. EUR)",
+    "description": "Validation"
+  },
+  "ledgerErrCodeExists": {
+    "ar": "هذه العملة موجودة",
+    "en": "This currency already exists",
+    "description": "Validation"
+  },
+  "ledgerErrRate": {
+    "ar": "أدخل سعرًا أكبر من صفر",
+    "en": "Enter a rate above zero",
+    "description": "Validation"
+  },
+  "ledgerErrName": {
+    "ar": "أدخل اسمًا",
+    "en": "Enter a name",
+    "description": "Validation"
+  },
+  "ledgerCurrencyInUse": {
+    "ar": "{count, plural, =1{مستخدمة في محفظة واحدة} =2{مستخدمة في محفظتين} few{مستخدمة في {count} محافظ} many{مستخدمة في {count} محفظة} other{مستخدمة في {count} محفظة}}",
+    "en": "{count, plural, =1{Used by 1 wallet} other{Used by {count} wallets}}",
+    "description": "Why a currency cannot be deleted",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ledgerCurrencyDeleted": {
+    "ar": "حُذفت العملة",
+    "en": "Currency deleted",
+    "description": "Undo toast"
+  },
+  "ledgerCurrencySaved": {
+    "ar": "حُفظت العملة",
+    "en": "Currency saved",
+    "description": "Undo toast"
+  },
+  "ledgerNoRate": {
+    "ar": "بلا سعر",
+    "en": "No rate",
+    "description": "Currency without a usable rate"
+  },
+  "ledgerRebaseTitle": {
+    "ar": "عملة أساسية جديدة",
+    "en": "New base currency",
+    "description": "Sheet title"
+  },
+  "ledgerRebaseExplain": {
+    "ar": "تُعاد كتابة كل الأسعار نسبةً إلى {code} بدقة، فتبقى القيم المحوّلة كما هي.",
+    "en": "Every rate is re-expressed exactly against {code}, so converted values stay the same.",
+    "description": "Rebase explanation; code already isolated",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerRebaseNow": {
+    "ar": "الآن",
+    "en": "Now",
+    "description": "Rebase preview column"
+  },
+  "ledgerRebaseAfter": {
+    "ar": "بعد التغيير",
+    "en": "After",
+    "description": "Rebase preview column"
+  },
+  "ledgerRebaseConfirm": {
+    "ar": "اعتماد {code}",
+    "en": "Make {code} the base",
+    "description": "Confirm button",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerRebaseDone": {
+    "ar": "أصبحت {code} العملة الأساسية",
+    "en": "{code} is now the base currency",
+    "description": "Undo toast",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerRebaseChoose": {
+    "ar": "اختر العملة الأساسية الجديدة",
+    "en": "Choose the new base currency",
+    "description": "Rebase sheet subtitle"
+  },
+  "ledgerSummaryEmpty": {
+    "ar": "لا محافظ بعد",
+    "en": "No wallets yet",
+    "description": "Summary card empty title"
+  },
+  "ledgerMoreWallets": {
+    "ar": "{count, plural, =1{ومحفظة أخرى} =2{ومحفظتان أخريان} few{و{count} محافظ أخرى} many{و{count} محفظة أخرى} other{و{count} محفظة أخرى}}",
+    "en": "{count, plural, =1{and 1 more wallet} other{and {count} more wallets}}",
+    "description": "Summary card footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ledgerWalletSemantics": {
+    "ar": "{name}، الرصيد {amount}",
+    "en": "{name}, balance {amount}",
+    "description": "Screen-reader label of a wallet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerApply": {
+    "ar": "تطبيق",
+    "en": "Apply",
+    "description": "Button"
+  },
+  "ledgerNoTags": {
+    "ar": "لا وسوم بعد",
+    "en": "No tags yet",
+    "description": "Tag filter without tags"
+  },
+  "ledgerCompactThousand": {
+    "ar": "ألف",
+    "en": "K",
+    "description": "Suffix of compact chart amounts (thousands)"
+  },
+  "ledgerCompactMillion": {
+    "ar": "مليون",
+    "en": "M",
+    "description": "Suffix of compact chart amounts (millions)"
+  },
+  "ledgerMakeBase": {
+    "ar": "اعتمادها عملة أساسية",
+    "en": "Make it the base",
+    "description": "Currency menu action"
+  },
+  "ledgerRatesStale": {
+    "ar": "الأسعار يدوية؛ حدّثها حين يتغيّر السوق",
+    "en": "Rates are manual: update them when the market moves",
+    "description": "Currencies screen footnote"
+  },
+  "ledgerNoteHintIncome": {
+    "ar": "مثلًا: تحصيل من شركة الشحن",
+    "en": "e.g. payout from the courier",
+    "description": "Hint of the note field when adding income"
+  },
+  "ledgerNoteHintTransfer": {
+    "ar": "مثلًا: إيداع في البنك",
+    "en": "e.g. cash deposited at the bank",
+    "description": "Hint of the note field when adding a transfer"
+  },
+  "ledgerNoteHintAdjust": {
+    "ar": "مثلًا: بعد عدّ النقود",
+    "en": "e.g. after counting the cash",
+    "description": "Hint of the note field when adding a balance adjustment"
+  },
+  "ledgerLinkJar": {
+    "ar": "حصّالة",
+    "en": "Savings jar",
+    "description": "Source of a wallet entry written by a savings jar deposit or withdrawal; also the label of its tag"
+  },
+  "ledgerLinkDebt": {
+    "ar": "دَين",
+    "en": "Debt",
+    "description": "Source of a wallet entry written by a debt payment; also the label of its tag"
+  },
+  "ledgerLinkObligation": {
+    "ar": "التزام",
+    "en": "Obligation",
+    "description": "Source of a wallet entry written when a recurring obligation is marked paid; also the label of its tag"
+  },
+  "ledgerOpenJar": {
+    "ar": "فتح الحصّالة",
+    "en": "Open the jar",
+    "description": "Menu action on a wallet entry that belongs to a savings jar"
+  },
+  "ledgerOpenDebt": {
+    "ar": "فتح الدَّين",
+    "en": "Open the debt",
+    "description": "Menu action on a wallet entry that belongs to a debt"
+  },
+  "ledgerOpenObligation": {
+    "ar": "فتح الالتزام",
+    "en": "Open the obligation",
+    "description": "Menu action on a wallet entry that belongs to a recurring obligation"
+  },
+  "ledgerLinkedHint": {
+    "ar": "تُعدَّل من {source}",
+    "en": "Managed from {source}",
+    "description": "Accessibility hint: this entry is edited from its savings jar, debt or obligation",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerArchivedBadge": {
+    "ar": "مؤرشفة",
+    "en": "Archived",
+    "description": "Status shown on an archived wallet"
+  },
+  "ledgerUnknownCurrencies": {
+    "ar": "بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.",
+    "en": "Some wallets use currencies that aren't in your list yet. Add them with a rate so they count in the totals.",
+    "description": "Notice on the currencies screen when wallets use currency codes missing from the list (e.g. created by quick add)"
+  },
+  "ledgerAddCode": {
+    "ar": "إضافة {code}",
+    "en": "Add {code}",
+    "description": "Chip adding a missing currency by its code",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerFixRates": {
+    "ar": "ضبط الأسعار",
+    "en": "Set rates",
+    "description": "Action next to the warning that some currencies have no exchange rate"
+  }
+}

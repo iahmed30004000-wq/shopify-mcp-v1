@@ -7895,4 +7895,9200 @@ class L10nAr extends L10n {
   String qiblaDialLabel(String bearing, String point) {
     return 'بوصلة القبلة: القبلة على $bearing نحو $point.';
   }
+
+  @override
+  String get medsTitle => 'الأدوية والمكمّلات';
+
+  @override
+  String get medsTabToday => 'اليوم';
+
+  @override
+  String get medsTabMeds => 'أدويتي';
+
+  @override
+  String get medsTabCourses => 'الدورات';
+
+  @override
+  String get medsSettingsOpen => 'إعدادات الأدوية';
+
+  @override
+  String get medsAddMed => 'دواء جديد';
+
+  @override
+  String get medsAddCourse => 'دورة علاجية جديدة';
+
+  @override
+  String get medsAddRule => 'قاعدة توقيت جديدة';
+
+  @override
+  String get medsKindMedication => 'دواء';
+
+  @override
+  String get medsKindSupplement => 'مكمّل';
+
+  @override
+  String get medsKindInjection => 'حقنة';
+
+  @override
+  String get medsKindOther => 'أخرى';
+
+  @override
+  String get medsWithEmptyStomach => 'على الريق';
+
+  @override
+  String get medsWithBreakfast => 'مع الفطور';
+
+  @override
+  String get medsWithLunch => 'مع الغداء';
+
+  @override
+  String get medsWithDinner => 'مع العشاء';
+
+  @override
+  String get medsWithBedtime => 'قبل النوم';
+
+  @override
+  String get medsWithOther => 'أخرى';
+
+  @override
+  String get medsWithPerCourse => 'حسب الدورة';
+
+  @override
+  String get medsWithAnytime => 'في أي وقت';
+
+  @override
+  String get medsMealBreakfast => 'الفطور';
+
+  @override
+  String get medsMealLunch => 'الغداء';
+
+  @override
+  String get medsMealDinner => 'وجبة العشاء';
+
+  @override
+  String get medsMealBedtime => 'النوم';
+
+  @override
+  String get medsMealBreakfastTitle => 'الفطور';
+
+  @override
+  String get medsMealLunchTitle => 'الغداء';
+
+  @override
+  String get medsMealDinnerTitle => 'العشاء';
+
+  @override
+  String get medsMealBedtimeTitle => 'النوم';
+
+  @override
+  String medsAnchorAtPrayer(String place) {
+    return 'عند $place';
+  }
+
+  @override
+  String medsAnchorWithMeal(String place) {
+    return 'مع $place';
+  }
+
+  @override
+  String medsAnchorBefore(String place, String duration) {
+    return 'قبل $place بـ$duration';
+  }
+
+  @override
+  String medsAnchorAfter(String place, String duration) {
+    return 'بعد $place بـ$duration';
+  }
+
+  @override
+  String get medsAnchorBedtime => 'عند النوم';
+
+  @override
+  String get medsTimes => 'مواعيد الجرعات';
+
+  @override
+  String get medsTimesHint =>
+      'وقت ثابت، أو موعد يتبع صلاة أو وجبة ويتحرّك معها كل يوم';
+
+  @override
+  String get medsAddFixedTime => 'وقت ثابت';
+
+  @override
+  String get medsAddAnchoredTime => 'مع صلاة أو وجبة';
+
+  @override
+  String medsTimeToday(String time) {
+    return 'اليوم $time';
+  }
+
+  @override
+  String get medsRemoveTime => 'إزالة الموعد';
+
+  @override
+  String get medsOffsetBefore => 'قبل';
+
+  @override
+  String get medsOffsetAt => 'عند';
+
+  @override
+  String get medsOffsetAfter => 'بعد';
+
+  @override
+  String get medsAnchorPrayers => 'الصلوات';
+
+  @override
+  String get medsAnchorMeals => 'الوجبات';
+
+  @override
+  String get medsAnchorPick => 'يتبع';
+
+  @override
+  String get medsAnchorOffset => 'التوقيت';
+
+  @override
+  String get medsAnchorDone => 'تم';
+
+  @override
+  String get medsNoTimesAsNeeded => 'بلا مواعيد: تُسجَّل الجرعة عند أخذها';
+
+  @override
+  String get medsEditorNew => 'دواء جديد';
+
+  @override
+  String get medsEditorEdit => 'تعديل الدواء';
+
+  @override
+  String get medsFieldName => 'الاسم';
+
+  @override
+  String get medsFieldNameHint => 'كما هو على العلبة';
+
+  @override
+  String get medsFieldNameRequired => 'اكتب الاسم';
+
+  @override
+  String get medsFieldKind => 'النوع';
+
+  @override
+  String get medsFieldDose => 'الجرعة';
+
+  @override
+  String get medsFieldDoseHint => 'كما في الوصفة، مثلًا: ١٠ ملغ أو حبّتان';
+
+  @override
+  String get medsFieldAmount => 'الكمية';
+
+  @override
+  String get medsFieldUnit => 'الوحدة';
+
+  @override
+  String get medsUnitTab => 'حبة';
+
+  @override
+  String get medsUnitCap => 'كبسولة';
+
+  @override
+  String get medsUnitMg => 'ملغ';
+
+  @override
+  String get medsUnitMl => 'مل';
+
+  @override
+  String get medsUnitIu => 'وحدة';
+
+  @override
+  String get medsUnitDrop => 'نقطة';
+
+  @override
+  String get medsUnitPuff => 'بخة';
+
+  @override
+  String get medsUnitAmp => 'أمبولة';
+
+  @override
+  String get medsFieldTakenWith => 'يؤخذ';
+
+  @override
+  String get medsFieldTakenWithNote => 'توضيح';
+
+  @override
+  String get medsFieldNotes => 'ملاحظات';
+
+  @override
+  String get medsFieldStock => 'المتبقي';
+
+  @override
+  String get medsFieldRefillAt => 'نبّهني عند';
+
+  @override
+  String get medsStockHint => 'ينقص مع كل «أخذتُها» بقدر الجرعة';
+
+  @override
+  String get medsFieldColor => 'اللون';
+
+  @override
+  String get medsFieldActive => 'نشط';
+
+  @override
+  String get medsFieldActiveHint => 'أوقفه مؤقتًا دون أن تفقد سجلّه';
+
+  @override
+  String get medsFieldCourse => 'الدورة العلاجية';
+
+  @override
+  String get medsNoCourse => 'بلا دورة';
+
+  @override
+  String get medsCourseLinkedHint => 'جرعاته تتبع مراحل الدورة';
+
+  @override
+  String get medsTitration => 'جدول التدرّج';
+
+  @override
+  String get medsTitrationHint =>
+      'الجرعة التي حدّدها طبيبك لكل فترة، من تاريخ إلى آخر';
+
+  @override
+  String get medsTitrationAdd => 'خطوة جديدة';
+
+  @override
+  String medsTitrationFrom(String date) {
+    return 'من $date';
+  }
+
+  @override
+  String get medsTitrationStop => 'توقّف';
+
+  @override
+  String get medsTitrationStopLine => 'تتوقف الجرعات';
+
+  @override
+  String get medsTitrationStepDose => 'الجرعة من هذا التاريخ';
+
+  @override
+  String get medsTitrationStepTitle => 'خطوة تدرّج';
+
+  @override
+  String get medsTitrationNow => 'الحالية';
+
+  @override
+  String get medsSave => 'حفظ';
+
+  @override
+  String get medsDelete => 'حذف';
+
+  @override
+  String get medsMore => 'تفاصيل إضافية';
+
+  @override
+  String get medsTodayHeader => 'جرعات اليوم';
+
+  @override
+  String medsTodayCount(String taken, String total) {
+    return 'أُخذت $taken من $total';
+  }
+
+  @override
+  String medsNextDose(String name, String time) {
+    return 'التالية: $name · $time';
+  }
+
+  @override
+  String medsDueNowCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جرعة تنتظرك الآن',
+      many: '$count جرعة تنتظرك الآن',
+      few: '$count جرعات تنتظرك الآن',
+      two: 'جرعتان تنتظرانك الآن',
+      one: 'جرعة تنتظرك الآن',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get medsAllAnswered => 'أجبتَ عن كل جرعات اليوم';
+
+  @override
+  String get medsNoDosesToday => 'لا جرعات مجدولة اليوم';
+
+  @override
+  String get medsEmptyTitle => 'لا أدوية بعد';
+
+  @override
+  String get medsEmptyBody =>
+      'أضف دواءً أو مكمّلًا بمواعيده، وسيرتّب مَدار جرعاتك حول صلواتك ووجباتك.';
+
+  @override
+  String get medsAsNeeded => 'عند الحاجة';
+
+  @override
+  String get medsLogNow => 'سجّل جرعة الآن';
+
+  @override
+  String get medsAnytimeGroup => 'بلا نافذة';
+
+  @override
+  String get medsStateUpcoming => 'قادمة';
+
+  @override
+  String get medsStateDue => 'حان وقتها';
+
+  @override
+  String get medsStateLate => 'متأخرة';
+
+  @override
+  String get medsStateMissed => 'فاتت';
+
+  @override
+  String medsStateTakenAt(String time) {
+    return 'أُخذت $time';
+  }
+
+  @override
+  String get medsStateSkipped => 'تُخطّيت';
+
+  @override
+  String medsStateSnoozedUntil(String time) {
+    return 'مؤجّلة حتى $time';
+  }
+
+  @override
+  String get medsTake => 'أخذتُها';
+
+  @override
+  String get medsSnooze => 'غفوة';
+
+  @override
+  String medsSnoozeFor(String duration) {
+    return 'غفوة $duration';
+  }
+
+  @override
+  String get medsSkip => 'تخطّي';
+
+  @override
+  String get medsReset => 'إلغاء الإجابة';
+
+  @override
+  String medsTookToast(String name) {
+    return 'سُجّلت جرعة $name';
+  }
+
+  @override
+  String medsSkippedToast(String name) {
+    return 'تُخطّيت جرعة $name';
+  }
+
+  @override
+  String medsSnoozedToast(String name, String time) {
+    return 'جرعة $name مؤجّلة حتى $time';
+  }
+
+  @override
+  String get medsResetToast => 'أُلغيت الإجابة';
+
+  @override
+  String medsShiftedLater(String duration) {
+    return 'أُخّرت $duration لقاعدة توقيت';
+  }
+
+  @override
+  String medsShiftedEarlier(String duration) {
+    return 'قُدّمت $duration لقاعدة توقيت';
+  }
+
+  @override
+  String get medsPinnedToMeal => 'على موعد الطعام';
+
+  @override
+  String get medsPastMidnight => 'بعد منتصف الليل';
+
+  @override
+  String medsPartOfCourse(String name) {
+    return 'ضمن $name';
+  }
+
+  @override
+  String medsDoseSemantics(
+    String name,
+    String dose,
+    String time,
+    String state,
+  ) {
+    return '$name، $dose، $time، $state';
+  }
+
+  @override
+  String medsRefillBanner(String name, String count) {
+    return 'بقي $count من $name — حان وقت إعادة التعبئة';
+  }
+
+  @override
+  String get medsRefilled => 'أعدتُ التعبئة';
+
+  @override
+  String medsRefillSheetTitle(String name) {
+    return 'إعادة تعبئة $name';
+  }
+
+  @override
+  String get medsRefillAdded => 'الوحدات المضافة';
+
+  @override
+  String medsStockUpdated(String name) {
+    return 'حُدّث المتبقي من $name';
+  }
+
+  @override
+  String medsStockLine(String count) {
+    return 'المتبقي $count';
+  }
+
+  @override
+  String medsRefillAtLine(String count) {
+    return 'التنبيه عند $count';
+  }
+
+  @override
+  String get medsLowStock => 'قارب على النفاد';
+
+  @override
+  String get medsConflictsTitle => 'قواعد لم تتحقق';
+
+  @override
+  String medsConflictSeparation(
+    String a,
+    String b,
+    String required,
+    String actual,
+  ) {
+    return 'تعذّر ترك $required بين $a و$b؛ الفاصل الآن $actual.';
+  }
+
+  @override
+  String medsConflictNoMeal(String name) {
+    return 'لا وجبة متاحة لجرعة إضافية من $name؛ بقيت في موعدها.';
+  }
+
+  @override
+  String medsConflictClash(String name) {
+    return 'لدى $name قاعدتا طعام مختلفتان؛ طُبّقت الأولى.';
+  }
+
+  @override
+  String get medsAtTheSameTime => 'في الوقت نفسه';
+
+  @override
+  String get medsAlertsTitle => 'تنبيهات دائمة';
+
+  @override
+  String get medsAdherence => 'الالتزام';
+
+  @override
+  String medsAdherenceRate(String percent) {
+    return 'أُخذت $percent من الجرعات';
+  }
+
+  @override
+  String medsLastDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر $count يوم',
+      many: 'آخر $count يومًا',
+      few: 'آخر $count أيام',
+      two: 'آخر يومين',
+      one: 'آخر يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get medsNoAdherence => 'لا جرعات مستحقة في هذه الفترة';
+
+  @override
+  String get medsStatTaken => 'أُخذت';
+
+  @override
+  String get medsStatSkipped => 'تُخطّيت';
+
+  @override
+  String get medsStatMissed => 'فاتت';
+
+  @override
+  String get medsStatLate => 'متأخرة';
+
+  @override
+  String medsStreakDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم كامل متتالٍ',
+      many: '$count يومًا كاملًا متتاليًا',
+      few: '$count أيام كاملة متتالية',
+      two: 'يومان كاملان متتاليان',
+      one: 'يوم كامل',
+      zero: 'لا أيام كاملة متتالية بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String medsDayBarSemantics(String date, String taken, String total) {
+    return '$date: $taken من $total';
+  }
+
+  @override
+  String medsDayNothingDue(String date) {
+    return '$date: لا جرعات';
+  }
+
+  @override
+  String get medsHistory => 'السجل';
+
+  @override
+  String medsHistoryTitle(String name) {
+    return 'سجل $name';
+  }
+
+  @override
+  String get medsNoHistory => 'لا سجل بعد';
+
+  @override
+  String get medsOffSchedule => 'خارج المواعيد';
+
+  @override
+  String get medsRecent => 'آخر الجرعات';
+
+  @override
+  String get medsPaused => 'متوقف مؤقتًا';
+
+  @override
+  String get medsPausedSection => 'متوقفة مؤقتًا';
+
+  @override
+  String get medsPause => 'إيقاف مؤقت';
+
+  @override
+  String get medsResume => 'استئناف';
+
+  @override
+  String get medsDuplicate => 'نسخ';
+
+  @override
+  String get medsEdit => 'تعديل';
+
+  @override
+  String medsDeletedToast(String name) {
+    return 'حُذف $name';
+  }
+
+  @override
+  String medsPausedToast(String name) {
+    return 'أُوقف $name مؤقتًا';
+  }
+
+  @override
+  String medsResumedToast(String name) {
+    return 'استُؤنف $name';
+  }
+
+  @override
+  String medsDuplicatedToast(String name) {
+    return 'نُسخ $name';
+  }
+
+  @override
+  String medsCopyName(String name) {
+    return '$name (نسخة)';
+  }
+
+  @override
+  String medsTimesPerDay(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مرة يوميًا',
+      many: '$count مرة يوميًا',
+      few: '$count مرات يوميًا',
+      two: 'مرتان يوميًا',
+      one: 'مرة يوميًا',
+      zero: 'بلا مواعيد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get medsRulesTitle => 'قواعد التوقيت';
+
+  @override
+  String get medsRulesEmpty =>
+      'القواعد تُبقي الجرعات على التوقيت الذي حدّدتَه: فاصل بين دواءين، أو موعد قبل الطعام أو بعده.';
+
+  @override
+  String get medsRuleKindSeparate => 'فاصل بين دواءين';
+
+  @override
+  String get medsRuleKindNotWith => 'لا يؤخذان معًا';
+
+  @override
+  String get medsRuleKindBeforeFood => 'قبل الطعام';
+
+  @override
+  String get medsRuleKindAfterFood => 'بعد الطعام';
+
+  @override
+  String get medsRuleKindWithFood => 'مع الطعام';
+
+  @override
+  String get medsRuleKindCustom => 'ملاحظة';
+
+  @override
+  String medsRuleSeparateText(String a, String b, String duration) {
+    return '$duration على الأقل بين $a و$b';
+  }
+
+  @override
+  String medsRuleBeforeFoodText(String a, String duration) {
+    return '$a قبل الطعام بـ$duration';
+  }
+
+  @override
+  String medsRuleAfterFoodText(String a, String duration) {
+    return '$a بعد الطعام بـ$duration';
+  }
+
+  @override
+  String medsRuleWithFoodText(String a) {
+    return '$a مع الطعام';
+  }
+
+  @override
+  String medsRuleCustomText(String a, String note) {
+    return '$a: $note';
+  }
+
+  @override
+  String get medsRuleEditorNew => 'قاعدة توقيت جديدة';
+
+  @override
+  String get medsRuleEditorEdit => 'تعديل القاعدة';
+
+  @override
+  String get medsRuleKind => 'نوع القاعدة';
+
+  @override
+  String get medsRuleMedA => 'الدواء';
+
+  @override
+  String get medsRuleMedB => 'والدواء الآخر';
+
+  @override
+  String get medsRuleMinutes => 'المدة';
+
+  @override
+  String get medsRuleNote => 'الملاحظة';
+
+  @override
+  String get medsRuleNeedTwo => 'اختر دواءين مختلفين';
+
+  @override
+  String get medsRuleNeedMed => 'اختر الدواء';
+
+  @override
+  String get medsRuleNeedMeds => 'أضف دواءً أولًا';
+
+  @override
+  String get medsRuleNeedNote => 'اكتب الملاحظة';
+
+  @override
+  String get medsRuleFoodHint => 'أوقات الطعام من «أوقات الوجبات» في الإعدادات';
+
+  @override
+  String get medsRuleDeleted => 'حُذفت القاعدة';
+
+  @override
+  String get medsCoursesEmptyTitle => 'لا دورات علاجية';
+
+  @override
+  String get medsCoursesEmptyBody =>
+      'للحقن والعلاجات على مراحل، مثل: يوميًا، ثم أسبوعيًا، ثم شهريًا.';
+
+  @override
+  String get medsCourseEditorNew => 'دورة علاجية جديدة';
+
+  @override
+  String get medsCourseEditorEdit => 'تعديل الدورة';
+
+  @override
+  String get medsCourseName => 'اسم الدورة';
+
+  @override
+  String get medsCourseNameRequired => 'اكتب اسم الدورة';
+
+  @override
+  String get medsCourseMed => 'الدواء';
+
+  @override
+  String get medsCourseStart => 'تاريخ البدء';
+
+  @override
+  String get medsCoursePhases => 'المراحل';
+
+  @override
+  String get medsCourseAddPhase => 'مرحلة جديدة';
+
+  @override
+  String medsCoursePhaseN(String n) {
+    return 'المرحلة $n';
+  }
+
+  @override
+  String get medsCourseNeedsPhase => 'أضف مرحلة واحدة على الأقل';
+
+  @override
+  String get medsFreqDaily => 'يومي';
+
+  @override
+  String get medsFreqWeekly => 'أسبوعي';
+
+  @override
+  String get medsFreqMonthly => 'شهري';
+
+  @override
+  String medsEveryDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $count يوم',
+      many: 'كل $count يومًا',
+      few: 'كل $count أيام',
+      two: 'كل يومين',
+      one: 'يوميًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String medsEveryWeeks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $count أسبوع',
+      many: 'كل $count أسبوعًا',
+      few: 'كل $count أسابيع',
+      two: 'كل أسبوعين',
+      one: 'أسبوعيًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String medsEveryMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $count شهر',
+      many: 'كل $count شهرًا',
+      few: 'كل $count أشهر',
+      two: 'كل شهرين',
+      one: 'شهريًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get medsPhaseInterval => 'كل';
+
+  @override
+  String get medsPhaseCount => 'عدد الجرعات';
+
+  @override
+  String get medsPhaseOngoing => 'مستمرة';
+
+  @override
+  String get medsPhaseDose => 'جرعة المرحلة';
+
+  @override
+  String medsPhaseTimes(String freq, String count) {
+    return '$freq × $count';
+  }
+
+  @override
+  String medsPhaseOngoingLine(String freq) {
+    return '$freq باستمرار';
+  }
+
+  @override
+  String medsCourseDoneOf(String done, String total) {
+    return '$done من $total جرعة';
+  }
+
+  @override
+  String medsCourseDosesSoFar(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جرعة حتى الآن',
+      many: '$count جرعة حتى الآن',
+      few: '$count جرعات حتى الآن',
+      two: 'جرعتان حتى الآن',
+      one: 'جرعة واحدة حتى الآن',
+      zero: 'لم تبدأ الجرعات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String medsCoursePhaseProgress(String phase, String done, String total) {
+    return 'المرحلة $phase: $done من $total';
+  }
+
+  @override
+  String medsCoursePhaseOngoingProgress(String phase) {
+    return 'المرحلة $phase (مستمرة)';
+  }
+
+  @override
+  String medsCourseNext(String date) {
+    return 'الجرعة التالية $date';
+  }
+
+  @override
+  String medsCourseStarts(String date) {
+    return 'تبدأ $date';
+  }
+
+  @override
+  String medsCourseFinished(String date) {
+    return 'اكتملت في $date';
+  }
+
+  @override
+  String get medsCourseNoMed => 'اربطها بدواء لتظهر جرعاتها في اليوم';
+
+  @override
+  String get medsCourseDeleted => 'حُذفت الدورة';
+
+  @override
+  String get medsCoursePaused => 'متوقفة';
+
+  @override
+  String get medsCourseActive => 'الدورة نشطة';
+
+  @override
+  String get medsCourseTimeline => 'مواعيد الدورة';
+
+  @override
+  String medsCourseMoreDates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count موعد آخر',
+      many: 'و$count موعدًا آخر',
+      few: 'و$count مواعيد أخرى',
+      two: 'وموعدان آخران',
+      one: 'وموعد آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get medsToday => 'اليوم';
+
+  @override
+  String get medsSettingsTitle => 'إعدادات الأدوية';
+
+  @override
+  String get medsMealTimes => 'أوقات الوجبات';
+
+  @override
+  String get medsMealTimesHint => 'تربط «مع الفطور» وقواعد الطعام بيومك';
+
+  @override
+  String get medsEmptyStomachLead => 'مدة «على الريق» قبل الفطور';
+
+  @override
+  String get medsReminders => 'التذكير بالجرعات';
+
+  @override
+  String get medsRemindersHint =>
+      'إشعار في موعد كل جرعة، فيه: أخذتُها، غفوة، تخطّي';
+
+  @override
+  String get medsSnoozeDefault => 'غفوة الإشعار';
+
+  @override
+  String get medsLateAfter => 'تُعدّ متأخرة بعد';
+
+  @override
+  String get medsNotifyGroup => 'الأدوية';
+
+  @override
+  String get medsNotifyChannel => 'مواعيد الجرعات';
+
+  @override
+  String get medsNotifyChannelDescription =>
+      'تذكير في موعد كل جرعة، مع أزرار: أخذتُها، غفوة، تخطّي';
+
+  @override
+  String medsNotifyTitle(String name) {
+    return 'حان موعد $name';
+  }
+
+  @override
+  String medsNotifyAgainTitle(String name) {
+    return 'تذكير: $name';
+  }
+
+  @override
+  String medsNotifyRefillTitle(String name) {
+    return '$name: الكمية تقارب النفاد';
+  }
+
+  @override
+  String medsNotifyRefillBody(String count) {
+    return 'بقي $count. حان وقت إعادة التعبئة.';
+  }
+
+  @override
+  String get medsNotifyFailedTitle => 'لم تُسجَّل الجرعة';
+
+  @override
+  String get medsNotifyFailedBody => 'افتح مَدار لتسجيلها.';
+
+  @override
+  String get recordTitle => 'السجل الطبي';
+
+  @override
+  String get recordTabLabs => 'التحاليل';
+
+  @override
+  String get recordTabAppointments => 'المواعيد';
+
+  @override
+  String get recordTabConditions => 'الحالات';
+
+  @override
+  String get recordTabQuestions => 'الأسئلة';
+
+  @override
+  String get recordAdd => 'إضافة';
+
+  @override
+  String get recordSave => 'حفظ';
+
+  @override
+  String get recordDelete => 'حذف';
+
+  @override
+  String get recordNotes => 'ملاحظات';
+
+  @override
+  String get recordDate => 'التاريخ';
+
+  @override
+  String get recordTime => 'الوقت';
+
+  @override
+  String get recordListSeparator => '، ';
+
+  @override
+  String get recordToday => 'اليوم';
+
+  @override
+  String get recordTomorrow => 'غدًا';
+
+  @override
+  String get recordYesterday => 'أمس';
+
+  @override
+  String recordInDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بعد $n يوم',
+      many: 'بعد $n يومًا',
+      few: 'بعد $n أيام',
+      two: 'بعد يومين',
+      one: 'بعد يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordDaysAgo(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n يوم',
+      many: 'قبل $n يومًا',
+      few: 'قبل $n أيام',
+      two: 'قبل يومين',
+      one: 'قبل يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordDoctorReport => 'تقرير للطبيب';
+
+  @override
+  String get recordSettingsTitle => 'إعدادات السجل';
+
+  @override
+  String get recordFlagLow => 'منخفض';
+
+  @override
+  String get recordFlagHigh => 'مرتفع';
+
+  @override
+  String get recordFlagBorderline => 'حدّي';
+
+  @override
+  String get recordFlagBorderlineLow => 'قرب الحدّ الأدنى';
+
+  @override
+  String get recordFlagBorderlineHigh => 'قرب الحدّ الأعلى';
+
+  @override
+  String get recordFlagInRange => 'ضمن المدى';
+
+  @override
+  String get recordFlagNoRange => 'بلا مدى';
+
+  @override
+  String get recordFlagQualitative => 'وصفية';
+
+  @override
+  String get recordSeverityCritical => 'بالغ الأهمية';
+
+  @override
+  String get recordSeverityWarning => 'تنبيه';
+
+  @override
+  String get recordSeverityInfo => 'للعلم';
+
+  @override
+  String recordRangeBetween(String low, String high) {
+    return '$low – $high';
+  }
+
+  @override
+  String recordRangeUpTo(String high) {
+    return 'حتى $high';
+  }
+
+  @override
+  String recordRangeAtLeast(String low) {
+    return 'من $low فأكثر';
+  }
+
+  @override
+  String get recordTakenWithEmptyStomach => 'على معدة فارغة';
+
+  @override
+  String get recordTakenWithBreakfast => 'مع الفطور';
+
+  @override
+  String get recordTakenWithLunch => 'مع الغداء';
+
+  @override
+  String get recordTakenWithDinner => 'مع العشاء';
+
+  @override
+  String get recordTakenWithBedtime => 'قبل النوم';
+
+  @override
+  String get recordTakenWithOther => 'أخرى';
+
+  @override
+  String get recordTakenWithPerCourse => 'حسب الكورس';
+
+  @override
+  String get recordTakenWithAnytime => 'في أي وقت';
+
+  @override
+  String get recordPeriod1m => 'شهر';
+
+  @override
+  String recordPeriodMonths(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n شهر',
+      many: '$n شهرًا',
+      few: '$n أشهر',
+      two: 'شهران',
+      one: 'شهر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordPeriod12m => 'سنة';
+
+  @override
+  String get recordPeriodAll => 'الكل';
+
+  @override
+  String get recordSectionAlerts => 'تنبيهات دائمة';
+
+  @override
+  String get recordSectionConditions => 'الحالات الصحية';
+
+  @override
+  String get recordSectionMedications => 'الأدوية والمكمّلات الحالية';
+
+  @override
+  String get recordSectionLabs => 'نتائج التحاليل';
+
+  @override
+  String get recordSectionPain => 'ملخّص الألم';
+
+  @override
+  String get recordSectionMood => 'ملخّص المزاج والتوتر';
+
+  @override
+  String get recordSectionQuestions => 'أسئلة للطبيب';
+
+  @override
+  String recordOffsetWeeks(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n أسبوع',
+      many: 'قبل $n أسبوعًا',
+      few: 'قبل $n أسابيع',
+      two: 'قبل أسبوعين',
+      one: 'قبل أسبوع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordOffsetDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n يوم',
+      many: 'قبل $n يومًا',
+      few: 'قبل $n أيام',
+      two: 'قبل يومين',
+      one: 'قبل يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordOffsetHours(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n ساعة',
+      many: 'قبل $n ساعة',
+      few: 'قبل $n ساعات',
+      two: 'قبل ساعتين',
+      one: 'قبل ساعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordOffsetMinutes(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n دقيقة',
+      many: 'قبل $n دقيقة',
+      few: 'قبل $n دقائق',
+      two: 'قبل دقيقتين',
+      one: 'قبل دقيقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordReportTitle => 'ملخّص صحي للطبيب';
+
+  @override
+  String get recordReportNameLabel => 'الاسم';
+
+  @override
+  String recordReportGenerated(String date) {
+    return 'تاريخ الإعداد $date';
+  }
+
+  @override
+  String recordReportPeriodLine(String from, String to) {
+    return 'الفترة من $from إلى $to';
+  }
+
+  @override
+  String recordReportPeriodAll(String date) {
+    return 'السجل كاملًا حتى $date';
+  }
+
+  @override
+  String get recordReportFooter =>
+      'سجلّ شخصي يدوّنه صاحبه على جهازه. لا يتضمّن تشخيصًا ولا توصية علاجية.';
+
+  @override
+  String recordReportPage(String page, String total) {
+    return 'صفحة $page من $total';
+  }
+
+  @override
+  String get recordReportNothing => 'لا شيء مسجّل لهذه الفترة.';
+
+  @override
+  String recordConditionSince(String date) {
+    return 'منذ $date';
+  }
+
+  @override
+  String get recordReportColName => 'الاسم';
+
+  @override
+  String get recordReportColDose => 'الجرعة';
+
+  @override
+  String get recordReportColTimes => 'المواعيد';
+
+  @override
+  String get recordReportColWith => 'طريقة الأخذ';
+
+  @override
+  String recordReportSupplementName(String name) {
+    return '$name – مكمّل';
+  }
+
+  @override
+  String get recordReportColTest => 'التحليل';
+
+  @override
+  String get recordReportColLatest => 'آخر نتيجة';
+
+  @override
+  String get recordReportColRange => 'المدى المرجعي';
+
+  @override
+  String get recordReportColTrend => 'المسار';
+
+  @override
+  String get recordReportColHistory => 'نتائج سابقة';
+
+  @override
+  String recordReportLabLegend(String margin) {
+    return 'تُقارَن كل نتيجة بالمدى المرجعي الذي أدخلتُه للتحليل. «حدّي» تعني ضمن المدى وعلى بُعد $margin من عرضه عن أحد الحدّين.';
+  }
+
+  @override
+  String get recordReportEntries => 'عدد التسجيلات';
+
+  @override
+  String get recordReportDaysLogged => 'أيام فيها تسجيل';
+
+  @override
+  String recordReportPainAverage(String max) {
+    return 'متوسط الشدة من $max';
+  }
+
+  @override
+  String get recordReportPainHighest => 'أعلى شدة سُجّلت';
+
+  @override
+  String get recordReportTopLocations => 'أكثر المواضع تكرارًا';
+
+  @override
+  String get recordReportTopTriggers => 'أكثر المحفّزات تكرارًا';
+
+  @override
+  String recordReportMoodAverage(String max) {
+    return 'متوسط المزاج من $max';
+  }
+
+  @override
+  String recordReportStressAverage(String max) {
+    return 'متوسط التوتر من $max';
+  }
+
+  @override
+  String recordReportAnxietyAverage(String max) {
+    return 'متوسط القلق من $max';
+  }
+
+  @override
+  String recordReportEnergyAverage(String max) {
+    return 'متوسط الطاقة من $max';
+  }
+
+  @override
+  String get recordReportSleepAverage => 'متوسط ساعات النوم';
+
+  @override
+  String get recordReportCaffeineAverage => 'متوسط أكواب الكافيين';
+
+  @override
+  String get recordReportTopFactors => 'العوامل الأكثر تكرارًا';
+
+  @override
+  String recordReportQuestionFor(String title, String date) {
+    return 'لموعد $title في $date';
+  }
+
+  @override
+  String get recordLabUncategorized => 'أخرى';
+
+  @override
+  String recordReminderTitle(String title) {
+    return 'موعد طبي: $title';
+  }
+
+  @override
+  String recordReminderIn(String duration) {
+    return 'بعد $duration';
+  }
+
+  @override
+  String get recordReminderGroup => 'الصحة';
+
+  @override
+  String get recordReminderChannelName => 'مواعيد الطبيب';
+
+  @override
+  String get recordReminderChannelDescription => 'تذكير قبل مواعيدك الطبية';
+
+  @override
+  String recordDateAtTime(String date, String time) {
+    return '$date، الساعة $time';
+  }
+
+  @override
+  String get recordSavedToast => 'حُفظت التعديلات';
+
+  @override
+  String get recordReorder => 'ترتيب';
+
+  @override
+  String get recordReorderDone => 'تمّ الترتيب';
+
+  @override
+  String get recordReordered => 'تغيّر الترتيب';
+
+  @override
+  String get recordAlertAdd => 'إضافة تنبيه دائم';
+
+  @override
+  String get recordAlertEdit => 'تعديل التنبيه';
+
+  @override
+  String get recordAlertSubtitle => 'ما يجب أن يعرفه أي طبيب قبل كل شيء';
+
+  @override
+  String get recordAlertBody => 'نص التنبيه';
+
+  @override
+  String get recordAlertBodyHint => 'مثلًا: حساسية من البنسلين';
+
+  @override
+  String get recordAlertSeverity => 'الأهمية';
+
+  @override
+  String get recordAlertPinned => 'مثبّت في أعلى صفحات الصحة';
+
+  @override
+  String get recordAlertPinnedHint => 'يظهر دائمًا فوق شاشات الصحة';
+
+  @override
+  String get recordAlertUnpin => 'إلغاء التثبيت';
+
+  @override
+  String get recordAlertAdded => 'أُضيف التنبيه';
+
+  @override
+  String get recordAlertDeleted => 'حُذف التنبيه';
+
+  @override
+  String get recordAlertPinnedToast => 'ثُبّت التنبيه في الأعلى';
+
+  @override
+  String get recordAlertUnpinnedToast => 'أُلغي تثبيت التنبيه';
+
+  @override
+  String get recordAlertsManage => 'إدارة';
+
+  @override
+  String get recordAlertsManagerSubtitle =>
+      'اسحب لترتيبها، وثبّت ما تريد رؤيته دائمًا';
+
+  @override
+  String get recordAlertsEmptyHint =>
+      'حساسية، أو دواء لا يناسبك، أو معلومة يجب ألّا تغيب عن أي طبيب.';
+
+  @override
+  String recordAlertsMore(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n تنبيه آخر',
+      many: '$n تنبيهًا آخر',
+      few: '$n تنبيهات أخرى',
+      two: 'تنبيهان آخران',
+      one: 'تنبيه آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordConditionAdd => 'إضافة حالة';
+
+  @override
+  String get recordConditionEdit => 'تعديل الحالة';
+
+  @override
+  String get recordConditionName => 'الحالة';
+
+  @override
+  String get recordConditionSinceLabel => 'منذ';
+
+  @override
+  String get recordConditionActive => 'نشطة حاليًا';
+
+  @override
+  String get recordConditionInactive => 'غير نشطة';
+
+  @override
+  String get recordConditionMarkInactive => 'تعليمها غير نشطة';
+
+  @override
+  String get recordConditionMarkActive => 'تعليمها نشطة';
+
+  @override
+  String get recordConditionMarkedInactive => 'صارت الحالة غير نشطة';
+
+  @override
+  String get recordConditionMarkedActive => 'صارت الحالة نشطة';
+
+  @override
+  String get recordConditionAdded => 'أُضيفت الحالة';
+
+  @override
+  String get recordConditionDeleted => 'حُذفت الحالة';
+
+  @override
+  String get recordConditionsEmpty => 'لا حالات مسجّلة';
+
+  @override
+  String get recordConditionsEmptyBody =>
+      'سجّل حالاتك الصحية مع تاريخ بدايتها وملاحظاتك، لتكون حاضرة في أي زيارة.';
+
+  @override
+  String get recordConditionsInactiveHeader => 'حالات غير نشطة';
+
+  @override
+  String get recordLabVisit => 'زيارة مختبر';
+
+  @override
+  String get recordLabVisitSubtitle => 'نتائج عدة تحاليل بتاريخ واحد';
+
+  @override
+  String get recordLabVisitDate => 'تاريخ التحاليل';
+
+  @override
+  String get recordLabVisitSaveNone => 'أدخل نتيجة واحدة على الأقل';
+
+  @override
+  String recordLabVisitSave(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حفظ $n نتيجة',
+      many: 'حفظ $n نتيجة',
+      few: 'حفظ $n نتائج',
+      two: 'حفظ نتيجتين',
+      one: 'حفظ نتيجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordLabVisitSaved(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حُفظت $n نتيجة',
+      many: 'حُفظت $n نتيجة',
+      few: 'حُفظت $n نتائج',
+      two: 'حُفظت نتيجتان',
+      one: 'حُفظت نتيجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordLabAddTest => 'تحليل جديد';
+
+  @override
+  String get recordLabEditTest => 'تعديل التحليل';
+
+  @override
+  String get recordLabTestSubtitle => 'اكتب المدى المرجعي كما في ورقة مختبرك';
+
+  @override
+  String get recordLabTestName => 'اسم التحليل';
+
+  @override
+  String get recordLabUnit => 'الوحدة';
+
+  @override
+  String get recordLabUnitHint => 'مثلًا mg/dL';
+
+  @override
+  String get recordLabLow => 'الحدّ الأدنى للمدى';
+
+  @override
+  String get recordLabHigh => 'الحدّ الأعلى للمدى';
+
+  @override
+  String get recordLabRangeInvalid => 'الحدّ الأدنى أكبر من الأعلى';
+
+  @override
+  String get recordLabCategory => 'الفئة';
+
+  @override
+  String get recordLabTestAdded => 'أُضيف التحليل';
+
+  @override
+  String get recordLabTestDeleted => 'حُذف التحليل مع نتائجه';
+
+  @override
+  String get recordLabTestGone => 'لم يعد هذا التحليل موجودًا';
+
+  @override
+  String get recordLabAddReading => 'إضافة نتيجة';
+
+  @override
+  String get recordLabEditReading => 'تعديل النتيجة';
+
+  @override
+  String get recordLabValue => 'النتيجة';
+
+  @override
+  String recordLabValueWithUnit(String unit) {
+    return 'النتيجة بوحدة $unit';
+  }
+
+  @override
+  String get recordLabValueHint => 'رقم، أو نتيجة وصفية مثل «سلبي»';
+
+  @override
+  String get recordLabNote => 'ملاحظة';
+
+  @override
+  String get recordLabReadingAdded => 'أُضيفت النتيجة';
+
+  @override
+  String get recordLabReadingDeleted => 'حُذفت النتيجة';
+
+  @override
+  String get recordLabsEmpty => 'لا تحاليل بعد';
+
+  @override
+  String get recordLabsEmptyBody =>
+      'أنشئ تحاليلك مرة واحدة بمداها المرجعي، ثم سجّل نتائج كل زيارة لترى مسارها.';
+
+  @override
+  String get recordLabNoReadings => 'لا نتائج';
+
+  @override
+  String get recordLabNoReadingsBody => 'لم تُسجَّل نتائج لهذا التحليل بعد.';
+
+  @override
+  String get recordLabNoRange => 'بلا مدى مرجعي';
+
+  @override
+  String get recordLabRangeLabel => 'المدى المرجعي';
+
+  @override
+  String get recordLabLatest => 'آخر نتيجة';
+
+  @override
+  String recordLabChange(String delta) {
+    return '$delta عن النتيجة السابقة';
+  }
+
+  @override
+  String get recordLabHistory => 'كل النتائج';
+
+  @override
+  String get recordLabChartEmpty => 'لا نتائج رقمية في هذه الفترة';
+
+  @override
+  String recordLabChartSemantics(String name, int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'مسار $name: $n نتيجة',
+      many: 'مسار $name: $n نتيجة',
+      few: 'مسار $name: $n نتائج',
+      two: 'مسار $name: نتيجتان',
+      one: 'مسار $name: نتيجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordLabReadingsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n نتيجة',
+      many: '$n نتيجة',
+      few: '$n نتائج',
+      two: 'نتيجتان',
+      one: 'نتيجة واحدة',
+      zero: 'لا نتائج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordLabTestsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n تحليل',
+      many: '$n تحليلًا',
+      few: '$n تحاليل',
+      two: 'تحليلان',
+      one: 'تحليل واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recordLabMarginNote(String margin) {
+    return '«حدّي» يعني: ضمن المدى وعلى بُعد $margin من عرضه عن أحد الحدّين. يمكنك تغيير النسبة من إعدادات السجل.';
+  }
+
+  @override
+  String get recordLabFlagsTitle => 'التحاليل';
+
+  @override
+  String recordLabFlaggedCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n نتيجة خارج المدى أو قربه',
+      many: '$n نتيجة خارج المدى أو قربه',
+      few: '$n نتائج خارج المدى أو قربه',
+      two: 'نتيجتان خارج المدى أو قربه',
+      one: 'نتيجة خارج المدى أو قربه',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordLabAllInRange =>
+      'آخر نتائج تحاليلك كلها ضمن المدى الذي أدخلته.';
+
+  @override
+  String get recordAppointmentsTitle => 'المواعيد الطبية';
+
+  @override
+  String get recordAppointmentAdd => 'موعد جديد';
+
+  @override
+  String get recordAppointmentEdit => 'تعديل الموعد';
+
+  @override
+  String get recordAppointmentTitleField => 'الموعد';
+
+  @override
+  String get recordAppointmentTitleHint => 'مثلًا: مراجعة دورية';
+
+  @override
+  String get recordAppointmentDoctor => 'الطبيب';
+
+  @override
+  String get recordAppointmentPlace => 'المكان';
+
+  @override
+  String get recordAppointmentDone => 'تمّ';
+
+  @override
+  String get recordAppointmentMarkDone => 'تمّ الموعد';
+
+  @override
+  String get recordAppointmentMarkUndone => 'لم يتمّ بعد';
+
+  @override
+  String get recordAppointmentDoneToast => 'سُجّل الموعد كمنجز';
+
+  @override
+  String get recordAppointmentUndoneToast => 'أُعيد الموعد إلى القادمة';
+
+  @override
+  String get recordAppointmentAdded => 'أُضيف الموعد';
+
+  @override
+  String get recordAppointmentDeleted => 'حُذف الموعد، وبقيت أسئلته';
+
+  @override
+  String get recordAppointmentUpcoming => 'القادمة';
+
+  @override
+  String get recordAppointmentPast => 'السابقة';
+
+  @override
+  String get recordAppointmentShowAll => 'كل المواعيد';
+
+  @override
+  String get recordAppointmentsEmpty => 'لا مواعيد قادمة';
+
+  @override
+  String get recordAppointmentsEmptyBody =>
+      'أضف موعدك القادم لتصلك تذكرة قبله، وتبقى أسئلتك للطبيب معه.';
+
+  @override
+  String get recordNextAppointment => 'الموعد القادم';
+
+  @override
+  String recordAppointmentQuestions(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n سؤال بانتظاره',
+      many: '$n سؤالًا بانتظاره',
+      few: '$n أسئلة بانتظاره',
+      two: 'سؤالان بانتظاره',
+      one: 'سؤال واحد بانتظاره',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordQuestionAdd => 'سؤال جديد';
+
+  @override
+  String get recordQuestionAddForVisit => 'أضف سؤالًا لهذه الزيارة';
+
+  @override
+  String get recordQuestionEdit => 'تعديل السؤال';
+
+  @override
+  String get recordQuestionField => 'السؤال';
+
+  @override
+  String get recordQuestionAppointment => 'لأي موعد؟';
+
+  @override
+  String get recordQuestionGeneral => 'سؤال عام';
+
+  @override
+  String get recordQuestionAnswered => 'تمّت الإجابة';
+
+  @override
+  String get recordQuestionAnswer => 'الإجابة';
+
+  @override
+  String get recordQuestionAnswerOptional => 'الإجابة (اختياري)';
+
+  @override
+  String get recordQuestionMarkAnswered => 'أُجيب عنه';
+
+  @override
+  String get recordQuestionReopen => 'إعادة فتح السؤال';
+
+  @override
+  String get recordQuestionAdded => 'أُضيف السؤال';
+
+  @override
+  String get recordQuestionDeleted => 'حُذف السؤال';
+
+  @override
+  String get recordQuestionAnsweredToast => 'سُجّلت الإجابة';
+
+  @override
+  String get recordQuestionReopened => 'أُعيد فتح السؤال';
+
+  @override
+  String get recordQuestionsEmpty => 'لا أسئلة بعد';
+
+  @override
+  String get recordQuestionsEmptyBody =>
+      'دوّن ما تريد سؤاله حين يخطر لك، حتى لا يضيع في العيادة.';
+
+  @override
+  String get recordQuestionsGeneralHeader => 'أسئلة عامة';
+
+  @override
+  String get recordQuestionsAnsweredHeader => 'أُجيب عنها';
+
+  @override
+  String recordQuestionsMore(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$n سؤال آخر',
+      many: 'و$n سؤالًا آخر',
+      few: 'و$n أسئلة أخرى',
+      two: 'وسؤالان آخران',
+      one: 'وسؤال آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recordReportSheetSubtitle => 'ملف PDF مرتّب للطباعة أو المشاركة';
+
+  @override
+  String get recordReportNameField => 'الاسم في رأس التقرير';
+
+  @override
+  String get recordReportNameHint => 'يُطبع فقط، ولا يُحفظ';
+
+  @override
+  String get recordReportRememberName => 'تذكّر الاسم';
+
+  @override
+  String get recordReportRememberHint => 'يُحفظ على هذا الجهاز فقط';
+
+  @override
+  String get recordReportPeriodField => 'الفترة';
+
+  @override
+  String get recordReportSectionsField => 'الأقسام';
+
+  @override
+  String get recordReportPrivacyNote =>
+      'يُنشأ التقرير على جهازك، ولا يغادره إلا إذا شاركته بنفسك.';
+
+  @override
+  String get recordReportShare => 'مشاركة';
+
+  @override
+  String get recordReportSave => 'حفظ ملف';
+
+  @override
+  String get recordReportBuilding => 'جارٍ إعداد التقرير…';
+
+  @override
+  String get recordReportSaved => 'حُفظ التقرير';
+
+  @override
+  String get recordReportFailed => 'تعذّر إعداد التقرير، حاول مجددًا';
+
+  @override
+  String get recordSettingsMargin => 'هامش «حدّي» قرب كل حدّ';
+
+  @override
+  String get recordSettingsReminders => 'تذكير المواعيد';
+
+  @override
+  String get recordSettingsRemindersHint => 'إشعار قبل كل موعد طبي';
+
+  @override
+  String get recordSettingsReminderTimes => 'متى أُذكَّر';
+
+  @override
+  String get wbTitle => 'العافية';
+
+  @override
+  String get wbTabToday => 'اليوم';
+
+  @override
+  String get wbTabPain => 'الألم';
+
+  @override
+  String get wbTabHabits => 'العادات';
+
+  @override
+  String get wbTabWorries => 'الهموم';
+
+  @override
+  String get wbTabInsights => 'رؤى';
+
+  @override
+  String get wbAdd => 'إضافة';
+
+  @override
+  String get wbCancel => 'إلغاء';
+
+  @override
+  String get wbSave => 'حفظ';
+
+  @override
+  String get wbDelete => 'حذف';
+
+  @override
+  String get wbEdit => 'تعديل';
+
+  @override
+  String get wbClose => 'إغلاق';
+
+  @override
+  String get wbOpen => 'فتح';
+
+  @override
+  String get wbEditList => 'تعديل القائمة';
+
+  @override
+  String get wbShowAll => 'عرض الكل';
+
+  @override
+  String get wbShowLess => 'عرض أقل';
+
+  @override
+  String get wbNotes => 'ملاحظات';
+
+  @override
+  String get wbWhen => 'الوقت';
+
+  @override
+  String get wbNow => 'الآن';
+
+  @override
+  String get wbToday => 'اليوم';
+
+  @override
+  String get wbYesterday => 'أمس';
+
+  @override
+  String wbDayAtTime(String day, String time) {
+    return '$day، $time';
+  }
+
+  @override
+  String get wbListSeparator => '، ';
+
+  @override
+  String get wbLess => 'أقل';
+
+  @override
+  String get wbMore => 'أكثر';
+
+  @override
+  String wbOutOf(String value, String max) {
+    return '$value من $max';
+  }
+
+  @override
+  String wbOutOfMax(String max) {
+    return 'من $max';
+  }
+
+  @override
+  String wbFraction(String done, String total) {
+    return '$done من $total';
+  }
+
+  @override
+  String get wbMetricMood => 'المزاج';
+
+  @override
+  String get wbMetricStress => 'التوتر';
+
+  @override
+  String get wbMetricAnxiety => 'القلق';
+
+  @override
+  String get wbMetricEnergy => 'الطاقة';
+
+  @override
+  String get wbMetricSleep => 'النوم';
+
+  @override
+  String get wbMetricCaffeine => 'الكافيين';
+
+  @override
+  String get wbMetricPain => 'الألم';
+
+  @override
+  String wbMetricYour(String metric) {
+    String _temp0 = intl.Intl.selectLogic(metric, {
+      'mood': 'تقييم مزاجك',
+      'stress': 'توترك',
+      'anxiety': 'قلقك',
+      'energy': 'طاقتك',
+      'sleep': 'ساعات نومك',
+      'caffeine': 'أكواب الكافيين',
+      'pain': 'ألمك',
+      'other': 'القيمة',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get wbMood1 => 'ثقيل';
+
+  @override
+  String get wbMood2 => 'منخفض';
+
+  @override
+  String get wbMood3 => 'معتدل';
+
+  @override
+  String get wbMood4 => 'طيّب';
+
+  @override
+  String get wbMood5 => 'مُشرق';
+
+  @override
+  String get wbMoodQuestion => 'كيف حالك اليوم؟';
+
+  @override
+  String get wbCheckInPrompt =>
+      'اختر وجهًا لتسجيل سريع، أو سجّل التوتر والنوم والطاقة معًا.';
+
+  @override
+  String get wbCheckInFull => 'تسجيل كامل';
+
+  @override
+  String get wbCheckInTitle => 'تسجيل المزاج والتوتر';
+
+  @override
+  String get wbCheckInEditTitle => 'تعديل التسجيل';
+
+  @override
+  String get wbCheckInSubtitle => 'كل الحقول اختيارية؛ سجّل ما يناسبك.';
+
+  @override
+  String get wbCheckInAnother => 'تسجيل آخر';
+
+  @override
+  String get wbCheckedIn => 'تم التسجيل';
+
+  @override
+  String get wbTodayCheckIn => 'تسجيل اليوم';
+
+  @override
+  String get wbCheckInDeleted => 'حُذف التسجيل';
+
+  @override
+  String get wbMoodNotesHint => 'ما الذي أثّر في يومك؟';
+
+  @override
+  String get wbScaleCalm => 'هادئ';
+
+  @override
+  String get wbScaleVeryHigh => 'مرتفع جدًا';
+
+  @override
+  String get wbScaleNone => 'لا شيء';
+
+  @override
+  String get wbScaleDrained => 'مستنزَف';
+
+  @override
+  String get wbScaleFull => 'ممتلئ';
+
+  @override
+  String get wbSleepHours => 'ساعات النوم';
+
+  @override
+  String get wbCaffeine => 'أكواب الكافيين';
+
+  @override
+  String get wbFactors => 'ما الذي أثّر';
+
+  @override
+  String wbHours(String n) {
+    return '$n س';
+  }
+
+  @override
+  String wbCups(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n كوب',
+      many: '$n كوبًا',
+      few: '$n أكواب',
+      two: 'كوبان',
+      one: 'كوب واحد',
+      zero: 'لا أكواب',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbDaysRange(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n يوم',
+      many: '$n يومًا',
+      few: '$n أيام',
+      two: 'يومان',
+      one: 'يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbDayCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n يوم',
+      many: '$n يومًا',
+      few: '$n أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbMinutes(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n دقيقة',
+      many: '$n دقيقة',
+      few: '$n دقائق',
+      two: 'دقيقتان',
+      one: 'دقيقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbTimes(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n مرة',
+      many: '$n مرة',
+      few: '$n مرات',
+      two: 'مرتان',
+      one: 'مرة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbPointsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n نقطة على الخريطة',
+      many: '$n نقطة على الخريطة',
+      few: '$n نقاط على الخريطة',
+      two: 'نقطتان على الخريطة',
+      one: 'نقطة على الخريطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbPainLogTitle => 'تسجيل ألم';
+
+  @override
+  String get wbPainEditTitle => 'تعديل تسجيل الألم';
+
+  @override
+  String get wbPainLogSubtitle => 'من «لا ألم» إلى «أشدّ ما يكون»';
+
+  @override
+  String get wbPainScore => 'شدة الألم';
+
+  @override
+  String get wbPainNone => 'لا ألم';
+
+  @override
+  String get wbPainMild => 'خفيف';
+
+  @override
+  String get wbPainModerate => 'متوسط';
+
+  @override
+  String get wbPainSevere => 'شديد';
+
+  @override
+  String get wbPainWorst => 'أشدّ ما يكون';
+
+  @override
+  String get wbBodyMap => 'خريطة الجسم';
+
+  @override
+  String get wbBodyMapHint =>
+      'المس موضع الألم لتضع نقطة، والمسها ثانيةً لإزالتها.';
+
+  @override
+  String wbBodyMapSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'خريطة الجسم، عليها $count نقطة',
+      many: 'خريطة الجسم، عليها $count نقطة',
+      few: 'خريطة الجسم، عليها $count نقاط',
+      two: 'خريطة الجسم، عليها نقطتان',
+      one: 'خريطة الجسم، عليها نقطة واحدة',
+      zero: 'خريطة الجسم من الأمام والخلف، بلا نقاط',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbClearPoints => 'مسح النقاط';
+
+  @override
+  String get wbFront => 'أمام';
+
+  @override
+  String get wbBack => 'خلف';
+
+  @override
+  String get wbLocations => 'الأماكن';
+
+  @override
+  String get wbTriggers => 'المحفزات';
+
+  @override
+  String get wbPainNotesHint => 'كيف كان الألم؟ وما الذي سبقه؟';
+
+  @override
+  String get wbPainNowQuestion => 'كم ألمك الآن؟';
+
+  @override
+  String get wbQuickLog => 'تسجيل سريع';
+
+  @override
+  String get wbWithDetails => 'مع التفاصيل';
+
+  @override
+  String wbPainLogged(String score) {
+    return 'سُجّل ألم بدرجة $score';
+  }
+
+  @override
+  String get wbPainDeleted => 'حُذف تسجيل الألم';
+
+  @override
+  String get wbPainOverTime => 'الألم عبر الأيام';
+
+  @override
+  String get wbPainChartEmpty =>
+      'يظهر الرسم بعد تسجيل الألم في يومين على الأقل.';
+
+  @override
+  String get wbPainDailyMax => 'أعلى درجة في اليوم';
+
+  @override
+  String get wbPainDailyMean => 'متوسط اليوم';
+
+  @override
+  String get wbPainAvgMax => 'متوسط الأعلى';
+
+  @override
+  String get wbPainPeak => 'الذروة';
+
+  @override
+  String get wbPainDaysLogged => 'أيام مسجّلة';
+
+  @override
+  String get wbWhereItHurt => 'مواضع الألم';
+
+  @override
+  String get wbHeatEmpty => 'لا نقاط على الخريطة في هذه المدة بعد.';
+
+  @override
+  String get wbHeatLess => 'أقل';
+
+  @override
+  String get wbHeatMore => 'أشد';
+
+  @override
+  String wbHeatSemantics(String places) {
+    return 'خريطة الألم؛ أكثر المواضع تكرارًا: $places';
+  }
+
+  @override
+  String get wbTriggersFrequent => 'المحفزات الأكثر تكرارًا';
+
+  @override
+  String get wbTriggersEmpty => 'لم تُسجَّل محفزات في هذه المدة.';
+
+  @override
+  String get wbLocationsFrequent => 'الأماكن الأكثر تكرارًا';
+
+  @override
+  String get wbLocationsEmpty => 'لم تُسجَّل أماكن في هذه المدة.';
+
+  @override
+  String get wbManageTriggers => 'تعديل قائمة المحفزات';
+
+  @override
+  String get wbManageLocations => 'تعديل قائمة الأماكن';
+
+  @override
+  String get wbHistoryPain => 'سجل الألم';
+
+  @override
+  String get wbPainHistoryEmpty => 'لا تسجيلات بعد.';
+
+  @override
+  String get wbLogPain => 'سجّل ألمًا';
+
+  @override
+  String get wbNoPainToday => 'لا تسجيل اليوم';
+
+  @override
+  String wbLastPain(String score, String time) {
+    return '$score عند $time';
+  }
+
+  @override
+  String get wbRegionLegs => 'الساقان';
+
+  @override
+  String get wbTagKindLocations => 'أماكن الألم';
+
+  @override
+  String get wbTagKindTriggers => 'محفزات الألم';
+
+  @override
+  String get wbTagKindFactors => 'عوامل المزاج';
+
+  @override
+  String get wbTagKindGeneric => 'الوسوم';
+
+  @override
+  String wbTagAddTitle(String list) {
+    return 'إضافة إلى $list';
+  }
+
+  @override
+  String get wbTagName => 'الاسم';
+
+  @override
+  String get wbTagRenameTitle => 'إعادة التسمية';
+
+  @override
+  String wbTagDeleted(String name) {
+    return 'حُذف «$name» من القائمة';
+  }
+
+  @override
+  String get wbTagManagerSubtitle =>
+      'اسحب لإعادة الترتيب، والمس لإعادة التسمية (تتبعها التسجيلات السابقة)، واضغط مطوّلًا للحذف.';
+
+  @override
+  String get wbTagAdd => 'إضافة عنصر';
+
+  @override
+  String get wbTagEmpty => 'القائمة فارغة؛ أضف ما يناسبك.';
+
+  @override
+  String get wbTrends => 'مسار الأيام';
+
+  @override
+  String get wbTrendsNone =>
+      'بعد بضعة تسجيلات يظهر هنا مسار مزاجك وتوترك ونومك عبر الأيام.';
+
+  @override
+  String wbTrendsEmpty(String metric) {
+    return 'يظهر مسار $metric بعد تسجيله في يومين على الأقل.';
+  }
+
+  @override
+  String wbChartSemantics(String metric, String range) {
+    return 'رسم $metric خلال $range';
+  }
+
+  @override
+  String wbAverageOver(String value, String days) {
+    return 'المتوسط $value عبر $days';
+  }
+
+  @override
+  String get wbFactorsFrequent => 'العوامل الأكثر حضورًا';
+
+  @override
+  String get wbHistoryCheckIns => 'التسجيلات السابقة';
+
+  @override
+  String get wbHistoryEmpty => 'لا تسجيلات بعد؛ يكفي وجه واحد لتبدأ.';
+
+  @override
+  String get wbHabitsToday => 'عادات اليوم';
+
+  @override
+  String get wbHabitsSubtitle => 'خطوات صغيرة تخفّف الضغط.';
+
+  @override
+  String get wbHabitsAllDone => 'أتممتها كلها اليوم.';
+
+  @override
+  String wbBestStreakNow(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'أطول سلسلة الآن: $n يوم',
+      many: 'أطول سلسلة الآن: $n يومًا',
+      few: 'أطول سلسلة الآن: $n أيام',
+      two: 'أطول سلسلة الآن: يومان',
+      one: 'أطول سلسلة الآن: يوم واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbStreak(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n يوم متتالٍ',
+      many: '$n يومًا متتاليًا',
+      few: '$n أيام متتالية',
+      two: 'يومان متتاليان',
+      one: 'يوم واحد متتالٍ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbStreakNone => 'ابدأ اليوم';
+
+  @override
+  String get wbHabitDoneState => 'أُنجزت اليوم';
+
+  @override
+  String get wbHabitOpenState => 'لم تُنجز بعد';
+
+  @override
+  String get wbHabitPausedState => 'متوقفة مؤقتًا';
+
+  @override
+  String get wbHabitMarkDone => 'إنجاز';
+
+  @override
+  String get wbHabitUndo => 'تراجع';
+
+  @override
+  String wbHabitDone(String name) {
+    return 'أُنجزت: $name';
+  }
+
+  @override
+  String get wbHabitUndone => 'أُلغي الإنجاز';
+
+  @override
+  String get wbHabitPause => 'إيقاف مؤقت';
+
+  @override
+  String get wbHabitResume => 'استئناف';
+
+  @override
+  String get wbHabitPaused => 'أُوقفت العادة مؤقتًا';
+
+  @override
+  String get wbHabitResumed => 'استُؤنفت العادة';
+
+  @override
+  String wbHabitDeleted(String name) {
+    return 'حُذفت: $name';
+  }
+
+  @override
+  String get wbHabitEditTitle => 'تعديل العادة';
+
+  @override
+  String get wbHabitAddTitle => 'عادة جديدة';
+
+  @override
+  String get wbHabitAddSubtitle => 'عادة صغيرة تساعدك على الهدوء.';
+
+  @override
+  String get wbHabitName => 'العادة';
+
+  @override
+  String get wbHabitsEmptyTitle => 'لا عادات بعد';
+
+  @override
+  String get wbHabitsEmptyBody => 'أضف عادات صغيرة تودّ متابعتها يوميًا.';
+
+  @override
+  String get wbHabitsHint =>
+      'المس للإنجاز، واسحب لإعادة الترتيب، واضغط مطوّلًا للمزيد.';
+
+  @override
+  String get wbHabitsShort => 'العادات';
+
+  @override
+  String get wbWorriesShort => 'مركونة';
+
+  @override
+  String get wbWorryWindowTitle => 'نافذة القلق';
+
+  @override
+  String get wbWorryWindowExplain =>
+      'وقت قصير كل يوم تراجع فيه ما يشغل بالك. وحتى يحين، اركن الهموم هنا لتعود إليها في موعدها.';
+
+  @override
+  String get wbWorryWindowSet => 'حدّد النافذة';
+
+  @override
+  String get wbWorryWindowEdit => 'تعديل النافذة';
+
+  @override
+  String get wbWorryWindowEnabled => 'تفعيل نافذة القلق';
+
+  @override
+  String get wbWorryWindowStart => 'وقت البدء';
+
+  @override
+  String get wbWorryWindowLength => 'المدة';
+
+  @override
+  String get wbWorryWindowRemind => 'تذكير عند البدء';
+
+  @override
+  String get wbWorryWindowRemindHint => 'إشعار هادئ حين تُفتح النافذة.';
+
+  @override
+  String get wbWorryWindowAbout => 'تبقى همومك على هذا الجهاز وحده، مشفّرة.';
+
+  @override
+  String wbWorryWindowSummary(String time, String length) {
+    return 'كل يوم عند $time · $length';
+  }
+
+  @override
+  String get wbWorryWindowOff => 'غير مفعّلة';
+
+  @override
+  String wbWorryWindowOpenNow(String left) {
+    return 'النافذة مفتوحة الآن؛ بقي $left';
+  }
+
+  @override
+  String wbWorryWindowOpensIn(String left) {
+    return 'تُفتح بعد $left';
+  }
+
+  @override
+  String wbWorryReviewStart(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'راجع $n همّ',
+      many: 'راجع $n همًّا',
+      few: 'راجع $n هموم',
+      two: 'راجع همّين',
+      one: 'راجع همًّا واحدًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbWorryReviewNothing => 'لا هموم مركونة';
+
+  @override
+  String get wbWorryParkTitle => 'اركن همًّا';
+
+  @override
+  String get wbWorryParkExplain =>
+      'اكتبه كما هو، ثم دعه ينتظر نافذتك. لا حاجة إلى حلّه الآن.';
+
+  @override
+  String get wbWorryParkHint => 'ما الذي يشغل بالك؟';
+
+  @override
+  String get wbWorryPark => 'اركنه';
+
+  @override
+  String wbWorriesParked(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n همّ مركون',
+      many: '$n همًّا مركونًا',
+      few: '$n هموم مركونة',
+      two: 'همّان مركونان',
+      one: 'همّ مركون واحد',
+      zero: 'الهموم المركونة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbWorriesNone => 'لا شيء مركون الآن.';
+
+  @override
+  String wbWorriesResolved(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n همّ انتهى أمرها',
+      many: '$n همًّا انتهى أمرها',
+      few: '$n هموم انتهى أمرها',
+      two: 'همّان انتهى أمرهما',
+      one: 'همّ انتهى أمره',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbWorryParkedOn(String date) {
+    return 'رُكن: $date';
+  }
+
+  @override
+  String get wbWorryEditTitle => 'تعديل الهمّ';
+
+  @override
+  String get wbWorryBody => 'الهمّ';
+
+  @override
+  String get wbWorryDeleted => 'حُذف الهمّ';
+
+  @override
+  String get wbWorryMarkedResolved => 'انتهى أمره';
+
+  @override
+  String get wbWorryReopened => 'أُعيد إلى المركونة';
+
+  @override
+  String get wbWorryResolved => 'انتهى أمره';
+
+  @override
+  String get wbWorryReopen => 'اركنه من جديد';
+
+  @override
+  String get wbWorryKeep => 'أبقِه لاحقًا';
+
+  @override
+  String get wbWorryReviewTitle => 'مراجعة الهموم';
+
+  @override
+  String get wbWorryReviewSubtitle => 'واحدًا تلو الآخر، بلا عجلة.';
+
+  @override
+  String wbWorryReviewProgress(String index, String total) {
+    return '$index من $total';
+  }
+
+  @override
+  String get wbWorryReviewQuestion => 'هل انتهى أمره، أم تبقيه لنافذة قادمة؟';
+
+  @override
+  String get wbWorryAddReflection => 'أضف تأمّلًا';
+
+  @override
+  String get wbWorryReflection => 'تأمّل';
+
+  @override
+  String get wbWorryReflectionHint => 'كيف تراه الآن؟';
+
+  @override
+  String wbWorryEarlierReflection(String text) {
+    return 'تأمّل سابق: $text';
+  }
+
+  @override
+  String get wbWorryReviewEmpty => 'لا هموم مركونة للمراجعة الآن.';
+
+  @override
+  String get wbWorryReviewDoneTitle => 'انتهت المراجعة';
+
+  @override
+  String wbWorryReviewDoneBody(int count, String n, String resolved) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'راجعت $n همّ، وانتهى أمر $resolved منها.',
+      many: 'راجعت $n همًّا، وانتهى أمر $resolved منها.',
+      few: 'راجعت $n هموم، وانتهى أمر $resolved منها.',
+      two: 'راجعت همّين، وانتهى أمر $resolved منهما.',
+      one: 'راجعت همًّا واحدًا، وانتهى أمر $resolved.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbWorryNotifyTitle => 'حان وقت نافذة القلق';
+
+  @override
+  String wbWorryNotifyBody(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n همّ مركون ينتظرك.',
+      many: '$n همًّا مركونًا ينتظرك.',
+      few: '$n هموم مركونة تنتظرك.',
+      two: 'همّان مركونان ينتظرانك.',
+      one: 'همّ واحد مركون ينتظرك.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wbWorryNotifyBodyEmpty => 'لا شيء مركون اليوم؛ لحظة هدوء لك.';
+
+  @override
+  String get wbNotifyGroup => 'الصحة';
+
+  @override
+  String get wbNotifyChannel => 'نافذة القلق';
+
+  @override
+  String get wbNotifyChannelDescription =>
+      'تذكير هادئ حين يحين وقت مراجعة الهموم المركونة.';
+
+  @override
+  String wbInsightsIntro(String days) {
+    return 'ملاحظات محايدة تُحسب على جهازك من بياناتك وحدها خلال آخر $days. هي أرقام للتأمل، لا تشخيص فيها ولا نصيحة، وتزامن أمرين لا يعني أن أحدهما سبب الآخر.';
+  }
+
+  @override
+  String get wbInsightsNotYetTitle => 'الرؤى في الطريق';
+
+  @override
+  String wbInsightsNotYetBody(String needed, String logged) {
+    return 'تظهر الملاحظات حين تتجمّع بيانات $needed أيام على الأقل. لديك الآن $logged من $needed.';
+  }
+
+  @override
+  String get wbInsightsNoneTitle => 'لا أنماط واضحة بعد';
+
+  @override
+  String get wbInsightsNoneBody =>
+      'لم تظهر في بياناتك حتى الآن فروق أو ارتباطات واضحة بما يكفي، وستظهر هنا إن ظهرت.';
+
+  @override
+  String wbInsightBasis(String days) {
+    return 'بناءً على $days من بياناتك';
+  }
+
+  @override
+  String get wbInsightCorrelationNote => 'الارتباط يصف تزامنًا فقط، لا سببًا.';
+
+  @override
+  String get wbInsightThoseDays => 'تلك الأيام';
+
+  @override
+  String get wbInsightOtherDays => 'بقية الأيام';
+
+  @override
+  String get wbCorrelationOpposite => 'عكسي';
+
+  @override
+  String get wbCorrelationNone => 'لا ارتباط';
+
+  @override
+  String get wbCorrelationTogether => 'معًا';
+
+  @override
+  String wbAverages30(String days) {
+    return 'متوسطات آخر $days';
+  }
+
+  @override
+  String wbInsightSplit(
+    String condition,
+    String comparison,
+    String a,
+    String b,
+  ) {
+    return '$condition، $comparison: $a مقابل $b في بقية الأيام.';
+  }
+
+  @override
+  String wbAvgHigher(String metric, String amount) {
+    return 'كان متوسط $metric أعلى $amount';
+  }
+
+  @override
+  String wbAvgLower(String metric, String amount) {
+    return 'كان متوسط $metric أقل $amount';
+  }
+
+  @override
+  String wbByPoints(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بـ$n درجة',
+      many: 'بـ$n درجة',
+      few: 'بـ$n درجات',
+      two: 'بدرجتين',
+      one: 'بدرجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbByPointsFraction(String n) {
+    return 'بـ$n درجة';
+  }
+
+  @override
+  String wbByHours(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بـ$n ساعة',
+      many: 'بـ$n ساعة',
+      few: 'بـ$n ساعات',
+      two: 'بساعتين',
+      one: 'بساعة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbByHoursFraction(String n) {
+    return 'بـ$n ساعة';
+  }
+
+  @override
+  String wbWhenSleptUnder(String hours, String days) {
+    return 'في الأيام التي نمت فيها أقل من $hours ساعات ($days)';
+  }
+
+  @override
+  String wbWhenCaffeineAtLeast(String cups, String days) {
+    return 'في الأيام التي شربت فيها $cups أكواب كافيين أو أكثر ($days)';
+  }
+
+  @override
+  String wbWhenStressAtLeast(String level, String days) {
+    return 'في الأيام التي كان توترك فيها $level فأكثر ($days)';
+  }
+
+  @override
+  String wbWhenMetricAtLeast(String metric, String level, String days) {
+    return 'في الأيام التي بلغ فيها $metric $level فأكثر ($days)';
+  }
+
+  @override
+  String wbInsightCorrelation(String when, String then, String r, String days) {
+    return '$when، $then في الغالب (معامل الارتباط $r على مدى $days).';
+  }
+
+  @override
+  String wbWhenHigher(String metric) {
+    String _temp0 = intl.Intl.selectLogic(metric, {
+      'mood': 'في الأيام التي ارتفع فيها تقييم مزاجك',
+      'stress': 'في الأيام التي ارتفع فيها توترك',
+      'anxiety': 'في الأيام التي ارتفع فيها قلقك',
+      'energy': 'في الأيام التي ارتفعت فيها طاقتك',
+      'sleep': 'في الأيام التي طال فيها نومك',
+      'caffeine': 'في الأيام التي زادت فيها أكواب الكافيين',
+      'pain': 'في الأيام التي اشتدّ فيها ألمك',
+      'other': 'في الأيام التي ارتفعت فيها القيمة',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String wbThenHigher(String metric) {
+    String _temp0 = intl.Intl.selectLogic(metric, {
+      'mood': 'كان تقييم مزاجك أعلى',
+      'stress': 'كان توترك أعلى',
+      'anxiety': 'كان قلقك أعلى',
+      'energy': 'كانت طاقتك أعلى',
+      'sleep': 'كان نومك أطول',
+      'caffeine': 'كانت أكواب الكافيين أكثر',
+      'pain': 'كان ألمك أشدّ',
+      'other': 'كانت القيمة أعلى',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String wbThenLower(String metric) {
+    String _temp0 = intl.Intl.selectLogic(metric, {
+      'mood': 'كان تقييم مزاجك أقل',
+      'stress': 'كان توترك أقل',
+      'anxiety': 'كان قلقك أقل',
+      'energy': 'كانت طاقتك أقل',
+      'sleep': 'كان نومك أقصر',
+      'caffeine': 'كانت أكواب الكافيين أقل',
+      'pain': 'كان ألمك أخفّ',
+      'other': 'كانت القيمة أقل',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get wbSupportTitle => 'لست وحدك';
+
+  @override
+  String wbSupportBody(String low, String total) {
+    return 'سجّلت مزاجًا منخفضًا في $low من آخر $total تسجيلات. إن احتجت إلى مساعدة عاجلة، فخط الطوارئ متاح على مدار الساعة.';
+  }
+
+  @override
+  String wbSupportCall(String number) {
+    return 'اتصال بـ $number';
+  }
+
+  @override
+  String get wbSupportHideWeek => 'إخفاء لأسبوع';
+
+  @override
+  String get wbSupportCompact =>
+      'سجّلت مزاجًا منخفضًا مؤخرًا. الطوارئ متاحة دائمًا.';
+
+  @override
+  String wbDialFailed(String number) {
+    return 'تعذّر فتح الهاتف. رقم الطوارئ: $number';
+  }
+
+  @override
+  String get wbSettingsTitle => 'إعدادات العافية';
+
+  @override
+  String get wbSettingsSubtitle => 'رقم الطوارئ، ونافذة القلق، وصوت التنفّس';
+
+  @override
+  String get wbSettingsSupportNumber => 'رقم الطوارئ';
+
+  @override
+  String wbSettingsSupportNumberHint(String number) {
+    return 'يظهر في لافتة الدعم. في الأردن $number؛ غيّره إن كنت تقيم في بلد آخر.';
+  }
+
+  @override
+  String get wbSettingsNumberInvalid => 'أدخل رقمًا صالحًا';
+
+  @override
+  String wbSettingsResetNumber(String number) {
+    return 'استعادة $number';
+  }
+
+  @override
+  String get wbSettingsBreathingSound => 'صوت هادئ للتنفّس';
+
+  @override
+  String get wbSettingsBreathingSoundHint =>
+      'نغمة خفيفة عند كل مرحلة؛ الاهتزاز يعمل دائمًا.';
+
+  @override
+  String get wbBreathTitle => 'تنفّس';
+
+  @override
+  String get wbBreatheShort => 'تنفّس';
+
+  @override
+  String get wbBreath478 => 'الاسترخاء';
+
+  @override
+  String get wbBreathBox => 'الصندوق';
+
+  @override
+  String get wbBreathIn => 'شهيق';
+
+  @override
+  String get wbBreathHold => 'احبس';
+
+  @override
+  String get wbBreathOut => 'زفير';
+
+  @override
+  String get wbBreathRest => 'توقّف';
+
+  @override
+  String wbBreathReady(String rhythm) {
+    return 'إيقاع $rhythm ثوانٍ. ابدأ حين تكون مستعدًا.';
+  }
+
+  @override
+  String get wbBreathDone => 'اكتملت الجلسة';
+
+  @override
+  String wbBreathDoneBody(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'أتممت $n دورة.',
+      many: 'أتممت $n دورة.',
+      few: 'أتممت $n دورات.',
+      two: 'أتممت دورتين.',
+      one: 'أتممت دورة واحدة.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wbBreathCycle(String index, String total) {
+    return 'الدورة $index من $total';
+  }
+
+  @override
+  String get wbBreathPaused => 'متوقف مؤقتًا';
+
+  @override
+  String get wbBreathCycles => 'عدد الدورات';
+
+  @override
+  String get wbBreathStart => 'ابدأ';
+
+  @override
+  String get wbBreathAgain => 'مرة أخرى';
+
+  @override
+  String get wbBreathStop => 'إنهاء';
+
+  @override
+  String get wbBreathPause => 'إيقاف مؤقت';
+
+  @override
+  String get wbBreathResume => 'متابعة';
+
+  @override
+  String get wbBreathSoundOn => 'الصوت مفعّل';
+
+  @override
+  String get wbBreathSoundOff => 'الصوت مغلق';
+
+  @override
+  String get wbBreathGentleNote => 'خذ الإيقاع بلطف، ويمكنك التوقف في أي لحظة.';
+
+  @override
+  String get wbTodayCardTitle => 'العافية اليوم';
+
+  @override
+  String get healthHubTodayTitle => 'عنايتك اليوم';
+
+  @override
+  String get healthHubDoctorTitle => 'مع طبيبك';
+
+  @override
+  String get healthHubRecordAction => 'السجل';
+
+  @override
+  String get healthHubToolsTitle => 'أدوات الصحة';
+
+  @override
+  String get healthHubPainTitle => 'الألم الآن';
+
+  @override
+  String get healthHubPainNone => 'لا ألم مسجّل اليوم';
+
+  @override
+  String healthHubPainToday(int count, String n, String max) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n تسجيل اليوم، أعلاها $max',
+      many: '$n تسجيلًا اليوم، أعلاها $max',
+      few: '$n تسجيلات اليوم، أعلاها $max',
+      two: 'تسجيلان اليوم، أعلاهما $max',
+      one: 'تسجيل واحد اليوم بدرجة $max',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get healthHubPainWhere => 'تفاصيل';
+
+  @override
+  String get healthHubPainWhereHint =>
+      'تسجيل كامل: موضع الألم على الجسم والمحفّزات والملاحظات';
+
+  @override
+  String get healthHubPainLow => 'لا ألم';
+
+  @override
+  String get healthHubPainHigh => 'أشدّ ألم';
+
+  @override
+  String healthHubPainLogScore(String score, String max) {
+    return 'سجّل ألمًا بدرجة $score من $max';
+  }
+
+  @override
+  String get healthHubQuestionsTitle => 'أسئلة لطبيبك';
+
+  @override
+  String healthHubQuestionsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n سؤال بانتظار الإجابة',
+      many: '$n سؤالًا بانتظار الإجابة',
+      few: '$n أسئلة بانتظار الإجابة',
+      two: 'سؤالان بانتظار الإجابة',
+      one: 'سؤال واحد بانتظار الإجابة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String healthHubQuestionFor(String title) {
+    return 'لموعد $title';
+  }
+
+  @override
+  String get healthHubToolMeds => 'الأدوية';
+
+  @override
+  String get healthHubToolMedsHint => 'الجرعات والدورات وقواعد التوقيت';
+
+  @override
+  String get healthHubToolLabs => 'التحاليل';
+
+  @override
+  String get healthHubToolLabsHint => 'النتائج ومساراتها ومداك المرجعي';
+
+  @override
+  String get healthHubToolAppointments => 'المواعيد';
+
+  @override
+  String get healthHubToolAppointmentsHint =>
+      'المواعيد القادمة والسابقة وأسئلتها';
+
+  @override
+  String get healthHubToolWellbeing => 'العافية';
+
+  @override
+  String get healthHubToolWellbeingHint => 'المزاج والألم والعادات والهموم';
+
+  @override
+  String get healthHubToolBreathe => 'تنفّس';
+
+  @override
+  String get healthHubToolBreatheHint => 'تنفّس موجَّه بإيقاع هادئ';
+
+  @override
+  String get healthHubToolReport => 'ملخّص للطبيب';
+
+  @override
+  String get healthHubToolReportHint => 'ملف PDF تطبعه أو تشاركه';
+
+  @override
+  String get healthHubSettingsSection => 'الصحة';
+
+  @override
+  String get healthHubSettingsSectionHint =>
+      'الأدوية والمواعيد والعافية، وكلها على جهازك';
+
+  @override
+  String get healthHubSettingsTitle => 'إعدادات الصحة';
+
+  @override
+  String healthHubSettingsRemindersOn(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n تذكير مفعّل',
+      many: '$n تذكيرًا مفعّلًا',
+      few: '$n تذكيرات مفعّلة',
+      two: 'تذكيران مفعّلان',
+      one: 'تذكير واحد مفعّل',
+      zero: 'تذكيرات الصحة متوقفة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String healthHubSettingsEntrySummary(String reminders, String number) {
+    return '$reminders، والطوارئ $number';
+  }
+
+  @override
+  String get healthHubSettingsRecordSection => 'المواعيد والتحاليل';
+
+  @override
+  String get healthHubSettingsMarginHint =>
+      'جزء من عرض المدى الذي أدخلته لكل تحليل؛ النتيجة ضمنه قرب أحد الحدّين تُعلَّم «حدّية».';
+
+  @override
+  String get healthHubSettingsReportSection => 'ملخّص الطبيب';
+
+  @override
+  String get healthHubSettingsReportPeriod => 'الفترة المعتادة';
+
+  @override
+  String get healthHubSettingsReportSections => 'الأقسام المضمّنة';
+
+  @override
+  String get healthHubSettingsReportSectionsAll => 'كل الأقسام';
+
+  @override
+  String get healthHubSettingsReportNameNone =>
+      'لا يُحفظ اسم، يُكتب عند كل تقرير';
+
+  @override
+  String healthHubSettingsReportNameKept(String name) {
+    return '$name، على هذا الجهاز فقط';
+  }
+
+  @override
+  String get healthHubSettingsReportNameHint =>
+      'اتركه فارغًا كي لا يُحفظ أي اسم';
+
+  @override
+  String healthHubSettingsEmergencyHint(String number) {
+    return '$number، ويظهر في رسالة الدعم حين يتكرّر المزاج المنخفض';
+  }
+
+  @override
+  String get healthHubSettingsDenied =>
+      'إشعارات مَدار متوقفة في إعدادات الهاتف، فلن تصل التذكيرات.';
+
+  @override
+  String get healthHubSettingsPrivacy =>
+      'كل ما في الصحة يبقى على هذا الجهاز مشفّرًا. مَدار يسجّل ويعرض فقط؛ لا يشخّص ولا ينصح بعلاج.';
+
+  @override
+  String get healthHubSettingsOff => 'متوقفة';
+
+  @override
+  String healthHubSettingsWorrySummary(String time, String length) {
+    return 'يوميًا عند $time، لمدة $length';
+  }
+
+  @override
+  String get ledgerTitle => 'المحافظ والحركات';
+
+  @override
+  String get ledgerNetBalance => 'صافي الرصيد';
+
+  @override
+  String get ledgerPersonal => 'شخصي';
+
+  @override
+  String get ledgerBusiness => 'تجاري';
+
+  @override
+  String ledgerApprox(String amount) {
+    return '≈ $amount';
+  }
+
+  @override
+  String get ledgerWallets => 'المحافظ';
+
+  @override
+  String get ledgerAddWallet => 'محفظة جديدة';
+
+  @override
+  String ledgerArchivedCount(String count) {
+    return 'المؤرشفة ($count)';
+  }
+
+  @override
+  String get ledgerRecent => 'آخر الحركات';
+
+  @override
+  String get ledgerSeeAll => 'عرض الكل';
+
+  @override
+  String get ledgerCurrencies => 'العملات وأسعار الصرف';
+
+  @override
+  String get ledgerSearch => 'ابحث في الحركات';
+
+  @override
+  String get ledgerAddTx => 'حركة جديدة';
+
+  @override
+  String get ledgerEmptyTitle => 'ابدأ بمحفظتك الأولى';
+
+  @override
+  String get ledgerEmptyBody =>
+      'أنشئ محفظة لكل مكان يوجد فيه مالك: نقدًا، في البنك، أو عهدة لدى شركة التوصيل.';
+
+  @override
+  String get ledgerNoTxTitle => 'لا حركات بعد';
+
+  @override
+  String get ledgerNoTxBody => 'سجّل مصروفًا أو دخلًا وسيظهر هنا.';
+
+  @override
+  String get ledgerNoResults => 'لا حركات مطابقة';
+
+  @override
+  String get ledgerNoResultsBody => 'جرّب كلمة أخرى أو أزل بعض عوامل التصفية.';
+
+  @override
+  String ledgerMissingRate(String codes) {
+    return 'بلا سعر صرف، فلم تُحسب في المجموع: $codes';
+  }
+
+  @override
+  String get ledgerRatesDefaults =>
+      'أسعار الصرف ما زالت تقديرية. راجعها لتكون المجاميع دقيقة.';
+
+  @override
+  String get ledgerReview => 'مراجعة';
+
+  @override
+  String get ledgerKindExpense => 'مصروف';
+
+  @override
+  String get ledgerKindIncome => 'دخل';
+
+  @override
+  String get ledgerKindTransfer => 'تحويل';
+
+  @override
+  String get ledgerKindAdjustment => 'تسوية';
+
+  @override
+  String get ledgerToday => 'اليوم';
+
+  @override
+  String get ledgerYesterday => 'أمس';
+
+  @override
+  String ledgerTransferRoute(String from, String to) {
+    return '$from ← $to';
+  }
+
+  @override
+  String ledgerTransferOut(String wallet) {
+    return 'تحويل إلى $wallet';
+  }
+
+  @override
+  String ledgerTransferIn(String wallet) {
+    return 'تحويل من $wallet';
+  }
+
+  @override
+  String get ledgerAdjustmentTitle => 'تسوية الرصيد';
+
+  @override
+  String get ledgerUnassigned => 'بلا بند';
+
+  @override
+  String ledgerBalanceAfter(String amount) {
+    return 'الرصيد $amount';
+  }
+
+  @override
+  String get ledgerDuplicateToday => 'تكرار لليوم';
+
+  @override
+  String get ledgerDeleted => 'حُذفت الحركة';
+
+  @override
+  String get ledgerDuplicated => 'تكررت الحركة بتاريخ اليوم';
+
+  @override
+  String ledgerMoved(String wallet) {
+    return 'نُقلت إلى $wallet';
+  }
+
+  @override
+  String ledgerMovedConverted(String wallet, String amount) {
+    return 'نُقلت إلى $wallet بمبلغ $amount';
+  }
+
+  @override
+  String get ledgerSaved => 'حُفظت الحركة';
+
+  @override
+  String get ledgerUpdated => 'عُدّلت الحركة';
+
+  @override
+  String get ledgerMoveTitle => 'نقل الحركة إلى…';
+
+  @override
+  String get ledgerEditTx => 'تعديل الحركة';
+
+  @override
+  String get ledgerWallet => 'المحفظة';
+
+  @override
+  String get ledgerFrom => 'من';
+
+  @override
+  String get ledgerTo => 'إلى';
+
+  @override
+  String get ledgerSent => 'المُرسَل';
+
+  @override
+  String get ledgerReceived => 'المستلَم';
+
+  @override
+  String get ledgerUseRate => 'حسب سعر الصرف';
+
+  @override
+  String ledgerRateLine(String one, String from, String rate, String to) {
+    return '$one $from = $rate $to';
+  }
+
+  @override
+  String get ledgerBudgetItem => 'البند';
+
+  @override
+  String get ledgerChooseItem => 'اختر بندًا';
+
+  @override
+  String get ledgerNoBudget => 'لا بنود في الميزانية بعد';
+
+  @override
+  String get ledgerSearchItems => 'ابحث عن بند';
+
+  @override
+  String ledgerItemLeft(String amount) {
+    return 'متبقٍّ $amount';
+  }
+
+  @override
+  String ledgerItemOver(String amount) {
+    return 'تجاوز $amount';
+  }
+
+  @override
+  String get ledgerDate => 'التاريخ';
+
+  @override
+  String get ledgerOtherDay => 'يوم آخر';
+
+  @override
+  String get ledgerNote => 'ملاحظة';
+
+  @override
+  String get ledgerNoteHint => 'مثلًا: خضار من السوق';
+
+  @override
+  String get ledgerTags => 'الوسوم';
+
+  @override
+  String get ledgerTagHint => 'أضف وسمًا';
+
+  @override
+  String get ledgerSetBalance => 'الرصيد الفعلي';
+
+  @override
+  String get ledgerDifference => 'الفرق';
+
+  @override
+  String get ledgerCurrentBalance => 'الرصيد الحالي';
+
+  @override
+  String get ledgerNegative => 'سالب';
+
+  @override
+  String get ledgerErrNoWallet => 'اختر محفظة';
+
+  @override
+  String get ledgerErrNoAmount => 'أدخل المبلغ';
+
+  @override
+  String get ledgerErrNoDestination => 'اختر المحفظة المستلِمة';
+
+  @override
+  String get ledgerErrSameWallet => 'اختر محفظة مختلفة';
+
+  @override
+  String get ledgerErrNoRate => 'لا يوجد سعر صرف، أدخل المبلغ المستلَم';
+
+  @override
+  String get ledgerErrNoChange => 'الرصيد مطابق أصلًا';
+
+  @override
+  String get ledgerNeedWallet => 'أنشئ محفظة أولًا لتسجيل الحركات';
+
+  @override
+  String get ledgerKeyDecimal => 'فاصلة عشرية';
+
+  @override
+  String get ledgerKeyBackspace => 'حذف آخر رقم';
+
+  @override
+  String get ledgerAmount => 'المبلغ';
+
+  @override
+  String get ledgerWalletEdit => 'تعديل المحفظة';
+
+  @override
+  String get ledgerWalletName => 'الاسم';
+
+  @override
+  String get ledgerWalletNameHint => 'مثلًا: الصندوق، البنك، عهدة المندوب';
+
+  @override
+  String get ledgerOpening => 'الرصيد الافتتاحي والعملة';
+
+  @override
+  String get ledgerWalletKind => 'نوع المحفظة';
+
+  @override
+  String get ledgerColor => 'اللون';
+
+  @override
+  String get ledgerIcon => 'الأيقونة';
+
+  @override
+  String get ledgerCurrencyLocked =>
+      'لا يمكن تغيير العملة بعد تسجيل حركات في المحفظة';
+
+  @override
+  String get ledgerArchive => 'أرشفة';
+
+  @override
+  String get ledgerUnarchive => 'إعادة من الأرشيف';
+
+  @override
+  String get ledgerArchivedToast => 'أُرشفت المحفظة';
+
+  @override
+  String get ledgerUnarchivedToast => 'أُعيدت المحفظة';
+
+  @override
+  String ledgerWalletDeleted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حُذفت المحفظة و$count حركة',
+      many: 'حُذفت المحفظة و$count حركة',
+      few: 'حُذفت المحفظة و$count حركات',
+      two: 'حُذفت المحفظة وحركتان',
+      one: 'حُذفت المحفظة وحركة واحدة',
+      zero: 'حُذفت المحفظة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ledgerWalletSaved => 'حُفظت المحفظة';
+
+  @override
+  String get ledgerBalance => 'الرصيد';
+
+  @override
+  String get ledgerBalanceHistory => 'تطوّر الرصيد';
+
+  @override
+  String get ledgerRange1M => 'شهر';
+
+  @override
+  String get ledgerRange3M => '٣ أشهر';
+
+  @override
+  String get ledgerRange1Y => 'سنة';
+
+  @override
+  String get ledgerRangeAll => 'الكل';
+
+  @override
+  String get ledgerTransactions => 'الحركات';
+
+  @override
+  String get ledgerWalletMissing => 'لم نجد هذه المحفظة';
+
+  @override
+  String ledgerOpeningLine(String amount) {
+    return 'رصيد افتتاحي $amount';
+  }
+
+  @override
+  String get ledgerFilterWallet => 'المحفظة';
+
+  @override
+  String get ledgerFilterKind => 'النوع';
+
+  @override
+  String get ledgerFilterItem => 'البند';
+
+  @override
+  String get ledgerFilterTag => 'الوسم';
+
+  @override
+  String get ledgerFilterDate => 'الفترة';
+
+  @override
+  String get ledgerFilterScope => 'النطاق';
+
+  @override
+  String get ledgerFilterClear => 'مسح التصفية';
+
+  @override
+  String ledgerFilterMore(String first, String count) {
+    return '$first +$count';
+  }
+
+  @override
+  String get ledgerAll => 'الكل';
+
+  @override
+  String get ledgerAllWallets => 'كل المحافظ';
+
+  @override
+  String get ledgerThisWeek => 'هذا الأسبوع';
+
+  @override
+  String get ledgerThisMonth => 'هذا الشهر';
+
+  @override
+  String get ledgerLastMonth => 'الشهر الماضي';
+
+  @override
+  String ledgerLastDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر $count يوم',
+      many: 'آخر $count يومًا',
+      few: 'آخر $count أيام',
+      two: 'آخر يومين',
+      one: 'آخر يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ledgerCustomRange => 'مدة مخصّصة';
+
+  @override
+  String ledgerRangeLabel(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get ledgerIncomeTotal => 'الدخل';
+
+  @override
+  String get ledgerExpenseTotal => 'المصروف';
+
+  @override
+  String get ledgerNet => 'الصافي';
+
+  @override
+  String ledgerTxCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count حركة',
+      many: '$count حركة',
+      few: '$count حركات',
+      two: 'حركتان',
+      one: 'حركة واحدة',
+      zero: 'لا حركات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ledgerSpending => 'الإنفاق';
+
+  @override
+  String get ledgerByItem => 'حسب البند';
+
+  @override
+  String get ledgerByWallet => 'حسب المحفظة';
+
+  @override
+  String get ledgerPeriodMonth => 'شهري';
+
+  @override
+  String get ledgerPeriodWeek => 'أسبوعي';
+
+  @override
+  String get ledgerPrevPeriod => 'الفترة السابقة';
+
+  @override
+  String get ledgerNextPeriod => 'الفترة التالية';
+
+  @override
+  String get ledgerNoSpending => 'لا مصاريف في هذه الفترة';
+
+  @override
+  String get ledgerTrend => 'الدخل والإنفاق';
+
+  @override
+  String ledgerTrendSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر $count شهر',
+      many: 'آخر $count شهرًا',
+      few: 'آخر $count أشهر',
+      two: 'آخر شهرين',
+      one: 'آخر شهر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ledgerInBase(String code) {
+    return 'بالعملة الأساسية $code';
+  }
+
+  @override
+  String get ledgerTotal => 'المجموع';
+
+  @override
+  String get ledgerOther => 'أخرى';
+
+  @override
+  String ledgerChartSpendingSemantics(
+    String period,
+    String total,
+    String slices,
+  ) {
+    return 'الإنفاق $period: المجموع $total. $slices';
+  }
+
+  @override
+  String ledgerChartTrendSemantics(
+    String period,
+    String income,
+    String expense,
+  ) {
+    return '$period: دخل $income، إنفاق $expense';
+  }
+
+  @override
+  String get ledgerCurrenciesTitle => 'العملات';
+
+  @override
+  String get ledgerBaseCurrency => 'العملة الأساسية';
+
+  @override
+  String get ledgerBaseHint => 'تُعرض بها كل المجاميع والرسوم البيانية';
+
+  @override
+  String get ledgerChangeBase => 'تغيير العملة الأساسية';
+
+  @override
+  String get ledgerOtherCurrencies => 'عملات أخرى';
+
+  @override
+  String get ledgerAddCurrency => 'إضافة عملة';
+
+  @override
+  String get ledgerNewCurrency => 'عملة جديدة';
+
+  @override
+  String get ledgerEditCurrency => 'تعديل العملة';
+
+  @override
+  String get ledgerCode => 'الرمز الدولي';
+
+  @override
+  String get ledgerCodeHint => 'مثل EUR';
+
+  @override
+  String get ledgerNameAr => 'الاسم بالعربية';
+
+  @override
+  String get ledgerNameEn => 'الاسم بالإنجليزية';
+
+  @override
+  String get ledgerSymbol => 'الرمز المختصر';
+
+  @override
+  String get ledgerDecimals => 'المنازل العشرية';
+
+  @override
+  String get ledgerRate => 'سعر الصرف';
+
+  @override
+  String get ledgerRateHint => 'يُدخَل يدويًا، دون اتصال بالإنترنت';
+
+  @override
+  String get ledgerErrCode => 'استخدم حروفًا لاتينية (مثل EUR)';
+
+  @override
+  String get ledgerErrCodeExists => 'هذه العملة موجودة';
+
+  @override
+  String get ledgerErrRate => 'أدخل سعرًا أكبر من صفر';
+
+  @override
+  String get ledgerErrName => 'أدخل اسمًا';
+
+  @override
+  String ledgerCurrencyInUse(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'مستخدمة في $count محفظة',
+      many: 'مستخدمة في $count محفظة',
+      few: 'مستخدمة في $count محافظ',
+      two: 'مستخدمة في محفظتين',
+      one: 'مستخدمة في محفظة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ledgerCurrencyDeleted => 'حُذفت العملة';
+
+  @override
+  String get ledgerCurrencySaved => 'حُفظت العملة';
+
+  @override
+  String get ledgerNoRate => 'بلا سعر';
+
+  @override
+  String get ledgerRebaseTitle => 'عملة أساسية جديدة';
+
+  @override
+  String ledgerRebaseExplain(String code) {
+    return 'تُعاد كتابة كل الأسعار نسبةً إلى $code بدقة، فتبقى القيم المحوّلة كما هي.';
+  }
+
+  @override
+  String get ledgerRebaseNow => 'الآن';
+
+  @override
+  String get ledgerRebaseAfter => 'بعد التغيير';
+
+  @override
+  String ledgerRebaseConfirm(String code) {
+    return 'اعتماد $code';
+  }
+
+  @override
+  String ledgerRebaseDone(String code) {
+    return 'أصبحت $code العملة الأساسية';
+  }
+
+  @override
+  String get ledgerRebaseChoose => 'اختر العملة الأساسية الجديدة';
+
+  @override
+  String get ledgerSummaryEmpty => 'لا محافظ بعد';
+
+  @override
+  String ledgerMoreWallets(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count محفظة أخرى',
+      many: 'و$count محفظة أخرى',
+      few: 'و$count محافظ أخرى',
+      two: 'ومحفظتان أخريان',
+      one: 'ومحفظة أخرى',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ledgerWalletSemantics(String name, String amount) {
+    return '$name، الرصيد $amount';
+  }
+
+  @override
+  String get ledgerApply => 'تطبيق';
+
+  @override
+  String get ledgerNoTags => 'لا وسوم بعد';
+
+  @override
+  String get ledgerCompactThousand => 'ألف';
+
+  @override
+  String get ledgerCompactMillion => 'مليون';
+
+  @override
+  String get ledgerMakeBase => 'اعتمادها عملة أساسية';
+
+  @override
+  String get ledgerRatesStale => 'الأسعار يدوية؛ حدّثها حين يتغيّر السوق';
+
+  @override
+  String get ledgerNoteHintIncome => 'مثلًا: تحصيل من شركة الشحن';
+
+  @override
+  String get ledgerNoteHintTransfer => 'مثلًا: إيداع في البنك';
+
+  @override
+  String get ledgerNoteHintAdjust => 'مثلًا: بعد عدّ النقود';
+
+  @override
+  String get ledgerLinkJar => 'حصّالة';
+
+  @override
+  String get ledgerLinkDebt => 'دَين';
+
+  @override
+  String get ledgerLinkObligation => 'التزام';
+
+  @override
+  String get ledgerOpenJar => 'فتح الحصّالة';
+
+  @override
+  String get ledgerOpenDebt => 'فتح الدَّين';
+
+  @override
+  String get ledgerOpenObligation => 'فتح الالتزام';
+
+  @override
+  String ledgerLinkedHint(String source) {
+    return 'تُعدَّل من $source';
+  }
+
+  @override
+  String get ledgerArchivedBadge => 'مؤرشفة';
+
+  @override
+  String get ledgerUnknownCurrencies =>
+      'بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.';
+
+  @override
+  String ledgerAddCode(String code) {
+    return 'إضافة $code';
+  }
+
+  @override
+  String get ledgerFixRates => 'ضبط الأسعار';
+
+  @override
+  String get budgetTitle => 'الميزانية';
+
+  @override
+  String get budgetTabPlan => 'الخطة';
+
+  @override
+  String get budgetTabSpending => 'الإنفاق';
+
+  @override
+  String get budgetAddItem => 'إضافة بند';
+
+  @override
+  String get budgetMonthlyPlan => 'الخطة الشهرية';
+
+  @override
+  String budgetWeeklyEquivalent(String amount) {
+    return '≈ $amount في الأسبوع';
+  }
+
+  @override
+  String budgetWeeksPerMonthChip(String weeks) {
+    return 'أسابيع الشهر: $weeks';
+  }
+
+  @override
+  String get budgetAllocation => 'توزيع الخطة';
+
+  @override
+  String get budgetBalanced => 'كل البنود متوازنة';
+
+  @override
+  String budgetWarningsTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count أمر يحتاج انتباهك',
+      many: '$count أمرًا يحتاج انتباهك',
+      few: '$count أمور تحتاج انتباهك',
+      two: 'أمران يحتاجان انتباهك',
+      one: 'أمر واحد يحتاج انتباهك',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String budgetWarningsMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count أمر آخر',
+      many: 'و$count أمرًا آخر',
+      few: 'و$count أمور أخرى',
+      two: 'وأمران آخران',
+      one: 'وأمر آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get budgetShowLess => 'عرض أقل';
+
+  @override
+  String budgetIssueChildrenUnder(String name, String amount) {
+    return 'بنود «$name» الفرعية أقلّ منه بـ$amount';
+  }
+
+  @override
+  String budgetIssueChildrenOver(String name, String amount) {
+    return 'بنود «$name» الفرعية تتجاوزه بـ$amount';
+  }
+
+  @override
+  String budgetIssuePercentSelf(String name, String percent) {
+    return 'نسبة «$name» أكبر من أصلها: $percent';
+  }
+
+  @override
+  String budgetIssuePercentChildren(String name, String percent) {
+    return 'نِسب بنود «$name» الفرعية مجموعها $percent';
+  }
+
+  @override
+  String budgetIssuePercentTotal(String percent) {
+    return 'البنود المحدّدة بنسبة من الإجمالي مجموعها $percent';
+  }
+
+  @override
+  String budgetIssueCircular(String name) {
+    return 'نِسب «$name» تعتمد على بعضها فتعذّر حسابها';
+  }
+
+  @override
+  String get budgetIssueCircularTotal =>
+      'البنود المحدّدة بنسبة من الإجمالي تستهلكه كلّه';
+
+  @override
+  String budgetIssueCircularParent(String name) {
+    return '«$name» كان داخل نفسه، فيظهر في المستوى الأعلى';
+  }
+
+  @override
+  String budgetIssueOrphan(String name) {
+    return 'البند الأب لـ«$name» غير موجود، فيظهر في المستوى الأعلى';
+  }
+
+  @override
+  String budgetIssueMissingRate(String currency) {
+    return 'لا سعر صرف مسجّل لـ$currency، فاحتُسب واحدًا بواحد';
+  }
+
+  @override
+  String budgetIssueOverspent(String name, String amount) {
+    return 'تجاوز «$name» خطّته بـ$amount هذا الشهر';
+  }
+
+  @override
+  String budgetBadgeUnder(String amount) {
+    return '$amount غير موزّع';
+  }
+
+  @override
+  String budgetBadgeOver(String amount) {
+    return 'زيادة $amount';
+  }
+
+  @override
+  String budgetBadgePercent(String percent) {
+    return '$percent أكبر من الأصل';
+  }
+
+  @override
+  String budgetBadgePercentChildren(String percent) {
+    return 'مجموع نِسب الفروع $percent';
+  }
+
+  @override
+  String get budgetBadgeCircular => 'نِسب متداخلة';
+
+  @override
+  String get budgetBadgeMoved => 'نُقل للأعلى';
+
+  @override
+  String get budgetBadgeNoRate => 'بلا سعر صرف';
+
+  @override
+  String budgetBadgeOverspent(String amount) {
+    return 'تجاوز بـ$amount';
+  }
+
+  @override
+  String budgetPercentOf(String percent, String name) {
+    return '$percent من «$name»';
+  }
+
+  @override
+  String budgetPercentOfTotal(String percent) {
+    return '$percent من الإجمالي';
+  }
+
+  @override
+  String budgetPerMonth(String amount) {
+    return '$amount شهريًا';
+  }
+
+  @override
+  String budgetPerWeek(String amount) {
+    return '$amount أسبوعيًا';
+  }
+
+  @override
+  String budgetApproxMonthly(String amount) {
+    return '≈ $amount شهريًا';
+  }
+
+  @override
+  String get budgetSumOfChildren => 'مجموع البنود الفرعية';
+
+  @override
+  String budgetChildrenSum(String sum, String plan) {
+    return 'الفروع: $sum من $plan';
+  }
+
+  @override
+  String get budgetSetByAmount => 'محدّد بالمبلغ';
+
+  @override
+  String get budgetSetByPercent => 'محدّد بالنسبة';
+
+  @override
+  String get budgetDragHint => 'اسحب المقبض لترتيب البنود داخل مجموعتها';
+
+  @override
+  String get budgetAddChild => 'إضافة بند فرعي';
+
+  @override
+  String get budgetAddSibling => 'إضافة بند مجاور';
+
+  @override
+  String budgetMoveTitle(String name) {
+    return 'نقل «$name»';
+  }
+
+  @override
+  String get budgetMoveSubtitle => 'يبقى مبلغه كما هو';
+
+  @override
+  String get budgetTopLevel => 'المستوى الأعلى';
+
+  @override
+  String budgetDeletedWithChildren(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حُذف البند و$count بند فرعي',
+      many: 'حُذف البند و$count بندًا فرعيًا',
+      few: 'حُذف البند و$count بنود فرعية',
+      two: 'حُذف البند وبندان فرعيان',
+      one: 'حُذف البند وبند فرعي',
+      zero: 'حُذف البند',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get budgetSaved => 'حُفظ البند';
+
+  @override
+  String get budgetAdded => 'أُضيف البند';
+
+  @override
+  String get budgetEmptyTitle => 'لا ميزانية بعد';
+
+  @override
+  String get budgetEmptyBody =>
+      'خطّط بالمبلغ أو بالنسبة، وضع البنود داخل بعضها، ثم قارن إنفاقك بالخطة.';
+
+  @override
+  String get budgetEmptyAction => 'أضف أول بند';
+
+  @override
+  String get budgetWeeksTitle => 'أسابيع الشهر';
+
+  @override
+  String get budgetWeeksSubtitle =>
+      'تُضرب البنود الأسبوعية في هذا العدد لحساب خطتها الشهرية';
+
+  @override
+  String get budgetWeeksRound => 'أسابيع كاملة';
+
+  @override
+  String get budgetWeeksCalendar => 'متوسط التقويم';
+
+  @override
+  String get budgetWeeksCustom => 'عدد آخر';
+
+  @override
+  String budgetWeeksInvalid(String min, String max) {
+    return 'أدخل عددًا بين $min و$max';
+  }
+
+  @override
+  String budgetWeeksExample(String weekly, String monthly) {
+    return '$weekly أسبوعيًا = $monthly شهريًا';
+  }
+
+  @override
+  String get budgetWeeksSaved => 'تغيّر عدد أسابيع الشهر';
+
+  @override
+  String get budgetNewItem => 'بند جديد';
+
+  @override
+  String budgetNewChild(String name) {
+    return 'بند فرعي في «$name»';
+  }
+
+  @override
+  String get budgetEditItem => 'تعديل البند';
+
+  @override
+  String get budgetFieldName => 'الاسم';
+
+  @override
+  String get budgetFieldNameHint => 'مثل: البقالة';
+
+  @override
+  String get budgetFieldParent => 'ضمن';
+
+  @override
+  String get budgetFieldSetBy => 'يُحدَّد بـ';
+
+  @override
+  String get budgetModeAmount => 'مبلغ';
+
+  @override
+  String get budgetModePercent => 'نسبة';
+
+  @override
+  String get budgetModeSum => 'مجموع الفروع';
+
+  @override
+  String get budgetFieldAmount => 'المبلغ';
+
+  @override
+  String get budgetFieldPercent => 'النسبة';
+
+  @override
+  String budgetOfParent(String name) {
+    return 'من «$name»';
+  }
+
+  @override
+  String get budgetOfTotal => 'من الإجمالي';
+
+  @override
+  String get budgetCalculated => 'محسوب';
+
+  @override
+  String get budgetFieldPeriod => 'الفترة';
+
+  @override
+  String get budgetMonthly => 'شهري';
+
+  @override
+  String get budgetWeekly => 'أسبوعي';
+
+  @override
+  String get budgetFieldCurrency => 'العملة';
+
+  @override
+  String budgetBaseCurrency(String code) {
+    return '$code · الأساس';
+  }
+
+  @override
+  String get budgetPreviewTitle => 'في الميزانية';
+
+  @override
+  String get budgetAmountInvalid => 'أدخل مبلغًا صحيحًا، صفرًا أو أكثر';
+
+  @override
+  String get budgetPercentInvalid => 'أدخل نسبة صحيحة، صفرًا أو أكثر';
+
+  @override
+  String get budgetSumHint => 'يساوي مجموع بنوده الفرعية ويتغيّر معها';
+
+  @override
+  String get budgetPickerTitle => 'بند الميزانية';
+
+  @override
+  String get budgetPickerSearch => 'ابحث في البنود';
+
+  @override
+  String get budgetPickerNone => 'بلا بند';
+
+  @override
+  String get budgetPickerEmpty => 'لا بنود في الميزانية بعد';
+
+  @override
+  String get budgetPickerNoResults => 'لا بنود مطابقة';
+
+  @override
+  String get budgetPickerPlaceholder => 'اختر بندًا';
+
+  @override
+  String budgetLeft(String amount) {
+    return 'متبقٍّ $amount';
+  }
+
+  @override
+  String budgetOverBy(String amount) {
+    return 'تجاوز $amount';
+  }
+
+  @override
+  String get budgetCurrentBadge => 'الحالي';
+
+  @override
+  String get budgetPreviousPeriod => 'الفترة السابقة';
+
+  @override
+  String get budgetNextPeriod => 'الفترة التالية';
+
+  @override
+  String get budgetSpent => 'المصروف';
+
+  @override
+  String budgetOfPlan(String amount) {
+    return 'من $amount';
+  }
+
+  @override
+  String get budgetRemaining => 'المتبقي';
+
+  @override
+  String get budgetOverPlan => 'فوق الخطة';
+
+  @override
+  String get budgetProjection => 'بهذا المعدّل';
+
+  @override
+  String budgetProjectionMonth(String amount) {
+    return '$amount بنهاية الشهر';
+  }
+
+  @override
+  String budgetProjectionWeek(String amount) {
+    return '$amount بنهاية الأسبوع';
+  }
+
+  @override
+  String budgetDayOf(String day, String days) {
+    return 'اليوم $day من $days';
+  }
+
+  @override
+  String get budgetPeriodClosed => 'فترة منتهية';
+
+  @override
+  String get budgetUnassigned => 'خارج الميزانية';
+
+  @override
+  String get budgetStatusCalm => 'ضمن الخطة';
+
+  @override
+  String get budgetStatusNear => 'قارب النفاد';
+
+  @override
+  String get budgetStatusAtRisk => 'في طريقه للتجاوز';
+
+  @override
+  String get budgetStatusOver => 'تجاوز الخطة';
+
+  @override
+  String get budgetStatusUnplanned => 'بلا خطة';
+
+  @override
+  String budgetSpentOf(String spent, String plan) {
+    return '$spent من $plan';
+  }
+
+  @override
+  String get budgetByItem => 'حسب البند';
+
+  @override
+  String get budgetHistoryMonths => 'الأشهر السابقة';
+
+  @override
+  String get budgetHistoryWeeks => 'الأسابيع السابقة';
+
+  @override
+  String get budgetLegendPlan => 'الخطة';
+
+  @override
+  String get budgetLegendSpent => 'المصروف';
+
+  @override
+  String get budgetHistoryNote => 'تُقارن الفترات السابقة بخطة اليوم';
+
+  @override
+  String get budgetNoSpending => 'لا مصروفات في هذه الفترة بعد';
+
+  @override
+  String budgetHistoryBar(String period, String spent, String plan) {
+    return '$period: $spent من $plan';
+  }
+
+  @override
+  String budgetCardSpentOf(String spent, String plan) {
+    return 'صُرف $spent من $plan';
+  }
+
+  @override
+  String get budgetCardEmpty => 'خطّط ميزانيتك بالمبلغ أو بالنسبة';
+
+  @override
+  String budgetCardWarnings(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تنبيه',
+      many: '$count تنبيهًا',
+      few: '$count تنبيهات',
+      two: 'تنبيهان',
+      one: 'تنبيه واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsTitle => 'المدّخرات والالتزامات';
+
+  @override
+  String get goalsTabJars => 'الحصّالات';
+
+  @override
+  String get goalsTabDebts => 'الديون';
+
+  @override
+  String get goalsTabObligations => 'الالتزامات';
+
+  @override
+  String get goalsDebtsTitle => 'الديون';
+
+  @override
+  String get goalsObligationsTitle => 'الالتزامات الدورية';
+
+  @override
+  String get goalsUpcomingTitle => 'مستحقات قريبة';
+
+  @override
+  String get goalsSeeAll => 'عرض الكل';
+
+  @override
+  String get goalsCreate => 'إنشاء';
+
+  @override
+  String get goalsGone => 'لم يعد هذا العنصر موجودًا.';
+
+  @override
+  String get goalsShow => 'إظهار';
+
+  @override
+  String get goalsHide => 'إخفاء';
+
+  @override
+  String get goalsFilterAll => 'الكل';
+
+  @override
+  String get goalsAmountPositive => 'أدخل مبلغًا أكبر من صفر';
+
+  @override
+  String get goalsFieldAmount => 'المبلغ';
+
+  @override
+  String get goalsFieldDate => 'التاريخ';
+
+  @override
+  String get goalsFieldNote => 'ملاحظة';
+
+  @override
+  String get goalsFieldFromWallet => 'من محفظة';
+
+  @override
+  String get goalsFieldToWallet => 'إلى محفظة';
+
+  @override
+  String get goalsNoWallet => 'بلا محفظة';
+
+  @override
+  String get goalsOf => 'من';
+
+  @override
+  String goalsOfTotal(String amount) {
+    return 'من $amount';
+  }
+
+  @override
+  String goalsSavedOfTarget(String saved, String target) {
+    return '$saved من $target';
+  }
+
+  @override
+  String goalsFromWallet(String name) {
+    return 'من $name';
+  }
+
+  @override
+  String goalsToWallet(String name) {
+    return 'إلى $name';
+  }
+
+  @override
+  String goalsMissingRates(String codes) {
+    return 'لا سعر صرف لـ$codes، فحُسبت بقيمتها الاسمية.';
+  }
+
+  @override
+  String get goalsDueToday => 'اليوم';
+
+  @override
+  String get goalsDueTomorrow => 'غدًا';
+
+  @override
+  String goalsDueInDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بعد $n يوم',
+      many: 'بعد $n يومًا',
+      few: 'بعد $n أيام',
+      two: 'بعد يومين',
+      one: 'بعد يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsOverdueDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'متأخر $n يوم',
+      many: 'متأخر $n يومًا',
+      few: 'متأخر $n أيام',
+      two: 'متأخر يومين',
+      one: 'متأخر يومًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsDueOn(String date) {
+    return 'في $date';
+  }
+
+  @override
+  String goalsEveryWeeks(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $n أسبوع',
+      many: 'كل $n أسبوعًا',
+      few: 'كل $n أسابيع',
+      two: 'كل أسبوعين',
+      one: 'كل أسبوع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsEveryMonths(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $n شهر',
+      many: 'كل $n شهرًا',
+      few: 'كل $n أشهر',
+      two: 'كل شهرين',
+      one: 'كل شهر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsEveryYears(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $n سنة',
+      many: 'كل $n سنةً',
+      few: 'كل $n سنوات',
+      two: 'كل سنتين',
+      one: 'كل سنة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsJarNew => 'حصّالة جديدة';
+
+  @override
+  String get goalsJarNewSubtitle => 'هدف ادّخار له مبلغ وموعد';
+
+  @override
+  String get goalsJarEdit => 'تعديل الحصّالة';
+
+  @override
+  String get goalsFieldJarName => 'الاسم';
+
+  @override
+  String get goalsFieldJarNameHint => 'مثلًا: السفر';
+
+  @override
+  String get goalsFieldTarget => 'المبلغ المستهدف';
+
+  @override
+  String get goalsFieldDeadline => 'الموعد النهائي';
+
+  @override
+  String get goalsFieldIcon => 'الرمز';
+
+  @override
+  String get goalsFieldColor => 'اللون';
+
+  @override
+  String get goalsDeposit => 'إيداع';
+
+  @override
+  String get goalsWithdraw => 'سحب';
+
+  @override
+  String goalsDepositTo(String name) {
+    return 'إيداع في $name';
+  }
+
+  @override
+  String goalsWithdrawFrom(String name) {
+    return 'سحب من $name';
+  }
+
+  @override
+  String goalsWithdrawTooMuch(String amount) {
+    return 'المدّخر $amount فقط';
+  }
+
+  @override
+  String goalsJarReached(String name) {
+    return 'بلغت $name هدفها!';
+  }
+
+  @override
+  String goalsDeposited(String amount) {
+    return 'أُودِع $amount';
+  }
+
+  @override
+  String goalsWithdrawn(String amount) {
+    return 'سُحب $amount';
+  }
+
+  @override
+  String get goalsJarArchived => 'أُرشفت الحصّالة';
+
+  @override
+  String get goalsJarRestored => 'أُعيدت الحصّالة';
+
+  @override
+  String get goalsArchive => 'أرشفة';
+
+  @override
+  String get goalsUnarchive => 'إلغاء الأرشفة';
+
+  @override
+  String get goalsArchivedJars => 'حصّالات مؤرشفة';
+
+  @override
+  String get goalsJarsEmptyTitle => 'لا حصّالات بعد';
+
+  @override
+  String get goalsJarsEmptyBody =>
+      'خصّص حصّالة لكل هدف – سفر، طوارئ، هدية – وراقبها تمتلئ.';
+
+  @override
+  String get goalsJarsHint =>
+      'اسحب الحصّالة لإيداع سريع، واضغط مطوّلًا لبقية الخيارات، واسحب المقبض لترتيبها.';
+
+  @override
+  String goalsJarsReachedCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n حصّالة بلغت أهدافها',
+      many: '$n حصّالةً بلغت أهدافها',
+      few: '$n حصّالات بلغت أهدافها',
+      two: 'حصّالتان بلغتا هدفيهما',
+      one: 'حصّالة بلغت هدفها',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsSavedInJars => 'المدّخر في الحصّالات';
+
+  @override
+  String get goalsNeededThisMonth => 'المطلوب هذا الشهر';
+
+  @override
+  String get goalsOfTargets => 'من الأهداف';
+
+  @override
+  String goalsOverallProgress(String percent) {
+    return 'التقدّم الكلّي $percent';
+  }
+
+  @override
+  String goalsNeedPerMonth(String amount) {
+    return '$amount شهريًا';
+  }
+
+  @override
+  String goalsDeadlineOn(String date) {
+    return 'حتى $date';
+  }
+
+  @override
+  String goalsSurplus(String amount) {
+    return 'فائض $amount';
+  }
+
+  @override
+  String goalsTargetOf(String amount) {
+    return 'الهدف $amount';
+  }
+
+  @override
+  String get goalsNoDeadlineHint => 'أضف موعدًا لتعرف المطلوب شهريًا';
+
+  @override
+  String get goalsPaceReached => 'بلغت الهدف';
+
+  @override
+  String get goalsPaceOnTrack => 'على المسار';
+
+  @override
+  String get goalsPaceBehind => 'متأخرة عن الخطة';
+
+  @override
+  String get goalsPaceOverdue => 'فات الموعد';
+
+  @override
+  String get goalsPaceOpen => 'بلا موعد';
+
+  @override
+  String goalsBalanceAfter(String amount) {
+    return 'الرصيد بعدها: $amount';
+  }
+
+  @override
+  String goalsPercentOfTarget(String percent) {
+    return '$percent من الهدف';
+  }
+
+  @override
+  String goalsWalletAmount(String amount) {
+    return 'بعملة المحفظة: $amount';
+  }
+
+  @override
+  String get goalsTrajectory => 'مسار الادّخار';
+
+  @override
+  String get goalsHistory => 'السجلّ';
+
+  @override
+  String get goalsNoMovements => 'لا إيداعات بعد';
+
+  @override
+  String get goalsDeleteJar => 'حذف الحصّالة';
+
+  @override
+  String goalsAlidadeHint(String percent) {
+    return 'المؤشّر الذهبي يدلّ على موضعك المفترض اليوم ($percent)';
+  }
+
+  @override
+  String get goalsRemaining => 'المتبقّي';
+
+  @override
+  String get goalsSurplusLabel => 'فوق الهدف';
+
+  @override
+  String get goalsNeededNow => 'المطلوب الآن';
+
+  @override
+  String get goalsPerMonth => 'المطلوب شهريًا';
+
+  @override
+  String goalsPerWeekCaption(String amount) {
+    return 'أو $amount أسبوعيًا';
+  }
+
+  @override
+  String goalsDaysLeft(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'باقٍ $n يوم',
+      many: 'باقٍ $n يومًا',
+      few: 'باقٍ $n أيام',
+      two: 'باقٍ يومان',
+      one: 'باقٍ يوم واحد',
+      zero: 'ينتهي اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsAtYourPace => 'بوتيرتك الحالية';
+
+  @override
+  String get goalsAfterDeadline => 'بعد الموعد';
+
+  @override
+  String get goalsBeforeDeadline => 'قبل الموعد';
+
+  @override
+  String goalsSavedTotal(String amount) {
+    return 'مدّخر $amount';
+  }
+
+  @override
+  String get goalsDebtNew => 'دين جديد';
+
+  @override
+  String get goalsDebtEdit => 'تعديل الدين';
+
+  @override
+  String get goalsFieldDirection => 'الاتجاه';
+
+  @override
+  String get goalsIOwe => 'عليّ';
+
+  @override
+  String get goalsOwedToMe => 'لي';
+
+  @override
+  String get goalsDebtIOweSubtitle => 'دين عليّ';
+
+  @override
+  String get goalsDebtOwedSubtitle => 'دين لي عنده';
+
+  @override
+  String get goalsFieldPerson => 'الشخص';
+
+  @override
+  String get goalsFieldPersonHint => 'اسم الشخص أو الجهة';
+
+  @override
+  String get goalsFieldDueDate => 'تاريخ الاستحقاق';
+
+  @override
+  String goalsIOweTo(String person) {
+    return 'أنا مدين لـ$person';
+  }
+
+  @override
+  String goalsOwedBy(String person) {
+    return '$person مدين لي';
+  }
+
+  @override
+  String goalsRemainingOf(String remaining, String total) {
+    return 'يتبقّى $remaining من $total';
+  }
+
+  @override
+  String get goalsSettle => 'تسوية';
+
+  @override
+  String get goalsReopen => 'إعادة فتح';
+
+  @override
+  String get goalsSettled => 'مُسوّى';
+
+  @override
+  String goalsSettledOn(String date) {
+    return 'سُوّي في $date';
+  }
+
+  @override
+  String goalsSettledWrittenOff(String date, String amount) {
+    return 'سُوّي في $date، وسُومح بـ$amount';
+  }
+
+  @override
+  String get goalsNoDueDate => 'بلا موعد';
+
+  @override
+  String get goalsRecordPayment => 'تسجيل دفعة';
+
+  @override
+  String goalsPayTo(String person) {
+    return 'دفعة إلى $person';
+  }
+
+  @override
+  String goalsReceiveFrom(String person) {
+    return 'دفعة من $person';
+  }
+
+  @override
+  String goalsDebtPaidOff(String person) {
+    return 'سُدّد الحساب مع $person بالكامل';
+  }
+
+  @override
+  String goalsPaymentRecorded(String amount) {
+    return 'سُجّلت دفعة $amount';
+  }
+
+  @override
+  String goalsDebtSettled(String person) {
+    return 'سُوّي الدين مع $person';
+  }
+
+  @override
+  String get goalsDebtReopened => 'أُعيد فتح الدين';
+
+  @override
+  String get goalsPayments => 'الدفعات';
+
+  @override
+  String get goalsNoPayments => 'لا دفعات بعد';
+
+  @override
+  String goalsPaidSoFar(String amount) {
+    return 'دُفع حتى الآن $amount';
+  }
+
+  @override
+  String get goalsPaysOff => 'هذه الدفعة تُنهي الدين';
+
+  @override
+  String goalsRemainingAfter(String amount) {
+    return 'يتبقّى بعدها $amount';
+  }
+
+  @override
+  String goalsPaidOfTotal(String paid, String total) {
+    return '$paid من $total';
+  }
+
+  @override
+  String get goalsDebtsEmptyTitle => 'لا ديون مسجّلة';
+
+  @override
+  String get goalsDebtsEmptyBody =>
+      'سجّل ما عليك وما لك عند الآخرين، مع مواعيد السداد والدفعات الجزئية.';
+
+  @override
+  String get goalsNoOpenDebts => 'لا ديون مفتوحة هنا';
+
+  @override
+  String get goalsSettledDebts => 'ديون مُسوّاة';
+
+  @override
+  String get goalsDebtsHint => 'اسحب الدين لتسويته فورًا، ويمكنك التراجع.';
+
+  @override
+  String goalsDebtsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n دين مفتوح',
+      many: '$n دينًا مفتوحًا',
+      few: '$n ديون مفتوحة',
+      two: 'دينان مفتوحان',
+      one: 'دين مفتوح واحد',
+      zero: 'لا ديون مفتوحة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsNetEven => 'الكفّتان متعادلتان';
+
+  @override
+  String goalsNetOwedToMe(String amount) {
+    return 'الصافي لك: $amount';
+  }
+
+  @override
+  String goalsNetIOwe(String amount) {
+    return 'الصافي عليك: $amount';
+  }
+
+  @override
+  String goalsOverdueCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n متأخر',
+      many: '$n متأخرًا',
+      few: '$n متأخرة',
+      two: 'متأخران',
+      one: 'متأخر واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsObligationNew => 'التزام جديد';
+
+  @override
+  String get goalsObligationNewSubtitle =>
+      'إيجار، قسط، اشتراك، مصروف… أي دفعة تتكرر';
+
+  @override
+  String get goalsObligationEdit => 'تعديل الالتزام';
+
+  @override
+  String get goalsFieldObligationName => 'الاسم';
+
+  @override
+  String get goalsFieldObligationNameHint => 'مثلًا: الإيجار';
+
+  @override
+  String get goalsFieldFrequency => 'يتكرر';
+
+  @override
+  String get goalsWeekly => 'أسبوعيًا';
+
+  @override
+  String get goalsMonthly => 'شهريًا';
+
+  @override
+  String get goalsYearly => 'سنويًا';
+
+  @override
+  String get goalsFieldInterval => 'كل كم فترة';
+
+  @override
+  String get goalsFieldIntervalHint => 'واحد: كل فترة، اثنان: كل فترتين…';
+
+  @override
+  String get goalsFieldNextDue => 'الاستحقاق القادم';
+
+  @override
+  String get goalsFieldPayFromWallet => 'يُدفع من محفظة';
+
+  @override
+  String get goalsFieldBudgetItem => 'بند الميزانية';
+
+  @override
+  String get goalsNoBudgetItem => 'بلا بند';
+
+  @override
+  String get goalsFieldPaidOn => 'تاريخ الدفع';
+
+  @override
+  String get goalsMarkPaid => 'دُفع';
+
+  @override
+  String goalsMarkPaidFor(String name) {
+    return 'تسجيل دفع $name';
+  }
+
+  @override
+  String get goalsPayOther => 'دفع بمبلغ آخر';
+
+  @override
+  String get goalsPayOtherShort => 'مبلغ آخر';
+
+  @override
+  String goalsPayObligation(String name) {
+    return 'دفع $name';
+  }
+
+  @override
+  String goalsForDue(String date) {
+    return 'عن استحقاق $date';
+  }
+
+  @override
+  String get goalsSkip => 'تخطّي';
+
+  @override
+  String get goalsSkippedEntry => 'تم التخطّي';
+
+  @override
+  String get goalsPause => 'إيقاف مؤقت';
+
+  @override
+  String get goalsResume => 'استئناف';
+
+  @override
+  String get goalsPaused => 'موقوف';
+
+  @override
+  String goalsObligationPaid(String date) {
+    return 'سُجّل الدفع، والموعد القادم $date';
+  }
+
+  @override
+  String goalsObligationSkipped(String date) {
+    return 'تم التخطّي، والموعد القادم $date';
+  }
+
+  @override
+  String get goalsObligationPaused => 'أُوقف الالتزام مؤقتًا';
+
+  @override
+  String get goalsObligationResumed => 'استُؤنف الالتزام';
+
+  @override
+  String get goalsObligationsEmptyTitle => 'لا التزامات دورية';
+
+  @override
+  String get goalsObligationsEmptyBody =>
+      'أضف ما يتكرر – الإيجار، الأقساط، الاشتراكات – وستصلك تذكرة قبل موعده، ويسجّل «دُفع» المصروف وينقلك إلى الموعد التالي.';
+
+  @override
+  String get goalsObligationsHint =>
+      'اسحب الالتزام لتسجيل دفعه، ويمكنك التراجع.';
+
+  @override
+  String get goalsMonthlyCommitments => 'الالتزامات شهريًا';
+
+  @override
+  String goalsActiveCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n التزام نشط',
+      many: '$n التزامًا نشطًا',
+      few: '$n التزامات نشطة',
+      two: 'التزامان نشطان',
+      one: 'التزام نشط واحد',
+      zero: 'لا التزامات نشطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsDueSoonCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n مستحق خلال أسبوع',
+      many: '$n مستحقًا خلال أسبوع',
+      few: '$n مستحقة خلال أسبوع',
+      two: 'مستحقان خلال أسبوع',
+      one: 'مستحق خلال أسبوع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsSectionOverdue => 'متأخرة';
+
+  @override
+  String get goalsSectionThisWeek => 'خلال أسبوع';
+
+  @override
+  String get goalsSectionLater => 'لاحقًا';
+
+  @override
+  String get goalsSectionPaused => 'موقوفة';
+
+  @override
+  String get goalsNextDue => 'الاستحقاق القادم';
+
+  @override
+  String get goalsComingUp => 'المواعيد التالية';
+
+  @override
+  String get goalsNoHistory => 'لم يُسجّل دفع بعد';
+
+  @override
+  String goalsPaidOnForDue(String paid, String due) {
+    return 'دُفع في $paid عن $due';
+  }
+
+  @override
+  String goalsPaidFrom(String wallet) {
+    return 'يُدفع من $wallet';
+  }
+
+  @override
+  String goalsCountsToward(String item) {
+    return 'يُحسب على بند $item';
+  }
+
+  @override
+  String get goalsNoWalletHint =>
+      'بلا محفظة: «دُفع» يسجّل الدفعة دون حركة في المحافظ.';
+
+  @override
+  String get goalsRecordedInLedger => 'مسجّل في دفتر الحركات';
+
+  @override
+  String goalsPeriodsDue(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n فترة مستحقة',
+      many: '$n فترةً مستحقة',
+      few: '$n فترات مستحقة',
+      two: 'فترتان مستحقتان',
+      one: 'فترة مستحقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsNextDates(String dates) {
+    return 'التالي: $dates';
+  }
+
+  @override
+  String goalsAboutPerMonth(String amount) {
+    return 'قرابة $amount شهريًا';
+  }
+
+  @override
+  String goalsNothingDue(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'لا شيء مستحق خلال $n يوم',
+      many: 'لا شيء مستحق خلال $n يومًا',
+      few: 'لا شيء مستحق خلال $n أيام',
+      two: 'لا شيء مستحق خلال يومين',
+      one: 'لا شيء مستحق غدًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalsMoreDues(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$n أخرى',
+      many: 'و$n أخرى',
+      few: 'و$n أخرى',
+      two: 'واثنان آخران',
+      one: 'وواحد آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsRemindersTitle => 'تذكير المستحقات';
+
+  @override
+  String get goalsRemindersSubtitle => 'للديون والالتزامات الدورية';
+
+  @override
+  String get goalsRemindersEnabled => 'التذكيرات';
+
+  @override
+  String get goalsRemindersEnabledHint => 'تنبيه هادئ قبل الموعد وفي يومه';
+
+  @override
+  String get goalsRemindersLead => 'تذكير مبكر';
+
+  @override
+  String get goalsRemindersLeadNone => 'بلا تذكير مبكر';
+
+  @override
+  String goalsRemindersLeadDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n يوم',
+      many: 'قبل $n يومًا',
+      few: 'قبل $n أيام',
+      two: 'قبل يومين',
+      one: 'قبل يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get goalsRemindersOnDueDay => 'وفي يوم الاستحقاق أيضًا';
+
+  @override
+  String get goalsRemindersTime => 'الوقت';
+
+  @override
+  String get goalsNotifyGroup => 'المال';
+
+  @override
+  String get goalsNotifyChannel => 'مواعيد الاستحقاق';
+
+  @override
+  String get goalsNotifyChannelDescription =>
+      'تذكير بالديون والالتزامات الدورية قبل موعدها';
+
+  @override
+  String goalsNotifyObligationTitle(String name) {
+    return 'استحقاق $name';
+  }
+
+  @override
+  String goalsNotifyObligationBody(String when, String amount) {
+    return '$when – المبلغ $amount';
+  }
+
+  @override
+  String goalsNotifyDebtIOweTitle(String person) {
+    return 'سداد لـ$person';
+  }
+
+  @override
+  String goalsNotifyDebtIOweBody(String when, String amount) {
+    return '$when – يُستحق عليك $amount';
+  }
+
+  @override
+  String goalsNotifyDebtOwedTitle(String person) {
+    return 'دين على $person';
+  }
+
+  @override
+  String goalsNotifyDebtOwedBody(String when, String amount) {
+    return '$when – يُستحق لك $amount';
+  }
+
+  @override
+  String get goalsFieldDebtWallet => 'عبر محفظة';
+
+  @override
+  String goalsDebtLentFrom(String wallet, String amount) {
+    return 'خرج المبلغ من $wallet، فينقص رصيدها $amount';
+  }
+
+  @override
+  String goalsDebtBorrowedInto(String wallet, String amount) {
+    return 'دخل المبلغ إلى $wallet، فيزيد رصيدها $amount';
+  }
+
+  @override
+  String get goalsDebtNoWalletHint => 'بلا محفظة: تبقى أرصدة المحافظ كما هي.';
+
+  @override
+  String get workTitle => 'العمل';
+
+  @override
+  String get workBoards => 'اللوحات';
+
+  @override
+  String get workProjects => 'المشاريع';
+
+  @override
+  String get workAllProjects => 'كل المشاريع';
+
+  @override
+  String get workOpenAll => 'فتح العمل';
+
+  @override
+  String get workSep => '، ';
+
+  @override
+  String get workSave => 'حفظ';
+
+  @override
+  String get workCreate => 'إضافة';
+
+  @override
+  String get workToday => 'اليوم';
+
+  @override
+  String get workTomorrow => 'غدًا';
+
+  @override
+  String get workPickDate => 'تاريخ آخر…';
+
+  @override
+  String get workNoDate => 'بلا موعد';
+
+  @override
+  String get workClear => 'مسح';
+
+  @override
+  String get workNewBoard => 'لوحة جديدة';
+
+  @override
+  String get workEditBoard => 'تعديل اللوحة';
+
+  @override
+  String get workBoardName => 'اسم اللوحة';
+
+  @override
+  String get workBoardNameHint => 'مثلًا: المتجر الإلكتروني';
+
+  @override
+  String get workBoardCountry => 'البلد أو النشاط';
+
+  @override
+  String get workBoardCountryHint => 'اختر بلدًا أو اكتب وصفًا قصيرًا';
+
+  @override
+  String get workBoardColor => 'اللون';
+
+  @override
+  String get workBoardOptions => 'خيارات اللوحة';
+
+  @override
+  String get workArchive => 'أرشفة';
+
+  @override
+  String get workUnarchive => 'إعادة من الأرشيف';
+
+  @override
+  String get workArchivedSection => 'اللوحات المؤرشفة';
+
+  @override
+  String get workBoardArchived => 'أُرشفت اللوحة';
+
+  @override
+  String get workBoardRestored => 'عادت اللوحة من الأرشيف';
+
+  @override
+  String get workBoardDeleted => 'حُذفت اللوحة وبطاقاتها';
+
+  @override
+  String get workBoardsEmptyTitle => 'ابدأ لوحتك الأولى';
+
+  @override
+  String get workBoardsEmptyBody =>
+      'لوحة لكل بلد أو نشاط — مثلًا «المتجر الإلكتروني» أو «فريق التوصيل» — بأعمدة: المطلوب، قيد التنفيذ، تمّ.';
+
+  @override
+  String get workBoardMissing => 'لم تعد هذه اللوحة موجودة';
+
+  @override
+  String workOpenCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count بطاقة مفتوحة',
+      many: '$count بطاقة مفتوحة',
+      few: '$count بطاقات مفتوحة',
+      two: 'بطاقتان مفتوحتان',
+      one: 'بطاقة مفتوحة',
+      zero: 'لا بطاقات مفتوحة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workDoneCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منجزة',
+      many: '$count منجزة',
+      few: '$count منجزة',
+      two: 'اثنتان منجزتان',
+      one: 'واحدة منجزة',
+      zero: 'لا منجز',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workDueTodayCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مستحقة اليوم',
+      many: '$count مستحقة اليوم',
+      few: '$count مستحقة اليوم',
+      two: 'اثنتان مستحقتان اليوم',
+      one: 'واحدة مستحقة اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workOverdueCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count متأخرة',
+      many: '$count متأخرة',
+      few: '$count متأخرة',
+      two: 'اثنتان متأخرتان',
+      one: 'واحدة متأخرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workCardsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count بطاقة',
+      many: '$count بطاقة',
+      few: '$count بطاقات',
+      two: 'بطاقتان',
+      one: 'بطاقة واحدة',
+      zero: 'لا بطاقات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workArchivedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count لوحة مؤرشفة',
+      many: '$count لوحة مؤرشفة',
+      few: '$count لوحات مؤرشفة',
+      two: 'لوحتان مؤرشفتان',
+      one: 'لوحة مؤرشفة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get workColTodo => 'المطلوب';
+
+  @override
+  String get workColDoing => 'قيد التنفيذ';
+
+  @override
+  String get workColDone => 'تمّ';
+
+  @override
+  String get workColumnUntitled => 'عمود';
+
+  @override
+  String get workEditColumns => 'تعديل الأعمدة';
+
+  @override
+  String get workEditColumnsHint => 'اسحب لإعادة الترتيب، واختر عمود الإنجاز';
+
+  @override
+  String get workAddColumn => 'إضافة عمود';
+
+  @override
+  String get workColumnName => 'اسم العمود';
+
+  @override
+  String get workRenameColumn => 'إعادة تسمية';
+
+  @override
+  String get workDeleteColumn => 'حذف العمود';
+
+  @override
+  String get workDoneColumn => 'عمود الإنجاز';
+
+  @override
+  String get workDoneColumnHint => 'البطاقات فيه تُعدّ منجزة وتُنعش كوكب العمل';
+
+  @override
+  String get workMakeDoneColumn => 'اجعله عمود الإنجاز';
+
+  @override
+  String get workNeedOneColumn => 'تحتاج اللوحة عمودًا واحدًا على الأقل';
+
+  @override
+  String workColumnDeleted(String column) {
+    return 'حُذف العمود ونُقلت بطاقاته إلى «$column»';
+  }
+
+  @override
+  String get workColumnsSaved => 'حُفظت الأعمدة';
+
+  @override
+  String get workColumnEmpty => 'لا بطاقات هنا بعد';
+
+  @override
+  String get workDropHere => 'أفلِت البطاقة هنا';
+
+  @override
+  String get workAddCard => 'إضافة بطاقة';
+
+  @override
+  String get workNewCard => 'بطاقة جديدة';
+
+  @override
+  String get workEditCard => 'تعديل البطاقة';
+
+  @override
+  String get workCardTitle => 'العنوان';
+
+  @override
+  String get workCardTitleHint => 'ما المطلوب إنجازه؟';
+
+  @override
+  String get workCardNotes => 'ملاحظات';
+
+  @override
+  String get workCardAssignee => 'المسؤول';
+
+  @override
+  String get workCardAssigneeHint => 'من سيتولّاها؟';
+
+  @override
+  String get workCardDue => 'موعد الاستحقاق';
+
+  @override
+  String get workCardColumn => 'العمود';
+
+  @override
+  String get workCardWindow => 'وقت العمل عليها';
+
+  @override
+  String get workCardWindowHint =>
+      'تظهر في قائمة ذلك الوقت على الشاشة الرئيسية';
+
+  @override
+  String get workNotPlaced => 'غير محدد';
+
+  @override
+  String get workCardDeleted => 'حُذفت البطاقة';
+
+  @override
+  String get workCardDuplicated => 'نُسخت البطاقة';
+
+  @override
+  String workCardMovedTo(String column) {
+    return 'نُقلت إلى «$column»';
+  }
+
+  @override
+  String workCardMovedBoard(String board) {
+    return 'نُقلت إلى لوحة «$board»';
+  }
+
+  @override
+  String get workCardDoneToast => 'أُنجزت، بارك الله فيك';
+
+  @override
+  String workCardReopened(String column) {
+    return 'أُعيدت إلى «$column»';
+  }
+
+  @override
+  String get workCardSaved => 'حُفظت البطاقة';
+
+  @override
+  String get workMoveToBoard => 'نقل إلى لوحة';
+
+  @override
+  String get workMoveToColumn => 'نقل إلى عمود';
+
+  @override
+  String workMoveForward(String column) {
+    return 'تقديم إلى «$column»';
+  }
+
+  @override
+  String workMoveBack(String column) {
+    return 'إرجاع إلى «$column»';
+  }
+
+  @override
+  String get workPlaceInWindow => 'ضعها في وقت صلاة';
+
+  @override
+  String get workRemoveFromWindow => 'أزلها من وقت الصلاة';
+
+  @override
+  String workPlacedToast(String window) {
+    return 'وُضعت في «$window»';
+  }
+
+  @override
+  String get workUnplacedToast => 'أُزيلت من وقت الصلاة';
+
+  @override
+  String get workDueSetToast => 'حُدّد موعد الاستحقاق';
+
+  @override
+  String workCardSemantics(String title, String column) {
+    return '$title، في عمود $column';
+  }
+
+  @override
+  String get workSwipeHint =>
+      'اسحب نحو العمود التالي لتقديمها أو السابق لإرجاعها، واضغط مطوّلًا لسحبها أو لفتح الخيارات';
+
+  @override
+  String get workUnassigned => 'بلا مسؤول';
+
+  @override
+  String get workDoneBadge => 'منجزة';
+
+  @override
+  String workLateDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تأخّر $count يوم',
+      many: 'تأخّر $count يومًا',
+      few: 'تأخّر $count أيام',
+      two: 'تأخّر يومين',
+      one: 'تأخّر يومًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workInWindow(String window) {
+    return '$window';
+  }
+
+  @override
+  String workWindowOnDay(String window, String day) {
+    return '$window، $day';
+  }
+
+  @override
+  String get workFilter => 'تصفية';
+
+  @override
+  String get workFilterAll => 'الكل';
+
+  @override
+  String get workFilterOverdue => 'المتأخرة';
+
+  @override
+  String get workFilterToday => 'مستحقة اليوم';
+
+  @override
+  String get workFilterWeek => 'هذا الأسبوع';
+
+  @override
+  String get workFilterNoDate => 'بلا موعد';
+
+  @override
+  String get workFilterAssignee => 'المسؤول';
+
+  @override
+  String get workFilterDue => 'الموعد';
+
+  @override
+  String get workFilterClear => 'إلغاء التصفية';
+
+  @override
+  String get workFilterNoMatch => 'لا بطاقات تطابق التصفية';
+
+  @override
+  String get workTop3Title => 'أهم ثلاث اليوم';
+
+  @override
+  String get workTop3Subtitle => 'ثلاث أولويات تكفي ليوم مبارك';
+
+  @override
+  String get workTop3Empty => 'اختر ما يستحق تركيزك اليوم — ثلاثة أشياء تكفي.';
+
+  @override
+  String get workTop3Choose => 'اختر';
+
+  @override
+  String get workTop3ChooseTitle => 'اختر أهم ثلاث';
+
+  @override
+  String workTop3SlotsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بقي $count مكان',
+      many: 'بقي $count مكانًا',
+      few: 'بقيت $count أماكن',
+      two: 'بقي مكانان',
+      one: 'بقي مكان واحد',
+      zero: 'اكتملت الثلاث',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get workTop3NoCandidates => 'لا بطاقات أو مهام مفتوحة لتختار منها';
+
+  @override
+  String workTop3Progress(String done, String total) {
+    return '$done من $total';
+  }
+
+  @override
+  String get workTop3AllDone => 'أنجزت أهم ثلاث اليوم — بارك الله في وقتك';
+
+  @override
+  String get workTop3Add => 'أضف إلى أهم ثلاث';
+
+  @override
+  String get workTop3Remove => 'أزل من أهم ثلاث';
+
+  @override
+  String get workTop3Added => 'أُضيفت إلى أهم ثلاث';
+
+  @override
+  String get workTop3Removed => 'أُزيلت من أهم ثلاث';
+
+  @override
+  String get workTop3Toggle => 'من أهم ثلاث اليوم';
+
+  @override
+  String get workTop3FullTitle => 'أهم ثلاث مكتملة';
+
+  @override
+  String workTop3FullBody(String title) {
+    return 'اختر ما تستبدله بـ«$title»';
+  }
+
+  @override
+  String get workTop3Swapped => 'استُبدلت في أهم ثلاث';
+
+  @override
+  String get workTop3FullShort => 'أهم ثلاث مكتملة';
+
+  @override
+  String get workCarryTitle => 'من تركيز الأمس';
+
+  @override
+  String workCarryBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بقي $count أمر لم يكتمل. أتنقلها إلى اليوم؟',
+      many: 'بقي $count أمرًا لم يكتمل. أتنقلها إلى اليوم؟',
+      few: 'بقيت $count أمور لم تكتمل. أتنقلها إلى اليوم؟',
+      two: 'بقي أمران لم يكتملا. أتنقلهما إلى اليوم؟',
+      one: 'بقي أمر واحد لم يكتمل. أتنقله إلى اليوم؟',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get workCarryOver => 'انقلها إلى اليوم';
+
+  @override
+  String get workStartFresh => 'ابدأ من جديد';
+
+  @override
+  String get workCarriedToast => 'انتقلت إلى تركيز اليوم';
+
+  @override
+  String get workFreshToast => 'بداية جديدة لليوم';
+
+  @override
+  String get workKindTask => 'مهمة';
+
+  @override
+  String get workItemDoneToast => 'أُنجزت';
+
+  @override
+  String get workItemReopenedToast => 'أُعيد فتحها';
+
+  @override
+  String get workTodayTitle => 'العمل اليوم';
+
+  @override
+  String get workTodayAllClear => 'لا شيء مستحق اليوم';
+
+  @override
+  String get workTodayTop3 => 'أهم ثلاث';
+
+  @override
+  String workTodayTop3Line(String done, String total) {
+    return 'أهم ثلاث: $done من $total';
+  }
+
+  @override
+  String get workNewProject => 'مشروع جديد';
+
+  @override
+  String get workEditProject => 'تعديل المشروع';
+
+  @override
+  String get workProjectName => 'اسم المشروع';
+
+  @override
+  String get workProjectNameHint => 'مثلًا: إطلاق منتج جديد';
+
+  @override
+  String get workProjectDescription => 'الوصف';
+
+  @override
+  String get workProjectDeadline => 'الموعد النهائي';
+
+  @override
+  String get workProjectStatus => 'الحالة';
+
+  @override
+  String get workStatusActive => 'نشط';
+
+  @override
+  String get workStatusPaused => 'متوقف مؤقتًا';
+
+  @override
+  String get workStatusDone => 'مكتمل';
+
+  @override
+  String get workProjectPlanet => 'الكوكب';
+
+  @override
+  String get workProjectColor => 'اللون';
+
+  @override
+  String get workChecklist => 'قائمة الخطوات';
+
+  @override
+  String get workAddItemHint => 'أضف خطوة…';
+
+  @override
+  String get workAddItem => 'إضافة خطوة';
+
+  @override
+  String get workEditItem => 'تعديل الخطوة';
+
+  @override
+  String get workItemBody => 'الخطوة';
+
+  @override
+  String get workItemDue => 'موعد الخطوة';
+
+  @override
+  String get workItemDeleted => 'حُذفت الخطوة';
+
+  @override
+  String get workChecklistEmpty =>
+      'قسّم المشروع إلى خطوات صغيرة — تبدأ الرحلة بخطوة.';
+
+  @override
+  String get workProjectTasks => 'مهام المشروع';
+
+  @override
+  String get workProjectTasksEmpty =>
+      'المهام التي تضعها للمشروع في أوقات الصلاة تظهر هنا';
+
+  @override
+  String get workAddProjectTask => 'مهمة في وقت صلاة';
+
+  @override
+  String get workTaskTitle => 'المهمة';
+
+  @override
+  String get workTaskWindow => 'الوقت';
+
+  @override
+  String get workTaskDay => 'اليوم';
+
+  @override
+  String get workProjectDeleted => 'حُذف المشروع';
+
+  @override
+  String get workProjectDuplicated => 'نُسخ المشروع';
+
+  @override
+  String get workProjectComplete => 'اكتمل المشروع، ما شاء الله!';
+
+  @override
+  String get workProjectMissing => 'لم يعد هذا المشروع موجودًا';
+
+  @override
+  String get workProjectsEmptyTitle => 'لا مشاريع بعد';
+
+  @override
+  String get workProjectsEmptyBody =>
+      'مشروع بخطوات وموعد نهائي — مثلًا «إطلاق منتج جديد» أو «تجديد الموقع».';
+
+  @override
+  String workStatusChanged(String status) {
+    return 'الحالة: $status';
+  }
+
+  @override
+  String get workSetStatus => 'تغيير الحالة';
+
+  @override
+  String workDaysLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get workDaysLeftCaption => 'حتى الموعد النهائي';
+
+  @override
+  String get workDueTodayCaption => 'الموعد النهائي اليوم';
+
+  @override
+  String get workDueTomorrowCaption => 'الموعد النهائي غدًا';
+
+  @override
+  String workOverdueDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'فات الموعد بـ$count يوم',
+      many: 'فات الموعد بـ$count يومًا',
+      few: 'فات الموعد بـ$count أيام',
+      two: 'فات الموعد بيومين',
+      one: 'فات الموعد بيوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get workNoDeadline => 'بلا موعد نهائي';
+
+  @override
+  String workDeadlineOn(String date) {
+    return 'الموعد: $date';
+  }
+
+  @override
+  String workItemsProgress(String done, String total) {
+    return '$done من $total خطوات';
+  }
+
+  @override
+  String get workCountryJO => 'الأردن';
+
+  @override
+  String get workCountrySA => 'السعودية';
+
+  @override
+  String get workCountryAE => 'الإمارات';
+
+  @override
+  String get workCountryKW => 'الكويت';
+
+  @override
+  String get workCountryQA => 'قطر';
+
+  @override
+  String get workCountryBH => 'البحرين';
+
+  @override
+  String get workCountryOM => 'عُمان';
+
+  @override
+  String get workCountryIQ => 'العراق';
+
+  @override
+  String get workCountrySY => 'سوريا';
+
+  @override
+  String get workCountryLB => 'لبنان';
+
+  @override
+  String get workCountryPS => 'فلسطين';
+
+  @override
+  String get workCountryEG => 'مصر';
+
+  @override
+  String get workCountryLY => 'ليبيا';
+
+  @override
+  String get workCountryTN => 'تونس';
+
+  @override
+  String get workCountryDZ => 'الجزائر';
+
+  @override
+  String get workCountryMA => 'المغرب';
+
+  @override
+  String get workCountrySD => 'السودان';
+
+  @override
+  String get workCountryYE => 'اليمن';
+
+  @override
+  String get workCountryTR => 'تركيا';
+
+  @override
+  String get familyTitle => 'العائلة والأحبّة';
+
+  @override
+  String get familyTodayTitle => 'صلة اليوم';
+
+  @override
+  String get familyOpenAll => 'عرض الكل';
+
+  @override
+  String get familyAddPerson => 'إضافة شخص';
+
+  @override
+  String get familyEmptyTitle => 'دائرتك القريبة تبدأ هنا';
+
+  @override
+  String get familyEmptyBody =>
+      'أضف من تحبّ أن تبقى على صلة به، واختر كل كم يومًا تتواصل — مثلًا: «أمي، كل يومين».';
+
+  @override
+  String get familySortUrgency => 'حسب الأولوية';
+
+  @override
+  String get familySortManual => 'ترتيبي الخاص';
+
+  @override
+  String get familySortLabel => 'طريقة الترتيب';
+
+  @override
+  String get familyRemindersTitle => 'تذكيرات الصلة';
+
+  @override
+  String get familyGroupOverdue => 'فات موعدهم';
+
+  @override
+  String get familyGroupDueToday => 'موعدهم اليوم';
+
+  @override
+  String get familyGroupThisWeek => 'خلال هذا الأسبوع';
+
+  @override
+  String get familyGroupInTouch => 'على تواصل';
+
+  @override
+  String get familyGroupNoRhythm => 'بلا موعد محدّد';
+
+  @override
+  String familyHeroWaiting(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شخص ينتظرون سؤالك',
+      many: '$count شخصًا ينتظرون سؤالك',
+      few: '$count أشخاص ينتظرون سؤالك',
+      two: 'شخصان ينتظران سؤالك',
+      one: 'شخص واحد ينتظر سؤالك',
+      zero: 'لا أحد ينتظر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get familyHeroAllGood => 'الجميع على تواصل';
+
+  @override
+  String get familyHeroBlessing => 'بارك الله في وصلك';
+
+  @override
+  String familyHeroInTouch(String inTouch, String total) {
+    return '$inTouch من $total على تواصل';
+  }
+
+  @override
+  String get familyHeroNoRhythm =>
+      'حدّد كل كم تتواصل مع كل شخص لتظهر هنا مواعيدهم';
+
+  @override
+  String familyStatusOverdue(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'فات الموعد بـ$count يوم',
+      many: 'فات الموعد بـ$count يومًا',
+      few: 'فات الموعد بـ$count أيام',
+      two: 'فات الموعد بيومين',
+      one: 'فات الموعد بيوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get familyStatusDueToday => 'موعد السؤال اليوم';
+
+  @override
+  String familyStatusDueIn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'الموعد بعد $count يوم',
+      many: 'الموعد بعد $count يومًا',
+      few: 'الموعد بعد $count أيام',
+      two: 'الموعد بعد يومين',
+      one: 'الموعد غدًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get familyStatusNoRhythm => 'بلا موعد';
+
+  @override
+  String get familyLastNever => 'لم يُسجَّل تواصل بعد';
+
+  @override
+  String familyLastDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر تواصل قبل $count يوم',
+      many: 'آخر تواصل قبل $count يومًا',
+      few: 'آخر تواصل قبل $count أيام',
+      two: 'آخر تواصل قبل يومين',
+      one: 'آخر تواصل أمس',
+      zero: 'آخر تواصل اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyInDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بعد $count يوم',
+      many: 'بعد $count يومًا',
+      few: 'بعد $count أيام',
+      two: 'بعد يومين',
+      one: 'غدًا',
+      zero: 'اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $count يوم',
+      many: 'قبل $count يومًا',
+      few: 'قبل $count أيام',
+      two: 'قبل يومين',
+      one: 'أمس',
+      zero: 'اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyDaysCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+      zero: '$count يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyRhythmEvery(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $count يوم',
+      many: 'كل $count يومًا',
+      few: 'كل $count أيام',
+      two: 'كل يومين',
+      one: 'يوميًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get familyRhythmWeekly => 'أسبوعيًا';
+
+  @override
+  String get familyRhythmBiweekly => 'كل أسبوعين';
+
+  @override
+  String get familyRhythmMonthly => 'شهريًا';
+
+  @override
+  String get familyRhythmNone => 'بلا إيقاع';
+
+  @override
+  String get familyRhythmCustom => 'عدد آخر';
+
+  @override
+  String get familyRhythmCustomLabel => 'كل كم يومًا؟';
+
+  @override
+  String get familyUnitDays => 'يوم';
+
+  @override
+  String get familyChannelCall => 'مكالمة';
+
+  @override
+  String get familyChannelVisit => 'زيارة';
+
+  @override
+  String get familyChannelMessage => 'رسالة';
+
+  @override
+  String get familyChannelOther => 'أخرى';
+
+  @override
+  String get familyContacted => 'تواصلت';
+
+  @override
+  String get familyContactedDetails => 'تواصلت… مع التفاصيل';
+
+  @override
+  String get familyCall => 'اتصال';
+
+  @override
+  String get familySms => 'رسالة نصية';
+
+  @override
+  String get familyWhatsApp => 'واتساب';
+
+  @override
+  String get familyLaunchFailed => 'تعذّر فتح التطبيق على هذا الجهاز';
+
+  @override
+  String get familyMoonShow => 'أظهِر في المدار';
+
+  @override
+  String get familyMoonHide => 'أخفِ من المدار';
+
+  @override
+  String get familyOpenProfile => 'فتح الملف';
+
+  @override
+  String get familyEdit => 'تعديل';
+
+  @override
+  String get familyDelete => 'حذف';
+
+  @override
+  String familyContactedToast(String name) {
+    return 'سُجِّل تواصلك مع $name';
+  }
+
+  @override
+  String familyDeletedToast(String name) {
+    return 'حُذف $name';
+  }
+
+  @override
+  String familySavedToast(String name) {
+    return 'حُفظ $name';
+  }
+
+  @override
+  String get familyContactDeletedToast => 'حُذف التواصل من السجل';
+
+  @override
+  String get familyContactUpdatedToast => 'عُدِّل التواصل';
+
+  @override
+  String familyMoonShownToast(String name) {
+    return 'أُضيف $name إلى المدار';
+  }
+
+  @override
+  String familyMoonHiddenToast(String name) {
+    return 'أُخفي $name من المدار';
+  }
+
+  @override
+  String get familyNewPerson => 'شخص جديد';
+
+  @override
+  String get familyNewPersonSubtitle => 'من تحبّ أن تبقى قريبًا منه';
+
+  @override
+  String familyEditTitle(String name) {
+    return 'تعديل $name';
+  }
+
+  @override
+  String get familyFieldName => 'الاسم';
+
+  @override
+  String get familyFieldNameHint => 'مثلًا: أمي، أحمد';
+
+  @override
+  String get familyFieldNameRequired => 'اكتب الاسم';
+
+  @override
+  String get familyFieldRelation => 'صلة القرابة';
+
+  @override
+  String get familyFieldRelationHint => 'اختر أو اكتب';
+
+  @override
+  String get familyFieldRhythm => 'كل كم تتواصل؟';
+
+  @override
+  String get familyFieldLastContact => 'آخر تواصل';
+
+  @override
+  String get familyFieldPhone => 'رقم الهاتف';
+
+  @override
+  String get familyFieldPhoneHint => 'مع رمز الدولة ليعمل واتساب';
+
+  @override
+  String get familyFieldBirthday => 'تاريخ الميلاد';
+
+  @override
+  String get familyBirthdayYearUnknown => 'السنة غير معروفة';
+
+  @override
+  String get familyBirthdayNone => 'بلا تاريخ';
+
+  @override
+  String get familyFieldNotes => 'ملاحظات';
+
+  @override
+  String get familyFieldNotesHint => 'اهتمامات، مناسبات، أفكار هدايا…';
+
+  @override
+  String get familyFieldColor => 'اللون';
+
+  @override
+  String get familyFieldMoon => 'قمر في المدار';
+
+  @override
+  String get familyFieldMoonHint => 'يظهر قمرًا حول كوكب العائلة في الرئيسية';
+
+  @override
+  String get familyMoreDetails => 'تفاصيل أكثر';
+
+  @override
+  String get familyFewerDetails => 'تفاصيل أقل';
+
+  @override
+  String get familySave => 'حفظ';
+
+  @override
+  String get familyWhenNow => 'الآن';
+
+  @override
+  String get familyWhenToday => 'اليوم';
+
+  @override
+  String get familyWhenEarlierToday => 'في وقت سابق اليوم';
+
+  @override
+  String get familyWhenYesterday => 'أمس';
+
+  @override
+  String get familyWhenWeekAgo => 'قبل أسبوع';
+
+  @override
+  String get familyWhenUnknown => 'لا أذكر';
+
+  @override
+  String get familyWhenPick => 'تاريخ آخر';
+
+  @override
+  String familyContactedTitle(String name) {
+    return 'تواصلت مع $name';
+  }
+
+  @override
+  String get familyContactedSubtitle => 'سجّل كيف ومتى — ولو بكلمة';
+
+  @override
+  String get familyEditContactTitle => 'تعديل التواصل';
+
+  @override
+  String get familyFieldChannel => 'الطريقة';
+
+  @override
+  String get familyFieldWhen => 'متى';
+
+  @override
+  String get familyFieldNote => 'ملاحظة';
+
+  @override
+  String get familyFieldNoteHint => 'عمّ تحدّثتما؟';
+
+  @override
+  String get familyFutureError => 'لا يمكن تسجيل تواصل في المستقبل';
+
+  @override
+  String get familyLog => 'سجّل';
+
+  @override
+  String get familyRhythmCardTitle => 'إيقاع الصلة';
+
+  @override
+  String get familyStatAverage => 'متوسط الفاصل';
+
+  @override
+  String get familyStatOnRhythm => 'في الموعد';
+
+  @override
+  String get familyStatLongestGap => 'أطول انقطاع';
+
+  @override
+  String get familyStatRecent => 'آخر ٩٠ يومًا';
+
+  @override
+  String familyStatTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مرّة',
+      many: '$count مرّة',
+      few: '$count مرّات',
+      two: 'مرّتان',
+      one: 'مرّة واحدة',
+      zero: 'لا مرّات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyVsRhythm(String rhythm) {
+    return 'الإيقاع: $rhythm';
+  }
+
+  @override
+  String get familyChartCaption => 'الفواصل بين آخر مرّات التواصل';
+
+  @override
+  String get familyStatsEmpty =>
+      'بعد مرّتين أو ثلاث من التواصل تظهر هنا إحصاءاتك';
+
+  @override
+  String get familyHistoryTitle => 'سجل التواصل';
+
+  @override
+  String get familyHistoryEmpty =>
+      'لا تواصل مسجّل بعد. اضغط «تواصلت» بعد كل مكالمة أو زيارة.';
+
+  @override
+  String get familyNotesTitle => 'ملاحظات';
+
+  @override
+  String get familyNotesAdd => 'أضف ملاحظة';
+
+  @override
+  String get familyBirthdayTitle => 'ذكرى الميلاد';
+
+  @override
+  String get familyBirthdayTodayBadge => 'اليوم!';
+
+  @override
+  String familyAgeTurning(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عام',
+      many: '$count عامًا',
+      few: '$count أعوام',
+      two: 'عامان',
+      one: 'عام واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyBirthdayUpcoming(String name, String when) {
+    return 'ذكرى ميلاد $name $when';
+  }
+
+  @override
+  String familyCardMore(String count) {
+    return 'و$count غيرهم';
+  }
+
+  @override
+  String get familyCardEmpty => 'أضف أحبّتك لتبقى على صلة بهم';
+
+  @override
+  String get familyDigestTitle => 'ملخّص يومي لطيف';
+
+  @override
+  String get familyDigestHint =>
+      'إشعار واحد في اليوم بمن حان موعد السؤال عنهم — لا إشعار لكل شخص';
+
+  @override
+  String get familyDigestTime => 'وقت الملخّص';
+
+  @override
+  String get familyBirthdayReminders => 'تذكير بذكرى الميلاد';
+
+  @override
+  String get familyBirthdayRemindersHint => 'قبلها بيوم وفي يومها';
+
+  @override
+  String get familyBirthdayTime => 'وقت تذكير الميلاد';
+
+  @override
+  String get familyNotifyGroup => 'العائلة والأحبّة';
+
+  @override
+  String get familyNotifyChannel => 'تذكيرات الصلة';
+
+  @override
+  String get familyNotifyChannelDescription =>
+      'ملخّص الصلة اليومي وتذكيرات ذكرى الميلاد';
+
+  @override
+  String familyDigestNotifyTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شخص ينتظرون سؤالك اليوم',
+      many: '$count شخصًا ينتظرون سؤالك اليوم',
+      few: '$count أشخاص ينتظرون سؤالك اليوم',
+      two: 'شخصان ينتظران سؤالك اليوم',
+      one: 'شخص واحد ينتظر سؤالك اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String familyDigestNotifyBody(String names) {
+    return '$names — مكالمة قصيرة تكفي.';
+  }
+
+  @override
+  String familyBirthdayEveTitle(String name) {
+    return 'غدًا ذكرى ميلاد $name';
+  }
+
+  @override
+  String get familyBirthdayEveBody => 'جهّز كلمة طيبة أو هدية صغيرة.';
+
+  @override
+  String familyBirthdayDayTitle(String name) {
+    return 'اليوم ذكرى ميلاد $name';
+  }
+
+  @override
+  String get familyBirthdayDayBody => 'بادِر بالتهنئة.';
+
+  @override
+  String get familyListSep => '، ';
+
+  @override
+  String get familyDot => ' · ';
+
+  @override
+  String get familyRelFather => 'أبي';
+
+  @override
+  String get familyRelMother => 'أمي';
+
+  @override
+  String get familyRelWife => 'زوجتي';
+
+  @override
+  String get familyRelHusband => 'زوجي';
+
+  @override
+  String get familyRelSon => 'ابني';
+
+  @override
+  String get familyRelDaughter => 'ابنتي';
+
+  @override
+  String get familyRelBrother => 'أخي';
+
+  @override
+  String get familyRelSister => 'أختي';
+
+  @override
+  String get familyRelGrandfather => 'جدّي';
+
+  @override
+  String get familyRelGrandmother => 'جدّتي';
+
+  @override
+  String get familyRelUncle => 'عمّي';
+
+  @override
+  String get familyRelMaternalUncle => 'خالي';
+
+  @override
+  String get familyRelAunt => 'عمّتي';
+
+  @override
+  String get familyRelMaternalAunt => 'خالتي';
+
+  @override
+  String get familyRelInLaw => 'نسيبي';
+
+  @override
+  String get familyRelRelative => 'قريبي';
+
+  @override
+  String get familyRelFriend => 'صديقي';
+
+  @override
+  String get familyRelColleague => 'زميلي';
+
+  @override
+  String get familyRelPartner => 'شريكي';
+
+  @override
+  String get familyRelNeighbour => 'جاري';
+
+  @override
+  String get familyRelTeacher => 'معلّمي';
+
+  @override
+  String get travelTitle => 'السفر';
+
+  @override
+  String get travelTabTrips => 'الرحلات';
+
+  @override
+  String get travelTabDocuments => 'الوثائق';
+
+  @override
+  String get travelTabTemplates => 'قوائم التجهيز';
+
+  @override
+  String get travelAddTrip => 'رحلة جديدة';
+
+  @override
+  String get travelAddDocument => 'وثيقة جديدة';
+
+  @override
+  String get travelAddTemplate => 'قائمة جديدة';
+
+  @override
+  String get travelSectionCurrent => 'في الطريق الآن';
+
+  @override
+  String get travelSectionUpcoming => 'رحلات قادمة';
+
+  @override
+  String get travelSectionPast => 'رحلات سابقة';
+
+  @override
+  String get travelTripsEmptyTitle => 'لا رحلات بعد';
+
+  @override
+  String get travelTripsEmptyBody =>
+      'خطّط لرحلتك القادمة: الوجهة والمواعيد وقائمة التجهيز، وأوقات الصلاة والقبلة هناك.';
+
+  @override
+  String get travelTripsEmptyExample =>
+      'مثلًا: عمرة في الشتاء، أو رحلة عمل قصيرة';
+
+  @override
+  String travelShowPast(String n) {
+    return 'عرض الرحلات السابقة ($n)';
+  }
+
+  @override
+  String get travelHidePast => 'إخفاء الرحلات السابقة';
+
+  @override
+  String get travelCountdownToday => 'السفر اليوم';
+
+  @override
+  String get travelCountdownTomorrow => 'السفر غدًا';
+
+  @override
+  String travelCountdownIn(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بعد $n يوم',
+      many: 'بعد $n يومًا',
+      few: 'بعد $n أيام',
+      two: 'بعد يومين',
+      one: 'بعد يوم واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelCountdownDayOf(String day, String total) {
+    return 'اليوم $day من $total';
+  }
+
+  @override
+  String travelCountdownDay(String day) {
+    return 'اليوم $day';
+  }
+
+  @override
+  String travelCountdownEnded(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'انتهت قبل $n يوم',
+      many: 'انتهت قبل $n يومًا',
+      few: 'انتهت قبل $n أيام',
+      two: 'انتهت قبل يومين',
+      one: 'انتهت أمس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get travelCountdownFinished => 'انتهت';
+
+  @override
+  String get travelCountdownUndated => 'بلا موعد بعد';
+
+  @override
+  String travelDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n يوم',
+      many: '$n يومًا',
+      few: '$n أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get travelOpenEnded => 'بلا موعد عودة';
+
+  @override
+  String get travelStatusPlanned => 'مخطّط لها';
+
+  @override
+  String get travelStatusActive => 'جارية';
+
+  @override
+  String get travelStatusDone => 'منتهية';
+
+  @override
+  String get travelStatusAuto => 'حسب التواريخ';
+
+  @override
+  String travelStatusAutoHint(String status) {
+    return 'تتغيّر الحالة وحدها مع التواريخ: الآن «$status»';
+  }
+
+  @override
+  String get travelStatusManualHint => 'حالة يدوية لا تتبع التواريخ';
+
+  @override
+  String get travelMarkDone => 'أنهِ الرحلة';
+
+  @override
+  String get travelFollowDates => 'اتبع التواريخ';
+
+  @override
+  String get travelSheetNewTitle => 'رحلة جديدة';
+
+  @override
+  String get travelSheetEditTitle => 'تعديل الرحلة';
+
+  @override
+  String get travelSheetSubtitle => 'الوجهة والمواعيد، وأوقات الصلاة هناك';
+
+  @override
+  String get travelFieldDestination => 'الوجهة';
+
+  @override
+  String get travelFieldDestinationHint => 'ابحث عن مدينة أو اكتب أي وجهة';
+
+  @override
+  String get travelDestinationRequired => 'اكتب الوجهة';
+
+  @override
+  String travelDestinationFree(String name) {
+    return 'استخدم «$name» كما كتبتها';
+  }
+
+  @override
+  String get travelDestinationFreeHint =>
+      'بلا أوقات صلاة ولا قبلة؛ اختر مدينة من القائمة لتظهر';
+
+  @override
+  String get travelDestinationChange => 'تغيير';
+
+  @override
+  String travelDestinationCity(String zone) {
+    return '$zone، القبلة وأوقات الصلاة متاحة';
+  }
+
+  @override
+  String get travelFieldStart => 'المغادرة';
+
+  @override
+  String get travelFieldEnd => 'العودة';
+
+  @override
+  String get travelFieldEndHint => 'اتركها فارغة إن لم تحدّد العودة بعد';
+
+  @override
+  String get travelEndBeforeStart => 'العودة قبل المغادرة';
+
+  @override
+  String get travelFieldStatus => 'الحالة';
+
+  @override
+  String get travelFieldColor => 'اللون';
+
+  @override
+  String get travelFieldNotes => 'ملاحظات';
+
+  @override
+  String get travelFieldNotesHint => 'الحجوزات، العناوين، ما يجب تذكّره…';
+
+  @override
+  String get travelSave => 'حفظ';
+
+  @override
+  String get travelCreate => 'أضف الرحلة';
+
+  @override
+  String get travelNoDate => 'لم يُحدَّد';
+
+  @override
+  String get travelLocalTime => 'الساعة هناك';
+
+  @override
+  String travelTimeAhead(String duration) {
+    return 'تسبق هاتفك بـ$duration';
+  }
+
+  @override
+  String travelTimeBehind(String duration) {
+    return 'تتأخر عن هاتفك $duration';
+  }
+
+  @override
+  String get travelTimeSame => 'بتوقيت هاتفك نفسه';
+
+  @override
+  String travelHours(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n ساعة',
+      many: '$n ساعة',
+      few: '$n ساعات',
+      two: 'ساعتين',
+      one: 'ساعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelHoursMinutes(String hm) {
+    return '$hm ساعة';
+  }
+
+  @override
+  String get travelTripDates => 'المواعيد';
+
+  @override
+  String get travelPackingTitle => 'قائمة التجهيز';
+
+  @override
+  String travelPackedCount(String packed, String total) {
+    return '$packed من $total';
+  }
+
+  @override
+  String get travelPackingEmptyTitle => 'لا شيء في القائمة بعد';
+
+  @override
+  String get travelPackingEmptyBody =>
+      'أضف ما ستحتاجه، أو ابدأ من قائمة جاهزة.';
+
+  @override
+  String get travelPackingAllDone => 'اكتملت الحقيبة، سفرًا موفّقًا';
+
+  @override
+  String travelPackingRemaining(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بقي $n غرض',
+      many: 'بقي $n غرضًا',
+      few: 'بقيت $n أغراض',
+      two: 'بقي غرضان',
+      one: 'بقي غرض واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get travelAddItem => 'أضف غرضًا';
+
+  @override
+  String get travelAddItemHint => 'مثلًا: شاحن الهاتف';
+
+  @override
+  String travelAddItemTo(String category) {
+    return 'أضف إلى «$category»…';
+  }
+
+  @override
+  String travelAddItemIn(String category) {
+    return 'إلى: $category';
+  }
+
+  @override
+  String get travelFromTemplate => 'من قائمة جاهزة';
+
+  @override
+  String get travelSaveAsTemplate => 'احفظها قائمة جاهزة';
+
+  @override
+  String get travelUnpackAll => 'أفرغ الحقيبة';
+
+  @override
+  String travelTemplatesApplied(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'أُضيف $n غرض',
+      many: 'أُضيف $n غرضًا',
+      few: 'أُضيفت $n أغراض',
+      two: 'أُضيف غرضان',
+      one: 'أُضيف غرض واحد',
+      zero: 'كل الأغراض موجودة في القائمة أصلًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get travelPickTemplatesTitle => 'اختر قوائم جاهزة';
+
+  @override
+  String get travelPickTemplatesHint => 'تُدمج القوائم دون تكرار ما في حقيبتك';
+
+  @override
+  String get travelPickTemplatesAdd => 'أضف إلى الرحلة';
+
+  @override
+  String get travelTemplateNameTitle => 'احفظها قائمة جاهزة';
+
+  @override
+  String travelTemplateSaved(String name) {
+    return 'حُفظت «$name»';
+  }
+
+  @override
+  String get travelItemNewTitle => 'غرض جديد';
+
+  @override
+  String get travelItemEditTitle => 'تعديل الغرض';
+
+  @override
+  String get travelFieldItem => 'الغرض';
+
+  @override
+  String get travelItemRequired => 'اكتب الغرض';
+
+  @override
+  String get travelFieldCategory => 'الفئة';
+
+  @override
+  String get travelMoveToCategory => 'انقل إلى فئة';
+
+  @override
+  String get travelItemPacked => 'في الحقيبة';
+
+  @override
+  String get travelItemNotPacked => 'لم يُحزم بعد';
+
+  @override
+  String get travelPack => 'في الحقيبة';
+
+  @override
+  String get travelUnpack => 'أخرِجه';
+
+  @override
+  String get travelCatDocuments => 'الأوراق والمال';
+
+  @override
+  String get travelCatClothes => 'الملابس';
+
+  @override
+  String get travelCatToiletries => 'العناية الشخصية';
+
+  @override
+  String get travelCatHealth => 'الصحة والأدوية';
+
+  @override
+  String get travelCatElectronics => 'الأجهزة والشواحن';
+
+  @override
+  String get travelCatPrayer => 'العبادة';
+
+  @override
+  String get travelCatMisc => 'أغراض أخرى';
+
+  @override
+  String get travelCatNew => 'فئة جديدة';
+
+  @override
+  String get travelCatNewHint => 'اسم الفئة';
+
+  @override
+  String travelPrayerTitle(String place) {
+    return 'الصلاة في $place';
+  }
+
+  @override
+  String get travelPrayerMethodNote =>
+      'بطريقة الحساب في إعداداتك، على توقيت الوجهة';
+
+  @override
+  String travelPrayerNext(String prayer, String duration) {
+    return '$prayer بعد $duration';
+  }
+
+  @override
+  String get travelPrayerUseHere => 'اعتمدها موقعًا لصلاتي أثناء السفر';
+
+  @override
+  String get travelPrayerIsLocation => 'هذه وجهة صلاتك الآن';
+
+  @override
+  String travelPrayerUsed(String place) {
+    return 'صارت أوقات صلاتك على توقيت $place';
+  }
+
+  @override
+  String get travelPrayerNoPlace =>
+      'اختر الوجهة من قائمة المدن لتظهر أوقات الصلاة والقبلة هناك.';
+
+  @override
+  String get travelPrayerPickCity => 'اختر المدينة';
+
+  @override
+  String get travelPrayerToday => 'اليوم';
+
+  @override
+  String get travelQiblaTitle => 'القبلة من هناك';
+
+  @override
+  String travelQiblaBearing(String bearing) {
+    return '$bearing من الشمال';
+  }
+
+  @override
+  String travelQiblaDistance(String distance) {
+    return '$distance إلى الكعبة';
+  }
+
+  @override
+  String get travelQiblaAtKaaba => 'أنت عند الكعبة';
+
+  @override
+  String travelQiblaSemantics(String bearing) {
+    return 'اتجاه القبلة $bearing';
+  }
+
+  @override
+  String travelWarnBeforeTrip(String doc, String date) {
+    return '$doc: الصلاحية تنتهي قبل السفر ($date)';
+  }
+
+  @override
+  String travelWarnDuringTrip(String doc, String date) {
+    return '$doc: الصلاحية تنتهي أثناء الرحلة ($date)';
+  }
+
+  @override
+  String travelWarnValidity(String doc, String months) {
+    return '$doc: تنتهي الصلاحية بعد عودتك بأقل من $months أشهر، ودول كثيرة تشترط مدة أطول';
+  }
+
+  @override
+  String travelWarnTrip(String destination) {
+    return 'رحلة $destination';
+  }
+
+  @override
+  String get travelDocsEmptyTitle => 'لا وثائق بعد';
+
+  @override
+  String get travelDocsEmptyBody =>
+      'سجّل الجوازات والتأشيرات والرخص ليذكّرك مدار قبل انتهائها، وينبّهك إن انتهت قبل رحلة.';
+
+  @override
+  String get travelDocNew => 'وثيقة جديدة';
+
+  @override
+  String get travelDocEdit => 'تعديل الوثيقة';
+
+  @override
+  String get travelDocSubtitle => 'تذكير قبل الانتهاء بالمدة التي تختارها';
+
+  @override
+  String get travelDocName => 'الوثيقة';
+
+  @override
+  String get travelDocNameHint => 'جواز السفر، تأشيرة، رخصة قيادة…';
+
+  @override
+  String get travelDocNameRequired => 'اكتب اسم الوثيقة';
+
+  @override
+  String get travelDocHolder => 'صاحبها';
+
+  @override
+  String get travelDocHolderHint => 'لمن هذه الوثيقة؟';
+
+  @override
+  String get travelDocNumber => 'الرقم';
+
+  @override
+  String get travelDocExpiry => 'تاريخ الانتهاء';
+
+  @override
+  String get travelDocRemind => 'ذكّرني';
+
+  @override
+  String travelDocNumberShort(String last) {
+    return 'رقم $last';
+  }
+
+  @override
+  String get travelRemindOnDay => 'يوم الانتهاء فقط';
+
+  @override
+  String get travelRemindWeek => 'قبل أسبوع';
+
+  @override
+  String get travelRemindTwoWeeks => 'قبل أسبوعين';
+
+  @override
+  String get travelRemindMonth => 'قبل شهر';
+
+  @override
+  String get travelRemindTwoMonths => 'قبل شهرين';
+
+  @override
+  String travelRemindMonths(String n) {
+    return 'قبل $n أشهر';
+  }
+
+  @override
+  String travelRemindDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $n يوم',
+      many: 'قبل $n يومًا',
+      few: 'قبل $n أيام',
+      two: 'قبل يومين',
+      one: 'قبل يوم',
+      zero: 'يوم الانتهاء فقط',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelRemindSummary(String when) {
+    return 'التذكير: $when';
+  }
+
+  @override
+  String get travelExpiresToday => 'الانتهاء اليوم';
+
+  @override
+  String travelExpiresInDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'الانتهاء بعد $n يوم',
+      many: 'الانتهاء بعد $n يومًا',
+      few: 'الانتهاء بعد $n أيام',
+      two: 'الانتهاء بعد يومين',
+      one: 'الانتهاء غدًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelExpiresInMonths(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'الانتهاء بعد $n شهر',
+      many: 'الانتهاء بعد $n شهرًا',
+      few: 'الانتهاء بعد $n أشهر',
+      two: 'الانتهاء بعد شهرين',
+      one: 'الانتهاء بعد شهر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelExpiresInYears(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'الانتهاء بعد $n سنة',
+      many: 'الانتهاء بعد $n سنة',
+      few: 'الانتهاء بعد $n سنوات',
+      two: 'الانتهاء بعد سنتين',
+      one: 'الانتهاء بعد سنة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelExpiredAgo(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'انتهت الصلاحية منذ $n يوم',
+      many: 'انتهت الصلاحية منذ $n يومًا',
+      few: 'انتهت الصلاحية منذ $n أيام',
+      two: 'انتهت الصلاحية منذ يومين',
+      one: 'انتهت الصلاحية أمس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String travelExpiredOn(String date) {
+    return 'انتهت الصلاحية في $date';
+  }
+
+  @override
+  String get travelNoExpiry => 'بلا تاريخ انتهاء';
+
+  @override
+  String get travelDocKindPassport => 'جواز سفر';
+
+  @override
+  String get travelDocKindVisa => 'تأشيرة';
+
+  @override
+  String get travelDocKindLicence => 'رخصة';
+
+  @override
+  String get travelDocKindId => 'هوية';
+
+  @override
+  String get travelDocKindInsurance => 'تأمين';
+
+  @override
+  String get travelDocKindOther => 'وثيقة';
+
+  @override
+  String travelDocAffects(String destination) {
+    return 'يمسّ رحلة $destination';
+  }
+
+  @override
+  String get travelNoticeGroup => 'السفر';
+
+  @override
+  String get travelNoticeChannel => 'انتهاء الوثائق';
+
+  @override
+  String get travelNoticeChannelDescription =>
+      'تذكير قبل انتهاء الجوازات والتأشيرات والرخص';
+
+  @override
+  String travelNoticeTitle(String doc, String when) {
+    return '$doc: $when';
+  }
+
+  @override
+  String travelNoticeAheadBody(String date) {
+    return 'تاريخ الانتهاء $date. ابدأ التجديد مبكرًا حتى لا تتعطّل رحلاتك.';
+  }
+
+  @override
+  String get travelNoticeOnDayBody =>
+      'تنتهي صلاحيتها اليوم. جدّدها قبل سفرك القادم.';
+
+  @override
+  String travelDocWithHolder(String doc, String holder) {
+    return '$doc ($holder)';
+  }
+
+  @override
+  String get travelTemplatesTitle => 'قوائم التجهيز الجاهزة';
+
+  @override
+  String get travelTemplatesEmptyTitle => 'لا قوائم جاهزة بعد';
+
+  @override
+  String get travelTemplatesEmptyBody =>
+      'القائمة الجاهزة تملأ حقيبة أي رحلة بلمسة، وتحفظ ما تنساه عادةً.';
+
+  @override
+  String get travelTemplatesStarter => 'أضف قوائم مقترحة';
+
+  @override
+  String get travelTemplatesStarterAdded =>
+      'أُضيفت القوائم المقترحة، عدّلها كما تشاء';
+
+  @override
+  String travelTemplateItems(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n غرض',
+      many: '$n غرضًا',
+      few: '$n أغراض',
+      two: 'غرضان',
+      one: 'غرض واحد',
+      zero: 'لا أغراض',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get travelTemplateNew => 'قائمة جديدة';
+
+  @override
+  String get travelTemplateRename => 'إعادة التسمية';
+
+  @override
+  String get travelTemplateName => 'الاسم';
+
+  @override
+  String get travelTemplateNameHint => 'مثلًا: رحلة عمل';
+
+  @override
+  String get travelTemplateNameRequired => 'اكتب اسمًا';
+
+  @override
+  String get travelTemplateEmptyItems =>
+      'أضف أغراض هذه القائمة، ورتّبها بالسحب.';
+
+  @override
+  String travelTemplateCopy(String name) {
+    return '$name (نسخة)';
+  }
+
+  @override
+  String get travelStarterEssentials => 'الأساسيات';
+
+  @override
+  String get travelStarterBusiness => 'رحلة عمل';
+
+  @override
+  String get travelStarterUmrah => 'العمرة';
+
+  @override
+  String get travelStarterWinter => 'سفر الشتاء';
+
+  @override
+  String get travelSeedPassport => 'جواز السفر';
+
+  @override
+  String get travelSeedTickets => 'التذاكر والحجوزات';
+
+  @override
+  String get travelSeedWallet => 'المحفظة والبطاقات';
+
+  @override
+  String get travelSeedCash => 'نقود بعملة البلد';
+
+  @override
+  String get travelSeedClothes => 'ملابس لأيام الرحلة';
+
+  @override
+  String get travelSeedSleepwear => 'ملابس النوم';
+
+  @override
+  String get travelSeedToothbrush => 'فرشاة ومعجون الأسنان';
+
+  @override
+  String get travelSeedMiswak => 'سواك';
+
+  @override
+  String get travelSeedDeodorant => 'مزيل العرق';
+
+  @override
+  String get travelSeedMeds => 'أدويتي المعتادة';
+
+  @override
+  String get travelSeedFirstAid => 'إسعافات أولية';
+
+  @override
+  String get travelSeedCharger => 'شاحن الهاتف';
+
+  @override
+  String get travelSeedPowerBank => 'بطارية متنقلة';
+
+  @override
+  String get travelSeedAdapter => 'محوّل كهرباء';
+
+  @override
+  String get travelSeedPrayerMat => 'سجادة صلاة للسفر';
+
+  @override
+  String get travelSeedQuran => 'مصحف الجيب';
+
+  @override
+  String get travelSeedLaptop => 'الحاسوب وشاحنه';
+
+  @override
+  String get travelSeedFormal => 'ملابس رسمية';
+
+  @override
+  String get travelSeedCards => 'بطاقات العمل';
+
+  @override
+  String get travelSeedNotebook => 'دفتر وقلم';
+
+  @override
+  String get travelSeedIhram => 'ملابس الإحرام';
+
+  @override
+  String get travelSeedIhramBelt => 'حزام الإحرام';
+
+  @override
+  String get travelSeedUnscented => 'صابون بلا عطر';
+
+  @override
+  String get travelSeedSandals => 'نعال مريحة';
+
+  @override
+  String get travelSeedShoeBag => 'كيس للأحذية';
+
+  @override
+  String get travelSeedUmbrella => 'مظلة للشمس';
+
+  @override
+  String get travelSeedDuas => 'كتيّب الأدعية';
+
+  @override
+  String get travelSeedWater => 'قارورة ماء';
+
+  @override
+  String get travelSeedPermit => 'تصريح العمرة';
+
+  @override
+  String get travelSeedCoat => 'معطف ثقيل';
+
+  @override
+  String get travelSeedScarf => 'وشاح وقفازات';
+
+  @override
+  String get travelSeedThermal => 'ملابس حرارية';
+
+  @override
+  String get travelSeedLipBalm => 'مرطّب شفاه';
+
+  @override
+  String get travelCardNoTrips => 'لا رحلات قادمة';
+
+  @override
+  String travelCardPacked(String packed, String total) {
+    return '$packed/$total في الحقيبة';
+  }
+
+  @override
+  String get travelCardNoPacking => 'لم تبدأ قائمة التجهيز';
+
+  @override
+  String travelCardNext(String destination, String countdown) {
+    return 'الرحلة التالية: $destination · $countdown';
+  }
+
+  @override
+  String travelCardDocsAttention(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n وثيقة تحتاج انتباهك',
+      many: '$n وثيقة تحتاج انتباهك',
+      few: '$n وثائق تحتاج انتباهك',
+      two: 'وثيقتان تحتاجان انتباهك',
+      one: 'وثيقة تحتاج انتباهك',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get travelUndoTripDeleted => 'حُذفت الرحلة';
+
+  @override
+  String get travelUndoTripDuplicated => 'نُسخت الرحلة';
+
+  @override
+  String get travelUndoItemDeleted => 'حُذف الغرض';
+
+  @override
+  String get travelUndoPacked => 'في الحقيبة';
+
+  @override
+  String get travelUndoUnpacked => 'أُخرج من الحقيبة';
+
+  @override
+  String travelUndoMoved(String category) {
+    return 'نُقل إلى $category';
+  }
+
+  @override
+  String get travelUndoDocDeleted => 'حُذفت الوثيقة';
+
+  @override
+  String get travelUndoDocDuplicated => 'نُسخت الوثيقة';
+
+  @override
+  String get travelUndoTemplateDeleted => 'حُذفت القائمة';
+
+  @override
+  String get travelUndoTemplateDuplicated => 'نُسخت القائمة';
+
+  @override
+  String travelUndoStatus(String status) {
+    return 'الرحلة الآن: $status';
+  }
+
+  @override
+  String get travelUndoUnpackedAll => 'أُفرغت الحقيبة';
+
+  @override
+  String get travelUndoSaved => 'حُفظت التعديلات';
+
+  @override
+  String travelUndoReminder(String when) {
+    return 'التذكير: $when';
+  }
+
+  @override
+  String travelOpenTrip(String destination) {
+    return 'افتح رحلة $destination';
+  }
+
+  @override
+  String get travelMore => 'المزيد';
+
+  @override
+  String get travelEdit => 'تعديل';
+
+  @override
+  String get travelTripNotFound => 'لم تعد هذه الرحلة موجودة';
+
+  @override
+  String get growthTitle => 'أهداف التعلّم';
+
+  @override
+  String get growthNewGoal => 'هدف جديد';
+
+  @override
+  String get growthEditGoal => 'تعديل الهدف';
+
+  @override
+  String get growthEmptyTitle => 'ابدأ رحلة تعلّم';
+
+  @override
+  String get growthEmptyBody =>
+      'ضع هدفًا تقيسه وسجّل تقدّمك أولًا بأول: كقراءة كتاب من ثلاثمئة صفحة، أو إنهاء دورة من اثني عشر درسًا.';
+
+  @override
+  String get growthEmptyAction => 'أضف أول هدف';
+
+  @override
+  String get growthSectionActive => 'قيد التعلّم';
+
+  @override
+  String get growthSectionCompleted => 'أهداف مكتملة';
+
+  @override
+  String get growthSectionPaused => 'متوقفة مؤقتًا';
+
+  @override
+  String get growthSectionHint => 'اسحب المقبض لترتيب أهدافك';
+
+  @override
+  String get growthOverviewTitle => 'مسيرة التعلّم';
+
+  @override
+  String growthActiveGoals(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count هدف نشط',
+      many: '$count هدفًا نشطًا',
+      few: '$count أهداف نشطة',
+      two: 'هدفان نشطان',
+      one: 'هدف نشط واحد',
+      zero: 'لا أهداف نشطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthCompletedGoals(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count هدف مكتمل',
+      many: '$count هدفًا مكتملًا',
+      few: '$count أهداف مكتملة',
+      two: 'هدفان مكتملان',
+      one: 'هدف مكتمل',
+      zero: 'لا أهداف مكتملة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthLoggedToday(String done, String total) {
+    return 'سجّلتَ اليوم في $done من $total';
+  }
+
+  @override
+  String get growthNothingToday => 'لم تسجّل شيئًا اليوم بعد';
+
+  @override
+  String get growthAverageLabel => 'المتوسط';
+
+  @override
+  String get growthLastSevenDays => 'الأيام السبعة الأخيرة';
+
+  @override
+  String growthDayActive(String day) {
+    return '$day: سُجّل تقدّم';
+  }
+
+  @override
+  String growthDayIdle(String day) {
+    return '$day: لا تقدّم';
+  }
+
+  @override
+  String get growthStreakLabel => 'السلسلة';
+
+  @override
+  String growthStreakDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم متتالٍ',
+      many: '$count يومًا متتاليًا',
+      few: '$count أيام متتالية',
+      two: 'يومان متتاليان',
+      one: 'يوم واحد متتالٍ',
+      zero: 'لا سلسلة بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthBestStreak(String days) {
+    return 'الأطول: $days';
+  }
+
+  @override
+  String get growthStreakAtRisk => 'سجّل اليوم لتحافظ على سلسلتك';
+
+  @override
+  String get growthActiveDaysLabel => 'أيام النشاط';
+
+  @override
+  String growthDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+      zero: '$count يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get growthUnitPagesName => 'صفحات';
+
+  @override
+  String growthUnitPages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count صفحة',
+      many: '$count صفحة',
+      few: '$count صفحات',
+      two: 'صفحتان',
+      one: 'صفحة واحدة',
+      zero: '$count صفحة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitPagesDecimal(String amount) {
+    return '$amount صفحة';
+  }
+
+  @override
+  String get growthUnitLessonsName => 'دروس';
+
+  @override
+  String growthUnitLessons(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count درس',
+      many: '$count درسًا',
+      few: '$count دروس',
+      two: 'درسان',
+      one: 'درس واحد',
+      zero: '$count درس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitLessonsDecimal(String amount) {
+    return '$amount درس';
+  }
+
+  @override
+  String get growthUnitHoursName => 'ساعات';
+
+  @override
+  String growthUnitHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ساعة',
+      many: '$count ساعة',
+      few: '$count ساعات',
+      two: 'ساعتان',
+      one: 'ساعة واحدة',
+      zero: '$count ساعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitHoursDecimal(String amount) {
+    return '$amount ساعة';
+  }
+
+  @override
+  String get growthUnitChaptersName => 'فصول';
+
+  @override
+  String growthUnitChapters(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count فصل',
+      many: '$count فصلًا',
+      few: '$count فصول',
+      two: 'فصلان',
+      one: 'فصل واحد',
+      zero: '$count فصل',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitChaptersDecimal(String amount) {
+    return '$amount فصل';
+  }
+
+  @override
+  String get growthUnitCoursesName => 'دورات';
+
+  @override
+  String growthUnitCourses(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دورة',
+      many: '$count دورة',
+      few: '$count دورات',
+      two: 'دورتان',
+      one: 'دورة واحدة',
+      zero: '$count دورة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitCoursesDecimal(String amount) {
+    return '$amount دورة';
+  }
+
+  @override
+  String get growthUnitWordsName => 'كلمات';
+
+  @override
+  String growthUnitWords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count كلمة',
+      many: '$count كلمة',
+      few: '$count كلمات',
+      two: 'كلمتان',
+      one: 'كلمة واحدة',
+      zero: '$count كلمة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitWordsDecimal(String amount) {
+    return '$amount كلمة';
+  }
+
+  @override
+  String get growthUnitBooksName => 'كتب';
+
+  @override
+  String growthUnitBooks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count كتاب',
+      many: '$count كتابًا',
+      few: '$count كتب',
+      two: 'كتابان',
+      one: 'كتاب واحد',
+      zero: '$count كتاب',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitBooksDecimal(String amount) {
+    return '$amount كتاب';
+  }
+
+  @override
+  String get growthUnitLecturesName => 'محاضرات';
+
+  @override
+  String growthUnitLectures(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count محاضرة',
+      many: '$count محاضرة',
+      few: '$count محاضرات',
+      two: 'محاضرتان',
+      one: 'محاضرة واحدة',
+      zero: '$count محاضرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitLecturesDecimal(String amount) {
+    return '$amount محاضرة';
+  }
+
+  @override
+  String get growthUnitMinutesName => 'دقائق';
+
+  @override
+  String growthUnitMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دقيقة',
+      many: '$count دقيقة',
+      few: '$count دقائق',
+      two: 'دقيقتان',
+      one: 'دقيقة واحدة',
+      zero: '$count دقيقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitMinutesDecimal(String amount) {
+    return '$amount دقيقة';
+  }
+
+  @override
+  String get growthUnitArticlesName => 'مقالات';
+
+  @override
+  String growthUnitArticles(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مقال',
+      many: '$count مقالًا',
+      few: '$count مقالات',
+      two: 'مقالان',
+      one: 'مقال واحد',
+      zero: '$count مقال',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String growthUnitArticlesDecimal(String amount) {
+    return '$amount مقال';
+  }
+
+  @override
+  String growthAmountCustom(String amount, String unit) {
+    return '$amount $unit';
+  }
+
+  @override
+  String growthProgressOf(String current, String target) {
+    return '$current من $target';
+  }
+
+  @override
+  String growthRemaining(String amount) {
+    return 'تبقّى $amount';
+  }
+
+  @override
+  String growthExceeded(String amount) {
+    return 'تجاوزتَ الهدف بـ$amount';
+  }
+
+  @override
+  String growthStartedFrom(String amount) {
+    return 'بدأتَ من $amount';
+  }
+
+  @override
+  String growthRatePerDay(String amount) {
+    return '$amount يوميًا';
+  }
+
+  @override
+  String growthRatePerWeek(String amount) {
+    return '$amount أسبوعيًا';
+  }
+
+  @override
+  String get growthPaceCompleted => 'مكتمل';
+
+  @override
+  String get growthPacePaused => 'متوقف مؤقتًا';
+
+  @override
+  String get growthPaceNotStarted => 'لم يبدأ بعد';
+
+  @override
+  String get growthPaceNoDeadline => 'بلا موعد';
+
+  @override
+  String get growthPaceAhead => 'متقدّم';
+
+  @override
+  String get growthPaceOnTrack => 'على المسار';
+
+  @override
+  String get growthPaceBehind => 'متأخّر';
+
+  @override
+  String get growthPaceOverdue => 'فات الموعد';
+
+  @override
+  String growthLineNeed(String rate, String date) {
+    return 'تحتاج $rate حتى $date';
+  }
+
+  @override
+  String growthLineAhead(String rate) {
+    return 'وتيرتك $rate، تسبق موعدك';
+  }
+
+  @override
+  String growthLineStart(String rate, String date) {
+    return '$rate تكفيك حتى $date';
+  }
+
+  @override
+  String get growthLineFirstLog => 'سجّل أول تقدّم لتبدأ';
+
+  @override
+  String growthLineOpen(String rate) {
+    return 'وتيرتك $rate';
+  }
+
+  @override
+  String growthLineOpenFinish(String rate, String date) {
+    return 'وتيرتك $rate، تُنهيه في $date';
+  }
+
+  @override
+  String get growthLineQuiet => 'لا تقدّم في الأسبوعين الأخيرين';
+
+  @override
+  String growthLineOverdue(String days, String amount) {
+    return 'فات الموعد منذ $days، تبقّى $amount';
+  }
+
+  @override
+  String growthLineDueToday(String amount) {
+    return 'الموعد اليوم، تبقّى $amount';
+  }
+
+  @override
+  String growthLineCompleted(String date) {
+    return 'اكتمل في $date';
+  }
+
+  @override
+  String get growthLinePaused => 'متوقف مؤقتًا، استأنفه متى شئت';
+
+  @override
+  String get growthNeededLabel => 'المطلوب';
+
+  @override
+  String get growthActualLabel => 'وتيرتك';
+
+  @override
+  String growthActualWindow(String days) {
+    return 'آخر $days';
+  }
+
+  @override
+  String growthNeededUntil(String date) {
+    return 'حتى $date';
+  }
+
+  @override
+  String get growthNoPaceYet => 'لا وتيرة بعد';
+
+  @override
+  String get growthProjectedLabel => 'الإنهاء المتوقع';
+
+  @override
+  String growthProjectionEarly(String days) {
+    return 'قبل الموعد بـ$days';
+  }
+
+  @override
+  String growthProjectionLate(String days) {
+    return 'بعد الموعد بـ$days';
+  }
+
+  @override
+  String get growthProjectionOnDay => 'في الموعد تمامًا';
+
+  @override
+  String get growthProjectionNone => 'سجّل تقدّمًا لنتوقّع موعد إنهائك';
+
+  @override
+  String get growthPaceNoDeadlineHint =>
+      'بلا موعد نهائي، تقدّم بالوتيرة التي تناسبك';
+
+  @override
+  String get growthPaceDoneHint => 'بلغتَ هدفك، ويمكنك مواصلة التسجيل';
+
+  @override
+  String growthPlanBehind(String amount) {
+    return 'خلف الخطة بـ$amount';
+  }
+
+  @override
+  String growthPlanAhead(String amount) {
+    return 'أمام الخطة بـ$amount';
+  }
+
+  @override
+  String growthDaysLeft(String days) {
+    return 'بقي $days';
+  }
+
+  @override
+  String get growthDeadlineLabel => 'الموعد';
+
+  @override
+  String get growthChartTitle => 'المسار';
+
+  @override
+  String get growthChartActual => 'التقدّم';
+
+  @override
+  String get growthChartPlan => 'الخطة';
+
+  @override
+  String get growthChartTarget => 'الهدف';
+
+  @override
+  String get growthChartProjection => 'التوقّع';
+
+  @override
+  String growthChartSemantics(String current, String target) {
+    return 'مخطط التقدّم: $current من $target';
+  }
+
+  @override
+  String get growthHistoryTitle => 'سجلّ التقدّم';
+
+  @override
+  String get growthHistoryEmpty => 'لا سجلات بعد. خطوة صغيرة اليوم تصنع الفرق.';
+
+  @override
+  String get growthToday => 'اليوم';
+
+  @override
+  String get growthYesterday => 'أمس';
+
+  @override
+  String growthRunningTotal(String amount) {
+    return 'المجموع $amount';
+  }
+
+  @override
+  String growthDayTotal(String amount) {
+    return '$amount في هذا اليوم';
+  }
+
+  @override
+  String get growthLogProgress => 'سجّل تقدّمًا';
+
+  @override
+  String get growthEditLog => 'تعديل السجل';
+
+  @override
+  String get growthLogOther => 'مقدار آخر';
+
+  @override
+  String growthLogQuick(String amount) {
+    return 'سجّل $amount';
+  }
+
+  @override
+  String get growthLogAmount => 'المقدار';
+
+  @override
+  String get growthLogWhen => 'الوقت';
+
+  @override
+  String get growthLogDate => 'اليوم';
+
+  @override
+  String get growthLogTime => 'الساعة';
+
+  @override
+  String get growthLogNow => 'الآن';
+
+  @override
+  String get growthLogNote => 'ملاحظة';
+
+  @override
+  String get growthLogNoteHint => 'ماذا تعلّمت؟';
+
+  @override
+  String growthLogNewTotal(String total, String percent) {
+    return 'المجموع بعدها $total ($percent)';
+  }
+
+  @override
+  String get growthLogWillComplete => 'بهذا تُتمّ هدفك!';
+
+  @override
+  String get growthLogSave => 'سجّل';
+
+  @override
+  String get growthDecrease => 'أنقِص';
+
+  @override
+  String get growthIncrease => 'زِد';
+
+  @override
+  String get growthErrorAmount => 'أدخل مقدارًا أكبر من صفر';
+
+  @override
+  String get growthFieldName => 'اسم الهدف';
+
+  @override
+  String get growthFieldNameHint => 'مثال: قراءة كتاب في الإدارة';
+
+  @override
+  String get growthFieldUnit => 'الوحدة';
+
+  @override
+  String get growthFieldUnitHint => 'اختر أو اكتب وحدتك';
+
+  @override
+  String get growthFieldTarget => 'المستهدف';
+
+  @override
+  String get growthFieldInitial => 'نقطة البداية';
+
+  @override
+  String get growthFieldInitialHint => 'ما أنجزته من قبل';
+
+  @override
+  String get growthFieldDeadline => 'الموعد النهائي';
+
+  @override
+  String get growthFieldNoDeadline => 'بلا موعد';
+
+  @override
+  String get growthFieldColor => 'اللون';
+
+  @override
+  String get growthFieldActive => 'هدف نشط';
+
+  @override
+  String get growthFieldActiveHint => 'أوقفه مؤقتًا دون أن تخسر تقدّمك';
+
+  @override
+  String get growthInMonth => 'بعد شهر';
+
+  @override
+  String get growthInThreeMonths => 'بعد ثلاثة أشهر';
+
+  @override
+  String get growthEndOfYear => 'نهاية السنة';
+
+  @override
+  String get growthErrorName => 'اكتب اسمًا للهدف';
+
+  @override
+  String get growthErrorTarget => 'أدخل مقدارًا أكبر من صفر';
+
+  @override
+  String get growthErrorInitial => 'يجب أن تكون البداية أقل من المستهدف';
+
+  @override
+  String growthPreviewNeed(String rate, String date) {
+    return '$rate تكفيك لتبلغ هدفك في $date';
+  }
+
+  @override
+  String get growthPreviewOpen => 'بلا موعد: سجّل تقدّمك بالوتيرة التي تناسبك';
+
+  @override
+  String get growthPreviewPast => 'هذا الموعد مضى؛ اختر موعدًا قادمًا';
+
+  @override
+  String get growthCreate => 'أنشئ الهدف';
+
+  @override
+  String get growthSave => 'احفظ';
+
+  @override
+  String get growthCancel => 'إلغاء';
+
+  @override
+  String get growthPause => 'إيقاف مؤقت';
+
+  @override
+  String get growthResume => 'استئناف';
+
+  @override
+  String get growthDelete => 'حذف';
+
+  @override
+  String get growthEdit => 'تعديل';
+
+  @override
+  String growthCopyName(String name) {
+    return '$name (نسخة)';
+  }
+
+  @override
+  String growthLogged(String amount, String goal) {
+    return 'سُجّل $amount، $goal';
+  }
+
+  @override
+  String get growthLogUpdated => 'عُدّل السجل';
+
+  @override
+  String get growthLogDeleted => 'حُذف السجل';
+
+  @override
+  String growthGoalCreated(String name) {
+    return 'أُضيف الهدف: $name';
+  }
+
+  @override
+  String get growthGoalSaved => 'حُفظت التعديلات';
+
+  @override
+  String growthGoalDeleted(String name) {
+    return 'حُذف الهدف: $name';
+  }
+
+  @override
+  String get growthGoalDuplicated => 'نُسخ الهدف';
+
+  @override
+  String get growthGoalPaused => 'أُوقف الهدف مؤقتًا';
+
+  @override
+  String get growthGoalResumed => 'استُؤنف الهدف';
+
+  @override
+  String get growthGoalMissing => 'لم يعد هذا الهدف موجودًا';
+
+  @override
+  String get growthCelebrateTitle => 'ما شاء الله، أتممتَ هدفك!';
+
+  @override
+  String growthCelebrateBody(String amount, String days) {
+    return '$amount خلال $days';
+  }
+
+  @override
+  String get growthCelebrateThanks => 'الحمد لله';
+
+  @override
+  String get growthCelebrateNext => 'هدف جديد';
+
+  @override
+  String get growthCardTitle => 'النمو اليوم';
+
+  @override
+  String get growthCardOpenAll => 'كل الأهداف';
+
+  @override
+  String get growthCardEmpty =>
+      'لا أهداف تعلّم بعد. أضف هدفًا وتابِع تقدّمك هنا.';
+
+  @override
+  String get growthCardAllDone => 'أتممتَ كل أهدافك النشطة، بارك الله فيك';
+
+  @override
+  String get growthOpenGoal => 'افتح الهدف';
+
+  @override
+  String growthGoalSemantics(String name, String progress, String status) {
+    return '$name، $progress، $status';
+  }
+
+  @override
+  String get growthSep => '، ';
+
+  @override
+  String get growthPaceTitle => 'الوتيرة';
+
+  @override
+  String get growthStatsDeadlineNone => 'بلا موعد';
+
+  @override
+  String growthStartedOn(String date) {
+    return 'بدأ في $date';
+  }
+
+  @override
+  String get growthAllActiveDone =>
+      'لا أهداف قيد التعلّم الآن. ما خطوتك التالية؟';
+
+  @override
+  String growthOverdueBy(String days) {
+    return 'فات الموعد منذ $days';
+  }
+
+  @override
+  String growthOfDays(String days) {
+    return 'من $days';
+  }
+
+  @override
+  String get bodyTitle => 'الجسد';
+
+  @override
+  String get bodyTabToday => 'اليوم';
+
+  @override
+  String get bodyTabPlan => 'الخطة';
+
+  @override
+  String get bodyTabFasting => 'الصيام';
+
+  @override
+  String get bodyTabWater => 'الماء';
+
+  @override
+  String get bodyTabAvoid => 'تجنّب';
+
+  @override
+  String get bodySave => 'حفظ';
+
+  @override
+  String get bodyCancel => 'إلغاء';
+
+  @override
+  String get bodyDelete => 'حذف';
+
+  @override
+  String get bodyNameRequired => 'اكتب اسمًا';
+
+  @override
+  String bodyKg(String value) {
+    return '$value كغ';
+  }
+
+  @override
+  String bodyMinutes(String value) {
+    return '$value د';
+  }
+
+  @override
+  String bodyHours(String value) {
+    return '$value س';
+  }
+
+  @override
+  String bodyRepsValue(String value) {
+    return '$value تكرار';
+  }
+
+  @override
+  String bodySetsReps(String sets, String reps) {
+    return '$sets × $reps';
+  }
+
+  @override
+  String bodyMl(String value) {
+    return '$value مل';
+  }
+
+  @override
+  String bodyLiters(String value) {
+    return '$value لتر';
+  }
+
+  @override
+  String bodyFraction(String done, String total) {
+    return '$done من $total';
+  }
+
+  @override
+  String bodyDaysInRow(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n يوم متتالٍ',
+      many: '$n يومًا متتاليًا',
+      few: '$n أيام متتالية',
+      two: 'يومان متتاليان',
+      one: 'يوم واحد متتالٍ',
+      zero: 'لا سلسلة بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String bodyExercisesCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n تمرين',
+      many: '$n تمرينًا',
+      few: '$n تمارين',
+      two: 'تمرينان',
+      one: 'تمرين واحد',
+      zero: 'لا تمارين',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String bodyPerWeek(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n مرة في الأسبوع',
+      many: '$n مرة في الأسبوع',
+      few: '$n مرات في الأسبوع',
+      two: 'مرتان في الأسبوع',
+      one: 'مرة في الأسبوع',
+      zero: 'بلا أيام محددة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get bodyTodaySession => 'تمرين اليوم';
+
+  @override
+  String get bodyRestDay => 'يوم راحة';
+
+  @override
+  String get bodyRestDayBody => 'لا شيء في خطة اليوم. خذ قسطك من الراحة.';
+
+  @override
+  String bodyNextSession(String day) {
+    return 'التمرين القادم: $day';
+  }
+
+  @override
+  String get bodySessionDone => 'أنهيت تمرين اليوم — أحسنت!';
+
+  @override
+  String get bodySessionKeepGoing => 'خطوة بخطوة، اسحب التمرين لتسجيله.';
+
+  @override
+  String get bodyNoPlanTitle => 'لا خطة تمارين بعد';
+
+  @override
+  String get bodyNoPlanBody =>
+      'أضف تمارينك وأيامها من تبويب «الخطة»، وستظهر هنا في يومها.';
+
+  @override
+  String get bodyOpenPlan => 'إلى الخطة';
+
+  @override
+  String get bodyAlsoToday => 'أيضًا اليوم';
+
+  @override
+  String get bodyLogExtra => 'سجّل تمرينًا';
+
+  @override
+  String get bodyMarkDone => 'أنجزته';
+
+  @override
+  String get bodyUnmark => 'إلغاء الإنجاز';
+
+  @override
+  String bodyLogged(String summary) {
+    return 'أنجزت: $summary';
+  }
+
+  @override
+  String bodyLoggedToast(String name) {
+    return 'سُجّل «$name»';
+  }
+
+  @override
+  String bodyUnloggedToast(String name) {
+    return 'أُلغي تسجيل «$name»';
+  }
+
+  @override
+  String get bodyLogDetails => 'سجّل بالتفاصيل';
+
+  @override
+  String get bodyAvoidReminder => 'تذكّر أن تتجنّب';
+
+  @override
+  String get bodyStateDone => 'أُنجز';
+
+  @override
+  String get bodyStateOpen => 'لم يُنجز بعد';
+
+  @override
+  String get bodyPlanWeek => 'هذا الأسبوع';
+
+  @override
+  String get bodyPlanHint =>
+      'اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لبقية الخيارات.';
+
+  @override
+  String get bodyPlanEmptyTitle => 'خطتك فارغة';
+
+  @override
+  String get bodyPlanEmptyBody =>
+      'أضف تمارينك وأيامها — مثلًا: تمرين ضغط، السبت والإثنين والأربعاء، ٣ × ١٢.';
+
+  @override
+  String get bodyAddExercise => 'تمرين جديد';
+
+  @override
+  String get bodyEditExercise => 'تعديل التمرين';
+
+  @override
+  String get bodyExerciseSubtitle => 'حدّد أيامه وما تريد إنجازه في كل مرة.';
+
+  @override
+  String get bodyExerciseName => 'اسم التمرين';
+
+  @override
+  String get bodyExerciseNameHint => 'مثلًا: مشي سريع';
+
+  @override
+  String get bodyWeekdays => 'أيام التمرين';
+
+  @override
+  String get bodyEveryDay => 'كل يوم';
+
+  @override
+  String get bodyClearDays => 'مسح';
+
+  @override
+  String bodyListAnd(String head, String last) {
+    return '$head و$last';
+  }
+
+  @override
+  String get bodyListSep => '، ';
+
+  @override
+  String get bodyPartsSep => '، ';
+
+  @override
+  String get bodyNoDays => 'بلا أيام محددة — لن يظهر في «اليوم».';
+
+  @override
+  String get bodyTarget => 'في كل مرة';
+
+  @override
+  String get bodySets => 'المجموعات';
+
+  @override
+  String get bodyReps => 'التكرارات';
+
+  @override
+  String get bodyWeight => 'الوزن';
+
+  @override
+  String get bodyDuration => 'المدة';
+
+  @override
+  String get bodyNotes => 'ملاحظات';
+
+  @override
+  String get bodyNotesHint => 'مثلًا: ركّز على الوضعية';
+
+  @override
+  String get bodyUnitKg => 'كغ';
+
+  @override
+  String get bodyUnitMin => 'دقيقة';
+
+  @override
+  String get bodyUnitMl => 'مل';
+
+  @override
+  String get bodyUnitHours => 'ساعة';
+
+  @override
+  String bodyStepperDecrease(String label) {
+    return 'إنقاص $label';
+  }
+
+  @override
+  String bodyStepperIncrease(String label) {
+    return 'زيادة $label';
+  }
+
+  @override
+  String get bodyNotSet => '—';
+
+  @override
+  String get bodyExerciseHistory => 'السجل والتقدّم';
+
+  @override
+  String get bodyPause => 'إيقاف مؤقت';
+
+  @override
+  String get bodyResume => 'استئناف';
+
+  @override
+  String get bodyPaused => 'متوقف مؤقتًا';
+
+  @override
+  String bodyCopyName(String name) {
+    return '$name (نسخة)';
+  }
+
+  @override
+  String bodyDeletedName(String name) {
+    return 'حُذف «$name»';
+  }
+
+  @override
+  String bodyDuplicatedName(String name) {
+    return 'نُسخ «$name»';
+  }
+
+  @override
+  String bodyPausedName(String name) {
+    return 'أُوقف «$name» مؤقتًا';
+  }
+
+  @override
+  String bodyResumedName(String name) {
+    return 'عاد «$name» إلى الخطة';
+  }
+
+  @override
+  String get bodyLogTitle => 'تسجيل التمرين';
+
+  @override
+  String get bodyLogEditTitle => 'تعديل السجل';
+
+  @override
+  String get bodyLogSubtitle => 'القيم من خطتك — عدّلها لما أنجزته فعلًا.';
+
+  @override
+  String get bodyLogExtraSubtitle => 'تمرين خارج الخطة؟ سجّله هنا.';
+
+  @override
+  String get bodyLogWhen => 'الوقت';
+
+  @override
+  String get bodyLogSave => 'سجّل';
+
+  @override
+  String get bodyWorkoutName => 'التمرين';
+
+  @override
+  String get bodyWorkoutNameHint => 'مثلًا: سباحة';
+
+  @override
+  String bodyLogVolume(String value) {
+    return 'الحجم: $value';
+  }
+
+  @override
+  String get bodyHistoryEmpty =>
+      'لا سجلات بعد. عندما تنجز هذا التمرين يظهر تقدّمك هنا.';
+
+  @override
+  String get bodyHistoryOneDay => 'يظهر المنحنى بعد يومين من السجلات.';
+
+  @override
+  String get bodyMetricWeight => 'الوزن';
+
+  @override
+  String get bodyMetricVolume => 'الحجم';
+
+  @override
+  String get bodyMetricReps => 'التكرارات';
+
+  @override
+  String get bodyMetricMinutes => 'الدقائق';
+
+  @override
+  String get bodyBest => 'الأفضل';
+
+  @override
+  String get bodyChange => 'التغيّر';
+
+  @override
+  String get bodySessions => 'الجلسات';
+
+  @override
+  String get bodyVolumeHint => 'الحجم = المجموعات × التكرارات × الوزن';
+
+  @override
+  String get bodyLogs => 'السجلات';
+
+  @override
+  String get bodyLogDeleted => 'حُذف السجل';
+
+  @override
+  String get bodyLogUpdated => 'حُدّث السجل';
+
+  @override
+  String get bodyFastingTitle => 'الصيام المتقطّع';
+
+  @override
+  String get bodyFastPhaseFasting => 'صائم';
+
+  @override
+  String get bodyFastPhaseEating => 'نافذة الأكل';
+
+  @override
+  String get bodyFastPhaseWaiting => 'خارج الصيام';
+
+  @override
+  String bodyFastRemaining(String time) {
+    return 'بقي $time';
+  }
+
+  @override
+  String bodyFastGoalAt(String time) {
+    return 'الهدف $time';
+  }
+
+  @override
+  String get bodyFastReached => 'بلغت هدفك!';
+
+  @override
+  String bodyFastOvertime(String time) {
+    return '$time فوق الهدف';
+  }
+
+  @override
+  String get bodyFastTimeNow => 'حان وقت صيامك';
+
+  @override
+  String bodyEatingClosesIn(String time) {
+    return 'تُغلق بعد $time';
+  }
+
+  @override
+  String bodyEatingClosesAt(String time) {
+    return 'آخر وجبة $time';
+  }
+
+  @override
+  String bodyNextFastAt(String time) {
+    return 'الصيام القادم $time';
+  }
+
+  @override
+  String bodyWindowOpensAt(String time) {
+    return 'تُفتح نافذة الأكل $time';
+  }
+
+  @override
+  String get bodyStartFast => 'ابدأ الصيام';
+
+  @override
+  String get bodyEndFast => 'أنهِ الصيام';
+
+  @override
+  String get bodyStartedEarlier => 'بدأت قبل الآن؟';
+
+  @override
+  String get bodyFastStartTitle => 'متى بدأ صيامك؟';
+
+  @override
+  String get bodyFastStarted => 'بدأ صيامك — بالتوفيق';
+
+  @override
+  String bodyFastEnded(String duration) {
+    return 'انتهى صيامك: $duration';
+  }
+
+  @override
+  String get bodyFastPlan => 'خطة الصيام';
+
+  @override
+  String get bodyFastHours => 'ساعات الصيام';
+
+  @override
+  String get bodyFastCustom => 'مخصّص';
+
+  @override
+  String get bodyFastCustomTitle => 'ساعات صيام مخصّصة';
+
+  @override
+  String get bodyFastCustomHint => 'من ساعة إلى ٧٢ ساعة';
+
+  @override
+  String bodyFastRatioHint(String fast, String eat) {
+    return '$fast ساعة صيام، ثم $eat ساعات للأكل';
+  }
+
+  @override
+  String bodyFastLongHint(String fast) {
+    return 'صيام $fast ساعة، بلا نافذة أكل يومية';
+  }
+
+  @override
+  String get bodyLastMeal => 'آخر وجبة';
+
+  @override
+  String get bodyLastMealHint => 'يبدأ صيامك المخطط عندها.';
+
+  @override
+  String get bodyNotifyGoal => 'نبّهني عند بلوغ الهدف';
+
+  @override
+  String get bodyNotifyEating => 'ذكّرني قبل إغلاق نافذة الأكل';
+
+  @override
+  String bodyLeadBefore(String n) {
+    return 'قبلها بـ$n د';
+  }
+
+  @override
+  String get bodyLeadAtTime => 'في وقتها';
+
+  @override
+  String get bodyStatStreak => 'السلسلة';
+
+  @override
+  String get bodyStatLongest => 'الأطول';
+
+  @override
+  String get bodyStatAverage => 'المتوسط';
+
+  @override
+  String get bodyStatCompleted => 'بلغت الهدف';
+
+  @override
+  String get bodyFastHistory => 'سجل الصيام';
+
+  @override
+  String get bodyFastHistoryEmpty =>
+      'لا صيام مسجّل بعد. اضغط «ابدأ الصيام» بعد آخر وجبة.';
+
+  @override
+  String bodyFastGoalBadge(String hours) {
+    return 'الهدف $hours س';
+  }
+
+  @override
+  String get bodyFastEditTitle => 'تعديل الصيام';
+
+  @override
+  String get bodyFastStartDate => 'يوم البدء';
+
+  @override
+  String get bodyFastStartTime => 'وقت البدء';
+
+  @override
+  String get bodyFastEndDate => 'يوم الانتهاء';
+
+  @override
+  String get bodyFastEndTime => 'وقت الانتهاء';
+
+  @override
+  String get bodyFastGoalHours => 'الهدف';
+
+  @override
+  String get bodyFastNote => 'ملاحظة';
+
+  @override
+  String get bodyFastNoteHint => 'مثلًا: صيام رمضان، صيام تطوّع';
+
+  @override
+  String get bodyFastEndBeforeStart => 'الانتهاء قبل البدء';
+
+  @override
+  String get bodyFastInFuture => 'هذا الوقت لم يأتِ بعد';
+
+  @override
+  String get bodyFastDeleted => 'حُذف الصيام';
+
+  @override
+  String get bodyFastUpdated => 'حُدّث الصيام';
+
+  @override
+  String bodyFastRingSemantics(String phase, String detail) {
+    return '$phase: $detail';
+  }
+
+  @override
+  String get bodyWaterTitle => 'الماء';
+
+  @override
+  String bodyWaterOf(String target) {
+    return 'من $target';
+  }
+
+  @override
+  String bodyAddAmount(String amount) {
+    return '+$amount';
+  }
+
+  @override
+  String bodyAddWaterSemantics(String amount) {
+    return 'أضف $amount';
+  }
+
+  @override
+  String get bodyWaterCustom => 'كمية أخرى';
+
+  @override
+  String get bodyWaterCustomTitle => 'كم شربت؟';
+
+  @override
+  String get bodyWaterAmount => 'الكمية';
+
+  @override
+  String get bodyWaterTarget => 'الهدف اليومي';
+
+  @override
+  String get bodyWaterTargetTitle => 'هدف الماء اليومي';
+
+  @override
+  String bodyWaterTargetSaved(String amount) {
+    return 'الهدف الآن $amount';
+  }
+
+  @override
+  String get bodyWaterGoalMet => 'بلغت هدف اليوم!';
+
+  @override
+  String bodyWaterLeft(String amount) {
+    return 'بقي $amount';
+  }
+
+  @override
+  String get bodyWaterWeek => 'الأسبوع الأخير';
+
+  @override
+  String bodyWaterAverage(String amount) {
+    return 'المتوسط $amount';
+  }
+
+  @override
+  String get bodyWaterToday => 'سجل اليوم';
+
+  @override
+  String get bodyWaterEmptyToday =>
+      'لم تسجّل ماءً اليوم بعد — كوب واحد بداية جيدة.';
+
+  @override
+  String bodyWaterAdded(String amount) {
+    return 'أُضيف $amount';
+  }
+
+  @override
+  String bodyWaterRemoved(String amount) {
+    return 'حُذف $amount';
+  }
+
+  @override
+  String get bodyWaterEditTitle => 'تعديل الكمية';
+
+  @override
+  String get bodyWaterUpdated => 'حُدّثت الكمية';
+
+  @override
+  String get bodyAvoidTitle => 'قائمة التجنّب';
+
+  @override
+  String get bodyAvoidSubtitle =>
+      'حركات وأطعمة اخترت أن تبتعد عنها، مع أسبابك أنت.';
+
+  @override
+  String get bodyAvoidAdd => 'أضف إلى القائمة';
+
+  @override
+  String get bodyAvoidEdit => 'تعديل البند';
+
+  @override
+  String get bodyAvoidWhat => 'ماذا تتجنّب؟';
+
+  @override
+  String get bodyAvoidWhatHint => 'مثلًا: رفع الأثقال فوق الرأس';
+
+  @override
+  String get bodyAvoidReason => 'السبب';
+
+  @override
+  String get bodyAvoidReasonHint => 'مثلًا: بحسب نصيحة المختص';
+
+  @override
+  String get bodyAvoidEmptyTitle => 'القائمة فارغة';
+
+  @override
+  String get bodyAvoidEmptyBody =>
+      'دوّن ما تريد تجنّبه ولماذا — مثلًا: المشروبات الغازية، أو القرفصاء العميقة.';
+
+  @override
+  String get bodyAvoidRemoved => 'حُذف من القائمة';
+
+  @override
+  String get bodyAvoidNoReason => 'بلا سبب مكتوب';
+
+  @override
+  String get bodyCardTitle => 'الجسد اليوم';
+
+  @override
+  String get bodyCardTraining => 'التمرين';
+
+  @override
+  String get bodyCardFasting => 'الصيام';
+
+  @override
+  String get bodyCardWater => 'الماء';
+
+  @override
+  String get bodyNotifyGroup => 'الجسد';
+
+  @override
+  String get bodyNotifyChannel => 'تنبيهات الصيام';
+
+  @override
+  String get bodyNotifyChannelDescription =>
+      'بلوغ هدف الصيام واقتراب إغلاق نافذة الأكل';
+
+  @override
+  String get bodyNotifyGoalTitle => 'بلغت هدف صيامك';
+
+  @override
+  String bodyNotifyGoalBody(String hours) {
+    return 'أتممت $hours ساعة صيام — أحسنت.';
+  }
+
+  @override
+  String get bodyNotifyEatingTitle => 'نافذة الأكل تُغلق قريبًا';
+
+  @override
+  String bodyNotifyEatingBody(String time) {
+    return 'آخر وجبة عند $time.';
+  }
+
+  @override
+  String get bodyNotifyHint => 'يحتاج إذن الإشعارات على الهاتف.';
 }
