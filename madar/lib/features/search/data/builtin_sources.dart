@@ -9,9 +9,6 @@ import '../domain/search_doc.dart';
 import 'custom_module_source.dart';
 import 'search_source.dart';
 
-/// Joins non-empty parts with « · ».
-String _join(Iterable<String?> parts) => SearchLoadContext.join(parts);
-
 /// Non-empty [lines], one per line.
 String _lines(Iterable<String?> lines) => lines.where((l) => l != null && l.trim().isNotEmpty).join('\n');
 
@@ -25,13 +22,14 @@ DateTime? _day(String day) {
   return y == null || m == null || d == null ? null : DateTime(y, m, d);
 }
 
+/// A prayer window by its prayer's name («العصر»), as tasks are filed.
 String _window(L10n l, PrayerWindow w) => switch (w) {
-  PrayerWindow.fajr => l.windowFajr,
-  PrayerWindow.duha => l.windowDuha,
-  PrayerWindow.dhuhr => l.windowDhuhr,
-  PrayerWindow.asr => l.windowAsr,
-  PrayerWindow.maghrib => l.windowMaghrib,
-  PrayerWindow.isha => l.windowIsha,
+  PrayerWindow.fajr => l.prayerFajr,
+  PrayerWindow.duha => l.trackerDuha,
+  PrayerWindow.dhuhr => l.prayerDhuhr,
+  PrayerWindow.asr => l.prayerAsr,
+  PrayerWindow.maghrib => l.prayerMaghrib,
+  PrayerWindow.isha => l.prayerIsha,
   PrayerWindow.anytime => l.windowAnytime,
 };
 
@@ -123,7 +121,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'tasks',
         refId: t.id,
         title: t.title,
-        subtitle: _join([
+        subtitle: c.join([
           if (t.window != PrayerWindow.anytime) _window(c.l10n, t.window),
           if (t.done) c.l10n.searchDone,
         ]),
@@ -168,7 +166,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'prayer_logs',
         refId: p.id,
         title: _prayer(c.l10n, p.prayer),
-        subtitle: _join([
+        subtitle: c.join([
           _prayerStatus(c.l10n, p.status),
           if (p.inJamaah) c.l10n.trackerJamaah,
           if (p.atMosque) c.l10n.trackerMosque,
@@ -237,7 +235,7 @@ abstract final class BuiltInSearchSources {
           refTable: 'hifz_items',
           refId: h.id,
           title: _has(h.title) ? h.title! : (range ?? c.l10n.searchSourceHifz),
-          subtitle: _join([if (_has(h.title)) range, h.source]),
+          subtitle: c.join([if (_has(h.title)) range, h.source]),
           body: h.body ?? '',
           date: h.due ?? h.createdAt,
           planetKey: 'faith',
@@ -284,7 +282,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'medications',
         refId: m.id,
         title: m.name,
-        subtitle: _join([m.dose, if (m.times.isNotEmpty) c.formatter.localizeDigits(m.times.join(' '))]),
+        subtitle: c.join([m.dose, if (m.times.isNotEmpty) c.formatter.localizeDigits(m.times.join(' '))]),
         body: _lines([m.notes, m.takenWithNote]),
         planetKey: 'health',
       ),
@@ -349,7 +347,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'lab_tests',
         refId: x.id,
         title: x.name,
-        subtitle: _join([
+        subtitle: c.join([
           x.category,
           if (x.low != null && x.high != null) '${c.number(x.low!)}–${c.number(x.high!)} ${x.unit ?? ''}'.trim(),
         ]),
@@ -397,7 +395,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'appointments',
         refId: a.id,
         title: a.title,
-        subtitle: _join([a.doctor, a.place]),
+        subtitle: c.join([a.doctor, a.place]),
         body: a.notes ?? '',
         date: a.at,
         planetKey: 'health',
@@ -438,8 +436,8 @@ abstract final class BuiltInSearchSources {
         id: p.id,
         refTable: 'pain_entries',
         refId: p.id,
-        title: c.l10n.searchPainTitle(c.formatter.formatInt(p.score)),
-        subtitle: _join([...p.locations, ...p.triggers]),
+        title: c.l10n.searchPainTitle(c.formatter.formatInt(p.score), c.formatter.formatInt(10)),
+        subtitle: c.join([...p.locations, ...p.triggers]),
         body: p.notes ?? '',
         date: p.at,
         planetKey: 'health',
@@ -459,7 +457,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'mood_entries',
               refId: m.id,
               title: c.l10n.searchMoodTitle,
-              subtitle: _join(m.factors),
+              subtitle: c.join(m.factors),
               body: m.notes ?? '',
               date: m.at,
               planetKey: 'health',
@@ -503,7 +501,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'wallets',
         refId: w.id,
         title: w.name,
-        subtitle: _join([w.currency, if (w.archived) c.l10n.searchArchived]),
+        subtitle: c.join([w.currency, if (w.archived) c.l10n.searchArchived]),
         planetKey: 'money',
       ),
     ),
@@ -528,11 +526,11 @@ abstract final class BuiltInSearchSources {
                 refTable: 'transactions',
                 refId: t.id,
                 title: note.isNotEmpty ? note : (category ?? kind),
-                subtitle: _join([
+                subtitle: c.join([
                   c.money(t.amountMilli, wallet?.currency ?? 'JOD'),
                   kind,
                   wallet?.name,
-                  if (t.toWalletId != null) '→ ${wallets[t.toWalletId]?.name ?? ''}',
+                  if (wallets[t.toWalletId] case final to?) '→ ${to.name}',
                   if (note.isNotEmpty) category,
                 ]),
                 body: t.tags.map((tag) => '#$tag').join(' '),
@@ -560,7 +558,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'budget_items',
               refId: b.id,
               title: b.name,
-              subtitle: _join([
+              subtitle: c.join([
                 names[b.parentId],
                 if (b.amountMilli != null && b.mode == BudgetMode.amount) c.money(b.amountMilli!, b.currency ?? 'JOD'),
                 if (b.percent != null && b.mode == BudgetMode.percent) c.formatter.formatPercent(b.percent! / 100),
@@ -581,7 +579,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'jars',
         refId: j.id,
         title: j.name,
-        subtitle: _join([c.money(j.targetMilli, j.currency), if (j.archived) c.l10n.searchArchived]),
+        subtitle: c.join([c.money(j.targetMilli, j.currency), if (j.archived) c.l10n.searchArchived]),
         date: j.deadline,
         planetKey: 'money',
       ),
@@ -602,7 +600,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'jar_deposits',
               refId: d.id,
               title: d.note!.trim(),
-              subtitle: _join([jars[d.jarId]?.name, c.money(d.amountMilli, jars[d.jarId]?.currency ?? 'JOD')]),
+              subtitle: c.join([jars[d.jarId]?.name, c.money(d.amountMilli, jars[d.jarId]?.currency ?? 'JOD')]),
               date: d.date,
               planetKey: 'money',
               extra: {'jarId': d.jarId},
@@ -621,7 +619,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'debts',
         refId: d.id,
         title: d.person,
-        subtitle: _join([
+        subtitle: c.join([
           d.direction == DebtDirection.iOwe ? c.l10n.searchDebtIOwe : c.l10n.searchDebtOwedToMe,
           c.money(d.amountMilli, d.currency),
           if (d.settledAt != null) c.l10n.searchDone,
@@ -647,7 +645,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'debt_payments',
               refId: p.id,
               title: p.note!.trim(),
-              subtitle: _join([debts[p.debtId]?.person, c.money(p.amountMilli, debts[p.debtId]?.currency ?? 'JOD')]),
+              subtitle: c.join([debts[p.debtId]?.person, c.money(p.amountMilli, debts[p.debtId]?.currency ?? 'JOD')]),
               date: p.date,
               planetKey: 'money',
               extra: {'debtId': p.debtId},
@@ -751,7 +749,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'project_items',
               refId: i.id,
               title: i.body,
-              subtitle: _join([projects[i.projectId]?.name, if (i.done) c.l10n.searchDone]),
+              subtitle: c.join([projects[i.projectId]?.name, if (i.done) c.l10n.searchDone]),
               date: i.dueDate,
               planetKey: projects[i.projectId]?.planetKey ?? 'work',
               extra: {'projectId': i.projectId},
@@ -796,7 +794,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'board_cards',
               refId: k.id,
               title: k.title,
-              subtitle: _join([boards[k.boardId]?.name, column(boards[k.boardId], k.columnId), k.assignee]),
+              subtitle: c.join([boards[k.boardId]?.name, column(boards[k.boardId], k.columnId), k.assignee]),
               body: k.notes ?? '',
               date: k.dueDate,
               planetKey: 'work',
@@ -840,7 +838,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'trip_items',
               refId: i.id,
               title: i.body,
-              subtitle: _join([trips[i.tripId]?.destination, i.category]),
+              subtitle: c.join([trips[i.tripId]?.destination, i.category]),
               date: trips[i.tripId]?.startDate,
               planetKey: 'travel',
               extra: {'tripId': i.tripId},
@@ -859,7 +857,7 @@ abstract final class BuiltInSearchSources {
         refTable: 'packing_templates',
         refId: p.id,
         title: p.name,
-        body: p.items.join(' · '),
+        body: p.items.join(c.listSeparator),
         planetKey: 'travel',
       ),
     ),
@@ -915,7 +913,7 @@ abstract final class BuiltInSearchSources {
               refTable: 'goal_logs',
               refId: x.id,
               title: x.note!.trim(),
-              subtitle: _join([goals[x.goalId]?.name, '${c.number(x.amount)} ${goals[x.goalId]?.unit ?? ''}'.trim()]),
+              subtitle: c.join([goals[x.goalId]?.name, '${c.number(x.amount)} ${goals[x.goalId]?.unit ?? ''}'.trim()]),
               date: x.at,
               planetKey: 'growth',
               extra: {'goalId': x.goalId},
@@ -983,7 +981,7 @@ abstract final class BuiltInSearchSources {
             refTable: 'fasting_sessions',
             refId: f.id,
             title: f.note!.trim(),
-            subtitle: _join([c.l10n.searchFastingTitle, c.number(f.targetHours)]),
+            subtitle: c.join([c.l10n.searchFastingTitle, c.number(f.targetHours)]),
             date: f.start,
             planetKey: 'body',
           ),
@@ -995,7 +993,7 @@ abstract final class BuiltInSearchSources {
     CustomModuleSearch.entries(),
   ];
 
-  static String _workout(SearchLoadContext c, int? sets, int? reps, double? weight, int? minutes) => _join([
+  static String _workout(SearchLoadContext c, int? sets, int? reps, double? weight, int? minutes) => c.join([
     if (sets != null && reps != null)
       c.formatter.localizeDigits('$sets×$reps')
     else if (sets != null)

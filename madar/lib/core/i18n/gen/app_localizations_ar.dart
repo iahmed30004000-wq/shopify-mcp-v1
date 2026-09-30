@@ -18391,7 +18391,8 @@ class L10nAr extends L10n {
   String get cinemaMetropolisTagline => 'واجه الآلات العملاقة واحدة تلو الأخرى';
 
   @override
-  String get cinemaMetropolisHomage => 'تحية لفيلم «متروبوليس» الصامت (1927)';
+  String get cinemaMetropolisHomage =>
+      'تحية لفيلم «متروبوليس» الصامت من العشرينيات';
 
   @override
   String get cinemaCaravanTitle => 'سباق القافلة';
@@ -18455,6 +18456,24 @@ class L10nAr extends L10n {
 
   @override
   String get cinemaCancel => 'إلغاء';
+
+  @override
+  String get cinemaFxTestCard => 'بطاقة المعايرة';
+
+  @override
+  String get cinemaFxFilmLook => 'مظهر الفيلم';
+
+  @override
+  String get cinemaFxQualityLowPower => 'توفير الطاقة';
+
+  @override
+  String get cinemaFxQualityBalanced => 'متوازن';
+
+  @override
+  String get cinemaFxQualityFull => 'أعلى دقة';
+
+  @override
+  String get cinemaFxReelLabel => 'بكرة';
 
   @override
   String get dataCentreTitle => 'بياناتك';
@@ -19916,8 +19935,8 @@ class L10nAr extends L10n {
   String get searchChannelOther => 'تواصل';
 
   @override
-  String searchPainTitle(String score) {
-    return 'ألم $score/10';
+  String searchPainTitle(String score, String max) {
+    return 'ألم $score/$max';
   }
 
   @override
@@ -19928,12 +19947,12 @@ class L10nAr extends L10n {
 
   @override
   String searchAyahPlace(String surah, String ayah) {
-    return '$surah · الآية $ayah';
+    return '$surah، الآية $ayah';
   }
 
   @override
   String searchAyahRange(String surah, String from, String to) {
-    return '$surah · $from–$to';
+    return '$surah $from–$to';
   }
 
   @override
@@ -20081,9 +20100,6 @@ class L10nAr extends L10n {
 
   @override
   String get ncTitle => 'الإشعارات';
-
-  @override
-  String get ncSubtitle => 'ما وصلك وما سيصلك، في مكان واحد';
 
   @override
   String get ncTabUpcoming => 'القادمة';
@@ -20434,20 +20450,6 @@ class L10nAr extends L10n {
   }
 
   @override
-  String ncMutedBanner(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count مجموعة مكتومة',
-      many: '$count مجموعة مكتومة',
-      few: '$count مجموعات مكتومة',
-      two: 'مجموعتان مكتومتان',
-      one: 'مجموعة مكتومة',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get ncSettingsTitle => 'الإشعارات';
 
   @override
@@ -20510,5 +20512,657 @@ class L10nAr extends L10n {
       zero: 'الإشعارات',
     );
     return '$_temp0';
+  }
+
+  @override
+  String get ncActionCancelSnooze => 'ألغِ التأجيل';
+
+  @override
+  String get ncActionSnoozeMenu => 'أجِّل…';
+
+  @override
+  String get ncSnoozeTitle => 'أعِده بعد قليل';
+
+  @override
+  String get ncSnoozeSubtitle =>
+      'يختفي الآن، ثم يصلك من جديد في الوقت الذي تختاره.';
+
+  @override
+  String ncOptionUntil(String time) {
+    return 'حتى $time';
+  }
+
+  @override
+  String ncOptionAt(String time) {
+    return 'يعود $time';
+  }
+
+  @override
+  String ncRecentCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشعار',
+      many: '$count إشعارًا',
+      few: '$count إشعارات',
+      two: 'إشعاران',
+      one: 'إشعار واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUpcomingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشعار في الأيام السبعة القادمة',
+      many: '$count إشعارًا في الأيام السبعة القادمة',
+      few: '$count إشعارات في الأيام السبعة القادمة',
+      two: 'إشعاران في الأيام السبعة القادمة',
+      one: 'إشعار واحد في الأيام السبعة القادمة',
+      zero: 'لا شيء في الأيام السبعة القادمة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncNewCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جديد',
+      many: '$count جديدًا',
+      few: '$count جديدة',
+      two: 'اثنان جديدان',
+      one: 'واحد جديد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUntilTomorrow(String time) {
+    return 'غدًا $time';
+  }
+
+  @override
+  String get aiChatTitle => 'المحادثة الذكية';
+
+  @override
+  String get aiChatNewChat => 'محادثة جديدة';
+
+  @override
+  String get aiChatListTitle => 'المحادثات';
+
+  @override
+  String get aiChatSettingsTitle => 'إعدادات الذكاء الاصطناعي';
+
+  @override
+  String get aiChatSettingsRowSubtitle => 'المفاتيح والنموذج وطول الرد';
+
+  @override
+  String get aiChatAskAi => 'اسأل الذكاء الاصطناعي';
+
+  @override
+  String get aiChatAskAiSubtitle => 'بمفتاحك الخاص، وأنت تختار ما يُرسل';
+
+  @override
+  String aiChatAskAbout(String area) {
+    return 'اسأل عن $area';
+  }
+
+  @override
+  String get aiChatMenu => 'المزيد';
+
+  @override
+  String get aiChatOpenList => 'كل المحادثات';
+
+  @override
+  String get aiChatInputHint => 'اكتب رسالتك…';
+
+  @override
+  String get aiChatSend => 'إرسال';
+
+  @override
+  String get aiChatStop => 'إيقاف';
+
+  @override
+  String get aiChatThinking => 'يفكّر…';
+
+  @override
+  String get aiChatWriting => 'يكتب الرد';
+
+  @override
+  String get aiChatWillSend => 'سيُرسل';
+
+  @override
+  String get aiChatContextReviewFirst =>
+      'ستراجع ما يُشارك من ملخّصك قبل أول إرسال';
+
+  @override
+  String get aiChatContextNone => 'بلا سياق شخصي';
+
+  @override
+  String aiChatContextSections(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count قسم من ملخّصك',
+      many: '$count قسمًا من ملخّصك',
+      few: '$count أقسام من ملخّصك',
+      two: 'قسمان من ملخّصك',
+      one: 'قسم واحد من ملخّصك',
+      zero: 'لا أقسام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatMessagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count رسالة',
+      many: '$count رسالة',
+      few: '$count رسائل',
+      two: 'رسالتان',
+      one: 'رسالة واحدة',
+      zero: 'لا رسائل',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatApproxTokens(String count) {
+    return '≈ $count رمز';
+  }
+
+  @override
+  String aiChatStripSemantics(String summary) {
+    return 'سيُرسل: $summary. انقر للمراجعة أو التغيير';
+  }
+
+  @override
+  String aiChatOmitted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count رسالة أقدم لن تُرسل',
+      many: '$count رسالة أقدم لن تُرسل',
+      few: '$count رسائل أقدم لن تُرسل',
+      two: 'رسالتان أقدم لن تُرسلا',
+      one: 'رسالة أقدم لن تُرسل',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aiChatContextTitle => 'ما الذي سيُرسل';
+
+  @override
+  String get aiChatContextSubtitle => 'لا يُرسل شيء إلا حين تضغط «إرسال»';
+
+  @override
+  String get aiChatContextFromSummary => 'من ملخّصك';
+
+  @override
+  String get aiChatContextChange => 'مراجعة الأقسام';
+
+  @override
+  String get aiChatContextChoose => 'اختيار الأقسام';
+
+  @override
+  String get aiChatContextNoneHint =>
+      'لن يُرسل شيء من بياناتك، فقط رسائل هذه المحادثة.';
+
+  @override
+  String get aiChatContextUnsetHint =>
+      'عند أول إرسال ستظهر معاينة الملخّص لتختار الأقسام أو تستبعد ما تشاء.';
+
+  @override
+  String get aiChatContextUse => 'استخدمه في المحادثة';
+
+  @override
+  String get aiChatContextUseAndSend => 'استخدمه وأرسل';
+
+  @override
+  String aiChatContextReviewed(String when) {
+    return 'راجعته $when';
+  }
+
+  @override
+  String get aiChatContextCancelled => 'لم يُرسل شيء.';
+
+  @override
+  String aiChatServiceModel(String service, String model) {
+    return '$service · $model';
+  }
+
+  @override
+  String get aiChatViewPayload => 'عرض الطلب كما سيُرسل';
+
+  @override
+  String get aiChatDone => 'تم';
+
+  @override
+  String get aiChatPayloadTitle => 'الطلب كما سيُرسل';
+
+  @override
+  String get aiChatPayloadEndpoint => 'العنوان';
+
+  @override
+  String get aiChatPayloadHeaders => 'الترويسات (المفتاح مخفي)';
+
+  @override
+  String get aiChatPayloadSystem => 'التعليمات والسياق';
+
+  @override
+  String get aiChatPayloadMessages => 'الرسائل';
+
+  @override
+  String get aiChatPayloadRaw => 'النص الكامل (JSON)';
+
+  @override
+  String get aiChatPayloadDraftNote =>
+      'يشمل رسالتك الجاري كتابتها. لن يُرسل إلا حين تضغط «إرسال».';
+
+  @override
+  String get aiChatPayloadNoDraft => 'اكتب رسالة لترى الطلب كاملًا.';
+
+  @override
+  String aiChatPayloadSize(String size, String tokens) {
+    return '$size · ≈ $tokens رمز';
+  }
+
+  @override
+  String aiChatBytes(String count) {
+    return '$count بايت';
+  }
+
+  @override
+  String aiChatKiloBytes(String count) {
+    return '$count ك.ب';
+  }
+
+  @override
+  String get aiChatRoleUser => 'أنت';
+
+  @override
+  String get aiChatRoleAssistant => 'المساعد';
+
+  @override
+  String get aiChatCopy => 'نسخ';
+
+  @override
+  String get aiChatCopied => 'نُسخ';
+
+  @override
+  String get aiChatCopyCode => 'نسخ الشيفرة';
+
+  @override
+  String get aiChatRegenerate => 'إعادة كتابة الرد';
+
+  @override
+  String get aiChatRetry => 'إعادة المحاولة';
+
+  @override
+  String get aiChatStopped => 'أوقفتَ الرد';
+
+  @override
+  String get aiChatCutShort =>
+      'توقّف الرد عند حدّ الطول. يمكنك رفعه من الإعدادات.';
+
+  @override
+  String get aiChatRefused => 'امتنع النموذج عن الإجابة.';
+
+  @override
+  String get aiChatFiltered => 'أوقف مرشّح المحتوى الرد.';
+
+  @override
+  String get aiChatHealthNote =>
+      'للمتابعة فقط وليس نصيحة طبية؛ استشر طبيبك في أي قرار صحي.';
+
+  @override
+  String aiChatOpenLink(String url) {
+    return 'فتح الرابط $url';
+  }
+
+  @override
+  String get aiChatLinkFailed => 'تعذّر فتح الرابط.';
+
+  @override
+  String aiChatErrorNoKey(String service) {
+    return 'أضف مفتاح $service أولًا.';
+  }
+
+  @override
+  String aiChatErrorBadKey(String service) {
+    return 'رفضت $service المفتاح. تحقّق منه أو استبدله في الإعدادات.';
+  }
+
+  @override
+  String get aiChatErrorForbidden =>
+      'لا يملك هذا المفتاح صلاحية استخدام هذا النموذج.';
+
+  @override
+  String get aiChatErrorRateLimited =>
+      'طلبات كثيرة الآن. انتظر قليلًا ثم أعد المحاولة.';
+
+  @override
+  String aiChatErrorRetryAfter(String seconds) {
+    return 'يمكنك المحاولة بعد $seconds ث.';
+  }
+
+  @override
+  String aiChatErrorQuota(String service) {
+    return 'نفد الرصيد أو بلغتَ حدّ الإنفاق لدى $service.';
+  }
+
+  @override
+  String aiChatErrorOverloaded(String service) {
+    return '$service مشغولة الآن. أعد المحاولة بعد قليل.';
+  }
+
+  @override
+  String aiChatErrorServer(String service) {
+    return 'حدث خلل لدى $service. أعد المحاولة.';
+  }
+
+  @override
+  String aiChatErrorModelNotFound(String model) {
+    return 'النموذج «$model» غير متاح لهذا المفتاح. اختر نموذجًا آخر.';
+  }
+
+  @override
+  String get aiChatErrorTemperature =>
+      'لا يقبل هذا النموذج درجة حرارة مخصّصة. اجعلها «افتراضي النموذج» في الإعدادات.';
+
+  @override
+  String get aiChatErrorContextTooLong =>
+      'المحادثة أطول مما يحتمله النموذج. ابدأ محادثة جديدة أو شارك أقسامًا أقل.';
+
+  @override
+  String aiChatErrorBadRequest(String service) {
+    return 'رفضت $service الطلب.';
+  }
+
+  @override
+  String get aiChatErrorNetwork => 'لا اتصال بالإنترنت، أو انقطع الاتصال.';
+
+  @override
+  String get aiChatErrorTimeout => 'لم يصل ردّ في الوقت المناسب.';
+
+  @override
+  String get aiChatErrorBadResponse => 'وصل ردّ تعذّرت قراءته.';
+
+  @override
+  String get aiChatErrorUnknown => 'حدث خطأ غير متوقّع.';
+
+  @override
+  String get aiChatOpenSettings => 'فتح الإعدادات';
+
+  @override
+  String get aiChatSetupTitle => 'اربط مفتاحك الخاص';
+
+  @override
+  String get aiChatSetupBody =>
+      'تعمل المحادثة بمفتاح API منك لدى Anthropic أو OpenAI. يُحفظ مشفّرًا على هذا الهاتف فقط، ولا يدخل النسخ الاحتياطية ولا التصدير.';
+
+  @override
+  String aiChatSetupAdd(String service) {
+    return 'إضافة مفتاح $service';
+  }
+
+  @override
+  String get aiChatSetupPrivacy =>
+      'لا يُرسل شيء إلا حين تضغط «إرسال»، وترى قبلها ما سيُرسل بالضبط.';
+
+  @override
+  String get aiChatEmptyTitle => 'بمَ أساعدك اليوم؟';
+
+  @override
+  String get aiChatEmptyBody =>
+      'اسأل عن يومك أو صلاتك أو ميزانيتك أو أهدافك. تختار ما يُشارك من ملخّصك قبل الإرسال.';
+
+  @override
+  String get aiChatSuggestWeek => 'لخّص أسبوعي في نقاط قليلة';
+
+  @override
+  String get aiChatSuggestBudget => 'كيف أحسّن ميزانيتي هذا الشهر؟';
+
+  @override
+  String get aiChatSuggestPlan => 'ساعدني أخطّط لغدٍ متوازن';
+
+  @override
+  String get aiChatSuggestPrayer => 'كيف أحافظ على الصلاة في وقتها؟';
+
+  @override
+  String get aiChatListEmptyTitle => 'لا محادثات بعد';
+
+  @override
+  String get aiChatListEmptyBody => 'ابدأ محادثة، وتُحفظ هنا مشفّرة على هاتفك.';
+
+  @override
+  String get aiChatRename => 'إعادة التسمية';
+
+  @override
+  String get aiChatRenameField => 'اسم المحادثة';
+
+  @override
+  String get aiChatRenameSave => 'حفظ الاسم';
+
+  @override
+  String get aiChatDelete => 'حذف المحادثة';
+
+  @override
+  String get aiChatDeleted => 'حُذفت المحادثة';
+
+  @override
+  String get aiChatDeleteAll => 'حذف كل المحادثات';
+
+  @override
+  String get aiChatDeletedAll => 'حُذفت كل المحادثات';
+
+  @override
+  String get aiChatUntitled => 'محادثة بلا عنوان';
+
+  @override
+  String aiChatListLimitNote(String count) {
+    return 'تُحفظ آخر $count محادثة؛ الأقدم يُحذف تلقائيًا.';
+  }
+
+  @override
+  String aiChatListUpdated(String when, String messages) {
+    return '$when · $messages';
+  }
+
+  @override
+  String get aiChatToday => 'اليوم';
+
+  @override
+  String get aiChatYesterday => 'أمس';
+
+  @override
+  String get aiChatSettingsService => 'الخدمة';
+
+  @override
+  String get aiChatServiceAnthropic => 'Anthropic';
+
+  @override
+  String get aiChatServiceOpenai => 'OpenAI';
+
+  @override
+  String get aiChatSettingsKeys => 'مفاتيح API';
+
+  @override
+  String aiChatKeyTitle(String service) {
+    return 'مفتاح $service';
+  }
+
+  @override
+  String aiChatKeySaved(String mask) {
+    return 'محفوظ · $mask';
+  }
+
+  @override
+  String get aiChatKeyNotSet => 'لم يُضف بعد';
+
+  @override
+  String get aiChatKeySheetSubtitle => 'يُحفظ مشفّرًا على هذا الهاتف فقط.';
+
+  @override
+  String get aiChatKeyCurrent => 'المفتاح الحالي';
+
+  @override
+  String get aiChatKeyField => 'المفتاح';
+
+  @override
+  String get aiChatKeyFieldHint => 'الصق المفتاح هنا';
+
+  @override
+  String get aiChatKeyPaste => 'لصق';
+
+  @override
+  String get aiChatKeySave => 'حفظ المفتاح';
+
+  @override
+  String get aiChatKeyReplace => 'استبدال المفتاح';
+
+  @override
+  String get aiChatKeyDelete => 'حذف المفتاح';
+
+  @override
+  String get aiChatKeyDeleted => 'حُذف المفتاح';
+
+  @override
+  String get aiChatKeySavedNotice => 'حُفظ المفتاح.';
+
+  @override
+  String get aiChatKeyTest => 'اختبار المفتاح';
+
+  @override
+  String get aiChatKeyTestOk => 'المفتاح يعمل.';
+
+  @override
+  String get aiChatKeyTestNote =>
+      'الاختبار يطلب قائمة النماذج فقط، ولا يرسل أي بيانات منك.';
+
+  @override
+  String get aiChatKeyWhere => 'أين أجد مفتاحي؟';
+
+  @override
+  String get aiChatKeyProblemEmpty => 'الصق المفتاح أولًا.';
+
+  @override
+  String get aiChatKeyProblemShort => 'هذا أقصر من أن يكون مفتاحًا.';
+
+  @override
+  String get aiChatKeyProblemSpaces => 'في المفتاح مسافات؛ انسخه مرة أخرى.';
+
+  @override
+  String get aiChatKeyProblemProvider =>
+      'يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.';
+
+  @override
+  String get aiChatSettingsModel => 'النموذج';
+
+  @override
+  String get aiChatModelPickerTitle => 'اختر النموذج';
+
+  @override
+  String get aiChatModelYourList => 'قائمتك';
+
+  @override
+  String aiChatModelsAvailable(String service) {
+    return 'متاح لدى $service';
+  }
+
+  @override
+  String get aiChatModelCustom => 'إضافة معرّف نموذج';
+
+  @override
+  String get aiChatModelCustomField => 'معرّف النموذج';
+
+  @override
+  String get aiChatModelCustomHint => 'مثل claude-sonnet-5-5';
+
+  @override
+  String get aiChatModelInvalid => 'معرّف غير صالح.';
+
+  @override
+  String get aiChatModelUse => 'استخدام';
+
+  @override
+  String get aiChatModelRefresh => 'تحديث قائمة النماذج';
+
+  @override
+  String aiChatModelRefreshed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نموذج متاح',
+      many: '$count نموذجًا متاحًا',
+      few: '$count نماذج متاحة',
+      two: 'نموذجان متاحان',
+      one: 'نموذج واحد متاح',
+      zero: 'لا نماذج متاحة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatModelRefreshNote(String service) {
+    return 'يطلب القائمة من $service حين تضغط فقط.';
+  }
+
+  @override
+  String get aiChatModelReset => 'استعادة القائمة الأصلية';
+
+  @override
+  String aiChatModelRemove(String model) {
+    return 'إزالة $model من القائمة';
+  }
+
+  @override
+  String get aiChatModelSelected => 'المختار';
+
+  @override
+  String aiChatModelChip(String model) {
+    return 'النموذج: $model. انقر للتغيير';
+  }
+
+  @override
+  String get aiChatSettingsReply => 'الرد';
+
+  @override
+  String get aiChatMaxTokens => 'أقصى طول للرد';
+
+  @override
+  String get aiChatMaxTokensNote => 'بالرموز، ويشمل تفكير النموذج إن وُجد.';
+
+  @override
+  String get aiChatTemperature => 'درجة الحرارة';
+
+  @override
+  String get aiChatTemperatureDefault => 'افتراضي النموذج (موصى به)';
+
+  @override
+  String get aiChatTemperatureNote =>
+      'النماذج الأحدث لا تقبل إلا القيمة الافتراضية. قيمة أقل = ردود أثبت.';
+
+  @override
+  String get aiChatSettingsPrivacy => 'الخصوصية';
+
+  @override
+  String get aiChatPrivacyKeys =>
+      'المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.';
+
+  @override
+  String get aiChatPrivacyCalls =>
+      'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.';
+
+  @override
+  String aiChatPrivacyHistory(String count) {
+    return 'تُحفظ المحادثات مشفّرة على هاتفك (آخر $count).';
   }
 }

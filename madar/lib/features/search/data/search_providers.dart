@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import '../../../core/db/database.dart';
 import '../../../core/db/repositories/repositories.dart';
@@ -14,6 +15,7 @@ import '../../quran/data/quran_providers.dart';
 import '../../quran/domain/quran_meta.dart';
 import '../domain/search_doc.dart';
 import 'builtin_sources.dart';
+import 'custom_module_source.dart';
 import 'quran_search_source.dart';
 import 'recent_searches.dart';
 import 'search_engine.dart';
@@ -94,6 +96,13 @@ final searchEngineProvider = Provider<SearchEngine>((ref) {
       }
       final arabic = language != 'en';
       final m = meta;
+      // Records are written up away from any widget: make sure the date
+      // names of the language are loaded.
+      try {
+        await initializeDateFormatting(arabic ? 'ar' : 'en');
+      } on Object {
+        // Dates fall back to yyyy-MM-dd.
+      }
       return SearchLoadContext(
         repos: Repositories(db),
         l10n: lookupL10n(Locale(arabic ? 'ar' : 'en')),
@@ -115,3 +124,12 @@ final recentSearchesProvider = StreamProvider<List<String>>((ref) => ref.watch(r
 
 /// Planets (names, colours) for filter chips and result orbs.
 final searchPlanetsProvider = StreamProvider<List<PlanetRow>>((ref) => ref.watch(repositoriesProvider).planets.watchAll());
+
+/// Custom modules by id (names, icons, colours of their result groups).
+final searchModuleGroupsProvider = StreamProvider<Map<String, CustomModuleRowLike>>(
+  (ref) => ref
+      .watch(repositoriesProvider)
+      .customModules
+      .watchAll()
+      .map((rows) => {for (final m in rows) m.id: CustomModuleRowLike(m.id, m.name, m.planetKey, m.icon, m.color)}),
+);

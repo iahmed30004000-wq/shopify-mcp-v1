@@ -102,6 +102,13 @@ void main() {
       expect(ids(find(index, 'مستشفا')), ['c']);
     });
 
+    test('numbers and codes never match with a typo', () {
+      final index = indexOf([doc('a', title: 'Budget 2026'), doc('b', title: 'Code AB1234')]);
+      expect(ids(find(index, '2025')), isEmpty);
+      expect(ids(find(index, '2026')), ['a']);
+      expect(ids(find(index, 'ab1235')), isEmpty);
+    });
+
     test('a typo in a word still being typed', () {
       final index = indexOf([doc('a', title: 'Vaccination schedule')]);
       expect(ids(find(index, 'vacinat')), ['a']);
@@ -280,14 +287,14 @@ void main() {
 
     test('remove and clearSource drop records and their terms', () {
       final index = indexOf([
-        doc('a', title: 'alpha unique1'),
-        doc('b', title: 'beta unique2'),
+        doc('a', title: 'alpha zebra'),
+        doc('b', title: 'beta walrus'),
         doc('c', title: 'gamma', source: 'people'),
       ]);
       final before = index.stats;
       expect(index.remove('tasks\u0001a'), isTrue);
       expect(index.remove('tasks\u0001a'), isFalse);
-      expect(find(index, 'unique1').hits, isEmpty);
+      expect(find(index, 'zebra').hits, isEmpty);
       expect(index.stats.terms, lessThan(before.terms));
       index.clearSource('tasks');
       expect(index.length, 1);

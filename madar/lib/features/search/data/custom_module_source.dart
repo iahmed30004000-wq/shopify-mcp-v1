@@ -38,8 +38,8 @@ abstract final class CustomModuleSearch {
             refTable: 'custom_modules',
             refId: m.id,
             title: m.name,
-            subtitle: SearchLoadContext.join([
-              fields.map((f) => f.label).join('، '),
+            subtitle: c.join([
+              fields.map((f) => f.label).join(c.listSeparator),
               if (m.archived) c.l10n.searchArchived,
             ]),
             planetKey: planetOf(like),
@@ -108,8 +108,8 @@ abstract final class CustomModuleSearch {
       refTable: 'custom_entries',
       refId: entryId,
       title: titleField == null ? module.name : FieldValues.text(values[titleField.id])!,
-      subtitle: SearchLoadContext.join([if (titleField != null) module.name, if (done) c.l10n.searchDone]),
-      body: parts.join(' · '),
+      subtitle: c.join([if (titleField != null) module.name, if (done) c.l10n.searchDone]),
+      body: parts.join(c.separator),
       date: at,
       planetKey: planetOf(module),
       group: groupOf(module.id),
@@ -145,7 +145,7 @@ abstract final class CustomModuleSearch {
         return id == null ? null : (f.option(id)?.label ?? id);
       case FieldType.multiSelect:
         final ids = FieldValues.multi(v);
-        return ids.isEmpty ? null : ids.map((id) => f.option(id)?.label ?? id).join('، ');
+        return ids.isEmpty ? null : ids.map((id) => f.option(id)?.label ?? id).join(c.listSeparator);
       case FieldType.rating:
         final r = FieldValues.rating(v);
         return r == null ? null : fmt.localizeDigits('★ $r/${f.ratingMax}');

@@ -28260,7 +28260,7 @@ abstract class L10n {
   /// No description provided for @cinemaMetropolisHomage.
   ///
   /// In ar, this message translates to:
-  /// **'تحية لفيلم «متروبوليس» الصامت (1927)'**
+  /// **'تحية لفيلم «متروبوليس» الصامت من العشرينيات'**
   String get cinemaMetropolisHomage;
 
   /// No description provided for @cinemaCaravanTitle.
@@ -28382,6 +28382,42 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'إلغاء'**
   String get cinemaCancel;
+
+  /// Projector check card that shows the film look of an era
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقة المعايرة'**
+  String get cinemaFxTestCard;
+
+  /// Setting: strength and quality of the old-film effect in Madar Cinema
+  ///
+  /// In ar, this message translates to:
+  /// **'مظهر الفيلم'**
+  String get cinemaFxFilmLook;
+
+  /// Film look quality: cheapest
+  ///
+  /// In ar, this message translates to:
+  /// **'توفير الطاقة'**
+  String get cinemaFxQualityLowPower;
+
+  /// Film look quality: default
+  ///
+  /// In ar, this message translates to:
+  /// **'متوازن'**
+  String get cinemaFxQualityBalanced;
+
+  /// Film look quality: best
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى دقة'**
+  String get cinemaFxQualityFull;
+
+  /// Label on a film-leader card before a reel number
+  ///
+  /// In ar, this message translates to:
+  /// **'بكرة'**
+  String get cinemaFxReelLabel;
 
   /// Data centre screen title
   ///
@@ -30720,8 +30756,8 @@ abstract class L10n {
   /// No description provided for @searchPainTitle.
   ///
   /// In ar, this message translates to:
-  /// **'ألم {score}/10'**
-  String searchPainTitle(String score);
+  /// **'ألم {score}/{max}'**
+  String searchPainTitle(String score, String max);
 
   /// No description provided for @searchMoodTitle.
   ///
@@ -30738,13 +30774,13 @@ abstract class L10n {
   /// No description provided for @searchAyahPlace.
   ///
   /// In ar, this message translates to:
-  /// **'{surah} · الآية {ayah}'**
+  /// **'{surah}، الآية {ayah}'**
   String searchAyahPlace(String surah, String ayah);
 
   /// No description provided for @searchAyahRange.
   ///
   /// In ar, this message translates to:
-  /// **'{surah} · {from}–{to}'**
+  /// **'{surah} {from}–{to}'**
   String searchAyahRange(String surah, String from, String to);
 
   /// No description provided for @searchSurahNumber.
@@ -31034,12 +31070,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'الإشعارات'**
   String get ncTitle;
-
-  /// No description provided for @ncSubtitle.
-  ///
-  /// In ar, this message translates to:
-  /// **'ما وصلك وما سيصلك، في مكان واحد'**
-  String get ncSubtitle;
 
   /// Notification center tab: scheduled notifications
   ///
@@ -31581,12 +31611,6 @@ abstract class L10n {
   /// **'مكتوم حتى {when}'**
   String ncMutedUntil(String when);
 
-  /// No description provided for @ncMutedBanner.
-  ///
-  /// In ar, this message translates to:
-  /// **'{count, plural, =1{مجموعة مكتومة} =2{مجموعتان مكتومتان} few{{count} مجموعات مكتومة} many{{count} مجموعة مكتومة} other{{count} مجموعة مكتومة}}'**
-  String ncMutedBanner(int count);
-
   /// No description provided for @ncSettingsTitle.
   ///
   /// In ar, this message translates to:
@@ -31658,6 +31682,990 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'{count, plural, =0{الإشعارات} =1{الإشعارات، واحد جديد} =2{الإشعارات، اثنان جديدان} few{الإشعارات، {count} جديدة} many{الإشعارات، {count} جديدًا} other{الإشعارات، {count} جديد}}'**
   String ncBellLabel(int count);
+
+  /// No description provided for @ncActionCancelSnooze.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألغِ التأجيل'**
+  String get ncActionCancelSnooze;
+
+  /// No description provided for @ncActionSnoozeMenu.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجِّل…'**
+  String get ncActionSnoozeMenu;
+
+  /// No description provided for @ncSnoozeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعِده بعد قليل'**
+  String get ncSnoozeTitle;
+
+  /// No description provided for @ncSnoozeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'يختفي الآن، ثم يصلك من جديد في الوقت الذي تختاره.'**
+  String get ncSnoozeSubtitle;
+
+  /// No description provided for @ncOptionUntil.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {time}'**
+  String ncOptionUntil(String time);
+
+  /// No description provided for @ncOptionAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعود {time}'**
+  String ncOptionAt(String time);
+
+  /// No description provided for @ncRecentCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{إشعار واحد} =2{إشعاران} few{{count} إشعارات} many{{count} إشعارًا} other{{count} إشعار}}'**
+  String ncRecentCount(int count);
+
+  /// No description provided for @ncUpcomingCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا شيء في الأيام السبعة القادمة} =1{إشعار واحد في الأيام السبعة القادمة} =2{إشعاران في الأيام السبعة القادمة} few{{count} إشعارات في الأيام السبعة القادمة} many{{count} إشعارًا في الأيام السبعة القادمة} other{{count} إشعار في الأيام السبعة القادمة}}'**
+  String ncUpcomingCount(int count);
+
+  /// No description provided for @ncNewCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{واحد جديد} =2{اثنان جديدان} few{{count} جديدة} many{{count} جديدًا} other{{count} جديد}}'**
+  String ncNewCount(int count);
+
+  /// End of a mute or snooze tomorrow, after 'until'
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا {time}'**
+  String ncUntilTomorrow(String time);
+
+  /// AI chat screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'المحادثة الذكية'**
+  String get aiChatTitle;
+
+  /// No description provided for @aiChatNewChat.
+  ///
+  /// In ar, this message translates to:
+  /// **'محادثة جديدة'**
+  String get aiChatNewChat;
+
+  /// No description provided for @aiChatListTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحادثات'**
+  String get aiChatListTitle;
+
+  /// No description provided for @aiChatSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الذكاء الاصطناعي'**
+  String get aiChatSettingsTitle;
+
+  /// Subtitle of the Settings row that opens the AI settings
+  ///
+  /// In ar, this message translates to:
+  /// **'المفاتيح والنموذج وطول الرد'**
+  String get aiChatSettingsRowSubtitle;
+
+  /// Entry point on hubs
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل الذكاء الاصطناعي'**
+  String get aiChatAskAi;
+
+  /// No description provided for @aiChatAskAiSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بمفتاحك الخاص، وأنت تختار ما يُرسل'**
+  String get aiChatAskAiSubtitle;
+
+  /// No description provided for @aiChatAskAbout.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل عن {area}'**
+  String aiChatAskAbout(String area);
+
+  /// No description provided for @aiChatMenu.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزيد'**
+  String get aiChatMenu;
+
+  /// No description provided for @aiChatOpenList.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المحادثات'**
+  String get aiChatOpenList;
+
+  /// No description provided for @aiChatInputHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب رسالتك…'**
+  String get aiChatInputHint;
+
+  /// No description provided for @aiChatSend.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال'**
+  String get aiChatSend;
+
+  /// No description provided for @aiChatStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف'**
+  String get aiChatStop;
+
+  /// No description provided for @aiChatThinking.
+  ///
+  /// In ar, this message translates to:
+  /// **'يفكّر…'**
+  String get aiChatThinking;
+
+  /// No description provided for @aiChatWriting.
+  ///
+  /// In ar, this message translates to:
+  /// **'يكتب الرد'**
+  String get aiChatWriting;
+
+  /// No description provided for @aiChatWillSend.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُرسل'**
+  String get aiChatWillSend;
+
+  /// No description provided for @aiChatContextReviewFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستراجع ما يُشارك من ملخّصك قبل أول إرسال'**
+  String get aiChatContextReviewFirst;
+
+  /// No description provided for @aiChatContextNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا سياق شخصي'**
+  String get aiChatContextNone;
+
+  /// No description provided for @aiChatContextSections.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أقسام} =1{قسم واحد من ملخّصك} =2{قسمان من ملخّصك} few{{count} أقسام من ملخّصك} many{{count} قسمًا من ملخّصك} other{{count} قسم من ملخّصك}}'**
+  String aiChatContextSections(int count);
+
+  /// No description provided for @aiChatMessagesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا رسائل} =1{رسالة واحدة} =2{رسالتان} few{{count} رسائل} many{{count} رسالة} other{{count} رسالة}}'**
+  String aiChatMessagesCount(int count);
+
+  /// No description provided for @aiChatApproxTokens.
+  ///
+  /// In ar, this message translates to:
+  /// **'≈ {count} رمز'**
+  String aiChatApproxTokens(String count);
+
+  /// No description provided for @aiChatStripSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُرسل: {summary}. انقر للمراجعة أو التغيير'**
+  String aiChatStripSemantics(String summary);
+
+  /// No description provided for @aiChatOmitted.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{رسالة أقدم لن تُرسل} =2{رسالتان أقدم لن تُرسلا} few{{count} رسائل أقدم لن تُرسل} many{{count} رسالة أقدم لن تُرسل} other{{count} رسالة أقدم لن تُرسل}}'**
+  String aiChatOmitted(int count);
+
+  /// No description provided for @aiChatContextTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما الذي سيُرسل'**
+  String get aiChatContextTitle;
+
+  /// No description provided for @aiChatContextSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُرسل شيء إلا حين تضغط «إرسال»'**
+  String get aiChatContextSubtitle;
+
+  /// No description provided for @aiChatContextFromSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'من ملخّصك'**
+  String get aiChatContextFromSummary;
+
+  /// No description provided for @aiChatContextChange.
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة الأقسام'**
+  String get aiChatContextChange;
+
+  /// No description provided for @aiChatContextChoose.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار الأقسام'**
+  String get aiChatContextChoose;
+
+  /// No description provided for @aiChatContextNoneHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لن يُرسل شيء من بياناتك، فقط رسائل هذه المحادثة.'**
+  String get aiChatContextNoneHint;
+
+  /// No description provided for @aiChatContextUnsetHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند أول إرسال ستظهر معاينة الملخّص لتختار الأقسام أو تستبعد ما تشاء.'**
+  String get aiChatContextUnsetHint;
+
+  /// Confirm button of the summary preview opened from the AI chat
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدمه في المحادثة'**
+  String get aiChatContextUse;
+
+  /// Confirm button of the summary preview opened by the first Send
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدمه وأرسل'**
+  String get aiChatContextUseAndSend;
+
+  /// No description provided for @aiChatContextReviewed.
+  ///
+  /// In ar, this message translates to:
+  /// **'راجعته {when}'**
+  String aiChatContextReviewed(String when);
+
+  /// No description provided for @aiChatContextCancelled.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُرسل شيء.'**
+  String get aiChatContextCancelled;
+
+  /// No description provided for @aiChatServiceModel.
+  ///
+  /// In ar, this message translates to:
+  /// **'{service} · {model}'**
+  String aiChatServiceModel(String service, String model);
+
+  /// No description provided for @aiChatViewPayload.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الطلب كما سيُرسل'**
+  String get aiChatViewPayload;
+
+  /// No description provided for @aiChatDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get aiChatDone;
+
+  /// No description provided for @aiChatPayloadTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطلب كما سيُرسل'**
+  String get aiChatPayloadTitle;
+
+  /// No description provided for @aiChatPayloadEndpoint.
+  ///
+  /// In ar, this message translates to:
+  /// **'العنوان'**
+  String get aiChatPayloadEndpoint;
+
+  /// No description provided for @aiChatPayloadHeaders.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترويسات (المفتاح مخفي)'**
+  String get aiChatPayloadHeaders;
+
+  /// No description provided for @aiChatPayloadSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'التعليمات والسياق'**
+  String get aiChatPayloadSystem;
+
+  /// No description provided for @aiChatPayloadMessages.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرسائل'**
+  String get aiChatPayloadMessages;
+
+  /// No description provided for @aiChatPayloadRaw.
+  ///
+  /// In ar, this message translates to:
+  /// **'النص الكامل (JSON)'**
+  String get aiChatPayloadRaw;
+
+  /// No description provided for @aiChatPayloadDraftNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'يشمل رسالتك الجاري كتابتها. لن يُرسل إلا حين تضغط «إرسال».'**
+  String get aiChatPayloadDraftNote;
+
+  /// No description provided for @aiChatPayloadNoDraft.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب رسالة لترى الطلب كاملًا.'**
+  String get aiChatPayloadNoDraft;
+
+  /// No description provided for @aiChatPayloadSize.
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} · ≈ {tokens} رمز'**
+  String aiChatPayloadSize(String size, String tokens);
+
+  /// No description provided for @aiChatBytes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} بايت'**
+  String aiChatBytes(String count);
+
+  /// No description provided for @aiChatKiloBytes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} ك.ب'**
+  String aiChatKiloBytes(String count);
+
+  /// No description provided for @aiChatRoleUser.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنت'**
+  String get aiChatRoleUser;
+
+  /// No description provided for @aiChatRoleAssistant.
+  ///
+  /// In ar, this message translates to:
+  /// **'المساعد'**
+  String get aiChatRoleAssistant;
+
+  /// No description provided for @aiChatCopy.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ'**
+  String get aiChatCopy;
+
+  /// No description provided for @aiChatCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ'**
+  String get aiChatCopied;
+
+  /// No description provided for @aiChatCopyCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ الشيفرة'**
+  String get aiChatCopyCode;
+
+  /// No description provided for @aiChatRegenerate.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة كتابة الرد'**
+  String get aiChatRegenerate;
+
+  /// No description provided for @aiChatRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get aiChatRetry;
+
+  /// No description provided for @aiChatStopped.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقفتَ الرد'**
+  String get aiChatStopped;
+
+  /// No description provided for @aiChatCutShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّف الرد عند حدّ الطول. يمكنك رفعه من الإعدادات.'**
+  String get aiChatCutShort;
+
+  /// No description provided for @aiChatRefused.
+  ///
+  /// In ar, this message translates to:
+  /// **'امتنع النموذج عن الإجابة.'**
+  String get aiChatRefused;
+
+  /// No description provided for @aiChatFiltered.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقف مرشّح المحتوى الرد.'**
+  String get aiChatFiltered;
+
+  /// No description provided for @aiChatHealthNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'للمتابعة فقط وليس نصيحة طبية؛ استشر طبيبك في أي قرار صحي.'**
+  String get aiChatHealthNote;
+
+  /// No description provided for @aiChatOpenLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الرابط {url}'**
+  String aiChatOpenLink(String url);
+
+  /// No description provided for @aiChatLinkFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح الرابط.'**
+  String get aiChatLinkFailed;
+
+  /// No description provided for @aiChatErrorNoKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف مفتاح {service} أولًا.'**
+  String aiChatErrorNoKey(String service);
+
+  /// No description provided for @aiChatErrorBadKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفضت {service} المفتاح. تحقّق منه أو استبدله في الإعدادات.'**
+  String aiChatErrorBadKey(String service);
+
+  /// No description provided for @aiChatErrorForbidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يملك هذا المفتاح صلاحية استخدام هذا النموذج.'**
+  String get aiChatErrorForbidden;
+
+  /// No description provided for @aiChatErrorRateLimited.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلبات كثيرة الآن. انتظر قليلًا ثم أعد المحاولة.'**
+  String get aiChatErrorRateLimited;
+
+  /// No description provided for @aiChatErrorRetryAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكنك المحاولة بعد {seconds} ث.'**
+  String aiChatErrorRetryAfter(String seconds);
+
+  /// No description provided for @aiChatErrorQuota.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفد الرصيد أو بلغتَ حدّ الإنفاق لدى {service}.'**
+  String aiChatErrorQuota(String service);
+
+  /// No description provided for @aiChatErrorOverloaded.
+  ///
+  /// In ar, this message translates to:
+  /// **'{service} مشغولة الآن. أعد المحاولة بعد قليل.'**
+  String aiChatErrorOverloaded(String service);
+
+  /// No description provided for @aiChatErrorServer.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خلل لدى {service}. أعد المحاولة.'**
+  String aiChatErrorServer(String service);
+
+  /// No description provided for @aiChatErrorModelNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'النموذج «{model}» غير متاح لهذا المفتاح. اختر نموذجًا آخر.'**
+  String aiChatErrorModelNotFound(String model);
+
+  /// No description provided for @aiChatErrorTemperature.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يقبل هذا النموذج درجة حرارة مخصّصة. اجعلها «افتراضي النموذج» في الإعدادات.'**
+  String get aiChatErrorTemperature;
+
+  /// No description provided for @aiChatErrorContextTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحادثة أطول مما يحتمله النموذج. ابدأ محادثة جديدة أو شارك أقسامًا أقل.'**
+  String get aiChatErrorContextTooLong;
+
+  /// No description provided for @aiChatErrorBadRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفضت {service} الطلب.'**
+  String aiChatErrorBadRequest(String service);
+
+  /// No description provided for @aiChatErrorNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا اتصال بالإنترنت، أو انقطع الاتصال.'**
+  String get aiChatErrorNetwork;
+
+  /// No description provided for @aiChatErrorTimeout.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يصل ردّ في الوقت المناسب.'**
+  String get aiChatErrorTimeout;
+
+  /// No description provided for @aiChatErrorBadResponse.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل ردّ تعذّرت قراءته.'**
+  String get aiChatErrorBadResponse;
+
+  /// No description provided for @aiChatErrorUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقّع.'**
+  String get aiChatErrorUnknown;
+
+  /// No description provided for @aiChatOpenSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الإعدادات'**
+  String get aiChatOpenSettings;
+
+  /// No description provided for @aiChatSetupTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اربط مفتاحك الخاص'**
+  String get aiChatSetupTitle;
+
+  /// No description provided for @aiChatSetupBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعمل المحادثة بمفتاح API منك لدى Anthropic أو OpenAI. يُحفظ مشفّرًا على هذا الهاتف فقط، ولا يدخل النسخ الاحتياطية ولا التصدير.'**
+  String get aiChatSetupBody;
+
+  /// No description provided for @aiChatSetupAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة مفتاح {service}'**
+  String aiChatSetupAdd(String service);
+
+  /// No description provided for @aiChatSetupPrivacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُرسل شيء إلا حين تضغط «إرسال»، وترى قبلها ما سيُرسل بالضبط.'**
+  String get aiChatSetupPrivacy;
+
+  /// No description provided for @aiChatEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بمَ أساعدك اليوم؟'**
+  String get aiChatEmptyTitle;
+
+  /// No description provided for @aiChatEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل عن يومك أو صلاتك أو ميزانيتك أو أهدافك. تختار ما يُشارك من ملخّصك قبل الإرسال.'**
+  String get aiChatEmptyBody;
+
+  /// No description provided for @aiChatSuggestWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'لخّص أسبوعي في نقاط قليلة'**
+  String get aiChatSuggestWeek;
+
+  /// No description provided for @aiChatSuggestBudget.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف أحسّن ميزانيتي هذا الشهر؟'**
+  String get aiChatSuggestBudget;
+
+  /// No description provided for @aiChatSuggestPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعدني أخطّط لغدٍ متوازن'**
+  String get aiChatSuggestPlan;
+
+  /// No description provided for @aiChatSuggestPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف أحافظ على الصلاة في وقتها؟'**
+  String get aiChatSuggestPrayer;
+
+  /// No description provided for @aiChatListEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا محادثات بعد'**
+  String get aiChatListEmptyTitle;
+
+  /// No description provided for @aiChatListEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ محادثة، وتُحفظ هنا مشفّرة على هاتفك.'**
+  String get aiChatListEmptyBody;
+
+  /// No description provided for @aiChatRename.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التسمية'**
+  String get aiChatRename;
+
+  /// No description provided for @aiChatRenameField.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المحادثة'**
+  String get aiChatRenameField;
+
+  /// No description provided for @aiChatRenameSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ الاسم'**
+  String get aiChatRenameSave;
+
+  /// No description provided for @aiChatDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المحادثة'**
+  String get aiChatDelete;
+
+  /// No description provided for @aiChatDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت المحادثة'**
+  String get aiChatDeleted;
+
+  /// No description provided for @aiChatDeleteAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف كل المحادثات'**
+  String get aiChatDeleteAll;
+
+  /// No description provided for @aiChatDeletedAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت كل المحادثات'**
+  String get aiChatDeletedAll;
+
+  /// No description provided for @aiChatUntitled.
+  ///
+  /// In ar, this message translates to:
+  /// **'محادثة بلا عنوان'**
+  String get aiChatUntitled;
+
+  /// No description provided for @aiChatListLimitNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحفظ آخر {count} محادثة؛ الأقدم يُحذف تلقائيًا.'**
+  String aiChatListLimitNote(String count);
+
+  /// No description provided for @aiChatListUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'{when} · {messages}'**
+  String aiChatListUpdated(String when, String messages);
+
+  /// No description provided for @aiChatToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get aiChatToday;
+
+  /// No description provided for @aiChatYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get aiChatYesterday;
+
+  /// No description provided for @aiChatSettingsService.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخدمة'**
+  String get aiChatSettingsService;
+
+  /// No description provided for @aiChatServiceAnthropic.
+  ///
+  /// In ar, this message translates to:
+  /// **'Anthropic'**
+  String get aiChatServiceAnthropic;
+
+  /// No description provided for @aiChatServiceOpenai.
+  ///
+  /// In ar, this message translates to:
+  /// **'OpenAI'**
+  String get aiChatServiceOpenai;
+
+  /// No description provided for @aiChatSettingsKeys.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفاتيح API'**
+  String get aiChatSettingsKeys;
+
+  /// No description provided for @aiChatKeyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتاح {service}'**
+  String aiChatKeyTitle(String service);
+
+  /// No description provided for @aiChatKeySaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظ · {mask}'**
+  String aiChatKeySaved(String mask);
+
+  /// No description provided for @aiChatKeyNotSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُضف بعد'**
+  String get aiChatKeyNotSet;
+
+  /// No description provided for @aiChatKeySheetSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحفظ مشفّرًا على هذا الهاتف فقط.'**
+  String get aiChatKeySheetSubtitle;
+
+  /// No description provided for @aiChatKeyCurrent.
+  ///
+  /// In ar, this message translates to:
+  /// **'المفتاح الحالي'**
+  String get aiChatKeyCurrent;
+
+  /// No description provided for @aiChatKeyField.
+  ///
+  /// In ar, this message translates to:
+  /// **'المفتاح'**
+  String get aiChatKeyField;
+
+  /// No description provided for @aiChatKeyFieldHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق المفتاح هنا'**
+  String get aiChatKeyFieldHint;
+
+  /// No description provided for @aiChatKeyPaste.
+  ///
+  /// In ar, this message translates to:
+  /// **'لصق'**
+  String get aiChatKeyPaste;
+
+  /// No description provided for @aiChatKeySave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ المفتاح'**
+  String get aiChatKeySave;
+
+  /// No description provided for @aiChatKeyReplace.
+  ///
+  /// In ar, this message translates to:
+  /// **'استبدال المفتاح'**
+  String get aiChatKeyReplace;
+
+  /// No description provided for @aiChatKeyDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المفتاح'**
+  String get aiChatKeyDelete;
+
+  /// No description provided for @aiChatKeyDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف المفتاح'**
+  String get aiChatKeyDeleted;
+
+  /// No description provided for @aiChatKeySavedNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ المفتاح.'**
+  String get aiChatKeySavedNotice;
+
+  /// No description provided for @aiChatKeyTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختبار المفتاح'**
+  String get aiChatKeyTest;
+
+  /// No description provided for @aiChatKeyTestOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'المفتاح يعمل.'**
+  String get aiChatKeyTestOk;
+
+  /// No description provided for @aiChatKeyTestNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاختبار يطلب قائمة النماذج فقط، ولا يرسل أي بيانات منك.'**
+  String get aiChatKeyTestNote;
+
+  /// No description provided for @aiChatKeyWhere.
+  ///
+  /// In ar, this message translates to:
+  /// **'أين أجد مفتاحي؟'**
+  String get aiChatKeyWhere;
+
+  /// No description provided for @aiChatKeyProblemEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق المفتاح أولًا.'**
+  String get aiChatKeyProblemEmpty;
+
+  /// No description provided for @aiChatKeyProblemShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا أقصر من أن يكون مفتاحًا.'**
+  String get aiChatKeyProblemShort;
+
+  /// No description provided for @aiChatKeyProblemSpaces.
+  ///
+  /// In ar, this message translates to:
+  /// **'في المفتاح مسافات؛ انسخه مرة أخرى.'**
+  String get aiChatKeyProblemSpaces;
+
+  /// No description provided for @aiChatKeyProblemProvider.
+  ///
+  /// In ar, this message translates to:
+  /// **'يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.'**
+  String get aiChatKeyProblemProvider;
+
+  /// No description provided for @aiChatSettingsModel.
+  ///
+  /// In ar, this message translates to:
+  /// **'النموذج'**
+  String get aiChatSettingsModel;
+
+  /// No description provided for @aiChatModelPickerTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر النموذج'**
+  String get aiChatModelPickerTitle;
+
+  /// No description provided for @aiChatModelYourList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمتك'**
+  String get aiChatModelYourList;
+
+  /// No description provided for @aiChatModelsAvailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'متاح لدى {service}'**
+  String aiChatModelsAvailable(String service);
+
+  /// No description provided for @aiChatModelCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة معرّف نموذج'**
+  String get aiChatModelCustom;
+
+  /// No description provided for @aiChatModelCustomField.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف النموذج'**
+  String get aiChatModelCustomField;
+
+  /// No description provided for @aiChatModelCustomHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل claude-sonnet-5-5'**
+  String get aiChatModelCustomHint;
+
+  /// No description provided for @aiChatModelInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف غير صالح.'**
+  String get aiChatModelInvalid;
+
+  /// No description provided for @aiChatModelUse.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام'**
+  String get aiChatModelUse;
+
+  /// No description provided for @aiChatModelRefresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث قائمة النماذج'**
+  String get aiChatModelRefresh;
+
+  /// No description provided for @aiChatModelRefreshed.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا نماذج متاحة} =1{نموذج واحد متاح} =2{نموذجان متاحان} few{{count} نماذج متاحة} many{{count} نموذجًا متاحًا} other{{count} نموذج متاح}}'**
+  String aiChatModelRefreshed(int count);
+
+  /// No description provided for @aiChatModelRefreshNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'يطلب القائمة من {service} حين تضغط فقط.'**
+  String aiChatModelRefreshNote(String service);
+
+  /// No description provided for @aiChatModelReset.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة القائمة الأصلية'**
+  String get aiChatModelReset;
+
+  /// No description provided for @aiChatModelRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة {model} من القائمة'**
+  String aiChatModelRemove(String model);
+
+  /// No description provided for @aiChatModelSelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'المختار'**
+  String get aiChatModelSelected;
+
+  /// No description provided for @aiChatModelChip.
+  ///
+  /// In ar, this message translates to:
+  /// **'النموذج: {model}. انقر للتغيير'**
+  String aiChatModelChip(String model);
+
+  /// No description provided for @aiChatSettingsReply.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرد'**
+  String get aiChatSettingsReply;
+
+  /// No description provided for @aiChatMaxTokens.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى طول للرد'**
+  String get aiChatMaxTokens;
+
+  /// No description provided for @aiChatMaxTokensNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'بالرموز، ويشمل تفكير النموذج إن وُجد.'**
+  String get aiChatMaxTokensNote;
+
+  /// No description provided for @aiChatTemperature.
+  ///
+  /// In ar, this message translates to:
+  /// **'درجة الحرارة'**
+  String get aiChatTemperature;
+
+  /// No description provided for @aiChatTemperatureDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتراضي النموذج (موصى به)'**
+  String get aiChatTemperatureDefault;
+
+  /// No description provided for @aiChatTemperatureNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'النماذج الأحدث لا تقبل إلا القيمة الافتراضية. قيمة أقل = ردود أثبت.'**
+  String get aiChatTemperatureNote;
+
+  /// No description provided for @aiChatSettingsPrivacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصوصية'**
+  String get aiChatSettingsPrivacy;
+
+  /// No description provided for @aiChatPrivacyKeys.
+  ///
+  /// In ar, this message translates to:
+  /// **'المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.'**
+  String get aiChatPrivacyKeys;
+
+  /// No description provided for @aiChatPrivacyCalls.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.'**
+  String get aiChatPrivacyCalls;
+
+  /// No description provided for @aiChatPrivacyHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحفظ المحادثات مشفّرة على هاتفك (آخر {count}).'**
+  String aiChatPrivacyHistory(String count);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

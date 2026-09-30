@@ -65,6 +65,9 @@ class SearchEngine {
   /// Longest a live source may take before a query answers without it.
   final Duration liveTimeout;
 
+  /// Hits asked of a live source when it is not the only group shown.
+  static const int liveLimit = 30;
+
   /// Current state (the screen shows "preparing" while indexing).
   final ValueNotifier<SearchEngineStatus> status = ValueNotifier(SearchEngineStatus.idle);
 
@@ -88,6 +91,10 @@ class SearchEngine {
   Map<String, double> _planetWeights = const {};
 
   final Set<String> _dirty = {};
+
+  /// Sources changed while nobody listened to [changes]: re-read at the
+  /// next query instead (no work on the UI isolate while search is closed).
+  final Set<String> _deferred = {};
   Timer? _debounceTimer;
   DateTime? _firstDirtyAt;
   Future<void> _updates = Future.value();
@@ -191,6 +198,10 @@ class SearchEngine {
 
   void _markDirty(String sourceId) {
     if (_disposed) return;
+    if (!_changes.hasListener) {
+      _deferred.add(sourceId);
+      return;
+    }
     _dirty.add(sourceId);
     final now = DateTime.now();
     _firstDirtyAt ??= now;
@@ -246,8 +257,13 @@ class SearchEngine {
     });
   }
 
-  /// Applies pending changes now (instead of after the debounce).
+  /// Applies pending changes now (instead of after the debounce), deferred
+  /// ones included.
   Future<void> flushNow() async {
+    if (_deferred.isNotEmpty) {
+      _dirty.addAll(_deferred);
+      _deferred.clear();
+    }
     if (_dirty.isNotEmpty) {
       _debounceTimer?.cancel();
       _flush();
@@ -269,6 +285,7 @@ class SearchEngine {
     final text = request.text.trim();
     if (text.isEmpty) return SearchResults.empty(request);
     await warmUp();
+    if (_deferred.isNotEmpty) await flushNow();
     final worker = _worker;
     final ctx = _ctx;
     if (worker == null || ctx == null || _disposed) return SearchResults.empty(request);
@@ -285,7 +302,8 @@ class SearchEngine {
     final live = [
       for (final s in _registry.live)
         s
-            .search(text, ctx, limit: 30)
+            // The best few, or all of them once filtered to this source.
+            .search(text, ctx, limit: request.groups.contains(s.id) ? request.limit : liveLimit)
             .timeout(liveTimeout)
             .then<(LiveSearchSource, LiveSearchResult)>(
               (r) => (s, r),
@@ -338,10 +356,10 @@ class SearchEngine {
     );
   }
 
-  /// Size of the index (starts the engine).
+  /// Size of the index (starts the engine, applies pending changes).
   Future<SearchIndexStats> stats() async {
     await warmUp();
-    await _updates;
+    await flushNow();
     return _worker?.stats() ?? Future.value(const SearchIndexStats(docs: 0, terms: 0, postings: 0, approxBytes: 0, evicted: 0));
   }
 

@@ -102,6 +102,7 @@ flutter:
     - shaders/cinema/burn.frag
     - shaders/cinema/curtain.frag
     - shaders/cinema/spotlight.frag
+    - shaders/cinema/film_stock.frag
 
   fonts:
     - family: PlexArabic

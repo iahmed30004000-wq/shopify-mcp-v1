@@ -75,19 +75,19 @@
   "searchChannelMessage": {"ar": "رسالة", "en": "Message"},
   "searchChannelOther": {"ar": "تواصل", "en": "Contact"},
   "searchPainTitle": {
-    "ar": "ألم {score}/10",
-    "en": "Pain {score}/10",
-    "placeholders": {"score": {"type": "String"}}
+    "ar": "ألم {score}/{max}",
+    "en": "Pain {score}/{max}",
+    "placeholders": {"score": {"type": "String"}, "max": {"type": "String"}}
   },
   "searchMoodTitle": {"ar": "المزاج", "en": "Mood"},
   "searchFastingTitle": {"ar": "صيام", "en": "Fast"},
   "searchAyahPlace": {
-    "ar": "{surah} · الآية {ayah}",
+    "ar": "{surah}، الآية {ayah}",
     "en": "{surah} · ayah {ayah}",
     "placeholders": {"surah": {"type": "String"}, "ayah": {"type": "String"}}
   },
   "searchAyahRange": {
-    "ar": "{surah} · {from}–{to}",
+    "ar": "{surah} {from}–{to}",
     "en": "{surah} · {from}–{to}",
     "placeholders": {"surah": {"type": "String"}, "from": {"type": "String"}, "to": {"type": "String"}}
   },

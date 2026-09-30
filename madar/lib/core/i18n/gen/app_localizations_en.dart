@@ -17906,6 +17906,24 @@ class L10nEn extends L10n {
   String get cinemaCancel => 'Cancel';
 
   @override
+  String get cinemaFxTestCard => 'Calibration card';
+
+  @override
+  String get cinemaFxFilmLook => 'Film look';
+
+  @override
+  String get cinemaFxQualityLowPower => 'Power saver';
+
+  @override
+  String get cinemaFxQualityBalanced => 'Balanced';
+
+  @override
+  String get cinemaFxQualityFull => 'Full quality';
+
+  @override
+  String get cinemaFxReelLabel => 'Reel';
+
+  @override
   String get dataCentreTitle => 'Your data';
 
   @override
@@ -19367,8 +19385,8 @@ class L10nEn extends L10n {
   String get searchChannelOther => 'Contact';
 
   @override
-  String searchPainTitle(String score) {
-    return 'Pain $score/10';
+  String searchPainTitle(String score, String max) {
+    return 'Pain $score/$max';
   }
 
   @override
@@ -19532,9 +19550,6 @@ class L10nEn extends L10n {
 
   @override
   String get ncTitle => 'Notifications';
-
-  @override
-  String get ncSubtitle => 'What arrived and what\'s coming, in one place';
 
   @override
   String get ncTabUpcoming => 'Upcoming';
@@ -19876,17 +19891,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String ncMutedBanner(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count groups muted',
-      one: '1 group muted',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get ncSettingsTitle => 'Notifications';
 
   @override
@@ -19944,5 +19948,641 @@ class L10nEn extends L10n {
       zero: 'Notifications',
     );
     return '$_temp0';
+  }
+
+  @override
+  String get ncActionCancelSnooze => 'Cancel snooze';
+
+  @override
+  String get ncActionSnoozeMenu => 'Snooze…';
+
+  @override
+  String get ncSnoozeTitle => 'Bring it back later';
+
+  @override
+  String get ncSnoozeSubtitle =>
+      'It leaves now and arrives again when you choose.';
+
+  @override
+  String ncOptionUntil(String time) {
+    return 'until $time';
+  }
+
+  @override
+  String ncOptionAt(String time) {
+    return 'back $time';
+  }
+
+  @override
+  String ncRecentCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count notifications',
+      one: '1 notification',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUpcomingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count notifications in the next seven days',
+      one: '1 notification in the next seven days',
+      zero: 'Nothing in the next seven days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncNewCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new',
+      one: '1 new',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUntilTomorrow(String time) {
+    return 'tomorrow $time';
+  }
+
+  @override
+  String get aiChatTitle => 'AI chat';
+
+  @override
+  String get aiChatNewChat => 'New chat';
+
+  @override
+  String get aiChatListTitle => 'Conversations';
+
+  @override
+  String get aiChatSettingsTitle => 'AI settings';
+
+  @override
+  String get aiChatSettingsRowSubtitle => 'Keys, model and reply length';
+
+  @override
+  String get aiChatAskAi => 'Ask AI';
+
+  @override
+  String get aiChatAskAiSubtitle =>
+      'With your own key – you choose what’s sent';
+
+  @override
+  String aiChatAskAbout(String area) {
+    return 'Ask about $area';
+  }
+
+  @override
+  String get aiChatMenu => 'More';
+
+  @override
+  String get aiChatOpenList => 'All conversations';
+
+  @override
+  String get aiChatInputHint => 'Write your message…';
+
+  @override
+  String get aiChatSend => 'Send';
+
+  @override
+  String get aiChatStop => 'Stop';
+
+  @override
+  String get aiChatThinking => 'Thinking…';
+
+  @override
+  String get aiChatWriting => 'Writing a reply';
+
+  @override
+  String get aiChatWillSend => 'Will send';
+
+  @override
+  String get aiChatContextReviewFirst =>
+      'You’ll review what’s shared from your summary before the first send';
+
+  @override
+  String get aiChatContextNone => 'No personal context';
+
+  @override
+  String aiChatContextSections(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count summary sections',
+      one: '1 summary section',
+      zero: 'No sections',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatMessagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+      zero: 'No messages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatApproxTokens(String count) {
+    return '≈ $count tokens';
+  }
+
+  @override
+  String aiChatStripSemantics(String summary) {
+    return 'Will send: $summary. Tap to review or change';
+  }
+
+  @override
+  String aiChatOmitted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count older messages left out',
+      one: '1 older message left out',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aiChatContextTitle => 'What will be sent';
+
+  @override
+  String get aiChatContextSubtitle => 'Nothing is sent until you tap Send';
+
+  @override
+  String get aiChatContextFromSummary => 'From your summary';
+
+  @override
+  String get aiChatContextChange => 'Review sections';
+
+  @override
+  String get aiChatContextChoose => 'Choose sections';
+
+  @override
+  String get aiChatContextNoneHint =>
+      'Nothing from your data is sent – only this conversation’s messages.';
+
+  @override
+  String get aiChatContextUnsetHint =>
+      'On the first send, the summary preview opens so you can pick sections or leave any out.';
+
+  @override
+  String get aiChatContextUse => 'Use in this chat';
+
+  @override
+  String get aiChatContextUseAndSend => 'Use and send';
+
+  @override
+  String aiChatContextReviewed(String when) {
+    return 'Reviewed $when';
+  }
+
+  @override
+  String get aiChatContextCancelled => 'Nothing was sent.';
+
+  @override
+  String aiChatServiceModel(String service, String model) {
+    return '$service · $model';
+  }
+
+  @override
+  String get aiChatViewPayload => 'View the exact request';
+
+  @override
+  String get aiChatDone => 'Done';
+
+  @override
+  String get aiChatPayloadTitle => 'The exact request';
+
+  @override
+  String get aiChatPayloadEndpoint => 'Endpoint';
+
+  @override
+  String get aiChatPayloadHeaders => 'Headers (key hidden)';
+
+  @override
+  String get aiChatPayloadSystem => 'Instructions and context';
+
+  @override
+  String get aiChatPayloadMessages => 'Messages';
+
+  @override
+  String get aiChatPayloadRaw => 'Full body (JSON)';
+
+  @override
+  String get aiChatPayloadDraftNote =>
+      'Includes the message you’re typing. It’s sent only when you tap Send.';
+
+  @override
+  String get aiChatPayloadNoDraft =>
+      'Write a message to see the complete request.';
+
+  @override
+  String aiChatPayloadSize(String size, String tokens) {
+    return '$size · ≈ $tokens tokens';
+  }
+
+  @override
+  String aiChatBytes(String count) {
+    return '$count bytes';
+  }
+
+  @override
+  String aiChatKiloBytes(String count) {
+    return '$count KB';
+  }
+
+  @override
+  String get aiChatRoleUser => 'You';
+
+  @override
+  String get aiChatRoleAssistant => 'Assistant';
+
+  @override
+  String get aiChatCopy => 'Copy';
+
+  @override
+  String get aiChatCopied => 'Copied';
+
+  @override
+  String get aiChatCopyCode => 'Copy code';
+
+  @override
+  String get aiChatRegenerate => 'Regenerate';
+
+  @override
+  String get aiChatRetry => 'Try again';
+
+  @override
+  String get aiChatStopped => 'You stopped the reply';
+
+  @override
+  String get aiChatCutShort =>
+      'The reply hit the length limit. You can raise it in settings.';
+
+  @override
+  String get aiChatRefused => 'The model declined to answer.';
+
+  @override
+  String get aiChatFiltered => 'The content filter stopped the reply.';
+
+  @override
+  String get aiChatHealthNote =>
+      'For tracking only, not medical advice – ask your clinician about any health decision.';
+
+  @override
+  String aiChatOpenLink(String url) {
+    return 'Open link $url';
+  }
+
+  @override
+  String get aiChatLinkFailed => 'Couldn’t open the link.';
+
+  @override
+  String aiChatErrorNoKey(String service) {
+    return 'Add your $service key first.';
+  }
+
+  @override
+  String aiChatErrorBadKey(String service) {
+    return '$service rejected the key. Check it or replace it in settings.';
+  }
+
+  @override
+  String get aiChatErrorForbidden =>
+      'This key isn’t allowed to use this model.';
+
+  @override
+  String get aiChatErrorRateLimited =>
+      'Too many requests right now. Wait a moment, then try again.';
+
+  @override
+  String aiChatErrorRetryAfter(String seconds) {
+    return 'You can try again in $seconds s.';
+  }
+
+  @override
+  String aiChatErrorQuota(String service) {
+    return 'You’re out of credit or at your spend limit with $service.';
+  }
+
+  @override
+  String aiChatErrorOverloaded(String service) {
+    return '$service is busy right now. Try again shortly.';
+  }
+
+  @override
+  String aiChatErrorServer(String service) {
+    return '$service had a problem. Try again.';
+  }
+
+  @override
+  String aiChatErrorModelNotFound(String model) {
+    return 'The model “$model” isn’t available to this key. Pick another model.';
+  }
+
+  @override
+  String get aiChatErrorTemperature =>
+      'This model doesn’t accept a custom temperature. Set it to “Model default” in settings.';
+
+  @override
+  String get aiChatErrorContextTooLong =>
+      'The conversation is too long for the model. Start a new chat or share fewer sections.';
+
+  @override
+  String aiChatErrorBadRequest(String service) {
+    return '$service rejected the request.';
+  }
+
+  @override
+  String get aiChatErrorNetwork =>
+      'No internet connection, or the connection dropped.';
+
+  @override
+  String get aiChatErrorTimeout => 'No answer came in time.';
+
+  @override
+  String get aiChatErrorBadResponse => 'The answer couldn’t be read.';
+
+  @override
+  String get aiChatErrorUnknown => 'Something unexpected went wrong.';
+
+  @override
+  String get aiChatOpenSettings => 'Open settings';
+
+  @override
+  String get aiChatSetupTitle => 'Connect your own key';
+
+  @override
+  String get aiChatSetupBody =>
+      'The chat uses your own Anthropic or OpenAI API key. It’s stored encrypted on this phone only – never in backups or exports.';
+
+  @override
+  String aiChatSetupAdd(String service) {
+    return 'Add $service key';
+  }
+
+  @override
+  String get aiChatSetupPrivacy =>
+      'Nothing is sent until you tap Send, and you see exactly what goes out first.';
+
+  @override
+  String get aiChatEmptyTitle => 'How can I help today?';
+
+  @override
+  String get aiChatEmptyBody =>
+      'Ask about your day, prayers, budget or goals. You choose what’s shared from your summary before sending.';
+
+  @override
+  String get aiChatSuggestWeek => 'Sum up my week in a few points';
+
+  @override
+  String get aiChatSuggestBudget => 'How can I improve my budget this month?';
+
+  @override
+  String get aiChatSuggestPlan => 'Help me plan a balanced tomorrow';
+
+  @override
+  String get aiChatSuggestPrayer => 'How can I keep my prayers on time?';
+
+  @override
+  String get aiChatListEmptyTitle => 'No conversations yet';
+
+  @override
+  String get aiChatListEmptyBody =>
+      'Start a chat – it’s kept here, encrypted on your phone.';
+
+  @override
+  String get aiChatRename => 'Rename';
+
+  @override
+  String get aiChatRenameField => 'Conversation name';
+
+  @override
+  String get aiChatRenameSave => 'Save name';
+
+  @override
+  String get aiChatDelete => 'Delete chat';
+
+  @override
+  String get aiChatDeleted => 'Chat deleted';
+
+  @override
+  String get aiChatDeleteAll => 'Delete all chats';
+
+  @override
+  String get aiChatDeletedAll => 'All chats deleted';
+
+  @override
+  String get aiChatUntitled => 'Untitled chat';
+
+  @override
+  String aiChatListLimitNote(String count) {
+    return 'The latest $count chats are kept; older ones are removed automatically.';
+  }
+
+  @override
+  String aiChatListUpdated(String when, String messages) {
+    return '$when · $messages';
+  }
+
+  @override
+  String get aiChatToday => 'Today';
+
+  @override
+  String get aiChatYesterday => 'Yesterday';
+
+  @override
+  String get aiChatSettingsService => 'Service';
+
+  @override
+  String get aiChatServiceAnthropic => 'Anthropic';
+
+  @override
+  String get aiChatServiceOpenai => 'OpenAI';
+
+  @override
+  String get aiChatSettingsKeys => 'API keys';
+
+  @override
+  String aiChatKeyTitle(String service) {
+    return '$service key';
+  }
+
+  @override
+  String aiChatKeySaved(String mask) {
+    return 'Saved · $mask';
+  }
+
+  @override
+  String get aiChatKeyNotSet => 'Not added yet';
+
+  @override
+  String get aiChatKeySheetSubtitle => 'Stored encrypted on this phone only.';
+
+  @override
+  String get aiChatKeyCurrent => 'Current key';
+
+  @override
+  String get aiChatKeyField => 'Key';
+
+  @override
+  String get aiChatKeyFieldHint => 'Paste the key here';
+
+  @override
+  String get aiChatKeyPaste => 'Paste';
+
+  @override
+  String get aiChatKeySave => 'Save key';
+
+  @override
+  String get aiChatKeyReplace => 'Replace key';
+
+  @override
+  String get aiChatKeyDelete => 'Delete key';
+
+  @override
+  String get aiChatKeyDeleted => 'Key deleted';
+
+  @override
+  String get aiChatKeySavedNotice => 'Key saved.';
+
+  @override
+  String get aiChatKeyTest => 'Test key';
+
+  @override
+  String get aiChatKeyTestOk => 'The key works.';
+
+  @override
+  String get aiChatKeyTestNote =>
+      'The test only asks for the model list – none of your data is sent.';
+
+  @override
+  String get aiChatKeyWhere => 'Where do I get a key?';
+
+  @override
+  String get aiChatKeyProblemEmpty => 'Paste the key first.';
+
+  @override
+  String get aiChatKeyProblemShort => 'That’s too short to be a key.';
+
+  @override
+  String get aiChatKeyProblemSpaces =>
+      'The key contains spaces – copy it again.';
+
+  @override
+  String get aiChatKeyProblemProvider =>
+      'This looks like a key for another service. It will be saved anyway – test it to be sure.';
+
+  @override
+  String get aiChatSettingsModel => 'Model';
+
+  @override
+  String get aiChatModelPickerTitle => 'Choose a model';
+
+  @override
+  String get aiChatModelYourList => 'Your list';
+
+  @override
+  String aiChatModelsAvailable(String service) {
+    return 'Available from $service';
+  }
+
+  @override
+  String get aiChatModelCustom => 'Add a model id';
+
+  @override
+  String get aiChatModelCustomField => 'Model id';
+
+  @override
+  String get aiChatModelCustomHint => 'e.g. claude-sonnet-5-5';
+
+  @override
+  String get aiChatModelInvalid => 'Not a valid model id.';
+
+  @override
+  String get aiChatModelUse => 'Use';
+
+  @override
+  String get aiChatModelRefresh => 'Refresh models';
+
+  @override
+  String aiChatModelRefreshed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count models available',
+      one: '1 model available',
+      zero: 'No models available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatModelRefreshNote(String service) {
+    return 'Asks $service for the list only when you tap.';
+  }
+
+  @override
+  String get aiChatModelReset => 'Reset the list';
+
+  @override
+  String aiChatModelRemove(String model) {
+    return 'Remove $model from the list';
+  }
+
+  @override
+  String get aiChatModelSelected => 'Selected';
+
+  @override
+  String aiChatModelChip(String model) {
+    return 'Model: $model. Tap to change';
+  }
+
+  @override
+  String get aiChatSettingsReply => 'Reply';
+
+  @override
+  String get aiChatMaxTokens => 'Longest reply';
+
+  @override
+  String get aiChatMaxTokensNote => 'In tokens, including any model reasoning.';
+
+  @override
+  String get aiChatTemperature => 'Temperature';
+
+  @override
+  String get aiChatTemperatureDefault => 'Model default (recommended)';
+
+  @override
+  String get aiChatTemperatureNote =>
+      'Newer models accept only the default. Lower = steadier replies.';
+
+  @override
+  String get aiChatSettingsPrivacy => 'Privacy';
+
+  @override
+  String get aiChatPrivacyKeys =>
+      'Keys live in the phone’s encrypted storage – not in the database, backups or exports.';
+
+  @override
+  String get aiChatPrivacyCalls =>
+      'Madar contacts the service only when you tap Send, Test key or Refresh models. Nothing runs in the background.';
+
+  @override
+  String aiChatPrivacyHistory(String count) {
+    return 'Chats are kept encrypted on your phone (the latest $count).';
   }
 }

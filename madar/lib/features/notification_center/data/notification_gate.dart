@@ -224,6 +224,11 @@ class NotificationGate {
     return true;
   }
 
+  /// The shown notifications straight from the platform the gate wraps –
+  /// whatever wraps the gate in turn (e.g. a decorator that does not
+  /// forward [ActiveNotificationQuery]) – or null when not attached.
+  Future<List<ActiveNotice>>? activeNotices() => _platform?.activeNotices();
+
   /// Cancels a snooze made with [snooze] (the snoozed alarm goes too).
   Future<void> cancelSnooze(int id) async {
     if (!_policy.snoozed.containsKey(id)) return;

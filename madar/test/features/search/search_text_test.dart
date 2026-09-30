@@ -85,10 +85,10 @@ void main() {
 
   group('invisible characters', () {
     test('bidi isolates, marks and zero-width joiners are dropped inside words', () {
-      expect(fold('⁨Omar⁩'), 'omar');
-      expect(fold('مو‌سى'), 'موسي');
-      expect(fold('a­b'), 'ab');
-      expect(SearchText.tokenize('‏مرحبا‎'), hasLength(1));
+      expect(fold('\u2068Omar\u2069'), 'omar');
+      expect(fold('مو\u200Cسى'), 'موسي');
+      expect(fold('a\u00ADb'), 'ab');
+      expect(SearchText.tokenize('\u200Fمرحبا\u200E'), hasLength(1));
     });
   });
 

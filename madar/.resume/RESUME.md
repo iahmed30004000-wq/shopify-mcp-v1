@@ -31,7 +31,7 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
 | AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | RUNNING (wf_089d5589-460) |
 | Global search | lib/features/search, d2_search.json | RUNNING (wf_d2217f93-49b) |
-| Notification center | lib/features/notification_center, d3_notifications.json | RUNNING (wf_f2b25651-a6a) |
+| Notification center | lib/features/notification_center, d3_notifications.json | built (report in scratchpad/phase9_packages.md); safety review RUNNING (wf_4ddbde81-dc2); needs wiring (gate, AppServices, links, route) |
 
 ## Owner decisions
 - EveryAyah recitations: approved (stream on play / download on request; credited).

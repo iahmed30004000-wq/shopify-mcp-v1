@@ -91,12 +91,18 @@ class _Entry {
 
 /// A query word and the forms it may take in the index.
 class _QueryTerm {
-  _QueryTerm(this.term) : stem = SearchText.stem(term);
+  _QueryTerm(this.term)
+    : stem = SearchText.stem(term),
+      typoTolerant = term.length >= SearchScoring.typoMinLength && !_digits.hasMatch(term);
+
+  static final RegExp _digits = RegExp('[0-9]');
 
   final String term;
   final String? stem;
 
-  bool get typoTolerant => term.length >= SearchScoring.typoMinLength;
+  /// Long words tolerate a typo; numbers and codes never do («2025» must
+  /// not find «2026»).
+  final bool typoTolerant;
 
   /// Which stretch of the indexed word [t] this query word matches, in
   /// folded coordinates, with its quality; null when it does not.

@@ -157,14 +157,14 @@ class CenterNotice {
       other is CenterNotice &&
       other.id == id &&
       other.namespace == namespace &&
-      other.at == at &&
+      other.at?.millisecondsSinceEpoch == at?.millisecondsSinceEpoch &&
       mapEquals(other.data, data) &&
       other.title == title &&
       other.body == body &&
       other.channelId == channelId;
 
   @override
-  int get hashCode => Object.hash(id, namespace, at, title, body, channelId, data.length);
+  int get hashCode => Object.hash(id, namespace, at?.millisecondsSinceEpoch, title, body, channelId, data.length);
 
   @override
   String toString() => 'CenterNotice($namespace#$id @ ${at?.toIso8601String()} "$title")';

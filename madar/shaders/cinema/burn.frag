@@ -29,20 +29,35 @@ out vec4 fragColor;
 void main() {
   vec2 p = FlutterFragCoord().xy;
   vec2 size = max(uRect.zw, vec2(1.0));
-  float maxR = length(size) * 1.1;
-  float r = uBurn.x * maxR;
-  float n = cn_fbm(p * 0.018 + uBurn.w * 13.0) - 0.5;
-  float d = length(p - uBurn.yz) + n * 90.0 - r;
-  float w = max(uEdge.a, 1.0);
   if (uBurn.x <= 0.0) {
     fragColor = vec4(0.0);
     return;
   }
-  float hole = 1.0 - cn_edge(0.0, d, 1.5);
-  float edge = (1.0 - cn_edge(w, d, w * 0.5)) * (1.0 - hole);
-  float scorch = (1.0 - cn_edge(w * 3.0, d, w)) * (1.0 - hole) * (1.0 - edge);
+  // The melt starts as a slow blister and then runs away.
+  float prog = uBurn.x;
+  float r = prog * prog * (length(size) * 1.2);
+  vec2 o = p - uBurn.yz;
+  float n = cn_fbm(p * 0.018 + uBurn.w * 13.0) - 0.5;
+  float d = length(o) + n * (36.0 + r * 0.4) - r;
+  // Bubbles pop open just ahead of the front.
+  vec2 cell = floor((p - uRect.xy) / 24.0);
+  vec2 rnd = cn_hash22(cell + uBurn.w * 7.0);
+  vec2 bc = uRect.xy + (cell + 0.2 + 0.6 * rnd) * 24.0;
+  float grow = 1.0 - smoothstep(0.0, 55.0, d);
+  float bd = length(p - bc) - (2.0 + rnd.x * 7.0) * grow + (1.0 - grow) * 30.0;
+  float dist = rnd.y < 0.35 ? d : min(d, bd);
+  float w = max(uEdge.a, 1.0);
+  float hole = 1.0 - cn_edge(0.0, dist, 1.2);
+  float out1 = 1.0 - hole;
+  float white = (1.0 - smoothstep(0.0, w * 0.45, dist)) * out1;
+  float glow = (1.0 - smoothstep(w * 0.2, w * 1.3, dist)) * out1;
+  float scorch = (1.0 - smoothstep(w * 0.8, w * 4.5, dist)) * out1;
+  float blister = (1.0 - smoothstep(0.0, 3.0, abs(dist - w * 2.2))) * out1 * 0.35;
   vec4 col = vec4(uHole.rgb, 1.0) * uHole.a * hole;
-  col += vec4(uEdge.rgb, 1.0) * edge;
-  col += vec4(0.18, 0.09, 0.03, 1.0) * scorch * 0.75;
+  vec3 ring = mix(uEdge.rgb, vec3(1.0, 0.97, 0.82), white);
+  float ringA = max(glow, white);
+  vec4 scorchC = vec4(0.16, 0.08, 0.03, 1.0) * scorch * 0.85;
+  col += vec4(ring, 1.0) * ringA + scorchC * (1.0 - ringA);
+  col.rgb += vec3(1.0, 0.75, 0.4) * blister * (1.0 - ringA);
   fragColor = col;
 }

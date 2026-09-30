@@ -17798,7 +17798,7 @@
   "cinemaFlappyOrbitHomage": "تحية لرسوم الخرطوم المطاطي في الثلاثينيات",
   "cinemaMetropolisTitle": "آلة المتروبوليس",
   "cinemaMetropolisTagline": "واجه الآلات العملاقة واحدة تلو الأخرى",
-  "cinemaMetropolisHomage": "تحية لفيلم «متروبوليس» الصامت (1927)",
+  "cinemaMetropolisHomage": "تحية لفيلم «متروبوليس» الصامت من العشرينيات",
   "cinemaCaravanTitle": "سباق القافلة",
   "cinemaCaravanTagline": "اعبر الكثبان بألوان التكنيكولور",
   "cinemaCaravanHomage": "تحية لملاحم الصحراء في الخمسينيات",
@@ -17819,6 +17819,30 @@
   "cinemaOpenGameFailed": "تعذّر فتح الرابط",
   "cinemaSave": "حفظ",
   "cinemaCancel": "إلغاء",
+  "cinemaFxTestCard": "بطاقة المعايرة",
+  "@cinemaFxTestCard": {
+    "description": "Projector check card that shows the film look of an era"
+  },
+  "cinemaFxFilmLook": "مظهر الفيلم",
+  "@cinemaFxFilmLook": {
+    "description": "Setting: strength and quality of the old-film effect in Madar Cinema"
+  },
+  "cinemaFxQualityLowPower": "توفير الطاقة",
+  "@cinemaFxQualityLowPower": {
+    "description": "Film look quality: cheapest"
+  },
+  "cinemaFxQualityBalanced": "متوازن",
+  "@cinemaFxQualityBalanced": {
+    "description": "Film look quality: default"
+  },
+  "cinemaFxQualityFull": "أعلى دقة",
+  "@cinemaFxQualityFull": {
+    "description": "Film look quality: best"
+  },
+  "cinemaFxReelLabel": "بكرة",
+  "@cinemaFxReelLabel": {
+    "description": "Label on a film-leader card before a reel number"
+  },
   "dataCentreTitle": "بياناتك",
   "@dataCentreTitle": {
     "description": "Data centre screen title"
@@ -18985,17 +19009,20 @@
   "searchChannelVisit": "زيارة",
   "searchChannelMessage": "رسالة",
   "searchChannelOther": "تواصل",
-  "searchPainTitle": "ألم {score}/10",
+  "searchPainTitle": "ألم {score}/{max}",
   "@searchPainTitle": {
     "placeholders": {
       "score": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
   "searchMoodTitle": "المزاج",
   "searchFastingTitle": "صيام",
-  "searchAyahPlace": "{surah} · الآية {ayah}",
+  "searchAyahPlace": "{surah}، الآية {ayah}",
   "@searchAyahPlace": {
     "placeholders": {
       "surah": {
@@ -19006,7 +19033,7 @@
       }
     }
   },
-  "searchAyahRange": "{surah} · {from}–{to}",
+  "searchAyahRange": "{surah} {from}–{to}",
   "@searchAyahRange": {
     "placeholders": {
       "surah": {
@@ -19078,7 +19105,6 @@
   "@ncTitle": {
     "description": "Title of the notification center"
   },
-  "ncSubtitle": "ما وصلك وما سيصلك، في مكان واحد",
   "ncTabUpcoming": "القادمة",
   "@ncTabUpcoming": {
     "description": "Notification center tab: scheduled notifications"
@@ -19367,14 +19393,6 @@
       }
     }
   },
-  "ncMutedBanner": "{count, plural, =1{مجموعة مكتومة} =2{مجموعتان مكتومتان} few{{count} مجموعات مكتومة} many{{count} مجموعة مكتومة} other{{count} مجموعة مكتومة}}",
-  "@ncMutedBanner": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "ncSettingsTitle": "الإشعارات",
   "ncSettingsSubtitle": "ما يرسله كل جزء من مَدار، في مكان واحد",
   "ncSettingsOn": "مفعّلة",
@@ -19416,6 +19434,454 @@
     "placeholders": {
       "count": {
         "type": "int"
+      }
+    }
+  },
+  "ncActionCancelSnooze": "ألغِ التأجيل",
+  "ncActionSnoozeMenu": "أجِّل…",
+  "ncSnoozeTitle": "أعِده بعد قليل",
+  "ncSnoozeSubtitle": "يختفي الآن، ثم يصلك من جديد في الوقت الذي تختاره.",
+  "ncOptionUntil": "حتى {time}",
+  "@ncOptionUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOptionAt": "يعود {time}",
+  "@ncOptionAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncRecentCount": "{count, plural, =1{إشعار واحد} =2{إشعاران} few{{count} إشعارات} many{{count} إشعارًا} other{{count} إشعار}}",
+  "@ncRecentCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUpcomingCount": "{count, plural, =0{لا شيء في الأيام السبعة القادمة} =1{إشعار واحد في الأيام السبعة القادمة} =2{إشعاران في الأيام السبعة القادمة} few{{count} إشعارات في الأيام السبعة القادمة} many{{count} إشعارًا في الأيام السبعة القادمة} other{{count} إشعار في الأيام السبعة القادمة}}",
+  "@ncUpcomingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncNewCount": "{count, plural, =1{واحد جديد} =2{اثنان جديدان} few{{count} جديدة} many{{count} جديدًا} other{{count} جديد}}",
+  "@ncNewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUntilTomorrow": "غدًا {time}",
+  "@ncUntilTomorrow": {
+    "description": "End of a mute or snooze tomorrow, after 'until'",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatTitle": "المحادثة الذكية",
+  "@aiChatTitle": {
+    "description": "AI chat screen title"
+  },
+  "aiChatNewChat": "محادثة جديدة",
+  "aiChatListTitle": "المحادثات",
+  "aiChatSettingsTitle": "إعدادات الذكاء الاصطناعي",
+  "aiChatSettingsRowSubtitle": "المفاتيح والنموذج وطول الرد",
+  "@aiChatSettingsRowSubtitle": {
+    "description": "Subtitle of the Settings row that opens the AI settings"
+  },
+  "aiChatAskAi": "اسأل الذكاء الاصطناعي",
+  "@aiChatAskAi": {
+    "description": "Entry point on hubs"
+  },
+  "aiChatAskAiSubtitle": "بمفتاحك الخاص، وأنت تختار ما يُرسل",
+  "aiChatAskAbout": "اسأل عن {area}",
+  "@aiChatAskAbout": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatMenu": "المزيد",
+  "aiChatOpenList": "كل المحادثات",
+  "aiChatInputHint": "اكتب رسالتك…",
+  "aiChatSend": "إرسال",
+  "aiChatStop": "إيقاف",
+  "aiChatThinking": "يفكّر…",
+  "aiChatWriting": "يكتب الرد",
+  "aiChatWillSend": "سيُرسل",
+  "aiChatContextReviewFirst": "ستراجع ما يُشارك من ملخّصك قبل أول إرسال",
+  "aiChatContextNone": "بلا سياق شخصي",
+  "aiChatContextSections": "{count, plural, =0{لا أقسام} =1{قسم واحد من ملخّصك} =2{قسمان من ملخّصك} few{{count} أقسام من ملخّصك} many{{count} قسمًا من ملخّصك} other{{count} قسم من ملخّصك}}",
+  "@aiChatContextSections": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatMessagesCount": "{count, plural, =0{لا رسائل} =1{رسالة واحدة} =2{رسالتان} few{{count} رسائل} many{{count} رسالة} other{{count} رسالة}}",
+  "@aiChatMessagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatApproxTokens": "≈ {count} رمز",
+  "@aiChatApproxTokens": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatStripSemantics": "سيُرسل: {summary}. انقر للمراجعة أو التغيير",
+  "@aiChatStripSemantics": {
+    "placeholders": {
+      "summary": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatOmitted": "{count, plural, =1{رسالة أقدم لن تُرسل} =2{رسالتان أقدم لن تُرسلا} few{{count} رسائل أقدم لن تُرسل} many{{count} رسالة أقدم لن تُرسل} other{{count} رسالة أقدم لن تُرسل}}",
+  "@aiChatOmitted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatContextTitle": "ما الذي سيُرسل",
+  "aiChatContextSubtitle": "لا يُرسل شيء إلا حين تضغط «إرسال»",
+  "aiChatContextFromSummary": "من ملخّصك",
+  "aiChatContextChange": "مراجعة الأقسام",
+  "aiChatContextChoose": "اختيار الأقسام",
+  "aiChatContextNoneHint": "لن يُرسل شيء من بياناتك، فقط رسائل هذه المحادثة.",
+  "aiChatContextUnsetHint": "عند أول إرسال ستظهر معاينة الملخّص لتختار الأقسام أو تستبعد ما تشاء.",
+  "aiChatContextUse": "استخدمه في المحادثة",
+  "@aiChatContextUse": {
+    "description": "Confirm button of the summary preview opened from the AI chat"
+  },
+  "aiChatContextUseAndSend": "استخدمه وأرسل",
+  "@aiChatContextUseAndSend": {
+    "description": "Confirm button of the summary preview opened by the first Send"
+  },
+  "aiChatContextReviewed": "راجعته {when}",
+  "@aiChatContextReviewed": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatContextCancelled": "لم يُرسل شيء.",
+  "aiChatServiceModel": "{service} · {model}",
+  "@aiChatServiceModel": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatViewPayload": "عرض الطلب كما سيُرسل",
+  "aiChatDone": "تم",
+  "aiChatPayloadTitle": "الطلب كما سيُرسل",
+  "aiChatPayloadEndpoint": "العنوان",
+  "aiChatPayloadHeaders": "الترويسات (المفتاح مخفي)",
+  "aiChatPayloadSystem": "التعليمات والسياق",
+  "aiChatPayloadMessages": "الرسائل",
+  "aiChatPayloadRaw": "النص الكامل (JSON)",
+  "aiChatPayloadDraftNote": "يشمل رسالتك الجاري كتابتها. لن يُرسل إلا حين تضغط «إرسال».",
+  "aiChatPayloadNoDraft": "اكتب رسالة لترى الطلب كاملًا.",
+  "aiChatPayloadSize": "{size} · ≈ {tokens} رمز",
+  "@aiChatPayloadSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "tokens": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatBytes": "{count} بايت",
+  "@aiChatBytes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKiloBytes": "{count} ك.ب",
+  "@aiChatKiloBytes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatRoleUser": "أنت",
+  "aiChatRoleAssistant": "المساعد",
+  "aiChatCopy": "نسخ",
+  "aiChatCopied": "نُسخ",
+  "aiChatCopyCode": "نسخ الشيفرة",
+  "aiChatRegenerate": "إعادة كتابة الرد",
+  "aiChatRetry": "إعادة المحاولة",
+  "aiChatStopped": "أوقفتَ الرد",
+  "aiChatCutShort": "توقّف الرد عند حدّ الطول. يمكنك رفعه من الإعدادات.",
+  "aiChatRefused": "امتنع النموذج عن الإجابة.",
+  "aiChatFiltered": "أوقف مرشّح المحتوى الرد.",
+  "aiChatHealthNote": "للمتابعة فقط وليس نصيحة طبية؛ استشر طبيبك في أي قرار صحي.",
+  "aiChatOpenLink": "فتح الرابط {url}",
+  "@aiChatOpenLink": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatLinkFailed": "تعذّر فتح الرابط.",
+  "aiChatErrorNoKey": "أضف مفتاح {service} أولًا.",
+  "@aiChatErrorNoKey": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorBadKey": "رفضت {service} المفتاح. تحقّق منه أو استبدله في الإعدادات.",
+  "@aiChatErrorBadKey": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorForbidden": "لا يملك هذا المفتاح صلاحية استخدام هذا النموذج.",
+  "aiChatErrorRateLimited": "طلبات كثيرة الآن. انتظر قليلًا ثم أعد المحاولة.",
+  "aiChatErrorRetryAfter": "يمكنك المحاولة بعد {seconds} ث.",
+  "@aiChatErrorRetryAfter": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorQuota": "نفد الرصيد أو بلغتَ حدّ الإنفاق لدى {service}.",
+  "@aiChatErrorQuota": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorOverloaded": "{service} مشغولة الآن. أعد المحاولة بعد قليل.",
+  "@aiChatErrorOverloaded": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorServer": "حدث خلل لدى {service}. أعد المحاولة.",
+  "@aiChatErrorServer": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorModelNotFound": "النموذج «{model}» غير متاح لهذا المفتاح. اختر نموذجًا آخر.",
+  "@aiChatErrorModelNotFound": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorTemperature": "لا يقبل هذا النموذج درجة حرارة مخصّصة. اجعلها «افتراضي النموذج» في الإعدادات.",
+  "aiChatErrorContextTooLong": "المحادثة أطول مما يحتمله النموذج. ابدأ محادثة جديدة أو شارك أقسامًا أقل.",
+  "aiChatErrorBadRequest": "رفضت {service} الطلب.",
+  "@aiChatErrorBadRequest": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorNetwork": "لا اتصال بالإنترنت، أو انقطع الاتصال.",
+  "aiChatErrorTimeout": "لم يصل ردّ في الوقت المناسب.",
+  "aiChatErrorBadResponse": "وصل ردّ تعذّرت قراءته.",
+  "aiChatErrorUnknown": "حدث خطأ غير متوقّع.",
+  "aiChatOpenSettings": "فتح الإعدادات",
+  "aiChatSetupTitle": "اربط مفتاحك الخاص",
+  "aiChatSetupBody": "تعمل المحادثة بمفتاح API منك لدى Anthropic أو OpenAI. يُحفظ مشفّرًا على هذا الهاتف فقط، ولا يدخل النسخ الاحتياطية ولا التصدير.",
+  "aiChatSetupAdd": "إضافة مفتاح {service}",
+  "@aiChatSetupAdd": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSetupPrivacy": "لا يُرسل شيء إلا حين تضغط «إرسال»، وترى قبلها ما سيُرسل بالضبط.",
+  "aiChatEmptyTitle": "بمَ أساعدك اليوم؟",
+  "aiChatEmptyBody": "اسأل عن يومك أو صلاتك أو ميزانيتك أو أهدافك. تختار ما يُشارك من ملخّصك قبل الإرسال.",
+  "aiChatSuggestWeek": "لخّص أسبوعي في نقاط قليلة",
+  "aiChatSuggestBudget": "كيف أحسّن ميزانيتي هذا الشهر؟",
+  "aiChatSuggestPlan": "ساعدني أخطّط لغدٍ متوازن",
+  "aiChatSuggestPrayer": "كيف أحافظ على الصلاة في وقتها؟",
+  "aiChatListEmptyTitle": "لا محادثات بعد",
+  "aiChatListEmptyBody": "ابدأ محادثة، وتُحفظ هنا مشفّرة على هاتفك.",
+  "aiChatRename": "إعادة التسمية",
+  "aiChatRenameField": "اسم المحادثة",
+  "aiChatRenameSave": "حفظ الاسم",
+  "aiChatDelete": "حذف المحادثة",
+  "aiChatDeleted": "حُذفت المحادثة",
+  "aiChatDeleteAll": "حذف كل المحادثات",
+  "aiChatDeletedAll": "حُذفت كل المحادثات",
+  "aiChatUntitled": "محادثة بلا عنوان",
+  "aiChatListLimitNote": "تُحفظ آخر {count} محادثة؛ الأقدم يُحذف تلقائيًا.",
+  "@aiChatListLimitNote": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatListUpdated": "{when} · {messages}",
+  "@aiChatListUpdated": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "messages": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatToday": "اليوم",
+  "aiChatYesterday": "أمس",
+  "aiChatSettingsService": "الخدمة",
+  "aiChatServiceAnthropic": "Anthropic",
+  "aiChatServiceOpenai": "OpenAI",
+  "aiChatSettingsKeys": "مفاتيح API",
+  "aiChatKeyTitle": "مفتاح {service}",
+  "@aiChatKeyTitle": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeySaved": "محفوظ · {mask}",
+  "@aiChatKeySaved": {
+    "placeholders": {
+      "mask": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeyNotSet": "لم يُضف بعد",
+  "aiChatKeySheetSubtitle": "يُحفظ مشفّرًا على هذا الهاتف فقط.",
+  "aiChatKeyCurrent": "المفتاح الحالي",
+  "aiChatKeyField": "المفتاح",
+  "aiChatKeyFieldHint": "الصق المفتاح هنا",
+  "aiChatKeyPaste": "لصق",
+  "aiChatKeySave": "حفظ المفتاح",
+  "aiChatKeyReplace": "استبدال المفتاح",
+  "aiChatKeyDelete": "حذف المفتاح",
+  "aiChatKeyDeleted": "حُذف المفتاح",
+  "aiChatKeySavedNotice": "حُفظ المفتاح.",
+  "aiChatKeyTest": "اختبار المفتاح",
+  "aiChatKeyTestOk": "المفتاح يعمل.",
+  "aiChatKeyTestNote": "الاختبار يطلب قائمة النماذج فقط، ولا يرسل أي بيانات منك.",
+  "aiChatKeyWhere": "أين أجد مفتاحي؟",
+  "aiChatKeyProblemEmpty": "الصق المفتاح أولًا.",
+  "aiChatKeyProblemShort": "هذا أقصر من أن يكون مفتاحًا.",
+  "aiChatKeyProblemSpaces": "في المفتاح مسافات؛ انسخه مرة أخرى.",
+  "aiChatKeyProblemProvider": "يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.",
+  "aiChatSettingsModel": "النموذج",
+  "aiChatModelPickerTitle": "اختر النموذج",
+  "aiChatModelYourList": "قائمتك",
+  "aiChatModelsAvailable": "متاح لدى {service}",
+  "@aiChatModelsAvailable": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelCustom": "إضافة معرّف نموذج",
+  "aiChatModelCustomField": "معرّف النموذج",
+  "aiChatModelCustomHint": "مثل claude-sonnet-5-5",
+  "aiChatModelInvalid": "معرّف غير صالح.",
+  "aiChatModelUse": "استخدام",
+  "aiChatModelRefresh": "تحديث قائمة النماذج",
+  "aiChatModelRefreshed": "{count, plural, =0{لا نماذج متاحة} =1{نموذج واحد متاح} =2{نموذجان متاحان} few{{count} نماذج متاحة} many{{count} نموذجًا متاحًا} other{{count} نموذج متاح}}",
+  "@aiChatModelRefreshed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatModelRefreshNote": "يطلب القائمة من {service} حين تضغط فقط.",
+  "@aiChatModelRefreshNote": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelReset": "استعادة القائمة الأصلية",
+  "aiChatModelRemove": "إزالة {model} من القائمة",
+  "@aiChatModelRemove": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelSelected": "المختار",
+  "aiChatModelChip": "النموذج: {model}. انقر للتغيير",
+  "@aiChatModelChip": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSettingsReply": "الرد",
+  "aiChatMaxTokens": "أقصى طول للرد",
+  "aiChatMaxTokensNote": "بالرموز، ويشمل تفكير النموذج إن وُجد.",
+  "aiChatTemperature": "درجة الحرارة",
+  "aiChatTemperatureDefault": "افتراضي النموذج (موصى به)",
+  "aiChatTemperatureNote": "النماذج الأحدث لا تقبل إلا القيمة الافتراضية. قيمة أقل = ردود أثبت.",
+  "aiChatSettingsPrivacy": "الخصوصية",
+  "aiChatPrivacyKeys": "المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.",
+  "aiChatPrivacyCalls": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
+  "aiChatPrivacyHistory": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count}).",
+  "@aiChatPrivacyHistory": {
+    "placeholders": {
+      "count": {
+        "type": "String"
       }
     }
   }

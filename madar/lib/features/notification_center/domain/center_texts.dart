@@ -82,9 +82,17 @@ class CenterTexts {
   /// A mute's end: "5:48 PM" today, "Tomorrow 7:00 AM", "Thursday, 7:00 AM"…
   String until(DateTime end, DateTime now) {
     final a = end.toLocal(), n = now.toLocal();
-    final sameDay = a.year == n.year && a.month == n.month && a.day == n.day;
-    return sameDay ? time(end) : when(end, now);
+    final days = DateTime.utc(a.year, a.month, a.day).difference(DateTime.utc(n.year, n.month, n.day)).inDays;
+    if (days == 0) return time(end);
+    if (days == 1) return l.ncUntilTomorrow(time(end));
+    return when(end, now);
   }
 
   String count(int n) => fmt.formatInt(n);
+
+  /// [s] (a plural message with its number) in the active digits.
+  String digits(String s) => fmt.localizeDigits(s);
+
+  /// Parts of a screen-reader label, with the language's comma.
+  String join(Iterable<String> parts) => parts.where((p) => p.isNotEmpty).join(fmt.isArabic ? '، ' : ', ');
 }

@@ -158,15 +158,19 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
       })
       .catchError((Object e, StackTrace s) => debugPrint('NotificationCenter: refresh failed: $e\n$s'));
 
+  /// Reads the stored state once the database is there (until then the
+  /// center keeps what it records in memory and merges it in later).
   Future<void> _load(DateTime now) async {
     if (_loaded) return;
-    _loaded = true;
     final store = _store;
     if (store == null) return;
+    _loaded = true;
     try {
-      _history = await store.history();
-      _watch = await store.watch();
+      final stored = await store.history();
+      _history = stored.recordAll(_history.entries, now: now).bounded(now);
+      _watch = [...await store.watch(), ..._watch];
       _seenAt = await store.seenAt() ?? _seenAt;
+      if (!ref.mounted) return;
       final gate = _gate;
       if (!gate.policyLoaded) {
         await gate.setPolicy(await store.policy());
@@ -180,6 +184,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     if (!ref.mounted) return;
     final now = _now();
     await _load(now);
+    if (!ref.mounted) return;
     final service = _service;
     final gate = _gate;
     var pendingRaw = const <PendingNotice>[];
@@ -191,7 +196,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
       debugPrint('NotificationCenter: pending notifications unavailable: $e');
     }
     try {
-      activeRaw = await service.activeNotices();
+      activeRaw = await (gate.activeNotices() ?? service.activeNotices());
     } catch (e) {
       debugPrint('NotificationCenter: shown notifications unavailable: $e');
     }
@@ -203,6 +208,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     final policy = gate.policy.pruned(now);
     if (policy != gate.policy) {
       await gate.setPolicy(policy);
+      if (!ref.mounted) return;
       await _persistPolicy();
     }
     final pending = [
@@ -240,6 +246,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     if (history != _history) {
       _history = history;
       await _saveHistory();
+      if (!ref.mounted) return;
     }
     if (_watchDirty || !listEquals(watch, _watch)) {
       _watch = watch;
@@ -505,7 +512,11 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
 
   Future<void> _saveHistory() => _guard((s) => s.saveHistory(_history));
 
-  Future<void> _persistPolicy() => _guard((s) => s.savePolicy(_gate.policy));
+  Future<void> _persistPolicy() async {
+    if (!ref.mounted) return;
+    final policy = _gate.policy;
+    await _guard((s) => s.savePolicy(policy));
+  }
 
   Future<void> _guard(Future<void> Function(NotificationCenterStore store) write) async {
     final store = _store;

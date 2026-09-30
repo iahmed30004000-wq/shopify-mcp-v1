@@ -35,8 +35,16 @@ class SearchLoadContext {
   /// A number in the app's digits (at most two decimals).
   String number(num value) => formatter.formatNumber(value);
 
-  /// A day in the app's style (`٢٧ سبتمبر ٢٠٢٦`).
-  String date(DateTime day) => formatter.formatDate(day);
+  /// A day in the app's style (`٢٧ سبتمبر ٢٠٢٦`); `2026-09-27` in the
+  /// app's digits if the locale's date names are not loaded.
+  String date(DateTime day) {
+    try {
+      return formatter.formatDate(day);
+    } on Object {
+      String two(int n) => n.toString().padLeft(2, '0');
+      return formatter.localizeDigits('${day.year}-${two(day.month)}-${two(day.day)}');
+    }
+  }
 
   /// The sura's name in the app's language (`البقرة`), or «سورة ٢» while the
   /// Quran data is not loaded.
@@ -47,8 +55,19 @@ class SearchLoadContext {
   String ayahPlace(int surah, int ayah) =>
       l10n.searchAyahPlace(this.surah(surah), formatter.formatInt(ayah, grouping: false));
 
-  /// Non-empty [parts] joined by « · ».
-  static String join(Iterable<String?> parts) => parts.where((p) => p != null && p.trim().isNotEmpty).join(' · ');
+  /// Between the parts of a line: the Arabic comma in Arabic (a middle dot
+  /// next to Arabic-Indic digits reads as a zero), « · » otherwise.
+  String get separator => arabic ? '، ' : ' · ';
+
+  /// Between the items of a list («ممتع، طويل» / "fun, long").
+  String get listSeparator => arabic ? '، ' : ', ';
+
+  /// Non-empty [parts] joined by [separator].
+  String join(Iterable<String?> parts) => joinWith(parts, separator);
+
+  /// Non-empty [parts] joined by [separator].
+  static String joinWith(Iterable<String?> parts, String separator) =>
+      parts.where((p) => p != null && p.trim().isNotEmpty).join(separator);
 }
 
 /// Produces the records of an indexed source.

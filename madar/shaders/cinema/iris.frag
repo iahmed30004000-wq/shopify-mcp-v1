@@ -69,11 +69,22 @@ void main() {
   vec2 q = p - uIris.xy;
   float r = max(uIris.z, 0.0);
   float d = shapeDistance(q, r, uStyle.x);
-  float ang = atan(q.y, q.x);
+  // Hand-inked edge: the outline re-boils on twos (boil frame).
+  float ang = atan(q.y, q.x + 0.0001);
   d += (cn_noise(vec2(ang * 3.0 + 7.0, uStyle.z * 1.7)) - 0.5) * uStyle.y * 2.0;
   float soft = max(uIris.w, 0.75);
   float cover = cn_edge(0.0, d, soft);
   if (r <= 0.0) cover = 1.0;
-  float rim = (1.0 - smoothstep(0.0, soft * 3.0 + 4.0, abs(d + soft * 2.0))) * uStyle.w * (1.0 - cover);
-  fragColor = vec4(uColor.rgb, 1.0) * uColor.a * cover + vec4(1.0, 0.95, 0.85, 1.0) * rim * 0.35;
+  float inside = 1.0 - cover;
+  // Inside the opening: the lens penumbra darkens toward the blades and a
+  // thin rim of light catches the edge.
+  float pen = (1.0 - smoothstep(0.0, 22.0 + r * 0.12, -d)) * inside;
+  float rim = (1.0 - smoothstep(0.0, soft * 3.0 + 4.0, abs(d + soft * 2.5))) * uStyle.w * inside;
+  // Outside: the mask with a faint card texture (never dead flat black).
+  vec2 lp = p - uRect.xy;
+  float tex = (cn_noise(lp / 2.5 + uStyle.z * 0.37) - 0.5) * 0.08;
+  vec4 col = vec4(uColor.rgb * (1.0 + tex), 1.0) * uColor.a * cover;
+  col += vec4(uColor.rgb, 1.0) * pen * 0.42 * uColor.a;
+  col.rgb += vec3(1.0, 0.95, 0.85) * rim * 0.32;
+  fragColor = col;
 }

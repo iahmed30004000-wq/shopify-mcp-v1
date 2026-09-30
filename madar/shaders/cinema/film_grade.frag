@@ -2,12 +2,17 @@
 precision highp float;
 #include <flutter/runtime_effect.glsl>
 #include "lib/cinema.glsl"
+#include "lib/film.glsl"
 
 // ---------------------------------------------------------------------------
 // film_grade — the Film Reel Engine's ONE full-frame post pass (1920s–1970s
 // eras; the 1980s use vhs.frag). Owner: FX agent (body). Uniform contract:
 // architect (lib/features/cinema/engine/core/shader_uniforms.dart,
 // FilmGradeUniforms) – change both together or not at all.
+//
+// ReelFilmFx (engine/fx/) grades with film_stock.frag, a superset of this
+// layout with the per-era print looks; this pass is the contract-level
+// fallback (same film wear from lib/film.glsl, no print stylisation).
 //
 // Draw: the whole game frame is recorded, rasterised (Picture.toImageSync at
 // physical resolution × FilmFx.resolutionScale) and bound as uFrame; the
@@ -60,81 +65,60 @@ vec3 sampleFrame(vec2 uv) {
 
 void main() {
   vec2 size = max(uRect.zw, vec2(1.0));
-  vec2 p = FlutterFragCoord().xy - uRect.xy;
+  vec2 p0 = FlutterFragCoord().xy - uRect.xy;
+  float t = uClock.x;
   float ff = uClock.y;
   float seed = uClock.w;
 
-  // Gate weave: the print hops a little every film frame and drifts slowly.
-  vec2 hop = cn_hash22(vec2(ff, seed + 1.3)) - 0.5;
-  vec2 drift = vec2(sin(uClock.x * 1.7 + seed), sin(uClock.x * 2.3 + 1.1)) * 0.35;
-  vec2 weave = (hop * vec2(0.6, 1.0) + drift) * uWear.x;
-  weave += (cn_hash22(vec2(ff * 1.7, 3.1 + seed)) - 0.5) * uEvent.y * 14.0;
-  vec2 uv = (p - weave) / size;
+  // Gate weave + projector shake.
+  vec2 weave = fm_weave(ff, t, seed) * uWear.x;
+  weave += (cn_hash22(vec2(ff * 1.7, 3.1 + seed)) - 0.5) * uEvent.y * 16.0;
+  vec2 p = p0 - weave;
+  vec2 uv = p / size;
   vec3 c = sampleFrame(uv);
 
-  // Halation: brights bleed a soft warm glow (4 taps, only when enabled).
+  // Halation: brights bleed a warm glow (4 taps, only when enabled).
   if (uWear.w > 0.001) {
     vec2 o = vec2(3.0) / size;
     vec3 h = sampleFrame(uv + vec2(o.x, o.y)) + sampleFrame(uv + vec2(-o.x, o.y)) +
              sampleFrame(uv + vec2(o.x, -o.y)) + sampleFrame(uv - o);
     h *= 0.25;
-    float hb = smoothstep(0.6, 1.0, cn_luma(h));
-    c += h * hb * uWear.w * vec3(1.0, 0.82, 0.62) * 0.6;
+    c += h * smoothstep(0.6, 1.0, cn_luma(h)) * uWear.w * vec3(1.0, 0.55, 0.35) * 0.7;
   }
 
-  // Era grade: duotone for monochrome stock, then colour back by saturation.
-  float l = cn_luma(c);
-  vec3 duo = mix(uInk.rgb, uPaper.rgb, l);
-  c = mix(duo, c, uTone.x);
-  c = mix(c, c * uTint.rgb * 1.25, uTint.a);
+  // Tone curve first, then the stock: duotone for monochrome, saturation
+  // around grey for colour.
   c = (c - 0.5) * uTone.y + 0.5 + uTone.z;
-  if (uTone.w > 0.5) {
-    c = floor(c * uTone.w + 0.5) / uTone.w;
-  }
+  if (uTone.w > 0.5) c = floor(c * uTone.w + 0.5) / uTone.w;
+  float l = cn_sat(cn_luma(c));
+  vec3 duo = mix(uInk.rgb, uPaper.rgb, l);
+  vec3 satc = mix(vec3(l), c, max(uTone.x, 0.0));
+  c = mix(duo, satc, cn_sat(uTone.x));
+  c = mix(c, c * uTint.rgb * 1.2, uTint.a);
 
-  // Projector flicker: exposure jitters per film frame.
-  float flick = (cn_hash11(ff * 7.13 + seed) - 0.5) * 0.22 + sin(uClock.x * 31.0) * 0.03;
-  c *= 1.0 + flick * uGrain.z;
+  // Exposure: flicker and vignette.
+  vec2 q = p0 / size - 0.5;
+  c *= 1.0 + fm_flicker(q, ff, t, seed) * uGrain.z;
+  c = mix(c, uInk.rgb * 0.5, fm_vignette(p0, size, uGrain.w, 0.0, t) * 0.92);
 
-  // Vignette (aspect-corrected, slightly uneven like an old lens).
-  vec2 q = (p / size - 0.5) * vec2(size.x / size.y, 1.0);
-  float vig = smoothstep(0.35, 1.05, length(q * vec2(1.25, 0.9)));
-  c *= 1.0 - uGrain.w * vig;
+  // Grain, strongest in the mid-tones.
+  float lum = cn_luma(c);
+  float body = 0.35 + 0.65 * (1.0 - abs(lum - 0.45) * 1.3);
+  c += fm_grain(p0, max(uGrain.y, 0.75), ff, seed, 1.0) * uGrain.x * 0.1 * body;
 
-  // Grain: new pattern every film frame, strongest in the mid-tones.
-  float gs = max(uGrain.y, 1.0);
-  float g = cn_hash12(floor(p / gs) + vec2(ff * 17.13, ff * 5.71) + seed) - 0.5;
-  float mid = 1.0 - abs(cn_luma(c) - 0.5) * 1.2;
-  c += g * uGrain.x * 0.32 * mid;
-
-  // Dust: sparse specks (dark on the print, bright where the negative was hit).
+  // Dust and travelling scratches (plus reel damage).
   float dust = cn_sat(uWear.y + uEvent.w * 0.6);
   if (dust > 0.001) {
-    vec2 cell = floor(p / 48.0);
-    vec2 r = cn_hash22(cell + ff * 3.7 + seed);
-    float present = step(1.0 - dust * 0.18, cn_hash12(cell * 1.31 + ff));
-    vec2 centre = (cell + r) * 48.0;
-    float rad = 0.8 + r.x * 2.4;
-    float speck = 1.0 - cn_edge(rad, length(p - centre), 0.9);
-    float bright = step(0.7, r.y);
-    c = mix(c, mix(uInk.rgb * 0.6, uPaper.rgb, bright), speck * present * 0.85);
+    vec2 d = fm_dustLayer(p, 44.0, dust * 0.2, ff, seed);
+    c = mix(c, mix(mix(uInk.rgb, c, 0.25), mix(uPaper.rgb, vec3(1.0), 0.4), d.y), d.x * 0.9);
   }
-
-  // Scratches: a few thin vertical lines that jump between film frames.
   float scr = cn_sat(uWear.z + uEvent.w * 0.5);
   if (scr > 0.001) {
-    for (int k = 0; k < 3; k++) {
-      float fk = float(k);
-      float on = step(1.0 - scr * 0.6, cn_hash11(ff * 1.91 + fk * 13.7 + seed));
-      float x = cn_hash11(floor(ff / 3.0) * 4.3 + fk * 7.1) * size.x;
-      x += sin(p.y * 0.01 + fk) * 2.0;
-      float line = 1.0 - cn_edge(0.6, abs(p.x - x), 0.6);
-      float breakup = step(0.35, cn_noise(vec2(p.y * 0.02, fk * 5.0 + ff)));
-      c = mix(c, uPaper.rgb * 1.05, line * on * breakup * 0.55);
-    }
+    vec2 s = fm_scratches(p, size, scr, ff, seed);
+    c = mix(c, mix(mix(uPaper.rgb, vec3(1.0), 0.35), uInk.rgb, s.y), s.x * 0.75);
   }
 
-  c = mix(c, uPaper.rgb, cn_sat(uEvent.x));
-  c = mix(c, uInk.rgb * 0.35, cn_sat(uEvent.z));
+  c = mix(c, mix(uPaper.rgb, vec3(1.0), 0.3), cn_sat(uEvent.x));
+  c = mix(c, uInk.rgb * 0.3, cn_sat(uEvent.z));
   fragColor = vec4(cn_sat3(c), 1.0);
 }
