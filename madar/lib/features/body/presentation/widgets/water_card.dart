@@ -165,7 +165,7 @@ class _RingTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!tx.fmt.arabicIndic) {
-      return RollingNumber(value: total, formatter: (v) => tx.fmt.formatInt(v.round(), grouping: false), style: style);
+      return RollingNumber(value: total, formatter: (v) => tx.fmt.formatInt(v.round()), style: style);
     }
     return TweenAnimationBuilder<double>(
       tween: Tween(end: total.toDouble()),

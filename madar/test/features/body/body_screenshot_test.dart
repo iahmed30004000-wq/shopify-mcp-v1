@@ -217,6 +217,32 @@ void main() {
     );
   });
 
+  testWidgets('workout log sheet, day and time open – Arabic, Lapis', (tester) async {
+    await shot(
+      tester,
+      'workout_log_sheet_when_ar_lapis',
+      OpenOnStart(
+        behind: const BodyScreen(),
+        open: (context, ref) async {
+          await ref.read(bodyExerciseRowsProvider.future);
+          final e = ref.read(bodyExercisesProvider)[1];
+          if (context.mounted) await showWorkoutLogSheet(context, exercise: e);
+        },
+      ),
+      trailingFrames: 24,
+      beforeCapture: (tester) async {
+        await tester.tap(find.text(lookupL10n(const Locale('ar')).bodyLogWhen));
+        for (var i = 0; i < 12; i++) {
+          await tester.pump(const Duration(milliseconds: 50));
+        }
+        await tester.tap(find.text(lookupL10n(const Locale('ar')).bodyYesterday));
+        for (var i = 0; i < 12; i++) {
+          await tester.pump(const Duration(milliseconds: 50));
+        }
+      },
+    );
+  });
+
   testWidgets('history sheet – Arabic, Emerald', (tester) async {
     await shot(
       tester,

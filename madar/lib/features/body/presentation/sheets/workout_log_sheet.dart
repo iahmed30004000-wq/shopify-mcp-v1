@@ -34,6 +34,10 @@ class WorkoutLogSheet extends ConsumerStatefulWidget {
 }
 
 class _WorkoutLogSheetState extends ConsumerState<WorkoutLogSheet> {
+  /// Days offered when logging a workout done earlier: today and the six
+  /// before it.
+  static const int _dayChoices = 7;
+
   late final TextEditingController _name;
   late final TextEditingController _notes;
   String? _exerciseId;
@@ -112,6 +116,7 @@ class _WorkoutLogSheetState extends ConsumerState<WorkoutLogSheet> {
     final volume = WorkoutMath.volume(_sets, _reps, _weight);
     final today = ref.watch(bodyTodayProvider);
     final hhmm = BodyTimes.format(_at.hour * 60 + _at.minute);
+    final daysAgo = BodyDays.between(BodyDays.of(_at), today);
     return InteractionSheetFrame(
       title: widget.log != null ? l.bodyLogEditTitle : (e?.name ?? l.bodyLogTitle),
       subtitle: widget.log != null ? tx.timeOn(widget.log!.at, today) : (_free ? l.bodyLogExtraSubtitle : l.bodyLogSubtitle),
@@ -286,13 +291,41 @@ class _WorkoutLogSheetState extends ConsumerState<WorkoutLogSheet> {
                 ? const SizedBox(width: double.infinity)
                 : Padding(
                     padding: const EdgeInsets.only(top: Space.s),
-                    child: TimeWheel(
-                      value: hhmm,
-                      onChanged: (v) {
-                        final m = BodyTimes.parse(v);
-                        if (m == null) return;
-                        setState(() => _at = DateTime(_at.year, _at.month, _at.day, 0, m));
-                      },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ChoicePills<int>.single(
+                          key: const ValueKey('body.log.day'),
+                          dense: true,
+                          scrollable: true,
+                          options: [
+                            for (var i = 0; i < _dayChoices; i++)
+                              ChoiceOption(
+                                value: i,
+                                label: switch (i) {
+                                  0 => l.bodyTabToday,
+                                  1 => l.bodyYesterday,
+                                  _ => tx.weekdayName(BodyDays.add(today, -i).weekday),
+                                },
+                              ),
+                          ],
+                          selected: daysAgo >= 0 && daysAgo < _dayChoices ? daysAgo : null,
+                          onChanged: (i) {
+                            if (i == null) return;
+                            final d = BodyDays.add(today, -i);
+                            setState(() => _at = DateTime(d.year, d.month, d.day, _at.hour, _at.minute));
+                          },
+                        ),
+                        const SizedBox(height: Space.s),
+                        TimeWheel(
+                          value: hhmm,
+                          onChanged: (v) {
+                            final m = BodyTimes.parse(v);
+                            if (m == null) return;
+                            setState(() => _at = DateTime(_at.year, _at.month, _at.day, 0, m));
+                          },
+                        ),
+                      ],
                     ),
                   ),
           ),

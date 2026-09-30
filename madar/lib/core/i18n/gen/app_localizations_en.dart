@@ -15459,7 +15459,7 @@ class L10nEn extends L10n {
 
   @override
   String growthLineAhead(String rate) {
-    return 'At $rate · ahead of schedule';
+    return 'Ahead at $rate';
   }
 
   @override
@@ -15485,12 +15485,12 @@ class L10nEn extends L10n {
 
   @override
   String growthLineOverdue(String days, String amount) {
-    return '$days overdue · $amount to go';
+    return '$days late · $amount left';
   }
 
   @override
   String growthLineDueToday(String amount) {
-    return 'Due today · $amount to go';
+    return 'Due today · $amount left';
   }
 
   @override
@@ -16178,7 +16178,10 @@ class L10nEn extends L10n {
   String get bodyLogExtraSubtitle => 'Something outside the plan? Log it here.';
 
   @override
-  String get bodyLogWhen => 'Time';
+  String get bodyYesterday => 'Yesterday';
+
+  @override
+  String get bodyLogWhen => 'When';
 
   @override
   String get bodyLogSave => 'Log it';
@@ -16268,8 +16271,8 @@ class L10nEn extends L10n {
   String get bodyFastTimeNow => 'Time to start your fast';
 
   @override
-  String bodyEatingClosesIn(String time) {
-    return 'Closes in $time';
+  String bodyEatingOpenSince(String time) {
+    return 'Open since $time';
   }
 
   @override
@@ -16559,7 +16562,7 @@ class L10nEn extends L10n {
 
   @override
   String bodyNotifyGoalBody(String hours) {
-    return '$hours hours done — well done.';
+    return 'You fasted $hours h — well done.';
   }
 
   @override

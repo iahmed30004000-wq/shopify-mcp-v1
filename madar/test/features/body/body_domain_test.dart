@@ -131,6 +131,22 @@ void main() {
       expect(day.minutes, 45);
     });
 
+    test('only the last open exercise completes the session', () {
+      final none = TrainingDay.build(exercises: exercises, logs: const [], day: tue);
+      expect(none.completedBy('a'), isFalse); // two still open
+      final oneDone = TrainingDay.build(
+        exercises: exercises,
+        logs: [log('1', DateTime(2026, 9, 29, 7), exerciseId: 'a')],
+        day: tue,
+      );
+      expect(oneDone.completedBy('d'), isTrue);
+      expect(oneDone.completedBy('a'), isFalse); // logging it again adds nothing
+      expect(oneDone.completedBy('b'), isFalse); // not on today's plan
+      expect(oneDone.completedBy(null), isFalse); // a free workout
+      final rest = TrainingDay.build(exercises: exercises, logs: const [], day: DateTime(2026, 9, 27));
+      expect(rest.completedBy('a'), isFalse);
+    });
+
     test('days follow the wall clock (a +3 zone)', () {
       final amman = FakeZoneClock.fixed(3);
       final logs = [

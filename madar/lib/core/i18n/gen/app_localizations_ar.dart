@@ -15973,7 +15973,7 @@ class L10nAr extends L10n {
 
   @override
   String growthLineAhead(String rate) {
-    return 'وتيرتك $rate، تسبق موعدك';
+    return 'متقدّم بوتيرة $rate';
   }
 
   @override
@@ -15999,7 +15999,7 @@ class L10nAr extends L10n {
 
   @override
   String growthLineOverdue(String days, String amount) {
-    return 'فات الموعد منذ $days، تبقّى $amount';
+    return 'متأخّر $days، تبقّى $amount';
   }
 
   @override
@@ -16697,7 +16697,10 @@ class L10nAr extends L10n {
   String get bodyLogExtraSubtitle => 'تمرين خارج الخطة؟ سجّله هنا.';
 
   @override
-  String get bodyLogWhen => 'الوقت';
+  String get bodyYesterday => 'أمس';
+
+  @override
+  String get bodyLogWhen => 'متى';
 
   @override
   String get bodyLogSave => 'سجّل';
@@ -16787,8 +16790,8 @@ class L10nAr extends L10n {
   String get bodyFastTimeNow => 'حان وقت صيامك';
 
   @override
-  String bodyEatingClosesIn(String time) {
-    return 'تُغلق بعد $time';
+  String bodyEatingOpenSince(String time) {
+    return 'مفتوحة منذ $time';
   }
 
   @override
@@ -16843,7 +16846,7 @@ class L10nAr extends L10n {
 
   @override
   String bodyFastRatioHint(String fast, String eat) {
-    return '$fast ساعة صيام، ثم $eat ساعات للأكل';
+    return 'صيام $fast س، ثم نافذة أكل $eat س';
   }
 
   @override
@@ -17078,7 +17081,7 @@ class L10nAr extends L10n {
 
   @override
   String bodyNotifyGoalBody(String hours) {
-    return 'أتممت $hours ساعة صيام — أحسنت.';
+    return 'أتممت هدف صيامك ($hours س) — أحسنت.';
   }
 
   @override

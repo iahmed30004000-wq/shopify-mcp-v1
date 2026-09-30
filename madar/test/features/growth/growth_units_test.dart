@@ -124,8 +124,8 @@ void main() {
         ],
         today: today,
       );
-      expect(texts('ar').paceLine(coding), 'فات الموعد منذ ٣$nbspأيام، تبقّى ٧٫٥$nbspساعة');
-      expect(texts('en').paceLine(coding), '3${nbsp}days overdue · 7.5${nbsp}hours to go');
+      expect(texts('ar').paceLine(coding), 'متأخّر ٣$nbspأيام، تبقّى ٧٫٥$nbspساعة');
+      expect(texts('en').paceLine(coding), '3${nbsp}days late · 7.5${nbsp}hours left');
     });
 
     test('signed amounts', () {

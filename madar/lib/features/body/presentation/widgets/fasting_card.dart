@@ -79,13 +79,14 @@ class FastingTexts {
     }
   }
 
-  /// A third line: the goal time, the overtime, or the next fast.
+  /// A third line: the goal time, the overtime, since when the eating
+  /// window is open, or the next fast.
   String? get detail => switch (status.phase) {
     FastingPhase.fasting =>
       status.reached
           ? l.bodyFastOvertime(tx.duration(status.overtime))
           : l.bodyFastGoalAt(tx.timeOn(status.until, BodyDays.of(status.now))),
-    FastingPhase.eating => l.bodyEatingClosesIn(tx.duration(status.remaining)),
+    FastingPhase.eating => l.bodyEatingOpenSince(tx.timeOn(status.from, BodyDays.of(status.now))),
     FastingPhase.waiting => _missed || plan.eatingWindow == Duration.zero
         ? null
         : l.bodyNextFastAt(tx.fmt.formatTime(status.until)),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
+import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/interaction/interaction.dart';
 import 'package:madar/core/sound/sound_api.dart';
@@ -79,6 +80,23 @@ void main() {
       expect(find.text(ar.bodyKg('٢٬٠٠٠')), findsOneWidget);
     });
 
+    testWidgets('a workout done yesterday is logged on that day, not on today', (tester) async {
+      final env = await pumpBodyApp(tester, home: const BodyScreen(), seed: BodySeed.planOnly);
+      await tester.tap(find.text('تمرين ضغط'));
+      await frames(tester);
+      await tester.tap(find.text(ar.bodyLogWhen));
+      await frames(tester, n: 6);
+      await tester.tap(find.descendant(of: find.byKey(const ValueKey('body.log.day')), matching: find.text(ar.bodyYesterday)));
+      await frames(tester, n: 4);
+      await tester.tap(find.widgetWithText(SheetButton, ar.bodyLogSave));
+      await frames(tester);
+      final log = (await db(tester, () => env.repos.workoutLogs.getAll())).single;
+      expect(log.at, DateTime(2026, 9, 28, 10, 40));
+      // Today's push-ups are still open.
+      final tile = find.byKey(ValueKey('body.session.${log.exerciseId}'));
+      expect(find.descendant(of: tile, matching: find.bySemanticsLabel(ar.bodyMarkDone)), findsOneWidget);
+    });
+
     testWidgets('swiping an exercise to the reading end logs it', (tester) async {
       final env = await pumpBodyApp(tester, home: const BodyScreen(), seed: BodySeed.planOnly, locale: const Locale('en'));
       await tester.drag(find.text('Brisk walk'), const Offset(260, 0));
@@ -144,6 +162,8 @@ void main() {
       state.delete();
       await frames(tester);
       expect(await db(tester, () => env.repos.exercises.count()), 4);
+      // The name sits bidi-isolated inside the sentence.
+      expect(find.text(ar.bodyDeletedName(BidiIsolate.isolate(first.name))), findsOneWidget);
       await tester.tap(find.text(ar.actionUndo));
       await frames(tester);
       expect(await db(tester, () => env.repos.exercises.count()), 5);

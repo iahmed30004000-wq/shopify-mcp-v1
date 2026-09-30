@@ -15722,7 +15722,7 @@
       }
     }
   },
-  "growthLineAhead": "وتيرتك {rate}، تسبق موعدك",
+  "growthLineAhead": "متقدّم بوتيرة {rate}",
   "@growthLineAhead": {
     "description": "Pace line when ahead",
     "placeholders": {
@@ -15772,7 +15772,7 @@
   "@growthLineQuiet": {
     "description": "Pace line: no recent pace"
   },
-  "growthLineOverdue": "فات الموعد منذ {days}، تبقّى {amount}",
+  "growthLineOverdue": "متأخّر {days}، تبقّى {amount}",
   "@growthLineOverdue": {
     "description": "Pace line after the deadline",
     "placeholders": {
@@ -16614,7 +16614,8 @@
   "bodyLogEditTitle": "تعديل السجل",
   "bodyLogSubtitle": "القيم من خطتك — عدّلها لما أنجزته فعلًا.",
   "bodyLogExtraSubtitle": "تمرين خارج الخطة؟ سجّله هنا.",
-  "bodyLogWhen": "الوقت",
+  "bodyYesterday": "أمس",
+  "bodyLogWhen": "متى",
   "bodyLogSave": "سجّل",
   "bodyWorkoutName": "التمرين",
   "bodyWorkoutNameHint": "مثلًا: سباحة",
@@ -16669,8 +16670,8 @@
     }
   },
   "bodyFastTimeNow": "حان وقت صيامك",
-  "bodyEatingClosesIn": "تُغلق بعد {time}",
-  "@bodyEatingClosesIn": {
+  "bodyEatingOpenSince": "مفتوحة منذ {time}",
+  "@bodyEatingOpenSince": {
     "placeholders": {
       "time": {
         "type": "String"
@@ -16719,7 +16720,7 @@
   "bodyFastCustom": "مخصّص",
   "bodyFastCustomTitle": "ساعات صيام مخصّصة",
   "bodyFastCustomHint": "من ساعة إلى ٧٢ ساعة",
-  "bodyFastRatioHint": "{fast} ساعة صيام، ثم {eat} ساعات للأكل",
+  "bodyFastRatioHint": "صيام {fast} س، ثم نافذة أكل {eat} س",
   "@bodyFastRatioHint": {
     "placeholders": {
       "fast": {
@@ -16884,7 +16885,7 @@
   "bodyNotifyChannel": "تنبيهات الصيام",
   "bodyNotifyChannelDescription": "بلوغ هدف الصيام واقتراب إغلاق نافذة الأكل",
   "bodyNotifyGoalTitle": "بلغت هدف صيامك",
-  "bodyNotifyGoalBody": "أتممت {hours} ساعة صيام — أحسنت.",
+  "bodyNotifyGoalBody": "أتممت هدف صيامك ({hours} س) — أحسنت.",
   "@bodyNotifyGoalBody": {
     "placeholders": {
       "hours": {

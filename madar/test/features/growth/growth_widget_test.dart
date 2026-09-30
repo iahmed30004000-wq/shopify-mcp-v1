@@ -216,6 +216,40 @@ void main() {
     await frames(tester, 140);
   });
 
+  testWidgets('goal page: delete the goal and undo it with its logs', (tester) async {
+    late GrowthScenario s;
+    final env = await pumpGrowthApp(
+      tester,
+      home: const GrowthScreen(),
+      locale: const Locale('en'),
+      beforePump: (db) async => s = await seedScenario(db, lang: 'en'),
+    );
+    final logsBefore = (await logsOf(tester, env)).where((l) => l.goalId == s.book.id).length;
+    expect(logsBefore, greaterThan(0));
+    await tester.tap(find.text('Read “Atomic Habits”'));
+    await frames(tester, 30);
+    await tester.tap(find.byIcon(Icons.delete_outline_rounded));
+    await frames(tester, 30);
+    await settleDb(tester);
+    expect(find.byType(GoalScreen), findsNothing, reason: 'the page closes');
+    expect(find.text('Read “Atomic Habits”'), findsNothing);
+    expect((await logsOf(tester, env)).where((l) => l.goalId == s.book.id), isEmpty);
+    expect(
+      (await activity(
+        tester,
+        env,
+      )).where((a) => a.planetKey == GrowthActivity.planetKey && a.payload['goalId'] == s.book.id),
+      isEmpty,
+    );
+
+    await tester.tap(find.text('Undo'));
+    await frames(tester, 10);
+    await settleDb(tester);
+    expect(find.text('Read “Atomic Habits”'), findsOneWidget);
+    expect((await logsOf(tester, env)).where((l) => l.goalId == s.book.id).length, logsBefore);
+    await frames(tester, 140);
+  });
+
   testWidgets('goal page shows pace, projection and the chart', (tester) async {
     late GrowthScenario s;
     await pumpGrowthApp(

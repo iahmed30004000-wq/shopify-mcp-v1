@@ -20,6 +20,11 @@ import 'widgets/body_widgets.dart';
 
 UndoableAction _undo(String label, BodyUndo undo) => UndoableAction(label: label, undo: undo);
 
+/// Wraps a user-typed name for a sentence: bidi-isolated, so a Latin name
+/// in an Arabic toast keeps its place and punctuation. Read it before any
+/// await (the row may leave the tree).
+String Function(String name) _namer(BuildContext context) => BodyTexts.of(context).fmt.isolate;
+
 /// Every user action of the Body screens: sheets, writes, feedback and undo.
 /// Actions that return an [UndoableAction] are shown as an undo toast by
 /// the calling [ActionableItem]; the others show their own.
@@ -42,27 +47,31 @@ abstract final class BodyActions {
 
   static Future<UndoableAction?> duplicateExercise(BuildContext context, WidgetRef ref, String exerciseId) async {
     final l = L10n.of(context);
+    final isolate = _namer(context);
     final row = await ref.read(repositoriesProvider).exercises.byId(exerciseId);
     if (row == null) return null;
     final (_, undo) = await ref.read(bodyServiceProvider).duplicateExercise(row, name: l.bodyCopyName(row.name));
-    return _undo(l.bodyDuplicatedName(row.name), undo);
+    return _undo(l.bodyDuplicatedName(isolate(row.name)), undo);
   }
 
   static Future<UndoableAction?> toggleExerciseActive(BuildContext context, WidgetRef ref, String exerciseId) async {
     final l = L10n.of(context);
+    final isolate = _namer(context);
     final row = await ref.read(repositoriesProvider).exercises.byId(exerciseId);
     if (row == null) return null;
     final undo = await ref.read(bodyServiceProvider).setExerciseActive(row, !row.active);
     Fx.fire(row.active ? Sfx.toggleOff : Sfx.toggleOn);
-    return _undo(row.active ? l.bodyPausedName(row.name) : l.bodyResumedName(row.name), undo);
+    final name = isolate(row.name);
+    return _undo(row.active ? l.bodyPausedName(name) : l.bodyResumedName(name), undo);
   }
 
   static Future<UndoableAction?> deleteExercise(BuildContext context, WidgetRef ref, String exerciseId) async {
     final l = L10n.of(context);
+    final isolate = _namer(context);
     final row = await ref.read(repositoriesProvider).exercises.byId(exerciseId);
     if (row == null) return null;
     final undo = await ref.read(bodyServiceProvider).deleteExercise(row);
-    return _undo(l.bodyDeletedName(row.name), undo);
+    return _undo(l.bodyDeletedName(isolate(row.name)), undo);
   }
 
   // -------------------------------------------------------- workouts ----
@@ -71,6 +80,7 @@ abstract final class BodyActions {
   /// check). Celebrates when it completes the day's session.
   static Future<UndoableAction?> quickLog(BuildContext context, WidgetRef ref, PlannedExercise exercise) async {
     final l = L10n.of(context);
+    final isolate = _namer(context);
     final before = ref.read(bodyTrainingTodayProvider);
     final (_, undo) = await ref
         .read(bodyServiceProvider)
@@ -85,10 +95,10 @@ abstract final class BodyActions {
             durationMin: exercise.durationMin,
           ),
         );
-    if (context.mounted && before.planned > 0 && before.done == before.planned - 1) {
+    if (context.mounted && before.completedBy(exercise.id)) {
       _celebrate(context, BodyPalette.of(context).training);
     }
-    return _undo(l.bodyLoggedToast(exercise.name), undo);
+    return _undo(l.bodyLoggedToast(isolate(exercise.name)), undo);
   }
 
   /// Opens the log sheet for [exercise] (prefilled) or a free workout.
@@ -98,8 +108,9 @@ abstract final class BodyActions {
     final before = ref.read(bodyTrainingTodayProvider);
     await ref.read(bodyServiceProvider).logWorkout(draft);
     Fx.fire(Sfx.complete);
-    final after = ref.read(bodyTrainingTodayProvider);
-    if (context.mounted && exercise != null && before.planned > 0 && before.done == before.planned - 1 && after.done >= before.done) {
+    final today = ref.read(bodyTodayProvider);
+    final forToday = BodyDays.same(ref.read(bodyWallClockProvider).dayOf(draft.at), today);
+    if (context.mounted && forToday && before.completedBy(draft.exerciseId)) {
       _celebrate(context, BodyPalette.of(context).training);
     }
   }
@@ -118,10 +129,11 @@ abstract final class BodyActions {
   /// Removes a log (un-marks a done exercise).
   static Future<UndoableAction?> deleteWorkout(BuildContext context, WidgetRef ref, String logId, {bool unmark = false}) async {
     final l = L10n.of(context);
+    final isolate = _namer(context);
     final row = await ref.read(repositoriesProvider).workoutLogs.byId(logId);
     if (row == null) return null;
     final undo = await ref.read(bodyServiceProvider).deleteWorkout(row);
-    return _undo(unmark ? l.bodyUnloggedToast(row.name) : l.bodyLogDeleted, undo);
+    return _undo(unmark ? l.bodyUnloggedToast(isolate(row.name)) : l.bodyLogDeleted, undo);
   }
 
   // ----------------------------------------------------------- avoid ----

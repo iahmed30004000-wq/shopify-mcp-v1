@@ -15722,7 +15722,7 @@
       }
     }
   },
-  "growthLineAhead": "At {rate} · ahead of schedule",
+  "growthLineAhead": "Ahead at {rate}",
   "@growthLineAhead": {
     "description": "Pace line when ahead",
     "placeholders": {
@@ -15772,7 +15772,7 @@
   "@growthLineQuiet": {
     "description": "Pace line: no recent pace"
   },
-  "growthLineOverdue": "{days} overdue · {amount} to go",
+  "growthLineOverdue": "{days} late · {amount} left",
   "@growthLineOverdue": {
     "description": "Pace line after the deadline",
     "placeholders": {
@@ -15784,7 +15784,7 @@
       }
     }
   },
-  "growthLineDueToday": "Due today · {amount} to go",
+  "growthLineDueToday": "Due today · {amount} left",
   "@growthLineDueToday": {
     "description": "Pace line on the deadline day",
     "placeholders": {
@@ -16614,7 +16614,8 @@
   "bodyLogEditTitle": "Edit log",
   "bodyLogSubtitle": "Prefilled from your plan — adjust to what you actually did.",
   "bodyLogExtraSubtitle": "Something outside the plan? Log it here.",
-  "bodyLogWhen": "Time",
+  "bodyYesterday": "Yesterday",
+  "bodyLogWhen": "When",
   "bodyLogSave": "Log it",
   "bodyWorkoutName": "Workout",
   "bodyWorkoutNameHint": "e.g. Swimming",
@@ -16669,8 +16670,8 @@
     }
   },
   "bodyFastTimeNow": "Time to start your fast",
-  "bodyEatingClosesIn": "Closes in {time}",
-  "@bodyEatingClosesIn": {
+  "bodyEatingOpenSince": "Open since {time}",
+  "@bodyEatingOpenSince": {
     "placeholders": {
       "time": {
         "type": "String"
@@ -16884,7 +16885,7 @@
   "bodyNotifyChannel": "Fasting reminders",
   "bodyNotifyChannelDescription": "Fasting goal reached and eating window closing",
   "bodyNotifyGoalTitle": "You reached your fasting goal",
-  "bodyNotifyGoalBody": "{hours} hours done — well done.",
+  "bodyNotifyGoalBody": "You fasted {hours} h — well done.",
   "@bodyNotifyGoalBody": {
     "placeholders": {
       "hours": {

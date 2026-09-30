@@ -145,6 +145,14 @@ class TrainingDay {
   bool get complete => planned > 0 && done == planned;
   double get progress => planned == 0 ? 0 : done / planned;
 
+  /// Whether logging [exerciseId] completes this day's session: it is the
+  /// one planned exercise not done yet.
+  bool completedBy(String? exerciseId) =>
+      exerciseId != null &&
+      planned > 0 &&
+      done == planned - 1 &&
+      items.any((i) => i.exercise.id == exerciseId && !i.done);
+
   Iterable<WorkoutEntry> get allLogs sync* {
     for (final i in items) {
       yield* i.logs;

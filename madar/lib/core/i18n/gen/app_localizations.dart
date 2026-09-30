@@ -24282,7 +24282,7 @@ abstract class L10n {
   /// Pace line when ahead
   ///
   /// In ar, this message translates to:
-  /// **'وتيرتك {rate}، تسبق موعدك'**
+  /// **'متقدّم بوتيرة {rate}'**
   String growthLineAhead(String rate);
 
   /// Pace line before the first log
@@ -24318,7 +24318,7 @@ abstract class L10n {
   /// Pace line after the deadline
   ///
   /// In ar, this message translates to:
-  /// **'فات الموعد منذ {days}، تبقّى {amount}'**
+  /// **'متأخّر {days}، تبقّى {amount}'**
   String growthLineOverdue(String days, String amount);
 
   /// Pace line on the deadline day
@@ -25449,10 +25449,16 @@ abstract class L10n {
   /// **'تمرين خارج الخطة؟ سجّله هنا.'**
   String get bodyLogExtraSubtitle;
 
+  /// No description provided for @bodyYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get bodyYesterday;
+
   /// No description provided for @bodyLogWhen.
   ///
   /// In ar, this message translates to:
-  /// **'الوقت'**
+  /// **'متى'**
   String get bodyLogWhen;
 
   /// No description provided for @bodyLogSave.
@@ -25611,11 +25617,11 @@ abstract class L10n {
   /// **'حان وقت صيامك'**
   String get bodyFastTimeNow;
 
-  /// No description provided for @bodyEatingClosesIn.
+  /// No description provided for @bodyEatingOpenSince.
   ///
   /// In ar, this message translates to:
-  /// **'تُغلق بعد {time}'**
-  String bodyEatingClosesIn(String time);
+  /// **'مفتوحة منذ {time}'**
+  String bodyEatingOpenSince(String time);
 
   /// No description provided for @bodyEatingClosesAt.
   ///
@@ -25704,7 +25710,7 @@ abstract class L10n {
   /// No description provided for @bodyFastRatioHint.
   ///
   /// In ar, this message translates to:
-  /// **'{fast} ساعة صيام، ثم {eat} ساعات للأكل'**
+  /// **'صيام {fast} س، ثم نافذة أكل {eat} س'**
   String bodyFastRatioHint(String fast, String eat);
 
   /// No description provided for @bodyFastLongHint.
@@ -26112,7 +26118,7 @@ abstract class L10n {
   /// No description provided for @bodyNotifyGoalBody.
   ///
   /// In ar, this message translates to:
-  /// **'أتممت {hours} ساعة صيام — أحسنت.'**
+  /// **'أتممت هدف صيامك ({hours} س) — أحسنت.'**
   String bodyNotifyGoalBody(String hours);
 
   /// No description provided for @bodyNotifyEatingTitle.
