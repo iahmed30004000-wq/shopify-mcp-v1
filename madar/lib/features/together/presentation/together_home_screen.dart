@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
+import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/sound/sound_api.dart';
 import '../data/together_providers.dart';
@@ -514,11 +515,14 @@ class _ShelfItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
           ),
-          Text(
-            caption,
-            style: text.labelSmall?.copyWith(color: earned ? t.gold : t.textTertiary),
-            maxLines: 1,
-            textAlign: TextAlign.center,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              caption,
+              style: text.labelSmall?.copyWith(color: earned ? t.gold : t.textTertiary),
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),
@@ -549,6 +553,8 @@ class _GameRow extends StatelessWidget {
     final total = segments.fold<int>(0, (s, e) => s + e.$1);
     return GlassCard(
       key: ValueKey('together-game-$gameId'),
+      onTap: () => unawaited(showGameHistorySheet(context, gameId)),
+      semanticLabel: '${tx.game(gameId)}: ${coop ? tx.score(tally.coopWins, tally.coopLosses) : tx.score(tally.winsOne, tally.winsTwo)}',
       padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.m, Space.m),
       child: Row(
         children: [
@@ -582,6 +588,7 @@ class _GameRow extends StatelessWidget {
                     child: total == 0
                         ? ColoredBox(color: t.glassBorder)
                         : Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               for (final (n, color) in segments)
                                 if (n > 0) Expanded(flex: n, child: ColoredBox(color: color)),
@@ -683,6 +690,87 @@ class TogetherMatchTile extends StatelessWidget {
             const SizedBox(width: Space.s),
           ],
           lead,
+        ],
+      ),
+    );
+  }
+}
+
+/// One game's head-to-head: wins, best streaks and best scores of each
+/// player, then every recorded match of that game (newest first).
+Future<void> showGameHistorySheet(BuildContext context, String gameId) =>
+    showInteractionSheet<void>(context, builder: (_) => GameHistorySheet(gameId: gameId));
+
+class GameHistorySheet extends ConsumerWidget {
+  const GameHistorySheet({super.key, required this.gameId});
+
+  final String gameId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final t = context.tokens;
+    final tx = TogetherTexts.of(context);
+    final text = Theme.of(context).textTheme;
+    final o = ref.watch(togetherOverviewProvider).value;
+    if (o == null) return const SizedBox.shrink();
+    final tally = o.ledger.tallyOf(gameId);
+    final matches = o.history.where((r) => r.gameId == gameId).toList();
+
+    Widget column(TogetherProfile p) {
+      final best = tally.bestStreakOf(p.slot);
+      final high = tally.highScoreOf(p.slot);
+      return Expanded(
+        child: Column(
+          children: [
+            TogetherAvatarView(profile: p, displayName: tx.rawName(p), size: 48),
+            const SizedBox(height: Space.xs),
+            Text(tx.rawName(p), style: text.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(
+              tx.n(tally.winsOf(p.slot)),
+              style: text.headlineSmall?.copyWith(color: TogetherLook.colorOf(p), fontWeight: FontWeight.w700),
+            ),
+            if (best > 1)
+              Text('${tx.l.togetherWinStreakLabel} ×${tx.n(best)}', style: text.labelSmall?.copyWith(color: t.textSecondary)),
+            if (high != null)
+              Text(tx.l.togetherBestScore(tx.n(high)), style: text.labelSmall?.copyWith(color: t.gold)),
+          ],
+        ),
+      );
+    }
+
+    return InteractionSheetFrame(
+      title: tx.game(gameId),
+      subtitle: tally.draws > 0 ? '${tx.matches(tally.matches)} · ${tx.draws(tally.draws)}' : tx.matches(tally.matches),
+      icon: TogetherLook.gameIcon(gameId),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (tally.versusMatches > 0)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                column(o.profiles.one),
+                Padding(
+                  padding: const EdgeInsets.only(top: Space.l),
+                  child: Text(tx.l.togetherVs, style: text.titleMedium?.copyWith(color: t.gold)),
+                ),
+                column(o.profiles.two),
+              ],
+            ),
+          if (tally.coopWins + tally.coopLosses > 0) ...[
+            const SizedBox(height: Space.m),
+            Text(
+              '${tx.l.togetherCoopLabel}: ${tx.score(tally.coopWins, tally.coopLosses)}',
+              style: text.titleSmall?.copyWith(color: t.success),
+              textAlign: TextAlign.center,
+            ),
+          ],
+          const SizedBox(height: Space.l),
+          for (final r in matches)
+            Padding(
+              padding: const EdgeInsetsDirectional.only(bottom: Space.s),
+              child: TogetherMatchTile(record: r, profiles: o.profiles),
+            ),
         ],
       ),
     );

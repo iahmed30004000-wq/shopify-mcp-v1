@@ -132,28 +132,27 @@ abstract final class SolitaireAutoPlayer {
   }
 
   /// Whether drawing or recycling can help: some stock card is unseen, or a
-  /// card the stock will show can be played somewhere now.
+  /// card the stock will show can be played somewhere now. The stock shows
+  /// the rest of this pass and, when a recycle is left, the whole next pass:
+  /// in draw three a recycle regroups the triples, so the next pass can show
+  /// cards this one skips.
   static bool stockUseful(SolitaireBoard m, SolitaireOptions o) {
     if (m.stockCount == 0 && (m.wasteCount == 0 || !m.recycleAllowed(o))) return false;
     if (m.stockUnseen) return true;
     final len = m.talonLength;
-    final start = m.wasteCount;
     final maxRecycles = o.maxRecycles;
     var recyclesLeft = maxRecycles == null ? 1 : math.min(1, maxRecycles - m.recycles);
-    var p = start;
-    var recycled = false;
+    var p = m.wasteCount;
     for (var guard = 0; guard < 2 * len + 4; guard++) {
       if (p < len) {
         p = math.min(p + o.drawCount, len);
       } else if (recyclesLeft > 0) {
         recyclesLeft--;
-        recycled = true;
         p = 0;
         continue;
       } else {
         break;
       }
-      if (recycled && p >= start) break;
       final card = m.talonAt(p - 1);
       if (m.homePlace(card) >= 0) return true;
       for (var t = 0; t < 7; t++) {

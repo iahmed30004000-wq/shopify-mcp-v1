@@ -9,30 +9,40 @@ import 'game_data.dart';
 /// How a finished game ended, by seat. The session maps seats to the two
 /// players (and AI seats to nobody) before recording.
 final class SeatOutcome {
-  const SeatOutcome({required this.winners, this.scores = const []});
+  const SeatOutcome({required this.winners, this.scores = const []}) : isLoss = false;
 
   /// [seat] won alone.
-  SeatOutcome.win(int seat, {this.scores = const []}) : winners = List.unmodifiable([seat]);
+  SeatOutcome.win(int seat, {this.scores = const []}) : winners = List.unmodifiable([seat]), isLoss = false;
 
-  const SeatOutcome.draw({this.scores = const []}) : winners = const [];
+  const SeatOutcome.draw({this.scores = const []}) : winners = const [], isLoss = false;
 
-  /// Winning seats (partners together); empty for a draw.
+  /// Nobody won: the game beat every seat (a lost co-op game – "we lost
+  /// together"). Not a draw: it never breaks a head-to-head streak.
+  const SeatOutcome.loss({this.scores = const []}) : winners = const [], isLoss = true;
+
+  /// Winning seats (partners together); empty for a draw or a [isLoss].
   final List<int> winners;
 
   /// Score per seat (empty when the game has no score).
   final List<int> scores;
 
-  bool get isDraw => winners.isEmpty;
+  /// Every seat lost ([SeatOutcome.loss]).
+  final bool isLoss;
+
+  bool get isDraw => winners.isEmpty && !isLoss;
 
   @override
   bool operator ==(Object other) =>
-      other is SeatOutcome && _listEq(other.winners, winners) && _listEq(other.scores, scores);
+      other is SeatOutcome &&
+      other.isLoss == isLoss &&
+      _listEq(other.winners, winners) &&
+      _listEq(other.scores, scores);
 
   @override
-  int get hashCode => Object.hash(Object.hashAll(winners), Object.hashAll(scores));
+  int get hashCode => Object.hash(isLoss, Object.hashAll(winners), Object.hashAll(scores));
 
   @override
-  String toString() => 'SeatOutcome(winners: $winners, scores: $scores)';
+  String toString() => 'SeatOutcome(${isLoss ? 'loss' : 'winners: $winners'}, scores: $scores)';
 
   static bool _listEq(List<int> a, List<int> b) {
     if (a.length != b.length) return false;

@@ -46,6 +46,12 @@ enum BlackjackEventKind {
   /// A hand's result: [BlackjackEvent.outcome], `value` = its points.
   handSettled,
 
+  /// European table with `originalOnly`: a dealer natural takes one base
+  /// result (−2) from the seat in all (B-25, B-61g). `value` = the points
+  /// given back to the seat after its `handSettled` events (always > 0), so
+  /// the seat's events add up to its round points.
+  lossCapped,
+
   /// The round is over; the summary is `state.lastRound`.
   roundScored,
   sessionOver,
@@ -466,16 +472,22 @@ class BlackjackRules extends CardRules<BlackjackState, BlackjackMove> {
   void _finishRound(BlackjackState s, {required bool dealerNatural, List<CardEvent>? ev}) {
     final o = s.options;
     final seatPoints = <int>[];
-    for (final seat in s.seats) {
+    for (var i = 0; i < s.seats.length; i++) {
+      final seat = s.seats[i];
       final nets = [for (final h in seat.hands) netPoints(h, o)];
       if (dealerNatural && o.originalOnlyApplies) {
         // The seat loses one base result in all, whatever it split or
-        // doubled; a natural pushes (B-25, B-61g).
+        // doubled; a natural pushes (B-25, B-61g). The first hand carries
+        // the seat's result; `lossCapped` gives back what the hands'
+        // `handSettled` events took beyond it.
+        final shown = seat.hands.fold<int>(0, (n, h) => n + h.points);
         final seatNet = seat.hands.any((h) => h.natural) ? 0 : -2;
         for (var j = 0; j < nets.length; j++) {
           nets[j] = j == 0 ? seatNet : 0;
           seat.hands[j].points = _tallied(nets[j], o);
         }
+        final givenBack = seat.hands.fold<int>(0, (n, h) => n + h.points) - shown;
+        if (givenBack != 0) ev?.add(BlackjackEvent(BlackjackEventKind.lossCapped, seat: i, value: givenBack));
       }
       var net = 0;
       var tallied = 0;

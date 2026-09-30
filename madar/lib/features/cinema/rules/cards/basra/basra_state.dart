@@ -155,7 +155,9 @@ class BasraOptions {
   final BasraDeck deck;
 
   /// Cards dealt to each player per round; null = automatic (4, or 5 for
-  /// the 44-card pack with four players). See [cardsPerRound].
+  /// the 44-card pack with four players). Only 4, 5 or 6 are played, and
+  /// only when the pack splits into whole rounds (see [configError]): 6 with
+  /// 52 cards and 2 or 4 players, 5 with 44 cards. See [cardsPerRound].
   final int? handSize;
   final int targetScore;
   final BasraValueRule basraValue;
@@ -193,13 +195,13 @@ class BasraOptions {
 
   /// Null when the options can be played, else a stable id:
   /// `playerCount` (not 2–4), `shortDeckThreePlayers` (the 44-card pack
-  /// cannot be shared by three), `handSize` (the pack does not split into
-  /// whole rounds).
+  /// cannot be shared by three), `handSize` (not 4, 5 or 6 cards a round,
+  /// or the pack does not split into whole rounds).
   String? get configError {
     if (players < 2 || players > 4) return 'playerCount';
     if (deck == BasraDeck.short44 && players == 3) return 'shortDeckThreePlayers';
     final n = cardsPerRound;
-    if (n < 1 || (deckSize - 4) % (players * n) != 0) return 'handSize';
+    if (n < 4 || n > 6 || (deckSize - 4) % (players * n) != 0) return 'handSize';
     return null;
   }
 
@@ -244,16 +246,20 @@ class BasraOptions {
     'majorityTie': majorityTie.name,
   };
 
+  /// [toJson] with the hand size resolved, so that an explicit hand size
+  /// equal to the automatic one is the same rule set.
+  Map<String, Object?> _identity() => {...toJson(), 'handSize': cardsPerRound};
+
   @override
   bool operator ==(Object other) {
     if (other is! BasraOptions) return false;
-    final a = toJson();
-    final b = other.toJson();
+    final a = _identity();
+    final b = other._identity();
     return a.keys.every((k) => a[k] == b[k]);
   }
 
   @override
-  int get hashCode => Object.hashAll(toJson().values);
+  int get hashCode => Object.hashAll(_identity().values);
 }
 
 final class BasraMove extends CardMove {

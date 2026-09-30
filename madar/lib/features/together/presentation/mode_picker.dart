@@ -302,12 +302,29 @@ class TogetherSettingsSheet extends ConsumerWidget {
           const SizedBox(height: Space.l),
           switchRow(
             title: l.togetherSettingsOnline,
-            hint: onlineTransport ? l.togetherSettingsOnlineHint : '${l.togetherSettingsOnlineHint} ${l.togetherComingSoon}.',
+            hint: onlineTransport ? l.togetherSettingsOnlineHint : '${l.togetherComingSoon} · ${l.togetherSettingsOnlineHint}',
             value: settings.onlineEnabled && onlineTransport,
             onChanged: onlineTransport ? (v) => save(settings.copyWith(onlineEnabled: v)) : null,
           ),
           const SizedBox(height: Space.xl),
           const TogetherPrivacyNote(),
+          const SizedBox(height: Space.xl),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: MadarButton(
+              key: const ValueKey('together-reset'),
+              label: l.togetherResetRecords,
+              icon: Icons.delete_sweep_rounded,
+              variant: MadarButtonVariant.ghost,
+              size: MadarButtonSize.small,
+              sfx: Sfx.delete,
+              onPressed: () async {
+                final undo = await repo.resetRecords();
+                if (!context.mounted) return;
+                unawaited(showUndoToast(context, UndoableAction(label: l.togetherResetDone, undo: undo)));
+              },
+            ),
+          ),
         ],
       ),
     );

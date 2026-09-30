@@ -19,14 +19,23 @@ String togetherIdOfBoardGame(BoardGameId id) => switch (id) {
 
 /// Plays any [BoardGameKit] together. States are immutable; the kit's
 /// `newGame(players, seed)` makes the shared initial state.
+///
+/// [players] defaults to the kit's minimum (4 for Ludo in partnerships).
+/// The default [policy] ([boardPolicy]) reads the `keys` of chess and
+/// draughts states – their Zobrist repetition history, as hex – as hashes,
+/// not text.
 class BoardKitTogetherAdapter extends TogetherGameAdapter<GameState, GameMove> {
   BoardKitTogetherAdapter(
     this.kit, {
     String? gameId,
     this.gameVersion = 1,
-    this.players = 2,
-    this.policy = GameDataPolicy.standard,
-  }) : gameId = gameId ?? togetherIdOfBoardGame(kit.id);
+    int? players,
+    this.policy = boardPolicy,
+  }) : gameId = gameId ?? togetherIdOfBoardGame(kit.id),
+       players = players ?? kit.minPlayers;
+
+  /// The standard policy, with the board engines' hash fields.
+  static const GameDataPolicy boardPolicy = GameDataPolicy(hashKeys: {'keys'});
 
   final BoardGameKit<GameState, GameMove> kit;
 

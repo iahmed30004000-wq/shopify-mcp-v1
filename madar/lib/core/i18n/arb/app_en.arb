@@ -11767,6 +11767,10 @@
   "@ledgerFixRates": {
     "description": "Action next to the warning that some currencies have no exchange rate"
   },
+  "ledgerCurrencyInUseElsewhere": "Used by savings, debts, bills or the budget",
+  "@ledgerCurrencyInUseElsewhere": {
+    "description": "Why a currency cannot be deleted: a jar, debt, recurring obligation or budget item is kept in it"
+  },
   "budgetTitle": "Budget",
   "@budgetTitle": {
     "description": "Title of the budget screen and card"
@@ -20594,5 +20598,253 @@
   "widgetsPeriodWeek": "This week",
   "@widgetsPeriodWeek": {
     "description": "Settings option"
-  }
+  },
+  "savedGamesTitle": "Saved games",
+  "@savedGamesTitle": {
+    "description": "Saved Games screen title"
+  },
+  "savedGamesShelfTitle": "My saved games",
+  "@savedGamesShelfTitle": {
+    "description": "Heading of the Saved Games shelf in the cinema hall"
+  },
+  "savedGamesShelfSubtitle": "Web games that run from their own links",
+  "savedGamesSeeAll": "See all",
+  "savedGamesAdd": "Add a game",
+  "savedGamesAddTitle": "New game from a link",
+  "savedGamesAddSubtitle": "It runs from its original link; none of its code is copied",
+  "savedGamesEditTitle": "Edit game",
+  "savedGamesUrlLabel": "Link",
+  "savedGamesUrlHint": "https://claude.ai/public/artifacts/…",
+  "@savedGamesUrlHint": {
+    "description": "Example link format shown as a hint (not a real game)"
+  },
+  "savedGamesPaste": "Paste",
+  "savedGamesClipboardEmpty": "There's no link on the clipboard",
+  "savedGamesUrlEmpty": "Paste the game's link first",
+  "savedGamesUrlNotHttps": "Only secure (https) links are supported",
+  "savedGamesUseHttps": "Use https",
+  "savedGamesUrlScheme": "That isn't a web page link",
+  "savedGamesUrlMalformed": "That doesn't look like a valid link",
+  "savedGamesUrlCredentials": "Links containing a user name or password aren't allowed",
+  "savedGamesUrlTooLong": "That link is too long",
+  "savedGamesUrlDuplicate": "Already saved as “{title}”",
+  "@savedGamesUrlDuplicate": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesArtifactBadge": "Claude artifact",
+  "savedGamesSecureBadge": "Secure link",
+  "savedGamesNameLabel": "Name",
+  "savedGamesNameHint": "Game name",
+  "savedGamesFetchTitle": "Fetch title",
+  "savedGamesFetchFailed": "Couldn't read the page title – type one instead",
+  "savedGamesFetchNote": "“Fetch” contacts the site once, only when you tap it, and sends nothing about you.",
+  "savedGamesIconLabel": "Icon",
+  "savedGamesUseSiteIcon": "Site icon",
+  "savedGamesRemoveSiteIcon": "Remove site icon",
+  "savedGamesIconFailed": "No usable icon was found for this site",
+  "savedGamesShuffleIcon": "Shuffle",
+  "savedGamesGlyph": "Symbol {number}",
+  "@savedGamesGlyph": {
+    "description": "Semantics label of a glyph choice; number is already formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesColor": "Colour {number}",
+  "@savedGamesColor": {
+    "description": "Semantics label of a colour choice; number is already formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesOrientationLabel": "Screen orientation while playing",
+  "savedGamesOrientationAuto": "Auto",
+  "savedGamesOrientationPortrait": "Portrait",
+  "savedGamesOrientationLandscape": "Landscape",
+  "savedGamesNotesLabel": "Notes",
+  "savedGamesNotesHint": "e.g. how to play, or who shared it",
+  "savedGamesSave": "Save",
+  "savedGamesCancel": "Cancel",
+  "savedGamesAdded": "Added “{title}”",
+  "@savedGamesAdded": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesUpdated": "Changes saved",
+  "savedGamesDeleted": "Deleted “{title}”",
+  "@savedGamesDeleted": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesFull": "You've reached the limit of {max} games – delete one first",
+  "@savedGamesFull": {
+    "description": "max is already formatted",
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesPlay": "Play",
+  "savedGamesPlayGame": "Play {title}",
+  "@savedGamesPlayGame": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesPlayCount": "{count, plural, =0{Not played yet} =1{Played once} other{Played {count} times}}",
+  "@savedGamesPlayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savedGamesLastPlayedToday": "Last played today",
+  "savedGamesLastPlayedYesterday": "Last played yesterday",
+  "savedGamesLastPlayedDays": "{days, plural, other{Last played {days} days ago}}",
+  "@savedGamesLastPlayedDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "savedGamesLastPlayedOn": "Last played {date}",
+  "@savedGamesLastPlayedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesNew": "New",
+  "savedGamesLayoutGrid": "Poster view",
+  "savedGamesLayoutList": "List view & reorder",
+  "savedGamesReorderHint": "Drag a handle to reorder",
+  "savedGamesEmptyTitle": "Bring the web games you love",
+  "savedGamesEmptyBody": "Save any browser game by its secure link and play it full-screen inside Madar.",
+  "savedGamesEmptyStep1": "Open the game – for example an interactive artifact someone shared from Claude.",
+  "savedGamesEmptyStep2": "Copy its link – it usually looks like {example}",
+  "@savedGamesEmptyStep2": {
+    "description": "example is a link pattern shown left-to-right",
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesEmptyStep3": "Tap “Add a game”, paste the link, then give it a name and an icon.",
+  "savedGamesPrivacyNote": "Each game runs from its original link; its code is never copied. Madar only goes online when you open a game or tap “Fetch”.",
+  "savedGamesOpenExternal": "Open in browser",
+  "savedGamesEdit": "Edit",
+  "savedGamesMore": "More options",
+  "savedGamesClearData": "Clear site data",
+  "savedGamesClearDataTitle": "Clear “{title}” data?",
+  "@savedGamesClearDataTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesClearDataBody": "Removes what the game stored on this device: progress, settings and cookies visible to the page. This can't be undone.",
+  "savedGamesClearDataScheduled": "Its data will be cleared the next time it opens",
+  "savedGamesClearDataPending": "Data will be cleared on open",
+  "savedGamesClearAll": "Clear data of all games",
+  "savedGamesClearAllTitle": "Clear the data of all games?",
+  "savedGamesClearAllBody": "Deletes the cookies, storage and cache of every web game. The rest of Madar's data and your list of games stay untouched.",
+  "savedGamesClearAllDone": "All game data cleared",
+  "savedGamesClearFailed": "Some data couldn't be cleared",
+  "savedGamesConfirmClear": "Clear",
+  "savedGamesLoading": "Loading “{title}”…",
+  "@savedGamesLoading": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesClearing": "Clearing the game's data…",
+  "savedGamesOfflineTitle": "You're offline",
+  "savedGamesOfflineBody": "This game needs the internet because it runs from its original link.",
+  "savedGamesErrorTitle": "Couldn't open the game",
+  "savedGamesErrorBody": "The site may be down, or its link may have changed.",
+  "savedGamesInsecureTitle": "Connection not secure",
+  "savedGamesInsecureBody": "The site's security certificate isn't valid, so Madar stopped the connection to protect you.",
+  "savedGamesRetry": "Try again",
+  "savedGamesBackToMadar": "Back to Madar",
+  "savedGamesReload": "Reload",
+  "savedGamesMute": "Mute",
+  "savedGamesUnmute": "Unmute",
+  "savedGamesControls": "Game controls",
+  "savedGamesCloseControls": "Hide controls",
+  "savedGamesMuteSealed": "Some of this game's sound plays inside a protected frame – use your phone's volume buttons.",
+  "savedGamesExitTitle": "Leave the game?",
+  "savedGamesExitBody": "Any progress the game doesn't save itself may be lost.",
+  "savedGamesExitStay": "Keep playing",
+  "savedGamesExitLeave": "Leave",
+  "savedGamesExternalTitle": "Open an outside link?",
+  "savedGamesExternalBody": "The game wants to open {host}. It will open in your browser, outside Madar.",
+  "@savedGamesExternalBody": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesExternalFailed": "No browser could open the link",
+  "savedGamesPrayerTitle": "Time for prayer",
+  "savedGamesPrayerBody": "The game and its sound are paused. It resumes by itself after the adhan and prayer time.",
+  "savedGamesPrayerUnloaded": "The game was stopped because its sound can't be muted from inside; it will reload after prayer.",
+  "savedGamesPageSays": "{host} says",
+  "@savedGamesPageSays": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesOk": "OK",
+  "savedGamesStats": "{added} · {played}",
+  "@savedGamesStats": {
+    "description": "Two already-localised stat fragments joined",
+    "placeholders": {
+      "added": {
+        "type": "String"
+      },
+      "played": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesAddedOn": "Added {date}",
+  "@savedGamesAddedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesAddCardHint": "Paste a web game link",
+  "savedGamesShelfEmpty": "Save a web game by its link and it will appear here.",
+  "savedGamesDeleteGame": "Delete",
+  "savedGamesOpenAll": "Open saved games",
+  "savedGamesClearDataDone": "Game data cleared"
 }

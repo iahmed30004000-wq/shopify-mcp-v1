@@ -10,7 +10,7 @@
     android:minHeight="110dp"
     android:minResizeWidth="110dp"
     android:minResizeHeight="100dp"
-    android:previewImage="@drawable/widget_mark"
+    android:previewImage="@drawable/widget_picker_meds"
     android:previewLayout="@layout/widget_preview_meds"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="4"

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The budget widget in the widget picker of Android 8–11 (previewImage;
+     Android 12+ shows @layout/widget_preview_budget): the 2×2 card as a
+     wireframe – title, the amount left, the plan, the bar of what is left
+     and the days to go. Colours follow light / dark mode. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <!-- Card -->
+    <path
+        android:fillColor="@color/widget_surface"
+        android:strokeColor="@color/widget_stroke"
+        android:strokeWidth="1"
+        android:pathData="M22,0.5H98A21.5,21.5 0 0,1 119.5,22V98A21.5,21.5 0 0,1 98,119.5H22A21.5,21.5 0 0,1 0.5,98V22A21.5,21.5 0 0,1 22,0.5Z" />
+    <!-- Title -->
+    <path
+        android:fillColor="@color/widget_text_secondary"
+        android:pathData="M17.5,20H66.5A3.5,3.5 0 0,1 66.5,27H17.5A3.5,3.5 0 0,1 17.5,20Z" />
+    <!-- Amount left -->
+    <path
+        android:fillColor="@color/widget_text_primary"
+        android:pathData="M21,35H83A7,7 0 0,1 83,49H21A7,7 0 0,1 21,35Z" />
+    <!-- Of the plan -->
+    <path
+        android:fillColor="@color/widget_text_secondary"
+        android:pathData="M17.5,56H71.5A3.5,3.5 0 0,1 71.5,63H17.5A3.5,3.5 0 0,1 17.5,56Z" />
+    <!-- Bar: track and what is left (40 %) -->
+    <path
+        android:fillColor="@color/widget_bar_track"
+        android:pathData="M18,74H102A4,4 0 0,1 102,82H18A4,4 0 0,1 18,74Z" />
+    <path
+        android:fillColor="@color/widget_bar_fill"
+        android:pathData="M18,74H48A4,4 0 0,1 48,82H18A4,4 0 0,1 18,74Z" />
+    <!-- Days left -->
+    <path
+        android:fillColor="@color/widget_text_muted"
+        android:pathData="M17,93H57A3,3 0 0,1 57,99H17A3,3 0 0,1 17,93Z" />
+</vector>

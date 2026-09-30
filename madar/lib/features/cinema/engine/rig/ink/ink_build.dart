@@ -49,13 +49,7 @@ final class InkBuild {
   /// units (100 = a standard character): the era's line width and boil are
   /// specified for that size and scale gently (√) with it, so big bosses get
   /// bolder lines and small props finer ones, as an inker would.
-  void begin(
-    RigPaintContext ctx, {
-    required double size,
-    double lineScale = 1,
-    bool? inkTexture,
-    int? boilFrame,
-  }) {
+  void begin(RigPaintContext ctx, {required double size, double lineScale = 1, bool? inkTexture, int? boilFrame}) {
     skin = ctx.skin;
     colors.update(skin);
     final ink = skin.ink;

@@ -14,10 +14,13 @@ import java.io.FileOutputStream
  * * `<kind>-<image>.png` – its images (the prayer widget's astrolabes: no
  *   personal data), `<image>` being `<key>_light` / `<key>_dark`.
  *
- * Written only for widgets that are on a home screen (the channel checks),
+ * Written only for widgets that are on a home screen ([writeIfInstalled]),
  * deleted when the last one of a kind is removed and on "delete all data".
  * Writes are atomic (temp file + rename), so a provider drawing at the same
- * moment reads the old file or the new one.
+ * moment reads the old file or the new one. Writing and deleting hold this
+ * object's lock: the app's write (on the channel's thread) and the
+ * provider's `onDisabled` (main thread) never interleave, so a widget
+ * removed while the app was writing never keeps its data.
  */
 object MadarWidgetStore {
     private const val TAG = "MadarWidgets"
@@ -30,7 +33,28 @@ object MadarWidgetStore {
     private fun snapshotFile(context: Context, kind: MadarWidgetKind): File =
         File(directory(context), "${kind.wire}.bin")
 
-    fun writeSnapshot(context: Context, kind: MadarWidgetKind, json: String) {
+    /**
+     * Writes [kind]'s snapshot [json] (encrypted) and, when given, replaces
+     * its [images] – only if [installed] (asked under the lock) still says a
+     * widget of it is on a home screen. True when written.
+     */
+    fun writeIfInstalled(
+        context: Context,
+        kind: MadarWidgetKind,
+        json: String,
+        images: Map<String, ByteArray>?,
+        installed: () -> Boolean,
+    ): Boolean = synchronized(this) {
+        if (installed()) {
+            writeSnapshot(context, kind, json)
+            if (images != null) replaceImages(context, kind, images)
+            true
+        } else {
+            false
+        }
+    }
+
+    private fun writeSnapshot(context: Context, kind: MadarWidgetKind, json: String) {
         val blob = MadarWidgetCrypto.encrypt(json.toByteArray(Charsets.UTF_8))
         writeAtomically(snapshotFile(context, kind), blob)
     }
@@ -50,7 +74,7 @@ object MadarWidgetStore {
     fun hasSnapshot(context: Context, kind: MadarWidgetKind): Boolean = snapshotFile(context, kind).isFile
 
     /** Replaces every image of [kind] with [images] (name → PNG bytes). */
-    fun replaceImages(context: Context, kind: MadarWidgetKind, images: Map<String, ByteArray>) {
+    private fun replaceImages(context: Context, kind: MadarWidgetKind, images: Map<String, ByteArray>) {
         deleteImages(context, kind)
         for ((name, bytes) in images) {
             if (!SAFE_IMAGE.matches(name)) continue
@@ -74,14 +98,18 @@ object MadarWidgetStore {
 
     /** Deletes [kind]'s snapshot and images. */
     fun remove(context: Context, kind: MadarWidgetKind) {
-        snapshotFile(context, kind).delete()
-        deleteImages(context, kind)
+        synchronized(this) {
+            snapshotFile(context, kind).delete()
+            deleteImages(context, kind)
+        }
     }
 
     /** Deletes every widget's data and the widgets' key. */
     fun clearAll(context: Context) {
-        File(context.noBackupFilesDir, DIRECTORY).deleteRecursively()
-        MadarWidgetCrypto.deleteKey()
+        synchronized(this) {
+            File(context.noBackupFilesDir, DIRECTORY).deleteRecursively()
+            MadarWidgetCrypto.deleteKey()
+        }
     }
 
     private fun writeAtomically(target: File, bytes: ByteArray) {

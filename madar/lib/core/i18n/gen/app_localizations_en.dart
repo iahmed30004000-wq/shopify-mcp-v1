@@ -11531,6 +11531,10 @@ class L10nEn extends L10n {
   String get ledgerFixRates => 'Set rates';
 
   @override
+  String get ledgerCurrencyInUseElsewhere =>
+      'Used by savings, debts, bills or the budget';
+
+  @override
   String get budgetTitle => 'Budget';
 
   @override
@@ -21433,4 +21437,406 @@ class L10nEn extends L10n {
 
   @override
   String get widgetsPeriodWeek => 'This week';
+
+  @override
+  String get savedGamesTitle => 'Saved games';
+
+  @override
+  String get savedGamesShelfTitle => 'My saved games';
+
+  @override
+  String get savedGamesShelfSubtitle =>
+      'Web games that run from their own links';
+
+  @override
+  String get savedGamesSeeAll => 'See all';
+
+  @override
+  String get savedGamesAdd => 'Add a game';
+
+  @override
+  String get savedGamesAddTitle => 'New game from a link';
+
+  @override
+  String get savedGamesAddSubtitle =>
+      'It runs from its original link; none of its code is copied';
+
+  @override
+  String get savedGamesEditTitle => 'Edit game';
+
+  @override
+  String get savedGamesUrlLabel => 'Link';
+
+  @override
+  String get savedGamesUrlHint => 'https://claude.ai/public/artifacts/…';
+
+  @override
+  String get savedGamesPaste => 'Paste';
+
+  @override
+  String get savedGamesClipboardEmpty => 'There\'s no link on the clipboard';
+
+  @override
+  String get savedGamesUrlEmpty => 'Paste the game\'s link first';
+
+  @override
+  String get savedGamesUrlNotHttps => 'Only secure (https) links are supported';
+
+  @override
+  String get savedGamesUseHttps => 'Use https';
+
+  @override
+  String get savedGamesUrlScheme => 'That isn\'t a web page link';
+
+  @override
+  String get savedGamesUrlMalformed => 'That doesn\'t look like a valid link';
+
+  @override
+  String get savedGamesUrlCredentials =>
+      'Links containing a user name or password aren\'t allowed';
+
+  @override
+  String get savedGamesUrlTooLong => 'That link is too long';
+
+  @override
+  String savedGamesUrlDuplicate(String title) {
+    return 'Already saved as “$title”';
+  }
+
+  @override
+  String get savedGamesArtifactBadge => 'Claude artifact';
+
+  @override
+  String get savedGamesSecureBadge => 'Secure link';
+
+  @override
+  String get savedGamesNameLabel => 'Name';
+
+  @override
+  String get savedGamesNameHint => 'Game name';
+
+  @override
+  String get savedGamesFetchTitle => 'Fetch title';
+
+  @override
+  String get savedGamesFetchFailed =>
+      'Couldn\'t read the page title – type one instead';
+
+  @override
+  String get savedGamesFetchNote =>
+      '“Fetch” contacts the site once, only when you tap it, and sends nothing about you.';
+
+  @override
+  String get savedGamesIconLabel => 'Icon';
+
+  @override
+  String get savedGamesUseSiteIcon => 'Site icon';
+
+  @override
+  String get savedGamesRemoveSiteIcon => 'Remove site icon';
+
+  @override
+  String get savedGamesIconFailed => 'No usable icon was found for this site';
+
+  @override
+  String get savedGamesShuffleIcon => 'Shuffle';
+
+  @override
+  String savedGamesGlyph(String number) {
+    return 'Symbol $number';
+  }
+
+  @override
+  String savedGamesColor(String number) {
+    return 'Colour $number';
+  }
+
+  @override
+  String get savedGamesOrientationLabel => 'Screen orientation while playing';
+
+  @override
+  String get savedGamesOrientationAuto => 'Auto';
+
+  @override
+  String get savedGamesOrientationPortrait => 'Portrait';
+
+  @override
+  String get savedGamesOrientationLandscape => 'Landscape';
+
+  @override
+  String get savedGamesNotesLabel => 'Notes';
+
+  @override
+  String get savedGamesNotesHint => 'e.g. how to play, or who shared it';
+
+  @override
+  String get savedGamesSave => 'Save';
+
+  @override
+  String get savedGamesCancel => 'Cancel';
+
+  @override
+  String savedGamesAdded(String title) {
+    return 'Added “$title”';
+  }
+
+  @override
+  String get savedGamesUpdated => 'Changes saved';
+
+  @override
+  String savedGamesDeleted(String title) {
+    return 'Deleted “$title”';
+  }
+
+  @override
+  String savedGamesFull(String max) {
+    return 'You\'ve reached the limit of $max games – delete one first';
+  }
+
+  @override
+  String get savedGamesPlay => 'Play';
+
+  @override
+  String savedGamesPlayGame(String title) {
+    return 'Play $title';
+  }
+
+  @override
+  String savedGamesPlayCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Played $count times',
+      one: 'Played once',
+      zero: 'Not played yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get savedGamesLastPlayedToday => 'Last played today';
+
+  @override
+  String get savedGamesLastPlayedYesterday => 'Last played yesterday';
+
+  @override
+  String savedGamesLastPlayedDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Last played $days days ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String savedGamesLastPlayedOn(String date) {
+    return 'Last played $date';
+  }
+
+  @override
+  String get savedGamesNew => 'New';
+
+  @override
+  String get savedGamesLayoutGrid => 'Poster view';
+
+  @override
+  String get savedGamesLayoutList => 'List view & reorder';
+
+  @override
+  String get savedGamesReorderHint => 'Drag a handle to reorder';
+
+  @override
+  String get savedGamesEmptyTitle => 'Bring the web games you love';
+
+  @override
+  String get savedGamesEmptyBody =>
+      'Save any browser game by its secure link and play it full-screen inside Madar.';
+
+  @override
+  String get savedGamesEmptyStep1 =>
+      'Open the game – for example an interactive artifact someone shared from Claude.';
+
+  @override
+  String savedGamesEmptyStep2(String example) {
+    return 'Copy its link – it usually looks like $example';
+  }
+
+  @override
+  String get savedGamesEmptyStep3 =>
+      'Tap “Add a game”, paste the link, then give it a name and an icon.';
+
+  @override
+  String get savedGamesPrivacyNote =>
+      'Each game runs from its original link; its code is never copied. Madar only goes online when you open a game or tap “Fetch”.';
+
+  @override
+  String get savedGamesOpenExternal => 'Open in browser';
+
+  @override
+  String get savedGamesEdit => 'Edit';
+
+  @override
+  String get savedGamesMore => 'More options';
+
+  @override
+  String get savedGamesClearData => 'Clear site data';
+
+  @override
+  String savedGamesClearDataTitle(String title) {
+    return 'Clear “$title” data?';
+  }
+
+  @override
+  String get savedGamesClearDataBody =>
+      'Removes what the game stored on this device: progress, settings and cookies visible to the page. This can\'t be undone.';
+
+  @override
+  String get savedGamesClearDataScheduled =>
+      'Its data will be cleared the next time it opens';
+
+  @override
+  String get savedGamesClearDataPending => 'Data will be cleared on open';
+
+  @override
+  String get savedGamesClearAll => 'Clear data of all games';
+
+  @override
+  String get savedGamesClearAllTitle => 'Clear the data of all games?';
+
+  @override
+  String get savedGamesClearAllBody =>
+      'Deletes the cookies, storage and cache of every web game. The rest of Madar\'s data and your list of games stay untouched.';
+
+  @override
+  String get savedGamesClearAllDone => 'All game data cleared';
+
+  @override
+  String get savedGamesClearFailed => 'Some data couldn\'t be cleared';
+
+  @override
+  String get savedGamesConfirmClear => 'Clear';
+
+  @override
+  String savedGamesLoading(String title) {
+    return 'Loading “$title”…';
+  }
+
+  @override
+  String get savedGamesClearing => 'Clearing the game\'s data…';
+
+  @override
+  String get savedGamesOfflineTitle => 'You\'re offline';
+
+  @override
+  String get savedGamesOfflineBody =>
+      'This game needs the internet because it runs from its original link.';
+
+  @override
+  String get savedGamesErrorTitle => 'Couldn\'t open the game';
+
+  @override
+  String get savedGamesErrorBody =>
+      'The site may be down, or its link may have changed.';
+
+  @override
+  String get savedGamesInsecureTitle => 'Connection not secure';
+
+  @override
+  String get savedGamesInsecureBody =>
+      'The site\'s security certificate isn\'t valid, so Madar stopped the connection to protect you.';
+
+  @override
+  String get savedGamesRetry => 'Try again';
+
+  @override
+  String get savedGamesBackToMadar => 'Back to Madar';
+
+  @override
+  String get savedGamesReload => 'Reload';
+
+  @override
+  String get savedGamesMute => 'Mute';
+
+  @override
+  String get savedGamesUnmute => 'Unmute';
+
+  @override
+  String get savedGamesControls => 'Game controls';
+
+  @override
+  String get savedGamesCloseControls => 'Hide controls';
+
+  @override
+  String get savedGamesMuteSealed =>
+      'Some of this game\'s sound plays inside a protected frame – use your phone\'s volume buttons.';
+
+  @override
+  String get savedGamesExitTitle => 'Leave the game?';
+
+  @override
+  String get savedGamesExitBody =>
+      'Any progress the game doesn\'t save itself may be lost.';
+
+  @override
+  String get savedGamesExitStay => 'Keep playing';
+
+  @override
+  String get savedGamesExitLeave => 'Leave';
+
+  @override
+  String get savedGamesExternalTitle => 'Open an outside link?';
+
+  @override
+  String savedGamesExternalBody(String host) {
+    return 'The game wants to open $host. It will open in your browser, outside Madar.';
+  }
+
+  @override
+  String get savedGamesExternalFailed => 'No browser could open the link';
+
+  @override
+  String get savedGamesPrayerTitle => 'Time for prayer';
+
+  @override
+  String get savedGamesPrayerBody =>
+      'The game and its sound are paused. It resumes by itself after the adhan and prayer time.';
+
+  @override
+  String get savedGamesPrayerUnloaded =>
+      'The game was stopped because its sound can\'t be muted from inside; it will reload after prayer.';
+
+  @override
+  String savedGamesPageSays(String host) {
+    return '$host says';
+  }
+
+  @override
+  String get savedGamesOk => 'OK';
+
+  @override
+  String savedGamesStats(String added, String played) {
+    return '$added · $played';
+  }
+
+  @override
+  String savedGamesAddedOn(String date) {
+    return 'Added $date';
+  }
+
+  @override
+  String get savedGamesAddCardHint => 'Paste a web game link';
+
+  @override
+  String get savedGamesShelfEmpty =>
+      'Save a web game by its link and it will appear here.';
+
+  @override
+  String get savedGamesDeleteGame => 'Delete';
+
+  @override
+  String get savedGamesOpenAll => 'Open saved games';
+
+  @override
+  String get savedGamesClearDataDone => 'Game data cleared';
 }

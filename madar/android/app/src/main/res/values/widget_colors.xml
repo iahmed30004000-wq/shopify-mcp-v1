@@ -8,7 +8,8 @@
     <color name="widget_stroke">#55B8862F</color>
     <color name="widget_text_primary">#FF1D1A24</color>
     <color name="widget_text_secondary">#FF474353</color>
-    <color name="widget_text_muted">#A65E5867</color>
+    <!-- Muted, yet 5.3:1 on the card (WCAG AA for the 11 sp notes). -->
+    <color name="widget_text_muted">#FF686270</color>
     <color name="widget_accent">#FF77540E</color>
     <color name="widget_warn">#FFAB2828</color>
     <color name="widget_bar_track">#29483A1C</color>

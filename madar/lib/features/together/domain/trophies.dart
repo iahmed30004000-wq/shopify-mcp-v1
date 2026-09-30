@@ -7,6 +7,7 @@ import 'dart:math' as math;
 import 'head_to_head.dart';
 import 'match_record.dart';
 import 'player_profile.dart';
+import 'together_bounds.dart';
 
 /// Medal metal of a trophy.
 enum TrophyTier { bronze, silver, gold, legendary }
@@ -98,8 +99,8 @@ final class EarnedTrophy {
   static EarnedTrophy? fromJson(Object? json) {
     if (json is! Map) return null;
     final id = TrophyId.values.where((t) => t.name == json['id']).firstOrNull;
-    final t = json['t'];
-    if (id == null || t is! int) return null;
+    final t = TogetherBounds.time(json['t']);
+    if (id == null || t == null) return null;
     final holder = PlayerSlot.tryParse(json['h']);
     final game = json['g'];
     final match = json['m'];
@@ -111,7 +112,7 @@ final class EarnedTrophy {
         holder: id.scope == TrophyScope.shared ? null : holder,
         gameId: id.scope == TrophyScope.playerGame ? game as String : null,
       ),
-      earnedAt: DateTime.fromMillisecondsSinceEpoch(t),
+      earnedAt: t,
       matchId: match is String && match.length <= 64 ? match : null,
     );
   }

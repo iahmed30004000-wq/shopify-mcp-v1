@@ -64,6 +64,7 @@ final class TogetherDataRejected implements Exception {
 final class GameDataPolicy {
   const GameDataPolicy({
     this.allowedKeys,
+    this.hashKeys = const {},
     this.maxStringLength = 128,
     this.maxDepth = 12,
     this.maxNodes = 20000,
@@ -75,6 +76,15 @@ final class GameDataPolicy {
   /// When set, every map key anywhere in the data must be one of these (the
   /// game's own field names). The denylist applies either way.
   final Set<String>? allowedKeys;
+
+  /// Keys whose string values (directly, or in lists) are machine hashes –
+  /// e.g. the Zobrist keys a chess or draughts state keeps for repetition.
+  /// Such a string must be 1–16 lower-case hex digits (at most 64 bits, the
+  /// same information an integer carries) and is not read as text: random
+  /// hex often holds seven decimal digits in a row, which would otherwise be
+  /// refused as a phone / account number. Anything else under these keys is
+  /// refused as [TogetherRejection.personalText].
+  final Set<String> hashKeys;
   final int maxStringLength;
   final int maxDepth;
   final int maxNodes;
@@ -115,8 +125,14 @@ final class GameDataPolicy {
   static final RegExp _control = RegExp('[\u0000-\u001F\u007F\u202A-\u202E\u2066-\u2069]');
   static final RegExp _email = RegExp(r'\S+@\S+\.\S+');
   static final RegExp _link = RegExp(r'(://|www\.|\.com\b|\.net\b|\.org\b)', caseSensitive: false);
-  static final RegExp _separators = RegExp(r'[\s\-().+]');
-  static final RegExp _digitRun = RegExp('[0-9\u0660-\u0669\u06F0-\u06F9]{7,}');
+  // Spacing, punctuation and invisible characters a number may be broken up
+  // with (soft hyphen, Arabic letter mark, zero-width spaces and joiners,
+  // directional marks, word joiner, BOM).
+  static final RegExp _separators = RegExp('[\\s\\-().+\u00AD\u061C\u200B-\u200F\u2060-\u2064\uFEFF]');
+
+  // ASCII, Arabic-Indic, Extended Arabic-Indic and full-width digits.
+  static final RegExp _digitRun = RegExp('[0-9\u0660-\u0669\u06F0-\u06F9\uFF10-\uFF19]{7,}');
+  static final RegExp _hash = RegExp(r'^[0-9a-f]{1,16}$');
 
   /// The words of a key (lower case).
   static List<String> keyWords(String key) => [for (final m in _wordSplit.allMatches(key)) m[0]!.toLowerCase()];
@@ -142,11 +158,16 @@ final class GameDataPolicy {
     }
   }
 
+  /// Checks a string under one of [hashKeys].
+  void checkHash(String s, String path) {
+    if (!_hash.hasMatch(s)) throw TogetherDataRejected(TogetherRejection.personalText, path);
+  }
+
   /// A deep, unmodifiable copy of [json] that passes this policy; throws
   /// [TogetherDataRejected] otherwise.
   Object? sanitize(Object? json, {String path = ''}) {
     var nodes = 0;
-    Object? walk(Object? v, String at, int depth) {
+    Object? walk(Object? v, String at, int depth, {bool hash = false}) {
       if (++nodes > maxNodes) throw TogetherDataRejected(TogetherRejection.tooLarge, at);
       if (depth > maxDepth) throw TogetherDataRejected(TogetherRejection.tooDeep, at);
       switch (v) {
@@ -162,10 +183,16 @@ final class GameDataPolicy {
           }
           return v;
         case String():
-          checkString(v, at);
+          if (hash) {
+            checkHash(v, at);
+          } else {
+            checkString(v, at);
+          }
           return v;
         case List():
-          return List<Object?>.unmodifiable([for (var i = 0; i < v.length; i++) walk(v[i], '$at[$i]', depth + 1)]);
+          return List<Object?>.unmodifiable([
+            for (var i = 0; i < v.length; i++) walk(v[i], '$at[$i]', depth + 1, hash: hash),
+          ]);
         case Map():
           final out = <String, Object?>{};
           for (final e in v.entries) {
@@ -173,7 +200,7 @@ final class GameDataPolicy {
             if (k is! String) throw TogetherDataRejected(TogetherRejection.notJson, at);
             final p = at.isEmpty ? k : '$at.$k';
             checkKey(k, p);
-            out[k] = walk(e.value, p, depth + 1);
+            out[k] = walk(e.value, p, depth + 1, hash: hashKeys.contains(k));
           }
           return Map<String, Object?>.unmodifiable(out);
         default:

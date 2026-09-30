@@ -128,6 +128,7 @@ class WidgetPage {
 
   Map<String, Object?> toJson() => {
     if (from case final f?) 'from': f.millisecondsSinceEpoch,
+    if (from case final f?) 'off': phoneOffsetMinutes(f),
     'big': ?headline,
     'sub': ?detail,
     'note': ?note,
@@ -170,6 +171,17 @@ class WidgetPage {
   @override
   String toString() => 'WidgetPage(from: $from, $headline | $detail | $note, rows: ${rows.length})';
 }
+
+/// The phone's UTC offset (minutes) at [at] – for a `TZDateTime` of another
+/// zone too (a prayer time of the location), which is why it goes through
+/// the epoch. Written beside each page start and [WidgetSnapshot.until]: the
+/// Android provider compares them with `TimeZone.getDefault()` and, once the
+/// phone has moved to another time zone, shows [WidgetSnapshot.stale]
+/// instead of the old zone's dose times, midnights and days
+/// (`MadarWidgetRenderer.Doc.zoneMatches`). Fixed by the instant and the
+/// zone's rules, so the JSON stays free of volatile values.
+int phoneOffsetMinutes(DateTime at) =>
+    DateTime.fromMillisecondsSinceEpoch(at.millisecondsSinceEpoch).timeZoneOffset.inMinutes;
 
 /// Everything one home-screen widget shows until [until], as the Android
 /// provider reads it (`files/…/widgets/<kind>.bin`, encrypted there).
@@ -251,6 +263,7 @@ class WidgetSnapshot {
     'private': private,
     'title': title,
     'until': until.millisecondsSinceEpoch,
+    'untilOff': phoneOffsetMinutes(until),
     'stale': stale,
     'link': ?link,
     'pages': [for (final p in pages) p.toJson()],

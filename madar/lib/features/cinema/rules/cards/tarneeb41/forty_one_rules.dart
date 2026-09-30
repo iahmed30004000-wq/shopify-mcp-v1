@@ -40,7 +40,8 @@ class FortyOneRules extends CardRules<FortyOneState, FortyOneMove> {
       return 'mustFollowSuit';
     }
     if (m.kind == FortyOneMoveKind.bid && s.phase == FortyOnePhase.bidding) {
-      return m.amount! > 13 ? 'bidTooHigh' : 'bidTooLow';
+      // (A move decoded from a damaged save may have no amount.)
+      return (m.amount ?? 0) > 13 ? 'bidTooHigh' : 'bidTooLow';
     }
     return 'wrongPhase';
   }

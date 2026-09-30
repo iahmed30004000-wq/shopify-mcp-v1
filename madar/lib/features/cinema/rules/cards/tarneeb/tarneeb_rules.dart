@@ -59,10 +59,14 @@ class TarneebRules extends CardRules<TarneebState, TarneebMove> {
     return true;
   }
 
-  /// [seat] may throw its hand in now (first turn to speak, worthless hand).
+  /// [seat] may throw its hand in now: a worthless hand, claimed before the
+  /// first bid of the auction (earlier passes do not matter) and before the
+  /// seat has spoken. A bid shows strength, so a claim after it would let a
+  /// player cancel a deal the opponents are about to win.
   static bool canThrowIn(TarneebState s, int seat) =>
       s.options.worthlessHandRedeal &&
       s.phase == TarneebPhase.bidding &&
+      s.highBidder < 0 &&
       !s.hasSpoken(seat) &&
       isWorthlessHand(s.hands[seat]);
 
@@ -104,7 +108,9 @@ class TarneebRules extends CardRules<TarneebState, TarneebMove> {
       if (mustLeadTrump(s)) return 'mustLeadTrump';
       return 'mustFollowSuit';
     }
-    if (m.kind == TarneebMoveKind.bid && s.phase == TarneebPhase.bidding) return 'bidTooLow';
+    if (m.kind == TarneebMoveKind.bid && s.phase == TarneebPhase.bidding) {
+      return (m.amount ?? 0) > 13 ? 'bidTooHigh' : 'bidTooLow';
+    }
     if (m.kind == TarneebMoveKind.pass && s.phase == TarneebPhase.bidding) return 'dealerMustBid';
     if (m.kind == TarneebMoveKind.throwIn && s.phase == TarneebPhase.bidding) return 'cannotThrowIn';
     return 'wrongPhase';

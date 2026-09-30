@@ -432,6 +432,42 @@ class InkPuff extends InkProp {
   }
 }
 
+/// A game's own inked prop: [draw] builds the drawing with the ink toolkit
+/// (layers, shapes, brush strokes, crescents) and gets the same boil,
+/// era colours, shading and caching as the built-in props. Create the
+/// callback once (not per frame).
+///
+/// ```dart
+/// final barrel = InkSketch(size: 60, extent: Rect.fromCircle(center: Offset.zero, radius: 32), draw: (b) {
+///   b.layer();
+///   b.shape(b.colors.fill(PaletteRole.midtone));
+///   b.pen.circle(0, 0, 30);
+///   b.endLayer();
+/// });
+/// ```
+class InkSketch extends InkProp {
+  InkSketch({required super.size, required this.draw, required this.extent, this.fps = 0, super.seed})
+    : super(id: 'sketch');
+
+  final void Function(InkBuild b) draw;
+
+  /// Local bounds of the drawing.
+  final Rect extent;
+
+  /// Drawings per second when the sketch animates with [time] (0 = only
+  /// on boil changes).
+  final double fps;
+
+  @override
+  double get drawFps => fps;
+
+  @override
+  Rect get bounds => extent;
+
+  @override
+  void build(InkBuild b) => draw(b);
+}
+
 /// Puts an [InkProp] into a Flame world (anchor = the prop's origin).
 class PropComponent extends PositionComponent with HasGameReference<CinemaGame> {
   PropComponent({required this.prop, super.position, super.priority}) : super(anchor: Anchor.topLeft);

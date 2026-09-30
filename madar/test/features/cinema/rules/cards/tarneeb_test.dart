@@ -713,6 +713,22 @@ void main() {
       expect(ai.chooseMove(sure, 0, AiLevel.medium, rng, AiBudget.phone), const TarneebMove.bid(13));
     });
 
+    test('with a certain كبوت the AI bids 13 at once (+26), not a cheap 7 that scores 16 for the same 13 tricks', () {
+      const ai = TarneebAi();
+      // Seat 0 speaks first holding all thirteen spades.
+      final s = TarneebState.withHands(suitsDeal());
+      expect(ai.chooseMove(s, 0, AiLevel.medium, CardRng(1), AiBudget.phone), const TarneebMove.bid(13));
+      // The hard AI keeps that bid, and weighs 13 whenever the medium AI
+      // would bid at all.
+      expect(ai.chooseMove(s, 0, AiLevel.hard, CardRng(1), const AiBudget.simulations(60)), const TarneebMove.bid(13));
+      final legal = const TarneebRules().legalMoves(s, 0);
+      expect(ai.hardCandidates(s, 0, legal, const TarneebMove.bid(9)), contains(const TarneebMove.bid(13)));
+      expect(ai.hardCandidates(s, 0, legal, const TarneebMove.pass()), isNot(contains(const TarneebMove.bid(13))));
+      // A merely good hand (about 13.15 tricks with the partner) still bids low.
+      final good = TarneebState.withHands(dealWith(c('AS KS QS JS TS 9S 8S 7S 6S AH KH 2D 2C')));
+      expect(ai.chooseMove(good, 0, AiLevel.medium, CardRng(1), AiBudget.phone), const TarneebMove.bid(7));
+    });
+
     test('Syrian trump: the AI values its hand with the known trump suit', () {
       const ai = TarneebAi();
       // Seat 1 holds all the hearts; the exposed 7♠ makes clubs trumps.
@@ -791,9 +807,17 @@ void main() {
             final real = e.state;
             final other = ai.determinize(real, seat, CardRng(move));
             expect(sortedCards(other.cardsInPlay()), sortedCards(real.cardsInPlay()));
+            // The worlds the hard AI searches are built from public facts and
+            // the seat's own hand only (not the other hands, not the saved
+            // shuffle generator that fixes the next deals).
+            expect(
+              jsonEncode(ai.determinize(other, seat, CardRng(77)).toJson()),
+              jsonEncode(ai.determinize(real, seat, CardRng(77)).toJson()),
+              reason: '$name move $move world',
+            );
             for (final level in [AiLevel.medium, AiLevel.hard]) {
-              final a = ai.chooseMove(real, seat, level, CardRng(9), const AiBudget.simulations(10));
-              final b = ai.chooseMove(other, seat, level, CardRng(9), const AiBudget.simulations(10));
+              final a = ai.chooseMove(real, seat, level, CardRng(9), const AiBudget.simulations(40));
+              final b = ai.chooseMove(other, seat, level, CardRng(9), const AiBudget.simulations(40));
               expect(b, a, reason: '$name move $move ${level.name}');
             }
             checked++;
@@ -851,24 +875,31 @@ void main() {
     });
   });
 
-  group('hard beats easy (both partners hard against two easy players)', () {
-    for (final (name, options, matches) in [
-      ('jordan', const TarneebOptions(), 8),
-      ('syrian trump', const TarneebOptions.syrianTrump(), 6),
+  group('AI levels are ordered (two partners of one level against two of another)', () {
+    for (final (name, options, strong, weak, matches, sims) in [
+      ('jordan', const TarneebOptions(), AiLevel.hard, AiLevel.easy, 8, 24),
+      ('syrian trump', const TarneebOptions.syrianTrump(), AiLevel.hard, AiLevel.easy, 6, 24),
+      ('jordan', const TarneebOptions(), AiLevel.medium, AiLevel.easy, 8, 0),
+      // With a phone-sized search (about 150 rollouts a move); with a tiny
+      // budget the hard AI keeps the medium move.
+      ('jordan', const TarneebOptions(), AiLevel.hard, AiLevel.medium, 6, 150),
     ]) {
-      test(name, () {
+      test('$name: ${strong.name} beats ${weak.name}', () {
         final k = tarneebKit(name, options);
         var wins = 0;
         var edge = 0;
         for (var m = 0; m < matches; m++) {
-          final hardTeam = m % 2;
-          final levels = [for (var s = 0; s < 4; s++) s % 2 == hardTeam ? AiLevel.hard : AiLevel.easy];
-          final r = playMatch(k, 500 + m, levels, budget: const AiBudget.simulations(24));
-          if (r.winners.contains(hardTeam)) wins++;
-          edge += r.scores[hardTeam] - r.scores[1 - hardTeam];
+          final strongTeam = m % 2;
+          final levels = [for (var s = 0; s < 4; s++) s % 2 == strongTeam ? strong : weak];
+          final r = playMatch(k, 500 + m, levels, budget: AiBudget.simulations(sims));
+          if (r.winners.contains(strongTeam)) wins++;
+          edge += r.scores[strongTeam] - r.scores[1 - strongTeam];
         }
         // ignore: avoid_print
-        print('tarneeb $name: hard won $wins/$matches, average edge ${(edge / matches).toStringAsFixed(1)}');
+        print(
+          'tarneeb $name: ${strong.name} won $wins/$matches against ${weak.name}, '
+          'average edge ${(edge / matches).toStringAsFixed(1)}',
+        );
         expect(wins, greaterThan(matches / 2));
         expect(edge, greaterThan(0));
       });

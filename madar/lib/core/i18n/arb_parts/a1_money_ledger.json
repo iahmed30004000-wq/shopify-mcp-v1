@@ -1124,5 +1124,10 @@
     "ar": "ضبط الأسعار",
     "en": "Set rates",
     "description": "Action next to the warning that some currencies have no exchange rate"
+  },
+  "ledgerCurrencyInUseElsewhere": {
+    "ar": "مستخدمة في الحصّالات أو الديون أو الالتزامات أو الميزانية",
+    "en": "Used by savings, debts, bills or the budget",
+    "description": "Why a currency cannot be deleted: a jar, debt, recurring obligation or budget item is kept in it"
   }
 }

@@ -167,8 +167,17 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
   // ------------------------------------------------------------- projects
 
   /// The best set of non-overlapping projects in [hand] (by total value,
-  /// then by the best single project).
-  static List<BalootProject> detectProjects(List<PlayingCard> hand, int seat, BalootMode mode) {
+  /// then by the best single project, compared as [compareProjects] does
+  /// with [trump] and [options], so that e.g. `sequenceBeatsCarre` makes a
+  /// player holding a four of a kind or an equal sequence declare the
+  /// sequence).
+  static List<BalootProject> detectProjects(
+    List<PlayingCard> hand,
+    int seat,
+    BalootMode mode, {
+    Suit? trump,
+    BalootOptions options = const BalootOptions(),
+  }) {
     final candidates = <BalootProject>[];
     for (final r in [Rank.ace, Rank.ten, Rank.king, Rank.queen, Rank.jack]) {
       final four = [for (final s in Suit.values) PlayingCard(s, r)];
@@ -198,7 +207,15 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
       if (value > bestValue ||
           (value == bestValue &&
               value > 0 &&
-              compareProjects(_strongest(chosen, mode), _strongest(best, mode), 0, mode) > 0)) {
+              compareProjects(
+                    _strongest(chosen, mode, trump, options),
+                    _strongest(best, mode, trump, options),
+                    0,
+                    mode,
+                    trump: trump,
+                    options: options,
+                  ) >
+                  0)) {
         bestValue = value;
         best = List.of(chosen);
       }
@@ -215,8 +232,23 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     return best;
   }
 
-  static BalootProject _strongest(List<BalootProject> ps, BalootMode mode) =>
-      ps.reduce((a, b) => compareProjects(a, b, 0, mode) >= 0 ? a : b);
+  static BalootProject _strongest(List<BalootProject> ps, BalootMode mode, Suit? trump, BalootOptions options) =>
+      ps.reduce((a, b) => compareProjects(a, b, 0, mode, trump: trump, options: options) >= 0 ? a : b);
+
+  /// [detectProjects] for [seat]'s current hand under the deal's contract
+  /// and options.
+  static List<BalootProject> projectsOf(BalootState s, int seat) =>
+      detectProjects(s.hands[seat], seat, s.mode!, trump: s.trump, options: s.options);
+
+  /// The play-start announcement of [seat]'s declared projects: their types
+  /// (`detail`, comma-separated) and points (`value`), without the cards,
+  /// which stay hidden until the first trick is complete.
+  static CardEvent announceProjects(int seat, List<BalootProject> mine, BalootMode mode) => CardEvent(
+    CardEventType.projectsDeclared,
+    seat: seat,
+    value: mine.fold<int>(0, (a, p) => a + p.value(mode)),
+    detail: mine.map((p) => p.type.name).join(','),
+  );
 
   /// > 0 when [a] beats [b]: higher value; among hundreds, four of a kind
   /// beats a sequence (or the reverse with `sequenceBeatsCarre`); the higher
@@ -369,7 +401,7 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
       !s.projectsDecided[seat] &&
       s.trick != null &&
       !s.trick!.seats.contains(seat) &&
-      detectProjects(s.hands[seat], seat, s.mode!).isNotEmpty;
+      projectsOf(s, seat).isNotEmpty;
 
   @override
   List<BalootMove> legalMoves(BalootState s, int seat) {
@@ -427,9 +459,9 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
         switch (m.kind) {
           case BalootMoveKind.declareProjects:
             s.projectsDecided[seat] = true;
-            final mine = detectProjects(s.hands[seat], seat, s.mode!);
+            final mine = projectsOf(s, seat);
             s.projects.addAll(mine);
-            ev?.add(CardEvent(CardEventType.projectsDeclared, seat: seat, cards: [for (final p in mine) ...p.cards]));
+            ev?.add(announceProjects(seat, mine, s.mode!));
           case BalootMoveKind.skipProjects:
             s.projectsDecided[seat] = true;
             ev?.add(CardEvent(CardEventType.pass, seat: seat, detail: 'noProjects'));
@@ -609,13 +641,11 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     s.phase = BalootPhase.playing;
     s.belote = beloteHolder(s);
     if (s.options.declareProjects == BalootDeclareProjects.auto) {
-      s.projects = [for (var seat = 0; seat < 4; seat++) ...detectProjects(s.hands[seat], seat, s.mode!)];
+      s.projects = [for (var seat = 0; seat < 4; seat++) ...projectsOf(s, seat)];
       s.projectsDecided = List.filled(4, true);
       for (var seat = 0; seat < 4; seat++) {
         final mine = s.projects.where((p) => p.seat == seat).toList();
-        if (mine.isNotEmpty) {
-          ev?.add(CardEvent(CardEventType.projectsDeclared, seat: seat, cards: [for (final p in mine) ...p.cards]));
-        }
+        if (mine.isNotEmpty) ev?.add(announceProjects(seat, mine, s.mode!));
       }
     } else {
       s.projects = [];
@@ -648,6 +678,22 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     s.tricks.add(trick);
     s.trick = null;
     ev?.add(CardEvent(CardEventType.trickWon, seat: winner, cards: List.of(trick.cards)));
+    if (s.tricks.length == 1 && ev != null) {
+      // The first trick is complete: the declared projects are shown.
+      for (var seat = 0; seat < 4; seat++) {
+        final mine = s.projects.where((p) => p.seat == seat).toList();
+        if (mine.isEmpty) continue;
+        ev.add(
+          CardEvent(
+            CardEventType.projectsDeclared,
+            seat: seat,
+            cards: [for (final p in mine) ...p.cards],
+            value: mine.fold<int>(0, (a, p) => a + p.value(s.mode!)),
+            detail: 'shown',
+          ),
+        );
+      }
+    }
     if (s.tricks.length == 8) return _scoreDeal(s, ev);
     s.trick = Trick(winner);
     s.turn = winner;

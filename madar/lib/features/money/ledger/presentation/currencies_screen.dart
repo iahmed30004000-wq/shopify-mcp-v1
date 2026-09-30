@@ -76,6 +76,8 @@ class _CurrenciesBody extends ConsumerWidget {
     for (final w in book.wallets) {
       usage[w.currency] = (usage[w.currency] ?? 0) + 1;
     }
+    // Jars, debts, obligations and budget items in a currency keep it too.
+    final elsewhere = ref.watch(ledgerCurrencyUseElsewhereProvider).value ?? const <String, int>{};
     // Codes used by wallets but missing from the list (e.g. a quick add in
     // a currency the user never added).
     final unknown = [
@@ -136,6 +138,7 @@ class _CurrenciesBody extends ConsumerWidget {
               book: book,
               currency: c,
               usedBy: usage[c.code] ?? 0,
+              usedElsewhere: elsewhere[c.code.toUpperCase()] ?? 0,
               handle: handle,
             ),
           ),
@@ -275,12 +278,16 @@ class _CurrencyRow extends ConsumerWidget {
     required this.book,
     required this.currency,
     required this.usedBy,
+    this.usedElsewhere = 0,
     required this.handle,
   });
 
   final LedgerBook book;
   final LedgerCurrency currency;
   final int usedBy;
+
+  /// Jars, debts, obligations and budget items kept in this currency.
+  final int usedElsewhere;
   final Widget handle;
 
   @override
@@ -300,6 +307,7 @@ class _CurrencyRow extends ConsumerWidget {
     final line = rate == null ? l.ledgerNoRate : l.ledgerRateLine(one, sym, fmt.rate(rate), baseSym);
     final inverse = rate == null ? null : l.ledgerRateLine(one, baseSym, fmt.rate(RateMath.inverse(rate)), sym);
     final service = ref.read(ledgerServiceProvider);
+    final inUse = usedBy > 0 || usedElsewhere > 0;
     Future<UndoableAction?> delete() async {
       final undo = await service.deleteCurrency(currency.code);
       return UndoableAction(label: l.ledgerCurrencyDeleted, undo: undo);
@@ -318,7 +326,7 @@ class _CurrencyRow extends ConsumerWidget {
             return null;
           },
         ),
-        if (usedBy == 0)
+        if (!inUse)
           QuickAction(
             icon: Icons.delete_outline_rounded,
             label: l.actionDelete,
@@ -331,7 +339,7 @@ class _CurrencyRow extends ConsumerWidget {
       ],
       actions: ItemActions(
         onEdit: () => showCurrencySheet(context, ref, currency: currency),
-        onDelete: usedBy > 0 ? null : delete,
+        onDelete: inUse ? null : delete,
         extra: [
           if (rate != null)
             ItemAction(
@@ -343,10 +351,10 @@ class _CurrencyRow extends ConsumerWidget {
                 return null;
               },
             ),
-          if (usedBy > 0)
+          if (inUse)
             ItemAction(
               icon: Icons.lock_outline_rounded,
-              label: f.localizeDigits(l.ledgerCurrencyInUse(usedBy)),
+              label: usedBy > 0 ? f.localizeDigits(l.ledgerCurrencyInUse(usedBy)) : l.ledgerCurrencyInUseElsewhere,
               enabled: false,
               onSelected: () => null,
             ),
@@ -384,11 +392,11 @@ class _CurrencyRow extends ConsumerWidget {
                       inverse,
                       style: LedgerStyle.amount(t, size: 11.5, color: t.textTertiary, weight: FontWeight.w500),
                     ),
-                  if (usedBy > 0)
+                  if (inUse)
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        f.localizeDigits(l.ledgerCurrencyInUse(usedBy)),
+                        usedBy > 0 ? f.localizeDigits(l.ledgerCurrencyInUse(usedBy)) : l.ledgerCurrencyInUseElsewhere,
                         style: text.labelSmall?.copyWith(color: t.textTertiary),
                       ),
                     ),

@@ -192,7 +192,8 @@ class TarneebOptions {
 
   /// A player whose hand is worthless (no ace, no king with another card of
   /// its suit, no queen in a suit of 3+, no jack in a suit of 4+) may throw
-  /// the cards in on their first turn to speak; the next dealer deals.
+  /// the cards in when it is their first turn to speak and nobody has bid
+  /// yet; the next dealer deals.
   final bool worthlessHandRedeal;
 
   /// A team at or below minus the target after a deal loses the match.

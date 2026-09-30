@@ -312,6 +312,7 @@ class RummyState extends CardGameState {
     required this.openAtTurnStart,
     required this.tableAtTurnStart,
     required this.usedOldMelds,
+    required this.oldMeldCards,
     required this.turnsTaken,
     required this.turn,
     required this.mustUse,
@@ -394,6 +395,7 @@ class RummyState extends CardGameState {
     openAtTurnStart: false,
     tableAtTurnStart: 0,
     usedOldMelds: false,
+    oldMeldCards: [],
     turnsTaken: List.filled(options.players, 0),
     turn: 0,
     mustUse: null,
@@ -434,6 +436,7 @@ class RummyState extends CardGameState {
       openAtTurnStart: j['openAtTurnStart']! as bool,
       tableAtTurnStart: j['tableAtTurnStart'] as int? ?? table.length,
       usedOldMelds: j['usedOldMelds'] as bool? ?? false,
+      oldMeldCards: j['oldMeldCards'] == null ? [] : cardsFromJson(j['oldMeldCards']),
       turnsTaken: list('turnsTaken', List.filled(n, 1)),
       turn: j['turn']! as int,
       mustUse: j['mustUse'] == null ? null : PlayingCard.parse(j['mustUse']! as String),
@@ -482,6 +485,11 @@ class RummyState extends CardGameState {
 
   /// The seat to act laid off on, or swapped from, an older meld this turn.
   bool usedOldMelds;
+
+  /// The cards the seat to act put this turn on older melds (lay-offs and
+  /// swapped-in naturals): part of a full hand when `fullHandOwnMeldsOnly` is
+  /// off, so the one-colour / one-suit bonuses look at them too.
+  List<PlayingCard> oldMeldCards;
 
   /// Turns each seat has finished this round.
   List<int> turnsTaken;
@@ -668,6 +676,7 @@ class RummyState extends CardGameState {
     mustUse = null;
     pendingWilds = [];
     usedOldMelds = false;
+    oldMeldCards = [];
     tableAtTurnStart = 0;
     openAtTurnStart = false;
     dealNumber++;
@@ -719,6 +728,7 @@ class RummyState extends CardGameState {
     openAtTurnStart: openAtTurnStart,
     tableAtTurnStart: tableAtTurnStart,
     usedOldMelds: usedOldMelds,
+    oldMeldCards: List.of(oldMeldCards),
     turnsTaken: List.of(turnsTaken),
     turn: turn,
     mustUse: mustUse,
@@ -753,6 +763,7 @@ class RummyState extends CardGameState {
     'openAtTurnStart': openAtTurnStart,
     'tableAtTurnStart': tableAtTurnStart,
     'usedOldMelds': usedOldMelds,
+    'oldMeldCards': cardsToJson(oldMeldCards),
     'turnsTaken': turnsTaken,
     'turn': turn,
     'mustUse': mustUse?.id,

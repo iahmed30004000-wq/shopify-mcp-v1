@@ -10,13 +10,13 @@ import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import android.util.SizeF
-import android.view.Gravity
 import android.view.View
 import android.widget.RemoteViews
 import app.madar.orbit.MainActivity
 import app.madar.orbit.R
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.TimeZone
 
 /**
  * Turns a widget's snapshot into RemoteViews.
@@ -30,10 +30,15 @@ import org.json.JSONObject
  * app's language and digits (not the phone's). The app declares no
  * `supportsRtl`, and a widget must follow the app's language anyway, so
  * layouts are fixed left-to-right (`layoutDirection="ltr"`) and mirrored
- * here: text gravity is set to the reading side, a direction mark starts
- * every text (so a line opening with a Latin name or a number still reads
- * right to left in Arabic), and side-by-side pieces (the astrolabe, a
- * dose's time, the progress bar) have a left and a right slot.
+ * here. A direction mark starts every text (RLM / LRM: a line opening with
+ * a Latin name or a number still reads right to left in Arabic), and the
+ * layouts' gravity is relative – `start` / `end` of a TextView align to the
+ * start / end of its *paragraph* (Layout.Alignment.ALIGN_NORMAL /
+ * ALIGN_OPPOSITE), which the mark decides – so no alignment is set from
+ * code (`TextView.setGravity` is not a RemoteViews method before Android 12:
+ * calling it made the launcher refuse the whole widget on Android 8–11).
+ * Side-by-side pieces (the astrolabe, the header's count, a dose's time,
+ * the progress bar) have a left and a right slot or padding set here.
  *
  * **Sizes.** Android 12+: one RemoteViews per size class, the launcher picks
  * ([sizesFor]). Before: the layout for the size in the widget's options.
@@ -54,10 +59,11 @@ object MadarWidgetRenderer {
     /** Row slots in the list layout. */
     private const val ROW_SLOTS = 6
 
-    enum class Variant { SMALL, WIDE, TALL }
-
-    /** Where a text sits: the reading side's start or end, or centred. */
-    private enum class Align { START, END, CENTER }
+    /**
+     * Size classes: SMALL (2 cells wide), SHORT (wide, about 2 cells high or
+     * less), WIDE (wide, 2–3 cells high), TALL (wide, 3+ cells high).
+     */
+    enum class Variant { SMALL, SHORT, WIDE, TALL }
 
     private class Row(val container: Int, val open: Int, val done: Int, val time: Int)
 
@@ -99,6 +105,24 @@ object MadarWidgetRenderer {
             return current
         }
 
+        /**
+         * Whether the phone's time zone still gives the UTC offsets the app
+         * saw when it built the snapshot (`off` of each page start,
+         * `untilOff`): its wall-clock texts – dose times, midnights, days
+         * left – belong to that zone. After a move to another zone the widget
+         * asks to open Madar instead of showing the old zone's times
+         * (TIMEZONE_CHANGED redraws it). Snapshots without offsets match.
+         */
+        fun zoneMatches(zone: TimeZone = TimeZone.getDefault()): Boolean {
+            if (json.has("untilOff") && zone.getOffset(until) / 60000 != json.optInt("untilOff")) return false
+            for (p in pages) {
+                if (p.has("from") && p.has("off") && zone.getOffset(p.optLong("from")) / 60000 != p.optInt("off")) {
+                    return false
+                }
+            }
+            return true
+        }
+
         /** When the widget changes next after [now]. */
         fun nextChangeAfter(now: Long): Long {
             for (p in pages) {
@@ -114,7 +138,9 @@ object MadarWidgetRenderer {
                 val json = JSONObject(text)
                 if (json.optInt("v", 0) == VERSION) Doc(json) else null
             } catch (e: Exception) {
-                Log.w(TAG, "unreadable widget snapshot", e)
+                // By class only: org.json's messages quote the whole
+                // (decrypted, personal) input.
+                Log.w(TAG, "unreadable widget snapshot (${e.javaClass.simpleName})")
                 null
             }
         }
@@ -134,7 +160,7 @@ object MadarWidgetRenderer {
         }
         val now = System.currentTimeMillis()
         val doc = MadarWidgetStore.readSnapshot(context, kind)?.let { Doc.parse(it) }
-        val page = doc?.pageAt(now)
+        val page = doc?.takeIf { it.zoneMatches() }?.pageAt(now)
         val images = page?.let { loadImages(context, kind, optText(it, "img")) }
         for (id in ids) {
             val views = try {
@@ -184,13 +210,19 @@ object MadarWidgetRenderer {
 
     /** Android 12+: the size classes the launcher chooses from (dp). */
     private fun sizesFor(kind: MadarWidgetKind): List<Pair<SizeF, Variant>> = when (kind) {
-        MadarWidgetKind.PRAYER, MadarWidgetKind.BUDGET -> listOf(
+        MadarWidgetKind.PRAYER -> listOf(
             Pair(SizeF(100f, 80f), Variant.SMALL),
             Pair(SizeF(200f, 80f), Variant.WIDE),
         )
+        MadarWidgetKind.BUDGET -> listOf(
+            Pair(SizeF(100f, 80f), Variant.SMALL),
+            Pair(SizeF(200f, 80f), Variant.SHORT),
+            Pair(SizeF(200f, 120f), Variant.WIDE),
+        )
         MadarWidgetKind.MEDS, MadarWidgetKind.TASKS -> listOf(
             Pair(SizeF(100f, 80f), Variant.SMALL),
-            Pair(SizeF(200f, 80f), Variant.WIDE),
+            Pair(SizeF(200f, 80f), Variant.SHORT),
+            Pair(SizeF(200f, 120f), Variant.WIDE),
             Pair(SizeF(200f, 190f), Variant.TALL),
         )
     }
@@ -201,7 +233,12 @@ object MadarWidgetRenderer {
             return if (kind == MadarWidgetKind.MEDS || kind == MadarWidgetKind.TASKS) Variant.WIDE else Variant.SMALL
         }
         if (width < 180) return Variant.SMALL
-        return if (height >= 190) Variant.TALL else Variant.WIDE
+        return when {
+            height in 1 until 120 -> Variant.SHORT
+            height in 120 until 190 -> Variant.WIDE
+            height >= 190 -> Variant.TALL
+            else -> Variant.WIDE
+        }
     }
 
     private fun views(
@@ -217,9 +254,16 @@ object MadarWidgetRenderer {
             if (doc.countsOnly || variant == Variant.SMALL || page.has("empty")) {
                 counts(context, kind, doc, page)
             } else {
-                list(context, kind, doc, page, if (variant == Variant.TALL) ROW_SLOTS else 3)
+                list(context, kind, doc, page, rowsFor(variant))
             }
         MadarWidgetKind.BUDGET -> budget(context, kind, doc, page, variant)
+    }
+
+    /** Rows that fit a list widget of [variant] (22 dp each). */
+    private fun rowsFor(variant: Variant): Int = when (variant) {
+        Variant.SMALL, Variant.SHORT -> 2
+        Variant.WIDE -> 3
+        Variant.TALL -> ROW_SLOTS
     }
 
     // ------------------------------------------------------------ layouts ----
@@ -231,9 +275,10 @@ object MadarWidgetRenderer {
     private fun prayerSmall(context: Context, doc: Doc, page: JSONObject, images: Images?): RemoteViews {
         val rtl = doc.rtl
         val v = RemoteViews(context.packageName, R.layout.widget_prayer_small)
-        text(v, R.id.widget_headline, optText(page, "big"), rtl, Align.CENTER)
-        text(v, R.id.widget_detail, optText(page, "sub"), rtl, Align.CENTER)
-        countdown(v, page, rtl, Align.CENTER)
+        text(v, R.id.widget_headline, optText(page, "big"), rtl)
+        text(v, R.id.widget_detail, optText(page, "sub"), rtl)
+        countdown(v, page, rtl)
+        v.setViewVisibility(R.id.widget_astro_frame, if (images != null) View.VISIBLE else View.GONE)
         image(v, R.id.widget_astro_day, R.id.widget_astro_night, images)
         v.setOnClickPendingIntent(
             android.R.id.background,
@@ -249,7 +294,7 @@ object MadarWidgetRenderer {
         text(v, R.id.widget_title, doc.title, rtl)
         text(v, R.id.widget_headline, optText(page, "big"), rtl)
         text(v, R.id.widget_detail, optText(page, "sub"), rtl)
-        countdown(v, page, rtl, Align.START)
+        countdown(v, page, rtl)
         text(v, R.id.widget_note, optText(page, "note"), rtl)
         val hasImage = images != null
         v.setViewVisibility(R.id.widget_slot_left, if (hasImage && !rtl) View.VISIBLE else View.GONE)
@@ -285,7 +330,7 @@ object MadarWidgetRenderer {
         val headerGap = (56 * density).toInt()
         text(v, R.id.widget_title, doc.title, rtl)
         v.setViewPadding(R.id.widget_title, if (rtl) headerGap else 0, 0, if (rtl) 0 else headerGap, 0)
-        text(v, R.id.widget_headline, optText(page, "big"), rtl, Align.END)
+        text(v, R.id.widget_headline, optText(page, "big"), rtl)
         text(v, R.id.widget_detail, optText(page, "sub"), rtl)
 
         val rows = page.optJSONArray("rows") ?: JSONArray()
@@ -323,7 +368,7 @@ object MadarWidgetRenderer {
             val right = if (rtl) 0 else gap
             v.setViewPadding(slot.open, left, 0, right, 0)
             v.setViewPadding(slot.done, left, 0, right, 0)
-            text(v, slot.time, time, rtl, Align.END)
+            text(v, slot.time, time, rtl)
             v.setOnClickPendingIntent(
                 slot.container,
                 openIntent(context, kind, i + 1, optText(row, "link") ?: link(page, doc)),
@@ -346,7 +391,8 @@ object MadarWidgetRenderer {
         text(v, R.id.widget_headline, if (warn) null else headline, rtl)
         text(v, R.id.widget_headline_warn, if (warn) headline else null, rtl)
         text(v, R.id.widget_detail, if (empty == null) optText(page, "sub") else null, rtl)
-        text(v, R.id.widget_note, if (empty == null && variant != Variant.SMALL) optText(page, "note") else null, rtl)
+        val roomForNote = variant == Variant.WIDE || variant == Variant.TALL
+        text(v, R.id.widget_note, if (empty == null && roomForNote) optText(page, "note") else null, rtl)
         text(v, R.id.widget_empty, empty, rtl)
         val bar = if (empty == null && page.has("bar")) page.optInt("bar", 0).coerceIn(0, 1000) else -1
         val shownBar = when {
@@ -375,8 +421,8 @@ object MadarWidgetRenderer {
         val rtl = doc?.rtl ?: (context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL)
         val title = doc?.title?.takeIf { it.isNotEmpty() } ?: context.getString(kind.titleRes)
         val message = doc?.stale?.takeIf { it.isNotEmpty() } ?: context.getString(R.string.widget_placeholder)
-        text(v, R.id.widget_title, title, rtl, Align.CENTER)
-        text(v, R.id.widget_message, message, rtl, Align.CENTER)
+        text(v, R.id.widget_title, title, rtl)
+        text(v, R.id.widget_message, message, rtl)
         v.setOnClickPendingIntent(android.R.id.background, openIntent(context, kind, 0, doc?.link))
         return v
     }
@@ -384,30 +430,24 @@ object MadarWidgetRenderer {
     // ------------------------------------------------------------ helpers ----
 
     /**
-     * Shows [value] (reading in the app's direction, [rtl]) at [align], or
-     * hides the view when there is nothing to show.
+     * Shows [value] reading in the app's direction ([rtl]), or hides the
+     * view when there is nothing to show. The layout's gravity (start, end
+     * or center) places it: relative to the marked paragraph.
      */
-    private fun text(v: RemoteViews, id: Int, value: String?, rtl: Boolean, align: Align = Align.START) {
+    private fun text(v: RemoteViews, id: Int, value: String?, rtl: Boolean) {
         if (value.isNullOrEmpty()) {
             v.setViewVisibility(id, View.GONE)
             return
         }
         v.setViewVisibility(id, View.VISIBLE)
         v.setTextViewText(id, mark(value, rtl))
-        v.setInt(id, "setGravity", gravity(rtl, align))
-    }
-
-    private fun gravity(rtl: Boolean, align: Align): Int = when (align) {
-        Align.CENTER -> Gravity.CENTER
-        Align.START -> (if (rtl) Gravity.RIGHT else Gravity.LEFT) or Gravity.CENTER_VERTICAL
-        Align.END -> (if (rtl) Gravity.LEFT else Gravity.RIGHT) or Gravity.CENTER_VERTICAL
     }
 
     /** A direction mark first: the paragraph reads in the app's direction. */
     private fun mark(value: String, rtl: Boolean): String = (if (rtl) RLM else LRM) + value
 
     /** The ticking countdown ([android.widget.Chronometer], counting down). */
-    private fun countdown(v: RemoteViews, page: JSONObject, rtl: Boolean, align: Align) {
+    private fun countdown(v: RemoteViews, page: JSONObject, rtl: Boolean) {
         val target = page.optLong("cd", 0L)
         if (target <= 0L) {
             v.setChronometer(R.id.widget_countdown, SystemClock.elapsedRealtime(), null, false)
@@ -419,7 +459,6 @@ object MadarWidgetRenderer {
         v.setViewVisibility(R.id.widget_countdown, View.VISIBLE)
         v.setChronometer(R.id.widget_countdown, base, format, true)
         v.setChronometerCountDown(R.id.widget_countdown, true)
-        v.setInt(R.id.widget_countdown, "setGravity", gravity(rtl, align))
     }
 
     /** [format] with exactly one `%s` and every other `%` escaped. */

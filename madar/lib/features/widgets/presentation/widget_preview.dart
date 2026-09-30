@@ -26,7 +26,7 @@ class WidgetPreviewColors {
     stroke: Color(0x55B8862F),
     primary: Color(0xFF1D1A24),
     secondary: Color(0xFF474353),
-    muted: Color(0xA65E5867),
+    muted: Color(0xFF686270),
     accent: Color(0xFF77540E),
     warn: Color(0xFFAB2828),
     track: Color(0x29483A1C),
@@ -38,7 +38,7 @@ class WidgetPreviewColors {
     stroke: Color(0x40E8C77A),
     primary: Color(0xFFF4EEDD),
     secondary: Color(0xFFC7C3D6),
-    muted: Color(0xA6ADACBD),
+    muted: Color(0xFF8E8FA4),
     accent: Color(0xFFE8C77A),
     warn: Color(0xFFFF9393),
     track: Color(0x33E8C77A),
@@ -71,7 +71,9 @@ class MadarWidgetPreview extends StatelessWidget {
   final bool dark;
 
   bool get _small => size.width < 180;
-  bool get _tall => size.height >= 190;
+
+  /// Rows a list widget of this size shows (MadarWidgetRenderer.rowsFor).
+  int get _rows => size.height < 120 ? 2 : (size.height < 190 ? 3 : 6);
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class MadarWidgetPreview extends StatelessWidget {
         MadarWidgetKind.meds || MadarWidgetKind.tasks =>
           snapshot.private || _small || page.empty != null
               ? _counts(snapshot, page, c)
-              : _list(snapshot, page, c, _tall ? 6 : 3),
+              : _list(snapshot, page, c, _rows),
         MadarWidgetKind.budget => _budget(snapshot, page, c),
       };
     }
@@ -147,17 +149,17 @@ class MadarWidgetPreview extends StatelessWidget {
   Widget _prayerSmall(WidgetPage page, WidgetPreviewColors c) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      _astro(page, 52),
-      const SizedBox(height: 4),
-      Text(page.headline ?? '', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-      Text(page.detail ?? '', style: TextStyle(color: c.secondary)),
-      Text(_countdown(page), style: TextStyle(color: c.accent, fontSize: 12)),
+      _astro(page, 40),
+      const SizedBox(height: 2),
+      Text(page.headline ?? '', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+      Text(page.detail ?? '', style: TextStyle(color: c.secondary, fontSize: 12)),
+      Text(_countdown(page), style: TextStyle(color: c.accent, fontSize: 11)),
     ],
   );
 
   Widget _prayerWide(WidgetSnapshot s, WidgetPage page, WidgetPreviewColors c) => Row(
     children: [
-      _astro(page, 84),
+      _astro(page, 72),
       const SizedBox(width: 12),
       Expanded(
         child: Column(
@@ -165,9 +167,9 @@ class MadarWidgetPreview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(s.title, style: TextStyle(color: c.secondary, fontSize: 12)),
-            Text(page.headline ?? '', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-            Text(page.detail ?? '', style: const TextStyle(fontSize: 15)),
-            Text(_countdown(page), style: TextStyle(color: c.accent)),
+            Text(page.headline ?? '', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+            Text(page.detail ?? '', style: const TextStyle(fontSize: 14)),
+            Text(_countdown(page), style: TextStyle(color: c.accent, fontSize: 12)),
             if (page.note != null) Text(page.note!, style: TextStyle(color: c.muted, fontSize: 11)),
           ],
         ),
@@ -185,7 +187,7 @@ class MadarWidgetPreview extends StatelessWidget {
           Text(page.headline!, style: TextStyle(color: c.accent, fontSize: 28, fontWeight: FontWeight.w700)),
         if (page.detail != null) Text(page.detail!, style: TextStyle(color: c.secondary), maxLines: 2),
       ],
-      if (page.note != null) Text(page.note!, style: TextStyle(color: c.accent, fontSize: 12)),
+      if (page.note != null) _Dots.orText(page.note!, TextStyle(color: c.accent, fontSize: 12), c.accent),
       if (page.empty != null) Text(page.empty!, maxLines: 3),
     ],
   );
@@ -208,16 +210,22 @@ class MadarWidgetPreview extends StatelessWidget {
         const SizedBox(height: 4),
         for (final r in page.rows.take(shown))
           SizedBox(
-            height: 26,
+            height: 22,
             child: Row(
               children: [
+                Icon(
+                  switch (r.state) {
+                    WidgetRowState.done => Icons.check_rounded,
+                    WidgetRowState.skipped => Icons.remove_rounded,
+                    WidgetRowState.open => Icons.radio_button_unchecked_rounded,
+                  },
+                  size: 14,
+                  color: r.state == WidgetRowState.open ? c.accent : c.muted,
+                ),
+                const SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    '${switch (r.state) {
-                      WidgetRowState.done => '✓',
-                      WidgetRowState.skipped => '–',
-                      WidgetRowState.open => '○',
-                    }}  ${r.text}',
+                    r.text,
                     style: TextStyle(
                       color: r.state == WidgetRowState.open ? c.primary : c.muted,
                       decoration:
@@ -246,9 +254,18 @@ class MadarWidgetPreview extends StatelessWidget {
       if (page.empty != null)
         Text(page.empty!, maxLines: 3)
       else ...[
-        Text(
-          page.headline ?? '',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: page.warn ? c.warn : c.primary),
+        // Android shrinks the amount to fit (autosize 24 → 13 sp).
+        SizedBox(
+          height: 30,
+          width: double.infinity,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              page.headline ?? '',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: page.warn ? c.warn : c.primary),
+            ),
+          ),
         ),
         if (page.detail != null) Text(page.detail!, style: TextStyle(color: c.secondary)),
         if (page.bar != null) ...[
@@ -265,12 +282,46 @@ class MadarWidgetPreview extends StatelessWidget {
             ),
           ),
         ],
-        if (!_small && page.note != null) ...[
+        if (size.height >= 120 && !_small && page.note != null) ...[
           const SizedBox(height: 6),
           Text(page.note!, style: TextStyle(color: c.muted, fontSize: 11)),
         ],
       ],
     ],
+  );
+}
+
+/// The counts-only state dots ("● ● ○") drawn as dots, or [text] as is.
+class _Dots extends StatelessWidget {
+  const _Dots(this.done, this.total, this.color);
+
+  final int done, total;
+  final Color color;
+
+  static Widget orText(String text, TextStyle style, Color color) {
+    final marks = text.replaceAll(' ', '');
+    if (marks.isEmpty || !RegExp(r'^[●○]+$').hasMatch(marks)) return Text(text, style: style);
+    return _Dots('●'.allMatches(marks).length, marks.length, color);
+  }
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 4),
+    child: Row(
+      children: [
+        for (var i = 0; i < total; i++)
+          Container(
+            width: 9,
+            height: 9,
+            margin: const EdgeInsetsDirectional.only(end: 5),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: i < done ? color : null,
+              border: Border.all(color: color, width: 1.3),
+            ),
+          ),
+      ],
+    ),
   );
 }
 

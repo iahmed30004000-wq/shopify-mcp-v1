@@ -156,7 +156,7 @@ final class GameTally {
       bestCoopStreak: c('bc'),
       highScoreOne: TogetherBounds.score(json['h1']),
       highScoreTwo: TogetherBounds.score(json['h2']),
-      lastPlayed: t is int ? DateTime.fromMillisecondsSinceEpoch(t) : null,
+      lastPlayed: TogetherBounds.time(t),
     );
   }
 }
@@ -301,7 +301,7 @@ final class TogetherLedger {
       bestDayStreak: TogetherBounds.count(json['bds']),
       matchesOnLastDay: TogetherBounds.count(json['dc']),
       bestMatchesInDay: TogetherBounds.count(json['bdc']),
-      firstPlayed: f is int ? DateTime.fromMillisecondsSinceEpoch(f) : null,
+      firstPlayed: TogetherBounds.time(f),
     );
   }
 }

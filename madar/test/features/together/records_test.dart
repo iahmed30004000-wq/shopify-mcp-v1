@@ -340,6 +340,24 @@ void main() {
       expect(r.newTrophies.map((t) => t.id), containsAll([TrophyId.firstMatch, TrophyId.photoFinish]));
     });
 
+    test('a finished session is recorded into the head-to-head history', () async {
+      final session = TogetherSession<_Duel, int>.local(
+        adapter: const _DuelGame(),
+        seating: const [PlayerSlot.two, PlayerSlot.one],
+        recorder: repo.recordMatch,
+        clock: () => DateTime(2026, 9, 30, 21),
+      );
+      addTearDown(session.dispose);
+      await session.start(seed: 5);
+      await session.play(1); // participant 0 (player two) wins at once
+      final recorded = (await session.recorded)!;
+      expect(recorded.record.outcome, MatchOutcome.twoWon);
+      expect(recorded.newTrophies.map((t) => t.id), contains(TrophyId.firstMatch));
+      final ledger = await repo.ledger();
+      expect(ledger.tallyOf('duel').winsTwo, 1);
+      expect((await repo.history()).single.id, session.matchId);
+    });
+
     test('reset clears records (not profiles) and can be undone', () async {
       await repo.saveProfile(TogetherProfile.defaults(PlayerSlot.two).copyWith(name: 'Player B'));
       await repo.recordMatch(_m(1, MatchOutcome.twoWon));
@@ -352,4 +370,57 @@ void main() {
       expect((await repo.trophies()).trophies, isNotEmpty);
     });
   });
+}
+
+/// One move and the mover wins (session → repository test).
+class _Duel {
+  const _Duel({this.done = false});
+
+  final bool done;
+}
+
+class _DuelGame extends TogetherGameAdapter<_Duel, int> {
+  const _DuelGame();
+
+  @override
+  String get gameId => 'duel';
+
+  @override
+  int get gameVersion => 1;
+
+  @override
+  TogetherGameKind get kind => TogetherGameKind.turnBased;
+
+  @override
+  GameDataPolicy get policy => const GameDataPolicy(allowedKeys: {'done', 'x'});
+
+  @override
+  int get seatCount => 2;
+
+  @override
+  _Duel initialState({required int seed, required GameData config}) => const _Duel();
+
+  @override
+  int? seatToMove(_Duel state) => state.done ? null : 0;
+
+  @override
+  String? validateMove(_Duel state, int seat, int move) => null;
+
+  @override
+  _Duel applyMove(_Duel state, int seat, int move) => const _Duel(done: true);
+
+  @override
+  SeatOutcome? outcome(_Duel state) => state.done ? SeatOutcome.win(0) : null;
+
+  @override
+  Object? encodeState(_Duel state) => {'done': state.done};
+
+  @override
+  _Duel decodeState(Object? json) => _Duel(done: (json! as Map)['done'] == true);
+
+  @override
+  Object? encodeMove(int move) => {'x': move};
+
+  @override
+  int decodeMove(Object? json) => (json! as Map)['x'] as int;
 }

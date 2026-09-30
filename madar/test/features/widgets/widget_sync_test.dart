@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/domain/budget_math.dart';
 import 'package:madar/core/domain/enums.dart';
@@ -41,6 +41,16 @@ class _Rev extends Notifier<int> {
 
 final _revProvider = NotifierProvider<_Rev, int>(_Rev.new);
 
+/// The app lock, switchable (turned on / off in the settings).
+class _Lock extends Notifier<bool> {
+  @override
+  bool build() => false;
+
+  void set(bool on) => state = on;
+}
+
+final _lockProvider = NotifierProvider<_Lock, bool>(_Lock.new);
+
 WidgetBuild _fakeBuild(MadarWidgetKind kind, int rev) => WidgetBuild(
   WidgetSnapshot(
     kind: kind,
@@ -77,7 +87,7 @@ void main() {
 
   final now = DateTime(2026, 9, 30, 13, 5);
 
-  ProviderContainer container(FakeWidgetPlatform platform, {List<Object> overrides = const [], bool lockOn = true}) {
+  ProviderContainer container(FakeWidgetPlatform platform, {List<Override> overrides = const [], bool lockOn = true}) {
     final c = ProviderContainer(
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
@@ -89,7 +99,7 @@ void main() {
         widgetNowProvider.overrideWith(() => _FixedNow(now)),
         widgetAppLockOnProvider.overrideWithValue(lockOn),
         appForegroundProvider.overrideWithValue(ValueNotifier(true)),
-        ...overrides.cast(),
+        ...overrides,
       ],
     );
     addTearDown(c.dispose);
@@ -97,7 +107,7 @@ void main() {
   }
 
   group('sync', () {
-    List<Object> fakeBuilds() => [
+    List<Override> fakeBuilds() => [
       widgetBuildProvider.overrideWith((ref, kind) => AsyncData(_fakeBuild(kind, ref.watch(_revProvider)))),
     ];
 
@@ -128,7 +138,8 @@ void main() {
       platform.installedKinds.add(MadarWidgetKind.prayer);
       platform.emit(WidgetPlatformEvent.changed);
       await _settle(c);
-      expect(platform.published.map((p) => p.kind), [MadarWidgetKind.meds, MadarWidgetKind.meds, MadarWidgetKind.prayer]);
+      expect(platform.published.first.kind, MadarWidgetKind.meds);
+      expect(platform.published.skip(1).map((p) => p.kind), unorderedEquals([MadarWidgetKind.meds, MadarWidgetKind.prayer]));
 
       // Same widgets, but Android may have dropped data: written again.
       platform.emit(WidgetPlatformEvent.changed);
@@ -275,6 +286,66 @@ void main() {
       expect(weekly.private, isTrue);
       expect(weekly.pages.first.detail, 'left this week');
       expect(platform.stored[MadarWidgetKind.budget], isNot(contains('JOD')));
+    });
+  });
+
+  group('privacy', () {
+    ProviderContainer lockable() {
+      final c = ProviderContainer(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(prefs),
+          widgetAppLockOnProvider.overrideWith((ref) => ref.watch(_lockProvider)),
+        ],
+      );
+      addTearDown(c.dispose);
+      return c;
+    }
+
+    test('a "show details" chosen while App Lock is off does not outlive turning the lock on', () async {
+      final c = lockable();
+      final prefsCtl = c.read(widgetPrefsProvider.notifier);
+      bool shows(MadarWidgetKind k) => c.read(widgetShowsDetailsProvider(k));
+      expect(shows(MadarWidgetKind.meds), isTrue, reason: 'lock off: details by default');
+
+      // Switched off and on again with the lock off: back to the default.
+      await prefsCtl.setDetails(MadarWidgetKind.meds, false);
+      await prefsCtl.setDetails(MadarWidgetKind.meds, true);
+      expect(shows(MadarWidgetKind.meds), isTrue);
+
+      // The lock goes on: counts only, as for a widget never touched.
+      c.read(_lockProvider.notifier).set(true);
+      expect(shows(MadarWidgetKind.meds), isFalse);
+      expect(shows(MadarWidgetKind.budget), isFalse);
+      // Nothing personal is stored as a choice either.
+      expect(c.read(widgetPrefsProvider).details, isEmpty);
+    });
+
+    test('a choice that differs from the lock\'s default is kept, both ways', () async {
+      final c = lockable();
+      final prefsCtl = c.read(widgetPrefsProvider.notifier);
+      bool shows(MadarWidgetKind k) => c.read(widgetShowsDetailsProvider(k));
+
+      // Hidden with the lock off: stays hidden whatever the lock does.
+      await prefsCtl.setDetails(MadarWidgetKind.budget, false);
+      c.read(_lockProvider.notifier).set(true);
+      expect(shows(MadarWidgetKind.budget), isFalse);
+      c.read(_lockProvider.notifier).set(false);
+      expect(shows(MadarWidgetKind.budget), isFalse);
+
+      // Shown on purpose while the lock is on: the user's explicit opt-in.
+      c.read(_lockProvider.notifier).set(true);
+      await prefsCtl.setDetails(MadarWidgetKind.tasks, true);
+      expect(shows(MadarWidgetKind.tasks), isTrue);
+      c.read(_lockProvider.notifier).set(false);
+      c.read(_lockProvider.notifier).set(true);
+      expect(shows(MadarWidgetKind.tasks), isTrue);
+
+      // Hidden again under the lock: the default, not a stored choice.
+      await prefsCtl.setDetails(MadarWidgetKind.tasks, false);
+      expect(shows(MadarWidgetKind.tasks), isFalse);
+      expect(c.read(widgetPrefsProvider).details, {MadarWidgetKind.budget: false});
+      // Stored for the next run.
+      expect(prefs.getString(WidgetPrefsController.key), contains('"budget":false'));
     });
   });
 

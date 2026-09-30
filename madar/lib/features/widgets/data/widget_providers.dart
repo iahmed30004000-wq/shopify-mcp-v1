@@ -65,7 +65,17 @@ class WidgetPrefsController extends Notifier<WidgetPrefs> {
   }
 
   /// [show] null: back to the default (hidden while the app lock is on).
-  Future<void> setDetails(MadarWidgetKind kind, bool? show) => _save(state.withDetails(kind, show));
+  ///
+  /// A choice equal to what the app lock implies right now is no choice and
+  /// is not kept: "show" picked while the lock is off (the default then)
+  /// must not keep names, times and amounts on the home screen once the
+  /// lock is turned on. Only a real departure from the default is stored –
+  /// hide with the lock off (stays hidden), show with the lock on (the
+  /// user's explicit opt-in).
+  Future<void> setDetails(MadarWidgetKind kind, bool? show) {
+    final byDefault = const WidgetPrefs().showsDetails(kind, appLockOn: ref.read(widgetAppLockOnProvider));
+    return _save(state.withDetails(kind, show == byDefault ? null : show));
+  }
 
   Future<void> setBudgetPeriod(BudgetPeriod period) => _save(state.withBudgetPeriod(period));
 
@@ -102,41 +112,26 @@ final widgetTextsProvider = Provider<WidgetTexts>((ref) {
 /// The widgets' wall clock (home's; tests freeze it).
 final widgetClockProvider = Provider<DateTime Function()>((ref) => ref.watch(homeClockProvider));
 
-/// "Now" for the snapshots: re-read when the app comes to the foreground,
-/// at midnight and every [WidgetNow.every] while it runs. The widgets move
-/// on by themselves between (their pages); this only keeps the next pages
-/// coming.
+/// "Now" for the snapshots: re-read when the app comes back to the
+/// foreground and at midnight (today turns over). Between app runs the
+/// widgets move on by themselves through their pages (prayer times,
+/// midnight), which cover the next one to three days – no timer of its own.
 final widgetNowProvider = NotifierProvider<WidgetNow, DateTime>(WidgetNow.new);
 
 class WidgetNow extends Notifier<DateTime> {
-  static const Duration every = Duration(minutes: 30);
-
-  Timer? _timer;
-
   @override
   DateTime build() {
     final clock = ref.watch(widgetClockProvider);
-    // Midnight (today turns over) rebuilds this with a fresh "now".
+    // Midnight rebuilds this with a fresh "now".
     ref.watch(orbitTodayProvider);
     final foreground = ref.watch(appForegroundProvider);
     void onForeground() {
-      if (!foreground.value) return;
-      state = clock();
-      _arm(clock);
+      if (foreground.value) state = clock();
     }
 
     foreground.addListener(onForeground);
-    ref.onDispose(() {
-      _timer?.cancel();
-      foreground.removeListener(onForeground);
-    });
-    _arm(clock);
+    ref.onDispose(() => foreground.removeListener(onForeground));
     return clock();
-  }
-
-  void _arm(DateTime Function() clock) {
-    _timer?.cancel();
-    _timer = Timer.periodic(every, (_) => state = clock());
   }
 }
 
@@ -306,12 +301,23 @@ class WidgetInstalled extends Notifier<Set<MadarWidgetKind>> {
       if (!setEquals(kinds, state)) {
         state = Set.unmodifiable(kinds);
       } else if (rewrite) {
-        ref.invalidate(widgetSyncProvider);
+        ref.read(widgetRewriteProvider.notifier).bump();
       }
     } catch (e) {
       _log('installed widgets', e);
     }
   }
+}
+
+/// Bumped when every installed widget must be written again although the
+/// set of installed kinds is the same (see [WidgetInstalled.refresh]).
+final widgetRewriteProvider = NotifierProvider<WidgetRewrite, int>(WidgetRewrite.new);
+
+class WidgetRewrite extends Notifier<int> {
+  @override
+  int build() => 0;
+
+  void bump() => state++;
 }
 
 /// How long data changes settle before a widget is written.
@@ -333,6 +339,8 @@ class WidgetSync extends Notifier<Set<MadarWidgetKind>> {
   @override
   Set<MadarWidgetKind> build() {
     final installed = ref.watch(widgetInstalledProvider);
+    // A rewrite rebuilds this: every listener below fires again.
+    ref.watch(widgetRewriteProvider);
     final bridge = ref.watch(widgetBridgeProvider);
     final debounce = ref.watch(widgetSyncDebounceProvider);
     ref.onDispose(() {

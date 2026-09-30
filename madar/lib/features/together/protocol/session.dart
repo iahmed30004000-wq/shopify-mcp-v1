@@ -233,6 +233,7 @@ class TogetherSession<S, M> extends ChangeNotifier {
   final ListQueue<(int, TogetherBody)> _outbox = ListQueue();
   final Map<int, int> _lastInputTick = {};
   int _rejectedFrames = 0;
+  int _unstartedFrames = 0;
   bool _disposed = false;
 
   // ------------------------------------------------------------ read state
@@ -259,7 +260,9 @@ class TogetherSession<S, M> extends ChangeNotifier {
 
   SessionPhase get phase => _phase;
 
-  /// Why the session failed / ended (`incompatibleGame`, `peerLeft`).
+  /// Why the session failed / ended: `incompatibleGame` (other game or
+  /// rules version – on either side), `incompatibleProtocol` (the peer
+  /// speaks another wire version), `peerLeft`, `left`.
   String? get failure => _failure;
 
   SeatOutcome? get outcome => _outcome;
@@ -315,6 +318,7 @@ class TogetherSession<S, M> extends ChangeNotifier {
   Future<void> start({int? seed}) async {
     if (role != SessionRole.host) throw StateError('only the host starts a session');
     if (_state != null) throw StateError('the session has already started');
+    if (_phase == SessionPhase.failed) throw StateError('the session failed: $_failure');
     final s = (seed ?? _random.nextInt(1 << 32)) & 0xFFFFFFFF;
     final initial = adapter.initialState(seed: s, config: _config);
     final hash = _hashOf(initial);
@@ -418,6 +422,14 @@ class TogetherSession<S, M> extends ChangeNotifier {
     if (_disposed) return;
     final seq = body.kind.sequenced ? _nextSeq++ : 0;
     if (seq > 0) {
+      // A reset (start, snapshot) supersedes every earlier message: the peer
+      // jumps to it on arrival, so they are never retransmitted again (a
+      // real-time host publishing snapshots through a disconnection would
+      // otherwise resend hundreds of stale states). A snapshot keeps the
+      // start – a guest that missed it cannot use a snapshot.
+      if (body.kind.resets) {
+        _outbox.removeWhere((e) => body.kind == TogetherMessageKind.start || e.$2.kind != TogetherMessageKind.start);
+      }
       _outbox.add((seq, body));
       while (_outbox.length > _maxOutbox) {
         _droppedUpTo = _outbox.removeFirst().$1;
@@ -470,7 +482,11 @@ class TogetherSession<S, M> extends ChangeNotifier {
   void _sendResult(SeatOutcome o) => _send(
     ResultBody(
       matchId: matchId,
-      outcome: o.isDraw ? SeatOutcomeKind.draw : SeatOutcomeKind.win,
+      outcome: o.isLoss
+          ? SeatOutcomeKind.loss
+          : o.isDraw
+          ? SeatOutcomeKind.draw
+          : SeatOutcomeKind.win,
       winners: o.winners,
       scores: o.scores,
     ),
@@ -505,6 +521,9 @@ class TogetherSession<S, M> extends ChangeNotifier {
       env = _codec.decode(text);
     } on TogetherDataRejected catch (e) {
       _reject(e);
+      // A Together peer speaking another protocol version: stop – never
+      // wait forever for frames this build cannot read.
+      if (e.reason == TogetherRejection.unsupportedVersion) _fail('incompatibleProtocol');
       return;
     }
     // A peer only ever speaks as itself.
@@ -512,7 +531,14 @@ class TogetherSession<S, M> extends ChangeNotifier {
       _reject(const TogetherDataRejected(TogetherRejection.wrongType, 'from'));
       return;
     }
-    if (!_acceptsSession(env)) return;
+    if (!_acceptsSession(env)) {
+      // A guest without the start (lost on the way) hears the host playing:
+      // ask again (the host answers with the start and a snapshot).
+      if (role == SessionRole.guest && _state == null && _phase == SessionPhase.waiting) {
+        if (_unstartedFrames++ % 8 == 0) _sendHello();
+      }
+      return;
+    }
     _prune(env.ack);
     if (!env.kind.sequenced) {
       _control(env);
@@ -541,10 +567,15 @@ class TogetherSession<S, M> extends ChangeNotifier {
   }
 
   bool _acceptsSession(TogetherEnvelope env) {
+    if (_phase == SessionPhase.failed) return false;
     if (role == SessionRole.host) {
       // The guest learns the session id from `start`; its hello may carry its
-      // own provisional id.
-      return env.kind == TogetherMessageKind.hello || env.sessionId == _sessionId || _state == null;
+      // own provisional id. Before the start a guest has nothing else to
+      // say: anything sequenced is a stray from another session and must not
+      // move this session's ordering.
+      if (env.kind == TogetherMessageKind.hello) return true;
+      if (_state == null) return env.kind == TogetherMessageKind.bye;
+      return env.sessionId == _sessionId;
     }
     if (_state == null) return env.kind == TogetherMessageKind.start || env.kind == TogetherMessageKind.bye;
     return env.sessionId == _sessionId;
@@ -580,8 +611,8 @@ class TogetherSession<S, M> extends ChangeNotifier {
         if (role == SessionRole.host) _sendSnapshot();
       case InputBody b:
         _onInput(env, b);
-      case ByeBody _:
-        _onBye();
+      case ByeBody b:
+        _onBye(b);
       case StartBody() || MoveBody() || SnapshotBody() || ResultBody():
         break; // sequenced kinds never arrive here (the codec checks seq)
     }
@@ -605,7 +636,7 @@ class TogetherSession<S, M> extends ChangeNotifier {
   void _onHello(HelloBody b) {
     if (role != SessionRole.host) return;
     if (b.gameId != adapter.gameId || b.gameVersion != adapter.gameVersion) {
-      _emit(const SessionFailed('incompatibleGame'));
+      _fail('incompatibleGame');
       return;
     }
     if (_state == null) return;
@@ -616,6 +647,13 @@ class TogetherSession<S, M> extends ChangeNotifier {
 
   void _onStart(TogetherEnvelope env, StartBody b) {
     if (role != SessionRole.guest) return;
+    // The host re-sends the start when a hello reaches it after the game
+    // began (a late or duplicated hello, a reconnection); a snapshot follows
+    // whenever the game has moved on. Never rewind an ongoing – or finished –
+    // game to its first position.
+    if (_state != null) return;
+    // From now on speak in the host's session (a bye must reach it).
+    _sessionId = env.sessionId;
     if (b.gameId != adapter.gameId || b.gameVersion != adapter.gameVersion || b.seats.length != adapter.seatCount) {
       _fail('incompatibleGame');
       return;
@@ -634,7 +672,6 @@ class TogetherSession<S, M> extends ChangeNotifier {
       _fail('incompatibleGame');
       return;
     }
-    _sessionId = env.sessionId;
     _seed = b.seed;
     _config = b.config;
     _seats = b.seats;
@@ -708,9 +745,11 @@ class TogetherSession<S, M> extends ChangeNotifier {
 
   void _onResult(ResultBody b) {
     if (_state == null || _phase == SessionPhase.finished) return;
-    final o = b.outcome == SeatOutcomeKind.draw
-        ? SeatOutcome.draw(scores: b.scores)
-        : SeatOutcome(winners: b.winners, scores: b.scores);
+    final o = switch (b.outcome) {
+      SeatOutcomeKind.draw => SeatOutcome.draw(scores: b.scores),
+      SeatOutcomeKind.loss => SeatOutcome.loss(scores: b.scores),
+      SeatOutcomeKind.win => SeatOutcome(winners: b.winners, scores: b.scores),
+    };
     _finish(o, announce: false);
   }
 
@@ -751,8 +790,12 @@ class TogetherSession<S, M> extends ChangeNotifier {
     _emit(InputReceived(seat: b.seat, tick: b.tick, input: b.input));
   }
 
-  void _onBye() {
-    if (_phase == SessionPhase.finished) return;
+  void _onBye(ByeBody b) {
+    if (b.reason == ByeReason.incompatible) {
+      _fail('incompatibleGame', tellPeer: false);
+      return;
+    }
+    if (_phase == SessionPhase.finished || _phase == SessionPhase.failed) return;
     _phase = SessionPhase.abandoned;
     _failure = 'peerLeft';
     _activeParticipant.value = null;
@@ -770,7 +813,11 @@ class TogetherSession<S, M> extends ChangeNotifier {
     }
   }
 
-  void _fail(String reason) {
+  /// Stops the session: the two sides cannot play together. The peer is told
+  /// (unless it told us), so neither side waits forever.
+  void _fail(String reason, {bool tellPeer = true}) {
+    if (_phase != SessionPhase.waiting && _phase != SessionPhase.playing) return;
+    if (tellPeer) _send(const ByeBody(reason: ByeReason.incompatible));
     _phase = SessionPhase.failed;
     _failure = reason;
     _activeParticipant.value = null;
@@ -833,7 +880,9 @@ class TogetherSession<S, M> extends ChangeNotifier {
         if (w >= 0 && w < _seats.length && _seats[w] != TogetherSeats.ai) _seats[w],
     };
     final MatchOutcome outcome;
-    if (o.isDraw) {
+    if (o.isLoss) {
+      outcome = MatchOutcome.teamLost;
+    } else if (o.isDraw) {
       outcome = MatchOutcome.draw;
     } else if (humans.length == 2) {
       outcome = MatchOutcome.teamWon;

@@ -533,9 +533,17 @@ void main() {
             final real = e.state;
             final other = ai.determinize(real, seat, CardRng(move));
             expect(sortedCards(other.cardsInPlay()), sortedCards(real.cardsInPlay()));
+            // The worlds the hard AI searches are built from public facts and
+            // the seat's own hand only (not the other hands, not the saved
+            // shuffle generator that fixes the next deals).
+            expect(
+              jsonEncode(ai.determinize(other, seat, CardRng(77)).toJson()),
+              jsonEncode(ai.determinize(real, seat, CardRng(77)).toJson()),
+              reason: '$name move $move world',
+            );
             for (final level in [AiLevel.medium, AiLevel.hard]) {
-              final a = ai.chooseMove(real, seat, level, CardRng(9), const AiBudget.simulations(10));
-              final b = ai.chooseMove(other, seat, level, CardRng(9), const AiBudget.simulations(10));
+              final a = ai.chooseMove(real, seat, level, CardRng(9), const AiBudget.simulations(40));
+              final b = ai.chooseMove(other, seat, level, CardRng(9), const AiBudget.simulations(40));
               expect(b, a, reason: '$name move $move ${level.name}');
             }
             checked++;
@@ -592,24 +600,28 @@ void main() {
     });
   });
 
-  group('hard beats easy (both partners hard against two easy players)', () {
-    for (final (name, options, matches) in [
-      ('41', const FortyOneOptions(), 8),
-      ('400 (lebanese)', const FortyOneOptions.lebanese400(), 6),
+  group('AI levels are ordered (two partners of one level against two of another)', () {
+    for (final (name, options, strong, weak, matches) in [
+      ('41', const FortyOneOptions(), AiLevel.hard, AiLevel.easy, 8),
+      ('400 (lebanese)', const FortyOneOptions.lebanese400(), AiLevel.hard, AiLevel.easy, 6),
+      ('41', const FortyOneOptions(), AiLevel.medium, AiLevel.easy, 8),
     ]) {
-      test(name, () {
+      test('$name: ${strong.name} beats ${weak.name}', () {
         final k = fortyOneKit(name, options);
         var wins = 0;
         var edge = 0;
         for (var m = 0; m < matches; m++) {
-          final hardTeam = m % 2;
-          final levels = [for (var s = 0; s < 4; s++) s % 2 == hardTeam ? AiLevel.hard : AiLevel.easy];
+          final strongTeam = m % 2;
+          final levels = [for (var s = 0; s < 4; s++) s % 2 == strongTeam ? strong : weak];
           final r = playMatch(k, 700 + m, levels, budget: const AiBudget.simulations(24));
-          if (r.winners.contains(hardTeam)) wins++;
-          edge += r.scores[hardTeam] + r.scores[hardTeam + 2] - r.scores[1 - hardTeam] - r.scores[3 - hardTeam];
+          if (r.winners.contains(strongTeam)) wins++;
+          edge += r.scores[strongTeam] + r.scores[strongTeam + 2] - r.scores[1 - strongTeam] - r.scores[3 - strongTeam];
         }
         // ignore: avoid_print
-        print('41 $name: hard won $wins/$matches, average team edge ${(edge / matches).toStringAsFixed(1)}');
+        print(
+          '41 $name: ${strong.name} won $wins/$matches against ${weak.name}, '
+          'average team edge ${(edge / matches).toStringAsFixed(1)}',
+        );
         expect(wins, greaterThan(matches / 2));
         expect(edge, greaterThan(0));
       });

@@ -11840,6 +11840,10 @@ class L10nAr extends L10n {
   String get ledgerFixRates => 'ضبط الأسعار';
 
   @override
+  String get ledgerCurrencyInUseElsewhere =>
+      'مستخدمة في الحصّالات أو الديون أو الالتزامات أو الميزانية';
+
+  @override
   String get budgetTitle => 'الميزانية';
 
   @override
@@ -21351,7 +21355,7 @@ class L10nAr extends L10n {
 
   @override
   String togetherResultWon(String name) {
-    return 'الفوز لـ$name';
+    return 'فوز $name';
   }
 
   @override
@@ -21568,7 +21572,7 @@ class L10nAr extends L10n {
 
   @override
   String togetherTrophyMatches10Desc(String count) {
-    return '$count مباراة معًا';
+    return '$count مباريات معًا';
   }
 
   @override
@@ -22028,4 +22032,407 @@ class L10nAr extends L10n {
 
   @override
   String get widgetsPeriodWeek => 'هذا الأسبوع';
+
+  @override
+  String get savedGamesTitle => 'ألعابي من الويب';
+
+  @override
+  String get savedGamesShelfTitle => 'ألعابي المحفوظة';
+
+  @override
+  String get savedGamesShelfSubtitle => 'ألعاب ويب تعمل من روابطها الأصلية';
+
+  @override
+  String get savedGamesSeeAll => 'الكل';
+
+  @override
+  String get savedGamesAdd => 'أضف لعبة';
+
+  @override
+  String get savedGamesAddTitle => 'لعبة جديدة من رابط';
+
+  @override
+  String get savedGamesAddSubtitle =>
+      'تعمل من رابطها الأصلي؛ لا يُنسخ شيء من كودها';
+
+  @override
+  String get savedGamesEditTitle => 'تعديل اللعبة';
+
+  @override
+  String get savedGamesUrlLabel => 'الرابط';
+
+  @override
+  String get savedGamesUrlHint => 'https://claude.ai/public/artifacts/…';
+
+  @override
+  String get savedGamesPaste => 'لصق';
+
+  @override
+  String get savedGamesClipboardEmpty => 'لا يوجد رابط في الحافظة';
+
+  @override
+  String get savedGamesUrlEmpty => 'الصق رابط اللعبة أولًا';
+
+  @override
+  String get savedGamesUrlNotHttps => 'الروابط الآمنة (https) فقط';
+
+  @override
+  String get savedGamesUseHttps => 'استخدم https';
+
+  @override
+  String get savedGamesUrlScheme => 'هذا ليس رابط صفحة ويب';
+
+  @override
+  String get savedGamesUrlMalformed => 'لا يبدو هذا رابطًا صحيحًا';
+
+  @override
+  String get savedGamesUrlCredentials =>
+      'لا تُقبل روابط تحوي اسم مستخدم أو كلمة مرور';
+
+  @override
+  String get savedGamesUrlTooLong => 'الرابط طويل جدًا';
+
+  @override
+  String savedGamesUrlDuplicate(String title) {
+    return 'محفوظة من قبل باسم «$title»';
+  }
+
+  @override
+  String get savedGamesArtifactBadge => 'عمل تفاعلي من Claude';
+
+  @override
+  String get savedGamesSecureBadge => 'رابط آمن';
+
+  @override
+  String get savedGamesNameLabel => 'الاسم';
+
+  @override
+  String get savedGamesNameHint => 'اسم اللعبة';
+
+  @override
+  String get savedGamesFetchTitle => 'جلب العنوان';
+
+  @override
+  String get savedGamesFetchFailed => 'تعذّرت قراءة عنوان الصفحة؛ اكتبه بنفسك';
+
+  @override
+  String get savedGamesFetchNote =>
+      '«جلب» يتصل بالموقع مرة واحدة حين تضغطه فقط، ولا يُرسل عنك شيئًا.';
+
+  @override
+  String get savedGamesIconLabel => 'الأيقونة';
+
+  @override
+  String get savedGamesUseSiteIcon => 'أيقونة الموقع';
+
+  @override
+  String get savedGamesRemoveSiteIcon => 'إزالة أيقونة الموقع';
+
+  @override
+  String get savedGamesIconFailed => 'لم نجد أيقونة صالحة لهذا الموقع';
+
+  @override
+  String get savedGamesShuffleIcon => 'أيقونة أخرى';
+
+  @override
+  String savedGamesGlyph(String number) {
+    return 'الرمز $number';
+  }
+
+  @override
+  String savedGamesColor(String number) {
+    return 'اللون $number';
+  }
+
+  @override
+  String get savedGamesOrientationLabel => 'اتجاه الشاشة أثناء اللعب';
+
+  @override
+  String get savedGamesOrientationAuto => 'تلقائي';
+
+  @override
+  String get savedGamesOrientationPortrait => 'عمودي';
+
+  @override
+  String get savedGamesOrientationLandscape => 'أفقي';
+
+  @override
+  String get savedGamesNotesLabel => 'ملاحظات';
+
+  @override
+  String get savedGamesNotesHint => 'مثلًا: طريقة اللعب أو من شاركها معي';
+
+  @override
+  String get savedGamesSave => 'حفظ';
+
+  @override
+  String get savedGamesCancel => 'إلغاء';
+
+  @override
+  String savedGamesAdded(String title) {
+    return 'أُضيفت «$title»';
+  }
+
+  @override
+  String get savedGamesUpdated => 'حُفظت التعديلات';
+
+  @override
+  String savedGamesDeleted(String title) {
+    return 'حُذفت «$title»';
+  }
+
+  @override
+  String savedGamesFull(String max) {
+    return 'بلغتَ الحد الأقصى ($max لعبة)؛ احذف واحدة أولًا';
+  }
+
+  @override
+  String get savedGamesPlay => 'العب';
+
+  @override
+  String savedGamesPlayGame(String title) {
+    return 'العب $title';
+  }
+
+  @override
+  String savedGamesPlayCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'لُعبت $count مرة',
+      many: 'لُعبت $count مرة',
+      few: 'لُعبت $count مرات',
+      two: 'لُعبت مرتين',
+      one: 'لُعبت مرة واحدة',
+      zero: 'لم تُلعب بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get savedGamesLastPlayedToday => 'آخر لعب اليوم';
+
+  @override
+  String get savedGamesLastPlayedYesterday => 'آخر لعب أمس';
+
+  @override
+  String savedGamesLastPlayedDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'آخر لعب قبل $days يوم',
+      many: 'آخر لعب قبل $days يومًا',
+      few: 'آخر لعب قبل $days أيام',
+      two: 'آخر لعب قبل يومين',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String savedGamesLastPlayedOn(String date) {
+    return 'آخر لعب $date';
+  }
+
+  @override
+  String get savedGamesNew => 'جديدة';
+
+  @override
+  String get savedGamesLayoutGrid => 'عرض الملصقات';
+
+  @override
+  String get savedGamesLayoutList => 'عرض القائمة والترتيب';
+
+  @override
+  String get savedGamesReorderHint => 'اسحب المقبض لتغيير الترتيب';
+
+  @override
+  String get savedGamesEmptyTitle => 'أحضِر ألعاب الويب التي تحبها';
+
+  @override
+  String get savedGamesEmptyBody =>
+      'احفظ أي لعبة تعمل في المتصفح برابطها الآمن، والعبها بملء الشاشة داخل مَدار.';
+
+  @override
+  String get savedGamesEmptyStep1 =>
+      'افتح اللعبة، مثل عمل تفاعلي (Artifact) شاركه أحدهم من Claude.';
+
+  @override
+  String savedGamesEmptyStep2(String example) {
+    return 'انسخ رابطها، ويكون عادةً بالشكل $example';
+  }
+
+  @override
+  String get savedGamesEmptyStep3 =>
+      'اضغط «أضف لعبة» والصق الرابط، ثم اختر لها اسمًا وأيقونة.';
+
+  @override
+  String get savedGamesPrivacyNote =>
+      'تعمل كل لعبة من رابطها الأصلي ولا يُنسخ كودها. لا يتصل مَدار بالشبكة إلا حين تفتح لعبة أو تضغط «جلب».';
+
+  @override
+  String get savedGamesOpenExternal => 'فتح في المتصفح';
+
+  @override
+  String get savedGamesEdit => 'تعديل';
+
+  @override
+  String get savedGamesMore => 'خيارات أخرى';
+
+  @override
+  String get savedGamesClearData => 'مسح بيانات الموقع';
+
+  @override
+  String savedGamesClearDataTitle(String title) {
+    return 'مسح بيانات «$title»؟';
+  }
+
+  @override
+  String get savedGamesClearDataBody =>
+      'يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.';
+
+  @override
+  String get savedGamesClearDataScheduled =>
+      'ستُمسح بياناتها عند فتحها في المرة القادمة';
+
+  @override
+  String get savedGamesClearDataPending => 'ستُمسح بياناتها عند الفتح';
+
+  @override
+  String get savedGamesClearAll => 'مسح بيانات كل الألعاب';
+
+  @override
+  String get savedGamesClearAllTitle => 'مسح بيانات كل الألعاب؟';
+
+  @override
+  String get savedGamesClearAllBody =>
+      'يحذف ملفات الارتباط والتخزين والذاكرة المؤقتة لكل ألعاب الويب. لا يمسّ بقية بيانات مَدار ولا قائمة ألعابك.';
+
+  @override
+  String get savedGamesClearAllDone => 'مُسحت بيانات كل الألعاب';
+
+  @override
+  String get savedGamesClearFailed => 'تعذّر مسح بعض البيانات';
+
+  @override
+  String get savedGamesConfirmClear => 'مسح';
+
+  @override
+  String savedGamesLoading(String title) {
+    return 'يُحمَّل «$title»…';
+  }
+
+  @override
+  String get savedGamesClearing => 'تُمسح بيانات اللعبة…';
+
+  @override
+  String get savedGamesOfflineTitle => 'لا يوجد اتصال';
+
+  @override
+  String get savedGamesOfflineBody =>
+      'تحتاج هذه اللعبة إلى الإنترنت لأنها تعمل من رابطها الأصلي.';
+
+  @override
+  String get savedGamesErrorTitle => 'تعذّر فتح اللعبة';
+
+  @override
+  String get savedGamesErrorBody => 'قد يكون الموقع متوقفًا أو تغيّر رابطه.';
+
+  @override
+  String get savedGamesInsecureTitle => 'اتصال غير آمن';
+
+  @override
+  String get savedGamesInsecureBody =>
+      'شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.';
+
+  @override
+  String get savedGamesRetry => 'إعادة المحاولة';
+
+  @override
+  String get savedGamesBackToMadar => 'العودة إلى مَدار';
+
+  @override
+  String get savedGamesReload => 'إعادة التحميل';
+
+  @override
+  String get savedGamesMute => 'كتم الصوت';
+
+  @override
+  String get savedGamesUnmute => 'تشغيل الصوت';
+
+  @override
+  String get savedGamesControls => 'أدوات اللعبة';
+
+  @override
+  String get savedGamesCloseControls => 'إخفاء الأدوات';
+
+  @override
+  String get savedGamesMuteSealed =>
+      'بعض أصوات هذه اللعبة داخل إطار محمي؛ استخدم أزرار الصوت في هاتفك.';
+
+  @override
+  String get savedGamesExitTitle => 'الخروج من اللعبة؟';
+
+  @override
+  String get savedGamesExitBody => 'قد يضيع أي تقدّم لا تحفظه اللعبة بنفسها.';
+
+  @override
+  String get savedGamesExitStay => 'متابعة اللعب';
+
+  @override
+  String get savedGamesExitLeave => 'خروج';
+
+  @override
+  String get savedGamesExternalTitle => 'فتح رابط خارجي؟';
+
+  @override
+  String savedGamesExternalBody(String host) {
+    return 'تريد اللعبة فتح $host. سيُفتح في متصفحك خارج مَدار.';
+  }
+
+  @override
+  String get savedGamesExternalFailed => 'لم يُعثر على متصفح يفتح الرابط';
+
+  @override
+  String get savedGamesPrayerTitle => 'حان وقت الصلاة';
+
+  @override
+  String get savedGamesPrayerBody =>
+      'أوقفنا اللعبة وصوتها. تُستأنف من تلقاء نفسها بعد الأذان ووقت الصلاة.';
+
+  @override
+  String get savedGamesPrayerUnloaded =>
+      'أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.';
+
+  @override
+  String savedGamesPageSays(String host) {
+    return 'رسالة من $host';
+  }
+
+  @override
+  String get savedGamesOk => 'حسنًا';
+
+  @override
+  String savedGamesStats(String added, String played) {
+    return '$added · $played';
+  }
+
+  @override
+  String savedGamesAddedOn(String date) {
+    return 'أُضيفت $date';
+  }
+
+  @override
+  String get savedGamesAddCardHint => 'الصق رابط لعبة ويب';
+
+  @override
+  String get savedGamesShelfEmpty => 'احفظ لعبة ويب برابطها وستظهر هنا.';
+
+  @override
+  String get savedGamesDeleteGame => 'حذف';
+
+  @override
+  String get savedGamesOpenAll => 'فتح ألعابي المحفوظة';
+
+  @override
+  String get savedGamesClearDataDone => 'مُسحت بيانات اللعبة';
 }

@@ -310,6 +310,16 @@ void main() {
         InkCrate(size: 60),
         InkMoon(size: 80),
         InkPuff(size: 40),
+        InkSketch(
+          size: 60,
+          extent: const Rect.fromLTRB(-32, -32, 32, 32),
+          draw: (b) {
+            b.layer();
+            b.shape(b.colors.fill(PaletteRole.midtone));
+            b.pen.circle(0, 0, 30);
+            b.endLayer();
+          },
+        ),
       ];
       for (final p in props) {
         p.update(0.2);

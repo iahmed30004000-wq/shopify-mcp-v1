@@ -120,7 +120,7 @@ class _HallBody extends StatelessWidget {
                 maxCrossAxisExtent: 132,
                 mainAxisSpacing: Space.m,
                 crossAxisSpacing: Space.m,
-                childAspectRatio: 0.72,
+                childAspectRatio: 0.66,
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, i) => StaggerItem(
@@ -169,9 +169,19 @@ class _TrophyCell extends StatelessWidget {
           Text(
             tx.trophy(id),
             style: text.labelLarge?.copyWith(color: isEarned ? t.textPrimary : t.textSecondary),
-            maxLines: 2,
+            maxLines: 1,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 2),
+          Flexible(
+            child: Text(
+              tx.trophyDescription(id, gameId: earned.firstOrNull?.key.gameId),
+              style: text.labelSmall?.copyWith(color: t.textTertiary, height: 1.3),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           const Spacer(),
           if (isEarned)

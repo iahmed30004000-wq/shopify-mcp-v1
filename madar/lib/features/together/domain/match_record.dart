@@ -88,12 +88,13 @@ final class MatchRecord {
     final outcome = MatchOutcome.tryParse(json['o']);
     if (id is! String || !TogetherBounds.isValidId(id)) return null;
     if (game is! String || !TogetherGames.isValidId(game)) return null;
-    if (t is! int || outcome == null) return null;
+    final endedAt = TogetherBounds.time(t);
+    if (endedAt == null || outcome == null) return null;
     final d = json['d'];
     return MatchRecord(
       id: id,
       gameId: game,
-      endedAt: DateTime.fromMillisecondsSinceEpoch(t),
+      endedAt: endedAt,
       outcome: outcome,
       scoreOne: TogetherBounds.score(json['a']),
       scoreTwo: TogetherBounds.score(json['b']),

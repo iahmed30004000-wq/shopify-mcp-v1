@@ -3,7 +3,8 @@
      a bar of what is left and the days to go. Two headlines (normal /
      warning colour) and four bars (left-to-right / mirrored, normal /
      warning) – the renderer shows one of each, since colours are never set
-     from code. -->
+     from code. The amount shrinks to fit a 2×2 widget (uniform autosize,
+     Android 8+). -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/background"
     android:layout_width="match_parent"
@@ -20,12 +21,12 @@
 
     <TextView
         android:id="@+id/widget_headline"
-        style="@style/widget_text_headline"
+        style="@style/widget_text_amount"
         android:layout_marginTop="2dp" />
 
     <TextView
         android:id="@+id/widget_headline_warn"
-        style="@style/widget_text_headline"
+        style="@style/widget_text_amount"
         android:layout_marginTop="2dp"
         android:textColor="@color/widget_warn"
         android:visibility="gone" />

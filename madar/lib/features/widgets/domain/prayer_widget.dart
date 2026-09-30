@@ -19,7 +19,7 @@ import 'widget_texts.dart';
 /// A page: the next prayer's name (Jumuʿah on Fridays), its time on the
 /// user's 12 / 24-hour clock, the countdown to it, the Hijri date (with the
 /// user's offset and Maghrib rollover) and, with details shown, the
-/// location's name. The images: one mini astrolabe per prayer, lit on it,
+/// location's name (then the Hijri day and month only). The images: one mini astrolabe per prayer, lit on it,
 /// drawn from today's times.
 abstract final class PrayerWidgetBuilder {
   static const int horizonDays = 3;
@@ -52,12 +52,16 @@ abstract final class PrayerWidgetBuilder {
     WidgetPage page(DateTime? from, DateTime at) {
       final w = schedule.windowAt(at);
       final wall = schedule.wallClock(w.nextPrayerAt);
-      final hijri = texts.l.hijriDate(hijriAt(schedule, settings, at), texts.fmt);
+      final hijri = hijriAt(schedule, settings, at);
+      // Beside the place the year is left out, so the line fits a 4×2 widget.
+      final note = place == null || place.isEmpty
+          ? texts.l.hijriDate(hijri, texts.fmt)
+          : texts.l.widgetsPrayerNotePlace(texts.l.hijriDayMonth(hijri, texts.fmt), texts.name(place));
       return WidgetPage(
         from: from,
         headline: texts.l.prayerName(w.nextPrayer, friday: wall.weekday == DateTime.friday),
         detail: clock.format(wall).joined,
-        note: place == null || place.isEmpty ? hijri : texts.l.widgetsPrayerNotePlace(hijri, texts.name(place)),
+        note: note,
         countdownTo: w.nextPrayerAt,
         countdownFormat: texts.l.widgetsCountdown('%s'),
         image: imageKey(w.nextPrayer),

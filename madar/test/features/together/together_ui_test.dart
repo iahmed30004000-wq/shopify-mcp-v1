@@ -51,11 +51,32 @@ void main() {
       expect(find.textContaining('leads by'), findsOneWidget);
       expect(find.text('Head to head'), findsOneWidget);
       expect(find.byKey(const ValueKey('together-game-basra')), findsOneWidget);
-      await tester.scrollUntilVisible(find.text('Recent matches'), 300);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('together-match-seed-9')),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.pumpAndSettle();
       expect(find.text('Recent matches'), findsOneWidget);
       expect(find.byType(TogetherMatchTile), findsWidgets);
       expect(find.textContaining('Won together'), findsWidgets);
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('a game row opens that game\'s head-to-head history', (tester) async {
+      await pumpTogetherApp(tester, locale: const Locale('en'), home: const TogetherHomeScreen(), seed: seedTogetherHistory);
+      await tester.ensureVisible(find.byKey(const ValueKey('together-game-basra')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('together-game-basra')));
+      await tester.pumpAndSettle();
+      expect(find.byType(GameHistorySheet), findsOneWidget);
+      // Three Basra matches, all won by player two; best score 104.
+      expect(
+        find.descendant(of: find.byType(GameHistorySheet), matching: find.byType(TogetherMatchTile)),
+        findsNWidgets(3),
+      );
+      expect(find.text('Best: 104'), findsOneWidget);
+      expect(find.text('Win streak ×3'), findsOneWidget);
     });
 
     testWidgets('editing a profile from the home avatar', (tester) async {
@@ -69,6 +90,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('🦉'));
       await tester.pump();
+      await tester.ensureVisible(find.text('Quiz Whiz'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Quiz Whiz'));
       await tester.pump();
       await tester.tap(find.byKey(const ValueKey('together-profile-save')));
@@ -85,7 +108,7 @@ void main() {
       final env = await pumpTogetherApp(tester, locale: const Locale('en'), home: const TogetherHomeScreen());
       await tester.tap(find.byKey(const ValueKey('together-avatar-one')));
       await tester.pumpAndSettle();
-      final taken = find.bySemanticsLabel(RegExp("Player 2.s colour"));
+      final taken = find.bySemanticsLabel(RegExp('Player 2.*colour'));
       await tester.ensureVisible(taken);
       await tester.tap(taken);
       await tester.pump();
@@ -188,15 +211,50 @@ void main() {
     });
   });
 
+  testWidgets('clearing history and trophies can be undone', (tester) async {
+    final env = await pumpTogetherApp(
+      tester,
+      locale: const Locale('en'),
+      home: const MadarScaffold(title: '', body: Padding(padding: EdgeInsets.all(16), child: TogetherSettingsTile())),
+      seed: seedTogetherHistory,
+    );
+    await tester.tap(find.byKey(const ValueKey('together-settings-tile')));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('together-reset')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('together-reset')));
+    // The undo toast counts down: pump frames, do not settle it away.
+    for (var i = 0; i < 4; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    expect(await tester.runAsync(() => env.repo.history()), isEmpty);
+    expect(find.text('History and trophies cleared'), findsOneWidget);
+    await tester.tap(find.text('Undo').last);
+    for (var i = 0; i < 4; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    await tester.pumpAndSettle(const Duration(milliseconds: 100), EnginePhase.sendSemanticsUpdate, const Duration(seconds: 30));
+    expect((await tester.runAsync(() => env.repo.history()))!, hasLength(10));
+  });
+
   group('Hall of Fame', () {
     testWidgets('every trophy on the shelf, earned ones first, details on tap (ar)', (tester) async {
       await pumpTogetherApp(tester, home: const HallOfFameScreen(), seed: seedTogetherHistory);
       expect(find.text('قاعة مجدنا'), findsOneWidget);
       expect(find.byKey(const ValueKey('together-trophy-firstMatch')), findsOneWidget);
       final first = tester.getTopLeft(find.byKey(const ValueKey('together-trophy-firstMatch')));
-      await tester.scrollUntilVisible(find.byKey(const ValueKey('together-trophy-dayStreak30')), 300);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('together-trophy-dayStreak30')),
+        300,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.ensureVisible(find.byKey(const ValueKey('together-trophy-dayStreak30')));
+      await tester.pumpAndSettle();
       final locked = tester.getTopLeft(find.byKey(const ValueKey('together-trophy-dayStreak30')));
-      expect(locked.dy, greaterThan(first.dy));
+      final scrolled = tester.state<ScrollableState>(find.byType(Scrollable).first).position.pixels;
+      expect(locked.dy + scrolled, greaterThan(first.dy), reason: 'earned trophies come first');
       await tester.tap(find.byKey(const ValueKey('together-trophy-dayStreak30')));
       await tester.pumpAndSettle();
       expect(find.text('لم تُحصد بعد'), findsWidgets);
@@ -213,7 +271,6 @@ void main() {
             MatchRecord(id: 'x1', gameId: 'chess', endedAt: togetherNow, outcome: MatchOutcome.draw),
           );
           if (c.mounted) await celebrateNewTrophies(c, recorded);
-          return null;
         }, []),
       );
       await tester.tap(find.byKey(const ValueKey('open')));

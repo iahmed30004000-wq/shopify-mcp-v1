@@ -71,6 +71,17 @@ abstract final class TogetherBounds {
     return i;
   }
 
+  /// Largest stored instant (ms since the epoch) [DateTime] can represent.
+  static const int maxEpochMs = 8640000000000000;
+
+  /// A stored instant (ms since the epoch), or null when it is missing,
+  /// not an integer or outside what [DateTime] can hold – a corrupt value
+  /// must never throw out of a reader.
+  static DateTime? time(Object? v) {
+    if (v is! int || v.abs() > maxEpochMs) return null;
+    return DateTime.fromMillisecondsSinceEpoch(v);
+  }
+
   /// A non-negative count read from storage (corrupt values become 0).
   static int count(Object? v, {int max = 1 << 40}) {
     if (v is! num || !v.isFinite) return 0;

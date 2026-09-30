@@ -449,4 +449,33 @@ void main() {
       dpr: 1.5,
     );
   });
+
+  testWidgets('cast in every era', (tester) async {
+    await captureScreen(
+      tester,
+      madarScreenshotApp(
+        home: ModelSheet(
+          title: 'THE CAST IN EVERY ERA',
+          subtitle: 'one design, six film stocks · palette roles re-skin every character',
+          rows: [
+            for (final era in Era.values)
+              SheetRow(era: era, era.name.toUpperCase(), [
+                for (final m in RigCast.all)
+                  _rig(m.id, () => m.build(height: 100), (r) {
+                    r
+                      ..facing = 0.6
+                      ..expression = RigExpression.happy;
+                    if (r is ClockworkBoss) r.phase = 1;
+                    run(r, 0.9);
+                  }),
+              ]),
+          ],
+        ),
+      ),
+      'cinema/rig/cast_eras',
+      settle: const Duration(milliseconds: 100),
+      logicalSize: _sheetSize,
+      dpr: 1.5,
+    );
+  });
 }

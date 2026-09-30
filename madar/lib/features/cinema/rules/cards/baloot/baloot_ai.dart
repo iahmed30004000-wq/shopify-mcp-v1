@@ -129,7 +129,7 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
   /// Manual declaration: declare unless an opponent has already declared a
   /// better project (then ours would score nothing and only show cards).
   BalootMove _declareDecision(BalootState s, int seat) {
-    final mine = BalootRules.detectProjects(s.hands[seat], seat, s.mode!);
+    final mine = BalootRules.projectsOf(s, seat);
     for (final p in s.projects) {
       if (p.seat % 2 == seat % 2) continue;
       final beaten = mine.every(

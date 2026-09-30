@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Home-screen widgets. The astrolabe comes as a light and a dark bitmap in
      two image views; these styles (overridden in values-night) show the one
-     that matches the home screen, so a switch to dark mode needs no redraw. -->
+     that matches the home screen, so a switch to dark mode needs no redraw.
+
+     Alignment is XML only: TextView gravity start / end aligns to the start
+     / end of the text's own paragraph, and every text begins with an RLM or
+     LRM (MadarWidgetRenderer.mark), so Arabic sits on the right and English
+     on the left in the same fixed left-to-right layout. Never LEFT / RIGHT,
+     and never setGravity from code (not a RemoteViews method before
+     Android 12). -->
 <resources>
     <style name="widget_astro_day">
         <item name="android:visibility">visible</item>
@@ -16,6 +23,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:includeFontPadding">false</item>
+        <item name="android:gravity">start|center_vertical</item>
         <item name="android:textColor">@color/widget_text_primary</item>
     </style>
     <style name="widget_text_title" parent="widget_text">
@@ -25,6 +33,15 @@
     <style name="widget_text_headline" parent="widget_text">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <!-- An amount that must fit whole: shrinks from 24 to 13 sp. -->
+    <style name="widget_text_amount" parent="widget_text_headline">
+        <item name="android:layout_height">30dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">13sp</item>
+        <item name="android:autoSizeMaxTextSize">24sp</item>
+        <item name="android:autoSizeStepGranularity">1sp</item>
     </style>
     <style name="widget_text_detail" parent="widget_text">
         <item name="android:textSize">13sp</item>
@@ -40,12 +57,15 @@
     </style>
     <style name="widget_text_row" parent="widget_text">
         <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">start|center_vertical</item>
         <item name="android:textSize">13sp</item>
     </style>
     <style name="widget_text_row_done" parent="widget_text_row">
         <item name="android:textColor">@color/widget_text_muted</item>
     </style>
+    <!-- A dose's time: at the row's far end (left in Arabic). -->
     <style name="widget_text_row_time" parent="widget_text_row">
+        <item name="android:gravity">end|center_vertical</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/widget_text_secondary</item>
     </style>

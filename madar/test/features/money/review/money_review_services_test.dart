@@ -164,4 +164,31 @@ void main() {
     final usd = (await repos.currencies.byCode('USD'))!;
     expect(usd.rateToBase, 0.709);
   });
+
+  test('a currency kept by a jar, debt, bill or budget item cannot be deleted (it would count 1:1)', () async {
+    final (_, repos, ledger, goals) = await _open();
+    await ledger.saveCurrency(const LedgerCurrency(code: 'EUR', decimals: 2), rate: Rational.tryParse('0.77'));
+    final ob = await goals.addObligation(
+      ObligationDraft(
+        name: 'Hosting',
+        amountMilli: 12000,
+        currency: 'EUR',
+        frequency: Recurrence.monthly,
+        nextDue: DateTime(2026, 10, 5),
+      ),
+    );
+    expect(await ledger.watchCurrencyUseElsewhere().first, containsPair('EUR', 1));
+    await expectLater(
+      ledger.deleteCurrency('EUR'),
+      throwsA(isA<CurrencyInUseException>().having((e) => e.elsewhere, 'elsewhere', 1)),
+    );
+    await goals.deleteObligation(ob.id);
+    await BudgetRepository(repos).add(const BudgetNode(id: 'ads', name: 'Ads', amountMilli: 50000, currency: 'EUR'));
+    await expectLater(ledger.deleteCurrency('EUR'), throwsA(isA<CurrencyInUseException>()));
+    await BudgetRepository(repos).deleteSubtree('ads');
+    final undo = await ledger.deleteCurrency('EUR');
+    expect(await repos.currencies.byCode('EUR'), isNull);
+    await undo();
+    expect(await repos.currencies.byCode('EUR'), isNotNull);
+  });
 }

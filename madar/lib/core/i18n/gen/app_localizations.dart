@@ -18381,6 +18381,12 @@ abstract class L10n {
   /// **'ضبط الأسعار'**
   String get ledgerFixRates;
 
+  /// Why a currency cannot be deleted: a jar, debt, recurring obligation or budget item is kept in it
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخدمة في الحصّالات أو الديون أو الالتزامات أو الميزانية'**
+  String get ledgerCurrencyInUseElsewhere;
+
   /// Title of the budget screen and card
   ///
   /// In ar, this message translates to:
@@ -32940,7 +32946,7 @@ abstract class L10n {
   /// No description provided for @togetherResultWon.
   ///
   /// In ar, this message translates to:
-  /// **'الفوز لـ{name}'**
+  /// **'فوز {name}'**
   String togetherResultWon(String name);
 
   /// No description provided for @togetherResultDraw.
@@ -33330,7 +33336,7 @@ abstract class L10n {
   /// No description provided for @togetherTrophyMatches10Desc.
   ///
   /// In ar, this message translates to:
-  /// **'{count} مباراة معًا'**
+  /// **'{count} مباريات معًا'**
   String togetherTrophyMatches10Desc(String count);
 
   /// No description provided for @togetherTrophyMatches50.
@@ -34028,6 +34034,678 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'هذا الأسبوع'**
   String get widgetsPeriodWeek;
+
+  /// Saved Games screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعابي من الويب'**
+  String get savedGamesTitle;
+
+  /// Heading of the Saved Games shelf in the cinema hall
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعابي المحفوظة'**
+  String get savedGamesShelfTitle;
+
+  /// No description provided for @savedGamesShelfSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعاب ويب تعمل من روابطها الأصلية'**
+  String get savedGamesShelfSubtitle;
+
+  /// No description provided for @savedGamesSeeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get savedGamesSeeAll;
+
+  /// No description provided for @savedGamesAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف لعبة'**
+  String get savedGamesAdd;
+
+  /// No description provided for @savedGamesAddTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبة جديدة من رابط'**
+  String get savedGamesAddTitle;
+
+  /// No description provided for @savedGamesAddSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعمل من رابطها الأصلي؛ لا يُنسخ شيء من كودها'**
+  String get savedGamesAddSubtitle;
+
+  /// No description provided for @savedGamesEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل اللعبة'**
+  String get savedGamesEditTitle;
+
+  /// No description provided for @savedGamesUrlLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرابط'**
+  String get savedGamesUrlLabel;
+
+  /// Example link format shown as a hint (not a real game)
+  ///
+  /// In ar, this message translates to:
+  /// **'https://claude.ai/public/artifacts/…'**
+  String get savedGamesUrlHint;
+
+  /// No description provided for @savedGamesPaste.
+  ///
+  /// In ar, this message translates to:
+  /// **'لصق'**
+  String get savedGamesPaste;
+
+  /// No description provided for @savedGamesClipboardEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد رابط في الحافظة'**
+  String get savedGamesClipboardEmpty;
+
+  /// No description provided for @savedGamesUrlEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رابط اللعبة أولًا'**
+  String get savedGamesUrlEmpty;
+
+  /// No description provided for @savedGamesUrlNotHttps.
+  ///
+  /// In ar, this message translates to:
+  /// **'الروابط الآمنة (https) فقط'**
+  String get savedGamesUrlNotHttps;
+
+  /// No description provided for @savedGamesUseHttps.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم https'**
+  String get savedGamesUseHttps;
+
+  /// No description provided for @savedGamesUrlScheme.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا ليس رابط صفحة ويب'**
+  String get savedGamesUrlScheme;
+
+  /// No description provided for @savedGamesUrlMalformed.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يبدو هذا رابطًا صحيحًا'**
+  String get savedGamesUrlMalformed;
+
+  /// No description provided for @savedGamesUrlCredentials.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تُقبل روابط تحوي اسم مستخدم أو كلمة مرور'**
+  String get savedGamesUrlCredentials;
+
+  /// No description provided for @savedGamesUrlTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرابط طويل جدًا'**
+  String get savedGamesUrlTooLong;
+
+  /// No description provided for @savedGamesUrlDuplicate.
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظة من قبل باسم «{title}»'**
+  String savedGamesUrlDuplicate(String title);
+
+  /// No description provided for @savedGamesArtifactBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمل تفاعلي من Claude'**
+  String get savedGamesArtifactBadge;
+
+  /// No description provided for @savedGamesSecureBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'رابط آمن'**
+  String get savedGamesSecureBadge;
+
+  /// No description provided for @savedGamesNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get savedGamesNameLabel;
+
+  /// No description provided for @savedGamesNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم اللعبة'**
+  String get savedGamesNameHint;
+
+  /// No description provided for @savedGamesFetchTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جلب العنوان'**
+  String get savedGamesFetchTitle;
+
+  /// No description provided for @savedGamesFetchFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت قراءة عنوان الصفحة؛ اكتبه بنفسك'**
+  String get savedGamesFetchFailed;
+
+  /// No description provided for @savedGamesFetchNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'«جلب» يتصل بالموقع مرة واحدة حين تضغطه فقط، ولا يُرسل عنك شيئًا.'**
+  String get savedGamesFetchNote;
+
+  /// No description provided for @savedGamesIconLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيقونة'**
+  String get savedGamesIconLabel;
+
+  /// No description provided for @savedGamesUseSiteIcon.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيقونة الموقع'**
+  String get savedGamesUseSiteIcon;
+
+  /// No description provided for @savedGamesRemoveSiteIcon.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة أيقونة الموقع'**
+  String get savedGamesRemoveSiteIcon;
+
+  /// No description provided for @savedGamesIconFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نجد أيقونة صالحة لهذا الموقع'**
+  String get savedGamesIconFailed;
+
+  /// No description provided for @savedGamesShuffleIcon.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيقونة أخرى'**
+  String get savedGamesShuffleIcon;
+
+  /// Semantics label of a glyph choice; number is already formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'الرمز {number}'**
+  String savedGamesGlyph(String number);
+
+  /// Semantics label of a colour choice; number is already formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون {number}'**
+  String savedGamesColor(String number);
+
+  /// No description provided for @savedGamesOrientationLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه الشاشة أثناء اللعب'**
+  String get savedGamesOrientationLabel;
+
+  /// No description provided for @savedGamesOrientationAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get savedGamesOrientationAuto;
+
+  /// No description provided for @savedGamesOrientationPortrait.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمودي'**
+  String get savedGamesOrientationPortrait;
+
+  /// No description provided for @savedGamesOrientationLandscape.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفقي'**
+  String get savedGamesOrientationLandscape;
+
+  /// No description provided for @savedGamesNotesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get savedGamesNotesLabel;
+
+  /// No description provided for @savedGamesNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: طريقة اللعب أو من شاركها معي'**
+  String get savedGamesNotesHint;
+
+  /// No description provided for @savedGamesSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get savedGamesSave;
+
+  /// No description provided for @savedGamesCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get savedGamesCancel;
+
+  /// No description provided for @savedGamesAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت «{title}»'**
+  String savedGamesAdded(String title);
+
+  /// No description provided for @savedGamesUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت التعديلات'**
+  String get savedGamesUpdated;
+
+  /// No description provided for @savedGamesDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت «{title}»'**
+  String savedGamesDeleted(String title);
+
+  /// max is already formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'بلغتَ الحد الأقصى ({max} لعبة)؛ احذف واحدة أولًا'**
+  String savedGamesFull(String max);
+
+  /// No description provided for @savedGamesPlay.
+  ///
+  /// In ar, this message translates to:
+  /// **'العب'**
+  String get savedGamesPlay;
+
+  /// No description provided for @savedGamesPlayGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'العب {title}'**
+  String savedGamesPlayGame(String title);
+
+  /// No description provided for @savedGamesPlayCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم تُلعب بعد} =1{لُعبت مرة واحدة} =2{لُعبت مرتين} few{لُعبت {count} مرات} many{لُعبت {count} مرة} other{لُعبت {count} مرة}}'**
+  String savedGamesPlayCount(int count);
+
+  /// No description provided for @savedGamesLastPlayedToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر لعب اليوم'**
+  String get savedGamesLastPlayedToday;
+
+  /// No description provided for @savedGamesLastPlayedYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر لعب أمس'**
+  String get savedGamesLastPlayedYesterday;
+
+  /// No description provided for @savedGamesLastPlayedDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}'**
+  String savedGamesLastPlayedDays(int days);
+
+  /// No description provided for @savedGamesLastPlayedOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر لعب {date}'**
+  String savedGamesLastPlayedOn(String date);
+
+  /// No description provided for @savedGamesNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'جديدة'**
+  String get savedGamesNew;
+
+  /// No description provided for @savedGamesLayoutGrid.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الملصقات'**
+  String get savedGamesLayoutGrid;
+
+  /// No description provided for @savedGamesLayoutList.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض القائمة والترتيب'**
+  String get savedGamesLayoutList;
+
+  /// No description provided for @savedGamesReorderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب المقبض لتغيير الترتيب'**
+  String get savedGamesReorderHint;
+
+  /// No description provided for @savedGamesEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحضِر ألعاب الويب التي تحبها'**
+  String get savedGamesEmptyTitle;
+
+  /// No description provided for @savedGamesEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ أي لعبة تعمل في المتصفح برابطها الآمن، والعبها بملء الشاشة داخل مَدار.'**
+  String get savedGamesEmptyBody;
+
+  /// No description provided for @savedGamesEmptyStep1.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح اللعبة، مثل عمل تفاعلي (Artifact) شاركه أحدهم من Claude.'**
+  String get savedGamesEmptyStep1;
+
+  /// example is a link pattern shown left-to-right
+  ///
+  /// In ar, this message translates to:
+  /// **'انسخ رابطها، ويكون عادةً بالشكل {example}'**
+  String savedGamesEmptyStep2(String example);
+
+  /// No description provided for @savedGamesEmptyStep3.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط «أضف لعبة» والصق الرابط، ثم اختر لها اسمًا وأيقونة.'**
+  String get savedGamesEmptyStep3;
+
+  /// No description provided for @savedGamesPrivacyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعمل كل لعبة من رابطها الأصلي ولا يُنسخ كودها. لا يتصل مَدار بالشبكة إلا حين تفتح لعبة أو تضغط «جلب».'**
+  String get savedGamesPrivacyNote;
+
+  /// No description provided for @savedGamesOpenExternal.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح في المتصفح'**
+  String get savedGamesOpenExternal;
+
+  /// No description provided for @savedGamesEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get savedGamesEdit;
+
+  /// No description provided for @savedGamesMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات أخرى'**
+  String get savedGamesMore;
+
+  /// No description provided for @savedGamesClearData.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح بيانات الموقع'**
+  String get savedGamesClearData;
+
+  /// No description provided for @savedGamesClearDataTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح بيانات «{title}»؟'**
+  String savedGamesClearDataTitle(String title);
+
+  /// No description provided for @savedGamesClearDataBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.'**
+  String get savedGamesClearDataBody;
+
+  /// No description provided for @savedGamesClearDataScheduled.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستُمسح بياناتها عند فتحها في المرة القادمة'**
+  String get savedGamesClearDataScheduled;
+
+  /// No description provided for @savedGamesClearDataPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستُمسح بياناتها عند الفتح'**
+  String get savedGamesClearDataPending;
+
+  /// No description provided for @savedGamesClearAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح بيانات كل الألعاب'**
+  String get savedGamesClearAll;
+
+  /// No description provided for @savedGamesClearAllTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح بيانات كل الألعاب؟'**
+  String get savedGamesClearAllTitle;
+
+  /// No description provided for @savedGamesClearAllBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحذف ملفات الارتباط والتخزين والذاكرة المؤقتة لكل ألعاب الويب. لا يمسّ بقية بيانات مَدار ولا قائمة ألعابك.'**
+  String get savedGamesClearAllBody;
+
+  /// No description provided for @savedGamesClearAllDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُسحت بيانات كل الألعاب'**
+  String get savedGamesClearAllDone;
+
+  /// No description provided for @savedGamesClearFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر مسح بعض البيانات'**
+  String get savedGamesClearFailed;
+
+  /// No description provided for @savedGamesConfirmClear.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح'**
+  String get savedGamesConfirmClear;
+
+  /// No description provided for @savedGamesLoading.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحمَّل «{title}»…'**
+  String savedGamesLoading(String title);
+
+  /// No description provided for @savedGamesClearing.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُمسح بيانات اللعبة…'**
+  String get savedGamesClearing;
+
+  /// No description provided for @savedGamesOfflineTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد اتصال'**
+  String get savedGamesOfflineTitle;
+
+  /// No description provided for @savedGamesOfflineBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحتاج هذه اللعبة إلى الإنترنت لأنها تعمل من رابطها الأصلي.'**
+  String get savedGamesOfflineBody;
+
+  /// No description provided for @savedGamesErrorTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح اللعبة'**
+  String get savedGamesErrorTitle;
+
+  /// No description provided for @savedGamesErrorBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قد يكون الموقع متوقفًا أو تغيّر رابطه.'**
+  String get savedGamesErrorBody;
+
+  /// No description provided for @savedGamesInsecureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال غير آمن'**
+  String get savedGamesInsecureTitle;
+
+  /// No description provided for @savedGamesInsecureBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.'**
+  String get savedGamesInsecureBody;
+
+  /// No description provided for @savedGamesRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get savedGamesRetry;
+
+  /// No description provided for @savedGamesBackToMadar.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة إلى مَدار'**
+  String get savedGamesBackToMadar;
+
+  /// No description provided for @savedGamesReload.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التحميل'**
+  String get savedGamesReload;
+
+  /// No description provided for @savedGamesMute.
+  ///
+  /// In ar, this message translates to:
+  /// **'كتم الصوت'**
+  String get savedGamesMute;
+
+  /// No description provided for @savedGamesUnmute.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل الصوت'**
+  String get savedGamesUnmute;
+
+  /// No description provided for @savedGamesControls.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدوات اللعبة'**
+  String get savedGamesControls;
+
+  /// No description provided for @savedGamesCloseControls.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء الأدوات'**
+  String get savedGamesCloseControls;
+
+  /// No description provided for @savedGamesMuteSealed.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعض أصوات هذه اللعبة داخل إطار محمي؛ استخدم أزرار الصوت في هاتفك.'**
+  String get savedGamesMuteSealed;
+
+  /// No description provided for @savedGamesExitTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخروج من اللعبة؟'**
+  String get savedGamesExitTitle;
+
+  /// No description provided for @savedGamesExitBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قد يضيع أي تقدّم لا تحفظه اللعبة بنفسها.'**
+  String get savedGamesExitBody;
+
+  /// No description provided for @savedGamesExitStay.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة اللعب'**
+  String get savedGamesExitStay;
+
+  /// No description provided for @savedGamesExitLeave.
+  ///
+  /// In ar, this message translates to:
+  /// **'خروج'**
+  String get savedGamesExitLeave;
+
+  /// No description provided for @savedGamesExternalTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح رابط خارجي؟'**
+  String get savedGamesExternalTitle;
+
+  /// No description provided for @savedGamesExternalBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تريد اللعبة فتح {host}. سيُفتح في متصفحك خارج مَدار.'**
+  String savedGamesExternalBody(String host);
+
+  /// No description provided for @savedGamesExternalFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُعثر على متصفح يفتح الرابط'**
+  String get savedGamesExternalFailed;
+
+  /// No description provided for @savedGamesPrayerTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت الصلاة'**
+  String get savedGamesPrayerTitle;
+
+  /// No description provided for @savedGamesPrayerBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقفنا اللعبة وصوتها. تُستأنف من تلقاء نفسها بعد الأذان ووقت الصلاة.'**
+  String get savedGamesPrayerBody;
+
+  /// No description provided for @savedGamesPrayerUnloaded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.'**
+  String get savedGamesPrayerUnloaded;
+
+  /// No description provided for @savedGamesPageSays.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة من {host}'**
+  String savedGamesPageSays(String host);
+
+  /// No description provided for @savedGamesOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسنًا'**
+  String get savedGamesOk;
+
+  /// Two already-localised stat fragments joined
+  ///
+  /// In ar, this message translates to:
+  /// **'{added} · {played}'**
+  String savedGamesStats(String added, String played);
+
+  /// No description provided for @savedGamesAddedOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيفت {date}'**
+  String savedGamesAddedOn(String date);
+
+  /// No description provided for @savedGamesAddCardHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رابط لعبة ويب'**
+  String get savedGamesAddCardHint;
+
+  /// No description provided for @savedGamesShelfEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ لعبة ويب برابطها وستظهر هنا.'**
+  String get savedGamesShelfEmpty;
+
+  /// No description provided for @savedGamesDeleteGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get savedGamesDeleteGame;
+
+  /// No description provided for @savedGamesOpenAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح ألعابي المحفوظة'**
+  String get savedGamesOpenAll;
+
+  /// No description provided for @savedGamesClearDataDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُسحت بيانات اللعبة'**
+  String get savedGamesClearDataDone;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

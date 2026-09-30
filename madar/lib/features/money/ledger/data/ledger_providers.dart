@@ -54,6 +54,12 @@ final ledgerWeeksPerMonthProvider = StreamProvider<num?>(
   (ref) => ref.watch(ledgerServiceProvider).watchWeeksPerMonth(),
 );
 
+/// Savings jars, debts, obligations and budget items per currency code
+/// (see [LedgerService.watchCurrencyUseElsewhere]).
+final ledgerCurrencyUseElsewhereProvider = StreamProvider.autoDispose<Map<String, int>>(
+  (ref) => ref.watch(ledgerServiceProvider).watchCurrencyUseElsewhere(),
+);
+
 final ledgerRatesAreDefaultsProvider = StreamProvider<bool>(
   (ref) => ref.watch(ledgerServiceProvider).watchRatesAreDefaults(),
 );

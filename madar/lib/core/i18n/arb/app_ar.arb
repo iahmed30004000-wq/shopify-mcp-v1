@@ -11767,6 +11767,10 @@
   "@ledgerFixRates": {
     "description": "Action next to the warning that some currencies have no exchange rate"
   },
+  "ledgerCurrencyInUseElsewhere": "مستخدمة في الحصّالات أو الديون أو الالتزامات أو الميزانية",
+  "@ledgerCurrencyInUseElsewhere": {
+    "description": "Why a currency cannot be deleted: a jar, debt, recurring obligation or budget item is kept in it"
+  },
   "budgetTitle": "الميزانية",
   "@budgetTitle": {
     "description": "Title of the budget screen and card"
@@ -20020,7 +20024,7 @@
     }
   },
   "togetherTrophiesEarned": "جوائز محصودة",
-  "togetherResultWon": "الفوز لـ{name}",
+  "togetherResultWon": "فوز {name}",
   "@togetherResultWon": {
     "placeholders": {
       "name": {
@@ -20151,7 +20155,7 @@
   "togetherTrophyFirstMatch": "البداية",
   "togetherTrophyFirstMatchDesc": "أول مباراة معًا",
   "togetherTrophyMatches10": "عشر مباريات",
-  "togetherTrophyMatches10Desc": "{count} مباراة معًا",
+  "togetherTrophyMatches10Desc": "{count} مباريات معًا",
   "@togetherTrophyMatches10Desc": {
     "placeholders": {
       "count": {
@@ -20594,5 +20598,253 @@
   "widgetsPeriodWeek": "هذا الأسبوع",
   "@widgetsPeriodWeek": {
     "description": "Settings option"
-  }
+  },
+  "savedGamesTitle": "ألعابي من الويب",
+  "@savedGamesTitle": {
+    "description": "Saved Games screen title"
+  },
+  "savedGamesShelfTitle": "ألعابي المحفوظة",
+  "@savedGamesShelfTitle": {
+    "description": "Heading of the Saved Games shelf in the cinema hall"
+  },
+  "savedGamesShelfSubtitle": "ألعاب ويب تعمل من روابطها الأصلية",
+  "savedGamesSeeAll": "الكل",
+  "savedGamesAdd": "أضف لعبة",
+  "savedGamesAddTitle": "لعبة جديدة من رابط",
+  "savedGamesAddSubtitle": "تعمل من رابطها الأصلي؛ لا يُنسخ شيء من كودها",
+  "savedGamesEditTitle": "تعديل اللعبة",
+  "savedGamesUrlLabel": "الرابط",
+  "savedGamesUrlHint": "https://claude.ai/public/artifacts/…",
+  "@savedGamesUrlHint": {
+    "description": "Example link format shown as a hint (not a real game)"
+  },
+  "savedGamesPaste": "لصق",
+  "savedGamesClipboardEmpty": "لا يوجد رابط في الحافظة",
+  "savedGamesUrlEmpty": "الصق رابط اللعبة أولًا",
+  "savedGamesUrlNotHttps": "الروابط الآمنة (https) فقط",
+  "savedGamesUseHttps": "استخدم https",
+  "savedGamesUrlScheme": "هذا ليس رابط صفحة ويب",
+  "savedGamesUrlMalformed": "لا يبدو هذا رابطًا صحيحًا",
+  "savedGamesUrlCredentials": "لا تُقبل روابط تحوي اسم مستخدم أو كلمة مرور",
+  "savedGamesUrlTooLong": "الرابط طويل جدًا",
+  "savedGamesUrlDuplicate": "محفوظة من قبل باسم «{title}»",
+  "@savedGamesUrlDuplicate": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesArtifactBadge": "عمل تفاعلي من Claude",
+  "savedGamesSecureBadge": "رابط آمن",
+  "savedGamesNameLabel": "الاسم",
+  "savedGamesNameHint": "اسم اللعبة",
+  "savedGamesFetchTitle": "جلب العنوان",
+  "savedGamesFetchFailed": "تعذّرت قراءة عنوان الصفحة؛ اكتبه بنفسك",
+  "savedGamesFetchNote": "«جلب» يتصل بالموقع مرة واحدة حين تضغطه فقط، ولا يُرسل عنك شيئًا.",
+  "savedGamesIconLabel": "الأيقونة",
+  "savedGamesUseSiteIcon": "أيقونة الموقع",
+  "savedGamesRemoveSiteIcon": "إزالة أيقونة الموقع",
+  "savedGamesIconFailed": "لم نجد أيقونة صالحة لهذا الموقع",
+  "savedGamesShuffleIcon": "أيقونة أخرى",
+  "savedGamesGlyph": "الرمز {number}",
+  "@savedGamesGlyph": {
+    "description": "Semantics label of a glyph choice; number is already formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesColor": "اللون {number}",
+  "@savedGamesColor": {
+    "description": "Semantics label of a colour choice; number is already formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesOrientationLabel": "اتجاه الشاشة أثناء اللعب",
+  "savedGamesOrientationAuto": "تلقائي",
+  "savedGamesOrientationPortrait": "عمودي",
+  "savedGamesOrientationLandscape": "أفقي",
+  "savedGamesNotesLabel": "ملاحظات",
+  "savedGamesNotesHint": "مثلًا: طريقة اللعب أو من شاركها معي",
+  "savedGamesSave": "حفظ",
+  "savedGamesCancel": "إلغاء",
+  "savedGamesAdded": "أُضيفت «{title}»",
+  "@savedGamesAdded": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesUpdated": "حُفظت التعديلات",
+  "savedGamesDeleted": "حُذفت «{title}»",
+  "@savedGamesDeleted": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesFull": "بلغتَ الحد الأقصى ({max} لعبة)؛ احذف واحدة أولًا",
+  "@savedGamesFull": {
+    "description": "max is already formatted",
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesPlay": "العب",
+  "savedGamesPlayGame": "العب {title}",
+  "@savedGamesPlayGame": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesPlayCount": "{count, plural, =0{لم تُلعب بعد} =1{لُعبت مرة واحدة} =2{لُعبت مرتين} few{لُعبت {count} مرات} many{لُعبت {count} مرة} other{لُعبت {count} مرة}}",
+  "@savedGamesPlayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savedGamesLastPlayedToday": "آخر لعب اليوم",
+  "savedGamesLastPlayedYesterday": "آخر لعب أمس",
+  "savedGamesLastPlayedDays": "{days, plural, =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}",
+  "@savedGamesLastPlayedDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "savedGamesLastPlayedOn": "آخر لعب {date}",
+  "@savedGamesLastPlayedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesNew": "جديدة",
+  "savedGamesLayoutGrid": "عرض الملصقات",
+  "savedGamesLayoutList": "عرض القائمة والترتيب",
+  "savedGamesReorderHint": "اسحب المقبض لتغيير الترتيب",
+  "savedGamesEmptyTitle": "أحضِر ألعاب الويب التي تحبها",
+  "savedGamesEmptyBody": "احفظ أي لعبة تعمل في المتصفح برابطها الآمن، والعبها بملء الشاشة داخل مَدار.",
+  "savedGamesEmptyStep1": "افتح اللعبة، مثل عمل تفاعلي (Artifact) شاركه أحدهم من Claude.",
+  "savedGamesEmptyStep2": "انسخ رابطها، ويكون عادةً بالشكل {example}",
+  "@savedGamesEmptyStep2": {
+    "description": "example is a link pattern shown left-to-right",
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesEmptyStep3": "اضغط «أضف لعبة» والصق الرابط، ثم اختر لها اسمًا وأيقونة.",
+  "savedGamesPrivacyNote": "تعمل كل لعبة من رابطها الأصلي ولا يُنسخ كودها. لا يتصل مَدار بالشبكة إلا حين تفتح لعبة أو تضغط «جلب».",
+  "savedGamesOpenExternal": "فتح في المتصفح",
+  "savedGamesEdit": "تعديل",
+  "savedGamesMore": "خيارات أخرى",
+  "savedGamesClearData": "مسح بيانات الموقع",
+  "savedGamesClearDataTitle": "مسح بيانات «{title}»؟",
+  "@savedGamesClearDataTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesClearDataBody": "يُحذف ما حفظته اللعبة على هذا الجهاز: التقدّم والإعدادات وملفات الارتباط الظاهرة للصفحة. لا يمكن التراجع.",
+  "savedGamesClearDataScheduled": "ستُمسح بياناتها عند فتحها في المرة القادمة",
+  "savedGamesClearDataPending": "ستُمسح بياناتها عند الفتح",
+  "savedGamesClearAll": "مسح بيانات كل الألعاب",
+  "savedGamesClearAllTitle": "مسح بيانات كل الألعاب؟",
+  "savedGamesClearAllBody": "يحذف ملفات الارتباط والتخزين والذاكرة المؤقتة لكل ألعاب الويب. لا يمسّ بقية بيانات مَدار ولا قائمة ألعابك.",
+  "savedGamesClearAllDone": "مُسحت بيانات كل الألعاب",
+  "savedGamesClearFailed": "تعذّر مسح بعض البيانات",
+  "savedGamesConfirmClear": "مسح",
+  "savedGamesLoading": "يُحمَّل «{title}»…",
+  "@savedGamesLoading": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesClearing": "تُمسح بيانات اللعبة…",
+  "savedGamesOfflineTitle": "لا يوجد اتصال",
+  "savedGamesOfflineBody": "تحتاج هذه اللعبة إلى الإنترنت لأنها تعمل من رابطها الأصلي.",
+  "savedGamesErrorTitle": "تعذّر فتح اللعبة",
+  "savedGamesErrorBody": "قد يكون الموقع متوقفًا أو تغيّر رابطه.",
+  "savedGamesInsecureTitle": "اتصال غير آمن",
+  "savedGamesInsecureBody": "شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.",
+  "savedGamesRetry": "إعادة المحاولة",
+  "savedGamesBackToMadar": "العودة إلى مَدار",
+  "savedGamesReload": "إعادة التحميل",
+  "savedGamesMute": "كتم الصوت",
+  "savedGamesUnmute": "تشغيل الصوت",
+  "savedGamesControls": "أدوات اللعبة",
+  "savedGamesCloseControls": "إخفاء الأدوات",
+  "savedGamesMuteSealed": "بعض أصوات هذه اللعبة داخل إطار محمي؛ استخدم أزرار الصوت في هاتفك.",
+  "savedGamesExitTitle": "الخروج من اللعبة؟",
+  "savedGamesExitBody": "قد يضيع أي تقدّم لا تحفظه اللعبة بنفسها.",
+  "savedGamesExitStay": "متابعة اللعب",
+  "savedGamesExitLeave": "خروج",
+  "savedGamesExternalTitle": "فتح رابط خارجي؟",
+  "savedGamesExternalBody": "تريد اللعبة فتح {host}. سيُفتح في متصفحك خارج مَدار.",
+  "@savedGamesExternalBody": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesExternalFailed": "لم يُعثر على متصفح يفتح الرابط",
+  "savedGamesPrayerTitle": "حان وقت الصلاة",
+  "savedGamesPrayerBody": "أوقفنا اللعبة وصوتها. تُستأنف من تلقاء نفسها بعد الأذان ووقت الصلاة.",
+  "savedGamesPrayerUnloaded": "أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.",
+  "savedGamesPageSays": "رسالة من {host}",
+  "@savedGamesPageSays": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesOk": "حسنًا",
+  "savedGamesStats": "{added} · {played}",
+  "@savedGamesStats": {
+    "description": "Two already-localised stat fragments joined",
+    "placeholders": {
+      "added": {
+        "type": "String"
+      },
+      "played": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesAddedOn": "أُضيفت {date}",
+  "@savedGamesAddedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "savedGamesAddCardHint": "الصق رابط لعبة ويب",
+  "savedGamesShelfEmpty": "احفظ لعبة ويب برابطها وستظهر هنا.",
+  "savedGamesDeleteGame": "حذف",
+  "savedGamesOpenAll": "فتح ألعابي المحفوظة",
+  "savedGamesClearDataDone": "مُسحت بيانات اللعبة"
 }

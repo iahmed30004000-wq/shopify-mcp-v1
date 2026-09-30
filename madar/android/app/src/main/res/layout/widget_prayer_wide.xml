@@ -10,12 +10,12 @@
     android:gravity="center_vertical"
     android:layoutDirection="ltr"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="10dp">
 
     <FrameLayout
         android:id="@+id/widget_slot_left"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginRight="12dp">
 
         <ImageView
@@ -48,29 +48,29 @@
         <TextView
             android:id="@+id/widget_headline"
             style="@style/widget_text_headline"
-            android:layout_marginTop="2dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/widget_detail"
             style="@style/widget_text_detail"
             android:textColor="@color/widget_text_primary"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <Chronometer
             android:id="@+id/widget_countdown"
             style="@style/widget_text_accent"
-            android:layout_marginTop="2dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/widget_note"
             style="@style/widget_text_note"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="2dp" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/widget_slot_right"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginLeft="12dp"
         android:visibility="gone">
 

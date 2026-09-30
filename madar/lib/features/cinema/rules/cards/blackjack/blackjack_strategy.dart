@@ -137,8 +137,10 @@ abstract final class BlackjackStrategy {
       case 9:
         return up == 7 || up >= 10 ? null : BlackjackChartCode.split;
       case 8:
-        if (up == 11 && o.dealerHitsSoft17) return BlackjackChartCode.surrenderOrSplit;
+        // The European change comes first: with no peek, splitting 8-8
+        // against a 10 or an ace only doubles what a dealer natural takes.
         if (_allLost(o) && up >= 10) return null;
+        if (up == 11 && o.dealerHitsSoft17) return BlackjackChartCode.surrenderOrSplit;
         return BlackjackChartCode.split;
       case 7:
         return up <= 7 ? BlackjackChartCode.split : null;

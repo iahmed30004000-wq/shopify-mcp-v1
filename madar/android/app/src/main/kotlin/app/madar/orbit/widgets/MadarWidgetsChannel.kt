@@ -208,11 +208,9 @@ class MadarWidgetsPlugin(private val context: Context) :
      * on a home screen. True when written.
      */
     private fun publish(kind: MadarWidgetKind, json: String, images: Map<String, ByteArray>?): Boolean {
-        if (!kind.isInstalled(context)) return false
-        MadarWidgetStore.writeSnapshot(context, kind, json)
-        if (images != null) MadarWidgetStore.replaceImages(context, kind, images)
-        MadarWidgetRenderer.updateAll(context, kind)
-        return true
+        val written = MadarWidgetStore.writeIfInstalled(context, kind, json, images) { kind.isInstalled(context) }
+        if (written) MadarWidgetRenderer.updateAll(context, kind)
+        return written
     }
 
     private fun imagesOf(raw: Any?): Map<String, ByteArray>? {

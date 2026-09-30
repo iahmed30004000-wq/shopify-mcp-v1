@@ -70,7 +70,18 @@ enum TogetherMessageKind {
 }
 
 /// How a finished game ended, by seat (the session maps seats to players).
-enum SeatOutcomeKind { win, draw }
+/// [loss]: every seat lost (a co-op defeat).
+enum SeatOutcomeKind { win, draw, loss }
+
+/// Why a participant leaves.
+enum ByeReason {
+  /// The player left (or the game was closed).
+  left,
+
+  /// This side cannot play with the peer (other game, rules or protocol
+  /// version): the peer should stop waiting and say so.
+  incompatible,
+}
 
 /// A message body. Sealed: nothing else can be put on the wire.
 sealed class TogetherBody {
@@ -225,13 +236,15 @@ final class ResultBody extends TogetherBody {
 }
 
 final class ByeBody extends TogetherBody {
-  const ByeBody();
+  const ByeBody({this.reason = ByeReason.left});
+
+  final ByeReason reason;
 
   @override
   TogetherMessageKind get kind => TogetherMessageKind.bye;
 
   @override
-  Map<String, Object?> toWire() => const {};
+  Map<String, Object?> toWire() => reason == ByeReason.left ? const {} : {'r': reason.name};
 }
 
 /// One message.
@@ -366,16 +379,26 @@ final class TogetherCodec {
       ),
       TogetherMessageKind.sync => SyncBody(turn: body.integer('t', min: 0), hash: body.hash('h', optional: true)),
       TogetherMessageKind.resync => ResyncBody(turn: body.integer('t', min: 0), hash: body.hash('h', optional: true)),
-      TogetherMessageKind.result => ResultBody(
-        matchId: body.id('m'),
-        outcome: body.enumValue('o', SeatOutcomeKind.values),
-        winners: body.intList('w', min: 0, max: TogetherProtocol.maxSeats - 1, maxLength: TogetherProtocol.maxSeats),
-        scores: body.intList('sc', min: -999999999, max: 999999999, maxLength: TogetherProtocol.maxSeats),
-      ),
-      TogetherMessageKind.bye => const ByeBody(),
+      TogetherMessageKind.result => _result(body),
+      TogetherMessageKind.bye => ByeBody(reason: body.enumValue('r', ByeReason.values, optional: true) ?? ByeReason.left),
     };
     body.done();
     return TogetherEnvelope(sessionId: sid, from: from, body: parsed, seq: seq, ack: ack, version: v);
+  }
+
+  static ResultBody _result(_Fields body) {
+    final outcome = body.enumValue('o', SeatOutcomeKind.values)!;
+    final winners = body.intList('w', min: 0, max: TogetherProtocol.maxSeats - 1, maxLength: TogetherProtocol.maxSeats);
+    // A win names its winners; a draw or a loss names none.
+    if ((outcome == SeatOutcomeKind.win) == winners.isEmpty) {
+      throw const TogetherDataRejected(TogetherRejection.wrongType, 'b.w');
+    }
+    return ResultBody(
+      matchId: body.id('m'),
+      outcome: outcome,
+      winners: winners,
+      scores: body.intList('sc', min: -999999999, max: 999999999, maxLength: TogetherProtocol.maxSeats),
+    );
   }
 
   static int _int(Map<Object?, Object?> m, String key, String at, {int min = -GameDataPolicy.maxSafeInt, int? max}) {
@@ -427,8 +450,9 @@ final class _Fields {
     return v;
   }
 
-  T enumValue<T extends Enum>(String k, List<T> values) {
-    final v = _take(k);
+  T? enumValue<T extends Enum>(String k, List<T> values, {bool optional = false}) {
+    final v = _take(k, optional: optional);
+    if (v == null && optional) return null;
     final match = values.where((e) => e.name == v).firstOrNull;
     if (match == null) throw TogetherDataRejected(TogetherRejection.wrongType, _p(k));
     return match;

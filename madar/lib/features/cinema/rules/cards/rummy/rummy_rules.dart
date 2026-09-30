@@ -69,17 +69,65 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
   }) {
     final cands = candidates ?? s.meldRules.candidates(hand);
     final found = <MeldPlan>[];
-    if (must != null && !cands.any((m) => mustFits(s, m, must))) return found;
     final keys = <String>{};
-    searchPlans(hand, cands, (p) {
+    bool visit(MeldPlan p) {
       if (openingError(s, p, must) == null && keys.add(p.key)) {
         found.add(p);
         if (stopAtFirst) return false;
       }
       return true;
-    }, maxCards: hand.length - keep);
+    }
+
+    final maxCards = hand.length - keep;
+    if (must == null) {
+      searchPlans(hand, cands, visit, maxCards: maxCards);
+    } else {
+      // Every such opening holds a meld with the taken card: start from each
+      // of them and search the rest of the hand, so that the node limit of
+      // the search is never spent on plans without it.
+      for (final (first, rest, restCands) in _withFirst(s, hand, cands, must)) {
+        if (first.cards.length > maxCards) continue;
+        var go = visit(MeldPlan([first]));
+        if (go) {
+          searchPlans(rest, restCands, (p) {
+            go = visit(MeldPlan([first, ...p.melds]));
+            return go;
+          }, maxCards: maxCards - first.cards.length);
+        }
+        if (!go) break;
+      }
+    }
     found.sort((a, b) => b.cardCount != a.cardCount ? b.cardCount - a.cardCount : b.value - a.value);
     return found.take(cap).toList();
+  }
+
+  /// For each candidate of [cands] that holds the taken card [must] in an
+  /// allowed way: that meld, the rest of [hand] and the candidates that still
+  /// fit in it.
+  static Iterable<(Meld, List<PlayingCard>, List<Meld>)> _withFirst(
+    RummyState s,
+    List<PlayingCard> hand,
+    List<Meld> cands,
+    PlayingCard must,
+  ) sync* {
+    for (final first in cands) {
+      if (!mustFits(s, first, must)) continue;
+      final rest = cardsMinus(hand, first.cards);
+      final counts = cardCounts(rest);
+      final restCands = [
+        for (final m in cands)
+          if (_fits(m, counts)) m,
+      ];
+      yield (first, rest, restCands);
+    }
+  }
+
+  static bool _fits(Meld m, List<int> counts) {
+    final need = cardCounts(m.cards);
+    for (final c in m.cards) {
+      if (need[c.code] > counts[c.code]) return false;
+    }
+    return true;
   }
 
   /// Lays [cards] off on the table one by one (greedily), or null when some
@@ -121,14 +169,13 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
   }) {
     if (!s.options.oneTurnFinishWaivesThreshold || s.opened[seat] || keepFor(s, seat) > 1) return const [];
     final cands = candidates ?? s.meldRules.candidates(hand);
-    if (must != null && !cands.any((m) => mustFits(s, m, must))) return const [];
     final out = <RummyMove>[];
     final seen = <RummyMove>{};
     void add(RummyMove m) {
       if (seen.add(m)) out.add(m);
     }
 
-    coverPlans(hand, cands, s.table.isEmpty ? 1 : 4, (plan, left) {
+    bool visit(MeldPlan plan, List<PlayingCard> left) {
       if (!planUsesMust(s, plan, must)) return true;
       final melds = [for (final m in plan.melds) m.cards];
       final lows = [for (final m in plan.melds) m.wildPlacedLow];
@@ -144,7 +191,25 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
         }
       }
       return out.length < cap && !(stopAtFirst && out.isNotEmpty);
-    });
+    }
+
+    final maxLeft = s.table.isEmpty ? 1 : 4;
+    if (must == null) {
+      coverPlans(hand, cands, maxLeft, visit);
+    } else {
+      // As for openings: start from each meld that holds the taken card.
+      for (final (first, rest, restCands) in _withFirst(s, hand, cands, must)) {
+        if (rest.isEmpty) continue;
+        var go = rest.length > maxLeft || visit(MeldPlan([first]), rest);
+        if (go) {
+          coverPlans(rest, restCands, maxLeft, (plan, left) {
+            go = visit(MeldPlan([first, ...plan.melds]), left);
+            return go;
+          });
+        }
+        if (!go) break;
+      }
+    }
     out.sort((a, b) => a.layoffs.length - b.layoffs.length);
     return out;
   }
@@ -277,6 +342,15 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
   static bool discardBlocked(RummyState s) =>
       s.mustUse != null || (s.options.swappedWildMustBeUsed && s.pendingWilds.isNotEmpty);
 
+  /// Whether lay-down [m] puts down a card that holds the discard back (the
+  /// taken discard or a freed wild still to be laid down).
+  static bool usesBlockedCard(RummyState s, RummyMove m) {
+    final must = s.mustUse;
+    final pending = s.options.swappedWildMustBeUsed ? s.pendingWilds : const <PlayingCard>[];
+    bool blocked(PlayingCard? c) => c != null && (c == must || pending.contains(c));
+    return blocked(m.card) || blocked(m.card2) || m.meldCards.any(blocked);
+  }
+
   @override
   List<RummyMove> legalMoves(RummyState s, int seat) {
     if (s.isOver || s.turn != seat) return const [];
@@ -298,9 +372,10 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
     final discards = [for (final c in distinct) RummyMove.discard(c)];
     if (discardOnlyTurn(s, seat)) return discards;
     final moves = layDownMoves(s, seat);
-    // Safety net: a taken discard (or freed wild) that can no longer be laid
-    // down is released.
-    if (!discardBlocked(s) || moves.isEmpty) moves.addAll(discards);
+    // The discard waits while a lay-down can still put the taken discard (or
+    // a freed wild) on the table; one that no lay-down can use is released,
+    // whatever else could still be laid down.
+    if (!discardBlocked(s) || !moves.any((m) => usesBlockedCard(s, m))) moves.addAll(discards);
     return moves;
   }
 
@@ -493,7 +568,10 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
           ..sort();
         s.known[seat].add(wild);
         if (s.options.swappedWildMustBeUsed) s.pendingWilds.add(wild);
-        if (t < s.tableAtTurnStart) s.usedOldMelds = true;
+        if (t < s.tableAtTurnStart) {
+          s.usedOldMelds = true;
+          s.oldMeldCards.addAll(nats);
+        }
         ev?.add(CardEvent(CardEventType.jokerSwapped, seat: seat, cards: [...nats, wild], value: t));
       case RummyMoveKind.finish:
         final plan = _layMelds(s, seat, m);
@@ -523,7 +601,10 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
   void _layOff(RummyState s, int seat, PlayingCard card, int target, bool atLow, List<CardEvent>? ev) {
     s.table[target] = s.meldRules.withCard(s.table[target], card, atLow: atLow)!;
     _used(s, seat, [card]);
-    if (target < s.tableAtTurnStart) s.usedOldMelds = true;
+    if (target < s.tableAtTurnStart) {
+      s.usedOldMelds = true;
+      s.oldMeldCards.add(card);
+    }
     ev?.add(CardEvent(CardEventType.laidOff, seat: seat, cards: [card], value: target));
   }
 
@@ -547,6 +628,7 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
     s.openAtTurnStart = s.opened[seat];
     s.tableAtTurnStart = s.table.length;
     s.usedOldMelds = false;
+    s.oldMeldCards = [];
     s.pendingWilds = [];
     s.mustUse = null;
   }
@@ -579,7 +661,10 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
   // ------------------------------------------------------------ scoring
 
   /// Bonus factor of a full hand (options): ×2 for a wild as the last
-  /// discard, ×2 for one colour or ×4 for one suit (wilds excepted).
+  /// discard, ×2 for one colour or ×4 for one suit (wilds excepted). The
+  /// full hand is every card the winner put down this turn: its new melds,
+  /// what it laid on older melds (when that still counts as a full hand) and
+  /// the last discard.
   static int bonusFactor(RummyState s, int winner, PlayingCard? lastDiscard) {
     final o = s.options;
     final r = s.meldRules;
@@ -589,6 +674,7 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
       final cards = [
         for (var i = s.tableAtTurnStart; i < s.table.length; i++)
           if (s.table[i].owner == winner) ...s.table[i].cards,
+        ...s.oldMeldCards,
         ?lastDiscard,
       ].where((c) => !r.isWild(c));
       final suits = cards.map(r.suitOf).toSet();

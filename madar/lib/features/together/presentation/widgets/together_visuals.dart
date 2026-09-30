@@ -10,6 +10,10 @@ import '../../domain/trophies.dart';
 
 /// Colours and icons of Together Mode.
 abstract final class TogetherLook {
+  /// Colour-emoji families to fall back to for avatar emoji (the platform's
+  /// own fallback covers devices; named here so previews can load one).
+  static const List<String> emojiFallback = ['NotoColorEmoji', 'Noto Color Emoji'];
+
   static Color colorOf(TogetherProfile p) => Color(p.colorValue);
 
   static Color paletteColor(int index) => Color(TogetherPalette.colors[TogetherPalette.clampIndex(index)]);
@@ -108,7 +112,7 @@ class TogetherAvatarView extends StatelessWidget {
       AvatarKind.emoji => Text(
         avatar.emoji ?? '⭐',
         textAlign: TextAlign.center,
-        style: TextStyle(fontSize: size * 0.5, height: 1.1),
+        style: TextStyle(fontSize: size * 0.5, height: 1.1, fontFamilyFallback: TogetherLook.emojiFallback),
       ),
       AvatarKind.initials => Text(
         _initial(displayName),

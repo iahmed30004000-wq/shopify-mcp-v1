@@ -90,9 +90,11 @@ void main() {
     final s = build(texts: en);
     expect(s.rtl, isFalse);
     expect(s.pages.first.headline, '2/4');
-    expect(s.pages.first.rows.first.time, '8:00 AM');
+    // intl puts a narrow no-break space before AM.
+    expect(s.pages.first.rows.first.time!.replaceAll('\u202F', ' '), '8:00 AM');
     expect(s.pages.first.detail, startsWith('Next at 2:00'));
-    expect(Digits.hasEasternDigits(s.pages.first.detail!), isFalse);
+    expect(Digits.hasEasternDigits(s.pages.first.headline!), isFalse);
+    expect(Digits.hasEasternDigits(s.pages.first.rows.last.time!), isFalse);
   });
 
   test('a long day is cut at the row limit and the "more" lines count every dose', () {

@@ -51,8 +51,10 @@ bird.flash();                              // hit flash (fills go white)
 `InkCloud`, `InkStar` (twinkling, optional face via `PropMood`), `InkGear`
 (`speed` rad/s), `InkCrate` (`hit()` squashes it; origin = bottom centre),
 `InkMoon` (sleepy "zz"), `InkPuff` (pooled smoke: `restart()`, `done`).
-Set `shaded = false` on small or distant props: the material shader is
-replaced by a flat tone.
+`InkSketch(size:, extent:, draw: (InkBuild b) {...})` inks a game's own
+scenery (barrels, platforms, signs) with the same toolkit, boil, era colours
+and caching. Set `shaded = false` on small or distant props: the material
+shader is replaced by a flat tone.
 
 ## How a drawing is made (and why it is cheap)
 

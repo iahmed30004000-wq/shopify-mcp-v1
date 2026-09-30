@@ -364,7 +364,7 @@ class _EmojiGrid extends StatelessWidget {
                 color: e == selected ? color.withValues(alpha: 0.35) : t.glassFill,
                 border: Border.all(color: e == selected ? color : t.glassBorder, width: e == selected ? 1.8 : 0.8),
               ),
-              child: Text(e, style: const TextStyle(fontSize: 22, height: 1.1)),
+              child: Text(e, style: const TextStyle(fontSize: 22, height: 1.1, fontFamilyFallback: TogetherLook.emojiFallback)),
             ),
           ),
       ],

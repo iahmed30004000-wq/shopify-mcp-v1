@@ -647,7 +647,7 @@ class ToonRig extends HoseRig {
     final ox = i == 0 ? _hp0 : _hp1;
     final rootX = bx(ox, bodyH * 0.02), rootY = by(ox, bodyH * 0.02);
     final f = feet[i];
-    final ankleY = math.min(f.y - h * 0.045, 0.0);
+    final ankleY = math.min(f.y - (spec.shoes ? h * 0.045 : 0), 0.0);
     Hose.draw(
       b,
       rootX: rootX,

@@ -45,11 +45,15 @@ class LedgerLinkedEntryException implements Exception {
 
 /// A currency still used by wallets cannot be deleted.
 class CurrencyInUseException implements Exception {
-  const CurrencyInUseException(this.code, this.wallets);
+  const CurrencyInUseException(this.code, this.wallets, {this.elsewhere = 0});
   final String code;
   final int wallets;
+
+  /// Savings jars, debts, recurring obligations and budget items kept in
+  /// [code] (without its rate they would silently count 1:1).
+  final int elsewhere;
   @override
-  String toString() => 'CurrencyInUseException($code, $wallets wallets)';
+  String toString() => 'CurrencyInUseException($code, $wallets wallets, $elsewhere elsewhere)';
 }
 
 /// Row ↔ domain mapping.
@@ -144,6 +148,22 @@ class LedgerService {
   /// The user's weeks-per-month (see [BudgetSettings.weeksPerMonthKey]).
   Stream<num?> watchWeeksPerMonth() =>
       repos.keyValues.watchJson(BudgetSettings.weeksPerMonthKey).map((v) => v is num && v > 0 ? v : null);
+
+  /// How many savings jars, debts, recurring obligations and budget items
+  /// are kept in each currency (upper-case code → count). A currency in use
+  /// there cannot be deleted: without its rate their amounts would count 1:1.
+  Stream<Map<String, int>> watchCurrencyUseElsewhere() => db
+      .customSelect(
+        'SELECT UPPER(currency) AS code, COUNT(*) AS n FROM ('
+        'SELECT currency FROM ${db.jars.actualTableName} '
+        'UNION ALL SELECT currency FROM ${db.debts.actualTableName} '
+        'UNION ALL SELECT currency FROM ${db.obligations.actualTableName} '
+        'UNION ALL SELECT currency FROM ${db.budgetItems.actualTableName} WHERE currency IS NOT NULL'
+        ') GROUP BY UPPER(currency)',
+        readsFrom: {db.jars, db.debts, db.obligations, db.budgetItems},
+      )
+      .watch()
+      .map((rows) => {for (final r in rows) r.read<String>('code'): r.read<int>('n')});
 
   /// Whether the rates are still the generic seeded ones.
   Stream<bool> watchRatesAreDefaults() =>
@@ -455,13 +475,14 @@ class LedgerService {
   }
 
   /// Deletes an unused currency; throws [CurrencyInUseException] when
-  /// wallets use it and a [StateError] for the base currency. Returns the
+  /// wallets, jars, debts, obligations or budget items use it and a [StateError] for the base currency. Returns the
   /// undo.
   Future<LedgerUndo> deleteCurrency(String code) async {
     final current = await repos.currencies.byCode(code);
     if (current?.isBase ?? false) throw StateError('The base currency $code cannot be deleted');
     final used = await repos.wallets.count(where: (w) => w.currency.equals(code));
-    if (used > 0) throw CurrencyInUseException(code, used);
+    final elsewhere = (await watchCurrencyUseElsewhere().first)[code.toUpperCase()] ?? 0;
+    if (used > 0 || elsewhere > 0) throw CurrencyInUseException(code, used, elsewhere: elsewhere);
     final row = await repos.currencies.delete(code);
     return () async {
       if (row != null) await repos.currencies.restore(row);

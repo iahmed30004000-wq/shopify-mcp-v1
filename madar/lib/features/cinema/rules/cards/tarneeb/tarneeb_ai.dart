@@ -100,16 +100,16 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
   @override
   double get matchWinBonus => 20;
 
+  /// Estimated team tricks needed before the AI bids 13 (كبوت).
+  static const double _kabootMargin = 13.5;
+
   // ---------------------------------------------------------------- bidding
 
   TarneebMove _bid(TarneebState s, int seat, List<TarneebMove> legal, {required bool careful, math.Random? rng}) {
     final hand = s.hands[seat];
-    if (legal.contains(const TarneebMove.throwIn())) {
-      // A worthless hand: throw it in, unless (careful) the partner has
-      // already shown a strong hand by bidding.
-      final partnerBid = s.bids.any((b) => b.seat == (seat + 2) % 4 && !b.isPass);
-      if (!careful || !partnerBid) return const TarneebMove.throwIn();
-    }
+    // A worthless hand is thrown in while that is allowed (before anyone
+    // has bid); the hard AI weighs it against passing and bidding.
+    if (legal.contains(const TarneebMove.throwIn())) return const TarneebMove.throwIn();
     // With Syrian trumps the trump suit is known before the auction.
     final known = s.trump;
     var mine = known != null
@@ -133,8 +133,10 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     if (bids.isEmpty) return legal.first;
     final lowest = bids.first;
     // A bid of 13 wins 26 but a failure costs 16 and pays the defenders
-    // double: only with a clear margin.
-    if (lowest.amount == 13 && canPass && team < 13.5) return const TarneebMove.pass();
+    // double: only with a clear margin – and then at once, since a cheaper
+    // contract that takes all 13 tricks scores only 16.
+    if (careful && team >= _kabootMargin) return const TarneebMove.bid(13);
+    if (lowest.amount == 13 && canPass && team < _kabootMargin) return const TarneebMove.pass();
     // Never overbid a partner who holds the contract unless much stronger.
     if (careful && s.highBidder >= 0 && s.highBidder % 2 == seat % 2 && canPass) {
       if (target < lowest.amount! + 1) return const TarneebMove.pass();
@@ -277,15 +279,18 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     _ => TarneebMove.play(_playMedium(s, seat)),
   };
 
-  /// In the auction only pass, the cheapest bid, the heuristic bid and a
-  /// throw-in (when allowed) are compared (more worlds each).
+  /// In the auction only pass, the cheapest bid, the heuristic bid, a bid of
+  /// 13 (when the heuristic would bid at all) and a throw-in (when allowed)
+  /// are compared (more worlds each).
   @override
   List<TarneebMove> hardCandidates(TarneebState s, int seat, List<TarneebMove> legal, TarneebMove prior) {
     if (s.phase != TarneebPhase.bidding) return legal;
+    const kaboot = TarneebMove.bid(13);
     return {
       prior,
       legal.first,
       if (legal.length > 1) legal[1],
+      if (prior.kind == TarneebMoveKind.bid && legal.contains(kaboot)) kaboot,
       if (legal.contains(const TarneebMove.throwIn())) const TarneebMove.throwIn(),
     }.toList();
   }

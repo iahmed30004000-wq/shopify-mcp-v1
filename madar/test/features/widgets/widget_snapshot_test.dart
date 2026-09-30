@@ -2,9 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/domain/enums.dart' show BudgetPeriod;
+import 'package:madar/features/prayer/domain/time_zones.dart';
 import 'package:madar/features/widgets/widgets.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 void main() {
+  setUpAll(MadarTimeZones.ensure);
+
   final t0 = DateTime(2026, 9, 30, 10);
   WidgetSnapshot snapshot({List<WidgetPage>? pages}) => WidgetSnapshot(
     kind: MadarWidgetKind.meds,
@@ -64,6 +68,26 @@ void main() {
 
     test('holds nothing volatile: the same content encodes identically', () {
       expect(snapshot().encode(), snapshot().encode());
+    });
+
+    test('records the phone\'s UTC offsets, so Android can tell the time zone changed', () {
+      // Dose times, midnights and the budget's days are wall-clock texts of
+      // the zone the app built them in: once the phone's zone gives another
+      // offset for these instants, Android shows "Open Madar to refresh"
+      // (MadarWidgetRenderer.Doc.zoneMatches) instead of wrong times.
+      int phoneOffset(DateTime at) =>
+          DateTime.fromMillisecondsSinceEpoch(at.millisecondsSinceEpoch).timeZoneOffset.inMinutes;
+      final j = jsonDecode(snapshot().encode()) as Map<String, Object?>;
+      expect(j['untilOff'], phoneOffset(DateTime(2026, 10, 2)));
+      final pages = (j['pages'] as List).cast<Map<String, Object?>>();
+      expect(pages.first.containsKey('off'), isFalse, reason: 'the first page has no start');
+      expect(pages.last['off'], phoneOffset(DateTime(2026, 10, 1)));
+      // A prayer time is a TZDateTime of the location's zone: still the
+      // phone's offset at that instant (what Android's TimeZone.getDefault() gives).
+      final kiritimati = tz.TZDateTime(tz.getLocation('Pacific/Kiritimati'), 2026, 10, 1, 5);
+      expect(kiritimati.timeZoneOffset.inMinutes, 14 * 60);
+      final page = WidgetPage(from: kiritimati).toJson();
+      expect(page['off'], phoneOffset(kiritimati));
     });
 
     test('picks the last started page, like the Android provider', () {

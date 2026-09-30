@@ -151,7 +151,7 @@
     "en": "Trophies earned"
   },
   "togetherResultWon": {
-    "ar": "الفوز لـ{name}",
+    "ar": "فوز {name}",
     "en": "{name} won",
     "placeholders": {
       "name": {
@@ -457,7 +457,7 @@
     "en": "Ten Together"
   },
   "togetherTrophyMatches10Desc": {
-    "ar": "{count} مباراة معًا",
+    "ar": "{count} مباريات معًا",
     "en": "{count} matches together",
     "placeholders": {
       "count": {

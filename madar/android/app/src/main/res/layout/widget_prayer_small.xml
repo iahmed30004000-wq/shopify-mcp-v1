@@ -9,12 +9,13 @@
     android:gravity="center"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="8dp">
 
     <FrameLayout
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="4dp">
+        android:id="@+id/widget_astro_frame"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="2dp">
 
         <ImageView
             android:id="@+id/widget_astro_day"
@@ -22,8 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/widget_astro_preview" />
+            android:scaleType="fitCenter" />
 
         <ImageView
             android:id="@+id/widget_astro_night"
@@ -31,24 +31,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/widget_astro_preview" />
+            android:scaleType="fitCenter" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/widget_headline"
         style="@style/widget_text_headline"
         android:gravity="center"
-        android:textSize="18sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/widget_detail"
         style="@style/widget_text_detail"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="12sp" />
 
     <Chronometer
         android:id="@+id/widget_countdown"
         style="@style/widget_text_accent"
         android:gravity="center"
-        android:textSize="12sp" />
+        android:textSize="11sp" />
 </LinearLayout>

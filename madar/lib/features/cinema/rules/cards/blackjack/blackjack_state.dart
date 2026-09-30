@@ -404,7 +404,9 @@ class BlackjackHand {
   /// once, everything else after the dealer).
   BlackjackOutcome? outcome;
 
-  /// The hand's points in the tally (valid once [outcome] is set).
+  /// The hand's points in the tally (valid once [outcome] is set). On the
+  /// European table with `originalOnly`, after a dealer natural the first
+  /// hand holds the seat's result and the others 0 (B-61g).
   int points;
 
   int get total => blackjackTotal(cards).total;
