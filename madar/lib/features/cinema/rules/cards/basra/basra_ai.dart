@@ -89,7 +89,12 @@ class BasraAi extends HeuristicAi<BasraState, BasraMove> {
     final unseenCards = unseen(s, seat);
     return bestBy(legal, (m) {
       final cap = BasraRules.captureFor(s.table, m.card, s.options);
-      final after = cap.isCapture ? [for (final c in s.table) if (!cap.cards.contains(c)) c] : [...s.table, m.card];
+      final after = cap.isCapture
+          ? [
+              for (final c in s.table)
+                if (!cap.cards.contains(c)) c,
+            ]
+          : [...s.table, m.card];
       return gain(s, seat, m.card) - risk(s, seat, after, unseenCards) * 0.8;
     });
   }
@@ -100,7 +105,10 @@ class BasraAi extends HeuristicAi<BasraState, BasraMove> {
       // Future shuffles must not leak into the search.
       ..rng = CardRng(rng.nextInt(0x7fffffff));
     final pool = unseen(s, observer);
-    final others = [for (var i = 0; i < s.playerCount; i++) if (i != observer) i];
+    final others = [
+      for (var i = 0; i < s.playerCount; i++)
+        if (i != observer) i,
+    ];
     final counts = [for (final o in others) s.hands[o].length, s.stock.length];
     final dealt = dealConstrained(pool, counts, (h, c) => true, rng);
     for (var i = 0; i < others.length; i++) {

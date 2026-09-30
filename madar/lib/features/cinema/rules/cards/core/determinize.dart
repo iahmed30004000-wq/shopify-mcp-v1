@@ -25,7 +25,13 @@ List<List<PlayingCard>> dealConstrained(
   }
   final eligible = <PlayingCard, List<int>>{};
   for (final c in pool) {
-    eligible.putIfAbsent(c, () => [for (var h = 0; h < holders; h++) if (counts[h] > 0 && canHold(h, c)) h]);
+    eligible.putIfAbsent(
+      c,
+      () => [
+        for (var h = 0; h < holders; h++)
+          if (counts[h] > 0 && canHold(h, c)) h,
+      ],
+    );
   }
   for (var attempt = 0; attempt < 24; attempt++) {
     final cards = List.of(pool);
@@ -74,7 +80,10 @@ List<List<PlayingCard>> dealConstrained(
     left[h]--;
   }
   for (final c in rest) {
-    final h = [for (var i = 0; i < holders; i++) if (left[i] > 0) i].first;
+    final h = [
+      for (var i = 0; i < holders; i++)
+        if (left[i] > 0) i,
+    ].first;
     out[h].add(c);
     left[h]--;
   }

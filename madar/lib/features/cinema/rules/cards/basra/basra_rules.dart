@@ -23,8 +23,7 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
   const BasraRules();
 
   /// Numeral value (A = 1 … 10); faces have none.
-  static int? numeral(PlayingCard c) =>
-      c.rank == Rank.ace ? 1 : (c.rank.value <= 10 ? c.rank.value : null);
+  static int? numeral(PlayingCard c) => c.rank == Rank.ace ? 1 : (c.rank.value <= 10 ? c.rank.value : null);
 
   /// Scoring value of a captured card.
   static int cardPoints(PlayingCard c) {
@@ -182,9 +181,7 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
 
   /// Points per side for piles and basras.
   static List<int> dealPoints(BasraOptions o, List<List<PlayingCard>> piles, List<int> basras) {
-    final pts = [
-      for (var i = 0; i < piles.length; i++) piles[i].fold<int>(0, (a, c) => a + cardPoints(c)) + basras[i],
-    ];
+    final pts = [for (var i = 0; i < piles.length; i++) piles[i].fold<int>(0, (a, c) => a + cardPoints(c)) + basras[i]];
     final counts = [for (final p in piles) p.length];
     final most = counts.reduce((a, b) => a > b ? a : b);
     if (counts.where((c) => c == most).length == 1) pts[counts.indexOf(most)] += o.majorityPoints;

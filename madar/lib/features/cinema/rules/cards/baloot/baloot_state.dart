@@ -105,14 +105,11 @@ final class BalootMove extends CardMove {
   final PlayingCard? card;
 
   @override
-  Map<String, Object?> toJson() => {
-    'k': kind.name,
-    if (suit != null) 's': suit!.code,
-    if (card != null) 'c': card!.id,
-  };
+  Map<String, Object?> toJson() => {'k': kind.name, if (suit != null) 's': suit!.code, if (card != null) 'c': card!.id};
 
   @override
-  bool operator ==(Object other) => other is BalootMove && other.kind == kind && other.suit == suit && other.card == card;
+  bool operator ==(Object other) =>
+      other is BalootMove && other.kind == kind && other.suit == suit && other.card == card;
 
   @override
   int get hashCode => Object.hash(kind, suit, card);
@@ -436,12 +433,7 @@ class BalootState extends CardGameState {
   }
 
   @override
-  List<PlayingCard> cardsInPlay() => [
-    for (final h in hands) ...h,
-    ...stock,
-    ?upCard,
-    ...playedCards,
-  ];
+  List<PlayingCard> cardsInPlay() => [for (final h in hands) ...h, ...stock, ?upCard, ...playedCards];
 
   @override
   List<PlayingCard> fullDeck() => buildDeck(ranks: balootRanks);

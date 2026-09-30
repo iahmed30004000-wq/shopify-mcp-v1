@@ -52,10 +52,7 @@ void main() {
 
   group('play', () {
     test('captures go to the side pile; a basra made with the last card does not count', () {
-      final s = BasraState.custom(
-        hands: [c('5S'), c('KH'), c('2D'), c('9C')],
-        table: c('5H'),
-      );
+      final s = BasraState.custom(hands: [c('5S'), c('KH'), c('2D'), c('9C')], table: c('5H'));
       final e = BasraEngine(s);
       e.apply(BasraMove(p('5S'))); // seat 0: basra
       expect(e.state.basraScore, [10, 0]);

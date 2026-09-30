@@ -44,7 +44,10 @@ double trixContractEstimate(TrixContract c, List<PlayingCard> hand) {
       final est = (3.25 + (high - 1.25) * 1.2 - (d.length >= 5 ? 0.5 : 0) + (aces - 1) * 0.3).clamp(0.0, 13.0);
       return -10 * est;
     case TrixContract.ltoush:
-      final est = (3.25 + (aces - 1) * 0.9 + (kings - 1) * 0.6 + (queens - 1) * 0.3 - (lows - 5) * 0.2).clamp(0.0, 13.0);
+      final est = (3.25 + (aces - 1) * 0.9 + (kings - 1) * 0.6 + (queens - 1) * 0.3 - (lows - 5) * 0.2).clamp(
+        0.0,
+        13.0,
+      );
       return -15 * est;
     case TrixContract.trix:
       final jacks = hand.where((x) => x.rank == Rank.jack).length;
@@ -248,7 +251,10 @@ class TrixAi extends HeuristicAi<TrixState, TrixMove> {
     final w = s.copy()
       // Future shuffles must not leak into the search.
       ..rng = CardRng(rng.nextInt(0x7fffffff));
-    final others = [for (var i = 0; i < 4; i++) if (i != observer) i];
+    final others = [
+      for (var i = 0; i < 4; i++)
+        if (i != observer) i,
+    ];
     final seen = <PlayingCard>{...s.hands[observer], ...s.playedCards};
     // Publicly doubled cards still in hand stay with their doubler.
     final fixed = [for (var i = 0; i < 4; i++) <PlayingCard>[]];

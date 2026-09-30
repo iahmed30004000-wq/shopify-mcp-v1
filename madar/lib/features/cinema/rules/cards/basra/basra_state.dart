@@ -238,7 +238,10 @@ class BasraState extends CardGameState {
   List<int> get winners {
     if (!over) return const [];
     final best = sideScores.reduce((a, b) => a > b ? a : b);
-    return [for (var i = 0; i < playerCount; i++) if (sideScores[teamOf(i)] == best) i];
+    return [
+      for (var i = 0; i < playerCount; i++)
+        if (sideScores[teamOf(i)] == best) i,
+    ];
   }
 
   static bool isSpecial(PlayingCard c, BasraOptions o) =>

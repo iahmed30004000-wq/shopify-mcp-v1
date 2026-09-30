@@ -68,7 +68,12 @@ void main() {
     for (final k in hardKits) {
       test('${k.name}: hard (tiny budget), mixed tables', () {
         playMatch(k, 1, List.filled(4, AiLevel.hard), budget: const AiBudget.simulations(12), jsonEvery: 13);
-        playMatch(k, 2, [AiLevel.hard, AiLevel.easy, AiLevel.medium, AiLevel.easy], budget: const AiBudget.simulations(12));
+        playMatch(k, 2, [
+          AiLevel.hard,
+          AiLevel.easy,
+          AiLevel.medium,
+          AiLevel.easy,
+        ], budget: const AiBudget.simulations(12));
       });
     }
   });

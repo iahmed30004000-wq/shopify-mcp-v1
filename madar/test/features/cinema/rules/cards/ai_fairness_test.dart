@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/rules/cards/cards.dart';
+import 'package:madar/features/cinema/rules/cards/core/determinize.dart';
 
 void main() {
   for (final id in CardGameId.values) {
@@ -19,7 +20,10 @@ void main() {
           final real = e.state;
           final other = ai.determinize(real, seat, CardRng(move));
           // Same own hand and public view, different hidden cards.
-          expect(jsonEncode(cardsToJson(sortedCards(other.cardsInPlay()))), jsonEncode(cardsToJson(sortedCards(real.cardsInPlay()))));
+          expect(
+            jsonEncode(cardsToJson(sortedCards(other.cardsInPlay()))),
+            jsonEncode(cardsToJson(sortedCards(real.cardsInPlay()))),
+          );
           for (final level in [AiLevel.medium, AiLevel.hard]) {
             final a = ai.chooseMove(real, seat, level, CardRng(9), const AiBudget.simulations(10));
             final b = ai.chooseMove(other, seat, level, CardRng(9), const AiBudget.simulations(10));
@@ -62,21 +66,23 @@ void main() {
       expect(w.hands[2].any((c) => c.suit == Suit.hearts), isFalse);
     }
     // Rummy: a card taken from the discard pile stays with its taker.
+    final rummyHands = [
+      PlayingCard.list('2C 3C'),
+      PlayingCard.list('KD KH 5S'),
+      PlayingCard.list('4D'),
+      PlayingCard.list('9S'),
+    ];
     final r = RummyState.custom(
       options: const RummyOptions.hand(),
-      hands: [
-        PlayingCard.list('2C 3C'),
-        PlayingCard.list('KD KH 5S'),
-        PlayingCard.list('4D'),
-        PlayingCard.list('9S'),
-      ],
-      stock: PlayingCard.list('7H 8H 9H 2D 3D'),
+      hands: rummyHands,
+      stock: cardsMinus(buildDeck(copies: 2, jokers: 4), [for (final h in rummyHands) ...h]),
     )..known[1] = PlayingCard.list('KD');
     for (var i = 0; i < 10; i++) {
       final w = const RummyAi().determinize(r, 0, CardRng(i));
       expect(w.hands[1], contains(PlayingCard.parse('KD')));
+      expect(w.hands.map((h) => h.length), [2, 3, 1, 1]);
       expect(w.hands[0], r.hands[0]);
-      expect(w.stock.length, 5);
+      expect(w.stock.length, r.stock.length);
     }
   });
 }

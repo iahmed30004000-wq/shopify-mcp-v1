@@ -83,8 +83,9 @@ final class PlayingCard implements Comparable<PlayingCard> {
   );
 
   /// Parses a whitespace-separated list of ids: `'AS KD 7H'`.
-  static List<PlayingCard> list(String ids) =>
-      [for (final id in ids.split(RegExp(r'\s+')).where((s) => s.isNotEmpty)) PlayingCard.parse(id)];
+  static List<PlayingCard> list(String ids) => [
+    for (final id in ids.split(RegExp(r'\s+')).where((s) => s.isNotEmpty)) PlayingCard.parse(id),
+  ];
 
   final int code;
 

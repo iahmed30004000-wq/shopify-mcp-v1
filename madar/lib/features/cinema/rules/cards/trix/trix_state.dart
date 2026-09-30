@@ -213,7 +213,11 @@ class TrixState extends CardGameState {
   }
 
   /// A match whose first deal is [hands] (tests / puzzles).
-  factory TrixState.withHands(List<List<PlayingCard>> hands, {TrixOptions options = const TrixOptions(), int seed = 0}) {
+  factory TrixState.withHands(
+    List<List<PlayingCard>> hands, {
+    TrixOptions options = const TrixOptions(),
+    int seed = 0,
+  }) {
     final s = TrixState._empty(options, CardRng(seed));
     s.startDeal([for (final h in hands) List.of(h)]);
     return s;
@@ -256,9 +260,7 @@ class TrixState extends CardGameState {
     hands: handsFromJson(j['hands']),
     contract: j['contract'] == null ? null : TrixContract.values.byName(j['contract']! as String),
     turn: j['turn']! as int,
-    doubled: {
-      for (final d in j['doubled']! as List) PlayingCard.parse((d as List)[0] as String): d[1] as int,
-    },
+    doubled: {for (final d in j['doubled']! as List) PlayingCard.parse((d as List)[0] as String): d[1] as int},
     doublingAnswers: j['doublingAnswers']! as int,
     trick: j['trick'] == null ? null : Trick.fromJson((j['trick']! as Map).cast<String, Object?>()),
     tricks: [for (final t in j['tricks']! as List) Trick.fromJson((t as Map).cast<String, Object?>())],
@@ -340,7 +342,10 @@ class TrixState extends CardGameState {
     if (!isOver) return const [];
     final sc = scores;
     final best = sc.reduce((a, b) => a > b ? a : b);
-    return [for (var i = 0; i < 4; i++) if (sc[i] == best) i];
+    return [
+      for (var i = 0; i < 4; i++)
+        if (sc[i] == best) i,
+    ];
   }
 
   /// Deals played in the match so far.

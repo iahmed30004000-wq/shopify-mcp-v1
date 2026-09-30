@@ -92,7 +92,9 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     for (final r in [Rank.ace, Rank.ten, Rank.king, Rank.queen, Rank.jack]) {
       final four = [for (final s in Suit.values) PlayingCard(s, r)];
       if (four.every(hand.contains)) {
-        final type = r == Rank.ace && mode == BalootMode.sun ? BalootProjectType.fourHundred : BalootProjectType.hundred;
+        final type = r == Rank.ace && mode == BalootMode.sun
+            ? BalootProjectType.fourHundred
+            : BalootProjectType.hundred;
         candidates.add(BalootProject(type, seat, four));
       }
     }
@@ -105,9 +107,7 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
           final type = len == 3
               ? BalootProjectType.sira
               : (len == 4 ? BalootProjectType.fifty : BalootProjectType.hundred);
-          candidates.add(
-            BalootProject(type, seat, [for (var k = 0; k < len; k++) ranksByIndex[start + k]!]),
-          );
+          candidates.add(BalootProject(type, seat, [for (var k = 0; k < len; k++) ranksByIndex[start + k]!]));
         }
       }
     }

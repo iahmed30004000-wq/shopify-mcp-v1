@@ -42,18 +42,14 @@ class RummyOptions {
   }) : assert(players >= 2 && players <= 4);
 
   /// Hand (هاند) as played in Jordan: see RULES.md.
-  const RummyOptions.hand({
-    int players = 4,
-    int rounds = 5,
-    int openingThreshold = 51,
-    int jokerPenalty = 25,
-  }) : this(
-         variant: RummyVariant.hand,
-         players: players,
-         rounds: rounds,
-         openingThreshold: openingThreshold,
-         jokerPenalty: jokerPenalty,
-       );
+  const RummyOptions.hand({int players = 4, int rounds = 5, int openingThreshold = 51, int jokerPenalty = 25})
+    : this(
+        variant: RummyVariant.hand,
+        players: players,
+        rounds: rounds,
+        openingThreshold: openingThreshold,
+        jokerPenalty: jokerPenalty,
+      );
 
   /// Konkan (كونكان) as played in Jordan: see RULES.md.
   const RummyOptions.konkan({
@@ -183,8 +179,7 @@ final class RummyMove extends CardMove {
   const RummyMove.layoff(PlayingCard card, int target) : this._(RummyMoveKind.layoff, card: card, target: target);
 
   /// Puts [card] in place of the joker of table meld [target] and takes it.
-  const RummyMove.swapJoker(PlayingCard card, int target)
-    : this._(RummyMoveKind.swapJoker, card: card, target: target);
+  const RummyMove.swapJoker(PlayingCard card, int target) : this._(RummyMoveKind.swapJoker, card: card, target: target);
 
   const RummyMove.discard(PlayingCard card) : this._(RummyMoveKind.discard, card: card);
 
@@ -220,7 +215,11 @@ final class RummyMove extends CardMove {
 
   @override
   bool operator ==(Object other) =>
-      other is RummyMove && other.kind == kind && other.card == card && other.target == target && other._meldKey == _meldKey;
+      other is RummyMove &&
+      other.kind == kind &&
+      other.card == card &&
+      other.target == target &&
+      other._meldKey == _meldKey;
 
   @override
   int get hashCode => Object.hash(kind, card, target, _meldKey);
@@ -401,7 +400,10 @@ class RummyState extends CardGameState {
   List<int> get winners {
     if (!over) return const [];
     final best = seatScores.reduce((a, b) => a < b ? a : b);
-    return [for (var i = 0; i < playerCount; i++) if (seatScores[i] == best) i];
+    return [
+      for (var i = 0; i < playerCount; i++)
+        if (seatScores[i] == best) i,
+    ];
   }
 
   int get roundsPlayed => results.length;

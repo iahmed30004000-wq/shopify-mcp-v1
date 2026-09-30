@@ -328,7 +328,8 @@ final class FallingBlocksGame extends PuzzleBase<FallingState, FallingAction> {
 
   final FallingConfig config;
   FallingState _pieceStart;
-  double _clock = 0;
+  double _elapsed = 0;
+  int _played = 0;
 
   @override
   PuzzleKind get kind => PuzzleKind.fallingBlocks;
@@ -383,10 +384,12 @@ final class FallingBlocksGame extends PuzzleBase<FallingState, FallingAction> {
   /// Runs gravity for [seconds] of real time at 60 frames per second;
   /// returns the frames played.
   int advance(double seconds) {
-    _clock += seconds;
+    _elapsed += seconds;
+    final target = (_elapsed * 60 + 1e-6).floor();
     var n = 0;
-    while (_clock >= 1 / 60 && !isOver) {
-      _clock -= 1 / 60;
+    while (_played < target) {
+      _played++;
+      if (isOver) continue;
       apply(FallingAction.tick);
       n++;
     }
@@ -461,8 +464,8 @@ final class FallingBlocksGame extends PuzzleBase<FallingState, FallingAction> {
         var st = s.copyWith(frames: s.frames + 1);
         var piece = p;
         var g = st.gravity + 1 / (secondsPerRow(st.level) * 60);
-        while (g >= 1) {
-          g -= 1;
+        while (g >= 1 - 1e-9) {
+          g = g - 1 < 0 ? 0 : g - 1;
           final q = piece.moved(0, 1);
           if (!fits(well, q)) {
             g = 0;

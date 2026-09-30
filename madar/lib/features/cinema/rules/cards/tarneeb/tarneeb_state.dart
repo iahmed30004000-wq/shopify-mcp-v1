@@ -272,9 +272,7 @@ class TarneebState extends CardGameState {
     hands: handsFromJson(j['hands']),
     turn: j['turn']! as int,
     passed: (j['passed']! as List).cast<bool>().toList(),
-    bids: [
-      for (final b in j['bids']! as List) TarneebBid((b as List)[0] as int, b[1] as int),
-    ],
+    bids: [for (final b in j['bids']! as List) TarneebBid((b as List)[0] as int, b[1] as int)],
     highBid: j['highBid']! as int,
     highBidder: j['highBidder']! as int,
     consecutivePasses: j['consecutivePasses']! as int,
@@ -283,9 +281,7 @@ class TarneebState extends CardGameState {
     tricks: [for (final t in j['tricks']! as List) Trick.fromJson((t as Map).cast<String, Object?>())],
     tricksWon: (j['tricksWon']! as List).cast<int>().toList(),
     teamScores: (j['teamScores']! as List).cast<int>().toList(),
-    results: [
-      for (final r in j['results']! as List) TarneebRoundResult.fromJson((r as Map).cast<String, Object?>()),
-    ],
+    results: [for (final r in j['results']! as List) TarneebRoundResult.fromJson((r as Map).cast<String, Object?>())],
     winnerTeam: j['winnerTeam'] as int?,
   );
 

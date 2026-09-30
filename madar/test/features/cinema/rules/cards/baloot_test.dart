@@ -205,9 +205,7 @@ void main() {
       // except 7S.
       expect(e.legalMoves(3).map((m) => m.card), unorderedEquals(c('TS AS QS KS')));
 
-      final relaxed = BalootEngine(
-        playing(hands, options: const BalootOptions(mustTrumpWhenPartnerWinning: false)),
-      );
+      final relaxed = BalootEngine(playing(hands, options: const BalootOptions(mustTrumpWhenPartnerWinning: false)));
       relaxed.apply(BalootMove.play(p('AD')));
       relaxed.apply(BalootMove.play(p('7D')));
       // Partner (seat 0) is winning: seat 2 may play anything.

@@ -16,4 +16,13 @@ List<PlayingCard> buildDeck({int copies = 1, int jokers = 0, Iterable<Rank>? ran
 }
 
 /// The 32-card pack (7..A) used by Baloot.
-final List<Rank> balootRanks = [Rank.seven, Rank.eight, Rank.nine, Rank.ten, Rank.jack, Rank.queen, Rank.king, Rank.ace];
+final List<Rank> balootRanks = [
+  Rank.seven,
+  Rank.eight,
+  Rank.nine,
+  Rank.ten,
+  Rank.jack,
+  Rank.queen,
+  Rank.king,
+  Rank.ace,
+];

@@ -29,10 +29,7 @@ class TarneebRules extends CardRules<TarneebState, TarneebMove> {
     switch (s.phase) {
       case TarneebPhase.bidding:
         final lo = s.highBid + 1 > s.options.minBid ? s.highBid + 1 : s.options.minBid;
-        return [
-          if (!dealerMustBid(s)) const TarneebMove.pass(),
-          for (var b = lo; b <= 13; b++) TarneebMove.bid(b),
-        ];
+        return [if (!dealerMustBid(s)) const TarneebMove.pass(), for (var b = lo; b <= 13; b++) TarneebMove.bid(b)];
       case TarneebPhase.trump:
         return [for (final suit in Suit.values) TarneebMove.trump(suit)];
       case TarneebPhase.playing:
@@ -90,7 +87,10 @@ class TarneebRules extends CardRules<TarneebState, TarneebMove> {
   void _advanceAuction(TarneebState s, List<CardEvent>? ev) {
     if (s.highBid == 13) return _endAuction(s);
     if (s.options.passIsFinal) {
-      final active = [for (var i = 0; i < 4; i++) if (!s.passed[i]) i];
+      final active = [
+        for (var i = 0; i < 4; i++)
+          if (!s.passed[i]) i,
+      ];
       if (s.highBidder >= 0 && active.length == 1) return _endAuction(s);
       if (active.isEmpty) return _allPassed(s, ev);
       var next = (s.turn + 1) % 4;

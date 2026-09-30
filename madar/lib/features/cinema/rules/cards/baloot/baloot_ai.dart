@@ -135,8 +135,7 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
     final partnerWinning = trick.seats[winIdx] % 2 == seat % 2;
     final last = trick.length == 3;
     final partnerSafe =
-        partnerWinning &&
-        (last || (isMaster(winCard) && (winCard.suit == trump || !opponentsMayRuff(led))));
+        partnerWinning && (last || (isMaster(winCard) && (winCard.suit == trump || !opponentsMayRuff(led))));
     if (partnerSafe) {
       // Feed the partner points without wasting masters.
       final feed = legal.where((c) => !isMaster(c) || pts(c) >= 10).toList();
@@ -192,7 +191,10 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
     final w = s.copy()
       // Future shuffles must not leak into the search.
       ..rng = CardRng(rng.nextInt(0x7fffffff));
-    final others = [for (var i = 0; i < 4; i++) if (i != observer) i];
+    final others = [
+      for (var i = 0; i < 4; i++)
+        if (i != observer) i,
+    ];
     final seen = <PlayingCard>{...s.hands[observer], ...s.playedCards, ?s.upCard};
     // Publicly known cards in other hands: the taken up-card and revealed
     // projects.
@@ -216,7 +218,12 @@ class BalootAi extends HeuristicAi<BalootState, BalootMove> {
     ];
     final voids = voidsFromTricks([...s.tricks, if (s.trick != null) s.trick!], 4);
     final counts = [for (final o in others) s.hands[o].length - fixed[o].length, s.stock.length];
-    final dealt = dealConstrained(pool, counts, (h, c) => h == others.length || !voids[others[h]].contains(c.suit), rng);
+    final dealt = dealConstrained(
+      pool,
+      counts,
+      (h, c) => h == others.length || !voids[others[h]].contains(c.suit),
+      rng,
+    );
     for (var i = 0; i < others.length; i++) {
       w.hands[others[i]] = [...fixed[others[i]], ...dealt[i]]..sort();
     }

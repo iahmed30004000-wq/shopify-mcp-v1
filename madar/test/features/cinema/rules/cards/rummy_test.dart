@@ -152,10 +152,7 @@ void main() {
 
     test('going out: −30 for the winner, cards left for the opened, 100 for the closed', () {
       final e = RummyEngine(
-        state(
-          hands: [c('9C'), c('KD 5C'), c('2D 3D'), c('X0 AS')],
-          opened: [true, true, false, true],
-        ),
+        state(hands: [c('9C'), c('KD 5C'), c('2D 3D'), c('X0 AS')], opened: [true, true, false, true]),
       );
       e.apply(RummyMove.discard(p('9C')));
       final r = e.state.results.single;
@@ -194,7 +191,12 @@ void main() {
 
     test('an empty stock is refilled from the discards; then the round is abandoned', () {
       final e = RummyEngine(
-        state(hands: [c('9C 8D'), c('2D'), c('3S'), c('4H')], stock: [], discardPile: c('2C 3D 4S'), phase: RummyPhase.draw),
+        state(
+          hands: [c('9C 8D'), c('2D'), c('3S'), c('4H')],
+          stock: [],
+          discardPile: c('2C 3D 4S'),
+          phase: RummyPhase.draw,
+        ),
       );
       e.apply(const RummyMove.drawStock());
       expect(e.state.recycles, 1);
@@ -202,8 +204,12 @@ void main() {
       expect(e.state.stock.length, 1);
       expect(e.state.hands[0].length, 3);
 
-      final s = state(hands: [c('9C 8D'), c('2D'), c('3S'), c('4H')], stock: [], discardPile: c('2C 3D 4S'), phase: RummyPhase.draw)
-        ..recycles = 2;
+      final s = state(
+        hands: [c('9C 8D'), c('2D'), c('3S'), c('4H')],
+        stock: [],
+        discardPile: c('2C 3D 4S'),
+        phase: RummyPhase.draw,
+      )..recycles = 2;
       final f = RummyEngine(s);
       f.apply(const RummyMove.drawStock());
       expect(f.state.results.single.winner, isNull);

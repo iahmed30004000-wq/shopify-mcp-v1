@@ -73,9 +73,10 @@ class RummyAi extends HeuristicAi<RummyState, RummyMove> {
       return ms.isEmpty ? null : bestBy<RummyMove>(ms, score);
     }
 
-    final open = pick(RummyMoveKind.open, (m) => m.meldCards.length * 100 + MeldPlan([
-      for (final cs in m.melds) Meld.arrange(cs)!,
-    ]).value);
+    final open = pick(
+      RummyMoveKind.open,
+      (m) => m.meldCards.length * 100 + MeldPlan([for (final cs in m.melds) Meld.arrange(cs)!]).value,
+    );
     if (open != null) return open;
     final meld = pick(
       RummyMoveKind.meld,
@@ -111,7 +112,9 @@ class RummyAi extends HeuristicAi<RummyState, RummyMove> {
   @override
   RummyMove mediumMove(RummyState s, int seat, List<RummyMove> legal, math.Random rng) {
     if (s.phase == RummyPhase.draw) {
-      return legal.contains(const RummyMove.takeDiscard()) ? const RummyMove.takeDiscard() : const RummyMove.drawStock();
+      return legal.contains(const RummyMove.takeDiscard())
+          ? const RummyMove.takeDiscard()
+          : const RummyMove.drawStock();
     }
     return _play(s, seat, legal, careful: true);
   }
@@ -158,7 +161,10 @@ class RummyAi extends HeuristicAi<RummyState, RummyMove> {
     final w = s.copy()
       // Future shuffles must not leak into the search.
       ..rng = CardRng(rng.nextInt(0x7fffffff));
-    final others = [for (var i = 0; i < s.playerCount; i++) if (i != observer) i];
+    final others = [
+      for (var i = 0; i < s.playerCount; i++)
+        if (i != observer) i,
+    ];
     final seen = [
       ...s.hands[observer],
       ...s.discardPile,

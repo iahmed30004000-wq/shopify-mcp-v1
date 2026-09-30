@@ -135,10 +135,8 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
 
   // ------------------------------------------------------------------ play
 
-  PlayingCard _lowest(Iterable<PlayingCard> cards, Suit? trump) => bestBy(
-    cards,
-    (c) => -(c.rank.value + (c.suit == trump ? 20 : 0)),
-  );
+  PlayingCard _lowest(Iterable<PlayingCard> cards, Suit? trump) =>
+      bestBy(cards, (c) => -(c.rank.value + (c.suit == trump ? 20 : 0)));
 
   PlayingCard _playMedium(TarneebState s, int seat) {
     final mem = _Memory(s, seat);
@@ -284,7 +282,10 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
       for (final c in s.fullDeck())
         if (!seen.contains(c)) c,
     ];
-    final others = [for (var i = 0; i < 4; i++) if (i != observer) i];
+    final others = [
+      for (var i = 0; i < 4; i++)
+        if (i != observer) i,
+    ];
     final voids = voidsFromTricks([...s.tricks, if (s.trick != null) s.trick!], 4);
     final dealt = dealConstrained(
       pool,

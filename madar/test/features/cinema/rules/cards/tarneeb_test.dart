@@ -18,10 +18,7 @@ void main() {
     test('first bidder is the dealer\'s right; bids must rise; 7..13', () {
       final e = TarneebEngine(TarneebState.withHands(suitsDeal()));
       expect(e.currentPlayer, 0);
-      expect(e.legalMoves(0), [
-        const TarneebMove.pass(),
-        for (var b = 7; b <= 13; b++) TarneebMove.bid(b),
-      ]);
+      expect(e.legalMoves(0), [const TarneebMove.pass(), for (var b = 7; b <= 13; b++) TarneebMove.bid(b)]);
       e.apply(const TarneebMove.bid(8));
       expect(e.currentPlayer, 1);
       expect(e.legalMoves(1).where((m) => m.kind == TarneebMoveKind.bid).first, const TarneebMove.bid(9));
@@ -74,9 +71,7 @@ void main() {
     });
 
     test('non-final passes: the auction ends after three passes in a row', () {
-      final e = TarneebEngine(
-        TarneebState.withHands(suitsDeal(), options: const TarneebOptions(passIsFinal: false)),
-      );
+      final e = TarneebEngine(TarneebState.withHands(suitsDeal(), options: const TarneebOptions(passIsFinal: false)));
       e.apply(const TarneebMove.pass()); // 0
       e.apply(const TarneebMove.bid(7)); // 1
       e.apply(const TarneebMove.pass()); // 2

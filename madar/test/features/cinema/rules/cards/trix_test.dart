@@ -63,7 +63,10 @@ void main() {
       expect(e.state.phase, TrixPhase.doubling);
       expect(e.legalMoves(0), [TrixMove.double(const [])]);
       e.apply(TrixMove.double(const []));
-      expect(e.legalMoves(1), [TrixMove.double(const []), TrixMove.double([p('KH')])]);
+      expect(e.legalMoves(1), [
+        TrixMove.double(const []),
+        TrixMove.double([p('KH')]),
+      ]);
       e.apply(TrixMove.double([p('KH')]));
       e.apply(TrixMove.double(const []));
       e.apply(TrixMove.double(const []));
@@ -138,12 +141,7 @@ void main() {
       final s = scored(TrixContract.ltoush)..tricksTaken = [5, 4, 3, 1];
       expect(TrixRules.dealPoints(s), [-75, -60, -45, -15]);
       final q = scored(TrixContract.queens)
-        ..taken = [
-          c('QS QH'),
-          c('QD'),
-          <PlayingCard>[],
-          c('QC'),
-        ]
+        ..taken = [c('QS QH'), c('QD'), <PlayingCard>[], c('QC')]
         ..doubled = {p('QS'): 2, p('QC'): 3};
       // Seat 0: Q♠ doubled by seat 2 (−50, seat 2 +25) and Q♥ (−25).
       // Seat 3 took its own doubled Q♣: −50, no bonus.
@@ -152,12 +150,7 @@ void main() {
 
     test('complex adds everything: Q♦ counts as a queen and a diamond', () {
       final s = scored(TrixContract.complex)
-        ..taken = [
-          c('KH QD 2D'),
-          <PlayingCard>[],
-          c('QS'),
-          <PlayingCard>[],
-        ]
+        ..taken = [c('KH QD 2D'), <PlayingCard>[], c('QS'), <PlayingCard>[]]
         ..tricksTaken = [2, 0, 1, 0];
       expect(TrixRules.dealPoints(s), [-75 - 25 - 20 - 30, 0, -25 - 15, 0]);
     });
