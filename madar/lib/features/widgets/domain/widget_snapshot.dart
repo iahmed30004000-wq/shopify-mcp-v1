@@ -241,10 +241,7 @@ class WidgetSnapshot {
   }
 
   /// Image keys the pages use.
-  Set<String> get imageKeys => {
-    for (final p in pages)
-      if (p.image case final i?) i,
-  };
+  Set<String> get imageKeys => {for (final p in pages) ?p.image};
 
   Map<String, Object?> toJson() => {
     'v': version,

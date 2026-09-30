@@ -213,12 +213,7 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
   /// Scores a deal: card points, most cards (a unique maximum only, plus
   /// [carry] carried points) and basras. On a tie the most-cards points are
   /// lost, or carried over with [BasraMajorityTie.carryOver].
-  static BasraDealScore scoreDeal(
-    BasraOptions o,
-    List<List<PlayingCard>> piles,
-    List<int> basras, {
-    int carry = 0,
-  }) {
+  static BasraDealScore scoreDeal(BasraOptions o, List<List<PlayingCard>> piles, List<int> basras, {int carry = 0}) {
     final pts = [for (var i = 0; i < piles.length; i++) piles[i].fold<int>(0, (a, c) => a + cardPoints(c)) + basras[i]];
     final counts = [for (final p in piles) p.length];
     final most = counts.reduce((a, b) => a > b ? a : b);

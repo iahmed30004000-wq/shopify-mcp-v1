@@ -173,7 +173,10 @@ void main() {
         final s = BasraState.newMatch(seed: seed);
         expect(s.table.any((x) => x.rank == Rank.jack || x == sevenOfDiamonds), isFalse, reason: 'seed $seed');
         // With an ordinary 7♦ only jacks are reburied.
-        final n = BasraState.newMatch(seed: seed, options: const BasraOptions(sevenDiamonds: BasraSevenDiamonds.normal));
+        final n = BasraState.newMatch(
+          seed: seed,
+          options: const BasraOptions(sevenDiamonds: BasraSevenDiamonds.normal),
+        );
         expect(n.table.any((x) => x.rank == Rank.jack), isFalse);
         sevenSeen |= n.table.contains(sevenOfDiamonds);
       }
@@ -319,10 +322,10 @@ void main() {
     });
 
     test('A4.8 the captured cards and the capturing card go to the side pile (shared by partners)', () {
-      final e = playOut(
-        BasraState.custom(hands: [c('5S 9H'), c('KH 9D'), c('KD 9S'), c('9C TS')], table: c('5H KC')),
-        ['5S', 'KH'],
-      );
+      final e = playOut(BasraState.custom(hands: [c('5S 9H'), c('KH 9D'), c('KD 9S'), c('9C TS')], table: c('5H KC')), [
+        '5S',
+        'KH',
+      ]);
       expect(sortedCards(e.state.piles[0]), sortedCards(c('5H 5S')));
       expect(sortedCards(e.state.piles[1]), sortedCards(c('KC KH')));
       e.apply(BasraMove(p('9S'))); // seat 2 (partner of 0): nothing
@@ -330,10 +333,10 @@ void main() {
     });
 
     test('E12 a 7♦ left on the table is taken by a 7: basra 14', () {
-      final e = playOut(
-        BasraState.custom(hands: [c('7D 9H'), c('7C 9D'), c('KD 8S'), c('8C TS')], table: []),
-        ['7D', '7C'],
-      );
+      final e = playOut(BasraState.custom(hands: [c('7D 9H'), c('7C 9D'), c('KD 8S'), c('8C TS')], table: []), [
+        '7D',
+        '7C',
+      ]);
       expect(e.state.basraScore, [0, 14]);
     });
 
@@ -416,20 +419,24 @@ void main() {
         expect(e.state.results.single.basras, [0, allowed ? 12 : 0]);
       }
       // No basra at all: 5 takes 2 + 3 only.
-      final e = playOut(
-        BasraState.custom(hands: [c('2S'), c('KH'), c('3D'), c('5C')], table: c('4H')),
-        ['2S', 'KH', '3D', '5C'],
-      );
+      final e = playOut(BasraState.custom(hands: [c('2S'), c('KH'), c('3D'), c('5C')], table: c('4H')), [
+        '2S',
+        'KH',
+        '3D',
+        '5C',
+      ]);
       expect(e.state.results.single.basras, [0, 0]);
     });
   });
 
   group('end of deal and scoring (A6, A7, §5)', () {
     test('A6.1 leftovers go to the side that captured last, never as a basra', () {
-      final e = playOut(
-        BasraState.custom(hands: [c('5S'), c('KH'), c('2D'), c('9C')], table: c('5H')),
-        ['5S', 'KH', '2D', '9C'],
-      );
+      final e = playOut(BasraState.custom(hands: [c('5S'), c('KH'), c('2D'), c('9C')], table: c('5H')), [
+        '5S',
+        'KH',
+        '2D',
+        '9C',
+      ]);
       final r = e.state.results.single;
       expect(r.cardCounts, [5, 0]);
       // Basra 10 (a 5 on a lone 5) + most cards 3.
@@ -438,10 +445,12 @@ void main() {
     });
 
     test('A6.2 nobody captured: the table goes to the dealer\'s side', () {
-      final e = playOut(
-        BasraState.custom(hands: [c('5S'), c('KH'), c('2D'), c('9C')], table: c('3H'), dealer: 3),
-        ['5S', 'KH', '2D', '9C'],
-      );
+      final e = playOut(BasraState.custom(hands: [c('5S'), c('KH'), c('2D'), c('9C')], table: c('3H'), dealer: 3), [
+        '5S',
+        'KH',
+        '2D',
+        '9C',
+      ]);
       expect(e.state.results.single.cardCounts, [0, 5]);
     });
 
@@ -529,11 +538,10 @@ void main() {
     test('three players: most cards is individual', () {
       final s = BasraRules.scoreDeal(const BasraOptions(players: 3), [c('2H 3H 4H'), c('5H'), c('6H 7H')], [0, 0, 0]);
       expect(s.points, [3, 0, 0]);
-      expect(BasraRules.scoreDeal(const BasraOptions(players: 3), [c('2H 3H'), c('5H'), c('6H 7H')], [0, 0, 0]).points, [
-        0,
-        0,
-        0,
-      ]);
+      expect(
+        BasraRules.scoreDeal(const BasraOptions(players: 3), [c('2H 3H'), c('5H'), c('6H 7H')], [0, 0, 0]).points,
+        [0, 0, 0],
+      );
     });
   });
 

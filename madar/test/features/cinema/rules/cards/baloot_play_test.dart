@@ -12,12 +12,8 @@ import 'support.dart';
 List<PlayingCard> c(String ids) => PlayingCard.list(ids);
 PlayingCard p(String id) => PlayingCard.parse(id);
 
-Kit balootKit(String name, BalootOptions o) => Kit(
-  name,
-  (seed) => BalootEngine.newMatch(seed: seed, options: o),
-  BalootEngine.fromJson,
-  const BalootAi(),
-);
+Kit balootKit(String name, BalootOptions o) =>
+    Kit(name, (seed) => BalootEngine.newMatch(seed: seed, options: o), BalootEngine.fromJson, const BalootAi());
 
 final variants = <String, BalootOptions>{
   'jordan': const BalootOptions(),
@@ -55,10 +51,7 @@ final variants = <String, BalootOptions>{
   ),
 };
 
-BalootOptions shortMatch(BalootOptions o, int target) => BalootOptions.fromJson({
-  ...o.toJson(),
-  'targetScore': target,
-});
+BalootOptions shortMatch(BalootOptions o, int target) => BalootOptions.fromJson({...o.toJson(), 'targetScore': target});
 
 void main() {
   group('self-play, every variant', () {
@@ -260,10 +253,7 @@ void main() {
   });
 
   group('the AI never peeks', () {
-    for (final v in {
-      'jordan': variants['jordan']!,
-      'every option on': variants['every option on']!,
-    }.entries) {
+    for (final v in {'jordan': variants['jordan']!, 'every option on': variants['every option on']!}.entries) {
       test('${v.key}: decisions depend only on what the seat can see', () {
         const ai = BalootAi();
         final e = BalootEngine.newMatch(seed: 5, options: v.value);

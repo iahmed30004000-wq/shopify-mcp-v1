@@ -187,10 +187,12 @@ void main() {
 
     test('option manual declaration: declare or skip before the first card; skipped projects do not count', () {
       const o = BalootOptions(declareProjects: BalootDeclareProjects.manual);
-      final s = at(
-        ['7H 8H 9H JS 9S AS 7C 8C', 'TS KS QS 9C TH 7D 8D JD', '8S 7S JH QH KH AH TC JC', 'QD KD AD TD JD QC KC AC'],
-        options: o,
-      )..projectsDecided = List.filled(4, false);
+      final s = at([
+        '7H 8H 9H JS 9S AS 7C 8C',
+        'TS KS QS 9C TH 7D 8D JD',
+        '8S 7S JH QH KH AH TC JC',
+        'QD KD AD TD JD QC KC AC',
+      ], options: o)..projectsDecided = List.filled(4, false);
       final e = BalootEngine(s);
       // Seat 0 holds a sira: it must decide first.
       expect(e.legalMoves(0), const [BalootMove.declareProjects(), BalootMove.skipProjects()]);
@@ -417,9 +419,12 @@ void main() {
     });
 
     test('Ekka: the lead is announced on the card-played event; an Ace is always one', () {
-      final s = at(['KD AC 7H', '7D 8D 8C', '9D 9C TH', 'QD TC JH'], done: [
-        Trick(0, seats: [0, 1, 2, 3], cards: c('AD TD 7S 8S')),
-      ]);
+      final s = at(
+        ['KD AC 7H', '7D 8D 8C', '9D 9C TH', 'QD TC JH'],
+        done: [
+          Trick(0, seats: [0, 1, 2, 3], cards: c('AD TD 7S 8S')),
+        ],
+      );
       final e = BalootEngine(s);
       final events = e.apply(BalootMove.play(p('KD')));
       expect(events.first.detail, 'ekka');

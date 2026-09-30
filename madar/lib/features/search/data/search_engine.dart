@@ -46,7 +46,7 @@ class SearchEngine {
     DateTime Function()? clock,
     this.debounce = const Duration(milliseconds: 350),
     this.maxDelay = const Duration(milliseconds: 1500),
-    this.applyChunk = 1000,
+    this.applyChunk = 500,
     this.liveTimeout = const Duration(seconds: 3),
     this.workerTimeout = const Duration(seconds: 4),
     this.applyTimeout = const Duration(seconds: 30),
@@ -148,7 +148,11 @@ class SearchEngine {
         return;
       }
       _worker = worker;
+      // Frames in between: starting the isolate and making the write-up
+      // context (language data) each take a moment on this isolate.
+      await _breathe();
       _ctx = await _contextFactory();
+      await _breathe();
       await _loadPlanetWeights();
       _tableSub = _db.tableUpdates(TableUpdateQuery.any()).listen((updates) {
         final tables = {for (final u in updates) u.table};
@@ -173,6 +177,9 @@ class SearchEngine {
           await _load(s);
         }
         await _readmit(always: true);
+        // One throwaway query readies the query path on the worker, so the
+        // user's first keystroke answers as fast as the rest.
+        await _worker?.search(const SearchIndexQuery('ا a', limit: 1)).timeout(workerTimeout);
       });
       await _drain();
       if (!_disposed) status.value = SearchEngineStatus.ready;

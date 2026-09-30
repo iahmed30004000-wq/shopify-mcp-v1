@@ -32775,6 +32775,1026 @@ abstract class L10n {
   /// **'فتح الرابط'**
   String get aiChatLinkOpen;
 
+  /// Together Mode home title
+  ///
+  /// In ar, this message translates to:
+  /// **'معًا'**
+  String get togetherTitle;
+
+  /// No description provided for @togetherHallOfFame.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعة مجدنا'**
+  String get togetherHallOfFame;
+
+  /// Generic default player name; number is already formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'اللاعب {number}'**
+  String togetherPlayerDefault(String number);
+
+  /// No description provided for @togetherVs.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضد'**
+  String get togetherVs;
+
+  /// No description provided for @togetherEditProfile.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل ملف {name}'**
+  String togetherEditProfile(String name);
+
+  /// No description provided for @togetherSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات اللعب معًا'**
+  String get togetherSettingsTitle;
+
+  /// No description provided for @togetherPlayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللاعبان'**
+  String get togetherPlayers;
+
+  /// No description provided for @togetherWinsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتصارات'**
+  String get togetherWinsLabel;
+
+  /// No description provided for @togetherLeads.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الصدارة: {name} بفارق {diff}'**
+  String togetherLeads(String name, String diff);
+
+  /// No description provided for @togetherAllSquare.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعادل تام بينكما'**
+  String get togetherAllSquare;
+
+  /// No description provided for @togetherDrawsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا تعادلات} =1{تعادل واحد} =2{تعادلان} few{{count} تعادلات} many{{count} تعادلًا} other{{count} تعادل}}'**
+  String togetherDrawsCount(int count);
+
+  /// No description provided for @togetherMatchesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا مباريات} =1{مباراة واحدة} =2{مباراتان} few{{count} مباريات} many{{count} مباراة} other{{count} مباراة}}'**
+  String togetherMatchesCount(int count);
+
+  /// No description provided for @togetherDaysCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أيام} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String togetherDaysCount(int count);
+
+  /// No description provided for @togetherDayStreakLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام اللعب المتتالية'**
+  String get togetherDayStreakLabel;
+
+  /// No description provided for @togetherWinStreakLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سلسلة الانتصارات'**
+  String get togetherWinStreakLabel;
+
+  /// No description provided for @togetherCoopLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتصارات مشتركة'**
+  String get togetherCoopLabel;
+
+  /// No description provided for @togetherPlayedToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبتما اليوم'**
+  String get togetherPlayedToday;
+
+  /// No description provided for @togetherPlayTodayHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'العبا اليوم لتستمر السلسلة'**
+  String get togetherPlayTodayHint;
+
+  /// No description provided for @togetherNoStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا سلسلة الآن'**
+  String get togetherNoStreak;
+
+  /// No description provided for @togetherSeeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get togetherSeeAll;
+
+  /// No description provided for @togetherHeadToHead.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجهًا لوجه'**
+  String get togetherHeadToHead;
+
+  /// No description provided for @togetherRecentMatches.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر المباريات'**
+  String get togetherRecentMatches;
+
+  /// No description provided for @togetherEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مباريات بعد'**
+  String get togetherEmptyTitle;
+
+  /// No description provided for @togetherEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'العبا أول لعبة معًا — كل مباراة تُسجَّل هنا مع السلاسل والجوائز.'**
+  String get togetherEmptyBody;
+
+  /// No description provided for @togetherShelfEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول جائزة بانتظاركما'**
+  String get togetherShelfEmpty;
+
+  /// No description provided for @togetherTrophiesProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'{earned} من {total}'**
+  String togetherTrophiesProgress(String earned, String total);
+
+  /// No description provided for @togetherTrophiesEarned.
+  ///
+  /// In ar, this message translates to:
+  /// **'جوائز محصودة'**
+  String get togetherTrophiesEarned;
+
+  /// No description provided for @togetherResultWon.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفوز لـ{name}'**
+  String togetherResultWon(String name);
+
+  /// No description provided for @togetherResultDraw.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعادل'**
+  String get togetherResultDraw;
+
+  /// No description provided for @togetherResultTeamWon.
+  ///
+  /// In ar, this message translates to:
+  /// **'فزتما معًا'**
+  String get togetherResultTeamWon;
+
+  /// No description provided for @togetherResultTeamLost.
+  ///
+  /// In ar, this message translates to:
+  /// **'خسرتما معًا'**
+  String get togetherResultTeamLost;
+
+  /// No description provided for @togetherBestScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفضل نتيجة: {score}'**
+  String togetherBestScore(String score);
+
+  /// No description provided for @togetherModePassAndPlay.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرير الهاتف'**
+  String get togetherModePassAndPlay;
+
+  /// No description provided for @togetherModePassAndPlayBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتف واحد بالتناوب، وشاشة تسليم تخفي الأوراق والإجابات'**
+  String get togetherModePassAndPlayBody;
+
+  /// No description provided for @togetherModeSplitScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاشة مقسومة'**
+  String get togetherModeSplitScreen;
+
+  /// No description provided for @togetherModeSplitScreenBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتف واحد، لكلٍّ نصفه، ولمسٌ متعدد في آنٍ واحد'**
+  String get togetherModeSplitScreenBody;
+
+  /// No description provided for @togetherModeNearby.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتفان متجاوران'**
+  String get togetherModeNearby;
+
+  /// No description provided for @togetherModeNearbyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلوتوث وواي فاي مباشر — بلا إنترنت ولا خوادم'**
+  String get togetherModeNearbyBody;
+
+  /// No description provided for @togetherModeOnline.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتفان عبر الإنترنت'**
+  String get togetherModeOnline;
+
+  /// No description provided for @togetherModeOnlineBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'من مكانين مختلفين — مطفأ افتراضيًا'**
+  String get togetherModeOnlineBody;
+
+  /// No description provided for @togetherComingSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبًا'**
+  String get togetherComingSoon;
+
+  /// No description provided for @togetherModeUnsupported.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير متاح لهذه اللعبة'**
+  String get togetherModeUnsupported;
+
+  /// No description provided for @togetherModeDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطفأ في الإعدادات'**
+  String get togetherModeDisabled;
+
+  /// No description provided for @togetherOnlyGameState.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ينتقل بين الهاتفين إلا حالة اللعبة — الصحة والمال وبياناتكما الشخصية لا تغادر الجهاز.'**
+  String get togetherOnlyGameState;
+
+  /// No description provided for @togetherLaunchSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف ستلعبان؟'**
+  String get togetherLaunchSubtitle;
+
+  /// No description provided for @togetherWhoStarts.
+  ///
+  /// In ar, this message translates to:
+  /// **'من يبدأ؟'**
+  String get togetherWhoStarts;
+
+  /// No description provided for @togetherRandomStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرعة'**
+  String get togetherRandomStart;
+
+  /// No description provided for @togetherStartGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'هيا نلعب'**
+  String get togetherStartGame;
+
+  /// No description provided for @togetherSplitLayout.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب الشاشة'**
+  String get togetherSplitLayout;
+
+  /// No description provided for @togetherLayoutFaceToFace.
+  ///
+  /// In ar, this message translates to:
+  /// **'متقابلان'**
+  String get togetherLayoutFaceToFace;
+
+  /// No description provided for @togetherLayoutSideBySide.
+  ///
+  /// In ar, this message translates to:
+  /// **'جنبًا إلى جنب'**
+  String get togetherLayoutSideBySide;
+
+  /// No description provided for @togetherLayoutEndToEnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'طرفًا لطرف'**
+  String get togetherLayoutEndToEnd;
+
+  /// Followed by the player's name on its own line
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّر الهاتف إلى'**
+  String get togetherPassTo;
+
+  /// No description provided for @togetherPassToName.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّر الهاتف إلى {name}'**
+  String togetherPassToName(String name);
+
+  /// No description provided for @togetherHandOffHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعلومات الخاصة مخفية حتى يكشفها صاحبها'**
+  String get togetherHandOffHint;
+
+  /// No description provided for @togetherNoPeeking.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تلصّص!'**
+  String get togetherNoPeeking;
+
+  /// No description provided for @togetherReveal.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنا {name} — اكشف'**
+  String togetherReveal(String name);
+
+  /// No description provided for @togetherStillYou.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل ما زلت {name}؟'**
+  String togetherStillYou(String name);
+
+  /// No description provided for @togetherShieldHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخفيت الشاشة عند مغادرة التطبيق'**
+  String get togetherShieldHint;
+
+  /// No description provided for @togetherContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get togetherContinue;
+
+  /// No description provided for @togetherLastMove.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر حركة: {move}'**
+  String togetherLastMove(String move);
+
+  /// No description provided for @togetherPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get togetherPause;
+
+  /// No description provided for @togetherYourSide.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهة {name}'**
+  String togetherYourSide(String name);
+
+  /// No description provided for @togetherProfileTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف اللاعب'**
+  String get togetherProfileTitle;
+
+  /// No description provided for @togetherFieldName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get togetherFieldName;
+
+  /// No description provided for @togetherFieldTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللقب'**
+  String get togetherFieldTitle;
+
+  /// No description provided for @togetherTitleNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا لقب'**
+  String get togetherTitleNone;
+
+  /// No description provided for @togetherTitleCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'لقب خاص'**
+  String get togetherTitleCustom;
+
+  /// No description provided for @togetherTitleCustomHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب لقبًا'**
+  String get togetherTitleCustomHint;
+
+  /// No description provided for @togetherFieldAvatar.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصورة الرمزية'**
+  String get togetherFieldAvatar;
+
+  /// No description provided for @togetherAvatarConstellation.
+  ///
+  /// In ar, this message translates to:
+  /// **'شعار'**
+  String get togetherAvatarConstellation;
+
+  /// No description provided for @togetherAvatarEmoji.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز'**
+  String get togetherAvatarEmoji;
+
+  /// No description provided for @togetherAvatarInitials.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحرف الأول'**
+  String get togetherAvatarInitials;
+
+  /// No description provided for @togetherAvatarShuffle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شكل آخر'**
+  String get togetherAvatarShuffle;
+
+  /// No description provided for @togetherAvatarOption.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشكل {number}'**
+  String togetherAvatarOption(String number);
+
+  /// No description provided for @togetherFieldColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get togetherFieldColor;
+
+  /// No description provided for @togetherColorTaken.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون {name}'**
+  String togetherColorTaken(String name);
+
+  /// No description provided for @togetherSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get togetherSave;
+
+  /// No description provided for @togetherCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get togetherCancel;
+
+  /// No description provided for @togetherTitleStrategist.
+  ///
+  /// In ar, this message translates to:
+  /// **'العقل المدبّر'**
+  String get togetherTitleStrategist;
+
+  /// No description provided for @togetherTitleCardShark.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجم الورق'**
+  String get togetherTitleCardShark;
+
+  /// No description provided for @togetherTitleLuckyStar.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجم الحظ'**
+  String get togetherTitleLuckyStar;
+
+  /// No description provided for @togetherTitleChallenger.
+  ///
+  /// In ar, this message translates to:
+  /// **'روح التحدّي'**
+  String get togetherTitleChallenger;
+
+  /// No description provided for @togetherTitleGrandmaster.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسطورة الرقعة'**
+  String get togetherTitleGrandmaster;
+
+  /// No description provided for @togetherTitleQuizWhiz.
+  ///
+  /// In ar, this message translates to:
+  /// **'موسوعة الأسئلة'**
+  String get togetherTitleQuizWhiz;
+
+  /// No description provided for @togetherTitleComebackKing.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة القوية'**
+  String get togetherTitleComebackKing;
+
+  /// No description provided for @togetherTitleLightning.
+  ///
+  /// In ar, this message translates to:
+  /// **'البرق الخاطف'**
+  String get togetherTitleLightning;
+
+  /// No description provided for @togetherTitlePeacemaker.
+  ///
+  /// In ar, this message translates to:
+  /// **'حمامة السلام'**
+  String get togetherTitlePeacemaker;
+
+  /// No description provided for @togetherTitleDreamer.
+  ///
+  /// In ar, this message translates to:
+  /// **'روح حالمة'**
+  String get togetherTitleDreamer;
+
+  /// No description provided for @togetherTrophyFirstMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'البداية'**
+  String get togetherTrophyFirstMatch;
+
+  /// No description provided for @togetherTrophyFirstMatchDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول مباراة معًا'**
+  String get togetherTrophyFirstMatchDesc;
+
+  /// No description provided for @togetherTrophyMatches10.
+  ///
+  /// In ar, this message translates to:
+  /// **'عشر مباريات'**
+  String get togetherTrophyMatches10;
+
+  /// No description provided for @togetherTrophyMatches10Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} مباراة معًا'**
+  String togetherTrophyMatches10Desc(String count);
+
+  /// No description provided for @togetherTrophyMatches50.
+  ///
+  /// In ar, this message translates to:
+  /// **'نصف المئة'**
+  String get togetherTrophyMatches50;
+
+  /// No description provided for @togetherTrophyMatches50Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} مباراة معًا'**
+  String togetherTrophyMatches50Desc(String count);
+
+  /// No description provided for @togetherTrophyMatches100.
+  ///
+  /// In ar, this message translates to:
+  /// **'نادي المئة'**
+  String get togetherTrophyMatches100;
+
+  /// No description provided for @togetherTrophyMatches100Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} مباراة معًا'**
+  String togetherTrophyMatches100Desc(String count);
+
+  /// No description provided for @togetherTrophyMatches250.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفيقا الدرب'**
+  String get togetherTrophyMatches250;
+
+  /// No description provided for @togetherTrophyMatches250Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} مباراة معًا'**
+  String togetherTrophyMatches250Desc(String count);
+
+  /// No description provided for @togetherTrophyDayStreak3.
+  ///
+  /// In ar, this message translates to:
+  /// **'شعلة صغيرة'**
+  String get togetherTrophyDayStreak3;
+
+  /// No description provided for @togetherTrophyDayStreak3Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبتما {count} أيام متتالية'**
+  String togetherTrophyDayStreak3Desc(String count);
+
+  /// No description provided for @togetherTrophyDayStreak7.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوع كامل'**
+  String get togetherTrophyDayStreak7;
+
+  /// No description provided for @togetherTrophyDayStreak7Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبتما {count} أيام متتالية'**
+  String togetherTrophyDayStreak7Desc(String count);
+
+  /// No description provided for @togetherTrophyDayStreak30.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهر من الوفاء'**
+  String get togetherTrophyDayStreak30;
+
+  /// No description provided for @togetherTrophyDayStreak30Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبتما {count} يومًا متتاليًا'**
+  String togetherTrophyDayStreak30Desc(String count);
+
+  /// No description provided for @togetherTrophyWinStreak3.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتريك'**
+  String get togetherTrophyWinStreak3;
+
+  /// No description provided for @togetherTrophyWinStreak3Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} انتصارات متتالية'**
+  String togetherTrophyWinStreak3Desc(String count);
+
+  /// No description provided for @togetherTrophyWinStreak5.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُوقَف'**
+  String get togetherTrophyWinStreak5;
+
+  /// No description provided for @togetherTrophyWinStreak5Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} انتصارات متتالية'**
+  String togetherTrophyWinStreak5Desc(String count);
+
+  /// No description provided for @togetherTrophyWinStreak10.
+  ///
+  /// In ar, this message translates to:
+  /// **'سلسلة أسطورية'**
+  String get togetherTrophyWinStreak10;
+
+  /// No description provided for @togetherTrophyWinStreak10Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} انتصارات متتالية'**
+  String togetherTrophyWinStreak10Desc(String count);
+
+  /// No description provided for @togetherTrophyExplorer5.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستكشفان'**
+  String get togetherTrophyExplorer5;
+
+  /// No description provided for @togetherTrophyExplorer5Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّبتما {count} ألعاب مختلفة'**
+  String togetherTrophyExplorer5Desc(String count);
+
+  /// No description provided for @togetherTrophyExplorer10.
+  ///
+  /// In ar, this message translates to:
+  /// **'رحّالة الألعاب'**
+  String get togetherTrophyExplorer10;
+
+  /// No description provided for @togetherTrophyExplorer10Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّبتما {count} ألعاب مختلفة'**
+  String togetherTrophyExplorer10Desc(String count);
+
+  /// No description provided for @togetherTrophyCoopWins5.
+  ///
+  /// In ar, this message translates to:
+  /// **'فريق الأحلام'**
+  String get togetherTrophyCoopWins5;
+
+  /// No description provided for @togetherTrophyCoopWins5Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} انتصارات مشتركة'**
+  String togetherTrophyCoopWins5Desc(String count);
+
+  /// No description provided for @togetherTrophyCoopWins25.
+  ///
+  /// In ar, this message translates to:
+  /// **'قلب واحد'**
+  String get togetherTrophyCoopWins25;
+
+  /// No description provided for @togetherTrophyCoopWins25Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} انتصارًا مشتركًا'**
+  String togetherTrophyCoopWins25Desc(String count);
+
+  /// No description provided for @togetherTrophyMarathon.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماراثون'**
+  String get togetherTrophyMarathon;
+
+  /// No description provided for @togetherTrophyMarathonDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} مباريات في يوم واحد'**
+  String togetherTrophyMarathonDesc(String count);
+
+  /// No description provided for @togetherTrophyPhotoFinish.
+  ///
+  /// In ar, this message translates to:
+  /// **'كتفًا بكتف'**
+  String get togetherTrophyPhotoFinish;
+
+  /// No description provided for @togetherTrophyPhotoFinishDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول تعادل بينكما'**
+  String get togetherTrophyPhotoFinishDesc;
+
+  /// No description provided for @togetherTrophyNailBiter.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الحافة'**
+  String get togetherTrophyNailBiter;
+
+  /// No description provided for @togetherTrophyNailBiterDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'فوز بفارق نقطة واحدة'**
+  String get togetherTrophyNailBiterDesc;
+
+  /// No description provided for @togetherTrophyPerfectBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'توازن مثالي'**
+  String get togetherTrophyPerfectBalance;
+
+  /// No description provided for @togetherTrophyPerfectBalanceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتصارات متساوية بعد {count} مباراة على الأقل'**
+  String togetherTrophyPerfectBalanceDesc(String count);
+
+  /// No description provided for @togetherTrophyGameMaster.
+  ///
+  /// In ar, this message translates to:
+  /// **'خبرة لا تُضاهى'**
+  String get togetherTrophyGameMaster;
+
+  /// No description provided for @togetherTrophyGameMasterDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} انتصارات في {game}'**
+  String togetherTrophyGameMasterDesc(String count, String game);
+
+  /// No description provided for @togetherTierBronze.
+  ///
+  /// In ar, this message translates to:
+  /// **'برونزية'**
+  String get togetherTierBronze;
+
+  /// No description provided for @togetherTierSilver.
+  ///
+  /// In ar, this message translates to:
+  /// **'فضية'**
+  String get togetherTierSilver;
+
+  /// No description provided for @togetherTierGold.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذهبية'**
+  String get togetherTierGold;
+
+  /// No description provided for @togetherTierLegendary.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسطورية'**
+  String get togetherTierLegendary;
+
+  /// No description provided for @togetherEarnedOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُصدت في {date}'**
+  String togetherEarnedOn(String date);
+
+  /// No description provided for @togetherLocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُحصد بعد'**
+  String get togetherLocked;
+
+  /// No description provided for @togetherTrophyShared.
+  ///
+  /// In ar, this message translates to:
+  /// **'لكما معًا'**
+  String get togetherTrophyShared;
+
+  /// No description provided for @togetherTrophyHolder.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصدها {name}'**
+  String togetherTrophyHolder(String name);
+
+  /// No description provided for @togetherNewTrophies.
+  ///
+  /// In ar, this message translates to:
+  /// **'جديد في قاعة مجدنا!'**
+  String get togetherNewTrophies;
+
+  /// No description provided for @togetherProgressOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'{current} / {target}'**
+  String togetherProgressOf(String current, String target);
+
+  /// No description provided for @togetherGameTarneeb.
+  ///
+  /// In ar, this message translates to:
+  /// **'طرنيب'**
+  String get togetherGameTarneeb;
+
+  /// No description provided for @togetherGameTrix.
+  ///
+  /// In ar, this message translates to:
+  /// **'تركس'**
+  String get togetherGameTrix;
+
+  /// No description provided for @togetherGameBasra.
+  ///
+  /// In ar, this message translates to:
+  /// **'باصرة'**
+  String get togetherGameBasra;
+
+  /// No description provided for @togetherGameKonkan.
+  ///
+  /// In ar, this message translates to:
+  /// **'كونكان'**
+  String get togetherGameKonkan;
+
+  /// No description provided for @togetherGameBackgammon.
+  ///
+  /// In ar, this message translates to:
+  /// **'طاولة الزهر'**
+  String get togetherGameBackgammon;
+
+  /// No description provided for @togetherGameChess.
+  ///
+  /// In ar, this message translates to:
+  /// **'شطرنج'**
+  String get togetherGameChess;
+
+  /// No description provided for @togetherGameDominoes.
+  ///
+  /// In ar, this message translates to:
+  /// **'دومينو'**
+  String get togetherGameDominoes;
+
+  /// No description provided for @togetherGameLudo.
+  ///
+  /// In ar, this message translates to:
+  /// **'لودو'**
+  String get togetherGameLudo;
+
+  /// No description provided for @togetherGameFourInARow.
+  ///
+  /// In ar, this message translates to:
+  /// **'أربعة في صف'**
+  String get togetherGameFourInARow;
+
+  /// No description provided for @togetherGameWordDuel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبارزة الكلمات'**
+  String get togetherGameWordDuel;
+
+  /// No description provided for @togetherGameQuizDuel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحدّي الأسئلة الإسلامية'**
+  String get togetherGameQuizDuel;
+
+  /// No description provided for @togetherGameDrawGuess.
+  ///
+  /// In ar, this message translates to:
+  /// **'ارسم وخمّن'**
+  String get togetherGameDrawGuess;
+
+  /// No description provided for @togetherGameMiniGolf.
+  ///
+  /// In ar, this message translates to:
+  /// **'جولف مصغّر'**
+  String get togetherGameMiniGolf;
+
+  /// No description provided for @togetherGameKnowMe.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تعرفني جيدًا؟'**
+  String get togetherGameKnowMe;
+
+  /// No description provided for @togetherGameAirHockey.
+  ///
+  /// In ar, this message translates to:
+  /// **'هوكي الطاولة'**
+  String get togetherGameAirHockey;
+
+  /// No description provided for @togetherGameBeachVolley.
+  ///
+  /// In ar, this message translates to:
+  /// **'كرة الشاطئ الثنائية'**
+  String get togetherGameBeachVolley;
+
+  /// No description provided for @togetherGameKartDash.
+  ///
+  /// In ar, this message translates to:
+  /// **'سباق الكارت'**
+  String get togetherGameKartDash;
+
+  /// No description provided for @togetherGameSnowballFight.
+  ///
+  /// In ar, this message translates to:
+  /// **'معركة كرات الثلج'**
+  String get togetherGameSnowballFight;
+
+  /// No description provided for @togetherGamePaddleDuel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبارزة المضارب'**
+  String get togetherGamePaddleDuel;
+
+  /// No description provided for @togetherGameTankDuel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبارزة الدبابات'**
+  String get togetherGameTankDuel;
+
+  /// No description provided for @togetherGameMetropolisCoop.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدينة الآلات معًا'**
+  String get togetherGameMetropolisCoop;
+
+  /// No description provided for @togetherGameUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبة'**
+  String get togetherGameUnknown;
+
+  /// No description provided for @togetherSettingsDefaultMode.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة اللعب الافتراضية'**
+  String get togetherSettingsDefaultMode;
+
+  /// No description provided for @togetherSettingsDefaultModeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُقترح في بداية كل لعبة، ويمكن تغييرها وقتها'**
+  String get togetherSettingsDefaultModeHint;
+
+  /// No description provided for @togetherSettingsOnline.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللعب عبر الإنترنت'**
+  String get togetherSettingsOnline;
+
+  /// No description provided for @togetherSettingsOnlineHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطفأ افتراضيًا. عند تفعيله لا تنتقل إلا حالة اللعبة.'**
+  String get togetherSettingsOnlineHint;
+
+  /// No description provided for @togetherSettingsPrivacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء من التطبيقات الأخيرة'**
+  String get togetherSettingsPrivacy;
+
+  /// No description provided for @togetherSettingsPrivacyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أثناء الأدوار الخاصة لا تظهر الشاشة في المصغّرات ولقطات الشاشة'**
+  String get togetherSettingsPrivacyHint;
+
+  /// No description provided for @togetherResetRecords.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح السجل والجوائز'**
+  String get togetherResetRecords;
+
+  /// No description provided for @togetherResetDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُسح السجل والجوائز'**
+  String get togetherResetDone;
+
+  /// No description provided for @togetherTapToEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط للتعديل'**
+  String get togetherTapToEdit;
+
   /// Home-screen widget: the next prayer (widget title and its name in settings)
   ///
   /// In ar, this message translates to:

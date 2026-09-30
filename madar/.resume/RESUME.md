@@ -26,13 +26,15 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Money integration + review | routing, app, settings, orbit planet, money/hub, a9_money_hub.json | RUNNING (phase5_integrate.js, wf_ad90daa6-564) |
 | Work, Family, Travel, Growth, Body, Custom Modules builders | lib/features/{work,family,travel,growth,body,custom_modules} | built + verified; integration NOT started |
 | Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
-| Jordanian rules (owner confirmed "Jordan") + new Solitaire, Blackjack | cinema/rules/cards/**, cinema/rules/board/** | RUNNING (wf_94413da5-0be cards, wf_a8c19eb3-b9e board); specs in scratchpad/jordan_rules/ |
+| Jordanian rules: board (dama, tawla ×3, dominoes, ludo) | cinema/rules/board/** | DONE (561 tests); open detail questions in board/RULES.md §9.2 |
+| Jordanian rules: cards + new Solitaire, Blackjack | cinema/rules/cards/** | RUNNING (wf_94413da5-0be); specs in scratchpad/jordan_rules/ |
+| CI dependency probe (webview_flutter, nearby_connections, firebase_*) | pubspec only | pushed 008ccec (Phase 4 tree + deps); if green, add the same deps to the main pubspec |
 | Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
 | AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | built + security-reviewed (163 tests); needs routes /ai, /ai/chats, /settings/ai, AskAi entries, AiKeyStore.deleteAll() in delete-all-data |
 | Together Mode core + couple specials | lib/features/together, e1_together.json | RUNNING (wf_ab7dcc7b-712) |
 | Home-screen widgets | lib/features/widgets, android .../widgets, res widget_*, e2_widgets.json | RUNNING (wf_54ac8044-8f2) |
-| Global search | lib/features/search, d2_search.json | built (report in scratchpad/phase9_packages.md); two-lens review RUNNING (wf_182fdfeb-068); needs route + opener + launcher |
+| Global search | lib/features/search, d2_search.json | built + reviewed (26 findings fixed, 183 tests); needs route + opener + launcher |
 | Notification center | lib/features/notification_center, d3_notifications.json | built + safety-reviewed (24 fixes, 138 tests); needs wiring per scratchpad/phase9_packages.md (gate inside Suspending wrapper, meds background gate, AdhanEventHub.withholds, AppServices watch, reserve ids 160000–160999) |
 
 ## Owner decisions

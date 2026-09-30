@@ -20646,6 +20646,619 @@ class L10nEn extends L10n {
   String get aiChatLinkOpen => 'Open link';
 
   @override
+  String get togetherTitle => 'Together';
+
+  @override
+  String get togetherHallOfFame => 'Our Hall of Fame';
+
+  @override
+  String togetherPlayerDefault(String number) {
+    return 'Player $number';
+  }
+
+  @override
+  String get togetherVs => 'vs';
+
+  @override
+  String togetherEditProfile(String name) {
+    return 'Edit $name\'s profile';
+  }
+
+  @override
+  String get togetherSettingsTitle => 'Together settings';
+
+  @override
+  String get togetherPlayers => 'Players';
+
+  @override
+  String get togetherWinsLabel => 'Wins';
+
+  @override
+  String togetherLeads(String name, String diff) {
+    return '$name leads by $diff';
+  }
+
+  @override
+  String get togetherAllSquare => 'All square';
+
+  @override
+  String togetherDrawsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count draws',
+      one: '1 draw',
+      zero: 'No draws',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherMatchesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count matches',
+      one: '1 match',
+      zero: 'No matches',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherDaysCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+      zero: '0 days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get togetherDayStreakLabel => 'Days in a row';
+
+  @override
+  String get togetherWinStreakLabel => 'Win streak';
+
+  @override
+  String get togetherCoopLabel => 'Team wins';
+
+  @override
+  String get togetherPlayedToday => 'Played today';
+
+  @override
+  String get togetherPlayTodayHint => 'Play today to keep it going';
+
+  @override
+  String get togetherNoStreak => 'No streak yet';
+
+  @override
+  String get togetherSeeAll => 'See all';
+
+  @override
+  String get togetherHeadToHead => 'Head to head';
+
+  @override
+  String get togetherRecentMatches => 'Recent matches';
+
+  @override
+  String get togetherEmptyTitle => 'No matches yet';
+
+  @override
+  String get togetherEmptyBody =>
+      'Play your first game together — every match lands here, with streaks and trophies.';
+
+  @override
+  String get togetherShelfEmpty => 'Your first trophy is waiting';
+
+  @override
+  String togetherTrophiesProgress(String earned, String total) {
+    return '$earned of $total';
+  }
+
+  @override
+  String get togetherTrophiesEarned => 'Trophies earned';
+
+  @override
+  String togetherResultWon(String name) {
+    return '$name won';
+  }
+
+  @override
+  String get togetherResultDraw => 'Draw';
+
+  @override
+  String get togetherResultTeamWon => 'Won together';
+
+  @override
+  String get togetherResultTeamLost => 'Lost together';
+
+  @override
+  String togetherBestScore(String score) {
+    return 'Best: $score';
+  }
+
+  @override
+  String get togetherModePassAndPlay => 'Pass & play';
+
+  @override
+  String get togetherModePassAndPlayBody =>
+      'One phone taking turns — a hand-off screen hides cards and answers';
+
+  @override
+  String get togetherModeSplitScreen => 'Split screen';
+
+  @override
+  String get togetherModeSplitScreenBody =>
+      'One phone, a half each, both touching at once';
+
+  @override
+  String get togetherModeNearby => 'Two phones nearby';
+
+  @override
+  String get togetherModeNearbyBody =>
+      'Bluetooth & Wi-Fi Direct — no internet, no servers';
+
+  @override
+  String get togetherModeOnline => 'Two phones online';
+
+  @override
+  String get togetherModeOnlineBody => 'From different places — off by default';
+
+  @override
+  String get togetherComingSoon => 'Coming soon';
+
+  @override
+  String get togetherModeUnsupported => 'Not in this game';
+
+  @override
+  String get togetherModeDisabled => 'Off in settings';
+
+  @override
+  String get togetherOnlyGameState =>
+      'Only game state ever travels between phones — health, money and personal data never leave the device.';
+
+  @override
+  String get togetherLaunchSubtitle => 'How will you play?';
+
+  @override
+  String get togetherWhoStarts => 'Who starts?';
+
+  @override
+  String get togetherRandomStart => 'Random';
+
+  @override
+  String get togetherStartGame => 'Let\'s play';
+
+  @override
+  String get togetherSplitLayout => 'Screen layout';
+
+  @override
+  String get togetherLayoutFaceToFace => 'Face to face';
+
+  @override
+  String get togetherLayoutSideBySide => 'Side by side';
+
+  @override
+  String get togetherLayoutEndToEnd => 'End to end';
+
+  @override
+  String get togetherPassTo => 'Pass the phone to';
+
+  @override
+  String togetherPassToName(String name) {
+    return 'Pass the phone to $name';
+  }
+
+  @override
+  String get togetherHandOffHint =>
+      'Private info stays hidden until its owner reveals it';
+
+  @override
+  String get togetherNoPeeking => 'No peeking!';
+
+  @override
+  String togetherReveal(String name) {
+    return 'I\'m $name — reveal';
+  }
+
+  @override
+  String togetherStillYou(String name) {
+    return 'Still you, $name?';
+  }
+
+  @override
+  String get togetherShieldHint =>
+      'The screen was hidden when you left the app';
+
+  @override
+  String get togetherContinue => 'Continue';
+
+  @override
+  String togetherLastMove(String move) {
+    return 'Last move: $move';
+  }
+
+  @override
+  String get togetherPause => 'Pause';
+
+  @override
+  String togetherYourSide(String name) {
+    return '$name\'s side';
+  }
+
+  @override
+  String get togetherProfileTitle => 'Player profile';
+
+  @override
+  String get togetherFieldName => 'Name';
+
+  @override
+  String get togetherFieldTitle => 'Title';
+
+  @override
+  String get togetherTitleNone => 'No title';
+
+  @override
+  String get togetherTitleCustom => 'Custom';
+
+  @override
+  String get togetherTitleCustomHint => 'Type a title';
+
+  @override
+  String get togetherFieldAvatar => 'Avatar';
+
+  @override
+  String get togetherAvatarConstellation => 'Emblem';
+
+  @override
+  String get togetherAvatarEmoji => 'Emoji';
+
+  @override
+  String get togetherAvatarInitials => 'Initial';
+
+  @override
+  String get togetherAvatarShuffle => 'Shuffle';
+
+  @override
+  String togetherAvatarOption(String number) {
+    return 'Design $number';
+  }
+
+  @override
+  String get togetherFieldColor => 'Colour';
+
+  @override
+  String togetherColorTaken(String name) {
+    return '$name\'s colour';
+  }
+
+  @override
+  String get togetherSave => 'Save';
+
+  @override
+  String get togetherCancel => 'Cancel';
+
+  @override
+  String get togetherTitleStrategist => 'The Mastermind';
+
+  @override
+  String get togetherTitleCardShark => 'Card Star';
+
+  @override
+  String get togetherTitleLuckyStar => 'Lucky Star';
+
+  @override
+  String get togetherTitleChallenger => 'The Challenger';
+
+  @override
+  String get togetherTitleGrandmaster => 'Board Legend';
+
+  @override
+  String get togetherTitleQuizWhiz => 'Quiz Whiz';
+
+  @override
+  String get togetherTitleComebackKing => 'Comeback Kid';
+
+  @override
+  String get togetherTitleLightning => 'Lightning';
+
+  @override
+  String get togetherTitlePeacemaker => 'Peacemaker';
+
+  @override
+  String get togetherTitleDreamer => 'Dreamer';
+
+  @override
+  String get togetherTrophyFirstMatch => 'First Match';
+
+  @override
+  String get togetherTrophyFirstMatchDesc => 'Your first match together';
+
+  @override
+  String get togetherTrophyMatches10 => 'Ten Together';
+
+  @override
+  String togetherTrophyMatches10Desc(String count) {
+    return '$count matches together';
+  }
+
+  @override
+  String get togetherTrophyMatches50 => 'Fifty Strong';
+
+  @override
+  String togetherTrophyMatches50Desc(String count) {
+    return '$count matches together';
+  }
+
+  @override
+  String get togetherTrophyMatches100 => 'Century Club';
+
+  @override
+  String togetherTrophyMatches100Desc(String count) {
+    return '$count matches together';
+  }
+
+  @override
+  String get togetherTrophyMatches250 => 'Partners for Life';
+
+  @override
+  String togetherTrophyMatches250Desc(String count) {
+    return '$count matches together';
+  }
+
+  @override
+  String get togetherTrophyDayStreak3 => 'Little Flame';
+
+  @override
+  String togetherTrophyDayStreak3Desc(String count) {
+    return 'Played together $count days in a row';
+  }
+
+  @override
+  String get togetherTrophyDayStreak7 => 'Full Week';
+
+  @override
+  String togetherTrophyDayStreak7Desc(String count) {
+    return 'Played together $count days in a row';
+  }
+
+  @override
+  String get togetherTrophyDayStreak30 => 'A Month Strong';
+
+  @override
+  String togetherTrophyDayStreak30Desc(String count) {
+    return 'Played together $count days in a row';
+  }
+
+  @override
+  String get togetherTrophyWinStreak3 => 'Hat-trick';
+
+  @override
+  String togetherTrophyWinStreak3Desc(String count) {
+    return '$count wins in a row';
+  }
+
+  @override
+  String get togetherTrophyWinStreak5 => 'Unstoppable';
+
+  @override
+  String togetherTrophyWinStreak5Desc(String count) {
+    return '$count wins in a row';
+  }
+
+  @override
+  String get togetherTrophyWinStreak10 => 'Legendary Run';
+
+  @override
+  String togetherTrophyWinStreak10Desc(String count) {
+    return '$count wins in a row';
+  }
+
+  @override
+  String get togetherTrophyExplorer5 => 'Explorers';
+
+  @override
+  String togetherTrophyExplorer5Desc(String count) {
+    return 'Played $count different games';
+  }
+
+  @override
+  String get togetherTrophyExplorer10 => 'Game Voyagers';
+
+  @override
+  String togetherTrophyExplorer10Desc(String count) {
+    return 'Played $count different games';
+  }
+
+  @override
+  String get togetherTrophyCoopWins5 => 'Dream Team';
+
+  @override
+  String togetherTrophyCoopWins5Desc(String count) {
+    return '$count wins as a team';
+  }
+
+  @override
+  String get togetherTrophyCoopWins25 => 'One Heart';
+
+  @override
+  String togetherTrophyCoopWins25Desc(String count) {
+    return '$count wins as a team';
+  }
+
+  @override
+  String get togetherTrophyMarathon => 'Marathon';
+
+  @override
+  String togetherTrophyMarathonDesc(String count) {
+    return '$count matches in one day';
+  }
+
+  @override
+  String get togetherTrophyPhotoFinish => 'Neck and Neck';
+
+  @override
+  String get togetherTrophyPhotoFinishDesc => 'Your first draw';
+
+  @override
+  String get togetherTrophyNailBiter => 'Nail-biter';
+
+  @override
+  String get togetherTrophyNailBiterDesc => 'Won by a single point';
+
+  @override
+  String get togetherTrophyPerfectBalance => 'Perfect Balance';
+
+  @override
+  String togetherTrophyPerfectBalanceDesc(String count) {
+    return 'Level on wins after at least $count matches';
+  }
+
+  @override
+  String get togetherTrophyGameMaster => 'Game Master';
+
+  @override
+  String togetherTrophyGameMasterDesc(String count, String game) {
+    return '$count wins in $game';
+  }
+
+  @override
+  String get togetherTierBronze => 'Bronze';
+
+  @override
+  String get togetherTierSilver => 'Silver';
+
+  @override
+  String get togetherTierGold => 'Gold';
+
+  @override
+  String get togetherTierLegendary => 'Legendary';
+
+  @override
+  String togetherEarnedOn(String date) {
+    return 'Earned $date';
+  }
+
+  @override
+  String get togetherLocked => 'Not earned yet';
+
+  @override
+  String get togetherTrophyShared => 'Shared by you both';
+
+  @override
+  String togetherTrophyHolder(String name) {
+    return 'Earned by $name';
+  }
+
+  @override
+  String get togetherNewTrophies => 'New in our Hall of Fame!';
+
+  @override
+  String togetherProgressOf(String current, String target) {
+    return '$current / $target';
+  }
+
+  @override
+  String get togetherGameTarneeb => 'Tarneeb';
+
+  @override
+  String get togetherGameTrix => 'Trix';
+
+  @override
+  String get togetherGameBasra => 'Basra';
+
+  @override
+  String get togetherGameKonkan => 'Konkan';
+
+  @override
+  String get togetherGameBackgammon => 'Backgammon';
+
+  @override
+  String get togetherGameChess => 'Chess';
+
+  @override
+  String get togetherGameDominoes => 'Dominoes';
+
+  @override
+  String get togetherGameLudo => 'Ludo';
+
+  @override
+  String get togetherGameFourInARow => 'Four in a Row';
+
+  @override
+  String get togetherGameWordDuel => 'Word Duel';
+
+  @override
+  String get togetherGameQuizDuel => 'Islamic Quiz Duel';
+
+  @override
+  String get togetherGameDrawGuess => 'Draw & Guess';
+
+  @override
+  String get togetherGameMiniGolf => 'Mini Golf';
+
+  @override
+  String get togetherGameKnowMe => 'How Well Do You Know Me?';
+
+  @override
+  String get togetherGameAirHockey => 'Air Hockey';
+
+  @override
+  String get togetherGameBeachVolley => 'Beach Volley Duo';
+
+  @override
+  String get togetherGameKartDash => 'Kart Dash';
+
+  @override
+  String get togetherGameSnowballFight => 'Snowball Fight';
+
+  @override
+  String get togetherGamePaddleDuel => 'Paddle Duel';
+
+  @override
+  String get togetherGameTankDuel => 'Tank Duel';
+
+  @override
+  String get togetherGameMetropolisCoop => 'Metropolis Machine Co-op';
+
+  @override
+  String get togetherGameUnknown => 'Game';
+
+  @override
+  String get togetherSettingsDefaultMode => 'Default play mode';
+
+  @override
+  String get togetherSettingsDefaultModeHint =>
+      'Suggested at the start of every game — you can still change it then';
+
+  @override
+  String get togetherSettingsOnline => 'Online play';
+
+  @override
+  String get togetherSettingsOnlineHint =>
+      'Off by default. When on, only game state travels.';
+
+  @override
+  String get togetherSettingsPrivacy => 'Hide from recent apps';
+
+  @override
+  String get togetherSettingsPrivacyHint =>
+      'During private turns the screen stays out of thumbnails and screenshots';
+
+  @override
+  String get togetherResetRecords => 'Clear history & trophies';
+
+  @override
+  String get togetherResetDone => 'History and trophies cleared';
+
+  @override
+  String get togetherTapToEdit => 'Tap to edit';
+
+  @override
   String get widgetsPrayerName => 'Next prayer';
 
   @override

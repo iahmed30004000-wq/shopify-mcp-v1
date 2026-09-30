@@ -19934,6 +19934,447 @@
   },
   "aiChatLinkBody": "يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.",
   "aiChatLinkOpen": "فتح الرابط",
+  "togetherTitle": "معًا",
+  "@togetherTitle": {
+    "description": "Together Mode home title"
+  },
+  "togetherHallOfFame": "قاعة مجدنا",
+  "togetherPlayerDefault": "اللاعب {number}",
+  "@togetherPlayerDefault": {
+    "description": "Generic default player name; number is already formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherVs": "ضد",
+  "togetherEditProfile": "تعديل ملف {name}",
+  "@togetherEditProfile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherSettingsTitle": "إعدادات اللعب معًا",
+  "togetherPlayers": "اللاعبان",
+  "togetherWinsLabel": "الانتصارات",
+  "togetherLeads": "في الصدارة: {name} بفارق {diff}",
+  "@togetherLeads": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherAllSquare": "تعادل تام بينكما",
+  "togetherDrawsCount": "{count, plural, =0{لا تعادلات} =1{تعادل واحد} =2{تعادلان} few{{count} تعادلات} many{{count} تعادلًا} other{{count} تعادل}}",
+  "@togetherDrawsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherMatchesCount": "{count, plural, =0{لا مباريات} =1{مباراة واحدة} =2{مباراتان} few{{count} مباريات} many{{count} مباراة} other{{count} مباراة}}",
+  "@togetherMatchesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherDaysCount": "{count, plural, =0{لا أيام} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@togetherDaysCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherDayStreakLabel": "أيام اللعب المتتالية",
+  "togetherWinStreakLabel": "سلسلة الانتصارات",
+  "togetherCoopLabel": "انتصارات مشتركة",
+  "togetherPlayedToday": "لعبتما اليوم",
+  "togetherPlayTodayHint": "العبا اليوم لتستمر السلسلة",
+  "togetherNoStreak": "لا سلسلة الآن",
+  "togetherSeeAll": "عرض الكل",
+  "togetherHeadToHead": "وجهًا لوجه",
+  "togetherRecentMatches": "آخر المباريات",
+  "togetherEmptyTitle": "لا مباريات بعد",
+  "togetherEmptyBody": "العبا أول لعبة معًا — كل مباراة تُسجَّل هنا مع السلاسل والجوائز.",
+  "togetherShelfEmpty": "أول جائزة بانتظاركما",
+  "togetherTrophiesProgress": "{earned} من {total}",
+  "@togetherTrophiesProgress": {
+    "placeholders": {
+      "earned": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophiesEarned": "جوائز محصودة",
+  "togetherResultWon": "الفوز لـ{name}",
+  "@togetherResultWon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherResultDraw": "تعادل",
+  "togetherResultTeamWon": "فزتما معًا",
+  "togetherResultTeamLost": "خسرتما معًا",
+  "togetherBestScore": "أفضل نتيجة: {score}",
+  "@togetherBestScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherModePassAndPlay": "تمرير الهاتف",
+  "togetherModePassAndPlayBody": "هاتف واحد بالتناوب، وشاشة تسليم تخفي الأوراق والإجابات",
+  "togetherModeSplitScreen": "شاشة مقسومة",
+  "togetherModeSplitScreenBody": "هاتف واحد، لكلٍّ نصفه، ولمسٌ متعدد في آنٍ واحد",
+  "togetherModeNearby": "هاتفان متجاوران",
+  "togetherModeNearbyBody": "بلوتوث وواي فاي مباشر — بلا إنترنت ولا خوادم",
+  "togetherModeOnline": "هاتفان عبر الإنترنت",
+  "togetherModeOnlineBody": "من مكانين مختلفين — مطفأ افتراضيًا",
+  "togetherComingSoon": "قريبًا",
+  "togetherModeUnsupported": "غير متاح لهذه اللعبة",
+  "togetherModeDisabled": "مطفأ في الإعدادات",
+  "togetherOnlyGameState": "لا ينتقل بين الهاتفين إلا حالة اللعبة — الصحة والمال وبياناتكما الشخصية لا تغادر الجهاز.",
+  "togetherLaunchSubtitle": "كيف ستلعبان؟",
+  "togetherWhoStarts": "من يبدأ؟",
+  "togetherRandomStart": "قرعة",
+  "togetherStartGame": "هيا نلعب",
+  "togetherSplitLayout": "ترتيب الشاشة",
+  "togetherLayoutFaceToFace": "متقابلان",
+  "togetherLayoutSideBySide": "جنبًا إلى جنب",
+  "togetherLayoutEndToEnd": "طرفًا لطرف",
+  "togetherPassTo": "مرّر الهاتف إلى",
+  "@togetherPassTo": {
+    "description": "Followed by the player's name on its own line"
+  },
+  "togetherPassToName": "مرّر الهاتف إلى {name}",
+  "@togetherPassToName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherHandOffHint": "المعلومات الخاصة مخفية حتى يكشفها صاحبها",
+  "togetherNoPeeking": "بلا تلصّص!",
+  "togetherReveal": "أنا {name} — اكشف",
+  "@togetherReveal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherStillYou": "هل ما زلت {name}؟",
+  "@togetherStillYou": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherShieldHint": "أُخفيت الشاشة عند مغادرة التطبيق",
+  "togetherContinue": "متابعة",
+  "togetherLastMove": "آخر حركة: {move}",
+  "@togetherLastMove": {
+    "placeholders": {
+      "move": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherPause": "إيقاف مؤقت",
+  "togetherYourSide": "جهة {name}",
+  "@togetherYourSide": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherProfileTitle": "ملف اللاعب",
+  "togetherFieldName": "الاسم",
+  "togetherFieldTitle": "اللقب",
+  "togetherTitleNone": "بلا لقب",
+  "togetherTitleCustom": "لقب خاص",
+  "togetherTitleCustomHint": "اكتب لقبًا",
+  "togetherFieldAvatar": "الصورة الرمزية",
+  "togetherAvatarConstellation": "شعار",
+  "togetherAvatarEmoji": "رمز",
+  "togetherAvatarInitials": "الحرف الأول",
+  "togetherAvatarShuffle": "شكل آخر",
+  "togetherAvatarOption": "الشكل {number}",
+  "@togetherAvatarOption": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherFieldColor": "اللون",
+  "togetherColorTaken": "لون {name}",
+  "@togetherColorTaken": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherSave": "حفظ",
+  "togetherCancel": "إلغاء",
+  "togetherTitleStrategist": "العقل المدبّر",
+  "togetherTitleCardShark": "نجم الورق",
+  "togetherTitleLuckyStar": "نجم الحظ",
+  "togetherTitleChallenger": "روح التحدّي",
+  "togetherTitleGrandmaster": "أسطورة الرقعة",
+  "togetherTitleQuizWhiz": "موسوعة الأسئلة",
+  "togetherTitleComebackKing": "العودة القوية",
+  "togetherTitleLightning": "البرق الخاطف",
+  "togetherTitlePeacemaker": "حمامة السلام",
+  "togetherTitleDreamer": "روح حالمة",
+  "togetherTrophyFirstMatch": "البداية",
+  "togetherTrophyFirstMatchDesc": "أول مباراة معًا",
+  "togetherTrophyMatches10": "عشر مباريات",
+  "togetherTrophyMatches10Desc": "{count} مباراة معًا",
+  "@togetherTrophyMatches10Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMatches50": "نصف المئة",
+  "togetherTrophyMatches50Desc": "{count} مباراة معًا",
+  "@togetherTrophyMatches50Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMatches100": "نادي المئة",
+  "togetherTrophyMatches100Desc": "{count} مباراة معًا",
+  "@togetherTrophyMatches100Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMatches250": "رفيقا الدرب",
+  "togetherTrophyMatches250Desc": "{count} مباراة معًا",
+  "@togetherTrophyMatches250Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyDayStreak3": "شعلة صغيرة",
+  "togetherTrophyDayStreak3Desc": "لعبتما {count} أيام متتالية",
+  "@togetherTrophyDayStreak3Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyDayStreak7": "أسبوع كامل",
+  "togetherTrophyDayStreak7Desc": "لعبتما {count} أيام متتالية",
+  "@togetherTrophyDayStreak7Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyDayStreak30": "شهر من الوفاء",
+  "togetherTrophyDayStreak30Desc": "لعبتما {count} يومًا متتاليًا",
+  "@togetherTrophyDayStreak30Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyWinStreak3": "هاتريك",
+  "togetherTrophyWinStreak3Desc": "{count} انتصارات متتالية",
+  "@togetherTrophyWinStreak3Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyWinStreak5": "لا يُوقَف",
+  "togetherTrophyWinStreak5Desc": "{count} انتصارات متتالية",
+  "@togetherTrophyWinStreak5Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyWinStreak10": "سلسلة أسطورية",
+  "togetherTrophyWinStreak10Desc": "{count} انتصارات متتالية",
+  "@togetherTrophyWinStreak10Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyExplorer5": "المستكشفان",
+  "togetherTrophyExplorer5Desc": "جرّبتما {count} ألعاب مختلفة",
+  "@togetherTrophyExplorer5Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyExplorer10": "رحّالة الألعاب",
+  "togetherTrophyExplorer10Desc": "جرّبتما {count} ألعاب مختلفة",
+  "@togetherTrophyExplorer10Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyCoopWins5": "فريق الأحلام",
+  "togetherTrophyCoopWins5Desc": "{count} انتصارات مشتركة",
+  "@togetherTrophyCoopWins5Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyCoopWins25": "قلب واحد",
+  "togetherTrophyCoopWins25Desc": "{count} انتصارًا مشتركًا",
+  "@togetherTrophyCoopWins25Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMarathon": "ماراثون",
+  "togetherTrophyMarathonDesc": "{count} مباريات في يوم واحد",
+  "@togetherTrophyMarathonDesc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyPhotoFinish": "كتفًا بكتف",
+  "togetherTrophyPhotoFinishDesc": "أول تعادل بينكما",
+  "togetherTrophyNailBiter": "على الحافة",
+  "togetherTrophyNailBiterDesc": "فوز بفارق نقطة واحدة",
+  "togetherTrophyPerfectBalance": "توازن مثالي",
+  "togetherTrophyPerfectBalanceDesc": "انتصارات متساوية بعد {count} مباراة على الأقل",
+  "@togetherTrophyPerfectBalanceDesc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyGameMaster": "خبرة لا تُضاهى",
+  "togetherTrophyGameMasterDesc": "{count} انتصارات في {game}",
+  "@togetherTrophyGameMasterDesc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "game": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTierBronze": "برونزية",
+  "togetherTierSilver": "فضية",
+  "togetherTierGold": "ذهبية",
+  "togetherTierLegendary": "أسطورية",
+  "togetherEarnedOn": "حُصدت في {date}",
+  "@togetherEarnedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherLocked": "لم تُحصد بعد",
+  "togetherTrophyShared": "لكما معًا",
+  "togetherTrophyHolder": "حصدها {name}",
+  "@togetherTrophyHolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNewTrophies": "جديد في قاعة مجدنا!",
+  "togetherProgressOf": "{current} / {target}",
+  "@togetherProgressOf": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGameTarneeb": "طرنيب",
+  "togetherGameTrix": "تركس",
+  "togetherGameBasra": "باصرة",
+  "togetherGameKonkan": "كونكان",
+  "togetherGameBackgammon": "طاولة الزهر",
+  "togetherGameChess": "شطرنج",
+  "togetherGameDominoes": "دومينو",
+  "togetherGameLudo": "لودو",
+  "togetherGameFourInARow": "أربعة في صف",
+  "togetherGameWordDuel": "مبارزة الكلمات",
+  "togetherGameQuizDuel": "تحدّي الأسئلة الإسلامية",
+  "togetherGameDrawGuess": "ارسم وخمّن",
+  "togetherGameMiniGolf": "جولف مصغّر",
+  "togetherGameKnowMe": "هل تعرفني جيدًا؟",
+  "togetherGameAirHockey": "هوكي الطاولة",
+  "togetherGameBeachVolley": "كرة الشاطئ الثنائية",
+  "togetherGameKartDash": "سباق الكارت",
+  "togetherGameSnowballFight": "معركة كرات الثلج",
+  "togetherGamePaddleDuel": "مبارزة المضارب",
+  "togetherGameTankDuel": "مبارزة الدبابات",
+  "togetherGameMetropolisCoop": "مدينة الآلات معًا",
+  "togetherGameUnknown": "لعبة",
+  "togetherSettingsDefaultMode": "طريقة اللعب الافتراضية",
+  "togetherSettingsDefaultModeHint": "تُقترح في بداية كل لعبة، ويمكن تغييرها وقتها",
+  "togetherSettingsOnline": "اللعب عبر الإنترنت",
+  "togetherSettingsOnlineHint": "مطفأ افتراضيًا. عند تفعيله لا تنتقل إلا حالة اللعبة.",
+  "togetherSettingsPrivacy": "إخفاء من التطبيقات الأخيرة",
+  "togetherSettingsPrivacyHint": "أثناء الأدوار الخاصة لا تظهر الشاشة في المصغّرات ولقطات الشاشة",
+  "togetherResetRecords": "مسح السجل والجوائز",
+  "togetherResetDone": "مُسح السجل والجوائز",
+  "togetherTapToEdit": "اضغط للتعديل",
   "widgetsPrayerName": "الصلاة القادمة",
   "@widgetsPrayerName": {
     "description": "Home-screen widget: the next prayer (widget title and its name in settings)"

@@ -28,6 +28,7 @@ import 'package:madar/features/money/budget/budget.dart';
 import 'package:madar/features/money/goals/goals.dart';
 import 'package:madar/features/money/hub/money_hub.dart';
 import 'package:madar/features/money/ledger/ledger.dart';
+import 'package:madar/features/money/ledger/presentation/widgets/amount_keypad.dart' show AmountKeypad;
 import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
 
 import '../../../core/design/rendered_contrast.dart';
@@ -106,6 +107,10 @@ Future<void> _seed(MadarDatabase db, {required bool arabic}) async {
   );
 }
 
+/// Text worth measuring: a separator such as " · " is a few anti-aliased
+/// pixels whose "ink" the audit cannot find (it carries no information).
+final RegExp _readable = RegExp(r'[\p{L}\p{N}]', unicode: true);
+
 Future<void> _frames(WidgetTester tester, [int n = 16]) async {
   for (var i = 0; i < n; i++) {
     await tester.pump(const Duration(milliseconds: 50));
@@ -151,9 +156,13 @@ Future<void> _shot(
       await _frames(tester, 10);
       // WCAG AA on the pixels actually painted (text only; icons are
       // decorative beside their labels).
+      // Text scrolling out under a sheet's footer (the keypad) is faded on
+      // purpose – a scroll edge, not text to read there.
+      final keypad = find.byType(AmountKeypad);
+      final fadeTop = keypad.evaluate().isEmpty ? double.infinity : tester.getRect(keypad.first).top - 56;
       misses.addAll([
         for (final r in await measureRenderedContrast(tester, boundary))
-          if (!r.passes && !r.icon) r,
+          if (!r.passes && !r.icon && r.rect.bottom < fadeTop && _readable.hasMatch(r.text)) r,
       ]);
     },
     trailingFrames: 4,

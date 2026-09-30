@@ -1,6 +1,7 @@
 // Trix (تركس) as commonly played in Jordan: one test per rule of the spec
 // (RULES.md §2). Test names start with the rule id (T-, K-, P-, X-, DB-, C-,
-// M-, E- for the edge cases, O- for options and J- for save / load).
+// M-, E- for the edge cases, EX- for the worked examples, O- for options and
+// J- for save / load).
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/rules/cards/cards.dart';
 import 'package:madar/features/cinema/rules/cards/core/trick.dart' show standardPower;
@@ -222,7 +223,7 @@ void main() {
       ]);
     });
 
-    test('K-2 the holder of the 7♥ in the first deal owns the first kingdom', () {
+    test('K-2 E-1 the holder of the 7♥ in the first deal owns the first kingdom (newMatch and withHands)', () {
       final e = TrixEngine(TrixState.withHands(roundRobinDeal()));
       expect(e.state.owner, 3);
       expect(e.currentPlayer, 3);
@@ -235,7 +236,7 @@ void main() {
       }
     });
 
-    test('K-2 only the first deal of the match decides; later deals keep the kingdom owner', () {
+    test('K-2 E-1 only the first deal of the match decides; later deals keep the kingdom owner', () {
       final e = TrixEngine(TrixState.withHands(suitsDeal()));
       expect(e.state.owner, 1);
       var sevenElsewhere = false;
@@ -350,6 +351,27 @@ void main() {
       expect(e.currentPlayer, 2);
       expect(e.state.trick!.leader, 2);
     });
+
+    test('P-3 every trick is kept (leader, seats, cards); the winner takes its cards', () {
+      final e = TrixEngine(TrixState.withHands(roundRobinDeal(), options: fixed0));
+      e.apply(const TrixMove.contract(TrixContract.ltoush));
+      final ev = <CardEvent>[];
+      for (final id in ['2C', '3C', 'QC', '5C', '4C', 'KC', 'AC', '7C']) {
+        ev.addAll(e.apply(TrixMove.play(p(id))));
+      }
+      final t = e.state.tricks;
+      expect(t, hasLength(2));
+      expect([t[0].leader, t[0].seats, t[0].cards], [0, [0, 1, 2, 3], c('2C 3C QC 5C')]);
+      // Seat 2 won the first trick and led the second; seat 0's A♣ won it.
+      expect([t[1].leader, t[1].seats, t[1].cards], [2, [2, 3, 0, 1], c('4C KC AC 7C')]);
+      expect(e.state.taken[2], c('2C 3C QC 5C'));
+      expect(e.state.taken[0], c('4C KC AC 7C'));
+      expect(e.state.tricksTaken, [1, 0, 1, 0]);
+      expect(e.currentPlayer, 0);
+      final won = ev.where((x) => x.type == CardEventType.trickWon).toList();
+      expect(won.map((x) => x.seat), [2, 0]);
+      expect(won.last.cards, c('4C KC AC 7C'));
+    });
   });
 
   group('P-K: شيخ الكبة (king of hearts)', () {
@@ -359,7 +381,7 @@ void main() {
       expect(TrixRules.dealPoints(s), [0, -75, 0, 0]);
     });
 
-    test('P-K2 a player who cannot follow and holds K♥ must throw it', () {
+    test('P-K2 E-6 a player who cannot follow and holds K♥ must throw it', () {
       final e = TrixEngine(TrixState.withHands(kingDeal(), options: fixed0.copyWith(doubling: false)));
       e.apply(const TrixMove.contract(TrixContract.king));
       e.apply(TrixMove.play(p('2C')));
@@ -367,7 +389,7 @@ void main() {
       expect(e.validate(TrixMove.play(p('AD'))), 'mustDiscardKing');
     });
 
-    test('P-K2 a holder of K♥ who can follow suit follows normally', () {
+    test('P-K2 E-6 a holder of K♥ who can follow suit follows normally', () {
       final e = TrixEngine(TrixState.withHands(aceDeal(), options: fixed0.copyWith(doubling: false)));
       e.apply(const TrixMove.contract(TrixContract.king));
       e.apply(TrixMove.play(p('2C')));
@@ -425,7 +447,7 @@ void main() {
       expectFullDeal(e.state.hands);
     });
 
-    test('P-K5 kingOnAceOfHearts (off by default): K♥ must go on a heart trick holding A♥', () {
+    test('P-K5 E-6 kingOnAceOfHearts (off by default): K♥ must go on a heart trick holding A♥', () {
       final base = fixed0.copyWith(doubling: false).copyWith(noHeartLeadInKing: false);
       final off = TrixEngine(TrixState.withHands(aceDeal(), options: base));
       off.apply(const TrixMove.contract(TrixContract.king));
@@ -552,8 +574,18 @@ void main() {
       while (e.state.dealsPlayed == 0) {
         events.addAll(e.apply(e.legalMoves(e.currentPlayer!).first));
       }
-      final finished = events.where((x) => x.type == CardEventType.playerFinished).map((x) => x.seat).toList();
-      expect(finished, [0, 1, 2]);
+      final finished = events.where((x) => x.type == CardEventType.playerFinished).toList();
+      expect(finished.map((x) => x.seat), [0, 1, 2, 3]);
+      expect(finished.map((x) => x.value), [1, 2, 3, 4]);
+      // The fourth player's last cards complete the layout: his event carries
+      // them, so every card of the deal reaches the table through an event.
+      expect(finished.last.cards, isNotEmpty);
+      expect(finished.last.cards.every((x) => x.suit == Suit.clubs), isTrue);
+      final shown = [
+        for (final x in events)
+          if (x.type == CardEventType.cardPlayed || x.type == CardEventType.playerFinished) ...x.cards,
+      ];
+      expect(sortedCards(shown), buildDeck());
       expect(e.state.results.single.points, [200, 150, 100, 50]);
     });
 
@@ -567,7 +599,7 @@ void main() {
       }
     });
 
-    test('X-5 partnership: places are scored per seat and summed by team', () {
+    test('X-5 E-10 partnership: places are scored per seat and summed by team', () {
       final s = TrixState.withHands(suitsDeal(), options: const TrixOptions(partnership: true))
         ..contract = TrixContract.trix
         ..finished = [0, 1, 2, 3];
@@ -617,9 +649,17 @@ void main() {
       final f = TrixEngine(s);
       f.apply(const TrixMove.contract(TrixContract.queens));
       expect(f.legalMoves(0), hasLength(16));
+      // An answer the seat may not give names its reason (not "wrong phase").
+      expect(e.validate(TrixMove.double([p('QS')])), 'cardNotInHand');
+      expect(e.validate(TrixMove.double([p('QH'), p('QS')])), 'cardNotInHand');
+      expect(e.validate(TrixMove.double([p('2C')])), 'notDoublable');
+      expect(e.validate(TrixMove.double([p('QH'), p('QH')])), 'notDoublable');
+      expect(e.validate(TrixMove.play(p('QH'))), 'wrongPhase');
       final k = TrixEngine(TrixState.withHands(roundRobinDeal()));
       k.apply(const TrixMove.contract(TrixContract.king));
       expect(k.legalMoves(3), [TrixMove.double(const [])]);
+      // A queen is not doublable in the King contract, even when held.
+      expect(k.validate(TrixMove.double([p('QD')])), 'notDoublable');
       k.apply(TrixMove.double(const []));
       k.apply(TrixMove.double(const []));
       expect(k.legalMoves(1), [TrixMove.double(const []), TrixMove.double([p('KH')])]);
@@ -710,7 +750,7 @@ void main() {
       expect(TrixRules.dealPoints(s), [0, 0, 0, -25]);
     });
 
-    test('DB-S2 §6.3-1 doubled card taken by another: taker −2×, doubler +1×', () {
+    test('DB-S2 EX-1 doubled card taken by another: taker −2×, doubler +1×', () {
       final e = TrixEngine(TrixState.withHands(kingDeal(), options: fixed0));
       e.apply(const TrixMove.contract(TrixContract.king));
       e.apply(TrixMove.double(const []));
@@ -766,7 +806,7 @@ void main() {
       });
     }
 
-    test('DB-S3 §6.3-2 through play: seat 1 leads ♣4, seat 3 follows with its doubled Q♣', () {
+    test('DB-S3 EX-2 through play: seat 1 leads ♣4, seat 3 follows with its doubled Q♣', () {
       final hands = [
         c('2S 3S 4S 5S 6S 7S 8S 9S TS JS QS KS AS'),
         c('4C 2H 3H 4H 5H 6H 7H 8H 9H TH JH QH KH'),
@@ -787,7 +827,7 @@ void main() {
       expect(pts, [0, 25, 0, -50]);
     });
 
-    test('DB-S4 §6.3-3 E-5 through play: a self-led doubled K♥ costs its doubler 75', () {
+    test('DB-S4 EX-3 E-5 through play: a self-led doubled K♥ costs its doubler 75', () {
       final hands = kingDeal();
       hands[0] = c('KH QH JH TH 9H 8H 7H 6H 5H 4H 3H 2H AH');
       hands[1] = c('AC AD KD QD JD TD 9D 8D 7D 6D 5D 4D 3D');
@@ -857,7 +897,7 @@ void main() {
       });
     }
 
-    test('§6.3-4 partnership default: partner takes the doubled Q♠: −50, nobody gains', () {
+    test('DB-P2 EX-4 partnership default: partner takes the doubled Q♠: −50, nobody gains', () {
       final s = finishedDeal(
         TrixContract.queens,
         [partnerTakes],
@@ -869,12 +909,12 @@ void main() {
       expect(s.scores, [-50, 0, -50, 0]);
     });
 
-    test('§6.3-5 Complex: seat 1 takes Q♦ doubled by seat 0: −50 −10 −15, doubler +25', () {
+    test('C-3 EX-5 Complex: seat 1 takes Q♦ doubled by seat 0: −50 −10 −15, doubler +25', () {
       final s = finishedDeal(TrixContract.complex, [tr(1, 'AS 2S 3S QD')], doubled: {'QD': 0});
       expect(TrixRules.dealPoints(s), [25, -75, 0, 0]);
     });
 
-    test('§6.3-6 Complex: seat 2 must throw its doubled K♥ on seat 3\'s lead; seat 0 wins', () {
+    test('P-K2 EX-6 Complex: seat 2 must throw its doubled K♥ on seat 3\'s lead; seat 0 wins', () {
       final hands = [
         c('AC KC QC JC TC 9C 8C 7C 6C JS QS KS AS'),
         c('5C AD KD QD JD TD 9D 8D 7D 6D 5D 4D 3D'),
@@ -971,6 +1011,29 @@ void main() {
       c2.apply(TrixMove.play(p('AH')));
       expect(c2.legalMoves(1), hasLength(3));
     });
+
+    test('C-7 the heart-lead ban lasts the whole Complex deal, even after K♥ has been taken', () {
+      final hands = [
+        c('AC 2H 3H 2S 3S 4S 5S 6S 7S 8S 9S TS JS'),
+        c('KH AD KD QD JD TD 9D 8D 7D 6D 5D 4D 3D'),
+        c('AH QH JH TH 9H 8H 7H 6H 5H 4H 2D QS KS'),
+        c('KC QC JC TC 9C 8C 7C 6C 5C 4C 3C 2C AS'),
+      ];
+      expectFullDeal(hands);
+      final base = fixed0.copyWith(doubling: false, mode: TrixMode.complex);
+      for (final rules in [true, false]) {
+        final e = TrixEngine(TrixState.withHands(hands, options: base.copyWith(kingRulesInComplex: rules)));
+        e.apply(const TrixMove.contract(TrixContract.complex));
+        e.apply(TrixMove.play(p('AC')));
+        if (rules) expect(e.legalMoves(1), [TrixMove.play(kingOfHearts)]);
+        play(e, rules ? 'KH 2D 2C' : 'AD 2D 2C');
+        expect(e.currentPlayer, 0);
+        if (rules) expect(e.state.taken[0], contains(kingOfHearts));
+        final hearts = e.legalMoves(0).where((m) => m.card!.suit == Suit.hearts);
+        expect(hearts, rules ? isEmpty : hasLength(2));
+        expect(e.validate(TrixMove.play(p('2H'))), rules ? 'noHeartLead' : isNull);
+      }
+    });
   });
 
   group('M: match end', () {
@@ -1000,7 +1063,7 @@ void main() {
       ]);
     });
 
-    test('M-4 a tie for first place is a shared win (draw)', () {
+    test('M-4 E-11 a tie for first place is a shared win (draw)', () {
       final s = TrixState.withHands(suitsDeal())
         ..phase = TrixPhase.over
         ..seatScores = [100, 100, -50, -150];
@@ -1100,6 +1163,18 @@ void main() {
       for (final m in moves) {
         expect(TrixMove.fromJson(m.toJson()), m);
       }
+      // A double read from JSON matches the legal move whatever the order of
+      // its cards.
+      final e = TrixEngine(TrixState.withHands(roundRobinDeal(), options: const TrixOptions(mode: TrixMode.complex)));
+      e.apply(const TrixMove.contract(TrixContract.complex));
+      e.apply(TrixMove.double(const []));
+      e.apply(TrixMove.double(const []));
+      final json = {
+        'k': 'double',
+        'cs': ['QS', 'KH'],
+      };
+      expect(TrixMove.fromJson(json), TrixMove.double([p('KH'), p('QS')]));
+      expect(e.validate(e.moveFromJson(json)), isNull);
     });
   });
 }

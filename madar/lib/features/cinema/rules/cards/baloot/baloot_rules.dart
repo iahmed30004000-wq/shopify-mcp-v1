@@ -288,10 +288,7 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     final k = PlayingCard(s.trump!, Rank.king);
     final q = PlayingCard(s.trump!, Rank.queen);
     return !s.projects.any(
-      (p) =>
-          p.seat == s.belote &&
-          p.type == BalootProjectType.hundred &&
-          (p.cards.contains(k) || p.cards.contains(q)),
+      (p) => p.seat == s.belote && p.type == BalootProjectType.hundred && (p.cards.contains(k) || p.cards.contains(q)),
     );
   }
 
@@ -331,8 +328,7 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     final partnerWinning = trick.seats[winIdx] % 2 == seat % 2;
     if (led == trump) {
       if (follow.isEmpty) return List.of(hand);
-      final mustBeat =
-          o.mustOvertrump && (!partnerWinning || o.trumpLedOvertrump == BalootTrumpLedOvertrump.always);
+      final mustBeat = o.mustOvertrump && (!partnerWinning || o.trumpLedOvertrump == BalootTrumpLedOvertrump.always);
       if (mustBeat) {
         final higher = follow.where((c) => trumpRank(c.rank) > bestTrump).toList();
         if (higher.isNotEmpty) return higher;
@@ -383,11 +379,7 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
         return _bidMoves(s, seat);
       case BalootPhase.doubling:
         final lockable = s.mode == BalootMode.hokom && (s.level == 1 || s.level == 3);
-        return [
-          const BalootMove.pass(),
-          const BalootMove.raise(),
-          if (lockable) const BalootMove.raise(locked: true),
-        ];
+        return [const BalootMove.pass(), const BalootMove.raise(), if (lockable) const BalootMove.raise(locked: true)];
       case BalootPhase.playing:
         if (mustDecideProjects(s, seat)) return const [BalootMove.declareProjects(), BalootMove.skipProjects()];
         return [for (final c in playable(s, seat)) BalootMove.play(c)];
@@ -550,12 +542,7 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
   void _endBidding(BalootState s, List<CardEvent>? ev) {
     s.bidQueue = [];
     ev?.add(
-      CardEvent(
-        CardEventType.contractChosen,
-        seat: s.buyer,
-        suit: s.trump,
-        detail: s.ashkal ? 'ashkal' : s.mode!.name,
-      ),
+      CardEvent(CardEventType.contractChosen, seat: s.buyer, suit: s.trump, detail: s.ashkal ? 'ashkal' : s.mode!.name),
     );
     s.hands[s.buyer].add(s.upCard!);
     s.upCard = null;

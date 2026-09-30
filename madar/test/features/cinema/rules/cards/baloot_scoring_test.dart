@@ -377,7 +377,9 @@ void main() {
       final all = tricks();
       final s = finished()
         ..tricks = all.sublist(0, 7)
-        ..hands = [for (final card in all[7].cards) <PlayingCard>[card]]
+        ..hands = [
+          for (final card in all[7].cards) <PlayingCard>[card],
+        ]
         ..trick = Trick(0)
         ..turn = 0
         ..teamScores = List.of(scores)

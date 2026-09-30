@@ -207,10 +207,7 @@ class BasraOptions {
   /// players, the partnership and the target).
   BasraPreset get preset {
     for (final (preset, o) in [
-      (
-        BasraPreset.jordan,
-        BasraOptions.jordan(players: players, partnership: partnership, targetScore: targetScore),
-      ),
+      (BasraPreset.jordan, BasraOptions.jordan(players: players, partnership: partnership, targetScore: targetScore)),
       (
         BasraPreset.palestinian44,
         BasraOptions.palestinian44(players: players, partnership: partnership, targetScore: targetScore),

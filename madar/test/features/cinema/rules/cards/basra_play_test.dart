@@ -8,12 +8,8 @@ import 'package:madar/features/cinema/rules/cards/cards.dart';
 
 import 'support.dart';
 
-Kit basraKit(String name, BasraOptions o) => Kit(
-  name,
-  (seed) => BasraEngine.newMatch(seed: seed, options: o),
-  BasraEngine.fromJson,
-  const BasraAi(),
-);
+Kit basraKit(String name, BasraOptions o) =>
+    Kit(name, (seed) => BasraEngine.newMatch(seed: seed, options: o), BasraEngine.fromJson, const BasraAi());
 
 final variants = <String, BasraOptions>{
   'jordan 4p': const BasraOptions(),

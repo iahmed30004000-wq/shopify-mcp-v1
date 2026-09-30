@@ -124,6 +124,11 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
       }
       return 'mustDiscardKing';
     }
+    if (m.kind == TrixMoveKind.double && s.phase == TrixPhase.doubling) {
+      // A card the seat does not hold, or one that cannot be doubled in this
+      // contract (only K♥ in King / Complex, queens in Queens / Complex).
+      return m.cards.every(s.hands[seat].contains) ? 'notDoublable' : 'cardNotInHand';
+    }
     if (m.kind == TrixMoveKind.pass && s.phase == TrixPhase.layout) return 'mustPlayWhenAble';
     if (m.kind == TrixMoveKind.contract && s.phase == TrixPhase.contract) {
       return s.options.contracts.contains(m.contract) ? 'contractAlreadyPlayed' : 'contractNotAvailable';

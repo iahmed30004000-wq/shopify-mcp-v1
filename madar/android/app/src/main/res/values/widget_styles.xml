@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home-screen widgets. The astrolabe comes as a light and a dark bitmap in
+     two image views; these styles (overridden in values-night) show the one
+     that matches the home screen, so a switch to dark mode needs no redraw. -->
+<resources>
+    <style name="widget_astro_day">
+        <item name="android:visibility">visible</item>
+    </style>
+    <style name="widget_astro_night">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="widget_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/widget_text_primary</item>
+    </style>
+    <style name="widget_text_title" parent="widget_text">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/widget_text_secondary</item>
+    </style>
+    <style name="widget_text_headline" parent="widget_text">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="widget_text_detail" parent="widget_text">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/widget_text_secondary</item>
+    </style>
+    <style name="widget_text_note" parent="widget_text">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/widget_text_muted</item>
+    </style>
+    <style name="widget_text_accent" parent="widget_text">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/widget_accent</item>
+    </style>
+    <style name="widget_text_row" parent="widget_text">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="widget_text_row_done" parent="widget_text_row">
+        <item name="android:textColor">@color/widget_text_muted</item>
+    </style>
+    <style name="widget_text_row_time" parent="widget_text_row">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/widget_text_secondary</item>
+    </style>
+    <style name="widget_bar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:minHeight">8dp</item>
+        <item name="android:maxHeight">8dp</item>
+        <item name="android:max">1000</item>
+        <item name="android:indeterminate">false</item>
+        <item name="android:progressDrawable">@drawable/widget_progress</item>
+    </style>
+    <style name="widget_bar_warn" parent="widget_bar">
+        <item name="android:progressDrawable">@drawable/widget_progress_warn</item>
+    </style>
+</resources>

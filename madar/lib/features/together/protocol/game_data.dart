@@ -112,11 +112,11 @@ final class GameDataPolicy {
 
   static final RegExp _keyPattern = RegExp(r'^[A-Za-z_][A-Za-z0-9_]{0,39}$');
   static final RegExp _wordSplit = RegExp(r'[A-Z]?[a-z]+|[A-Z]+(?![a-z])|[0-9]+');
-  static final RegExp _control = RegExp('[\u0000-\u001F\u007F‪-‮⁦-⁩]');
+  static final RegExp _control = RegExp('[\u0000-\u001F\u007F\u202A-\u202E\u2066-\u2069]');
   static final RegExp _email = RegExp(r'\S+@\S+\.\S+');
   static final RegExp _link = RegExp(r'(://|www\.|\.com\b|\.net\b|\.org\b)', caseSensitive: false);
   static final RegExp _separators = RegExp(r'[\s\-().+]');
-  static final RegExp _digitRun = RegExp('[0-9٠-٩۰-۹]{7,}');
+  static final RegExp _digitRun = RegExp('[0-9\u0660-\u0669\u06F0-\u06F9]{7,}');
 
   /// The words of a key (lower case).
   static List<String> keyWords(String key) => [for (final m in _wordSplit.allMatches(key)) m[0]!.toLowerCase()];

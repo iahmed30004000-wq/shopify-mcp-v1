@@ -21224,6 +21224,626 @@ class L10nAr extends L10n {
   String get aiChatLinkOpen => 'فتح الرابط';
 
   @override
+  String get togetherTitle => 'معًا';
+
+  @override
+  String get togetherHallOfFame => 'قاعة مجدنا';
+
+  @override
+  String togetherPlayerDefault(String number) {
+    return 'اللاعب $number';
+  }
+
+  @override
+  String get togetherVs => 'ضد';
+
+  @override
+  String togetherEditProfile(String name) {
+    return 'تعديل ملف $name';
+  }
+
+  @override
+  String get togetherSettingsTitle => 'إعدادات اللعب معًا';
+
+  @override
+  String get togetherPlayers => 'اللاعبان';
+
+  @override
+  String get togetherWinsLabel => 'الانتصارات';
+
+  @override
+  String togetherLeads(String name, String diff) {
+    return 'في الصدارة: $name بفارق $diff';
+  }
+
+  @override
+  String get togetherAllSquare => 'تعادل تام بينكما';
+
+  @override
+  String togetherDrawsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تعادل',
+      many: '$count تعادلًا',
+      few: '$count تعادلات',
+      two: 'تعادلان',
+      one: 'تعادل واحد',
+      zero: 'لا تعادلات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherMatchesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مباراة',
+      many: '$count مباراة',
+      few: '$count مباريات',
+      two: 'مباراتان',
+      one: 'مباراة واحدة',
+      zero: 'لا مباريات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherDaysCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+      zero: 'لا أيام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get togetherDayStreakLabel => 'أيام اللعب المتتالية';
+
+  @override
+  String get togetherWinStreakLabel => 'سلسلة الانتصارات';
+
+  @override
+  String get togetherCoopLabel => 'انتصارات مشتركة';
+
+  @override
+  String get togetherPlayedToday => 'لعبتما اليوم';
+
+  @override
+  String get togetherPlayTodayHint => 'العبا اليوم لتستمر السلسلة';
+
+  @override
+  String get togetherNoStreak => 'لا سلسلة الآن';
+
+  @override
+  String get togetherSeeAll => 'عرض الكل';
+
+  @override
+  String get togetherHeadToHead => 'وجهًا لوجه';
+
+  @override
+  String get togetherRecentMatches => 'آخر المباريات';
+
+  @override
+  String get togetherEmptyTitle => 'لا مباريات بعد';
+
+  @override
+  String get togetherEmptyBody =>
+      'العبا أول لعبة معًا — كل مباراة تُسجَّل هنا مع السلاسل والجوائز.';
+
+  @override
+  String get togetherShelfEmpty => 'أول جائزة بانتظاركما';
+
+  @override
+  String togetherTrophiesProgress(String earned, String total) {
+    return '$earned من $total';
+  }
+
+  @override
+  String get togetherTrophiesEarned => 'جوائز محصودة';
+
+  @override
+  String togetherResultWon(String name) {
+    return 'الفوز لـ$name';
+  }
+
+  @override
+  String get togetherResultDraw => 'تعادل';
+
+  @override
+  String get togetherResultTeamWon => 'فزتما معًا';
+
+  @override
+  String get togetherResultTeamLost => 'خسرتما معًا';
+
+  @override
+  String togetherBestScore(String score) {
+    return 'أفضل نتيجة: $score';
+  }
+
+  @override
+  String get togetherModePassAndPlay => 'تمرير الهاتف';
+
+  @override
+  String get togetherModePassAndPlayBody =>
+      'هاتف واحد بالتناوب، وشاشة تسليم تخفي الأوراق والإجابات';
+
+  @override
+  String get togetherModeSplitScreen => 'شاشة مقسومة';
+
+  @override
+  String get togetherModeSplitScreenBody =>
+      'هاتف واحد، لكلٍّ نصفه، ولمسٌ متعدد في آنٍ واحد';
+
+  @override
+  String get togetherModeNearby => 'هاتفان متجاوران';
+
+  @override
+  String get togetherModeNearbyBody =>
+      'بلوتوث وواي فاي مباشر — بلا إنترنت ولا خوادم';
+
+  @override
+  String get togetherModeOnline => 'هاتفان عبر الإنترنت';
+
+  @override
+  String get togetherModeOnlineBody => 'من مكانين مختلفين — مطفأ افتراضيًا';
+
+  @override
+  String get togetherComingSoon => 'قريبًا';
+
+  @override
+  String get togetherModeUnsupported => 'غير متاح لهذه اللعبة';
+
+  @override
+  String get togetherModeDisabled => 'مطفأ في الإعدادات';
+
+  @override
+  String get togetherOnlyGameState =>
+      'لا ينتقل بين الهاتفين إلا حالة اللعبة — الصحة والمال وبياناتكما الشخصية لا تغادر الجهاز.';
+
+  @override
+  String get togetherLaunchSubtitle => 'كيف ستلعبان؟';
+
+  @override
+  String get togetherWhoStarts => 'من يبدأ؟';
+
+  @override
+  String get togetherRandomStart => 'قرعة';
+
+  @override
+  String get togetherStartGame => 'هيا نلعب';
+
+  @override
+  String get togetherSplitLayout => 'ترتيب الشاشة';
+
+  @override
+  String get togetherLayoutFaceToFace => 'متقابلان';
+
+  @override
+  String get togetherLayoutSideBySide => 'جنبًا إلى جنب';
+
+  @override
+  String get togetherLayoutEndToEnd => 'طرفًا لطرف';
+
+  @override
+  String get togetherPassTo => 'مرّر الهاتف إلى';
+
+  @override
+  String togetherPassToName(String name) {
+    return 'مرّر الهاتف إلى $name';
+  }
+
+  @override
+  String get togetherHandOffHint => 'المعلومات الخاصة مخفية حتى يكشفها صاحبها';
+
+  @override
+  String get togetherNoPeeking => 'بلا تلصّص!';
+
+  @override
+  String togetherReveal(String name) {
+    return 'أنا $name — اكشف';
+  }
+
+  @override
+  String togetherStillYou(String name) {
+    return 'هل ما زلت $name؟';
+  }
+
+  @override
+  String get togetherShieldHint => 'أُخفيت الشاشة عند مغادرة التطبيق';
+
+  @override
+  String get togetherContinue => 'متابعة';
+
+  @override
+  String togetherLastMove(String move) {
+    return 'آخر حركة: $move';
+  }
+
+  @override
+  String get togetherPause => 'إيقاف مؤقت';
+
+  @override
+  String togetherYourSide(String name) {
+    return 'جهة $name';
+  }
+
+  @override
+  String get togetherProfileTitle => 'ملف اللاعب';
+
+  @override
+  String get togetherFieldName => 'الاسم';
+
+  @override
+  String get togetherFieldTitle => 'اللقب';
+
+  @override
+  String get togetherTitleNone => 'بلا لقب';
+
+  @override
+  String get togetherTitleCustom => 'لقب خاص';
+
+  @override
+  String get togetherTitleCustomHint => 'اكتب لقبًا';
+
+  @override
+  String get togetherFieldAvatar => 'الصورة الرمزية';
+
+  @override
+  String get togetherAvatarConstellation => 'شعار';
+
+  @override
+  String get togetherAvatarEmoji => 'رمز';
+
+  @override
+  String get togetherAvatarInitials => 'الحرف الأول';
+
+  @override
+  String get togetherAvatarShuffle => 'شكل آخر';
+
+  @override
+  String togetherAvatarOption(String number) {
+    return 'الشكل $number';
+  }
+
+  @override
+  String get togetherFieldColor => 'اللون';
+
+  @override
+  String togetherColorTaken(String name) {
+    return 'لون $name';
+  }
+
+  @override
+  String get togetherSave => 'حفظ';
+
+  @override
+  String get togetherCancel => 'إلغاء';
+
+  @override
+  String get togetherTitleStrategist => 'العقل المدبّر';
+
+  @override
+  String get togetherTitleCardShark => 'نجم الورق';
+
+  @override
+  String get togetherTitleLuckyStar => 'نجم الحظ';
+
+  @override
+  String get togetherTitleChallenger => 'روح التحدّي';
+
+  @override
+  String get togetherTitleGrandmaster => 'أسطورة الرقعة';
+
+  @override
+  String get togetherTitleQuizWhiz => 'موسوعة الأسئلة';
+
+  @override
+  String get togetherTitleComebackKing => 'العودة القوية';
+
+  @override
+  String get togetherTitleLightning => 'البرق الخاطف';
+
+  @override
+  String get togetherTitlePeacemaker => 'حمامة السلام';
+
+  @override
+  String get togetherTitleDreamer => 'روح حالمة';
+
+  @override
+  String get togetherTrophyFirstMatch => 'البداية';
+
+  @override
+  String get togetherTrophyFirstMatchDesc => 'أول مباراة معًا';
+
+  @override
+  String get togetherTrophyMatches10 => 'عشر مباريات';
+
+  @override
+  String togetherTrophyMatches10Desc(String count) {
+    return '$count مباراة معًا';
+  }
+
+  @override
+  String get togetherTrophyMatches50 => 'نصف المئة';
+
+  @override
+  String togetherTrophyMatches50Desc(String count) {
+    return '$count مباراة معًا';
+  }
+
+  @override
+  String get togetherTrophyMatches100 => 'نادي المئة';
+
+  @override
+  String togetherTrophyMatches100Desc(String count) {
+    return '$count مباراة معًا';
+  }
+
+  @override
+  String get togetherTrophyMatches250 => 'رفيقا الدرب';
+
+  @override
+  String togetherTrophyMatches250Desc(String count) {
+    return '$count مباراة معًا';
+  }
+
+  @override
+  String get togetherTrophyDayStreak3 => 'شعلة صغيرة';
+
+  @override
+  String togetherTrophyDayStreak3Desc(String count) {
+    return 'لعبتما $count أيام متتالية';
+  }
+
+  @override
+  String get togetherTrophyDayStreak7 => 'أسبوع كامل';
+
+  @override
+  String togetherTrophyDayStreak7Desc(String count) {
+    return 'لعبتما $count أيام متتالية';
+  }
+
+  @override
+  String get togetherTrophyDayStreak30 => 'شهر من الوفاء';
+
+  @override
+  String togetherTrophyDayStreak30Desc(String count) {
+    return 'لعبتما $count يومًا متتاليًا';
+  }
+
+  @override
+  String get togetherTrophyWinStreak3 => 'هاتريك';
+
+  @override
+  String togetherTrophyWinStreak3Desc(String count) {
+    return '$count انتصارات متتالية';
+  }
+
+  @override
+  String get togetherTrophyWinStreak5 => 'لا يُوقَف';
+
+  @override
+  String togetherTrophyWinStreak5Desc(String count) {
+    return '$count انتصارات متتالية';
+  }
+
+  @override
+  String get togetherTrophyWinStreak10 => 'سلسلة أسطورية';
+
+  @override
+  String togetherTrophyWinStreak10Desc(String count) {
+    return '$count انتصارات متتالية';
+  }
+
+  @override
+  String get togetherTrophyExplorer5 => 'المستكشفان';
+
+  @override
+  String togetherTrophyExplorer5Desc(String count) {
+    return 'جرّبتما $count ألعاب مختلفة';
+  }
+
+  @override
+  String get togetherTrophyExplorer10 => 'رحّالة الألعاب';
+
+  @override
+  String togetherTrophyExplorer10Desc(String count) {
+    return 'جرّبتما $count ألعاب مختلفة';
+  }
+
+  @override
+  String get togetherTrophyCoopWins5 => 'فريق الأحلام';
+
+  @override
+  String togetherTrophyCoopWins5Desc(String count) {
+    return '$count انتصارات مشتركة';
+  }
+
+  @override
+  String get togetherTrophyCoopWins25 => 'قلب واحد';
+
+  @override
+  String togetherTrophyCoopWins25Desc(String count) {
+    return '$count انتصارًا مشتركًا';
+  }
+
+  @override
+  String get togetherTrophyMarathon => 'ماراثون';
+
+  @override
+  String togetherTrophyMarathonDesc(String count) {
+    return '$count مباريات في يوم واحد';
+  }
+
+  @override
+  String get togetherTrophyPhotoFinish => 'كتفًا بكتف';
+
+  @override
+  String get togetherTrophyPhotoFinishDesc => 'أول تعادل بينكما';
+
+  @override
+  String get togetherTrophyNailBiter => 'على الحافة';
+
+  @override
+  String get togetherTrophyNailBiterDesc => 'فوز بفارق نقطة واحدة';
+
+  @override
+  String get togetherTrophyPerfectBalance => 'توازن مثالي';
+
+  @override
+  String togetherTrophyPerfectBalanceDesc(String count) {
+    return 'انتصارات متساوية بعد $count مباراة على الأقل';
+  }
+
+  @override
+  String get togetherTrophyGameMaster => 'خبرة لا تُضاهى';
+
+  @override
+  String togetherTrophyGameMasterDesc(String count, String game) {
+    return '$count انتصارات في $game';
+  }
+
+  @override
+  String get togetherTierBronze => 'برونزية';
+
+  @override
+  String get togetherTierSilver => 'فضية';
+
+  @override
+  String get togetherTierGold => 'ذهبية';
+
+  @override
+  String get togetherTierLegendary => 'أسطورية';
+
+  @override
+  String togetherEarnedOn(String date) {
+    return 'حُصدت في $date';
+  }
+
+  @override
+  String get togetherLocked => 'لم تُحصد بعد';
+
+  @override
+  String get togetherTrophyShared => 'لكما معًا';
+
+  @override
+  String togetherTrophyHolder(String name) {
+    return 'حصدها $name';
+  }
+
+  @override
+  String get togetherNewTrophies => 'جديد في قاعة مجدنا!';
+
+  @override
+  String togetherProgressOf(String current, String target) {
+    return '$current / $target';
+  }
+
+  @override
+  String get togetherGameTarneeb => 'طرنيب';
+
+  @override
+  String get togetherGameTrix => 'تركس';
+
+  @override
+  String get togetherGameBasra => 'باصرة';
+
+  @override
+  String get togetherGameKonkan => 'كونكان';
+
+  @override
+  String get togetherGameBackgammon => 'طاولة الزهر';
+
+  @override
+  String get togetherGameChess => 'شطرنج';
+
+  @override
+  String get togetherGameDominoes => 'دومينو';
+
+  @override
+  String get togetherGameLudo => 'لودو';
+
+  @override
+  String get togetherGameFourInARow => 'أربعة في صف';
+
+  @override
+  String get togetherGameWordDuel => 'مبارزة الكلمات';
+
+  @override
+  String get togetherGameQuizDuel => 'تحدّي الأسئلة الإسلامية';
+
+  @override
+  String get togetherGameDrawGuess => 'ارسم وخمّن';
+
+  @override
+  String get togetherGameMiniGolf => 'جولف مصغّر';
+
+  @override
+  String get togetherGameKnowMe => 'هل تعرفني جيدًا؟';
+
+  @override
+  String get togetherGameAirHockey => 'هوكي الطاولة';
+
+  @override
+  String get togetherGameBeachVolley => 'كرة الشاطئ الثنائية';
+
+  @override
+  String get togetherGameKartDash => 'سباق الكارت';
+
+  @override
+  String get togetherGameSnowballFight => 'معركة كرات الثلج';
+
+  @override
+  String get togetherGamePaddleDuel => 'مبارزة المضارب';
+
+  @override
+  String get togetherGameTankDuel => 'مبارزة الدبابات';
+
+  @override
+  String get togetherGameMetropolisCoop => 'مدينة الآلات معًا';
+
+  @override
+  String get togetherGameUnknown => 'لعبة';
+
+  @override
+  String get togetherSettingsDefaultMode => 'طريقة اللعب الافتراضية';
+
+  @override
+  String get togetherSettingsDefaultModeHint =>
+      'تُقترح في بداية كل لعبة، ويمكن تغييرها وقتها';
+
+  @override
+  String get togetherSettingsOnline => 'اللعب عبر الإنترنت';
+
+  @override
+  String get togetherSettingsOnlineHint =>
+      'مطفأ افتراضيًا. عند تفعيله لا تنتقل إلا حالة اللعبة.';
+
+  @override
+  String get togetherSettingsPrivacy => 'إخفاء من التطبيقات الأخيرة';
+
+  @override
+  String get togetherSettingsPrivacyHint =>
+      'أثناء الأدوار الخاصة لا تظهر الشاشة في المصغّرات ولقطات الشاشة';
+
+  @override
+  String get togetherResetRecords => 'مسح السجل والجوائز';
+
+  @override
+  String get togetherResetDone => 'مُسح السجل والجوائز';
+
+  @override
+  String get togetherTapToEdit => 'اضغط للتعديل';
+
+  @override
   String get widgetsPrayerName => 'الصلاة القادمة';
 
   @override

@@ -1,7 +1,8 @@
 // Trix self-play for every Jordanian preset and house-rule set at every AI
 // level, with the scoring invariants of RULES.md §2 ("Invariants") checked
-// on every deal; hidden-doubling fairness of the AIs; deterministic replay;
-// the hard AI beating the easy AI.
+// on every deal; an independent referee (legal moves, turns and every seat's
+// points from the RULES.md text) over random house rules; hidden-doubling
+// fairness of the AIs; deterministic replay; the AI levels in order.
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -81,7 +82,7 @@ class Played {
 /// Plays a whole match; checks after every move that a legal move exists,
 /// the AI neither changes the state nor plays an illegal move, every move
 /// has an event, every card is somewhere exactly once, and after every deal
-/// the §6.4 score sums (every deal and every kingdom).
+/// the RULES.md §2.7 score sums (every deal and every kingdom).
 Played selfPlay(
   TrixOptions o,
   int seed,
@@ -139,6 +140,278 @@ Played selfPlay(
   expect(e.state.winners, isNotEmpty);
   expect(e.state.results, hasLength(o.mode == TrixMode.classic ? 20 : 8));
   return Played(e.state, moves, log);
+}
+
+
+// ------------------------------------------------------------------------
+// An independent referee, written from the RULES.md §2 text and not from
+// the engine: who acts, which moves are legal and what every seat scores.
+
+final _kh = p('KH');
+final _ah = p('AH');
+
+int _refWinner(Trick t) {
+  final led = t.cards.first.suit;
+  var best = 0;
+  for (var i = 1; i < t.cards.length; i++) {
+    if (t.cards[i].suit == led && t.cards[i].rank.value > t.cards[best].rank.value) best = i;
+  }
+  return t.seats[best];
+}
+
+bool _refKingRules(TrixOptions o, TrixContract k) =>
+    k == TrixContract.king || (k == TrixContract.complex && o.kingRulesInComplex);
+
+/// P-1, P-K2, P-K3, P-K5.
+Set<PlayingCard> _refTrickLegal(TrixOptions o, TrixContract k, Trick t, List<PlayingCard> hand) {
+  final kingRules = _refKingRules(o, k);
+  if (t.cards.isEmpty) {
+    final other = hand.where((c) => c.suit != Suit.hearts).toSet();
+    return kingRules && o.noHeartLeadInKing && other.isNotEmpty ? other : hand.toSet();
+  }
+  final led = t.cards.first.suit;
+  final follow = hand.where((c) => c.suit == led).toSet();
+  if (follow.isNotEmpty) {
+    final aceDown = led == Suit.hearts && t.cards.contains(_ah);
+    return kingRules && o.kingOnAceOfHearts && aceDown && hand.contains(_kh) ? {_kh} : follow;
+  }
+  return kingRules && o.kingMustBeDiscarded && hand.contains(_kh) ? {_kh} : hand.toSet();
+}
+
+/// X-1, X-2: a jack, or the card next to a card already on the layout
+/// (towards the 2 below the jack, towards the ace above it).
+Set<PlayingCard> _refLayoutLegal(List<PlayingCard> layout, List<PlayingCard> hand) {
+  final down = layout.toSet();
+  bool isDown(Suit s, int v) => down.contains(PlayingCard(s, Rank.fromValue(v)));
+  return {
+    for (final c in hand)
+      if (c.rank == Rank.jack ||
+          (c.rank.value < 11 && isDown(c.suit, c.rank.value + 1)) ||
+          (c.rank.value > 11 && isDown(c.suit, c.rank.value - 1)))
+        c,
+  };
+}
+
+/// DB-2: K♥ in King / Complex, the queens in Queens / Complex.
+Set<PlayingCard> _refDoublable(TrixContract k, List<PlayingCard> hand) => {
+  for (final c in hand)
+    if ((c == _kh && (k == TrixContract.king || k == TrixContract.complex)) ||
+        (c.rank == Rank.queen && (k == TrixContract.queens || k == TrixContract.complex)))
+      c,
+};
+
+/// §2.7: points of a finished trick deal, straight from the tables.
+List<int> _refPoints(TrixOptions o, TrixContract k, List<Trick> tricks, Map<PlayingCard, int> doubled) {
+  final pts = List.filled(4, 0);
+  int team(int x) => o.partnership ? x % 2 : x;
+  final king = k == TrixContract.king || k == TrixContract.complex;
+  final queens = k == TrixContract.queens || k == TrixContract.complex;
+  final diamonds = k == TrixContract.diamonds || k == TrixContract.complex;
+  final ltoush = k == TrixContract.ltoush || k == TrixContract.complex;
+  for (final t in tricks) {
+    final w = _refWinner(t);
+    final l = t.leader;
+    if (ltoush) pts[w] -= o.trickPenalty;
+    for (final card in t.cards) {
+      if (diamonds && card.suit == Suit.diamonds) pts[w] -= o.diamondPenalty;
+      final v = king && card == _kh ? o.kingPenalty : (queens && card.rank == Rank.queen ? o.queenPenalty : 0);
+      if (v == 0) continue;
+      final d = doubled[card];
+      if (d == null) {
+        pts[w] -= v; // DB-S1
+      } else if (team(w) != team(d)) {
+        pts[w] -= 2 * v; // DB-S2 / DB-P1
+        pts[d] += v;
+      } else if (!o.partnership) {
+        final selfLed = l == d; // DB-S3 (forced) / DB-S4 (self-led)
+        switch (o.selfCaptureRule) {
+          case TrixSelfCapture.leaderGains:
+            pts[w] -= selfLed ? v : 2 * v;
+            if (!selfLed) pts[l] += v;
+          case TrixSelfCapture.leaderGainsStrict:
+            pts[w] -= 2 * v;
+            if (!selfLed) pts[l] += v;
+          case TrixSelfCapture.normalValue:
+            pts[w] -= v;
+          case TrixSelfCapture.doubleNoBonus:
+            pts[w] -= 2 * v;
+        }
+      } else {
+        switch (o.partnerCaptureRule) {
+          // DB-P2 / DB-P3
+          case TrixPartnerCapture.noBonus:
+            pts[w] -= 2 * v;
+          case TrixPartnerCapture.normalValue:
+            pts[w] -= v;
+          case TrixPartnerCapture.opponentsGain:
+            if (w == d && l == d) {
+              pts[w] -= v;
+            } else {
+              pts[w] -= 2 * v;
+              pts[team(l) != team(d) ? l : (l + 1) % 4] += v;
+            }
+        }
+      }
+    }
+  }
+  return pts;
+}
+
+/// A random house-rule set (every option, every value).
+TrixOptions _randomOptions(CardRng r) => TrixOptions(
+  partnership: r.nextBool(),
+  mode: r.nextBool() ? TrixMode.classic : TrixMode.complex,
+  doubling: r.nextInt(5) != 0,
+  noHeartLeadInKing: r.nextBool(),
+  kingMustBeDiscarded: r.nextBool(),
+  kingOnAceOfHearts: r.nextBool(),
+  kingRulesInComplex: r.nextBool(),
+  firstOwnerRule: r.nextBool() ? TrixFirstOwner.sevenOfHearts : TrixFirstOwner.fixedSeat,
+  firstOwner: r.nextInt(4),
+  doublingReveal: r.nextBool() ? TrixDoublingReveal.simultaneous : TrixDoublingReveal.sequential,
+  selfCaptureRule: TrixSelfCapture.values[r.nextInt(TrixSelfCapture.values.length)],
+  partnerCaptureRule: TrixPartnerCapture.values[r.nextInt(TrixPartnerCapture.values.length)],
+);
+
+/// Plays a match with random legal moves (random doubles included) and
+/// checks every move and every deal against the referee. Returns the number
+/// of deals with a doubled card.
+int refereeMatch(TrixOptions o, int seed) {
+  final rng = CardRng(seed * 31 + 5);
+  final e = TrixEngine.newMatch(seed: seed, options: o);
+  // K-2: the 7♥ holder of the first deal, or the fixed seat.
+  final firstOwner = o.firstOwnerRule == TrixFirstOwner.sevenOfHearts
+      ? e.state.hands.indexWhere((h) => h.contains(p('7H')))
+      : o.firstOwner;
+  final per = o.contracts.length;
+  final chosen = <TrixContract>[];
+  var answers = <int, List<PlayingCard>>{};
+  var doubledDeals = 0;
+  var totals = List.filled(4, 0);
+  var guard = 0;
+  while (!e.isOver) {
+    final s = e.state;
+    final deal = s.results.length;
+    final owner = (firstOwner + deal ~/ per) % 4; // K-1, K-3
+    expect(s.owner, owner, reason: 'deal $deal');
+    final seat = e.currentPlayer!;
+    final legal = e.legalMoves(seat);
+    switch (s.phase) {
+      case TrixPhase.contract:
+        // K-4: the owner, any contract of the kingdom not played yet.
+        expect(seat, owner);
+        final used = chosen.sublist(deal - deal % per);
+        expect(legal.map((m) => m.contract).toSet(), o.contracts.where((k) => !used.contains(k)).toSet());
+      case TrixPhase.doubling:
+        // DB-1, DB-5: every seat answers once, from the owner round.
+        expect(seat, (owner + answers.length) % 4);
+        final can = _refDoublable(s.contract!, s.hands[seat]);
+        expect(legal, hasLength(1 << can.length));
+        expect(legal.every((m) => m.cards.toSet().difference(can).isEmpty), isTrue);
+      case TrixPhase.tricks:
+        final t = s.trick!;
+        // K-6, P-2: the owner leads first, then the last trick's winner.
+        final leader = s.tricks.isEmpty ? owner : _refWinner(s.tricks.last);
+        expect(t.leader, leader);
+        expect(seat, (leader + t.length) % 4);
+        expect(legal.map((m) => m.card).toSet(), _refTrickLegal(o, s.contract!, t, s.hands[seat]));
+        for (final c in s.hands[seat]) {
+          expect(e.validate(TrixMove.play(c)) == null, legal.contains(TrixMove.play(c)));
+        }
+      case TrixPhase.layout:
+        // X-3: the owner first, then the next seat still holding cards.
+        if (s.layoutCards.isEmpty && s.cannotHold.every((x) => x.isEmpty)) expect(seat, owner);
+        expect(s.finished, isNot(contains(seat)));
+        final ref = _refLayoutLegal(s.layoutCards, s.hands[seat]);
+        // X-4: pass only with no playable card.
+        expect(legal, ref.isEmpty ? [const TrixMove.pass()] : [for (final c in sortedCards(ref)) TrixMove.play(c)]);
+      case TrixPhase.over:
+        fail('over');
+    }
+    final m = legal[rng.nextInt(legal.length)];
+    final pre = s.copy();
+    final events = e.apply(m);
+    final post = e.state;
+    if (m.kind == TrixMoveKind.contract) {
+      chosen.add(m.contract!);
+      answers = {};
+    }
+    if (m.kind == TrixMoveKind.double) {
+      answers[seat] = m.cards;
+      final withCards = events.where((x) => x.type == CardEventType.doubled && x.cards.isNotEmpty).toList();
+      if (o.doublingReveal == TrixDoublingReveal.simultaneous) {
+        // DB-5: nothing shows before the fourth answer, then all at once.
+        if (answers.length < 4) {
+          expect(withCards, isEmpty);
+          expect(post.doubled, isEmpty);
+        } else {
+          expect([for (final x in withCards) ...x.cards].toSet(), {for (final a in answers.values) ...a});
+        }
+      } else {
+        expect([for (final x in withCards) ...x.cards], m.cards);
+      }
+      if (answers.length == 4) {
+        expect(post.doubled, {
+          for (final a in answers.entries)
+            for (final c in a.value) c: a.key,
+        });
+        expect(post.phase, TrixPhase.tricks);
+        expect(post.currentPlayer, owner);
+      }
+    }
+    if (post.dealsPlayed == pre.dealsPlayed) {
+      if (++guard > 3000) fail('the match did not end');
+      continue;
+    }
+    // A deal ended: its points, straight from the tables.
+    final r = post.results.last;
+    expect(r.owner, owner);
+    expect(r.contract, pre.contract);
+    List<int> ref;
+    if (pre.contract == TrixContract.trix) {
+      // X-5, X-6: places in finishing order; the fourth is placed last.
+      final order = [...pre.finished, seat];
+      order.add([0, 1, 2, 3].firstWhere((x) => !order.contains(x)));
+      ref = List.filled(4, 0);
+      for (var i = 0; i < 4; i++) {
+        ref[order[i]] += o.trixScores[i];
+      }
+    } else {
+      final tricks = [...pre.tricks, pre.trick!.copy()..add(seat, m.card!)];
+      final taken = [for (final t in tricks) ...t.cards];
+      // P-K4, P-Q3, P-D3: the early ends; P-L1, C-4: all 13 tricks.
+      final early = switch (pre.contract!) {
+        TrixContract.king => taken.contains(_kh),
+        TrixContract.queens => taken.where((c) => c.rank == Rank.queen).length == 4,
+        TrixContract.diamonds => taken.where((c) => c.suit == Suit.diamonds).length == 13,
+        _ => false,
+      };
+      expect(early || tricks.length == 13, isTrue);
+      final lastBut = tricks.sublist(0, tricks.length - 1).expand((t) => t.cards).toList();
+      final endedBefore = switch (pre.contract!) {
+        TrixContract.king => lastBut.contains(_kh),
+        TrixContract.queens => lastBut.where((c) => c.rank == Rank.queen).length == 4,
+        TrixContract.diamonds => lastBut.where((c) => c.suit == Suit.diamonds).length == 13,
+        _ => false,
+      };
+      expect(endedBefore, isFalse, reason: 'the deal should have ended one trick earlier');
+      if (pre.doubled.isNotEmpty) doubledDeals++;
+      ref = _refPoints(o, pre.contract!, tricks, pre.doubled);
+    }
+    expect(r.points, ref, reason: 'deal $deal ${pre.contract!.name}');
+    totals = [for (var i = 0; i < 4; i++) totals[i] + ref[i]];
+    expect(post.seatScores, totals);
+  }
+  // M-1: a fixed number of deals; M-2, M-4, M-5: the best total wins, ties share.
+  expect(e.state.results, hasLength(4 * per));
+  final sc = [for (var i = 0; i < 4; i++) o.partnership ? totals[i % 2] + totals[i % 2 + 2] : totals[i]];
+  expect(e.state.scores, sc);
+  final best = sc.reduce((a, b) => a > b ? a : b);
+  expect(e.state.winners, [
+    for (var i = 0; i < 4; i++)
+      if (sc[i] == best) i,
+  ]);
+  return doubledDeals;
 }
 
 void main() {
@@ -404,35 +677,68 @@ void main() {
     }
   });
 
+  test('independent referee: turns, legal moves, doubling, early ends and every seat\'s points, '
+      'over random house rules and random play', () {
+    final r = CardRng(2026);
+    var doubled = 0;
+    for (var game = 0; game < 40; game++) {
+      doubled += refereeMatch(game < 4 ? TrixPreset.values[game].options : _randomOptions(r), game);
+    }
+    expect(doubled, greaterThan(100), reason: 'random play must exercise the doubling table');
+  });
+
+  /// One [strong] seat (rotating) against three [weak] seats, or a strong
+  /// team (alternating) against a weak team. Deterministic budgets.
+  void expectStronger(TrixOptions o, int matches, AiLevel strong, AiLevel weak, String label) {
+    var wins = 0;
+    var edge = 0.0;
+    for (var m = 0; m < matches; m++) {
+      final strongSeats = o.partnership ? [m % 2, m % 2 + 2] : [m % 4];
+      final levels = [for (var s = 0; s < 4; s++) strongSeats.contains(s) ? strong : weak];
+      final s = selfPlay(o, 1000 + m, levels, budget: const AiBudget.simulations(24)).state;
+      final sc = s.scores;
+      final mine = sum(strongSeats.map((x) => sc[x])) / strongSeats.length;
+      final others = [
+        for (var x = 0; x < 4; x++)
+          if (!strongSeats.contains(x)) sc[x],
+      ];
+      edge += mine - sum(others) / others.length;
+      if (strongSeats.any(s.winners.contains)) wins++;
+    }
+    // ignore: avoid_print
+    print('$label: ${strong.name} won $wins/$matches against ${weak.name}, '
+        'average edge ${(edge / matches).toStringAsFixed(1)}');
+    expect(edge / matches, greaterThan(0));
+    expect(wins, greaterThanOrEqualTo(matches / (o.partnership ? 2 : 4)));
+  }
+
   group('hard beats easy', () {
-    // One hard seat (rotating) against three easy seats, or a hard team
-    // (alternating) against an easy team. Deterministic budgets.
     for (final entry in {
       'تركس كومبلكس': (const TrixOptions(mode: TrixMode.complex), 8),
       'تركس (jordan)': (const TrixOptions(), 4),
       'كومبلكس شراكة': (const TrixOptions(mode: TrixMode.complex, partnership: true), 6),
     }.entries) {
-      test(entry.key, () {
-        final (o, matches) = entry.value;
-        var wins = 0;
-        var edge = 0.0;
-        for (var m = 0; m < matches; m++) {
-          final hardSeats = o.partnership ? [m % 2, m % 2 + 2] : [m % 4];
-          final levels = [for (var s = 0; s < 4; s++) hardSeats.contains(s) ? AiLevel.hard : AiLevel.easy];
-          final s = selfPlay(o, 1000 + m, levels, budget: const AiBudget.simulations(24)).state;
-          final sc = s.scores;
-          final hard = sum(hardSeats.map((x) => sc[x])) / hardSeats.length;
-          final others = [
-            for (var x = 0; x < 4; x++)
-              if (!hardSeats.contains(x)) sc[x],
-          ];
-          edge += hard - sum(others) / others.length;
-          if (hardSeats.any(s.winners.contains)) wins++;
-        }
-        // ignore: avoid_print
-        print('${entry.key}: hard won $wins/$matches, average edge ${(edge / matches).toStringAsFixed(1)}');
-        expect(edge / matches, greaterThan(0));
-        expect(wins, greaterThanOrEqualTo(matches / (o.partnership ? 2 : 4)));
+      test(entry.key, () => expectStronger(entry.value.$1, entry.value.$2, AiLevel.hard, AiLevel.easy, entry.key));
+    }
+  });
+
+  group('the levels are ordered: medium beats easy, hard beats medium', () {
+    for (final entry in {
+      'تركس (jordan)': const TrixOptions(),
+      'تركس شراكة': const TrixOptions(partnership: true),
+      'تركس كومبلكس': const TrixOptions(mode: TrixMode.complex),
+      'كومبلكس شراكة': const TrixOptions(mode: TrixMode.complex, partnership: true),
+    }.entries) {
+      test('${entry.key}: medium beats easy', () {
+        expectStronger(entry.value, 8, AiLevel.medium, AiLevel.easy, entry.key);
+      });
+    }
+    for (final entry in {
+      'تركس كومبلكس': const TrixOptions(mode: TrixMode.complex),
+      'كومبلكس شراكة': const TrixOptions(mode: TrixMode.complex, partnership: true),
+    }.entries) {
+      test('${entry.key}: hard beats medium', () {
+        expectStronger(entry.value, 6, AiLevel.hard, AiLevel.medium, entry.key);
       });
     }
   });

@@ -280,11 +280,7 @@ void main() {
       run(e, [for (var i = 0; i < 8; i++) pass]);
       expect(e.state.bidRound, 3);
       expect(e.currentPlayer, 0);
-      expect(e.legalMoves(0), [
-        pass,
-        for (final s in Suit.values) BalootMove.hokom(s),
-        sun,
-      ]);
+      expect(e.legalMoves(0), [pass, for (final s in Suit.values) BalootMove.hokom(s), sun]);
       run(e, [const BalootMove.hokom(Suit.diamonds)]);
       expect(e.state.phase, BalootPhase.playing);
       expect(e.state.hands[0], contains(p('AD')));
@@ -411,7 +407,10 @@ void main() {
 
     test('options sunDoubleRule: either direction, always, never', () {
       BalootPhase phase(List<int> scores, BalootSunDoubleRule rule) {
-        final e = deal(scores: scores, options: BalootOptions(sunDoubleRule: rule));
+        final e = deal(
+          scores: scores,
+          options: BalootOptions(sunDoubleRule: rule),
+        );
         run(e, [sun]);
         return e.state.phase;
       }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home-screen widgets, dark home screens: Madar's Lapis theme (deep
+     lapis-lazuli night with astrolabe gold). -->
+<resources>
+    <color name="widget_surface">#F20D1430</color>
+    <color name="widget_stroke">#40E8C77A</color>
+    <color name="widget_text_primary">#FFF4EEDD</color>
+    <color name="widget_text_secondary">#FFC7C3D6</color>
+    <color name="widget_text_muted">#A6ADACBD</color>
+    <color name="widget_accent">#FFE8C77A</color>
+    <color name="widget_warn">#FFFF9393</color>
+    <color name="widget_bar_track">#33E8C77A</color>
+    <color name="widget_bar_fill">#FFE8C77A</color>
+</resources>

@@ -515,13 +515,13 @@ class TxRowBuilder {
           }
           if (sum != 0) {
             total = fmt.amount(sum, book.currencyOfWallet(w) ?? book.baseCode, sign: SignDisplay.always);
-            color = sum > 0 ? t.success.withValues(alpha: 0.85) : t.textTertiary;
+            color = sum > 0 ? t.success : t.textTertiary;
           }
         } else {
           final flow = LedgerFlowOf.day(group.txs, book);
           if (flow != 0) {
             total = fmt.amount(flow, book.baseCode, sign: SignDisplay.always);
-            color = flow > 0 ? t.success.withValues(alpha: 0.85) : t.textTertiary;
+            color = flow > 0 ? t.success : t.textTertiary;
           }
         }
         return TxDayHeader(key: ValueKey('day-${group.day}'), label: label, total: total, totalColor: color);

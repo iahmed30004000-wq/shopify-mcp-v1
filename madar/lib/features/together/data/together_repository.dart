@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:drift/drift.dart';
-
 import '../../../core/db/database.dart';
 import '../../../core/db/repositories/key_value_repository.dart';
 import '../domain/head_to_head.dart';
@@ -132,16 +130,16 @@ class TogetherRepository {
       if (history.length > TogetherBounds.maxHistory) {
         history = history.sublist(history.length - TogetherBounds.maxHistory);
       }
-      var trophies = [...shelf.trophies, ...fresh];
-      if (trophies.length > TogetherBounds.maxTrophies) {
-        trophies = trophies.sublist(trophies.length - TogetherBounds.maxTrophies);
+      var onShelf = [...shelf.trophies, ...fresh];
+      if (onShelf.length > TogetherBounds.maxTrophies) {
+        onShelf = onShelf.sublist(onShelf.length - TogetherBounds.maxTrophies);
       }
       await keyValues.setJson(historyKey, {
         'v': 1,
         'matches': [for (final m in history) m.toJson()],
       });
       await keyValues.setJson(ledgerKey, ledger.toJson());
-      if (fresh.isNotEmpty) await keyValues.setJson(trophiesKey, TrophyShelf(trophies).toJson());
+      if (fresh.isNotEmpty) await keyValues.setJson(trophiesKey, TrophyShelf(onShelf).toJson());
       return RecordedMatch(record: r, duplicate: false, newTrophies: fresh);
     });
   }

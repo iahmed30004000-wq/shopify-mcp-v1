@@ -46,7 +46,7 @@ abstract final class TogetherBounds {
   // spaces, the BOM and line/paragraph separators. ZWJ (U+200D) is kept –
   // emoji sequences and Arabic shaping need it.
   static final RegExp _unsafe = RegExp(
-    '[\u0000-\u001F\u007F-\u009F؜​‎‏‪-‮  ⁦-⁩﻿]',
+    '[\u0000-\u001F\u007F-\u009F\u061C\u200B\u200E\u200F\u202A-\u202E\u2028\u2029\u2066-\u2069\uFEFF]',
   );
   static final RegExp _spaces = RegExp(r'\s+');
 

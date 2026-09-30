@@ -317,8 +317,9 @@ class TrendBars extends StatelessWidget {
       top = math.max(top, math.max(p.incomeMilli, p.expenseMilli));
     }
     final scale = ChartScale.of(0, top / 1000);
+    // Secondary, not tertiary: small axis labels over glass need AA.
     final labelStyle = text.labelSmall!.copyWith(
-      color: t.textTertiary,
+      color: t.textSecondary,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final valueTitles = AxisTitles(
@@ -469,8 +470,9 @@ class BalanceLine extends StatelessWidget {
       hi = math.max(hi, p.balanceMilli);
     }
     final scale = ChartScale.of(lo / 1000, hi / 1000);
+    // Secondary, not tertiary: small axis labels over glass need AA.
     final labelStyle = text.labelSmall!.copyWith(
-      color: t.textTertiary,
+      color: t.textSecondary,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final spots = [for (var i = 0; i < n; i++) FlSpot(xOf(i), points[i].balanceMilli / 1000)]

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark home screens: the astrolabe's dark bitmap (see values/widget_styles.xml). -->
+<resources>
+    <style name="widget_astro_day">
+        <item name="android:visibility">gone</item>
+    </style>
+    <style name="widget_astro_night">
+        <item name="android:visibility">visible</item>
+    </style>
+</resources>

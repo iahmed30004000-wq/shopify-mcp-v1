@@ -19934,6 +19934,447 @@
   },
   "aiChatLinkBody": "It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it.",
   "aiChatLinkOpen": "Open link",
+  "togetherTitle": "Together",
+  "@togetherTitle": {
+    "description": "Together Mode home title"
+  },
+  "togetherHallOfFame": "Our Hall of Fame",
+  "togetherPlayerDefault": "Player {number}",
+  "@togetherPlayerDefault": {
+    "description": "Generic default player name; number is already formatted",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherVs": "vs",
+  "togetherEditProfile": "Edit {name}'s profile",
+  "@togetherEditProfile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherSettingsTitle": "Together settings",
+  "togetherPlayers": "Players",
+  "togetherWinsLabel": "Wins",
+  "togetherLeads": "{name} leads by {diff}",
+  "@togetherLeads": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherAllSquare": "All square",
+  "togetherDrawsCount": "{count, plural, =0{No draws} =1{1 draw} other{{count} draws}}",
+  "@togetherDrawsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherMatchesCount": "{count, plural, =0{No matches} =1{1 match} other{{count} matches}}",
+  "@togetherMatchesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherDaysCount": "{count, plural, =0{0 days} =1{1 day} other{{count} days}}",
+  "@togetherDaysCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherDayStreakLabel": "Days in a row",
+  "togetherWinStreakLabel": "Win streak",
+  "togetherCoopLabel": "Team wins",
+  "togetherPlayedToday": "Played today",
+  "togetherPlayTodayHint": "Play today to keep it going",
+  "togetherNoStreak": "No streak yet",
+  "togetherSeeAll": "See all",
+  "togetherHeadToHead": "Head to head",
+  "togetherRecentMatches": "Recent matches",
+  "togetherEmptyTitle": "No matches yet",
+  "togetherEmptyBody": "Play your first game together — every match lands here, with streaks and trophies.",
+  "togetherShelfEmpty": "Your first trophy is waiting",
+  "togetherTrophiesProgress": "{earned} of {total}",
+  "@togetherTrophiesProgress": {
+    "placeholders": {
+      "earned": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophiesEarned": "Trophies earned",
+  "togetherResultWon": "{name} won",
+  "@togetherResultWon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherResultDraw": "Draw",
+  "togetherResultTeamWon": "Won together",
+  "togetherResultTeamLost": "Lost together",
+  "togetherBestScore": "Best: {score}",
+  "@togetherBestScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherModePassAndPlay": "Pass & play",
+  "togetherModePassAndPlayBody": "One phone taking turns — a hand-off screen hides cards and answers",
+  "togetherModeSplitScreen": "Split screen",
+  "togetherModeSplitScreenBody": "One phone, a half each, both touching at once",
+  "togetherModeNearby": "Two phones nearby",
+  "togetherModeNearbyBody": "Bluetooth & Wi-Fi Direct — no internet, no servers",
+  "togetherModeOnline": "Two phones online",
+  "togetherModeOnlineBody": "From different places — off by default",
+  "togetherComingSoon": "Coming soon",
+  "togetherModeUnsupported": "Not in this game",
+  "togetherModeDisabled": "Off in settings",
+  "togetherOnlyGameState": "Only game state ever travels between phones — health, money and personal data never leave the device.",
+  "togetherLaunchSubtitle": "How will you play?",
+  "togetherWhoStarts": "Who starts?",
+  "togetherRandomStart": "Random",
+  "togetherStartGame": "Let's play",
+  "togetherSplitLayout": "Screen layout",
+  "togetherLayoutFaceToFace": "Face to face",
+  "togetherLayoutSideBySide": "Side by side",
+  "togetherLayoutEndToEnd": "End to end",
+  "togetherPassTo": "Pass the phone to",
+  "@togetherPassTo": {
+    "description": "Followed by the player's name on its own line"
+  },
+  "togetherPassToName": "Pass the phone to {name}",
+  "@togetherPassToName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherHandOffHint": "Private info stays hidden until its owner reveals it",
+  "togetherNoPeeking": "No peeking!",
+  "togetherReveal": "I'm {name} — reveal",
+  "@togetherReveal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherStillYou": "Still you, {name}?",
+  "@togetherStillYou": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherShieldHint": "The screen was hidden when you left the app",
+  "togetherContinue": "Continue",
+  "togetherLastMove": "Last move: {move}",
+  "@togetherLastMove": {
+    "placeholders": {
+      "move": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherPause": "Pause",
+  "togetherYourSide": "{name}'s side",
+  "@togetherYourSide": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherProfileTitle": "Player profile",
+  "togetherFieldName": "Name",
+  "togetherFieldTitle": "Title",
+  "togetherTitleNone": "No title",
+  "togetherTitleCustom": "Custom",
+  "togetherTitleCustomHint": "Type a title",
+  "togetherFieldAvatar": "Avatar",
+  "togetherAvatarConstellation": "Emblem",
+  "togetherAvatarEmoji": "Emoji",
+  "togetherAvatarInitials": "Initial",
+  "togetherAvatarShuffle": "Shuffle",
+  "togetherAvatarOption": "Design {number}",
+  "@togetherAvatarOption": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherFieldColor": "Colour",
+  "togetherColorTaken": "{name}'s colour",
+  "@togetherColorTaken": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherSave": "Save",
+  "togetherCancel": "Cancel",
+  "togetherTitleStrategist": "The Mastermind",
+  "togetherTitleCardShark": "Card Star",
+  "togetherTitleLuckyStar": "Lucky Star",
+  "togetherTitleChallenger": "The Challenger",
+  "togetherTitleGrandmaster": "Board Legend",
+  "togetherTitleQuizWhiz": "Quiz Whiz",
+  "togetherTitleComebackKing": "Comeback Kid",
+  "togetherTitleLightning": "Lightning",
+  "togetherTitlePeacemaker": "Peacemaker",
+  "togetherTitleDreamer": "Dreamer",
+  "togetherTrophyFirstMatch": "First Match",
+  "togetherTrophyFirstMatchDesc": "Your first match together",
+  "togetherTrophyMatches10": "Ten Together",
+  "togetherTrophyMatches10Desc": "{count} matches together",
+  "@togetherTrophyMatches10Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMatches50": "Fifty Strong",
+  "togetherTrophyMatches50Desc": "{count} matches together",
+  "@togetherTrophyMatches50Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMatches100": "Century Club",
+  "togetherTrophyMatches100Desc": "{count} matches together",
+  "@togetherTrophyMatches100Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMatches250": "Partners for Life",
+  "togetherTrophyMatches250Desc": "{count} matches together",
+  "@togetherTrophyMatches250Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyDayStreak3": "Little Flame",
+  "togetherTrophyDayStreak3Desc": "Played together {count} days in a row",
+  "@togetherTrophyDayStreak3Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyDayStreak7": "Full Week",
+  "togetherTrophyDayStreak7Desc": "Played together {count} days in a row",
+  "@togetherTrophyDayStreak7Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyDayStreak30": "A Month Strong",
+  "togetherTrophyDayStreak30Desc": "Played together {count} days in a row",
+  "@togetherTrophyDayStreak30Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyWinStreak3": "Hat-trick",
+  "togetherTrophyWinStreak3Desc": "{count} wins in a row",
+  "@togetherTrophyWinStreak3Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyWinStreak5": "Unstoppable",
+  "togetherTrophyWinStreak5Desc": "{count} wins in a row",
+  "@togetherTrophyWinStreak5Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyWinStreak10": "Legendary Run",
+  "togetherTrophyWinStreak10Desc": "{count} wins in a row",
+  "@togetherTrophyWinStreak10Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyExplorer5": "Explorers",
+  "togetherTrophyExplorer5Desc": "Played {count} different games",
+  "@togetherTrophyExplorer5Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyExplorer10": "Game Voyagers",
+  "togetherTrophyExplorer10Desc": "Played {count} different games",
+  "@togetherTrophyExplorer10Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyCoopWins5": "Dream Team",
+  "togetherTrophyCoopWins5Desc": "{count} wins as a team",
+  "@togetherTrophyCoopWins5Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyCoopWins25": "One Heart",
+  "togetherTrophyCoopWins25Desc": "{count} wins as a team",
+  "@togetherTrophyCoopWins25Desc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMarathon": "Marathon",
+  "togetherTrophyMarathonDesc": "{count} matches in one day",
+  "@togetherTrophyMarathonDesc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyPhotoFinish": "Neck and Neck",
+  "togetherTrophyPhotoFinishDesc": "Your first draw",
+  "togetherTrophyNailBiter": "Nail-biter",
+  "togetherTrophyNailBiterDesc": "Won by a single point",
+  "togetherTrophyPerfectBalance": "Perfect Balance",
+  "togetherTrophyPerfectBalanceDesc": "Level on wins after at least {count} matches",
+  "@togetherTrophyPerfectBalanceDesc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyGameMaster": "Game Master",
+  "togetherTrophyGameMasterDesc": "{count} wins in {game}",
+  "@togetherTrophyGameMasterDesc": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "game": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTierBronze": "Bronze",
+  "togetherTierSilver": "Silver",
+  "togetherTierGold": "Gold",
+  "togetherTierLegendary": "Legendary",
+  "togetherEarnedOn": "Earned {date}",
+  "@togetherEarnedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherLocked": "Not earned yet",
+  "togetherTrophyShared": "Shared by you both",
+  "togetherTrophyHolder": "Earned by {name}",
+  "@togetherTrophyHolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNewTrophies": "New in our Hall of Fame!",
+  "togetherProgressOf": "{current} / {target}",
+  "@togetherProgressOf": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGameTarneeb": "Tarneeb",
+  "togetherGameTrix": "Trix",
+  "togetherGameBasra": "Basra",
+  "togetherGameKonkan": "Konkan",
+  "togetherGameBackgammon": "Backgammon",
+  "togetherGameChess": "Chess",
+  "togetherGameDominoes": "Dominoes",
+  "togetherGameLudo": "Ludo",
+  "togetherGameFourInARow": "Four in a Row",
+  "togetherGameWordDuel": "Word Duel",
+  "togetherGameQuizDuel": "Islamic Quiz Duel",
+  "togetherGameDrawGuess": "Draw & Guess",
+  "togetherGameMiniGolf": "Mini Golf",
+  "togetherGameKnowMe": "How Well Do You Know Me?",
+  "togetherGameAirHockey": "Air Hockey",
+  "togetherGameBeachVolley": "Beach Volley Duo",
+  "togetherGameKartDash": "Kart Dash",
+  "togetherGameSnowballFight": "Snowball Fight",
+  "togetherGamePaddleDuel": "Paddle Duel",
+  "togetherGameTankDuel": "Tank Duel",
+  "togetherGameMetropolisCoop": "Metropolis Machine Co-op",
+  "togetherGameUnknown": "Game",
+  "togetherSettingsDefaultMode": "Default play mode",
+  "togetherSettingsDefaultModeHint": "Suggested at the start of every game — you can still change it then",
+  "togetherSettingsOnline": "Online play",
+  "togetherSettingsOnlineHint": "Off by default. When on, only game state travels.",
+  "togetherSettingsPrivacy": "Hide from recent apps",
+  "togetherSettingsPrivacyHint": "During private turns the screen stays out of thumbnails and screenshots",
+  "togetherResetRecords": "Clear history & trophies",
+  "togetherResetDone": "History and trophies cleared",
+  "togetherTapToEdit": "Tap to edit",
   "widgetsPrayerName": "Next prayer",
   "@widgetsPrayerName": {
     "description": "Home-screen widget: the next prayer (widget title and its name in settings)"

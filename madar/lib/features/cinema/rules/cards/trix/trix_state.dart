@@ -379,7 +379,9 @@ final class TrixMove extends CardMove {
     TrixMoveKind.values.byName(j['k']! as String),
     contract: j['t'] == null ? null : TrixContract.values.byName(j['t']! as String),
     card: j['c'] == null ? null : PlayingCard.parse(j['c']! as String),
-    cards: j['cs'] == null ? const [] : cardsFromJson(j['cs']),
+    // Sorted like [TrixMove.double], so the answer's card order never
+    // matters when comparing it with the legal moves.
+    cards: j['cs'] == null ? const [] : sortedCards(cardsFromJson(j['cs'])),
   );
 
   final TrixMoveKind kind;
