@@ -55,8 +55,7 @@ void main() {
 
   Future<SceneSnapshot> snap() => orbit.snapshot(now: now, languageCode: 'en');
   Future<OrbitPlanet> money() async => (await snap()).planet('money')!;
-  NeglectReason? reason(OrbitPlanet p, ReasonCode code) =>
-      p.score.reasons.where((r) => r.code == code).firstOrNull;
+  NeglectReason? reason(OrbitPlanet p, ReasonCode code) => p.score.reasons.where((r) => r.code == code).firstOrNull;
 
   test('wallets orbit Money sized by their share of the balances; an overdrawn one looks neglected', () async {
     var planet = await money();
@@ -73,9 +72,10 @@ void main() {
     expect(moons[ids.bank]!.label, 'Bank');
 
     // 200 JOD more from cash: overdrawn (−95).
-    await LedgerService(repos, clock: () => now).add(
-      TxWrite(walletId: ids.cash, kind: TxKind.expense, amountMilli: 200000, date: now),
-    );
+    await LedgerService(
+      repos,
+      clock: () => now,
+    ).add(TxWrite(walletId: ids.cash, kind: TxKind.expense, amountMilli: 200000, date: now));
     planet = await money();
     final cash = planet.moons.firstWhere((m) => m.refId == ids.cash);
     expect(cash.score, 0.15);
@@ -128,12 +128,16 @@ void main() {
     // Fuel 30 % over (severity 0.7) outranks the debt two days late (0.6).
     var e = await entry();
     expect(e.reason.code, ReasonCode.budgetOverspent);
-    expect(RecordOpener.moneyTarget('${e.reason.refTable}:${e.reason.refId}'), const MoneyRouteTarget('/budget?tab=spending'));
+    expect(
+      RecordOpener.moneyTarget('${e.reason.refTable}:${e.reason.refId}'),
+      const MoneyRouteTarget('/budget?tab=spending'),
+    );
 
     // A plan of 150 for fuel covers the 130 spent: the debt is next.
-    await BudgetRepository(repos, clock: () => now).save(
-      BudgetNode(id: ids.fuel, name: 'Car fuel', amountMilli: 150000),
-    );
+    await BudgetRepository(
+      repos,
+      clock: () => now,
+    ).save(BudgetNode(id: ids.fuel, name: 'Car fuel', amountMilli: 150000));
     e = await entry();
     expect(e.reason.code, ReasonCode.debtOverdue);
     expect(e.text, 'Debt to ${_iso('Khaled')} — 2 days overdue');
@@ -142,8 +146,9 @@ void main() {
   });
 
   test('every money write is logged on the Money world', () async {
-    Future<Set<String>> kinds() async =>
-        {for (final a in await repos.activity.since(DateTime(2026, 9, 1), planetKey: 'money')) a.kind};
+    Future<Set<String>> kinds() async => {
+      for (final a in await repos.activity.since(DateTime(2026, 9, 1), planetKey: 'money')) a.kind,
+    };
     // Entries, the jar deposit and the budget plan.
     expect(await kinds(), containsAll([LedgerService.activityKind, GoalsService.kindJar, 'money.budget']));
     final goals = GoalsService(repos, clock: () => now);

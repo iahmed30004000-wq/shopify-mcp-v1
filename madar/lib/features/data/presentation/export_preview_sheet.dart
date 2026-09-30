@@ -235,7 +235,7 @@ class _ExportPreviewSheetState extends ConsumerState<ExportPreviewSheet> {
               border: Border.all(color: t.glassBorder.withValues(alpha: 0.7), width: 0.8),
             ),
             child: SelectableText(
-              markdown.trimRight(),
+              Directionality.of(context) == TextDirection.rtl ? isolateLatinRuns(markdown.trimRight()) : markdown.trimRight(),
               style: text.bodySmall!.copyWith(color: t.textPrimary, height: 1.55, fontSize: 12.5),
             ),
           ),
@@ -305,6 +305,14 @@ class _ExportPreviewSheetState extends ConsumerState<ExportPreviewSheet> {
     );
   }
 }
+
+final RegExp _latinRun = RegExp(r'[0-9A-Za-z](?:[0-9A-Za-z .,:/%+\-–→×•]*[0-9A-Za-z%•])?');
+
+/// Display-only: wraps every Latin / numeric run (dates, times, amounts,
+/// codes) of an Arabic preview in a left-to-right isolate so `2026-09-30`
+/// or `50.00 USD` read in order inside right-to-left lines. The shared text
+/// itself carries no bidi control characters.
+String isolateLatinRuns(String text) => text.replaceAllMapped(_latinRun, (m) => BidiIsolate.ltr(m[0]!));
 
 class _Pill extends StatelessWidget {
   const _Pill({required this.icon, required this.label});
@@ -377,21 +385,30 @@ class _SectionToggle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.s, Space.m, Space.s),
+            padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.xs + 2, Space.m, Space.xs + 2),
             child: Row(
               children: [
-                DataIconBadge(iconOf(section.id), size: 34, color: active ? t.accent : t.textTertiary),
+                DataIconBadge(iconOf(section.id), size: 30, color: active ? t.accent : t.textTertiary),
                 const SizedBox(width: Space.m),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(section.title, style: text.titleSmall!.copyWith(color: t.textPrimary)),
-                      Text(subtitle, style: text.bodySmall!.copyWith(color: t.textTertiary)),
-                    ],
+                  child: Text(
+                    section.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: text.titleSmall!.copyWith(color: t.textPrimary),
                   ),
                 ),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 132),
+                  child: Text(
+                    subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.end,
+                    style: text.labelSmall!.copyWith(color: t.textTertiary),
+                  ),
+                ),
+                const SizedBox(width: Space.s),
                 MadarSwitch(
                   value: active,
                   semanticLabel: section.title,

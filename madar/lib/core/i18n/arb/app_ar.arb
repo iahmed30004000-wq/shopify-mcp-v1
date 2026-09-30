@@ -17861,13 +17861,13 @@
   "dataExportSummaryTitle": "ملخّص جاهز للذكاء الاصطناعي",
   "dataExportSummaryBody": "نظرة موجزة بصيغة Markdown تراجعها قسمًا قسمًا قبل مشاركتها.",
   "dataExportCsvTitle": "جداول (CSV)",
-  "dataExportCsvBody": "التحاليل والمعاملات والألم والمزاج – لـExcel أو Sheets.",
+  "dataExportCsvBody": "التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.",
   "dataExportJsonTitle": "كل البيانات (JSON)",
   "dataExportJsonBody": "كل السجلات في ملف واحد، لأرشيفك الخاص أو لتطبيقات أخرى.",
   "dataExportPlainWarning": "ملفات التصدير غير مشفّرة: من يحصل عليها يستطيع قراءتها. شاركها مع من تثق به فقط.",
   "dataImportSection": "الاستيراد",
   "dataImportTitle": "الاستيراد من نموذج مَدار الأول",
-  "dataImportBody": "أدخل البيانات المصدّرة من النسخة الأولى (ملف JSON).",
+  "dataImportBody": "أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.",
   "dataFooter": "لا يرفع مَدار بياناتك إلى أي خادم. أنت وحدك تقرّر أين تذهب ملفاتك.",
   "dataAreaOther": "الإعدادات والسجلّ",
   "dataShareAction": "مشاركة",
@@ -17960,7 +17960,7 @@
     }
   },
   "dataCsvSheetTitle": "تصدير جدول",
-  "dataCsvSheetSubtitle": "CSV · UTF-8 · يُفتح في Excel وSheets",
+  "dataCsvSheetSubtitle": "ملف CSV يُفتح في برامج الجداول",
   "dataCsvWhat": "ماذا",
   "dataCsvWhen": "الفترة",
   "dataCsvLabs": "التحاليل",
@@ -17984,7 +17984,14 @@
       }
     }
   },
-  "dataCsvFormatNote": "التواريخ بصيغة 2026-09-30 والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.",
+  "dataCsvFormatNote": "التواريخ بصيغة {example} والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.",
+  "@dataCsvFormatNote": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
   "dataCsvCreate": "إنشاء الملف",
   "dataCsvCreateRows": "{count, plural, =0{لا صفوف في هذه الفترة} =1{إنشاء الملف (صف واحد)} =2{إنشاء الملف (صفّان)} few{إنشاء الملف ({count} صفوف)} many{إنشاء الملف ({count} صفًّا)} other{إنشاء الملف ({count} صف)}}",
   "@dataCsvCreateRows": {
@@ -18061,7 +18068,7 @@
     }
   },
   "dataSummaryNoData": "لا بيانات بعد",
-  "dataSummaryProfileHint": "اختياري – أنت تحدّد ما يُذكر",
+  "dataSummaryProfileHint": "اختياري",
   "dataSummaryPreviewTitle": "ما سيُشارَك بالضبط",
   "dataSummaryCopied": "نُسخ الملخّص إلى الحافظة.",
   "dataSummaryUse": "استخدام هذا الملخّص",
@@ -18069,7 +18076,14 @@
   "dataProfileAboutHint": "مثلًا: العمر أو ما يهمّك أن يعرفه المساعد",
   "dataRestoreFlowTitle": "الاستعادة",
   "dataRestoreChooseTitle": "استعادة بياناتك",
-  "dataRestoreChooseBody": "اختر ملف ‎.madarbackup‎. سترى ما فيه قبل أن يتغيّر أي شيء.",
+  "dataRestoreChooseBody": "اختر ملف نسخة ينتهي بـ {ext}. سترى ما فيه قبل أن يتغيّر أي شيء.",
+  "@dataRestoreChooseBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
   "dataRestorePickFile": "اختيار ملف النسخة",
   "dataRestoreNothingChanges": "لن يتغيّر شيء في بياناتك الحالية حتى تؤكّد الاستبدال في الخطوة الأخيرة.",
   "dataSafetyCopiesTitle": "نسخ الأمان على هذا الهاتف",
@@ -18104,7 +18118,14 @@
   "dataNothingChanged": "لم يتغيّر شيء في بياناتك.",
   "dataErrWrongPassphrase": "عبارة المرور هذه لا تفتح النسخة. تحقّق من الأحرف وحاول مجددًا.",
   "dataErrNotBackupTitle": "هذا ليس ملف نسخة من مَدار",
-  "dataErrNotBackupBody": "اختر ملفًا ينتهي بـ ‎.madarbackup‎ أنشأته من «إنشاء نسخة احتياطية».",
+  "dataErrNotBackupBody": "اختر ملفًا ينتهي بـ {ext} أنشأته من «إنشاء نسخة احتياطية».",
+  "@dataErrNotBackupBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
   "dataErrNewerTitle": "أُنشئت بإصدار أحدث من مَدار",
   "dataErrNewerBody": "حدّث مَدار على هذا الهاتف ثم حاول مجددًا.",
   "dataErrTruncatedTitle": "الملف غير مكتمل",

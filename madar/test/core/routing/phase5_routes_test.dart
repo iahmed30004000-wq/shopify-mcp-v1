@@ -156,9 +156,7 @@ void main() {
 
     app.router.go(
       AppRoutes.transactionsOf(
-        TxFilterQuery.encode(
-          const TxFilter(walletIds: {'w-7'}, kinds: {TxKind.income}, tags: {'cod'}, query: 'Amman'),
-        ),
+        TxFilterQuery.encode(const TxFilter(walletIds: {'w-7'}, kinds: {TxKind.income}, tags: {'cod'}, query: 'Amman')),
       ),
     );
     await settleApp(tester);

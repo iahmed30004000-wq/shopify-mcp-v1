@@ -30,7 +30,11 @@ void main() {
     expect(RecordOpener.canOpen('medications', null, const []), isTrue, reason: 'doses of several medications');
     expect(RecordOpener.canOpen('lab_tests', 'l1', const []), isTrue);
     expect(RecordOpener.canOpen('habits', 'h1', const [], planetKey: 'health'), isTrue);
-    expect(RecordOpener.canOpen('habits', 'h1', const [], planetKey: 'growth'), isFalse, reason: "another world's habit");
+    expect(
+      RecordOpener.canOpen('habits', 'h1', const [], planetKey: 'growth'),
+      isFalse,
+      reason: "another world's habit",
+    );
     expect(RecordOpener.healthLocation('medications:m1'), '/meds');
     expect(RecordOpener.healthLocation('medications'), '/meds');
     expect(RecordOpener.healthLocation('appointments:a1'), '/record/appointments?highlight=a1');

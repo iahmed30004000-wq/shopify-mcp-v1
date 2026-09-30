@@ -361,7 +361,7 @@ class _ChooseView extends ConsumerWidget {
               Text(l.dataRestoreChooseTitle, textAlign: TextAlign.center, style: text.headlineSmall!.copyWith(color: t.textPrimary)),
               const SizedBox(height: Space.s),
               Text(
-                l.dataRestoreChooseBody,
+                l.dataRestoreChooseBody(BidiIsolate.ltr('.$madarBackupExtension')),
                 textAlign: TextAlign.center,
                 style: text.bodyMedium!.copyWith(color: t.textSecondary, height: 1.5),
               ),
@@ -614,7 +614,7 @@ class _PreviewView extends StatelessWidget {
                       const SizedBox(width: Space.m),
                       Expanded(child: Text(dataAreaLabel(l, a), style: text.bodyMedium!.copyWith(color: t.textPrimary))),
                       Text(
-                        fmt.localizeDigits(l.dataRecordsCount(areas[a]!)),
+                        recordsText(l, fmt, areas[a]!),
                         style: text.bodySmall!.copyWith(color: t.textSecondary),
                       ),
                     ],
@@ -747,7 +747,7 @@ class _FailedView extends StatelessWidget {
   final VoidCallback onRetry;
 
   static (String, String) texts(L10n l, RestoreFailure f) => switch (f) {
-    RestoreFailure.notABackup => (l.dataErrNotBackupTitle, l.dataErrNotBackupBody),
+    RestoreFailure.notABackup => (l.dataErrNotBackupTitle, l.dataErrNotBackupBody(BidiIsolate.ltr('.$madarBackupExtension'))),
     RestoreFailure.newerVersion => (l.dataErrNewerTitle, l.dataErrNewerBody),
     RestoreFailure.truncated => (l.dataErrTruncatedTitle, l.dataErrTruncatedBody),
     RestoreFailure.corrupted => (l.dataErrCorruptedTitle, l.dataErrCorruptedBody),

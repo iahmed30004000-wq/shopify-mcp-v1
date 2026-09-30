@@ -82,7 +82,7 @@ class _DataFilePanelState extends ConsumerState<DataFilePanel> {
     final f = widget.file;
     final meta = [
       formatDataSize(l, fmt, f.size),
-      if (f.records != null) fmt.localizeDigits(l.dataRecordsCount(f.records!)),
+      if (f.records != null) recordsText(l, fmt, f.records!),
     ].join(' · ');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

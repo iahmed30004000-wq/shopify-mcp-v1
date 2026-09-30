@@ -28518,7 +28518,7 @@ abstract class L10n {
   /// No description provided for @dataExportCsvBody.
   ///
   /// In ar, this message translates to:
-  /// **'التحاليل والمعاملات والألم والمزاج – لـExcel أو Sheets.'**
+  /// **'التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.'**
   String get dataExportCsvBody;
 
   /// No description provided for @dataExportJsonTitle.
@@ -28554,7 +28554,7 @@ abstract class L10n {
   /// No description provided for @dataImportBody.
   ///
   /// In ar, this message translates to:
-  /// **'أدخل البيانات المصدّرة من النسخة الأولى (ملف JSON).'**
+  /// **'أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.'**
   String get dataImportBody;
 
   /// No description provided for @dataFooter.
@@ -28860,7 +28860,7 @@ abstract class L10n {
   /// No description provided for @dataCsvSheetSubtitle.
   ///
   /// In ar, this message translates to:
-  /// **'CSV · UTF-8 · يُفتح في Excel وSheets'**
+  /// **'ملف CSV يُفتح في برامج الجداول'**
   String get dataCsvSheetSubtitle;
 
   /// No description provided for @dataCsvWhat.
@@ -28944,8 +28944,8 @@ abstract class L10n {
   /// No description provided for @dataCsvFormatNote.
   ///
   /// In ar, this message translates to:
-  /// **'التواريخ بصيغة 2026-09-30 والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.'**
-  String get dataCsvFormatNote;
+  /// **'التواريخ بصيغة {example} والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.'**
+  String dataCsvFormatNote(String example);
 
   /// No description provided for @dataCsvCreate.
   ///
@@ -29262,7 +29262,7 @@ abstract class L10n {
   /// No description provided for @dataSummaryProfileHint.
   ///
   /// In ar, this message translates to:
-  /// **'اختياري – أنت تحدّد ما يُذكر'**
+  /// **'اختياري'**
   String get dataSummaryProfileHint;
 
   /// No description provided for @dataSummaryPreviewTitle.
@@ -29310,8 +29310,8 @@ abstract class L10n {
   /// No description provided for @dataRestoreChooseBody.
   ///
   /// In ar, this message translates to:
-  /// **'اختر ملف ‎.madarbackup‎. سترى ما فيه قبل أن يتغيّر أي شيء.'**
-  String get dataRestoreChooseBody;
+  /// **'اختر ملف نسخة ينتهي بـ {ext}. سترى ما فيه قبل أن يتغيّر أي شيء.'**
+  String dataRestoreChooseBody(String ext);
 
   /// No description provided for @dataRestorePickFile.
   ///
@@ -29478,8 +29478,8 @@ abstract class L10n {
   /// No description provided for @dataErrNotBackupBody.
   ///
   /// In ar, this message translates to:
-  /// **'اختر ملفًا ينتهي بـ ‎.madarbackup‎ أنشأته من «إنشاء نسخة احتياطية».'**
-  String get dataErrNotBackupBody;
+  /// **'اختر ملفًا ينتهي بـ {ext} أنشأته من «إنشاء نسخة احتياطية».'**
+  String dataErrNotBackupBody(String ext);
 
   /// No description provided for @dataErrNewerTitle.
   ///

@@ -9,6 +9,10 @@ import '../../../../core/motion/motion.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../domain/passphrase_strength.dart';
 
+/// "1,234 records" with grouped, localised digits.
+String recordsText(L10n l, MadarFormatter fmt, int count) =>
+    fmt.localizeDigits(l.dataRecordsCount(count).replaceFirst('$count', fmt.formatInt(count)));
+
 /// `12.4 KB` / `١٢٫٤ ك.ب` style size text.
 String formatDataSize(L10n l, MadarFormatter fmt, int bytes) {
   if (bytes < 1024) return l.dataSizeBytes(fmt.formatInt(bytes));

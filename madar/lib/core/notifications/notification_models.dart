@@ -339,10 +339,29 @@ class NotificationTap {
 /// reports it.
 @immutable
 class PendingNotice {
-  const PendingNotice(this.id, this.payload);
+  const PendingNotice(this.id, this.payload, {this.title, this.body});
 
   final int id;
   final String? payload;
+
+  /// What it will show, when the platform reports it (read-only queries such
+  /// as the notification center; scheduling compares payloads only).
+  final String? title;
+  final String? body;
+}
+
+/// A notification currently shown in the system tray, as the platform
+/// reports it (see `ActiveNotificationQuery`). [payload] is Madar's
+/// `NotificationEnvelope` when the notification is one of Madar's own.
+@immutable
+class ActiveNotice {
+  const ActiveNotice(this.id, {this.payload, this.title, this.body, this.channelId});
+
+  final int id;
+  final String? payload;
+  final String? title;
+  final String? body;
+  final String? channelId;
 }
 
 /// What a [NotificationService.sync] did.

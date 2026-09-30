@@ -24,7 +24,8 @@ class MoneyHubIds {
 }
 
 /// The planet page needs prayer times; nothing else.
-Future<void> seedMoneyFresh(MadarDatabase db) => OrbitRepository(Repositories(db)).setPrayerSettings(hostPrayerSettings());
+Future<void> seedMoneyFresh(MadarDatabase db) =>
+    OrbitRepository(Repositories(db)).setPrayerSettings(hostPrayerSettings());
 
 /// Three wallets (JOD cash and bank, an EGP business wallet), a budget of
 /// two items (fuel overspent this month), three entries, a jar funded from

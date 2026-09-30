@@ -93,8 +93,7 @@ abstract final class MoneyLinks {
       'budget_items' => MoneyRouteTarget(AppRoutes.budgetOf(tab: 'spending')),
       'jars' => MoneyRouteTarget(id == null ? AppRoutes.goalsOf(tab: 'jars') : AppRoutes.jarOf(id)),
       'debts' => id == null ? MoneyRouteTarget(AppRoutes.goalsOf(tab: 'debts')) : MoneyDebtTarget(id),
-      'obligations' =>
-        id == null ? MoneyRouteTarget(AppRoutes.goalsOf(tab: 'obligations')) : MoneyObligationTarget(id),
+      'obligations' => id == null ? MoneyRouteTarget(AppRoutes.goalsOf(tab: 'obligations')) : MoneyObligationTarget(id),
       _ => null,
     };
   }

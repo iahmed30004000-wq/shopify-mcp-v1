@@ -56,7 +56,8 @@ void main() {
     });
     tearDown(() => db.close());
 
-    Future<LedgerTx> entry(bool Function(LedgerTx tx) where) async => (await ledger.book()).transactions.firstWhere(where);
+    Future<LedgerTx> entry(bool Function(LedgerTx tx) where) async =>
+        (await ledger.book()).transactions.firstWhere(where);
 
     test('lead back to their jar, debt or bill', () async {
       final jarTx = await entry((t) => t.id.startsWith(LedgerLinks.jarPrefix));
@@ -72,10 +73,7 @@ void main() {
 
       await goals.payObligation(ids.internet);
       final bill = await entry((t) => t.id.startsWith(LedgerLinks.obligationPrefix));
-      expect(
-        await MoneyLinks.linkedTarget(repos, bill, LedgerLink.obligation),
-        MoneyObligationTarget(ids.internet),
-      );
+      expect(await MoneyLinks.linkedTarget(repos, bill, LedgerLink.obligation), MoneyObligationTarget(ids.internet));
       // "Paid" moved the bill on by a month.
       expect((await repos.obligations.byId(ids.internet))!.nextDue, DateTime(2026, 11, 1));
 
@@ -92,10 +90,7 @@ void main() {
       final jarTx = await entry((t) => t.id.startsWith(LedgerLinks.jarPrefix));
       for (final tx in [opening, jarTx]) {
         await expectLater(
-          ledger.update(
-            tx.id,
-            TxWrite(walletId: tx.walletId, kind: tx.kind, amountMilli: 1, date: moneyHubNow),
-          ),
+          ledger.update(tx.id, TxWrite(walletId: tx.walletId, kind: tx.kind, amountMilli: 1, date: moneyHubNow)),
           throwsA(isA<LedgerLinkedEntryException>()),
         );
         await expectLater(ledger.delete(tx.id), throwsA(isA<LedgerLinkedEntryException>()));

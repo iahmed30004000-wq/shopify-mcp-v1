@@ -13,7 +13,12 @@ import '../../core/i18n/gen/app_localizations.dart';
 import '../../core/interaction/interaction.dart';
 import '../../core/routing/routes.dart';
 import '../money/budget/budget.dart'
-    show BudgetCurrencies, BudgetFormat, budgetCurrenciesProvider, budgetRepositoryProvider, budgetWeeksPerMonthProvider,
+    show
+        BudgetCurrencies,
+        BudgetFormat,
+        budgetCurrenciesProvider,
+        budgetRepositoryProvider,
+        budgetWeeksPerMonthProvider,
         showBudgetWeeksSheet;
 import '../money/goals/goals.dart' show GoalsActions, GoalsReminderSettings, goalsReminderSettingsProvider;
 import '../money/hub/money_hub_logic.dart';
@@ -74,9 +79,7 @@ class MoneySettingsSection extends ConsumerWidget {
           title: l.moneyHubSettingsWeekStart,
           subtitle: l.moneyHubSettingsWeekStartHint,
           selected: weekStart,
-          options: [
-            for (final day in MoneySettings.weekStarts) ChoiceOption(value: day, label: weekdayName(l, day)),
-          ],
+          options: [for (final day in MoneySettings.weekStarts) ChoiceOption(value: day, label: weekdayName(l, day))],
           onChanged: (day) => unawaited(setMoneyWeekStart(ref.read(repositoriesProvider), day)),
         ),
         SettingsTile(
@@ -91,11 +94,7 @@ class MoneySettingsSection extends ConsumerWidget {
   }
 
   Future<void> _editWeeks(BuildContext context, WidgetRef ref, num current, BudgetCurrencies currencies) async {
-    final value = await showBudgetWeeksSheet(
-      context,
-      current: current,
-      format: BudgetFormat.of(context, currencies),
-    );
+    final value = await showBudgetWeeksSheet(context, current: current, format: BudgetFormat.of(context, currencies));
     if (value == null || value == current || !context.mounted) return;
     final l = L10n.of(context);
     final undo = await ref.read(budgetRepositoryProvider).setWeeksPerMonth(value);

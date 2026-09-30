@@ -149,9 +149,10 @@ void main() {
       await shot(
         tester,
         'restore_preview_$tag',
-        const RestoreFlow(
+        RestoreFlow(
           debugState: RestoreDebugState(
             stage: RestoreStage.preview,
+            header: _header,
             fileName: 'madar-backup-2026-09-12-1840.madarbackup',
             counts: _backupCounts,
             currentCounts: _currentCounts,
@@ -195,7 +196,10 @@ void main() {
         beforeCapture: openSheet(
           (_) => const ExportPreviewSheet(),
           then: (tester) async {
-            await tester.drag(find.byType(SelectableText), const Offset(0, -900));
+            for (var i = 0; i < 3; i++) {
+              await tester.dragFrom(const Offset(206, 700), const Offset(0, -420));
+              await frames(tester, 6);
+            }
             await frames(tester, 20);
           },
         ),

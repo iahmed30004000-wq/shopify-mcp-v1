@@ -16,7 +16,7 @@ class FakeScheduled {
 /// In-memory [NotificationPlatform] for tests of any feature: records
 /// channels, scheduled / shown / cancelled notifications, and lets a test
 /// deny exact alarms, fire a tap or simulate a launch notification.
-class FakeNotificationPlatform implements NotificationPlatform {
+class FakeNotificationPlatform implements NotificationPlatform, ActiveNotificationQuery {
   FakeNotificationPlatform({this.exactAllowed = true, this.enabled = true, this.fullScreenAllowed = true, this.launch});
 
   bool exactAllowed;
@@ -122,7 +122,8 @@ class FakeNotificationPlatform implements NotificationPlatform {
 
   @override
   Future<List<PendingNotice>> pending() async => [
-    for (final s in scheduled.values) PendingNotice(s.request.id, s.payload),
+    for (final s in scheduled.values)
+      PendingNotice(s.request.id, s.payload, title: s.request.title, body: s.request.body),
   ];
 
   /// Ids whose alarm the "system" no longer holds although they are still
@@ -147,6 +148,18 @@ class FakeNotificationPlatform implements NotificationPlatform {
 
   @override
   Future<List<int>> activeIds() async => shown.keys.toList();
+
+  @override
+  Future<List<ActiveNotice>> activeNotices() async => [
+    for (final s in shown.values)
+      ActiveNotice(
+        s.request.id,
+        payload: s.payload,
+        title: s.request.title,
+        body: s.request.body,
+        channelId: s.request.channelId,
+      ),
+  ];
 
   @override
   Future<bool> notificationsEnabled() async => enabled;

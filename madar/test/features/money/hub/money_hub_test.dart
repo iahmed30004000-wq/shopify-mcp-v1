@@ -67,11 +67,12 @@ Future<void> _reveal(WidgetTester tester, Finder finder) async {
 }
 
 /// A tool tile of the grid, by its semantics ("title. hint").
-Finder _tool(String title) =>
-    find.descendant(of: find.byType(MoneyTools), matching: find.bySemanticsLabel(RegExp('^${RegExp.escape(title)}\\. ')));
+Finder _tool(String title) => find.descendant(
+  of: find.byType(MoneyTools),
+  matching: find.bySemanticsLabel(RegExp('^${RegExp.escape(title)}\\. ')),
+);
 
-String _netWorthText(WidgetTester tester) =>
-    tester.widget<Text>(find.byKey(const ValueKey('money-net-worth'))).data!;
+String _netWorthText(WidgetTester tester) => tester.widget<Text>(find.byKey(const ValueKey('money-net-worth'))).data!;
 
 void main() {
   group('pure', () {
@@ -169,20 +170,14 @@ void main() {
       expect(nine, contains('9:00'));
       expect(MoneySettingsSummary.reminders(en, enFmt, reminders), '1 day before and on the day · at $nine');
       expect(MoneySettingsSummary.reminders(ar, arFmt, reminders), startsWith('قبل يوم وفي يومه · الساعة'));
-      expect(
-        MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 0)),
-        'On the due day · at $nine',
-      );
+      expect(MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 0)), 'On the due day · at $nine');
       expect(
         MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 3, onDueDay: false)),
         '3 days before · at $nine',
       );
       expect(MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(enabled: false)), 'Off');
       expect(MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 0, onDueDay: false)), 'Off');
-      const currencies = [
-        LedgerCurrency(code: 'USD', rateToBase: 0.709),
-        LedgerCurrency(code: 'JOD', isBase: true),
-      ];
+      const currencies = [LedgerCurrency(code: 'USD', rateToBase: 0.709), LedgerCurrency(code: 'JOD', isBase: true)];
       expect(MoneySettingsSummary.currencies(en, enFmt, currencies), '\u2068JOD\u2069 · 2 currencies');
       expect(MoneySettingsSummary.currencies(ar, arFmt, currencies), '\u2068JOD\u2069 · عملتان');
       const named = [LedgerCurrency(code: 'JOD', nameAr: 'دينار أردني', nameEn: 'Jordanian dinar', isBase: true)];

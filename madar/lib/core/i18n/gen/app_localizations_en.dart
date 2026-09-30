@@ -18248,8 +18248,9 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get dataCsvFormatNote =>
-      'Dates look like 2026-09-30 and numbers use a decimal point, so any spreadsheet opens them as they are.';
+  String dataCsvFormatNote(String example) {
+    return 'Dates look like $example and numbers use a decimal point, so any spreadsheet opens them as they are.';
+  }
 
   @override
   String get dataCsvCreate => 'Create file';
@@ -18423,7 +18424,7 @@ class L10nEn extends L10n {
   String get dataSummaryNoData => 'No data yet';
 
   @override
-  String get dataSummaryProfileHint => 'Optional – you pick what’s mentioned';
+  String get dataSummaryProfileHint => 'Optional';
 
   @override
   String get dataSummaryPreviewTitle => 'Exactly what will be shared';
@@ -18448,8 +18449,9 @@ class L10nEn extends L10n {
   String get dataRestoreChooseTitle => 'Bring your data back';
 
   @override
-  String get dataRestoreChooseBody =>
-      'Pick a .madarbackup file. You’ll see what’s inside before anything changes.';
+  String dataRestoreChooseBody(String ext) {
+    return 'Pick a $ext file. You’ll see what’s inside before anything changes.';
+  }
 
   @override
   String get dataRestorePickFile => 'Choose backup file';
@@ -18544,8 +18546,9 @@ class L10nEn extends L10n {
   String get dataErrNotBackupTitle => 'This isn’t a Madar backup';
 
   @override
-  String get dataErrNotBackupBody =>
-      'Choose a file ending in .madarbackup, made with “Create backup”.';
+  String dataErrNotBackupBody(String ext) {
+    return 'Choose a file ending in $ext, made with “Create backup”.';
+  }
 
   @override
   String get dataErrNewerTitle => 'Made by a newer Madar';

@@ -18551,7 +18551,7 @@ class L10nAr extends L10n {
 
   @override
   String get dataExportCsvBody =>
-      'التحاليل والمعاملات والألم والمزاج – لـExcel أو Sheets.';
+      'التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.';
 
   @override
   String get dataExportJsonTitle => 'كل البيانات (JSON)';
@@ -18572,7 +18572,7 @@ class L10nAr extends L10n {
 
   @override
   String get dataImportBody =>
-      'أدخل البيانات المصدّرة من النسخة الأولى (ملف JSON).';
+      'أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.';
 
   @override
   String get dataFooter =>
@@ -18758,7 +18758,7 @@ class L10nAr extends L10n {
   String get dataCsvSheetTitle => 'تصدير جدول';
 
   @override
-  String get dataCsvSheetSubtitle => 'CSV · UTF-8 · يُفتح في Excel وSheets';
+  String get dataCsvSheetSubtitle => 'ملف CSV يُفتح في برامج الجداول';
 
   @override
   String get dataCsvWhat => 'ماذا';
@@ -18802,8 +18802,9 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get dataCsvFormatNote =>
-      'التواريخ بصيغة 2026-09-30 والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.';
+  String dataCsvFormatNote(String example) {
+    return 'التواريخ بصيغة $example والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.';
+  }
 
   @override
   String get dataCsvCreate => 'إنشاء الملف';
@@ -18980,7 +18981,7 @@ class L10nAr extends L10n {
   String get dataSummaryNoData => 'لا بيانات بعد';
 
   @override
-  String get dataSummaryProfileHint => 'اختياري – أنت تحدّد ما يُذكر';
+  String get dataSummaryProfileHint => 'اختياري';
 
   @override
   String get dataSummaryPreviewTitle => 'ما سيُشارَك بالضبط';
@@ -19005,8 +19006,9 @@ class L10nAr extends L10n {
   String get dataRestoreChooseTitle => 'استعادة بياناتك';
 
   @override
-  String get dataRestoreChooseBody =>
-      'اختر ملف ‎.madarbackup‎. سترى ما فيه قبل أن يتغيّر أي شيء.';
+  String dataRestoreChooseBody(String ext) {
+    return 'اختر ملف نسخة ينتهي بـ $ext. سترى ما فيه قبل أن يتغيّر أي شيء.';
+  }
 
   @override
   String get dataRestorePickFile => 'اختيار ملف النسخة';
@@ -19099,8 +19101,9 @@ class L10nAr extends L10n {
   String get dataErrNotBackupTitle => 'هذا ليس ملف نسخة من مَدار';
 
   @override
-  String get dataErrNotBackupBody =>
-      'اختر ملفًا ينتهي بـ ‎.madarbackup‎ أنشأته من «إنشاء نسخة احتياطية».';
+  String dataErrNotBackupBody(String ext) {
+    return 'اختر ملفًا ينتهي بـ $ext أنشأته من «إنشاء نسخة احتياطية».';
+  }
 
   @override
   String get dataErrNewerTitle => 'أُنشئت بإصدار أحدث من مَدار';

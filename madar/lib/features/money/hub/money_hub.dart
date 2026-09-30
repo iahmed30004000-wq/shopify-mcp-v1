@@ -242,17 +242,19 @@ class MoneyNetWorthCard extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: Space.s),
-          _ShareStrip(
-            segments: [(shares.wallets, t.info), (shares.jars, t.gold), (shares.owed, t.success)],
-          ),
+          _ShareStrip(segments: [(shares.wallets, t.info), (shares.jars, t.gold), (shares.owed, t.success)]),
           const SizedBox(height: Space.m),
           for (var i = 0; i < parts.length; i += 2) ...[
             if (i > 0) const SizedBox(height: Space.xs),
             Row(
               children: [
-                Expanded(child: _PartCell(part: parts[i], fmt: fmt, base: worth.base)),
+                Expanded(
+                  child: _PartCell(part: parts[i], fmt: fmt, base: worth.base),
+                ),
                 const SizedBox(width: Space.m),
-                Expanded(child: _PartCell(part: parts[i + 1], fmt: fmt, base: worth.base)),
+                Expanded(
+                  child: _PartCell(part: parts[i + 1], fmt: fmt, base: worth.base),
+                ),
               ],
             ),
           ],
@@ -407,7 +409,10 @@ class _Medallion extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: RadialGradient(
-          colors: [color.withValues(alpha: t.isDark ? 0.30 : 0.18), color.withValues(alpha: t.isDark ? 0.08 : 0.05)],
+          colors: [
+            color.withValues(alpha: t.isDark ? 0.30 : 0.18),
+            color.withValues(alpha: t.isDark ? 0.08 : 0.05),
+          ],
         ),
         border: Border.all(color: color.withValues(alpha: t.isDark ? 0.55 : 0.45), width: 0.9),
       ),

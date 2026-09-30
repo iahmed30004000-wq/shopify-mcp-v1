@@ -17984,7 +17984,14 @@
       }
     }
   },
-  "dataCsvFormatNote": "Dates look like 2026-09-30 and numbers use a decimal point, so any spreadsheet opens them as they are.",
+  "dataCsvFormatNote": "Dates look like {example} and numbers use a decimal point, so any spreadsheet opens them as they are.",
+  "@dataCsvFormatNote": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
   "dataCsvCreate": "Create file",
   "dataCsvCreateRows": "{count, plural, =0{No rows in this range} =1{Create file (1 row)} other{Create file ({count} rows)}}",
   "@dataCsvCreateRows": {
@@ -18061,7 +18068,7 @@
     }
   },
   "dataSummaryNoData": "No data yet",
-  "dataSummaryProfileHint": "Optional – you pick what’s mentioned",
+  "dataSummaryProfileHint": "Optional",
   "dataSummaryPreviewTitle": "Exactly what will be shared",
   "dataSummaryCopied": "Summary copied to the clipboard.",
   "dataSummaryUse": "Use this summary",
@@ -18069,7 +18076,14 @@
   "dataProfileAboutHint": "e.g. your age, or anything the assistant should know",
   "dataRestoreFlowTitle": "Restore",
   "dataRestoreChooseTitle": "Bring your data back",
-  "dataRestoreChooseBody": "Pick a .madarbackup file. You’ll see what’s inside before anything changes.",
+  "dataRestoreChooseBody": "Pick a {ext} file. You’ll see what’s inside before anything changes.",
+  "@dataRestoreChooseBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
   "dataRestorePickFile": "Choose backup file",
   "dataRestoreNothingChanges": "Nothing in your current data changes until you confirm the replacement in the last step.",
   "dataSafetyCopiesTitle": "Safety copies on this phone",
@@ -18104,7 +18118,14 @@
   "dataNothingChanged": "Nothing in your data was changed.",
   "dataErrWrongPassphrase": "That passphrase doesn’t open this backup. Check for typos and try again.",
   "dataErrNotBackupTitle": "This isn’t a Madar backup",
-  "dataErrNotBackupBody": "Choose a file ending in .madarbackup, made with “Create backup”.",
+  "dataErrNotBackupBody": "Choose a file ending in {ext}, made with “Create backup”.",
+  "@dataErrNotBackupBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
   "dataErrNewerTitle": "Made by a newer Madar",
   "dataErrNewerBody": "Update Madar on this phone, then try again.",
   "dataErrTruncatedTitle": "The file is incomplete",

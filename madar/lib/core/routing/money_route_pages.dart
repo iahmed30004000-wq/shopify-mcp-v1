@@ -118,8 +118,7 @@ abstract final class TxFilterQuery {
     return TxFilter(
       walletIds: ids('wallet'),
       kinds: {
-        for (final name in q['kind'] ?? const <String>[])
-          ?TxKind.values.where((k) => k.name == name).firstOrNull,
+        for (final name in q['kind'] ?? const <String>[]) ?TxKind.values.where((k) => k.name == name).firstOrNull,
       },
       budgetItemIds: ids('item'),
       unassignedOnly: one('unassigned') == '1',
@@ -254,11 +253,8 @@ class _GoalsRoutePageState extends ConsumerState<GoalsRoutePage> {
   }
 
   @override
-  Widget build(BuildContext context) => GoalsScreen(
-    key: ValueKey('goals:${widget.tab.name}'),
-    initialTab: widget.tab,
-    animateBackdrop: !_saver(ref),
-  );
+  Widget build(BuildContext context) =>
+      GoalsScreen(key: ValueKey('goals:${widget.tab.name}'), initialTab: widget.tab, animateBackdrop: !_saver(ref));
 }
 
 /// `/goals/jar/:id` (an unknown jar shows the screen's own "gone").

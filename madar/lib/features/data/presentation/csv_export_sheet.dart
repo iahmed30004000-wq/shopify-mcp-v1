@@ -189,7 +189,7 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
                 ],
               ),
               const SizedBox(height: Space.l),
-              DataNote(text: l.dataCsvFormatNote, icon: Icons.table_rows_rounded),
+              DataNote(text: l.dataCsvFormatNote(BidiIsolate.ltr('2026-09-30')), icon: Icons.table_rows_rounded),
               if (_failed) ...[
                 const SizedBox(height: Space.s),
                 DataNote(text: l.dataExportFailed, icon: Icons.error_outline_rounded, color: t.danger, dense: true),

@@ -102,7 +102,7 @@
     "en": "Spreadsheets (CSV)"
   },
   "dataExportCsvBody": {
-    "ar": "التحاليل والمعاملات والألم والمزاج – لـExcel أو Sheets.",
+    "ar": "التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.",
     "en": "Labs, transactions, pain and mood – for Excel or Sheets."
   },
   "dataExportJsonTitle": {
@@ -126,7 +126,7 @@
     "en": "Import from the Madar prototype"
   },
   "dataImportBody": {
-    "ar": "أدخل البيانات المصدّرة من النسخة الأولى (ملف JSON).",
+    "ar": "أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.",
     "en": "Bring in data exported from the earlier version (a JSON file)."
   },
   "dataFooter": {
@@ -360,7 +360,7 @@
     "en": "Spreadsheet export"
   },
   "dataCsvSheetSubtitle": {
-    "ar": "CSV · UTF-8 · يُفتح في Excel وSheets",
+    "ar": "ملف CSV يُفتح في برامج الجداول",
     "en": "CSV · UTF-8 · opens in Excel and Sheets"
   },
   "dataCsvWhat": {
@@ -424,8 +424,13 @@
     }
   },
   "dataCsvFormatNote": {
-    "ar": "التواريخ بصيغة 2026-09-30 والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.",
-    "en": "Dates look like 2026-09-30 and numbers use a decimal point, so any spreadsheet opens them as they are."
+    "ar": "التواريخ بصيغة {example} والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.",
+    "en": "Dates look like {example} and numbers use a decimal point, so any spreadsheet opens them as they are.",
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
   },
   "dataCsvCreate": {
     "ar": "إنشاء الملف",
@@ -654,8 +659,8 @@
     "en": "No data yet"
   },
   "dataSummaryProfileHint": {
-    "ar": "اختياري – أنت تحدّد ما يُذكر",
-    "en": "Optional – you pick what’s mentioned"
+    "ar": "اختياري",
+    "en": "Optional"
   },
   "dataSummaryPreviewTitle": {
     "ar": "ما سيُشارَك بالضبط",
@@ -686,8 +691,13 @@
     "en": "Bring your data back"
   },
   "dataRestoreChooseBody": {
-    "ar": "اختر ملف ‎.madarbackup‎. سترى ما فيه قبل أن يتغيّر أي شيء.",
-    "en": "Pick a .madarbackup file. You’ll see what’s inside before anything changes."
+    "ar": "اختر ملف نسخة ينتهي بـ {ext}. سترى ما فيه قبل أن يتغيّر أي شيء.",
+    "en": "Pick a {ext} file. You’ll see what’s inside before anything changes.",
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
   },
   "dataRestorePickFile": {
     "ar": "اختيار ملف النسخة",
@@ -803,8 +813,13 @@
     "en": "This isn’t a Madar backup"
   },
   "dataErrNotBackupBody": {
-    "ar": "اختر ملفًا ينتهي بـ ‎.madarbackup‎ أنشأته من «إنشاء نسخة احتياطية».",
-    "en": "Choose a file ending in .madarbackup, made with “Create backup”."
+    "ar": "اختر ملفًا ينتهي بـ {ext} أنشأته من «إنشاء نسخة احتياطية».",
+    "en": "Choose a file ending in {ext}, made with “Create backup”.",
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
   },
   "dataErrNewerTitle": {
     "ar": "أُنشئت بإصدار أحدث من مَدار",

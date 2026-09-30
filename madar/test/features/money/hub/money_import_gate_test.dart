@@ -13,10 +13,10 @@ import 'package:madar/core/db/repositories/repositories.dart';
 import 'package:madar/core/routing/routes.dart';
 import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/features/money/budget/budget.dart';
-import 'package:madar/features/money/hub/money_hub.dart';
 import 'package:madar/features/orbit/data/orbit_repository.dart';
 import 'package:madar/features/orbit/domain/planet_scores.dart';
 import 'package:madar/features/orbit/domain/score_sources.dart';
+import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
 
 import '../../../helpers/test_app.dart';
 import '../../lock/lock_test_utils.dart';
@@ -51,9 +51,7 @@ void main() {
     await tester.scrollUntilVisible(
       card,
       250,
-      scrollable: find.descendant(of: find.byType(MoneyHub), matching: find.byType(Scrollable)).evaluate().isEmpty
-          ? find.byType(Scrollable).first
-          : find.descendant(of: find.byType(MoneyHub), matching: find.byType(Scrollable)).first,
+      scrollable: find.descendant(of: find.byType(PlanetModulePage), matching: find.byType(Scrollable)).first,
     );
     expect(find.descendant(of: card, matching: find.textContaining('350.000', findRichText: true)), findsWidgets);
 
@@ -63,7 +61,7 @@ void main() {
     expect(plan.totalWeeklyMilli, 87500);
     final byName = {for (final l in plan.lines) l.name: l};
     expect(byName.keys, hasLength(8));
-    expect(byName['Home food']!.percentOfBase, closeTo(57.142857, 1e-4));
+    expect(byName['Home food']!.percentOfBase, closeTo(400 / 7, 1e-9));
     expect(byName['Proteins']!.percentOfBase, closeTo(50, 1e-9));
     expect(byName["Wife's allowance"]!.monthlyMilli, 20000);
     expect(plan.issues, isEmpty);

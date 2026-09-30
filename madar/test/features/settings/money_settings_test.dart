@@ -59,10 +59,7 @@ void main() {
       expect(find.text(l.moneyHubSettingsWeekStart), findsOneWidget);
       expect(find.text(l.moneyHubWeekSaturday), findsOneWidget);
       expect(find.text(l.moneyHubSettingsReminders), findsOneWidget);
-      expect(
-        Directionality.of(tester.element(section)),
-        lang == 'ar' ? TextDirection.rtl : TextDirection.ltr,
-      );
+      expect(Directionality.of(tester.element(section)), lang == 'ar' ? TextDirection.rtl : TextDirection.ltr);
       await tester.pump(const Duration(seconds: 6));
     });
   }
@@ -114,9 +111,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 50));
     }
     expect(find.text(l.budgetWeeksSaved), findsOneWidget, reason: 'the undo toast');
-    final stored = await tester.runAsync(
-      () => Repositories(app.db).keyValues.getJson(BudgetSettings.weeksPerMonthKey),
-    );
+    final stored = await tester.runAsync(() => Repositories(app.db).keyValues.getJson(BudgetSettings.weeksPerMonthKey));
     expect(stored, isA<num>());
     expect(stored, isNot(4));
     await tester.pump(const Duration(seconds: 6));
