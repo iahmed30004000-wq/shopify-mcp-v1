@@ -19,6 +19,11 @@ Future<void> _reveal(WidgetTester tester) async {
 }
 
 Future<void> _tapKey(WidgetTester tester, String key) async {
+  final target = find.byKey(ValueKey(key));
+  // Lazily built lists: scroll the target into existence first.
+  if (target.evaluate().isEmpty) {
+    await tester.scrollUntilVisible(target, 200, scrollable: find.byType(Scrollable).first);
+  }
   await tester.ensureVisible(find.byKey(ValueKey(key)));
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(ValueKey(key)));
@@ -138,8 +143,6 @@ void main() {
       expect((await tester.runAsync(() => SpecialsRepository(env.db).prefs()))!.roundSize, 3);
       await tester.tap(find.text('Player 2').last);
       await tester.pumpAndSettle();
-      print('DBG routes: ${find.byType(KnowMeScreen).evaluate().length} bank=${find.byType(QuestionBankScreen).evaluate().length}');
-      print('DBG buttons: ${find.byType(MadarButton).evaluate().map((e) => e.widget.key).toList()}');
       await _tapKey(tester, 'knowme-start');
       expect(find.byType(KnowMeRoundScreen), findsOneWidget);
       final round = tester.widget<KnowMeRoundScreen>(find.byType(KnowMeRoundScreen)).round;

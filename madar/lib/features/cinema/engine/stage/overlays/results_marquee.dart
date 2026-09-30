@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
@@ -32,6 +33,16 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
   final ui.FragmentShader? _ticketPaper = overlayPaperShader();
 
   @override
+  void initState() {
+    super.initState();
+    // Curtain call: the lens opens on the stage and the house curtains
+    // swing shut behind the card.
+    final game = widget.game;
+    unawaited(game.transitions.irisIn(duration: const Duration(milliseconds: 650)));
+    unawaited(game.stage.closeCurtains(duration: const Duration(milliseconds: 1700)));
+  }
+
+  @override
   void dispose() {
     _paper?.dispose();
     _ticketPaper?.dispose();
@@ -56,61 +67,80 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
       namesRoute: true,
       explicitChildNodes: true,
       label: '$title. ${l10n.cinemaScoreLine(fmt.formatInt(score))}',
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          ColoredBox(color: s.skin.palette.ink.withValues(alpha: 0.72)),
-          SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: AnimatedBuilder(
-                    animation: s.repaint,
-                    builder: (context, child) {
-                      final t = (_timer.elapsed / 0.6).clamp(0.0, 1.0);
-                      final e = Curves.easeOutBack.transform(t);
-                      return Transform.scale(scale: 0.7 + 0.3 * e, child: Opacity(opacity: math.min(1, t * 2.5), child: child));
-                    },
-                    child: SizedBox(
-                      width: 340,
-                      child: CustomPaint(
-                        painter: _MarqueeBoardPainter(s, _paper),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(height: 26, width: 180, child: CustomPaint(painter: _StarsPainter(s, won))),
-                              const SizedBox(height: 6),
-                              Text(title, textAlign: TextAlign.center, style: s.title(44)),
-                              const SizedBox(height: 14),
-                              AnimatedBuilder(
-                                animation: s.repaint,
-                                builder: (context, _) {
-                                  final t = _timer.elapsed;
-                                  final count = ((t - 0.45) / 1.1).clamp(0.0, 1.0);
-                                  final shown = (score * Curves.easeOutCubic.transform(count)).round();
-                                  final stamp = ((t - 1.6) / 0.28).clamp(0.0, 1.0);
-                                  return _Ticket(
-                                    scene: s,
-                                    paper: _ticketPaper,
-                                    admit: l10n.cinemaStageAdmitOne,
-                                    scoreLabel: l10n.cinemaStageScore,
-                                    score: fmt.formatInt(shown),
-                                    best: best == null ? null : l10n.cinemaBestLine(fmt.formatInt(math.max(best, record ? score : best))),
-                                    time: time == null ? null : '${l10n.cinemaStageRunningTime}: $time',
-                                    stamp: record ? l10n.cinemaStageNewRecord : null,
-                                    stampT: stamp,
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 20),
-                              StageButton(scene: s, label: l10n.cinemaPlayAgain, onPressed: game.requestRestart, primary: true, icon: Icons.replay_rounded),
-                              const SizedBox(height: 12),
-                              StageButton(scene: s, label: l10n.cinemaLeave, onPressed: game.requestExit, icon: Icons.logout_rounded),
-                            ],
+      child: Material(
+        type: MaterialType.transparency,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ColoredBox(color: s.skin.palette.ink.withValues(alpha: 0.42)),
+            SafeArea(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: AnimatedBuilder(
+                      animation: s.repaint,
+                      builder: (context, child) {
+                        final t = (_timer.elapsed / 0.6).clamp(0.0, 1.0);
+                        final e = Curves.easeOutBack.transform(t);
+                        return Transform.scale(
+                          scale: 0.7 + 0.3 * e,
+                          child: Opacity(opacity: math.min(1, t * 2.5), child: child),
+                        );
+                      },
+                      child: SizedBox(
+                        width: 340,
+                        child: CustomPaint(
+                          painter: _MarqueeBoardPainter(s, _paper),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(height: 26, width: 180, child: CustomPaint(painter: _StarsPainter(s, won))),
+                                const SizedBox(height: 6),
+                                Text(title, textAlign: TextAlign.center, style: s.title(44)),
+                                const SizedBox(height: 14),
+                                AnimatedBuilder(
+                                  animation: s.repaint,
+                                  builder: (context, _) {
+                                    final t = _timer.elapsed;
+                                    final count = ((t - 0.45) / 1.1).clamp(0.0, 1.0);
+                                    final shown = (score * Curves.easeOutCubic.transform(count)).round();
+                                    final stamp = ((t - 1.6) / 0.28).clamp(0.0, 1.0);
+                                    return _Ticket(
+                                      scene: s,
+                                      paper: _ticketPaper,
+                                      admit: l10n.cinemaStageAdmitOne,
+                                      scoreLabel: l10n.cinemaStageScore,
+                                      score: fmt.formatInt(shown),
+                                      best: best == null
+                                          ? null
+                                          : l10n.cinemaBestLine(fmt.formatInt(math.max(best, record ? score : best))),
+                                      time: time == null ? null : '${l10n.cinemaStageRunningTime}: $time',
+                                      stamp: record ? l10n.cinemaStageNewRecord : null,
+                                      stampT: stamp,
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 20),
+                                StageButton(
+                                  scene: s,
+                                  label: l10n.cinemaPlayAgain,
+                                  onPressed: game.requestRestart,
+                                  primary: true,
+                                  icon: Icons.replay_rounded,
+                                ),
+                                const SizedBox(height: 12),
+                                StageButton(
+                                  scene: s,
+                                  label: l10n.cinemaLeave,
+                                  onPressed: game.requestExit,
+                                  icon: Icons.logout_rounded,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -119,8 +149,8 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -128,7 +158,9 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
 
 /// The marquee board: the era's card with a ring of chasing bulbs.
 class _MarqueeBoardPainter extends CustomPainter {
-  _MarqueeBoardPainter(this.scene, this.paper) : _card = CardBackgroundPainter(scene, paper, seed: 17), super(repaint: scene.repaint);
+  _MarqueeBoardPainter(this.scene, this.paper)
+    : _card = CardBackgroundPainter(scene, paper, seed: 17),
+      super(repaint: scene.repaint);
 
   final OverlayScene scene;
   final ui.FragmentShader? paper;
@@ -142,8 +174,13 @@ class _MarqueeBoardPainter extends CustomPainter {
     final r = (Offset.zero & size).deflate(13);
     final t = scene.beat == null ? 0.0 : scene.clock.time;
     if (scene.neon) {
-      Ornaments.neon(canvas, Path()..addRRect(RRect.fromRectAndRadius(r, const Radius.circular(8))), m.neonB, 1.3,
-          intensity: 0.85 + 0.15 * math.sin(t * 30));
+      Ornaments.neon(
+        canvas,
+        Path()..addRRect(RRect.fromRectAndRadius(r, const Radius.circular(8))),
+        m.neonB,
+        1.3,
+        intensity: 0.85 + 0.15 * math.sin(t * 30),
+      );
       return;
     }
     // Bulbs round the board, chasing.
@@ -194,7 +231,13 @@ class _StarsPainter extends CustomPainter {
     final positions = won ? const [-1.0, 0.0, 1.0] : const [0.0];
     for (final k in positions) {
       final r = (k == 0 ? 12.0 : 9.0) * (1 + 0.08 * math.sin(t * 5 + k * 2));
-      final p = Ornaments.starPath(c + Offset(k * 36, k == 0 ? -1 : 3), r, r * 0.45, 5, rotation: -math.pi / 2 + k * 0.2);
+      final p = Ornaments.starPath(
+        c + Offset(k * 36, k == 0 ? -1 : 3),
+        r,
+        r * 0.45,
+        5,
+        rotation: -math.pi / 2 + k * 0.2,
+      );
       if (scene.neon) {
         Ornaments.neon(canvas, p, m.neonA, 1.1);
       } else {
@@ -247,7 +290,10 @@ class _Ticket extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(admit, style: s.body(12, color: muted, weight: FontWeight.w700)),
+                Text(
+                  admit,
+                  style: s.body(12, color: muted, weight: FontWeight.w700),
+                ),
                 const SizedBox(height: 2),
                 Text(scoreLabel, style: s.body(14, color: muted)),
                 Text(score, style: hudTextStyle(s.skin, 46, ink, glow: s.neon)),
@@ -258,13 +304,16 @@ class _Ticket extends StatelessWidget {
           ),
           if (stamp != null && stampT > 0)
             PositionedDirectional(
-              top: 38,
-              end: -6,
+              top: -16,
+              end: -30,
               child: Transform.rotate(
-                angle: -0.26,
+                angle: -0.22,
                 child: Transform.scale(
                   scale: 2.2 - 1.2 * Curves.easeIn.transform(stampT),
-                  child: Opacity(opacity: stampT, child: _Stamp(scene: s, text: stamp!)),
+                  child: Opacity(
+                    opacity: stampT,
+                    child: _Stamp(scene: s, text: stamp!),
+                  ),
                 ),
               ),
             ),
@@ -282,7 +331,9 @@ class _Stamp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = scene.neon ? scene.materials.neonA : (scene.skin.era.isMonochrome ? scene.materials.ink : scene.skin.palette.accent);
+    final color = scene.neon
+        ? scene.materials.neonA
+        : (scene.skin.era.isMonochrome ? scene.materials.ink : scene.skin.palette.accent);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(

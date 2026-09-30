@@ -46,63 +46,83 @@ class _ProjectorBoothOverlayState extends State<ProjectorBoothOverlay> {
       namesRoute: true,
       explicitChildNodes: true,
       label: l10n.cinemaIntermission,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          CustomPaint(painter: _DimPainter(s, _timer)),
-          SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: AnimatedBuilder(
-                    animation: s.repaint,
-                    builder: (context, child) {
-                      // Drops in from above and settles with a bounce.
-                      final t = (_timer.elapsed / 0.55).clamp(0.0, 1.0);
-                      final e = Curves.elasticOut.transform(t);
-                      return Transform.translate(offset: Offset(0, -60 * (1 - e)), child: Opacity(opacity: math.min(1, t * 3), child: child));
-                    },
-                    child: SizedBox(
-                      width: 340,
-                      child: CustomPaint(
-                        painter: CardBackgroundPainter(s, _paper, seed: 11),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(22, 14, 22, 22),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(
-                                height: 172,
-                                width: double.infinity,
-                                child: CustomPaint(painter: _BoothPainter(s)),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(l10n.cinemaIntermission, textAlign: TextAlign.center, style: s.title(38)),
-                              const SizedBox(height: 4),
-                              Text(l10n.cinemaStageBoothNote, textAlign: TextAlign.center, style: s.body(15)),
-                              const SizedBox(height: 6),
-                              Text(
-                                '${game.era.label(l10n)}  ·  ${l10n.cinemaScoreLine(score)}',
-                                textAlign: TextAlign.center,
-                                style: s.body(13, color: s.text.withValues(alpha: 0.65)),
-                              ),
-                              const SizedBox(height: 18),
-                              StageButton(scene: s, label: l10n.cinemaResume, onPressed: game.resumeGame, primary: true, icon: Icons.play_arrow_rounded),
-                              const SizedBox(height: 12),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: StageButton(scene: s, label: l10n.cinemaRestart, onPressed: game.requestRestart, icon: Icons.replay_rounded),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: StageButton(scene: s, label: l10n.cinemaLeave, onPressed: game.requestExit, icon: Icons.logout_rounded),
-                                  ),
-                                ],
-                              ),
-                            ],
+      child: Material(
+        type: MaterialType.transparency,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            CustomPaint(painter: _DimPainter(s, _timer)),
+            SafeArea(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: AnimatedBuilder(
+                      animation: s.repaint,
+                      builder: (context, child) {
+                        // Drops in from above and settles with a bounce.
+                        final t = (_timer.elapsed / 0.55).clamp(0.0, 1.0);
+                        final e = Curves.elasticOut.transform(t);
+                        return Transform.translate(
+                          offset: Offset(0, -60 * (1 - e)),
+                          child: Opacity(opacity: math.min(1, t * 3), child: child),
+                        );
+                      },
+                      child: SizedBox(
+                        width: 340,
+                        child: CustomPaint(
+                          painter: CardBackgroundPainter(s, _paper, seed: 11),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(22, 14, 22, 22),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  height: 172,
+                                  width: double.infinity,
+                                  child: CustomPaint(painter: _BoothPainter(s)),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(l10n.cinemaIntermission, textAlign: TextAlign.center, style: s.title(38)),
+                                const SizedBox(height: 4),
+                                Text(l10n.cinemaStageBoothNote, textAlign: TextAlign.center, style: s.body(15)),
+                                const SizedBox(height: 6),
+                                Text(
+                                  '${game.era.label(l10n)}  ·  ${l10n.cinemaScoreLine(score)}',
+                                  textAlign: TextAlign.center,
+                                  style: s.body(13, color: s.text.withValues(alpha: 0.65)),
+                                ),
+                                const SizedBox(height: 18),
+                                StageButton(
+                                  scene: s,
+                                  label: l10n.cinemaResume,
+                                  onPressed: game.resumeGame,
+                                  primary: true,
+                                  icon: Icons.play_arrow_rounded,
+                                ),
+                                const SizedBox(height: 12),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: StageButton(
+                                        scene: s,
+                                        label: l10n.cinemaRestart,
+                                        onPressed: game.requestRestart,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: StageButton(
+                                        scene: s,
+                                        label: l10n.cinemaLeave,
+                                        onPressed: game.requestExit,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -111,8 +131,8 @@ class _ProjectorBoothOverlayState extends State<ProjectorBoothOverlay> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -191,9 +211,14 @@ class _BoothPainter extends CustomPainter {
       canvas.drawCircle(port + Offset(math.cos(a), math.sin(a)) * 22, 1.3, _p);
     }
     // Floor line.
-    Ornaments.line(canvas, Path()
-      ..moveTo(0, h - 3)
-      ..lineTo(w, h - 3), ink.withValues(alpha: 0.5), 2);
+    Ornaments.line(
+      canvas,
+      Path()
+        ..moveTo(0, h - 3)
+        ..lineTo(w, h - 3),
+      ink.withValues(alpha: 0.5),
+      2,
+    );
     // Stand.
     final stand = Path()
       ..moveTo(cx - 34, h - 3)
@@ -202,7 +227,13 @@ class _BoothPainter extends CustomPainter {
       ..lineTo(cx + 34, h - 3)
       ..close();
     Ornaments.inked(canvas, stand, metalDark, ink, lw);
-    Ornaments.inked(canvas, Path()..addRRect(RRect.fromRectAndRadius(Rect.fromLTWH(cx - 44, h - 9, 88, 7), const Radius.circular(3))), metal, ink, lw);
+    Ornaments.inked(
+      canvas,
+      Path()..addRRect(RRect.fromRectAndRadius(Rect.fromLTWH(cx - 44, h - 9, 88, 7), const Radius.circular(3))),
+      metal,
+      ink,
+      lw,
+    );
     // Film path (behind the body).
     final rearReel = Offset(cx - 38, h * 0.2);
     final frontReel = Offset(cx + 30, h * 0.24);
@@ -254,7 +285,12 @@ class _BoothPainter extends CustomPainter {
       metal,
       ink,
       lw,
-      shader: ui.Gradient.linear(body.outerRect.topCenter, body.outerRect.bottomCenter, [m.giltLight, metal, metalDark], const [0, 0.35, 1]),
+      shader: ui.Gradient.linear(
+        body.outerRect.topCenter,
+        body.outerRect.bottomCenter,
+        [m.giltLight, metal, metalDark],
+        const [0, 0.35, 1],
+      ),
     );
     // Chimney with a curl of heat.
     final chimney = Rect.fromLTWH(cx - 46, h * 0.44 - 18, 16, 20);
@@ -262,7 +298,10 @@ class _BoothPainter extends CustomPainter {
     Ornaments.inked(canvas, Path()..addRect(Rect.fromLTWH(chimney.left - 3, chimney.top - 4, 22, 5)), metal, ink, lw);
     // Vents glowing with the lamp.
     for (var k = 0; k < 4; k++) {
-      final r = RRect.fromRectAndRadius(Rect.fromLTWH(cx - 48 + k * 10, h * 0.44 + 14, 5, 24), const Radius.circular(2.5));
+      final r = RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx - 48 + k * 10, h * 0.44 + 14, 5, 24),
+        const Radius.circular(2.5),
+      );
       _p.color = ink;
       canvas.drawRRect(r, _p);
       _add.color = m.glow.withValues(alpha: 0.6 * flicker);
@@ -271,7 +310,15 @@ class _BoothPainter extends CustomPainter {
     // Badge with the orbit emblem.
     final badge = Offset(cx + 22, h * 0.44 + 26);
     Ornaments.inked(canvas, Path()..addOval(Rect.fromCircle(center: badge, radius: 14)), m.paper, ink, lw);
-    Ornaments.orbitEmblem(canvas, badge, 8.5, ring: m.gilt, planet: scene.skin.era.isMonochrome ? m.ink : pal.accent, ink: ink, lineWidth: 1);
+    Ornaments.orbitEmblem(
+      canvas,
+      badge,
+      8.5,
+      ring: m.gilt,
+      planet: scene.skin.era.isMonochrome ? m.ink : pal.accent,
+      ink: ink,
+      lineWidth: 1,
+    );
     // Lens barrel.
     final barrel = Path()
       ..addRRect(RRect.fromRectAndRadius(Rect.fromLTWH(cx + 60, h * 0.62 - 10, 16, 20), const Radius.circular(3)))
@@ -295,7 +342,10 @@ class _BoothPainter extends CustomPainter {
     final t = scene.beat == null ? 0.4 : scene.clock.time;
     final w = size.width, h = size.height;
     // A tape on top, the deck below.
-    final deck = RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.08, h * 0.46, w * 0.84, h * 0.4), const Radius.circular(6));
+    final deck = RRect.fromRectAndRadius(
+      Rect.fromLTWH(w * 0.08, h * 0.46, w * 0.84, h * 0.4),
+      const Radius.circular(6),
+    );
     _p.shader = ui.Gradient.linear(deck.outerRect.topCenter, deck.outerRect.bottomCenter, [m.wallLight, m.wallDark]);
     canvas.drawRRect(deck, _p);
     _p.shader = null;
@@ -307,13 +357,25 @@ class _BoothPainter extends CustomPainter {
     final tape = Rect.fromLTWH(slot.left + 10, slot.top - 38, slot.width - 20, 46);
     _p.color = const Color(0xFF15101F);
     canvas.drawRRect(RRect.fromRectAndRadius(tape, const Radius.circular(3)), _p);
-    Ornaments.neon(canvas, Path()..addRRect(RRect.fromRectAndRadius(tape, const Radius.circular(3))), m.neonB, 0.9, intensity: 0.8);
+    Ornaments.neon(
+      canvas,
+      Path()..addRRect(RRect.fromRectAndRadius(tape, const Radius.circular(3))),
+      m.neonB,
+      0.9,
+      intensity: 0.8,
+    );
     _p.color = pal.paper.withValues(alpha: 0.85);
     canvas.drawRect(Rect.fromLTWH(tape.left + 12, tape.top + 7, tape.width - 24, 9), _p);
     for (final x in [tape.left + tape.width * 0.32, tape.left + tape.width * 0.68]) {
       _p.color = m.wall;
       canvas.drawCircle(Offset(x, tape.top + 30), 7, _p);
-      Ornaments.neon(canvas, Path()..addOval(Rect.fromCircle(center: Offset(x, tape.top + 30), radius: 7)), m.neonB, 0.7, intensity: 0.7);
+      Ornaments.neon(
+        canvas,
+        Path()..addOval(Rect.fromCircle(center: Offset(x, tape.top + 30), radius: 7)),
+        m.neonB,
+        0.7,
+        intensity: 0.7,
+      );
     }
     // Display: a blinking pause.
     final disp = Rect.fromLTWH(deck.right - deck.width * 0.36, deck.top + 12, deck.width * 0.3, 26);

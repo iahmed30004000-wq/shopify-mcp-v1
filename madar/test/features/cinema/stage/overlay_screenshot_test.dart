@@ -25,7 +25,10 @@ void main() {
         tester,
         ProviderScope(
           child: madarScreenshotApp(
-            home: CinemaGameView(builder: (ctx) => game = DemoGame(context: ctx, era: era, autoplay: true), skipOpening: true),
+            home: CinemaGameView(
+              builder: (ctx) => game = DemoGame(context: ctx, era: era, autoplay: true),
+              skipOpening: true,
+            ),
           ),
         ),
         'cinema/stage/pause_${era.name}',
@@ -46,7 +49,10 @@ void main() {
         tester,
         ProviderScope(
           child: madarScreenshotApp(
-            home: CinemaGameView(builder: (ctx) => game = DemoGame(context: ctx, era: era, autoplay: true), skipOpening: true),
+            home: CinemaGameView(
+              builder: (ctx) => game = DemoGame(context: ctx, era: era, autoplay: true),
+              skipOpening: true,
+            ),
           ),
         ),
         'cinema/stage/results_${era.name}',

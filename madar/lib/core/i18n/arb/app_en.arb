@@ -18127,9 +18127,24 @@
   "dataCsvTransactions": "Transactions",
   "dataCsvPain": "Pain",
   "dataCsvMood": "Mood",
-  "dataRange30": "30 days",
-  "dataRange90": "90 days",
-  "dataRangeYear": "12 months",
+  "dataRangeDays": "{days, plural, =1{{days} day} other{{days} days}}",
+  "@dataRangeDays": {
+    "description": "CSV date-range choice: the last N days (30, 90)",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataRangeMonths": "{months, plural, =1{{months} month} other{{months} months}}",
+  "@dataRangeMonths": {
+    "description": "CSV date-range choice: the last N months (12)",
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
   "dataRangeAll": "All time",
   "dataRangeCustom": "Custom…",
   "dataRangeAllTime": "Every record since the start",
@@ -18184,14 +18199,69 @@
   "dataCsvToAmount": "to_amount",
   "dataCsvToCurrency": "to_currency",
   "dataCsvTags": "tags",
-  "dataCsvPainScore": "score_0_10",
+  "dataCsvPainScore": "score_{min}_{max}",
+  "@dataCsvPainScore": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
   "dataCsvLocations": "locations",
   "dataCsvTriggers": "triggers",
   "dataCsvBodyPoints": "body_points",
-  "dataCsvMoodScore": "mood_1_5",
-  "dataCsvStress": "stress_0_10",
-  "dataCsvAnxiety": "anxiety_0_10",
-  "dataCsvEnergy": "energy_0_10",
+  "dataCsvMoodScore": "mood_{min}_{max}",
+  "@dataCsvMoodScore": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvStress": "stress_{min}_{max}",
+  "@dataCsvStress": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvAnxiety": "anxiety_{min}_{max}",
+  "@dataCsvAnxiety": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvEnergy": "energy_{min}_{max}",
+  "@dataCsvEnergy": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
   "dataCsvSleepHours": "sleep_hours",
   "dataCsvCaffeine": "caffeine_cups",
   "dataCsvFactors": "factors",
@@ -18522,10 +18592,14 @@
       }
     }
   },
-  "dataSumAvgGrade": "average grade: {value}/5",
+  "dataSumAvgGrade": "average grade: {value}/{max}",
   "@dataSumAvgGrade": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
@@ -18593,34 +18667,50 @@
   "dataSumTopPlaces": "Most logged places",
   "dataSumTopTriggers": "Most logged triggers",
   "dataSumMoodTitle": "Mood (tracking)",
-  "dataSumMoodAvg": "mood: {value}/5",
+  "dataSumMoodAvg": "mood: {value}/{max}",
   "@dataSumMoodAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
-  "dataSumStressAvg": "stress: {value}/10",
+  "dataSumStressAvg": "stress: {value}/{max}",
   "@dataSumStressAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
-  "dataSumAnxietyAvg": "anxiety: {value}/10",
+  "dataSumAnxietyAvg": "anxiety: {value}/{max}",
   "@dataSumAnxietyAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
-  "dataSumEnergyAvg": "energy: {value}/10",
+  "dataSumEnergyAvg": "energy: {value}/{max}",
   "@dataSumEnergyAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
@@ -18831,7 +18921,15 @@
       }
     }
   },
-  "dataSumTop3Title": "Top 3",
+  "dataSumTop3Title": "Top {count}",
+  "@dataSumTop3Title": {
+    "description": "AI summary (machine-readable) heading for the Top 3 tasks; count is pre-formatted with Western digits",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "dataSumOnBoard": "board: {board}",
   "@dataSumOnBoard": {
     "placeholders": {
@@ -19974,7 +20072,15 @@
   },
   "aiChatModelCustom": "Add a model id",
   "aiChatModelCustomField": "Model id",
-  "aiChatModelCustomHint": "e.g. claude-sonnet-5-5",
+  "aiChatModelCustomHint": "e.g. {model}",
+  "@aiChatModelCustomHint": {
+    "description": "Hint in the custom model id field; model is an example id for the chosen service",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
   "aiChatModelInvalid": "Not a valid model id.",
   "aiChatModelUse": "Use",
   "aiChatModelRefresh": "Refresh models",

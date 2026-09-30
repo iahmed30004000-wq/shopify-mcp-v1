@@ -281,7 +281,12 @@
   },
   "aiChatModelCustom": {"ar": "إضافة معرّف نموذج", "en": "Add a model id"},
   "aiChatModelCustomField": {"ar": "معرّف النموذج", "en": "Model id"},
-  "aiChatModelCustomHint": {"ar": "مثل claude-sonnet-5-5", "en": "e.g. claude-sonnet-5-5"},
+  "aiChatModelCustomHint": {
+    "ar": "مثل {model}",
+    "en": "e.g. {model}",
+    "description": "Hint in the custom model id field; model is an example id for the chosen service",
+    "placeholders": {"model": {"type": "String"}}
+  },
   "aiChatModelInvalid": {"ar": "معرّف غير صالح.", "en": "Not a valid model id."},
   "aiChatModelUse": {"ar": "استخدام", "en": "Use"},
   "aiChatModelRefresh": {"ar": "تحديث قائمة النماذج", "en": "Refresh models"},

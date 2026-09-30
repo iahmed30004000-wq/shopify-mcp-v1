@@ -75,7 +75,8 @@ class ReelTransitions implements CinemaTransitions {
     _closing = false;
     if (_cover.value < 1 && !_cover.isActive) _cover.jumpTo(1);
     if (style == EraTransition.burn && !env.reducedMotion) _flash = 1;
-    final d = duration ??
+    final d =
+        duration ??
         switch (style) {
           EraTransition.glitch => const Duration(milliseconds: 750),
           _ => const Duration(milliseconds: 1000),
@@ -87,7 +88,8 @@ class ReelTransitions implements CinemaTransitions {
   Future<void> irisOut({Offset? focus, Duration? duration}) {
     _focus = focus;
     _closing = true;
-    final d = duration ??
+    final d =
+        duration ??
         switch (style) {
           EraTransition.burn => const Duration(milliseconds: 1300),
           EraTransition.glitch => const Duration(milliseconds: 700),
@@ -149,7 +151,15 @@ class ReelTransitions implements CinemaTransitions {
           if (_closing) {
             _burn.paint(canvas, full, cover, clock, origin: _centre, hole: skin.palette.ink, seed: 3);
           } else {
-            _iris.paint(canvas, full, 1 - cover, clock, focus: _centre, shape: IrisShape.circle, boil: !env.reducedMotion);
+            _iris.paint(
+              canvas,
+              full,
+              1 - cover,
+              clock,
+              focus: _centre,
+              shape: IrisShape.circle,
+              boil: !env.reducedMotion,
+            );
           }
         case EraTransition.glitch:
           _glitch(canvas, full, cover, clock);

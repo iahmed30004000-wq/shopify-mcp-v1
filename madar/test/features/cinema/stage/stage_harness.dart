@@ -10,14 +10,12 @@ import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/features/cinema/engine/cinema_engine.dart';
 import 'package:madar/features/cinema/engine/fx/fx.dart';
 import 'package:madar/features/cinema/engine/rig/rig_kit.dart';
-import 'package:madar/features/cinema/engine/stage/stage_kit.dart';
 
 import '../../../helpers/screenshot_harness.dart';
 
 /// A stage, its HUD and transitions for one era, driven by hand.
 class StageScene {
-  StageScene(this.era, {this.direction = TextDirection.rtl, this.reducedMotion = false})
-    : skin = EraSkins.of(era) {
+  StageScene(this.era, {this.direction = TextDirection.rtl, this.reducedMotion = false}) : skin = EraSkins.of(era) {
     env = CinemaEnv(skin: skin, direction: direction, reducedMotion: reducedMotion, seed: 3);
     stage = CinemaEngine.standardKit.stage(env);
     hudKit = CinemaEngine.standardKit.hud(env);
@@ -143,11 +141,12 @@ class StageScene {
 void paintWorld(Canvas canvas, Rect play, StageScene scene) {
   final pal = scene.skin.palette;
   final sky = Paint()
-    ..shader = ui.Gradient.linear(play.topCenter, play.bottomCenter, [
-      Color.lerp(pal.backdrop, pal.highlight, 0.25)!,
-      pal.backdrop,
-      Color.lerp(pal.backdrop, pal.midtone, 0.5)!,
-    ], const [0, 0.6, 1]);
+    ..shader = ui.Gradient.linear(
+      play.topCenter,
+      play.bottomCenter,
+      [Color.lerp(pal.backdrop, pal.highlight, 0.25)!, pal.backdrop, Color.lerp(pal.backdrop, pal.midtone, 0.5)!],
+      const [0, 0.6, 1],
+    );
   canvas.drawRect(play, sky);
   final floorY = play.top + play.height * 0.8;
   final hills = Path()
@@ -166,7 +165,10 @@ void paintWorld(Canvas canvas, Rect play, StageScene scene) {
         ..strokeWidth = 2.4
         ..color = pal.ink,
     )
-    ..drawRect(Rect.fromLTRB(play.left, floorY, play.right, play.bottom), Paint()..color = Color.lerp(pal.midtone, pal.shadow, 0.35)!);
+    ..drawRect(
+      Rect.fromLTRB(play.left, floorY, play.right, play.bottom),
+      Paint()..color = Color.lerp(pal.midtone, pal.shadow, 0.35)!,
+    );
   final boards = Paint()
     ..color = pal.ink.withValues(alpha: 0.55)
     ..strokeWidth = 1.4;
@@ -206,7 +208,10 @@ class GradedScenePainter extends CustomPainter {
     final c = Canvas(rec)..scale(dpr * fx.resolutionScale);
     scene.paint(c);
     final pic = rec.endRecording();
-    final img = pic.toImageSync((size.width * dpr * fx.resolutionScale).ceil(), (size.height * dpr * fx.resolutionScale).ceil());
+    final img = pic.toImageSync(
+      (size.width * dpr * fx.resolutionScale).ceil(),
+      (size.height * dpr * fx.resolutionScale).ceil(),
+    );
     pic.dispose();
     fx.apply(canvas, img, Offset.zero & size, scene.clock, film ?? FilmFrame());
     img.dispose();
@@ -237,7 +242,9 @@ Future<void> shootScene(
       debugShowCheckedModeBanner: false,
       home: Builder(
         builder: (context) => CustomPaint(
-          painter: graded ? GradedScenePainter(fx, scene, MediaQuery.devicePixelRatioOf(context), film: film) : _Plain(scene),
+          painter: graded
+              ? GradedScenePainter(fx, scene, MediaQuery.devicePixelRatioOf(context), film: film)
+              : _Plain(scene),
           size: Size.infinite,
         ),
       ),

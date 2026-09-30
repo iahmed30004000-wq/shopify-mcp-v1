@@ -29241,23 +29241,17 @@ abstract class L10n {
   /// **'المزاج'**
   String get dataCsvMood;
 
-  /// No description provided for @dataRange30.
+  /// CSV date-range choice: the last N days (30, 90)
   ///
   /// In ar, this message translates to:
-  /// **'30 يومًا'**
-  String get dataRange30;
+  /// **'{days, plural, =1{يوم واحد} =2{يومان} few{{days} أيام} many{{days} يومًا} other{{days} يوم}}'**
+  String dataRangeDays(int days);
 
-  /// No description provided for @dataRange90.
+  /// CSV date-range choice: the last N months (12)
   ///
   /// In ar, this message translates to:
-  /// **'90 يومًا'**
-  String get dataRange90;
-
-  /// No description provided for @dataRangeYear.
-  ///
-  /// In ar, this message translates to:
-  /// **'12 شهرًا'**
-  String get dataRangeYear;
+  /// **'{months, plural, =1{شهر واحد} =2{شهران} few{{months} أشهر} many{{months} شهرًا} other{{months} شهر}}'**
+  String dataRangeMonths(int months);
 
   /// No description provided for @dataRangeAll.
   ///
@@ -29439,11 +29433,11 @@ abstract class L10n {
   /// **'الوسوم'**
   String get dataCsvTags;
 
-  /// No description provided for @dataCsvPainScore.
+  /// CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)
   ///
   /// In ar, this message translates to:
-  /// **'شدة الألم (0-10)'**
-  String get dataCsvPainScore;
+  /// **'شدة الألم ({min}-{max})'**
+  String dataCsvPainScore(String min, String max);
 
   /// No description provided for @dataCsvLocations.
   ///
@@ -29463,29 +29457,29 @@ abstract class L10n {
   /// **'نقاط خريطة الجسم'**
   String get dataCsvBodyPoints;
 
-  /// No description provided for @dataCsvMoodScore.
+  /// CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)
   ///
   /// In ar, this message translates to:
-  /// **'المزاج (1-5)'**
-  String get dataCsvMoodScore;
+  /// **'المزاج ({min}-{max})'**
+  String dataCsvMoodScore(String min, String max);
 
-  /// No description provided for @dataCsvStress.
+  /// CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)
   ///
   /// In ar, this message translates to:
-  /// **'التوتر (0-10)'**
-  String get dataCsvStress;
+  /// **'التوتر ({min}-{max})'**
+  String dataCsvStress(String min, String max);
 
-  /// No description provided for @dataCsvAnxiety.
+  /// CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)
   ///
   /// In ar, this message translates to:
-  /// **'القلق (0-10)'**
-  String get dataCsvAnxiety;
+  /// **'القلق ({min}-{max})'**
+  String dataCsvAnxiety(String min, String max);
 
-  /// No description provided for @dataCsvEnergy.
+  /// CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)
   ///
   /// In ar, this message translates to:
-  /// **'الطاقة (0-10)'**
-  String get dataCsvEnergy;
+  /// **'الطاقة ({min}-{max})'**
+  String dataCsvEnergy(String min, String max);
 
   /// No description provided for @dataCsvSleepHours.
   ///
@@ -30195,11 +30189,11 @@ abstract class L10n {
   /// **'المراجعات: {count}'**
   String dataSumReviews(String count);
 
-  /// No description provided for @dataSumAvgGrade.
+  /// AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits
   ///
   /// In ar, this message translates to:
-  /// **'متوسط التقييم: {value}/5'**
-  String dataSumAvgGrade(String value);
+  /// **'متوسط التقييم: {value}/{max}'**
+  String dataSumAvgGrade(String value, String max);
 
   /// No description provided for @dataSumAlertsTitle.
   ///
@@ -30375,29 +30369,29 @@ abstract class L10n {
   /// **'المزاج (متابعة)'**
   String get dataSumMoodTitle;
 
-  /// No description provided for @dataSumMoodAvg.
+  /// AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits
   ///
   /// In ar, this message translates to:
-  /// **'المزاج: {value}/5'**
-  String dataSumMoodAvg(String value);
+  /// **'المزاج: {value}/{max}'**
+  String dataSumMoodAvg(String value, String max);
 
-  /// No description provided for @dataSumStressAvg.
+  /// AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits
   ///
   /// In ar, this message translates to:
-  /// **'التوتر: {value}/10'**
-  String dataSumStressAvg(String value);
+  /// **'التوتر: {value}/{max}'**
+  String dataSumStressAvg(String value, String max);
 
-  /// No description provided for @dataSumAnxietyAvg.
+  /// AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits
   ///
   /// In ar, this message translates to:
-  /// **'القلق: {value}/10'**
-  String dataSumAnxietyAvg(String value);
+  /// **'القلق: {value}/{max}'**
+  String dataSumAnxietyAvg(String value, String max);
 
-  /// No description provided for @dataSumEnergyAvg.
+  /// AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits
   ///
   /// In ar, this message translates to:
-  /// **'الطاقة: {value}/10'**
-  String dataSumEnergyAvg(String value);
+  /// **'الطاقة: {value}/{max}'**
+  String dataSumEnergyAvg(String value, String max);
 
   /// No description provided for @dataSumSleepAvg.
   ///
@@ -30585,11 +30579,11 @@ abstract class L10n {
   /// **'أشخاص بلا إيقاع تواصل: {count}'**
   String dataSumPeopleNoRhythm(int count);
 
-  /// No description provided for @dataSumTop3Title.
+  /// AI summary (machine-readable) heading for the Top 3 tasks; count is pre-formatted with Western digits
   ///
   /// In ar, this message translates to:
-  /// **'أهم 3'**
-  String get dataSumTop3Title;
+  /// **'أهم {count}'**
+  String dataSumTop3Title(String count);
 
   /// No description provided for @dataSumOnBoard.
   ///
@@ -32859,11 +32853,11 @@ abstract class L10n {
   /// **'معرّف النموذج'**
   String get aiChatModelCustomField;
 
-  /// No description provided for @aiChatModelCustomHint.
+  /// Hint in the custom model id field; model is an example id for the chosen service
   ///
   /// In ar, this message translates to:
-  /// **'مثل claude-sonnet-5-5'**
-  String get aiChatModelCustomHint;
+  /// **'مثل {model}'**
+  String aiChatModelCustomHint(String model);
 
   /// No description provided for @aiChatModelInvalid.
   ///

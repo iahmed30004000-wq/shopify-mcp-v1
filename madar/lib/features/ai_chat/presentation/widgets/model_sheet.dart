@@ -218,7 +218,7 @@ class _ModelPickerSheetState extends ConsumerState<ModelPickerSheet> {
                     isDense: true,
                     counterText: '',
                     labelText: l.aiChatModelCustomField,
-                    hintText: l.aiChatModelCustomHint,
+                    hintText: l.aiChatModelCustomHint(AiSettings.defaultSelected[p]!),
                     errorText: _invalid ? l.aiChatModelInvalid : null,
                     filled: true,
                     fillColor: t.glassFill,

@@ -18963,13 +18963,32 @@ class L10nAr extends L10n {
   String get dataCsvMood => 'المزاج';
 
   @override
-  String get dataRange30 => '30 يومًا';
+  String dataRangeDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days يوم',
+      many: '$days يومًا',
+      few: '$days أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get dataRange90 => '90 يومًا';
-
-  @override
-  String get dataRangeYear => '12 شهرًا';
+  String dataRangeMonths(int months) {
+    String _temp0 = intl.Intl.pluralLogic(
+      months,
+      locale: localeName,
+      other: '$months شهر',
+      many: '$months شهرًا',
+      few: '$months أشهر',
+      two: 'شهران',
+      one: 'شهر واحد',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get dataRangeAll => 'الكل';
@@ -19078,7 +19097,9 @@ class L10nAr extends L10n {
   String get dataCsvTags => 'الوسوم';
 
   @override
-  String get dataCsvPainScore => 'شدة الألم (0-10)';
+  String dataCsvPainScore(String min, String max) {
+    return 'شدة الألم ($min-$max)';
+  }
 
   @override
   String get dataCsvLocations => 'المواضع';
@@ -19090,16 +19111,24 @@ class L10nAr extends L10n {
   String get dataCsvBodyPoints => 'نقاط خريطة الجسم';
 
   @override
-  String get dataCsvMoodScore => 'المزاج (1-5)';
+  String dataCsvMoodScore(String min, String max) {
+    return 'المزاج ($min-$max)';
+  }
 
   @override
-  String get dataCsvStress => 'التوتر (0-10)';
+  String dataCsvStress(String min, String max) {
+    return 'التوتر ($min-$max)';
+  }
 
   @override
-  String get dataCsvAnxiety => 'القلق (0-10)';
+  String dataCsvAnxiety(String min, String max) {
+    return 'القلق ($min-$max)';
+  }
 
   @override
-  String get dataCsvEnergy => 'الطاقة (0-10)';
+  String dataCsvEnergy(String min, String max) {
+    return 'الطاقة ($min-$max)';
+  }
 
   @override
   String get dataCsvSleepHours => 'ساعات النوم';
@@ -19538,8 +19567,8 @@ class L10nAr extends L10n {
   }
 
   @override
-  String dataSumAvgGrade(String value) {
-    return 'متوسط التقييم: $value/5';
+  String dataSumAvgGrade(String value, String max) {
+    return 'متوسط التقييم: $value/$max';
   }
 
   @override
@@ -19638,23 +19667,23 @@ class L10nAr extends L10n {
   String get dataSumMoodTitle => 'المزاج (متابعة)';
 
   @override
-  String dataSumMoodAvg(String value) {
-    return 'المزاج: $value/5';
+  String dataSumMoodAvg(String value, String max) {
+    return 'المزاج: $value/$max';
   }
 
   @override
-  String dataSumStressAvg(String value) {
-    return 'التوتر: $value/10';
+  String dataSumStressAvg(String value, String max) {
+    return 'التوتر: $value/$max';
   }
 
   @override
-  String dataSumAnxietyAvg(String value) {
-    return 'القلق: $value/10';
+  String dataSumAnxietyAvg(String value, String max) {
+    return 'القلق: $value/$max';
   }
 
   @override
-  String dataSumEnergyAvg(String value) {
-    return 'الطاقة: $value/10';
+  String dataSumEnergyAvg(String value, String max) {
+    return 'الطاقة: $value/$max';
   }
 
   @override
@@ -19795,7 +19824,9 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get dataSumTop3Title => 'أهم 3';
+  String dataSumTop3Title(String count) {
+    return 'أهم $count';
+  }
 
   @override
   String dataSumOnBoard(String board) {
@@ -21252,7 +21283,9 @@ class L10nAr extends L10n {
   String get aiChatModelCustomField => 'معرّف النموذج';
 
   @override
-  String get aiChatModelCustomHint => 'مثل claude-sonnet-5-5';
+  String aiChatModelCustomHint(String model) {
+    return 'مثل $model';
+  }
 
   @override
   String get aiChatModelInvalid => 'معرّف غير صالح.';

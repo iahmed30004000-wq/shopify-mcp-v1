@@ -109,12 +109,10 @@ class ReelStage implements StageFrame {
   }
 
   @override
-  Future<void> openCurtains({Duration? duration}) =>
-      motion.haul(1, duration ?? const Duration(milliseconds: 1500));
+  Future<void> openCurtains({Duration? duration}) => motion.haul(1, duration ?? const Duration(milliseconds: 1500));
 
   @override
-  Future<void> closeCurtains({Duration? duration}) =>
-      motion.haul(0, duration ?? const Duration(milliseconds: 1250));
+  Future<void> closeCurtains({Duration? duration}) => motion.haul(0, duration ?? const Duration(milliseconds: 1250));
 
   @override
   void spotlight(Offset? target) {
@@ -177,7 +175,16 @@ class ReelStage implements StageFrame {
     final skew = lag.clamp(-maxShift, maxShift);
     final folds = math.max(3, style.curtainFolds);
     _panel(canvas, clock, l, Rect.fromLTRB(0, l.curtainTop, panel, l.curtainBottom), CurtainPanel.left, folds, g, skew);
-    _panel(canvas, clock, l, Rect.fromLTRB(w - panel, l.curtainTop, w, l.curtainBottom), CurtainPanel.right, folds, g, -skew);
+    _panel(
+      canvas,
+      clock,
+      l,
+      Rect.fromLTRB(w - panel, l.curtainTop, w, l.curtainBottom),
+      CurtainPanel.right,
+      folds,
+      g,
+      -skew,
+    );
 
     // Festoon valance.
     final swags = math.max(3, (w / 86).round());
@@ -214,7 +221,16 @@ class ReelStage implements StageFrame {
       ..blendMode = BlendMode.srcOver;
   }
 
-  void _panel(Canvas canvas, FilmClock clock, StageLayout l, Rect rect, CurtainPanel side, int folds, double g, double skew) {
+  void _panel(
+    Canvas canvas,
+    FilmClock clock,
+    StageLayout l,
+    Rect rect,
+    CurtainPanel side,
+    int folds,
+    double g,
+    double skew,
+  ) {
     canvas.save();
     if (skew != 0) {
       // The hem swings about the curtain rod (the outer edge stays behind

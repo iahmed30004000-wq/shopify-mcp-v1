@@ -18411,13 +18411,26 @@ class L10nEn extends L10n {
   String get dataCsvMood => 'Mood';
 
   @override
-  String get dataRange30 => '30 days';
+  String dataRangeDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '$days day',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get dataRange90 => '90 days';
-
-  @override
-  String get dataRangeYear => '12 months';
+  String dataRangeMonths(int months) {
+    String _temp0 = intl.Intl.pluralLogic(
+      months,
+      locale: localeName,
+      other: '$months months',
+      one: '$months month',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get dataRangeAll => 'All time';
@@ -18523,7 +18536,9 @@ class L10nEn extends L10n {
   String get dataCsvTags => 'tags';
 
   @override
-  String get dataCsvPainScore => 'score_0_10';
+  String dataCsvPainScore(String min, String max) {
+    return 'score_${min}_$max';
+  }
 
   @override
   String get dataCsvLocations => 'locations';
@@ -18535,16 +18550,24 @@ class L10nEn extends L10n {
   String get dataCsvBodyPoints => 'body_points';
 
   @override
-  String get dataCsvMoodScore => 'mood_1_5';
+  String dataCsvMoodScore(String min, String max) {
+    return 'mood_${min}_$max';
+  }
 
   @override
-  String get dataCsvStress => 'stress_0_10';
+  String dataCsvStress(String min, String max) {
+    return 'stress_${min}_$max';
+  }
 
   @override
-  String get dataCsvAnxiety => 'anxiety_0_10';
+  String dataCsvAnxiety(String min, String max) {
+    return 'anxiety_${min}_$max';
+  }
 
   @override
-  String get dataCsvEnergy => 'energy_0_10';
+  String dataCsvEnergy(String min, String max) {
+    return 'energy_${min}_$max';
+  }
 
   @override
   String get dataCsvSleepHours => 'sleep_hours';
@@ -18982,8 +19005,8 @@ class L10nEn extends L10n {
   }
 
   @override
-  String dataSumAvgGrade(String value) {
-    return 'average grade: $value/5';
+  String dataSumAvgGrade(String value, String max) {
+    return 'average grade: $value/$max';
   }
 
   @override
@@ -19082,23 +19105,23 @@ class L10nEn extends L10n {
   String get dataSumMoodTitle => 'Mood (tracking)';
 
   @override
-  String dataSumMoodAvg(String value) {
-    return 'mood: $value/5';
+  String dataSumMoodAvg(String value, String max) {
+    return 'mood: $value/$max';
   }
 
   @override
-  String dataSumStressAvg(String value) {
-    return 'stress: $value/10';
+  String dataSumStressAvg(String value, String max) {
+    return 'stress: $value/$max';
   }
 
   @override
-  String dataSumAnxietyAvg(String value) {
-    return 'anxiety: $value/10';
+  String dataSumAnxietyAvg(String value, String max) {
+    return 'anxiety: $value/$max';
   }
 
   @override
-  String dataSumEnergyAvg(String value) {
-    return 'energy: $value/10';
+  String dataSumEnergyAvg(String value, String max) {
+    return 'energy: $value/$max';
   }
 
   @override
@@ -19251,7 +19274,9 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get dataSumTop3Title => 'Top 3';
+  String dataSumTop3Title(String count) {
+    return 'Top $count';
+  }
 
   @override
   String dataSumOnBoard(String board) {
@@ -20678,7 +20703,9 @@ class L10nEn extends L10n {
   String get aiChatModelCustomField => 'Model id';
 
   @override
-  String get aiChatModelCustomHint => 'e.g. claude-sonnet-5-5';
+  String aiChatModelCustomHint(String model) {
+    return 'e.g. $model';
+  }
 
   @override
   String get aiChatModelInvalid => 'Not a valid model id.';

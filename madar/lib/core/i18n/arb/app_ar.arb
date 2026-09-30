@@ -18127,9 +18127,24 @@
   "dataCsvTransactions": "المعاملات",
   "dataCsvPain": "الألم",
   "dataCsvMood": "المزاج",
-  "dataRange30": "30 يومًا",
-  "dataRange90": "90 يومًا",
-  "dataRangeYear": "12 شهرًا",
+  "dataRangeDays": "{days, plural, =1{يوم واحد} =2{يومان} few{{days} أيام} many{{days} يومًا} other{{days} يوم}}",
+  "@dataRangeDays": {
+    "description": "CSV date-range choice: the last N days (30, 90)",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataRangeMonths": "{months, plural, =1{شهر واحد} =2{شهران} few{{months} أشهر} many{{months} شهرًا} other{{months} شهر}}",
+  "@dataRangeMonths": {
+    "description": "CSV date-range choice: the last N months (12)",
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
   "dataRangeAll": "الكل",
   "dataRangeCustom": "مخصّصة…",
   "dataRangeAllTime": "كل السجلات منذ البداية",
@@ -18184,14 +18199,69 @@
   "dataCsvToAmount": "المبلغ المستلم",
   "dataCsvToCurrency": "عملة الاستلام",
   "dataCsvTags": "الوسوم",
-  "dataCsvPainScore": "شدة الألم (0-10)",
+  "dataCsvPainScore": "شدة الألم ({min}-{max})",
+  "@dataCsvPainScore": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
   "dataCsvLocations": "المواضع",
   "dataCsvTriggers": "المحفّزات",
   "dataCsvBodyPoints": "نقاط خريطة الجسم",
-  "dataCsvMoodScore": "المزاج (1-5)",
-  "dataCsvStress": "التوتر (0-10)",
-  "dataCsvAnxiety": "القلق (0-10)",
-  "dataCsvEnergy": "الطاقة (0-10)",
+  "dataCsvMoodScore": "المزاج ({min}-{max})",
+  "@dataCsvMoodScore": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvStress": "التوتر ({min}-{max})",
+  "@dataCsvStress": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvAnxiety": "القلق ({min}-{max})",
+  "@dataCsvAnxiety": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvEnergy": "الطاقة ({min}-{max})",
+  "@dataCsvEnergy": {
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
   "dataCsvSleepHours": "ساعات النوم",
   "dataCsvCaffeine": "أكواب الكافيين",
   "dataCsvFactors": "العوامل",
@@ -18522,10 +18592,14 @@
       }
     }
   },
-  "dataSumAvgGrade": "متوسط التقييم: {value}/5",
+  "dataSumAvgGrade": "متوسط التقييم: {value}/{max}",
   "@dataSumAvgGrade": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
@@ -18593,34 +18667,50 @@
   "dataSumTopPlaces": "أكثر المواضع تسجيلًا",
   "dataSumTopTriggers": "أكثر المحفّزات تسجيلًا",
   "dataSumMoodTitle": "المزاج (متابعة)",
-  "dataSumMoodAvg": "المزاج: {value}/5",
+  "dataSumMoodAvg": "المزاج: {value}/{max}",
   "@dataSumMoodAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
-  "dataSumStressAvg": "التوتر: {value}/10",
+  "dataSumStressAvg": "التوتر: {value}/{max}",
   "@dataSumStressAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
-  "dataSumAnxietyAvg": "القلق: {value}/10",
+  "dataSumAnxietyAvg": "القلق: {value}/{max}",
   "@dataSumAnxietyAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
-  "dataSumEnergyAvg": "الطاقة: {value}/10",
+  "dataSumEnergyAvg": "الطاقة: {value}/{max}",
   "@dataSumEnergyAvg": {
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
@@ -18831,7 +18921,15 @@
       }
     }
   },
-  "dataSumTop3Title": "أهم 3",
+  "dataSumTop3Title": "أهم {count}",
+  "@dataSumTop3Title": {
+    "description": "AI summary (machine-readable) heading for the Top 3 tasks; count is pre-formatted with Western digits",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "dataSumOnBoard": "اللوحة: {board}",
   "@dataSumOnBoard": {
     "placeholders": {
@@ -19974,7 +20072,15 @@
   },
   "aiChatModelCustom": "إضافة معرّف نموذج",
   "aiChatModelCustomField": "معرّف النموذج",
-  "aiChatModelCustomHint": "مثل claude-sonnet-5-5",
+  "aiChatModelCustomHint": "مثل {model}",
+  "@aiChatModelCustomHint": {
+    "description": "Hint in the custom model id field; model is an example id for the chosen service",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
   "aiChatModelInvalid": "معرّف غير صالح.",
   "aiChatModelUse": "استخدام",
   "aiChatModelRefresh": "تحديث قائمة النماذج",

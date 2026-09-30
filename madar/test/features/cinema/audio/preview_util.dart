@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:madar/core/sound/synth/rng.dart';
 import 'package:madar/core/sound/synth/wav.dart';
+import 'package:madar/features/cinema/engine/audio/music/score.dart';
 import 'package:madar/features/cinema/engine/audio/synth/renderer.dart';
 
 import 'audio_analysis.dart';
@@ -121,4 +122,65 @@ int _crc32(List<int> data) {
     }
   }
   return c ^ 0xFFFFFFFF;
+}
+
+/// Piano roll of a composed cue (x = beats, y = pitch 24–100; bar lines
+/// grey, the loop start red; one colour per stem, drums as ticks at the
+/// bottom).
+void writePianoRoll(String name, CueScore s, {int pxPerBeat = 18, int pxPerSemi = 5}) {
+  final beats = (s.introBeats + s.loopBeats).ceil();
+  final w = beats * pxPerBeat + 1;
+  const lo = 24, hi = 100;
+  final h = (hi - lo) * pxPerSemi + 40;
+  final img = Uint8List(w * h * 3)..fillRange(0, w * h * 3, 18);
+  void px(int x, int y, List<int> c) {
+    if (x < 0 || y < 0 || x >= w || y >= h) return;
+    final o = (y * w + x) * 3;
+    img[o] = c[0];
+    img[o + 1] = c[1];
+    img[o + 2] = c[2];
+  }
+
+  for (var b = 0; b <= beats; b++) {
+    final isBar = b % s.beatsPerBar == 0;
+    final c = b == s.introBeats.round() ? [200, 40, 40] : (isBar ? [70, 70, 70] : [34, 34, 34]);
+    for (var y = 0; y < h; y++) {
+      px(b * pxPerBeat, y, c);
+    }
+  }
+  // C lines.
+  for (var p = lo; p <= hi; p += 12) {
+    final y = (hi - p) * pxPerSemi;
+    for (var x = 0; x < w; x += 2) {
+      px(x, y, [45, 45, 60]);
+    }
+  }
+  const colours = [
+    [90, 170, 255],
+    [255, 200, 60],
+    [120, 230, 120],
+    [240, 110, 200],
+  ];
+  for (final e in s.events) {
+    final c = colours[e.stem % colours.length];
+    final x0 = (e.beat * pxPerBeat).round();
+    if (e.inst.isDrum && e.inst != Inst.timpani) {
+      final lane = h - 36 + (e.inst.index % 8) * 4;
+      for (var x = x0; x < x0 + 3; x++) {
+        for (var y = lane; y < lane + 3; y++) {
+          px(x, y, c);
+        }
+      }
+      continue;
+    }
+    final x1 = math.max(x0 + 2, ((e.beat + e.dur) * pxPerBeat).round());
+    final y0 = ((hi - e.pitch) * pxPerSemi).round();
+    final shade = 0.45 + 0.55 * e.vel;
+    for (var x = x0; x < x1; x++) {
+      for (var y = y0 - pxPerSemi ~/ 2; y < y0 + pxPerSemi ~/ 2; y++) {
+        px(x, y, [for (final v in c) (v * shade).round()]);
+      }
+    }
+  }
+  File('${previewDir().path}/$name.roll.png').writeAsBytesSync(encodePng(w, h, img));
 }

@@ -9,7 +9,12 @@ import '../core/era_skin.dart';
 StageStyle eraStage(Era era) => switch (era) {
   Era.silent => const StageStyle(proscenium: ProsceniumStyle.picturePalace, curtainFolds: 6, footlightFlicker: 0.5),
   Era.rubberHose => const StageStyle(proscenium: ProsceniumStyle.artDeco),
-  Era.noir => const StageStyle(proscenium: ProsceniumStyle.noirArch, curtainFolds: 8, footlights: 7, footlightFlicker: 0.15),
+  Era.noir => const StageStyle(
+    proscenium: ProsceniumStyle.noirArch,
+    curtainFolds: 8,
+    footlights: 7,
+    footlightFlicker: 0.15,
+  ),
   Era.technicolor => const StageStyle(proscenium: ProsceniumStyle.atomic, footlights: 11),
   Era.grindhouse => const StageStyle(
     proscenium: ProsceniumStyle.marquee,

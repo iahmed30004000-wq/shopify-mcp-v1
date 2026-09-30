@@ -149,9 +149,20 @@ class ScoreHudItem extends HudItem {
       final beaten = ctx.model.score > best;
       final shown = beaten ? ctx.model.score : best;
       final tabW = 22 * s + _bestDigits.widthFor(RollingDigits.digitCount(shown));
-      final tab = Rect.fromLTWH(rtl ? main.right - tabW - 10 * s : main.left + 10 * s, main.bottom - 3 * s, tabW, 19 * s);
+      final tab = Rect.fromLTWH(
+        rtl ? main.right - tabW - 10 * s : main.left + 10 * s,
+        main.bottom - 3 * s,
+        tabW,
+        19 * s,
+      );
       _tab.paint(canvas, tab, ctx, flash: beaten ? 0.3 + 0.3 * math.sin(ctx.clock.time * 6) : 0);
-      _crown(canvas, Offset(rtl ? tab.right - 10 * s : tab.left + 10 * s, tab.center.dy + 1 * s), 5.5 * s, beaten ? m.gilt : m.giltDark, m.ink);
+      _crown(
+        canvas,
+        Offset(rtl ? tab.right - 10 * s : tab.left + 10 * s, tab.center.dy + 1 * s),
+        5.5 * s,
+        beaten ? m.gilt : m.giltDark,
+        m.ink,
+      );
       final digitsRight = rtl ? tab.right - 18 * s : tab.right - 5 * s;
       _bestDigits.paint(canvas, digitsRight, tab.center.dy + 1 * s, shown, shown, 1, RollingDigits.digitCount(shown));
     }
@@ -229,7 +240,16 @@ class ReelGlyph {
     ..strokeJoin = StrokeJoin.round;
   final Path _path = Path();
 
-  void paint(Canvas canvas, Offset c, double r, double angle, double film, HudContext ctx, {double alpha = 1, double scale = 1}) {
+  void paint(
+    Canvas canvas,
+    Offset c,
+    double r,
+    double angle,
+    double film,
+    HudContext ctx, {
+    double alpha = 1,
+    double scale = 1,
+  }) {
     final m = StageMaterials.of(ctx.skin);
     final pal = ctx.skin.palette;
     final neon = ctx.skin.titles.frame == TitleFrame.osd;
@@ -555,8 +575,17 @@ class BurningFilmBossBar extends HudItem {
       _p.color = neon ? m.neonB.withValues(alpha: 0.8) : pal.paper.withValues(alpha: 0.9);
       for (var x = strip.left + 3 * s; x < strip.right - 3 * s; x += 7 * s) {
         canvas
-          ..drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(x, strip.top + 2 * s, 3.4 * s, 2.8 * s), Radius.circular(0.8 * s)), _p)
-          ..drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(x, strip.bottom - 4.8 * s, 3.4 * s, 2.8 * s), Radius.circular(0.8 * s)), _p);
+          ..drawRRect(
+            RRect.fromRectAndRadius(Rect.fromLTWH(x, strip.top + 2 * s, 3.4 * s, 2.8 * s), Radius.circular(0.8 * s)),
+            _p,
+          )
+          ..drawRRect(
+            RRect.fromRectAndRadius(
+              Rect.fromLTWH(x, strip.bottom - 4.8 * s, 3.4 * s, 2.8 * s),
+              Radius.circular(0.8 * s),
+            ),
+            _p,
+          );
       }
       // Scorched frames between the health line and the flame front.
       if (frontLen > len + 0.5) {
@@ -569,7 +598,11 @@ class BurningFilmBossBar extends HudItem {
           final hy = _hash(k * 5.3 + 1.1);
           final a = 0.4 + 0.6 * _hash(k + (t * 18).floorToDouble());
           _add.color = ember.withValues(alpha: a);
-          canvas.drawCircle(Offset(scorch.left + scorch.width * hx, scorch.top + scorch.height * hy), (1.2 + hy) * s, _add);
+          canvas.drawCircle(
+            Offset(scorch.left + scorch.width * hx, scorch.top + scorch.height * hy),
+            (1.2 + hy) * s,
+            _add,
+          );
         }
       }
       // Hit flash.
@@ -626,11 +659,7 @@ class BurningFilmBossBar extends HudItem {
     for (var k = 0; k < 3; k++) {
       final ph = (t * 0.7 + k / 3) % 1;
       _p.color = pal.shadow.withValues(alpha: 0.4 * (1 - ph));
-      canvas.drawCircle(
-        Offset(x + math.sin(ph * 6 + k) * 5 * s, strip.top - ph * 22 * s),
-        (3 + ph * 7) * s,
-        _p,
-      );
+      canvas.drawCircle(Offset(x + math.sin(ph * 6 + k) * 5 * s, strip.top - ph * 22 * s), (3 + ph * 7) * s, _p);
     }
   }
 
@@ -673,7 +702,9 @@ class StopwatchHudItem extends HudItem {
       _urgent = urgent;
       _scale = ctx.scale;
       final txt = '${secs ~/ 60}:${(secs % 60).toString().padLeft(2, '0')}';
-      final color = urgent && ctx.skin.titles.frame != TitleFrame.plain ? ctx.skin.palette.accent : HudPlaque.textColor(ctx);
+      final color = urgent && ctx.skin.titles.frame != TitleFrame.plain
+          ? ctx.skin.palette.accent
+          : HudPlaque.textColor(ctx);
       _text
         ..text = TextSpan(
           text: hudDigits(txt, env.languageCode),
@@ -786,7 +817,9 @@ class FilmProgressHudItem extends HudItem {
       final d0 = fw * i;
       final lit = d0 + fw * 0.5 < head;
       final x = rtl ? strip.right - d0 - fw : strip.left + d0;
-      _p.color = lit ? (neon ? m.neonB : (ctx.skin.era.isMonochrome ? pal.paper : m.gilt)) : pal.shadow.withValues(alpha: 0.6);
+      _p.color = lit
+          ? (neon ? m.neonB : (ctx.skin.era.isMonochrome ? pal.paper : m.gilt))
+          : pal.shadow.withValues(alpha: 0.6);
       canvas.drawRect(Rect.fromLTWH(x + 1.2 * s, strip.top + 3 * s, fw - 2.4 * s, strip.height - 6 * s), _p);
     }
     _p.color = pal.paper.withValues(alpha: neon ? 0.5 : 0.85);
@@ -841,8 +874,20 @@ class PauseHudItem extends HudItem {
     final c = r.center + Offset(0, 0.5 * s);
     final bw = r.width * 0.12, bh = r.height * 0.4;
     canvas
-      ..drawRRect(RRect.fromRectAndRadius(Rect.fromCenter(center: c - Offset(bw * 0.95, 0), width: bw, height: bh), Radius.circular(bw * 0.4)), _p)
-      ..drawRRect(RRect.fromRectAndRadius(Rect.fromCenter(center: c + Offset(bw * 0.95, 0), width: bw, height: bh), Radius.circular(bw * 0.4)), _p);
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(center: c - Offset(bw * 0.95, 0), width: bw, height: bh),
+          Radius.circular(bw * 0.4),
+        ),
+        _p,
+      )
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(center: c + Offset(bw * 0.95, 0), width: bw, height: bh),
+          Radius.circular(bw * 0.4),
+        ),
+        _p,
+      );
   }
 }
 

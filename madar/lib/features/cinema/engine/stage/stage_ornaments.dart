@@ -34,7 +34,14 @@ abstract final class Ornaments {
   }
 
   /// Strokes [path] with [color] at [width].
-  static void line(Canvas canvas, Path path, Color color, double width, {Shader? shader, StrokeCap cap = StrokeCap.round}) {
+  static void line(
+    Canvas canvas,
+    Path path,
+    Color color,
+    double width, {
+    Shader? shader,
+    StrokeCap cap = StrokeCap.round,
+  }) {
     _stroke
       ..shader = shader
       ..color = color
@@ -166,7 +173,15 @@ abstract final class Ornaments {
   }
 
   /// A star with [points] spikes (outer radius [r], inner [ri]).
-  static Path starPath(Offset c, double r, double ri, int points, {double rotation = -math.pi / 2, BoilPen? pen, int frame = 0}) {
+  static Path starPath(
+    Offset c,
+    double r,
+    double ri,
+    int points, {
+    double rotation = -math.pi / 2,
+    BoilPen? pen,
+    int frame = 0,
+  }) {
     final path = Path();
     if (pen != null) pen.begin(path, frame);
     for (var i = 0; i < points * 2; i++) {
@@ -184,7 +199,16 @@ abstract final class Ornaments {
   }
 
   /// A plaster rosette: [petals] round petals around a boss.
-  static void rosette(Canvas canvas, Offset c, double r, int petals, {required Color fill, required Color ink, required Color boss, double lineWidth = 1}) {
+  static void rosette(
+    Canvas canvas,
+    Offset c,
+    double r,
+    int petals, {
+    required Color fill,
+    required Color ink,
+    required Color boss,
+    double lineWidth = 1,
+  }) {
     final p = Path();
     for (var i = 0; i < petals; i++) {
       final a = math.pi * 2 * i / petals;
@@ -196,7 +220,16 @@ abstract final class Ornaments {
 
   /// A laurel sprig from [a] to [b] bowing by [bend] (× length), with
   /// [leaves] pairs of leaves.
-  static void laurel(Canvas canvas, Offset a, Offset b, double bend, int leaves, {required Color fill, required Color ink, double lineWidth = 1}) {
+  static void laurel(
+    Canvas canvas,
+    Offset a,
+    Offset b,
+    double bend,
+    int leaves, {
+    required Color fill,
+    required Color ink,
+    double lineWidth = 1,
+  }) {
     final d = b - a;
     final n = Offset(-d.dy, d.dx);
     final ctrl = Offset.lerp(a, b, 0.5)! + n * bend;

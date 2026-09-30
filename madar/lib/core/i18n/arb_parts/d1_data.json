@@ -387,17 +387,25 @@
     "ar": "المزاج",
     "en": "Mood"
   },
-  "dataRange30": {
-    "ar": "30 يومًا",
-    "en": "30 days"
+  "dataRangeDays": {
+    "ar": "{days, plural, =1{يوم واحد} =2{يومان} few{{days} أيام} many{{days} يومًا} other{{days} يوم}}",
+    "en": "{days, plural, =1{{days} day} other{{days} days}}",
+    "description": "CSV date-range choice: the last N days (30, 90)",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   },
-  "dataRange90": {
-    "ar": "90 يومًا",
-    "en": "90 days"
-  },
-  "dataRangeYear": {
-    "ar": "12 شهرًا",
-    "en": "12 months"
+  "dataRangeMonths": {
+    "ar": "{months, plural, =1{شهر واحد} =2{شهران} few{{months} أشهر} many{{months} شهرًا} other{{months} شهر}}",
+    "en": "{months, plural, =1{{months} month} other{{months} months}}",
+    "description": "CSV date-range choice: the last N months (12)",
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
   },
   "dataRangeAll": {
     "ar": "الكل",
@@ -538,8 +546,17 @@
     "en": "tags"
   },
   "dataCsvPainScore": {
-    "ar": "شدة الألم (0-10)",
-    "en": "score_0_10"
+    "ar": "شدة الألم ({min}-{max})",
+    "en": "score_{min}_{max}",
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
   },
   "dataCsvLocations": {
     "ar": "المواضع",
@@ -554,20 +571,56 @@
     "en": "body_points"
   },
   "dataCsvMoodScore": {
-    "ar": "المزاج (1-5)",
-    "en": "mood_1_5"
+    "ar": "المزاج ({min}-{max})",
+    "en": "mood_{min}_{max}",
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
   },
   "dataCsvStress": {
-    "ar": "التوتر (0-10)",
-    "en": "stress_0_10"
+    "ar": "التوتر ({min}-{max})",
+    "en": "stress_{min}_{max}",
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
   },
   "dataCsvAnxiety": {
-    "ar": "القلق (0-10)",
-    "en": "anxiety_0_10"
+    "ar": "القلق ({min}-{max})",
+    "en": "anxiety_{min}_{max}",
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
   },
   "dataCsvEnergy": {
-    "ar": "الطاقة (0-10)",
-    "en": "energy_0_10"
+    "ar": "الطاقة ({min}-{max})",
+    "en": "energy_{min}_{max}",
+    "description": "CSV column header; min/max are the scale's ends, passed pre-formatted with Western digits (machine-readable)",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
   },
   "dataCsvSleepHours": {
     "ar": "ساعات النوم",
@@ -1196,10 +1249,14 @@
     }
   },
   "dataSumAvgGrade": {
-    "ar": "متوسط التقييم: {value}/5",
-    "en": "average grade: {value}/5",
+    "ar": "متوسط التقييم: {value}/{max}",
+    "en": "average grade: {value}/{max}",
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
@@ -1347,37 +1404,53 @@
     "en": "Mood (tracking)"
   },
   "dataSumMoodAvg": {
-    "ar": "المزاج: {value}/5",
-    "en": "mood: {value}/5",
+    "ar": "المزاج: {value}/{max}",
+    "en": "mood: {value}/{max}",
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
   "dataSumStressAvg": {
-    "ar": "التوتر: {value}/10",
-    "en": "stress: {value}/10",
+    "ar": "التوتر: {value}/{max}",
+    "en": "stress: {value}/{max}",
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
   "dataSumAnxietyAvg": {
-    "ar": "القلق: {value}/10",
-    "en": "anxiety: {value}/10",
+    "ar": "القلق: {value}/{max}",
+    "en": "anxiety: {value}/{max}",
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
   },
   "dataSumEnergyAvg": {
-    "ar": "الطاقة: {value}/10",
-    "en": "energy: {value}/10",
+    "ar": "الطاقة: {value}/{max}",
+    "en": "energy: {value}/{max}",
+    "description": "AI summary (machine-readable): value and the scale's top, pre-formatted with Western digits",
     "placeholders": {
       "value": {
+        "type": "String"
+      },
+      "max": {
         "type": "String"
       }
     }
@@ -1638,8 +1711,14 @@
     }
   },
   "dataSumTop3Title": {
-    "ar": "أهم 3",
-    "en": "Top 3"
+    "ar": "أهم {count}",
+    "en": "Top {count}",
+    "description": "AI summary (machine-readable) heading for the Top 3 tasks; count is pre-formatted with Western digits",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
   "dataSumOnBoard": {
     "ar": "اللوحة: {board}",

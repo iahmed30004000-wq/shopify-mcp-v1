@@ -160,9 +160,9 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
               const SizedBox(height: Space.s),
               ChoicePills<ExportRangePreset>.single(
                 options: [
-                  ChoiceOption(value: ExportRangePreset.days30, label: fmt.localizeDigits(l.dataRange30)),
-                  ChoiceOption(value: ExportRangePreset.days90, label: fmt.localizeDigits(l.dataRange90)),
-                  ChoiceOption(value: ExportRangePreset.year, label: fmt.localizeDigits(l.dataRangeYear)),
+                  ChoiceOption(value: ExportRangePreset.days30, label: fmt.localizeDigits(l.dataRangeDays(30))),
+                  ChoiceOption(value: ExportRangePreset.days90, label: fmt.localizeDigits(l.dataRangeDays(90))),
+                  ChoiceOption(value: ExportRangePreset.year, label: fmt.localizeDigits(l.dataRangeMonths(12))),
                   ChoiceOption(value: ExportRangePreset.all, label: l.dataRangeAll),
                   ChoiceOption(value: ExportRangePreset.custom, label: l.dataRangeCustom, icon: Icons.date_range_rounded),
                 ],

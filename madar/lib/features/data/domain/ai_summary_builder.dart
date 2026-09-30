@@ -257,7 +257,7 @@ class AiSummaryBuilder {
         if (reviews.isNotEmpty)
           '- ${_windowLabel(window)} — ${_join([
             l.dataSumReviews('${reviews.length}'),
-            if (avg != null) l.dataSumAvgGrade(_num(avg)),
+            if (avg != null) l.dataSumAvgGrade(_num(avg), '5'),
           ])}',
       ]);
     }
@@ -419,10 +419,10 @@ class AiSummaryBuilder {
       }
 
       final parts = [
-        a((m) => m.mood, (v) => l.dataSumMoodAvg(v)),
-        a((m) => m.stress, (v) => l.dataSumStressAvg(v)),
-        a((m) => m.anxiety, (v) => l.dataSumAnxietyAvg(v)),
-        a((m) => m.energy, (v) => l.dataSumEnergyAvg(v)),
+        a((m) => m.mood, (v) => l.dataSumMoodAvg(v, '5')),
+        a((m) => m.stress, (v) => l.dataSumStressAvg(v, '10')),
+        a((m) => m.anxiety, (v) => l.dataSumAnxietyAvg(v, '10')),
+        a((m) => m.energy, (v) => l.dataSumEnergyAvg(v, '10')),
         a((m) => m.sleepHours, (v) => l.dataSumSleepAvg(v)),
         a((m) => m.caffeineCups, (v) => l.dataSumCaffeineAvg(v)),
       ];
@@ -681,7 +681,7 @@ class AiSummaryBuilder {
         ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.title, b.title, a.id, b.id)))
         '- ${_clean(c.title)} (${l.dataSumOnBoard(_clean(boardById[c.boardId]!.name))})',
     ];
-    md.sub(l.dataSumTop3Title, top);
+    md.sub(l.dataSumTop3Title('3'), top);
 
     md.sub(l.dataSumBoardsTitle, [
       for (final b in boards)

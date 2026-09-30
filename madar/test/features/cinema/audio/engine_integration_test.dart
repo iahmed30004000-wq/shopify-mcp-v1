@@ -67,10 +67,6 @@ void main() {
 
     // Effects go through the bank.
     game.feedback(CinemaSound.coin);
-    // ignore: avoid_print
-    print(mixer.calls.where((c) => c.contains('coin')).toList());
-    // ignore: avoid_print
-    print(sfx!.loadedKeys.length);
     expect(mixer.active('sound:coin'), hasLength(1));
 
     // Intermission ducks the score.
@@ -86,7 +82,8 @@ void main() {
     await tester.pump();
     expect(bed.target, 0);
     game.feedback(CinemaSound.coin);
-    expect(mixer.active('sound:coin'), hasLength(1), reason: 'no new effects during prayer');
+    expect(mixer.calls.where((c) => c.startsWith('play') && c.contains('sound:coin')), hasLength(1), reason: 'no new effects during prayer');
+    expect(mixer.active('sound:coin'), isEmpty, reason: 'ringing effects are cut');
     lease.release();
     await tester.pump();
     expect(bed.target, closeTo(full, 1e-9));

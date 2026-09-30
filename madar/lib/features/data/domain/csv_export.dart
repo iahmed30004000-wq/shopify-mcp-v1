@@ -262,7 +262,7 @@ class DataCsvBuilder {
       header: [
         l.dataCsvDate,
         l.dataCsvTime,
-        l.dataCsvPainScore,
+        l.dataCsvPainScore('0', '10'),
         l.dataCsvLocations,
         l.dataCsvTriggers,
         l.dataCsvBodyPoints,
@@ -299,10 +299,10 @@ class DataCsvBuilder {
       header: [
         l.dataCsvDate,
         l.dataCsvTime,
-        l.dataCsvMoodScore,
-        l.dataCsvStress,
-        l.dataCsvAnxiety,
-        l.dataCsvEnergy,
+        l.dataCsvMoodScore('1', '5'),
+        l.dataCsvStress('0', '10'),
+        l.dataCsvAnxiety('0', '10'),
+        l.dataCsvEnergy('0', '10'),
         l.dataCsvSleepHours,
         l.dataCsvCaffeine,
         l.dataCsvFactors,

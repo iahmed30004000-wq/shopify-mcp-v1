@@ -9,6 +9,11 @@ import '../together_test_utils.dart';
 Finder _field(String key) => find.descendant(of: find.byKey(ValueKey(key)), matching: find.byType(TextField));
 
 Future<void> _tapKey(WidgetTester tester, String key) async {
+  final target = find.byKey(ValueKey(key));
+  // Lazily built lists: scroll the target into existence first.
+  if (target.evaluate().isEmpty) {
+    await tester.scrollUntilVisible(target, 200, scrollable: find.byType(Scrollable).first);
+  }
   await tester.ensureVisible(find.byKey(ValueKey(key)));
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(ValueKey(key)));
@@ -108,7 +113,7 @@ void main() {
   });
 
   group('editing', () {
-    testWidgets('a question or challenge that cleans to nothing is refused quietly', (tester) async {
+    testWidgets('a question that cleans to nothing is refused quietly', (tester) async {
       final env = await pumpTogetherApp(tester, locale: const Locale('en'), home: const QuestionBankScreen());
       await _tapKey(tester, 'bank-add-question');
       // Zero-width and bidi characters only: the sheet sees text, storage none.
@@ -119,8 +124,9 @@ void main() {
       expect(tester.takeException(), isNull);
       final bank = await tester.runAsync(() => SpecialsRepository(env.db).bank());
       expect(bank!.questions.where((q) => !q.isDefault), isEmpty);
+    });
 
-      await tester.pumpWidget(const SizedBox());
+    testWidgets('a challenge that cleans to nothing is refused quietly', (tester) async {
       final env2 = await pumpTogetherApp(tester, locale: const Locale('en'), home: const ChallengeListScreen());
       await _tapKey(tester, 'challenges-add');
       await tester.enterText(find.byType(TextField).first, '\u200B\u200B');

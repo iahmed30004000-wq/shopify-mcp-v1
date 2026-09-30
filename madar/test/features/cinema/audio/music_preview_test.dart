@@ -29,6 +29,7 @@ void main() {
         final mix = mixdown(cue);
         writePreview('${era.name}_${mood.name}', mix);
         writeSpectrogram('${era.name}_${mood.name}', mix);
+        writePianoRoll('${era.name}_${mood.name}', score);
         final loop = mixdown(cue, loops: 1);
         final spec = Spectrum.of(mix.mono, mix.sampleRate);
         final seams = [for (final s in cue.stems) Pcm.decode(s.loop)].map((p) => seamScore(p.channels.first).toStringAsFixed(2)).join('/');

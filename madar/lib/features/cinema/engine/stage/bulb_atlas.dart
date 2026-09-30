@@ -73,7 +73,11 @@ class BulbAtlas {
           const [0, 0.55, 1],
         ),
     );
-    c.drawCircle(const ui.Offset(bx - r * 0.3, by - r * 0.32), r * 0.16, ui.Paint()..color = const ui.Color(0xFFFFFFFF));
+    c.drawCircle(
+      const ui.Offset(bx - r * 0.3, by - r * 0.32),
+      r * 0.16,
+      ui.Paint()..color = const ui.Color(0xFFFFFFFF),
+    );
     final pic = rec.endRecording();
     final img = pic.toImageSync((_glowSize + _bulbSize).toInt(), _glowSize.toInt());
     pic.dispose();
@@ -160,15 +164,7 @@ class BulbAtlas {
       _glowRectView = Float32List.sublistView(_glowRect, 0, _g * 4);
       _glowColorView = Int32List.sublistView(_glowColor, 0, _g);
     }
-    canvas.drawRawAtlas(
-      sprite,
-      _glowXfView!,
-      _glowRectView!,
-      _glowColorView,
-      ui.BlendMode.modulate,
-      null,
-      _glowPaint,
-    );
+    canvas.drawRawAtlas(sprite, _glowXfView!, _glowRectView!, _glowColorView, ui.BlendMode.modulate, null, _glowPaint);
   }
 
   void dispose() {
