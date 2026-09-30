@@ -29,10 +29,10 @@ final class AiBudget {
   final Duration? maxTime;
   final int? maxNodes;
 
-  Map<String, Object?> toJson() => {'ms': maxTime?.inMicroseconds, 'nodes': maxNodes};
+  Map<String, Object?> toJson() => {'us': maxTime?.inMicroseconds, 'nodes': maxNodes};
 
   factory AiBudget.fromJson(Map<String, Object?> json) {
-    final us = json['ms'] as num?;
+    final us = json['us'] as num?;
     return AiBudget(
       maxTime: us == null ? null : Duration(microseconds: us.toInt()),
       maxNodes: (json['nodes'] as num?)?.toInt(),
