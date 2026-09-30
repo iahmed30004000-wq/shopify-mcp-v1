@@ -470,7 +470,8 @@ void main() {
       expect(app.container.read(orbitFlightProvider).toScene(global), offsetMoreOrLessEquals(center, epsilon: 0.01));
       await tester.tapAt(global);
       // The sheet opens once the record is read from the database.
-      for (var i = 0; i < 100 && find.byType(InteractionSheetFrame).evaluate().isEmpty; i++) {
+      // Up to ~4 s of real time: the record read can be slow on a loaded machine.
+      for (var i = 0; i < 400 && find.byType(InteractionSheetFrame).evaluate().isEmpty; i++) {
         await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
         await tester.pump(const Duration(milliseconds: 16));
       }

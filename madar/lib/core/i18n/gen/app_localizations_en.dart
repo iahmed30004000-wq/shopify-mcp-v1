@@ -13006,6 +13006,7 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count due today',
+      one: '$count due today',
     );
     return '$_temp0';
   }
@@ -13016,6 +13017,7 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count overdue',
+      one: '$count overdue',
     );
     return '$_temp0';
   }
@@ -16575,171 +16577,4 @@ class L10nEn extends L10n {
 
   @override
   String get bodyNotifyHint => 'Needs notification permission on the phone.';
-
-  @override
-  String get cinemaTitle => 'Madar Cinema';
-
-  @override
-  String get cinemaHallSubtitle =>
-      'Original games in the spirit of classic cinema';
-
-  @override
-  String get cinemaFeatures => 'Features';
-
-  @override
-  String get cinemaShorts => 'Shorts';
-
-  @override
-  String get cinemaComingSoon => 'Coming soon';
-
-  @override
-  String get cinemaPlay => 'Play';
-
-  @override
-  String get cinemaGameViewLabel => 'Game screen';
-
-  @override
-  String get cinemaPause => 'Pause';
-
-  @override
-  String get cinemaIntermission => 'Intermission';
-
-  @override
-  String get cinemaResume => 'Resume';
-
-  @override
-  String get cinemaRestart => 'Restart';
-
-  @override
-  String get cinemaLeave => 'Leave';
-
-  @override
-  String get cinemaPlayAgain => 'Play again';
-
-  @override
-  String get cinemaTheEnd => 'The End';
-
-  @override
-  String get cinemaGameOver => 'Show\'s Over';
-
-  @override
-  String cinemaScoreLine(String score) {
-    return 'Score: $score';
-  }
-
-  @override
-  String cinemaBestLine(String score) {
-    return 'Best: $score';
-  }
-
-  @override
-  String get cinemaEraSilent => 'Silent 1920s';
-
-  @override
-  String get cinemaEraRubberHose => '1930s Cartoon';
-
-  @override
-  String get cinemaEraNoir => '1940s Noir';
-
-  @override
-  String get cinemaEraTechnicolor => '1950s Technicolor';
-
-  @override
-  String get cinemaEraGrindhouse => '1970s Grindhouse';
-
-  @override
-  String get cinemaEraVhs => '1980s VHS';
-
-  @override
-  String get cinemaDemoTitle => 'Rehearsal';
-
-  @override
-  String get cinemaDemoTagline => 'A test scene for the Film Reel Engine';
-
-  @override
-  String get cinemaDemoOpening => 'Scene One';
-
-  @override
-  String get cinemaDemoOpeningSubtitle => 'Tap to jump over the barrels!';
-
-  @override
-  String get cinemaFlappyOrbitTitle => 'Flappy Orbit';
-
-  @override
-  String get cinemaFlappyOrbitTagline => 'Flap between planets to a swing beat';
-
-  @override
-  String get cinemaFlappyOrbitHomage => 'Homage to 1930s rubber-hose cartoons';
-
-  @override
-  String get cinemaMetropolisTitle => 'Metropolis Machine';
-
-  @override
-  String get cinemaMetropolisTagline => 'Take on the giant machines one by one';
-
-  @override
-  String get cinemaMetropolisHomage =>
-      'Homage to the silent film Metropolis (1927)';
-
-  @override
-  String get cinemaCaravanTitle => 'Caravan Dash';
-
-  @override
-  String get cinemaCaravanTagline => 'Race the dunes in Technicolor';
-
-  @override
-  String get cinemaCaravanHomage => 'Homage to 1950s desert epics';
-
-  @override
-  String get cinemaNoirTitle => 'Noir Rooftops';
-
-  @override
-  String get cinemaNoirTagline => 'Chase shadows across rain-soaked rooftops';
-
-  @override
-  String get cinemaNoirHomage => 'Homage to 1940s film noir';
-
-  @override
-  String get cinemaNeonSoukTitle => 'Neon Souk Racer';
-
-  @override
-  String get cinemaNeonSoukTagline => 'Race through a souk of neon lights';
-
-  @override
-  String get cinemaNeonSoukHomage => 'Homage to 1980s sci-fi on VHS';
-
-  @override
-  String get cinemaSavedGames => 'Saved games';
-
-  @override
-  String get cinemaSavedGamesEmpty =>
-      'Add a web game by its link to play it here full screen.';
-
-  @override
-  String get cinemaSavedGamesNote =>
-      'Games open from their original link; nothing is copied into the app.';
-
-  @override
-  String get cinemaAddGame => 'Add game';
-
-  @override
-  String get cinemaGameName => 'Game name';
-
-  @override
-  String get cinemaGameUrl => 'Game link';
-
-  @override
-  String get cinemaInvalidUrl => 'Enter a valid link starting with https://';
-
-  @override
-  String get cinemaRemoveGame => 'Remove';
-
-  @override
-  String get cinemaOpenGameFailed => 'Couldn\'t open the link';
-
-  @override
-  String get cinemaSave => 'Save';
-
-  @override
-  String get cinemaCancel => 'Cancel';
 }

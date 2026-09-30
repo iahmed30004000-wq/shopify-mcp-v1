@@ -171,7 +171,7 @@
   },
   "workDueTodayCount": {
     "ar": "{count, plural, =1{واحدة مستحقة اليوم} =2{اثنتان مستحقتان اليوم} few{{count} مستحقة اليوم} many{{count} مستحقة اليوم} other{{count} مستحقة اليوم}}",
-    "en": "{count, plural, other{{count} due today}}",
+    "en": "{count, plural, one{{count} due today} other{{count} due today}}",
     "description": "Board tile / today card: cards due today",
     "placeholders": {
       "count": {
@@ -181,7 +181,7 @@
   },
   "workOverdueCount": {
     "ar": "{count, plural, =1{واحدة متأخرة} =2{اثنتان متأخرتان} few{{count} متأخرة} many{{count} متأخرة} other{{count} متأخرة}}",
-    "en": "{count, plural, other{{count} overdue}}",
+    "en": "{count, plural, one{{count} overdue} other{{count} overdue}}",
     "description": "Board tile / today card: overdue cards",
     "placeholders": {
       "count": {

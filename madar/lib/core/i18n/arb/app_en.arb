@@ -13455,7 +13455,7 @@
       }
     }
   },
-  "workDueTodayCount": "{count, plural, other{{count} due today}}",
+  "workDueTodayCount": "{count, plural, one{{count} due today} other{{count} due today}}",
   "@workDueTodayCount": {
     "description": "Board tile / today card: cards due today",
     "placeholders": {
@@ -13464,7 +13464,7 @@
       }
     }
   },
-  "workOverdueCount": "{count, plural, other{{count} overdue}}",
+  "workOverdueCount": "{count, plural, one{{count} overdue} other{{count} overdue}}",
   "@workOverdueCount": {
     "description": "Board tile / today card: overdue cards",
     "placeholders": {
@@ -16902,90 +16902,5 @@
       }
     }
   },
-  "bodyNotifyHint": "Needs notification permission on the phone.",
-  "cinemaTitle": "Madar Cinema",
-  "@cinemaTitle": {
-    "description": "Name of the games hub"
-  },
-  "cinemaHallSubtitle": "Original games in the spirit of classic cinema",
-  "cinemaFeatures": "Features",
-  "@cinemaFeatures": {
-    "description": "Tier 1 games section"
-  },
-  "cinemaShorts": "Shorts",
-  "@cinemaShorts": {
-    "description": "Tier 2 games section"
-  },
-  "cinemaComingSoon": "Coming soon",
-  "cinemaPlay": "Play",
-  "cinemaGameViewLabel": "Game screen",
-  "cinemaPause": "Pause",
-  "cinemaIntermission": "Intermission",
-  "@cinemaIntermission": {
-    "description": "Pause card title"
-  },
-  "cinemaResume": "Resume",
-  "cinemaRestart": "Restart",
-  "cinemaLeave": "Leave",
-  "cinemaPlayAgain": "Play again",
-  "cinemaTheEnd": "The End",
-  "cinemaGameOver": "Show's Over",
-  "@cinemaGameOver": {
-    "description": "Game over card"
-  },
-  "cinemaScoreLine": "Score: {score}",
-  "@cinemaScoreLine": {
-    "placeholders": {
-      "score": {
-        "type": "String"
-      }
-    }
-  },
-  "cinemaBestLine": "Best: {score}",
-  "@cinemaBestLine": {
-    "placeholders": {
-      "score": {
-        "type": "String"
-      }
-    }
-  },
-  "cinemaEraSilent": "Silent 1920s",
-  "cinemaEraRubberHose": "1930s Cartoon",
-  "cinemaEraNoir": "1940s Noir",
-  "cinemaEraTechnicolor": "1950s Technicolor",
-  "cinemaEraGrindhouse": "1970s Grindhouse",
-  "cinemaEraVhs": "1980s VHS",
-  "cinemaDemoTitle": "Rehearsal",
-  "@cinemaDemoTitle": {
-    "description": "Engine demo scene"
-  },
-  "cinemaDemoTagline": "A test scene for the Film Reel Engine",
-  "cinemaDemoOpening": "Scene One",
-  "cinemaDemoOpeningSubtitle": "Tap to jump over the barrels!",
-  "cinemaFlappyOrbitTitle": "Flappy Orbit",
-  "cinemaFlappyOrbitTagline": "Flap between planets to a swing beat",
-  "cinemaFlappyOrbitHomage": "Homage to 1930s rubber-hose cartoons",
-  "cinemaMetropolisTitle": "Metropolis Machine",
-  "cinemaMetropolisTagline": "Take on the giant machines one by one",
-  "cinemaMetropolisHomage": "Homage to the silent film Metropolis (1927)",
-  "cinemaCaravanTitle": "Caravan Dash",
-  "cinemaCaravanTagline": "Race the dunes in Technicolor",
-  "cinemaCaravanHomage": "Homage to 1950s desert epics",
-  "cinemaNoirTitle": "Noir Rooftops",
-  "cinemaNoirTagline": "Chase shadows across rain-soaked rooftops",
-  "cinemaNoirHomage": "Homage to 1940s film noir",
-  "cinemaNeonSoukTitle": "Neon Souk Racer",
-  "cinemaNeonSoukTagline": "Race through a souk of neon lights",
-  "cinemaNeonSoukHomage": "Homage to 1980s sci-fi on VHS",
-  "cinemaSavedGames": "Saved games",
-  "cinemaSavedGamesEmpty": "Add a web game by its link to play it here full screen.",
-  "cinemaSavedGamesNote": "Games open from their original link; nothing is copied into the app.",
-  "cinemaAddGame": "Add game",
-  "cinemaGameName": "Game name",
-  "cinemaGameUrl": "Game link",
-  "cinemaInvalidUrl": "Enter a valid link starting with https://",
-  "cinemaRemoveGame": "Remove",
-  "cinemaOpenGameFailed": "Couldn't open the link",
-  "cinemaSave": "Save",
-  "cinemaCancel": "Cancel"
+  "bodyNotifyHint": "Needs notification permission on the phone."
 }
