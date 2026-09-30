@@ -13317,6 +13317,250 @@
   "@goalsDebtNoWalletHint": {
     "description": "Debt editor preview without a wallet"
   },
+  "moneyHubNetWorthTitle": "صافي ثروتك",
+  "@moneyHubNetWorthTitle": {
+    "description": "Money page: title of the net worth card (wallets + jars + owed to you − you owe, in the base currency)"
+  },
+  "moneyHubNetWorthIn": "بعملة {code}",
+  "@moneyHubNetWorthIn": {
+    "description": "Money page: the base currency the net worth is shown in",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubNetWorthEmpty": "أضف محفظتك الأولى ليظهر هنا صافي ثروتك بعملتك الأساسية.",
+  "@moneyHubNetWorthEmpty": {
+    "description": "Money page: net worth card on a fresh install"
+  },
+  "moneyHubPartWallets": "المحافظ",
+  "@moneyHubPartWallets": {
+    "description": "Money page: part of the net worth – the wallets' balances"
+  },
+  "moneyHubPartJars": "الحصّالات",
+  "@moneyHubPartJars": {
+    "description": "Money page: part of the net worth – money in savings jars"
+  },
+  "moneyHubPartOwedToMe": "لك عند الناس",
+  "@moneyHubPartOwedToMe": {
+    "description": "Money page: part of the net worth – open debts owed to the user"
+  },
+  "moneyHubPartIOwe": "عليك",
+  "@moneyHubPartIOwe": {
+    "description": "Money page: part of the net worth – open debts the user owes (subtracted)"
+  },
+  "moneyHubNetWorthSemantics": "صافي ثروتك {total}: المحافظ {wallets}، الحصّالات {jars}، لك {owed}، عليك {owe}",
+  "@moneyHubNetWorthSemantics": {
+    "description": "Money page: screen-reader summary of the net worth card",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "wallets": {
+        "type": "String"
+      },
+      "jars": {
+        "type": "String"
+      },
+      "owed": {
+        "type": "String"
+      },
+      "owe": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubRatesAction": "العملات",
+  "@moneyHubRatesAction": {
+    "description": "Money page: button on the net worth card opening currencies and rates"
+  },
+  "moneyHubQuickTitle": "سجّل حركة",
+  "@moneyHubQuickTitle": {
+    "description": "Money page: title of the quick add row (expense, income, transfer)"
+  },
+  "moneyHubAddExpenseHint": "سجّل مصروفًا",
+  "@moneyHubAddExpenseHint": {
+    "description": "Money page: screen-reader label of the quick expense button"
+  },
+  "moneyHubAddIncomeHint": "سجّل دخلًا",
+  "@moneyHubAddIncomeHint": {
+    "description": "Money page: screen-reader label of the quick income button"
+  },
+  "moneyHubAddTransferHint": "حوّل بين محفظتين",
+  "@moneyHubAddTransferHint": {
+    "description": "Money page: screen-reader label of the quick transfer button"
+  },
+  "moneyHubWalletsTitle": "محافظك",
+  "@moneyHubWalletsTitle": {
+    "description": "Money page: section of the wallets summary"
+  },
+  "moneyHubLedgerAction": "الدفتر",
+  "@moneyHubLedgerAction": {
+    "description": "Money page: section action opening the ledger"
+  },
+  "moneyHubPlanTitle": "خطة هذا الشهر",
+  "@moneyHubPlanTitle": {
+    "description": "Money page: section of the budget status (plan vs spent, warnings)"
+  },
+  "moneyHubBudgetAction": "الميزانية",
+  "@moneyHubBudgetAction": {
+    "description": "Money page: section action opening the budget"
+  },
+  "moneyHubDuesTitle": "المستحقات والادّخار",
+  "@moneyHubDuesTitle": {
+    "description": "Money page: section of upcoming dues (bills, debts) and savings jars"
+  },
+  "moneyHubGoalsAction": "الكل",
+  "@moneyHubGoalsAction": {
+    "description": "Money page: section action opening savings, debts and bills"
+  },
+  "moneyHubToolsTitle": "أدوات المال",
+  "@moneyHubToolsTitle": {
+    "description": "Money page: section of links to the money screens"
+  },
+  "moneyHubToolLedger": "الدفتر",
+  "@moneyHubToolLedger": {
+    "description": "Money tool: the ledger (wallets, balances, recent entries)"
+  },
+  "moneyHubToolLedgerHint": "المحافظ وأرصدتها وآخر الحركات",
+  "@moneyHubToolLedgerHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolTransactions": "الحركات",
+  "@moneyHubToolTransactions": {
+    "description": "Money tool: every transaction"
+  },
+  "moneyHubToolTransactionsHint": "كل الحركات مع البحث والتصفية",
+  "@moneyHubToolTransactionsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBudget": "الميزانية",
+  "@moneyHubToolBudget": {
+    "description": "Money tool: the nested budget"
+  },
+  "moneyHubToolBudgetHint": "الخطة المتداخلة والإنفاق مقابلها",
+  "@moneyHubToolBudgetHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolJars": "الحصّالات",
+  "@moneyHubToolJars": {
+    "description": "Money tool: savings jars"
+  },
+  "moneyHubToolJarsHint": "الأهداف والمواعيد والإيداعات",
+  "@moneyHubToolJarsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolDebts": "الديون",
+  "@moneyHubToolDebts": {
+    "description": "Money tool: debts (I owe / owed to me)"
+  },
+  "moneyHubToolDebtsHint": "ما عليك وما لك، ومواعيد السداد",
+  "@moneyHubToolDebtsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBills": "الالتزامات",
+  "@moneyHubToolBills": {
+    "description": "Money tool: recurring obligations"
+  },
+  "moneyHubToolBillsHint": "الالتزامات المتكررة؛ «دُفع» ينقل الموعد التالي",
+  "@moneyHubToolBillsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubMoonOpenWallet": "افتح المحفظة",
+  "@moneyHubMoonOpenWallet": {
+    "description": "Wallet moon sheet: button opening the wallet's screen"
+  },
+  "moneyHubSettingsSection": "المال",
+  "@moneyHubSettingsSection": {
+    "description": "Settings: section of the money preferences"
+  },
+  "moneyHubSettingsSectionHint": "العملات وأسابيع الشهر وبداية الأسبوع وتذكير المستحقات",
+  "@moneyHubSettingsSectionHint": {
+    "description": "Settings: subtitle of the money section"
+  },
+  "moneyHubSettingsCurrencies": "العملة الأساسية والأسعار",
+  "@moneyHubSettingsCurrencies": {
+    "description": "Settings › Money: entry opening the currencies and manual exchange rates"
+  },
+  "moneyHubSettingsCurrencyCount": "{count, plural, =1{عملة واحدة} =2{عملتان} few{{n} عملات} many{{n} عملة} other{{n} عملة}}",
+  "@moneyHubSettingsCurrencyCount": {
+    "description": "Settings › Money: how many currencies are set up",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeeks": "أسابيع الشهر",
+  "@moneyHubSettingsWeeks": {
+    "description": "Settings › Money: weeks per month (weekly ↔ monthly budget conversion)"
+  },
+  "moneyHubSettingsWeeksSummary": "{weeks} · للتحويل بين الأسبوعي والشهري",
+  "@moneyHubSettingsWeeksSummary": {
+    "description": "Settings › Money: the weeks-per-month value",
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeekStart": "بداية الأسبوع",
+  "@moneyHubSettingsWeekStart": {
+    "description": "Settings › Money: first day of the week in weekly budgets and reports"
+  },
+  "moneyHubSettingsWeekStartHint": "للبنود الأسبوعية في الميزانية وتقارير الأسبوع في الدفتر",
+  "@moneyHubSettingsWeekStartHint": {
+    "description": "Settings › Money: hint under the week start choice"
+  },
+  "moneyHubWeekSaturday": "السبت",
+  "@moneyHubWeekSaturday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekSunday": "الأحد",
+  "@moneyHubWeekSunday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekMonday": "الإثنين",
+  "@moneyHubWeekMonday": {
+    "description": "Week start choice"
+  },
+  "moneyHubSettingsReminders": "تذكير المستحقات",
+  "@moneyHubSettingsReminders": {
+    "description": "Settings › Money: entry opening the debt and bill due reminder options"
+  },
+  "moneyHubSettingsRemindersOff": "متوقف",
+  "@moneyHubSettingsRemindersOff": {
+    "description": "Settings › Money: due reminders switched off"
+  },
+  "moneyHubSettingsRemindersOnDay": "في يوم الاستحقاق",
+  "@moneyHubSettingsRemindersOnDay": {
+    "description": "Settings › Money: reminders only on the due day"
+  },
+  "moneyHubSettingsRemindersBoth": "{lead} وفي يومه",
+  "@moneyHubSettingsRemindersBoth": {
+    "description": "Settings › Money: an early reminder and one on the due day",
+    "placeholders": {
+      "lead": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsRemindersAt": "{when} · الساعة {time}",
+  "@moneyHubSettingsRemindersAt": {
+    "description": "Settings › Money: when the due reminders arrive",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "workTitle": "العمل",
   "@workTitle": {
     "description": "Work planet screen title"
@@ -16902,5 +17146,677 @@
       }
     }
   },
-  "bodyNotifyHint": "يحتاج إذن الإشعارات على الهاتف."
+  "bodyNotifyHint": "يحتاج إذن الإشعارات على الهاتف.",
+  "cmodTitle": "متتبّعات وقوائم",
+  "@cmodTitle": {
+    "description": "Custom modules screen title"
+  },
+  "cmodNewModule": "وحدة جديدة",
+  "cmodModulesCount": "{count, plural, =0{لا وحدات بعد} =1{وحدة واحدة} =2{وحدتان} few{{count} وحدات} many{{count} وحدة} other{{count} وحدة}}",
+  "@cmodModulesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodLoggedToday": "{count, plural, =0{لم تسجّل شيئًا اليوم بعد} =1{إدخال واحد اليوم} =2{إدخالان اليوم} few{{count} إدخالات اليوم} many{{count} إدخالًا اليوم} other{{count} إدخال اليوم}}",
+  "@cmodLoggedToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEntriesCount": "{count, plural, =0{لا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}",
+  "@cmodEntriesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsCount": "{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}",
+  "@cmodItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsProgress": "{done} من {total} منجز",
+  "@cmodItemsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodOpenItems": "{count, plural, =0{لا شيء متبقٍّ} =1{عنصر واحد متبقٍّ} =2{عنصران متبقيان} few{{count} عناصر متبقية} many{{count} عنصرًا متبقيًا} other{{count} عنصر متبقٍّ}}",
+  "@cmodOpenItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEmptyTitle": "اصنع متتبّعك الأول",
+  "cmodEmptyBody": "تتبّع ما يهمّك بحقولك أنت: سجلّ قراءة، أذكار بعد الصلاة، قائمة عادات… ويظهر كل ذلك في كواكبك.",
+  "cmodEmptyAction": "أنشئ وحدة",
+  "cmodArchivedSection": "المؤرشفة",
+  "cmodKindTracker": "متتبّع",
+  "cmodKindList": "قائمة",
+  "cmodKindTrackerHint": "قيم تسجّلها مع الأيام، برسوم بيانية",
+  "cmodKindListHint": "عناصر تشطبها وترتّبها",
+  "cmodLastToday": "آخر إدخال اليوم",
+  "cmodLastYesterday": "آخر إدخال أمس",
+  "cmodLastDaysAgo": "{count, plural, =1{آخر إدخال قبل يوم} =2{آخر إدخال قبل يومين} few{آخر إدخال قبل {count} أيام} many{آخر إدخال قبل {count} يومًا} other{آخر إدخال قبل {count} يوم}}",
+  "@cmodLastDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodNoEntries": "لا إدخالات بعد",
+  "cmodStreakBadge": "سلسلة {count}",
+  "@cmodStreakBadge": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodActionArchive": "أرشفة",
+  "cmodActionUnarchive": "إعادة من الأرشيف",
+  "cmodActionAddEntry": "إدخال جديد",
+  "cmodActionOpen": "فتح",
+  "cmodActionExport": "مشاركة كملف CSV",
+  "cmodActionUncheck": "إعادة فتح",
+  "cmodActionCheck": "إنجاز",
+  "cmodToastArchived": "أُرشفت «{name}»",
+  "@cmodToastArchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnarchived": "عادت «{name}» من الأرشيف",
+  "@cmodToastUnarchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDeleted": "حُذفت «{name}»",
+  "@cmodToastDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDuplicated": "نُسخت «{name}»",
+  "@cmodToastDuplicated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastLogged": "سُجّل في «{name}»",
+  "@cmodToastLogged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnchecked": "أُلغي تسجيل اليوم",
+  "cmodToastEntryDeleted": "حُذف الإدخال",
+  "cmodToastEntryDuplicated": "نُسخ الإدخال",
+  "cmodToastItemDone": "أُنجز العنصر",
+  "cmodToastItemReopened": "أُعيد فتح العنصر",
+  "cmodToastCleared": "مُسحت العناصر المنجزة",
+  "cmodToastSaved": "حُفظت «{name}»",
+  "@cmodToastSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastReminderDeleted": "حُذف التذكير",
+  "cmodToastReminderAdded": "أُضيف التذكير",
+  "cmodQuickDone": "تمّ اليوم",
+  "cmodQuickDoneHint": "سجّل إنجاز اليوم بلمسة",
+  "cmodQuickChecked": "أُنجز اليوم",
+  "cmodQuickCheckedHint": "المس لإلغاء تسجيل اليوم",
+  "cmodQuickAddOne": "سجّل مرّة",
+  "cmodQuickRate": "قيّم اليوم",
+  "cmodRateStars": "{count, plural, =1{نجمة واحدة} =2{نجمتان} few{{count} نجوم} many{{count} نجمة} other{{count} نجمة}}",
+  "@cmodRateStars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodBuilderNewTitle": "وحدة جديدة",
+  "cmodBuilderEditTitle": "تعديل الوحدة",
+  "cmodSectionBasics": "الأساسيات",
+  "cmodName": "الاسم",
+  "cmodNameHint": "مثال: سجلّ القراءة",
+  "cmodKind": "النوع",
+  "cmodIcon": "الأيقونة",
+  "cmodColor": "اللون",
+  "cmodPlanet": "الكوكب",
+  "cmodPlanetNone": "بلا كوكب",
+  "cmodPlanetHint": "كل إدخال يُنعش هذا الكوكب في المدار، ويدور حوله قمرًا",
+  "cmodWindow": "وقت الصلاة",
+  "cmodWindowHint": "متى تتوقّع أن تسجّل عادةً",
+  "cmodSectionFields": "الحقول",
+  "cmodAddField": "أضف حقلًا",
+  "cmodFieldsEmptyTracker": "بلا حقول يصبح المتتبّع عدّادًا بلمسة واحدة",
+  "cmodFieldsEmptyList": "أضف حقلًا واحدًا على الأقل، كاسم العنصر",
+  "cmodHiddenFields": "حقول مخفية",
+  "cmodHiddenFieldsHint": "أُزيلت من النموذج، وبياناتها القديمة محفوظة",
+  "cmodRestoreField": "إظهار",
+  "cmodSectionChart": "الرسم البياني",
+  "cmodChartField": "ما يُرسم",
+  "cmodChartEntries": "عدد الإدخالات",
+  "cmodChartStyle": "الشكل",
+  "cmodChartRange": "المدة",
+  "cmodChartLine": "خط",
+  "cmodChartBar": "أعمدة",
+  "cmodChartHeat": "تقويم",
+  "cmodChartStreak": "سلسلة",
+  "cmodChartEmpty": "لا بيانات في هذه المدة بعد",
+  "cmodRangeDays": "{count, plural, =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@cmodRangeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodSave": "حفظ",
+  "cmodCreate": "إنشاء",
+  "cmodCancel": "إلغاء",
+  "cmodDiscardTitle": "تجاهل التغييرات؟",
+  "cmodDiscardBody": "لم تُحفظ تعديلاتك على هذه الوحدة.",
+  "cmodDiscard": "تجاهل",
+  "cmodKeepEditing": "متابعة التعديل",
+  "cmodPreviewUntitled": "وحدة بلا اسم",
+  "cmodIssueNameMissing": "اكتب اسمًا للوحدة",
+  "cmodIssueNameTooLong": "الاسم طويل جدًا",
+  "cmodIssueNoFields": "أضف حقلًا واحدًا على الأقل",
+  "cmodIssueTooManyFields": "الحد الأقصى {max} حقلًا",
+  "@cmodIssueTooManyFields": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodIssueLabelMissing": "حقل بلا اسم",
+  "cmodIssueLabelDuplicate": "اسم الحقل مكرّر",
+  "cmodIssueNoOptions": "أضف خيارًا واحدًا على الأقل",
+  "cmodIssueOptionLabelMissing": "خيار بلا اسم",
+  "cmodIssueOptionDuplicate": "خيار مكرّر",
+  "cmodIssueRangeInverted": "الحد الأدنى أكبر من الأعلى",
+  "cmodIssueCurrencyCode": "رمز العملة غير صالح",
+  "cmodMigrationTitle": "قبل الحفظ",
+  "cmodMigrationBlockedTitle": "هذا التغيير سيضيّع بيانات",
+  "cmodMigrationBlockedBody": "لم يُحفظ شيء. أعد النوع كما كان، أو أضف حقلًا جديدًا بالنوع الذي تريده.",
+  "cmodMigrationOk": "حسنًا",
+  "cmodMigTypeBlocked": "«{field}»: {entries} لا تصلح بنوع «{type}»",
+  "@cmodMigTypeBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigRatingBlocked": "«{field}»: {entries} فيها نجوم أكثر من المقياس الجديد",
+  "@cmodMigRatingBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigFieldHidden": "«{field}» سيُخفى، وتبقى قيمه في {entries}",
+  "@cmodMigFieldHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOptionHidden": "الخيارات المحذوفة من «{field}» والمستخدمة ستُخفى ولن تُحذف",
+  "@cmodMigOptionHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigConverted": "قيم «{field}» في {entries} ستتحوّل إلى «{type}»",
+  "@cmodMigConverted": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOutOfRange": "{entries} في «{field}» خارج الحدود الجديدة وستبقى كما هي",
+  "@cmodMigOutOfRange": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigNewlyRequired": "{entries} بلا قيمة لـ«{field}» الذي صار مطلوبًا",
+  "@cmodMigNewlyRequired": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodTypeText": "نص",
+  "cmodTypeNumber": "رقم",
+  "cmodTypeDate": "تاريخ",
+  "cmodTypeTime": "وقت",
+  "cmodTypeCheckbox": "خانة إنجاز",
+  "cmodTypeSingle": "اختيار واحد",
+  "cmodTypeMulti": "اختيارات متعددة",
+  "cmodTypeRating": "تقييم بالنجوم",
+  "cmodTypeCurrency": "مبلغ",
+  "cmodTypeTextHint": "ملاحظة، عنوان كتاب…",
+  "cmodTypeNumberHint": "صفحات، دقائق، مرّات…",
+  "cmodTypeDateHint": "موعد أو مناسبة",
+  "cmodTypeTimeHint": "وقت النوم، وقت البدء…",
+  "cmodTypeCheckboxHint": "تمّ أو لم يتمّ",
+  "cmodTypeSingleHint": "خيار واحد من قائمتك",
+  "cmodTypeMultiHint": "عدّة خيارات من قائمتك",
+  "cmodTypeRatingHint": "من نجمتين إلى عشر",
+  "cmodTypeCurrencyHint": "مبلغ بعملة تختارها",
+  "cmodPickType": "نوع الحقل",
+  "cmodFieldNew": "حقل جديد",
+  "cmodFieldEdit": "تعديل الحقل",
+  "cmodFieldLabel": "اسم الحقل",
+  "cmodFieldLabelHint": "مثال: الصفحات",
+  "cmodFieldRequired": "مطلوب",
+  "cmodFieldRequiredHint": "لا يُحفظ الإدخال دونه",
+  "cmodFieldUnit": "الوحدة",
+  "cmodFieldUnitHint": "صفحة، دقيقة، كغ…",
+  "cmodFieldMin": "الحد الأدنى",
+  "cmodFieldMax": "الحد الأعلى",
+  "cmodFieldNoLimit": "بلا حد",
+  "cmodFieldDecimals": "الخانات العشرية",
+  "cmodFieldScale": "المقياس",
+  "cmodFieldCurrency": "العملة",
+  "cmodFieldOptions": "الخيارات",
+  "cmodAddOption": "أضف خيارًا",
+  "cmodOptionHint": "اسم الخيار",
+  "cmodRemoveOption": "احذف الخيار",
+  "cmodFieldMultiline": "نص طويل",
+  "cmodFieldMultilineHint": "يتّسع لعدّة أسطر",
+  "cmodFieldDelete": "احذف الحقل",
+  "cmodFieldCopyLabel": "{label} (نسخة)",
+  "@cmodFieldCopyLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldTypeNote": "إن غيّرت النوع تتحوّل القيم القديمة حين يمكن ذلك، وإلا لا يُحفظ التغيير.",
+  "cmodFieldOptionsCount": "{count, plural, =0{بلا خيارات} =1{خيار واحد} =2{خياران} few{{count} خيارات} many{{count} خيارًا} other{{count} خيار}}",
+  "@cmodFieldOptionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodFieldRange": "{min} – {max}",
+  "@cmodFieldRange": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtLeast": "من {min}",
+  "@cmodFieldAtLeast": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtMost": "حتى {max}",
+  "@cmodFieldAtMost": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDeleted": "حُذف «{name}» من النموذج",
+  "@cmodFieldDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDuplicated": "نُسخ الحقل",
+  "cmodGalleryTitle": "ابدأ وحدة",
+  "cmodGallerySubtitle": "من الصفر أو من قالب، وكل شيء قابل للتعديل",
+  "cmodBlankTracker": "متتبّع فارغ",
+  "cmodBlankList": "قائمة فارغة",
+  "cmodTemplatesHeader": "قوالب للبدء",
+  "cmodTplReadingLog": "سجلّ القراءة",
+  "cmodTplReadingLogDesc": "الكتاب والصفحات وتقييمك",
+  "cmodTplDhikr": "أذكار بعد الصلاة",
+  "cmodTplDhikrDesc": "كم مرّة ذكرت الله، وبعد أي صلاة",
+  "cmodTplHabit": "عادة يومية",
+  "cmodTplHabitDesc": "لمسة واحدة كل يوم، وسلسلة تكبر",
+  "cmodTplHabitList": "قائمة عادات",
+  "cmodTplHabitListDesc": "عادات تريد بناءها وكم تتكرّر",
+  "cmodTplSleep": "سجلّ النوم",
+  "cmodTplSleepDesc": "النوم والاستيقاظ والساعات والجودة",
+  "cmodTplGifts": "أفكار هدايا",
+  "cmodTplGiftsDesc": "الفكرة ولمن والميزانية والمناسبة",
+  "cmodTplBook": "الكتاب",
+  "cmodTplPages": "الصفحات",
+  "cmodTplRating": "التقييم",
+  "cmodTplUnitPages": "صفحة",
+  "cmodTplAfterPrayer": "بعد صلاة",
+  "cmodTplCount": "العدد",
+  "cmodTplUnitTimes": "مرّة",
+  "cmodTplDone": "تمّ",
+  "cmodTplNote": "ملاحظة",
+  "cmodTplHabitItem": "العادة",
+  "cmodTplFrequency": "التكرار",
+  "cmodTplDaily": "يوميًا",
+  "cmodTplWeekly": "أسبوعيًا",
+  "cmodTplMonthly": "شهريًا",
+  "cmodTplBedtime": "وقت النوم",
+  "cmodTplWake": "وقت الاستيقاظ",
+  "cmodTplHours": "ساعات النوم",
+  "cmodTplUnitHours": "ساعة",
+  "cmodTplQuality": "الجودة",
+  "cmodTplIdea": "الفكرة",
+  "cmodTplFor": "لمن",
+  "cmodTplBudget": "الميزانية",
+  "cmodTplOccasion": "المناسبة",
+  "cmodTplNotes": "ملاحظات",
+  "cmodAddEntry": "إدخال جديد",
+  "cmodAddItem": "عنصر جديد",
+  "cmodEntriesSection": "الإدخالات",
+  "cmodItemsSection": "العناصر",
+  "cmodDoneSection": "المنجزة",
+  "cmodClearDone": "امسح المنجزة",
+  "cmodToday": "اليوم",
+  "cmodYesterday": "أمس",
+  "cmodEntriesEmpty": "لا إدخالات بعد. أول إدخال يبدأ الحكاية.",
+  "cmodItemsEmpty": "القائمة فارغة. أضف أول عنصر.",
+  "cmodAllDone": "أنجزت كل شيء، ما شاء الله",
+  "cmodStatStreak": "السلسلة",
+  "cmodStatBest": "الأفضل",
+  "cmodStatTotal": "المجموع",
+  "cmodStatAverage": "المتوسط",
+  "cmodStatActive": "أيام نشطة",
+  "cmodStatEntries": "الإدخالات",
+  "cmodStatRate": "نسبة الإنجاز",
+  "cmodDays": "{count, plural, =0{٠ يوم} =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@cmodDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodReminders": "التذكيرات",
+  "cmodAddReminder": "أضف تذكيرًا",
+  "cmodRemindersEmpty": "ذكّرني بعد صلاة أو في وقت أحدّده",
+  "cmodReminderPaused": "متوقّف",
+  "cmodReminderToggle": "تشغيل التذكير",
+  "cmodModuleMenu": "خيارات الوحدة",
+  "cmodHiddenValue": "{label} (مخفي)",
+  "@cmodHiddenValue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodNotifyGroup": "المتتبّعات والقوائم",
+  "cmodNotifyChannel": "تذكيرات المتتبّعات والقوائم",
+  "cmodNotifyChannelDescription": "تذكيرات لطيفة لتسجيل متتبّعاتك ومراجعة قوائمك",
+  "cmodNotifyBodyTracker": "حان وقت التسجيل",
+  "cmodNotifyBodyList": "ألقِ نظرة على قائمتك",
+  "cmodEntryNew": "إدخال جديد",
+  "cmodEntryEdit": "تعديل الإدخال",
+  "cmodItemNew": "عنصر جديد",
+  "cmodItemEdit": "تعديل العنصر",
+  "cmodEntryWhen": "متى",
+  "cmodEntryDone": "منجز",
+  "cmodEntryCounter": "هذه الوحدة عدّاد: الحفظ يسجّل مرّة واحدة.",
+  "cmodErrRequired": "هذا الحقل مطلوب",
+  "cmodErrNumber": "اكتب رقمًا",
+  "cmodErrWhole": "رقم صحيح فقط",
+  "cmodErrPrecise": "{count} خانات عشرية على الأكثر",
+  "@cmodErrPrecise": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMin": "لا يقلّ عن {value}",
+  "@cmodErrMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMax": "لا يزيد على {value}",
+  "@cmodErrMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrDate": "تاريخ غير صالح",
+  "cmodErrTime": "وقت غير صالح",
+  "cmodErrOption": "اختر من القائمة",
+  "cmodErrScale": "خارج المقياس",
+  "cmodErrTooLong": "النص طويل جدًا",
+  "cmodPickDate": "اختر تاريخًا",
+  "cmodPickTime": "اختر وقتًا",
+  "cmodClear": "مسح",
+  "cmodYes": "نعم",
+  "cmodNo": "لا",
+  "cmodChecked": "تمّ",
+  "cmodUnchecked": "لم يتمّ",
+  "cmodCardTitle": "متتبّعاتك هنا",
+  "cmodCardSeeAll": "عرض الكل",
+  "cmodCardEmpty": "أنشئ متتبّعًا لهذا الكوكب",
+  "cmodCardEmptyHint": "عدّاد، أو سجلّ، أو قائمة: بحقولك أنت",
+  "cmodExportDate": "التاريخ",
+  "cmodExportTime": "الوقت",
+  "cmodExportDone": "منجز",
+  "cmodExportEntries": "الإدخالات",
+  "cmodExportLastEntry": "آخر إدخال",
+  "cmodExportOpen": "متبقٍّ",
+  "cmodExportLastDays": "{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}",
+  "@cmodExportLastDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportActiveDays": "{count, plural, =0{لا أيام نشطة} =1{يوم نشط واحد} =2{يومان نشطان} few{{count} أيام نشطة} many{{count} يومًا نشطًا} other{{count} يوم نشط}}",
+  "@cmodExportActiveDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportTotal": "المجموع {value}",
+  "@cmodExportTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportAverage": "المتوسط {value}",
+  "@cmodExportAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportStreak": "السلسلة {current} (الأفضل {best})",
+  "@cmodExportStreak": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "best": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportHidden": "مخفي",
+  "cinemaTitle": "سينما مدار",
+  "@cinemaTitle": {
+    "description": "Name of the games hub"
+  },
+  "cinemaHallSubtitle": "ألعاب أصلية بروح السينما الكلاسيكية",
+  "cinemaFeatures": "الأفلام الطويلة",
+  "@cinemaFeatures": {
+    "description": "Tier 1 games section"
+  },
+  "cinemaShorts": "الأفلام القصيرة",
+  "@cinemaShorts": {
+    "description": "Tier 2 games section"
+  },
+  "cinemaComingSoon": "قريبًا",
+  "cinemaPlay": "إلى العرض",
+  "cinemaGameViewLabel": "شاشة اللعبة",
+  "cinemaPause": "إيقاف مؤقت",
+  "cinemaIntermission": "استراحة",
+  "@cinemaIntermission": {
+    "description": "Pause card title"
+  },
+  "cinemaResume": "متابعة العرض",
+  "cinemaRestart": "من البداية",
+  "cinemaLeave": "مغادرة القاعة",
+  "cinemaPlayAgain": "عرض آخر",
+  "cinemaTheEnd": "النهاية",
+  "cinemaGameOver": "انتهى العرض",
+  "@cinemaGameOver": {
+    "description": "Game over card"
+  },
+  "cinemaScoreLine": "النتيجة: {score}",
+  "@cinemaScoreLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaBestLine": "أفضل نتيجة: {score}",
+  "@cinemaBestLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaEraSilent": "العشرينيات الصامتة",
+  "cinemaEraRubberHose": "كرتون الثلاثينيات",
+  "cinemaEraNoir": "نوار الأربعينيات",
+  "cinemaEraTechnicolor": "ألوان الخمسينيات",
+  "cinemaEraGrindhouse": "سينما السبعينيات",
+  "cinemaEraVhs": "فيديو الثمانينيات",
+  "cinemaDemoTitle": "بروفة",
+  "@cinemaDemoTitle": {
+    "description": "Engine demo scene"
+  },
+  "cinemaDemoTagline": "مشهد تجريبي لمحرّك بكرة الفيلم",
+  "cinemaDemoOpening": "المشهد الأول",
+  "cinemaDemoOpeningSubtitle": "المس الشاشة لتقفز فوق البراميل!",
+  "cinemaFlappyOrbitTitle": "رفرفة المدار",
+  "cinemaFlappyOrbitTagline": "رفرف بين الكواكب على أنغام السوينغ",
+  "cinemaFlappyOrbitHomage": "تحية لرسوم الخرطوم المطاطي في الثلاثينيات",
+  "cinemaMetropolisTitle": "آلة المتروبوليس",
+  "cinemaMetropolisTagline": "واجه الآلات العملاقة واحدة تلو الأخرى",
+  "cinemaMetropolisHomage": "تحية لفيلم «متروبوليس» الصامت (1927)",
+  "cinemaCaravanTitle": "سباق القافلة",
+  "cinemaCaravanTagline": "اعبر الكثبان بألوان التكنيكولور",
+  "cinemaCaravanHomage": "تحية لملاحم الصحراء في الخمسينيات",
+  "cinemaNoirTitle": "أسطح النوار",
+  "cinemaNoirTagline": "طارد الظلال فوق أسطح المدينة الممطرة",
+  "cinemaNoirHomage": "تحية لأفلام النوار في الأربعينيات",
+  "cinemaNeonSoukTitle": "متسابق سوق النيون",
+  "cinemaNeonSoukTagline": "انطلق عبر سوق من أضواء النيون",
+  "cinemaNeonSoukHomage": "تحية لأفلام الخيال العلمي على أشرطة الفيديو",
+  "cinemaSavedGames": "ألعابي المحفوظة",
+  "cinemaSavedGamesEmpty": "أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.",
+  "cinemaSavedGamesNote": "تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.",
+  "cinemaAddGame": "إضافة لعبة",
+  "cinemaGameName": "اسم اللعبة",
+  "cinemaGameUrl": "رابط اللعبة",
+  "cinemaInvalidUrl": "أدخل رابطًا صحيحًا يبدأ بـ https://",
+  "cinemaRemoveGame": "إزالة",
+  "cinemaOpenGameFailed": "تعذّر فتح الرابط",
+  "cinemaSave": "حفظ",
+  "cinemaCancel": "إلغاء"
 }

@@ -14,6 +14,10 @@ import 'ledger_service.dart';
 /// The ledger's wall clock (follows the orbit's, so tests freeze both).
 final ledgerClockProvider = Provider<DateTime Function()>((ref) => ref.watch(orbitClockProvider));
 
+/// First day of the ledger's weeks (the app follows the user's Money
+/// setting; Saturday by default).
+final ledgerWeekStartProvider = Provider<int>((ref) => DateTime.saturday);
+
 /// Records `money.tx` through the orbit's pulse hub, so the Money world
 /// pulses at once.
 final ledgerActivityRecorderProvider = Provider<LedgerActivityRecorder>((ref) {
@@ -77,6 +81,7 @@ final ledgerBookProvider = Provider<AsyncValue<LedgerBook>>((ref) {
       budgetLooks: {for (final r in b) r.id: BudgetItemLook(color: r.color, icon: r.icon)},
       weeksPerMonth: weeks.value ?? BudgetSettings.defaultWeeksPerMonth,
       ratesAreDefaults: defaults.value ?? false,
+      weekStart: ref.watch(ledgerWeekStartProvider),
     ),
   );
 });

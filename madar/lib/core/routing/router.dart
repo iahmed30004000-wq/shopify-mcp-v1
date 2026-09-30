@@ -25,6 +25,7 @@ import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
 import 'health_route_pages.dart';
+import 'money_route_pages.dart';
 import 'now_playing_dock.dart';
 import 'route_pages.dart';
 import 'routes.dart';
@@ -64,8 +65,9 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// faith pages (prayer times, tracker, adhkar, the Quran's home, reader and
 /// search, the wird, Hifz and its reviews, recitation and its downloads)
 /// and the health pages (medications, the medical record, a lab test, the
-/// appointments, wellbeing, Settings › Health) move along the reading
-/// direction (shared axis); the tasbeeh, the qibla compass, guided
+/// appointments, wellbeing, Settings › Health) and the money pages (the
+/// ledger, a wallet, the transactions, the currencies, the budget, the
+/// goals and a jar) move along the reading direction (shared axis); the tasbeeh, the qibla compass, guided
 /// breathing and the design gallery zoom in (scaled shared axis); the
 /// importer rises as a sheet, and the full recitation player
 /// (`/now-playing`) as an interaction sheet over the page beneath; a planet
@@ -337,6 +339,73 @@ List<RouteBase> madarRoutes() => [
               key: state.pageKey,
               axis: MadarSharedAxis.scaled,
               child: BreathingRoutePage(pattern: BreathingRoutePage.patternOf(state.uri.queryParameters['pattern'])),
+            ),
+          ),
+        ],
+      ),
+      // Phase 5 – money.
+      GoRoute(
+        path: 'ledger',
+        pageBuilder: (context, state) =>
+            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const LedgerRoutePage()),
+        routes: [
+          GoRoute(
+            path: 'wallet/:id',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: WalletRoutePage(walletId: state.pathParameters['id']!),
+            ),
+          ),
+          GoRoute(
+            path: 'transactions',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: TransactionsRoutePage(filter: TransactionsRoutePage.filterOf(state.uri.queryParametersAll)),
+            ),
+          ),
+          GoRoute(
+            path: 'currencies',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const CurrenciesRoutePage(),
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: 'budget',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: BudgetRoutePage(tab: BudgetRoutePage.tabOf(state.uri.queryParameters['tab'])),
+        ),
+      ),
+      GoRoute(
+        path: 'goals',
+        pageBuilder: (context, state) {
+          final q = state.uri.queryParameters;
+          return MadarTransitions.sharedAxis<void>(
+            context: context,
+            key: state.pageKey,
+            child: GoalsRoutePage(
+              // A new debt / obligation in the location opens its sheet anew.
+              key: ValueKey('goals:${state.uri.query}'),
+              tab: GoalsRoutePage.tabFor(tab: q['tab'], debtId: q['debt'], obligationId: q['obligation']),
+              debtId: q['debt'],
+              obligationId: q['obligation'],
+            ),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: 'jar/:id',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: JarRoutePage(jarId: state.pathParameters['id']!),
             ),
           ),
         ],

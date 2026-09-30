@@ -17,6 +17,16 @@ void main() {
     expect(LedgerLinks.isLinked(_tx('my-jar-tx-1')), isFalse);
   });
 
+  test('a debt opened through a wallet is protected too; its source is the debt', () {
+    final opening = _tx('debt-open-tx-d7');
+    expect(LedgerLinks.of(opening), LedgerLink.debt);
+    expect(LedgerLinks.isLinked(opening), isTrue);
+    expect(LedgerLinks.isDebtOpening(opening), isTrue);
+    expect(LedgerLinks.sourceId(opening), 'd7');
+    expect(LedgerLinks.isDebtOpening(_tx('debt-tx-p1')), isFalse);
+    expect(LedgerLinks.ofId('debt-open-tx-'), isNull);
+  });
+
   test('the other half\'s id', () {
     expect(LedgerLinks.sourceId(_tx('jar-tx-m1')), 'm1');
     expect(LedgerLinks.sourceId(_tx('ob-tx-abc-def')), 'abc-def');

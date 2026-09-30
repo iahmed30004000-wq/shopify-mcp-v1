@@ -12886,6 +12886,184 @@ class L10nEn extends L10n {
       'No wallet: wallet balances stay as they are.';
 
   @override
+  String get moneyHubNetWorthTitle => 'Net worth';
+
+  @override
+  String moneyHubNetWorthIn(String code) {
+    return 'in $code';
+  }
+
+  @override
+  String get moneyHubNetWorthEmpty =>
+      'Add your first wallet to see your net worth here, in your base currency.';
+
+  @override
+  String get moneyHubPartWallets => 'Wallets';
+
+  @override
+  String get moneyHubPartJars => 'Jars';
+
+  @override
+  String get moneyHubPartOwedToMe => 'Owed to you';
+
+  @override
+  String get moneyHubPartIOwe => 'You owe';
+
+  @override
+  String moneyHubNetWorthSemantics(
+    String total,
+    String wallets,
+    String jars,
+    String owed,
+    String owe,
+  ) {
+    return 'Net worth $total: wallets $wallets, jars $jars, owed to you $owed, you owe $owe';
+  }
+
+  @override
+  String get moneyHubRatesAction => 'Currencies';
+
+  @override
+  String get moneyHubQuickTitle => 'Add an entry';
+
+  @override
+  String get moneyHubAddExpenseHint => 'Add an expense';
+
+  @override
+  String get moneyHubAddIncomeHint => 'Add income';
+
+  @override
+  String get moneyHubAddTransferHint => 'Move money between wallets';
+
+  @override
+  String get moneyHubWalletsTitle => 'Your wallets';
+
+  @override
+  String get moneyHubLedgerAction => 'Ledger';
+
+  @override
+  String get moneyHubPlanTitle => 'This month\'s plan';
+
+  @override
+  String get moneyHubBudgetAction => 'Budget';
+
+  @override
+  String get moneyHubDuesTitle => 'Dues & savings';
+
+  @override
+  String get moneyHubGoalsAction => 'All';
+
+  @override
+  String get moneyHubToolsTitle => 'Money tools';
+
+  @override
+  String get moneyHubToolLedger => 'Ledger';
+
+  @override
+  String get moneyHubToolLedgerHint => 'Wallets, balances and recent entries';
+
+  @override
+  String get moneyHubToolTransactions => 'Entries';
+
+  @override
+  String get moneyHubToolTransactionsHint =>
+      'Every entry, searchable and filtered';
+
+  @override
+  String get moneyHubToolBudget => 'Budget';
+
+  @override
+  String get moneyHubToolBudgetHint =>
+      'The nested plan and spending against it';
+
+  @override
+  String get moneyHubToolJars => 'Savings jars';
+
+  @override
+  String get moneyHubToolJarsHint => 'Targets, deadlines and deposits';
+
+  @override
+  String get moneyHubToolDebts => 'Debts';
+
+  @override
+  String get moneyHubToolDebtsHint =>
+      'What you owe and are owed, with due dates';
+
+  @override
+  String get moneyHubToolBills => 'Bills';
+
+  @override
+  String get moneyHubToolBillsHint =>
+      'Recurring bills; “Paid” moves the next due date';
+
+  @override
+  String get moneyHubMoonOpenWallet => 'Open wallet';
+
+  @override
+  String get moneyHubSettingsSection => 'Money';
+
+  @override
+  String get moneyHubSettingsSectionHint =>
+      'Currencies, weeks per month, the week\'s start and due reminders';
+
+  @override
+  String get moneyHubSettingsCurrencies => 'Base currency & rates';
+
+  @override
+  String moneyHubSettingsCurrencyCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n currencies',
+      one: '1 currency',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get moneyHubSettingsWeeks => 'Weeks per month';
+
+  @override
+  String moneyHubSettingsWeeksSummary(String weeks) {
+    return '$weeks · converts weekly and monthly amounts';
+  }
+
+  @override
+  String get moneyHubSettingsWeekStart => 'Week starts on';
+
+  @override
+  String get moneyHubSettingsWeekStartHint =>
+      'For weekly budget items and the ledger\'s weekly reports';
+
+  @override
+  String get moneyHubWeekSaturday => 'Saturday';
+
+  @override
+  String get moneyHubWeekSunday => 'Sunday';
+
+  @override
+  String get moneyHubWeekMonday => 'Monday';
+
+  @override
+  String get moneyHubSettingsReminders => 'Due reminders';
+
+  @override
+  String get moneyHubSettingsRemindersOff => 'Off';
+
+  @override
+  String get moneyHubSettingsRemindersOnDay => 'On the due day';
+
+  @override
+  String moneyHubSettingsRemindersBoth(String lead) {
+    return '$lead and on the day';
+  }
+
+  @override
+  String moneyHubSettingsRemindersAt(String when, String time) {
+    return '$when · at $time';
+  }
+
+  @override
   String get workTitle => 'Work';
 
   @override
@@ -13006,7 +13184,6 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count due today',
-      one: '$count due today',
     );
     return '$_temp0';
   }
@@ -13017,7 +13194,6 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count overdue',
-      one: '$count overdue',
     );
     return '$_temp0';
   }
@@ -16577,4 +16753,1153 @@ class L10nEn extends L10n {
 
   @override
   String get bodyNotifyHint => 'Needs notification permission on the phone.';
+
+  @override
+  String get cmodTitle => 'Trackers & lists';
+
+  @override
+  String get cmodNewModule => 'New module';
+
+  @override
+  String cmodModulesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count modules',
+      one: '1 module',
+      zero: 'No modules yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodLoggedToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries today',
+      one: '1 entry today',
+      zero: 'Nothing logged today yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodEntriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+      zero: 'no entries',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+      zero: 'no items',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsProgress(String done, String total) {
+    return '$done of $total done';
+  }
+
+  @override
+  String cmodOpenItems(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items left',
+      one: '1 item left',
+      zero: 'Nothing left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodEmptyTitle => 'Build your first tracker';
+
+  @override
+  String get cmodEmptyBody =>
+      'Track what matters with your own fields – a reading log, dhikr after prayer, a habit list… and watch it feed your planets.';
+
+  @override
+  String get cmodEmptyAction => 'Create a module';
+
+  @override
+  String get cmodArchivedSection => 'Archived';
+
+  @override
+  String get cmodKindTracker => 'Tracker';
+
+  @override
+  String get cmodKindList => 'List';
+
+  @override
+  String get cmodKindTrackerHint => 'Values you log over time, with charts';
+
+  @override
+  String get cmodKindListHint => 'Items you check off and reorder';
+
+  @override
+  String get cmodLastToday => 'Last entry today';
+
+  @override
+  String get cmodLastYesterday => 'Last entry yesterday';
+
+  @override
+  String cmodLastDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Last entry $count days ago',
+      one: 'Last entry a day ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodNoEntries => 'No entries yet';
+
+  @override
+  String cmodStreakBadge(String count) {
+    return '$count-day streak';
+  }
+
+  @override
+  String get cmodActionArchive => 'Archive';
+
+  @override
+  String get cmodActionUnarchive => 'Unarchive';
+
+  @override
+  String get cmodActionAddEntry => 'New entry';
+
+  @override
+  String get cmodActionOpen => 'Open';
+
+  @override
+  String get cmodActionExport => 'Share as CSV';
+
+  @override
+  String get cmodActionUncheck => 'Reopen';
+
+  @override
+  String get cmodActionCheck => 'Check off';
+
+  @override
+  String cmodToastArchived(String name) {
+    return 'Archived “$name”';
+  }
+
+  @override
+  String cmodToastUnarchived(String name) {
+    return '“$name” is back';
+  }
+
+  @override
+  String cmodToastDeleted(String name) {
+    return 'Deleted “$name”';
+  }
+
+  @override
+  String cmodToastDuplicated(String name) {
+    return 'Duplicated “$name”';
+  }
+
+  @override
+  String cmodToastLogged(String name) {
+    return 'Logged to “$name”';
+  }
+
+  @override
+  String get cmodToastUnchecked => 'Today’s check-in removed';
+
+  @override
+  String get cmodToastEntryDeleted => 'Entry deleted';
+
+  @override
+  String get cmodToastEntryDuplicated => 'Entry duplicated';
+
+  @override
+  String get cmodToastItemDone => 'Item done';
+
+  @override
+  String get cmodToastItemReopened => 'Item reopened';
+
+  @override
+  String get cmodToastCleared => 'Done items cleared';
+
+  @override
+  String cmodToastSaved(String name) {
+    return 'Saved “$name”';
+  }
+
+  @override
+  String get cmodToastReminderDeleted => 'Reminder deleted';
+
+  @override
+  String get cmodToastReminderAdded => 'Reminder added';
+
+  @override
+  String get cmodQuickDone => 'Done today';
+
+  @override
+  String get cmodQuickDoneHint => 'Log today with one tap';
+
+  @override
+  String get cmodQuickChecked => 'Done for today';
+
+  @override
+  String get cmodQuickCheckedHint => 'Tap to undo today’s check-in';
+
+  @override
+  String get cmodQuickAddOne => 'Log one';
+
+  @override
+  String get cmodQuickRate => 'Rate today';
+
+  @override
+  String cmodRateStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stars',
+      one: '1 star',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodBuilderNewTitle => 'New module';
+
+  @override
+  String get cmodBuilderEditTitle => 'Edit module';
+
+  @override
+  String get cmodSectionBasics => 'Basics';
+
+  @override
+  String get cmodName => 'Name';
+
+  @override
+  String get cmodNameHint => 'e.g. Reading log';
+
+  @override
+  String get cmodKind => 'Kind';
+
+  @override
+  String get cmodIcon => 'Icon';
+
+  @override
+  String get cmodColor => 'Colour';
+
+  @override
+  String get cmodPlanet => 'Planet';
+
+  @override
+  String get cmodPlanetNone => 'No planet';
+
+  @override
+  String get cmodPlanetHint =>
+      'Every entry brings this planet to life and circles it as a moon';
+
+  @override
+  String get cmodWindow => 'Prayer window';
+
+  @override
+  String get cmodWindowHint => 'When you usually log it';
+
+  @override
+  String get cmodSectionFields => 'Fields';
+
+  @override
+  String get cmodAddField => 'Add field';
+
+  @override
+  String get cmodFieldsEmptyTracker =>
+      'With no fields, a tracker is a one-tap counter';
+
+  @override
+  String get cmodFieldsEmptyList =>
+      'Add at least one field, such as the item’s name';
+
+  @override
+  String get cmodHiddenFields => 'Hidden fields';
+
+  @override
+  String get cmodHiddenFieldsHint =>
+      'Removed from the form – their old data is kept';
+
+  @override
+  String get cmodRestoreField => 'Show again';
+
+  @override
+  String get cmodSectionChart => 'Chart';
+
+  @override
+  String get cmodChartField => 'What to plot';
+
+  @override
+  String get cmodChartEntries => 'Number of entries';
+
+  @override
+  String get cmodChartStyle => 'Style';
+
+  @override
+  String get cmodChartRange => 'Period';
+
+  @override
+  String get cmodChartLine => 'Line';
+
+  @override
+  String get cmodChartBar => 'Bars';
+
+  @override
+  String get cmodChartHeat => 'Calendar';
+
+  @override
+  String get cmodChartStreak => 'Streak';
+
+  @override
+  String get cmodChartEmpty => 'No data in this period yet';
+
+  @override
+  String cmodRangeDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodSave => 'Save';
+
+  @override
+  String get cmodCreate => 'Create';
+
+  @override
+  String get cmodCancel => 'Cancel';
+
+  @override
+  String get cmodDiscardTitle => 'Discard changes?';
+
+  @override
+  String get cmodDiscardBody => 'Your changes to this module are not saved.';
+
+  @override
+  String get cmodDiscard => 'Discard';
+
+  @override
+  String get cmodKeepEditing => 'Keep editing';
+
+  @override
+  String get cmodPreviewUntitled => 'Untitled module';
+
+  @override
+  String get cmodIssueNameMissing => 'Give the module a name';
+
+  @override
+  String get cmodIssueNameTooLong => 'The name is too long';
+
+  @override
+  String get cmodIssueNoFields => 'Add at least one field';
+
+  @override
+  String cmodIssueTooManyFields(String max) {
+    return '$max fields at most';
+  }
+
+  @override
+  String get cmodIssueLabelMissing => 'A field has no name';
+
+  @override
+  String get cmodIssueLabelDuplicate => 'Two fields share this name';
+
+  @override
+  String get cmodIssueNoOptions => 'Add at least one option';
+
+  @override
+  String get cmodIssueOptionLabelMissing => 'An option has no name';
+
+  @override
+  String get cmodIssueOptionDuplicate => 'Two options share a name';
+
+  @override
+  String get cmodIssueRangeInverted => 'The minimum is above the maximum';
+
+  @override
+  String get cmodIssueCurrencyCode => 'Not a valid currency code';
+
+  @override
+  String get cmodMigrationTitle => 'Before saving';
+
+  @override
+  String get cmodMigrationBlockedTitle => 'This change would lose data';
+
+  @override
+  String get cmodMigrationBlockedBody =>
+      'Nothing was saved. Change the type back, or add a new field with the type you want.';
+
+  @override
+  String get cmodMigrationOk => 'OK';
+
+  @override
+  String cmodMigTypeBlocked(String field, String entries, String type) {
+    return '“$field”: $entries can’t become “$type”';
+  }
+
+  @override
+  String cmodMigRatingBlocked(String field, String entries) {
+    return '“$field”: $entries have more stars than the new scale';
+  }
+
+  @override
+  String cmodMigFieldHidden(String field, String entries) {
+    return '“$field” will be hidden; its values in $entries are kept';
+  }
+
+  @override
+  String cmodMigOptionHidden(String field) {
+    return 'Removed options of “$field” that are in use will be hidden, not deleted';
+  }
+
+  @override
+  String cmodMigConverted(String field, String entries, String type) {
+    return 'Values of “$field” in $entries will be converted to “$type”';
+  }
+
+  @override
+  String cmodMigOutOfRange(String field, String entries) {
+    return '$entries in “$field” are outside the new limits and stay as they are';
+  }
+
+  @override
+  String cmodMigNewlyRequired(String field, String entries) {
+    return '$entries have no value for “$field”, now required';
+  }
+
+  @override
+  String get cmodTypeText => 'Text';
+
+  @override
+  String get cmodTypeNumber => 'Number';
+
+  @override
+  String get cmodTypeDate => 'Date';
+
+  @override
+  String get cmodTypeTime => 'Time';
+
+  @override
+  String get cmodTypeCheckbox => 'Checkbox';
+
+  @override
+  String get cmodTypeSingle => 'Single choice';
+
+  @override
+  String get cmodTypeMulti => 'Multiple choice';
+
+  @override
+  String get cmodTypeRating => 'Star rating';
+
+  @override
+  String get cmodTypeCurrency => 'Amount';
+
+  @override
+  String get cmodTypeTextHint => 'A note, a book title…';
+
+  @override
+  String get cmodTypeNumberHint => 'Pages, minutes, times…';
+
+  @override
+  String get cmodTypeDateHint => 'An appointment or occasion';
+
+  @override
+  String get cmodTypeTimeHint => 'Bedtime, start time…';
+
+  @override
+  String get cmodTypeCheckboxHint => 'Done or not';
+
+  @override
+  String get cmodTypeSingleHint => 'One option from your list';
+
+  @override
+  String get cmodTypeMultiHint => 'Several options from your list';
+
+  @override
+  String get cmodTypeRatingHint => 'Two to ten stars';
+
+  @override
+  String get cmodTypeCurrencyHint => 'Money in the currency you choose';
+
+  @override
+  String get cmodPickType => 'Field type';
+
+  @override
+  String get cmodFieldNew => 'New field';
+
+  @override
+  String get cmodFieldEdit => 'Edit field';
+
+  @override
+  String get cmodFieldLabel => 'Field name';
+
+  @override
+  String get cmodFieldLabelHint => 'e.g. Pages';
+
+  @override
+  String get cmodFieldRequired => 'Required';
+
+  @override
+  String get cmodFieldRequiredHint => 'An entry can’t be saved without it';
+
+  @override
+  String get cmodFieldUnit => 'Unit';
+
+  @override
+  String get cmodFieldUnitHint => 'pages, min, kg…';
+
+  @override
+  String get cmodFieldMin => 'Minimum';
+
+  @override
+  String get cmodFieldMax => 'Maximum';
+
+  @override
+  String get cmodFieldNoLimit => 'No limit';
+
+  @override
+  String get cmodFieldDecimals => 'Decimal places';
+
+  @override
+  String get cmodFieldScale => 'Scale';
+
+  @override
+  String get cmodFieldCurrency => 'Currency';
+
+  @override
+  String get cmodFieldOptions => 'Options';
+
+  @override
+  String get cmodAddOption => 'Add option';
+
+  @override
+  String get cmodOptionHint => 'Option name';
+
+  @override
+  String get cmodRemoveOption => 'Remove option';
+
+  @override
+  String get cmodFieldMultiline => 'Long text';
+
+  @override
+  String get cmodFieldMultilineHint => 'Room for several lines';
+
+  @override
+  String get cmodFieldDelete => 'Delete field';
+
+  @override
+  String cmodFieldCopyLabel(String label) {
+    return '$label (copy)';
+  }
+
+  @override
+  String get cmodFieldTypeNote =>
+      'Changing the type converts old values when possible; otherwise the change is not saved.';
+
+  @override
+  String cmodFieldOptionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count options',
+      one: '1 option',
+      zero: 'no options',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodFieldRange(String min, String max) {
+    return '$min – $max';
+  }
+
+  @override
+  String cmodFieldAtLeast(String min) {
+    return 'from $min';
+  }
+
+  @override
+  String cmodFieldAtMost(String max) {
+    return 'up to $max';
+  }
+
+  @override
+  String cmodFieldDeleted(String name) {
+    return 'Removed “$name” from the form';
+  }
+
+  @override
+  String get cmodFieldDuplicated => 'Field duplicated';
+
+  @override
+  String get cmodGalleryTitle => 'Start a module';
+
+  @override
+  String get cmodGallerySubtitle =>
+      'From scratch or a template – everything stays editable';
+
+  @override
+  String get cmodBlankTracker => 'Blank tracker';
+
+  @override
+  String get cmodBlankList => 'Blank list';
+
+  @override
+  String get cmodTemplatesHeader => 'Starter templates';
+
+  @override
+  String get cmodTplReadingLog => 'Reading log';
+
+  @override
+  String get cmodTplReadingLogDesc => 'Book, pages and your rating';
+
+  @override
+  String get cmodTplDhikr => 'Dhikr after prayer';
+
+  @override
+  String get cmodTplDhikrDesc => 'How many times, and after which prayer';
+
+  @override
+  String get cmodTplHabit => 'Daily habit';
+
+  @override
+  String get cmodTplHabitDesc => 'One tap a day, and a growing streak';
+
+  @override
+  String get cmodTplHabitList => 'Habit list';
+
+  @override
+  String get cmodTplHabitListDesc => 'Habits to build, and how often';
+
+  @override
+  String get cmodTplSleep => 'Sleep log';
+
+  @override
+  String get cmodTplSleepDesc => 'Bedtime, wake-up, hours and quality';
+
+  @override
+  String get cmodTplGifts => 'Gift ideas';
+
+  @override
+  String get cmodTplGiftsDesc => 'The idea, who for, budget and occasion';
+
+  @override
+  String get cmodTplBook => 'Book';
+
+  @override
+  String get cmodTplPages => 'Pages';
+
+  @override
+  String get cmodTplRating => 'Rating';
+
+  @override
+  String get cmodTplUnitPages => 'pages';
+
+  @override
+  String get cmodTplAfterPrayer => 'After prayer';
+
+  @override
+  String get cmodTplCount => 'Count';
+
+  @override
+  String get cmodTplUnitTimes => 'times';
+
+  @override
+  String get cmodTplDone => 'Done';
+
+  @override
+  String get cmodTplNote => 'Note';
+
+  @override
+  String get cmodTplHabitItem => 'Habit';
+
+  @override
+  String get cmodTplFrequency => 'How often';
+
+  @override
+  String get cmodTplDaily => 'Daily';
+
+  @override
+  String get cmodTplWeekly => 'Weekly';
+
+  @override
+  String get cmodTplMonthly => 'Monthly';
+
+  @override
+  String get cmodTplBedtime => 'Bedtime';
+
+  @override
+  String get cmodTplWake => 'Wake-up';
+
+  @override
+  String get cmodTplHours => 'Hours';
+
+  @override
+  String get cmodTplUnitHours => 'h';
+
+  @override
+  String get cmodTplQuality => 'Quality';
+
+  @override
+  String get cmodTplIdea => 'Idea';
+
+  @override
+  String get cmodTplFor => 'Who for';
+
+  @override
+  String get cmodTplBudget => 'Budget';
+
+  @override
+  String get cmodTplOccasion => 'Occasion';
+
+  @override
+  String get cmodTplNotes => 'Notes';
+
+  @override
+  String get cmodAddEntry => 'New entry';
+
+  @override
+  String get cmodAddItem => 'New item';
+
+  @override
+  String get cmodEntriesSection => 'Entries';
+
+  @override
+  String get cmodItemsSection => 'Items';
+
+  @override
+  String get cmodDoneSection => 'Done';
+
+  @override
+  String get cmodClearDone => 'Clear done';
+
+  @override
+  String get cmodToday => 'Today';
+
+  @override
+  String get cmodYesterday => 'Yesterday';
+
+  @override
+  String get cmodEntriesEmpty =>
+      'No entries yet. The first one starts the story.';
+
+  @override
+  String get cmodItemsEmpty => 'The list is empty. Add the first item.';
+
+  @override
+  String get cmodAllDone => 'All done – well done';
+
+  @override
+  String get cmodStatStreak => 'Streak';
+
+  @override
+  String get cmodStatBest => 'Best';
+
+  @override
+  String get cmodStatTotal => 'Total';
+
+  @override
+  String get cmodStatAverage => 'Average';
+
+  @override
+  String get cmodStatActive => 'Active days';
+
+  @override
+  String get cmodStatEntries => 'Entries';
+
+  @override
+  String get cmodStatRate => 'Check-in rate';
+
+  @override
+  String cmodDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodReminders => 'Reminders';
+
+  @override
+  String get cmodAddReminder => 'Add reminder';
+
+  @override
+  String get cmodRemindersEmpty => 'Remind me after a prayer or at a set time';
+
+  @override
+  String get cmodReminderPaused => 'Paused';
+
+  @override
+  String get cmodReminderToggle => 'Reminder on';
+
+  @override
+  String get cmodModuleMenu => 'Module options';
+
+  @override
+  String cmodHiddenValue(String label) {
+    return '$label (hidden)';
+  }
+
+  @override
+  String get cmodNotifyGroup => 'Trackers & lists';
+
+  @override
+  String get cmodNotifyChannel => 'Tracker & list reminders';
+
+  @override
+  String get cmodNotifyChannelDescription =>
+      'Gentle nudges to log your trackers and review your lists';
+
+  @override
+  String get cmodNotifyBodyTracker => 'Time to log it';
+
+  @override
+  String get cmodNotifyBodyList => 'Take a look at your list';
+
+  @override
+  String get cmodEntryNew => 'New entry';
+
+  @override
+  String get cmodEntryEdit => 'Edit entry';
+
+  @override
+  String get cmodItemNew => 'New item';
+
+  @override
+  String get cmodItemEdit => 'Edit item';
+
+  @override
+  String get cmodEntryWhen => 'When';
+
+  @override
+  String get cmodEntryDone => 'Done';
+
+  @override
+  String get cmodEntryCounter => 'This module is a counter: saving logs one.';
+
+  @override
+  String get cmodErrRequired => 'This field is required';
+
+  @override
+  String get cmodErrNumber => 'Enter a number';
+
+  @override
+  String get cmodErrWhole => 'Whole numbers only';
+
+  @override
+  String cmodErrPrecise(String count) {
+    return 'At most $count decimal places';
+  }
+
+  @override
+  String cmodErrMin(String value) {
+    return 'At least $value';
+  }
+
+  @override
+  String cmodErrMax(String value) {
+    return 'At most $value';
+  }
+
+  @override
+  String get cmodErrDate => 'Not a valid date';
+
+  @override
+  String get cmodErrTime => 'Not a valid time';
+
+  @override
+  String get cmodErrOption => 'Pick from the list';
+
+  @override
+  String get cmodErrScale => 'Outside the scale';
+
+  @override
+  String get cmodErrTooLong => 'The text is too long';
+
+  @override
+  String get cmodPickDate => 'Pick a date';
+
+  @override
+  String get cmodPickTime => 'Pick a time';
+
+  @override
+  String get cmodClear => 'Clear';
+
+  @override
+  String get cmodYes => 'Yes';
+
+  @override
+  String get cmodNo => 'No';
+
+  @override
+  String get cmodChecked => 'Done';
+
+  @override
+  String get cmodUnchecked => 'Not done';
+
+  @override
+  String get cmodCardTitle => 'Your trackers here';
+
+  @override
+  String get cmodCardSeeAll => 'See all';
+
+  @override
+  String get cmodCardEmpty => 'Create a tracker for this planet';
+
+  @override
+  String get cmodCardEmptyHint =>
+      'A counter, a log or a list – with your own fields';
+
+  @override
+  String get cmodExportDate => 'date';
+
+  @override
+  String get cmodExportTime => 'time';
+
+  @override
+  String get cmodExportDone => 'done';
+
+  @override
+  String get cmodExportEntries => 'Entries';
+
+  @override
+  String get cmodExportLastEntry => 'Last entry';
+
+  @override
+  String get cmodExportOpen => 'Open';
+
+  @override
+  String cmodExportLastDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Last $count days',
+      one: 'Last day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportActiveDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count active days',
+      one: '1 active day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportTotal(String value) {
+    return 'total $value';
+  }
+
+  @override
+  String cmodExportAverage(String value) {
+    return 'average $value';
+  }
+
+  @override
+  String cmodExportStreak(String current, String best) {
+    return 'streak $current (best $best)';
+  }
+
+  @override
+  String get cmodExportHidden => 'hidden';
+
+  @override
+  String get cinemaTitle => 'Madar Cinema';
+
+  @override
+  String get cinemaHallSubtitle =>
+      'Original games in the spirit of classic cinema';
+
+  @override
+  String get cinemaFeatures => 'Features';
+
+  @override
+  String get cinemaShorts => 'Shorts';
+
+  @override
+  String get cinemaComingSoon => 'Coming soon';
+
+  @override
+  String get cinemaPlay => 'Play';
+
+  @override
+  String get cinemaGameViewLabel => 'Game screen';
+
+  @override
+  String get cinemaPause => 'Pause';
+
+  @override
+  String get cinemaIntermission => 'Intermission';
+
+  @override
+  String get cinemaResume => 'Resume';
+
+  @override
+  String get cinemaRestart => 'Restart';
+
+  @override
+  String get cinemaLeave => 'Leave';
+
+  @override
+  String get cinemaPlayAgain => 'Play again';
+
+  @override
+  String get cinemaTheEnd => 'The End';
+
+  @override
+  String get cinemaGameOver => 'Show\'s Over';
+
+  @override
+  String cinemaScoreLine(String score) {
+    return 'Score: $score';
+  }
+
+  @override
+  String cinemaBestLine(String score) {
+    return 'Best: $score';
+  }
+
+  @override
+  String get cinemaEraSilent => 'Silent 1920s';
+
+  @override
+  String get cinemaEraRubberHose => '1930s Cartoon';
+
+  @override
+  String get cinemaEraNoir => '1940s Noir';
+
+  @override
+  String get cinemaEraTechnicolor => '1950s Technicolor';
+
+  @override
+  String get cinemaEraGrindhouse => '1970s Grindhouse';
+
+  @override
+  String get cinemaEraVhs => '1980s VHS';
+
+  @override
+  String get cinemaDemoTitle => 'Rehearsal';
+
+  @override
+  String get cinemaDemoTagline => 'A test scene for the Film Reel Engine';
+
+  @override
+  String get cinemaDemoOpening => 'Scene One';
+
+  @override
+  String get cinemaDemoOpeningSubtitle => 'Tap to jump over the barrels!';
+
+  @override
+  String get cinemaFlappyOrbitTitle => 'Flappy Orbit';
+
+  @override
+  String get cinemaFlappyOrbitTagline => 'Flap between planets to a swing beat';
+
+  @override
+  String get cinemaFlappyOrbitHomage => 'Homage to 1930s rubber-hose cartoons';
+
+  @override
+  String get cinemaMetropolisTitle => 'Metropolis Machine';
+
+  @override
+  String get cinemaMetropolisTagline => 'Take on the giant machines one by one';
+
+  @override
+  String get cinemaMetropolisHomage =>
+      'Homage to the silent film Metropolis (1927)';
+
+  @override
+  String get cinemaCaravanTitle => 'Caravan Dash';
+
+  @override
+  String get cinemaCaravanTagline => 'Race the dunes in Technicolor';
+
+  @override
+  String get cinemaCaravanHomage => 'Homage to 1950s desert epics';
+
+  @override
+  String get cinemaNoirTitle => 'Noir Rooftops';
+
+  @override
+  String get cinemaNoirTagline => 'Chase shadows across rain-soaked rooftops';
+
+  @override
+  String get cinemaNoirHomage => 'Homage to 1940s film noir';
+
+  @override
+  String get cinemaNeonSoukTitle => 'Neon Souk Racer';
+
+  @override
+  String get cinemaNeonSoukTagline => 'Race through a souk of neon lights';
+
+  @override
+  String get cinemaNeonSoukHomage => 'Homage to 1980s sci-fi on VHS';
+
+  @override
+  String get cinemaSavedGames => 'Saved games';
+
+  @override
+  String get cinemaSavedGamesEmpty =>
+      'Add a web game by its link to play it here full screen.';
+
+  @override
+  String get cinemaSavedGamesNote =>
+      'Games open from their original link; nothing is copied into the app.';
+
+  @override
+  String get cinemaAddGame => 'Add game';
+
+  @override
+  String get cinemaGameName => 'Game name';
+
+  @override
+  String get cinemaGameUrl => 'Game link';
+
+  @override
+  String get cinemaInvalidUrl => 'Enter a valid link starting with https://';
+
+  @override
+  String get cinemaRemoveGame => 'Remove';
+
+  @override
+  String get cinemaOpenGameFailed => 'Couldn\'t open the link';
+
+  @override
+  String get cinemaSave => 'Save';
+
+  @override
+  String get cinemaCancel => 'Cancel';
 }

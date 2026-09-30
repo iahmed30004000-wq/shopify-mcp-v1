@@ -67,7 +67,11 @@ class _SpendingCardState extends State<SpendingCard> {
     final f = MadarFormatter.of(context);
     final book = widget.book;
     final fmt = ledgerFormatOf(context, book);
-    final window = LedgerReports.shift(LedgerReports.windowOf(widget.today, _period), _offset);
+    final window = LedgerReports.shift(
+      LedgerReports.windowOf(widget.today, _period, weekStart: book.weekStart),
+      _offset,
+      weekStart: book.weekStart,
+    );
     final breakdown = _view == SpendingView.byItem
         ? LedgerReports.spendingByBudgetItem(
             book.transactions,
@@ -311,6 +315,7 @@ class TrendCard extends StatelessWidget {
       walletCurrency: book.walletCurrency,
       rates: book.rates,
       count: count,
+      weekStart: book.weekStart,
       wallets: wallets,
     );
     final suffix = compactSuffixes(context);

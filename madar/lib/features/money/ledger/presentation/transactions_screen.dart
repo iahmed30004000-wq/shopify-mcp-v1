@@ -256,8 +256,9 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
           active: itemNames.isNotEmpty,
           icon: Icons.account_tree_outlined,
           onTap: () async {
-            final picked = await showBudgetItemPicker(
+            final picked = await LedgerActions.pickBudgetItem(
               context,
+              ref,
               book: book,
               selected: fl.budgetItemIds.length == 1 ? fl.budgetItemIds.single : null,
               today: today,
@@ -291,7 +292,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
         label: dateLabel(),
         active: fl.hasDateRange,
         icon: Icons.date_range_rounded,
-        onTap: () => _pickDates(context, today),
+        onTap: () => _pickDates(context, today, weekStart: book.weekStart),
       ),
       if (book.totals.hasBusiness)
         chip(
@@ -347,10 +348,10 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
     );
   }
 
-  Future<void> _pickDates(BuildContext context, DateTime today) async {
+  Future<void> _pickDates(BuildContext context, DateTime today, {int weekStart = DateTime.saturday}) async {
     final l = L10n.of(context);
     const presets = ['week', 'month', 'lastMonth', 'days30', 'custom'];
-    final week = LedgerReports.windowOf(today, BudgetPeriod.weekly);
+    final week = LedgerReports.windowOf(today, BudgetPeriod.weekly, weekStart: weekStart);
     final month = LedgerReports.windowOf(today, BudgetPeriod.monthly);
     final lastMonth = LedgerReports.shift(month, -1);
     final picked = await showChoiceSheet<String>(

@@ -27,6 +27,7 @@ import '../ledger_ui.dart';
 import '../widgets/amount_keypad.dart';
 import '../widgets/ledger_segmented.dart';
 import '../widgets/wallet_chip_row.dart';
+import '../ledger_actions.dart';
 import 'budget_item_picker.dart';
 
 /// What the sheet saved (for the caller's undo toast).
@@ -244,7 +245,13 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
 
   Future<void> _pickItem(LedgerBook book) async {
     final d = _draft!;
-    final picked = await showBudgetItemPicker(context, book: book, selected: d.budgetItemId, today: _today);
+    final picked = await LedgerActions.pickBudgetItem(
+      context,
+      ref,
+      book: book,
+      selected: d.budgetItemId,
+      today: _today,
+    );
     if (picked == null || !mounted) return;
     _set(picked == BudgetPick.none ? d.copyWith(clearBudgetItem: true) : d.copyWith(budgetItemId: picked));
   }

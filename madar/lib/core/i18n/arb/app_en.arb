@@ -13317,6 +13317,250 @@
   "@goalsDebtNoWalletHint": {
     "description": "Debt editor preview without a wallet"
   },
+  "moneyHubNetWorthTitle": "Net worth",
+  "@moneyHubNetWorthTitle": {
+    "description": "Money page: title of the net worth card (wallets + jars + owed to you − you owe, in the base currency)"
+  },
+  "moneyHubNetWorthIn": "in {code}",
+  "@moneyHubNetWorthIn": {
+    "description": "Money page: the base currency the net worth is shown in",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubNetWorthEmpty": "Add your first wallet to see your net worth here, in your base currency.",
+  "@moneyHubNetWorthEmpty": {
+    "description": "Money page: net worth card on a fresh install"
+  },
+  "moneyHubPartWallets": "Wallets",
+  "@moneyHubPartWallets": {
+    "description": "Money page: part of the net worth – the wallets' balances"
+  },
+  "moneyHubPartJars": "Jars",
+  "@moneyHubPartJars": {
+    "description": "Money page: part of the net worth – money in savings jars"
+  },
+  "moneyHubPartOwedToMe": "Owed to you",
+  "@moneyHubPartOwedToMe": {
+    "description": "Money page: part of the net worth – open debts owed to the user"
+  },
+  "moneyHubPartIOwe": "You owe",
+  "@moneyHubPartIOwe": {
+    "description": "Money page: part of the net worth – open debts the user owes (subtracted)"
+  },
+  "moneyHubNetWorthSemantics": "Net worth {total}: wallets {wallets}, jars {jars}, owed to you {owed}, you owe {owe}",
+  "@moneyHubNetWorthSemantics": {
+    "description": "Money page: screen-reader summary of the net worth card",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "wallets": {
+        "type": "String"
+      },
+      "jars": {
+        "type": "String"
+      },
+      "owed": {
+        "type": "String"
+      },
+      "owe": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubRatesAction": "Currencies",
+  "@moneyHubRatesAction": {
+    "description": "Money page: button on the net worth card opening currencies and rates"
+  },
+  "moneyHubQuickTitle": "Add an entry",
+  "@moneyHubQuickTitle": {
+    "description": "Money page: title of the quick add row (expense, income, transfer)"
+  },
+  "moneyHubAddExpenseHint": "Add an expense",
+  "@moneyHubAddExpenseHint": {
+    "description": "Money page: screen-reader label of the quick expense button"
+  },
+  "moneyHubAddIncomeHint": "Add income",
+  "@moneyHubAddIncomeHint": {
+    "description": "Money page: screen-reader label of the quick income button"
+  },
+  "moneyHubAddTransferHint": "Move money between wallets",
+  "@moneyHubAddTransferHint": {
+    "description": "Money page: screen-reader label of the quick transfer button"
+  },
+  "moneyHubWalletsTitle": "Your wallets",
+  "@moneyHubWalletsTitle": {
+    "description": "Money page: section of the wallets summary"
+  },
+  "moneyHubLedgerAction": "Ledger",
+  "@moneyHubLedgerAction": {
+    "description": "Money page: section action opening the ledger"
+  },
+  "moneyHubPlanTitle": "This month's plan",
+  "@moneyHubPlanTitle": {
+    "description": "Money page: section of the budget status (plan vs spent, warnings)"
+  },
+  "moneyHubBudgetAction": "Budget",
+  "@moneyHubBudgetAction": {
+    "description": "Money page: section action opening the budget"
+  },
+  "moneyHubDuesTitle": "Dues & savings",
+  "@moneyHubDuesTitle": {
+    "description": "Money page: section of upcoming dues (bills, debts) and savings jars"
+  },
+  "moneyHubGoalsAction": "All",
+  "@moneyHubGoalsAction": {
+    "description": "Money page: section action opening savings, debts and bills"
+  },
+  "moneyHubToolsTitle": "Money tools",
+  "@moneyHubToolsTitle": {
+    "description": "Money page: section of links to the money screens"
+  },
+  "moneyHubToolLedger": "Ledger",
+  "@moneyHubToolLedger": {
+    "description": "Money tool: the ledger (wallets, balances, recent entries)"
+  },
+  "moneyHubToolLedgerHint": "Wallets, balances and recent entries",
+  "@moneyHubToolLedgerHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolTransactions": "Entries",
+  "@moneyHubToolTransactions": {
+    "description": "Money tool: every transaction"
+  },
+  "moneyHubToolTransactionsHint": "Every entry, searchable and filtered",
+  "@moneyHubToolTransactionsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBudget": "Budget",
+  "@moneyHubToolBudget": {
+    "description": "Money tool: the nested budget"
+  },
+  "moneyHubToolBudgetHint": "The nested plan and spending against it",
+  "@moneyHubToolBudgetHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolJars": "Savings jars",
+  "@moneyHubToolJars": {
+    "description": "Money tool: savings jars"
+  },
+  "moneyHubToolJarsHint": "Targets, deadlines and deposits",
+  "@moneyHubToolJarsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolDebts": "Debts",
+  "@moneyHubToolDebts": {
+    "description": "Money tool: debts (I owe / owed to me)"
+  },
+  "moneyHubToolDebtsHint": "What you owe and are owed, with due dates",
+  "@moneyHubToolDebtsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBills": "Bills",
+  "@moneyHubToolBills": {
+    "description": "Money tool: recurring obligations"
+  },
+  "moneyHubToolBillsHint": "Recurring bills; “Paid” moves the next due date",
+  "@moneyHubToolBillsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubMoonOpenWallet": "Open wallet",
+  "@moneyHubMoonOpenWallet": {
+    "description": "Wallet moon sheet: button opening the wallet's screen"
+  },
+  "moneyHubSettingsSection": "Money",
+  "@moneyHubSettingsSection": {
+    "description": "Settings: section of the money preferences"
+  },
+  "moneyHubSettingsSectionHint": "Currencies, weeks per month, the week's start and due reminders",
+  "@moneyHubSettingsSectionHint": {
+    "description": "Settings: subtitle of the money section"
+  },
+  "moneyHubSettingsCurrencies": "Base currency & rates",
+  "@moneyHubSettingsCurrencies": {
+    "description": "Settings › Money: entry opening the currencies and manual exchange rates"
+  },
+  "moneyHubSettingsCurrencyCount": "{count, plural, =1{1 currency} other{{n} currencies}}",
+  "@moneyHubSettingsCurrencyCount": {
+    "description": "Settings › Money: how many currencies are set up",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeeks": "Weeks per month",
+  "@moneyHubSettingsWeeks": {
+    "description": "Settings › Money: weeks per month (weekly ↔ monthly budget conversion)"
+  },
+  "moneyHubSettingsWeeksSummary": "{weeks} · converts weekly and monthly amounts",
+  "@moneyHubSettingsWeeksSummary": {
+    "description": "Settings › Money: the weeks-per-month value",
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeekStart": "Week starts on",
+  "@moneyHubSettingsWeekStart": {
+    "description": "Settings › Money: first day of the week in weekly budgets and reports"
+  },
+  "moneyHubSettingsWeekStartHint": "For weekly budget items and the ledger's weekly reports",
+  "@moneyHubSettingsWeekStartHint": {
+    "description": "Settings › Money: hint under the week start choice"
+  },
+  "moneyHubWeekSaturday": "Saturday",
+  "@moneyHubWeekSaturday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekSunday": "Sunday",
+  "@moneyHubWeekSunday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekMonday": "Monday",
+  "@moneyHubWeekMonday": {
+    "description": "Week start choice"
+  },
+  "moneyHubSettingsReminders": "Due reminders",
+  "@moneyHubSettingsReminders": {
+    "description": "Settings › Money: entry opening the debt and bill due reminder options"
+  },
+  "moneyHubSettingsRemindersOff": "Off",
+  "@moneyHubSettingsRemindersOff": {
+    "description": "Settings › Money: due reminders switched off"
+  },
+  "moneyHubSettingsRemindersOnDay": "On the due day",
+  "@moneyHubSettingsRemindersOnDay": {
+    "description": "Settings › Money: reminders only on the due day"
+  },
+  "moneyHubSettingsRemindersBoth": "{lead} and on the day",
+  "@moneyHubSettingsRemindersBoth": {
+    "description": "Settings › Money: an early reminder and one on the due day",
+    "placeholders": {
+      "lead": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsRemindersAt": "{when} · at {time}",
+  "@moneyHubSettingsRemindersAt": {
+    "description": "Settings › Money: when the due reminders arrive",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "workTitle": "Work",
   "@workTitle": {
     "description": "Work planet screen title"
@@ -13455,7 +13699,7 @@
       }
     }
   },
-  "workDueTodayCount": "{count, plural, one{{count} due today} other{{count} due today}}",
+  "workDueTodayCount": "{count, plural, other{{count} due today}}",
   "@workDueTodayCount": {
     "description": "Board tile / today card: cards due today",
     "placeholders": {
@@ -13464,7 +13708,7 @@
       }
     }
   },
-  "workOverdueCount": "{count, plural, one{{count} overdue} other{{count} overdue}}",
+  "workOverdueCount": "{count, plural, other{{count} overdue}}",
   "@workOverdueCount": {
     "description": "Board tile / today card: overdue cards",
     "placeholders": {
@@ -16902,5 +17146,677 @@
       }
     }
   },
-  "bodyNotifyHint": "Needs notification permission on the phone."
+  "bodyNotifyHint": "Needs notification permission on the phone.",
+  "cmodTitle": "Trackers & lists",
+  "@cmodTitle": {
+    "description": "Custom modules screen title"
+  },
+  "cmodNewModule": "New module",
+  "cmodModulesCount": "{count, plural, =0{No modules yet} =1{1 module} other{{count} modules}}",
+  "@cmodModulesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodLoggedToday": "{count, plural, =0{Nothing logged today yet} =1{1 entry today} other{{count} entries today}}",
+  "@cmodLoggedToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEntriesCount": "{count, plural, =0{no entries} =1{1 entry} other{{count} entries}}",
+  "@cmodEntriesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsCount": "{count, plural, =0{no items} =1{1 item} other{{count} items}}",
+  "@cmodItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsProgress": "{done} of {total} done",
+  "@cmodItemsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodOpenItems": "{count, plural, =0{Nothing left} =1{1 item left} other{{count} items left}}",
+  "@cmodOpenItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEmptyTitle": "Build your first tracker",
+  "cmodEmptyBody": "Track what matters with your own fields – a reading log, dhikr after prayer, a habit list… and watch it feed your planets.",
+  "cmodEmptyAction": "Create a module",
+  "cmodArchivedSection": "Archived",
+  "cmodKindTracker": "Tracker",
+  "cmodKindList": "List",
+  "cmodKindTrackerHint": "Values you log over time, with charts",
+  "cmodKindListHint": "Items you check off and reorder",
+  "cmodLastToday": "Last entry today",
+  "cmodLastYesterday": "Last entry yesterday",
+  "cmodLastDaysAgo": "{count, plural, =1{Last entry a day ago} other{Last entry {count} days ago}}",
+  "@cmodLastDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodNoEntries": "No entries yet",
+  "cmodStreakBadge": "{count}-day streak",
+  "@cmodStreakBadge": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodActionArchive": "Archive",
+  "cmodActionUnarchive": "Unarchive",
+  "cmodActionAddEntry": "New entry",
+  "cmodActionOpen": "Open",
+  "cmodActionExport": "Share as CSV",
+  "cmodActionUncheck": "Reopen",
+  "cmodActionCheck": "Check off",
+  "cmodToastArchived": "Archived “{name}”",
+  "@cmodToastArchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnarchived": "“{name}” is back",
+  "@cmodToastUnarchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDeleted": "Deleted “{name}”",
+  "@cmodToastDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDuplicated": "Duplicated “{name}”",
+  "@cmodToastDuplicated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastLogged": "Logged to “{name}”",
+  "@cmodToastLogged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnchecked": "Today’s check-in removed",
+  "cmodToastEntryDeleted": "Entry deleted",
+  "cmodToastEntryDuplicated": "Entry duplicated",
+  "cmodToastItemDone": "Item done",
+  "cmodToastItemReopened": "Item reopened",
+  "cmodToastCleared": "Done items cleared",
+  "cmodToastSaved": "Saved “{name}”",
+  "@cmodToastSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastReminderDeleted": "Reminder deleted",
+  "cmodToastReminderAdded": "Reminder added",
+  "cmodQuickDone": "Done today",
+  "cmodQuickDoneHint": "Log today with one tap",
+  "cmodQuickChecked": "Done for today",
+  "cmodQuickCheckedHint": "Tap to undo today’s check-in",
+  "cmodQuickAddOne": "Log one",
+  "cmodQuickRate": "Rate today",
+  "cmodRateStars": "{count, plural, =1{1 star} other{{count} stars}}",
+  "@cmodRateStars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodBuilderNewTitle": "New module",
+  "cmodBuilderEditTitle": "Edit module",
+  "cmodSectionBasics": "Basics",
+  "cmodName": "Name",
+  "cmodNameHint": "e.g. Reading log",
+  "cmodKind": "Kind",
+  "cmodIcon": "Icon",
+  "cmodColor": "Colour",
+  "cmodPlanet": "Planet",
+  "cmodPlanetNone": "No planet",
+  "cmodPlanetHint": "Every entry brings this planet to life and circles it as a moon",
+  "cmodWindow": "Prayer window",
+  "cmodWindowHint": "When you usually log it",
+  "cmodSectionFields": "Fields",
+  "cmodAddField": "Add field",
+  "cmodFieldsEmptyTracker": "With no fields, a tracker is a one-tap counter",
+  "cmodFieldsEmptyList": "Add at least one field, such as the item’s name",
+  "cmodHiddenFields": "Hidden fields",
+  "cmodHiddenFieldsHint": "Removed from the form – their old data is kept",
+  "cmodRestoreField": "Show again",
+  "cmodSectionChart": "Chart",
+  "cmodChartField": "What to plot",
+  "cmodChartEntries": "Number of entries",
+  "cmodChartStyle": "Style",
+  "cmodChartRange": "Period",
+  "cmodChartLine": "Line",
+  "cmodChartBar": "Bars",
+  "cmodChartHeat": "Calendar",
+  "cmodChartStreak": "Streak",
+  "cmodChartEmpty": "No data in this period yet",
+  "cmodRangeDays": "{count, plural, =1{1 day} other{{count} days}}",
+  "@cmodRangeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodSave": "Save",
+  "cmodCreate": "Create",
+  "cmodCancel": "Cancel",
+  "cmodDiscardTitle": "Discard changes?",
+  "cmodDiscardBody": "Your changes to this module are not saved.",
+  "cmodDiscard": "Discard",
+  "cmodKeepEditing": "Keep editing",
+  "cmodPreviewUntitled": "Untitled module",
+  "cmodIssueNameMissing": "Give the module a name",
+  "cmodIssueNameTooLong": "The name is too long",
+  "cmodIssueNoFields": "Add at least one field",
+  "cmodIssueTooManyFields": "{max} fields at most",
+  "@cmodIssueTooManyFields": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodIssueLabelMissing": "A field has no name",
+  "cmodIssueLabelDuplicate": "Two fields share this name",
+  "cmodIssueNoOptions": "Add at least one option",
+  "cmodIssueOptionLabelMissing": "An option has no name",
+  "cmodIssueOptionDuplicate": "Two options share a name",
+  "cmodIssueRangeInverted": "The minimum is above the maximum",
+  "cmodIssueCurrencyCode": "Not a valid currency code",
+  "cmodMigrationTitle": "Before saving",
+  "cmodMigrationBlockedTitle": "This change would lose data",
+  "cmodMigrationBlockedBody": "Nothing was saved. Change the type back, or add a new field with the type you want.",
+  "cmodMigrationOk": "OK",
+  "cmodMigTypeBlocked": "“{field}”: {entries} can’t become “{type}”",
+  "@cmodMigTypeBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigRatingBlocked": "“{field}”: {entries} have more stars than the new scale",
+  "@cmodMigRatingBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigFieldHidden": "“{field}” will be hidden; its values in {entries} are kept",
+  "@cmodMigFieldHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOptionHidden": "Removed options of “{field}” that are in use will be hidden, not deleted",
+  "@cmodMigOptionHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigConverted": "Values of “{field}” in {entries} will be converted to “{type}”",
+  "@cmodMigConverted": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOutOfRange": "{entries} in “{field}” are outside the new limits and stay as they are",
+  "@cmodMigOutOfRange": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigNewlyRequired": "{entries} have no value for “{field}”, now required",
+  "@cmodMigNewlyRequired": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodTypeText": "Text",
+  "cmodTypeNumber": "Number",
+  "cmodTypeDate": "Date",
+  "cmodTypeTime": "Time",
+  "cmodTypeCheckbox": "Checkbox",
+  "cmodTypeSingle": "Single choice",
+  "cmodTypeMulti": "Multiple choice",
+  "cmodTypeRating": "Star rating",
+  "cmodTypeCurrency": "Amount",
+  "cmodTypeTextHint": "A note, a book title…",
+  "cmodTypeNumberHint": "Pages, minutes, times…",
+  "cmodTypeDateHint": "An appointment or occasion",
+  "cmodTypeTimeHint": "Bedtime, start time…",
+  "cmodTypeCheckboxHint": "Done or not",
+  "cmodTypeSingleHint": "One option from your list",
+  "cmodTypeMultiHint": "Several options from your list",
+  "cmodTypeRatingHint": "Two to ten stars",
+  "cmodTypeCurrencyHint": "Money in the currency you choose",
+  "cmodPickType": "Field type",
+  "cmodFieldNew": "New field",
+  "cmodFieldEdit": "Edit field",
+  "cmodFieldLabel": "Field name",
+  "cmodFieldLabelHint": "e.g. Pages",
+  "cmodFieldRequired": "Required",
+  "cmodFieldRequiredHint": "An entry can’t be saved without it",
+  "cmodFieldUnit": "Unit",
+  "cmodFieldUnitHint": "pages, min, kg…",
+  "cmodFieldMin": "Minimum",
+  "cmodFieldMax": "Maximum",
+  "cmodFieldNoLimit": "No limit",
+  "cmodFieldDecimals": "Decimal places",
+  "cmodFieldScale": "Scale",
+  "cmodFieldCurrency": "Currency",
+  "cmodFieldOptions": "Options",
+  "cmodAddOption": "Add option",
+  "cmodOptionHint": "Option name",
+  "cmodRemoveOption": "Remove option",
+  "cmodFieldMultiline": "Long text",
+  "cmodFieldMultilineHint": "Room for several lines",
+  "cmodFieldDelete": "Delete field",
+  "cmodFieldCopyLabel": "{label} (copy)",
+  "@cmodFieldCopyLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldTypeNote": "Changing the type converts old values when possible; otherwise the change is not saved.",
+  "cmodFieldOptionsCount": "{count, plural, =0{no options} =1{1 option} other{{count} options}}",
+  "@cmodFieldOptionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodFieldRange": "{min} – {max}",
+  "@cmodFieldRange": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtLeast": "from {min}",
+  "@cmodFieldAtLeast": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtMost": "up to {max}",
+  "@cmodFieldAtMost": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDeleted": "Removed “{name}” from the form",
+  "@cmodFieldDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDuplicated": "Field duplicated",
+  "cmodGalleryTitle": "Start a module",
+  "cmodGallerySubtitle": "From scratch or a template – everything stays editable",
+  "cmodBlankTracker": "Blank tracker",
+  "cmodBlankList": "Blank list",
+  "cmodTemplatesHeader": "Starter templates",
+  "cmodTplReadingLog": "Reading log",
+  "cmodTplReadingLogDesc": "Book, pages and your rating",
+  "cmodTplDhikr": "Dhikr after prayer",
+  "cmodTplDhikrDesc": "How many times, and after which prayer",
+  "cmodTplHabit": "Daily habit",
+  "cmodTplHabitDesc": "One tap a day, and a growing streak",
+  "cmodTplHabitList": "Habit list",
+  "cmodTplHabitListDesc": "Habits to build, and how often",
+  "cmodTplSleep": "Sleep log",
+  "cmodTplSleepDesc": "Bedtime, wake-up, hours and quality",
+  "cmodTplGifts": "Gift ideas",
+  "cmodTplGiftsDesc": "The idea, who for, budget and occasion",
+  "cmodTplBook": "Book",
+  "cmodTplPages": "Pages",
+  "cmodTplRating": "Rating",
+  "cmodTplUnitPages": "pages",
+  "cmodTplAfterPrayer": "After prayer",
+  "cmodTplCount": "Count",
+  "cmodTplUnitTimes": "times",
+  "cmodTplDone": "Done",
+  "cmodTplNote": "Note",
+  "cmodTplHabitItem": "Habit",
+  "cmodTplFrequency": "How often",
+  "cmodTplDaily": "Daily",
+  "cmodTplWeekly": "Weekly",
+  "cmodTplMonthly": "Monthly",
+  "cmodTplBedtime": "Bedtime",
+  "cmodTplWake": "Wake-up",
+  "cmodTplHours": "Hours",
+  "cmodTplUnitHours": "h",
+  "cmodTplQuality": "Quality",
+  "cmodTplIdea": "Idea",
+  "cmodTplFor": "Who for",
+  "cmodTplBudget": "Budget",
+  "cmodTplOccasion": "Occasion",
+  "cmodTplNotes": "Notes",
+  "cmodAddEntry": "New entry",
+  "cmodAddItem": "New item",
+  "cmodEntriesSection": "Entries",
+  "cmodItemsSection": "Items",
+  "cmodDoneSection": "Done",
+  "cmodClearDone": "Clear done",
+  "cmodToday": "Today",
+  "cmodYesterday": "Yesterday",
+  "cmodEntriesEmpty": "No entries yet. The first one starts the story.",
+  "cmodItemsEmpty": "The list is empty. Add the first item.",
+  "cmodAllDone": "All done – well done",
+  "cmodStatStreak": "Streak",
+  "cmodStatBest": "Best",
+  "cmodStatTotal": "Total",
+  "cmodStatAverage": "Average",
+  "cmodStatActive": "Active days",
+  "cmodStatEntries": "Entries",
+  "cmodStatRate": "Check-in rate",
+  "cmodDays": "{count, plural, =1{1 day} other{{count} days}}",
+  "@cmodDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodReminders": "Reminders",
+  "cmodAddReminder": "Add reminder",
+  "cmodRemindersEmpty": "Remind me after a prayer or at a set time",
+  "cmodReminderPaused": "Paused",
+  "cmodReminderToggle": "Reminder on",
+  "cmodModuleMenu": "Module options",
+  "cmodHiddenValue": "{label} (hidden)",
+  "@cmodHiddenValue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodNotifyGroup": "Trackers & lists",
+  "cmodNotifyChannel": "Tracker & list reminders",
+  "cmodNotifyChannelDescription": "Gentle nudges to log your trackers and review your lists",
+  "cmodNotifyBodyTracker": "Time to log it",
+  "cmodNotifyBodyList": "Take a look at your list",
+  "cmodEntryNew": "New entry",
+  "cmodEntryEdit": "Edit entry",
+  "cmodItemNew": "New item",
+  "cmodItemEdit": "Edit item",
+  "cmodEntryWhen": "When",
+  "cmodEntryDone": "Done",
+  "cmodEntryCounter": "This module is a counter: saving logs one.",
+  "cmodErrRequired": "This field is required",
+  "cmodErrNumber": "Enter a number",
+  "cmodErrWhole": "Whole numbers only",
+  "cmodErrPrecise": "At most {count} decimal places",
+  "@cmodErrPrecise": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMin": "At least {value}",
+  "@cmodErrMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMax": "At most {value}",
+  "@cmodErrMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrDate": "Not a valid date",
+  "cmodErrTime": "Not a valid time",
+  "cmodErrOption": "Pick from the list",
+  "cmodErrScale": "Outside the scale",
+  "cmodErrTooLong": "The text is too long",
+  "cmodPickDate": "Pick a date",
+  "cmodPickTime": "Pick a time",
+  "cmodClear": "Clear",
+  "cmodYes": "Yes",
+  "cmodNo": "No",
+  "cmodChecked": "Done",
+  "cmodUnchecked": "Not done",
+  "cmodCardTitle": "Your trackers here",
+  "cmodCardSeeAll": "See all",
+  "cmodCardEmpty": "Create a tracker for this planet",
+  "cmodCardEmptyHint": "A counter, a log or a list – with your own fields",
+  "cmodExportDate": "date",
+  "cmodExportTime": "time",
+  "cmodExportDone": "done",
+  "cmodExportEntries": "Entries",
+  "cmodExportLastEntry": "Last entry",
+  "cmodExportOpen": "Open",
+  "cmodExportLastDays": "{count, plural, =1{Last day} other{Last {count} days}}",
+  "@cmodExportLastDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportActiveDays": "{count, plural, =1{1 active day} other{{count} active days}}",
+  "@cmodExportActiveDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportTotal": "total {value}",
+  "@cmodExportTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportAverage": "average {value}",
+  "@cmodExportAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportStreak": "streak {current} (best {best})",
+  "@cmodExportStreak": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "best": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportHidden": "hidden",
+  "cinemaTitle": "Madar Cinema",
+  "@cinemaTitle": {
+    "description": "Name of the games hub"
+  },
+  "cinemaHallSubtitle": "Original games in the spirit of classic cinema",
+  "cinemaFeatures": "Features",
+  "@cinemaFeatures": {
+    "description": "Tier 1 games section"
+  },
+  "cinemaShorts": "Shorts",
+  "@cinemaShorts": {
+    "description": "Tier 2 games section"
+  },
+  "cinemaComingSoon": "Coming soon",
+  "cinemaPlay": "Play",
+  "cinemaGameViewLabel": "Game screen",
+  "cinemaPause": "Pause",
+  "cinemaIntermission": "Intermission",
+  "@cinemaIntermission": {
+    "description": "Pause card title"
+  },
+  "cinemaResume": "Resume",
+  "cinemaRestart": "Restart",
+  "cinemaLeave": "Leave",
+  "cinemaPlayAgain": "Play again",
+  "cinemaTheEnd": "The End",
+  "cinemaGameOver": "Show's Over",
+  "@cinemaGameOver": {
+    "description": "Game over card"
+  },
+  "cinemaScoreLine": "Score: {score}",
+  "@cinemaScoreLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaBestLine": "Best: {score}",
+  "@cinemaBestLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaEraSilent": "Silent 1920s",
+  "cinemaEraRubberHose": "1930s Cartoon",
+  "cinemaEraNoir": "1940s Noir",
+  "cinemaEraTechnicolor": "1950s Technicolor",
+  "cinemaEraGrindhouse": "1970s Grindhouse",
+  "cinemaEraVhs": "1980s VHS",
+  "cinemaDemoTitle": "Rehearsal",
+  "@cinemaDemoTitle": {
+    "description": "Engine demo scene"
+  },
+  "cinemaDemoTagline": "A test scene for the Film Reel Engine",
+  "cinemaDemoOpening": "Scene One",
+  "cinemaDemoOpeningSubtitle": "Tap to jump over the barrels!",
+  "cinemaFlappyOrbitTitle": "Flappy Orbit",
+  "cinemaFlappyOrbitTagline": "Flap between planets to a swing beat",
+  "cinemaFlappyOrbitHomage": "Homage to 1930s rubber-hose cartoons",
+  "cinemaMetropolisTitle": "Metropolis Machine",
+  "cinemaMetropolisTagline": "Take on the giant machines one by one",
+  "cinemaMetropolisHomage": "Homage to the silent film Metropolis (1927)",
+  "cinemaCaravanTitle": "Caravan Dash",
+  "cinemaCaravanTagline": "Race the dunes in Technicolor",
+  "cinemaCaravanHomage": "Homage to 1950s desert epics",
+  "cinemaNoirTitle": "Noir Rooftops",
+  "cinemaNoirTagline": "Chase shadows across rain-soaked rooftops",
+  "cinemaNoirHomage": "Homage to 1940s film noir",
+  "cinemaNeonSoukTitle": "Neon Souk Racer",
+  "cinemaNeonSoukTagline": "Race through a souk of neon lights",
+  "cinemaNeonSoukHomage": "Homage to 1980s sci-fi on VHS",
+  "cinemaSavedGames": "Saved games",
+  "cinemaSavedGamesEmpty": "Add a web game by its link to play it here full screen.",
+  "cinemaSavedGamesNote": "Games open from their original link; nothing is copied into the app.",
+  "cinemaAddGame": "Add game",
+  "cinemaGameName": "Game name",
+  "cinemaGameUrl": "Game link",
+  "cinemaInvalidUrl": "Enter a valid link starting with https://",
+  "cinemaRemoveGame": "Remove",
+  "cinemaOpenGameFailed": "Couldn't open the link",
+  "cinemaSave": "Save",
+  "cinemaCancel": "Cancel"
 }

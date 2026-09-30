@@ -13248,6 +13248,184 @@ class L10nAr extends L10n {
   String get goalsDebtNoWalletHint => 'بلا محفظة: تبقى أرصدة المحافظ كما هي.';
 
   @override
+  String get moneyHubNetWorthTitle => 'صافي ثروتك';
+
+  @override
+  String moneyHubNetWorthIn(String code) {
+    return 'بعملة $code';
+  }
+
+  @override
+  String get moneyHubNetWorthEmpty =>
+      'أضف محفظتك الأولى ليظهر هنا صافي ثروتك بعملتك الأساسية.';
+
+  @override
+  String get moneyHubPartWallets => 'المحافظ';
+
+  @override
+  String get moneyHubPartJars => 'الحصّالات';
+
+  @override
+  String get moneyHubPartOwedToMe => 'لك عند الناس';
+
+  @override
+  String get moneyHubPartIOwe => 'عليك';
+
+  @override
+  String moneyHubNetWorthSemantics(
+    String total,
+    String wallets,
+    String jars,
+    String owed,
+    String owe,
+  ) {
+    return 'صافي ثروتك $total: المحافظ $wallets، الحصّالات $jars، لك $owed، عليك $owe';
+  }
+
+  @override
+  String get moneyHubRatesAction => 'العملات';
+
+  @override
+  String get moneyHubQuickTitle => 'سجّل حركة';
+
+  @override
+  String get moneyHubAddExpenseHint => 'سجّل مصروفًا';
+
+  @override
+  String get moneyHubAddIncomeHint => 'سجّل دخلًا';
+
+  @override
+  String get moneyHubAddTransferHint => 'حوّل بين محفظتين';
+
+  @override
+  String get moneyHubWalletsTitle => 'محافظك';
+
+  @override
+  String get moneyHubLedgerAction => 'الدفتر';
+
+  @override
+  String get moneyHubPlanTitle => 'خطة هذا الشهر';
+
+  @override
+  String get moneyHubBudgetAction => 'الميزانية';
+
+  @override
+  String get moneyHubDuesTitle => 'المستحقات والادّخار';
+
+  @override
+  String get moneyHubGoalsAction => 'الكل';
+
+  @override
+  String get moneyHubToolsTitle => 'أدوات المال';
+
+  @override
+  String get moneyHubToolLedger => 'الدفتر';
+
+  @override
+  String get moneyHubToolLedgerHint => 'المحافظ وأرصدتها وآخر الحركات';
+
+  @override
+  String get moneyHubToolTransactions => 'الحركات';
+
+  @override
+  String get moneyHubToolTransactionsHint => 'كل الحركات مع البحث والتصفية';
+
+  @override
+  String get moneyHubToolBudget => 'الميزانية';
+
+  @override
+  String get moneyHubToolBudgetHint => 'الخطة المتداخلة والإنفاق مقابلها';
+
+  @override
+  String get moneyHubToolJars => 'الحصّالات';
+
+  @override
+  String get moneyHubToolJarsHint => 'الأهداف والمواعيد والإيداعات';
+
+  @override
+  String get moneyHubToolDebts => 'الديون';
+
+  @override
+  String get moneyHubToolDebtsHint => 'ما عليك وما لك، ومواعيد السداد';
+
+  @override
+  String get moneyHubToolBills => 'الالتزامات';
+
+  @override
+  String get moneyHubToolBillsHint =>
+      'الالتزامات المتكررة؛ «دُفع» ينقل الموعد التالي';
+
+  @override
+  String get moneyHubMoonOpenWallet => 'افتح المحفظة';
+
+  @override
+  String get moneyHubSettingsSection => 'المال';
+
+  @override
+  String get moneyHubSettingsSectionHint =>
+      'العملات وأسابيع الشهر وبداية الأسبوع وتذكير المستحقات';
+
+  @override
+  String get moneyHubSettingsCurrencies => 'العملة الأساسية والأسعار';
+
+  @override
+  String moneyHubSettingsCurrencyCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n عملة',
+      many: '$n عملة',
+      few: '$n عملات',
+      two: 'عملتان',
+      one: 'عملة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get moneyHubSettingsWeeks => 'أسابيع الشهر';
+
+  @override
+  String moneyHubSettingsWeeksSummary(String weeks) {
+    return '$weeks · للتحويل بين الأسبوعي والشهري';
+  }
+
+  @override
+  String get moneyHubSettingsWeekStart => 'بداية الأسبوع';
+
+  @override
+  String get moneyHubSettingsWeekStartHint =>
+      'للبنود الأسبوعية في الميزانية وتقارير الأسبوع في الدفتر';
+
+  @override
+  String get moneyHubWeekSaturday => 'السبت';
+
+  @override
+  String get moneyHubWeekSunday => 'الأحد';
+
+  @override
+  String get moneyHubWeekMonday => 'الإثنين';
+
+  @override
+  String get moneyHubSettingsReminders => 'تذكير المستحقات';
+
+  @override
+  String get moneyHubSettingsRemindersOff => 'متوقف';
+
+  @override
+  String get moneyHubSettingsRemindersOnDay => 'في يوم الاستحقاق';
+
+  @override
+  String moneyHubSettingsRemindersBoth(String lead) {
+    return '$lead وفي يومه';
+  }
+
+  @override
+  String moneyHubSettingsRemindersAt(String when, String time) {
+    return '$when · الساعة $time';
+  }
+
+  @override
   String get workTitle => 'العمل';
 
   @override
@@ -17094,4 +17272,1187 @@ class L10nAr extends L10n {
 
   @override
   String get bodyNotifyHint => 'يحتاج إذن الإشعارات على الهاتف.';
+
+  @override
+  String get cmodTitle => 'متتبّعات وقوائم';
+
+  @override
+  String get cmodNewModule => 'وحدة جديدة';
+
+  @override
+  String cmodModulesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count وحدة',
+      many: '$count وحدة',
+      few: '$count وحدات',
+      two: 'وحدتان',
+      one: 'وحدة واحدة',
+      zero: 'لا وحدات بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodLoggedToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إدخال اليوم',
+      many: '$count إدخالًا اليوم',
+      few: '$count إدخالات اليوم',
+      two: 'إدخالان اليوم',
+      one: 'إدخال واحد اليوم',
+      zero: 'لم تسجّل شيئًا اليوم بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodEntriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إدخال',
+      many: '$count إدخالًا',
+      few: '$count إدخالات',
+      two: 'إدخالان',
+      one: 'إدخال واحد',
+      zero: 'لا إدخالات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عنصر',
+      many: '$count عنصرًا',
+      few: '$count عناصر',
+      two: 'عنصران',
+      one: 'عنصر واحد',
+      zero: 'لا عناصر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsProgress(String done, String total) {
+    return '$done من $total منجز';
+  }
+
+  @override
+  String cmodOpenItems(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عنصر متبقٍّ',
+      many: '$count عنصرًا متبقيًا',
+      few: '$count عناصر متبقية',
+      two: 'عنصران متبقيان',
+      one: 'عنصر واحد متبقٍّ',
+      zero: 'لا شيء متبقٍّ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodEmptyTitle => 'اصنع متتبّعك الأول';
+
+  @override
+  String get cmodEmptyBody =>
+      'تتبّع ما يهمّك بحقولك أنت: سجلّ قراءة، أذكار بعد الصلاة، قائمة عادات… ويظهر كل ذلك في كواكبك.';
+
+  @override
+  String get cmodEmptyAction => 'أنشئ وحدة';
+
+  @override
+  String get cmodArchivedSection => 'المؤرشفة';
+
+  @override
+  String get cmodKindTracker => 'متتبّع';
+
+  @override
+  String get cmodKindList => 'قائمة';
+
+  @override
+  String get cmodKindTrackerHint => 'قيم تسجّلها مع الأيام، برسوم بيانية';
+
+  @override
+  String get cmodKindListHint => 'عناصر تشطبها وترتّبها';
+
+  @override
+  String get cmodLastToday => 'آخر إدخال اليوم';
+
+  @override
+  String get cmodLastYesterday => 'آخر إدخال أمس';
+
+  @override
+  String cmodLastDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر إدخال قبل $count يوم',
+      many: 'آخر إدخال قبل $count يومًا',
+      few: 'آخر إدخال قبل $count أيام',
+      two: 'آخر إدخال قبل يومين',
+      one: 'آخر إدخال قبل يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodNoEntries => 'لا إدخالات بعد';
+
+  @override
+  String cmodStreakBadge(String count) {
+    return 'سلسلة $count';
+  }
+
+  @override
+  String get cmodActionArchive => 'أرشفة';
+
+  @override
+  String get cmodActionUnarchive => 'إعادة من الأرشيف';
+
+  @override
+  String get cmodActionAddEntry => 'إدخال جديد';
+
+  @override
+  String get cmodActionOpen => 'فتح';
+
+  @override
+  String get cmodActionExport => 'مشاركة كملف CSV';
+
+  @override
+  String get cmodActionUncheck => 'إعادة فتح';
+
+  @override
+  String get cmodActionCheck => 'إنجاز';
+
+  @override
+  String cmodToastArchived(String name) {
+    return 'أُرشفت «$name»';
+  }
+
+  @override
+  String cmodToastUnarchived(String name) {
+    return 'عادت «$name» من الأرشيف';
+  }
+
+  @override
+  String cmodToastDeleted(String name) {
+    return 'حُذفت «$name»';
+  }
+
+  @override
+  String cmodToastDuplicated(String name) {
+    return 'نُسخت «$name»';
+  }
+
+  @override
+  String cmodToastLogged(String name) {
+    return 'سُجّل في «$name»';
+  }
+
+  @override
+  String get cmodToastUnchecked => 'أُلغي تسجيل اليوم';
+
+  @override
+  String get cmodToastEntryDeleted => 'حُذف الإدخال';
+
+  @override
+  String get cmodToastEntryDuplicated => 'نُسخ الإدخال';
+
+  @override
+  String get cmodToastItemDone => 'أُنجز العنصر';
+
+  @override
+  String get cmodToastItemReopened => 'أُعيد فتح العنصر';
+
+  @override
+  String get cmodToastCleared => 'مُسحت العناصر المنجزة';
+
+  @override
+  String cmodToastSaved(String name) {
+    return 'حُفظت «$name»';
+  }
+
+  @override
+  String get cmodToastReminderDeleted => 'حُذف التذكير';
+
+  @override
+  String get cmodToastReminderAdded => 'أُضيف التذكير';
+
+  @override
+  String get cmodQuickDone => 'تمّ اليوم';
+
+  @override
+  String get cmodQuickDoneHint => 'سجّل إنجاز اليوم بلمسة';
+
+  @override
+  String get cmodQuickChecked => 'أُنجز اليوم';
+
+  @override
+  String get cmodQuickCheckedHint => 'المس لإلغاء تسجيل اليوم';
+
+  @override
+  String get cmodQuickAddOne => 'سجّل مرّة';
+
+  @override
+  String get cmodQuickRate => 'قيّم اليوم';
+
+  @override
+  String cmodRateStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نجمة',
+      many: '$count نجمة',
+      few: '$count نجوم',
+      two: 'نجمتان',
+      one: 'نجمة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodBuilderNewTitle => 'وحدة جديدة';
+
+  @override
+  String get cmodBuilderEditTitle => 'تعديل الوحدة';
+
+  @override
+  String get cmodSectionBasics => 'الأساسيات';
+
+  @override
+  String get cmodName => 'الاسم';
+
+  @override
+  String get cmodNameHint => 'مثال: سجلّ القراءة';
+
+  @override
+  String get cmodKind => 'النوع';
+
+  @override
+  String get cmodIcon => 'الأيقونة';
+
+  @override
+  String get cmodColor => 'اللون';
+
+  @override
+  String get cmodPlanet => 'الكوكب';
+
+  @override
+  String get cmodPlanetNone => 'بلا كوكب';
+
+  @override
+  String get cmodPlanetHint =>
+      'كل إدخال يُنعش هذا الكوكب في المدار، ويدور حوله قمرًا';
+
+  @override
+  String get cmodWindow => 'وقت الصلاة';
+
+  @override
+  String get cmodWindowHint => 'متى تتوقّع أن تسجّل عادةً';
+
+  @override
+  String get cmodSectionFields => 'الحقول';
+
+  @override
+  String get cmodAddField => 'أضف حقلًا';
+
+  @override
+  String get cmodFieldsEmptyTracker =>
+      'بلا حقول يصبح المتتبّع عدّادًا بلمسة واحدة';
+
+  @override
+  String get cmodFieldsEmptyList => 'أضف حقلًا واحدًا على الأقل، كاسم العنصر';
+
+  @override
+  String get cmodHiddenFields => 'حقول مخفية';
+
+  @override
+  String get cmodHiddenFieldsHint =>
+      'أُزيلت من النموذج، وبياناتها القديمة محفوظة';
+
+  @override
+  String get cmodRestoreField => 'إظهار';
+
+  @override
+  String get cmodSectionChart => 'الرسم البياني';
+
+  @override
+  String get cmodChartField => 'ما يُرسم';
+
+  @override
+  String get cmodChartEntries => 'عدد الإدخالات';
+
+  @override
+  String get cmodChartStyle => 'الشكل';
+
+  @override
+  String get cmodChartRange => 'المدة';
+
+  @override
+  String get cmodChartLine => 'خط';
+
+  @override
+  String get cmodChartBar => 'أعمدة';
+
+  @override
+  String get cmodChartHeat => 'تقويم';
+
+  @override
+  String get cmodChartStreak => 'سلسلة';
+
+  @override
+  String get cmodChartEmpty => 'لا بيانات في هذه المدة بعد';
+
+  @override
+  String cmodRangeDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodSave => 'حفظ';
+
+  @override
+  String get cmodCreate => 'إنشاء';
+
+  @override
+  String get cmodCancel => 'إلغاء';
+
+  @override
+  String get cmodDiscardTitle => 'تجاهل التغييرات؟';
+
+  @override
+  String get cmodDiscardBody => 'لم تُحفظ تعديلاتك على هذه الوحدة.';
+
+  @override
+  String get cmodDiscard => 'تجاهل';
+
+  @override
+  String get cmodKeepEditing => 'متابعة التعديل';
+
+  @override
+  String get cmodPreviewUntitled => 'وحدة بلا اسم';
+
+  @override
+  String get cmodIssueNameMissing => 'اكتب اسمًا للوحدة';
+
+  @override
+  String get cmodIssueNameTooLong => 'الاسم طويل جدًا';
+
+  @override
+  String get cmodIssueNoFields => 'أضف حقلًا واحدًا على الأقل';
+
+  @override
+  String cmodIssueTooManyFields(String max) {
+    return 'الحد الأقصى $max حقلًا';
+  }
+
+  @override
+  String get cmodIssueLabelMissing => 'حقل بلا اسم';
+
+  @override
+  String get cmodIssueLabelDuplicate => 'اسم الحقل مكرّر';
+
+  @override
+  String get cmodIssueNoOptions => 'أضف خيارًا واحدًا على الأقل';
+
+  @override
+  String get cmodIssueOptionLabelMissing => 'خيار بلا اسم';
+
+  @override
+  String get cmodIssueOptionDuplicate => 'خيار مكرّر';
+
+  @override
+  String get cmodIssueRangeInverted => 'الحد الأدنى أكبر من الأعلى';
+
+  @override
+  String get cmodIssueCurrencyCode => 'رمز العملة غير صالح';
+
+  @override
+  String get cmodMigrationTitle => 'قبل الحفظ';
+
+  @override
+  String get cmodMigrationBlockedTitle => 'هذا التغيير سيضيّع بيانات';
+
+  @override
+  String get cmodMigrationBlockedBody =>
+      'لم يُحفظ شيء. أعد النوع كما كان، أو أضف حقلًا جديدًا بالنوع الذي تريده.';
+
+  @override
+  String get cmodMigrationOk => 'حسنًا';
+
+  @override
+  String cmodMigTypeBlocked(String field, String entries, String type) {
+    return '«$field»: $entries لا تصلح بنوع «$type»';
+  }
+
+  @override
+  String cmodMigRatingBlocked(String field, String entries) {
+    return '«$field»: $entries فيها نجوم أكثر من المقياس الجديد';
+  }
+
+  @override
+  String cmodMigFieldHidden(String field, String entries) {
+    return '«$field» سيُخفى، وتبقى قيمه في $entries';
+  }
+
+  @override
+  String cmodMigOptionHidden(String field) {
+    return 'الخيارات المحذوفة من «$field» والمستخدمة ستُخفى ولن تُحذف';
+  }
+
+  @override
+  String cmodMigConverted(String field, String entries, String type) {
+    return 'قيم «$field» في $entries ستتحوّل إلى «$type»';
+  }
+
+  @override
+  String cmodMigOutOfRange(String field, String entries) {
+    return '$entries في «$field» خارج الحدود الجديدة وستبقى كما هي';
+  }
+
+  @override
+  String cmodMigNewlyRequired(String field, String entries) {
+    return '$entries بلا قيمة لـ«$field» الذي صار مطلوبًا';
+  }
+
+  @override
+  String get cmodTypeText => 'نص';
+
+  @override
+  String get cmodTypeNumber => 'رقم';
+
+  @override
+  String get cmodTypeDate => 'تاريخ';
+
+  @override
+  String get cmodTypeTime => 'وقت';
+
+  @override
+  String get cmodTypeCheckbox => 'خانة إنجاز';
+
+  @override
+  String get cmodTypeSingle => 'اختيار واحد';
+
+  @override
+  String get cmodTypeMulti => 'اختيارات متعددة';
+
+  @override
+  String get cmodTypeRating => 'تقييم بالنجوم';
+
+  @override
+  String get cmodTypeCurrency => 'مبلغ';
+
+  @override
+  String get cmodTypeTextHint => 'ملاحظة، عنوان كتاب…';
+
+  @override
+  String get cmodTypeNumberHint => 'صفحات، دقائق، مرّات…';
+
+  @override
+  String get cmodTypeDateHint => 'موعد أو مناسبة';
+
+  @override
+  String get cmodTypeTimeHint => 'وقت النوم، وقت البدء…';
+
+  @override
+  String get cmodTypeCheckboxHint => 'تمّ أو لم يتمّ';
+
+  @override
+  String get cmodTypeSingleHint => 'خيار واحد من قائمتك';
+
+  @override
+  String get cmodTypeMultiHint => 'عدّة خيارات من قائمتك';
+
+  @override
+  String get cmodTypeRatingHint => 'من نجمتين إلى عشر';
+
+  @override
+  String get cmodTypeCurrencyHint => 'مبلغ بعملة تختارها';
+
+  @override
+  String get cmodPickType => 'نوع الحقل';
+
+  @override
+  String get cmodFieldNew => 'حقل جديد';
+
+  @override
+  String get cmodFieldEdit => 'تعديل الحقل';
+
+  @override
+  String get cmodFieldLabel => 'اسم الحقل';
+
+  @override
+  String get cmodFieldLabelHint => 'مثال: الصفحات';
+
+  @override
+  String get cmodFieldRequired => 'مطلوب';
+
+  @override
+  String get cmodFieldRequiredHint => 'لا يُحفظ الإدخال دونه';
+
+  @override
+  String get cmodFieldUnit => 'الوحدة';
+
+  @override
+  String get cmodFieldUnitHint => 'صفحة، دقيقة، كغ…';
+
+  @override
+  String get cmodFieldMin => 'الحد الأدنى';
+
+  @override
+  String get cmodFieldMax => 'الحد الأعلى';
+
+  @override
+  String get cmodFieldNoLimit => 'بلا حد';
+
+  @override
+  String get cmodFieldDecimals => 'الخانات العشرية';
+
+  @override
+  String get cmodFieldScale => 'المقياس';
+
+  @override
+  String get cmodFieldCurrency => 'العملة';
+
+  @override
+  String get cmodFieldOptions => 'الخيارات';
+
+  @override
+  String get cmodAddOption => 'أضف خيارًا';
+
+  @override
+  String get cmodOptionHint => 'اسم الخيار';
+
+  @override
+  String get cmodRemoveOption => 'احذف الخيار';
+
+  @override
+  String get cmodFieldMultiline => 'نص طويل';
+
+  @override
+  String get cmodFieldMultilineHint => 'يتّسع لعدّة أسطر';
+
+  @override
+  String get cmodFieldDelete => 'احذف الحقل';
+
+  @override
+  String cmodFieldCopyLabel(String label) {
+    return '$label (نسخة)';
+  }
+
+  @override
+  String get cmodFieldTypeNote =>
+      'إن غيّرت النوع تتحوّل القيم القديمة حين يمكن ذلك، وإلا لا يُحفظ التغيير.';
+
+  @override
+  String cmodFieldOptionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count خيار',
+      many: '$count خيارًا',
+      few: '$count خيارات',
+      two: 'خياران',
+      one: 'خيار واحد',
+      zero: 'بلا خيارات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodFieldRange(String min, String max) {
+    return '$min – $max';
+  }
+
+  @override
+  String cmodFieldAtLeast(String min) {
+    return 'من $min';
+  }
+
+  @override
+  String cmodFieldAtMost(String max) {
+    return 'حتى $max';
+  }
+
+  @override
+  String cmodFieldDeleted(String name) {
+    return 'حُذف «$name» من النموذج';
+  }
+
+  @override
+  String get cmodFieldDuplicated => 'نُسخ الحقل';
+
+  @override
+  String get cmodGalleryTitle => 'ابدأ وحدة';
+
+  @override
+  String get cmodGallerySubtitle => 'من الصفر أو من قالب، وكل شيء قابل للتعديل';
+
+  @override
+  String get cmodBlankTracker => 'متتبّع فارغ';
+
+  @override
+  String get cmodBlankList => 'قائمة فارغة';
+
+  @override
+  String get cmodTemplatesHeader => 'قوالب للبدء';
+
+  @override
+  String get cmodTplReadingLog => 'سجلّ القراءة';
+
+  @override
+  String get cmodTplReadingLogDesc => 'الكتاب والصفحات وتقييمك';
+
+  @override
+  String get cmodTplDhikr => 'أذكار بعد الصلاة';
+
+  @override
+  String get cmodTplDhikrDesc => 'كم مرّة ذكرت الله، وبعد أي صلاة';
+
+  @override
+  String get cmodTplHabit => 'عادة يومية';
+
+  @override
+  String get cmodTplHabitDesc => 'لمسة واحدة كل يوم، وسلسلة تكبر';
+
+  @override
+  String get cmodTplHabitList => 'قائمة عادات';
+
+  @override
+  String get cmodTplHabitListDesc => 'عادات تريد بناءها وكم تتكرّر';
+
+  @override
+  String get cmodTplSleep => 'سجلّ النوم';
+
+  @override
+  String get cmodTplSleepDesc => 'النوم والاستيقاظ والساعات والجودة';
+
+  @override
+  String get cmodTplGifts => 'أفكار هدايا';
+
+  @override
+  String get cmodTplGiftsDesc => 'الفكرة ولمن والميزانية والمناسبة';
+
+  @override
+  String get cmodTplBook => 'الكتاب';
+
+  @override
+  String get cmodTplPages => 'الصفحات';
+
+  @override
+  String get cmodTplRating => 'التقييم';
+
+  @override
+  String get cmodTplUnitPages => 'صفحة';
+
+  @override
+  String get cmodTplAfterPrayer => 'بعد صلاة';
+
+  @override
+  String get cmodTplCount => 'العدد';
+
+  @override
+  String get cmodTplUnitTimes => 'مرّة';
+
+  @override
+  String get cmodTplDone => 'تمّ';
+
+  @override
+  String get cmodTplNote => 'ملاحظة';
+
+  @override
+  String get cmodTplHabitItem => 'العادة';
+
+  @override
+  String get cmodTplFrequency => 'التكرار';
+
+  @override
+  String get cmodTplDaily => 'يوميًا';
+
+  @override
+  String get cmodTplWeekly => 'أسبوعيًا';
+
+  @override
+  String get cmodTplMonthly => 'شهريًا';
+
+  @override
+  String get cmodTplBedtime => 'وقت النوم';
+
+  @override
+  String get cmodTplWake => 'وقت الاستيقاظ';
+
+  @override
+  String get cmodTplHours => 'ساعات النوم';
+
+  @override
+  String get cmodTplUnitHours => 'ساعة';
+
+  @override
+  String get cmodTplQuality => 'الجودة';
+
+  @override
+  String get cmodTplIdea => 'الفكرة';
+
+  @override
+  String get cmodTplFor => 'لمن';
+
+  @override
+  String get cmodTplBudget => 'الميزانية';
+
+  @override
+  String get cmodTplOccasion => 'المناسبة';
+
+  @override
+  String get cmodTplNotes => 'ملاحظات';
+
+  @override
+  String get cmodAddEntry => 'إدخال جديد';
+
+  @override
+  String get cmodAddItem => 'عنصر جديد';
+
+  @override
+  String get cmodEntriesSection => 'الإدخالات';
+
+  @override
+  String get cmodItemsSection => 'العناصر';
+
+  @override
+  String get cmodDoneSection => 'المنجزة';
+
+  @override
+  String get cmodClearDone => 'امسح المنجزة';
+
+  @override
+  String get cmodToday => 'اليوم';
+
+  @override
+  String get cmodYesterday => 'أمس';
+
+  @override
+  String get cmodEntriesEmpty => 'لا إدخالات بعد. أول إدخال يبدأ الحكاية.';
+
+  @override
+  String get cmodItemsEmpty => 'القائمة فارغة. أضف أول عنصر.';
+
+  @override
+  String get cmodAllDone => 'أنجزت كل شيء، ما شاء الله';
+
+  @override
+  String get cmodStatStreak => 'السلسلة';
+
+  @override
+  String get cmodStatBest => 'الأفضل';
+
+  @override
+  String get cmodStatTotal => 'المجموع';
+
+  @override
+  String get cmodStatAverage => 'المتوسط';
+
+  @override
+  String get cmodStatActive => 'أيام نشطة';
+
+  @override
+  String get cmodStatEntries => 'الإدخالات';
+
+  @override
+  String get cmodStatRate => 'نسبة الإنجاز';
+
+  @override
+  String cmodDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم',
+      zero: '٠ يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodReminders => 'التذكيرات';
+
+  @override
+  String get cmodAddReminder => 'أضف تذكيرًا';
+
+  @override
+  String get cmodRemindersEmpty => 'ذكّرني بعد صلاة أو في وقت أحدّده';
+
+  @override
+  String get cmodReminderPaused => 'متوقّف';
+
+  @override
+  String get cmodReminderToggle => 'تشغيل التذكير';
+
+  @override
+  String get cmodModuleMenu => 'خيارات الوحدة';
+
+  @override
+  String cmodHiddenValue(String label) {
+    return '$label (مخفي)';
+  }
+
+  @override
+  String get cmodNotifyGroup => 'المتتبّعات والقوائم';
+
+  @override
+  String get cmodNotifyChannel => 'تذكيرات المتتبّعات والقوائم';
+
+  @override
+  String get cmodNotifyChannelDescription =>
+      'تذكيرات لطيفة لتسجيل متتبّعاتك ومراجعة قوائمك';
+
+  @override
+  String get cmodNotifyBodyTracker => 'حان وقت التسجيل';
+
+  @override
+  String get cmodNotifyBodyList => 'ألقِ نظرة على قائمتك';
+
+  @override
+  String get cmodEntryNew => 'إدخال جديد';
+
+  @override
+  String get cmodEntryEdit => 'تعديل الإدخال';
+
+  @override
+  String get cmodItemNew => 'عنصر جديد';
+
+  @override
+  String get cmodItemEdit => 'تعديل العنصر';
+
+  @override
+  String get cmodEntryWhen => 'متى';
+
+  @override
+  String get cmodEntryDone => 'منجز';
+
+  @override
+  String get cmodEntryCounter => 'هذه الوحدة عدّاد: الحفظ يسجّل مرّة واحدة.';
+
+  @override
+  String get cmodErrRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get cmodErrNumber => 'اكتب رقمًا';
+
+  @override
+  String get cmodErrWhole => 'رقم صحيح فقط';
+
+  @override
+  String cmodErrPrecise(String count) {
+    return '$count خانات عشرية على الأكثر';
+  }
+
+  @override
+  String cmodErrMin(String value) {
+    return 'لا يقلّ عن $value';
+  }
+
+  @override
+  String cmodErrMax(String value) {
+    return 'لا يزيد على $value';
+  }
+
+  @override
+  String get cmodErrDate => 'تاريخ غير صالح';
+
+  @override
+  String get cmodErrTime => 'وقت غير صالح';
+
+  @override
+  String get cmodErrOption => 'اختر من القائمة';
+
+  @override
+  String get cmodErrScale => 'خارج المقياس';
+
+  @override
+  String get cmodErrTooLong => 'النص طويل جدًا';
+
+  @override
+  String get cmodPickDate => 'اختر تاريخًا';
+
+  @override
+  String get cmodPickTime => 'اختر وقتًا';
+
+  @override
+  String get cmodClear => 'مسح';
+
+  @override
+  String get cmodYes => 'نعم';
+
+  @override
+  String get cmodNo => 'لا';
+
+  @override
+  String get cmodChecked => 'تمّ';
+
+  @override
+  String get cmodUnchecked => 'لم يتمّ';
+
+  @override
+  String get cmodCardTitle => 'متتبّعاتك هنا';
+
+  @override
+  String get cmodCardSeeAll => 'عرض الكل';
+
+  @override
+  String get cmodCardEmpty => 'أنشئ متتبّعًا لهذا الكوكب';
+
+  @override
+  String get cmodCardEmptyHint => 'عدّاد، أو سجلّ، أو قائمة: بحقولك أنت';
+
+  @override
+  String get cmodExportDate => 'التاريخ';
+
+  @override
+  String get cmodExportTime => 'الوقت';
+
+  @override
+  String get cmodExportDone => 'منجز';
+
+  @override
+  String get cmodExportEntries => 'الإدخالات';
+
+  @override
+  String get cmodExportLastEntry => 'آخر إدخال';
+
+  @override
+  String get cmodExportOpen => 'متبقٍّ';
+
+  @override
+  String cmodExportLastDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر $count يوم',
+      many: 'آخر $count يومًا',
+      few: 'آخر $count أيام',
+      two: 'آخر يومين',
+      one: 'آخر يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportActiveDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم نشط',
+      many: '$count يومًا نشطًا',
+      few: '$count أيام نشطة',
+      two: 'يومان نشطان',
+      one: 'يوم نشط واحد',
+      zero: 'لا أيام نشطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportTotal(String value) {
+    return 'المجموع $value';
+  }
+
+  @override
+  String cmodExportAverage(String value) {
+    return 'المتوسط $value';
+  }
+
+  @override
+  String cmodExportStreak(String current, String best) {
+    return 'السلسلة $current (الأفضل $best)';
+  }
+
+  @override
+  String get cmodExportHidden => 'مخفي';
+
+  @override
+  String get cinemaTitle => 'سينما مدار';
+
+  @override
+  String get cinemaHallSubtitle => 'ألعاب أصلية بروح السينما الكلاسيكية';
+
+  @override
+  String get cinemaFeatures => 'الأفلام الطويلة';
+
+  @override
+  String get cinemaShorts => 'الأفلام القصيرة';
+
+  @override
+  String get cinemaComingSoon => 'قريبًا';
+
+  @override
+  String get cinemaPlay => 'إلى العرض';
+
+  @override
+  String get cinemaGameViewLabel => 'شاشة اللعبة';
+
+  @override
+  String get cinemaPause => 'إيقاف مؤقت';
+
+  @override
+  String get cinemaIntermission => 'استراحة';
+
+  @override
+  String get cinemaResume => 'متابعة العرض';
+
+  @override
+  String get cinemaRestart => 'من البداية';
+
+  @override
+  String get cinemaLeave => 'مغادرة القاعة';
+
+  @override
+  String get cinemaPlayAgain => 'عرض آخر';
+
+  @override
+  String get cinemaTheEnd => 'النهاية';
+
+  @override
+  String get cinemaGameOver => 'انتهى العرض';
+
+  @override
+  String cinemaScoreLine(String score) {
+    return 'النتيجة: $score';
+  }
+
+  @override
+  String cinemaBestLine(String score) {
+    return 'أفضل نتيجة: $score';
+  }
+
+  @override
+  String get cinemaEraSilent => 'العشرينيات الصامتة';
+
+  @override
+  String get cinemaEraRubberHose => 'كرتون الثلاثينيات';
+
+  @override
+  String get cinemaEraNoir => 'نوار الأربعينيات';
+
+  @override
+  String get cinemaEraTechnicolor => 'ألوان الخمسينيات';
+
+  @override
+  String get cinemaEraGrindhouse => 'سينما السبعينيات';
+
+  @override
+  String get cinemaEraVhs => 'فيديو الثمانينيات';
+
+  @override
+  String get cinemaDemoTitle => 'بروفة';
+
+  @override
+  String get cinemaDemoTagline => 'مشهد تجريبي لمحرّك بكرة الفيلم';
+
+  @override
+  String get cinemaDemoOpening => 'المشهد الأول';
+
+  @override
+  String get cinemaDemoOpeningSubtitle => 'المس الشاشة لتقفز فوق البراميل!';
+
+  @override
+  String get cinemaFlappyOrbitTitle => 'رفرفة المدار';
+
+  @override
+  String get cinemaFlappyOrbitTagline => 'رفرف بين الكواكب على أنغام السوينغ';
+
+  @override
+  String get cinemaFlappyOrbitHomage =>
+      'تحية لرسوم الخرطوم المطاطي في الثلاثينيات';
+
+  @override
+  String get cinemaMetropolisTitle => 'آلة المتروبوليس';
+
+  @override
+  String get cinemaMetropolisTagline => 'واجه الآلات العملاقة واحدة تلو الأخرى';
+
+  @override
+  String get cinemaMetropolisHomage => 'تحية لفيلم «متروبوليس» الصامت (1927)';
+
+  @override
+  String get cinemaCaravanTitle => 'سباق القافلة';
+
+  @override
+  String get cinemaCaravanTagline => 'اعبر الكثبان بألوان التكنيكولور';
+
+  @override
+  String get cinemaCaravanHomage => 'تحية لملاحم الصحراء في الخمسينيات';
+
+  @override
+  String get cinemaNoirTitle => 'أسطح النوار';
+
+  @override
+  String get cinemaNoirTagline => 'طارد الظلال فوق أسطح المدينة الممطرة';
+
+  @override
+  String get cinemaNoirHomage => 'تحية لأفلام النوار في الأربعينيات';
+
+  @override
+  String get cinemaNeonSoukTitle => 'متسابق سوق النيون';
+
+  @override
+  String get cinemaNeonSoukTagline => 'انطلق عبر سوق من أضواء النيون';
+
+  @override
+  String get cinemaNeonSoukHomage =>
+      'تحية لأفلام الخيال العلمي على أشرطة الفيديو';
+
+  @override
+  String get cinemaSavedGames => 'ألعابي المحفوظة';
+
+  @override
+  String get cinemaSavedGamesEmpty =>
+      'أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.';
+
+  @override
+  String get cinemaSavedGamesNote =>
+      'تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.';
+
+  @override
+  String get cinemaAddGame => 'إضافة لعبة';
+
+  @override
+  String get cinemaGameName => 'اسم اللعبة';
+
+  @override
+  String get cinemaGameUrl => 'رابط اللعبة';
+
+  @override
+  String get cinemaInvalidUrl => 'أدخل رابطًا صحيحًا يبدأ بـ https://';
+
+  @override
+  String get cinemaRemoveGame => 'إزالة';
+
+  @override
+  String get cinemaOpenGameFailed => 'تعذّر فتح الرابط';
+
+  @override
+  String get cinemaSave => 'حفظ';
+
+  @override
+  String get cinemaCancel => 'إلغاء';
 }

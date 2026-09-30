@@ -1,0 +1,86 @@
+OK   filter words are plain Arabic letters
+INFO filter: 38 LDNOOBW words (10 allowed as common words: ['بيضان', 'تمص', 'جماع', 'شهوة', 'فرج', 'لبوة', 'لحس', 'لعق', 'مبادل', 'مص']), 42 Madar additions, 59 sensitive
+OK   every curated word is plain Arabic letters
+OK   no curated word is blocked ([])
+INFO 2 curated words not in the Wikipedia list (ranked last): ['سمبوسة', 'طواويس']
+INFO lexicon: 86117 entries by length [(3, 4360), (4, 14082), (5, 21063), (6, 20741), (7, 16203), (8, 9668)]; 1815 with a curated vowelled form
+OK   lexicon has no duplicate entries
+INFO word guess answers, 4 letters: 570
+INFO word guess answers, 5 letters: 471
+INFO word guess answers, 6 letters: 215
+OK   at least a year of distinct 5-letter daily answers
+OK   at least 150 answers for 4 and 6 letters
+OK   every answer is in the lexicon (valid guess)
+OK   theme fruits has >= 8 words (25)
+OK   theme fruits has no filtered word
+OK   theme vegetables has >= 8 words (24)
+OK   theme vegetables has no filtered word
+OK   theme animals has >= 8 words (27)
+OK   theme animals has no filtered word
+OK   theme birds has >= 8 words (25)
+OK   theme birds has no filtered word
+OK   theme sea has >= 8 words (20)
+OK   theme sea has no filtered word
+OK   theme colours has >= 8 words (20)
+OK   theme colours has no filtered word
+OK   theme arab_capitals has >= 8 words (22)
+OK   theme arab_capitals has no filtered word
+OK   theme cities has >= 8 words (29)
+OK   theme cities has no filtered word
+OK   theme prophets has >= 8 words (24)
+OK   theme prophets has no filtered word
+OK   theme countries has >= 8 words (36)
+OK   theme countries has no filtered word
+OK   theme body has >= 8 words (27)
+OK   theme body has no filtered word
+OK   theme jobs has >= 8 words (28)
+OK   theme jobs has no filtered word
+OK   theme school has >= 8 words (24)
+OK   theme school has no filtered word
+OK   theme home has >= 8 words (24)
+OK   theme home has no filtered word
+OK   theme kitchen has >= 8 words (20)
+OK   theme kitchen has no filtered word
+OK   theme space has >= 8 words (27)
+OK   theme space has no filtered word
+OK   theme weather has >= 8 words (20)
+OK   theme weather has no filtered word
+OK   theme sports has >= 8 words (24)
+OK   theme sports has no filtered word
+OK   theme clothes has >= 8 words (24)
+OK   theme clothes has no filtered word
+OK   theme transport has >= 8 words (18)
+OK   theme transport has no filtered word
+OK   theme arab_food has >= 8 words (24)
+OK   theme arab_food has no filtered word
+OK   theme hijri_months has >= 8 words (8)
+OK   theme hijri_months has no filtered word
+OK   theme surahs has >= 8 words (84)
+OK   theme surahs has no filtered word
+OK   theme virtues has >= 8 words (24)
+OK   theme virtues has no filtered word
+OK   theme nature has >= 8 words (25)
+OK   theme nature has no filtered word
+OK   theme shapes has >= 8 words (16)
+OK   theme shapes has no filtered word
+OK   theme numbers has >= 8 words (18)
+OK   theme numbers has no filtered word
+OK   theme tools has >= 8 words (20)
+OK   theme tools has no filtered word
+OK   theme family has >= 8 words (20)
+OK   theme family has no filtered word
+INFO themes: 29, words: 727
+WROTE arabic_lexicon.txt: 1095568 bytes, sha256 e5de02bc5a36e3a6cf6cd72dfb081c714dc549ddeab73a3fad9d1844028f0cff
+WROTE arabic_word_filter.json: 2451 bytes, sha256 f84d4dd06cfaa8dc67c1cfa013b39d8a3420ab8e1bcb6b385c5bcad63c6ca842
+WROTE word_guess_answers.json: 41610 bytes, sha256 acaffa371aaa0cab6a42c2ac9f676b320a9f476cc97bfd8c1a7e5784d0982c74
+WROTE word_search_themes.json: 25517 bytes, sha256 0450258b84382f7c283fb594d66290118971f5c95fc4b84bb6bc15b1d1f8d466
+FAIL quiz #18 (بأي لغة أُنزل القرآن الكريم؟): Quran (12, 2) lacks key "انا انزلنه قرانا عربيا" (ayah: اناانزلنهقرناعربيالعلكمتعقلون)
+INFO ayat naming {'موسي': 132, 'ابرهيم': 51, 'نوح': 55, 'عيسي': 25}
+FAIL quiz #96 (في أي سورة ورد ذكر «مكة» بهذا الاسم؟): meta fact {'t': 'meta', 'k': 'ayat_containing', 'key': 'مكه', 'v': 1} does not hold
+FAIL quiz #124 (من الذي شارك إبراهيم في رفع قواعد البيت؟): Quran (2, 127) lacks key "واذ يرفع ابرهيم القواعد من البيت واسمعيل" (ayah: واذيرفعابرهمالقواعدمنالبيتواسمعيلربناتقبلمناانكانتالسميعالعليم)
+FAIL quiz #169 (كيف كان صيام داود عليه السلام الذي وُصف ): bukhari 1131 lacks key "كان يصوم يوما ويفطر يوما"
+FAIL every quiz question passed structure and citation checks (4 failed)
+FAIL at least 300 quiz questions (201)
+INFO quiz by category {'quran': 103, 'prophets': 98}, by level {1: 79, 2: 101, 3: 21}, citations {'meta': 42, 'quran': 182, 'hadith': 12}
+WROTE islamic_quiz.json: 111436 bytes, sha256 8277c3a765d11eac24c169ca8a35487e14a82e6abc1a1bd9c34501deacedfe06
+RESULT FAIL (6 failed checks)

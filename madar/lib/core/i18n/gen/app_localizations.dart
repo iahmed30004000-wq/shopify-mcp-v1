@@ -20373,6 +20373,306 @@ abstract class L10n {
   /// **'بلا محفظة: تبقى أرصدة المحافظ كما هي.'**
   String get goalsDebtNoWalletHint;
 
+  /// Money page: title of the net worth card (wallets + jars + owed to you − you owe, in the base currency)
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي ثروتك'**
+  String get moneyHubNetWorthTitle;
+
+  /// Money page: the base currency the net worth is shown in
+  ///
+  /// In ar, this message translates to:
+  /// **'بعملة {code}'**
+  String moneyHubNetWorthIn(String code);
+
+  /// Money page: net worth card on a fresh install
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف محفظتك الأولى ليظهر هنا صافي ثروتك بعملتك الأساسية.'**
+  String get moneyHubNetWorthEmpty;
+
+  /// Money page: part of the net worth – the wallets' balances
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ'**
+  String get moneyHubPartWallets;
+
+  /// Money page: part of the net worth – money in savings jars
+  ///
+  /// In ar, this message translates to:
+  /// **'الحصّالات'**
+  String get moneyHubPartJars;
+
+  /// Money page: part of the net worth – open debts owed to the user
+  ///
+  /// In ar, this message translates to:
+  /// **'لك عند الناس'**
+  String get moneyHubPartOwedToMe;
+
+  /// Money page: part of the net worth – open debts the user owes (subtracted)
+  ///
+  /// In ar, this message translates to:
+  /// **'عليك'**
+  String get moneyHubPartIOwe;
+
+  /// Money page: screen-reader summary of the net worth card
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي ثروتك {total}: المحافظ {wallets}، الحصّالات {jars}، لك {owed}، عليك {owe}'**
+  String moneyHubNetWorthSemantics(
+    String total,
+    String wallets,
+    String jars,
+    String owed,
+    String owe,
+  );
+
+  /// Money page: button on the net worth card opening currencies and rates
+  ///
+  /// In ar, this message translates to:
+  /// **'العملات'**
+  String get moneyHubRatesAction;
+
+  /// Money page: title of the quick add row (expense, income, transfer)
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل حركة'**
+  String get moneyHubQuickTitle;
+
+  /// Money page: screen-reader label of the quick expense button
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل مصروفًا'**
+  String get moneyHubAddExpenseHint;
+
+  /// Money page: screen-reader label of the quick income button
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل دخلًا'**
+  String get moneyHubAddIncomeHint;
+
+  /// Money page: screen-reader label of the quick transfer button
+  ///
+  /// In ar, this message translates to:
+  /// **'حوّل بين محفظتين'**
+  String get moneyHubAddTransferHint;
+
+  /// Money page: section of the wallets summary
+  ///
+  /// In ar, this message translates to:
+  /// **'محافظك'**
+  String get moneyHubWalletsTitle;
+
+  /// Money page: section action opening the ledger
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفتر'**
+  String get moneyHubLedgerAction;
+
+  /// Money page: section of the budget status (plan vs spent, warnings)
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة هذا الشهر'**
+  String get moneyHubPlanTitle;
+
+  /// Money page: section action opening the budget
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية'**
+  String get moneyHubBudgetAction;
+
+  /// Money page: section of upcoming dues (bills, debts) and savings jars
+  ///
+  /// In ar, this message translates to:
+  /// **'المستحقات والادّخار'**
+  String get moneyHubDuesTitle;
+
+  /// Money page: section action opening savings, debts and bills
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get moneyHubGoalsAction;
+
+  /// Money page: section of links to the money screens
+  ///
+  /// In ar, this message translates to:
+  /// **'أدوات المال'**
+  String get moneyHubToolsTitle;
+
+  /// Money tool: the ledger (wallets, balances, recent entries)
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفتر'**
+  String get moneyHubToolLedger;
+
+  /// Money tool hint (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ وأرصدتها وآخر الحركات'**
+  String get moneyHubToolLedgerHint;
+
+  /// Money tool: every transaction
+  ///
+  /// In ar, this message translates to:
+  /// **'الحركات'**
+  String get moneyHubToolTransactions;
+
+  /// Money tool hint (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الحركات مع البحث والتصفية'**
+  String get moneyHubToolTransactionsHint;
+
+  /// Money tool: the nested budget
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية'**
+  String get moneyHubToolBudget;
+
+  /// Money tool hint (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة المتداخلة والإنفاق مقابلها'**
+  String get moneyHubToolBudgetHint;
+
+  /// Money tool: savings jars
+  ///
+  /// In ar, this message translates to:
+  /// **'الحصّالات'**
+  String get moneyHubToolJars;
+
+  /// Money tool hint (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الأهداف والمواعيد والإيداعات'**
+  String get moneyHubToolJarsHint;
+
+  /// Money tool: debts (I owe / owed to me)
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get moneyHubToolDebts;
+
+  /// Money tool hint (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عليك وما لك، ومواعيد السداد'**
+  String get moneyHubToolDebtsHint;
+
+  /// Money tool: recurring obligations
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات'**
+  String get moneyHubToolBills;
+
+  /// Money tool hint (screen readers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات المتكررة؛ «دُفع» ينقل الموعد التالي'**
+  String get moneyHubToolBillsHint;
+
+  /// Wallet moon sheet: button opening the wallet's screen
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح المحفظة'**
+  String get moneyHubMoonOpenWallet;
+
+  /// Settings: section of the money preferences
+  ///
+  /// In ar, this message translates to:
+  /// **'المال'**
+  String get moneyHubSettingsSection;
+
+  /// Settings: subtitle of the money section
+  ///
+  /// In ar, this message translates to:
+  /// **'العملات وأسابيع الشهر وبداية الأسبوع وتذكير المستحقات'**
+  String get moneyHubSettingsSectionHint;
+
+  /// Settings › Money: entry opening the currencies and manual exchange rates
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة الأساسية والأسعار'**
+  String get moneyHubSettingsCurrencies;
+
+  /// Settings › Money: how many currencies are set up
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{عملة واحدة} =2{عملتان} few{{n} عملات} many{{n} عملة} other{{n} عملة}}'**
+  String moneyHubSettingsCurrencyCount(int count, String n);
+
+  /// Settings › Money: weeks per month (weekly ↔ monthly budget conversion)
+  ///
+  /// In ar, this message translates to:
+  /// **'أسابيع الشهر'**
+  String get moneyHubSettingsWeeks;
+
+  /// Settings › Money: the weeks-per-month value
+  ///
+  /// In ar, this message translates to:
+  /// **'{weeks} · للتحويل بين الأسبوعي والشهري'**
+  String moneyHubSettingsWeeksSummary(String weeks);
+
+  /// Settings › Money: first day of the week in weekly budgets and reports
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية الأسبوع'**
+  String get moneyHubSettingsWeekStart;
+
+  /// Settings › Money: hint under the week start choice
+  ///
+  /// In ar, this message translates to:
+  /// **'للبنود الأسبوعية في الميزانية وتقارير الأسبوع في الدفتر'**
+  String get moneyHubSettingsWeekStartHint;
+
+  /// Week start choice
+  ///
+  /// In ar, this message translates to:
+  /// **'السبت'**
+  String get moneyHubWeekSaturday;
+
+  /// Week start choice
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحد'**
+  String get moneyHubWeekSunday;
+
+  /// Week start choice
+  ///
+  /// In ar, this message translates to:
+  /// **'الإثنين'**
+  String get moneyHubWeekMonday;
+
+  /// Settings › Money: entry opening the debt and bill due reminder options
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير المستحقات'**
+  String get moneyHubSettingsReminders;
+
+  /// Settings › Money: due reminders switched off
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف'**
+  String get moneyHubSettingsRemindersOff;
+
+  /// Settings › Money: reminders only on the due day
+  ///
+  /// In ar, this message translates to:
+  /// **'في يوم الاستحقاق'**
+  String get moneyHubSettingsRemindersOnDay;
+
+  /// Settings › Money: an early reminder and one on the due day
+  ///
+  /// In ar, this message translates to:
+  /// **'{lead} وفي يومه'**
+  String moneyHubSettingsRemindersBoth(String lead);
+
+  /// Settings › Money: when the due reminders arrive
+  ///
+  /// In ar, this message translates to:
+  /// **'{when} · الساعة {time}'**
+  String moneyHubSettingsRemindersAt(String when, String time);
+
   /// Work planet screen title
   ///
   /// In ar, this message translates to:
@@ -26138,6 +26438,1950 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'يحتاج إذن الإشعارات على الهاتف.'**
   String get bodyNotifyHint;
+
+  /// Custom modules screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّعات وقوائم'**
+  String get cmodTitle;
+
+  /// No description provided for @cmodNewModule.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة جديدة'**
+  String get cmodNewModule;
+
+  /// No description provided for @cmodModulesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا وحدات بعد} =1{وحدة واحدة} =2{وحدتان} few{{count} وحدات} many{{count} وحدة} other{{count} وحدة}}'**
+  String cmodModulesCount(int count);
+
+  /// No description provided for @cmodLoggedToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لم تسجّل شيئًا اليوم بعد} =1{إدخال واحد اليوم} =2{إدخالان اليوم} few{{count} إدخالات اليوم} many{{count} إدخالًا اليوم} other{{count} إدخال اليوم}}'**
+  String cmodLoggedToday(int count);
+
+  /// No description provided for @cmodEntriesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}'**
+  String cmodEntriesCount(int count);
+
+  /// No description provided for @cmodItemsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}'**
+  String cmodItemsCount(int count);
+
+  /// No description provided for @cmodItemsProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total} منجز'**
+  String cmodItemsProgress(String done, String total);
+
+  /// No description provided for @cmodOpenItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا شيء متبقٍّ} =1{عنصر واحد متبقٍّ} =2{عنصران متبقيان} few{{count} عناصر متبقية} many{{count} عنصرًا متبقيًا} other{{count} عنصر متبقٍّ}}'**
+  String cmodOpenItems(int count);
+
+  /// No description provided for @cmodEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اصنع متتبّعك الأول'**
+  String get cmodEmptyTitle;
+
+  /// No description provided for @cmodEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبّع ما يهمّك بحقولك أنت: سجلّ قراءة، أذكار بعد الصلاة، قائمة عادات… ويظهر كل ذلك في كواكبك.'**
+  String get cmodEmptyBody;
+
+  /// No description provided for @cmodEmptyAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ وحدة'**
+  String get cmodEmptyAction;
+
+  /// No description provided for @cmodArchivedSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'المؤرشفة'**
+  String get cmodArchivedSection;
+
+  /// No description provided for @cmodKindTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّع'**
+  String get cmodKindTracker;
+
+  /// No description provided for @cmodKindList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة'**
+  String get cmodKindList;
+
+  /// No description provided for @cmodKindTrackerHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم تسجّلها مع الأيام، برسوم بيانية'**
+  String get cmodKindTrackerHint;
+
+  /// No description provided for @cmodKindListHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عناصر تشطبها وترتّبها'**
+  String get cmodKindListHint;
+
+  /// No description provided for @cmodLastToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر إدخال اليوم'**
+  String get cmodLastToday;
+
+  /// No description provided for @cmodLastYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر إدخال أمس'**
+  String get cmodLastYesterday;
+
+  /// No description provided for @cmodLastDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آخر إدخال قبل يوم} =2{آخر إدخال قبل يومين} few{آخر إدخال قبل {count} أيام} many{آخر إدخال قبل {count} يومًا} other{آخر إدخال قبل {count} يوم}}'**
+  String cmodLastDaysAgo(int count);
+
+  /// No description provided for @cmodNoEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا إدخالات بعد'**
+  String get cmodNoEntries;
+
+  /// No description provided for @cmodStreakBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'سلسلة {count}'**
+  String cmodStreakBadge(String count);
+
+  /// No description provided for @cmodActionArchive.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرشفة'**
+  String get cmodActionArchive;
+
+  /// No description provided for @cmodActionUnarchive.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة من الأرشيف'**
+  String get cmodActionUnarchive;
+
+  /// No description provided for @cmodActionAddEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال جديد'**
+  String get cmodActionAddEntry;
+
+  /// No description provided for @cmodActionOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح'**
+  String get cmodActionOpen;
+
+  /// No description provided for @cmodActionExport.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة كملف CSV'**
+  String get cmodActionExport;
+
+  /// No description provided for @cmodActionUncheck.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة فتح'**
+  String get cmodActionUncheck;
+
+  /// No description provided for @cmodActionCheck.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنجاز'**
+  String get cmodActionCheck;
+
+  /// No description provided for @cmodToastArchived.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرشفت «{name}»'**
+  String cmodToastArchived(String name);
+
+  /// No description provided for @cmodToastUnarchived.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادت «{name}» من الأرشيف'**
+  String cmodToastUnarchived(String name);
+
+  /// No description provided for @cmodToastDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت «{name}»'**
+  String cmodToastDeleted(String name);
+
+  /// No description provided for @cmodToastDuplicated.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت «{name}»'**
+  String cmodToastDuplicated(String name);
+
+  /// No description provided for @cmodToastLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل في «{name}»'**
+  String cmodToastLogged(String name);
+
+  /// No description provided for @cmodToastUnchecked.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي تسجيل اليوم'**
+  String get cmodToastUnchecked;
+
+  /// No description provided for @cmodToastEntryDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الإدخال'**
+  String get cmodToastEntryDeleted;
+
+  /// No description provided for @cmodToastEntryDuplicated.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ الإدخال'**
+  String get cmodToastEntryDuplicated;
+
+  /// No description provided for @cmodToastItemDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجز العنصر'**
+  String get cmodToastItemDone;
+
+  /// No description provided for @cmodToastItemReopened.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُعيد فتح العنصر'**
+  String get cmodToastItemReopened;
+
+  /// No description provided for @cmodToastCleared.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُسحت العناصر المنجزة'**
+  String get cmodToastCleared;
+
+  /// No description provided for @cmodToastSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت «{name}»'**
+  String cmodToastSaved(String name);
+
+  /// No description provided for @cmodToastReminderDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف التذكير'**
+  String get cmodToastReminderDeleted;
+
+  /// No description provided for @cmodToastReminderAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف التذكير'**
+  String get cmodToastReminderAdded;
+
+  /// No description provided for @cmodQuickDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ اليوم'**
+  String get cmodQuickDone;
+
+  /// No description provided for @cmodQuickDoneHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل إنجاز اليوم بلمسة'**
+  String get cmodQuickDoneHint;
+
+  /// No description provided for @cmodQuickChecked.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنجز اليوم'**
+  String get cmodQuickChecked;
+
+  /// No description provided for @cmodQuickCheckedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المس لإلغاء تسجيل اليوم'**
+  String get cmodQuickCheckedHint;
+
+  /// No description provided for @cmodQuickAddOne.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل مرّة'**
+  String get cmodQuickAddOne;
+
+  /// No description provided for @cmodQuickRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيّم اليوم'**
+  String get cmodQuickRate;
+
+  /// No description provided for @cmodRateStars.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{نجمة واحدة} =2{نجمتان} few{{count} نجوم} many{{count} نجمة} other{{count} نجمة}}'**
+  String cmodRateStars(int count);
+
+  /// No description provided for @cmodBuilderNewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة جديدة'**
+  String get cmodBuilderNewTitle;
+
+  /// No description provided for @cmodBuilderEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الوحدة'**
+  String get cmodBuilderEditTitle;
+
+  /// No description provided for @cmodSectionBasics.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأساسيات'**
+  String get cmodSectionBasics;
+
+  /// No description provided for @cmodName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get cmodName;
+
+  /// No description provided for @cmodNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: سجلّ القراءة'**
+  String get cmodNameHint;
+
+  /// No description provided for @cmodKind.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوع'**
+  String get cmodKind;
+
+  /// No description provided for @cmodIcon.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيقونة'**
+  String get cmodIcon;
+
+  /// No description provided for @cmodColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get cmodColor;
+
+  /// No description provided for @cmodPlanet.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكوكب'**
+  String get cmodPlanet;
+
+  /// No description provided for @cmodPlanetNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا كوكب'**
+  String get cmodPlanetNone;
+
+  /// No description provided for @cmodPlanetHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل إدخال يُنعش هذا الكوكب في المدار، ويدور حوله قمرًا'**
+  String get cmodPlanetHint;
+
+  /// No description provided for @cmodWindow.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الصلاة'**
+  String get cmodWindow;
+
+  /// No description provided for @cmodWindowHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'متى تتوقّع أن تسجّل عادةً'**
+  String get cmodWindowHint;
+
+  /// No description provided for @cmodSectionFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحقول'**
+  String get cmodSectionFields;
+
+  /// No description provided for @cmodAddField.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف حقلًا'**
+  String get cmodAddField;
+
+  /// No description provided for @cmodFieldsEmptyTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا حقول يصبح المتتبّع عدّادًا بلمسة واحدة'**
+  String get cmodFieldsEmptyTracker;
+
+  /// No description provided for @cmodFieldsEmptyList.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف حقلًا واحدًا على الأقل، كاسم العنصر'**
+  String get cmodFieldsEmptyList;
+
+  /// No description provided for @cmodHiddenFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'حقول مخفية'**
+  String get cmodHiddenFields;
+
+  /// No description provided for @cmodHiddenFieldsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيلت من النموذج، وبياناتها القديمة محفوظة'**
+  String get cmodHiddenFieldsHint;
+
+  /// No description provided for @cmodRestoreField.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار'**
+  String get cmodRestoreField;
+
+  /// No description provided for @cmodSectionChart.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرسم البياني'**
+  String get cmodSectionChart;
+
+  /// No description provided for @cmodChartField.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما يُرسم'**
+  String get cmodChartField;
+
+  /// No description provided for @cmodChartEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الإدخالات'**
+  String get cmodChartEntries;
+
+  /// No description provided for @cmodChartStyle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشكل'**
+  String get cmodChartStyle;
+
+  /// No description provided for @cmodChartRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة'**
+  String get cmodChartRange;
+
+  /// No description provided for @cmodChartLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'خط'**
+  String get cmodChartLine;
+
+  /// No description provided for @cmodChartBar.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعمدة'**
+  String get cmodChartBar;
+
+  /// No description provided for @cmodChartHeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقويم'**
+  String get cmodChartHeat;
+
+  /// No description provided for @cmodChartStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'سلسلة'**
+  String get cmodChartStreak;
+
+  /// No description provided for @cmodChartEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات في هذه المدة بعد'**
+  String get cmodChartEmpty;
+
+  /// No description provided for @cmodRangeDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String cmodRangeDays(int count);
+
+  /// No description provided for @cmodSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get cmodSave;
+
+  /// No description provided for @cmodCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء'**
+  String get cmodCreate;
+
+  /// No description provided for @cmodCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get cmodCancel;
+
+  /// No description provided for @cmodDiscardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاهل التغييرات؟'**
+  String get cmodDiscardTitle;
+
+  /// No description provided for @cmodDiscardBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُحفظ تعديلاتك على هذه الوحدة.'**
+  String get cmodDiscardBody;
+
+  /// No description provided for @cmodDiscard.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاهل'**
+  String get cmodDiscard;
+
+  /// No description provided for @cmodKeepEditing.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة التعديل'**
+  String get cmodKeepEditing;
+
+  /// No description provided for @cmodPreviewUntitled.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة بلا اسم'**
+  String get cmodPreviewUntitled;
+
+  /// No description provided for @cmodIssueNameMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا للوحدة'**
+  String get cmodIssueNameMissing;
+
+  /// No description provided for @cmodIssueNameTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم طويل جدًا'**
+  String get cmodIssueNameTooLong;
+
+  /// No description provided for @cmodIssueNoFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف حقلًا واحدًا على الأقل'**
+  String get cmodIssueNoFields;
+
+  /// No description provided for @cmodIssueTooManyFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأقصى {max} حقلًا'**
+  String cmodIssueTooManyFields(String max);
+
+  /// No description provided for @cmodIssueLabelMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'حقل بلا اسم'**
+  String get cmodIssueLabelMissing;
+
+  /// No description provided for @cmodIssueLabelDuplicate.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الحقل مكرّر'**
+  String get cmodIssueLabelDuplicate;
+
+  /// No description provided for @cmodIssueNoOptions.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف خيارًا واحدًا على الأقل'**
+  String get cmodIssueNoOptions;
+
+  /// No description provided for @cmodIssueOptionLabelMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيار بلا اسم'**
+  String get cmodIssueOptionLabelMissing;
+
+  /// No description provided for @cmodIssueOptionDuplicate.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيار مكرّر'**
+  String get cmodIssueOptionDuplicate;
+
+  /// No description provided for @cmodIssueRangeInverted.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى أكبر من الأعلى'**
+  String get cmodIssueRangeInverted;
+
+  /// No description provided for @cmodIssueCurrencyCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز العملة غير صالح'**
+  String get cmodIssueCurrencyCode;
+
+  /// No description provided for @cmodMigrationTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل الحفظ'**
+  String get cmodMigrationTitle;
+
+  /// No description provided for @cmodMigrationBlockedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا التغيير سيضيّع بيانات'**
+  String get cmodMigrationBlockedTitle;
+
+  /// No description provided for @cmodMigrationBlockedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُحفظ شيء. أعد النوع كما كان، أو أضف حقلًا جديدًا بالنوع الذي تريده.'**
+  String get cmodMigrationBlockedBody;
+
+  /// No description provided for @cmodMigrationOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسنًا'**
+  String get cmodMigrationOk;
+
+  /// No description provided for @cmodMigTypeBlocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{field}»: {entries} لا تصلح بنوع «{type}»'**
+  String cmodMigTypeBlocked(String field, String entries, String type);
+
+  /// No description provided for @cmodMigRatingBlocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{field}»: {entries} فيها نجوم أكثر من المقياس الجديد'**
+  String cmodMigRatingBlocked(String field, String entries);
+
+  /// No description provided for @cmodMigFieldHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{field}» سيُخفى، وتبقى قيمه في {entries}'**
+  String cmodMigFieldHidden(String field, String entries);
+
+  /// No description provided for @cmodMigOptionHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخيارات المحذوفة من «{field}» والمستخدمة ستُخفى ولن تُحذف'**
+  String cmodMigOptionHidden(String field);
+
+  /// No description provided for @cmodMigConverted.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم «{field}» في {entries} ستتحوّل إلى «{type}»'**
+  String cmodMigConverted(String field, String entries, String type);
+
+  /// No description provided for @cmodMigOutOfRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'{entries} في «{field}» خارج الحدود الجديدة وستبقى كما هي'**
+  String cmodMigOutOfRange(String field, String entries);
+
+  /// No description provided for @cmodMigNewlyRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'{entries} بلا قيمة لـ«{field}» الذي صار مطلوبًا'**
+  String cmodMigNewlyRequired(String field, String entries);
+
+  /// No description provided for @cmodTypeText.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص'**
+  String get cmodTypeText;
+
+  /// No description provided for @cmodTypeNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم'**
+  String get cmodTypeNumber;
+
+  /// No description provided for @cmodTypeDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ'**
+  String get cmodTypeDate;
+
+  /// No description provided for @cmodTypeTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت'**
+  String get cmodTypeTime;
+
+  /// No description provided for @cmodTypeCheckbox.
+  ///
+  /// In ar, this message translates to:
+  /// **'خانة إنجاز'**
+  String get cmodTypeCheckbox;
+
+  /// No description provided for @cmodTypeSingle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار واحد'**
+  String get cmodTypeSingle;
+
+  /// No description provided for @cmodTypeMulti.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيارات متعددة'**
+  String get cmodTypeMulti;
+
+  /// No description provided for @cmodTypeRating.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقييم بالنجوم'**
+  String get cmodTypeRating;
+
+  /// No description provided for @cmodTypeCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبلغ'**
+  String get cmodTypeCurrency;
+
+  /// No description provided for @cmodTypeTextHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة، عنوان كتاب…'**
+  String get cmodTypeTextHint;
+
+  /// No description provided for @cmodTypeNumberHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحات، دقائق، مرّات…'**
+  String get cmodTypeNumberHint;
+
+  /// No description provided for @cmodTypeDateHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد أو مناسبة'**
+  String get cmodTypeDateHint;
+
+  /// No description provided for @cmodTypeTimeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت النوم، وقت البدء…'**
+  String get cmodTypeTimeHint;
+
+  /// No description provided for @cmodTypeCheckboxHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ أو لم يتمّ'**
+  String get cmodTypeCheckboxHint;
+
+  /// No description provided for @cmodTypeSingleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيار واحد من قائمتك'**
+  String get cmodTypeSingleHint;
+
+  /// No description provided for @cmodTypeMultiHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّة خيارات من قائمتك'**
+  String get cmodTypeMultiHint;
+
+  /// No description provided for @cmodTypeRatingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'من نجمتين إلى عشر'**
+  String get cmodTypeRatingHint;
+
+  /// No description provided for @cmodTypeCurrencyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبلغ بعملة تختارها'**
+  String get cmodTypeCurrencyHint;
+
+  /// No description provided for @cmodPickType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الحقل'**
+  String get cmodPickType;
+
+  /// No description provided for @cmodFieldNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'حقل جديد'**
+  String get cmodFieldNew;
+
+  /// No description provided for @cmodFieldEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الحقل'**
+  String get cmodFieldEdit;
+
+  /// No description provided for @cmodFieldLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الحقل'**
+  String get cmodFieldLabel;
+
+  /// No description provided for @cmodFieldLabelHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: الصفحات'**
+  String get cmodFieldLabelHint;
+
+  /// No description provided for @cmodFieldRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطلوب'**
+  String get cmodFieldRequired;
+
+  /// No description provided for @cmodFieldRequiredHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُحفظ الإدخال دونه'**
+  String get cmodFieldRequiredHint;
+
+  /// No description provided for @cmodFieldUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get cmodFieldUnit;
+
+  /// No description provided for @cmodFieldUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة، دقيقة، كغ…'**
+  String get cmodFieldUnitHint;
+
+  /// No description provided for @cmodFieldMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى'**
+  String get cmodFieldMin;
+
+  /// No description provided for @cmodFieldMax.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأعلى'**
+  String get cmodFieldMax;
+
+  /// No description provided for @cmodFieldNoLimit.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا حد'**
+  String get cmodFieldNoLimit;
+
+  /// No description provided for @cmodFieldDecimals.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخانات العشرية'**
+  String get cmodFieldDecimals;
+
+  /// No description provided for @cmodFieldScale.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقياس'**
+  String get cmodFieldScale;
+
+  /// No description provided for @cmodFieldCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة'**
+  String get cmodFieldCurrency;
+
+  /// No description provided for @cmodFieldOptions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخيارات'**
+  String get cmodFieldOptions;
+
+  /// No description provided for @cmodAddOption.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف خيارًا'**
+  String get cmodAddOption;
+
+  /// No description provided for @cmodOptionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الخيار'**
+  String get cmodOptionHint;
+
+  /// No description provided for @cmodRemoveOption.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف الخيار'**
+  String get cmodRemoveOption;
+
+  /// No description provided for @cmodFieldMultiline.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص طويل'**
+  String get cmodFieldMultiline;
+
+  /// No description provided for @cmodFieldMultilineHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتّسع لعدّة أسطر'**
+  String get cmodFieldMultilineHint;
+
+  /// No description provided for @cmodFieldDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف الحقل'**
+  String get cmodFieldDelete;
+
+  /// No description provided for @cmodFieldCopyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'{label} (نسخة)'**
+  String cmodFieldCopyLabel(String label);
+
+  /// No description provided for @cmodFieldTypeNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'إن غيّرت النوع تتحوّل القيم القديمة حين يمكن ذلك، وإلا لا يُحفظ التغيير.'**
+  String get cmodFieldTypeNote;
+
+  /// No description provided for @cmodFieldOptionsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا خيارات} =1{خيار واحد} =2{خياران} few{{count} خيارات} many{{count} خيارًا} other{{count} خيار}}'**
+  String cmodFieldOptionsCount(int count);
+
+  /// No description provided for @cmodFieldRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'{min} – {max}'**
+  String cmodFieldRange(String min, String max);
+
+  /// No description provided for @cmodFieldAtLeast.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {min}'**
+  String cmodFieldAtLeast(String min);
+
+  /// No description provided for @cmodFieldAtMost.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {max}'**
+  String cmodFieldAtMost(String max);
+
+  /// No description provided for @cmodFieldDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف «{name}» من النموذج'**
+  String cmodFieldDeleted(String name);
+
+  /// No description provided for @cmodFieldDuplicated.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ الحقل'**
+  String get cmodFieldDuplicated;
+
+  /// No description provided for @cmodGalleryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ وحدة'**
+  String get cmodGalleryTitle;
+
+  /// No description provided for @cmodGallerySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'من الصفر أو من قالب، وكل شيء قابل للتعديل'**
+  String get cmodGallerySubtitle;
+
+  /// No description provided for @cmodBlankTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّع فارغ'**
+  String get cmodBlankTracker;
+
+  /// No description provided for @cmodBlankList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة فارغة'**
+  String get cmodBlankList;
+
+  /// No description provided for @cmodTemplatesHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوالب للبدء'**
+  String get cmodTemplatesHeader;
+
+  /// No description provided for @cmodTplReadingLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ القراءة'**
+  String get cmodTplReadingLog;
+
+  /// No description provided for @cmodTplReadingLogDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكتاب والصفحات وتقييمك'**
+  String get cmodTplReadingLogDesc;
+
+  /// No description provided for @cmodTplDhikr.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار بعد الصلاة'**
+  String get cmodTplDhikr;
+
+  /// No description provided for @cmodTplDhikrDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'كم مرّة ذكرت الله، وبعد أي صلاة'**
+  String get cmodTplDhikrDesc;
+
+  /// No description provided for @cmodTplHabit.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادة يومية'**
+  String get cmodTplHabit;
+
+  /// No description provided for @cmodTplHabitDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'لمسة واحدة كل يوم، وسلسلة تكبر'**
+  String get cmodTplHabitDesc;
+
+  /// No description provided for @cmodTplHabitList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة عادات'**
+  String get cmodTplHabitList;
+
+  /// No description provided for @cmodTplHabitListDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادات تريد بناءها وكم تتكرّر'**
+  String get cmodTplHabitListDesc;
+
+  /// No description provided for @cmodTplSleep.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ النوم'**
+  String get cmodTplSleep;
+
+  /// No description provided for @cmodTplSleepDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم والاستيقاظ والساعات والجودة'**
+  String get cmodTplSleepDesc;
+
+  /// No description provided for @cmodTplGifts.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفكار هدايا'**
+  String get cmodTplGifts;
+
+  /// No description provided for @cmodTplGiftsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفكرة ولمن والميزانية والمناسبة'**
+  String get cmodTplGiftsDesc;
+
+  /// No description provided for @cmodTplBook.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكتاب'**
+  String get cmodTplBook;
+
+  /// No description provided for @cmodTplPages.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصفحات'**
+  String get cmodTplPages;
+
+  /// No description provided for @cmodTplRating.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقييم'**
+  String get cmodTplRating;
+
+  /// No description provided for @cmodTplUnitPages.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة'**
+  String get cmodTplUnitPages;
+
+  /// No description provided for @cmodTplAfterPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد صلاة'**
+  String get cmodTplAfterPrayer;
+
+  /// No description provided for @cmodTplCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'العدد'**
+  String get cmodTplCount;
+
+  /// No description provided for @cmodTplUnitTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّة'**
+  String get cmodTplUnitTimes;
+
+  /// No description provided for @cmodTplDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get cmodTplDone;
+
+  /// No description provided for @cmodTplNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get cmodTplNote;
+
+  /// No description provided for @cmodTplHabitItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادة'**
+  String get cmodTplHabitItem;
+
+  /// No description provided for @cmodTplFrequency.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكرار'**
+  String get cmodTplFrequency;
+
+  /// No description provided for @cmodTplDaily.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوميًا'**
+  String get cmodTplDaily;
+
+  /// No description provided for @cmodTplWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعيًا'**
+  String get cmodTplWeekly;
+
+  /// No description provided for @cmodTplMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهريًا'**
+  String get cmodTplMonthly;
+
+  /// No description provided for @cmodTplBedtime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت النوم'**
+  String get cmodTplBedtime;
+
+  /// No description provided for @cmodTplWake.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الاستيقاظ'**
+  String get cmodTplWake;
+
+  /// No description provided for @cmodTplHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات النوم'**
+  String get cmodTplHours;
+
+  /// No description provided for @cmodTplUnitHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعة'**
+  String get cmodTplUnitHours;
+
+  /// No description provided for @cmodTplQuality.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجودة'**
+  String get cmodTplQuality;
+
+  /// No description provided for @cmodTplIdea.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفكرة'**
+  String get cmodTplIdea;
+
+  /// No description provided for @cmodTplFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'لمن'**
+  String get cmodTplFor;
+
+  /// No description provided for @cmodTplBudget.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية'**
+  String get cmodTplBudget;
+
+  /// No description provided for @cmodTplOccasion.
+  ///
+  /// In ar, this message translates to:
+  /// **'المناسبة'**
+  String get cmodTplOccasion;
+
+  /// No description provided for @cmodTplNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get cmodTplNotes;
+
+  /// No description provided for @cmodAddEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال جديد'**
+  String get cmodAddEntry;
+
+  /// No description provided for @cmodAddItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'عنصر جديد'**
+  String get cmodAddItem;
+
+  /// No description provided for @cmodEntriesSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدخالات'**
+  String get cmodEntriesSection;
+
+  /// No description provided for @cmodItemsSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'العناصر'**
+  String get cmodItemsSection;
+
+  /// No description provided for @cmodDoneSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنجزة'**
+  String get cmodDoneSection;
+
+  /// No description provided for @cmodClearDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح المنجزة'**
+  String get cmodClearDone;
+
+  /// No description provided for @cmodToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get cmodToday;
+
+  /// No description provided for @cmodYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get cmodYesterday;
+
+  /// No description provided for @cmodEntriesEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا إدخالات بعد. أول إدخال يبدأ الحكاية.'**
+  String get cmodEntriesEmpty;
+
+  /// No description provided for @cmodItemsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة فارغة. أضف أول عنصر.'**
+  String get cmodItemsEmpty;
+
+  /// No description provided for @cmodAllDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزت كل شيء، ما شاء الله'**
+  String get cmodAllDone;
+
+  /// No description provided for @cmodStatStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة'**
+  String get cmodStatStreak;
+
+  /// No description provided for @cmodStatBest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأفضل'**
+  String get cmodStatBest;
+
+  /// No description provided for @cmodStatTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع'**
+  String get cmodStatTotal;
+
+  /// No description provided for @cmodStatAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط'**
+  String get cmodStatAverage;
+
+  /// No description provided for @cmodStatActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام نشطة'**
+  String get cmodStatActive;
+
+  /// No description provided for @cmodStatEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدخالات'**
+  String get cmodStatEntries;
+
+  /// No description provided for @cmodStatRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الإنجاز'**
+  String get cmodStatRate;
+
+  /// No description provided for @cmodDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{٠ يوم} =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String cmodDays(int count);
+
+  /// No description provided for @cmodReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات'**
+  String get cmodReminders;
+
+  /// No description provided for @cmodAddReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف تذكيرًا'**
+  String get cmodAddReminder;
+
+  /// No description provided for @cmodRemindersEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني بعد صلاة أو في وقت أحدّده'**
+  String get cmodRemindersEmpty;
+
+  /// No description provided for @cmodReminderPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّف'**
+  String get cmodReminderPaused;
+
+  /// No description provided for @cmodReminderToggle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل التذكير'**
+  String get cmodReminderToggle;
+
+  /// No description provided for @cmodModuleMenu.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات الوحدة'**
+  String get cmodModuleMenu;
+
+  /// No description provided for @cmodHiddenValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{label} (مخفي)'**
+  String cmodHiddenValue(String label);
+
+  /// No description provided for @cmodNotifyGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتتبّعات والقوائم'**
+  String get cmodNotifyGroup;
+
+  /// No description provided for @cmodNotifyChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكيرات المتتبّعات والقوائم'**
+  String get cmodNotifyChannel;
+
+  /// No description provided for @cmodNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكيرات لطيفة لتسجيل متتبّعاتك ومراجعة قوائمك'**
+  String get cmodNotifyChannelDescription;
+
+  /// No description provided for @cmodNotifyBodyTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت التسجيل'**
+  String get cmodNotifyBodyTracker;
+
+  /// No description provided for @cmodNotifyBodyList.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألقِ نظرة على قائمتك'**
+  String get cmodNotifyBodyList;
+
+  /// No description provided for @cmodEntryNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال جديد'**
+  String get cmodEntryNew;
+
+  /// No description provided for @cmodEntryEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الإدخال'**
+  String get cmodEntryEdit;
+
+  /// No description provided for @cmodItemNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'عنصر جديد'**
+  String get cmodItemNew;
+
+  /// No description provided for @cmodItemEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل العنصر'**
+  String get cmodItemEdit;
+
+  /// No description provided for @cmodEntryWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'متى'**
+  String get cmodEntryWhen;
+
+  /// No description provided for @cmodEntryDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'منجز'**
+  String get cmodEntryDone;
+
+  /// No description provided for @cmodEntryCounter.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الوحدة عدّاد: الحفظ يسجّل مرّة واحدة.'**
+  String get cmodEntryCounter;
+
+  /// No description provided for @cmodErrRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الحقل مطلوب'**
+  String get cmodErrRequired;
+
+  /// No description provided for @cmodErrNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب رقمًا'**
+  String get cmodErrNumber;
+
+  /// No description provided for @cmodErrWhole.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم صحيح فقط'**
+  String get cmodErrWhole;
+
+  /// No description provided for @cmodErrPrecise.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} خانات عشرية على الأكثر'**
+  String cmodErrPrecise(String count);
+
+  /// No description provided for @cmodErrMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يقلّ عن {value}'**
+  String cmodErrMin(String value);
+
+  /// No description provided for @cmodErrMax.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يزيد على {value}'**
+  String cmodErrMax(String value);
+
+  /// No description provided for @cmodErrDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ غير صالح'**
+  String get cmodErrDate;
+
+  /// No description provided for @cmodErrTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت غير صالح'**
+  String get cmodErrTime;
+
+  /// No description provided for @cmodErrOption.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر من القائمة'**
+  String get cmodErrOption;
+
+  /// No description provided for @cmodErrScale.
+  ///
+  /// In ar, this message translates to:
+  /// **'خارج المقياس'**
+  String get cmodErrScale;
+
+  /// No description provided for @cmodErrTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'النص طويل جدًا'**
+  String get cmodErrTooLong;
+
+  /// No description provided for @cmodPickDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر تاريخًا'**
+  String get cmodPickDate;
+
+  /// No description provided for @cmodPickTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر وقتًا'**
+  String get cmodPickTime;
+
+  /// No description provided for @cmodClear.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح'**
+  String get cmodClear;
+
+  /// No description provided for @cmodYes.
+  ///
+  /// In ar, this message translates to:
+  /// **'نعم'**
+  String get cmodYes;
+
+  /// No description provided for @cmodNo.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا'**
+  String get cmodNo;
+
+  /// No description provided for @cmodChecked.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get cmodChecked;
+
+  /// No description provided for @cmodUnchecked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتمّ'**
+  String get cmodUnchecked;
+
+  /// No description provided for @cmodCardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّعاتك هنا'**
+  String get cmodCardTitle;
+
+  /// No description provided for @cmodCardSeeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل'**
+  String get cmodCardSeeAll;
+
+  /// No description provided for @cmodCardEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ متتبّعًا لهذا الكوكب'**
+  String get cmodCardEmpty;
+
+  /// No description provided for @cmodCardEmptyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّاد، أو سجلّ، أو قائمة: بحقولك أنت'**
+  String get cmodCardEmptyHint;
+
+  /// No description provided for @cmodExportDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get cmodExportDate;
+
+  /// No description provided for @cmodExportTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get cmodExportTime;
+
+  /// No description provided for @cmodExportDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'منجز'**
+  String get cmodExportDone;
+
+  /// No description provided for @cmodExportEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدخالات'**
+  String get cmodExportEntries;
+
+  /// No description provided for @cmodExportLastEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر إدخال'**
+  String get cmodExportLastEntry;
+
+  /// No description provided for @cmodExportOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ'**
+  String get cmodExportOpen;
+
+  /// No description provided for @cmodExportLastDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}'**
+  String cmodExportLastDays(int count);
+
+  /// No description provided for @cmodExportActiveDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أيام نشطة} =1{يوم نشط واحد} =2{يومان نشطان} few{{count} أيام نشطة} many{{count} يومًا نشطًا} other{{count} يوم نشط}}'**
+  String cmodExportActiveDays(int count);
+
+  /// No description provided for @cmodExportTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع {value}'**
+  String cmodExportTotal(String value);
+
+  /// No description provided for @cmodExportAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط {value}'**
+  String cmodExportAverage(String value);
+
+  /// No description provided for @cmodExportStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة {current} (الأفضل {best})'**
+  String cmodExportStreak(String current, String best);
+
+  /// No description provided for @cmodExportHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخفي'**
+  String get cmodExportHidden;
+
+  /// Name of the games hub
+  ///
+  /// In ar, this message translates to:
+  /// **'سينما مدار'**
+  String get cinemaTitle;
+
+  /// No description provided for @cinemaHallSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعاب أصلية بروح السينما الكلاسيكية'**
+  String get cinemaHallSubtitle;
+
+  /// Tier 1 games section
+  ///
+  /// In ar, this message translates to:
+  /// **'الأفلام الطويلة'**
+  String get cinemaFeatures;
+
+  /// Tier 2 games section
+  ///
+  /// In ar, this message translates to:
+  /// **'الأفلام القصيرة'**
+  String get cinemaShorts;
+
+  /// No description provided for @cinemaComingSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبًا'**
+  String get cinemaComingSoon;
+
+  /// No description provided for @cinemaPlay.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى العرض'**
+  String get cinemaPlay;
+
+  /// No description provided for @cinemaGameViewLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاشة اللعبة'**
+  String get cinemaGameViewLabel;
+
+  /// No description provided for @cinemaPause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get cinemaPause;
+
+  /// Pause card title
+  ///
+  /// In ar, this message translates to:
+  /// **'استراحة'**
+  String get cinemaIntermission;
+
+  /// No description provided for @cinemaResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة العرض'**
+  String get cinemaResume;
+
+  /// No description provided for @cinemaRestart.
+  ///
+  /// In ar, this message translates to:
+  /// **'من البداية'**
+  String get cinemaRestart;
+
+  /// No description provided for @cinemaLeave.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغادرة القاعة'**
+  String get cinemaLeave;
+
+  /// No description provided for @cinemaPlayAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض آخر'**
+  String get cinemaPlayAgain;
+
+  /// No description provided for @cinemaTheEnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'النهاية'**
+  String get cinemaTheEnd;
+
+  /// Game over card
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى العرض'**
+  String get cinemaGameOver;
+
+  /// No description provided for @cinemaScoreLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة: {score}'**
+  String cinemaScoreLine(String score);
+
+  /// No description provided for @cinemaBestLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفضل نتيجة: {score}'**
+  String cinemaBestLine(String score);
+
+  /// No description provided for @cinemaEraSilent.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشرينيات الصامتة'**
+  String get cinemaEraSilent;
+
+  /// No description provided for @cinemaEraRubberHose.
+  ///
+  /// In ar, this message translates to:
+  /// **'كرتون الثلاثينيات'**
+  String get cinemaEraRubberHose;
+
+  /// No description provided for @cinemaEraNoir.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوار الأربعينيات'**
+  String get cinemaEraNoir;
+
+  /// No description provided for @cinemaEraTechnicolor.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألوان الخمسينيات'**
+  String get cinemaEraTechnicolor;
+
+  /// No description provided for @cinemaEraGrindhouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'سينما السبعينيات'**
+  String get cinemaEraGrindhouse;
+
+  /// No description provided for @cinemaEraVhs.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيديو الثمانينيات'**
+  String get cinemaEraVhs;
+
+  /// Engine demo scene
+  ///
+  /// In ar, this message translates to:
+  /// **'بروفة'**
+  String get cinemaDemoTitle;
+
+  /// No description provided for @cinemaDemoTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشهد تجريبي لمحرّك بكرة الفيلم'**
+  String get cinemaDemoTagline;
+
+  /// No description provided for @cinemaDemoOpening.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشهد الأول'**
+  String get cinemaDemoOpening;
+
+  /// No description provided for @cinemaDemoOpeningSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المس الشاشة لتقفز فوق البراميل!'**
+  String get cinemaDemoOpeningSubtitle;
+
+  /// No description provided for @cinemaFlappyOrbitTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفرفة المدار'**
+  String get cinemaFlappyOrbitTitle;
+
+  /// No description provided for @cinemaFlappyOrbitTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفرف بين الكواكب على أنغام السوينغ'**
+  String get cinemaFlappyOrbitTagline;
+
+  /// No description provided for @cinemaFlappyOrbitHomage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحية لرسوم الخرطوم المطاطي في الثلاثينيات'**
+  String get cinemaFlappyOrbitHomage;
+
+  /// No description provided for @cinemaMetropolisTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'آلة المتروبوليس'**
+  String get cinemaMetropolisTitle;
+
+  /// No description provided for @cinemaMetropolisTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'واجه الآلات العملاقة واحدة تلو الأخرى'**
+  String get cinemaMetropolisTagline;
+
+  /// No description provided for @cinemaMetropolisHomage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحية لفيلم «متروبوليس» الصامت (1927)'**
+  String get cinemaMetropolisHomage;
+
+  /// No description provided for @cinemaCaravanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سباق القافلة'**
+  String get cinemaCaravanTitle;
+
+  /// No description provided for @cinemaCaravanTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعبر الكثبان بألوان التكنيكولور'**
+  String get cinemaCaravanTagline;
+
+  /// No description provided for @cinemaCaravanHomage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحية لملاحم الصحراء في الخمسينيات'**
+  String get cinemaCaravanHomage;
+
+  /// No description provided for @cinemaNoirTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسطح النوار'**
+  String get cinemaNoirTitle;
+
+  /// No description provided for @cinemaNoirTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'طارد الظلال فوق أسطح المدينة الممطرة'**
+  String get cinemaNoirTagline;
+
+  /// No description provided for @cinemaNoirHomage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحية لأفلام النوار في الأربعينيات'**
+  String get cinemaNoirHomage;
+
+  /// No description provided for @cinemaNeonSoukTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'متسابق سوق النيون'**
+  String get cinemaNeonSoukTitle;
+
+  /// No description provided for @cinemaNeonSoukTagline.
+  ///
+  /// In ar, this message translates to:
+  /// **'انطلق عبر سوق من أضواء النيون'**
+  String get cinemaNeonSoukTagline;
+
+  /// No description provided for @cinemaNeonSoukHomage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحية لأفلام الخيال العلمي على أشرطة الفيديو'**
+  String get cinemaNeonSoukHomage;
+
+  /// No description provided for @cinemaSavedGames.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعابي المحفوظة'**
+  String get cinemaSavedGames;
+
+  /// No description provided for @cinemaSavedGamesEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.'**
+  String get cinemaSavedGamesEmpty;
+
+  /// No description provided for @cinemaSavedGamesNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.'**
+  String get cinemaSavedGamesNote;
+
+  /// No description provided for @cinemaAddGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة لعبة'**
+  String get cinemaAddGame;
+
+  /// No description provided for @cinemaGameName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم اللعبة'**
+  String get cinemaGameName;
+
+  /// No description provided for @cinemaGameUrl.
+  ///
+  /// In ar, this message translates to:
+  /// **'رابط اللعبة'**
+  String get cinemaGameUrl;
+
+  /// No description provided for @cinemaInvalidUrl.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رابطًا صحيحًا يبدأ بـ https://'**
+  String get cinemaInvalidUrl;
+
+  /// No description provided for @cinemaRemoveGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة'**
+  String get cinemaRemoveGame;
+
+  /// No description provided for @cinemaOpenGameFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح الرابط'**
+  String get cinemaOpenGameFailed;
+
+  /// No description provided for @cinemaSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get cinemaSave;
+
+  /// No description provided for @cinemaCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get cinemaCancel;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

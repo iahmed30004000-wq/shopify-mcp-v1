@@ -90,6 +90,17 @@ flutter:
     - shaders/orbit/prayer_fire.frag
     - shaders/orbit/lens_flare.frag
     - shaders/orbit/zoom_blur.frag
+    # Madar Cinema – Film Reel Engine (contracts: lib/features/cinema/ENGINE.md)
+    - shaders/cinema/film_grade.frag
+    - shaders/cinema/vhs.frag
+    - shaders/cinema/halftone.frag
+    - shaders/cinema/crosshatch.frag
+    - shaders/cinema/ink_line.frag
+    - shaders/cinema/paper.frag
+    - shaders/cinema/iris.frag
+    - shaders/cinema/burn.frag
+    - shaders/cinema/curtain.frag
+    - shaders/cinema/spotlight.frag
 
   fonts:
     - family: PlexArabic
