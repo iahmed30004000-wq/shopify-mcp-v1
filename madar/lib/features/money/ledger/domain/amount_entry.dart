@@ -41,6 +41,22 @@ class AmountEntry {
     return AmountEntry(frac.isEmpty ? '$whole' : '$whole.$frac', decimals);
   }
 
+  /// The amount shown when editing a stored [milli]: like [fromMilli], but
+  /// the fraction is never cut – the entry allows more than [decimals]
+  /// digits when the stored value has them (an imported `12.345 USD` stays
+  /// exact unless the user retypes it).
+  factory AmountEntry.exact(int milli, {int decimals = 3}) {
+    final a = milli.abs();
+    final needed = a % 10 != 0
+        ? 3
+        : a % 100 != 0
+        ? 2
+        : a % 1000 != 0
+        ? 1
+        : 0;
+    return AmountEntry.fromMilli(milli, decimals: needed > decimals ? needed : decimals);
+  }
+
   /// ASCII digits with at most one `.`.
   final String text;
 

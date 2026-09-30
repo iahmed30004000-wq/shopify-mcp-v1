@@ -510,8 +510,17 @@ class WorkService {
       for (final i in r.unflag) {
         await _setFlagRaw(i.kind, i.id, false);
       }
+      final today = _today;
       for (final i in r.redate) {
-        await _tasks.setColumn(i.id, 'date', _today);
+        if (i.kind == FocusKind.task) {
+          await _tasks.setColumn(i.id, 'date', today);
+          continue;
+        }
+        // A carried card keeps its window: its open task moves to today.
+        for (final t in await _linkedTasks(i.id)) {
+          final d = t.date;
+          if (!t.done && d != null && WorkDays.between(d, today) > 0) await _tasks.setColumn(t.id, 'date', today);
+        }
       }
     });
   }

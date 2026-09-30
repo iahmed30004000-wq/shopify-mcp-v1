@@ -11748,6 +11748,23 @@
   "@ledgerArchivedBadge": {
     "description": "Status shown on an archived wallet"
   },
+  "ledgerUnknownCurrencies": "بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.",
+  "@ledgerUnknownCurrencies": {
+    "description": "Notice on the currencies screen when wallets use currency codes missing from the list (e.g. created by quick add)"
+  },
+  "ledgerAddCode": "إضافة {code}",
+  "@ledgerAddCode": {
+    "description": "Chip adding a missing currency by its code",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerFixRates": "ضبط الأسعار",
+  "@ledgerFixRates": {
+    "description": "Action next to the warning that some currencies have no exchange rate"
+  },
   "budgetTitle": "الميزانية",
   "@budgetTitle": {
     "description": "Title of the budget screen and card"

@@ -138,7 +138,9 @@ class Top3Rollover {
 
   final List<FocusItem> unflag;
 
-  /// Tasks carried over whose day was before today (they move to today).
+  /// Items carried over whose day was before today: a task moves to
+  /// today, a card placed in a window has its open window task moved to
+  /// today (so it shows in today's home panel again).
   final List<FocusItem> redate;
 
   bool get isEmpty => unflag.isEmpty && redate.isEmpty;
@@ -180,14 +182,15 @@ abstract final class Top3Rules {
   }
 
   /// Keep yesterday's unfinished focus for today: finished ones are
-  /// cleared, dated tasks move to today.
+  /// cleared, dated tasks (and the window tasks of placed cards) move to
+  /// today.
   static Top3Rollover carryOver(Top3State state) {
     final keep = state.leftovers.take(max).toList();
     return Top3Rollover(
       unflag: [...state.staleDone, ...state.leftovers.skip(max)],
       redate: [
         for (final i in keep)
-          if (i.kind == FocusKind.task && i.date != null && WorkDays.between(i.date!, state.today) > 0) i,
+          if (i.date != null && WorkDays.between(i.date!, state.today) > 0) i,
       ],
     );
   }

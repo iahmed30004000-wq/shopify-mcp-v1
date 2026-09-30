@@ -19,31 +19,35 @@ import '../../domain/ledger_models.dart';
 import '../ledger_ui.dart';
 import '../widgets/ledger_segmented.dart';
 
-/// Opens the currency editor ([currency] null = add a currency), saves and
-/// shows the undo toast. The rate can be typed either way round ("1 SYP =
-/// … JOD" or "1 JOD = … SYP") and is stored exactly.
-Future<void> showCurrencySheet(BuildContext context, WidgetRef ref, {LedgerCurrency? currency}) async {
+/// Opens the currency editor ([currency] null = add a currency, with
+/// [code] prefilled when given), saves and shows the undo toast. The rate
+/// can be typed either way round ("1 SYP = … JOD" or "1 JOD = … SYP") and
+/// is stored exactly.
+Future<void> showCurrencySheet(BuildContext context, WidgetRef ref, {LedgerCurrency? currency, String? code}) async {
   final book = ref.read(ledgerBookProvider).value;
   if (book == null) return;
   final saved = await showInteractionSheet<bool>(
     context,
-    builder: (_) => CurrencySheet(book: book, currency: currency),
+    builder: (_) => CurrencySheet(book: book, currency: currency, initialCode: code),
   );
   if (saved != true || !context.mounted) return;
 }
 
 class CurrencySheet extends ConsumerStatefulWidget {
-  const CurrencySheet({super.key, required this.book, this.currency});
+  const CurrencySheet({super.key, required this.book, this.currency, this.initialCode});
 
   final LedgerBook book;
   final LedgerCurrency? currency;
+
+  /// Prefills the code of a new currency.
+  final String? initialCode;
 
   @override
   ConsumerState<CurrencySheet> createState() => _CurrencySheetState();
 }
 
 class _CurrencySheetState extends ConsumerState<CurrencySheet> {
-  late final _code = TextEditingController(text: widget.currency?.code ?? '');
+  late final _code = TextEditingController(text: widget.currency?.code ?? widget.initialCode ?? '');
   late final _nameAr = TextEditingController(text: widget.currency?.nameAr ?? '');
   late final _nameEn = TextEditingController(text: widget.currency?.nameEn ?? '');
   late final _symbol = TextEditingController(text: widget.currency?.symbol ?? '');

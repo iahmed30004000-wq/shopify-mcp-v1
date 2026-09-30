@@ -285,9 +285,10 @@ void main() {
 
     test('next morning: carry over keeps the unfinished, moves dated tasks to today', () async {
       final b = await work.createBoard(name: 'B');
-      final x = await work.addCard(b.id, const CardDraft(title: 'x'));
+      final x = await work.addCard(b.id, const CardDraft(title: 'x', window: PrayerWindow.asr));
       final y = await work.addCard(b.id, const CardDraft(title: 'y'));
       final t = await home.add(title: 't', window: PrayerWindow.isha, date: today, planetKey: 'work');
+      expect((await linked(x.id)).single.date, today);
       await work.setCardTop3(x.id, true);
       await work.setCardTop3(y.id, true);
       await work.setTaskTop3(t.id, true);
@@ -303,9 +304,13 @@ void main() {
       expect(s.needsCarryOver, isFalse);
       expect(s.items.map((i) => i.title), ['x', 't']);
       expect((await repos.tasks.byId(t.id))!.date, DateTime(2026, 9, 30));
+      // The carried card stays in its window, now on today's home list.
+      expect((await linked(x.id)).single.date, DateTime(2026, 9, 30));
+      expect((await card(x.id)).window, PrayerWindow.asr);
       expect((await card(y.id)).isTop3, isFalse);
       await undo();
       expect((await work.top3State()).needsCarryOver, isTrue);
+      expect((await linked(x.id)).single.date, today);
       await work.startFreshTop3();
       s = await work.top3State();
       expect(s.items, isEmpty);

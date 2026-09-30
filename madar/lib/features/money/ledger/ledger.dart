@@ -32,7 +32,7 @@ export 'presentation/charts/ledger_chart_cards.dart'
 export 'presentation/currencies_screen.dart';
 export 'presentation/ledger_actions.dart';
 export 'presentation/money_ledger_screen.dart' show MoneyLedgerScreen, NetBalancePanel, RatesNotice;
-export 'presentation/sheets/currency_sheet.dart' show showCurrencySheet;
+export 'presentation/sheets/currency_sheet.dart' show showCurrencySheet, CurrencySheet;
 export 'presentation/sheets/rebase_sheet.dart' show showRebaseSheet;
 export 'presentation/sheets/transaction_sheet.dart' show showTransactionSheet, TransactionSheet, TransactionSheetResult;
 export 'presentation/transactions_screen.dart';

@@ -6,6 +6,7 @@ import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
+import '../../../../core/interaction/sheets/field_inputs.dart' show KitChip;
 import '../../../../core/motion/motion_kit.dart' show EntranceChoreo, StaggerItem;
 import '../../../../core/sound/sound_api.dart';
 import '../data/ledger_providers.dart';
@@ -75,6 +76,12 @@ class _CurrenciesBody extends ConsumerWidget {
     for (final w in book.wallets) {
       usage[w.currency] = (usage[w.currency] ?? 0) + 1;
     }
+    // Codes used by wallets but missing from the list (e.g. a quick add in
+    // a currency the user never added).
+    final unknown = [
+      for (final code in usage.keys)
+        if (book.currency(code) == null) code,
+    ]..sort();
     return EntranceChoreo(
       id: 'currencies',
       child: ListView(
@@ -84,6 +91,14 @@ class _CurrenciesBody extends ConsumerWidget {
             StaggerItem(
               index: 0,
               child: _BaseCard(book: book, base: base, hasOthers: others.isNotEmpty),
+            ),
+          if (unknown.isNotEmpty)
+            StaggerItem(
+              index: 1,
+              child: Padding(
+                padding: const EdgeInsets.only(top: Space.m),
+                child: _UnknownCurrencies(codes: unknown),
+              ),
             ),
           if (book.ratesAreDefaults)
             StaggerItem(
@@ -129,6 +144,56 @@ class _CurrenciesBody extends ConsumerWidget {
             l.ledgerRateHint,
             textAlign: TextAlign.center,
             style: text.bodySmall?.copyWith(color: t.textTertiary),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Wallet currencies missing from the list, each with an "Add" chip.
+class _UnknownCurrencies extends ConsumerWidget {
+  const _UnknownCurrencies({required this.codes});
+
+  final List<String> codes;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = L10n.of(context);
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return GlassCard(
+      borderColor: t.warning.withValues(alpha: 0.45),
+      padding: const EdgeInsets.all(Space.m),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.warning_amber_rounded, size: 20, color: t.warning),
+              const SizedBox(width: Space.s),
+              Expanded(
+                child: Text(l.ledgerUnknownCurrencies, style: text.bodySmall?.copyWith(color: t.textSecondary)),
+              ),
+            ],
+          ),
+          const SizedBox(height: Space.s),
+          Wrap(
+            spacing: Space.s,
+            runSpacing: Space.s,
+            children: [
+              for (final code in codes)
+                KitChip(
+                  dense: true,
+                  label: l.ledgerAddCode(LedgerMoneyFormat.isolate(code)),
+                  icon: Icons.add_rounded,
+                  selected: false,
+                  sfx: Sfx.sheetOpen,
+                  onTap: () => showCurrencySheet(context, ref, code: code),
+                ),
+            ],
           ),
         ],
       ),

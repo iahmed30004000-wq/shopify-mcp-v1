@@ -18369,6 +18369,24 @@ abstract class L10n {
   /// **'مؤرشفة'**
   String get ledgerArchivedBadge;
 
+  /// Notice on the currencies screen when wallets use currency codes missing from the list (e.g. created by quick add)
+  ///
+  /// In ar, this message translates to:
+  /// **'بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.'**
+  String get ledgerUnknownCurrencies;
+
+  /// Chip adding a missing currency by its code
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة {code}'**
+  String ledgerAddCode(String code);
+
+  /// Action next to the warning that some currencies have no exchange rate
+  ///
+  /// In ar, this message translates to:
+  /// **'ضبط الأسعار'**
+  String get ledgerFixRates;
+
   /// Title of the budget screen and card
   ///
   /// In ar, this message translates to:

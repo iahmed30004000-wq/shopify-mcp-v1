@@ -134,7 +134,7 @@ class _MoneyLedgerScreenState extends ConsumerState<MoneyLedgerScreen> {
         children: [
           StaggerItem(
             index: i++,
-            child: NetBalancePanel(book: book),
+            child: NetBalancePanel(book: book, onFixRates: () => LedgerActions.openCurrencies(context, ref)),
           ),
           if (book.ratesAreDefaults)
             StaggerItem(
@@ -311,9 +311,13 @@ class LedgerSegmented3 extends StatelessWidget {
 /// The net balance of every active wallet in the base currency, the
 /// personal / business split and the native total of each currency.
 class NetBalancePanel extends StatelessWidget {
-  const NetBalancePanel({super.key, required this.book});
+  const NetBalancePanel({super.key, required this.book, this.onFixRates});
 
   final LedgerBook book;
+
+  /// Where "Set rates" leads when some currencies have no rate (hidden
+  /// when null).
+  final VoidCallback? onFixRates;
 
   @override
   Widget build(BuildContext context) {
@@ -397,9 +401,25 @@ class NetBalancePanel extends StatelessWidget {
           ],
           if (totals.missingRates.isNotEmpty) ...[
             const SizedBox(height: Space.s),
-            Text(
-              l.ledgerMissingRate(totals.missingRates.map(LedgerMoneyFormat.isolate).join('، ')),
-              style: text.bodySmall?.copyWith(color: t.warning),
+            Row(
+              children: [
+                Icon(Icons.warning_amber_rounded, size: 16, color: t.warning),
+                const SizedBox(width: Space.xs),
+                Expanded(
+                  child: Text(
+                    l.ledgerMissingRate(totals.missingRates.map(LedgerMoneyFormat.isolate).join('، ')),
+                    style: text.bodySmall?.copyWith(color: t.warning),
+                  ),
+                ),
+                if (onFixRates != null)
+                  MadarButton(
+                    label: l.ledgerFixRates,
+                    variant: MadarButtonVariant.ghost,
+                    size: MadarButtonSize.small,
+                    sfx: Sfx.navigate,
+                    onPressed: onFixRates,
+                  ),
+              ],
             ),
           ],
         ],

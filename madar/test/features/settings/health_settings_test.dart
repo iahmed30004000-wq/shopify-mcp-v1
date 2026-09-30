@@ -88,10 +88,12 @@ void main() {
       expect(find.text(l.medsReminders), findsOneWidget);
       // The meal times read as a sentence; dinner is named as a meal
       // («وجبة العشاء») so it never reads as the Isha prayer.
-      final meals = find.textContaining(l.medsMealDinner);
+      // Each meal keeps its time on its line (no-break spaces).
+      String nb(String s) => s.replaceAll(' ', '\u00A0');
+      final meals = find.textContaining(nb(l.medsMealDinner));
       await _show(tester, meals);
       final summary = tester.widget<Text>(meals.first).data!;
-      expect(summary, startsWith(l.medsMealBreakfastTitle));
+      expect(summary, startsWith(nb(l.medsMealBreakfastTitle)));
       expect(summary, contains(l.medsMealLunch));
       expect(summary, contains(l.medsMealBedtime));
       await _show(tester, find.text(l.healthHubSettingsReportSection));

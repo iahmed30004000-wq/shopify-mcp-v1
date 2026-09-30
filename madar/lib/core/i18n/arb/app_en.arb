@@ -11748,6 +11748,23 @@
   "@ledgerArchivedBadge": {
     "description": "Status shown on an archived wallet"
   },
+  "ledgerUnknownCurrencies": "Some wallets use currencies that aren't in your list yet. Add them with a rate so they count in the totals.",
+  "@ledgerUnknownCurrencies": {
+    "description": "Notice on the currencies screen when wallets use currency codes missing from the list (e.g. created by quick add)"
+  },
+  "ledgerAddCode": "Add {code}",
+  "@ledgerAddCode": {
+    "description": "Chip adding a missing currency by its code",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerFixRates": "Set rates",
+  "@ledgerFixRates": {
+    "description": "Action next to the warning that some currencies have no exchange rate"
+  },
   "budgetTitle": "Budget",
   "@budgetTitle": {
     "description": "Title of the budget screen and card"

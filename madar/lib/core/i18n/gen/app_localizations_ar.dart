@@ -11832,6 +11832,18 @@ class L10nAr extends L10n {
   String get ledgerArchivedBadge => 'مؤرشفة';
 
   @override
+  String get ledgerUnknownCurrencies =>
+      'بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.';
+
+  @override
+  String ledgerAddCode(String code) {
+    return 'إضافة $code';
+  }
+
+  @override
+  String get ledgerFixRates => 'ضبط الأسعار';
+
+  @override
   String get budgetTitle => 'الميزانية';
 
   @override

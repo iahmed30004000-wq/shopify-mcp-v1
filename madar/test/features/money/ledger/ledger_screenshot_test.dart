@@ -6,7 +6,10 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:drift/drift.dart' show Value;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:madar/core/db/database.dart';
+import 'package:madar/core/db/repositories/repositories.dart';
 import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/design/widgets/widgets.dart' show MadarScaffold;
 import 'package:madar/core/domain/enums.dart';
@@ -61,8 +64,10 @@ void main() {
     Locale locale = _ar,
     bool data = true,
     Future<void> Function(WidgetTester tester)? before,
+    Future<void> Function(Repositories repos)? extra,
   }) async {
     final db = await ledgerDb(tester, data: data, arabic: locale == _ar);
+    if (extra != null) await tester.runAsync(() => extra(Repositories(db)));
     await captureScreen(
       tester,
       ledgerTestApp(home: home, overrides: ledgerOverrides(db), theme: theme, locale: locale),
@@ -224,6 +229,29 @@ void main() {
 
   testWidgets('currencies – English, Pearl', (tester) async {
     await shot(tester, 'currencies_en_pearl', const CurrenciesScreen(), theme: MadarThemeId.pearl, locale: _en);
+  });
+
+  testWidgets('currencies – Arabic, Desert, a wallet currency missing', (tester) async {
+    await shot(
+      tester,
+      'currencies_ar_desert_unknown',
+      const CurrenciesScreen(),
+      theme: MadarThemeId.desert,
+      extra: (repos) => repos.wallets.insert(WalletsCompanion.insert(name: 'بطاقة السفر', currency: 'EUR')),
+    );
+  });
+
+  testWidgets('hub – English, Aurora, a wallet currency missing', (tester) async {
+    await shot(
+      tester,
+      'hub_en_aurora_missing_rate',
+      const MoneyLedgerScreen(),
+      theme: MadarThemeId.aurora,
+      locale: _en,
+      extra: (repos) => repos.wallets.insert(
+        WalletsCompanion.insert(name: 'Travel card', currency: 'EUR', openingMilli: const Value(120000)),
+      ),
+    );
   });
 
   testWidgets('rebase – Arabic, Emerald', (tester) async {

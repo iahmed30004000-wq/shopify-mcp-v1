@@ -91,6 +91,15 @@ void main() {
       );
     });
 
+    testWidgets('Arabic, Lapis, tablet width: every column, right to left', (tester) async {
+      await shot(
+        tester,
+        'board_wide_ar_lapis',
+        (s) => BoardScreen(boardId: s.store.id),
+        size: const Size(1100, 760),
+      );
+    });
+
     testWidgets('English, Pearl (left to right)', (tester) async {
       await shot(
         tester,

@@ -1104,5 +1104,25 @@
     "ar": "مؤرشفة",
     "en": "Archived",
     "description": "Status shown on an archived wallet"
+  },
+  "ledgerUnknownCurrencies": {
+    "ar": "بعض المحافظ بعملات غير موجودة في قائمتك بعد. أضِفها مع سعر صرف لتدخل في المجاميع.",
+    "en": "Some wallets use currencies that aren't in your list yet. Add them with a rate so they count in the totals.",
+    "description": "Notice on the currencies screen when wallets use currency codes missing from the list (e.g. created by quick add)"
+  },
+  "ledgerAddCode": {
+    "ar": "إضافة {code}",
+    "en": "Add {code}",
+    "description": "Chip adding a missing currency by its code",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "ledgerFixRates": {
+    "ar": "ضبط الأسعار",
+    "en": "Set rates",
+    "description": "Action next to the warning that some currencies have no exchange rate"
   }
 }

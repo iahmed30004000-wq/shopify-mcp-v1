@@ -152,6 +152,33 @@ void main() {
     expect(book.transactions.single.date, DateTime(2026, 9, 29));
   });
 
+  testWidgets('a wallet in a currency missing from the list can be priced from the notice', (tester) async {
+    final db = await ledgerDb(tester, data: false, arabic: false);
+    await tester.runAsync(
+      () => LedgerService(Repositories(db)).addWallet(name: 'Travel card', currency: 'EUR', openingMilli: 100000),
+    );
+    await _pump(tester, db, const MoneyLedgerScreen());
+    expect(find.textContaining('No exchange rate'), findsOneWidget);
+    await tester.tap(find.text('Set rates'));
+    await _frames(tester, 30);
+    expect(find.text('Add \u2068EUR\u2069'), findsOneWidget);
+    await tester.tap(find.text('Add \u2068EUR\u2069'));
+    await _frames(tester, 30);
+    final fields = find.descendant(of: find.byType(CurrencySheet), matching: find.byType(TextField));
+    expect(tester.widget<TextField>(fields.at(0)).controller!.text, 'EUR');
+    await tester.enterText(fields.at(2), 'Euro');
+    await tester.enterText(fields.at(4), '0.8');
+    await _frames(tester, 4);
+    await tester.tap(find.text('Save'));
+    await _frames(tester, 30);
+    final book = (await tester.runAsync(() => LedgerService(Repositories(db)).book()))!;
+    expect(book.currency('EUR')!.rateToBase, 0.8);
+    expect(book.totals.missingRates, isEmpty);
+    expect(book.totals.baseMilli, 80000);
+    expect(find.text('Add \u2068EUR\u2069'), findsNothing);
+    await _settleToast(tester);
+  });
+
   group('entries owned by a jar, debt or obligation', () {
     Future<MadarDatabase> linkedDb(WidgetTester tester) async {
       final db = await _twoWallets(tester);

@@ -54,6 +54,16 @@ class TxTile extends StatelessWidget {
   final bool showWallet;
   final TxTileActions actions;
 
+  /// "From → To" in the UI's direction. The arrow belongs to the
+  /// translation (`←` in Arabic), so the route must lay out in the UI
+  /// direction even when both wallet names are in the other script.
+  static String routeOf(LedgerTx tx, LedgerBook book, L10n l) {
+    final from = book.walletNameOf(tx.walletId) ?? '—';
+    final to = tx.toWalletId == null ? '—' : (book.walletNameOf(tx.toWalletId!) ?? '—');
+    final route = l.ledgerTransferRoute(LedgerMoneyFormat.isolate(from), LedgerMoneyFormat.isolate(to));
+    return l.localeName.startsWith('ar') ? BidiIsolate.rtl(route) : BidiIsolate.ltr(route);
+  }
+
   /// The row's title.
   static String titleOf(LedgerTx tx, LedgerBook book, L10n l, {String? perspectiveWalletId}) {
     final note = tx.cleanNote;
@@ -68,7 +78,7 @@ class TxTile extends StatelessWidget {
           return l.ledgerTransferIn(LedgerMoneyFormat.isolate(from));
         }
         if (perspectiveWalletId != null) return l.ledgerTransferOut(LedgerMoneyFormat.isolate(to));
-        return l.ledgerTransferRoute(LedgerMoneyFormat.isolate(from), LedgerMoneyFormat.isolate(to));
+        return routeOf(tx, book, l);
       case TxKind.adjustment:
         return note ?? l.ledgerAdjustmentTitle;
       case TxKind.expense:
@@ -85,43 +95,39 @@ class TxTile extends StatelessWidget {
     required bool showWallet,
     String? perspectiveWalletId,
   }) {
+    // Each part is isolated on its own; the route keeps the UI direction.
     final parts = <String>[];
+    void add(String part) => parts.add(LedgerMoneyFormat.isolate(part));
     switch (tx.kind) {
       case TxKind.expense:
       case TxKind.income:
         final path = book.budgetPath(tx.budgetItemId);
         if (tx.cleanNote != null) {
-          parts.add(path ?? (tx.kind == TxKind.income ? l.ledgerKindIncome : l.ledgerUnassigned));
+          add(path ?? (tx.kind == TxKind.income ? l.ledgerKindIncome : l.ledgerUnassigned));
         } else if (path != null && path.contains(' › ')) {
-          parts.add(path.substring(0, path.lastIndexOf(' › ')));
+          add(path.substring(0, path.lastIndexOf(' › ')));
         } else if (tx.budgetItemId == null && tx.kind == TxKind.expense) {
-          parts.add(l.ledgerUnassigned);
+          add(l.ledgerUnassigned);
         }
       case TxKind.transfer:
-        if (tx.cleanNote != null || perspectiveWalletId == null) {
-          final from = book.walletNameOf(tx.walletId) ?? '—';
-          final to = tx.toWalletId == null ? '—' : (book.walletNameOf(tx.toWalletId!) ?? '—');
-          if (tx.cleanNote != null) {
-            parts.add(l.ledgerTransferRoute(LedgerMoneyFormat.isolate(from), LedgerMoneyFormat.isolate(to)));
-          } else {
-            parts.add(l.ledgerKindTransfer);
-          }
+        if (tx.cleanNote != null) {
+          parts.add(routeOf(tx, book, l));
         } else {
-          parts.add(l.ledgerKindTransfer);
+          add(l.ledgerKindTransfer);
         }
       case TxKind.adjustment:
         final link = LedgerLinks.of(tx);
         if (link != null) {
-          if (tx.cleanNote != null) parts.add(l.link(link));
+          if (tx.cleanNote != null) add(l.link(link));
         } else if (tx.cleanNote != null) {
-          parts.add(l.ledgerAdjustmentTitle);
+          add(l.ledgerAdjustmentTitle);
         }
     }
     if (showWallet && tx.kind != TxKind.transfer) {
       final w = book.walletNameOf(tx.walletId);
-      if (w != null) parts.add(w);
+      if (w != null) add(w);
     }
-    return parts.map(LedgerMoneyFormat.isolate).join(' · ');
+    return parts.join(' · ');
   }
 
   @override
@@ -290,7 +296,10 @@ class TxTile extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  textDirection: BidiIsolate.directionOf(title),
+                  // A route ("A → B") follows the UI; a note its own script.
+                  textDirection: tx.isTransfer && tx.cleanNote == null
+                      ? Directionality.of(context)
+                      : BidiIsolate.directionOf(title),
                   textAlign: TextAlign.start,
                   style: text.titleSmall?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w600),
                 ),

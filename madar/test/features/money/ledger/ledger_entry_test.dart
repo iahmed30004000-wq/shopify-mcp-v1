@@ -55,6 +55,14 @@ void main() {
       expect(AmountEntry.fromMilli(0).text, '');
     });
 
+    test('exact keeps a stored fraction finer than the currency', () {
+      final e = AmountEntry.exact(12345, decimals: 2);
+      expect((e.text, e.decimals, e.milli), ('12.345', 3, 12345));
+      expect(AmountEntry.exact(12340, decimals: 2).decimals, 2);
+      expect(AmountEntry.exact(-7000, decimals: 0).text, '7');
+      expect(AmountEntry.exact(7500, decimals: 0).decimals, 1);
+    });
+
     test('withDecimals truncates when the currency changes', () {
       expect(type('1.234').withDecimals(2).text, '1.23');
       expect(type('1.2').withDecimals(0).text, '1');

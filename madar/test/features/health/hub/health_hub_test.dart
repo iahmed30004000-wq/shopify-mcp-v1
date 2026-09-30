@@ -6,6 +6,7 @@
 // opening its screen as a route. Reasons of the Neglect Radar about doses
 // open today's doses. The hub's small decisions are pure.
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
@@ -40,6 +41,7 @@ Future<TestApp> _healthPage(
   String lang = 'ar',
   Future<void> Function(MadarDatabase db)? seed,
   String? location,
+  List<Override> overrides = const [],
 }) async {
   final app = await pumpMadarApp(
     tester,
@@ -47,7 +49,7 @@ Future<TestApp> _healthPage(
     initialLocation: location ?? AppRoutes.planetOf('health'),
     now: hubTestNow,
     beforePump: seed ?? _fresh,
-    overrides: LockFixture.empty().overrides,
+    overrides: [...LockFixture.empty().overrides, ...overrides],
     settle: false,
   );
   await _frames(tester, 60);
@@ -241,6 +243,30 @@ void main() {
     await tester.tap(find.text(l.healthHubQuestionsTitle));
     await settleApp(tester);
     expect(app.router.state.uri.toString(), AppRoutes.recordOf(tab: 'questions'));
+    await tester.pump(const Duration(seconds: 6));
+  });
+
+  testWidgets('low moods repeating: the gentle support note shows on the hub and its call opens the dialler', (
+    tester,
+  ) async {
+    final dialer = RecordingPhoneDialer();
+    await _healthPage(
+      tester,
+      lang: 'en',
+      seed: (db) => seedHealthHub(db, lang: 'en', seed: HubSeed.lowMood),
+      overrides: [phoneDialerProvider.overrideWithValue(dialer)],
+    );
+    final l = lookupL10n(const Locale('en'));
+    final banner = find.descendant(of: find.byType(HealthHub), matching: find.byType(SupportBanner));
+    await _reveal(tester, banner);
+    // Inside wellbeing today, above the check-in: what was logged, and the
+    // number – never a diagnosis or advice.
+    expect(find.descendant(of: banner, matching: find.text(l.wbSupportCompact)), findsOneWidget);
+    expect(tester.getTopLeft(banner).dy, lessThan(tester.getTopLeft(find.byType(HealthPainCard)).dy));
+    await tester.tap(find.descendant(of: banner, matching: find.byIcon(Icons.call_rounded)));
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 30)));
+    await _frames(tester, 10);
+    expect(dialer.dialed, ['911']);
     await tester.pump(const Duration(seconds: 6));
   });
 

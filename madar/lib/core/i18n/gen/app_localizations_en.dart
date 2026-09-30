@@ -11522,6 +11522,18 @@ class L10nEn extends L10n {
   String get ledgerArchivedBadge => 'Archived';
 
   @override
+  String get ledgerUnknownCurrencies =>
+      'Some wallets use currencies that aren\'t in your list yet. Add them with a rate so they count in the totals.';
+
+  @override
+  String ledgerAddCode(String code) {
+    return 'Add $code';
+  }
+
+  @override
+  String get ledgerFixRates => 'Set rates';
+
+  @override
   String get budgetTitle => 'Budget';
 
   @override

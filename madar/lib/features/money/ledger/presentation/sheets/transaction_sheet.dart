@@ -131,13 +131,10 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
     if (existing != null) {
       final d = TxDraft.fromTx(existing);
       _draft = d;
-      _amount = AmountEntry.fromMilli(
-        d.amountMilli,
-        decimals: fmt.decimalsOf(book.currencyOfWallet(d.walletId!) ?? ''),
-      );
+      _amount = AmountEntry.exact(d.amountMilli, decimals: fmt.decimalsOf(book.currencyOfWallet(d.walletId!) ?? ''));
       if (existing.isTransfer && existing.toAmountMilli != null && existing.toWalletId != null) {
         final toCur = book.currencyOfWallet(existing.toWalletId!) ?? '';
-        _received = AmountEntry.fromMilli(existing.toAmountMilli!, decimals: fmt.decimalsOf(toCur));
+        _received = AmountEntry.exact(existing.toAmountMilli!, decimals: fmt.decimalsOf(toCur));
       }
       _note.text = d.note;
       return;

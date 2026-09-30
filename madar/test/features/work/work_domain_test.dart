@@ -279,21 +279,23 @@ void main() {
           item('a', done: true),
           item('t', kind: FocusKind.task, date: yesterday),
           item('b'),
+          item('p', date: yesterday, sort: 1),
         ],
         storedDay: yesterday,
         today: today,
       );
       expect(s.items, isEmpty);
       expect(s.needsCarryOver, isTrue);
-      expect(s.leftovers.map((i) => i.id), ['b', 't']);
+      expect(s.leftovers.map((i) => i.id), ['b', 't', 'p']);
       expect(s.staleDone.map((i) => i.id), ['a']);
 
+      // A card placed in yesterday's window is redated too (its task moves).
       final carry = Top3Rules.carryOver(s);
       expect(carry.unflag.map((i) => i.id), ['a']);
-      expect(carry.redate.map((i) => i.id), ['t']);
+      expect(carry.redate.map((i) => i.id), ['t', 'p']);
 
       final fresh = Top3Rules.startFresh(s);
-      expect(fresh.unflag.map((i) => i.id).toSet(), {'a', 'b', 't'});
+      expect(fresh.unflag.map((i) => i.id).toSet(), {'a', 'b', 'p', 't'});
       expect(fresh.redate, isEmpty);
     });
 
