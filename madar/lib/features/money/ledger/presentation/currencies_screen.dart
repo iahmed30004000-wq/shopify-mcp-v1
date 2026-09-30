@@ -421,8 +421,10 @@ class _CodeBadge extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: RadialGradient(
+          // A faint core in dark themes: the symbol is drawn in the same
+          // hue and needs its AA contrast against it.
           colors: [
-            color.withValues(alpha: t.isDark ? 0.26 : 0.16),
+            color.withValues(alpha: t.isDark ? 0.12 : 0.16),
             color.withValues(alpha: 0.04),
           ],
         ),
@@ -440,7 +442,7 @@ class _CodeBadge extends StatelessWidget {
           if (symbol != code)
             Text(
               code,
-              style: LedgerStyle.amount(t, size: 9, color: t.textTertiary, weight: FontWeight.w500),
+              style: LedgerStyle.amount(t, size: 9, color: t.textSecondary, weight: FontWeight.w600),
             ),
         ],
       ),

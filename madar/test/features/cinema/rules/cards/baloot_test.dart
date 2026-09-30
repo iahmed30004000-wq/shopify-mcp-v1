@@ -232,6 +232,23 @@ void main() {
       expect(events.singleWhere((x) => x.type == CardEventType.belote).seat, 0);
     });
 
+    test('B7.8 a belote inside the holder\'s scored hundred is announced as void (value 0)', () {
+      final s = at(['KS QS KH KD KC', '8H 9H TH 7D 8D', 'JH QH AH 9D TD', '7H JD QD AD 8C'], buyer: 1)
+        ..belote = 0
+        ..projects = [BalootProject(BalootProjectType.hundred, 0, c('KS KH KD KC'))];
+      final e = BalootEngine(s);
+      for (final id in ['KS', '8H', 'JH', '7H', 'QS']) {
+        final events = e.apply(BalootMove.play(p(id)));
+        final belote = events.where((x) => x.type == CardEventType.belote);
+        if (id == 'QS') {
+          expect(belote.single.value, 0);
+          expect(belote.single.detail, 'void');
+        } else {
+          expect(belote, isEmpty);
+        }
+      }
+    });
+
     test('the belote holder is found from the hands when play starts', () {
       final e = BalootEngine(dealt(options: const BalootOptions(doubling: false)));
       e.apply(const BalootMove.pass());

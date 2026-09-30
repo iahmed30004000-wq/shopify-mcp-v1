@@ -646,7 +646,12 @@ class BalootRules extends CardRules<BalootState, BalootMove> {
     ev?.add(CardEvent(CardEventType.cardPlayed, seat: seat, cards: [card], detail: ekka ? 'ekka' : null));
     if (seat == s.belote && card.suit == s.trump && (card.rank == Rank.king || card.rank == Rank.queen)) {
       final other = PlayingCard(s.trump!, card.rank == Rank.king ? Rank.queen : Rank.king);
-      if (!s.hands[seat].contains(other)) ev?.add(CardEvent(CardEventType.belote, seat: seat, value: 2));
+      if (!s.hands[seat].contains(other)) {
+        // Announced with the second card; 0 (detail `void`) when the holder's
+        // own scored hundred holds the trump K or Q.
+        final counts = beloteCounts(s);
+        ev?.add(CardEvent(CardEventType.belote, seat: seat, value: counts ? 2 : 0, detail: counts ? null : 'void'));
+      }
     }
     if (trick.length < 4) {
       s.turn = (seat + 1) % 4;

@@ -81,7 +81,7 @@ class WidgetPage {
     this.countdownFormat,
     this.image,
     this.rows = const [],
-    this.more,
+    this.more = const [],
     this.empty,
     this.bar,
     this.warn = false,
@@ -110,8 +110,9 @@ class WidgetPage {
   final String? image;
   final List<WidgetRow> rows;
 
-  /// "+2 more doses" under a list cut short.
-  final String? more;
+  /// The line under a list cut short: `more[k - 1]` when k rows do not fit
+  /// ("+2 more doses" – plurals are Dart's, the fit is Android's).
+  final List<String> more;
 
   /// Shown instead of the rows when there are none.
   final String? empty;
@@ -134,7 +135,7 @@ class WidgetPage {
     'cdFmt': ?countdownFormat,
     'img': ?image,
     if (rows.isNotEmpty) 'rows': [for (final r in rows) r.toJson()],
-    'more': ?more,
+    if (more.isNotEmpty) 'more': more,
     'empty': ?empty,
     'bar': ?bar,
     if (warn) 'warn': true,
@@ -155,7 +156,10 @@ class WidgetPage {
         for (final r in (j['rows'] as List?) ?? const [])
           if (r is Map) WidgetRow.fromJson(r.cast<String, Object?>()),
       ],
-      more: j['more'] as String?,
+      more: [
+        for (final m in (j['more'] as List?) ?? const [])
+          if (m is String) m,
+      ],
       empty: j['empty'] as String?,
       bar: (j['bar'] as num?)?.toInt(),
       warn: j['warn'] == true,

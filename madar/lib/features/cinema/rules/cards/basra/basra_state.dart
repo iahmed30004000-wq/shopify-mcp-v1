@@ -144,6 +144,9 @@ class BasraOptions {
     );
   }
 
+  /// Targets offered in the games menu (any number is accepted).
+  static const List<int> targetChoices = [101, 121, 151];
+
   /// 2, 3 or 4.
   final int players;
 
