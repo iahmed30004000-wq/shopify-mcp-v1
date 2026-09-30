@@ -1,6 +1,8 @@
-/// Checkers AI: negamax alpha-beta with iterative deepening, capture
-/// extension (forced captures are searched past the horizon), repetition
-/// awareness and a material / advancement / back-rank evaluation.
+/// Checkers / Dama AI: negamax alpha-beta with iterative deepening, capture
+/// extension (forced captures are searched past the horizon), awareness of
+/// every game end the rules adjudicate (material adjudications, no-progress
+/// and repetition draws) and a material / advancement / back-rank
+/// evaluation. One AI serves every [CheckersConfig].
 library;
 
 import '../core/engine.dart';
@@ -10,6 +12,10 @@ import '../core/search.dart';
 import 'checkers_rules.dart';
 
 const int _win = 100000;
+
+/// How much worse than an even position a draw looks to the searching side,
+/// so the AI does not settle for a repetition in a balanced game.
+const int _contempt = 12;
 
 final class CheckersAi implements BoardAi<CheckersState, CheckersMove> {
   const CheckersAi();
@@ -53,6 +59,9 @@ final class _Search {
   final List<int> keys;
   bool abortable = false;
 
+  /// A draw's score for [player] (to move), with [_contempt] for the root.
+  int _draw(int player) => player == root ? -_contempt : _contempt;
+
   int evaluate(int player) {
     int score;
     final diagonal = gen.config.geometry == CheckersGeometry.diagonal;
@@ -88,12 +97,17 @@ final class _Search {
     final moves = gen.generate(board, player);
     if (moves.isEmpty) return -_win + ply;
     if (ply > 0) {
-      if (quiet >= gen.config.noProgressLimit) return 0;
+      final verdict = gen.adjudicate(board, player, captureForced: moves.first.isCapture);
+      if (verdict != null) {
+        final w = verdict.winner;
+        return w == null ? _draw(player) : (w == player ? _win - ply : -_win + ply);
+      }
+      if (quiet >= gen.config.noProgressLimit) return _draw(player);
       final key = keys.last;
       if (key != -1) {
         for (var i = keys.length - 3; i >= 0; i -= 2) {
           if (keys[i] == -1 || keys[i + 1] == -1) break;
-          if (keys[i] == key) return 0;
+          if (keys[i] == key) return _draw(player);
         }
       }
     }
@@ -107,12 +121,11 @@ final class _Search {
     moves.sort((a, b) => b.captures.length - a.captures.length);
     var best = -_win * 2;
     for (final m in moves) {
-      final wasMan = !CheckersPiece.isKing(board[m.from]);
+      final irreversible = CheckersMoveGen.isIrreversible(m, board[m.from]);
       final undo = gen.make(board, m, player);
       final savedQuiet = quiet;
-      final progress = m.isCapture || wasMan;
-      quiet = progress ? 0 : quiet + 1;
-      keys.add(progress ? -1 : checkersHash(board, 1 - player));
+      quiet = irreversible ? 0 : quiet + 1;
+      keys.add(irreversible ? -1 : checkersHash(board, 1 - player));
       int score;
       try {
         score = -_negamax(1 - player, depth - 1, -beta, -alpha, ply + 1, extensions);
@@ -129,12 +142,11 @@ final class _Search {
   }
 
   int _scoreRoot(CheckersMove m, int depth, int alpha, int beta) {
-    final wasMan = !CheckersPiece.isKing(board[m.from]);
+    final irreversible = CheckersMoveGen.isIrreversible(m, board[m.from]);
     final undo = gen.make(board, m, root);
     final savedQuiet = quiet;
-    final progress = m.isCapture || wasMan;
-    quiet = progress ? 0 : quiet + 1;
-    keys.add(progress ? -1 : checkersHash(board, 1 - root));
+    quiet = irreversible ? 0 : quiet + 1;
+    keys.add(irreversible ? -1 : checkersHash(board, 1 - root));
     try {
       return -_negamax(1 - root, depth - 1, -beta, -alpha, 1, 0);
     } finally {
@@ -158,7 +170,10 @@ final class _Search {
     }
     var best = 0, bestScore = -_win * 4;
     for (var i = 0; i < moves.length; i++) {
-      final s = scores[i] + rng.nextInt(2 * noise + 1) - noise;
+      // Noise blurs judgement, not forced results: a known win or loss keeps
+      // its exact score so the fastest win / slowest loss is taken.
+      final jitter = rng.nextInt(2 * noise + 1) - noise;
+      final s = scores[i].abs() >= _win - 1000 ? scores[i] : scores[i] + jitter;
       if (s > bestScore) {
         bestScore = s;
         best = i;

@@ -34,21 +34,14 @@ class OpenAiProvider extends HttpAiProvider {
     return AiHttpRequest(
       method: 'POST',
       url: baseUrl.resolve('/v1/chat/completions'),
-      headers: {
-        'authorization': 'Bearer $apiKey',
-        'content-type': 'application/json',
-        'accept': 'text/event-stream',
-      },
+      headers: {'authorization': 'Bearer $apiKey', 'content-type': 'application/json', 'accept': 'text/event-stream'},
       body: jsonEncode(body),
     );
   }
 
   @override
-  AiHttpRequest modelsRequest(String apiKey, {int? limit}) => AiHttpRequest(
-    method: 'GET',
-    url: baseUrl.resolve('/v1/models'),
-    headers: {'authorization': 'Bearer $apiKey'},
-  );
+  AiHttpRequest modelsRequest(String apiKey, {int? limit}) =>
+      AiHttpRequest(method: 'GET', url: baseUrl.resolve('/v1/models'), headers: {'authorization': 'Bearer $apiKey'});
 
   /// Model ids that can't chat (audio, images, embeddings …).
   static final RegExp _notChat = RegExp(

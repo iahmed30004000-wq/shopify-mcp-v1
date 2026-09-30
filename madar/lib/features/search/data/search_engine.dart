@@ -32,6 +32,11 @@ typedef SearchContextFactory = Future<SearchLoadContext> Function();
 /// first use, keeps it current from the database's table updates
 /// (debounced; only changed records are re-indexed) and answers queries,
 /// merging the live sources (the Quran) in.
+///
+/// It keeps going when things fail: a source whose update the worker
+/// rejects is sent again in full (with backoff), the other sources are not
+/// held up, a worker that stops answering is replaced, and a query never
+/// throws (it answers without the index instead).
 class SearchEngine {
   SearchEngine({
     required this._db,
@@ -41,8 +46,10 @@ class SearchEngine {
     DateTime Function()? clock,
     this.debounce = const Duration(milliseconds: 350),
     this.maxDelay = const Duration(milliseconds: 1500),
-    this.applyChunk = 2500,
+    this.applyChunk = 1000,
     this.liveTimeout = const Duration(seconds: 3),
+    this.workerTimeout = const Duration(seconds: 4),
+    this.applyTimeout = const Duration(seconds: 30),
   }) : _contextFactory = context,
        _workerFactory = workerFactory ?? (() => IsolateSearchWorker.spawn()),
        _clock = clock ?? DateTime.now;
@@ -59,14 +66,26 @@ class SearchEngine {
   /// Longest a change waits under a stream of further changes.
   final Duration maxDelay;
 
-  /// Records sent to the worker per message.
+  /// Records sent to the worker per message (each message is copied on
+  /// this isolate, so it stays small).
   final int applyChunk;
 
   /// Longest a live source may take before a query answers without it.
   final Duration liveTimeout;
 
+  /// Longest the worker may take to answer a query (it answers in
+  /// milliseconds; after this it is taken for stuck and replaced).
+  final Duration workerTimeout;
+
+  /// Longest the worker may take to apply one update message.
+  final Duration applyTimeout;
+
   /// Hits asked of a live source when it is not the only group shown.
   static const int liveLimit = 30;
+
+  /// Records processed on this isolate between two breaks (so a large
+  /// source never holds a frame for long).
+  static const int _slice = 1000;
 
   /// Current state (the screen shows "preparing" while indexing).
   final ValueNotifier<SearchEngineStatus> status = ValueNotifier(SearchEngineStatus.idle);
@@ -90,11 +109,28 @@ class SearchEngine {
   final Map<String, Map<String, int>> _hashes = {};
   Map<String, double> _planetWeights = const {};
 
+  /// The planets changed while nobody listened: re-read at the next query.
+  bool _planetsStale = false;
+
   final Set<String> _dirty = {};
 
   /// Sources changed while nobody listened to [changes]: re-read at the
   /// next query instead (no work on the UI isolate while search is closed).
   final Set<String> _deferred = {};
+
+  /// Sources the index may hold a partial update of (a failed one): sent
+  /// again in full, after clearing them.
+  final Set<String> _resync = {};
+  int _failures = 0;
+  Timer? _retryTimer;
+
+  /// The index dropped records at its cap: after removals, send them again
+  /// if they fit (see [SearchIndexStats.readmit]).
+  bool _mayHaveDropped = false;
+
+  bool _restarting = false;
+  DateTime? _lastRestart;
+
   Timer? _debounceTimer;
   DateTime? _firstDirtyAt;
   Future<void> _updates = Future.value();
@@ -106,13 +142,7 @@ class SearchEngine {
   Future<void> _start() async {
     status.value = SearchEngineStatus.indexing;
     try {
-      SearchWorker worker;
-      try {
-        worker = await _workerFactory();
-      } on Object catch (e) {
-        debugPrint('Search: background worker unavailable ($e); indexing inline');
-        worker = InlineSearchWorker();
-      }
+      final worker = await _spawn();
       if (_disposed) {
         await worker.close();
         return;
@@ -122,7 +152,13 @@ class SearchEngine {
       await _loadPlanetWeights();
       _tableSub = _db.tableUpdates(TableUpdateQuery.any()).listen((updates) {
         final tables = {for (final u in updates) u.table};
-        if (tables.contains('planets')) unawaited(_loadPlanetWeights());
+        if (tables.contains('planets')) {
+          if (_changes.hasListener) {
+            unawaited(_loadPlanetWeights());
+          } else {
+            _planetsStale = true;
+          }
+        }
         for (final s in _loaded.values) {
           if (s.tables.any(tables.contains)) _markDirty(s.id);
         }
@@ -130,12 +166,23 @@ class SearchEngine {
       _registry.addListener(_onRegistry);
       for (final s in _registry.indexed.toList()) {
         if (_disposed) return;
+        // A source that fails is retried on its own; the others go on.
         await _load(s);
       }
+      await _readmit(always: true);
       if (!_disposed) status.value = SearchEngineStatus.ready;
     } on Object catch (e, st) {
       debugPrint('Search: indexing failed: $e\n$st');
       if (!_disposed) status.value = SearchEngineStatus.failed;
+    }
+  }
+
+  Future<SearchWorker> _spawn() async {
+    try {
+      return await _workerFactory();
+    } on Object catch (e) {
+      debugPrint('Search: background worker unavailable ($e); indexing inline');
+      return InlineSearchWorker();
     }
   }
 
@@ -157,7 +204,12 @@ class SearchEngine {
     await _reload(s);
   }
 
-  /// Re-reads [s] and sends only the records that changed.
+  /// A break for this isolate's event loop (frames, input).
+  static Future<void> _breathe() => Future<void>.delayed(Duration.zero);
+
+  /// Re-reads [s] and sends only the records that changed. When the worker
+  /// fails the update, the source is marked to be cleared and sent again in
+  /// full, and a retry is scheduled.
   Future<void> _reload(SearchSource s) async {
     final worker = _worker;
     final ctx = _ctx;
@@ -169,31 +221,121 @@ class SearchEngine {
       debugPrint('Search: source ${s.id} failed to load: $e\n$st');
       return;
     }
-    if (_disposed || _loaded[s.id] != s) return;
-    final previous = _hashes[s.id] ?? const <String, int>{};
+    if (_disposed || _loaded[s.id] != s || !identical(worker, _worker)) return;
+    final full = _resync.contains(s.id);
+    final previous = full ? const <String, int>{} : (_hashes[s.id] ?? const <String, int>{});
     final next = <String, int>{};
     final upserts = <SearchDoc>[];
-    for (final raw in docs) {
-      final doc = raw.withSource(s.id);
+    var duplicates = false;
+    for (var i = 0; i < docs.length; i++) {
+      if (i > 0 && i % _slice == 0) {
+        await _breathe();
+        if (_disposed) return;
+      }
+      final doc = docs[i].withSource(s.id);
       final hash = doc.contentHash;
-      if (next.containsKey(doc.id)) upserts.removeWhere((d) => d.id == doc.id);
+      if (next.containsKey(doc.id)) duplicates = true;
       next[doc.id] = hash;
       if (previous[doc.id] != hash) upserts.add(doc);
+    }
+    if (duplicates) {
+      // The last record with an id wins.
+      final seen = <String>{};
+      final kept = <SearchDoc>[];
+      for (final d in upserts.reversed) {
+        if (seen.add(d.id)) kept.add(d);
+      }
+      upserts
+        ..clear()
+        ..addAll(kept.reversed);
     }
     final removals = [
       for (final id in previous.keys)
         if (!next.containsKey(id)) '${s.id}\u0001$id',
     ];
-    _hashes[s.id] = next;
-    if (upserts.isEmpty && removals.isEmpty) return;
-    // Large sources go over in chunks so no single message is huge.
-    var i = 0;
-    do {
-      final end = i + applyChunk < upserts.length ? i + applyChunk : upserts.length;
-      await worker.apply(SearchIndexDelta(upserts: upserts.sublist(i, end), removals: i == 0 ? removals : const []));
+    if (!full && upserts.isEmpty && removals.isEmpty) {
+      _hashes[s.id] = next;
+      return;
+    }
+    try {
+      // Large sources go over in chunks so no single message is huge.
+      var i = 0;
+      var first = true;
+      do {
+        final end = i + applyChunk < upserts.length ? i + applyChunk : upserts.length;
+        await worker
+            .apply(
+              SearchIndexDelta(
+                clearSources: first && full ? {s.id} : const {},
+                upserts: upserts.sublist(i, end),
+                removals: first ? removals : const [],
+              ),
+            )
+            .timeout(applyTimeout);
+        if (_disposed) return;
+        first = false;
+        i = end;
+      } while (i < upserts.length);
+      _hashes[s.id] = next;
+      _resync.remove(s.id);
+      _failures = 0;
+      if (removals.isNotEmpty) _roomMade = true;
+    } on Object catch (e) {
+      debugPrint('Search: updating ${s.id} failed ($e); sending it again');
       if (_disposed) return;
-      i = end;
-    } while (i < upserts.length);
+      _hashes.remove(s.id);
+      _resync.add(s.id);
+      _scheduleRetry(s.id);
+    }
+  }
+
+  /// Records were removed in the last update (dropped ones may fit again).
+  bool _roomMade = false;
+
+  /// Retries the sources whose update failed, backing off (the debounce,
+  /// doubled per failure in a row, at most half a minute); while nobody
+  /// listens, at the next query instead.
+  void _scheduleRetry(String sourceId) {
+    _failures++;
+    if (!_changes.hasListener) {
+      _deferred.add(sourceId);
+      return;
+    }
+    _dirty.add(sourceId);
+    if (_retryTimer != null) return;
+    final ms = debounce.inMilliseconds * (1 << (_failures < 7 ? _failures : 7));
+    _retryTimer = Timer(Duration(milliseconds: ms.clamp(1, 30000)), () {
+      _retryTimer = null;
+      _flush();
+    });
+  }
+
+  /// Sends records the index dropped at its cap again once removals made
+  /// room for them ([always]: ask even if nothing was removed).
+  Future<void> _readmit({bool always = false}) async {
+    if (!always && !(_mayHaveDropped && _roomMade)) return;
+    _roomMade = false;
+    final worker = _worker;
+    if (worker == null || _disposed) return;
+    try {
+      final stats = await worker.stats().timeout(workerTimeout);
+      _mayHaveDropped = stats.evicted > 0;
+      if (stats.readmit.isEmpty) return;
+      final sources = <String>{};
+      for (final key in stats.readmit) {
+        final sep = key.indexOf('\u0001');
+        if (sep < 0) continue;
+        final source = key.substring(0, sep);
+        _hashes[source]?.remove(key.substring(sep + 1));
+        sources.add(source);
+      }
+      for (final id in sources) {
+        final s = _loaded[id];
+        if (s != null) await _reload(s);
+      }
+    } on Object catch (e) {
+      debugPrint('Search: could not check dropped records: $e');
+    }
   }
 
   void _markDirty(String sourceId) {
@@ -211,26 +353,44 @@ class SearchEngine {
     _debounceTimer = Timer(wait, _flush);
   }
 
+  /// Runs [job] after the updates before it, whatever happened to them; a
+  /// failing job never stops the ones after it.
+  void _enqueue(Future<void> Function() job) {
+    _updates = _updates.then((_) async {
+      if (_disposed) return;
+      try {
+        await job();
+      } on Object catch (e, st) {
+        debugPrint('Search: update failed: $e\n$st');
+      }
+    });
+  }
+
+  void _bump() {
+    if (_disposed) return;
+    _revision++;
+    _changes.add(_revision);
+  }
+
   void _flush() {
     _debounceTimer = null;
     _firstDirtyAt = null;
     final ids = _dirty.toList();
     _dirty.clear();
     if (ids.isEmpty || _disposed) return;
-    _updates = _updates.then((_) async {
+    _enqueue(() async {
       for (final id in ids) {
         final s = _loaded[id];
         if (s != null) await _reload(s);
       }
-      if (_disposed) return;
-      _revision++;
-      _changes.add(_revision);
+      await _readmit();
+      _bump();
     });
   }
 
   void _onRegistry() {
     if (_disposed || _worker == null) return;
-    _updates = _updates.then((_) async {
+    _enqueue(() async {
       final now = {for (final s in _registry.indexed) s.id: s};
       final removed = [
         for (final id in _loaded.keys)
@@ -239,21 +399,58 @@ class SearchEngine {
       for (final id in removed) {
         _loaded.remove(id);
         _hashes.remove(id);
+        _resync.remove(id);
         await _extraSubs.remove(id)?.cancel();
       }
-      if (removed.isNotEmpty) await _worker?.apply(SearchIndexDelta(clearSources: removed.toSet()));
+      if (removed.isNotEmpty) await _worker?.apply(SearchIndexDelta(clearSources: removed.toSet())).timeout(applyTimeout);
       for (final s in now.values) {
         if (!identical(_loaded[s.id], s)) {
           if (_loaded.containsKey(s.id)) {
             _hashes.remove(s.id);
-            await _worker?.apply(SearchIndexDelta(clearSources: {s.id}));
+            _resync.add(s.id);
           }
           await _load(s);
         }
       }
-      if (_disposed) return;
-      _revision++;
-      _changes.add(_revision);
+      _bump();
+    });
+  }
+
+  /// The worker stopped answering: replace it and index everything again
+  /// (at most once a minute).
+  void _replaceWorker() {
+    if (_disposed || _restarting) return;
+    final now = DateTime.now();
+    final last = _lastRestart;
+    if (last != null && now.difference(last) < const Duration(minutes: 1)) return;
+    _restarting = true;
+    _lastRestart = now;
+    _enqueue(() async {
+      try {
+        final old = _worker;
+        _worker = null;
+        try {
+          await old?.close().timeout(const Duration(seconds: 2));
+        } on Object {
+          // Gone either way.
+        }
+        final worker = await _spawn();
+        if (_disposed) {
+          await worker.close();
+          return;
+        }
+        _worker = worker;
+        _hashes.clear();
+        _resync.clear();
+        status.value = SearchEngineStatus.indexing;
+        for (final s in _loaded.values.toList()) {
+          await _reload(s);
+        }
+        if (!_disposed) status.value = SearchEngineStatus.ready;
+        _bump();
+      } finally {
+        _restarting = false;
+      }
     });
   }
 
@@ -266,6 +463,8 @@ class SearchEngine {
     }
     if (_dirty.isNotEmpty) {
       _debounceTimer?.cancel();
+      _retryTimer?.cancel();
+      _retryTimer = null;
       _flush();
     }
     await _updates;
@@ -281,11 +480,17 @@ class SearchEngine {
   }
 
   /// Answers [request]: the index and the live sources, merged by score.
+  /// Never throws: without a working index it answers with the live
+  /// sources alone.
   Future<SearchResults> search(SearchRequest request) async {
     final text = request.text.trim();
     if (text.isEmpty) return SearchResults.empty(request);
     await warmUp();
     if (_deferred.isNotEmpty) await flushNow();
+    if (_planetsStale && !_disposed) {
+      _planetsStale = false;
+      await _loadPlanetWeights();
+    }
     final worker = _worker;
     final ctx = _ctx;
     if (worker == null || ctx == null || _disposed) return SearchResults.empty(request);
@@ -313,18 +518,22 @@ class SearchEngine {
               },
             ),
     ];
-    final SearchIndexResult indexed;
+    SearchIndexResult indexed;
     try {
-      indexed = await worker.search(query);
+      indexed = await worker.search(query).timeout(workerTimeout);
+    } on TimeoutException {
+      debugPrint('Search: the index did not answer in $workerTimeout; replacing it');
+      indexed = SearchIndexResult.empty;
+      _replaceWorker();
     } on Object catch (e) {
       debugPrint('Search: query failed: $e');
-      return SearchResults.empty(request);
+      indexed = SearchIndexResult.empty;
     }
     final counts = {
       for (final e in indexed.counts.entries) e.key: Map<String, int>.of(e.value),
     };
-    final hits = [...indexed.hits];
     var total = indexed.total;
+    final extra = <SearchHit>[];
     for (final (source, result) in await Future.wait(live)) {
       if (result.total == 0) continue;
       final byGroup = counts[source.planetKey] ??= <String, int>{};
@@ -333,7 +542,7 @@ class SearchEngine {
       if (request.groups.isNotEmpty && !request.groups.contains(source.id)) continue;
       total += result.total;
       for (final h in result.hits) {
-        hits.add(
+        extra.add(
           SearchHit(
             doc: h.doc.withSource(source.id),
             score: h.score * source.weight,
@@ -345,10 +554,21 @@ class SearchEngine {
         );
       }
     }
-    hits.sort((a, b) => b.score.compareTo(a.score));
+    // The index's order stands (records needing a typo come after exact
+    // ones whatever their score); live hits are merged in by score.
+    mergeSort(extra, compare: (a, b) => b.score.compareTo(a.score));
+    final hits = <SearchHit>[];
+    var i = 0, j = 0;
+    while (hits.length < request.limit && (i < indexed.hits.length || j < extra.length)) {
+      if (j >= extra.length || (i < indexed.hits.length && indexed.hits[i].score >= extra[j].score)) {
+        hits.add(indexed.hits[i++]);
+      } else {
+        hits.add(extra[j++]);
+      }
+    }
     return SearchResults(
       request: request,
-      hits: hits.length > request.limit ? hits.sublist(0, request.limit) : hits,
+      hits: hits,
       total: total,
       counts: counts,
       partial: indexed.partial,
@@ -360,7 +580,14 @@ class SearchEngine {
   Future<SearchIndexStats> stats() async {
     await warmUp();
     await flushNow();
-    return _worker?.stats() ?? Future.value(const SearchIndexStats(docs: 0, terms: 0, postings: 0, approxBytes: 0, evicted: 0));
+    const none = SearchIndexStats(docs: 0, terms: 0, postings: 0, approxBytes: 0, evicted: 0);
+    final worker = _worker;
+    if (worker == null) return none;
+    try {
+      return await worker.stats().timeout(workerTimeout);
+    } on Object {
+      return none;
+    }
   }
 
   /// Stops following changes and closes the worker.
@@ -368,7 +595,9 @@ class SearchEngine {
     if (_disposed) return;
     _disposed = true;
     _debounceTimer?.cancel();
+    _retryTimer?.cancel();
     _registry.removeListener(_onRegistry);
+    status.value = SearchEngineStatus.idle;
     await _tableSub?.cancel();
     for (final s in _extraSubs.values) {
       await s.cancel();
@@ -377,7 +606,11 @@ class SearchEngine {
     await _changes.close();
     final worker = _worker;
     _worker = null;
-    await worker?.close();
+    try {
+      await worker?.close();
+    } on Object {
+      // Closing is best effort.
+    }
     status.dispose();
   }
 }

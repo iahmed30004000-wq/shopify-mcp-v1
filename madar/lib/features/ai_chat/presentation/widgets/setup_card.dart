@@ -50,7 +50,11 @@ class AiKeySetupCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: Space.l),
-          Text(l.aiChatSetupTitle, textAlign: TextAlign.center, style: text.headlineSmall!.copyWith(color: t.textPrimary)),
+          Text(
+            l.aiChatSetupTitle,
+            textAlign: TextAlign.center,
+            style: text.headlineSmall!.copyWith(color: t.textPrimary),
+          ),
           const SizedBox(height: Space.s),
           Text(
             l.aiChatSetupBody,
@@ -76,10 +80,7 @@ class AiKeySetupCard extends StatelessWidget {
               Icon(Icons.shield_moon_outlined, size: 16, color: t.textTertiary),
               const SizedBox(width: Space.s),
               Expanded(
-                child: Text(
-                  l.aiChatSetupPrivacy,
-                  style: text.bodySmall!.copyWith(color: t.textTertiary, height: 1.45),
-                ),
+                child: Text(l.aiChatSetupPrivacy, style: text.bodySmall!.copyWith(color: t.textTertiary, height: 1.45)),
               ),
             ],
           ),

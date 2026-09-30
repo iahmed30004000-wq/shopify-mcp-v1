@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 /// One word of a text, folded for search.
 @immutable
 class SearchToken {
-  const SearchToken(this.term, this.start, this.end, this.position, [this.origins]);
+  const SearchToken(this.term, this.start, this.end, this.position, [this.origins, this.hamzaAlefs = 0, this.ending = 0]);
 
   /// The folded word (see [SearchText]).
   final String term;
@@ -25,6 +25,16 @@ class SearchToken {
   /// For each code unit of [term], the code unit of the original it came
   /// from (only when tokenised with `withOrigins`).
   final List<int>? origins;
+
+  /// Bit k set: letter k of [term] (k < 8) was an alef carrying a hamza or
+  /// a madda (أ إ آ) in the original. The definite article's alef never
+  /// does, so «إلهام» is not «ال» + «هام».
+  final int hamzaAlefs;
+
+  /// How the word's last letter was spelled when it folds to ي or ه:
+  /// [SearchText.endingPlain] (ي / ه), [SearchText.endingMarked] (ى / ة),
+  /// or 0.
+  final int ending;
 
   /// The original range of the folded stretch [from, to) of [term] (the
   /// whole word when origins were not kept or the stretch is the whole
@@ -48,9 +58,15 @@ class SearchToken {
 ///
 /// * Arabic: diacritics (harakat, shadda, sukun, superscript alef), Quranic
 ///   annotation signs and tatweel are dropped; every alef form (أ إ آ ٱ) →
-///   ا; ى / ی → ي; ة → ه; ؤ → و; ئ → ي; a bare hamza ء is dropped; ک → ك.
+///   ا; ى / ی → ي; ة → ه; ؤ → و; ئ → ي; ک → ك. A hamza on the line ء is
+///   kept: «غداء» (lunch) is not «غداً» (tomorrow), «دواء» is not the start
+///   of «دوام». A query typed without it still finds it (see
+///   [dropHamza]).
 /// * Digits: Arabic-Indic (٠-٩) and Persian (۰-۹) digits → 0-9, so «١٢»
-///   finds «12» and the other way round.
+///   finds «12» and the other way round. An amount stays one word across
+///   its separators: grouping (, ٬) is dropped and the decimal point (. ٫)
+///   kept as «.», without trailing zeros – «١٬٢٥٠٫٠٠٠» and «1,250.000» are
+///   both «1250», «١٢٫٥٠٠» is «12.5».
 /// * Latin: lower-cased; accented Latin-1 letters lose their accents (é → e);
 ///   combining accents are dropped.
 /// * Invisible characters (bidi isolates and marks, zero-width joiners, soft
@@ -61,6 +77,15 @@ abstract final class SearchText {
   /// Longest folded word kept (longer words are cut; they still match by
   /// prefix).
   static const int maxTermLength = 40;
+
+  /// The hamza on the line, kept by the folding.
+  static const int hamza = 0x0621;
+
+  /// [SearchToken.ending]: the last letter was written ي / ه.
+  static const int endingPlain = 1;
+
+  /// [SearchToken.ending]: the last letter was written ى / ة.
+  static const int endingMarked = 2;
 
   /// Dropped inside a word (a mark, tatweel, invisible control).
   static const int _drop = -1;
@@ -107,7 +132,6 @@ abstract final class SearchText {
     switch (c) {
       case 0x0640: // tatweel
       case 0x061C: // Arabic letter mark
-      case 0x0621: // hamza on the line
       case 0x0674: // high hamza
         return _drop;
       case 0x0622 || 0x0623 || 0x0625 || 0x0671 || 0x0672 || 0x0673:
@@ -129,36 +153,136 @@ abstract final class SearchText {
   static bool isArabic(int c) =>
       (c >= 0x0620 && c <= 0x06FF) || (c >= 0x08A0 && c <= 0x08FF) || (c >= 0xFB50 && c <= 0xFEFC);
 
+  static bool _isDigit(int c) => (c >= 0x30 && c <= 0x39) || (c >= 0x0660 && c <= 0x0669) || (c >= 0x06F0 && c <= 0x06F9);
+
+  static bool _isGroupSep(int c) => c == 0x2C || c == 0x066C; // , ٬
+
+  static bool _isDecimalSep(int c) => c == 0x2E || c == 0x066B; // . ٫
+
+  static bool _isSep(int c) => _isGroupSep(c) || _isDecimalSep(c);
+
+  static bool _digitsAt(String s, int from, int count) {
+    if (from + count > s.length) return false;
+    for (var k = from; k < from + count; k++) {
+      if (!_isDigit(s.codeUnitAt(k))) return false;
+    }
+    return true;
+  }
+
+  /// Where the amount starting at [i] (a digit that starts a word) ends,
+  /// when it is written with thousands groups («1,250», «١٬٢٥٠») and / or
+  /// decimals («12.5», «١٢٫٥٠٠»); null for a plain run of digits and for
+  /// things that only look like numbers (versions and dates «1.2.3», codes
+  /// «1.5kg»).
+  static int? _amountEnd(String s, int i) {
+    final n = s.length;
+    // The second part of «1.2.3» or «1,2».
+    if (i >= 2 && _isSep(s.codeUnitAt(i - 1)) && _isDigit(s.codeUnitAt(i - 2))) return null;
+    var j = i;
+    while (j < n && _isDigit(s.codeUnitAt(j))) {
+      j++;
+    }
+    var end = -1;
+    if (j - i <= 3) {
+      // Thousands groups: exactly three digits after each separator.
+      var k = j;
+      while (k < n && _isGroupSep(s.codeUnitAt(k)) && _digitsAt(s, k + 1, 3) && !(k + 4 < n && _isDigit(s.codeUnitAt(k + 4)))) {
+        k += 4;
+      }
+      if (k > j) end = j = k;
+    }
+    if (j + 1 < n && _isDecimalSep(s.codeUnitAt(j)) && _isDigit(s.codeUnitAt(j + 1))) {
+      var k = j + 1;
+      while (k < n && _isDigit(s.codeUnitAt(k))) {
+        k++;
+      }
+      // «1.2.3», «12.5,7»: not an amount.
+      if (k + 1 < n && _isSep(s.codeUnitAt(k)) && _isDigit(s.codeUnitAt(k + 1))) return null;
+      end = k;
+    }
+    if (end < 0) return null;
+    if (end < n) {
+      final f = _fold(s.codeUnitAt(end));
+      if (f >= 0 && !isArabic(f)) return null; // «1.5kg»: a code
+    }
+    return end;
+  }
+
   /// The words of [text], folded. With [withOrigins] every token also maps
   /// its folded letters back to the original (for highlights). At most
   /// [maxTokens] words are read.
   static List<SearchToken> tokenize(String text, {bool withOrigins = false, int maxTokens = 1 << 30}) {
     final out = <SearchToken>[];
     if (text.isEmpty) return out;
-    final buf = StringBuffer();
+    final units = <int>[];
     var origins = <int>[];
     var inWord = false;
     var arabicWord = false;
     var start = 0;
     var end = 0;
-    var length = 0;
+    var hamzaAlefs = 0;
+    var lastRaw = 0;
+    // An amount being read: its end and whether it has a decimal point.
+    var amountEnd = -1;
+    var decimal = false;
 
     void flush() {
       if (!inWord) return;
-      out.add(SearchToken(buf.toString(), start, end, out.length, withOrigins ? List.unmodifiable(origins) : null));
-      buf.clear();
+      var length = units.length;
+      if (decimal) {
+        // «12.500» → «12.5», «1250.000» → «1250».
+        while (length > 0 && units[length - 1] == 0x30) {
+          length--;
+        }
+        if (length > 0 && units[length - 1] == 0x2E) length--;
+      }
+      var ending = 0;
+      if (length > 0 && arabicWord) {
+        final last = units[length - 1];
+        if (last == 0x064A) {
+          ending = lastRaw == 0x064A ? endingPlain : (lastRaw == 0x0649 || lastRaw == 0x06CC ? endingMarked : 0);
+        } else if (last == 0x0647) {
+          ending = lastRaw == 0x0647 ? endingPlain : (lastRaw == 0x0629 ? endingMarked : 0);
+        }
+      }
+      final term = String.fromCharCodes(length == units.length ? units : units.sublist(0, length));
+      out.add(
+        SearchToken(
+          term,
+          start,
+          end,
+          out.length,
+          withOrigins ? List.unmodifiable(length == origins.length ? origins : origins.sublist(0, length)) : null,
+          hamzaAlefs,
+          ending,
+        ),
+      );
+      units.clear();
       if (withOrigins) origins = <int>[];
       inWord = false;
-      length = 0;
+      hamzaAlefs = 0;
+      decimal = false;
+      amountEnd = -1;
     }
 
     for (var i = 0; i < text.length; i++) {
-      final f = _fold(text.codeUnitAt(i));
+      final c = text.codeUnitAt(i);
+      final f = _fold(c);
       if (f == _drop) {
         if (inWord) end = i + 1; // marks after a letter belong to it
         continue;
       }
       if (f == _sep) {
+        if (inWord && i < amountEnd) {
+          // Inside an amount: grouping is dropped, the decimal point kept.
+          end = i + 1;
+          if (_isDecimalSep(c) && units.length < maxTermLength) {
+            units.add(0x2E);
+            if (withOrigins) origins.add(i);
+            decimal = true;
+          }
+          continue;
+        }
         flush();
         if (out.length >= maxTokens) break;
         continue;
@@ -172,12 +296,14 @@ abstract final class SearchText {
         inWord = true;
         arabicWord = arabic;
         start = i;
+        if (f >= 0x30 && f <= 0x39) amountEnd = _amountEnd(text, i) ?? -1;
       }
       end = i + 1;
-      if (length < maxTermLength) {
-        buf.writeCharCode(f);
+      if (units.length < maxTermLength) {
+        if (units.length < 8 && (c == 0x0622 || c == 0x0623 || c == 0x0625)) hamzaAlefs |= 1 << units.length;
+        units.add(f);
         if (withOrigins) origins.add(i);
-        length++;
+        lastRaw = c;
       }
     }
     if (out.length < maxTokens) flush();
@@ -198,15 +324,102 @@ abstract final class SearchText {
   /// Shortest word left after taking off an article.
   static const int minStemLength = 3;
 
+  /// Two-letter words after a bare «ال» that are not article + noun
+  /// («الله», «الذي», «التي», «الآن», «اللي»).
+  static const Set<String> _shortStemStop = {'له', 'ذي', 'تي', 'ان', 'لي'};
+
   /// [term] without its definite article («الكتاب» / «والكتاب» → «كتاب»),
-  /// or null when it has none (or too little would be left).
-  static String? stem(String term) {
-    if (term.length < minStemLength + 2 || !isArabic(term.codeUnitAt(0))) return null;
+  /// or null when it has none (or too little would be left). Two-letter
+  /// nouns keep their article only after a bare «ال» («الدم» → «دم»).
+  /// [hamzaAlefs] (see [SearchToken.hamzaAlefs]) keeps names such as
+  /// «إلهام» whole: the article's alef never carries a hamza.
+  static String? stem(String term, {int hamzaAlefs = 0}) {
+    if (term.length < 4 || !isArabic(term.codeUnitAt(0))) return null;
     for (final p in _articles) {
-      if (term.startsWith(p) && term.length - p.length >= minStemLength) return term.substring(p.length);
+      if (!term.startsWith(p)) continue;
+      final alef = p.indexOf('ا');
+      if (alef >= 0 && hamzaAlefs & (1 << alef) != 0) continue;
+      final rest = term.length - p.length;
+      if (rest >= minStemLength) return term.substring(p.length);
+      if (rest == 2 && p == 'ال') {
+        final s = term.substring(2);
+        if (!_shortStemStop.contains(s)) return s;
+      }
     }
     return null;
   }
+
+  static const int _waw = 0x0648, _faa = 0x0641, _baa = 0x0628, _lam = 0x0644, _kaf = 0x0643;
+
+  /// [term] without a leading conjunction or preposition written onto it
+  /// (و ب ل, and ف ك before longer words; و / ف + ب / ل): «وحليب» →
+  /// «حليب», «بمحمود» → «محمود», «وبسارة» → «ساره» (and «بساره»). Words
+  /// with an article are left to [stem].
+  static List<String> proclitics(String term) {
+    final n = term.length;
+    if (n < 4) return const [];
+    final c0 = term.codeUnitAt(0);
+    if (c0 != _waw && c0 != _faa && c0 != _baa && c0 != _lam && c0 != _kaf) return const [];
+    final out = <String>[];
+    final minRest = c0 == _faa || c0 == _kaf ? 4 : 3;
+    if (n - 1 >= minRest && !term.startsWith('ال', 1)) out.add(term.substring(1));
+    if ((c0 == _waw || c0 == _faa) && n - 2 >= 3) {
+      final c1 = term.codeUnitAt(1);
+      if ((c1 == _baa || c1 == _lam) && !term.startsWith('ال', 2)) out.add(term.substring(2));
+    }
+    return out;
+  }
+
+  /// Every other form [term] is found by, with where it starts in [term]:
+  /// without its article ([stem]), without a leading conjunction or
+  /// preposition ([proclitics]), and – with [compounds] – the parts of a
+  /// compound name written as one word («عبدالرحمن» → «عبد», «الرحمن»,
+  /// «رحمن»; «ابوعلي» → «ابو», «علي»).
+  static List<(String, int)> variants(String term, {int hamzaAlefs = 0, bool compounds = true}) {
+    if (term.length < 4 || !isArabic(term.codeUnitAt(0))) return const [];
+    final out = <(String, int)>[];
+    final s = stem(term, hamzaAlefs: hamzaAlefs);
+    if (s != null) {
+      out.add((s, term.length - s.length));
+    } else {
+      for (final p in proclitics(term)) {
+        out.add((p, term.length - p.length));
+      }
+    }
+    if (compounds) {
+      if (term.startsWith('عبدال') && term.length >= 6) {
+        final rest = term.substring(3);
+        out.add(('عبد', 0));
+        out.add((rest, 3));
+        final rs = stem(rest);
+        if (rs != null) out.add((rs, term.length - rs.length));
+      } else if (term.startsWith('ابو') && term.length >= 6) {
+        out.add(('ابو', 0));
+        out.add((term.substring(3), 3));
+      }
+    }
+    return out;
+  }
+
+  /// Joined spelling of two neighbouring words of a compound name («عبد» +
+  /// «الله» → «عبدالله», «ابو» + «علي» → «ابوعلي»), or null.
+  static String? compound(String first, String second) {
+    if (second.length < 2 || !isArabic(second.codeUnitAt(0))) return null;
+    if (first == 'عبد' && second.startsWith('ال') && second.length >= 3) return '$first$second';
+    if (first == 'ابو' && second.length >= 3) return '$first$second';
+    return null;
+  }
+
+  /// [term] without its hamzas («قراءه» → «قراه»): how it reads when typed
+  /// without them.
+  static String dropHamza(String term) => term.replaceAll('ء', '');
+
+  /// Whether [term] holds a hamza on the line.
+  static bool hasHamza(String term) => term.contains('ء');
+
+  /// Pronoun and dual endings after a taa marbuta turned ت («زوجتي»،
+  /// «رحلتنا»، «سنتين»).
+  static const Set<String> taaSuffixes = {'ي', 'ك', 'ه', 'نا', 'كم', 'كن', 'ها', 'هم', 'هن', 'كما', 'هما', 'ان', 'ين'};
 
   /// Whether [a] and [b] differ by at most one edit (insert, delete,
   /// substitute, or swap of two neighbouring letters).

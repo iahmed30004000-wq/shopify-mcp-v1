@@ -49,7 +49,8 @@ precision highp float;
 //   sampler 0 uFrame     the rendered frame (opaque).
 // Output: opaque, premultiplied.
 // Budget: ≤ 10 texture fetches/pixel at full quality (1 frame + 8 glow +
-// 1 dye registration for Technicolor; 1 + 4 soft focus for the silents),
+// 1 dye registration for Technicolor; 1 + 4 soft-focus / edge taps for the
+// silent, 1930s and noir stocks),
 // 1 in low power. Branches only on uniforms (and the per-cell dust test).
 // ---------------------------------------------------------------------------
 
@@ -89,7 +90,8 @@ vec3 threeStrip(vec3 c) {
   sep = mix(sep, 1.0 - (1.0 - sep) * (1.0 - sep), 0.18);
   sep = mix(sep, sep * sep * (3.0 - 2.0 * sep), 0.35);
   sep *= mix(0.78, 1.0, smoothstep(0.0, 0.45, l));
-  vec3 warm = sep * vec3(1.05, 1.0, 0.9);
+  // Warm, creamy highlights that keep their blue skies; cool deep shadows.
+  vec3 warm = sep * vec3(1.04, 1.0, 0.96) + vec3(0.0, 0.0, 0.03) * sep.b;
   vec3 cool = sep * vec3(0.93, 0.98, 1.07);
   return mix(cool, warm, smoothstep(0.25, 0.85, l));
 }
@@ -186,8 +188,10 @@ void main() {
   vec2 size = max(uRect.zw, vec2(1.0));
   vec2 p0 = FlutterFragCoord().xy - uRect.xy;
   float t = uClock.x;
-  float ff = uClock.y;
-  float bf = uClock.z;
+  // Wrapped so per-frame hashes keep full float precision in long sessions
+  // (8192 film frames ≈ 6 min; the random wear never visibly repeats).
+  float ff = mod(uClock.y, 8192.0);
+  float bf = mod(uClock.z, 4096.0);
   float seed = uClock.w;
   float quality = uInk.a;
   float damage = uEvent.w;
@@ -215,12 +219,17 @@ void main() {
   vec3 c = sampleFrame(uv);
 
   // --- optics ------------------------------------------------------------------
+  // `edge` marks line work and text (local contrast): the print screens stay
+  // off it so small lettering and fine ink stay crisp.
+  float edge = 0.0;
   if (quality > 0.5) {
-    if (uInkFx.z > 0.001) {
+    if (uInkFx.z > 0.001 || uPrint.x + uPrint.z > 0.001) {
       vec2 o = vec2(1.35) / size;
       vec3 b = sampleFrame(uv + vec2(o.x, 0.0)) + sampleFrame(uv - vec2(o.x, 0.0)) +
                sampleFrame(uv + vec2(0.0, o.y)) + sampleFrame(uv - vec2(0.0, o.y));
-      c = mix(c, b * 0.25, cn_sat(uInkFx.z));
+      b *= 0.25;
+      edge = smoothstep(0.03, 0.12, abs(cn_luma(c) - cn_luma(b)));
+      c = mix(c, b, cn_sat(uInkFx.z));
     }
     float glowAmt = uWear.w + uDye.w;
     if (glowAmt > 0.001) {
@@ -273,7 +282,7 @@ void main() {
     float band = smoothstep(0.03, 0.12, l) * (1.0 - smoothstep(0.6, 0.72, l));
     // The screen prints ink dots over a light wash of the tone itself.
     float wash = mix(l, 1.0, 0.55);
-    ls = mix(ls, mix(wash, 0.0, dots), band * uPrint.x);
+    ls = mix(ls, mix(wash, 0.0, dots), band * uPrint.x * (1.0 - edge));
   }
   if (uLight.x > 0.001) {
     vec2 bl = blinds(p, size);
@@ -283,9 +292,10 @@ void main() {
     float haze = bl.x * bl.y * 0.16 * (1.0 - ls);
     ls = mix(ls, cn_sat(ls * light + haze), uLight.x);
   }
-  if (uPrint.z > 0.001) {
+  float hatchBand = 1.0 - smoothstep(0.3, 0.5, ls);
+  if (uPrint.z > 0.001 && hatchBand > 0.0) {
     float h = hatchScreen(p, ls, uPrint.w, uInkFx.x + 0.3, bf);
-    float band = 1.0 - smoothstep(0.3, 0.5, ls);
+    float band = hatchBand * (1.0 - edge);
     // Strokes of ink over a slightly lifted shadow: the tone survives,
     // the shadow reads as pen work.
     float hatched = mix(min(1.0, ls * 1.6 + 0.12), ls * 0.2, h);
@@ -302,7 +312,7 @@ void main() {
   vec2 q = p0 / size - 0.5;
   c *= 1.0 + fm_flicker(q, ff, t, seed) * uGrain.z;
   c *= 1.0 + uGate.y * (0.16 - dot(q, q) * 0.9);
-  float vig = fm_vignette(p0, size, uGrain.w, uPaper.a, t);
+  float vig = fm_vignette(p0, size, uGrain.w, uPaper.a * step(0.5, quality), t);
   c = mix(c, uInk.rgb * 0.5, vig * 0.92);
 
   // --- grain -----------------------------------------------------------------------

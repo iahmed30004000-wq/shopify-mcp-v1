@@ -29,8 +29,14 @@ void main() {
       expect(fold('مصطفى'), 'مصطفي');
       expect(fold('فارسی'), 'فارسي');
       expect(fold('صلاة'), 'صلاه');
-      expect(fold('سماء'), 'سما');
       expect(fold('کتاب'), 'كتاب');
+    });
+
+    test('keeps the hamza on the line: «غداء» (lunch) is not «غداً» (tomorrow)', () {
+      expect(fold('سماء'), 'سماء');
+      expect(fold('غداء'), isNot(fold('غداً')));
+      expect(fold('دواءٌ'), 'دواء');
+      expect(SearchText.dropHamza(fold('قراءة')), 'قراه');
     });
 
     test('Quranic annotation signs are dropped', () {
@@ -44,7 +50,7 @@ void main() {
 
     test('everyday and vowelled spellings fold the same', () {
       expect(fold('الصَّلاةُ عَلَى وَقْتِها'), fold('الصلاه علي وقتها'));
-      expect(fold('إن شاء الله'), fold('ان شا الله'));
+      expect(fold('إن شاء الله'), fold('ان شاء الله'));
     });
   });
 
@@ -55,10 +61,32 @@ void main() {
       expect(fold('غرفة ١٠٢'), 'غرفه 102');
     });
 
-    test('decimal and grouping separators split numbers into parts', () {
-      expect(SearchText.terms('١٢٫٥'), ['12', '5']);
-      expect(SearchText.terms('12.5'), ['12', '5']);
-      expect(SearchText.terms('1,250'), ['1', '250']);
+    test('an amount stays one word: grouping dropped, decimals without trailing zeros', () {
+      expect(SearchText.terms('١٢٫٥'), ['12.5']);
+      expect(SearchText.terms('12.5'), ['12.5']);
+      expect(SearchText.terms('1,250'), ['1250']);
+      expect(SearchText.terms('١٬٢٥٠٫٠٠٠ د.أ'), ['1250', 'د', 'ا']);
+      expect(SearchText.terms('1,250.000 JOD'), ['1250', 'jod']);
+      expect(SearchText.terms('١٢٫٥٠٠'), ['12.5']);
+      expect(SearchText.terms('12,500.750'), ['12500.75']);
+    });
+
+    test('things that only look like amounts are split as before', () {
+      expect(SearchText.terms('1.2.3'), ['1', '2', '3']);
+      expect(SearchText.terms('30.09.2026'), ['30', '09', '2026']);
+      expect(SearchText.terms('1,2'), ['1', '2']);
+      expect(SearchText.terms('12,50'), ['12', '50']);
+      expect(SearchText.terms('1.5kg'), ['1', '5kg']);
+      expect(SearchText.terms('done. 12'), ['done', '12']);
+    });
+
+    test('an amount maps back to its original digits', () {
+      const text = 'دفعت ١٬٢٥٠٫٥٠ دينار';
+      final t = SearchText.tokenize(text, withOrigins: true)[1];
+      expect(t.term, '1250.5');
+      expect(text.substring(t.start, t.end), '١٬٢٥٠٫٥٠');
+      final (a, b) = t.rangeOf(0, 2);
+      expect(text.substring(a, b), '١٬٢');
     });
 
     test('a word breaks where Arabic letters meet digits or Latin', () {
@@ -136,9 +164,52 @@ void main() {
     });
 
     test('leave short words and Latin alone', () {
-      expect(SearchText.stem('الله'), isNull); // «له» would be too short
+      expect(SearchText.stem('الله'), isNull); // not «ال» + «له»
+      expect(SearchText.stem('الذي'), isNull);
       expect(SearchText.stem('كتاب'), isNull);
       expect(SearchText.stem('allergy'), isNull);
+    });
+
+    test('two-letter nouns keep only a bare article', () {
+      expect(SearchText.stem('الدم'), 'دم');
+      expect(SearchText.stem('اليد'), 'يد');
+      expect(SearchText.stem('والدي'), isNull); // «my father», not و + ال + «دي»
+    });
+
+    test('an alef with a hamza is not the article («إلهام», «ألمانيا»)', () {
+      final ilham = SearchText.tokenize('إلهام').single;
+      expect(SearchText.stem(ilham.term, hamzaAlefs: ilham.hamzaAlefs), isNull);
+      final bi = SearchText.tokenize('بإلهام').single;
+      expect(SearchText.stem(bi.term, hamzaAlefs: bi.hamzaAlefs), isNull);
+      final article = SearchText.tokenize('الهاتف').single;
+      expect(SearchText.stem(article.term, hamzaAlefs: article.hamzaAlefs), 'هاتف');
+    });
+
+    test('a leading conjunction or preposition comes off', () {
+      expect(SearchText.proclitics('وحليب'), ['حليب']);
+      expect(SearchText.proclitics('بمحمود'), ['محمود']);
+      expect(SearchText.proclitics('لساره'), ['ساره']);
+      expect(SearchText.proclitics('وبساره'), ['بساره', 'ساره']);
+      expect(SearchText.proclitics('فكره'), isEmpty); // ف / ك only before longer words
+      expect(SearchText.proclitics('والكتاب'), isEmpty); // the article's job
+      expect(SearchText.proclitics('بيت'), isEmpty);
+    });
+
+    test('compound names: parts and joined spelling', () {
+      final parts = [for (final (v, _) in SearchText.variants('عبدالرحمن')) v];
+      expect(parts, containsAll(['عبد', 'الرحمن', 'رحمن']));
+      expect(SearchText.compound('عبد', 'الله'), 'عبدالله');
+      expect(SearchText.compound('عبد', 'كريم'), isNull);
+    });
+
+    test('word endings remember ى / ة against ي / ه', () {
+      final t = SearchText.tokenize('على علي صلاة صلاه');
+      expect([for (final x in t) x.ending], [
+        SearchText.endingMarked,
+        SearchText.endingPlain,
+        SearchText.endingMarked,
+        SearchText.endingPlain,
+      ]);
     });
   });
 

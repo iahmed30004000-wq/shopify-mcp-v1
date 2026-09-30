@@ -49,6 +49,12 @@ final class Face {
   double tremble = 0;
 
   bool brows = true;
+
+  /// Brow weight multiplier (heavy metal brows on a boss).
+  double browWeight = 1;
+
+  /// A rim (porthole, goggles) drawn round each eye, or null.
+  Color? rim;
   NoseStyle nose = NoseStyle.button;
   double noseScale = 1;
 
@@ -115,7 +121,7 @@ final class Face {
       _brow(b, farX, ey - eh * farScale, farScale, -1);
       _brow(b, nearX, ey - eh * nearScale, nearScale, 1);
     }
-    if (nose != NoseStyle.none) _nose(b, fx + t * r * 0.28, ey + eh * 0.95);
+    if (nose != NoseStyle.none) _nose(b, fx + t * r * 0.28, ey + eh * 0.82);
     if (drawMouth) _mouth(b, fx + t * r * 0.18, cy + mouthY * r, r * mouthW * (1 - 0.12 * t));
   }
 
@@ -170,7 +176,13 @@ final class Face {
       b.endLayer();
       return;
     }
-    // The white.
+    // The rim (porthole / goggle), then the white.
+    if (rim != null) {
+      b.layer();
+      b.shape(rim!);
+      pen.ellipse(x, y, ew * 1.3 + b.lw, eh * 1.18 + b.lw, side * 0.06);
+      b.endLayer();
+    }
     b.layer();
     final c = b.contour(1)..clear();
     final lean = side * 0.06;
@@ -181,7 +193,7 @@ final class Face {
     c.ellipse(pen, 0, 0, ew, eh, samples: 24);
     pen.restore();
     c.wobble(b.amp * 0.35, b.frame, b.seedFor(salt + side), 31);
-    b.blob(c, b.colors.eyeWhite, ink: 0.72);
+    b.blob(c, b.colors.eyeWhite, ink: 0.85);
 
     if (state == EyeState.cross) {
       b.brushQuad(2, x - ew * 0.6, y - eh * 0.5, x, y, x + ew * 0.6, y + eh * 0.5, lw * 1.2);
@@ -202,13 +214,13 @@ final class Face {
     }
 
     // Pupil: pie-cut (the wedge faces up-forward), round, with look/tremble.
-    var pw = ew * 0.6, ph = eh * 0.6;
+    var pw = ew * 0.54, ph = eh * 0.56;
     if (e == RigExpression.scared || e == RigExpression.surprised) {
       pw *= 0.55;
       ph *= 0.5;
     }
     final maxX = ew - pw * 0.92, maxY = eh - ph * 0.92;
-    var bx = lookX, by = lookY + 0.25;
+    var bx = lookX, by = lookY + 0.32;
     switch (e) {
       case RigExpression.sly:
         bx += 0.6;
@@ -223,8 +235,8 @@ final class Face {
     final px = x + bx.clamp(-1.0, 1.0) * maxX + tremble * b.j(salt + 40 + side);
     final py = y + by.clamp(-1.0, 1.0) * maxY + tremble * b.j(salt + 42 + side);
     if (eyes == RigEyes.pieCut) {
-      const wedge = 0.95;
-      const dirA = -math.pi * 0.33;
+      const wedge = 0.8;
+      const dirA = -math.pi * 0.3;
       final start = dirA + wedge / 2;
       b.inkFill(b.colors.dark);
       _wedge(pen, px, py, pw, ph, start, math.pi * 2 - wedge);
@@ -382,7 +394,7 @@ final class Face {
       (yi + yo) / 2 - arch * ew,
       outer,
       yo,
-      b.lw * thick,
+      b.lw * thick * browWeight,
       taperIn: 0.15,
       taperOut: 0.7,
       press: 0.4,
@@ -401,9 +413,9 @@ final class Face {
     switch (nose) {
       case NoseStyle.button:
         b.shape(noseColor ?? b.colors.dark, ink: 0.6);
-        pen.ellipse(x, y, s * 0.13, s * 0.1);
+        pen.ellipse(x, y, s * 0.11, s * 0.085);
         b.fill(b.colors.shine);
-        pen.ellipse(x - s * 0.045, y - s * 0.04, s * 0.04, s * 0.028);
+        pen.ellipse(x - s * 0.04, y - s * 0.035, s * 0.035, s * 0.024);
       case NoseStyle.snout:
         b.shape(noseColor ?? skin, ink: 0.8);
         pen.ellipse(x + s * 0.05, y + s * 0.02, s * 0.24, s * 0.16);

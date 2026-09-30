@@ -247,7 +247,9 @@ final class Contour {
       final nx = _n[i * 2], ny = _n[i * 2 + 1];
       final dot = nx * sx + ny * sy;
       var w = ((dot - threshold) / (1 - threshold)).clamp(0.0, 1.0);
-      w = math.pow(w * w * (3 - 2 * w), power).toDouble();
+      w = w * w * (3 - 2 * w);
+      // power < 1 fattens the crescent: blend toward sqrt (no pow per point).
+      if (power < 1) w = w + (math.sqrt(w) - w) * (1 - power) * 2.5;
       _ox[i] = _x[i] - nx * depth * w;
       _oy[i] = _y[i] - ny * depth * w;
     }
@@ -296,7 +298,8 @@ final class Contour {
     // Round end cap.
     final ex = _x[n - 1] - _x[n - 2], ey = _y[n - 1] - _y[n - 2];
     final el = math.max(1e-9, math.sqrt(ex * ex + ey * ey));
-    final ew = math.sqrt(math.pow(_ox[n - 1] - _n[(n - 1) * 2], 2) + math.pow(_oy[n - 1] - _n[(n - 1) * 2 + 1], 2)) / 2;
+    final ex0 = _ox[n - 1] - _n[(n - 1) * 2], ey0 = _oy[n - 1] - _n[(n - 1) * 2 + 1];
+    final ew = math.sqrt(ex0 * ex0 + ey0 * ey0) / 2;
     p.quadraticBezierTo(
       _x[n - 1] + ex / el * ew * 1.3,
       _y[n - 1] + ey / el * ew * 1.3,
@@ -315,7 +318,8 @@ final class Contour {
     p.lineTo(_n[0], _n[1]);
     final sx = _x[0] - _x[1], sy = _y[0] - _y[1];
     final sl = math.max(1e-9, math.sqrt(sx * sx + sy * sy));
-    final sw = math.sqrt(math.pow(_ox[0] - _n[0], 2) + math.pow(_oy[0] - _n[1], 2)) / 2;
+    final sx0 = _ox[0] - _n[0], sy0 = _oy[0] - _n[1];
+    final sw = math.sqrt(sx0 * sx0 + sy0 * sy0) / 2;
     p
       ..quadraticBezierTo(_x[0] + sx / sl * sw * 1.3, _y[0] + sy / sl * sw * 1.3, _ox[0], _oy[0])
       ..close();

@@ -30,12 +30,20 @@ uniform vec4 uHatch;
 
 out vec4 fragColor;
 
+// One pen layer: parallel strokes that wander with the hand (re-inked on
+// every boil frame), vary in pressure along their length and break off now
+// and then. `width` 0 = no stroke, so a layer fades in instead of starting
+// at a hard edge.
 float hatch(vec2 p, float angle, float spacing, float width, float wobble, float boil) {
   vec2 q = cn_rotate(p, angle);
-  float n = cn_noise(vec2(q.x * 0.02, boil * 3.1 + angle)) - 0.5;
+  float row = floor(q.y / spacing);
+  float n = cn_noise(vec2(q.x * 0.02, boil * 3.1 + angle + row * 0.37)) - 0.5;
   float y = q.y + n * wobble * 2.0;
   float d = abs(fract(y / spacing) - 0.5) * spacing;
-  return 1.0 - cn_edge(width * 0.5, d, 0.6);
+  float press = 0.7 + 0.6 * cn_noise(vec2(q.x * 0.035 + row * 1.7, angle * 3.0));
+  float gap = smoothstep(0.08, 0.2, cn_noise(vec2(q.x * 0.012 + row * 5.3, angle + boil * 0.5)));
+  float w = width * press * 0.5;
+  return (1.0 - cn_edge(w, d, 0.6)) * gap * step(0.05, width);
 }
 
 void main() {
@@ -43,10 +51,15 @@ void main() {
   float t = mix(uRampMode.y, uRampMode.z, cn_ramp(p, uRamp.xy, uRamp.zw, uRampMode.x));
   float sp = max(uHatch.x, 2.0);
   float boil = uRampMode.w;
-  float a = 0.0;
-  a = max(a, hatch(p, uHatch.y, sp, uHatch.z, uHatch.w, boil) * step(0.15, t));
-  a = max(a, hatch(p, uHatch.y + 1.5708, sp, uHatch.z, uHatch.w, boil) * step(0.4, t));
-  a = max(a, hatch(p, uHatch.y + 0.7854, sp * 0.8, uHatch.z, uHatch.w, boil) * step(0.65, t));
-  a = max(a, hatch(p, uHatch.y - 0.7854, sp * 0.8, uHatch.z, uHatch.w, boil) * step(0.85, t));
+  float lw = uHatch.z;
+  // Each layer thickens in as the tone darkens.
+  float w1 = lw * smoothstep(0.08, 0.3, t);
+  float w2 = lw * smoothstep(0.35, 0.55, t);
+  float w3 = lw * 0.9 * smoothstep(0.6, 0.78, t);
+  float w4 = lw * 0.9 * smoothstep(0.8, 0.95, t);
+  float a = hatch(p, uHatch.y, sp, w1, uHatch.w, boil);
+  a = max(a, hatch(p, uHatch.y + 1.5708, sp, w2, uHatch.w, boil));
+  a = max(a, hatch(p, uHatch.y + 0.7854, sp * 0.8, w3, uHatch.w, boil));
+  a = max(a, hatch(p, uHatch.y - 0.7854, sp * 0.8, w4, uHatch.w, boil));
   fragColor = vec4(uInk.rgb, 1.0) * uInk.a * a;
 }

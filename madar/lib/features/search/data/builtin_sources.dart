@@ -72,16 +72,17 @@ String _channel(L10n l, ContactChannel c) => switch (c) {
 /// Rows with a non-empty text column (notes-only logs).
 Expression<bool> _filled(Expression<String> column) => column.isNotNull() & column.trim().equals('').not();
 
-/// An indexed source over one table: [read] its rows, [map] each to a
-/// record (null to skip).
-SearchSource _rows<R>({
+/// An indexed source over one [table]: its rows (read a page at a time,
+/// see [SearchLoadContext.mapRows]), [map]ped each to a record (null to
+/// skip).
+SearchSource _rows<T extends Table, R extends DataClass>({
   required String id,
   required String planet,
   required IconData icon,
   required String label,
   Set<String>? tables,
   double weight = 1,
-  required Future<List<R>> Function(Repositories r) read,
+  required EntityRepository<T, R> Function(Repositories r) table,
   required SearchDoc? Function(R row, SearchLoadContext c) map,
 }) => SearchSource(
   id: id,
@@ -90,9 +91,7 @@ SearchSource _rows<R>({
   labelKey: label,
   weight: weight,
   tables: tables ?? {id},
-  load: (c) async => [
-    for (final row in await read(c.repos)) ?map(row, c),
-  ],
+  load: (c) => c.mapRows(table(c.repos), (row) => map(row, c)),
 );
 
 /// The global search's built-in sources: one per table with text the user
@@ -110,12 +109,12 @@ abstract final class BuiltInSearchSources {
   /// Every built-in indexed source.
   static List<SearchSource> all() => [
     // ------------------------------------------------------------ core
-    _rows<TaskRow>(
+    _rows(
       id: 'tasks',
       planet: 'work',
       icon: Icons.task_alt_rounded,
       label: 'searchSourceTasks',
-      read: (r) => r.tasks.getAll(),
+      table: (r) => r.tasks,
       map: (t, c) => SearchDoc(
         id: t.id,
         refTable: 'tasks',
@@ -154,13 +153,13 @@ abstract final class BuiltInSearchSources {
     ),
 
     // ----------------------------------------------------------- faith
-    _rows<PrayerLogRow>(
+    _rows(
       id: 'prayer_logs',
       planet: 'faith',
       icon: Icons.mosque_rounded,
       label: 'searchSourcePrayerLogs',
       weight: 0.6,
-      read: (r) => r.prayerLogs.getAll(),
+      table: (r) => r.prayerLogs,
       map: (p, c) => SearchDoc(
         id: p.id,
         refTable: 'prayer_logs',
@@ -176,12 +175,12 @@ abstract final class BuiltInSearchSources {
         extra: {'day': p.day, 'prayer': p.prayer.name},
       ),
     ),
-    _rows<QuranBookmarkRow>(
+    _rows(
       id: 'quran_bookmarks',
       planet: 'faith',
       icon: Icons.bookmark_rounded,
       label: 'searchSourceQuranBookmarks',
-      read: (r) => r.quranBookmarks.getAll(),
+      table: (r) => r.quranBookmarks,
       map: (b, c) {
         final place = c.ayahPlace(b.surah, b.ayah);
         return SearchDoc(
@@ -197,12 +196,12 @@ abstract final class BuiltInSearchSources {
         );
       },
     ),
-    _rows<WirdPlanRow>(
+    _rows(
       id: 'wird_plans',
       planet: 'faith',
       icon: Icons.auto_stories_rounded,
       label: 'searchSourceWirdPlans',
-      read: (r) => r.wirdPlans.getAll(),
+      table: (r) => r.wirdPlans,
       map: (w, c) => SearchDoc(
         id: w.id,
         refTable: 'wird_plans',
@@ -213,12 +212,12 @@ abstract final class BuiltInSearchSources {
         planetKey: 'faith',
       ),
     ),
-    _rows<HifzItemRow>(
+    _rows(
       id: 'hifz_items',
       planet: 'faith',
       icon: Icons.psychology_rounded,
       label: 'searchSourceHifz',
-      read: (r) => r.hifzItems.getAll(),
+      table: (r) => r.hifzItems,
       map: (h, c) {
         final s = h.surah;
         final range = s == null
@@ -245,22 +244,21 @@ abstract final class BuiltInSearchSources {
     ),
 
     // ---------------------------------------------------------- health
-    _rows<HealthAlertRow>(
+    _rows(
       id: 'health_alerts',
       planet: 'health',
       icon: Icons.warning_amber_rounded,
       label: 'searchSourceHealthAlerts',
       weight: 1.1,
-      read: (r) => r.healthAlerts.getAll(),
-      map: (a, c) =>
-          SearchDoc(id: a.id, refTable: 'health_alerts', refId: a.id, title: a.body, planetKey: 'health'),
+      table: (r) => r.healthAlerts,
+      map: (a, c) => SearchDoc(id: a.id, refTable: 'health_alerts', refId: a.id, title: a.body, planetKey: 'health'),
     ),
-    _rows<ConditionRow>(
+    _rows(
       id: 'conditions',
       planet: 'health',
       icon: Icons.healing_rounded,
       label: 'searchSourceConditions',
-      read: (r) => r.conditions.getAll(),
+      table: (r) => r.conditions,
       map: (x, c) => SearchDoc(
         id: x.id,
         refTable: 'conditions',
@@ -271,12 +269,12 @@ abstract final class BuiltInSearchSources {
         planetKey: 'health',
       ),
     ),
-    _rows<MedicationRow>(
+    _rows(
       id: 'medications',
       planet: 'health',
       icon: Icons.medication_rounded,
       label: 'searchSourceMedications',
-      read: (r) => r.medications.getAll(),
+      table: (r) => r.medications,
       map: (m, c) => SearchDoc(
         id: m.id,
         refTable: 'medications',
@@ -295,20 +293,20 @@ abstract final class BuiltInSearchSources {
       tables: const {'med_courses', 'medications'},
       load: (c) async {
         final meds = {for (final m in await c.repos.medications.getAll()) m.id: m.name};
-        return [
-          for (final x in await c.repos.medCourses.getAll())
-            SearchDoc(
-              id: x.id,
-              refTable: 'med_courses',
-              refId: x.id,
-              title: x.name,
-              subtitle: meds[x.medicationId] ?? '',
-              body: x.notes ?? '',
-              date: x.startDate,
-              planetKey: 'health',
-              extra: {'medicationId': ?x.medicationId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.medCourses,
+          (x) => SearchDoc(
+            id: x.id,
+            refTable: 'med_courses',
+            refId: x.id,
+            title: x.name,
+            subtitle: meds[x.medicationId] ?? '',
+            body: x.notes ?? '',
+            date: x.startDate,
+            planetKey: 'health',
+            extra: {'medicationId': ?x.medicationId},
+          ),
+        );
       },
     ),
     SearchSource(
@@ -320,28 +318,29 @@ abstract final class BuiltInSearchSources {
       tables: const {'med_doses', 'medications'},
       load: (c) async {
         final meds = {for (final m in await c.repos.medications.getAll()) m.id: m.name};
-        return [
-          for (final d in await c.repos.medDoses.getAll(where: (t) => _filled(t.note)))
-            SearchDoc(
-              id: d.id,
-              refTable: 'med_doses',
-              refId: d.id,
-              title: meds[d.medicationId] ?? '',
-              subtitle: d.dose ?? '',
-              body: d.note ?? '',
-              date: d.takenAt ?? d.scheduledAt ?? d.createdAt,
-              planetKey: 'health',
-              extra: {'medicationId': d.medicationId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.medDoses,
+          (d) => SearchDoc(
+            id: d.id,
+            refTable: 'med_doses',
+            refId: d.id,
+            title: meds[d.medicationId] ?? '',
+            subtitle: d.dose ?? '',
+            body: d.note ?? '',
+            date: d.takenAt ?? d.scheduledAt ?? d.createdAt,
+            planetKey: 'health',
+            extra: {'medicationId': d.medicationId},
+          ),
+          where: (t) => _filled(t.note),
+        );
       },
     ),
-    _rows<LabTestRow>(
+    _rows(
       id: 'lab_tests',
       planet: 'health',
       icon: Icons.biotech_rounded,
       label: 'searchSourceLabTests',
-      read: (r) => r.labTests.getAll(),
+      table: (r) => r.labTests,
       map: (x, c) => SearchDoc(
         id: x.id,
         refTable: 'lab_tests',
@@ -364,32 +363,32 @@ abstract final class BuiltInSearchSources {
       tables: const {'lab_readings', 'lab_tests'},
       load: (c) async {
         final tests = {for (final t in await c.repos.labTests.getAll()) t.id: t};
-        return [
-          for (final x in await c.repos.labReadings.getAll())
-            SearchDoc(
-              id: x.id,
-              refTable: 'lab_readings',
-              refId: x.id,
-              title: tests[x.testId]?.name ?? '',
-              subtitle: _has(x.valueText)
-                  ? x.valueText!
-                  : x.value == null
-                  ? ''
-                  : '${c.number(x.value!)} ${tests[x.testId]?.unit ?? ''}'.trim(),
-              body: x.note ?? '',
-              date: x.date,
-              planetKey: 'health',
-              extra: {'testId': x.testId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.labReadings,
+          (x) => SearchDoc(
+            id: x.id,
+            refTable: 'lab_readings',
+            refId: x.id,
+            title: tests[x.testId]?.name ?? '',
+            subtitle: _has(x.valueText)
+                ? x.valueText!
+                : x.value == null
+                ? ''
+                : '${c.number(x.value!)} ${tests[x.testId]?.unit ?? ''}'.trim(),
+            body: x.note ?? '',
+            date: x.date,
+            planetKey: 'health',
+            extra: {'testId': x.testId},
+          ),
+        );
       },
     ),
-    _rows<AppointmentRow>(
+    _rows(
       id: 'appointments',
       planet: 'health',
       icon: Icons.event_available_rounded,
       label: 'searchSourceAppointments',
-      read: (r) => r.appointments.getAll(),
+      table: (r) => r.appointments,
       map: (a, c) => SearchDoc(
         id: a.id,
         refTable: 'appointments',
@@ -409,29 +408,29 @@ abstract final class BuiltInSearchSources {
       tables: const {'doctor_questions', 'appointments'},
       load: (c) async {
         final appts = {for (final a in await c.repos.appointments.getAll()) a.id: a};
-        return [
-          for (final q in await c.repos.doctorQuestions.getAll())
-            SearchDoc(
-              id: q.id,
-              refTable: 'doctor_questions',
-              refId: q.id,
-              title: q.question,
-              subtitle: appts[q.appointmentId]?.title ?? '',
-              body: q.answer ?? '',
-              date: appts[q.appointmentId]?.at ?? q.createdAt,
-              planetKey: 'health',
-              extra: {'appointmentId': ?q.appointmentId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.doctorQuestions,
+          (q) => SearchDoc(
+            id: q.id,
+            refTable: 'doctor_questions',
+            refId: q.id,
+            title: q.question,
+            subtitle: appts[q.appointmentId]?.title ?? '',
+            body: q.answer ?? '',
+            date: appts[q.appointmentId]?.at ?? q.createdAt,
+            planetKey: 'health',
+            extra: {'appointmentId': ?q.appointmentId},
+          ),
+        );
       },
     ),
-    _rows<PainEntryRow>(
+    _rows(
       id: 'pain_entries',
       planet: 'health',
       icon: Icons.personal_injury_rounded,
       label: 'searchSourcePain',
       weight: 0.8,
-      read: (r) => r.painEntries.getAll(),
+      table: (r) => r.painEntries,
       map: (p, c) => SearchDoc(
         id: p.id,
         refTable: 'pain_entries',
@@ -443,13 +442,13 @@ abstract final class BuiltInSearchSources {
         planetKey: 'health',
       ),
     ),
-    _rows<MoodEntryRow>(
+    _rows(
       id: 'mood_entries',
       planet: 'health',
       icon: Icons.mood_rounded,
       label: 'searchSourceMood',
       weight: 0.8,
-      read: (r) => r.moodEntries.getAll(),
+      table: (r) => r.moodEntries,
       map: (m, c) => !_has(m.notes) && m.factors.isEmpty
           ? null
           : SearchDoc(
@@ -463,21 +462,21 @@ abstract final class BuiltInSearchSources {
               planetKey: 'health',
             ),
     ),
-    _rows<HabitRow>(
+    _rows(
       id: 'habits',
       planet: 'health',
       icon: Icons.repeat_rounded,
       label: 'searchSourceHabits',
-      read: (r) => r.habits.getAll(),
+      table: (r) => r.habits,
       map: (h, c) =>
           SearchDoc(id: h.id, refTable: 'habits', refId: h.id, title: h.name, planetKey: h.planetKey ?? 'health'),
     ),
-    _rows<WorryRow>(
+    _rows(
       id: 'worries',
       planet: 'health',
       icon: Icons.cloud_rounded,
       label: 'searchSourceWorries',
-      read: (r) => r.worries.getAll(),
+      table: (r) => r.worries,
       map: (w, c) => SearchDoc(
         id: w.id,
         refTable: 'worries',
@@ -490,12 +489,12 @@ abstract final class BuiltInSearchSources {
     ),
 
     // ----------------------------------------------------------- money
-    _rows<WalletRow>(
+    _rows(
       id: 'wallets',
       planet: 'money',
       icon: Icons.account_balance_wallet_rounded,
       label: 'searchSourceWallets',
-      read: (r) => r.wallets.getAll(),
+      table: (r) => r.wallets,
       map: (w, c) => SearchDoc(
         id: w.id,
         refTable: 'wallets',
@@ -514,32 +513,32 @@ abstract final class BuiltInSearchSources {
       load: (c) async {
         final wallets = {for (final w in await c.repos.wallets.getAll()) w.id: w};
         final budget = {for (final b in await c.repos.budgetItems.getAll()) b.id: b.name};
-        return [
-          for (final t in await c.repos.transactions.getAll())
-            () {
-              final wallet = wallets[t.walletId];
-              final category = budget[t.budgetItemId];
-              final note = t.note?.trim() ?? '';
-              final kind = _txKind(c.l10n, t.kind);
-              return SearchDoc(
-                id: t.id,
-                refTable: 'transactions',
-                refId: t.id,
-                title: note.isNotEmpty ? note : (category ?? kind),
-                subtitle: c.join([
-                  c.money(t.amountMilli, wallet?.currency ?? 'JOD'),
-                  kind,
-                  wallet?.name,
-                  if (wallets[t.toWalletId] case final to?) '→ ${to.name}',
-                  if (note.isNotEmpty) category,
-                ]),
-                body: t.tags.map((tag) => '#$tag').join(' '),
-                date: t.date,
-                planetKey: 'money',
-                extra: {'walletId': t.walletId},
-              );
-            }(),
-        ];
+        return c.mapRows(
+          c.repos.transactions,
+          (t) => () {
+            final wallet = wallets[t.walletId];
+            final category = budget[t.budgetItemId];
+            final note = t.note?.trim() ?? '';
+            final kind = _txKind(c.l10n, t.kind);
+            return SearchDoc(
+              id: t.id,
+              refTable: 'transactions',
+              refId: t.id,
+              title: note.isNotEmpty ? note : (category ?? kind),
+              subtitle: c.join([
+                c.money(t.amountMilli, wallet?.currency ?? 'JOD'),
+                kind,
+                wallet?.name,
+                if (wallets[t.toWalletId] case final to?) '→ ${to.name}',
+                if (note.isNotEmpty) category,
+              ]),
+              body: t.tags.map((tag) => '#$tag').join(' '),
+              date: t.date,
+              planetKey: 'money',
+              extra: {'walletId': t.walletId},
+            );
+          }(),
+        );
       },
     ),
     SearchSource(
@@ -568,12 +567,12 @@ abstract final class BuiltInSearchSources {
         ];
       },
     ),
-    _rows<JarRow>(
+    _rows(
       id: 'jars',
       planet: 'money',
       icon: Icons.savings_rounded,
       label: 'searchSourceJars',
-      read: (r) => r.jars.getAll(),
+      table: (r) => r.jars,
       map: (j, c) => SearchDoc(
         id: j.id,
         refTable: 'jars',
@@ -593,27 +592,28 @@ abstract final class BuiltInSearchSources {
       tables: const {'jar_deposits', 'jars'},
       load: (c) async {
         final jars = {for (final j in await c.repos.jars.getAll()) j.id: j};
-        return [
-          for (final d in await c.repos.jarDeposits.getAll(where: (t) => _filled(t.note)))
-            SearchDoc(
-              id: d.id,
-              refTable: 'jar_deposits',
-              refId: d.id,
-              title: d.note!.trim(),
-              subtitle: c.join([jars[d.jarId]?.name, c.money(d.amountMilli, jars[d.jarId]?.currency ?? 'JOD')]),
-              date: d.date,
-              planetKey: 'money',
-              extra: {'jarId': d.jarId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.jarDeposits,
+          (d) => SearchDoc(
+            id: d.id,
+            refTable: 'jar_deposits',
+            refId: d.id,
+            title: d.note!.trim(),
+            subtitle: c.join([jars[d.jarId]?.name, c.money(d.amountMilli, jars[d.jarId]?.currency ?? 'JOD')]),
+            date: d.date,
+            planetKey: 'money',
+            extra: {'jarId': d.jarId},
+          ),
+          where: (t) => _filled(t.note),
+        );
       },
     ),
-    _rows<DebtRow>(
+    _rows(
       id: 'debts',
       planet: 'money',
       icon: Icons.handshake_rounded,
       label: 'searchSourceDebts',
-      read: (r) => r.debts.getAll(),
+      table: (r) => r.debts,
       map: (d, c) => SearchDoc(
         id: d.id,
         refTable: 'debts',
@@ -638,27 +638,28 @@ abstract final class BuiltInSearchSources {
       tables: const {'debt_payments', 'debts'},
       load: (c) async {
         final debts = {for (final d in await c.repos.debts.getAll()) d.id: d};
-        return [
-          for (final p in await c.repos.debtPayments.getAll(where: (t) => _filled(t.note)))
-            SearchDoc(
-              id: p.id,
-              refTable: 'debt_payments',
-              refId: p.id,
-              title: p.note!.trim(),
-              subtitle: c.join([debts[p.debtId]?.person, c.money(p.amountMilli, debts[p.debtId]?.currency ?? 'JOD')]),
-              date: p.date,
-              planetKey: 'money',
-              extra: {'debtId': p.debtId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.debtPayments,
+          (p) => SearchDoc(
+            id: p.id,
+            refTable: 'debt_payments',
+            refId: p.id,
+            title: p.note!.trim(),
+            subtitle: c.join([debts[p.debtId]?.person, c.money(p.amountMilli, debts[p.debtId]?.currency ?? 'JOD')]),
+            date: p.date,
+            planetKey: 'money',
+            extra: {'debtId': p.debtId},
+          ),
+          where: (t) => _filled(t.note),
+        );
       },
     ),
-    _rows<ObligationRow>(
+    _rows(
       id: 'obligations',
       planet: 'money',
       icon: Icons.event_repeat_rounded,
       label: 'searchSourceObligations',
-      read: (r) => r.obligations.getAll(),
+      table: (r) => r.obligations,
       map: (o, c) => SearchDoc(
         id: o.id,
         refTable: 'obligations',
@@ -672,13 +673,13 @@ abstract final class BuiltInSearchSources {
     ),
 
     // ---------------------------------------------------------- family
-    _rows<PersonRow>(
+    _rows(
       id: 'people',
       planet: 'family',
       icon: Icons.person_rounded,
       label: 'searchSourcePeople',
       weight: 1.1,
-      read: (r) => r.people.getAll(),
+      table: (r) => r.people,
       // The phone number is never indexed.
       map: (p, c) => SearchDoc(
         id: p.id,
@@ -700,30 +701,31 @@ abstract final class BuiltInSearchSources {
       tables: const {'contact_logs', 'people'},
       load: (c) async {
         final people = {for (final p in await c.repos.people.getAll()) p.id: p.name};
-        return [
-          for (final x in await c.repos.contactLogs.getAll(where: (t) => _filled(t.note)))
-            SearchDoc(
-              id: x.id,
-              refTable: 'contact_logs',
-              refId: x.id,
-              title: people[x.personId] ?? '',
-              subtitle: _channel(c.l10n, x.channel),
-              body: x.note ?? '',
-              date: x.at,
-              planetKey: 'family',
-              extra: {'personId': x.personId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.contactLogs,
+          (x) => SearchDoc(
+            id: x.id,
+            refTable: 'contact_logs',
+            refId: x.id,
+            title: people[x.personId] ?? '',
+            subtitle: _channel(c.l10n, x.channel),
+            body: x.note ?? '',
+            date: x.at,
+            planetKey: 'family',
+            extra: {'personId': x.personId},
+          ),
+          where: (t) => _filled(t.note),
+        );
       },
     ),
 
     // ------------------------------------------------------------ work
-    _rows<ProjectRow>(
+    _rows(
       id: 'projects',
       planet: 'work',
       icon: Icons.rocket_launch_rounded,
       label: 'searchSourceProjects',
-      read: (r) => r.projects.getAll(),
+      table: (r) => r.projects,
       map: (p, c) => SearchDoc(
         id: p.id,
         refTable: 'projects',
@@ -742,27 +744,27 @@ abstract final class BuiltInSearchSources {
       tables: const {'project_items', 'projects'},
       load: (c) async {
         final projects = {for (final p in await c.repos.projects.getAll()) p.id: p};
-        return [
-          for (final i in await c.repos.projectItems.getAll())
-            SearchDoc(
-              id: i.id,
-              refTable: 'project_items',
-              refId: i.id,
-              title: i.body,
-              subtitle: c.join([projects[i.projectId]?.name, if (i.done) c.l10n.searchDone]),
-              date: i.dueDate,
-              planetKey: projects[i.projectId]?.planetKey ?? 'work',
-              extra: {'projectId': i.projectId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.projectItems,
+          (i) => SearchDoc(
+            id: i.id,
+            refTable: 'project_items',
+            refId: i.id,
+            title: i.body,
+            subtitle: c.join([projects[i.projectId]?.name, if (i.done) c.l10n.searchDone]),
+            date: i.dueDate,
+            planetKey: projects[i.projectId]?.planetKey ?? 'work',
+            extra: {'projectId': i.projectId},
+          ),
+        );
       },
     ),
-    _rows<BoardRow>(
+    _rows(
       id: 'boards',
       planet: 'work',
       icon: Icons.view_kanban_rounded,
       label: 'searchSourceBoards',
-      read: (r) => r.boards.getAll(),
+      table: (r) => r.boards,
       map: (b, c) => SearchDoc(
         id: b.id,
         refTable: 'boards',
@@ -787,30 +789,30 @@ abstract final class BuiltInSearchSources {
           return null;
         }
 
-        return [
-          for (final k in await c.repos.boardCards.getAll())
-            SearchDoc(
-              id: k.id,
-              refTable: 'board_cards',
-              refId: k.id,
-              title: k.title,
-              subtitle: c.join([boards[k.boardId]?.name, column(boards[k.boardId], k.columnId), k.assignee]),
-              body: k.notes ?? '',
-              date: k.dueDate,
-              planetKey: 'work',
-              extra: {'boardId': k.boardId, 'columnId': k.columnId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.boardCards,
+          (k) => SearchDoc(
+            id: k.id,
+            refTable: 'board_cards',
+            refId: k.id,
+            title: k.title,
+            subtitle: c.join([boards[k.boardId]?.name, column(boards[k.boardId], k.columnId), k.assignee]),
+            body: k.notes ?? '',
+            date: k.dueDate,
+            planetKey: 'work',
+            extra: {'boardId': k.boardId, 'columnId': k.columnId},
+          ),
+        );
       },
     ),
 
     // ---------------------------------------------------------- travel
-    _rows<TripRow>(
+    _rows(
       id: 'trips',
       planet: 'travel',
       icon: Icons.flight_takeoff_rounded,
       label: 'searchSourceTrips',
-      read: (r) => r.trips.getAll(),
+      table: (r) => r.trips,
       map: (t, c) => SearchDoc(
         id: t.id,
         refTable: 'trips',
@@ -831,27 +833,27 @@ abstract final class BuiltInSearchSources {
       tables: const {'trip_items', 'trips'},
       load: (c) async {
         final trips = {for (final t in await c.repos.trips.getAll()) t.id: t};
-        return [
-          for (final i in await c.repos.tripItems.getAll())
-            SearchDoc(
-              id: i.id,
-              refTable: 'trip_items',
-              refId: i.id,
-              title: i.body,
-              subtitle: c.join([trips[i.tripId]?.destination, i.category]),
-              date: trips[i.tripId]?.startDate,
-              planetKey: 'travel',
-              extra: {'tripId': i.tripId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.tripItems,
+          (i) => SearchDoc(
+            id: i.id,
+            refTable: 'trip_items',
+            refId: i.id,
+            title: i.body,
+            subtitle: c.join([trips[i.tripId]?.destination, i.category]),
+            date: trips[i.tripId]?.startDate,
+            planetKey: 'travel',
+            extra: {'tripId': i.tripId},
+          ),
+        );
       },
     ),
-    _rows<PackingTemplateRow>(
+    _rows(
       id: 'packing_templates',
       planet: 'travel',
       icon: Icons.backpack_rounded,
       label: 'searchSourcePackingTemplates',
-      read: (r) => r.packingTemplates.getAll(),
+      table: (r) => r.packingTemplates,
       map: (p, c) => SearchDoc(
         id: p.id,
         refTable: 'packing_templates',
@@ -861,12 +863,12 @@ abstract final class BuiltInSearchSources {
         planetKey: 'travel',
       ),
     ),
-    _rows<TravelDocumentRow>(
+    _rows(
       id: 'travel_documents',
       planet: 'travel',
       icon: Icons.badge_rounded,
       label: 'searchSourceTravelDocuments',
-      read: (r) => r.travelDocuments.getAll(),
+      table: (r) => r.travelDocuments,
       // The document number is never indexed.
       map: (d, c) => SearchDoc(
         id: d.id,
@@ -881,12 +883,12 @@ abstract final class BuiltInSearchSources {
     ),
 
     // ---------------------------------------------------------- growth
-    _rows<LearningGoalRow>(
+    _rows(
       id: 'learning_goals',
       planet: 'growth',
       icon: Icons.school_rounded,
       label: 'searchSourceLearningGoals',
-      read: (r) => r.learningGoals.getAll(),
+      table: (r) => r.learningGoals,
       map: (g, c) => SearchDoc(
         id: g.id,
         refTable: 'learning_goals',
@@ -906,29 +908,30 @@ abstract final class BuiltInSearchSources {
       tables: const {'goal_logs', 'learning_goals'},
       load: (c) async {
         final goals = {for (final g in await c.repos.learningGoals.getAll()) g.id: g};
-        return [
-          for (final x in await c.repos.goalLogs.getAll(where: (t) => _filled(t.note)))
-            SearchDoc(
-              id: x.id,
-              refTable: 'goal_logs',
-              refId: x.id,
-              title: x.note!.trim(),
-              subtitle: c.join([goals[x.goalId]?.name, '${c.number(x.amount)} ${goals[x.goalId]?.unit ?? ''}'.trim()]),
-              date: x.at,
-              planetKey: 'growth',
-              extra: {'goalId': x.goalId},
-            ),
-        ];
+        return c.mapRows(
+          c.repos.goalLogs,
+          (x) => SearchDoc(
+            id: x.id,
+            refTable: 'goal_logs',
+            refId: x.id,
+            title: x.note!.trim(),
+            subtitle: c.join([goals[x.goalId]?.name, '${c.number(x.amount)} ${goals[x.goalId]?.unit ?? ''}'.trim()]),
+            date: x.at,
+            planetKey: 'growth',
+            extra: {'goalId': x.goalId},
+          ),
+          where: (t) => _filled(t.note),
+        );
       },
     ),
 
     // ------------------------------------------------------------ body
-    _rows<ExerciseRow>(
+    _rows(
       id: 'exercises',
       planet: 'body',
       icon: Icons.fitness_center_rounded,
       label: 'searchSourceExercises',
-      read: (r) => r.exercises.getAll(),
+      table: (r) => r.exercises,
       map: (e, c) => SearchDoc(
         id: e.id,
         refTable: 'exercises',
@@ -939,13 +942,13 @@ abstract final class BuiltInSearchSources {
         planetKey: 'body',
       ),
     ),
-    _rows<WorkoutLogRow>(
+    _rows(
       id: 'workout_logs',
       planet: 'body',
       icon: Icons.directions_run_rounded,
       label: 'searchSourceWorkouts',
       weight: 0.8,
-      read: (r) => r.workoutLogs.getAll(),
+      table: (r) => r.workoutLogs,
       map: (w, c) => SearchDoc(
         id: w.id,
         refTable: 'workout_logs',
@@ -958,14 +961,20 @@ abstract final class BuiltInSearchSources {
         extra: {'exerciseId': ?w.exerciseId},
       ),
     ),
-    _rows<AvoidItemRow>(
+    _rows(
       id: 'avoid_items',
       planet: 'body',
       icon: Icons.do_not_disturb_on_rounded,
       label: 'searchSourceAvoidItems',
-      read: (r) => r.avoidItems.getAll(),
-      map: (a, c) =>
-          SearchDoc(id: a.id, refTable: 'avoid_items', refId: a.id, title: a.body, body: a.reason ?? '', planetKey: 'body'),
+      table: (r) => r.avoidItems,
+      map: (a, c) => SearchDoc(
+        id: a.id,
+        refTable: 'avoid_items',
+        refId: a.id,
+        title: a.body,
+        body: a.reason ?? '',
+        planetKey: 'body',
+      ),
     ),
     SearchSource(
       id: 'fasting_sessions',

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
+import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
@@ -119,8 +120,27 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
 
   // ------------------------------------------------------------ actions --
 
-  Future<void> _send() async {
+  /// The saved settings are loaded (until then Send would use defaults –
+  /// maybe another service than the one the user chose).
+  bool get _settingsReady => ref.read(aiSettingsProvider).hasValue;
+
+  /// First call of a conversation (or after "No personal context" was
+  /// switched off): the user sees exactly what is shared and can trim it.
+  /// False when they dismissed the preview.
+  Future<bool> _decideContext() async {
     final l = L10n.of(context);
+    final markdown = await ref.read(aiContextPickerProvider)(context, andSend: true);
+    if (!mounted) return false;
+    if (markdown == null || markdown.trim().isEmpty) {
+      _say(l.aiChatContextCancelled);
+      return false;
+    }
+    _chat.setContext(ChatContext.personal(markdown, approvedAt: ref.read(aiClockProvider)()));
+    return true;
+  }
+
+  Future<void> _send() async {
+    if (!_settingsReady) return;
     final settings = _settings;
     final hints = ref.read(aiKeyHintsProvider).value ?? const {};
     final text = _input.text;
@@ -131,19 +151,20 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
         await showAiKeySheet(context, settings.provider);
         return;
       case SendBlock.needsContext:
-        // First send: the user sees exactly what is shared and can trim it.
-        final markdown = await ref.read(aiContextPickerProvider)(context, andSend: true);
-        if (!mounted) return;
-        if (markdown == null || markdown.trim().isEmpty) {
-          _say(l.aiChatContextCancelled);
-          return;
-        }
-        _chat.setContext(ChatContext.personal(markdown, approvedAt: ref.read(aiClockProvider)()));
+        if (!await _decideContext()) return;
       case null:
         break;
     }
     final ok = await _chat.send(text, settings: settings, languageCode: _lang);
-    if (!ok || !mounted) return;
+    if (!mounted) return;
+    if (!ok) {
+      // The key went missing since the screen last looked.
+      if (_chat.lastError?.kind == AiErrorKind.noKey) {
+        ref.invalidate(aiKeyHintsProvider);
+        await showAiKeySheet(context, settings.provider);
+      }
+      return;
+    }
     _input.clear();
     setState(() => _notice = null);
     if (_scroll.hasClients) {
@@ -152,12 +173,16 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
   }
 
   Future<void> _regenerate() async {
+    if (!_settingsReady || _chat.busy) return;
     final settings = _settings;
     final hints = ref.read(aiKeyHintsProvider).value ?? const {};
     if (hints[settings.provider] == null) {
       await showAiKeySheet(context, settings.provider);
       return;
     }
+    // Never a silent no-op: an undecided context is decided first.
+    if (!_chat.conversation.context.isDecided && !await _decideContext()) return;
+    if (!mounted) return;
     await _chat.regenerate(settings: settings, languageCode: _lang);
   }
 
@@ -174,7 +199,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
     final hint = ref.read(aiKeyHintsProvider).value?[settings.provider];
     final request = ref
         .read(aiProviderRegistryProvider)[settings.provider]
-        .chatRequest(payload.request, apiKey: AiKeyStore.mask(hint ?? ''));
+        .chatRequest(payload.request, apiKey: AiKeyStore.maskHint(hint));
     await showPayloadSheet(sheetContext, request: request, payload: payload, includesDraft: draft.isNotEmpty);
   }
 
@@ -325,7 +350,9 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
     final l = L10n.of(context);
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    final settings = ref.watch(aiSettingsProvider).value ?? const AiSettings();
+    final settingsAsync = ref.watch(aiSettingsProvider);
+    final settings = settingsAsync.value ?? const AiSettings();
+    final settingsReady = settingsAsync.hasValue;
     final hintsAsync = ref.watch(aiKeyHintsProvider);
     final hints = hintsAsync.value;
     final powerSaver = ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver));
@@ -363,7 +390,13 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
             },
           );
         } else {
-          content = _Messages(chat: _chat, scroll: _scroll, onRegenerate: _regenerate, onOpenSettings: _openSettings, onOpenLink: widget.onOpenLink);
+          content = _Messages(
+            chat: _chat,
+            scroll: _scroll,
+            onRegenerate: _regenerate,
+            onOpenSettings: _openSettings,
+            onOpenLink: widget.onOpenLink,
+          );
         }
 
         return MadarScaffold(
@@ -430,7 +463,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                       controller: _input,
                       focusNode: _focus,
                       busy: _chat.busy,
-                      enabled: !_chat.loading && !_chat.missing,
+                      enabled: !_chat.loading && !_chat.missing && settingsReady,
                       onSend: _send,
                       onStop: _chat.stop,
                     ),
@@ -544,15 +577,29 @@ class _Messages extends StatelessWidget {
             streaming: m.id == chat.streamingId,
             canRegenerate: last && chat.canRegenerate,
             onRegenerate: onRegenerate,
-            onRetry: last && m.status == MessageStatus.failed && (chat.lastError?.retryable ?? true) ? onRegenerate : null,
+            onRetry: last && m.status == MessageStatus.failed && AiException(m.error ?? AiErrorKind.unknown).retryable
+                ? onRegenerate
+                : null,
             onOpenSettings: onOpenSettings,
-            errorDetail: last ? chat.lastError?.detail : null,
+            errorDetail: last ? _errorDetail(context, chat.lastError) : null,
             onOpenLink: onOpenLink,
           ),
         );
       },
     );
   }
+}
+
+/// The provider's (redacted) words plus "try again in N s" when known.
+String? _errorDetail(BuildContext context, AiException? e) {
+  if (e == null) return null;
+  final wait = e.retryAfter;
+  final parts = [
+    if (wait != null && wait.inSeconds > 0)
+      L10n.of(context).aiChatErrorRetryAfter(context.formatter.formatInt(wait.inSeconds)),
+    ?e.detail,
+  ];
+  return parts.isEmpty ? null : parts.join('\n');
 }
 
 class _EmptyChat extends StatelessWidget {
@@ -585,7 +632,11 @@ class _EmptyChat extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Space.xl),
-            Text(l.aiChatEmptyTitle, textAlign: TextAlign.center, style: text.headlineSmall!.copyWith(color: t.textPrimary)),
+            Text(
+              l.aiChatEmptyTitle,
+              textAlign: TextAlign.center,
+              style: text.headlineSmall!.copyWith(color: t.textPrimary),
+            ),
             const SizedBox(height: Space.s),
             Text(
               l.aiChatEmptyBody,
@@ -634,7 +685,9 @@ class _MenuRow extends StatelessWidget {
           children: [
             Icon(icon, size: 20, color: danger ? t.danger : t.accent),
             const SizedBox(width: Space.m),
-            Expanded(child: Text(label, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: color))),
+            Expanded(
+              child: Text(label, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: color)),
+            ),
           ],
         ),
       ),

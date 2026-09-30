@@ -160,29 +160,38 @@ final class BackgammonConfig {
     this.maxTurns = 2000,
   }) : assert(!doublingCube || variant == TawlaVariant.sheshBesh, 'the cube is a شيش بيش option'),
        assert(matchTarget == null || matchTarget >= 0),
+       assert(maxCube >= 1),
        assert(maxTurns > 0);
 
+  /// Rejects what the constructor only asserts, so that a bad save cannot
+  /// make a release build loop (a turn cap of 0 voids every game of a match).
   factory BackgammonConfig.fromJson(Map<String, Object?> json) {
-    final config = BackgammonConfig(
-      variant: TawlaVariant.values.byName(json['variant']! as String),
+    final variant = TawlaVariant.values.byName(json['variant']! as String);
+    if (json['cube']! as bool && variant != TawlaVariant.sheshBesh) {
+      throw const FormatException('the doubling cube is only for sheshBesh');
+    }
+    final target = (json['target'] as num?)?.toInt();
+    final maxCube = (json['maxCube']! as num).toInt();
+    final maxTurns = (json['maxTurns']! as num).toInt();
+    if (target != null && target < 0) throw FormatException('negative match target', target);
+    if (maxCube < 1) throw FormatException('maxCube below 1', maxCube);
+    if (maxTurns < 1) throw FormatException('maxTurns below 1', maxTurns);
+    return BackgammonConfig(
+      variant: variant,
       openingRollIsFirstMove: json['openingMove']! as bool,
       nextGameStarter: TawlaNextStarter.values.byName(json['nextStarter']! as String),
-      matchTarget: (json['target'] as num?)?.toInt(),
+      matchTarget: target,
       gammons: json['gammons']! as bool,
       triple: TawlaTriple.values.byName(json['triple']! as String),
       doublingCube: json['cube']! as bool,
-      maxCube: (json['maxCube']! as num).toInt(),
+      maxCube: maxCube,
       motherRule: json['motherRule']! as bool,
       mahbusaScoring: MahbusaScoring.values.byName(json['mahbusaScoring']! as String),
       layout31: Tawla31Layout.values.byName(json['layout31']! as String),
       runnerTarget: Tawla31RunnerTarget.values.byName(json['runnerTarget']! as String),
       noFullPrime: json['noFullPrime']! as bool,
-      maxTurns: (json['maxTurns']! as num).toInt(),
+      maxTurns: maxTurns,
     );
-    if (config.doublingCube && config.variant != TawlaVariant.sheshBesh) {
-      throw const FormatException('the doubling cube is only for sheshBesh');
-    }
-    return config;
   }
 
   /// شيش بيش as commonly played in Jordan (= `BackgammonConfig()`).
@@ -222,6 +231,8 @@ final class BackgammonConfig {
 
   /// شيش بيش only: the doubling cube (off – coffee-house play has none).
   final bool doublingCube;
+
+  /// The cube never goes above this (a double is refused when it would).
   final int maxCube;
 
   /// محبوسة: pinning the opponent's last start-point checker while one's own
@@ -685,7 +696,7 @@ final class BackgammonRules extends GameRules<BackgammonState, BackgammonMove> {
       s.config.variant == TawlaVariant.sheshBesh &&
       s.phase == BackgammonPhase.awaitingRoll &&
       (s.cubeOwner == -1 || s.cubeOwner == s.currentPlayer) &&
-      s.cubeValue < s.config.maxCube;
+      s.cubeValue * 2 <= s.config.maxCube;
 
   @override
   List<BackgammonMove> legalMoves(BackgammonState state) {
@@ -715,7 +726,7 @@ final class BackgammonRules extends GameRules<BackgammonState, BackgammonMove> {
     d,
   );
 
-  static List<int> _allDice(List<int> dice) => dice[0] == dice[1] ? List.filled(4, dice[0]) : [...dice];
+  static List<int> _allDice(List<int> dice) => dice[0] == dice[1] ? [dice[0], dice[0], dice[0], dice[0]] : [...dice];
 
   /// Replays [steps] for the mover; null when a step is illegal.
   static BgBoard? _simulate(BackgammonState s, List<BackgammonStep> steps) {
@@ -841,9 +852,20 @@ final class BackgammonRules extends GameRules<BackgammonState, BackgammonMove> {
           dice: const [],
           turns: state.turns + 1,
         );
-        final end = _gameEnd(next, board, move.steps.isEmpty);
+        final end = playEnd(
+          state.config,
+          board,
+          cubeValue: state.cubeValue,
+          turns: next.turns,
+          passed: move.steps.isEmpty,
+        );
         if (end == null) return next;
-        return _finishGame(next, end.winner, end.points, end.end);
+        final winner = switch (end.moverWon) {
+          null => null,
+          true => p,
+          false => o,
+        };
+        return _finishGame(next, winner, end.points, end.end);
     }
   }
 
@@ -871,32 +893,40 @@ final class BackgammonRules extends GameRules<BackgammonState, BackgammonMove> {
     );
   }
 
-  /// The end tests after a play, in the spec's order (§5.4): 15 off, both
-  /// mothers pinned, the mother rule, a frozen position after a pass, the
-  /// turn cap. [board] is the mover's view after the play.
-  ({int? winner, int points, TawlaGameEnd end})? _gameEnd(BackgammonState next, BgBoard board, bool passed) {
-    final cfg = next.config;
-    final mover = 1 - next.currentPlayer;
+  /// How the game ends right after a play (null: it goes on). The end tests
+  /// run in the spec's order (§5.4): 15 off, both mothers pinned, the mother
+  /// rule, a frozen position after a pass ([passed]), the turn cap.
+  ///
+  /// [board] is the mover's view after the play and [turns] counts the plays
+  /// of this game including it. `moverWon` is null for a void game. The AI
+  /// uses this too, so it sees every way a game can end.
+  static ({bool? moverWon, int points, TawlaGameEnd end})? playEnd(
+    BackgammonConfig cfg,
+    BgBoard board, {
+    required int cubeValue,
+    required int turns,
+    bool passed = false,
+  }) {
     if (board.a[0] == 15) {
-      final (points, end) = winPoints(cfg, board, next.cubeValue);
-      return (winner: mover, points: points, end: end);
+      final (points, end) = winPoints(cfg, board, cubeValue);
+      return (moverWon: true, points: points, end: end);
     }
     if (cfg.variant == TawlaVariant.mahbusa) {
       final myMother = board.pa[24] == 1, theirMother = board.pb[24] == 1;
-      if (myMother && theirMother) return (winner: null, points: 0, end: TawlaGameEnd.bothMothersPinned);
+      if (myMother && theirMother) return (moverWon: null, points: 0, end: TawlaGameEnd.bothMothersPinned);
       if (cfg.motherRule) {
         if (theirMother && board.a[24] == 0) {
-          return (winner: mover, points: _marsValue(cfg), end: TawlaGameEnd.motherPinned);
+          return (moverWon: true, points: _marsValue(cfg), end: TawlaGameEnd.motherPinned);
         }
         if (myMother && board.b[24] == 0) {
-          return (winner: 1 - mover, points: _marsValue(cfg), end: TawlaGameEnd.motherPinned);
+          return (moverWon: false, points: _marsValue(cfg), end: TawlaGameEnd.motherPinned);
         }
       }
     }
     if (passed && cfg.variant != TawlaVariant.sheshBesh && !hasAnyPlay(board) && !hasAnyPlay(board.swapped())) {
-      return (winner: null, points: 0, end: TawlaGameEnd.positionFrozen);
+      return (moverWon: null, points: 0, end: TawlaGameEnd.positionFrozen);
     }
-    if (next.turns >= cfg.maxTurns) return (winner: null, points: 0, end: TawlaGameEnd.moveLimit);
+    if (turns >= cfg.maxTurns) return (moverWon: null, points: 0, end: TawlaGameEnd.moveLimit);
     return null;
   }
 

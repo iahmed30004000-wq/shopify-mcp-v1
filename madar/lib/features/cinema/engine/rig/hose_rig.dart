@@ -41,6 +41,7 @@ enum RigTiming {
 /// sub-steps) and [build] (the drawing).
 abstract class HoseRig implements RigCharacter {
   HoseRig(this.spec) : ink = InkBuild(seed: seedOf(spec.id) ^ spec.seed) {
+    stagger = (ink.seed % 7) / 7 / 24;
     _nextBlink = 1.2 + boilHash01(0, ink.seed, 7) * 2.5;
     _nextGlance = 3 + boilHash01(0, ink.seed, 8) * 3;
   }
@@ -63,6 +64,11 @@ abstract class HoseRig implements RigCharacter {
 
   /// While > 0 the fills flash white (hit flash).
   double flashTime = 0;
+
+  /// World velocity (units/s) a game may feed each tick: fast motion
+  /// stretches the body along it (squash & stretch from velocity, on top of
+  /// the impact springs). Leave at zero if the game doesn't track it.
+  Offset velocity = Offset.zero;
 
   /// Mouth motion 0..1 a game can drive while the character speaks
   /// (the [RigAction.talk] loop animates it by itself).
@@ -101,6 +107,13 @@ abstract class HoseRig implements RigCharacter {
 
   /// Number of drawings made so far (tests: proves caching).
   int drawings = 0;
+
+  /// Sub-frame offset (s) of this rig's drawing clock: a cast re-inks within
+  /// the same 1/24 s, but not all on the same game tick (no frame spikes).
+  late double stagger;
+
+  /// The boil frame of the current drawing (staggered).
+  int boilFrame = 0;
 
   Rect _bounds = Rect.zero;
 
@@ -184,7 +197,7 @@ abstract class HoseRig implements RigCharacter {
   Offset? get lookTarget => _look;
 
   @override
-  void squash(double amount) => squashSpring.kick(amount * 9 * (0.4 + 0.6 * spec.bounciness));
+  void squash(double amount) => squashSpring.kick(amount * 15 * (0.4 + 0.6 * spec.bounciness));
 
   /// Current squash (+) / stretch (−).
   double get squashAmount => squashSpring.value;
@@ -234,7 +247,9 @@ abstract class HoseRig implements RigCharacter {
     facingSpring.step(h, _facing, 24, 0.75);
     // Squash wobbles back with overshoot (rubber).
     final k = 0.8 + 0.4 * spec.bounciness;
-    squashSpring.step(h, 0, 17 * k, 0.32 / k);
+    final v = velocity.distance;
+    final stretch = v <= 0 ? 0.0 : (v / (spec.height * 11)).clamp(0.0, 0.24) * (0.5 + 0.5 * spec.bounciness);
+    squashSpring.step(h, -stretch, 17 * k, 0.32 / k);
     squashSpring.value = squashSpring.value.clamp(-0.45, 0.45);
 
     // Blinks (sometimes a double blink) and idle glances.
@@ -252,7 +267,10 @@ abstract class HoseRig implements RigCharacter {
       _nextGlance = 3.5 + boilHash01((time * 10).floor(), ink.seed, 13) * 4;
     }
     if (_glance > 0) _glance = math.max(0, _glance - h);
-    final lx = _look?.dx ?? glance * 0.9, ly = _look?.dy ?? 0.0;
+    // lookAt is in character (screen) space; pupils live in design space,
+    // which is mirrored when facing left.
+    final look = _look;
+    final lx = look != null ? look.dx * dir : glance * 0.9, ly = look?.dy ?? 0.0;
     final ll = math.sqrt(lx * lx + ly * ly);
     final nx = ll > 1 ? lx / ll : lx, ny = ll > 1 ? ly / ll : ly;
     lookSpring.step(h, nx, ny, 34, 0.8);
@@ -276,7 +294,9 @@ abstract class HoseRig implements RigCharacter {
   }
 
   double _drawRate(EraSkin skin) {
-    if (skin.ink.boilFps <= 0) return 0;
+    if (timing == RigTiming.smooth) return 0;
+    // Video eras (no boil): a new drawing per video frame.
+    if (skin.ink.boilFps <= 0) return skin.grade.projectionFps > 0 ? skin.grade.projectionFps : 30;
     return switch (timing) {
       RigTiming.smooth => 0,
       RigTiming.ones => 24,
@@ -290,14 +310,17 @@ abstract class HoseRig implements RigCharacter {
     final clock = context.clock;
     final skin = context.skin;
     final rate = _drawRate(skin);
-    final key = rate <= 0 ? clock.tick : (clock.time * rate + 1e-6).floor() * 100 + rate.toInt();
+    final t = clock.time + stagger;
+    final key = rate <= 0 ? clock.tick : (t * rate + 1e-6).floor() * 100 + rate.toInt();
+    final boil = skin.ink.boilFps > 0 ? (t * skin.ink.boilFps + 1e-6).floor() : 0;
     if (_dirty ||
         key != _drawKey ||
-        clock.boilFrame != _boilKey ||
+        boil != _boilKey ||
         !identical(skin, _skinKey) ||
         context.pixelScale != _scaleKey) {
       _drawKey = key;
-      _boilKey = clock.boilFrame;
+      _boilKey = boil;
+      boilFrame = boil;
       _skinKey = skin;
       _scaleKey = context.pixelScale;
       _dirty = false;
@@ -312,8 +335,14 @@ abstract class HoseRig implements RigCharacter {
   /// Builds the drawing into [ink] (call [InkBuild.begin] first).
   void build(RigPaintContext context);
 
-  /// Records the drawing's bounds (character space) during [build].
-  void setBounds(Rect r) => _bounds = r;
+  /// Records the drawing's bounds during [build], given in design space
+  /// (facing +x); mirrored into character space when facing left. Allocates
+  /// only when the box changes.
+  void setBounds(double l, double t, double r, double b) {
+    final ml = dir < 0 ? -r : l, mr = dir < 0 ? -l : r;
+    if (_bounds.left == ml && _bounds.top == t && _bounds.right == mr && _bounds.bottom == b) return;
+    _bounds = Rect.fromLTRB(ml, t, mr, b);
+  }
 
   @override
   Rect get bounds {

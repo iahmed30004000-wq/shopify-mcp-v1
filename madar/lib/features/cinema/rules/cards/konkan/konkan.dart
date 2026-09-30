@@ -1,7 +1,9 @@
-/// Konkan (كونكان): the rummy engine with the Konkan preset (two packs and
-/// two jokers, 14 cards / 15 for the opener, 51 to open, no bonus for going
-/// out, a one-turn finish doubles everyone else, match to 500). See
-/// RULES.md.
+/// Konkan (كونكان): the rummy engine with `RummyOptions.konkan()` – the
+/// Hand core (106 cards, 14 / 15, the starter only discards first, 51 to
+/// open, one wild per meld, the top discard only into a new meld), nothing
+/// for going out, a one-turn finish (كونكان) doubles everyone else, a joker
+/// left in hand costs 25, and a player whose total goes over 301 is out
+/// until one player is left. Low confidence: see RULES.md.
 library;
 
 import '../rummy/rummy_ai.dart';
@@ -19,7 +21,8 @@ class KonkanEngine extends RummyEngine {
   factory KonkanEngine.fromJson(Map<String, Object?> json) => KonkanEngine(RummyState.fromJson(json));
 }
 
-/// The Konkan AI is the shared rummy AI.
+/// The Konkan AI is the shared rummy AI; near the elimination score it
+/// sheds high cards first.
 class KonkanAi extends RummyAi {
   const KonkanAi();
 }

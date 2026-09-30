@@ -92,7 +92,8 @@ void main() {
       final opened = noticeOf(appointment(ncAt(0, 11)));
       final hidden = noticeOf(moneyDue(ncAt(0, 10)));
       final history = const NotificationHistory().recordAll([
-        HistoryEntry(notice: oldAdhkar, status: HistoryStatus.delivered, recordedAt: now),
+        // Recorded when it arrived (before the last look).
+        HistoryEntry(notice: oldAdhkar, status: HistoryStatus.delivered, recordedAt: ncAt(0, 5, 31)),
         HistoryEntry(notice: opened, status: HistoryStatus.opened, recordedAt: now),
         HistoryEntry(notice: hidden, status: HistoryStatus.delivered, recordedAt: now, hidden: true),
       ], now: now);
@@ -116,6 +117,7 @@ void main() {
   });
 
   group('history', () {
+    // Recorded when it arrived (the center records arrivals as it sees them).
     HistoryEntry entry(int i, {HistoryStatus status = HistoryStatus.delivered, DateTime? at}) => HistoryEntry(
       notice: CenterNotice(
         id: 110000 + i,
@@ -123,7 +125,7 @@ void main() {
         at: at ?? now.subtract(Duration(minutes: i)),
       ),
       status: status,
-      recordedAt: now,
+      recordedAt: at ?? now.subtract(Duration(minutes: i)),
     );
 
     test('is bounded: at most maxEntries, newest kept, nothing older than two weeks', () {
@@ -176,6 +178,24 @@ void main() {
       ], now: now);
       final unread = h.unread(seenAt: now.subtract(const Duration(minutes: 100)), now: now);
       expect(unread.map((e) => e.notice.id), [110001, 110003]);
+      // Due before the last look but only recorded after it (Doze delayed
+      // the alarm; the center saw it late): the user has not seen it.
+      final late = h.record(
+        HistoryEntry(
+          notice: const CenterNotice(
+            id: 110300,
+            namespace: 'adhkar',
+          ).copyWith(at: now.subtract(const Duration(hours: 3))),
+          status: HistoryStatus.delivered,
+          recordedAt: now.subtract(const Duration(minutes: 5)),
+        ),
+        now: now,
+      );
+      expect(late.unread(seenAt: now.subtract(const Duration(minutes: 100)), now: now).map((e) => e.notice.id), [
+        110001,
+        110003,
+        110300,
+      ]);
     });
 
     test('survives JSON, ignoring junk', () {

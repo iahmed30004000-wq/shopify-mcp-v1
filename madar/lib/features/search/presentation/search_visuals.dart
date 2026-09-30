@@ -126,3 +126,34 @@ TextSpan searchHighlightSpan(String text, List<HighlightRange> ranges, TextStyle
   if (at < text.length) children.add(TextSpan(text: text.substring(at)));
   return TextSpan(style: style, children: children);
 }
+
+/// The reading direction of [text], from its first letter that has one
+/// (digits and punctuation have none): a result in the other script than
+/// the app's is laid out in its own direction («Call Omar!» keeps its «!»
+/// at the end in the Arabic app, a snippet's leading «…» stays before the
+/// first word). Null when [text] has no such letter.
+TextDirection? searchTextDirection(String text) {
+  for (final rune in text.runes) {
+    if (_rtl(rune)) return TextDirection.rtl;
+    if (_ltr(rune)) return TextDirection.ltr;
+  }
+  return null;
+}
+
+bool _rtl(int c) =>
+    (c >= 0x0590 && c <= 0x05FF) || // Hebrew
+    (c >= 0x0600 && c <= 0x06FF && !(c >= 0x0660 && c <= 0x0669) && !(c >= 0x06F0 && c <= 0x06F9) && c != 0x066B && c != 0x066C) ||
+    (c >= 0x0700 && c <= 0x08FF) || // Syriac, Thaana, Arabic supplement / extended
+    (c >= 0xFB1D && c <= 0xFDFF) || // Hebrew / Arabic presentation forms A
+    (c >= 0xFE70 && c <= 0xFEFC) || // Arabic presentation forms B
+    c == 0x200F; // RLM
+
+bool _ltr(int c) =>
+    (c >= 0x41 && c <= 0x5A) ||
+    (c >= 0x61 && c <= 0x7A) ||
+    (c >= 0xC0 && c <= 0x24F && c != 0xD7 && c != 0xF7) || // Latin-1 and Latin Extended letters
+    (c >= 0x0370 && c <= 0x058F) || // Greek, Cyrillic, Armenian
+    (c >= 0x0900 && c <= 0x1FFF) || // Indic … Greek extended
+    (c >= 0x3040 && c <= 0x9FFF) || // kana, CJK
+    (c >= 0xAC00 && c <= 0xD7AF) || // Hangul
+    c == 0x200E; // LRM

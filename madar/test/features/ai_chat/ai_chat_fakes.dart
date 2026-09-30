@@ -99,8 +99,12 @@ String anthropicSse(List<String> deltas, {String stopReason = 'end_turn', bool t
   var index = 0;
   if (thinking) {
     b
-      ..write('event: content_block_start\ndata: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":""}}\n\n')
-      ..write('event: content_block_delta\ndata: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"secret plan"}}\n\n')
+      ..write(
+        'event: content_block_start\ndata: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":""}}\n\n',
+      )
+      ..write(
+        'event: content_block_delta\ndata: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"secret plan"}}\n\n',
+      )
       ..write('event: content_block_stop\ndata: {"type":"content_block_stop","index":0}\n\n');
     index = 1;
   }

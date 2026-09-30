@@ -109,8 +109,6 @@ abstract final class HealthMentions {
 
   /// Folds Arabic spelling variants: harakat and tatweel dropped, alef
   /// forms → ا, ى → ي, ة → ة (kept), ه at a word end left alone.
-  static String normalizeArabic(String s) => s
-      .replaceAll(RegExp('[ً-ٰٟـ]'), '')
-      .replaceAll(RegExp('[آأإٱ]'), 'ا')
-      .replaceAll('ى', 'ي');
+  static String normalizeArabic(String s) =>
+      s.replaceAll(RegExp('[ً-ٰٟـ]'), '').replaceAll(RegExp('[آأإٱ]'), 'ا').replaceAll('ى', 'ي');
 }

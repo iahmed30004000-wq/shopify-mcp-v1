@@ -1,6 +1,7 @@
 /// Basra AI: greedy captures (easy), capture value minus the risk left to
 /// the next opponent from counted cards (medium), determinised Monte Carlo
-/// (hard).
+/// (hard). Works for every rule set (2–4 players, 52 or 44 cards, either
+/// basra value): all values come from [BasraRules.captureFor].
 library;
 
 import 'dart:math' as math;
@@ -31,8 +32,10 @@ class BasraAi extends HeuristicAi<BasraState, BasraMove> {
       v += BasraRules.cardPoints(c) + 0.25;
     }
     if (cap.basraPoints > 0 && (!lastCard || s.options.basraOnLastCard)) v += cap.basraPoints;
-    // Using a jack or the 7♦ on a poor table wastes it.
-    if (card.rank == Rank.jack || card == sevenOfDiamonds) v -= 1.5;
+    // Using a jack or the sweeping 7♦ on a poor table wastes it.
+    if (card.rank == Rank.jack || (card == sevenOfDiamonds && s.options.sevenDiamonds == BasraSevenDiamonds.sweep)) {
+      v -= 1.5;
+    }
     return v;
   }
 
@@ -59,14 +62,20 @@ class BasraAi extends HeuristicAi<BasraState, BasraMove> {
     final jacks = unseenCards.where((c) => c.rank == Rank.jack).length;
     final loneJack = table.length == 1 && table.first.rank == Rank.jack;
     loss += chance(jacks) * (tableValue + 1 + (loneJack ? s.options.jackBasraPoints : 0));
-    // Basra threats: a card that takes the whole table.
+    // Basra threats: a card (the 7♦ included) that clears the table. Each
+    // is weighted by what that basra would be worth to the opponent (twice
+    // the card in Jordan, a flat value in Egypt).
     var basraCards = 0;
+    var basraValue = 0;
     for (final c in unseenCards.toSet()) {
-      if (c.rank == Rank.jack || c == sevenOfDiamonds) continue;
+      if (c.rank == Rank.jack) continue;
       final cap = BasraRules.captureFor(table, c, s.options);
-      if (cap.basraPoints > 0) basraCards++;
+      if (cap.basraPoints > 0) {
+        basraCards++;
+        basraValue += cap.basraPoints;
+      }
     }
-    loss += chance(basraCards) * (s.options.basraPoints + tableValue);
+    if (basraCards > 0) loss += chance(basraCards) * (basraValue / basraCards + tableValue);
     return loss;
   }
 

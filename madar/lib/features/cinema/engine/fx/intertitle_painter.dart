@@ -114,9 +114,9 @@ class IntertitlePainter {
   // Text.
 
   double _titleScale(IntertitleKind kind) => switch (kind) {
-    IntertitleKind.title || IntertitleKind.theEnd || IntertitleKind.gameOver => 0.1,
-    IntertitleKind.chapter || IntertitleKind.intermission => 0.085,
-    IntertitleKind.dialogue => 0.068,
+    IntertitleKind.title || IntertitleKind.theEnd || IntertitleKind.gameOver => 0.115,
+    IntertitleKind.chapter || IntertitleKind.intermission => 0.095,
+    IntertitleKind.dialogue => 0.072,
   };
 
   Color get _textColor => switch (skin.titles.frame) {
@@ -157,9 +157,10 @@ class IntertitlePainter {
       ..text = TextSpan(text: sub, style: style(sub, size * 0.46, FontWeight.w500, _subColor, 2.5))
       ..layout(maxWidth: maxW);
     if (skin.titles.frame == TitleFrame.osd || skin.titles.frame == TitleFrame.marquee) {
+      final osd = skin.titles.frame == TitleFrame.osd;
       final glowPaint = Paint()
-        ..color = skin.titles.frame == TitleFrame.osd ? _pal.accent : _pal.accent
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5);
+        ..color = osd ? _pal.accent : _pal.accent2
+        ..maskFilter = osd ? const MaskFilter.blur(BlurStyle.normal, 5) : null;
       _glow
         ..textDirection = direction
         ..text = TextSpan(text: card.text, style: style(card.text, size, t.weight, _pal.accent, t.letterSpacing + 1.5, paint: glowPaint))
@@ -167,29 +168,37 @@ class IntertitlePainter {
     }
   }
 
-  double get _contentHeight => _title.height + (_hasSub ? _subtitle.height + _title.height * 0.35 : 0);
+  double get _contentHeight => _title.height + (_hasSub ? _subtitle.height + _title.height * 0.42 : 0);
   bool get _hasSub => (_laidOut?.subtitle ?? '').isNotEmpty;
 
   Rect _panel(Rect bounds, IntertitleCard card) {
-    final w = bounds.width * 0.86;
-    final h = math.max(_contentHeight + bounds.width * 0.42, bounds.width * 0.78);
-    return Rect.fromCenter(center: bounds.center, width: w, height: math.min(h, bounds.height * 0.9));
+    final w = bounds.width * 0.88;
+    final h = math.min(math.max(_contentHeight + bounds.width * 0.5, bounds.width * 1.02), bounds.height * 0.86);
+    final osd = skin.titles.frame == TitleFrame.osd;
+    final centre = osd ? Offset(bounds.center.dx, bounds.top + bounds.height * 0.4) : bounds.center;
+    return Rect.fromCenter(center: centre, width: w, height: osd ? _contentHeight + bounds.width * 0.3 : h);
   }
 
-  void _paintText(Canvas canvas, Rect panel, {Offset shift = Offset.zero, bool glow = false}) {
+  /// Gap between the headline and the second line.
+  double get _gap => _title.height * 0.42;
+
+  /// y of the divider between the two lines (for ornaments).
+  double _dividerY(Rect panel, {double shift = 0}) => panel.center.dy - _contentHeight / 2 + shift + _title.height + _gap / 2;
+
+  void _paintText(Canvas canvas, Rect panel, {Offset shift = Offset.zero, bool glow = false, bool subtitle = true}) {
     var y = panel.center.dy - _contentHeight / 2 + shift.dy;
     final cx = panel.center.dx + shift.dx;
     if (glow) _glow.paint(canvas, Offset(cx - _glow.width / 2, y));
     _title.paint(canvas, Offset(cx - _title.width / 2, y));
-    y += _title.height + _title.height * 0.35;
-    if (_hasSub) _subtitle.paint(canvas, Offset(cx - _subtitle.width / 2, y));
+    y += _title.height + _gap;
+    if (_hasSub && subtitle) _subtitle.paint(canvas, Offset(cx - _subtitle.width / 2, y));
   }
 
   /// Paints the paper stock (paper.frag, flat colour fallback).
-  void _paper(Canvas canvas, Rect rect, FilmClock clock, Color paper, Color stain, {double age = 0.55, double seed = 3}) {
+  void _paper(Canvas canvas, Rect rect, FilmClock clock, Color paper, Color stain, {double age = 0.55, double seed = 3, double stains = 0.35}) {
     final s = _paperPool.next(clock);
     if (s != null) {
-      PaperUniforms.write(s, rect: rect, paper: paper, stain: stain, age: age, seed: seed, stainAmount: 0.35);
+      PaperUniforms.write(s, rect: rect, paper: paper, stain: stain, age: age, seed: seed, stainAmount: stains);
       _fill
         ..shader = s
         ..color = const Color(0xFFFFFFFF);
@@ -208,38 +217,61 @@ class IntertitlePainter {
   void _ornate(Canvas canvas, Rect bounds, Rect panel, IntertitleCard card, FilmClock clock, double a, bool rebuild) {
     final ink = _pal.ink;
     final cream = _pal.paper;
-    _paper(canvas, bounds, clock, Color.lerp(ink, cream, 0.07)!, ink, age: 0.2, seed: 5);
+    final card0 = Color.lerp(ink, cream, 0.06)!;
+    _paper(canvas, bounds, clock, card0, ink, age: 0.25, seed: 5, stains: 0.2);
+    final medal = panel.width * 0.085;
+    final top = Offset(panel.center.dx, panel.top);
+    final bottom = Offset(panel.center.dx, panel.bottom);
     if (rebuild) {
       _pen.begin(_line, _ornFrame);
-      final outer = panel;
-      final inner = panel.deflate(9);
-      // Double rule with coved (quarter-round) corners, drawn on from the
-      // middle of each side as the card appears.
-      _covedRect(outer, 16, a);
-      _covedRect(inner, 11, a);
+      // Double rule with coved corners, drawn on from the middle outwards.
+      _covedRect(panel, 20, a);
+      _pen.begin(_accent, _ornFrame);
+      _covedRect(panel.deflate(8), 14, a);
+      _covedRect(panel.deflate(13), 11, a);
       _pen.begin(_ink, _ornFrame);
-      final s = panel.width * 0.075 * (0.4 + 0.6 * a);
+      final s = panel.width * 0.1 * (0.35 + 0.65 * a);
       for (var i = 0; i < 4; i++) {
-        final cx = i.isEven ? outer.left : outer.right;
-        final cy = i < 2 ? outer.top : outer.bottom;
+        final cx = i.isEven ? panel.left : panel.right;
+        final cy = i < 2 ? panel.top : panel.bottom;
         _scroll(Offset(cx, cy), Offset(i.isEven ? 1 : -1, i < 2 ? 1 : -1), s);
       }
-      // Fleuron under the text, emblem on the top rule.
-      final base = Offset(panel.center.dx, panel.bottom - panel.height * 0.14);
-      _fleuron(base, panel.width * 0.2 * a);
-      _emblem(Offset(panel.center.dx, panel.top), panel.width * 0.05 * (0.5 + 0.5 * a));
+      // Medallions on the top and bottom rules, wings along them.
+      final m = medal * (0.5 + 0.5 * a);
+      _emblem(top, m * 0.62);
+      for (final dir in const [-1.0, 1.0]) {
+        _pen
+          ..brush(top + Offset(dir * m * 1.1, 0), top + Offset(dir * m * 2.2, -m * 0.55), top + Offset(dir * m * 3.4, -m * 0.1), m * 0.2, taper: 0.9)
+          ..circle(top + Offset(dir * m * 3.55, -m * 0.05), m * 0.09)
+          ..brush(bottom + Offset(dir * m * 0.9, 0), bottom + Offset(dir * m * 1.8, m * 0.45), bottom + Offset(dir * m * 2.8, m * 0.08), m * 0.16, taper: 0.9);
+      }
+      _pen
+        ..moveTo(bottom.dx, bottom.dy - m * 0.42)
+        ..lineTo(bottom.dx + m * 0.42, bottom.dy)
+        ..lineTo(bottom.dx, bottom.dy + m * 0.42)
+        ..lineTo(bottom.dx - m * 0.42, bottom.dy)
+        ..close();
+      if (_hasSub) _fleuron(Offset(panel.center.dx, _dividerY(panel)), panel.width * 0.16 * a);
     }
-    // Knock the rules out behind the emblem.
-    _fill.color = Color.lerp(ink, cream, 0.07)!;
-    canvas.drawCircle(Offset(panel.center.dx, panel.top), panel.width * 0.075, _fill);
+    // Knock the rules out behind the medallions.
+    _fill
+      ..shader = null
+      ..color = card0;
+    canvas
+      ..drawCircle(top, medal, _fill)
+      ..drawRect(Rect.fromCenter(center: bottom, width: medal * 1.4, height: 30), _fill);
     _stroke
-      ..color = cream.withValues(alpha: 0.92)
-      ..strokeWidth = 1.6;
+      ..color = cream.withValues(alpha: 0.95)
+      ..strokeWidth = 2.6;
     canvas.drawPath(_line, _stroke);
-    _fill.color = cream.withValues(alpha: 0.92);
-    canvas.drawPath(_ink, _fill);
-    _stroke.strokeWidth = 1.4;
+    _stroke.strokeWidth = 1.1;
     canvas.drawPath(_accent, _stroke);
+    _stroke.strokeWidth = 1.4;
+    canvas
+      ..drawCircle(top, medal * 0.92, _stroke)
+      ..drawCircle(top, medal * 0.78, _stroke);
+    _fill.color = cream.withValues(alpha: 0.95);
+    canvas.drawPath(_ink, _fill);
     _paintText(canvas, panel);
   }
 
@@ -343,7 +375,7 @@ class IntertitlePainter {
     final ink = _pal.ink;
     final colour = !skin.era.isMonochrome;
     // Card stock over the whole frame, sunburst rays behind the panel.
-    _paper(canvas, bounds, clock, _pal.paper, _pal.shadow, age: 0.45, seed: 9);
+    _paper(canvas, bounds, clock, _pal.paper, _pal.shadow, age: 0.4, seed: 9, stains: 0.12);
     if (rebuild) {
       final origin = Offset(panel.center.dx, panel.bottom + panel.height * 0.12);
       const rays = 36;
@@ -360,7 +392,7 @@ class IntertitlePainter {
     }
     _fill
       ..shader = null
-      ..color = (colour ? _pal.footlight : ink).withValues(alpha: colour ? 0.28 : 0.07);
+      ..color = (colour ? _pal.accent : ink).withValues(alpha: colour ? 0.1 : 0.07);
     canvas.save();
     canvas.clipRect(bounds);
     canvas.drawPath(_rays, _fill);
@@ -368,12 +400,12 @@ class IntertitlePainter {
     // The panel itself: a lighter card with stepped corners.
     if (rebuild) {
       _pen.begin(_line, _ornFrame);
-      _steppedRect(panel, 18);
-      _steppedRect(panel.deflate(8), 13);
+      _steppedRect(panel, 20);
       _pen.begin(_ink, _ornFrame);
+      _steppedRect(panel.deflate(8), 14);
       // Fan on the top edge.
       final fanC = Offset(panel.center.dx, panel.top + 2);
-      final fr = panel.width * 0.13 * (0.3 + 0.7 * a);
+      final fr = panel.width * 0.17 * (0.3 + 0.7 * a);
       for (var k = 0; k < 3; k++) {
         final r = fr * (1 - k * 0.28);
         _arc(fanC, r);
@@ -384,7 +416,7 @@ class IntertitlePainter {
         _pen.line(fanC, fanC + Offset(math.cos(ang), math.sin(ang)) * fr, bow: 0);
       }
       // Chevrons on the bottom edge and speed lines on the sides.
-      final chev = Offset(panel.center.dx, panel.bottom - 2);
+      final chev = Offset(panel.center.dx, panel.bottom + panel.width * 0.075);
       final cw = panel.width * 0.08 * a;
       for (var k = 0; k < 3; k++) {
         final y = chev.dy - k * cw * 0.45;
@@ -405,24 +437,65 @@ class IntertitlePainter {
       ..shader = null
       ..color = Color.lerp(_pal.paper, _pal.highlight, 0.45)!;
     canvas.drawRect(panel.deflate(4), _fill);
+    // Deco friezes: an ink band with a sawtooth of stock along the top and
+    // bottom of the panel.
+    final inner = panel.deflate(8);
+    final bandH = panel.width * 0.045;
+    for (var b = 0; b < 2; b++) {
+      final y = b == 0 ? inner.top + 6.0 : inner.bottom - 6 - bandH;
+      final band = Rect.fromLTWH(inner.left + 16, y, inner.width - 32, bandH);
+      _fill.color = colour ? _pal.accent2 : ink;
+      canvas.drawRect(band, _fill);
+      _fill.color = Color.lerp(_pal.paper, _pal.highlight, 0.45)!;
+      final n = (band.width / (bandH * 1.2)).floor();
+      final step = band.width / n;
+      _tri.reset();
+      for (var k = 0; k < n; k++) {
+        final x = band.left + k * step;
+        _tri
+          ..moveTo(x + step * 0.15, band.bottom - 2)
+          ..lineTo(x + step * 0.5, band.top + 3)
+          ..lineTo(x + step * 0.85, band.bottom - 2)
+          ..close();
+      }
+      canvas.drawPath(_tri, _fill);
+    }
     // Fan fill.
     final fanC = Offset(panel.center.dx, panel.top + 2);
-    final fr = panel.width * 0.13 * (0.3 + 0.7 * a);
+    final fr = panel.width * 0.17 * (0.3 + 0.7 * a);
     _fill.color = colour ? _pal.accent : _pal.midtone;
     canvas.drawArc(Rect.fromCircle(center: fanC, radius: fr), math.pi, math.pi, true, _fill);
     _fill.color = colour ? _pal.accent2 : _pal.shadow;
     canvas.drawArc(Rect.fromCircle(center: fanC, radius: fr * 0.44), math.pi, math.pi, true, _fill);
     _stroke
       ..color = ink
-      ..strokeWidth = 2.4;
+      ..strokeWidth = 3.4;
     canvas.drawPath(_line, _stroke);
-    _stroke.strokeWidth = 1.6;
+    _stroke.strokeWidth = 1.8;
     canvas.drawPath(_ink, _stroke);
     _stroke
       ..strokeWidth = 1.1
       ..color = ink.withValues(alpha: 0.8);
     canvas.drawPath(_accent, _stroke);
-    _paintText(canvas, panel, shift: Offset(0, panel.height * 0.03));
+    // A small diamond rule between the lines.
+    if (_hasSub) {
+      final y = _dividerY(panel);
+      final w = panel.width * 0.12;
+      _stroke
+        ..color = ink
+        ..strokeWidth = 1.4;
+      canvas
+        ..drawLine(Offset(panel.center.dx - w, y), Offset(panel.center.dx - 7, y), _stroke)
+        ..drawLine(Offset(panel.center.dx + 7, y), Offset(panel.center.dx + w, y), _stroke);
+      _fill.color = colour ? _pal.accent : ink;
+      canvas
+        ..save()
+        ..translate(panel.center.dx, y)
+        ..rotate(math.pi / 4)
+        ..drawRect(const Rect.fromLTWH(-3.5, -3.5, 7, 7), _fill)
+        ..restore();
+    }
+    _paintText(canvas, panel);
   }
 
   void _steppedRect(Rect r, double step) {
@@ -573,8 +646,9 @@ class IntertitlePainter {
       bulb(r.right, r.top + r.height * i / ny);
       bulb(r.left, r.bottom - r.height * i / ny);
     }
-    // Title with a hard drop shadow in the accent colour.
-    _paintText(canvas, panel, shift: const Offset(3, 3), glow: true);
+    // Title with a hard drop shadow (the glow painter holds the shadow copy).
+    final y = panel.center.dy - _contentHeight / 2;
+    _glow.paint(canvas, Offset(panel.center.dx - _glow.width / 2 + 3.5, y + 3.5));
     _paintText(canvas, panel);
   }
 
@@ -588,7 +662,7 @@ class IntertitlePainter {
       ..color = ink;
     canvas.drawRect(bounds, _fill);
     // Perspective grid to the horizon.
-    final horizon = bounds.top + bounds.height * 0.64;
+    final horizon = bounds.top + bounds.height * 0.7;
     _fill.shader = ui.Gradient.linear(Offset(0, horizon - bounds.height * 0.25), Offset(0, horizon), [
       ink.withValues(alpha: 0),
       _pal.midtone.withValues(alpha: 0.55),
@@ -596,7 +670,7 @@ class IntertitlePainter {
     canvas.drawRect(Rect.fromLTRB(bounds.left, horizon - bounds.height * 0.25, bounds.right, horizon), _fill);
     _fill.shader = null;
     // Striped sun on the horizon.
-    final sunR = bounds.width * 0.26;
+    final sunR = bounds.width * 0.22;
     final sun = Offset(bounds.center.dx, horizon);
     canvas.save();
     canvas.clipRect(Rect.fromLTRB(bounds.left, horizon - sunR, bounds.right, horizon));

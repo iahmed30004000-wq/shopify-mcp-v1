@@ -30,15 +30,29 @@ void main() {
   vec2 size = max(uRect.zw, vec2(1.0));
   vec2 uv = p / size;
   float fs = max(uParams.x, 0.5);
-  float fibres = cn_noise(vec2(p.x / (fs * 8.0), p.y / fs) + uParams.z) - 0.5;
-  float mottling = cn_fbm(p / 90.0 + uParams.z * 3.0) - 0.5;
-  vec3 c = uPaper.rgb * (1.0 + fibres * 0.06 + mottling * 0.08);
-  float fox = smoothstep(0.62, 0.8, cn_fbm(p / 40.0 + uParams.z * 7.0));
-  c = mix(c, uStain.rgb, fox * uStain.a * 0.6);
+  float seed = uParams.z;
+  // Laid paper: long fibres along x, a faint tooth, very soft mottling.
+  float fibres = cn_noise(vec2(p.x / (fs * 9.0), p.y / fs) + seed) - 0.5;
+  float tooth = cn_hash12(floor(p / 1.5) + seed) - 0.5;
+  float mottle = cn_noise(p / 120.0 + seed * 3.0) - 0.5;
+  vec3 c = uPaper.rgb * (1.0 + fibres * 0.05 + tooth * 0.025 + mottle * 0.05);
+  // Foxing: small rust spots with soft halos, and a faint tide mark or two.
+  vec2 cell = floor(p / 38.0);
+  vec2 r = cn_hash22(cell + seed * 5.1);
+  float spot = step(0.86, cn_hash12(cell * 1.7 + seed));
+  float d = length(p - (cell + 0.2 + 0.6 * r) * 38.0);
+  float rad = 1.2 + r.x * 3.5;
+  float fox = (1.0 - smoothstep(rad * 0.6, rad, d)) * 0.8 + (1.0 - smoothstep(rad, rad * 3.0, d)) * 0.25;
+  fox *= spot;
+  float tide = cn_noise(p / 70.0 + seed * 11.0);
+  float ring = (1.0 - smoothstep(0.0, 0.025, abs(tide - 0.62))) * smoothstep(0.35, 0.65, cn_noise(p / 200.0 + seed));
+  vec3 stain = mix(uPaper.rgb, uStain.rgb, 0.55) * vec3(1.02, 0.95, 0.85);
+  c = mix(c, stain, cn_sat(fox + ring * 0.35) * uStain.a);
+  // Age: the edges yellow and darken unevenly; a soft vignette.
   vec2 e = min(uv, 1.0 - uv) * size;
-  float edge = 1.0 - smoothstep(0.0, 26.0, min(e.x, e.y) + mottling * 10.0);
-  c *= 1.0 - edge * uParams.y * 0.45;
-  float vig = smoothstep(0.3, 0.8, length(uv - 0.5));
-  c *= 1.0 - vig * uParams.w * 0.35;
+  float edge = 1.0 - smoothstep(0.0, 22.0, min(e.x, e.y) + mottle * 14.0);
+  c = mix(c, c * vec3(0.9, 0.82, 0.68), edge * uParams.y);
+  float vig = smoothstep(0.35, 0.85, length(uv - 0.5));
+  c *= 1.0 - vig * uParams.w * 0.25;
   fragColor = vec4(cn_sat3(c), 1.0) * uPaper.a;
 }

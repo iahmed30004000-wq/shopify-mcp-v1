@@ -17843,6 +17843,40 @@
   "@cinemaFxReelLabel": {
     "description": "Label on a film-leader card before a reel number"
   },
+  "cinemaRigCast": "طاقم التمثيل",
+  "@cinemaRigCast": {
+    "description": "Heading of the list of original Madar Cinema characters"
+  },
+  "cinemaRigNujaym": "نُجيم",
+  "@cinemaRigNujaym": {
+    "description": "Name of the star-bird hero of Flappy Orbit (means 'little star')"
+  },
+  "cinemaRigNujaymRole": "طائر النجمة الشجاع، بطل «رفرفة المدار»",
+  "cinemaRigZunbruk": "البارون زُنبُرك",
+  "@cinemaRigZunbruk": {
+    "description": "Name of the clockwork boss of Metropolis Machine (zunbruk = mainspring)"
+  },
+  "cinemaRigZunbrukRole": "رئيس العمّال الآلي في «آلة المتروبوليس»",
+  "cinemaRigZajil": "زاجل",
+  "@cinemaRigZajil": {
+    "description": "Name of the camel courier of Caravan Dash (means 'messenger')"
+  },
+  "cinemaRigZajilRole": "الجمل ساعي البريد في «سباق القافلة»",
+  "cinemaRigMishmish": "المفتش مِشمِش",
+  "@cinemaRigMishmish": {
+    "description": "Name of the detective cat of Noir Rooftops"
+  },
+  "cinemaRigMishmishRole": "القط المحقق ذو المعطف في «أسطح النوار»",
+  "cinemaRigSarab": "سراب",
+  "@cinemaRigSarab": {
+    "description": "Name of the hover-bike rider of Neon Souk Racer (means 'mirage')"
+  },
+  "cinemaRigSarabRole": "راكبة الدراجة الطائرة في «متسابق سوق النيون»",
+  "cinemaRigBean": "حبّة",
+  "@cinemaRigBean": {
+    "description": "Name of the bean-shaped hero of the engine demo"
+  },
+  "cinemaRigBeanRole": "نجم البروفة، حبّة فاصولياء بقفازين أبيضين",
   "dataCentreTitle": "بياناتك",
   "@dataCentreTitle": {
     "description": "Data centre screen title"
@@ -19522,7 +19556,7 @@
   "aiChatThinking": "يفكّر…",
   "aiChatWriting": "يكتب الرد",
   "aiChatWillSend": "سيُرسل",
-  "aiChatContextReviewFirst": "ستراجع ما يُشارك من ملخّصك قبل أول إرسال",
+  "aiChatContextReviewFirst": "ستراجع ملخّصك قبل الإرسال",
   "aiChatContextNone": "بلا سياق شخصي",
   "aiChatContextSections": "{count, plural, =0{لا أقسام} =1{قسم واحد من ملخّصك} =2{قسمان من ملخّصك} few{{count} أقسام من ملخّصك} many{{count} قسمًا من ملخّصك} other{{count} قسم من ملخّصك}}",
   "@aiChatContextSections": {
@@ -19779,6 +19813,7 @@
   "aiChatToday": "اليوم",
   "aiChatYesterday": "أمس",
   "aiChatSettingsService": "الخدمة",
+  "aiChatSettingsServiceModel": "الخدمة والنموذج",
   "aiChatServiceAnthropic": "Anthropic",
   "aiChatServiceOpenai": "OpenAI",
   "aiChatSettingsKeys": "مفاتيح API",
@@ -19816,7 +19851,14 @@
   "aiChatKeyProblemEmpty": "الصق المفتاح أولًا.",
   "aiChatKeyProblemShort": "هذا أقصر من أن يكون مفتاحًا.",
   "aiChatKeyProblemSpaces": "في المفتاح مسافات؛ انسخه مرة أخرى.",
-  "aiChatKeyProblemProvider": "يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.",
+  "aiChatKeyProblemProvider": "هذا المفتاح خاص بخدمة {service}، لذا لم يُحفظ هنا حتى لا يُرسل إلى خدمة أخرى. أضِفه ضمن {service}.",
+  "@aiChatKeyProblemProvider": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
   "aiChatSettingsModel": "النموذج",
   "aiChatModelPickerTitle": "اختر النموذج",
   "aiChatModelYourList": "قائمتك",
@@ -19876,13 +19918,20 @@
   "aiChatTemperatureNote": "النماذج الأحدث لا تقبل إلا القيمة الافتراضية. قيمة أقل = ردود أثبت.",
   "aiChatSettingsPrivacy": "الخصوصية",
   "aiChatPrivacyKeys": "المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.",
-  "aiChatPrivacyCalls": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
-  "aiChatPrivacyHistory": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count}).",
+  "aiChatPrivacyCalls": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
+  "aiChatPrivacyHistory": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count})، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.",
   "@aiChatPrivacyHistory": {
     "placeholders": {
       "count": {
         "type": "String"
       }
     }
-  }
+  },
+  "aiChatKeyProblemChars": "في المفتاح رموز لا تكون في المفاتيح (ربما من النسخ)؛ انسخه مرة أخرى.",
+  "aiChatLinkTitle": "فتح هذا الرابط؟",
+  "@aiChatLinkTitle": {
+    "description": "Sheet shown before a link in an AI reply opens"
+  },
+  "aiChatLinkBody": "يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.",
+  "aiChatLinkOpen": "فتح الرابط"
 }

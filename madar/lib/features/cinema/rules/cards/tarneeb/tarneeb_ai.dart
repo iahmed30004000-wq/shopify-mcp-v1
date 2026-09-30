@@ -104,7 +104,17 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
 
   TarneebMove _bid(TarneebState s, int seat, List<TarneebMove> legal, {required bool careful, math.Random? rng}) {
     final hand = s.hands[seat];
-    var mine = Suit.values.map((t) => tarneebHandTricks(hand, t)).reduce(math.max);
+    if (legal.contains(const TarneebMove.throwIn())) {
+      // A worthless hand: throw it in, unless (careful) the partner has
+      // already shown a strong hand by bidding.
+      final partnerBid = s.bids.any((b) => b.seat == (seat + 2) % 4 && !b.isPass);
+      if (!careful || !partnerBid) return const TarneebMove.throwIn();
+    }
+    // With Syrian trumps the trump suit is known before the auction.
+    final known = s.trump;
+    var mine = known != null
+        ? tarneebHandTricks(hand, known)
+        : Suit.values.map((t) => tarneebHandTricks(hand, t)).reduce(math.max);
     if (!careful && rng != null) mine += rng.nextDouble() * 1.6 - 0.6;
     var team = mine + 2.6;
     if (careful) {
@@ -122,6 +132,9 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     final canPass = legal.contains(const TarneebMove.pass());
     if (bids.isEmpty) return legal.first;
     final lowest = bids.first;
+    // A bid of 13 wins 26 but a failure costs 16 and pays the defenders
+    // double: only with a clear margin.
+    if (lowest.amount == 13 && canPass && team < 13.5) return const TarneebMove.pass();
     // Never overbid a partner who holds the contract unless much stronger.
     if (careful && s.highBidder >= 0 && s.highBidder % 2 == seat % 2 && canPass) {
       if (target < lowest.amount! + 1) return const TarneebMove.pass();
@@ -142,7 +155,7 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     final mem = _Memory(s, seat);
     final trick = s.trick!;
     final trump = s.trump!;
-    final legal = TarneebRules.playableCards(s.hands[seat], trick);
+    final legal = TarneebRules.playable(s, seat);
     final bidTeam = s.highBidder % 2 == seat % 2;
     if (trick.isEmpty) return _lead(s, mem, legal, bidTeam);
     final led = trick.ledSuit!;
@@ -237,7 +250,7 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
 
   PlayingCard _playEasy(TarneebState s, int seat) {
     final trick = s.trick!;
-    final legal = TarneebRules.playableCards(s.hands[seat], trick);
+    final legal = TarneebRules.playable(s, seat);
     if (trick.isEmpty) return bestBy(legal, (c) => c.rank.value - (c.suit == s.trump ? 5 : 0));
     final led = trick.ledSuit!;
     final winIdx = trick.winningIndex((c, l) => TarneebRules.power(c, l, s.trump));
@@ -264,12 +277,17 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     _ => TarneebMove.play(_playMedium(s, seat)),
   };
 
-  /// In the auction only pass, the cheapest bid and the heuristic bid are
-  /// compared (more worlds each).
+  /// In the auction only pass, the cheapest bid, the heuristic bid and a
+  /// throw-in (when allowed) are compared (more worlds each).
   @override
   List<TarneebMove> hardCandidates(TarneebState s, int seat, List<TarneebMove> legal, TarneebMove prior) {
     if (s.phase != TarneebPhase.bidding) return legal;
-    return {prior, legal.first, if (legal.length > 1) legal[1]}.toList();
+    return {
+      prior,
+      legal.first,
+      if (legal.length > 1) legal[1],
+      if (legal.contains(const TarneebMove.throwIn())) const TarneebMove.throwIn(),
+    }.toList();
   }
 
   @override
@@ -277,7 +295,12 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     final w = s.copy()
       // Future shuffles must not leak into the search.
       ..rng = CardRng(rng.nextInt(0x7fffffff));
-    final seen = <PlayingCard>{...s.hands[observer], ...s.playedCards};
+    // Syrian trumps: everybody saw the dealer's exposed card; it stays with
+    // the dealer until played.
+    final exposed = s.exposedCard;
+    // (Whether it is still in the dealer's hand is public: it is unless played.)
+    final pinned = exposed != null && observer != s.dealer && !s.playedCards.contains(exposed) ? exposed : null;
+    final seen = <PlayingCard>{...s.hands[observer], ...s.playedCards, ?pinned};
     final pool = [
       for (final c in s.fullDeck())
         if (!seen.contains(c)) c,
@@ -289,11 +312,12 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     final voids = voidsFromTricks([...s.tricks, if (s.trick != null) s.trick!], 4);
     final dealt = dealConstrained(
       pool,
-      [for (final o in others) s.hands[o].length],
+      [for (final o in others) s.hands[o].length - (o == s.dealer && pinned != null ? 1 : 0)],
       (h, c) => !voids[others[h]].contains(c.suit),
       rng,
     );
     for (var i = 0; i < others.length; i++) {
+      if (others[i] == s.dealer && pinned != null) dealt[i].add(pinned);
       w.hands[others[i]] = dealt[i]..sort();
     }
     return w;

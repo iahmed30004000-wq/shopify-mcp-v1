@@ -266,6 +266,7 @@ class SearchIndexStats {
     required this.approxBytes,
     required this.evicted,
     this.docsBySource = const {},
+    this.readmit = const [],
   });
 
   final int docs;
@@ -278,6 +279,10 @@ class SearchIndexStats {
   /// Records dropped to stay inside the limits since the index was made.
   final int evicted;
   final Map<String, int> docsBySource;
+
+  /// Index keys of dropped records that fit again (records were removed
+  /// since), newest first: the engine sends them again.
+  final List<String> readmit;
 
   @override
   String toString() => 'SearchIndexStats(docs: $docs, terms: $terms, postings: $postings, ~${approxBytes ~/ 1024} KB)';

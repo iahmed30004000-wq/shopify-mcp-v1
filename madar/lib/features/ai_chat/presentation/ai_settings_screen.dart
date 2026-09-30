@@ -61,16 +61,14 @@ class AiSettingsScreen extends ConsumerWidget {
             fade: false,
             children: [
               SettingsSection(
-                title: l.aiChatSettingsService,
+                title: l.aiChatSettingsServiceModel,
                 seed: 0.1,
                 children: [
                   SettingsChoiceTile<AiProviderId>(
                     icon: aiServiceIcon(p),
                     title: l.aiChatSettingsService,
                     subtitle: l.aiService(p),
-                    options: [
-                      for (final s in AiProviderId.values) ChoiceOption(value: s, label: l.aiService(s)),
-                    ],
+                    options: [for (final s in AiProviderId.values) ChoiceOption(value: s, label: l.aiService(s))],
                     selected: p,
                     onChanged: (v) => ctrl.change((s) => s.copyWith(provider: v)),
                   ),
@@ -78,8 +76,10 @@ class AiSettingsScreen extends ConsumerWidget {
                     key: modelRow,
                     icon: Icons.memory_rounded,
                     title: l.aiChatSettingsModel,
-                    subtitle: '${aiModelLabel(settings.model, displayName: settings.displayNameOf(p, settings.model))}'
-                        ' · ${BidiIsolate.ltr(settings.model)}',
+                    // The id on its own line: it never breaks at its hyphens.
+                    subtitle:
+                        '${aiModelLabel(settings.model, displayName: settings.displayNameOf(p, settings.model))}'
+                        '\n${BidiIsolate.ltr(settings.model)}',
                     navigates: true,
                     onTap: () => showModelPickerSheet(context),
                   ),

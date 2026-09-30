@@ -297,6 +297,32 @@ double evaluateTawla(BgBoard board, {required bool meOnRoll}) => switch (board.m
 /// Rough probability that [me] wins from an evaluation.
 double winProbability(double eval) => 1 / (1 + math.exp(-eval / 14));
 
+/// How [play] ends the game by any rule (15 off, the mother rule, a void
+/// game), or null when the game goes on.
+({bool? moverWon, int points, TawlaGameEnd end})? _playEnd(
+  BgPlay play,
+  BackgammonConfig cfg, {
+  required int cubeValue,
+  required int turns,
+}) => BackgammonRules.playEnd(cfg, play.result, cubeValue: cubeValue, turns: turns, passed: play.from.isEmpty);
+
+/// A win is worth more than any position, and more with every point it
+/// scores, so the biggest finish is chosen (e.g. hitting on the way off
+/// under `triple: barOnly`).
+const double _winValue = 1000, _winPointValue = 100;
+
+/// The value of a play for its mover: the evaluation of the position it
+/// leaves or, when the play ends the game, the outcome itself. A void game
+/// is replayed from scratch and counts as even.
+double _playValue(BgPlay play, BackgammonConfig cfg, {required int cubeValue, required int turns}) {
+  final end = _playEnd(play, cfg, cubeValue: cubeValue, turns: turns);
+  if (end == null) return evaluateTawla(play.result, meOnRoll: false);
+  final won = end.moverWon;
+  if (won == null) return 0;
+  final value = _winValue + _winPointValue * end.points;
+  return won ? value : -value;
+}
+
 final class BackgammonAi implements BoardAi<BackgammonState, BackgammonMove> {
   const BackgammonAi();
 
@@ -321,9 +347,11 @@ final class BackgammonAi implements BoardAi<BackgammonState, BackgammonMove> {
       case BackgammonPhase.moving:
         break;
     }
+    final cfg = state.config;
     final plays = generatePlays(boardFor(state, p), state.dice);
     // Plays come in the same order as legalMoves.
-    final scores = [for (final play in plays) evaluateTawla(play.result, meOnRoll: false)];
+    final turns = state.turns + 1;
+    final scores = [for (final play in plays) _playValue(play, cfg, cubeValue: state.cubeValue, turns: turns)];
 
     switch (level) {
       case AiLevel.easy:
@@ -332,7 +360,7 @@ final class BackgammonAi implements BoardAi<BackgammonState, BackgammonMove> {
       case AiLevel.medium:
         return legal[_argmax([for (final s in scores) s + (rng.nextDouble() - 0.5) * 2])];
       case AiLevel.hard:
-        return legal[_twoPly(plays, scores, SearchClock(budget))];
+        return legal[_twoPly(plays, scores, cfg, state.cubeValue, turns, SearchClock(budget))];
     }
   }
 
@@ -345,18 +373,35 @@ final class BackgammonAi implements BoardAi<BackgammonState, BackgammonMove> {
   }
 
   /// Expectiminimax: my play → every opponent roll → opponent's best reply
-  /// (by the 1-ply evaluation). Candidates are the best 1-ply plays; a
-  /// candidate is only compared once it has been fully averaged. A play that
-  /// ends the game is taken at once.
-  int _twoPly(List<BgPlay> plays, List<double> oneply, SearchClock clock) {
+  /// (by the 1-ply value). Candidates are the best 1-ply plays; a candidate
+  /// is only compared once it has been fully averaged. A winning play is
+  /// taken at once (the one scoring most, as [oneply] ranks it); a play that
+  /// ends the game otherwise (a void) keeps its outcome value unsearched.
+  int _twoPly(
+    List<BgPlay> plays,
+    List<double> oneply,
+    BackgammonConfig cfg,
+    int cubeValue,
+    int turns,
+    SearchClock clock,
+  ) {
     final order = List<int>.generate(plays.length, (i) => i)..sort((x, y) => oneply[y].compareTo(oneply[x]));
+    final ends = [for (final play in plays) _playEnd(play, cfg, cubeValue: cubeValue, turns: turns)];
     for (final i in order) {
-      if (plays[i].terminal) return i;
+      if (ends[i]?.moverWon ?? false) return i; // the highest-scoring win
     }
     final candidates = order.take(6).toList();
     var best = candidates.first;
     var bestValue = double.negativeInfinity;
     for (final ci in candidates) {
+      if (ends[ci] != null) {
+        // A void (or lost) game: its outcome value, nothing to search.
+        if (oneply[ci] > bestValue) {
+          bestValue = oneply[ci];
+          best = ci;
+        }
+        continue;
+      }
       final after = plays[ci].result.swapped(); // opponent to move
       var expected = 0.0;
       var aborted = false;
@@ -365,7 +410,7 @@ final class BackgammonAi implements BoardAi<BackgammonState, BackgammonMove> {
         var bestReply = double.negativeInfinity;
         for (final r in replies) {
           clock.tick();
-          final v = evaluateTawla(r.result, meOnRoll: false);
+          final v = _playValue(r, cfg, cubeValue: cubeValue, turns: turns + 1);
           if (v > bestReply) bestReply = v;
         }
         expected -= bestReply * roll[2] / 36.0;

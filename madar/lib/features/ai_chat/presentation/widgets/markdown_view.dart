@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
+import '../../../../core/interaction/interaction.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../domain/markdown.dart';
 
@@ -25,9 +26,13 @@ Future<bool> _launch(Uri uri) async {
 /// letter, so an English paragraph in an Arabic reply reads left to right
 /// (and the reverse), with numbers kept in place by the bidi algorithm.
 /// Code is always left to right. Links are shown and open only on tap
-/// (web and e-mail only).
+/// (web and e-mail only), after a sheet shows where they really go – a
+/// reply's link label can hide an address that carries data away.
 class MarkdownView extends StatefulWidget {
   const MarkdownView(this.text, {super.key, this.style, this.onOpenLink, this.selectable = false});
+
+  /// "Open link" in the confirmation sheet.
+  static const Key openLinkKey = ValueKey('ai-open-link');
 
   final String text;
   final TextStyle? style;
@@ -69,6 +74,8 @@ class _MarkdownViewState extends State<MarkdownView> {
   Future<void> _open(String raw) async {
     final uri = MdLinks.safeUri(raw);
     if (uri == null) return;
+    final go = await showInteractionSheet<bool>(context, builder: (_) => LinkConfirmSheet(uri: uri));
+    if (go != true || !mounted) return;
     Fx.fire(Sfx.navigate);
     final ok = await (widget.onOpenLink ?? _launch)(uri);
     if (!ok && mounted) {
@@ -265,11 +272,12 @@ class _MarkdownViewState extends State<MarkdownView> {
       if (s.italic) style = style.copyWith(fontStyle: FontStyle.italic);
       if (s.strike) style = style.copyWith(decoration: TextDecoration.lineThrough);
       if (s.code) {
+        // The app font (bundled, so it renders the same everywhere) with
+        // even digits on a soft tint.
         style = style.copyWith(
-          fontFamily: 'monospace',
-          fontFamilyFallback: const ['PlexArabic'],
-          fontSize: (base.fontSize ?? 15) * 0.9,
-          backgroundColor: t.accent.withValues(alpha: 0.12),
+          fontSize: (base.fontSize ?? 15) * 0.92,
+          fontFeatures: const [FontFeature.tabularFigures()],
+          backgroundColor: t.accent.withValues(alpha: 0.14),
           color: t.textPrimary,
         );
       }
@@ -327,9 +335,8 @@ class _CodeBlock extends StatelessWidget {
               child: Text(
                 code,
                 style: style.copyWith(
-                  fontFamily: 'monospace',
-                  fontFamilyFallback: const ['PlexArabic'],
-                  fontSize: (style.fontSize ?? 15) * 0.86,
+                  fontSize: (style.fontSize ?? 15) * 0.88,
+                  fontFeatures: const [FontFeature.tabularFigures()],
                   height: 1.45,
                   color: t.textPrimary,
                 ),
@@ -352,6 +359,72 @@ class _CodeBlock extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// "Open this link?": the real destination of a tapped link – its site in
+/// large type and the whole address – before anything opens.
+class LinkConfirmSheet extends StatelessWidget {
+  const LinkConfirmSheet({super.key, required this.uri});
+
+  final Uri uri;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final mail = uri.scheme == 'mailto';
+    final site = mail ? uri.path : uri.host;
+    return InteractionSheetFrame(
+      title: l.aiChatLinkTitle,
+      icon: mail ? Icons.mail_outline_rounded : Icons.open_in_new_rounded,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            BidiIsolate.ltr(site),
+            style: text.titleLarge!.copyWith(color: t.textPrimary, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: Space.s),
+          Container(
+            padding: const EdgeInsetsDirectional.all(Space.m),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(t.radiusM),
+              color: t.space0.withValues(alpha: t.isDark ? 0.42 : 0.55),
+              border: Border.all(color: t.glassBorder.withValues(alpha: 0.7), width: 0.8),
+            ),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: SelectableText(
+                uri.toString(),
+                minLines: 1,
+                maxLines: 6,
+                style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.45),
+              ),
+            ),
+          ),
+          const SizedBox(height: Space.m),
+          Text(l.aiChatLinkBody, style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.45)),
+        ],
+      ),
+      footer: Row(
+        children: [
+          SheetButton(label: l.actionCancel, onPressed: () => Navigator.of(context).pop(false)),
+          const SizedBox(width: Space.s),
+          Expanded(
+            child: SheetButton(
+              key: MarkdownView.openLinkKey,
+              label: l.aiChatLinkOpen,
+              icon: Icons.open_in_new_rounded,
+              primary: true,
+              onPressed: () => Navigator.of(context).pop(true),
+            ),
+          ),
+        ],
       ),
     );
   }

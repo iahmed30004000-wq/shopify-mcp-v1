@@ -146,16 +146,26 @@ class NotificationDescriberRegistry {
       try {
         if (d.groupOf(notice) != null) return d;
       } catch (e) {
-        debugPrint('NotificationDescriber ${d.id} failed on ${notice.key}: $e');
+        debugPrint('NotificationDescriber ${d.id} failed on ${notice.key} (${e.runtimeType})');
       }
     }
     return null;
   }
 
   NotificationGroup groupOf(CenterNotice notice) {
+    if (pinnedGroupOf(notice) case final pinned?) return pinned;
     final d = describerOf(notice);
     return d?.groupOf(notice) ?? fallbackGroupOf(notice);
   }
+
+  /// The groups no describer can change: the adhan's and the medication
+  /// tracker's notifications are always Prayer and Medications – a mute of
+  /// another group never holds them, a mute of theirs always does.
+  static NotificationGroup? pinnedGroupOf(CenterNotice notice) => switch (notice.namespace) {
+    final ns when ns == NotificationNamespaces.adhan.name => NotificationGroup.prayer,
+    final ns when ns == NotificationNamespaces.meds.name => NotificationGroup.medications,
+    _ => null,
+  };
 
   NotificationDescription describe(CenterNotice notice, CenterTexts t) {
     final d = describerOf(notice);
@@ -163,7 +173,7 @@ class NotificationDescriberRegistry {
       try {
         return d.describe(notice, t);
       } catch (e) {
-        debugPrint('NotificationDescriber ${d.id} failed to describe ${notice.key}: $e');
+        debugPrint('NotificationDescriber ${d.id} failed to describe ${notice.key} (${e.runtimeType})');
       }
     }
     return fallbackDescription(notice, t, group: groupOf(notice));

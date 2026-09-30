@@ -130,7 +130,10 @@ Future<(Widget, AiTestEnv)> buildAiApp(
       localizationsDelegates: L10n.localizationsDelegates,
       builder: (context, child) => MadarFormatScope(
         digits: DigitStyle.auto,
-        child: MotionScope(reduced: reducedMotion, child: CelebrationOverlay(child: child!)),
+        child: MotionScope(
+          reduced: reducedMotion,
+          child: CelebrationOverlay(child: child!),
+        ),
       ),
       home: home,
     ),

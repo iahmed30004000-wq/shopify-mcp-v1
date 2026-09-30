@@ -62,9 +62,7 @@ class ModelSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: dark ? const Color(0xFF14101E) : const Color(0xFFF1EADB),
-      child: SizedBox.expand(
-        child: CustomPaint(painter: _SheetPainter(this)),
-      ),
+      child: SizedBox.expand(child: CustomPaint(painter: _SheetPainter(this))),
     );
   }
 }

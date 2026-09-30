@@ -19,7 +19,11 @@ void main() {
         MdSpan('f', link: 'https://x.org'),
       ]);
       expect(_inline('***both***'), const [MdSpan('both', bold: true, italic: true)]);
-      expect(_inline('__bold__ and _it_'), const [MdSpan('bold', bold: true), MdSpan(' and '), MdSpan('it', italic: true)]);
+      expect(_inline('__bold__ and _it_'), const [
+        MdSpan('bold', bold: true),
+        MdSpan(' and '),
+        MdSpan('it', italic: true),
+      ]);
       expect(_inline('**bold with *inner* italic**'), const [
         MdSpan('bold with ', bold: true),
         MdSpan('inner', bold: true, italic: true),
@@ -124,7 +128,8 @@ void main() {
     });
 
     test('never throws on arbitrary prefixes of a reply', () {
-      const reply = '## خطة\n\n1. **الفجر** في وقته\n   - `05:12`\n2. [رابط](https://x.org)\n\n| a | b |\n|---|---|\n| 1 | 2 |\n\n```\ncode';
+      const reply =
+          '## خطة\n\n1. **الفجر** في وقته\n   - `05:12`\n2. [رابط](https://x.org)\n\n| a | b |\n|---|---|\n| 1 | 2 |\n\n```\ncode';
       for (var i = 0; i <= reply.length; i++) {
         MdParser.parse(reply.substring(0, i));
       }

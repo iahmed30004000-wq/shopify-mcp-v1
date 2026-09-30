@@ -13,25 +13,16 @@
     "ar": "بمفتاحك الخاص، وأنت تختار ما يُرسل",
     "en": "With your own key – you choose what’s sent"
   },
-  "aiChatAskAbout": {
-    "ar": "اسأل عن {area}",
-    "en": "Ask about {area}",
-    "placeholders": {"area": {"type": "String"}}
-  },
+  "aiChatAskAbout": {"ar": "اسأل عن {area}", "en": "Ask about {area}", "placeholders": {"area": {"type": "String"}}},
   "aiChatMenu": {"ar": "المزيد", "en": "More"},
   "aiChatOpenList": {"ar": "كل المحادثات", "en": "All conversations"},
-
   "aiChatInputHint": {"ar": "اكتب رسالتك…", "en": "Write your message…"},
   "aiChatSend": {"ar": "إرسال", "en": "Send"},
   "aiChatStop": {"ar": "إيقاف", "en": "Stop"},
   "aiChatThinking": {"ar": "يفكّر…", "en": "Thinking…"},
   "aiChatWriting": {"ar": "يكتب الرد", "en": "Writing a reply"},
-
   "aiChatWillSend": {"ar": "سيُرسل", "en": "Will send"},
-  "aiChatContextReviewFirst": {
-    "ar": "ستراجع ما يُشارك من ملخّصك قبل أول إرسال",
-    "en": "You’ll review what’s shared from your summary before the first send"
-  },
+  "aiChatContextReviewFirst": {"ar": "ستراجع ملخّصك قبل الإرسال", "en": "you’ll review your summary first"},
   "aiChatContextNone": {"ar": "بلا سياق شخصي", "en": "No personal context"},
   "aiChatContextSections": {
     "ar": "{count, plural, =0{لا أقسام} =1{قسم واحد من ملخّصك} =2{قسمان من ملخّصك} few{{count} أقسام من ملخّصك} many{{count} قسمًا من ملخّصك} other{{count} قسم من ملخّصك}}",
@@ -58,7 +49,6 @@
     "en": "{count, plural, =1{1 older message left out} other{{count} older messages left out}}",
     "placeholders": {"count": {"type": "int"}}
   },
-
   "aiChatContextTitle": {"ar": "ما الذي سيُرسل", "en": "What will be sent"},
   "aiChatContextSubtitle": {"ar": "لا يُرسل شيء إلا حين تضغط «إرسال»", "en": "Nothing is sent until you tap Send"},
   "aiChatContextFromSummary": {"ar": "من ملخّصك", "en": "From your summary"},
@@ -72,8 +62,16 @@
     "ar": "عند أول إرسال ستظهر معاينة الملخّص لتختار الأقسام أو تستبعد ما تشاء.",
     "en": "On the first send, the summary preview opens so you can pick sections or leave any out."
   },
-  "aiChatContextUse": {"ar": "استخدمه في المحادثة", "en": "Use in this chat", "description": "Confirm button of the summary preview opened from the AI chat"},
-  "aiChatContextUseAndSend": {"ar": "استخدمه وأرسل", "en": "Use and send", "description": "Confirm button of the summary preview opened by the first Send"},
+  "aiChatContextUse": {
+    "ar": "استخدمه في المحادثة",
+    "en": "Use in this chat",
+    "description": "Confirm button of the summary preview opened from the AI chat"
+  },
+  "aiChatContextUseAndSend": {
+    "ar": "استخدمه وأرسل",
+    "en": "Use and send",
+    "description": "Confirm button of the summary preview opened by the first Send"
+  },
   "aiChatContextReviewed": {
     "ar": "راجعته {when}",
     "en": "Reviewed {when}",
@@ -87,7 +85,6 @@
   },
   "aiChatViewPayload": {"ar": "عرض الطلب كما سيُرسل", "en": "View the exact request"},
   "aiChatDone": {"ar": "تم", "en": "Done"},
-
   "aiChatPayloadTitle": {"ar": "الطلب كما سيُرسل", "en": "The exact request"},
   "aiChatPayloadEndpoint": {"ar": "العنوان", "en": "Endpoint"},
   "aiChatPayloadHeaders": {"ar": "الترويسات (المفتاح مخفي)", "en": "Headers (key hidden)"},
@@ -98,28 +95,16 @@
     "ar": "يشمل رسالتك الجاري كتابتها. لن يُرسل إلا حين تضغط «إرسال».",
     "en": "Includes the message you’re typing. It’s sent only when you tap Send."
   },
-  "aiChatPayloadNoDraft": {
-    "ar": "اكتب رسالة لترى الطلب كاملًا.",
-    "en": "Write a message to see the complete request."
-  },
+  "aiChatPayloadNoDraft": {"ar": "اكتب رسالة لترى الطلب كاملًا.", "en": "Write a message to see the complete request."},
   "aiChatPayloadSize": {
     "ar": "{size} · ≈ {tokens} رمز",
     "en": "{size} · ≈ {tokens} tokens",
     "placeholders": {"size": {"type": "String"}, "tokens": {"type": "String"}}
   },
-  "aiChatBytes": {
-    "ar": "{count} بايت",
-    "en": "{count} bytes",
-    "placeholders": {"count": {"type": "String"}}
-  },
-  "aiChatKiloBytes": {
-    "ar": "{count} ك.ب",
-    "en": "{count} KB",
-    "placeholders": {"count": {"type": "String"}}
-  },
+  "aiChatBytes": {"ar": "{count} بايت", "en": "{count} bytes", "placeholders": {"count": {"type": "String"}}},
+  "aiChatKiloBytes": {"ar": "{count} ك.ب", "en": "{count} KB", "placeholders": {"count": {"type": "String"}}},
   "aiChatRoleUser": {"ar": "أنت", "en": "You"},
   "aiChatRoleAssistant": {"ar": "المساعد", "en": "Assistant"},
-
   "aiChatCopy": {"ar": "نسخ", "en": "Copy"},
   "aiChatCopied": {"ar": "نُسخ", "en": "Copied"},
   "aiChatCopyCode": {"ar": "نسخ الشيفرة", "en": "Copy code"},
@@ -136,13 +121,8 @@
     "ar": "للمتابعة فقط وليس نصيحة طبية؛ استشر طبيبك في أي قرار صحي.",
     "en": "For tracking only, not medical advice – ask your clinician about any health decision."
   },
-  "aiChatOpenLink": {
-    "ar": "فتح الرابط {url}",
-    "en": "Open link {url}",
-    "placeholders": {"url": {"type": "String"}}
-  },
+  "aiChatOpenLink": {"ar": "فتح الرابط {url}", "en": "Open link {url}", "placeholders": {"url": {"type": "String"}}},
   "aiChatLinkFailed": {"ar": "تعذّر فتح الرابط.", "en": "Couldn’t open the link."},
-
   "aiChatErrorNoKey": {
     "ar": "أضف مفتاح {service} أولًا.",
     "en": "Add your {service} key first.",
@@ -207,7 +187,6 @@
   "aiChatErrorBadResponse": {"ar": "وصل ردّ تعذّرت قراءته.", "en": "The answer couldn’t be read."},
   "aiChatErrorUnknown": {"ar": "حدث خطأ غير متوقّع.", "en": "Something unexpected went wrong."},
   "aiChatOpenSettings": {"ar": "فتح الإعدادات", "en": "Open settings"},
-
   "aiChatSetupTitle": {"ar": "اربط مفتاحك الخاص", "en": "Connect your own key"},
   "aiChatSetupBody": {
     "ar": "تعمل المحادثة بمفتاح API منك لدى Anthropic أو OpenAI. يُحفظ مشفّرًا على هذا الهاتف فقط، ولا يدخل النسخ الاحتياطية ولا التصدير.",
@@ -222,7 +201,6 @@
     "ar": "لا يُرسل شيء إلا حين تضغط «إرسال»، وترى قبلها ما سيُرسل بالضبط.",
     "en": "Nothing is sent until you tap Send, and you see exactly what goes out first."
   },
-
   "aiChatEmptyTitle": {"ar": "بمَ أساعدك اليوم؟", "en": "How can I help today?"},
   "aiChatEmptyBody": {
     "ar": "اسأل عن يومك أو صلاتك أو ميزانيتك أو أهدافك. تختار ما يُشارك من ملخّصك قبل الإرسال.",
@@ -232,7 +210,6 @@
   "aiChatSuggestBudget": {"ar": "كيف أحسّن ميزانيتي هذا الشهر؟", "en": "How can I improve my budget this month?"},
   "aiChatSuggestPlan": {"ar": "ساعدني أخطّط لغدٍ متوازن", "en": "Help me plan a balanced tomorrow"},
   "aiChatSuggestPrayer": {"ar": "كيف أحافظ على الصلاة في وقتها؟", "en": "How can I keep my prayers on time?"},
-
   "aiChatListEmptyTitle": {"ar": "لا محادثات بعد", "en": "No conversations yet"},
   "aiChatListEmptyBody": {
     "ar": "ابدأ محادثة، وتُحفظ هنا مشفّرة على هاتفك.",
@@ -258,21 +235,13 @@
   },
   "aiChatToday": {"ar": "اليوم", "en": "Today"},
   "aiChatYesterday": {"ar": "أمس", "en": "Yesterday"},
-
   "aiChatSettingsService": {"ar": "الخدمة", "en": "Service"},
+  "aiChatSettingsServiceModel": {"ar": "الخدمة والنموذج", "en": "Service and model"},
   "aiChatServiceAnthropic": {"ar": "Anthropic", "en": "Anthropic"},
   "aiChatServiceOpenai": {"ar": "OpenAI", "en": "OpenAI"},
   "aiChatSettingsKeys": {"ar": "مفاتيح API", "en": "API keys"},
-  "aiChatKeyTitle": {
-    "ar": "مفتاح {service}",
-    "en": "{service} key",
-    "placeholders": {"service": {"type": "String"}}
-  },
-  "aiChatKeySaved": {
-    "ar": "محفوظ · {mask}",
-    "en": "Saved · {mask}",
-    "placeholders": {"mask": {"type": "String"}}
-  },
+  "aiChatKeyTitle": {"ar": "مفتاح {service}", "en": "{service} key", "placeholders": {"service": {"type": "String"}}},
+  "aiChatKeySaved": {"ar": "محفوظ · {mask}", "en": "Saved · {mask}", "placeholders": {"mask": {"type": "String"}}},
   "aiChatKeyNotSet": {"ar": "لم يُضف بعد", "en": "Not added yet"},
   "aiChatKeySheetSubtitle": {"ar": "يُحفظ مشفّرًا على هذا الهاتف فقط.", "en": "Stored encrypted on this phone only."},
   "aiChatKeyCurrent": {"ar": "المفتاح الحالي", "en": "Current key"},
@@ -293,12 +262,15 @@
   "aiChatKeyWhere": {"ar": "أين أجد مفتاحي؟", "en": "Where do I get a key?"},
   "aiChatKeyProblemEmpty": {"ar": "الصق المفتاح أولًا.", "en": "Paste the key first."},
   "aiChatKeyProblemShort": {"ar": "هذا أقصر من أن يكون مفتاحًا.", "en": "That’s too short to be a key."},
-  "aiChatKeyProblemSpaces": {"ar": "في المفتاح مسافات؛ انسخه مرة أخرى.", "en": "The key contains spaces – copy it again."},
-  "aiChatKeyProblemProvider": {
-    "ar": "يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.",
-    "en": "This looks like a key for another service. It will be saved anyway – test it to be sure."
+  "aiChatKeyProblemSpaces": {
+    "ar": "في المفتاح مسافات؛ انسخه مرة أخرى.",
+    "en": "The key contains spaces – copy it again."
   },
-
+  "aiChatKeyProblemProvider": {
+    "ar": "هذا المفتاح خاص بخدمة {service}، لذا لم يُحفظ هنا حتى لا يُرسل إلى خدمة أخرى. أضِفه ضمن {service}.",
+    "en": "This key belongs to {service}, so it wasn’t saved here – it would be sent to the wrong service. Add it under {service}.",
+    "placeholders": {"service": {"type": "String"}}
+  },
   "aiChatSettingsModel": {"ar": "النموذج", "en": "Model"},
   "aiChatModelPickerTitle": {"ar": "اختر النموذج", "en": "Choose a model"},
   "aiChatModelYourList": {"ar": "قائمتك", "en": "Your list"},
@@ -353,12 +325,26 @@
     "en": "Keys live in the phone’s encrypted storage – not in the database, backups or exports."
   },
   "aiChatPrivacyCalls": {
-    "ar": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
-    "en": "Madar contacts the service only when you tap Send, Test key or Refresh models. Nothing runs in the background."
+    "ar": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
+    "en": "Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background."
   },
   "aiChatPrivacyHistory": {
-    "ar": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count}).",
-    "en": "Chats are kept encrypted on your phone (the latest {count}).",
+    "ar": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count})، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.",
+    "en": "Chats are kept encrypted on your phone (the latest {count}), each with the summary you approved for it. They are part of your backups and your full data export.",
     "placeholders": {"count": {"type": "String"}}
-  }
+  },
+  "aiChatKeyProblemChars": {
+    "ar": "في المفتاح رموز لا تكون في المفاتيح (ربما من النسخ)؛ انسخه مرة أخرى.",
+    "en": "The key has characters no key has (maybe from copying) – copy it again."
+  },
+  "aiChatLinkTitle": {
+    "ar": "فتح هذا الرابط؟",
+    "en": "Open this link?",
+    "description": "Sheet shown before a link in an AI reply opens"
+  },
+  "aiChatLinkBody": {
+    "ar": "يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.",
+    "en": "It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it."
+  },
+  "aiChatLinkOpen": {"ar": "فتح الرابط", "en": "Open link"}
 }

@@ -5,6 +5,7 @@ import '../../../../core/domain/budget_math.dart';
 import '../../../../core/domain/enums.dart';
 import '../../../../core/domain/money.dart';
 import '../../../../core/i18n/formatters.dart';
+import '../../money_glyphs.dart';
 import '../data/budget_repository.dart';
 
 /// Money, percent and period formatting of the budget screens: the app's
@@ -44,7 +45,7 @@ class BudgetFormat {
       decimals: currencies.decimalsOf(code),
       symbol: _customSymbol(code),
     );
-    return arabic ? BidiIsolate.rtl(s) : BidiIsolate.ltr(s);
+    return _isolate(MoneyGlyphs.legibleGroups(s));
   }
 
   /// The amount without a symbol (`1,234.5` → `1,234.500`).
@@ -54,8 +55,10 @@ class BudgetFormat {
       milli,
       code,
     ).formatAmount(locale: fmt.languageCode, digits: _digits, decimals: currencies.decimalsOf(code));
-    return arabic ? BidiIsolate.rtl(s) : BidiIsolate.ltr(s);
+    return _isolate(MoneyGlyphs.legibleGroups(s));
   }
+
+  String _isolate(String s) => arabic ? BidiIsolate.rtl(s) : BidiIsolate.ltr(s);
 
   /// A compact amount for chart axes (`1.2k`), no symbol.
   String compact(int milli) {

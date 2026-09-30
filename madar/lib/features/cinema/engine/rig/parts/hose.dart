@@ -75,6 +75,9 @@ abstract final class Hose {
         pen.target(b.list.detail(InkOp.glow, b.colors.glow, w + b.lw * 3));
         _curve(b, rootX, rootY, cx, cy, tipX, tipY);
       }
+      if (b.rimLine((fill == null ? w : w + b.lw * 1.6) * 1.05) != null) {
+        _curve(b, rootX, rootY, cx, cy, tipX, tipY);
+      }
       b.inkLine(fill == null ? w : w + b.lw * 1.6);
       _curve(b, rootX, rootY, cx, cy, tipX, tipY);
       if (fill != null) {

@@ -76,6 +76,14 @@ class _GlobalSearchScreenState extends ConsumerState<GlobalSearchScreen> {
   bool _keyboard = false;
   final Map<String, GlobalKey> _tileKeys = {};
 
+  /// The kind of content shown (recent searches, results …) and a serial
+  /// that changes with it: the cross-fade keys its children by the serial,
+  /// so a kind that comes back while its old self is still fading out
+  /// (a letter, backspace, the letter again) is a new child, not a
+  /// duplicate key.
+  Type? _contentType;
+  int _contentSerial = 0;
+
   @override
   void initState() {
     super.initState();
@@ -142,7 +150,8 @@ class _GlobalSearchScreenState extends ConsumerState<GlobalSearchScreen> {
       limit: _group == null ? 120 : 300,
     );
     final results = await engine.search(request);
-    if (!mounted || seq != _seq) return;
+    // Stale: a newer query ran, or the text changed (typed on, cleared).
+    if (!mounted || seq != _seq || _query.text != text) return;
     setState(() {
       _results = results;
       if (!keepSelection) {
@@ -166,6 +175,7 @@ class _GlobalSearchScreenState extends ConsumerState<GlobalSearchScreen> {
 
   void _clear() {
     Fx.fire(Sfx.tap);
+    _seq++; // a query still in flight is stale
     _query.clear();
     _setFilter(null, null);
     setState(() => _results = null);
@@ -205,7 +215,15 @@ class _GlobalSearchScreenState extends ConsumerState<GlobalSearchScreen> {
     if (text.trim().isNotEmpty) unawaited(ref.read(recentSearchesStoreProvider).add(text));
     final opener = widget.onOpen ?? ref.read(searchOpenerProvider);
     var handled = false;
-    if (opener != null) handled = await opener(context, hit.doc);
+    if (opener != null) {
+      try {
+        handled = await opener(context, hit.doc);
+      } on Object catch (e, st) {
+        // An opener without a route for this result: say so, stay usable.
+        debugPrint('Search: opening ${hit.doc.openKey}/${hit.doc.refId} failed: $e\n$st');
+        handled = false;
+      }
+    }
     if (handled || !mounted) return;
     ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(content: Text(L10n.of(context).searchCannotOpen)));
   }
@@ -288,12 +306,20 @@ class _GlobalSearchScreenState extends ConsumerState<GlobalSearchScreen> {
           Expanded(
             child: AnimatedSwitcher(
               duration: MadarMotion.short,
-              child: KeyedSubtree(key: ValueKey(content.runtimeType), child: content),
+              child: KeyedSubtree(key: ValueKey(_contentSerialFor(content)), child: content),
             ),
           ),
         ],
       ),
     );
+  }
+
+  int _contentSerialFor(Widget content) {
+    if (content.runtimeType != _contentType) {
+      _contentType = content.runtimeType;
+      _contentSerial++;
+    }
+    return _contentSerial;
   }
 
   // ------------------------------------------------------------ filters

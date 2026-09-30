@@ -1,6 +1,7 @@
 /// The only way the AI chat reaches the network: one HTTPS request per
-/// explicit user action, over `dart:io` [HttpClient]. Nothing here logs
-/// requests, headers or bodies.
+/// explicit user action, over `dart:io` [HttpClient], and only to the two
+/// services' API hosts ([AiHostPolicy]). Nothing here logs requests,
+/// headers or bodies, and no exception thrown from here carries them.
 library;
 
 import 'dart:async';
@@ -45,6 +46,52 @@ class AiCancelledException implements Exception {
   String toString() => 'AiCancelledException';
 }
 
+/// The request's address is not one the AI chat may contact (see
+/// [AiHostPolicy]). Nothing was sent – not even a DNS lookup.
+class AiHostNotAllowedException implements Exception {
+  const AiHostNotAllowedException();
+
+  // Deliberately without the URL or headers.
+  @override
+  String toString() => 'AiHostNotAllowedException';
+}
+
+/// A header value (in practice: the key) that HTTP can't carry. Replaces
+/// `dart:io`'s FormatException, whose text would contain the whole value.
+class AiInvalidHeaderException implements Exception {
+  const AiInvalidHeaderException();
+
+  @override
+  String toString() => 'AiInvalidHeaderException';
+}
+
+/// Where the AI chat may connect: TLS on the default port to
+/// api.anthropic.com or api.openai.com – and each service's key only to its
+/// own host (an Anthropic `x-api-key` never goes to OpenAI, an OpenAI
+/// `authorization` never goes to Anthropic).
+abstract final class AiHostPolicy {
+  static const String anthropicHost = 'api.anthropic.com';
+  static const String openAiHost = 'api.openai.com';
+
+  static bool allowsUrl(Uri url) =>
+      url.scheme == 'https' &&
+      (url.host == anthropicHost || url.host == openAiHost) &&
+      url.port == 443 &&
+      url.userInfo.isEmpty &&
+      !url.hasFragment;
+
+  /// Whether [request] may go out.
+  static bool check(AiHttpRequest request) {
+    if (!allowsUrl(request.url)) return false;
+    for (final name in request.headers.keys) {
+      final n = name.toLowerCase();
+      if (n == 'x-api-key' && request.url.host != anthropicHost) return false;
+      if (n == 'authorization' && request.url.host != openAiHost) return false;
+    }
+    return true;
+  }
+}
+
 /// Cancels an in-flight request.
 class AiCancelToken {
   final Completer<void> _done = Completer<void>();
@@ -67,21 +114,41 @@ abstract interface class AiTransport {
 }
 
 /// [AiTransport] over `dart:io` [HttpClient] (a fresh client per request,
-/// closed as soon as the body is read or the request cancelled).
+/// closed as soon as the body is read or the request cancelled). Refuses
+/// every request [AiHostPolicy] doesn't allow, before any connection.
 class IoAiTransport implements AiTransport {
   IoAiTransport({HttpClient Function()? createClient, this.connectTimeout = const Duration(seconds: 20)})
-    : _createClient = createClient ?? HttpClient.new;
+    : _createClient = createClient ?? HttpClient.new,
+      _allows = AiHostPolicy.check;
+
+  /// Tests only: plain HTTP to a server on this machine (and nothing else).
+  @visibleForTesting
+  IoAiTransport.loopbackForTesting({HttpClient Function()? createClient, this.connectTimeout = const Duration(seconds: 20)})
+    : _createClient = createClient ?? HttpClient.new,
+      _allows = _isLoopback;
+
+  static bool _isLoopback(AiHttpRequest r) =>
+      r.url.scheme == 'http' && (r.url.host == '127.0.0.1' || r.url.host == 'localhost');
+
+  static final RegExp _headerValue = RegExp(r'^[\x20-\x7E\t]*$');
 
   final HttpClient Function() _createClient;
+  final bool Function(AiHttpRequest request) _allows;
   final Duration connectTimeout;
 
   @override
   Future<AiHttpResponse> send(AiHttpRequest request, {AiCancelToken? cancel}) async {
     if (cancel?.isCancelled ?? false) throw const AiCancelledException();
+    if (!_allows(request)) throw const AiHostNotAllowedException();
+    // Checked before connecting; dart:io would reject these too, but with
+    // the whole value (the key) in its exception text.
+    if (!request.headers.values.every(_headerValue.hasMatch)) throw const AiInvalidHeaderException();
     final client = _createClient()
       ..connectionTimeout = connectTimeout
       ..idleTimeout = const Duration(seconds: 10)
-      ..userAgent = 'Madar';
+      ..userAgent = 'Madar'
+      // Never accept a certificate the platform doesn't trust.
+      ..badCertificateCallback = ((cert, host, port) => false);
     var closed = false;
     void closeClient() {
       if (closed) return;
@@ -99,7 +166,12 @@ class IoAiTransport implements AiTransport {
       final req = pending = await client.openUrl(request.method, request.url);
       if (cancel?.isCancelled ?? false) throw const AiCancelledException();
       req.followRedirects = false;
-      request.headers.forEach(req.headers.set);
+      try {
+        request.headers.forEach(req.headers.set);
+      } on FormatException {
+        // Its text would carry the value – the key.
+        throw const AiInvalidHeaderException();
+      }
       final body = request.body;
       if (body != null) {
         final bytes = utf8.encode(body);

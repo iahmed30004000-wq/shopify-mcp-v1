@@ -101,12 +101,25 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
   DateTime _seenAt = DateTime.fromMillisecondsSinceEpoch(0);
   bool _loaded = false;
   bool _watchDirty = false;
+
+  /// Upcoming firings a feature cancelled, with the order they were
+  /// reported in: a refresh whose read of the pending list began before a
+  /// cancel must neither watch that firing again nor later count it as
+  /// delivered.
+  final Map<String, int> _cancelledKeys = {};
+  int _cancelSeq = 0;
   Future<void> _tail = Future.value();
   Future<void>? _queued;
 
   /// Refreshes are at least this far apart when the timer re-arms itself.
   static const Duration minTimer = Duration(seconds: 5);
   static const Duration maxTimer = Duration(minutes: 30);
+
+  /// How long one feature's re-plan may take before the center moves on.
+  static const Duration replanTimeout = Duration(seconds: 20);
+
+  /// The row each snooze replaced, and whether it was in the tray (undo).
+  final Map<String, (HistoryEntry, bool)> _beforeSnooze = {};
 
   NotificationService get _service => ref.read(notificationServiceProvider);
   NotificationGate get _gate => ref.read(notificationGateProvider);
@@ -156,7 +169,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
         _queued = null;
         return _refresh();
       })
-      .catchError((Object e, StackTrace s) => debugPrint('NotificationCenter: refresh failed: $e\n$s'));
+      .catchError((Object e) => _log('refresh', e));
 
   /// Reads the stored state once the database is there (until then the
   /// center keeps what it records in memory and merges it in later).
@@ -174,49 +187,68 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
       final gate = _gate;
       if (!gate.policyLoaded) {
         await gate.setPolicy(await store.policy());
+        await _replanStale();
       }
     } catch (e) {
-      debugPrint('NotificationCenter: loading its state failed: $e');
+      _log('loading its state', e);
     }
   }
 
   Future<void> _refresh() async {
     if (!ref.mounted) return;
-    final now = _now();
-    await _load(now);
+    await _load(_now());
     if (!ref.mounted) return;
     final service = _service;
     final gate = _gate;
+    final readSeq = _cancelSeq;
     var pendingRaw = const <PendingNotice>[];
     var activeRaw = const <ActiveNotice>[];
     var permitted = true;
     try {
       pendingRaw = await service.pendingNotices();
     } catch (e) {
-      debugPrint('NotificationCenter: pending notifications unavailable: $e');
+      _log('reading pending notifications', e);
     }
     try {
       activeRaw = await (gate.activeNotices() ?? service.activeNotices());
     } catch (e) {
-      debugPrint('NotificationCenter: shown notifications unavailable: $e');
+      _log('reading shown notifications', e);
     }
     try {
       permitted = await service.notificationsEnabled();
     } catch (_) {}
+    // Snoozes are hidden from the features' own re-arming: the gate re-arms
+    // those the system dropped. A re-plan that failed earlier is retried.
+    if (gate.attached) await gate.rearmDroppedSnoozes();
     if (!ref.mounted) return;
+    await _replanStale();
+    if (!ref.mounted) return;
+    // After the reads: whatever they saw had happened by now (an alarm that
+    // fires while they run is recorded when it was seen).
+    final now = _now();
 
     final policy = gate.policy.pruned(now);
     if (policy != gate.policy) {
       await gate.setPolicy(policy);
       if (!ref.mounted) return;
       await _persistPolicy();
+      await _replanStale();
+      if (!ref.mounted) return;
     }
     final pending = [
       for (final p in pendingRaw) CenterNotice.fromPayload(p.id, p.payload, title: p.title, body: p.body),
     ];
+    // A snooze moved to the center's own ids is the firing of its feature's
+    // id (its taps say so too): one row, whichever id it arrived on.
     final active = [
       for (final a in activeRaw)
-        CenterNotice.fromPayload(a.id, a.payload, title: a.title, body: a.body, channelId: a.channelId),
+        CenterNotice.fromPayload(
+          GateMarks.originOf(a.payload) ?? a.id,
+          a.payload,
+          title: a.title,
+          body: a.body,
+          channelId: a.channelId,
+        ),
     ];
 
     // What arrived since the last look: upcoming then, gone now, its moment
@@ -225,7 +257,10 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     final pendingKeys = {for (final p in pending) p.key};
     final arrived = <HistoryEntry>[
       for (final w in _watch)
-        if (w.notice.at != null && !w.notice.at!.isAfter(now) && !pendingKeys.contains(w.notice.key))
+        if (w.notice.at != null &&
+            !w.notice.at!.isAfter(now) &&
+            !pendingKeys.contains(w.notice.key) &&
+            !_cancelledKeys.containsKey(w.notice.key))
           if (_arrivalOf(w) case final status?) HistoryEntry(notice: w.notice, status: status, recordedAt: now),
       for (final a in active)
         if (a.namespace != null && a.at != null)
@@ -234,7 +269,26 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     final history = _history.recordAll(arrived, now: now).bounded(now);
     final groupOf = _groupOf;
     final upcoming = CenterLayout.upcoming(pending: pending, policy: gate.policy, groupOf: groupOf, now: now);
-    final watch = [for (final i in upcoming) WatchedNotice(i.notice, i.state)];
+    // Watched until it leaves the pending list: the upcoming ones, and those
+    // past their moment yet still pending (Doze delays an alarm; the plugin
+    // lists it until it fires) – dropping those would lose their arrival.
+    final previous = {for (final w in _watch) w.notice.key: w.state};
+    final upcomingKeys = {for (final i in upcoming) i.key};
+    final watch = [
+      for (final i in upcoming)
+        // Cancelled while this read ran: the list is older than the cancel.
+        if ((_cancelledKeys[i.key] ?? -1) <= readSeq) WatchedNotice(i.notice, i.state),
+      for (final n in pending)
+        if (n.at != null && !n.at!.isAfter(now) && !upcomingKeys.contains(n.key))
+          if ((_cancelledKeys[n.key] ?? -1) <= readSeq)
+            WatchedNotice(
+              n,
+              previous[n.key] ?? gate.policy.holdOf(n, groupOf(n), now: now) ?? CenterItemState.scheduled,
+            ),
+    ];
+    // What was cancelled before this read is settled by it (still pending =
+    // scheduled again since).
+    _cancelledKeys.removeWhere((_, seq) => seq <= readSeq);
     final recent = CenterLayout.recent(
       history: history,
       active: active,
@@ -336,6 +390,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
   }
 
   void _onCancelled(CenterNotice notice) {
+    _cancelledKeys[notice.key] = ++_cancelSeq;
     final before = _watch.length;
     _watch = [
       for (final w in _watch)
@@ -375,12 +430,12 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     final handler = ref.read(notificationActionHandlersProvider)[actionId];
     if (handler == null) return false;
     final now = _now();
-    if (item.live) await _cancelQuietly(item.id);
+    if (item.live) await removeShownNotice(ref, item.notice);
     bool ok;
     try {
       ok = await handler(CenterActionRequest(notice: item.notice, actionId: actionId, now: now, live: item.live));
     } catch (e) {
-      debugPrint('NotificationCenter: $actionId failed: $e');
+      _log(actionId, e);
       ok = false;
     }
     if (!ref.mounted) return ok;
@@ -403,6 +458,13 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     final gate = _gate;
     final ok = gate.attached ? await gate.snooze(item.notice, until) : await _snoozeUngated(item.notice, until);
     if (!ok || !ref.mounted) return null;
+    _beforeSnooze[item.key] = (
+      _history[item.key] ?? HistoryEntry(notice: item.notice, status: HistoryStatus.delivered, recordedAt: now),
+      item.live,
+    );
+    while (_beforeSnooze.length > 20) {
+      _beforeSnooze.remove(_beforeSnooze.keys.first);
+    }
     _history = _history.record(
       HistoryEntry(notice: item.notice, status: HistoryStatus.snoozed, recordedAt: now),
       now: now,
@@ -417,10 +479,44 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
   /// re-plan may take it back).
   Future<bool> _snoozeUngated(CenterNotice notice, DateTime until) async {
     final service = _service;
-    await _cancelQuietly(notice.id);
+    // Not when its id has another firing to come (it would go too).
+    if (!await removeShownNotice(ref, notice)) return false;
     final ok = await service.schedule(NotificationGate.requestFor(notice, at: until, now: _now()));
     if (ok) await _gate.setPolicy(_gate.policy.snooze(SnoozedNotice(notice: notice, until: until)));
     return ok;
+  }
+
+  /// Undoes [snooze] of [item] (the row it was snoozed from): the snoozed
+  /// alarm goes, the notification is back in the tray if it was there, and
+  /// its row is as it was.
+  Future<void> undoSnooze(CenterItem item) async {
+    final gate = _gate;
+    final before = _beforeSnooze.remove(item.key);
+    final wasLive = before?.$2 ?? item.live;
+    if (gate.attached) {
+      if (wasLive) {
+        await gate.unsnooze(item.notice);
+      } else {
+        await gate.cancelSnooze(item.id);
+      }
+    } else {
+      await _cancelQuietly(item.id);
+      await gate.setPolicy(gate.policy.dropSnooze(item.id));
+      if (wasLive) {
+        try {
+          await _service.show(NotificationGate.requestFor(item.notice, now: _now()));
+        } catch (e) {
+          _log('showing it again', e);
+        }
+      }
+    }
+    final now = _now();
+    _history = _history.restore([
+      before?.$1 ?? HistoryEntry(notice: item.notice, status: HistoryStatus.delivered, recordedAt: now),
+    ]);
+    await _persistPolicy();
+    await _saveHistory();
+    await refresh();
   }
 
   /// Cancels the snooze of an upcoming [item] (it will not come back).
@@ -464,10 +560,41 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
   Future<void> unmute(NotificationGroup group) => _applyPolicy(_gate.policy.unmute(group));
 
   Future<void> _applyPolicy(CenterPolicy policy, {int? cancel}) async {
+    // Stored first: if the app dies while the gate holds back or re-arms,
+    // the next run applies what the user chose (an unmute stays an unmute).
+    await _guard((s) => s.savePolicy(policy));
     await _gate.setPolicy(policy);
     if (cancel != null) await _cancelQuietly(cancel);
     await _persistPolicy();
+    await _replanStale();
     await refresh();
+  }
+
+  /// Has the features whose requests the gate had to rebuild (held or
+  /// re-armed from what the plugin reported – no buttons) re-send their
+  /// own ([NotificationReplanHooks]), so a mute undone or lifted never
+  /// leaves an adhan or a dose without its buttons. One at a time: a call
+  /// while one runs waits for it (the next look retries what is left).
+  Future<void> _replanStale() {
+    if (!ref.mounted || _gate.staleNamespaces.isEmpty) return Future.value();
+    return _replanning ??= _replan().whenComplete(() => _replanning = null);
+  }
+
+  Future<void>? _replanning;
+
+  Future<void> _replan() async {
+    final stale = _gate.staleNamespaces;
+    if (stale.isEmpty || !ref.mounted) return;
+    final hooks = ref.read(notificationReplanHooksProvider);
+    for (final ns in stale) {
+      final replan = hooks[ns];
+      if (replan == null) continue;
+      try {
+        await replan().timeout(replanTimeout);
+      } catch (e) {
+        _log('re-planning $ns', e);
+      }
+    }
   }
 
   /// Removes [item] from Recent (and from the tray while it is there).
@@ -488,7 +615,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
         _history[i.key] ?? HistoryEntry(notice: i.notice, status: HistoryStatus.delivered, recordedAt: now),
     ];
     for (final i in items) {
-      if (i.live) await _cancelQuietly(i.id);
+      if (i.live) await removeShownNotice(ref, i.notice);
     }
     _history = _history.recordAll(before, now: now).hide(items.map((i) => i.key));
     await _saveHistory();
@@ -506,9 +633,13 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     try {
       await _service.cancel(id);
     } catch (e) {
-      debugPrint('NotificationCenter: cancelling $id failed: $e');
+      _log('cancelling $id', e);
     }
   }
+
+  /// Logs a failure by its type only: messages (database errors, JSON)
+  /// can carry what notifications say – names of medications, people.
+  static void _log(String what, Object error) => debugPrint('NotificationCenter: $what failed (${error.runtimeType})');
 
   Future<void> _saveHistory() => _guard((s) => s.saveHistory(_history));
 
@@ -524,7 +655,7 @@ class NotificationCenterController extends Notifier<NotificationCenterState> {
     try {
       await write(store);
     } catch (e) {
-      debugPrint('NotificationCenter: saving failed: $e');
+      _log('saving', e);
     }
   }
 }

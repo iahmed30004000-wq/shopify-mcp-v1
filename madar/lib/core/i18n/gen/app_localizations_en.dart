@@ -17924,6 +17924,48 @@ class L10nEn extends L10n {
   String get cinemaFxReelLabel => 'Reel';
 
   @override
+  String get cinemaRigCast => 'The Cast';
+
+  @override
+  String get cinemaRigNujaym => 'Nujaym';
+
+  @override
+  String get cinemaRigNujaymRole => 'The plucky star-bird of Flappy Orbit';
+
+  @override
+  String get cinemaRigZunbruk => 'Baron Zunbruk';
+
+  @override
+  String get cinemaRigZunbrukRole =>
+      'The clockwork foreman of Metropolis Machine';
+
+  @override
+  String get cinemaRigZajil => 'Zajil';
+
+  @override
+  String get cinemaRigZajilRole => 'The camel courier of Caravan Dash';
+
+  @override
+  String get cinemaRigMishmish => 'Inspector Mishmish';
+
+  @override
+  String get cinemaRigMishmishRole =>
+      'The trench-coat detective cat of Noir Rooftops';
+
+  @override
+  String get cinemaRigSarab => 'Sarab';
+
+  @override
+  String get cinemaRigSarabRole => 'The hover-bike courier of Neon Souk Racer';
+
+  @override
+  String get cinemaRigBean => 'Habba';
+
+  @override
+  String get cinemaRigBeanRole =>
+      'Star of the rehearsal, a bean in white gloves';
+
+  @override
   String get dataCentreTitle => 'Your data';
 
   @override
@@ -20064,8 +20106,7 @@ class L10nEn extends L10n {
   String get aiChatWillSend => 'Will send';
 
   @override
-  String get aiChatContextReviewFirst =>
-      'You’ll review what’s shared from your summary before the first send';
+  String get aiChatContextReviewFirst => 'you’ll review your summary first';
 
   @override
   String get aiChatContextNone => 'No personal context';
@@ -20408,6 +20449,9 @@ class L10nEn extends L10n {
   String get aiChatSettingsService => 'Service';
 
   @override
+  String get aiChatSettingsServiceModel => 'Service and model';
+
+  @override
   String get aiChatServiceAnthropic => 'Anthropic';
 
   @override
@@ -20483,8 +20527,9 @@ class L10nEn extends L10n {
       'The key contains spaces – copy it again.';
 
   @override
-  String get aiChatKeyProblemProvider =>
-      'This looks like a key for another service. It will be saved anyway – test it to be sure.';
+  String aiChatKeyProblemProvider(String service) {
+    return 'This key belongs to $service, so it wasn’t saved here – it would be sent to the wrong service. Add it under $service.';
+  }
 
   @override
   String get aiChatSettingsModel => 'Model';
@@ -20579,10 +20624,24 @@ class L10nEn extends L10n {
 
   @override
   String get aiChatPrivacyCalls =>
-      'Madar contacts the service only when you tap Send, Test key or Refresh models. Nothing runs in the background.';
+      'Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background.';
 
   @override
   String aiChatPrivacyHistory(String count) {
-    return 'Chats are kept encrypted on your phone (the latest $count).';
+    return 'Chats are kept encrypted on your phone (the latest $count), each with the summary you approved for it. They are part of your backups and your full data export.';
   }
+
+  @override
+  String get aiChatKeyProblemChars =>
+      'The key has characters no key has (maybe from copying) – copy it again.';
+
+  @override
+  String get aiChatLinkTitle => 'Open this link?';
+
+  @override
+  String get aiChatLinkBody =>
+      'It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it.';
+
+  @override
+  String get aiChatLinkOpen => 'Open link';
 }

@@ -128,31 +128,36 @@ abstract final class Extremities {
       ..scale(dir * size, size)
       ..rotate(pitch * dir);
     b.layer();
-    // Heel/body + bulb toe + sole: one inked silhouette.
+    // Heel + big bulb toe on a flat sole: one inked silhouette.
     b.shape(fill);
-    pen.ellipse(0.02, 0.18, 0.62, 0.4);
-    b.shape(fill);
-    pen.ellipse(0.78, 0.1, 0.56 + b.j(salt + 1) * 0.02, 0.44);
-    b.shape(fill);
-    pen.roundRect(-0.62, 0.3, 1.3, 0.58, 0.14);
+    pen
+      ..moveTo(-0.62, 0.5)
+      ..lineTo(1.12, 0.5)
+      ..cubicTo(1.52 + b.j(salt + 1) * 0.03, 0.5, 1.56, -0.12, 1.08, -0.4)
+      ..cubicTo(0.78, -0.58, 0.42, -0.5, 0.26, -0.32)
+      ..lineTo(0.2, -0.36)
+      ..cubicTo(-0.1, -0.5, -0.66, -0.44, -0.7, 0.06)
+      ..quadTo(-0.72, 0.42, -0.62, 0.5)
+      ..close();
     if (spat != null) {
       b.shape(spat);
-      pen.roundRect(-0.45, -0.38, 0.5, 0.22, 0.16);
+      pen.roundRect(-0.52, -0.46, 0.46, 0.24, 0.18);
     }
-    // Sole line and shine.
-    b.stroke(b.colors.shine, b.lw * 0.55);
+    // Sole edge, toe cap seam and the shine.
+    b.inkLine(b.lw * 0.55);
     pen
-      ..moveTo(-0.5, 0.4)
-      ..lineTo(1.18, 0.4);
+      ..moveTo(-0.6, 0.36)
+      ..lineTo(1.2, 0.36);
+    b.brushQuad(3, 0.55, -0.34, 0.66, 0.0, 0.62, 0.34, b.lw * 0.6, taperIn: 0.4, taperOut: 0.4);
     b.brushQuad(
       3,
-      0.52,
-      -0.16,
-      0.74,
-      -0.34,
-      1.02,
+      0.78,
+      -0.3,
+      1.04,
+      -0.36,
+      1.26,
       -0.12,
-      b.lw * 0.9,
+      b.lw * 1.0,
       color: b.colors.shine,
       taperIn: 0.5,
       taperOut: 0.5,

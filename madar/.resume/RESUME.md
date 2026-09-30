@@ -29,9 +29,11 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Jordanian rules (owner confirmed "Jordan") + new Solitaire, Blackjack | cinema/rules/cards/**, cinema/rules/board/** | RUNNING (wf_94413da5-0be cards, wf_a8c19eb3-b9e board); specs in scratchpad/jordan_rules/ |
 | Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
-| AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | RUNNING (wf_089d5589-460) |
+| AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | built + security-reviewed (163 tests); needs routes /ai, /ai/chats, /settings/ai, AskAi entries, AiKeyStore.deleteAll() in delete-all-data |
+| Together Mode core + couple specials | lib/features/together, e1_together.json | RUNNING (wf_ab7dcc7b-712) |
+| Home-screen widgets | lib/features/widgets, android .../widgets, res widget_*, e2_widgets.json | RUNNING (wf_54ac8044-8f2) |
 | Global search | lib/features/search, d2_search.json | built (report in scratchpad/phase9_packages.md); two-lens review RUNNING (wf_182fdfeb-068); needs route + opener + launcher |
-| Notification center | lib/features/notification_center, d3_notifications.json | built (report in scratchpad/phase9_packages.md); safety review RUNNING (wf_4ddbde81-dc2); needs wiring (gate, AppServices, links, route) |
+| Notification center | lib/features/notification_center, d3_notifications.json | built + safety-reviewed (24 fixes, 138 tests); needs wiring per scratchpad/phase9_packages.md (gate inside Suspending wrapper, meds background gate, AdhanEventHub.withholds, AppServices watch, reserve ids 160000–160999) |
 
 ## Owner decisions
 - EveryAyah recitations: approved (stream on play / download on request; credited).

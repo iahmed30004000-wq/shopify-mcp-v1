@@ -64,16 +64,15 @@ final aiProviderRegistryProvider = Provider<AiProviderRegistry>(
 typedef AiContextPicker = Future<String?> Function(BuildContext context, {required bool andSend});
 
 final aiContextPickerProvider = Provider<AiContextPicker>(
-  (ref) => (context, {required andSend}) => showExportPreviewSheet(
-    context,
-    mode: ExportPreviewMode.select,
-    confirmLabel: andSend ? L10n.of(context).aiChatContextUseAndSend : L10n.of(context).aiChatContextUse,
-  ),
+  (ref) =>
+      (context, {required andSend}) => showExportPreviewSheet(
+        context,
+        mode: ExportPreviewMode.select,
+        confirmLabel: andSend ? L10n.of(context).aiChatContextUseAndSend : L10n.of(context).aiChatContextUse,
+      ),
 );
 
-final conversationStoreProvider = Provider<ConversationStore>(
-  (ref) => ConversationStore(ref.watch(databaseProvider)),
-);
+final conversationStoreProvider = Provider<ConversationStore>((ref) => ConversationStore(ref.watch(databaseProvider)));
 
 /// The conversation list, newest first.
 final conversationIndexProvider = StreamProvider.autoDispose<List<ConversationMeta>>(
@@ -150,7 +149,13 @@ class AiKeyHintsController extends AsyncNotifier<Map<AiProviderId, String?>> {
     state = AsyncData({...?state.value, p: null});
     if (old == null) return null;
     return () async {
-      await _store.save(p, old);
+      try {
+        await _store.save(p, old);
+      } on ArgumentError {
+        // A key an older version accepted but this one refuses (e.g. the
+        // other service's key) stays deleted.
+        return;
+      }
       state = AsyncData({...?state.value, p: AiKeyStore.hintOf(old)});
     };
   }
@@ -170,4 +175,3 @@ Future<void> testAiKey(WidgetRef ref, AiProviderId p, {AiCancelToken? cancel}) a
   if (key == null) throw const AiException(AiErrorKind.noKey);
   await ref.read(aiProviderRegistryProvider)[p].testKey(key, cancel: cancel);
 }
-

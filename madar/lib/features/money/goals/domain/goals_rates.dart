@@ -90,6 +90,19 @@ class GoalsRates {
     return (Rational.fromInt(milli) * f / t).roundHalfUp();
   }
 
+  /// [milli] of [from] as an amount a wallet in [to] can hold: converted
+  /// exactly ([convert]) and rounded once, half-up, to [to]'s minor unit
+  /// (100 JOD → 141.04 USD, not 141.044), so a wallet's balance is always
+  /// the sum of the amounts its entries show. The same code is returned
+  /// as is.
+  int convertToMinor(int milli, String from, String to) {
+    if (from.toUpperCase() == to.toUpperCase()) return milli;
+    final f = rateOf(from) ?? Rational.one;
+    final t = rateOf(to) ?? Rational.one;
+    final step = minorStepOf(to);
+    return (Rational.fromInt(milli) * f / (t * Rational.fromInt(step))).roundHalfUp() * step;
+  }
+
   /// Rounds [value] (milli-units of [code]) **up** to the currency's minor
   /// unit – a plan that reaches its target never falls a fils short.
   int ceilToMinor(Rational value, String code) {

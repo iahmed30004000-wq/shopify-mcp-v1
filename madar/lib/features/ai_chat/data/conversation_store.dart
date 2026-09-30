@@ -2,7 +2,14 @@
 /// schema change): one entry per conversation plus a small index for the
 /// list. Bounded: at most [ConversationStore.maxConversations] (oldest
 /// dropped), each with at most [Conversation.maxMessages] messages.
+///
+/// A deleted conversation stays deleted: a late save from a screen that
+/// still has it open is dropped (only undo – [ConversationStore.restore] –
+/// brings it back), and [ConversationStore.deletions] tells open screens to
+/// let go of it.
 library;
+
+import 'dart:async';
 
 import 'package:drift/drift.dart';
 
@@ -28,6 +35,15 @@ class ConversationStore {
 
   static String keyOf(String id) => '$conversationPrefix$id';
 
+  /// Ids deleted through this store (until undone).
+  final Set<String> _deleted = {};
+
+  final StreamController<Set<String>?> _deletions = StreamController<Set<String>?>.broadcast(sync: true);
+
+  /// Ids just deleted (null = every conversation). Delivered synchronously,
+  /// before the delete call completes.
+  Stream<Set<String>?> get deletions => _deletions.stream;
+
   /// Every `key_values` key the AI chat writes (for tests and audits).
   static bool ownsKey(String key) =>
       key == indexKey || key == AiSettings.storageKey || key.startsWith(conversationPrefix);
@@ -51,10 +67,15 @@ class ConversationStore {
   /// Saves [c] (an empty conversation is not stored) and updates the index,
   /// dropping the oldest conversations beyond the limit.
   Future<void> save(Conversation c) async {
-    if (c.isEmpty) return;
+    if (c.isEmpty || _deleted.contains(c.id)) return;
     await db.transaction(() async {
+      // Deleted while this save waited for the database.
+      if (_deleted.contains(c.id)) return;
       await kv.setJson(keyOf(c.id), c.toJson());
-      final list = [for (final m in await index()) if (m.id != c.id) m]..insert(0, ConversationMeta.of(c));
+      final list = [
+        for (final m in await index())
+          if (m.id != c.id) m,
+      ]..insert(0, ConversationMeta.of(c));
       list.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
       while (list.length > maxConversations) {
         final dropped = list.removeLast();
@@ -67,7 +88,7 @@ class ConversationStore {
   /// Renames [id]; returns the updated conversation.
   Future<Conversation?> rename(String id, String title) async {
     final c = await load(id);
-    if (c == null) return null;
+    if (c == null || _deleted.contains(id)) return null;
     final clean = Conversation.cleanTitle(title);
     final next = c.copyWith(title: clean.isEmpty ? c.title : clean, titleEdited: clean.isNotEmpty);
     await db.transaction(() async {
@@ -91,12 +112,17 @@ class ConversationStore {
 
   /// Deletes [id]; returns it for undo.
   Future<Conversation?> delete(String id) async {
+    _deleted.add(id);
     final c = await load(id);
     await db.transaction(() async {
       await kv.remove(keyOf(id));
-      final list = [for (final m in await index()) if (m.id != id) m];
+      final list = [
+        for (final m in await index())
+          if (m.id != id) m,
+      ];
       await kv.setJson(indexKey, [for (final m in list) m.toJson()]);
     });
+    if (!_deletions.isClosed) _deletions.add({id});
     return c;
   }
 
@@ -105,18 +131,21 @@ class ConversationStore {
     final all = <Conversation>[];
     await db.transaction(() async {
       for (final m in await index()) {
+        _deleted.add(m.id);
         final c = await load(m.id);
         if (c != null) all.add(c);
       }
       await (db.delete(db.keyValues)..where((t) => t.key.like('$conversationPrefix%'))).go();
       await kv.remove(indexKey);
     });
+    if (!_deletions.isClosed) _deletions.add(null);
     return all;
   }
 
   /// Puts [conversations] back (undo).
   Future<void> restore(Iterable<Conversation> conversations) async {
     for (final c in conversations) {
+      _deleted.remove(c.id);
       await save(c);
     }
   }

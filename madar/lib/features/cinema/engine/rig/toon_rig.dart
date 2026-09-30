@@ -74,7 +74,7 @@ class ToonRig extends HoseRig {
   ToonRig(super.spec, {ToonLook? look}) : look = look ?? ToonLook.of(spec) {
     final h = spec.height;
     separateHead = spec.body == RigBody.pear || spec.body == RigBody.tall;
-    legLen = h * spec.limbLength * (spec.body == RigBody.tall ? 0.72 : 0.58);
+    legLen = h * spec.limbLength * (spec.body == RigBody.tall ? 0.72 : 0.68);
     armLen = h * spec.limbLength * 0.66;
     hipH = legLen * 0.88;
     limbW = h * spec.limbWidth;
@@ -252,13 +252,13 @@ class ToonRig extends HoseRig {
     switch (action) {
       case RigAction.idle:
         // The 1930s bounce: down on every beat, hang at the top.
-        tHipY = (1 - hop) * 3.2 * uu;
-        tTilt = math.sin(bt * math.pi) * 0.035;
-        tHeadTilt = math.sin(bt * math.pi) * 0.06;
-        sqBias = contact * 0.07 - hop * 0.02;
+        tHipY = (1 - hop) * 5.5 * uu;
+        tTilt = math.sin(bt * math.pi) * 0.05;
+        tHeadTilt = math.sin(bt * math.pi) * 0.09;
+        sqBias = contact * 0.13 - hop * 0.04;
         for (var i = 0; i < 2; i++) {
           final s = i == 0 ? -1.0 : 1.0;
-          _hand(i, s * (shX + 7 * uu + hop * 3 * uu), shY + armLen * 0.78 - hop * 2 * uu + (1 - hop) * 3 * uu);
+          _hand(i, s * (shX + 7 * uu + hop * 4 * uu), shY + armLen * 0.78 - hop * 3 * uu + (1 - hop) * 6 * uu);
           _foot(i, s * 10 * uu, 0);
           handShape[i] = HandShape.open;
         }
@@ -287,7 +287,7 @@ class ToonRig extends HoseRig {
         final ph = cycle;
         airborne = false;
         tHipY = -3 * uu - 4 * uu * math.sin(ph).abs();
-        tTilt = 0.2 + math.sin(ph * 2) * 0.03;
+        tTilt = 0.12 + (speed.abs() / h).clamp(0.0, 3.0) * 0.045 + math.sin(ph * 2) * 0.03;
         tHeadTilt = 0.08;
         sqBias = -0.05;
         for (var i = 0; i < 2; i++) {
@@ -467,7 +467,7 @@ class ToonRig extends HoseRig {
   void build(RigPaintContext ctx) {
     final b = ink;
     final h = spec.height;
-    b.begin(ctx, size: h);
+    b.begin(ctx, size: h, boilFrame: boilFrame);
     final pen = b.pen;
     final d = dir;
     final tn = turn;
@@ -483,8 +483,7 @@ class ToonRig extends HoseRig {
       ..scale(sx, sy)
       ..translate(0, -pivotY)
       ..scale(d, 1);
-    final bounds = Rect.fromLTRB(-h * 0.55, -h * 1.12, h * 0.55, 0);
-    setBounds(bounds);
+    setBounds(-h * 0.55, -h * 1.12, h * 0.55, 0);
     b.shadeAcross(Rect.fromLTWH(-h * 0.4, -h, h * 0.8, h));
 
     final hipX = hip.x, hipY = -hipH + hip.y;
@@ -499,8 +498,8 @@ class ToonRig extends HoseRig {
     final far = _far;
     final shFront = bodyW * 0.44;
     // Shoulder roots, front view → side view.
-    _sh0 = Bounce.lerp(-shFront, -bodyW * 0.16, tn);
-    _sh1 = Bounce.lerp(shFront, bodyW * 0.1, tn);
+    _sh0 = Bounce.lerp(-shFront, -bodyW * 0.3, tn);
+    _sh1 = Bounce.lerp(shFront, bodyW * 0.3, tn);
     _hp0 = Bounce.lerp(-bodyW * 0.2, -bodyW * 0.06, tn);
     _hp1 = Bounce.lerp(bodyW * 0.2, bodyW * 0.08, tn);
 
@@ -631,7 +630,7 @@ class ToonRig extends HoseRig {
         x: tip.x,
         y: tip.y,
         angle: tip.angle,
-        size: h * 0.068,
+        size: h * 0.078,
         fill: c.fill(spec.trim),
         shape: handOverride(i) ?? handShape[i],
         thumb: Extremities.thumbFront(tip.angle) * (i == 0 && !_far ? -1 : 1),
@@ -687,7 +686,7 @@ class ToonRig extends HoseRig {
     body.blob(pen, 0, cy, bodyW / 2, bodyH / 2, taper: taper, bend: bend, box: box, samples: 40);
     body.wobble(b.amp, b.frame, b.seed, 1);
     b.layer();
-    b.blob(body, c.fill(spec.fill), depth: bodyW * 0.2);
+    b.blob(body, c.fill(spec.fill), depth: bodyW * 0.16, threshold: 0.28);
     if (look.buttons > 0) {
       for (var i = 0; i < look.buttons; i++) {
         b.inkFill();
@@ -728,7 +727,7 @@ class ToonRig extends HoseRig {
   /// The face painted on a one-piece body (pen at the hip).
   void drawFaceOnBody(InkBuild b) {
     final r = bodyW * 0.5;
-    final cy = bodyCy - bodyH * (spec.body == RigBody.ball ? 0.1 : 0.2);
+    final cy = bodyCy - bodyH * (spec.body == RigBody.ball ? 0.12 : 0.24);
     _hair(b, bodyW * 0.08 * turn, bodyCy - bodyH * 0.5 + b.lw * 0.2, r);
     _setupFace(b, bodyW * 0.02, cy, r * 0.92);
     face.draw(b);
@@ -750,7 +749,7 @@ class ToonRig extends HoseRig {
         ..circle(x - r * 0.95, y - r * 0.05, r * 0.28)
         ..circle(x + r * 0.95, y - r * 0.05, r * 0.28);
     }
-    b.blob(head, c.fill(spec.fill), depth: r * 0.32);
+    b.blob(head, c.fill(spec.fill), depth: r * 0.3, threshold: 0.28);
     b.endLayer();
     _hair(b, x + r * 0.15 * turn, y - r * 0.95, r);
     _setupFace(b, x, y + r * 0.02, r);
@@ -766,7 +765,8 @@ class ToonRig extends HoseRig {
       ..turn = turn
       ..expression = expression
       ..eyes = spec.eyes
-      ..eyeScale = look.eyeScale
+      ..eyeScale = look.eyeScale * (separateHead ? 1.05 : 1.2)
+      ..mouthW = separateHead ? 0.9 : 1.08
       ..blink = blinkAmount
       ..lookX = lookSpring.x
       ..lookY = (lookSpring.y + lookBiasY).clamp(-1.0, 1.0)
@@ -787,37 +787,31 @@ class ToonRig extends HoseRig {
       case ToonHair.none:
         return;
       case ToonHair.curl:
-        // A single spring-loaded curl, swinging on the chain.
-        final c0 = chain[1], c1 = chain[3];
-        final sway = (c1.x - chainAnchorX) * 0.3;
+        // A single spring-loaded kiss-curl, swinging on the chain.
+        final sway = ((chain[2].x - chainAnchorX) * 0.25).clamp(-r * 0.3, r * 0.3);
         final ct = b.contour(2)..clear(closed: false);
         ct.cubic(
           pen,
-          x,
-          y + r * 0.05,
-          x + sway * 0.3,
-          y - r * 0.35,
-          x + r * 0.35 + sway,
-          y - r * 0.5,
-          x + r * 0.28 + sway,
-          y - r * 0.2 + (c0.y - chainAnchorY) * 0.05,
-          samples: 10,
-        );
-        ct.cubic(
-          pen,
-          x + r * 0.28 + sway,
+          x - r * 0.02,
+          y + r * 0.06,
+          x + sway * 0.2,
           y - r * 0.2,
-          x + r * 0.2,
-          y - r * 0.05,
-          x + r * 0.08,
-          y - r * 0.18,
-          x + r * 0.12 + sway * 0.5,
-          y - r * 0.28,
-          samples: 6,
-          skipFirst: true,
+          x + r * 0.05 + sway,
+          y - r * 0.36,
+          x + r * 0.24 + sway,
+          y - r * 0.34,
+          samples: 8,
         );
+        // Then a spiral turning back in on itself.
+        final ox = x + r * 0.2 + sway, oy = y - r * 0.24;
+        for (var i = 1; i <= 14; i++) {
+          final k = i / 14;
+          final a = -math.pi * 0.5 + k * math.pi * 1.7;
+          final rr = r * 0.11 * (1 - k * 0.55);
+          ct.addPen(pen, ox + math.cos(a) * rr + r * 0.04 * (1 - k), oy + math.sin(a) * rr);
+        }
         b.layer();
-        b.brush(ct, b.lw * 1.9, taperIn: 0.05, taperOut: 0.5, press: 0.3);
+        b.brush(ct, b.lw * 1.7, taperIn: 0.02, taperOut: 0.45, press: 0.35, minWidth: 0.3);
         b.endLayer();
       case ToonHair.tuft:
         b.layer();

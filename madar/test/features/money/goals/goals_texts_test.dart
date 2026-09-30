@@ -29,7 +29,7 @@ void main() {
     test('whole amounts drop their decimals; fractions keep at least two', () {
       final ar = texts('ar');
       expect(plain(ar.money(500000, 'JOD')), '٥٠٠ د.أ');
-      expect(plain(ar.money(1200000, 'JOD')), '١٬٢٠٠ د.أ');
+      expect(plain(ar.money(1200000, 'JOD')), '١\u202F٢٠٠ د.أ');
       expect(plain(ar.money(87500, 'JOD')), '٨٧٫٥٠ د.أ');
       expect(plain(ar.money(282475, 'JOD')), '٢٨٢٫٤٧٥ د.أ');
       expect(plain(ar.money(12500, 'USD')), '١٢٫٥٠ \$');

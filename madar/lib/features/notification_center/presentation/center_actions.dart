@@ -72,8 +72,8 @@ abstract final class CenterActions {
     await link(context, group, item?.notice);
   }
 
-  /// Snoozes a delivered notification by [by] (toast: undo = cancel it and
-  /// bring nothing back – the snoozed original is gone from the tray).
+  /// Snoozes a delivered notification by [by] (toast: undo = the snooze
+  /// goes and the notification is back as it was).
   static Future<void> snooze(BuildContext context, WidgetRef ref, CenterItem item, Duration by) async {
     Fx.fire(Sfx.drop);
     final tx = CenterTexts.of(context);
@@ -82,11 +82,7 @@ abstract final class CenterActions {
     if (until == null) return _failed(context);
     _toast(
       context,
-      UndoableAction(
-        label: tx.l.ncSnoozedToast(tx.until(until, _now(ref))),
-        undo: () =>
-            _c(ref).cancelSnooze(CenterItem(notice: item.notice, group: item.group, state: CenterItemState.snoozed)),
-      ),
+      UndoableAction(label: tx.l.ncSnoozedToast(tx.until(until, _now(ref))), undo: () => _c(ref).undoSnooze(item)),
     );
   }
 

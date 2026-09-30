@@ -1,6 +1,6 @@
-/// Trix (تركس) rules: four kingdoms, the owner of each choosing the order of
-/// its contracts (king of hearts, queens, diamonds, ltoush, trix – or complex
-/// and trix). See RULES.md.
+/// Trix (تركس) rules as commonly played in Jordan: four kingdoms, the owner
+/// of each choosing the order of its contracts (شيخ الكبة, البنات, الديناري,
+/// اللطوش, التركس – or الكومبلكس and التركس). See RULES.md §2.
 library;
 
 import '../core/card_game.dart';
@@ -9,6 +9,7 @@ import '../core/trick.dart';
 import 'trix_state.dart';
 
 final PlayingCard kingOfHearts = PlayingCard(Suit.hearts, Rank.king);
+final PlayingCard aceOfHearts = PlayingCard(Suit.hearts, Rank.ace);
 
 class TrixRules extends CardRules<TrixState, TrixMove> {
   const TrixRules();
@@ -17,6 +18,11 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
   static bool hasQueens(TrixContract? c) => c == TrixContract.queens || c == TrixContract.complex;
   static bool hasDiamonds(TrixContract? c) => c == TrixContract.diamonds || c == TrixContract.complex;
   static bool hasTricks(TrixContract? c) => c == TrixContract.ltoush || c == TrixContract.complex;
+
+  /// Whether the king rules (`noHeartLeadInKing`, `kingMustBeDiscarded`,
+  /// `kingOnAceOfHearts`) apply to the current contract.
+  static bool kingRulesApply(TrixState s) =>
+      s.contract == TrixContract.king || (s.contract == TrixContract.complex && s.options.kingRulesInComplex);
 
   /// Cards [seat] could double in the current contract.
   static List<PlayingCard> doublable(TrixState s, int seat) => [
@@ -37,17 +43,28 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
 
   /// Cards of [hand] playable to the current trick.
   static List<PlayingCard> trickPlayable(TrixState s, List<PlayingCard> hand) {
+    final o = s.options;
+    final kingRules = kingRulesApply(s);
     final led = s.trick!.ledSuit;
     if (led == null) {
-      if (hasKing(s.contract) && s.options.noHeartLeadInKing) {
+      if (kingRules && o.noHeartLeadInKing) {
         final other = hand.where((c) => c.suit != Suit.hearts).toList();
         if (other.isNotEmpty) return other;
       }
       return List.of(hand);
     }
     final follow = hand.where((c) => c.suit == led).toList();
-    if (follow.isNotEmpty) return follow;
-    if (hasKing(s.contract) && s.options.kingMustBeDiscarded && hand.contains(kingOfHearts)) return [kingOfHearts];
+    if (follow.isNotEmpty) {
+      if (kingRules &&
+          o.kingOnAceOfHearts &&
+          led == Suit.hearts &&
+          s.trick!.cards.contains(aceOfHearts) &&
+          hand.contains(kingOfHearts)) {
+        return [kingOfHearts];
+      }
+      return follow;
+    }
+    if (kingRules && o.kingMustBeDiscarded && hand.contains(kingOfHearts)) return [kingOfHearts];
     return List.of(hand);
   }
 
@@ -102,11 +119,15 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
       if (s.phase == TrixPhase.layout) return 'notPlayableOnLayout';
       final led = s.trick!.ledSuit;
       if (led == null) return 'noHeartLead';
-      if (s.hands[seat].any((c) => c.suit == led)) return 'mustFollowSuit';
+      if (s.hands[seat].any((c) => c.suit == led)) {
+        return m.card!.suit == led ? 'mustPlayKingOnAce' : 'mustFollowSuit';
+      }
       return 'mustDiscardKing';
     }
     if (m.kind == TrixMoveKind.pass && s.phase == TrixPhase.layout) return 'mustPlayWhenAble';
-    if (m.kind == TrixMoveKind.contract && s.phase == TrixPhase.contract) return 'contractAlreadyPlayed';
+    if (m.kind == TrixMoveKind.contract && s.phase == TrixPhase.contract) {
+      return s.options.contracts.contains(m.contract) ? 'contractAlreadyPlayed' : 'contractNotAvailable';
+    }
     return 'wrongPhase';
   }
 
@@ -133,16 +154,26 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
         }
         s.turn = s.owner;
       case TrixMoveKind.double:
-        for (final c in m.cards) {
-          s.doubled[c] = seat;
+        if (s.options.doublingReveal == TrixDoublingReveal.sequential) {
+          for (final c in m.cards) {
+            s.doubled[c] = seat;
+          }
+          ev?.add(
+            m.cards.isEmpty
+                ? CardEvent(CardEventType.pass, seat: seat)
+                : CardEvent(CardEventType.doubled, seat: seat, cards: m.cards),
+          );
+        } else {
+          // Hidden until everyone has answered: the event only says that
+          // this seat answered.
+          for (final c in m.cards) {
+            s.pendingDoubles[c] = seat;
+          }
+          ev?.add(CardEvent(CardEventType.doubled, seat: seat, detail: TrixEventDetail.doublingAnswered));
         }
-        ev?.add(
-          m.cards.isEmpty
-              ? CardEvent(CardEventType.pass, seat: seat)
-              : CardEvent(CardEventType.doubled, seat: seat, cards: m.cards),
-        );
         s.doublingAnswers++;
         if (s.doublingAnswers == 4) {
+          _revealDoubles(s, ev);
           s.phase = TrixPhase.tricks;
           s.trick = Trick(s.owner);
           s.turn = s.owner;
@@ -160,6 +191,25 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
         ev?.add(CardEvent(CardEventType.pass, seat: seat));
         s.turn = _nextActive(s, seat);
     }
+  }
+
+  /// Simultaneous doubling: every hidden double becomes public at once, one
+  /// event per doubling seat in seat order from the owner.
+  void _revealDoubles(TrixState s, List<CardEvent>? ev) {
+    if (s.pendingDoubles.isEmpty) return;
+    for (var i = 0; i < 4; i++) {
+      final seat = (s.owner + i) % 4;
+      final cards = sortedCards([
+        for (final e in s.pendingDoubles.entries)
+          if (e.value == seat) e.key,
+      ]);
+      if (cards.isEmpty) continue;
+      for (final c in cards) {
+        s.doubled[c] = seat;
+      }
+      ev?.add(CardEvent(CardEventType.doubled, seat: seat, cards: cards, detail: TrixEventDetail.doublingRevealed));
+    }
+    s.pendingDoubles = {};
   }
 
   int _nextActive(TrixState s, int seat) {
@@ -229,7 +279,7 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
     };
   }
 
-  /// Points per seat of the finished deal.
+  /// Points per seat of the finished deal (RULES.md §2, "Scoring").
   static List<int> dealPoints(TrixState s) {
     final o = s.options;
     final pts = List.filled(4, 0);
@@ -240,26 +290,78 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
       }
       return pts;
     }
-    int team(int seat) => o.partnership ? seat % 2 : seat;
-    void penalise(int taker, PlayingCard card, int penalty) {
-      final doubler = s.doubled[card];
-      if (doubler == null) {
-        pts[taker] -= penalty;
-        return;
-      }
-      pts[taker] -= 2 * penalty;
-      if (team(doubler) != team(taker)) pts[doubler] += penalty;
-    }
-
     for (var seat = 0; seat < 4; seat++) {
       for (final card in s.taken[seat]) {
-        if (hasKing(c) && card == kingOfHearts) penalise(seat, card, o.kingPenalty);
-        if (hasQueens(c) && card.rank == Rank.queen) penalise(seat, card, o.queenPenalty);
+        if (hasKing(c) && card == kingOfHearts) _scoreCard(s, pts, seat, card, o.kingPenalty);
+        if (hasQueens(c) && card.rank == Rank.queen) _scoreCard(s, pts, seat, card, o.queenPenalty);
         if (hasDiamonds(c) && card.suit == Suit.diamonds) pts[seat] -= o.diamondPenalty;
       }
       if (hasTricks(c)) pts[seat] -= o.trickPenalty * s.tricksTaken[seat];
     }
     return pts;
+  }
+
+  /// The completed trick holding [card], if any.
+  static Trick? trickHolding(TrixState s, PlayingCard card) {
+    for (final t in s.tricks) {
+      if (t.cards.contains(card)) return t;
+    }
+    return null;
+  }
+
+  /// Scores K♥ or a queen of value [v] taken by seat [t] (the doubling
+  /// table of RULES.md §2).
+  static void _scoreCard(TrixState s, List<int> pts, int t, PlayingCard card, int v) {
+    final o = s.options;
+    final d = s.doubled[card];
+    if (d == null) {
+      pts[t] -= v;
+      return;
+    }
+    int team(int seat) => o.partnership ? seat % 2 : seat;
+    if (team(t) != team(d)) {
+      // An opponent took it: he pays double, the doubler gains the value.
+      pts[t] -= 2 * v;
+      pts[d] += v;
+      return;
+    }
+    // The doubler (or his partner) took it. The trick's leader decides
+    // between "forced" and "self-led"; a hand-built state without the trick
+    // counts as self-led.
+    final leader = trickHolding(s, card)?.leader ?? t;
+    final selfLed = t == d && leader == d;
+    if (!o.partnership) {
+      switch (o.selfCaptureRule) {
+        case TrixSelfCapture.leaderGains:
+          if (selfLed) {
+            pts[t] -= v;
+          } else {
+            pts[t] -= 2 * v;
+            pts[leader] += v;
+          }
+        case TrixSelfCapture.leaderGainsStrict:
+          pts[t] -= 2 * v;
+          if (!selfLed) pts[leader] += v;
+        case TrixSelfCapture.normalValue:
+          pts[t] -= v;
+        case TrixSelfCapture.doubleNoBonus:
+          pts[t] -= 2 * v;
+      }
+      return;
+    }
+    switch (o.partnerCaptureRule) {
+      case TrixPartnerCapture.noBonus:
+        pts[t] -= 2 * v;
+      case TrixPartnerCapture.opponentsGain:
+        if (selfLed) {
+          pts[t] -= v;
+        } else {
+          pts[t] -= 2 * v;
+          pts[team(leader) != team(d) ? leader : (leader + 1) % 4] += v;
+        }
+      case TrixPartnerCapture.normalValue:
+        pts[t] -= v;
+    }
   }
 
   void _scoreDeal(TrixState s, List<CardEvent>? ev) {

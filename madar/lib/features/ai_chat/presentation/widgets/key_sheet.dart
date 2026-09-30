@@ -49,7 +49,14 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
   String? _notice;
   bool _noticeOk = true;
   AiKeyProblem? _problem;
+
+  /// The service a pasted key looks like it belongs to (wrong-provider).
+  AiProviderId? _otherOwner;
   AiCancelToken? _cancel;
+
+  /// The field holds what Paste took from the clipboard (cleared from the
+  /// clipboard once saved, so keyboard clipboard histories don't keep it).
+  String? _pasted;
 
   AiProviderId get _p => widget.provider;
 
@@ -65,7 +72,8 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
     AiKeyProblem.empty => l.aiChatKeyProblemEmpty,
     AiKeyProblem.tooShort => l.aiChatKeyProblemShort,
     AiKeyProblem.spaces => l.aiChatKeyProblemSpaces,
-    AiKeyProblem.wrongProvider => l.aiChatKeyProblemProvider,
+    AiKeyProblem.invalidChars => l.aiChatKeyProblemChars,
+    AiKeyProblem.wrongProvider => l.aiChatKeyProblemProvider(l.aiService(_otherOwner ?? _p)),
   };
 
   void _say(String text, {bool ok = true}) {
@@ -81,6 +89,7 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
     final text = data?.text;
     if (text == null || !mounted) return;
     _field.text = AiKeyStore.clean(text);
+    _pasted = _field.text;
     _field.selection = TextSelection.collapsed(offset: _field.text.length);
     setState(() {
       _problem = null;
@@ -92,26 +101,45 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
     final l = L10n.of(context);
     final key = AiKeyStore.clean(_field.text);
     final problem = AiKeyStore.check(_p, key);
-    if (problem != null && problem != AiKeyProblem.wrongProvider) {
+    if (problem != null) {
+      // Including the other service's key: it would be sent to the wrong
+      // company.
       Fx.fire(Sfx.error);
-      setState(() => _problem = problem);
+      setState(() {
+        _problem = problem;
+        _otherOwner = AiKeyStore.otherOwner(_p, key);
+      });
       return;
     }
     setState(() => _busy = true);
     try {
       await ref.read(aiKeyHintsProvider.notifier).save(_p, key);
+      if (_pasted != null && _pasted == key) await _clearClipboard(key);
+      _pasted = null;
+      if (!mounted) return;
       _field.clear();
       Fx.fire(Sfx.complete);
       setState(() {
         _busy = false;
-        _problem = problem; // a provider mismatch stays visible as a warning
+        _problem = null;
       });
       _say(l.aiChatKeySavedNotice);
     } catch (_) {
+      if (!mounted) return;
       Fx.fire(Sfx.error);
       setState(() => _busy = false);
       _say(l.aiChatErrorUnknown, ok: false);
     }
+  }
+
+  /// Empties the clipboard if it still holds [key].
+  static Future<void> _clearClipboard(String key) async {
+    try {
+      final now = await Clipboard.getData(Clipboard.kTextPlain);
+      if (now?.text != null && AiKeyStore.clean(now!.text!) == key) {
+        await Clipboard.setData(const ClipboardData(text: ''));
+      }
+    } catch (_) {}
   }
 
   Future<void> _test() async {
@@ -180,9 +208,15 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
             padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.m, Space.l, Space.m),
             child: Row(
               children: [
-                Icon(saved ? Icons.lock_rounded : Icons.lock_open_rounded, size: 18, color: saved ? t.success : t.textTertiary),
+                Icon(
+                  saved ? Icons.lock_rounded : Icons.lock_open_rounded,
+                  size: 18,
+                  color: saved ? t.success : t.textTertiary,
+                ),
                 const SizedBox(width: Space.m),
-                Expanded(child: Text(l.aiChatKeyCurrent, style: text.titleSmall!.copyWith(color: t.textPrimary))),
+                Expanded(
+                  child: Text(l.aiChatKeyCurrent, style: text.titleSmall!.copyWith(color: t.textPrimary)),
+                ),
                 Text(
                   saved ? BidiIsolate.ltr('••••$hint') : l.aiChatKeyNotSet,
                   key: const ValueKey('ai-key-mask'),
@@ -196,51 +230,49 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
             ),
           ),
           const SizedBox(height: Space.l),
-          Directionality(
+          TextField(
+            key: AiKeySheet.fieldKey,
             textDirection: TextDirection.ltr,
-            child: TextField(
-              key: AiKeySheet.fieldKey,
-              controller: _field,
-              obscureText: true,
-              obscuringCharacter: '•',
-              autocorrect: false,
-              enableSuggestions: false,
-              enableIMEPersonalizedLearning: false,
-              keyboardType: TextInputType.visiblePassword,
-              autofillHints: const <String>[],
-              maxLines: 1,
-              style: text.bodyLarge!.copyWith(color: t.textPrimary),
-              cursorColor: t.accent,
-              onChanged: (_) {
-                if (_problem != null || _notice != null) {
-                  setState(() {
-                    _problem = null;
-                    _notice = null;
-                  });
-                }
-              },
-              decoration: InputDecoration(
-                labelText: l.aiChatKeyField,
-                hintText: l.aiChatKeyFieldHint,
-                filled: true,
-                fillColor: t.glassFill,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(t.radiusM)),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(t.radiusM),
-                  borderSide: BorderSide(color: t.glassBorder),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(t.radiusM),
-                  borderSide: BorderSide(color: t.accent, width: 1.4),
-                ),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.only(right: Space.xs),
-                  child: TextButton.icon(
-                    key: AiKeySheet.pasteKey,
-                    onPressed: _busy ? null : _paste,
-                    icon: const Icon(Icons.content_paste_rounded, size: 18),
-                    label: Text(l.aiChatKeyPaste),
-                  ),
+            controller: _field,
+            obscureText: true,
+            obscuringCharacter: '•',
+            autocorrect: false,
+            enableSuggestions: false,
+            enableIMEPersonalizedLearning: false,
+            keyboardType: TextInputType.visiblePassword,
+            autofillHints: const <String>[],
+            maxLines: 1,
+            style: text.bodyLarge!.copyWith(color: t.textPrimary),
+            cursorColor: t.accent,
+            onChanged: (_) {
+              if (_problem != null || _notice != null) {
+                setState(() {
+                  _problem = null;
+                  _notice = null;
+                });
+              }
+            },
+            decoration: InputDecoration(
+              labelText: l.aiChatKeyField,
+              hintText: l.aiChatKeyFieldHint,
+              filled: true,
+              fillColor: t.glassFill,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(t.radiusM)),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(t.radiusM),
+                borderSide: BorderSide(color: t.glassBorder),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(t.radiusM),
+                borderSide: BorderSide(color: t.accent, width: 1.4),
+              ),
+              suffixIcon: Padding(
+                padding: const EdgeInsetsDirectional.only(end: Space.xs),
+                child: TextButton.icon(
+                  key: AiKeySheet.pasteKey,
+                  onPressed: _busy ? null : _paste,
+                  icon: const Icon(Icons.content_paste_rounded, size: 18),
+                  label: Text(l.aiChatKeyPaste),
                 ),
               ),
             ),
@@ -254,9 +286,7 @@ class _AiKeySheetState extends ConsumerState<AiKeySheet> {
                     padding: const EdgeInsetsDirectional.only(top: Space.s, start: Space.xs),
                     child: Text(
                       _problemText(l, _problem!),
-                      style: text.bodySmall!.copyWith(
-                        color: _problem == AiKeyProblem.wrongProvider ? t.warning : t.danger,
-                      ),
+                      style: text.bodySmall!.copyWith(color: t.danger),
                     ),
                   ),
           ),

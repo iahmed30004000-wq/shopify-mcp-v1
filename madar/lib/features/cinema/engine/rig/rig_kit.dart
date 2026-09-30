@@ -4,6 +4,12 @@
 /// ([RigCharacter]) so it plugs into `RigComponent`.
 library;
 
+export 'cast/camel_courier.dart';
+export 'cast/cast.dart';
+export 'cast/clockwork_boss.dart';
+export 'cast/detective_cat.dart';
+export 'cast/neon_rider.dart';
+export 'cast/star_bird.dart';
 export 'hose_rig.dart';
 export 'ink/boil.dart';
 export 'ink/contour.dart';
@@ -17,5 +23,7 @@ export 'parts/extremities.dart';
 export 'parts/face.dart';
 export 'parts/hats.dart';
 export 'parts/hose.dart';
+export 'parts/mechanics.dart';
+export 'props/ink_props.dart';
 export 'rig_entry.dart';
 export 'toon_rig.dart';

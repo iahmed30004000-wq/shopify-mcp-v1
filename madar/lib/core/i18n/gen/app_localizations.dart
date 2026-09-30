@@ -28419,6 +28419,84 @@ abstract class L10n {
   /// **'بكرة'**
   String get cinemaFxReelLabel;
 
+  /// Heading of the list of original Madar Cinema characters
+  ///
+  /// In ar, this message translates to:
+  /// **'طاقم التمثيل'**
+  String get cinemaRigCast;
+
+  /// Name of the star-bird hero of Flappy Orbit (means 'little star')
+  ///
+  /// In ar, this message translates to:
+  /// **'نُجيم'**
+  String get cinemaRigNujaym;
+
+  /// No description provided for @cinemaRigNujaymRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'طائر النجمة الشجاع، بطل «رفرفة المدار»'**
+  String get cinemaRigNujaymRole;
+
+  /// Name of the clockwork boss of Metropolis Machine (zunbruk = mainspring)
+  ///
+  /// In ar, this message translates to:
+  /// **'البارون زُنبُرك'**
+  String get cinemaRigZunbruk;
+
+  /// No description provided for @cinemaRigZunbrukRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'رئيس العمّال الآلي في «آلة المتروبوليس»'**
+  String get cinemaRigZunbrukRole;
+
+  /// Name of the camel courier of Caravan Dash (means 'messenger')
+  ///
+  /// In ar, this message translates to:
+  /// **'زاجل'**
+  String get cinemaRigZajil;
+
+  /// No description provided for @cinemaRigZajilRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجمل ساعي البريد في «سباق القافلة»'**
+  String get cinemaRigZajilRole;
+
+  /// Name of the detective cat of Noir Rooftops
+  ///
+  /// In ar, this message translates to:
+  /// **'المفتش مِشمِش'**
+  String get cinemaRigMishmish;
+
+  /// No description provided for @cinemaRigMishmishRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'القط المحقق ذو المعطف في «أسطح النوار»'**
+  String get cinemaRigMishmishRole;
+
+  /// Name of the hover-bike rider of Neon Souk Racer (means 'mirage')
+  ///
+  /// In ar, this message translates to:
+  /// **'سراب'**
+  String get cinemaRigSarab;
+
+  /// No description provided for @cinemaRigSarabRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'راكبة الدراجة الطائرة في «متسابق سوق النيون»'**
+  String get cinemaRigSarabRole;
+
+  /// Name of the bean-shaped hero of the engine demo
+  ///
+  /// In ar, this message translates to:
+  /// **'حبّة'**
+  String get cinemaRigBean;
+
+  /// No description provided for @cinemaRigBeanRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجم البروفة، حبّة فاصولياء بقفازين أبيضين'**
+  String get cinemaRigBeanRole;
+
   /// Data centre screen title
   ///
   /// In ar, this message translates to:
@@ -31842,7 +31920,7 @@ abstract class L10n {
   /// No description provided for @aiChatContextReviewFirst.
   ///
   /// In ar, this message translates to:
-  /// **'ستراجع ما يُشارك من ملخّصك قبل أول إرسال'**
+  /// **'ستراجع ملخّصك قبل الإرسال'**
   String get aiChatContextReviewFirst;
 
   /// No description provided for @aiChatContextNone.
@@ -32367,6 +32445,12 @@ abstract class L10n {
   /// **'الخدمة'**
   String get aiChatSettingsService;
 
+  /// No description provided for @aiChatSettingsServiceModel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخدمة والنموذج'**
+  String get aiChatSettingsServiceModel;
+
   /// No description provided for @aiChatServiceAnthropic.
   ///
   /// In ar, this message translates to:
@@ -32508,8 +32592,8 @@ abstract class L10n {
   /// No description provided for @aiChatKeyProblemProvider.
   ///
   /// In ar, this message translates to:
-  /// **'يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.'**
-  String get aiChatKeyProblemProvider;
+  /// **'هذا المفتاح خاص بخدمة {service}، لذا لم يُحفظ هنا حتى لا يُرسل إلى خدمة أخرى. أضِفه ضمن {service}.'**
+  String aiChatKeyProblemProvider(String service);
 
   /// No description provided for @aiChatSettingsModel.
   ///
@@ -32658,14 +32742,38 @@ abstract class L10n {
   /// No description provided for @aiChatPrivacyCalls.
   ///
   /// In ar, this message translates to:
-  /// **'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.'**
+  /// **'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.'**
   String get aiChatPrivacyCalls;
 
   /// No description provided for @aiChatPrivacyHistory.
   ///
   /// In ar, this message translates to:
-  /// **'تُحفظ المحادثات مشفّرة على هاتفك (آخر {count}).'**
+  /// **'تُحفظ المحادثات مشفّرة على هاتفك (آخر {count})، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.'**
   String aiChatPrivacyHistory(String count);
+
+  /// No description provided for @aiChatKeyProblemChars.
+  ///
+  /// In ar, this message translates to:
+  /// **'في المفتاح رموز لا تكون في المفاتيح (ربما من النسخ)؛ انسخه مرة أخرى.'**
+  String get aiChatKeyProblemChars;
+
+  /// Sheet shown before a link in an AI reply opens
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح هذا الرابط؟'**
+  String get aiChatLinkTitle;
+
+  /// No description provided for @aiChatLinkBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.'**
+  String get aiChatLinkBody;
+
+  /// No description provided for @aiChatLinkOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الرابط'**
+  String get aiChatLinkOpen;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

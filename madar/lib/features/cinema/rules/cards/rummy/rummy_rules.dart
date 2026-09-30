@@ -1,7 +1,10 @@
 /// Rules shared by Hand (هاند) and Konkan (كونكان). A turn is a sequence of
 /// atomic moves: draw (stock or the top discard), then any lay-downs, and a
-/// discard that ends the turn. See RULES.md.
+/// discard that ends the turn; a closed player may also go out in one
+/// `finish` move. See RULES.md.
 library;
+
+import 'dart:math' as math;
 
 import '../core/card_game.dart';
 import '../core/determinize.dart';
@@ -12,24 +15,66 @@ import 'rummy_state.dart';
 class RummyRules extends CardRules<RummyState, RummyMove> {
   const RummyRules();
 
-  static bool _openingOk(RummyOptions o, MeldPlan p, PlayingCard? must) =>
-      p.value >= o.openingThreshold && (!o.openingRequiresRun || p.hasRun) && (must == null || p.uses(must));
+  // ------------------------------------------------------------ queries
 
-  /// Opening lay-downs available from [hand] (most cards first), leaving at
-  /// least [keep] cards for the discard.
+  /// Cards [seat] must keep after a lay-down this turn: two on its first
+  /// turn when nobody may go out on their first turn, else one (for the
+  /// discard).
+  static int keepFor(RummyState s, int seat) => s.options.noGoOutOnFirstTurn && s.turnsTaken[seat] == 0 ? 2 : 1;
+
+  /// The starter's first turn: a discard only.
+  static bool discardOnlyTurn(RummyState s, int seat) =>
+      s.options.starterFirstTurnDiscardOnly && seat == s.starter && s.turnsTaken[seat] == 0;
+
+  /// Minimum total of an opening made now.
+  static int openingMinimum(RummyState s) {
+    final o = s.options;
+    if (!o.openingMustBeatPrevious || s.highestOpening == 0) return o.openingThreshold;
+    return math.max(o.openingThreshold, s.highestOpening + 1);
+  }
+
+  /// Whether [m] contains the taken discard [must] in an allowed way (with
+  /// the indicator option a wild taken from the pile may only be an ace).
+  static bool mustFits(RummyState s, Meld m, PlayingCard must) {
+    if (!m.cards.contains(must)) return false;
+    final r = s.meldRules;
+    if (!s.options.wildIndicator || !r.isWild(must)) return true;
+    return r.wildUsedAsAce(m, must);
+  }
+
+  static bool planUsesMust(RummyState s, MeldPlan p, PlayingCard? must) =>
+      must == null || p.melds.any((m) => mustFits(s, m, must));
+
+  /// Why [p] cannot be an opening now (null: it can).
+  static String? openingError(RummyState s, MeldPlan p, PlayingCard? must) {
+    final o = s.options;
+    if (!planUsesMust(s, p, must)) return 'mustUseTakenDiscard';
+    if (o.openingMustUseDiscard && must == null) return 'openingNeedsDiscard';
+    if (p.value < o.openingThreshold) return 'openingBelowThreshold';
+    if (p.value < openingMinimum(s)) return 'openingMustBeatPrevious';
+    if (o.openingRequiresRun && !p.hasRun) return 'openingNeedsRun';
+    return null;
+  }
+
+  /// Opening lay-downs from [hand] (most cards first), leaving at least
+  /// [keep] cards.
   static List<MeldPlan> openingPlans(
-    RummyOptions o,
+    RummyState s,
     List<PlayingCard> hand, {
     PlayingCard? must,
     int keep = 1,
     int cap = 12,
+    bool stopAtFirst = false,
+    List<Meld>? candidates,
   }) {
+    final cands = candidates ?? s.meldRules.candidates(hand);
     final found = <MeldPlan>[];
+    if (must != null && !cands.any((m) => mustFits(s, m, must))) return found;
     final keys = <String>{};
-    searchPlans(hand, candidateMelds(hand), (p) {
-      if (_openingOk(o, p, must)) {
-        final key = (p.melds.map((m) => m.key).toList()..sort()).join('|');
-        if (keys.add(key)) found.add(p);
+    searchPlans(hand, cands, (p) {
+      if (openingError(s, p, must) == null && keys.add(p.key)) {
+        found.add(p);
+        if (stopAtFirst) return false;
       }
       return true;
     }, maxCards: hand.length - keep);
@@ -37,68 +82,225 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
     return found.take(cap).toList();
   }
 
-  static bool canOpen(RummyOptions o, List<PlayingCard> hand, {PlayingCard? must, int keep = 1}) {
-    var ok = false;
-    searchPlans(hand, candidateMelds(hand), (p) {
-      ok = _openingOk(o, p, must);
-      return !ok;
-    }, maxCards: hand.length - keep);
-    return ok;
-  }
-
-  /// Whether [seat] could meld [card] at once if it took it.
-  static bool canUseCard(RummyState s, int seat, PlayingCard card) {
-    final hand = [...s.hands[seat], card];
-    if (!s.opened[seat]) return canOpen(s.options, hand, must: card);
-    if (hand.length < 2) return false;
-    for (final m in s.table) {
-      if (m.withCard(card) != null) return true;
-      if (s.options.jokerSwap && m.swapJoker(card) != null) return true;
-    }
-    return candidateMelds(hand).any((m) => m.cards.contains(card) && m.cards.length <= hand.length - 1);
-  }
-
-  @override
-  List<RummyMove> legalMoves(RummyState s, int seat) {
-    if (s.isOver || s.turn != seat) return const [];
-    final o = s.options;
-    if (s.phase == RummyPhase.draw) {
-      final top = s.topDiscard;
-      return [
-        const RummyMove.drawStock(),
-        if (top != null && (!o.discardMustBeUsed || canUseCard(s, seat, top))) const RummyMove.takeDiscard(),
-      ];
-    }
-    final hand = s.hands[seat];
-    final must = s.mustUse;
-    final distinct = hand.toSet().toList()..sort();
-    final moves = <RummyMove>[];
-    if (!s.opened[seat]) {
-      for (final p in openingPlans(o, hand, must: must)) {
-        moves.add(RummyMove.open([for (final m in p.melds) m.cards]));
-      }
-    } else {
-      for (final m in candidateMelds(hand)) {
-        if (m.cards.length <= hand.length - 1 && (must == null || m.cards.contains(must))) {
-          moves.add(RummyMove.meld(m.cards));
+  /// Lays [cards] off on the table one by one (greedily), or null when some
+  /// card does not fit. Used for the lay-offs of a one-turn finish.
+  static List<RummyLayoff>? layAll(RummyState s, List<PlayingCard> cards) {
+    final r = s.meldRules;
+    final table = List.of(s.table);
+    final rest = List.of(cards);
+    final out = <RummyLayoff>[];
+    var progress = true;
+    while (rest.isNotEmpty && progress) {
+      progress = false;
+      for (var k = 0; k < rest.length && !progress; k++) {
+        for (var i = 0; i < table.length; i++) {
+          final m = r.withCard(table[i], rest[k]);
+          if (m == null) continue;
+          table[i] = m;
+          out.add(RummyLayoff(rest[k], i));
+          rest.removeAt(k);
+          progress = true;
+          break;
         }
       }
-      if (hand.length >= 2) {
-        for (final c in distinct) {
-          if (must != null && c != must) continue;
-          for (var i = 0; i < s.table.length; i++) {
-            if (s.table[i].withCard(c) != null) moves.add(RummyMove.layoff(c, i));
-            if (o.jokerSwap && s.table[i].swapJoker(c) != null) moves.add(RummyMove.swapJoker(c, i));
+    }
+    return rest.isEmpty ? out : null;
+  }
+
+  /// Ways for a closed [seat] holding [hand] to go out in one move (new
+  /// melds, lay-offs on table melds, the last card discarded), pure
+  /// finishes first.
+  static List<RummyMove> finishMoves(
+    RummyState s,
+    int seat,
+    List<PlayingCard> hand, {
+    PlayingCard? must,
+    int cap = 6,
+    bool stopAtFirst = false,
+    List<Meld>? candidates,
+  }) {
+    if (!s.options.oneTurnFinishWaivesThreshold || s.opened[seat] || keepFor(s, seat) > 1) return const [];
+    final cands = candidates ?? s.meldRules.candidates(hand);
+    if (must != null && !cands.any((m) => mustFits(s, m, must))) return const [];
+    final out = <RummyMove>[];
+    final seen = <RummyMove>{};
+    void add(RummyMove m) {
+      if (seen.add(m)) out.add(m);
+    }
+
+    coverPlans(hand, cands, s.table.isEmpty ? 1 : 4, (plan, left) {
+      if (!planUsesMust(s, plan, must)) return true;
+      final melds = [for (final m in plan.melds) m.cards];
+      final lows = [for (final m in plan.melds) m.wildPlacedLow];
+      if (left.length == 1) {
+        add(RummyMove.finish(melds: melds, wildLow: lows, discard: left.single));
+      } else {
+        for (final d in left.toSet()) {
+          final lay = layAll(s, List.of(left)..remove(d));
+          if (lay != null) {
+            add(RummyMove.finish(melds: melds, wildLow: lows, layoffs: lay, discard: d));
+            break;
+          }
+        }
+      }
+      return out.length < cap && !(stopAtFirst && out.isNotEmpty);
+    });
+    out.sort((a, b) => a.layoffs.length - b.layoffs.length);
+    return out;
+  }
+
+  /// Whether [seat] may take [top] from the discard pile now: it must go
+  /// at once into a new meld with at least two cards of the hand (before
+  /// opening, inside an opening or a one-turn finish).
+  static bool canTakeDiscard(RummyState s, int seat, PlayingCard top) {
+    final hand = [...s.hands[seat], top]..sort();
+    final keep = keepFor(s, seat);
+    final r = s.meldRules;
+    final cands = r.candidates(hand);
+    if (!s.opened[seat]) {
+      return openingPlans(s, hand, must: top, keep: keep, stopAtFirst: true, candidates: cands).isNotEmpty ||
+          finishMoves(s, seat, hand, must: top, stopAtFirst: true, candidates: cands).isNotEmpty;
+    }
+    if (cands.any((m) => mustFits(s, m, top) && m.cards.length <= hand.length - keep)) return true;
+    if (s.options.discardUse != RummyDiscardUse.any || hand.length - 1 < keep) return false;
+    for (var i = 0; i < s.table.length; i++) {
+      if (layoffError(s, seat, top, i, handAfter: hand.length - 1) == null) return true;
+      if (!s.options.jokerSwap) continue;
+      if (r.swap(s.table[i], [top]) != null) return true;
+      // Both missing suits of a set of two naturals and a wild.
+      for (final other in s.hands[seat]) {
+        if (r.swap(s.table[i], [top, other]) != null) return true;
+      }
+    }
+    return false;
+  }
+
+  /// Why [card] cannot be laid off on table meld [target] (null: it can).
+  /// [handAfter] is the hand size after the lay-off.
+  static String? layoffError(
+    RummyState s,
+    int seat,
+    PlayingCard card,
+    int target, {
+    bool atLow = false,
+    int? handAfter,
+  }) {
+    if (target < 0 || target >= s.table.length) return 'noSuchMeld';
+    final r = s.meldRules;
+    final t = s.table[target];
+    if (r.withCard(t, card, atLow: atLow) == null) return 'doesNotFit';
+    // A set of two naturals and a wild takes a single natural only from a
+    // player about to go out, or when another player holds one card.
+    if (s.options.setWildSwap == RummySetWildSwap.bothMissing &&
+        t.kind == MeldKind.set &&
+        t.cards.length == 3 &&
+        t.wilds == 1 &&
+        !r.isWild(card)) {
+      final after = handAfter ?? s.hands[seat].length - 1;
+      final lastCard = s.activeSeats.any((p) => p != seat && s.hands[p].length == 1);
+      if (after > 2 && !lastCard) return 'setNeedsBothSuits';
+    }
+    return null;
+  }
+
+  /// Lay-downs available to [seat] in the play phase (no discards).
+  static List<RummyMove> layDownMoves(RummyState s, int seat) {
+    final o = s.options;
+    final r = s.meldRules;
+    final hand = s.hands[seat];
+    final must = s.mustUse;
+    final keep = keepFor(s, seat);
+    final cands = r.candidates(hand);
+    final moves = <RummyMove>[];
+    if (!s.opened[seat]) {
+      moves.addAll(finishMoves(s, seat, hand, must: must, candidates: cands));
+      for (final p in openingPlans(s, hand, must: must, keep: keep, candidates: cands)) {
+        moves.add(
+          RummyMove.open([for (final m in p.melds) m.cards], wildLow: [for (final m in p.melds) m.wildPlacedLow]),
+        );
+      }
+      return moves;
+    }
+    for (final m in cands) {
+      if (m.cards.length <= hand.length - keep && (must == null || mustFits(s, m, must))) {
+        moves.add(RummyMove.meld(m.cards, wildLow: m.wildPlacedLow));
+      }
+    }
+    final anyUse = o.discardUse == RummyDiscardUse.any;
+    if (must != null && !anyUse) return moves;
+    final distinct = hand.toSet().toList()..sort();
+    if (hand.length - 1 >= keep) {
+      for (final c in distinct) {
+        if (must != null && c != must) continue;
+        for (var i = 0; i < s.table.length; i++) {
+          if (layoffError(s, seat, c, i) != null) continue;
+          moves.add(RummyMove.layoff(c, i));
+          final t = s.table[i];
+          if (r.isWild(c) && t.kind == MeldKind.run && t.low > 1 && t.high < 14) {
+            moves.add(RummyMove.layoff(c, i, atLow: true));
           }
         }
       }
     }
-    // Safety net: a taken discard that can no longer be used is released.
-    if (must == null || moves.isEmpty) {
-      for (final c in distinct) {
-        moves.add(RummyMove.discard(c));
+    if (o.jokerSwap) {
+      for (var i = 0; i < s.table.length; i++) {
+        final t = s.table[i];
+        if (t.wilds == 0) continue;
+        if (t.kind == MeldKind.run) {
+          for (final c in distinct) {
+            if ((must == null || c == must) && r.swap(t, [c]) != null) moves.add(RummyMove.swapJoker(c, i));
+          }
+          continue;
+        }
+        final have = <PlayingCard>[];
+        for (final su in r.missingSuits(t)) {
+          for (final c in distinct) {
+            if (!r.isWild(c) && r.rankOf(c) == t.rank && r.suitOf(c) == su) {
+              have.add(c);
+              break;
+            }
+          }
+        }
+        for (final c in have) {
+          if ((must == null || c == must) && r.swap(t, [c]) != null) moves.add(RummyMove.swapJoker(c, i));
+        }
+        if (have.length == 2 && hand.length - 1 >= keep && (must == null || have.contains(must))) {
+          if (r.swap(t, have) != null) moves.add(RummyMove.swapJoker(have[0], i, card2: have[1]));
+        }
       }
     }
+    return moves;
+  }
+
+  /// Whether a discard is held back (a taken discard or a freed wild still to
+  /// be laid down).
+  static bool discardBlocked(RummyState s) =>
+      s.mustUse != null || (s.options.swappedWildMustBeUsed && s.pendingWilds.isNotEmpty);
+
+  @override
+  List<RummyMove> legalMoves(RummyState s, int seat) {
+    if (s.isOver || s.turn != seat) return const [];
+    switch (s.phase) {
+      case RummyPhase.over:
+        return const [];
+      case RummyPhase.redealOffer:
+        return const [RummyMove.callRedeal(), RummyMove.keepHand()];
+      case RummyPhase.draw:
+        final top = s.topDiscard;
+        return [
+          const RummyMove.drawStock(),
+          if (top != null && canTakeDiscard(s, seat, top)) const RummyMove.takeDiscard(),
+        ];
+      case RummyPhase.play:
+        break;
+    }
+    final distinct = s.hands[seat].toSet().toList()..sort();
+    final discards = [for (final c in distinct) RummyMove.discard(c)];
+    if (discardOnlyTurn(s, seat)) return discards;
+    final moves = layDownMoves(s, seat);
+    // Safety net: a taken discard (or freed wild) that can no longer be laid
+    // down is released.
+    if (!discardBlocked(s) || moves.isEmpty) moves.addAll(discards);
     return moves;
   }
 
@@ -107,53 +309,123 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
     if (s.isOver) return 'matchOver';
     if (s.turn != seat) return 'notYourTurn';
     final o = s.options;
-    final isDraw = m.kind == RummyMoveKind.drawStock || m.kind == RummyMoveKind.takeDiscard;
-    if (isDraw != (s.phase == RummyPhase.draw)) return 'wrongPhase';
+    final phaseOk = switch (m.kind) {
+      RummyMoveKind.drawStock || RummyMoveKind.takeDiscard => s.phase == RummyPhase.draw,
+      RummyMoveKind.callRedeal || RummyMoveKind.keepHand => s.phase == RummyPhase.redealOffer,
+      _ => s.phase == RummyPhase.play,
+    };
+    if (!phaseOk) return 'wrongPhase';
     final hand = s.hands[seat];
+    final r = s.meldRules;
+    final keep = keepFor(s, seat);
+    final must = s.mustUse;
+    String? keepError(int left) => left < 1 ? 'mustKeepOneCard' : (left < keep ? 'noGoOutOnFirstTurn' : null);
     switch (m.kind) {
+      case RummyMoveKind.callRedeal:
+        return s.canCallRedeal(seat) ? null : 'cannotRedeal';
+      case RummyMoveKind.keepHand:
       case RummyMoveKind.drawStock:
         return null;
       case RummyMoveKind.takeDiscard:
-        if (s.topDiscard == null) return 'discardPileEmpty';
-        return legalMoves(s, seat).contains(m) ? null : 'cannotUseDiscard';
+        final top = s.topDiscard;
+        if (top == null) return 'discardPileEmpty';
+        return canTakeDiscard(s, seat, top) ? null : 'cannotUseDiscard';
+      default:
+        break;
+    }
+    if (m.kind != RummyMoveKind.discard && discardOnlyTurn(s, seat)) return 'firstTurnDiscardOnly';
+    switch (m.kind) {
       case RummyMoveKind.open:
       case RummyMoveKind.meld:
         if (m.kind == RummyMoveKind.open && s.opened[seat]) return 'alreadyOpened';
         if (m.kind == RummyMoveKind.meld && !s.opened[seat]) return 'notOpened';
-        if (m.kind == RummyMoveKind.meld && m.melds.length != 1) return 'invalidMeld';
-        if (m.melds.isEmpty) return 'invalidMeld';
+        if (m.melds.isEmpty || (m.kind == RummyMoveKind.meld && m.melds.length != 1)) return 'invalidMeld';
         final cards = m.meldCards;
         if (cardsMinus(hand, cards).length != hand.length - cards.length) return 'cardNotInHand';
-        final melds = [for (final cs in m.melds) Meld.arrange(cs)];
+        final melds = [for (var i = 0; i < m.melds.length; i++) r.arrange(m.melds[i], wildLow: m.lowAt(i))];
         if (melds.any((x) => x == null)) return 'invalidMeld';
-        if (hand.length - cards.length < 1) return 'mustKeepOneCard';
+        final kept = keepError(hand.length - cards.length);
+        if (kept != null) return kept;
         final plan = MeldPlan([for (final x in melds) x!]);
-        if (s.mustUse != null && !plan.uses(s.mustUse!)) return 'mustUseTakenDiscard';
-        if (m.kind == RummyMoveKind.open) {
-          if (plan.value < o.openingThreshold) return 'openingBelowThreshold';
-          if (o.openingRequiresRun && !plan.hasRun) return 'openingNeedsRun';
+        if (!planUsesMust(s, plan, must)) return 'mustUseTakenDiscard';
+        if (m.kind == RummyMoveKind.open) return openingError(s, plan, must);
+        return null;
+      case RummyMoveKind.finish:
+        if (s.opened[seat]) return 'alreadyOpened';
+        if (!o.oneTurnFinishWaivesThreshold) return 'finishNotAllowed';
+        if (keep > 1) return 'noGoOutOnFirstTurn';
+        if (m.melds.isEmpty || m.card == null) return 'invalidMeld';
+        final used = [...m.meldCards, for (final l in m.layoffs) l.card, m.card!];
+        final rest = cardsMinus(hand, used);
+        if (rest.length != hand.length - used.length) return 'cardNotInHand';
+        if (rest.isNotEmpty) return 'notAFinish';
+        final melds = [for (var i = 0; i < m.melds.length; i++) r.arrange(m.melds[i], wildLow: m.lowAt(i))];
+        if (melds.any((x) => x == null)) return 'invalidMeld';
+        if (!planUsesMust(s, MeldPlan([for (final x in melds) x!]), must)) return 'mustUseTakenDiscard';
+        final table = List.of(s.table);
+        for (final l in m.layoffs) {
+          if (l.target < 0 || l.target >= table.length) return 'noSuchMeld';
+          final next = r.withCard(table[l.target], l.card, atLow: l.atLow);
+          if (next == null) return 'doesNotFit';
+          table[l.target] = next;
         }
         return null;
       case RummyMoveKind.layoff:
+        if (!s.opened[seat]) return 'notOpened';
+        if (!hand.contains(m.card)) return 'cardNotInHand';
+        final kept = keepError(hand.length - 1);
+        if (kept != null) return kept;
+        if (must != null && (o.discardUse != RummyDiscardUse.any || m.card != must)) return 'mustUseTakenDiscard';
+        return layoffError(s, seat, m.card!, m.target ?? -1, atLow: m.atLow);
       case RummyMoveKind.swapJoker:
+        if (!o.jokerSwap) return 'jokerSwapOff';
+        if (!s.opened[seat]) return 'notOpened';
+        final nats = [m.card!, ?m.card2];
+        if (cardsMinus(hand, nats).length != hand.length - nats.length) return 'cardNotInHand';
+        if (must != null && (o.discardUse != RummyDiscardUse.any || !nats.contains(must))) {
+          return 'mustUseTakenDiscard';
+        }
+        final t = m.target;
+        if (t == null || t < 0 || t >= s.table.length) return 'noSuchMeld';
+        final meld = s.table[t];
+        if (r.swap(meld, nats) == null) {
+          // A single natural of a missing suit on a set of two naturals and
+          // a wild: both missing suits are needed.
+          final single = nats.length == 1 && !r.isWild(nats.single) ? nats.single : null;
+          final needsBoth =
+              single != null &&
+              meld.kind == MeldKind.set &&
+              meld.cards.length == 3 &&
+              meld.wilds == 1 &&
+              r.rankOf(single) == meld.rank &&
+              r.missingSuits(meld).contains(r.suitOf(single));
+          return needsBoth ? 'setNeedsBothSuits' : 'noJokerForCard';
+        }
+        return keepError(hand.length - nats.length + 1);
       case RummyMoveKind.discard:
         if (!hand.contains(m.card)) return 'cardNotInHand';
-        if (legalMoves(s, seat).contains(m)) return null;
-        if (m.kind == RummyMoveKind.discard) return 'mustUseTakenDiscard';
-        if (!s.opened[seat]) return 'notOpened';
-        if (hand.length < 2) return 'mustKeepOneCard';
-        if (s.mustUse != null && m.card != s.mustUse) return 'mustUseTakenDiscard';
-        return m.kind == RummyMoveKind.layoff ? 'doesNotFit' : 'noJokerForCard';
+        if (discardBlocked(s) && !legalMoves(s, seat).contains(m)) {
+          return must != null ? 'mustUseTakenDiscard' : 'mustUseFreedWild';
+        }
+        return null;
+      case RummyMoveKind.drawStock:
+      case RummyMoveKind.takeDiscard:
+      case RummyMoveKind.callRedeal:
+      case RummyMoveKind.keepHand:
+        return null;
     }
   }
 
   @override
   RummyMove moveFromJson(Map<String, Object?> json) => RummyMove.fromJson(json);
 
+  // ------------------------------------------------------------ applying
+
   void _used(RummyState s, int seat, Iterable<PlayingCard> cards) {
     for (final c in cards) {
       s.hands[seat].remove(c);
       s.known[seat].remove(c);
+      s.pendingWilds.remove(c);
       if (c == s.mustUse) s.mustUse = null;
     }
   }
@@ -162,103 +434,290 @@ class RummyRules extends CardRules<RummyState, RummyMove> {
   void apply(RummyState s, RummyMove m, [List<CardEvent>? ev]) {
     final seat = s.turn;
     final hand = s.hands[seat];
+    final r = s.meldRules;
     switch (m.kind) {
+      case RummyMoveKind.callRedeal:
+        ev?.add(CardEvent(CardEventType.redeal, seat: seat, detail: 'pairs'));
+        s.dealFromRng();
+        ev?.add(CardEvent(CardEventType.dealt, seat: s.dealer, cards: [?s.indicator]));
+      case RummyMoveKind.keepHand:
+        ev?.add(CardEvent(CardEventType.pass, seat: seat, detail: 'keepHand'));
+        final next = s.redealCandidate(after: seat);
+        s.turn = next ?? s.starter;
+        s.phase = next == null ? RummyPhase.play : RummyPhase.redealOffer;
       case RummyMoveKind.drawStock:
+        var restocked = false;
         if (s.stock.isEmpty) {
-          if (s.discardPile.length > 1 && s.recycles < s.options.maxStockRecycles) {
-            final top = s.discardPile.removeLast();
-            s.stock = s.discardPile;
-            s.rng.shuffle(s.stock);
-            s.discardPile = [top];
-            s.recycles++;
-          } else {
-            return _endRound(s, null, ev);
-          }
+          if (!_restock(s)) return _endRound(s, null, ev);
+          restocked = true;
         }
         final card = s.stock.removeLast();
         hand
           ..add(card)
           ..sort();
         s.phase = RummyPhase.play;
-        ev?.add(CardEvent(CardEventType.drewStock, seat: seat, cards: [card]));
+        ev?.add(CardEvent(CardEventType.drewStock, seat: seat, cards: [card], detail: restocked ? 'restocked' : null));
       case RummyMoveKind.takeDiscard:
         final card = s.discardPile.removeLast();
         hand
           ..add(card)
           ..sort();
         s.known[seat].add(card);
-        if (s.options.discardMustBeUsed) s.mustUse = card;
+        s.mustUse = card;
         s.phase = RummyPhase.play;
         ev?.add(CardEvent(CardEventType.tookDiscard, seat: seat, cards: [card]));
       case RummyMoveKind.open:
       case RummyMoveKind.meld:
-        for (final cs in m.melds) {
-          final meld = Meld.arrange(cs, owner: seat)!;
-          _used(s, seat, cs);
-          s.table.add(meld);
-        }
+        final plan = _layMelds(s, seat, m);
         final opening = m.kind == RummyMoveKind.open;
+        if (opening) s.highestOpening = math.max(s.highestOpening, plan.value);
         s.opened[seat] = true;
-        ev?.add(CardEvent(opening ? CardEventType.opened : CardEventType.melded, seat: seat, cards: m.meldCards));
+        ev?.add(
+          CardEvent(
+            opening ? CardEventType.opened : CardEventType.melded,
+            seat: seat,
+            cards: m.meldCards,
+            value: plan.value,
+          ),
+        );
       case RummyMoveKind.layoff:
-        s.table[m.target!] = s.table[m.target!].withCard(m.card!)!;
-        _used(s, seat, [m.card!]);
-        ev?.add(CardEvent(CardEventType.laidOff, seat: seat, cards: [m.card!], value: m.target));
+        _layOff(s, seat, m.card!, m.target!, m.atLow, ev);
       case RummyMoveKind.swapJoker:
-        final (meld, joker) = s.table[m.target!].swapJoker(m.card!)!;
-        s.table[m.target!] = meld;
-        _used(s, seat, [m.card!]);
+        final nats = [m.card!, ?m.card2];
+        final t = m.target!;
+        final (meld, wild) = r.swap(s.table[t], nats)!;
+        s.table[t] = meld;
+        _used(s, seat, nats);
         hand
-          ..add(joker)
+          ..add(wild)
           ..sort();
-        ev?.add(CardEvent(CardEventType.jokerSwapped, seat: seat, cards: [m.card!, joker], value: m.target));
+        s.known[seat].add(wild);
+        if (s.options.swappedWildMustBeUsed) s.pendingWilds.add(wild);
+        if (t < s.tableAtTurnStart) s.usedOldMelds = true;
+        ev?.add(CardEvent(CardEventType.jokerSwapped, seat: seat, cards: [...nats, wild], value: t));
+      case RummyMoveKind.finish:
+        final plan = _layMelds(s, seat, m);
+        s.opened[seat] = true;
+        ev?.add(CardEvent(CardEventType.opened, seat: seat, cards: m.meldCards, value: plan.value));
+        for (final l in m.layoffs) {
+          _layOff(s, seat, l.card, l.target, l.atLow, ev);
+        }
+        _discard(s, seat, m.card!, ev);
       case RummyMoveKind.discard:
-        _used(s, seat, [m.card!]);
-        s.mustUse = null;
-        s.discardPile.add(m.card!);
-        ev?.add(CardEvent(CardEventType.discarded, seat: seat, cards: [m.card!]));
-        if (hand.isEmpty) return _endRound(s, seat, ev);
-        s.turn = (seat + 1) % s.playerCount;
-        s.phase = RummyPhase.draw;
-        s.openAtTurnStart = s.opened[s.turn];
+        _discard(s, seat, m.card!, ev);
     }
   }
 
-  /// Points of a finished round per seat ([winner] null: abandoned).
-  static List<int> roundPoints(RummyState s, int? winner, {required bool handFinish}) {
+  MeldPlan _layMelds(RummyState s, int seat, RummyMove m) {
+    final r = s.meldRules;
+    final melds = <Meld>[];
+    for (var i = 0; i < m.melds.length; i++) {
+      final meld = r.arrange(m.melds[i], owner: seat, wildLow: m.lowAt(i))!;
+      _used(s, seat, meld.cards);
+      s.table.add(meld);
+      melds.add(meld);
+    }
+    return MeldPlan(melds);
+  }
+
+  void _layOff(RummyState s, int seat, PlayingCard card, int target, bool atLow, List<CardEvent>? ev) {
+    s.table[target] = s.meldRules.withCard(s.table[target], card, atLow: atLow)!;
+    _used(s, seat, [card]);
+    if (target < s.tableAtTurnStart) s.usedOldMelds = true;
+    ev?.add(CardEvent(CardEventType.laidOff, seat: seat, cards: [card], value: target));
+  }
+
+  void _discard(RummyState s, int seat, PlayingCard card, List<CardEvent>? ev) {
+    _used(s, seat, [card]);
+    s.mustUse = null;
+    s.pendingWilds = [];
+    s.discardPile.add(card);
+    ev?.add(CardEvent(CardEventType.discarded, seat: seat, cards: [card]));
+    if (s.hands[seat].isEmpty) return _endRound(s, seat, ev, lastDiscard: card);
+    s.turnsTaken[seat]++;
+    if (s.options.stockEnd == RummyStockEnd.voidAtPlayers && s.stock.length <= s.activeSeats.length) {
+      return _endRound(s, null, ev);
+    }
+    _startTurn(s, s.nextActive(seat));
+  }
+
+  static void _startTurn(RummyState s, int seat) {
+    s.turn = seat;
+    s.phase = RummyPhase.draw;
+    s.openAtTurnStart = s.opened[seat];
+    s.tableAtTurnStart = s.table.length;
+    s.usedOldMelds = false;
+    s.pendingWilds = [];
+    s.mustUse = null;
+  }
+
+  /// Refills an empty stock from the discards (all but the top card), or
+  /// returns false when the round must be void.
+  bool _restock(RummyState s) {
     final o = s.options;
-    final pts = List.filled(s.playerCount, 0);
-    if (winner == null) return pts;
-    final mult = handFinish ? o.handMultiplier : 1;
-    for (var p = 0; p < s.playerCount; p++) {
-      if (p == winner) continue;
-      pts[p] = (s.opened[p] ? s.handPenalty(p) : o.notOpenedPenalty) * mult;
+    if (s.discardPile.length <= 1) return false;
+    switch (o.stockEnd) {
+      case RummyStockEnd.reshuffle:
+        if (s.recycles >= o.maxStockRecycles) return false;
+        final top = s.discardPile.removeLast();
+        s.stock = s.discardPile;
+        s.rng.shuffle(s.stock);
+        s.discardPile = [top];
+      case RummyStockEnd.flipNoShuffle:
+        if (s.recycles >= RummyOptions.flipSafetyCap) return false;
+        final top = s.discardPile.removeLast();
+        // The pile turned face down: its bottom card is drawn first.
+        s.stock = s.discardPile.reversed.toList();
+        s.discardPile = [top];
+      case RummyStockEnd.voidAtPlayers:
+        return false;
     }
-    pts[winner] = handFinish ? o.handWinnerScore : o.winnerScore;
-    return pts;
+    s.recycles++;
+    return true;
   }
 
-  void _endRound(RummyState s, int? winner, List<CardEvent>? ev) {
-    final handFinish = winner != null && !s.openAtTurnStart;
-    final pts = roundPoints(s, winner, handFinish: handFinish);
+  // ------------------------------------------------------------ scoring
+
+  /// Bonus factor of a full hand (options): ×2 for a wild as the last
+  /// discard, ×2 for one colour or ×4 for one suit (wilds excepted).
+  static int bonusFactor(RummyState s, int winner, PlayingCard? lastDiscard) {
+    final o = s.options;
+    final r = s.meldRules;
+    var b = 1;
+    if (o.bonusWildLastDiscard && lastDiscard != null && r.isWild(lastDiscard)) b *= 2;
+    if (o.bonusOneColour || o.bonusOneSuit) {
+      final cards = [
+        for (var i = s.tableAtTurnStart; i < s.table.length; i++)
+          if (s.table[i].owner == winner) ...s.table[i].cards,
+        ?lastDiscard,
+      ].where((c) => !r.isWild(c));
+      final suits = cards.map(r.suitOf).toSet();
+      bool red(Suit x) => x == Suit.hearts || x == Suit.diamonds;
+      if (o.bonusOneSuit && suits.length <= 1) {
+        b *= 4;
+      } else if (o.bonusOneColour && (suits.every(red) || !suits.any(red))) {
+        b *= 2;
+      }
+    }
+    return b;
+  }
+
+  /// Points of a round: (each seat's own points, what is added to each
+  /// seat's total). [winner] null: a void round.
+  static (List<int>, List<int>) roundPoints(RummyState s, int? winner, {required bool handFinish, int bonus = 1}) {
+    final o = s.options;
+    final n = s.playerCount;
+    final own = List.filled(n, 0);
+    if (winner == null) return (own, List.filled(n, 0));
+    final mult = handFinish ? o.handMultiplier * bonus : 1;
+    int penalty(int p) => s.opened[p] ? s.handPenalty(p) : o.notOpenedPenalty;
+    for (final p in s.activeSeats) {
+      if (p != winner) own[p] = penalty(p) * mult;
+    }
+    own[winner] = handFinish ? o.handWinnerScore * bonus : o.winnerScore;
+    if (!o.partnership) return (own, List.of(own));
+    final partner = (winner + 2) % n;
+    own[partner] = o.partnerOfWinnerPays ? penalty(partner) : 0;
+    final team = [0, 0];
+    for (var p = 0; p < n; p++) {
+      team[p % 2] += own[p];
+    }
+    return (own, [for (var p = 0; p < n; p++) team[p % 2]]);
+  }
+
+  void _endRound(RummyState s, int? winner, List<CardEvent>? ev, {PlayingCard? lastDiscard}) {
+    final o = s.options;
+    final full = winner != null && !s.openAtTurnStart && (!o.fullHandOwnMeldsOnly || !s.usedOldMelds);
+    final bonus = full ? bonusFactor(s, winner, lastDiscard) : 1;
+    final (own, pts) = roundPoints(s, winner, handFinish: full, bonus: bonus);
+    bool counted;
+    if (winner != null) {
+      counted = true;
+      s.voidStreak = 0;
+    } else {
+      s.voidStreak++;
+      counted = o.voidRoundsCount || s.voidStreak >= RummyOptions.maxVoidRepeats;
+      if (counted) s.voidStreak = 0;
+    }
     for (var i = 0; i < pts.length; i++) {
       s.seatScores[i] += pts[i];
     }
-    s.results.add(RummyRoundResult(winner: winner, handFinish: handFinish, points: pts));
-    ev?.add(CardEvent(CardEventType.roundScored, seat: winner, detail: handFinish ? 'hand' : null));
-    final o = s.options;
-    final done = o.matchEnd == RummyMatchEnd.rounds
-        ? s.results.length >= o.rounds
-        : s.seatScores.any((x) => x >= o.targetScore);
-    if (done) {
+    final out = <int>[];
+    if (winner != null && o.matchEnd == RummyMatchEnd.elimination) {
+      final number = s.roundsPlayed + 1;
+      for (final p in s.activeSeats) {
+        if (s.seatScores[p] > o.eliminationScore) {
+          s.eliminated[p] = true;
+          s.eliminatedAt[p] = number;
+          out.add(p);
+        }
+      }
+    }
+    s.results.add(
+      RummyRoundResult(
+        winner: winner,
+        handFinish: full,
+        points: pts,
+        seatPoints: own,
+        counted: counted,
+        multiplier: bonus,
+        eliminated: out,
+      ),
+    );
+    ev?.add(
+      CardEvent(
+        CardEventType.roundScored,
+        seat: winner,
+        value: bonus,
+        detail: winner == null ? 'void' : (full ? 'hand' : null),
+      ),
+    );
+    for (final p in out) {
+      ev?.add(CardEvent(CardEventType.playerFinished, seat: p, detail: 'eliminated'));
+    }
+    if (counted && _matchEnds(s)) {
       s.over = true;
       s.phase = RummyPhase.over;
       ev?.add(const CardEvent(CardEventType.matchOver));
       return;
     }
-    s.dealer = (s.dealer + 1) % s.playerCount;
+    if (winner != null) s.dealer = nextDealer(s, own);
     s.dealFromRng();
-    ev?.add(CardEvent(CardEventType.dealt, seat: s.dealer));
+    ev?.add(CardEvent(CardEventType.dealt, seat: s.dealer, cards: [?s.indicator]));
+  }
+
+  /// Whether the match is over after a counted round (starting an extra
+  /// round when players tie for the lowest total).
+  static bool _matchEnds(RummyState s) {
+    final o = s.options;
+    if (o.matchEnd == RummyMatchEnd.elimination) return s.activeSeats.length <= 1;
+    final reached =
+        s.tieBreakRounds > 0 ||
+        (o.matchEnd == RummyMatchEnd.rounds ? s.roundsPlayed >= o.rounds : s.seatScores.any((x) => x >= o.targetScore));
+    if (!reached) return false;
+    if (o.tieBreak == RummyTieBreak.shared || s.tieBreakRounds >= o.maxTieBreakRounds) return true;
+    final best = s.seatScores.reduce(math.min);
+    final teams = {
+      for (var i = 0; i < s.playerCount; i++)
+        if (s.seatScores[i] == best) s.teamOf(i),
+    };
+    if (teams.length <= 1) return true;
+    s.tieBreakRounds++;
+    return false;
+  }
+
+  /// Dealer of the next round after a scored round with seat points [own].
+  static int nextDealer(RummyState s, List<int> own) {
+    if (s.options.dealerRule == RummyDealerRule.rotate) return s.nextActive(s.dealer);
+    final active = s.activeSeats;
+    final worst = active.map((p) => own[p]).reduce(math.max);
+    final tied = active.where((p) => own[p] == worst).toSet();
+    if (tied.contains(s.dealer)) return s.dealer;
+    for (var i = 1; i <= s.playerCount; i++) {
+      final p = (s.dealer + i) % s.playerCount;
+      if (tied.contains(p)) return p;
+    }
+    return s.nextActive(s.dealer);
   }
 }
 

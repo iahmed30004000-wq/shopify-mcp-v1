@@ -210,11 +210,15 @@ class NotificationHistory {
     return NotificationHistory(list);
   }
 
-  /// Not yet dealt with and arrived after [seenAt] (when the user last
-  /// looked at the Recent tab), up to [now].
+  /// Not yet dealt with and arrived – or first recorded – after [seenAt]
+  /// (when the user last looked at the Recent tab), up to [now].
   List<HistoryEntry> unread({required DateTime seenAt, required DateTime now}) => [
     for (final e in entries)
-      if (!e.hidden && !e.status.handled && e.at.isAfter(seenAt) && !e.at.isAfter(now)) e,
+      if (!e.hidden &&
+          !e.status.handled &&
+          (e.at.isAfter(seenAt) || e.recordedAt.isAfter(seenAt)) &&
+          !e.at.isAfter(now))
+        e,
   ];
 
   static int _newestFirst(HistoryEntry a, HistoryEntry b) {

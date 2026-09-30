@@ -4,6 +4,7 @@
 library;
 
 import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
 
@@ -40,20 +41,38 @@ abstract final class SearchScoring {
   static const double subtitleWeight = 1.6;
   static const double bodyWeight = 1.0;
 
-  /// A word found only once its article is taken off («كتاب» in «الكتاب»).
+  /// A word found only in a derived form: without its article («كتاب» in
+  /// «الكتاب»), without a conjunction or preposition («حليب» in «وحليب»),
+  /// or as part of a compound name.
   static const double derivedFactor = 0.85;
 
   static const double exact = 1.0;
+
+  /// The query word without its article («الكتاب» → «كتاب»).
   static const double stem = 0.9;
+
+  /// The query word without a conjunction or preposition («وسارة» →
+  /// «سارة»): lower, since the letter may belong to the word («بطاقة» is
+  /// not «ب» + «طاقة»).
+  static const double procliticStem = 0.7;
 
   /// A prefix scores between [prefixMin] and [prefixMin] + [prefixRange]
   /// (closer to a whole word scores more).
   static const double prefixMin = 0.55;
   static const double prefixRange = 0.3;
-  static const double typo = 0.5;
-  static const double prefixTypo = 0.4;
 
-  /// Words at least this long tolerate one typo.
+  /// A taa marbuta written ت before an ending («زوجة» → «زوجتي»).
+  static const double taa = 0.75;
+
+  /// The query leaves out a hamza the word has («قراه» → «قراءه»).
+  static const double looseHamza = 0.95;
+
+  /// One typo. Records that need a typo for any word always rank after
+  /// records that hold every word exactly or by prefix.
+  static const double typo = 0.3;
+  static const double prefixTypo = 0.25;
+
+  /// Words at least this long (without their article) tolerate one typo.
   static const int typoMinLength = 5;
 
   /// Rarity bonus per word: `1 + idfWeight · ln(1 + N / df)`.
@@ -63,6 +82,10 @@ abstract final class SearchScoring {
   static const double titleStartBoost = 1.25;
   static const double titlePhraseBoost = 1.4;
   static const double phraseBoost = 1.2;
+
+  /// The word spelled as typed where the folding merges two spellings (ي /
+  /// ى, ه / ة): «علي» (Ali) before «على» (on).
+  static const double spellingBonus = 1.15;
 
   /// Recent (or soon due) records: `1 + recencyBoost · e^(−days / recencyDays)`.
   static const double recencyBoost = 0.3;
@@ -76,77 +99,211 @@ abstract final class SearchScoring {
     final days = (nowMs - dateMs).abs() / Duration.millisecondsPerDay;
     return 1 + recencyBoost * math.exp(-days / recencyDays);
   }
+
+  static double prefix(int typed, int length) => prefixMin + prefixRange * typed / length;
 }
 
 class _Entry {
-  _Entry(this.doc, this.terms, this.dateMs, this.bytes);
+  _Entry(this.doc, this.terms, this.slots, this.dateMs, this.bytes);
 
   final SearchDoc doc;
 
-  /// Every term posted for the record (to take them back out).
+  /// Every term posted for the record (to take them back out) …
   final List<String> terms;
+
+  /// … and where its posting sits in each term's list (kept up to date as
+  /// postings move), so a record leaves in time proportional to its own
+  /// words, never to the length of the lists it is in.
+  final Int32List slots;
   final int? dateMs;
   final int bytes;
 }
 
+/// How a query word matched an indexed word: the stretch of the indexed
+/// word (folded coordinates), the quality, and whether it took a typo.
+typedef _Match = (int, int, double, bool);
+
 /// A query word and the forms it may take in the index.
 class _QueryTerm {
-  _QueryTerm(this.term)
-    : stem = SearchText.stem(term),
-      typoTolerant = term.length >= SearchScoring.typoMinLength && !_digits.hasMatch(term);
+  _QueryTerm(this.term, {int hamzaAlefs = 0, this.ending = 0, this.literal = false, this.prefix = true})
+    : hamza = SearchText.hasHamza(term),
+      articleStem = SearchText.stem(term, hamzaAlefs: hamzaAlefs),
+      stems = _stemsOf(term, hamzaAlefs) {
+    core = articleStem ?? term;
+    typoTolerant = !literal && core.length >= SearchScoring.typoMinLength && !_digits.hasMatch(core);
+    taaForms = literal
+        ? const []
+        : [
+            for (final base in [term, for (final (s, _) in stems) s])
+              if (base.length >= 3 && base.codeUnitAt(base.length - 1) == 0x0647 && SearchText.isArabic(base.codeUnitAt(0)))
+                '${base.substring(0, base.length - 1)}ت',
+          ];
+  }
+
+  factory _QueryTerm.of(SearchToken t, {bool literal = false, bool prefix = true}) =>
+      _QueryTerm(t.term, hamzaAlefs: t.hamzaAlefs, ending: t.ending, literal: literal, prefix: prefix);
 
   static final RegExp _digits = RegExp('[0-9]');
 
+  static List<(String, double)> _stemsOf(String term, int hamzaAlefs) {
+    final s = SearchText.stem(term, hamzaAlefs: hamzaAlefs);
+    if (s != null) return [(s, SearchScoring.stem)];
+    return [for (final p in SearchText.proclitics(term)) (p, SearchScoring.procliticStem)];
+  }
+
   final String term;
-  final String? stem;
+
+  /// How the word's last letter was typed (see [SearchToken.ending]).
+  final int ending;
+
+  /// Quoted: only the word itself or its article-less form, no typo.
+  final bool literal;
+
+  /// Whether it may match the start of a longer word (every word, except
+  /// quoted ones – the last word of a quote still being typed may).
+  final bool prefix;
+
+  /// Typed with a hamza: only words with it match.
+  final bool hamza;
+
+  final String? articleStem;
+
+  /// The word without its article, or without a leading conjunction /
+  /// preposition, with the quality of such a match.
+  final List<(String, double)> stems;
+
+  /// The word typo tolerance is judged on: without its article («الصوم» is
+  /// a three-letter word, so never «اليوم» or «النوم»).
+  late final String core;
 
   /// Long words tolerate a typo; numbers and codes never do («2025» must
   /// not find «2026»).
-  final bool typoTolerant;
+  late final bool typoTolerant;
 
-  /// Which stretch of the indexed word [t] this query word matches, in
-  /// folded coordinates, with its quality; null when it does not.
-  (int, int, double)? match(String t, {bool allowPrefix = true}) {
-    if (t == term) return (0, t.length, SearchScoring.exact);
-    final s = stem;
-    if (s != null && t == s) return (0, t.length, SearchScoring.stem);
-    final ts = SearchText.stem(t);
-    if (ts != null && (ts == term || ts == s)) return (t.length - ts.length, t.length, SearchScoring.stem);
-    if (allowPrefix) {
-      if (t.length > term.length && t.startsWith(term)) {
-        return (0, term.length, SearchScoring.prefixMin + SearchScoring.prefixRange * term.length / t.length);
-      }
-      if (ts != null && ts.length > term.length && ts.startsWith(term)) {
-        final off = t.length - ts.length;
-        return (off, off + term.length, SearchScoring.prefixMin);
+  /// Forms with a final ه (from ة) written ت, as before an ending.
+  late final List<String> taaForms;
+
+  /// Whether this word can match [t] without a typo at all: every such
+  /// match has one of its forms inside [t] (a quick test that spares
+  /// working out [t]'s other forms for most words of a text).
+  bool _mayOccurIn(String t) {
+    if (t.contains(term)) return true;
+    for (final (s, _) in stems) {
+      if (t.contains(s)) return true;
+    }
+    for (final a in taaForms) {
+      if (t.contains(a)) return true;
+    }
+    return !hamza && SearchText.hasHamza(t) && SearchText.dropHamza(t).contains(term);
+  }
+
+  /// Which stretch of the indexed word [t] (written with [hamzaAlefs], see
+  /// [SearchToken.hamzaAlefs]) this query word matches, in folded
+  /// coordinates, with its quality and whether it took a typo; null when it
+  /// does not.
+  _Match? match(String t, {int hamzaAlefs = 0, bool allowPrefix = true}) {
+    final n = term.length;
+    if (t == term) return (0, t.length, SearchScoring.exact, false);
+    for (final (s, q) in stems) {
+      if (t == s) return (0, t.length, q, false);
+    }
+    // Typos: [t] and its other forms are never longer than [t].
+    final typoPossible = typoTolerant && t.length + 1 >= core.length;
+    if (!typoPossible && !_mayOccurIn(t)) return null;
+    final forms = SearchText.variants(t, hamzaAlefs: hamzaAlefs);
+    for (final (v, off) in forms) {
+      if (v == term) return (off, off + v.length, SearchScoring.stem, false);
+      for (final (s, q) in stems) {
+        if (v == s) return (off, off + v.length, q, false);
       }
     }
-    if (typoTolerant) {
-      if ((t.length - term.length).abs() <= 1 && SearchText.withinOneEdit(term, t)) {
-        return (0, t.length, SearchScoring.typo);
+    final loose = !hamza && SearchText.hasHamza(t) ? SearchText.dropHamza(t) : null;
+    if (loose == term) return (0, t.length, SearchScoring.looseHamza, false);
+    final prefixOk = allowPrefix && prefix;
+    if (prefixOk) {
+      if (t.length > n && t.startsWith(term)) return (0, n, SearchScoring.prefix(n, t.length), false);
+      for (final (v, off) in forms) {
+        if (v.length > n && v.startsWith(term)) return (off, off + n, SearchScoring.prefixMin, false);
       }
-      if (allowPrefix && t.length > term.length + 1 && SearchText.prefixWithinOneEdit(term, t)) {
-        return (0, math.min(t.length, term.length), SearchScoring.prefixTypo);
+      for (final (s, q) in stems) {
+        if (s.length < SearchText.minStemLength) continue;
+        if (t.length > s.length && t.startsWith(s)) return (0, s.length, SearchScoring.prefixMin * q, false);
+        for (final (v, off) in forms) {
+          if (v.length > s.length && v.startsWith(s)) return (off, off + s.length, SearchScoring.prefixMin * q, false);
+        }
+      }
+      if (loose != null && loose.length > n && loose.startsWith(term)) {
+        return (0, _hamzaPrefixEnd(t, n), SearchScoring.prefixMin, false);
+      }
+    }
+    for (final a in taaForms) {
+      if (_taaMatch(t, a)) return (0, a.length, SearchScoring.taa, false);
+      for (final (v, off) in forms) {
+        if (_taaMatch(v, a)) return (off, off + a.length, SearchScoring.taa, false);
+      }
+    }
+    if (typoPossible) {
+      final w = core;
+      final m = _typo(w, t, 0, prefixOk);
+      if (m != null) return m;
+      for (final (v, off) in forms) {
+        final mv = _typo(w, v, off, prefixOk);
+        if (mv != null) return mv;
       }
     }
     return null;
   }
+
+  static _Match? _typo(String w, String x, int off, bool prefixOk) {
+    final d = x.length - w.length;
+    if (d >= -1 && d <= 1) {
+      if (x != w && SearchText.withinOneEdit(w, x)) return (off, off + x.length, SearchScoring.typo, true);
+    } else if (prefixOk && d > 1 && SearchText.prefixWithinOneEdit(w, x)) {
+      return (off, off + math.min(x.length, w.length), SearchScoring.prefixTypo, true);
+    }
+    return null;
+  }
+
+  /// Where the first [n] hamza-free letters of [t] end.
+  static int _hamzaPrefixEnd(String t, int n) {
+    var seen = 0;
+    for (var i = 0; i < t.length; i++) {
+      if (t.codeUnitAt(i) == SearchText.hamza) continue;
+      if (++seen == n) return i + 1;
+    }
+    return t.length;
+  }
+
+  static bool _taaMatch(String x, String a) =>
+      x.length > a.length && x.startsWith(a) && SearchText.taaSuffixes.contains(x.substring(a.length));
 }
 
 /// The parsed query: its words in order and the quoted phrases.
 class _ParsedQuery {
   _ParsedQuery(this.words, this.phrases, this.folded);
 
+  /// Quotes: straight, curly, and Arabic guillemets.
+  static final RegExp _quotes = RegExp('["“”«»„‟]');
+
   factory _ParsedQuery.parse(String text) {
     final words = <_QueryTerm>[];
     final phrases = <List<_QueryTerm>>[];
-    final parts = text.split(RegExp('["“”]'));
+    final parts = text.split(_quotes);
+    // An odd number of parts: every quote is closed.
+    final unclosed = parts.length.isEven;
     for (var i = 0; i < parts.length; i++) {
-      final terms = [for (final t in SearchText.tokenize(parts[i], maxTokens: 12)) _QueryTerm(t.term)];
+      final quoted = i.isOdd;
+      final tokens = SearchText.tokenize(parts[i], maxTokens: 12);
+      final lastOpen = quoted && unclosed && i == parts.length - 1;
+      final terms = [
+        for (var k = 0; k < tokens.length; k++)
+          _QueryTerm.of(tokens[k], literal: quoted, prefix: !quoted || (lastOpen && k == tokens.length - 1)),
+      ];
       words.addAll(terms);
-      if (i.isOdd && terms.length > 1) phrases.add(terms);
+      if (quoted && terms.length > 1) phrases.add(terms);
     }
-    return _ParsedQuery(words.take(12).toList(), phrases, words.map((w) => w.term).join(' '));
+    final kept = words.take(12).toList();
+    return _ParsedQuery(kept, phrases, kept.map((w) => w.term).join(' '));
   }
 
   /// Words in the order typed (duplicates kept for phrase checks).
@@ -158,14 +315,25 @@ class _ParsedQuery {
   /// The folded query (`words` joined by spaces).
   final String folded;
 
-  /// Distinct words.
+  /// Distinct words (a word typed both quoted and not counts as quoted).
   List<_QueryTerm> get distinct {
-    final seen = <String>{};
-    return [
-      for (final w in words)
-        if (seen.add(w.term)) w,
-    ];
+    final byTerm = <String, _QueryTerm>{};
+    for (final w in words) {
+      final seen = byTerm[w.term];
+      if (seen == null || (w.literal && !seen.literal)) byTerm[w.term] = w;
+    }
+    return byTerm.values.toList();
   }
+}
+
+/// One query word's matches: a score per record id (0 = none), whether the
+/// record needed a typo for it, and the ids matched.
+class _WordHits {
+  _WordHits(int size) : score = Float64List(size), typo = Uint8List(size);
+
+  final Float64List score;
+  final Uint8List typo;
+  final List<int> ids = [];
 }
 
 /// In-memory inverted index with Arabic-aware folding, prefix and typo
@@ -174,10 +342,11 @@ class _ParsedQuery {
 ///
 /// Every record's title, subtitle and body are folded into terms (see
 /// [SearchText]); each term keeps a posting list of `(record, fields)`.
-/// Words with an Arabic article are also posted without it («الكتاب» →
-/// «كتاب»), marked as derived. Terms are bucketed by their first one and
-/// two letters so prefix and typo expansion only scans words that can
-/// match.
+/// Words are also posted in their other forms, marked as derived: without
+/// their article («الكتاب» → «كتاب»), without a leading conjunction or
+/// preposition («وحليب» → «حليب»), a compound name joined or split («عبد
+/// الله» ↔ «عبدالله»). Terms are bucketed by their first one and two
+/// letters so prefix and typo expansion only scans words that can match.
 class SearchIndex {
   SearchIndex({this.limits = const SearchIndexLimits(), DateTime Function()? clock}) : _clock = clock ?? DateTime.now;
 
@@ -194,10 +363,16 @@ class SearchIndex {
   int _bytes = 0;
   int _evicted = 0;
 
+  /// Records dropped at the cap and not removed since: key → date.
+  final Map<String, int?> _dropped = {};
+
   // Field flags of a posting: bits 0–2 = the term is a word of the title /
-  // subtitle / body; bits 4–6 = only its article-less form is.
+  // subtitle / body; bits 4–6 = only a derived form is; bit 3 / bit 7 = the
+  // word ends in ي / ه (bit 3) or in ى / ة (bit 7) as written.
   static const int _flagBits = 8;
   static const int _flagMask = (1 << _flagBits) - 1;
+  static const int _plainEnding = 8;
+  static const int _markedEnding = 128;
   static final List<double> _fieldWeight = List<double>.generate(1 << _flagBits, (f) {
     var w = 0.0;
     if (f & 1 != 0) w = math.max(w, SearchScoring.titleWeight);
@@ -245,7 +420,10 @@ class SearchIndex {
   }
 
   /// Removes the record with [indexKey]; whether it was there.
-  bool remove(String indexKey) => _remove(indexKey);
+  bool remove(String indexKey) {
+    _dropped.remove(indexKey);
+    return _remove(indexKey);
+  }
 
   /// Drops every record of [sourceId].
   void clearSource(String sourceId) {
@@ -255,6 +433,7 @@ class SearchIndex {
         if (k.startsWith(prefix)) k,
     ];
     keys.forEach(_remove);
+    _dropped.removeWhere((k, _) => k.startsWith(prefix));
   }
 
   /// Empties the index.
@@ -265,6 +444,7 @@ class SearchIndex {
     _postings.clear();
     _byFirst.clear();
     _byFirstTwo.clear();
+    _dropped.clear();
     _postingCount = 0;
     _bytes = 0;
   }
@@ -282,16 +462,27 @@ class SearchIndex {
             body: _cut(raw.body, limits.maxBodyChars),
           )
         : raw;
+    _dropped.remove(doc.indexKey);
     final flags = <String, int>{};
     var budget = limits.maxTokensPerDoc;
     void field(String text, int bit) {
       if (text.isEmpty || budget <= 0) return;
       final tokens = SearchText.tokenize(text, maxTokens: budget);
       budget -= tokens.length;
-      for (final t in tokens) {
-        flags[t.term] = (flags[t.term] ?? 0) | bit;
-        final s = SearchText.stem(t.term);
-        if (s != null) flags[s] = (flags[s] ?? 0) | (bit << 4);
+      final derived = bit << 4;
+      for (var i = 0; i < tokens.length; i++) {
+        final t = tokens[i];
+        var f = bit;
+        if (t.ending == SearchText.endingPlain) f |= _plainEnding;
+        if (t.ending == SearchText.endingMarked) f |= _markedEnding;
+        flags[t.term] = (flags[t.term] ?? 0) | f;
+        for (final (v, _) in SearchText.variants(t.term, hamzaAlefs: t.hamzaAlefs)) {
+          flags[v] = (flags[v] ?? 0) | derived;
+        }
+        if (i + 1 < tokens.length) {
+          final joined = SearchText.compound(t.term, tokens[i + 1].term);
+          if (joined != null) flags[joined] = (flags[joined] ?? 0) | derived;
+        }
       }
     }
 
@@ -306,18 +497,22 @@ class SearchIndex {
       id = _entries.length;
       _entries.add(null);
     }
-    for (final MapEntry(key: term, value: f) in flags.entries) {
+    final terms = flags.keys.toList(growable: false);
+    final slots = Int32List(terms.length);
+    for (var k = 0; k < terms.length; k++) {
+      final term = terms[k];
       var list = _postings[term];
       if (list == null) {
         list = _postings[term] = <int>[];
         _bucketAdd(term);
       }
-      list.add(id << _flagBits | f);
+      slots[k] = list.length;
+      list.add(id << _flagBits | flags[term]!);
     }
-    _postingCount += flags.length;
+    _postingCount += terms.length;
     final bytes = 2 * (doc.title.length + doc.subtitle.length + doc.body.length + doc.id.length + doc.refId.length) + 96;
     _bytes += bytes;
-    _entries[id] = _Entry(doc, flags.keys.toList(growable: false), doc.date?.millisecondsSinceEpoch, bytes);
+    _entries[id] = _Entry(doc, terms, slots, doc.date?.millisecondsSinceEpoch, bytes);
     _byKey[doc.indexKey] = id;
   }
 
@@ -325,15 +520,23 @@ class SearchIndex {
     final id = _byKey.remove(key);
     if (id == null) return false;
     final e = _entries[id]!;
-    for (final term in e.terms) {
+    for (var k = 0; k < e.terms.length; k++) {
+      final term = e.terms[k];
       final list = _postings[term];
       if (list == null) continue;
-      for (var i = 0; i < list.length; i++) {
-        if (list[i] >> _flagBits == id) {
-          list[i] = list.last;
-          list.removeLast();
-          _postingCount--;
-          break;
+      final at = e.slots[k];
+      final last = list.removeLast();
+      _postingCount--;
+      if (at < list.length) {
+        // The last posting fills the hole: tell its record where it went.
+        list[at] = last;
+        final moved = _entries[last >> _flagBits]!;
+        final mt = moved.terms;
+        for (var j = 0; j < mt.length; j++) {
+          if (identical(mt[j], term) || mt[j] == term) {
+            moved.slots[j] = at;
+            break;
+          }
         }
       }
       if (list.isEmpty) {
@@ -366,6 +569,8 @@ class SearchIndex {
 
   /// Keeps the index inside [SearchIndexLimits.maxDocs]: drops the oldest
   /// dated records first (then undated ones), down to 95 % of the limit.
+  /// Dropped records are remembered, so they come back (see
+  /// [SearchIndexStats.readmit]) once removals make room again.
   void _enforceLimits() {
     if (_byKey.length <= limits.maxDocs) return;
     final target = (limits.maxDocs * 0.95).floor();
@@ -383,7 +588,9 @@ class SearchIndex {
     });
     var i = 0;
     while (_byKey.length > target && i < live.length) {
-      _remove(_entries[live[i++]]!.doc.indexKey);
+      final e = _entries[live[i++]]!;
+      _remove(e.doc.indexKey);
+      _dropped[e.doc.indexKey] = e.dateMs;
       _evicted++;
     }
   }
@@ -404,75 +611,159 @@ class SearchIndex {
       docs: _byKey.length,
       terms: _postings.length,
       postings: _postingCount,
-      approxBytes: _bytes + termBytes + 8 * _postingCount + 16 * _entries.length,
+      approxBytes: _bytes + termBytes + 12 * _postingCount + 16 * _entries.length,
       evicted: _evicted,
       docsBySource: bySource,
+      readmit: readmit,
     );
   }
 
-  /// Every indexed term [q] may stand for, with the match quality.
-  Map<String, double> _expand(_QueryTerm q) {
-    final out = <String, double>{};
-    void put(String t, double w) {
-      if ((out[t] ?? 0) < w) out[t] = w;
+  /// Keys of dropped records that fit again, newest first.
+  List<String> get readmit {
+    // Up to the level eviction leaves (95 %), so a full index doesn't churn.
+    final room = (limits.maxDocs * 0.95).floor() - _byKey.length;
+    if (_dropped.isEmpty || room <= 0) return const [];
+    final keys = _dropped.keys.toList()
+      ..sort((a, b) {
+        final da = _dropped[a], db = _dropped[b];
+        if (da == null && db == null) return 0;
+        if (da == null) return -1;
+        if (db == null) return 1;
+        return db.compareTo(da);
+      });
+    return keys.length <= room ? keys : keys.sublist(0, room);
+  }
+
+  /// Every indexed term [q] may stand for, with the match quality: the
+  /// exact, article-less, prefix, hamza-less and taa forms, and apart,
+  /// the typo forms.
+  (Map<String, double>, Map<String, double>) _expand(_QueryTerm q) {
+    final strict = <String, double>{};
+    final typos = <String, double>{};
+    void put(Map<String, double> m, String t, double w) {
+      if ((m[t] ?? 0) < w) m[t] = w;
     }
 
     final term = q.term;
-    if (_postings.containsKey(term)) put(term, SearchScoring.exact);
-    final s = q.stem;
-    if (s != null && _postings.containsKey(s)) put(s, SearchScoring.stem);
-    final Set<String>? bucket;
-    if (q.typoTolerant || term.length < 2) {
-      bucket = _byFirst[term.codeUnitAt(0)];
-    } else {
-      bucket = _byFirstTwo[_two(term)];
-    }
-    if (bucket == null) return out;
     final n = term.length;
-    for (final t in bucket) {
-      if (t.length > n && t.startsWith(term)) {
-        put(t, SearchScoring.prefixMin + SearchScoring.prefixRange * n / t.length);
-      } else if (q.typoTolerant) {
-        final d = t.length - n;
-        if (d >= -1 && d <= 1) {
-          if (t != term && SearchText.withinOneEdit(term, t)) put(t, SearchScoring.typo);
-        } else if (d > 1 && SearchText.prefixWithinOneEdit(term, t)) {
-          put(t, SearchScoring.prefixTypo);
+    if (_postings.containsKey(term)) put(strict, term, SearchScoring.exact);
+    for (final (s, quality) in q.stems) {
+      if (_postings.containsKey(s)) put(strict, s, quality);
+    }
+    if (q.prefix) {
+      final bucket = n >= 2 ? _byFirstTwo[_two(term)] : _byFirst[term.codeUnitAt(0)];
+      if (bucket != null) {
+        for (final t in bucket) {
+          if (t.length > n && t.startsWith(term)) {
+            put(strict, t, SearchScoring.prefix(n, t.length));
+          } else if (!q.hamza && t.length >= n && SearchText.hasHamza(t)) {
+            final loose = SearchText.dropHamza(t);
+            if (loose == term) {
+              put(strict, t, SearchScoring.looseHamza);
+            } else if (loose.length > n && loose.startsWith(term)) {
+              put(strict, t, SearchScoring.prefix(n, loose.length));
+            }
+          }
+        }
+      }
+      // Typing a word with its article or a preposition: «المستش» already
+      // finds «مستشفى» and «بالمستشفى».
+      for (final (s, quality) in q.stems) {
+        if (s.length < SearchText.minStemLength) continue;
+        final b = _byFirstTwo[_two(s)];
+        if (b == null) continue;
+        for (final t in b) {
+          if (t.length > s.length && t.startsWith(s)) put(strict, t, SearchScoring.prefix(s.length, t.length) * quality);
+        }
+      }
+    }
+    for (final a in q.taaForms) {
+      final b = _byFirstTwo[_two(a)];
+      if (b == null) continue;
+      for (final t in b) {
+        if (_QueryTerm._taaMatch(t, a)) put(strict, t, SearchScoring.taa);
+      }
+    }
+    if (q.typoTolerant) {
+      final w = q.core;
+      final bucket = _byFirst[w.codeUnitAt(0)];
+      if (bucket != null) {
+        final wn = w.length;
+        for (final t in bucket) {
+          if (strict.containsKey(t)) continue;
+          final d = t.length - wn;
+          if (d >= -1 && d <= 1) {
+            if (t != w && SearchText.withinOneEdit(w, t)) put(typos, t, SearchScoring.typo);
+          } else if (d > 1 && q.prefix && SearchText.prefixWithinOneEdit(w, t)) {
+            put(typos, t, SearchScoring.prefixTypo);
+          }
+        }
+      }
+    }
+    return (strict, typos);
+  }
+
+  /// Best score of each record for one query word.
+  _WordHits _scoreWord(_QueryTerm q, int size) {
+    final out = _WordHits(size);
+    final score = out.score;
+    final typo = out.typo;
+    final ids = out.ids;
+    final docs = _byKey.length;
+    final (strict, typos) = _expand(q);
+    // The spelling typed, where the folding merges two (ي / ى, ه / ة).
+    final spelled = switch (q.ending) {
+      SearchText.endingPlain => _plainEnding,
+      SearchText.endingMarked => _markedEnding,
+      _ => 0,
+    };
+    for (final MapEntry(key: term, value: quality) in strict.entries) {
+      final list = _postings[term]!;
+      final idf = 1 + SearchScoring.idfWeight * math.log(1 + docs / list.length);
+      final base = quality * idf;
+      final spelling = spelled != 0 && term == q.term;
+      for (final p in list) {
+        final id = p >> _flagBits;
+        var s = base * _fieldWeight[p & _flagMask];
+        if (spelling && p & spelled != 0) s *= SearchScoring.spellingBonus;
+        final prev = score[id];
+        if (prev == 0) ids.add(id);
+        if (s > prev) score[id] = s;
+      }
+    }
+    for (final MapEntry(key: term, value: quality) in typos.entries) {
+      final list = _postings[term]!;
+      final idf = 1 + SearchScoring.idfWeight * math.log(1 + docs / list.length);
+      final base = quality * idf;
+      for (final p in list) {
+        final id = p >> _flagBits;
+        final s = base * _fieldWeight[p & _flagMask];
+        final prev = score[id];
+        if (prev == 0) {
+          ids.add(id);
+          typo[id] = 1;
+          score[id] = s;
+        } else if (typo[id] == 1 && s > prev) {
+          score[id] = s;
         }
       }
     }
     return out;
   }
 
-  /// Best score of each record for one query word.
-  Map<int, double> _scoreWord(_QueryTerm q) {
-    final scores = <int, double>{};
-    final n = _byKey.length;
-    for (final MapEntry(key: term, value: quality) in _expand(q).entries) {
-      final list = _postings[term]!;
-      final idf = 1 + SearchScoring.idfWeight * math.log(1 + n / list.length);
-      final base = quality * idf;
-      for (final p in list) {
-        final id = p >> _flagBits;
-        final s = base * _fieldWeight[p & _flagMask];
-        final prev = scores[id];
-        if (prev == null || s > prev) scores[id] = s;
-      }
-    }
-    return scores;
-  }
-
   /// Searches the index.
   ///
-  /// Every word must match somewhere (exactly, without its article, as the
-  /// start of a word, or – for words of 5+ letters – with one typo); when no
+  /// Every word must match somewhere (exactly, without its article or a
+  /// leading conjunction / preposition, as the start of a word, or – for
+  /// words of 5+ letters without their article – with one typo); when no
   /// record holds them all, the records holding the most words are returned
-  /// and [SearchIndexResult.partial] is set. Words in "quotes" must appear
-  /// together. A record's score adds up each word's best field (title >
-  /// subtitle > body) times its match quality and rarity, is boosted for an
-  /// exact title, a title starting with the query and the words appearing
-  /// as a phrase, then multiplied by recency, planet weight and source
-  /// weight.
+  /// and [SearchIndexResult.partial] is set. Words in quotes ("…" or «…»)
+  /// are taken literally (no typo, no prefix) and must appear together.
+  /// Records that need a typo rank after those that don't. A record's
+  /// score adds up each word's best field (title > subtitle > body) times
+  /// its match quality and rarity, is boosted for an exact title, a title
+  /// starting with the query and the words appearing as a phrase, then
+  /// multiplied by recency, planet weight and source weight.
   SearchIndexResult search(SearchIndexQuery query) {
     final watch = Stopwatch()..start();
     final parsed = _ParsedQuery.parse(query.text);
@@ -480,52 +771,79 @@ class SearchIndex {
     if (words.isEmpty || _byKey.isEmpty) return SearchIndexResult.empty;
 
     // 1. Each word's matches, then records holding every word.
-    final perWord = [for (final w in words) _scoreWord(w)]..sort((a, b) => a.length.compareTo(b.length));
-    var matched = <int, double>{};
-    for (final MapEntry(key: id, value: s) in perWord.first.entries) {
-      var total = s;
+    final size = _entries.length;
+    final perWord = [for (final w in words) _scoreWord(w, size)]..sort((a, b) => a.ids.length.compareTo(b.ids.length));
+    var ids = <int>[];
+    var sums = <double>[];
+    var typos = <bool>[];
+    final first = perWord.first;
+    for (final id in first.ids) {
+      var total = first.score[id];
+      var typo = first.typo[id] != 0;
       var ok = true;
       for (var i = 1; i < perWord.length; i++) {
-        final v = perWord[i][id];
-        if (v == null) {
+        final w = perWord[i];
+        final v = w.score[id];
+        if (v == 0) {
           ok = false;
           break;
         }
         total += v;
+        if (w.typo[id] != 0) typo = true;
       }
-      if (ok) matched[id] = total;
+      if (ok) {
+        ids.add(id);
+        sums.add(total);
+        typos.add(typo);
+      }
     }
     var partial = false;
-    if (matched.isEmpty && perWord.length > 1) {
-      final count = <int, int>{};
-      final sum = <int, double>{};
-      for (final m in perWord) {
-        for (final MapEntry(key: id, value: s) in m.entries) {
-          count[id] = (count[id] ?? 0) + 1;
-          sum[id] = (sum[id] ?? 0) + s;
+    if (ids.isEmpty && perWord.length > 1) {
+      final count = Uint8List(size);
+      final sum = Float64List(size);
+      final typo = Uint8List(size);
+      final touched = <int>[];
+      var best = 0;
+      for (final w in perWord) {
+        for (final id in w.ids) {
+          if (count[id] == 0) touched.add(id);
+          final c = ++count[id];
+          if (c > best) best = c;
+          sum[id] += w.score[id];
+          if (w.typo[id] != 0) typo[id] = 1;
         }
       }
-      final best = count.values.fold(0, math.max);
       if (best > 0) {
         partial = true;
-        matched = {
-          for (final MapEntry(key: id, value: c) in count.entries)
-            if (c == best) id: sum[id]! * c / perWord.length,
-        };
+        for (final id in touched) {
+          if (count[id] != best) continue;
+          ids.add(id);
+          sums.add(sum[id] * best / perWord.length);
+          typos.add(typo[id] != 0);
+        }
       }
     }
     if (parsed.phrases.isNotEmpty) {
-      matched.removeWhere((id, _) {
-        final d = _entries[id]!.doc;
-        return !parsed.phrases.every((p) => _hasPhrase(d.title, p) || _hasPhrase(d.subtitle, p) || _hasPhrase(d.body, p));
-      });
+      final keptIds = <int>[], keptSums = <double>[], keptTypos = <bool>[];
+      for (var i = 0; i < ids.length; i++) {
+        final d = _entries[ids[i]]!.doc;
+        if (parsed.phrases.every((p) => _hasPhrase(d.title, p) || _hasPhrase(d.subtitle, p) || _hasPhrase(d.body, p))) {
+          keptIds.add(ids[i]);
+          keptSums.add(sums[i]);
+          keptTypos.add(typos[i]);
+        }
+      }
+      ids = keptIds;
+      sums = keptSums;
+      typos = keptTypos;
     }
 
     // 2. Counts for the filter chips (before the filters), then filters.
     final counts = <String, Map<String, int>>{};
     final nowMs = (query.now ?? _clock()).millisecondsSinceEpoch;
-    final ranked = <(int, double)>[];
-    for (final MapEntry(key: id, value: s) in matched.entries) {
+    final ranked = <_Ranked>[];
+    for (var i = 0; i < ids.length; i++) {
+      final id = ids[i];
       final e = _entries[id]!;
       final d = e.doc;
       final byGroup = counts[d.planetKey] ??= <String, int>{};
@@ -533,31 +851,21 @@ class SearchIndex {
       if (query.planets.isNotEmpty && !query.planets.contains(d.planetKey)) continue;
       if (query.groups.isNotEmpty && !query.groups.contains(d.groupKey)) continue;
       final score =
-          s *
+          sums[i] *
           SearchScoring.recencyFactor(e.dateMs, nowMs) *
           SearchScoring.planetFactor(query.planetWeights[d.planetKey] ?? 1) *
           (query.sourceWeights[d.sourceId] ?? 1);
-      ranked.add((id, score));
+      ranked.add(_Ranked(id, score, typos[i], e.dateMs ?? 0));
     }
-    int byScore((int, double) a, (int, double) b) {
-      final c = b.$2.compareTo(a.$2);
-      if (c != 0) return c;
-      final da = _entries[a.$1]!.dateMs ?? 0;
-      final db = _entries[b.$1]!.dateMs ?? 0;
-      return db.compareTo(da);
-    }
-
-    ranked.sort(byScore);
 
     // 3. Title and phrase boosts for the leaders, then the final order.
-    final head = math.min(ranked.length, math.max(query.limit * 3, 240));
-    for (var i = 0; i < head; i++) {
-      final (id, s) = ranked[i];
-      ranked[i] = (id, s * _boost(_entries[id]!.doc, parsed));
+    final head = _top(ranked, math.max(query.limit * 3, 240));
+    for (final r in head) {
+      r.score *= _boost(_entries[r.id]!.doc, parsed);
     }
-    final top = ranked.sublist(0, head)..sort(byScore);
+    head.sort(_Ranked.compare);
     final hits = [
-      for (final (id, s) in top.take(query.limit)) _hit(_entries[id]!.doc, s, words),
+      for (final r in head.take(query.limit)) _hit(_entries[r.id]!.doc, r.score, words),
     ];
     return SearchIndexResult(
       hits: hits,
@@ -566,6 +874,47 @@ class SearchIndex {
       partial: partial,
       elapsedMicros: watch.elapsedMicroseconds,
     );
+  }
+
+  /// The best [k] of [all] (in no particular order), without sorting them
+  /// all: a bounded heap whose root is the weakest kept.
+  static List<_Ranked> _top(List<_Ranked> all, int k) {
+    if (all.length <= k) return List.of(all);
+    final heap = <_Ranked>[];
+    // a before b in the heap: a ranks after b.
+    bool weaker(_Ranked a, _Ranked b) => _Ranked.compare(a, b) > 0;
+    void siftDown(int i) {
+      while (true) {
+        final l = 2 * i + 1, r = l + 1;
+        var m = i;
+        if (l < heap.length && weaker(heap[l], heap[m])) m = l;
+        if (r < heap.length && weaker(heap[r], heap[m])) m = r;
+        if (m == i) return;
+        final t = heap[i];
+        heap[i] = heap[m];
+        heap[m] = t;
+        i = m;
+      }
+    }
+
+    for (final x in all) {
+      if (heap.length < k) {
+        heap.add(x);
+        var i = heap.length - 1;
+        while (i > 0) {
+          final p = (i - 1) >> 1;
+          if (!weaker(heap[i], heap[p])) break;
+          final t = heap[i];
+          heap[i] = heap[p];
+          heap[p] = t;
+          i = p;
+        }
+      } else if (weaker(heap[0], x)) {
+        heap[0] = x;
+        siftDown(0);
+      }
+    }
+    return heap;
   }
 
   double _boost(SearchDoc doc, _ParsedQuery q) {
@@ -600,13 +949,14 @@ class SearchIndex {
   }
 
   /// Whether [words] appear in order from token [at] (the last word may be
-  /// a prefix).
+  /// a prefix; no word may need a typo).
   static bool _sequenceAt(List<SearchToken> tokens, int at, List<_QueryTerm> words) {
     if (at + words.length > tokens.length) return false;
     for (var j = 0; j < words.length; j++) {
       final last = j == words.length - 1;
-      final m = words[j].match(tokens[at + j].term, allowPrefix: last);
-      if (m == null || m.$3 < SearchScoring.typo) return false;
+      final t = tokens[at + j];
+      final m = words[j].match(t.term, hamzaAlefs: t.hamzaAlefs, allowPrefix: last);
+      if (m == null || m.$4) return false;
     }
     return true;
   }
@@ -666,29 +1016,68 @@ class SearchIndex {
 
   /// [highlightTerms] for a query as typed.
   static List<HighlightRange> highlightQuery(String text, String query) =>
-      highlightTerms(text, [for (final t in SearchText.tokenize(query)) t.term]);
+      _highlight(text, _ParsedQuery.parse(query).distinct);
 
   static List<HighlightRange> _highlight(String text, List<_QueryTerm> qs) {
     if (text.isEmpty || qs.isEmpty) return const [];
     final out = <HighlightRange>[];
-    for (final token in SearchText.tokenize(text, withOrigins: true)) {
-      (int, int)? best;
-      for (final q in qs) {
-        final m = q.match(token.term);
-        if (m == null) continue;
-        if (best == null || m.$2 - m.$1 > best.$2 - best.$1) best = (m.$1, m.$2);
-      }
-      if (best == null) continue;
-      final (a, b) = token.rangeOf(best.$1, best.$2);
+    void light(int a, int b) {
       if (out.isNotEmpty && out.last.end >= a) {
         out[out.length - 1] = HighlightRange(out.last.start, math.max(out.last.end, b));
       } else {
         out.add(HighlightRange(a, b));
       }
     }
+
+    final tokens = SearchText.tokenize(text, withOrigins: true);
+    for (var i = 0; i < tokens.length; i++) {
+      final token = tokens[i];
+      (int, int)? best;
+      for (final q in qs) {
+        final m = q.match(token.term, hamzaAlefs: token.hamzaAlefs);
+        if (m == null) continue;
+        if (best == null || m.$2 - m.$1 > best.$2 - best.$1) best = (m.$1, m.$2);
+      }
+      if (best == null) {
+        // A compound name written apart, typed as one word («عبدالله»).
+        if (i + 1 < tokens.length) {
+          final joined = SearchText.compound(token.term, tokens[i + 1].term);
+          if (joined != null && qs.any((q) => q.term == joined || q.stems.any((s) => s.$1 == joined))) {
+            light(token.start, token.end);
+            light(tokens[i + 1].start, tokens[i + 1].end);
+            i++;
+          }
+        }
+        continue;
+      }
+      final (a, b) = token.rangeOf(best.$1, best.$2);
+      light(a, b);
+    }
     return out;
   }
 
   @visibleForTesting
-  Map<String, double> debugExpand(String word) => _expand(_QueryTerm(word));
+  Map<String, double> debugExpand(String word) {
+    final t = SearchText.tokenize(word);
+    final (strict, typos) = _expand(t.isEmpty ? _QueryTerm(word) : _QueryTerm.of(t.first));
+    return {...typos, ...strict};
+  }
+}
+
+/// A record in the ranking: records needing a typo come last, then by
+/// score, then newest first.
+class _Ranked {
+  _Ranked(this.id, this.score, this.typo, this.dateMs);
+
+  final int id;
+  double score;
+  final bool typo;
+  final int dateMs;
+
+  static int compare(_Ranked a, _Ranked b) {
+    if (a.typo != b.typo) return a.typo ? 1 : -1;
+    final c = b.score.compareTo(a.score);
+    if (c != 0) return c;
+    return b.dateMs.compareTo(a.dateMs);
+  }
 }

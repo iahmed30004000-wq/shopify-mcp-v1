@@ -52,7 +52,9 @@ abstract final class CenterLayout {
 
   /// The recent notifications: the history's visible entries (live while
   /// still in the tray) and anything shown the history has not recorded
-  /// yet; newest first. Unread: arrived after [seenAt] and not handled.
+  /// yet; newest first. Unread: not handled, and arrived – or first
+  /// reached the center (an alarm Doze delayed past its moment) – after
+  /// [seenAt].
   static List<CenterItem> recent({
     required NotificationHistory history,
     required Iterable<CenterNotice> active,
@@ -87,7 +89,7 @@ abstract final class CenterLayout {
           notice: e.notice,
           group: groupOf(e.notice),
           state: state,
-          unread: !e.status.handled && isNew(e.at),
+          unread: !e.status.handled && (isNew(e.at) || (e.recordedAt.isAfter(seenAt) && !e.at.isAfter(now))),
           actionId: e.actionId,
           until: e.status == HistoryStatus.snoozed ? policy.snoozed[e.notice.id]?.until : null,
           live: live,

@@ -93,14 +93,17 @@ class WillSendSheet extends StatelessWidget {
               if (ctx.approvedAt != null) ...[
                 const SizedBox(height: Space.s),
                 Text(
-                  l.aiChatContextReviewed(fmt.formatTime(ctx.approvedAt!)),
+                  l.aiChatContextReviewed(_when(fmt, ctx.approvedAt!, clock())),
                   style: text.labelSmall!.copyWith(color: t.textTertiary),
                 ),
               ],
             ],
           );
         } else if (none) {
-          contextBody = Text(l.aiChatContextNoneHint, style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.45));
+          contextBody = Text(
+            l.aiChatContextNoneHint,
+            style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.45),
+          );
         } else {
           contextBody = Text(
             l.aiChatContextUnsetHint,
@@ -123,18 +126,16 @@ class WillSendSheet extends StatelessWidget {
                   children: [
                     Icon(aiServiceIcon(p.request.provider), size: 18, color: t.accent),
                     const SizedBox(width: Space.s),
-                    Expanded(child: Text(serviceModel, style: text.titleSmall!.copyWith(color: t.textPrimary))),
+                    Expanded(
+                      child: Text(serviceModel, style: text.titleSmall!.copyWith(color: t.textPrimary)),
+                    ),
                   ],
                 ),
               ),
               const SizedBox(height: Space.l),
               Text(l.aiChatContextFromSummary, style: text.labelLarge!.copyWith(color: t.textSecondary)),
               const SizedBox(height: Space.s),
-              AnimatedOpacity(
-                duration: const Duration(milliseconds: 200),
-                opacity: none ? 0.6 : 1,
-                child: contextBody,
-              ),
+              AnimatedOpacity(duration: const Duration(milliseconds: 200), opacity: none ? 0.6 : 1, child: contextBody),
               const SizedBox(height: Space.m),
               if (!none)
                 Align(
@@ -156,7 +157,9 @@ class WillSendSheet extends StatelessWidget {
                   children: [
                     Icon(Icons.visibility_off_outlined, size: 18, color: t.textSecondary),
                     const SizedBox(width: Space.m),
-                    Expanded(child: Text(l.aiChatContextNone, style: text.titleSmall!.copyWith(color: t.textPrimary))),
+                    Expanded(
+                      child: Text(l.aiChatContextNone, style: text.titleSmall!.copyWith(color: t.textPrimary)),
+                    ),
                     MadarSwitch(
                       key: noneSwitchKey,
                       value: none,
@@ -171,7 +174,9 @@ class WillSendSheet extends StatelessWidget {
                 children: [
                   Icon(Icons.token_outlined, size: 16, color: t.textTertiary),
                   const SizedBox(width: Space.s),
-                  Expanded(child: Text(counts, style: text.bodySmall!.copyWith(color: t.textSecondary))),
+                  Expanded(
+                    child: Text(counts, style: text.bodySmall!.copyWith(color: t.textSecondary)),
+                  ),
                 ],
               ),
             ],
@@ -199,4 +204,11 @@ class WillSendSheet extends StatelessWidget {
       },
     );
   }
+}
+
+/// "10:30 AM" today, "September 28, 10:30 AM" before.
+String _when(MadarFormatter fmt, DateTime at, DateTime now) {
+  if (at.year == now.year && at.month == now.month && at.day == now.day) return fmt.formatTime(at);
+  final sep = fmt.isArabic ? '، ' : ', ';
+  return '${fmt.formatDate(at, style: MadarDateStyle.dayMonth)}$sep${fmt.formatTime(at)}';
 }

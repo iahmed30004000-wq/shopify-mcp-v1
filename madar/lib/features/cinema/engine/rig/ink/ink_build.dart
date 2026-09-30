@@ -49,14 +49,20 @@ final class InkBuild {
   /// units (100 = a standard character): the era's line width and boil are
   /// specified for that size and scale gently (√) with it, so big bosses get
   /// bolder lines and small props finer ones, as an inker would.
-  void begin(RigPaintContext ctx, {required double size, double lineScale = 1, bool inkTexture = true}) {
+  void begin(
+    RigPaintContext ctx, {
+    required double size,
+    double lineScale = 1,
+    bool? inkTexture,
+    int? boilFrame,
+  }) {
     skin = ctx.skin;
     colors.update(skin);
     final ink = skin.ink;
     final k = math.sqrt((size / 100).clamp(0.12, 6.0));
     lw = ink.lineWidth * k * lineScale;
     amp = ink.boilAmplitude * k;
-    frame = ink.boilFps > 0 ? ctx.clock.boilFrame : 0;
+    frame = ink.boilFps > 0 ? (boilFrame ?? ctx.clock.boilFrame) : 0;
     pixelScale = ctx.pixelScale;
     final off = lw * (0.12 + ink.taper * 0.42);
     pen.reset();
@@ -67,15 +73,19 @@ final class InkBuild {
       neon: colors.neon,
       offsetX: kShadowX * off,
       offsetY: kShadowY * off,
-      glowWidth: colors.neon ? math.max(ink.glow * k, lw * 1.5) : 0,
+      glowWidth: colors.neon ? math.max(ink.glow * k * 0.6, lw * 1.2) : 0,
+      glowMin: lw * 1.7,
+      rim: colors.rim,
       shading: ink.shading,
     );
-    list.setInkTexture(skin, boilFrame: frame, seed: (seed % 97).toDouble(), enabled: inkTexture);
+    // Dry-brush breaks only where the era's ink is really dry (a worn 1970s
+    // print); clean cel ink everywhere else.
+    list.setInkTexture(skin, boilFrame: frame, seed: (seed % 97).toDouble(), enabled: inkTexture ?? ink.dryness > 0.28);
   }
 
   /// Sets the shading ramp across the drawing's local [box] (light at the
   /// top-left, dense at the bottom-right).
-  void shadeAcross(Rect box, {double toneFrom = 0.45, double toneTo = 1}) {
+  void shadeAcross(Rect box, {double toneFrom = 0.18, double toneTo = 0.62}) {
     list.setShading(
       skin,
       box.topLeft,
@@ -132,6 +142,16 @@ final class InkBuild {
   /// Ink line detail (uniform width, round caps).
   Path inkLine(double width) {
     final p = list.detail(InkOp.inkStroke, colors.ink, width);
+    pen.target(p);
+    return p;
+  }
+
+  /// A rim-light line (pale, nudged toward the light) behind the next ink
+  /// line, in eras with a dark backdrop; `null` elsewhere.
+  Path? rimLine(double width) {
+    final rim = list.rimColor;
+    if (rim == null) return null;
+    final p = list.detail(InkOp.rim, rim, width, -list.inkOffsetX * 1.6, -list.inkOffsetY * 1.6);
     pen.target(p);
     return p;
   }

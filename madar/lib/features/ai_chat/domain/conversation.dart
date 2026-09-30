@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 
 import '../../data/domain/ai_summary.dart' show SummarySectionId;
 import 'ai_models.dart';
+import 'markdown.dart';
 
 /// State of a message.
 enum MessageStatus {
@@ -263,8 +264,13 @@ class Conversation {
       copyWith(messages: [for (final x in messages) x.id == m.id ? m : x], updatedAt: now);
 
   /// Removes the message with [id].
-  Conversation remove(String id, {DateTime? now}) =>
-      copyWith(messages: [for (final x in messages) if (x.id != id) x], updatedAt: now);
+  Conversation remove(String id, {DateTime? now}) => copyWith(
+    messages: [
+      for (final x in messages)
+        if (x.id != id) x,
+    ],
+    updatedAt: now,
+  );
 
   Map<String, Object?> toJson() {
     final list = messages.length > maxMessages ? messages.sublist(messages.length - maxMessages) : messages;
@@ -321,7 +327,7 @@ class ConversationMeta {
 
   factory ConversationMeta.of(Conversation c) {
     final last = c.lastMessage;
-    final text = last?.text.replaceAll(RegExp(r'\s+'), ' ').trim() ?? '';
+    final text = last == null ? '' : MdParser.plainText(last.text);
     return ConversationMeta(
       id: c.id,
       title: c.title,

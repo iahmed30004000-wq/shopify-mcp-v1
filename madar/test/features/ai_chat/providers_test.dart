@@ -47,9 +47,13 @@ void main() {
     Stream<List<int>> bytes(List<List<int>> chunks) => Stream.fromIterable(chunks);
 
     test('events split anywhere, even inside a multi-byte character', () async {
-      final raw = utf8.encode('event: a\ndata: مرحبا\n\n: comment\nevent: b\r\ndata: one\r\ndata: two\r\n\r\ndata: tail');
+      final raw = utf8.encode(
+        'event: a\ndata: مرحبا\n\n: comment\nevent: b\r\ndata: one\r\ndata: two\r\n\r\ndata: tail',
+      );
       for (var size = 1; size <= 7; size++) {
-        final chunks = [for (var i = 0; i < raw.length; i += size) raw.sublist(i, i + size > raw.length ? raw.length : i + size)];
+        final chunks = [
+          for (var i = 0; i < raw.length; i += size) raw.sublist(i, i + size > raw.length ? raw.length : i + size),
+        ];
         final events = await decodeSse(bytes(chunks)).toList();
         expect(events, const [
           SseEvent(event: 'a', data: 'مرحبا'),
@@ -113,7 +117,11 @@ void main() {
         ('refusal', AiStopReason.refusal),
         ('pause_turn', AiStopReason.other),
       ]) {
-        final t = FakeTransport([FakeReply.sse([anthropicSse(['x'], stopReason: raw)])]);
+        final t = FakeTransport([
+          FakeReply.sse([
+            anthropicSse(['x'], stopReason: raw),
+          ]),
+        ]);
         final events = await AnthropicProvider(t).streamChat(_request, apiKey: 'k').toList();
         expect((events.last as AiStreamDone).reason, reason);
       }
@@ -121,9 +129,11 @@ void main() {
 
     test('HTTP errors map to what the user can act on', () async {
       Future<AiException> run(int status, Map<String, Object?> body, {Map<String, String> headers = const {}}) =>
-          _error(AnthropicProvider(FakeTransport([FakeReply.json(body, status: status, headers: headers)]))
-              .streamChat(_request, apiKey: 'k')
-              .toList());
+          _error(
+            AnthropicProvider(FakeTransport([FakeReply.json(body, status: status, headers: headers)]))
+                .streamChat(_request, apiKey: 'k')
+                .toList(),
+          );
       Map<String, Object?> err(String type, String msg) => {
         'type': 'error',
         'error': {'type': type, 'message': msg},
@@ -147,7 +157,10 @@ void main() {
         AiErrorKind.contextTooLong,
       );
       expect(
-        (await run(400, err('invalid_request_error', 'Your credit balance is too low to access the Anthropic API'))).kind,
+        (await run(
+          400,
+          err('invalid_request_error', 'Your credit balance is too low to access the Anthropic API'),
+        )).kind,
         AiErrorKind.quotaExceeded,
       );
       expect((await run(402, err('billing_error', 'pay'))).kind, AiErrorKind.quotaExceeded);
@@ -159,12 +172,14 @@ void main() {
 
     test('a key echoed in an error message is redacted', () async {
       final e = await _error(
-        AnthropicProvider(FakeTransport([
-          FakeReply.json({
-            'type': 'error',
-            'error': {'type': 'invalid_request_error', 'message': 'bad key $testAnthropicKey here'},
-          }, status: 400),
-        ])).streamChat(_request, apiKey: testAnthropicKey).toList(),
+        AnthropicProvider(
+          FakeTransport([
+            FakeReply.json({
+              'type': 'error',
+              'error': {'type': 'invalid_request_error', 'message': 'bad key $testAnthropicKey here'},
+            }, status: 400),
+          ]),
+        ).streamChat(_request, apiKey: testAnthropicKey).toList(),
       );
       expect(e.detail, isNot(contains('TESTKEY')));
       expect(e.toString(), isNot(contains('TESTKEY')));
@@ -178,20 +193,25 @@ void main() {
           'event: error\ndata: {"type": "error", "error": {"type": "overloaded_error", "message": "Overloaded"}}\n\n';
       final received = <String>[];
       final e1 = await _error(
-        AnthropicProvider(FakeTransport([FakeReply.sse([overloaded])]))
-            .streamChat(_request, apiKey: 'k')
-            .map((e) {
-              if (e is AiTextDelta) received.add(e.text);
-              return e;
-            })
-            .toList(),
+        AnthropicProvider(
+          FakeTransport([
+            FakeReply.sse([overloaded]),
+          ]),
+        ).streamChat(_request, apiKey: 'k').map((e) {
+          if (e is AiTextDelta) received.add(e.text);
+          return e;
+        }).toList(),
       );
       expect(e1.kind, AiErrorKind.overloaded);
       expect(received, ['Hi']);
 
       final cut = anthropicSse(['Hi']).split('event: message_delta').first;
       final e2 = await _error(
-        AnthropicProvider(FakeTransport([FakeReply.sse([cut])])).streamChat(_request, apiKey: 'k').toList(),
+        AnthropicProvider(
+          FakeTransport([
+            FakeReply.sse([cut]),
+          ]),
+        ).streamChat(_request, apiKey: 'k').toList(),
       );
       expect(e2.kind, AiErrorKind.network);
 
@@ -204,7 +224,9 @@ void main() {
 
       final e4 = await _error(
         AnthropicProvider(
-          FakeTransport([FakeReply.sse([cut], hang: true)]),
+          FakeTransport([
+            FakeReply.sse([cut], hang: true),
+          ]),
           idleTimeout: const Duration(milliseconds: 60),
         ).streamChat(_request, apiKey: 'k').toList(),
       );
@@ -226,11 +248,9 @@ void main() {
       final got = <AiStreamEvent>[];
       final done = Completer<void>();
       Object? error;
-      final sub = AnthropicProvider(t).streamChat(_request, apiKey: 'k', cancel: cancel).listen(
-        got.add,
-        onError: (Object e) => error = e,
-        onDone: done.complete,
-      );
+      final sub = AnthropicProvider(t)
+          .streamChat(_request, apiKey: 'k', cancel: cancel)
+          .listen(got.add, onError: (Object e) => error = e, onDone: done.complete);
       reply.controller!.add(utf8.encode(anthropicSse(['part']).split('event: content_block_stop').first));
       await Future<void>.delayed(const Duration(milliseconds: 20));
       expect(got.whereType<AiTextDelta>().map((e) => e.text), ['part']);
@@ -246,7 +266,12 @@ void main() {
       final t = FakeTransport([
         FakeReply.json({
           'data': [
-            {'id': 'claude-opus-5-5', 'display_name': 'Claude Opus 5.5', 'created_at': '2026-09-01T00:00:00Z', 'type': 'model'},
+            {
+              'id': 'claude-opus-5-5',
+              'display_name': 'Claude Opus 5.5',
+              'created_at': '2026-09-01T00:00:00Z',
+              'type': 'model',
+            },
             {'id': 'claude-haiku-4-5-20251001', 'display_name': 'Claude Haiku 4.5', 'type': 'model'},
           ],
           'has_more': false,
@@ -291,7 +316,9 @@ void main() {
     });
 
     test('streams deltas, usage chunk and [DONE]', () async {
-      final t = FakeTransport([FakeReply.sse(chunked(openAiSse(['Sal', 'aam ', '٣']), 11))]);
+      final t = FakeTransport([
+        FakeReply.sse(chunked(openAiSse(['Sal', 'aam ', '٣']), 11)),
+      ]);
       final events = await OpenAiProvider(t).streamChat(_openAiRequest(), apiKey: 'k').toList();
       expect(events.whereType<AiTextDelta>().map((e) => e.text).join(), 'Salaam ٣');
       final done = events.last as AiStreamDone;
@@ -302,11 +329,18 @@ void main() {
 
     test('length / content filter; a finished stream without [DONE] still completes', () async {
       final t = FakeTransport([
-        FakeReply.sse([openAiSse(['a'], finish: 'length')]),
-        FakeReply.sse([openAiSse(['b'], finish: 'content_filter', done: false)]),
+        FakeReply.sse([
+          openAiSse(['a'], finish: 'length'),
+        ]),
+        FakeReply.sse([
+          openAiSse(['b'], finish: 'content_filter', done: false),
+        ]),
       ]);
       final p = OpenAiProvider(t);
-      expect(((await p.streamChat(_openAiRequest(), apiKey: 'k').toList()).last as AiStreamDone).reason, AiStopReason.maxTokens);
+      expect(
+        ((await p.streamChat(_openAiRequest(), apiKey: 'k').toList()).last as AiStreamDone).reason,
+        AiStopReason.maxTokens,
+      );
       expect(
         ((await p.streamChat(_openAiRequest(), apiKey: 'k').toList()).last as AiStreamDone).reason,
         AiStopReason.contentFilter,
@@ -315,9 +349,11 @@ void main() {
 
     test('errors: bad key, quota vs rate limit, model not found, temperature, mid-stream error', () async {
       Future<AiException> run(int status, Map<String, Object?> error) => _error(
-        OpenAiProvider(FakeTransport([FakeReply.json({'error': error}, status: status)]))
-            .streamChat(_openAiRequest(), apiKey: testOpenAiKey)
-            .toList(),
+        OpenAiProvider(
+          FakeTransport([
+            FakeReply.json({'error': error}, status: status),
+          ]),
+        ).streamChat(_openAiRequest(), apiKey: testOpenAiKey).toList(),
       );
       final bad = await run(401, {
         'message': 'Incorrect API key provided: sk-proj-****QRST. You can find your API key at …',
@@ -326,13 +362,24 @@ void main() {
       });
       expect(bad.kind, AiErrorKind.badKey);
       expect(bad.detail, isNot(contains('sk-proj')));
-      expect((await run(429, {'message': 'Rate limit reached', 'type': 'requests', 'code': 'rate_limit_exceeded'})).kind, AiErrorKind.rateLimited);
       expect(
-        (await run(429, {'message': 'You exceeded your current quota', 'type': 'insufficient_quota', 'code': 'insufficient_quota'})).kind,
+        (await run(429, {'message': 'Rate limit reached', 'type': 'requests', 'code': 'rate_limit_exceeded'})).kind,
+        AiErrorKind.rateLimited,
+      );
+      expect(
+        (await run(429, {
+          'message': 'You exceeded your current quota',
+          'type': 'insufficient_quota',
+          'code': 'insufficient_quota',
+        })).kind,
         AiErrorKind.quotaExceeded,
       );
       expect(
-        (await run(404, {'message': 'The model `gpt-9` does not exist', 'type': 'invalid_request_error', 'code': 'model_not_found'})).kind,
+        (await run(404, {
+          'message': 'The model `gpt-9` does not exist',
+          'type': 'invalid_request_error',
+          'code': 'model_not_found',
+        })).kind,
         AiErrorKind.modelNotFound,
       );
       expect(
@@ -345,15 +392,20 @@ void main() {
         AiErrorKind.temperatureUnsupported,
       );
       expect(
-        (await run(400, {'message': 'maximum context length is 400000 tokens', 'code': 'context_length_exceeded'})).kind,
+        (await run(400, {
+          'message': 'maximum context length is 400000 tokens',
+          'code': 'context_length_exceeded',
+        })).kind,
         AiErrorKind.contextTooLong,
       );
       expect((await run(503, {'message': 'The engine is currently overloaded'})).kind, AiErrorKind.overloaded);
 
       final mid = await _error(
-        OpenAiProvider(FakeTransport([
-          FakeReply.sse(['data: {"error": {"message": "The server had an error", "type": "server_error"}}\n\n']),
-        ])).streamChat(_openAiRequest(), apiKey: 'k').toList(),
+        OpenAiProvider(
+          FakeTransport([
+            FakeReply.sse(['data: {"error": {"message": "The server had an error", "type": "server_error"}}\n\n']),
+          ]),
+        ).streamChat(_openAiRequest(), apiKey: 'k').toList(),
       );
       expect(mid.kind, AiErrorKind.serverError);
     });
@@ -409,7 +461,7 @@ void main() {
         }
         await r.response.close();
       };
-      final p = AnthropicProvider(IoAiTransport(), baseUrl: base);
+      final p = AnthropicProvider(IoAiTransport.loopbackForTesting(), baseUrl: base);
       final text = await _text(p.streamChat(_request, apiKey: 'LOCAL-KEY'));
       expect(text, 'مرحبًا بك 2026');
       expect(seen.single.method, 'POST');
@@ -422,35 +474,39 @@ void main() {
     test('error status is read and mapped', () async {
       handler = (r) async {
         r.response.statusCode = 401;
-        r.response.write(jsonEncode({'error': {'message': 'Incorrect API key', 'code': 'invalid_api_key'}}));
+        r.response.write(
+          jsonEncode({
+            'error': {'message': 'Incorrect API key', 'code': 'invalid_api_key'},
+          }),
+        );
         await r.response.close();
       };
-      final e = await _error(OpenAiProvider(IoAiTransport(), baseUrl: base).streamChat(_openAiRequest(), apiKey: 'x').toList());
+      final e = await _error(
+        OpenAiProvider(IoAiTransport.loopbackForTesting(), baseUrl: base).streamChat(_openAiRequest(), apiKey: 'x').toList(),
+      );
       expect(e.kind, AiErrorKind.badKey);
     });
 
     test('cancel mid-stream closes the connection', () async {
-      final closed = Completer<void>();
+      var stop = false;
       handler = (r) async {
         r.response.headers.contentType = ContentType('text', 'event-stream');
         r.response.bufferOutput = false;
         r.response.add(utf8.encode(anthropicSse(['first']).split('event: content_block_stop').first));
         await r.response.flush();
-        // Keep writing until the client goes away.
+        // Keep the stream open (as a thinking model would) until the test ends.
         try {
-          for (var i = 0; i < 200; i++) {
+          while (!stop) {
             await Future<void>.delayed(const Duration(milliseconds: 20));
             r.response.add(utf8.encode(': keep-alive\n\n'));
             await r.response.flush();
           }
-        } catch (_) {
-          if (!closed.isCompleted) closed.complete();
-        }
-        if (!closed.isCompleted) closed.complete();
+        } catch (_) {}
       };
+      addTearDown(() => stop = true);
       final cancel = AiCancelToken();
       final got = <String>[];
-      final sub = AnthropicProvider(IoAiTransport(), baseUrl: base)
+      final sub = AnthropicProvider(IoAiTransport.loopbackForTesting(), baseUrl: base)
           .streamChat(_request, apiKey: 'k', cancel: cancel)
           .listen((e) {
             if (e is AiTextDelta) got.add(e.text);
@@ -458,9 +514,16 @@ void main() {
       while (got.isEmpty) {
         await Future<void>.delayed(const Duration(milliseconds: 10));
       }
+      expect(server.connectionsInfo().total, 1);
       cancel.cancel();
-      await sub.cancel();
-      await closed.future.timeout(const Duration(seconds: 5));
+      await sub.cancel().timeout(const Duration(seconds: 2));
+      // The server sees the connection go away.
+      final deadline = DateTime.now().add(const Duration(seconds: 8));
+      while (server.connectionsInfo().total > 0 && DateTime.now().isBefore(deadline)) {
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+      }
+      stop = true;
+      expect(server.connectionsInfo().total, 0);
       expect(got, ['first']);
     });
 
@@ -469,9 +532,10 @@ void main() {
       final port = dead.port;
       await dead.close();
       final e = await _error(
-        AnthropicProvider(IoAiTransport(), baseUrl: Uri.parse('http://127.0.0.1:$port'))
-            .streamChat(_request, apiKey: 'k')
-            .toList(),
+        AnthropicProvider(
+          IoAiTransport.loopbackForTesting(),
+          baseUrl: Uri.parse('http://127.0.0.1:$port'),
+        ).streamChat(_request, apiKey: 'k').toList(),
       );
       expect(e.kind, AiErrorKind.network);
       handler = (_) async {};

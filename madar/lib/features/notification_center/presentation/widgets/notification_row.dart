@@ -46,7 +46,10 @@ class NotificationRow extends ConsumerWidget {
       for (final a in d.actions)
         if (a.availableFor(item)) a,
     ];
-    final snoozable = !upcoming && d.snoozable && item.state != CenterItemState.acted;
+    // Not an answered one, nor one already snoozed (its snooze is the
+    // upcoming row; the gate would refuse a second one under the same id).
+    final snoozable =
+        !upcoming && d.snoozable && item.state != CenterItemState.acted && item.state != CenterItemState.deferred;
     final groupName = tx.group(item.group);
 
     final when = tx.when(item.at, now);

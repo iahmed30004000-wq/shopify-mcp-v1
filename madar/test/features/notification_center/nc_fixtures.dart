@@ -64,6 +64,28 @@ NotificationRequest adhanCall(AdhanSlot slot, DateTime at) {
   );
 }
 
+/// The adhan call exactly as the adhan scheduler builds it (full screen,
+/// public, timeout, drop-if-late, Stop).
+NotificationRequest adhanFull(AdhanSlot slot, DateTime at) {
+  final r = adhanCall(slot, at);
+  return NotificationRequest(
+    namespace: r.namespace,
+    id: r.id,
+    channelId: r.channelId,
+    title: r.title,
+    body: r.body,
+    at: r.at,
+    data: r.data,
+    category: NotificationCategory.alarm,
+    timing: NotificationTiming.alarmClock,
+    fullScreen: true,
+    publicOnLockScreen: true,
+    timeout: const Duration(minutes: 8),
+    dropIfLateBy: const Duration(minutes: 30),
+    actions: const [NotificationActionSpec(id: AdhanActions.stop, title: 'إيقاف')],
+  );
+}
+
 NotificationRequest adhanPre(AdhanSlot slot, DateTime prayerAt, int minutes) {
   final alarm = AdhanAlarm(
     id: AdhanIds.of(_day(prayerAt), AdhanKind.preAdhan, slot),

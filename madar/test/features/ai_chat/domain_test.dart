@@ -12,11 +12,25 @@ import 'package:madar/features/data/data.dart' show SummarySectionId;
 
 final _t0 = DateTime(2026, 9, 30, 9);
 
-ChatMessage _msg(String id, ChatRole role, String text, {MessageStatus status = MessageStatus.complete, int minute = 0}) =>
-    ChatMessage(id: id, role: role, text: text, createdAt: _t0.add(Duration(minutes: minute)), status: status);
+ChatMessage _msg(
+  String id,
+  ChatRole role,
+  String text, {
+  MessageStatus status = MessageStatus.complete,
+  int minute = 0,
+}) => ChatMessage(
+  id: id,
+  role: role,
+  text: text,
+  createdAt: _t0.add(Duration(minutes: minute)),
+  status: status,
+);
 
-Conversation _conv({List<ChatMessage> messages = const [], ChatContext context = const ChatContext(), String id = 'c1'}) =>
-    Conversation(id: id, createdAt: _t0, updatedAt: _t0, messages: messages, context: context);
+Conversation _conv({
+  List<ChatMessage> messages = const [],
+  ChatContext context = const ChatContext(),
+  String id = 'c1',
+}) => Conversation(id: id, createdAt: _t0, updatedAt: _t0, messages: messages, context: context);
 
 void main() {
   group('Conversation', () {
@@ -80,10 +94,10 @@ void main() {
       const md = '# Madar\n\nintro\n\n## Faith\n\n- a\n\n## المال\n\n- b\n### not a section';
       const ctx = ChatContext.personal(md);
       expect(ctx.sectionTitles, ['Faith', 'المال']);
-      expect(ChatContext.sectionIdsOf(ctx.sectionTitles, {SummarySectionId.faith: 'Faith', SummarySectionId.money: 'Money'}), [
-        SummarySectionId.faith,
-        null,
-      ]);
+      expect(
+        ChatContext.sectionIdsOf(ctx.sectionTitles, {SummarySectionId.faith: 'Faith', SummarySectionId.money: 'Money'}),
+        [SummarySectionId.faith, null],
+      );
       expect(ChatContext.fromJson(ctx.toJson()), ctx);
       expect(ChatContext.fromJson({'mode': 'personal'}), const ChatContext());
     });
@@ -159,9 +173,7 @@ void main() {
     });
 
     test('bounded: at most maxHistoryMessages and the token budget', () {
-      final many = [
-        for (var i = 0; i < 80; i++) _msg('$i', i.isEven ? ChatRole.user : ChatRole.assistant, 'turn $i'),
-      ];
+      final many = [for (var i = 0; i < 80; i++) _msg('$i', i.isEven ? ChatRole.user : ChatRole.assistant, 'turn $i')];
       final p = AiPayloadBuilder.build(
         conversation: _conv(messages: many, context: const ChatContext.none()),
         settings: settings,
@@ -173,10 +185,7 @@ void main() {
       expect(p.request.messages.last.text, 'last');
       expect(p.omittedCount, greaterThan(0));
 
-      final huge = [
-        _msg('0', ChatRole.user, 'a' * 200000),
-        _msg('1', ChatRole.assistant, 'b'),
-      ];
+      final huge = [_msg('0', ChatRole.user, 'a' * 200000), _msg('1', ChatRole.assistant, 'b')];
       final q = AiPayloadBuilder.build(
         conversation: _conv(messages: huge, context: const ChatContext.none()),
         settings: settings,
@@ -190,7 +199,12 @@ void main() {
       final s = const AiSettings()
           .copyWith(provider: AiProviderId.openai, maxTokens: 8192, temperature: () => 0.4)
           .selectModel(AiProviderId.openai, 'gpt-6-astra');
-      final p = AiPayloadBuilder.build(conversation: _conv(context: const ChatContext.none()), settings: s, languageCode: 'en', pendingText: 'x');
+      final p = AiPayloadBuilder.build(
+        conversation: _conv(context: const ChatContext.none()),
+        settings: s,
+        languageCode: 'en',
+        pendingText: 'x',
+      );
       expect(p.request.provider, AiProviderId.openai);
       expect(p.request.model, 'gpt-6-astra');
       expect(p.request.maxTokens, 8192);
@@ -217,7 +231,9 @@ void main() {
       expect(removed.model, 'claude-opus-5-5');
       expect(removed.modelsFor(AiProviderId.anthropic), isNot(contains('claude-new-6')));
       expect(custom.resetModels(AiProviderId.anthropic).model, 'claude-sonnet-5-5');
-      final fetched = custom.withFetched(AiProviderId.anthropic, const [AiModelInfo('claude-new-6', displayName: 'Claude New 6')]);
+      final fetched = custom.withFetched(AiProviderId.anthropic, const [
+        AiModelInfo('claude-new-6', displayName: 'Claude New 6'),
+      ]);
       final back = AiSettings.fromJson(jsonDecode(jsonEncode(fetched.toJson())));
       expect(back, fetched);
       expect(back.displayNameOf(AiProviderId.anthropic, 'claude-new-6'), 'Claude New 6');
@@ -328,7 +344,10 @@ void main() {
       expect(index.last.id, 'c5');
       expect(await store.load('c0'), isNull, reason: 'pruned conversations are deleted');
       final rows = await db.select(db.keyValues).get();
-      expect(rows.where((r) => r.key.startsWith(ConversationStore.conversationPrefix)).length, ConversationStore.maxConversations);
+      expect(
+        rows.where((r) => r.key.startsWith(ConversationStore.conversationPrefix)).length,
+        ConversationStore.maxConversations,
+      );
       expect(rows.every((r) => ConversationStore.ownsKey(r.key)), isTrue);
       expect(index.first.preview, 'hello ${ConversationStore.maxConversations + 4}');
       expect(index.first.messageCount, 1);

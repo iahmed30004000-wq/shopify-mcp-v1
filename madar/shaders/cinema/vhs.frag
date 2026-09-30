@@ -54,7 +54,7 @@ void main() {
   vec2 size = max(uRect.zw, vec2(1.0));
   vec2 p = FlutterFragCoord().xy - uRect.xy;
   float t = uClock.x;
-  float vf = uClock.y;
+  float vf = mod(uClock.y, 8192.0);
   float seed = uClock.w;
   float lineH = 3.0;
   float line = floor(p.y / lineH);

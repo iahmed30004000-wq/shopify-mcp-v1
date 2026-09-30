@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:drift/drift.dart'
+    show ComparableExpr, DataClass, Expression, GeneratedColumn, Insertable, OrderingTerm, Table, Variable;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' show IconData;
 
@@ -68,6 +70,41 @@ class SearchLoadContext {
   /// Non-empty [parts] joined by [separator].
   static String joinWith(Iterable<String?> parts, String separator) =>
       parts.where((p) => p != null && p.trim().isNotEmpty).join(separator);
+
+  /// Rows read per page by [mapRows].
+  static const int pageSize = 400;
+
+  /// The records of [repo]'s rows (those matching [where]), made by [map]
+  /// (null skips a row). The rows are read and mapped a page at a time:
+  /// rows are turned into objects on this (the UI) isolate, and a table of
+  /// tens of thousands of rows in one go would freeze the screen for
+  /// seconds; a page takes a few milliseconds, with frames in between.
+  Future<List<SearchDoc>> mapRows<T extends Table, R extends DataClass>(
+    EntityRepository<T, R> repo,
+    SearchDoc? Function(R row) map, {
+    Expression<bool> Function(T tbl)? where,
+  }) async {
+    final out = <SearchDoc>[];
+    final id = repo.table.columnsByName['id']! as GeneratedColumn<String>;
+    String? after;
+    while (true) {
+      final query = repo.db.select(repo.table)
+        ..orderBy([(_) => OrderingTerm.asc(id)])
+        ..limit(pageSize);
+      final last = after;
+      if (where != null) query.where(where);
+      if (last != null) query.where((_) => id.isBiggerThanValue(last));
+      final rows = await query.get();
+      for (final row in rows) {
+        final doc = map(row);
+        if (doc != null) out.add(doc);
+      }
+      if (rows.length < pageSize) return out;
+      after = ((rows.last as Insertable<R>).toColumns(false)['id']! as Variable<String>).value;
+      // A frame between pages, also when the rows come back at once.
+      await Future<void>.delayed(Duration.zero);
+    }
+  }
 }
 
 /// Produces the records of an indexed source.

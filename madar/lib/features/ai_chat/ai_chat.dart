@@ -1,7 +1,9 @@
 /// In-app AI chat with the user's own Anthropic or OpenAI key.
 ///
 /// * Keys live only in encrypted secure storage ([AiKeyStore]); the app
-///   shows their last four characters, nothing else.
+///   shows their last four characters, nothing else. Each key goes only to
+///   its own service, over TLS, to api.anthropic.com / api.openai.com
+///   ([AiHostPolicy]).
 /// * A call happens only on an explicit tap (Send, Regenerate, Try again,
 ///   Test key, Refresh models) – never in the background.
 /// * The first Send of a conversation opens the summary preview
@@ -39,7 +41,16 @@ export 'data/conversation_store.dart' show ConversationStore;
 export 'data/key_store.dart' show AiKeyProblem, AiKeyStore;
 export 'data/openai_provider.dart' show OpenAiProvider;
 export 'data/transport.dart'
-    show AiCancelToken, AiCancelledException, AiHttpRequest, AiHttpResponse, AiTransport, IoAiTransport;
+    show
+        AiCancelToken,
+        AiCancelledException,
+        AiHostNotAllowedException,
+        AiHostPolicy,
+        AiHttpRequest,
+        AiHttpResponse,
+        AiInvalidHeaderException,
+        AiTransport,
+        IoAiTransport;
 export 'domain/ai_models.dart';
 export 'domain/ai_settings.dart';
 export 'domain/conversation.dart';

@@ -1,5 +1,9 @@
 /// Trix AI: contract choice, doubling, ducking play in the negative
 /// contracts and blocking play on the trix layout.
+///
+/// Hidden information: with simultaneous doubling a seat only ever sees its
+/// own pending answer ([TrixState.doublesVisibleTo]); the hard AI's sampled
+/// worlds re-draw the other seats' pending answers from their sampled hands.
 library;
 
 import 'dart:math' as math;
@@ -61,6 +65,25 @@ double trixContractEstimate(TrixContract c, List<PlayingCard> hand) {
   }
 }
 
+/// The cards the medium AI doubles: K♥ with five or more hearts, a queen
+/// with three more cards of its suit and neither its ace nor its king. Reads
+/// only [seat]'s own hand.
+List<PlayingCard> trixDoubleHeuristic(TrixState s, int seat) {
+  final hand = s.hands[seat];
+  final pick = <PlayingCard>[];
+  for (final c in TrixRules.doublable(s, seat)) {
+    final suitLen = ofSuit(hand, c.suit).length;
+    if (c == kingOfHearts) {
+      if (suitLen >= 5) pick.add(c);
+    } else if (suitLen >= 4 &&
+        !hand.contains(PlayingCard(c.suit, Rank.ace)) &&
+        !hand.contains(PlayingCard(c.suit, Rank.king))) {
+      pick.add(c);
+    }
+  }
+  return pick;
+}
+
 const Map<TrixContract, double> _baseline = {
   TrixContract.king: -18.75,
   TrixContract.queens: -25,
@@ -85,21 +108,7 @@ class TrixAi extends HeuristicAi<TrixState, TrixMove> {
     return v;
   });
 
-  TrixMove _double(TrixState s, int seat) {
-    final hand = s.hands[seat];
-    final pick = <PlayingCard>[];
-    for (final c in TrixRules.doublable(s, seat)) {
-      final suitLen = ofSuit(hand, c.suit).length;
-      if (c == kingOfHearts) {
-        if (suitLen >= 5) pick.add(c);
-      } else if (suitLen >= 4 &&
-          !hand.contains(PlayingCard(c.suit, Rank.ace)) &&
-          !hand.contains(PlayingCard(c.suit, Rank.king))) {
-        pick.add(c);
-      }
-    }
-    return TrixMove.double(pick);
-  }
+  TrixMove _double(TrixState s, int seat) => TrixMove.double(trixDoubleHeuristic(s, seat));
 
   // ------------------------------------------------------------ trick play
 
@@ -256,10 +265,18 @@ class TrixAi extends HeuristicAi<TrixState, TrixMove> {
         if (i != observer) i,
     ];
     final seen = <PlayingCard>{...s.hands[observer], ...s.playedCards};
-    // Publicly doubled cards still in hand stay with their doubler.
+    // Publicly doubled cards still in hand stay with their doubler. Pending
+    // (unrevealed) doubles of other seats are unknown and not used.
     final fixed = [for (var i = 0; i < 4; i++) <PlayingCard>[]];
     for (final e in s.doubled.entries) {
       if (e.value != observer && !seen.contains(e.key)) fixed[e.value].add(e.key);
+    }
+    // In the first deal of the match the owner is known to hold the 7♥.
+    if (s.dealNumber == 1 &&
+        s.options.firstOwnerRule == TrixFirstOwner.sevenOfHearts &&
+        s.owner != observer &&
+        !seen.contains(sevenOfHearts)) {
+      fixed[s.owner].add(sevenOfHearts);
     }
     final fixedAll = {for (final f in fixed) ...f};
     final pool = [
@@ -269,15 +286,21 @@ class TrixAi extends HeuristicAi<TrixState, TrixMove> {
     final allTricks = [...s.tricks, if (s.trick != null) s.trick!];
     final voids = voidsFromTricks(allTricks, 4);
     final noKing = List.filled(4, false);
-    if (TrixRules.hasKing(s.contract)) {
+    if (TrixRules.kingRulesApply(s)) {
+      final o = s.options;
       for (final t in allTricks) {
         if (t.cards.isEmpty) continue;
         final led = t.cards.first.suit;
-        if (s.options.noHeartLeadInKing && led == Suit.hearts) {
+        if (o.noHeartLeadInKing && led == Suit.hearts) {
           voids[t.leader].addAll([Suit.clubs, Suit.diamonds, Suit.spades]);
         }
         for (var i = 1; i < t.cards.length; i++) {
-          if (s.options.kingMustBeDiscarded && t.cards[i].suit != led && t.cards[i] != kingOfHearts) {
+          final card = t.cards[i];
+          if (card == kingOfHearts) continue;
+          // A void seat holding K♥ would have had to throw it.
+          if (o.kingMustBeDiscarded && card.suit != led) noKing[t.seats[i]] = true;
+          // A heart played onto A♥ instead of K♥.
+          if (o.kingOnAceOfHearts && led == Suit.hearts && t.cards.sublist(0, i).contains(aceOfHearts)) {
             noKing[t.seats[i]] = true;
           }
         }
@@ -294,6 +317,20 @@ class TrixAi extends HeuristicAi<TrixState, TrixMove> {
     final dealt = dealConstrained(pool, [for (final o in others) s.hands[o].length - fixed[o].length], canHold, rng);
     for (var i = 0; i < others.length; i++) {
       w.hands[others[i]] = [...fixed[others[i]], ...dealt[i]]..sort();
+    }
+    if (s.phase == TrixPhase.doubling && s.options.doublingReveal == TrixDoublingReveal.simultaneous) {
+      // Keep only the observer's own hidden answer; the seats that already
+      // answered get the medium answer for their sampled hands.
+      w.pendingDoubles = {
+        for (final e in s.pendingDoubles.entries)
+          if (e.value == observer) e.key: e.value,
+      };
+      for (final seat in s.doublingAnswered) {
+        if (seat == observer) continue;
+        for (final c in trixDoubleHeuristic(w, seat)) {
+          w.pendingDoubles[c] = seat;
+        }
+      }
     }
     return w;
   }

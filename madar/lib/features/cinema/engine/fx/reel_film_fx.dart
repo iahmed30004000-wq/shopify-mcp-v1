@@ -109,9 +109,10 @@ class ReelFilmFx implements FilmFx {
   Future<void> load() async {
     await CinemaShaders.preload();
     await FxShaders.preload();
-    _vhs = CinemaShaders.program(CinemaShader.vhs)?.fragmentShader();
-    _grade = CinemaShaders.program(CinemaShader.filmGrade)?.fragmentShader();
-    _stock = FxShaders.program(FxShader.filmStock)?.fragmentShader();
+    // Idempotent: a second load keeps the instances it already has.
+    _vhs ??= CinemaShaders.program(CinemaShader.vhs)?.fragmentShader();
+    _grade ??= CinemaShaders.program(CinemaShader.filmGrade)?.fragmentShader();
+    _stock ??= FxShaders.program(FxShader.filmStock)?.fragmentShader();
   }
 
   @override
@@ -151,7 +152,7 @@ class ReelFilmFx implements FilmFx {
     if (isVideo) {
       final s = _vhs;
       if (s != null) {
-        VhsUniforms.write(s, rect: dst, image: frame, clock: clock, grade: _scaledVideo(grade), frame: params);
+        VhsUniforms.write(s, rect: dst, image: frame, clock: clock, grade: _scaled(grade), frame: params);
         _draw(canvas, s, dst, FilmPass.vhs);
         return;
       }
@@ -181,7 +182,7 @@ class ReelFilmFx implements FilmFx {
           image: frame,
           clock: clock,
           palette: skin.palette,
-          grade: _scaledFilm(grade),
+          grade: _scaled(grade),
           frame: params,
         );
         _draw(canvas, g, dst, FilmPass.grade);
@@ -203,15 +204,13 @@ class ReelFilmFx implements FilmFx {
   FilmGrade? _scaledGrade;
   double _scaledFor = -1;
 
-  FilmGrade _scaledFilm(FilmGrade g) {
+  FilmGrade _scaled(FilmGrade g) {
     if (_scaledGrade == null || _scaledFor != _wear) {
       _scaledFor = _wear;
       _scaledGrade = g.scaled(_wear);
     }
     return _scaledGrade!;
   }
-
-  FilmGrade _scaledVideo(FilmGrade g) => _scaledFilm(g);
 
   @override
   void dispose() {
@@ -224,3 +223,10 @@ class ReelFilmFx implements FilmFx {
 
 /// The pass [ReelFilmFx.apply] drew with.
 enum FilmPass { none, stock, grade, vhs, blit }
+
+/// Reaches the FX knobs from a game: `game.filmFx.reel?.quality = …`,
+/// `game.filmFx.reel?.events.cueNow()`. `null` for other FilmFx
+/// implementations (test fakes).
+extension ReelFilmFxAccess on FilmFx {
+  ReelFilmFx? get reel => this is ReelFilmFx ? this as ReelFilmFx : null;
+}

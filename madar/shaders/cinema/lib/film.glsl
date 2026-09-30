@@ -56,6 +56,8 @@ vec2 fm_dustLayer(vec2 p, float cellPx, float amount, float ff, float seed) {
   vec2 cell = floor(p / cellPx);
   vec2 local = p - cell * cellPx;
   float h = cn_hash12(cell * 1.31 + vec2(ff * 7.17 + seed, ff * 0.61));
+  // Most cells are clean this frame: skip the shape (coherent per cell).
+  if (h > amount) return vec2(0.0);
   vec2 r = cn_hash22(cell + vec2(ff * 3.71 + seed, ff * 1.3 + 2.0));
   vec2 d = local - (0.22 + 0.56 * r) * cellPx;
   float kind = fract(h * 57.3);
@@ -91,14 +93,17 @@ vec2 fm_scratches(vec2 p, vec2 size, float amount, float ff, float seed) {
     x += sin(ff * 0.09 + fk * 2.0) * 3.0 + (cn_hash11(ff + fk * 3.3) - 0.5) * 0.9;
     x += sin(p.y * (0.004 + fk * 0.0021) + epoch) * (1.5 + fk);
     float w = 0.35 + cn_hash11(epoch + fk * 5.0) * 0.8;
-    float line = 1.0 - smoothstep(w, w + 0.75, abs(p.x - x));
-    float run = cn_noise(vec2(fk * 7.0 + epoch * 1.3, (p.y + ff * size.y * 1.137) / 46.0));
-    float on = smoothstep(0.3, 0.45, run);
-    float flutter = 0.5 + 0.5 * cn_hash11(ff * 1.7 + fk);
-    float mk = line * on * flutter * alive;
-    float kk = step(0.6, cn_hash11(epoch * 1.9 + fk));
-    kind = mix(kind, kk, step(m, mk));
-    m = max(m, mk);
+    float line = (1.0 - smoothstep(w, w + 0.75, abs(p.x - x))) * alive;
+    // Only the pixels on a scratch pay for its breaks.
+    if (line > 0.0) {
+      float run = cn_noise(vec2(fk * 7.0 + epoch * 1.3, (p.y + ff * size.y * 1.137) / 46.0));
+      float on = smoothstep(0.3, 0.45, run);
+      float flutter = 0.5 + 0.5 * cn_hash11(ff * 1.7 + fk);
+      float mk = line * on * flutter;
+      float kk = step(0.6, cn_hash11(epoch * 1.9 + fk));
+      kind = mix(kind, kk, step(m, mk));
+      m = max(m, mk);
+    }
   }
   // One-frame "flash" scratches: short bright tears in random places.
   float fs = step(1.0 - amount * 0.35, cn_hash11(ff * 1.91 + seed));
@@ -118,13 +123,25 @@ float fm_gate(vec2 p, vec2 size, float radius, float soft) {
   return 1.0 - smoothstep(-soft, soft * 0.5, dist);
 }
 
-// Uneven lens vignette; `age` adds the blotchy density of an old print.
+// Uneven lens vignette that follows the frame's shape (tall phone screens
+// darken along every edge, most in the rounded corners, not just in a
+// landscape-sized ellipse); `age` adds the blotchy density of an old print.
 float fm_vignette(vec2 p, vec2 size, float amount, float age, float t) {
-  vec2 q = (p / size - 0.5) * vec2(size.x / size.y, 1.0);
-  float r = length(q * vec2(1.25, 0.92));
-  float v = smoothstep(0.3, 1.02, r);
+  float m = min(size.x, size.y);
+  vec2 e = min(p, size - p) / m;
+  // Smooth minimum of the two edge distances rounds the corners.
+  float k = 0.14;
+  float h = clamp(0.5 + 0.5 * (e.y - e.x) / k, 0.0, 1.0);
+  float ed = mix(e.y, e.x, h) - k * h * (1.0 - h);
+  float v = 1.0 - smoothstep(-0.03, 0.34, ed);
+  v *= v;
+  vec2 q = (p / size - 0.5) * 2.0;
+  v = max(v, smoothstep(0.7, 1.45, length(q)) * 0.55);
   if (age > 0.001) {
-    v += (cn_fbm(p / 170.0 + vec2(floor(t * 0.7) * 1.7, 3.0)) - 0.5) * age * (0.35 + r);
+    // Two octaves are plenty at this scale (the mottle is large and slow).
+    vec2 mq = p / 170.0 + vec2(floor(t * 0.7) * 1.7, 3.0);
+    float n = cn_noise(mq) * 0.65 + cn_noise(mq * 2.3 + 5.1) * 0.35;
+    v += (n - 0.5) * age * (0.3 + v);
   }
   return cn_sat(v * amount);
 }

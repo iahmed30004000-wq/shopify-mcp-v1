@@ -1,5 +1,6 @@
-/// Basra (باصرة) rules: capture by rank or sum, jacks sweep, basra bonuses,
-/// the 7♦ special. See RULES.md.
+/// Basra (باصرة) rules: capture by rank or sum, jacks sweep, basra bonuses
+/// (twice the capturing card in Jordan, a flat 10 in Egypt), the 7♦ special,
+/// most cards (with the Egyptian carry-over on a tie). See RULES.md.
 library;
 
 import '../core/card_game.dart';
@@ -18,6 +19,23 @@ class BasraCapture {
 }
 
 final PlayingCard sevenOfDiamonds = PlayingCard(Suit.diamonds, Rank.seven);
+
+/// The score of one deal.
+class BasraDealScore {
+  const BasraDealScore(this.points, this.majoritySide, this.majorityAwarded, this.carry);
+
+  /// Per side: card points, most cards and basras.
+  final List<int> points;
+
+  /// The side with the most cards, or null on a tie.
+  final int? majoritySide;
+
+  /// Most-cards points it scored (carried points included).
+  final int majorityAwarded;
+
+  /// Most-cards points carried over to the next deal.
+  final int carry;
+}
 
 class BasraRules extends CardRules<BasraState, BasraMove> {
   const BasraRules();
@@ -103,6 +121,15 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
     return c;
   }
 
+  /// What a basra made with [card] is worth: twice the card (A 2 … 10 20,
+  /// Q/K 2 × `faceCardBasraBase`, the 7♦ 14) or the flat value; a jack on a
+  /// lone jack is always `jackBasraPoints`.
+  static int basraValue(PlayingCard card, BasraOptions o) {
+    if (card.rank == Rank.jack) return o.jackBasraPoints;
+    if (o.basraValue == BasraValueRule.flat) return o.basraPoints;
+    return 2 * (numeral(card) ?? o.faceCardBasraBase);
+  }
+
   /// What [card] takes from [table] (before the last-card rule).
   static BasraCapture captureFor(List<PlayingCard> table, PlayingCard card, BasraOptions o) {
     if (table.isEmpty) return const BasraCapture([], 0);
@@ -114,7 +141,7 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
       final nums = table.map(numeral).toList();
       final allNumerals = nums.every((v) => v != null);
       final sum = allNumerals ? nums.fold<int>(0, (a, v) => a + v!) : 0;
-      return BasraCapture(List.of(table), allNumerals && sum <= o.sevenDiamondsBasraMaxSum ? o.basraPoints : 0);
+      return BasraCapture(List.of(table), allNumerals && sum <= o.sevenDiamondsBasraMaxSum ? basraValue(card, o) : 0);
     }
     final List<PlayingCard> taken;
     final v = numeral(card);
@@ -124,7 +151,7 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
       taken = bestSumCapture(table.where((c) => numeral(c) != null).toList(), v);
     }
     final sweep = taken.isNotEmpty && taken.length == table.length;
-    return BasraCapture(taken, sweep ? o.basraPoints : 0);
+    return BasraCapture(taken, sweep ? basraValue(card, o) : 0);
   }
 
   @override
@@ -179,14 +206,30 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
     }
   }
 
-  /// Points per side for piles and basras.
-  static List<int> dealPoints(BasraOptions o, List<List<PlayingCard>> piles, List<int> basras) {
+  /// Scores a deal: card points, most cards (a unique maximum only, plus
+  /// [carry] carried points) and basras. On a tie the most-cards points are
+  /// lost, or carried over with [BasraMajorityTie.carryOver].
+  static BasraDealScore scoreDeal(
+    BasraOptions o,
+    List<List<PlayingCard>> piles,
+    List<int> basras, {
+    int carry = 0,
+  }) {
     final pts = [for (var i = 0; i < piles.length; i++) piles[i].fold<int>(0, (a, c) => a + cardPoints(c)) + basras[i]];
     final counts = [for (final p in piles) p.length];
     final most = counts.reduce((a, b) => a > b ? a : b);
-    if (counts.where((c) => c == most).length == 1) pts[counts.indexOf(most)] += o.majorityPoints;
-    return pts;
+    final majority = o.majorityPoints + (o.majorityTie == BasraMajorityTie.carryOver ? carry : 0);
+    if (counts.where((c) => c == most).length == 1) {
+      final side = counts.indexOf(most);
+      pts[side] += majority;
+      return BasraDealScore(pts, side, majority, 0);
+    }
+    return BasraDealScore(pts, null, 0, o.majorityTie == BasraMajorityTie.carryOver ? majority : 0);
   }
+
+  /// Points per side for piles and basras (no carried points).
+  static List<int> dealPoints(BasraOptions o, List<List<PlayingCard>> piles, List<int> basras) =>
+      scoreDeal(o, piles, basras).points;
 
   void _endDeal(BasraState s, List<CardEvent>? ev) {
     if (s.table.isNotEmpty) {
@@ -195,11 +238,22 @@ class BasraRules extends CardRules<BasraState, BasraMove> {
       ev?.add(CardEvent(CardEventType.captured, seat: taker, cards: List.of(s.table)));
       s.table = [];
     }
-    final pts = dealPoints(s.options, s.piles, s.basraScore);
+    final score = scoreDeal(s.options, s.piles, s.basraScore, carry: s.majorityCarry);
+    final pts = score.points;
     for (var i = 0; i < pts.length; i++) {
       s.sideScores[i] += pts[i];
     }
-    s.results.add(BasraDealResult(pts, [for (final p in s.piles) p.length], List.of(s.basraScore)));
+    s.majorityCarry = score.carry;
+    s.results.add(
+      BasraDealResult(
+        pts,
+        [for (final p in s.piles) p.length],
+        List.of(s.basraScore),
+        majoritySide: score.majoritySide,
+        majorityAwarded: score.majorityAwarded,
+        carry: score.carry,
+      ),
+    );
     ev?.add(CardEvent(CardEventType.roundScored, seat: s.dealer));
     final best = s.sideScores.reduce((a, b) => a > b ? a : b);
     if (best >= s.options.targetScore && s.sideScores.where((x) => x == best).length == 1) {

@@ -110,7 +110,12 @@ class AiSettings {
     final list = modelsFor(p);
     return copyWith(
       selected: {...selected, p: clean},
-      models: list.contains(clean) ? null : {...models, p: [...list, clean].take(maxModels).toList()},
+      models: list.contains(clean)
+          ? null
+          : {
+              ...models,
+              p: [...list, clean].take(maxModels).toList(),
+            },
     );
   }
 
@@ -119,7 +124,12 @@ class AiSettings {
     final clean = cleanModelId(id);
     final list = modelsFor(p);
     if (clean == null || list.contains(clean) || list.length >= maxModels) return this;
-    return copyWith(models: {...models, p: [...list, clean]});
+    return copyWith(
+      models: {
+        ...models,
+        p: [...list, clean],
+      },
+    );
   }
 
   /// Removes [id] from [p]'s list (the last model can't be removed; the
@@ -128,17 +138,17 @@ class AiSettings {
     final list = modelsFor(p);
     if (!list.contains(id) || list.length <= 1) return this;
     final next = [...list]..remove(id);
-    return copyWith(
-      models: {...models, p: next},
-      selected: modelFor(p) == id ? {...selected, p: next.first} : null,
-    );
+    return copyWith(models: {...models, p: next}, selected: modelFor(p) == id ? {...selected, p: next.first} : null);
   }
 
   /// Back to the starting list (keeps the selection when it is in it).
   AiSettings resetModels(AiProviderId p) {
     final defaults = defaultModels[p]!;
     return copyWith(
-      models: {...models, p: [...defaults]},
+      models: {
+        ...models,
+        p: [...defaults],
+      },
       selected: defaults.contains(modelFor(p)) ? null : {...selected, p: defaultSelected[p]!},
     );
   }

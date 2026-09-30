@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../domain/ai_models.dart';
+import 'key_store.dart';
 import 'sse.dart';
 import 'transport.dart';
 
@@ -167,8 +168,11 @@ abstract class HttpAiProvider implements AiProvider {
     }
   }
 
-  /// Sends [request]; a non-2xx answer becomes an [AiException].
+  /// Sends [request]; a non-2xx answer becomes an [AiException]. A key HTTP
+  /// can't carry, or the other service's key, is refused here – nothing
+  /// goes out.
   Future<AiHttpResponse> _send(AiHttpRequest request, String apiKey, AiCancelToken? cancel) async {
+    if (!AiKeyStore.sendable(id, apiKey)) throw const AiException(AiErrorKind.badKey);
     final AiHttpResponse resp;
     // Our own token, so a timeout also tears the request down.
     final inner = AiCancelToken();
@@ -211,8 +215,7 @@ abstract class HttpAiProvider implements AiProvider {
     final lower = message.toLowerCase();
     final detail = message.isEmpty ? null : AiRedactor.redact(message, secrets: [apiKey]);
     final retryAfter = _retryAfter(headers['retry-after']);
-    AiException ex(AiErrorKind kind) =>
-        AiException(kind, statusCode: status, detail: detail, retryAfter: retryAfter);
+    AiException ex(AiErrorKind kind) => AiException(kind, statusCode: status, detail: detail, retryAfter: retryAfter);
 
     if (type == 'overloaded_error' || status == 529 || status == 503) return ex(AiErrorKind.overloaded);
     if (status == 401 || type == 'authentication_error' || code == 'invalid_api_key') return ex(AiErrorKind.badKey);
@@ -278,8 +281,13 @@ abstract class HttpAiProvider implements AiProvider {
   static AiException mapTransportError(Object e) => switch (e) {
     AiException() => e,
     TimeoutException() => const AiException(AiErrorKind.timeout),
-    SocketException() || HandshakeException() || TlsException() || HttpException() || OSError() =>
-      const AiException(AiErrorKind.network),
+    AiInvalidHeaderException() => const AiException(AiErrorKind.badKey),
+    AiHostNotAllowedException() => const AiException(AiErrorKind.network),
+    SocketException() ||
+    HandshakeException() ||
+    TlsException() ||
+    HttpException() ||
+    OSError() => const AiException(AiErrorKind.network),
     FormatException() => const AiException(AiErrorKind.badResponse),
     _ => const AiException(AiErrorKind.unknown),
   };

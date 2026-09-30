@@ -22,7 +22,7 @@ InkStyle eraInk(Era era) => switch (era) {
     dryness: 0.1,
   ),
   Era.technicolor => const InkStyle(
-    lineWidth: 2.4,
+    lineWidth: 2.9,
     taper: 0.4,
     boilAmplitude: 0.35,
     shading: ShadingMode.gradient,

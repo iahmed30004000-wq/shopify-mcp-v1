@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/rules/board/board_games.dart';
+import 'package:madar/features/cinema/rules/board/checkers/checkers_rules.dart'
+    show CheckersGameEnd, CheckersMoveGen, CheckersVariant;
 
 int sq(int row, int col) => row * 8 + col;
 
@@ -14,9 +16,49 @@ const m0 = CheckersPiece.man0, k0 = CheckersPiece.king0, m1 = CheckersPiece.man1
 void main() {
   const rules = checkersRules;
 
-  group('American (default)', () {
+  group('defaults and presets', () {
+    test('the Jordanian rules are the default', () {
+      expect(CheckersState.initial().config, CheckersConfig.jordan);
+      final kitState = boardGameKits[BoardGameId.checkers]!.newGame() as CheckersState;
+      expect(kitState.config, CheckersConfig.jordan);
+      expect(kitState.config.variant, CheckersVariant.jordan);
+    });
+
+    test('every variant maps to its own preset and back', () {
+      final configs = {for (final v in CheckersVariant.values) v.config};
+      expect(configs, hasLength(CheckersVariant.values.length));
+      for (final v in CheckersVariant.values) {
+        expect(v.config.variant, v);
+      }
+      expect(CheckersConfig.jordan.copyWith(noProgressLimit: 32).variant, isNull);
+      expect(CheckersConfig.turkish, CheckersConfig.jordan.copyWith(kingsBeatLoneKing: false));
+      expect(CheckersConfig.americanFlyingKings, CheckersConfig.american.copyWith(flyingKings: true));
+    });
+
+    test('the American presets keep their previous behaviour', () {
+      for (final c in [CheckersConfig.american, CheckersConfig.americanFlyingKings]) {
+        expect(c.onePieceEachDraw || c.kingsBeatLoneKing || c.kingBeatsLoneMan, isFalse);
+        expect(c.noProgressLimit, 80);
+      }
+    });
+
+    test('JSON without the adjudication keys loads them as false', () {
+      final json = CheckersConfig.jordan.toJson()
+        ..remove('onePieceEachDraw')
+        ..remove('kingsBeatLoneKing')
+        ..remove('kingBeatsLoneMan');
+      final c = CheckersConfig.fromJson(json);
+      expect(c.onePieceEachDraw || c.kingsBeatLoneKing || c.kingBeatsLoneMan, isFalse);
+      expect(c.geometry, CheckersGeometry.orthogonal);
+      final state = CheckersState.initial(CheckersConfig.american).toJson();
+      (state['config']! as Map<String, Object?>).remove('kingBeatsLoneMan');
+      expect(CheckersState.fromJson(state).config, CheckersConfig.american);
+    });
+  });
+
+  group('American', () {
     test('initial position', () {
-      final s = CheckersState.initial();
+      final s = CheckersState.initial(CheckersConfig.american);
       expect(s.pieceCount(0), 12);
       expect(s.pieceCount(1), 12);
       expect(rules.legalMoves(s), hasLength(7));
@@ -93,6 +135,7 @@ void main() {
         s = rules.apply(s, cycle[i % 4]);
       }
       expect(s.result?.reason, GameEndReason.threefoldRepetition);
+      expect(s.end, CheckersGameEnd.threefoldRepetition);
 
       final quiet = CheckersState(
         config: CheckersConfig.american,
@@ -101,6 +144,30 @@ void main() {
         pliesWithoutProgress: 79,
       );
       expect(rules.apply(quiet, cycle[0]).result?.reason, GameEndReason.noProgress);
+    });
+
+    test('every man move is irreversible on the diagonal board', () {
+      final s = board({sq(2, 2): m0, sq(0, 0): k0, sq(7, 7): k1, sq(6, 6): k1});
+      final quiet = CheckersState(
+        config: CheckersConfig.american,
+        board: s.board,
+        currentPlayer: 0,
+        pliesWithoutProgress: 10,
+      );
+      final step = CheckersMove([sq(2, 2), sq(3, 3)]);
+      expect(CheckersMoveGen.isIrreversible(step, m0), isTrue);
+      final after = rules.apply(quiet, step);
+      expect(after.pliesWithoutProgress, 0);
+      expect(after.keys, hasLength(1));
+    });
+
+    test('one piece each and kings v a lone king are not adjudicated', () {
+      final one = board({sq(2, 2): m0, sq(3, 3): m1, sq(7, 7): k1});
+      final after = rules.apply(one, rules.legalMoves(one).single);
+      expect(after.pieceCount(0) + after.pieceCount(1), 2);
+      expect(after.result, isNull);
+      final kings = board({sq(0, 0): k0, sq(0, 2): k0, sq(7, 1): k1});
+      expect(rules.apply(kings, CheckersMove([sq(0, 2), sq(1, 3)])).result, isNull);
     });
   });
 
@@ -114,7 +181,7 @@ void main() {
     });
   });
 
-  group('Turkish Dama (orthogonal)', () {
+  group('Turkish federation Dama (orthogonal)', () {
     const t = CheckersConfig.turkish;
 
     test('initial position and first moves', () {

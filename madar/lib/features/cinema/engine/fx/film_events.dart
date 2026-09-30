@@ -44,6 +44,7 @@ class FilmEvents {
   int _slipFrames = 0;
   double _slipStep = 0;
   int _spliceFrames = 0;
+  double _spliceLevel = 1;
   int _hairFrames = 0;
   int _cueFrames = 0;
   int _reelFrames = -1;
@@ -97,12 +98,13 @@ class FilmEvents {
     // Splices: a bright tape line for a frame or two, often with a jump.
     if (_spliceFrames > 0) {
       _spliceFrames--;
-      splice = _spliceFrames > 0 ? 1 : 0;
+      splice = _spliceFrames > 0 ? _spliceLevel : 0;
     } else {
       splice = 0;
       if (_chance(look.splicesPerMinute * perFrame * boost * w)) {
         _spliceFrames = 1 + (_rng.nextDouble() < 0.4 ? 1 : 0);
-        splice = reduced ? 0.4 : 1;
+        _spliceLevel = reduced ? 0.4 : 1;
+        splice = _spliceLevel;
         spliceY = 0.15 + _rng.nextDouble() * 0.7;
         if (!reduced && _rng.nextDouble() < 0.35) _startSlip(0.08 + _rng.nextDouble() * 0.12);
       }
@@ -176,7 +178,7 @@ class FilmEvents {
   }
 
   void _showCue() {
-    _cueFrames = 5;
+    _cueFrames = 4;
     cue = 1;
     cueRadius = 0.03 + _rng.nextDouble() * 0.01;
     cueX = 0.855 + _rng.nextDouble() * 0.03;
@@ -205,6 +207,7 @@ class FilmEvents {
   /// Forces a splice with a frame slip on the next film frame's read
   /// (e.g. a boss slams the ground).
   void spliceNow({double y = 0.5, double slip = 0.25}) {
+    _spliceLevel = 1;
     splice = 1;
     spliceY = y;
     _spliceFrames = 2;

@@ -26,7 +26,7 @@ FilmLook eraLook(Era era) => switch (era) {
   Era.rubberHose => const FilmLook(
     halftone: 0.85,
     halftoneCell: 4,
-    lineBoil: 0.4,
+    lineBoil: 0.3,
     gateCorner: 12,
     hotspot: 0.35,
     age: 0.2,

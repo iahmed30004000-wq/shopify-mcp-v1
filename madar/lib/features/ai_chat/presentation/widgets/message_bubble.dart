@@ -43,8 +43,7 @@ class MessageBubble extends StatelessWidget {
   final MdLinkOpener? onOpenLink;
 
   @override
-  Widget build(BuildContext context) =>
-      message.isUser ? _UserBubble(message: message) : _AssistantBubble(bubble: this);
+  Widget build(BuildContext context) => message.isUser ? _UserBubble(message: message) : _AssistantBubble(bubble: this);
 }
 
 class _UserBubble extends StatelessWidget {
@@ -78,7 +77,10 @@ class _UserBubble extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [t.accent.withValues(alpha: t.isDark ? 0.34 : 0.2), t.accent.withValues(alpha: t.isDark ? 0.22 : 0.12)],
+                  colors: [
+                    t.accent.withValues(alpha: t.isDark ? 0.34 : 0.2),
+                    t.accent.withValues(alpha: t.isDark ? 0.22 : 0.12),
+                  ],
                 ),
                 border: Border.all(color: t.accent.withValues(alpha: 0.45), width: 0.9),
               ),
@@ -118,7 +120,8 @@ class _AssistantBubble extends StatelessWidget {
       if (m.stopReason == AiStopReason.maxTokens) _Note(icon: Icons.short_text_rounded, text: l.aiChatCutShort),
       if (m.stopReason == AiStopReason.refusal) _Note(icon: Icons.do_not_disturb_on_outlined, text: l.aiChatRefused),
       if (m.stopReason == AiStopReason.contentFilter) _Note(icon: Icons.filter_alt_outlined, text: l.aiChatFiltered),
-      if (!streaming && !failed && HealthMentions.mentions(m.text))
+      // Also under a failed or stopped partial reply: its text stays visible.
+      if (!streaming && m.text.isNotEmpty && HealthMentions.mentions(m.text))
         _Note(icon: Icons.health_and_safety_outlined, text: l.aiChatHealthNote, key: const ValueKey('ai-health-note')),
     ];
 
@@ -159,7 +162,9 @@ class _AssistantBubble extends StatelessWidget {
         ),
         color: t.glassFill,
         border: Border.all(color: t.glassBorder.withValues(alpha: 0.75), width: 0.8),
-        boxShadow: [BoxShadow(color: t.glassShadow.withValues(alpha: 0.18), blurRadius: 18, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(color: t.glassShadow.withValues(alpha: 0.18), blurRadius: 18, offset: const Offset(0, 6)),
+        ],
       ),
       child: AnimatedSize(
         duration: context.reducedMotion ? Duration.zero : MadarMotion.short,
@@ -199,7 +204,11 @@ class _AssistantBubble extends StatelessWidget {
           for (final n in notes) n,
           if (failed)
             _ErrorCard(
-              message: l.aiError(m.error ?? AiErrorKind.unknown, provider: m.provider ?? AiProviderId.anthropic, model: model ?? ''),
+              message: l.aiError(
+                m.error ?? AiErrorKind.unknown,
+                provider: m.provider ?? AiProviderId.anthropic,
+                model: model ?? '',
+              ),
               detail: bubble.errorDetail,
               onRetry: bubble.onRetry,
               onOpenSettings: aiErrorWantsSettings(m.error ?? AiErrorKind.unknown) ? bubble.onOpenSettings : null,
@@ -368,10 +377,7 @@ class _ActionRowState extends State<_ActionRow> {
         semanticLabel: label,
         excludeChildSemantics: true,
         focusRadius: BorderRadius.circular(18),
-        child: SizedBox.square(
-          dimension: 36,
-          child: Icon(icon, size: 17, color: color ?? t.textTertiary),
-        ),
+        child: SizedBox.square(dimension: 36, child: Icon(icon, size: 17, color: color ?? t.textTertiary)),
       ),
     );
     return Padding(

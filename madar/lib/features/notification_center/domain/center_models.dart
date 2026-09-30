@@ -167,7 +167,8 @@ class CenterNotice {
   int get hashCode => Object.hash(id, namespace, at?.millisecondsSinceEpoch, title, body, channelId, data.length);
 
   @override
-  String toString() => 'CenterNotice($namespace#$id @ ${at?.toIso8601String()} "$title")';
+  // Never the texts: they name medications and people (logs, error messages).
+  String toString() => 'CenterNotice($namespace#$id @ ${at?.toIso8601String()})';
 }
 
 /// Where a notification of the center stands.

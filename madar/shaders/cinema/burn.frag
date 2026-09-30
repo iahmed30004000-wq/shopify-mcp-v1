@@ -39,20 +39,24 @@ void main() {
   vec2 o = p - uBurn.yz;
   float n = cn_fbm(p * 0.018 + uBurn.w * 13.0) - 0.5;
   float d = length(o) + n * (36.0 + r * 0.4) - r;
-  // Bubbles pop open just ahead of the front.
+  // Bubbles pop open just ahead of the front: small holes with a hot rim,
+  // kept inside their cell (centre in the middle third, radius + rim < 8 px).
   vec2 cell = floor((p - uRect.xy) / 24.0);
   vec2 rnd = cn_hash22(cell + uBurn.w * 7.0);
-  vec2 bc = uRect.xy + (cell + 0.2 + 0.6 * rnd) * 24.0;
-  float grow = 1.0 - smoothstep(0.0, 55.0, d);
-  float bd = length(p - bc) - (2.0 + rnd.x * 7.0) * grow + (1.0 - grow) * 30.0;
-  float dist = rnd.y < 0.35 ? d : min(d, bd);
+  vec2 bc = uRect.xy + (cell + 0.35 + 0.3 * rnd) * 24.0;
+  float grow = (1.0 - smoothstep(4.0, 50.0, d)) * step(0.4, rnd.y) * step(0.0, d);
+  float br = (1.5 + rnd.x * 3.5) * grow;
+  float bdist = length(p - bc) - br;
+  float bhole = (1.0 - cn_edge(0.0, bdist, 0.8)) * step(0.3, br);
+  float brim = (1.0 - smoothstep(0.0, 2.6, bdist)) * step(0.3, br) * (1.0 - bhole);
+
   float w = max(uEdge.a, 1.0);
-  float hole = 1.0 - cn_edge(0.0, dist, 1.2);
+  float hole = max(1.0 - cn_edge(0.0, d, 1.2), bhole);
   float out1 = 1.0 - hole;
-  float white = (1.0 - smoothstep(0.0, w * 0.45, dist)) * out1;
-  float glow = (1.0 - smoothstep(w * 0.2, w * 1.3, dist)) * out1;
-  float scorch = (1.0 - smoothstep(w * 0.8, w * 4.5, dist)) * out1;
-  float blister = (1.0 - smoothstep(0.0, 3.0, abs(dist - w * 2.2))) * out1 * 0.35;
+  float white = max((1.0 - smoothstep(0.0, w * 0.45, d)), brim) * out1;
+  float glow = max((1.0 - smoothstep(w * 0.2, w * 1.3, d)), brim) * out1;
+  float scorch = (1.0 - smoothstep(w * 0.8, w * 4.5, d)) * out1;
+  float blister = (1.0 - smoothstep(0.0, 3.0, abs(d - w * 2.2))) * out1 * 0.35;
   vec4 col = vec4(uHole.rgb, 1.0) * uHole.a * hole;
   vec3 ring = mix(uEdge.rgb, vec3(1.0, 0.97, 0.82), white);
   float ringA = max(glow, white);

@@ -67,7 +67,7 @@ void main() {
   vec2 size = max(uRect.zw, vec2(1.0));
   vec2 p0 = FlutterFragCoord().xy - uRect.xy;
   float t = uClock.x;
-  float ff = uClock.y;
+  float ff = mod(uClock.y, 8192.0);
   float seed = uClock.w;
 
   // Gate weave + projector shake.

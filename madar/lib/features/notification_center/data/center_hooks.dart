@@ -3,13 +3,15 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/notifications/notification_envelope.dart';
 import '../../../core/notifications/notification_models.dart';
 import '../../../core/notifications/notification_providers.dart';
-import '../../adhan/application/adhan_providers.dart' show adhanEventProvider;
+import '../../adhan/application/adhan_providers.dart' show adhanEventProvider, adhanSyncProvider;
 import '../../adhan/domain/adhan_event.dart' show AdhanActions, AdhanEvent;
 import '../../health/meds/data/meds_notifications.dart' show MedsNotificationTaps;
-import '../../health/meds/data/meds_providers.dart' show medsNotificationBridgeProvider;
+import '../../health/meds/data/meds_providers.dart' show medsNotificationBridgeProvider, medsReminderSyncProvider;
 import '../domain/center_models.dart';
+import 'center_providers.dart';
 
 // ---------------------------------------------------------------------------
 // Actions: the notifications' own buttons, answered from the center
@@ -68,7 +70,8 @@ final notificationActionHandlersProvider = Provider<NotificationActionHandlers>(
   }
 
   Future<bool> stopAdhan(CenterActionRequest r) async {
-    await ref.read(notificationServiceProvider).cancel(r.notice.id);
+    // Its sound stops with it (a notification of the id still to come stays).
+    await removeShownNotice(ref, r.notice);
     final event = AdhanEvent.fromTap(r.tap);
     if (event != null && ref.exists(adhanEventProvider) && ref.read(adhanEventProvider)?.key == event.key) {
       ref.read(adhanEventProvider.notifier).dismiss();
@@ -83,6 +86,69 @@ final notificationActionHandlersProvider = Provider<NotificationActionHandlers>(
     AdhanActions.stop: stopAdhan,
   });
 });
+
+/// Takes [notice] (shown) out of the tray and stops its sound – unless its
+/// id has another firing pending, which a cancel would take along (the
+/// platform cancels by id: the alarm and the shown notification together)
+/// – one still to come, or one Doze holds past its moment: then it stays in
+/// the tray. True when it was removed.
+Future<bool> removeShownNotice(Ref ref, CenterNotice notice) async {
+  final gate = ref.read(notificationGateProvider);
+  if (gate.attached) return gate.removeShown(notice);
+  try {
+    final service = ref.read(notificationServiceProvider);
+    final shown = notice.at?.millisecondsSinceEpoch;
+    for (final p in await service.pendingNotices()) {
+      if (p.id != notice.id) continue;
+      final at = NotificationEnvelope.decode(p.payload).at;
+      if (at == null || shown == null || at.millisecondsSinceEpoch != shown) return false;
+    }
+    await service.cancel(notice.id);
+    return true;
+  } catch (e) {
+    debugPrint('NotificationCenter: removing ${notice.key} from the tray failed (${e.runtimeType})');
+    return false;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Re-plans: a feature re-sends its own requests
+
+/// Re-plans one feature's notifications now (its sync, as on a settings
+/// change).
+typedef NotificationReplan = Future<void> Function();
+
+/// The feature re-plans the center asks for, by namespace name, when the
+/// gate had to rebuild some of their requests from what the plugin
+/// reported (after a restart the original request – its buttons, its
+/// alarm-clock timing – is gone). Mute a group in a fresh run and undo it:
+/// without a re-plan the adhan would come back without its Stop button
+/// until its next scheduled re-plan (hours). Built in: the adhan and the
+/// medication tracker, the two whose notifications carry buttons – each
+/// only when its sync is already running (never started from here). The
+/// lead [register]s others if wanted.
+class NotificationReplanHooks {
+  NotificationReplanHooks([Map<String, NotificationReplan> hooks = const {}]) : _hooks = {...hooks};
+
+  final Map<String, NotificationReplan> _hooks;
+
+  void register(String namespace, NotificationReplan replan) => _hooks[namespace] = replan;
+
+  NotificationReplan? operator [](String namespace) => _hooks[namespace];
+
+  Iterable<String> get namespaces => _hooks.keys;
+}
+
+final notificationReplanHooksProvider = Provider<NotificationReplanHooks>(
+  (ref) => NotificationReplanHooks({
+    NotificationNamespaces.adhan.name: () async {
+      if (ref.exists(adhanSyncProvider)) await ref.read(adhanSyncProvider.notifier).syncNow();
+    },
+    NotificationNamespaces.meds.name: () async {
+      if (ref.exists(medsReminderSyncProvider)) await ref.read(medsReminderSyncProvider.notifier).syncNow();
+    },
+  }),
+);
 
 // ---------------------------------------------------------------------------
 // Links the lead wires: opening an item, a group's reminder settings

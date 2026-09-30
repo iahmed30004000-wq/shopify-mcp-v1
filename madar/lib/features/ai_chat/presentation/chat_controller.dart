@@ -1,7 +1,10 @@
 /// One conversation's state and its calls. Every call starts from an
 /// explicit user action ([send], [regenerate], [retry]) and only once the
 /// user has decided what personal context goes out – nothing here runs on
-/// a timer, on load or in the background.
+/// a timer, on load or in the background. One call at a time (a double tap
+/// sends once), none after the screen is gone, and a conversation deleted
+/// elsewhere (list, settings) is let go of at once – its reply stopped, its
+/// history and approved summary never sent or saved again.
 library;
 
 import 'dart:async';
@@ -41,13 +44,16 @@ class ChatController extends ChangeNotifier {
     required this.clock,
     required this.newId,
     this.conversationId,
-  });
+  }) {
+    _deletions = store.deletions.listen(_onDeleted);
+  }
 
   final ConversationStore store;
   final AiProviderRegistry providers;
   final AiKeyStore keys;
   final DateTime Function() clock;
   final String Function() newId;
+
   /// The stored conversation to open (null = a new chat).
   final String? conversationId;
 
@@ -62,6 +68,11 @@ class ChatController extends ChangeNotifier {
   StringBuffer? _buffer;
   AiException? _lastError;
   Future<void> _saving = Future.value();
+  StreamSubscription<Set<String>?>? _deletions;
+
+  /// A Send / Regenerate is between the tap and its request (reading the
+  /// key): a second tap is ignored.
+  bool _starting = false;
 
   /// The conversation (a fresh, unsaved one for a new chat).
   Conversation get conversation => _conversation ??= _fresh();
@@ -156,13 +167,27 @@ class ChatController extends ChangeNotifier {
     return last != null && !last.isUser && conversation.messages.any((m) => m.isUser && m.isHistory);
   }
 
+  /// Whether a call may start now (not busy, not already starting, still
+  /// on screen, not deleted).
+  bool get _canStart => !busy && !_starting && !_disposed && !_discarded;
+
   /// Sends [text] – the user tapped Send. Returns false (and sends nothing)
-  /// when the context isn't decided, there's no key or a reply is running.
+  /// when the context isn't decided, there's no key, a reply is running or
+  /// starting, or the screen is gone.
   Future<bool> send(String text, {required AiSettings settings, required String languageCode}) async {
     final trimmed = text.trim();
-    if (trimmed.isEmpty || busy || !conversation.context.isDecided) return false;
-    final key = await _key(settings.provider);
-    if (key == null) return false;
+    if (trimmed.isEmpty || !_canStart || !conversation.context.isDecided) return false;
+    _starting = true;
+    final String? key;
+    final id = conversation.id;
+    try {
+      key = await _key(settings.provider);
+    } finally {
+      _starting = false;
+    }
+    // Left, deleted or switched while the key was read: send nothing.
+    if (key == null || _disposed || _discarded || busy || conversation.id != id) return false;
+    if (!conversation.context.isDecided) return false;
     final payload = payloadFor(settings, languageCode, draft: trimmed);
     final now = clock();
     _conversation = conversation.append(
@@ -175,11 +200,20 @@ class ChatController extends ChangeNotifier {
 
   /// Writes the last reply again – the user tapped Regenerate.
   Future<bool> regenerate({required AiSettings settings, required String languageCode}) async {
-    if (busy || !conversation.context.isDecided) return false;
+    if (!_canStart || !conversation.context.isDecided) return false;
+    if (conversation.messages.lastIndexWhere((m) => m.isUser && m.isHistory) < 0) return false;
+    _starting = true;
+    final String? key;
+    final id = conversation.id;
+    try {
+      key = await _key(settings.provider);
+    } finally {
+      _starting = false;
+    }
+    if (key == null || _disposed || _discarded || busy || conversation.id != id) return false;
+    if (!conversation.context.isDecided) return false;
     final lastUser = conversation.messages.lastIndexWhere((m) => m.isUser && m.isHistory);
     if (lastUser < 0) return false;
-    final key = await _key(settings.provider);
-    if (key == null) return false;
     // Drop the replies after the last question.
     final kept = conversation.messages.sublist(0, lastUser + 1);
     _conversation = conversation.copyWith(messages: kept, updatedAt: clock());
@@ -214,6 +248,7 @@ class ChatController extends ChangeNotifier {
       final key = await keys.read(p);
       if (key != null) return key;
     } catch (_) {}
+    if (_disposed) return null;
     _lastError = const AiException(AiErrorKind.noKey);
     _notify();
     return null;
@@ -328,15 +363,36 @@ class ChatController extends ChangeNotifier {
   /// again (so a late save can't bring it back).
   Future<void> discard() async {
     _discarded = true;
-    if (busy) {
-      _cancel?.cancel();
-      final sub = _sub;
-      _sub = null;
-      unawaited(sub?.cancel());
-      _streamingId = null;
-      _buffer = null;
-    }
+    _abortReply();
     await _saving;
+  }
+
+  /// Stops the reply without keeping or saving anything.
+  void _abortReply() {
+    if (!busy) return;
+    _cancel?.cancel();
+    _cancel = null;
+    final sub = _sub;
+    _sub = null;
+    unawaited(sub?.cancel());
+    _streamingId = null;
+    _buffer = null;
+  }
+
+  /// [ids] were deleted (null = all): if this conversation is one of them,
+  /// stop its reply and start over with a fresh, undecided conversation –
+  /// so neither its history nor its approved summary is sent or saved
+  /// again.
+  void _onDeleted(Set<String>? ids) {
+    if (_disposed) return;
+    if (ids != null && !ids.contains(conversation.id)) return;
+    _abortReply();
+    _lastError = null;
+    _previousPersonal = null;
+    _missing = false;
+    _discarded = false; // the fresh conversation has its own id
+    _conversation = _fresh();
+    _notify();
   }
 
   void _persist() {
@@ -359,8 +415,10 @@ class ChatController extends ChangeNotifier {
   @override
   void dispose() {
     // Leaving the screen stops the reply (never continues in the background).
-    stop();
     _disposed = true;
+    unawaited(_deletions?.cancel());
+    _deletions = null;
+    stop();
     super.dispose();
   }
 }

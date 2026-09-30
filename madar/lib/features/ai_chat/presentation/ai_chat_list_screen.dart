@@ -170,7 +170,10 @@ class AiChatListScreen extends ConsumerWidget {
                                   style: text.bodySmall!.copyWith(color: t.textSecondary),
                                 ),
                               Text(
-                                l.aiChatListUpdated(when(m.updatedAt), fmt.localizeDigits(l.aiChatMessagesCount(m.messageCount))),
+                                l.aiChatListUpdated(
+                                  when(m.updatedAt),
+                                  fmt.localizeDigits(l.aiChatMessagesCount(m.messageCount)),
+                                ),
                                 style: text.labelSmall!.copyWith(color: t.textTertiary),
                               ),
                             ],

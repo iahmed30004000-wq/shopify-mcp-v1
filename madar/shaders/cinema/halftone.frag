@@ -43,8 +43,14 @@ void main() {
     float w = t * 0.5;
     a = 1.0 - cn_edge(w, abs(f.y), uDots.w / cell + 0.02);
   } else {
-    float r = sqrt(cn_sat(t)) * 0.7071;
-    a = 1.0 - cn_edge(r, length(f), uDots.w / cell + 0.02);
+    // Ink spread: every dot prints a little differently (and re-inks with
+    // the boil frame), so the screen reads as print, not as a grid.
+    vec2 id = floor(q);
+    float spread = 0.88 + 0.24 * cn_hash12(id + vec2(uRampMode.w * 0.37, 5.1));
+    float r = sqrt(cn_sat(t)) * 0.7071 * spread;
+    float ang = atan(f.y, f.x + 0.0001);
+    float rough = (cn_noise(vec2(ang * 1.3, id.x * 3.1 + id.y * 1.7)) - 0.5) * 0.08;
+    a = 1.0 - cn_edge(r + rough * r, length(f), uDots.w / cell + 0.02);
   }
   a *= step(0.001, t);
   fragColor = vec4(uInk.rgb, 1.0) * uInk.a * a;

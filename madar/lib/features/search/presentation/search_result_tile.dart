@@ -58,6 +58,9 @@ class SearchResultTile extends StatelessWidget {
     );
     final date = doc.date == null ? null : SearchVisuals.date(doc.date!, now ?? DateTime.now(), l, fmt);
     final quran = doc.refTable == QuranSearchSource.refTable;
+    // Each text runs in its own direction (see [searchTextDirection]) but
+    // lines up with the app's reading start, like the rest of the list.
+    final start = Directionality.of(context) == TextDirection.rtl ? TextAlign.right : TextAlign.left;
     final snippetStyle = quran
         ? MadarTypography.quran(t, size: 19).copyWith(height: 1.75, color: t.textSecondary)
         : text.bodySmall!.copyWith(color: t.textSecondary, height: 1.45);
@@ -99,6 +102,8 @@ class SearchResultTile extends StatelessWidget {
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        textDirection: searchTextDirection(doc.title),
+                        textAlign: start,
                       ),
                     ),
                     if (date != null)
@@ -114,6 +119,8 @@ class SearchResultTile extends StatelessWidget {
                     searchHighlightSpan(doc.subtitle, hit.subtitleRanges, text.bodySmall!.copyWith(color: t.textSecondary), lit),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    textDirection: searchTextDirection(doc.subtitle),
+                    textAlign: start,
                   ),
                 ],
                 if (hit.snippet.isNotEmpty) ...[
@@ -122,7 +129,8 @@ class SearchResultTile extends StatelessWidget {
                     searchHighlightSpan(hit.snippet, hit.snippetRanges, snippetStyle, lit),
                     maxLines: quran ? 3 : 2,
                     overflow: TextOverflow.ellipsis,
-                    textDirection: quran ? TextDirection.rtl : null,
+                    textDirection: quran ? TextDirection.rtl : searchTextDirection(hit.snippet),
+                    textAlign: quran ? null : start,
                   ),
                 ],
                 if (moduleLabel != null) ...[

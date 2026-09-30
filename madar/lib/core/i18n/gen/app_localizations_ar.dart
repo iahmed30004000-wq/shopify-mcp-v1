@@ -18476,6 +18476,46 @@ class L10nAr extends L10n {
   String get cinemaFxReelLabel => 'بكرة';
 
   @override
+  String get cinemaRigCast => 'طاقم التمثيل';
+
+  @override
+  String get cinemaRigNujaym => 'نُجيم';
+
+  @override
+  String get cinemaRigNujaymRole => 'طائر النجمة الشجاع، بطل «رفرفة المدار»';
+
+  @override
+  String get cinemaRigZunbruk => 'البارون زُنبُرك';
+
+  @override
+  String get cinemaRigZunbrukRole => 'رئيس العمّال الآلي في «آلة المتروبوليس»';
+
+  @override
+  String get cinemaRigZajil => 'زاجل';
+
+  @override
+  String get cinemaRigZajilRole => 'الجمل ساعي البريد في «سباق القافلة»';
+
+  @override
+  String get cinemaRigMishmish => 'المفتش مِشمِش';
+
+  @override
+  String get cinemaRigMishmishRole => 'القط المحقق ذو المعطف في «أسطح النوار»';
+
+  @override
+  String get cinemaRigSarab => 'سراب';
+
+  @override
+  String get cinemaRigSarabRole =>
+      'راكبة الدراجة الطائرة في «متسابق سوق النيون»';
+
+  @override
+  String get cinemaRigBean => 'حبّة';
+
+  @override
+  String get cinemaRigBeanRole => 'نجم البروفة، حبّة فاصولياء بقفازين أبيضين';
+
+  @override
   String get dataCentreTitle => 'بياناتك';
 
   @override
@@ -20636,8 +20676,7 @@ class L10nAr extends L10n {
   String get aiChatWillSend => 'سيُرسل';
 
   @override
-  String get aiChatContextReviewFirst =>
-      'ستراجع ما يُشارك من ملخّصك قبل أول إرسال';
+  String get aiChatContextReviewFirst => 'ستراجع ملخّصك قبل الإرسال';
 
   @override
   String get aiChatContextNone => 'بلا سياق شخصي';
@@ -20986,6 +21025,9 @@ class L10nAr extends L10n {
   String get aiChatSettingsService => 'الخدمة';
 
   @override
+  String get aiChatSettingsServiceModel => 'الخدمة والنموذج';
+
+  @override
   String get aiChatServiceAnthropic => 'Anthropic';
 
   @override
@@ -21060,8 +21102,9 @@ class L10nAr extends L10n {
   String get aiChatKeyProblemSpaces => 'في المفتاح مسافات؛ انسخه مرة أخرى.';
 
   @override
-  String get aiChatKeyProblemProvider =>
-      'يبدو هذا مفتاحًا لخدمة أخرى. سيُحفظ على أي حال، واختبره للتأكد.';
+  String aiChatKeyProblemProvider(String service) {
+    return 'هذا المفتاح خاص بخدمة $service، لذا لم يُحفظ هنا حتى لا يُرسل إلى خدمة أخرى. أضِفه ضمن $service.';
+  }
 
   @override
   String get aiChatSettingsModel => 'النموذج';
@@ -21159,10 +21202,24 @@ class L10nAr extends L10n {
 
   @override
   String get aiChatPrivacyCalls =>
-      'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.';
+      'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.';
 
   @override
   String aiChatPrivacyHistory(String count) {
-    return 'تُحفظ المحادثات مشفّرة على هاتفك (آخر $count).';
+    return 'تُحفظ المحادثات مشفّرة على هاتفك (آخر $count)، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.';
   }
+
+  @override
+  String get aiChatKeyProblemChars =>
+      'في المفتاح رموز لا تكون في المفاتيح (ربما من النسخ)؛ انسخه مرة أخرى.';
+
+  @override
+  String get aiChatLinkTitle => 'فتح هذا الرابط؟';
+
+  @override
+  String get aiChatLinkBody =>
+      'يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.';
+
+  @override
+  String get aiChatLinkOpen => 'فتح الرابط';
 }

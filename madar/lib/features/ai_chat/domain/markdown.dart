@@ -127,6 +127,43 @@ abstract final class MdParser {
 
   static List<MdBlock> parse(String source) => _blocks(source.replaceAll('\r\n', '\n').split('\n'), 0);
 
+  /// The text of [source] without Markdown syntax, blocks joined by a space
+  /// (for one-line previews).
+  static String plainText(String source) {
+    final parts = <String>[];
+    void add(MdBlock b) {
+      switch (b) {
+        case MdParagraph(:final spans) || MdHeading(:final spans):
+          parts.add(mdPlain(spans));
+        case MdCodeBlock(:final code):
+          parts.add(code);
+        case MdQuote(:final children):
+          children.forEach(add);
+        case MdList(:final items):
+          void item(MdListItem i) {
+            parts.add(mdPlain(i.spans));
+            for (final c in i.children) {
+              c.items.forEach(item);
+            }
+          }
+          items.forEach(item);
+        case MdTable(:final header, :final rows):
+          parts.add(
+            [
+              for (final c in header) mdPlain(c),
+              for (final r in rows)
+                for (final c in r) mdPlain(c),
+            ].join(' '),
+          );
+        case MdRule():
+          break;
+      }
+    }
+
+    parse(source).forEach(add);
+    return parts.join(' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+  }
+
   static List<MdBlock> _blocks(List<String> lines, int depth) {
     final out = <MdBlock>[];
     final para = <String>[];
@@ -184,9 +221,7 @@ abstract final class MdParser {
           body.add(q != null ? q[1]! : lines[i]);
           i++;
         }
-        out.add(
-          depth >= _maxDepth ? MdParagraph(MdInline.parse(body.join('\n'))) : MdQuote(_blocks(body, depth + 1)),
-        );
+        out.add(depth >= _maxDepth ? MdParagraph(MdInline.parse(body.join('\n'))) : MdQuote(_blocks(body, depth + 1)));
         continue;
       }
       if (_item.hasMatch(line) && !(para.isNotEmpty && _isOrderedNotOne(line))) {
@@ -466,9 +501,7 @@ abstract final class MdInline {
           if (close != null) {
             final body = s.substring(i + run, close);
             flushPlain();
-            out.addAll([
-              for (final span in inner(body)) span.styled(bold: run >= 2, italic: run != 2),
-            ]);
+            out.addAll([for (final span in inner(body)) span.styled(bold: run >= 2, italic: run != 2)]);
             i = close + run;
             continue;
           }

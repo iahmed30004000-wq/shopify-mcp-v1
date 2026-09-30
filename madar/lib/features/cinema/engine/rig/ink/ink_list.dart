@@ -27,6 +27,9 @@ abstract final class InkOp {
 
   /// Plain stroke in the op's colour.
   static const stroke = 5;
+
+  /// Rim light: a pale stroke nudged toward the light, behind the ink.
+  static const rim = 6;
 }
 
 final class _Op {
@@ -74,7 +77,8 @@ final class InkList {
   Color _cel = const Color(0x40000000);
   bool _neon = false;
   double _offX = 0, _offY = 0;
-  double _glowWidth = 0;
+  double _glowWidth = 0, _glowMin = 0;
+  Color? _rim;
   ShadingMode _shading = ShadingMode.flat;
 
   final Paint _fill = Paint()..isAntiAlias = true;
@@ -119,6 +123,8 @@ final class InkList {
     required double offsetY,
     required double glowWidth,
     required ShadingMode shading,
+    double glowMin = 0,
+    Color? rim,
   }) {
     _pathCount = 0;
     _opCount = 0;
@@ -129,6 +135,8 @@ final class InkList {
     _offX = offsetX;
     _offY = offsetY;
     _glowWidth = glowWidth;
+    _glowMin = glowMin;
+    _rim = rim;
     _shading = shading;
     _shadeReady = false;
   }
@@ -183,43 +191,54 @@ final class InkList {
   }
 
   /// A detail of the current layer drawn after fills and shading.
-  Path detail(int kind, Color color, [double width = 0]) {
+  Path detail(int kind, Color color, [double width = 0, double dx = 0, double dy = 0]) {
     final p = _newPath();
-    if (!_inLayer) {
-      // Outside a layer a detail is a direct op.
-      _op()
-        ..path = p
-        ..kind = kind
-        ..color = color
-        ..width = width
-        ..dx = 0
-        ..dy = 0;
-      return p;
-    }
-    _stage(_details, _nDetails++)
+    final o = _inLayer ? _stage(_details, _nDetails++) : _op();
+    o
       ..path = p
       ..kind = kind
       ..color = color
       ..width = width
-      ..dx = 0
-      ..dy = 0;
+      ..dx = dx
+      ..dy = dy;
     return p;
   }
+
+  /// The rim-light colour of this drawing (dark-backdrop eras), or null.
+  Color? get rimColor => _rim;
+
+  /// Offset of the ink toward the shadow side (rim light goes the other way).
+  double get inkOffsetX => _offX;
+  double get inkOffsetY => _offY;
 
   /// Flushes the current layer: glow → ink silhouettes → fills → shading →
   /// details.
   void endLayer() {
     if (!_inLayer) return;
     _inLayer = false;
+    final rim = _rim;
+    if (rim != null) {
+      for (var i = 0; i < _nShapes; i++) {
+        final s = _shapes[i];
+        if (s.width < _glowMin) continue;
+        _op()
+          ..path = s.path
+          ..kind = InkOp.rim
+          ..color = rim
+          ..width = s.width * 1.05
+          ..dx = -_offX * 1.6
+          ..dy = -_offY * 1.6;
+      }
+    }
     if (_neon && _glowWidth > 0) {
       for (var i = 0; i < _nShapes; i++) {
         final s = _shapes[i];
-        if (s.width <= 0) continue;
+        if (s.width < _glowMin) continue;
         _op()
           ..path = s.path
           ..kind = InkOp.glow
           ..color = _glow
-          ..width = s.width + _glowWidth
+          ..width = s.width * 1.6
           ..dx = 0
           ..dy = 0;
       }
@@ -378,6 +397,14 @@ final class InkList {
             ..color = o.color
             ..strokeWidth = o.width;
           canvas.drawPath(o.path, _glowPaint);
+        case InkOp.rim:
+          _stroke
+            ..color = o.color
+            ..strokeWidth = o.width;
+          canvas
+            ..translate(o.dx, o.dy)
+            ..drawPath(o.path, _stroke)
+            ..translate(-o.dx, -o.dy);
         case InkOp.stroke:
           _stroke
             ..color = flash != null && o.color.a > 0.9 && o.color != _ink ? flash : o.color

@@ -1,4 +1,10 @@
 /// Tarneeb (طرنيب): options, moves and the serialisable match state.
+///
+/// `const TarneebOptions()` is the game as commonly played in Jordan (see
+/// RULES.md): auction 7–13 where a pass is final, the same dealer redeals
+/// when all four pass, the bidder names trump and leads, made = the tricks
+/// taken, failed = minus the bid and the defenders score their tricks, 13
+/// tricks = 16, a bid of 13 = +26 or −16 (defenders double), first to 31.
 library;
 
 import '../core/card_game.dart';
@@ -9,10 +15,14 @@ import '../core/trick.dart';
 
 /// What happens when all four players pass.
 enum TarneebAllPass {
-  /// The deal is thrown in and the next dealer deals again (default).
-  redeal,
+  /// The cards are thrown in and the **same dealer** deals again (Jordan
+  /// default).
+  redealSameDealer,
 
-  /// The dealer may not pass and must bid the minimum.
+  /// The cards are thrown in and the next dealer deals.
+  redealNextDealer,
+
+  /// After three passes the dealer may not pass and must bid.
   dealerTakesMinimum,
 }
 
@@ -25,7 +35,7 @@ enum TarneebMadeScore {
   bid,
 }
 
-/// What the defenders score when the bidding team fails.
+/// What the defenders score when a contract of 7–12 fails.
 enum TarneebFailScore {
   /// The tricks they took (default).
   defendersTricks,
@@ -37,39 +47,123 @@ enum TarneebFailScore {
   nothing,
 }
 
+/// What the defenders score when a bid of 13 fails.
+enum TarneebKabootFail {
+  /// Twice the tricks they took (default).
+  doubled,
+
+  /// The tricks they took.
+  single,
+}
+
+/// How trumps are decided.
+enum TarneebTrumpMode {
+  /// The winning bidder names any suit (default).
+  bidderChooses,
+
+  /// Syrian style: the dealer's last card is shown to everyone (and stays in
+  /// the dealer's hand); trumps are the other suit of the same colour.
+  exposedCardSisterSuit,
+}
+
+/// The other suit of the same colour: ♥ ↔ ♦, ♠ ↔ ♣.
+Suit sisterSuit(Suit s) => switch (s) {
+  Suit.hearts => Suit.diamonds,
+  Suit.diamonds => Suit.hearts,
+  Suit.spades => Suit.clubs,
+  Suit.clubs => Suit.spades,
+};
+
 class TarneebOptions {
+  /// The Jordanian game (every default below).
   const TarneebOptions({
     this.targetScore = 31,
     this.minBid = 7,
     this.passIsFinal = true,
-    this.allPass = TarneebAllPass.redeal,
+    this.oneRoundAuction = false,
+    this.allPass = TarneebAllPass.redealSameDealer,
     this.madeScore = TarneebMadeScore.tricksTaken,
     this.failScore = TarneebFailScore.defendersTricks,
     this.defendersScoreWhenMade = false,
-    this.allTricksScore = 16,
+    this.kabootScore = 16,
+    this.kabootBidMadeScore = 26,
+    this.kabootBidFailPenalty = 16,
+    this.kabootFailDefenders = TarneebKabootFail.doubled,
+    this.trumpMode = TarneebTrumpMode.bidderChooses,
     this.bidderLeads = true,
+    this.firstLeadMustBeTrump = false,
+    this.worthlessHandRedeal = false,
+    this.loseAtNegativeTarget = false,
     this.firstDealer = 3,
   });
 
-  factory TarneebOptions.fromJson(Map<String, Object?> j) => TarneebOptions(
-    targetScore: j['targetScore']! as int,
-    minBid: j['minBid']! as int,
-    passIsFinal: j['passIsFinal']! as bool,
-    allPass: TarneebAllPass.values.byName(j['allPass']! as String),
-    madeScore: TarneebMadeScore.values.byName(j['madeScore']! as String),
-    failScore: TarneebFailScore.values.byName(j['failScore']! as String),
-    defendersScoreWhenMade: j['defendersScoreWhenMade']! as bool,
-    allTricksScore: j['allTricksScore']! as int,
-    bidderLeads: j['bidderLeads']! as bool,
-    firstDealer: j['firstDealer']! as int,
-  );
+  /// Tarneeb as commonly played in Jordan (the same as `TarneebOptions()`).
+  const TarneebOptions.jordan({int targetScore = 31}) : this(targetScore: targetScore);
 
-  /// 31 by default; 41 is the other common target.
+  /// Syrian trump (طرنيب سوري): the dealer's last card is shown and trumps
+  /// are the other suit of its colour; the auction winner only leads.
+  const TarneebOptions.syrianTrump({int targetScore = 31})
+    : this(targetScore: targetScore, trumpMode: TarneebTrumpMode.exposedCardSisterSuit);
+
+  /// Lebanese auction: everybody speaks once and the dealer, last, may take
+  /// the contract by equalling the highest bid.
+  const TarneebOptions.lebaneseAuction({int targetScore = 31}) : this(targetScore: targetScore, oneRoundAuction: true);
+
+  /// Open auction: a player who passed may bid again (three passes after a
+  /// bid end it) and after three opening passes the dealer must bid 7.
+  const TarneebOptions.openAuction({int targetScore = 31})
+    : this(targetScore: targetScore, passIsFinal: false, allPass: TarneebAllPass.dealerTakesMinimum);
+
+  /// Missing keys take the defaults; a save from before the Jordanian
+  /// defaults (`allTricksScore`, `allPass: redeal`) keeps its old rules.
+  factory TarneebOptions.fromJson(Map<String, Object?> j) {
+    const d = TarneebOptions();
+    final legacyAllTricks = j['kabootScore'] == null ? j['allTricksScore'] as int? : null;
+    final allPass = j['allPass'] as String?;
+    T pick<T>(String key, T fallback) => (j[key] as T?) ?? fallback;
+    return TarneebOptions(
+      targetScore: pick('targetScore', d.targetScore),
+      minBid: pick('minBid', d.minBid),
+      passIsFinal: pick('passIsFinal', d.passIsFinal),
+      oneRoundAuction: pick('oneRoundAuction', d.oneRoundAuction),
+      allPass: allPass == null
+          ? d.allPass
+          : allPass == 'redeal'
+          ? TarneebAllPass.redealNextDealer
+          : TarneebAllPass.values.byName(allPass),
+      madeScore: j['madeScore'] == null ? d.madeScore : TarneebMadeScore.values.byName(j['madeScore']! as String),
+      failScore: j['failScore'] == null ? d.failScore : TarneebFailScore.values.byName(j['failScore']! as String),
+      defendersScoreWhenMade: pick('defendersScoreWhenMade', d.defendersScoreWhenMade),
+      kabootScore: legacyAllTricks ?? pick('kabootScore', d.kabootScore),
+      kabootBidMadeScore: legacyAllTricks ?? pick('kabootBidMadeScore', d.kabootBidMadeScore),
+      kabootBidFailPenalty: legacyAllTricks != null ? 13 : pick('kabootBidFailPenalty', d.kabootBidFailPenalty),
+      kabootFailDefenders: legacyAllTricks != null
+          ? TarneebKabootFail.single
+          : j['kabootFailDefenders'] == null
+          ? d.kabootFailDefenders
+          : TarneebKabootFail.values.byName(j['kabootFailDefenders']! as String),
+      trumpMode: j['trumpMode'] == null ? d.trumpMode : TarneebTrumpMode.values.byName(j['trumpMode']! as String),
+      bidderLeads: pick('bidderLeads', d.bidderLeads),
+      firstLeadMustBeTrump: pick('firstLeadMustBeTrump', d.firstLeadMustBeTrump),
+      worthlessHandRedeal: pick('worthlessHandRedeal', d.worthlessHandRedeal),
+      loseAtNegativeTarget: pick('loseAtNegativeTarget', d.loseAtNegativeTarget),
+      firstDealer: pick('firstDealer', d.firstDealer),
+    );
+  }
+
+  /// The match targets offered in the UI (31 is the Jordanian default).
+  static const List<int> targetChoices = [31, 41, 61];
+
+  /// 31 by default; 41 and 61 are the longer games.
   final int targetScore;
   final int minBid;
 
   /// A player who passes may not bid again in that auction.
   final bool passIsFinal;
+
+  /// Everybody speaks exactly once, from the dealer's right; the dealer, who
+  /// speaks last, may equal the highest bid and so take the contract.
+  final bool oneRoundAuction;
   final TarneebAllPass allPass;
   final TarneebMadeScore madeScore;
   final TarneebFailScore failScore;
@@ -77,32 +171,115 @@ class TarneebOptions {
   /// Defenders also score their tricks when the contract is made.
   final bool defendersScoreWhenMade;
 
-  /// Score of a bidding team that takes all 13 tricks (kaboot / كبوت).
-  final int allTricksScore;
+  /// A bid of 7–12 that takes all 13 tricks (كبوت).
+  final int kabootScore;
+
+  /// A bid of 13 that is made.
+  final int kabootBidMadeScore;
+
+  /// What the bidders lose when a bid of 13 fails (they score minus this).
+  final int kabootBidFailPenalty;
+
+  /// What the defenders score when a bid of 13 fails.
+  final TarneebKabootFail kabootFailDefenders;
+  final TarneebTrumpMode trumpMode;
 
   /// The winning bidder leads the first trick (else the dealer's right).
   final bool bidderLeads;
 
+  /// The first lead of the deal must be a trump when the leader has one.
+  final bool firstLeadMustBeTrump;
+
+  /// A player whose hand is worthless (no ace, no king with another card of
+  /// its suit, no queen in a suit of 3+, no jack in a suit of 4+) may throw
+  /// the cards in on their first turn to speak; the next dealer deals.
+  final bool worthlessHandRedeal;
+
+  /// A team at or below minus the target after a deal loses the match.
+  final bool loseAtNegativeTarget;
+
   /// Dealer of the first deal; the first bidder is the next seat.
   final int firstDealer;
+
+  TarneebOptions copyWith({
+    int? targetScore,
+    int? minBid,
+    bool? passIsFinal,
+    bool? oneRoundAuction,
+    TarneebAllPass? allPass,
+    TarneebMadeScore? madeScore,
+    TarneebFailScore? failScore,
+    bool? defendersScoreWhenMade,
+    int? kabootScore,
+    int? kabootBidMadeScore,
+    int? kabootBidFailPenalty,
+    TarneebKabootFail? kabootFailDefenders,
+    TarneebTrumpMode? trumpMode,
+    bool? bidderLeads,
+    bool? firstLeadMustBeTrump,
+    bool? worthlessHandRedeal,
+    bool? loseAtNegativeTarget,
+    int? firstDealer,
+  }) => TarneebOptions(
+    targetScore: targetScore ?? this.targetScore,
+    minBid: minBid ?? this.minBid,
+    passIsFinal: passIsFinal ?? this.passIsFinal,
+    oneRoundAuction: oneRoundAuction ?? this.oneRoundAuction,
+    allPass: allPass ?? this.allPass,
+    madeScore: madeScore ?? this.madeScore,
+    failScore: failScore ?? this.failScore,
+    defendersScoreWhenMade: defendersScoreWhenMade ?? this.defendersScoreWhenMade,
+    kabootScore: kabootScore ?? this.kabootScore,
+    kabootBidMadeScore: kabootBidMadeScore ?? this.kabootBidMadeScore,
+    kabootBidFailPenalty: kabootBidFailPenalty ?? this.kabootBidFailPenalty,
+    kabootFailDefenders: kabootFailDefenders ?? this.kabootFailDefenders,
+    trumpMode: trumpMode ?? this.trumpMode,
+    bidderLeads: bidderLeads ?? this.bidderLeads,
+    firstLeadMustBeTrump: firstLeadMustBeTrump ?? this.firstLeadMustBeTrump,
+    worthlessHandRedeal: worthlessHandRedeal ?? this.worthlessHandRedeal,
+    loseAtNegativeTarget: loseAtNegativeTarget ?? this.loseAtNegativeTarget,
+    firstDealer: firstDealer ?? this.firstDealer,
+  );
 
   Map<String, Object?> toJson() => {
     'targetScore': targetScore,
     'minBid': minBid,
     'passIsFinal': passIsFinal,
+    'oneRoundAuction': oneRoundAuction,
     'allPass': allPass.name,
     'madeScore': madeScore.name,
     'failScore': failScore.name,
     'defendersScoreWhenMade': defendersScoreWhenMade,
-    'allTricksScore': allTricksScore,
+    'kabootScore': kabootScore,
+    'kabootBidMadeScore': kabootBidMadeScore,
+    'kabootBidFailPenalty': kabootBidFailPenalty,
+    'kabootFailDefenders': kabootFailDefenders.name,
+    'trumpMode': trumpMode.name,
     'bidderLeads': bidderLeads,
+    'firstLeadMustBeTrump': firstLeadMustBeTrump,
+    'worthlessHandRedeal': worthlessHandRedeal,
+    'loseAtNegativeTarget': loseAtNegativeTarget,
     'firstDealer': firstDealer,
   };
+
+  @override
+  bool operator ==(Object other) => other is TarneebOptions && _mapEquals(other.toJson(), toJson());
+
+  @override
+  int get hashCode => Object.hashAll(toJson().values);
+}
+
+bool _mapEquals(Map<String, Object?> a, Map<String, Object?> b) {
+  if (a.length != b.length) return false;
+  for (final e in a.entries) {
+    if (b[e.key] != e.value) return false;
+  }
+  return true;
 }
 
 enum TarneebPhase { bidding, trump, playing, over }
 
-enum TarneebMoveKind { bid, pass, trump, play }
+enum TarneebMoveKind { bid, pass, trump, play, throwIn }
 
 final class TarneebMove extends CardMove {
   const TarneebMove._(this.kind, {this.amount, this.suit, this.card});
@@ -114,6 +291,9 @@ final class TarneebMove extends CardMove {
   const TarneebMove.trump(Suit suit) : this._(TarneebMoveKind.trump, suit: suit);
 
   const TarneebMove.play(PlayingCard card) : this._(TarneebMoveKind.play, card: card);
+
+  /// Throw a worthless hand in (option `worthlessHandRedeal`).
+  const TarneebMove.throwIn() : this._(TarneebMoveKind.throwIn);
 
   factory TarneebMove.fromJson(Map<String, Object?> j) => TarneebMove._(
     TarneebMoveKind.values.byName(j['k']! as String),
@@ -146,7 +326,7 @@ final class TarneebMove extends CardMove {
   String toString() => 'Tarneeb(${kind.name} ${amount ?? suit?.code ?? card ?? ''})';
 }
 
-/// One bid of the auction (amount 0 = pass).
+/// One call of the auction (amount 0 = pass).
 class TarneebBid {
   const TarneebBid(this.seat, this.amount);
 
@@ -186,6 +366,9 @@ class TarneebRoundResult {
 
   bool get made => tricks[bidder % 2] >= bid;
 
+  /// The bidding team took all 13 tricks.
+  bool get kaboot => tricks[bidder % 2] == 13;
+
   Map<String, Object?> toJson() => {
     'bidder': bidder,
     'bid': bid,
@@ -217,6 +400,7 @@ class TarneebState extends CardGameState {
     required this.teamScores,
     required this.results,
     required this.winnerTeam,
+    this.exposedCard,
   });
 
   /// A new match; the first deal is dealt from [seed].
@@ -227,15 +411,23 @@ class TarneebState extends CardGameState {
   }
 
   /// A match whose first deal is [hands] (for tests and puzzles); later
-  /// deals come from [seed].
+  /// deals come from [seed]. With Syrian trumps, [exposedCard] (default: the
+  /// last card of the dealer's list) must be in the dealer's hand.
   factory TarneebState.withHands(
     List<List<PlayingCard>> hands, {
     TarneebOptions options = const TarneebOptions(),
     int dealer = 3,
     int seed = 0,
+    PlayingCard? exposedCard,
   }) {
     final s = TarneebState._empty(options, CardRng(seed), dealer);
-    s.startDeal([for (final h in hands) List.of(h)]);
+    final exposed = options.trumpMode == TarneebTrumpMode.exposedCardSisterSuit
+        ? exposedCard ?? hands[dealer].last
+        : null;
+    if (exposed != null && !hands[dealer].contains(exposed)) {
+      throw ArgumentError.value(exposed, 'exposedCard', 'must be in the dealer\'s hand');
+    }
+    s.startDeal([for (final h in hands) List.of(h)], exposed: exposed);
     return s;
   }
 
@@ -283,6 +475,7 @@ class TarneebState extends CardGameState {
     teamScores: (j['teamScores']! as List).cast<int>().toList(),
     results: [for (final r in j['results']! as List) TarneebRoundResult.fromJson((r as Map).cast<String, Object?>())],
     winnerTeam: j['winnerTeam'] as int?,
+    exposedCard: j['exposedCard'] == null ? null : PlayingCard.parse(j['exposedCard']! as String),
   );
 
   final TarneebOptions options;
@@ -305,7 +498,13 @@ class TarneebState extends CardGameState {
   /// -1 while nobody has bid.
   int highBidder;
   int consecutivePasses;
+
+  /// Null until chosen; known from the deal with Syrian trumps.
   Suit? trump;
+
+  /// Syrian trumps: the dealer's card everybody has seen (it stays in the
+  /// dealer's hand until played). Null otherwise.
+  PlayingCard? exposedCard;
   Trick? trick;
 
   /// Completed tricks of the current deal.
@@ -340,6 +539,9 @@ class TarneebState extends CardGameState {
 
   TarneebRoundResult? get lastResult => results.isEmpty ? null : results.last;
 
+  /// [seat] has already spoken in the current auction.
+  bool hasSpoken(int seat) => bids.any((b) => b.seat == seat);
+
   /// Every card played in the current deal (completed tricks, then the
   /// current trick), in order.
   Iterable<PlayingCard> get playedCards sync* {
@@ -352,10 +554,14 @@ class TarneebState extends CardGameState {
   void dealFromRng() {
     final deck = buildDeck();
     rng.shuffle(deck);
-    startDeal([for (var i = 0; i < 4; i++) deck.sublist(i * 13, i * 13 + 13)..sort()]);
+    // The dealer's last dealt card (the Syrian exposed card).
+    final last = deck[dealer * 13 + 12];
+    startDeal([
+      for (var i = 0; i < 4; i++) deck.sublist(i * 13, i * 13 + 13)..sort(),
+    ], exposed: options.trumpMode == TarneebTrumpMode.exposedCardSisterSuit ? last : null);
   }
 
-  void startDeal(List<List<PlayingCard>> newHands) {
+  void startDeal(List<List<PlayingCard>> newHands, {PlayingCard? exposed}) {
     hands = newHands;
     phase = TarneebPhase.bidding;
     turn = (dealer + 1) % 4;
@@ -364,7 +570,8 @@ class TarneebState extends CardGameState {
     highBid = 0;
     highBidder = -1;
     consecutivePasses = 0;
-    trump = null;
+    exposedCard = exposed;
+    trump = exposed == null ? null : sisterSuit(exposed.suit);
     trick = null;
     tricks = [];
     tricksWon = [0, 0];
@@ -399,6 +606,7 @@ class TarneebState extends CardGameState {
     teamScores: List.of(teamScores),
     results: List.of(results),
     winnerTeam: winnerTeam,
+    exposedCard: exposedCard,
   );
 
   @override
@@ -420,6 +628,7 @@ class TarneebState extends CardGameState {
     'highBidder': highBidder,
     'consecutivePasses': consecutivePasses,
     'trump': trump?.code,
+    'exposedCard': exposedCard?.id,
     'trick': trick?.toJson(),
     'tricks': [for (final t in tricks) t.toJson()],
     'tricksWon': tricksWon,

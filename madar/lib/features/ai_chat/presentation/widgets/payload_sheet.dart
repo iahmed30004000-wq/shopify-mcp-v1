@@ -93,18 +93,31 @@ class _PayloadSheetState extends State<PayloadSheet> {
 
     final children = <Widget>[
       Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(aiServiceIcon(req.provider), size: 18, color: t.accent),
-          const SizedBox(width: Space.s),
-          Expanded(
-            child: Text(
-              l.aiChatServiceModel(l.aiService(req.provider), BidiIsolate.ltr(req.model)),
-              style: text.titleSmall!.copyWith(color: t.textPrimary),
-            ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(top: 2),
+            child: Icon(aiServiceIcon(req.provider), size: 18, color: t.accent),
           ),
-          Text(
-            l.aiChatPayloadSize(size, fmt.formatInt(widget.payload.approxTokens)),
-            style: text.labelSmall!.copyWith(color: t.textTertiary),
+          const SizedBox(width: Space.s),
+          // The size goes under the service and model, so a long model id
+          // keeps the whole line (it never breaks at its hyphens).
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  l.aiChatServiceModel(l.aiService(req.provider), BidiIsolate.ltr(req.model)),
+                  style: text.titleSmall!.copyWith(color: t.textPrimary),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  l.aiChatPayloadSize(size, fmt.formatInt(widget.payload.approxTokens)),
+                  style: text.labelSmall!.copyWith(color: t.textTertiary),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -156,11 +169,7 @@ class _PayloadSheetState extends State<PayloadSheet> {
         const SizedBox(height: Space.s),
       ],
       const SizedBox(height: Space.s),
-      DisclosureRow(
-        label: l.aiChatPayloadRaw,
-        expanded: _raw,
-        onTap: () => setState(() => _raw = !_raw),
-      ),
+      DisclosureRow(label: l.aiChatPayloadRaw, expanded: _raw, onTap: () => setState(() => _raw = !_raw)),
       AnimatedSize(
         duration: context.motion(MadarMotion.medium),
         curve: MadarMotion.emphasized,

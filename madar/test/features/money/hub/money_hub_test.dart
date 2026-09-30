@@ -270,7 +270,7 @@ void main() {
   testWidgets('ar lived in: the net worth in Arabic digits, the parts in the reading direction', (tester) async {
     await _moneyPage(tester, lang: 'ar', seed: (db) => seedMoneyHub(db, arabic: true));
     final text = _netWorthText(tester);
-    expect(text, startsWith('٢٬١٩٠٫٠٠٠'));
+    expect(text, startsWith('٢\u202F١٩٠٫٠٠٠'));
     expect(text, contains('د.أ'));
     final l = lookupL10n(const Locale('ar'));
     final card = find.byType(MoneyNetWorthCard);

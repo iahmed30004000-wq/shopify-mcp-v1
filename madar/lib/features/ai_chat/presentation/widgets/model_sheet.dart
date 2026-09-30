@@ -104,7 +104,10 @@ class _ModelPickerSheetState extends ConsumerState<ModelPickerSheet> {
     final p = settings.provider;
     final list = settings.modelsFor(p);
     final selected = settings.modelFor(p);
-    final fetched = [for (final m in settings.fetchedFor(p)) if (!list.contains(m.id)) m];
+    final fetched = [
+      for (final m in settings.fetchedFor(p))
+        if (!list.contains(m.id)) m,
+    ];
     final label = text.labelLarge!.copyWith(color: t.textSecondary);
 
     return InteractionSheetFrame(
@@ -118,7 +121,8 @@ class _ModelPickerSheetState extends ConsumerState<ModelPickerSheet> {
           const SizedBox(height: Space.s),
           ChoicePills<AiProviderId>.single(
             options: [
-              for (final s in AiProviderId.values) ChoiceOption(value: s, label: l.aiService(s), icon: aiServiceIcon(s)),
+              for (final s in AiProviderId.values)
+                ChoiceOption(value: s, label: l.aiService(s), icon: aiServiceIcon(s)),
             ],
             selected: p,
             onChanged: (v) {
@@ -176,10 +180,7 @@ class _ModelPickerSheetState extends ConsumerState<ModelPickerSheet> {
                 ? const SizedBox(width: double.infinity)
                 : Padding(
                     padding: const EdgeInsetsDirectional.only(top: Space.s),
-                    child: Text(
-                      _notice!,
-                      style: text.bodySmall!.copyWith(color: _noticeOk ? t.success : t.danger),
-                    ),
+                    child: Text(_notice!, style: text.bodySmall!.copyWith(color: _noticeOk ? t.success : t.danger)),
                   ),
           ),
           if (fetched.isNotEmpty) ...[
@@ -200,33 +201,31 @@ class _ModelPickerSheetState extends ConsumerState<ModelPickerSheet> {
           Row(
             children: [
               Expanded(
-                child: Directionality(
+                child: TextField(
+                  key: ModelPickerSheet.customFieldKey,
                   textDirection: TextDirection.ltr,
-                  child: TextField(
-                    key: ModelPickerSheet.customFieldKey,
-                    controller: _custom,
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    maxLength: AiSettings.maxModelIdLength,
-                    style: text.bodyLarge!.copyWith(color: t.textPrimary),
-                    cursorColor: t.accent,
-                    onChanged: (_) {
-                      if (_invalid) setState(() => _invalid = false);
-                    },
-                    onSubmitted: (_) => _useCustom(p),
-                    decoration: InputDecoration(
-                      isDense: true,
-                      counterText: '',
-                      labelText: l.aiChatModelCustomField,
-                      hintText: l.aiChatModelCustomHint,
-                      errorText: _invalid ? l.aiChatModelInvalid : null,
-                      filled: true,
-                      fillColor: t.glassFill,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(t.radiusM)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(t.radiusM),
-                        borderSide: BorderSide(color: t.glassBorder),
-                      ),
+                  controller: _custom,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  maxLength: AiSettings.maxModelIdLength,
+                  style: text.bodyLarge!.copyWith(color: t.textPrimary),
+                  cursorColor: t.accent,
+                  onChanged: (_) {
+                    if (_invalid) setState(() => _invalid = false);
+                  },
+                  onSubmitted: (_) => _useCustom(p),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    counterText: '',
+                    labelText: l.aiChatModelCustomField,
+                    hintText: l.aiChatModelCustomHint,
+                    errorText: _invalid ? l.aiChatModelInvalid : null,
+                    filled: true,
+                    fillColor: t.glassFill,
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(t.radiusM)),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(t.radiusM),
+                      borderSide: BorderSide(color: t.glassBorder),
                     ),
                   ),
                 ),

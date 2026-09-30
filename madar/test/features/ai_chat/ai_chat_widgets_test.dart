@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/repositories/key_value_repository.dart';
@@ -81,11 +82,17 @@ void main() {
         usePhone(tester);
         final l = await _l10n(lang);
         final picker = FakePicker(result: null);
-        final (app, env) = await buildAiApp(tester, home: const AiChatScreen(), locale: Locale(lang), keys: _keys, picker: picker);
+        final (app, env) = await buildAiApp(
+          tester,
+          home: const AiChatScreen(),
+          locale: Locale(lang),
+          keys: _keys,
+          picker: picker,
+        );
         await tester.pumpWidget(app);
         await settleAsync(tester);
         expect(find.byKey(WillSendStrip.stripKey), findsOneWidget);
-        expect(find.text(l.aiChatContextReviewFirst), findsOneWidget);
+        expect(find.textContaining(l.aiChatContextReviewFirst, findRichText: true), findsOneWidget);
 
         await _type(tester, 'How was my week?');
         await _tapSend(tester);
@@ -145,9 +152,15 @@ void main() {
     });
   }
 
-  testWidgets('nothing is sent without an explicit Send: typing, the strip, its sheet and the payload view', (tester) async {
+  testWidgets('nothing is sent without an explicit Send: typing, the strip, its sheet and the payload view', (
+    tester,
+  ) async {
     usePhone(tester);
-    final (app, env) = await buildAiApp(tester, home: const AiChatScreen(initialDraft: 'Plan my day'), keys: _keys);
+    final (app, env) = await buildAiApp(
+      tester,
+      home: const AiChatScreen(initialDraft: 'Plan my day'),
+      keys: _keys,
+    );
     await tester.pumpWidget(app);
     await settleAsync(tester);
     await _type(tester, 'Plan my day, please');
@@ -167,7 +180,11 @@ void main() {
 
   testWidgets('"What will be sent" shows the exact body that Send then posts; key masked', (tester) async {
     usePhone(tester);
-    final transport = FakeTransport([FakeReply.sse([anthropicSse(['Done.'])])]);
+    final transport = FakeTransport([
+      FakeReply.sse([
+        anthropicSse(['Done.']),
+      ]),
+    ]);
     final (app, env) = await buildAiApp(tester, home: const AiChatScreen(), keys: _keys, transport: transport);
     await tester.pumpWidget(app);
     await settleAsync(tester);
@@ -180,16 +197,19 @@ void main() {
     await tester.tap(find.byKey(WillSendSheet.payloadKey));
     await frames(tester, 14);
     // Expand the raw body.
+    await tester.ensureVisible(find.text('Full body (JSON)'));
+    await frames(tester, 2);
     await tester.tap(find.text('Full body (JSON)'));
     await frames(tester, 10);
     final shown = tester.widget<SelectableText>(find.byKey(const ValueKey('ai-payload-json'))).data!;
     expect(find.textContaining('x-api-key: ••••WXYZ'), findsOneWidget);
     expect(_allText(tester).where((s) => s.contains('TESTKEY')), isEmpty);
-    // Close both sheets and send.
-    await tester.tapAt(const Offset(200, 30));
+    // Close both sheets ("Done") and send.
+    await tester.tap(find.text('Done').last);
     await frames(tester, 12);
-    await tester.tapAt(const Offset(200, 30));
+    await tester.tap(find.text('Done').last);
     await frames(tester, 12);
+    expect(find.byType(WillSendSheet), findsNothing);
     await _tapSend(tester);
     expect(transport.requests.length, 1);
     final sent = transport.requests.single;
@@ -317,11 +337,18 @@ void main() {
   });
 
   group('markdown + bidi rendering', () {
-    Future<void> pumpMd(WidgetTester tester, String md, {TextDirection dir = TextDirection.rtl, MdLinkOpener? open}) async {
+    Future<void> pumpMd(
+      WidgetTester tester,
+      String md, {
+      TextDirection dir = TextDirection.rtl,
+      MdLinkOpener? open,
+    }) async {
       final (app, _) = await buildAiApp(
         tester,
         locale: dir == TextDirection.rtl ? const Locale('ar') : const Locale('en'),
-        home: Scaffold(body: SingleChildScrollView(child: MarkdownView(md, onOpenLink: open))),
+        home: Scaffold(
+          body: SingleChildScrollView(child: MarkdownView(md, onOpenLink: open)),
+        ),
       );
       await tester.pumpWidget(app);
       await frames(tester, 2);
@@ -330,26 +357,34 @@ void main() {
     RichText richWith(WidgetTester tester, String text) =>
         tester.widgetList<RichText>(find.byType(RichText)).firstWhere((r) => r.text.toPlainText().contains(text));
 
+    /// The direction the paragraph is actually laid out in.
+    TextDirection dirOf(WidgetTester tester, String text) =>
+        tester.renderObject<RenderParagraph>(find.byWidget(richWith(tester, text))).textDirection;
+
     testWidgets('each paragraph and list item takes its own direction', (tester) async {
       await pumpMd(
         tester,
         'مرحبًا! هذه خطتك لعام 2026:\n\nEnglish paragraph with ٣ numbers.\n\n- بند عربي 12\n- English item\n\n```\ncode()\n```',
       );
-      expect(richWith(tester, 'مرحبًا').textDirection, TextDirection.rtl);
-      expect(richWith(tester, 'English paragraph').textDirection, TextDirection.ltr);
-      expect(richWith(tester, 'بند عربي').textDirection, TextDirection.rtl);
-      expect(richWith(tester, 'English item').textDirection, TextDirection.ltr);
-      expect(richWith(tester, 'code()').textDirection, TextDirection.ltr);
+      expect(dirOf(tester, 'مرحبًا'), TextDirection.rtl);
+      expect(dirOf(tester, 'English paragraph'), TextDirection.ltr);
+      expect(dirOf(tester, 'بند عربي'), TextDirection.rtl);
+      expect(dirOf(tester, 'English item'), TextDirection.ltr);
+      expect(dirOf(tester, 'code()'), TextDirection.ltr);
     });
 
     testWidgets('an Arabic paragraph in an English layout still reads right to left', (tester) async {
       await pumpMd(tester, 'Hello\n\nالسلام عليكم ورحمة الله', dir: TextDirection.ltr);
-      expect(richWith(tester, 'Hello').textDirection, TextDirection.ltr);
-      expect(richWith(tester, 'السلام').textDirection, TextDirection.rtl);
+      expect(dirOf(tester, 'Hello'), TextDirection.ltr);
+      expect(dirOf(tester, 'السلام'), TextDirection.rtl);
     });
 
     testWidgets('styles: bold, italic, code, headings, table', (tester) async {
-      await pumpMd(tester, '## Plan\n\n**bold** and *it* and `x`\n\n| a | b |\n|---|---|\n| 1 | 2 |', dir: TextDirection.ltr);
+      await pumpMd(
+        tester,
+        '## Plan\n\n**bold** and *it* and `x`\n\n| a | b |\n|---|---|\n| 1 | 2 |',
+        dir: TextDirection.ltr,
+      );
       final p = richWith(tester, 'bold and');
       final spans = <TextSpan>[];
       p.text.visitChildren((s) {
@@ -384,7 +419,17 @@ void main() {
       });
       expect(unsafe!.recognizer, isNull);
       (link!.recognizer! as TapGestureRecognizer).onTap!();
-      await tester.pump();
+      await frames(tester, 12);
+      // The destination is shown first; nothing opens on cancel.
+      expect(find.byType(LinkConfirmSheet), findsOneWidget);
+      expect(opened, isEmpty);
+      await tester.tap(find.text('Cancel'));
+      await frames(tester, 12);
+      expect(opened, isEmpty);
+      (link!.recognizer! as TapGestureRecognizer).onTap!();
+      await frames(tester, 12);
+      await tester.tap(find.byKey(MarkdownView.openLinkKey));
+      await frames(tester, 12);
       expect(opened, [Uri.parse('https://madar.app/guide')]);
     });
   });
@@ -405,9 +450,7 @@ void main() {
               createdAt: aiTestNow,
               updatedAt: aiTestNow.subtract(Duration(days: i)),
               title: 'Chat number $i',
-              messages: [
-                ChatMessage(id: 'm$i', role: ChatRole.user, text: 'Question $i', createdAt: aiTestNow),
-              ],
+              messages: [ChatMessage(id: 'm$i', role: ChatRole.user, text: 'Question $i', createdAt: aiTestNow)],
             ),
           );
         }
@@ -429,7 +472,7 @@ void main() {
     await frames(tester, 8);
     expect(find.text(l.aiChatListEmptyTitle), findsOneWidget);
     expect(find.text(l.aiChatDeletedAll), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel(l.actionUndo).last);
+    await tester.tap(find.text(l.actionUndo));
     await settleAsync(tester, rounds: 12);
     await frames(tester, 12);
     expect(find.text('Budget review'), findsOneWidget);
@@ -448,6 +491,7 @@ void main() {
     await tester.tap(find.text('8,192'));
     await settleAsync(tester, rounds: 4);
     await tester.ensureVisible(find.byKey(AiSettingsScreen.temperatureSwitch));
+    await frames(tester, 6);
     await tester.tap(find.byKey(AiSettingsScreen.temperatureSwitch));
     await settleAsync(tester, rounds: 4);
     await frames(tester, 8);
@@ -463,7 +507,11 @@ void main() {
     final (app, env) = await buildAiApp(
       tester,
       keys: _keys,
-      home: const Scaffold(body: Center(child: AskAiEntry(area: 'health', prompt: 'How is my sleep?'))),
+      home: const Scaffold(
+        body: Center(
+          child: AskAiEntry(area: 'health', prompt: 'How is my sleep?'),
+        ),
+      ),
     );
     await tester.pumpWidget(app);
     await frames(tester, 4);
@@ -517,4 +565,3 @@ void main() {
     expect(copied, ['Copy **me**']);
   });
 }
-

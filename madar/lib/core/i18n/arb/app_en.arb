@@ -17843,6 +17843,40 @@
   "@cinemaFxReelLabel": {
     "description": "Label on a film-leader card before a reel number"
   },
+  "cinemaRigCast": "The Cast",
+  "@cinemaRigCast": {
+    "description": "Heading of the list of original Madar Cinema characters"
+  },
+  "cinemaRigNujaym": "Nujaym",
+  "@cinemaRigNujaym": {
+    "description": "Name of the star-bird hero of Flappy Orbit (means 'little star')"
+  },
+  "cinemaRigNujaymRole": "The plucky star-bird of Flappy Orbit",
+  "cinemaRigZunbruk": "Baron Zunbruk",
+  "@cinemaRigZunbruk": {
+    "description": "Name of the clockwork boss of Metropolis Machine (zunbruk = mainspring)"
+  },
+  "cinemaRigZunbrukRole": "The clockwork foreman of Metropolis Machine",
+  "cinemaRigZajil": "Zajil",
+  "@cinemaRigZajil": {
+    "description": "Name of the camel courier of Caravan Dash (means 'messenger')"
+  },
+  "cinemaRigZajilRole": "The camel courier of Caravan Dash",
+  "cinemaRigMishmish": "Inspector Mishmish",
+  "@cinemaRigMishmish": {
+    "description": "Name of the detective cat of Noir Rooftops"
+  },
+  "cinemaRigMishmishRole": "The trench-coat detective cat of Noir Rooftops",
+  "cinemaRigSarab": "Sarab",
+  "@cinemaRigSarab": {
+    "description": "Name of the hover-bike rider of Neon Souk Racer (means 'mirage')"
+  },
+  "cinemaRigSarabRole": "The hover-bike courier of Neon Souk Racer",
+  "cinemaRigBean": "Habba",
+  "@cinemaRigBean": {
+    "description": "Name of the bean-shaped hero of the engine demo"
+  },
+  "cinemaRigBeanRole": "Star of the rehearsal, a bean in white gloves",
   "dataCentreTitle": "Your data",
   "@dataCentreTitle": {
     "description": "Data centre screen title"
@@ -19522,7 +19556,7 @@
   "aiChatThinking": "Thinking…",
   "aiChatWriting": "Writing a reply",
   "aiChatWillSend": "Will send",
-  "aiChatContextReviewFirst": "You’ll review what’s shared from your summary before the first send",
+  "aiChatContextReviewFirst": "you’ll review your summary first",
   "aiChatContextNone": "No personal context",
   "aiChatContextSections": "{count, plural, =0{No sections} =1{1 summary section} other{{count} summary sections}}",
   "@aiChatContextSections": {
@@ -19779,6 +19813,7 @@
   "aiChatToday": "Today",
   "aiChatYesterday": "Yesterday",
   "aiChatSettingsService": "Service",
+  "aiChatSettingsServiceModel": "Service and model",
   "aiChatServiceAnthropic": "Anthropic",
   "aiChatServiceOpenai": "OpenAI",
   "aiChatSettingsKeys": "API keys",
@@ -19816,7 +19851,14 @@
   "aiChatKeyProblemEmpty": "Paste the key first.",
   "aiChatKeyProblemShort": "That’s too short to be a key.",
   "aiChatKeyProblemSpaces": "The key contains spaces – copy it again.",
-  "aiChatKeyProblemProvider": "This looks like a key for another service. It will be saved anyway – test it to be sure.",
+  "aiChatKeyProblemProvider": "This key belongs to {service}, so it wasn’t saved here – it would be sent to the wrong service. Add it under {service}.",
+  "@aiChatKeyProblemProvider": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
   "aiChatSettingsModel": "Model",
   "aiChatModelPickerTitle": "Choose a model",
   "aiChatModelYourList": "Your list",
@@ -19876,13 +19918,20 @@
   "aiChatTemperatureNote": "Newer models accept only the default. Lower = steadier replies.",
   "aiChatSettingsPrivacy": "Privacy",
   "aiChatPrivacyKeys": "Keys live in the phone’s encrypted storage – not in the database, backups or exports.",
-  "aiChatPrivacyCalls": "Madar contacts the service only when you tap Send, Test key or Refresh models. Nothing runs in the background.",
-  "aiChatPrivacyHistory": "Chats are kept encrypted on your phone (the latest {count}).",
+  "aiChatPrivacyCalls": "Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background.",
+  "aiChatPrivacyHistory": "Chats are kept encrypted on your phone (the latest {count}), each with the summary you approved for it. They are part of your backups and your full data export.",
   "@aiChatPrivacyHistory": {
     "placeholders": {
       "count": {
         "type": "String"
       }
     }
-  }
+  },
+  "aiChatKeyProblemChars": "The key has characters no key has (maybe from copying) – copy it again.",
+  "aiChatLinkTitle": "Open this link?",
+  "@aiChatLinkTitle": {
+    "description": "Sheet shown before a link in an AI reply opens"
+  },
+  "aiChatLinkBody": "It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it.",
+  "aiChatLinkOpen": "Open link"
 }

@@ -75,8 +75,10 @@ final searchDebounceProvider = Provider<Duration>((ref) => const Duration(millis
 
 /// The global search engine (lazy: nothing is read until the search is
 /// first used). Rebuilt when the language or digit style changes, since
-/// records are written up in them.
-final searchEngineProvider = Provider<SearchEngine>((ref) {
+/// records are written up in them. It lives while a search screen listens:
+/// closing the last one stops it (its index isolate and database listener
+/// with it), and the next search builds the index again.
+final searchEngineProvider = Provider.autoDispose<SearchEngine>((ref) {
   final db = ref.watch(databaseProvider);
   final registry = ref.watch(searchRegistryProvider);
   final quran = ref.watch(searchQuranAccessProvider);
