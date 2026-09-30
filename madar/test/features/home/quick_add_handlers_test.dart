@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart' show Value;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
@@ -84,6 +85,21 @@ void main() {
     final txs = await repos.transactions.getAll();
     expect(txs, hasLength(3));
     expect(txs.where((t) => t.kind == TxKind.income).single.amountMilli, 100000);
+  });
+
+  test('a contact by relation reaches the one person with it; never a guess between two', () async {
+    final mum = await repos.people.insert(PeopleCompanion.insert(name: 'فاطمة', relation: const Value('mother')));
+    expect(await add('اتصلت بأمي'), isTrue);
+    expect(await repos.people.count(), 1, reason: 'no new «أمي»');
+    expect((await repos.contactLogs.getAll()).single.personId, mum.id);
+    expect((await repos.people.byId(mum.id))!.lastContact, isNotNull);
+
+    // Two paternal uncles: nobody is picked; a new person keeps the relation.
+    await repos.people.insert(PeopleCompanion.insert(name: 'سمير', relation: const Value('uncle')));
+    await repos.people.insert(PeopleCompanion.insert(name: 'نبيل', relation: const Value('uncle')));
+    expect(await add('كلمت عمي امبارح'), isTrue);
+    final created = (await repos.people.getAll()).where((p) => p.name == 'عمي').single;
+    expect(created.relation, 'uncle', reason: 'a relation word is stored as its key (marks ignored)');
   });
 
   test('water, pain, mood and contact are recorded too', () async {

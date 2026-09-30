@@ -333,7 +333,12 @@ class ProsceniumPainter {
       final cap = Rect.fromLTWH(r.left - 1, r.top, r.width + 2, 14 * u);
       Ornaments.inked(c, Path()..addRect(cap), m.gilt, m.ink, _lw * 0.6);
       final vo = side == 0 ? 1.0 : -1.0;
-      Ornaments.line(c, Ornaments.volute(Offset(cap.center.dx - 3 * u * vo, cap.center.dy + 1), 5 * u, vo), m.ink, 1.3 * u);
+      Ornaments.line(
+        c,
+        Ornaments.volute(Offset(cap.center.dx - 3 * u * vo, cap.center.dy + 1), 5 * u, vo),
+        m.ink,
+        1.3 * u,
+      );
       final base = Rect.fromLTWH(r.left - 1, r.bottom - 14 * u, r.width + 2, 14 * u);
       Ornaments.inked(c, Path()..addRect(base), m.giltDark, m.ink, _lw * 0.6);
       _vrule(c, base.left, base.top + 4 * u, base.top + 4 * u, m.gilt, 1);
@@ -363,8 +368,23 @@ class ProsceniumPainter {
     }
     final shield = Path()..addOval(Rect.fromCenter(center: cc, width: 46 * k, height: 42 * k));
     Ornaments.inked(c, shield, m.giltDark, m.ink, _lw);
-    Ornaments.inked(c, Path()..addOval(Rect.fromCenter(center: cc, width: 37 * k, height: 33 * k)), m.wallDark, m.ink, _lw * 0.5);
-    Ornaments.orbitEmblem(c, cc, 12.5 * k, ring: m.giltLight, planet: m.gilt, ink: m.ink, light: m.giltLight, lineWidth: 1.2 * k);
+    Ornaments.inked(
+      c,
+      Path()..addOval(Rect.fromCenter(center: cc, width: 37 * k, height: 33 * k)),
+      m.wallDark,
+      m.ink,
+      _lw * 0.5,
+    );
+    Ornaments.orbitEmblem(
+      c,
+      cc,
+      12.5 * k,
+      ring: m.giltLight,
+      planet: m.gilt,
+      ink: m.ink,
+      light: m.giltLight,
+      lineWidth: 1.2 * k,
+    );
     // Keystone scrolls.
     Ornaments.line(c, Ornaments.volute(cc + Offset(-25 * k, 15 * k), 6 * k, -1), m.gilt, 2 * k);
     Ornaments.line(c, Ornaments.volute(cc + Offset(25 * k, 15 * k), 6 * k, 1), m.gilt, 2 * k);
@@ -430,13 +450,34 @@ class ProsceniumPainter {
     _moulding(c, l, 7.5 * u);
     // Sunburst fan and medallion at the apex.
     final cc = Offset(w / 2, l.hdr);
-    Ornaments.sunburst(c, cc, l.hdr * 0.5, l.hdr * 1.02, 13, math.pi, math.pi, a: m.gilt, b: m.wallLight, ink: m.ink, lineWidth: _lw);
+    Ornaments.sunburst(
+      c,
+      cc,
+      l.hdr * 0.5,
+      l.hdr * 1.02,
+      13,
+      math.pi,
+      math.pi,
+      a: m.gilt,
+      b: m.wallLight,
+      ink: m.ink,
+      lineWidth: _lw,
+    );
     final arc = Path()..addArc(Rect.fromCircle(center: cc, radius: l.hdr * 1.02), math.pi, math.pi);
     Ornaments.line(c, arc, m.ink, _lw * 2);
     final med = Path()..addOval(Rect.fromCircle(center: cc, radius: l.hdr * 0.46));
     Ornaments.inked(c, med, m.paper, m.ink, _lw * 1.4);
     Ornaments.line(c, Path()..addOval(Rect.fromCircle(center: cc, radius: l.hdr * 0.38)), m.ink, 1.2 * u);
-    Ornaments.orbitEmblem(c, cc, l.hdr * 0.27, ring: m.paper, planet: m.gilt, ink: m.ink, light: m.giltLight, lineWidth: 1.2 * u);
+    Ornaments.orbitEmblem(
+      c,
+      cc,
+      l.hdr * 0.27,
+      ring: m.paper,
+      planet: m.gilt,
+      ink: m.ink,
+      light: m.giltLight,
+      lineWidth: 1.2 * u,
+    );
     // Chevrons under the medallion.
     for (var k = 0; k < 2; k++) {
       final y = cc.dy + l.hdr * 0.5 + k * 5 * u;
@@ -502,7 +543,16 @@ class ProsceniumPainter {
       }
     }
     Ornaments.inked(c, Path()..addOval(Rect.fromCircle(center: cc, radius: 18 * u)), m.wallDark, m.gilt, 1 * u);
-    Ornaments.orbitEmblem(c, cc, 11 * u, ring: m.giltLight, planet: m.gilt, ink: m.ink, light: m.giltLight, lineWidth: 1 * u);
+    Ornaments.orbitEmblem(
+      c,
+      cc,
+      11 * u,
+      ring: m.giltLight,
+      planet: m.gilt,
+      ink: m.ink,
+      light: m.giltLight,
+      lineWidth: 1 * u,
+    );
   }
 
   // --- 1950s atomic -------------------------------------------------------------
@@ -551,7 +601,16 @@ class ProsceniumPainter {
     final cc = Offset(w / 2, l.hdr * 0.5);
     Ornaments.inked(c, Ornaments.starPath(cc, l.hdr * 0.62, l.hdr * 0.3, 12), m.gilt, m.ink, _lw);
     Ornaments.inked(c, Path()..addOval(Rect.fromCircle(center: cc, radius: l.hdr * 0.3)), m.paper, m.ink, _lw);
-    Ornaments.orbitEmblem(c, cc, l.hdr * 0.24, ring: pal.accent2, planet: pal.accent, ink: m.ink, light: m.paper, lineWidth: 1.2 * u);
+    Ornaments.orbitEmblem(
+      c,
+      cc,
+      l.hdr * 0.24,
+      ring: pal.accent2,
+      planet: pal.accent,
+      ink: m.ink,
+      light: m.paper,
+      lineWidth: 1.2 * u,
+    );
     // Pilaster stripes.
     for (final x in [l.pil * 0.5, w - l.pil * 0.5]) {
       _vrule(c, x, l.hdr + l.drop + 8 * u, l.footTop - 6 * u, m.ink, 4.2 * u);
@@ -600,7 +659,11 @@ class ProsceniumPainter {
       ..color = m.paper.withValues(alpha: 0.18);
     for (var k = 0; k < 10; k++) {
       final x = rnd.nextDouble() * w, y = rnd.nextDouble() * l.footTop;
-      c.drawLine(Offset(x, y), Offset(x + (rnd.nextDouble() - 0.5) * 30 * u, y + 20 * u + rnd.nextDouble() * 40 * u), scratch);
+      c.drawLine(
+        Offset(x, y),
+        Offset(x + (rnd.nextDouble() - 0.5) * 30 * u, y + 20 * u + rnd.nextDouble() * 40 * u),
+        scratch,
+      );
     }
     c.restore();
     _moulding(c, l, 6.5 * u);
@@ -624,7 +687,12 @@ class ProsceniumPainter {
       ..save()
       ..clipRect(Rect.fromLTRB(0, 0, w, l.hdr - 1));
     final sun = Paint()
-      ..shader = Gradient.linear(cc - Offset(0, r), cc, [const Color(0xFFFFE08A), m.neonA, const Color(0xFF7A1FA8)], const [0, 0.55, 1]);
+      ..shader = Gradient.linear(
+        cc - Offset(0, r),
+        cc,
+        [const Color(0xFFFFE08A), m.neonA, const Color(0xFF7A1FA8)],
+        const [0, 0.55, 1],
+      );
     c.drawCircle(cc, r, sun);
     // Cut stripes.
     final cut = Paint()..color = m.wall;

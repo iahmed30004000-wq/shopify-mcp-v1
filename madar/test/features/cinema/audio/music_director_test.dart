@@ -43,6 +43,20 @@ void main() {
     expect(src.requests, isEmpty);
   });
 
+  test('sound that comes up after prepare() still gets its score', () async {
+    mixer = FakeCinemaMixer()..live = false;
+    source = FakeCueSource();
+    director = ProceduralMusicDirector(_ctx(), mixer: mixer, source: source, prefetch: false);
+    await director.prepare();
+    expect(source.requests, isEmpty);
+    mixer.live = true;
+    director.cue(MusicMood.calm);
+    await pumpEventQueue();
+    director.update(1 / 60);
+    expect(source.requests, containsAll(['stingers', 'cue calm']));
+    expect(director.playingMood, MusicMood.calm);
+  });
+
   test('renders the cued mood first, then prefetches the rest', () async {
     await start(MusicMood.title, prefetch: true);
     expect(director.isReady, isTrue);

@@ -28,6 +28,7 @@ import '../scene/scene_composition.dart';
 import '../scene/scene_controller.dart';
 import 'customize_sheet.dart';
 import 'faith_hub.dart';
+import 'life_hubs.dart';
 import 'moon_sheet.dart';
 import 'planet_modules.dart';
 import 'record_open.dart';
@@ -38,9 +39,11 @@ import 'world_modules.dart';
 /// orbit scene underneath this transparent route), and a glass sheet slides
 /// up with its balance ring, the world's own hub (Faith: the day around the
 /// prayers – [FaithHub]; Health: the body's care – [HealthHub]; Money: the
-/// net worth, wallets, plan, dues and savings – [MoneyHub]), what needs
-/// care, its moons (tappable – each is a real record) and what feeds its
-/// score.
+/// net worth, wallets, plan, dues and savings – [MoneyHub]; Work, Family,
+/// Travel, Growth and Body: the package's "today" cards and the world's
+/// tools – [LifeHubs]), every world's own trackers and lists
+/// ([PlanetModulesSection]), what needs care, its moons (tappable – each is
+/// a real record) and what feeds its score.
 class PlanetModulePage extends ConsumerStatefulWidget {
   const PlanetModulePage({super.key, required this.planetKey, this.item});
 
@@ -571,6 +574,11 @@ class _Sheet extends StatelessWidget {
           // Money's hub: the net worth, one-tap entries, the wallets, this
           // month's plan, the dues and savings, the tools.
           if (planet.key == 'money') ...[const SizedBox(height: Space.l), const MoneyHub(firstIndex: 1)],
+          // Work, Family, Travel, Growth and Body: the package's "today"
+          // cards and the world's tools ([LifeHubs]).
+          if (LifeHubs.has(planet.key)) ...[const SizedBox(height: Space.l), LifeHubs.of(planet.key, firstIndex: 1)],
+          // Every world's own trackers and lists (custom worlds included).
+          StaggerItem(index: 1, child: PlanetModulesSection(planetKey: planet.key)),
           // … and every world's tasks of the day.
           StaggerItem(index: 1, child: section(l.orbitUiWorldTasksTitle)),
           StaggerItem(index: 1, child: WorldTasksModule(planetKey: planet.key)),

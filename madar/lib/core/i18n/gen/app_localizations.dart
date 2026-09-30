@@ -28071,6 +28071,156 @@ abstract class L10n {
   /// **'مخفي'**
   String get cmodExportHidden;
 
+  /// Work / Family / Travel / Growth / Body planet pages: title above the row of tool tiles
+  ///
+  /// In ar, this message translates to:
+  /// **'أدوات'**
+  String get lifeHubToolsTitle;
+
+  /// Family planet page: tool tile that opens the list of people
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحبّة'**
+  String get lifeHubPeople;
+
+  /// Work planet page: screen-reader hint of the Boards tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحات المهام وأعمدتها'**
+  String get lifeHubToolBoardsHint;
+
+  /// Work / Growth planet pages: screen-reader hint of the Projects tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع وقوائمها وعدّها التنازلي'**
+  String get lifeHubToolProjectsHint;
+
+  /// Family planet page: screen-reader hint of the People tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'كل من تحبّ أن تبقى قريبًا منه'**
+  String get lifeHubToolPeopleHint;
+
+  /// Family planet page: screen-reader hint of the reach-out reminders tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'الملخّص اليومي وأعياد الميلاد'**
+  String get lifeHubToolRemindersHint;
+
+  /// Travel planet page: screen-reader hint of the Trips tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'رحلاتك وعدّها التنازلي'**
+  String get lifeHubToolTripsHint;
+
+  /// Travel planet page: screen-reader hint of the Documents tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'الجوازات والتأشيرات وتواريخ انتهائها'**
+  String get lifeHubToolDocumentsHint;
+
+  /// Growth planet page: screen-reader hint of the All goals tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف التعلّم وتقدّمك فيها'**
+  String get lifeHubToolGoalsHint;
+
+  /// Body planet page: screen-reader hint of the training plan tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'تمارين الأسبوع حسب الأيام'**
+  String get lifeHubToolPlanHint;
+
+  /// Body planet page: screen-reader hint of the Avoid list tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'ما اخترت أن تبتعد عنه'**
+  String get lifeHubToolAvoidHint;
+
+  /// Moon sheet of a person (Family world): opens the person's own page
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح صفحته'**
+  String get lifeHubMoonOpenPerson;
+
+  /// Moon sheet of a Work board: opens the board
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح اللوحة'**
+  String get lifeHubMoonOpenBoard;
+
+  /// Moon sheet of a trip: opens the trip
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح الرحلة'**
+  String get lifeHubMoonOpenTrip;
+
+  /// Moon sheet of a custom tracker or list: opens it
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح المتتبّع'**
+  String get lifeHubMoonOpenModule;
+
+  /// Settings: title of the Life section (family reminders, water, fasting, packing lists, trackers)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحياة'**
+  String get lifeHubSettingsSection;
+
+  /// Settings: subtitle of the Life section
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة والجسد والسفر ومتتبّعاتك'**
+  String get lifeHubSettingsSectionHint;
+
+  /// Settings › Life: the reach-out reminders tile when the daily digest is on
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص يومي الساعة {time}'**
+  String lifeHubSettingsFamilyOn(String time);
+
+  /// Settings › Life: the reach-out reminders tile when the digest is off but birthday reminders are on
+  ///
+  /// In ar, this message translates to:
+  /// **'أعياد الميلاد فقط'**
+  String get lifeHubSettingsFamilyBirthdays;
+
+  /// Settings › Life: the reach-out reminders tile when every family reminder is off
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقّفة'**
+  String get lifeHubSettingsFamilyOff;
+
+  /// Settings › Life: the daily water target (pre-formatted number of millilitres)
+  ///
+  /// In ar, this message translates to:
+  /// **'{ml} مل يوميًا'**
+  String lifeHubSettingsWaterValue(String ml);
+
+  /// Settings › Life: subtitle of the intermittent fasting tile (opens Body › Fasting)
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة والتنبيهات'**
+  String get lifeHubSettingsFastingHint;
+
+  /// Settings › Life: subtitle of the packing lists tile; also the Travel page's packing lists tool hint
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم جاهزة لكل رحلة'**
+  String get lifeHubSettingsTemplatesHint;
+
+  /// Settings › Life: how many trackers and lists the user made
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا متتبّعات بعد} =1{متتبّع واحد} =2{متتبّعان} few{{n} متتبّعات} many{{n} متتبّعًا} other{{n} متتبّع}}'**
+  String lifeHubSettingsModulesCount(int count, String n);
+
+  /// Travel: the place named in 'Your prayer times now follow {place}' when a trip's destination is known only by its coordinates
+  ///
+  /// In ar, this message translates to:
+  /// **'وجهتك'**
+  String get lifeHubPrayerDestination;
+
   /// Name of the games hub
   ///
   /// In ar, this message translates to:
@@ -35810,6 +35960,672 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'مُسحت بيانات اللعبة'**
   String get savedGamesClearDataDone;
+
+  /// No description provided for @togetherNetOnThisPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'على هذا الهاتف'**
+  String get togetherNetOnThisPhone;
+
+  /// No description provided for @togetherNetOnThisPhoneHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختارا صاحب هذا الهاتف — يُحفظ الاختيار'**
+  String get togetherNetOnThisPhoneHint;
+
+  /// No description provided for @togetherNetThisIsMe.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الهاتف لـ{name}'**
+  String togetherNetThisIsMe(String name);
+
+  /// No description provided for @togetherNetNearbyIntro.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتحا اللعبة نفسها على الهاتفين ثم اضغطا «العبا معًا» على كلٍّ منهما. بلوتوث وواي فاي مباشر فقط — بلا إنترنت ولا خوادم.'**
+  String get togetherNetNearbyIntro;
+
+  /// No description provided for @togetherNetPlayTogether.
+  ///
+  /// In ar, this message translates to:
+  /// **'العبا معًا'**
+  String get togetherNetPlayTogether;
+
+  /// No description provided for @togetherNetSearching.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبحث عن الهاتف الآخر…'**
+  String get togetherNetSearching;
+
+  /// No description provided for @togetherNetSearchingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يظهر؟ تأكّدا أن اللعبة نفسها مفتوحة على الهاتفين وأن البلوتوث والواي فاي يعملان.'**
+  String get togetherNetSearchingHint;
+
+  /// No description provided for @togetherNetPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّف البحث ريثما تعودان إلى مَدار'**
+  String get togetherNetPaused;
+
+  /// No description provided for @togetherNetPickPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجدنا أكثر من هاتف — اختارا الهاتف الآخر'**
+  String get togetherNetPickPhone;
+
+  /// No description provided for @togetherNetConnect.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال'**
+  String get togetherNetConnect;
+
+  /// No description provided for @togetherNetConnecting.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتصل بـ{name}…'**
+  String togetherNetConnecting(String name);
+
+  /// No description provided for @togetherNetConfirmTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل يظهر الرقم نفسه؟'**
+  String get togetherNetConfirmTitle;
+
+  /// No description provided for @togetherNetConfirmBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكّدا أن هاتف {name} يعرض هذه الأرقام الأربعة نفسها.'**
+  String togetherNetConfirmBody(String name);
+
+  /// No description provided for @togetherNetDigits.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز التحقّق {digits}'**
+  String togetherNetDigits(String digits);
+
+  /// No description provided for @togetherNetMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'متطابقة'**
+  String get togetherNetMatch;
+
+  /// No description provided for @togetherNetNoMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير متطابقة'**
+  String get togetherNetNoMatch;
+
+  /// No description provided for @togetherNetWaitingFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار تأكيد {name}…'**
+  String togetherNetWaitingFor(String name);
+
+  /// No description provided for @togetherNetConnected.
+  ///
+  /// In ar, this message translates to:
+  /// **'متصلان — {name} على الهاتف الآخر'**
+  String togetherNetConnected(String name);
+
+  /// No description provided for @togetherNetReconnecting.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقطع الاتصال — نبحث عن {name}…'**
+  String togetherNetReconnecting(String name);
+
+  /// No description provided for @togetherNetLost.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نعثر على {name}'**
+  String togetherNetLost(String name);
+
+  /// No description provided for @togetherNetLostHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرّبا الهاتفين وتأكّدا أن مَدار مفتوح على كليهما.'**
+  String get togetherNetLostHint;
+
+  /// No description provided for @togetherNetSearchAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث مجددًا'**
+  String get togetherNetSearchAgain;
+
+  /// No description provided for @togetherNetTryAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'حاول مجددًا'**
+  String get togetherNetTryAgain;
+
+  /// No description provided for @togetherNetCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get togetherNetCancel;
+
+  /// No description provided for @togetherNetPermTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمح بالعثور على الأجهزة القريبة'**
+  String get togetherNetPermTitle;
+
+  /// No description provided for @togetherNetPermNearbyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليجد مَدار الهاتف الآخر دون إنترنت يحتاج إذن «الأجهزة المجاورة»: بلوتوث وواي فاي مباشر.'**
+  String get togetherNetPermNearbyBody;
+
+  /// No description provided for @togetherNetPermLocationBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'على هذا الإصدار من أندرويد يربط النظام البحث بالبلوتوث والواي فاي بإذن الموقع. لا يقرأ مَدار موقعكما أبدًا.'**
+  String get togetherNetPermLocationBody;
+
+  /// No description provided for @togetherNetPermPointPairing.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُستخدم أثناء الاقتران واللعب فقط'**
+  String get togetherNetPermPointPairing;
+
+  /// No description provided for @togetherNetPermPointGameOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يغادر الهاتف إلا حالة اللعبة'**
+  String get togetherNetPermPointGameOnly;
+
+  /// No description provided for @togetherNetPermPointStops.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتوقف البحث فور الاقتران أو عند مغادرة التطبيق'**
+  String get togetherNetPermPointStops;
+
+  /// No description provided for @togetherNetContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get togetherNetContinue;
+
+  /// No description provided for @togetherNetNotNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليس الآن'**
+  String get togetherNetNotNow;
+
+  /// No description provided for @togetherNetPermDenied.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يستطيع مَدار البحث دون هذا الإذن'**
+  String get togetherNetPermDenied;
+
+  /// No description provided for @togetherNetPermDeniedForever.
+  ///
+  /// In ar, this message translates to:
+  /// **'رُفض الإذن. فعّلاه من إعدادات التطبيق ← الأذونات.'**
+  String get togetherNetPermDeniedForever;
+
+  /// No description provided for @togetherNetOpenSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الإعدادات'**
+  String get togetherNetOpenSettings;
+
+  /// No description provided for @togetherNetLocationOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمات الموقع متوقفة'**
+  String get togetherNetLocationOff;
+
+  /// No description provided for @togetherNetLocationOffBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'على هذا الإصدار من أندرويد يحتاج البحث عن الأجهزة إلى تشغيلها. لا يقرأ مَدار موقعكما.'**
+  String get togetherNetLocationOffBody;
+
+  /// No description provided for @togetherNetSearchAnyway.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث على أي حال'**
+  String get togetherNetSearchAnyway;
+
+  /// No description provided for @togetherNetFailRadio.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّلا البلوتوث والواي فاي ثم حاولا مجددًا'**
+  String get togetherNetFailRadio;
+
+  /// No description provided for @togetherNetFailDeclined.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يؤكّد الهاتف الآخر'**
+  String get togetherNetFailDeclined;
+
+  /// No description provided for @togetherNetFailNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد غرفة مفتوحة بهذا الرمز'**
+  String get togetherNetFailNotFound;
+
+  /// No description provided for @togetherNetFailExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت صلاحية الرمز — أنشئا رمزًا جديدًا'**
+  String get togetherNetFailExpired;
+
+  /// No description provided for @togetherNetFailTaken.
+  ///
+  /// In ar, this message translates to:
+  /// **'انضمّ هاتف آخر بهذا الرمز'**
+  String get togetherNetFailTaken;
+
+  /// No description provided for @togetherNetFailDifferentGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الرمز للعبة أخرى'**
+  String get togetherNetFailDifferentGame;
+
+  /// No description provided for @togetherNetFailNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا اتصال بالإنترنت'**
+  String get togetherNetFailNetwork;
+
+  /// No description provided for @togetherNetFailSetup.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفض Firebase إعدادات المشروع — راجعاها في «اللعب عبر الإنترنت»'**
+  String get togetherNetFailSetup;
+
+  /// No description provided for @togetherNetFailSignIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الدخول المجهول — فعّلاه في مشروع Firebase'**
+  String get togetherNetFailSignIn;
+
+  /// No description provided for @togetherNetFailRules.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان'**
+  String get togetherNetFailRules;
+
+  /// No description provided for @togetherNetFailPeerLeft.
+  ///
+  /// In ar, this message translates to:
+  /// **'غادر الطرف الآخر'**
+  String get togetherNetFailPeerLeft;
+
+  /// No description provided for @togetherNetFailUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقع'**
+  String get togetherNetFailUnknown;
+
+  /// No description provided for @togetherNetCreateCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء رمز'**
+  String get togetherNetCreateCode;
+
+  /// No description provided for @togetherNetEnterCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال رمز'**
+  String get togetherNetEnterCode;
+
+  /// No description provided for @togetherNetOnlineIntro.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحدكما يُنشئ رمزًا والآخر يكتبه على هاتفه. لا يُحفظ في مشروعكما على Firebase إلا حالة اللعبة، وتُحذف عند المغادرة.'**
+  String get togetherNetOnlineIntro;
+
+  /// No description provided for @togetherNetYourCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز الغرفة'**
+  String get togetherNetYourCode;
+
+  /// No description provided for @togetherNetCodeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتبا هذا الرمز على الهاتف الآخر في «إدخال رمز»'**
+  String get togetherNetCodeHint;
+
+  /// No description provided for @togetherNetCodeValid.
+  ///
+  /// In ar, this message translates to:
+  /// **'صالح حتى {time}'**
+  String togetherNetCodeValid(String time);
+
+  /// No description provided for @togetherNetCopyCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ الرمز'**
+  String get togetherNetCopyCode;
+
+  /// No description provided for @togetherNetCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ'**
+  String get togetherNetCopied;
+
+  /// No description provided for @togetherNetWaitingJoin.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار انضمام الهاتف الآخر…'**
+  String get togetherNetWaitingJoin;
+
+  /// No description provided for @togetherNetJoinRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} يطلب الانضمام'**
+  String togetherNetJoinRequest(String name);
+
+  /// No description provided for @togetherNetJoinRequestBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل هذا الطرف الآخر فعلًا؟ إن لم يكن فارفضا وسنُنشئ رمزًا جديدًا.'**
+  String get togetherNetJoinRequestBody;
+
+  /// No description provided for @togetherNetAccept.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ اللعب'**
+  String get togetherNetAccept;
+
+  /// No description provided for @togetherNetDecline.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفض'**
+  String get togetherNetDecline;
+
+  /// No description provided for @togetherNetCodeField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرمز (ستة أرقام)'**
+  String get togetherNetCodeField;
+
+  /// No description provided for @togetherNetJoin.
+  ///
+  /// In ar, this message translates to:
+  /// **'انضمام'**
+  String get togetherNetJoin;
+
+  /// No description provided for @togetherNetJoining.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتحقّق من الرمز…'**
+  String get togetherNetJoining;
+
+  /// No description provided for @togetherNetWaitingAccept.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار قبول {name}…'**
+  String togetherNetWaitingAccept(String name);
+
+  /// No description provided for @togetherNetSigningIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتصل بمشروعكما…'**
+  String get togetherNetSigningIn;
+
+  /// No description provided for @togetherNetNeedsSetup.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللعب عبر الإنترنت غير مُفعَّل'**
+  String get togetherNetNeedsSetup;
+
+  /// No description provided for @togetherNetNeedsSetupBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعمل عبر مشروع Firebase مجاني خاص بكما، ويبقى مطفأً حتى تفعّلاه.'**
+  String get togetherNetNeedsSetupBody;
+
+  /// No description provided for @togetherNetSetUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعداد اللعب عبر الإنترنت'**
+  String get togetherNetSetUp;
+
+  /// No description provided for @togetherNetQrLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز QR للغرفة {code}'**
+  String togetherNetQrLabel(String code);
+
+  /// No description provided for @togetherNetOnlineIntroSheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'للّعب من مكانين مختلفين يستخدم مَدار مشروع Firebase المجاني الخاص بكما — لا خادم لمَدار. لا يُحفظ فيه إلا حالة اللعبة، ومعها اسم العرض والصورة واللون، لساعات قليلة ثم يُحذف.'**
+  String get togetherNetOnlineIntroSheet;
+
+  /// No description provided for @togetherNetEnable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل اللعب عبر الإنترنت'**
+  String get togetherNetEnable;
+
+  /// No description provided for @togetherNetEnableHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطفأ افتراضيًا. يحتاج إعدادات مشروع صالحة.'**
+  String get togetherNetEnableHint;
+
+  /// No description provided for @togetherNetEnableNeedsConfig.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظا إعدادات المشروع أولًا'**
+  String get togetherNetEnableNeedsConfig;
+
+  /// No description provided for @togetherNetStepsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعداد مرة واحدة'**
+  String get togetherNetStepsTitle;
+
+  /// No description provided for @togetherNetStep1.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئا مشروعًا مجانيًا في console.firebase.google.com'**
+  String get togetherNetStep1;
+
+  /// No description provided for @togetherNetStep2.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضيفا تطبيق أندرويد باسم الحزمة app.madar.orbit'**
+  String get togetherNetStep2;
+
+  /// No description provided for @togetherNetStep3.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous'**
+  String get togetherNetStep3;
+
+  /// No description provided for @togetherNetStep4.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئا Realtime Database والصقا قواعد الأمان في تبويب Rules'**
+  String get togetherNetStep4;
+
+  /// No description provided for @togetherNetStep5.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقلا القيم إلى الحقول هنا، أو الصقا ملف google-services.json كاملًا'**
+  String get togetherNetStep5;
+
+  /// No description provided for @togetherNetCopyRules.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ قواعد الأمان'**
+  String get togetherNetCopyRules;
+
+  /// No description provided for @togetherNetRulesCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخت قواعد الأمان'**
+  String get togetherNetRulesCopied;
+
+  /// No description provided for @togetherNetPasteConfig.
+  ///
+  /// In ar, this message translates to:
+  /// **'لصق من الحافظة'**
+  String get togetherNetPasteConfig;
+
+  /// No description provided for @togetherNetPasteNothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا إعدادات في الحافظة'**
+  String get togetherNetPasteNothing;
+
+  /// No description provided for @togetherNetPasted.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُلئت الحقول من الحافظة'**
+  String get togetherNetPasted;
+
+  /// No description provided for @togetherNetFieldApiKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتاح الواجهة (API key)'**
+  String get togetherNetFieldApiKey;
+
+  /// No description provided for @togetherNetFieldAppId.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف التطبيق (App ID)'**
+  String get togetherNetFieldAppId;
+
+  /// No description provided for @togetherNetFieldProjectId.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف المشروع (Project ID)'**
+  String get togetherNetFieldProjectId;
+
+  /// No description provided for @togetherNetFieldDatabaseUrl.
+  ///
+  /// In ar, this message translates to:
+  /// **'رابط قاعدة البيانات'**
+  String get togetherNetFieldDatabaseUrl;
+
+  /// No description provided for @togetherNetFieldSenderId.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم المُرسِل (Sender ID)'**
+  String get togetherNetFieldSenderId;
+
+  /// No description provided for @togetherNetErrMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطلوب'**
+  String get togetherNetErrMissing;
+
+  /// No description provided for @togetherNetErrFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيغة غير صحيحة'**
+  String get togetherNetErrFormat;
+
+  /// No description provided for @togetherNetErrMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يطابق رقم المشروع في معرّف التطبيق'**
+  String get togetherNetErrMismatch;
+
+  /// No description provided for @togetherNetSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get togetherNetSave;
+
+  /// No description provided for @togetherNetSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظت الإعدادات'**
+  String get togetherNetSaved;
+
+  /// No description provided for @togetherNetTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختبار الاتصال'**
+  String get togetherNetTest;
+
+  /// No description provided for @togetherNetTesting.
+  ///
+  /// In ar, this message translates to:
+  /// **'نختبر…'**
+  String get togetherNetTesting;
+
+  /// No description provided for @togetherNetTestOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعمل! الدخول المجهول وقواعد الأمان جاهزة'**
+  String get togetherNetTestOk;
+
+  /// No description provided for @togetherNetRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الإعدادات'**
+  String get togetherNetRemove;
+
+  /// No description provided for @togetherNetRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت إعدادات المشروع'**
+  String get togetherNetRemoved;
+
+  /// No description provided for @togetherNetStoredSecurely.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحفظ في التخزين الآمن لهذا الهاتف فقط، ولا تُرسل إلى أي مكان سوى مشروعكما.'**
+  String get togetherNetStoredSecurely;
+
+  /// No description provided for @togetherNetOnlineOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُفعَّل'**
+  String get togetherNetOnlineOn;
+
+  /// No description provided for @togetherNetOnlineOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطفأ'**
+  String get togetherNetOnlineOff;
+
+  /// No description provided for @togetherNetOnlineNotSetUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مُعدّ'**
+  String get togetherNetOnlineNotSetUp;
+
+  /// No description provided for @togetherNetTurnGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللعب معًا'**
+  String get togetherNetTurnGroup;
+
+  /// No description provided for @togetherNetTurnChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دورك'**
+  String get togetherNetTurnChannel;
+
+  /// No description provided for @togetherNetTurnChannelBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'حين يلعب الطرف الآخر من هاتف بعيد'**
+  String get togetherNetTurnChannelBody;
+
+  /// No description provided for @togetherNetTurnTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دورك في {game}'**
+  String togetherNetTurnTitle(String game);
+
+  /// No description provided for @togetherNetTurnBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعب {name} — حان دورك'**
+  String togetherNetTurnBody(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

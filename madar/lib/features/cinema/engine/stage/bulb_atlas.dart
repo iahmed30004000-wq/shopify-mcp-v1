@@ -73,7 +73,11 @@ class BulbAtlas {
           const [0, 0.55, 1],
         ),
     );
-    c.drawCircle(const ui.Offset(bx - r * 0.3, by - r * 0.32), r * 0.16, ui.Paint()..color = const ui.Color(0xFFFFFFFF));
+    c.drawCircle(
+      const ui.Offset(bx - r * 0.3, by - r * 0.32),
+      r * 0.16,
+      ui.Paint()..color = const ui.Color(0xFFFFFFFF),
+    );
     final pic = rec.endRecording();
     final img = pic.toImageSync((_glowSize + _bulbSize).toInt(), _glowSize.toInt());
     pic.dispose();
@@ -136,7 +140,15 @@ class BulbAtlas {
         _bulbRectView = Float32List.sublistView(_bulbRect, 0, _n * 4);
         _bulbColorView = Int32List.sublistView(_bulbColor, 0, _n);
       }
-      canvas.drawRawAtlas(sprite, _bulbXfView!, _bulbRectView!, _bulbColorView, ui.BlendMode.modulate, null, _bulbPaint);
+      canvas.drawRawAtlas(
+        sprite,
+        _bulbXfView!,
+        _bulbRectView!,
+        _bulbColorView,
+        ui.BlendMode.modulate,
+        null,
+        _bulbPaint,
+      );
     }
     if (halosOnTop) _halos(canvas, sprite);
     _n = 0;

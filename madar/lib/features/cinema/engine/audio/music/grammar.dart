@@ -181,41 +181,69 @@ List<MelNote> _melodyAttempt(ChordChart chart, double startBeat, int bars, int b
   final form = spec.form.isEmpty ? 'A' : spec.form;
   final sliceBars = math.max(1, bars ~/ form.length);
   final stepBeats = beatsPerBar / spec.steps;
+  final range = spec.hi - spec.lo;
   final out = <MelNote>[];
-  final letterCells = <String, List<int>>{};
-  final letterSeeds = <String, int>{};
   final top = SynthRandom(seed);
-  var prev = (spec.lo + spec.hi) ~/ 2;
-  // Start near the tonic's chord tone in the middle of the range.
-  final firstChord = chart.at(startBeat);
-  final tones = firstChord.tonesIn(keyMidi, spec.lo, spec.hi, withExtensions: false);
-  if (tones.isNotEmpty) prev = tones.reduce((a, b) => (a - prev).abs() <= (b - prev).abs() ? a : b);
-
+  // Per letter: rhythm cells, decision seed, starting pitch and whether
+  // its second bar restates the first as a sequence. Repeats reuse them,
+  // so an A section comes back recognisably (only its last bar varies).
+  final letters = <String, _Letter>{};
+  var unique = 0;
   for (var li = 0; li < form.length; li++) {
     final letter = form[li];
-    final isRepeat = letterSeeds.containsKey(letter);
-    final letterSeed = letterSeeds.putIfAbsent(letter, () => top.nextUint32());
-    final cells = letterCells.putIfAbsent(letter, () => [for (var b = 0; b < sliceBars; b++) top.nextInt(spec.rhythms.length)]);
+    final isRepeat = letters.containsKey(letter);
+    final l = letters.putIfAbsent(letter, () {
+      // Registers: A sits low-middle, B (the bridge) climbs, C in between.
+      final lift = const [0.3, 0.52, 0.42, 0.36][unique++ % 4];
+      final cells = [for (var b = 0; b < sliceBars; b++) top.nextInt(spec.rhythms.length)];
+      final sequence = sliceBars >= 2 && top.nextDouble() < 0.55;
+      if (sequence) cells[1] = cells[0];
+      return _Letter(cells, top.nextUint32(), spec.lo + (range * lift).round(), sequence, top.nextDouble() < 0.5 ? 2 : -2);
+    });
     final lastLetter = li == form.length - 1;
+    // Start on a chord tone near the letter's register.
+    final firstChord = chart.at(startBeat + li * sliceBars * beatsPerBar);
+    final tones = firstChord.tonesIn(keyMidi, spec.lo, spec.hi, withExtensions: false);
+    var prev = tones.isEmpty ? l.anchor : _nearest(tones, l.anchor, -99, null);
+    List<MelNote>? firstBar;
     for (var b = 0; b < sliceBars; b++) {
       final bar = li * sliceBars + b;
       if (bar >= bars) break;
       final barBeat = startBeat + bar * beatsPerBar;
       final lastBar = lastLetter && b == sliceBars - 1;
-      String cell = spec.rhythms[cells[b] % spec.rhythms.length];
+      var cell = spec.rhythms[l.cells[b] % spec.rhythms.length];
       if (lastBar && spec.cadenceRhythm != null) cell = spec.cadenceRhythm!;
-      if (lastBar && spec.cadenceRhythm == null && spec.cadence == Cadence.resolve) {
-        cell = 'x${'-' * (spec.steps - 1)}';
-      }
-      // Repeats reuse the letter's decisions, except the variant's last bar.
+      if (lastBar && spec.cadenceRhythm == null && spec.cadence == Cadence.resolve) cell = 'x${'-' * (spec.steps - 1)}';
       final variantBar = isRepeat && b == sliceBars - 1;
-      final rng = SynthRandom(letterSeed + b * 31 + (variantBar ? li * 977 : 0));
+      // A sequence: bar 2 restates bar 1 a step higher/lower, refitted to
+      // the new chord.
+      if (b == 1 && l.sequence && firstBar != null && firstBar.isNotEmpty && !variantBar && !lastBar) {
+        final chord = chart.at(barBeat);
+        final target = firstBar.first.pitch + l.seqStep;
+        final cands = chord.tonesIn(keyMidi, spec.lo, spec.hi, withExtensions: false);
+        final shift = (cands.isEmpty ? target : _nearest(cands, target, -99, null)) - firstBar.first.pitch;
+        for (final n in firstBar) {
+          final beat = n.beat + beatsPerBar;
+          final c = chart.at(beat);
+          var p = (n.pitch + shift).clamp(spec.lo, spec.hi);
+          final pos = ((beat - startBeat) % beatsPerBar) / beatsPerBar;
+          if ((pos == 0 || pos == 0.5) && !c.contains((p - keyMidi) % 12)) {
+            p = _nearest(c.tonesIn(keyMidi, spec.lo, spec.hi, withExtensions: false), p, -99, null);
+          } else if (!c.inScale((p - keyMidi) % 12)) {
+            p = _nearest(c.scaleIn(keyMidi, spec.lo, spec.hi), p, -99, null);
+          }
+          out.add(MelNote(beat, n.dur, p, accent: n.accent));
+          prev = p;
+        }
+        continue;
+      }
+      final rng = SynthRandom(l.seed + b * 31 + (variantBar ? li * 977 : 0));
       final rhythm = parseRhythm(cell);
-      // Contour: rise through the first half of the slice, fall after.
+      // Arch contour over the letter: climb to its middle, then descend.
       final rising = (b + 0.5) / sliceBars < 0.55;
+      final barStart = out.length;
       for (final (step, len) in rhythm) {
         if (step < 0) {
-          // Tie into this bar.
           if (out.isNotEmpty) out.last.dur += len * stepBeats;
           continue;
         }
@@ -224,19 +252,21 @@ List<MelNote> _melodyAttempt(ChordChart chart, double startBeat, int bars, int b
         final chord = chart.at(beat);
         final posInBar = step / spec.steps;
         final strong = posInBar == 0 || posInBar == 0.5 || dur >= 1.0 - 1e-9 || out.isEmpty;
+        final climbing = rising || (posInBar < 0.5 && sliceBars == 1);
         int p;
         if (rng.nextDouble() < spec.repeat && out.isNotEmpty && !strong) {
           p = prev;
         } else if (strong) {
           final ext = rng.nextDouble() < spec.extensions;
           final cands = chord.tonesIn(keyMidi, spec.lo, spec.hi, withExtensions: ext);
-          var desired = prev + (rising ? 1 : -1) * (rng.nextDouble() < spec.leap ? 5 + rng.nextInt(4) : 1 + rng.nextInt(3));
-          if (rng.nextDouble() < 0.25) desired = prev + (rising ? -2 : 2);
+          final leap = rng.nextDouble() < spec.leap;
+          var desired = prev + (climbing ? 1 : -1) * (leap ? 5 + rng.nextInt(4) : 2 + rng.nextInt(3));
+          if (rng.nextDouble() < 0.2) desired = prev + (climbing ? -2 : 2);
           p = _nearest(cands, desired, prev, rng);
         } else {
           final cands = chord.scaleIn(keyMidi, spec.lo, spec.hi);
           final stepwise = rng.nextDouble() < spec.stepBias;
-          final dir = (rising ? 1 : -1) * (rng.nextDouble() < 0.72 ? 1 : -1);
+          final dir = (climbing ? 1 : -1) * (rng.nextDouble() < 0.75 ? 1 : -1);
           final idx = _indexNear(cands, prev);
           final move = stepwise ? 1 : 2 + rng.nextInt(2);
           p = cands.isEmpty ? prev : cands[(idx + dir * move).clamp(0, cands.length - 1)];
@@ -251,10 +281,14 @@ List<MelNote> _melodyAttempt(ChordChart chart, double startBeat, int bars, int b
             if (cands.isNotEmpty) p = cands[(idx - lastIv.sign).clamp(0, cands.length - 1)];
           }
         }
+        // Keep away from the range edges (reflect).
+        if (p >= spec.hi - 1 && climbing) p = _nearest(chord.scaleIn(keyMidi, spec.lo, spec.hi), p - 3, p, null);
+        if (p <= spec.lo + 1 && !climbing) p = _nearest(chord.scaleIn(keyMidi, spec.lo, spec.hi), p + 3, p, null);
         p = p.clamp(spec.lo, spec.hi);
         out.add(MelNote(beat, dur, p, accent: strong && posInBar != 0 || (step % 4 != 0 && len >= 3)));
         prev = p;
       }
+      if (b == 0) firstBar = out.sublist(barStart);
     }
   }
   // Chromatic approaches into strong notes.
@@ -283,6 +317,16 @@ List<MelNote> _melodyAttempt(ChordChart chart, double startBeat, int bars, int b
     }
   }
   return out;
+}
+
+final class _Letter {
+  _Letter(this.cells, this.seed, this.anchor, this.sequence, this.seqStep);
+
+  final List<int> cells;
+  final int seed;
+  final int anchor;
+  final bool sequence;
+  final int seqStep;
 }
 
 int chordThird(Chord c) => c.isMinor ? 3 : 4;
@@ -694,6 +738,40 @@ void addPad(
     final v = s.chord.closeVoicing(keyMidi, floor, size: size);
     for (final p in v) {
       out.add(NoteEvent(s.beat, s.beats * 0.98, p.toDouble(), vel, inst, stem: stem, fx: fx, gain: gain));
+    }
+  }
+}
+
+/// Stride piano left hand: bass octaves on 1 and 3 (root, then the fifth
+/// when the chord holds), close chords on 2 and 4.
+void addStride(
+  List<NoteEvent> out,
+  Inst inst,
+  ChordChart chart,
+  int keyMidi, {
+  required double start,
+  required int bars,
+  int stem = 0,
+  double vel = 0.55,
+  double gain = 1,
+  int chordFloor = 53,
+}) {
+  for (var bar = 0; bar < bars; bar++) {
+    for (var beat = 0; beat < 4; beat++) {
+      final t = start + bar * 4 + beat;
+      final chord = chart.at(t);
+      if (beat.isEven) {
+        final slot = chart.slotAt(t);
+        final fresh = (slot.beat - t).abs() < 1e-6 || beat == 0;
+        var p = chord.rootNear(keyMidi, 43) + (fresh ? 0 : 7);
+        if (p > 50) p -= 12;
+        out.add(NoteEvent(t, 0.6, p.toDouble(), vel + (beat == 0 ? 0.08 : 0), inst, stem: stem, gain: gain));
+        out.add(NoteEvent(t, 0.6, p - 12.0, vel * 0.85, inst, stem: stem, gain: gain));
+      } else {
+        for (final p in chord.closeVoicing(keyMidi, chordFloor, size: 3)) {
+          out.add(NoteEvent(t, 0.4, p.toDouble(), vel * 0.72, inst, stem: stem, fx: Art.staccato, gain: gain));
+        }
+      }
     }
   }
 }

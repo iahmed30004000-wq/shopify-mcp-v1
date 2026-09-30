@@ -165,7 +165,10 @@ void paintWorld(Canvas canvas, Rect play, StageScene scene) {
         ..strokeWidth = 2.4
         ..color = pal.ink,
     )
-    ..drawRect(Rect.fromLTRB(play.left, floorY, play.right, play.bottom), Paint()..color = Color.lerp(pal.midtone, pal.shadow, 0.35)!);
+    ..drawRect(
+      Rect.fromLTRB(play.left, floorY, play.right, play.bottom),
+      Paint()..color = Color.lerp(pal.midtone, pal.shadow, 0.35)!,
+    );
   final boards = Paint()
     ..color = pal.ink.withValues(alpha: 0.55)
     ..strokeWidth = 1.4;
@@ -205,7 +208,10 @@ class GradedScenePainter extends CustomPainter {
     final c = Canvas(rec)..scale(dpr * fx.resolutionScale);
     scene.paint(c);
     final pic = rec.endRecording();
-    final img = pic.toImageSync((size.width * dpr * fx.resolutionScale).ceil(), (size.height * dpr * fx.resolutionScale).ceil());
+    final img = pic.toImageSync(
+      (size.width * dpr * fx.resolutionScale).ceil(),
+      (size.height * dpr * fx.resolutionScale).ceil(),
+    );
     pic.dispose();
     fx.apply(canvas, img, Offset.zero & size, scene.clock, film ?? FilmFrame());
     img.dispose();
@@ -236,7 +242,9 @@ Future<void> shootScene(
       debugShowCheckedModeBanner: false,
       home: Builder(
         builder: (context) => CustomPaint(
-          painter: graded ? GradedScenePainter(fx, scene, MediaQuery.devicePixelRatioOf(context), film: film) : _Plain(scene),
+          painter: graded
+              ? GradedScenePainter(fx, scene, MediaQuery.devicePixelRatioOf(context), film: film)
+              : _Plain(scene),
           size: Size.infinite,
         ),
       ),

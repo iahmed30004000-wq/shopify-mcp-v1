@@ -76,7 +76,8 @@ class OverlayTimer {
   double get elapsed {
     final now = scene.clock.time;
     final t0 = _t0 ??= now;
-    return scene.beat == null ? 10 : now - t0;
+    // No beat (fake stage) or reduced motion: everything already in place.
+    return scene.beat == null || scene.game.env.reducedMotion ? 10 : now - t0;
   }
 }
 
@@ -151,7 +152,14 @@ class CardBackgroundPainter extends CustomPainter {
 /// A menu button on the era's plaque (real button semantics, game sound and
 /// haptic). [primary] gets marquee bulbs round it.
 class StageButton extends StatefulWidget {
-  const StageButton({super.key, required this.scene, required this.label, required this.onPressed, this.primary = false, this.icon});
+  const StageButton({
+    super.key,
+    required this.scene,
+    required this.label,
+    required this.onPressed,
+    this.primary = false,
+    this.icon,
+  });
 
   final OverlayScene scene;
   final String label;
@@ -206,7 +214,11 @@ class _StageButtonState extends State<StageButton> {
                       Flexible(
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
-                          child: Text(widget.label, maxLines: 1, style: scene.title(widget.primary ? 21 : 17, color: _textColor(scene))),
+                          child: Text(
+                            widget.label,
+                            maxLines: 1,
+                            style: scene.title(widget.primary ? 21 : 17, color: _textColor(scene)),
+                          ),
                         ),
                       ),
                     ],
@@ -224,7 +236,8 @@ class _StageButtonState extends State<StageButton> {
 }
 
 class _ButtonPainter extends CustomPainter {
-  _ButtonPainter(this.scene, {required this.primary, required this.down}) : super(repaint: primary ? scene.repaint : null);
+  _ButtonPainter(this.scene, {required this.primary, required this.down})
+    : super(repaint: primary ? scene.repaint : null);
 
   final OverlayScene scene;
   final bool primary;

@@ -17743,6 +17743,97 @@ class L10nEn extends L10n {
   String get cmodExportHidden => 'hidden';
 
   @override
+  String get lifeHubToolsTitle => 'Tools';
+
+  @override
+  String get lifeHubPeople => 'People';
+
+  @override
+  String get lifeHubToolBoardsHint => 'Your kanban boards and their columns';
+
+  @override
+  String get lifeHubToolProjectsHint =>
+      'Projects, their checklists and countdowns';
+
+  @override
+  String get lifeHubToolPeopleHint => 'Everyone you want to stay close to';
+
+  @override
+  String get lifeHubToolRemindersHint => 'The daily digest and birthdays';
+
+  @override
+  String get lifeHubToolTripsHint => 'Your trips and their countdowns';
+
+  @override
+  String get lifeHubToolDocumentsHint =>
+      'Passports, visas and when they expire';
+
+  @override
+  String get lifeHubToolGoalsHint => 'Your learning goals and progress';
+
+  @override
+  String get lifeHubToolPlanHint => 'The week\'s training by weekday';
+
+  @override
+  String get lifeHubToolAvoidHint => 'What you chose to stay away from';
+
+  @override
+  String get lifeHubMoonOpenPerson => 'Open their page';
+
+  @override
+  String get lifeHubMoonOpenBoard => 'Open board';
+
+  @override
+  String get lifeHubMoonOpenTrip => 'Open trip';
+
+  @override
+  String get lifeHubMoonOpenModule => 'Open tracker';
+
+  @override
+  String get lifeHubSettingsSection => 'Life';
+
+  @override
+  String get lifeHubSettingsSectionHint =>
+      'Family, body, travel and your trackers';
+
+  @override
+  String lifeHubSettingsFamilyOn(String time) {
+    return 'Daily digest at $time';
+  }
+
+  @override
+  String get lifeHubSettingsFamilyBirthdays => 'Birthdays only';
+
+  @override
+  String get lifeHubSettingsFamilyOff => 'Off';
+
+  @override
+  String lifeHubSettingsWaterValue(String ml) {
+    return '$ml ml a day';
+  }
+
+  @override
+  String get lifeHubSettingsFastingHint => 'Plan and notifications';
+
+  @override
+  String get lifeHubSettingsTemplatesHint => 'Ready lists for every trip';
+
+  @override
+  String lifeHubSettingsModulesCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n trackers',
+      one: '$n tracker',
+      zero: 'None yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get lifeHubPrayerDestination => 'your destination';
+
+  @override
   String get cinemaTitle => 'Madar Cinema';
 
   @override
@@ -22536,4 +22627,398 @@ class L10nEn extends L10n {
 
   @override
   String get savedGamesClearDataDone => 'Game data cleared';
+
+  @override
+  String get togetherNetOnThisPhone => 'On this phone';
+
+  @override
+  String get togetherNetOnThisPhoneHint =>
+      'Pick who this phone belongs to — it\'s remembered';
+
+  @override
+  String togetherNetThisIsMe(String name) {
+    return 'This phone is $name\'s';
+  }
+
+  @override
+  String get togetherNetNearbyIntro =>
+      'Open the same game on both phones, then tap “Play together” on each. Just Bluetooth and Wi-Fi Direct — no internet, no servers.';
+
+  @override
+  String get togetherNetPlayTogether => 'Play together';
+
+  @override
+  String get togetherNetSearching => 'Looking for the other phone…';
+
+  @override
+  String get togetherNetSearchingHint =>
+      'Not showing up? Make sure both phones have the same game open, with Bluetooth and Wi-Fi on.';
+
+  @override
+  String get togetherNetPaused => 'Search paused until you\'re back in Madar';
+
+  @override
+  String get togetherNetPickPhone =>
+      'More than one phone found — pick the other one';
+
+  @override
+  String get togetherNetConnect => 'Connect';
+
+  @override
+  String togetherNetConnecting(String name) {
+    return 'Connecting to $name…';
+  }
+
+  @override
+  String get togetherNetConfirmTitle => 'Same number on both phones?';
+
+  @override
+  String togetherNetConfirmBody(String name) {
+    return 'Check that $name\'s phone shows these same four digits.';
+  }
+
+  @override
+  String togetherNetDigits(String digits) {
+    return 'Check code $digits';
+  }
+
+  @override
+  String get togetherNetMatch => 'They match';
+
+  @override
+  String get togetherNetNoMatch => 'They don\'t match';
+
+  @override
+  String togetherNetWaitingFor(String name) {
+    return 'Waiting for $name to confirm…';
+  }
+
+  @override
+  String togetherNetConnected(String name) {
+    return 'Connected — $name is on the other phone';
+  }
+
+  @override
+  String togetherNetReconnecting(String name) {
+    return 'Connection lost — looking for $name…';
+  }
+
+  @override
+  String togetherNetLost(String name) {
+    return 'Couldn\'t find $name';
+  }
+
+  @override
+  String get togetherNetLostHint =>
+      'Bring the phones closer and make sure Madar is open on both.';
+
+  @override
+  String get togetherNetSearchAgain => 'Search again';
+
+  @override
+  String get togetherNetTryAgain => 'Try again';
+
+  @override
+  String get togetherNetCancel => 'Cancel';
+
+  @override
+  String get togetherNetPermTitle => 'Allow finding nearby devices';
+
+  @override
+  String get togetherNetPermNearbyBody =>
+      'To find the other phone without the internet, Madar needs the “Nearby devices” permission: Bluetooth and Wi-Fi Direct.';
+
+  @override
+  String get togetherNetPermLocationBody =>
+      'On this Android version, the system ties Bluetooth and Wi-Fi searches to the location permission. Madar never reads your location.';
+
+  @override
+  String get togetherNetPermPointPairing =>
+      'Used only while pairing and playing';
+
+  @override
+  String get togetherNetPermPointGameOnly => 'Only game state leaves the phone';
+
+  @override
+  String get togetherNetPermPointStops =>
+      'Searching stops once paired, or when you leave the app';
+
+  @override
+  String get togetherNetContinue => 'Continue';
+
+  @override
+  String get togetherNetNotNow => 'Not now';
+
+  @override
+  String get togetherNetPermDenied =>
+      'Madar can\'t search without this permission';
+
+  @override
+  String get togetherNetPermDeniedForever =>
+      'The permission was refused. Turn it on in App settings › Permissions.';
+
+  @override
+  String get togetherNetOpenSettings => 'Open settings';
+
+  @override
+  String get togetherNetLocationOff => 'Location services are off';
+
+  @override
+  String get togetherNetLocationOffBody =>
+      'On this Android version, finding devices needs them on. Madar doesn\'t read your location.';
+
+  @override
+  String get togetherNetSearchAnyway => 'Search anyway';
+
+  @override
+  String get togetherNetFailRadio =>
+      'Turn on Bluetooth and Wi-Fi, then try again';
+
+  @override
+  String get togetherNetFailDeclined => 'The other phone declined';
+
+  @override
+  String get togetherNetFailNotFound => 'No open room with this code';
+
+  @override
+  String get togetherNetFailExpired =>
+      'This code has expired — create a new one';
+
+  @override
+  String get togetherNetFailTaken =>
+      'Another phone already joined with this code';
+
+  @override
+  String get togetherNetFailDifferentGame => 'This code is for another game';
+
+  @override
+  String get togetherNetFailNetwork => 'No internet connection';
+
+  @override
+  String get togetherNetFailSetup =>
+      'Firebase refused the project settings — check them in Online play';
+
+  @override
+  String get togetherNetFailSignIn =>
+      'Anonymous sign-in failed — enable it in your Firebase project';
+
+  @override
+  String get togetherNetFailRules =>
+      'The database refused access — paste the security rules';
+
+  @override
+  String get togetherNetFailPeerLeft => 'The other player left';
+
+  @override
+  String get togetherNetFailUnknown => 'Something went wrong';
+
+  @override
+  String get togetherNetCreateCode => 'Create a code';
+
+  @override
+  String get togetherNetEnterCode => 'Enter a code';
+
+  @override
+  String get togetherNetOnlineIntro =>
+      'One of you creates a code, the other types it on their phone. Only game state is kept in your own Firebase project, and it\'s deleted when you leave.';
+
+  @override
+  String get togetherNetYourCode => 'Room code';
+
+  @override
+  String get togetherNetCodeHint =>
+      'Type this code on the other phone under “Enter a code”';
+
+  @override
+  String togetherNetCodeValid(String time) {
+    return 'Valid until $time';
+  }
+
+  @override
+  String get togetherNetCopyCode => 'Copy code';
+
+  @override
+  String get togetherNetCopied => 'Copied';
+
+  @override
+  String get togetherNetWaitingJoin => 'Waiting for the other phone to join…';
+
+  @override
+  String togetherNetJoinRequest(String name) {
+    return '$name wants to join';
+  }
+
+  @override
+  String get togetherNetJoinRequestBody =>
+      'Is this really the other player? If not, decline and we\'ll make a new code.';
+
+  @override
+  String get togetherNetAccept => 'Play';
+
+  @override
+  String get togetherNetDecline => 'Decline';
+
+  @override
+  String get togetherNetCodeField => 'Code (6 digits)';
+
+  @override
+  String get togetherNetJoin => 'Join';
+
+  @override
+  String get togetherNetJoining => 'Checking the code…';
+
+  @override
+  String togetherNetWaitingAccept(String name) {
+    return 'Waiting for $name to accept…';
+  }
+
+  @override
+  String get togetherNetSigningIn => 'Connecting to your project…';
+
+  @override
+  String get togetherNetNeedsSetup => 'Online play is off';
+
+  @override
+  String get togetherNetNeedsSetupBody =>
+      'It runs on your own free Firebase project and stays off until you turn it on.';
+
+  @override
+  String get togetherNetSetUp => 'Set up online play';
+
+  @override
+  String togetherNetQrLabel(String code) {
+    return 'QR code of room $code';
+  }
+
+  @override
+  String get togetherNetOnlineIntroSheet =>
+      'To play from different places, Madar uses your own free Firebase project — Madar has no server. It only ever holds game state, plus a display name, avatar and colour, for a few hours; then it\'s deleted.';
+
+  @override
+  String get togetherNetEnable => 'Online play';
+
+  @override
+  String get togetherNetEnableHint =>
+      'Off by default. Needs valid project settings.';
+
+  @override
+  String get togetherNetEnableNeedsConfig => 'Save the project settings first';
+
+  @override
+  String get togetherNetStepsTitle => 'One-time setup';
+
+  @override
+  String get togetherNetStep1 =>
+      'Create a free project at console.firebase.google.com';
+
+  @override
+  String get togetherNetStep2 =>
+      'Add an Android app with the package name app.madar.orbit';
+
+  @override
+  String get togetherNetStep3 =>
+      'Enable anonymous sign-in: Authentication › Sign-in method › Anonymous';
+
+  @override
+  String get togetherNetStep4 =>
+      'Create a Realtime Database and paste the security rules into its Rules tab';
+
+  @override
+  String get togetherNetStep5 =>
+      'Copy the values into the fields here, or paste the whole google-services.json';
+
+  @override
+  String get togetherNetCopyRules => 'Copy security rules';
+
+  @override
+  String get togetherNetRulesCopied => 'Security rules copied';
+
+  @override
+  String get togetherNetPasteConfig => 'Paste from clipboard';
+
+  @override
+  String get togetherNetPasteNothing => 'No settings on the clipboard';
+
+  @override
+  String get togetherNetPasted => 'Fields filled from the clipboard';
+
+  @override
+  String get togetherNetFieldApiKey => 'API key';
+
+  @override
+  String get togetherNetFieldAppId => 'App ID';
+
+  @override
+  String get togetherNetFieldProjectId => 'Project ID';
+
+  @override
+  String get togetherNetFieldDatabaseUrl => 'Database URL';
+
+  @override
+  String get togetherNetFieldSenderId => 'Sender ID';
+
+  @override
+  String get togetherNetErrMissing => 'Required';
+
+  @override
+  String get togetherNetErrFormat => 'Not in the expected format';
+
+  @override
+  String get togetherNetErrMismatch =>
+      'Doesn\'t match the project number in the App ID';
+
+  @override
+  String get togetherNetSave => 'Save';
+
+  @override
+  String get togetherNetSaved => 'Settings saved';
+
+  @override
+  String get togetherNetTest => 'Test connection';
+
+  @override
+  String get togetherNetTesting => 'Testing…';
+
+  @override
+  String get togetherNetTestOk =>
+      'It works! Anonymous sign-in and the rules are ready';
+
+  @override
+  String get togetherNetRemove => 'Remove settings';
+
+  @override
+  String get togetherNetRemoved => 'Project settings removed';
+
+  @override
+  String get togetherNetStoredSecurely =>
+      'Kept only in this phone\'s secure storage and sent nowhere but your own project.';
+
+  @override
+  String get togetherNetOnlineOn => 'On';
+
+  @override
+  String get togetherNetOnlineOff => 'Off';
+
+  @override
+  String get togetherNetOnlineNotSetUp => 'Not set up';
+
+  @override
+  String get togetherNetTurnGroup => 'Together';
+
+  @override
+  String get togetherNetTurnChannel => 'Your turn';
+
+  @override
+  String get togetherNetTurnChannelBody =>
+      'When the other player moves from another phone';
+
+  @override
+  String togetherNetTurnTitle(String game) {
+    return 'Your turn in $game';
+  }
+
+  @override
+  String togetherNetTurnBody(String name) {
+    return '$name played — it\'s your move';
+  }
 }
