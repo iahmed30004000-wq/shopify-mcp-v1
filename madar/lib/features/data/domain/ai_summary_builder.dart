@@ -185,7 +185,7 @@ class AiSummaryBuilder {
       }
       if (logged == 0) continue;
       prayers.add(
-        '- ${l.dataSumObligatory(_windowLabel(days))}: ${_join([
+        '- ${l.dataSumObligatory(_windowLabel(days))} — ${_join([
           l.dataSumLogged('$logged', '${days * _obligatory.length}'),
           l.dataSumOnTime('$onTime'),
           if (late > 0) l.dataSumLate('$late'),
@@ -211,7 +211,7 @@ class AiSummaryBuilder {
       final pages = s.fold<double>(0, (a, q) => a + q.pages);
       final minutes = (s.fold<int>(0, (a, q) => a + q.seconds) / 60).round();
       quran.add(
-        '- ${_windowLabel(days)}: ${_join([
+        '- ${_windowLabel(days)} — ${_join([
           l.dataSumSessions('${s.length}'),
           l.dataSumPages(_num(pages)),
           if (minutes > 0) l.dataSumMinutes('$minutes'),
@@ -255,7 +255,7 @@ class AiSummaryBuilder {
           l.dataSumDueToday('$due'),
         ])}',
         if (reviews.isNotEmpty)
-          '- ${_windowLabel(window)}: ${_join([
+          '- ${_windowLabel(window)} — ${_join([
             l.dataSumReviews('${reviews.length}'),
             if (avg != null) l.dataSumAvgGrade(_num(avg)),
           ])}',
@@ -371,7 +371,7 @@ class AiSummaryBuilder {
       _tableRow([l.dataSumColTest, l.dataSumColDate, l.dataSumColResult, l.dataSumColRange, l.dataSumColFlag, l.dataSumColPrevious]),
       _tableRow(List.filled(6, '---')),
       for (final r in shown) _tableRow(r.$3),
-      if (rows.length > shown.length) '- ${l.dataSumMore('${rows.length - shown.length}')}',
+      if (rows.length > shown.length) ...['', '- ${l.dataSumMore('${rows.length - shown.length}')}'],
     ];
   }
 
@@ -384,18 +384,18 @@ class AiSummaryBuilder {
     final out = <String>[];
     if (recent.isNotEmpty) {
       out.add(
-        '- ${_windowLabel(window)}: ${_join([
+        '- ${_windowLabel(window)} — ${_join([
           l.dataSumEntries('${recent.length}'),
           l.dataSumAverageOf(_num(_avg(recent.map((p) => p.score))!), '10'),
           l.dataSumHighest('${recent.map((p) => p.score).reduce(math.max)}', '10'),
         ])}',
       );
     } else {
-      out.add('- ${_windowLabel(window)}: ${l.dataSumEntries('0')}');
+      out.add('- ${_windowLabel(window)} — ${l.dataSumEntries('0')}');
     }
     if (previous.isNotEmpty) {
       out.add(
-        '- ${l.dataSumPreviousDays(_windowLabel(window))}: ${_join([
+        '- ${l.dataSumPreviousDays('$window')} — ${_join([
           l.dataSumEntries('${previous.length}'),
           l.dataSumAverageOf(_num(_avg(previous.map((p) => p.score))!), '10'),
         ])}',
@@ -430,8 +430,8 @@ class AiSummaryBuilder {
     }
 
     final out = <String>[
-      '- ${_windowLabel(window)}: ${recent.isEmpty ? l.dataSumEntries('0') : metrics(recent)}',
-      if (previous.isNotEmpty) '- ${l.dataSumPreviousDays(_windowLabel(window))}: ${metrics(previous)}',
+      '- ${_windowLabel(window)} — ${recent.isEmpty ? l.dataSumEntries('0') : metrics(recent)}',
+      if (previous.isNotEmpty) '- ${l.dataSumPreviousDays('$window')} — ${metrics(previous)}',
     ];
     final factors = _top(recent.expand((m) => m.factors));
     if (factors.isNotEmpty) out.add('- ${l.dataSumTopFactors}: $factors');
@@ -496,7 +496,7 @@ class AiSummaryBuilder {
           if (baseCode != null) converted == null ? '—' : PlainNumbers.milli(converted, decimals: decimals(baseCode)),
         ]));
       }
-      if (baseCode != null) lines.add('- ${l.dataSumTotal(amount(total, baseCode))}');
+      if (baseCode != null) lines.addAll(['', '- ${l.dataSumTotal(amount(total, baseCode))}']);
       md.sub(l.dataSumWalletsTitle, lines);
     }
 
@@ -567,7 +567,7 @@ class AiSummaryBuilder {
         final c = a.nextDue.compareTo(b.nextDue);
         return c != 0 ? c : _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id);
       });
-    md.sub(l.dataSumDueTitle(_windowLabel(window)), [
+    md.sub(l.dataSumDueTitle('$window'), [
       for (final o in dues)
         _day(o.nextDue).isBefore(_today)
             ? '- ${_clean(o.name)}: ${amount(o.amountMilli, o.currency)} – ${l.dataSumOverdueSince(isoDay(o.nextDue))}'
@@ -779,7 +779,7 @@ class AiSummaryBuilder {
       final avg = (water.fold<int>(0, (a, w) => a + w.ml) / shortWindow).round();
       recent.add(
         '- ${_join([
-          l.dataSumWater(_windowLabel(shortWindow), '$avg'),
+          l.dataSumWater('$shortWindow', '$avg'),
           if (input.waterTargetMl != null) l.dataSumTargetMl('${input.waterTargetMl}'),
         ])}',
       );

@@ -202,7 +202,7 @@ class MoneyNetWorthCard extends ConsumerWidget {
 
     final shares = worth.shares;
     final parts = <_Part>[
-      (l.moneyHubPartWallets, worth.walletsMilli, t.accent, false),
+      (l.moneyHubPartWallets, worth.walletsMilli, t.info, false),
       (l.moneyHubPartJars, worth.jarsMilli, t.gold, false),
       (l.moneyHubPartOwedToMe, worth.owedToMeMilli, t.success, false),
       (l.moneyHubPartIOwe, worth.iOweMilli, t.danger, true),
@@ -243,7 +243,7 @@ class MoneyNetWorthCard extends ConsumerWidget {
           ),
           const SizedBox(height: Space.s),
           _ShareStrip(
-            segments: [(shares.wallets, t.accent), (shares.jars, t.gold), (shares.owed, t.success)],
+            segments: [(shares.wallets, t.info), (shares.jars, t.gold), (shares.owed, t.success)],
           ),
           const SizedBox(height: Space.m),
           for (var i = 0; i < parts.length; i += 2) ...[
@@ -345,6 +345,7 @@ class _ShareStrip extends StatelessWidget {
         child: shown.isEmpty
             ? ColoredBox(color: t.glassBorder)
             : Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   for (final (share, color) in shown)
                     Expanded(

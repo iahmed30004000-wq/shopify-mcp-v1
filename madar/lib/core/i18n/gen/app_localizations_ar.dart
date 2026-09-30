@@ -18455,4 +18455,1319 @@ class L10nAr extends L10n {
 
   @override
   String get cinemaCancel => 'إلغاء';
+
+  @override
+  String get dataCentreTitle => 'بياناتك';
+
+  @override
+  String get dataHeroTitle => 'بياناتك تبقى معك';
+
+  @override
+  String get dataHeroBody =>
+      'يحفظ مَدار كل شيء مشفّرًا على هذا الهاتف، ولا يرفع شيئًا إلى أي مكان. لا يغادر ملفٌّ التطبيقَ إلا حين تشاركه أو تحفظه بنفسك.';
+
+  @override
+  String get dataStatRecords => 'السجلات';
+
+  @override
+  String get dataStatLastBackup => 'آخر نسخة احتياطية';
+
+  @override
+  String get dataLastBackupNever => 'لم تُنشأ بعد';
+
+  @override
+  String get dataLastBackupToday => 'اليوم';
+
+  @override
+  String dataLastBackupDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'قبل $days يوم',
+      many: 'قبل $days يومًا',
+      few: 'قبل $days أيام',
+      two: 'قبل يومين',
+      one: 'أمس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataBackupSection => 'النسخ الاحتياطي';
+
+  @override
+  String get dataBackupSectionHint =>
+      'ملف واحد مشفّر لنقل بياناتك أو حفظها بأمان';
+
+  @override
+  String get dataBackupCreateTitle => 'نسخة احتياطية مشفّرة';
+
+  @override
+  String get dataBackupCreateBody =>
+      'ملف واحد يُقفَل بعبارة مرور لا يعرفها أحد غيرك. احتفظ به في مكان آمن لتنقل بياناتك إلى هاتف جديد.';
+
+  @override
+  String get dataBackupCreateAction => 'إنشاء نسخة احتياطية';
+
+  @override
+  String get dataRestoreTitle => 'الاستعادة من نسخة احتياطية';
+
+  @override
+  String get dataRestoreBody =>
+      'تستبدل كل ما في مَدار بمحتوى ملف النسخة. نحفظ أولًا نسخة أمان من بياناتك الحالية على الهاتف.';
+
+  @override
+  String get dataRestoreAction => 'اختيار ملف النسخة';
+
+  @override
+  String dataSafetyCopiesLine(int count, String date) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نسخة أمان على الهاتف',
+      many: '$count نسخة أمان على الهاتف',
+      few: '$count نسخ أمان على الهاتف',
+      two: 'نسختا أمان على الهاتف',
+      one: 'نسخة أمان واحدة على الهاتف',
+    );
+    return '$_temp0 · آخرها $date';
+  }
+
+  @override
+  String get dataExportSection => 'التصدير';
+
+  @override
+  String get dataExportSectionHint => 'نسخ مقروءة لبياناتك – غير مشفّرة';
+
+  @override
+  String get dataExportSummaryTitle => 'ملخّص جاهز للذكاء الاصطناعي';
+
+  @override
+  String get dataExportSummaryBody =>
+      'نظرة موجزة بصيغة Markdown تراجعها قسمًا قسمًا قبل مشاركتها.';
+
+  @override
+  String get dataExportCsvTitle => 'جداول (CSV)';
+
+  @override
+  String get dataExportCsvBody =>
+      'التحاليل والمعاملات والألم والمزاج – لـExcel أو Sheets.';
+
+  @override
+  String get dataExportJsonTitle => 'كل البيانات (JSON)';
+
+  @override
+  String get dataExportJsonBody =>
+      'كل السجلات في ملف واحد، لأرشيفك الخاص أو لتطبيقات أخرى.';
+
+  @override
+  String get dataExportPlainWarning =>
+      'ملفات التصدير غير مشفّرة: من يحصل عليها يستطيع قراءتها. شاركها مع من تثق به فقط.';
+
+  @override
+  String get dataImportSection => 'الاستيراد';
+
+  @override
+  String get dataImportTitle => 'الاستيراد من نموذج مَدار الأول';
+
+  @override
+  String get dataImportBody =>
+      'أدخل البيانات المصدّرة من النسخة الأولى (ملف JSON).';
+
+  @override
+  String get dataFooter =>
+      'لا يرفع مَدار بياناتك إلى أي خادم. أنت وحدك تقرّر أين تذهب ملفاتك.';
+
+  @override
+  String get dataAreaOther => 'الإعدادات والسجلّ';
+
+  @override
+  String get dataShareAction => 'مشاركة';
+
+  @override
+  String get dataSaveAction => 'حفظ في…';
+
+  @override
+  String get dataCopyAction => 'نسخ';
+
+  @override
+  String get dataDoneAction => 'تم';
+
+  @override
+  String get dataCancelAction => 'إلغاء';
+
+  @override
+  String get dataTryAgainAction => 'حاول مجددًا';
+
+  @override
+  String get dataFileReadyTitle => 'ملفّك جاهز';
+
+  @override
+  String get dataFileReadySubtitle => 'اختر أين يذهب – لا شيء يُرسَل تلقائيًا';
+
+  @override
+  String get dataFileEncryptedNote =>
+      'مشفّر بعبارة المرور. لا يُفتح إلا بها – احتفظ بها بعيدًا عن الملف.';
+
+  @override
+  String get dataFilePlainNote =>
+      'غير مشفّر: من يحصل على هذا الملف يستطيع قراءته.';
+
+  @override
+  String get dataFileShared => 'أُرسل إلى قائمة المشاركة.';
+
+  @override
+  String get dataFileSaved => 'حُفظ في المكان الذي اخترته.';
+
+  @override
+  String get dataFileSendFailed => 'تعذّر ذلك. لم يُرسَل شيء – حاول مجددًا.';
+
+  @override
+  String get dataExportFailed => 'تعذّر تجهيز الملف. بياناتك لم تتغيّر.';
+
+  @override
+  String dataRecordsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سجل',
+      many: '$count سجلًّا',
+      few: '$count سجلات',
+      two: 'سجلّان',
+      one: 'سجل واحد',
+      zero: 'لا سجلات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSizeBytes(String size) {
+    return '$size بايت';
+  }
+
+  @override
+  String dataSizeKb(String size) {
+    return '$size ك.ب';
+  }
+
+  @override
+  String dataSizeMb(String size) {
+    return '$size م.ب';
+  }
+
+  @override
+  String get dataBackupSheetTitle => 'نسخة احتياطية مشفّرة';
+
+  @override
+  String get dataBackupSheetSubtitle =>
+      'AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك';
+
+  @override
+  String get dataBackupSheetBody =>
+      'اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.';
+
+  @override
+  String get dataPassphraseLabel => 'عبارة المرور';
+
+  @override
+  String get dataPassphraseConfirmLabel => 'أعد كتابة عبارة المرور';
+
+  @override
+  String get dataPassphraseMismatch => 'العبارتان غير متطابقتين.';
+
+  @override
+  String get dataPassphraseShow => 'إظهار عبارة المرور';
+
+  @override
+  String get dataPassphraseHide => 'إخفاء عبارة المرور';
+
+  @override
+  String get dataPassphraseNeverStored =>
+      'لا تُحفظ عبارة المرور في أي مكان. بدونها لا يمكن فتح النسخة – ولا حتى بواسطتنا.';
+
+  @override
+  String get dataStrengthLabel => 'القوة';
+
+  @override
+  String get dataStrengthEmpty => '—';
+
+  @override
+  String get dataStrengthVeryWeak => 'ضعيفة جدًا';
+
+  @override
+  String get dataStrengthWeak => 'ضعيفة';
+
+  @override
+  String get dataStrengthFair => 'مقبولة';
+
+  @override
+  String get dataStrengthStrong => 'قوية';
+
+  @override
+  String get dataStrengthVeryStrong => 'قوية جدًا';
+
+  @override
+  String dataStrengthHintShort(String min) {
+    return 'استخدم $min أحرف على الأقل – جملة قصيرة تفي بالغرض.';
+  }
+
+  @override
+  String get dataStrengthHintCommon => 'هذه عبارة شائعة يسهل تخمينها.';
+
+  @override
+  String get dataStrengthHintPattern =>
+      'تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.';
+
+  @override
+  String get dataStrengthHintDigits => 'الأرقام وحدها سهلة التخمين؛ أضف كلمات.';
+
+  @override
+  String get dataStrengthHintWords =>
+      'جيدة. كلمة أو كلمتان إضافيتان تجعلانها أقوى بكثير.';
+
+  @override
+  String get dataBackupWorking => 'نقفل بياناتك…';
+
+  @override
+  String get dataBackupWorkingHint =>
+      'يستغرق هذا بضع ثوانٍ عن قصد، ليصعب تخمين عبارة المرور.';
+
+  @override
+  String get dataBackupReadyTitle => 'النسخة الاحتياطية جاهزة';
+
+  @override
+  String get dataBackupReadySubtitle => 'شاركها أو احفظها في مكان آمن';
+
+  @override
+  String get dataBackupReadyHint =>
+      'احفظ الملف وعبارة المرور في مكانين مختلفين. ستحتاج إلى كليهما للاستعادة.';
+
+  @override
+  String get dataBackupShareSubject => 'نسخة مَدار الاحتياطية';
+
+  @override
+  String get dataBackupFailed =>
+      'تعذّر إنشاء النسخة. بياناتك كما هي – حاول مجددًا.';
+
+  @override
+  String dataBackupMadeOn(String date) {
+    return 'أُنشئت في $date';
+  }
+
+  @override
+  String get dataCsvSheetTitle => 'تصدير جدول';
+
+  @override
+  String get dataCsvSheetSubtitle => 'CSV · UTF-8 · يُفتح في Excel وSheets';
+
+  @override
+  String get dataCsvWhat => 'ماذا';
+
+  @override
+  String get dataCsvWhen => 'الفترة';
+
+  @override
+  String get dataCsvLabs => 'التحاليل';
+
+  @override
+  String get dataCsvTransactions => 'المعاملات';
+
+  @override
+  String get dataCsvPain => 'الألم';
+
+  @override
+  String get dataCsvMood => 'المزاج';
+
+  @override
+  String get dataRange30 => '30 يومًا';
+
+  @override
+  String get dataRange90 => '90 يومًا';
+
+  @override
+  String get dataRangeYear => '12 شهرًا';
+
+  @override
+  String get dataRangeAll => 'الكل';
+
+  @override
+  String get dataRangeCustom => 'مخصّصة…';
+
+  @override
+  String get dataRangeAllTime => 'كل السجلات منذ البداية';
+
+  @override
+  String dataRangeFromTo(String from, String to) {
+    return 'من $from إلى $to';
+  }
+
+  @override
+  String get dataCsvFormatNote =>
+      'التواريخ بصيغة 2026-09-30 والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.';
+
+  @override
+  String get dataCsvCreate => 'إنشاء الملف';
+
+  @override
+  String dataCsvCreateRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'إنشاء الملف ($count صف)',
+      many: 'إنشاء الملف ($count صفًّا)',
+      few: 'إنشاء الملف ($count صفوف)',
+      two: 'إنشاء الملف (صفّان)',
+      one: 'إنشاء الملف (صف واحد)',
+      zero: 'لا صفوف في هذه الفترة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataCsvDate => 'التاريخ';
+
+  @override
+  String get dataCsvTime => 'الوقت';
+
+  @override
+  String get dataCsvTest => 'التحليل';
+
+  @override
+  String get dataCsvCategory => 'الفئة';
+
+  @override
+  String get dataCsvValue => 'القيمة';
+
+  @override
+  String get dataCsvTextResult => 'نتيجة نصية';
+
+  @override
+  String get dataCsvUnit => 'الوحدة';
+
+  @override
+  String get dataCsvRangeLow => 'الحد الأدنى';
+
+  @override
+  String get dataCsvRangeHigh => 'الحد الأعلى';
+
+  @override
+  String get dataCsvFlag => 'العلامة';
+
+  @override
+  String get dataCsvNote => 'ملاحظة';
+
+  @override
+  String get dataCsvNotes => 'ملاحظات';
+
+  @override
+  String get dataCsvKind => 'النوع';
+
+  @override
+  String get dataCsvWallet => 'المحفظة';
+
+  @override
+  String get dataCsvCurrency => 'العملة';
+
+  @override
+  String get dataCsvAmount => 'المبلغ';
+
+  @override
+  String get dataCsvAmountBase => 'المبلغ بالعملة الأساسية';
+
+  @override
+  String get dataCsvBaseCurrency => 'العملة الأساسية';
+
+  @override
+  String get dataCsvBudgetItem => 'بند الميزانية';
+
+  @override
+  String get dataCsvToWallet => 'إلى المحفظة';
+
+  @override
+  String get dataCsvToAmount => 'المبلغ المستلم';
+
+  @override
+  String get dataCsvToCurrency => 'عملة الاستلام';
+
+  @override
+  String get dataCsvTags => 'الوسوم';
+
+  @override
+  String get dataCsvPainScore => 'شدة الألم (0-10)';
+
+  @override
+  String get dataCsvLocations => 'المواضع';
+
+  @override
+  String get dataCsvTriggers => 'المحفّزات';
+
+  @override
+  String get dataCsvBodyPoints => 'نقاط خريطة الجسم';
+
+  @override
+  String get dataCsvMoodScore => 'المزاج (1-5)';
+
+  @override
+  String get dataCsvStress => 'التوتر (0-10)';
+
+  @override
+  String get dataCsvAnxiety => 'القلق (0-10)';
+
+  @override
+  String get dataCsvEnergy => 'الطاقة (0-10)';
+
+  @override
+  String get dataCsvSleepHours => 'ساعات النوم';
+
+  @override
+  String get dataCsvCaffeine => 'أكواب الكافيين';
+
+  @override
+  String get dataCsvFactors => 'العوامل';
+
+  @override
+  String get dataFlagLow => 'منخفض';
+
+  @override
+  String get dataFlagBorderlineLow => 'على الحد الأدنى';
+
+  @override
+  String get dataFlagInRange => 'ضمن المعدل';
+
+  @override
+  String get dataFlagBorderlineHigh => 'على الحد الأعلى';
+
+  @override
+  String get dataFlagHigh => 'مرتفع';
+
+  @override
+  String get dataTxExpense => 'مصروف';
+
+  @override
+  String get dataTxIncome => 'دخل';
+
+  @override
+  String get dataTxTransfer => 'تحويل';
+
+  @override
+  String get dataTxAdjustment => 'تسوية';
+
+  @override
+  String get dataSummarySubtitle =>
+      'يُعدّ على هاتفك · راجع كل قسم قبل المشاركة';
+
+  @override
+  String get dataSummaryIntro =>
+      'لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.';
+
+  @override
+  String get dataSummaryPreparing => 'نجهّز الملخّص على هاتفك…';
+
+  @override
+  String get dataSummarySections => 'الأقسام المضمَّنة';
+
+  @override
+  String dataSummarySectionsOf(String selected, String total) {
+    return '$selected من $total أقسام';
+  }
+
+  @override
+  String dataSummaryTokens(String count) {
+    return '≈ $count رمز';
+  }
+
+  @override
+  String get dataSummaryNoData => 'لا بيانات بعد';
+
+  @override
+  String get dataSummaryProfileHint => 'اختياري – أنت تحدّد ما يُذكر';
+
+  @override
+  String get dataSummaryPreviewTitle => 'ما سيُشارَك بالضبط';
+
+  @override
+  String get dataSummaryCopied => 'نُسخ الملخّص إلى الحافظة.';
+
+  @override
+  String get dataSummaryUse => 'استخدام هذا الملخّص';
+
+  @override
+  String get dataProfileChoose => 'اختر ما يُذكر عنك:';
+
+  @override
+  String get dataProfileAboutHint =>
+      'مثلًا: العمر أو ما يهمّك أن يعرفه المساعد';
+
+  @override
+  String get dataRestoreFlowTitle => 'الاستعادة';
+
+  @override
+  String get dataRestoreChooseTitle => 'استعادة بياناتك';
+
+  @override
+  String get dataRestoreChooseBody =>
+      'اختر ملف ‎.madarbackup‎. سترى ما فيه قبل أن يتغيّر أي شيء.';
+
+  @override
+  String get dataRestorePickFile => 'اختيار ملف النسخة';
+
+  @override
+  String get dataRestoreNothingChanges =>
+      'لن يتغيّر شيء في بياناتك الحالية حتى تؤكّد الاستبدال في الخطوة الأخيرة.';
+
+  @override
+  String get dataSafetyCopiesTitle => 'نسخ الأمان على هذا الهاتف';
+
+  @override
+  String get dataSafetyCopiesHint =>
+      'تُنشأ تلقائيًا قبل كل استعادة، وتُفتح بعبارة المرور التي استُخدمت حينها.';
+
+  @override
+  String get dataRestoreUnlockBody =>
+      'اكتب عبارة المرور التي أقفلت بها هذه النسخة.';
+
+  @override
+  String get dataRestoreUnlockAction => 'فتح النسخة';
+
+  @override
+  String get dataRestoreOtherFile => 'اختيار ملف آخر';
+
+  @override
+  String get dataRestoreOpening => 'نتحقق من النسخة…';
+
+  @override
+  String get dataRestoreOpeningHint =>
+      'نتأكد أن الملف سليم ولم يُعدَّل، ثم نفكّ تشفيره على هاتفك.';
+
+  @override
+  String get dataRestorePreviewTitle => 'النسخة سليمة';
+
+  @override
+  String get dataRestoreInBackup => 'في النسخة';
+
+  @override
+  String get dataRestoreOnPhone => 'على الهاتف الآن';
+
+  @override
+  String get dataRestoreWhatsInside => 'ما في هذه النسخة';
+
+  @override
+  String get dataRestoreReplaceWarning =>
+      'ستحلّ هذه النسخة محلّ كل البيانات الموجودة في مَدار الآن. قبل ذلك نحفظ بياناتك الحالية نسخةَ أمان على هذا الهاتف، تُفتح بعبارة المرور نفسها.';
+
+  @override
+  String get dataRestoreUnderstand => 'فهمت أن بياناتي الحالية ستُستبدل';
+
+  @override
+  String get dataRestoreConfirmAction => 'استبدال بياناتي';
+
+  @override
+  String get dataRestoreSavingSafety => 'نحفظ نسخة أمان من بياناتك الحالية…';
+
+  @override
+  String get dataRestoreRestoring => 'نستعيد بياناتك…';
+
+  @override
+  String get dataRestoreKeepOpen => 'أبقِ التطبيق مفتوحًا لحظات.';
+
+  @override
+  String get dataRestoreDoneTitle => 'تمت الاستعادة';
+
+  @override
+  String dataRestoreDoneBody(String count) {
+    return 'عادت سجلاتك ($count) إلى مَدار.';
+  }
+
+  @override
+  String get dataRestoreSafetyKept =>
+      'نسخة أمان من بياناتك السابقة محفوظة على هذا الهاتف، وتُفتح بعبارة المرور نفسها.';
+
+  @override
+  String get dataSafetyCopySave => 'حفظ نسخة الأمان في مكان آخر';
+
+  @override
+  String get dataSafetyCopyTitle => 'نسخة الأمان';
+
+  @override
+  String get dataNothingChanged => 'لم يتغيّر شيء في بياناتك.';
+
+  @override
+  String get dataErrWrongPassphrase =>
+      'عبارة المرور هذه لا تفتح النسخة. تحقّق من الأحرف وحاول مجددًا.';
+
+  @override
+  String get dataErrNotBackupTitle => 'هذا ليس ملف نسخة من مَدار';
+
+  @override
+  String get dataErrNotBackupBody =>
+      'اختر ملفًا ينتهي بـ ‎.madarbackup‎ أنشأته من «إنشاء نسخة احتياطية».';
+
+  @override
+  String get dataErrNewerTitle => 'أُنشئت بإصدار أحدث من مَدار';
+
+  @override
+  String get dataErrNewerBody => 'حدّث مَدار على هذا الهاتف ثم حاول مجددًا.';
+
+  @override
+  String get dataErrTruncatedTitle => 'الملف غير مكتمل';
+
+  @override
+  String get dataErrTruncatedBody =>
+      'ربما لم يكتمل نسخه أو تنزيله. انسخه مرة أخرى ثم حاول.';
+
+  @override
+  String get dataErrCorruptedTitle => 'الملف تالف';
+
+  @override
+  String get dataErrCorruptedBody =>
+      'تغيّر الملف أو تلف بعد إنشائه، فلا يمكن الوثوق به.';
+
+  @override
+  String get dataErrUnreadableTitle => 'تعذّرت قراءة الملف';
+
+  @override
+  String get dataErrUnreadableBody =>
+      'جرّب ملفًا آخر أو انسخه إلى الهاتف أولًا.';
+
+  @override
+  String get dataErrSafetyTitle => 'تعذّر حفظ نسخة الأمان';
+
+  @override
+  String get dataErrSafetyBody =>
+      'لذلك لم نستبدل بياناتك. وفّر بعض المساحة ثم حاول مجددًا.';
+
+  @override
+  String get dataErrRejectedTitle => 'تعذّرت استعادة هذه النسخة';
+
+  @override
+  String get dataErrRejectedBody => 'لم تجتز بياناتها فحوص السلامة.';
+
+  @override
+  String dataSumHeading(String date) {
+    return 'ملخّص مَدار — $date';
+  }
+
+  @override
+  String get dataSumPreamble =>
+      'بيانات متابعة شخصية من تطبيق مَدار، أُعدّت على هاتف المستخدم نفسه. التواريخ بصيغة سنة-شهر-يوم والكسور العشرية بنقطة. لا تُضمَّن الملاحظات ولا أرقام الهواتف ولا أرقام الوثائق أو الحسابات.';
+
+  @override
+  String get dataSumNoData => 'لا بيانات بعد.';
+
+  @override
+  String get dataSumListSep => '، ';
+
+  @override
+  String dataSumLastDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'آخر $days يوم',
+      many: 'آخر $days يومًا',
+      few: 'آخر $days أيام',
+      two: 'آخر يومين',
+      one: 'اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSumPreviousDays(String days) {
+    return 'الأيام الـ$days السابقة';
+  }
+
+  @override
+  String dataSumMore(String count) {
+    return 'غير معروضة: $count';
+  }
+
+  @override
+  String get dataSumProfile => 'نبذة شخصية';
+
+  @override
+  String get dataSumFaith => 'الإيمان';
+
+  @override
+  String get dataSumHealth => 'الصحة';
+
+  @override
+  String get dataSumMoney => 'المال';
+
+  @override
+  String get dataSumFamily => 'العائلة';
+
+  @override
+  String get dataSumWork => 'العمل';
+
+  @override
+  String get dataSumGrowth => 'النمو';
+
+  @override
+  String get dataSumBody => 'الجسد';
+
+  @override
+  String get dataSumTravel => 'السفر';
+
+  @override
+  String get dataSumCustom => 'متتبّعات مخصّصة';
+
+  @override
+  String get dataSumCity => 'المدينة';
+
+  @override
+  String get dataSumTimeZone => 'المنطقة الزمنية';
+
+  @override
+  String get dataSumBaseCurrency => 'العملة الأساسية';
+
+  @override
+  String get dataSumLanguage => 'لغة التطبيق';
+
+  @override
+  String get dataSumLanguageName => 'العربية';
+
+  @override
+  String get dataSumAboutMe => 'عنّي';
+
+  @override
+  String get dataSumPrayersTitle => 'الصلاة';
+
+  @override
+  String dataSumObligatory(String window) {
+    return '$window (الفرائض)';
+  }
+
+  @override
+  String dataSumLogged(String logged, String expected) {
+    return 'المسجّل: $logged/$expected';
+  }
+
+  @override
+  String dataSumOnTime(String count) {
+    return 'في وقتها: $count';
+  }
+
+  @override
+  String dataSumLate(String count) {
+    return 'متأخرة: $count';
+  }
+
+  @override
+  String dataSumMadeUp(String count) {
+    return 'قضاء: $count';
+  }
+
+  @override
+  String dataSumMissed(String count) {
+    return 'فائتة: $count';
+  }
+
+  @override
+  String dataSumInCongregation(String count) {
+    return 'جماعة: $count';
+  }
+
+  @override
+  String dataSumVoluntary(String window) {
+    return '$window (النوافل)';
+  }
+
+  @override
+  String get dataSumQuranTitle => 'القرآن والورد';
+
+  @override
+  String dataSumSessions(String count) {
+    return 'الجلسات: $count';
+  }
+
+  @override
+  String dataSumPages(String count) {
+    return 'الصفحات: $count';
+  }
+
+  @override
+  String dataSumMinutes(String count) {
+    return '$count د';
+  }
+
+  @override
+  String dataSumLastSession(String date) {
+    return 'آخر جلسة: $date';
+  }
+
+  @override
+  String dataSumWird(String name) {
+    return 'الورد «$name»';
+  }
+
+  @override
+  String dataSumPerDay(String amount, String unit) {
+    return '$unit يوميًا: $amount';
+  }
+
+  @override
+  String get dataSumUnitPages => 'الصفحات';
+
+  @override
+  String get dataSumUnitJuz => 'الأجزاء';
+
+  @override
+  String get dataSumUnitHizb => 'الأحزاب';
+
+  @override
+  String get dataSumUnitAyat => 'الآيات';
+
+  @override
+  String dataSumSince(String date) {
+    return 'منذ $date';
+  }
+
+  @override
+  String dataSumBy(String date) {
+    return 'حتى $date';
+  }
+
+  @override
+  String get dataSumHifzTitle => 'الحفظ';
+
+  @override
+  String dataSumItems(String count) {
+    return 'المحفوظات: $count';
+  }
+
+  @override
+  String dataSumNew(String count) {
+    return 'جديدة: $count';
+  }
+
+  @override
+  String dataSumDueToday(String count) {
+    return 'مستحقة للمراجعة اليوم: $count';
+  }
+
+  @override
+  String dataSumReviews(String count) {
+    return 'المراجعات: $count';
+  }
+
+  @override
+  String dataSumAvgGrade(String value) {
+    return 'متوسط التقييم: $value/5';
+  }
+
+  @override
+  String get dataSumAlertsTitle => 'تنبيهات دائمة';
+
+  @override
+  String get dataSumSeverityCritical => 'حرج';
+
+  @override
+  String get dataSumSeverityWarning => 'تنبيه';
+
+  @override
+  String get dataSumSeverityInfo => 'ملاحظة';
+
+  @override
+  String get dataSumConditionsTitle => 'الحالات الصحية';
+
+  @override
+  String get dataSumMedsTitle => 'الأدوية الحالية';
+
+  @override
+  String get dataSumKindSupplement => 'مكمّل';
+
+  @override
+  String get dataSumKindInjection => 'حقنة';
+
+  @override
+  String get dataSumWithEmptyStomach => 'على معدة فارغة';
+
+  @override
+  String get dataSumWithBreakfast => 'مع الفطور';
+
+  @override
+  String get dataSumWithLunch => 'مع الغداء';
+
+  @override
+  String get dataSumWithDinner => 'مع العشاء';
+
+  @override
+  String get dataSumWithBedtime => 'قبل النوم';
+
+  @override
+  String get dataSumWithCourse => 'حسب خطة العلاج';
+
+  @override
+  String get dataSumLabsTitle => 'أحدث التحاليل';
+
+  @override
+  String dataSumLabsWindow(String months) {
+    return 'آخر نتيجة لكل تحليل خلال آخر $months شهرًا؛ العلامة مقارنةً بالمعدل المحفوظ في التطبيق.';
+  }
+
+  @override
+  String get dataSumColTest => 'التحليل';
+
+  @override
+  String get dataSumColDate => 'التاريخ';
+
+  @override
+  String get dataSumColResult => 'النتيجة';
+
+  @override
+  String get dataSumColRange => 'المعدل';
+
+  @override
+  String get dataSumColFlag => 'العلامة';
+
+  @override
+  String get dataSumColPrevious => 'السابقة';
+
+  @override
+  String get dataSumPainTitle => 'الألم (متابعة)';
+
+  @override
+  String dataSumEntries(String count) {
+    return 'الإدخالات: $count';
+  }
+
+  @override
+  String dataSumAverageOf(String value, String max) {
+    return 'المتوسط: $value/$max';
+  }
+
+  @override
+  String dataSumHighest(String value, String max) {
+    return 'الأعلى: $value/$max';
+  }
+
+  @override
+  String get dataSumTopPlaces => 'أكثر المواضع تسجيلًا';
+
+  @override
+  String get dataSumTopTriggers => 'أكثر المحفّزات تسجيلًا';
+
+  @override
+  String get dataSumMoodTitle => 'المزاج (متابعة)';
+
+  @override
+  String dataSumMoodAvg(String value) {
+    return 'المزاج: $value/5';
+  }
+
+  @override
+  String dataSumStressAvg(String value) {
+    return 'التوتر: $value/10';
+  }
+
+  @override
+  String dataSumAnxietyAvg(String value) {
+    return 'القلق: $value/10';
+  }
+
+  @override
+  String dataSumEnergyAvg(String value) {
+    return 'الطاقة: $value/10';
+  }
+
+  @override
+  String dataSumSleepAvg(String value) {
+    return 'النوم: $value س';
+  }
+
+  @override
+  String dataSumCaffeineAvg(String value) {
+    return 'الكافيين: $value كوب';
+  }
+
+  @override
+  String get dataSumTopFactors => 'العوامل الأكثر تكرارًا';
+
+  @override
+  String get dataSumWalletsTitle => 'المحافظ';
+
+  @override
+  String dataSumConvertedTo(String code) {
+    return 'محوّلة إلى $code بأسعار الصرف المحفوظة في التطبيق.';
+  }
+
+  @override
+  String get dataSumColWallet => 'المحفظة';
+
+  @override
+  String get dataSumColBalance => 'الرصيد';
+
+  @override
+  String dataSumColInBase(String code) {
+    return 'بـ$code';
+  }
+
+  @override
+  String dataSumTotal(String amount) {
+    return 'الإجمالي: $amount';
+  }
+
+  @override
+  String dataSumBudgetTitle(String month) {
+    return 'الميزانية — $month';
+  }
+
+  @override
+  String dataSumPlanned(String amount) {
+    return 'المخطط: $amount';
+  }
+
+  @override
+  String dataSumSpent(String amount) {
+    return 'المصروف: $amount';
+  }
+
+  @override
+  String dataSumRemaining(String amount) {
+    return 'المتبقي: $amount';
+  }
+
+  @override
+  String get dataSumOverPlan => 'تجاوز الخطة';
+
+  @override
+  String dataSumUnassigned(String amount) {
+    return 'مصروف بلا بند: $amount';
+  }
+
+  @override
+  String dataSumDueTitle(String days) {
+    return 'المستحق خلال الأيام الـ$days القادمة';
+  }
+
+  @override
+  String dataSumDueOn(String date) {
+    return 'يستحق $date';
+  }
+
+  @override
+  String dataSumOverdueSince(String date) {
+    return 'متأخر منذ $date';
+  }
+
+  @override
+  String get dataSumDebtsTitle => 'الديون';
+
+  @override
+  String dataSumIOwe(String person, String left, String total) {
+    return 'عليّ لـ$person: المتبقي $left من $total';
+  }
+
+  @override
+  String dataSumOwedToMe(String person, String left, String total) {
+    return 'لي عند $person: المتبقي $left من $total';
+  }
+
+  @override
+  String get dataSumJarsTitle => 'حصّالات الادخار';
+
+  @override
+  String dataSumJar(String name, String saved, String target, String percent) {
+    return '$name: $saved من $target ($percent%)';
+  }
+
+  @override
+  String dataSumEvery(String days) {
+    return 'الإيقاع (أيام): $days';
+  }
+
+  @override
+  String dataSumLastContact(String days) {
+    return 'أيام منذ آخر تواصل: $days';
+  }
+
+  @override
+  String get dataSumNeverContacted => 'لم يُسجَّل تواصل بعد';
+
+  @override
+  String dataSumOverdueBy(String days) {
+    return 'متأخر (أيام): $days';
+  }
+
+  @override
+  String get dataSumDueTodayStatus => 'مستحق اليوم';
+
+  @override
+  String dataSumDueIn(String days) {
+    return 'يستحق بعد (أيام): $days';
+  }
+
+  @override
+  String dataSumNoRhythm(int count) {
+    return 'آخرون بلا إيقاع تواصل: $count';
+  }
+
+  @override
+  String dataSumPeopleNoRhythm(int count) {
+    return 'أشخاص بلا إيقاع تواصل: $count';
+  }
+
+  @override
+  String get dataSumTop3Title => 'أهم 3';
+
+  @override
+  String dataSumOnBoard(String board) {
+    return 'اللوحة: $board';
+  }
+
+  @override
+  String get dataSumBoardsTitle => 'اللوحات';
+
+  @override
+  String get dataSumOther => 'أخرى';
+
+  @override
+  String get dataSumProjectsTitle => 'المشاريع';
+
+  @override
+  String get dataSumStatusActive => 'نشط';
+
+  @override
+  String get dataSumStatusPaused => 'متوقف مؤقتًا';
+
+  @override
+  String dataSumDoneOf(String done, String total) {
+    return 'المنجز: $done/$total';
+  }
+
+  @override
+  String dataSumDeadline(String date) {
+    return 'الموعد النهائي: $date';
+  }
+
+  @override
+  String dataSumProgress(String current, String target, String unit) {
+    return '$current من $target $unit';
+  }
+
+  @override
+  String dataSumRecentGain(String amount, String window) {
+    return '$window: $amount';
+  }
+
+  @override
+  String get dataSumExercisePlanTitle => 'خطة التمارين';
+
+  @override
+  String get dataSumWeekdays =>
+      'الإثنين,الثلاثاء,الأربعاء,الخميس,الجمعة,السبت,الأحد';
+
+  @override
+  String dataSumSets(String count) {
+    return 'المجموعات: $count';
+  }
+
+  @override
+  String dataSumKg(String value) {
+    return '$value كغ';
+  }
+
+  @override
+  String dataSumWorkouts(String count) {
+    return 'التمارين المنجزة: $count';
+  }
+
+  @override
+  String dataSumFasting(String count, String hours) {
+    return 'الصيام: $count · المتوسط: $hours س';
+  }
+
+  @override
+  String dataSumTargetHours(String hours) {
+    return 'الهدف: $hours س';
+  }
+
+  @override
+  String dataSumWater(String days, String ml) {
+    return 'الماء خلال آخر $days أيام: $ml مل يوميًا في المتوسط';
+  }
+
+  @override
+  String dataSumTargetMl(String ml) {
+    return 'الهدف: $ml مل';
+  }
+
+  @override
+  String get dataSumAvoidTitle => 'تجنّب';
+
+  @override
+  String get dataSumTripsTitle => 'الرحلات القادمة';
+
+  @override
+  String get dataSumTripPlanned => 'مخطط لها';
+
+  @override
+  String get dataSumTripUnderWay => 'جارية الآن';
+
+  @override
+  String get dataSumDocumentsTitle => 'الوثائق (لا تُضمَّن أرقامها أبدًا)';
+
+  @override
+  String dataSumExpiresIn(String date, String days) {
+    return 'تنتهي $date (الأيام المتبقية: $days)';
+  }
+
+  @override
+  String dataSumExpired(String date) {
+    return 'انتهت $date';
+  }
+
+  @override
+  String get dataSumNoExpiry => 'بلا تاريخ انتهاء';
+
+  @override
+  String get dataSumModuleTracker => 'متتبّع';
+
+  @override
+  String get dataSumModuleList => 'قائمة';
+
+  @override
+  String dataSumOpen(String count) {
+    return 'مفتوحة: $count';
+  }
+
+  @override
+  String dataSumDone(String count) {
+    return 'منجزة: $count';
+  }
+
+  @override
+  String dataSumInWindow(String count, String window) {
+    return '$window: $count';
+  }
+
+  @override
+  String dataSumLastOn(String date) {
+    return 'الأخير: $date';
+  }
+
+  @override
+  String dataSumAverage(String value) {
+    return 'المتوسط: $value';
+  }
+
+  @override
+  String dataSumMin(String value) {
+    return 'الأدنى: $value';
+  }
+
+  @override
+  String dataSumMax(String value) {
+    return 'الأعلى: $value';
+  }
+
+  @override
+  String dataSumSum(String value) {
+    return 'المجموع: $value';
+  }
+
+  @override
+  String dataSumTicked(String count, String total) {
+    return 'مؤشَّر عليها: $count/$total';
+  }
 }

@@ -406,5 +406,5 @@ LDNOOBW_ALLOW = """
 # Innocent words that merely look like a blocked word plus a clitic
 # (couscous, names and brands); exact matches, never blocked.
 FILTER_ALLOW_WORDS = """
-    كسكس الكسكس خولان خولي الخولي نيكي نيكون نايكي نيكول نيكولا نيكولاس
+    كسكس الكسكس خولان خولي الخولي نيكي نيكون نايكي نيكول نيكولا نيكولاس الزبى الزبي زبى
 """

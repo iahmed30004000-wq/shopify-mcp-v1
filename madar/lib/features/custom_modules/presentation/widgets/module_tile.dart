@@ -147,10 +147,18 @@ class ModuleTile extends ConsumerWidget {
     );
 
     if (compact) {
-      return GestureDetector(onTap: () {
-        Fx.fire(Sfx.navigate);
-        open();
-      }, child: card);
+      return Semantics(
+        button: true,
+        label: '${m.name} · $status',
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {
+            Fx.fire(Sfx.navigate);
+            open();
+          },
+          child: card,
+        ),
+      );
     }
 
     return ActionableItem(

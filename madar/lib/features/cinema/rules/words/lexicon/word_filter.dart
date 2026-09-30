@@ -30,8 +30,8 @@ final class WordFilter {
   }) : _blocked = {for (final w in blocked) filterKey(w)},
        _sensitive = {for (final w in sensitive) filterKey(w)},
        _allowed = {for (final w in allowed) filterKey(w)},
-       _prefixes = ['', ...?(prefixes ?? defaultPrefixes)],
-       _suffixes = ['', ...?(suffixes ?? defaultSuffixes)];
+       _prefixes = ['', ...(prefixes ?? defaultPrefixes)],
+       _suffixes = ['', ...(suffixes ?? defaultSuffixes)];
 
   /// Parses assets/games/arabic_word_filter.json.
   factory WordFilter.parse(String jsonText) {

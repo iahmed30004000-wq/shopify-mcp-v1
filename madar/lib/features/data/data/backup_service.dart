@@ -42,6 +42,9 @@ class SafetyCopy {
   String get name => file.uri.pathSegments.last;
 }
 
+/// Steps of [BackupService.restore], reported as they start.
+enum RestorePhase { safetyCopy, restoring }
+
 enum RestoreProblem {
   /// The safety copy of the current data could not be written; nothing was
   /// changed.
@@ -180,8 +183,9 @@ class BackupService {
   /// Replaces all data with [backup]: first seals a safety copy of the
   /// current data (same passphrase) into app storage, then restores in one
   /// transaction. On any failure the current data is untouched.
-  Future<RestoreResult> restore(OpenedBackup backup) async {
+  Future<RestoreResult> restore(OpenedBackup backup, {void Function(RestorePhase phase)? onPhase}) async {
     final now = clock();
+    onPhase?.call(RestorePhase.safetyCopy);
     final previous = (await currentCounts()).values.fold<int>(0, (a, b) => a + b);
     final SafetyCopy safety;
     try {
@@ -191,6 +195,7 @@ class BackupService {
     } catch (e) {
       throw RestoreException(RestoreProblem.safetyCopyFailed, e);
     }
+    onPhase?.call(RestorePhase.restoring);
     try {
       await restoreSnapshot(db, backup.snapshot);
     } catch (e) {

@@ -13184,6 +13184,7 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count due today',
+      one: '$count due today',
     );
     return '$_temp0';
   }
@@ -13194,6 +13195,7 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count overdue',
+      one: '$count overdue',
     );
     return '$_temp0';
   }
@@ -17902,4 +17904,1323 @@ class L10nEn extends L10n {
 
   @override
   String get cinemaCancel => 'Cancel';
+
+  @override
+  String get dataCentreTitle => 'Your data';
+
+  @override
+  String get dataHeroTitle => 'Your data stays with you';
+
+  @override
+  String get dataHeroBody =>
+      'Madar keeps everything encrypted on this phone and uploads nothing. A file leaves only when you share or save it yourself.';
+
+  @override
+  String get dataStatRecords => 'Records';
+
+  @override
+  String get dataStatLastBackup => 'Last backup';
+
+  @override
+  String get dataLastBackupNever => 'Not yet';
+
+  @override
+  String get dataLastBackupToday => 'Today';
+
+  @override
+  String dataLastBackupDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days ago',
+      one: 'Yesterday',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataBackupSection => 'Backup';
+
+  @override
+  String get dataBackupSectionHint =>
+      'One encrypted file to move or safeguard your data';
+
+  @override
+  String get dataBackupCreateTitle => 'Encrypted backup';
+
+  @override
+  String get dataBackupCreateBody =>
+      'One file, locked with a passphrase only you know. Keep it somewhere safe to move your data to a new phone.';
+
+  @override
+  String get dataBackupCreateAction => 'Create backup';
+
+  @override
+  String get dataRestoreTitle => 'Restore from a backup';
+
+  @override
+  String get dataRestoreBody =>
+      'Replaces everything in Madar with a backup file. A safety copy of your current data is kept on this phone first.';
+
+  @override
+  String get dataRestoreAction => 'Choose a backup file';
+
+  @override
+  String dataSafetyCopiesLine(int count, String date) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count safety copies on this phone',
+      one: '1 safety copy on this phone',
+    );
+    return '$_temp0 · latest $date';
+  }
+
+  @override
+  String get dataExportSection => 'Export';
+
+  @override
+  String get dataExportSectionHint =>
+      'Readable copies of your data – not encrypted';
+
+  @override
+  String get dataExportSummaryTitle => 'AI-ready summary';
+
+  @override
+  String get dataExportSummaryBody =>
+      'A short Markdown overview you review section by section before sharing.';
+
+  @override
+  String get dataExportCsvTitle => 'Spreadsheets (CSV)';
+
+  @override
+  String get dataExportCsvBody =>
+      'Labs, transactions, pain and mood – for Excel or Sheets.';
+
+  @override
+  String get dataExportJsonTitle => 'Everything (JSON)';
+
+  @override
+  String get dataExportJsonBody =>
+      'Every record in one file, for your own archive or other apps.';
+
+  @override
+  String get dataExportPlainWarning =>
+      'Exported files are not encrypted: anyone who gets them can read them. Share them only with people you trust.';
+
+  @override
+  String get dataImportSection => 'Import';
+
+  @override
+  String get dataImportTitle => 'Import from the Madar prototype';
+
+  @override
+  String get dataImportBody =>
+      'Bring in data exported from the earlier version (a JSON file).';
+
+  @override
+  String get dataFooter =>
+      'Madar never uploads your data to any server. You alone decide where your files go.';
+
+  @override
+  String get dataAreaOther => 'Settings & history';
+
+  @override
+  String get dataShareAction => 'Share';
+
+  @override
+  String get dataSaveAction => 'Save to…';
+
+  @override
+  String get dataCopyAction => 'Copy';
+
+  @override
+  String get dataDoneAction => 'Done';
+
+  @override
+  String get dataCancelAction => 'Cancel';
+
+  @override
+  String get dataTryAgainAction => 'Try again';
+
+  @override
+  String get dataFileReadyTitle => 'Your file is ready';
+
+  @override
+  String get dataFileReadySubtitle =>
+      'Choose where it goes – nothing is sent automatically';
+
+  @override
+  String get dataFileEncryptedNote =>
+      'Encrypted with your passphrase and opens only with it – keep the two apart.';
+
+  @override
+  String get dataFilePlainNote =>
+      'Not encrypted: anyone who gets this file can read it.';
+
+  @override
+  String get dataFileShared => 'Handed to the share sheet.';
+
+  @override
+  String get dataFileSaved => 'Saved where you chose.';
+
+  @override
+  String get dataFileSendFailed =>
+      'That didn’t work. Nothing was sent – please try again.';
+
+  @override
+  String get dataExportFailed =>
+      'Couldn’t prepare the file. Your data is unchanged.';
+
+  @override
+  String dataRecordsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records',
+      one: '1 record',
+      zero: 'no records',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSizeBytes(String size) {
+    return '$size bytes';
+  }
+
+  @override
+  String dataSizeKb(String size) {
+    return '$size KB';
+  }
+
+  @override
+  String dataSizeMb(String size) {
+    return '$size MB';
+  }
+
+  @override
+  String get dataBackupSheetTitle => 'Encrypted backup';
+
+  @override
+  String get dataBackupSheetSubtitle =>
+      'AES-256 · keys derived with Argon2id on your phone';
+
+  @override
+  String get dataBackupSheetBody =>
+      'Choose a passphrase to lock the backup file. Madar never stores it and can’t recover it, so write it down somewhere you trust.';
+
+  @override
+  String get dataPassphraseLabel => 'Passphrase';
+
+  @override
+  String get dataPassphraseConfirmLabel => 'Type the passphrase again';
+
+  @override
+  String get dataPassphraseMismatch => 'The two don’t match.';
+
+  @override
+  String get dataPassphraseShow => 'Show passphrase';
+
+  @override
+  String get dataPassphraseHide => 'Hide passphrase';
+
+  @override
+  String get dataPassphraseNeverStored =>
+      'The passphrase is never stored anywhere. Without it the backup can’t be opened – not even by us.';
+
+  @override
+  String get dataStrengthLabel => 'Strength';
+
+  @override
+  String get dataStrengthEmpty => '—';
+
+  @override
+  String get dataStrengthVeryWeak => 'Very weak';
+
+  @override
+  String get dataStrengthWeak => 'Weak';
+
+  @override
+  String get dataStrengthFair => 'Fair';
+
+  @override
+  String get dataStrengthStrong => 'Strong';
+
+  @override
+  String get dataStrengthVeryStrong => 'Very strong';
+
+  @override
+  String dataStrengthHintShort(String min) {
+    return 'Use at least $min characters – a short sentence works well.';
+  }
+
+  @override
+  String get dataStrengthHintCommon =>
+      'This is a common password that’s easy to guess.';
+
+  @override
+  String get dataStrengthHintPattern =>
+      'Avoid repeats and runs like 1234 or aaaa.';
+
+  @override
+  String get dataStrengthHintDigits =>
+      'Digits alone are easy to guess; add some words.';
+
+  @override
+  String get dataStrengthHintWords =>
+      'Good. One or two more words make it much stronger.';
+
+  @override
+  String get dataBackupWorking => 'Locking your data…';
+
+  @override
+  String get dataBackupWorkingHint =>
+      'This takes a few seconds on purpose – it makes the passphrase hard to guess.';
+
+  @override
+  String get dataBackupReadyTitle => 'Backup ready';
+
+  @override
+  String get dataBackupReadySubtitle => 'Share it or save it somewhere safe';
+
+  @override
+  String get dataBackupReadyHint =>
+      'Keep the file and the passphrase in different places. You’ll need both to restore.';
+
+  @override
+  String get dataBackupShareSubject => 'Madar backup';
+
+  @override
+  String get dataBackupFailed =>
+      'Couldn’t create the backup. Your data is untouched – please try again.';
+
+  @override
+  String dataBackupMadeOn(String date) {
+    return 'Made on $date';
+  }
+
+  @override
+  String get dataCsvSheetTitle => 'Spreadsheet export';
+
+  @override
+  String get dataCsvSheetSubtitle => 'CSV · UTF-8 · opens in Excel and Sheets';
+
+  @override
+  String get dataCsvWhat => 'What';
+
+  @override
+  String get dataCsvWhen => 'When';
+
+  @override
+  String get dataCsvLabs => 'Labs';
+
+  @override
+  String get dataCsvTransactions => 'Transactions';
+
+  @override
+  String get dataCsvPain => 'Pain';
+
+  @override
+  String get dataCsvMood => 'Mood';
+
+  @override
+  String get dataRange30 => '30 days';
+
+  @override
+  String get dataRange90 => '90 days';
+
+  @override
+  String get dataRangeYear => '12 months';
+
+  @override
+  String get dataRangeAll => 'All time';
+
+  @override
+  String get dataRangeCustom => 'Custom…';
+
+  @override
+  String get dataRangeAllTime => 'Every record since the start';
+
+  @override
+  String dataRangeFromTo(String from, String to) {
+    return 'From $from to $to';
+  }
+
+  @override
+  String get dataCsvFormatNote =>
+      'Dates look like 2026-09-30 and numbers use a decimal point, so any spreadsheet opens them as they are.';
+
+  @override
+  String get dataCsvCreate => 'Create file';
+
+  @override
+  String dataCsvCreateRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Create file ($count rows)',
+      one: 'Create file (1 row)',
+      zero: 'No rows in this range',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataCsvDate => 'date';
+
+  @override
+  String get dataCsvTime => 'time';
+
+  @override
+  String get dataCsvTest => 'test';
+
+  @override
+  String get dataCsvCategory => 'category';
+
+  @override
+  String get dataCsvValue => 'value';
+
+  @override
+  String get dataCsvTextResult => 'text_result';
+
+  @override
+  String get dataCsvUnit => 'unit';
+
+  @override
+  String get dataCsvRangeLow => 'range_low';
+
+  @override
+  String get dataCsvRangeHigh => 'range_high';
+
+  @override
+  String get dataCsvFlag => 'flag';
+
+  @override
+  String get dataCsvNote => 'note';
+
+  @override
+  String get dataCsvNotes => 'notes';
+
+  @override
+  String get dataCsvKind => 'kind';
+
+  @override
+  String get dataCsvWallet => 'wallet';
+
+  @override
+  String get dataCsvCurrency => 'currency';
+
+  @override
+  String get dataCsvAmount => 'amount';
+
+  @override
+  String get dataCsvAmountBase => 'amount_base';
+
+  @override
+  String get dataCsvBaseCurrency => 'base_currency';
+
+  @override
+  String get dataCsvBudgetItem => 'budget_item';
+
+  @override
+  String get dataCsvToWallet => 'to_wallet';
+
+  @override
+  String get dataCsvToAmount => 'to_amount';
+
+  @override
+  String get dataCsvToCurrency => 'to_currency';
+
+  @override
+  String get dataCsvTags => 'tags';
+
+  @override
+  String get dataCsvPainScore => 'score_0_10';
+
+  @override
+  String get dataCsvLocations => 'locations';
+
+  @override
+  String get dataCsvTriggers => 'triggers';
+
+  @override
+  String get dataCsvBodyPoints => 'body_points';
+
+  @override
+  String get dataCsvMoodScore => 'mood_1_5';
+
+  @override
+  String get dataCsvStress => 'stress_0_10';
+
+  @override
+  String get dataCsvAnxiety => 'anxiety_0_10';
+
+  @override
+  String get dataCsvEnergy => 'energy_0_10';
+
+  @override
+  String get dataCsvSleepHours => 'sleep_hours';
+
+  @override
+  String get dataCsvCaffeine => 'caffeine_cups';
+
+  @override
+  String get dataCsvFactors => 'factors';
+
+  @override
+  String get dataFlagLow => 'low';
+
+  @override
+  String get dataFlagBorderlineLow => 'borderline low';
+
+  @override
+  String get dataFlagInRange => 'in range';
+
+  @override
+  String get dataFlagBorderlineHigh => 'borderline high';
+
+  @override
+  String get dataFlagHigh => 'high';
+
+  @override
+  String get dataTxExpense => 'expense';
+
+  @override
+  String get dataTxIncome => 'income';
+
+  @override
+  String get dataTxTransfer => 'transfer';
+
+  @override
+  String get dataTxAdjustment => 'adjustment';
+
+  @override
+  String get dataSummarySubtitle =>
+      'Made on your phone · review each section before sharing';
+
+  @override
+  String get dataSummaryIntro =>
+      'Nothing goes anywhere until you choose. The preview below is exactly what would leave – notes, phone numbers and document or account numbers are never included.';
+
+  @override
+  String get dataSummaryPreparing => 'Preparing the summary on your phone…';
+
+  @override
+  String get dataSummarySections => 'Sections to include';
+
+  @override
+  String dataSummarySectionsOf(String selected, String total) {
+    return '$selected of $total sections';
+  }
+
+  @override
+  String dataSummaryTokens(String count) {
+    return '≈ $count tokens';
+  }
+
+  @override
+  String get dataSummaryNoData => 'No data yet';
+
+  @override
+  String get dataSummaryProfileHint => 'Optional – you pick what’s mentioned';
+
+  @override
+  String get dataSummaryPreviewTitle => 'Exactly what will be shared';
+
+  @override
+  String get dataSummaryCopied => 'Summary copied to the clipboard.';
+
+  @override
+  String get dataSummaryUse => 'Use this summary';
+
+  @override
+  String get dataProfileChoose => 'Choose what to mention about you:';
+
+  @override
+  String get dataProfileAboutHint =>
+      'e.g. your age, or anything the assistant should know';
+
+  @override
+  String get dataRestoreFlowTitle => 'Restore';
+
+  @override
+  String get dataRestoreChooseTitle => 'Bring your data back';
+
+  @override
+  String get dataRestoreChooseBody =>
+      'Pick a .madarbackup file. You’ll see what’s inside before anything changes.';
+
+  @override
+  String get dataRestorePickFile => 'Choose backup file';
+
+  @override
+  String get dataRestoreNothingChanges =>
+      'Nothing in your current data changes until you confirm the replacement in the last step.';
+
+  @override
+  String get dataSafetyCopiesTitle => 'Safety copies on this phone';
+
+  @override
+  String get dataSafetyCopiesHint =>
+      'Made automatically before each restore; each opens with the passphrase used for that restore.';
+
+  @override
+  String get dataRestoreUnlockBody =>
+      'Enter the passphrase this backup was locked with.';
+
+  @override
+  String get dataRestoreUnlockAction => 'Unlock backup';
+
+  @override
+  String get dataRestoreOtherFile => 'Choose another file';
+
+  @override
+  String get dataRestoreOpening => 'Checking the backup…';
+
+  @override
+  String get dataRestoreOpeningHint =>
+      'Making sure the file is intact and unchanged, then decrypting it on your phone.';
+
+  @override
+  String get dataRestorePreviewTitle => 'The backup is intact';
+
+  @override
+  String get dataRestoreInBackup => 'In the backup';
+
+  @override
+  String get dataRestoreOnPhone => 'On this phone now';
+
+  @override
+  String get dataRestoreWhatsInside => 'What’s inside';
+
+  @override
+  String get dataRestoreReplaceWarning =>
+      'This backup will replace all data in Madar now. First, your current data is saved as a safety copy on this phone, opening with the same passphrase.';
+
+  @override
+  String get dataRestoreUnderstand =>
+      'I understand my current data will be replaced';
+
+  @override
+  String get dataRestoreConfirmAction => 'Replace my data';
+
+  @override
+  String get dataRestoreSavingSafety =>
+      'Saving a safety copy of your current data…';
+
+  @override
+  String get dataRestoreRestoring => 'Restoring your data…';
+
+  @override
+  String get dataRestoreKeepOpen => 'Keep the app open for a moment.';
+
+  @override
+  String get dataRestoreDoneTitle => 'Restored';
+
+  @override
+  String dataRestoreDoneBody(String count) {
+    return 'Your records ($count) are back in Madar.';
+  }
+
+  @override
+  String get dataRestoreSafetyKept =>
+      'A safety copy of your previous data is kept on this phone and opens with the same passphrase.';
+
+  @override
+  String get dataSafetyCopySave => 'Save the safety copy elsewhere';
+
+  @override
+  String get dataSafetyCopyTitle => 'Safety copy';
+
+  @override
+  String get dataNothingChanged => 'Nothing in your data was changed.';
+
+  @override
+  String get dataErrWrongPassphrase =>
+      'That passphrase doesn’t open this backup. Check for typos and try again.';
+
+  @override
+  String get dataErrNotBackupTitle => 'This isn’t a Madar backup';
+
+  @override
+  String get dataErrNotBackupBody =>
+      'Choose a file ending in .madarbackup, made with “Create backup”.';
+
+  @override
+  String get dataErrNewerTitle => 'Made by a newer Madar';
+
+  @override
+  String get dataErrNewerBody => 'Update Madar on this phone, then try again.';
+
+  @override
+  String get dataErrTruncatedTitle => 'The file is incomplete';
+
+  @override
+  String get dataErrTruncatedBody =>
+      'It may not have finished copying or downloading. Copy it again and retry.';
+
+  @override
+  String get dataErrCorruptedTitle => 'The file is damaged';
+
+  @override
+  String get dataErrCorruptedBody =>
+      'It changed or was damaged after it was made, so it can’t be trusted.';
+
+  @override
+  String get dataErrUnreadableTitle => 'Couldn’t read the file';
+
+  @override
+  String get dataErrUnreadableBody =>
+      'Try another file, or copy it to the phone first.';
+
+  @override
+  String get dataErrSafetyTitle => 'Couldn’t save a safety copy';
+
+  @override
+  String get dataErrSafetyBody =>
+      'So your data was not replaced. Free some space and try again.';
+
+  @override
+  String get dataErrRejectedTitle => 'This backup couldn’t be restored';
+
+  @override
+  String get dataErrRejectedBody => 'Its data didn’t pass the safety checks.';
+
+  @override
+  String dataSumHeading(String date) {
+    return 'Madar summary — $date';
+  }
+
+  @override
+  String get dataSumPreamble =>
+      'Personal tracking data from the Madar app, prepared on the user’s own phone. Dates are yyyy-mm-dd; decimals use a point. Notes, phone numbers and document or account numbers are never included.';
+
+  @override
+  String get dataSumNoData => 'No data yet.';
+
+  @override
+  String get dataSumListSep => ', ';
+
+  @override
+  String dataSumLastDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Last $days days',
+      one: 'Today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSumPreviousDays(String days) {
+    return 'The $days days before';
+  }
+
+  @override
+  String dataSumMore(String count) {
+    return 'not shown: $count';
+  }
+
+  @override
+  String get dataSumProfile => 'Profile';
+
+  @override
+  String get dataSumFaith => 'Faith';
+
+  @override
+  String get dataSumHealth => 'Health';
+
+  @override
+  String get dataSumMoney => 'Money';
+
+  @override
+  String get dataSumFamily => 'Family';
+
+  @override
+  String get dataSumWork => 'Work';
+
+  @override
+  String get dataSumGrowth => 'Growth';
+
+  @override
+  String get dataSumBody => 'Body';
+
+  @override
+  String get dataSumTravel => 'Travel';
+
+  @override
+  String get dataSumCustom => 'Custom trackers';
+
+  @override
+  String get dataSumCity => 'City';
+
+  @override
+  String get dataSumTimeZone => 'Time zone';
+
+  @override
+  String get dataSumBaseCurrency => 'Base currency';
+
+  @override
+  String get dataSumLanguage => 'App language';
+
+  @override
+  String get dataSumLanguageName => 'English';
+
+  @override
+  String get dataSumAboutMe => 'About me';
+
+  @override
+  String get dataSumPrayersTitle => 'Prayers';
+
+  @override
+  String dataSumObligatory(String window) {
+    return '$window (obligatory)';
+  }
+
+  @override
+  String dataSumLogged(String logged, String expected) {
+    return 'logged: $logged/$expected';
+  }
+
+  @override
+  String dataSumOnTime(String count) {
+    return 'on time: $count';
+  }
+
+  @override
+  String dataSumLate(String count) {
+    return 'late: $count';
+  }
+
+  @override
+  String dataSumMadeUp(String count) {
+    return 'made up: $count';
+  }
+
+  @override
+  String dataSumMissed(String count) {
+    return 'missed: $count';
+  }
+
+  @override
+  String dataSumInCongregation(String count) {
+    return 'in congregation: $count';
+  }
+
+  @override
+  String dataSumVoluntary(String window) {
+    return '$window (voluntary)';
+  }
+
+  @override
+  String get dataSumQuranTitle => 'Quran and wird';
+
+  @override
+  String dataSumSessions(String count) {
+    return 'sessions: $count';
+  }
+
+  @override
+  String dataSumPages(String count) {
+    return 'pages: $count';
+  }
+
+  @override
+  String dataSumMinutes(String count) {
+    return '$count min';
+  }
+
+  @override
+  String dataSumLastSession(String date) {
+    return 'Last session: $date';
+  }
+
+  @override
+  String dataSumWird(String name) {
+    return 'Wird “$name”';
+  }
+
+  @override
+  String dataSumPerDay(String amount, String unit) {
+    return '$amount $unit a day';
+  }
+
+  @override
+  String get dataSumUnitPages => 'pages';
+
+  @override
+  String get dataSumUnitJuz => 'juz';
+
+  @override
+  String get dataSumUnitHizb => 'hizb';
+
+  @override
+  String get dataSumUnitAyat => 'ayat';
+
+  @override
+  String dataSumSince(String date) {
+    return 'since $date';
+  }
+
+  @override
+  String dataSumBy(String date) {
+    return 'by $date';
+  }
+
+  @override
+  String get dataSumHifzTitle => 'Hifz';
+
+  @override
+  String dataSumItems(String count) {
+    return 'items: $count';
+  }
+
+  @override
+  String dataSumNew(String count) {
+    return 'new: $count';
+  }
+
+  @override
+  String dataSumDueToday(String count) {
+    return 'due today: $count';
+  }
+
+  @override
+  String dataSumReviews(String count) {
+    return 'reviews: $count';
+  }
+
+  @override
+  String dataSumAvgGrade(String value) {
+    return 'average grade: $value/5';
+  }
+
+  @override
+  String get dataSumAlertsTitle => 'Standing alerts';
+
+  @override
+  String get dataSumSeverityCritical => 'critical';
+
+  @override
+  String get dataSumSeverityWarning => 'warning';
+
+  @override
+  String get dataSumSeverityInfo => 'note';
+
+  @override
+  String get dataSumConditionsTitle => 'Conditions';
+
+  @override
+  String get dataSumMedsTitle => 'Active medications';
+
+  @override
+  String get dataSumKindSupplement => 'supplement';
+
+  @override
+  String get dataSumKindInjection => 'injection';
+
+  @override
+  String get dataSumWithEmptyStomach => 'on an empty stomach';
+
+  @override
+  String get dataSumWithBreakfast => 'with breakfast';
+
+  @override
+  String get dataSumWithLunch => 'with lunch';
+
+  @override
+  String get dataSumWithDinner => 'with dinner';
+
+  @override
+  String get dataSumWithBedtime => 'at bedtime';
+
+  @override
+  String get dataSumWithCourse => 'per course plan';
+
+  @override
+  String get dataSumLabsTitle => 'Recent labs';
+
+  @override
+  String dataSumLabsWindow(String months) {
+    return 'Latest result per test in the last $months months; flags compare with the range saved in the app.';
+  }
+
+  @override
+  String get dataSumColTest => 'Test';
+
+  @override
+  String get dataSumColDate => 'Date';
+
+  @override
+  String get dataSumColResult => 'Result';
+
+  @override
+  String get dataSumColRange => 'Range';
+
+  @override
+  String get dataSumColFlag => 'Flag';
+
+  @override
+  String get dataSumColPrevious => 'Previous';
+
+  @override
+  String get dataSumPainTitle => 'Pain (tracking)';
+
+  @override
+  String dataSumEntries(String count) {
+    return 'entries: $count';
+  }
+
+  @override
+  String dataSumAverageOf(String value, String max) {
+    return 'average: $value/$max';
+  }
+
+  @override
+  String dataSumHighest(String value, String max) {
+    return 'highest: $value/$max';
+  }
+
+  @override
+  String get dataSumTopPlaces => 'Most logged places';
+
+  @override
+  String get dataSumTopTriggers => 'Most logged triggers';
+
+  @override
+  String get dataSumMoodTitle => 'Mood (tracking)';
+
+  @override
+  String dataSumMoodAvg(String value) {
+    return 'mood: $value/5';
+  }
+
+  @override
+  String dataSumStressAvg(String value) {
+    return 'stress: $value/10';
+  }
+
+  @override
+  String dataSumAnxietyAvg(String value) {
+    return 'anxiety: $value/10';
+  }
+
+  @override
+  String dataSumEnergyAvg(String value) {
+    return 'energy: $value/10';
+  }
+
+  @override
+  String dataSumSleepAvg(String value) {
+    return 'sleep: $value h';
+  }
+
+  @override
+  String dataSumCaffeineAvg(String value) {
+    return 'caffeine: $value cups';
+  }
+
+  @override
+  String get dataSumTopFactors => 'Common factors';
+
+  @override
+  String get dataSumWalletsTitle => 'Wallets';
+
+  @override
+  String dataSumConvertedTo(String code) {
+    return 'Converted to $code with the exchange rates saved in the app.';
+  }
+
+  @override
+  String get dataSumColWallet => 'Wallet';
+
+  @override
+  String get dataSumColBalance => 'Balance';
+
+  @override
+  String dataSumColInBase(String code) {
+    return 'In $code';
+  }
+
+  @override
+  String dataSumTotal(String amount) {
+    return 'Total: $amount';
+  }
+
+  @override
+  String dataSumBudgetTitle(String month) {
+    return 'Budget — $month';
+  }
+
+  @override
+  String dataSumPlanned(String amount) {
+    return 'planned: $amount';
+  }
+
+  @override
+  String dataSumSpent(String amount) {
+    return 'spent: $amount';
+  }
+
+  @override
+  String dataSumRemaining(String amount) {
+    return 'remaining: $amount';
+  }
+
+  @override
+  String get dataSumOverPlan => 'Over plan';
+
+  @override
+  String dataSumUnassigned(String amount) {
+    return 'Spent without a budget item: $amount';
+  }
+
+  @override
+  String dataSumDueTitle(String days) {
+    return 'Due in the next $days days';
+  }
+
+  @override
+  String dataSumDueOn(String date) {
+    return 'due $date';
+  }
+
+  @override
+  String dataSumOverdueSince(String date) {
+    return 'overdue since $date';
+  }
+
+  @override
+  String get dataSumDebtsTitle => 'Debts';
+
+  @override
+  String dataSumIOwe(String person, String left, String total) {
+    return 'I owe $person: $left left of $total';
+  }
+
+  @override
+  String dataSumOwedToMe(String person, String left, String total) {
+    return '$person owes me: $left left of $total';
+  }
+
+  @override
+  String get dataSumJarsTitle => 'Savings jars';
+
+  @override
+  String dataSumJar(String name, String saved, String target, String percent) {
+    return '$name: $saved of $target ($percent%)';
+  }
+
+  @override
+  String dataSumEvery(String days) {
+    return 'rhythm: every $days days';
+  }
+
+  @override
+  String dataSumLastContact(String days) {
+    return 'days since last contact: $days';
+  }
+
+  @override
+  String get dataSumNeverContacted => 'no contact logged yet';
+
+  @override
+  String dataSumOverdueBy(String days) {
+    return 'overdue by (days): $days';
+  }
+
+  @override
+  String get dataSumDueTodayStatus => 'due today';
+
+  @override
+  String dataSumDueIn(String days) {
+    return 'due in (days): $days';
+  }
+
+  @override
+  String dataSumNoRhythm(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more people without a contact rhythm',
+      one: '1 more person without a contact rhythm',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSumPeopleNoRhythm(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people, no contact rhythm set',
+      one: '1 person, no contact rhythm set',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataSumTop3Title => 'Top 3';
+
+  @override
+  String dataSumOnBoard(String board) {
+    return 'board: $board';
+  }
+
+  @override
+  String get dataSumBoardsTitle => 'Boards';
+
+  @override
+  String get dataSumOther => 'Other';
+
+  @override
+  String get dataSumProjectsTitle => 'Projects';
+
+  @override
+  String get dataSumStatusActive => 'active';
+
+  @override
+  String get dataSumStatusPaused => 'paused';
+
+  @override
+  String dataSumDoneOf(String done, String total) {
+    return 'items done: $done/$total';
+  }
+
+  @override
+  String dataSumDeadline(String date) {
+    return 'deadline: $date';
+  }
+
+  @override
+  String dataSumProgress(String current, String target, String unit) {
+    return '$current of $target $unit';
+  }
+
+  @override
+  String dataSumRecentGain(String amount, String window) {
+    return '$window: $amount';
+  }
+
+  @override
+  String get dataSumExercisePlanTitle => 'Exercise plan';
+
+  @override
+  String get dataSumWeekdays => 'Mon,Tue,Wed,Thu,Fri,Sat,Sun';
+
+  @override
+  String dataSumSets(String count) {
+    return 'sets: $count';
+  }
+
+  @override
+  String dataSumKg(String value) {
+    return '$value kg';
+  }
+
+  @override
+  String dataSumWorkouts(String count) {
+    return 'workouts: $count';
+  }
+
+  @override
+  String dataSumFasting(String count, String hours) {
+    return 'fasts: $count · average: $hours h';
+  }
+
+  @override
+  String dataSumTargetHours(String hours) {
+    return 'target: $hours h';
+  }
+
+  @override
+  String dataSumWater(String days, String ml) {
+    return 'Water, last $days days: $ml ml a day on average';
+  }
+
+  @override
+  String dataSumTargetMl(String ml) {
+    return 'target: $ml ml';
+  }
+
+  @override
+  String get dataSumAvoidTitle => 'Avoid';
+
+  @override
+  String get dataSumTripsTitle => 'Upcoming trips';
+
+  @override
+  String get dataSumTripPlanned => 'planned';
+
+  @override
+  String get dataSumTripUnderWay => 'under way';
+
+  @override
+  String get dataSumDocumentsTitle => 'Documents (numbers are never included)';
+
+  @override
+  String dataSumExpiresIn(String date, String days) {
+    return 'expires $date (days left: $days)';
+  }
+
+  @override
+  String dataSumExpired(String date) {
+    return 'expired $date';
+  }
+
+  @override
+  String get dataSumNoExpiry => 'no expiry date';
+
+  @override
+  String get dataSumModuleTracker => 'tracker';
+
+  @override
+  String get dataSumModuleList => 'list';
+
+  @override
+  String dataSumOpen(String count) {
+    return 'open: $count';
+  }
+
+  @override
+  String dataSumDone(String count) {
+    return 'done: $count';
+  }
+
+  @override
+  String dataSumInWindow(String count, String window) {
+    return '$window: $count';
+  }
+
+  @override
+  String dataSumLastOn(String date) {
+    return 'last: $date';
+  }
+
+  @override
+  String dataSumAverage(String value) {
+    return 'average: $value';
+  }
+
+  @override
+  String dataSumMin(String value) {
+    return 'min: $value';
+  }
+
+  @override
+  String dataSumMax(String value) {
+    return 'max: $value';
+  }
+
+  @override
+  String dataSumSum(String value) {
+    return 'total: $value';
+  }
+
+  @override
+  String dataSumTicked(String count, String total) {
+    return 'ticked: $count/$total';
+  }
 }

@@ -28382,6 +28382,2100 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'إلغاء'**
   String get cinemaCancel;
+
+  /// Data centre screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'بياناتك'**
+  String get dataCentreTitle;
+
+  /// No description provided for @dataHeroTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بياناتك تبقى معك'**
+  String get dataHeroTitle;
+
+  /// No description provided for @dataHeroBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحفظ مَدار كل شيء مشفّرًا على هذا الهاتف، ولا يرفع شيئًا إلى أي مكان. لا يغادر ملفٌّ التطبيقَ إلا حين تشاركه أو تحفظه بنفسك.'**
+  String get dataHeroBody;
+
+  /// No description provided for @dataStatRecords.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجلات'**
+  String get dataStatRecords;
+
+  /// No description provided for @dataStatLastBackup.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نسخة احتياطية'**
+  String get dataStatLastBackup;
+
+  /// No description provided for @dataLastBackupNever.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُنشأ بعد'**
+  String get dataLastBackupNever;
+
+  /// No description provided for @dataLastBackupToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get dataLastBackupToday;
+
+  /// No description provided for @dataLastBackupDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =1{أمس} =2{قبل يومين} few{قبل {days} أيام} many{قبل {days} يومًا} other{قبل {days} يوم}}'**
+  String dataLastBackupDaysAgo(int days);
+
+  /// No description provided for @dataBackupSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'النسخ الاحتياطي'**
+  String get dataBackupSection;
+
+  /// No description provided for @dataBackupSectionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف واحد مشفّر لنقل بياناتك أو حفظها بأمان'**
+  String get dataBackupSectionHint;
+
+  /// No description provided for @dataBackupCreateTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة احتياطية مشفّرة'**
+  String get dataBackupCreateTitle;
+
+  /// No description provided for @dataBackupCreateBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف واحد يُقفَل بعبارة مرور لا يعرفها أحد غيرك. احتفظ به في مكان آمن لتنقل بياناتك إلى هاتف جديد.'**
+  String get dataBackupCreateBody;
+
+  /// No description provided for @dataBackupCreateAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء نسخة احتياطية'**
+  String get dataBackupCreateAction;
+
+  /// No description provided for @dataRestoreTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستعادة من نسخة احتياطية'**
+  String get dataRestoreTitle;
+
+  /// No description provided for @dataRestoreBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تستبدل كل ما في مَدار بمحتوى ملف النسخة. نحفظ أولًا نسخة أمان من بياناتك الحالية على الهاتف.'**
+  String get dataRestoreBody;
+
+  /// No description provided for @dataRestoreAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار ملف النسخة'**
+  String get dataRestoreAction;
+
+  /// No description provided for @dataSafetyCopiesLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{نسخة أمان واحدة على الهاتف} =2{نسختا أمان على الهاتف} few{{count} نسخ أمان على الهاتف} many{{count} نسخة أمان على الهاتف} other{{count} نسخة أمان على الهاتف}} · آخرها {date}'**
+  String dataSafetyCopiesLine(int count, String date);
+
+  /// No description provided for @dataExportSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'التصدير'**
+  String get dataExportSection;
+
+  /// No description provided for @dataExportSectionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ مقروءة لبياناتك – غير مشفّرة'**
+  String get dataExportSectionHint;
+
+  /// No description provided for @dataExportSummaryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص جاهز للذكاء الاصطناعي'**
+  String get dataExportSummaryTitle;
+
+  /// No description provided for @dataExportSummaryBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظرة موجزة بصيغة Markdown تراجعها قسمًا قسمًا قبل مشاركتها.'**
+  String get dataExportSummaryBody;
+
+  /// No description provided for @dataExportCsvTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جداول (CSV)'**
+  String get dataExportCsvTitle;
+
+  /// No description provided for @dataExportCsvBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل والمعاملات والألم والمزاج – لـExcel أو Sheets.'**
+  String get dataExportCsvBody;
+
+  /// No description provided for @dataExportJsonTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل البيانات (JSON)'**
+  String get dataExportJsonTitle;
+
+  /// No description provided for @dataExportJsonBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل السجلات في ملف واحد، لأرشيفك الخاص أو لتطبيقات أخرى.'**
+  String get dataExportJsonBody;
+
+  /// No description provided for @dataExportPlainWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملفات التصدير غير مشفّرة: من يحصل عليها يستطيع قراءتها. شاركها مع من تثق به فقط.'**
+  String get dataExportPlainWarning;
+
+  /// No description provided for @dataImportSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستيراد'**
+  String get dataImportSection;
+
+  /// No description provided for @dataImportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستيراد من نموذج مَدار الأول'**
+  String get dataImportTitle;
+
+  /// No description provided for @dataImportBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل البيانات المصدّرة من النسخة الأولى (ملف JSON).'**
+  String get dataImportBody;
+
+  /// No description provided for @dataFooter.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يرفع مَدار بياناتك إلى أي خادم. أنت وحدك تقرّر أين تذهب ملفاتك.'**
+  String get dataFooter;
+
+  /// No description provided for @dataAreaOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات والسجلّ'**
+  String get dataAreaOther;
+
+  /// No description provided for @dataShareAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة'**
+  String get dataShareAction;
+
+  /// No description provided for @dataSaveAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ في…'**
+  String get dataSaveAction;
+
+  /// No description provided for @dataCopyAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ'**
+  String get dataCopyAction;
+
+  /// No description provided for @dataDoneAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get dataDoneAction;
+
+  /// No description provided for @dataCancelAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get dataCancelAction;
+
+  /// No description provided for @dataTryAgainAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'حاول مجددًا'**
+  String get dataTryAgainAction;
+
+  /// No description provided for @dataFileReadyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملفّك جاهز'**
+  String get dataFileReadyTitle;
+
+  /// No description provided for @dataFileReadySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر أين يذهب – لا شيء يُرسَل تلقائيًا'**
+  String get dataFileReadySubtitle;
+
+  /// No description provided for @dataFileEncryptedNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشفّر بعبارة المرور. لا يُفتح إلا بها – احتفظ بها بعيدًا عن الملف.'**
+  String get dataFileEncryptedNote;
+
+  /// No description provided for @dataFilePlainNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مشفّر: من يحصل على هذا الملف يستطيع قراءته.'**
+  String get dataFilePlainNote;
+
+  /// No description provided for @dataFileShared.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرسل إلى قائمة المشاركة.'**
+  String get dataFileShared;
+
+  /// No description provided for @dataFileSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ في المكان الذي اخترته.'**
+  String get dataFileSaved;
+
+  /// No description provided for @dataFileSendFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر ذلك. لم يُرسَل شيء – حاول مجددًا.'**
+  String get dataFileSendFailed;
+
+  /// No description provided for @dataExportFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تجهيز الملف. بياناتك لم تتغيّر.'**
+  String get dataExportFailed;
+
+  /// No description provided for @dataRecordsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلّان} few{{count} سجلات} many{{count} سجلًّا} other{{count} سجل}}'**
+  String dataRecordsCount(int count);
+
+  /// No description provided for @dataSizeBytes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} بايت'**
+  String dataSizeBytes(String size);
+
+  /// No description provided for @dataSizeKb.
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} ك.ب'**
+  String dataSizeKb(String size);
+
+  /// No description provided for @dataSizeMb.
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} م.ب'**
+  String dataSizeMb(String size);
+
+  /// No description provided for @dataBackupSheetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة احتياطية مشفّرة'**
+  String get dataBackupSheetTitle;
+
+  /// No description provided for @dataBackupSheetSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك'**
+  String get dataBackupSheetSubtitle;
+
+  /// No description provided for @dataBackupSheetBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.'**
+  String get dataBackupSheetBody;
+
+  /// No description provided for @dataPassphraseLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عبارة المرور'**
+  String get dataPassphraseLabel;
+
+  /// No description provided for @dataPassphraseConfirmLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد كتابة عبارة المرور'**
+  String get dataPassphraseConfirmLabel;
+
+  /// No description provided for @dataPassphraseMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'العبارتان غير متطابقتين.'**
+  String get dataPassphraseMismatch;
+
+  /// No description provided for @dataPassphraseShow.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار عبارة المرور'**
+  String get dataPassphraseShow;
+
+  /// No description provided for @dataPassphraseHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء عبارة المرور'**
+  String get dataPassphraseHide;
+
+  /// No description provided for @dataPassphraseNeverStored.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تُحفظ عبارة المرور في أي مكان. بدونها لا يمكن فتح النسخة – ولا حتى بواسطتنا.'**
+  String get dataPassphraseNeverStored;
+
+  /// No description provided for @dataStrengthLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القوة'**
+  String get dataStrengthLabel;
+
+  /// No description provided for @dataStrengthEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'—'**
+  String get dataStrengthEmpty;
+
+  /// No description provided for @dataStrengthVeryWeak.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضعيفة جدًا'**
+  String get dataStrengthVeryWeak;
+
+  /// No description provided for @dataStrengthWeak.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضعيفة'**
+  String get dataStrengthWeak;
+
+  /// No description provided for @dataStrengthFair.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقبولة'**
+  String get dataStrengthFair;
+
+  /// No description provided for @dataStrengthStrong.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوية'**
+  String get dataStrengthStrong;
+
+  /// No description provided for @dataStrengthVeryStrong.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوية جدًا'**
+  String get dataStrengthVeryStrong;
+
+  /// No description provided for @dataStrengthHintShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم {min} أحرف على الأقل – جملة قصيرة تفي بالغرض.'**
+  String dataStrengthHintShort(String min);
+
+  /// No description provided for @dataStrengthHintCommon.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه عبارة شائعة يسهل تخمينها.'**
+  String get dataStrengthHintCommon;
+
+  /// No description provided for @dataStrengthHintPattern.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.'**
+  String get dataStrengthHintPattern;
+
+  /// No description provided for @dataStrengthHintDigits.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأرقام وحدها سهلة التخمين؛ أضف كلمات.'**
+  String get dataStrengthHintDigits;
+
+  /// No description provided for @dataStrengthHintWords.
+  ///
+  /// In ar, this message translates to:
+  /// **'جيدة. كلمة أو كلمتان إضافيتان تجعلانها أقوى بكثير.'**
+  String get dataStrengthHintWords;
+
+  /// No description provided for @dataBackupWorking.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقفل بياناتك…'**
+  String get dataBackupWorking;
+
+  /// No description provided for @dataBackupWorkingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يستغرق هذا بضع ثوانٍ عن قصد، ليصعب تخمين عبارة المرور.'**
+  String get dataBackupWorkingHint;
+
+  /// No description provided for @dataBackupReadyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'النسخة الاحتياطية جاهزة'**
+  String get dataBackupReadyTitle;
+
+  /// No description provided for @dataBackupReadySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاركها أو احفظها في مكان آمن'**
+  String get dataBackupReadySubtitle;
+
+  /// No description provided for @dataBackupReadyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ الملف وعبارة المرور في مكانين مختلفين. ستحتاج إلى كليهما للاستعادة.'**
+  String get dataBackupReadyHint;
+
+  /// No description provided for @dataBackupShareSubject.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة مَدار الاحتياطية'**
+  String get dataBackupShareSubject;
+
+  /// No description provided for @dataBackupFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر إنشاء النسخة. بياناتك كما هي – حاول مجددًا.'**
+  String get dataBackupFailed;
+
+  /// No description provided for @dataBackupMadeOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنشئت في {date}'**
+  String dataBackupMadeOn(String date);
+
+  /// No description provided for @dataCsvSheetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصدير جدول'**
+  String get dataCsvSheetTitle;
+
+  /// No description provided for @dataCsvSheetSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'CSV · UTF-8 · يُفتح في Excel وSheets'**
+  String get dataCsvSheetSubtitle;
+
+  /// No description provided for @dataCsvWhat.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا'**
+  String get dataCsvWhat;
+
+  /// No description provided for @dataCsvWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get dataCsvWhen;
+
+  /// No description provided for @dataCsvLabs.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل'**
+  String get dataCsvLabs;
+
+  /// No description provided for @dataCsvTransactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعاملات'**
+  String get dataCsvTransactions;
+
+  /// No description provided for @dataCsvPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم'**
+  String get dataCsvPain;
+
+  /// No description provided for @dataCsvMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج'**
+  String get dataCsvMood;
+
+  /// No description provided for @dataRange30.
+  ///
+  /// In ar, this message translates to:
+  /// **'30 يومًا'**
+  String get dataRange30;
+
+  /// No description provided for @dataRange90.
+  ///
+  /// In ar, this message translates to:
+  /// **'90 يومًا'**
+  String get dataRange90;
+
+  /// No description provided for @dataRangeYear.
+  ///
+  /// In ar, this message translates to:
+  /// **'12 شهرًا'**
+  String get dataRangeYear;
+
+  /// No description provided for @dataRangeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get dataRangeAll;
+
+  /// No description provided for @dataRangeCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصّصة…'**
+  String get dataRangeCustom;
+
+  /// No description provided for @dataRangeAllTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل السجلات منذ البداية'**
+  String get dataRangeAllTime;
+
+  /// No description provided for @dataRangeFromTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {from} إلى {to}'**
+  String dataRangeFromTo(String from, String to);
+
+  /// No description provided for @dataCsvFormatNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'التواريخ بصيغة 2026-09-30 والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.'**
+  String get dataCsvFormatNote;
+
+  /// No description provided for @dataCsvCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء الملف'**
+  String get dataCsvCreate;
+
+  /// No description provided for @dataCsvCreateRows.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا صفوف في هذه الفترة} =1{إنشاء الملف (صف واحد)} =2{إنشاء الملف (صفّان)} few{إنشاء الملف ({count} صفوف)} many{إنشاء الملف ({count} صفًّا)} other{إنشاء الملف ({count} صف)}}'**
+  String dataCsvCreateRows(int count);
+
+  /// No description provided for @dataCsvDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get dataCsvDate;
+
+  /// No description provided for @dataCsvTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get dataCsvTime;
+
+  /// No description provided for @dataCsvTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحليل'**
+  String get dataCsvTest;
+
+  /// No description provided for @dataCsvCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get dataCsvCategory;
+
+  /// No description provided for @dataCsvValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيمة'**
+  String get dataCsvValue;
+
+  /// No description provided for @dataCsvTextResult.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة نصية'**
+  String get dataCsvTextResult;
+
+  /// No description provided for @dataCsvUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get dataCsvUnit;
+
+  /// No description provided for @dataCsvRangeLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى'**
+  String get dataCsvRangeLow;
+
+  /// No description provided for @dataCsvRangeHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأعلى'**
+  String get dataCsvRangeHigh;
+
+  /// No description provided for @dataCsvFlag.
+  ///
+  /// In ar, this message translates to:
+  /// **'العلامة'**
+  String get dataCsvFlag;
+
+  /// No description provided for @dataCsvNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get dataCsvNote;
+
+  /// No description provided for @dataCsvNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get dataCsvNotes;
+
+  /// No description provided for @dataCsvKind.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوع'**
+  String get dataCsvKind;
+
+  /// No description provided for @dataCsvWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة'**
+  String get dataCsvWallet;
+
+  /// No description provided for @dataCsvCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة'**
+  String get dataCsvCurrency;
+
+  /// No description provided for @dataCsvAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get dataCsvAmount;
+
+  /// No description provided for @dataCsvAmountBase.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ بالعملة الأساسية'**
+  String get dataCsvAmountBase;
+
+  /// No description provided for @dataCsvBaseCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة الأساسية'**
+  String get dataCsvBaseCurrency;
+
+  /// No description provided for @dataCsvBudgetItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'بند الميزانية'**
+  String get dataCsvBudgetItem;
+
+  /// No description provided for @dataCsvToWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى المحفظة'**
+  String get dataCsvToWallet;
+
+  /// No description provided for @dataCsvToAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المستلم'**
+  String get dataCsvToAmount;
+
+  /// No description provided for @dataCsvToCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'عملة الاستلام'**
+  String get dataCsvToCurrency;
+
+  /// No description provided for @dataCsvTags.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوسوم'**
+  String get dataCsvTags;
+
+  /// No description provided for @dataCsvPainScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'شدة الألم (0-10)'**
+  String get dataCsvPainScore;
+
+  /// No description provided for @dataCsvLocations.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواضع'**
+  String get dataCsvLocations;
+
+  /// No description provided for @dataCsvTriggers.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفّزات'**
+  String get dataCsvTriggers;
+
+  /// No description provided for @dataCsvBodyPoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط خريطة الجسم'**
+  String get dataCsvBodyPoints;
+
+  /// No description provided for @dataCsvMoodScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج (1-5)'**
+  String get dataCsvMoodScore;
+
+  /// No description provided for @dataCsvStress.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوتر (0-10)'**
+  String get dataCsvStress;
+
+  /// No description provided for @dataCsvAnxiety.
+  ///
+  /// In ar, this message translates to:
+  /// **'القلق (0-10)'**
+  String get dataCsvAnxiety;
+
+  /// No description provided for @dataCsvEnergy.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطاقة (0-10)'**
+  String get dataCsvEnergy;
+
+  /// No description provided for @dataCsvSleepHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات النوم'**
+  String get dataCsvSleepHours;
+
+  /// No description provided for @dataCsvCaffeine.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكواب الكافيين'**
+  String get dataCsvCaffeine;
+
+  /// No description provided for @dataCsvFactors.
+  ///
+  /// In ar, this message translates to:
+  /// **'العوامل'**
+  String get dataCsvFactors;
+
+  /// No description provided for @dataFlagLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'منخفض'**
+  String get dataFlagLow;
+
+  /// No description provided for @dataFlagBorderlineLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الحد الأدنى'**
+  String get dataFlagBorderlineLow;
+
+  /// No description provided for @dataFlagInRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضمن المعدل'**
+  String get dataFlagInRange;
+
+  /// No description provided for @dataFlagBorderlineHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الحد الأعلى'**
+  String get dataFlagBorderlineHigh;
+
+  /// No description provided for @dataFlagHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتفع'**
+  String get dataFlagHigh;
+
+  /// No description provided for @dataTxExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف'**
+  String get dataTxExpense;
+
+  /// No description provided for @dataTxIncome.
+  ///
+  /// In ar, this message translates to:
+  /// **'دخل'**
+  String get dataTxIncome;
+
+  /// No description provided for @dataTxTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل'**
+  String get dataTxTransfer;
+
+  /// No description provided for @dataTxAdjustment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسوية'**
+  String get dataTxAdjustment;
+
+  /// No description provided for @dataSummarySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُعدّ على هاتفك · راجع كل قسم قبل المشاركة'**
+  String get dataSummarySubtitle;
+
+  /// No description provided for @dataSummaryIntro.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.'**
+  String get dataSummaryIntro;
+
+  /// No description provided for @dataSummaryPreparing.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجهّز الملخّص على هاتفك…'**
+  String get dataSummaryPreparing;
+
+  /// No description provided for @dataSummarySections.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقسام المضمَّنة'**
+  String get dataSummarySections;
+
+  /// No description provided for @dataSummarySectionsOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'{selected} من {total} أقسام'**
+  String dataSummarySectionsOf(String selected, String total);
+
+  /// No description provided for @dataSummaryTokens.
+  ///
+  /// In ar, this message translates to:
+  /// **'≈ {count} رمز'**
+  String dataSummaryTokens(String count);
+
+  /// No description provided for @dataSummaryNoData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات بعد'**
+  String get dataSummaryNoData;
+
+  /// No description provided for @dataSummaryProfileHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري – أنت تحدّد ما يُذكر'**
+  String get dataSummaryProfileHint;
+
+  /// No description provided for @dataSummaryPreviewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما سيُشارَك بالضبط'**
+  String get dataSummaryPreviewTitle;
+
+  /// No description provided for @dataSummaryCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُسخ الملخّص إلى الحافظة.'**
+  String get dataSummaryCopied;
+
+  /// No description provided for @dataSummaryUse.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام هذا الملخّص'**
+  String get dataSummaryUse;
+
+  /// No description provided for @dataProfileChoose.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ما يُذكر عنك:'**
+  String get dataProfileChoose;
+
+  /// No description provided for @dataProfileAboutHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: العمر أو ما يهمّك أن يعرفه المساعد'**
+  String get dataProfileAboutHint;
+
+  /// No description provided for @dataRestoreFlowTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستعادة'**
+  String get dataRestoreFlowTitle;
+
+  /// No description provided for @dataRestoreChooseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة بياناتك'**
+  String get dataRestoreChooseTitle;
+
+  /// No description provided for @dataRestoreChooseBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ملف ‎.madarbackup‎. سترى ما فيه قبل أن يتغيّر أي شيء.'**
+  String get dataRestoreChooseBody;
+
+  /// No description provided for @dataRestorePickFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار ملف النسخة'**
+  String get dataRestorePickFile;
+
+  /// No description provided for @dataRestoreNothingChanges.
+  ///
+  /// In ar, this message translates to:
+  /// **'لن يتغيّر شيء في بياناتك الحالية حتى تؤكّد الاستبدال في الخطوة الأخيرة.'**
+  String get dataRestoreNothingChanges;
+
+  /// No description provided for @dataSafetyCopiesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ الأمان على هذا الهاتف'**
+  String get dataSafetyCopiesTitle;
+
+  /// No description provided for @dataSafetyCopiesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُنشأ تلقائيًا قبل كل استعادة، وتُفتح بعبارة المرور التي استُخدمت حينها.'**
+  String get dataSafetyCopiesHint;
+
+  /// No description provided for @dataRestoreUnlockBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب عبارة المرور التي أقفلت بها هذه النسخة.'**
+  String get dataRestoreUnlockBody;
+
+  /// No description provided for @dataRestoreUnlockAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح النسخة'**
+  String get dataRestoreUnlockAction;
+
+  /// No description provided for @dataRestoreOtherFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار ملف آخر'**
+  String get dataRestoreOtherFile;
+
+  /// No description provided for @dataRestoreOpening.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتحقق من النسخة…'**
+  String get dataRestoreOpening;
+
+  /// No description provided for @dataRestoreOpeningHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتأكد أن الملف سليم ولم يُعدَّل، ثم نفكّ تشفيره على هاتفك.'**
+  String get dataRestoreOpeningHint;
+
+  /// No description provided for @dataRestorePreviewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'النسخة سليمة'**
+  String get dataRestorePreviewTitle;
+
+  /// No description provided for @dataRestoreInBackup.
+  ///
+  /// In ar, this message translates to:
+  /// **'في النسخة'**
+  String get dataRestoreInBackup;
+
+  /// No description provided for @dataRestoreOnPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الهاتف الآن'**
+  String get dataRestoreOnPhone;
+
+  /// No description provided for @dataRestoreWhatsInside.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في هذه النسخة'**
+  String get dataRestoreWhatsInside;
+
+  /// No description provided for @dataRestoreReplaceWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستحلّ هذه النسخة محلّ كل البيانات الموجودة في مَدار الآن. قبل ذلك نحفظ بياناتك الحالية نسخةَ أمان على هذا الهاتف، تُفتح بعبارة المرور نفسها.'**
+  String get dataRestoreReplaceWarning;
+
+  /// No description provided for @dataRestoreUnderstand.
+  ///
+  /// In ar, this message translates to:
+  /// **'فهمت أن بياناتي الحالية ستُستبدل'**
+  String get dataRestoreUnderstand;
+
+  /// No description provided for @dataRestoreConfirmAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'استبدال بياناتي'**
+  String get dataRestoreConfirmAction;
+
+  /// No description provided for @dataRestoreSavingSafety.
+  ///
+  /// In ar, this message translates to:
+  /// **'نحفظ نسخة أمان من بياناتك الحالية…'**
+  String get dataRestoreSavingSafety;
+
+  /// No description provided for @dataRestoreRestoring.
+  ///
+  /// In ar, this message translates to:
+  /// **'نستعيد بياناتك…'**
+  String get dataRestoreRestoring;
+
+  /// No description provided for @dataRestoreKeepOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبقِ التطبيق مفتوحًا لحظات.'**
+  String get dataRestoreKeepOpen;
+
+  /// No description provided for @dataRestoreDoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت الاستعادة'**
+  String get dataRestoreDoneTitle;
+
+  /// No description provided for @dataRestoreDoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادت سجلاتك ({count}) إلى مَدار.'**
+  String dataRestoreDoneBody(String count);
+
+  /// No description provided for @dataRestoreSafetyKept.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة أمان من بياناتك السابقة محفوظة على هذا الهاتف، وتُفتح بعبارة المرور نفسها.'**
+  String get dataRestoreSafetyKept;
+
+  /// No description provided for @dataSafetyCopySave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ نسخة الأمان في مكان آخر'**
+  String get dataSafetyCopySave;
+
+  /// No description provided for @dataSafetyCopyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة الأمان'**
+  String get dataSafetyCopyTitle;
+
+  /// No description provided for @dataNothingChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتغيّر شيء في بياناتك.'**
+  String get dataNothingChanged;
+
+  /// No description provided for @dataErrWrongPassphrase.
+  ///
+  /// In ar, this message translates to:
+  /// **'عبارة المرور هذه لا تفتح النسخة. تحقّق من الأحرف وحاول مجددًا.'**
+  String get dataErrWrongPassphrase;
+
+  /// No description provided for @dataErrNotBackupTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا ليس ملف نسخة من مَدار'**
+  String get dataErrNotBackupTitle;
+
+  /// No description provided for @dataErrNotBackupBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ملفًا ينتهي بـ ‎.madarbackup‎ أنشأته من «إنشاء نسخة احتياطية».'**
+  String get dataErrNotBackupBody;
+
+  /// No description provided for @dataErrNewerTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنشئت بإصدار أحدث من مَدار'**
+  String get dataErrNewerTitle;
+
+  /// No description provided for @dataErrNewerBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّث مَدار على هذا الهاتف ثم حاول مجددًا.'**
+  String get dataErrNewerBody;
+
+  /// No description provided for @dataErrTruncatedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف غير مكتمل'**
+  String get dataErrTruncatedTitle;
+
+  /// No description provided for @dataErrTruncatedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربما لم يكتمل نسخه أو تنزيله. انسخه مرة أخرى ثم حاول.'**
+  String get dataErrTruncatedBody;
+
+  /// No description provided for @dataErrCorruptedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف تالف'**
+  String get dataErrCorruptedTitle;
+
+  /// No description provided for @dataErrCorruptedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيّر الملف أو تلف بعد إنشائه، فلا يمكن الوثوق به.'**
+  String get dataErrCorruptedBody;
+
+  /// No description provided for @dataErrUnreadableTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت قراءة الملف'**
+  String get dataErrUnreadableTitle;
+
+  /// No description provided for @dataErrUnreadableBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب ملفًا آخر أو انسخه إلى الهاتف أولًا.'**
+  String get dataErrUnreadableBody;
+
+  /// No description provided for @dataErrSafetyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر حفظ نسخة الأمان'**
+  String get dataErrSafetyTitle;
+
+  /// No description provided for @dataErrSafetyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لذلك لم نستبدل بياناتك. وفّر بعض المساحة ثم حاول مجددًا.'**
+  String get dataErrSafetyBody;
+
+  /// No description provided for @dataErrRejectedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّرت استعادة هذه النسخة'**
+  String get dataErrRejectedTitle;
+
+  /// No description provided for @dataErrRejectedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تجتز بياناتها فحوص السلامة.'**
+  String get dataErrRejectedBody;
+
+  /// No description provided for @dataSumHeading.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخّص مَدار — {date}'**
+  String dataSumHeading(String date);
+
+  /// No description provided for @dataSumPreamble.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات متابعة شخصية من تطبيق مَدار، أُعدّت على هاتف المستخدم نفسه. التواريخ بصيغة سنة-شهر-يوم والكسور العشرية بنقطة. لا تُضمَّن الملاحظات ولا أرقام الهواتف ولا أرقام الوثائق أو الحسابات.'**
+  String get dataSumPreamble;
+
+  /// No description provided for @dataSumNoData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات بعد.'**
+  String get dataSumNoData;
+
+  /// No description provided for @dataSumListSep.
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get dataSumListSep;
+
+  /// No description provided for @dataSumLastDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =1{اليوم} =2{آخر يومين} few{آخر {days} أيام} many{آخر {days} يومًا} other{آخر {days} يوم}}'**
+  String dataSumLastDays(int days);
+
+  /// No description provided for @dataSumPreviousDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام الـ{days} السابقة'**
+  String dataSumPreviousDays(String days);
+
+  /// No description provided for @dataSumMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير معروضة: {count}'**
+  String dataSumMore(String count);
+
+  /// No description provided for @dataSumProfile.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبذة شخصية'**
+  String get dataSumProfile;
+
+  /// No description provided for @dataSumFaith.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيمان'**
+  String get dataSumFaith;
+
+  /// No description provided for @dataSumHealth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة'**
+  String get dataSumHealth;
+
+  /// No description provided for @dataSumMoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'المال'**
+  String get dataSumMoney;
+
+  /// No description provided for @dataSumFamily.
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة'**
+  String get dataSumFamily;
+
+  /// No description provided for @dataSumWork.
+  ///
+  /// In ar, this message translates to:
+  /// **'العمل'**
+  String get dataSumWork;
+
+  /// No description provided for @dataSumGrowth.
+  ///
+  /// In ar, this message translates to:
+  /// **'النمو'**
+  String get dataSumGrowth;
+
+  /// No description provided for @dataSumBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجسد'**
+  String get dataSumBody;
+
+  /// No description provided for @dataSumTravel.
+  ///
+  /// In ar, this message translates to:
+  /// **'السفر'**
+  String get dataSumTravel;
+
+  /// No description provided for @dataSumCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّعات مخصّصة'**
+  String get dataSumCustom;
+
+  /// No description provided for @dataSumCity.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدينة'**
+  String get dataSumCity;
+
+  /// No description provided for @dataSumTimeZone.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنطقة الزمنية'**
+  String get dataSumTimeZone;
+
+  /// No description provided for @dataSumBaseCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملة الأساسية'**
+  String get dataSumBaseCurrency;
+
+  /// No description provided for @dataSumLanguage.
+  ///
+  /// In ar, this message translates to:
+  /// **'لغة التطبيق'**
+  String get dataSumLanguage;
+
+  /// No description provided for @dataSumLanguageName.
+  ///
+  /// In ar, this message translates to:
+  /// **'العربية'**
+  String get dataSumLanguageName;
+
+  /// No description provided for @dataSumAboutMe.
+  ///
+  /// In ar, this message translates to:
+  /// **'عنّي'**
+  String get dataSumAboutMe;
+
+  /// No description provided for @dataSumPrayersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة'**
+  String get dataSumPrayersTitle;
+
+  /// No description provided for @dataSumObligatory.
+  ///
+  /// In ar, this message translates to:
+  /// **'{window} (الفرائض)'**
+  String dataSumObligatory(String window);
+
+  /// No description provided for @dataSumLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'المسجّل: {logged}/{expected}'**
+  String dataSumLogged(String logged, String expected);
+
+  /// No description provided for @dataSumOnTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'في وقتها: {count}'**
+  String dataSumOnTime(String count);
+
+  /// No description provided for @dataSumLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة: {count}'**
+  String dataSumLate(String count);
+
+  /// No description provided for @dataSumMadeUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'قضاء: {count}'**
+  String dataSumMadeUp(String count);
+
+  /// No description provided for @dataSumMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فائتة: {count}'**
+  String dataSumMissed(String count);
+
+  /// No description provided for @dataSumInCongregation.
+  ///
+  /// In ar, this message translates to:
+  /// **'جماعة: {count}'**
+  String dataSumInCongregation(String count);
+
+  /// No description provided for @dataSumVoluntary.
+  ///
+  /// In ar, this message translates to:
+  /// **'{window} (النوافل)'**
+  String dataSumVoluntary(String window);
+
+  /// No description provided for @dataSumQuranTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القرآن والورد'**
+  String get dataSumQuranTitle;
+
+  /// No description provided for @dataSumSessions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجلسات: {count}'**
+  String dataSumSessions(String count);
+
+  /// No description provided for @dataSumPages.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصفحات: {count}'**
+  String dataSumPages(String count);
+
+  /// No description provided for @dataSumMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} د'**
+  String dataSumMinutes(String count);
+
+  /// No description provided for @dataSumLastSession.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر جلسة: {date}'**
+  String dataSumLastSession(String date);
+
+  /// No description provided for @dataSumWird.
+  ///
+  /// In ar, this message translates to:
+  /// **'الورد «{name}»'**
+  String dataSumWird(String name);
+
+  /// No description provided for @dataSumPerDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'{unit} يوميًا: {amount}'**
+  String dataSumPerDay(String amount, String unit);
+
+  /// No description provided for @dataSumUnitPages.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصفحات'**
+  String get dataSumUnitPages;
+
+  /// No description provided for @dataSumUnitJuz.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجزاء'**
+  String get dataSumUnitJuz;
+
+  /// No description provided for @dataSumUnitHizb.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحزاب'**
+  String get dataSumUnitHizb;
+
+  /// No description provided for @dataSumUnitAyat.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآيات'**
+  String get dataSumUnitAyat;
+
+  /// No description provided for @dataSumSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {date}'**
+  String dataSumSince(String date);
+
+  /// No description provided for @dataSumBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى {date}'**
+  String dataSumBy(String date);
+
+  /// No description provided for @dataSumHifzTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحفظ'**
+  String get dataSumHifzTitle;
+
+  /// No description provided for @dataSumItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفوظات: {count}'**
+  String dataSumItems(String count);
+
+  /// No description provided for @dataSumNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'جديدة: {count}'**
+  String dataSumNew(String count);
+
+  /// No description provided for @dataSumDueToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستحقة للمراجعة اليوم: {count}'**
+  String dataSumDueToday(String count);
+
+  /// No description provided for @dataSumReviews.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعات: {count}'**
+  String dataSumReviews(String count);
+
+  /// No description provided for @dataSumAvgGrade.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط التقييم: {value}/5'**
+  String dataSumAvgGrade(String value);
+
+  /// No description provided for @dataSumAlertsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات دائمة'**
+  String get dataSumAlertsTitle;
+
+  /// No description provided for @dataSumSeverityCritical.
+  ///
+  /// In ar, this message translates to:
+  /// **'حرج'**
+  String get dataSumSeverityCritical;
+
+  /// No description provided for @dataSumSeverityWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه'**
+  String get dataSumSeverityWarning;
+
+  /// No description provided for @dataSumSeverityInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get dataSumSeverityInfo;
+
+  /// No description provided for @dataSumConditionsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالات الصحية'**
+  String get dataSumConditionsTitle;
+
+  /// No description provided for @dataSumMedsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية الحالية'**
+  String get dataSumMedsTitle;
+
+  /// No description provided for @dataSumKindSupplement.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكمّل'**
+  String get dataSumKindSupplement;
+
+  /// No description provided for @dataSumKindInjection.
+  ///
+  /// In ar, this message translates to:
+  /// **'حقنة'**
+  String get dataSumKindInjection;
+
+  /// No description provided for @dataSumWithEmptyStomach.
+  ///
+  /// In ar, this message translates to:
+  /// **'على معدة فارغة'**
+  String get dataSumWithEmptyStomach;
+
+  /// No description provided for @dataSumWithBreakfast.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الفطور'**
+  String get dataSumWithBreakfast;
+
+  /// No description provided for @dataSumWithLunch.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الغداء'**
+  String get dataSumWithLunch;
+
+  /// No description provided for @dataSumWithDinner.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع العشاء'**
+  String get dataSumWithDinner;
+
+  /// No description provided for @dataSumWithBedtime.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل النوم'**
+  String get dataSumWithBedtime;
+
+  /// No description provided for @dataSumWithCourse.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب خطة العلاج'**
+  String get dataSumWithCourse;
+
+  /// No description provided for @dataSumLabsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحدث التحاليل'**
+  String get dataSumLabsTitle;
+
+  /// No description provided for @dataSumLabsWindow.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نتيجة لكل تحليل خلال آخر {months} شهرًا؛ العلامة مقارنةً بالمعدل المحفوظ في التطبيق.'**
+  String dataSumLabsWindow(String months);
+
+  /// No description provided for @dataSumColTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحليل'**
+  String get dataSumColTest;
+
+  /// No description provided for @dataSumColDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get dataSumColDate;
+
+  /// No description provided for @dataSumColResult.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة'**
+  String get dataSumColResult;
+
+  /// No description provided for @dataSumColRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعدل'**
+  String get dataSumColRange;
+
+  /// No description provided for @dataSumColFlag.
+  ///
+  /// In ar, this message translates to:
+  /// **'العلامة'**
+  String get dataSumColFlag;
+
+  /// No description provided for @dataSumColPrevious.
+  ///
+  /// In ar, this message translates to:
+  /// **'السابقة'**
+  String get dataSumColPrevious;
+
+  /// No description provided for @dataSumPainTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألم (متابعة)'**
+  String get dataSumPainTitle;
+
+  /// No description provided for @dataSumEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدخالات: {count}'**
+  String dataSumEntries(String count);
+
+  /// No description provided for @dataSumAverageOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط: {value}/{max}'**
+  String dataSumAverageOf(String value, String max);
+
+  /// No description provided for @dataSumHighest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأعلى: {value}/{max}'**
+  String dataSumHighest(String value, String max);
+
+  /// No description provided for @dataSumTopPlaces.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المواضع تسجيلًا'**
+  String get dataSumTopPlaces;
+
+  /// No description provided for @dataSumTopTriggers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المحفّزات تسجيلًا'**
+  String get dataSumTopTriggers;
+
+  /// No description provided for @dataSumMoodTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج (متابعة)'**
+  String get dataSumMoodTitle;
+
+  /// No description provided for @dataSumMoodAvg.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج: {value}/5'**
+  String dataSumMoodAvg(String value);
+
+  /// No description provided for @dataSumStressAvg.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوتر: {value}/10'**
+  String dataSumStressAvg(String value);
+
+  /// No description provided for @dataSumAnxietyAvg.
+  ///
+  /// In ar, this message translates to:
+  /// **'القلق: {value}/10'**
+  String dataSumAnxietyAvg(String value);
+
+  /// No description provided for @dataSumEnergyAvg.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطاقة: {value}/10'**
+  String dataSumEnergyAvg(String value);
+
+  /// No description provided for @dataSumSleepAvg.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم: {value} س'**
+  String dataSumSleepAvg(String value);
+
+  /// No description provided for @dataSumCaffeineAvg.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكافيين: {value} كوب'**
+  String dataSumCaffeineAvg(String value);
+
+  /// No description provided for @dataSumTopFactors.
+  ///
+  /// In ar, this message translates to:
+  /// **'العوامل الأكثر تكرارًا'**
+  String get dataSumTopFactors;
+
+  /// No description provided for @dataSumWalletsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ'**
+  String get dataSumWalletsTitle;
+
+  /// No description provided for @dataSumConvertedTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'محوّلة إلى {code} بأسعار الصرف المحفوظة في التطبيق.'**
+  String dataSumConvertedTo(String code);
+
+  /// No description provided for @dataSumColWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفظة'**
+  String get dataSumColWallet;
+
+  /// No description provided for @dataSumColBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get dataSumColBalance;
+
+  /// No description provided for @dataSumColInBase.
+  ///
+  /// In ar, this message translates to:
+  /// **'بـ{code}'**
+  String dataSumColInBase(String code);
+
+  /// No description provided for @dataSumTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي: {amount}'**
+  String dataSumTotal(String amount);
+
+  /// No description provided for @dataSumBudgetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية — {month}'**
+  String dataSumBudgetTitle(String month);
+
+  /// No description provided for @dataSumPlanned.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخطط: {amount}'**
+  String dataSumPlanned(String amount);
+
+  /// No description provided for @dataSumSpent.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروف: {amount}'**
+  String dataSumSpent(String amount);
+
+  /// No description provided for @dataSumRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي: {amount}'**
+  String dataSumRemaining(String amount);
+
+  /// No description provided for @dataSumOverPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز الخطة'**
+  String get dataSumOverPlan;
+
+  /// No description provided for @dataSumUnassigned.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف بلا بند: {amount}'**
+  String dataSumUnassigned(String amount);
+
+  /// No description provided for @dataSumDueTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستحق خلال الأيام الـ{days} القادمة'**
+  String dataSumDueTitle(String days);
+
+  /// No description provided for @dataSumDueOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'يستحق {date}'**
+  String dataSumDueOn(String date);
+
+  /// No description provided for @dataSumOverdueSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر منذ {date}'**
+  String dataSumOverdueSince(String date);
+
+  /// No description provided for @dataSumDebtsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get dataSumDebtsTitle;
+
+  /// No description provided for @dataSumIOwe.
+  ///
+  /// In ar, this message translates to:
+  /// **'عليّ لـ{person}: المتبقي {left} من {total}'**
+  String dataSumIOwe(String person, String left, String total);
+
+  /// No description provided for @dataSumOwedToMe.
+  ///
+  /// In ar, this message translates to:
+  /// **'لي عند {person}: المتبقي {left} من {total}'**
+  String dataSumOwedToMe(String person, String left, String total);
+
+  /// No description provided for @dataSumJarsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصّالات الادخار'**
+  String get dataSumJarsTitle;
+
+  /// No description provided for @dataSumJar.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}: {saved} من {target} ({percent}%)'**
+  String dataSumJar(String name, String saved, String target, String percent);
+
+  /// No description provided for @dataSumEvery.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيقاع (أيام): {days}'**
+  String dataSumEvery(String days);
+
+  /// No description provided for @dataSumLastContact.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام منذ آخر تواصل: {days}'**
+  String dataSumLastContact(String days);
+
+  /// No description provided for @dataSumNeverContacted.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُسجَّل تواصل بعد'**
+  String get dataSumNeverContacted;
+
+  /// No description provided for @dataSumOverdueBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر (أيام): {days}'**
+  String dataSumOverdueBy(String days);
+
+  /// No description provided for @dataSumDueTodayStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستحق اليوم'**
+  String get dataSumDueTodayStatus;
+
+  /// No description provided for @dataSumDueIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'يستحق بعد (أيام): {days}'**
+  String dataSumDueIn(String days);
+
+  /// No description provided for @dataSumNoRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخرون بلا إيقاع تواصل: {count}'**
+  String dataSumNoRhythm(int count);
+
+  /// No description provided for @dataSumPeopleNoRhythm.
+  ///
+  /// In ar, this message translates to:
+  /// **'أشخاص بلا إيقاع تواصل: {count}'**
+  String dataSumPeopleNoRhythm(int count);
+
+  /// No description provided for @dataSumTop3Title.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهم 3'**
+  String get dataSumTop3Title;
+
+  /// No description provided for @dataSumOnBoard.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللوحة: {board}'**
+  String dataSumOnBoard(String board);
+
+  /// No description provided for @dataSumBoardsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللوحات'**
+  String get dataSumBoardsTitle;
+
+  /// No description provided for @dataSumOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get dataSumOther;
+
+  /// No description provided for @dataSumProjectsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع'**
+  String get dataSumProjectsTitle;
+
+  /// No description provided for @dataSumStatusActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get dataSumStatusActive;
+
+  /// No description provided for @dataSumStatusPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف مؤقتًا'**
+  String get dataSumStatusPaused;
+
+  /// No description provided for @dataSumDoneOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنجز: {done}/{total}'**
+  String dataSumDoneOf(String done, String total);
+
+  /// No description provided for @dataSumDeadline.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموعد النهائي: {date}'**
+  String dataSumDeadline(String date);
+
+  /// No description provided for @dataSumProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'{current} من {target} {unit}'**
+  String dataSumProgress(String current, String target, String unit);
+
+  /// No description provided for @dataSumRecentGain.
+  ///
+  /// In ar, this message translates to:
+  /// **'{window}: {amount}'**
+  String dataSumRecentGain(String amount, String window);
+
+  /// No description provided for @dataSumExercisePlanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة التمارين'**
+  String get dataSumExercisePlanTitle;
+
+  /// Seven comma-separated weekday names, Monday first
+  ///
+  /// In ar, this message translates to:
+  /// **'الإثنين,الثلاثاء,الأربعاء,الخميس,الجمعة,السبت,الأحد'**
+  String get dataSumWeekdays;
+
+  /// No description provided for @dataSumSets.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموعات: {count}'**
+  String dataSumSets(String count);
+
+  /// No description provided for @dataSumKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} كغ'**
+  String dataSumKg(String value);
+
+  /// No description provided for @dataSumWorkouts.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمارين المنجزة: {count}'**
+  String dataSumWorkouts(String count);
+
+  /// No description provided for @dataSumFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام: {count} · المتوسط: {hours} س'**
+  String dataSumFasting(String count, String hours);
+
+  /// No description provided for @dataSumTargetHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف: {hours} س'**
+  String dataSumTargetHours(String hours);
+
+  /// No description provided for @dataSumWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء خلال آخر {days} أيام: {ml} مل يوميًا في المتوسط'**
+  String dataSumWater(String days, String ml);
+
+  /// No description provided for @dataSumTargetMl.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف: {ml} مل'**
+  String dataSumTargetMl(String ml);
+
+  /// No description provided for @dataSumAvoidTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجنّب'**
+  String get dataSumAvoidTitle;
+
+  /// No description provided for @dataSumTripsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات القادمة'**
+  String get dataSumTripsTitle;
+
+  /// No description provided for @dataSumTripPlanned.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطط لها'**
+  String get dataSumTripPlanned;
+
+  /// No description provided for @dataSumTripUnderWay.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارية الآن'**
+  String get dataSumTripUnderWay;
+
+  /// No description provided for @dataSumDocumentsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوثائق (لا تُضمَّن أرقامها أبدًا)'**
+  String get dataSumDocumentsTitle;
+
+  /// No description provided for @dataSumExpiresIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنتهي {date} (الأيام المتبقية: {days})'**
+  String dataSumExpiresIn(String date, String days);
+
+  /// No description provided for @dataSumExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت {date}'**
+  String dataSumExpired(String date);
+
+  /// No description provided for @dataSumNoExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تاريخ انتهاء'**
+  String get dataSumNoExpiry;
+
+  /// No description provided for @dataSumModuleTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'متتبّع'**
+  String get dataSumModuleTracker;
+
+  /// No description provided for @dataSumModuleList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة'**
+  String get dataSumModuleList;
+
+  /// No description provided for @dataSumOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة: {count}'**
+  String dataSumOpen(String count);
+
+  /// No description provided for @dataSumDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'منجزة: {count}'**
+  String dataSumDone(String count);
+
+  /// No description provided for @dataSumInWindow.
+  ///
+  /// In ar, this message translates to:
+  /// **'{window}: {count}'**
+  String dataSumInWindow(String count, String window);
+
+  /// No description provided for @dataSumLastOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأخير: {date}'**
+  String dataSumLastOn(String date);
+
+  /// No description provided for @dataSumAverage.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتوسط: {value}'**
+  String dataSumAverage(String value);
+
+  /// No description provided for @dataSumMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدنى: {value}'**
+  String dataSumMin(String value);
+
+  /// No description provided for @dataSumMax.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأعلى: {value}'**
+  String dataSumMax(String value);
+
+  /// No description provided for @dataSumSum.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع: {value}'**
+  String dataSumSum(String value);
+
+  /// No description provided for @dataSumTicked.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤشَّر عليها: {count}/{total}'**
+  String dataSumTicked(String count, String total);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

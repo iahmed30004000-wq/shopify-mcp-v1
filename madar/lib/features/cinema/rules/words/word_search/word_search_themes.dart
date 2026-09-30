@@ -48,7 +48,8 @@ final class WordSearchTheme {
             titleAr: title['ar']! as String,
             titleEn: title['en']! as String,
             words: List.unmodifiable([
-              for (final w in m['words']! as List<Object?>) ThemeWord((w! as List<Object?>)[0]! as String, w[1]! as String),
+              for (final w in m['words']! as List<Object?>)
+                if (w case [final String word, final String vowelled]) ThemeWord(word, vowelled),
             ]),
           );
         }(),

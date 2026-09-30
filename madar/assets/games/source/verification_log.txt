@@ -17,7 +17,7 @@ OK   every answer is in the lexicon (valid guess)
 OK   themes: >= 8 words each, none filtered
 INFO themes: 29, words: 727
 WROTE arabic_lexicon.txt: 1098141 bytes, sha256 deb7e3a416e3ac32c257f186ed9779475cacfe85e2c191f19d3579e05b2bc1e9
-WROTE arabic_word_filter.json: 2451 bytes, sha256 f84d4dd06cfaa8dc67c1cfa013b39d8a3420ab8e1bcb6b385c5bcad63c6ca842
+WROTE arabic_word_filter.json: 2486 bytes, sha256 32ce95a356bd0fa06805ebc4655dc72ef759e52fdaaac4c3d4163205028f553f
 WROTE word_guess_answers.json: 41610 bytes, sha256 acaffa371aaa0cab6a42c2ac9f676b320a9f476cc97bfd8c1a7e5784d0982c74
 WROTE word_search_themes.json: 25517 bytes, sha256 0450258b84382f7c283fb594d66290118971f5c95fc4b84bb6bc15b1d1f8d466
 WROTE crossword_clues.json: 54849 bytes, sha256 8e2acba7f84df24f7c6aedfb807c40d58fc026052c27a3cce1df1a149481bb7f
@@ -34,8 +34,8 @@ INFO tirmidhi 2317 grades ['Daif', 'Hasan', 'Sahih']
 INFO tirmidhi 1919 grades ['Hasan', 'Sahih']
 OK   every quiz question passed structure and citation checks (0 failed)
 OK   at least 300 quiz questions (377)
-INFO quiz by category {'quran': 105, 'prophets': 100, 'seerah': 51, 'pillars': 48, 'manners': 47, 'companions': 26}, by level {1: 147, 2: 191, 3: 39}, citations {'meta': 42, 'quran': 233, 'hadith': 151}
-WROTE islamic_quiz.json: 216444 bytes, sha256 39d9443ae6ef2ac3f08745e37b36406f0946da4c4ce192de52e4d57a5ecf0921
+INFO quiz by category {'quran': 105, 'prophets': 100, 'seerah': 51, 'pillars': 48, 'manners': 47, 'companions': 26}, by level {1: 147, 2: 191, 3: 39}, citations {'meta': 42, 'quran': 233, 'hadith': 152}
+WROTE islamic_quiz.json: 216682 bytes, sha256 4df18b0fe70edb2dd93aff9cc9aca95aaeedebdd6e928e34842421f3c234aa30
 OK   countries: unique codes / names, known continents, valid flag specs
 OK   193 UN member states (193)
 OK   2 UN observer states (2)

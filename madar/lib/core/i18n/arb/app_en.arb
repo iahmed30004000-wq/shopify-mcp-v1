@@ -13699,7 +13699,7 @@
       }
     }
   },
-  "workDueTodayCount": "{count, plural, other{{count} due today}}",
+  "workDueTodayCount": "{count, plural, one{{count} due today} other{{count} due today}}",
   "@workDueTodayCount": {
     "description": "Board tile / today card: cards due today",
     "placeholders": {
@@ -13708,7 +13708,7 @@
       }
     }
   },
-  "workOverdueCount": "{count, plural, other{{count} overdue}}",
+  "workOverdueCount": "{count, plural, one{{count} overdue} other{{count} overdue}}",
   "@workOverdueCount": {
     "description": "Board tile / today card: overdue cards",
     "placeholders": {
@@ -17818,5 +17818,1066 @@
   "cinemaRemoveGame": "Remove",
   "cinemaOpenGameFailed": "Couldn't open the link",
   "cinemaSave": "Save",
-  "cinemaCancel": "Cancel"
+  "cinemaCancel": "Cancel",
+  "dataCentreTitle": "Your data",
+  "@dataCentreTitle": {
+    "description": "Data centre screen title"
+  },
+  "dataHeroTitle": "Your data stays with you",
+  "dataHeroBody": "Madar keeps everything encrypted on this phone and uploads nothing. A file leaves only when you share or save it yourself.",
+  "dataStatRecords": "Records",
+  "dataStatLastBackup": "Last backup",
+  "dataLastBackupNever": "Not yet",
+  "dataLastBackupToday": "Today",
+  "dataLastBackupDaysAgo": "{days, plural, =1{Yesterday} other{{days} days ago}}",
+  "@dataLastBackupDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataBackupSection": "Backup",
+  "dataBackupSectionHint": "One encrypted file to move or safeguard your data",
+  "dataBackupCreateTitle": "Encrypted backup",
+  "dataBackupCreateBody": "One file, locked with a passphrase only you know. Keep it somewhere safe to move your data to a new phone.",
+  "dataBackupCreateAction": "Create backup",
+  "dataRestoreTitle": "Restore from a backup",
+  "dataRestoreBody": "Replaces everything in Madar with a backup file. A safety copy of your current data is kept on this phone first.",
+  "dataRestoreAction": "Choose a backup file",
+  "dataSafetyCopiesLine": "{count, plural, =1{1 safety copy on this phone} other{{count} safety copies on this phone}} · latest {date}",
+  "@dataSafetyCopiesLine": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataExportSection": "Export",
+  "dataExportSectionHint": "Readable copies of your data – not encrypted",
+  "dataExportSummaryTitle": "AI-ready summary",
+  "dataExportSummaryBody": "A short Markdown overview you review section by section before sharing.",
+  "dataExportCsvTitle": "Spreadsheets (CSV)",
+  "dataExportCsvBody": "Labs, transactions, pain and mood – for Excel or Sheets.",
+  "dataExportJsonTitle": "Everything (JSON)",
+  "dataExportJsonBody": "Every record in one file, for your own archive or other apps.",
+  "dataExportPlainWarning": "Exported files are not encrypted: anyone who gets them can read them. Share them only with people you trust.",
+  "dataImportSection": "Import",
+  "dataImportTitle": "Import from the Madar prototype",
+  "dataImportBody": "Bring in data exported from the earlier version (a JSON file).",
+  "dataFooter": "Madar never uploads your data to any server. You alone decide where your files go.",
+  "dataAreaOther": "Settings & history",
+  "dataShareAction": "Share",
+  "dataSaveAction": "Save to…",
+  "dataCopyAction": "Copy",
+  "dataDoneAction": "Done",
+  "dataCancelAction": "Cancel",
+  "dataTryAgainAction": "Try again",
+  "dataFileReadyTitle": "Your file is ready",
+  "dataFileReadySubtitle": "Choose where it goes – nothing is sent automatically",
+  "dataFileEncryptedNote": "Encrypted with your passphrase and opens only with it – keep the two apart.",
+  "dataFilePlainNote": "Not encrypted: anyone who gets this file can read it.",
+  "dataFileShared": "Handed to the share sheet.",
+  "dataFileSaved": "Saved where you chose.",
+  "dataFileSendFailed": "That didn’t work. Nothing was sent – please try again.",
+  "dataExportFailed": "Couldn’t prepare the file. Your data is unchanged.",
+  "dataRecordsCount": "{count, plural, =0{no records} =1{1 record} other{{count} records}}",
+  "@dataRecordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSizeBytes": "{size} bytes",
+  "@dataSizeBytes": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeKb": "{size} KB",
+  "@dataSizeKb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeMb": "{size} MB",
+  "@dataSizeMb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataBackupSheetTitle": "Encrypted backup",
+  "dataBackupSheetSubtitle": "AES-256 · keys derived with Argon2id on your phone",
+  "dataBackupSheetBody": "Choose a passphrase to lock the backup file. Madar never stores it and can’t recover it, so write it down somewhere you trust.",
+  "dataPassphraseLabel": "Passphrase",
+  "dataPassphraseConfirmLabel": "Type the passphrase again",
+  "dataPassphraseMismatch": "The two don’t match.",
+  "dataPassphraseShow": "Show passphrase",
+  "dataPassphraseHide": "Hide passphrase",
+  "dataPassphraseNeverStored": "The passphrase is never stored anywhere. Without it the backup can’t be opened – not even by us.",
+  "dataStrengthLabel": "Strength",
+  "dataStrengthEmpty": "—",
+  "dataStrengthVeryWeak": "Very weak",
+  "dataStrengthWeak": "Weak",
+  "dataStrengthFair": "Fair",
+  "dataStrengthStrong": "Strong",
+  "dataStrengthVeryStrong": "Very strong",
+  "dataStrengthHintShort": "Use at least {min} characters – a short sentence works well.",
+  "@dataStrengthHintShort": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "dataStrengthHintCommon": "This is a common password that’s easy to guess.",
+  "dataStrengthHintPattern": "Avoid repeats and runs like 1234 or aaaa.",
+  "dataStrengthHintDigits": "Digits alone are easy to guess; add some words.",
+  "dataStrengthHintWords": "Good. One or two more words make it much stronger.",
+  "dataBackupWorking": "Locking your data…",
+  "dataBackupWorkingHint": "This takes a few seconds on purpose – it makes the passphrase hard to guess.",
+  "dataBackupReadyTitle": "Backup ready",
+  "dataBackupReadySubtitle": "Share it or save it somewhere safe",
+  "dataBackupReadyHint": "Keep the file and the passphrase in different places. You’ll need both to restore.",
+  "dataBackupShareSubject": "Madar backup",
+  "dataBackupFailed": "Couldn’t create the backup. Your data is untouched – please try again.",
+  "dataBackupMadeOn": "Made on {date}",
+  "@dataBackupMadeOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvSheetTitle": "Spreadsheet export",
+  "dataCsvSheetSubtitle": "CSV · UTF-8 · opens in Excel and Sheets",
+  "dataCsvWhat": "What",
+  "dataCsvWhen": "When",
+  "dataCsvLabs": "Labs",
+  "dataCsvTransactions": "Transactions",
+  "dataCsvPain": "Pain",
+  "dataCsvMood": "Mood",
+  "dataRange30": "30 days",
+  "dataRange90": "90 days",
+  "dataRangeYear": "12 months",
+  "dataRangeAll": "All time",
+  "dataRangeCustom": "Custom…",
+  "dataRangeAllTime": "Every record since the start",
+  "dataRangeFromTo": "From {from} to {to}",
+  "@dataRangeFromTo": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvFormatNote": "Dates look like 2026-09-30 and numbers use a decimal point, so any spreadsheet opens them as they are.",
+  "dataCsvCreate": "Create file",
+  "dataCsvCreateRows": "{count, plural, =0{No rows in this range} =1{Create file (1 row)} other{Create file ({count} rows)}}",
+  "@dataCsvCreateRows": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataCsvDate": "date",
+  "dataCsvTime": "time",
+  "dataCsvTest": "test",
+  "dataCsvCategory": "category",
+  "dataCsvValue": "value",
+  "dataCsvTextResult": "text_result",
+  "dataCsvUnit": "unit",
+  "dataCsvRangeLow": "range_low",
+  "dataCsvRangeHigh": "range_high",
+  "dataCsvFlag": "flag",
+  "dataCsvNote": "note",
+  "dataCsvNotes": "notes",
+  "dataCsvKind": "kind",
+  "dataCsvWallet": "wallet",
+  "dataCsvCurrency": "currency",
+  "dataCsvAmount": "amount",
+  "dataCsvAmountBase": "amount_base",
+  "dataCsvBaseCurrency": "base_currency",
+  "dataCsvBudgetItem": "budget_item",
+  "dataCsvToWallet": "to_wallet",
+  "dataCsvToAmount": "to_amount",
+  "dataCsvToCurrency": "to_currency",
+  "dataCsvTags": "tags",
+  "dataCsvPainScore": "score_0_10",
+  "dataCsvLocations": "locations",
+  "dataCsvTriggers": "triggers",
+  "dataCsvBodyPoints": "body_points",
+  "dataCsvMoodScore": "mood_1_5",
+  "dataCsvStress": "stress_0_10",
+  "dataCsvAnxiety": "anxiety_0_10",
+  "dataCsvEnergy": "energy_0_10",
+  "dataCsvSleepHours": "sleep_hours",
+  "dataCsvCaffeine": "caffeine_cups",
+  "dataCsvFactors": "factors",
+  "dataFlagLow": "low",
+  "dataFlagBorderlineLow": "borderline low",
+  "dataFlagInRange": "in range",
+  "dataFlagBorderlineHigh": "borderline high",
+  "dataFlagHigh": "high",
+  "dataTxExpense": "expense",
+  "dataTxIncome": "income",
+  "dataTxTransfer": "transfer",
+  "dataTxAdjustment": "adjustment",
+  "dataSummarySubtitle": "Made on your phone · review each section before sharing",
+  "dataSummaryIntro": "Nothing goes anywhere until you choose. The preview below is exactly what would leave – notes, phone numbers and document or account numbers are never included.",
+  "dataSummaryPreparing": "Preparing the summary on your phone…",
+  "dataSummarySections": "Sections to include",
+  "dataSummarySectionsOf": "{selected} of {total} sections",
+  "@dataSummarySectionsOf": {
+    "placeholders": {
+      "selected": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryTokens": "≈ {count} tokens",
+  "@dataSummaryTokens": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryNoData": "No data yet",
+  "dataSummaryProfileHint": "Optional – you pick what’s mentioned",
+  "dataSummaryPreviewTitle": "Exactly what will be shared",
+  "dataSummaryCopied": "Summary copied to the clipboard.",
+  "dataSummaryUse": "Use this summary",
+  "dataProfileChoose": "Choose what to mention about you:",
+  "dataProfileAboutHint": "e.g. your age, or anything the assistant should know",
+  "dataRestoreFlowTitle": "Restore",
+  "dataRestoreChooseTitle": "Bring your data back",
+  "dataRestoreChooseBody": "Pick a .madarbackup file. You’ll see what’s inside before anything changes.",
+  "dataRestorePickFile": "Choose backup file",
+  "dataRestoreNothingChanges": "Nothing in your current data changes until you confirm the replacement in the last step.",
+  "dataSafetyCopiesTitle": "Safety copies on this phone",
+  "dataSafetyCopiesHint": "Made automatically before each restore; each opens with the passphrase used for that restore.",
+  "dataRestoreUnlockBody": "Enter the passphrase this backup was locked with.",
+  "dataRestoreUnlockAction": "Unlock backup",
+  "dataRestoreOtherFile": "Choose another file",
+  "dataRestoreOpening": "Checking the backup…",
+  "dataRestoreOpeningHint": "Making sure the file is intact and unchanged, then decrypting it on your phone.",
+  "dataRestorePreviewTitle": "The backup is intact",
+  "dataRestoreInBackup": "In the backup",
+  "dataRestoreOnPhone": "On this phone now",
+  "dataRestoreWhatsInside": "What’s inside",
+  "dataRestoreReplaceWarning": "This backup will replace all data in Madar now. First, your current data is saved as a safety copy on this phone, opening with the same passphrase.",
+  "dataRestoreUnderstand": "I understand my current data will be replaced",
+  "dataRestoreConfirmAction": "Replace my data",
+  "dataRestoreSavingSafety": "Saving a safety copy of your current data…",
+  "dataRestoreRestoring": "Restoring your data…",
+  "dataRestoreKeepOpen": "Keep the app open for a moment.",
+  "dataRestoreDoneTitle": "Restored",
+  "dataRestoreDoneBody": "Your records ({count}) are back in Madar.",
+  "@dataRestoreDoneBody": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestoreSafetyKept": "A safety copy of your previous data is kept on this phone and opens with the same passphrase.",
+  "dataSafetyCopySave": "Save the safety copy elsewhere",
+  "dataSafetyCopyTitle": "Safety copy",
+  "dataNothingChanged": "Nothing in your data was changed.",
+  "dataErrWrongPassphrase": "That passphrase doesn’t open this backup. Check for typos and try again.",
+  "dataErrNotBackupTitle": "This isn’t a Madar backup",
+  "dataErrNotBackupBody": "Choose a file ending in .madarbackup, made with “Create backup”.",
+  "dataErrNewerTitle": "Made by a newer Madar",
+  "dataErrNewerBody": "Update Madar on this phone, then try again.",
+  "dataErrTruncatedTitle": "The file is incomplete",
+  "dataErrTruncatedBody": "It may not have finished copying or downloading. Copy it again and retry.",
+  "dataErrCorruptedTitle": "The file is damaged",
+  "dataErrCorruptedBody": "It changed or was damaged after it was made, so it can’t be trusted.",
+  "dataErrUnreadableTitle": "Couldn’t read the file",
+  "dataErrUnreadableBody": "Try another file, or copy it to the phone first.",
+  "dataErrSafetyTitle": "Couldn’t save a safety copy",
+  "dataErrSafetyBody": "So your data was not replaced. Free some space and try again.",
+  "dataErrRejectedTitle": "This backup couldn’t be restored",
+  "dataErrRejectedBody": "Its data didn’t pass the safety checks.",
+  "dataSumHeading": "Madar summary — {date}",
+  "@dataSumHeading": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPreamble": "Personal tracking data from the Madar app, prepared on the user’s own phone. Dates are yyyy-mm-dd; decimals use a point. Notes, phone numbers and document or account numbers are never included.",
+  "dataSumNoData": "No data yet.",
+  "dataSumListSep": ", ",
+  "dataSumLastDays": "{days, plural, =1{Today} other{Last {days} days}}",
+  "@dataSumLastDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPreviousDays": "The {days} days before",
+  "@dataSumPreviousDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMore": "not shown: {count}",
+  "@dataSumMore": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProfile": "Profile",
+  "dataSumFaith": "Faith",
+  "dataSumHealth": "Health",
+  "dataSumMoney": "Money",
+  "dataSumFamily": "Family",
+  "dataSumWork": "Work",
+  "dataSumGrowth": "Growth",
+  "dataSumBody": "Body",
+  "dataSumTravel": "Travel",
+  "dataSumCustom": "Custom trackers",
+  "dataSumCity": "City",
+  "dataSumTimeZone": "Time zone",
+  "dataSumBaseCurrency": "Base currency",
+  "dataSumLanguage": "App language",
+  "dataSumLanguageName": "English",
+  "dataSumAboutMe": "About me",
+  "dataSumPrayersTitle": "Prayers",
+  "dataSumObligatory": "{window} (obligatory)",
+  "@dataSumObligatory": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLogged": "logged: {logged}/{expected}",
+  "@dataSumLogged": {
+    "placeholders": {
+      "logged": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOnTime": "on time: {count}",
+  "@dataSumOnTime": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLate": "late: {count}",
+  "@dataSumLate": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMadeUp": "made up: {count}",
+  "@dataSumMadeUp": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMissed": "missed: {count}",
+  "@dataSumMissed": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInCongregation": "in congregation: {count}",
+  "@dataSumInCongregation": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumVoluntary": "{window} (voluntary)",
+  "@dataSumVoluntary": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumQuranTitle": "Quran and wird",
+  "dataSumSessions": "sessions: {count}",
+  "@dataSumSessions": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPages": "pages: {count}",
+  "@dataSumPages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMinutes": "{count} min",
+  "@dataSumMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastSession": "Last session: {date}",
+  "@dataSumLastSession": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWird": "Wird “{name}”",
+  "@dataSumWird": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPerDay": "{amount} {unit} a day",
+  "@dataSumPerDay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumUnitPages": "pages",
+  "dataSumUnitJuz": "juz",
+  "dataSumUnitHizb": "hizb",
+  "dataSumUnitAyat": "ayat",
+  "dataSumSince": "since {date}",
+  "@dataSumSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBy": "by {date}",
+  "@dataSumBy": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHifzTitle": "Hifz",
+  "dataSumItems": "items: {count}",
+  "@dataSumItems": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNew": "new: {count}",
+  "@dataSumNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueToday": "due today: {count}",
+  "@dataSumDueToday": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumReviews": "reviews: {count}",
+  "@dataSumReviews": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvgGrade": "average grade: {value}/5",
+  "@dataSumAvgGrade": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAlertsTitle": "Standing alerts",
+  "dataSumSeverityCritical": "critical",
+  "dataSumSeverityWarning": "warning",
+  "dataSumSeverityInfo": "note",
+  "dataSumConditionsTitle": "Conditions",
+  "dataSumMedsTitle": "Active medications",
+  "dataSumKindSupplement": "supplement",
+  "dataSumKindInjection": "injection",
+  "dataSumWithEmptyStomach": "on an empty stomach",
+  "dataSumWithBreakfast": "with breakfast",
+  "dataSumWithLunch": "with lunch",
+  "dataSumWithDinner": "with dinner",
+  "dataSumWithBedtime": "at bedtime",
+  "dataSumWithCourse": "per course plan",
+  "dataSumLabsTitle": "Recent labs",
+  "dataSumLabsWindow": "Latest result per test in the last {months} months; flags compare with the range saved in the app.",
+  "@dataSumLabsWindow": {
+    "placeholders": {
+      "months": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColTest": "Test",
+  "dataSumColDate": "Date",
+  "dataSumColResult": "Result",
+  "dataSumColRange": "Range",
+  "dataSumColFlag": "Flag",
+  "dataSumColPrevious": "Previous",
+  "dataSumPainTitle": "Pain (tracking)",
+  "dataSumEntries": "entries: {count}",
+  "@dataSumEntries": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverageOf": "average: {value}/{max}",
+  "@dataSumAverageOf": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHighest": "highest: {value}/{max}",
+  "@dataSumHighest": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopPlaces": "Most logged places",
+  "dataSumTopTriggers": "Most logged triggers",
+  "dataSumMoodTitle": "Mood (tracking)",
+  "dataSumMoodAvg": "mood: {value}/5",
+  "@dataSumMoodAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumStressAvg": "stress: {value}/10",
+  "@dataSumStressAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAnxietyAvg": "anxiety: {value}/10",
+  "@dataSumAnxietyAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEnergyAvg": "energy: {value}/10",
+  "@dataSumEnergyAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSleepAvg": "sleep: {value} h",
+  "@dataSumSleepAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumCaffeineAvg": "caffeine: {value} cups",
+  "@dataSumCaffeineAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopFactors": "Common factors",
+  "dataSumWalletsTitle": "Wallets",
+  "dataSumConvertedTo": "Converted to {code} with the exchange rates saved in the app.",
+  "@dataSumConvertedTo": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColWallet": "Wallet",
+  "dataSumColBalance": "Balance",
+  "dataSumColInBase": "In {code}",
+  "@dataSumColInBase": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTotal": "Total: {amount}",
+  "@dataSumTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBudgetTitle": "Budget — {month}",
+  "@dataSumBudgetTitle": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPlanned": "planned: {amount}",
+  "@dataSumPlanned": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSpent": "spent: {amount}",
+  "@dataSumSpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRemaining": "remaining: {amount}",
+  "@dataSumRemaining": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverPlan": "Over plan",
+  "dataSumUnassigned": "Spent without a budget item: {amount}",
+  "@dataSumUnassigned": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTitle": "Due in the next {days} days",
+  "@dataSumDueTitle": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueOn": "due {date}",
+  "@dataSumDueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverdueSince": "overdue since {date}",
+  "@dataSumOverdueSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDebtsTitle": "Debts",
+  "dataSumIOwe": "I owe {person}: {left} left of {total}",
+  "@dataSumIOwe": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOwedToMe": "{person} owes me: {left} left of {total}",
+  "@dataSumOwedToMe": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumJarsTitle": "Savings jars",
+  "dataSumJar": "{name}: {saved} of {target} ({percent}%)",
+  "@dataSumJar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEvery": "rhythm: every {days} days",
+  "@dataSumEvery": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastContact": "days since last contact: {days}",
+  "@dataSumLastContact": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNeverContacted": "no contact logged yet",
+  "dataSumOverdueBy": "overdue by (days): {days}",
+  "@dataSumOverdueBy": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTodayStatus": "due today",
+  "dataSumDueIn": "due in (days): {days}",
+  "@dataSumDueIn": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoRhythm": "{count, plural, =1{1 more person without a contact rhythm} other{{count} more people without a contact rhythm}}",
+  "@dataSumNoRhythm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPeopleNoRhythm": "{count, plural, =1{1 person, no contact rhythm set} other{{count} people, no contact rhythm set}}",
+  "@dataSumPeopleNoRhythm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumTop3Title": "Top 3",
+  "dataSumOnBoard": "board: {board}",
+  "@dataSumOnBoard": {
+    "placeholders": {
+      "board": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBoardsTitle": "Boards",
+  "dataSumOther": "Other",
+  "dataSumProjectsTitle": "Projects",
+  "dataSumStatusActive": "active",
+  "dataSumStatusPaused": "paused",
+  "dataSumDoneOf": "items done: {done}/{total}",
+  "@dataSumDoneOf": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDeadline": "deadline: {date}",
+  "@dataSumDeadline": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProgress": "{current} of {target} {unit}",
+  "@dataSumProgress": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRecentGain": "{window}: {amount}",
+  "@dataSumRecentGain": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExercisePlanTitle": "Exercise plan",
+  "dataSumWeekdays": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+  "@dataSumWeekdays": {
+    "description": "Seven comma-separated weekday names, Monday first"
+  },
+  "dataSumSets": "sets: {count}",
+  "@dataSumSets": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumKg": "{value} kg",
+  "@dataSumKg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWorkouts": "workouts: {count}",
+  "@dataSumWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumFasting": "fasts: {count} · average: {hours} h",
+  "@dataSumFasting": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetHours": "target: {hours} h",
+  "@dataSumTargetHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWater": "Water, last {days} days: {ml} ml a day on average",
+  "@dataSumWater": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetMl": "target: {ml} ml",
+  "@dataSumTargetMl": {
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvoidTitle": "Avoid",
+  "dataSumTripsTitle": "Upcoming trips",
+  "dataSumTripPlanned": "planned",
+  "dataSumTripUnderWay": "under way",
+  "dataSumDocumentsTitle": "Documents (numbers are never included)",
+  "dataSumExpiresIn": "expires {date} (days left: {days})",
+  "@dataSumExpiresIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExpired": "expired {date}",
+  "@dataSumExpired": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoExpiry": "no expiry date",
+  "dataSumModuleTracker": "tracker",
+  "dataSumModuleList": "list",
+  "dataSumOpen": "open: {count}",
+  "@dataSumOpen": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDone": "done: {count}",
+  "@dataSumDone": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInWindow": "{window}: {count}",
+  "@dataSumInWindow": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastOn": "last: {date}",
+  "@dataSumLastOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverage": "average: {value}",
+  "@dataSumAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMin": "min: {value}",
+  "@dataSumMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMax": "max: {value}",
+  "@dataSumMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSum": "total: {value}",
+  "@dataSumSum": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTicked": "ticked: {count}/{total}",
+  "@dataSumTicked": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  }
 }

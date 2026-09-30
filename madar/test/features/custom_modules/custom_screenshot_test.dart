@@ -13,6 +13,7 @@ import 'package:madar/core/db/repositories/repositories.dart';
 import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/design/tokens.dart';
 import 'package:madar/core/design/widgets/widgets.dart';
+import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/features/custom_modules/custom_modules.dart';
 
 import '../../helpers/screenshot_harness.dart';
@@ -269,6 +270,37 @@ void main() {
         ModuleTemplateKey.dhikrCounter,
         theme: MadarThemeId.aurora,
         beforeCapture: (tester) => scroll(tester, 820),
+      );
+    });
+
+    testWidgets('blocked type change explained, Arabic, Lapis', (tester) async {
+      final ar = lookupL10n(const Locale('ar'));
+      await builderShot(
+        tester,
+        'migration_blocked_ar_lapis',
+        ModuleTemplateKey.readingLog,
+        beforeCapture: (tester) async {
+          await tester.scrollUntilVisible(find.textContaining(ar.cmodTplBook), 300, scrollable: find.byType(Scrollable).first);
+          // Let the list come to rest: a tap on a moving list only stops it.
+          for (var i = 0; i < 30; i++) {
+            await tester.pump(const Duration(milliseconds: 50));
+          }
+          await tester.tap(find.textContaining(ar.cmodTplBook).first);
+          for (var i = 0; i < 20; i++) {
+            await tester.pump(const Duration(milliseconds: 50));
+          }
+          await tester.tap(find.text(ar.cmodTypeNumber));
+          await tester.pump(const Duration(milliseconds: 50));
+          await tester.tap(find.text(ar.cmodSave).last);
+          for (var i = 0; i < 20; i++) {
+            await tester.pump(const Duration(milliseconds: 50));
+          }
+          await tester.tap(find.text(ar.cmodSave).last);
+          for (var i = 0; i < 10; i++) {
+            await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 5)));
+            await tester.pump(const Duration(milliseconds: 50));
+          }
+        },
       );
     });
 

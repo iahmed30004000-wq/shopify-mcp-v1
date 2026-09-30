@@ -27,7 +27,7 @@ enum ArabicKeyKind {
 final class ArabicKey {
   /// Creates a key.
   const ArabicKey(this.label, {this.kind = ArabicKeyKind.letter, this.variants = const [], String? letters})
-    : _letters = letters;
+    : _letters = letters; // ignore: prefer_initializing_formals
 
   /// The printed label.
   final String label;

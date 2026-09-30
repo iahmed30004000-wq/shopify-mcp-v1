@@ -299,7 +299,7 @@ class DataCsvBuilder {
       header: [
         l.dataCsvDate,
         l.dataCsvTime,
-        l.dataCsvMood,
+        l.dataCsvMoodScore,
         l.dataCsvStress,
         l.dataCsvAnxiety,
         l.dataCsvEnergy,

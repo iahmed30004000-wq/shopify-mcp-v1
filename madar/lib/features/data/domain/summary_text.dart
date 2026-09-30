@@ -22,7 +22,7 @@ abstract final class SummaryText {
   static final RegExp _date = RegExp('^(?:[$_d]{4}[-/.][$_d]{1,2}[-/.][$_d]{1,2}|[$_d]{1,2}[-/.][$_d]{1,2}[-/.][$_d]{2,4})\$');
   static final RegExp _space = RegExp(r'\s+');
   static final RegExp _controls = RegExp(
-    '[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F⁦-⁩‪-‮‎‏]',
+    '[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u2066-\u2069\u202A-\u202E\u200E\u200F]',
   );
 
   /// Masked marker for removed numbers.

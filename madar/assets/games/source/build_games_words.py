@@ -626,6 +626,8 @@ def build_typing(wf):
         expect(plain(text) != text, f'vowelled passage carries tashkeel: {text[:30]}')
         add('vowelled', lvl, text)
     for text, by_ar, by_en, lvl in Ty.SAYINGS:
+        bad = [w for w in re.findall(r'[\u0621-\u064A]+', plain(text)) if wf.is_blocked(w)]
+        expect(not bad, f'typing saying has no blocked word {bad}')
         add('saying', lvl, text, by={'ar': by_ar, 'en': by_en})
     for s, a0, a1, lvl in Ty.QURAN:
         ok = all((s, a) in ayat for a in range(a0, a1 + 1)) and (a0 > 1 or s == 1)

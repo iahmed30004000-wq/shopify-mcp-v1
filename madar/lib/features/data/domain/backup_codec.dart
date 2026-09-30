@@ -75,7 +75,7 @@ class MadarBackupCodec {
     final derived = await argon.deriveKey(secretKey: SecretKey(utf8.encode(passphrase)), nonce: salt);
     final bytes = Uint8List.fromList(await derived.extractBytes());
     final aesKey = Uint8List.fromList(bytes.sublist(0, 32));
-    final check = DartSha256().hashSync([...utf8.encode(_checkLabel), ...bytes.sublist(32, 64)]).bytes;
+    final check = const DartSha256().hashSync([...utf8.encode(_checkLabel), ...bytes.sublist(32, 64)]).bytes;
     bytes.fillRange(0, bytes.length, 0);
     return BackupKey(
       kdf: kdf,
@@ -87,7 +87,7 @@ class MadarBackupCodec {
 
   static Uint8List _randomBytes(Random random, int n) => Uint8List.fromList([for (var i = 0; i < n; i++) random.nextInt(256)]);
 
-  static List<int> _sha256(List<int> data) => DartSha256().hashSync(data).bytes;
+  static List<int> _sha256(List<int> data) => const DartSha256().hashSync(data).bytes;
 
   /// Encrypts [json] (the UTF-8 snapshot) with a key derived from
   /// [passphrase] and a fresh random salt. Returns the file bytes and the key

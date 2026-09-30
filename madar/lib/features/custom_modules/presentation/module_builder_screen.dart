@@ -476,6 +476,14 @@ class _ModuleBuilderScreenState extends ConsumerState<ModuleBuilderScreen> {
                         dense: true,
                         onTap: () => _set(d.copyWith(clearPlanet: true)),
                       ),
+                      // A planet hidden (or removed) since: keep it visible.
+                      if (d.planetKey != null && !planets.any((p) => p.key == d.planetKey))
+                        KitChip(
+                          label: tx.planet(d.planetKey) ?? d.planetKey!,
+                          selected: true,
+                          dense: true,
+                          onTap: () {},
+                        ),
                       for (final p in planets)
                         KitChip(
                           label: tx.arabic ? p.nameAr : p.nameEn,

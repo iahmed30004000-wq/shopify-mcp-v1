@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../core/design/painters/painters.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/i18n/formatters.dart';
@@ -363,7 +362,8 @@ class PassphraseStrengthMeter extends StatelessWidget {
       PassphraseLevel.strong => 4,
       PassphraseLevel.veryStrong => 5,
     };
-    final hint = hintText(l, check.hint);
+    final rawHint = hintText(l, check.hint);
+    final hint = rawHint == null ? null : context.formatter.localizeDigits(rawHint);
     final duration = context.motion(MadarMotion.short);
     return Semantics(
       liveRegion: true,

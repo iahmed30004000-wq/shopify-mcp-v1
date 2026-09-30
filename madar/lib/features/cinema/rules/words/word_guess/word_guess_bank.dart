@@ -59,8 +59,8 @@ final class WordGuessBank {
     for (final e in raw.entries) {
       answers[int.parse(e.key)] = [
         for (final pair in e.value! as List<Object?>)
-          if (!filter.isUnsuitable((pair! as List<Object?>)[0]! as String))
-            AnswerWord(pair[0]! as String, pair[1]! as String),
+          if (pair case [final String word, final String vowelled] when !filter.isUnsuitable(word))
+            AnswerWord(word, vowelled),
       ];
     }
     return WordGuessBank(answers: answers, lexicon: lexicon, filter: filter);

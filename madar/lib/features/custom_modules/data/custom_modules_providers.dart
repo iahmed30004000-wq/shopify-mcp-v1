@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/db/database.dart';
 import '../../../core/db/repositories/repositories.dart';
+import '../../../core/domain/enums.dart';
 import '../../../core/notifications/notification_models.dart';
 import '../../../core/notifications/notification_providers.dart';
 import '../../../core/settings/app_settings.dart';
@@ -100,6 +101,17 @@ final customPlanetModulesProvider = Provider.family<AsyncValue<List<ModuleSummar
       .whenData((all) => [
             for (final s in all)
               if (!s.module.archived && s.module.planetKey == planetKey) s,
+          ]);
+});
+
+/// Live trackers placed in [window] that have nothing logged today – for
+/// the home panel's current prayer window ("log your reading after Fajr").
+final customWindowModulesProvider = Provider.family<AsyncValue<List<ModuleSummary>>, PrayerWindow>((ref, window) {
+  return ref
+      .watch(customModuleSummariesProvider)
+      .whenData((all) => [
+            for (final s in all)
+              if (!s.module.archived && s.module.isTracker && s.module.window == window && s.todayCount == 0) s,
           ]);
 });
 
