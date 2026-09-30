@@ -1,6 +1,6 @@
-/// Madar's app lock: fingerprint (local_auth) with the Madar PIN as the
-/// fallback, the hold-to-unlock astrolabe, the background time-out and the
-/// privacy shield.
+/// Madar's app lock: fingerprint (local_auth; the prompt opens by itself
+/// while the astrolabe assembles) with the Madar PIN as the fallback, the
+/// background time-out and the privacy shield.
 ///
 /// * Gate: `BiometricLockGate` (lib/app/lock_gate.dart) is the default
 ///   `lockGateProvider`; it hosts the app in [LockGateHost].

@@ -5,8 +5,9 @@
     "description": "Line under the app name on the lock screen"
   },
   "lockHoldHint": {
-    "ar": "اضغط مطوّلًا على الأسطرلاب لتفتح مَدار",
-    "en": "Press and hold the astrolabe to unlock"
+    "ar": "افتح مَدار ببصمتك",
+    "en": "Unlock Madar with your fingerprint",
+    "description": "Hint under the lock screen astrolabe when the fingerprint prompt is not showing (after a cancel), above the large \"Use fingerprint\" button"
   },
   "lockHoldingHint": {
     "ar": "أبقِ إصبعك… الأسطرلاب يكتمل",
@@ -74,7 +75,8 @@
   },
   "lockUseFingerprint": {
     "ar": "استخدم البصمة",
-    "en": "Use fingerprint"
+    "en": "Use fingerprint",
+    "description": "Large button on the lock screen that opens the fingerprint prompt again (after a cancel or an error)"
   },
   "lockForgotPin": {
     "ar": "نسيت الرمز؟",
@@ -98,15 +100,10 @@
     "ar": "تحقّق من هويتك لتغيير إعدادات القفل",
     "en": "Confirm it's you to change the lock settings"
   },
-  "lockPromptCancel": {
-    "ar": "استخدم الرمز",
-    "en": "Use PIN",
-    "description": "Negative button of the system fingerprint prompt (max 30 characters)"
-  },
   "lockPromptCancelPlain": {
     "ar": "إلغاء",
     "en": "Cancel",
-    "description": "Negative button of the fingerprint prompt in settings (max 30 characters)"
+    "description": "Negative button of the system fingerprint prompt (max 30 characters)"
   },
   "lockStorageError": {
     "ar": "تعذّرت قراءة الخزنة الآمنة على هاتفك.",
@@ -383,7 +380,7 @@
     "en": "Couldn't verify your fingerprint. Try again or use your PIN."
   },
   "lockBioInterrupted": {
-    "ar": "انقطع التحقّق. اضغط مطوّلًا لتعيد المحاولة.",
-    "en": "Verification was interrupted. Press and hold to try again."
+    "ar": "انقطع التحقّق بالبصمة. حاول مجددًا.",
+    "en": "The fingerprint check was interrupted. Try again."
   }
 }

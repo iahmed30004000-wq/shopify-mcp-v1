@@ -28,9 +28,10 @@ class NoLockGate extends LockGate {
   Widget wrap(BuildContext context, Widget app) => app;
 }
 
-/// The Phase 2 app lock: fingerprint (local_auth) with the Madar PIN as
-/// fallback, the hold-to-unlock astrolabe, the background time-out and the
-/// privacy shield ([LockGateHost]).
+/// The Phase 2 app lock: fingerprint (local_auth; the system prompt opens by
+/// itself on the lock screen while the astrolabe assembles) with the Madar
+/// PIN as fallback, the background time-out and the privacy shield
+/// ([LockGateHost]).
 ///
 /// It is always installed and follows Settings › Security: the lock is only
 /// active when `AppSettings.lockEnabled` is on and a PIN has been set, so a

@@ -47,12 +47,6 @@ import 'suspending_flows.dart';
 ///    database is open; recitation starts audio_service on the first play
 ///    and plays in the foreground only when that fails; the qibla's sensors
 ///    run only while its page shows.
-/// 8. Phase 4 (health) likewise waits for the database: dose reminders (the
-///    next 48 hours, with Taken / Snooze / Skip), appointment reminders and
-///    the worry window are planned by the app's services; the dose buttons
-///    pressed in the shade run in the notifications plugin's background
-///    isolate (`medsNotificationBackgroundTap`, installed with the plugin in
-///    [suspendingFlowOverrides]).
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   installErrorHooks();

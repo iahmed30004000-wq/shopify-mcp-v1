@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' show Color, Offset, Rect, Size;
 
+import 'package:flutter/animation.dart' show Curve, Curves;
 import 'package:flutter/foundation.dart';
 
 import '../../../../core/motion/springs.dart';
@@ -30,6 +31,10 @@ class _MoonState {
   double appear;
   final MoonFrame frame;
 
+  /// The turn a [PlanetSceneController.respread] adds (radians), and how
+  /// much of it has been applied so far.
+  double homeDelta = 0, homeApplied = 0;
+
   double get inclination => MoonLayout.inclinationOf(moon.seed);
   double get node => MoonLayout.nodeOf(moon.seed);
 }
@@ -46,6 +51,10 @@ class _BodyState {
   double angle;
   final BodyFrame frame;
   final Map<String, _MoonState> moons = {};
+
+  /// The turn a [PlanetSceneController.respread] adds (radians), and how
+  /// much of it has been applied so far.
+  double homeDelta = 0, homeApplied = 0;
 
   late double inclination, node, tilt, spinPeriod, spinPhase, worldRadius;
 
@@ -79,6 +88,8 @@ class PlanetSceneController extends ChangeNotifier {
     this.star = V3.zero,
     this.coreRadius = 0.52,
   }) : _time = initialTime,
+       _startTime = initialTime,
+       _homeAt = initialTime,
        living = LivingStateAnimator(time: initialTime);
 
   final PlanetSystemLayout layout;
@@ -343,6 +354,8 @@ class PlanetSceneController extends ChangeNotifier {
           m.appear = 1;
         }
       }
+      // A glide home in progress lands at once (the clock stops).
+      if (respreading) _stepHome(1);
       planetLabels.settle();
       moonLabels.settle();
     }
@@ -355,13 +368,139 @@ class PlanetSceneController extends ChangeNotifier {
 
   double _time;
 
+  /// The clock when the scene started: the worlds' "home" positions (a
+  /// golden angle apart) are where they stood then.
+  final double _startTime;
+
   /// Shader clock in seconds (frozen under reduced motion).
   double get time => _time;
+
+  // ------------------------------------------------------------------ home --
+
+  /// Seconds a [respread] glide takes.
+  static const double respreadSeconds = 1.1;
+
+  static const Curve _respreadCurve = Curves.easeInOutCubic;
+
+  double _respreadT = 1;
+  double _homeAt;
+
+  /// Worlds are gliding home ([respread]).
+  bool get respreading => _respreadT < 1;
+
+  int _labelLayoutEpoch = 0;
+
+  /// Bumped by [relayoutLabels]: the label painters then forget the spots
+  /// their labels held (hysteresis) and place every label afresh.
+  int get labelLayoutEpoch => _labelLayoutEpoch;
+
+  /// Lets every name label choose its spot anew – as on a fresh start –
+  /// rather than keep the side an earlier view gave it.
+  void relayoutLabels() {
+    _labelLayoutEpoch++;
+    notifyListeners();
+  }
+
+  /// Seconds of orbit since the worlds last stood at home (the start, or
+  /// the end of the last [respread]).
+  double get secondsSinceHome => math.max(0, _time - _homeAt);
+
+  /// The angle the [index]-th of [count] worlds (of [seed]) stands at when
+  /// the scene starts: [PlanetSystemLayout.initialAngle] turned by its line
+  /// of nodes, so the worlds' apparent longitudes are evenly spread and no
+  /// two of them overlap.
+  double homeAngleOf(int index, int count, double seed) =>
+      layout.initialAngle(index) +
+      layout.nodeOf(seed) +
+      layout.angularSpeedFor(layout.laneRadius(index, count)) * _startTime;
+
+  /// Glides every world – and every moon around it – along its orbit, the
+  /// short way round, back to where it stood when the scene started: the
+  /// even, non-overlapping layout of a fresh start (the worlds orbit at
+  /// different speeds, so over minutes they drift into each other). They
+  /// keep orbiting meanwhile, so afterwards the system is exactly what a
+  /// fresh start shows [respreadSeconds] later. Without [animate] (or under
+  /// reduced motion) they jump.
+  void respread({bool animate = true}) {
+    final count = _bodies.length;
+    for (var i = 0; i < count; i++) {
+      final st = _bodies[i];
+      st
+        ..homeDelta = _arc(st.angle, homeAngleOf(i, count, st.body.seed))
+        ..homeApplied = 0;
+      final moons = st.moons.values.toList();
+      for (var j = 0; j < moons.length; j++) {
+        final ms = moons[j];
+        final lane = MoonLayout.laneOf(j, moons.length, st.body.archetype);
+        final home =
+            MoonLayout.initialAngle(j, moons.length, ms.moon.seed) + _tau * _startTime / MoonLayout.periodOf(lane);
+        ms
+          ..homeDelta = _arc(ms.angle, home)
+          ..homeApplied = 0;
+      }
+    }
+    _homeAt = _time;
+    _respreadT = 0;
+    if (!animate || _reducedMotion) _stepHome(1);
+    _dirty = true;
+    _guides.ping();
+    notifyListeners();
+  }
+
+  /// Moves the glide home on to progress [t] (0..1).
+  void _stepHome(double t) {
+    _respreadT = t.clamp(0.0, 1.0);
+    final e = _respreadT >= 1 ? 1.0 : _respreadCurve.transform(_respreadT);
+    for (final b in _bodies) {
+      final want = b.homeDelta * e;
+      b.angle = (b.angle + want - b.homeApplied) % _tau;
+      b.homeApplied = want;
+      for (final m in b.moons.values) {
+        final w = m.homeDelta * e;
+        m.angle = (m.angle + w - m.homeApplied) % _tau;
+        m.homeApplied = w;
+      }
+    }
+    if (_respreadT >= 1) {
+      _homeAt = _time;
+      for (final b in _bodies) {
+        b.homeDelta = b.homeApplied = 0;
+        for (final m in b.moons.values) {
+          m.homeDelta = m.homeApplied = 0;
+        }
+      }
+    }
+  }
+
+  /// Signed shortest turn from [from] to [to] (radians, −π … π).
+  static double _arc(double from, double to) {
+    var d = (to - from) % _tau;
+    if (d > math.pi) d -= _tau;
+    return d;
+  }
+
+  /// Whether two worlds on screen overlap by more than [overlap] px – their
+  /// orbits have carried them in front of each other (a fresh start never
+  /// shows that).
+  bool crowded(Size viewport, {double overlap = 4}) {
+    if (viewport.isEmpty) return false;
+    final bodies = frameFor(viewport).bodies;
+    for (var i = 0; i < bodies.length; i++) {
+      final a = bodies[i];
+      if (!a.visible) continue;
+      for (var j = i + 1; j < bodies.length; j++) {
+        final b = bodies[j];
+        if (!b.visible) continue;
+        if ((a.center - b.center).distance < a.radius + b.radius - overlap) return true;
+      }
+    }
+    return false;
+  }
 
   /// A spring, pulse, arrival or fade is running – tick at full rate; when
   /// false the scene may idle at 30 fps (the orbits still drift).
   bool get isAnimating {
-    if (living.isAnimating || planetLabels.isAnimating || moonLabels.isAnimating) return true;
+    if (respreading || living.isAnimating || planetLabels.isAnimating || moonLabels.isAnimating) return true;
     for (final b in _bodies) {
       if (!b.lane.isAtRest) return true;
       for (final m in b.moons.values) {
@@ -395,6 +534,8 @@ class PlanetSceneController extends ChangeNotifier {
         if (m.appear < 1) m.appear = math.min(1, m.appear + dt / 0.5);
       }
     }
+    // The glide home rides on top of the orbits.
+    if (respreading) _stepHome(_respreadT + dt / respreadSeconds);
     living.advance(dt);
     planetLabels.advance(dt);
     moonLabels.advance(dt);

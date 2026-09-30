@@ -567,6 +567,9 @@ class PlanetLabelCache {
   /// The candidate slot each label used last frame (hysteresis).
   final Map<String, int> slots = {};
 
+  /// [PlanetSceneController.labelLayoutEpoch] the [slots] belong to.
+  int layoutEpoch = 0;
+
   /// Displayed offset of each label's centre from its body's centre (it
   /// glides to a new spot instead of jumping).
   final Map<String, Offset> shown = {};
@@ -668,6 +671,12 @@ class PlanetLabelsPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final f = controller.frameFor(size);
     cache.begin(_sky, textDirection);
+    // A reset view: every label chooses its spot afresh (and glides there),
+    // instead of keeping the side a turned or zoomed view gave it.
+    if (cache.layoutEpoch != controller.labelLayoutEpoch) {
+      cache.slots.clear();
+      cache.layoutEpoch = controller.labelLayoutEpoch;
+    }
     final snapNow = snap || controller.reducedMotion;
     final t = controller.time;
     final dt = cache.lastTime.isNaN ? 0.0 : (t - cache.lastTime).clamp(0.0, 0.1);

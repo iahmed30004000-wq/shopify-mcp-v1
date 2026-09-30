@@ -576,6 +576,230 @@ void main() {
     });
   });
 
+  group('reset view', () {
+    Finder resetPill() => find.bySemanticsLabel(_ar.orbitUiRecenter);
+    Finder pillButton() => find.byWidgetPredicate((w) => w is MadarButton && w.label == _ar.orbitUiRecenter);
+
+    /// The pill is faded in and takes touches.
+    bool pillShown(WidgetTester tester) {
+      final fade = tester.widget<AnimatedOpacity>(
+        find.ancestor(of: pillButton(), matching: find.byType(AnimatedOpacity)).first,
+      );
+      final ignore = tester.widget<IgnorePointer>(
+        find.ancestor(of: pillButton(), matching: find.byType(IgnorePointer)).first,
+      );
+      return fade.opacity == 1 && !ignore.ignoring;
+    }
+
+    /// A point on empty sky inside the scene's band (no world, moon, pointer
+    /// or dial; clear of the reset pill).
+    Offset emptySky(WidgetTester tester) {
+      final c = _scene(tester);
+      final band = c.sceneRect;
+      final pill = tester.getRect(pillButton()).inflate(40);
+      for (var y = band.top + 60; y < band.bottom - 20; y += 10) {
+        for (var x = 24.0; x < band.right - 24; x += 10) {
+          final p = Offset(x, y);
+          if (c.hitTest(p) != null || pill.contains(p)) continue;
+          final near = c.planets.frameFor(c.viewport).bodies.any((b) => (b.center - p).distance < b.radius * 2 + 20);
+          if (!near && (p - c.coreCenter).distance > c.coreRadius * 1.1) return p;
+        }
+      }
+      fail('no empty sky');
+    }
+
+    Future<void> settleRig(WidgetTester tester) async {
+      final c = _scene(tester);
+      for (var i = 0; i < 400 && (c.rig.isMoving || c.planets.respreading); i++) {
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await _pumpFrames(tester, 30);
+    }
+
+    testWidgets('hidden at the overview; a clear pill once the view is turned; it puts everything back', (
+      tester,
+    ) async {
+      final app = await pumpMadarApp(tester, beforePump: _prayerSettings);
+      final c = _scene(tester);
+      final overview = c.camera;
+      expect(pillShown(tester), isFalse, reason: 'nothing to reset on a fresh start');
+      expect(find.semantics.byLabel(_ar.orbitUiRecenter), findsNothing);
+
+      // Turn and tilt the orbit.
+      final g = await tester.startGesture(emptySky(tester));
+      for (var i = 0; i < 10; i++) {
+        await g.moveBy(const Offset(-14, 6));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await g.up();
+      await _pumpFrames(tester, 30);
+      expect(c.rig.isAway, isTrue);
+      expect(pillShown(tester), isTrue);
+      expect(resetPill(), findsOneWidget);
+      final size = tester.getSize(resetPill());
+      expect(size.height, greaterThanOrEqualTo(44), reason: 'a real touch target');
+      expect(find.text(_ar.orbitUiRecenter), findsOneWidget, reason: 'labelled, not a cryptic icon');
+      // Names never slide under it.
+      expect(c.planets.labelKeepOut, isNotEmpty);
+
+      app.sound.played.clear();
+      await tester.tap(resetPill());
+      await tester.pump();
+      await _pumpFrames(tester, 20);
+      expect(app.sound.played, [Sfx.navigate], reason: 'one sound, not two');
+      expect(pillShown(tester), isFalse, reason: 'it steps aside while the view springs home – no blinking back');
+      await settleRig(tester);
+      expect((c.rig.yaw, c.rig.tilt, c.rig.zoom), (0, 0, 0));
+      expect(c.camera.distance, closeTo(overview.distance, 1e-9));
+      expect(c.camera.elevation, closeTo(overview.elevation, 0.02), reason: 'only the drift’s breath differs');
+      expect(pillShown(tester), isFalse);
+      expect(find.semantics.byLabel(_ar.orbitUiRecenter), findsNothing, reason: 'screen readers no longer meet it');
+      expect(c.planets.labelKeepOut, isEmpty);
+    });
+
+    testWidgets('a double tap on empty sky resets too; a single one does nothing', (tester) async {
+      final app = await pumpMadarApp(tester, beforePump: _prayerSettings);
+      final c = _scene(tester);
+      // A real two-finger pinch on the dial.
+      final focal = c.coreCenter;
+      final a = await tester.startGesture(focal - const Offset(24, 0));
+      final b = await tester.startGesture(focal + const Offset(24, 0));
+      for (var i = 1; i <= 10; i++) {
+        await a.moveTo(focal - Offset(24 + 3.0 * i, 0));
+        await b.moveTo(focal + Offset(24 + 3.0 * i, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await _pumpFrames(tester, 20);
+      expect(c.rig.zoom, greaterThan(0.2));
+      expect(pillShown(tester), isTrue);
+      expect(resetPill(), findsOneWidget);
+      final sky = emptySky(tester);
+
+      await tester.tapAt(sky);
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(c.rig.zoom, greaterThan(0.2), reason: 'one tap on the sky is not a reset');
+      expect(app.location, AppRoutes.home);
+
+      await tester.tapAt(sky);
+      await tester.pump(const Duration(milliseconds: 90));
+      await tester.tapAt(sky + const Offset(6, -4));
+      await tester.pump();
+      expect(c.rig.isHoming, isTrue);
+      await settleRig(tester);
+      expect(c.rig.zoom, 0);
+      expect(c.rig.zoomKey, isNull);
+      expect(pillShown(tester), isFalse);
+    });
+
+    testWidgets('two quick taps on a world are never a reset', (tester) async {
+      final app = await pumpMadarApp(tester, beforePump: _prayerSettings);
+      final c = _scene(tester);
+      c.rig
+        ..begin()
+        ..dragBy(const Offset(-80, 0), c.viewport, baseElevation: c.baseCamera.elevation)
+        ..end();
+      await _pumpFrames(tester, 10);
+      final key = _tappableWorld(tester);
+      await tester.tapAt(c.planetDisc(key)!.$1);
+      await tester.pump();
+      expect(c.rig.isHoming, isFalse);
+      await _pumpFrames(tester, 50);
+      await settleApp(tester);
+      expect(app.location, AppRoutes.planetOf(key));
+    });
+
+    testWidgets('worlds drifted into each other: the pill offers itself and re-spreads them', (tester) async {
+      await pumpMadarApp(tester, beforePump: _prayerSettings);
+      AmbientMotion.debugOverride = true;
+      addTearDown(() => AmbientMotion.debugOverride = null);
+      final c = _scene(tester);
+      // Minutes of orbiting at different speeds.
+      for (var s = 0; s < 900 && !c.planets.crowded(c.viewport); s++) {
+        c.planets.advanceSeconds(1);
+      }
+      c.refresh();
+      expect(c.planets.crowded(c.viewport), isTrue);
+      expect(c.rig.isAway, isFalse, reason: 'the camera never moved');
+      // A touch wakes the idle scene (it re-reads the ambient switch).
+      await tester.tap(find.byType(OrbitScene), warnIfMissed: false);
+      await _pumpFrames(tester, 90);
+      expect(pillShown(tester), isTrue);
+      expect(resetPill(), findsOneWidget);
+      await tester.tap(resetPill());
+      await tester.pump();
+      await settleRig(tester);
+      expect(c.planets.crowded(c.viewport), isFalse, reason: 'back to the even layout of a fresh start');
+      expect(pillShown(tester), isFalse);
+    });
+
+    testWidgets('a pinch cut off by leaving the app never comes back stuck mid-zoom', (tester) async {
+      final app = await pumpMadarApp(tester, beforePump: _prayerSettings);
+      final c = _scene(tester);
+      // Two fingers pinching deep into the dial …
+      final focal = c.coreCenter;
+      final a = await tester.startGesture(focal - const Offset(24, 0));
+      final b = await tester.startGesture(focal + const Offset(24, 0));
+      for (var i = 1; i <= 12; i++) {
+        await a.moveTo(focal - Offset(24 + 5.0 * i, 0));
+        await b.moveTo(focal + Offset(24 + 5.0 * i, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      expect(c.rig.zoom, greaterThan(0.3));
+      expect(c.rig.interacting, isTrue);
+      // … when the app is left (the gesture's end never arrives in time).
+      for (final s in [AppLifecycleState.inactive, AppLifecycleState.hidden, AppLifecycleState.paused]) {
+        tester.binding.handleAppLifecycleStateChanged(s);
+      }
+      await tester.pump();
+      expect(c.rig.interacting, isFalse, reason: 'the touch is let go');
+      for (final s in [AppLifecycleState.hidden, AppLifecycleState.inactive, AppLifecycleState.resumed]) {
+        tester.binding.handleAppLifecycleStateChanged(s);
+      }
+      // The late end of that touch changes nothing (no fling, no page).
+      await a.up();
+      await b.up();
+      await tester.pump();
+      await settleRig(tester);
+      expect(c.rig.zoom, 0, reason: 'springs back out to the whole system');
+      expect(c.rig.zoomKey, isNull);
+      expect(c.rig.isMoving, isFalse);
+      expect(app.location, AppRoutes.home);
+      expect(c.rig.interacting, isFalse);
+      // Nothing keeps the scene at full rate.
+      for (var i = 0; i < 400 && c.governor.mode == SceneMode.live; i++) {
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      expect(c.governor.mode, isNot(SceneMode.live));
+    });
+
+    testWidgets('reduced motion: the reset is a cut', (tester) async {
+      await pumpMadarApp(
+        tester,
+        settings: const AppSettings(onboarded: true, motion: MotionPreference.reduced),
+        beforePump: _prayerSettings,
+      );
+      final c = _scene(tester);
+      final overview = c.camera;
+      final g = await tester.startGesture(emptySky(tester));
+      for (var i = 0; i < 6; i++) {
+        await g.moveBy(const Offset(-20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await g.up();
+      await _pumpFrames(tester, 30);
+      expect(pillShown(tester), isTrue);
+      expect(resetPill(), findsOneWidget);
+      await tester.tap(resetPill());
+      await tester.pump();
+      expect(c.rig.isMoving, isFalse);
+      expect(c.camera.azimuth, closeTo(overview.azimuth, 1e-9));
+      await settleApp(tester);
+      expect(pillShown(tester), isFalse);
+    });
+  });
+
   group('power', () {
     testWidgets('touching the scene runs it at full rate; the idle drift at 30 fps', (tester) async {
       await pumpMadarApp(tester, beforePump: _prayerSettings);

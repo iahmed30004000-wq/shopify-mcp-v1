@@ -14,7 +14,6 @@ import '../../features/prayer/presentation/prayer_settings_screen.dart';
 import '../../features/qibla/qibla.dart' show QiblaScreen;
 import '../../features/recitation/recitation.dart' show RecitationSettingsScreen;
 import '../../features/settings/appearance_screen.dart';
-import '../../features/settings/health_settings_screen.dart';
 import '../../features/settings/licenses_screen.dart';
 import '../../features/settings/quran_settings_screen.dart';
 import '../../features/settings/reminders_settings_screen.dart';
@@ -24,7 +23,6 @@ import '../../features/settings/sound_settings_screen.dart';
 import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
-import 'health_route_pages.dart';
 import 'now_playing_dock.dart';
 import 'route_pages.dart';
 import 'routes.dart';
@@ -63,10 +61,8 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// Transitions: home and onboarding fade through; settings pages and the
 /// faith pages (prayer times, tracker, adhkar, the Quran's home, reader and
 /// search, the wird, Hifz and its reviews, recitation and its downloads)
-/// and the health pages (medications, the medical record, a lab test, the
-/// appointments, wellbeing, Settings › Health) move along the reading
-/// direction (shared axis); the tasbeeh, the qibla compass, guided
-/// breathing and the design gallery zoom in (scaled shared axis); the
+/// move along the reading direction (shared axis); the tasbeeh, the qibla
+/// compass and the design gallery zoom in (scaled shared axis); the
 /// importer rises as a sheet, and the full recitation player
 /// (`/now-playing`) as an interaction sheet over the page beneath; a planet
 /// page is a transparent route whose animation drives the orbit's fly-in /
@@ -168,14 +164,6 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: const RemindersSettingsScreen(),
-            ),
-          ),
-          GoRoute(
-            path: 'health',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: const HealthSettingsScreen(),
             ),
           ),
         ],
@@ -286,60 +274,6 @@ List<RouteBase> madarRoutes() => [
           axis: MadarSharedAxis.scaled,
           child: const QiblaScreen(),
         ),
-      ),
-      // Phase 4 – health.
-      GoRoute(
-        path: 'meds',
-        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-          context: context,
-          key: state.pageKey,
-          child: MedsRoutePage(tab: MedsRoutePage.tabOf(state.uri.queryParameters['tab'])),
-        ),
-      ),
-      GoRoute(
-        path: 'record',
-        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-          context: context,
-          key: state.pageKey,
-          child: RecordRoutePage(tab: RecordRoutePage.tabOf(state.uri.queryParameters['tab'])),
-        ),
-        routes: [
-          GoRoute(
-            path: 'appointments',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: AppointmentsRoutePage(highlightId: state.uri.queryParameters['highlight']),
-            ),
-          ),
-          GoRoute(
-            path: 'lab/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: LabTestRoutePage(testId: state.pathParameters['id']!),
-            ),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: 'wellbeing',
-        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-          context: context,
-          key: state.pageKey,
-          child: WellbeingRoutePage(tab: WellbeingRoutePage.tabOf(state.uri.queryParameters['tab'])),
-        ),
-        routes: [
-          GoRoute(
-            path: 'breathing',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              axis: MadarSharedAxis.scaled,
-              child: BreathingRoutePage(pattern: BreathingRoutePage.patternOf(state.uri.queryParameters['pattern'])),
-            ),
-          ),
-        ],
       ),
       GoRoute(
         path: 'now-playing',

@@ -5,13 +5,15 @@ import '../data/biometric_auth.dart';
 
 /// Localised texts shared by the lock screen and the security settings.
 abstract final class LockTexts {
-  /// The system prompt on the lock screen; its negative button switches to
-  /// the PIN when one exists.
-  static BiometricPromptText unlockPrompt(L10n l, {bool pinFallback = true}) => BiometricPromptText(
+  /// The system prompt on the lock screen. Its negative button is a plain
+  /// "Cancel": local_auth reports it exactly like a dismissal, and either
+  /// way the lock screen stays on its fingerprint face with a large "Use
+  /// fingerprint" button and the PIN one tap away.
+  static BiometricPromptText unlockPrompt(L10n l) => BiometricPromptText(
     reason: l.lockPromptReason,
     title: l.lockPromptTitle,
     hint: l.lockPromptHint,
-    cancel: pinFallback ? l.lockPromptCancel : l.lockPromptCancelPlain,
+    cancel: l.lockPromptCancelPlain,
   );
 
   /// The system prompt confirming a change in Settings.

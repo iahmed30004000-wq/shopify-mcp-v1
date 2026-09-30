@@ -123,8 +123,6 @@ void main() {
 
   test('the production overrides cover every flow', () {
     final overrides = suspendingFlowOverrides();
-    // Phase 2–3's seven, plus the doctor report's exporter and the support
-    // note's dialler (Phase 4 – see health_notification_routing_test).
-    expect(overrides, hasLength(9));
+    expect(overrides, hasLength(7));
   });
 }

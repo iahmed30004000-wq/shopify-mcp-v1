@@ -26,7 +26,10 @@ import 'pin_pad.dart';
 
 /// What the lock screen is showing.
 enum LockScreenMode {
-  /// Hold the astrolabe; the fingerprint prompt opens when it is half built.
+  /// The fingerprint face: the system prompt opens by itself as soon as the
+  /// screen shows (and again on every return to the app) while the
+  /// astrolabe assembles; after a cancel or an error a large "Use
+  /// fingerprint" button asks again – so does holding the astrolabe.
   hold,
 
   /// The PIN keypad.
@@ -47,10 +50,18 @@ class LockBackHandler {
   bool handle() => onBack?.call() ?? false;
 }
 
-/// The lock screen: the brass astrolabe assembles itself as the owner holds
-/// it and as the fingerprint is read (or digit by digit as the PIN is
-/// typed), locks together with a chime and golden sparks, and then opens
-/// like a double door into the app.
+/// The lock screen: the brass astrolabe assembles itself as the fingerprint
+/// is read (or digit by digit as the PIN is typed), locks together with a
+/// chime and golden sparks, and then opens like a double door into the app.
+///
+/// With fingerprint unlock on, the system prompt is requested by itself
+/// right after the first frame – on a cold start and whenever the app
+/// returns to the foreground to this screen – but only while the app is
+/// really in the foreground (`resumed`), never twice at once, and never
+/// again by itself after the owner cancelled it or it failed (no prompt
+/// loop): then a large "Use fingerprint" button (or holding the astrolabe)
+/// asks again and the PIN is one tap away. A locked-out sensor goes
+/// straight to the PIN; PIN-only owners get the keypad at once.
 ///
 /// Reads and drives [lockControllerProvider]; [reveal] reports the door's
 /// progress (0 → 1) so the gate can zoom the app in behind it.
@@ -64,7 +75,8 @@ class LockScreen extends ConsumerStatefulWidget {
   @visibleForTesting
   final double? initialProgress;
 
-  /// How long the owner holds before the fingerprint prompt opens.
+  /// How long the owner holds the astrolabe before the fingerprint prompt
+  /// opens (the optional gesture; the prompt also opens by itself).
   static const Duration holdDuration = Duration(milliseconds: 850);
 
   @override
@@ -99,6 +111,17 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
   Timer? _countdown;
   double _lastAssembly = 0;
   late final double _ruleAngle;
+  late final AppLifecycleListener _lifecycle;
+
+  /// A fingerprint prompt is owed: it opens by itself as soon as the app is
+  /// in the foreground and the fingerprint face is idle. Owed when the
+  /// screen appears and after the app was really left (stopped); cleared
+  /// the moment any prompt starts – a cancelled or failed prompt never
+  /// comes back by itself.
+  bool _autoPrompt = false;
+
+  /// The app was left (stopped) while a prompt was up.
+  bool _leftWhilePrompting = false;
 
   LockScreenMode get mode => _mode;
 
@@ -114,10 +137,15 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     _door.addListener(() => widget.reveal?.value = _door.value);
     _ruleAngle = LockAstrolabe.ruleAngleFor(ref.read(lockClockProvider)());
     widget.backHandler?.onBack = _handleBack;
+    _lifecycle = AppLifecycleListener(onStateChange: _onLifecycle);
+    // Previews (a fixed assembly) never prompt.
+    _autoPrompt = _mode == LockScreenMode.hold && widget.initialProgress == null;
+    _scheduleAutoPrompt();
   }
 
   @override
   void dispose() {
+    _lifecycle.dispose();
     widget.backHandler?.onBack = null;
     _countdown?.cancel();
     _assembly.dispose();
@@ -166,6 +194,63 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     );
   }
 
+  // ---------------------------------------------------------- auto prompt
+
+  static bool get _foreground => WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed;
+
+  /// The owed prompt is about to open: the screen already shows the
+  /// "being read" state instead of flashing the button for a frame.
+  bool get _awaitingPrompt =>
+      _autoPrompt && _foreground && _bioUsable && _mode == LockScreenMode.hold && _stage == _Stage.idle;
+
+  void _onLifecycle(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.paused:
+        // Really left – not merely covered by the prompt, which only makes
+        // the app inactive. Coming back is a new look at the lock screen.
+        if (_stage == _Stage.reading) {
+          _leftWhilePrompting = true;
+        } else if (_mode == LockScreenMode.hold && _stage != _Stage.done) {
+          _autoPrompt = true;
+        }
+      case AppLifecycleState.resumed:
+        _scheduleAutoPrompt();
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+        break;
+    }
+    if (mounted) setState(() {});
+  }
+
+  /// Checks the owed prompt after the next frame (the first frame of the
+  /// screen, or the one after a lifecycle / availability change).
+  void _scheduleAutoPrompt() {
+    if (!_autoPrompt) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeAutoPrompt());
+    WidgetsBinding.instance.ensureVisualUpdate();
+  }
+
+  void _maybeAutoPrompt() {
+    if (!mounted || !_autoPrompt) return;
+    // Paused / inactive (a system dialog, the shade) / not yet known: stay
+    // owed until `resumed`.
+    if (!_foreground) return;
+    if (_mode != LockScreenMode.hold || _stage != _Stage.idle || _busy || _opening) {
+      // The owner already chose (the PIN, a hold in progress …).
+      _autoPrompt = false;
+      return;
+    }
+    // Wait for the availability check (its listener asks again), so a phone
+    // without an enrolled finger goes straight to the PIN without a
+    // pointless prompt.
+    final availability = ref.read(biometricAvailabilityProvider);
+    if (availability.isLoading && !availability.hasValue) return;
+    _autoPrompt = false;
+    if (!_bioUsable) return;
+    unawaited(_startReading(feedback: false));
+  }
+
   // ----------------------------------------------------------------- hold
 
   void _onHoldStart() {
@@ -200,8 +285,14 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     unawaited(_assembleTo(0, duration: const Duration(milliseconds: 520), curve: Curves.easeOutCubic));
   }
 
-  Future<void> _startReading() async {
+  /// Opens the system prompt while the astrolabe assembles ("being read").
+  /// [feedback] marks the moment with a sound when nothing else did (the
+  /// hold reaching half the dial); a button already sounded, and the
+  /// automatic prompt stays quiet.
+  Future<void> _startReading({bool feedback = true}) async {
     if (_stage == _Stage.reading || _stage == _Stage.done) return;
+    _autoPrompt = false;
+    _leftWhilePrompting = false;
     final l = L10n.of(context);
     final hasPin = ref.read(lockControllerProvider).hasPin;
     setState(() {
@@ -210,7 +301,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
       _message = l.lockReadingHint;
       _messageIsError = false;
     });
-    Fx.fire(Sfx.navigate, haptic: Haptic.medium);
+    if (feedback) Fx.fire(Sfx.navigate, haptic: Haptic.medium);
     unawaited(_scan.forward());
     unawaited(
       _assembleTo(
@@ -219,7 +310,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
         curve: Curves.easeOutQuart,
       ),
     );
-    final outcome = await _lock.authenticateWithBiometrics(LockTexts.unlockPrompt(l, pinFallback: hasPin));
+    final outcome = await _lock.authenticateWithBiometrics(LockTexts.unlockPrompt(l));
     if (!mounted) return;
     if (outcome == BiometricOutcome.success) {
       unawaited(_succeed());
@@ -231,10 +322,17 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     if (outcome == BiometricOutcome.notEnrolled || outcome == BiometricOutcome.noHardware) {
       ref.invalidate(biometricAvailabilityProvider);
     }
-    if (hasPin && (outcome == BiometricOutcome.cancelled || LockTexts.biometricBlocked(outcome))) {
+    // Locked out / no usable sensor: the PIN at once.
+    if (hasPin && LockTexts.biometricBlocked(outcome)) {
       _enterPin(message: message, error: message != null);
       return;
     }
+    // Cancelled or failed: stay on the fingerprint face; the big button
+    // asks again – never the screen by itself (no prompt loop). Only when
+    // the system dropped the prompt because the owner left the app does the
+    // return ask again.
+    if (_leftWhilePrompting && !_foreground) _autoPrompt = true;
+    _leftWhilePrompting = false;
     if (message != null) Fx.fire(Sfx.error);
     setState(() {
       _message = message;
@@ -246,6 +344,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
   // ------------------------------------------------------------------ pin
 
   void _enterPin({String? message, bool error = false}) {
+    _autoPrompt = false;
     setState(() {
       _mode = LockScreenMode.pin;
       _pin = '';
@@ -255,13 +354,16 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     unawaited(_assembleTo(AssemblyTimeline.pinBase));
   }
 
+  /// The keypad's fingerprint key or the big "Use fingerprint" button (they
+  /// sound themselves).
   void _useFingerprint() {
+    if (_stage == _Stage.reading || _stage == _Stage.done) return;
     setState(() {
       _mode = LockScreenMode.hold;
       _pin = '';
       _message = null;
     });
-    unawaited(_startReading());
+    unawaited(_startReading(feedback: false));
   }
 
   bool _lockedOut(AppLockState lock) {
@@ -389,10 +491,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
   Future<void> _resetWithFingerprint() async {
     final l = L10n.of(context);
     setState(() => _busy = true);
-    final outcome = await _lock.authenticateWithBiometrics(
-      LockTexts.unlockPrompt(l, pinFallback: false),
-      unlock: false,
-    );
+    final outcome = await _lock.authenticateWithBiometrics(LockTexts.unlockPrompt(l), unlock: false);
     if (!mounted) return;
     setState(() => _busy = false);
     if (outcome != BiometricOutcome.success) {
@@ -554,7 +653,11 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
         lock.biometrics && (availability.value ?? BiometricAvailability.available) == BiometricAvailability.available;
     ref.listen(biometricAvailabilityProvider, (_, next) {
       final a = next.value;
-      if (a == null || a == BiometricAvailability.available) return;
+      if (a == null || a == BiometricAvailability.available) {
+        // The check the owed prompt was waiting for.
+        _scheduleAutoPrompt();
+        return;
+      }
       if (_mode == LockScreenMode.hold && _stage == _Stage.idle && lock.hasPin) {
         _enterPin(message: lock.biometrics ? L10n.of(context).lockSettingsBiometricNotEnrolled : null);
       }
@@ -596,7 +699,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     final keySize = math.min(76.0, math.max(50.0, (h - 380) / 4.7));
     final headerH = keypad && !tall ? 56.0 : (tall ? 118.0 : 92.0);
     final bottomH = switch (_mode) {
-      LockScreenMode.hold => 170.0,
+      LockScreenMode.hold => 44 + _holdControlsHeight + 14,
       LockScreenMode.pin || LockScreenMode.newPin => keySize * 4 + keySize * 0.3 * 0.55 * 4 + 22 + 16 + 48 + 58,
       LockScreenMode.forgot => math.min(h * 0.5, 380.0),
     };
@@ -685,7 +788,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
     );
 
     final Widget bottom = switch (_mode) {
-      LockScreenMode.hold => _holdControls(context, lock),
+      LockScreenMode.hold => _holdControls(context, lock, w),
       LockScreenMode.pin => _pinControls(context, lock, keySize, lockedOut),
       LockScreenMode.newPin => _newPinControls(context, keySize),
       LockScreenMode.forgot => _forgotPanel(context),
@@ -734,7 +837,7 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
         _Stage.holding => l.lockHoldingHint,
         _Stage.reading => l.lockReadingHint,
         _Stage.done => l.lockWelcome,
-        _Stage.idle => l.lockHoldHint,
+        _Stage.idle => _awaitingPrompt ? l.lockReadingHint : l.lockHoldHint,
       },
       LockScreenMode.pin => _stage == _Stage.done ? l.lockWelcome : l.lockPinHint,
       LockScreenMode.newPin =>
@@ -745,21 +848,52 @@ class LockScreenState extends ConsumerState<LockScreen> with TickerProviderState
 
   String _fmt(int n) => context.formatter.formatInt(n);
 
-  Widget _holdControls(BuildContext context, AppLockState lock) {
+  /// Height of the fingerprint face's controls: the large "Use fingerprint"
+  /// button over the "Use PIN" link.
+  static const double _holdControlsHeight = 118;
+
+  Widget _holdControls(BuildContext context, AppLockState lock, double width) {
     final l = L10n.of(context);
+    final busy = _stage == _Stage.reading || _stage == _Stage.done;
+    // While the prompt is up (or about to open) the astrolabe is the whole
+    // story; the button steps aside and comes back after a cancel.
+    final asking = busy || _stage == _Stage.holding || _awaitingPrompt;
     return SizedBox(
-      height: 64,
-      child: Center(
-        child: lock.hasPin
-            ? MadarButton(
-                label: l.lockUsePin,
-                icon: Icons.dialpad_rounded,
-                variant: MadarButtonVariant.ghost,
-                size: MadarButtonSize.small,
-                sfx: Sfx.navigate,
-                onPressed: _stage == _Stage.reading || _stage == _Stage.done ? null : () => _enterPin(),
-              )
-            : const SizedBox.shrink(),
+      height: _holdControlsHeight,
+      child: Column(
+        children: [
+          AnimatedOpacity(
+            opacity: asking ? 0 : 1,
+            duration: context.motion(MadarMotion.short),
+            child: IgnorePointer(
+              ignoring: asking,
+              child: ExcludeSemantics(
+                excluding: asking,
+                child: SizedBox(
+                  width: math.min(width - 2 * Space.gutter, 320),
+                  child: MadarButton(
+                    label: l.lockUseFingerprint,
+                    icon: Icons.fingerprint_rounded,
+                    size: MadarButtonSize.large,
+                    expand: true,
+                    sfx: Sfx.navigate,
+                    onPressed: _useFingerprint,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: Space.s),
+          if (lock.hasPin)
+            MadarButton(
+              label: l.lockUsePin,
+              icon: Icons.dialpad_rounded,
+              variant: MadarButtonVariant.ghost,
+              size: MadarButtonSize.small,
+              sfx: Sfx.navigate,
+              onPressed: busy ? null : () => _enterPin(),
+            ),
+        ],
       ),
     );
   }

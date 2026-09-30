@@ -215,6 +215,7 @@ class LockController extends Notifier<AppLockState> {
   LockRecord? _record;
   Future<LockRecord?>? _loading;
   bool _checking = false;
+  bool _prompting = false;
 
   LockVault get _vault => ref.read(lockVaultProvider);
   PinHasher get _hasher => ref.read(pinHasherProvider);
@@ -459,6 +460,11 @@ class LockController extends Notifier<AppLockState> {
     bool unlock = true,
     bool enrolling = false,
   }) async {
+    // One system prompt at a time: a second request while one is up (a
+    // lock screen appearing over a settings scan, a double tap) would only
+    // make local_auth fail with "already in progress".
+    if (_prompting) return BiometricOutcome.interrupted;
+    _prompting = true;
     _session.suspend();
     try {
       if (!enrolling) {
@@ -478,10 +484,14 @@ class LockController extends Notifier<AppLockState> {
       }
       return outcome;
     } finally {
+      _prompting = false;
       _session.unsuspend();
       _publish();
     }
   }
+
+  /// Whether a biometric prompt is up right now.
+  bool get prompting => _prompting;
 
   // ----------------------------------------------------------- configuration
 

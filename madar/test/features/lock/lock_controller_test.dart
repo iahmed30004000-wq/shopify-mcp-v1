@@ -138,6 +138,28 @@ void main() {
     }
   });
 
+  test('never two prompts at once: a request while one is up is turned away', () async {
+    final fx = await LockFixture.configured();
+    fx.bio.holdPrompt = true;
+    final c = await _container(fx);
+    await _settle();
+    final lock = c.read(lockControllerProvider.notifier);
+    final first = lock.authenticateWithBiometrics(_prompt);
+    await _settle();
+    expect(fx.bio.prompts, hasLength(1));
+    expect(lock.prompting, isTrue);
+    expect(await lock.authenticateWithBiometrics(_prompt), BiometricOutcome.interrupted);
+    expect(fx.bio.prompts, hasLength(1), reason: 'the plugin is never asked twice');
+    fx.bio.finish(BiometricOutcome.success);
+    expect(await first, BiometricOutcome.success);
+    expect(lock.prompting, isFalse);
+    expect(c.read(lockControllerProvider).phase, LockPhase.revealing);
+    // Free again afterwards.
+    fx.bio.holdPrompt = false;
+    expect(await lock.authenticateWithBiometrics(_prompt, unlock: false), BiometricOutcome.success);
+    expect(fx.bio.prompts, hasLength(2));
+  });
+
   test('background time-out through the controller (fake clock + lifecycle)', () async {
     final fx = await LockFixture.configured();
     final c = await _container(fx);

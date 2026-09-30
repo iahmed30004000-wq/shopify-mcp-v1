@@ -206,13 +206,13 @@ void main() {
       expect(rig.zoomKey, isNull);
     });
 
-    test('recenter springs home the short way round', () {
+    test('reset springs home the short way round', () {
       final rig = CameraRig()
         ..begin()
         ..dragBy(const Offset(-2000, 0), _phone, baseElevation: 0.6)
         ..end();
       expect(rig.isAway, isTrue);
-      rig.recenter();
+      rig.reset();
       for (var i = 0; i < 60 * 3; i++) {
         rig.advance(1 / 60);
       }

@@ -274,6 +274,14 @@ class SceneController extends ChangeNotifier {
       _flightSide = null;
       _flightT = 0;
       planets.setFocus(null, 0);
+      // A page opened by pinching deep into a world must not leave the scene
+      // zoomed into it. A page that landed already let the zoom go (see
+      // [tick]); one closed before it landed (a cancelled fly-in) flew back
+      // to the zoomed view: spring out from there. Reduced motion never
+      // flew the camera: a cut, like the page's cross-fade.
+      if (rig.zoom >= pinchOpenZoom && !rig.interacting) {
+        _reducedMotion ? rig.clearZoom() : rig.releaseZoom();
+      }
       _apply();
       return;
     }
@@ -553,6 +561,85 @@ class SceneController extends ChangeNotifier {
     return _keepOut;
   }
 
+  // --------------------------------------------------------------- reset view --
+
+  /// A pinch released past this zoom opens the world's page (the scene
+  /// widget's gesture); once that page has landed the scene lets the zoom
+  /// go, so closing the page flies back out to the overview instead of into
+  /// a world left filling the screen.
+  static const double pinchOpenZoom = 0.9;
+
+  /// Seconds two worlds must keep overlapping before the reset control
+  /// offers itself, and seconds clear before it leaves again (no flicker
+  /// as two worlds brush past each other).
+  static const double crowdShowAfter = 0.8, crowdHideAfter = 1.5;
+
+  /// Seconds of orbit after a reset (or the start) before overlapping
+  /// worlds count: the control never comes straight back after a reset.
+  static const double crowdGrace = 20;
+
+  double _crowdedFor = 0, _clearFor = 0;
+  bool _crowdCue = false;
+
+  /// A reset is springing home: its labels are placed afresh once it lands.
+  bool _resetSettling = false;
+
+  /// The opening's labels have been placed afresh (see [tick]).
+  bool _openingLabelsPlaced = false;
+
+  /// Whether the scene offers its "reset view" control: the camera is away
+  /// from the default overview (turned, tilted, zoomed, spinning), or the
+  /// worlds – orbiting at different speeds – have drifted into each other;
+  /// never while a reset or a planet page is under way.
+  bool get resetCue {
+    if (_flightKey != null || rig.isHoming || planets.respreading) return false;
+    return rig.isAway || _crowdCue;
+  }
+
+  void _updateCrowding(double dt) {
+    if (_flightKey != null || rig.isHoming || planets.respreading || _viewport.isEmpty) {
+      _crowdedFor = _clearFor = 0;
+      _crowdCue = false;
+      return;
+    }
+    final crowded = planets.secondsSinceHome >= crowdGrace && planets.crowded(_viewport);
+    if (crowded) {
+      _clearFor = 0;
+      _crowdedFor += dt;
+      if (_crowdedFor >= crowdShowAfter) _crowdCue = true;
+    } else {
+      _crowdedFor = 0;
+      _clearFor += dt;
+      if (_clearFor >= crowdHideAfter) _crowdCue = false;
+    }
+  }
+
+  /// Everything back to the default composed overview, exactly as on a
+  /// fresh start: the camera's turn, tilt and zoom (and the world it zoomed
+  /// into), any spin, the drift's breath and the gyro parallax on one
+  /// spring; the worlds and their moons glide back along their orbits to
+  /// their even, non-overlapping starting layout ([PlanetSceneController.respread]).
+  /// Without [animate] (and under reduced motion) it is a cut.
+  void resetView({bool animate = true}) {
+    if (animate && !_reducedMotion) {
+      rig.reset(gyroYaw: gyroEnabled ? gyro.yaw : 0, gyroPitch: gyroEnabled ? gyro.pitch : 0);
+      planets.respread();
+    } else {
+      rig.snapHome();
+      planets.respread(animate: false);
+    }
+    gyro.reset();
+    _crowdedFor = _clearFor = 0;
+    _crowdCue = false;
+    // The labels choose their spots afresh now and again once everything
+    // has landed – so they end up exactly where a fresh start puts them.
+    planets.relayoutLabels();
+    _resetSettling = rig.isHoming || planets.respreading;
+    _openingLabelsPlaced = true;
+    _apply();
+    notifyListeners();
+  }
+
   // -------------------------------------------------------------------- tick --
 
   /// Something animates (fly-in/out, rig spring or spin, morph, pulse,
@@ -577,6 +664,10 @@ class SceneController extends ChangeNotifier {
     if (gyroEnabled) gyro.advance(dt);
     final anim = _flight;
     if (anim != null) _flightT = anim.value.clamp(0.0, 1.0);
+    // A page opened by a deep pinch has landed: at t = 1 the camera is the
+    // hero's whatever the zoom, so letting it go here is invisible – and the
+    // fly-out then lands on the overview.
+    if (_flightKey != null && _flightT >= 1 && !rig.interacting && rig.zoom >= pinchOpenZoom) rig.clearZoom();
     // The worlds move first: the camera (which follows a world in flight)
     // and the frame painted this vsync then agree on where it is – no
     // one-frame lag, no jitter on the hero.
@@ -584,6 +675,22 @@ class SceneController extends ChangeNotifier {
     astrolabe.advanceSeconds(dt);
     sky.advanceSeconds(dt);
     _apply();
+    if (_resetSettling && !rig.isHoming && !planets.respreading) {
+      _resetSettling = false;
+      planets.relayoutLabels();
+    }
+    // The opening: once the worlds have orbited for as long as a reset's
+    // glide takes, every label chooses its spot afresh – against exactly the
+    // frame a reset lands on – so the names sit where a reset puts them,
+    // whatever the first frames (data still arriving, moons appearing) made
+    // of them.
+    if (!_openingLabelsPlaced &&
+        planets.bodies.isNotEmpty &&
+        planets.secondsSinceHome >= PlanetSceneController.respreadSeconds) {
+      _openingLabelsPlaced = true;
+      if (_flightKey == null && !rig.isAway && !_resetSettling) planets.relayoutLabels();
+    }
+    _updateCrowding(dt);
     notifyListeners();
   }
 

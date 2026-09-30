@@ -214,6 +214,8 @@ void main() {
   test('complete surahs are recognised from disk alone', () async {
     await downloads.download(reciter, [114]);
     await downloads.whenIdle();
+    // The index is written asynchronously: let it land before deleting it.
+    await downloads.flush();
     File('${root.path}/downloads.json').deleteSync();
     final again = make();
     await again.load();

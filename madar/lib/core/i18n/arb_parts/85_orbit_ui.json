@@ -5,9 +5,9 @@
     "description": "Screen-reader hint of the whole orbit scene on home"
   },
   "orbitUiRecenter": {
-    "ar": "العودة إلى المدار كاملًا",
-    "en": "Back to the whole orbit",
-    "description": "Button shown after rotating or zooming the orbit; returns the camera to the overview"
+    "ar": "إعادة ضبط العرض",
+    "en": "Reset view",
+    "description": "Pill on the orbit scene shown whenever the view differs from the default overview (turned, tilted, zoomed, or the worlds drifted into each other); puts the camera and the worlds back exactly as on a fresh start"
   },
   "orbitUiRadarClear": {
     "ar": "عوالمك كلها في توازن — لا شيء يحتاج انتباهك الآن",

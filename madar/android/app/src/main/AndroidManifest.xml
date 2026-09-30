@@ -177,13 +177,5 @@
         <!-- SystemUI plays notification sounds: it must be visible to grant it
              read access to the muezzin recordings (AdhanSoundProvider). -->
         <package android:name="com.android.systemui" />
-        <!-- Health › Wellbeing: the support note's "Call 911" opens the
-             phone's dialler through url_launcher's tel: link (the user
-             presses call; Madar never calls by itself). Android 11+ package
-             visibility needs the tel: scheme declared (url_launcher README). -->
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="tel" />
-        </intent>
     </queries>
 </manifest>

@@ -4,10 +4,6 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import '../core/notifications/notifications.dart';
 import '../features/adhan/adhan.dart';
 import '../features/adhkar/adhkar.dart' show dhikrAudioPickerProvider, pickDhikrAudio;
-import '../features/health/meds/meds.dart' show medsNotificationBackgroundTap;
-import '../features/health/record/record.dart'
-    show DoctorReportFile, PlatformReportExporter, ReportExporter, reportExporterProvider;
-import '../features/health/wellbeing/wellbeing.dart' show PhoneDialer, UrlLauncherPhoneDialer, phoneDialerProvider;
 import '../features/import/import_controller.dart' show importFilePickerProvider, pickJsonFile;
 import '../features/lock/application/lock_controller.dart';
 import '../features/prayer/prayer.dart';
@@ -26,25 +22,14 @@ SuspendRunner lockSuspender(Ref ref) =>
 /// Production overrides that route every system flow the Phase 2 features
 /// open through [lockSuspender]: notification / exact-alarm / full-screen
 /// permission requests, the battery-optimisation dialog, the adhan's system
-/// settings pages, the location permission and settings pages, the file
-/// pickers (muezzin recordings, dhikr recordings, the importer), and the
-/// health flows that leave the app: the doctor report's share sheet and
-/// save dialog, and the support note's dialler.
-///
-/// The notifications plugin is also where a dose's Taken / Snooze / Skip
-/// buttons land when they are pressed in the shade: they never open the
-/// app, so Android hands them to the plugin's background isolate, whose
-/// entry point [medsNotificationBackgroundTap] records them (see
-/// `meds_background.dart`); every other background response is left alone.
+/// settings pages, the location permission and settings pages, and the file
+/// pickers (muezzin recordings, dhikr recordings, the importer).
 ///
 /// Tests replace these providers with fakes, so they are installed by
 /// `bootstrap` only; the decorators themselves are unit-tested.
 List<Override> suspendingFlowOverrides() => [
   notificationPlatformProvider.overrideWith(
-    (ref) => SuspendingNotificationPlatform(
-      FlutterLocalNotificationsPlatform(backgroundHandler: medsNotificationBackgroundTap),
-      lockSuspender(ref),
-    ),
+    (ref) => SuspendingNotificationPlatform(FlutterLocalNotificationsPlatform(), lockSuspender(ref)),
   ),
   batteryGateProvider.overrideWith(
     (ref) => SuspendingBatteryGate(const PermissionHandlerBatteryGate(), lockSuspender(ref)),
@@ -66,37 +51,7 @@ List<Override> suspendingFlowOverrides() => [
     final suspend = lockSuspender(ref);
     return () => suspend(pickJsonFile);
   }),
-  reportExporterProvider.overrideWith(
-    (ref) => SuspendingReportExporter(const PlatformReportExporter(), lockSuspender(ref)),
-  ),
-  phoneDialerProvider.overrideWith((ref) => SuspendingPhoneDialer(const UrlLauncherPhoneDialer(), lockSuspender(ref))),
 ];
-
-/// The doctor report's share sheet and save dialog suspended.
-class SuspendingReportExporter implements ReportExporter {
-  SuspendingReportExporter(this.inner, this.suspend);
-
-  final ReportExporter inner;
-  final SuspendRunner suspend;
-
-  @override
-  Future<void> share(DoctorReportFile file, {String? subject}) => suspend(() => inner.share(file, subject: subject));
-
-  @override
-  Future<bool> save(DoctorReportFile file) => suspend(() => inner.save(file));
-}
-
-/// The support note's trip to the phone's dialler suspended (the lock still
-/// locks after its grace if the call runs long).
-class SuspendingPhoneDialer implements PhoneDialer {
-  SuspendingPhoneDialer(this.inner, this.suspend);
-
-  final PhoneDialer inner;
-  final SuspendRunner suspend;
-
-  @override
-  Future<bool> dial(String number) => suspend(() => inner.dial(number));
-}
 
 /// Permission requests suspended; everything else passes straight through.
 class SuspendingNotificationPlatform implements NotificationPlatform {

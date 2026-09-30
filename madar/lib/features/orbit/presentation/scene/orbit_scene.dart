@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
+import 'package:flutter/gestures.dart' show kDoubleTapSlop, kDoubleTapTimeout;
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
@@ -55,7 +56,11 @@ typedef SceneMoonCallback = void Function(OrbitMoon moon, String planetKey, Rect
 /// pinch zooms into a world (released past 90 % it opens) or into the dial;
 /// tap a world → [onPlanetTap] (the fly-in is driven by the planet route,
 /// see [OrbitFlight]); long-press → [onPlanetLongPress]; tap a moon →
-/// [onMoonTap]; tap a prayer pointer → [onPrayerTap].
+/// [onMoonTap]; tap a prayer pointer → [onPrayerTap]. A "reset view" pill
+/// shows whenever the view differs from the default overview (the camera
+/// moved, or the worlds drifted into each other); it – or a double tap on
+/// empty sky – puts everything back as on a fresh start
+/// ([SceneController.resetView]).
 class OrbitScene extends ConsumerStatefulWidget {
   const OrbitScene({
     super.key,
@@ -65,7 +70,7 @@ class OrbitScene extends ConsumerStatefulWidget {
     this.onMoonTap,
     this.onPrayerTap,
     this.initialTime,
-    this.recenterInset = 12,
+    this.resetInset = 12,
   });
 
   /// The band the system is framed in: the scene's box minus these insets
@@ -81,10 +86,10 @@ class OrbitScene extends ConsumerStatefulWidget {
   /// when home opens (the default spreads them a golden angle apart).
   final double? initialTime;
 
-  /// Gap between the "back to the whole orbit" button and the band's top
-  /// (the button sits in the band's top end corner, clear of the worlds
-  /// crowding the zoomed dial's lower half and of the panel).
-  final double recenterInset;
+  /// Gap between the "reset view" pill and the band's top (it sits in the
+  /// band's top end corner, clear of the worlds crowding the zoomed dial's
+  /// lower half and of the panel).
+  final double resetInset;
 
   @override
   ConsumerState<OrbitScene> createState() => OrbitSceneState();
@@ -97,7 +102,10 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
   final SceneClock _clock = SceneClock();
   final GlobalKey _sceneKey = GlobalKey();
   final GlobalKey _liveKey = GlobalKey();
-  final ValueNotifier<bool> _away = ValueNotifier(false);
+  final GlobalKey _resetKey = GlobalKey();
+
+  /// The "reset view" pill is offered ([SceneController.resetCue]).
+  final ValueNotifier<bool> _cue = ValueNotifier(false);
 
   /// Ticks once a minute (screen-reader text of the dial).
   final ValueNotifier<int> _minute = ValueNotifier(0);
@@ -185,6 +193,8 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
     super.didChangeDependencies();
     _c.reducedMotion = context.reducedMotion;
     _tickerVisible = TickerMode.valuesOf(context).enabled;
+    // Hidden (the app lock came down, a page covers home) mid-touch.
+    if (!_tickerVisible) _dropGesture();
     final labels = AstrolabeLabels.of(context);
     if (labels != _labels) {
       _labels = labels;
@@ -211,6 +221,7 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
     _idleWake?.cancel();
     _stillTimer?.cancel();
     _gyroSlowdown?.cancel();
+    _skyTap?.cancel();
     _flightRoute?.removeStatusListener(_onFlightStatus);
     _flightRoute = null;
     unawaited(_pulses?.cancel());
@@ -223,7 +234,7 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
     _renderer?.dispose();
     _still?.dispose();
     _fadingStill?.dispose();
-    _away.dispose();
+    _cue.dispose();
     _minute.dispose();
     _c.dispose();
     super.dispose();
@@ -294,6 +305,7 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
     _c.bindFlight(_flight.key, route);
     _c.planets.selectedMoonId = _flight.active ? _flight.item : null;
     _c.refresh();
+    _syncCue();
     _sync();
   }
 
@@ -352,6 +364,8 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
   void _onLifecycle(AppLifecycleState state) {
     final resumed = state == AppLifecycleState.resumed && !_foreground;
     _foreground = state == AppLifecycleState.resumed;
+    // Really left mid-touch: the gesture's end may never come.
+    if (state == AppLifecycleState.hidden || state == AppLifecycleState.paused) _dropGesture();
     _sync();
     // Back from the background: the dial jumps to now at once (not on the
     // next 1 Hz tick).
@@ -499,11 +513,7 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
     if (step != null) {
       _c.tick(step);
       _clock.advanced(step);
-      final away = _c.rig.isAway;
-      if (away != _away.value) {
-        _away.value = away;
-        _syncKeepOut();
-      }
+      _syncCue();
     }
     final g = _c.governor;
     final before = g.mode;
@@ -611,7 +621,9 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
 
   void _onTapUp(TapUpDetails d) {
     final hit = _c.hitTest(d.localPosition);
-    if (hit == null) return;
+    if (hit == null) return _onSkyTap(d.localPosition);
+    _skyTap?.cancel();
+    _skyTap = null;
     final rect = _global(hit.rect);
     switch (hit.kind) {
       case SceneHitKind.planet:
@@ -680,6 +692,7 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
   }
 
   void _onScaleStart(ScaleStartDetails d) {
+    _gesture = true;
     _pinch = d.pointerCount > 1;
     _c.rig.begin(pinch: _pinch, zoomKey: _pinch ? _zoomTargetAt(d.localFocalPoint) : null);
     _stillLiveNow();
@@ -687,6 +700,8 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
   }
 
   void _onScaleUpdate(ScaleUpdateDetails d) {
+    // A gesture dropped when the app left: the rest of it is ignored.
+    if (!_gesture) return;
     if (d.pointerCount > 1) {
       if (!_pinch) {
         _pinch = true;
@@ -700,12 +715,16 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
   }
 
   void _onScaleEnd(ScaleEndDetails d) {
+    // Dropped already (see [_dropGesture]): no late fling, no page opening
+    // behind the owner's back.
+    if (!_gesture) return;
+    _gesture = false;
     final wasPinch = _pinch;
     _pinch = false;
     final key = _c.rig.zoomKey;
     final zoom = _c.rig.zoom;
     _c.rig.end(velocity: d.velocity.pixelsPerSecond, viewport: _size);
-    if (wasPinch && key != null && zoom > 0.9 && widget.onPlanetTap != null) {
+    if (wasPinch && key != null && zoom > SceneController.pinchOpenZoom && widget.onPlanetTap != null) {
       Fx.fire(Sfx.navigate);
       final disc = _c.planetDisc(key);
       final rect = disc == null ? Rect.zero : Rect.fromCircle(center: disc.$1, radius: disc.$2);
@@ -714,28 +733,81 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
     _sync();
   }
 
-  void _stillLiveNow() => _setStillLive(true);
+  /// A drag or pinch is in progress (between its start and its end).
+  bool _gesture = false;
 
-  void _recenter() {
-    Fx.fire(Sfx.navigate);
-    if (context.reducedMotion) {
-      _c.rig.snapHome();
-      _c.refresh();
-    } else {
-      _c.rig.recenter();
-    }
-    _away.value = false;
-    _syncKeepOut();
+  /// The touch was cut off without its end – the app left the foreground,
+  /// or the lock (or a page) hid the scene mid-gesture: let go of it where
+  /// the camera is, and spring an unreleased pinch back out, so the owner
+  /// never comes back to a scene stuck mid-zoom (a late end is ignored).
+  void _dropGesture() {
+    if (!_gesture) return;
+    _gesture = false;
+    _pinch = false;
+    _c.rig.cancelGesture();
+    _c.refresh();
+    _syncCue();
     _sync();
   }
 
-  /// Size of the "back to the whole orbit" button (small icon button).
-  static const double _recenterSize = 36;
-  Rect _recenterRect = Rect.zero;
+  void _stillLiveNow() => _setStillLive(true);
 
-  /// Labels keep clear of the recenter button while it shows.
+  // ----------------------------------------------------------- reset view --
+
+  Timer? _skyTap;
+  Offset _skyTapAt = Offset.zero;
+
+  /// Empty sky: a second tap there within the double-tap time resets the
+  /// view. Detected by hand, so taps on worlds never wait for a possible
+  /// double tap.
+  void _onSkyTap(Offset p) {
+    final pending = _skyTap;
+    if (pending != null && pending.isActive && (p - _skyTapAt).distance <= kDoubleTapSlop) {
+      pending.cancel();
+      _skyTap = null;
+      _resetView();
+      return;
+    }
+    _skyTapAt = p;
+    pending?.cancel();
+    _skyTap = Timer(kDoubleTapTimeout, () => _skyTap = null);
+  }
+
+  /// Everything back as on a fresh start (a spring; a cut under reduced
+  /// motion). [sound]: the pill already made its own.
+  void _resetView({bool sound = true}) {
+    if (_c.flightKey != null) return;
+    if (sound) Fx.fire(Sfx.navigate);
+    _stillLiveNow();
+    _c.resetView(animate: !context.reducedMotion);
+    _syncCue();
+    _sync();
+  }
+
+  void _syncCue() {
+    final cue = _c.resetCue;
+    if (cue == _cue.value) return;
+    _cue.value = cue;
+    _syncKeepOut();
+  }
+
+  /// Where the reset pill sits (scene coordinates; measured after layout).
+  Rect _resetRect = Rect.zero;
+
+  void _measureReset() {
+    if (!mounted) return;
+    final button = _resetKey.currentContext?.findRenderObject();
+    final scene = _sceneKey.currentContext?.findRenderObject();
+    if (button is! RenderBox || scene is! RenderBox || !button.hasSize || !button.attached || !scene.attached) return;
+    final rect = MatrixUtils.transformRect(button.getTransformTo(scene), Offset.zero & button.size);
+    if (rect == _resetRect) return;
+    _resetRect = rect;
+    _syncKeepOut();
+  }
+
+  /// Labels keep clear of the reset pill while it shows.
   void _syncKeepOut() {
-    _c.planets.labelKeepOut = _away.value && !_recenterRect.isEmpty ? [_recenterRect.inflate(6)] : const [];
+    _c.planets.labelKeepOut = _cue.value && !_resetRect.isEmpty ? [_resetRect.inflate(6)] : const [];
   }
 
   // ----------------------------------------------------------------- build --
@@ -758,14 +830,9 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
           size.height - widget.sceneInsets.bottom,
         );
         _c.layout(size, band);
-        final rtl = Directionality.of(context) == TextDirection.rtl;
-        final rx = rtl ? Space.gutter : size.width - Space.gutter - _recenterSize;
-        final rTop = widget.sceneInsets.top + widget.recenterInset;
-        final recenter = Rect.fromLTWH(rx, rTop, _recenterSize, _recenterSize);
-        if (recenter != _recenterRect) {
-          _recenterRect = recenter;
-          _syncKeepOut();
-        }
+        // The pill's place follows the band, the text direction and the
+        // label's width: re-measured after every layout of the scene.
+        SchedulerBinding.instance.addPostFrameCallback((_) => _measureReset());
         final live = RepaintBoundary(
           key: _liveKey,
           child: ColoredBox(
@@ -915,22 +982,36 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
                 ),
                 PositionedDirectional(
                   end: Space.gutter,
-                  top: widget.sceneInsets.top + widget.recenterInset,
+                  top: widget.sceneInsets.top + widget.resetInset,
                   child: ValueListenableBuilder<bool>(
-                    valueListenable: _away,
-                    builder: (context, away, _) => AnimatedOpacity(
-                      opacity: away ? 1 : 0,
-                      duration: context.motion(MadarMotion.short),
+                    valueListenable: _cue,
+                    builder: (context, shown, child) => AnimatedOpacity(
+                      opacity: shown ? 1 : 0,
+                      duration: context.motion(MadarMotion.medium),
+                      curve: MadarMotion.standard,
                       child: IgnorePointer(
-                        ignoring: !away,
-                        child: MadarButton.icon(
-                          icon: Icons.center_focus_strong_rounded,
-                          semanticLabel: l10n.orbitUiRecenter,
-                          size: MadarButtonSize.small,
-                          sfx: Sfx.navigate,
-                          onPressed: _recenter,
+                        ignoring: !shown,
+                        // Screen readers only meet it while it is offered;
+                        // then as its own node, never merged into the
+                        // scene's (whose double tap would otherwise reset
+                        // the view).
+                        child: ExcludeSemantics(
+                          excluding: !shown,
+                          child: Semantics(container: true, child: child),
                         ),
                       ),
+                    ),
+                    // A labelled glass pill, 48 dp tall (a full touch
+                    // target you can see): what it does is written on it.
+                    child: MadarButton(
+                      key: _resetKey,
+                      label: l10n.orbitUiRecenter,
+                      icon: Icons.restart_alt_rounded,
+                      variant: MadarButtonVariant.secondary,
+                      size: MadarButtonSize.medium,
+                      // The same sound as a double tap on the sky.
+                      sfx: Sfx.navigate,
+                      onPressed: () => _resetView(sound: false),
                     ),
                   ),
                 ),

@@ -13,7 +13,6 @@ import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/sound/sound_api.dart';
-import '../../../health/hub/health_hub.dart';
 import '../../data/orbit_providers.dart';
 import '../../domain/neglect_text.dart';
 import '../../domain/orbit_labels.dart';
@@ -35,10 +34,8 @@ import 'world_modules.dart';
 /// A world's page, rising from its surface after the fly-in: the world
 /// itself stays behind the header as a giant, slowly turning hero (it is the
 /// orbit scene underneath this transparent route), and a glass sheet slides
-/// up with its balance ring, the world's own hub (Faith: the day around the
-/// prayers – [FaithHub]; Health: the body's care – [HealthHub]), what needs
-/// care, its moons (tappable – each is a real record) and what feeds its
-/// score.
+/// up with its balance ring, what needs care, its moons (tappable – each is
+/// a real record) and what feeds its score.
 class PlanetModulePage extends ConsumerStatefulWidget {
   const PlanetModulePage({super.key, required this.planetKey, this.item});
 
@@ -109,13 +106,13 @@ class _PlanetModulePageState extends ConsumerState<PlanetModulePage> {
     // sheet of its own is listed among the reasons on this page.
     final moons = ref.read(sceneSnapshotProvider).value?.planet(widget.planetKey)?.moons ?? const <OrbitMoon>[];
     _openedItem = true;
-    unawaited(RecordOpener.open(context, ref, id, moons, planetKey: widget.planetKey));
+    unawaited(RecordOpener.open(context, ref, id, moons));
   }
 
   /// A record that is not a moon (a task): its own editor.
   void _openRecord(String item) {
     final moons = ref.read(sceneSnapshotProvider).value?.planet(widget.planetKey)?.moons ?? const <OrbitMoon>[];
-    unawaited(RecordOpener.open(context, ref, item, moons, planetKey: widget.planetKey));
+    unawaited(RecordOpener.open(context, ref, item, moons));
   }
 
   /// A moon (its row, or the moon itself on the hero world): highlight it
@@ -560,9 +557,6 @@ class _Sheet extends StatelessWidget {
           // prayer, today's prayers (tracker) and adhkar, and links to the
           // faith pages …
           if (planet.key == 'faith') ...[const SizedBox(height: Space.l), const FaithHub(firstIndex: 1)],
-          // Health's hub of the body's care: the standing alerts, today's
-          // doses, wellbeing and pain, the doctor's side, the tools.
-          if (planet.key == 'health') ...[const SizedBox(height: Space.l), const HealthHub(firstIndex: 1)],
           // … and every world's tasks of the day.
           StaggerItem(index: 1, child: section(l.orbitUiWorldTasksTitle)),
           StaggerItem(index: 1, child: WorldTasksModule(planetKey: planet.key)),
@@ -585,13 +579,11 @@ class _Sheet extends StatelessWidget {
                   reason: reasons[i],
                   text: neglectReasonText(l, reasons[i], fmt),
                   // A button only when it opens something (a moon, a task).
-                  onTap: !RecordOpener.canOpen(reasons[i].refTable, reasons[i].refId, moons, planetKey: planet.key)
+                  onTap: !RecordOpener.canOpen(reasons[i].refTable, reasons[i].refId, moons)
                       ? null
                       : () {
                           final r = reasons[i];
-                          // A reason about several records (doses of more
-                          // than one medication) names only its table.
-                          final id = r.refId == null ? r.refTable! : PlanetModules.itemOf(r.refTable!, r.refId!);
+                          final id = PlanetModules.itemOf(r.refTable!, r.refId!);
                           Fx.fire(Sfx.tap);
                           final moon = RecordOpener.moonOf(id, moons);
                           if (moon != null) {

@@ -13,7 +13,6 @@ import '../features/quran/quran.dart' show quranMetaProvider;
 import '../features/recitation/recitation.dart' show RecitationPlayer, recitationPlayerProvider;
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
-import 'health_services.dart';
 
 /// Prepares the services the app needs soon but never on the first frame:
 /// the full time-zone database (prayer times of a location in another zone,
@@ -55,12 +54,8 @@ void _log(String what, Object error, StackTrace stack) {
 ///
 /// * An adhkar reminder opens its set in the reader
 ///   (`/adhkar/<set>`), a wird reminder the wird page on its plan
-///   (`/wird?plan=<id>`), a dose notification the medications (`/meds`),
-///   an appointment reminder the appointments with it lit
-///   (`/record/appointments?highlight=<id>`) and the worry window the
-///   worries (`/wellbeing?tab=worries`) – whether it launched the app (cold
-///   start) or reached it running (warm). A dose's Taken / Snooze / Skip
-///   buttons never navigate: they are recorded ([healthNotificationLocation]).
+///   (`/wird?plan=<id>`), whether it launched the app (cold start) or
+///   reached it running (warm).
 /// * The router moves underneath the app lock: when Madar is locked the lock
 ///   screen stays in front, and the reader is what the owner sees after
 ///   unlocking – a notification never reveals anything past the lock.
@@ -80,7 +75,7 @@ class AppNotificationRouter {
     if (set != null) return AppRoutes.adhkarSetOf(set.name);
     final plan = WirdReminderTaps.planOf(tap);
     if (plan != null) return AppRoutes.wirdOf(plan);
-    return healthNotificationLocation(tap);
+    return null;
   }
 
   Future<void> _readLaunch(NotificationService service) async {
@@ -122,10 +117,7 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///   the recitation's media notification the full player
 ///   ([RecitationNotificationRouter]);
 /// * a listening session still open when the engine detaches from its last
-///   activity is written ([RecitationPlayer.flushSession]);
-/// * the health reminders stay planned – doses (48 h rolling), appointments,
-///   the worry window – and a dose answered from its notification is
-///   recorded ([watchHealthServices]).
+///   activity is written ([RecitationPlayer.flushSession]).
 ///
 /// The adhan's own services (alarm planning, prayer quiet, the full-screen
 /// adhan) live in `AdhanHost`, directly below this.
@@ -170,7 +162,6 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     ref.watch(wirdCompletionSyncProvider);
     ref.watch(appNotificationRouterProvider);
     ref.watch(recitationNotificationRouterProvider);
-    watchHealthServices(ref);
     return widget.child;
   }
 }

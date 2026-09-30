@@ -13,13 +13,11 @@ import '../../core/routing/routes.dart';
 import '../../core/settings/app_settings.dart';
 import '../../core/sound/sound.dart';
 import '../adhan/presentation/adhan_permissions_card.dart';
-import '../health/wellbeing/wellbeing.dart' show WellbeingSettings, wellbeingSettingsProvider;
 import '../lock/application/lock_controller.dart';
 import '../orbit/data/orbit_providers.dart' show prayerSettingsProvider;
 import '../prayer/prayer.dart' show PrayerLabels, cityDatabaseProvider;
 import '../quran/quran.dart' show QuranReaderMode, quranReaderPrefsProvider;
 import '../recitation/recitation.dart' show recitationSettingsProvider;
-import 'health_settings_screen.dart' show healthRemindersOnProvider;
 import 'reminders_settings_screen.dart' show faithRemindersOnProvider;
 import 'settings_controller.dart';
 import 'widgets/appearance_pickers.dart';
@@ -28,9 +26,7 @@ import 'widgets/settings_widgets.dart';
 /// Settings hub: appearance and sound (own pages); faith – prayer times and
 /// calculation, the adhan, Quran reading, recitation and the reminders
 /// (adhkar and wird), each its own page, with the adhan's permissions card
-/// below them; health (its own page: meal times, reminders, lab margin,
-/// doctor report, worry window, emergency number); motion and power
-/// (inline); privacy and security (the app
+/// below them; motion and power (inline); privacy and security (the app
 /// lock's page); data (import); about (version, fonts and content sources,
 /// licences) and the design gallery. Every change applies instantly.
 class SettingsScreen extends ConsumerWidget {
@@ -130,21 +126,6 @@ class SettingsScreen extends ConsumerWidget {
               const Padding(
                 padding: EdgeInsetsDirectional.only(top: Space.m),
                 child: AdhanPermissionsCard(),
-              ),
-              SettingsSection(
-                title: l.healthHubSettingsSection,
-                subtitle: l.healthHubSettingsSectionHint,
-                seed: 0.25,
-                children: [
-                  SettingsTile(
-                    icon: Icons.favorite_rounded,
-                    iconColor: t.gold,
-                    title: l.healthHubSettingsTitle,
-                    subtitle: _healthSummary(l, fmt, ref),
-                    navigates: true,
-                    onTap: () => context.go(AppRoutes.healthSettings),
-                  ),
-                ],
               ),
               SettingsSection(
                 title: l.settingsSectionMotionPower,
@@ -261,17 +242,6 @@ String? _quranSummary(L10n l, WidgetRef ref) {
   return l.orbitUiListSeparator(
     prefs.mode == QuranReaderMode.mushaf ? l.quranModeMushaf : l.quranModeList,
     prefs.tajweed ? l.settingsQuranTajweedOn : l.settingsQuranTajweedOff,
-  );
-}
-
-/// "2 reminders on · Emergency 911" – the health reminders switched on
-/// (doses, appointments, the worry window) and the support note's number.
-String _healthSummary(L10n l, MadarFormatter fmt, WidgetRef ref) {
-  final on = ref.watch(healthRemindersOnProvider);
-  final number = (ref.watch(wellbeingSettingsProvider).value ?? const WellbeingSettings()).supportNumber;
-  return l.healthHubSettingsEntrySummary(
-    fmt.localizeDigits(l.healthHubSettingsRemindersOn(on, fmt.formatInt(on))),
-    BidiIsolate.ltr(fmt.localizeDigits(number)),
   );
 }
 
