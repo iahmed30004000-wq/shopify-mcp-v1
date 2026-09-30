@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -115,20 +116,31 @@ class _HallBody extends StatelessWidget {
           ),
           SliverPadding(
             padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, 0, Space.gutter, Space.xxxl),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 132,
-                mainAxisSpacing: Space.m,
-                crossAxisSpacing: Space.m,
-                childAspectRatio: 0.66,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (context, i) => StaggerItem(
-                  index: i + 1,
-                  child: _TrophyCell(id: ids[i], overview: overview),
-                ),
-                childCount: ids.length,
-              ),
+            sliver: SliverLayoutBuilder(
+              builder: (context, constraints) {
+                // Cells grow with the text size: fewer, wider columns and
+                // taller cells, so names and descriptions are never cut.
+                final scaler = MediaQuery.textScalerOf(context);
+                final minCell = scaler.scale(_TrophyCell.minWidth);
+                final count = math.max(2, ((constraints.crossAxisExtent + Space.m) / (minCell + Space.m)).floor());
+                return SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: count,
+                    mainAxisSpacing: Space.m,
+                    crossAxisSpacing: Space.m,
+                    mainAxisExtent: _TrophyCell.fixedHeight +
+                        scaler.scale(_TrophyCell.textHeight) +
+                        (_TrophyCell.descriptionLinesFor(scaler) - 2) * scaler.scale(_TrophyCell.descriptionLine),
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (context, i) => StaggerItem(
+                      index: i + 1,
+                      child: _TrophyCell(id: ids[i], overview: overview),
+                    ),
+                    childCount: ids.length,
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -139,6 +151,22 @@ class _HallBody extends StatelessWidget {
 
 class _TrophyCell extends StatelessWidget {
   const _TrophyCell({required this.id, required this.overview});
+
+  /// Narrowest cell at text scale 1 (three columns on a phone).
+  static const double minWidth = 108;
+
+  /// Padding, medal and gaps.
+  static const double fixedHeight = 100;
+
+  /// Name, two description lines and the tier / progress line at text
+  /// scale 1 (scaled with the text).
+  static const double textHeight = 78;
+
+  /// One more description line (labelSmall, height 1.3) at text scale 1.
+  static const double descriptionLine = 15;
+
+  /// Descriptions get a third line at large text sizes.
+  static int descriptionLinesFor(TextScaler scaler) => scaler.scale(1) > 1.1 ? 3 : 2;
 
   final TrophyId id;
   final TogetherOverview overview;
@@ -178,7 +206,7 @@ class _TrophyCell extends StatelessWidget {
             child: Text(
               tx.trophyDescription(id, gameId: earned.firstOrNull?.key.gameId),
               style: text.labelSmall?.copyWith(color: t.textTertiary, height: 1.3),
-              maxLines: 2,
+              maxLines: descriptionLinesFor(MediaQuery.textScalerOf(context)),
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
             ),
@@ -285,10 +313,10 @@ class _TrophySheet extends ConsumerWidget {
                               style: text.titleSmall,
                             ),
                             Text(
-                              [
+                              tx.facts([
                                 l.togetherEarnedOn(tx.date(e.earnedAt)),
                                 if (e.key.gameId != null) tx.game(e.key.gameId!),
-                              ].join(' · '),
+                              ]),
                               style: text.bodySmall?.copyWith(color: t.textSecondary),
                             ),
                           ],

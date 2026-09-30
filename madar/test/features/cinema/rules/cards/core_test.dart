@@ -134,13 +134,102 @@ void main() {
         final json = jsonDecode(jsonEncode(e.toJson())) as Map<String, Object?>;
         final back = CardGames.fromJson(json);
         expect(jsonEncode(back.toJson()), jsonEncode(json));
+        expect(json['game'], id.name);
         final p = e.currentPlayer!;
         final m = CardGames.ai(id).chooseMove(e.state, p, AiLevel.medium, CardRng(1), AiBudget.phone);
         expect(e.validate(m), isNull);
-        expect(e.legalMoves((p + 1) % e.state.playerCount), isEmpty);
+        // Blackjack's default table has one seat, which is also the next one.
+        if (e.state.playerCount > 1) expect(e.legalMoves((p + 1) % e.state.playerCount), isEmpty);
         expect(e.validate(m), isNull);
         e.apply(m);
       }
+    });
+
+    Object optionsOf(CardGameState s) => switch (s) {
+      TarneebState() => s.options,
+      FortyOneState() => s.options,
+      TrixState() => s.options,
+      BasraState() => s.options,
+      BalootState() => s.options,
+      RummyState() => s.options,
+      BlackjackState() => s.options,
+      _ => throw StateError('unknown game ${s.gameId}'),
+    };
+
+    test('with no options every game is its Jordanian preset', () {
+      const jordan = <CardGameId, Object>{
+        CardGameId.tarneeb: TarneebOptions.jordan(),
+        CardGameId.fortyOne: FortyOneOptions.jordan(),
+        CardGameId.trix: TrixOptions.jordan(),
+        CardGameId.basra: BasraOptions.jordan(),
+        CardGameId.baloot: BalootOptions.jordan(),
+        CardGameId.hand: RummyOptions.hand(),
+        CardGameId.konkan: RummyOptions.konkan(),
+        CardGameId.blackjack: BlackjackOptions.jordan(),
+      };
+      expect(jordan.keys.toSet(), CardGameId.values.toSet());
+      for (final id in CardGameId.values) {
+        expect(optionsOf(CardGames.newMatch(id, seed: 2).state), jordan[id], reason: id.name);
+      }
+      expect(TrixPreset.trix.options, const TrixOptions());
+      expect(const RummyOptions(), const RummyOptions.hand());
+      expect(const SolitaireOptions(), const SolitaireOptions.jordan());
+    });
+
+    test('every named preset is created, saved and restored through the registry', () {
+      final presets = <(CardGameId, Object)>[
+        (CardGameId.tarneeb, const TarneebOptions.syrianTrump()),
+        (CardGameId.tarneeb, const TarneebOptions.lebaneseAuction()),
+        (CardGameId.tarneeb, const TarneebOptions.openAuction(targetScore: 41)),
+        (CardGameId.fortyOne, const FortyOneOptions.lebanese400()),
+        (CardGameId.fortyOne, const FortyOneOptions.syrian()),
+        for (final preset in TrixPreset.values) (CardGameId.trix, preset.options),
+        (CardGameId.trix, const TrixOptions.openDoubling()),
+        (CardGameId.basra, const BasraOptions.palestinian44()),
+        (CardGameId.basra, const BasraOptions.egyptian(players: 3)),
+        (CardGameId.baloot, const BalootOptions(kawesh: true, declareProjects: BalootDeclareProjects.manual)),
+        (CardGameId.hand, const RummyOptions.handPartnership()),
+        (CardGameId.hand, const RummyOptions.handIndicator()),
+        (CardGameId.konkan, const RummyOptions.konkan(eliminationScore: 101)),
+        (CardGameId.blackjack, const BlackjackOptions.european(seats: 3)),
+      ];
+      for (final (id, options) in presets) {
+        final e = CardGames.newMatch(id, seed: 3, options: options);
+        expect(e.state.gameId, id);
+        expect(optionsOf(e.state), options, reason: '$id $options');
+        final json = jsonDecode(jsonEncode(e.toJson())) as Map<String, Object?>;
+        final back = CardGames.fromJson(json);
+        expect(back.state.gameId, id);
+        expect(optionsOf(back.state), options, reason: '$id $options restored');
+        expect(jsonEncode(back.toJson()), jsonEncode(json));
+      }
+    });
+
+    test('options of the wrong game are refused with an ArgumentError', () {
+      expect(
+        () => CardGames.newMatch(CardGameId.hand, seed: 1, options: const RummyOptions.konkan()),
+        throwsArgumentError,
+      );
+      expect(
+        () => CardGames.newMatch(CardGameId.konkan, seed: 1, options: const RummyOptions.hand()),
+        throwsArgumentError,
+      );
+      expect(
+        () => CardGames.newMatch(CardGameId.basra, seed: 1, options: const BasraOptions.palestinian44(players: 3)),
+        throwsArgumentError,
+      );
+      expect(
+        () => CardGames.newMatch(CardGameId.tarneeb, seed: 1, options: const TrixOptions()),
+        throwsA(isA<TypeError>()),
+      );
+    });
+
+    test('Solitaire is exported by the barrel but has no CardGameId', () {
+      final g = SolitaireGame.newDeal(seed: 7);
+      expect(g.options, const SolitaireOptions.jordan());
+      final back = SolitaireGame.fromJson(jsonDecode(jsonEncode(g.toJson())) as Map<String, Object?>);
+      expect(jsonEncode(back.toJson()), jsonEncode(g.toJson()));
+      expect(CardGameId.values.map((g) => g.name), isNot(contains('solitaire')));
     });
 
     test('a move for the wrong phase is rejected with an id', () {

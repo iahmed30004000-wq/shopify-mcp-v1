@@ -61,8 +61,9 @@ enum BlackjackEventKind {
   adviceGiven,
 }
 
-/// The shared event type used for [kind]: the value of the same name once
-/// `CardEventType` has one, else the nearest generic type.
+/// The shared event type used for [kind]: the `CardEventType` of the same
+/// name (every kind has one); the switch below is only a fallback for a kind
+/// added here before it is added to the shared enum.
 CardEventType blackjackEventType(BlackjackEventKind kind) {
   for (final t in CardEventType.values) {
     if (t.name == kind.name) return t;
@@ -268,7 +269,9 @@ class BlackjackRules extends CardRules<BlackjackState, BlackjackMove> {
       if (advice.action == action) {
         seat.decisionsMatched++;
       } else if (o.advisor == BlackjackAdvisor.coach) {
-        ev?.add(BlackjackEvent(BlackjackEventKind.adviceGiven, seat: seatIndex, hand: s.handIndex, action: advice.action));
+        ev?.add(
+          BlackjackEvent(BlackjackEventKind.adviceGiven, seat: seatIndex, hand: s.handIndex, action: advice.action),
+        );
       }
     }
     switch (action) {

@@ -149,7 +149,8 @@ class PlayModeCard extends StatelessWidget {
               Text(
                 tx.mode(mode),
                 style: text.titleSmall?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w600),
-                maxLines: 1,
+                // "Two phones nearby" needs two lines at large text sizes.
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: Space.xxs),
@@ -302,7 +303,7 @@ class TogetherSettingsSheet extends ConsumerWidget {
           const SizedBox(height: Space.l),
           switchRow(
             title: l.togetherSettingsOnline,
-            hint: onlineTransport ? l.togetherSettingsOnlineHint : '${l.togetherComingSoon} · ${l.togetherSettingsOnlineHint}',
+            hint: onlineTransport ? l.togetherSettingsOnlineHint : tx.facts([l.togetherComingSoon, l.togetherSettingsOnlineHint]),
             value: settings.onlineEnabled && onlineTransport,
             onChanged: onlineTransport ? (v) => save(settings.copyWith(onlineEnabled: v)) : null,
           ),

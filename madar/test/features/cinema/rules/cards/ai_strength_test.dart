@@ -1,7 +1,13 @@
-// Sanity check: the hard AI beats the easy AI over seeded matches.
+// Sanity check: the hard AI beats the easy AI over seeded matches, for every
+// game and main variant of the registry.
 //
 // Deterministic: the hard AI's budget is a fixed number of simulations, so
 // every seed replays exactly. The thresholds are deliberately loose.
+//
+// Not here, by design: Blackjack 21 (the dealer is not an opponent; its
+// strength test, B-77, compares points per hand over 20 000 hands in
+// `blackjack_ai_test.dart`) and Solitaire (no opponent; hard wins more of the
+// same 200 deals than easy in `solitaire_ai_test.dart`).
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/rules/cards/baloot/baloot_ai.dart';
 import 'package:madar/features/cinema/rules/cards/baloot/baloot_rules.dart';
@@ -14,8 +20,11 @@ import 'package:madar/features/cinema/rules/cards/konkan/konkan.dart';
 import 'package:madar/features/cinema/rules/cards/rummy/rummy_state.dart';
 import 'package:madar/features/cinema/rules/cards/tarneeb/tarneeb_ai.dart';
 import 'package:madar/features/cinema/rules/cards/tarneeb/tarneeb_rules.dart';
+import 'package:madar/features/cinema/rules/cards/tarneeb41/forty_one_ai.dart';
+import 'package:madar/features/cinema/rules/cards/tarneeb41/forty_one_rules.dart';
 import 'package:madar/features/cinema/rules/cards/trix/trix_ai.dart';
 import 'package:madar/features/cinema/rules/cards/trix/trix_rules.dart';
+import 'package:madar/features/cinema/rules/cards/trix/trix_state.dart';
 
 import 'support.dart';
 
@@ -27,17 +36,22 @@ class Duel {
   final AiBudget budget;
 }
 
-/// Plays [d.matches] matches; the hard side alternates between team/seat
-/// groups so seat order does not matter. Returns (hard wins, points edge).
+/// True for a four-seat game played in partnerships (seats 0 & 2 against
+/// 1 & 3), where both partners of the hard side must be hard.
+bool isPartnership(CardGameState s) => s.playerCount == 4 && s.teamOf(0) == s.teamOf(2);
+
+/// Plays [d.matches] matches; the hard side alternates between the two
+/// teams (partnerships: both partners hard) or rotates one hard seat round
+/// the table (individual games), so seat order does not matter. A match
+/// counts as a hard win when a hard seat is among the match winners.
+/// Returns (hard wins, average points edge of the hard side).
 (int, double) duel(Duel d) {
   var wins = 0;
   var edge = 0.0;
   for (var m = 0; m < d.matches; m++) {
     final probe = d.kit.create(1000 + m).state;
     final n = probe.playerCount;
-    final teams = probe.teamOf(1) != 1; // partnership
-    // Partnerships: hard team alternates; individual: one hard seat rotates.
-    final hardSeats = teams
+    final hardSeats = isPartnership(probe)
         ? [
             for (var s = 0; s < n; s++)
               if (s % 2 == m % 2) s,
@@ -53,8 +67,7 @@ class Duel {
     ];
     final easy = others.reduce((a, b) => a + b) / others.length;
     edge += sign * (hard - easy);
-    final best = sign > 0 ? r.scores.reduce((a, b) => a > b ? a : b) : r.scores.reduce((a, b) => a < b ? a : b);
-    if (hardSeats.any((s) => r.scores[s] == best)) wins++;
+    if (r.winners.any(hardSeats.contains)) wins++;
   }
   return (wins, edge / d.matches);
 }
@@ -65,7 +78,20 @@ void main() {
       Kit('tarneeb', (seed) => TarneebEngine.newMatch(seed: seed), TarneebEngine.fromJson, const TarneebAi()),
       8,
     ),
+    'forty-one': Duel(
+      Kit('forty-one', (seed) => FortyOneEngine.newMatch(seed: seed), FortyOneEngine.fromJson, const FortyOneAi()),
+      8,
+    ),
     'trix': Duel(Kit('trix', (seed) => TrixEngine.newMatch(seed: seed), TrixEngine.fromJson, const TrixAi()), 4),
+    'trix complex': Duel(
+      Kit(
+        'trix complex',
+        (seed) => TrixEngine.newMatch(seed: seed, options: TrixPreset.complex.options),
+        TrixEngine.fromJson,
+        const TrixAi(),
+      ),
+      4,
+    ),
     'basra': Duel(
       Kit(
         'basra',
@@ -88,17 +114,24 @@ void main() {
       ),
       8,
     ),
+    'hand partnership': Duel(
+      Kit(
+        'hand partnership',
+        (seed) => HandEngine.newMatch(seed: seed, options: const RummyOptions.handPartnership(rounds: 3)),
+        HandEngine.fromJson,
+        const HandAi(),
+      ),
+      6,
+    ),
+    // The Jordanian match end (elimination), with the shorter 101 limit.
     'konkan': Duel(
       Kit(
         'konkan',
-        (seed) => KonkanEngine.newMatch(
-          seed: seed,
-          options: const RummyOptions.konkan(matchEnd: RummyMatchEnd.rounds, rounds: 3),
-        ),
+        (seed) => KonkanEngine.newMatch(seed: seed, options: const RummyOptions.konkan(eliminationScore: 101)),
         KonkanEngine.fromJson,
         const KonkanAi(),
       ),
-      8,
+      6,
     ),
   };
   for (final e in duels.entries) {
@@ -107,9 +140,9 @@ void main() {
       // ignore: avoid_print
       print('${e.key}: hard won $wins/${e.value.matches}, average edge ${edge.toStringAsFixed(1)}');
       // More points than the easy side on average, and at least as many wins
-      // as chance (1 in 2 for partnerships, 1 in 4 for a lone hard seat).
+      // as chance (1 in 2 for partnerships, 1 in n for a lone hard seat).
       final probe = e.value.kit.create(0).state;
-      final sides = probe.teamOf(1) != 1 ? 2 : probe.playerCount;
+      final sides = isPartnership(probe) ? 2 : probe.playerCount;
       expect(edge, greaterThan(0));
       expect(wins, greaterThanOrEqualTo(e.value.matches / sides));
     });

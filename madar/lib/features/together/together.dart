@@ -14,8 +14,10 @@
 /// [TogetherSession] over a [TogetherGameAdapter] (ready-made:
 /// [BoardKitTogetherAdapter], [CardEngineTogetherAdapter]) with
 /// `recorder: ref.read(togetherRecorderProvider)`; [HandOffGate] /
-/// [FollowingHandOffGate] for pass-and-play, [SplitScreenArena] for
-/// split-screen; [celebrateNewTrophies] after the result is recorded.
+/// [FollowingHandOffGate] for pass-and-play (moves made from a private view
+/// pass its participant: `session.play(move, participant: p)`),
+/// [SplitScreenArena] for split-screen; [celebrateNewTrophies] after the
+/// result is recorded.
 ///
 /// Only game state ever travels: every message goes through the whitelist
 /// [TogetherCodec]; health, money and personal data never leave the device.

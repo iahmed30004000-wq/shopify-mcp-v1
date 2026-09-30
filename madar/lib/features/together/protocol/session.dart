@@ -338,7 +338,12 @@ class TogetherSession<S, M> extends ChangeNotifier {
   /// [TogetherMoveRefused] when it is not this device's turn or the move is
   /// illegal, and [TogetherDataRejected] when the move's data is not pure
   /// game data – nothing is applied or sent then.
-  Future<void> play(M move, {int? seat}) async {
+  ///
+  /// On a shared device both players' seats are local: a game UI passes the
+  /// [participant] whose view made the move (the hand-off gate's viewer), so
+  /// a late tap on the previous player's view never plays the next player's
+  /// turn (refused as `notYourTurn`). AI seats are played without it.
+  Future<void> play(M move, {int? seat, int? participant}) async {
     final current = _state;
     if (current == null) throw const TogetherMoveRefused('notStarted');
     if (_phase != SessionPhase.playing) throw const TogetherMoveRefused('finished');
@@ -346,6 +351,7 @@ class TogetherSession<S, M> extends ChangeNotifier {
     final s = seat ?? toMove;
     if (s == null || s != toMove) throw const TogetherMoveRefused('notYourTurn');
     if (!controlsSeat(s)) throw const TogetherMoveRefused('notYourSeat');
+    if (participant != null && _seats[s] != participant) throw const TogetherMoveRefused('notYourTurn');
     final error = adapter.validateMove(current, s, move);
     if (error != null) throw TogetherMoveRefused(error);
     final data = GameData(adapter.encodeMove(move), policy: adapter.policy);

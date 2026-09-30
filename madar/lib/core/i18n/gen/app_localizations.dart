@@ -34533,6 +34533,18 @@ abstract class L10n {
   /// **'شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.'**
   String get savedGamesInsecureBody;
 
+  /// Player: the web page's renderer crashed or was closed for memory
+  ///
+  /// In ar, this message translates to:
+  /// **'توقّفت اللعبة'**
+  String get savedGamesCrashedTitle;
+
+  /// No description provided for @savedGamesCrashedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعطّلت صفحة اللعبة أو أُغلقت لنفاد الذاكرة. أعد المحاولة لتحميلها من جديد.'**
+  String get savedGamesCrashedBody;
+
   /// No description provided for @savedGamesRetry.
   ///
   /// In ar, this message translates to:
@@ -34638,7 +34650,7 @@ abstract class L10n {
   /// No description provided for @savedGamesPrayerUnloaded.
   ///
   /// In ar, this message translates to:
-  /// **'أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.'**
+  /// **'أوقفنا اللعبة كي لا يصدر عنها أي صوت، وسيُعاد تحميلها بعد الصلاة.'**
   String get savedGamesPrayerUnloaded;
 
   /// No description provided for @savedGamesPageSays.

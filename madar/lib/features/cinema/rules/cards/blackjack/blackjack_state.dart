@@ -15,13 +15,9 @@ import '../core/deck.dart';
 import '../core/determinize.dart' show cardsMinus;
 import '../core/playing_card.dart';
 
-/// The registry id of this game: `CardGameId.blackjack` once it is added to
-/// the enum in `core/card_game.dart`. Until then the state reports the first
-/// id of the enum; its JSON always says `blackjack`.
-final CardGameId blackjackGameId = CardGameId.values.firstWhere(
-  (g) => g.name == BlackjackState.gameKey,
-  orElse: () => CardGameId.values.first,
-);
+/// The registry id of this game ([CardGameId.blackjack]; its name is the
+/// JSON `game` key, [BlackjackState.gameKey]).
+const CardGameId blackjackGameId = CardGameId.blackjack;
 
 /// When the dealer's second card arrives (B-21, B-25).
 enum BlackjackHoleCard {
@@ -275,8 +271,7 @@ class BlackjackOptions {
   };
 
   @override
-  bool operator ==(Object other) =>
-      other is BlackjackOptions && _jsonEquals(other.toJson(), toJson());
+  bool operator ==(Object other) => other is BlackjackOptions && _jsonEquals(other.toJson(), toJson());
 
   @override
   int get hashCode => Object.hashAll(toJson().values);
@@ -360,8 +355,7 @@ int blackjackCardValue(PlayingCard c) => switch (c.rank) {
 
 /// Ace plus a 10-value card as two cards (whether it counts as a natural
 /// also depends on the hand not coming from a split, B-12).
-bool isTwoCardTwentyOne(List<PlayingCard> cards) =>
-    cards.length == 2 && blackjackTotal(cards).total == 21;
+bool isTwoCardTwentyOne(List<PlayingCard> cards) => cards.length == 2 && blackjackTotal(cards).total == 21;
 
 /// One player hand.
 class BlackjackHand {
@@ -621,9 +615,7 @@ class BlackjackState extends CardGameState {
     int seed = 0,
   }) {
     final s = BlackjackState._empty(options, CardRng(seed));
-    final rest = fillRest
-        ? cardsMinus(buildDeck(copies: options.decks), [...drawOrder, ...discards])
-        : <PlayingCard>[];
+    final rest = fillRest ? cardsMinus(buildDeck(copies: options.decks), [...drawOrder, ...discards]) : <PlayingCard>[];
     // The next card is the last one.
     s.shoe = [...rest.reversed, ...drawOrder.reversed];
     s.discards.addAll(discards);
@@ -664,7 +656,7 @@ class BlackjackState extends CardGameState {
         : BlackjackRoundSummary.fromJson((j['lastRound']! as Map).cast<String, Object?>()),
   );
 
-  /// The `game` key of the JSON (and the future `CardGameId` name).
+  /// The `game` key of the JSON (the name of the `CardGameId`).
   static const String gameKey = 'blackjack';
 
   final BlackjackOptions options;
@@ -749,8 +741,7 @@ class BlackjackState extends CardGameState {
   List<PlayingCard> get dealerVisible => holeHidden ? dealer.sublist(0, 1) : List.of(dealer);
 
   /// The hand being played, if any.
-  BlackjackHand? get activeHand =>
-      phase == BlackjackPhase.playerTurn ? seats[turn].hands[handIndex] : null;
+  BlackjackHand? get activeHand => phase == BlackjackPhase.playerTurn ? seats[turn].hands[handIndex] : null;
 
   /// The active hand may take a card (B-30, B-38).
   bool get canHit {

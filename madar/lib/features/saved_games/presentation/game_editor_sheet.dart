@@ -204,7 +204,7 @@ class _GameEditorSheetState extends ConsumerState<GameEditorSheet> {
       return;
     }
     final typed = clampText(_title.text, SavedGamesLimits.maxTitle);
-    final title = typed.isEmpty ? url.host : typed;
+    final title = typed.isEmpty ? displayHost(url) : typed;
     final notes = clampText(_notes.text, SavedGamesLimits.maxNotes, singleLine: false);
     final existing = widget.existing;
     final game = existing != null
@@ -230,7 +230,8 @@ class _GameEditorSheetState extends ConsumerState<GameEditorSheet> {
     final url = check.url;
     final urlError = _urlError(l);
     final existing = widget.existing;
-    final title = _title.text.trim().isEmpty ? (url?.host ?? l.savedGamesNameHint) : _title.text.trim();
+    final shownHost = url == null ? null : displayHost(url);
+    final title = _title.text.trim().isEmpty ? (shownHost ?? l.savedGamesNameHint) : _title.text.trim();
 
     return InteractionSheetFrame(
       title: existing == null ? l.savedGamesAddTitle : l.savedGamesEditTitle,
@@ -240,7 +241,7 @@ class _GameEditorSheetState extends ConsumerState<GameEditorSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          _PreviewRow(art: _art, seed: existing?.id ?? _url.text, title: title, host: url?.host),
+          _PreviewRow(art: _art, seed: existing?.id ?? _url.text, title: title, host: shownHost),
           const SizedBox(height: Space.l),
           FieldShell(
             label: l.savedGamesUrlLabel,
@@ -302,7 +303,7 @@ class _GameEditorSheetState extends ConsumerState<GameEditorSheet> {
               textInputAction: TextInputAction.next,
               maxLength: SavedGamesLimits.maxTitle,
               style: text.bodyMedium,
-              decoration: kitInputDecoration(context, hint: url?.host ?? l.savedGamesNameHint),
+              decoration: kitInputDecoration(context, hint: shownHost ?? l.savedGamesNameHint),
             ),
           ),
           const SizedBox(height: Space.l),

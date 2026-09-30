@@ -24,6 +24,10 @@ class TogetherTexts {
 
   String digits(String s) => fmt.localizeDigits(s);
 
+  /// Short facts on one line: "10 matches · 1 draw" / "١٠ مباريات، تعادل
+  /// واحد" (a middle dot beside Arabic-Indic digits reads as a zero).
+  String facts(Iterable<String> parts) => parts.join(l.commonFactSeparator);
+
   /// The player's name, or the localised "Player 1" / "Player 2".
   String rawName(TogetherProfile p) => p.name.isNotEmpty ? p.name : l.togetherPlayerDefault(n(p.slot.index + 1));
 

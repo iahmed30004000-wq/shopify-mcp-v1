@@ -21741,6 +21741,13 @@ class L10nEn extends L10n {
       'The site\'s security certificate isn\'t valid, so Madar stopped the connection to protect you.';
 
   @override
+  String get savedGamesCrashedTitle => 'The game stopped';
+
+  @override
+  String get savedGamesCrashedBody =>
+      'The game\'s page crashed or was closed to free memory. Try again to load it afresh.';
+
+  @override
   String get savedGamesRetry => 'Try again';
 
   @override
@@ -21798,7 +21805,7 @@ class L10nEn extends L10n {
 
   @override
   String get savedGamesPrayerUnloaded =>
-      'The game was stopped because its sound can\'t be muted from inside; it will reload after prayer.';
+      'The game was stopped so none of its sound can play; it will reload after prayer.';
 
   @override
   String savedGamesPageSays(String host) {

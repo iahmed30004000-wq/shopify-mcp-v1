@@ -20786,6 +20786,11 @@
   "savedGamesErrorBody": "قد يكون الموقع متوقفًا أو تغيّر رابطه.",
   "savedGamesInsecureTitle": "اتصال غير آمن",
   "savedGamesInsecureBody": "شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.",
+  "savedGamesCrashedTitle": "توقّفت اللعبة",
+  "@savedGamesCrashedTitle": {
+    "description": "Player: the web page's renderer crashed or was closed for memory"
+  },
+  "savedGamesCrashedBody": "تعطّلت صفحة اللعبة أو أُغلقت لنفاد الذاكرة. أعد المحاولة لتحميلها من جديد.",
   "savedGamesRetry": "إعادة المحاولة",
   "savedGamesBackToMadar": "العودة إلى مَدار",
   "savedGamesReload": "إعادة التحميل",
@@ -20810,7 +20815,7 @@
   "savedGamesExternalFailed": "لم يُعثر على متصفح يفتح الرابط",
   "savedGamesPrayerTitle": "حان وقت الصلاة",
   "savedGamesPrayerBody": "أوقفنا اللعبة وصوتها. تُستأنف من تلقاء نفسها بعد الأذان ووقت الصلاة.",
-  "savedGamesPrayerUnloaded": "أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.",
+  "savedGamesPrayerUnloaded": "أوقفنا اللعبة كي لا يصدر عنها أي صوت، وسيُعاد تحميلها بعد الصلاة.",
   "savedGamesPageSays": "رسالة من {host}",
   "@savedGamesPageSays": {
     "placeholders": {

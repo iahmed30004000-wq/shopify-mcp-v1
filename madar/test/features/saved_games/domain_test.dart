@@ -177,9 +177,12 @@ void main() {
     });
 
     test('planHush: prayer needs certain silence, the rest never unloads', () {
-      expect(planHush(reason: HushReason.prayer, sealedFrames: 0), HushPlan.inPlace);
-      expect(planHush(reason: HushReason.prayer, sealedFrames: 1), HushPlan.unload);
-      expect(planHush(reason: HushReason.prayer, sealedFrames: null), HushPlan.unload);
+      expect(planHush(reason: HushReason.prayer, sealedFrames: 0, blind: false), HushPlan.inPlace);
+      // Sound the tracker may never have seen (or no answer about it).
+      expect(planHush(reason: HushReason.prayer, sealedFrames: 0, blind: true), HushPlan.unload);
+      expect(planHush(reason: HushReason.prayer, sealedFrames: 0), HushPlan.unload);
+      expect(planHush(reason: HushReason.prayer, sealedFrames: 1, blind: false), HushPlan.unload);
+      expect(planHush(reason: HushReason.prayer, sealedFrames: null, blind: false), HushPlan.unload);
       expect(planHush(reason: HushReason.user, sealedFrames: 3), HushPlan.inPlace);
       expect(planHush(reason: HushReason.background, sealedFrames: null), HushPlan.inPlace);
     });

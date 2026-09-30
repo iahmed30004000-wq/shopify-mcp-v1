@@ -10,6 +10,7 @@ import 'package:madar/core/design/widgets/widgets.dart' show GlassCard;
 import 'package:madar/features/together/together.dart';
 
 import 'split_touch_harness.dart';
+import '../../helpers/screenshot_harness.dart' show loadMadarFonts;
 import 'together_test_utils.dart';
 
 const _secret = ValueKey('secret-hand');
@@ -99,6 +100,12 @@ void main() {
     );
     final field = tester.widget<TextField>(find.byKey(const ValueKey('together-name-field')));
     expect(field.controller!.text, 'Nova');
+    // Opening the editor does not jump to the custom title with the keyboard up.
+    final title = tester.widget<EditableText>(
+      find.descendant(of: find.byKey(const ValueKey('together-title-field')), matching: find.byType(EditableText)),
+    );
+    expect(title.controller.text, 'Card Queen');
+    expect(title.focusNode.hasFocus, isFalse);
     await tester.tap(find.text('Save'));
     await settleTogether(tester);
     final stored = (await tester.runAsync(() => env.repo.profiles()))!.two;
@@ -108,64 +115,18 @@ void main() {
     expect(stored.customTitle, 'Card Queen');
   });
 
-  group('text scale 1.3 (English, the longest texts)', () {
-    /// Texts under [scope] that are cut: vertically clipped, or truncated
-    /// to their maxLines.
-    List<String> cutTexts(WidgetTester tester, Finder scope) => [
-      for (final e in find.descendant(of: scope, matching: find.byType(RichText)).evaluate())
-        if (e.renderObject case final RenderParagraph p
-            when p.didExceedMaxLines || p.size.height + 0.5 < p.getMinIntrinsicHeight(p.size.width))
-          p.text.toPlainText(),
-    ];
-
-    testWidgets('Hall of Fame: every trophy name and description is shown whole', (tester) async {
-      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
-      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-      await pumpTogetherApp(
-        tester,
-        locale: const Locale('en'),
-        home: const HallOfFameScreen(animateBackdrop: false),
-        seed: seedTogetherHistory,
-      );
-      final cut = <String>{};
-      for (var i = 0; i < 8; i++) {
-        cut.addAll(cutTexts(tester, find.byType(GlassCard)));
-        await tester.drag(find.byType(Scrollable).first, const Offset(0, -300));
-        await tester.pumpAndSettle();
+  testWidgets('Arabic never puts a middle dot beside Arabic-Indic digits (it reads as a zero)', (tester) async {
+    await pumpTogetherApp(tester, home: const TogetherHomeScreen(animateBackdrop: false), seed: seedTogetherHistory);
+    final seen = <String>{};
+    for (var i = 0; i < 6; i++) {
+      for (final e in find.byType(RichText).evaluate()) {
+        seen.add((e.widget as RichText).text.toPlainText());
       }
-      expect(cut, isEmpty);
-    });
-
-    testWidgets('launch sheet: the play modes are named in full', (tester) async {
-      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
-      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-      await pumpTogetherApp(
-        tester,
-        locale: const Locale('en'),
-        home: _OpenOnStart((c) => showGameLaunchSheet(c, game: TogetherGames.airHockey)),
-      );
-      expect(cutTexts(tester, find.byType(PlayModeCard)).where((t) => t.startsWith('Two phones')), isEmpty);
-    });
-
-    testWidgets('home shelf: the dates under the trophies never run into each other', (tester) async {
-      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
-      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-      await pumpTogetherApp(
-        tester,
-        locale: const Locale('en'),
-        home: const TogetherHomeScreen(animateBackdrop: false),
-        seed: seedTogetherHistory,
-      );
-      final shelf = find.byKey(const ValueKey('together-shelf'));
-      final dates = [
-        for (final e in find.descendant(of: shelf, matching: find.textContaining('September')).evaluate())
-          tester.getRect(find.byWidget(e.widget)),
-      ]..sort((a, b) => a.left.compareTo(b.left));
-      expect(dates.length, greaterThan(2));
-      for (var i = 1; i < dates.length; i++) {
-        expect(dates[i].left - dates[i - 1].right, greaterThanOrEqualTo(6), reason: 'gap before date $i');
-      }
-    });
+      await tester.drag(find.byType(Scrollable).first, const Offset(0, -400));
+      await tester.pumpAndSettle();
+    }
+    expect(seen.where((t) => t.contains('·')), isEmpty);
+    expect(seen.where((t) => t.contains('، ')), isNotEmpty);
   });
 
   group('hand-off', () {
@@ -471,6 +432,70 @@ void main() {
       final right = at(397);
       expect((left.r * 255).round(), greaterThan(200), reason: 'left edge is player 0 (red): $left');
       expect((right.b * 255).round(), greaterThan(200), reason: 'right edge is player 1 (blue): $right');
+    });
+  });
+
+  // Last: these load the real fonts (the test font's square glyphs say
+  // nothing about what fits), which then stay loaded in this isolate.
+  group('text scale 1.3 (English, the longest texts)', () {
+    setUpAll(loadMadarFonts);
+
+    /// Texts under [scope] that are cut: vertically clipped, or truncated
+    /// to their maxLines.
+    List<String> cutTexts(WidgetTester tester, Finder scope) => [
+      for (final e in find.descendant(of: scope, matching: find.byType(RichText)).evaluate())
+        if (e.renderObject case final RenderParagraph p
+            when p.didExceedMaxLines || p.size.height + 0.5 < p.getMinIntrinsicHeight(p.size.width))
+          p.text.toPlainText(),
+    ];
+
+    testWidgets('Hall of Fame: every trophy name and description is shown whole', (tester) async {
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      await pumpTogetherApp(
+        tester,
+        locale: const Locale('en'),
+        home: const HallOfFameScreen(animateBackdrop: false),
+        seed: seedTogetherHistory,
+      );
+      final cut = <String>{};
+      for (var i = 0; i < 8; i++) {
+        cut.addAll(cutTexts(tester, find.byType(GlassCard)));
+        await tester.drag(find.byType(Scrollable).first, const Offset(0, -300));
+        await tester.pumpAndSettle();
+      }
+      expect(cut, isEmpty);
+    });
+
+    testWidgets('launch sheet: the play modes are named in full', (tester) async {
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      await pumpTogetherApp(
+        tester,
+        locale: const Locale('en'),
+        home: _OpenOnStart((c) => showGameLaunchSheet(c, game: TogetherGames.airHockey)),
+      );
+      expect(cutTexts(tester, find.byType(PlayModeCard)).where((t) => t.startsWith('Two phones')), isEmpty);
+    });
+
+    testWidgets('home shelf: the dates under the trophies never run into each other', (tester) async {
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      await pumpTogetherApp(
+        tester,
+        locale: const Locale('en'),
+        home: const TogetherHomeScreen(animateBackdrop: false),
+        seed: seedTogetherHistory,
+      );
+      final shelf = find.byKey(const ValueKey('together-shelf'));
+      final dates = [
+        for (final e in find.descendant(of: shelf, matching: find.textContaining('September')).evaluate())
+          tester.getRect(find.byWidget(e.widget)),
+      ]..sort((a, b) => a.left.compareTo(b.left));
+      expect(dates.length, greaterThan(2));
+      for (var i = 1; i < dates.length; i++) {
+        expect(dates[i].left - dates[i - 1].right, greaterThanOrEqualTo(6), reason: 'gap before date $i');
+      }
     });
   });
 }

@@ -268,6 +268,8 @@ class _GameRow extends ConsumerWidget {
                     BidiIsolate.ltr(game.host),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    textDirection: BidiIsolate.directionOf(game.host),
+                    textAlign: uiStartAlign(context),
                     style: text.labelMedium?.copyWith(color: t.textSecondary),
                   ),
                   const SizedBox(height: 2),

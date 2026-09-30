@@ -309,7 +309,14 @@ class GoalsPill extends StatelessWidget {
               label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: text.labelSmall?.copyWith(color: t.isDark ? color : Color.lerp(color, t.textPrimary, 0.25)),
+              // A filled pill's own tint darkens the glass behind it in
+              // dark themes: its label is lifted towards the text colour to
+              // keep AA ("1 overdue" was 4.37:1 on Lapis).
+              style: text.labelSmall?.copyWith(
+                color: t.isDark
+                    ? (filled ? Color.lerp(color, t.textPrimary, 0.35) : color)
+                    : Color.lerp(color, t.textPrimary, 0.25),
+              ),
             ),
           ),
         ],

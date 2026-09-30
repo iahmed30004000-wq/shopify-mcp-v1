@@ -129,12 +129,15 @@ NavigationVerdict decideGameNavigation({
 
 /// How to silence a game for [reason]. [sealedFrames] is the number of
 /// cross-origin frames the in-page hush could not reach (null: the hush
-/// could not run at all).
+/// could not run at all); [blind] is true when the page may hold sound Madar
+/// never saw (its audio tracker started after the page's own scripts, so a
+/// Web Audio context or a detached `new Audio()` created earlier is out of
+/// reach – in a WebView main frame Web Audio needs no user gesture).
 ///
-/// Prayer requires certain silence: when any sound source is out of reach
-/// the page is unloaded (and reloaded after). A user mute or leaving the
-/// app never throws the game's state away.
-HushPlan planHush({required HushReason reason, required int? sealedFrames}) {
+/// Prayer requires certain silence: unless every sound source is known to be
+/// reached, the page is unloaded (and reloaded after). A user mute or
+/// leaving the app never throws the game's state away.
+HushPlan planHush({required HushReason reason, required int? sealedFrames, bool blind = true}) {
   if (reason != HushReason.prayer) return HushPlan.inPlace;
-  return sealedFrames == 0 ? HushPlan.inPlace : HushPlan.unload;
+  return sealedFrames == 0 && !blind ? HushPlan.inPlace : HushPlan.unload;
 }

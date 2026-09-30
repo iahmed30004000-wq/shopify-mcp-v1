@@ -9,8 +9,13 @@ import 'dart:math' as math;
 
 import 'playing_card.dart';
 
-/// The six Tier 2 card games.
-enum CardGameId { tarneeb, trix, hand, basra, baloot, konkan }
+/// The card games behind the uniform [CardGameEngine]: the six Tier 2 games,
+/// "41" (`fortyOne`, the individual-bid game of the Tarneeb family) and
+/// Blackjack 21 (1–3 seats against a dealer). Solitaire is a one-player
+/// patience with its own `SolitaireGame` and has no id here. Variants of a
+/// game (Trix Complex, partnership Hand, the Syrian trump, …) are options of
+/// that game, not ids. New values go at the end: saves store the name.
+enum CardGameId { tarneeb, trix, hand, basra, baloot, konkan, fortyOne, blackjack }
 
 /// AI strength.
 enum AiLevel { easy, medium, hard }
@@ -80,6 +85,27 @@ enum CardEventType {
   playerFinished,
   roundScored,
   matchOver,
+
+  // Blackjack 21 (`BlackjackEventKind`, same names; `blackjackEventType`
+  // picks them up by name). The Trix `doubled` is not reused for a doubled
+  // Blackjack hand.
+  shoeShuffled,
+  cardBurned,
+  dealerPeeked,
+  holeRevealed,
+  dealerDrew,
+  cardToHand,
+  hit,
+  stood,
+  handDoubled,
+  split,
+  surrendered,
+  bust,
+  blackjack,
+  handSettled,
+  lossCapped,
+  sessionOver,
+  adviceGiven,
 }
 
 /// The whole (mutable) state of a match. The UI must treat it as read-only

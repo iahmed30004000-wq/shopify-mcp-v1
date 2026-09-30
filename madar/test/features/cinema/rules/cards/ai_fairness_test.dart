@@ -7,11 +7,69 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/rules/cards/cards.dart';
 import 'package:madar/features/cinema/rules/cards/core/determinize.dart';
 
+/// One table to check: a game and its options (null = the Jordanian default).
+typedef FairnessCase = ({String name, CardGameId id, Object? options});
+
+/// Every game of the registry with its default, and every named preset or
+/// option that changes what a seat may see or infer (exposed trump card,
+/// hidden or public doubles, partnerships, projects, the indicator card,
+/// eliminated seats, the hole card). Blackjack is played with three endless
+/// seats so the check sees enough decisions (a solo 20-round session is over
+/// after about 50 moves).
+final List<FairnessCase> fairnessCases = [
+  for (final id in CardGameId.values)
+    if (id != CardGameId.blackjack) (name: id.name, id: id, options: null),
+  (name: 'blackjack', id: CardGameId.blackjack, options: const BlackjackOptions(seats: 3, sessionRounds: null)),
+  (
+    name: 'blackjack european',
+    id: CardGameId.blackjack,
+    options: const BlackjackOptions.european(seats: 3, sessionRounds: null, originalOnly: true),
+  ),
+  (name: 'tarneeb syrian trump', id: CardGameId.tarneeb, options: const TarneebOptions.syrianTrump()),
+  (
+    name: 'tarneeb lebanese auction, worthless hand, trump lead',
+    id: CardGameId.tarneeb,
+    options: const TarneebOptions(oneRoundAuction: true, worthlessHandRedeal: true, firstLeadMustBeTrump: true),
+  ),
+  (name: '400 (lebanese)', id: CardGameId.fortyOne, options: const FortyOneOptions.lebanese400()),
+  (name: 'syrian 41', id: CardGameId.fortyOne, options: const FortyOneOptions.syrian()),
+  for (final preset in TrixPreset.values)
+    if (preset != TrixPreset.trix) (name: 'trix ${preset.name}', id: CardGameId.trix, options: preset.options),
+  (
+    name: 'trix complex partners, sequential doubling',
+    id: CardGameId.trix,
+    options: const TrixOptions(
+      mode: TrixMode.complex,
+      partnership: true,
+      doublingReveal: TrixDoublingReveal.sequential,
+    ),
+  ),
+  (name: 'basra palestinian 44', id: CardGameId.basra, options: const BasraOptions.palestinian44()),
+  (name: 'basra egyptian 3p', id: CardGameId.basra, options: const BasraOptions.egyptian(players: 3)),
+  (
+    name: 'baloot manual projects, kawesh, ace round, taker leads',
+    id: CardGameId.baloot,
+    options: const BalootOptions(
+      kawesh: true,
+      aceThirdRound: true,
+      declareProjects: BalootDeclareProjects.manual,
+      firstLead: BalootFirstLead.taker,
+    ),
+  ),
+  (name: 'hand partnership', id: CardGameId.hand, options: const RummyOptions.handPartnership()),
+  (name: 'hand indicator', id: CardGameId.hand, options: const RummyOptions.handIndicator()),
+  (
+    name: 'konkan 3p rounds',
+    id: CardGameId.konkan,
+    options: const RummyOptions.konkan(players: 3, matchEnd: RummyMatchEnd.rounds),
+  ),
+];
+
 void main() {
-  for (final id in CardGameId.values) {
-    test('${id.name}: decisions depend only on what the seat can see', () {
-      final ai = CardGames.ai(id) as HeuristicAi;
-      final e = CardGames.newMatch(id, seed: 5);
+  for (final c in fairnessCases) {
+    test('${c.name}: decisions depend only on what the seat can see', () {
+      final ai = CardGames.ai(c.id) as HeuristicAi;
+      final e = CardGames.newMatch(c.id, seed: 5, options: c.options);
       final rng = CardRng(1);
       var checked = 0;
       for (var move = 0; move < 400 && !e.isOver; move++) {
@@ -27,7 +85,7 @@ void main() {
           for (final level in [AiLevel.medium, AiLevel.hard]) {
             final a = ai.chooseMove(real, seat, level, CardRng(9), const AiBudget.simulations(10));
             final b = ai.chooseMove(other, seat, level, CardRng(9), const AiBudget.simulations(10));
-            expect(b, a, reason: '${id.name} move $move ${level.name}');
+            expect(b, a, reason: '${c.name} move $move ${level.name}');
           }
           checked++;
         }
@@ -75,7 +133,7 @@ void main() {
     final r = RummyState.custom(
       options: const RummyOptions.hand(),
       hands: rummyHands,
-      stock: cardsMinus(buildDeck(copies: 2, jokers: 4), [for (final h in rummyHands) ...h]),
+      stock: cardsMinus(buildDeck(copies: 2, jokers: 2), [for (final h in rummyHands) ...h]),
     )..known[1] = PlayingCard.list('KD');
     for (var i = 0; i < 10; i++) {
       final w = const RummyAi().determinize(r, 0, CardRng(i));

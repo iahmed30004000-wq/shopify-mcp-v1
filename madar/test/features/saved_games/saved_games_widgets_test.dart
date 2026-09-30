@@ -343,8 +343,13 @@ void main() {
       testWidgets('the adhan / prayer mute covers and silences the game, then lifts', (tester) async {
         final env = await openPlayer(tester);
         final l = l10nOf(tester);
-        final web = env.web.last..result = (s) => s.contains('sealed') ? '"{\\"sealed\\":0}"' : '""';
-        web.pageFinished(web.loads.single);
+        final web = env.web.last
+          ..result = (s) => s == GameScripts.trackAudio
+              ? '"{\\"early\\":true}"'
+              : (s.contains('sealed') ? '"{\\"sealed\\":0,\\"blind\\":false}"' : '""');
+        web
+          ..pageStarted(web.loads.single)
+          ..pageFinished(web.loads.single);
         await settle(tester);
         final container = ProviderScope.containerOf(tester.element(find.byType(SavedGamePlayerScreen)));
         final lease = container.read(prayerMuteProvider).acquire('test adhan');

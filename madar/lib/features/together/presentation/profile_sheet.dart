@@ -34,24 +34,37 @@ class TogetherProfileSheet extends ConsumerStatefulWidget {
 }
 
 class _TogetherProfileSheetState extends ConsumerState<TogetherProfileSheet> {
+  /// False until the stored profiles have loaded: the draft starts from the
+  /// stored profile, never from the defaults (saving those would overwrite
+  /// the player's name, avatar and title).
+  bool _ready = false;
   late TogetherProfile _draft;
   late TogetherProfile _other;
-  late final TextEditingController _name;
-  late final TextEditingController _customTitle;
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _customTitle = TextEditingController();
   late int _variantBase;
   late bool _customTitleOn;
+
+  /// The player just picked "custom title": focus its field (never when the
+  /// editor opens on a stored custom title – no keyboard jumping up).
+  bool _focusCustomTitle = false;
   late final math.Random _random = widget.random ?? math.Random();
 
   @override
   void initState() {
     super.initState();
-    final profiles = ref.read(togetherProfilesProvider).value ?? TogetherProfiles.defaults();
+    final profiles = ref.read(togetherProfilesProvider).value;
+    if (profiles != null) _start(profiles);
+  }
+
+  void _start(TogetherProfiles profiles) {
     _draft = profiles.of(widget.slot);
     _other = profiles.of(widget.slot.other);
-    _name = TextEditingController(text: _draft.name);
-    _customTitle = TextEditingController(text: _draft.customTitle);
+    _name.text = _draft.name;
+    _customTitle.text = _draft.customTitle;
     _customTitleOn = _draft.title == null && _draft.customTitle.isNotEmpty;
     _variantBase = _draft.avatar.seed;
+    _ready = true;
   }
 
   @override
@@ -85,6 +98,23 @@ class _TogetherProfileSheetState extends ConsumerState<TogetherProfileSheet> {
     final tx = TogetherTexts.of(context);
     final l = tx.l;
     final text = Theme.of(context).textTheme;
+    final profiles = ref.watch(togetherProfilesProvider).value;
+    if (!_ready) {
+      if (profiles == null) {
+        return InteractionSheetFrame(
+          title: l.togetherProfileTitle,
+          icon: Icons.person_rounded,
+          body: const Padding(
+            padding: EdgeInsets.all(Space.xxl),
+            child: Center(child: OrbitLoader(size: 40)),
+          ),
+        );
+      }
+      _start(profiles);
+    } else if (profiles != null) {
+      // The other player's colour stays current (it cannot be taken).
+      _other = profiles.of(widget.slot.other);
+    }
     final preview = _result;
     final defaultName = l.togetherPlayerDefault(tx.n(widget.slot.index + 1));
     Widget gap([double h = Space.xl]) => SizedBox(height: h);
@@ -232,7 +262,10 @@ class _TogetherProfileSheetState extends ConsumerState<TogetherProfileSheet> {
                       icon: Icons.edit_rounded,
                       dense: true,
                       selected: _customTitleOn,
-                      onSelected: (_) => setState(() => _customTitleOn = true),
+                      onSelected: (_) => setState(() {
+                        _focusCustomTitle = !_customTitleOn;
+                        _customTitleOn = true;
+                      }),
                     ),
                   ],
                 ),
@@ -241,7 +274,7 @@ class _TogetherProfileSheetState extends ConsumerState<TogetherProfileSheet> {
                   TextField(
                     key: const ValueKey('together-title-field'),
                     controller: _customTitle,
-                    autofocus: true,
+                    autofocus: _focusCustomTitle,
                     inputFormatters: [LengthLimitingTextInputFormatter(TogetherBounds.maxTitleLength)],
                     decoration: kitInputDecoration(context, hint: l.togetherTitleCustomHint),
                     onChanged: (_) => setState(() {}),

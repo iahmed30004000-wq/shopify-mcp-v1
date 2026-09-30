@@ -126,7 +126,8 @@ class SavedWebGame {
   /// The user asked to clear the site's data; done the next time it opens.
   final bool clearDataPending;
 
-  String get host => url.host;
+  /// The link's host as the user reads it (an Arabic domain in Arabic).
+  String get host => displayHost(url);
 
   SavedWebGame copyWith({
     String? title,
@@ -195,7 +196,7 @@ class SavedWebGame {
     final count = json['playCount'];
     return SavedWebGame(
       id: id,
-      title: title is String && title.trim().isNotEmpty ? title : url.host,
+      title: title is String && title.trim().isNotEmpty ? title : displayHost(url),
       url: url,
       notes: notes is String ? notes : '',
       orientation: GameOrientation.values.asNameMap()[json['orientation']] ?? GameOrientation.auto,

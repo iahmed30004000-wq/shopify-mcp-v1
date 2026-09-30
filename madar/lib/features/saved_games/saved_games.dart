@@ -12,13 +12,32 @@
 ///
 /// Network: only when the user opens a game, or taps "Fetch title" /
 /// "Site icon". Sound: the player follows the app's prayer mute
-/// (`prayerMuteProvider`); no extra wiring is needed.
+/// (`prayerMuteProvider`); no extra wiring is needed. During prayer a game
+/// stays paused in place only when Madar's audio tracker ran before the
+/// page's own scripts and reaches every frame; otherwise it is unloaded
+/// and reloaded after prayer (certain silence).
 ///
-/// Host integration (Android, optional but recommended): answer the
-/// `app.madar/saved_games` method channel – `keepScreenOn {on: bool}`,
-/// `pauseWebView {id: int}` / `resumeWebView {id: int}` (via
-/// `WebViewFlutterAndroidExternalApi.getWebView`). Without it the player
-/// still works; the screen may dim and in-place muting stays in-page only.
+/// While something opaque covers the player (a pushed page, or the adhan –
+/// `AdhanHost` stops the tickers beneath it) the phone gets Madar's normal
+/// screen back (portrait, system bars, screen may sleep) and the game is
+/// hushed; both return when it is uncovered.
+///
+/// Host integration (Android, recommended): answer the
+/// `app.madar.orbit/saved_games` method channel, finding the view with
+/// `WebViewFlutterAndroidExternalApi.getWebView(engine, id)`:
+/// * `keepScreenOn {on: bool}` – use `FlutterView.keepScreenOn`, not the
+///   window flag (the adhan's lock-screen mode owns that flag);
+/// * `pauseWebView {id}` / `resumeWebView {id}` – `onPause()` +
+///   `pauseTimers()` / `resumeTimers()` + `onResume()`; answer `true`;
+/// * `hardenWebView {id}` – `settings.setSupportMultipleWindows(false)` and
+///   `setJavaScriptCanOpenWindowsAutomatically(false)` (the plugin turns
+///   both on: every `window.open` would create a native WebView), and wrap
+///   its `WebViewClient` (API 26+: `webView.webViewClient`) so that
+///   `onRenderProcessGone` returns true and invokes `rendererGone {id}` on
+///   this channel – without it Android kills the whole app when a game's
+///   renderer crashes or is reclaimed for memory.
+/// Without the host the player still works: the screen may dim, in-place
+/// muting stays in-page only, and a renderer crash takes the app down.
 library;
 
 export 'data/game_meta_fetcher.dart' show GameMetaFetcher, HttpGameMetaFetcher;

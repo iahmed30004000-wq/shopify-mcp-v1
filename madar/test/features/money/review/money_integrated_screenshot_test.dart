@@ -161,9 +161,17 @@ Future<void> _shot(
       // purpose – a scroll edge, not text to read there.
       final keypad = find.byType(AmountKeypad);
       final fadeTop = keypad.evaluate().isEmpty ? double.infinity : tester.getRect(keypad.first).top - 56;
+      // On the Money page, the sheet's text scrolled up past its top edge
+      // is clipped away under the planet – not on screen at all.
+      final clipped = _clippedUnderPlanet(tester);
       misses.addAll([
         for (final r in await measureRenderedContrast(tester, boundary))
-          if (!r.passes && !r.icon && r.rect.bottom < fadeTop && _readable.hasMatch(r.text)) r,
+          if (!r.passes &&
+              !r.icon &&
+              r.rect.bottom < fadeTop &&
+              !clipped.any((c) => c.inflate(1).contains(r.rect.center)) &&
+              _readable.hasMatch(r.text))
+            r,
       ]);
     },
     trailingFrames: 4,
@@ -171,14 +179,28 @@ Future<void> _shot(
   expect(misses, isEmpty, reason: '${screen.name} $lang ${theme.name}: ${misses.join('\n')}');
 }
 
+/// The Money page's scrolling sheet (none on the other screens).
+Finder _planetSheet() => find.descendant(
+  of: find.byType(PlanetModulePage),
+  matching: find.byWidgetPredicate((w) => w is Scrollable && w.axisDirection == AxisDirection.down),
+);
+
+/// Global rects of the sheet's text that sits (partly) above the sheet's
+/// top edge, where the sheet clips it.
+List<Rect> _clippedUnderPlanet(WidgetTester tester) {
+  final sheet = _planetSheet();
+  if (sheet.evaluate().isEmpty) return const [];
+  final top = tester.getTopLeft(sheet.first).dy;
+  return [
+    for (final e in find.descendant(of: sheet.first, matching: find.byType(RichText)).evaluate())
+      if (e.renderObject case final RenderBox box when box.attached && box.hasSize)
+        if ((box.localToGlobal(Offset.zero) & box.size) case final rect when rect.top < top - 0.5) rect,
+  ];
+}
+
 /// Scrolls the planet sheet so [target] sits [below] its top edge.
 Future<void> _sheetTo(WidgetTester tester, Finder target, {double below = 60}) async {
-  final scrollable = find
-      .descendant(
-        of: find.byType(PlanetModulePage),
-        matching: find.byWidgetPredicate((w) => w is Scrollable && w.axisDirection == AxisDirection.down),
-      )
-      .first;
+  final scrollable = _planetSheet().first;
   final position = tester.state<ScrollableState>(scrollable).position;
   for (var pass = 0; pass < 3; pass++) {
     await _frames(tester, 4);

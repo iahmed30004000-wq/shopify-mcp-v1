@@ -121,6 +121,23 @@ void main() {
       expect(failures, isEmpty);
     });
 
+    test('pass-and-play: a stale tap from the previous player cannot play the next player\'s turn', () async {
+      // Both players are local, so play(move) without a seat plays for
+      // whoever is to move – a second tap on the previous player's view
+      // (before the hand-off screen replaced it) moved for the other player.
+      final s = TogetherSession<RaceState, int>.local(adapter: const RaceGame());
+      addTearDown(s.dispose);
+      await s.start(seed: 0);
+      await s.play(1, participant: 0);
+      await expectLater(
+        s.play(2, participant: 0),
+        throwsA(isA<TogetherMoveRefused>().having((e) => e.code, 'code', 'notYourTurn')),
+      );
+      expect(s.turn, 1);
+      await s.play(2, participant: 1);
+      expect(s.turn, 2);
+    });
+
     test('a guest cannot declare the result – only the host does', () async {
       final pair = SessionPair();
       addTearDown(pair.dispose);

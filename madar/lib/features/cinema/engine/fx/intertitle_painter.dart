@@ -565,7 +565,6 @@ class IntertitlePainter {
 
   void _plain(Canvas canvas, Rect bounds, Rect panel, IntertitleCard card, FilmClock clock, double a, bool rebuild) {
     final ink = _pal.ink;
-    final paper = _pal.paper;
     _fill
       ..shader = null
       ..color = ink;
@@ -581,7 +580,7 @@ class IntertitlePainter {
     canvas.clipRect(bounds);
     canvas.translate(bounds.center.dx, bounds.center.dy);
     canvas.rotate(-0.42);
-    _fill.color = ink.withValues(alpha: 0.55);
+    _fill.color = _slatColour;
     final span = bounds.longestSide;
     for (var y = -span; y < span; y += 46) {
       canvas.drawRect(Rect.fromLTWH(-span, y + 30, span * 2, 16), _fill);
@@ -617,7 +616,7 @@ class IntertitlePainter {
       }
     }
     _stroke
-      ..color = paper.withValues(alpha: 0.85)
+      ..color = _ruleColour
       ..strokeWidth = 1.2;
     canvas.drawPath(_line, _stroke);
     _paintText(canvas, panel);
@@ -630,6 +629,8 @@ class IntertitlePainter {
   Rect _nightPanel = Rect.zero;
   ui.Gradient? _haze;
   ui.Gradient? _lightPool;
+  late final Color _slatColour = _pal.ink.withValues(alpha: 0.55);
+  late final Color _ruleColour = _pal.paper.withValues(alpha: 0.85);
   late final Color _windowColour = Color.lerp(_pal.paper, _pal.footlight, 0.4)!.withValues(alpha: 0.75);
 
   double _rnd(int i, int k) => (LineBoil.jitter(97, i * 13 + k, 0) + 1) / 2;

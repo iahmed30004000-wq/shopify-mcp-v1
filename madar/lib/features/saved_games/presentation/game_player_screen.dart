@@ -18,6 +18,7 @@ import '../../../core/sound/prayer_mute.dart';
 import '../../../core/sound/sound_api.dart';
 import '../data/game_platform.dart';
 import '../data/saved_games_providers.dart';
+import '../domain/game_url.dart';
 import '../domain/saved_web_game.dart';
 import '../player/game_player_controller.dart';
 import 'game_art.dart';
@@ -62,6 +63,13 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
   bool _leaving = false;
   bool _sealedNoted = false;
 
+  /// Something opaque covers the player: a page pushed over it, or the
+  /// adhan (AdhanHost stops the tickers of the app beneath it). The phone
+  /// then gets Madar's normal screen back and the game is hushed.
+  bool _covered = false;
+  bool _away = false;
+  int _shownGeneration = 0;
+
   SavedWebGame get _record => widget.game;
 
   @override
@@ -74,7 +82,10 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
       dialogs: this,
       platform: _platform,
       onExternalRequest: _askExternal,
-      onCleared: () => store.setClearDataPending(_record.id, false),
+      onCleared: () async {
+        await store.setClearDataPending(_record.id, false);
+        if (mounted) showGameNote(context, L10n.of(context).savedGamesClearDataDone);
+      },
       createWebView: widget.createWebView,
     )..addListener(_onGameChanged);
     unawaited(_platform.enter(_record.orientation));
@@ -90,20 +101,37 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final covered = !TickerMode.valuesOf(context).enabled;
+    if (covered == _covered) return;
+    _covered = covered;
+    if (covered) {
+      unawaited(_platform.exit());
+    } else {
+      unawaited(_platform.enter(_record.orientation));
+    }
+    unawaited(_game.setBackground(_covered || _away));
+  }
+
+  @override
   void dispose() {
+    // First, whatever else fails: give the phone its normal screen back.
+    unawaited(_platform.exit());
     WidgetsBinding.instance.removeObserver(this);
     _mute?.removeListener(_onPrayerMute);
     _game
       ..removeListener(_onGameChanged)
       ..dispose();
-    unawaited(_platform.exit());
     super.dispose();
   }
 
   void _onPrayerMute() => unawaited(_game.setPrayerMuted(_mute?.muted ?? false));
 
   void _onGameChanged() {
-    if (_game.sealedAudio && _game.userMuted && !_sealedNoted && mounted) {
+    if (!mounted) return;
+    if (_game.webGeneration != _shownGeneration) setState(() => _shownGeneration = _game.webGeneration);
+    if (_game.sealedAudio && _game.userMuted && !_sealedNoted) {
       _sealedNoted = true;
       showGameNote(context, L10n.of(context).savedGamesMuteSealed);
     }
@@ -113,10 +141,14 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.paused || AppLifecycleState.hidden || AppLifecycleState.detached:
+        _away = true;
         unawaited(_game.setBackground(true));
       case AppLifecycleState.resumed:
-        unawaited(_game.setBackground(false));
-        unawaited(_platform.reassert());
+        _away = false;
+        unawaited(_game.setBackground(_covered));
+        // Android shows the bars again after a trip away; not while
+        // something else covers the game.
+        if (!_covered) unawaited(_platform.reassert());
       case AppLifecycleState.inactive:
         break;
     }
@@ -154,7 +186,7 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
     final ok = await showGameConfirm(
       context,
       title: l.savedGamesExternalTitle,
-      body: l.savedGamesExternalBody(BidiIsolate.ltr(url.host)),
+      body: l.savedGamesExternalBody(BidiIsolate.ltr(displayHost(url))),
       confirmLabel: l.savedGamesOpenExternal,
       cancelLabel: l.savedGamesCancel,
       icon: Icons.open_in_new_rounded,
@@ -180,10 +212,8 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
       icon: Icons.cleaning_services_rounded,
       danger: true,
     );
-    if (ok && mounted) {
-      await _game.clearSiteData();
-      if (mounted) showGameNote(context, l.savedGamesClearDataDone);
-    }
+    // "Cleared" is shown when the clear has finished (onCleared).
+    if (ok && mounted) await _game.clearSiteData();
   }
 
   // ── GamePageDialogs ─────────────────────────────────────────────────────
@@ -283,7 +313,8 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
             fit: StackFit.expand,
             children: [
               WebViewWidget(
-                key: const ValueKey('savedGames.webView'),
+                // A fresh WebView after a renderer crash is a new platform view.
+                key: ValueKey('savedGames.webView.$_shownGeneration'),
                 controller: _game.web,
                 // The game gets every gesture: nothing Flutter-side can turn
                 // a pull-down into leaving the game.
@@ -301,9 +332,12 @@ class _SavedGamePlayerScreenState extends ConsumerState<SavedGamePlayerScreen>
               ),
               ListenableBuilder(
                 listenable: _game,
-                // Hidden under the prayer veil (it has its own way back);
-                // nothing may reload a sounding page during prayer.
-                builder: (context, _) => _game.prayerHushed || _game.phase == GamePhase.resting
+                // Hidden under the prayer veil (it has its own way back;
+                // nothing may reload a sounding page during prayer) and the
+                // crash veil (its own Try again / Back; a dead page has no
+                // data to clear).
+                builder: (context, _) =>
+                    _game.prayerHushed || _game.phase == GamePhase.resting || _game.phase == GamePhase.crashed
                     ? const SizedBox.shrink()
                     : _GameControl(
                         muted: _game.userMuted,
@@ -388,6 +422,14 @@ class _Veils extends StatelessWidget {
               onPressed: onOpenExternally,
             ),
           ],
+        ),
+        GamePhase.crashed => _MessageVeil(
+          key: const ValueKey('crashed'),
+          game: game,
+          icon: Icons.memory_rounded,
+          title: l.savedGamesCrashedTitle,
+          body: l.savedGamesCrashedBody,
+          actions: _errorActions(l),
         ),
         GamePhase.insecure => _MessageVeil(
           key: const ValueKey('insecure'),
@@ -627,7 +669,9 @@ class _GameControlState extends State<_GameControl> {
   void _toggle() {
     setState(() => _open = !_open);
     _autoClose?.cancel();
-    if (_open) {
+    // With TalkBack the tray stays until closed: exploring five buttons by
+    // swiping takes longer than any timeout.
+    if (_open && !MediaQuery.accessibleNavigationOf(context)) {
       _autoClose = Timer(const Duration(seconds: 6), () {
         if (mounted) setState(() => _open = false);
       });
@@ -795,6 +839,8 @@ class _TrayButton extends StatelessWidget {
     final t = context.tokens;
     return Tooltip(
       message: label,
+      // The button already says it; TalkBack would read it twice.
+      excludeFromSemantics: true,
       child: MadarPressable(
         onTap: onTap,
         sfx: sfx,

@@ -293,6 +293,15 @@ class FakeSslError extends PlatformSslAuthError {
 class FakeSessionPlatform implements GameSessionPlatform {
   final List<String> calls = [];
 
+  /// Renderer-gone reports, as the host would send them.
+  final StreamController<int> gone = StreamController<int>.broadcast();
+
+  @override
+  Stream<int> get rendererGone => gone.stream;
+
+  @override
+  Future<void> hardenWebView(int webViewId) async => calls.add('harden:$webViewId');
+
   @override
   Future<void> enter(GameOrientation orientation) async => calls.add('enter:${orientation.name}');
 
@@ -423,6 +432,12 @@ class SavedGamesEnv {
   List<SavedWebGame> games = const [],
   SavedGamesLayout layout = SavedGamesLayout.grid,
   List<Override> overrides = const [],
+
+  /// Replaces the recording fake (e.g. the real [HttpGameMetaFetcher]).
+  GameMetaFetcher? metaFetcher,
+
+  /// The user's font size (1.3 = a large accessibility setting).
+  double textScale = 1.0,
 }) {
   final web = FakeWebViewPlatform();
   WebViewPlatform.instance = web;
@@ -446,7 +461,7 @@ class SavedGamesEnv {
       soundServiceProvider.overrideWithValue(sound),
       hapticsServiceProvider.overrideWithValue(haptics),
       savedWebGamesStoreProvider.overrideWithValue(store),
-      gameMetaFetcherProvider.overrideWithValue(env.fetcher),
+      gameMetaFetcherProvider.overrideWithValue(metaFetcher ?? env.fetcher),
       gameSessionPlatformProvider.overrideWithValue(env.session),
       gameLinkOpenerProvider.overrideWithValue(env.opener),
       gameWebDataCleanerProvider.overrideWithValue(env.cleaner),
@@ -460,9 +475,12 @@ class SavedGamesEnv {
       locale: locale,
       supportedLocales: L10n.supportedLocales,
       localizationsDelegates: L10n.localizationsDelegates,
-      builder: (context, child) => MadarFormatScope(
-        digits: DigitStyle.auto,
-        child: MotionScope(reduced: false, child: CelebrationOverlay(child: child!)),
+      builder: (context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(textScale)),
+        child: MadarFormatScope(
+          digits: DigitStyle.auto,
+          child: MotionScope(reduced: false, child: CelebrationOverlay(child: child!)),
+        ),
       ),
       home: home,
     ),

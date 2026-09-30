@@ -403,6 +403,15 @@
     "ar": "شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.",
     "en": "The site's security certificate isn't valid, so Madar stopped the connection to protect you."
   },
+  "savedGamesCrashedTitle": {
+    "ar": "توقّفت اللعبة",
+    "en": "The game stopped",
+    "description": "Player: the web page's renderer crashed or was closed for memory"
+  },
+  "savedGamesCrashedBody": {
+    "ar": "تعطّلت صفحة اللعبة أو أُغلقت لنفاد الذاكرة. أعد المحاولة لتحميلها من جديد.",
+    "en": "The game's page crashed or was closed to free memory. Try again to load it afresh."
+  },
   "savedGamesRetry": {
     "ar": "إعادة المحاولة",
     "en": "Try again"
@@ -477,8 +486,8 @@
     "en": "The game and its sound are paused. It resumes by itself after the adhan and prayer time."
   },
   "savedGamesPrayerUnloaded": {
-    "ar": "أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.",
-    "en": "The game was stopped because its sound can't be muted from inside; it will reload after prayer."
+    "ar": "أوقفنا اللعبة كي لا يصدر عنها أي صوت، وسيُعاد تحميلها بعد الصلاة.",
+    "en": "The game was stopped so none of its sound can play; it will reload after prayer."
   },
   "savedGamesPageSays": {
     "ar": "رسالة من {host}",

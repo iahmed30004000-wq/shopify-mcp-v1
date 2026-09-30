@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../data/game_platform.dart';
+import '../domain/game_url.dart';
 import '../domain/navigation_policy.dart';
 import '../domain/saved_web_game.dart';
 import 'android_hardening.dart';
@@ -33,6 +34,10 @@ enum GamePhase {
 
   /// Unloaded for prayer (its sound could not be reached); reloads after.
   resting,
+
+  /// The page's renderer process is gone (crashed or killed for memory);
+  /// the game needs a fresh WebView.
+  crashed,
 }
 
 /// Madar-styled answers to the page's `alert` / `confirm` / `prompt`.
@@ -55,16 +60,33 @@ class GamePlayerController extends ChangeNotifier {
     this.platform = const SystemGameSessionPlatform(),
     this.onCleared,
     WebViewController Function()? createWebView,
+    DateTime Function()? now,
     @visibleForTesting this.clearPollInterval = const Duration(milliseconds: 150),
     @visibleForTesting this.rehushInterval = const Duration(seconds: 2),
   }) : origins = GameOrigins(game.url),
-       web = (createWebView ?? _defaultWebView)();
+       _createWebView = createWebView ?? _defaultWebView,
+       _now = now ?? DateTime.now {
+    _web = _createWebView();
+  }
 
   static WebViewController _defaultWebView() => WebViewController(onPermissionRequest: (r) => r.deny());
 
   final SavedWebGame game;
-  final WebViewController web;
   final GameSessionPlatform platform;
+  final WebViewController Function() _createWebView;
+  final DateTime Function() _now;
+
+  late WebViewController _web;
+  int _generation = 0;
+  bool _webGone = false;
+  StreamSubscription<int>? _goneSub;
+
+  /// The game's WebView. Replaced by a fresh one after its renderer died
+  /// ([webGeneration] then changes).
+  WebViewController get web => _web;
+
+  /// Changes whenever [web] is replaced.
+  int get webGeneration => _generation;
   final GamePageDialogs dialogs;
 
   /// The page wants to open [url] outside the game's origin. The UI asks
@@ -96,9 +118,19 @@ class GamePlayerController extends ChangeNotifier {
   Timer? _rehush;
   Future<void> _hushChain = Future<void>.value();
 
-  // Dialog flood guard.
-  final List<DateTime> _dialogTimes = [];
-  DateTime? _dialogsMutedUntil;
+  // The audio tracker of the current document started before the page's
+  // own scripts (reported by the install run at page start; the page
+  // cannot fake it, no page script had run yet).
+  bool _trackedEarly = false;
+  int _pageSeq = 0;
+
+  // A clear of the site's data was cut short by prayer: finish it after.
+  bool _resumeClear = false;
+
+  // Flood guard for everything a page can put in front of the user
+  // (alert / confirm / prompt and "open outside?" questions).
+  final List<DateTime> _modalTimes = [];
+  DateTime? _modalsMutedUntil;
 
   // Navigation loop guard (e.g. a download URL re-requested forever).
   String? _lastNavUrl;
@@ -136,6 +168,7 @@ class GamePlayerController extends ChangeNotifier {
   Future<void> start({bool clearFirst = false}) async {
     if (_started) return;
     _started = true;
+    _goneSub = platform.rendererGone.listen(_onRendererGone);
     await _configure();
     if (clearFirst) {
       await clearSiteData();
@@ -145,19 +178,22 @@ class GamePlayerController extends ChangeNotifier {
   }
 
   Future<void> _configure() async {
+    final web = _web;
+    // Events of a WebView that has since been replaced are ignored.
+    bool current() => identical(web, _web);
     await _quiet(() => web.setJavaScriptMode(JavaScriptMode.unrestricted));
     await _quiet(() => web.setBackgroundColor(const Color(0xFF000000)));
     await _quiet(
       () => web.setNavigationDelegate(
         NavigationDelegate(
-          onNavigationRequest: _onNavigationRequest,
-          onPageStarted: _onPageStarted,
-          onPageFinished: _onPageFinished,
-          onProgress: (p) => _set(progress: p.clamp(0, 100)),
-          onWebResourceError: _onWebResourceError,
+          onNavigationRequest: (r) => current() ? _onNavigationRequest(r) : NavigationDecision.prevent,
+          onPageStarted: (u) => current() ? _onPageStarted(u) : null,
+          onPageFinished: (u) => current() ? _onPageFinished(u) : null,
+          onProgress: (p) => current() ? _set(progress: p.clamp(0, 100)) : null,
+          onWebResourceError: (e) => current() ? _onWebResourceError(e) : null,
           onSslAuthError: (e) {
             unawaited(_quiet(e.cancel));
-            if (!_firstPageDone) _fail(GamePhase.insecure);
+            if (current() && !_firstPageDone) _fail(GamePhase.insecure);
           },
           // Never answer a site's login prompt from inside a game.
           onHttpAuthRequest: (r) => r.onCancel(),
@@ -171,6 +207,10 @@ class GamePlayerController extends ChangeNotifier {
     await _quiet(() => web.enableZoom(false));
     await _quiet(() => web.setOverScrollMode(WebViewOverScrollMode.never));
     await hardenGameWebView(web);
+    // What the plugin cannot switch off from Dart (popup windows, which
+    // it enables) and the renderer-gone watch are the host's.
+    final id = nativeWebViewId(web);
+    if (id != null) await platform.hardenWebView(id);
   }
 
   /// The one way a game page is loaded. During prayer nothing is: the
@@ -195,6 +235,10 @@ class GamePlayerController extends ChangeNotifier {
   /// Loads the game again (after an error or from the controls).
   Future<void> retry() async {
     if (_prayer || _phase == GamePhase.resting || _phase == GamePhase.clearing) return;
+    if (_webGone) {
+      await _replaceWebView();
+      return;
+    }
     if (_firstPageDone && _phase == GamePhase.ready) {
       _mainError = false;
       _set(progress: 0);
@@ -217,7 +261,8 @@ class GamePlayerController extends ChangeNotifier {
   /// Every origin the game used this session is cleared (the saved link's
   /// and any it was redirected to), one after the other.
   Future<void> clearSiteData() async {
-    if (_disposed) return;
+    if (_disposed || _webGone) return;
+    _resumeClear = false;
     _mainError = false;
     _clearQueue
       ..clear()
@@ -270,7 +315,8 @@ class GamePlayerController extends ChangeNotifier {
   // ── Navigation ──────────────────────────────────────────────────────────
 
   FutureOr<NavigationDecision> _onNavigationRequest(NavigationRequest request) {
-    if (_phase == GamePhase.resting) return NavigationDecision.prevent;
+    // During prayer nothing new may load (a new document could sound).
+    if (_phase == GamePhase.resting || _prayer || _webGone) return NavigationDecision.prevent;
     final verdict = decideGameNavigation(
       origins: origins,
       target: request.url,
@@ -285,7 +331,7 @@ class GamePlayerController extends ChangeNotifier {
         return _loopGuard(request) ? NavigationDecision.navigate : NavigationDecision.prevent;
       case NavigationVerdict.askExternal:
         final uri = Uri.tryParse(request.url);
-        if (uri != null && !_externalPending) {
+        if (uri != null && !_externalPending && _modalAllowed(whileLoading: true)) {
           _externalPending = true;
           unawaited(onExternalRequest(uri).whenComplete(() => _externalPending = false));
         }
@@ -309,8 +355,17 @@ class GamePlayerController extends ChangeNotifier {
   }
 
   void _onPageStarted(String url) {
-    if (_phase == GamePhase.clearing || _phase == GamePhase.resting) return;
+    if (_disposed || _phase == GamePhase.clearing || _phase == GamePhase.resting) return;
     if (!_firstPageDone) _set(phase: GamePhase.loading);
+    // A new document: install the audio tracker before its scripts if we
+    // can, and trust in-place hushing only if that worked.
+    _trackedEarly = false;
+    final seq = ++_pageSeq;
+    final web = _web;
+    unawaited(() async {
+      final r = decodeJsObject(await _evalRaw(GameScripts.trackAudio));
+      if (seq == _pageSeq && identical(web, _web) && r?['early'] == true) _trackedEarly = true;
+    }());
   }
 
   void _onPageFinished(String url) {
@@ -321,7 +376,7 @@ class GamePlayerController extends ChangeNotifier {
         return;
       case GamePhase.resting:
         return;
-      case GamePhase.offline || GamePhase.failed || GamePhase.insecure:
+      case GamePhase.offline || GamePhase.failed || GamePhase.insecure || GamePhase.crashed:
         return;
       case GamePhase.loading || GamePhase.ready:
         if (_mainError) return;
@@ -338,7 +393,7 @@ class GamePlayerController extends ChangeNotifier {
 
   void _onWebResourceError(WebResourceError error) {
     final main = error.isForMainFrame ?? !_firstPageDone;
-    if (!main || _phase == GamePhase.clearing || _phase == GamePhase.resting) return;
+    if (!main || _webGone || _phase == GamePhase.clearing || _phase == GamePhase.resting) return;
     if (error.errorType == WebResourceErrorType.unsupportedScheme) return;
     final offline = switch (error.errorType) {
       WebResourceErrorType.hostLookup ||
@@ -347,7 +402,9 @@ class GamePlayerController extends ChangeNotifier {
       WebResourceErrorType.io => true,
       _ => false,
     };
-    final insecure = error.errorType == WebResourceErrorType.failedSslHandshake;
+    final insecure =
+        error.errorType == WebResourceErrorType.failedSslHandshake ||
+        error.errorType == WebResourceErrorType.unsafeResource;
     _fail(offline ? GamePhase.offline : (insecure ? GamePhase.insecure : GamePhase.failed));
   }
 
@@ -356,36 +413,77 @@ class GamePlayerController extends ChangeNotifier {
     _set(phase: phase);
   }
 
-  // ── Page dialogs (rate-limited: a page cannot trap the user) ────────────
-
-  bool _dialogAllowed() {
-    final now = DateTime.now();
-    if (_dialogsMutedUntil != null && now.isBefore(_dialogsMutedUntil!)) return false;
-    _dialogTimes
-      ..add(now)
-      ..removeWhere((t) => now.difference(t) > const Duration(seconds: 10));
-    if (_dialogTimes.length > 3) {
-      _dialogsMutedUntil = now.add(const Duration(seconds: 30));
-      _dialogTimes.clear();
-      return false;
-    }
-    return !_disposed && _phase == GamePhase.ready;
+  /// The host reports that WebView [id]'s renderer is gone. Without the
+  /// host's handling Android kills the whole app; with it, the player shows
+  /// what happened and a retry builds a fresh WebView.
+  void _onRendererGone(int id) {
+    if (_disposed || _webGone || id != nativeWebViewId(_web)) return;
+    _webGone = true;
+    _stopRehush();
+    _clearTimeout?.cancel();
+    _nativePaused = false;
+    if (_phase == GamePhase.clearing) _resumeClear = true;
+    _set(phase: GamePhase.crashed);
   }
 
-  static String _hostOf(String url) => Uri.tryParse(url)?.host ?? '';
+  Future<void> _replaceWebView() async {
+    _web = _createWebView();
+    _generation++;
+    _webGone = false;
+    _firstPageDone = false;
+    _trackedEarly = false;
+    _mainError = false;
+    _set(phase: GamePhase.loading, progress: 0);
+    notifyListeners();
+    await _configure();
+    if (_disposed) return;
+    if (_resumeClear) {
+      await clearSiteData();
+    } else {
+      await _load(game.url);
+    }
+  }
+
+  // ── Page dialogs (rate-limited: a page cannot trap the user) ────────────
+
+  /// Whether the page may put a dialog or question in front of the user
+  /// now: only while the game is showing ([whileLoading]: or loading – a
+  /// saved link that redirects to http asks to open outside), never over
+  /// the prayer screen or while Madar is away, and at most 3 in 10 s – then
+  /// nothing for 30 s, so a page cannot keep the user from the controls.
+  bool _modalAllowed({bool whileLoading = false}) {
+    final shown = _phase == GamePhase.ready || (whileLoading && _phase == GamePhase.loading);
+    if (_disposed || !shown || _prayer || _background) return false;
+    final now = _now();
+    if (_modalsMutedUntil != null && now.isBefore(_modalsMutedUntil!)) return false;
+    _modalTimes
+      ..add(now)
+      ..removeWhere((t) => now.difference(t) > const Duration(seconds: 10));
+    if (_modalTimes.length > 3) {
+      _modalsMutedUntil = now.add(const Duration(seconds: 30));
+      _modalTimes.clear();
+      return false;
+    }
+    return true;
+  }
+
+  static String _hostOf(String url) {
+    final uri = Uri.tryParse(url);
+    return uri == null ? '' : displayHost(uri);
+  }
 
   Future<void> _alert(JavaScriptAlertDialogRequest r) async {
-    if (!_dialogAllowed()) return;
+    if (!_modalAllowed()) return;
     await dialogs.alert(_hostOf(r.url), clampText(r.message, 600, singleLine: false));
   }
 
   Future<bool> _confirm(JavaScriptConfirmDialogRequest r) async {
-    if (!_dialogAllowed()) return false;
+    if (!_modalAllowed()) return false;
     return dialogs.confirm(_hostOf(r.url), clampText(r.message, 600, singleLine: false));
   }
 
   Future<String> _prompt(JavaScriptTextInputDialogRequest r) async {
-    if (!_dialogAllowed()) return '';
+    if (!_modalAllowed()) return '';
     final answer = await dialogs.prompt(
       _hostOf(r.url),
       clampText(r.message, 600, singleLine: false),
@@ -430,31 +528,43 @@ class GamePlayerController extends ChangeNotifier {
   Future<void> _enterPrayer() async {
     if (_phase == GamePhase.resting) return;
     int? sealed;
+    var blind = true;
     if (_phase == GamePhase.ready) {
-      sealed = await _hush(pause: true, hide: true);
+      final r = await _hush(pause: true, hide: true);
+      sealed = r.sealed;
+      blind = r.blind || !_trackedEarly;
     } else if (_phase != GamePhase.loading && _phase != GamePhase.clearing) {
-      // An error page makes no sound.
+      // An error page (or a dead renderer) makes no sound.
       sealed = 0;
+      blind = false;
     }
-    final plan = planHush(reason: HushReason.prayer, sealedFrames: sealed);
+    final plan = planHush(reason: HushReason.prayer, sealedFrames: sealed, blind: blind);
     _prayerPlan = plan;
     if (plan == HushPlan.unload) {
-      Uri? current;
-      if (_phase == GamePhase.ready) {
-        try {
-          final u = await web.currentUrl();
-          current = u == null ? null : Uri.tryParse(u);
-        } on Object {
-          current = null;
-        }
-      }
-      // Loading / clearing / error: start the game afresh afterwards.
-      _resumeUrl = current != null && origins.contains(current) ? current : (_resumeUrl ?? game.url);
-      await _rest();
+      await _unloadForPrayer();
     } else {
-      await _nativePause();
+      if (!_webGone) await _nativePause();
       _startRehush();
     }
+  }
+
+  /// Unloads the page (certain silence); it loads again when prayer ends.
+  Future<void> _unloadForPrayer() async {
+    _prayerPlan = HushPlan.unload;
+    _stopRehush();
+    if (_phase == GamePhase.clearing) _resumeClear = true;
+    Uri? current;
+    if (_phase == GamePhase.ready) {
+      try {
+        final u = await _web.currentUrl();
+        current = u == null ? null : Uri.tryParse(u);
+      } on Object {
+        current = null;
+      }
+    }
+    // Loading / clearing / error: start the game afresh afterwards.
+    _resumeUrl = current != null && origins.contains(current) ? current : (_resumeUrl ?? game.url);
+    await _rest();
   }
 
   Future<void> _leavePrayer() async {
@@ -463,7 +573,11 @@ class GamePlayerController extends ChangeNotifier {
     if (_phase == GamePhase.resting || plan == HushPlan.unload) {
       final url = _resumeUrl ?? game.url;
       _resumeUrl = null;
-      await _load(url);
+      if (_resumeClear) {
+        await clearSiteData();
+      } else {
+        await _load(url);
+      }
       return;
     }
     await _reapplyHush();
@@ -484,8 +598,8 @@ class GamePlayerController extends ChangeNotifier {
       _stopRehush();
       return;
     }
-    final sealed = await _hush(pause: strict, hide: strict);
-    if (_userMuted && !strict && (sealed ?? 1) > 0 && !_sealedAudio) {
+    final r = await _hush(pause: strict, hide: strict);
+    if (_userMuted && !strict && (r.sealed ?? 1) > 0 && !_sealedAudio) {
       _sealedAudio = true;
       notifyListeners();
     }
@@ -497,22 +611,35 @@ class GamePlayerController extends ChangeNotifier {
     _startRehush();
   }
 
-  /// Runs the in-page hush; the number of unreachable frames or null.
-  Future<int?> _hush({required bool pause, required bool hide}) async {
+  /// Runs the in-page hush: the number of unreachable frames (null when
+  /// the hush could not run) and whether some sound may be out of its sight
+  /// (an answer without the flag counts as blind).
+  Future<({int? sealed, bool blind})> _hush({required bool pause, required bool hide}) async {
     final result = decodeJsObject(await _evalRaw(GameScripts.hush(pause: pause, hide: hide)));
     final sealed = result?['sealed'];
     if (sealed is num && sealed > 0 && !_sealedAudio) {
       _sealedAudio = true;
       if (!_disposed) notifyListeners();
     }
-    return sealed is num ? sealed.toInt() : null;
+    return (sealed: sealed is num ? sealed.toInt() : null, blind: result?['blind'] != false);
   }
 
   void _startRehush() {
     _rehush ??= Timer.periodic(rehushInterval, (_) {
       if (_disposed || !_hushWanted || _phase != GamePhase.ready) return;
       final strict = _prayer || _background;
-      unawaited(_serial(() => _hush(pause: strict, hide: strict)));
+      unawaited(
+        _serial(() async {
+          final r = await _hush(pause: strict, hide: strict);
+          // The page grew sound Madar cannot reach during prayer (a new
+          // cross-origin frame, an untracked window): unload it after all.
+          final plan = planHush(reason: HushReason.prayer, sealedFrames: r.sealed, blind: r.blind || !_trackedEarly);
+          if (_prayer && _prayerPlan == HushPlan.inPlace && plan == HushPlan.unload && _phase == GamePhase.ready) {
+            await _nativeResume();
+            await _unloadForPrayer();
+          }
+        }),
+      );
     });
   }
 
@@ -522,13 +649,13 @@ class GamePlayerController extends ChangeNotifier {
   }
 
   Future<void> _nativePause() async {
-    final id = nativeWebViewId(web);
+    final id = nativeWebViewId(_web);
     if (id == null || _nativePaused) return;
     _nativePaused = await platform.pauseWebView(id);
   }
 
   Future<void> _nativeResume() async {
-    final id = nativeWebViewId(web);
+    final id = nativeWebViewId(_web);
     if (id == null || !_nativePaused) return;
     _nativePaused = false;
     await platform.resumeWebView(id);
@@ -536,11 +663,12 @@ class GamePlayerController extends ChangeNotifier {
 
   // ── JavaScript helpers ──────────────────────────────────────────────────
 
-  Future<void> _eval(String script) => _quiet(() => web.runJavaScript(script));
+  Future<void> _eval(String script) => _quiet(() => _web.runJavaScript(script));
 
   Future<Object?> _evalRaw(String script) async {
+    if (_webGone) return null;
     try {
-      return await web.runJavaScriptReturningResult(script);
+      return await _web.runJavaScriptReturningResult(script);
     } on Object {
       return null;
     }
@@ -564,10 +692,11 @@ class GamePlayerController extends ChangeNotifier {
     _disposed = true;
     _stopRehush();
     _clearTimeout?.cancel();
-    final id = nativeWebViewId(web);
+    unawaited(_goneSub?.cancel());
+    final id = nativeWebViewId(_web);
     if (id != null && _nativePaused) unawaited(platform.resumeWebView(id));
     // Stop anything still sounding before the view is torn down.
-    unawaited(_quiet(() => web.loadHtmlString(GameScripts.restPage)));
+    if (!_webGone) unawaited(_quiet(() => _web.loadHtmlString(GameScripts.restPage)));
     super.dispose();
   }
 }

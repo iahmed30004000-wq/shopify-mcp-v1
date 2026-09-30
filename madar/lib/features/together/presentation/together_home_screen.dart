@@ -266,7 +266,7 @@ class _RivalryHero extends StatelessWidget {
           if (overview.hasMatches) ...[
             const SizedBox(height: Space.xxs),
             Text(
-              '${tx.matches(all.matches)} · ${tx.draws(all.draws)}',
+              tx.facts([tx.matches(all.matches), tx.draws(all.draws)]),
               style: text.bodySmall?.copyWith(color: t.textSecondary),
               textAlign: TextAlign.center,
             ),
@@ -502,8 +502,11 @@ class _ShelfItem extends StatelessWidget {
     final t = context.tokens;
     final tx = TogetherTexts.of(context);
     final text = Theme.of(context).textTheme;
-    return SizedBox(
-      width: 92,
+    // Side padding: captions scaled down to the cell never touch the next
+    // cell's (long English dates at large text sizes).
+    return Container(
+      width: 96,
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.xs),
       child: Column(
         children: [
           TrophyMedal(id: id, size: 60, earned: earned, holderColor: holderColor),
@@ -598,7 +601,7 @@ class _GameRow extends StatelessWidget {
                 ),
                 const SizedBox(height: Space.xs),
                 Text(
-                  tally.draws > 0 && !coop ? '${tx.matches(tally.matches)} · ${tx.draws(tally.draws)}' : tx.matches(tally.matches),
+                  tally.draws > 0 && !coop ? tx.facts([tx.matches(tally.matches), tx.draws(tally.draws)]) : tx.matches(tally.matches),
                   style: text.labelSmall?.copyWith(color: t.textTertiary),
                 ),
               ],
@@ -674,9 +677,10 @@ class TogetherMatchTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${tx.outcome(record, profiles)} · ${tx.date(record.endedAt)}',
+                  tx.facts([tx.outcome(record, profiles), tx.date(record.endedAt)]),
                   style: text.bodySmall?.copyWith(color: t.textSecondary),
-                  maxLines: 1,
+                  // Two lines: the date must not be cut at large text sizes.
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -740,7 +744,7 @@ class GameHistorySheet extends ConsumerWidget {
 
     return InteractionSheetFrame(
       title: tx.game(gameId),
-      subtitle: tally.draws > 0 ? '${tx.matches(tally.matches)} · ${tx.draws(tally.draws)}' : tx.matches(tally.matches),
+      subtitle: tally.draws > 0 ? tx.facts([tx.matches(tally.matches), tx.draws(tally.draws)]) : tx.matches(tally.matches),
       icon: TogetherLook.gameIcon(gameId),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

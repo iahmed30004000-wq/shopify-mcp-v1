@@ -27,7 +27,7 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Work, Family, Travel, Growth, Body, Custom Modules builders | lib/features/{work,family,travel,growth,body,custom_modules} | built + verified; integration NOT started |
 | Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
 | Jordanian rules: board (dama, tawla ×3, dominoes, ludo) | cinema/rules/board/** | DONE (561 tests); open detail questions in board/RULES.md §9.2 |
-| Jordanian rules: cards + new Solitaire, Blackjack | cinema/rules/cards/** | RUNNING (wf_94413da5-0be); specs in scratchpad/jordan_rules/ |
+| Jordanian rules: cards (Tarneeb/41, Trix/Complex, Hand/partners, Konkan, Basra, Baloot) + new Solitaire, Blackjack | cinema/rules/cards/** | DONE (977 tests); open owner questions in cards/RULES.md 'Still open' |
 | Deps webview_flutter 4.14.1, nearby_connections 4.3.0, firebase_core/auth/database | pubspec | CI probe 008ccec GREEN (run #13); added to main pubspec |
 | Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |

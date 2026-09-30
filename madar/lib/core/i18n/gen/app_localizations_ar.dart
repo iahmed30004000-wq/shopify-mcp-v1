@@ -22339,6 +22339,13 @@ class L10nAr extends L10n {
       'شهادة أمان الموقع غير صالحة، فأوقف مَدار الاتصال لحمايتك.';
 
   @override
+  String get savedGamesCrashedTitle => 'توقّفت اللعبة';
+
+  @override
+  String get savedGamesCrashedBody =>
+      'تعطّلت صفحة اللعبة أو أُغلقت لنفاد الذاكرة. أعد المحاولة لتحميلها من جديد.';
+
+  @override
   String get savedGamesRetry => 'إعادة المحاولة';
 
   @override
@@ -22395,7 +22402,7 @@ class L10nAr extends L10n {
 
   @override
   String get savedGamesPrayerUnloaded =>
-      'أُوقفت اللعبة لأن صوتها لا يُكتم من داخلها، وسيُعاد تحميلها بعد الصلاة.';
+      'أوقفنا اللعبة كي لا يصدر عنها أي صوت، وسيُعاد تحميلها بعد الصلاة.';
 
   @override
   String savedGamesPageSays(String host) {

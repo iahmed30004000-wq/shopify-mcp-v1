@@ -109,14 +109,18 @@ class TogetherAvatarView extends StatelessWidget {
     );
     final glyph = switch (avatar.kind) {
       AvatarKind.constellation => null,
+      // The glyphs are pictures sized to the disc (the name is the
+      // semantic label): the text scale must not push them out of it.
       AvatarKind.emoji => Text(
         avatar.emoji ?? '⭐',
         textAlign: TextAlign.center,
+        textScaler: TextScaler.noScaling,
         style: TextStyle(fontSize: size * 0.5, height: 1.1, fontFamilyFallback: TogetherLook.emojiFallback),
       ),
       AvatarKind.initials => Text(
         _initial(displayName),
         textAlign: TextAlign.center,
+        textScaler: TextScaler.noScaling,
         style: TextStyle(
           fontFamily: MadarTypography.displayFamily,
           fontSize: size * 0.46,

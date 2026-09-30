@@ -17,13 +17,9 @@ import '../core/playing_card.dart';
 import '../core/trick.dart';
 import '../tarneeb/tarneeb_state.dart' show sisterSuit;
 
-/// The registry id of this game. `CardGameId.fortyOne` once it is added to
-/// the enum in `core/card_game.dart`; until then the match reports its
-/// family, [CardGameId.tarneeb] (its JSON still says `fortyOne`).
-final CardGameId fortyOneGameId = CardGameId.values.firstWhere(
-  (g) => g.name == FortyOneState.gameKey,
-  orElse: () => CardGameId.tarneeb,
-);
+/// The registry id of this game ([CardGameId.fortyOne]; its name is the
+/// JSON `game` key, [FortyOneState.gameKey]).
+const CardGameId fortyOneGameId = CardGameId.fortyOne;
 
 /// How trumps are decided.
 enum FortyOneTrumpMode {
@@ -416,7 +412,7 @@ class FortyOneState extends CardGameState {
     winnerTeam: j['winnerTeam'] as int?,
   );
 
-  /// The `game` key of the JSON (and the future `CardGameId` name).
+  /// The `game` key of the JSON (the name of the `CardGameId`).
   static const String gameKey = 'fortyOne';
 
   final FortyOneOptions options;

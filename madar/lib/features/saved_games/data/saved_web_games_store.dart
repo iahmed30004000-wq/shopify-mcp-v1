@@ -219,7 +219,7 @@ abstract class SavedWebGamesStore {
       games.add(
         SavedWebGame(
           id: newId(),
-          title: title is String && title.trim().isNotEmpty ? title : url.host,
+          title: title is String && title.trim().isNotEmpty ? title : displayHost(url),
           url: url,
           art: GameArt.seeded(url.toString()),
           addedAt: DateTime.tryParse('${e['addedAt']}')?.toLocal() ?? now,

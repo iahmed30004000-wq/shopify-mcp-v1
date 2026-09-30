@@ -20786,6 +20786,11 @@
   "savedGamesErrorBody": "The site may be down, or its link may have changed.",
   "savedGamesInsecureTitle": "Connection not secure",
   "savedGamesInsecureBody": "The site's security certificate isn't valid, so Madar stopped the connection to protect you.",
+  "savedGamesCrashedTitle": "The game stopped",
+  "@savedGamesCrashedTitle": {
+    "description": "Player: the web page's renderer crashed or was closed for memory"
+  },
+  "savedGamesCrashedBody": "The game's page crashed or was closed to free memory. Try again to load it afresh.",
   "savedGamesRetry": "Try again",
   "savedGamesBackToMadar": "Back to Madar",
   "savedGamesReload": "Reload",
@@ -20810,7 +20815,7 @@
   "savedGamesExternalFailed": "No browser could open the link",
   "savedGamesPrayerTitle": "Time for prayer",
   "savedGamesPrayerBody": "The game and its sound are paused. It resumes by itself after the adhan and prayer time.",
-  "savedGamesPrayerUnloaded": "The game was stopped because its sound can't be muted from inside; it will reload after prayer.",
+  "savedGamesPrayerUnloaded": "The game was stopped so none of its sound can play; it will reload after prayer.",
   "savedGamesPageSays": "{host} says",
   "@savedGamesPageSays": {
     "placeholders": {

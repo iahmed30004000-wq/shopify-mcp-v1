@@ -8,6 +8,7 @@ import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/design/tokens.dart';
 import 'package:madar/core/design/widgets/widgets.dart';
 import 'package:madar/core/sound/prayer_mute.dart';
+import 'package:madar/features/saved_games/player/game_scripts.dart';
 import 'package:madar/features/saved_games/saved_games.dart';
 import 'package:webview_flutter/webview_flutter.dart' show WebResourceErrorType;
 
@@ -154,8 +155,13 @@ void main() {
       SavedGamePlayerScreen(game: sampleGames()[0]),
       games: sampleGames(),
       drive: (t, env) async {
-        final web = env.web.last..result = (s) => s.contains('sealed') ? '"{\\"sealed\\":0}"' : '""';
-        web.pageFinished(web.loads.single);
+        final web = env.web.last
+          ..result = (s) => s == GameScripts.trackAudio
+              ? '"{\\"early\\":true}"'
+              : (s.contains('sealed') ? '"{\\"sealed\\":0,\\"blind\\":false}"' : '""');
+        web
+          ..pageStarted(web.loads.single)
+          ..pageFinished(web.loads.single);
         await t.pump(const Duration(milliseconds: 400));
         final container = ProviderScope.containerOf(t.element(find.byType(SavedGamePlayerScreen)));
         container.read(prayerMuteProvider).acquire('screenshot');

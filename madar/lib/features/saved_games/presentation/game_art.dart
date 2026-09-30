@@ -240,10 +240,14 @@ class GamePoster extends StatelessWidget {
                           if (caption != null)
                             Padding(
                               padding: const EdgeInsets.only(top: 2),
+                              // A host keeps its own direction (a cut-off
+                              // "games.exam…" ends on the right in Arabic too).
                               child: Text(
                                 caption!,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
+                                textDirection: BidiIsolate.directionOf(caption!),
+                                textAlign: uiStartAlign(context),
                                 style: text.labelSmall?.copyWith(color: Colors.white.withValues(alpha: 0.78)),
                               ),
                             ),

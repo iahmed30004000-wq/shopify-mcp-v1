@@ -423,11 +423,36 @@ class InkPuff extends InkProp {
     final grow = math.sin(math.min(1.0, k * 1.3) * math.pi * 0.92 + 0.08);
     final ox = drift.dx * k, oy = drift.dy * k;
     b.layer();
+    final r = size * 0.32 * grow;
+    final c = b.contour(0);
+    var sx = 0.0, sy = 0.0;
     for (var i = 0; i < 3; i++) {
       final a = i * 2.1 + 0.4;
-      b.shape(b.colors.puff, ink: 0.7);
-      pen.circle(ox + math.cos(a) * size * 0.3 * (0.6 + k), oy + math.sin(a) * size * 0.22, size * 0.32 * grow);
+      final cx = ox + math.cos(a) * size * 0.3 * (0.6 + k), cy = oy + math.sin(a) * size * 0.22;
+      if (i == 1) {
+        sx = cx;
+        sy = cy;
+      }
+      c
+        ..clear()
+        ..ellipse(pen, cx, cy, r, r, samples: 20);
+      // Each ball gets its own shadow crescent (halftone / hatch per era).
+      b.blob(c, b.colors.puff, depth: r * 0.28, ink: 0.7);
     }
+    // Period smoke: one inked swirl that unwinds as the puff thins out.
+    final curl = r * (0.5 - 0.2 * k);
+    b.brushQuad(
+      2,
+      sx - curl * 0.8,
+      sy + curl * 0.2,
+      sx - curl * 0.1,
+      sy - curl * 0.95,
+      sx + curl * 0.75,
+      sy - curl * 0.05,
+      b.lw * 0.75,
+      taperIn: 0.1,
+      taperOut: 0.8,
+    );
     b.endLayer();
   }
 }

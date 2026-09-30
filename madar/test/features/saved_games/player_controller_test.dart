@@ -35,7 +35,11 @@ final SavedWebGame artifact = SavedWebGame(
 );
 
 /// Android-style result of the hush script.
-String hushResult(int sealed) => '"{\\"sealed\\":$sealed,\\"media\\":1,\\"ctx\\":1}"';
+String hushResult(int sealed, {bool blind = false}) =>
+    '"{\\"sealed\\":$sealed,\\"blind\\":$blind,\\"media\\":1,\\"ctx\\":1}"';
+
+/// Android-style result of the tracker installed before the page's scripts.
+const String trackedEarly = '"{\\"early\\":true}"';
 
 void main() {
   late FakeWebViewPlatform platform;
@@ -162,11 +166,14 @@ void main() {
     }
   });
 
-  testWidgets('prayer mute hushes in place when every frame is reachable, then resumes', (tester) async {
+  testWidgets('prayer mute hushes in place when every sound source is reachable, then resumes', (tester) async {
     final c = make();
     await c.start();
-    final web = platform.last..result = (s) => s.contains('sealed') ? hushResult(0) : '""';
-    web.pageFinished('https://claude.ai/public/artifacts/abc');
+    final web = platform.last
+      ..result = (s) => s == GameScripts.trackAudio ? trackedEarly : (s.contains('sealed') ? hushResult(0) : '""');
+    web
+      ..pageStarted('https://claude.ai/public/artifacts/abc')
+      ..pageFinished('https://claude.ai/public/artifacts/abc');
     await tester.pump();
     await c.setPrayerMuted(true);
     expect(c.prayerHushed, isTrue);
@@ -217,16 +224,22 @@ void main() {
     c.dispose();
   });
 
-  testWidgets('prayer during a data clear keeps the clear pending', (tester) async {
+  testWidgets('prayer during a data clear holds it, then finishes it before the game loads', (tester) async {
     final c = make();
     await c.start(clearFirst: true);
-    final web = platform.last;
+    final web = platform.last..result = (s) => s == GameScripts.clearedProbe ? '"done"' : '""';
     await c.setPrayerMuted(true);
     expect(c.phase, GamePhase.resting);
     web.pageFinished('about:blank');
     await tester.pump(const Duration(seconds: 9));
     expect(cleared, 0);
+    expect(web.loads, isEmpty);
     await c.setPrayerMuted(false);
+    expect(c.phase, GamePhase.clearing);
+    web.pageFinished('https://claude.ai/');
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(cleared, 1);
     expect(web.loads, ['https://claude.ai/public/artifacts/abc']);
     c.dispose();
   });
