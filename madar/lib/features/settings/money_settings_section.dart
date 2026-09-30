@@ -105,11 +105,14 @@ class MoneySettingsSection extends ConsumerWidget {
 
 /// The Money entries' one-line summaries (pure).
 abstract final class MoneySettingsSummary {
-  /// "JOD · 5 currencies" – the base currency and how many are set up.
+  /// "Jordanian dinar · 5 currencies" – the base currency (its name in the
+  /// UI language, else its code) and how many are set up.
   static String currencies(L10n l, MadarFormatter fmt, List<LedgerCurrency> currencies) {
-    final base = currencies.where((c) => c.isBase).firstOrNull?.code ?? currencies.firstOrNull?.code ?? '—';
+    final base = currencies.where((c) => c.isBase).firstOrNull ?? currencies.firstOrNull;
+    final named = base == null ? '' : (fmt.isArabic ? base.nameAr : base.nameEn).trim();
+    final label = named.isNotEmpty ? named : (base?.code ?? '—');
     final n = currencies.length;
-    return l.orbitUiListSeparator(BidiIsolate.isolate(base), l.moneyHubSettingsCurrencyCount(n, fmt.formatInt(n)));
+    return l.orbitUiListSeparator(BidiIsolate.isolate(label), l.moneyHubSettingsCurrencyCount(n, fmt.formatInt(n)));
   }
 
   /// "1 day before and on the day · at 9:00 AM", "On the due day · at …",

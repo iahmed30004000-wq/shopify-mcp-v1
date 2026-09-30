@@ -185,6 +185,9 @@ void main() {
       ];
       expect(MoneySettingsSummary.currencies(en, enFmt, currencies), '\u2068JOD\u2069 · 2 currencies');
       expect(MoneySettingsSummary.currencies(ar, arFmt, currencies), '\u2068JOD\u2069 · عملتان');
+      const named = [LedgerCurrency(code: 'JOD', nameAr: 'دينار أردني', nameEn: 'Jordanian dinar', isBase: true)];
+      expect(MoneySettingsSummary.currencies(en, enFmt, named), '\u2068Jordanian dinar\u2069 · 1 currency');
+      expect(MoneySettingsSummary.currencies(ar, arFmt, named), '\u2068دينار أردني\u2069 · عملة واحدة');
     });
   });
 
@@ -339,6 +342,24 @@ void main() {
     await tester.binding.handlePopRoute();
     await settleApp(tester);
     expect(find.byType(DebtSheet), findsNothing);
+    expect(find.byType(MoneyHub), findsOneWidget);
+    await tester.pump(const Duration(seconds: 6));
+  });
+
+  testWidgets("a wallet's moon opens its sheet, and the sheet the wallet", (tester) async {
+    late MoneyHubIds ids;
+    final app = await _moneyPage(tester, seed: (db) async => ids = await seedMoneyHub(db), location: AppRoutes.home);
+    final l = lookupL10n(const Locale('en'));
+    app.router.go(AppRoutes.planetOf('money', item: 'wallets:${ids.bank}'));
+    await _frames(tester, 60);
+    await settleApp(tester);
+    expect(find.text(l.moneyHubMoonOpenWallet), findsOneWidget);
+    await tester.tap(find.text(l.moneyHubMoonOpenWallet));
+    await settleApp(tester);
+    expect(app.router.state.uri.toString(), AppRoutes.walletOf(ids.bank));
+    expect(tester.widget<WalletScreen>(find.byType(WalletScreen)).walletId, ids.bank);
+    await tester.binding.handlePopRoute();
+    await settleApp(tester);
     expect(find.byType(MoneyHub), findsOneWidget);
     await tester.pump(const Duration(seconds: 6));
   });

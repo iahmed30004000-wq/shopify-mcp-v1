@@ -32,4 +32,4 @@ export 'presentation/backup_sheet.dart' show BackupSheet, lastBackupKey, showBac
 export 'presentation/csv_export_sheet.dart' show CsvExportSheet, showCsvExportSheet;
 export 'presentation/data_centre_screen.dart' show DataCentreScreen, dataRecordCountProvider, lastBackupAtProvider;
 export 'presentation/export_preview_sheet.dart' show ExportPreviewMode, ExportPreviewSheet, showExportPreviewSheet;
-export 'presentation/restore_flow.dart' show RestoreFlow, RestoreStage;
+export 'presentation/restore_flow.dart' show RestoreDebugState, RestoreFailure, RestoreFlow, RestoreStage;
