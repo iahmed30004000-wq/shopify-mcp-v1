@@ -116,6 +116,31 @@ void main() {
     }
   });
 
+  test('the search solver clears turtle deals without the dealer plan', () {
+    for (var seed = 0; seed < 4; seed++) {
+      final g = MahjongGame(MahjongConfig(seed: seed));
+      final path = MahjongDealer.solve(g.layout, g.state.faces, g.state.present, nodeBudget: 50000);
+      expect(path, isNotNull, reason: 'seed $seed');
+      for (final (a, b) in path!) {
+        expect(g.apply(MahjongAction.remove(a, b)), isTrue);
+      }
+      expect(g.isSolved, isTrue);
+    }
+  });
+
+  test('after leaving the plan, hints still offer legal moves', () {
+    final g = MahjongGame(const MahjongConfig(seed: 2));
+    // Take a legal pair that is not one of the plan's pairs, if any.
+    final plan = g.state.plan;
+    final pairs = {for (var k = 0; k < plan.length; k += 2) (plan[k], plan[k + 1])};
+    final off = g.availableMoves().where((m) => !pairs.contains(m) && !pairs.contains((m.$2, m.$1))).toList();
+    if (off.isNotEmpty) g.apply(MahjongAction.remove(off.first.$1, off.first.$2));
+    for (var i = 0; i < 10 && !g.isOver; i++) {
+      final h = g.hint()!;
+      expect(g.apply(h.action), isTrue);
+    }
+  });
+
   test('shuffle keeps tiles and positions, stays solvable, and is limited', () {
     final g = MahjongGame(const MahjongConfig(seed: 3, shuffles: 2));
     for (var i = 0; i < 10; i++) {

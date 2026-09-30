@@ -82,13 +82,14 @@ void main() {
     final g = PipeGame(PipeConfig.forDifficulty(PuzzleDifficulty.hard, seed: 2));
     final rng = SeededRng(2);
     final log = <Map<String, Object?>>[];
-    for (var i = 0; i < 2000 && !g.isOver; i++) {
+    for (var i = 0; i < 600 && !g.isOver; i++) {
       final cell = rng.nextInt(81);
       final a = rng.nextInt(8) == 0 ? PipeAction.lock(cell) : PipeAction.rotate(cell, rng.nextRange(1, 3));
       if (g.apply(a)) log.add(roundTripJson(a.toJson()));
     }
     expect(replay(PipeGame(PipeConfig.forDifficulty(PuzzleDifficulty.hard, seed: 2)), log), replay(g, const []));
     expectJsonRoundTrip(g);
+    // 600 actions fit in the 1000-step undo history.
     while (g.undo()) {}
     expect(g.state.rotations.every((r) => r == 0), isTrue);
   });

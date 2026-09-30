@@ -70,6 +70,7 @@ final class MahjongState extends PuzzleState {
     required this.rng,
     required this.shufflesLeft,
     this.moves = 0,
+    this.plan = const [],
   });
 
   /// Face per slot (kept after removal for rendering history).
@@ -78,6 +79,10 @@ final class MahjongState extends PuzzleState {
   final List<int> rng;
   final int shufflesLeft;
   final int moves;
+
+  /// The dealer's clearing order (flattened slot pairs) for the current
+  /// arrangement: valid as long as every removal so far took a pair of it.
+  final List<int> plan;
 
   int get remaining => present.where((p) => p).length;
 
@@ -88,6 +93,7 @@ final class MahjongState extends PuzzleState {
     'rng': rng,
     'shuffles': shufflesLeft,
     'moves': moves,
+    'plan': plan,
   };
 
   factory MahjongState.fromJson(Map<String, Object?> j) => MahjongState(
@@ -96,6 +102,7 @@ final class MahjongState extends PuzzleState {
     rng: jsonInts(j['rng']),
     shufflesLeft: jsonInt(j, 'shuffles'),
     moves: jsonInt(j, 'moves'),
+    plan: List.unmodifiable(jsonInts(j['plan'])),
   );
 }
 
@@ -245,11 +252,17 @@ abstract final class MahjongDealer {
       // Groups whose remaining tiles are all free are safe to clear first.
       final remainingByGroup = <int, int>{};
       final freeByGroup = <int, int>{};
+      final tilesByGroup = <int, List<int>>{};
       for (var i = 0; i < layout.length; i++) {
         if (!cur[i]) continue;
         final g = MahjongFaces.group(faces[i]);
         remainingByGroup[g] = (remainingByGroup[g] ?? 0) + 1;
+        (tilesByGroup[g] ??= []).add(i);
         if (layout.isFree(i, cur)) freeByGroup[g] = (freeByGroup[g] ?? 0) + 1;
+      }
+      // Dead end: the last two tiles of a group stacked on each other.
+      for (final t in tilesByGroup.values) {
+        if (t.length == 2 && (layout.isStackedOver(t[0], t[1]) || layout.isStackedOver(t[1], t[0]))) return false;
       }
       int score((int, int) m) {
         final g = MahjongFaces.group(faces[m.$1]);
@@ -299,6 +312,7 @@ final class MahjongGame extends PuzzleBase<MahjongState, MahjongAction> {
         present: List.unmodifiable(List<bool>.filled(layout.length, true)),
         rng: rng.state,
         shufflesLeft: config.shuffles,
+        plan: List.unmodifiable([for (final (a, b) in deal.order) ...[a, b]]),
       ),
     );
   }
@@ -342,6 +356,7 @@ final class MahjongGame extends PuzzleBase<MahjongState, MahjongAction> {
           rng: s.rng,
           shufflesLeft: s.shufflesLeft,
           moves: s.moves + 1,
+          plan: s.plan,
         );
       case MahjongActionType.shuffle:
         if (s.shufflesLeft <= 0 || s.remaining == 0) return null;
@@ -373,6 +388,7 @@ final class MahjongGame extends PuzzleBase<MahjongState, MahjongAction> {
           rng: rng.state,
           shufflesLeft: s.shufflesLeft - 1,
           moves: s.moves + 1,
+          plan: List.unmodifiable([for (final (a, b) in dealt.order) ...[a, b]]),
         );
     }
   }
@@ -393,6 +409,21 @@ final class MahjongGame extends PuzzleBase<MahjongState, MahjongAction> {
     final ms = availableMoves();
     if (ms.isEmpty) {
       return s.shufflesLeft > 0 ? const PuzzleHint(MahjongAction.shuffle(), technique: 'shuffle') : null;
+    }
+    // While every removal so far took a pair of the dealer's plan, the plan
+    // (minus those pairs) still clears the board: removing tiles earlier
+    // only frees others.
+    final plan = s.plan;
+    var consistent = plan.isNotEmpty;
+    for (var k = 0; k + 1 < plan.length && consistent; k += 2) {
+      if (s.present[plan[k]] != s.present[plan[k + 1]]) consistent = false;
+    }
+    if (consistent) {
+      for (var k = 0; k + 1 < plan.length; k += 2) {
+        if (s.present[plan[k]]) {
+          return PuzzleHint(MahjongAction.remove(plan[k], plan[k + 1]), technique: 'solver', focus: [plan[k], plan[k + 1]]);
+        }
+      }
     }
     final path = MahjongDealer.solve(layout, s.faces, s.present, nodeBudget: nodeBudget);
     if (path != null && path.isNotEmpty) {

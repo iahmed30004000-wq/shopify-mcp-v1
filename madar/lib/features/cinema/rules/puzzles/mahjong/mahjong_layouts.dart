@@ -51,6 +51,16 @@ final class MahjongLayout {
       }
     }
     _blocks.addAll([for (final b in blocked) List<int>.unmodifiable(b)]);
+    // Everything stacked (directly or indirectly) over each slot.
+    for (var i = 0; i < n; i++) {
+      final seen = <int>{};
+      final stack = [..._above[i]];
+      while (stack.isNotEmpty) {
+        final j = stack.removeLast();
+        if (seen.add(j)) stack.addAll(_above[j]);
+      }
+      _stackedOver.add(seen);
+    }
   }
 
   final MahjongLayoutId id;
@@ -59,6 +69,7 @@ final class MahjongLayout {
   final List<List<int>> _right = [];
   final List<List<int>> _above = [];
   final List<List<int>> _blocks = [];
+  final List<Set<int>> _stackedOver = [];
 
   int get length => slots.length;
 
@@ -68,6 +79,9 @@ final class MahjongLayout {
 
   /// Slots that slot [i] covers or flanks (the ones it can block).
   List<int> blocks(int i) => _blocks[i];
+
+  /// Whether [upper] lies (directly or through other tiles) on [lower].
+  bool isStackedOver(int upper, int lower) => _stackedOver[lower].contains(upper);
 
   /// A present slot is free when nothing lies on it and one side is open.
   bool isFree(int i, List<bool> present) {

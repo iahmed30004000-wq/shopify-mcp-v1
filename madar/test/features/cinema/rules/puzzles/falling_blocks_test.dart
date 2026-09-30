@@ -27,9 +27,11 @@ void main() {
     final g = FallingBlocksGame(const FallingConfig(seed: 5));
     final seen = <BlockShape>[g.state.piece.shape];
     expect(g.state.preview.length, 5);
-    for (var i = 0; i < 27; i++) {
-      g.apply(FallingAction.hardDrop);
-      seen.add(g.state.piece.shape);
+    // Let the placement AI play so that the stack never tops out.
+    while (seen.length < 28) {
+      final before = g.state.pieces;
+      expect(g.apply(g.hint()!.action), isTrue);
+      if (g.state.pieces != before) seen.add(g.state.piece.shape);
     }
     for (var bag = 0; bag < 4; bag++) {
       expect(seen.sublist(bag * 7, bag * 7 + 7).toSet().length, 7, reason: 'bag $bag');
