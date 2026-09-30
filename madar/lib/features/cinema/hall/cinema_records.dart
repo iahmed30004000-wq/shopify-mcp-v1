@@ -206,7 +206,7 @@ class KvCinemaRecordsStore implements CinemaRecordsStore {
 
   @override
   Stream<CinemaRecords> watch() async* {
-    yield await load();
+    await load(); // folds the legacy map in first
     yield* kv.watchJson(key).map(decode).distinct(_same);
   }
 
@@ -240,9 +240,17 @@ class MemoryCinemaRecordsStore implements CinemaRecordsStore {
   Future<CinemaRecords> load() async => _records;
 
   @override
-  Stream<CinemaRecords> watch() async* {
-    yield _records;
-    yield* _changes.stream;
+  Stream<CinemaRecords> watch() {
+    StreamSubscription<CinemaRecords>? sub;
+    late final StreamController<CinemaRecords> out;
+    out = StreamController<CinemaRecords>(
+      onListen: () {
+        out.add(_records);
+        sub = _changes.stream.listen(out.add);
+      },
+      onCancel: () => sub?.cancel(),
+    );
+    return out.stream;
   }
 
   @override

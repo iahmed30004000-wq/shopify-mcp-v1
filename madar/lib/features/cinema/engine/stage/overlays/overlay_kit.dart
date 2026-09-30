@@ -76,7 +76,8 @@ class OverlayTimer {
   double get elapsed {
     final now = scene.clock.time;
     final t0 = _t0 ??= now;
-    return scene.beat == null ? 10 : now - t0;
+    // No beat (fake stage) or reduced motion: everything already in place.
+    return scene.beat == null || scene.game.env.reducedMotion ? 10 : now - t0;
   }
 }
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/db/database.dart';
 import '../../../../core/db/repositories/repositories.dart';
@@ -11,6 +12,7 @@ import '../../../../core/design/tokens.dart';
 import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
+import '../../../../core/routing/life_route_pages.dart' show LifeRecordLinks;
 import '../../../../core/routing/money_route_pages.dart' show MoneyNav;
 import '../../../../core/sound/sound_api.dart';
 import '../../data/orbit_providers.dart';
@@ -126,8 +128,8 @@ final moonRecordsProvider = Provider<MoonRecords>(
 /// Opens [moon]'s record: what it is and which world it circles, how fresh
 /// it is, the concrete reasons it needs care, and what can be done right
 /// here – rename it, for a person, log that you were in touch today (the
-/// Family world pulses), and for a wallet, open it. Every change can be
-/// undone.
+/// Family world pulses), and open the record itself (a wallet, a person's
+/// page, a board, a trip, a tracker). Every change can be undone.
 Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) async {
   final records = ref.read(moonRecordsProvider);
   final record = await records.read(moon.refTable, moon.refId);
@@ -143,6 +145,9 @@ Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) 
   switch (action) {
     case _MoonAction.openWallet:
       MoneyNav.wallet(context, moon.refId);
+    case _MoonAction.openRecord:
+      final location = LifeRecordLinks.locationOf(moon.refTable, moon.refId);
+      if (location != null) unawaited(context.push<void>(location));
     case _MoonAction.inTouch:
       final hub = ref.read(orbitPulseHubProvider);
       final undo = await records.logContact(
@@ -175,7 +180,7 @@ Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) 
   }
 }
 
-enum _MoonAction { openWallet, inTouch, rename }
+enum _MoonAction { openWallet, openRecord, inTouch, rename }
 
 class _MoonSheet extends StatelessWidget {
   const _MoonSheet({required this.moon, required this.planet, required this.record});
@@ -204,6 +209,15 @@ class _MoonSheet extends StatelessWidget {
         if (r.refTable == moon.refTable && r.refId == moon.refId) r,
     ];
     final palette = PlanetPalettes.fromColor(moon.color);
+    final openLabel = LifeRecordLinks.locationOf(moon.refTable, moon.refId) == null
+        ? null
+        : switch (moon.refTable) {
+            'people' => l.lifeHubMoonOpenPerson,
+            'boards' => l.lifeHubMoonOpenBoard,
+            'trips' => l.lifeHubMoonOpenTrip,
+            'custom_modules' => l.lifeHubMoonOpenModule,
+            _ => null,
+          };
     void pick(_MoonAction a) => Navigator.of(context).pop(a);
     final details = <String>[
       if (moon.refTable == 'people')
@@ -293,6 +307,18 @@ class _MoonSheet extends StatelessWidget {
               primary: true,
               sfx: Sfx.complete,
               onPressed: () => pick(_MoonAction.inTouch),
+            ),
+            const SizedBox(height: Space.s),
+          ],
+          // A life moon opens its record's own page (a person's page below
+          // "in touch", a board, a trip, a tracker).
+          if (openLabel != null) ...[
+            SheetButton(
+              label: openLabel,
+              icon: iconOf(moon),
+              primary: moon.refTable != 'people',
+              sfx: Sfx.navigate,
+              onPressed: () => pick(_MoonAction.openRecord),
             ),
             const SizedBox(height: Space.s),
           ],

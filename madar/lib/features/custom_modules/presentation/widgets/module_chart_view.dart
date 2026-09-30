@@ -96,19 +96,20 @@ class ModuleChartCard extends StatelessWidget {
           ),
           if (onConfigChanged != null) ...[
             const SizedBox(height: Space.s),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            // Wraps instead of overflowing: the English ranges ran 8 px past
+            // a phone's card.
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: Space.s,
+              runSpacing: Space.xs,
               children: [
                 for (final r in ModuleChartConfig.ranges)
-                  Padding(
-                    padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.xs),
-                    child: _RangeChip(
-                      label: tx.range(r),
-                      semanticLabel: tx.range(r),
-                      selected: data.config.range == r,
-                      color: c,
-                      onTap: () => change(data.config.copyWith(range: r)),
-                    ),
+                  _RangeChip(
+                    label: tx.range(r),
+                    semanticLabel: tx.range(r),
+                    selected: data.config.range == r,
+                    color: c,
+                    onTap: () => change(data.config.copyWith(range: r)),
                   ),
               ],
             ),

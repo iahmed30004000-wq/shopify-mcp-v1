@@ -23242,4 +23242,391 @@ class L10nAr extends L10n {
 
   @override
   String get savedGamesClearDataDone => 'مُسحت بيانات اللعبة';
+
+  @override
+  String get togetherNetOnThisPhone => 'على هذا الهاتف';
+
+  @override
+  String get togetherNetOnThisPhoneHint =>
+      'اختارا صاحب هذا الهاتف — يُحفظ الاختيار';
+
+  @override
+  String togetherNetThisIsMe(String name) {
+    return 'هذا الهاتف لـ$name';
+  }
+
+  @override
+  String get togetherNetNearbyIntro =>
+      'افتحا اللعبة نفسها على الهاتفين ثم اضغطا «العبا معًا» على كلٍّ منهما. بلوتوث وواي فاي مباشر فقط — بلا إنترنت ولا خوادم.';
+
+  @override
+  String get togetherNetPlayTogether => 'العبا معًا';
+
+  @override
+  String get togetherNetSearching => 'نبحث عن الهاتف الآخر…';
+
+  @override
+  String get togetherNetSearchingHint =>
+      'لا يظهر؟ تأكّدا أن اللعبة نفسها مفتوحة على الهاتفين وأن البلوتوث والواي فاي يعملان.';
+
+  @override
+  String get togetherNetPaused => 'توقّف البحث ريثما تعودان إلى مَدار';
+
+  @override
+  String get togetherNetPickPhone => 'وجدنا أكثر من هاتف — اختارا الهاتف الآخر';
+
+  @override
+  String get togetherNetConnect => 'اتصال';
+
+  @override
+  String togetherNetConnecting(String name) {
+    return 'نتصل بـ$name…';
+  }
+
+  @override
+  String get togetherNetConfirmTitle => 'هل يظهر الرقم نفسه؟';
+
+  @override
+  String togetherNetConfirmBody(String name) {
+    return 'تأكّدا أن هاتف $name يعرض هذه الأرقام الأربعة نفسها.';
+  }
+
+  @override
+  String togetherNetDigits(String digits) {
+    return 'رمز التحقّق $digits';
+  }
+
+  @override
+  String get togetherNetMatch => 'متطابقة';
+
+  @override
+  String get togetherNetNoMatch => 'غير متطابقة';
+
+  @override
+  String togetherNetWaitingFor(String name) {
+    return 'بانتظار تأكيد $name…';
+  }
+
+  @override
+  String togetherNetConnected(String name) {
+    return 'متصلان — $name على الهاتف الآخر';
+  }
+
+  @override
+  String togetherNetReconnecting(String name) {
+    return 'انقطع الاتصال — نبحث عن $name…';
+  }
+
+  @override
+  String togetherNetLost(String name) {
+    return 'لم نعثر على $name';
+  }
+
+  @override
+  String get togetherNetLostHint =>
+      'قرّبا الهاتفين وتأكّدا أن مَدار مفتوح على كليهما.';
+
+  @override
+  String get togetherNetSearchAgain => 'ابحث مجددًا';
+
+  @override
+  String get togetherNetTryAgain => 'حاول مجددًا';
+
+  @override
+  String get togetherNetCancel => 'إلغاء';
+
+  @override
+  String get togetherNetPermTitle => 'اسمح بالعثور على الأجهزة القريبة';
+
+  @override
+  String get togetherNetPermNearbyBody =>
+      'ليجد مَدار الهاتف الآخر دون إنترنت يحتاج إذن «الأجهزة المجاورة»: بلوتوث وواي فاي مباشر.';
+
+  @override
+  String get togetherNetPermLocationBody =>
+      'على هذا الإصدار من أندرويد يربط النظام البحث بالبلوتوث والواي فاي بإذن الموقع. لا يقرأ مَدار موقعكما أبدًا.';
+
+  @override
+  String get togetherNetPermPointPairing => 'يُستخدم أثناء الاقتران واللعب فقط';
+
+  @override
+  String get togetherNetPermPointGameOnly => 'لا يغادر الهاتف إلا حالة اللعبة';
+
+  @override
+  String get togetherNetPermPointStops =>
+      'يتوقف البحث فور الاقتران أو عند مغادرة التطبيق';
+
+  @override
+  String get togetherNetContinue => 'متابعة';
+
+  @override
+  String get togetherNetNotNow => 'ليس الآن';
+
+  @override
+  String get togetherNetPermDenied => 'لا يستطيع مَدار البحث دون هذا الإذن';
+
+  @override
+  String get togetherNetPermDeniedForever =>
+      'رُفض الإذن. فعّلاه من إعدادات التطبيق ← الأذونات.';
+
+  @override
+  String get togetherNetOpenSettings => 'فتح الإعدادات';
+
+  @override
+  String get togetherNetLocationOff => 'خدمات الموقع متوقفة';
+
+  @override
+  String get togetherNetLocationOffBody =>
+      'على هذا الإصدار من أندرويد يحتاج البحث عن الأجهزة إلى تشغيلها. لا يقرأ مَدار موقعكما.';
+
+  @override
+  String get togetherNetSearchAnyway => 'ابحث على أي حال';
+
+  @override
+  String get togetherNetFailRadio =>
+      'شغّلا البلوتوث والواي فاي ثم حاولا مجددًا';
+
+  @override
+  String get togetherNetFailDeclined => 'لم يؤكّد الهاتف الآخر';
+
+  @override
+  String get togetherNetFailNotFound => 'لا توجد غرفة مفتوحة بهذا الرمز';
+
+  @override
+  String get togetherNetFailExpired =>
+      'انتهت صلاحية الرمز — أنشئا رمزًا جديدًا';
+
+  @override
+  String get togetherNetFailTaken => 'انضمّ هاتف آخر بهذا الرمز';
+
+  @override
+  String get togetherNetFailDifferentGame => 'هذا الرمز للعبة أخرى';
+
+  @override
+  String get togetherNetFailNetwork => 'لا اتصال بالإنترنت';
+
+  @override
+  String get togetherNetFailSetup =>
+      'رفض Firebase إعدادات المشروع — راجعاها في «اللعب عبر الإنترنت»';
+
+  @override
+  String get togetherNetFailSignIn =>
+      'تعذّر الدخول المجهول — فعّلاه في مشروع Firebase';
+
+  @override
+  String get togetherNetFailRules =>
+      'رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان';
+
+  @override
+  String get togetherNetFailPeerLeft => 'غادر الطرف الآخر';
+
+  @override
+  String get togetherNetFailUnknown => 'حدث خطأ غير متوقع';
+
+  @override
+  String get togetherNetCreateCode => 'إنشاء رمز';
+
+  @override
+  String get togetherNetEnterCode => 'إدخال رمز';
+
+  @override
+  String get togetherNetOnlineIntro =>
+      'أحدكما يُنشئ رمزًا والآخر يكتبه على هاتفه. لا يُحفظ في مشروعكما على Firebase إلا حالة اللعبة، وتُحذف عند المغادرة.';
+
+  @override
+  String get togetherNetYourCode => 'رمز الغرفة';
+
+  @override
+  String get togetherNetCodeHint =>
+      'اكتبا هذا الرمز على الهاتف الآخر في «إدخال رمز»';
+
+  @override
+  String togetherNetCodeValid(String time) {
+    return 'صالح حتى $time';
+  }
+
+  @override
+  String get togetherNetCopyCode => 'نسخ الرمز';
+
+  @override
+  String get togetherNetCopied => 'نُسخ';
+
+  @override
+  String get togetherNetWaitingJoin => 'بانتظار انضمام الهاتف الآخر…';
+
+  @override
+  String togetherNetJoinRequest(String name) {
+    return '$name يطلب الانضمام';
+  }
+
+  @override
+  String get togetherNetJoinRequestBody =>
+      'هل هذا الطرف الآخر فعلًا؟ إن لم يكن فارفضا وسنُنشئ رمزًا جديدًا.';
+
+  @override
+  String get togetherNetAccept => 'ابدأ اللعب';
+
+  @override
+  String get togetherNetDecline => 'رفض';
+
+  @override
+  String get togetherNetCodeField => 'الرمز (ستة أرقام)';
+
+  @override
+  String get togetherNetJoin => 'انضمام';
+
+  @override
+  String get togetherNetJoining => 'نتحقّق من الرمز…';
+
+  @override
+  String togetherNetWaitingAccept(String name) {
+    return 'بانتظار قبول $name…';
+  }
+
+  @override
+  String get togetherNetSigningIn => 'نتصل بمشروعكما…';
+
+  @override
+  String get togetherNetNeedsSetup => 'اللعب عبر الإنترنت غير مُفعَّل';
+
+  @override
+  String get togetherNetNeedsSetupBody =>
+      'يعمل عبر مشروع Firebase مجاني خاص بكما، ويبقى مطفأً حتى تفعّلاه.';
+
+  @override
+  String get togetherNetSetUp => 'إعداد اللعب عبر الإنترنت';
+
+  @override
+  String togetherNetQrLabel(String code) {
+    return 'رمز QR للغرفة $code';
+  }
+
+  @override
+  String get togetherNetOnlineIntroSheet =>
+      'للّعب من مكانين مختلفين يستخدم مَدار مشروع Firebase المجاني الخاص بكما — لا خادم لمَدار. لا يُحفظ فيه إلا حالة اللعبة، ومعها اسم العرض والصورة واللون، لساعات قليلة ثم يُحذف.';
+
+  @override
+  String get togetherNetEnable => 'تفعيل اللعب عبر الإنترنت';
+
+  @override
+  String get togetherNetEnableHint =>
+      'مطفأ افتراضيًا. يحتاج إعدادات مشروع صالحة.';
+
+  @override
+  String get togetherNetEnableNeedsConfig => 'احفظا إعدادات المشروع أولًا';
+
+  @override
+  String get togetherNetStepsTitle => 'الإعداد مرة واحدة';
+
+  @override
+  String get togetherNetStep1 =>
+      'أنشئا مشروعًا مجانيًا في console.firebase.google.com';
+
+  @override
+  String get togetherNetStep2 =>
+      'أضيفا تطبيق أندرويد باسم الحزمة app.madar.orbit';
+
+  @override
+  String get togetherNetStep3 =>
+      'فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous';
+
+  @override
+  String get togetherNetStep4 =>
+      'أنشئا Realtime Database والصقا قواعد الأمان في تبويب Rules';
+
+  @override
+  String get togetherNetStep5 =>
+      'انقلا القيم إلى الحقول هنا، أو الصقا ملف google-services.json كاملًا';
+
+  @override
+  String get togetherNetCopyRules => 'نسخ قواعد الأمان';
+
+  @override
+  String get togetherNetRulesCopied => 'نُسخت قواعد الأمان';
+
+  @override
+  String get togetherNetPasteConfig => 'لصق من الحافظة';
+
+  @override
+  String get togetherNetPasteNothing => 'لا إعدادات في الحافظة';
+
+  @override
+  String get togetherNetPasted => 'مُلئت الحقول من الحافظة';
+
+  @override
+  String get togetherNetFieldApiKey => 'مفتاح الواجهة (API key)';
+
+  @override
+  String get togetherNetFieldAppId => 'معرّف التطبيق (App ID)';
+
+  @override
+  String get togetherNetFieldProjectId => 'معرّف المشروع (Project ID)';
+
+  @override
+  String get togetherNetFieldDatabaseUrl => 'رابط قاعدة البيانات';
+
+  @override
+  String get togetherNetFieldSenderId => 'رقم المُرسِل (Sender ID)';
+
+  @override
+  String get togetherNetErrMissing => 'مطلوب';
+
+  @override
+  String get togetherNetErrFormat => 'الصيغة غير صحيحة';
+
+  @override
+  String get togetherNetErrMismatch => 'لا يطابق رقم المشروع في معرّف التطبيق';
+
+  @override
+  String get togetherNetSave => 'حفظ';
+
+  @override
+  String get togetherNetSaved => 'حُفظت الإعدادات';
+
+  @override
+  String get togetherNetTest => 'اختبار الاتصال';
+
+  @override
+  String get togetherNetTesting => 'نختبر…';
+
+  @override
+  String get togetherNetTestOk => 'يعمل! الدخول المجهول وقواعد الأمان جاهزة';
+
+  @override
+  String get togetherNetRemove => 'حذف الإعدادات';
+
+  @override
+  String get togetherNetRemoved => 'حُذفت إعدادات المشروع';
+
+  @override
+  String get togetherNetStoredSecurely =>
+      'تُحفظ في التخزين الآمن لهذا الهاتف فقط، ولا تُرسل إلى أي مكان سوى مشروعكما.';
+
+  @override
+  String get togetherNetOnlineOn => 'مُفعَّل';
+
+  @override
+  String get togetherNetOnlineOff => 'مطفأ';
+
+  @override
+  String get togetherNetOnlineNotSetUp => 'غير مُعدّ';
+
+  @override
+  String get togetherNetTurnGroup => 'اللعب معًا';
+
+  @override
+  String get togetherNetTurnChannel => 'دورك';
+
+  @override
+  String get togetherNetTurnChannelBody => 'حين يلعب الطرف الآخر من هاتف بعيد';
+
+  @override
+  String togetherNetTurnTitle(String game) {
+    return 'دورك في $game';
+  }
+
+  @override
+  String togetherNetTurnBody(String name) {
+    return 'لعب $name — حان دورك';
+  }
 }

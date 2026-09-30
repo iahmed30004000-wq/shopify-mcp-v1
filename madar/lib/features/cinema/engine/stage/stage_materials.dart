@@ -29,6 +29,8 @@ class StageMaterials {
     required this.neonB,
     required this.plaque,
     required this.plaqueText,
+    this.velvet,
+    this.velvetShade,
   });
 
   final Era era;
@@ -57,6 +59,12 @@ class StageMaterials {
   /// HUD / menu plaque fill and its text.
   final Color plaque;
   final Color plaqueText;
+
+  /// The house curtains' velvet when it differs from the palette's
+  /// `curtain` / `curtainShade` (noir lifts it so the drape reads in the
+  /// dark).
+  final Color? velvet;
+  final Color? velvetShade;
 
   bool get isNeon => era == Era.vhs;
 
@@ -122,6 +130,8 @@ class StageMaterials {
         neonB: p.footlight,
         plaque: const Color(0xFF1B1B20),
         plaqueText: p.paper,
+        velvet: const Color(0xFF4C4C55),
+        velvetShade: const Color(0xFF0C0C0F),
       ),
       Era.technicolor => StageMaterials(
         era: skin.era,

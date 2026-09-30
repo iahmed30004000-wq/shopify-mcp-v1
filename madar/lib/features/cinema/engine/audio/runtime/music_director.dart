@@ -107,7 +107,7 @@ final class ProceduralMusicDirector implements MusicDirector {
       _ready = true;
       return;
     }
-    final stingers = _loadStingers();
+    final stingers = _ensureStingers();
     // Whatever was cued first renders first; otherwise start with the
     // main gameplay mood.
     _want(_pending?.mood ?? _mood ?? MusicMood.adventure, urgent: true);
@@ -137,6 +137,7 @@ final class ProceduralMusicDirector implements MusicDirector {
     _mood = mood;
     _pending = _Pending(mood, fade);
     if (_live) {
+      unawaited(_ensureStingers());
       _want(mood, urgent: true);
       _service();
     }
@@ -185,9 +186,10 @@ final class ProceduralMusicDirector implements MusicDirector {
     if (cur != null) {
       _fadeOut(cur, const Duration(milliseconds: 80), mixer.now);
       _current = null;
+      // Resume re-enters the loop (no intro) once back – unless another
+      // cue was already on its way.
+      _pending ??= _Pending(cur.mood, const Duration(milliseconds: 700), skipIntro: true);
     }
-    // Resume re-enters the loop (no intro) once back.
-    if (_mood != null) _pending = _Pending(_mood!, const Duration(milliseconds: 700), skipIntro: true);
   }
 
   @override
@@ -393,6 +395,11 @@ final class ProceduralMusicDirector implements MusicDirector {
 
   // ---------------------------------------------------------------------------
   // Rendering and loading
+
+  Future<void>? _stingerLoad;
+
+  /// Loads the stinger kit once (also when sound comes up after prepare).
+  Future<void> _ensureStingers() => _stingerLoad ??= _loadStingers();
 
   Future<void> _loadStingers() async {
     try {

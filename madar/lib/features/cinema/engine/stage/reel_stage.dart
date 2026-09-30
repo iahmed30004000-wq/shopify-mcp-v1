@@ -72,6 +72,7 @@ class ReelStage implements StageFrame {
   Offset _spot = Offset.zero;
   double _spotAlpha = 0;
 
+  late final EraPalette _velvet = _velvetPalette();
   final ShaderPool _curtains = ShaderPool(CinemaShader.curtain, maxInstances: 4);
   final ShaderPool _spots = ShaderPool(CinemaShader.spotlight, maxInstances: 1);
   final BulbAtlas _atlas = BulbAtlas(capacity: 160);
@@ -252,7 +253,7 @@ class ReelStage implements StageFrame {
       CurtainUniforms.write(
         s,
         rect: rect,
-        palette: skin.palette,
+        palette: _velvet,
         panel: side,
         clock: clock,
         folds: folds,
@@ -273,7 +274,7 @@ class ReelStage implements StageFrame {
       return;
     }
     // Plain-canvas fallback: a flat velvet silhouette.
-    _paint.color = skin.palette.curtain;
+    _paint.color = _velvet.curtain;
     if (side == CurtainPanel.valance) {
       canvas.drawRect(Rect.fromLTRB(rect.left, rect.top, rect.right, rect.top + rect.height * 0.75), _paint);
       return;
@@ -297,6 +298,26 @@ class ReelStage implements StageFrame {
       ..lineTo(outer, rect.bottom)
       ..close();
     canvas.drawPath(_fallback, _paint);
+  }
+
+  /// The palette the curtain shader reads (the stage's own velvet).
+  EraPalette _velvetPalette() {
+    final p = skin.palette;
+    final v = materials.velvet, vs = materials.velvetShade;
+    if (v == null && vs == null) return p;
+    return EraPalette(
+      ink: p.ink,
+      paper: p.paper,
+      shadow: p.shadow,
+      midtone: p.midtone,
+      highlight: p.highlight,
+      accent: p.accent,
+      accent2: p.accent2,
+      backdrop: p.backdrop,
+      curtain: v ?? p.curtain,
+      curtainShade: vs ?? p.curtainShade,
+      footlight: p.footlight,
+    );
   }
 
   /// The gilt rope and tassel that hold a gathered curtain.

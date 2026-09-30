@@ -454,6 +454,9 @@ class BurningFilmBossBar extends HudItem {
     ..strokeCap = StrokeCap.round
     ..strokeJoin = StrokeJoin.round;
   final Path _edge = Path();
+  final Path _holes = Path();
+  Size _holesFor = Size.zero;
+  double _holesScale = 0;
   String? _laidOut;
   double _scale = 0;
   Size _size = Size.zero;
@@ -571,22 +574,14 @@ class BurningFilmBossBar extends HudItem {
         final bc = Offset(r.center.dx + (_hash(i + 1.0) - 0.5) * 3 * s, r.center.dy + 1 * s);
         canvas.drawOval(Rect.fromCenter(center: bc, width: r.width * 0.42, height: r.height * 0.62), _p);
       }
-      // Sprocket holes.
+      // Sprocket holes (one cached path, rebuilt only on resize).
       _p.color = neon ? m.neonB.withValues(alpha: 0.8) : pal.paper.withValues(alpha: 0.9);
-      for (var x = strip.left + 3 * s; x < strip.right - 3 * s; x += 7 * s) {
-        canvas
-          ..drawRRect(
-            RRect.fromRectAndRadius(Rect.fromLTWH(x, strip.top + 2 * s, 3.4 * s, 2.8 * s), Radius.circular(0.8 * s)),
-            _p,
-          )
-          ..drawRRect(
-            RRect.fromRectAndRadius(
-              Rect.fromLTWH(x, strip.bottom - 4.8 * s, 3.4 * s, 2.8 * s),
-              Radius.circular(0.8 * s),
-            ),
-            _p,
-          );
-      }
+      _buildHoles(strip.size, s);
+      canvas
+        ..save()
+        ..translate(strip.left, strip.top)
+        ..drawPath(_holes, _p)
+        ..restore();
       // Scorched frames between the health line and the flame front.
       if (frontLen > len + 0.5) {
         final scorch = Rect.fromLTRB(math.min(burnX, frontX), strip.top, math.max(burnX, frontX), strip.bottom);
@@ -618,6 +613,20 @@ class BurningFilmBossBar extends HudItem {
       canvas.drawRRect(RRect.fromRectAndRadius(keep, Radius.circular(3 * s)), _s);
     }
     if (_ghost < 1 && _ghost > 0) _burnEdge(canvas, strip, frontX, rtl ? -1 : 1, ctx);
+  }
+
+  void _buildHoles(Size strip, double s) {
+    if (strip == _holesFor && s == _holesScale) return;
+    _holesFor = strip;
+    _holesScale = s;
+    _holes.reset();
+    for (var x = 3 * s; x < strip.width - 3 * s; x += 7 * s) {
+      _holes
+        ..addRRect(RRect.fromRectAndRadius(Rect.fromLTWH(x, 2 * s, 3.4 * s, 2.8 * s), Radius.circular(0.8 * s)))
+        ..addRRect(
+          RRect.fromRectAndRadius(Rect.fromLTWH(x, strip.height - 4.8 * s, 3.4 * s, 2.8 * s), Radius.circular(0.8 * s)),
+        );
+    }
   }
 
   /// The charred, glowing edge where the film is burning back.
@@ -776,6 +785,8 @@ class FilmProgressHudItem extends HudItem {
   final ReelGlyph _reel = ReelGlyph();
   final Paint _p = Paint();
   final Paint _s = Paint()..style = PaintingStyle.stroke;
+  final Path _holes = Path();
+  Size _holesFor = Size.zero;
   double _shown = -1;
   double _scale = 0;
   Size _size = Size.zero;
@@ -823,11 +834,20 @@ class FilmProgressHudItem extends HudItem {
       canvas.drawRect(Rect.fromLTWH(x + 1.2 * s, strip.top + 3 * s, fw - 2.4 * s, strip.height - 6 * s), _p);
     }
     _p.color = pal.paper.withValues(alpha: neon ? 0.5 : 0.85);
-    for (var x = strip.left + 2 * s; x < strip.right - 2 * s; x += 5 * s) {
-      canvas
-        ..drawRect(Rect.fromLTWH(x, strip.top + 0.6 * s, 2 * s, 1.6 * s), _p)
-        ..drawRect(Rect.fromLTWH(x, strip.bottom - 2.2 * s, 2 * s, 1.6 * s), _p);
+    if (strip.size != _holesFor) {
+      _holesFor = strip.size;
+      _holes.reset();
+      for (var x = 2 * s; x < strip.width - 2 * s; x += 5 * s) {
+        _holes
+          ..addRect(Rect.fromLTWH(x, 0.6 * s, 2 * s, 1.6 * s))
+          ..addRect(Rect.fromLTWH(x, strip.height - 2.2 * s, 2 * s, 1.6 * s));
+      }
     }
+    canvas
+      ..save()
+      ..translate(strip.left, strip.top)
+      ..drawPath(_holes, _p)
+      ..restore();
     _s
       ..color = neon ? m.neonB : pal.ink
       ..strokeWidth = 1.6 * s;

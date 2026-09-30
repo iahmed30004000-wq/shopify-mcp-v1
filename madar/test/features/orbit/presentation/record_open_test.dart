@@ -21,7 +21,8 @@ void main() {
     expect(RecordOpener.canOpen('people', 'p1', const [dad]), isTrue);
     expect(RecordOpener.canOpen('tasks', 't1', const []), isTrue);
     expect(RecordOpener.canOpen('budgets', 'b1', const [dad]), isFalse);
-    expect(RecordOpener.canOpen('people', 'p2', const [dad]), isFalse, reason: 'a hidden / missing moon');
+    // A person who is no moon (hidden) still has a page of their own.
+    expect(RecordOpener.canOpen('people', 'p2', const [dad]), isTrue, reason: "the person's page");
     expect(RecordOpener.canOpen(null, null, const [dad]), isFalse);
   });
 

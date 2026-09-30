@@ -51,7 +51,8 @@ class CinemaGameScreen extends ConsumerStatefulWidget {
     transitionDuration: const Duration(milliseconds: 560),
     reverseTransitionDuration: const Duration(milliseconds: 420),
     pageBuilder: (context, animation, secondary) => CinemaGameScreen(gameId: gameId, entry: entry),
-    transitionsBuilder: (context, animation, secondary, child) => IrisRouteTransition(animation: animation, origin: origin, child: child),
+    transitionsBuilder: (context, animation, secondary, child) =>
+        IrisRouteTransition(animation: animation, origin: origin, child: child),
   );
 
   @override
@@ -61,7 +62,7 @@ class CinemaGameScreen extends ConsumerStatefulWidget {
 class _CinemaGameScreenState extends ConsumerState<CinemaGameScreen> {
   CinemaGame? _game;
   int? _best;
-  ValueListenable<bool>? _tickers;
+  ValueListenable<TickerModeData>? _tickers;
   bool _covered = false;
   PrayerMuteController? _mute;
   bool _muted = false;
@@ -111,15 +112,17 @@ class _CinemaGameScreenState extends ConsumerState<CinemaGameScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final tickers = TickerMode.getNotifier(context);
+    final tickers = TickerMode.getValuesNotifier(context);
     if (!identical(tickers, _tickers)) {
       _tickers?.removeListener(_onTickers);
       _tickers = tickers..addListener(_onTickers);
     }
     if (_mute == null) {
       try {
-        _mute = ref.read(prayerMuteProvider)..addListener(_onMute);
-        _muted = _mute!.muted;
+        final mute = ref.read(prayerMuteProvider);
+        _mute = mute;
+        mute.addListener(_onMute);
+        _muted = mute.muted;
         _muteExpanded = _muted;
       } catch (_) {
         _mute = null;
@@ -128,7 +131,7 @@ class _CinemaGameScreenState extends ConsumerState<CinemaGameScreen> {
   }
 
   void _onTickers() {
-    if (_tickers?.value ?? true) {
+    if (_tickers?.value.enabled ?? true) {
       _uncover();
     } else {
       _cover();
@@ -353,7 +356,13 @@ class _NotOpenYetStageState extends State<NotOpenYetStage> with SingleTickerProv
                         Text(
                           entry.title(l10n),
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontFamily: font, fontSize: 30, fontWeight: _skin.titles.weight, color: ink, height: 1.2),
+                          style: TextStyle(
+                            fontFamily: font,
+                            fontSize: 30,
+                            fontWeight: _skin.titles.weight,
+                            color: ink,
+                            height: 1.2,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
@@ -372,7 +381,12 @@ class _NotOpenYetStageState extends State<NotOpenYetStage> with SingleTickerProv
                         Text(
                           l10n.cinemaHallComingSoonBody,
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontFamily: 'PlexArabic', fontSize: 15, height: 1.45, color: ink.withValues(alpha: 0.8)),
+                          style: TextStyle(
+                            fontFamily: 'PlexArabic',
+                            fontSize: 15,
+                            height: 1.45,
+                            color: ink.withValues(alpha: 0.8),
+                          ),
                         ),
                       ],
                       const SizedBox(height: 18),

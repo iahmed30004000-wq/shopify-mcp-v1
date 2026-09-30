@@ -246,5 +246,16 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tel" />
         </intent>
+        <!-- Family: a person's SMS and WhatsApp (wa.me over https) open only
+             on an explicit tap (url_launcher; Android 11+ package visibility
+             needs the schemes declared). Madar never sends by itself. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="sms" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
     </queries>
 </manifest>

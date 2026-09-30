@@ -21508,5 +21508,214 @@
   "@savedGamesOpenAll": {
     "description": "Optional label for an entry point to the Saved Games screen (e.g. a hall tile)"
   },
-  "savedGamesClearDataDone": "مُسحت بيانات اللعبة"
+  "savedGamesClearDataDone": "مُسحت بيانات اللعبة",
+  "togetherNetOnThisPhone": "على هذا الهاتف",
+  "togetherNetOnThisPhoneHint": "اختارا صاحب هذا الهاتف — يُحفظ الاختيار",
+  "togetherNetThisIsMe": "هذا الهاتف لـ{name}",
+  "@togetherNetThisIsMe": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetNearbyIntro": "افتحا اللعبة نفسها على الهاتفين ثم اضغطا «العبا معًا» على كلٍّ منهما. بلوتوث وواي فاي مباشر فقط — بلا إنترنت ولا خوادم.",
+  "togetherNetPlayTogether": "العبا معًا",
+  "togetherNetSearching": "نبحث عن الهاتف الآخر…",
+  "togetherNetSearchingHint": "لا يظهر؟ تأكّدا أن اللعبة نفسها مفتوحة على الهاتفين وأن البلوتوث والواي فاي يعملان.",
+  "togetherNetPaused": "توقّف البحث ريثما تعودان إلى مَدار",
+  "togetherNetPickPhone": "وجدنا أكثر من هاتف — اختارا الهاتف الآخر",
+  "togetherNetConnect": "اتصال",
+  "togetherNetConnecting": "نتصل بـ{name}…",
+  "@togetherNetConnecting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetConfirmTitle": "هل يظهر الرقم نفسه؟",
+  "togetherNetConfirmBody": "تأكّدا أن هاتف {name} يعرض هذه الأرقام الأربعة نفسها.",
+  "@togetherNetConfirmBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetDigits": "رمز التحقّق {digits}",
+  "@togetherNetDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetMatch": "متطابقة",
+  "togetherNetNoMatch": "غير متطابقة",
+  "togetherNetWaitingFor": "بانتظار تأكيد {name}…",
+  "@togetherNetWaitingFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetConnected": "متصلان — {name} على الهاتف الآخر",
+  "@togetherNetConnected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetReconnecting": "انقطع الاتصال — نبحث عن {name}…",
+  "@togetherNetReconnecting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetLost": "لم نعثر على {name}",
+  "@togetherNetLost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetLostHint": "قرّبا الهاتفين وتأكّدا أن مَدار مفتوح على كليهما.",
+  "togetherNetSearchAgain": "ابحث مجددًا",
+  "togetherNetTryAgain": "حاول مجددًا",
+  "togetherNetCancel": "إلغاء",
+  "togetherNetPermTitle": "اسمح بالعثور على الأجهزة القريبة",
+  "togetherNetPermNearbyBody": "ليجد مَدار الهاتف الآخر دون إنترنت يحتاج إذن «الأجهزة المجاورة»: بلوتوث وواي فاي مباشر.",
+  "togetherNetPermLocationBody": "على هذا الإصدار من أندرويد يربط النظام البحث بالبلوتوث والواي فاي بإذن الموقع. لا يقرأ مَدار موقعكما أبدًا.",
+  "togetherNetPermPointPairing": "يُستخدم أثناء الاقتران واللعب فقط",
+  "togetherNetPermPointGameOnly": "لا يغادر الهاتف إلا حالة اللعبة",
+  "togetherNetPermPointStops": "يتوقف البحث فور الاقتران أو عند مغادرة التطبيق",
+  "togetherNetContinue": "متابعة",
+  "togetherNetNotNow": "ليس الآن",
+  "togetherNetPermDenied": "لا يستطيع مَدار البحث دون هذا الإذن",
+  "togetherNetPermDeniedForever": "رُفض الإذن. فعّلاه من إعدادات التطبيق ← الأذونات.",
+  "togetherNetOpenSettings": "فتح الإعدادات",
+  "togetherNetLocationOff": "خدمات الموقع متوقفة",
+  "togetherNetLocationOffBody": "على هذا الإصدار من أندرويد يحتاج البحث عن الأجهزة إلى تشغيلها. لا يقرأ مَدار موقعكما.",
+  "togetherNetSearchAnyway": "ابحث على أي حال",
+  "togetherNetFailRadio": "شغّلا البلوتوث والواي فاي ثم حاولا مجددًا",
+  "togetherNetFailDeclined": "لم يؤكّد الهاتف الآخر",
+  "togetherNetFailNotFound": "لا توجد غرفة مفتوحة بهذا الرمز",
+  "togetherNetFailExpired": "انتهت صلاحية الرمز — أنشئا رمزًا جديدًا",
+  "togetherNetFailTaken": "انضمّ هاتف آخر بهذا الرمز",
+  "togetherNetFailDifferentGame": "هذا الرمز للعبة أخرى",
+  "togetherNetFailNetwork": "لا اتصال بالإنترنت",
+  "togetherNetFailSetup": "رفض Firebase إعدادات المشروع — راجعاها في «اللعب عبر الإنترنت»",
+  "togetherNetFailSignIn": "تعذّر الدخول المجهول — فعّلاه في مشروع Firebase",
+  "togetherNetFailRules": "رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان",
+  "togetherNetFailPeerLeft": "غادر الطرف الآخر",
+  "togetherNetFailUnknown": "حدث خطأ غير متوقع",
+  "togetherNetCreateCode": "إنشاء رمز",
+  "togetherNetEnterCode": "إدخال رمز",
+  "togetherNetOnlineIntro": "أحدكما يُنشئ رمزًا والآخر يكتبه على هاتفه. لا يُحفظ في مشروعكما على Firebase إلا حالة اللعبة، وتُحذف عند المغادرة.",
+  "togetherNetYourCode": "رمز الغرفة",
+  "togetherNetCodeHint": "اكتبا هذا الرمز على الهاتف الآخر في «إدخال رمز»",
+  "togetherNetCodeValid": "صالح حتى {time}",
+  "@togetherNetCodeValid": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetCopyCode": "نسخ الرمز",
+  "togetherNetCopied": "نُسخ",
+  "togetherNetWaitingJoin": "بانتظار انضمام الهاتف الآخر…",
+  "togetherNetJoinRequest": "{name} يطلب الانضمام",
+  "@togetherNetJoinRequest": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetJoinRequestBody": "هل هذا الطرف الآخر فعلًا؟ إن لم يكن فارفضا وسنُنشئ رمزًا جديدًا.",
+  "togetherNetAccept": "ابدأ اللعب",
+  "togetherNetDecline": "رفض",
+  "togetherNetCodeField": "الرمز (ستة أرقام)",
+  "togetherNetJoin": "انضمام",
+  "togetherNetJoining": "نتحقّق من الرمز…",
+  "togetherNetWaitingAccept": "بانتظار قبول {name}…",
+  "@togetherNetWaitingAccept": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetSigningIn": "نتصل بمشروعكما…",
+  "togetherNetNeedsSetup": "اللعب عبر الإنترنت غير مُفعَّل",
+  "togetherNetNeedsSetupBody": "يعمل عبر مشروع Firebase مجاني خاص بكما، ويبقى مطفأً حتى تفعّلاه.",
+  "togetherNetSetUp": "إعداد اللعب عبر الإنترنت",
+  "togetherNetQrLabel": "رمز QR للغرفة {code}",
+  "@togetherNetQrLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetOnlineIntroSheet": "للّعب من مكانين مختلفين يستخدم مَدار مشروع Firebase المجاني الخاص بكما — لا خادم لمَدار. لا يُحفظ فيه إلا حالة اللعبة، ومعها اسم العرض والصورة واللون، لساعات قليلة ثم يُحذف.",
+  "togetherNetEnable": "تفعيل اللعب عبر الإنترنت",
+  "togetherNetEnableHint": "مطفأ افتراضيًا. يحتاج إعدادات مشروع صالحة.",
+  "togetherNetEnableNeedsConfig": "احفظا إعدادات المشروع أولًا",
+  "togetherNetStepsTitle": "الإعداد مرة واحدة",
+  "togetherNetStep1": "أنشئا مشروعًا مجانيًا في console.firebase.google.com",
+  "togetherNetStep2": "أضيفا تطبيق أندرويد باسم الحزمة app.madar.orbit",
+  "togetherNetStep3": "فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous",
+  "togetherNetStep4": "أنشئا Realtime Database والصقا قواعد الأمان في تبويب Rules",
+  "togetherNetStep5": "انقلا القيم إلى الحقول هنا، أو الصقا ملف google-services.json كاملًا",
+  "togetherNetCopyRules": "نسخ قواعد الأمان",
+  "togetherNetRulesCopied": "نُسخت قواعد الأمان",
+  "togetherNetPasteConfig": "لصق من الحافظة",
+  "togetherNetPasteNothing": "لا إعدادات في الحافظة",
+  "togetherNetPasted": "مُلئت الحقول من الحافظة",
+  "togetherNetFieldApiKey": "مفتاح الواجهة (API key)",
+  "togetherNetFieldAppId": "معرّف التطبيق (App ID)",
+  "togetherNetFieldProjectId": "معرّف المشروع (Project ID)",
+  "togetherNetFieldDatabaseUrl": "رابط قاعدة البيانات",
+  "togetherNetFieldSenderId": "رقم المُرسِل (Sender ID)",
+  "togetherNetErrMissing": "مطلوب",
+  "togetherNetErrFormat": "الصيغة غير صحيحة",
+  "togetherNetErrMismatch": "لا يطابق رقم المشروع في معرّف التطبيق",
+  "togetherNetSave": "حفظ",
+  "togetherNetSaved": "حُفظت الإعدادات",
+  "togetherNetTest": "اختبار الاتصال",
+  "togetherNetTesting": "نختبر…",
+  "togetherNetTestOk": "يعمل! الدخول المجهول وقواعد الأمان جاهزة",
+  "togetherNetRemove": "حذف الإعدادات",
+  "togetherNetRemoved": "حُذفت إعدادات المشروع",
+  "togetherNetStoredSecurely": "تُحفظ في التخزين الآمن لهذا الهاتف فقط، ولا تُرسل إلى أي مكان سوى مشروعكما.",
+  "togetherNetOnlineOn": "مُفعَّل",
+  "togetherNetOnlineOff": "مطفأ",
+  "togetherNetOnlineNotSetUp": "غير مُعدّ",
+  "togetherNetTurnGroup": "اللعب معًا",
+  "togetherNetTurnChannel": "دورك",
+  "togetherNetTurnChannelBody": "حين يلعب الطرف الآخر من هاتف بعيد",
+  "togetherNetTurnTitle": "دورك في {game}",
+  "@togetherNetTurnTitle": {
+    "placeholders": {
+      "game": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetTurnBody": "لعب {name} — حان دورك",
+  "@togetherNetTurnBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

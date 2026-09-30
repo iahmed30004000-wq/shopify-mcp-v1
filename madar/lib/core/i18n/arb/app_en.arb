@@ -21508,5 +21508,214 @@
   "@savedGamesOpenAll": {
     "description": "Optional label for an entry point to the Saved Games screen (e.g. a hall tile)"
   },
-  "savedGamesClearDataDone": "Game data cleared"
+  "savedGamesClearDataDone": "Game data cleared",
+  "togetherNetOnThisPhone": "On this phone",
+  "togetherNetOnThisPhoneHint": "Pick who this phone belongs to — it's remembered",
+  "togetherNetThisIsMe": "This phone is {name}'s",
+  "@togetherNetThisIsMe": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetNearbyIntro": "Open the same game on both phones, then tap “Play together” on each. Just Bluetooth and Wi-Fi Direct — no internet, no servers.",
+  "togetherNetPlayTogether": "Play together",
+  "togetherNetSearching": "Looking for the other phone…",
+  "togetherNetSearchingHint": "Not showing up? Make sure both phones have the same game open, with Bluetooth and Wi-Fi on.",
+  "togetherNetPaused": "Search paused until you're back in Madar",
+  "togetherNetPickPhone": "More than one phone found — pick the other one",
+  "togetherNetConnect": "Connect",
+  "togetherNetConnecting": "Connecting to {name}…",
+  "@togetherNetConnecting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetConfirmTitle": "Same number on both phones?",
+  "togetherNetConfirmBody": "Check that {name}'s phone shows these same four digits.",
+  "@togetherNetConfirmBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetDigits": "Check code {digits}",
+  "@togetherNetDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetMatch": "They match",
+  "togetherNetNoMatch": "They don't match",
+  "togetherNetWaitingFor": "Waiting for {name} to confirm…",
+  "@togetherNetWaitingFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetConnected": "Connected — {name} is on the other phone",
+  "@togetherNetConnected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetReconnecting": "Connection lost — looking for {name}…",
+  "@togetherNetReconnecting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetLost": "Couldn't find {name}",
+  "@togetherNetLost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetLostHint": "Bring the phones closer and make sure Madar is open on both.",
+  "togetherNetSearchAgain": "Search again",
+  "togetherNetTryAgain": "Try again",
+  "togetherNetCancel": "Cancel",
+  "togetherNetPermTitle": "Allow finding nearby devices",
+  "togetherNetPermNearbyBody": "To find the other phone without the internet, Madar needs the “Nearby devices” permission: Bluetooth and Wi-Fi Direct.",
+  "togetherNetPermLocationBody": "On this Android version, the system ties Bluetooth and Wi-Fi searches to the location permission. Madar never reads your location.",
+  "togetherNetPermPointPairing": "Used only while pairing and playing",
+  "togetherNetPermPointGameOnly": "Only game state leaves the phone",
+  "togetherNetPermPointStops": "Searching stops once paired, or when you leave the app",
+  "togetherNetContinue": "Continue",
+  "togetherNetNotNow": "Not now",
+  "togetherNetPermDenied": "Madar can't search without this permission",
+  "togetherNetPermDeniedForever": "The permission was refused. Turn it on in App settings › Permissions.",
+  "togetherNetOpenSettings": "Open settings",
+  "togetherNetLocationOff": "Location services are off",
+  "togetherNetLocationOffBody": "On this Android version, finding devices needs them on. Madar doesn't read your location.",
+  "togetherNetSearchAnyway": "Search anyway",
+  "togetherNetFailRadio": "Turn on Bluetooth and Wi-Fi, then try again",
+  "togetherNetFailDeclined": "The other phone declined",
+  "togetherNetFailNotFound": "No open room with this code",
+  "togetherNetFailExpired": "This code has expired — create a new one",
+  "togetherNetFailTaken": "Another phone already joined with this code",
+  "togetherNetFailDifferentGame": "This code is for another game",
+  "togetherNetFailNetwork": "No internet connection",
+  "togetherNetFailSetup": "Firebase refused the project settings — check them in Online play",
+  "togetherNetFailSignIn": "Anonymous sign-in failed — enable it in your Firebase project",
+  "togetherNetFailRules": "The database refused access — paste the security rules",
+  "togetherNetFailPeerLeft": "The other player left",
+  "togetherNetFailUnknown": "Something went wrong",
+  "togetherNetCreateCode": "Create a code",
+  "togetherNetEnterCode": "Enter a code",
+  "togetherNetOnlineIntro": "One of you creates a code, the other types it on their phone. Only game state is kept in your own Firebase project, and it's deleted when you leave.",
+  "togetherNetYourCode": "Room code",
+  "togetherNetCodeHint": "Type this code on the other phone under “Enter a code”",
+  "togetherNetCodeValid": "Valid until {time}",
+  "@togetherNetCodeValid": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetCopyCode": "Copy code",
+  "togetherNetCopied": "Copied",
+  "togetherNetWaitingJoin": "Waiting for the other phone to join…",
+  "togetherNetJoinRequest": "{name} wants to join",
+  "@togetherNetJoinRequest": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetJoinRequestBody": "Is this really the other player? If not, decline and we'll make a new code.",
+  "togetherNetAccept": "Play",
+  "togetherNetDecline": "Decline",
+  "togetherNetCodeField": "Code (6 digits)",
+  "togetherNetJoin": "Join",
+  "togetherNetJoining": "Checking the code…",
+  "togetherNetWaitingAccept": "Waiting for {name} to accept…",
+  "@togetherNetWaitingAccept": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetSigningIn": "Connecting to your project…",
+  "togetherNetNeedsSetup": "Online play is off",
+  "togetherNetNeedsSetupBody": "It runs on your own free Firebase project and stays off until you turn it on.",
+  "togetherNetSetUp": "Set up online play",
+  "togetherNetQrLabel": "QR code of room {code}",
+  "@togetherNetQrLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetOnlineIntroSheet": "To play from different places, Madar uses your own free Firebase project — Madar has no server. It only ever holds game state, plus a display name, avatar and colour, for a few hours; then it's deleted.",
+  "togetherNetEnable": "Online play",
+  "togetherNetEnableHint": "Off by default. Needs valid project settings.",
+  "togetherNetEnableNeedsConfig": "Save the project settings first",
+  "togetherNetStepsTitle": "One-time setup",
+  "togetherNetStep1": "Create a free project at console.firebase.google.com",
+  "togetherNetStep2": "Add an Android app with the package name app.madar.orbit",
+  "togetherNetStep3": "Enable anonymous sign-in: Authentication › Sign-in method › Anonymous",
+  "togetherNetStep4": "Create a Realtime Database and paste the security rules into its Rules tab",
+  "togetherNetStep5": "Copy the values into the fields here, or paste the whole google-services.json",
+  "togetherNetCopyRules": "Copy security rules",
+  "togetherNetRulesCopied": "Security rules copied",
+  "togetherNetPasteConfig": "Paste from clipboard",
+  "togetherNetPasteNothing": "No settings on the clipboard",
+  "togetherNetPasted": "Fields filled from the clipboard",
+  "togetherNetFieldApiKey": "API key",
+  "togetherNetFieldAppId": "App ID",
+  "togetherNetFieldProjectId": "Project ID",
+  "togetherNetFieldDatabaseUrl": "Database URL",
+  "togetherNetFieldSenderId": "Sender ID",
+  "togetherNetErrMissing": "Required",
+  "togetherNetErrFormat": "Not in the expected format",
+  "togetherNetErrMismatch": "Doesn't match the project number in the App ID",
+  "togetherNetSave": "Save",
+  "togetherNetSaved": "Settings saved",
+  "togetherNetTest": "Test connection",
+  "togetherNetTesting": "Testing…",
+  "togetherNetTestOk": "It works! Anonymous sign-in and the rules are ready",
+  "togetherNetRemove": "Remove settings",
+  "togetherNetRemoved": "Project settings removed",
+  "togetherNetStoredSecurely": "Kept only in this phone's secure storage and sent nowhere but your own project.",
+  "togetherNetOnlineOn": "On",
+  "togetherNetOnlineOff": "Off",
+  "togetherNetOnlineNotSetUp": "Not set up",
+  "togetherNetTurnGroup": "Together",
+  "togetherNetTurnChannel": "Your turn",
+  "togetherNetTurnChannelBody": "When the other player moves from another phone",
+  "togetherNetTurnTitle": "Your turn in {game}",
+  "@togetherNetTurnTitle": {
+    "placeholders": {
+      "game": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherNetTurnBody": "{name} played — it's your move",
+  "@togetherNetTurnBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

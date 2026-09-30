@@ -287,20 +287,26 @@ class _Ticket extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(admit, style: s.body(12, color: muted, weight: FontWeight.w700)),
+            Text(
+              admit,
+              style: s.body(12, color: muted, weight: FontWeight.w700),
+            ),
             const SizedBox(height: 2),
             Text(scoreLabel, style: s.body(14, color: muted)),
             Text(score, style: hudTextStyle(s.skin, 46, ink, glow: s.neon)),
             if (stamp != null)
               SizedBox(
-                height: 32,
+                height: 40,
                 child: stampT <= 0
                     ? null
                     : Transform.rotate(
                         angle: -0.12,
                         child: Transform.scale(
                           scale: 2.2 - 1.2 * Curves.easeIn.transform(stampT),
-                          child: Opacity(opacity: stampT, child: _Stamp(scene: s, text: stamp!)),
+                          child: Opacity(
+                            opacity: stampT,
+                            child: _Stamp(scene: s, text: stamp!),
+                          ),
                         ),
                       ),
               ),

@@ -50,6 +50,11 @@ class OrbitRepository {
   static const waterTargetKey = 'body.waterTargetMl';
   static const defaultWaterTargetMl = 2500;
 
+  /// `key_values` key of the Work boards the user archived (JSON list of
+  /// ids; Work owns it): an archived board is no moon and its cards neither
+  /// count nor warn.
+  static const archivedBoardsKey = 'work.archivedBoards';
+
   static final prayerSettingsKv = KvKey.json<PrayerSettings>(
     prayerSettingsKey,
     fromJson: (j) => j is Map ? PrayerSettings.fromJson(j.cast<String, Object?>()) : const PrayerSettings(),
@@ -358,8 +363,15 @@ class _Gatherer {
         ),
     ];
 
-    // Boards and cards (done = the `done` column; doneAt = updatedAt).
-    final boardRows = await repo.repos.boards.getAll();
+    // Boards and cards (done = the `done` column; doneAt = updatedAt). An
+    // archived board is put away: no moon, and its cards (skipped below by
+    // their missing board name) neither count nor warn.
+    final archivedJson = await kv.getJson(OrbitRepository.archivedBoardsKey);
+    final archivedBoards = archivedJson is List ? {for (final e in archivedJson) if (e is String) e} : const <String>{};
+    final boardRows = [
+      for (final b in await repo.repos.boards.getAll())
+        if (!archivedBoards.contains(b.id)) b,
+    ];
     final boardName = {for (final b in boardRows) b.id: b.name};
     final cardRows = await (db.select(
       db.boardCards,

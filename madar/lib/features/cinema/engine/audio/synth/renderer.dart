@@ -176,7 +176,9 @@ final class CueRenderer {
     final lofi = _Lofi(score.sound, sr, loopN, introN, seed);
     final room = ReverbSpec(roomSize: score.sound.roomSize, damping: score.sound.damping, preDelayMs: 12, width: 0.9);
     final primeN = math.min(loopN, (2.0 * sr).round());
-    if (stem.spec.delayBeats > 0) stem.applyDelay((stem.spec.delayBeats * score.secondsPerBeat * sr).round(), stem.spec.delayFeedback, primeN);
+    if (stem.spec.delayBeats > 0) {
+      stem.applyDelay((stem.spec.delayBeats * score.secondsPerBeat * sr).round(), stem.spec.delayFeedback, primeN);
+    }
     if (stem.spec.reverb > 0 && score.sound.wet > 0) stem.applyReverb(room, sr, stem.spec.reverb * score.sound.wet, primeN);
     lofi.apply(stem, primeN);
     if (index == 0 && (score.sound.crackle > 0 || score.sound.lofi > 0.3)) lofi.addSurface(stem);
@@ -618,7 +620,7 @@ final class _Lofi {
     final out = Float64List(n);
     for (var i = 0; i < n; i++) {
       final t = (i + offset) / sr;
-      out[i] = base + depth * math.sin(twoPi * wowHz * t) + depth * 0.18 * math.sin(twoPi * flutHz * t);
+      out[i] = base + depth * math.sin(twoPi * wowHz * t) + depth * 0.08 * math.sin(twoPi * flutHz * t);
     }
     return out;
   }

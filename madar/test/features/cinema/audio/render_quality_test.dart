@@ -156,4 +156,3 @@ Float64List _loopMix(RenderedCue cue, double intensity) {
 }
 
 Float64List _pad(Float64List x) => x.length >= 4096 ? x : (Float64List(4096)..setRange(0, x.length, x));
-

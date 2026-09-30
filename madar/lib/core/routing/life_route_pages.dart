@@ -10,7 +10,6 @@ import '../../features/family/family.dart' show FamilyScreen, PersonScreen;
 import '../../features/growth/growth.dart' show GoalScreen, GrowthScreen;
 import '../../features/travel/travel.dart' show PackingTemplateScreen, TravelScreen, TravelTab, TripScreen;
 import '../../features/work/work.dart' show BoardScreen, ProjectScreen, ProjectsScreen, WorkRoutes, WorkScreen;
-import '../domain/enums.dart';
 import '../settings/app_settings.dart';
 import 'routes.dart';
 
