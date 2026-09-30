@@ -28,7 +28,8 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
 | Jordanian rules (owner confirmed "Jordan") + new Solitaire, Blackjack | cinema/rules/cards/**, cinema/rules/board/** | RUNNING (wf_94413da5-0be cards, wf_a8c19eb3-b9e board); specs in scratchpad/jordan_rules/ |
 | Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
-| Data export + encrypted backup | lib/features/data, d1_data.json | RUNNING (wf_76b71c1b-d3f) |
+| Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
+| AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | RUNNING (wf_089d5589-460) |
 | Global search | lib/features/search, d2_search.json | RUNNING (wf_d2217f93-49b) |
 | Notification center | lib/features/notification_center, d3_notifications.json | RUNNING (wf_f2b25651-a6a) |
 

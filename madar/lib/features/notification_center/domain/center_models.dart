@@ -93,13 +93,8 @@ class CenterNotice {
     channelId: r.channelId,
   );
 
-  factory CenterNotice.fromTap(NotificationTap tap) => CenterNotice(
-    id: tap.id ?? 0,
-    namespace: tap.namespace,
-    at: tap.at,
-    data: tap.data,
-    channelId: tap.channelId,
-  );
+  factory CenterNotice.fromTap(NotificationTap tap) =>
+      CenterNotice(id: tap.id ?? 0, namespace: tap.namespace, at: tap.at, data: tap.data, channelId: tap.channelId);
 
   static String? _text(String? s) => s == null || s.trim().isEmpty ? null : s;
 

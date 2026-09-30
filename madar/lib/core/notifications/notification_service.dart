@@ -261,7 +261,7 @@ class NotificationService {
   Future<List<ActiveNotice>> activeNotices() async {
     await init();
     final p = platform;
-    if (p is ActiveNotificationQuery) return p.activeNotices();
+    if (p case final ActiveNotificationQuery query) return query.activeNotices();
     return [for (final id in await p.activeIds()) ActiveNotice(id)];
   }
 

@@ -103,23 +103,22 @@ abstract class NotificationDescriber {
 
 /// A describer made of two functions.
 class FunctionDescriber extends NotificationDescriber {
-  const FunctionDescriber({
-    required this.id,
-    required NotificationGroup? Function(CenterNotice notice) groupOf,
-    required NotificationDescription Function(CenterNotice notice, CenterTexts t) describe,
-  }) : _groupOf = groupOf,
-       _describe = describe;
+  const FunctionDescriber({required this.id, required this.classify, required this.build});
 
   @override
   final String id;
-  final NotificationGroup? Function(CenterNotice notice) _groupOf;
-  final NotificationDescription Function(CenterNotice notice, CenterTexts t) _describe;
+
+  /// [groupOf].
+  final NotificationGroup? Function(CenterNotice notice) classify;
+
+  /// [describe].
+  final NotificationDescription Function(CenterNotice notice, CenterTexts t) build;
 
   @override
-  NotificationGroup? groupOf(CenterNotice notice) => _groupOf(notice);
+  NotificationGroup? groupOf(CenterNotice notice) => classify(notice);
 
   @override
-  NotificationDescription describe(CenterNotice notice, CenterTexts t) => _describe(notice, t);
+  NotificationDescription describe(CenterNotice notice, CenterTexts t) => build(notice, t);
 }
 
 /// The describers the center consults, first match wins; anything no
@@ -180,11 +179,7 @@ class NotificationDescriberRegistry {
     _ => NotificationGroup.other,
   };
 
-  static NotificationDescription fallbackDescription(
-    CenterNotice notice,
-    CenterTexts t, {
-    NotificationGroup? group,
-  }) {
+  static NotificationDescription fallbackDescription(CenterNotice notice, CenterTexts t, {NotificationGroup? group}) {
     final g = group ?? fallbackGroupOf(notice);
     return NotificationDescription(
       group: g,

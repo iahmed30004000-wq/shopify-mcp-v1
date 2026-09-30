@@ -20,14 +20,14 @@ class SearchDoc {
     this.body = '',
     this.date,
     required this.planetKey,
-    String? openKey,
+    this._openKey,
     this.group,
     this.groupLabel,
     this.groupIcon,
     this.groupColor,
     this.extra = const {},
     this.sourceId = '',
-  }) : _openKey = openKey;
+  });
 
   /// Unique within the source (usually the row id).
   final String id;

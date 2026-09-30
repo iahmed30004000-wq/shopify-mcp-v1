@@ -16,8 +16,8 @@ class SearchLoadContext {
     required this.repos,
     required this.l10n,
     required this.formatter,
-    String? Function(int surah)? surahName,
-  }) : _surahName = surahName;
+    this._surahName,
+  });
 
   final Repositories repos;
   final L10n l10n;
@@ -67,8 +67,8 @@ sealed class SearchSourceBase {
     required this.icon,
     required this.labelKey,
     this.weight = 1,
-    SearchLabel? label,
-  }) : _label = label;
+    this._label,
+  });
 
   /// Stable id (`tasks`, `quran`, `games` …); also the default group.
   final String id;

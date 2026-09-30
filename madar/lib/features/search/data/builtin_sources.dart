@@ -1,4 +1,4 @@
-import 'package:drift/drift.dart' show Expression;
+import 'package:drift/drift.dart';
 import 'package:flutter/material.dart' show Icons, IconData;
 
 import '../../../core/db/database.dart';

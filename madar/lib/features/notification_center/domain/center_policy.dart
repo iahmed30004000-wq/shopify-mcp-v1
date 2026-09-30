@@ -75,8 +75,7 @@ class CenterPolicy {
     return null;
   }
 
-  CenterPolicy mute(NotificationGroup group, DateTime until) =>
-      _copy(mutedUntil: {...mutedUntil, group: until});
+  CenterPolicy mute(NotificationGroup group, DateTime until) => _copy(mutedUntil: {...mutedUntil, group: until});
 
   CenterPolicy unmute(NotificationGroup group) =>
       mutedUntil.containsKey(group) ? _copy(mutedUntil: {...mutedUntil}..remove(group)) : this;
@@ -144,8 +143,7 @@ class CenterPolicy {
       skipped: {if (s is List) ...s.whereType<String>()},
       snoozed: {
         if (z is List)
-          for (final raw in z)
-            if (SnoozedNotice.fromJson(raw) case final sn?) sn.notice.id: sn,
+          for (final sn in [for (final raw in z) ?SnoozedNotice.fromJson(raw)]) sn.notice.id: sn,
       },
     );
   }

@@ -174,18 +174,21 @@ class NotificationGate {
     }
   }
 
+  NotificationRequest _reconstruct(CenterNotice n) => requestFor(n, now: _now);
+
   /// A request rebuilt from what the platform reports (after a restart the
   /// original is gone): same id, channel, texts, instant and data – no
   /// buttons (the feature's next re-plan restores those).
-  NotificationRequest _reconstruct(CenterNotice n) {
-    final ns = NotificationNamespaces.byName(n.namespace ?? '') ?? NotificationNamespace(n.namespace ?? 'center', n.id, n.id);
+  static NotificationRequest requestFor(CenterNotice n, {DateTime? at, required DateTime now}) {
+    final ns =
+        NotificationNamespaces.byName(n.namespace ?? '') ?? NotificationNamespace(n.namespace ?? 'center', n.id, n.id);
     return NotificationRequest(
       namespace: ns,
       id: n.id,
       channelId: n.channelId ?? 'madar.center.1',
       title: n.title ?? '',
       body: n.body ?? '',
-      at: n.at ?? _now,
+      at: at ?? n.at ?? now,
       data: n.data,
     );
   }
@@ -344,7 +347,7 @@ class GatedNotificationPlatform implements NotificationPlatform, ActiveNotificat
   @override
   Future<List<ActiveNotice>> activeNotices() async {
     final i = inner;
-    if (i is ActiveNotificationQuery) return i.activeNotices();
+    if (i case final ActiveNotificationQuery query) return query.activeNotices();
     return [
       for (final id in await i.activeIds())
         ActiveNotice(

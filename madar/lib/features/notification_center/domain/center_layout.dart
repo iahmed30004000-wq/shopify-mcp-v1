@@ -97,15 +97,7 @@ abstract final class CenterLayout {
     for (final a in active) {
       if (a.at == null || keys.contains(a.key)) continue;
       keys.add(a.key);
-      out.add(
-        CenterItem(
-          notice: a,
-          group: groupOf(a),
-          state: CenterItemState.live,
-          unread: isNew(a.at!),
-          live: true,
-        ),
-      );
+      out.add(CenterItem(notice: a, group: groupOf(a), state: CenterItemState.live, unread: isNew(a.at!), live: true));
     }
     out.sort((a, b) => _soonestFirst(b, a));
     return out;
@@ -114,11 +106,7 @@ abstract final class CenterLayout {
   /// [items] by group, each group in the items' order. Upcoming sections
   /// are ordered by their soonest item (what comes next is on top), recent
   /// ones by their newest.
-  static List<CenterSection> sections(
-    List<CenterItem> items, {
-    required CenterPolicy policy,
-    required DateTime now,
-  }) {
+  static List<CenterSection> sections(List<CenterItem> items, {required CenterPolicy policy, required DateTime now}) {
     final byGroup = <NotificationGroup, List<CenterItem>>{};
     for (final item in items) {
       (byGroup[item.group] ??= []).add(item);

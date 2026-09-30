@@ -204,7 +204,11 @@ class MedsDescriber extends NotificationDescriber {
                 primary: true,
                 whenUpcoming: true,
               ),
-              CenterActionSpec(id: MedsNotificationTaps.actionSnooze, label: l.ncActionSnooze, icon: Icons.snooze_rounded),
+              CenterActionSpec(
+                id: MedsNotificationTaps.actionSnooze,
+                label: l.ncActionSnooze,
+                icon: Icons.snooze_rounded,
+              ),
               CenterActionSpec(
                 id: MedsNotificationTaps.actionSkip,
                 label: l.ncActionSkip,

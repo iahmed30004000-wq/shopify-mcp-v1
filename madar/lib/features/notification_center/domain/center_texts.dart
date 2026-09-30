@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
+import '../../../core/settings/app_settings.dart' show DigitStyle;
 import 'center_models.dart';
 
 /// The center's words in the UI language: group names, relative times and
