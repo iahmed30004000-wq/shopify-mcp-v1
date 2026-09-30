@@ -25,7 +25,6 @@ import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
 import 'health_route_pages.dart';
-import 'life_route_pages.dart';
 import 'money_route_pages.dart';
 import 'now_playing_dock.dart';
 import 'route_pages.dart';
@@ -68,11 +67,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// and the health pages (medications, the medical record, a lab test, the
 /// appointments, wellbeing, Settings › Health) and the money pages (the
 /// ledger, a wallet, the transactions, the currencies, the budget, the
-/// goals and a jar) and the life pages (Work, a board, the projects, a
-/// project, Family, a person, Travel on its tabs, a trip, a packing
-/// template, the learning goals, a learning goal, the Body on its tabs, the
-/// trackers and a tracker) move along the reading direction (shared axis);
-/// the tasbeeh, the qibla compass, guided
+/// goals and a jar) move along the reading direction (shared axis); the tasbeeh, the qibla compass, guided
 /// breathing and the design gallery zoom in (scaled shared axis); the
 /// importer rises as a sheet, and the full recitation player
 /// (`/now-playing`) as an interaction sheet over the page beneath; a planet
@@ -411,117 +406,6 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: JarRoutePage(jarId: state.pathParameters['id']!),
-            ),
-          ),
-        ],
-      ),
-      // Phase 6 – life.
-      GoRoute(
-        path: 'work',
-        pageBuilder: (context, state) =>
-            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const WorkRoutePage()),
-        routes: [
-          GoRoute(
-            path: 'board/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: BoardRoutePage(boardId: state.pathParameters['id']!),
-            ),
-          ),
-          GoRoute(
-            path: 'projects',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: const ProjectsRoutePage(),
-            ),
-          ),
-          GoRoute(
-            path: 'project/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: ProjectRoutePage(projectId: state.pathParameters['id']!),
-            ),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: 'family',
-        pageBuilder: (context, state) =>
-            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const FamilyRoutePage()),
-        routes: [
-          GoRoute(
-            path: 'person/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: PersonRoutePage(personId: state.pathParameters['id']!),
-            ),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: 'travel',
-        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-          context: context,
-          key: state.pageKey,
-          child: TravelRoutePage(tab: TravelRoutePage.tabOf(state.uri.queryParameters['tab'])),
-        ),
-        routes: [
-          GoRoute(
-            path: 'trip/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: TripRoutePage(tripId: state.pathParameters['id']!),
-            ),
-          ),
-          GoRoute(
-            path: 'template/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: PackingTemplateRoutePage(templateId: state.pathParameters['id']!),
-            ),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: 'growth',
-        pageBuilder: (context, state) =>
-            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const GrowthRoutePage()),
-        routes: [
-          GoRoute(
-            path: 'goal/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: GrowthGoalRoutePage(goalId: state.pathParameters['id']!),
-            ),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: 'body',
-        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-          context: context,
-          key: state.pageKey,
-          child: BodyRoutePage(tab: BodyRoutePage.tabOf(state.uri.queryParameters['tab'])),
-        ),
-      ),
-      GoRoute(
-        path: 'modules',
-        pageBuilder: (context, state) =>
-            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const ModulesRoutePage()),
-        routes: [
-          GoRoute(
-            path: 'module/:id',
-            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
-              context: context,
-              key: state.pageKey,
-              child: ModuleRoutePage(moduleId: state.pathParameters['id']!),
             ),
           ),
         ],

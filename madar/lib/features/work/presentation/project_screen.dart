@@ -259,18 +259,10 @@ class _ProjectScreenState extends ConsumerState<ProjectScreen> {
             ],
           ),
           const SizedBox(height: Space.l),
-          // The action sits under the title: beside it, "Task in a prayer
-          // window" ran past a phone's width in English.
-          SectionHeader(title: l.workProjectTasks),
-          Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: MadarButton(
-              label: l.workAddProjectTask,
-              icon: Icons.add_rounded,
-              variant: MadarButtonVariant.ghost,
-              size: MadarButtonSize.small,
-              onPressed: () => WorkActions.addProjectTask(context, ref, p),
-            ),
+          SectionHeader(
+            title: l.workProjectTasks,
+            actionLabel: l.workAddProjectTask,
+            onAction: () => WorkActions.addProjectTask(context, ref, p),
           ),
           if (tasks.isEmpty)
             Padding(

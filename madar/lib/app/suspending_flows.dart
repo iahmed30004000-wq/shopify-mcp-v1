@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import '../core/notifications/notifications.dart';
 import '../features/adhan/adhan.dart';
 import '../features/adhkar/adhkar.dart' show dhikrAudioPickerProvider, pickDhikrAudio;
-import '../features/family/family.dart'
-    show ContactLaunch, ContactLauncher, UrlContactLauncher, familyContactLauncherProvider;
 import '../features/health/meds/meds.dart' show medsNotificationBackgroundTap;
 import '../features/health/record/record.dart'
     show DoctorReportFile, PlatformReportExporter, ReportExporter, reportExporterProvider;
@@ -31,8 +29,7 @@ SuspendRunner lockSuspender(Ref ref) =>
 /// settings pages, the location permission and settings pages, the file
 /// pickers (muezzin recordings, dhikr recordings, the importer), and the
 /// health flows that leave the app: the doctor report's share sheet and
-/// save dialog, and the support note's dialler; and the family's call, SMS
-/// and WhatsApp (the dialler, the messages app or WhatsApp open on a tap).
+/// save dialog, and the support note's dialler.
 ///
 /// The notifications plugin is also where a dose's Taken / Snooze / Skip
 /// buttons land when they are pressed in the shade: they never open the
@@ -73,9 +70,6 @@ List<Override> suspendingFlowOverrides() => [
     (ref) => SuspendingReportExporter(const PlatformReportExporter(), lockSuspender(ref)),
   ),
   phoneDialerProvider.overrideWith((ref) => SuspendingPhoneDialer(const UrlLauncherPhoneDialer(), lockSuspender(ref))),
-  familyContactLauncherProvider.overrideWith(
-    (ref) => SuspendingContactLauncher(const UrlContactLauncher(), lockSuspender(ref)),
-  ),
 ];
 
 /// The doctor report's share sheet and save dialog suspended.
@@ -102,18 +96,6 @@ class SuspendingPhoneDialer implements PhoneDialer {
 
   @override
   Future<bool> dial(String number) => suspend(() => inner.dial(number));
-}
-
-/// The family's call, SMS and WhatsApp suspended (the time in the other app
-/// is the owner's own; the lock still locks after its grace).
-class SuspendingContactLauncher implements ContactLauncher {
-  SuspendingContactLauncher(this.inner, this.suspend);
-
-  final ContactLauncher inner;
-  final SuspendRunner suspend;
-
-  @override
-  Future<bool> open(ContactLaunch kind, String phone) => suspend(() => inner.open(kind, phone));
 }
 
 /// Permission requests suspended; everything else passes straight through.

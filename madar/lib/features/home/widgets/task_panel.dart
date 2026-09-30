@@ -17,7 +17,6 @@ import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/routing/route_pages.dart';
 import '../../../core/settings/app_settings.dart';
-import '../../work/work.dart' show FocusItem, FocusKind, WorkActions;
 import '../home_providers.dart';
 import 'neglect_radar_card.dart';
 import 'task_actions.dart';
@@ -483,14 +482,6 @@ class TaskItem extends ConsumerStatefulWidget {
 }
 
 class _TaskItemState extends ConsumerState<TaskItem> {
-  /// The task as a Top 3 item (its card when it carries one).
-  static FocusItem _focusOf(TaskRow task) {
-    final card = task.cardId;
-    return card != null
-        ? FocusItem(kind: FocusKind.card, id: card, title: task.title, flagged: task.isTop3, done: task.done)
-        : FocusItem(kind: FocusKind.task, id: task.id, title: task.title, flagged: task.isTop3, done: task.done);
-  }
-
   final GlobalKey _tileKey = GlobalKey();
 
   /// Stardust from the task's orb (at the reading start of the row).
@@ -545,16 +536,6 @@ class _TaskItemState extends ConsumerState<TaskItem> {
         onMove: () => actions.move(task),
         onSetReminder: () => actions.setReminder(task),
         onDelete: () => actions.delete(task),
-        extra: [
-          // Today's Top 3 is Work's: its limit of three, the swap sheet when
-          // full, a card-linked task flags its card.
-          if (!task.done || task.isTop3)
-            ItemAction(
-              icon: task.isTop3 ? Icons.star_rounded : Icons.star_outline_rounded,
-              label: task.isTop3 ? l.workTop3Remove : l.workTop3Add,
-              onSelected: () => WorkActions.setTop3(context, ref, _focusOf(task), !task.isTop3, showToast: false),
-            ),
-        ],
       ),
       child: TaskTile(
         key: _tileKey,

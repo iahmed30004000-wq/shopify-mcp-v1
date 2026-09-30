@@ -86,24 +86,18 @@ class FamilyTexts implements FamilyReminderTexts {
   }
 
   /// The suggestion key whose label (in either language) is [typed], so a
-  /// typed «أمي» or "Mother" is stored as `mother`. Arabic marks are
-  /// ignored: «جدتي» is «جدّتي».
+  /// typed «أمي» or "Mother" is stored as `mother`.
   static String? relationKeyFor(String typed) {
-    final t = _plain(typed);
+    final t = typed.trim().toLowerCase();
     if (t.isEmpty) return null;
     for (final lang in const ['ar', 'en']) {
       final texts = FamilyTexts.forLanguage(lang);
       for (final k in FamilyRelations.keys) {
-        if (_plain(texts.relation(k)!) == t) return k;
+        if (texts.relation(k)!.toLowerCase() == t) return k;
       }
     }
     return null;
   }
-
-  /// Arabic short vowels, shadda, sukun and tatweel.
-  static final RegExp _marks = RegExp('[\u064B-\u0652\u0640]');
-
-  static String _plain(String s) => s.trim().toLowerCase().replaceAll(_marks, '');
 
   // ----------------------------------------------------------------- rhythm
 

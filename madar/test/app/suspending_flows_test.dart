@@ -9,8 +9,6 @@ import 'package:madar/app/suspending_flows.dart';
 import 'package:madar/core/notifications/notifications.dart';
 import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/features/adhan/adhan.dart';
-import 'package:madar/features/family/family.dart'
-    show ContactLaunch, RecordingContactLauncher, familyContactLauncherProvider;
 import 'package:madar/features/lock/application/lock_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -123,26 +121,10 @@ void main() {
     lock.onLifecycle(AppLifecycleState.resumed);
   });
 
-  test('the family\'s call, SMS and WhatsApp leave the app suspended', () async {
-    final recorder = _Recorder();
-    final inner = RecordingContactLauncher();
-    final launcher = SuspendingContactLauncher(inner, recorder.runner(() => 'contact'));
-    expect(await launcher.open(ContactLaunch.call, '+962 79 000 0000'), isTrue);
-    expect(await launcher.open(ContactLaunch.whatsapp, '+962 79 000 0000'), isTrue);
-    expect(await launcher.open(ContactLaunch.sms, ''), isFalse, reason: 'an unusable number opens nothing');
-    expect(recorder.suspended, ['contact', 'contact', 'contact']);
-    expect(inner.opened.map((u) => u.scheme), ['tel', 'https']);
-
-    final container = ProviderContainer(overrides: suspendingFlowOverrides());
-    addTearDown(container.dispose);
-    expect(container.read(familyContactLauncherProvider), isA<SuspendingContactLauncher>());
-  });
-
   test('the production overrides cover every flow', () {
     final overrides = suspendingFlowOverrides();
-    // Phase 2–3's seven, the doctor report's exporter and the support
-    // note's dialler (Phase 4 – see health_notification_routing_test), and
-    // the family's contact launcher (Phase 6).
-    expect(overrides, hasLength(10));
+    // Phase 2–3's seven, plus the doctor report's exporter and the support
+    // note's dialler (Phase 4 – see health_notification_routing_test).
+    expect(overrides, hasLength(9));
   });
 }

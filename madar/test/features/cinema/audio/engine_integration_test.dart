@@ -50,10 +50,7 @@ void main() {
           locale: const Locale('ar'),
           supportedLocales: L10n.supportedLocales,
           localizationsDelegates: L10n.localizationsDelegates,
-          home: CinemaGameView(
-            kit: kit,
-            builder: (ctx) => game = _Game(context: ctx),
-          ),
+          home: CinemaGameView(kit: kit, builder: (ctx) => game = _Game(context: ctx)),
         ),
       ),
     );
@@ -85,11 +82,7 @@ void main() {
     await tester.pump();
     expect(bed.target, 0);
     game.feedback(CinemaSound.coin);
-    expect(
-      mixer.calls.where((c) => c.startsWith('play') && c.contains('sound:coin')),
-      hasLength(1),
-      reason: 'no new effects during prayer',
-    );
+    expect(mixer.calls.where((c) => c.startsWith('play') && c.contains('sound:coin')), hasLength(1), reason: 'no new effects during prayer');
     expect(mixer.active('sound:coin'), isEmpty, reason: 'ringing effects are cut');
     lease.release();
     await tester.pump();

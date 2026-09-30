@@ -105,19 +105,11 @@ class _ProjectorBoothOverlayState extends State<ProjectorBoothOverlay> {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: StageButton(
-                                        scene: s,
-                                        label: l10n.cinemaRestart,
-                                        onPressed: game.requestRestart,
-                                      ),
+                                      child: StageButton(scene: s, label: l10n.cinemaRestart, onPressed: game.requestRestart),
                                     ),
                                     const SizedBox(width: 10),
                                     Expanded(
-                                      child: StageButton(
-                                        scene: s,
-                                        label: l10n.cinemaLeave,
-                                        onPressed: game.requestExit,
-                                      ),
+                                      child: StageButton(scene: s, label: l10n.cinemaLeave, onPressed: game.requestExit),
                                     ),
                                   ],
                                 ),
@@ -153,10 +145,7 @@ class _DimPainter extends CustomPainter {
     canvas.drawRect(
       r,
       Paint()
-        ..shader = ui.Gradient.radial(r.center, size.longestSide * 0.7, [
-          ink.withValues(alpha: 0.5 * a),
-          ink.withValues(alpha: 0.86 * a),
-        ]),
+        ..shader = ui.Gradient.radial(r.center, size.longestSide * 0.7, [ink.withValues(alpha: 0.5 * a), ink.withValues(alpha: 0.86 * a)]),
     );
   }
 
@@ -298,10 +287,7 @@ class _BoothPainter extends CustomPainter {
     Ornaments.inked(canvas, Path()..addRect(Rect.fromLTWH(chimney.left - 3, chimney.top - 4, 22, 5)), metal, ink, lw);
     // Vents glowing with the lamp.
     for (var k = 0; k < 4; k++) {
-      final r = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx - 48 + k * 10, h * 0.44 + 14, 5, 24),
-        const Radius.circular(2.5),
-      );
+      final r = RRect.fromRectAndRadius(Rect.fromLTWH(cx - 48 + k * 10, h * 0.44 + 14, 5, 24), const Radius.circular(2.5));
       _p.color = ink;
       canvas.drawRRect(r, _p);
       _add.color = m.glow.withValues(alpha: 0.6 * flicker);
@@ -342,10 +328,7 @@ class _BoothPainter extends CustomPainter {
     final t = scene.beat == null ? 0.4 : scene.clock.time;
     final w = size.width, h = size.height;
     // A tape on top, the deck below.
-    final deck = RRect.fromRectAndRadius(
-      Rect.fromLTWH(w * 0.08, h * 0.46, w * 0.84, h * 0.4),
-      const Radius.circular(6),
-    );
+    final deck = RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.08, h * 0.46, w * 0.84, h * 0.4), const Radius.circular(6));
     _p.shader = ui.Gradient.linear(deck.outerRect.topCenter, deck.outerRect.bottomCenter, [m.wallLight, m.wallDark]);
     canvas.drawRRect(deck, _p);
     _p.shader = null;
@@ -357,25 +340,13 @@ class _BoothPainter extends CustomPainter {
     final tape = Rect.fromLTWH(slot.left + 10, slot.top - 38, slot.width - 20, 46);
     _p.color = const Color(0xFF15101F);
     canvas.drawRRect(RRect.fromRectAndRadius(tape, const Radius.circular(3)), _p);
-    Ornaments.neon(
-      canvas,
-      Path()..addRRect(RRect.fromRectAndRadius(tape, const Radius.circular(3))),
-      m.neonB,
-      0.9,
-      intensity: 0.8,
-    );
+    Ornaments.neon(canvas, Path()..addRRect(RRect.fromRectAndRadius(tape, const Radius.circular(3))), m.neonB, 0.9, intensity: 0.8);
     _p.color = pal.paper.withValues(alpha: 0.85);
     canvas.drawRect(Rect.fromLTWH(tape.left + 12, tape.top + 7, tape.width - 24, 9), _p);
     for (final x in [tape.left + tape.width * 0.32, tape.left + tape.width * 0.68]) {
       _p.color = m.wall;
       canvas.drawCircle(Offset(x, tape.top + 30), 7, _p);
-      Ornaments.neon(
-        canvas,
-        Path()..addOval(Rect.fromCircle(center: Offset(x, tape.top + 30), radius: 7)),
-        m.neonB,
-        0.7,
-        intensity: 0.7,
-      );
+      Ornaments.neon(canvas, Path()..addOval(Rect.fromCircle(center: Offset(x, tape.top + 30), radius: 7)), m.neonB, 0.7, intensity: 0.7);
     }
     // Display: a blinking pause.
     final disp = Rect.fromLTWH(deck.right - deck.width * 0.36, deck.top + 12, deck.width * 0.3, 26);

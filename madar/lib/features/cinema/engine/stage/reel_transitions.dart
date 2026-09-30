@@ -151,15 +151,7 @@ class ReelTransitions implements CinemaTransitions {
           if (_closing) {
             _burn.paint(canvas, full, cover, clock, origin: _centre, hole: skin.palette.ink, seed: 3);
           } else {
-            _iris.paint(
-              canvas,
-              full,
-              1 - cover,
-              clock,
-              focus: _centre,
-              shape: IrisShape.circle,
-              boil: !env.reducedMotion,
-            );
+            _iris.paint(canvas, full, 1 - cover, clock, focus: _centre, shape: IrisShape.circle, boil: !env.reducedMotion);
           }
         case EraTransition.glitch:
           _glitch(canvas, full, cover, clock);

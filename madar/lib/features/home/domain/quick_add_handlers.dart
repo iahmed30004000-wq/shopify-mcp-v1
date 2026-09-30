@@ -5,7 +5,6 @@ import '../../../core/db/repositories/repositories.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/interaction/quick_add/parser.dart';
 import '../../../core/interaction/quick_add/quick_add_handler.dart';
-import '../../family/family_texts.dart' show FamilyTexts;
 import '../../money/ledger/data/ledger_service.dart';
 import '../../money/ledger/domain/tx_draft.dart' show TxWrite;
 import 'home_tasks.dart';
@@ -241,14 +240,9 @@ class ContactQuickAdd extends QuickAddHandler {
     if (at.isAfter(now)) return TaskQuickAdd(c).handle(intent);
     final key = name.toLowerCase();
     final people = await repos.people.getAll();
-    // «اتصلت بأمي»: the person saved by name, else the one person whose
-    // relation is that word (never a guess between two uncles), else a new
-    // person who keeps the relation.
-    final relation = FamilyTexts.relationKeyFor(name);
     final person =
         people.where((p) => p.name.trim().toLowerCase() == key).firstOrNull ??
-        (relation == null ? null : people.where((p) => p.relation == relation).singleOrNull) ??
-        await repos.people.insert(PeopleCompanion.insert(name: name, relation: Value(relation)));
+        await repos.people.insert(PeopleCompanion.insert(name: name));
     final log = await repos.contactLogs.insert(
       ContactLogsCompanion.insert(personId: person.id, at: at, channel: Value(intent.channel ?? ContactChannel.other)),
     );

@@ -299,13 +299,12 @@ class BodyReminderSync extends Notifier<List<BodyNotice>?> {
         eatingBody: (closes) => l.bodyNotifyEatingBody(fmt.formatTime(closes)),
       );
       await ref.read(bodyReminderSchedulerProvider).replaceAll(notices);
-      // The app may have locked or reset meanwhile (the notifier is gone).
-      if (ref.mounted) state = notices;
+      state = notices;
     } catch (e) {
       debugPrint('body reminders: $e');
     } finally {
       _running = false;
-      if (_again && ref.mounted) {
+      if (_again) {
         _again = false;
         _schedule();
       }

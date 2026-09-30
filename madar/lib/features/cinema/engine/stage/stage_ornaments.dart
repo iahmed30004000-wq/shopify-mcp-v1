@@ -34,14 +34,7 @@ abstract final class Ornaments {
   }
 
   /// Strokes [path] with [color] at [width].
-  static void line(
-    Canvas canvas,
-    Path path,
-    Color color,
-    double width, {
-    Shader? shader,
-    StrokeCap cap = StrokeCap.round,
-  }) {
+  static void line(Canvas canvas, Path path, Color color, double width, {Shader? shader, StrokeCap cap = StrokeCap.round}) {
     _stroke
       ..shader = shader
       ..color = color
@@ -173,15 +166,7 @@ abstract final class Ornaments {
   }
 
   /// A star with [points] spikes (outer radius [r], inner [ri]).
-  static Path starPath(
-    Offset c,
-    double r,
-    double ri,
-    int points, {
-    double rotation = -math.pi / 2,
-    BoilPen? pen,
-    int frame = 0,
-  }) {
+  static Path starPath(Offset c, double r, double ri, int points, {double rotation = -math.pi / 2, BoilPen? pen, int frame = 0}) {
     final path = Path();
     if (pen != null) pen.begin(path, frame);
     for (var i = 0; i < points * 2; i++) {

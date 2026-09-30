@@ -14,7 +14,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager
 import app.madar.orbit.savedgames.SavedGamesChannel
-import app.madar.orbit.together.TogetherChannels
 import app.madar.orbit.widgets.MadarWidgetsChannel
 import com.ryanheise.audioservice.AudioServiceFragmentActivity
 import com.ryanheise.audioservice.AudioServicePlugin
@@ -278,7 +277,6 @@ class MainActivity : AudioServiceFragmentActivity() {
         }
         MadarWidgetsChannel.register(flutterEngine, app)
         SavedGamesChannel.register(flutterEngine)
-        TogetherChannels.register(flutterEngine)
         // The plugins are attached to this activity by now (the engine attaches
         // them before it calls configureFlutterEngine): deliver the launch the
         // way flutter_local_notifications reports a tap to a running app.

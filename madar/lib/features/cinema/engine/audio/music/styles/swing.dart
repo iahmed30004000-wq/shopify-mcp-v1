@@ -105,8 +105,6 @@ final class SwingComposer implements StyleComposer {
       length: 0.5,
       fx: Art.staccato,
     );
-    // Stride piano joins the hot layer.
-    addStride(b.ev, Inst.piano, b.chart, b.key, start: b.loopStart, bars: b.loopBars, stem: hot, vel: 0.42, gain: 0.7);
     if (action) {
       b.pattern(Inst.snare, const ['....x.......x...', '....x.......x.xx'], stem: hot, vel: 0.45);
     }

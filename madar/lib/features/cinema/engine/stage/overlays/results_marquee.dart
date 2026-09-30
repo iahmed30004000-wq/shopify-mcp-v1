@@ -114,10 +114,8 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
                                       paper: _ticketPaper,
                                       admit: l10n.cinemaStageAdmitOne,
                                       scoreLabel: l10n.cinemaStageScore,
-                                      score: fmt.formatInt(shown, grouping: false),
-                                      best: best == null
-                                          ? null
-                                          : l10n.cinemaBestLine(fmt.formatInt(math.max(best, record ? score : best))),
+                                      score: fmt.formatInt(shown),
+                                      best: best == null ? null : l10n.cinemaBestLine(fmt.formatInt(math.max(best, record ? score : best))),
                                       time: time == null ? null : '${l10n.cinemaStageRunningTime}: $time',
                                       stamp: record ? l10n.cinemaStageNewRecord : null,
                                       stampT: stamp,
@@ -133,12 +131,7 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
                                   icon: Icons.replay_rounded,
                                 ),
                                 const SizedBox(height: 12),
-                                StageButton(
-                                  scene: s,
-                                  label: l10n.cinemaLeave,
-                                  onPressed: game.requestExit,
-                                  icon: Icons.logout_rounded,
-                                ),
+                                StageButton(scene: s, label: l10n.cinemaLeave, onPressed: game.requestExit, icon: Icons.logout_rounded),
                               ],
                             ),
                           ),
@@ -158,9 +151,7 @@ class _ResultsMarqueeOverlayState extends State<ResultsMarqueeOverlay> {
 
 /// The marquee board: the era's card with a ring of chasing bulbs.
 class _MarqueeBoardPainter extends CustomPainter {
-  _MarqueeBoardPainter(this.scene, this.paper)
-    : _card = CardBackgroundPainter(scene, paper, seed: 17),
-      super(repaint: scene.repaint);
+  _MarqueeBoardPainter(this.scene, this.paper) : _card = CardBackgroundPainter(scene, paper, seed: 17), super(repaint: scene.repaint);
 
   final OverlayScene scene;
   final ui.FragmentShader? paper;
@@ -231,13 +222,7 @@ class _StarsPainter extends CustomPainter {
     final positions = won ? const [-1.0, 0.0, 1.0] : const [0.0];
     for (final k in positions) {
       final r = (k == 0 ? 12.0 : 9.0) * (1 + 0.08 * math.sin(t * 5 + k * 2));
-      final p = Ornaments.starPath(
-        c + Offset(k * 36, k == 0 ? -1 : 3),
-        r,
-        r * 0.45,
-        5,
-        rotation: -math.pi / 2 + k * 0.2,
-      );
+      final p = Ornaments.starPath(c + Offset(k * 36, k == 0 ? -1 : 3), r, r * 0.45, 5, rotation: -math.pi / 2 + k * 0.2);
       if (scene.neon) {
         Ornaments.neon(canvas, p, m.neonA, 1.1);
       } else {
@@ -282,38 +267,42 @@ class _Ticket extends StatelessWidget {
     final muted = ink.withValues(alpha: 0.7);
     return CustomPaint(
       painter: _TicketPainter(s, paper),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(26, 12, 26, 14),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              admit,
-              style: s.body(12, color: muted, weight: FontWeight.w700),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(26, 12, 26, 14),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  admit,
+                  style: s.body(12, color: muted, weight: FontWeight.w700),
+                ),
+                const SizedBox(height: 2),
+                Text(scoreLabel, style: s.body(14, color: muted)),
+                Text(score, style: hudTextStyle(s.skin, 46, ink, glow: s.neon)),
+                if (best != null) Text(best!, style: s.body(14, color: ink)),
+                if (time != null) Text(time!, style: s.body(12.5, color: muted)),
+              ],
             ),
-            const SizedBox(height: 2),
-            Text(scoreLabel, style: s.body(14, color: muted)),
-            Text(score, style: hudTextStyle(s.skin, 46, ink, glow: s.neon)),
-            if (stamp != null)
-              SizedBox(
-                height: 40,
-                child: stampT <= 0
-                    ? null
-                    : Transform.rotate(
-                        angle: -0.12,
-                        child: Transform.scale(
-                          scale: 2.2 - 1.2 * Curves.easeIn.transform(stampT),
-                          child: Opacity(
-                            opacity: stampT,
-                            child: _Stamp(scene: s, text: stamp!),
-                          ),
-                        ),
-                      ),
+          ),
+          if (stamp != null && stampT > 0)
+            PositionedDirectional(
+              top: -16,
+              end: -30,
+              child: Transform.rotate(
+                angle: -0.22,
+                child: Transform.scale(
+                  scale: 2.2 - 1.2 * Curves.easeIn.transform(stampT),
+                  child: Opacity(
+                    opacity: stampT,
+                    child: _Stamp(scene: s, text: stamp!),
+                  ),
+                ),
               ),
-            if (best != null) Text(best!, style: s.body(14, color: ink)),
-            if (time != null) Text(time!, style: s.body(12.5, color: muted)),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -327,9 +316,7 @@ class _Stamp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = scene.neon
-        ? scene.materials.neonA
-        : (scene.skin.era.isMonochrome ? scene.materials.ink : scene.skin.palette.accent);
+    final color = scene.neon ? scene.materials.neonA : (scene.skin.era.isMonochrome ? scene.materials.ink : scene.skin.palette.accent);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(

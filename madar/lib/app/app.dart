@@ -21,7 +21,6 @@ import 'app_gate.dart';
 import 'app_preferences.dart';
 import 'faith_services.dart';
 import 'health_services.dart';
-import 'life_services.dart';
 import 'money_services.dart';
 
 /// The root overrides of the Madar provider scope – shared by `bootstrap`
@@ -40,9 +39,6 @@ import 'money_services.dart';
 ///   goals' screens open as routes, linked entries open their jar / debt /
 ///   obligation, the ledger picks budget items with the budget's picker,
 ///   and weekly views follow the user's week start.
-/// * The life packages' hooks ([lifeHookOverrides]): Work's boards and
-///   projects and a learning goal open as routes, and a trip's destination
-///   can become the prayer location while travelling.
 List<Override> madarAppOverrides({
   required SharedPreferences prefs,
   required SoundService sound,
@@ -56,7 +52,6 @@ List<Override> madarAppOverrides({
   ...faithHookOverrides(),
   ...healthHookOverrides(),
   ...moneyHookOverrides(),
-  ...lifeHookOverrides(),
 ];
 
 /// The app's [ThemeData], rebuilt only when an input of the theme changes

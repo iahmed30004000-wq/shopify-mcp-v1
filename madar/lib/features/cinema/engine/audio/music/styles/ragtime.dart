@@ -69,7 +69,7 @@ final class RagtimeComposer implements StyleComposer {
     final rh = b.stem(const StemSpec('lead', layer: 0.3, reverb: 0.1, pan: 0.1));
     final pit = b.stem(const StemSpec('hot', layer: 0.66, reverb: 0.16, pan: 0.3, gain: 0.62));
 
-    addStride(b.ev, Inst.honkyPiano, b.chart, b.key, start: b.loopStart, bars: b.loopBars, stem: lh, vel: action ? 0.62 : 0.55);
+    _strideLeftHand(b, lh, b.loopStart, b.loopBars, vel: action ? 0.62 : 0.55);
     final mel = b.melody(
       MelodySpec(
         lo: 67,
@@ -112,7 +112,7 @@ final class RagtimeComposer implements StyleComposer {
       }
       b.note(Inst.honkyPiano, 3.25, 0.2, v7root + 4, 0.7, stem: rh);
       b.note(Inst.honkyPiano, 3.5, 0.4, v7root + 7, 0.75, stem: rh);
-      addStride(b.ev, Inst.honkyPiano, b.chart, b.key, start: 0, bars: 1, stem: lh, vel: 0.5);
+      _strideLeftHand(b, lh, 0, 1, vel: 0.5);
       b.note(Inst.snare, 3.5, 0.1, 0, 0.45, stem: pit);
     }
     return b.build();
@@ -300,6 +300,28 @@ final class RagtimeComposer implements StyleComposer {
       }
     }
     return b.build();
+  }
+
+  /// Stride: octave bass on 1 and 3 (root, then fifth), chords on 2 and 4.
+  static void _strideLeftHand(CueBuilder b, int stem, double start, int bars, {double vel = 0.55}) {
+    for (var bar = 0; bar < bars; bar++) {
+      for (var beat = 0; beat < 4; beat++) {
+        final t = start + bar * 4 + beat;
+        final chord = b.chart.at(t);
+        if (beat.isEven) {
+          final slot = b.chart.slotAt(t);
+          final fresh = (slot.beat - t).abs() < 1e-6 || beat == 0;
+          var p = chord.rootNear(b.key, 43) + (fresh ? 0 : 7);
+          if (p > 50) p -= 12;
+          b.note(Inst.honkyPiano, t, 0.6, p, vel + (beat == 0 ? 0.08 : 0), stem: stem);
+          b.note(Inst.honkyPiano, t, 0.6, p - 12, vel * 0.85, stem: stem);
+        } else {
+          for (final p in chord.closeVoicing(b.key, 53, size: 3)) {
+            b.note(Inst.honkyPiano, t, 0.4, p, vel * 0.72, stem: stem, fx: Art.staccato);
+          }
+        }
+      }
+    }
   }
 
   /// Right hand: the line, thickened with a chord tone below on accents.

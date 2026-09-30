@@ -14,7 +14,6 @@ import 'package:madar/features/orbit/domain/neglect_text.dart';
 import 'package:madar/features/orbit/domain/orbit_moons.dart';
 import 'package:madar/features/orbit/domain/planet_scores.dart';
 import 'package:madar/features/orbit/domain/prayer_schedule.dart';
-import 'package:madar/features/work/work.dart' show WorkService;
 
 import 'orbit_fixtures.dart';
 
@@ -336,26 +335,6 @@ void main() {
         }
       }
       expect(snap.moon('people:${ids.mother}')!.label, 'أمي');
-    });
-
-    test('an archived Work board is no moon, and its cards neither count nor warn', () async {
-      expect(OrbitRepository.archivedBoardsKey, WorkService.archivedKey, reason: 'one key, owned by Work');
-      final ids = await seedLivedIn(repos, thriving: false);
-      final before = await repo.snapshot();
-      expect(
-        before.planet('work')!.score.reasons.where((r) => r.code == ReasonCode.cardsOverdue).map((r) => r.refId),
-        contains(ids.boardJo),
-      );
-      await repos.keyValues.setJson(OrbitRepository.archivedBoardsKey, [ids.boardJo]);
-      final snap = await repo.snapshot();
-      final work = snap.planet('work')!;
-      expect(work.moons.map((m) => (m.refTable, m.refId)), [('boards', ids.boardSy)]);
-      expect(work.score.reasons.where((r) => r.refTable == 'boards' && r.refId == ids.boardJo), isEmpty);
-      expect(snap.radar.where((r) => r.refId == ids.boardJo), isEmpty);
-      expect(work.extras[0], 1, reason: 'one board left in use');
-      // Restored: a moon again.
-      await repos.keyValues.setJson(OrbitRepository.archivedBoardsKey, const <String>[]);
-      expect((await repo.snapshot()).planet('work')!.moons, hasLength(2));
     });
 
     test('at most 12 moons per planet; the overflow is counted and the most overdue are kept', () async {

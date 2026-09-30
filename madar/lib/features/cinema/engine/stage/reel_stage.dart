@@ -44,11 +44,7 @@ class StageBeat extends ChangeNotifier {
 class ReelStage implements StageFrame {
   ReelStage(this.env)
     : materials = StageMaterials.of(env.skin),
-      _proscenium = ProsceniumPainter(
-        skin: env.skin,
-        materials: StageMaterials.of(env.skin),
-        reducedMotion: env.reducedMotion,
-      );
+      _proscenium = ProsceniumPainter(skin: env.skin, materials: StageMaterials.of(env.skin), reducedMotion: env.reducedMotion);
 
   final CinemaEnv env;
   final StageMaterials materials;
@@ -72,7 +68,6 @@ class ReelStage implements StageFrame {
   Offset _spot = Offset.zero;
   double _spotAlpha = 0;
 
-  late final EraPalette _velvet = _velvetPalette();
   final ShaderPool _curtains = ShaderPool(CinemaShader.curtain, maxInstances: 4);
   final ShaderPool _spots = ShaderPool(CinemaShader.spotlight, maxInstances: 1);
   final BulbAtlas _atlas = BulbAtlas(capacity: 160);
@@ -176,16 +171,7 @@ class ReelStage implements StageFrame {
     final skew = lag.clamp(-maxShift, maxShift);
     final folds = math.max(3, style.curtainFolds);
     _panel(canvas, clock, l, Rect.fromLTRB(0, l.curtainTop, panel, l.curtainBottom), CurtainPanel.left, folds, g, skew);
-    _panel(
-      canvas,
-      clock,
-      l,
-      Rect.fromLTRB(w - panel, l.curtainTop, w, l.curtainBottom),
-      CurtainPanel.right,
-      folds,
-      g,
-      -skew,
-    );
+    _panel(canvas, clock, l, Rect.fromLTRB(w - panel, l.curtainTop, w, l.curtainBottom), CurtainPanel.right, folds, g, -skew);
 
     // Festoon valance.
     final swags = math.max(3, (w / 86).round());
@@ -222,16 +208,7 @@ class ReelStage implements StageFrame {
       ..blendMode = BlendMode.srcOver;
   }
 
-  void _panel(
-    Canvas canvas,
-    FilmClock clock,
-    StageLayout l,
-    Rect rect,
-    CurtainPanel side,
-    int folds,
-    double g,
-    double skew,
-  ) {
+  void _panel(Canvas canvas, FilmClock clock, StageLayout l, Rect rect, CurtainPanel side, int folds, double g, double skew) {
     canvas.save();
     if (skew != 0) {
       // The hem swings about the curtain rod (the outer edge stays behind
@@ -253,7 +230,7 @@ class ReelStage implements StageFrame {
       CurtainUniforms.write(
         s,
         rect: rect,
-        palette: _velvet,
+        palette: skin.palette,
         panel: side,
         clock: clock,
         folds: folds,
@@ -274,7 +251,7 @@ class ReelStage implements StageFrame {
       return;
     }
     // Plain-canvas fallback: a flat velvet silhouette.
-    _paint.color = _velvet.curtain;
+    _paint.color = skin.palette.curtain;
     if (side == CurtainPanel.valance) {
       canvas.drawRect(Rect.fromLTRB(rect.left, rect.top, rect.right, rect.top + rect.height * 0.75), _paint);
       return;
@@ -298,26 +275,6 @@ class ReelStage implements StageFrame {
       ..lineTo(outer, rect.bottom)
       ..close();
     canvas.drawPath(_fallback, _paint);
-  }
-
-  /// The palette the curtain shader reads (the stage's own velvet).
-  EraPalette _velvetPalette() {
-    final p = skin.palette;
-    final v = materials.velvet, vs = materials.velvetShade;
-    if (v == null && vs == null) return p;
-    return EraPalette(
-      ink: p.ink,
-      paper: p.paper,
-      shadow: p.shadow,
-      midtone: p.midtone,
-      highlight: p.highlight,
-      accent: p.accent,
-      accent2: p.accent2,
-      backdrop: p.backdrop,
-      curtain: v ?? p.curtain,
-      curtainShade: vs ?? p.curtainShade,
-      footlight: p.footlight,
-    );
   }
 
   /// The gilt rope and tassel that hold a gathered curtain.

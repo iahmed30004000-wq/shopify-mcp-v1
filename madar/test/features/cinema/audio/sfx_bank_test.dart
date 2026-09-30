@@ -35,20 +35,6 @@ void main() {
     await b.dispose();
   });
 
-  test('fetches the kit on first use when sound comes up after prepare()', () async {
-    mixer = FakeCinemaMixer()..live = false;
-    source = FakeCueSource();
-    bank = ProceduralSfxBank(_ctx(), mixer: mixer, source: source, clock: () => now);
-    await bank.prepare();
-    mixer.live = true;
-    bank.play(CinemaSound.coin);
-    await pumpEventQueue();
-    expect(source.requests, ['sfx vhs']);
-    now += const Duration(seconds: 1);
-    bank.play(CinemaSound.coin);
-    expect(mixer.active('sound:coin'), hasLength(1));
-  });
-
   test('loads every sound and every extra of the era kit', () async {
     await start();
     expect(source.requests, ['sfx vhs']);

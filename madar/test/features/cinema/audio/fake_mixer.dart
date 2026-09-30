@@ -46,7 +46,8 @@ class FakeCinemaMixer implements CinemaMixer {
   String nameOf(int source) => sources[source]?.$1 ?? '?';
 
   /// Live (not stopping) voices whose source name contains [part].
-  List<FakeVoice> active([String part = '']) => voices.values.where((v) => !v.stopping && nameOf(v.source).contains(part)).toList();
+  List<FakeVoice> active([String part = '']) =>
+      voices.values.where((v) => !v.stopping && nameOf(v.source).contains(part)).toList();
 
   @override
   bool get isLive => live;
@@ -126,7 +127,9 @@ class FakeCueSource implements CueSource {
     final jingle = mood == MusicMood.victory || mood == MusicMood.defeat;
     final info = infoFor(mood, loops: !jingle);
     final half = cueBytes ~/ 6;
-    return RenderedCue(info, [for (final s in info.stems) RenderedStem(s, tinyWav(frames: half ~/ 2), tinyWav(frames: half ~/ 2))]);
+    return RenderedCue(info, [
+      for (final s in info.stems) RenderedStem(s, tinyWav(frames: half ~/ 2), tinyWav(frames: half ~/ 2)),
+    ]);
   }
 
   @override

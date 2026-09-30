@@ -221,24 +221,6 @@ Flutter overlays (pause / results cards) sit above, ungraded, with real buttons.
 * Overlays: `CinemaOverlays.pause` ("Intermission": resume, restart, leave)
   and `CinemaOverlays.results` (score, play again, leave) are Flutter
   widgets built by `CinemaOverlayBuilder(context, game)`.
-* **Implementations (stage agent, `engine/stage/`, toolkit barrel
-  `stage/stage_kit.dart`):** `ReelStage` (velvet curtains on physics:
-  `CurtainMotion` hauls a rope, the leading edge follows on a spring, the
-  hem swings, the tie-back gathers the drape; festoon valance with fringe;
-  the era's proscenium from `ProsceniumPainter`, recorded once per layout;
-  chasing marquee bulbs and footlight halos batched by `BulbAtlas`, two
-  atlas draws; follow-spot; `beat`, a `StageBeat` that ticks every update so
-  Flutter overlays repaint on game time with no second ticker).
-  `ReelHudKit` (rolling-odometer score with a best tab, lives as film reels
-  that unspool when lost, the boss bar as a burning film strip, a
-  stopwatch, a film-strip progress bar, era plaques via `HudPlaque`).
-  `ReelTransitions` (iris in the era's shape; the 1970s print burns
-  through; 1980s tape-glitch bands; the FX agent's `IntertitlePainter`
-  cards). Overlays: `ProjectorBoothOverlay` (pause) and
-  `ResultsMarqueeOverlay` (results; it irises back onto the stage and
-  closes the house curtains behind the card). Shared house style:
-  `StageMaterials.of(skin)` (gilt, wall, bulbs, neon per era) and
-  `Ornaments` (orbit emblem, sunburst, stars, laurels, neon tubes).
 
 ### The game: `cinema_game.dart`, `cinema_kit.dart`, `cinema_context.dart`, `cinema_env.dart`
 `abstract class CinemaGame extends FlameGame<CinemaWorld>`:
@@ -278,28 +260,16 @@ Flutter overlays (pause / results cards) sit above, ungraded, with real buttons.
   noir_rooftops, neon_souk_racer); set their `builder`.
 * `GameResult { gameId, score, won, playTime, stats }` is sent to a
   `ScoreSink { submit, best }`. `MemoryScoreSink` is the default; the hall
-  uses `KvCinemaRecordsStore` (encrypted key/value store, key
-  `cinema.records`: best, plays, wins and play time per game; the old
-  `cinema.best` map is folded in once. `KvScoreSink` remains as a typedef).
+  uses `KvScoreSink` (encrypted key/value store, key `cinema.best`).
 
-### Hall and Saved Games: `hall/` (barrel `hall/hall.dart`)
-* `CinemaHallScreen` – the movie-palace lobby: marquee sign, **Now
-  Showing** (Tier 1 poster cases), the full programme with era / kind /
-  ready-to-play filters and locked "coming attraction" slots, the ticket
-  book (`cinemaRecordsProvider`), and the Saved Games shelf. Posters are
-  `PosterPainter` one-sheets drawn per era, starring each game's rig-cast
-  member (`CastMember.gameId`).
-* `CinemaGameScreen(gameId: …)` (`CinemaGameScreen.route(id)` opens it
-  through an iris): immersive portrait session with the screen kept on,
-  best score on the HUD, results into the records store, pauses and puts
-  the engine to sleep when covered (adhan, pushed page), a prayer-mute
-  badge; an unknown or unplayable id shows `NotOpenYetStage`.
-* Saved Games are built by the Saved Games feature
-  (`lib/features/saved_games`): the hall hosts its `SavedGamesShelf` and
-  re-exports `SavedGamesScreen`. The hall's first list (`cinema.savedGames`)
-  is migrated into that store once.
-* Hall and stage strings: `c1_cinema_hall.json` (prefixes `cinemaHall…`,
-  `cinemaStage…`).
+### Hall and Saved Games: `hall/`
+* `CinemaHallScreen` (the hub) and `CinemaGameScreen(entry)` (immersive, with
+  persistent scores).
+* Saved Games: `SavedGame { id, title, url, addedAt }`, `parseGameUrl`
+  (http/https only, adds `https://`), `SavedGamesStore` (`KvSavedGamesStore`
+  key `cinema.savedGames`, `MemorySavedGamesStore`), and
+  `SavedGameLauncher` (url_launcher `inAppBrowserView`, falling back to
+  external).
 * **Rule:** a saved game always runs from its original link. Madar stores
   only the title and URL and never copies, caches or bundles third-party
   game code.

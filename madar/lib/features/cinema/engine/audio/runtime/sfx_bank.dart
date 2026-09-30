@@ -60,15 +60,6 @@ final class ProceduralSfxBank implements SfxBank {
       _ready = true;
       return;
     }
-    await _loadKit();
-    _ready = true;
-  }
-
-  bool _kitRequested = false;
-
-  Future<void> _loadKit() async {
-    if (_kitRequested) return;
-    _kitRequested = true;
     try {
       final kit = await source.renderSfx(context.era, 1);
       for (final e in kit.entries) {
@@ -80,7 +71,11 @@ final class ProceduralSfxBank implements SfxBank {
     } catch (e) {
       if (kDebugMode) debugPrint('ProceduralSfxBank: kit failed: $e');
     }
-    if (_disposed) _unloadAll();
+    if (_disposed) {
+      _unloadAll();
+      return;
+    }
+    _ready = true;
   }
 
   @override
@@ -97,12 +92,7 @@ final class ProceduralSfxBank implements SfxBank {
   void _play(String key, {required double volume, required double pitch, required double pan}) {
     if (!_ready || _disposed || _prayerMuted) return;
     final clip = _clips[key];
-    if (clip == null) {
-      // Sound came up after prepare(): fetch the kit now (it plays from the
-      // next trigger on).
-      if (!_kitRequested && mixer.isLive) unawaited(_loadKit());
-      return;
-    }
+    if (clip == null) return;
     final gain = mixer.gamesGain * level * volume.clamp(0.0, 1.0);
     if (gain <= 0.0005) return;
     final now = _clock();
