@@ -94,7 +94,9 @@ class CustomModulesCard extends ConsumerWidget {
               Expanded(
                 child: Semantics(
                   header: true,
-                  child: Text(l.cmodCardTitle, style: text.titleSmall!.copyWith(color: t.metalBrass)),
+                  // The brass stays on the icon: brass text measured under AA
+                  // (3.7 : 1) on the planet pages' glass.
+                  child: Text(l.cmodCardTitle, style: text.titleSmall!.copyWith(color: t.textPrimary)),
                 ),
               ),
               TextButton(

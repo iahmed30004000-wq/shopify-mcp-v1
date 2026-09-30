@@ -82,6 +82,14 @@ Future<void> _namedEn(TogetherRepository repo) async {
   await repo.saveProfile(TogetherProfile.defaults(PlayerSlot.two).copyWith(name: 'Sara', avatar: const TogetherAvatar.emoji('🌙')));
 }
 
+/// Closes a scripted partner (its drain timeouts need fake time to pass).
+Future<void> closeUnderFakeTime(WidgetTester tester, PairableTransport partner) async {
+  unawaited(partner.close());
+  for (var i = 0; i < 6; i++) {
+    await tester.pump(const Duration(seconds: 1));
+  }
+}
+
 void main() {
   setUpAll(_loadEmojiFont);
 
@@ -232,7 +240,7 @@ void main() {
         }
       },
     );
-    await partner.close();
+    await closeUnderFakeTime(tester, partner);
   });
 
   testWidgets('nearby – confirm, English, aurora', (tester) async {
@@ -260,7 +268,7 @@ void main() {
         }
       },
     );
-    await partner.close();
+    await closeUnderFakeTime(tester, partner);
   });
 
   testWidgets('nearby – connected, Arabic, aurora', (tester) async {
@@ -273,7 +281,7 @@ void main() {
       theme: MadarThemeId.aurora,
       overrides: [n.override],
       seed: _named,
-      trailingFrames: 3,
+      trailingFrames: 8,
       drive: (tester) async {
         await tap(tester, 'together-pair-play');
         partner = other(n.air, 'sara');
@@ -293,7 +301,7 @@ void main() {
         }
       },
     );
-    await partner.close();
+    await closeUnderFakeTime(tester, partner);
   });
 
   // ------------------------------------------------------------------ online
@@ -375,7 +383,7 @@ void main() {
         }
       },
     );
-    await partner.close();
+    await closeUnderFakeTime(tester, partner);
   });
 
   testWidgets('online – typing a code, English, desert', (tester) async {

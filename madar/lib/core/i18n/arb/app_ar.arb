@@ -21631,7 +21631,7 @@
   "togetherNetCopyCode": "نسخ الرمز",
   "togetherNetCopied": "نُسخ",
   "togetherNetWaitingJoin": "بانتظار انضمام الهاتف الآخر…",
-  "togetherNetJoinRequest": "{name} يطلب الانضمام",
+  "togetherNetJoinRequest": "طلب انضمام من {name}",
   "@togetherNetJoinRequest": {
     "placeholders": {
       "name": {
@@ -21672,7 +21672,7 @@
   "togetherNetStepsTitle": "الإعداد مرة واحدة",
   "togetherNetStep1": "أنشئا مشروعًا مجانيًا في console.firebase.google.com",
   "togetherNetStep2": "أضيفا تطبيق أندرويد باسم الحزمة app.madar.orbit",
-  "togetherNetStep3": "فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous",
+  "togetherNetStep3": "فعّلا الدخول المجهول: Authentication › Sign-in method › Anonymous",
   "togetherNetStep4": "أنشئا Realtime Database والصقا قواعد الأمان في تبويب Rules",
   "togetherNetStep5": "انقلا القيم إلى الحقول هنا، أو الصقا ملف google-services.json كاملًا",
   "togetherNetCopyRules": "نسخ قواعد الأمان",
@@ -21710,7 +21710,7 @@
       }
     }
   },
-  "togetherNetTurnBody": "لعب {name} — حان دورك",
+  "togetherNetTurnBody": "انتهى دور {name} — حان دورك",
   "@togetherNetTurnBody": {
     "placeholders": {
       "name": {

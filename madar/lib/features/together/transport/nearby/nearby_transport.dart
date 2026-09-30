@@ -432,9 +432,21 @@ class NearbyTransport extends PairingTransportBase {
     _requested = null;
     _initiating = null;
     _connectTimer?.cancel();
-    if (closed || roleValue != null) return; // reconnecting: the search goes on
+    if (closed) return;
+    if (roleValue != null) {
+      // Reconnecting: discovery reports a phone only once – start it again so
+      // the partner is found (and asked) anew.
+      if (state.phase == PairingPhase.reconnecting) unawaited(_restartRadios());
+      return;
+    }
     _publishFound();
     _scheduleAutoConnect();
+  }
+
+  Future<void> _restartRadios() async {
+    _found.clear();
+    await _radiosOff(keepWanted: true);
+    if (!closed && state.phase == PairingPhase.reconnecting) await _radiosOn();
   }
 
   Future<void> _onInitiated(NearbyConnectionInitiated e) async {

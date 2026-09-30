@@ -14,9 +14,9 @@
 ///   avatar id ≤ 32, colour index 0–15) and only frames that look like
 ///   Together frames, sent as itself (`s` = 0 host, 1 guest), stamped with
 ///   the server's clock;
-/// * either member can delete a frame (the recipient deletes what it read)
-///   or the whole room (leaving); anyone signed in can delete an expired
-///   room;
+/// * either member can delete a frame (the recipient deletes what it read;
+///   the sender withdraws old unread ones) or the whole room (leaving);
+///   anyone signed in can delete an expired room;
 /// * no other field can ever be written.
 library;
 
@@ -73,7 +73,7 @@ abstract final class OnlineSecurityRules {
         },
         "f": {
           "$frame": {
-            ".write": "auth != null && root.child('rooms').child($code).child('x').val() >= now && ((!data.exists() && newData.exists() && ((newData.child('s').val() === 0 && root.child('rooms').child($code).child('h').val() === auth.uid) || (newData.child('s').val() === 1 && root.child('rooms').child($code).child('g').val() === auth.uid))) || (data.exists() && !newData.exists() && (root.child('rooms').child($code).child('h').val() === auth.uid || root.child('rooms').child($code).child('g').val() === auth.uid)))",
+            ".write": "auth != null && root.child('rooms').child($code).child('x').val() >= now && ((!data.exists() && newData.exists() && ((newData.child('s').val() === 0 && root.child('rooms').child($code).child('h').val() === auth.uid) || (newData.child('s').val() === 1 && root.child('rooms').child($code).child('g').val() === auth.uid))) || (!newData.exists() && (root.child('rooms').child($code).child('h').val() === auth.uid || root.child('rooms').child($code).child('g').val() === auth.uid)))",
             ".validate": "newData.hasChildren(['s', 't', 'at'])",
             "s": { ".validate": "newData.val() === 0 || newData.val() === 1" },
             "t": { ".validate": "newData.isString() && newData.val().length <= 262144 && newData.val().matches(/^[{]\"p\":\"madar[.]together\",\"v\":1,\"sid\":\"[A-Za-z0-9_-]+\",\"k\":\"(hello|start|move|input|snapshot|sync|resync|result|bye)\",/)" },

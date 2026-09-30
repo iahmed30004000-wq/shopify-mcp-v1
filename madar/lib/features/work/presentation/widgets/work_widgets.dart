@@ -64,7 +64,9 @@ class WorkPill extends StatelessWidget {
     return Container(
       padding: EdgeInsetsDirectional.symmetric(horizontal: dense ? Space.s : Space.m, vertical: dense ? 2 : Space.xs),
       decoration: BoxDecoration(
-        color: filled ? c.withValues(alpha: 0.18) : c.withValues(alpha: 0.07),
+        // 0.14: the filled danger pill kept its text at AA on the planet
+        // pages' tinted glass (0.18 measured 4.36 : 1 on Lapis).
+        color: filled ? c.withValues(alpha: 0.14) : c.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: c.withValues(alpha: filled ? 0.5 : 0.28), width: 0.8),
       ),

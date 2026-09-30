@@ -317,7 +317,9 @@ class _OnlinePlaySheetState extends ConsumerState<OnlinePlaySheet> {
             child: Text(px.digits('$n'), style: text.labelSmall?.copyWith(color: t.gold)),
           ),
           const SizedBox(width: Space.s),
-          Expanded(child: Text(s, style: text.bodySmall?.copyWith(color: t.textSecondary, height: 1.4))),
+          Expanded(
+            child: Text(s, style: text.bodySmall?.copyWith(color: t.textSecondary, height: 1.4)),
+          ),
         ],
       ),
     );
@@ -434,7 +436,9 @@ class _OnlinePlaySheetState extends ConsumerState<OnlinePlaySheet> {
             children: [
               Icon(Icons.lock_rounded, size: 16, color: t.textTertiary),
               const SizedBox(width: Space.s),
-              Expanded(child: Text(l.togetherNetStoredSecurely, style: text.bodySmall?.copyWith(color: t.textTertiary))),
+              Expanded(
+                child: Text(l.togetherNetStoredSecurely, style: text.bodySmall?.copyWith(color: t.textTertiary)),
+              ),
             ],
           ),
           if (_saved != null) ...[

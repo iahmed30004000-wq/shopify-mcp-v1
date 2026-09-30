@@ -299,6 +299,7 @@ class OnlineTransport extends PairingTransportBase {
     final wasPaired = _paired;
     final guestWaiting = roleValue == SessionRole.guest && !wasPaired;
     final guestLeft = roleValue == SessionRole.host && state.phase == PairingPhase.confirm;
+    // Deleted by the partner (or taken over after expiry): nothing to clean.
     unawaited(_quietly(() async => ledger?.remove(_code ?? '')));
     _code = null;
     _cancelSubs();
@@ -439,10 +440,18 @@ class OnlineTransport extends PairingTransportBase {
     _hostUid = null;
     _paired = false;
     peerValue = null;
-    if (client != null && code != null) {
-      await _quietly(() => client.remove(OnlineRooms.room(code)));
-      await _quietly(() async => ledger?.remove(code));
+    if (client != null && code != null) await _deleteRoom(client, code);
+  }
+
+  /// Deletes the room; it leaves the crash ledger only once really deleted
+  /// (offline, the next online pairing deletes it).
+  Future<void> _deleteRoom(RtdbClient client, String code) async {
+    try {
+      await client.remove(OnlineRooms.room(code)).timeout(const Duration(seconds: 3));
+    } on Object {
+      return;
     }
+    await _quietly(() async => ledger?.remove(code));
   }
 
   /// Starts over from [PairingPhase.failed]: no room, no role.
@@ -476,10 +485,7 @@ class OnlineTransport extends PairingTransportBase {
     _cancelSubs();
     final code = _code;
     _code = null;
-    if (client != null && code != null) {
-      await _quietly(() => client.remove(OnlineRooms.room(code)));
-      await _quietly(() async => ledger?.remove(code));
-    }
+    if (client != null && code != null) await _deleteRoom(client, code);
     await _quietly(() async => client?.close());
     await finishClose();
   }

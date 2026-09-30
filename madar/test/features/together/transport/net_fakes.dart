@@ -136,6 +136,9 @@ class FakeNearbyApi implements NearbyApi {
   /// Fails the next start of advertising with this error.
   NearbyApiException? failNextStart;
 
+  /// Fails this many connection requests (a radio hiccup).
+  int failRequests = 0;
+
   @override
   int maxPayloadBytes = 32 * 1024;
 
@@ -195,6 +198,10 @@ class FakeNearbyApi implements NearbyApi {
   @override
   Future<void> requestConnection({required String name, required String endpointId}) async {
     calls.add('requestConnection');
+    if (failRequests > 0) {
+      failRequests--;
+      throw const NearbyApiException(NearbyErrorKind.unknown, '8012: STATUS_ENDPOINT_IO_ERROR');
+    }
     final target = air._byId(endpointId);
     if (target == null || !target.advertising || !air.inRange) {
       throw const NearbyApiException(NearbyErrorKind.unknown, '8011: STATUS_ENDPOINT_UNKNOWN');
@@ -494,7 +501,7 @@ class FakeRtdb {
           final s = after['s'];
           return (s == 0 && data['h'] == uid) || (s == 1 && data['g'] == uid);
         }
-        if (before != null && after == null) return data['h'] == uid || data['g'] == uid;
+        if (after == null) return data['h'] == uid || data['g'] == uid;
         return false;
     }
     return false;

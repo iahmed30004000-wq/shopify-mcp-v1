@@ -95,8 +95,7 @@ class _PairingRadarState extends State<PairingRadar> with SingleTickerProviderSt
                 ),
               ),
               if (widget.center != null) widget.center!,
-              for (final (i, p) in widget.found.indexed)
-                _orbiting(p, i, size, t, text, _c.value),
+              for (final (i, p) in widget.found.indexed) _orbiting(p, i, size, t, text, _c.value),
             ],
           ),
         ),
@@ -264,7 +263,10 @@ class DigitTiles extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            FittedBox(fit: BoxFit.scaleDown, child: Row(mainAxisSize: MainAxisSize.min, children: tiles)),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(mainAxisSize: MainAxisSize.min, children: tiles),
+            ),
             if (localized != digits)
               Padding(
                 padding: const EdgeInsets.only(top: Space.xs),

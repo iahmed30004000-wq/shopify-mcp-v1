@@ -36318,7 +36318,7 @@ abstract class L10n {
   /// No description provided for @togetherNetJoinRequest.
   ///
   /// In ar, this message translates to:
-  /// **'{name} يطلب الانضمام'**
+  /// **'طلب انضمام من {name}'**
   String togetherNetJoinRequest(String name);
 
   /// No description provided for @togetherNetJoinRequestBody.
@@ -36438,7 +36438,7 @@ abstract class L10n {
   /// No description provided for @togetherNetStep3.
   ///
   /// In ar, this message translates to:
-  /// **'فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous'**
+  /// **'فعّلا الدخول المجهول: Authentication › Sign-in method › Anonymous'**
   String get togetherNetStep3;
 
   /// No description provided for @togetherNetStep4.
@@ -36624,7 +36624,7 @@ abstract class L10n {
   /// No description provided for @togetherNetTurnBody.
   ///
   /// In ar, this message translates to:
-  /// **'لعب {name} — حان دورك'**
+  /// **'انتهى دور {name} — حان دورك'**
   String togetherNetTurnBody(String name);
 }
 

@@ -10,11 +10,15 @@ library;
 
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
+
 import '../domain/play_modes.dart';
 import '../domain/player_profile.dart';
+import '../protocol/envelope.dart';
 import '../protocol/game_data.dart';
 import '../protocol/session.dart';
 import '../protocol/together_game.dart';
+import '../protocol/transport.dart';
 import 'pairing_state.dart';
 
 /// Participant ↔ player on one of two paired phones.
@@ -68,6 +72,10 @@ final class PairedLink {
   /// This phone's session of [adapter]. The host seats [firstPlayer] (this
   /// phone's "who starts") on seat 0 and must call `start()`; the guest
   /// follows the host's start (its [firstPlayer] is ignored).
+  ///
+  /// The session gets a view of the link: disposing it lets go of the link
+  /// without ending it, so `session(...)` again is a rematch on the same two
+  /// phones (no second pairing). [close] ends the link.
   TogetherSession<S, M> session<S, M>({
     required TogetherGameAdapter<S, M> adapter,
     required PlayerSlot firstPlayer,
@@ -76,21 +84,54 @@ final class PairedLink {
     GameData? config,
     math.Random? random,
     DateTime Function()? clock,
-  }) => TogetherSession<S, M>(
-    adapter: adapter,
-    transport: transport,
-    role: role,
-    seating: seating.seating,
-    seats: role == SessionRole.host
-        ? seating.seats(firstPlayer: firstPlayer, seatCount: adapter.seatCount, partners: partners)
-        : null,
-    recorder: recorder,
-    config: config,
-    random: random,
-    clock: clock,
-  );
+  }) {
+    // Frames of a previous session nobody read (a late `bye` would end the
+    // new one before it starts); the new session recovers the rest.
+    final t = transport;
+    if (t is PairingTransportBase) t.dropEarlyFrames();
+    return TogetherSession<S, M>(
+      adapter: adapter,
+      transport: _SessionView(transport),
+      role: role,
+      seating: seating.seating,
+      seats: role == SessionRole.host
+          ? seating.seats(firstPlayer: firstPlayer, seatCount: adapter.seatCount, partners: partners)
+          : null,
+      recorder: recorder,
+      config: config,
+      random: random,
+      clock: clock,
+    );
+  }
 
-  /// Leaves: the partner is told by the session's `bye`; the transport stops
-  /// its radios / deletes the online room.
+  /// Ends two-phone play (after the session's `leave()` told the partner):
+  /// the radios stop / the online room is deleted.
   Future<void> close() => transport.close();
+}
+
+/// One session's view of a paired link: everything goes through to the link
+/// except [close], which only detaches this session.
+class _SessionView implements TogetherTransport {
+  _SessionView(this.link);
+
+  final PairableTransport link;
+  bool _detached = false;
+
+  @override
+  PlayMode get mode => link.mode;
+
+  @override
+  Set<int> get localParticipants => link.localParticipants;
+
+  @override
+  ValueListenable<TransportStatus> get status => link.status;
+
+  @override
+  Stream<String> get incoming => link.incoming;
+
+  @override
+  Future<void> send(TogetherFrame frame) => _detached ? Future<void>.value() : link.send(frame);
+
+  @override
+  Future<void> close() async => _detached = true;
 }

@@ -52,7 +52,9 @@ class NearbyPermissionPanel extends StatelessWidget {
         children: [
           Icon(i, size: 18, color: t.success),
           const SizedBox(width: Space.s),
-          Expanded(child: Text(s, style: text.bodyMedium?.copyWith(color: t.textSecondary))),
+          Expanded(
+            child: Text(s, style: text.bodyMedium?.copyWith(color: t.textSecondary)),
+          ),
         ],
       ),
     );
@@ -81,7 +83,11 @@ class NearbyPermissionPanel extends StatelessWidget {
         ),
         for (final b in bodies) ...[
           const SizedBox(height: Space.s),
-          Text(b, textAlign: TextAlign.center, style: text.bodyMedium?.copyWith(color: t.textSecondary, height: 1.45)),
+          Text(
+            b,
+            textAlign: TextAlign.center,
+            style: text.bodyMedium?.copyWith(color: t.textSecondary, height: 1.45),
+          ),
         ],
         if (!serviceOff && !denied) ...[
           const SizedBox(height: Space.m),

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/design/contrast.dart';
 import '../../../../core/design/themes.dart' show PlanetPalettes;
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
@@ -67,7 +68,9 @@ class PersonAvatar extends StatelessWidget {
     final ringColor = familyStatusColor(status, t);
     final stroke = math.max(2.5, size / 16);
     final inner = size - (ring ? stroke * 2 + 3 : 0);
-    final light = ThemeData.estimateBrightnessForColor(c) == Brightness.light;
+    // The ink with the better contrast on the person's colour (a light
+    // lavender read 2.4 : 1 under white).
+    final ink = MadarContrast.bestOn(c, const [Color(0xFF2A1A10), Colors.white]);
     final orb = Container(
       width: inner,
       height: inner,
@@ -88,7 +91,7 @@ class PersonAvatar extends StatelessWidget {
           fontSize: inner * 0.42,
           height: 1.1,
           fontWeight: FontWeight.w600,
-          color: light ? const Color(0xFF2A1A10) : Colors.white,
+          color: ink,
         ),
       ),
     );

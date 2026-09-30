@@ -223,9 +223,14 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
                     onPick: _pickSlot,
                   ),
                   const SizedBox(height: Space.l),
+                  // Fade-through: the old stage is gone before the new one
+                  // appears (they differ in height and must never overlap).
                   AnimatedSwitcher(
                     duration: context.motion(MadarMotion.medium),
-                    switchInCurve: MadarMotion.decelerate,
+                    switchInCurve: const Interval(0.45, 1, curve: MadarMotion.decelerate),
+                    switchOutCurve: const Interval(0.55, 1, curve: Curves.easeIn),
+                    layoutBuilder: (current, previous) =>
+                        Stack(alignment: Alignment.topCenter, children: [...previous, ?current]),
                     transitionBuilder: (child, a) => FadeTransition(
                       opacity: a,
                       child: ScaleTransition(scale: Tween(begin: 0.97, end: 1.0).animate(a), child: child),
@@ -260,7 +265,8 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
   }
 
   bool _identityOpen(PairingState s) =>
-      s.role == null && (s.phase == PairingPhase.idle || s.phase == PairingPhase.needsSetup || s.phase == PairingPhase.closed);
+      s.role == null &&
+      (s.phase == PairingPhase.idle || s.phase == PairingPhase.needsSetup || s.phase == PairingPhase.closed);
 
   Widget _avatarOfMe({double size = 56}) {
     final p = _profiles.of(_currentSlot());
@@ -325,7 +331,9 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
             _Stage(
               visual: PairingRadar(active: !s.paused, found: found, center: _avatarOfMe()),
               title: title,
-              body: s.paused ? l.togetherNetPaused : (_hint && s.phase == PairingPhase.searching ? l.togetherNetSearchingHint : null),
+              body: s.paused
+                  ? l.togetherNetPaused
+                  : (_hint && s.phase == PairingPhase.searching ? l.togetherNetSearchingHint : null),
             ),
             if (s.phase == PairingPhase.searching && s.found.length > 1) ...[
               const SizedBox(height: Space.m),
@@ -485,7 +493,11 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(l.togetherNetYourCode, textAlign: TextAlign.center, style: text.titleSmall?.copyWith(color: tokens.textSecondary)),
+            Text(
+              l.togetherNetYourCode,
+              textAlign: TextAlign.center,
+              style: text.titleSmall?.copyWith(color: tokens.textSecondary),
+            ),
             const SizedBox(height: Space.s),
             DigitTiles(
               key: const ValueKey('together-pair-code'),
@@ -500,7 +512,11 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
               child: TogetherQrView(data: code, semanticLabel: l.togetherNetQrLabel(px.digits(code))),
             ),
             const SizedBox(height: Space.m),
-            Text(l.togetherNetCodeHint, textAlign: TextAlign.center, style: text.bodyMedium?.copyWith(color: tokens.textSecondary)),
+            Text(
+              l.togetherNetCodeHint,
+              textAlign: TextAlign.center,
+              style: text.bodyMedium?.copyWith(color: tokens.textSecondary),
+            ),
             if (expires != null) ...[
               const SizedBox(height: Space.xs),
               Text(
@@ -529,7 +545,9 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
               children: [
                 const OrbitLoader(size: 20),
                 const SizedBox(width: Space.s),
-                Flexible(child: Text(l.togetherNetWaitingJoin, style: text.bodySmall?.copyWith(color: tokens.textSecondary))),
+                Flexible(
+                  child: Text(l.togetherNetWaitingJoin, style: text.bodySmall?.copyWith(color: tokens.textSecondary)),
+                ),
               ],
             ),
           ],
@@ -695,14 +713,20 @@ class _Stage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (busy) ...[const OrbitLoader(size: 18), const SizedBox(width: Space.s)],
-                Flexible(child: Text(title!, textAlign: TextAlign.center, style: text.titleMedium)),
+                Flexible(
+                  child: Text(title!, textAlign: TextAlign.center, style: text.titleMedium),
+                ),
               ],
             ),
           ),
         ],
         if (body != null) ...[
           const SizedBox(height: Space.s),
-          Text(body!, textAlign: TextAlign.center, style: text.bodyMedium?.copyWith(color: t.textSecondary, height: 1.45)),
+          Text(
+            body!,
+            textAlign: TextAlign.center,
+            style: text.bodyMedium?.copyWith(color: t.textSecondary, height: 1.45),
+          ),
         ],
       ],
     );
@@ -806,7 +830,13 @@ class _WhoIsHere extends ConsumerWidget {
       children: [
         Text(l.togetherNetOnThisPhone, style: text.titleSmall?.copyWith(color: t.textSecondary)),
         const SizedBox(height: Space.s),
-        Row(children: [chip(profiles.one), const SizedBox(width: Space.s), chip(profiles.two)]),
+        Row(
+          children: [
+            chip(profiles.one),
+            const SizedBox(width: Space.s),
+            chip(profiles.two),
+          ],
+        ),
       ],
     );
   }
@@ -829,7 +859,9 @@ class _FoundPhone extends StatelessWidget {
         children: [
           Icon(Icons.phone_android_rounded, color: t.accent),
           const SizedBox(width: Space.m),
-          Expanded(child: Text(peer.name, style: text.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis)),
+          Expanded(
+            child: Text(peer.name, style: text.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+          ),
           MadarButton(
             key: ValueKey('together-pair-found-${peer.id}'),
             label: l.togetherNetConnect,
@@ -858,7 +890,11 @@ class _CodeField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(l.togetherNetOnlineIntro, textAlign: TextAlign.center, style: text.bodyMedium?.copyWith(color: t.textSecondary)),
+        Text(
+          l.togetherNetOnlineIntro,
+          textAlign: TextAlign.center,
+          style: text.bodyMedium?.copyWith(color: t.textSecondary),
+        ),
         const SizedBox(height: Space.l),
         Text(l.togetherNetCodeField, style: text.titleSmall?.copyWith(color: t.textSecondary)),
         const SizedBox(height: Space.s),

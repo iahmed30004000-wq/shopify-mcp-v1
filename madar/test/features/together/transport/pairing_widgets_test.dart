@@ -294,7 +294,7 @@ void main() {
       final guest = o.partner(host: false);
       await guest.join('123456', _sara());
       await _pump(tester);
-      expect(find.textContaining('يطلب الانضمام'), findsOneWidget);
+      expect(find.textContaining('طلب انضمام من'), findsOneWidget);
       expect(find.textContaining('Sara'), findsOneWidget);
       await tester.tap(find.byKey(const ValueKey('together-pair-accept')));
       await _pump(tester);

@@ -23456,7 +23456,7 @@ class L10nAr extends L10n {
 
   @override
   String togetherNetJoinRequest(String name) {
-    return '$name يطلب الانضمام';
+    return 'طلب انضمام من $name';
   }
 
   @override
@@ -23528,7 +23528,7 @@ class L10nAr extends L10n {
 
   @override
   String get togetherNetStep3 =>
-      'فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous';
+      'فعّلا الدخول المجهول: Authentication › Sign-in method › Anonymous';
 
   @override
   String get togetherNetStep4 =>
@@ -23627,6 +23627,6 @@ class L10nAr extends L10n {
 
   @override
   String togetherNetTurnBody(String name) {
-    return 'لعب $name — حان دورك';
+    return 'انتهى دور $name — حان دورك';
   }
 }

@@ -531,6 +531,43 @@ void main() {
       await p.dispose();
     });
 
+    test('a failed reconnection request is retried: discovery starts again', () async {
+      final p = _Pair(grace: const Duration(seconds: 5));
+      await p.pair();
+      final roles = (p.a.role, p.b.role);
+      p.phoneA.failRequests = 1;
+      p.phoneB.failRequests = 1;
+      p.air.cut(p.phoneA, p.phoneB);
+      await settle(80);
+      expect(p.a.pairing.value.phase, PairingPhase.connected);
+      expect(p.b.pairing.value.phase, PairingPhase.connected);
+      expect((p.a.role, p.b.role), roles);
+      expect(p.phoneA.calls.where((c) => c == 'startDiscovery').length, greaterThanOrEqualTo(3));
+      await p.dispose();
+    });
+
+    test('a rematch on the same link: the finished session lets go, the next one starts', () async {
+      final p = _Pair();
+      await p.pair();
+      final (host, guest, _, _) = await start(p, hostFirst: PlayerSlot.one);
+      await playOut(host, guest);
+      expect(host.phase, SessionPhase.finished);
+      host.dispose();
+      guest.dispose();
+      await settle();
+      expect(p.a.status.value, TransportStatus.connected, reason: 'disposing a session keeps the link');
+      final (host2, guest2, hostRecords, _) = await start(p, hostFirst: PlayerSlot.two);
+      expect(guest2.started, isTrue);
+      expect(host2.sessionId, isNot(host.sessionId));
+      await playOut(host2, guest2);
+      expect(host2.phase, SessionPhase.finished);
+      expect(hostRecords, hasLength(1));
+      host2.dispose();
+      guest2.dispose();
+      await p.dispose();
+      expect(p.phoneA.calls, contains('stopAllEndpoints'));
+    });
+
     test('moves made while out of range arrive after the reconnection', () async {
       final p = _Pair(grace: const Duration(seconds: 5));
       await p.pair();

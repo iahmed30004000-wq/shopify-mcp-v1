@@ -134,6 +134,19 @@ Future<void> _sheetTo(WidgetTester tester, Finder target, {double below = 60}) a
   await _frames(tester, 12);
 }
 
+/// Global rects of the sheet's text that sits (partly) above the sheet's
+/// top edge, where the sheet clips it.
+List<Rect> _clippedUnderPlanet(WidgetTester tester) {
+  final sheet = _planetSheet();
+  if (sheet.evaluate().isEmpty) return const [];
+  final top = tester.getTopLeft(sheet.first).dy;
+  return [
+    for (final e in find.descendant(of: sheet.first, matching: find.byType(RichText)).evaluate())
+      if (e.renderObject case final RenderBox box when box.attached && box.hasSize)
+        if ((box.localToGlobal(Offset.zero) & box.size) case final rect when rect.top < top - 0.5) rect,
+  ];
+}
+
 /// Text worth measuring (a separator is a few anti-aliased pixels).
 final RegExp _readable = RegExp(r'[\p{L}\p{N}]', unicode: true);
 
@@ -177,9 +190,16 @@ Future<void> _shot(
     beforeCapture: (tester) async {
       await before?.call(tester);
       await _frames(tester, 10);
+      // On a planet page, the sheet's text scrolled up past its top edge is
+      // clipped away under the planet – not on screen at all.
+      final clipped = _clippedUnderPlanet(tester);
       misses.addAll([
         for (final r in await measureRenderedContrast(tester, boundary))
-          if (!r.passes && !r.icon && _readable.hasMatch(r.text)) r,
+          if (!r.passes &&
+              !r.icon &&
+              _readable.hasMatch(r.text) &&
+              !clipped.any((c) => c.inflate(1).contains(r.rect.center)))
+            r,
       ]);
     },
     trailingFrames: 4,

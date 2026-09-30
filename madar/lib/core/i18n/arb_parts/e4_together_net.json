@@ -281,7 +281,7 @@
     "en": "Waiting for the other phone to join…"
   },
   "togetherNetJoinRequest": {
-    "ar": "{name} يطلب الانضمام",
+    "ar": "طلب انضمام من {name}",
     "en": "{name} wants to join",
     "placeholders": {
       "name": {
@@ -376,7 +376,7 @@
     "en": "Add an Android app with the package name app.madar.orbit"
   },
   "togetherNetStep3": {
-    "ar": "فعّلا الدخول المجهول: Authentication ← Sign-in method ← Anonymous",
+    "ar": "فعّلا الدخول المجهول: Authentication › Sign-in method › Anonymous",
     "en": "Enable anonymous sign-in: Authentication › Sign-in method › Anonymous"
   },
   "togetherNetStep4": {
@@ -505,7 +505,7 @@
     }
   },
   "togetherNetTurnBody": {
-    "ar": "لعب {name} — حان دورك",
+    "ar": "انتهى دور {name} — حان دورك",
     "en": "{name} played — it's your move",
     "placeholders": {
       "name": {

@@ -388,6 +388,9 @@ abstract class PairingTransportBase implements PairableTransport {
     }
   }
 
+  /// Forgets frames no session has read yet.
+  void dropEarlyFrames() => _early.clear();
+
   void _flush() {
     while (_early.isNotEmpty && !_incoming.isClosed) {
       _incoming.add(_early.removeFirst());
