@@ -1244,5 +1244,41 @@
         "type": "String"
       }
     }
+  },
+  "goalsFieldDebtWallet": {
+    "ar": "عبر محفظة",
+    "en": "Through a wallet",
+    "description": "Debt editor: the wallet the lent / borrowed money went through"
+  },
+  "goalsDebtLentFrom": {
+    "ar": "خرج المبلغ من {wallet}، فينقص رصيدها {amount}",
+    "en": "Lent from {wallet} – its balance drops by {amount}",
+    "description": "Debt editor preview (owed to me, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtBorrowedInto": {
+    "ar": "دخل المبلغ إلى {wallet}، فيزيد رصيدها {amount}",
+    "en": "Borrowed into {wallet} – its balance rises by {amount}",
+    "description": "Debt editor preview (I owe, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtNoWalletHint": {
+    "ar": "بلا محفظة: تبقى أرصدة المحافظ كما هي.",
+    "en": "No wallet: wallet balances stay as they are.",
+    "description": "Debt editor preview without a wallet"
   }
 }

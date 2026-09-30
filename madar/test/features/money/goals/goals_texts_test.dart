@@ -99,6 +99,20 @@ void main() {
       expect(en.recurrence(Recurrence.monthly, 2), 'Every 2 months');
     });
 
+    test('compact dates keep the year apart and fit a stat tile', () {
+      final today = DateTime(2026, 9, 29);
+      final en = texts('en').compactDate(DateTime(2027, 6, 1), today);
+      expect(en.dayMonth, 'Jun 1');
+      expect(en.year, '2027');
+      expect(texts('en').compactDate(DateTime(2026, 12, 15), today).year, isNull);
+      final ar = texts('ar').compactDate(DateTime(2027, 3, 16), today);
+      expect(ar.dayMonth, '١٦ مارس');
+      expect(ar.year, '٢٠٢٧');
+      final western = texts('ar', digits: DigitStyle.western).compactDate(DateTime(2027, 3, 16), today);
+      expect(western.dayMonth, '16 مارس');
+      expect(western.year, '2027');
+    });
+
     test('days left and nothing due', () {
       expect(texts('ar').daysLeft(12), 'باقٍ ١٢ يومًا');
       expect(texts('en').daysLeft(1), '1 day left');
@@ -111,6 +125,22 @@ void main() {
       expect(l.goalsDueSoonCount(2, '٢'), 'مستحقان خلال أسبوع');
       expect(l.goalsDueSoonCount(1, '١'), 'مستحق خلال أسبوع');
       expect(l.goalsOverdueCount(2, '٢'), 'متأخران');
+    });
+  });
+
+  group('trajectory chart', () {
+    test('the value axis takes two to four round steps', () {
+      expect(JarTrajectoryChart.axisScale(1200 * 1.08), (1500.0, 500.0));
+      expect(JarTrajectoryChart.axisScale(160 * 1.08), (200.0, 100.0));
+      expect(JarTrajectoryChart.axisScale(900 * 1.08), (1000.0, 500.0));
+      expect(JarTrajectoryChart.axisScale(3000 * 1.08), (4000.0, 2000.0));
+      expect(JarTrajectoryChart.axisScale(0), (1.0, 0.5));
+      for (final v in [0.4, 7.0, 55.0, 999.0, 12345.0, 2e6]) {
+        final (max, step) = JarTrajectoryChart.axisScale(v);
+        expect(max, greaterThanOrEqualTo(v));
+        final steps = (max / step).round();
+        expect(steps, inInclusiveRange(2, 4), reason: '$v → $max / $step');
+      }
     });
   });
 

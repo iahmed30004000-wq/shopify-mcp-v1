@@ -96,6 +96,22 @@ class GoalsTexts {
   String shortDate(DateTime d, DateTime today) =>
       fmt.formatDate(d, style: d.year == today.year ? MadarDateStyle.dayMonth : MadarDateStyle.medium);
 
+  /// A date for big numerals: `Jun 1` / `١ يونيو`, with the year apart
+  /// (`2027` / `٢٠٢٧`; null in [today]'s year) so it fits a stat tile.
+  ({String dayMonth, String? year}) compactDate(DateTime d, DateTime today) {
+    String format(DateFormat Function(String locale) build) {
+      DateFormat f;
+      try {
+        f = build(fmt.languageCode);
+      } catch (_) {
+        f = build('en');
+      }
+      return fmt.localizeDigits(f.format(d));
+    }
+
+    return (dayMonth: format(DateFormat.MMMd), year: d.year == today.year ? null : format(DateFormat.y));
+  }
+
   String _n(int n) => fmt.formatInt(n);
 
   /// "Today", "Tomorrow", "In 3 days", "2 days overdue", or the date when

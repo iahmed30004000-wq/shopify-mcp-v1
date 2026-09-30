@@ -55,6 +55,7 @@ class DebtDraft {
     required this.currency,
     this.dueDate,
     this.note,
+    this.walletId,
   });
 
   final DebtDirection direction;
@@ -63,6 +64,11 @@ class DebtDraft {
   final String currency;
   final DateTime? dueDate;
   final String? note;
+
+  /// The wallet the money went through when the debt was opened – lent
+  /// from it, or borrowed into it (see [GoalsService]). On an update, null
+  /// removes that wallet transaction.
+  final String? walletId;
 }
 
 /// A new or edited recurring obligation.
@@ -140,6 +146,11 @@ class ObligationPayResult {
 /// * A debt payment made from / received into a wallet is recorded the same
 ///   way (tag `debt`, id `debt-tx-<payment id>`): repaying a loan is not
 ///   spending, receiving one back is not income.
+/// * A debt opened through a wallet (money lent from it, or borrowed into
+///   it) gets the matching adjustment too (tag `debt`, id
+///   `debt-open-tx-<debt id>`: −amount when lending, +amount when
+///   borrowing), so lending 100 and being repaid 100 into the same wallet
+///   nets to zero. Editing the debt keeps it in step; deleting removes it.
 /// * "Paid" on an obligation with a wallet writes an [TxKind.expense] on that
 ///   wallet and the obligation's budget item (tag `obligation`, id
 ///   `ob-tx-<payment id>`, also stored in `obligation_payments.transaction_id`).
@@ -165,6 +176,7 @@ class GoalsService {
 
   static String jarTxId(String movementId) => 'jar-tx-$movementId';
   static String debtTxId(String paymentId) => 'debt-tx-$paymentId';
+  static String debtOpenTxId(String debtId) => 'debt-open-tx-$debtId';
   static String obligationTxId(String paymentId) => 'ob-tx-$paymentId';
 
   static final KvKey<GoalsReminderSettings> reminderSettingsKey = KvKey.json<GoalsReminderSettings>(
@@ -363,33 +375,87 @@ class GoalsService {
 
   // ================================================================ debts ==
 
-  Future<DebtRow> addDebt(DebtDraft d) => repos.debts.insert(
-    DebtsCompanion.insert(
-      direction: d.direction,
-      person: d.person.trim(),
-      amountMilli: d.amountMilli.abs(),
-      currency: d.currency.toUpperCase(),
-      dueDate: Value(d.dueDate == null ? null : CalendarDays.of(d.dueDate!)),
-      note: Value(_clean(d.note)),
-    ),
-  );
+  Future<DebtRow> addDebt(DebtDraft d) async {
+    final rates = await _rates();
+    return _db.transaction(() async {
+      final row = await repos.debts.insert(
+        DebtsCompanion.insert(
+          direction: d.direction,
+          person: d.person.trim(),
+          amountMilli: d.amountMilli.abs(),
+          currency: d.currency.toUpperCase(),
+          dueDate: Value(d.dueDate == null ? null : CalendarDays.of(d.dueDate!)),
+          note: Value(_clean(d.note)),
+        ),
+      );
+      await _syncDebtOpening(row, d.walletId, rates);
+      return row;
+    });
+  }
 
-  Future<void> updateDebt(String id, DebtDraft d) => repos.debts.update(
-    DebtsCompanion(
-      id: Value(id),
-      direction: Value(d.direction),
-      person: Value(d.person.trim()),
-      amountMilli: Value(d.amountMilli.abs()),
-      currency: Value(d.currency.toUpperCase()),
-      dueDate: Value(d.dueDate == null ? null : CalendarDays.of(d.dueDate!)),
-      note: Value(_clean(d.note)),
-    ),
-  );
+  Future<void> updateDebt(String id, DebtDraft d) async {
+    final rates = await _rates();
+    await _db.transaction(() async {
+      await repos.debts.update(
+        DebtsCompanion(
+          id: Value(id),
+          direction: Value(d.direction),
+          person: Value(d.person.trim()),
+          amountMilli: Value(d.amountMilli.abs()),
+          currency: Value(d.currency.toUpperCase()),
+          dueDate: Value(d.dueDate == null ? null : CalendarDays.of(d.dueDate!)),
+          note: Value(_clean(d.note)),
+        ),
+      );
+      final row = await repos.debts.byId(id);
+      if (row != null) await _syncDebtOpening(row, d.walletId, rates);
+    });
+  }
+
+  /// The wallet a debt's money went through when it was opened (null when
+  /// none was chosen, or its transaction was deleted in the ledger).
+  Future<String?> debtWalletOf(String debtId) async => (await repos.transactions.byId(debtOpenTxId(debtId)))?.walletId;
+
+  /// Writes, updates or removes the wallet transaction of [debt]'s opening
+  /// (see the class documentation).
+  Future<void> _syncDebtOpening(DebtRow debt, String? walletId, GoalsRates rates) async {
+    final id = debtOpenTxId(debt.id);
+    final existing = await repos.transactions.byId(id);
+    final wallet = walletId == null ? null : await repos.wallets.byId(walletId);
+    if (wallet == null) {
+      if (existing != null) await repos.transactions.delete(id);
+      return;
+    }
+    final amount = rates.convert(debt.amountMilli.abs(), debt.currency, wallet.currency);
+    final signed = debt.direction == DebtDirection.iOwe ? amount : -amount;
+    if (existing == null) {
+      await repos.transactions.insert(
+        TransactionsCompanion.insert(
+          id: Value(id),
+          walletId: wallet.id,
+          kind: TxKind.adjustment,
+          amountMilli: signed,
+          date: _today,
+          note: Value(debt.person),
+          tags: const Value([tagDebt]),
+        ),
+      );
+    } else {
+      await repos.transactions.update(
+        TransactionsCompanion(
+          id: Value(id),
+          walletId: Value(wallet.id),
+          amountMilli: Value(signed),
+          note: Value(debt.person),
+        ),
+      );
+    }
+  }
 
   Future<void> reorderDebts(List<String> ids) => repos.debts.reorder(ids);
 
-  /// Deletes a debt with its payments, their wallet transactions and
-  /// activity entries.
+  /// Deletes a debt with its payments, their wallet transactions (and the
+  /// opening one) and activity entries.
   Future<GoalsUndo?> deleteDebt(String id) async {
     late final DebtRow? debt;
     late final List<DebtPaymentRow> pays;
@@ -398,8 +464,8 @@ class GoalsService {
     await _db.transaction(() async {
       debt = await repos.debts.delete(id);
       pays = await repos.debtPayments.deleteWhere((t) => t.debtId.equals(id));
-      final txIds = [for (final p in pays) debtTxId(p.id)];
-      txs = txIds.isEmpty ? const [] : await repos.transactions.deleteWhere((t) => t.id.isIn(txIds));
+      final txIds = [debtOpenTxId(id), for (final p in pays) debtTxId(p.id)];
+      txs = await repos.transactions.deleteWhere((t) => t.id.isIn(txIds));
       activity = [
         ...await repos.activity.removeFor(refTable: repos.debts.tableName, refId: id),
         for (final p in pays) ...await repos.activity.removeFor(refTable: repos.debtPayments.tableName, refId: p.id),

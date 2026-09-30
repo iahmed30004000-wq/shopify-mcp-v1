@@ -185,13 +185,6 @@ class DebtSheet extends ConsumerWidget {
                 sfx: Sfx.sheetOpen,
                 onTap: () => actions.editDebt(d),
               ),
-              if (!s.settled)
-                GoalsSheetAction(
-                  icon: GoalsIcons.paid,
-                  label: l.goalsRecordPayment,
-                  sfx: Sfx.sheetOpen,
-                  onTap: () => run(() => actions.recordPayment(debt)),
-                ),
               GoalsSheetAction(
                 icon: Icons.delete_outline_rounded,
                 label: l.actionDelete,

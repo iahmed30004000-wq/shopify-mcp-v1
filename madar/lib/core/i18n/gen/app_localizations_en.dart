@@ -10697,7 +10697,7 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$n entries today, highest $max',
-      one: '1 entry today: $max',
+      one: '1 entry today, score $max',
     );
     return '$_temp0';
   }
@@ -10980,9 +10980,6 @@ class L10nEn extends L10n {
   String get ledgerDuplicateToday => 'Duplicate to today';
 
   @override
-  String get ledgerMoveToWallet => 'Move to wallet';
-
-  @override
   String get ledgerDeleted => 'Transaction deleted';
 
   @override
@@ -10997,9 +10994,6 @@ class L10nEn extends L10n {
   String ledgerMovedConverted(String wallet, String amount) {
     return 'Moved to $wallet as $amount';
   }
-
-  @override
-  String get ledgerMoveNotPossible => 'No exchange rate for that wallet';
 
   @override
   String get ledgerSaved => 'Transaction saved';
@@ -11422,9 +11416,6 @@ class L10nEn extends L10n {
   String get ledgerCurrencyDeleted => 'Currency deleted';
 
   @override
-  String get ledgerRateUpdated => 'Rate updated';
-
-  @override
   String get ledgerCurrencySaved => 'Currency saved';
 
   @override
@@ -11477,12 +11468,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get ledgerOpenWallet => 'Open wallet';
-
-  @override
-  String get ledgerFiltersTitle => 'Filter transactions';
-
-  @override
   String get ledgerApply => 'Apply';
 
   @override
@@ -11502,9 +11487,39 @@ class L10nEn extends L10n {
       'Rates are manual: update them when the market moves';
 
   @override
-  String ledgerFromWalletLabel(String wallet) {
-    return 'From $wallet';
+  String get ledgerNoteHintIncome => 'e.g. payout from the courier';
+
+  @override
+  String get ledgerNoteHintTransfer => 'e.g. cash deposited at the bank';
+
+  @override
+  String get ledgerNoteHintAdjust => 'e.g. after counting the cash';
+
+  @override
+  String get ledgerLinkJar => 'Savings jar';
+
+  @override
+  String get ledgerLinkDebt => 'Debt';
+
+  @override
+  String get ledgerLinkObligation => 'Obligation';
+
+  @override
+  String get ledgerOpenJar => 'Open the jar';
+
+  @override
+  String get ledgerOpenDebt => 'Open the debt';
+
+  @override
+  String get ledgerOpenObligation => 'Open the obligation';
+
+  @override
+  String ledgerLinkedHint(String source) {
+    return 'Managed from $source';
   }
+
+  @override
+  String get ledgerArchivedBadge => 'Archived';
 
   @override
   String get budgetTitle => 'Budget';
@@ -11628,7 +11643,12 @@ class L10nEn extends L10n {
 
   @override
   String budgetBadgePercent(String percent) {
-    return '$percent – more than all';
+    return '$percent – above its whole';
+  }
+
+  @override
+  String budgetBadgePercentChildren(String percent) {
+    return 'Sub-items total $percent';
   }
 
   @override
@@ -12838,6 +12858,23 @@ class L10nEn extends L10n {
   String goalsNotifyDebtOwedBody(String when, String amount) {
     return '$when – $amount is due to you';
   }
+
+  @override
+  String get goalsFieldDebtWallet => 'Through a wallet';
+
+  @override
+  String goalsDebtLentFrom(String wallet, String amount) {
+    return 'Lent from $wallet – its balance drops by $amount';
+  }
+
+  @override
+  String goalsDebtBorrowedInto(String wallet, String amount) {
+    return 'Borrowed into $wallet – its balance rises by $amount';
+  }
+
+  @override
+  String get goalsDebtNoWalletHint =>
+      'No wallet: wallet balances stay as they are.';
 
   @override
   String get workTitle => 'Work';

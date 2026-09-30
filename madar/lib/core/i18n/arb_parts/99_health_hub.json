@@ -30,8 +30,8 @@
     "description": "Pain card: nothing logged today"
   },
   "healthHubPainToday": {
-    "ar": "{count, plural, =1{تسجيل واحد اليوم: {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}",
-    "en": "{count, plural, =1{1 entry today: {max}} other{{n} entries today, highest {max}}}",
+    "ar": "{count, plural, =1{تسجيل واحد اليوم بدرجة {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}",
+    "en": "{count, plural, =1{1 entry today, score {max}} other{{n} entries today, highest {max}}}",
     "description": "Pain card: today's entries and the highest score (numbers only)",
     "placeholders": {
       "count": {

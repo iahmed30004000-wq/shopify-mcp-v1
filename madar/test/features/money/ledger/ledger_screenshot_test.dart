@@ -128,6 +128,15 @@ void main() {
     await shot(tester, 'wallet_ar_lapis', const WalletScreen(walletId: Ex.cash));
   });
 
+  testWidgets('wallet – Arabic, Lapis, entries', (tester) async {
+    await shot(
+      tester,
+      'wallet_ar_lapis_entries',
+      const WalletScreen(walletId: Ex.cash),
+      before: (t) => _scrollBy(t, 1180),
+    );
+  });
+
   testWidgets('wallet – English, Pearl, USD', (tester) async {
     await shot(
       tester,

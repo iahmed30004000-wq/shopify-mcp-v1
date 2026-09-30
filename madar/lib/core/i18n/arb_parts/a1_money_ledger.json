@@ -212,11 +212,6 @@
     "en": "Duplicate to today",
     "description": "Menu action"
   },
-  "ledgerMoveToWallet": {
-    "ar": "نقل إلى محفظة",
-    "en": "Move to wallet",
-    "description": "Menu action"
-  },
   "ledgerDeleted": {
     "ar": "حُذفت الحركة",
     "en": "Transaction deleted",
@@ -249,11 +244,6 @@
         "type": "String"
       }
     }
-  },
-  "ledgerMoveNotPossible": {
-    "ar": "لا يوجد سعر صرف لهذه المحفظة",
-    "en": "No exchange rate for that wallet",
-    "description": "Move failed for lack of a rate"
   },
   "ledgerSaved": {
     "ar": "حُفظت الحركة",
@@ -937,11 +927,6 @@
     "en": "Currency deleted",
     "description": "Undo toast"
   },
-  "ledgerRateUpdated": {
-    "ar": "حُدّث سعر الصرف",
-    "en": "Rate updated",
-    "description": "Undo toast"
-  },
   "ledgerCurrencySaved": {
     "ar": "حُفظت العملة",
     "en": "Currency saved",
@@ -1030,16 +1015,6 @@
       }
     }
   },
-  "ledgerOpenWallet": {
-    "ar": "فتح المحفظة",
-    "en": "Open wallet",
-    "description": "Screen-reader hint"
-  },
-  "ledgerFiltersTitle": {
-    "ar": "تصفية الحركات",
-    "en": "Filter transactions",
-    "description": "Filter sheet title"
-  },
   "ledgerApply": {
     "ar": "تطبيق",
     "en": "Apply",
@@ -1070,14 +1045,64 @@
     "en": "Rates are manual: update them when the market moves",
     "description": "Currencies screen footnote"
   },
-  "ledgerFromWalletLabel": {
-    "ar": "من {wallet}",
-    "en": "From {wallet}",
-    "description": "Scope label",
+  "ledgerNoteHintIncome": {
+    "ar": "مثلًا: تحصيل من شركة الشحن",
+    "en": "e.g. payout from the courier",
+    "description": "Hint of the note field when adding income"
+  },
+  "ledgerNoteHintTransfer": {
+    "ar": "مثلًا: إيداع في البنك",
+    "en": "e.g. cash deposited at the bank",
+    "description": "Hint of the note field when adding a transfer"
+  },
+  "ledgerNoteHintAdjust": {
+    "ar": "مثلًا: بعد عدّ النقود",
+    "en": "e.g. after counting the cash",
+    "description": "Hint of the note field when adding a balance adjustment"
+  },
+  "ledgerLinkJar": {
+    "ar": "حصّالة",
+    "en": "Savings jar",
+    "description": "Source of a wallet entry written by a savings jar deposit or withdrawal; also the label of its tag"
+  },
+  "ledgerLinkDebt": {
+    "ar": "دَين",
+    "en": "Debt",
+    "description": "Source of a wallet entry written by a debt payment; also the label of its tag"
+  },
+  "ledgerLinkObligation": {
+    "ar": "التزام",
+    "en": "Obligation",
+    "description": "Source of a wallet entry written when a recurring obligation is marked paid; also the label of its tag"
+  },
+  "ledgerOpenJar": {
+    "ar": "فتح الحصّالة",
+    "en": "Open the jar",
+    "description": "Menu action on a wallet entry that belongs to a savings jar"
+  },
+  "ledgerOpenDebt": {
+    "ar": "فتح الدَّين",
+    "en": "Open the debt",
+    "description": "Menu action on a wallet entry that belongs to a debt"
+  },
+  "ledgerOpenObligation": {
+    "ar": "فتح الالتزام",
+    "en": "Open the obligation",
+    "description": "Menu action on a wallet entry that belongs to a recurring obligation"
+  },
+  "ledgerLinkedHint": {
+    "ar": "تُعدَّل من {source}",
+    "en": "Managed from {source}",
+    "description": "Accessibility hint: this entry is edited from its savings jar, debt or obligation",
     "placeholders": {
-      "wallet": {
+      "source": {
         "type": "String"
       }
     }
+  },
+  "ledgerArchivedBadge": {
+    "ar": "مؤرشفة",
+    "en": "Archived",
+    "description": "Status shown on an archived wallet"
   }
 }

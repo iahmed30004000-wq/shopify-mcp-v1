@@ -8,6 +8,7 @@ import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/domain/money.dart';
 import 'package:madar/features/money/ledger/data/ledger_service.dart';
 import 'package:madar/features/money/ledger/domain/currency_math.dart';
+import 'package:madar/features/money/ledger/domain/ledger_links.dart';
 import 'package:madar/features/money/ledger/domain/ledger_models.dart';
 import 'package:madar/features/money/ledger/domain/tx_draft.dart';
 
@@ -113,7 +114,13 @@ void main() {
     final bank = await service.addWallet(name: 'Bank', currency: 'JOD');
     final usd = await service.addWallet(name: 'USD', currency: 'USD');
     final t = await service.add(
-      TxWrite(walletId: cash.id, kind: TxKind.transfer, amountMilli: 70900, date: DateTime(2026, 9, 28), toWalletId: bank.id),
+      TxWrite(
+        walletId: cash.id,
+        kind: TxKind.transfer,
+        amountMilli: 70900,
+        date: DateTime(2026, 9, 28),
+        toWalletId: bank.id,
+      ),
     );
     expect((await service.book()).balanceOf(bank.id), 70900);
     await service.move(t.id, usd.id, await service.book());
@@ -208,6 +215,7 @@ void main() {
   test('a currency in use cannot be deleted; an unused one can, with undo', () async {
     await service.addWallet(name: 'W', currency: 'EGP');
     expect(() => service.deleteCurrency('EGP'), throwsA(isA<CurrencyInUseException>()));
+    expect(() => service.deleteCurrency('JOD'), throwsStateError);
     final undo = await service.deleteCurrency('LYD');
     expect(await repos.currencies.byCode('LYD'), isNull);
     await undo();
@@ -231,6 +239,33 @@ void main() {
     expect(t.cleanNote, 'غداء');
     expect(t.tags, isEmpty);
     expect(book.balanceOf(w.id), -5000);
+  });
+
+  test('entries owned by a jar / debt / obligation are never changed by the ledger', () async {
+    final cash = await service.addWallet(name: 'Cash', currency: 'JOD');
+    final usd = await service.addWallet(name: 'USD', currency: 'USD');
+    await repos.transactions.insert(
+      TransactionsCompanion.insert(
+        id: const Value('jar-tx-m1'),
+        walletId: cash.id,
+        kind: TxKind.adjustment,
+        amountMilli: -20000,
+        date: DateTime(2026, 9, 28),
+        tags: const Value(['jar']),
+      ),
+    );
+    final linked = throwsA(isA<LedgerLinkedEntryException>().having((e) => e.link, 'link', LedgerLink.jar));
+    expect(() => service.delete('jar-tx-m1'), linked);
+    expect(() => service.update('jar-tx-m1', expense(cash.id, 1)), linked);
+    expect(() => service.duplicate('jar-tx-m1'), linked);
+    expect(await service.move('jar-tx-m1', usd.id, await service.book()), isNull);
+    final row = (await repos.transactions.getAll()).single;
+    expect((row.walletId, row.amountMilli), (cash.id, -20000));
+    // Deleting the wallet itself still takes everything booked in it.
+    final undo = await service.deleteWallet(cash.id);
+    expect(await repos.transactions.getAll(), isEmpty);
+    await undo();
+    expect(await repos.transactions.getAll(), hasLength(1));
   });
 }
 

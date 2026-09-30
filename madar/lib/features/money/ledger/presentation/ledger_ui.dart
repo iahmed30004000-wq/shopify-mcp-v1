@@ -11,6 +11,7 @@ import '../../../../core/interaction/interaction.dart';
 import '../data/ledger_providers.dart';
 import '../domain/ledger_book.dart';
 import '../domain/ledger_format.dart';
+import '../domain/ledger_links.dart';
 import '../domain/ledger_models.dart';
 import '../domain/tx_draft.dart';
 
@@ -35,6 +36,35 @@ extension LedgerLabels on L10n {
     TxDraftError.sameWallet => ledgerErrSameWallet,
     TxDraftError.noRate => ledgerErrNoRate,
     TxDraftError.noChange => ledgerErrNoChange,
+  };
+
+  /// Where a linked entry comes from ("Savings jar", "Debt", …).
+  String link(LedgerLink k) => switch (k) {
+    LedgerLink.jar => ledgerLinkJar,
+    LedgerLink.debt => ledgerLinkDebt,
+    LedgerLink.obligation => ledgerLinkObligation,
+  };
+
+  /// The menu action opening a linked entry's owner.
+  String openLink(LedgerLink k) => switch (k) {
+    LedgerLink.jar => ledgerOpenJar,
+    LedgerLink.debt => ledgerOpenDebt,
+    LedgerLink.obligation => ledgerOpenObligation,
+  };
+
+  /// A tag as shown: the goals package's system tags in the UI language,
+  /// the user's own tags as typed.
+  String tag(String tag) {
+    final link = LedgerLinks.ofTag(tag);
+    return link == null ? tag : this.link(link);
+  }
+
+  /// The note field's example for [kind].
+  String noteHint(TxKind kind) => switch (kind) {
+    TxKind.expense => ledgerNoteHint,
+    TxKind.income => ledgerNoteHintIncome,
+    TxKind.transfer => ledgerNoteHintTransfer,
+    TxKind.adjustment => ledgerNoteHintAdjust,
   };
 }
 
@@ -123,6 +153,12 @@ abstract final class LedgerStyle {
       (w.isBusiness ? Icons.storefront_rounded : Icons.account_balance_wallet_rounded);
 
   static IconData? budgetIcon(BudgetItemLook? look) => InteractionIcons.curated[look?.icon];
+
+  static IconData linkIcon(LedgerLink k) => switch (k) {
+    LedgerLink.jar => Icons.savings_rounded,
+    LedgerLink.debt => Icons.handshake_rounded,
+    LedgerLink.obligation => Icons.event_repeat_rounded,
+  };
 
   /// Tabular numerals for amounts.
   static TextStyle amount(MadarTokens t, {double size = 15, Color? color, FontWeight weight = FontWeight.w600}) =>

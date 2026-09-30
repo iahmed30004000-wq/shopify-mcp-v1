@@ -86,6 +86,14 @@ void main() {
       expect(find.byType(HealthSettingsScreen), findsOneWidget);
       expect(find.text(l.medsTitle), findsOneWidget);
       expect(find.text(l.medsReminders), findsOneWidget);
+      // The meal times read as a sentence; dinner is named as a meal
+      // («وجبة العشاء») so it never reads as the Isha prayer.
+      final meals = find.textContaining(l.medsMealDinner);
+      await _show(tester, meals);
+      final summary = tester.widget<Text>(meals.first).data!;
+      expect(summary, startsWith(l.medsMealBreakfastTitle));
+      expect(summary, contains(l.medsMealLunch));
+      expect(summary, contains(l.medsMealBedtime));
       await _show(tester, find.text(l.healthHubSettingsReportSection));
       await _show(tester, find.text(l.wbSettingsSupportNumber));
       await _show(tester, find.text(l.healthHubSettingsPrivacy));

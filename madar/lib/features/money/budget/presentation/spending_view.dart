@@ -431,32 +431,28 @@ class _HistoryCard extends StatelessWidget {
     BarChartGroupData group(int x, BudgetPeriodSummary h) {
       final isSel = h.window.start == selected;
       final spentColor = h.overspent ? t.danger : t.accent;
-      return BarChartGroupData(
-        x: x,
-        barsSpace: 3,
-        barRods: [
-          BarChartRodData(
-            toY: h.plannedMilli.toDouble(),
-            width: 9,
-            color: t.textTertiary.withValues(alpha: 0.35),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(3)),
-          ),
-          BarChartRodData(
-            toY: h.spentMilli.toDouble(),
-            width: 9,
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.lerp(spentColor, budgetShine(t), 0.2)!,
-                spentColor.withValues(alpha: isSel ? 1 : 0.7),
-              ],
-            ),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(3)),
-            borderSide: isSel ? BorderSide(color: t.gold, width: 1.2) : BorderSide.none,
-          ),
-        ],
+      final plan = BarChartRodData(
+        toY: h.plannedMilli.toDouble(),
+        width: 9,
+        color: t.textTertiary.withValues(alpha: 0.35),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(3)),
       );
+      final spent = BarChartRodData(
+        toY: h.spentMilli.toDouble(),
+        width: 9,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color.lerp(spentColor, budgetShine(t), 0.2)!,
+            spentColor.withValues(alpha: isSel ? 1 : 0.7),
+          ],
+        ),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(3)),
+        borderSide: isSel ? BorderSide(color: t.gold, width: 1.2) : BorderSide.none,
+      );
+      // Plan first in reading order: on the right in Arabic.
+      return BarChartGroupData(x: x, barsSpace: 3, barRods: rtl ? [spent, plan] : [plan, spent]);
     }
 
     return GlassCard(
@@ -510,7 +506,7 @@ class _HistoryCard extends StatelessWidget {
                     tooltipBorder: BorderSide(color: t.glassBorder),
                     fitInsideHorizontally: true,
                     fitInsideVertically: true,
-                    getTooltipItem: (g, gi, rod, ri) => ri == 1
+                    getTooltipItem: (g, gi, rod, ri) => ri == (rtl ? 0 : 1)
                         ? BarTooltipItem(
                             '${f.window(history[g.x].window)}\n',
                             labelStyle,

@@ -220,9 +220,19 @@
     }
   },
   "budgetBadgePercent": {
-    "ar": "{percent} أكثر من الكل",
-    "en": "{percent} – more than all",
-    "description": "Badge: percentages above 100 percent",
+    "ar": "{percent} أكبر من الأصل",
+    "en": "{percent} – above its whole",
+    "description": "Badge on an item whose own percentage is above 100 percent",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetBadgePercentChildren": {
+    "ar": "مجموع نِسب الفروع {percent}",
+    "en": "Sub-items total {percent}",
+    "description": "Badge on a parent whose sub-items' percentages add up to more than 100 percent",
     "placeholders": {
       "percent": {
         "type": "String"

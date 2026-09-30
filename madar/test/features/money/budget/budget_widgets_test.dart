@@ -23,7 +23,8 @@ class _Budget {
 
   Repositories get repos => Repositories(db);
 
-  Future<BudgetItemRow?> item(String id) async => await tester.runAsync<BudgetItemRow?>(() => repos.budgetItems.byId(id));
+  Future<BudgetItemRow?> item(String id) async =>
+      await tester.runAsync<BudgetItemRow?>(() => repos.budgetItems.byId(id));
   Future<int> count() async => (await tester.runAsync(() => repos.budgetItems.count()))!;
   Future<Object?> kv(String key) async => await tester.runAsync<Object?>(() => repos.keyValues.getJson(key));
 
@@ -54,7 +55,12 @@ Future<_Budget> _pump(
     if (spending) await seedSpending(repos);
   });
   await tester.pumpWidget(
-    budgetTestApp(home: home, overrides: budgetOverrides(db: db), locale: locale, reducedMotion: reducedMotion),
+    budgetTestApp(
+      home: home,
+      overrides: budgetOverrides(db: db),
+      locale: locale,
+      reducedMotion: reducedMotion,
+    ),
   );
   final b = _Budget(tester, db, fx);
   await b.settle(30);
@@ -69,8 +75,7 @@ String _fieldText(WidgetTester tester, String key) =>
     _plain(tester.widget<TextField>(find.byKey(ValueKey(key))).controller!.text);
 
 /// The tree row of [name] (not the legend entry of the same name).
-Finder _row(String name) =>
-    find.ancestor(of: find.text(name), matching: find.byType(ActionableItem)).first;
+Finder _row(String name) => find.ancestor(of: find.text(name), matching: find.byType(ActionableItem)).first;
 
 /// Taps [finder] after scrolling it into view (sheets scroll).
 Future<void> _tapVisible(_Budget b, Finder finder) async {
@@ -110,7 +115,9 @@ void main() {
       expect(_fieldText(tester, 'budget.sheet.percent'), '40');
       // The preview warns about the parent at once.
       expect(
-        find.byWidgetPredicate((w) => w is Text && _plain(w.data ?? '') == 'Sub-items of Home food are 20.000 JOD short of it'),
+        find.byWidgetPredicate(
+          (w) => w is Text && _plain(w.data ?? '') == 'Sub-items of Home food are 20.000 JOD short of it',
+        ),
         findsOneWidget,
       );
       await _tapVisible(b, find.text('Save'));
@@ -162,7 +169,10 @@ void main() {
       expect(await b.count(), 9);
       final rows = await tester.runAsync(() => b.repos.budgetItems.getAll());
       final saved = rows!.firstWhere((r) => r.name == 'Savings');
-      expect((saved.mode, saved.percent, saved.percentOf, saved.parentId), (BudgetMode.percent, 10.0, PercentBase.total, null));
+      expect(
+        (saved.mode, saved.percent, saved.percentOf, saved.parentId),
+        (BudgetMode.percent, 10.0, PercentBase.total, null),
+      );
       expect(_textPlain('388.889 JOD'), findsOneWidget);
     });
 
@@ -236,6 +246,74 @@ void main() {
       final math = await tester.runAsync(() => BudgetRepository(b.repos).math());
       expect([for (final c in math!.childrenOf('food')) c.node.id], ['spice', 'prot', 'treat', 'fv']);
       expect(b.fx.sound.played, containsAll([Sfx.pickUp, Sfx.drop]));
+    });
+
+    testWidgets('move to another parent from the menu keeps the amount; undo', (tester) async {
+      final b = await _pump(tester);
+      unawaited(tester.state<ActionableItemState>(_row('Treats')).openMenu());
+      await b.settle(12);
+      await tester.tap(find.text('Move'));
+      await b.settle(16);
+      expect(find.byType(MoveSheet), findsOneWidget);
+      await _tapVisible(b, find.descendant(of: find.byType(MoveSheet), matching: find.text('Car fuel')));
+      await b.settle();
+      final moved = await b.item('treat');
+      expect((moved!.parentId, moved.mode, moved.amountMilli), ('fuel', BudgetMode.amount, 30000));
+      expect(moved.percent, closeTo(30, 1e-9)); // 30 of Car fuel's 100
+      expect(find.text('Moved'), findsOneWidget);
+      // Home food is now 30 short, Car fuel 70 short; the total is unchanged.
+      expect(find.text('2 things need attention'), findsOneWidget);
+      expect(_textPlain('350.000\u00a0JOD'), findsOneWidget);
+      await tester.tap(find.text('Undo'));
+      await b.settle();
+      expect((await b.item('treat'))!.parentId, 'food');
+      expect(find.text('Everything adds up'), findsOneWidget);
+    });
+
+    testWidgets('add a sub-item as a percent of its parent from the menu', (tester) async {
+      final b = await _pump(tester);
+      unawaited(tester.state<ActionableItemState>(_row('Car fuel')).openMenu());
+      await b.settle(12);
+      await tester.tap(find.text('Add sub-item'));
+      await b.settle(16);
+      expect(find.byType(BudgetItemSheet), findsOneWidget);
+      await tester.enterText(find.byKey(const ValueKey('budget.sheet.name')), 'Commute');
+      await tester.enterText(find.byKey(const ValueKey('budget.sheet.percent')), '60');
+      await b.settle(6);
+      expect(_fieldText(tester, 'budget.sheet.amount'), '60');
+      await _tapVisible(b, find.text('Save'));
+      await b.settle();
+      final rows = await tester.runAsync(() => b.repos.budgetItems.getAll());
+      final saved = rows!.firstWhere((r) => r.name == 'Commute');
+      expect(
+        (saved.parentId, saved.mode, saved.percent, saved.percentOf, saved.amountMilli),
+        ('fuel', BudgetMode.percent, 60.0, PercentBase.parent, 60000),
+      );
+      expect(
+        find.byWidgetPredicate(
+          (w) => w is Text && _plain(w.data ?? '') == 'Sub-items of Car fuel are 40.000\u00a0JOD short of it',
+        ),
+        findsOneWidget,
+      );
+      expect(_textPlain('350.000\u00a0JOD'), findsOneWidget);
+    });
+
+    testWidgets('add an item beside another lands right after it', (tester) async {
+      final b = await _pump(tester);
+      unawaited(tester.state<ActionableItemState>(_row('Spices')).openMenu());
+      await b.settle(12);
+      await tester.tap(find.text('Add item beside'));
+      await b.settle(16);
+      await tester.enterText(find.byKey(const ValueKey('budget.sheet.name')), 'Herbs');
+      await tester.enterText(find.byKey(const ValueKey('budget.sheet.amount')), '5');
+      await b.settle(6);
+      expect(_fieldText(tester, 'budget.sheet.percent'), '2.5'); // 5 of Home food's 200
+      await _tapVisible(b, find.text('Save'));
+      await b.settle();
+      final math = await tester.runAsync(() => BudgetRepository(b.repos).math());
+      final names = [for (final c in math!.childrenOf('food')) c.node.name];
+      expect(names, ['Proteins', 'Spices', 'Herbs', 'Treats', 'Fruit & vegetables']);
+      expect(find.text('1 thing needs attention'), findsOneWidget);
     });
 
     testWidgets('weeks per month from the header chip', (tester) async {
@@ -349,7 +427,12 @@ void main() {
     });
 
     testWidgets('BudgetStatusCard: empty budget invites planning (Arabic)', (tester) async {
-      await _pump(tester, home: const Scaffold(body: BudgetStatusCard()), nodes: const [], locale: const Locale('ar'));
+      await _pump(
+        tester,
+        home: const Scaffold(body: BudgetStatusCard()),
+        nodes: const [],
+        locale: const Locale('ar'),
+      );
       expect(find.text('خطّط ميزانيتك بالمبلغ أو بالنسبة'), findsOneWidget);
     });
   });

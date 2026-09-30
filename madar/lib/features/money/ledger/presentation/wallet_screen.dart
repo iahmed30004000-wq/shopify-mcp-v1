@@ -16,6 +16,7 @@ import '../domain/tx_filter.dart';
 import 'charts/ledger_chart_cards.dart';
 import 'ledger_actions.dart';
 import 'ledger_ui.dart';
+import 'money_ledger_screen.dart' show showLedgerUndo;
 import 'sheets/transaction_sheet.dart';
 import 'widgets/tx_tile.dart';
 
@@ -43,7 +44,15 @@ class WalletScreen extends ConsumerWidget {
       backdropSeed: 5.1,
       animateBackdrop: animateBackdrop,
       actions: [
-        if (wallet != null)
+        if (wallet != null) ...[
+          MadarButton.icon(
+            icon: wallet.archived ? Icons.unarchive_rounded : Icons.archive_outlined,
+            semanticLabel: wallet.archived ? l.ledgerUnarchive : l.ledgerArchive,
+            variant: MadarButtonVariant.ghost,
+            sfx: wallet.archived ? Sfx.toggleOn : Sfx.toggleOff,
+            onPressed: () =>
+                showLedgerUndo(context, LedgerActions.toggleArchive(context, ref, wallet, feedback: false)),
+          ),
           MadarButton.icon(
             icon: Icons.edit_rounded,
             semanticLabel: l.ledgerWalletEdit,
@@ -51,6 +60,7 @@ class WalletScreen extends ConsumerWidget {
             sfx: Sfx.sheetOpen,
             onPressed: () => LedgerActions.editWallet(context, ref, wallet: wallet),
           ),
+        ],
       ],
       body: switch (bookAsync) {
         AsyncData() when wallet == null => Center(
@@ -199,7 +209,7 @@ class _Hero extends StatelessWidget {
                       [
                         l.walletKind(wallet.kind),
                         LedgerMoneyFormat.isolate(currency?.name(arabic: fmt.arabic) ?? wallet.currency),
-                        if (wallet.archived) l.ledgerArchive,
+                        if (wallet.archived) l.ledgerArchivedBadge,
                       ].join(' · '),
                       style: text.bodySmall?.copyWith(color: t.textTertiary),
                     ),

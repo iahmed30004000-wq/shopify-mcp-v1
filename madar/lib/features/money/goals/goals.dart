@@ -12,7 +12,8 @@ export 'data/goals_notifications.dart';
 export 'data/goals_providers.dart';
 export 'data/goals_service.dart';
 export 'domain/debt_ledger.dart';
-export 'domain/due_dates.dart';
+// CalendarDays stays internal: Family and Wird have their own.
+export 'domain/due_dates.dart' hide CalendarDays;
 export 'domain/due_reminders.dart';
 export 'domain/goals_rates.dart';
 export 'domain/goals_snapshot.dart';

@@ -8,6 +8,7 @@ import '../../../../core/domain/enums.dart';
 import '../../../../core/domain/money.dart';
 import '../domain/currency_math.dart';
 import '../domain/ledger_book.dart';
+import '../domain/ledger_links.dart';
 import '../domain/ledger_models.dart';
 import '../domain/tx_draft.dart';
 
@@ -30,6 +31,16 @@ class WalletCurrencyLockedException implements Exception {
   final String walletId;
   @override
   String toString() => 'WalletCurrencyLockedException($walletId)';
+}
+
+/// Entries written for a jar, debt or obligation ([LedgerLinks]) are only
+/// changed by their owner, never by the ledger alone.
+class LedgerLinkedEntryException implements Exception {
+  const LedgerLinkedEntryException(this.transactionId, this.link);
+  final String transactionId;
+  final LedgerLink link;
+  @override
+  String toString() => 'LedgerLinkedEntryException($transactionId, ${link.name})';
 }
 
 /// A currency still used by wallets cannot be deleted.
@@ -196,8 +207,15 @@ class LedgerService {
     }
   }
 
-  /// Rewrites entry [id]; returns the undo.
+  static void _guard(String id) {
+    final link = LedgerLinks.ofId(id);
+    if (link != null) throw LedgerLinkedEntryException(id, link);
+  }
+
+  /// Rewrites entry [id]; returns the undo. Throws
+  /// [LedgerLinkedEntryException] for a jar / debt / obligation entry.
   Future<LedgerUndo> update(String id, TxWrite write) async {
+    _guard(id);
     final before = await repos.transactions.byId(id);
     if (before == null) throw StateError('No transaction $id');
     await repos.transactions.update(_companion(write).copyWith(id: Value(id)));
@@ -205,7 +223,9 @@ class LedgerService {
   }
 
   /// Deletes entry [id] (and its activity entries); returns the undo.
+  /// Throws [LedgerLinkedEntryException] for a jar / debt / obligation entry.
   Future<LedgerUndo> delete(String id) async {
+    _guard(id);
     return db.transaction(() async {
       final row = await repos.transactions.delete(id);
       final activity = await repos.activity.removeFor(refTable: 'transactions', refId: id);
@@ -219,8 +239,10 @@ class LedgerService {
   }
 
   /// Copies entry [id] to [date] (today by default); returns the copy and
-  /// its undo.
+  /// its undo. Throws [LedgerLinkedEntryException] for a jar / debt /
+  /// obligation entry.
   Future<(LedgerTx, LedgerUndo)> duplicate(String id, {DateTime? date}) async {
+    _guard(id);
     final now = clock();
     final day = date ?? DateTime(now.year, now.month, now.day);
     final copy = await repos.transactions.duplicate(id, overrides: {'date': day});
@@ -230,8 +252,10 @@ class LedgerService {
 
   /// Moves entry [id] to [walletId]. Between currencies the amount is
   /// converted with the manual rates (rounded to the target's minor unit);
-  /// returns the undo, or null when the move is not possible.
+  /// returns the undo, or null when the move is not possible (always for a
+  /// jar / debt / obligation entry).
   Future<LedgerUndo?> move(String id, String walletId, LedgerBook book) async {
+    if (LedgerLinks.ofId(id) != null) return null;
     final before = await repos.transactions.byId(id);
     final target = book.wallet(walletId);
     if (before == null || target == null || before.walletId == walletId) return null;
@@ -251,7 +275,10 @@ class LedgerService {
     // A transfer that stored no separate received amount received the same
     // number; keep what arrived once the source changes currency.
     final keepReceived =
-        before.kind == TxKind.transfer && before.toWalletId != null && before.toAmountMilli == null && amount != before.amountMilli;
+        before.kind == TxKind.transfer &&
+        before.toWalletId != null &&
+        before.toAmountMilli == null &&
+        amount != before.amountMilli;
     await repos.transactions.update(
       TransactionsCompanion(
         id: Value(id),
@@ -428,8 +455,11 @@ class LedgerService {
   }
 
   /// Deletes an unused currency; throws [CurrencyInUseException] when
-  /// wallets use it. Returns the undo.
+  /// wallets use it and a [StateError] for the base currency. Returns the
+  /// undo.
   Future<LedgerUndo> deleteCurrency(String code) async {
+    final current = await repos.currencies.byCode(code);
+    if (current?.isBase ?? false) throw StateError('The base currency $code cannot be deleted');
     final used = await repos.wallets.count(where: (w) => w.currency.equals(code));
     if (used > 0) throw CurrencyInUseException(code, used);
     final row = await repos.currencies.delete(code);

@@ -10601,7 +10601,7 @@
   "@healthHubPainNone": {
     "description": "Pain card: nothing logged today"
   },
-  "healthHubPainToday": "{count, plural, =1{1 entry today: {max}} other{{n} entries today, highest {max}}}",
+  "healthHubPainToday": "{count, plural, =1{1 entry today, score {max}} other{{n} entries today, highest {max}}}",
   "@healthHubPainToday": {
     "description": "Pain card: today's entries and the highest score (numbers only)",
     "placeholders": {
@@ -11005,10 +11005,6 @@
   "@ledgerDuplicateToday": {
     "description": "Menu action"
   },
-  "ledgerMoveToWallet": "Move to wallet",
-  "@ledgerMoveToWallet": {
-    "description": "Menu action"
-  },
   "ledgerDeleted": "Transaction deleted",
   "@ledgerDeleted": {
     "description": "Undo toast"
@@ -11037,10 +11033,6 @@
         "type": "String"
       }
     }
-  },
-  "ledgerMoveNotPossible": "No exchange rate for that wallet",
-  "@ledgerMoveNotPossible": {
-    "description": "Move failed for lack of a rate"
   },
   "ledgerSaved": "Transaction saved",
   "@ledgerSaved": {
@@ -11607,10 +11599,6 @@
   "@ledgerCurrencyDeleted": {
     "description": "Undo toast"
   },
-  "ledgerRateUpdated": "Rate updated",
-  "@ledgerRateUpdated": {
-    "description": "Undo toast"
-  },
   "ledgerCurrencySaved": "Currency saved",
   "@ledgerCurrencySaved": {
     "description": "Undo toast"
@@ -11687,14 +11675,6 @@
       }
     }
   },
-  "ledgerOpenWallet": "Open wallet",
-  "@ledgerOpenWallet": {
-    "description": "Screen-reader hint"
-  },
-  "ledgerFiltersTitle": "Filter transactions",
-  "@ledgerFiltersTitle": {
-    "description": "Filter sheet title"
-  },
   "ledgerApply": "Apply",
   "@ledgerApply": {
     "description": "Button"
@@ -11719,14 +11699,54 @@
   "@ledgerRatesStale": {
     "description": "Currencies screen footnote"
   },
-  "ledgerFromWalletLabel": "From {wallet}",
-  "@ledgerFromWalletLabel": {
-    "description": "Scope label",
+  "ledgerNoteHintIncome": "e.g. payout from the courier",
+  "@ledgerNoteHintIncome": {
+    "description": "Hint of the note field when adding income"
+  },
+  "ledgerNoteHintTransfer": "e.g. cash deposited at the bank",
+  "@ledgerNoteHintTransfer": {
+    "description": "Hint of the note field when adding a transfer"
+  },
+  "ledgerNoteHintAdjust": "e.g. after counting the cash",
+  "@ledgerNoteHintAdjust": {
+    "description": "Hint of the note field when adding a balance adjustment"
+  },
+  "ledgerLinkJar": "Savings jar",
+  "@ledgerLinkJar": {
+    "description": "Source of a wallet entry written by a savings jar deposit or withdrawal; also the label of its tag"
+  },
+  "ledgerLinkDebt": "Debt",
+  "@ledgerLinkDebt": {
+    "description": "Source of a wallet entry written by a debt payment; also the label of its tag"
+  },
+  "ledgerLinkObligation": "Obligation",
+  "@ledgerLinkObligation": {
+    "description": "Source of a wallet entry written when a recurring obligation is marked paid; also the label of its tag"
+  },
+  "ledgerOpenJar": "Open the jar",
+  "@ledgerOpenJar": {
+    "description": "Menu action on a wallet entry that belongs to a savings jar"
+  },
+  "ledgerOpenDebt": "Open the debt",
+  "@ledgerOpenDebt": {
+    "description": "Menu action on a wallet entry that belongs to a debt"
+  },
+  "ledgerOpenObligation": "Open the obligation",
+  "@ledgerOpenObligation": {
+    "description": "Menu action on a wallet entry that belongs to a recurring obligation"
+  },
+  "ledgerLinkedHint": "Managed from {source}",
+  "@ledgerLinkedHint": {
+    "description": "Accessibility hint: this entry is edited from its savings jar, debt or obligation",
     "placeholders": {
-      "wallet": {
+      "source": {
         "type": "String"
       }
     }
+  },
+  "ledgerArchivedBadge": "Archived",
+  "@ledgerArchivedBadge": {
+    "description": "Status shown on an archived wallet"
   },
   "budgetTitle": "Budget",
   "@budgetTitle": {
@@ -11923,9 +11943,18 @@
       }
     }
   },
-  "budgetBadgePercent": "{percent} – more than all",
+  "budgetBadgePercent": "{percent} – above its whole",
   "@budgetBadgePercent": {
-    "description": "Badge: percentages above 100 percent",
+    "description": "Badge on an item whose own percentage is above 100 percent",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetBadgePercentChildren": "Sub-items total {percent}",
+  "@budgetBadgePercentChildren": {
+    "description": "Badge on a parent whose sub-items' percentages add up to more than 100 percent",
     "placeholders": {
       "percent": {
         "type": "String"
@@ -13236,6 +13265,38 @@
         "type": "String"
       }
     }
+  },
+  "goalsFieldDebtWallet": "Through a wallet",
+  "@goalsFieldDebtWallet": {
+    "description": "Debt editor: the wallet the lent / borrowed money went through"
+  },
+  "goalsDebtLentFrom": "Lent from {wallet} – its balance drops by {amount}",
+  "@goalsDebtLentFrom": {
+    "description": "Debt editor preview (owed to me, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtBorrowedInto": "Borrowed into {wallet} – its balance rises by {amount}",
+  "@goalsDebtBorrowedInto": {
+    "description": "Debt editor preview (I owe, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtNoWalletHint": "No wallet: wallet balances stay as they are.",
+  "@goalsDebtNoWalletHint": {
+    "description": "Debt editor preview without a wallet"
   },
   "workTitle": "Work",
   "@workTitle": {

@@ -209,10 +209,12 @@ Future<void> seedLedgerExample(Repositories repos, {required bool arabic, DateTi
     List<String> tags = const [],
     String? to,
     int? toAmount,
+    String? id,
   }) {
     clock = clock.add(const Duration(minutes: 7));
     return repos.transactions.insert(
       TransactionsCompanion.insert(
+        id: id == null ? const Value.absent() : Value(id),
         walletId: wallet,
         kind: kind,
         amountMilli: milli,
@@ -300,6 +302,8 @@ Future<void> seedLedgerExample(Repositories repos, {required bool arabic, DateTi
   );
   await tx(Ex.cash, TxKind.expense, 5000, d(10), item: Ex.allowance);
   await tx(Ex.libya, TxKind.expense, 150000, d(8), noteAr: 'شحن', noteEn: 'Shipping', tags: [shop]);
+  // A deposit into a savings jar, as the goals package books it.
+  await tx(Ex.cash, TxKind.adjustment, -20000, d(6), noteAr: 'سفر', noteEn: 'Travel', tags: ['jar'], id: 'jar-tx-demo');
   await tx(Ex.cash, TxKind.expense, 12750, d(5), item: Ex.treats, noteAr: 'كنافة', noteEn: 'Knafeh', tags: [family]);
   await tx(Ex.bank, TxKind.transfer, 60000, d(4), to: Ex.cash, noteAr: 'سحب نقدي', noteEn: 'Cash withdrawal');
   await tx(Ex.cash, TxKind.expense, 5000, d(3), item: Ex.allowance);

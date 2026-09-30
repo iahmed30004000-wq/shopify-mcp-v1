@@ -34,16 +34,31 @@ List<BudgetNode> mixedNodes() => [
 ];
 
 /// Warning states: Spices raised to 40 (sub-items over Home food by 20),
-/// Car fuel split into sub-items that leave 25 unallocated, a percent over
-/// 100 % and a foreign-currency item.
+/// Car fuel split into sub-items that leave 25 unallocated, a foreign-currency
+/// item and Repairs at 120 % of Emergency (a percent over 100 % that also
+/// pushes Emergency's sub-items over it).
 List<BudgetNode> warningNodes() => [
   for (final n in mixedNodes()) n.id == 'spice' ? n.copyWith(amountMilli: 40000) : n,
   const BudgetNode(id: 'fuelA', parentId: 'fuel', name: 'Commute', amountMilli: 60000, sortOrder: 20),
   const BudgetNode(id: 'fuelB', parentId: 'fuel', name: 'Trips', amountMilli: 15000, sortOrder: 21),
   const BudgetNode(id: 'subs', name: 'Subscriptions', amountMilli: 20000, currency: 'USD', sortOrder: 22),
+  const BudgetNode(
+    id: 'rep',
+    parentId: 'emerg',
+    name: 'Repairs',
+    mode: BudgetMode.percent,
+    percent: 120,
+    sortOrder: 23,
+  ),
 ];
 
-const _warningNamesAr = {...specNamesAr, 'fuelA': 'مشاوير العمل', 'fuelB': 'رحلات', 'subs': 'اشتراكات'};
+const _warningNamesAr = {
+  ...specNamesAr,
+  'fuelA': 'مشاوير العمل',
+  'fuelB': 'رحلات',
+  'subs': 'اشتراكات',
+  'rep': 'تصليحات',
+};
 
 Future<MadarDatabase> _db(
   WidgetTester tester, {
@@ -90,7 +105,10 @@ void main() {
     final db = await _db(tester);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db)),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+      ),
       '$_dir/plan_ar_lapis',
     );
   });
@@ -113,7 +131,11 @@ void main() {
     final db = await _db(tester, nodes: warningNodes(), names: _warningNamesAr);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db), theme: MadarThemeId.emerald),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+        theme: MadarThemeId.emerald,
+      ),
       '$_dir/plan_warnings_ar_emerald',
     );
   });
@@ -122,7 +144,11 @@ void main() {
     final db = await _db(tester, nodes: warningNodes(), arabic: false);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db), locale: en),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+        locale: en,
+      ),
       '$_dir/plan_warnings_en_lapis_tree',
       beforeCapture: (tester) => _scrollBy(tester, 420),
     );
@@ -132,7 +158,11 @@ void main() {
     final db = await _db(tester, nodes: warningNodes(), names: _warningNamesAr);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db), theme: MadarThemeId.pearl),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+        theme: MadarThemeId.pearl,
+      ),
       '$_dir/plan_warnings_ar_pearl_tree',
       beforeCapture: (tester) => _scrollBy(tester, 820),
     );
@@ -169,7 +199,11 @@ void main() {
     final db = await _db(tester);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db), theme: MadarThemeId.pearl),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+        theme: MadarThemeId.pearl,
+      ),
       '$_dir/item_sheet_new_ar_pearl',
       beforeCapture: (tester) async {
         await tester.tap(find.bySemanticsLabel('إضافة بند'));
@@ -228,7 +262,10 @@ void main() {
     final db = await _db(tester);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db)),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+      ),
       '$_dir/item_sheet_ar_lapis',
       beforeCapture: (tester) => _tapText(tester, 'بروتينات'),
       trailingFrames: 30,
@@ -290,7 +327,14 @@ void main() {
         child: Column(children: [BudgetStatusCard()]),
       ),
     );
-    await captureScreen(tester, budgetTestApp(home: card(), overrides: budgetOverrides(db: db)), '$_dir/card_ar_lapis');
+    await captureScreen(
+      tester,
+      budgetTestApp(
+        home: card(),
+        overrides: budgetOverrides(db: db),
+      ),
+      '$_dir/card_ar_lapis',
+    );
   });
 
   testWidgets('status card – English, Pearl', (tester) async {
@@ -317,7 +361,10 @@ void main() {
     final db = await openBudgetDatabase(tester);
     await captureScreen(
       tester,
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db)),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+      ),
       '$_dir/empty_ar_lapis',
     );
   });

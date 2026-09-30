@@ -270,6 +270,9 @@ class GoalsActions {
 
   Future<void> _debtEditor(DebtRow? debt, {DebtDirection? direction}) async {
     final rates = _rates;
+    final wallets = _walletOptions();
+    final walletId = debt == null ? null : await _service.debtWalletOf(debt.id);
+    if (!context.mounted) return;
     final values = await showEditSheet(
       context,
       title: debt == null ? l.goalsDebtNew : l.goalsDebtEdit,
@@ -309,10 +312,13 @@ class GoalsActions {
           firstDate: _firstDate(debt?.dueDate),
           lastDate: _lastDate,
         ),
+        if (wallets.length > 1)
+          FieldSpec.singleSelect('wallet', l.goalsFieldDebtWallet, options: wallets, icon: GoalsIcons.wallet),
         FieldSpec.multiline('note', l.goalsFieldNote, icon: GoalsIcons.note, maxLength: 300),
       ],
       initial: {
         'direction': (debt?.direction ?? direction ?? DebtDirection.iOwe).name,
+        'wallet': walletId != null && wallets.any((w) => w.id == walletId) ? walletId : _none,
         if (debt != null) ...{
           'person': debt.person,
           'amount': MoneyValue(amountMilli: debt.amountMilli, currency: debt.currency),
@@ -320,6 +326,9 @@ class GoalsActions {
           'note': debt.note,
         },
       },
+      preview: wallets.length > 1
+          ? (context, v) => _DebtEditorPreview(values: v, rates: rates, wallets: _snap?.wallets ?? const {})
+          : null,
     );
     if (values == null) return;
     final amount = values['amount'] as MoneyValue;
@@ -330,6 +339,8 @@ class GoalsActions {
       currency: amount.currency,
       dueDate: values['due'] as DateTime?,
       note: values['note'] as String?,
+      // Without the field (no wallets) an existing link is kept.
+      walletId: wallets.length > 1 ? _id(values['wallet']) : walletId,
     );
     if (debt == null) {
       await _service.addDebt(draft);
@@ -865,6 +876,49 @@ class _DebtPaymentPreview extends StatelessWidget {
           Text(
             l.goalsPaidOfTotal(texts.money(paid, debt.debt.currency), texts.money(s.amountMilli, debt.debt.currency)),
             style: text.labelSmall?.copyWith(color: t.textTertiary),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// What a debt being edited does to the wallet it went through.
+class _DebtEditorPreview extends StatelessWidget {
+  const _DebtEditorPreview({required this.values, required this.rates, required this.wallets});
+
+  final Map<String, Object?> values;
+  final GoalsRates rates;
+  final Map<String, WalletRow> wallets;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l = L10n.of(context);
+    final texts = GoalsTexts.of(context, rates);
+    final iOwe = values['direction'] != DebtDirection.owedToMe.name;
+    final wallet = wallets[values['wallet']];
+    final amount = values['amount'];
+    final String line;
+    if (wallet == null || amount is! MoneyValue || amount.amountMilli <= 0) {
+      line = l.goalsDebtNoWalletHint;
+    } else {
+      final moved = texts.money(rates.convert(amount.amountMilli, amount.currency, wallet.currency), wallet.currency);
+      final name = texts.user(wallet.name);
+      line = iOwe ? l.goalsDebtBorrowedInto(name, moved) : l.goalsDebtLentFrom(name, moved);
+    }
+    final color = wallet == null ? t.textTertiary : debtColor(t, iOwe ? DebtDirection.iOwe : DebtDirection.owedToMe);
+    return _PreviewFrame(
+      child: Row(
+        children: [
+          Icon(iOwe ? GoalsIcons.iOwe : GoalsIcons.owedToMe, color: color, size: 22),
+          const SizedBox(width: Space.m),
+          Expanded(
+            child: Text(
+              line,
+              style: text.bodySmall?.copyWith(color: wallet == null ? t.textSecondary : t.textPrimary),
+            ),
           ),
         ],
       ),

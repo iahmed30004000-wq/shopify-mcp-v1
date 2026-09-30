@@ -12,19 +12,24 @@ import '../../../../../core/sound/sound_api.dart';
 import '../../data/ledger_providers.dart';
 import '../../domain/ledger_book.dart';
 import '../../domain/ledger_format.dart';
+import '../../domain/ledger_links.dart';
 import '../../domain/ledger_math.dart';
 import '../../domain/ledger_models.dart';
 import '../../domain/tx_filter.dart';
 import '../ledger_ui.dart';
 
 /// What a transaction row can do (wired by the screen).
+///
+/// Entries linked to a jar, debt or obligation ([LedgerLinks]) only offer
+/// [onOpenLinked]: they are edited where they were made.
 class TxTileActions {
-  const TxTileActions({this.onEdit, this.onDuplicate, this.onMove, this.onDelete});
+  const TxTileActions({this.onEdit, this.onDuplicate, this.onMove, this.onDelete, this.onOpenLinked});
 
   final FutureOr<void> Function(LedgerTx tx)? onEdit;
   final FutureOr<UndoableAction?> Function(LedgerTx tx)? onDuplicate;
   final FutureOr<UndoableAction?> Function(LedgerTx tx)? onMove;
   final FutureOr<UndoableAction?> Function(LedgerTx tx)? onDelete;
+  final FutureOr<void> Function(LedgerTx tx, LedgerLink link)? onOpenLinked;
 }
 
 /// One ledger entry: medallion, title (note, budget item or kind), details
@@ -52,6 +57,8 @@ class TxTile extends StatelessWidget {
   /// The row's title.
   static String titleOf(LedgerTx tx, LedgerBook book, L10n l, {String? perspectiveWalletId}) {
     final note = tx.cleanNote;
+    final link = LedgerLinks.of(tx);
+    if (link != null && tx.kind == TxKind.adjustment) return note ?? l.link(link);
     switch (tx.kind) {
       case TxKind.transfer:
         final from = book.walletNameOf(tx.walletId) ?? '—';
@@ -103,7 +110,12 @@ class TxTile extends StatelessWidget {
           parts.add(l.ledgerKindTransfer);
         }
       case TxKind.adjustment:
-        if (tx.cleanNote != null) parts.add(l.ledgerAdjustmentTitle);
+        final link = LedgerLinks.of(tx);
+        if (link != null) {
+          if (tx.cleanNote != null) parts.add(l.link(link));
+        } else if (tx.cleanNote != null) {
+          parts.add(l.ledgerAdjustmentTitle);
+        }
     }
     if (showWallet && tx.kind != TxKind.transfer) {
       final w = book.walletNameOf(tx.walletId);
@@ -116,7 +128,6 @@ class TxTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = L10n.of(context);
-    final text = Theme.of(context).textTheme;
     final fmt = ledgerFormatOf(context, book);
     final wallet = book.wallet(tx.walletId);
     final walletCurrency = wallet?.currency ?? book.baseCode;
@@ -154,9 +165,18 @@ class TxTile extends StatelessWidget {
       TxKind.expense =>
         hasItem ? LedgerStyle.budgetItem(t, look, book.rootIndexOf(tx.budgetItemId).clamp(0, 99)) : t.textSecondary,
     };
-    final icon = (tx.kind == TxKind.expense || tx.kind == TxKind.income)
+    final link = LedgerLinks.of(tx);
+    final icon = link != null
+        ? LedgerStyle.linkIcon(link)
+        : (tx.kind == TxKind.expense || tx.kind == TxKind.income)
         ? (LedgerStyle.budgetIcon(look) ?? LedgerStyle.kindIcon(tx.kind))
         : LedgerStyle.kindIcon(tx.kind);
+    final tint = switch (link) {
+      LedgerLink.jar => t.gold,
+      LedgerLink.debt => t.highlight,
+      _ => medallionColor,
+    };
+    final tags = LedgerLinks.visibleTags(tx);
 
     final title = titleOf(tx, book, l, perspectiveWalletId: perspectiveWalletId);
     final detail = detailOf(tx, book, l, showWallet: showWallet, perspectiveWalletId: perspectiveWalletId);
@@ -173,7 +193,38 @@ class TxTile extends StatelessWidget {
       }
     }
 
-    final semantic = [title, amountText, if (detail.isNotEmpty) detail, ?secondary].join('، ');
+    final semantic = [
+      title,
+      amountText,
+      if (detail.isNotEmpty) detail,
+      ?secondary,
+      if (link != null) l.ledgerLinkedHint(l.link(link)),
+    ].join('، ');
+
+    if (link != null) {
+      final open = actions.onOpenLinked;
+      return ActionableItem(
+        onTap: open == null ? null : () => open(tx, link),
+        semanticLabel: BidiIsolate.strip(semantic),
+        swipeEnabled: false,
+        actions: open == null
+            ? ItemActions.none
+            : ItemActions(
+                extra: [
+                  ItemAction(
+                    icon: LedgerStyle.linkIcon(link),
+                    label: l.openLink(link),
+                    tone: ActionTone.accent,
+                    onSelected: () async {
+                      await open(tx, link);
+                      return null;
+                    },
+                  ),
+                ],
+              ),
+        child: _body(context, title, detail, tags, icon, tint, amountText, amountColor, secondary, link: link),
+      );
+    }
 
     return ActionableItem(
       onTap: actions.onEdit == null ? null : () => actions.onEdit!(tx),
@@ -206,74 +257,127 @@ class TxTile extends StatelessWidget {
             tone: ActionTone.danger,
           ),
       ],
-      child: GlassCard(
-        padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.l, Space.m),
-        child: Row(
-          children: [
-            LedgerMedallion(icon: icon, color: medallionColor, size: 40),
-            const SizedBox(width: Space.m),
-            Expanded(
+      child: _body(context, title, detail, tags, icon, tint, amountText, amountColor, secondary),
+    );
+  }
+
+  Widget _body(
+    BuildContext context,
+    String title,
+    String detail,
+    List<String> tags,
+    IconData icon,
+    Color tint,
+    String amountText,
+    Color amountColor,
+    String? secondary, {
+    LedgerLink? link,
+  }) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return GlassCard(
+      padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.l, Space.m),
+      child: Row(
+        children: [
+          _medallion(icon, tint, link),
+          const SizedBox(width: Space.m),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textDirection: BidiIsolate.directionOf(title),
+                  textAlign: TextAlign.start,
+                  style: text.titleSmall?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w600),
+                ),
+                if (detail.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 2),
+                    child: Text(
+                      detail,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: text.bodySmall?.copyWith(color: t.textSecondary),
+                    ),
+                  ),
+                if (tags.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: Space.xs),
+                    child: Wrap(
+                      spacing: Space.xs,
+                      runSpacing: Space.xxs,
+                      children: [for (final tag in tags.take(3)) TagPill(tag: tag)],
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: Space.s),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.42),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: AlignmentDirectional.centerEnd,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textDirection: BidiIsolate.directionOf(title),
-                    textAlign: TextAlign.start,
-                    style: text.titleSmall?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w600),
-                  ),
-                  if (detail.isNotEmpty)
+                  Text(amountText, maxLines: 1, style: LedgerStyle.amount(t, size: 15, color: amountColor)),
+                  if (secondary != null)
                     Padding(
                       padding: const EdgeInsetsDirectional.only(top: 2),
                       child: Text(
-                        detail,
+                        secondary,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: text.bodySmall?.copyWith(color: t.textSecondary),
-                      ),
-                    ),
-                  if (tx.tags.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(top: Space.xs),
-                      child: Wrap(
-                        spacing: Space.xs,
-                        runSpacing: Space.xxs,
-                        children: [for (final tag in tx.tags.take(3)) TagPill(tag: tag)],
+                        style: LedgerStyle.amount(t, size: 11.5, color: t.textTertiary, weight: FontWeight.w500),
                       ),
                     ),
                 ],
               ),
             ),
-            const SizedBox(width: Space.s),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.42),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: AlignmentDirectional.centerEnd,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(amountText, maxLines: 1, style: LedgerStyle.amount(t, size: 15, color: amountColor)),
-                    if (secondary != null)
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(top: 2),
-                        child: Text(
-                          secondary,
-                          maxLines: 1,
-                          style: LedgerStyle.amount(t, size: 11.5, color: t.textTertiary, weight: FontWeight.w500),
-                        ),
-                      ),
-                  ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// The medallion; a linked entry wears a small link badge.
+  Widget _medallion(IconData icon, Color color, LedgerLink? link) {
+    const size = 40.0;
+    final medallion = LedgerMedallion(icon: icon, color: color, size: size);
+    if (link == null) return medallion;
+    return Builder(
+      builder: (context) {
+        final t = context.tokens;
+        return SizedBox(
+          width: size,
+          height: size,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              medallion,
+              PositionedDirectional(
+                end: -3,
+                bottom: -3,
+                child: Container(
+                  width: 17,
+                  height: 17,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: t.space2,
+                    border: Border.all(color: color.withValues(alpha: 0.6), width: 0.8),
+                  ),
+                  child: Icon(Icons.link_rounded, size: 11, color: color),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -287,6 +391,7 @@ class TagPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    final label = L10n.of(context).tag(tag);
     return Container(
       padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.s, vertical: 1),
       decoration: BoxDecoration(
@@ -295,9 +400,9 @@ class TagPill extends StatelessWidget {
         border: Border.all(color: t.accent.withValues(alpha: 0.35), width: 0.7),
       ),
       child: Text(
-        '#$tag',
+        '#$label',
         maxLines: 1,
-        textDirection: BidiIsolate.directionOf(tag),
+        textDirection: BidiIsolate.directionOf(label),
         style: Theme.of(context).textTheme.labelSmall?.copyWith(color: t.accent, fontSize: 11),
       ),
     );

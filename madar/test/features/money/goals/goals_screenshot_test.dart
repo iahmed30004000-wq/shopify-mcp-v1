@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/design/tokens.dart';
 import 'package:madar/core/design/widgets/widgets.dart';
+import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/features/money/goals/goals.dart';
 
@@ -262,6 +263,30 @@ void main() {
           },
         ),
         theme: MadarThemeId.pearl,
+      ),
+    );
+    testWidgets(
+      'new debt lent from a wallet – English, Lapis',
+      (t) => shot(
+        t,
+        'debt_new_wallet_en_lapis',
+        OpenOnStart(
+          behind: const GoalsScreen(initialTab: GoalsTab.debts),
+          open: (context, ref) => GoalsActions(context, ref).addDebt(direction: DebtDirection.owedToMe),
+        ),
+        locale: en,
+        beforeCapture: (t) async {
+          await t.enterText(find.byType(TextField).at(0), 'Neighbour');
+          await t.enterText(find.byType(TextField).at(1), '75');
+          await t.tap(find.text('Cash · JOD'));
+          for (var i = 0; i < 12; i++) {
+            await t.pump(const Duration(milliseconds: 50));
+          }
+          FocusManager.instance.primaryFocus?.unfocus();
+          for (var i = 0; i < 12; i++) {
+            await t.pump(const Duration(milliseconds: 50));
+          }
+        },
       ),
     );
     testWidgets(

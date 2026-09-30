@@ -184,8 +184,13 @@ class _HealthSettingsScreenState extends ConsumerState<HealthSettingsScreen> {
     final wellbeing = ref.watch(wellbeingSettingsProvider).value ?? const WellbeingSettings();
     final worry = wellbeing.worry;
 
+    // A sentence: "Breakfast 8:00 AM, lunch 2:00 PM, dinner …" – the meal
+    // words after the first are the running ones, which in Arabic say
+    // «وجبة العشاء» so dinner never reads as the Isha prayer.
     final meals = [
-      for (final m in MealSlot.values) '${tx.mealTitle(m)} ${tx.clock((meds ?? const MedsSettings()).mealTime(m))}',
+      for (final m in MealSlot.values)
+        '${m == MealSlot.values.first ? tx.mealTitle(m) : tx.meal(m)} '
+            '${tx.clock((meds ?? const MedsSettings()).mealTime(m))}',
     ].join(l.recordListSeparator);
     final offsets = record.remindersEnabled && record.effectiveOffsets.isNotEmpty
         ? [for (final o in record.effectiveOffsets) texts.reminderOffset(o)].join(l.recordListSeparator)

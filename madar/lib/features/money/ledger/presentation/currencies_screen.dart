@@ -235,17 +235,38 @@ class _CurrencyRow extends ConsumerWidget {
     final line = rate == null ? l.ledgerNoRate : l.ledgerRateLine(one, sym, fmt.rate(rate), baseSym);
     final inverse = rate == null ? null : l.ledgerRateLine(one, baseSym, fmt.rate(RateMath.inverse(rate)), sym);
     final service = ref.read(ledgerServiceProvider);
+    Future<UndoableAction?> delete() async {
+      final undo = await service.deleteCurrency(currency.code);
+      return UndoableAction(label: l.ledgerCurrencyDeleted, undo: undo);
+    }
+
     return ActionableItem(
       onTap: () => showCurrencySheet(context, ref, currency: currency),
       semanticLabel: BidiIsolate.strip('${currency.code} ${currency.name(arabic: fmt.arabic)}، $line'),
+      quickActions: [
+        QuickAction(
+          icon: Icons.edit_rounded,
+          label: l.ledgerEditCurrency,
+          tone: ActionTone.accent,
+          onPressed: () async {
+            await showCurrencySheet(context, ref, currency: currency);
+            return null;
+          },
+        ),
+        if (usedBy == 0)
+          QuickAction(
+            icon: Icons.delete_outline_rounded,
+            label: l.actionDelete,
+            tone: ActionTone.danger,
+            onPressed: () {
+              Fx.fire(Sfx.delete);
+              return delete();
+            },
+          ),
+      ],
       actions: ItemActions(
         onEdit: () => showCurrencySheet(context, ref, currency: currency),
-        onDelete: usedBy > 0
-            ? null
-            : () async {
-                final undo = await service.deleteCurrency(currency.code);
-                return UndoableAction(label: l.ledgerCurrencyDeleted, undo: undo);
-              },
+        onDelete: usedBy > 0 ? null : delete,
         extra: [
           if (rate != null)
             ItemAction(

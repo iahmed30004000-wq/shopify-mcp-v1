@@ -289,6 +289,8 @@ class _JarStats extends ConsumerWidget {
     final today = ref.watch(goalsTodayProvider);
     final plan = jar.plan;
     final currency = jar.jar.currency;
+    final deadline = plan.deadline == null ? null : texts.compactDate(plan.deadline!, today);
+    final eta = plan.eta == null ? null : texts.compactDate(plan.eta!, today);
     final tiles = <Widget>[
       StatTile(
         label: plan.reached ? l.goalsSurplusLabel : l.goalsRemaining,
@@ -306,19 +308,21 @@ class _JarStats extends ConsumerWidget {
               ? null
               : l.goalsPerWeekCaption(texts.money(plan.requiredPerWeekMilli ?? 0, currency)),
         ),
-      if (plan.deadline != null)
+      if (deadline != null)
         StatTile(
           label: l.goalsFieldDeadline,
-          value: texts.shortDate(plan.deadline!, today),
+          value: deadline.dayMonth,
+          unit: deadline.year,
           icon: GoalsIcons.deadline,
           caption: plan.daysLeft == null
               ? null
               : (plan.daysLeft! >= 0 ? texts.daysLeft(plan.daysLeft!) : texts.dueRelative(plan.deadline!, today)),
         ),
-      if (plan.eta != null)
+      if (eta != null)
         StatTile(
           label: l.goalsAtYourPace,
-          value: texts.shortDate(plan.eta!, today),
+          value: eta.dayMonth,
+          unit: eta.year,
           icon: Icons.trending_up_rounded,
           caption: plan.deadline == null
               ? null
@@ -508,7 +512,7 @@ class JarTrajectoryChart extends ConsumerWidget {
     DateTime dayOf(double x) => CalendarDays.addDays(from, (rtl ? span - x : x).round());
     final units = jar.plan.targetMilli / 1000;
     final peak = series.fold<double>(0, (m, p) => math.max(m, p.$2 / 1000));
-    final maxY = _niceCeil(math.max(units, peak) * 1.08);
+    final (maxY, stepY) = axisScale(math.max(units, peak) * 1.08);
     final spots = [
       for (final p in series) FlSpot(xOf(p.$1), math.max(0, p.$2) / 1000),
       // Carry the last balance to today.
@@ -535,7 +539,7 @@ class JarTrajectoryChart extends ConsumerWidget {
       sideTitles: SideTitles(
         showTitles: true,
         reservedSize: 40,
-        interval: maxY / 2,
+        interval: stepY,
         getTitlesWidget: (value, meta) => SideTitleWidget(
           meta: meta,
           space: 6,
@@ -609,7 +613,7 @@ class JarTrajectoryChart extends ConsumerWidget {
             ),
             gridData: FlGridData(
               drawVerticalLine: false,
-              horizontalInterval: maxY / 2,
+              horizontalInterval: stepY,
               getDrawingHorizontalLine: (_) => FlLine(color: t.glassBorder.withValues(alpha: 0.4), strokeWidth: 0.8),
             ),
             borderData: FlBorderData(show: false),
@@ -684,13 +688,22 @@ class JarTrajectoryChart extends ConsumerWidget {
     }
   }
 
-  /// A round axis maximum (1, 2, 2.5, 5 × 10ⁿ).
-  static double _niceCeil(double v) {
-    if (v <= 0) return 1;
-    final exp = math.pow(10, (math.log(v) / math.ln10).floor()).toDouble();
-    for (final m in const [1.0, 2.0, 2.5, 5.0, 10.0]) {
-      if (m * exp >= v) return m * exp;
+  /// A round value axis for balances up to [v]: two to four steps of 1, 2,
+  /// 2.5 or 5 × 10ⁿ, so a 1,200 target reads 0 · 500 · 1,000 · 1,500 rather
+  /// than leaving half the chart empty. Returns (maximum, step).
+  @visibleForTesting
+  static (double, double) axisScale(double v) {
+    if (v <= 0 || !v.isFinite) return (1, 0.5);
+    final raw = v / 3;
+    final exp = math.pow(10, (math.log(raw) / math.ln10).floor()).toDouble();
+    var step = 10 * exp;
+    for (final m in const [1.0, 2.0, 2.5, 5.0]) {
+      if (m * exp >= raw) {
+        step = m * exp;
+        break;
+      }
     }
-    return 10 * exp;
+    final steps = math.max(2, (v / step - 1e-9).ceil());
+    return (steps * step, step);
   }
 }

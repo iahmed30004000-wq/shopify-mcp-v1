@@ -282,6 +282,56 @@ void main() {
       expect((await env.snapshot()).debt(debt.id)!.state.paidMilli, 1000);
       expect(await env.balance(wallet), 9000);
     });
+
+    test('a debt opened through a wallet moves its balance; repaid, it nets to zero', () async {
+      final env = await _open();
+      final cash = await env.wallet('Cash', 'JOD', opening: 500000);
+      final lent = await env.service.addDebt(
+        DebtDraft(
+          direction: DebtDirection.owedToMe,
+          person: 'A friend',
+          amountMilli: 100000,
+          currency: 'JOD',
+          walletId: cash,
+        ),
+      );
+      final opening = await env.repos.transactions.byId(GoalsService.debtOpenTxId(lent.id));
+      expect(opening!.kind, TxKind.adjustment);
+      expect(opening.amountMilli, -100000);
+      expect(opening.tags, ['debt']);
+      expect(opening.date, d(2026, 9, 29));
+      expect(await env.balance(cash), 400000);
+      expect(await env.service.debtWalletOf(lent.id), cash);
+      await env.service.addDebtPayment(lent.id, amountMilli: 100000, walletId: cash);
+      expect(await env.balance(cash), 500000, reason: 'lent 100, repaid 100');
+
+      // Borrowing in dollars into the JOD wallet converts at the manual rate.
+      final borrowed = await env.service.addDebt(
+        DebtDraft(direction: DebtDirection.iOwe, person: 'Bank', amountMilli: 100000, currency: 'USD', walletId: cash),
+      );
+      expect(await env.balance(cash), 570900);
+
+      // Editing keeps the transaction in step; clearing the wallet removes it.
+      await env.service.updateDebt(
+        borrowed.id,
+        DebtDraft(direction: DebtDirection.iOwe, person: 'Bank', amountMilli: 200000, currency: 'USD', walletId: cash),
+      );
+      expect(await env.balance(cash), 641800);
+      await env.service.updateDebt(
+        borrowed.id,
+        const DebtDraft(direction: DebtDirection.iOwe, person: 'Bank', amountMilli: 200000, currency: 'USD'),
+      );
+      expect(await env.balance(cash), 500000);
+      expect(await env.service.debtWalletOf(borrowed.id), isNull);
+
+      // Deleting the debt removes its opening transaction too; undo restores it.
+      final undo = await env.service.deleteDebt(lent.id);
+      expect(await env.balance(cash), 500000);
+      expect(await env.repos.transactions.byId(GoalsService.debtOpenTxId(lent.id)), isNull);
+      await undo!();
+      expect(await env.balance(cash), 500000);
+      expect(await env.service.debtWalletOf(lent.id), cash);
+    });
   });
 
   group('obligations', () {

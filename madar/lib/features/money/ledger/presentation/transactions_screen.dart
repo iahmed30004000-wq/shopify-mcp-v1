@@ -322,6 +322,8 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
       height: 36,
       child: ListView(
         scrollDirection: Axis.horizontal,
+        // The selected chips' glow reaches past the row.
+        clipBehavior: Clip.none,
         children: [
           if (fl.activeCount > 0)
             Padding(

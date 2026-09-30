@@ -10986,7 +10986,7 @@ class L10nAr extends L10n {
       many: '$n تسجيلًا اليوم، أعلاها $max',
       few: '$n تسجيلات اليوم، أعلاها $max',
       two: 'تسجيلان اليوم، أعلاهما $max',
-      one: 'تسجيل واحد اليوم: $max',
+      one: 'تسجيل واحد اليوم بدرجة $max',
     );
     return '$_temp0';
   }
@@ -11273,9 +11273,6 @@ class L10nAr extends L10n {
   String get ledgerDuplicateToday => 'تكرار لليوم';
 
   @override
-  String get ledgerMoveToWallet => 'نقل إلى محفظة';
-
-  @override
   String get ledgerDeleted => 'حُذفت الحركة';
 
   @override
@@ -11290,9 +11287,6 @@ class L10nAr extends L10n {
   String ledgerMovedConverted(String wallet, String amount) {
     return 'نُقلت إلى $wallet بمبلغ $amount';
   }
-
-  @override
-  String get ledgerMoveNotPossible => 'لا يوجد سعر صرف لهذه المحفظة';
 
   @override
   String get ledgerSaved => 'حُفظت الحركة';
@@ -11730,9 +11724,6 @@ class L10nAr extends L10n {
   String get ledgerCurrencyDeleted => 'حُذفت العملة';
 
   @override
-  String get ledgerRateUpdated => 'حُدّث سعر الصرف';
-
-  @override
   String get ledgerCurrencySaved => 'حُفظت العملة';
 
   @override
@@ -11788,12 +11779,6 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get ledgerOpenWallet => 'فتح المحفظة';
-
-  @override
-  String get ledgerFiltersTitle => 'تصفية الحركات';
-
-  @override
   String get ledgerApply => 'تطبيق';
 
   @override
@@ -11812,9 +11797,39 @@ class L10nAr extends L10n {
   String get ledgerRatesStale => 'الأسعار يدوية؛ حدّثها حين يتغيّر السوق';
 
   @override
-  String ledgerFromWalletLabel(String wallet) {
-    return 'من $wallet';
+  String get ledgerNoteHintIncome => 'مثلًا: تحصيل من شركة الشحن';
+
+  @override
+  String get ledgerNoteHintTransfer => 'مثلًا: إيداع في البنك';
+
+  @override
+  String get ledgerNoteHintAdjust => 'مثلًا: بعد عدّ النقود';
+
+  @override
+  String get ledgerLinkJar => 'حصّالة';
+
+  @override
+  String get ledgerLinkDebt => 'دَين';
+
+  @override
+  String get ledgerLinkObligation => 'التزام';
+
+  @override
+  String get ledgerOpenJar => 'فتح الحصّالة';
+
+  @override
+  String get ledgerOpenDebt => 'فتح الدَّين';
+
+  @override
+  String get ledgerOpenObligation => 'فتح الالتزام';
+
+  @override
+  String ledgerLinkedHint(String source) {
+    return 'تُعدَّل من $source';
   }
+
+  @override
+  String get ledgerArchivedBadge => 'مؤرشفة';
 
   @override
   String get budgetTitle => 'الميزانية';
@@ -11944,7 +11959,12 @@ class L10nAr extends L10n {
 
   @override
   String budgetBadgePercent(String percent) {
-    return '$percent أكثر من الكل';
+    return '$percent أكبر من الأصل';
+  }
+
+  @override
+  String budgetBadgePercentChildren(String percent) {
+    return 'مجموع نِسب الفروع $percent';
   }
 
   @override
@@ -13202,6 +13222,22 @@ class L10nAr extends L10n {
   String goalsNotifyDebtOwedBody(String when, String amount) {
     return '$when – يُستحق لك $amount';
   }
+
+  @override
+  String get goalsFieldDebtWallet => 'عبر محفظة';
+
+  @override
+  String goalsDebtLentFrom(String wallet, String amount) {
+    return 'خرج المبلغ من $wallet، فينقص رصيدها $amount';
+  }
+
+  @override
+  String goalsDebtBorrowedInto(String wallet, String amount) {
+    return 'دخل المبلغ إلى $wallet، فيزيد رصيدها $amount';
+  }
+
+  @override
+  String get goalsDebtNoWalletHint => 'بلا محفظة: تبقى أرصدة المحافظ كما هي.';
 
   @override
   String get workTitle => 'العمل';

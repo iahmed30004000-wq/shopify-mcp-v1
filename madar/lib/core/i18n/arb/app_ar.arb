@@ -10601,7 +10601,7 @@
   "@healthHubPainNone": {
     "description": "Pain card: nothing logged today"
   },
-  "healthHubPainToday": "{count, plural, =1{تسجيل واحد اليوم: {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}",
+  "healthHubPainToday": "{count, plural, =1{تسجيل واحد اليوم بدرجة {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}",
   "@healthHubPainToday": {
     "description": "Pain card: today's entries and the highest score (numbers only)",
     "placeholders": {
@@ -11005,10 +11005,6 @@
   "@ledgerDuplicateToday": {
     "description": "Menu action"
   },
-  "ledgerMoveToWallet": "نقل إلى محفظة",
-  "@ledgerMoveToWallet": {
-    "description": "Menu action"
-  },
   "ledgerDeleted": "حُذفت الحركة",
   "@ledgerDeleted": {
     "description": "Undo toast"
@@ -11037,10 +11033,6 @@
         "type": "String"
       }
     }
-  },
-  "ledgerMoveNotPossible": "لا يوجد سعر صرف لهذه المحفظة",
-  "@ledgerMoveNotPossible": {
-    "description": "Move failed for lack of a rate"
   },
   "ledgerSaved": "حُفظت الحركة",
   "@ledgerSaved": {
@@ -11607,10 +11599,6 @@
   "@ledgerCurrencyDeleted": {
     "description": "Undo toast"
   },
-  "ledgerRateUpdated": "حُدّث سعر الصرف",
-  "@ledgerRateUpdated": {
-    "description": "Undo toast"
-  },
   "ledgerCurrencySaved": "حُفظت العملة",
   "@ledgerCurrencySaved": {
     "description": "Undo toast"
@@ -11687,14 +11675,6 @@
       }
     }
   },
-  "ledgerOpenWallet": "فتح المحفظة",
-  "@ledgerOpenWallet": {
-    "description": "Screen-reader hint"
-  },
-  "ledgerFiltersTitle": "تصفية الحركات",
-  "@ledgerFiltersTitle": {
-    "description": "Filter sheet title"
-  },
   "ledgerApply": "تطبيق",
   "@ledgerApply": {
     "description": "Button"
@@ -11719,14 +11699,54 @@
   "@ledgerRatesStale": {
     "description": "Currencies screen footnote"
   },
-  "ledgerFromWalletLabel": "من {wallet}",
-  "@ledgerFromWalletLabel": {
-    "description": "Scope label",
+  "ledgerNoteHintIncome": "مثلًا: تحصيل من شركة الشحن",
+  "@ledgerNoteHintIncome": {
+    "description": "Hint of the note field when adding income"
+  },
+  "ledgerNoteHintTransfer": "مثلًا: إيداع في البنك",
+  "@ledgerNoteHintTransfer": {
+    "description": "Hint of the note field when adding a transfer"
+  },
+  "ledgerNoteHintAdjust": "مثلًا: بعد عدّ النقود",
+  "@ledgerNoteHintAdjust": {
+    "description": "Hint of the note field when adding a balance adjustment"
+  },
+  "ledgerLinkJar": "حصّالة",
+  "@ledgerLinkJar": {
+    "description": "Source of a wallet entry written by a savings jar deposit or withdrawal; also the label of its tag"
+  },
+  "ledgerLinkDebt": "دَين",
+  "@ledgerLinkDebt": {
+    "description": "Source of a wallet entry written by a debt payment; also the label of its tag"
+  },
+  "ledgerLinkObligation": "التزام",
+  "@ledgerLinkObligation": {
+    "description": "Source of a wallet entry written when a recurring obligation is marked paid; also the label of its tag"
+  },
+  "ledgerOpenJar": "فتح الحصّالة",
+  "@ledgerOpenJar": {
+    "description": "Menu action on a wallet entry that belongs to a savings jar"
+  },
+  "ledgerOpenDebt": "فتح الدَّين",
+  "@ledgerOpenDebt": {
+    "description": "Menu action on a wallet entry that belongs to a debt"
+  },
+  "ledgerOpenObligation": "فتح الالتزام",
+  "@ledgerOpenObligation": {
+    "description": "Menu action on a wallet entry that belongs to a recurring obligation"
+  },
+  "ledgerLinkedHint": "تُعدَّل من {source}",
+  "@ledgerLinkedHint": {
+    "description": "Accessibility hint: this entry is edited from its savings jar, debt or obligation",
     "placeholders": {
-      "wallet": {
+      "source": {
         "type": "String"
       }
     }
+  },
+  "ledgerArchivedBadge": "مؤرشفة",
+  "@ledgerArchivedBadge": {
+    "description": "Status shown on an archived wallet"
   },
   "budgetTitle": "الميزانية",
   "@budgetTitle": {
@@ -11923,9 +11943,18 @@
       }
     }
   },
-  "budgetBadgePercent": "{percent} أكثر من الكل",
+  "budgetBadgePercent": "{percent} أكبر من الأصل",
   "@budgetBadgePercent": {
-    "description": "Badge: percentages above 100 percent",
+    "description": "Badge on an item whose own percentage is above 100 percent",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetBadgePercentChildren": "مجموع نِسب الفروع {percent}",
+  "@budgetBadgePercentChildren": {
+    "description": "Badge on a parent whose sub-items' percentages add up to more than 100 percent",
     "placeholders": {
       "percent": {
         "type": "String"
@@ -13236,6 +13265,38 @@
         "type": "String"
       }
     }
+  },
+  "goalsFieldDebtWallet": "عبر محفظة",
+  "@goalsFieldDebtWallet": {
+    "description": "Debt editor: the wallet the lent / borrowed money went through"
+  },
+  "goalsDebtLentFrom": "خرج المبلغ من {wallet}، فينقص رصيدها {amount}",
+  "@goalsDebtLentFrom": {
+    "description": "Debt editor preview (owed to me, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtBorrowedInto": "دخل المبلغ إلى {wallet}، فيزيد رصيدها {amount}",
+  "@goalsDebtBorrowedInto": {
+    "description": "Debt editor preview (I owe, with a wallet)",
+    "placeholders": {
+      "wallet": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalsDebtNoWalletHint": "بلا محفظة: تبقى أرصدة المحافظ كما هي.",
+  "@goalsDebtNoWalletHint": {
+    "description": "Debt editor preview without a wallet"
   },
   "workTitle": "العمل",
   "@workTitle": {

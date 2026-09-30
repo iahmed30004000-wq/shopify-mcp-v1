@@ -19,12 +19,14 @@ import '../../data/ledger_service.dart';
 import '../../domain/amount_entry.dart';
 import '../../domain/ledger_book.dart';
 import '../../domain/ledger_format.dart';
+import '../../domain/ledger_links.dart';
 import '../../domain/ledger_math.dart';
 import '../../domain/ledger_models.dart';
 import '../../domain/tx_draft.dart';
 import '../ledger_ui.dart';
 import '../widgets/amount_keypad.dart';
 import '../widgets/ledger_segmented.dart';
+import '../widgets/wallet_chip_row.dart';
 import 'budget_item_picker.dart';
 
 /// What the sheet saved (for the caller's undo toast).
@@ -50,6 +52,11 @@ Future<LedgerTx?> showTransactionSheet(
   String? toWalletId,
   String? budgetItemId,
 }) async {
+  // Jar, debt and obligation entries are edited where they were made.
+  if (transactionId != null && LedgerLinks.ofId(transactionId) != null) {
+    Fx.fire(Sfx.error);
+    return null;
+  }
   final result = await showInteractionSheet<TransactionSheetResult>(
     context,
     builder: (_) => TransactionSheet(
@@ -398,7 +405,7 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
               textCapitalization: TextCapitalization.sentences,
               maxLines: 2,
               minLines: 1,
-              decoration: kitInputDecoration(context, hint: l.ledgerNoteHint),
+              decoration: kitInputDecoration(context, hint: l.noteHint(d.kind)),
               onChanged: (v) => _draft = _draft!.copyWith(note: v),
             ),
           ),
@@ -731,38 +738,8 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
       for (final w in book.wallets)
         if (!w.archived || w.id == d.walletId || w.id == d.toWalletId) w,
     ];
-    Widget row(String? selected, ValueChanged<String> onPick, {String? disabled}) {
-      final t = context.tokens;
-      return SizedBox(
-        height: 40,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: wallets.length,
-          separatorBuilder: (_, _) => const SizedBox(width: Space.s),
-          itemBuilder: (context, i) {
-            final w = wallets[i];
-            final index = book.wallets.indexOf(w);
-            return Opacity(
-              opacity: w.id == disabled ? 0.4 : 1,
-              child: KitChip(
-                label: w.name,
-                icon: LedgerStyle.walletIcon(w),
-                swatch: LedgerStyle.wallet(t, w, index),
-                selected: w.id == selected,
-                sfx: Sfx.tap,
-                onTap: () {
-                  if (w.id == disabled) {
-                    Fx.fire(Sfx.error);
-                    return;
-                  }
-                  onPick(w.id);
-                },
-              ),
-            );
-          },
-        ),
-      );
-    }
+    Widget row(String? selected, ValueChanged<String> onPick, {String? disabled}) =>
+        WalletChipRow(book: book, wallets: wallets, selected: selected, onPick: onPick, disabled: disabled);
 
     if (d.isTransfer) {
       return [

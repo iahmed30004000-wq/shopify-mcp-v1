@@ -42,7 +42,10 @@ abstract final class BudgetLabels {
       BudgetWarningKind.childrenUnder => l.budgetBadgeUnder(amount),
       BudgetWarningKind.childrenOver => l.budgetBadgeOver(amount),
       BudgetWarningKind.overspent => l.budgetBadgeOverspent(amount),
-      BudgetWarningKind.percentOver100 => l.budgetBadgePercent(f.percent(issue.percent)),
+      BudgetWarningKind.percentOver100 when issue.selfPercent || issue.nodeId == null => l.budgetBadgePercent(
+        f.percent(issue.percent),
+      ),
+      BudgetWarningKind.percentOver100 => l.budgetBadgePercentChildren(f.percent(issue.percent)),
       BudgetWarningKind.circularPercent => l.budgetBadgeCircular,
       BudgetWarningKind.circularParent || BudgetWarningKind.orphanParent => l.budgetBadgeMoved,
       BudgetWarningKind.missingRate => l.budgetBadgeNoRate,

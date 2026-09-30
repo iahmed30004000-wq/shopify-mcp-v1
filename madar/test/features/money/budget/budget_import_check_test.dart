@@ -106,7 +106,10 @@ void main() {
     });
 
     test('the displayed text in English', () {
-      final f = BudgetFormat(const MadarFormatter(languageCode: 'en'), currencies: const BudgetCurrencies(base: 'JOD'));
+      final f = BudgetFormat(
+        const MadarFormatter(languageCode: 'en'),
+        currencies: const BudgetCurrencies(base: 'JOD'),
+      );
       final l = L10nEn();
       String strip(String s) => BidiIsolate.strip(s);
       expect(strip(f.money(plan.totalMonthlyMilli)), '350.000 JOD');
@@ -153,7 +156,11 @@ void main() {
     final db = await openBudgetDatabase(tester);
     await tester.runAsync(() => importSpec(db));
     await tester.pumpWidget(
-      budgetTestApp(home: const BudgetScreen(), overrides: budgetOverrides(db: db), locale: const Locale('en')),
+      budgetTestApp(
+        home: const BudgetScreen(),
+        overrides: budgetOverrides(db: db),
+        locale: const Locale('en'),
+      ),
     );
     for (var i = 0; i < 30; i++) {
       await tester.pump(const Duration(milliseconds: 50));

@@ -17014,7 +17014,7 @@ abstract class L10n {
   /// Pain card: today's entries and the highest score (numbers only)
   ///
   /// In ar, this message translates to:
-  /// **'{count, plural, =1{تسجيل واحد اليوم: {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}'**
+  /// **'{count, plural, =1{تسجيل واحد اليوم بدرجة {max}} =2{تسجيلان اليوم، أعلاهما {max}} few{{n} تسجيلات اليوم، أعلاها {max}} many{{n} تسجيلًا اليوم، أعلاها {max}} other{{n} تسجيل اليوم، أعلاها {max}}}'**
   String healthHubPainToday(int count, String n, String max);
 
   /// Pain card: button opening the full pain log (body map, triggers, notes)
@@ -17461,12 +17461,6 @@ abstract class L10n {
   /// **'تكرار لليوم'**
   String get ledgerDuplicateToday;
 
-  /// Menu action
-  ///
-  /// In ar, this message translates to:
-  /// **'نقل إلى محفظة'**
-  String get ledgerMoveToWallet;
-
   /// Undo toast
   ///
   /// In ar, this message translates to:
@@ -17490,12 +17484,6 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'نُقلت إلى {wallet} بمبلغ {amount}'**
   String ledgerMovedConverted(String wallet, String amount);
-
-  /// Move failed for lack of a rate
-  ///
-  /// In ar, this message translates to:
-  /// **'لا يوجد سعر صرف لهذه المحفظة'**
-  String get ledgerMoveNotPossible;
 
   /// Toast after adding
   ///
@@ -18210,12 +18198,6 @@ abstract class L10n {
   /// Undo toast
   ///
   /// In ar, this message translates to:
-  /// **'حُدّث سعر الصرف'**
-  String get ledgerRateUpdated;
-
-  /// Undo toast
-  ///
-  /// In ar, this message translates to:
   /// **'حُفظت العملة'**
   String get ledgerCurrencySaved;
 
@@ -18285,18 +18267,6 @@ abstract class L10n {
   /// **'{name}، الرصيد {amount}'**
   String ledgerWalletSemantics(String name, String amount);
 
-  /// Screen-reader hint
-  ///
-  /// In ar, this message translates to:
-  /// **'فتح المحفظة'**
-  String get ledgerOpenWallet;
-
-  /// Filter sheet title
-  ///
-  /// In ar, this message translates to:
-  /// **'تصفية الحركات'**
-  String get ledgerFiltersTitle;
-
   /// Button
   ///
   /// In ar, this message translates to:
@@ -18333,11 +18303,71 @@ abstract class L10n {
   /// **'الأسعار يدوية؛ حدّثها حين يتغيّر السوق'**
   String get ledgerRatesStale;
 
-  /// Scope label
+  /// Hint of the note field when adding income
   ///
   /// In ar, this message translates to:
-  /// **'من {wallet}'**
-  String ledgerFromWalletLabel(String wallet);
+  /// **'مثلًا: تحصيل من شركة الشحن'**
+  String get ledgerNoteHintIncome;
+
+  /// Hint of the note field when adding a transfer
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: إيداع في البنك'**
+  String get ledgerNoteHintTransfer;
+
+  /// Hint of the note field when adding a balance adjustment
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: بعد عدّ النقود'**
+  String get ledgerNoteHintAdjust;
+
+  /// Source of a wallet entry written by a savings jar deposit or withdrawal; also the label of its tag
+  ///
+  /// In ar, this message translates to:
+  /// **'حصّالة'**
+  String get ledgerLinkJar;
+
+  /// Source of a wallet entry written by a debt payment; also the label of its tag
+  ///
+  /// In ar, this message translates to:
+  /// **'دَين'**
+  String get ledgerLinkDebt;
+
+  /// Source of a wallet entry written when a recurring obligation is marked paid; also the label of its tag
+  ///
+  /// In ar, this message translates to:
+  /// **'التزام'**
+  String get ledgerLinkObligation;
+
+  /// Menu action on a wallet entry that belongs to a savings jar
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الحصّالة'**
+  String get ledgerOpenJar;
+
+  /// Menu action on a wallet entry that belongs to a debt
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الدَّين'**
+  String get ledgerOpenDebt;
+
+  /// Menu action on a wallet entry that belongs to a recurring obligation
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الالتزام'**
+  String get ledgerOpenObligation;
+
+  /// Accessibility hint: this entry is edited from its savings jar, debt or obligation
+  ///
+  /// In ar, this message translates to:
+  /// **'تُعدَّل من {source}'**
+  String ledgerLinkedHint(String source);
+
+  /// Status shown on an archived wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤرشفة'**
+  String get ledgerArchivedBadge;
 
   /// Title of the budget screen and card
   ///
@@ -18489,11 +18519,17 @@ abstract class L10n {
   /// **'زيادة {amount}'**
   String budgetBadgeOver(String amount);
 
-  /// Badge: percentages above 100 percent
+  /// Badge on an item whose own percentage is above 100 percent
   ///
   /// In ar, this message translates to:
-  /// **'{percent} أكثر من الكل'**
+  /// **'{percent} أكبر من الأصل'**
   String budgetBadgePercent(String percent);
+
+  /// Badge on a parent whose sub-items' percentages add up to more than 100 percent
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع نِسب الفروع {percent}'**
+  String budgetBadgePercentChildren(String percent);
 
   /// Badge: circular percentages
   ///
@@ -20300,6 +20336,30 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'{when} – يُستحق لك {amount}'**
   String goalsNotifyDebtOwedBody(String when, String amount);
+
+  /// Debt editor: the wallet the lent / borrowed money went through
+  ///
+  /// In ar, this message translates to:
+  /// **'عبر محفظة'**
+  String get goalsFieldDebtWallet;
+
+  /// Debt editor preview (owed to me, with a wallet)
+  ///
+  /// In ar, this message translates to:
+  /// **'خرج المبلغ من {wallet}، فينقص رصيدها {amount}'**
+  String goalsDebtLentFrom(String wallet, String amount);
+
+  /// Debt editor preview (I owe, with a wallet)
+  ///
+  /// In ar, this message translates to:
+  /// **'دخل المبلغ إلى {wallet}، فيزيد رصيدها {amount}'**
+  String goalsDebtBorrowedInto(String wallet, String amount);
+
+  /// Debt editor preview without a wallet
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا محفظة: تبقى أرصدة المحافظ كما هي.'**
+  String get goalsDebtNoWalletHint;
 
   /// Work planet screen title
   ///

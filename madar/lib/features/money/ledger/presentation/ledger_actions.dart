@@ -12,6 +12,7 @@ import '../../../../core/sound/sound_api.dart';
 import '../data/ledger_providers.dart';
 import '../domain/ledger_book.dart';
 import '../domain/ledger_format.dart';
+import '../domain/ledger_links.dart';
 import '../domain/ledger_models.dart';
 import '../domain/tx_filter.dart';
 import 'currencies_screen.dart';
@@ -25,12 +26,17 @@ import 'widgets/tx_tile.dart';
 /// Where the ledger's screens lead. The defaults push plain routes; the app
 /// can override [ledgerRoutesProvider] to route through go_router instead.
 class LedgerRoutes {
-  const LedgerRoutes({this.ledger, this.wallet, this.transactions, this.currencies});
+  const LedgerRoutes({this.ledger, this.wallet, this.transactions, this.currencies, this.linked});
 
   final void Function(BuildContext context)? ledger;
   final void Function(BuildContext context, String walletId)? wallet;
   final void Function(BuildContext context, TxFilter filter)? transactions;
   final void Function(BuildContext context)? currencies;
+
+  /// Opens the jar, debt or obligation a linked entry belongs to
+  /// ([LedgerLinks]; [LedgerLinks.sourceId] is the movement / payment id).
+  /// Null: linked rows are shown without actions.
+  final void Function(BuildContext context, LedgerTx tx, LedgerLink link)? linked;
 }
 
 final ledgerRoutesProvider = Provider<LedgerRoutes>((ref) => const LedgerRoutes());
@@ -83,6 +89,13 @@ abstract final class LedgerActions {
       final l = L10n.of(context);
       final undo = await ref.read(ledgerServiceProvider).delete(tx.id);
       return UndoableAction(label: l.ledgerDeleted, undo: undo);
+    },
+    onOpenLinked: switch (ref.read(ledgerRoutesProvider).linked) {
+      null => null,
+      final open => (tx, link) {
+        Fx.fire(Sfx.navigate);
+        open(context, tx, link);
+      },
     },
   );
 
@@ -280,10 +293,17 @@ abstract final class LedgerActions {
     return wallet.id;
   }
 
-  static Future<UndoableAction?> toggleArchive(BuildContext context, WidgetRef ref, LedgerWallet wallet) async {
+  /// Archives / restores [wallet]; [feedback] = false when the caller's
+  /// control already played the toggle sound.
+  static Future<UndoableAction?> toggleArchive(
+    BuildContext context,
+    WidgetRef ref,
+    LedgerWallet wallet, {
+    bool feedback = true,
+  }) async {
     final l = L10n.of(context);
     final undo = await ref.read(ledgerServiceProvider).setArchived(wallet.id, !wallet.archived);
-    Fx.fire(wallet.archived ? Sfx.toggleOn : Sfx.toggleOff);
+    if (feedback) Fx.fire(wallet.archived ? Sfx.toggleOn : Sfx.toggleOff);
     return UndoableAction(label: wallet.archived ? l.ledgerUnarchivedToast : l.ledgerArchivedToast, undo: undo);
   }
 

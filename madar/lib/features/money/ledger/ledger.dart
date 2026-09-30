@@ -10,7 +10,8 @@
 /// * Pure logic: balances and totals ([LedgerMath], [LedgerTotals]),
 ///   reports ([LedgerReports]), money text ([LedgerMoneyFormat]), rates
 ///   ([RateMath], [RebasePlan]), filters ([TxFilter]), the keypad
-///   ([AmountEntry]) and the form model ([TxDraft], [TxWrite]).
+///   ([AmountEntry]) and the form model ([TxDraft], [TxWrite]); entries
+///   owned by jars, debts and obligations ([LedgerLinks]).
 library;
 
 export 'data/ledger_providers.dart';
@@ -20,6 +21,7 @@ export 'domain/chart_scale.dart';
 export 'domain/currency_math.dart';
 export 'domain/ledger_book.dart';
 export 'domain/ledger_format.dart';
+export 'domain/ledger_links.dart';
 export 'domain/ledger_math.dart';
 export 'domain/ledger_models.dart';
 export 'domain/ledger_reports.dart';

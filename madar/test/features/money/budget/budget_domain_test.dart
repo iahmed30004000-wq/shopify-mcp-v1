@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/domain/budget_math.dart';
 import 'package:madar/core/domain/enums.dart';
+import 'package:madar/core/i18n/formatters.dart';
+import 'package:madar/core/i18n/gen/app_localizations_en.dart';
 import 'package:madar/features/money/budget/budget.dart';
 
 import 'budget_fixtures.dart';
@@ -93,6 +95,19 @@ void main() {
       );
       expect(roots.globalIssues.single.kind, BudgetWarningKind.percentOver100);
       expect(roots.globalIssues.single.nodeId, isNull);
+
+      // The wording tells the three apart.
+      final l = L10nEn();
+      final f = BudgetFormat(
+        const MadarFormatter(languageCode: 'en'),
+        currencies: const BudgetCurrencies(base: 'JOD'),
+      );
+      String plain(String s) => BidiIsolate.strip(s);
+      expect(plain(BudgetLabels.badge(l, f, xi)), '150% – above its whole');
+      expect(plain(BudgetLabels.issue(l, f, self, xi)), 'X is set above its whole: 150%');
+      expect(plain(BudgetLabels.badge(l, f, gi)), 'Sub-items total 130%');
+      expect(plain(BudgetLabels.issue(l, f, group, gi)), 'Sub-items of Car fuel claim 130% of it');
+      expect(plain(BudgetLabels.issue(l, f, roots, roots.globalIssues.single)), contains('110%'));
     });
 
     test('empty budget', () {
