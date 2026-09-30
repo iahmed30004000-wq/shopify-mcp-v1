@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Meds / Top 3 with details shown, 4×2 and taller: the title with the
+     count at the other end, the next line and a row per dose / item (3 at
+     4×2, up to 6 when taller). A row holds its label twice – open and
+     done (muted) – and its time over the other end; the renderer picks the
+     label, the sides and the padding that keeps the two apart. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingTop="10dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="8dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/widget_title"
+            style="@style/widget_text_title"
+            android:textColor="@color/widget_text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_headline"
+            style="@style/widget_text_accent"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/widget_detail"
+        style="@style/widget_text_detail"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/widget_row_0"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@drawable/widget_row_bg"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
+
+            <TextView
+                android:id="@+id/widget_row_0_open"
+                style="@style/widget_text_row" />
+
+            <TextView
+                android:id="@+id/widget_row_0_done"
+                style="@style/widget_text_row_done"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/widget_row_0_time"
+                style="@style/widget_text_row_time" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/widget_row_1"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@drawable/widget_row_bg"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
+
+            <TextView
+                android:id="@+id/widget_row_1_open"
+                style="@style/widget_text_row" />
+
+            <TextView
+                android:id="@+id/widget_row_1_done"
+                style="@style/widget_text_row_done"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/widget_row_1_time"
+                style="@style/widget_text_row_time" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/widget_row_2"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@drawable/widget_row_bg"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
+
+            <TextView
+                android:id="@+id/widget_row_2_open"
+                style="@style/widget_text_row" />
+
+            <TextView
+                android:id="@+id/widget_row_2_done"
+                style="@style/widget_text_row_done"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/widget_row_2_time"
+                style="@style/widget_text_row_time" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/widget_row_3"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@drawable/widget_row_bg"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
+
+            <TextView
+                android:id="@+id/widget_row_3_open"
+                style="@style/widget_text_row" />
+
+            <TextView
+                android:id="@+id/widget_row_3_done"
+                style="@style/widget_text_row_done"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/widget_row_3_time"
+                style="@style/widget_text_row_time" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/widget_row_4"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@drawable/widget_row_bg"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
+
+            <TextView
+                android:id="@+id/widget_row_4_open"
+                style="@style/widget_text_row" />
+
+            <TextView
+                android:id="@+id/widget_row_4_done"
+                style="@style/widget_text_row_done"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/widget_row_4_time"
+                style="@style/widget_text_row_time" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/widget_row_5"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@drawable/widget_row_bg"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
+
+            <TextView
+                android:id="@+id/widget_row_5_open"
+                style="@style/widget_text_row" />
+
+            <TextView
+                android:id="@+id/widget_row_5_done"
+                style="@style/widget_text_row_done"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/widget_row_5_time"
+                style="@style/widget_text_row_time" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_more"
+        style="@style/widget_text_note"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/widget_empty"
+        style="@style/widget_text_detail"
+        android:layout_marginTop="6dp"
+        android:maxLines="3"
+        android:textColor="@color/widget_text_primary" />
+</LinearLayout>

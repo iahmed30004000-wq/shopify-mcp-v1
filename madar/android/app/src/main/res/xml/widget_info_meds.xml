@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The meds home-screen widget (MadarWidgetKind.MEDS): home screen only –
+     never the lock screen (widgetCategory), resizable, redrawn at least every
+     60 minutes from the snapshot the app wrote (its pages turn at
+     their own times through an alarm in between). -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_meds_description"
+    android:initialLayout="@layout/widget_placeholder"
+    android:minWidth="250dp"
+    android:minHeight="110dp"
+    android:minResizeWidth="110dp"
+    android:minResizeHeight="100dp"
+    android:previewImage="@drawable/widget_mark"
+    android:previewLayout="@layout/widget_preview_meds"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="4"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen" />

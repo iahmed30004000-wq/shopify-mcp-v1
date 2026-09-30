@@ -466,6 +466,17 @@ void main() {
       low.apply(const TrixMove.contract(TrixContract.king));
       low.apply(TrixMove.play(p('2H')));
       expect(low.legalMoves(1).map((m) => m.card), unorderedEquals(c('3H 4H KH')));
+
+      // A♥ need not be the lead: seat 3 leads 9♥, seat 0 follows with A♥,
+      // and seat 1 must still play K♥.
+      final later = TrixEngine(
+        TrixState.withHands(aceDeal(), options: base.copyWith(kingOnAceOfHearts: true, firstOwner: 3)),
+      );
+      later.apply(const TrixMove.contract(TrixContract.king));
+      later.apply(TrixMove.play(p('9H')));
+      later.apply(TrixMove.play(p('AH')));
+      expect(later.legalMoves(1), [TrixMove.play(p('KH'))]);
+      expect(later.validate(TrixMove.play(p('4H'))), 'mustPlayKingOnAce');
     });
   });
 

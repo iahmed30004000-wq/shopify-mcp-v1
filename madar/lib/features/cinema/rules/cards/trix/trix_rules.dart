@@ -244,10 +244,13 @@ class TrixRules extends CardRules<TrixState, TrixMove> {
       ev?.add(CardEvent(CardEventType.playerFinished, seat: seat, value: s.finished.length));
       if (s.finished.length == 3) {
         final lastSeat = [0, 1, 2, 3].firstWhere((x) => !s.finished.contains(x));
-        // The last player's cards go down too (the layout completes).
-        s.layoutCards.addAll(s.hands[lastSeat]);
+        // The last player's cards go down too (the layout completes); his
+        // event carries them so the table can move them.
+        final rest = List.of(s.hands[lastSeat]);
+        s.layoutCards.addAll(rest);
         s.hands[lastSeat].clear();
         s.finished.add(lastSeat);
+        ev?.add(CardEvent(CardEventType.playerFinished, seat: lastSeat, cards: rest, value: 4));
         return _scoreDeal(s, ev);
       }
     }

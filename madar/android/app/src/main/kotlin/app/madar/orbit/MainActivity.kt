@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager
+import app.madar.orbit.widgets.MadarWidgetsChannel
 import com.ryanheise.audioservice.AudioServiceFragmentActivity
 import com.ryanheise.audioservice.AudioServicePlugin
 import io.flutter.embedding.engine.FlutterEngine
@@ -273,6 +274,7 @@ class MainActivity : AudioServiceFragmentActivity() {
                 result.error("alarms", e.message, null)
             }
         }
+        MadarWidgetsChannel.register(flutterEngine, app)
         // The plugins are attached to this activity by now (the engine attaches
         // them before it calls configureFlutterEngine): deliver the launch the
         // way flutter_local_notifications reports a tap to a running app.

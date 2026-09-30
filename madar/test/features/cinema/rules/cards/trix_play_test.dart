@@ -360,6 +360,14 @@ int refereeMatch(TrixOptions o, int seed) {
       }
     }
     if (post.dealsPlayed == pre.dealsPlayed) {
+      if (pre.phase == TrixPhase.layout) {
+        // X-3: one card (or a pass) per turn, then the next seat still in.
+        var next = (seat + 1) % 4;
+        while (post.finished.contains(next)) {
+          next = (next + 1) % 4;
+        }
+        expect(post.currentPlayer, next);
+      }
       if (++guard > 3000) fail('the match did not end');
       continue;
     }
@@ -735,7 +743,7 @@ void main() {
     }
     for (final entry in {
       'تركس كومبلكس': const TrixOptions(mode: TrixMode.complex),
-      'كومبلكس شراكة': const TrixOptions(mode: TrixMode.complex, partnership: true),
+      'تركس شراكة': const TrixOptions(partnership: true),
     }.entries) {
       test('${entry.key}: hard beats medium', () {
         expectStronger(entry.value, 6, AiLevel.hard, AiLevel.medium, entry.key);

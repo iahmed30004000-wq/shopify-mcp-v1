@@ -512,13 +512,16 @@ class GoalsMedallion extends StatelessWidget {
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                // Dark themes: a fainter core and a lighter initial, so the
-                // letter keeps AA contrast on its own hue (2.6:1 before).
+                // Dark themes: an opaque core (the glow no longer shows
+                // through it) and a lighter initial, so the letter keeps AA
+                // contrast on its own hue (2.6:1 before).
                 gradient: RadialGradient(
-                  colors: [
-                    color.withValues(alpha: t.isDark ? 0.16 : 0.30),
-                    color.withValues(alpha: t.isDark ? 0.06 : 0.10),
-                  ],
+                  colors: t.isDark
+                      ? [
+                          Color.alphaBlend(color.withValues(alpha: 0.20), t.space1),
+                          Color.alphaBlend(color.withValues(alpha: 0.08), t.space1),
+                        ]
+                      : [color.withValues(alpha: 0.30), color.withValues(alpha: 0.10)],
                 ),
                 border: Border.all(color: color.withValues(alpha: 0.65), width: 1.2),
                 boxShadow: [BoxShadow(color: color.withValues(alpha: t.isDark ? 0.28 : 0.16), blurRadius: 10)],

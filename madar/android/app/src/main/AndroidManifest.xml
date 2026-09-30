@@ -158,6 +158,67 @@
             </intent-filter>
         </receiver>
 
+        <!-- Home-screen widgets (lib/features/widgets, kotlin/…/widgets): next
+             prayer, today's meds, Top 3, budget left. Each draws from the
+             encrypted snapshot the app wrote (nothing is written for a widget
+             that is not on a home screen), turns its pages at their own times
+             with a non-waking alarm and redraws on clock / time-zone changes.
+             Home screen only (widgetCategory) – never the lock screen. Not
+             exported: only the system's widget service and the app's own
+             alarms reach them. -->
+        <receiver
+            android:name=".widgets.PrayerWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_prayer_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_prayer" />
+        </receiver>
+        <receiver
+            android:name=".widgets.MedsWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_meds_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_meds" />
+        </receiver>
+        <receiver
+            android:name=".widgets.TasksWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_tasks_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_tasks" />
+        </receiver>
+        <receiver
+            android:name=".widgets.BudgetWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_budget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_budget" />
+        </receiver>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -112,7 +112,7 @@ class TogetherRepository {
   /// oldest beyond the bound), updates the lifetime ledger and puts newly
   /// earned trophies on the shelf – atomically. Recording an id that is
   /// already in the history changes nothing (two phones, resent results).
-  Future<RecordedMatch> recordMatch(MatchRecord record) {
+  Future<RecordedMatch> recordMatch(MatchRecord record) async {
     final r = record.bounded();
     if (!r.isValid) throw ArgumentError.value(record, 'record', 'invalid match or game id');
     return db.transaction(() async {

@@ -224,31 +224,42 @@ object MadarWidgetRenderer {
 
     // ------------------------------------------------------------ layouts ----
 
-    private fun prayer(context: Context, doc: Doc, page: JSONObject, images: Images?, variant: Variant): RemoteViews {
-        val kind = MadarWidgetKind.PRAYER
+    private fun prayer(context: Context, doc: Doc, page: JSONObject, images: Images?, variant: Variant): RemoteViews =
+        if (variant == Variant.SMALL) prayerSmall(context, doc, page, images) else prayerWide(context, doc, page, images)
+
+    /** 2×2: centred, so it reads the same in both directions. */
+    private fun prayerSmall(context: Context, doc: Doc, page: JSONObject, images: Images?): RemoteViews {
         val rtl = doc.rtl
-        if (variant == Variant.SMALL) {
-            val v = RemoteViews(context.packageName, R.layout.widget_prayer_small)
-            text(v, R.id.widget_headline, optText(page, "big"), rtl, Align.CENTER)
-            text(v, R.id.widget_detail, optText(page, "sub"), rtl, Align.CENTER)
-            countdown(v, page, rtl, Align.CENTER)
-            image(v, R.id.widget_astro_day, R.id.widget_astro_night, images)
-            v.setOnClickPendingIntent(android.R.id.background, openIntent(context, kind, 0, link(page, doc)))
-            return v
-        }
+        val v = RemoteViews(context.packageName, R.layout.widget_prayer_small)
+        text(v, R.id.widget_headline, optText(page, "big"), rtl, Align.CENTER)
+        text(v, R.id.widget_detail, optText(page, "sub"), rtl, Align.CENTER)
+        countdown(v, page, rtl, Align.CENTER)
+        image(v, R.id.widget_astro_day, R.id.widget_astro_night, images)
+        v.setOnClickPendingIntent(
+            android.R.id.background,
+            openIntent(context, MadarWidgetKind.PRAYER, 0, link(page, doc)),
+        )
+        return v
+    }
+
+    /** 4×2: the astrolabe on the reading side's start, the texts beside it. */
+    private fun prayerWide(context: Context, doc: Doc, page: JSONObject, images: Images?): RemoteViews {
+        val rtl = doc.rtl
         val v = RemoteViews(context.packageName, R.layout.widget_prayer_wide)
         text(v, R.id.widget_title, doc.title, rtl)
         text(v, R.id.widget_headline, optText(page, "big"), rtl)
         text(v, R.id.widget_detail, optText(page, "sub"), rtl)
         countdown(v, page, rtl, Align.START)
         text(v, R.id.widget_note, optText(page, "note"), rtl)
-        // The astrolabe on the reading side's start.
         val hasImage = images != null
         v.setViewVisibility(R.id.widget_slot_left, if (hasImage && !rtl) View.VISIBLE else View.GONE)
         v.setViewVisibility(R.id.widget_slot_right, if (hasImage && rtl) View.VISIBLE else View.GONE)
         image(v, R.id.widget_astro_day_left, R.id.widget_astro_night_left, images)
         image(v, R.id.widget_astro_day_right, R.id.widget_astro_night_right, images)
-        v.setOnClickPendingIntent(android.R.id.background, openIntent(context, kind, 0, link(page, doc)))
+        v.setOnClickPendingIntent(
+            android.R.id.background,
+            openIntent(context, MadarWidgetKind.PRAYER, 0, link(page, doc)),
+        )
         return v
     }
 

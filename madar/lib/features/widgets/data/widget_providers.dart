@@ -279,7 +279,7 @@ class WidgetInstalled extends Notifier<Set<MadarWidgetKind>> {
   Set<MadarWidgetKind> build() {
     final platform = ref.watch(widgetPlatformProvider);
     final events = platform.events.listen((e) {
-      if (e == WidgetPlatformEvent.changed) unawaited(refresh());
+      if (e == WidgetPlatformEvent.changed) unawaited(refresh(rewrite: true));
     });
     final foreground = ref.watch(appForegroundProvider);
     void onForeground() {
@@ -295,10 +295,19 @@ class WidgetInstalled extends Notifier<Set<MadarWidgetKind>> {
     return const {};
   }
 
-  Future<void> refresh() async {
+  /// Asks Android again. [rewrite]: a widget was added or removed while the
+  /// app may not have been watching (Android deletes a kind's data when its
+  /// last widget goes), so every installed kind is written again.
+  Future<void> refresh({bool rewrite = false}) async {
     try {
       final kinds = await ref.read(widgetPlatformProvider).installed();
-      if (ref.mounted && !setEquals(kinds, state)) state = Set.unmodifiable(kinds);
+      if (!ref.mounted) return;
+      if (rewrite) ref.read(widgetBridgeProvider).forgetAll();
+      if (!setEquals(kinds, state)) {
+        state = Set.unmodifiable(kinds);
+      } else if (rewrite) {
+        ref.invalidate(widgetSyncProvider);
+      }
     } catch (e) {
       _log('installed widgets', e);
     }

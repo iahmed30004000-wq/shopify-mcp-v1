@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A widget without data yet (or whose data ran out): Madar's mark and
+     "Open Madar". Also the widgets' initialLayout. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:gravity="center"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/widget_mark"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="@null"
+        android:src="@drawable/widget_mark" />
+
+    <TextView
+        android:id="@+id/widget_title"
+        style="@style/widget_text_accent"
+        android:gravity="center"
+        android:text="@string/widget_prayer_title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_message"
+        style="@style/widget_text_detail"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/widget_placeholder" />
+</LinearLayout>

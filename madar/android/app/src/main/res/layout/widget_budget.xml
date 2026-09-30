@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Budget left: the amount (or, counts only, the percentage) with the plan,
+     a bar of what is left and the days to go. Two headlines (normal /
+     warning colour) and four bars (left-to-right / mirrored, normal /
+     warning) – the renderer shows one of each, since colours are never set
+     from code. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:gravity="center_vertical"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/widget_title"
+        style="@style/widget_text_title" />
+
+    <TextView
+        android:id="@+id/widget_headline"
+        style="@style/widget_text_headline"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/widget_headline_warn"
+        style="@style/widget_text_headline"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/widget_warn"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/widget_detail"
+        style="@style/widget_text_detail" />
+
+    <FrameLayout
+        android:id="@+id/widget_bars"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="8dp">
+
+        <ProgressBar
+            android:id="@+id/widget_bar_ltr"
+            style="@style/widget_bar" />
+
+        <ProgressBar
+            android:id="@+id/widget_bar_rtl"
+            style="@style/widget_bar"
+            android:scaleX="-1"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/widget_bar_warn_ltr"
+            style="@style/widget_bar_warn"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/widget_bar_warn_rtl"
+            style="@style/widget_bar_warn"
+            android:scaleX="-1"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/widget_note"
+        style="@style/widget_text_note"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:id="@+id/widget_empty"
+        style="@style/widget_text_detail"
+        android:layout_marginTop="4dp"
+        android:maxLines="3"
+        android:textColor="@color/widget_text_primary" />
+</LinearLayout>

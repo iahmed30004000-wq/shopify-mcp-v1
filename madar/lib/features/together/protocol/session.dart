@@ -727,12 +727,16 @@ class TogetherSession<S, M> extends ChangeNotifier {
         if (_turn > 0 || _phase == SessionPhase.finished) _sendSnapshot();
       } else if (lostHistory || (b.turn == _turn && b.hash != _hash)) {
         _sendSnapshot();
+      } else if (b.turn > _turn) {
+        _sendSync(); // the guest is ahead: tell it what we have, it resends
       }
     } else {
       if (current == null) {
         _sendHello();
       } else if (lostHistory || (b.turn == _turn && b.hash != null && b.hash != _hash)) {
         _send(ResyncBody(turn: _turn, hash: _hash));
+      } else if (b.turn > _turn) {
+        _sendSync(); // behind: our ack makes the host resend what we lack
       }
     }
   }

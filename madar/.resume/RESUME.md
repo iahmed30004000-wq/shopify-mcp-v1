@@ -28,7 +28,7 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
 | Jordanian rules: board (dama, tawla ×3, dominoes, ludo) | cinema/rules/board/** | DONE (561 tests); open detail questions in board/RULES.md §9.2 |
 | Jordanian rules: cards + new Solitaire, Blackjack | cinema/rules/cards/** | RUNNING (wf_94413da5-0be); specs in scratchpad/jordan_rules/ |
-| CI dependency probe (webview_flutter, nearby_connections, firebase_*) | pubspec only | pushed 008ccec (Phase 4 tree + deps); if green, add the same deps to the main pubspec |
+| Deps webview_flutter 4.14.1, nearby_connections 4.3.0, firebase_core/auth/database | pubspec | CI probe 008ccec GREEN (run #13); added to main pubspec |
 | Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
 | AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | built + security-reviewed (163 tests); needs routes /ai, /ai/chats, /settings/ai, AskAi entries, AiKeyStore.deleteAll() in delete-all-data |

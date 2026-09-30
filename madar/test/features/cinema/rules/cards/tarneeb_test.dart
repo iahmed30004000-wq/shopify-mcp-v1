@@ -99,6 +99,14 @@ void main() {
       expect(() => e.apply(const TarneebMove.bid(7)), throwsA(isA<IllegalMoveException>()));
     });
 
+    test('A2.2 a bid above 13 is `bidTooHigh`; a move decoded without its amount gets an error id', () {
+      final e = TarneebEngine(TarneebState.withHands(suitsDeal()));
+      expect(e.validate(const TarneebMove.bid(14)), 'bidTooHigh');
+      expect(e.validate(const TarneebMove.bid(0)), 'bidTooLow');
+      expect(e.validate(TarneebMove.fromJson(const {'k': 'bid'})), 'bidTooLow');
+      expect(() => e.apply(const TarneebMove.bid(14)), throwsA(isA<IllegalMoveException>()));
+    });
+
     test('A2.2 overbidding one\'s own partner is legal; A2.3 a player who passed may not bid again', () {
       final e = TarneebEngine(TarneebState.withHands(suitsDeal()));
       e.apply(const TarneebMove.bid(7)); // 0
@@ -544,6 +552,27 @@ void main() {
       expect(TarneebRules.isWorthlessHand(g.state.hands[1]), isFalse);
       expect(g.legalMoves(1).contains(const TarneebMove.throwIn()), isFalse);
     });
+
+    test('claimed before the first bid (spec A-opt-3): after anyone bids, a worthless hand plays on', () {
+      const o = TarneebOptions(worthlessHandRedeal: true);
+      final hands = dealWith(c('2S 3S 4S 5S 6S 2H 3H 4H 5H 2D 3D 4D KC'));
+      // Dealer 1: seat 2 bids 12 before seat 0 first speaks. Seat 0 must not
+      // be able to cancel the deal after seeing that bid.
+      final e = TarneebEngine(TarneebState.withHands(hands, options: o, dealer: 1));
+      e.apply(const TarneebMove.bid(12)); // 2
+      e.apply(const TarneebMove.pass()); // 3
+      expect(e.currentPlayer, 0);
+      expect(e.legalMoves(0), isNot(contains(const TarneebMove.throwIn())));
+      expect(e.validate(const TarneebMove.throwIn()), 'cannotThrowIn');
+      // Passes before do not take the right away.
+      final f = TarneebEngine(TarneebState.withHands(hands, options: o, dealer: 1));
+      f.apply(const TarneebMove.pass()); // 2
+      f.apply(const TarneebMove.pass()); // 3
+      expect(f.legalMoves(0).last, const TarneebMove.throwIn());
+      f.apply(const TarneebMove.throwIn());
+      expect(f.state.dealer, 2);
+      expect(f.currentPlayer, 3);
+    });
   });
 
   group('options, presets and serialisation', () {
@@ -698,21 +727,27 @@ void main() {
       expect(ai.chooseMove(free, 1, AiLevel.medium, CardRng(1), AiBudget.phone).kind, TarneebMoveKind.bid);
     });
 
-    test('medium throws a worthless hand in, unless the partner has already bid', () {
+    test('medium throws a worthless hand in while it may; the hard AI weighs it against pass and bids', () {
       const ai = TarneebAi();
       final hands = dealWith(c('2S 3S 4S 5S 6S 2H 3H 4H 5H 2D 3D 4D KC'));
       const o = TarneebOptions(worthlessHandRedeal: true);
       final s = TarneebState.withHands(hands, options: o);
       expect(ai.chooseMove(s, 0, AiLevel.medium, CardRng(3), AiBudget.phone), const TarneebMove.throwIn());
-      // Dealer 1: seat 2 (the partner) bids 7 and seat 3 passes before seat 0
-      // first speaks.
+      // Dealer 1: seats 2 and 3 pass before seat 0 first speaks.
       final e = TarneebEngine(TarneebState.withHands(hands, options: o, dealer: 1));
-      e.apply(const TarneebMove.bid(7));
       e.apply(const TarneebMove.pass());
-      expect(e.legalMoves(0), contains(const TarneebMove.throwIn()));
-      expect(ai.chooseMove(e.state, 0, AiLevel.medium, CardRng(3), AiBudget.phone), const TarneebMove.pass());
+      e.apply(const TarneebMove.pass());
+      expect(ai.chooseMove(e.state, 0, AiLevel.medium, CardRng(3), AiBudget.phone), const TarneebMove.throwIn());
       // The hard AI compares the throw-in with passing and bidding.
-      expect(ai.hardCandidates(s, 0, e.legalMoves(0), const TarneebMove.pass()), contains(const TarneebMove.throwIn()));
+      expect(
+        ai.hardCandidates(e.state, 0, e.legalMoves(0), const TarneebMove.pass()),
+        containsAll(const [TarneebMove.pass(), TarneebMove.bid(7), TarneebMove.throwIn()]),
+      );
+      // Once the partner has bid the chance is gone and the AI simply passes.
+      final f = TarneebEngine(TarneebState.withHands(hands, options: o, dealer: 1));
+      f.apply(const TarneebMove.bid(7));
+      f.apply(const TarneebMove.pass());
+      expect(ai.chooseMove(f.state, 0, AiLevel.medium, CardRng(3), AiBudget.phone), const TarneebMove.pass());
     });
 
     test('determinised worlds keep the Syrian exposed card with the dealer until it is played', () {

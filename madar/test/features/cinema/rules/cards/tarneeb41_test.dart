@@ -97,6 +97,15 @@ void main() {
       expect(e.state.bids, [5, 2, 2, 2]);
     });
 
+    test('a move decoded without its amount or card is refused with an error id, not a crash', () {
+      final e = engine();
+      expect(e.validate(FortyOneMove.fromJson(const {'k': 'bid'})), 'bidTooLow');
+      expect(e.validate(FortyOneMove.fromJson(const {'k': 'play'})), 'wrongPhase');
+      expect(() => e.apply(FortyOneMove.fromJson(const {'k': 'bid'})), throwsA(isA<IllegalMoveException>()));
+      bidAll(e, [2, 2, 2, 5]);
+      expect(e.validate(FortyOneMove.fromJson(const {'k': 'play'})), 'cardNotInHand');
+    });
+
     test('B4.2 the total may exceed 13 (13 + 2 + 2 + 2 = 19)', () {
       final e = engine();
       bidAll(e, [13, 2, 2, 2]);

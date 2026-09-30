@@ -51,6 +51,12 @@ class WidgetBridge {
     _images.remove(kind);
   }
 
+  /// Forgets everything written (the next push of each kind writes again).
+  void forgetAll() {
+    _json.clear();
+    _images.clear();
+  }
+
   Future<void> remove(MadarWidgetKind kind) async {
     forget(kind);
     await platform.remove(kind);

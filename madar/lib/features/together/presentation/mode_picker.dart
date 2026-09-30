@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
 import '../../../core/interaction/interaction.dart';
+import '../../../core/interaction/sheets/field_inputs.dart' show FieldShell;
 import '../../../core/motion/motion.dart';
 import '../../../core/sound/sound_api.dart';
 import '../data/together_providers.dart';
