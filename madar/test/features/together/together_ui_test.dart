@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/design/widgets/widgets.dart';
 import 'package:madar/features/together/together.dart';
@@ -205,27 +204,23 @@ void main() {
     });
 
     testWidgets('new trophies are celebrated after a recorded match', (tester) async {
-      final env = await pumpTogetherApp(
+      await pumpTogetherApp(
         tester,
         locale: const Locale('en'),
         home: _Launcher<void>((c) async {
-          final recorded = await env0!.repo.recordMatch(
+          final repo = ProviderScope.containerOf(c).read(togetherRepositoryProvider);
+          final recorded = await repo.recordMatch(
             MatchRecord(id: 'x1', gameId: 'chess', endedAt: togetherNow, outcome: MatchOutcome.draw),
           );
           if (c.mounted) await celebrateNewTrophies(c, recorded);
           return null;
         }, []),
       );
-      env0 = env;
       await tester.tap(find.byKey(const ValueKey('open')));
-      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
-      await tester.pumpAndSettle();
+      await settleTogether(tester);
       expect(find.text('New in our Hall of Fame!'), findsOneWidget);
       expect(find.text('First Match'), findsOneWidget);
       expect(find.text('Neck and Neck'), findsOneWidget);
-      unawaited(Future<void>.value());
     });
   });
 }
-
-TogetherTestEnv? env0;
