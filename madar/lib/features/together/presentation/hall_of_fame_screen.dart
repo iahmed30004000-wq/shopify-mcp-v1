@@ -334,11 +334,15 @@ class _TrophySheet extends ConsumerWidget {
 
 /// After a match was recorded: celebrates the trophies it earned (stardust
 /// burst + a sheet with the new medals). Nothing happens without new ones.
-Future<void> celebrateNewTrophies(BuildContext context, RecordedMatch recorded) async {
-  if (recorded.newTrophies.isEmpty) return;
+Future<void> celebrateNewTrophies(BuildContext context, RecordedMatch recorded) =>
+    celebrateTrophies(context, recorded.newTrophies);
+
+/// Celebrates [trophies] just put on the shelf (nothing without any).
+Future<void> celebrateTrophies(BuildContext context, List<EarnedTrophy> trophies) async {
+  if (trophies.isEmpty) return;
   Fx.fire(Sfx.levelUp);
   Celebrate.burstFrom(context, kind: CelebrationKind.stardust);
-  await showInteractionSheet<void>(context, builder: (_) => _NewTrophiesSheet(trophies: recorded.newTrophies));
+  await showInteractionSheet<void>(context, builder: (_) => _NewTrophiesSheet(trophies: trophies));
 }
 
 class _NewTrophiesSheet extends ConsumerWidget {

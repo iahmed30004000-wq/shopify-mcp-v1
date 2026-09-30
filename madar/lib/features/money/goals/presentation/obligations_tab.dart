@@ -130,6 +130,8 @@ class ObligationTotalsCard extends ConsumerWidget {
               caption: fmt.localizeDigits(l.goalsActiveCount(totals.activeCount, fmt.formatInt(totals.activeCount))),
             ),
           ),
+          // The amount shrinks to fit; it never runs into the pills.
+          const SizedBox(width: Space.s),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

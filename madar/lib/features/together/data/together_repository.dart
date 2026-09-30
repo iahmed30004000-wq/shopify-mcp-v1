@@ -144,6 +144,36 @@ class TogetherRepository {
     });
   }
 
+  /// Puts trophies earned outside the match ledger (the couple specials) on
+  /// the shelf – only those not there yet – and returns the new ones.
+  Future<List<EarnedTrophy>> awardTrophies(List<TrophyKey> keys, {required DateTime at, String? matchId}) {
+    for (final k in keys) {
+      final valid = switch (k.id.scope) {
+        TrophyScope.shared => k.holder == null && k.gameId == null,
+        TrophyScope.player => k.holder != null && k.gameId == null,
+        TrophyScope.playerGame => k.holder != null && k.gameId != null && TogetherGames.isValidId(k.gameId!),
+      };
+      if (!valid) throw ArgumentError.value(k, 'keys', 'holder / game do not match the trophy');
+    }
+    final match = matchId != null && TogetherBounds.isValidId(matchId) ? matchId : null;
+    return db.transaction(() async {
+      final shelf = await trophies();
+      final fresh = <EarnedTrophy>[];
+      for (final key in keys) {
+        if (!shelf.has(key) && !fresh.any((t) => t.key == key)) {
+          fresh.add(EarnedTrophy(key: key, earnedAt: at, matchId: match));
+        }
+      }
+      if (fresh.isEmpty) return const <EarnedTrophy>[];
+      var onShelf = [...shelf.trophies, ...fresh];
+      if (onShelf.length > TogetherBounds.maxTrophies) {
+        onShelf = onShelf.sublist(onShelf.length - TogetherBounds.maxTrophies);
+      }
+      await keyValues.setJson(trophiesKey, TrophyShelf(onShelf).toJson());
+      return fresh;
+    });
+  }
+
   /// Clears the history, tallies and trophies (profiles and settings stay).
   /// Returns an undo that restores exactly what was there.
   Future<Future<void> Function()> resetRecords() => db.transaction(() async {

@@ -186,7 +186,9 @@ class JarTile extends ConsumerWidget {
                             ),
                         ],
                       ),
-                      maxLines: 1,
+                      // Wraps "of 1,200.000 JOD" at a large text size
+                      // rather than cutting the target.
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: Space.xs),

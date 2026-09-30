@@ -45,7 +45,23 @@ enum TrophyId {
   photoFinish(TrophyTier.bronze, TrophyScope.shared, 1),
   nailBiter(TrophyTier.bronze, TrophyScope.player, 1),
   perfectBalance(TrophyTier.gold, TrophyScope.shared, 20),
-  gameMaster(TrophyTier.gold, TrophyScope.playerGame, 10);
+  gameMaster(TrophyTier.gold, TrophyScope.playerGame, 10),
+
+  // Couple specials: earned outside the match ledger and put on the shelf
+  // with [TogetherRepository.awardTrophies] (the ledger rules never grant
+  // them, so their progress reads 0 until earned).
+
+  /// A perfect round of "How well do you know me?" (every guess spot on).
+  mindReader(TrophyTier.gold, TrophyScope.player, 1),
+
+  /// The weekly challenge done together four weeks in a row.
+  challengeChampions(TrophyTier.silver, TrophyScope.shared, 1),
+
+  /// A cooperative goal reached – its reward unlocked.
+  dreamCameTrue(TrophyTier.gold, TrophyScope.shared, 1);
+
+  /// Earned outside the match ledger (the couple specials).
+  bool get isSpecial => this == mindReader || this == challengeChampions || this == dreamCameTrue;
 
   const TrophyId(this.tier, this.scope, this.target);
 
@@ -197,6 +213,7 @@ abstract final class TrophyRules {
       TrophyId.nailBiter => 0,
       TrophyId.perfectBalance => all.versusMatches,
       TrophyId.gameMaster => ledger.games.values.fold(0, (m, t) => math.max(m, math.max(t.winsOne, t.winsTwo))),
+      TrophyId.mindReader || TrophyId.challengeChampions || TrophyId.dreamCameTrue => 0,
     };
     return TrophyProgress(math.min(current, id.target), id.target);
   }

@@ -1,9 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-// webview_flutter_android is resolved through webview_flutter (federated
-// plugin). The lead adds it to pubspec.yaml as a direct dependency; until
-// then the lint below is expected.
-// ignore: depend_on_referenced_packages
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 /// Android-only lock-down of a game's WebView (no-op elsewhere / in tests):

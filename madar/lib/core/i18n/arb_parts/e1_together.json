@@ -803,7 +803,7 @@
     "en": "Mini Golf"
   },
   "togetherGameKnowMe": {
-    "ar": "هل تعرفني جيدًا؟",
+    "ar": "قديش بتعرفني؟",
     "en": "How Well Do You Know Me?"
   },
   "togetherGameAirHockey": {
@@ -873,5 +873,737 @@
   "togetherTapToEdit": {
     "ar": "اضغط للتعديل",
     "en": "Tap to edit"
+  },
+  "togetherSpecialsTitle": {
+    "ar": "لنا نحن الاثنين",
+    "en": "Just the two of us",
+    "description": "Section of the couple specials on the Together home"
+  },
+  "togetherSpecialsGoalEmpty": {
+    "ar": "حدّدا هدفًا ومكافأة",
+    "en": "Set a goal and a reward"
+  },
+  "togetherSpecialsSettings": {
+    "ar": "إعدادات التحدّي",
+    "en": "Challenge settings"
+  },
+  "togetherKnowMeIntro": {
+    "ar": "كلٌّ منكما يجيب عن نفسه ويخمّن إجابات الآخر، وتبقى الإجابات مخفيّة حتى تكشفاها معًا.",
+    "en": "Each of you answers about yourself and guesses the other's answers – they stay hidden until you reveal them together."
+  },
+  "togetherKnowMeQuestionsPerRound": {
+    "ar": "عدد الأسئلة",
+    "en": "Questions per round"
+  },
+  "togetherKnowMeCategories": {
+    "ar": "الفئات",
+    "en": "Categories"
+  },
+  "togetherKnowMeAllCategories": {
+    "ar": "الكلّ",
+    "en": "All"
+  },
+  "togetherKnowMeStart": {
+    "ar": "ابدأ الجولة",
+    "en": "Start the round"
+  },
+  "togetherKnowMeEditQuestions": {
+    "ar": "تعديل الأسئلة",
+    "en": "Edit questions"
+  },
+  "togetherKnowMeQuestionsCount": {
+    "ar": "{count, plural, =0{لا أسئلة} =1{سؤال واحد} =2{سؤالان} few{{count} أسئلة} many{{count} سؤالًا} other{{count} سؤال}}",
+    "en": "{count, plural, =0{No questions} =1{1 question} other{{count} questions}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherKnowMeNoQuestions": {
+    "ar": "لا أسئلة في هذه الفئات",
+    "en": "No questions in these categories"
+  },
+  "togetherKnowMeWhoKnowsBest": {
+    "ar": "من يعرف الآخر أكثر؟",
+    "en": "Who knows the other best?"
+  },
+  "togetherKnowMeRoundsCount": {
+    "ar": "{count, plural, =0{لا جولات بعد} =1{جولة واحدة} =2{جولتان} few{{count} جولات} many{{count} جولة} other{{count} جولة}}",
+    "en": "{count, plural, =0{No rounds yet} =1{1 round} other{{count} rounds}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherKnowMeQuestionOf": {
+    "ar": "السؤال {current} من {total}",
+    "en": "Question {current} of {total}",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeYourAnswer": {
+    "ar": "إجابتك عن نفسك",
+    "en": "Your own answer"
+  },
+  "togetherKnowMeYourAnswerHint": {
+    "ar": "يمكن تركها فارغة لتخطّي السؤال",
+    "en": "Leave it empty to skip the question"
+  },
+  "togetherKnowMeYourGuess": {
+    "ar": "تخمينك لإجابة {name}",
+    "en": "Your guess of {name}'s answer",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeGuessHint": {
+    "ar": "تخمينك…",
+    "en": "Your guess…"
+  },
+  "togetherKnowMeNext": {
+    "ar": "التالي",
+    "en": "Next"
+  },
+  "togetherKnowMeBack": {
+    "ar": "السابق",
+    "en": "Back"
+  },
+  "togetherKnowMeDonePass": {
+    "ar": "انتهيت من الإجابة",
+    "en": "I'm done"
+  },
+  "togetherKnowMeDoneReveal": {
+    "ar": "انتهيت – إلى الكشف",
+    "en": "I'm done – to the reveal"
+  },
+  "togetherKnowMeHiddenNote": {
+    "ar": "لن تظهر إجاباتك قبل الكشف",
+    "en": "Your answers stay hidden until the reveal"
+  },
+  "togetherKnowMeRevealTitle": {
+    "ar": "لحظة الكشف",
+    "en": "The reveal"
+  },
+  "togetherKnowMeAnswerOf": {
+    "ar": "إجابة {name}",
+    "en": "{name}'s answer",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeGuessOf": {
+    "ar": "تخمين {name}",
+    "en": "{name}'s guess",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeRevealButton": {
+    "ar": "اكشف",
+    "en": "Reveal"
+  },
+  "togetherKnowMeHiddenAnswer": {
+    "ar": "مخفيّة حتى الكشف",
+    "en": "Hidden until the reveal"
+  },
+  "togetherKnowMeSkipped": {
+    "ar": "سؤال متروك – بلا نقاط",
+    "en": "Skipped – not scored"
+  },
+  "togetherKnowMeNoGuess": {
+    "ar": "بلا تخمين",
+    "en": "No guess"
+  },
+  "togetherKnowMeJudgePrompt": {
+    "ar": "يا {name}، ما مدى قرب التخمين؟",
+    "en": "{name}, how close was the guess?",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeExact": {
+    "ar": "في الصميم",
+    "en": "Spot on"
+  },
+  "togetherKnowMeClose": {
+    "ar": "قريب",
+    "en": "Close"
+  },
+  "togetherKnowMeMiss": {
+    "ar": "بعيد",
+    "en": "Not quite"
+  },
+  "togetherKnowMeSuggested": {
+    "ar": "اقتراح",
+    "en": "Suggested"
+  },
+  "togetherKnowMeNextQuestion": {
+    "ar": "السؤال التالي",
+    "en": "Next question"
+  },
+  "togetherKnowMeSeeResults": {
+    "ar": "النتيجة",
+    "en": "See the results"
+  },
+  "togetherKnowMeJudgeFirst": {
+    "ar": "قيّما التخمينات أولًا",
+    "en": "Judge the guesses first"
+  },
+  "togetherKnowMeResultsTitle": {
+    "ar": "النتيجة",
+    "en": "Results"
+  },
+  "togetherKnowMeDrawText": {
+    "ar": "تعادل! كلاكما يعرف الآخر بالقدر نفسه",
+    "en": "A draw – you know each other equally well!"
+  },
+  "togetherKnowMeScoreOf": {
+    "ar": "{score} من {max}",
+    "en": "{score} of {max}",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeAccuracy": {
+    "ar": "دقّة التخمين {percent}",
+    "en": "Guessing accuracy {percent}",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMePlayAgain": {
+    "ar": "جولة أخرى",
+    "en": "Another round"
+  },
+  "togetherKnowMeFinish": {
+    "ar": "إنهاء",
+    "en": "Done"
+  },
+  "togetherKnowMeNotRecorded": {
+    "ar": "لم تُسجَّل الجولة: لم يُجَب عن أيّ سؤال",
+    "en": "Not recorded – no question was answered"
+  },
+  "togetherKnowMeLeaveTitle": {
+    "ar": "مغادرة الجولة؟",
+    "en": "Leave the round?"
+  },
+  "togetherKnowMeLeaveBody": {
+    "ar": "ستضيع الإجابات المكتوبة في هذه الجولة.",
+    "en": "The answers typed in this round will be lost."
+  },
+  "togetherKnowMeLeave": {
+    "ar": "مغادرة",
+    "en": "Leave"
+  },
+  "togetherKnowMeStay": {
+    "ar": "متابعة اللعب",
+    "en": "Keep playing"
+  },
+  "togetherKnowMeBankTitle": {
+    "ar": "بنك الأسئلة",
+    "en": "Question bank"
+  },
+  "togetherKnowMeAddQuestion": {
+    "ar": "سؤال جديد",
+    "en": "New question"
+  },
+  "togetherKnowMeEditQuestion": {
+    "ar": "تعديل السؤال",
+    "en": "Edit question"
+  },
+  "togetherKnowMeQuestionField": {
+    "ar": "السؤال",
+    "en": "Question"
+  },
+  "togetherKnowMeQuestionHint": {
+    "ar": "بصيغة المتكلّم: ما ... المفضّل عندي؟",
+    "en": "In the first person: “What's my favourite …?”"
+  },
+  "togetherKnowMeCategoryField": {
+    "ar": "الفئة",
+    "en": "Category"
+  },
+  "togetherKnowMeAddCategory": {
+    "ar": "فئة جديدة",
+    "en": "New category"
+  },
+  "togetherKnowMeEditCategory": {
+    "ar": "تعديل الفئة",
+    "en": "Edit category"
+  },
+  "togetherKnowMeCategoryName": {
+    "ar": "اسم الفئة",
+    "en": "Category name"
+  },
+  "togetherKnowMeCategoryIcon": {
+    "ar": "الأيقونة",
+    "en": "Icon"
+  },
+  "togetherKnowMeDeleteCategory": {
+    "ar": "حذف الفئة",
+    "en": "Delete category"
+  },
+  "togetherKnowMeCategoryDeleted": {
+    "ar": "حُذفت الفئة ونُقلت أسئلتها إلى «{name}»",
+    "en": "Category deleted – its questions moved to “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeQuestionDeleted": {
+    "ar": "حُذف السؤال",
+    "en": "Question deleted"
+  },
+  "togetherKnowMeMoveTo": {
+    "ar": "نقل إلى فئة",
+    "en": "Move to category"
+  },
+  "togetherKnowMeResetWording": {
+    "ar": "الصياغة الأصلية",
+    "en": "Original wording"
+  },
+  "togetherKnowMeRestoreDefaults": {
+    "ar": "استعادة الأسئلة الأصلية",
+    "en": "Restore default questions"
+  },
+  "togetherKnowMeRestored": {
+    "ar": "استُعيدت الأسئلة الأصلية",
+    "en": "Default questions restored"
+  },
+  "togetherKnowMeBankFull": {
+    "ar": "امتلأ البنك ({max} سؤالًا)",
+    "en": "The bank is full ({max} questions)",
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeEmptyCategory": {
+    "ar": "لا أسئلة في هذه الفئة بعد",
+    "en": "No questions in this category yet"
+  },
+  "togetherKnowMeEdited": {
+    "ar": "معدّل",
+    "en": "Edited"
+  },
+  "togetherKnowMeOwn": {
+    "ar": "من إضافتنا",
+    "en": "Our own"
+  },
+  "togetherKnowMeLastCategory": {
+    "ar": "تبقى فئة واحدة على الأقل",
+    "en": "At least one category must stay"
+  },
+  "togetherKnowMeReorderHint": {
+    "ar": "اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لمزيد من الخيارات",
+    "en": "Drag the handle to reorder; long-press for more"
+  },
+  "togetherWeeklyTitle": {
+    "ar": "تحدّي الأسبوع",
+    "en": "Challenge of the week"
+  },
+  "togetherWeeklyDaysLeft": {
+    "ar": "{count, plural, =0{آخر يوم} =1{آخر يوم} =2{بقي يومان} few{بقيت {count} أيام} many{بقي {count} يومًا} other{بقي {count} يوم}}",
+    "en": "{count, plural, =0{Last day} =1{Last day} other{{count} days left}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherWeeklyRenewsOn": {
+    "ar": "يتجدّد يوم {day}",
+    "en": "Renews on {day}",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherWeeklyMarkDone": {
+    "ar": "أنجزته",
+    "en": "I did it"
+  },
+  "togetherWeeklyDone": {
+    "ar": "تمّ",
+    "en": "Done"
+  },
+  "togetherWeeklyWaiting": {
+    "ar": "بانتظار {name}",
+    "en": "Waiting for {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherWeeklyNotYet": {
+    "ar": "لم يبدأ بعد",
+    "en": "Not started yet"
+  },
+  "togetherWeeklyBothDone": {
+    "ar": "أنجزتماه معًا!",
+    "en": "Done together!"
+  },
+  "togetherWeeklyStreak": {
+    "ar": "السلسلة",
+    "en": "Streak"
+  },
+  "togetherWeeklyBest": {
+    "ar": "أفضل سلسلة",
+    "en": "Best streak"
+  },
+  "togetherWeeklyTotal": {
+    "ar": "المنجزة",
+    "en": "Completed"
+  },
+  "togetherWeeklyAnother": {
+    "ar": "تحدٍّ آخر",
+    "en": "Another one"
+  },
+  "togetherWeeklyPick": {
+    "ar": "اختيار تحدٍّ",
+    "en": "Pick a challenge"
+  },
+  "togetherWeeklySwapLocked": {
+    "ar": "لا يُبدَّل التحدّي بعد أن يبدأ أحدكما",
+    "en": "The challenge can't change once one of you has done it"
+  },
+  "togetherWeeklyList": {
+    "ar": "قائمة التحدّيات",
+    "en": "Our challenges"
+  },
+  "togetherWeeklyListHint": {
+    "ar": "تدور التحدّيات بهذا الترتيب أسبوعًا بعد أسبوع",
+    "en": "Challenges take turns in this order, week after week"
+  },
+  "togetherWeeklyAdd": {
+    "ar": "تحدٍّ جديد",
+    "en": "New challenge"
+  },
+  "togetherWeeklyEdit": {
+    "ar": "تعديل التحدّي",
+    "en": "Edit challenge"
+  },
+  "togetherWeeklyField": {
+    "ar": "التحدّي",
+    "en": "Challenge"
+  },
+  "togetherWeeklyFieldHint": {
+    "ar": "شيء نفعله معًا هذا الأسبوع",
+    "en": "Something to do together this week"
+  },
+  "togetherWeeklyHide": {
+    "ar": "إخراج من الدورة",
+    "en": "Take out of rotation"
+  },
+  "togetherWeeklyShow": {
+    "ar": "إعادة إلى الدورة",
+    "en": "Put back in rotation"
+  },
+  "togetherWeeklyHidden": {
+    "ar": "خارج الدورة",
+    "en": "Not in rotation"
+  },
+  "togetherWeeklyDeleted": {
+    "ar": "حُذف التحدّي",
+    "en": "Challenge deleted"
+  },
+  "togetherWeeklyHiddenDone": {
+    "ar": "أُخرج من الدورة",
+    "en": "Taken out of rotation"
+  },
+  "togetherWeeklyLastActive": {
+    "ar": "يبقى تحدٍّ واحد على الأقل في الدورة",
+    "en": "At least one challenge must stay in rotation"
+  },
+  "togetherWeeklyRecent": {
+    "ar": "الأسابيع الماضية",
+    "en": "Recent weeks"
+  },
+  "togetherWeeklyUndone": {
+    "ar": "أُلغي الإنجاز",
+    "en": "Marked as not done"
+  },
+  "togetherWeeklyThisWeek": {
+    "ar": "هذا الأسبوع",
+    "en": "This week"
+  },
+  "togetherWeekStart": {
+    "ar": "بداية الأسبوع",
+    "en": "Week starts on"
+  },
+  "togetherWeekStartHint": {
+    "ar": "يتجدّد التحدّي عند منتصف ليل هذا اليوم بتوقيت الهاتف.",
+    "en": "The challenge renews at midnight on this day, phone time."
+  },
+  "togetherWeeksCount": {
+    "ar": "{count, plural, =0{لا أسابيع} =1{أسبوع واحد} =2{أسبوعان} few{{count} أسابيع} many{{count} أسبوعًا} other{{count} أسبوع}}",
+    "en": "{count, plural, =0{0 weeks} =1{1 week} other{{count} weeks}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherGoalTitle": {
+    "ar": "هدفنا",
+    "en": "Our goal"
+  },
+  "togetherGoalNone": {
+    "ar": "لا هدف بعد",
+    "en": "No goal yet"
+  },
+  "togetherGoalNoneBody": {
+    "ar": "اختارا معًا هدفًا، ومكافأةً تنتظركما عند الوصول إليه.",
+    "en": "Choose a goal together – and a reward that waits for you when you reach it."
+  },
+  "togetherGoalSet": {
+    "ar": "حدّدا هدفًا",
+    "en": "Set a goal"
+  },
+  "togetherGoalEdit": {
+    "ar": "تعديل الهدف",
+    "en": "Edit goal"
+  },
+  "togetherGoalNew": {
+    "ar": "هدف جديد",
+    "en": "New goal"
+  },
+  "togetherGoalNameField": {
+    "ar": "اسم الهدف",
+    "en": "Goal name"
+  },
+  "togetherGoalRewardField": {
+    "ar": "المكافأة",
+    "en": "The reward"
+  },
+  "togetherGoalRewardHint": {
+    "ar": "مثلًا: عشاء في مكاننا المفضّل",
+    "en": "e.g. dinner at our favourite place"
+  },
+  "togetherGoalRewardRequired": {
+    "ar": "اكتبا المكافأة التي تنتظركما",
+    "en": "Write the reward that waits for you"
+  },
+  "togetherGoalMetricField": {
+    "ar": "كيف نتقدّم؟",
+    "en": "How do we get there?"
+  },
+  "togetherGoalMetricPoints": {
+    "ar": "نقاط معًا",
+    "en": "Together points"
+  },
+  "togetherGoalMetricPointsBody": {
+    "ar": "{match} لكلّ مباراة نلعبها معًا، و{challenge} لكلّ تحدٍّ أسبوعي ننجزه",
+    "en": "{match} for each match we play, {challenge} for each weekly challenge we complete",
+    "placeholders": {
+      "match": {
+        "type": "String"
+      },
+      "challenge": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalMetricCounter": {
+    "ar": "عدّاد خاصّ بنا",
+    "en": "Our own counter"
+  },
+  "togetherGoalMetricCounterBody": {
+    "ar": "نحرّكه بأنفسنا: مشاوير، صفحات، زيارات…",
+    "en": "We move it ourselves: walks, pages, visits…"
+  },
+  "togetherGoalTargetField": {
+    "ar": "الهدف",
+    "en": "Target"
+  },
+  "togetherGoalUnitField": {
+    "ar": "الوحدة",
+    "en": "Unit"
+  },
+  "togetherGoalUnitHint": {
+    "ar": "مثلًا: مشوار",
+    "en": "e.g. walks"
+  },
+  "togetherGoalCountGames": {
+    "ar": "المباريات",
+    "en": "Matches"
+  },
+  "togetherGoalCountChallenges": {
+    "ar": "التحدّيات الأسبوعية",
+    "en": "Weekly challenges"
+  },
+  "togetherGoalPointsCount": {
+    "ar": "{count, plural, =0{لا نقاط} =1{نقطة واحدة} =2{نقطتان} few{{count} نقاط} many{{count} نقطة} other{{count} نقطة}}",
+    "en": "{count, plural, =0{0 points} =1{1 point} other{{count} points}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherGoalProgress": {
+    "ar": "{current} من {target}",
+    "en": "{current} of {target}",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalRemaining": {
+    "ar": "بقي {count}",
+    "en": "{count} to go",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalRewardLocked": {
+    "ar": "المكافأة بانتظاركما",
+    "en": "Your reward is waiting"
+  },
+  "togetherGoalUnlocked": {
+    "ar": "فُتحت المكافأة!",
+    "en": "Reward unlocked!"
+  },
+  "togetherGoalUnlockedBody": {
+    "ar": "وصلتما إلى الهدف. استمتعا بمكافأتكما:",
+    "en": "You reached your goal. Enjoy your reward:"
+  },
+  "togetherGoalNext": {
+    "ar": "هدفنا التالي",
+    "en": "Our next goal"
+  },
+  "togetherGoalFromMatches": {
+    "ar": "من المباريات: {points}",
+    "en": "From matches: {points}",
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalFromChallenges": {
+    "ar": "من التحدّيات: {points}",
+    "en": "From challenges: {points}",
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalAchieved": {
+    "ar": "مكافآتنا",
+    "en": "Our rewards"
+  },
+  "togetherGoalDelete": {
+    "ar": "التخلّي عن الهدف",
+    "en": "Drop this goal"
+  },
+  "togetherGoalDeleted": {
+    "ar": "حُذف الهدف",
+    "en": "Goal dropped"
+  },
+  "togetherGoalAddOne": {
+    "ar": "زيادة واحد",
+    "en": "Add one"
+  },
+  "togetherGoalTakeOne": {
+    "ar": "إنقاص واحد",
+    "en": "Take one away"
+  },
+  "togetherGoalCounterDefaultUnit": {
+    "ar": "مرّة",
+    "en": "times"
+  },
+  "togetherGoalSince": {
+    "ar": "منذ {date}",
+    "en": "Since {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMindReader": {
+    "ar": "قارئ الأفكار",
+    "en": "Mind reader"
+  },
+  "togetherTrophyMindReaderDesc": {
+    "ar": "جولة «قديش بتعرفني؟» كاملة بلا خطأ",
+    "en": "A perfect round of “How well do you know me?”"
+  },
+  "togetherTrophyChallengeChampions": {
+    "ar": "أبطال التحدّي",
+    "en": "Challenge champions"
+  },
+  "togetherTrophyChallengeChampionsDesc": {
+    "ar": "تحدّي الأسبوع أربعة أسابيع متتالية",
+    "en": "The weekly challenge, four weeks in a row"
+  },
+  "togetherTrophyDreamCameTrue": {
+    "ar": "حلم تحقّق",
+    "en": "Dream come true"
+  },
+  "togetherTrophyDreamCameTrueDesc": {
+    "ar": "هدف مشترك تحقّق ومكافأته فُتحت",
+    "en": "A shared goal reached, its reward unlocked"
+  },
+  "togetherWeeklyInRotation": {
+    "ar": "{count} في الدورة",
+    "en": "{count} in rotation",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeRecap": {
+    "ar": "الإجابات",
+    "en": "The answers"
+  },
+  "togetherWeeklyRange": {
+    "ar": "{from} – {to}",
+    "en": "{from} – {to}",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
   }
 }

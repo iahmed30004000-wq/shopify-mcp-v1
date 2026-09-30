@@ -21791,7 +21791,7 @@ class L10nAr extends L10n {
   String get togetherGameMiniGolf => 'جولف مصغّر';
 
   @override
-  String get togetherGameKnowMe => 'هل تعرفني جيدًا؟';
+  String get togetherGameKnowMe => 'قديش بتعرفني؟';
 
   @override
   String get togetherGameAirHockey => 'هوكي الطاولة';
@@ -21846,6 +21846,565 @@ class L10nAr extends L10n {
 
   @override
   String get togetherTapToEdit => 'اضغط للتعديل';
+
+  @override
+  String get togetherSpecialsTitle => 'لنا نحن الاثنين';
+
+  @override
+  String get togetherSpecialsGoalEmpty => 'حدّدا هدفًا ومكافأة';
+
+  @override
+  String get togetherSpecialsSettings => 'إعدادات التحدّي';
+
+  @override
+  String get togetherKnowMeIntro =>
+      'كلٌّ منكما يجيب عن نفسه ويخمّن إجابات الآخر، وتبقى الإجابات مخفيّة حتى تكشفاها معًا.';
+
+  @override
+  String get togetherKnowMeQuestionsPerRound => 'عدد الأسئلة';
+
+  @override
+  String get togetherKnowMeCategories => 'الفئات';
+
+  @override
+  String get togetherKnowMeAllCategories => 'الكلّ';
+
+  @override
+  String get togetherKnowMeStart => 'ابدأ الجولة';
+
+  @override
+  String get togetherKnowMeEditQuestions => 'تعديل الأسئلة';
+
+  @override
+  String togetherKnowMeQuestionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سؤال',
+      many: '$count سؤالًا',
+      few: '$count أسئلة',
+      two: 'سؤالان',
+      one: 'سؤال واحد',
+      zero: 'لا أسئلة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get togetherKnowMeNoQuestions => 'لا أسئلة في هذه الفئات';
+
+  @override
+  String get togetherKnowMeWhoKnowsBest => 'من يعرف الآخر أكثر؟';
+
+  @override
+  String togetherKnowMeRoundsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جولة',
+      many: '$count جولة',
+      few: '$count جولات',
+      two: 'جولتان',
+      one: 'جولة واحدة',
+      zero: 'لا جولات بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherKnowMeQuestionOf(String current, String total) {
+    return 'السؤال $current من $total';
+  }
+
+  @override
+  String get togetherKnowMeYourAnswer => 'إجابتك عن نفسك';
+
+  @override
+  String get togetherKnowMeYourAnswerHint => 'يمكن تركها فارغة لتخطّي السؤال';
+
+  @override
+  String togetherKnowMeYourGuess(String name) {
+    return 'تخمينك لإجابة $name';
+  }
+
+  @override
+  String get togetherKnowMeGuessHint => 'تخمينك…';
+
+  @override
+  String get togetherKnowMeNext => 'التالي';
+
+  @override
+  String get togetherKnowMeBack => 'السابق';
+
+  @override
+  String get togetherKnowMeDonePass => 'انتهيت من الإجابة';
+
+  @override
+  String get togetherKnowMeDoneReveal => 'انتهيت – إلى الكشف';
+
+  @override
+  String get togetherKnowMeHiddenNote => 'لن تظهر إجاباتك قبل الكشف';
+
+  @override
+  String get togetherKnowMeRevealTitle => 'لحظة الكشف';
+
+  @override
+  String togetherKnowMeAnswerOf(String name) {
+    return 'إجابة $name';
+  }
+
+  @override
+  String togetherKnowMeGuessOf(String name) {
+    return 'تخمين $name';
+  }
+
+  @override
+  String get togetherKnowMeRevealButton => 'اكشف';
+
+  @override
+  String get togetherKnowMeHiddenAnswer => 'مخفيّة حتى الكشف';
+
+  @override
+  String get togetherKnowMeSkipped => 'سؤال متروك – بلا نقاط';
+
+  @override
+  String get togetherKnowMeNoGuess => 'بلا تخمين';
+
+  @override
+  String togetherKnowMeJudgePrompt(String name) {
+    return 'يا $name، ما مدى قرب التخمين؟';
+  }
+
+  @override
+  String get togetherKnowMeExact => 'في الصميم';
+
+  @override
+  String get togetherKnowMeClose => 'قريب';
+
+  @override
+  String get togetherKnowMeMiss => 'بعيد';
+
+  @override
+  String get togetherKnowMeSuggested => 'اقتراح';
+
+  @override
+  String get togetherKnowMeNextQuestion => 'السؤال التالي';
+
+  @override
+  String get togetherKnowMeSeeResults => 'النتيجة';
+
+  @override
+  String get togetherKnowMeJudgeFirst => 'قيّما التخمينات أولًا';
+
+  @override
+  String get togetherKnowMeResultsTitle => 'النتيجة';
+
+  @override
+  String get togetherKnowMeDrawText => 'تعادل! كلاكما يعرف الآخر بالقدر نفسه';
+
+  @override
+  String togetherKnowMeScoreOf(String score, String max) {
+    return '$score من $max';
+  }
+
+  @override
+  String togetherKnowMeAccuracy(String percent) {
+    return 'دقّة التخمين $percent';
+  }
+
+  @override
+  String get togetherKnowMePlayAgain => 'جولة أخرى';
+
+  @override
+  String get togetherKnowMeFinish => 'إنهاء';
+
+  @override
+  String get togetherKnowMeNotRecorded =>
+      'لم تُسجَّل الجولة: لم يُجَب عن أيّ سؤال';
+
+  @override
+  String get togetherKnowMeLeaveTitle => 'مغادرة الجولة؟';
+
+  @override
+  String get togetherKnowMeLeaveBody =>
+      'ستضيع الإجابات المكتوبة في هذه الجولة.';
+
+  @override
+  String get togetherKnowMeLeave => 'مغادرة';
+
+  @override
+  String get togetherKnowMeStay => 'متابعة اللعب';
+
+  @override
+  String get togetherKnowMeBankTitle => 'بنك الأسئلة';
+
+  @override
+  String get togetherKnowMeAddQuestion => 'سؤال جديد';
+
+  @override
+  String get togetherKnowMeEditQuestion => 'تعديل السؤال';
+
+  @override
+  String get togetherKnowMeQuestionField => 'السؤال';
+
+  @override
+  String get togetherKnowMeQuestionHint =>
+      'بصيغة المتكلّم: ما ... المفضّل عندي؟';
+
+  @override
+  String get togetherKnowMeCategoryField => 'الفئة';
+
+  @override
+  String get togetherKnowMeAddCategory => 'فئة جديدة';
+
+  @override
+  String get togetherKnowMeEditCategory => 'تعديل الفئة';
+
+  @override
+  String get togetherKnowMeCategoryName => 'اسم الفئة';
+
+  @override
+  String get togetherKnowMeCategoryIcon => 'الأيقونة';
+
+  @override
+  String get togetherKnowMeDeleteCategory => 'حذف الفئة';
+
+  @override
+  String togetherKnowMeCategoryDeleted(String name) {
+    return 'حُذفت الفئة ونُقلت أسئلتها إلى «$name»';
+  }
+
+  @override
+  String get togetherKnowMeQuestionDeleted => 'حُذف السؤال';
+
+  @override
+  String get togetherKnowMeMoveTo => 'نقل إلى فئة';
+
+  @override
+  String get togetherKnowMeResetWording => 'الصياغة الأصلية';
+
+  @override
+  String get togetherKnowMeRestoreDefaults => 'استعادة الأسئلة الأصلية';
+
+  @override
+  String get togetherKnowMeRestored => 'استُعيدت الأسئلة الأصلية';
+
+  @override
+  String togetherKnowMeBankFull(String max) {
+    return 'امتلأ البنك ($max سؤالًا)';
+  }
+
+  @override
+  String get togetherKnowMeEmptyCategory => 'لا أسئلة في هذه الفئة بعد';
+
+  @override
+  String get togetherKnowMeEdited => 'معدّل';
+
+  @override
+  String get togetherKnowMeOwn => 'من إضافتنا';
+
+  @override
+  String get togetherKnowMeLastCategory => 'تبقى فئة واحدة على الأقل';
+
+  @override
+  String get togetherKnowMeReorderHint =>
+      'اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لمزيد من الخيارات';
+
+  @override
+  String get togetherWeeklyTitle => 'تحدّي الأسبوع';
+
+  @override
+  String togetherWeeklyDaysLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بقي $count يوم',
+      many: 'بقي $count يومًا',
+      few: 'بقيت $count أيام',
+      two: 'بقي يومان',
+      one: 'آخر يوم',
+      zero: 'آخر يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherWeeklyRenewsOn(String day) {
+    return 'يتجدّد يوم $day';
+  }
+
+  @override
+  String get togetherWeeklyMarkDone => 'أنجزته';
+
+  @override
+  String get togetherWeeklyDone => 'تمّ';
+
+  @override
+  String togetherWeeklyWaiting(String name) {
+    return 'بانتظار $name';
+  }
+
+  @override
+  String get togetherWeeklyNotYet => 'لم يبدأ بعد';
+
+  @override
+  String get togetherWeeklyBothDone => 'أنجزتماه معًا!';
+
+  @override
+  String get togetherWeeklyStreak => 'السلسلة';
+
+  @override
+  String get togetherWeeklyBest => 'أفضل سلسلة';
+
+  @override
+  String get togetherWeeklyTotal => 'المنجزة';
+
+  @override
+  String get togetherWeeklyAnother => 'تحدٍّ آخر';
+
+  @override
+  String get togetherWeeklyPick => 'اختيار تحدٍّ';
+
+  @override
+  String get togetherWeeklySwapLocked =>
+      'لا يُبدَّل التحدّي بعد أن يبدأ أحدكما';
+
+  @override
+  String get togetherWeeklyList => 'قائمة التحدّيات';
+
+  @override
+  String get togetherWeeklyListHint =>
+      'تدور التحدّيات بهذا الترتيب أسبوعًا بعد أسبوع';
+
+  @override
+  String get togetherWeeklyAdd => 'تحدٍّ جديد';
+
+  @override
+  String get togetherWeeklyEdit => 'تعديل التحدّي';
+
+  @override
+  String get togetherWeeklyField => 'التحدّي';
+
+  @override
+  String get togetherWeeklyFieldHint => 'شيء نفعله معًا هذا الأسبوع';
+
+  @override
+  String get togetherWeeklyHide => 'إخراج من الدورة';
+
+  @override
+  String get togetherWeeklyShow => 'إعادة إلى الدورة';
+
+  @override
+  String get togetherWeeklyHidden => 'خارج الدورة';
+
+  @override
+  String get togetherWeeklyDeleted => 'حُذف التحدّي';
+
+  @override
+  String get togetherWeeklyHiddenDone => 'أُخرج من الدورة';
+
+  @override
+  String get togetherWeeklyLastActive => 'يبقى تحدٍّ واحد على الأقل في الدورة';
+
+  @override
+  String get togetherWeeklyRecent => 'الأسابيع الماضية';
+
+  @override
+  String get togetherWeeklyUndone => 'أُلغي الإنجاز';
+
+  @override
+  String get togetherWeeklyThisWeek => 'هذا الأسبوع';
+
+  @override
+  String get togetherWeekStart => 'بداية الأسبوع';
+
+  @override
+  String get togetherWeekStartHint =>
+      'يتجدّد التحدّي عند منتصف ليل هذا اليوم بتوقيت الهاتف.';
+
+  @override
+  String togetherWeeksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count أسبوع',
+      many: '$count أسبوعًا',
+      few: '$count أسابيع',
+      two: 'أسبوعان',
+      one: 'أسبوع واحد',
+      zero: 'لا أسابيع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get togetherGoalTitle => 'هدفنا';
+
+  @override
+  String get togetherGoalNone => 'لا هدف بعد';
+
+  @override
+  String get togetherGoalNoneBody =>
+      'اختارا معًا هدفًا، ومكافأةً تنتظركما عند الوصول إليه.';
+
+  @override
+  String get togetherGoalSet => 'حدّدا هدفًا';
+
+  @override
+  String get togetherGoalEdit => 'تعديل الهدف';
+
+  @override
+  String get togetherGoalNew => 'هدف جديد';
+
+  @override
+  String get togetherGoalNameField => 'اسم الهدف';
+
+  @override
+  String get togetherGoalRewardField => 'المكافأة';
+
+  @override
+  String get togetherGoalRewardHint => 'مثلًا: عشاء في مكاننا المفضّل';
+
+  @override
+  String get togetherGoalRewardRequired => 'اكتبا المكافأة التي تنتظركما';
+
+  @override
+  String get togetherGoalMetricField => 'كيف نتقدّم؟';
+
+  @override
+  String get togetherGoalMetricPoints => 'نقاط معًا';
+
+  @override
+  String togetherGoalMetricPointsBody(String match, String challenge) {
+    return '$match لكلّ مباراة نلعبها معًا، و$challenge لكلّ تحدٍّ أسبوعي ننجزه';
+  }
+
+  @override
+  String get togetherGoalMetricCounter => 'عدّاد خاصّ بنا';
+
+  @override
+  String get togetherGoalMetricCounterBody =>
+      'نحرّكه بأنفسنا: مشاوير، صفحات، زيارات…';
+
+  @override
+  String get togetherGoalTargetField => 'الهدف';
+
+  @override
+  String get togetherGoalUnitField => 'الوحدة';
+
+  @override
+  String get togetherGoalUnitHint => 'مثلًا: مشوار';
+
+  @override
+  String get togetherGoalCountGames => 'المباريات';
+
+  @override
+  String get togetherGoalCountChallenges => 'التحدّيات الأسبوعية';
+
+  @override
+  String togetherGoalPointsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نقطة',
+      many: '$count نقطة',
+      few: '$count نقاط',
+      two: 'نقطتان',
+      one: 'نقطة واحدة',
+      zero: 'لا نقاط',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String togetherGoalProgress(String current, String target) {
+    return '$current من $target';
+  }
+
+  @override
+  String togetherGoalRemaining(String count) {
+    return 'بقي $count';
+  }
+
+  @override
+  String get togetherGoalRewardLocked => 'المكافأة بانتظاركما';
+
+  @override
+  String get togetherGoalUnlocked => 'فُتحت المكافأة!';
+
+  @override
+  String get togetherGoalUnlockedBody =>
+      'وصلتما إلى الهدف. استمتعا بمكافأتكما:';
+
+  @override
+  String get togetherGoalNext => 'هدفنا التالي';
+
+  @override
+  String togetherGoalFromMatches(String points) {
+    return 'من المباريات: $points';
+  }
+
+  @override
+  String togetherGoalFromChallenges(String points) {
+    return 'من التحدّيات: $points';
+  }
+
+  @override
+  String get togetherGoalAchieved => 'مكافآتنا';
+
+  @override
+  String get togetherGoalDelete => 'التخلّي عن الهدف';
+
+  @override
+  String get togetherGoalDeleted => 'حُذف الهدف';
+
+  @override
+  String get togetherGoalAddOne => 'زيادة واحد';
+
+  @override
+  String get togetherGoalTakeOne => 'إنقاص واحد';
+
+  @override
+  String get togetherGoalCounterDefaultUnit => 'مرّة';
+
+  @override
+  String togetherGoalSince(String date) {
+    return 'منذ $date';
+  }
+
+  @override
+  String get togetherTrophyMindReader => 'قارئ الأفكار';
+
+  @override
+  String get togetherTrophyMindReaderDesc =>
+      'جولة «قديش بتعرفني؟» كاملة بلا خطأ';
+
+  @override
+  String get togetherTrophyChallengeChampions => 'أبطال التحدّي';
+
+  @override
+  String get togetherTrophyChallengeChampionsDesc =>
+      'تحدّي الأسبوع أربعة أسابيع متتالية';
+
+  @override
+  String get togetherTrophyDreamCameTrue => 'حلم تحقّق';
+
+  @override
+  String get togetherTrophyDreamCameTrueDesc =>
+      'هدف مشترك تحقّق ومكافأته فُتحت';
+
+  @override
+  String togetherWeeklyInRotation(String count) {
+    return '$count في الدورة';
+  }
+
+  @override
+  String get togetherKnowMeRecap => 'الإجابات';
+
+  @override
+  String togetherWeeklyRange(String from, String to) {
+    return '$from – $to';
+  }
 
   @override
   String get widgetsPrayerName => 'الصلاة القادمة';

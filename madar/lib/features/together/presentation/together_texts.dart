@@ -154,6 +154,9 @@ class TogetherTexts {
     TrophyId.nailBiter => l.togetherTrophyNailBiter,
     TrophyId.perfectBalance => l.togetherTrophyPerfectBalance,
     TrophyId.gameMaster => l.togetherTrophyGameMaster,
+    TrophyId.mindReader => l.togetherTrophyMindReader,
+    TrophyId.challengeChampions => l.togetherTrophyChallengeChampions,
+    TrophyId.dreamCameTrue => l.togetherTrophyDreamCameTrue,
   };
 
   /// What the trophy is for ([gameId] names the game of a per-game trophy).
@@ -180,6 +183,9 @@ class TogetherTexts {
       TrophyId.nailBiter => l.togetherTrophyNailBiterDesc,
       TrophyId.perfectBalance => l.togetherTrophyPerfectBalanceDesc(c),
       TrophyId.gameMaster => l.togetherTrophyGameMasterDesc(c, fmt.isolate(gameId == null ? '…' : game(gameId))),
+      TrophyId.mindReader => l.togetherTrophyMindReaderDesc,
+      TrophyId.challengeChampions => l.togetherTrophyChallengeChampionsDesc,
+      TrophyId.dreamCameTrue => l.togetherTrophyDreamCameTrueDesc,
     };
     return digits(text);
   }

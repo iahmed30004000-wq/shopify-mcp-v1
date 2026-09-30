@@ -55,6 +55,9 @@ abstract final class TogetherLook {
     TrophyId.nailBiter => Icons.flash_on_rounded,
     TrophyId.perfectBalance => Icons.balance_rounded,
     TrophyId.gameMaster => Icons.workspace_premium_rounded,
+    TrophyId.mindReader => Icons.psychology_rounded,
+    TrophyId.challengeChampions => Icons.event_available_rounded,
+    TrophyId.dreamCameTrue => Icons.redeem_rounded,
   };
 
   /// Metal of a tier: (light, deep).

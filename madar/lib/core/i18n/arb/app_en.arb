@@ -20379,6 +20379,341 @@
   "togetherResetRecords": "Clear history & trophies",
   "togetherResetDone": "History and trophies cleared",
   "togetherTapToEdit": "Tap to edit",
+  "togetherSpecialsTitle": "Just the two of us",
+  "@togetherSpecialsTitle": {
+    "description": "Section of the couple specials on the Together home"
+  },
+  "togetherSpecialsGoalEmpty": "Set a goal and a reward",
+  "togetherSpecialsSettings": "Challenge settings",
+  "togetherKnowMeIntro": "Each of you answers about yourself and guesses the other's answers – they stay hidden until you reveal them together.",
+  "togetherKnowMeQuestionsPerRound": "Questions per round",
+  "togetherKnowMeCategories": "Categories",
+  "togetherKnowMeAllCategories": "All",
+  "togetherKnowMeStart": "Start the round",
+  "togetherKnowMeEditQuestions": "Edit questions",
+  "togetherKnowMeQuestionsCount": "{count, plural, =0{No questions} =1{1 question} other{{count} questions}}",
+  "@togetherKnowMeQuestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherKnowMeNoQuestions": "No questions in these categories",
+  "togetherKnowMeWhoKnowsBest": "Who knows the other best?",
+  "togetherKnowMeRoundsCount": "{count, plural, =0{No rounds yet} =1{1 round} other{{count} rounds}}",
+  "@togetherKnowMeRoundsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherKnowMeQuestionOf": "Question {current} of {total}",
+  "@togetherKnowMeQuestionOf": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeYourAnswer": "Your own answer",
+  "togetherKnowMeYourAnswerHint": "Leave it empty to skip the question",
+  "togetherKnowMeYourGuess": "Your guess of {name}'s answer",
+  "@togetherKnowMeYourGuess": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeGuessHint": "Your guess…",
+  "togetherKnowMeNext": "Next",
+  "togetherKnowMeBack": "Back",
+  "togetherKnowMeDonePass": "I'm done",
+  "togetherKnowMeDoneReveal": "I'm done – to the reveal",
+  "togetherKnowMeHiddenNote": "Your answers stay hidden until the reveal",
+  "togetherKnowMeRevealTitle": "The reveal",
+  "togetherKnowMeAnswerOf": "{name}'s answer",
+  "@togetherKnowMeAnswerOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeGuessOf": "{name}'s guess",
+  "@togetherKnowMeGuessOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeRevealButton": "Reveal",
+  "togetherKnowMeHiddenAnswer": "Hidden until the reveal",
+  "togetherKnowMeSkipped": "Skipped – not scored",
+  "togetherKnowMeNoGuess": "No guess",
+  "togetherKnowMeJudgePrompt": "{name}, how close was the guess?",
+  "@togetherKnowMeJudgePrompt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeExact": "Spot on",
+  "togetherKnowMeClose": "Close",
+  "togetherKnowMeMiss": "Not quite",
+  "togetherKnowMeSuggested": "Suggested",
+  "togetherKnowMeNextQuestion": "Next question",
+  "togetherKnowMeSeeResults": "See the results",
+  "togetherKnowMeJudgeFirst": "Judge the guesses first",
+  "togetherKnowMeResultsTitle": "Results",
+  "togetherKnowMeDrawText": "A draw – you know each other equally well!",
+  "togetherKnowMeScoreOf": "{score} of {max}",
+  "@togetherKnowMeScoreOf": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeAccuracy": "Guessing accuracy {percent}",
+  "@togetherKnowMeAccuracy": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMePlayAgain": "Another round",
+  "togetherKnowMeFinish": "Done",
+  "togetherKnowMeNotRecorded": "Not recorded – no question was answered",
+  "togetherKnowMeLeaveTitle": "Leave the round?",
+  "togetherKnowMeLeaveBody": "The answers typed in this round will be lost.",
+  "togetherKnowMeLeave": "Leave",
+  "togetherKnowMeStay": "Keep playing",
+  "togetherKnowMeBankTitle": "Question bank",
+  "togetherKnowMeAddQuestion": "New question",
+  "togetherKnowMeEditQuestion": "Edit question",
+  "togetherKnowMeQuestionField": "Question",
+  "togetherKnowMeQuestionHint": "In the first person: “What's my favourite …?”",
+  "togetherKnowMeCategoryField": "Category",
+  "togetherKnowMeAddCategory": "New category",
+  "togetherKnowMeEditCategory": "Edit category",
+  "togetherKnowMeCategoryName": "Category name",
+  "togetherKnowMeCategoryIcon": "Icon",
+  "togetherKnowMeDeleteCategory": "Delete category",
+  "togetherKnowMeCategoryDeleted": "Category deleted – its questions moved to “{name}”",
+  "@togetherKnowMeCategoryDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeQuestionDeleted": "Question deleted",
+  "togetherKnowMeMoveTo": "Move to category",
+  "togetherKnowMeResetWording": "Original wording",
+  "togetherKnowMeRestoreDefaults": "Restore default questions",
+  "togetherKnowMeRestored": "Default questions restored",
+  "togetherKnowMeBankFull": "The bank is full ({max} questions)",
+  "@togetherKnowMeBankFull": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeEmptyCategory": "No questions in this category yet",
+  "togetherKnowMeEdited": "Edited",
+  "togetherKnowMeOwn": "Our own",
+  "togetherKnowMeLastCategory": "At least one category must stay",
+  "togetherKnowMeReorderHint": "Drag the handle to reorder; long-press for more",
+  "togetherWeeklyTitle": "Challenge of the week",
+  "togetherWeeklyDaysLeft": "{count, plural, =0{Last day} =1{Last day} other{{count} days left}}",
+  "@togetherWeeklyDaysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherWeeklyRenewsOn": "Renews on {day}",
+  "@togetherWeeklyRenewsOn": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherWeeklyMarkDone": "I did it",
+  "togetherWeeklyDone": "Done",
+  "togetherWeeklyWaiting": "Waiting for {name}",
+  "@togetherWeeklyWaiting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherWeeklyNotYet": "Not started yet",
+  "togetherWeeklyBothDone": "Done together!",
+  "togetherWeeklyStreak": "Streak",
+  "togetherWeeklyBest": "Best streak",
+  "togetherWeeklyTotal": "Completed",
+  "togetherWeeklyAnother": "Another one",
+  "togetherWeeklyPick": "Pick a challenge",
+  "togetherWeeklySwapLocked": "The challenge can't change once one of you has done it",
+  "togetherWeeklyList": "Our challenges",
+  "togetherWeeklyListHint": "Challenges take turns in this order, week after week",
+  "togetherWeeklyAdd": "New challenge",
+  "togetherWeeklyEdit": "Edit challenge",
+  "togetherWeeklyField": "Challenge",
+  "togetherWeeklyFieldHint": "Something to do together this week",
+  "togetherWeeklyHide": "Take out of rotation",
+  "togetherWeeklyShow": "Put back in rotation",
+  "togetherWeeklyHidden": "Not in rotation",
+  "togetherWeeklyDeleted": "Challenge deleted",
+  "togetherWeeklyHiddenDone": "Taken out of rotation",
+  "togetherWeeklyLastActive": "At least one challenge must stay in rotation",
+  "togetherWeeklyRecent": "Recent weeks",
+  "togetherWeeklyUndone": "Marked as not done",
+  "togetherWeeklyThisWeek": "This week",
+  "togetherWeekStart": "Week starts on",
+  "togetherWeekStartHint": "The challenge renews at midnight on this day, phone time.",
+  "togetherWeeksCount": "{count, plural, =0{0 weeks} =1{1 week} other{{count} weeks}}",
+  "@togetherWeeksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherGoalTitle": "Our goal",
+  "togetherGoalNone": "No goal yet",
+  "togetherGoalNoneBody": "Choose a goal together – and a reward that waits for you when you reach it.",
+  "togetherGoalSet": "Set a goal",
+  "togetherGoalEdit": "Edit goal",
+  "togetherGoalNew": "New goal",
+  "togetherGoalNameField": "Goal name",
+  "togetherGoalRewardField": "The reward",
+  "togetherGoalRewardHint": "e.g. dinner at our favourite place",
+  "togetherGoalRewardRequired": "Write the reward that waits for you",
+  "togetherGoalMetricField": "How do we get there?",
+  "togetherGoalMetricPoints": "Together points",
+  "togetherGoalMetricPointsBody": "{match} for each match we play, {challenge} for each weekly challenge we complete",
+  "@togetherGoalMetricPointsBody": {
+    "placeholders": {
+      "match": {
+        "type": "String"
+      },
+      "challenge": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalMetricCounter": "Our own counter",
+  "togetherGoalMetricCounterBody": "We move it ourselves: walks, pages, visits…",
+  "togetherGoalTargetField": "Target",
+  "togetherGoalUnitField": "Unit",
+  "togetherGoalUnitHint": "e.g. walks",
+  "togetherGoalCountGames": "Matches",
+  "togetherGoalCountChallenges": "Weekly challenges",
+  "togetherGoalPointsCount": "{count, plural, =0{0 points} =1{1 point} other{{count} points}}",
+  "@togetherGoalPointsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherGoalProgress": "{current} of {target}",
+  "@togetherGoalProgress": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalRemaining": "{count} to go",
+  "@togetherGoalRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalRewardLocked": "Your reward is waiting",
+  "togetherGoalUnlocked": "Reward unlocked!",
+  "togetherGoalUnlockedBody": "You reached your goal. Enjoy your reward:",
+  "togetherGoalNext": "Our next goal",
+  "togetherGoalFromMatches": "From matches: {points}",
+  "@togetherGoalFromMatches": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalFromChallenges": "From challenges: {points}",
+  "@togetherGoalFromChallenges": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalAchieved": "Our rewards",
+  "togetherGoalDelete": "Drop this goal",
+  "togetherGoalDeleted": "Goal dropped",
+  "togetherGoalAddOne": "Add one",
+  "togetherGoalTakeOne": "Take one away",
+  "togetherGoalCounterDefaultUnit": "times",
+  "togetherGoalSince": "Since {date}",
+  "@togetherGoalSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMindReader": "Mind reader",
+  "togetherTrophyMindReaderDesc": "A perfect round of “How well do you know me?”",
+  "togetherTrophyChallengeChampions": "Challenge champions",
+  "togetherTrophyChallengeChampionsDesc": "The weekly challenge, four weeks in a row",
+  "togetherTrophyDreamCameTrue": "Dream come true",
+  "togetherTrophyDreamCameTrueDesc": "A shared goal reached, its reward unlocked",
+  "togetherWeeklyInRotation": "{count} in rotation",
+  "@togetherWeeklyInRotation": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeRecap": "The answers",
+  "togetherWeeklyRange": "{from} – {to}",
+  "@togetherWeeklyRange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "widgetsPrayerName": "Next prayer",
   "@widgetsPrayerName": {
     "description": "Home-screen widget: the next prayer (widget title and its name in settings)"

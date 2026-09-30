@@ -47,6 +47,7 @@ dependencies:
   flame: ^1.38.2
   cryptography: ^2.9.0
   webview_flutter: ^4.14.1
+  webview_flutter_android: ^4.14.1 # saved_games imports it; its WebViewFlutterAndroidExternalApi serves the Android host
   nearby_connections: ^4.3.0
   firebase_core: ^4.15.0
   firebase_auth: ^6.7.0

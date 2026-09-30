@@ -82,6 +82,7 @@ class MoneyNetWorth {
   final int owedToMeMilli;
   final int iOweMilli;
   final int walletCount;
+
   /// Active jars, plus archived jars still holding money.
   final int jarCount;
   final int openDebtCount;

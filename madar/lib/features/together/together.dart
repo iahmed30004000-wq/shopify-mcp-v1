@@ -19,6 +19,11 @@
 /// [SplitScreenArena] for split-screen; [celebrateNewTrophies] after the
 /// result is recorded.
 ///
+/// The couple specials ("How well do you know me?", the weekly challenge
+/// and the cooperative goal) are in `specials/` – see [TogetherSpecialsSection]
+/// (shown on [TogetherHomeScreen]), [KnowMeScreen], [WeeklyChallengeScreen]
+/// and [CoopGoalScreen].
+///
 /// Only game state ever travels: every message goes through the whitelist
 /// [TogetherCodec]; health, money and personal data never leave the device.
 library;
@@ -46,3 +51,4 @@ export 'protocol/game_data.dart';
 export 'protocol/session.dart';
 export 'protocol/together_game.dart';
 export 'protocol/transport.dart';
+export 'specials/specials.dart';

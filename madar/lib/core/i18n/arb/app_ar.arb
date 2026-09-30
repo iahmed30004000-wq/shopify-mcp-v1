@@ -20361,7 +20361,7 @@
   "togetherGameQuizDuel": "تحدّي الأسئلة الإسلامية",
   "togetherGameDrawGuess": "ارسم وخمّن",
   "togetherGameMiniGolf": "جولف مصغّر",
-  "togetherGameKnowMe": "هل تعرفني جيدًا؟",
+  "togetherGameKnowMe": "قديش بتعرفني؟",
   "togetherGameAirHockey": "هوكي الطاولة",
   "togetherGameBeachVolley": "كرة الشاطئ الثنائية",
   "togetherGameKartDash": "سباق الكارت",
@@ -20379,6 +20379,341 @@
   "togetherResetRecords": "مسح السجل والجوائز",
   "togetherResetDone": "مُسح السجل والجوائز",
   "togetherTapToEdit": "اضغط للتعديل",
+  "togetherSpecialsTitle": "لنا نحن الاثنين",
+  "@togetherSpecialsTitle": {
+    "description": "Section of the couple specials on the Together home"
+  },
+  "togetherSpecialsGoalEmpty": "حدّدا هدفًا ومكافأة",
+  "togetherSpecialsSettings": "إعدادات التحدّي",
+  "togetherKnowMeIntro": "كلٌّ منكما يجيب عن نفسه ويخمّن إجابات الآخر، وتبقى الإجابات مخفيّة حتى تكشفاها معًا.",
+  "togetherKnowMeQuestionsPerRound": "عدد الأسئلة",
+  "togetherKnowMeCategories": "الفئات",
+  "togetherKnowMeAllCategories": "الكلّ",
+  "togetherKnowMeStart": "ابدأ الجولة",
+  "togetherKnowMeEditQuestions": "تعديل الأسئلة",
+  "togetherKnowMeQuestionsCount": "{count, plural, =0{لا أسئلة} =1{سؤال واحد} =2{سؤالان} few{{count} أسئلة} many{{count} سؤالًا} other{{count} سؤال}}",
+  "@togetherKnowMeQuestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherKnowMeNoQuestions": "لا أسئلة في هذه الفئات",
+  "togetherKnowMeWhoKnowsBest": "من يعرف الآخر أكثر؟",
+  "togetherKnowMeRoundsCount": "{count, plural, =0{لا جولات بعد} =1{جولة واحدة} =2{جولتان} few{{count} جولات} many{{count} جولة} other{{count} جولة}}",
+  "@togetherKnowMeRoundsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherKnowMeQuestionOf": "السؤال {current} من {total}",
+  "@togetherKnowMeQuestionOf": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeYourAnswer": "إجابتك عن نفسك",
+  "togetherKnowMeYourAnswerHint": "يمكن تركها فارغة لتخطّي السؤال",
+  "togetherKnowMeYourGuess": "تخمينك لإجابة {name}",
+  "@togetherKnowMeYourGuess": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeGuessHint": "تخمينك…",
+  "togetherKnowMeNext": "التالي",
+  "togetherKnowMeBack": "السابق",
+  "togetherKnowMeDonePass": "انتهيت من الإجابة",
+  "togetherKnowMeDoneReveal": "انتهيت – إلى الكشف",
+  "togetherKnowMeHiddenNote": "لن تظهر إجاباتك قبل الكشف",
+  "togetherKnowMeRevealTitle": "لحظة الكشف",
+  "togetherKnowMeAnswerOf": "إجابة {name}",
+  "@togetherKnowMeAnswerOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeGuessOf": "تخمين {name}",
+  "@togetherKnowMeGuessOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeRevealButton": "اكشف",
+  "togetherKnowMeHiddenAnswer": "مخفيّة حتى الكشف",
+  "togetherKnowMeSkipped": "سؤال متروك – بلا نقاط",
+  "togetherKnowMeNoGuess": "بلا تخمين",
+  "togetherKnowMeJudgePrompt": "يا {name}، ما مدى قرب التخمين؟",
+  "@togetherKnowMeJudgePrompt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeExact": "في الصميم",
+  "togetherKnowMeClose": "قريب",
+  "togetherKnowMeMiss": "بعيد",
+  "togetherKnowMeSuggested": "اقتراح",
+  "togetherKnowMeNextQuestion": "السؤال التالي",
+  "togetherKnowMeSeeResults": "النتيجة",
+  "togetherKnowMeJudgeFirst": "قيّما التخمينات أولًا",
+  "togetherKnowMeResultsTitle": "النتيجة",
+  "togetherKnowMeDrawText": "تعادل! كلاكما يعرف الآخر بالقدر نفسه",
+  "togetherKnowMeScoreOf": "{score} من {max}",
+  "@togetherKnowMeScoreOf": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeAccuracy": "دقّة التخمين {percent}",
+  "@togetherKnowMeAccuracy": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMePlayAgain": "جولة أخرى",
+  "togetherKnowMeFinish": "إنهاء",
+  "togetherKnowMeNotRecorded": "لم تُسجَّل الجولة: لم يُجَب عن أيّ سؤال",
+  "togetherKnowMeLeaveTitle": "مغادرة الجولة؟",
+  "togetherKnowMeLeaveBody": "ستضيع الإجابات المكتوبة في هذه الجولة.",
+  "togetherKnowMeLeave": "مغادرة",
+  "togetherKnowMeStay": "متابعة اللعب",
+  "togetherKnowMeBankTitle": "بنك الأسئلة",
+  "togetherKnowMeAddQuestion": "سؤال جديد",
+  "togetherKnowMeEditQuestion": "تعديل السؤال",
+  "togetherKnowMeQuestionField": "السؤال",
+  "togetherKnowMeQuestionHint": "بصيغة المتكلّم: ما ... المفضّل عندي؟",
+  "togetherKnowMeCategoryField": "الفئة",
+  "togetherKnowMeAddCategory": "فئة جديدة",
+  "togetherKnowMeEditCategory": "تعديل الفئة",
+  "togetherKnowMeCategoryName": "اسم الفئة",
+  "togetherKnowMeCategoryIcon": "الأيقونة",
+  "togetherKnowMeDeleteCategory": "حذف الفئة",
+  "togetherKnowMeCategoryDeleted": "حُذفت الفئة ونُقلت أسئلتها إلى «{name}»",
+  "@togetherKnowMeCategoryDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeQuestionDeleted": "حُذف السؤال",
+  "togetherKnowMeMoveTo": "نقل إلى فئة",
+  "togetherKnowMeResetWording": "الصياغة الأصلية",
+  "togetherKnowMeRestoreDefaults": "استعادة الأسئلة الأصلية",
+  "togetherKnowMeRestored": "استُعيدت الأسئلة الأصلية",
+  "togetherKnowMeBankFull": "امتلأ البنك ({max} سؤالًا)",
+  "@togetherKnowMeBankFull": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeEmptyCategory": "لا أسئلة في هذه الفئة بعد",
+  "togetherKnowMeEdited": "معدّل",
+  "togetherKnowMeOwn": "من إضافتنا",
+  "togetherKnowMeLastCategory": "تبقى فئة واحدة على الأقل",
+  "togetherKnowMeReorderHint": "اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لمزيد من الخيارات",
+  "togetherWeeklyTitle": "تحدّي الأسبوع",
+  "togetherWeeklyDaysLeft": "{count, plural, =0{آخر يوم} =1{آخر يوم} =2{بقي يومان} few{بقيت {count} أيام} many{بقي {count} يومًا} other{بقي {count} يوم}}",
+  "@togetherWeeklyDaysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherWeeklyRenewsOn": "يتجدّد يوم {day}",
+  "@togetherWeeklyRenewsOn": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherWeeklyMarkDone": "أنجزته",
+  "togetherWeeklyDone": "تمّ",
+  "togetherWeeklyWaiting": "بانتظار {name}",
+  "@togetherWeeklyWaiting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherWeeklyNotYet": "لم يبدأ بعد",
+  "togetherWeeklyBothDone": "أنجزتماه معًا!",
+  "togetherWeeklyStreak": "السلسلة",
+  "togetherWeeklyBest": "أفضل سلسلة",
+  "togetherWeeklyTotal": "المنجزة",
+  "togetherWeeklyAnother": "تحدٍّ آخر",
+  "togetherWeeklyPick": "اختيار تحدٍّ",
+  "togetherWeeklySwapLocked": "لا يُبدَّل التحدّي بعد أن يبدأ أحدكما",
+  "togetherWeeklyList": "قائمة التحدّيات",
+  "togetherWeeklyListHint": "تدور التحدّيات بهذا الترتيب أسبوعًا بعد أسبوع",
+  "togetherWeeklyAdd": "تحدٍّ جديد",
+  "togetherWeeklyEdit": "تعديل التحدّي",
+  "togetherWeeklyField": "التحدّي",
+  "togetherWeeklyFieldHint": "شيء نفعله معًا هذا الأسبوع",
+  "togetherWeeklyHide": "إخراج من الدورة",
+  "togetherWeeklyShow": "إعادة إلى الدورة",
+  "togetherWeeklyHidden": "خارج الدورة",
+  "togetherWeeklyDeleted": "حُذف التحدّي",
+  "togetherWeeklyHiddenDone": "أُخرج من الدورة",
+  "togetherWeeklyLastActive": "يبقى تحدٍّ واحد على الأقل في الدورة",
+  "togetherWeeklyRecent": "الأسابيع الماضية",
+  "togetherWeeklyUndone": "أُلغي الإنجاز",
+  "togetherWeeklyThisWeek": "هذا الأسبوع",
+  "togetherWeekStart": "بداية الأسبوع",
+  "togetherWeekStartHint": "يتجدّد التحدّي عند منتصف ليل هذا اليوم بتوقيت الهاتف.",
+  "togetherWeeksCount": "{count, plural, =0{لا أسابيع} =1{أسبوع واحد} =2{أسبوعان} few{{count} أسابيع} many{{count} أسبوعًا} other{{count} أسبوع}}",
+  "@togetherWeeksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherGoalTitle": "هدفنا",
+  "togetherGoalNone": "لا هدف بعد",
+  "togetherGoalNoneBody": "اختارا معًا هدفًا، ومكافأةً تنتظركما عند الوصول إليه.",
+  "togetherGoalSet": "حدّدا هدفًا",
+  "togetherGoalEdit": "تعديل الهدف",
+  "togetherGoalNew": "هدف جديد",
+  "togetherGoalNameField": "اسم الهدف",
+  "togetherGoalRewardField": "المكافأة",
+  "togetherGoalRewardHint": "مثلًا: عشاء في مكاننا المفضّل",
+  "togetherGoalRewardRequired": "اكتبا المكافأة التي تنتظركما",
+  "togetherGoalMetricField": "كيف نتقدّم؟",
+  "togetherGoalMetricPoints": "نقاط معًا",
+  "togetherGoalMetricPointsBody": "{match} لكلّ مباراة نلعبها معًا، و{challenge} لكلّ تحدٍّ أسبوعي ننجزه",
+  "@togetherGoalMetricPointsBody": {
+    "placeholders": {
+      "match": {
+        "type": "String"
+      },
+      "challenge": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalMetricCounter": "عدّاد خاصّ بنا",
+  "togetherGoalMetricCounterBody": "نحرّكه بأنفسنا: مشاوير، صفحات، زيارات…",
+  "togetherGoalTargetField": "الهدف",
+  "togetherGoalUnitField": "الوحدة",
+  "togetherGoalUnitHint": "مثلًا: مشوار",
+  "togetherGoalCountGames": "المباريات",
+  "togetherGoalCountChallenges": "التحدّيات الأسبوعية",
+  "togetherGoalPointsCount": "{count, plural, =0{لا نقاط} =1{نقطة واحدة} =2{نقطتان} few{{count} نقاط} many{{count} نقطة} other{{count} نقطة}}",
+  "@togetherGoalPointsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "togetherGoalProgress": "{current} من {target}",
+  "@togetherGoalProgress": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalRemaining": "بقي {count}",
+  "@togetherGoalRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalRewardLocked": "المكافأة بانتظاركما",
+  "togetherGoalUnlocked": "فُتحت المكافأة!",
+  "togetherGoalUnlockedBody": "وصلتما إلى الهدف. استمتعا بمكافأتكما:",
+  "togetherGoalNext": "هدفنا التالي",
+  "togetherGoalFromMatches": "من المباريات: {points}",
+  "@togetherGoalFromMatches": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalFromChallenges": "من التحدّيات: {points}",
+  "@togetherGoalFromChallenges": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherGoalAchieved": "مكافآتنا",
+  "togetherGoalDelete": "التخلّي عن الهدف",
+  "togetherGoalDeleted": "حُذف الهدف",
+  "togetherGoalAddOne": "زيادة واحد",
+  "togetherGoalTakeOne": "إنقاص واحد",
+  "togetherGoalCounterDefaultUnit": "مرّة",
+  "togetherGoalSince": "منذ {date}",
+  "@togetherGoalSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherTrophyMindReader": "قارئ الأفكار",
+  "togetherTrophyMindReaderDesc": "جولة «قديش بتعرفني؟» كاملة بلا خطأ",
+  "togetherTrophyChallengeChampions": "أبطال التحدّي",
+  "togetherTrophyChallengeChampionsDesc": "تحدّي الأسبوع أربعة أسابيع متتالية",
+  "togetherTrophyDreamCameTrue": "حلم تحقّق",
+  "togetherTrophyDreamCameTrueDesc": "هدف مشترك تحقّق ومكافأته فُتحت",
+  "togetherWeeklyInRotation": "{count} في الدورة",
+  "@togetherWeeklyInRotation": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherKnowMeRecap": "الإجابات",
+  "togetherWeeklyRange": "{from} – {to}",
+  "@togetherWeeklyRange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "widgetsPrayerName": "الصلاة القادمة",
   "@widgetsPrayerName": {
     "description": "Home-screen widget: the next prayer (widget title and its name in settings)"

@@ -33696,7 +33696,7 @@ abstract class L10n {
   /// No description provided for @togetherGameKnowMe.
   ///
   /// In ar, this message translates to:
-  /// **'هل تعرفني جيدًا؟'**
+  /// **'قديش بتعرفني؟'**
   String get togetherGameKnowMe;
 
   /// No description provided for @togetherGameAirHockey.
@@ -33800,6 +33800,900 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'اضغط للتعديل'**
   String get togetherTapToEdit;
+
+  /// Section of the couple specials on the Together home
+  ///
+  /// In ar, this message translates to:
+  /// **'لنا نحن الاثنين'**
+  String get togetherSpecialsTitle;
+
+  /// No description provided for @togetherSpecialsGoalEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّدا هدفًا ومكافأة'**
+  String get togetherSpecialsGoalEmpty;
+
+  /// No description provided for @togetherSpecialsSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات التحدّي'**
+  String get togetherSpecialsSettings;
+
+  /// No description provided for @togetherKnowMeIntro.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلٌّ منكما يجيب عن نفسه ويخمّن إجابات الآخر، وتبقى الإجابات مخفيّة حتى تكشفاها معًا.'**
+  String get togetherKnowMeIntro;
+
+  /// No description provided for @togetherKnowMeQuestionsPerRound.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأسئلة'**
+  String get togetherKnowMeQuestionsPerRound;
+
+  /// No description provided for @togetherKnowMeCategories.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئات'**
+  String get togetherKnowMeCategories;
+
+  /// No description provided for @togetherKnowMeAllCategories.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكلّ'**
+  String get togetherKnowMeAllCategories;
+
+  /// No description provided for @togetherKnowMeStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الجولة'**
+  String get togetherKnowMeStart;
+
+  /// No description provided for @togetherKnowMeEditQuestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الأسئلة'**
+  String get togetherKnowMeEditQuestions;
+
+  /// No description provided for @togetherKnowMeQuestionsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أسئلة} =1{سؤال واحد} =2{سؤالان} few{{count} أسئلة} many{{count} سؤالًا} other{{count} سؤال}}'**
+  String togetherKnowMeQuestionsCount(int count);
+
+  /// No description provided for @togetherKnowMeNoQuestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أسئلة في هذه الفئات'**
+  String get togetherKnowMeNoQuestions;
+
+  /// No description provided for @togetherKnowMeWhoKnowsBest.
+  ///
+  /// In ar, this message translates to:
+  /// **'من يعرف الآخر أكثر؟'**
+  String get togetherKnowMeWhoKnowsBest;
+
+  /// No description provided for @togetherKnowMeRoundsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا جولات بعد} =1{جولة واحدة} =2{جولتان} few{{count} جولات} many{{count} جولة} other{{count} جولة}}'**
+  String togetherKnowMeRoundsCount(int count);
+
+  /// No description provided for @togetherKnowMeQuestionOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال {current} من {total}'**
+  String togetherKnowMeQuestionOf(String current, String total);
+
+  /// No description provided for @togetherKnowMeYourAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجابتك عن نفسك'**
+  String get togetherKnowMeYourAnswer;
+
+  /// No description provided for @togetherKnowMeYourAnswerHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكن تركها فارغة لتخطّي السؤال'**
+  String get togetherKnowMeYourAnswerHint;
+
+  /// No description provided for @togetherKnowMeYourGuess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخمينك لإجابة {name}'**
+  String togetherKnowMeYourGuess(String name);
+
+  /// No description provided for @togetherKnowMeGuessHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخمينك…'**
+  String get togetherKnowMeGuessHint;
+
+  /// No description provided for @togetherKnowMeNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get togetherKnowMeNext;
+
+  /// No description provided for @togetherKnowMeBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'السابق'**
+  String get togetherKnowMeBack;
+
+  /// No description provided for @togetherKnowMeDonePass.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهيت من الإجابة'**
+  String get togetherKnowMeDonePass;
+
+  /// No description provided for @togetherKnowMeDoneReveal.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهيت – إلى الكشف'**
+  String get togetherKnowMeDoneReveal;
+
+  /// No description provided for @togetherKnowMeHiddenNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'لن تظهر إجاباتك قبل الكشف'**
+  String get togetherKnowMeHiddenNote;
+
+  /// No description provided for @togetherKnowMeRevealTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لحظة الكشف'**
+  String get togetherKnowMeRevealTitle;
+
+  /// No description provided for @togetherKnowMeAnswerOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجابة {name}'**
+  String togetherKnowMeAnswerOf(String name);
+
+  /// No description provided for @togetherKnowMeGuessOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخمين {name}'**
+  String togetherKnowMeGuessOf(String name);
+
+  /// No description provided for @togetherKnowMeRevealButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكشف'**
+  String get togetherKnowMeRevealButton;
+
+  /// No description provided for @togetherKnowMeHiddenAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخفيّة حتى الكشف'**
+  String get togetherKnowMeHiddenAnswer;
+
+  /// No description provided for @togetherKnowMeSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'سؤال متروك – بلا نقاط'**
+  String get togetherKnowMeSkipped;
+
+  /// No description provided for @togetherKnowMeNoGuess.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تخمين'**
+  String get togetherKnowMeNoGuess;
+
+  /// No description provided for @togetherKnowMeJudgePrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'يا {name}، ما مدى قرب التخمين؟'**
+  String togetherKnowMeJudgePrompt(String name);
+
+  /// No description provided for @togetherKnowMeExact.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الصميم'**
+  String get togetherKnowMeExact;
+
+  /// No description provided for @togetherKnowMeClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريب'**
+  String get togetherKnowMeClose;
+
+  /// No description provided for @togetherKnowMeMiss.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعيد'**
+  String get togetherKnowMeMiss;
+
+  /// No description provided for @togetherKnowMeSuggested.
+  ///
+  /// In ar, this message translates to:
+  /// **'اقتراح'**
+  String get togetherKnowMeSuggested;
+
+  /// No description provided for @togetherKnowMeNextQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال التالي'**
+  String get togetherKnowMeNextQuestion;
+
+  /// No description provided for @togetherKnowMeSeeResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة'**
+  String get togetherKnowMeSeeResults;
+
+  /// No description provided for @togetherKnowMeJudgeFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيّما التخمينات أولًا'**
+  String get togetherKnowMeJudgeFirst;
+
+  /// No description provided for @togetherKnowMeResultsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة'**
+  String get togetherKnowMeResultsTitle;
+
+  /// No description provided for @togetherKnowMeDrawText.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعادل! كلاكما يعرف الآخر بالقدر نفسه'**
+  String get togetherKnowMeDrawText;
+
+  /// No description provided for @togetherKnowMeScoreOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'{score} من {max}'**
+  String togetherKnowMeScoreOf(String score, String max);
+
+  /// No description provided for @togetherKnowMeAccuracy.
+  ///
+  /// In ar, this message translates to:
+  /// **'دقّة التخمين {percent}'**
+  String togetherKnowMeAccuracy(String percent);
+
+  /// No description provided for @togetherKnowMePlayAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'جولة أخرى'**
+  String get togetherKnowMePlayAgain;
+
+  /// No description provided for @togetherKnowMeFinish.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنهاء'**
+  String get togetherKnowMeFinish;
+
+  /// No description provided for @togetherKnowMeNotRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُسجَّل الجولة: لم يُجَب عن أيّ سؤال'**
+  String get togetherKnowMeNotRecorded;
+
+  /// No description provided for @togetherKnowMeLeaveTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغادرة الجولة؟'**
+  String get togetherKnowMeLeaveTitle;
+
+  /// No description provided for @togetherKnowMeLeaveBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستضيع الإجابات المكتوبة في هذه الجولة.'**
+  String get togetherKnowMeLeaveBody;
+
+  /// No description provided for @togetherKnowMeLeave.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغادرة'**
+  String get togetherKnowMeLeave;
+
+  /// No description provided for @togetherKnowMeStay.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة اللعب'**
+  String get togetherKnowMeStay;
+
+  /// No description provided for @togetherKnowMeBankTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنك الأسئلة'**
+  String get togetherKnowMeBankTitle;
+
+  /// No description provided for @togetherKnowMeAddQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'سؤال جديد'**
+  String get togetherKnowMeAddQuestion;
+
+  /// No description provided for @togetherKnowMeEditQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل السؤال'**
+  String get togetherKnowMeEditQuestion;
+
+  /// No description provided for @togetherKnowMeQuestionField.
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال'**
+  String get togetherKnowMeQuestionField;
+
+  /// No description provided for @togetherKnowMeQuestionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بصيغة المتكلّم: ما ... المفضّل عندي؟'**
+  String get togetherKnowMeQuestionHint;
+
+  /// No description provided for @togetherKnowMeCategoryField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get togetherKnowMeCategoryField;
+
+  /// No description provided for @togetherKnowMeAddCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'فئة جديدة'**
+  String get togetherKnowMeAddCategory;
+
+  /// No description provided for @togetherKnowMeEditCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الفئة'**
+  String get togetherKnowMeEditCategory;
+
+  /// No description provided for @togetherKnowMeCategoryName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الفئة'**
+  String get togetherKnowMeCategoryName;
+
+  /// No description provided for @togetherKnowMeCategoryIcon.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيقونة'**
+  String get togetherKnowMeCategoryIcon;
+
+  /// No description provided for @togetherKnowMeDeleteCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الفئة'**
+  String get togetherKnowMeDeleteCategory;
+
+  /// No description provided for @togetherKnowMeCategoryDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذفت الفئة ونُقلت أسئلتها إلى «{name}»'**
+  String togetherKnowMeCategoryDeleted(String name);
+
+  /// No description provided for @togetherKnowMeQuestionDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف السؤال'**
+  String get togetherKnowMeQuestionDeleted;
+
+  /// No description provided for @togetherKnowMeMoveTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل إلى فئة'**
+  String get togetherKnowMeMoveTo;
+
+  /// No description provided for @togetherKnowMeResetWording.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصياغة الأصلية'**
+  String get togetherKnowMeResetWording;
+
+  /// No description provided for @togetherKnowMeRestoreDefaults.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة الأسئلة الأصلية'**
+  String get togetherKnowMeRestoreDefaults;
+
+  /// No description provided for @togetherKnowMeRestored.
+  ///
+  /// In ar, this message translates to:
+  /// **'استُعيدت الأسئلة الأصلية'**
+  String get togetherKnowMeRestored;
+
+  /// No description provided for @togetherKnowMeBankFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'امتلأ البنك ({max} سؤالًا)'**
+  String togetherKnowMeBankFull(String max);
+
+  /// No description provided for @togetherKnowMeEmptyCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أسئلة في هذه الفئة بعد'**
+  String get togetherKnowMeEmptyCategory;
+
+  /// No description provided for @togetherKnowMeEdited.
+  ///
+  /// In ar, this message translates to:
+  /// **'معدّل'**
+  String get togetherKnowMeEdited;
+
+  /// No description provided for @togetherKnowMeOwn.
+  ///
+  /// In ar, this message translates to:
+  /// **'من إضافتنا'**
+  String get togetherKnowMeOwn;
+
+  /// No description provided for @togetherKnowMeLastCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبقى فئة واحدة على الأقل'**
+  String get togetherKnowMeLastCategory;
+
+  /// No description provided for @togetherKnowMeReorderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب المقبض لإعادة الترتيب، واضغط مطوّلًا لمزيد من الخيارات'**
+  String get togetherKnowMeReorderHint;
+
+  /// No description provided for @togetherWeeklyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحدّي الأسبوع'**
+  String get togetherWeeklyTitle;
+
+  /// No description provided for @togetherWeeklyDaysLeft.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{آخر يوم} =1{آخر يوم} =2{بقي يومان} few{بقيت {count} أيام} many{بقي {count} يومًا} other{بقي {count} يوم}}'**
+  String togetherWeeklyDaysLeft(int count);
+
+  /// No description provided for @togetherWeeklyRenewsOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتجدّد يوم {day}'**
+  String togetherWeeklyRenewsOn(String day);
+
+  /// No description provided for @togetherWeeklyMarkDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزته'**
+  String get togetherWeeklyMarkDone;
+
+  /// No description provided for @togetherWeeklyDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمّ'**
+  String get togetherWeeklyDone;
+
+  /// No description provided for @togetherWeeklyWaiting.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار {name}'**
+  String togetherWeeklyWaiting(String name);
+
+  /// No description provided for @togetherWeeklyNotYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يبدأ بعد'**
+  String get togetherWeeklyNotYet;
+
+  /// No description provided for @togetherWeeklyBothDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنجزتماه معًا!'**
+  String get togetherWeeklyBothDone;
+
+  /// No description provided for @togetherWeeklyStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'السلسلة'**
+  String get togetherWeeklyStreak;
+
+  /// No description provided for @togetherWeeklyBest.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفضل سلسلة'**
+  String get togetherWeeklyBest;
+
+  /// No description provided for @togetherWeeklyTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنجزة'**
+  String get togetherWeeklyTotal;
+
+  /// No description provided for @togetherWeeklyAnother.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحدٍّ آخر'**
+  String get togetherWeeklyAnother;
+
+  /// No description provided for @togetherWeeklyPick.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار تحدٍّ'**
+  String get togetherWeeklyPick;
+
+  /// No description provided for @togetherWeeklySwapLocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُبدَّل التحدّي بعد أن يبدأ أحدكما'**
+  String get togetherWeeklySwapLocked;
+
+  /// No description provided for @togetherWeeklyList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة التحدّيات'**
+  String get togetherWeeklyList;
+
+  /// No description provided for @togetherWeeklyListHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تدور التحدّيات بهذا الترتيب أسبوعًا بعد أسبوع'**
+  String get togetherWeeklyListHint;
+
+  /// No description provided for @togetherWeeklyAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحدٍّ جديد'**
+  String get togetherWeeklyAdd;
+
+  /// No description provided for @togetherWeeklyEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التحدّي'**
+  String get togetherWeeklyEdit;
+
+  /// No description provided for @togetherWeeklyField.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحدّي'**
+  String get togetherWeeklyField;
+
+  /// No description provided for @togetherWeeklyFieldHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيء نفعله معًا هذا الأسبوع'**
+  String get togetherWeeklyFieldHint;
+
+  /// No description provided for @togetherWeeklyHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخراج من الدورة'**
+  String get togetherWeeklyHide;
+
+  /// No description provided for @togetherWeeklyShow.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة إلى الدورة'**
+  String get togetherWeeklyShow;
+
+  /// No description provided for @togetherWeeklyHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'خارج الدورة'**
+  String get togetherWeeklyHidden;
+
+  /// No description provided for @togetherWeeklyDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف التحدّي'**
+  String get togetherWeeklyDeleted;
+
+  /// No description provided for @togetherWeeklyHiddenDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُخرج من الدورة'**
+  String get togetherWeeklyHiddenDone;
+
+  /// No description provided for @togetherWeeklyLastActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'يبقى تحدٍّ واحد على الأقل في الدورة'**
+  String get togetherWeeklyLastActive;
+
+  /// No description provided for @togetherWeeklyRecent.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسابيع الماضية'**
+  String get togetherWeeklyRecent;
+
+  /// No description provided for @togetherWeeklyUndone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُلغي الإنجاز'**
+  String get togetherWeeklyUndone;
+
+  /// No description provided for @togetherWeeklyThisWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get togetherWeeklyThisWeek;
+
+  /// No description provided for @togetherWeekStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية الأسبوع'**
+  String get togetherWeekStart;
+
+  /// No description provided for @togetherWeekStartHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتجدّد التحدّي عند منتصف ليل هذا اليوم بتوقيت الهاتف.'**
+  String get togetherWeekStartHint;
+
+  /// No description provided for @togetherWeeksCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أسابيع} =1{أسبوع واحد} =2{أسبوعان} few{{count} أسابيع} many{{count} أسبوعًا} other{{count} أسبوع}}'**
+  String togetherWeeksCount(int count);
+
+  /// No description provided for @togetherGoalTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدفنا'**
+  String get togetherGoalTitle;
+
+  /// No description provided for @togetherGoalNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا هدف بعد'**
+  String get togetherGoalNone;
+
+  /// No description provided for @togetherGoalNoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختارا معًا هدفًا، ومكافأةً تنتظركما عند الوصول إليه.'**
+  String get togetherGoalNoneBody;
+
+  /// No description provided for @togetherGoalSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدّدا هدفًا'**
+  String get togetherGoalSet;
+
+  /// No description provided for @togetherGoalEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الهدف'**
+  String get togetherGoalEdit;
+
+  /// No description provided for @togetherGoalNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف جديد'**
+  String get togetherGoalNew;
+
+  /// No description provided for @togetherGoalNameField.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الهدف'**
+  String get togetherGoalNameField;
+
+  /// No description provided for @togetherGoalRewardField.
+  ///
+  /// In ar, this message translates to:
+  /// **'المكافأة'**
+  String get togetherGoalRewardField;
+
+  /// No description provided for @togetherGoalRewardHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: عشاء في مكاننا المفضّل'**
+  String get togetherGoalRewardHint;
+
+  /// No description provided for @togetherGoalRewardRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتبا المكافأة التي تنتظركما'**
+  String get togetherGoalRewardRequired;
+
+  /// No description provided for @togetherGoalMetricField.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف نتقدّم؟'**
+  String get togetherGoalMetricField;
+
+  /// No description provided for @togetherGoalMetricPoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط معًا'**
+  String get togetherGoalMetricPoints;
+
+  /// No description provided for @togetherGoalMetricPointsBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{match} لكلّ مباراة نلعبها معًا، و{challenge} لكلّ تحدٍّ أسبوعي ننجزه'**
+  String togetherGoalMetricPointsBody(String match, String challenge);
+
+  /// No description provided for @togetherGoalMetricCounter.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّاد خاصّ بنا'**
+  String get togetherGoalMetricCounter;
+
+  /// No description provided for @togetherGoalMetricCounterBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'نحرّكه بأنفسنا: مشاوير، صفحات، زيارات…'**
+  String get togetherGoalMetricCounterBody;
+
+  /// No description provided for @togetherGoalTargetField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهدف'**
+  String get togetherGoalTargetField;
+
+  /// No description provided for @togetherGoalUnitField.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get togetherGoalUnitField;
+
+  /// No description provided for @togetherGoalUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلًا: مشوار'**
+  String get togetherGoalUnitHint;
+
+  /// No description provided for @togetherGoalCountGames.
+  ///
+  /// In ar, this message translates to:
+  /// **'المباريات'**
+  String get togetherGoalCountGames;
+
+  /// No description provided for @togetherGoalCountChallenges.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحدّيات الأسبوعية'**
+  String get togetherGoalCountChallenges;
+
+  /// No description provided for @togetherGoalPointsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا نقاط} =1{نقطة واحدة} =2{نقطتان} few{{count} نقاط} many{{count} نقطة} other{{count} نقطة}}'**
+  String togetherGoalPointsCount(int count);
+
+  /// No description provided for @togetherGoalProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'{current} من {target}'**
+  String togetherGoalProgress(String current, String target);
+
+  /// No description provided for @togetherGoalRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {count}'**
+  String togetherGoalRemaining(String count);
+
+  /// No description provided for @togetherGoalRewardLocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'المكافأة بانتظاركما'**
+  String get togetherGoalRewardLocked;
+
+  /// No description provided for @togetherGoalUnlocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'فُتحت المكافأة!'**
+  String get togetherGoalUnlocked;
+
+  /// No description provided for @togetherGoalUnlockedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصلتما إلى الهدف. استمتعا بمكافأتكما:'**
+  String get togetherGoalUnlockedBody;
+
+  /// No description provided for @togetherGoalNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدفنا التالي'**
+  String get togetherGoalNext;
+
+  /// No description provided for @togetherGoalFromMatches.
+  ///
+  /// In ar, this message translates to:
+  /// **'من المباريات: {points}'**
+  String togetherGoalFromMatches(String points);
+
+  /// No description provided for @togetherGoalFromChallenges.
+  ///
+  /// In ar, this message translates to:
+  /// **'من التحدّيات: {points}'**
+  String togetherGoalFromChallenges(String points);
+
+  /// No description provided for @togetherGoalAchieved.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكافآتنا'**
+  String get togetherGoalAchieved;
+
+  /// No description provided for @togetherGoalDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'التخلّي عن الهدف'**
+  String get togetherGoalDelete;
+
+  /// No description provided for @togetherGoalDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف الهدف'**
+  String get togetherGoalDeleted;
+
+  /// No description provided for @togetherGoalAddOne.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة واحد'**
+  String get togetherGoalAddOne;
+
+  /// No description provided for @togetherGoalTakeOne.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنقاص واحد'**
+  String get togetherGoalTakeOne;
+
+  /// No description provided for @togetherGoalCounterDefaultUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّة'**
+  String get togetherGoalCounterDefaultUnit;
+
+  /// No description provided for @togetherGoalSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {date}'**
+  String togetherGoalSince(String date);
+
+  /// No description provided for @togetherTrophyMindReader.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ الأفكار'**
+  String get togetherTrophyMindReader;
+
+  /// No description provided for @togetherTrophyMindReaderDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'جولة «قديش بتعرفني؟» كاملة بلا خطأ'**
+  String get togetherTrophyMindReaderDesc;
+
+  /// No description provided for @togetherTrophyChallengeChampions.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبطال التحدّي'**
+  String get togetherTrophyChallengeChampions;
+
+  /// No description provided for @togetherTrophyChallengeChampionsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحدّي الأسبوع أربعة أسابيع متتالية'**
+  String get togetherTrophyChallengeChampionsDesc;
+
+  /// No description provided for @togetherTrophyDreamCameTrue.
+  ///
+  /// In ar, this message translates to:
+  /// **'حلم تحقّق'**
+  String get togetherTrophyDreamCameTrue;
+
+  /// No description provided for @togetherTrophyDreamCameTrueDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف مشترك تحقّق ومكافأته فُتحت'**
+  String get togetherTrophyDreamCameTrueDesc;
+
+  /// No description provided for @togetherWeeklyInRotation.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} في الدورة'**
+  String togetherWeeklyInRotation(String count);
+
+  /// No description provided for @togetherKnowMeRecap.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجابات'**
+  String get togetherKnowMeRecap;
+
+  /// No description provided for @togetherWeeklyRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'{from} – {to}'**
+  String togetherWeeklyRange(String from, String to);
 
   /// Home-screen widget: the next prayer (widget title and its name in settings)
   ///

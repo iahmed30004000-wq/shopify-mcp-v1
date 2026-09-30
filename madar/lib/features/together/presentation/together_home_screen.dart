@@ -13,6 +13,7 @@ import '../domain/head_to_head.dart';
 import '../domain/match_record.dart';
 import '../domain/player_profile.dart';
 import '../domain/trophies.dart';
+import '../specials/presentation/specials_section.dart';
 import 'hall_of_fame_screen.dart';
 import 'mode_picker.dart';
 import 'profile_sheet.dart';
@@ -20,13 +21,25 @@ import 'together_texts.dart';
 import 'widgets/together_visuals.dart';
 
 /// Together Mode home: the two players face to face with the overall score,
-/// the streaks, a preview of "Our Hall of Fame", head-to-head per game and
-/// the recent matches.
+/// the streaks, the couple specials ("Just the two of us"), a preview of
+/// "Our Hall of Fame", head-to-head per game and the recent matches.
 class TogetherHomeScreen extends ConsumerWidget {
-  const TogetherHomeScreen({super.key, this.onOpenHallOfFame, this.animateBackdrop = true});
+  const TogetherHomeScreen({
+    super.key,
+    this.onOpenHallOfFame,
+    this.onOpenKnowMe,
+    this.onOpenWeekly,
+    this.onOpenGoal,
+    this.animateBackdrop = true,
+  });
 
   /// Opens the Hall of Fame; default: pushes [HallOfFameScreen].
   final VoidCallback? onOpenHallOfFame;
+
+  /// Open the couple specials; default: push their screens.
+  final VoidCallback? onOpenKnowMe;
+  final VoidCallback? onOpenWeekly;
+  final VoidCallback? onOpenGoal;
 
   /// Pass false in battery-saver mode.
   final bool animateBackdrop;
@@ -60,7 +73,11 @@ class TogetherHomeScreen extends ConsumerWidget {
         ),
       ],
       body: switch (overview) {
-        AsyncData(value: final o) => _HomeBody(overview: o, onOpenHallOfFame: openHall),
+        AsyncData(value: final o) => _HomeBody(
+          overview: o,
+          onOpenHallOfFame: openHall,
+          specials: TogetherSpecialsSection(onOpenKnowMe: onOpenKnowMe, onOpenWeekly: onOpenWeekly, onOpenGoal: onOpenGoal),
+        ),
         AsyncError() => const Center(child: AnimatedEmptyState(kind: EmptyStateKind.noData)),
         _ => const Center(child: OrbitLoader(size: 40)),
       },
@@ -69,10 +86,11 @@ class TogetherHomeScreen extends ConsumerWidget {
 }
 
 class _HomeBody extends StatelessWidget {
-  const _HomeBody({required this.overview, required this.onOpenHallOfFame});
+  const _HomeBody({required this.overview, required this.onOpenHallOfFame, required this.specials});
 
   final TogetherOverview overview;
   final VoidCallback onOpenHallOfFame;
+  final Widget specials;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +109,11 @@ class _HomeBody extends StatelessWidget {
           StaggerItem(index: i++, child: _RivalryHero(overview: o)),
           const SizedBox(height: Space.m),
           StaggerItem(index: i++, child: _StreakStrip(overview: o)),
+          StaggerItem(
+            index: i++,
+            child: SectionHeader(title: l.togetherSpecialsTitle, padding: header),
+          ),
+          StaggerItem(index: i++, child: specials),
           StaggerItem(
             index: i++,
             child: SectionHeader(
