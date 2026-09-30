@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
+import 'package:madar/core/design/widgets/widgets.dart';
 import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/interaction/interaction.dart';
@@ -226,6 +227,26 @@ void main() {
       // The running fast keeps its own 16 h goal: yesterday 20:05 + 16 h.
       expect(goal.at, DateTime(2026, 9, 29, 12, 5));
       expect(goal.id, BodyReminderIds.goal);
+    });
+
+    testWidgets('switching the eating reminder on asks for the permission once and plans it', (tester) async {
+      final env = await pumpBodyApp(tester, home: const BodyScreen(initialTab: BodyTab.fasting), seed: BodySeed.planOnly);
+      final toggle = find.byWidgetPredicate((w) => w is MadarSwitch && w.semanticLabel == ar.bodyNotifyEating);
+      await tester.ensureVisible(toggle);
+      await frames(tester, n: 4);
+      await tester.tap(toggle);
+      await frames(tester);
+      expect((await db(tester, () => BodyService(env.repos).fastingPlan())).notifyEatingClose, isTrue);
+      expect(env.reminders.permissionRequests, 1);
+      await env.container.read(bodyReminderSyncProvider.notifier).syncNow();
+      final eating = env.reminders.current.where((n) => n.kind == BodyNoticeKind.eatingClose).toList();
+      // 30 min before each of the next three 20:00 last meals.
+      expect(eating.map((n) => n.at), [
+        DateTime(2026, 9, 29, 19, 30),
+        DateTime(2026, 9, 30, 19, 30),
+        DateTime(2026, 10, 1, 19, 30),
+      ]);
+      expect(env.haptics.fired, isNotEmpty);
     });
   });
 

@@ -38,7 +38,8 @@ Future<List<DoseIn>> planDoseSlots(Repositories repos, {required DateTime from, 
     settings: await service.settings(),
     prayerTime: await _prayerTime(repos),
   );
-  final days = MedDays.dateOnly(now).difference(MedDays.dateOnly(from)).inDays + 1;
+  // Calendar days (a 23-hour DST day still counts).
+  final days = MedDays.between(from, now) + 1;
   if (days <= 0) return const [];
   // A day earlier: a log of a dose planned past midnight still matches.
   final logs = await service.logs(MedDays.add(MedDays.dateOnly(from), -1));

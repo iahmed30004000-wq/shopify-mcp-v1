@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../../../../core/db/database.dart';
 import '../../../../core/domain/enums.dart';
 import 'lab_flags.dart';
+import 'lab_series.dart' show RecordDates;
 
 /// Sections the user can include in the doctor report (in print order).
 enum ReportSection { alerts, conditions, medications, labs, pain, mood, questions }
@@ -23,7 +24,7 @@ enum ReportPeriod {
   DateTime? start(DateTime today) {
     final m = months;
     if (m == null) return null;
-    return DateTime(today.year, today.month - m, today.day);
+    return RecordDates.monthsBefore(today, m);
   }
 }
 

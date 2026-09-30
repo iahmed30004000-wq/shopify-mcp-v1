@@ -166,6 +166,9 @@ final insightReadinessProvider = Provider<InsightReadiness>(
 
 /// Whether the gentle support banner shows (see [SupportRule]).
 final supportStateProvider = Provider<SupportState>((ref) {
+  // Re-evaluated at least daily: check-ins age out of the rule's window and
+  // a dismissal expires without any new entry.
+  ref.watch(wellbeingTodayProvider);
   final entries = ref.watch(moodEntriesProvider).value;
   final settings = ref.watch(wellbeingSettingsProvider).value;
   if (entries == null || settings == null) return SupportState.none;

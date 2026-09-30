@@ -11,6 +11,10 @@ abstract interface class BodyReminderScheduler {
   Future<void> replaceAll(List<BodyNotice> notices);
 
   Future<void> cancelAll();
+
+  /// Asks for the notification permission when it is missing (called when
+  /// the user switches a fasting notification on); true when granted.
+  Future<bool> ensurePermission();
 }
 
 /// [BodyReminderScheduler] over Madar's [NotificationService]: its own id
@@ -69,12 +73,30 @@ class NotificationBodyReminderScheduler implements BodyReminderScheduler {
 
   @override
   Future<void> cancelAll() => replaceAll(const []);
+
+  @override
+  Future<bool> ensurePermission() async {
+    if (await notifications.notificationsEnabled()) return true;
+    return notifications.requestNotifications();
+  }
 }
 
 /// Records what would have been scheduled (tests, previews).
 class RecordingBodyReminderScheduler implements BodyReminderScheduler {
   List<BodyNotice> current = const [];
   int syncs = 0;
+
+  /// How often the permission was asked for.
+  int permissionRequests = 0;
+
+  /// What [ensurePermission] answers.
+  bool granted = true;
+
+  @override
+  Future<bool> ensurePermission() async {
+    permissionRequests++;
+    return granted;
+  }
 
   @override
   Future<void> replaceAll(List<BodyNotice> notices) async {

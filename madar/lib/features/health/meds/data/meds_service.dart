@@ -677,7 +677,7 @@ class MedsService {
         refId: row.id,
         at: when,
         value: 1,
-        payload: {'med': medId},
+        payload: {'med': medId, if (stock.units != null) unitsKey: stock.units},
       );
       return DoseActionResult(
         medName: med.name,
@@ -692,13 +692,21 @@ class MedsService {
     });
   }
 
-  Future<({int? after, MedsUndo undo})> _useStock(MedicationRow med, double? amount) async {
+  /// Activity payload key: the stock units a Taken used (so taking it back
+  /// returns exactly those, whatever the day's titration step or course
+  /// phase was).
+  static const unitsKey = 'units';
+
+  Future<({int? after, int? units, MedsUndo undo})> _useStock(MedicationRow med, double? amount) async {
     final before = med.stock;
-    if (before == null) return (after: null, undo: _noUndo);
-    final after = (before - MedStock.unitsPerDose(med.doseUnit, amount)).clamp(0, 1 << 30);
+    if (before == null) return (after: null, units: null, undo: _noUndo);
+    final units = MedStock.unitsPerDose(med.doseUnit, amount);
+    final after = (before - units).clamp(0, 1 << 30);
     await repos.medications.update(MedicationsCompanion(id: Value(med.id), stock: Value(after)));
     return (
       after: after,
+      // What actually left the stock (a stock of 1 gives 1 for a dose of 2).
+      units: before - after,
       undo: () => repos.medications.update(MedicationsCompanion(id: Value(med.id), stock: Value(before))),
     );
   }
@@ -709,8 +717,11 @@ class MedsService {
     final removed = await repos.activity.removeFor(refTable: doseTable, refId: row.id, kind: doseActivityKind);
     MedsUndo stockUndo = _noUndo;
     if (med?.stock != null) {
-      final units = MedStock.unitsPerDose(med!.doseUnit, med.doseAmount);
-      final before = med.stock!;
+      // The units the Taken recorded; older entries fall back to the
+      // medication's own dose.
+      final recorded = removed.map((a) => a.payload[unitsKey]).whereType<num>().firstOrNull;
+      final units = recorded?.toInt() ?? MedStock.unitsPerDose(med!.doseUnit, med.doseAmount);
+      final before = med!.stock!;
       await repos.medications.update(MedicationsCompanion(id: Value(med.id), stock: Value(before + units)));
       stockUndo = () => repos.medications.update(MedicationsCompanion(id: Value(med.id), stock: Value(before)));
     }
@@ -792,7 +803,7 @@ class MedsService {
         refId: row.id,
         at: when,
         value: 1,
-        payload: {'med': medId},
+        payload: {'med': medId, if (stock.units != null) unitsKey: stock.units},
       );
       return DoseActionResult(
         medName: med.name,

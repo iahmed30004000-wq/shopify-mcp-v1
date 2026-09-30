@@ -107,8 +107,14 @@ abstract final class WorryWindow {
 
   static WorryWindowStatus statusAt(WorryWindowSettings s, DateTime now) {
     if (!s.enabled) return const WorryWindowStatus(WorryWindowPhase.off);
+    final length = Duration(minutes: s.durationMinutes);
+    // A late window (23:50 for 20 min) runs on past midnight.
+    final yesterday = startOn(WbDays.add(WbDays.dateOf(now), -1), s);
+    if (now.isBefore(yesterday.add(length))) {
+      return WorryWindowStatus(WorryWindowPhase.open, start: yesterday, end: yesterday.add(length));
+    }
     final start = startOn(now, s);
-    final end = start.add(Duration(minutes: s.durationMinutes));
+    final end = start.add(length);
     if (now.isBefore(start)) return WorryWindowStatus(WorryWindowPhase.before, start: start, end: end);
     if (now.isBefore(end)) return WorryWindowStatus(WorryWindowPhase.open, start: start, end: end);
     final next = startOn(WbDays.add(WbDays.dateOf(now), 1), s);

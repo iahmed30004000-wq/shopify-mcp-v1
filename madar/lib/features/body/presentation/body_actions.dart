@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -317,6 +319,10 @@ abstract final class BodyActions {
     final next = change(current);
     if (next == current) return;
     await ref.read(bodyServiceProvider).setFastingPlan(next);
+    // A notification just switched on: ask for the permission if missing.
+    if ((next.notifyGoal && !current.notifyGoal) || (next.notifyEatingClose && !current.notifyEatingClose)) {
+      unawaited(ref.read(bodyReminderSchedulerProvider).ensurePermission().catchError((_) => false));
+    }
   }
 
   static Future<void> customFastHours(BuildContext context, WidgetRef ref) async {

@@ -20,7 +20,18 @@ enum LabPeriod {
   DateTime? start(DateTime today) {
     final m = months;
     if (m == null) return null;
-    return DateTime(today.year, today.month - m, today.day);
+    return RecordDates.monthsBefore(today, m);
+  }
+}
+
+abstract final class RecordDates {
+  /// [day]'s date [months] calendar months earlier, the day of month clamped
+  /// to that month's length (31 May − 3 months = 28 Feb, never 3 Mar).
+  static DateTime monthsBefore(DateTime day, int months) {
+    final total = day.year * 12 + (day.month - 1) - months;
+    final y = total ~/ 12, m = total % 12 + 1;
+    final last = DateTime(y, m + 1, 0).day;
+    return DateTime(y, m, math.min(day.day, last));
   }
 }
 
@@ -238,7 +249,7 @@ class LabChartScale {
 class ChartTimeAxis {
   ChartTimeAxis({required DateTime start, required DateTime end, required this.rtl})
     : start = _day(start),
-      end = _day(end).isAfter(_day(start)) ? _day(end) : _day(start).add(const Duration(days: 1));
+      end = _day(end).isAfter(_day(start)) ? _day(end) : _shift(_day(start), 1);
 
   /// Covers [dates] (padded by [padFraction] of the span on both sides, at
   /// least a day), extended to [from] / [to] when given.
@@ -258,11 +269,7 @@ class ChartTimeAxis {
     }
     final span = _days(_day(s), _day(e));
     final pad = math.max(1, (span * padFraction).round());
-    return ChartTimeAxis(
-      start: _day(s).subtract(Duration(days: pad)),
-      end: _day(e).add(Duration(days: pad)),
-      rtl: rtl,
-    );
+    return ChartTimeAxis(start: _shift(_day(s), -pad), end: _shift(_day(e), pad), rtl: rtl);
   }
 
   final DateTime start;
@@ -288,6 +295,9 @@ class ChartTimeAxis {
   double fraction(DateTime day) => span == 0 ? 0.5 : x(day) / span;
 
   static DateTime _day(DateTime d) => DateTime(d.year, d.month, d.day);
+
+  /// Calendar days, not 24-hour steps (a DST night is 23 or 25 hours).
+  static DateTime _shift(DateTime d, int days) => DateTime(d.year, d.month, d.day + days);
 
   /// Whole calendar days between two local midnights (DST-safe).
   static int _days(DateTime a, DateTime b) =>
