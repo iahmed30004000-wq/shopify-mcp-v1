@@ -192,7 +192,7 @@ class _HealthSettingsScreenState extends ConsumerState<HealthSettingsScreen> {
       for (final m in MealSlot.values)
         '${m == MealSlot.values.first ? tx.mealTitle(m) : tx.meal(m)} '
                 '${tx.clock((meds ?? const MedsSettings()).mealTime(m))}'
-            .replaceAll(' ', ' '),
+            .replaceAll(' ', '\u00A0'),
     ].join(l.recordListSeparator);
     final offsets = record.remindersEnabled && record.effectiveOffsets.isNotEmpty
         ? [for (final o in record.effectiveOffsets) texts.reminderOffset(o)].join(l.recordListSeparator)

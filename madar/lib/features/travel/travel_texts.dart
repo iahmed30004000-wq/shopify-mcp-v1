@@ -77,14 +77,13 @@ class TravelTexts {
         : MadarDateStyle.medium;
     if (end == null) return '${fmt.formatDate(s, style: style)}${l.commonFactSeparator}${l.travelOpenEnded}';
     if (TravelDates.sameDay(s, end)) return fmt.formatDate(s, style: style);
-    if (s.year == end.year && s.month == end.month && style == MadarDateStyle.dayMonth) {
-      // The month once: "١٢ – ١٨ أكتوبر" in Arabic, "October 12 – 18" in
-      // English (where the month leads the day).
-      if (!fmt.isArabic) {
-        return '${fmt.formatDate(s, style: MadarDateStyle.dayMonth)} – ${fmt.formatInt(end.day, grouping: false)}';
-      }
-      final month = fmt.formatDate(end, style: MadarDateStyle.dayMonth);
-      return '${fmt.formatInt(s.day, grouping: false)} – $month';
+    if (s.year == end.year && s.month == end.month) {
+      // The month (and year) once: "١٢ – ١٨ أكتوبر" in Arabic, "October
+      // 12 – 18" / "January 3 – 9, 2027" in English (the month leads).
+      String num(int v) => fmt.formatInt(v, grouping: false);
+      if (fmt.isArabic) return '${num(s.day)} – ${fmt.formatDate(end, style: style)}';
+      final head = '${fmt.formatDate(s, style: MadarDateStyle.dayMonth)} – ${num(end.day)}';
+      return style == MadarDateStyle.dayMonth ? head : '$head, ${num(end.year)}';
     }
     return '${fmt.formatDate(s, style: style)} – ${fmt.formatDate(end, style: style)}';
   }
