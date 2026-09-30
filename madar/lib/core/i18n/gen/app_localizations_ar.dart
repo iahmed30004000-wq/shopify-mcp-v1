@@ -18480,6 +18480,127 @@ class L10nAr extends L10n {
   String get cinemaFxReelLabel => 'بكرة';
 
   @override
+  String get cinemaHallNowShowing => 'يُعرض الآن';
+
+  @override
+  String get cinemaHallTonight => 'عرض الليلة';
+
+  @override
+  String get cinemaHallWelcome => 'أهلًا بك في قصر العروض';
+
+  @override
+  String get cinemaHallProgramme => 'البرنامج الكامل';
+
+  @override
+  String get cinemaHallAllEras => 'كل العصور';
+
+  @override
+  String get cinemaHallAllKinds => 'كل الأنواع';
+
+  @override
+  String get cinemaHallReadyOnly => 'الجاهز للعرض';
+
+  @override
+  String get cinemaHallGenreCards => 'ألعاب الورق';
+
+  @override
+  String get cinemaHallGenreBoard => 'ألعاب الطاولة';
+
+  @override
+  String get cinemaHallGenreArcade => 'الأركيد';
+
+  @override
+  String get cinemaHallGenrePuzzle => 'الألغاز';
+
+  @override
+  String get cinemaHallGenreWord => 'ألعاب الكلمات';
+
+  @override
+  String get cinemaHallBackstage => 'خلف الكواليس';
+
+  @override
+  String get cinemaHallLockedSlot => 'عرض قادم';
+
+  @override
+  String get cinemaHallLockedHint =>
+      'هذا الفيلم ما زال في غرفة المونتاج. عُد قريبًا!';
+
+  @override
+  String get cinemaHallShortsSoon =>
+      'عشرات الأفلام القصيرة في الطريق: ورق وطاولة وأركيد وكلمات.';
+
+  @override
+  String get cinemaHallNothingMatches =>
+      'لا عروض بهذا الاختيار. جرّب عصرًا آخر.';
+
+  @override
+  String get cinemaHallTicketBook => 'دفتر التذاكر';
+
+  @override
+  String get cinemaHallStatShows => 'العروض';
+
+  @override
+  String get cinemaHallStatWins => 'النهايات السعيدة';
+
+  @override
+  String get cinemaHallStatTime => 'وقت المشاهدة';
+
+  @override
+  String get cinemaHallStatFavourite => 'العرض المفضّل';
+
+  @override
+  String get cinemaHallFirstTicket =>
+      'تذكرتك الأولى بانتظارك. اختر عرضًا وادخل القاعة.';
+
+  @override
+  String cinemaHallBestBadge(String score) {
+    return 'الأفضل $score';
+  }
+
+  @override
+  String cinemaHallPosterLabel(String title, String era) {
+    return 'ملصق $title، $era';
+  }
+
+  @override
+  String get cinemaHallComingSoonTitle => 'العرض لم يبدأ بعد';
+
+  @override
+  String get cinemaHallComingSoonBody =>
+      'ما زلنا نصوّر هذا الفيلم. الستارة ستُفتح قريبًا.';
+
+  @override
+  String get cinemaHallNotFound => 'لم نجد هذا العرض في البرنامج.';
+
+  @override
+  String get cinemaHallBackToLobby => 'العودة إلى الردهة';
+
+  @override
+  String get cinemaHallPrayerMuted => 'الصوت متوقف وقت الصلاة';
+
+  @override
+  String get cinemaHallFooter =>
+      'كل صورة هنا مرسومة بالكود، وكل نغمة مؤلَّفة لحظة العرض.';
+
+  @override
+  String get cinemaStageBoothNote => 'البكرة تستريح… والعرض بانتظارك.';
+
+  @override
+  String get cinemaStageScore => 'النتيجة';
+
+  @override
+  String get cinemaStageBest => 'الأفضل';
+
+  @override
+  String get cinemaStageNewRecord => 'رقم قياسي جديد!';
+
+  @override
+  String get cinemaStageRunningTime => 'مدة العرض';
+
+  @override
+  String get cinemaStageAdmitOne => 'تذكرة دخول';
+
+  @override
   String get cinemaRigCast => 'طاقم التمثيل';
 
   @override
@@ -18723,7 +18844,7 @@ class L10nAr extends L10n {
 
   @override
   String get dataBackupSheetSubtitle =>
-      'AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك';
+      'تشفير AES-GCM · تُشتقّ المفاتيح بـArgon2id على هاتفك';
 
   @override
   String get dataBackupSheetBody =>
@@ -18779,7 +18900,7 @@ class L10nAr extends L10n {
 
   @override
   String get dataStrengthHintPattern =>
-      'تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.';
+      'تجنّب التكرار والتسلسلات مثل abcd أو aaaa.';
 
   @override
   String get dataStrengthHintDigits => 'الأرقام وحدها سهلة التخمين؛ أضف كلمات.';
@@ -22480,7 +22601,9 @@ class L10nAr extends L10n {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'بقيت $count',
+      other: 'بقي $count',
+      many: 'بقي $count',
+      few: 'بقيت $count',
       two: 'بقيت اثنتان',
       one: 'بقيت واحدة',
     );
@@ -22499,6 +22622,8 @@ class L10nAr extends L10n {
       count,
       locale: localeName,
       other: '$count لم تكتمل أمس',
+      many: '$count لم تكتمل أمس',
+      few: '$count لم تكتمل أمس',
       two: 'اثنتان لم تكتملا أمس',
       one: 'واحدة لم تكتمل أمس',
     );
@@ -22780,6 +22905,7 @@ class L10nAr extends L10n {
       many: 'آخر لعب قبل $days يومًا',
       few: 'آخر لعب قبل $days أيام',
       two: 'آخر لعب قبل يومين',
+      one: 'آخر لعب قبل يوم',
     );
     return '$_temp0';
   }

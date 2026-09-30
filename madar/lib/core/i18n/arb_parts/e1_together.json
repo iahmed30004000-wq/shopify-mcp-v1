@@ -1567,7 +1567,7 @@
   },
   "togetherTrophyChallengeChampions": {
     "ar": "أبطال التحدّي",
-    "en": "Challenge champions"
+    "en": "Weekly heroes"
   },
   "togetherTrophyChallengeChampionsDesc": {
     "ar": "تحدّي الأسبوع أربعة أسابيع متتالية",
@@ -1575,7 +1575,7 @@
   },
   "togetherTrophyDreamCameTrue": {
     "ar": "حلم تحقّق",
-    "en": "Dream come true"
+    "en": "Wish granted"
   },
   "togetherTrophyDreamCameTrueDesc": {
     "ar": "هدف مشترك تحقّق ومكافأته فُتحت",

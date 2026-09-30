@@ -37,8 +37,26 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
     for (final k in KnowMeCatalogue.iconKeys) k: SpecialsLook.categoryIcon(k),
   };
 
+  /// Runs an edit the bank may refuse (a text that cleans to nothing, a
+  /// category deleted meanwhile): refused edits only buzz.
+  Future<bool> _edit(KnowMeBank Function(KnowMeBank b) change) async {
+    try {
+      await _repo.updateBank(change);
+      return true;
+    } on BankEditException {
+      Fx.fire(Sfx.error);
+      return false;
+    }
+  }
+
   Future<void> _undoable(Future<SpecialsUndo> change, String label) async {
-    final undo = await change;
+    final SpecialsUndo undo;
+    try {
+      undo = await change;
+    } on BankEditException {
+      Fx.fire(Sfx.error);
+      return;
+    }
     if (!mounted) return;
     unawaited(showUndoToast(context, UndoableAction(label: label, undo: undo)));
   }
@@ -78,8 +96,8 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
     final category = values?['category'];
     if (text is! String || category is! String) return;
     final id = SpecialsBounds.newId('q');
-    await _repo.updateBank((b) => b.addQuestion(id: id, categoryId: category, text: text));
-    if (mounted && category != _selected) setState(() => _selected = category);
+    final added = await _edit((b) => b.addQuestion(id: id, categoryId: category, text: text));
+    if (added && mounted && category != _selected) setState(() => _selected = category);
   }
 
   Future<void> _editQuestion(KnowMeBank bank, KnowMeQuestion q) async {
@@ -107,7 +125,7 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
     // Unchanged default wording stays the default (and follows the app
     // language).
     final reworded = text.trim() != st.question(q).trim();
-    await _repo.updateBank((b) => b.editQuestion(q.id, text: reworded ? text : null, categoryId: category));
+    await _edit((b) => b.editQuestion(q.id, text: reworded ? text : null, categoryId: category));
   }
 
   Future<void> _moveQuestion(KnowMeBank bank, KnowMeQuestion q) async {
@@ -153,8 +171,8 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
     if (name is! String) return;
     final icon = values?['icon'];
     final id = SpecialsBounds.newId('c');
-    await _repo.updateBank((b) => b.addCategory(id: id, name: name, icon: icon is String ? icon : ''));
-    if (mounted) setState(() => _selected = id);
+    final added = await _edit((b) => b.addCategory(id: id, name: name, icon: icon is String ? icon : ''));
+    if (added && mounted) setState(() => _selected = id);
   }
 
   Future<void> _editCategory(KnowMeBank bank, KnowMeCategory c) async {
@@ -179,7 +197,7 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
     final name = values['name'];
     final icon = values['icon'];
     final unchanged = name is String && name.trim() == st.category(c).trim();
-    await _repo.updateBank(
+    await _edit(
       (b) => b.renameCategory(c.id, unchanged ? c.name : (name is String ? name : ''), icon: icon is String ? icon : null),
     );
   }

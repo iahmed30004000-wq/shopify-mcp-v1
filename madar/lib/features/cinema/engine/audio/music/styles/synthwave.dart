@@ -74,10 +74,10 @@ final class SynthwaveComposer implements StyleComposer {
     final lead = b.stem(const StemSpec('lead', layer: 0.3, reverb: 0.3, delayBeats: 0.75, delayFeedback: 0.3));
     final hot = b.stem(const StemSpec('hot', layer: 0.6, reverb: 0.25, stereo: true, delayBeats: 0.75, delayFeedback: 0.35, gain: 0.7));
     final all = b.introBars + b.loopBars;
-    b.pattern(Inst.kick, const ['x...x...x...x...'], stem: bed, vel: 0.8);
+    b.pattern(Inst.kick, const ['x...x...x...x...'], stem: bed, vel: 0.62);
     b.pattern(Inst.gatedSnare, const ['....x.......x...'], stem: bed, vel: 0.6);
-    b.pattern(Inst.clap, const ['....x.......x...'], stem: bed, vel: 0.3);
-    b.pattern(Inst.hatClosed, action ? const ['xxXxxxXxxxXxxxXx'] : const ['..x...x...x...x.'], stem: bed, vel: 0.3);
+    b.pattern(Inst.clap, const ['....x.......x...'], stem: bed, vel: 0.4);
+    b.pattern(Inst.hatClosed, action ? const ['xxXxxxXxxxXxxxXx'] : const ['x.X.x.X.x.X.x.X.'], stem: bed, vel: 0.5, gain: 1.5);
     b.pattern(
       Inst.tomHigh,
       const ['................', '................', '................', '........x.x.xxxx'],
@@ -88,8 +88,8 @@ final class SynthwaveComposer implements StyleComposer {
     b.pattern(Inst.tomLow, const ['................', '................', '................', '............x.xx'], stem: bed, vel: 0.5);
     b.phraseCymbals(Inst.crash, stem: bed, vel: 0.4);
     final gallop = boss ? const ['R.RRR.RRR.RRR.RR', 'R.RRR.RRR.RRO.OO'] : const ['R.R.O.R.R.R.O.R.', 'R.R.O.R.R.R.O.RO'];
-    b.notes(Inst.synthBass, riffBass(b.chart, b.loopStart, b.loopBars, b.key, gallop, base: 36), stem: bed, vel: 0.62);
-    addPad(b.ev, Inst.synthPad, b.chart, b.key, start: 0, beats: all * 4.0, floor: 55, size: 4, stem: bed, vel: 0.4);
+    b.notes(Inst.synthBass, riffBass(b.chart, b.loopStart, b.loopBars, b.key, gallop, base: 36), stem: bed, vel: 0.52, gain: 0.8);
+    addPad(b.ev, Inst.synthPad, b.chart, b.key, start: 0, beats: all * 4.0, floor: 55, size: 4, stem: bed, vel: 0.36, gain: 0.8);
     final mel = b.melody(
       MelodySpec(lo: boss ? 62 : 64, hi: boss ? 81 : 84, rhythms: _leadCells, form: 'AABA', stepBias: 0.72, leap: 0.14, chromatic: 0.05),
     );
@@ -109,7 +109,8 @@ final class SynthwaveComposer implements StyleComposer {
       span: 2,
       shape: action ? 'updown' : 'up',
       stem: hot,
-      vel: 0.42,
+      vel: 0.33,
+      gain: 0.6,
       gate: 0.6,
     );
     // Intro: filtered arp alone (title: plus pad swell), then the kit enters.
@@ -195,6 +196,9 @@ final class SynthwaveComposer implements StyleComposer {
       mask: 'x.xx.xx.x.xx.x.x',
     );
     b.pattern(Inst.gatedSnare, const ['................', '............x...'], stem: hot, vel: 0.45);
+    // A distant, sparse lead: long notes that hang in the echo.
+    final mel = b.melody(const MelodySpec(lo: 69, hi: 88, rhythms: ['x-------........', '........x-------', '................', 'x-----x---------'], form: 'ABAC'), salt: 3);
+    _lead(b, lead, mel, vel: 0.4);
     return b.build();
   }
 

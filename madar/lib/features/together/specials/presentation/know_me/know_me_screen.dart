@@ -81,16 +81,6 @@ class _KnowMeScreenState extends ConsumerState<KnowMeScreen> {
       title: l.togetherGameKnowMe,
       backdropSeed: 2.7,
       animateBackdrop: widget.animateBackdrop,
-      actions: [
-        MadarButton.icon(
-          key: const ValueKey('knowme-edit-questions'),
-          icon: Icons.edit_note_rounded,
-          onPressed: _openBank,
-          semanticLabel: l.togetherKnowMeEditQuestions,
-          variant: MadarButtonVariant.ghost,
-          sfx: Sfx.navigate,
-        ),
-      ],
       body: !ready
           ? const Center(child: OrbitLoader(size: 40))
           : _body(context, bank.requireValue, prefs.requireValue, profiles.requireValue, ledger.requireValue.tallyOf('knowMe')),
@@ -175,10 +165,25 @@ class _KnowMeScreenState extends ConsumerState<KnowMeScreen> {
                         ),
                     ],
                   ),
-                  const SizedBox(height: Space.s),
-                  Text(
-                    available == 0 ? l.togetherKnowMeNoQuestions : st.questions(available),
-                    style: text.bodySmall?.copyWith(color: available == 0 ? t.warning : t.textSecondary),
+                  const SizedBox(height: Space.xs),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          available == 0 ? l.togetherKnowMeNoQuestions : st.questions(available),
+                          style: text.bodySmall?.copyWith(color: available == 0 ? t.warning : t.textSecondary),
+                        ),
+                      ),
+                      MadarButton(
+                        key: const ValueKey('knowme-edit-questions'),
+                        label: l.togetherKnowMeEditQuestions,
+                        icon: Icons.edit_note_rounded,
+                        variant: MadarButtonVariant.ghost,
+                        size: MadarButtonSize.small,
+                        sfx: Sfx.navigate,
+                        onPressed: _openBank,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -212,20 +217,6 @@ class _KnowMeScreenState extends ConsumerState<KnowMeScreen> {
               size: MadarButtonSize.large,
               expand: true,
               onPressed: available == 0 ? null : () => _start(bank, prefs),
-            ),
-          ),
-          const SizedBox(height: Space.m),
-          StaggerItem(
-            index: i++,
-            child: Center(
-              child: MadarButton(
-                label: tx.facts([l.togetherKnowMeEditQuestions, st.questions(bank.questions.length)]),
-                icon: Icons.edit_note_rounded,
-                variant: MadarButtonVariant.ghost,
-                size: MadarButtonSize.small,
-                sfx: Sfx.navigate,
-                onPressed: _openBank,
-              ),
             ),
           ),
         ],

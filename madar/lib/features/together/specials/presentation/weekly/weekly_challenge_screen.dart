@@ -102,14 +102,6 @@ class _WeeklyChallengeScreenState extends ConsumerState<WeeklyChallengeScreen> {
           variant: MadarButtonVariant.ghost,
           sfx: Sfx.navigate,
         ),
-        MadarButton.icon(
-          key: const ValueKey('weekly-settings'),
-          icon: Icons.tune_rounded,
-          onPressed: () => unawaited(showSpecialsSettingsSheet(context)),
-          semanticLabel: l.togetherSpecialsSettings,
-          variant: MadarButtonVariant.ghost,
-          sfx: Sfx.sheetOpen,
-        ),
       ],
       body: switch ((view, profiles)) {
         (AsyncData(value: final v), final TogetherProfiles p) => _body(context, v, p),
@@ -191,7 +183,7 @@ class _WeeklyChallengeScreenState extends ConsumerState<WeeklyChallengeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                    child: StatTile(
+                    child: _WeekStat(
                       key: const ValueKey('weekly-streak'),
                       label: l.togetherWeeklyStreak,
                       value: view.streak > 0 ? '×${st.n(view.streak)}' : '—',
@@ -201,7 +193,7 @@ class _WeeklyChallengeScreenState extends ConsumerState<WeeklyChallengeScreen> {
                   ),
                   const SizedBox(width: Space.s),
                   Expanded(
-                    child: StatTile(
+                    child: _WeekStat(
                       label: l.togetherWeeklyBest,
                       value: view.log.best > 0 ? '×${st.n(view.log.best)}' : '—',
                       icon: Icons.workspace_premium_rounded,
@@ -210,7 +202,7 @@ class _WeeklyChallengeScreenState extends ConsumerState<WeeklyChallengeScreen> {
                   ),
                   const SizedBox(width: Space.s),
                   Expanded(
-                    child: StatTile(
+                    child: _WeekStat(
                       key: const ValueKey('weekly-total'),
                       label: l.togetherWeeklyTotal,
                       value: st.n(view.log.total),
@@ -231,6 +223,44 @@ class _WeeklyChallengeScreenState extends ConsumerState<WeeklyChallengeScreen> {
           ),
           StaggerItem(index: i++, child: _WeekStrip(view: view)),
         ],
+      ),
+    );
+  }
+}
+
+/// A number of the challenge log: icon, value and a label of up to two
+/// lines (long labels at large text sizes are never cut).
+class _WeekStat extends StatelessWidget {
+  const _WeekStat({super.key, required this.label, required this.value, required this.icon, required this.color});
+
+  final String label;
+  final String value;
+  final IconData icon;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return Semantics(
+      container: true,
+      label: '$label: $value',
+      excludeSemantics: true,
+      child: GlassCard(
+        padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.s, Space.m),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, size: 20, color: color, shadows: [Shadow(color: color.withValues(alpha: 0.6), blurRadius: 10)]),
+            const SizedBox(height: Space.xs),
+            Text(
+              value,
+              style: SpecialsLook.numerals(text.titleLarge)?.copyWith(color: t.textPrimary),
+              maxLines: 1,
+            ),
+            Text(label, style: text.labelMedium?.copyWith(color: t.textSecondary), maxLines: 2, overflow: TextOverflow.ellipsis),
+          ],
+        ),
       ),
     );
   }
@@ -282,13 +312,31 @@ class WeeklyChallengeHero extends StatelessWidget {
                   style: text.labelLarge?.copyWith(color: t.gold, fontWeight: FontWeight.w700),
                 ),
               ),
+              // "Renews on …" opens the week-start setting.
               Flexible(
-                child: Text(
-                  tx.facts([st.daysLeft(view.daysLeft), l.togetherWeeklyRenewsOn(st.weekday(view.weekStart))]),
-                  key: const ValueKey('weekly-renews'),
-                  style: text.labelSmall?.copyWith(color: t.textSecondary),
-                  textAlign: TextAlign.end,
-                  maxLines: 2,
+                child: MadarPressable(
+                  key: const ValueKey('weekly-settings'),
+                  onTap: () => unawaited(showSpecialsSettingsSheet(context)),
+                  sfx: Sfx.sheetOpen,
+                  semanticLabel: '${tx.facts([st.daysLeft(view.daysLeft), l.togetherWeeklyRenewsOn(st.weekday(view.weekStart))])}. '
+                      '${l.togetherSpecialsSettings}',
+                  excludeChildSemantics: true,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          tx.facts([st.daysLeft(view.daysLeft), l.togetherWeeklyRenewsOn(st.weekday(view.weekStart))]),
+                          key: const ValueKey('weekly-renews'),
+                          style: text.labelSmall?.copyWith(color: t.textSecondary),
+                          textAlign: TextAlign.end,
+                          maxLines: 2,
+                        ),
+                      ),
+                      const SizedBox(width: Space.xs),
+                      Icon(Icons.tune_rounded, size: 14, color: t.textTertiary),
+                    ],
+                  ),
                 ),
               ),
             ],

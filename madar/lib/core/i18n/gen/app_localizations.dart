@@ -28425,6 +28425,228 @@ abstract class L10n {
   /// **'بكرة'**
   String get cinemaFxReelLabel;
 
+  /// Marquee heading over the Tier 1 feature posters
+  ///
+  /// In ar, this message translates to:
+  /// **'يُعرض الآن'**
+  String get cinemaHallNowShowing;
+
+  /// Letterboard caption over the featured title
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الليلة'**
+  String get cinemaHallTonight;
+
+  /// No description provided for @cinemaHallWelcome.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهلًا بك في قصر العروض'**
+  String get cinemaHallWelcome;
+
+  /// No description provided for @cinemaHallProgramme.
+  ///
+  /// In ar, this message translates to:
+  /// **'البرنامج الكامل'**
+  String get cinemaHallProgramme;
+
+  /// Filter chip: no era filter
+  ///
+  /// In ar, this message translates to:
+  /// **'كل العصور'**
+  String get cinemaHallAllEras;
+
+  /// Filter chip: no genre filter
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الأنواع'**
+  String get cinemaHallAllKinds;
+
+  /// Filter chip: playable games only
+  ///
+  /// In ar, this message translates to:
+  /// **'الجاهز للعرض'**
+  String get cinemaHallReadyOnly;
+
+  /// No description provided for @cinemaHallGenreCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعاب الورق'**
+  String get cinemaHallGenreCards;
+
+  /// No description provided for @cinemaHallGenreBoard.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعاب الطاولة'**
+  String get cinemaHallGenreBoard;
+
+  /// No description provided for @cinemaHallGenreArcade.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأركيد'**
+  String get cinemaHallGenreArcade;
+
+  /// No description provided for @cinemaHallGenrePuzzle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الألغاز'**
+  String get cinemaHallGenrePuzzle;
+
+  /// No description provided for @cinemaHallGenreWord.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعاب الكلمات'**
+  String get cinemaHallGenreWord;
+
+  /// Shelf with the engine demo
+  ///
+  /// In ar, this message translates to:
+  /// **'خلف الكواليس'**
+  String get cinemaHallBackstage;
+
+  /// Label on a locked poster slot
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض قادم'**
+  String get cinemaHallLockedSlot;
+
+  /// No description provided for @cinemaHallLockedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الفيلم ما زال في غرفة المونتاج. عُد قريبًا!'**
+  String get cinemaHallLockedHint;
+
+  /// No description provided for @cinemaHallShortsSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'عشرات الأفلام القصيرة في الطريق: ورق وطاولة وأركيد وكلمات.'**
+  String get cinemaHallShortsSoon;
+
+  /// No description provided for @cinemaHallNothingMatches.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا عروض بهذا الاختيار. جرّب عصرًا آخر.'**
+  String get cinemaHallNothingMatches;
+
+  /// Section with the player's play statistics
+  ///
+  /// In ar, this message translates to:
+  /// **'دفتر التذاكر'**
+  String get cinemaHallTicketBook;
+
+  /// Stat label: games played
+  ///
+  /// In ar, this message translates to:
+  /// **'العروض'**
+  String get cinemaHallStatShows;
+
+  /// Stat label: games won
+  ///
+  /// In ar, this message translates to:
+  /// **'النهايات السعيدة'**
+  String get cinemaHallStatWins;
+
+  /// Stat label: total play time
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت المشاهدة'**
+  String get cinemaHallStatTime;
+
+  /// Stat label: most played game
+  ///
+  /// In ar, this message translates to:
+  /// **'العرض المفضّل'**
+  String get cinemaHallStatFavourite;
+
+  /// No description provided for @cinemaHallFirstTicket.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكرتك الأولى بانتظارك. اختر عرضًا وادخل القاعة.'**
+  String get cinemaHallFirstTicket;
+
+  /// Badge on a poster with the best score
+  ///
+  /// In ar, this message translates to:
+  /// **'الأفضل {score}'**
+  String cinemaHallBestBadge(String score);
+
+  /// Screen-reader label of a poster
+  ///
+  /// In ar, this message translates to:
+  /// **'ملصق {title}، {era}'**
+  String cinemaHallPosterLabel(String title, String era);
+
+  /// No description provided for @cinemaHallComingSoonTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'العرض لم يبدأ بعد'**
+  String get cinemaHallComingSoonTitle;
+
+  /// No description provided for @cinemaHallComingSoonBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما زلنا نصوّر هذا الفيلم. الستارة ستُفتح قريبًا.'**
+  String get cinemaHallComingSoonBody;
+
+  /// No description provided for @cinemaHallNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نجد هذا العرض في البرنامج.'**
+  String get cinemaHallNotFound;
+
+  /// No description provided for @cinemaHallBackToLobby.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة إلى الردهة'**
+  String get cinemaHallBackToLobby;
+
+  /// No description provided for @cinemaHallPrayerMuted.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصوت متوقف وقت الصلاة'**
+  String get cinemaHallPrayerMuted;
+
+  /// No description provided for @cinemaHallFooter.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل صورة هنا مرسومة بالكود، وكل نغمة مؤلَّفة لحظة العرض.'**
+  String get cinemaHallFooter;
+
+  /// Pause menu (projector booth) subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'البكرة تستريح… والعرض بانتظارك.'**
+  String get cinemaStageBoothNote;
+
+  /// No description provided for @cinemaStageScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة'**
+  String get cinemaStageScore;
+
+  /// No description provided for @cinemaStageBest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأفضل'**
+  String get cinemaStageBest;
+
+  /// No description provided for @cinemaStageNewRecord.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم قياسي جديد!'**
+  String get cinemaStageNewRecord;
+
+  /// No description provided for @cinemaStageRunningTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة العرض'**
+  String get cinemaStageRunningTime;
+
+  /// Decorative text on a ticket stub
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكرة دخول'**
+  String get cinemaStageAdmitOne;
+
   /// Heading of the list of original Madar Cinema characters
   ///
   /// In ar, this message translates to:
@@ -28806,7 +29028,7 @@ abstract class L10n {
   /// No description provided for @dataBackupSheetSubtitle.
   ///
   /// In ar, this message translates to:
-  /// **'AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك'**
+  /// **'تشفير AES-GCM · تُشتقّ المفاتيح بـArgon2id على هاتفك'**
   String get dataBackupSheetSubtitle;
 
   /// No description provided for @dataBackupSheetBody.
@@ -28908,7 +29130,7 @@ abstract class L10n {
   /// No description provided for @dataStrengthHintPattern.
   ///
   /// In ar, this message translates to:
-  /// **'تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.'**
+  /// **'تجنّب التكرار والتسلسلات مثل abcd أو aaaa.'**
   String get dataStrengthHintPattern;
 
   /// No description provided for @dataStrengthHintDigits.
@@ -34776,7 +34998,7 @@ abstract class L10n {
   /// Widget: Top 3 items not done yet
   ///
   /// In ar, this message translates to:
-  /// **'{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} other{بقيت {count}}}'**
+  /// **'{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} few{بقيت {count}} many{بقي {count}} other{بقي {count}}}'**
   String widgetsTasksLeft(int count);
 
   /// Widget: every Top 3 item is done
@@ -34794,7 +35016,7 @@ abstract class L10n {
   /// Widget after midnight: yesterday's unfinished Top 3 waiting for the carry-over
   ///
   /// In ar, this message translates to:
-  /// **'{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} other{{count} لم تكتمل أمس}}'**
+  /// **'{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} few{{count} لم تكتمل أمس} many{{count} لم تكتمل أمس} other{{count} لم تكتمل أمس}}'**
   String widgetsTasksCarried(int count);
 
   /// Widget: the planned total under what is left
@@ -35232,7 +35454,7 @@ abstract class L10n {
   /// No description provided for @savedGamesLastPlayedDays.
   ///
   /// In ar, this message translates to:
-  /// **'{days, plural, =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}'**
+  /// **'{days, plural, =1{آخر لعب قبل يوم} =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}'**
   String savedGamesLastPlayedDays(int days);
 
   /// No description provided for @savedGamesLastPlayedOn.

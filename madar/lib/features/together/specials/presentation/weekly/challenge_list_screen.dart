@@ -22,6 +22,15 @@ class ChallengeListScreen extends ConsumerWidget {
 
   final bool animateBackdrop;
 
+  /// A refused change (a text that cleans to nothing) only buzzes.
+  static Future<void> _safely(Future<Object?> change) async {
+    try {
+      await change;
+    } on ChallengeEditException {
+      Fx.fire(Sfx.error);
+    }
+  }
+
   Future<void> _add(BuildContext context, WidgetRef ref, ChallengeList list) async {
     final l = SpecialsTexts.of(context).l;
     if (list.isFull) {
@@ -44,7 +53,7 @@ class ChallengeListScreen extends ConsumerWidget {
     );
     final text = values?['text'];
     if (text is! String) return;
-    await ref.read(specialsRepositoryProvider).updateChallenges((c) => c.add(id: SpecialsBounds.newId('w'), text: text));
+    await _safely(ref.read(specialsRepositoryProvider).updateChallenges((c) => c.add(id: SpecialsBounds.newId('w'), text: text)));
   }
 
   Future<void> _edit(BuildContext context, WidgetRef ref, Challenge c) async {
@@ -66,7 +75,7 @@ class ChallengeListScreen extends ConsumerWidget {
     );
     final text = values?['text'];
     if (text is! String || text.trim() == st.challenge(c).trim()) return;
-    await ref.read(specialsRepositoryProvider).updateChallenges((list) => list.edit(c.id, text));
+    await _safely(ref.read(specialsRepositoryProvider).updateChallenges((list) => list.edit(c.id, text)));
   }
 
   Future<UndoableAction?> _remove(BuildContext context, WidgetRef ref, ChallengeList list, Challenge c) async {
@@ -192,7 +201,7 @@ class ChallengeListScreen extends ConsumerWidget {
                               sfx: c.hidden ? Sfx.toggleOn : Sfx.toggleOff,
                               onPressed: !c.hidden && list.pool.length <= 1
                                   ? null
-                                  : () => unawaited(repo.updateChallenges((x) => x.setHidden(c.id, !c.hidden))),
+                                  : () => unawaited(_safely(repo.updateChallenges((x) => x.setHidden(c.id, !c.hidden)))),
                             ),
                           grip,
                         ],

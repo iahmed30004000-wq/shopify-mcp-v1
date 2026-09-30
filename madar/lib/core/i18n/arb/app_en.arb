@@ -17847,6 +17847,104 @@
   "@cinemaFxReelLabel": {
     "description": "Label on a film-leader card before a reel number"
   },
+  "cinemaHallNowShowing": "Now Showing",
+  "@cinemaHallNowShowing": {
+    "description": "Marquee heading over the Tier 1 feature posters"
+  },
+  "cinemaHallTonight": "Tonight",
+  "@cinemaHallTonight": {
+    "description": "Letterboard caption over the featured title"
+  },
+  "cinemaHallWelcome": "Welcome to the picture palace",
+  "cinemaHallProgramme": "The full programme",
+  "cinemaHallAllEras": "All eras",
+  "@cinemaHallAllEras": {
+    "description": "Filter chip: no era filter"
+  },
+  "cinemaHallAllKinds": "All kinds",
+  "@cinemaHallAllKinds": {
+    "description": "Filter chip: no genre filter"
+  },
+  "cinemaHallReadyOnly": "Ready to play",
+  "@cinemaHallReadyOnly": {
+    "description": "Filter chip: playable games only"
+  },
+  "cinemaHallGenreCards": "Card games",
+  "cinemaHallGenreBoard": "Board games",
+  "cinemaHallGenreArcade": "Arcade",
+  "cinemaHallGenrePuzzle": "Puzzles",
+  "cinemaHallGenreWord": "Word games",
+  "cinemaHallBackstage": "Backstage",
+  "@cinemaHallBackstage": {
+    "description": "Shelf with the engine demo"
+  },
+  "cinemaHallLockedSlot": "Coming attraction",
+  "@cinemaHallLockedSlot": {
+    "description": "Label on a locked poster slot"
+  },
+  "cinemaHallLockedHint": "This one is still in the cutting room. Come back soon!",
+  "cinemaHallShortsSoon": "Dozens of shorts on the way: cards, board games, arcade and words.",
+  "cinemaHallNothingMatches": "No shows match. Try another era.",
+  "cinemaHallTicketBook": "Ticket book",
+  "@cinemaHallTicketBook": {
+    "description": "Section with the player's play statistics"
+  },
+  "cinemaHallStatShows": "Shows",
+  "@cinemaHallStatShows": {
+    "description": "Stat label: games played"
+  },
+  "cinemaHallStatWins": "Happy endings",
+  "@cinemaHallStatWins": {
+    "description": "Stat label: games won"
+  },
+  "cinemaHallStatTime": "Time watched",
+  "@cinemaHallStatTime": {
+    "description": "Stat label: total play time"
+  },
+  "cinemaHallStatFavourite": "Favourite show",
+  "@cinemaHallStatFavourite": {
+    "description": "Stat label: most played game"
+  },
+  "cinemaHallFirstTicket": "Your first ticket is waiting. Pick a show and step inside.",
+  "cinemaHallBestBadge": "Best {score}",
+  "@cinemaHallBestBadge": {
+    "description": "Badge on a poster with the best score",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaHallPosterLabel": "{title} poster, {era}",
+  "@cinemaHallPosterLabel": {
+    "description": "Screen-reader label of a poster",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "era": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaHallComingSoonTitle": "This show hasn't opened yet",
+  "cinemaHallComingSoonBody": "We're still filming this one. The curtain rises soon.",
+  "cinemaHallNotFound": "We couldn't find this show in the programme.",
+  "cinemaHallBackToLobby": "Back to the lobby",
+  "cinemaHallPrayerMuted": "Sound paused for prayer",
+  "cinemaHallFooter": "Every picture here is drawn in code and every note is composed as it plays.",
+  "cinemaStageBoothNote": "The reel is resting. The show waits for you.",
+  "@cinemaStageBoothNote": {
+    "description": "Pause menu (projector booth) subtitle"
+  },
+  "cinemaStageScore": "Score",
+  "cinemaStageBest": "Best",
+  "cinemaStageNewRecord": "New record!",
+  "cinemaStageRunningTime": "Running time",
+  "cinemaStageAdmitOne": "Admit one",
+  "@cinemaStageAdmitOne": {
+    "description": "Decorative text on a ticket stub"
+  },
   "cinemaRigCast": "The Cast",
   "@cinemaRigCast": {
     "description": "Heading of the list of original Madar Cinema characters"
@@ -17979,7 +18077,7 @@
     }
   },
   "dataBackupSheetTitle": "Encrypted backup",
-  "dataBackupSheetSubtitle": "AES-256 · keys derived with Argon2id on your phone",
+  "dataBackupSheetSubtitle": "AES-GCM encryption · keys derived with Argon2id on your phone",
   "dataBackupSheetBody": "Choose a passphrase to lock the backup file. Madar never stores it and can’t recover it, so write it down somewhere you trust.",
   "dataPassphraseLabel": "Passphrase",
   "dataPassphraseConfirmLabel": "Type the passphrase again",
@@ -18003,7 +18101,7 @@
     }
   },
   "dataStrengthHintCommon": "This is a common password that’s easy to guess.",
-  "dataStrengthHintPattern": "Avoid repeats and runs like 1234 or aaaa.",
+  "dataStrengthHintPattern": "Avoid repeats and runs like abcd or aaaa.",
   "dataStrengthHintDigits": "Digits alone are easy to guess; add some words.",
   "dataStrengthHintWords": "Good. One or two more words make it much stronger.",
   "dataBackupWorking": "Locking your data…",
@@ -20690,9 +20788,9 @@
   },
   "togetherTrophyMindReader": "Mind reader",
   "togetherTrophyMindReaderDesc": "A perfect round of “How well do you know me?”",
-  "togetherTrophyChallengeChampions": "Challenge champions",
+  "togetherTrophyChallengeChampions": "Weekly heroes",
   "togetherTrophyChallengeChampionsDesc": "The weekly challenge, four weeks in a row",
-  "togetherTrophyDreamCameTrue": "Dream come true",
+  "togetherTrophyDreamCameTrue": "Wish granted",
   "togetherTrophyDreamCameTrueDesc": "A shared goal reached, its reward unlocked",
   "togetherWeeklyInRotation": "{count} in rotation",
   "@togetherWeeklyInRotation": {
@@ -21052,7 +21150,7 @@
   },
   "savedGamesLastPlayedToday": "Last played today",
   "savedGamesLastPlayedYesterday": "Last played yesterday",
-  "savedGamesLastPlayedDays": "{days, plural, other{Last played {days} days ago}}",
+  "savedGamesLastPlayedDays": "{days, plural, one{Last played {days} day ago} other{Last played {days} days ago}}",
   "@savedGamesLastPlayedDays": {
     "placeholders": {
       "days": {

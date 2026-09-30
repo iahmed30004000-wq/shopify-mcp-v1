@@ -188,7 +188,9 @@ class _KnowMeRoundScreenState extends ConsumerState<KnowMeRoundScreen> {
     Fx.fire(Sfx.navigate);
     unawaited(
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute<void>(builder: (_) => KnowMeRoundScreen(round: next, random: widget.random)),
+        MaterialPageRoute<void>(
+          builder: (_) => KnowMeRoundScreen(round: next, random: widget.random),
+        ),
       ),
     );
   }
@@ -313,7 +315,9 @@ class _KnowMeRoundScreenState extends ConsumerState<KnowMeRoundScreen> {
                 padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.m),
                 child: MadarButton(
                   key: const ValueKey('knowme-next'),
-                  label: questionDone ? (last ? l.togetherKnowMeSeeResults : l.togetherKnowMeNextQuestion) : l.togetherKnowMeJudgeFirst,
+                  label: questionDone
+                      ? (last ? l.togetherKnowMeSeeResults : l.togetherKnowMeNextQuestion)
+                      : l.togetherKnowMeJudgeFirst,
                   icon: last ? Icons.emoji_events_rounded : Icons.arrow_forward_rounded,
                   size: MadarButtonSize.large,
                   expand: true,
@@ -422,84 +426,92 @@ class _KnowMeRoundScreenState extends ConsumerState<KnowMeRoundScreen> {
       title: l.togetherKnowMeResultsTitle,
       backdropSeed: 5.2,
       animateBackdrop: false,
-      body: ListView(
-        padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.xxxl),
-        children: [
-          GlassPanel(
-            key: _heroKey,
-            seed: 4,
-            padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.xl, Space.l, Space.xl),
-            child: Column(
-              children: [
-                if (heroProfile != null)
-                  TogetherAvatarView(profile: heroProfile, displayName: tx.rawName(heroProfile), size: 104, glow: true)
-                else
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (final p in profiles.both)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: Space.xs),
-                          child: TogetherAvatarView(profile: p, displayName: tx.rawName(p), size: 72, glow: true),
-                        ),
-                    ],
+      // The recap shows every answer: kept out of the recents thumbnail too.
+      body: TogetherPrivateSurface(
+        child: ListView(
+          padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.xxxl),
+          children: [
+            GlassPanel(
+              key: _heroKey,
+              seed: 4,
+              padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.xl, Space.l, Space.xl),
+              child: Column(
+                children: [
+                  if (heroProfile != null)
+                    TogetherAvatarView(
+                      profile: heroProfile,
+                      displayName: tx.rawName(heroProfile),
+                      size: 104,
+                      glow: true,
+                    )
+                  else
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        for (final p in profiles.both)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: Space.xs),
+                            child: TogetherAvatarView(profile: p, displayName: tx.rawName(p), size: 72, glow: true),
+                          ),
+                      ],
+                    ),
+                  const SizedBox(height: Space.m),
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      heroProfile == null ? l.togetherKnowMeDrawText : l.togetherResultWon(tx.name(heroProfile)),
+                      style: text.headlineSmall?.copyWith(color: t.textPrimary),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                const SizedBox(height: Space.m),
-                Semantics(
-                  header: true,
-                  child: Text(
-                    heroProfile == null ? l.togetherKnowMeDrawText : l.togetherResultWon(tx.name(heroProfile)),
-                    style: text.headlineSmall?.copyWith(color: t.textPrimary),
-                    textAlign: TextAlign.center,
+                  const SizedBox(height: Space.xs),
+                  Text(
+                    tx.score(r.scoreOne, r.scoreTwo),
+                    style: text.titleLarge?.copyWith(color: t.gold, fontWeight: FontWeight.w700),
                   ),
-                ),
-                const SizedBox(height: Space.xs),
-                Text(
-                  tx.score(r.scoreOne, r.scoreTwo),
-                  style: text.titleLarge?.copyWith(color: t.gold, fontWeight: FontWeight.w700),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: Space.l),
-          for (final p in profiles.both) ...[playerRow(p), const SizedBox(height: Space.s)],
-          if (recorded != null && !recorded.recorded) ...[
+            const SizedBox(height: Space.l),
+            for (final p in profiles.both) ...[playerRow(p), const SizedBox(height: Space.s)],
+            if (recorded != null && !recorded.recorded) ...[
+              const SizedBox(height: Space.s),
+              Text(
+                l.togetherKnowMeNotRecorded,
+                key: const ValueKey('knowme-not-recorded'),
+                style: text.bodySmall?.copyWith(color: t.textTertiary),
+                textAlign: TextAlign.center,
+              ),
+            ],
+            const SizedBox(height: Space.xl),
+            MadarButton(
+              key: const ValueKey('knowme-again'),
+              label: l.togetherKnowMePlayAgain,
+              icon: Icons.replay_rounded,
+              size: MadarButtonSize.large,
+              expand: true,
+              onPressed: _recording ? null : () => unawaited(_playAgain()),
+            ),
             const SizedBox(height: Space.s),
-            Text(
-              l.togetherKnowMeNotRecorded,
-              key: const ValueKey('knowme-not-recorded'),
-              style: text.bodySmall?.copyWith(color: t.textTertiary),
-              textAlign: TextAlign.center,
+            MadarButton(
+              key: const ValueKey('knowme-done'),
+              label: l.togetherKnowMeFinish,
+              variant: MadarButtonVariant.ghost,
+              expand: true,
+              sfx: Sfx.back,
+              onPressed: () => Navigator.of(context).pop(),
             ),
+            SectionHeader(
+              title: l.togetherKnowMeRecap,
+              padding: const EdgeInsetsDirectional.fromSTEB(0, Space.xl, 0, Space.m),
+            ),
+            for (var i = 0; i < _round.questions.length; i++)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(bottom: Space.s),
+                child: _RecapCard(round: _round, index: i, profiles: profiles),
+              ),
           ],
-          const SizedBox(height: Space.xl),
-          MadarButton(
-            key: const ValueKey('knowme-again'),
-            label: l.togetherKnowMePlayAgain,
-            icon: Icons.replay_rounded,
-            size: MadarButtonSize.large,
-            expand: true,
-            onPressed: _recording ? null : () => unawaited(_playAgain()),
-          ),
-          const SizedBox(height: Space.s),
-          MadarButton(
-            key: const ValueKey('knowme-done'),
-            label: l.togetherKnowMeFinish,
-            variant: MadarButtonVariant.ghost,
-            expand: true,
-            sfx: Sfx.back,
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          SectionHeader(
-            title: l.togetherKnowMeRecap,
-            padding: const EdgeInsetsDirectional.fromSTEB(0, Space.xl, 0, Space.m),
-          ),
-          for (var i = 0; i < _round.questions.length; i++)
-            Padding(
-              padding: const EdgeInsetsDirectional.only(bottom: Space.s),
-              child: _RecapCard(round: _round, index: i, profiles: profiles),
-            ),
-        ],
+        ),
       ),
     );
   }
@@ -913,7 +925,8 @@ class _Scoreboard extends StatelessWidget {
 
     return Semantics(
       container: true,
-      label: '${tx.name(profiles.one)} ${tx.n(round.revealedScoreOf(PlayerSlot.one, revealed))}, '
+      label:
+          '${tx.name(profiles.one)} ${tx.n(round.revealedScoreOf(PlayerSlot.one, revealed))}, '
           '${tx.name(profiles.two)} ${tx.n(round.revealedScoreOf(PlayerSlot.two, revealed))}',
       excludeSemantics: true,
       child: GlassCard(
@@ -1039,7 +1052,10 @@ class _RevealCard extends StatelessWidget {
                             Icon(Icons.lock_rounded, size: 14, color: t.textTertiary),
                             const SizedBox(width: Space.xs),
                             Flexible(
-                              child: Text(l.togetherKnowMeHiddenAnswer, style: text.bodySmall?.copyWith(color: t.textTertiary)),
+                              child: Text(
+                                l.togetherKnowMeHiddenAnswer,
+                                style: text.bodySmall?.copyWith(color: t.textTertiary),
+                              ),
                             ),
                           ],
                         ),
@@ -1057,9 +1073,21 @@ class _RevealCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          line(subject, l.togetherKnowMeAnswerOf(tx.name(subject)), isVoid ? l.togetherKnowMeSkipped : own, empty: isVoid, flip: 0),
+          line(
+            subject,
+            l.togetherKnowMeAnswerOf(tx.name(subject)),
+            isVoid ? l.togetherKnowMeSkipped : own,
+            empty: isVoid,
+            flip: 0,
+          ),
           const SizedBox(height: Space.m),
-          line(guesser, l.togetherKnowMeGuessOf(tx.name(guesser)), guess.isEmpty ? l.togetherKnowMeNoGuess : guess, empty: guess.isEmpty, flip: 1),
+          line(
+            guesser,
+            l.togetherKnowMeGuessOf(tx.name(guesser)),
+            guess.isEmpty ? l.togetherKnowMeNoGuess : guess,
+            empty: guess.isEmpty,
+            flip: 1,
+          ),
           const SizedBox(height: Space.m),
           if (!shown)
             Align(

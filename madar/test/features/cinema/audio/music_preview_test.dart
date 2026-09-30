@@ -1,5 +1,4 @@
-@Tags(['audio_preview'])
-library;
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/engine/audio/era_scores.dart';
@@ -23,7 +22,7 @@ void main() {
           .split(',');
   for (final era in Era.values.where((e) => eras.contains(e.name))) {
     for (final mood in MusicMood.values.where((m) => moods.contains(m.name))) {
-      test('preview ${era.name} ${mood.name}', () {
+      test('preview ${era.name} ${mood.name}', skip: _skip, () {
         final style = eraScore(era);
         final score = composeCue(style, mood, 1);
         final cue = CueRenderer().render(score);
@@ -45,3 +44,5 @@ void main() {
     }
   }
 }
+
+final _skip = Platform.environment['MADAR_AUDIO_PREVIEW_DIR'] == null ? 'set MADAR_AUDIO_PREVIEW_DIR to render previews' : null;

@@ -246,8 +246,8 @@
     "en": "Last played yesterday"
   },
   "savedGamesLastPlayedDays": {
-    "ar": "{days, plural, =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}",
-    "en": "{days, plural, other{Last played {days} days ago}}",
+    "ar": "{days, plural, =1{آخر لعب قبل يوم} =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}",
+    "en": "{days, plural, one{Last played {days} day ago} other{Last played {days} days ago}}",
     "placeholders": {
       "days": {
         "type": "int"

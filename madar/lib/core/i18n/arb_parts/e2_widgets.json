@@ -104,7 +104,7 @@
     }
   },
   "widgetsTasksLeft": {
-    "ar": "{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} other{بقيت {count}}}",
+    "ar": "{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} few{بقيت {count}} many{بقي {count}} other{بقي {count}}}",
     "en": "{count, plural, =1{1 to go} other{{count} to go}}",
     "description": "Widget: Top 3 items not done yet",
     "placeholders": {
@@ -124,7 +124,7 @@
     "description": "Widget: no Top 3 chosen for today"
   },
   "widgetsTasksCarried": {
-    "ar": "{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} other{{count} لم تكتمل أمس}}",
+    "ar": "{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} few{{count} لم تكتمل أمس} many{{count} لم تكتمل أمس} other{{count} لم تكتمل أمس}}",
     "en": "{count, plural, =1{1 unfinished from yesterday} other{{count} unfinished from yesterday}}",
     "description": "Widget after midnight: yesterday's unfinished Top 3 waiting for the carry-over",
     "placeholders": {

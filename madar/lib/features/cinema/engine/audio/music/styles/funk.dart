@@ -62,7 +62,7 @@ final class FunkComposer implements StyleComposer {
       bars: bars,
       vel: 0.62,
     );
-    b.pattern(Inst.hatClosed, const ['XxXxXxXxXxXxXxX.', 'XxXxXxXxXxXxXx..'], stem: stem, start: start, bars: bars, vel: 0.3);
+    b.pattern(Inst.hatClosed, const ['XxXxXxXxXxXxXxX.', 'XxXxXxXxXxXxXx..'], stem: stem, start: start, bars: bars, vel: 0.5, gain: 1.4);
     b.pattern(Inst.hatOpen, const ['..............x.', '.............x..'], stem: stem, start: start, bars: bars, vel: 0.3);
   }
 
@@ -102,14 +102,14 @@ final class FunkComposer implements StyleComposer {
     final horns = b.melody(MelodySpec(lo: 64, hi: 81, rhythms: _hornCells, form: 'AABA', repeat: 0.2, chromatic: 0.12, blue: 0.12));
     for (final n in horns) {
       final fx = n.dur >= 1 ? Art.fall : Art.staccato;
-      b.note(Inst.trumpet, n.beat, n.dur, n.pitch, 0.6 + (n.accent ? 0.12 : 0), stem: lead, fx: fx);
-      b.note(Inst.tenorSax, n.beat, n.dur, n.pitch - 12, 0.5, stem: lead, fx: n.dur >= 1 ? 0 : Art.staccato);
+      b.note(Inst.trumpet, n.beat, n.dur, n.pitch, 0.72 + (n.accent ? 0.12 : 0), stem: lead, fx: fx);
+      b.note(Inst.tenorSax, n.beat, n.dur, n.pitch - 12, 0.62, stem: lead, fx: n.dur >= 1 ? 0 : Art.staccato);
     }
     // Wah scratches, clav, congas.
-    b.hits(Inst.wahGuitar, const ['g.x.gxg.g.x.gxg.', 'g.x.gxg.gxx.g.g.'], stem: hot, vel: 0.5, floor: 64, size: 2, length: 0.8);
-    b.hits(Inst.clav, const ['..x..x.x..x..x..', '..x..x.x..x.x...'], stem: hot, vel: 0.4, floor: 60, size: 2, length: 0.6);
-    b.pattern(Inst.conga, const ['x..x..x.x..x..x.'], stem: hot, vel: 0.35, pitch: 0);
-    b.pattern(Inst.conga, const ['..x.......x...x.'], stem: hot, vel: 0.35, pitch: -5);
+    b.hits(Inst.wahGuitar, const ['g.x.gxg.g.x.gxg.', 'g.x.gxg.gxx.g.g.'], stem: hot, vel: 0.34, floor: 64, size: 2, length: 0.8);
+    b.hits(Inst.clav, const ['..x..x.x..x..x..', '..x..x.x..x.x...'], stem: hot, vel: 0.28, floor: 60, size: 2, length: 0.6);
+    b.pattern(Inst.conga, const ['x..x..x.x..x..x.'], stem: hot, vel: 0.26, pitch: 0);
+    b.pattern(Inst.conga, const ['..x.......x...x.'], stem: hot, vel: 0.26, pitch: -5);
     if (action) b.pattern(Inst.cowbell, const ['x.x.x.x.x.x.x.x.'], stem: hot, vel: 0.25);
     if (boss) {
       b.hits(
@@ -258,6 +258,8 @@ final class FunkComposer implements StyleComposer {
     b.pattern(Inst.kick, const ['x.......x..x....'], stem: bed, vel: 0.35);
     b.pattern(Inst.rimClick, const ['....x.......x...'], stem: bed, vel: 0.3);
     b.hits(Inst.rhodes, const ['x-----..x-......'], stem: bed, vel: 0.25, floor: 55, rootless: true);
+    b.pattern(Inst.conga, const ['x..x..x.x..x..x.'], stem: hot, vel: 0.22);
+    b.hits(Inst.wahGuitar, const ['g.x.g.g.g.x.g.g.'], stem: hot, vel: 0.26, floor: 64, size: 2, length: 0.8);
     return b.build();
   }
 }

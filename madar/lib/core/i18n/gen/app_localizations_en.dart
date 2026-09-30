@@ -17928,6 +17928,128 @@ class L10nEn extends L10n {
   String get cinemaFxReelLabel => 'Reel';
 
   @override
+  String get cinemaHallNowShowing => 'Now Showing';
+
+  @override
+  String get cinemaHallTonight => 'Tonight';
+
+  @override
+  String get cinemaHallWelcome => 'Welcome to the picture palace';
+
+  @override
+  String get cinemaHallProgramme => 'The full programme';
+
+  @override
+  String get cinemaHallAllEras => 'All eras';
+
+  @override
+  String get cinemaHallAllKinds => 'All kinds';
+
+  @override
+  String get cinemaHallReadyOnly => 'Ready to play';
+
+  @override
+  String get cinemaHallGenreCards => 'Card games';
+
+  @override
+  String get cinemaHallGenreBoard => 'Board games';
+
+  @override
+  String get cinemaHallGenreArcade => 'Arcade';
+
+  @override
+  String get cinemaHallGenrePuzzle => 'Puzzles';
+
+  @override
+  String get cinemaHallGenreWord => 'Word games';
+
+  @override
+  String get cinemaHallBackstage => 'Backstage';
+
+  @override
+  String get cinemaHallLockedSlot => 'Coming attraction';
+
+  @override
+  String get cinemaHallLockedHint =>
+      'This one is still in the cutting room. Come back soon!';
+
+  @override
+  String get cinemaHallShortsSoon =>
+      'Dozens of shorts on the way: cards, board games, arcade and words.';
+
+  @override
+  String get cinemaHallNothingMatches => 'No shows match. Try another era.';
+
+  @override
+  String get cinemaHallTicketBook => 'Ticket book';
+
+  @override
+  String get cinemaHallStatShows => 'Shows';
+
+  @override
+  String get cinemaHallStatWins => 'Happy endings';
+
+  @override
+  String get cinemaHallStatTime => 'Time watched';
+
+  @override
+  String get cinemaHallStatFavourite => 'Favourite show';
+
+  @override
+  String get cinemaHallFirstTicket =>
+      'Your first ticket is waiting. Pick a show and step inside.';
+
+  @override
+  String cinemaHallBestBadge(String score) {
+    return 'Best $score';
+  }
+
+  @override
+  String cinemaHallPosterLabel(String title, String era) {
+    return '$title poster, $era';
+  }
+
+  @override
+  String get cinemaHallComingSoonTitle => 'This show hasn\'t opened yet';
+
+  @override
+  String get cinemaHallComingSoonBody =>
+      'We\'re still filming this one. The curtain rises soon.';
+
+  @override
+  String get cinemaHallNotFound =>
+      'We couldn\'t find this show in the programme.';
+
+  @override
+  String get cinemaHallBackToLobby => 'Back to the lobby';
+
+  @override
+  String get cinemaHallPrayerMuted => 'Sound paused for prayer';
+
+  @override
+  String get cinemaHallFooter =>
+      'Every picture here is drawn in code and every note is composed as it plays.';
+
+  @override
+  String get cinemaStageBoothNote =>
+      'The reel is resting. The show waits for you.';
+
+  @override
+  String get cinemaStageScore => 'Score';
+
+  @override
+  String get cinemaStageBest => 'Best';
+
+  @override
+  String get cinemaStageNewRecord => 'New record!';
+
+  @override
+  String get cinemaStageRunningTime => 'Running time';
+
+  @override
+  String get cinemaStageAdmitOne => 'Admit one';
+
+  @override
   String get cinemaRigCast => 'The Cast';
 
   @override
@@ -18168,7 +18290,7 @@ class L10nEn extends L10n {
 
   @override
   String get dataBackupSheetSubtitle =>
-      'AES-256 · keys derived with Argon2id on your phone';
+      'AES-GCM encryption · keys derived with Argon2id on your phone';
 
   @override
   String get dataBackupSheetBody =>
@@ -18225,7 +18347,7 @@ class L10nEn extends L10n {
 
   @override
   String get dataStrengthHintPattern =>
-      'Avoid repeats and runs like 1234 or aaaa.';
+      'Avoid repeats and runs like abcd or aaaa.';
 
   @override
   String get dataStrengthHintDigits =>
@@ -21785,14 +21907,14 @@ class L10nEn extends L10n {
       'A perfect round of “How well do you know me?”';
 
   @override
-  String get togetherTrophyChallengeChampions => 'Challenge champions';
+  String get togetherTrophyChallengeChampions => 'Weekly heroes';
 
   @override
   String get togetherTrophyChallengeChampionsDesc =>
       'The weekly challenge, four weeks in a row';
 
   @override
-  String get togetherTrophyDreamCameTrue => 'Dream come true';
+  String get togetherTrophyDreamCameTrue => 'Wish granted';
 
   @override
   String get togetherTrophyDreamCameTrueDesc =>
@@ -22171,6 +22293,7 @@ class L10nEn extends L10n {
       days,
       locale: localeName,
       other: 'Last played $days days ago',
+      one: 'Last played $days day ago',
     );
     return '$_temp0';
   }

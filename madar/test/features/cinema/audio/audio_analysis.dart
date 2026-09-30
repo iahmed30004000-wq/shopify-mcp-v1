@@ -216,3 +216,30 @@ Directory previewDir() {
   if (!d.existsSync()) d.createSync(recursive: true);
   return d;
 }
+
+/// Click detector for a loop's wrap point: the second difference across
+/// the seam relative to the largest one in the ±[windowMs] neighbourhood
+/// (excluding the seam). Musical onsets at the downbeat raise the
+/// neighbourhood too; a discontinuity stands out (score ≫ 1).
+double seamClickScore(Float64List x, int sr, {double windowMs = 8}) {
+  final n = x.length;
+  double at(int i) => x[(i % n + n) % n];
+  double d2(int i) => (at(i + 1) - 2 * at(i) + at(i - 1)).abs();
+  final seam = [d2(n - 1), d2(0)].reduce((a, b) => a > b ? a : b);
+  final w = (windowMs * sr / 1000).round();
+  var neighbour = 1e-9;
+  for (var k = 2; k <= w; k++) {
+    final a = d2(n - 1 - k), b = d2(k);
+    if (a > neighbour) neighbour = a;
+    if (b > neighbour) neighbour = b;
+  }
+  return seam / neighbour;
+}
+
+/// [x] high-passed at 150 Hz (what a phone speaker can reproduce).
+Float64List speakerWeighted(Float64List x, int sr) {
+  final y = Float64List.fromList(x);
+  Biquad(BiquadType.highPass, frequency: 150, sampleRate: sr).processBuffer(y);
+  Biquad(BiquadType.highPass, frequency: 150, sampleRate: sr).processBuffer(y);
+  return y;
+}

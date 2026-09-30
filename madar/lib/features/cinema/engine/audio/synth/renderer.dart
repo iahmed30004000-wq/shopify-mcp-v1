@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 import 'dart:typed_data';
 
+import '../../../../../core/sound/synth/buffer.dart';
+import '../../../../../core/sound/synth/dynamics.dart';
 import '../../../../../core/sound/synth/filters.dart';
 import '../../../../../core/sound/synth/reverb.dart';
 import '../../../../../core/sound/synth/rng.dart';
@@ -114,6 +116,10 @@ final class CueRenderer {
   final double ceilingDb;
   final double introTailSeconds;
 
+  /// Speaker-weighted RMS of the last [render] before levelling
+  /// (diagnostics: compares parts of an arrangement).
+  double lastRawRmsDb = double.negativeInfinity;
+
   /// Milliseconds spent per phase in the last [render] (diagnostics).
   final Map<String, int> profile = {};
 
@@ -138,6 +144,7 @@ final class CueRenderer {
 
     final introSec = score.introSeconds;
     final loopSec = loopN / sr;
+    final trims = [for (final i in Inst.values) math.pow(10.0, instTrimDb(i) / 20.0).toDouble()];
     for (final e in score.events) {
       final stem = stems[e.stem.clamp(0, stems.length - 1)];
       final start = score.beatToSeconds(e.beat, straight: e.straight);
@@ -159,11 +166,12 @@ final class CueRenderer {
       final t = math.max(0.0, start + jitter);
       final inIntro = e.beat < score.introBeats - 1e-6;
       final pan = _eventPan(e, stem.spec);
+      final trim = trims[e.inst.index] * e.gain;
       if (inIntro) {
-        stem.addLinear(voice, (t * sr).round(), pan);
+        stem.addLinear(voice, (t * sr).round(), pan, trim);
       } else {
         final lt = (t - introSec) % loopSec;
-        stem.addCircular(voice, (lt * sr).round() % loopN, pan);
+        stem.addCircular(voice, (lt * sr).round() % loopN, pan, trim);
       }
     }
 
@@ -192,6 +200,7 @@ final class CueRenderer {
     final mixL = _sum(stems, measure, left: true);
     final mixR = _sum(stems, measure, left: false);
     final rms = _weightedRmsDb(mixL, mixR, sr);
+    lastRawRmsDb = rms;
     final gain = rms.isFinite ? math.pow(10.0, (targetRmsDb - rms) / 20.0).toDouble() : 1.0;
     for (final s in stems) {
       s.scale(gain);
@@ -380,36 +389,36 @@ final class _StemBuf {
 
   bool get stereo => spec.stereo;
 
-  void addLinear(Float64List v, int at, double pan) {
+  void addLinear(Float64List v, int at, double pan, double g) {
     final n = math.min(v.length, introL.length - at);
     if (n <= 0) return;
     if (!stereo) {
       for (var i = 0; i < n; i++) {
-        introL[at + i] += v[i];
+        introL[at + i] += v[i] * g;
       }
       return;
     }
     final a = (pan + 1) * math.pi / 4;
-    final gl = math.cos(a) * math.sqrt2, gr = math.sin(a) * math.sqrt2;
+    final gl = math.cos(a) * math.sqrt2 * g, gr = math.sin(a) * math.sqrt2 * g;
     for (var i = 0; i < n; i++) {
       introL[at + i] += v[i] * gl;
       introR[at + i] += v[i] * gr;
     }
   }
 
-  void addCircular(Float64List v, int at, double pan) {
+  void addCircular(Float64List v, int at, double pan, double g) {
     final n = loopL.length;
     final m = math.min(v.length, n); // a voice longer than the loop is cut
     var j = at;
     if (!stereo) {
       for (var i = 0; i < m; i++) {
-        loopL[j] += v[i];
+        loopL[j] += v[i] * g;
         if (++j >= n) j = 0;
       }
       return;
     }
     final a = (pan + 1) * math.pi / 4;
-    final gl = math.cos(a) * math.sqrt2, gr = math.sin(a) * math.sqrt2;
+    final gl = math.cos(a) * math.sqrt2 * g, gr = math.sin(a) * math.sqrt2 * g;
     for (var i = 0; i < m; i++) {
       loopL[j] += v[i] * gl;
       loopR[j] += v[i] * gr;
@@ -567,7 +576,7 @@ final class _Lofi {
   void apply(_StemBuf s, int primeN) {
     final lofi = sound.lofi.clamp(0.0, 1.0);
     final lpHz = 16000 * math.pow(0.24, lofi).toDouble(); // 16 kHz → ~3.8 kHz
-    final hpHz = 30 + 140 * lofi;
+    final hpHz = 40 + 130 * lofi;
     final drive = 1 + 1.6 * lofi;
     void tone(Float64List x) {
       if (x.isEmpty) return;
@@ -774,4 +783,84 @@ Uint8List encodeWav16(List<Float64List> channels, int sampleRate, {int seed = 1,
     }
   }
   return bytes;
+}
+
+/// Renders short one-shots (stingers) made of several [parts] that play
+/// together (e.g. a tonal part the director transposes and a drum part it
+/// does not). All parts share one gain so their balance is kept; the sum
+/// hits [loudnessDb] (momentary, speaker-weighted) under a −1.5 dBFS peak.
+List<Uint8List> renderParts(
+  List<List<NoteEvent>> parts, {
+  required MusicStyle style,
+  required double bpm,
+  required CueSound sound,
+  double loudnessDb = -16,
+  int seed = 1,
+  double maxSeconds = 4,
+}) {
+  final sr = sound.sampleRate;
+  final n = (maxSeconds * sr).round();
+  final voices = VoiceBox(sr, style, seed);
+  final spb = 60.0 / bpm;
+  final bufs = <Float64List>[];
+  final room = ReverbSpec(roomSize: sound.roomSize, damping: sound.damping, preDelayMs: 10, width: 0.8);
+  for (final part in parts) {
+    final x = Float64List(n);
+    for (final e in part) {
+      final v = voices.render(e, math.max(0.02, e.dur * spb));
+      final at = (e.beat * spb * sr).round();
+      final m = math.min(v.length, n - at);
+      final g = math.pow(10.0, instTrimDb(e.inst) / 20.0).toDouble() * e.gain;
+      for (var i = 0; i < m; i++) {
+        x[at + i] += v[i] * g;
+      }
+    }
+    if (sound.wet > 0) {
+      final send = Float64List(n);
+      for (var i = 0; i < n; i++) {
+        send[i] = x[i] * sound.wet;
+      }
+      final (wl, wr) = halfRateReverb(send, sr, room);
+      for (var i = 0; i < n; i++) {
+        x[i] += 0.5 * (wl[i] + wr[i]);
+      }
+    }
+    final lofi = sound.lofi;
+    Biquad(BiquadType.highPass, frequency: 30 + 140 * lofi, sampleRate: sr, q: 0.6).processBuffer(x);
+    final lp = 16000 * math.pow(0.24, lofi).toDouble();
+    if (lp < sr * 0.42) Biquad(BiquadType.lowPass, frequency: lp, sampleRate: sr, q: 0.6).processBuffer(x);
+    bufs.add(x);
+  }
+  // Shared level.
+  final sum = Float64List(n);
+  for (final b in bufs) {
+    for (var i = 0; i < n; i++) {
+      sum[i] += b[i];
+    }
+  }
+  final loud = Loudness.momentaryDb(StereoBuffer.fromChannels(sr, sum, sum));
+  var g = loud.isFinite ? math.pow(10.0, (loudnessDb - loud) / 20.0).toDouble() : 1.0;
+  var pk = 0.0;
+  for (final v in sum) {
+    if (v.abs() > pk) pk = v.abs();
+  }
+  final ceiling = math.pow(10.0, -1.5 / 20.0).toDouble();
+  if (pk * g > ceiling) g = ceiling / pk;
+  // Common length: until the sum falls 50 dB under its peak.
+  var end = n;
+  final thr = pk * g * 0.00316;
+  while (end > 1 && (sum[end - 1] * g).abs() < thr) {
+    end--;
+  }
+  end = math.min(n, end + (0.01 * sr).round());
+  final out = <Uint8List>[];
+  for (var k = 0; k < bufs.length; k++) {
+    final b = Float64List(end);
+    for (var i = 0; i < end; i++) {
+      b[i] = bufs[k][i] * g;
+    }
+    fadeEdges(b, 4, math.min(end ~/ 4, (0.04 * sr).round()));
+    out.add(encodeWav16([b], sr, seed: seed + k));
+  }
+  return out;
 }

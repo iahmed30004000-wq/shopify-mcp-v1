@@ -38,10 +38,17 @@ void main() {
       expect(find.text('معًا'), findsOneWidget);
       expect(find.text('اللاعب ١'), findsWidgets);
       expect(find.text('اللاعب ٢'), findsWidgets);
-      expect(find.byKey(const ValueKey('together-empty')), findsOneWidget);
+      // The couple specials sit between the streaks and the Hall of Fame.
+      expect(find.text('لنا نحن الاثنين'), findsOneWidget);
+      await tester.scrollUntilVisible(find.text('قاعة مجدنا'), 250, scrollable: find.byType(Scrollable).first);
       expect(find.text('أول جائزة بانتظاركما'), findsOneWidget);
-      expect(find.text('قاعة مجدنا'), findsOneWidget);
       expect(find.byType(TrophyMedal), findsWidgets);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('together-empty')),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(find.byKey(const ValueKey('together-empty')), findsOneWidget);
       expect(tester.takeException(), isNull);
     });
 
@@ -49,6 +56,12 @@ void main() {
       await pumpTogetherApp(tester, locale: const Locale('en'), home: const TogetherHomeScreen(), seed: seedTogetherHistory);
       expect(find.text('Together'), findsOneWidget);
       expect(find.textContaining('leads by'), findsOneWidget);
+      await tester.scrollUntilVisible(find.text('Head to head'), 250, scrollable: find.byType(Scrollable).first);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('together-game-basra')),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
       expect(find.text('Head to head'), findsOneWidget);
       expect(find.byKey(const ValueKey('together-game-basra')), findsOneWidget);
       await tester.scrollUntilVisible(
@@ -65,6 +78,11 @@ void main() {
 
     testWidgets('a game row opens that game\'s head-to-head history', (tester) async {
       await pumpTogetherApp(tester, locale: const Locale('en'), home: const TogetherHomeScreen(), seed: seedTogetherHistory);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('together-game-basra')),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.ensureVisible(find.byKey(const ValueKey('together-game-basra')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('together-game-basra')));

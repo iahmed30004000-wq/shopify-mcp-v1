@@ -28,9 +28,9 @@ class StageLayout {
     final w = screen.width, h = screen.height;
     // A landscape screen gets a proportionally slimmer frame.
     final unit = math.min(w, h * 0.62);
-    l.pil = math.max(10, unit * style.sideWidth * 0.46);
-    l.hdr = math.max(h * style.valanceHeight * 0.75, safe.top + 18);
-    l.valDepth = h * style.valanceHeight * 0.64;
+    l.pil = math.max(12, unit * style.sideWidth * 0.58);
+    l.hdr = math.max(math.min(h * style.valanceHeight, unit * 0.2), safe.top + 22);
+    l.valDepth = math.min(h * style.valanceHeight * 0.58, unit * 0.12);
     l.foot = h * style.footlightHeight + safe.bottom * 0.5;
     l.footTop = h - l.foot;
     l.drop = switch (style.proscenium) {
@@ -41,7 +41,7 @@ class StageLayout {
       ProsceniumStyle.marquee => 5,
       ProsceniumStyle.neon => 10,
     };
-    final inset = unit * 0.022;
+    final inset = unit * 0.02;
     l.play = Rect.fromLTRB(l.pil + inset, l.hdr + l.valDepth * 0.35, w - l.pil - inset, l.footTop);
     l.hud = Rect.fromLTRB(
       math.max(l.play.left + 6, safe.left + 8),
@@ -49,7 +49,7 @@ class StageLayout {
       math.min(l.play.right - 6, w - safe.right - 8),
       math.max(l.hdr + l.valDepth + 60, math.min(l.play.bottom - 8, h - safe.bottom - l.foot - 6)),
     );
-    l.curtainOpenWidth = l.pil + unit * 0.105;
+    l.curtainOpenWidth = l.pil + unit * 0.1;
     l.curtainClosedWidth = w / 2 + 8;
     l.curtainTop = l.hdr - 8;
     l.curtainBottom = l.footTop + l.foot * 0.45;

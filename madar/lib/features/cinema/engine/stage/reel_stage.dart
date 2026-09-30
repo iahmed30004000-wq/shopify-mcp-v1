@@ -6,6 +6,7 @@ import 'package:flutter/painting.dart' show EdgeInsets;
 
 import '../core/cinema_env.dart';
 import '../core/cinema_shaders.dart';
+import '../core/era.dart';
 import '../core/era_skin.dart';
 import '../core/film_clock.dart';
 import '../core/shader_uniforms.dart';
@@ -241,7 +242,11 @@ class ReelStage implements StageFrame {
         folds: folds,
         swayPhase: phase,
         gather: g,
-        sheen: skin.era.isMonochrome ? 0.5 : 0.62,
+        sheen: switch (skin.era) {
+          Era.noir => 0.95,
+          Era.silent || Era.rubberHose => 0.6,
+          _ => 0.62,
+        },
         footlight: 0.42 + 0.45 * _pulse,
       );
       _paint

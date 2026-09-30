@@ -74,8 +74,15 @@ final class SfxSynth {
   Uint8List renderSound(CinemaSound s) {
     final c = _canvas(s.index + 1, _maxLen(s));
     _compose(s, c);
-    return _finish(c, loudnessOf(s));
+    return _finish(c, loudnessOf(s), dry: _dry(s));
   }
+
+  /// Small, frequent interface-like effects stay nearly dry.
+  static bool _dry(CinemaSound s) => switch (s) {
+    CinemaSound.tap || CinemaSound.tick || CinemaSound.typewriter || CinemaSound.cardFlip || CinemaSound.cardDeal => true,
+    CinemaSound.piecePlace || CinemaSound.diceRoll || CinemaSound.pop || CinemaSound.land => true,
+    _ => false,
+  };
 
   Uint8List renderExtra(CinemaSfx s) {
     final c = _canvas(100 + s.index, s == CinemaSfx.gong ? 4.5 : 3.0);
@@ -101,8 +108,15 @@ final class SfxSynth {
     },
   );
 
-  Uint8List _finish(SfxCanvas c, double loudness) {
-    final out = c.finish(loudnessDb: loudness, wet: _old ? 0.6 : 0.8);
+  Uint8List _finish(SfxCanvas c, double loudness, {bool dry = false}) {
+    var out = c.finish(loudnessDb: loudness, wet: dry ? 0.12 : (_old ? 0.35 : 0.45));
+    // Keep effects tight: trim the tail 48 dB below the peak.
+    final pk = out.peak();
+    if (pk > 0) {
+      final end = out.audibleEnd(pk * dbToGain(-48));
+      final keep = math.min(out.frames, end + (0.01 * sr).round());
+      if (keep < out.frames) out = out.truncated(keep)..fadeOut(math.min(keep ~/ 4, (0.03 * sr).round()));
+    }
     // Period colour: optical-track band-limit for the old eras.
     final lofi = eraScore(era).lofi;
     if (lofi > 0.25) {

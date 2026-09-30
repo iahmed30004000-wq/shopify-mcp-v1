@@ -17847,6 +17847,104 @@
   "@cinemaFxReelLabel": {
     "description": "Label on a film-leader card before a reel number"
   },
+  "cinemaHallNowShowing": "يُعرض الآن",
+  "@cinemaHallNowShowing": {
+    "description": "Marquee heading over the Tier 1 feature posters"
+  },
+  "cinemaHallTonight": "عرض الليلة",
+  "@cinemaHallTonight": {
+    "description": "Letterboard caption over the featured title"
+  },
+  "cinemaHallWelcome": "أهلًا بك في قصر العروض",
+  "cinemaHallProgramme": "البرنامج الكامل",
+  "cinemaHallAllEras": "كل العصور",
+  "@cinemaHallAllEras": {
+    "description": "Filter chip: no era filter"
+  },
+  "cinemaHallAllKinds": "كل الأنواع",
+  "@cinemaHallAllKinds": {
+    "description": "Filter chip: no genre filter"
+  },
+  "cinemaHallReadyOnly": "الجاهز للعرض",
+  "@cinemaHallReadyOnly": {
+    "description": "Filter chip: playable games only"
+  },
+  "cinemaHallGenreCards": "ألعاب الورق",
+  "cinemaHallGenreBoard": "ألعاب الطاولة",
+  "cinemaHallGenreArcade": "الأركيد",
+  "cinemaHallGenrePuzzle": "الألغاز",
+  "cinemaHallGenreWord": "ألعاب الكلمات",
+  "cinemaHallBackstage": "خلف الكواليس",
+  "@cinemaHallBackstage": {
+    "description": "Shelf with the engine demo"
+  },
+  "cinemaHallLockedSlot": "عرض قادم",
+  "@cinemaHallLockedSlot": {
+    "description": "Label on a locked poster slot"
+  },
+  "cinemaHallLockedHint": "هذا الفيلم ما زال في غرفة المونتاج. عُد قريبًا!",
+  "cinemaHallShortsSoon": "عشرات الأفلام القصيرة في الطريق: ورق وطاولة وأركيد وكلمات.",
+  "cinemaHallNothingMatches": "لا عروض بهذا الاختيار. جرّب عصرًا آخر.",
+  "cinemaHallTicketBook": "دفتر التذاكر",
+  "@cinemaHallTicketBook": {
+    "description": "Section with the player's play statistics"
+  },
+  "cinemaHallStatShows": "العروض",
+  "@cinemaHallStatShows": {
+    "description": "Stat label: games played"
+  },
+  "cinemaHallStatWins": "النهايات السعيدة",
+  "@cinemaHallStatWins": {
+    "description": "Stat label: games won"
+  },
+  "cinemaHallStatTime": "وقت المشاهدة",
+  "@cinemaHallStatTime": {
+    "description": "Stat label: total play time"
+  },
+  "cinemaHallStatFavourite": "العرض المفضّل",
+  "@cinemaHallStatFavourite": {
+    "description": "Stat label: most played game"
+  },
+  "cinemaHallFirstTicket": "تذكرتك الأولى بانتظارك. اختر عرضًا وادخل القاعة.",
+  "cinemaHallBestBadge": "الأفضل {score}",
+  "@cinemaHallBestBadge": {
+    "description": "Badge on a poster with the best score",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaHallPosterLabel": "ملصق {title}، {era}",
+  "@cinemaHallPosterLabel": {
+    "description": "Screen-reader label of a poster",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "era": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaHallComingSoonTitle": "العرض لم يبدأ بعد",
+  "cinemaHallComingSoonBody": "ما زلنا نصوّر هذا الفيلم. الستارة ستُفتح قريبًا.",
+  "cinemaHallNotFound": "لم نجد هذا العرض في البرنامج.",
+  "cinemaHallBackToLobby": "العودة إلى الردهة",
+  "cinemaHallPrayerMuted": "الصوت متوقف وقت الصلاة",
+  "cinemaHallFooter": "كل صورة هنا مرسومة بالكود، وكل نغمة مؤلَّفة لحظة العرض.",
+  "cinemaStageBoothNote": "البكرة تستريح… والعرض بانتظارك.",
+  "@cinemaStageBoothNote": {
+    "description": "Pause menu (projector booth) subtitle"
+  },
+  "cinemaStageScore": "النتيجة",
+  "cinemaStageBest": "الأفضل",
+  "cinemaStageNewRecord": "رقم قياسي جديد!",
+  "cinemaStageRunningTime": "مدة العرض",
+  "cinemaStageAdmitOne": "تذكرة دخول",
+  "@cinemaStageAdmitOne": {
+    "description": "Decorative text on a ticket stub"
+  },
   "cinemaRigCast": "طاقم التمثيل",
   "@cinemaRigCast": {
     "description": "Heading of the list of original Madar Cinema characters"
@@ -17979,7 +18077,7 @@
     }
   },
   "dataBackupSheetTitle": "نسخة احتياطية مشفّرة",
-  "dataBackupSheetSubtitle": "AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك",
+  "dataBackupSheetSubtitle": "تشفير AES-GCM · تُشتقّ المفاتيح بـArgon2id على هاتفك",
   "dataBackupSheetBody": "اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.",
   "dataPassphraseLabel": "عبارة المرور",
   "dataPassphraseConfirmLabel": "أعد كتابة عبارة المرور",
@@ -18003,7 +18101,7 @@
     }
   },
   "dataStrengthHintCommon": "هذه عبارة شائعة يسهل تخمينها.",
-  "dataStrengthHintPattern": "تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.",
+  "dataStrengthHintPattern": "تجنّب التكرار والتسلسلات مثل abcd أو aaaa.",
   "dataStrengthHintDigits": "الأرقام وحدها سهلة التخمين؛ أضف كلمات.",
   "dataStrengthHintWords": "جيدة. كلمة أو كلمتان إضافيتان تجعلانها أقوى بكثير.",
   "dataBackupWorking": "نقفل بياناتك…",
@@ -20805,7 +20903,7 @@
       }
     }
   },
-  "widgetsTasksLeft": "{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} other{بقيت {count}}}",
+  "widgetsTasksLeft": "{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} few{بقيت {count}} many{بقي {count}} other{بقي {count}}}",
   "@widgetsTasksLeft": {
     "description": "Widget: Top 3 items not done yet",
     "placeholders": {
@@ -20822,7 +20920,7 @@
   "@widgetsTasksEmpty": {
     "description": "Widget: no Top 3 chosen for today"
   },
-  "widgetsTasksCarried": "{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} other{{count} لم تكتمل أمس}}",
+  "widgetsTasksCarried": "{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} few{{count} لم تكتمل أمس} many{{count} لم تكتمل أمس} other{{count} لم تكتمل أمس}}",
   "@widgetsTasksCarried": {
     "description": "Widget after midnight: yesterday's unfinished Top 3 waiting for the carry-over",
     "placeholders": {
@@ -21052,7 +21150,7 @@
   },
   "savedGamesLastPlayedToday": "آخر لعب اليوم",
   "savedGamesLastPlayedYesterday": "آخر لعب أمس",
-  "savedGamesLastPlayedDays": "{days, plural, =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}",
+  "savedGamesLastPlayedDays": "{days, plural, =1{آخر لعب قبل يوم} =2{آخر لعب قبل يومين} few{آخر لعب قبل {days} أيام} many{آخر لعب قبل {days} يومًا} other{آخر لعب قبل {days} يوم}}",
   "@savedGamesLastPlayedDays": {
     "placeholders": {
       "days": {

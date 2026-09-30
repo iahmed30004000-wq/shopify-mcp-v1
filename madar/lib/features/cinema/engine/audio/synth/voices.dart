@@ -687,7 +687,7 @@ final class VoiceBox {
       if (i & 15 == 0) {
         final t = i / sr;
         inc = path.incAt(t);
-        lp.set(1800 + 2600 * vel * (0.6 + 0.4 * math.exp(-t / 0.3)), 1.1);
+        lp.set(2600 + 4200 * vel * (0.6 + 0.4 * math.exp(-t / 0.3)), 1.1);
       }
       final s = a.saw(inc * 0.9965) * 0.45 + b.saw(inc * 1.0035) * 0.45 + c.pulse(inc * 0.5, 0.5) * 0.25;
       out[i] = lp.lp(s) * env.next();
@@ -726,7 +726,7 @@ final class VoiceBox {
     final lp = Filter(sr, cutoff: 1400, q: 0.8);
     final inc = f / sr;
     for (var i = 0; i < n; i++) {
-      if (i & 31 == 0) lp.set(900 + 1300 * math.min(1.0, i / sr / 1.2) + f, 0.8);
+      if (i & 31 == 0) lp.set(1500 + 2600 * math.min(1.0, i / sr / 1.2) + f, 0.8);
       var s = 0.0;
       for (var k = 0; k < det.length; k++) {
         s += oscs[k].saw(inc * det[k]);
@@ -781,6 +781,9 @@ final class VoiceBox {
       if (ph >= 1) ph -= 1;
       var s = SineTable.wrapped(ph) * amp;
       if (i < 90) s += lp.lp(rng.bipolar()) * (modern ? 0.5 : 0.35) * (1 - i / 90);
+      // Vintage bass drums: the felt beater and the shell's body carry the
+      // hit on small speakers.
+      if (!modern) s += SineTable.wrapped(ph * 2.3 % 1.0) * amp * amp * 0.45;
       out[i] = soft(s * 1.25);
       amp *= k;
     }

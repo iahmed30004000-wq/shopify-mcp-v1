@@ -1,6 +1,4 @@
-@Tags(['audio_preview'])
-library;
-
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +10,7 @@ import 'preview_util.dart';
 
 void main() {
   for (final era in Era.values) {
-    test('sfx preview ${era.name}', () {
+    test('sfx preview ${era.name}', skip: _skip, () {
       final sw = Stopwatch()..start();
       final kit = SfxSynth(era).renderKit();
       final ms = sw.elapsedMilliseconds;
@@ -33,8 +31,11 @@ void main() {
             'cent ${Spectrum.of(x.length >= 2048 ? x : Float64List(2048)..setRange(0, x.length, x), sr).centroid.toStringAsFixed(0)}');
       }
       writePreview('sfx_${era.name}', all);
+      writeSpectrogram('sfx_${era.name}', all, seconds: all.seconds);
       // ignore: avoid_print
       print('== ${era.name} kit ${ms}ms\n${lines.join('\n')}');
     });
   }
 }
+
+final _skip = Platform.environment['MADAR_AUDIO_PREVIEW_DIR'] == null ? 'set MADAR_AUDIO_PREVIEW_DIR to render previews' : null;

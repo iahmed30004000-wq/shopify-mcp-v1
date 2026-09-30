@@ -89,7 +89,8 @@ final class CueBuilder {
     int fx = 0,
     double transpose = 0,
     double legato = 1,
-  }) => addNotes(ev, inst, ns, stem: stem, vel: vel, accentVel: accent, fx: fx, transpose: transpose, legato: legato);
+    double gain = 1,
+  }) => addNotes(ev, inst, ns, stem: stem, vel: vel, accentVel: accent, fx: fx, transpose: transpose, legato: legato, gain: gain);
 
   void pattern(
     Inst inst,
@@ -101,6 +102,7 @@ final class CueBuilder {
     double pitch = 0,
     int fx = 0,
     double dur = 0.1,
+    double gain = 1,
   }) => addPattern(
     ev,
     inst,
@@ -113,6 +115,7 @@ final class CueBuilder {
     pitch: pitch,
     fx: fx,
     dur: dur,
+    gain: gain,
   );
 
   void hits(
@@ -159,7 +162,8 @@ final class CueBuilder {
     int fx = 0,
     double glideFrom = 0,
     bool straight = false,
-  }) => ev.add(NoteEvent(beat, dur, pitch.toDouble(), vel, inst, stem: stem, fx: fx, glideFrom: glideFrom, straight: straight));
+    double gain = 1,
+  }) => ev.add(NoteEvent(beat, dur, pitch.toDouble(), vel, inst, stem: stem, fx: fx, glideFrom: glideFrom, straight: straight, gain: gain));
 
   /// Crash / choke on the first beat of every [every]-bar phrase.
   void phraseCymbals(Inst inst, {required int stem, int every = 4, double vel = 0.5, double? start, int? bars}) {

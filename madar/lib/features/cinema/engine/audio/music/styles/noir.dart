@@ -180,7 +180,7 @@ final class NoirComposer implements StyleComposer {
     if (boss) {
       final riff = riffBass(b.chart, 0, all, b.key, const ['R..R..b.R...F.O.', 'R..R..b.R.R.F...'], base: 38);
       b.notes(Inst.uprightBass, riff, stem: bed, vel: 0.7);
-      b.notes(Inst.piano, riff, stem: bed, vel: 0.5, transpose: -12);
+      b.notes(Inst.piano, riff, stem: bed, vel: 0.5, transpose: 12, gain: 0.7);
       b.pattern(Inst.tomLow, const ['x.......x.....x.', 'x.......x...x.x.'], stem: bed, start: 0, bars: all, vel: 0.5);
     } else {
       b.notes(Inst.uprightBass, walkingBass(b.chart, 0, all * 4.0, b.key, b.rng, lo: 31, hi: 52), stem: bed, vel: 0.66);
@@ -188,7 +188,7 @@ final class NoirComposer implements StyleComposer {
     b.pattern(Inst.ride, const ['x...x.x.x...x.x.'], stem: bed, start: 0, bars: all, vel: 0.42);
     b.pattern(Inst.hatPedal, const ['....x.......x...'], stem: bed, start: 0, bars: all, vel: 0.45);
     b.pattern(Inst.snare, const ['..g...g.....g.g.', '......g...g...x.'], stem: bed, start: 0, bars: all, vel: 0.4);
-    b.hits(Inst.piano, const ['x..x....', '...x..x.'], stem: bed, vel: 0.36, floor: 52, rootless: true, length: 0.6);
+    b.hits(Inst.piano, const ['x..x....', '...x..x.'], stem: bed, vel: 0.3, floor: 52, rootless: true, length: 0.6);
     final mel = b.melody(
       MelodySpec(lo: boss ? 55 : 64, hi: boss ? 77 : 86, rhythms: _bopCells, steps: 8, form: 'AABA', chromatic: 0.25, blue: 0.15),
     );

@@ -67,7 +67,7 @@ final class RagtimeComposer implements StyleComposer {
     );
     final lh = b.stem(const StemSpec('bed', reverb: 0.1, pan: -0.1));
     final rh = b.stem(const StemSpec('lead', layer: 0.3, reverb: 0.1, pan: 0.1));
-    final pit = b.stem(const StemSpec('hot', layer: 0.66, reverb: 0.16, pan: 0.3, gain: 0.8));
+    final pit = b.stem(const StemSpec('hot', layer: 0.66, reverb: 0.16, pan: 0.3, gain: 0.62));
 
     _strideLeftHand(b, lh, b.loopStart, b.loopBars, vel: action ? 0.62 : 0.55);
     final mel = b.melody(
@@ -83,12 +83,12 @@ final class RagtimeComposer implements StyleComposer {
     _rightHand(b, rh, mel, vel: 0.62);
 
     // Pit drummer and violin for the hot layer.
-    b.pattern(Inst.kick, const ['x.......x.......'], stem: pit, vel: 0.5);
-    b.pattern(Inst.snare, action ? const ['x.x.x.x.x.x.x.x.', 'x.x.x.x.x.x.xxxx'] : const ['g.x.g.x.g.x.g.x.'], stem: pit, vel: 0.36);
-    b.pattern(Inst.woodblock, const ['x..x..x.x..x..x.', 'x..x..x.x.x.x...'], stem: pit, vel: 0.3);
+    b.pattern(Inst.kick, const ['x.......x.......'], stem: pit, vel: 0.38);
+    b.pattern(Inst.snare, action ? const ['x.x.x.x.x.x.x.x.', 'x.x.x.x.x.x.xxxx'] : const ['g.x.g.x.g.x.g.x.'], stem: pit, vel: 0.26);
+    b.pattern(Inst.woodblock, const ['x..x..x.x..x..x.', 'x..x..x.x.x.x...'], stem: pit, vel: 0.22);
     b.phraseCymbals(Inst.choke, stem: pit, vel: 0.45);
     final counter = b.melody(MelodySpec(lo: 64, hi: 81, rhythms: _counterCells, form: 'AB', stepBias: 0.85), salt: 7);
-    b.notes(Inst.violin, counter, stem: pit, vel: 0.42, fx: Art.vibrato);
+    b.notes(Inst.violin, counter, stem: pit, vel: 0.3, fx: Art.vibrato, gain: 0.5);
 
     // Intro: a rising chromatic run over the dominant, then the band hits.
     final v7root = b.key + 7;
@@ -163,7 +163,13 @@ final class RagtimeComposer implements StyleComposer {
       _tremoloBass(b, lh, start, 1, root, 0.42);
     }
     // Rising chromatic sequences in octaves, a falling run to loop back.
-    var p = b.key + 3;
+    var p = b.key + b.pick(const [3, 0, 7, -2]);
+    // Sequence figures: chromatic climb, neighbour turn, broken third.
+    final figure = b.pick(const [
+      [0, 1, 2, 3],
+      [0, 1, 0, 3],
+      [0, 3, 1, 4],
+    ]);
     for (var bar = 0; bar < b.loopBars; bar++) {
       final start = b.loopStart + bar * 4;
       if (bar == b.loopBars - 1) {
@@ -179,8 +185,8 @@ final class RagtimeComposer implements StyleComposer {
         final t = tones.isEmpty ? p : tones.reduce((a, c) => (a - p).abs() <= (c - p).abs() ? a : c);
         for (var i = 0; i < 4; i++) {
           final beat = start + half * 2 + i * 0.5;
-          b.note(Inst.honkyPiano, beat, 0.45, t + i, 0.55 + i * 0.05, stem: rh);
-          b.note(Inst.honkyPiano, beat, 0.45, t + i - 12, 0.45, stem: rh);
+          b.note(Inst.honkyPiano, beat, 0.45, t + figure[i], 0.55 + i * 0.05, stem: rh);
+          b.note(Inst.honkyPiano, beat, 0.45, t + figure[i] - 12, 0.45, stem: rh);
         }
         p = t + 3;
       }
@@ -204,7 +210,7 @@ final class RagtimeComposer implements StyleComposer {
     final bed = b.stem(const StemSpec('bed', reverb: 0.14));
     final lead = b.stem(const StemSpec('lead', layer: 0.3, reverb: 0.25));
     final hot = b.stem(const StemSpec('hot', layer: 0.6, reverb: 0.18, gain: 0.85));
-    final bass = riffBass(b.chart, b.loopStart, b.loopBars, b.key, const ['R.....R.R.....F.', 'R.....R.R...R.b.'], base: 38);
+    final bass = riffBass(b.chart, b.loopStart, b.loopBars, b.key, const ['R.....R.R.....F.', 'R.....R.R...R.b.'], base: 46);
     b.notes(Inst.honkyPiano, bass, stem: bed, vel: 0.7);
     b.notes(Inst.honkyPiano, bass, stem: bed, vel: 0.6, transpose: -12);
     addPad(b.ev, Inst.theatreOrgan, b.chart, b.key, start: b.loopStart, beats: b.loopBeats, floor: 53, size: 3, stem: bed, vel: 0.3);

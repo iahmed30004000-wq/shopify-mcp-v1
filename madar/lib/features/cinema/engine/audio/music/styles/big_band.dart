@@ -119,7 +119,7 @@ final class BigBandComposer implements StyleComposer {
     b.notes(Inst.uprightBass, tumbaoBass(b.chart, 0, all, b.key, lo: 33, hi: 52), stem: bed, vel: 0.66);
     // 3-2 son clave, conga tumbao, cowbell, shaker.
     b.pattern(Inst.clave, const ['x.....x.....x...', '....x...x.......'], stem: bed, start: 0, bars: all, vel: 0.5);
-    b.pattern(Inst.conga, const ['g.g.X.g.g.g.x.x.'], stem: bed, start: 0, bars: all, vel: 0.5, fx: 0);
+    b.pattern(Inst.conga, const ['g.g.X.g.g.g.x.x.'], stem: bed, start: 0, bars: all, vel: 0.45, gain: 0.6);
     b.pattern(Inst.conga, const ['....X...........'], stem: bed, start: 0, bars: all, vel: 0.45, fx: Art.slap);
     b.pattern(Inst.shaker, const ['x.x.x.x.x.x.x.x.'], stem: bed, start: 0, bars: all, vel: 0.4);
     // Piano montuno: syncopated octave arpeggios.
@@ -130,21 +130,21 @@ final class BigBandComposer implements StyleComposer {
       for (var i = 0; i < pos.length; i++) {
         final v = b.chart.at(start + pos[i]).closeVoicing(b.key, 60, size: 3);
         final p = v[shape[i] % v.length] + (shape[i] == 3 ? 12 : 0);
-        b.note(Inst.piano, start + pos[i], 0.4, p, 0.42 + (i == 0 ? 0.1 : 0), stem: bed);
-        b.note(Inst.piano, start + pos[i], 0.4, p + 12, 0.3, stem: bed);
+        b.note(Inst.piano, start + pos[i], 0.4, p, 0.42 + (i == 0 ? 0.1 : 0), stem: bed, gain: 0.55);
+        b.note(Inst.piano, start + pos[i], 0.4, p + 12, 0.3, stem: bed, gain: 0.5);
       }
     }
     // Trumpet riff (unison + octave trombone).
     final riff = b.melody(MelodySpec(lo: 67, hi: 84, rhythms: _mamboCells, form: 'AABA', repeat: 0.2, stepBias: 0.6, leap: 0.2));
-    b.notes(Inst.trumpet, riff, stem: lead, vel: 0.6, legato: 0.8, fx: Art.staccato);
-    b.notes(Inst.trombone, riff, stem: lead, vel: 0.45, transpose: -12, legato: 0.8);
+    b.notes(Inst.trumpet, riff, stem: lead, vel: 0.78, legato: 0.8, fx: Art.staccato);
+    b.notes(Inst.trombone, riff, stem: lead, vel: 0.58, transpose: -12, legato: 0.8);
     final counter = b.melody(
       const MelodySpec(lo: 60, hi: 76, rhythms: ['..x.x...x-x.....', '....x..x..x.x...', 'x.x.............'], form: 'AB', repeat: 0.25),
       salt: 6,
     );
-    b.notes(Inst.altoSax, counter, stem: hot, vel: 0.45);
-    b.pattern(Inst.cowbell, const ['X.x.x.x.X.x.x.x.'], stem: hot, vel: 0.35);
-    b.pattern(Inst.bongo, const ['x.xxx.xxx.xxx.xx'], stem: hot, vel: 0.35, pitch: 0);
+    b.notes(Inst.altoSax, counter, stem: hot, vel: 0.36);
+    b.pattern(Inst.cowbell, const ['X.x.x.x.X.x.x.x.'], stem: hot, vel: 0.25);
+    b.pattern(Inst.bongo, const ['x.xxx.xxx.xxx.xx'], stem: hot, vel: 0.26, pitch: 0, gain: 0.7);
     b.pattern(Inst.tomHigh, const ['..............xx', '........x.x.x.xx'], stem: hot, vel: 0.35, pitch: 7);
     // Intro: timbale-style fill into the band.
     b.pattern(Inst.tomHigh, const ['x.x.xx.x..x.x.xx'], stem: hot, start: 0, bars: 1, vel: 0.5, pitch: 7);

@@ -78,18 +78,18 @@ class ProsceniumPainter {
     // Marquee bulbs.
     for (var i = 0; i < _bulbs.length; i++) {
       final lit = _chase(_bulbIndex[i], t);
-      atlas.add(_bulbs[i], _bulbR[i], lit, m.bulb, m.bulbOff, halo: m.glow, haloRadius: _bulbR[i] * 4.6);
+      atlas.add(_bulbs[i], _bulbR[i], lit, m.bulb, m.bulbOff, halo: m.glow, haloRadius: _bulbR[i] * (3.2 + 3.2 * lit));
     }
     // Footlights.
     final flick = reducedMotion ? 0.0 : stage.footlightFlicker;
     for (var i = 0; i < _foot.length; i++) {
       final f = 1 - flick * 0.45 * (0.5 + 0.5 * math.sin(t * 9.3 + i * 2.3) * math.sin(t * 3.1 + i * 1.7));
       final lit = (0.78 + 0.22 * pulse) * f;
-      final r = l.foot * 0.12;
+      final r = l.foot * 0.13;
       if (style == ProsceniumStyle.neon) {
         atlas.addHalo(_foot[i], l.foot * (1.1 + 0.5 * pulse), m.neonA.withValues(alpha: 0.35 * lit));
       } else {
-        atlas.add(_foot[i], r, lit, m.bulb, m.bulbOff, halo: m.glow, haloRadius: l.foot * (1.05 + 0.6 * pulse));
+        atlas.add(_foot[i], r, lit, m.bulb, m.bulbOff, halo: m.glow, haloRadius: l.foot * (1.3 + 0.8 * pulse));
       }
     }
     // Noir sconces.
@@ -154,23 +154,23 @@ class ProsceniumPainter {
         for (var i = 0; i < n; i++) {
           final x = l.pil + 14 * u + (w - 2 * l.pil - 28 * u) * i / (n - 1);
           if ((x - w / 2).abs() < 36 * u) continue;
-          add(Offset(x, l.rimTopAt(x) - 7 * u), 2.7 * u);
+          add(Offset(x, l.rimTopAt(x) - 9 * u), 3.4 * u);
         }
       case ProsceniumStyle.artDeco:
         for (var y = l.hdr + l.drop * 3 + 16 * u; y < l.footTop - 12 * u; y += 27 * u) {
-          add(Offset(l.pil * 0.5, y), 3.1 * u);
+          add(Offset(l.pil * 0.5, y), 3.7 * u);
         }
         for (var y = l.hdr + l.drop * 3 + 16 * u; y < l.footTop - 12 * u; y += 27 * u) {
-          add(Offset(w - l.pil * 0.5, y), 3.1 * u);
+          add(Offset(w - l.pil * 0.5, y), 3.7 * u);
         }
         for (var x = l.pil + l.drop * 3 + 10 * u; x < w - l.pil - l.drop * 3 - 6 * u; x += 21 * u) {
           if ((x - w / 2).abs() < l.hdr * 1.05) continue;
-          add(Offset(x, l.hdr - 6 * u), 2.4 * u);
+          add(Offset(x, l.hdr - 8 * u), 3.1 * u);
         }
       case ProsceniumStyle.atomic:
         for (var x = l.pil + l.drop + 8 * u; x < w - l.pil - l.drop - 4 * u; x += 19 * u) {
           if ((x - w / 2).abs() < l.hdr * 0.95) continue;
-          add(Offset(x, l.hdr - 6 * u), 2.5 * u);
+          add(Offset(x, l.hdr - 8 * u), 3.2 * u);
         }
         // Star tips of the crest.
         final c = Offset(w / 2, l.hdr * 0.5);
@@ -178,16 +178,16 @@ class ProsceniumPainter {
         for (var i = 0; i < 12; i++) {
           final a = -math.pi / 2 + math.pi * 2 * i / 12;
           if (math.sin(a) > 0.3) continue;
-          add(c + Offset(math.cos(a), math.sin(a)) * r, 2.2 * u);
+          add(c + Offset(math.cos(a), math.sin(a)) * r, 2.8 * u);
         }
       case ProsceniumStyle.marquee:
         for (var x = l.pil + 10 * u; x < w - l.pil - 6 * u; x += 17 * u) {
           if ((x - w / 2).abs() < l.hdr * 0.6) continue;
-          add(Offset(x, l.hdr - 6 * u), 2.8 * u);
+          add(Offset(x, l.hdr - 8 * u), 3.4 * u);
         }
         for (var y = l.hdr + 10 * u; y < l.footTop - 8 * u; y += 19 * u) {
-          add(Offset(l.pil * 0.5, y), 2.8 * u);
-          add(Offset(w - l.pil * 0.5, y), 2.8 * u);
+          add(Offset(l.pil * 0.5, y), 3.4 * u);
+          add(Offset(w - l.pil * 0.5, y), 3.4 * u);
         }
       case ProsceniumStyle.noirArch || ProsceniumStyle.neon:
         break;
@@ -279,8 +279,8 @@ class ProsceniumPainter {
     final u = w / 412;
     _body(c, l, [m.wallLight, m.wall, m.wallDark], const [0, 0.3, 1]);
     // Coffered header panels with rosettes.
-    final top = l.hdr * 0.16, bottom = l.hdr * 0.62;
-    final crestHalf = 58 * u;
+    final top = l.hdr * 0.13, bottom = l.hdr * 0.58;
+    final crestHalf = l.hdr * 1.25;
     for (final side in const [-1, 1]) {
       final from = side < 0 ? l.pil + 6 * u : w / 2 + crestHalf;
       final to = side < 0 ? w / 2 - crestHalf : w - l.pil - 6 * u;
@@ -323,7 +323,7 @@ class ProsceniumPainter {
       Ornaments.inked(c, Path()..addRect(base), m.giltDark, m.ink, _lw * 0.6);
       _vrule(c, base.left, base.top + 4 * u, base.top + 4 * u, m.gilt, 1);
     }
-    _moulding(c, l, 6.5 * u);
+    _moulding(c, l, 8.5 * u);
     // Beads just inside the arch.
     final beads = Path();
     for (var x = l.pil + 8 * u; x < w - l.pil - 8 * u; x += 7 * u) {
@@ -332,12 +332,13 @@ class ProsceniumPainter {
     }
     Ornaments.inked(c, beads, m.giltLight, m.ink, _lw * 0.35);
     // Cartouche crest with laurels.
-    final cc = Offset(w / 2, l.hdr * 0.62);
+    final cc = Offset(w / 2, l.hdr * 0.6);
+    final k = l.hdr / 52;
     for (final side in const [-1.0, 1.0]) {
       Ornaments.laurel(
         c,
-        cc + Offset(side * 20 * u, 10 * u),
-        cc + Offset(side * 58 * u, -4 * u),
+        cc + Offset(side * 20 * k, 10 * k),
+        cc + Offset(side * 62 * k, -6 * k),
         side * 0.18,
         6,
         fill: m.gilt,
@@ -345,13 +346,13 @@ class ProsceniumPainter {
         lineWidth: _lw * 0.6,
       );
     }
-    final shield = Path()..addOval(Rect.fromCenter(center: cc, width: 44 * u, height: 40 * u));
+    final shield = Path()..addOval(Rect.fromCenter(center: cc, width: 46 * k, height: 42 * k));
     Ornaments.inked(c, shield, m.giltDark, m.ink, _lw);
-    Ornaments.inked(c, Path()..addOval(Rect.fromCenter(center: cc, width: 36 * u, height: 32 * u)), m.wallDark, m.ink, _lw * 0.5);
-    Ornaments.orbitEmblem(c, cc, 12 * u, ring: m.giltLight, planet: m.gilt, ink: m.ink, light: m.giltLight, lineWidth: 1.1 * u);
+    Ornaments.inked(c, Path()..addOval(Rect.fromCenter(center: cc, width: 37 * k, height: 33 * k)), m.wallDark, m.ink, _lw * 0.5);
+    Ornaments.orbitEmblem(c, cc, 12.5 * k, ring: m.giltLight, planet: m.gilt, ink: m.ink, light: m.giltLight, lineWidth: 1.2 * k);
     // Keystone scrolls.
-    Ornaments.line(c, Ornaments.volute(cc + Offset(-24 * u, 14 * u), 6 * u, -1), m.gilt, 2 * u);
-    Ornaments.line(c, Ornaments.volute(cc + Offset(24 * u, 14 * u), 6 * u, 1), m.gilt, 2 * u);
+    Ornaments.line(c, Ornaments.volute(cc + Offset(-25 * k, 15 * k), 6 * k, -1), m.gilt, 2 * k);
+    Ornaments.line(c, Ornaments.volute(cc + Offset(25 * k, 15 * k), 6 * k, 1), m.gilt, 2 * k);
   }
 
   // --- 1930s art deco ----------------------------------------------------------
@@ -399,7 +400,7 @@ class ProsceniumPainter {
         ..close();
       Ornaments.inked(c, zig, m.gilt, m.ink, _lw * 0.6);
     }
-    _moulding(c, l, 5.5 * u);
+    _moulding(c, l, 7.5 * u);
     // Sunburst fan and medallion at the apex.
     final cc = Offset(w / 2, l.hdr);
     Ornaments.sunburst(c, cc, l.hdr * 0.5, l.hdr * 1.02, 13, math.pi, math.pi, a: m.gilt, b: m.wallLight, ink: m.ink, lineWidth: _lw);
@@ -432,7 +433,7 @@ class ProsceniumPainter {
     c
       ..save()
       ..clipPath(l.body);
-    final slat = Paint()..color = m.paper.withValues(alpha: 0.13);
+    final slat = Paint()..color = m.paper.withValues(alpha: 0.2);
     for (var k = 0; k < 9; k++) {
       final y = -30 * u + k * 16 * u;
       final p = Path()
@@ -456,7 +457,7 @@ class ProsceniumPainter {
       Ornaments.inked(c, shade, m.giltDark, m.ink, _lw * 0.6);
       _vrule(c, x, y, y + 10 * u, m.gilt, 1.6 * u);
     }
-    _moulding(c, l, 4 * u);
+    _moulding(c, l, 5.5 * u);
     Ornaments.line(c, l.rim, m.gilt.withValues(alpha: 0.5), 0.8 * u);
     // A plain moderne medallion with long hairlines.
     final cc = Offset(w / 2, l.hdr * 0.56);
@@ -480,35 +481,40 @@ class ProsceniumPainter {
     final u = w / 412;
     final pal = skin.palette;
     _body(c, l, [m.wallLight, m.wall, m.wallDark], const [0, 0.4, 1]);
-    // Boomerangs and sparkles on the wall (deterministic scatter).
-    c
-      ..save()
-      ..clipPath(l.body);
-    final rnd = math.Random(19);
-    for (var k = 0; k < 16; k++) {
-      final onHeader = k < 10;
-      final x = onHeader ? l.pil + rnd.nextDouble() * (w - 2 * l.pil) : (k.isEven ? l.pil * 0.5 : w - l.pil * 0.5);
-      final y = onHeader ? 6 * u + rnd.nextDouble() * (l.hdr - 14 * u) : l.hdr + 40 * u + rnd.nextDouble() * (l.footTop - l.hdr - 80 * u);
-      if (onHeader && (x - w / 2).abs() < l.hdr * 0.95) continue;
-      if (k.isEven) {
-        final b = Path()
-          ..moveTo(x - 7 * u, y + 2 * u)
-          ..quadraticBezierTo(x, y - 7 * u, x + 7 * u, y + 2 * u)
-          ..quadraticBezierTo(x, y - 2 * u, x - 7 * u, y + 2 * u)
-          ..close();
-        Ornaments.inked(c, b, k % 4 == 0 ? pal.accent : m.gilt, m.ink, _lw * 0.4);
-      } else {
-        Ornaments.inked(c, Ornaments.starPath(Offset(x, y), 5 * u, 1.3 * u, 4), m.paper, m.ink, _lw * 0.3);
+    // Boomerangs and sparkles, mirrored like a 50s wallpaper.
+    void boomerang(Offset p, double s, double dir, Color color) {
+      final b = Path()
+        ..moveTo(p.dx - 8 * s * dir, p.dy + 3 * s)
+        ..quadraticBezierTo(p.dx, p.dy - 8 * s, p.dx + 8 * s * dir, p.dy + 3 * s)
+        ..quadraticBezierTo(p.dx + 1 * s * dir, p.dy - 2 * s, p.dx - 8 * s * dir, p.dy + 3 * s)
+        ..close();
+      Ornaments.inked(c, b, color, m.ink, _lw * 0.45);
+    }
+
+    final span = w / 2 - l.hdr * 1.05 - l.pil;
+    for (final dir in const [-1.0, 1.0]) {
+      for (var k = 0; k < 4; k++) {
+        final x = w / 2 + dir * (l.hdr * 1.05 + span * (k + 0.5) / 4);
+        final y = l.hdr * (k.isEven ? 0.34 : 0.62);
+        if (k.isEven) {
+          boomerang(Offset(x, y), u * 1.1, dir, k % 4 == 0 ? pal.accent : m.gilt);
+        } else {
+          Ornaments.inked(c, Ornaments.starPath(Offset(x, y), 5.5 * u, 1.4 * u, 4), m.paper, m.ink, _lw * 0.35);
+        }
       }
     }
-    c.restore();
+    for (final x in [l.pil * 0.5, w - l.pil * 0.5]) {
+      for (var y = l.hdr + l.drop + 60 * u; y < l.footTop - 30 * u; y += 92 * u) {
+        Ornaments.inked(c, Ornaments.starPath(Offset(x, y), 5 * u, 1.3 * u, 4), m.paper, m.ink, _lw * 0.35);
+      }
+    }
     // Coral band inside the gold rim.
     c
       ..save()
       ..translate(0, 0);
     Ornaments.line(c, l.rim, pal.accent, 10 * u);
     c.restore();
-    _moulding(c, l, 5 * u);
+    _moulding(c, l, 7 * u);
     // Starburst crest with the orbit.
     final cc = Offset(w / 2, l.hdr * 0.5);
     Ornaments.inked(c, Ornaments.starPath(cc, l.hdr * 0.62, l.hdr * 0.3, 12), m.gilt, m.ink, _lw);
@@ -565,7 +571,7 @@ class ProsceniumPainter {
       c.drawLine(Offset(x, y), Offset(x + (rnd.nextDouble() - 0.5) * 30 * u, y + 20 * u + rnd.nextDouble() * 40 * u), scratch);
     }
     c.restore();
-    _moulding(c, l, 4.5 * u);
+    _moulding(c, l, 6.5 * u);
     // A "feature" badge crest.
     final cc = Offset(w / 2, l.hdr * 0.5);
     Ornaments.inked(c, Path()..addOval(Rect.fromCircle(center: cc, radius: l.hdr * 0.44)), pal.accent, m.ink, _lw);

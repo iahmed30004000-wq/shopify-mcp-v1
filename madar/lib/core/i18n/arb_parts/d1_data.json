@@ -234,8 +234,8 @@
     "en": "Encrypted backup"
   },
   "dataBackupSheetSubtitle": {
-    "ar": "AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك",
-    "en": "AES-256 · keys derived with Argon2id on your phone"
+    "ar": "تشفير AES-GCM · تُشتقّ المفاتيح بـArgon2id على هاتفك",
+    "en": "AES-GCM encryption · keys derived with Argon2id on your phone"
   },
   "dataBackupSheetBody": {
     "ar": "اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.",
@@ -307,8 +307,8 @@
     "en": "This is a common password that’s easy to guess."
   },
   "dataStrengthHintPattern": {
-    "ar": "تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.",
-    "en": "Avoid repeats and runs like 1234 or aaaa."
+    "ar": "تجنّب التكرار والتسلسلات مثل abcd أو aaaa.",
+    "en": "Avoid repeats and runs like abcd or aaaa."
   },
   "dataStrengthHintDigits": {
     "ar": "الأرقام وحدها سهلة التخمين؛ أضف كلمات.",

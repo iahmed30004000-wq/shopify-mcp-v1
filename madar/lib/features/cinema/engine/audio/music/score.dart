@@ -116,6 +116,7 @@ final class NoteEvent {
     this.fx = 0,
     this.glideFrom = 0,
     this.straight = false,
+    this.gain = 1,
   });
 
   final double beat;
@@ -130,10 +131,13 @@ final class NoteEvent {
   /// Not swung (triplets, pre-placed grace notes).
   final bool straight;
 
+  /// Mix gain (balance), separate from [vel] (which also shapes timbre).
+  final double gain;
+
   bool has(int flag) => fx & flag != 0;
 
   NoteEvent shifted(double beats) =>
-      NoteEvent(beat + beats, dur, pitch, vel, inst, stem: stem, fx: fx, glideFrom: glideFrom, straight: straight);
+      NoteEvent(beat + beats, dur, pitch, vel, inst, stem: stem, fx: fx, glideFrom: glideFrom, straight: straight, gain: gain);
 }
 
 /// A rendered stem's role in the adaptive mix.
@@ -264,3 +268,63 @@ final class CueScore {
     return (pairs + warped) * unit * secondsPerBeat;
   }
 }
+
+/// Mix trim per instrument (dB), calibrated so every voice at velocity 0.7
+/// sits at a role-appropriate, speaker-weighted loudness (leads ≈ −18 dB,
+/// comping ≈ −20…−21, bass ≈ −21, drums −23…−29): the arrangements then
+/// balance by velocity alone.
+double instTrimDb(Inst i) => switch (i) {
+  Inst.piano => -1.1,
+  Inst.honkyPiano => 0.4,
+  Inst.theatreOrgan => -3.7,
+  Inst.rhodes => -4.0,
+  Inst.vibes => -4.2,
+  Inst.xylophone => 2.3,
+  Inst.marimba => -2.0,
+  Inst.celesta => -4.0,
+  Inst.uprightBass => 2.8,
+  Inst.tuba => 1.5,
+  Inst.electricBass => -0.7,
+  Inst.synthBass => 0,
+  Inst.banjo => 2.0,
+  Inst.wahGuitar => 1.0,
+  Inst.clav => 2.9,
+  Inst.violin => 1.8,
+  Inst.strings => -0.2,
+  Inst.clarinet => -6.0,
+  Inst.mutedTrumpet => 2.5,
+  Inst.trumpet => 1.4,
+  Inst.trombone => 0.5,
+  Inst.altoSax => 3.7,
+  Inst.tenorSax => 2.8,
+  Inst.flute => -4.4,
+  Inst.synthLead => 1.9,
+  Inst.synthArp => 3.8,
+  Inst.synthPad => -3.0,
+  Inst.synthBrass => -0.4,
+  Inst.kick => 5.0,
+  Inst.snare => 8.9,
+  Inst.gatedSnare => -2.5,
+  Inst.brushTap => 7.3,
+  Inst.brushSweep => 3.1,
+  Inst.hatClosed => 4.5,
+  Inst.hatOpen => 5.6,
+  Inst.hatPedal => 7.5,
+  Inst.ride => 3.9,
+  Inst.crash => 5.4,
+  Inst.choke => 9.3,
+  Inst.rimClick => 7.5,
+  Inst.woodblock => 6.1,
+  Inst.templeBlock => 6.2,
+  Inst.tomLow => 5.8,
+  Inst.tomHigh => -3.1,
+  Inst.conga => 5.7,
+  Inst.bongo => 5.6,
+  Inst.clave => 4.5,
+  Inst.cowbell => 7.8,
+  Inst.shaker => 5.0,
+  Inst.timpani => 0,
+  Inst.clap => 5.5,
+  Inst.tambourine => 10.8,
+  Inst.gong => -1.7,
+};

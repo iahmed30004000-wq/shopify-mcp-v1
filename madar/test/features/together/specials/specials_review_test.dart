@@ -107,6 +107,31 @@ void main() {
     });
   });
 
+  group('editing', () {
+    testWidgets('a question or challenge that cleans to nothing is refused quietly', (tester) async {
+      final env = await pumpTogetherApp(tester, locale: const Locale('en'), home: const QuestionBankScreen());
+      await _tapKey(tester, 'bank-add-question');
+      // Zero-width and bidi characters only: the sheet sees text, storage none.
+      await tester.enterText(find.byType(TextField).first, '\u200B\u202E\u2066');
+      await tester.pump();
+      await tester.tap(find.text('Save').last);
+      await settleTogether(tester);
+      expect(tester.takeException(), isNull);
+      final bank = await tester.runAsync(() => SpecialsRepository(env.db).bank());
+      expect(bank!.questions.where((q) => !q.isDefault), isEmpty);
+
+      await tester.pumpWidget(const SizedBox());
+      final env2 = await pumpTogetherApp(tester, locale: const Locale('en'), home: const ChallengeListScreen());
+      await _tapKey(tester, 'challenges-add');
+      await tester.enterText(find.byType(TextField).first, '\u200B\u200B');
+      await tester.pump();
+      await tester.tap(find.text('Save').last);
+      await settleTogether(tester);
+      expect(tester.takeException(), isNull);
+      expect((await tester.runAsync(() => SpecialsRepository(env2.db).challenges()))!.items, hasLength(26));
+    });
+  });
+
   group('scoring', () {
     testWidgets('"another round" never repeats the questions just asked', (tester) async {
       final env = await pumpTogetherApp(
@@ -117,14 +142,10 @@ void main() {
           (p) => p.copyWith(roundSize: 5, categories: {'fav'}),
         ),
       );
-      print('A');
       await _tapKey(tester, 'knowme-start');
-      print('B');
       final first = tester.widget<KnowMeRoundScreen>(find.byType(KnowMeRoundScreen)).round;
       for (var turn = 0; turn < 2; turn++) {
-        print('turn $turn');
         await _reveal(tester);
-        print('revealed');
         await tester.enterText(_field('knowme-own-0'), 'x');
         for (var i = 0; i < 4; i++) {
           await _tapKey(tester, 'knowme-page-next');
@@ -132,7 +153,6 @@ void main() {
         await _tapKey(tester, 'knowme-submit');
       }
       for (var q = 0; q < 5; q++) {
-        print('q $q');
         await _tapKey(tester, 'knowme-reveal-$q-one');
         await _tapKey(tester, 'knowme-reveal-$q-two');
         if (q == 0) {
@@ -141,11 +161,15 @@ void main() {
         }
         await _tapKey(tester, 'knowme-next');
       }
-      print('settling');
       await settleTogether(tester);
-      print('settled');
       expect(find.text('Results'), findsOneWidget);
-      // Straight away – before any stream could deliver the new prefs.
+      // The results recap every answer: still out of the recents thumbnail.
+      expect(env.secure.secure, isTrue);
+      // The first match's trophy is celebrated first.
+      final trophies = find.text('New in our Hall of Fame!');
+      expect(trophies, findsOneWidget);
+      Navigator.of(tester.element(trophies)).pop();
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('knowme-again')));
       await settleTogether(tester);
       final second = tester.widget<KnowMeRoundScreen>(find.byType(KnowMeRoundScreen)).round;

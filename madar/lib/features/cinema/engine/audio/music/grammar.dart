@@ -500,6 +500,7 @@ void addPattern(
   double pitch = 0,
   int fx = 0,
   double dur = 0.1,
+  double gain = 1,
 }) {
   for (var bar = 0; bar < bars; bar++) {
     final pat = patterns[bar % patterns.length];
@@ -512,7 +513,7 @@ void addPattern(
         'g' => vel * 0.38,
         _ => vel,
       };
-      out.add(NoteEvent(start + bar * beatsPerBar + i * stepBeats, dur, pitch, v, inst, stem: stem, fx: c == 'g' ? fx | Art.ghost : fx));
+      out.add(NoteEvent(start + bar * beatsPerBar + i * stepBeats, dur, pitch, v, inst, stem: stem, fx: c == 'g' ? fx | Art.ghost : fx, gain: gain));
     }
   }
 }
@@ -528,10 +529,20 @@ void addNotes(
   int fx = 0,
   double transpose = 0,
   double legato = 1.0,
+  double gain = 1.0,
 }) {
   for (final n in notes) {
     out.add(
-      NoteEvent(n.beat, n.dur * legato, n.pitch + transpose, math.min(1.0, vel + (n.accent ? accentVel : 0)), inst, stem: stem, fx: fx),
+      NoteEvent(
+        n.beat,
+        n.dur * legato,
+        n.pitch + transpose,
+        math.min(1.0, vel + (n.accent ? accentVel : 0)),
+        inst,
+        stem: stem,
+        fx: fx,
+        gain: gain,
+      ),
     );
   }
 }
@@ -633,6 +644,7 @@ void addArp(
   double vel = 0.55,
   double gate = 0.8,
   String? mask,
+  double gain = 1,
 }) {
   final stepBeats = beatsPerBar / steps;
   for (var bar = 0; bar < bars; bar++) {
@@ -657,7 +669,7 @@ void addArp(
         _ => i % n,
       };
       final accent = i % 4 == 0;
-      out.add(NoteEvent(beat, stepBeats * gate, tones[k].toDouble(), accent ? vel * 1.15 : vel, inst, stem: stem));
+      out.add(NoteEvent(beat, stepBeats * gate, tones[k].toDouble(), accent ? vel * 1.15 : vel, inst, stem: stem, gain: gain));
     }
   }
 }
@@ -675,12 +687,13 @@ void addPad(
   int stem = 0,
   double vel = 0.45,
   int fx = 0,
+  double gain = 1,
 }) {
   for (final s in chart.slots) {
     if (s.beat < start - 1e-6 || s.beat >= start + beats - 1e-6) continue;
     final v = s.chord.closeVoicing(keyMidi, floor, size: size);
     for (final p in v) {
-      out.add(NoteEvent(s.beat, s.beats * 0.98, p.toDouble(), vel, inst, stem: stem, fx: fx));
+      out.add(NoteEvent(s.beat, s.beats * 0.98, p.toDouble(), vel, inst, stem: stem, fx: fx, gain: gain));
     }
   }
 }
