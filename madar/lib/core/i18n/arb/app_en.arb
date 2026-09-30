@@ -18900,5 +18900,523 @@
         "type": "String"
       }
     }
+  },
+  "searchTitle": "Search",
+  "@searchTitle": {
+    "description": "Global search screen title"
+  },
+  "searchFieldHint": "Search tasks, notes, people, ayat…",
+  "searchLauncherHint": "Search Madar",
+  "@searchLauncherHint": {
+    "description": "Compact search launcher on home / app bars"
+  },
+  "searchLauncherTooltip": "Search everything",
+  "searchClear": "Clear text",
+  "searchRecentTitle": "Recent searches",
+  "searchRecentClear": "Clear history",
+  "searchRecentRemove": "Remove “{query}” from history",
+  "@searchRecentRemove": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchIntroTitle": "Search your whole orbit",
+  "searchIntroBody": "Tasks, notes, people, money and ayat in one place. Search runs on your phone only.",
+  "searchPreparing": "Preparing the search index…",
+  "searchNoResultsTitle": "No results for “{query}”",
+  "@searchNoResultsTitle": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchNoResultsBody": "Try fewer words or another spelling.",
+  "searchNoResultsFiltered": "Nothing here with the current filter.",
+  "searchClearFilters": "Clear filter",
+  "searchAll": "All",
+  "searchResultsCount": "{count, plural, =0{No results} =1{1 result} other{{count} results}}",
+  "@searchResultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchShowAll": "Show all ({count})",
+  "@searchShowAll": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchGroupSemantics": "{module}, {count}",
+  "@searchGroupSemantics": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchPartial": "Not every word was found together; these are the closest matches.",
+  "searchCannotOpen": "This result can’t be opened from here yet.",
+  "searchToday": "Today",
+  "searchYesterday": "Yesterday",
+  "searchTomorrow": "Tomorrow",
+  "searchFilterPlanets": "Filter by planet",
+  "searchFilterModules": "Filter by section",
+  "searchPlanetCustom": "Custom modules",
+  "searchKeyboardHint": "↑ ↓ to move, Enter to open, Esc to clear",
+  "searchDone": "Done",
+  "searchArchived": "Archived",
+  "searchTxExpense": "Expense",
+  "searchTxIncome": "Income",
+  "searchTxTransfer": "Transfer",
+  "searchTxAdjustment": "Adjustment",
+  "searchDebtIOwe": "I owe",
+  "searchDebtOwedToMe": "Owed to me",
+  "searchChannelCall": "Call",
+  "searchChannelVisit": "Visit",
+  "searchChannelMessage": "Message",
+  "searchChannelOther": "Contact",
+  "searchPainTitle": "Pain {score}/10",
+  "@searchPainTitle": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "searchMoodTitle": "Mood",
+  "searchFastingTitle": "Fast",
+  "searchAyahPlace": "{surah} · ayah {ayah}",
+  "@searchAyahPlace": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "searchAyahRange": "{surah} · {from}–{to}",
+  "@searchAyahRange": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSurahNumber": "Surah {number}",
+  "@searchSurahNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSourceTasks": "Tasks",
+  "searchSourcePrayerLogs": "Prayer log",
+  "searchSourceMedications": "Medications",
+  "searchSourceMedCourses": "Treatment courses",
+  "searchSourceMedDoses": "Dose notes",
+  "searchSourceConditions": "Conditions",
+  "searchSourceHealthAlerts": "Health alerts",
+  "searchSourceLabTests": "Lab tests",
+  "searchSourceLabReadings": "Lab results",
+  "searchSourceAppointments": "Appointments",
+  "searchSourceDoctorQuestions": "Doctor questions",
+  "searchSourcePain": "Pain log",
+  "searchSourceMood": "Mood log",
+  "searchSourceHabits": "Habits",
+  "searchSourceWorries": "Worries",
+  "searchSourceWallets": "Wallets",
+  "searchSourceTransactions": "Transactions",
+  "searchSourceBudget": "Budget",
+  "searchSourceJars": "Savings jars",
+  "searchSourceJarDeposits": "Jar deposits",
+  "searchSourceDebts": "Debts",
+  "searchSourceDebtPayments": "Debt payments",
+  "searchSourceObligations": "Obligations",
+  "searchSourcePeople": "People",
+  "searchSourceContactLogs": "Contact log",
+  "searchSourceProjects": "Projects",
+  "searchSourceProjectItems": "Project items",
+  "searchSourceBoards": "Boards",
+  "searchSourceCards": "Cards",
+  "searchSourceTrips": "Trips",
+  "searchSourceTripItems": "Trip items",
+  "searchSourcePackingTemplates": "Packing lists",
+  "searchSourceTravelDocuments": "Travel documents",
+  "searchSourceLearningGoals": "Learning goals",
+  "searchSourceGoalLogs": "Goal log",
+  "searchSourceExercises": "Exercises",
+  "searchSourceWorkouts": "Workout log",
+  "searchSourceAvoidItems": "Avoid list",
+  "searchSourceFasting": "Fasting",
+  "searchSourceCustomModules": "Custom modules",
+  "searchSourceCustomEntries": "Module entries",
+  "searchSourceQuranAyat": "Quran ayat",
+  "searchSourceQuranBookmarks": "Quran bookmarks",
+  "searchSourceWirdPlans": "Wird plans",
+  "searchSourceHifz": "Hifz",
+  "searchSourcePlanets": "Planets",
+  "ncTitle": "Notifications",
+  "@ncTitle": {
+    "description": "Title of the notification center"
+  },
+  "ncSubtitle": "What arrived and what's coming, in one place",
+  "ncTabUpcoming": "Upcoming",
+  "@ncTabUpcoming": {
+    "description": "Notification center tab: scheduled notifications"
+  },
+  "ncTabRecent": "Recent",
+  "@ncTabRecent": {
+    "description": "Notification center tab: delivered notifications"
+  },
+  "ncTabWithCount": "{label}, {count}",
+  "@ncTabWithCount": {
+    "description": "Screen-reader label of a tab with its count",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOpenSettings": "Notification settings",
+  "ncUpcomingEmptyTitle": "Nothing scheduled",
+  "ncUpcomingEmptyBody": "The adhan and reminders you switch on line up here for the next seven days.",
+  "ncRecentEmptyTitle": "All caught up",
+  "ncRecentEmptyBody": "Notifications that arrive stay here for two weeks, so you can come back to them.",
+  "ncClearAll": "Clear all",
+  "ncClearedAll": "{count, plural, =1{Cleared 1 notification} other{Cleared {count} notifications}}",
+  "@ncClearedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncDismissed": "Dismissed",
+  "ncSkippedToast": "This one won't arrive",
+  "ncRestoredToast": "It will arrive on time",
+  "ncShowMore": "{count, plural, =1{Show 1 more} other{Show {count} more}}",
+  "@ncShowMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncShowLess": "Show less",
+  "ncSectionLabel": "{group}, {count}",
+  "@ncSectionLabel": {
+    "description": "Screen-reader label of a group section",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncGroupPrayer": "Prayer & adhan",
+  "ncGroupAdhkar": "Adhkar",
+  "ncGroupMedications": "Medications",
+  "ncGroupHealth": "Health",
+  "ncGroupMoney": "Money dues",
+  "ncGroupFamily": "Family",
+  "ncGroupTravel": "Travel documents",
+  "ncGroupWird": "Wird",
+  "ncGroupCustom": "Custom modules",
+  "ncGroupOther": "Other",
+  "ncKindAdhan": "{prayer} adhan",
+  "@ncKindAdhan": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhan": "{prayer} in {minutes}",
+  "@ncKindPreAdhan": {
+    "description": "A reminder some minutes before a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhanShort": "Before {prayer}",
+  "@ncKindPreAdhanShort": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindSunrise": "Sunrise",
+  "ncKindAdhanTest": "Test adhan",
+  "ncKindAdhkarMorning": "Morning adhkar",
+  "ncKindAdhkarEvening": "Evening adhkar",
+  "ncKindAdhkar": "Adhkar reminder",
+  "ncKindDose": "Dose reminder",
+  "ncKindRefill": "Time to refill",
+  "ncKindMedsNotice": "Answer not recorded",
+  "ncKindAppointment": "Appointment",
+  "ncKindWorry": "Worry window",
+  "ncKindFastGoal": "Fasting goal",
+  "ncKindEatingClose": "Eating window closing",
+  "ncKindDebt": "Debt due",
+  "ncKindObligation": "Payment due",
+  "ncKindFamilyDigest": "Keep in touch",
+  "ncKindBirthdayEve": "Birthday tomorrow",
+  "ncKindBirthday": "Birthday today",
+  "ncKindDocAhead": "Document expiring soon",
+  "ncKindDocToday": "Document expires today",
+  "ncKindWird": "Daily wird",
+  "ncKindCustom": "Module reminder",
+  "ncKindOther": "Notification",
+  "ncAtTime": "at {time}",
+  "@ncAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateMuted": "Muted",
+  "ncStateSkipped": "Skipped",
+  "ncStateSnoozedUntil": "Snoozed until {time}",
+  "@ncStateSnoozedUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateLive": "Showing now",
+  "ncStateSilenced": "Arrived muted",
+  "ncStateOpened": "Opened",
+  "ncStateAnswered": "Answered: {action}",
+  "@ncStateAnswered": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateSnoozed": "Snoozed",
+  "ncStateNew": "New",
+  "ncTimeNow": "Now",
+  "ncTimeIn": "in {duration}",
+  "@ncTimeIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeAgo": "{duration} ago",
+  "@ncTimeAgo": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeToday": "Today {time}",
+  "@ncTimeToday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeTomorrow": "Tomorrow {time}",
+  "@ncTimeTomorrow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeYesterday": "Yesterday {time}",
+  "@ncTimeYesterday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeOnDay": "{day}, {time}",
+  "@ncTimeOnDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionTaken": "Taken",
+  "@ncActionTaken": {
+    "description": "Dose answered from the notification center"
+  },
+  "ncActionSnooze": "Snooze",
+  "ncActionSkip": "Skip",
+  "ncActionStop": "Stop",
+  "@ncActionStop": {
+    "description": "Stops a sounding adhan"
+  },
+  "ncActionOpen": "Open",
+  "ncActionSkipOne": "Skip this one",
+  "ncActionRestore": "Restore",
+  "ncActionSnoozeFor": "Snooze {duration}",
+  "@ncActionSnoozeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionMuteGroup": "Mute {group}",
+  "@ncActionMuteGroup": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionUnmute": "Unmute",
+  "ncActionSettings": "Reminder settings",
+  "ncActionDismiss": "Dismiss",
+  "ncActionFailed": "Couldn't do that right now – try again",
+  "ncSnoozedToast": "Snoozed until {time}",
+  "@ncSnoozedToast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedToast": "{group} muted until {when}",
+  "@ncMutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncUnmutedToast": "{group} is back on",
+  "@ncUnmutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteTitle": "Mute {group}",
+  "@ncMuteTitle": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteSubtitle": "Nothing from this group will sound for a while – you'll still find it listed here.",
+  "ncMuteForHours": "{count, plural, =1{1 hour} other{{count} hours}}",
+  "@ncMuteForHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncMuteUntilMorning": "Until tomorrow morning",
+  "ncMuteWeek": "A week",
+  "ncMutedUntil": "Muted until {when}",
+  "@ncMutedUntil": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedBanner": "{count, plural, =1{1 group muted} other{{count} groups muted}}",
+  "@ncMutedBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsTitle": "Notifications",
+  "ncSettingsSubtitle": "What each part of Madar sends you, in one place",
+  "ncSettingsOn": "On",
+  "ncSettingsOff": "Off",
+  "ncSettingsSome": "{on} of {total} on",
+  "@ncSettingsSome": {
+    "placeholders": {
+      "on": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsPerItem": "Set per item",
+  "ncSettingsComing": "{count, plural, =0{Nothing coming} =1{1 coming} other{{count} coming}}",
+  "@ncSettingsComing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsOpen": "Open {group} settings",
+  "@ncSettingsOpen": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsMute": "Mute",
+  "ncPermissionOff": "Madar's notifications are off in the phone's settings, so none of this will arrive.",
+  "ncPermissionTurnOn": "Turn on",
+  "ncBellLabel": "{count, plural, =0{Notifications} =1{Notifications, 1 new} other{Notifications, {count} new}}",
+  "@ncBellLabel": {
+    "description": "Screen-reader label of the notification bell",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

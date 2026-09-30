@@ -30476,6 +30476,1188 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'مؤشَّر عليها: {count}/{total}'**
   String dataSumTicked(String count, String total);
+
+  /// Global search screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'البحث'**
+  String get searchTitle;
+
+  /// No description provided for @searchFieldHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في المهام والملاحظات والأشخاص والآيات…'**
+  String get searchFieldHint;
+
+  /// Compact search launcher on home / app bars
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في مَدار'**
+  String get searchLauncherHint;
+
+  /// No description provided for @searchLauncherTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'البحث في كل شيء'**
+  String get searchLauncherTooltip;
+
+  /// No description provided for @searchClear.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح النص'**
+  String get searchClear;
+
+  /// No description provided for @searchRecentTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمليات البحث الأخيرة'**
+  String get searchRecentTitle;
+
+  /// No description provided for @searchRecentClear.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح السجل'**
+  String get searchRecentClear;
+
+  /// No description provided for @searchRecentRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف «{query}» من السجل'**
+  String searchRecentRemove(String query);
+
+  /// No description provided for @searchIntroTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في مدارك كله'**
+  String get searchIntroTitle;
+
+  /// No description provided for @searchIntroBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'المهام والملاحظات والأشخاص والمال والآيات في مكان واحد. يجري البحث على هاتفك فقط.'**
+  String get searchIntroBody;
+
+  /// No description provided for @searchPreparing.
+  ///
+  /// In ar, this message translates to:
+  /// **'نُجهّز فهرس البحث…'**
+  String get searchPreparing;
+
+  /// No description provided for @searchNoResultsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج لـ «{query}»'**
+  String searchNoResultsTitle(String query);
+
+  /// No description provided for @searchNoResultsBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب كلمات أقل أو تهجئة أخرى.'**
+  String get searchNoResultsBody;
+
+  /// No description provided for @searchNoResultsFiltered.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء هنا ضمن التصفية الحالية.'**
+  String get searchNoResultsFiltered;
+
+  /// No description provided for @searchClearFilters.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة التصفية'**
+  String get searchClearFilters;
+
+  /// No description provided for @searchAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get searchAll;
+
+  /// No description provided for @searchResultsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا نتائج} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}'**
+  String searchResultsCount(int count);
+
+  /// No description provided for @searchShowAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكل ({count})'**
+  String searchShowAll(String count);
+
+  /// No description provided for @searchGroupSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'{module}، {count}'**
+  String searchGroupSemantics(String module, String count);
+
+  /// No description provided for @searchPartial.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم نجد كل الكلمات معًا؛ هذه أقرب النتائج.'**
+  String get searchPartial;
+
+  /// No description provided for @searchCannotOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن فتح هذه النتيجة من هنا بعد.'**
+  String get searchCannotOpen;
+
+  /// No description provided for @searchToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get searchToday;
+
+  /// No description provided for @searchYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get searchYesterday;
+
+  /// No description provided for @searchTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا'**
+  String get searchTomorrow;
+
+  /// No description provided for @searchFilterPlanets.
+  ///
+  /// In ar, this message translates to:
+  /// **'التصفية حسب الكوكب'**
+  String get searchFilterPlanets;
+
+  /// No description provided for @searchFilterModules.
+  ///
+  /// In ar, this message translates to:
+  /// **'التصفية حسب القسم'**
+  String get searchFilterModules;
+
+  /// No description provided for @searchPlanetCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدات مخصصة'**
+  String get searchPlanetCustom;
+
+  /// No description provided for @searchKeyboardHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'↑ ↓ للتنقل، Enter للفتح، Esc للمسح'**
+  String get searchKeyboardHint;
+
+  /// No description provided for @searchDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'منجزة'**
+  String get searchDone;
+
+  /// No description provided for @searchArchived.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤرشفة'**
+  String get searchArchived;
+
+  /// No description provided for @searchTxExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف'**
+  String get searchTxExpense;
+
+  /// No description provided for @searchTxIncome.
+  ///
+  /// In ar, this message translates to:
+  /// **'دخل'**
+  String get searchTxIncome;
+
+  /// No description provided for @searchTxTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل'**
+  String get searchTxTransfer;
+
+  /// No description provided for @searchTxAdjustment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسوية'**
+  String get searchTxAdjustment;
+
+  /// No description provided for @searchDebtIOwe.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين عليّ'**
+  String get searchDebtIOwe;
+
+  /// No description provided for @searchDebtOwedToMe.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين لي'**
+  String get searchDebtOwedToMe;
+
+  /// No description provided for @searchChannelCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكالمة'**
+  String get searchChannelCall;
+
+  /// No description provided for @searchChannelVisit.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيارة'**
+  String get searchChannelVisit;
+
+  /// No description provided for @searchChannelMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة'**
+  String get searchChannelMessage;
+
+  /// No description provided for @searchChannelOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصل'**
+  String get searchChannelOther;
+
+  /// No description provided for @searchPainTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألم {score}/10'**
+  String searchPainTitle(String score);
+
+  /// No description provided for @searchMoodTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج'**
+  String get searchMoodTitle;
+
+  /// No description provided for @searchFastingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيام'**
+  String get searchFastingTitle;
+
+  /// No description provided for @searchAyahPlace.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah} · الآية {ayah}'**
+  String searchAyahPlace(String surah, String ayah);
+
+  /// No description provided for @searchAyahRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah} · {from}–{to}'**
+  String searchAyahRange(String surah, String from, String to);
+
+  /// No description provided for @searchSurahNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة {number}'**
+  String searchSurahNumber(String number);
+
+  /// No description provided for @searchSourceTasks.
+  ///
+  /// In ar, this message translates to:
+  /// **'المهام'**
+  String get searchSourceTasks;
+
+  /// No description provided for @searchSourcePrayerLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الصلوات'**
+  String get searchSourcePrayerLogs;
+
+  /// No description provided for @searchSourceMedications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية'**
+  String get searchSourceMedications;
+
+  /// No description provided for @searchSourceMedCourses.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكورسات العلاجية'**
+  String get searchSourceMedCourses;
+
+  /// No description provided for @searchSourceMedDoses.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات الجرعات'**
+  String get searchSourceMedDoses;
+
+  /// No description provided for @searchSourceConditions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالات الصحية'**
+  String get searchSourceConditions;
+
+  /// No description provided for @searchSourceHealthAlerts.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنبيهات الصحية'**
+  String get searchSourceHealthAlerts;
+
+  /// No description provided for @searchSourceLabTests.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحاليل'**
+  String get searchSourceLabTests;
+
+  /// No description provided for @searchSourceLabReadings.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتائج التحاليل'**
+  String get searchSourceLabReadings;
+
+  /// No description provided for @searchSourceAppointments.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواعيد'**
+  String get searchSourceAppointments;
+
+  /// No description provided for @searchSourceDoctorQuestions.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسئلة الطبيب'**
+  String get searchSourceDoctorQuestions;
+
+  /// No description provided for @searchSourcePain.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الألم'**
+  String get searchSourcePain;
+
+  /// No description provided for @searchSourceMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل المزاج'**
+  String get searchSourceMood;
+
+  /// No description provided for @searchSourceHabits.
+  ///
+  /// In ar, this message translates to:
+  /// **'العادات'**
+  String get searchSourceHabits;
+
+  /// No description provided for @searchSourceWorries.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخاوف'**
+  String get searchSourceWorries;
+
+  /// No description provided for @searchSourceWallets.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحافظ'**
+  String get searchSourceWallets;
+
+  /// No description provided for @searchSourceTransactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعاملات'**
+  String get searchSourceTransactions;
+
+  /// No description provided for @searchSourceBudget.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزانية'**
+  String get searchSourceBudget;
+
+  /// No description provided for @searchSourceJars.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحصّالات'**
+  String get searchSourceJars;
+
+  /// No description provided for @searchSourceJarDeposits.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداعات الحصّالات'**
+  String get searchSourceJarDeposits;
+
+  /// No description provided for @searchSourceDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get searchSourceDebts;
+
+  /// No description provided for @searchSourceDebtPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'سداد الديون'**
+  String get searchSourceDebtPayments;
+
+  /// No description provided for @searchSourceObligations.
+  ///
+  /// In ar, this message translates to:
+  /// **'الالتزامات'**
+  String get searchSourceObligations;
+
+  /// No description provided for @searchSourcePeople.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأشخاص'**
+  String get searchSourcePeople;
+
+  /// No description provided for @searchSourceContactLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل التواصل'**
+  String get searchSourceContactLogs;
+
+  /// No description provided for @searchSourceProjects.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشاريع'**
+  String get searchSourceProjects;
+
+  /// No description provided for @searchSourceProjectItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود المشاريع'**
+  String get searchSourceProjectItems;
+
+  /// No description provided for @searchSourceBoards.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللوحات'**
+  String get searchSourceBoards;
+
+  /// No description provided for @searchSourceCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقات'**
+  String get searchSourceCards;
+
+  /// No description provided for @searchSourceTrips.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات'**
+  String get searchSourceTrips;
+
+  /// No description provided for @searchSourceTripItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'أغراض الرحلات'**
+  String get searchSourceTripItems;
+
+  /// No description provided for @searchSourcePackingTemplates.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم التجهيز'**
+  String get searchSourcePackingTemplates;
+
+  /// No description provided for @searchSourceTravelDocuments.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثائق السفر'**
+  String get searchSourceTravelDocuments;
+
+  /// No description provided for @searchSourceLearningGoals.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهداف التعلّم'**
+  String get searchSourceLearningGoals;
+
+  /// No description provided for @searchSourceGoalLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الأهداف'**
+  String get searchSourceGoalLogs;
+
+  /// No description provided for @searchSourceExercises.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمارين'**
+  String get searchSourceExercises;
+
+  /// No description provided for @searchSourceWorkouts.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل التمارين'**
+  String get searchSourceWorkouts;
+
+  /// No description provided for @searchSourceAvoidItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة التجنّب'**
+  String get searchSourceAvoidItems;
+
+  /// No description provided for @searchSourceFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام المتقطع'**
+  String get searchSourceFasting;
+
+  /// No description provided for @searchSourceCustomModules.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدات المخصصة'**
+  String get searchSourceCustomModules;
+
+  /// No description provided for @searchSourceCustomEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلات الوحدات'**
+  String get searchSourceCustomEntries;
+
+  /// No description provided for @searchSourceQuranAyat.
+  ///
+  /// In ar, this message translates to:
+  /// **'آيات القرآن'**
+  String get searchSourceQuranAyat;
+
+  /// No description provided for @searchSourceQuranBookmarks.
+  ///
+  /// In ar, this message translates to:
+  /// **'علامات المصحف'**
+  String get searchSourceQuranBookmarks;
+
+  /// No description provided for @searchSourceWirdPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الورد'**
+  String get searchSourceWirdPlans;
+
+  /// No description provided for @searchSourceHifz.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحفظ'**
+  String get searchSourceHifz;
+
+  /// No description provided for @searchSourcePlanets.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكواكب'**
+  String get searchSourcePlanets;
+
+  /// Title of the notification center
+  ///
+  /// In ar, this message translates to:
+  /// **'الإشعارات'**
+  String get ncTitle;
+
+  /// No description provided for @ncSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما وصلك وما سيصلك، في مكان واحد'**
+  String get ncSubtitle;
+
+  /// Notification center tab: scheduled notifications
+  ///
+  /// In ar, this message translates to:
+  /// **'القادمة'**
+  String get ncTabUpcoming;
+
+  /// Notification center tab: delivered notifications
+  ///
+  /// In ar, this message translates to:
+  /// **'الأخيرة'**
+  String get ncTabRecent;
+
+  /// Screen-reader label of a tab with its count
+  ///
+  /// In ar, this message translates to:
+  /// **'{label}، {count}'**
+  String ncTabWithCount(String label, String count);
+
+  /// No description provided for @ncOpenSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الإشعارات'**
+  String get ncOpenSettings;
+
+  /// No description provided for @ncUpcomingEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء مجدول'**
+  String get ncUpcomingEmptyTitle;
+
+  /// No description provided for @ncUpcomingEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما تفعّله من أذان وتذكيرات سيصطفّ هنا للأيام السبعة القادمة.'**
+  String get ncUpcomingEmptyBody;
+
+  /// No description provided for @ncRecentEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا جديد'**
+  String get ncRecentEmptyTitle;
+
+  /// No description provided for @ncRecentEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما يصلك من إشعارات يبقى هنا أسبوعين، لتعود إليه متى شئت.'**
+  String get ncRecentEmptyBody;
+
+  /// No description provided for @ncClearAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح الكل'**
+  String get ncClearAll;
+
+  /// No description provided for @ncClearedAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مُسح إشعار واحد} =2{مُسح إشعاران} few{مُسحت {count} إشعارات} many{مُسح {count} إشعارًا} other{مُسح {count} إشعار}}'**
+  String ncClearedAll(int count);
+
+  /// No description provided for @ncDismissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيل من القائمة'**
+  String get ncDismissed;
+
+  /// No description provided for @ncSkippedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'لن يصل هذا التذكير'**
+  String get ncSkippedToast;
+
+  /// No description provided for @ncRestoredToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيصل في وقته'**
+  String get ncRestoredToast;
+
+  /// No description provided for @ncShowMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{عرض واحد آخر} =2{عرض اثنين آخرين} few{عرض {count} أخرى} many{عرض {count} أخرى} other{عرض {count} أخرى}}'**
+  String ncShowMore(int count);
+
+  /// No description provided for @ncShowLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض أقل'**
+  String get ncShowLess;
+
+  /// Screen-reader label of a group section
+  ///
+  /// In ar, this message translates to:
+  /// **'{group}، {count}'**
+  String ncSectionLabel(String group, String count);
+
+  /// No description provided for @ncGroupPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة والأذان'**
+  String get ncGroupPrayer;
+
+  /// No description provided for @ncGroupAdhkar.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذكار'**
+  String get ncGroupAdhkar;
+
+  /// No description provided for @ncGroupMedications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأدوية'**
+  String get ncGroupMedications;
+
+  /// No description provided for @ncGroupHealth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة'**
+  String get ncGroupHealth;
+
+  /// No description provided for @ncGroupMoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستحقات المالية'**
+  String get ncGroupMoney;
+
+  /// No description provided for @ncGroupFamily.
+  ///
+  /// In ar, this message translates to:
+  /// **'العائلة'**
+  String get ncGroupFamily;
+
+  /// No description provided for @ncGroupTravel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثائق السفر'**
+  String get ncGroupTravel;
+
+  /// No description provided for @ncGroupWird.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوِرد'**
+  String get ncGroupWird;
+
+  /// No description provided for @ncGroupCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدات المخصّصة'**
+  String get ncGroupCustom;
+
+  /// No description provided for @ncGroupOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get ncGroupOther;
+
+  /// No description provided for @ncKindAdhan.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان {prayer}'**
+  String ncKindAdhan(String prayer);
+
+  /// A reminder some minutes before a prayer
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} بعد {minutes}'**
+  String ncKindPreAdhan(String prayer, String minutes);
+
+  /// No description provided for @ncKindPreAdhanShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير قبل {prayer}'**
+  String ncKindPreAdhanShort(String prayer);
+
+  /// No description provided for @ncKindSunrise.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشروق'**
+  String get ncKindSunrise;
+
+  /// No description provided for @ncKindAdhanTest.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان تجريبي'**
+  String get ncKindAdhanTest;
+
+  /// No description provided for @ncKindAdhkarMorning.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار الصباح'**
+  String get ncKindAdhkarMorning;
+
+  /// No description provided for @ncKindAdhkarEvening.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذكار المساء'**
+  String get ncKindAdhkarEvening;
+
+  /// No description provided for @ncKindAdhkar.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بالأذكار'**
+  String get ncKindAdhkar;
+
+  /// No description provided for @ncKindDose.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد جرعة'**
+  String get ncKindDose;
+
+  /// No description provided for @ncKindRefill.
+  ///
+  /// In ar, this message translates to:
+  /// **'حان وقت إعادة التعبئة'**
+  String get ncKindRefill;
+
+  /// No description provided for @ncKindMedsNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجابة لم تُسجَّل'**
+  String get ncKindMedsNotice;
+
+  /// No description provided for @ncKindAppointment.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد طبي'**
+  String get ncKindAppointment;
+
+  /// No description provided for @ncKindWorry.
+  ///
+  /// In ar, this message translates to:
+  /// **'نافذة القلق'**
+  String get ncKindWorry;
+
+  /// No description provided for @ncKindFastGoal.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف الصيام'**
+  String get ncKindFastGoal;
+
+  /// No description provided for @ncKindEatingClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'نافذة الأكل تُغلق'**
+  String get ncKindEatingClose;
+
+  /// No description provided for @ncKindDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'دَين مستحق'**
+  String get ncKindDebt;
+
+  /// No description provided for @ncKindObligation.
+  ///
+  /// In ar, this message translates to:
+  /// **'التزام مستحق'**
+  String get ncKindObligation;
+
+  /// No description provided for @ncKindFamilyDigest.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلة الرحم'**
+  String get ncKindFamilyDigest;
+
+  /// No description provided for @ncKindBirthdayEve.
+  ///
+  /// In ar, this message translates to:
+  /// **'عيد ميلاد غدًا'**
+  String get ncKindBirthdayEve;
+
+  /// No description provided for @ncKindBirthday.
+  ///
+  /// In ar, this message translates to:
+  /// **'عيد ميلاد اليوم'**
+  String get ncKindBirthday;
+
+  /// No description provided for @ncKindDocAhead.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثيقة تقترب من الانتهاء'**
+  String get ncKindDocAhead;
+
+  /// No description provided for @ncKindDocToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثيقة تنتهي اليوم'**
+  String get ncKindDocToday;
+
+  /// No description provided for @ncKindWird.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوِرد اليومي'**
+  String get ncKindWird;
+
+  /// No description provided for @ncKindCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير وحدة'**
+  String get ncKindCustom;
+
+  /// No description provided for @ncKindOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار'**
+  String get ncKindOther;
+
+  /// No description provided for @ncAtTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة {time}'**
+  String ncAtTime(String time);
+
+  /// No description provided for @ncStateMuted.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتوم'**
+  String get ncStateMuted;
+
+  /// No description provided for @ncStateSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'متخطّى'**
+  String get ncStateSkipped;
+
+  /// No description provided for @ncStateSnoozedUntil.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤجّل حتى {time}'**
+  String ncStateSnoozedUntil(String time);
+
+  /// No description provided for @ncStateLive.
+  ///
+  /// In ar, this message translates to:
+  /// **'ظاهر الآن'**
+  String get ncStateLive;
+
+  /// No description provided for @ncStateSilenced.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل صامتًا'**
+  String get ncStateSilenced;
+
+  /// No description provided for @ncStateOpened.
+  ///
+  /// In ar, this message translates to:
+  /// **'فُتح'**
+  String get ncStateOpened;
+
+  /// No description provided for @ncStateAnswered.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُجيب: {action}'**
+  String ncStateAnswered(String action);
+
+  /// No description provided for @ncStateSnoozed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُجّل'**
+  String get ncStateSnoozed;
+
+  /// No description provided for @ncStateNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'جديد'**
+  String get ncStateNew;
+
+  /// No description provided for @ncTimeNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get ncTimeNow;
+
+  /// No description provided for @ncTimeIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {duration}'**
+  String ncTimeIn(String duration);
+
+  /// No description provided for @ncTimeAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل {duration}'**
+  String ncTimeAgo(String duration);
+
+  /// No description provided for @ncTimeToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {time}'**
+  String ncTimeToday(String time);
+
+  /// No description provided for @ncTimeTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا {time}'**
+  String ncTimeTomorrow(String time);
+
+  /// No description provided for @ncTimeYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس {time}'**
+  String ncTimeYesterday(String time);
+
+  /// No description provided for @ncTimeOnDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'{day} {time}'**
+  String ncTimeOnDay(String day, String time);
+
+  /// Dose answered from the notification center
+  ///
+  /// In ar, this message translates to:
+  /// **'أخذتها'**
+  String get ncActionTaken;
+
+  /// No description provided for @ncActionSnooze.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجِّل'**
+  String get ncActionSnooze;
+
+  /// No description provided for @ncActionSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطَّ'**
+  String get ncActionSkip;
+
+  /// Stops a sounding adhan
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف'**
+  String get ncActionStop;
+
+  /// No description provided for @ncActionOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح'**
+  String get ncActionOpen;
+
+  /// No description provided for @ncActionSkipOne.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ترسل هذا'**
+  String get ncActionSkipOne;
+
+  /// No description provided for @ncActionRestore.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعِده'**
+  String get ncActionRestore;
+
+  /// No description provided for @ncActionSnoozeFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجِّل {duration}'**
+  String ncActionSnoozeFor(String duration);
+
+  /// No description provided for @ncActionMuteGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتم {group}'**
+  String ncActionMuteGroup(String group);
+
+  /// No description provided for @ncActionUnmute.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألغِ الكتم'**
+  String get ncActionUnmute;
+
+  /// No description provided for @ncActionSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات التذكير'**
+  String get ncActionSettings;
+
+  /// No description provided for @ncActionDismiss.
+  ///
+  /// In ar, this message translates to:
+  /// **'أزِل'**
+  String get ncActionDismiss;
+
+  /// No description provided for @ncActionFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر ذلك الآن، حاول مرة أخرى'**
+  String get ncActionFailed;
+
+  /// No description provided for @ncSnoozedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُجّل حتى {time}'**
+  String ncSnoozedToast(String time);
+
+  /// No description provided for @ncMutedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'{group} مكتوم حتى {when}'**
+  String ncMutedToast(String group, String when);
+
+  /// No description provided for @ncUnmutedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'عاد {group} إلى وضعه'**
+  String ncUnmutedToast(String group);
+
+  /// No description provided for @ncMuteTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتم {group}'**
+  String ncMuteTitle(String group);
+
+  /// No description provided for @ncMuteSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لن يصدر شيء من هذه المجموعة خلال المدة، وستجده هنا في القائمة.'**
+  String get ncMuteSubtitle;
+
+  /// No description provided for @ncMuteForHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ساعة} =2{ساعتين} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}'**
+  String ncMuteForHours(int count);
+
+  /// No description provided for @ncMuteUntilMorning.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى صباح الغد'**
+  String get ncMuteUntilMorning;
+
+  /// No description provided for @ncMuteWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعًا'**
+  String get ncMuteWeek;
+
+  /// No description provided for @ncMutedUntil.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتوم حتى {when}'**
+  String ncMutedUntil(String when);
+
+  /// No description provided for @ncMutedBanner.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مجموعة مكتومة} =2{مجموعتان مكتومتان} few{{count} مجموعات مكتومة} many{{count} مجموعة مكتومة} other{{count} مجموعة مكتومة}}'**
+  String ncMutedBanner(int count);
+
+  /// No description provided for @ncSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإشعارات'**
+  String get ncSettingsTitle;
+
+  /// No description provided for @ncSettingsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما يرسله كل جزء من مَدار، في مكان واحد'**
+  String get ncSettingsSubtitle;
+
+  /// No description provided for @ncSettingsOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّلة'**
+  String get ncSettingsOn;
+
+  /// No description provided for @ncSettingsOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقفة'**
+  String get ncSettingsOff;
+
+  /// No description provided for @ncSettingsSome.
+  ///
+  /// In ar, this message translates to:
+  /// **'{on} من {total} مفعّلة'**
+  String ncSettingsSome(String on, String total);
+
+  /// No description provided for @ncSettingsPerItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُضبط لكل عنصر'**
+  String get ncSettingsPerItem;
+
+  /// No description provided for @ncSettingsComing.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا شيء قادم} =1{واحد قادم} =2{اثنان قادمان} few{{count} قادمة} many{{count} قادمًا} other{{count} قادم}}'**
+  String ncSettingsComing(int count);
+
+  /// No description provided for @ncSettingsOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح إعدادات {group}'**
+  String ncSettingsOpen(String group);
+
+  /// No description provided for @ncSettingsMute.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتم'**
+  String get ncSettingsMute;
+
+  /// No description provided for @ncPermissionOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعارات مَدار متوقفة من إعدادات الهاتف، فلن يصل شيء مما هنا.'**
+  String get ncPermissionOff;
+
+  /// No description provided for @ncPermissionTurnOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّلها'**
+  String get ncPermissionTurnOn;
+
+  /// Screen-reader label of the notification bell
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{الإشعارات} =1{الإشعارات، واحد جديد} =2{الإشعارات، اثنان جديدان} few{الإشعارات، {count} جديدة} many{الإشعارات، {count} جديدًا} other{الإشعارات، {count} جديد}}'**
+  String ncBellLabel(int count);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

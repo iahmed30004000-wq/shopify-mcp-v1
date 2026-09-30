@@ -19773,4 +19773,742 @@ class L10nAr extends L10n {
   String dataSumTicked(String count, String total) {
     return 'مؤشَّر عليها: $count/$total';
   }
+
+  @override
+  String get searchTitle => 'البحث';
+
+  @override
+  String get searchFieldHint => 'ابحث في المهام والملاحظات والأشخاص والآيات…';
+
+  @override
+  String get searchLauncherHint => 'ابحث في مَدار';
+
+  @override
+  String get searchLauncherTooltip => 'البحث في كل شيء';
+
+  @override
+  String get searchClear => 'مسح النص';
+
+  @override
+  String get searchRecentTitle => 'عمليات البحث الأخيرة';
+
+  @override
+  String get searchRecentClear => 'مسح السجل';
+
+  @override
+  String searchRecentRemove(String query) {
+    return 'حذف «$query» من السجل';
+  }
+
+  @override
+  String get searchIntroTitle => 'ابحث في مدارك كله';
+
+  @override
+  String get searchIntroBody =>
+      'المهام والملاحظات والأشخاص والمال والآيات في مكان واحد. يجري البحث على هاتفك فقط.';
+
+  @override
+  String get searchPreparing => 'نُجهّز فهرس البحث…';
+
+  @override
+  String searchNoResultsTitle(String query) {
+    return 'لا نتائج لـ «$query»';
+  }
+
+  @override
+  String get searchNoResultsBody => 'جرّب كلمات أقل أو تهجئة أخرى.';
+
+  @override
+  String get searchNoResultsFiltered => 'لا شيء هنا ضمن التصفية الحالية.';
+
+  @override
+  String get searchClearFilters => 'إزالة التصفية';
+
+  @override
+  String get searchAll => 'الكل';
+
+  @override
+  String searchResultsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نتيجة',
+      many: '$count نتيجة',
+      few: '$count نتائج',
+      two: 'نتيجتان',
+      one: 'نتيجة واحدة',
+      zero: 'لا نتائج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchShowAll(String count) {
+    return 'عرض الكل ($count)';
+  }
+
+  @override
+  String searchGroupSemantics(String module, String count) {
+    return '$module، $count';
+  }
+
+  @override
+  String get searchPartial => 'لم نجد كل الكلمات معًا؛ هذه أقرب النتائج.';
+
+  @override
+  String get searchCannotOpen => 'لا يمكن فتح هذه النتيجة من هنا بعد.';
+
+  @override
+  String get searchToday => 'اليوم';
+
+  @override
+  String get searchYesterday => 'أمس';
+
+  @override
+  String get searchTomorrow => 'غدًا';
+
+  @override
+  String get searchFilterPlanets => 'التصفية حسب الكوكب';
+
+  @override
+  String get searchFilterModules => 'التصفية حسب القسم';
+
+  @override
+  String get searchPlanetCustom => 'وحدات مخصصة';
+
+  @override
+  String get searchKeyboardHint => '↑ ↓ للتنقل، Enter للفتح، Esc للمسح';
+
+  @override
+  String get searchDone => 'منجزة';
+
+  @override
+  String get searchArchived => 'مؤرشفة';
+
+  @override
+  String get searchTxExpense => 'مصروف';
+
+  @override
+  String get searchTxIncome => 'دخل';
+
+  @override
+  String get searchTxTransfer => 'تحويل';
+
+  @override
+  String get searchTxAdjustment => 'تسوية';
+
+  @override
+  String get searchDebtIOwe => 'دين عليّ';
+
+  @override
+  String get searchDebtOwedToMe => 'دين لي';
+
+  @override
+  String get searchChannelCall => 'مكالمة';
+
+  @override
+  String get searchChannelVisit => 'زيارة';
+
+  @override
+  String get searchChannelMessage => 'رسالة';
+
+  @override
+  String get searchChannelOther => 'تواصل';
+
+  @override
+  String searchPainTitle(String score) {
+    return 'ألم $score/10';
+  }
+
+  @override
+  String get searchMoodTitle => 'المزاج';
+
+  @override
+  String get searchFastingTitle => 'صيام';
+
+  @override
+  String searchAyahPlace(String surah, String ayah) {
+    return '$surah · الآية $ayah';
+  }
+
+  @override
+  String searchAyahRange(String surah, String from, String to) {
+    return '$surah · $from–$to';
+  }
+
+  @override
+  String searchSurahNumber(String number) {
+    return 'سورة $number';
+  }
+
+  @override
+  String get searchSourceTasks => 'المهام';
+
+  @override
+  String get searchSourcePrayerLogs => 'سجل الصلوات';
+
+  @override
+  String get searchSourceMedications => 'الأدوية';
+
+  @override
+  String get searchSourceMedCourses => 'الكورسات العلاجية';
+
+  @override
+  String get searchSourceMedDoses => 'ملاحظات الجرعات';
+
+  @override
+  String get searchSourceConditions => 'الحالات الصحية';
+
+  @override
+  String get searchSourceHealthAlerts => 'التنبيهات الصحية';
+
+  @override
+  String get searchSourceLabTests => 'التحاليل';
+
+  @override
+  String get searchSourceLabReadings => 'نتائج التحاليل';
+
+  @override
+  String get searchSourceAppointments => 'المواعيد';
+
+  @override
+  String get searchSourceDoctorQuestions => 'أسئلة الطبيب';
+
+  @override
+  String get searchSourcePain => 'سجل الألم';
+
+  @override
+  String get searchSourceMood => 'سجل المزاج';
+
+  @override
+  String get searchSourceHabits => 'العادات';
+
+  @override
+  String get searchSourceWorries => 'المخاوف';
+
+  @override
+  String get searchSourceWallets => 'المحافظ';
+
+  @override
+  String get searchSourceTransactions => 'المعاملات';
+
+  @override
+  String get searchSourceBudget => 'الميزانية';
+
+  @override
+  String get searchSourceJars => 'الحصّالات';
+
+  @override
+  String get searchSourceJarDeposits => 'إيداعات الحصّالات';
+
+  @override
+  String get searchSourceDebts => 'الديون';
+
+  @override
+  String get searchSourceDebtPayments => 'سداد الديون';
+
+  @override
+  String get searchSourceObligations => 'الالتزامات';
+
+  @override
+  String get searchSourcePeople => 'الأشخاص';
+
+  @override
+  String get searchSourceContactLogs => 'سجل التواصل';
+
+  @override
+  String get searchSourceProjects => 'المشاريع';
+
+  @override
+  String get searchSourceProjectItems => 'بنود المشاريع';
+
+  @override
+  String get searchSourceBoards => 'اللوحات';
+
+  @override
+  String get searchSourceCards => 'البطاقات';
+
+  @override
+  String get searchSourceTrips => 'الرحلات';
+
+  @override
+  String get searchSourceTripItems => 'أغراض الرحلات';
+
+  @override
+  String get searchSourcePackingTemplates => 'قوائم التجهيز';
+
+  @override
+  String get searchSourceTravelDocuments => 'وثائق السفر';
+
+  @override
+  String get searchSourceLearningGoals => 'أهداف التعلّم';
+
+  @override
+  String get searchSourceGoalLogs => 'سجل الأهداف';
+
+  @override
+  String get searchSourceExercises => 'التمارين';
+
+  @override
+  String get searchSourceWorkouts => 'سجل التمارين';
+
+  @override
+  String get searchSourceAvoidItems => 'قائمة التجنّب';
+
+  @override
+  String get searchSourceFasting => 'الصيام المتقطع';
+
+  @override
+  String get searchSourceCustomModules => 'الوحدات المخصصة';
+
+  @override
+  String get searchSourceCustomEntries => 'سجلات الوحدات';
+
+  @override
+  String get searchSourceQuranAyat => 'آيات القرآن';
+
+  @override
+  String get searchSourceQuranBookmarks => 'علامات المصحف';
+
+  @override
+  String get searchSourceWirdPlans => 'خطط الورد';
+
+  @override
+  String get searchSourceHifz => 'الحفظ';
+
+  @override
+  String get searchSourcePlanets => 'الكواكب';
+
+  @override
+  String get ncTitle => 'الإشعارات';
+
+  @override
+  String get ncSubtitle => 'ما وصلك وما سيصلك، في مكان واحد';
+
+  @override
+  String get ncTabUpcoming => 'القادمة';
+
+  @override
+  String get ncTabRecent => 'الأخيرة';
+
+  @override
+  String ncTabWithCount(String label, String count) {
+    return '$label، $count';
+  }
+
+  @override
+  String get ncOpenSettings => 'إعدادات الإشعارات';
+
+  @override
+  String get ncUpcomingEmptyTitle => 'لا شيء مجدول';
+
+  @override
+  String get ncUpcomingEmptyBody =>
+      'ما تفعّله من أذان وتذكيرات سيصطفّ هنا للأيام السبعة القادمة.';
+
+  @override
+  String get ncRecentEmptyTitle => 'لا جديد';
+
+  @override
+  String get ncRecentEmptyBody =>
+      'ما يصلك من إشعارات يبقى هنا أسبوعين، لتعود إليه متى شئت.';
+
+  @override
+  String get ncClearAll => 'مسح الكل';
+
+  @override
+  String ncClearedAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'مُسح $count إشعار',
+      many: 'مُسح $count إشعارًا',
+      few: 'مُسحت $count إشعارات',
+      two: 'مُسح إشعاران',
+      one: 'مُسح إشعار واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncDismissed => 'أُزيل من القائمة';
+
+  @override
+  String get ncSkippedToast => 'لن يصل هذا التذكير';
+
+  @override
+  String get ncRestoredToast => 'سيصل في وقته';
+
+  @override
+  String ncShowMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'عرض $count أخرى',
+      many: 'عرض $count أخرى',
+      few: 'عرض $count أخرى',
+      two: 'عرض اثنين آخرين',
+      one: 'عرض واحد آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncShowLess => 'عرض أقل';
+
+  @override
+  String ncSectionLabel(String group, String count) {
+    return '$group، $count';
+  }
+
+  @override
+  String get ncGroupPrayer => 'الصلاة والأذان';
+
+  @override
+  String get ncGroupAdhkar => 'الأذكار';
+
+  @override
+  String get ncGroupMedications => 'الأدوية';
+
+  @override
+  String get ncGroupHealth => 'الصحة';
+
+  @override
+  String get ncGroupMoney => 'المستحقات المالية';
+
+  @override
+  String get ncGroupFamily => 'العائلة';
+
+  @override
+  String get ncGroupTravel => 'وثائق السفر';
+
+  @override
+  String get ncGroupWird => 'الوِرد';
+
+  @override
+  String get ncGroupCustom => 'الوحدات المخصّصة';
+
+  @override
+  String get ncGroupOther => 'أخرى';
+
+  @override
+  String ncKindAdhan(String prayer) {
+    return 'أذان $prayer';
+  }
+
+  @override
+  String ncKindPreAdhan(String prayer, String minutes) {
+    return '$prayer بعد $minutes';
+  }
+
+  @override
+  String ncKindPreAdhanShort(String prayer) {
+    return 'تذكير قبل $prayer';
+  }
+
+  @override
+  String get ncKindSunrise => 'الشروق';
+
+  @override
+  String get ncKindAdhanTest => 'أذان تجريبي';
+
+  @override
+  String get ncKindAdhkarMorning => 'أذكار الصباح';
+
+  @override
+  String get ncKindAdhkarEvening => 'أذكار المساء';
+
+  @override
+  String get ncKindAdhkar => 'تذكير بالأذكار';
+
+  @override
+  String get ncKindDose => 'موعد جرعة';
+
+  @override
+  String get ncKindRefill => 'حان وقت إعادة التعبئة';
+
+  @override
+  String get ncKindMedsNotice => 'إجابة لم تُسجَّل';
+
+  @override
+  String get ncKindAppointment => 'موعد طبي';
+
+  @override
+  String get ncKindWorry => 'نافذة القلق';
+
+  @override
+  String get ncKindFastGoal => 'هدف الصيام';
+
+  @override
+  String get ncKindEatingClose => 'نافذة الأكل تُغلق';
+
+  @override
+  String get ncKindDebt => 'دَين مستحق';
+
+  @override
+  String get ncKindObligation => 'التزام مستحق';
+
+  @override
+  String get ncKindFamilyDigest => 'صلة الرحم';
+
+  @override
+  String get ncKindBirthdayEve => 'عيد ميلاد غدًا';
+
+  @override
+  String get ncKindBirthday => 'عيد ميلاد اليوم';
+
+  @override
+  String get ncKindDocAhead => 'وثيقة تقترب من الانتهاء';
+
+  @override
+  String get ncKindDocToday => 'وثيقة تنتهي اليوم';
+
+  @override
+  String get ncKindWird => 'الوِرد اليومي';
+
+  @override
+  String get ncKindCustom => 'تذكير وحدة';
+
+  @override
+  String get ncKindOther => 'إشعار';
+
+  @override
+  String ncAtTime(String time) {
+    return 'الساعة $time';
+  }
+
+  @override
+  String get ncStateMuted => 'مكتوم';
+
+  @override
+  String get ncStateSkipped => 'متخطّى';
+
+  @override
+  String ncStateSnoozedUntil(String time) {
+    return 'مؤجّل حتى $time';
+  }
+
+  @override
+  String get ncStateLive => 'ظاهر الآن';
+
+  @override
+  String get ncStateSilenced => 'وصل صامتًا';
+
+  @override
+  String get ncStateOpened => 'فُتح';
+
+  @override
+  String ncStateAnswered(String action) {
+    return 'أُجيب: $action';
+  }
+
+  @override
+  String get ncStateSnoozed => 'أُجّل';
+
+  @override
+  String get ncStateNew => 'جديد';
+
+  @override
+  String get ncTimeNow => 'الآن';
+
+  @override
+  String ncTimeIn(String duration) {
+    return 'بعد $duration';
+  }
+
+  @override
+  String ncTimeAgo(String duration) {
+    return 'قبل $duration';
+  }
+
+  @override
+  String ncTimeToday(String time) {
+    return 'اليوم $time';
+  }
+
+  @override
+  String ncTimeTomorrow(String time) {
+    return 'غدًا $time';
+  }
+
+  @override
+  String ncTimeYesterday(String time) {
+    return 'أمس $time';
+  }
+
+  @override
+  String ncTimeOnDay(String day, String time) {
+    return '$day $time';
+  }
+
+  @override
+  String get ncActionTaken => 'أخذتها';
+
+  @override
+  String get ncActionSnooze => 'أجِّل';
+
+  @override
+  String get ncActionSkip => 'تخطَّ';
+
+  @override
+  String get ncActionStop => 'إيقاف';
+
+  @override
+  String get ncActionOpen => 'افتح';
+
+  @override
+  String get ncActionSkipOne => 'لا ترسل هذا';
+
+  @override
+  String get ncActionRestore => 'أعِده';
+
+  @override
+  String ncActionSnoozeFor(String duration) {
+    return 'أجِّل $duration';
+  }
+
+  @override
+  String ncActionMuteGroup(String group) {
+    return 'اكتم $group';
+  }
+
+  @override
+  String get ncActionUnmute => 'ألغِ الكتم';
+
+  @override
+  String get ncActionSettings => 'إعدادات التذكير';
+
+  @override
+  String get ncActionDismiss => 'أزِل';
+
+  @override
+  String get ncActionFailed => 'تعذّر ذلك الآن، حاول مرة أخرى';
+
+  @override
+  String ncSnoozedToast(String time) {
+    return 'أُجّل حتى $time';
+  }
+
+  @override
+  String ncMutedToast(String group, String when) {
+    return '$group مكتوم حتى $when';
+  }
+
+  @override
+  String ncUnmutedToast(String group) {
+    return 'عاد $group إلى وضعه';
+  }
+
+  @override
+  String ncMuteTitle(String group) {
+    return 'اكتم $group';
+  }
+
+  @override
+  String get ncMuteSubtitle =>
+      'لن يصدر شيء من هذه المجموعة خلال المدة، وستجده هنا في القائمة.';
+
+  @override
+  String ncMuteForHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ساعة',
+      many: '$count ساعة',
+      few: '$count ساعات',
+      two: 'ساعتين',
+      one: 'ساعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncMuteUntilMorning => 'حتى صباح الغد';
+
+  @override
+  String get ncMuteWeek => 'أسبوعًا';
+
+  @override
+  String ncMutedUntil(String when) {
+    return 'مكتوم حتى $when';
+  }
+
+  @override
+  String ncMutedBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مجموعة مكتومة',
+      many: '$count مجموعة مكتومة',
+      few: '$count مجموعات مكتومة',
+      two: 'مجموعتان مكتومتان',
+      one: 'مجموعة مكتومة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncSettingsTitle => 'الإشعارات';
+
+  @override
+  String get ncSettingsSubtitle => 'ما يرسله كل جزء من مَدار، في مكان واحد';
+
+  @override
+  String get ncSettingsOn => 'مفعّلة';
+
+  @override
+  String get ncSettingsOff => 'متوقفة';
+
+  @override
+  String ncSettingsSome(String on, String total) {
+    return '$on من $total مفعّلة';
+  }
+
+  @override
+  String get ncSettingsPerItem => 'تُضبط لكل عنصر';
+
+  @override
+  String ncSettingsComing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count قادم',
+      many: '$count قادمًا',
+      few: '$count قادمة',
+      two: 'اثنان قادمان',
+      one: 'واحد قادم',
+      zero: 'لا شيء قادم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncSettingsOpen(String group) {
+    return 'افتح إعدادات $group';
+  }
+
+  @override
+  String get ncSettingsMute => 'اكتم';
+
+  @override
+  String get ncPermissionOff =>
+      'إشعارات مَدار متوقفة من إعدادات الهاتف، فلن يصل شيء مما هنا.';
+
+  @override
+  String get ncPermissionTurnOn => 'فعّلها';
+
+  @override
+  String ncBellLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'الإشعارات، $count جديد',
+      many: 'الإشعارات، $count جديدًا',
+      few: 'الإشعارات، $count جديدة',
+      two: 'الإشعارات، اثنان جديدان',
+      one: 'الإشعارات، واحد جديد',
+      zero: 'الإشعارات',
+    );
+    return '$_temp0';
+  }
 }

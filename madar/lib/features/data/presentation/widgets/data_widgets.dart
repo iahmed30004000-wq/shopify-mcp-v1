@@ -105,7 +105,7 @@ class DataNote extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = color ?? t.textSecondary;
-    final style = Theme.of(context).textTheme.bodySmall!.copyWith(color: c == t.textSecondary ? t.textSecondary : c, height: 1.45);
+    final style = Theme.of(context).textTheme.bodySmall!.copyWith(color: c, height: 1.45);
     return Container(
       padding: EdgeInsetsDirectional.symmetric(horizontal: Space.m, vertical: dense ? Space.s : Space.m),
       decoration: BoxDecoration(

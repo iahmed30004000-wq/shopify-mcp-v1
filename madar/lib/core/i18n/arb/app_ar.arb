@@ -18900,5 +18900,523 @@
         "type": "String"
       }
     }
+  },
+  "searchTitle": "البحث",
+  "@searchTitle": {
+    "description": "Global search screen title"
+  },
+  "searchFieldHint": "ابحث في المهام والملاحظات والأشخاص والآيات…",
+  "searchLauncherHint": "ابحث في مَدار",
+  "@searchLauncherHint": {
+    "description": "Compact search launcher on home / app bars"
+  },
+  "searchLauncherTooltip": "البحث في كل شيء",
+  "searchClear": "مسح النص",
+  "searchRecentTitle": "عمليات البحث الأخيرة",
+  "searchRecentClear": "مسح السجل",
+  "searchRecentRemove": "حذف «{query}» من السجل",
+  "@searchRecentRemove": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchIntroTitle": "ابحث في مدارك كله",
+  "searchIntroBody": "المهام والملاحظات والأشخاص والمال والآيات في مكان واحد. يجري البحث على هاتفك فقط.",
+  "searchPreparing": "نُجهّز فهرس البحث…",
+  "searchNoResultsTitle": "لا نتائج لـ «{query}»",
+  "@searchNoResultsTitle": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchNoResultsBody": "جرّب كلمات أقل أو تهجئة أخرى.",
+  "searchNoResultsFiltered": "لا شيء هنا ضمن التصفية الحالية.",
+  "searchClearFilters": "إزالة التصفية",
+  "searchAll": "الكل",
+  "searchResultsCount": "{count, plural, =0{لا نتائج} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}",
+  "@searchResultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchShowAll": "عرض الكل ({count})",
+  "@searchShowAll": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchGroupSemantics": "{module}، {count}",
+  "@searchGroupSemantics": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchPartial": "لم نجد كل الكلمات معًا؛ هذه أقرب النتائج.",
+  "searchCannotOpen": "لا يمكن فتح هذه النتيجة من هنا بعد.",
+  "searchToday": "اليوم",
+  "searchYesterday": "أمس",
+  "searchTomorrow": "غدًا",
+  "searchFilterPlanets": "التصفية حسب الكوكب",
+  "searchFilterModules": "التصفية حسب القسم",
+  "searchPlanetCustom": "وحدات مخصصة",
+  "searchKeyboardHint": "↑ ↓ للتنقل، Enter للفتح، Esc للمسح",
+  "searchDone": "منجزة",
+  "searchArchived": "مؤرشفة",
+  "searchTxExpense": "مصروف",
+  "searchTxIncome": "دخل",
+  "searchTxTransfer": "تحويل",
+  "searchTxAdjustment": "تسوية",
+  "searchDebtIOwe": "دين عليّ",
+  "searchDebtOwedToMe": "دين لي",
+  "searchChannelCall": "مكالمة",
+  "searchChannelVisit": "زيارة",
+  "searchChannelMessage": "رسالة",
+  "searchChannelOther": "تواصل",
+  "searchPainTitle": "ألم {score}/10",
+  "@searchPainTitle": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "searchMoodTitle": "المزاج",
+  "searchFastingTitle": "صيام",
+  "searchAyahPlace": "{surah} · الآية {ayah}",
+  "@searchAyahPlace": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "searchAyahRange": "{surah} · {from}–{to}",
+  "@searchAyahRange": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSurahNumber": "سورة {number}",
+  "@searchSurahNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSourceTasks": "المهام",
+  "searchSourcePrayerLogs": "سجل الصلوات",
+  "searchSourceMedications": "الأدوية",
+  "searchSourceMedCourses": "الكورسات العلاجية",
+  "searchSourceMedDoses": "ملاحظات الجرعات",
+  "searchSourceConditions": "الحالات الصحية",
+  "searchSourceHealthAlerts": "التنبيهات الصحية",
+  "searchSourceLabTests": "التحاليل",
+  "searchSourceLabReadings": "نتائج التحاليل",
+  "searchSourceAppointments": "المواعيد",
+  "searchSourceDoctorQuestions": "أسئلة الطبيب",
+  "searchSourcePain": "سجل الألم",
+  "searchSourceMood": "سجل المزاج",
+  "searchSourceHabits": "العادات",
+  "searchSourceWorries": "المخاوف",
+  "searchSourceWallets": "المحافظ",
+  "searchSourceTransactions": "المعاملات",
+  "searchSourceBudget": "الميزانية",
+  "searchSourceJars": "الحصّالات",
+  "searchSourceJarDeposits": "إيداعات الحصّالات",
+  "searchSourceDebts": "الديون",
+  "searchSourceDebtPayments": "سداد الديون",
+  "searchSourceObligations": "الالتزامات",
+  "searchSourcePeople": "الأشخاص",
+  "searchSourceContactLogs": "سجل التواصل",
+  "searchSourceProjects": "المشاريع",
+  "searchSourceProjectItems": "بنود المشاريع",
+  "searchSourceBoards": "اللوحات",
+  "searchSourceCards": "البطاقات",
+  "searchSourceTrips": "الرحلات",
+  "searchSourceTripItems": "أغراض الرحلات",
+  "searchSourcePackingTemplates": "قوائم التجهيز",
+  "searchSourceTravelDocuments": "وثائق السفر",
+  "searchSourceLearningGoals": "أهداف التعلّم",
+  "searchSourceGoalLogs": "سجل الأهداف",
+  "searchSourceExercises": "التمارين",
+  "searchSourceWorkouts": "سجل التمارين",
+  "searchSourceAvoidItems": "قائمة التجنّب",
+  "searchSourceFasting": "الصيام المتقطع",
+  "searchSourceCustomModules": "الوحدات المخصصة",
+  "searchSourceCustomEntries": "سجلات الوحدات",
+  "searchSourceQuranAyat": "آيات القرآن",
+  "searchSourceQuranBookmarks": "علامات المصحف",
+  "searchSourceWirdPlans": "خطط الورد",
+  "searchSourceHifz": "الحفظ",
+  "searchSourcePlanets": "الكواكب",
+  "ncTitle": "الإشعارات",
+  "@ncTitle": {
+    "description": "Title of the notification center"
+  },
+  "ncSubtitle": "ما وصلك وما سيصلك، في مكان واحد",
+  "ncTabUpcoming": "القادمة",
+  "@ncTabUpcoming": {
+    "description": "Notification center tab: scheduled notifications"
+  },
+  "ncTabRecent": "الأخيرة",
+  "@ncTabRecent": {
+    "description": "Notification center tab: delivered notifications"
+  },
+  "ncTabWithCount": "{label}، {count}",
+  "@ncTabWithCount": {
+    "description": "Screen-reader label of a tab with its count",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOpenSettings": "إعدادات الإشعارات",
+  "ncUpcomingEmptyTitle": "لا شيء مجدول",
+  "ncUpcomingEmptyBody": "ما تفعّله من أذان وتذكيرات سيصطفّ هنا للأيام السبعة القادمة.",
+  "ncRecentEmptyTitle": "لا جديد",
+  "ncRecentEmptyBody": "ما يصلك من إشعارات يبقى هنا أسبوعين، لتعود إليه متى شئت.",
+  "ncClearAll": "مسح الكل",
+  "ncClearedAll": "{count, plural, =1{مُسح إشعار واحد} =2{مُسح إشعاران} few{مُسحت {count} إشعارات} many{مُسح {count} إشعارًا} other{مُسح {count} إشعار}}",
+  "@ncClearedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncDismissed": "أُزيل من القائمة",
+  "ncSkippedToast": "لن يصل هذا التذكير",
+  "ncRestoredToast": "سيصل في وقته",
+  "ncShowMore": "{count, plural, =1{عرض واحد آخر} =2{عرض اثنين آخرين} few{عرض {count} أخرى} many{عرض {count} أخرى} other{عرض {count} أخرى}}",
+  "@ncShowMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncShowLess": "عرض أقل",
+  "ncSectionLabel": "{group}، {count}",
+  "@ncSectionLabel": {
+    "description": "Screen-reader label of a group section",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncGroupPrayer": "الصلاة والأذان",
+  "ncGroupAdhkar": "الأذكار",
+  "ncGroupMedications": "الأدوية",
+  "ncGroupHealth": "الصحة",
+  "ncGroupMoney": "المستحقات المالية",
+  "ncGroupFamily": "العائلة",
+  "ncGroupTravel": "وثائق السفر",
+  "ncGroupWird": "الوِرد",
+  "ncGroupCustom": "الوحدات المخصّصة",
+  "ncGroupOther": "أخرى",
+  "ncKindAdhan": "أذان {prayer}",
+  "@ncKindAdhan": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhan": "{prayer} بعد {minutes}",
+  "@ncKindPreAdhan": {
+    "description": "A reminder some minutes before a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhanShort": "تذكير قبل {prayer}",
+  "@ncKindPreAdhanShort": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindSunrise": "الشروق",
+  "ncKindAdhanTest": "أذان تجريبي",
+  "ncKindAdhkarMorning": "أذكار الصباح",
+  "ncKindAdhkarEvening": "أذكار المساء",
+  "ncKindAdhkar": "تذكير بالأذكار",
+  "ncKindDose": "موعد جرعة",
+  "ncKindRefill": "حان وقت إعادة التعبئة",
+  "ncKindMedsNotice": "إجابة لم تُسجَّل",
+  "ncKindAppointment": "موعد طبي",
+  "ncKindWorry": "نافذة القلق",
+  "ncKindFastGoal": "هدف الصيام",
+  "ncKindEatingClose": "نافذة الأكل تُغلق",
+  "ncKindDebt": "دَين مستحق",
+  "ncKindObligation": "التزام مستحق",
+  "ncKindFamilyDigest": "صلة الرحم",
+  "ncKindBirthdayEve": "عيد ميلاد غدًا",
+  "ncKindBirthday": "عيد ميلاد اليوم",
+  "ncKindDocAhead": "وثيقة تقترب من الانتهاء",
+  "ncKindDocToday": "وثيقة تنتهي اليوم",
+  "ncKindWird": "الوِرد اليومي",
+  "ncKindCustom": "تذكير وحدة",
+  "ncKindOther": "إشعار",
+  "ncAtTime": "الساعة {time}",
+  "@ncAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateMuted": "مكتوم",
+  "ncStateSkipped": "متخطّى",
+  "ncStateSnoozedUntil": "مؤجّل حتى {time}",
+  "@ncStateSnoozedUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateLive": "ظاهر الآن",
+  "ncStateSilenced": "وصل صامتًا",
+  "ncStateOpened": "فُتح",
+  "ncStateAnswered": "أُجيب: {action}",
+  "@ncStateAnswered": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateSnoozed": "أُجّل",
+  "ncStateNew": "جديد",
+  "ncTimeNow": "الآن",
+  "ncTimeIn": "بعد {duration}",
+  "@ncTimeIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeAgo": "قبل {duration}",
+  "@ncTimeAgo": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeToday": "اليوم {time}",
+  "@ncTimeToday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeTomorrow": "غدًا {time}",
+  "@ncTimeTomorrow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeYesterday": "أمس {time}",
+  "@ncTimeYesterday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeOnDay": "{day} {time}",
+  "@ncTimeOnDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionTaken": "أخذتها",
+  "@ncActionTaken": {
+    "description": "Dose answered from the notification center"
+  },
+  "ncActionSnooze": "أجِّل",
+  "ncActionSkip": "تخطَّ",
+  "ncActionStop": "إيقاف",
+  "@ncActionStop": {
+    "description": "Stops a sounding adhan"
+  },
+  "ncActionOpen": "افتح",
+  "ncActionSkipOne": "لا ترسل هذا",
+  "ncActionRestore": "أعِده",
+  "ncActionSnoozeFor": "أجِّل {duration}",
+  "@ncActionSnoozeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionMuteGroup": "اكتم {group}",
+  "@ncActionMuteGroup": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionUnmute": "ألغِ الكتم",
+  "ncActionSettings": "إعدادات التذكير",
+  "ncActionDismiss": "أزِل",
+  "ncActionFailed": "تعذّر ذلك الآن، حاول مرة أخرى",
+  "ncSnoozedToast": "أُجّل حتى {time}",
+  "@ncSnoozedToast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedToast": "{group} مكتوم حتى {when}",
+  "@ncMutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncUnmutedToast": "عاد {group} إلى وضعه",
+  "@ncUnmutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteTitle": "اكتم {group}",
+  "@ncMuteTitle": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteSubtitle": "لن يصدر شيء من هذه المجموعة خلال المدة، وستجده هنا في القائمة.",
+  "ncMuteForHours": "{count, plural, =1{ساعة} =2{ساعتين} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}",
+  "@ncMuteForHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncMuteUntilMorning": "حتى صباح الغد",
+  "ncMuteWeek": "أسبوعًا",
+  "ncMutedUntil": "مكتوم حتى {when}",
+  "@ncMutedUntil": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedBanner": "{count, plural, =1{مجموعة مكتومة} =2{مجموعتان مكتومتان} few{{count} مجموعات مكتومة} many{{count} مجموعة مكتومة} other{{count} مجموعة مكتومة}}",
+  "@ncMutedBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsTitle": "الإشعارات",
+  "ncSettingsSubtitle": "ما يرسله كل جزء من مَدار، في مكان واحد",
+  "ncSettingsOn": "مفعّلة",
+  "ncSettingsOff": "متوقفة",
+  "ncSettingsSome": "{on} من {total} مفعّلة",
+  "@ncSettingsSome": {
+    "placeholders": {
+      "on": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsPerItem": "تُضبط لكل عنصر",
+  "ncSettingsComing": "{count, plural, =0{لا شيء قادم} =1{واحد قادم} =2{اثنان قادمان} few{{count} قادمة} many{{count} قادمًا} other{{count} قادم}}",
+  "@ncSettingsComing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsOpen": "افتح إعدادات {group}",
+  "@ncSettingsOpen": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsMute": "اكتم",
+  "ncPermissionOff": "إشعارات مَدار متوقفة من إعدادات الهاتف، فلن يصل شيء مما هنا.",
+  "ncPermissionTurnOn": "فعّلها",
+  "ncBellLabel": "{count, plural, =0{الإشعارات} =1{الإشعارات، واحد جديد} =2{الإشعارات، اثنان جديدان} few{الإشعارات، {count} جديدة} many{الإشعارات، {count} جديدًا} other{الإشعارات، {count} جديد}}",
+  "@ncBellLabel": {
+    "description": "Screen-reader label of the notification bell",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

@@ -1,0 +1,145 @@
+{
+  "searchTitle": {"ar": "البحث", "en": "Search", "description": "Global search screen title"},
+  "searchFieldHint": {"ar": "ابحث في المهام والملاحظات والأشخاص والآيات…", "en": "Search tasks, notes, people, ayat…"},
+  "searchLauncherHint": {"ar": "ابحث في مَدار", "en": "Search Madar", "description": "Compact search launcher on home / app bars"},
+  "searchLauncherTooltip": {"ar": "البحث في كل شيء", "en": "Search everything"},
+  "searchClear": {"ar": "مسح النص", "en": "Clear text"},
+  "searchRecentTitle": {"ar": "عمليات البحث الأخيرة", "en": "Recent searches"},
+  "searchRecentClear": {"ar": "مسح السجل", "en": "Clear history"},
+  "searchRecentRemove": {
+    "ar": "حذف «{query}» من السجل",
+    "en": "Remove “{query}” from history",
+    "placeholders": {"query": {"type": "String"}}
+  },
+  "searchIntroTitle": {"ar": "ابحث في مدارك كله", "en": "Search your whole orbit"},
+  "searchIntroBody": {
+    "ar": "المهام والملاحظات والأشخاص والمال والآيات في مكان واحد. يجري البحث على هاتفك فقط.",
+    "en": "Tasks, notes, people, money and ayat in one place. Search runs on your phone only."
+  },
+  "searchPreparing": {"ar": "نُجهّز فهرس البحث…", "en": "Preparing the search index…"},
+  "searchNoResultsTitle": {
+    "ar": "لا نتائج لـ «{query}»",
+    "en": "No results for “{query}”",
+    "placeholders": {"query": {"type": "String"}}
+  },
+  "searchNoResultsBody": {
+    "ar": "جرّب كلمات أقل أو تهجئة أخرى.",
+    "en": "Try fewer words or another spelling."
+  },
+  "searchNoResultsFiltered": {
+    "ar": "لا شيء هنا ضمن التصفية الحالية.",
+    "en": "Nothing here with the current filter."
+  },
+  "searchClearFilters": {"ar": "إزالة التصفية", "en": "Clear filter"},
+  "searchAll": {"ar": "الكل", "en": "All"},
+  "searchResultsCount": {
+    "ar": "{count, plural, =0{لا نتائج} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}",
+    "en": "{count, plural, =0{No results} =1{1 result} other{{count} results}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "searchShowAll": {
+    "ar": "عرض الكل ({count})",
+    "en": "Show all ({count})",
+    "placeholders": {"count": {"type": "String"}}
+  },
+  "searchGroupSemantics": {
+    "ar": "{module}، {count}",
+    "en": "{module}, {count}",
+    "placeholders": {"module": {"type": "String"}, "count": {"type": "String"}}
+  },
+  "searchPartial": {
+    "ar": "لم نجد كل الكلمات معًا؛ هذه أقرب النتائج.",
+    "en": "Not every word was found together; these are the closest matches."
+  },
+  "searchCannotOpen": {"ar": "لا يمكن فتح هذه النتيجة من هنا بعد.", "en": "This result can’t be opened from here yet."},
+  "searchToday": {"ar": "اليوم", "en": "Today"},
+  "searchYesterday": {"ar": "أمس", "en": "Yesterday"},
+  "searchTomorrow": {"ar": "غدًا", "en": "Tomorrow"},
+  "searchFilterPlanets": {"ar": "التصفية حسب الكوكب", "en": "Filter by planet"},
+  "searchFilterModules": {"ar": "التصفية حسب القسم", "en": "Filter by section"},
+  "searchPlanetCustom": {"ar": "وحدات مخصصة", "en": "Custom modules"},
+  "searchKeyboardHint": {
+    "ar": "↑ ↓ للتنقل، Enter للفتح، Esc للمسح",
+    "en": "↑ ↓ to move, Enter to open, Esc to clear"
+  },
+  "searchDone": {"ar": "منجزة", "en": "Done"},
+  "searchArchived": {"ar": "مؤرشفة", "en": "Archived"},
+  "searchTxExpense": {"ar": "مصروف", "en": "Expense"},
+  "searchTxIncome": {"ar": "دخل", "en": "Income"},
+  "searchTxTransfer": {"ar": "تحويل", "en": "Transfer"},
+  "searchTxAdjustment": {"ar": "تسوية", "en": "Adjustment"},
+  "searchDebtIOwe": {"ar": "دين عليّ", "en": "I owe"},
+  "searchDebtOwedToMe": {"ar": "دين لي", "en": "Owed to me"},
+  "searchChannelCall": {"ar": "مكالمة", "en": "Call"},
+  "searchChannelVisit": {"ar": "زيارة", "en": "Visit"},
+  "searchChannelMessage": {"ar": "رسالة", "en": "Message"},
+  "searchChannelOther": {"ar": "تواصل", "en": "Contact"},
+  "searchPainTitle": {
+    "ar": "ألم {score}/10",
+    "en": "Pain {score}/10",
+    "placeholders": {"score": {"type": "String"}}
+  },
+  "searchMoodTitle": {"ar": "المزاج", "en": "Mood"},
+  "searchFastingTitle": {"ar": "صيام", "en": "Fast"},
+  "searchAyahPlace": {
+    "ar": "{surah} · الآية {ayah}",
+    "en": "{surah} · ayah {ayah}",
+    "placeholders": {"surah": {"type": "String"}, "ayah": {"type": "String"}}
+  },
+  "searchAyahRange": {
+    "ar": "{surah} · {from}–{to}",
+    "en": "{surah} · {from}–{to}",
+    "placeholders": {"surah": {"type": "String"}, "from": {"type": "String"}, "to": {"type": "String"}}
+  },
+  "searchSurahNumber": {
+    "ar": "سورة {number}",
+    "en": "Surah {number}",
+    "placeholders": {"number": {"type": "String"}}
+  },
+  "searchSourceTasks": {"ar": "المهام", "en": "Tasks"},
+  "searchSourcePrayerLogs": {"ar": "سجل الصلوات", "en": "Prayer log"},
+  "searchSourceMedications": {"ar": "الأدوية", "en": "Medications"},
+  "searchSourceMedCourses": {"ar": "الكورسات العلاجية", "en": "Treatment courses"},
+  "searchSourceMedDoses": {"ar": "ملاحظات الجرعات", "en": "Dose notes"},
+  "searchSourceConditions": {"ar": "الحالات الصحية", "en": "Conditions"},
+  "searchSourceHealthAlerts": {"ar": "التنبيهات الصحية", "en": "Health alerts"},
+  "searchSourceLabTests": {"ar": "التحاليل", "en": "Lab tests"},
+  "searchSourceLabReadings": {"ar": "نتائج التحاليل", "en": "Lab results"},
+  "searchSourceAppointments": {"ar": "المواعيد", "en": "Appointments"},
+  "searchSourceDoctorQuestions": {"ar": "أسئلة الطبيب", "en": "Doctor questions"},
+  "searchSourcePain": {"ar": "سجل الألم", "en": "Pain log"},
+  "searchSourceMood": {"ar": "سجل المزاج", "en": "Mood log"},
+  "searchSourceHabits": {"ar": "العادات", "en": "Habits"},
+  "searchSourceWorries": {"ar": "المخاوف", "en": "Worries"},
+  "searchSourceWallets": {"ar": "المحافظ", "en": "Wallets"},
+  "searchSourceTransactions": {"ar": "المعاملات", "en": "Transactions"},
+  "searchSourceBudget": {"ar": "الميزانية", "en": "Budget"},
+  "searchSourceJars": {"ar": "الحصّالات", "en": "Savings jars"},
+  "searchSourceJarDeposits": {"ar": "إيداعات الحصّالات", "en": "Jar deposits"},
+  "searchSourceDebts": {"ar": "الديون", "en": "Debts"},
+  "searchSourceDebtPayments": {"ar": "سداد الديون", "en": "Debt payments"},
+  "searchSourceObligations": {"ar": "الالتزامات", "en": "Obligations"},
+  "searchSourcePeople": {"ar": "الأشخاص", "en": "People"},
+  "searchSourceContactLogs": {"ar": "سجل التواصل", "en": "Contact log"},
+  "searchSourceProjects": {"ar": "المشاريع", "en": "Projects"},
+  "searchSourceProjectItems": {"ar": "بنود المشاريع", "en": "Project items"},
+  "searchSourceBoards": {"ar": "اللوحات", "en": "Boards"},
+  "searchSourceCards": {"ar": "البطاقات", "en": "Cards"},
+  "searchSourceTrips": {"ar": "الرحلات", "en": "Trips"},
+  "searchSourceTripItems": {"ar": "أغراض الرحلات", "en": "Trip items"},
+  "searchSourcePackingTemplates": {"ar": "قوائم التجهيز", "en": "Packing lists"},
+  "searchSourceTravelDocuments": {"ar": "وثائق السفر", "en": "Travel documents"},
+  "searchSourceLearningGoals": {"ar": "أهداف التعلّم", "en": "Learning goals"},
+  "searchSourceGoalLogs": {"ar": "سجل الأهداف", "en": "Goal log"},
+  "searchSourceExercises": {"ar": "التمارين", "en": "Exercises"},
+  "searchSourceWorkouts": {"ar": "سجل التمارين", "en": "Workout log"},
+  "searchSourceAvoidItems": {"ar": "قائمة التجنّب", "en": "Avoid list"},
+  "searchSourceFasting": {"ar": "الصيام المتقطع", "en": "Fasting"},
+  "searchSourceCustomModules": {"ar": "الوحدات المخصصة", "en": "Custom modules"},
+  "searchSourceCustomEntries": {"ar": "سجلات الوحدات", "en": "Module entries"},
+  "searchSourceQuranAyat": {"ar": "آيات القرآن", "en": "Quran ayat"},
+  "searchSourceQuranBookmarks": {"ar": "علامات المصحف", "en": "Quran bookmarks"},
+  "searchSourceWirdPlans": {"ar": "خطط الورد", "en": "Wird plans"},
+  "searchSourceHifz": {"ar": "الحفظ", "en": "Hifz"},
+  "searchSourcePlanets": {"ar": "الكواكب", "en": "Planets"}
+}

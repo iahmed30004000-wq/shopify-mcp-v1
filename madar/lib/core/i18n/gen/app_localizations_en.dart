@@ -19226,4 +19226,723 @@ class L10nEn extends L10n {
   String dataSumTicked(String count, String total) {
     return 'ticked: $count/$total';
   }
+
+  @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get searchFieldHint => 'Search tasks, notes, people, ayat…';
+
+  @override
+  String get searchLauncherHint => 'Search Madar';
+
+  @override
+  String get searchLauncherTooltip => 'Search everything';
+
+  @override
+  String get searchClear => 'Clear text';
+
+  @override
+  String get searchRecentTitle => 'Recent searches';
+
+  @override
+  String get searchRecentClear => 'Clear history';
+
+  @override
+  String searchRecentRemove(String query) {
+    return 'Remove “$query” from history';
+  }
+
+  @override
+  String get searchIntroTitle => 'Search your whole orbit';
+
+  @override
+  String get searchIntroBody =>
+      'Tasks, notes, people, money and ayat in one place. Search runs on your phone only.';
+
+  @override
+  String get searchPreparing => 'Preparing the search index…';
+
+  @override
+  String searchNoResultsTitle(String query) {
+    return 'No results for “$query”';
+  }
+
+  @override
+  String get searchNoResultsBody => 'Try fewer words or another spelling.';
+
+  @override
+  String get searchNoResultsFiltered => 'Nothing here with the current filter.';
+
+  @override
+  String get searchClearFilters => 'Clear filter';
+
+  @override
+  String get searchAll => 'All';
+
+  @override
+  String searchResultsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+      zero: 'No results',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchShowAll(String count) {
+    return 'Show all ($count)';
+  }
+
+  @override
+  String searchGroupSemantics(String module, String count) {
+    return '$module, $count';
+  }
+
+  @override
+  String get searchPartial =>
+      'Not every word was found together; these are the closest matches.';
+
+  @override
+  String get searchCannotOpen => 'This result can’t be opened from here yet.';
+
+  @override
+  String get searchToday => 'Today';
+
+  @override
+  String get searchYesterday => 'Yesterday';
+
+  @override
+  String get searchTomorrow => 'Tomorrow';
+
+  @override
+  String get searchFilterPlanets => 'Filter by planet';
+
+  @override
+  String get searchFilterModules => 'Filter by section';
+
+  @override
+  String get searchPlanetCustom => 'Custom modules';
+
+  @override
+  String get searchKeyboardHint => '↑ ↓ to move, Enter to open, Esc to clear';
+
+  @override
+  String get searchDone => 'Done';
+
+  @override
+  String get searchArchived => 'Archived';
+
+  @override
+  String get searchTxExpense => 'Expense';
+
+  @override
+  String get searchTxIncome => 'Income';
+
+  @override
+  String get searchTxTransfer => 'Transfer';
+
+  @override
+  String get searchTxAdjustment => 'Adjustment';
+
+  @override
+  String get searchDebtIOwe => 'I owe';
+
+  @override
+  String get searchDebtOwedToMe => 'Owed to me';
+
+  @override
+  String get searchChannelCall => 'Call';
+
+  @override
+  String get searchChannelVisit => 'Visit';
+
+  @override
+  String get searchChannelMessage => 'Message';
+
+  @override
+  String get searchChannelOther => 'Contact';
+
+  @override
+  String searchPainTitle(String score) {
+    return 'Pain $score/10';
+  }
+
+  @override
+  String get searchMoodTitle => 'Mood';
+
+  @override
+  String get searchFastingTitle => 'Fast';
+
+  @override
+  String searchAyahPlace(String surah, String ayah) {
+    return '$surah · ayah $ayah';
+  }
+
+  @override
+  String searchAyahRange(String surah, String from, String to) {
+    return '$surah · $from–$to';
+  }
+
+  @override
+  String searchSurahNumber(String number) {
+    return 'Surah $number';
+  }
+
+  @override
+  String get searchSourceTasks => 'Tasks';
+
+  @override
+  String get searchSourcePrayerLogs => 'Prayer log';
+
+  @override
+  String get searchSourceMedications => 'Medications';
+
+  @override
+  String get searchSourceMedCourses => 'Treatment courses';
+
+  @override
+  String get searchSourceMedDoses => 'Dose notes';
+
+  @override
+  String get searchSourceConditions => 'Conditions';
+
+  @override
+  String get searchSourceHealthAlerts => 'Health alerts';
+
+  @override
+  String get searchSourceLabTests => 'Lab tests';
+
+  @override
+  String get searchSourceLabReadings => 'Lab results';
+
+  @override
+  String get searchSourceAppointments => 'Appointments';
+
+  @override
+  String get searchSourceDoctorQuestions => 'Doctor questions';
+
+  @override
+  String get searchSourcePain => 'Pain log';
+
+  @override
+  String get searchSourceMood => 'Mood log';
+
+  @override
+  String get searchSourceHabits => 'Habits';
+
+  @override
+  String get searchSourceWorries => 'Worries';
+
+  @override
+  String get searchSourceWallets => 'Wallets';
+
+  @override
+  String get searchSourceTransactions => 'Transactions';
+
+  @override
+  String get searchSourceBudget => 'Budget';
+
+  @override
+  String get searchSourceJars => 'Savings jars';
+
+  @override
+  String get searchSourceJarDeposits => 'Jar deposits';
+
+  @override
+  String get searchSourceDebts => 'Debts';
+
+  @override
+  String get searchSourceDebtPayments => 'Debt payments';
+
+  @override
+  String get searchSourceObligations => 'Obligations';
+
+  @override
+  String get searchSourcePeople => 'People';
+
+  @override
+  String get searchSourceContactLogs => 'Contact log';
+
+  @override
+  String get searchSourceProjects => 'Projects';
+
+  @override
+  String get searchSourceProjectItems => 'Project items';
+
+  @override
+  String get searchSourceBoards => 'Boards';
+
+  @override
+  String get searchSourceCards => 'Cards';
+
+  @override
+  String get searchSourceTrips => 'Trips';
+
+  @override
+  String get searchSourceTripItems => 'Trip items';
+
+  @override
+  String get searchSourcePackingTemplates => 'Packing lists';
+
+  @override
+  String get searchSourceTravelDocuments => 'Travel documents';
+
+  @override
+  String get searchSourceLearningGoals => 'Learning goals';
+
+  @override
+  String get searchSourceGoalLogs => 'Goal log';
+
+  @override
+  String get searchSourceExercises => 'Exercises';
+
+  @override
+  String get searchSourceWorkouts => 'Workout log';
+
+  @override
+  String get searchSourceAvoidItems => 'Avoid list';
+
+  @override
+  String get searchSourceFasting => 'Fasting';
+
+  @override
+  String get searchSourceCustomModules => 'Custom modules';
+
+  @override
+  String get searchSourceCustomEntries => 'Module entries';
+
+  @override
+  String get searchSourceQuranAyat => 'Quran ayat';
+
+  @override
+  String get searchSourceQuranBookmarks => 'Quran bookmarks';
+
+  @override
+  String get searchSourceWirdPlans => 'Wird plans';
+
+  @override
+  String get searchSourceHifz => 'Hifz';
+
+  @override
+  String get searchSourcePlanets => 'Planets';
+
+  @override
+  String get ncTitle => 'Notifications';
+
+  @override
+  String get ncSubtitle => 'What arrived and what\'s coming, in one place';
+
+  @override
+  String get ncTabUpcoming => 'Upcoming';
+
+  @override
+  String get ncTabRecent => 'Recent';
+
+  @override
+  String ncTabWithCount(String label, String count) {
+    return '$label, $count';
+  }
+
+  @override
+  String get ncOpenSettings => 'Notification settings';
+
+  @override
+  String get ncUpcomingEmptyTitle => 'Nothing scheduled';
+
+  @override
+  String get ncUpcomingEmptyBody =>
+      'The adhan and reminders you switch on line up here for the next seven days.';
+
+  @override
+  String get ncRecentEmptyTitle => 'All caught up';
+
+  @override
+  String get ncRecentEmptyBody =>
+      'Notifications that arrive stay here for two weeks, so you can come back to them.';
+
+  @override
+  String get ncClearAll => 'Clear all';
+
+  @override
+  String ncClearedAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Cleared $count notifications',
+      one: 'Cleared 1 notification',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncDismissed => 'Dismissed';
+
+  @override
+  String get ncSkippedToast => 'This one won\'t arrive';
+
+  @override
+  String get ncRestoredToast => 'It will arrive on time';
+
+  @override
+  String ncShowMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Show $count more',
+      one: 'Show 1 more',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncShowLess => 'Show less';
+
+  @override
+  String ncSectionLabel(String group, String count) {
+    return '$group, $count';
+  }
+
+  @override
+  String get ncGroupPrayer => 'Prayer & adhan';
+
+  @override
+  String get ncGroupAdhkar => 'Adhkar';
+
+  @override
+  String get ncGroupMedications => 'Medications';
+
+  @override
+  String get ncGroupHealth => 'Health';
+
+  @override
+  String get ncGroupMoney => 'Money dues';
+
+  @override
+  String get ncGroupFamily => 'Family';
+
+  @override
+  String get ncGroupTravel => 'Travel documents';
+
+  @override
+  String get ncGroupWird => 'Wird';
+
+  @override
+  String get ncGroupCustom => 'Custom modules';
+
+  @override
+  String get ncGroupOther => 'Other';
+
+  @override
+  String ncKindAdhan(String prayer) {
+    return '$prayer adhan';
+  }
+
+  @override
+  String ncKindPreAdhan(String prayer, String minutes) {
+    return '$prayer in $minutes';
+  }
+
+  @override
+  String ncKindPreAdhanShort(String prayer) {
+    return 'Before $prayer';
+  }
+
+  @override
+  String get ncKindSunrise => 'Sunrise';
+
+  @override
+  String get ncKindAdhanTest => 'Test adhan';
+
+  @override
+  String get ncKindAdhkarMorning => 'Morning adhkar';
+
+  @override
+  String get ncKindAdhkarEvening => 'Evening adhkar';
+
+  @override
+  String get ncKindAdhkar => 'Adhkar reminder';
+
+  @override
+  String get ncKindDose => 'Dose reminder';
+
+  @override
+  String get ncKindRefill => 'Time to refill';
+
+  @override
+  String get ncKindMedsNotice => 'Answer not recorded';
+
+  @override
+  String get ncKindAppointment => 'Appointment';
+
+  @override
+  String get ncKindWorry => 'Worry window';
+
+  @override
+  String get ncKindFastGoal => 'Fasting goal';
+
+  @override
+  String get ncKindEatingClose => 'Eating window closing';
+
+  @override
+  String get ncKindDebt => 'Debt due';
+
+  @override
+  String get ncKindObligation => 'Payment due';
+
+  @override
+  String get ncKindFamilyDigest => 'Keep in touch';
+
+  @override
+  String get ncKindBirthdayEve => 'Birthday tomorrow';
+
+  @override
+  String get ncKindBirthday => 'Birthday today';
+
+  @override
+  String get ncKindDocAhead => 'Document expiring soon';
+
+  @override
+  String get ncKindDocToday => 'Document expires today';
+
+  @override
+  String get ncKindWird => 'Daily wird';
+
+  @override
+  String get ncKindCustom => 'Module reminder';
+
+  @override
+  String get ncKindOther => 'Notification';
+
+  @override
+  String ncAtTime(String time) {
+    return 'at $time';
+  }
+
+  @override
+  String get ncStateMuted => 'Muted';
+
+  @override
+  String get ncStateSkipped => 'Skipped';
+
+  @override
+  String ncStateSnoozedUntil(String time) {
+    return 'Snoozed until $time';
+  }
+
+  @override
+  String get ncStateLive => 'Showing now';
+
+  @override
+  String get ncStateSilenced => 'Arrived muted';
+
+  @override
+  String get ncStateOpened => 'Opened';
+
+  @override
+  String ncStateAnswered(String action) {
+    return 'Answered: $action';
+  }
+
+  @override
+  String get ncStateSnoozed => 'Snoozed';
+
+  @override
+  String get ncStateNew => 'New';
+
+  @override
+  String get ncTimeNow => 'Now';
+
+  @override
+  String ncTimeIn(String duration) {
+    return 'in $duration';
+  }
+
+  @override
+  String ncTimeAgo(String duration) {
+    return '$duration ago';
+  }
+
+  @override
+  String ncTimeToday(String time) {
+    return 'Today $time';
+  }
+
+  @override
+  String ncTimeTomorrow(String time) {
+    return 'Tomorrow $time';
+  }
+
+  @override
+  String ncTimeYesterday(String time) {
+    return 'Yesterday $time';
+  }
+
+  @override
+  String ncTimeOnDay(String day, String time) {
+    return '$day, $time';
+  }
+
+  @override
+  String get ncActionTaken => 'Taken';
+
+  @override
+  String get ncActionSnooze => 'Snooze';
+
+  @override
+  String get ncActionSkip => 'Skip';
+
+  @override
+  String get ncActionStop => 'Stop';
+
+  @override
+  String get ncActionOpen => 'Open';
+
+  @override
+  String get ncActionSkipOne => 'Skip this one';
+
+  @override
+  String get ncActionRestore => 'Restore';
+
+  @override
+  String ncActionSnoozeFor(String duration) {
+    return 'Snooze $duration';
+  }
+
+  @override
+  String ncActionMuteGroup(String group) {
+    return 'Mute $group';
+  }
+
+  @override
+  String get ncActionUnmute => 'Unmute';
+
+  @override
+  String get ncActionSettings => 'Reminder settings';
+
+  @override
+  String get ncActionDismiss => 'Dismiss';
+
+  @override
+  String get ncActionFailed => 'Couldn\'t do that right now – try again';
+
+  @override
+  String ncSnoozedToast(String time) {
+    return 'Snoozed until $time';
+  }
+
+  @override
+  String ncMutedToast(String group, String when) {
+    return '$group muted until $when';
+  }
+
+  @override
+  String ncUnmutedToast(String group) {
+    return '$group is back on';
+  }
+
+  @override
+  String ncMuteTitle(String group) {
+    return 'Mute $group';
+  }
+
+  @override
+  String get ncMuteSubtitle =>
+      'Nothing from this group will sound for a while – you\'ll still find it listed here.';
+
+  @override
+  String ncMuteForHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hours',
+      one: '1 hour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncMuteUntilMorning => 'Until tomorrow morning';
+
+  @override
+  String get ncMuteWeek => 'A week';
+
+  @override
+  String ncMutedUntil(String when) {
+    return 'Muted until $when';
+  }
+
+  @override
+  String ncMutedBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count groups muted',
+      one: '1 group muted',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncSettingsTitle => 'Notifications';
+
+  @override
+  String get ncSettingsSubtitle =>
+      'What each part of Madar sends you, in one place';
+
+  @override
+  String get ncSettingsOn => 'On';
+
+  @override
+  String get ncSettingsOff => 'Off';
+
+  @override
+  String ncSettingsSome(String on, String total) {
+    return '$on of $total on';
+  }
+
+  @override
+  String get ncSettingsPerItem => 'Set per item';
+
+  @override
+  String ncSettingsComing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count coming',
+      one: '1 coming',
+      zero: 'Nothing coming',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncSettingsOpen(String group) {
+    return 'Open $group settings';
+  }
+
+  @override
+  String get ncSettingsMute => 'Mute';
+
+  @override
+  String get ncPermissionOff =>
+      'Madar\'s notifications are off in the phone\'s settings, so none of this will arrive.';
+
+  @override
+  String get ncPermissionTurnOn => 'Turn on';
+
+  @override
+  String ncBellLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notifications, $count new',
+      one: 'Notifications, 1 new',
+      zero: 'Notifications',
+    );
+    return '$_temp0';
+  }
 }
