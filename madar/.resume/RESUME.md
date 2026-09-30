@@ -23,7 +23,9 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Health (meds, record, wellbeing, hub) | lib/features/health/** | DONE, shipped 375be67 (APK #12) |
 | Hotfix: auto fingerprint + orbit reset view | lock, orbit | DONE, shipped e2aa71a (APK #11) |
 | Money ledger / budget / goals builders | lib/features/money/{ledger,budget,goals} | built + verified |
-| Money integration + review | routing, app, settings, orbit planet, money/hub, a9_money_hub.json | RUNNING (phase5_integrate.js, wf_ad90daa6-564) |
+| Money integration + review | routing, app, settings, orbit planet, money/hub, a9_money_hub.json | DONE (review fixes: net worth w/ archived jars, rebase keeps budget, goals decimals, AA contrast, 96 screenshots) |
+| Money APK release prep (snapshot in scratchpad/snap) | lint fixes in data/ai_chat strings; snapshot exclusions | RUNNING (wf_64b31bc3-312) → then commit-tree + push for CI |
+| Integration plans (read-only) | scratchpad/integration_plan_{life,system}.md, integration_conflicts.md | RUNNING (wf_4b0ec4d8-49f) |
 | Work, Family, Travel, Growth, Body, Custom Modules builders | lib/features/{work,family,travel,growth,body,custom_modules} | built + verified; integration NOT started |
 | Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
 | Jordanian rules: board (dama, tawla ×3, dominoes, ludo) | cinema/rules/board/** | DONE (561 tests); open detail questions in board/RULES.md §9.2 |
