@@ -79,7 +79,9 @@ Future<void> _named(TogetherRepository repo) async {
 
 Future<void> _namedEn(TogetherRepository repo) async {
   await repo.saveProfile(TogetherProfile.defaults(PlayerSlot.one).copyWith(name: 'Ali'));
-  await repo.saveProfile(TogetherProfile.defaults(PlayerSlot.two).copyWith(name: 'Sara', avatar: const TogetherAvatar.emoji('🌙')));
+  await repo.saveProfile(
+    TogetherProfile.defaults(PlayerSlot.two).copyWith(name: 'Sara', avatar: const TogetherAvatar.emoji('🌙')),
+  );
 }
 
 /// Closes a scripted partner (its drain timeouts need fake time to pass).
@@ -133,12 +135,8 @@ void main() {
       mine: mine,
       perms: perms,
       override: togetherTransportFactoriesProvider.overrideWithValue({
-        PlayMode.nearby: (req) async => NearbyTransport(
-          api: mine,
-          permissions: perms,
-          request: req,
-          autoConnectDelay: const Duration(seconds: 30),
-        ),
+        PlayMode.nearby: (req) async =>
+            NearbyTransport(api: mine, permissions: perms, request: req, autoConnectDelay: const Duration(seconds: 30)),
       }),
     );
   }

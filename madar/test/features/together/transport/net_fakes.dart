@@ -80,8 +80,7 @@ class FakeNearbyAir {
     return String.fromCharCodes([for (var i = 0; i < 4; i++) chars.codeUnitAt(_random.nextInt(chars.length))]);
   }
 
-  _Link? _linkOf(FakeNearbyApi x, FakeNearbyApi y) =>
-      _links.where((l) => l.involves(x) && l.involves(y)).firstOrNull;
+  _Link? _linkOf(FakeNearbyApi x, FakeNearbyApi y) => _links.where((l) => l.involves(x) && l.involves(y)).firstOrNull;
 
   FakeNearbyApi? _byId(String id) => phones.where((p) => p.endpointId == id).firstOrNull;
 
@@ -101,7 +100,14 @@ class FakeNearbyAir {
     _holding.remove(from.endpointId);
     final held = _held.remove(from.endpointId) ?? [];
     for (final (to, bytes) in reverse ? held.reversed : held) {
-      to._emit(NearbyPayloadReceived(from.endpointId, payloadId: _random.nextInt(1 << 30), kind: NearbyPayloadKind.bytes, bytes: bytes));
+      to._emit(
+        NearbyPayloadReceived(
+          from.endpointId,
+          payloadId: _random.nextInt(1 << 30),
+          kind: NearbyPayloadKind.bytes,
+          bytes: bytes,
+        ),
+      );
     }
   }
 
@@ -109,7 +115,11 @@ class FakeNearbyAir {
     if (identical(discoverer, advertiser) || !_inRange) return;
     if (discoverer.discoveringService == null || discoverer.discoveringService != advertiser.advertisingService) return;
     discoverer._emit(
-      NearbyEndpointFound(advertiser.endpointId, name: advertiser.advertisingName!, serviceId: advertiser.advertisingService!),
+      NearbyEndpointFound(
+        advertiser.endpointId,
+        name: advertiser.advertisingName!,
+        serviceId: advertiser.advertisingService!,
+      ),
     );
   }
 }
@@ -212,7 +222,9 @@ class FakeNearbyApi implements NearbyApi {
     }
     final link = _Link(this, target, air._token());
     air._links.add(link);
-    _emit(NearbyConnectionInitiated(target.endpointId, name: target.advertisingName!, token: link.token, incoming: false));
+    _emit(
+      NearbyConnectionInitiated(target.endpointId, name: target.advertisingName!, token: link.token, incoming: false),
+    );
     target._emit(NearbyConnectionInitiated(this.endpointId, name: name, token: link.token, incoming: true));
   }
 
@@ -263,7 +275,12 @@ class FakeNearbyApi implements NearbyApi {
     if (air.duplicateNext > 0) air.duplicateNext--;
     for (var i = 0; i < copies; i++) {
       other._emit(
-        NearbyPayloadReceived(this.endpointId, payloadId: air._random.nextInt(1 << 30), kind: NearbyPayloadKind.bytes, bytes: Uint8List.fromList(bytes)),
+        NearbyPayloadReceived(
+          this.endpointId,
+          payloadId: air._random.nextInt(1 << 30),
+          kind: NearbyPayloadKind.bytes,
+          bytes: Uint8List.fromList(bytes),
+        ),
       );
     }
   }
@@ -513,7 +530,14 @@ class FakeRtdb {
     final n = v['n'];
     final a = v['a'];
     final k = v['k'];
-    return n is String && n.isNotEmpty && n.length <= 48 && a is String && a.length <= 32 && k is num && k >= 0 && k <= 15;
+    return n is String &&
+        n.isNotEmpty &&
+        n.length <= 48 &&
+        a is String &&
+        a.length <= 32 &&
+        k is num &&
+        k >= 0 &&
+        k <= 15;
   }
 
   bool _frameOk(Object? v) {

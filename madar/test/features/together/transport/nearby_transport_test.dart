@@ -174,7 +174,12 @@ void main() {
     test('several phones found: none is picked automatically; the player chooses', () async {
       final air = FakeNearbyAir();
       final me = air.phone('ali');
-      final t = NearbyTransport(api: me, permissions: FakeNearbyPermissions(), request: _request, autoConnectDelay: Duration.zero);
+      final t = NearbyTransport(
+        api: me,
+        permissions: FakeNearbyPermissions(),
+        request: _request,
+        autoConnectDelay: Duration.zero,
+      );
       addTearDown(t.close);
       for (final name in ['Sara', 'Huda']) {
         final other = air.phone(name);
@@ -230,7 +235,10 @@ void main() {
     });
 
     test('refused in the dialog: "permission needed", and asking again is possible', () async {
-      final perms = FakeNearbyPermissions(status: NearbyPermissionStatus.needed, afterRequest: NearbyPermissionStatus.needed);
+      final perms = FakeNearbyPermissions(
+        status: NearbyPermissionStatus.needed,
+        afterRequest: NearbyPermissionStatus.needed,
+      );
       final p = _Pair(permsA: perms);
       addTearDown(p.dispose);
       await p.a.playTogether(p.ali);
@@ -403,7 +411,9 @@ void main() {
   });
 
   group('a whole game over Nearby', () {
-    Future<(TogetherSession<GameState, GameMove>, TogetherSession<GameState, GameMove>, List<MatchRecord>, List<MatchRecord>)>
+    Future<
+      (TogetherSession<GameState, GameMove>, TogetherSession<GameState, GameMove>, List<MatchRecord>, List<MatchRecord>)
+    >
     start(_Pair p, {required PlayerSlot hostFirst}) async {
       final kit = boardGameKits[BoardGameId.connectFour]!;
       final hostRecords = <MatchRecord>[];

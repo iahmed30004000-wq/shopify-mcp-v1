@@ -81,19 +81,14 @@ class _Nearby {
   );
 
   Override get override => togetherTransportFactoriesProvider.overrideWithValue({
-    PlayMode.nearby: (req) async => opened = NearbyTransport(
-      api: mine,
-      permissions: perms,
-      request: req,
-      autoConnectDelay: Duration.zero,
-    ),
+    PlayMode.nearby: (req) async =>
+        opened = NearbyTransport(api: mine, permissions: perms, request: req, autoConnectDelay: Duration.zero),
   });
 }
 
 class _Online {
-  _Online({bool configured = true}) : secrets = MemorySecretStore({
-    if (configured) OnlineConfigStore.key: jsonEncode(_config.toJson()),
-  });
+  _Online({bool configured = true})
+    : secrets = MemorySecretStore({if (configured) OnlineConfigStore.key: jsonEncode(_config.toJson())});
 
   final FakeRtdb db = FakeRtdb();
   final MemorySecretStore secrets;
@@ -330,7 +325,10 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('together-pair-join')));
       await _pump(tester);
       expect(host.pairing.value.phase, PairingPhase.hosting, reason: 'five digits: Join stays disabled');
-      await tester.enterText(find.byKey(const ValueKey('together-pair-code-field')), '${code.substring(0, 3)} ${code.substring(3)}');
+      await tester.enterText(
+        find.byKey(const ValueKey('together-pair-code-field')),
+        '${code.substring(0, 3)} ${code.substring(3)}',
+      );
       await _pump(tester);
       await tester.tap(find.byKey(const ValueKey('together-pair-join')));
       await _pump(tester);
@@ -442,12 +440,10 @@ void main() {
       await _pump(tester);
       expect(find.text('Settings saved'), findsOneWidget);
       final stored = OnlineConfig.fromJson(jsonDecode(o.secrets.values[OnlineConfigStore.key]!))!;
-      expect((stored.apiKey, stored.appId, stored.projectId, stored.databaseUrl), (
-        _config.apiKey,
-        _config.appId,
-        _config.projectId,
-        _config.databaseUrl,
-      ));
+      expect(
+        (stored.apiKey, stored.appId, stored.projectId, stored.databaseUrl),
+        (_config.apiKey, _config.appId, _config.projectId, _config.databaseUrl),
+      );
       expect(stored.senderId, '123456789012');
 
       // Test connection against the (fake) project.

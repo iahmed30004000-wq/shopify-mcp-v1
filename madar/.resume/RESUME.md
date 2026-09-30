@@ -24,19 +24,19 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Hotfix: auto fingerprint + orbit reset view | lock, orbit | DONE, shipped e2aa71a (APK #11) |
 | Money ledger / budget / goals builders | lib/features/money/{ledger,budget,goals} | built + verified |
 | Money integration + review | routing, app, settings, orbit planet, money/hub, a9_money_hub.json | DONE (review fixes: net worth w/ archived jars, rebase keeps budget, goals decimals, AA contrast, 96 screenshots) |
-| Money APK release | release commit 6bd956e (snapshot of a3db251 + lint fixes) | CI RUNNING; risks: wall-clock perf tests (search systems_perf_regression, minesweeper perf) |
+| Money APK release | release commit 6bd956e | DONE – CI run #14 green, artifact madar-apk-14 (id 11105002945) sent to the owner |
 | Integration plans (read-only) | scratchpad/integration_plan_{life,system}.md, integration_conflicts.md | DONE |
-| Life + System integration (Life integrate → 2 finders → fix → System integrate → 2 finders → fix) | shared files (routing, app, settings, home, orbit, manifest) | RUNNING (wf_45404415-287; script copy scratchpad/life_system_integration.js) |
+| Life + System integration (Life integrate → 2 finders → fix → System integrate → 2 finders → fix) | shared files (routing, app, settings, home, orbit, manifest) | PAUSED by owner request; life:integrate was mid-way (partial edits on disk, nothing cached). Resume: add a RESUMING note to the life:integrate prompt in scratchpad/life_system_integration.js, then Workflow({scriptPath}) |
 | Work, Family, Travel, Growth, Body, Custom Modules builders | lib/features/{work,family,travel,growth,body,custom_modules} | built + verified; integration NOT started |
 | Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
 | Jordanian rules: board (dama, tawla ×3, dominoes, ludo) | cinema/rules/board/** | DONE (561 tests); open detail questions in board/RULES.md §9.2 |
 | Jordanian rules: cards (Tarneeb/41, Trix/Complex, Hand/partners, Konkan, Basra, Baloot) + new Solitaire, Blackjack | cinema/rules/cards/** | DONE (977 tests); open owner questions in cards/RULES.md 'Still open' |
 | Deps webview_flutter 4.14.1, nearby_connections 4.3.0, firebase_core/auth/database | pubspec | CI probe 008ccec GREEN (run #13); added to main pubspec |
-| Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
+| Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | PAUSED: architect, fx, rig DONE (cached); audio + hall interrupted (partial work on disk); critic not started. Resume: add RESUMING notes to the audio/hall prompts in scratchpad/phase7_engine.js, then Workflow({scriptPath, resumeFromRunId: 'wf_4495c71d-7d5'}) |
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
 | AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | built + security-reviewed (163 tests); needs routes /ai, /ai/chats, /settings/ai, AskAi entries, AiKeyStore.deleteAll() in delete-all-data |
 | Together Mode core + couple specials | lib/features/together, e1_together.json | DONE (core reviewed: 17 fixes; specials: know-me quiz, weekly challenge, co-op goal; 162+ tests) – needs wiring later (route, settings tile, SpecialsRepository.allKeys in delete-all) |
-| Together transports (Nearby + optional Firebase online) + FLAG_SECURE channel | lib/features/together/{transport,pairing}, e4_together_net.json, android .../together | RUNNING (wf_7135f615-749; script copy scratchpad/together_transports.js); manifest permissions listed in its report for the lead |
+| Together transports (Nearby + optional Firebase online) + FLAG_SECURE channel | lib/features/together/{transport,pairing}, e4_together_net.json, android .../together | PAUSED: net:build DONE (cached), net:review interrupted. Resume: add a RESUMING note to the review prompt in scratchpad/together_transports.js, then Workflow({scriptPath, resumeFromRunId: 'wf_7135f615-749'}); manifest permissions are in the build report (journal) |
 | Saved Games (web games by URL, WebView) | lib/features/saved_games, e3_saved_games.json, android .../savedgames | built + reviewed (Dart 117 tests; Kotlin channel type-checked, registered in MainActivity); needs route + SavedGamesShelf in the cinema hall + savedGamesLegacyImportProvider read once |
 | Home-screen widgets | lib/features/widgets, android .../widgets, res widget_*, e2_widgets.json | built + reviewed (89 tests, kotlinc type-check OK); manifest receivers + MainActivity register line already added; needs watchWidgetServices(ref) in AppServices, clearWidgetData() in delete-all, /settings/widgets route |
 | Global search | lib/features/search, d2_search.json | built + reviewed (26 findings fixed, 183 tests); needs route + opener + launcher |
@@ -44,6 +44,9 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 
 ## Container restart #2 (09:28 UTC)
 All six runs were resumed with resumeFromRunId (completed agents replay from cache; interrupted ones re-run with a RESUMING note + strict memory rule): money review wf_ad90daa6-564 (scratchpad/phase5_integrate.js), engine wf_4495c71d-7d5 (scratchpad/phase7_engine.js; hall no longer builds Saved Games), cards wf_94413da5-0be (scratchpad/jordan_cards.js), together wf_ab7dcc7b-712, widgets wf_54ac8044-8f2, saved games wf_1fb242c0-188.
+
+## PAUSED by the owner after APK #14 – nothing is running
+Resume the three PAUSED runs above when the owner says so; keep ≤ ~6 concurrent agents and the strict memory rule.
 
 ## Owner decisions
 - EveryAyah recitations: approved (stream on play / download on request; credited).

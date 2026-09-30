@@ -10,12 +10,8 @@ import 'package:madar/features/together/together.dart';
 import '../together_test_utils.dart';
 import 'net_fakes.dart';
 
-PairingIdentity _me(PlayerSlot slot, String name, {int color = 1}) => PairingIdentity(
-  slot: slot,
-  rawName: name,
-  avatar: const TogetherAvatar.emoji('🌙', seed: 9),
-  colorIndex: color,
-);
+PairingIdentity _me(PlayerSlot slot, String name, {int color = 1}) =>
+    PairingIdentity(slot: slot, rawName: name, avatar: const TogetherAvatar.emoji('🌙', seed: 9), colorIndex: color);
 
 class _Online {
   _Online({String gameB = 'fourInARow', Duration joinWindow = OnlineRooms.joinWindow}) {
@@ -405,7 +401,13 @@ void main() {
       const codec = TogetherCodec();
       for (var i = 0; i < 12; i++) {
         await host.send(
-          codec.encode(TogetherEnvelope(sessionId: 'abcdef0123456789', from: 0, body: SyncBody(turn: i))),
+          codec.encode(
+            TogetherEnvelope(
+              sessionId: 'abcdef0123456789',
+              from: 0,
+              body: SyncBody(turn: i),
+            ),
+          ),
         );
       }
       await settle();
@@ -443,8 +445,12 @@ void main() {
       final code = await o.hostRoom();
       final eve = o.db.client(uid: 'uid-eve');
       await eve.signIn();
-      Map<String, Object?> hijack() =>
-          OnlineRooms.newRoom(hostUid: 'uid-eve', gameId: 'chess', host: _me(PlayerSlot.one, 'Eve'), now: eve.serverNow());
+      Map<String, Object?> hijack() => OnlineRooms.newRoom(
+        hostUid: 'uid-eve',
+        gameId: 'chess',
+        host: _me(PlayerSlot.one, 'Eve'),
+        now: eve.serverNow(),
+      );
       await expectLater(eve.set(OnlineRooms.room(code), hijack()), throwsA(isA<RtdbException>()));
       await expectLater(eve.remove(OnlineRooms.room(code)), throwsA(isA<RtdbException>()));
       o.db.advance(OnlineRooms.joinWindow + const Duration(minutes: 1));
@@ -480,7 +486,10 @@ void main() {
 
       // Members: only frames that look like Together frames, as themselves.
       await expectLater(o.guestClient.push('$room/f', OnlineRooms.frame(0, hello.text)), throwsA(isA<RtdbException>()));
-      await expectLater(o.guestClient.push('$room/f', OnlineRooms.frame(1, 'hello there')), throwsA(isA<RtdbException>()));
+      await expectLater(
+        o.guestClient.push('$room/f', OnlineRooms.frame(1, 'hello there')),
+        throwsA(isA<RtdbException>()),
+      );
       await expectLater(
         o.guestClient.push('$room/f', {'s': 1, 't': hello.text, 'at': rtdbServerTimestamp, 'phone': '0795551234'}),
         throwsA(isA<RtdbException>()),

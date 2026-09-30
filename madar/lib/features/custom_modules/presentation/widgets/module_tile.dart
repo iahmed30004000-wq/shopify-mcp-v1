@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/design/contrast.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/domain/enums.dart';
@@ -257,7 +258,11 @@ class _OpenCount extends StatelessWidget {
         excludeSemantics: true,
         child: Text(
           tx.count(count),
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: colors.ink, fontWeight: FontWeight.w700),
+          // At AA on its tinted disc (the deepened ink read 4.0 : 1 on Pearl).
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: MadarContrast.ensure(colors.ink, [Color.alphaBlend(colors.soft, context.tokens.space1)]),
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ),
     );

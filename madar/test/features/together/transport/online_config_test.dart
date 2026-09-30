@@ -18,10 +18,7 @@ const _db = 'https://madar-couple-default-rtdb.europe-west1.firebasedatabase.app
 void main() {
   group('online config', () {
     test('a valid project passes; the sender id comes from the app id', () {
-      expect(
-        OnlineConfig.validate(apiKey: _key, appId: _appId, projectId: 'madar-couple', databaseUrl: _db),
-        isEmpty,
-      );
+      expect(OnlineConfig.validate(apiKey: _key, appId: _appId, projectId: 'madar-couple', databaseUrl: _db), isEmpty);
       final c = OnlineConfig.tryCreate(
         apiKey: ' $_key ',
         appId: _appId,
@@ -57,15 +54,12 @@ void main() {
         OnlineConfigField.projectId: OnlineConfigProblem.format,
         OnlineConfigField.databaseUrl: OnlineConfigProblem.format,
       });
-      expect(
-        OnlineConfig.validate(apiKey: '', appId: '', projectId: '', databaseUrl: ''),
-        {
-          OnlineConfigField.apiKey: OnlineConfigProblem.missing,
-          OnlineConfigField.appId: OnlineConfigProblem.missing,
-          OnlineConfigField.projectId: OnlineConfigProblem.missing,
-          OnlineConfigField.databaseUrl: OnlineConfigProblem.missing,
-        },
-      );
+      expect(OnlineConfig.validate(apiKey: '', appId: '', projectId: '', databaseUrl: ''), {
+        OnlineConfigField.apiKey: OnlineConfigProblem.missing,
+        OnlineConfigField.appId: OnlineConfigProblem.missing,
+        OnlineConfigField.projectId: OnlineConfigProblem.missing,
+        OnlineConfigField.databaseUrl: OnlineConfigProblem.missing,
+      });
       expect(
         OnlineConfig.validate(
           apiKey: _key,
@@ -83,11 +77,9 @@ void main() {
         'https://firebaseio.com',
         'ftp://madar.firebaseio.com',
       ]) {
-        expect(
-          OnlineConfig.validate(apiKey: _key, appId: _appId, projectId: 'madar-couple', databaseUrl: url),
-          {OnlineConfigField.databaseUrl: OnlineConfigProblem.format},
-          reason: url,
-        );
+        expect(OnlineConfig.validate(apiKey: _key, appId: _appId, projectId: 'madar-couple', databaseUrl: url), {
+          OnlineConfigField.databaseUrl: OnlineConfigProblem.format,
+        }, reason: url);
       }
       expect(OnlineConfig.fromJson({'apiKey': 'x'}), isNull);
       expect(OnlineConfig.fromJson('nonsense'), isNull);
@@ -130,7 +122,8 @@ void main() {
     });
 
     test('pasting the console\'s web snippet fills the fields', () {
-      const snippet = '''
+      const snippet =
+          '''
 const firebaseConfig = {
   apiKey: "$_key",
   authDomain: "madar-couple.firebaseapp.com",
