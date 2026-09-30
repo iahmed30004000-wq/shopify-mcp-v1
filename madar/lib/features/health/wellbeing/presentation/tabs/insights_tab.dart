@@ -196,6 +196,27 @@ class _SplitBars extends StatelessWidget {
     final m = insight.outcome;
     final color = WbPalette.metric(t, m);
     final top = [insight.meanIn, insight.meanOut, m.max].reduce((a, b) => a > b ? a : b);
+    // Both rows share one value column as wide as the longer value at the
+    // current text scale ("٤٫٣ من ١٠" lost its "١٠" in a fixed 52 px at
+    // 1.3×), so the two bars keep the same track and stay comparable.
+    final valueStyle = text.labelMedium?.copyWith(color: t.textPrimary);
+    double widthOf(String s) {
+      final painter = TextPainter(
+        text: TextSpan(text: s, style: valueStyle),
+        textDirection: Directionality.of(context),
+        textScaler: MediaQuery.textScalerOf(context),
+        maxLines: 1,
+      )..layout();
+      final w = painter.width;
+      painter.dispose();
+      return w;
+    }
+
+    final valueWidth = [
+      52.0,
+      widthOf(tx.metricValue(m, insight.meanIn)) + 2,
+      widthOf(tx.metricValue(m, insight.meanOut)) + 2,
+    ].reduce((a, b) => a > b ? a : b).ceilToDouble();
     Widget bar(String label, double v, bool highlight) => Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
@@ -226,13 +247,8 @@ class _SplitBars extends StatelessWidget {
           ),
           const SizedBox(width: Space.s),
           SizedBox(
-            width: 52,
-            child: Text(
-              tx.metricValue(m, v),
-              textAlign: TextAlign.end,
-              style: text.labelMedium?.copyWith(color: t.textPrimary),
-              maxLines: 1,
-            ),
+            width: valueWidth,
+            child: Text(tx.metricValue(m, v), textAlign: TextAlign.end, style: valueStyle, maxLines: 1, softWrap: false),
           ),
         ],
       ),

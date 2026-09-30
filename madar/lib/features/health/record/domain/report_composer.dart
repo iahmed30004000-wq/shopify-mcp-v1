@@ -165,7 +165,7 @@ class ReportComposer {
           history: [
             for (final p in inPeriod.reversed.skip(1).take(historyLimit))
               (
-                date: fmt.formatDate(p.date, style: MadarDateStyle.short),
+                date: texts.compactDate(p.date),
                 value: texts.reading(p, decimals: decimals),
                 flag: p.flag,
               ),

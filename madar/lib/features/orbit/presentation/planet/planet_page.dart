@@ -413,6 +413,9 @@ class _Header extends ConsumerWidget {
     final fmt = MadarFormatter.of(context);
     final p = planet;
     final shadow = [Shadow(color: t.space0.withValues(alpha: 0.85), blurRadius: 14)];
+    // The state line is small text over the open sky (a pale noon sky on the
+    // dark themes): a tight halo of the night keeps it at AA on any sky.
+    final halo = [Shadow(color: t.space0.withValues(alpha: 0.8), blurRadius: 3), ...shadow];
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.s, Space.l, 0),
       child: Row(
@@ -457,7 +460,7 @@ class _Header extends ConsumerWidget {
                             : l.orbitUiListSeparator(planetStateLabel(l, p.state), fmt.formatPercent(p.uScore)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: text.bodyMedium!.copyWith(color: t.textPrimary.withValues(alpha: 0.86), shadows: shadow),
+                        style: text.bodyMedium!.copyWith(color: t.textPrimary.withValues(alpha: 0.9), shadows: halo),
                       ),
                     ],
                   ),
@@ -675,15 +678,23 @@ class _ScoreRow extends ConsumerWidget {
             gradientEnd: low ? t.warning : planet.palette.surface,
             semanticLabel: l.orbitUiBalanceLabel,
             semanticValue: dormant ? planetStateLabel(l, planet.state) : fmt.formatPercent(planet.uScore),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  dormant ? '—' : fmt.formatPercent(v.clamp(0.0, 1.0)),
-                  style: text.titleMedium!.copyWith(color: t.textPrimary, height: 1.1),
+            // Inside the ring's stroke at any text scale ("Balance" at 1.3×
+            // ran into it).
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      dormant ? '—' : fmt.formatPercent(v.clamp(0.0, 1.0)),
+                      style: text.titleMedium!.copyWith(color: t.textPrimary, height: 1.1),
+                    ),
+                    Text(l.orbitUiBalanceLabel, style: text.labelSmall!.copyWith(color: t.textSecondary, height: 1.1)),
+                  ],
                 ),
-                Text(l.orbitUiBalanceLabel, style: text.labelSmall!.copyWith(color: t.textSecondary, height: 1.1)),
-              ],
+              ),
             ),
           ),
         ),

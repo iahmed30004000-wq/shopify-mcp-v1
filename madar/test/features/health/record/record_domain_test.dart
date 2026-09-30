@@ -268,7 +268,9 @@ void main() {
     });
 
     test('report periods', () {
-      expect(ReportPeriod.months1.start(DateTime(2026, 3, 31)), DateTime(2026, 2, 31));
+      // Clamped to the shorter month (not 31 Feb = 3 Mar).
+      expect(ReportPeriod.months1.start(DateTime(2026, 3, 31)), DateTime(2026, 2, 28));
+      expect(ReportPeriod.months3.start(DateTime(2026, 9, 29)), DateTime(2026, 6, 29));
       expect(ReportPeriod.all.start(DateTime(2026, 3, 31)), isNull);
     });
   });

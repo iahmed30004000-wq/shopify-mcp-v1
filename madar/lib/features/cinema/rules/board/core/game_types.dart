@@ -72,12 +72,7 @@ enum GameEndReason {
 
 /// The outcome of a finished game.
 final class GameResult {
-  const GameResult({
-    required this.winners,
-    required this.reason,
-    this.scores = const [],
-    this.ranking = const [],
-  });
+  const GameResult({required this.winners, required this.reason, this.scores = const [], this.ranking = const []});
 
   /// A draw for [reason].
   const GameResult.draw(this.reason, {this.scores = const []}) : winners = const [], ranking = const [];

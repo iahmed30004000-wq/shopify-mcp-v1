@@ -43,8 +43,18 @@ enum CinemaShader {
 abstract final class CinemaShaders {
   static final Map<CinemaShader, ui.FragmentProgram> _programs = {};
   static Future<void>? _loading;
+  static bool _done = false;
 
-  static Future<void> preload() => _loading ??= _loadAll();
+  /// True once every program has been attempted (loaded or failed).
+  static bool get isDone => _done;
+
+  /// Loads every program once. After the first load completes this returns
+  /// a [SynchronousFuture], so awaiting it never costs a frame (and never
+  /// hops zones – important in fake-async widget tests).
+  static Future<void> preload() {
+    if (_done) return SynchronousFuture<void>(null);
+    return _loading ??= _loadAll();
+  }
 
   static Future<void> _loadAll() async {
     await Future.wait([
@@ -56,6 +66,7 @@ abstract final class CinemaShaders {
           },
         ),
     ]);
+    _done = true;
   }
 
   static ui.FragmentProgram? program(CinemaShader shader) => _programs[shader];
@@ -66,6 +77,7 @@ abstract final class CinemaShaders {
   static void debugReset() {
     _programs.clear();
     _loading = null;
+    _done = false;
   }
 }
 

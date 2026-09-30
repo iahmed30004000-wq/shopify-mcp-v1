@@ -121,10 +121,24 @@ abstract interface class RigCharacter {
 
   /// Draws the character with the era's ink ([EraSkin.ink]), palette and
   /// shading. Boil jitter must be seeded from [FilmClock.boilFrame].
-  void paint(Canvas canvas, EraSkin skin, FilmClock clock);
+  void paint(Canvas canvas, RigPaintContext context);
 
   /// Local bounds of the current pose (for culling and hit boxes).
   Rect get bounds;
 
   void dispose();
+}
+
+/// Per-frame inputs for painting rigs: one reused instance per game
+/// (`CinemaGame.rigPaint`), so painting allocates nothing.
+class RigPaintContext {
+  RigPaintContext({required this.skin, required this.clock});
+
+  EraSkin skin;
+  final FilmClock clock;
+
+  /// Logical screen px per world unit (the camera zoom). Pass it as
+  /// `pixelScale` to the halftone / crosshatch uniform writers so the dot
+  /// and hatch pitch stay constant on screen, and use it for hairlines.
+  double pixelScale = 1;
 }

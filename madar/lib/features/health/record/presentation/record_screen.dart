@@ -333,11 +333,17 @@ class LabsView extends ConsumerWidget {
           ],
         ),
         for (final k in keys) ...[
-          _header(
-            context,
-            k ?? l.recordLabUncategorized,
-            subtitle: l.recordLabTestsCount(groups[k]!.length, fmt.formatInt(groups[k]!.length)),
-          ),
+          // Uncategorised tests alone need no group name ("Other" only
+          // reads next to named categories; "Labs" would repeat the tab):
+          // the count heads them.
+          if (k == null && keys.length == 1)
+            _header(context, l.recordLabTestsCount(groups[k]!.length, fmt.formatInt(groups[k]!.length)))
+          else
+            _header(
+              context,
+              k ?? l.recordLabUncategorized,
+              subtitle: l.recordLabTestsCount(groups[k]!.length, fmt.formatInt(groups[k]!.length)),
+            ),
           if (reorder)
             ReorderableGlassList<LabTestView>(
               items: groups[k]!,

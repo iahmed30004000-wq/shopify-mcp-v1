@@ -3,9 +3,10 @@
 ///
 /// Each iteration samples one world consistent with the observer's
 /// knowledge, then plays every candidate move in that same world and rolls
-/// the deal out with the fast policy. The candidate with the best mean score
-/// wins. Too few samples (a tiny budget) fall back to the heuristic choice so
-/// the hard AI is never weaker than its policy.
+/// the deal out with the fast policy. A candidate replaces the heuristic
+/// move only when its paired advantage over it, world by world, is larger
+/// than twice its standard error; too few samples (a tiny budget) keep the
+/// heuristic choice, so the hard AI is never weaker than its policy.
 library;
 
 import 'dart:math' as math;
@@ -46,11 +47,19 @@ M monteCarloChoose<S extends CardGameState, M extends CardMove>({
   required math.Random rng,
   required AiBudget budget,
   required M fallback,
-  int minWorlds = 2,
+  int minWorlds = 3,
+  double confidence = 2.0,
 }) {
   if (candidates.length <= 1) return candidates.isEmpty ? fallback : candidates.first;
+  var fallbackIndex = candidates.indexOf(fallback);
+  if (fallbackIndex < 0) {
+    candidates = [fallback, ...candidates];
+    fallbackIndex = 0;
+  }
   final watch = Stopwatch()..start();
-  final totals = List<double>.filled(candidates.length, 0);
+  // Paired differences with the fallback, world by world.
+  final diffSum = List<double>.filled(candidates.length, 0);
+  final diffSq = List<double>.filled(candidates.length, 0);
   var worlds = 0;
   var simulations = 0;
   final values = List<double>.filled(candidates.length, 0);
@@ -72,16 +81,27 @@ M monteCarloChoose<S extends CardGameState, M extends CardMove>({
       simulations++;
     }
     for (var i = 0; i < candidates.length; i++) {
-      totals[i] += values[i];
+      final d = values[i] - values[fallbackIndex];
+      diffSum[i] += d;
+      diffSq[i] += d * d;
     }
     worlds++;
   }
   // Only complete worlds are compared (every candidate saw the same worlds).
   if (worlds < minWorlds) return fallback;
-  final fallbackIndex = candidates.indexOf(fallback);
-  var best = fallbackIndex >= 0 ? fallbackIndex : 0;
+  // A candidate replaces the heuristic move only when it is better by more
+  // than [confidence] standard errors of the paired difference.
+  var best = fallbackIndex;
+  var bestMean = 0.0;
   for (var i = 0; i < candidates.length; i++) {
-    if (totals[i] > totals[best] + 1e-9) best = i;
+    if (i == fallbackIndex) continue;
+    final mean = diffSum[i] / worlds;
+    final variance = math.max(0.0, diffSq[i] / worlds - mean * mean);
+    final se = math.sqrt(variance / worlds);
+    if (mean > bestMean && mean > confidence * se + 1e-9) {
+      best = i;
+      bestMean = mean;
+    }
   }
   return candidates[best];
 }

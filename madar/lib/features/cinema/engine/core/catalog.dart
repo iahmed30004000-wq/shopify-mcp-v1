@@ -38,7 +38,7 @@ class GameCatalogEntry {
     this.builder,
   });
 
-  /// Stable id: snake_case, also the games/<id>/ folder name and the score key.
+  /// Stable id: snake_case, also the `games/<id>/` folder name and the score key.
   final String id;
   final String Function(L10n l10n) title;
   final String Function(L10n l10n) tagline;

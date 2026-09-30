@@ -136,13 +136,24 @@ class WbTexts {
     };
   }
 
-  /// The observation as one neutral sentence with its numbers.
+  /// A mean as the sentence shows it (one decimal).
+  static double _shown(double v) => (v * 10).round() / 10;
+
+  /// The observation as one neutral sentence with its numbers. The gap it
+  /// states is the gap between the two means *as printed* (7.5 vs 3.8 is
+  /// "3.7 higher", never the unrounded 3.8).
   String insight(WellbeingInsight i) => switch (i) {
     SplitInsight s => l.wbInsightSplit(
       _condition(s.condition, s.daysIn),
       s.higher
-          ? l.wbAvgHigher(l.wbMetricYour(_metricKey(s.outcome)), _amount(s.outcome, s.diff))
-          : l.wbAvgLower(l.wbMetricYour(_metricKey(s.outcome)), _amount(s.outcome, s.diff)),
+          ? l.wbAvgHigher(
+              l.wbMetricYour(_metricKey(s.outcome)),
+              _amount(s.outcome, _shown(s.meanIn) - _shown(s.meanOut)),
+            )
+          : l.wbAvgLower(
+              l.wbMetricYour(_metricKey(s.outcome)),
+              _amount(s.outcome, _shown(s.meanIn) - _shown(s.meanOut)),
+            ),
       fmt.isolate(n(s.meanIn)),
       fmt.isolate(n(s.meanOut)),
     ),

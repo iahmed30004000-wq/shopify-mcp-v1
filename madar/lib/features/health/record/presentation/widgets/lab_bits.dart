@@ -25,7 +25,11 @@ class LabFlagChip extends StatelessWidget {
     final color = RecordColors.flag(t, flag);
     final icon = RecordIcons.flag(flag);
     final style = Theme.of(context).textTheme.labelSmall!
-        .copyWith(color: flag.isFlagged ? color : t.textSecondary, fontWeight: FontWeight.w600, height: 1.25);
+        .copyWith(
+      color: flag.isFlagged ? RecordColors.onWash(t, color, 0.14) : t.textSecondary,
+      fontWeight: FontWeight.w600,
+      height: 1.25,
+    );
     return Container(
       padding: EdgeInsetsDirectional.fromSTEB(dense ? 6 : 8, 2, dense ? 6 : 8, 2),
       decoration: BoxDecoration(

@@ -5,6 +5,7 @@ library;
 import 'dart:math' as math;
 
 import '../core/ai_base.dart';
+import '../core/card_rng.dart';
 import '../core/determinize.dart';
 import '../core/playing_card.dart';
 import '../core/trick.dart';
@@ -265,9 +266,19 @@ class TarneebAi extends HeuristicAi<TarneebState, TarneebMove> {
     _ => TarneebMove.play(_playMedium(s, seat)),
   };
 
+  /// In the auction only pass, the cheapest bid and the heuristic bid are
+  /// compared (more worlds each).
+  @override
+  List<TarneebMove> hardCandidates(TarneebState s, int seat, List<TarneebMove> legal, TarneebMove prior) {
+    if (s.phase != TarneebPhase.bidding) return legal;
+    return {prior, legal.first, if (legal.length > 1) legal[1]}.toList();
+  }
+
   @override
   TarneebState determinize(TarneebState s, int observer, math.Random rng) {
-    final w = s.copy();
+    final w = s.copy()
+      // Future shuffles must not leak into the search.
+      ..rng = CardRng(rng.nextInt(0x7fffffff));
     final seen = <PlayingCard>{...s.hands[observer], ...s.playedCards};
     final pool = [
       for (final c in s.fullDeck())

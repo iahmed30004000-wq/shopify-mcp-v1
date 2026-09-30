@@ -179,7 +179,14 @@ class WellbeingTabBar extends StatelessWidget {
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                            colors: [t.accent.withValues(alpha: 0.32), t.accent.withValues(alpha: 0.16)],
+                            // The accent washed over a veil of the theme's
+                            // own ground, so the label keeps AA over a bright
+                            // patch of nebula and with a luminous accent
+                            // (Aurora's teal measured 4.1 : 1 on glass alone).
+                            colors: [
+                              Color.alphaBlend(t.accent.withValues(alpha: 0.26), t.space1.withValues(alpha: 0.5)),
+                              Color.alphaBlend(t.accent.withValues(alpha: 0.12), t.space1.withValues(alpha: 0.5)),
+                            ],
                           ),
                           border: Border.all(color: t.accent.withValues(alpha: 0.55)),
                           boxShadow: [BoxShadow(color: t.accentGlow.withValues(alpha: 0.25), blurRadius: 12)],

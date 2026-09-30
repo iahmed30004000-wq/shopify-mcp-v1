@@ -144,7 +144,7 @@ abstract final class MedsActions {
     final tx = texts(context);
     final added = await showRefillSheet(context, med: med);
     if (added == null || added <= 0) return;
-    final undo = await ref.read(medsServiceProvider).setStock(med.id, (med.stock ?? 0) + added);
+    final undo = await ref.read(medsServiceProvider).addStock(med.id, added);
     Fx.fire(Sfx.complete);
     if (context.mounted) unawaited(showUndoToast(context, _undoable(tx.l.medsStockUpdated(tx.name(med.name)), undo)));
   }

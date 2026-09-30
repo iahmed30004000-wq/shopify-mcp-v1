@@ -15,7 +15,18 @@ import 'package:madar/features/health/meds/domain/dose_tracker.dart';
 import 'package:madar/features/health/meds/domain/med_models.dart';
 import 'package:madar/features/health/record/domain/lab_flags.dart';
 import 'package:madar/features/health/record/domain/lab_series.dart';
+import 'package:madar/features/health/record/domain/report_model.dart';
+import 'package:madar/features/health/wellbeing/domain/insights.dart';
+import 'package:madar/features/health/wellbeing/domain/wellbeing_data.dart';
 import 'package:madar/features/health/wellbeing/domain/worry_window.dart';
+import 'package:madar/features/health/wellbeing/presentation/wellbeing_texts.dart';
+import 'package:madar/core/i18n/formatters.dart';
+import 'package:madar/core/i18n/gen/app_localizations.dart';
+import 'package:flutter/widgets.dart' show Locale;
+
+import '../../../helpers/test_app.dart' show testDatabase;
+import '../record/doctor_report_test.dart' show buildReport;
+import '../record/record_seed.dart';
 
 void main() {
   group('stock', () {
@@ -53,9 +64,7 @@ void main() {
     });
 
     test('Clear answer after a course dose of 3 ampoules gives the 3 back; undo takes them again', () async {
-      final m = await service.saveMed(
-        MedDraft(name: 'Inj', dose: '1 amp', doseAmount: 1, doseUnit: 'amp', stock: 30),
-      );
+      final m = await service.saveMed(MedDraft(name: 'Inj', dose: '1 amp', doseAmount: 1, doseUnit: 'amp', stock: 30));
       await service.saveCourse(
         CourseDraft(
           name: 'Loading',
@@ -73,6 +82,52 @@ void main() {
       expect(await stockOf(m.id), 30);
       await r.undo();
       expect(await stockOf(m.id), 27);
+    });
+  });
+
+  group('stock: refill and as-needed', () {
+    late MadarDatabase db;
+    late Repositories repos;
+    late MedsService service;
+    final now = DateTime(2026, 9, 29, 8, 5);
+
+    setUp(() {
+      db = MadarDatabase(NativeDatabase.memory());
+      repos = Repositories(db);
+      service = MedsService(repos, clock: () => now);
+    });
+    tearDown(() => db.close());
+
+    test('a refill adds to the stock as it is now; a Taken meanwhile is kept, and undo keeps it too', () async {
+      final m = await service.saveMed(
+        MedDraft(name: 'Omega', doseAmount: 1, doseUnit: 'cap', slots: const [MedSlot(ClockHm(8, 0))], stock: 5),
+      );
+      // The sheet was opened on a stock of 5; a notification's Taken lands.
+      await service.apply(
+        MedDoseAction(medId: m.id, slot: DateTime(2026, 9, 29, 8), kind: MedDoseActionKind.taken, at: now),
+      );
+      final undo = await service.addStock(m.id, 30);
+      expect((await repos.medications.byId(m.id))!.stock, 34);
+      await undo();
+      expect((await repos.medications.byId(m.id))!.stock, 4);
+    });
+
+    test('an as-needed dose logged now uses the day\'s titration step for its text and units', () async {
+      final m = await service.saveMed(
+        MedDraft(
+          name: 'Pred',
+          dose: '1 tab',
+          doseAmount: 1,
+          doseUnit: 'tab',
+          stock: 20,
+          titration: [TitrationStep(from: DateTime(2026, 9, 25), dose: '2 tab', doseAmount: 2)],
+        ),
+      );
+      final r = await service.logNow(m.id);
+      expect((await repos.medDoses.getAll()).single.dose, '2 tab');
+      expect((await repos.medications.byId(m.id))!.stock, 18);
+      await r.undo();
+      expect((await repos.medications.byId(m.id))!.stock, 20);
     });
   });
 
@@ -106,6 +161,27 @@ void main() {
     });
   });
 
+  group('doctor report', () {
+    test('earlier results carry dates a clinician cannot misread (no US-style 7/1/2026)', () async {
+      final db = testDatabase(languageCode: 'en', seed: false);
+      addTearDown(db.close);
+      await seedRecord(db, arabic: false);
+      final file = await buildReport(db, 'en');
+      final rows = file.document.blocks.whereType<ReportLabsBlock>().single.groups.expand((g) => g.rows);
+      final dates = [
+        for (final r in rows)
+          for (final h in r.history) h.date,
+      ];
+      expect(dates, isNotEmpty);
+      expect(dates, everyElement(matches(RegExp(r'^[A-Z][a-z]{2} \d{1,2}, \d{4}$'))));
+    });
+
+    test('a period ending on the 31st starts on the clamped day', () {
+      expect(ReportPeriod.months3.start(DateTime(2026, 5, 31)), DateTime(2026, 2, 28));
+      expect(ReportPeriod.months1.start(DateTime(2026, 3, 31)), DateTime(2026, 2, 28));
+    });
+  });
+
   group('worry window', () {
     test('a window that crosses midnight is still open just after midnight', () {
       const s = WorryWindowSettings(enabled: true, minuteOfDay: 23 * 60 + 50, durationMinutes: 20);
@@ -116,6 +192,25 @@ void main() {
       final later = WorryWindow.statusAt(s, DateTime(2026, 9, 30, 0, 10));
       expect(later.phase, WorryWindowPhase.before);
       expect(later.start, DateTime(2026, 9, 30, 23, 50));
+    });
+  });
+
+  group('insights', () {
+    test('the stated gap is the gap between the means as printed', () {
+      const s = SplitInsight(
+        condition: SplitCondition.highStress,
+        outcome: WellMetric.pain,
+        meanIn: 7.54,
+        meanOut: 3.76,
+        daysIn: 8,
+        daysOut: 24,
+        effect: 2,
+      );
+      final en = WbTexts(lookupL10n(const Locale('en')), MadarFormatter(languageCode: 'en'));
+      final sentence = en.insight(s);
+      expect(sentence, contains('7.5'));
+      expect(sentence, contains('3.8'));
+      expect(sentence, contains('3.7 points higher'), reason: sentence);
     });
   });
 

@@ -10319,7 +10319,7 @@ class L10nAr extends L10n {
   String get wbHabitsToday => 'عادات اليوم';
 
   @override
-  String get wbHabitsSubtitle => 'خطوات صغيرة تخفّف الضغط.';
+  String get wbHabitsSubtitle => 'خطوات صغيرة اخترتها ليومك.';
 
   @override
   String get wbHabitsAllDone => 'أتممتها كلها اليوم.';
@@ -10402,7 +10402,7 @@ class L10nAr extends L10n {
   String get wbHabitAddTitle => 'عادة جديدة';
 
   @override
-  String get wbHabitAddSubtitle => 'عادة صغيرة تساعدك على الهدوء.';
+  String get wbHabitAddSubtitle => 'خطوة صغيرة تختارها لنفسك كل يوم.';
 
   @override
   String get wbHabitName => 'العادة';
@@ -10878,7 +10878,7 @@ class L10nAr extends L10n {
   String get wbBreatheShort => 'تنفّس';
 
   @override
-  String get wbBreath478 => 'الاسترخاء';
+  String get wbBreath478 => 'الزفير الطويل';
 
   @override
   String get wbBreathBox => 'الصندوق';
@@ -17094,4 +17094,171 @@ class L10nAr extends L10n {
 
   @override
   String get bodyNotifyHint => 'يحتاج إذن الإشعارات على الهاتف.';
+
+  @override
+  String get cinemaTitle => 'سينما مدار';
+
+  @override
+  String get cinemaHallSubtitle => 'ألعاب أصلية بروح السينما الكلاسيكية';
+
+  @override
+  String get cinemaFeatures => 'الأفلام الطويلة';
+
+  @override
+  String get cinemaShorts => 'الأفلام القصيرة';
+
+  @override
+  String get cinemaComingSoon => 'قريبًا';
+
+  @override
+  String get cinemaPlay => 'إلى العرض';
+
+  @override
+  String get cinemaGameViewLabel => 'شاشة اللعبة';
+
+  @override
+  String get cinemaPause => 'إيقاف مؤقت';
+
+  @override
+  String get cinemaIntermission => 'استراحة';
+
+  @override
+  String get cinemaResume => 'متابعة العرض';
+
+  @override
+  String get cinemaRestart => 'من البداية';
+
+  @override
+  String get cinemaLeave => 'مغادرة القاعة';
+
+  @override
+  String get cinemaPlayAgain => 'عرض آخر';
+
+  @override
+  String get cinemaTheEnd => 'النهاية';
+
+  @override
+  String get cinemaGameOver => 'انتهى العرض';
+
+  @override
+  String cinemaScoreLine(String score) {
+    return 'النتيجة: $score';
+  }
+
+  @override
+  String cinemaBestLine(String score) {
+    return 'أفضل نتيجة: $score';
+  }
+
+  @override
+  String get cinemaEraSilent => 'العشرينيات الصامتة';
+
+  @override
+  String get cinemaEraRubberHose => 'كرتون الثلاثينيات';
+
+  @override
+  String get cinemaEraNoir => 'نوار الأربعينيات';
+
+  @override
+  String get cinemaEraTechnicolor => 'ألوان الخمسينيات';
+
+  @override
+  String get cinemaEraGrindhouse => 'سينما السبعينيات';
+
+  @override
+  String get cinemaEraVhs => 'فيديو الثمانينيات';
+
+  @override
+  String get cinemaDemoTitle => 'بروفة';
+
+  @override
+  String get cinemaDemoTagline => 'مشهد تجريبي لمحرّك بكرة الفيلم';
+
+  @override
+  String get cinemaDemoOpening => 'المشهد الأول';
+
+  @override
+  String get cinemaDemoOpeningSubtitle => 'المس الشاشة لتقفز فوق البراميل!';
+
+  @override
+  String get cinemaFlappyOrbitTitle => 'رفرفة المدار';
+
+  @override
+  String get cinemaFlappyOrbitTagline => 'رفرف بين الكواكب على أنغام السوينغ';
+
+  @override
+  String get cinemaFlappyOrbitHomage =>
+      'تحية لرسوم الخرطوم المطاطي في الثلاثينيات';
+
+  @override
+  String get cinemaMetropolisTitle => 'آلة المتروبوليس';
+
+  @override
+  String get cinemaMetropolisTagline => 'واجه الآلات العملاقة واحدة تلو الأخرى';
+
+  @override
+  String get cinemaMetropolisHomage => 'تحية لفيلم «متروبوليس» الصامت (1927)';
+
+  @override
+  String get cinemaCaravanTitle => 'سباق القافلة';
+
+  @override
+  String get cinemaCaravanTagline => 'اعبر الكثبان بألوان التكنيكولور';
+
+  @override
+  String get cinemaCaravanHomage => 'تحية لملاحم الصحراء في الخمسينيات';
+
+  @override
+  String get cinemaNoirTitle => 'أسطح النوار';
+
+  @override
+  String get cinemaNoirTagline => 'طارد الظلال فوق أسطح المدينة الممطرة';
+
+  @override
+  String get cinemaNoirHomage => 'تحية لأفلام النوار في الأربعينيات';
+
+  @override
+  String get cinemaNeonSoukTitle => 'متسابق سوق النيون';
+
+  @override
+  String get cinemaNeonSoukTagline => 'انطلق عبر سوق من أضواء النيون';
+
+  @override
+  String get cinemaNeonSoukHomage =>
+      'تحية لأفلام الخيال العلمي على أشرطة الفيديو';
+
+  @override
+  String get cinemaSavedGames => 'ألعابي المحفوظة';
+
+  @override
+  String get cinemaSavedGamesEmpty =>
+      'أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.';
+
+  @override
+  String get cinemaSavedGamesNote =>
+      'تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.';
+
+  @override
+  String get cinemaAddGame => 'إضافة لعبة';
+
+  @override
+  String get cinemaGameName => 'اسم اللعبة';
+
+  @override
+  String get cinemaGameUrl => 'رابط اللعبة';
+
+  @override
+  String get cinemaInvalidUrl => 'أدخل رابطًا صحيحًا يبدأ بـ https://';
+
+  @override
+  String get cinemaRemoveGame => 'إزالة';
+
+  @override
+  String get cinemaOpenGameFailed => 'تعذّر فتح الرابط';
+
+  @override
+  String get cinemaSave => 'حفظ';
+
+  @override
+  String get cinemaCancel => 'إلغاء';
 }

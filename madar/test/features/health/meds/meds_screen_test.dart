@@ -60,8 +60,9 @@ void main() {
     final card = await scrollToDose(tester, 'Omega-3');
     await tester.tap(find.descendant(of: card, matching: find.text('Snooze')));
     await settleMeds(tester);
-    expect(find.text('30 min'), findsOneWidget);
-    await tester.tap(find.text('30 min'));
+    // A no-break space keeps "30 min" on one line.
+    expect(find.text('30\u00A0min'), findsOneWidget);
+    await tester.tap(find.text('30\u00A0min'));
     await settleMeds(tester);
     final row = (await rowsOf(tester, env, s.omega)).singleWhere((r) => r.scheduledAt == DateTime(2026, 9, 29, 13));
     expect(row.status, DoseStatus.snoozed);

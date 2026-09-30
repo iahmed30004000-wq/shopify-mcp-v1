@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/design/contrast.dart';
+import '../../../../core/design/themes.dart' show MadarPalettes;
 import '../../../../core/design/tokens.dart';
 import '../../../../core/domain/enums.dart';
 import '../../../../core/i18n/formatters.dart';
@@ -33,6 +35,19 @@ abstract final class RecordColors {
     Severity.warning => t.warning,
     Severity.info => t.info,
   };
+
+  /// [color] as small text on a card washed with [wash] of itself: moved
+  /// just enough in lightness to reach AA on that wash over every text
+  /// surface of the theme (a bright status colour on its own tint read at
+  /// ~3 : 1 on the dark themes).
+  static Color onWash(MadarTokens t, Color color, double wash) {
+    final fill = Color.alphaBlend(color.withValues(alpha: wash), t.glassFill);
+    return MadarContrast.ensure(color, [
+      for (final s in MadarPalettes.textSurfaces(t)) MadarContrast.over(fill, s),
+      // The brightest ground measured under a planet's sheet at noon.
+      MadarContrast.over(fill, Color.lerp(t.glassLit, t.textTertiary, 0.25)!),
+    ]);
+  }
 }
 
 abstract final class RecordIcons {

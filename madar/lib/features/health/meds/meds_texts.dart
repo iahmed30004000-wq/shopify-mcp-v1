@@ -49,7 +49,9 @@ class MedsTexts {
   String count(int n) => fmt.formatInt(n);
 
   /// Compact duration ("٣٠ د", "٢ س").
-  String duration(int minutes) => fmt.formatDurationWords(l, Duration(minutes: minutes.abs()));
+  /// "١ س ٣٤ د" / "1h 34m", never broken across lines ("١ | س ٣٤ د").
+  String duration(int minutes) =>
+      fmt.formatDurationWords(l, Duration(minutes: minutes.abs())).replaceAll(' ', '\u00A0');
 
   String kind(MedKind k) => switch (k) {
     MedKind.medication => l.medsKindMedication,

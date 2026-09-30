@@ -140,3 +140,5 @@ flutter:
     # Phase 3 content (openly licensed Quran text / tajweed data, hadith).
     - assets/quran/
     - assets/hadith/
+    # Madar Cinema game content (openly licensed word lists, quiz banks).
+    - assets/games/

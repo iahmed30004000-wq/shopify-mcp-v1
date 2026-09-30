@@ -686,8 +686,8 @@
     "en": "Today's habits"
   },
   "wbHabitsSubtitle": {
-    "ar": "خطوات صغيرة تخفّف الضغط.",
-    "en": "Small steps that ease the load."
+    "ar": "خطوات صغيرة اخترتها ليومك.",
+    "en": "Small steps you chose for your day."
   },
   "wbHabitsAllDone": {
     "ar": "أتممتها كلها اليوم.",
@@ -788,8 +788,8 @@
     "en": "New habit"
   },
   "wbHabitAddSubtitle": {
-    "ar": "عادة صغيرة تساعدك على الهدوء.",
-    "en": "A small habit that helps you unwind."
+    "ar": "خطوة صغيرة تختارها لنفسك كل يوم.",
+    "en": "A small daily step of your own."
   },
   "wbHabitName": {
     "ar": "العادة",
@@ -1439,9 +1439,9 @@
     "en": "Breathe"
   },
   "wbBreath478": {
-    "ar": "الاسترخاء",
-    "en": "Relax",
-    "description": "Name of the 4-7-8 breathing pattern"
+    "ar": "الزفير الطويل",
+    "en": "Long exhale",
+    "description": "Name of the 4-7-8 breathing pattern (descriptive of its long out-breath; never a promise of an effect)"
   },
   "wbBreathBox": {
     "ar": "الصندوق",

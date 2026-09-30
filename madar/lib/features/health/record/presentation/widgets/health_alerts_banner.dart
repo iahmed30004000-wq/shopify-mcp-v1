@@ -200,7 +200,10 @@ class HealthAlertCard extends StatelessWidget {
                           children: [
                             Text(
                               context.recordTexts.severity(alert.severity),
-                              style: text.labelSmall!.copyWith(color: color, fontWeight: FontWeight.w600),
+                              style: text.labelSmall!.copyWith(
+                                color: RecordColors.onWash(t, color, t.isDark ? 0.22 : 0.14),
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             const SizedBox(height: 1),
                             Text(

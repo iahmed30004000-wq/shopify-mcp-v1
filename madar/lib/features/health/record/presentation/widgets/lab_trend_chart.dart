@@ -177,7 +177,8 @@ class LabTrendChart extends StatelessWidget {
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 26,
-              interval: math.max(1, axis.span / 4),
+              // Three inner dates; two once large text would make them touch.
+              interval: math.max(1, axis.span / (MediaQuery.textScalerOf(context).scale(1) > 1.15 ? 3 : 4)),
               getTitlesWidget: (value, meta) {
                 // Three inner dates; the edges would be clipped.
                 if (value <= meta.min + 0.5 || value >= meta.max - axis.span * 0.1) return const SizedBox.shrink();

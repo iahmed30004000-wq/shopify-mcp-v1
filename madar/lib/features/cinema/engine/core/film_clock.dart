@@ -40,10 +40,11 @@ class FilmClock {
   void advance(double dt) {
     _time += dt;
     _tick++;
-    final boil = boilFps > 0 ? (_time * boilFps).floor() : 0;
+    // + epsilon: accumulated float steps must not lose a frame (120 × 1/120).
+    final boil = boilFps > 0 ? (_time * boilFps + 1e-6).floor() : 0;
     _boilChanged = boil != _boilFrame;
     _boilFrame = boil;
-    _filmFrame = (_time * projectionFps).floor();
+    _filmFrame = (_time * projectionFps + 1e-6).floor();
   }
 
   void reset() {

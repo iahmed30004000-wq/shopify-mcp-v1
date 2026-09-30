@@ -284,7 +284,8 @@ class MedsService {
     return out;
   }
 
-  Future<Map<String, Map<String, String>>> _anchors() async => _decodeAnchors(await repos.keyValues.getJson(anchorsKey));
+  Future<Map<String, Map<String, String>>> _anchors() async =>
+      _decodeAnchors(await repos.keyValues.getJson(anchorsKey));
 
   /// Every medication (active and paused) in the user's order.
   Future<List<MedSpec>> meds() async {
@@ -307,7 +308,8 @@ class MedsService {
 
   Future<List<CourseSpec>> courses() async => [for (final r in await repos.medCourses.getAll()) courseOf(r)];
 
-  Stream<List<CourseSpec>> watchCourses() => repos.medCourses.watchAll().map((rows) => [for (final r in rows) courseOf(r)]);
+  Stream<List<CourseSpec>> watchCourses() =>
+      repos.medCourses.watchAll().map((rows) => [for (final r in rows) courseOf(r)]);
 
   Future<List<RuleSpec>> rules() async => [for (final r in await repos.medRules.getAll()) ruleOf(r)];
 
@@ -425,7 +427,9 @@ class MedsService {
   /// Keeps both sides of the medication ↔ course link in step.
   Future<void> _linkCourse({required String medId, required String? courseId}) async {
     for (final c in await repos.medCourses.getAll(where: (c) => c.medicationId.equals(medId))) {
-      if (c.id != courseId) await repos.medCourses.update(MedCoursesCompanion(id: Value(c.id), medicationId: const Value(null)));
+      if (c.id != courseId) {
+        await repos.medCourses.update(MedCoursesCompanion(id: Value(c.id), medicationId: const Value(null)));
+      }
     }
     if (courseId != null) {
       await repos.medCourses.update(MedCoursesCompanion(id: Value(courseId), medicationId: Value(medId)));
@@ -498,6 +502,26 @@ class MedsService {
     await repos.medications.update(MedicationsCompanion(id: Value(id), stock: Value(stock)));
     return () => repos.medications.update(MedicationsCompanion(id: Value(id), stock: Value(row.stock)));
   }
+
+  /// Adds [units] to the stock as it is *now* (a refill): read and written
+  /// in one transaction, so a Taken recorded meanwhile – from a
+  /// notification button while the refill sheet was open – is not undone.
+  Future<MedsUndo> addStock(String id, int units) => _db.transaction(() async {
+    final row = await repos.medications.byId(id);
+    if (row == null) return _noUndo;
+    await repos.medications.update(MedicationsCompanion(id: Value(id), stock: Value((row.stock ?? 0) + units)));
+    return () => _db.transaction(() async {
+      final current = await repos.medications.byId(id);
+      if (current == null) return;
+      final back = (current.stock ?? 0) - units;
+      await repos.medications.update(
+        MedicationsCompanion(
+          id: Value(id),
+          stock: Value(row.stock == null && back <= 0 ? null : back.clamp(0, 1 << 30)),
+        ),
+      );
+    });
+  });
 
   // ---------------------------------------------------------------- courses --
 
@@ -787,15 +811,17 @@ class MedsService {
       final med = await repos.medications.byId(medId);
       if (med == null) return DoseActionResult.none;
       final when = at ?? now;
+      // The day's dose (a titration step or course phase), as the plan has it.
+      final planned = await doseForSlot(medId, when);
       final row = await repos.medDoses.insert(
         MedDosesCompanion.insert(
           medicationId: medId,
           takenAt: Value(when),
           status: DoseStatus.taken,
-          dose: Value(dose ?? med.dose),
+          dose: Value(dose ?? planned.dose ?? med.dose),
         ),
       );
-      final stock = await _useStock(med, med.doseAmount);
+      final stock = await _useStock(med, planned.amount ?? med.doseAmount);
       final activity = await repos.activity.log(
         planetKey: 'health',
         kind: doseActivityKind,

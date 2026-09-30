@@ -107,13 +107,15 @@ class WbLineChart extends StatelessWidget {
     final valueTitles = AxisTitles(
       sideTitles: SideTitles(
         showTitles: true,
-        reservedSize: 30,
+        reservedSize: 36,
         interval: step,
         getTitlesWidget: (value, meta) {
           if (value < minY - 0.001 || value > maxY + 0.001) return const SizedBox.shrink();
           return SideTitleWidget(
             meta: meta,
-            space: 6,
+            // Clear of the dots of the range's first / last day, which sit
+            // on the plot's edge.
+            space: 11,
             child: Text(valueLabel?.call(value) ?? fmt.formatNumber(value, maxDecimals: 1), style: labelStyle),
           );
         },

@@ -105,6 +105,13 @@ class RecordTexts {
   /// Compact axis dates: "Sep 14" / "١٤ سبتمبر".
   String dayMonthShort(DateTime d) => fmt.localizeDigits(_date(DateFormat.MMMd).format(d));
 
+  /// A compact date a clinician cannot misread: "Jul 1, 2026" in English
+  /// (a numeric 7/1/2026 is 1 July or 7 January depending on the reader),
+  /// "١/٧/٢٠٢٦" (day first) in Arabic.
+  String compactDate(DateTime d) => fmt.languageCode == 'ar'
+      ? fmt.formatDate(d, style: MadarDateStyle.short)
+      : fmt.localizeDigits(_date(DateFormat.yMMMd).format(d));
+
   /// "Tuesday, 6 October at 10:30 AM".
   String dateAtTime(DateTime at, {MadarDateStyle style = MadarDateStyle.weekdayDayMonth}) =>
       l.recordDateAtTime(fmt.formatDate(at, style: style), fmt.formatTime(at));

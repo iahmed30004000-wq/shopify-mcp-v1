@@ -6,7 +6,8 @@ import 'package:madar/features/health/meds/meds.dart';
 void main() {
   final ar = MedsTexts.forLanguage('ar');
   final en = MedsTexts.forLanguage('en');
-  String plain(String s) => BidiIsolate.strip(s);
+  // Durations keep their number and unit together with no-break spaces.
+  String plain(String s) => BidiIsolate.strip(s).replaceAll('\u00A0', ' ');
 
   test('anchors read naturally, with the user’s digits', () {
     expect(plain(ar.anchor(const TimeAnchor(AnchorBase.fajr, 20))), 'بعد الفجر بـ٢٠ د');
@@ -28,6 +29,11 @@ void main() {
       plain(en.rule(const RuleSpec(id: 'f', kind: MedRuleKind.beforeFood, medAId: 'a', minutes: 30), name)),
       'Levothyroxine 30 min before food',
     );
+  });
+
+  test('a duration never breaks between its number and unit', () {
+    expect(ar.duration(94), '١\u00A0س\u00A0٣٤\u00A0د');
+    expect(en.duration(30), isNot(contains(' ')));
   });
 
   test('phases, doses and kinds', () {

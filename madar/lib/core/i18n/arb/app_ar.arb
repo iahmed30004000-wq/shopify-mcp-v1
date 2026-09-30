@@ -10049,7 +10049,7 @@
   "wbHistoryCheckIns": "التسجيلات السابقة",
   "wbHistoryEmpty": "لا تسجيلات بعد؛ يكفي وجه واحد لتبدأ.",
   "wbHabitsToday": "عادات اليوم",
-  "wbHabitsSubtitle": "خطوات صغيرة تخفّف الضغط.",
+  "wbHabitsSubtitle": "خطوات صغيرة اخترتها ليومك.",
   "wbHabitsAllDone": "أتممتها كلها اليوم.",
   "wbBestStreakNow": "{count, plural, =1{أطول سلسلة الآن: يوم واحد} =2{أطول سلسلة الآن: يومان} few{أطول سلسلة الآن: {n} أيام} many{أطول سلسلة الآن: {n} يومًا} other{أطول سلسلة الآن: {n} يوم}}",
   "@wbBestStreakNow": {
@@ -10102,7 +10102,7 @@
   },
   "wbHabitEditTitle": "تعديل العادة",
   "wbHabitAddTitle": "عادة جديدة",
-  "wbHabitAddSubtitle": "عادة صغيرة تساعدك على الهدوء.",
+  "wbHabitAddSubtitle": "خطوة صغيرة تختارها لنفسك كل يوم.",
   "wbHabitName": "العادة",
   "wbHabitsEmptyTitle": "لا عادات بعد",
   "wbHabitsEmptyBody": "أضف عادات صغيرة تودّ متابعتها يوميًا.",
@@ -10525,9 +10525,9 @@
   "wbSettingsBreathingSoundHint": "نغمة خفيفة عند كل مرحلة؛ الاهتزاز يعمل دائمًا.",
   "wbBreathTitle": "تنفّس",
   "wbBreatheShort": "تنفّس",
-  "wbBreath478": "الاسترخاء",
+  "wbBreath478": "الزفير الطويل",
   "@wbBreath478": {
-    "description": "Name of the 4-7-8 breathing pattern"
+    "description": "Name of the 4-7-8 breathing pattern (descriptive of its long out-breath; never a promise of an effect)"
   },
   "wbBreathBox": "الصندوق",
   "@wbBreathBox": {
@@ -16902,5 +16902,90 @@
       }
     }
   },
-  "bodyNotifyHint": "يحتاج إذن الإشعارات على الهاتف."
+  "bodyNotifyHint": "يحتاج إذن الإشعارات على الهاتف.",
+  "cinemaTitle": "سينما مدار",
+  "@cinemaTitle": {
+    "description": "Name of the games hub"
+  },
+  "cinemaHallSubtitle": "ألعاب أصلية بروح السينما الكلاسيكية",
+  "cinemaFeatures": "الأفلام الطويلة",
+  "@cinemaFeatures": {
+    "description": "Tier 1 games section"
+  },
+  "cinemaShorts": "الأفلام القصيرة",
+  "@cinemaShorts": {
+    "description": "Tier 2 games section"
+  },
+  "cinemaComingSoon": "قريبًا",
+  "cinemaPlay": "إلى العرض",
+  "cinemaGameViewLabel": "شاشة اللعبة",
+  "cinemaPause": "إيقاف مؤقت",
+  "cinemaIntermission": "استراحة",
+  "@cinemaIntermission": {
+    "description": "Pause card title"
+  },
+  "cinemaResume": "متابعة العرض",
+  "cinemaRestart": "من البداية",
+  "cinemaLeave": "مغادرة القاعة",
+  "cinemaPlayAgain": "عرض آخر",
+  "cinemaTheEnd": "النهاية",
+  "cinemaGameOver": "انتهى العرض",
+  "@cinemaGameOver": {
+    "description": "Game over card"
+  },
+  "cinemaScoreLine": "النتيجة: {score}",
+  "@cinemaScoreLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaBestLine": "أفضل نتيجة: {score}",
+  "@cinemaBestLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaEraSilent": "العشرينيات الصامتة",
+  "cinemaEraRubberHose": "كرتون الثلاثينيات",
+  "cinemaEraNoir": "نوار الأربعينيات",
+  "cinemaEraTechnicolor": "ألوان الخمسينيات",
+  "cinemaEraGrindhouse": "سينما السبعينيات",
+  "cinemaEraVhs": "فيديو الثمانينيات",
+  "cinemaDemoTitle": "بروفة",
+  "@cinemaDemoTitle": {
+    "description": "Engine demo scene"
+  },
+  "cinemaDemoTagline": "مشهد تجريبي لمحرّك بكرة الفيلم",
+  "cinemaDemoOpening": "المشهد الأول",
+  "cinemaDemoOpeningSubtitle": "المس الشاشة لتقفز فوق البراميل!",
+  "cinemaFlappyOrbitTitle": "رفرفة المدار",
+  "cinemaFlappyOrbitTagline": "رفرف بين الكواكب على أنغام السوينغ",
+  "cinemaFlappyOrbitHomage": "تحية لرسوم الخرطوم المطاطي في الثلاثينيات",
+  "cinemaMetropolisTitle": "آلة المتروبوليس",
+  "cinemaMetropolisTagline": "واجه الآلات العملاقة واحدة تلو الأخرى",
+  "cinemaMetropolisHomage": "تحية لفيلم «متروبوليس» الصامت (1927)",
+  "cinemaCaravanTitle": "سباق القافلة",
+  "cinemaCaravanTagline": "اعبر الكثبان بألوان التكنيكولور",
+  "cinemaCaravanHomage": "تحية لملاحم الصحراء في الخمسينيات",
+  "cinemaNoirTitle": "أسطح النوار",
+  "cinemaNoirTagline": "طارد الظلال فوق أسطح المدينة الممطرة",
+  "cinemaNoirHomage": "تحية لأفلام النوار في الأربعينيات",
+  "cinemaNeonSoukTitle": "متسابق سوق النيون",
+  "cinemaNeonSoukTagline": "انطلق عبر سوق من أضواء النيون",
+  "cinemaNeonSoukHomage": "تحية لأفلام الخيال العلمي على أشرطة الفيديو",
+  "cinemaSavedGames": "ألعابي المحفوظة",
+  "cinemaSavedGamesEmpty": "أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.",
+  "cinemaSavedGamesNote": "تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.",
+  "cinemaAddGame": "إضافة لعبة",
+  "cinemaGameName": "اسم اللعبة",
+  "cinemaGameUrl": "رابط اللعبة",
+  "cinemaInvalidUrl": "أدخل رابطًا صحيحًا يبدأ بـ https://",
+  "cinemaRemoveGame": "إزالة",
+  "cinemaOpenGameFailed": "تعذّر فتح الرابط",
+  "cinemaSave": "حفظ",
+  "cinemaCancel": "إلغاء"
 }
