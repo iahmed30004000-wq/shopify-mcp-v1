@@ -20,7 +20,6 @@ import '../prayer/prayer.dart' show PrayerLabels, cityDatabaseProvider;
 import '../quran/quran.dart' show QuranReaderMode, quranReaderPrefsProvider;
 import '../recitation/recitation.dart' show recitationSettingsProvider;
 import 'health_settings_screen.dart' show healthRemindersOnProvider;
-import 'money_settings_section.dart';
 import 'reminders_settings_screen.dart' show faithRemindersOnProvider;
 import 'settings_controller.dart';
 import 'widgets/appearance_pickers.dart';
@@ -30,9 +29,7 @@ import 'widgets/settings_widgets.dart';
 /// calculation, the adhan, Quran reading, recitation and the reminders
 /// (adhkar and wird), each its own page, with the adhan's permissions card
 /// below them; health (its own page: meal times, reminders, lab margin,
-/// doctor report, worry window, emergency number); money (inline: base
-/// currency and rates, weeks per month, week start, due reminders – see
-/// [MoneySettingsSection]); motion and power
+/// doctor report, worry window, emergency number); motion and power
 /// (inline); privacy and security (the app
 /// lock's page); data (import); about (version, fonts and content sources,
 /// licences) and the design gallery. Every change applies instantly.
@@ -149,7 +146,6 @@ class SettingsScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const MoneySettingsSection(),
               SettingsSection(
                 title: l.settingsSectionMotionPower,
                 seed: 0.3,

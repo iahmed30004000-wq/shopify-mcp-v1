@@ -17,7 +17,6 @@ import '../data/goals_providers.dart';
 import '../domain/due_dates.dart';
 import '../domain/goals_snapshot.dart';
 import '../domain/jar_plan.dart';
-import '../../money_glyphs.dart';
 import '../goals_texts.dart';
 import 'astrolabe_ring.dart';
 import 'goals_actions.dart';
@@ -544,7 +543,7 @@ class JarTrajectoryChart extends ConsumerWidget {
         getTitlesWidget: (value, meta) => SideTitleWidget(
           meta: meta,
           space: 6,
-          child: Text(MoneyGlyphs.legibleGroups(fmt.formatNumber(value, maxDecimals: 0)), style: labelStyle),
+          child: Text(fmt.formatNumber(value, maxDecimals: 0), style: labelStyle),
         ),
       ),
     );

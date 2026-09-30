@@ -5,29 +5,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/db/repositories/repositories.dart';
-import '../../../../core/routing/money_route_pages.dart' show MoneyNav;
 import '../../../health/hub/health_hub_logic.dart';
 import '../../../home/widgets/task_actions.dart';
-import '../../../money/hub/money_links.dart';
 import '../../domain/orbit_moons.dart';
 import 'moon_sheet.dart';
 import 'planet_modules.dart';
 
 /// Opens the record a Neglect Radar entry or a reason points at: a moon's
-/// sheet, a task's editor, a Health record's screen (doses past due →
+/// sheet, a task's editor, or a Health record's screen (doses past due →
 /// today's doses, a slipping stress habit → the habits, an appointment, a
-/// lab test – see [HealthRecordLinks]) or a Money record (an overdue debt or
-/// bill → its sheet, a jar behind plan → the jar, an overspent budget item →
-/// the budget's spending, stale entries → the ledger – see [MoneyLinks]).
-/// Other records with no screen of their own are not openable – their rows
-/// are not buttons ([canOpen]).
+/// lab test – see [HealthRecordLinks]). Other records with no sheet of
+/// their own (a budget line, a debt …) are not openable – their rows are not
+/// buttons ([canOpen]).
 abstract final class RecordOpener {
   /// Whether `refTable:refId` opens something from [planetKey]'s page (a
   /// Health reason about several medications has no [refId] and still
   /// opens today's doses).
   static bool canOpen(String? refTable, String? refId, List<OrbitMoon> moons, {String? planetKey}) {
     if (HealthRecordLinks.locationOf(refTable, refId, planetKey: planetKey) != null) return true;
-    if (MoneyLinks.targetOf(refTable, refId) != null) return true;
     if (refTable == null || refId == null) return false;
     return moonOf(PlanetModules.itemOf(refTable, refId), moons) != null || refTable == 'tasks';
   }
@@ -48,14 +43,6 @@ abstract final class RecordOpener {
     return HealthRecordLinks.locationOf(table, parsed?.$2, planetKey: planetKey);
   }
 
-  /// Where a Money record [item] (`refTable:refId`, or a bare `refTable`)
-  /// leads, or null.
-  static MoneyTarget? moneyTarget(String item) {
-    final parsed = parse(item);
-    if (parsed != null) return MoneyLinks.targetOf(parsed.$1, parsed.$2);
-    return MoneyLinks.targetOf(item.contains(':') ? item.substring(0, item.indexOf(':')) : item, null);
-  }
-
   /// Splits an item id (`refTable:refId`).
   static (String, String)? parse(String item) {
     final i = item.indexOf(':');
@@ -63,9 +50,9 @@ abstract final class RecordOpener {
     return (item.substring(0, i), item.substring(i + 1));
   }
 
-  /// Opens [item] (a moon of [moons], a task, a Health record of
-  /// [planetKey]'s page – pushed as its route – or a Money record: its
-  /// route or its sheet); false when there is nothing to open.
+  /// Opens [item] (a moon of [moons], a task, or a Health record of
+  /// [planetKey]'s page – pushed as its route); false when there is nothing
+  /// to open.
   static Future<bool> open(
     BuildContext context,
     WidgetRef ref,
@@ -81,11 +68,6 @@ abstract final class RecordOpener {
     final health = healthLocation(item, planetKey: planetKey);
     if (health != null) {
       unawaited(context.push<void>(health));
-      return true;
-    }
-    final money = moneyTarget(item);
-    if (money != null) {
-      unawaited(MoneyNav.open(context, money));
       return true;
     }
     final parsed = parse(item);

@@ -21,7 +21,7 @@ void madarNotificationBackgroundTap(NotificationResponse response) {}
 /// * Channels are created explicitly so their frozen sound / vibration /
 ///   audio usage are exactly the [NotificationChannelSpec]'s.
 /// * On other platforms (desktop tests) every call is a harmless no-op.
-class FlutterLocalNotificationsPlatform implements NotificationPlatform, ActiveNotificationQuery {
+class FlutterLocalNotificationsPlatform implements NotificationPlatform {
   FlutterLocalNotificationsPlatform({
     FlutterLocalNotificationsPlugin? plugin,
     this.defaultIcon = 'ic_stat_madar',
@@ -223,7 +223,7 @@ class FlutterLocalNotificationsPlatform implements NotificationPlatform, ActiveN
   Future<List<PendingNotice>> pending() async {
     if (!_android) return const [];
     final list = await _plugin.pendingNotificationRequests();
-    return [for (final p in list) PendingNotice(p.id, p.payload, title: p.title, body: p.body)];
+    return [for (final p in list) PendingNotice(p.id, p.payload)];
   }
 
   /// Madar's own Android side (MainActivity.kt): whether the plugin's alarm
@@ -255,18 +255,6 @@ class FlutterLocalNotificationsPlatform implements NotificationPlatform, ActiveN
     if (!_android) return const [];
     final list = await _plugin.getActiveNotifications();
     return [for (final a in list) ?a.id];
-  }
-
-  /// The shown notifications with their payloads (Android 6+; the plugin
-  /// reports the extras it posted, so Madar's envelope comes back).
-  @override
-  Future<List<ActiveNotice>> activeNotices() async {
-    if (!_android) return const [];
-    final list = await _plugin.getActiveNotifications();
-    return [
-      for (final a in list)
-        if (a.id != null) ActiveNotice(a.id!, payload: a.payload, title: a.title, body: a.body, channelId: a.channelId),
-    ];
   }
 
   @override

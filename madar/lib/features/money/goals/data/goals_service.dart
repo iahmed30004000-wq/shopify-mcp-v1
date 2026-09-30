@@ -334,7 +334,7 @@ class GoalsService {
       if (walletId != null) {
         final wallet = await repos.wallets.byId(walletId);
         if (wallet != null) {
-          final walletAmount = rates.convertToMinor(amount, jar.currency, wallet.currency);
+          final walletAmount = rates.convert(amount, jar.currency, wallet.currency);
           tx = await repos.transactions.insert(
             TransactionsCompanion.insert(
               id: Value(jarTxId(move.id)),
@@ -426,7 +426,7 @@ class GoalsService {
       if (existing != null) await repos.transactions.delete(id);
       return;
     }
-    final amount = rates.convertToMinor(debt.amountMilli.abs(), debt.currency, wallet.currency);
+    final amount = rates.convert(debt.amountMilli.abs(), debt.currency, wallet.currency);
     final signed = debt.direction == DebtDirection.iOwe ? amount : -amount;
     if (existing == null) {
       await repos.transactions.insert(
@@ -519,7 +519,7 @@ class GoalsService {
       if (walletId != null) {
         final wallet = await repos.wallets.byId(walletId);
         if (wallet != null) {
-          final walletAmount = rates.convertToMinor(amount, row.currency, wallet.currency);
+          final walletAmount = rates.convert(amount, row.currency, wallet.currency);
           tx = await repos.transactions.insert(
             TransactionsCompanion.insert(
               id: Value(debtTxId(pay.id)),
@@ -711,7 +711,7 @@ class GoalsService {
             id: Value(obligationTxId(paymentId)),
             walletId: wallet.id,
             kind: TxKind.expense,
-            amountMilli: rates.convertToMinor(amount, row.currency, wallet.currency),
+            amountMilli: rates.convert(amount, row.currency, wallet.currency),
             date: CalendarDays.of(paidOn ?? clock()),
             budgetItemId: Value(row.budgetItemId),
             note: Value(row.name),

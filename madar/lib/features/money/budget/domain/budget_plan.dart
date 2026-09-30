@@ -236,16 +236,6 @@ class BudgetPlan {
 
   int get dangerCount => issues.where((i) => i.severity == BudgetIssueSeverity.danger).length;
 
-  /// Each root's share of the total for the allocation legend, rounded to
-  /// [decimals] so the legend adds up to exactly 100 % (see
-  /// [BudgetShares.largestRemainder]); by root id. Empty without a positive
-  /// total.
-  Map<String, double> rootShares({int decimals = 1}) {
-    final r = roots;
-    final shares = BudgetShares.largestRemainder([for (final l in r) l.monthlyMilli], decimals: decimals);
-    return {for (var i = 0; i < shares.length; i++) r[i].id: shares[i]};
-  }
-
   /// Names from the root down to [id] (`["Home food", "Proteins"]`).
   List<String> pathOf(String id) {
     final out = <String>[];
@@ -258,48 +248,5 @@ class BudgetPlan {
       cur = l.parentId;
     }
     return out;
-  }
-}
-
-/// Rounding of shares for display.
-abstract final class BudgetShares {
-  /// The percent share of each of [parts] (non-negative milli-units) in
-  /// their sum, rounded to [decimals] by the largest-remainder method: each
-  /// share is truncated, and the steps still missing to 100 % go to the
-  /// largest remainders (earlier parts first on a tie). The result always
-  /// adds up to exactly 100 % and every share is within one step of its
-  /// exact value (Home food 57.1 %, Car fuel 28.6 %, Emergency 8.6 %,
-  /// Allowance 5.7 % – not 57 + 29 + 9 + 6 = 101 %). Empty when the sum is
-  /// not positive.
-  static List<double> largestRemainder(List<int> parts, {int decimals = 1}) {
-    final clean = [for (final p in parts) p < 0 ? 0 : p];
-    final total = clean.fold<int>(0, (a, b) => a + b);
-    if (total <= 0) return const [];
-    var steps = 100;
-    for (var i = 0; i < decimals; i++) {
-      steps *= 10;
-    }
-    final whole = <int>[];
-    final rest = <BigInt>[];
-    final t = BigInt.from(total);
-    for (final p in clean) {
-      final scaled = BigInt.from(p) * BigInt.from(steps);
-      whole.add((scaled ~/ t).toInt());
-      rest.add(scaled.remainder(t));
-    }
-    var missing = steps - whole.fold<int>(0, (a, b) => a + b);
-    final order = List<int>.generate(clean.length, (i) => i)
-      ..sort((a, b) {
-        final c = rest[b].compareTo(rest[a]);
-        return c != 0 ? c : a.compareTo(b);
-      });
-    for (final i in order) {
-      if (missing <= 0) break;
-      if (rest[i] == BigInt.zero) continue;
-      whole[i]++;
-      missing--;
-    }
-    final unit = steps / 100;
-    return [for (final w in whole) w / unit];
   }
 }

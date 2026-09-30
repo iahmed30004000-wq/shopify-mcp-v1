@@ -14,7 +14,6 @@ import '../features/recitation/recitation.dart' show RecitationPlayer, recitatio
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
 import 'health_services.dart';
-import 'money_services.dart';
 
 /// Prepares the services the app needs soon but never on the first frame:
 /// the full time-zone database (prayer times of a location in another zone,
@@ -59,9 +58,8 @@ void _log(String what, Object error, StackTrace stack) {
 ///   (`/wird?plan=<id>`), a dose notification the medications (`/meds`),
 ///   an appointment reminder the appointments with it lit
 ///   (`/record/appointments?highlight=<id>`) and the worry window the
-///   worries (`/wellbeing?tab=worries`), a debt's or an obligation's due
-///   reminder the goals with its sheet up (`/goals?tab=debts&debt=<id>`) –
-///   whether it launched the app (cold start) or reached it running (warm). A dose's Taken / Snooze / Skip
+///   worries (`/wellbeing?tab=worries`) – whether it launched the app (cold
+///   start) or reached it running (warm). A dose's Taken / Snooze / Skip
 ///   buttons never navigate: they are recorded ([healthNotificationLocation]).
 /// * The router moves underneath the app lock: when Madar is locked the lock
 ///   screen stays in front, and the reader is what the owner sees after
@@ -82,7 +80,7 @@ class AppNotificationRouter {
     if (set != null) return AppRoutes.adhkarSetOf(set.name);
     final plan = WirdReminderTaps.planOf(tap);
     if (plan != null) return AppRoutes.wirdOf(plan);
-    return healthNotificationLocation(tap) ?? moneyNotificationLocation(tap);
+    return healthNotificationLocation(tap);
   }
 
   Future<void> _readLaunch(NotificationService service) async {
@@ -127,9 +125,7 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///   activity is written ([RecitationPlayer.flushSession]);
 /// * the health reminders stay planned – doses (48 h rolling), appointments,
 ///   the worry window – and a dose answered from its notification is
-///   recorded ([watchHealthServices]);
-/// * the debts' and obligations' due reminders stay planned
-///   ([watchMoneyServices]).
+///   recorded ([watchHealthServices]).
 ///
 /// The adhan's own services (alarm planning, prayer quiet, the full-screen
 /// adhan) live in `AdhanHost`, directly below this.
@@ -175,7 +171,6 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     ref.watch(appNotificationRouterProvider);
     ref.watch(recitationNotificationRouterProvider);
     watchHealthServices(ref);
-    watchMoneyServices(ref);
     return widget.child;
   }
 }

@@ -11,7 +11,6 @@ import '../../core/i18n/gen/app_localizations.dart';
 import '../../core/interaction/quick_add/quick_add_handler.dart';
 import '../../core/settings/app_settings.dart';
 import '../../core/astro/astronomy.dart';
-import '../money/ledger/data/ledger_providers.dart' show ledgerServiceProvider;
 import '../orbit/data/orbit_providers.dart' show orbitPrayerDayProvider, orbitPulseHubProvider, prayerSettingsProvider;
 import '../orbit/domain/prayer_schedule.dart' show PrayerSettings;
 import '../orbit/render/sky/sky_model.dart' show SkyModel;
@@ -183,7 +182,6 @@ final shellQuickAddHandlerProvider = Provider<QuickAddHandler>(
       focusedWindow: () =>
           ref.read(homeWindowProvider) ?? ref.read(prayerDayProvider).windowAt(ref.read(homeClockProvider)()),
       defaultWalletName: () => lookupL10n(ref.read(appSettingsProvider).locale).homeDefaultWallet,
-      ledger: () => ref.read(ledgerServiceProvider),
     ),
   ),
 );

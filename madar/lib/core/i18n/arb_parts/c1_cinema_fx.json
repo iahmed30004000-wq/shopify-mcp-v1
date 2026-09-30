@@ -1,8 +1,0 @@
-{
-  "cinemaFxTestCard": {"ar": "بطاقة المعايرة", "en": "Calibration card", "description": "Projector check card that shows the film look of an era"},
-  "cinemaFxFilmLook": {"ar": "مظهر الفيلم", "en": "Film look", "description": "Setting: strength and quality of the old-film effect in Madar Cinema"},
-  "cinemaFxQualityLowPower": {"ar": "توفير الطاقة", "en": "Power saver", "description": "Film look quality: cheapest"},
-  "cinemaFxQualityBalanced": {"ar": "متوازن", "en": "Balanced", "description": "Film look quality: default"},
-  "cinemaFxQualityFull": {"ar": "أعلى دقة", "en": "Full quality", "description": "Film look quality: best"},
-  "cinemaFxReelLabel": {"ar": "بكرة", "en": "Reel", "description": "Label on a film-leader card before a reel number"}
-}

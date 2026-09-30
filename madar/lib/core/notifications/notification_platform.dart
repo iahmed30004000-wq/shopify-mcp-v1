@@ -66,11 +66,3 @@ abstract interface class NotificationPlatform {
   /// granted; returns whether it is granted afterwards.
   Future<bool> requestFullScreenIntent();
 }
-
-/// Optional, read-only capability of a [NotificationPlatform]: the shown
-/// notifications with their content (not just [NotificationPlatform.activeIds]).
-/// A platform that cannot tell simply does not implement it;
-/// `NotificationService.activeNotices` then falls back to the ids.
-abstract interface class ActiveNotificationQuery {
-  Future<List<ActiveNotice>> activeNotices();
-}

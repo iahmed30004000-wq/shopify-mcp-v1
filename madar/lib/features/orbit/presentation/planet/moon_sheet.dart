@@ -11,7 +11,6 @@ import '../../../../core/design/tokens.dart';
 import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
-import '../../../../core/routing/money_route_pages.dart' show MoneyNav;
 import '../../../../core/sound/sound_api.dart';
 import '../../data/orbit_providers.dart';
 import '../../domain/neglect_text.dart';
@@ -125,9 +124,8 @@ final moonRecordsProvider = Provider<MoonRecords>(
 
 /// Opens [moon]'s record: what it is and which world it circles, how fresh
 /// it is, the concrete reasons it needs care, and what can be done right
-/// here – rename it, for a person, log that you were in touch today (the
-/// Family world pulses), and for a wallet, open it. Every change can be
-/// undone.
+/// here – rename it, and for a person, log that you were in touch today
+/// (the Family world pulses). Every change can be undone.
 Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) async {
   final records = ref.read(moonRecordsProvider);
   final record = await records.read(moon.refTable, moon.refId);
@@ -141,8 +139,6 @@ Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) 
   if (action == null || !context.mounted) return;
   final l = L10n.of(context);
   switch (action) {
-    case _MoonAction.openWallet:
-      MoneyNav.wallet(context, moon.refId);
     case _MoonAction.inTouch:
       final hub = ref.read(orbitPulseHubProvider);
       final undo = await records.logContact(
@@ -175,7 +171,7 @@ Future<void> showMoonSheet(BuildContext context, WidgetRef ref, OrbitMoon moon) 
   }
 }
 
-enum _MoonAction { openWallet, inTouch, rename }
+enum _MoonAction { inTouch, rename }
 
 class _MoonSheet extends StatelessWidget {
   const _MoonSheet({required this.moon, required this.planet, required this.record});
@@ -275,17 +271,6 @@ class _MoonSheet extends StatelessWidget {
                 ),
               ),
           const SizedBox(height: Space.m),
-          // A wallet's moon opens the wallet itself (balance, chart, entries).
-          if (moon.refTable == 'wallets') ...[
-            SheetButton(
-              label: l.moneyHubMoonOpenWallet,
-              icon: Icons.account_balance_wallet_rounded,
-              primary: true,
-              sfx: Sfx.navigate,
-              onPressed: () => pick(_MoonAction.openWallet),
-            ),
-            const SizedBox(height: Space.s),
-          ],
           if (moon.refTable == 'people') ...[
             SheetButton(
               label: l.orbitUiMoonInTouch,

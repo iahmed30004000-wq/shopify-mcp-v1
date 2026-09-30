@@ -122,8 +122,6 @@ class _SummaryCard extends StatelessWidget {
     final f = format;
     final roots = plan.roots;
     final total = plan.totalMonthlyMilli;
-    // Rounded so the legend adds up to exactly 100 %.
-    final shares = plan.rootShares();
     return GlassCard(
       seed: 2.4,
       padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.l, Space.l, Space.m + 2),
@@ -183,7 +181,7 @@ class _SummaryCard extends StatelessWidget {
                       ),
                       const SizedBox(width: Space.xs),
                       Text(
-                        f.percent(shares[r.id] ?? r.percentOfTotal, maxDecimals: 1),
+                        f.percent(r.percentOfTotal, maxDecimals: 0),
                         style: text.labelMedium?.copyWith(color: t.textTertiary),
                       ),
                     ],

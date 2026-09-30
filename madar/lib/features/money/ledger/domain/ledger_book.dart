@@ -26,7 +26,6 @@ class LedgerBook implements TxFilterContext {
     Map<String, BudgetItemLook> budgetLooks = const {},
     num weeksPerMonth = BudgetSettings.defaultWeeksPerMonth,
     this.ratesAreDefaults = false,
-    this.weekStart = DateTime.saturday,
   }) : currencies = List<LedgerCurrency>.unmodifiable(currencies),
        wallets = List<LedgerWallet>.unmodifiable(<LedgerWallet>[...wallets]..sort(_walletOrder)),
        transactions = List<LedgerTx>.unmodifiable(<LedgerTx>[...transactions]..sort(LedgerMath.compareNewestFirst)),
@@ -44,14 +43,9 @@ class LedgerBook implements TxFilterContext {
               weeksPerMonth: weeksPerMonth,
               baseCurrency: rates.base,
               ratesToBase: rates.asNumbers,
-              weekStart: weekStart,
             ),
           );
   }
-
-  /// First day of a week in the weekly views ([DateTime.monday] …
-  /// [DateTime.sunday]; the user's Money setting, Saturday by default).
-  final int weekStart;
 
   static int _walletOrder(LedgerWallet a, LedgerWallet b) {
     final s = a.sortOrder.compareTo(b.sortOrder);

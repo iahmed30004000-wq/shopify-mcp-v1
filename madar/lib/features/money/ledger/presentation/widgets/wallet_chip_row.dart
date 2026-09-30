@@ -34,31 +34,21 @@ class WalletChipRow extends StatefulWidget {
 
 class _WalletChipRowState extends State<WalletChipRow> {
   final _selectedKey = GlobalKey();
-  final _scroll = ScrollController();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final target = _selectedKey.currentContext?.findRenderObject();
-      if (!mounted || target == null || !_scroll.hasClients) return;
-      // Only this row scrolls: Scrollable.ensureVisible would also scroll
-      // the sheet around it and hide the amount at the top.
-      _scroll.position.ensureVisible(target, alignment: 0.5);
+      final target = _selectedKey.currentContext;
+      if (!mounted || target == null) return;
+      Scrollable.ensureVisible(target, alignment: 0.5);
     });
-  }
-
-  @override
-  void dispose() {
-    _scroll.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     return SingleChildScrollView(
-      controller: _scroll,
       scrollDirection: Axis.horizontal,
       clipBehavior: Clip.none,
       child: Row(

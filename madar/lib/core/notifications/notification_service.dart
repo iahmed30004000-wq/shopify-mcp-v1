@@ -244,27 +244,6 @@ class NotificationService {
     return list;
   }
 
-  /// Every pending notification (all namespaces, with the title and body
-  /// when the platform reports them) – a read-only view for the
-  /// notification center. Soonest first by the envelope's instant.
-  Future<List<PendingNotice>> pendingNotices() async {
-    await init();
-    final list = await platform.pending();
-    int at(PendingNotice p) => NotificationEnvelope.decode(p.payload).at?.millisecondsSinceEpoch ?? 0;
-    final keyed = [for (final p in list) (at(p), p)]
-      ..sort((a, b) => a.$1 != b.$1 ? a.$1.compareTo(b.$1) : a.$2.id.compareTo(b.$2.id));
-    return [for (final k in keyed) k.$2];
-  }
-
-  /// The notifications currently shown, with their payloads when the
-  /// platform can tell ([ActiveNotificationQuery]); otherwise only their ids.
-  Future<List<ActiveNotice>> activeNotices() async {
-    await init();
-    final p = platform;
-    if (p case final ActiveNotificationQuery query) return query.activeNotices();
-    return [for (final id in await p.activeIds()) ActiveNotice(id)];
-  }
-
   /// Whether notification [id] is currently shown.
   Future<bool> isShown(int id) async {
     await init();

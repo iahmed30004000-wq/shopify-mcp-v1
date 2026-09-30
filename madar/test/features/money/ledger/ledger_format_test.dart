@@ -27,7 +27,7 @@ void main() {
     });
 
     test('Arabic-Indic: Arabic separators, ALM before the sign, isolated symbol', () {
-      expect(ar.amount(1234500, 'JOD'), '١\u202F٢٣٤٫٥٠٠$nbsp$fsiد.أ$pdi');
+      expect(ar.amount(1234500, 'JOD'), '١٬٢٣٤٫٥٠٠$nbsp$fsiد.أ$pdi');
       expect(ar.amount(-12500, 'JOD'), '\u061C-١٢٫٥٠٠$nbsp$fsiد.أ$pdi');
       expect(ar.amount(12500, 'USD', sign: SignDisplay.always), '\u061C+١٢٫٥٠$nbsp$fsi\$$pdi');
     });

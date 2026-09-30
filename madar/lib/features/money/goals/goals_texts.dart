@@ -5,7 +5,6 @@ import '../../../core/domain/enums.dart';
 import '../../../core/domain/money.dart';
 import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
-import '../money_glyphs.dart';
 import 'domain/due_dates.dart';
 import 'domain/goals_rates.dart';
 
@@ -52,12 +51,10 @@ class GoalsTexts {
   String money(int milli, String currency, {bool signed = false}) {
     final code = currency.toUpperCase();
     final custom = _customSymbol(code);
-    var s = MoneyGlyphs.legibleGroups(
-      Money(
-        milli,
-        code,
-      ).format(locale: fmt.languageCode, digits: _digits, decimals: decimalsFor(milli, code), symbol: custom),
-    );
+    var s = Money(
+      milli,
+      code,
+    ).format(locale: fmt.languageCode, digits: _digits, decimals: decimalsFor(milli, code), symbol: custom);
     if (signed && milli > 0) {
       // The same marks intl puts before a minus sign (ALM / LRM).
       final mark = !arabic ? '' : (fmt.arabicIndic ? '\u061C' : '\u200E');
@@ -70,12 +67,10 @@ class GoalsTexts {
   String base(int milli) => money(milli, rates.base);
 
   /// The amount alone (no symbol), for large display numbers.
-  String amount(int milli, String currency) => MoneyGlyphs.legibleGroups(
-    Money(
-      milli,
-      currency.toUpperCase(),
-    ).formatAmount(locale: fmt.languageCode, digits: _digits, decimals: decimalsFor(milli, currency.toUpperCase())),
-  );
+  String amount(int milli, String currency) => Money(
+    milli,
+    currency.toUpperCase(),
+  ).formatAmount(locale: fmt.languageCode, digits: _digits, decimals: decimalsFor(milli, currency.toUpperCase()));
 
   /// The symbol shown next to [amount].
   String symbol(String currency) {

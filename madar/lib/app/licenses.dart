@@ -41,7 +41,6 @@ abstract final class MadarLicenses {
     "Hadith – An-Nawawi's Forty": 'assets/licenses/hadith_credits.txt',
     'Madar Quran recitation': 'assets/licenses/recitation_credits.txt',
     'Madar qibla compass (WMM2025)': 'assets/licenses/qibla_wmm.txt',
-    'Madar Cinema – word & knowledge games': 'assets/licenses/games_words_credits.txt',
   };
 
   /// Lets a test register again after `LicenseRegistry.reset()`.

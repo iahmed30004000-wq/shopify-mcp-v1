@@ -16,7 +16,6 @@ import '../../../../../core/motion/motion_kit.dart';
 import '../../../../../core/sound/sound_api.dart';
 import '../../data/ledger_providers.dart';
 import '../../data/ledger_service.dart';
-import '../../../money_glyphs.dart';
 import '../../domain/amount_entry.dart';
 import '../../domain/ledger_book.dart';
 import '../../domain/ledger_format.dart';
@@ -28,7 +27,6 @@ import '../ledger_ui.dart';
 import '../widgets/amount_keypad.dart';
 import '../widgets/ledger_segmented.dart';
 import '../widgets/wallet_chip_row.dart';
-import '../ledger_actions.dart';
 import 'budget_item_picker.dart';
 
 /// What the sheet saved (for the caller's undo toast).
@@ -107,12 +105,6 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
   TxDraft? _draft;
   AmountEntry _amount = const AmountEntry();
   AmountEntry? _received;
-
-  /// The stored (sent, received) amounts of the cross-currency transfer
-  /// being edited, until the user types a received amount or changes a
-  /// currency: editing what was sent then rescales what arrived at the
-  /// transfer's own rate.
-  (int, int)? _storedPair;
   _AmountField _field = _AmountField.main;
   bool _showCalendar = false;
   bool _tried = false;
@@ -140,13 +132,9 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
       final d = TxDraft.fromTx(existing);
       _draft = d;
       _amount = AmountEntry.exact(d.amountMilli, decimals: fmt.decimalsOf(book.currencyOfWallet(d.walletId!) ?? ''));
-      final fromCur = book.currencyOfWallet(existing.walletId) ?? '';
-      final toCur = existing.toWalletId == null ? '' : (book.currencyOfWallet(existing.toWalletId!) ?? '');
-      // Between two wallets of one currency the received amount is always
-      // the sent one (see TxDraft.resolvedToAmount).
-      if (existing.isTransfer && existing.toAmountMilli != null && existing.toWalletId != null && fromCur != toCur) {
+      if (existing.isTransfer && existing.toAmountMilli != null && existing.toWalletId != null) {
+        final toCur = book.currencyOfWallet(existing.toWalletId!) ?? '';
         _received = AmountEntry.exact(existing.toAmountMilli!, decimals: fmt.decimalsOf(toCur));
-        if (existing.amountMilli != 0) _storedPair = (existing.amountMilli.abs(), existing.toAmountMilli!.abs());
       }
       _note.text = d.note;
       return;
@@ -188,7 +176,6 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
         return;
       }
       setState(() {
-        _storedPair = null;
         _received = next.isEmpty ? null : next;
         _draft = d.copyWith(toAmountMilli: next.milli, clearToAmount: next.isEmpty || next.milli == 0);
       });
@@ -202,18 +189,6 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
     setState(() {
       _amount = next;
       _draft = d.copyWith(amountMilli: next.milli);
-      final pair = _storedPair;
-      if (pair != null && d.isTransfer) {
-        final decimals = fmt.decimalsOf(_currencyOf(book, d.toWalletId));
-        final received = TxDraft.rescaleReceived(
-          sentMilli: pair.$1,
-          receivedMilli: pair.$2,
-          newSentMilli: next.milli,
-          toDecimals: decimals,
-        );
-        _received = received == 0 ? null : AmountEntry.exact(received, decimals: decimals);
-        _draft = _draft!.copyWith(toAmountMilli: received, clearToAmount: received == 0);
-      }
     });
   }
 
@@ -238,7 +213,6 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
       next = other == null ? next.copyWith(clearToWallet: true) : next.copyWith(toWalletId: other.id);
     }
     setState(() {
-      if (_currencyOf(book, id) != _currencyOf(book, d.walletId)) _storedPair = null;
       _amount = amount;
       _draft = next;
     });
@@ -250,7 +224,6 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
     setState(() {
       if (changedCurrency) {
         _received = null;
-        _storedPair = null;
         _draft = d.copyWith(toWalletId: id, clearToAmount: true);
       } else {
         _draft = d.copyWith(toWalletId: id);
@@ -271,13 +244,7 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
 
   Future<void> _pickItem(LedgerBook book) async {
     final d = _draft!;
-    final picked = await LedgerActions.pickBudgetItem(
-      context,
-      ref,
-      book: book,
-      selected: d.budgetItemId,
-      today: _today,
-    );
+    final picked = await showBudgetItemPicker(context, book: book, selected: d.budgetItemId, today: _today);
     if (picked == null || !mounted) return;
     _set(picked == BudgetPick.none ? d.copyWith(clearBudgetItem: true) : d.copyWith(budgetItemId: picked));
   }
@@ -496,7 +463,7 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
       } else if (c == 0x2E) {
         out.write('\u066B');
       } else if (c == 0x2C) {
-        out.write(MoneyGlyphs.arabicGroup);
+        out.write('\u066C');
       } else {
         out.writeCharCode(c);
       }
@@ -662,7 +629,6 @@ class _TransactionSheetState extends ConsumerState<TransactionSheet> {
                   sfx: Sfx.toggleOff,
                   onTap: () => setState(() {
                     _received = null;
-                    _storedPair = null;
                     _draft = d.copyWith(clearToAmount: true);
                   }),
                 ),

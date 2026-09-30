@@ -231,7 +231,11 @@ class GoalsActions {
       note: values['note'] as String?,
     );
     if (result.reachedNow && context.mounted) {
-      Celebrate.burstFrom(context, kind: CelebrationKind.orbitalRing, color: context.tokens.metalGold);
+      Celebrate.burstFrom(
+        context,
+        kind: CelebrationKind.orbitalRing,
+        color: context.tokens.metalGold,
+      );
     }
     Fx.fire(result.reachedNow ? Sfx.levelUp : (withdraw ? Sfx.swipe : Sfx.complete));
     final label = result.reachedNow
@@ -803,7 +807,7 @@ class _MovePreview extends StatelessWidget {
           l.goalsBalanceAfter(texts.money(after, currency)),
           if (target > 0) l.goalsPercentOfTarget(texts.percent(progress)),
           if (wallet != null && wallet.currency.toUpperCase() != currency.toUpperCase() && amount > 0)
-            l.goalsWalletAmount(texts.money(rates.convertToMinor(amount, currency, wallet.currency), wallet.currency)),
+            l.goalsWalletAmount(texts.money(rates.convert(amount, currency, wallet.currency), wallet.currency)),
         ];
         final color = jar.jar.color == null ? t.accent : Color(jar.jar.color!);
         return _PreviewFrame(
@@ -900,10 +904,7 @@ class _DebtEditorPreview extends StatelessWidget {
     if (wallet == null || amount is! MoneyValue || amount.amountMilli <= 0) {
       line = l.goalsDebtNoWalletHint;
     } else {
-      final moved = texts.money(
-        rates.convertToMinor(amount.amountMilli, amount.currency, wallet.currency),
-        wallet.currency,
-      );
+      final moved = texts.money(rates.convert(amount.amountMilli, amount.currency, wallet.currency), wallet.currency);
       final name = texts.user(wallet.name);
       line = iOwe ? l.goalsDebtBorrowedInto(name, moved) : l.goalsDebtLentFrom(name, moved);
     }
@@ -914,7 +915,10 @@ class _DebtEditorPreview extends StatelessWidget {
           Icon(iOwe ? GoalsIcons.iOwe : GoalsIcons.owedToMe, color: color, size: 22),
           const SizedBox(width: Space.m),
           Expanded(
-            child: Text(line, style: text.bodySmall?.copyWith(color: wallet == null ? t.textSecondary : t.textPrimary)),
+            child: Text(
+              line,
+              style: text.bodySmall?.copyWith(color: wallet == null ? t.textSecondary : t.textPrimary),
+            ),
           ),
         ],
       ),
