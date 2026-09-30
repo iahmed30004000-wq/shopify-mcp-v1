@@ -11,7 +11,7 @@ void main() {
   DateTime d(int m, int day, [int y = 2026]) => DateTime(y, m, day);
 
   // Bidi isolates and marks are invisible; compare what is read.
-  String plain(String s) => s.replaceAll(RegExp('[⁦-⁩‎‏؜]'), '');
+  String plain(String s) => s.replaceAll(RegExp(r'[\u2066-\u2069\u200e\u200f\u061c]'), '');
 
   group('date ranges', () {
     test('one month: the month once, in each language\'s order', () {

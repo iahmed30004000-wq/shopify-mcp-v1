@@ -247,10 +247,11 @@ class GoalPaceCard extends StatelessWidget {
         return texts.weekly(u, perDay, needed: needed);
       }
 
+      // One short fact per line (never a wrapped sentence).
       final actualCaption = [
         ?weekly(s.actualPerDay),
         l.growthActualWindow(GrowthTexts.keepTogether(texts.days(s.paceWindow))),
-      ].join(l.growthSep);
+      ];
       final deadline = s.deadline;
       if (deadline == null) {
         children.add(
@@ -268,11 +269,11 @@ class GoalPaceCard extends StatelessWidget {
             ? l.growthRemaining(texts.amount(u, s.remaining))
             : texts.rate(u, s.neededPerDay ?? 0, needed: true);
         final neededCaption = overdue
-            ? l.growthOverdueBy(texts.days(s.daysOverdue))
+            ? [l.growthOverdueBy(texts.days(s.daysOverdue))]
             : [
                 ?weekly(s.neededPerDay ?? 0, needed: true),
                 l.growthNeededUntil(GrowthTexts.keepTogether(texts.date(deadline, today: today))),
-              ].join(l.growthSep);
+              ];
         children
           ..add(
             IntrinsicHeight(
@@ -363,11 +364,13 @@ class GoalPaceCard extends StatelessWidget {
 }
 
 class _RateBlock extends StatelessWidget {
-  const _RateBlock({required this.label, required this.value, required this.color, this.caption});
+  const _RateBlock({required this.label, required this.value, required this.color, this.caption = const []});
 
   final String label;
   final String value;
-  final String? caption;
+
+  /// Short facts, one per line.
+  final List<String> caption;
   final Color color;
 
   @override
@@ -376,7 +379,7 @@ class _RateBlock extends StatelessWidget {
     final text = Theme.of(context).textTheme;
     return Semantics(
       container: true,
-      label: [label, value, ?caption].join(', '),
+      label: [label, value, ...caption].join(', '),
       excludeSemantics: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -384,7 +387,8 @@ class _RateBlock extends StatelessWidget {
           Text(label, style: text.labelMedium),
           const SizedBox(height: Space.xxs),
           Text(value, style: text.titleMedium!.copyWith(color: color == t.textSecondary ? t.textPrimary : color)),
-          if (caption != null) Text(caption!, style: text.labelSmall, maxLines: 2),
+          const SizedBox(height: Space.xxs),
+          for (final c in caption) Text(c, style: text.labelSmall, maxLines: 2),
         ],
       ),
     );

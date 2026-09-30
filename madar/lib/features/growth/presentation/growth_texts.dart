@@ -147,34 +147,39 @@ class GrowthTexts {
   static String keepTogether(String s) => s.replaceAll(' ', '\u00A0');
 
   /// The one-line summary of where a goal stands (tiles and the card).
+  /// Amounts, rates and dates never break across lines ("٧٫٥ ساعة" stays
+  /// whole when the line wraps).
   String paceLine(GrowthGoal g) {
     final s = g.stats;
     final u = g.unit;
     final today = s.today;
     final deadline = s.deadline;
+    String left() => keepTogether(amount(u, s.remaining));
+    String pace(double perDay, {bool needed = false}) => keepTogether(rate(u, perDay, needed: needed));
+    String on(DateTime d) => keepTogether(date(d, today: today));
     switch (s.pace) {
       case GoalPace.completed:
-        return l.growthLineCompleted(keepTogether(date(s.completedOn ?? today, today: today)));
+        return l.growthLineCompleted(on(s.completedOn ?? today));
       case GoalPace.paused:
         return l.growthLinePaused;
       case GoalPace.overdue:
-        return l.growthLineOverdue(days(s.daysOverdue), amount(u, s.remaining));
+        return l.growthLineOverdue(keepTogether(days(s.daysOverdue)), left());
       case GoalPace.notStarted:
         if (deadline == null || s.neededPerDay == null) return l.growthLineFirstLog;
-        return l.growthLineStart(rate(u, s.neededPerDay!, needed: true), keepTogether(date(deadline, today: today)));
+        return l.growthLineStart(pace(s.neededPerDay!, needed: true), on(deadline));
       case GoalPace.noDeadline:
         if (s.actualPerDay <= 0) return l.growthLineQuiet;
         final finish = s.projectedFinish;
         return finish == null
-            ? l.growthLineOpen(rate(u, s.actualPerDay))
-            : l.growthLineOpenFinish(rate(u, s.actualPerDay), keepTogether(date(finish, today: today)));
+            ? l.growthLineOpen(pace(s.actualPerDay))
+            : l.growthLineOpenFinish(pace(s.actualPerDay), on(finish));
       case GoalPace.ahead:
-        if (s.daysLeft == 1) return l.growthLineDueToday(amount(u, s.remaining));
-        return l.growthLineAhead(rate(u, s.actualPerDay));
+        if (s.daysLeft == 1) return l.growthLineDueToday(left());
+        return l.growthLineAhead(pace(s.actualPerDay));
       case GoalPace.onTrack:
       case GoalPace.behind:
-        if (s.daysLeft == 1) return l.growthLineDueToday(amount(u, s.remaining));
-        return l.growthLineNeed(rate(u, s.neededPerDay!, needed: true), keepTogether(date(deadline!, today: today)));
+        if (s.daysLeft == 1) return l.growthLineDueToday(left());
+        return l.growthLineNeed(pace(s.neededPerDay!, needed: true), on(deadline!));
     }
   }
 

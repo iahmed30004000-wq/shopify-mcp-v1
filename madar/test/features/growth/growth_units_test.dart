@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:madar/core/db/database.dart';
 import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
+import 'package:madar/features/growth/domain/growth_goal.dart';
 import 'package:madar/features/growth/domain/growth_units.dart';
 import 'package:madar/features/growth/presentation/growth_texts.dart';
 
@@ -92,6 +94,38 @@ void main() {
       final t = texts('ar');
       expect(t.amount(const GrowthUnit.custom('episodes'), 3), '٣ \u2068episodes\u2069');
       expect(t.amount(GrowthUnit.none, 42), '٤٢');
+    });
+
+    test('pace lines never split an amount, a rate or a date across lines', () {
+      const nbsp = '\u00A0';
+      final today = DateTime(2026, 9, 28);
+      final coding = GrowthGoal.of(
+        LearningGoalRow(
+          id: 'g',
+          createdAt: DateTime(2026, 9, 1),
+          updatedAt: DateTime(2026, 9, 1),
+          sortOrder: 0,
+          name: 'g',
+          unit: 'hours',
+          target: 40,
+          initial: 0,
+          deadline: DateTime(2026, 9, 25),
+          active: true,
+        ),
+        [
+          GoalLogRow(
+            id: 'l',
+            createdAt: DateTime(2026, 9, 20),
+            updatedAt: DateTime(2026, 9, 20),
+            goalId: 'g',
+            amount: 32.5,
+            at: DateTime(2026, 9, 20),
+          ),
+        ],
+        today: today,
+      );
+      expect(texts('ar').paceLine(coding), 'فات الموعد منذ ٣$nbspأيام، تبقّى ٧٫٥$nbspساعة');
+      expect(texts('en').paceLine(coding), '3${nbsp}days overdue · 7.5${nbsp}hours to go');
     });
 
     test('signed amounts', () {
