@@ -102,6 +102,14 @@ def check(ok, msg):
     return ok
 
 
+def expect(ok, msg):
+    """Per-item check: only failures are logged (summaries use check())."""
+    if not ok:
+        log('FAIL ' + msg)
+        FAILED.append(msg)
+    return ok
+
+
 def fetch(name, cache):
     src = SOURCES[name]
     path = os.path.join(cache, name + '.src')
@@ -289,6 +297,7 @@ def build_words(cache, wf, extra_curated):
 
     # ---- Word Search themes
     themes = []
+    f0 = len(FAILED)
     for tid, ar, en, block in W.THEMES:
         words, keys = [], set()
         for v in words_of(block):
@@ -297,9 +306,10 @@ def build_words(cache, wf, extra_curated):
                 continue
             keys.add(fold(p))
             words.append([p, v])
-        check(len(words) >= 8, f'theme {tid} has >= 8 words ({len(words)})')
-        check(not any(wf.is_unsuitable(p) for p, _ in words), f'theme {tid} has no filtered word')
+        expect(len(words) >= 8, f'theme {tid} has >= 8 words ({len(words)})')
+        expect(not any(wf.is_unsuitable(p) for p, _ in words), f'theme {tid} has no filtered word')
         themes.append({'id': tid, 'title': {'ar': ar, 'en': en}, 'words': words})
+    check(len(FAILED) == f0, 'themes: >= 8 words each, none filtered')
     log(f'INFO themes: {len(themes)}, words: {sum(len(t["words"]) for t in themes)}')
     return lines, answers, themes, wiki
 
@@ -485,6 +495,191 @@ def build_quiz(cache):
     }
 
 
+# --------------------------------------------------------------------------
+# Capitals & flags
+# --------------------------------------------------------------------------
+CONTINENTS = ['africa', 'asia', 'europe', 'north_america', 'south_america', 'oceania']
+FLAG_TYPES = {
+    'fill': {'c'}, 'hs': {'c'}, 'vs': {'c'}, 'rect': {'c', 'x', 'y', 'w', 'h'}, 'poly': {'c', 'p'},
+    'circle': {'c', 'x', 'y', 'r'}, 'ring': {'c', 'x', 'y', 'r', 'ir'}, 'crescent': {'c', 'x', 'y', 'r', 'dx', 'dy', 'ir'},
+    'star': {'c', 'x', 'y', 'r'}, 'sun': {'c', 'x', 'y', 'r', 'n', 'ir'}, 'pentagram': {'c', 'x', 'y', 'r', 'sw'},
+    'cross': {'c', 'x', 'y', 'w'}, 'plus': {'c', 'x', 'y', 's', 'w'}, 'saltire': {'c', 'w'},
+    'band': {'c', 'x1', 'y1', 'x2', 'y2', 'w'}, 'uj': {'x', 'y', 'w', 'h'}, 'text': {'c', 'x', 'y', 's', 'v'},
+    'emblem': {'c', 'x', 'y', 'r', 'shape'}, 'wheel': {'c', 'x', 'y', 'r', 'n', 'sw'},
+}
+EMBLEMS = {'disc', 'oval', 'shield', 'eagle', 'bird', 'crown', 'tree'}
+HEX = re.compile(r'^#[0-9A-Fa-f]{6}$')
+
+
+def flag_problems(f):
+    probs = []
+    w, h = f['ratio']
+    if not (w > 0 and h > 0 and 0.5 <= w / h <= 3):
+        probs.append(f'ratio {f["ratio"]}')
+    if not f['e']:
+        probs.append('no elements')
+    for e in f['e']:
+        t = e.get('t')
+        if t not in FLAG_TYPES:
+            probs.append(f'type {t}')
+            continue
+        missing = FLAG_TYPES[t] - set(e)
+        if missing:
+            probs.append(f'{t} missing {missing}')
+        cols = e.get('c')
+        cols = cols if isinstance(cols, list) else ([cols] if cols is not None else [])
+        if any(not HEX.match(c) for c in cols):
+            probs.append(f'{t} colour {cols}')
+        if t in ('hs', 'vs') and 'w' in e and len(e['w']) != len(e['c']):
+            probs.append(f'{t} weights')
+        if t == 'poly' and len(e['p']) < 3:
+            probs.append('poly < 3 points')
+        if t == 'emblem' and e['shape'] not in EMBLEMS:
+            probs.append(f'emblem {e["shape"]}')
+        for key in ('x', 'y', 'x1', 'x2', 'y1', 'y2'):
+            if key in e and not -0.05 <= e[key] <= 1.05:
+                probs.append(f'{t}.{key}={e[key]}')
+        for pt in e.get('p', []):
+            if not (-0.1 <= pt[0] <= 1.1 and -0.1 <= pt[1] <= 1.1):
+                probs.append(f'poly point {pt}')
+    return probs
+
+
+def build_countries():
+    import content_countries as Cn
+    out, isos, names_ar, names_en = [], set(), set(), set()
+    f0 = len(FAILED)
+    caps_ar, caps_en = collections.Counter(), collections.Counter()
+    status = collections.Counter()
+    for row in Cn.COUNTRIES:
+        iso, ar, en, cap_ar, cap_en, cont, st, fl, extra = row
+        where = f'country {iso}'
+        expect(re.match(r'^[A-Z]{2}$', iso) is not None and iso not in isos, f'{where}: unique ISO code')
+        expect(ar not in names_ar and en not in names_en, f'{where}: unique names')
+        expect(cont in CONTINENTS and st in ('member', 'observer'), f'{where}: continent/status')
+        expect(bool(ar and en and cap_ar and cap_en), f'{where}: names and capital present')
+        probs = flag_problems(fl)
+        expect(not probs, f'{where}: flag spec valid {probs}')
+        isos.add(iso)
+        names_ar.add(ar)
+        names_en.add(en)
+        status[st] += 1
+        item = {
+            'iso': iso, 'name': {'ar': ar, 'en': en}, 'capital': {'ar': cap_ar, 'en': cap_en},
+            'continent': cont, 'status': st, 'flag': fl,
+        }
+        if extra.get('alt'):
+            item['altCapitals'] = [{'ar': a, 'en': b} for a, b in extra['alt']]
+        if extra.get('disputed'):
+            item['capitalDisputed'] = True
+        else:
+            caps_ar[cap_ar] += 1
+            caps_en[cap_en] += 1
+        if extra.get('review'):
+            item['review'] = True
+        if extra.get('note'):
+            item['note'] = extra['note']
+        out.append(item)
+    check(len(FAILED) == f0, 'countries: unique codes / names, known continents, valid flag specs')
+    check(status['member'] == 193, f'193 UN member states ({status["member"]})')
+    check(status['observer'] == 2, f'2 UN observer states ({status["observer"]})')
+    dup = [c for c, n in list(caps_ar.items()) + list(caps_en.items()) if n > 1]
+    check(not dup, f'undisputed capitals are unique ({dup})')
+    log(f'INFO countries: {len(out)} ({dict(status)}), by continent '
+        f'{dict(collections.Counter(c["continent"] for c in out))}, flag elements '
+        f'{sum(len(c["flag"]["e"]) for c in out)}')
+    return {
+        'version': 1,
+        'about': 'UN member and observer states: names, capitals, continents and code-drawable flag specs '
+                 '(see lib/features/cinema/rules/words/geo/flag_spec.dart). Written for Madar; facts as of '
+                 '2026-09. Entries marked "review" need a human check; disputed capitals are excluded from '
+                 'capital questions.',
+        'countries': out,
+    }
+
+
+# --------------------------------------------------------------------------
+# Typing race passages
+# --------------------------------------------------------------------------
+def build_typing(wf):
+    import content_typing as Ty
+    ayat, meta = load_quran()
+    out, seen = [], set()
+    f0 = len(FAILED)
+
+    def add(kind, lvl, text=None, **extra):
+        key = text if text is not None else json.dumps(extra.get('ref'))
+        expect(key not in seen, f'typing: unique passage {key[:40]}')
+        seen.add(key)
+        pid = f'{kind[:1]}-{hashlib.sha1((kind + key).encode("utf-8")).hexdigest()[:8]}'
+        item = {'id': pid, 'kind': kind, 'lvl': lvl}
+        if text is not None:
+            item['text'] = text
+        item.update(extra)
+        out.append(item)
+
+    for text, lvl in Ty.ORIGINAL:
+        bad = [w for w in re.findall(r'[ء-ي]+', plain(text)) if wf.is_blocked(w)]
+        expect(not bad, f'typing original has no blocked word {bad}')
+        add('original', lvl, text)
+    for text, lvl in Ty.VOWELLED:
+        expect(plain(text) != text, f'vowelled passage carries tashkeel: {text[:30]}')
+        add('vowelled', lvl, text)
+    for text, by_ar, by_en, lvl in Ty.SAYINGS:
+        add('saying', lvl, text, by={'ar': by_ar, 'en': by_en})
+    for s, a0, a1, lvl in Ty.QURAN:
+        ok = all((s, a) in ayat for a in range(a0, a1 + 1)) and (a0 > 1 or s == 1)
+        expect(ok, f'typing Quran {s}:{a0}-{a1} exists and avoids a basmala-prefixed ayah')
+        letters = sum(len(skeleton(ayat[(s, a)])) for a in range(a0, a1 + 1))
+        expect(letters <= 420, f'typing Quran {s}:{a0}-{a1} is short enough ({letters} letters)')
+        name_ar, name_en = meta['suras'][s - 1][3], meta['suras'][s - 1][4]
+        span = f'{a0}' if a0 == a1 else f'{a0}-{a1}'
+        span_ar = span.translate(AR_DIGITS)
+        add('quran', lvl, ref={'s': s, 'a': a0, 'to': a1},
+            cite={'ar': f'سورة {name_ar}، {"الآية" if a0 == a1 else "الآيات"} {span_ar}',
+                  'en': f'Quran {s}:{span} ({name_en})'})
+    check(len(FAILED) == f0, 'typing passages: unique, clean, Quran references valid and short')
+    kinds = collections.Counter(p['kind'] for p in out)
+    log(f'INFO typing passages: {len(out)} {dict(kinds)}, by level '
+        f'{dict(sorted(collections.Counter(p["lvl"] for p in out).items()))}')
+    return {
+        'version': 1,
+        'about': 'Typing Race passages. original / vowelled: written for Madar. saying: traditional Arabic '
+                 'proverbs and verses of poets who died before 1950 (public domain). quran: a reference only – '
+                 'the app shows the text verbatim from assets/quran/quran-uthmani.txt (Tanzil, never altered).',
+        'passages': out,
+    }
+
+
+# --------------------------------------------------------------------------
+# Crossword clue bank
+# --------------------------------------------------------------------------
+def build_crossword(wf):
+    import content_crossword as Cw
+    out, keys = [], set()
+    f0 = len(FAILED)
+    for ans, clue, lvl in Cw.CLUES:
+        p = plain(ans)
+        expect(is_game_word(p) and 3 <= len(p) <= 8, f'crossword answer {ans}: 3–8 plain letters')
+        expect(fold(p) not in keys, f'crossword answer {ans}: unique')
+        expect(not wf.is_blocked(p), f'crossword answer {ans}: not blocked')
+        expect(bool(clue.strip()) and lvl in (1, 2, 3), f'crossword answer {ans}: clue and level')
+        expect(fold(p) not in fold(plain(clue)).replace(' ', ''), f'crossword clue for {ans} does not give the answer away')
+        keys.add(fold(p))
+        out.append({'a': p, 'd': ans, 'c': clue, 'l': lvl})
+    check(len(FAILED) == f0, 'crossword clues: unique, 3–8 letters, not blocked, clue does not contain the answer')
+    check(len(out) >= 300, f'at least 300 crossword clue/answer pairs ({len(out)})')
+    lv = collections.Counter(c['l'] for c in out)
+    ln = collections.Counter(len(c['a']) for c in out)
+    log(f'INFO crossword clues: {len(out)}, by level {dict(sorted(lv.items()))}, by length {dict(sorted(ln.items()))}')
+    return {
+        'version': 1,
+        'about': 'Crossword clue bank written for Madar: a = answer (plain letters), d = vowelled display form, '
+                 'c = Arabic clue, l = level (1 easy, 2 medium, 3 hard).',
+        'clues': out,
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--cache', default=os.path.join(tempfile.gettempdir(), 'madar-games-cache'))
@@ -492,7 +687,8 @@ def main():
     os.makedirs(args.cache, exist_ok=True)
 
     wf, filter_obj = build_filter(args.cache)
-    lex_lines, answers, themes, wiki = build_words(args.cache, wf, {})
+    crossword = build_crossword(wf)
+    lex_lines, answers, themes, wiki = build_words(args.cache, wf, {c['a']: c['d'] for c in crossword['clues']})
 
     write('arabic_lexicon.txt', '\n'.join(lex_lines) + '\n')
     write_json('arabic_word_filter.json', filter_obj)
@@ -502,7 +698,10 @@ def main():
         'answers': {str(n): lst for n, lst in answers.items()},
     })
     write_json('word_search_themes.json', {'version': 1, 'themes': themes})
+    write_json('crossword_clues.json', crossword)
     write_json('islamic_quiz.json', build_quiz(args.cache))
+    write_json('countries.json', build_countries())
+    write_json('typing_passages.json', build_typing(wf))
 
     log(f'RESULT {"PASS" if not FAILED else "FAIL"} ({len(FAILED)} failed checks)')
     with open(os.path.join(HERE, 'verification_log.txt'), 'w', encoding='utf-8') as f:

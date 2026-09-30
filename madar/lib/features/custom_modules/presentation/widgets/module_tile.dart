@@ -80,14 +80,14 @@ class ModuleTile extends ConsumerWidget {
               start: 0,
               end: 0,
               bottom: 0,
-              height: 30,
+              height: 34,
               child: Opacity(
-                opacity: 0.55,
+                opacity: 0.9,
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(bottom: Radius.circular(t.radiusL)),
                   child: LayoutBuilder(
                     builder: (context, box) =>
-                        ModuleSparkline(values: summary.sparkline, color: c.base, width: box.maxWidth, height: 30),
+                        ModuleSparkline(values: summary.sparkline, color: c.base, width: box.maxWidth, height: 34, line: false),
                   ),
                 ),
               ),

@@ -243,12 +243,22 @@ class ModuleBadge extends StatelessWidget {
 /// A tiny area sparkline of daily values, oldest → newest in the reading
 /// direction (newest at the reading end).
 class ModuleSparkline extends StatelessWidget {
-  const ModuleSparkline({super.key, required this.values, required this.color, this.width = 64, this.height = 26});
+  const ModuleSparkline({
+    super.key,
+    required this.values,
+    required this.color,
+    this.width = 64,
+    this.height = 26,
+    this.line = true,
+  });
 
   final List<double> values;
   final Color color;
   final double width;
   final double height;
+
+  /// Draw the stroke and today's dot (false: a soft filled tide only).
+  final bool line;
 
   @override
   Widget build(BuildContext context) {
@@ -257,18 +267,19 @@ class ModuleSparkline extends StatelessWidget {
       child: SizedBox(
         width: width,
         height: height,
-        child: CustomPaint(painter: _SparkPainter(values: values, color: color, rtl: rtl)),
+        child: CustomPaint(painter: _SparkPainter(values: values, color: color, rtl: rtl, line: line)),
       ),
     );
   }
 }
 
 class _SparkPainter extends CustomPainter {
-  _SparkPainter({required this.values, required this.color, required this.rtl});
+  _SparkPainter({required this.values, required this.color, required this.rtl, required this.line});
 
   final List<double> values;
   final Color color;
   final bool rtl;
+  final bool line;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -282,13 +293,13 @@ class _SparkPainter extends CustomPainter {
       return Offset(x, y);
     }
 
-    final line = Path()..moveTo(at(0).dx, at(0).dy);
+    final stroke = Path()..moveTo(at(0).dx, at(0).dy);
     for (var i = 1; i < n; i++) {
       final p0 = at(i - 1), p1 = at(i);
       final mid = (p0.dx + p1.dx) / 2;
-      line.cubicTo(mid, p0.dy, mid, p1.dy, p1.dx, p1.dy);
+      stroke.cubicTo(mid, p0.dy, mid, p1.dy, p1.dx, p1.dy);
     }
-    final area = Path.from(line)
+    final area = Path.from(stroke)
       ..lineTo(at(n - 1).dx, size.height)
       ..lineTo(at(0).dx, size.height)
       ..close();
@@ -298,11 +309,12 @@ class _SparkPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [color.withValues(alpha: 0.32), color.withValues(alpha: 0)],
+          colors: [color.withValues(alpha: line ? 0.32 : 0.2), color.withValues(alpha: 0)],
         ).createShader(Offset.zero & size),
     );
+    if (!line) return;
     canvas.drawPath(
-      line,
+      stroke,
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.8
@@ -315,7 +327,8 @@ class _SparkPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_SparkPainter old) => old.values != values || old.color != color || old.rtl != rtl;
+  bool shouldRepaint(_SparkPainter old) =>
+      old.values != values || old.color != color || old.rtl != rtl || old.line != line;
 }
 
 /// A section heading inside Custom Modules pages: brass title, optional

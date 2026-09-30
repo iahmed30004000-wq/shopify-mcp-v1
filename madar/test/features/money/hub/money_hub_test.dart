@@ -8,6 +8,7 @@
 // world has landed. The hub's small decisions are pure.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/open.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
@@ -66,13 +67,15 @@ Future<void> _reveal(WidgetTester tester, Finder finder) async {
 }
 
 /// A tool tile of the grid, by its semantics ("title. hint").
-Finder _tool(String title) => find.bySemanticsLabel(RegExp('^${RegExp.escape(title)}\\. '));
+Finder _tool(String title) =>
+    find.descendant(of: find.byType(MoneyTools), matching: find.bySemanticsLabel(RegExp('^${RegExp.escape(title)}\\. ')));
 
 String _netWorthText(WidgetTester tester) =>
     tester.widget<Text>(find.byKey(const ValueKey('money-net-worth'))).data!;
 
 void main() {
   group('pure', () {
+    setUpAll(initializeDateFormatting);
     late MadarDatabase db;
     late Repositories repos;
     setUp(() async {
@@ -162,15 +165,17 @@ void main() {
       const enFmt = MadarFormatter(languageCode: 'en');
       const arFmt = MadarFormatter();
       const reminders = GoalsReminderSettings();
-      expect(MoneySettingsSummary.reminders(en, enFmt, reminders), '1 day before and on the day · at 9:00 AM');
+      final nine = enFmt.formatClock(9, 0);
+      expect(nine, contains('9:00'));
+      expect(MoneySettingsSummary.reminders(en, enFmt, reminders), '1 day before and on the day · at $nine');
       expect(MoneySettingsSummary.reminders(ar, arFmt, reminders), startsWith('قبل يوم وفي يومه · الساعة'));
       expect(
         MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 0)),
-        'On the due day · at 9:00 AM',
+        'On the due day · at $nine',
       );
       expect(
         MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 3, onDueDay: false)),
-        '3 days before · at 9:00 AM',
+        '3 days before · at $nine',
       );
       expect(MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(enabled: false)), 'Off');
       expect(MoneySettingsSummary.reminders(en, enFmt, reminders.copyWith(leadDays: 0, onDueDay: false)), 'Off');
@@ -270,8 +275,9 @@ void main() {
     expect(text, startsWith('٢٬١٩٠٫٠٠٠'));
     expect(text, contains('د.أ'));
     final l = lookupL10n(const Locale('ar'));
-    final wallets = find.text(l.moneyHubPartWallets);
-    final jars = find.text(l.moneyHubPartJars);
+    final card = find.byType(MoneyNetWorthCard);
+    final wallets = find.descendant(of: card, matching: find.text(l.moneyHubPartWallets));
+    final jars = find.descendant(of: card, matching: find.text(l.moneyHubPartJars));
     // Two by two: wallets at the start (right), jars beside it.
     expect(tester.getTopRight(wallets).dx, greaterThan(tester.getTopRight(jars).dx));
     await tester.pump(const Duration(seconds: 6));

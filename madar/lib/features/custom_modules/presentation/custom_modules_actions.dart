@@ -152,7 +152,6 @@ abstract final class CustomModulesActions {
   static Future<void> clearDone(BuildContext context, WidgetRef ref, ModuleDefinition m) async {
     final tx = CustomTexts.of(context);
     final overlay = _overlay(context);
-    Fx.fire(Sfx.delete);
     final undo = await _service(ref).clearDone(m.id);
     _toast(overlay, UndoableAction(label: tx.l.cmodToastCleared, undo: undo));
   }

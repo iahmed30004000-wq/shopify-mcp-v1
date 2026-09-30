@@ -395,6 +395,7 @@ class _EntrySheetState extends State<EntrySheet> {
           style: MadarTypography.numerals(t, size: 17),
           decoration: kitInputDecoration(
             context,
+            hint: f.unit,
             error: error,
             suffix: f.unit,
             suffixIcon: whole ? _Stepper(onStep: (d) => _step(f, d, tx)) : null,
@@ -523,7 +524,7 @@ class _EntrySheetState extends State<EntrySheet> {
                   label: o.label,
                   selected: v.contains(o.id),
                   showCheck: true,
-                  onTap: () => _set(f.id, v.contains(o.id) ? [...v]..remove(o.id) : [...v, o.id]),
+                  onTap: () => _set(f.id, v.contains(o.id) ? ([...v]..remove(o.id)) : [...v, o.id]),
                 ),
           ],
         );

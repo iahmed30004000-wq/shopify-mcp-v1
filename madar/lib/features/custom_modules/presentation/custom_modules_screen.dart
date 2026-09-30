@@ -164,8 +164,8 @@ class _Hero extends ConsumerWidget {
     final tx = CustomTexts.of(context);
     final text = Theme.of(context).textTheme;
     final today = summaries.fold<int>(0, (n, s) => n + (s.module.isTracker ? s.todayCount : 0));
-    final checked = summaries.where((s) => s.checkedToday).length;
-    final oneTap = summaries.where((s) => s.module.quickEntry != null).length;
+    final trackers = summaries.where((s) => s.module.isTracker).length;
+    final logged = summaries.where((s) => s.module.isTracker && s.todayCount > 0).length;
     return GlassCard(
       borderRadius: BorderRadius.circular(t.radiusXL),
       padding: const EdgeInsets.all(Space.l),
@@ -178,12 +178,12 @@ class _Hero extends ConsumerWidget {
                 Text(tx.modules(summaries.length), style: text.headlineSmall!.copyWith(color: t.textPrimary)),
                 const SizedBox(height: Space.xs),
                 Text(tx.loggedToday(today), style: text.bodyMedium!.copyWith(color: t.textSecondary)),
-                if (oneTap > 0) ...[
+                if (trackers > 0) ...[
                   const SizedBox(height: Space.m),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(99),
                     child: LinearProgressIndicator(
-                      value: oneTap == 0 ? 0 : checked / oneTap,
+                      value: logged / trackers,
                       minHeight: 5,
                       backgroundColor: t.glassBorder,
                       valueColor: AlwaysStoppedAnimation(t.gold),

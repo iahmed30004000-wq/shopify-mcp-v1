@@ -176,8 +176,9 @@ class CustomTexts implements CustomReminderTexts, ModuleExportTexts, ModuleValue
     digits: fmt.arabicIndic ? MoneyDigits.arabicIndic : MoneyDigits.western,
   );
 
+  /// "٤/٥" (the app fonts have no star glyph: rows draw star icons).
   @override
-  String rating(int stars, int max) => '${'★' * stars}${'☆' * (max - stars).clamp(0, 10)}';
+  String rating(int stars, int max) => '${count(stars)}/${count(max)}';
 
   @override
   String checkbox(bool value) => value ? l.cmodChecked : l.cmodUnchecked;
