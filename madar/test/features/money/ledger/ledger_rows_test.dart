@@ -12,7 +12,7 @@ import 'ledger_fixtures.dart';
 void main() {
   final ar = lookupL10n(const Locale('ar'));
   final en = lookupL10n(const Locale('en'));
-  const fsi = '⁨', lri = '⁦', rli = '⁧', pdi = '⁩';
+  const fsi = '\u2068', lri = '\u2066', rli = '\u2067', pdi = '\u2069';
   final book = sampleBook();
   final xfer = book.transaction('xfer')!; // Bank → Shop
 
