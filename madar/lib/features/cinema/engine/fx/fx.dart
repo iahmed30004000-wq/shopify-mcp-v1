@@ -16,3 +16,5 @@ export 'film_look.dart';
 export 'film_stock_shader.dart';
 export 'reel_film_fx.dart';
 export 'test_card_painter.dart';
+export 'intertitle_painter.dart';
+export 'line_boil.dart';

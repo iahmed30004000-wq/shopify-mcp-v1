@@ -30,7 +30,7 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 | Film Reel Engine (Phase 7) | lib/features/cinema/engine etc., shaders/cinema | RUNNING (phase7_engine.js, wf_4495c71d-7d5) |
 | Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
 | AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | RUNNING (wf_089d5589-460) |
-| Global search | lib/features/search, d2_search.json | RUNNING (wf_d2217f93-49b) |
+| Global search | lib/features/search, d2_search.json | built (report in scratchpad/phase9_packages.md); two-lens review RUNNING (wf_182fdfeb-068); needs route + opener + launcher |
 | Notification center | lib/features/notification_center, d3_notifications.json | built (report in scratchpad/phase9_packages.md); safety review RUNNING (wf_4ddbde81-dc2); needs wiring (gate, AppServices, links, route) |
 
 ## Owner decisions
