@@ -38,6 +38,8 @@ void main() {
       expect(find.text('بلغت الهدف'), findsOneWidget);
       // Archived jars stay folded away.
       expect(find.text('دورة لغة'), findsNothing);
+      await tester.ensureVisible(find.text('إظهار'));
+      await tester.pump(const Duration(milliseconds: 300));
       await tester.tap(find.text('إظهار'));
       await settleGoals(tester);
       expect(find.text('دورة لغة'), findsOneWidget);

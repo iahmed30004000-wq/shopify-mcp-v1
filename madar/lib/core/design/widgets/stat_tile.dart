@@ -71,15 +71,20 @@ class StatTile extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Flexible(
-                child: Text(
-                  value,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: MadarTypography.numerals(
-                    t,
-                    size: 26,
-                    color: t.textPrimary,
-                  ).copyWith(fontWeight: FontWeight.w600, height: 1.1),
+                // A value is never cut ("112.50 …" hid the currency at a
+                // large text size): it shrinks to fit instead.
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    value,
+                    maxLines: 1,
+                    style: MadarTypography.numerals(
+                      t,
+                      size: 26,
+                      color: t.textPrimary,
+                    ).copyWith(fontWeight: FontWeight.w600, height: 1.1),
+                  ),
                 ),
               ),
               if (unit != null) ...[

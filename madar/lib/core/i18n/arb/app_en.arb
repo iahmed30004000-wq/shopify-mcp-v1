@@ -13317,6 +13317,250 @@
   "@goalsDebtNoWalletHint": {
     "description": "Debt editor preview without a wallet"
   },
+  "moneyHubNetWorthTitle": "Net worth",
+  "@moneyHubNetWorthTitle": {
+    "description": "Money page: title of the net worth card (wallets + jars + owed to you − you owe, in the base currency)"
+  },
+  "moneyHubNetWorthIn": "in {code}",
+  "@moneyHubNetWorthIn": {
+    "description": "Money page: the base currency the net worth is shown in",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubNetWorthEmpty": "Add your first wallet to see your net worth here, in your base currency.",
+  "@moneyHubNetWorthEmpty": {
+    "description": "Money page: net worth card on a fresh install"
+  },
+  "moneyHubPartWallets": "Wallets",
+  "@moneyHubPartWallets": {
+    "description": "Money page: part of the net worth – the wallets' balances"
+  },
+  "moneyHubPartJars": "Jars",
+  "@moneyHubPartJars": {
+    "description": "Money page: part of the net worth – money in savings jars"
+  },
+  "moneyHubPartOwedToMe": "Owed to you",
+  "@moneyHubPartOwedToMe": {
+    "description": "Money page: part of the net worth – open debts owed to the user"
+  },
+  "moneyHubPartIOwe": "You owe",
+  "@moneyHubPartIOwe": {
+    "description": "Money page: part of the net worth – open debts the user owes (subtracted)"
+  },
+  "moneyHubNetWorthSemantics": "Net worth {total}: wallets {wallets}, jars {jars}, owed to you {owed}, you owe {owe}",
+  "@moneyHubNetWorthSemantics": {
+    "description": "Money page: screen-reader summary of the net worth card",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "wallets": {
+        "type": "String"
+      },
+      "jars": {
+        "type": "String"
+      },
+      "owed": {
+        "type": "String"
+      },
+      "owe": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubRatesAction": "Currencies",
+  "@moneyHubRatesAction": {
+    "description": "Money page: button on the net worth card opening currencies and rates"
+  },
+  "moneyHubQuickTitle": "Add an entry",
+  "@moneyHubQuickTitle": {
+    "description": "Money page: title of the quick add row (expense, income, transfer)"
+  },
+  "moneyHubAddExpenseHint": "Add an expense",
+  "@moneyHubAddExpenseHint": {
+    "description": "Money page: screen-reader label of the quick expense button"
+  },
+  "moneyHubAddIncomeHint": "Add income",
+  "@moneyHubAddIncomeHint": {
+    "description": "Money page: screen-reader label of the quick income button"
+  },
+  "moneyHubAddTransferHint": "Move money between wallets",
+  "@moneyHubAddTransferHint": {
+    "description": "Money page: screen-reader label of the quick transfer button"
+  },
+  "moneyHubWalletsTitle": "Your wallets",
+  "@moneyHubWalletsTitle": {
+    "description": "Money page: section of the wallets summary"
+  },
+  "moneyHubLedgerAction": "Ledger",
+  "@moneyHubLedgerAction": {
+    "description": "Money page: section action opening the ledger"
+  },
+  "moneyHubPlanTitle": "This month's plan",
+  "@moneyHubPlanTitle": {
+    "description": "Money page: section of the budget status (plan vs spent, warnings)"
+  },
+  "moneyHubBudgetAction": "Budget",
+  "@moneyHubBudgetAction": {
+    "description": "Money page: section action opening the budget"
+  },
+  "moneyHubDuesTitle": "Dues & savings",
+  "@moneyHubDuesTitle": {
+    "description": "Money page: section of upcoming dues (bills, debts) and savings jars"
+  },
+  "moneyHubGoalsAction": "All",
+  "@moneyHubGoalsAction": {
+    "description": "Money page: section action opening savings, debts and bills"
+  },
+  "moneyHubToolsTitle": "Money tools",
+  "@moneyHubToolsTitle": {
+    "description": "Money page: section of links to the money screens"
+  },
+  "moneyHubToolLedger": "Ledger",
+  "@moneyHubToolLedger": {
+    "description": "Money tool: the ledger (wallets, balances, recent entries)"
+  },
+  "moneyHubToolLedgerHint": "Wallets, balances and recent entries",
+  "@moneyHubToolLedgerHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolTransactions": "Entries",
+  "@moneyHubToolTransactions": {
+    "description": "Money tool: every transaction"
+  },
+  "moneyHubToolTransactionsHint": "Every entry, searchable and filtered",
+  "@moneyHubToolTransactionsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBudget": "Budget",
+  "@moneyHubToolBudget": {
+    "description": "Money tool: the nested budget"
+  },
+  "moneyHubToolBudgetHint": "The nested plan and spending against it",
+  "@moneyHubToolBudgetHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolJars": "Savings jars",
+  "@moneyHubToolJars": {
+    "description": "Money tool: savings jars"
+  },
+  "moneyHubToolJarsHint": "Targets, deadlines and deposits",
+  "@moneyHubToolJarsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolDebts": "Debts",
+  "@moneyHubToolDebts": {
+    "description": "Money tool: debts (I owe / owed to me)"
+  },
+  "moneyHubToolDebtsHint": "What you owe and are owed, with due dates",
+  "@moneyHubToolDebtsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBills": "Bills",
+  "@moneyHubToolBills": {
+    "description": "Money tool: recurring obligations"
+  },
+  "moneyHubToolBillsHint": "Recurring bills; “Paid” moves the next due date",
+  "@moneyHubToolBillsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubMoonOpenWallet": "Open wallet",
+  "@moneyHubMoonOpenWallet": {
+    "description": "Wallet moon sheet: button opening the wallet's screen"
+  },
+  "moneyHubSettingsSection": "Money",
+  "@moneyHubSettingsSection": {
+    "description": "Settings: section of the money preferences"
+  },
+  "moneyHubSettingsSectionHint": "Currencies, weeks per month, the week's start and due reminders",
+  "@moneyHubSettingsSectionHint": {
+    "description": "Settings: subtitle of the money section"
+  },
+  "moneyHubSettingsCurrencies": "Base currency & rates",
+  "@moneyHubSettingsCurrencies": {
+    "description": "Settings › Money: entry opening the currencies and manual exchange rates"
+  },
+  "moneyHubSettingsCurrencyCount": "{count, plural, =1{1 currency} other{{n} currencies}}",
+  "@moneyHubSettingsCurrencyCount": {
+    "description": "Settings › Money: how many currencies are set up",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeeks": "Weeks per month",
+  "@moneyHubSettingsWeeks": {
+    "description": "Settings › Money: weeks per month (weekly ↔ monthly budget conversion)"
+  },
+  "moneyHubSettingsWeeksSummary": "{weeks} · converts weekly and monthly amounts",
+  "@moneyHubSettingsWeeksSummary": {
+    "description": "Settings › Money: the weeks-per-month value",
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeekStart": "Week starts on",
+  "@moneyHubSettingsWeekStart": {
+    "description": "Settings › Money: first day of the week in weekly budgets and reports"
+  },
+  "moneyHubSettingsWeekStartHint": "For weekly budget items and the ledger's weekly reports",
+  "@moneyHubSettingsWeekStartHint": {
+    "description": "Settings › Money: hint under the week start choice"
+  },
+  "moneyHubWeekSaturday": "Saturday",
+  "@moneyHubWeekSaturday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekSunday": "Sunday",
+  "@moneyHubWeekSunday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekMonday": "Monday",
+  "@moneyHubWeekMonday": {
+    "description": "Week start choice"
+  },
+  "moneyHubSettingsReminders": "Due reminders",
+  "@moneyHubSettingsReminders": {
+    "description": "Settings › Money: entry opening the debt and bill due reminder options"
+  },
+  "moneyHubSettingsRemindersOff": "Off",
+  "@moneyHubSettingsRemindersOff": {
+    "description": "Settings › Money: due reminders switched off"
+  },
+  "moneyHubSettingsRemindersOnDay": "On the due day",
+  "@moneyHubSettingsRemindersOnDay": {
+    "description": "Settings › Money: reminders only on the due day"
+  },
+  "moneyHubSettingsRemindersBoth": "{lead} and on the day",
+  "@moneyHubSettingsRemindersBoth": {
+    "description": "Settings › Money: an early reminder and one on the due day",
+    "placeholders": {
+      "lead": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsRemindersAt": "{when} · at {time}",
+  "@moneyHubSettingsRemindersAt": {
+    "description": "Settings › Money: when the due reminders arrive",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "workTitle": "Work",
   "@workTitle": {
     "description": "Work planet screen title"
@@ -16902,5 +17146,3012 @@
       }
     }
   },
-  "bodyNotifyHint": "Needs notification permission on the phone."
+  "bodyNotifyHint": "Needs notification permission on the phone.",
+  "cmodTitle": "Trackers & lists",
+  "@cmodTitle": {
+    "description": "Custom modules screen title"
+  },
+  "cmodNewModule": "New module",
+  "cmodModulesCount": "{count, plural, =0{No modules yet} =1{1 module} other{{count} modules}}",
+  "@cmodModulesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodLoggedToday": "{count, plural, =0{Nothing logged today yet} =1{1 entry today} other{{count} entries today}}",
+  "@cmodLoggedToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEntriesCount": "{count, plural, =0{no entries} =1{1 entry} other{{count} entries}}",
+  "@cmodEntriesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsCount": "{count, plural, =0{no items} =1{1 item} other{{count} items}}",
+  "@cmodItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsProgress": "{done} of {total} done",
+  "@cmodItemsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodOpenItems": "{count, plural, =0{Nothing left} =1{1 item left} other{{count} items left}}",
+  "@cmodOpenItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEmptyTitle": "Build your first tracker",
+  "cmodEmptyBody": "Track what matters with your own fields – a reading log, dhikr after prayer, a habit list… and watch it feed your planets.",
+  "cmodEmptyAction": "Create a module",
+  "cmodArchivedSection": "Archived",
+  "cmodKindTracker": "Tracker",
+  "cmodKindList": "List",
+  "cmodKindTrackerHint": "Values you log over time, with charts",
+  "cmodKindListHint": "Items you check off and reorder",
+  "cmodLastToday": "Last entry today",
+  "cmodLastYesterday": "Last entry yesterday",
+  "cmodLastDaysAgo": "{count, plural, =1{Last entry a day ago} other{Last entry {count} days ago}}",
+  "@cmodLastDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodNoEntries": "No entries yet",
+  "cmodStreakBadge": "{count}-day streak",
+  "@cmodStreakBadge": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodActionArchive": "Archive",
+  "cmodActionUnarchive": "Unarchive",
+  "cmodActionAddEntry": "New entry",
+  "cmodActionOpen": "Open",
+  "cmodActionExport": "Share as CSV",
+  "cmodActionUncheck": "Reopen",
+  "cmodActionCheck": "Check off",
+  "cmodToastArchived": "Archived “{name}”",
+  "@cmodToastArchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnarchived": "“{name}” is back",
+  "@cmodToastUnarchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDeleted": "Deleted “{name}”",
+  "@cmodToastDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDuplicated": "Duplicated “{name}”",
+  "@cmodToastDuplicated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastLogged": "Logged to “{name}”",
+  "@cmodToastLogged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnchecked": "Today’s check-in removed",
+  "cmodToastEntryDeleted": "Entry deleted",
+  "cmodToastEntryDuplicated": "Entry duplicated",
+  "cmodToastItemDone": "Item done",
+  "cmodToastItemReopened": "Item reopened",
+  "cmodToastCleared": "Done items cleared",
+  "cmodToastSaved": "Saved “{name}”",
+  "@cmodToastSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastReminderDeleted": "Reminder deleted",
+  "cmodToastReminderAdded": "Reminder added",
+  "cmodQuickDone": "Done today",
+  "cmodQuickDoneHint": "Log today with one tap",
+  "cmodQuickChecked": "Done for today",
+  "cmodQuickCheckedHint": "Tap to undo today’s check-in",
+  "cmodQuickAddOne": "Log one",
+  "cmodQuickRate": "Rate today",
+  "cmodRateStars": "{count, plural, =1{1 star} other{{count} stars}}",
+  "@cmodRateStars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodBuilderNewTitle": "New module",
+  "cmodBuilderEditTitle": "Edit module",
+  "cmodSectionBasics": "Basics",
+  "cmodName": "Name",
+  "cmodNameHint": "e.g. Reading log",
+  "cmodKind": "Kind",
+  "cmodIcon": "Icon",
+  "cmodColor": "Colour",
+  "cmodPlanet": "Planet",
+  "cmodPlanetNone": "No planet",
+  "cmodPlanetHint": "Every entry brings this planet to life and circles it as a moon",
+  "cmodWindow": "Prayer window",
+  "cmodWindowHint": "When you usually log it",
+  "cmodSectionFields": "Fields",
+  "cmodAddField": "Add field",
+  "cmodFieldsEmptyTracker": "With no fields, a tracker is a one-tap counter",
+  "cmodFieldsEmptyList": "Add at least one field, such as the item’s name",
+  "cmodHiddenFields": "Hidden fields",
+  "cmodHiddenFieldsHint": "Removed from the form – their old data is kept",
+  "cmodRestoreField": "Show again",
+  "cmodSectionChart": "Chart",
+  "cmodChartField": "What to plot",
+  "cmodChartEntries": "Number of entries",
+  "cmodChartStyle": "Style",
+  "cmodChartRange": "Period",
+  "cmodChartLine": "Line",
+  "cmodChartBar": "Bars",
+  "cmodChartHeat": "Calendar",
+  "cmodChartStreak": "Streak",
+  "cmodChartEmpty": "No data in this period yet",
+  "cmodRangeDays": "{count, plural, =1{1 day} other{{count} days}}",
+  "@cmodRangeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodSave": "Save",
+  "cmodCreate": "Create",
+  "cmodCancel": "Cancel",
+  "cmodDiscardTitle": "Discard changes?",
+  "cmodDiscardBody": "Your changes to this module are not saved.",
+  "cmodDiscard": "Discard",
+  "cmodKeepEditing": "Keep editing",
+  "cmodPreviewUntitled": "Untitled module",
+  "cmodIssueNameMissing": "Give the module a name",
+  "cmodIssueNameTooLong": "The name is too long",
+  "cmodIssueNoFields": "Add at least one field",
+  "cmodIssueTooManyFields": "{max} fields at most",
+  "@cmodIssueTooManyFields": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodIssueLabelMissing": "A field has no name",
+  "cmodIssueLabelDuplicate": "Two fields share this name",
+  "cmodIssueNoOptions": "Add at least one option",
+  "cmodIssueOptionLabelMissing": "An option has no name",
+  "cmodIssueOptionDuplicate": "Two options share a name",
+  "cmodIssueRangeInverted": "The minimum is above the maximum",
+  "cmodIssueCurrencyCode": "Not a valid currency code",
+  "cmodMigrationTitle": "Before saving",
+  "cmodMigrationBlockedTitle": "This change would lose data",
+  "cmodMigrationBlockedBody": "Nothing was saved. Change the type back, or add a new field with the type you want.",
+  "cmodMigrationOk": "OK",
+  "cmodMigTypeBlocked": "“{field}”: {entries} can’t become “{type}”",
+  "@cmodMigTypeBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigRatingBlocked": "“{field}”: {entries} have more stars than the new scale",
+  "@cmodMigRatingBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigFieldHidden": "“{field}” will be hidden; its values in {entries} are kept",
+  "@cmodMigFieldHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOptionHidden": "Removed options of “{field}” that are in use will be hidden, not deleted",
+  "@cmodMigOptionHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigConverted": "Values of “{field}” in {entries} will be converted to “{type}”",
+  "@cmodMigConverted": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOutOfRange": "{entries} in “{field}” are outside the new limits and stay as they are",
+  "@cmodMigOutOfRange": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigNewlyRequired": "{entries} have no value for “{field}”, now required",
+  "@cmodMigNewlyRequired": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodTypeText": "Text",
+  "cmodTypeNumber": "Number",
+  "cmodTypeDate": "Date",
+  "cmodTypeTime": "Time",
+  "cmodTypeCheckbox": "Checkbox",
+  "cmodTypeSingle": "Single choice",
+  "cmodTypeMulti": "Multiple choice",
+  "cmodTypeRating": "Star rating",
+  "cmodTypeCurrency": "Amount",
+  "cmodTypeTextHint": "A note, a book title…",
+  "cmodTypeNumberHint": "Pages, minutes, times…",
+  "cmodTypeDateHint": "An appointment or occasion",
+  "cmodTypeTimeHint": "Bedtime, start time…",
+  "cmodTypeCheckboxHint": "Done or not",
+  "cmodTypeSingleHint": "One option from your list",
+  "cmodTypeMultiHint": "Several options from your list",
+  "cmodTypeRatingHint": "Two to ten stars",
+  "cmodTypeCurrencyHint": "Money in the currency you choose",
+  "cmodPickType": "Field type",
+  "cmodFieldNew": "New field",
+  "cmodFieldEdit": "Edit field",
+  "cmodFieldLabel": "Field name",
+  "cmodFieldLabelHint": "e.g. Pages",
+  "cmodFieldRequired": "Required",
+  "cmodFieldRequiredHint": "An entry can’t be saved without it",
+  "cmodFieldUnit": "Unit",
+  "cmodFieldUnitHint": "pages, min, kg…",
+  "cmodFieldMin": "Minimum",
+  "cmodFieldMax": "Maximum",
+  "cmodFieldNoLimit": "No limit",
+  "cmodFieldDecimals": "Decimal places",
+  "cmodFieldScale": "Scale",
+  "cmodFieldCurrency": "Currency",
+  "cmodFieldOptions": "Options",
+  "cmodAddOption": "Add option",
+  "cmodOptionHint": "Option name",
+  "cmodRemoveOption": "Remove option",
+  "cmodFieldMultiline": "Long text",
+  "cmodFieldMultilineHint": "Room for several lines",
+  "cmodFieldDelete": "Delete field",
+  "cmodFieldCopyLabel": "{label} (copy)",
+  "@cmodFieldCopyLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldTypeNote": "Changing the type converts old values when possible; otherwise the change is not saved.",
+  "cmodFieldOptionsCount": "{count, plural, =0{no options} =1{1 option} other{{count} options}}",
+  "@cmodFieldOptionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodFieldRange": "{min} – {max}",
+  "@cmodFieldRange": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtLeast": "from {min}",
+  "@cmodFieldAtLeast": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtMost": "up to {max}",
+  "@cmodFieldAtMost": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDeleted": "Removed “{name}” from the form",
+  "@cmodFieldDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDuplicated": "Field duplicated",
+  "cmodGalleryTitle": "Start a module",
+  "cmodGallerySubtitle": "From scratch or a template – everything stays editable",
+  "cmodBlankTracker": "Blank tracker",
+  "cmodBlankList": "Blank list",
+  "cmodTemplatesHeader": "Starter templates",
+  "cmodTplReadingLog": "Reading log",
+  "cmodTplReadingLogDesc": "Book, pages and your rating",
+  "cmodTplDhikr": "Dhikr after prayer",
+  "cmodTplDhikrDesc": "How many times, and after which prayer",
+  "cmodTplHabit": "Daily habit",
+  "cmodTplHabitDesc": "One tap a day, and a growing streak",
+  "cmodTplHabitList": "Habit list",
+  "cmodTplHabitListDesc": "Habits to build, and how often",
+  "cmodTplSleep": "Sleep log",
+  "cmodTplSleepDesc": "Bedtime, wake-up, hours and quality",
+  "cmodTplGifts": "Gift ideas",
+  "cmodTplGiftsDesc": "The idea, who for, budget and occasion",
+  "cmodTplBook": "Book",
+  "cmodTplPages": "Pages",
+  "cmodTplRating": "Rating",
+  "cmodTplUnitPages": "pages",
+  "cmodTplAfterPrayer": "After prayer",
+  "cmodTplCount": "Count",
+  "cmodTplUnitTimes": "times",
+  "cmodTplDone": "Done",
+  "cmodTplNote": "Note",
+  "cmodTplHabitItem": "Habit",
+  "cmodTplFrequency": "How often",
+  "cmodTplDaily": "Daily",
+  "cmodTplWeekly": "Weekly",
+  "cmodTplMonthly": "Monthly",
+  "cmodTplBedtime": "Bedtime",
+  "cmodTplWake": "Wake-up",
+  "cmodTplHours": "Hours",
+  "cmodTplUnitHours": "h",
+  "cmodTplQuality": "Quality",
+  "cmodTplIdea": "Idea",
+  "cmodTplFor": "Who for",
+  "cmodTplBudget": "Budget",
+  "cmodTplOccasion": "Occasion",
+  "cmodTplNotes": "Notes",
+  "cmodAddEntry": "New entry",
+  "cmodAddItem": "New item",
+  "cmodEntriesSection": "Entries",
+  "cmodItemsSection": "Items",
+  "cmodDoneSection": "Done",
+  "cmodClearDone": "Clear done",
+  "cmodToday": "Today",
+  "cmodYesterday": "Yesterday",
+  "cmodEntriesEmpty": "No entries yet. The first one starts the story.",
+  "cmodItemsEmpty": "The list is empty. Add the first item.",
+  "cmodAllDone": "All done – well done",
+  "cmodStatStreak": "Streak",
+  "cmodStatBest": "Best",
+  "cmodStatTotal": "Total",
+  "cmodStatAverage": "Average",
+  "cmodStatActive": "Active days",
+  "cmodStatEntries": "Entries",
+  "cmodStatRate": "Check-in rate",
+  "cmodDays": "{count, plural, =1{1 day} other{{count} days}}",
+  "@cmodDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodReminders": "Reminders",
+  "cmodAddReminder": "Add reminder",
+  "cmodRemindersEmpty": "Remind me after a prayer or at a set time",
+  "cmodReminderPaused": "Paused",
+  "cmodReminderToggle": "Reminder on",
+  "cmodModuleMenu": "Module options",
+  "cmodHiddenValue": "{label} (hidden)",
+  "@cmodHiddenValue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodNotifyGroup": "Trackers & lists",
+  "cmodNotifyChannel": "Tracker & list reminders",
+  "cmodNotifyChannelDescription": "Gentle nudges to log your trackers and review your lists",
+  "cmodNotifyBodyTracker": "Time to log it",
+  "cmodNotifyBodyList": "Take a look at your list",
+  "cmodEntryNew": "New entry",
+  "cmodEntryEdit": "Edit entry",
+  "cmodItemNew": "New item",
+  "cmodItemEdit": "Edit item",
+  "cmodEntryWhen": "When",
+  "cmodEntryDone": "Done",
+  "cmodEntryCounter": "This module is a counter: saving logs one.",
+  "cmodErrRequired": "This field is required",
+  "cmodErrNumber": "Enter a number",
+  "cmodErrWhole": "Whole numbers only",
+  "cmodErrPrecise": "At most {count} decimal places",
+  "@cmodErrPrecise": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMin": "At least {value}",
+  "@cmodErrMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMax": "At most {value}",
+  "@cmodErrMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrDate": "Not a valid date",
+  "cmodErrTime": "Not a valid time",
+  "cmodErrOption": "Pick from the list",
+  "cmodErrScale": "Outside the scale",
+  "cmodErrTooLong": "The text is too long",
+  "cmodPickDate": "Pick a date",
+  "cmodPickTime": "Pick a time",
+  "cmodClear": "Clear",
+  "cmodYes": "Yes",
+  "cmodNo": "No",
+  "cmodChecked": "Done",
+  "cmodUnchecked": "Not done",
+  "cmodCardTitle": "Your trackers here",
+  "cmodCardSeeAll": "See all",
+  "cmodCardEmpty": "Create a tracker for this planet",
+  "cmodCardEmptyHint": "A counter, a log or a list – with your own fields",
+  "cmodExportDate": "date",
+  "cmodExportTime": "time",
+  "cmodExportDone": "done",
+  "cmodExportEntries": "Entries",
+  "cmodExportLastEntry": "Last entry",
+  "cmodExportOpen": "Open",
+  "cmodExportLastDays": "{count, plural, =1{Last day} other{Last {count} days}}",
+  "@cmodExportLastDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportActiveDays": "{count, plural, =1{1 active day} other{{count} active days}}",
+  "@cmodExportActiveDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportTotal": "total {value}",
+  "@cmodExportTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportAverage": "average {value}",
+  "@cmodExportAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportStreak": "streak {current} (best {best})",
+  "@cmodExportStreak": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "best": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportHidden": "hidden",
+  "cinemaTitle": "Madar Cinema",
+  "@cinemaTitle": {
+    "description": "Name of the games hub"
+  },
+  "cinemaHallSubtitle": "Original games in the spirit of classic cinema",
+  "cinemaFeatures": "Features",
+  "@cinemaFeatures": {
+    "description": "Tier 1 games section"
+  },
+  "cinemaShorts": "Shorts",
+  "@cinemaShorts": {
+    "description": "Tier 2 games section"
+  },
+  "cinemaComingSoon": "Coming soon",
+  "cinemaPlay": "Play",
+  "cinemaGameViewLabel": "Game screen",
+  "cinemaPause": "Pause",
+  "cinemaIntermission": "Intermission",
+  "@cinemaIntermission": {
+    "description": "Pause card title"
+  },
+  "cinemaResume": "Resume",
+  "cinemaRestart": "Restart",
+  "cinemaLeave": "Leave",
+  "cinemaPlayAgain": "Play again",
+  "cinemaTheEnd": "The End",
+  "cinemaGameOver": "Show's Over",
+  "@cinemaGameOver": {
+    "description": "Game over card"
+  },
+  "cinemaScoreLine": "Score: {score}",
+  "@cinemaScoreLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaBestLine": "Best: {score}",
+  "@cinemaBestLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaEraSilent": "Silent 1920s",
+  "cinemaEraRubberHose": "1930s Cartoon",
+  "cinemaEraNoir": "1940s Noir",
+  "cinemaEraTechnicolor": "1950s Technicolor",
+  "cinemaEraGrindhouse": "1970s Grindhouse",
+  "cinemaEraVhs": "1980s VHS",
+  "cinemaDemoTitle": "Rehearsal",
+  "@cinemaDemoTitle": {
+    "description": "Engine demo scene"
+  },
+  "cinemaDemoTagline": "A test scene for the Film Reel Engine",
+  "cinemaDemoOpening": "Scene One",
+  "cinemaDemoOpeningSubtitle": "Tap to jump over the barrels!",
+  "cinemaFlappyOrbitTitle": "Flappy Orbit",
+  "cinemaFlappyOrbitTagline": "Flap between planets to a swing beat",
+  "cinemaFlappyOrbitHomage": "Homage to 1930s rubber-hose cartoons",
+  "cinemaMetropolisTitle": "Metropolis Machine",
+  "cinemaMetropolisTagline": "Take on the giant machines one by one",
+  "cinemaMetropolisHomage": "Homage to the silent film Metropolis (1927)",
+  "cinemaCaravanTitle": "Caravan Dash",
+  "cinemaCaravanTagline": "Race the dunes in Technicolor",
+  "cinemaCaravanHomage": "Homage to 1950s desert epics",
+  "cinemaNoirTitle": "Noir Rooftops",
+  "cinemaNoirTagline": "Chase shadows across rain-soaked rooftops",
+  "cinemaNoirHomage": "Homage to 1940s film noir",
+  "cinemaNeonSoukTitle": "Neon Souk Racer",
+  "cinemaNeonSoukTagline": "Race through a souk of neon lights",
+  "cinemaNeonSoukHomage": "Homage to 1980s sci-fi on VHS",
+  "cinemaSavedGames": "Saved games",
+  "cinemaSavedGamesEmpty": "Add a web game by its link to play it here full screen.",
+  "cinemaSavedGamesNote": "Games open from their original link; nothing is copied into the app.",
+  "cinemaAddGame": "Add game",
+  "cinemaGameName": "Game name",
+  "cinemaGameUrl": "Game link",
+  "cinemaInvalidUrl": "Enter a valid link starting with https://",
+  "cinemaRemoveGame": "Remove",
+  "cinemaOpenGameFailed": "Couldn't open the link",
+  "cinemaSave": "Save",
+  "cinemaCancel": "Cancel",
+  "cinemaFxTestCard": "Calibration card",
+  "@cinemaFxTestCard": {
+    "description": "Projector check card that shows the film look of an era"
+  },
+  "cinemaFxFilmLook": "Film look",
+  "@cinemaFxFilmLook": {
+    "description": "Setting: strength and quality of the old-film effect in Madar Cinema"
+  },
+  "cinemaFxQualityLowPower": "Power saver",
+  "@cinemaFxQualityLowPower": {
+    "description": "Film look quality: cheapest"
+  },
+  "cinemaFxQualityBalanced": "Balanced",
+  "@cinemaFxQualityBalanced": {
+    "description": "Film look quality: default"
+  },
+  "cinemaFxQualityFull": "Full quality",
+  "@cinemaFxQualityFull": {
+    "description": "Film look quality: best"
+  },
+  "cinemaFxReelLabel": "Reel",
+  "@cinemaFxReelLabel": {
+    "description": "Label on a film-leader card before a reel number"
+  },
+  "cinemaRigCast": "The Cast",
+  "@cinemaRigCast": {
+    "description": "Heading of the list of original Madar Cinema characters"
+  },
+  "cinemaRigNujaym": "Nujaym",
+  "@cinemaRigNujaym": {
+    "description": "Name of the star-bird hero of Flappy Orbit (means 'little star')"
+  },
+  "cinemaRigNujaymRole": "The plucky star-bird of Flappy Orbit",
+  "cinemaRigZunbruk": "Baron Zunbruk",
+  "@cinemaRigZunbruk": {
+    "description": "Name of the clockwork boss of Metropolis Machine (zunbruk = mainspring)"
+  },
+  "cinemaRigZunbrukRole": "The clockwork foreman of Metropolis Machine",
+  "cinemaRigZajil": "Zajil",
+  "@cinemaRigZajil": {
+    "description": "Name of the camel courier of Caravan Dash (means 'messenger')"
+  },
+  "cinemaRigZajilRole": "The camel courier of Caravan Dash",
+  "cinemaRigMishmish": "Inspector Mishmish",
+  "@cinemaRigMishmish": {
+    "description": "Name of the detective cat of Noir Rooftops"
+  },
+  "cinemaRigMishmishRole": "The trench-coat detective cat of Noir Rooftops",
+  "cinemaRigSarab": "Sarab",
+  "@cinemaRigSarab": {
+    "description": "Name of the hover-bike rider of Neon Souk Racer (means 'mirage')"
+  },
+  "cinemaRigSarabRole": "The hover-bike courier of Neon Souk Racer",
+  "cinemaRigBean": "Habba",
+  "@cinemaRigBean": {
+    "description": "Name of the bean-shaped hero of the engine demo"
+  },
+  "cinemaRigBeanRole": "Star of the rehearsal, a bean in white gloves",
+  "dataCentreTitle": "Your data",
+  "@dataCentreTitle": {
+    "description": "Data centre screen title"
+  },
+  "dataHeroTitle": "Your data stays with you",
+  "dataHeroBody": "Madar keeps everything encrypted on this phone and uploads nothing. A file leaves only when you share or save it yourself.",
+  "dataStatRecords": "Records",
+  "dataStatLastBackup": "Last backup",
+  "dataLastBackupNever": "Not yet",
+  "dataLastBackupToday": "Today",
+  "dataLastBackupDaysAgo": "{days, plural, =1{Yesterday} other{{days} days ago}}",
+  "@dataLastBackupDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataBackupSection": "Backup",
+  "dataBackupSectionHint": "One encrypted file to move or safeguard your data",
+  "dataBackupCreateTitle": "Encrypted backup",
+  "dataBackupCreateBody": "One file, locked with a passphrase only you know. Keep it somewhere safe to move your data to a new phone.",
+  "dataBackupCreateAction": "Create backup",
+  "dataRestoreTitle": "Restore from a backup",
+  "dataRestoreBody": "Replaces everything in Madar with a backup file. A safety copy of your current data is kept on this phone first.",
+  "dataRestoreAction": "Choose a backup file",
+  "dataSafetyCopiesLine": "{count, plural, =1{1 safety copy on this phone} other{{count} safety copies on this phone}} · latest {date}",
+  "@dataSafetyCopiesLine": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataExportSection": "Export",
+  "dataExportSectionHint": "Readable copies of your data – not encrypted",
+  "dataExportSummaryTitle": "AI-ready summary",
+  "dataExportSummaryBody": "A short Markdown overview you review section by section before sharing.",
+  "dataExportCsvTitle": "Spreadsheets (CSV)",
+  "dataExportCsvBody": "Labs, transactions, pain and mood – for Excel or Sheets.",
+  "dataExportJsonTitle": "Everything (JSON)",
+  "dataExportJsonBody": "Every record in one file, for your own archive or other apps.",
+  "dataExportPlainWarning": "Exported files are not encrypted: anyone who gets them can read them. Share them only with people you trust.",
+  "dataImportSection": "Import",
+  "dataImportTitle": "Import from the Madar prototype",
+  "dataImportBody": "Bring in data exported from the earlier version (a JSON file).",
+  "dataFooter": "Madar never uploads your data to any server. You alone decide where your files go.",
+  "dataAreaOther": "Settings & history",
+  "dataShareAction": "Share",
+  "dataSaveAction": "Save to…",
+  "dataCopyAction": "Copy",
+  "dataDoneAction": "Done",
+  "dataCancelAction": "Cancel",
+  "dataTryAgainAction": "Try again",
+  "dataFileReadyTitle": "Your file is ready",
+  "dataFileReadySubtitle": "Choose where it goes – nothing is sent automatically",
+  "dataFileEncryptedNote": "Encrypted with your passphrase and opens only with it – keep the two apart.",
+  "dataFilePlainNote": "Not encrypted: anyone who gets this file can read it.",
+  "dataFileShared": "Handed to the share sheet.",
+  "dataFileSaved": "Saved where you chose.",
+  "dataFileSendFailed": "That didn’t work. Nothing was sent – please try again.",
+  "dataExportFailed": "Couldn’t prepare the file. Your data is unchanged.",
+  "dataRecordsCount": "{count, plural, =0{no records} =1{1 record} other{{count} records}}",
+  "@dataRecordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSizeBytes": "{size} bytes",
+  "@dataSizeBytes": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeKb": "{size} KB",
+  "@dataSizeKb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeMb": "{size} MB",
+  "@dataSizeMb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataBackupSheetTitle": "Encrypted backup",
+  "dataBackupSheetSubtitle": "AES-256 · keys derived with Argon2id on your phone",
+  "dataBackupSheetBody": "Choose a passphrase to lock the backup file. Madar never stores it and can’t recover it, so write it down somewhere you trust.",
+  "dataPassphraseLabel": "Passphrase",
+  "dataPassphraseConfirmLabel": "Type the passphrase again",
+  "dataPassphraseMismatch": "The two don’t match.",
+  "dataPassphraseShow": "Show passphrase",
+  "dataPassphraseHide": "Hide passphrase",
+  "dataPassphraseNeverStored": "The passphrase is never stored anywhere. Without it the backup can’t be opened – not even by us.",
+  "dataStrengthLabel": "Strength",
+  "dataStrengthEmpty": "—",
+  "dataStrengthVeryWeak": "Very weak",
+  "dataStrengthWeak": "Weak",
+  "dataStrengthFair": "Fair",
+  "dataStrengthStrong": "Strong",
+  "dataStrengthVeryStrong": "Very strong",
+  "dataStrengthHintShort": "Use at least {min} characters – a short sentence works well.",
+  "@dataStrengthHintShort": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "dataStrengthHintCommon": "This is a common password that’s easy to guess.",
+  "dataStrengthHintPattern": "Avoid repeats and runs like 1234 or aaaa.",
+  "dataStrengthHintDigits": "Digits alone are easy to guess; add some words.",
+  "dataStrengthHintWords": "Good. One or two more words make it much stronger.",
+  "dataBackupWorking": "Locking your data…",
+  "dataBackupWorkingHint": "This takes a few seconds on purpose – it makes the passphrase hard to guess.",
+  "dataBackupReadyTitle": "Backup ready",
+  "dataBackupReadySubtitle": "Share it or save it somewhere safe",
+  "dataBackupReadyHint": "Keep the file and the passphrase in different places. You’ll need both to restore.",
+  "dataBackupShareSubject": "Madar backup",
+  "dataBackupFailed": "Couldn’t create the backup. Your data is untouched – please try again.",
+  "dataBackupMadeOn": "Made on {date}",
+  "@dataBackupMadeOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvSheetTitle": "Spreadsheet export",
+  "dataCsvSheetSubtitle": "CSV · UTF-8 · opens in Excel and Sheets",
+  "dataCsvWhat": "What",
+  "dataCsvWhen": "When",
+  "dataCsvLabs": "Labs",
+  "dataCsvTransactions": "Transactions",
+  "dataCsvPain": "Pain",
+  "dataCsvMood": "Mood",
+  "dataRange30": "30 days",
+  "dataRange90": "90 days",
+  "dataRangeYear": "12 months",
+  "dataRangeAll": "All time",
+  "dataRangeCustom": "Custom…",
+  "dataRangeAllTime": "Every record since the start",
+  "dataRangeFromTo": "From {from} to {to}",
+  "@dataRangeFromTo": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvFormatNote": "Dates look like {example} and numbers use a decimal point, so any spreadsheet opens them as they are.",
+  "@dataCsvFormatNote": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvCreate": "Create file",
+  "dataCsvCreateRows": "{count, plural, =0{No rows in this range} =1{Create file (1 row)} other{Create file ({count} rows)}}",
+  "@dataCsvCreateRows": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataCsvDate": "date",
+  "dataCsvTime": "time",
+  "dataCsvTest": "test",
+  "dataCsvCategory": "category",
+  "dataCsvValue": "value",
+  "dataCsvTextResult": "text_result",
+  "dataCsvUnit": "unit",
+  "dataCsvRangeLow": "range_low",
+  "dataCsvRangeHigh": "range_high",
+  "dataCsvFlag": "flag",
+  "dataCsvNote": "note",
+  "dataCsvNotes": "notes",
+  "dataCsvKind": "kind",
+  "dataCsvWallet": "wallet",
+  "dataCsvCurrency": "currency",
+  "dataCsvAmount": "amount",
+  "dataCsvAmountBase": "amount_base",
+  "dataCsvBaseCurrency": "base_currency",
+  "dataCsvBudgetItem": "budget_item",
+  "dataCsvToWallet": "to_wallet",
+  "dataCsvToAmount": "to_amount",
+  "dataCsvToCurrency": "to_currency",
+  "dataCsvTags": "tags",
+  "dataCsvPainScore": "score_0_10",
+  "dataCsvLocations": "locations",
+  "dataCsvTriggers": "triggers",
+  "dataCsvBodyPoints": "body_points",
+  "dataCsvMoodScore": "mood_1_5",
+  "dataCsvStress": "stress_0_10",
+  "dataCsvAnxiety": "anxiety_0_10",
+  "dataCsvEnergy": "energy_0_10",
+  "dataCsvSleepHours": "sleep_hours",
+  "dataCsvCaffeine": "caffeine_cups",
+  "dataCsvFactors": "factors",
+  "dataFlagLow": "low",
+  "dataFlagBorderlineLow": "borderline low",
+  "dataFlagInRange": "in range",
+  "dataFlagBorderlineHigh": "borderline high",
+  "dataFlagHigh": "high",
+  "dataTxExpense": "expense",
+  "dataTxIncome": "income",
+  "dataTxTransfer": "transfer",
+  "dataTxAdjustment": "adjustment",
+  "dataSummarySubtitle": "Made on your phone · review each section before sharing",
+  "dataSummaryIntro": "Nothing goes anywhere until you choose. The preview below is exactly what would leave – notes, phone numbers and document or account numbers are never included.",
+  "dataSummaryPreparing": "Preparing the summary on your phone…",
+  "dataSummarySections": "Sections to include",
+  "dataSummarySectionsOf": "{selected} of {total} sections",
+  "@dataSummarySectionsOf": {
+    "placeholders": {
+      "selected": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryTokens": "≈ {count} tokens",
+  "@dataSummaryTokens": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryNoData": "No data yet",
+  "dataSummaryProfileHint": "Optional",
+  "dataSummaryPreviewTitle": "Exactly what will be shared",
+  "dataSummaryCopied": "Summary copied to the clipboard.",
+  "dataSummaryUse": "Use this summary",
+  "dataProfileChoose": "Choose what to mention about you:",
+  "dataProfileAboutHint": "e.g. your age, or anything the assistant should know",
+  "dataRestoreFlowTitle": "Restore",
+  "dataRestoreChooseTitle": "Bring your data back",
+  "dataRestoreChooseBody": "Pick a {ext} file. You’ll see what’s inside before anything changes.",
+  "@dataRestoreChooseBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestorePickFile": "Choose backup file",
+  "dataRestoreNothingChanges": "Nothing in your current data changes until you confirm the replacement in the last step.",
+  "dataSafetyCopiesTitle": "Safety copies on this phone",
+  "dataSafetyCopiesHint": "Made automatically before each restore; each opens with the passphrase used for that restore.",
+  "dataRestoreUnlockBody": "Enter the passphrase this backup was locked with.",
+  "dataRestoreUnlockAction": "Unlock backup",
+  "dataRestoreOtherFile": "Choose another file",
+  "dataRestoreOpening": "Checking the backup…",
+  "dataRestoreOpeningHint": "Making sure the file is intact and unchanged, then decrypting it on your phone.",
+  "dataRestorePreviewTitle": "The backup is intact",
+  "dataRestoreInBackup": "In the backup",
+  "dataRestoreOnPhone": "On this phone now",
+  "dataRestoreWhatsInside": "What’s inside",
+  "dataRestoreReplaceWarning": "This backup will replace all data in Madar now. First, your current data is saved as a safety copy on this phone, opening with the same passphrase.",
+  "dataRestoreUnderstand": "I understand my current data will be replaced",
+  "dataRestoreConfirmAction": "Replace my data",
+  "dataRestoreSavingSafety": "Saving a safety copy of your current data…",
+  "dataRestoreRestoring": "Restoring your data…",
+  "dataRestoreKeepOpen": "Keep the app open for a moment.",
+  "dataRestoreDoneTitle": "Restored",
+  "dataRestoreDoneBody": "Your records ({count}) are back in Madar.",
+  "@dataRestoreDoneBody": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestoreSafetyKept": "A safety copy of your previous data is kept on this phone and opens with the same passphrase.",
+  "dataSafetyCopySave": "Save the safety copy elsewhere",
+  "dataSafetyCopyTitle": "Safety copy",
+  "dataNothingChanged": "Nothing in your data was changed.",
+  "dataErrWrongPassphrase": "That passphrase doesn’t open this backup. Check for typos and try again.",
+  "dataErrNotBackupTitle": "This isn’t a Madar backup",
+  "dataErrNotBackupBody": "Choose a file ending in {ext}, made with “Create backup”.",
+  "@dataErrNotBackupBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "dataErrNewerTitle": "Made by a newer Madar",
+  "dataErrNewerBody": "Update Madar on this phone, then try again.",
+  "dataErrTruncatedTitle": "The file is incomplete",
+  "dataErrTruncatedBody": "It may not have finished copying or downloading. Copy it again and retry.",
+  "dataErrCorruptedTitle": "The file is damaged",
+  "dataErrCorruptedBody": "It changed or was damaged after it was made, so it can’t be trusted.",
+  "dataErrUnreadableTitle": "Couldn’t read the file",
+  "dataErrUnreadableBody": "Try another file, or copy it to the phone first.",
+  "dataErrSafetyTitle": "Couldn’t save a safety copy",
+  "dataErrSafetyBody": "So your data was not replaced. Free some space and try again.",
+  "dataErrRejectedTitle": "This backup couldn’t be restored",
+  "dataErrRejectedBody": "Its data didn’t pass the safety checks.",
+  "dataSumHeading": "Madar summary — {date}",
+  "@dataSumHeading": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPreamble": "Personal tracking data from the Madar app, prepared on the user’s own phone. Dates are yyyy-mm-dd; decimals use a point. Notes, phone numbers and document or account numbers are never included.",
+  "dataSumNoData": "No data yet.",
+  "dataSumListSep": ", ",
+  "dataSumLastDays": "{days, plural, =1{Today} other{Last {days} days}}",
+  "@dataSumLastDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPreviousDays": "The {days} days before",
+  "@dataSumPreviousDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMore": "not shown: {count}",
+  "@dataSumMore": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProfile": "Profile",
+  "dataSumFaith": "Faith",
+  "dataSumHealth": "Health",
+  "dataSumMoney": "Money",
+  "dataSumFamily": "Family",
+  "dataSumWork": "Work",
+  "dataSumGrowth": "Growth",
+  "dataSumBody": "Body",
+  "dataSumTravel": "Travel",
+  "dataSumCustom": "Custom trackers",
+  "dataSumCity": "City",
+  "dataSumTimeZone": "Time zone",
+  "dataSumBaseCurrency": "Base currency",
+  "dataSumLanguage": "App language",
+  "dataSumLanguageName": "English",
+  "dataSumAboutMe": "About me",
+  "dataSumPrayersTitle": "Prayers",
+  "dataSumObligatory": "{window} (obligatory)",
+  "@dataSumObligatory": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLogged": "logged: {logged}/{expected}",
+  "@dataSumLogged": {
+    "placeholders": {
+      "logged": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOnTime": "on time: {count}",
+  "@dataSumOnTime": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLate": "late: {count}",
+  "@dataSumLate": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMadeUp": "made up: {count}",
+  "@dataSumMadeUp": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMissed": "missed: {count}",
+  "@dataSumMissed": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInCongregation": "in congregation: {count}",
+  "@dataSumInCongregation": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumVoluntary": "{window} (voluntary)",
+  "@dataSumVoluntary": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumQuranTitle": "Quran and wird",
+  "dataSumSessions": "sessions: {count}",
+  "@dataSumSessions": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPages": "pages: {count}",
+  "@dataSumPages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMinutes": "{count} min",
+  "@dataSumMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastSession": "Last session: {date}",
+  "@dataSumLastSession": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWird": "Wird “{name}”",
+  "@dataSumWird": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPerDay": "{amount} {unit} a day",
+  "@dataSumPerDay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumUnitPages": "pages",
+  "dataSumUnitJuz": "juz",
+  "dataSumUnitHizb": "hizb",
+  "dataSumUnitAyat": "ayat",
+  "dataSumSince": "since {date}",
+  "@dataSumSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBy": "by {date}",
+  "@dataSumBy": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHifzTitle": "Hifz",
+  "dataSumItems": "items: {count}",
+  "@dataSumItems": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNew": "new: {count}",
+  "@dataSumNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueToday": "due today: {count}",
+  "@dataSumDueToday": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumReviews": "reviews: {count}",
+  "@dataSumReviews": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvgGrade": "average grade: {value}/5",
+  "@dataSumAvgGrade": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAlertsTitle": "Standing alerts",
+  "dataSumSeverityCritical": "critical",
+  "dataSumSeverityWarning": "warning",
+  "dataSumSeverityInfo": "note",
+  "dataSumConditionsTitle": "Conditions",
+  "dataSumMedsTitle": "Active medications",
+  "dataSumKindSupplement": "supplement",
+  "dataSumKindInjection": "injection",
+  "dataSumWithEmptyStomach": "on an empty stomach",
+  "dataSumWithBreakfast": "with breakfast",
+  "dataSumWithLunch": "with lunch",
+  "dataSumWithDinner": "with dinner",
+  "dataSumWithBedtime": "at bedtime",
+  "dataSumWithCourse": "per course plan",
+  "dataSumLabsTitle": "Recent labs",
+  "dataSumLabsWindow": "Latest result per test in the last {months} months; flags compare with the range saved in the app.",
+  "@dataSumLabsWindow": {
+    "placeholders": {
+      "months": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColTest": "Test",
+  "dataSumColDate": "Date",
+  "dataSumColResult": "Result",
+  "dataSumColRange": "Range",
+  "dataSumColFlag": "Flag",
+  "dataSumColPrevious": "Previous",
+  "dataSumPainTitle": "Pain (tracking)",
+  "dataSumEntries": "entries: {count}",
+  "@dataSumEntries": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverageOf": "average: {value}/{max}",
+  "@dataSumAverageOf": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHighest": "highest: {value}/{max}",
+  "@dataSumHighest": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopPlaces": "Most logged places",
+  "dataSumTopTriggers": "Most logged triggers",
+  "dataSumMoodTitle": "Mood (tracking)",
+  "dataSumMoodAvg": "mood: {value}/5",
+  "@dataSumMoodAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumStressAvg": "stress: {value}/10",
+  "@dataSumStressAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAnxietyAvg": "anxiety: {value}/10",
+  "@dataSumAnxietyAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEnergyAvg": "energy: {value}/10",
+  "@dataSumEnergyAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSleepAvg": "sleep: {value} h",
+  "@dataSumSleepAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumCaffeineAvg": "caffeine: {value} cups",
+  "@dataSumCaffeineAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopFactors": "Common factors",
+  "dataSumWalletsTitle": "Wallets",
+  "dataSumConvertedTo": "Converted to {code} with the exchange rates saved in the app.",
+  "@dataSumConvertedTo": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColWallet": "Wallet",
+  "dataSumColBalance": "Balance",
+  "dataSumColInBase": "In {code}",
+  "@dataSumColInBase": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTotal": "Total: {amount}",
+  "@dataSumTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBudgetTitle": "Budget — {month}",
+  "@dataSumBudgetTitle": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPlanned": "planned: {amount}",
+  "@dataSumPlanned": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSpent": "spent: {amount}",
+  "@dataSumSpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRemaining": "remaining: {amount}",
+  "@dataSumRemaining": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverPlan": "Over plan",
+  "dataSumUnassigned": "Spent without a budget item: {amount}",
+  "@dataSumUnassigned": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTitle": "Due in the next {days} days",
+  "@dataSumDueTitle": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueOn": "due {date}",
+  "@dataSumDueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverdueSince": "overdue since {date}",
+  "@dataSumOverdueSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDebtsTitle": "Debts",
+  "dataSumIOwe": "I owe {person}: {left} left of {total}",
+  "@dataSumIOwe": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOwedToMe": "{person} owes me: {left} left of {total}",
+  "@dataSumOwedToMe": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumJarsTitle": "Savings jars",
+  "dataSumJar": "{name}: {saved} of {target} ({percent}%)",
+  "@dataSumJar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEvery": "rhythm: every {days} days",
+  "@dataSumEvery": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastContact": "days since last contact: {days}",
+  "@dataSumLastContact": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNeverContacted": "no contact logged yet",
+  "dataSumOverdueBy": "overdue by (days): {days}",
+  "@dataSumOverdueBy": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTodayStatus": "due today",
+  "dataSumDueIn": "due in (days): {days}",
+  "@dataSumDueIn": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoRhythm": "{count, plural, =1{1 more person without a contact rhythm} other{{count} more people without a contact rhythm}}",
+  "@dataSumNoRhythm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPeopleNoRhythm": "{count, plural, =1{1 person, no contact rhythm set} other{{count} people, no contact rhythm set}}",
+  "@dataSumPeopleNoRhythm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumTop3Title": "Top 3",
+  "dataSumOnBoard": "board: {board}",
+  "@dataSumOnBoard": {
+    "placeholders": {
+      "board": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBoardsTitle": "Boards",
+  "dataSumOther": "Other",
+  "dataSumProjectsTitle": "Projects",
+  "dataSumStatusActive": "active",
+  "dataSumStatusPaused": "paused",
+  "dataSumDoneOf": "items done: {done}/{total}",
+  "@dataSumDoneOf": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDeadline": "deadline: {date}",
+  "@dataSumDeadline": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProgress": "{current} of {target} {unit}",
+  "@dataSumProgress": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRecentGain": "{window}: {amount}",
+  "@dataSumRecentGain": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExercisePlanTitle": "Exercise plan",
+  "dataSumWeekdays": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+  "@dataSumWeekdays": {
+    "description": "Seven comma-separated weekday names, Monday first"
+  },
+  "dataSumSets": "sets: {count}",
+  "@dataSumSets": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumKg": "{value} kg",
+  "@dataSumKg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWorkouts": "workouts: {count}",
+  "@dataSumWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumFasting": "fasts: {count} · average: {hours} h",
+  "@dataSumFasting": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetHours": "target: {hours} h",
+  "@dataSumTargetHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWater": "Water, last {days} days: {ml} ml a day on average",
+  "@dataSumWater": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetMl": "target: {ml} ml",
+  "@dataSumTargetMl": {
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvoidTitle": "Avoid",
+  "dataSumTripsTitle": "Upcoming trips",
+  "dataSumTripPlanned": "planned",
+  "dataSumTripUnderWay": "under way",
+  "dataSumDocumentsTitle": "Documents (numbers are never included)",
+  "dataSumExpiresIn": "expires {date} (days left: {days})",
+  "@dataSumExpiresIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExpired": "expired {date}",
+  "@dataSumExpired": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoExpiry": "no expiry date",
+  "dataSumModuleTracker": "tracker",
+  "dataSumModuleList": "list",
+  "dataSumOpen": "open: {count}",
+  "@dataSumOpen": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDone": "done: {count}",
+  "@dataSumDone": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInWindow": "{window}: {count}",
+  "@dataSumInWindow": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastOn": "last: {date}",
+  "@dataSumLastOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverage": "average: {value}",
+  "@dataSumAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMin": "min: {value}",
+  "@dataSumMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMax": "max: {value}",
+  "@dataSumMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSum": "total: {value}",
+  "@dataSumSum": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTicked": "ticked: {count}/{total}",
+  "@dataSumTicked": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "searchTitle": "Search",
+  "@searchTitle": {
+    "description": "Global search screen title"
+  },
+  "searchFieldHint": "Search tasks, notes, people, ayat…",
+  "searchLauncherHint": "Search Madar",
+  "@searchLauncherHint": {
+    "description": "Compact search launcher on home / app bars"
+  },
+  "searchLauncherTooltip": "Search everything",
+  "searchClear": "Clear text",
+  "searchRecentTitle": "Recent searches",
+  "searchRecentClear": "Clear history",
+  "searchRecentRemove": "Remove “{query}” from history",
+  "@searchRecentRemove": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchIntroTitle": "Search your whole orbit",
+  "searchIntroBody": "Tasks, notes, people, money and ayat in one place. Search runs on your phone only.",
+  "searchPreparing": "Preparing the search index…",
+  "searchNoResultsTitle": "No results for “{query}”",
+  "@searchNoResultsTitle": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchNoResultsBody": "Try fewer words or another spelling.",
+  "searchNoResultsFiltered": "Nothing here with the current filter.",
+  "searchClearFilters": "Clear filter",
+  "searchAll": "All",
+  "searchResultsCount": "{count, plural, =0{No results} =1{1 result} other{{count} results}}",
+  "@searchResultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchShowAll": "Show all ({count})",
+  "@searchShowAll": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchGroupSemantics": "{module}, {count}",
+  "@searchGroupSemantics": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchPartial": "Not every word was found together; these are the closest matches.",
+  "searchCannotOpen": "This result can’t be opened from here yet.",
+  "searchToday": "Today",
+  "searchYesterday": "Yesterday",
+  "searchTomorrow": "Tomorrow",
+  "searchFilterPlanets": "Filter by planet",
+  "searchFilterModules": "Filter by section",
+  "searchPlanetCustom": "Custom modules",
+  "searchKeyboardHint": "↑ ↓ to move, Enter to open, Esc to clear",
+  "searchDone": "Done",
+  "searchArchived": "Archived",
+  "searchTxExpense": "Expense",
+  "searchTxIncome": "Income",
+  "searchTxTransfer": "Transfer",
+  "searchTxAdjustment": "Adjustment",
+  "searchDebtIOwe": "I owe",
+  "searchDebtOwedToMe": "Owed to me",
+  "searchChannelCall": "Call",
+  "searchChannelVisit": "Visit",
+  "searchChannelMessage": "Message",
+  "searchChannelOther": "Contact",
+  "searchPainTitle": "Pain {score}/{max}",
+  "@searchPainTitle": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "searchMoodTitle": "Mood",
+  "searchFastingTitle": "Fast",
+  "searchAyahPlace": "{surah} · ayah {ayah}",
+  "@searchAyahPlace": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "searchAyahRange": "{surah} · {from}–{to}",
+  "@searchAyahRange": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSurahNumber": "Surah {number}",
+  "@searchSurahNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSourceTasks": "Tasks",
+  "searchSourcePrayerLogs": "Prayer log",
+  "searchSourceMedications": "Medications",
+  "searchSourceMedCourses": "Treatment courses",
+  "searchSourceMedDoses": "Dose notes",
+  "searchSourceConditions": "Conditions",
+  "searchSourceHealthAlerts": "Health alerts",
+  "searchSourceLabTests": "Lab tests",
+  "searchSourceLabReadings": "Lab results",
+  "searchSourceAppointments": "Appointments",
+  "searchSourceDoctorQuestions": "Doctor questions",
+  "searchSourcePain": "Pain log",
+  "searchSourceMood": "Mood log",
+  "searchSourceHabits": "Habits",
+  "searchSourceWorries": "Worries",
+  "searchSourceWallets": "Wallets",
+  "searchSourceTransactions": "Transactions",
+  "searchSourceBudget": "Budget",
+  "searchSourceJars": "Savings jars",
+  "searchSourceJarDeposits": "Jar deposits",
+  "searchSourceDebts": "Debts",
+  "searchSourceDebtPayments": "Debt payments",
+  "searchSourceObligations": "Obligations",
+  "searchSourcePeople": "People",
+  "searchSourceContactLogs": "Contact log",
+  "searchSourceProjects": "Projects",
+  "searchSourceProjectItems": "Project items",
+  "searchSourceBoards": "Boards",
+  "searchSourceCards": "Cards",
+  "searchSourceTrips": "Trips",
+  "searchSourceTripItems": "Trip items",
+  "searchSourcePackingTemplates": "Packing lists",
+  "searchSourceTravelDocuments": "Travel documents",
+  "searchSourceLearningGoals": "Learning goals",
+  "searchSourceGoalLogs": "Goal log",
+  "searchSourceExercises": "Exercises",
+  "searchSourceWorkouts": "Workout log",
+  "searchSourceAvoidItems": "Avoid list",
+  "searchSourceFasting": "Fasting",
+  "searchSourceCustomModules": "Custom modules",
+  "searchSourceCustomEntries": "Module entries",
+  "searchSourceQuranAyat": "Quran ayat",
+  "searchSourceQuranBookmarks": "Quran bookmarks",
+  "searchSourceWirdPlans": "Wird plans",
+  "searchSourceHifz": "Hifz",
+  "searchSourcePlanets": "Planets",
+  "ncTitle": "Notifications",
+  "@ncTitle": {
+    "description": "Title of the notification center"
+  },
+  "ncTabUpcoming": "Upcoming",
+  "@ncTabUpcoming": {
+    "description": "Notification center tab: scheduled notifications"
+  },
+  "ncTabRecent": "Recent",
+  "@ncTabRecent": {
+    "description": "Notification center tab: delivered notifications"
+  },
+  "ncTabWithCount": "{label}, {count}",
+  "@ncTabWithCount": {
+    "description": "Screen-reader label of a tab with its count",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOpenSettings": "Notification settings",
+  "ncUpcomingEmptyTitle": "Nothing scheduled",
+  "ncUpcomingEmptyBody": "The adhan and reminders you switch on line up here for the next seven days.",
+  "ncRecentEmptyTitle": "All caught up",
+  "ncRecentEmptyBody": "Notifications that arrive stay here for two weeks, so you can come back to them.",
+  "ncClearAll": "Clear all",
+  "ncClearedAll": "{count, plural, =1{Cleared 1 notification} other{Cleared {count} notifications}}",
+  "@ncClearedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncDismissed": "Dismissed",
+  "ncSkippedToast": "This one won't arrive",
+  "ncRestoredToast": "It will arrive on time",
+  "ncShowMore": "{count, plural, =1{Show 1 more} other{Show {count} more}}",
+  "@ncShowMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncShowLess": "Show less",
+  "ncSectionLabel": "{group}, {count}",
+  "@ncSectionLabel": {
+    "description": "Screen-reader label of a group section",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncGroupPrayer": "Prayer & adhan",
+  "ncGroupAdhkar": "Adhkar",
+  "ncGroupMedications": "Medications",
+  "ncGroupHealth": "Health",
+  "ncGroupMoney": "Money dues",
+  "ncGroupFamily": "Family",
+  "ncGroupTravel": "Travel documents",
+  "ncGroupWird": "Wird",
+  "ncGroupCustom": "Custom modules",
+  "ncGroupOther": "Other",
+  "ncKindAdhan": "{prayer} adhan",
+  "@ncKindAdhan": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhan": "{prayer} in {minutes}",
+  "@ncKindPreAdhan": {
+    "description": "A reminder some minutes before a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhanShort": "Before {prayer}",
+  "@ncKindPreAdhanShort": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindSunrise": "Sunrise",
+  "ncKindAdhanTest": "Test adhan",
+  "ncKindAdhkarMorning": "Morning adhkar",
+  "ncKindAdhkarEvening": "Evening adhkar",
+  "ncKindAdhkar": "Adhkar reminder",
+  "ncKindDose": "Dose reminder",
+  "ncKindRefill": "Time to refill",
+  "ncKindMedsNotice": "Answer not recorded",
+  "ncKindAppointment": "Appointment",
+  "ncKindWorry": "Worry window",
+  "ncKindFastGoal": "Fasting goal",
+  "ncKindEatingClose": "Eating window closing",
+  "ncKindDebt": "Debt due",
+  "ncKindObligation": "Payment due",
+  "ncKindFamilyDigest": "Keep in touch",
+  "ncKindBirthdayEve": "Birthday tomorrow",
+  "ncKindBirthday": "Birthday today",
+  "ncKindDocAhead": "Document expiring soon",
+  "ncKindDocToday": "Document expires today",
+  "ncKindWird": "Daily wird",
+  "ncKindCustom": "Module reminder",
+  "ncKindOther": "Notification",
+  "ncAtTime": "at {time}",
+  "@ncAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateMuted": "Muted",
+  "ncStateSkipped": "Skipped",
+  "ncStateSnoozedUntil": "Snoozed until {time}",
+  "@ncStateSnoozedUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateLive": "Showing now",
+  "ncStateSilenced": "Arrived muted",
+  "ncStateOpened": "Opened",
+  "ncStateAnswered": "Answered: {action}",
+  "@ncStateAnswered": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateSnoozed": "Snoozed",
+  "ncStateNew": "New",
+  "ncTimeNow": "Now",
+  "ncTimeIn": "in {duration}",
+  "@ncTimeIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeAgo": "{duration} ago",
+  "@ncTimeAgo": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeToday": "Today {time}",
+  "@ncTimeToday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeTomorrow": "Tomorrow {time}",
+  "@ncTimeTomorrow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeYesterday": "Yesterday {time}",
+  "@ncTimeYesterday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeOnDay": "{day}, {time}",
+  "@ncTimeOnDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionTaken": "Taken",
+  "@ncActionTaken": {
+    "description": "Dose answered from the notification center"
+  },
+  "ncActionSnooze": "Snooze",
+  "ncActionSkip": "Skip",
+  "ncActionStop": "Stop",
+  "@ncActionStop": {
+    "description": "Stops a sounding adhan"
+  },
+  "ncActionOpen": "Open",
+  "ncActionSkipOne": "Skip this one",
+  "ncActionRestore": "Restore",
+  "ncActionSnoozeFor": "Snooze {duration}",
+  "@ncActionSnoozeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionMuteGroup": "Mute {group}",
+  "@ncActionMuteGroup": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionUnmute": "Unmute",
+  "ncActionSettings": "Reminder settings",
+  "ncActionDismiss": "Dismiss",
+  "ncActionFailed": "Couldn't do that right now – try again",
+  "ncSnoozedToast": "Snoozed until {time}",
+  "@ncSnoozedToast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedToast": "{group} muted until {when}",
+  "@ncMutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncUnmutedToast": "{group} is back on",
+  "@ncUnmutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteTitle": "Mute {group}",
+  "@ncMuteTitle": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteSubtitle": "Nothing from this group will sound for a while – you'll still find it listed here.",
+  "ncMuteForHours": "{count, plural, =1{1 hour} other{{count} hours}}",
+  "@ncMuteForHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncMuteUntilMorning": "Until tomorrow morning",
+  "ncMuteWeek": "A week",
+  "ncMutedUntil": "Muted until {when}",
+  "@ncMutedUntil": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsTitle": "Notifications",
+  "ncSettingsSubtitle": "What each part of Madar sends you, in one place",
+  "ncSettingsOn": "On",
+  "ncSettingsOff": "Off",
+  "ncSettingsSome": "{on} of {total} on",
+  "@ncSettingsSome": {
+    "placeholders": {
+      "on": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsPerItem": "Set per item",
+  "ncSettingsComing": "{count, plural, =0{Nothing coming} =1{1 coming} other{{count} coming}}",
+  "@ncSettingsComing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsOpen": "Open {group} settings",
+  "@ncSettingsOpen": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsMute": "Mute",
+  "ncPermissionOff": "Madar's notifications are off in the phone's settings, so none of this will arrive.",
+  "ncPermissionTurnOn": "Turn on",
+  "ncBellLabel": "{count, plural, =0{Notifications} =1{Notifications, 1 new} other{Notifications, {count} new}}",
+  "@ncBellLabel": {
+    "description": "Screen-reader label of the notification bell",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncActionCancelSnooze": "Cancel snooze",
+  "ncActionSnoozeMenu": "Snooze…",
+  "ncSnoozeTitle": "Bring it back later",
+  "ncSnoozeSubtitle": "It leaves now and arrives again when you choose.",
+  "ncOptionUntil": "until {time}",
+  "@ncOptionUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOptionAt": "back {time}",
+  "@ncOptionAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncRecentCount": "{count, plural, =1{1 notification} other{{count} notifications}}",
+  "@ncRecentCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUpcomingCount": "{count, plural, =0{Nothing in the next seven days} =1{1 notification in the next seven days} other{{count} notifications in the next seven days}}",
+  "@ncUpcomingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncNewCount": "{count, plural, =1{1 new} other{{count} new}}",
+  "@ncNewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUntilTomorrow": "tomorrow {time}",
+  "@ncUntilTomorrow": {
+    "description": "End of a mute or snooze tomorrow, after 'until'",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatTitle": "AI chat",
+  "@aiChatTitle": {
+    "description": "AI chat screen title"
+  },
+  "aiChatNewChat": "New chat",
+  "aiChatListTitle": "Conversations",
+  "aiChatSettingsTitle": "AI settings",
+  "aiChatSettingsRowSubtitle": "Keys, model and reply length",
+  "@aiChatSettingsRowSubtitle": {
+    "description": "Subtitle of the Settings row that opens the AI settings"
+  },
+  "aiChatAskAi": "Ask AI",
+  "@aiChatAskAi": {
+    "description": "Entry point on hubs"
+  },
+  "aiChatAskAiSubtitle": "With your own key – you choose what’s sent",
+  "aiChatAskAbout": "Ask about {area}",
+  "@aiChatAskAbout": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatMenu": "More",
+  "aiChatOpenList": "All conversations",
+  "aiChatInputHint": "Write your message…",
+  "aiChatSend": "Send",
+  "aiChatStop": "Stop",
+  "aiChatThinking": "Thinking…",
+  "aiChatWriting": "Writing a reply",
+  "aiChatWillSend": "Will send",
+  "aiChatContextReviewFirst": "you’ll review your summary first",
+  "aiChatContextNone": "No personal context",
+  "aiChatContextSections": "{count, plural, =0{No sections} =1{1 summary section} other{{count} summary sections}}",
+  "@aiChatContextSections": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatMessagesCount": "{count, plural, =0{No messages} =1{1 message} other{{count} messages}}",
+  "@aiChatMessagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatApproxTokens": "≈ {count} tokens",
+  "@aiChatApproxTokens": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatStripSemantics": "Will send: {summary}. Tap to review or change",
+  "@aiChatStripSemantics": {
+    "placeholders": {
+      "summary": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatOmitted": "{count, plural, =1{1 older message left out} other{{count} older messages left out}}",
+  "@aiChatOmitted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatContextTitle": "What will be sent",
+  "aiChatContextSubtitle": "Nothing is sent until you tap Send",
+  "aiChatContextFromSummary": "From your summary",
+  "aiChatContextChange": "Review sections",
+  "aiChatContextChoose": "Choose sections",
+  "aiChatContextNoneHint": "Nothing from your data is sent – only this conversation’s messages.",
+  "aiChatContextUnsetHint": "On the first send, the summary preview opens so you can pick sections or leave any out.",
+  "aiChatContextUse": "Use in this chat",
+  "@aiChatContextUse": {
+    "description": "Confirm button of the summary preview opened from the AI chat"
+  },
+  "aiChatContextUseAndSend": "Use and send",
+  "@aiChatContextUseAndSend": {
+    "description": "Confirm button of the summary preview opened by the first Send"
+  },
+  "aiChatContextReviewed": "Reviewed {when}",
+  "@aiChatContextReviewed": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatContextCancelled": "Nothing was sent.",
+  "aiChatServiceModel": "{service} · {model}",
+  "@aiChatServiceModel": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatViewPayload": "View the exact request",
+  "aiChatDone": "Done",
+  "aiChatPayloadTitle": "The exact request",
+  "aiChatPayloadEndpoint": "Endpoint",
+  "aiChatPayloadHeaders": "Headers (key hidden)",
+  "aiChatPayloadSystem": "Instructions and context",
+  "aiChatPayloadMessages": "Messages",
+  "aiChatPayloadRaw": "Full body (JSON)",
+  "aiChatPayloadDraftNote": "Includes the message you’re typing. It’s sent only when you tap Send.",
+  "aiChatPayloadNoDraft": "Write a message to see the complete request.",
+  "aiChatPayloadSize": "{size} · ≈ {tokens} tokens",
+  "@aiChatPayloadSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "tokens": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatBytes": "{count} bytes",
+  "@aiChatBytes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKiloBytes": "{count} KB",
+  "@aiChatKiloBytes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatRoleUser": "You",
+  "aiChatRoleAssistant": "Assistant",
+  "aiChatCopy": "Copy",
+  "aiChatCopied": "Copied",
+  "aiChatCopyCode": "Copy code",
+  "aiChatRegenerate": "Regenerate",
+  "aiChatRetry": "Try again",
+  "aiChatStopped": "You stopped the reply",
+  "aiChatCutShort": "The reply hit the length limit. You can raise it in settings.",
+  "aiChatRefused": "The model declined to answer.",
+  "aiChatFiltered": "The content filter stopped the reply.",
+  "aiChatHealthNote": "For tracking only, not medical advice – ask your clinician about any health decision.",
+  "aiChatOpenLink": "Open link {url}",
+  "@aiChatOpenLink": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatLinkFailed": "Couldn’t open the link.",
+  "aiChatErrorNoKey": "Add your {service} key first.",
+  "@aiChatErrorNoKey": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorBadKey": "{service} rejected the key. Check it or replace it in settings.",
+  "@aiChatErrorBadKey": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorForbidden": "This key isn’t allowed to use this model.",
+  "aiChatErrorRateLimited": "Too many requests right now. Wait a moment, then try again.",
+  "aiChatErrorRetryAfter": "You can try again in {seconds} s.",
+  "@aiChatErrorRetryAfter": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorQuota": "You’re out of credit or at your spend limit with {service}.",
+  "@aiChatErrorQuota": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorOverloaded": "{service} is busy right now. Try again shortly.",
+  "@aiChatErrorOverloaded": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorServer": "{service} had a problem. Try again.",
+  "@aiChatErrorServer": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorModelNotFound": "The model “{model}” isn’t available to this key. Pick another model.",
+  "@aiChatErrorModelNotFound": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorTemperature": "This model doesn’t accept a custom temperature. Set it to “Model default” in settings.",
+  "aiChatErrorContextTooLong": "The conversation is too long for the model. Start a new chat or share fewer sections.",
+  "aiChatErrorBadRequest": "{service} rejected the request.",
+  "@aiChatErrorBadRequest": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorNetwork": "No internet connection, or the connection dropped.",
+  "aiChatErrorTimeout": "No answer came in time.",
+  "aiChatErrorBadResponse": "The answer couldn’t be read.",
+  "aiChatErrorUnknown": "Something unexpected went wrong.",
+  "aiChatOpenSettings": "Open settings",
+  "aiChatSetupTitle": "Connect your own key",
+  "aiChatSetupBody": "The chat uses your own Anthropic or OpenAI API key. It’s stored encrypted on this phone only – never in backups or exports.",
+  "aiChatSetupAdd": "Add {service} key",
+  "@aiChatSetupAdd": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSetupPrivacy": "Nothing is sent until you tap Send, and you see exactly what goes out first.",
+  "aiChatEmptyTitle": "How can I help today?",
+  "aiChatEmptyBody": "Ask about your day, prayers, budget or goals. You choose what’s shared from your summary before sending.",
+  "aiChatSuggestWeek": "Sum up my week in a few points",
+  "aiChatSuggestBudget": "How can I improve my budget this month?",
+  "aiChatSuggestPlan": "Help me plan a balanced tomorrow",
+  "aiChatSuggestPrayer": "How can I keep my prayers on time?",
+  "aiChatListEmptyTitle": "No conversations yet",
+  "aiChatListEmptyBody": "Start a chat – it’s kept here, encrypted on your phone.",
+  "aiChatRename": "Rename",
+  "aiChatRenameField": "Conversation name",
+  "aiChatRenameSave": "Save name",
+  "aiChatDelete": "Delete chat",
+  "aiChatDeleted": "Chat deleted",
+  "aiChatDeleteAll": "Delete all chats",
+  "aiChatDeletedAll": "All chats deleted",
+  "aiChatUntitled": "Untitled chat",
+  "aiChatListLimitNote": "The latest {count} chats are kept; older ones are removed automatically.",
+  "@aiChatListLimitNote": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatListUpdated": "{when} · {messages}",
+  "@aiChatListUpdated": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "messages": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatToday": "Today",
+  "aiChatYesterday": "Yesterday",
+  "aiChatSettingsService": "Service",
+  "aiChatSettingsServiceModel": "Service and model",
+  "aiChatServiceAnthropic": "Anthropic",
+  "aiChatServiceOpenai": "OpenAI",
+  "aiChatSettingsKeys": "API keys",
+  "aiChatKeyTitle": "{service} key",
+  "@aiChatKeyTitle": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeySaved": "Saved · {mask}",
+  "@aiChatKeySaved": {
+    "placeholders": {
+      "mask": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeyNotSet": "Not added yet",
+  "aiChatKeySheetSubtitle": "Stored encrypted on this phone only.",
+  "aiChatKeyCurrent": "Current key",
+  "aiChatKeyField": "Key",
+  "aiChatKeyFieldHint": "Paste the key here",
+  "aiChatKeyPaste": "Paste",
+  "aiChatKeySave": "Save key",
+  "aiChatKeyReplace": "Replace key",
+  "aiChatKeyDelete": "Delete key",
+  "aiChatKeyDeleted": "Key deleted",
+  "aiChatKeySavedNotice": "Key saved.",
+  "aiChatKeyTest": "Test key",
+  "aiChatKeyTestOk": "The key works.",
+  "aiChatKeyTestNote": "The test only asks for the model list – none of your data is sent.",
+  "aiChatKeyWhere": "Where do I get a key?",
+  "aiChatKeyProblemEmpty": "Paste the key first.",
+  "aiChatKeyProblemShort": "That’s too short to be a key.",
+  "aiChatKeyProblemSpaces": "The key contains spaces – copy it again.",
+  "aiChatKeyProblemProvider": "This key belongs to {service}, so it wasn’t saved here – it would be sent to the wrong service. Add it under {service}.",
+  "@aiChatKeyProblemProvider": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSettingsModel": "Model",
+  "aiChatModelPickerTitle": "Choose a model",
+  "aiChatModelYourList": "Your list",
+  "aiChatModelsAvailable": "Available from {service}",
+  "@aiChatModelsAvailable": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelCustom": "Add a model id",
+  "aiChatModelCustomField": "Model id",
+  "aiChatModelCustomHint": "e.g. claude-sonnet-5-5",
+  "aiChatModelInvalid": "Not a valid model id.",
+  "aiChatModelUse": "Use",
+  "aiChatModelRefresh": "Refresh models",
+  "aiChatModelRefreshed": "{count, plural, =0{No models available} =1{1 model available} other{{count} models available}}",
+  "@aiChatModelRefreshed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatModelRefreshNote": "Asks {service} for the list only when you tap.",
+  "@aiChatModelRefreshNote": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelReset": "Reset the list",
+  "aiChatModelRemove": "Remove {model} from the list",
+  "@aiChatModelRemove": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelSelected": "Selected",
+  "aiChatModelChip": "Model: {model}. Tap to change",
+  "@aiChatModelChip": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSettingsReply": "Reply",
+  "aiChatMaxTokens": "Longest reply",
+  "aiChatMaxTokensNote": "In tokens, including any model reasoning.",
+  "aiChatTemperature": "Temperature",
+  "aiChatTemperatureDefault": "Model default (recommended)",
+  "aiChatTemperatureNote": "Newer models accept only the default. Lower = steadier replies.",
+  "aiChatSettingsPrivacy": "Privacy",
+  "aiChatPrivacyKeys": "Keys live in the phone’s encrypted storage – not in the database, backups or exports.",
+  "aiChatPrivacyCalls": "Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background.",
+  "aiChatPrivacyHistory": "Chats are kept encrypted on your phone (the latest {count}), each with the summary you approved for it. They are part of your backups and your full data export.",
+  "@aiChatPrivacyHistory": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeyProblemChars": "The key has characters no key has (maybe from copying) – copy it again.",
+  "aiChatLinkTitle": "Open this link?",
+  "@aiChatLinkTitle": {
+    "description": "Sheet shown before a link in an AI reply opens"
+  },
+  "aiChatLinkBody": "It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it.",
+  "aiChatLinkOpen": "Open link",
+  "widgetsPrayerName": "Next prayer",
+  "@widgetsPrayerName": {
+    "description": "Home-screen widget: the next prayer (widget title and its name in settings)"
+  },
+  "widgetsMedsName": "Today’s meds",
+  "@widgetsMedsName": {
+    "description": "Home-screen widget: today's doses (widget title and its name in settings)"
+  },
+  "widgetsTasksName": "Today’s Top 3",
+  "@widgetsTasksName": {
+    "description": "Home-screen widget: today's Top 3 (widget title and its name in settings)"
+  },
+  "widgetsBudgetName": "Budget left",
+  "@widgetsBudgetName": {
+    "description": "Home-screen widget: what is left of the budget (widget title and its name in settings)"
+  },
+  "widgetsCountdown": "in {time}",
+  "@widgetsCountdown": {
+    "description": "Widget countdown to the next prayer; {time} is a ticking h:mm:ss filled in by Android",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsPrayerNotePlace": "{date} · {place}",
+  "@widgetsPrayerNotePlace": {
+    "description": "Widget: Hijri date and the location's name",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsFraction": "{done}/{total}",
+  "@widgetsFraction": {
+    "description": "Widget headline: answered doses or finished tasks out of the total (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsMedsNext": "Next at {time}: {name}",
+  "@widgetsMedsNext": {
+    "description": "Widget: the next dose of today (details shown)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsMedsPending": "{count, plural, =1{1 dose to go} other{{count} doses to go}}",
+  "@widgetsMedsPending": {
+    "description": "Widget: doses of today still without an answer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsMedsAllDone": "Every dose of today is logged",
+  "@widgetsMedsAllDone": {
+    "description": "Widget: all of today's doses answered"
+  },
+  "widgetsMedsNoneToday": "No doses today",
+  "@widgetsMedsNoneToday": {
+    "description": "Widget: nothing is planned today"
+  },
+  "widgetsMedsSetUp": "Add your medications in Madar",
+  "@widgetsMedsSetUp": {
+    "description": "Widget: no medications yet"
+  },
+  "widgetsMore": "{count, plural, =1{+1 more dose} other{+{count} more doses}}",
+  "@widgetsMore": {
+    "description": "Widget: doses that do not fit in the list",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsTasksLeft": "{count, plural, =1{1 to go} other{{count} to go}}",
+  "@widgetsTasksLeft": {
+    "description": "Widget: Top 3 items not done yet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsTasksAllDone": "Today’s Top 3 are done",
+  "@widgetsTasksAllDone": {
+    "description": "Widget: every Top 3 item is done"
+  },
+  "widgetsTasksEmpty": "Choose today’s Top 3 in Madar",
+  "@widgetsTasksEmpty": {
+    "description": "Widget: no Top 3 chosen for today"
+  },
+  "widgetsTasksCarried": "{count, plural, =1{1 unfinished from yesterday} other{{count} unfinished from yesterday}}",
+  "@widgetsTasksCarried": {
+    "description": "Widget after midnight: yesterday's unfinished Top 3 waiting for the carry-over",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsBudgetOf": "of {amount}",
+  "@widgetsBudgetOf": {
+    "description": "Widget: the planned total under what is left",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsBudgetOverBy": "Over by {amount}",
+  "@widgetsBudgetOverBy": {
+    "description": "Widget: spent more than planned",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsBudgetOver": "Over budget",
+  "@widgetsBudgetOver": {
+    "description": "Widget (counts only): spent more than planned"
+  },
+  "widgetsBudgetLeftMonth": "left this month",
+  "@widgetsBudgetLeftMonth": {
+    "description": "Widget (counts only) under the percentage"
+  },
+  "widgetsBudgetLeftWeek": "left this week",
+  "@widgetsBudgetLeftWeek": {
+    "description": "Widget (counts only) under the percentage"
+  },
+  "widgetsBudgetDaysLeft": "{count, plural, =0{Last day} =1{1 day left} other{{count} days left}}",
+  "@widgetsBudgetDaysLeft": {
+    "description": "Widget: days left in the budget period after today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsBudgetNone": "Set up your budget in Madar",
+  "@widgetsBudgetNone": {
+    "description": "Widget: nothing is planned"
+  },
+  "widgetsStale": "Open Madar to refresh this widget",
+  "@widgetsStale": {
+    "description": "Widget: its data ran out (the app has not run for a while)"
+  },
+  "widgetsSettingsTitle": "Home-screen widgets",
+  "@widgetsSettingsTitle": {
+    "description": "Settings page / section title"
+  },
+  "widgetsSettingsIntro": "Add Madar’s widgets from your home screen: long-press an empty spot, choose Widgets, then Madar.",
+  "@widgetsSettingsIntro": {
+    "description": "Settings: how to add a widget"
+  },
+  "widgetsShowDetails": "Show details",
+  "@widgetsShowDetails": {
+    "description": "Settings switch: names, times and amounts on the widget"
+  },
+  "widgetsDetailsShown": "Names, times and amounts show on the home screen",
+  "@widgetsDetailsShown": {
+    "description": "Settings: subtitle while details are shown"
+  },
+  "widgetsDetailsHidden": "Counts only — no names or amounts",
+  "@widgetsDetailsHidden": {
+    "description": "Settings: subtitle while details are hidden"
+  },
+  "widgetsPrayerDetailsShown": "Your city’s name shows under the Hijri date",
+  "@widgetsPrayerDetailsShown": {
+    "description": "Settings (prayer widget): subtitle while details are shown"
+  },
+  "widgetsPrayerDetailsHidden": "The prayer, its time and the date — no city",
+  "@widgetsPrayerDetailsHidden": {
+    "description": "Settings (prayer widget): subtitle while details are hidden"
+  },
+  "widgetsOnHomeScreen": "On your home screen",
+  "@widgetsOnHomeScreen": {
+    "description": "Settings: this widget has been added"
+  },
+  "widgetsNotAdded": "Not added yet",
+  "@widgetsNotAdded": {
+    "description": "Settings: this widget is not on the home screen"
+  },
+  "widgetsLockNote": "App Lock is on, so widgets show counts only unless you choose otherwise here.",
+  "@widgetsLockNote": {
+    "description": "Settings: why details are hidden by default"
+  },
+  "widgetsPrivacyNote": "Widget data is written on this device only, encrypted, never for a widget you have not added, and erased with “Delete all data”.",
+  "@widgetsPrivacyNote": {
+    "description": "Settings: privacy note"
+  },
+  "widgetsBudgetPeriod": "Budget period",
+  "@widgetsBudgetPeriod": {
+    "description": "Settings: the budget widget shows this month or this week"
+  },
+  "widgetsPeriodMonth": "This month",
+  "@widgetsPeriodMonth": {
+    "description": "Settings option"
+  },
+  "widgetsPeriodWeek": "This week",
+  "@widgetsPeriodWeek": {
+    "description": "Settings option"
+  }
 }

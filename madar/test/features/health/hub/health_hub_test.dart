@@ -116,7 +116,10 @@ void main() {
       expect(RecordOpener.canOpen('medications', null, const [], planetKey: 'health'), isTrue);
       expect(RecordOpener.healthLocation('medications', planetKey: 'health'), AppRoutes.meds);
       expect(RecordOpener.healthLocation('medications:m1', planetKey: 'health'), AppRoutes.meds);
-      expect(RecordOpener.canOpen('debts', 'd', const [], planetKey: 'money'), isFalse);
+      // Money records open too since Phase 5 (a debt → its sheet), but
+      // never as a Health screen.
+      expect(RecordOpener.canOpen('debts', 'd', const [], planetKey: 'money'), isTrue);
+      expect(RecordOpener.healthLocation('debts:d', planetKey: 'money'), isNull);
     });
   });
 

@@ -17,6 +17,7 @@ library;
 import 'package:meta/meta.dart';
 
 import '../../../../core/domain/money.dart';
+import '../../money_glyphs.dart';
 import 'ledger_models.dart';
 
 /// When a sign is written.
@@ -104,7 +105,8 @@ class LedgerMoneyFormat {
       } else if (c == 0x2E) {
         out.write('٫');
       } else if (c == 0x2C) {
-        out.write('٬');
+        // Not `٬`: see MoneyGlyphs (the font draws it like the decimal `٫`).
+        out.write(MoneyGlyphs.arabicGroup);
       } else {
         out.writeCharCode(c);
       }

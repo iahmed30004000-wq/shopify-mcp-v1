@@ -169,12 +169,72 @@ abstract final class AppRoutes {
   /// number, lab margin, doctor report).
   static const String healthSettings = '/settings/health';
 
+  // Phase 5 – money (no tax, VAT, fee or zakat anywhere). The Money world's
+  // own page is its hub (`planetOf('money')`); every money screen below
+  // opens from it.
+
+  /// The ledger: net balance, wallets, charts, recent entries.
+  static const String ledger = '/ledger';
+
+  /// One wallet's balance, chart and entries (`/ledger/wallet/<id>`).
+  static const String wallet = '/ledger/wallet/:id';
+
+  /// Location of the wallet [walletId].
+  static String walletOf(String walletId) => '/ledger/wallet/${Uri.encodeComponent(walletId)}';
+
+  /// Every entry, searchable and filtered (`?wallet=&kind=&item=&tag=&from=
+  /// &to=&scope=&unassigned=1&q=`; repeated keys for several values).
+  static const String transactions = '/ledger/transactions';
+
+  /// Location of the transactions filtered by [query] (see
+  /// `TxFilterQuery`); none: every entry.
+  static String transactionsOf([Map<String, List<String>>? query]) =>
+      Uri(path: transactions, queryParameters: query == null || query.isEmpty ? null : query).toString();
+
+  /// Currencies, the base currency and the manual exchange rates.
+  static const String currencies = '/ledger/currencies';
+
+  /// The nested budget (`?tab=spending`; none: the plan).
+  static const String budget = '/budget';
+
+  /// Location of the budget on [tab] (`plan`, `spending`; null or `plan`:
+  /// the plain location).
+  static String budgetOf({String? tab}) => _withTab(budget, tab, 'plan');
+
+  /// Savings jars, debts and recurring obligations (`?tab=debts|obligations`;
+  /// `&debt=<id>` / `&obligation=<id>` opens that one's sheet).
+  static const String goals = '/goals';
+
+  /// Location of the goals on [tab] (`jars`, `debts`, `obligations`),
+  /// opening the sheet of [debt] or [obligation] (their tab implied).
+  static String goalsOf({String? tab, String? debt, String? obligation}) {
+    final t = debt != null ? 'debts' : (obligation != null ? 'obligations' : tab);
+    return Uri(
+      path: goals,
+      queryParameters: {
+        if (t != null && t != 'jars') 'tab': t,
+        'debt': ?debt,
+        if (debt == null) 'obligation': ?obligation,
+      }.nullIfEmpty,
+    ).toString();
+  }
+
+  /// One savings jar: progress, plan, chart, movements (`/goals/jar/<id>`).
+  static const String jar = '/goals/jar/:id';
+
+  /// Location of the jar [jarId].
+  static String jarOf(String jarId) => '/goals/jar/${Uri.encodeComponent(jarId)}';
+
   static String _withTab(String path, String? tab, String home) =>
       Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
 
   /// Locations reachable before onboarding is finished (onboarding can hand
   /// over to the importer).
   static const Set<String> beforeOnboarding = {onboarding, import};
+}
+
+extension on Map<String, String> {
+  Map<String, String>? get nullIfEmpty => isEmpty ? null : this;
 }
 
 /// Where the router must send [location] (a matched location such as

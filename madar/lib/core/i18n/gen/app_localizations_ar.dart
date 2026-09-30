@@ -13248,6 +13248,184 @@ class L10nAr extends L10n {
   String get goalsDebtNoWalletHint => 'بلا محفظة: تبقى أرصدة المحافظ كما هي.';
 
   @override
+  String get moneyHubNetWorthTitle => 'صافي ثروتك';
+
+  @override
+  String moneyHubNetWorthIn(String code) {
+    return 'بعملة $code';
+  }
+
+  @override
+  String get moneyHubNetWorthEmpty =>
+      'أضف محفظتك الأولى ليظهر هنا صافي ثروتك بعملتك الأساسية.';
+
+  @override
+  String get moneyHubPartWallets => 'المحافظ';
+
+  @override
+  String get moneyHubPartJars => 'الحصّالات';
+
+  @override
+  String get moneyHubPartOwedToMe => 'لك عند الناس';
+
+  @override
+  String get moneyHubPartIOwe => 'عليك';
+
+  @override
+  String moneyHubNetWorthSemantics(
+    String total,
+    String wallets,
+    String jars,
+    String owed,
+    String owe,
+  ) {
+    return 'صافي ثروتك $total: المحافظ $wallets، الحصّالات $jars، لك $owed، عليك $owe';
+  }
+
+  @override
+  String get moneyHubRatesAction => 'العملات';
+
+  @override
+  String get moneyHubQuickTitle => 'سجّل حركة';
+
+  @override
+  String get moneyHubAddExpenseHint => 'سجّل مصروفًا';
+
+  @override
+  String get moneyHubAddIncomeHint => 'سجّل دخلًا';
+
+  @override
+  String get moneyHubAddTransferHint => 'حوّل بين محفظتين';
+
+  @override
+  String get moneyHubWalletsTitle => 'محافظك';
+
+  @override
+  String get moneyHubLedgerAction => 'الدفتر';
+
+  @override
+  String get moneyHubPlanTitle => 'خطة هذا الشهر';
+
+  @override
+  String get moneyHubBudgetAction => 'الميزانية';
+
+  @override
+  String get moneyHubDuesTitle => 'المستحقات والادّخار';
+
+  @override
+  String get moneyHubGoalsAction => 'الكل';
+
+  @override
+  String get moneyHubToolsTitle => 'أدوات المال';
+
+  @override
+  String get moneyHubToolLedger => 'الدفتر';
+
+  @override
+  String get moneyHubToolLedgerHint => 'المحافظ وأرصدتها وآخر الحركات';
+
+  @override
+  String get moneyHubToolTransactions => 'الحركات';
+
+  @override
+  String get moneyHubToolTransactionsHint => 'كل الحركات مع البحث والتصفية';
+
+  @override
+  String get moneyHubToolBudget => 'الميزانية';
+
+  @override
+  String get moneyHubToolBudgetHint => 'الخطة المتداخلة والإنفاق مقابلها';
+
+  @override
+  String get moneyHubToolJars => 'الحصّالات';
+
+  @override
+  String get moneyHubToolJarsHint => 'الأهداف والمواعيد والإيداعات';
+
+  @override
+  String get moneyHubToolDebts => 'الديون';
+
+  @override
+  String get moneyHubToolDebtsHint => 'ما عليك وما لك، ومواعيد السداد';
+
+  @override
+  String get moneyHubToolBills => 'الالتزامات';
+
+  @override
+  String get moneyHubToolBillsHint =>
+      'الالتزامات المتكررة؛ «دُفع» ينقل الموعد التالي';
+
+  @override
+  String get moneyHubMoonOpenWallet => 'افتح المحفظة';
+
+  @override
+  String get moneyHubSettingsSection => 'المال';
+
+  @override
+  String get moneyHubSettingsSectionHint =>
+      'العملات وأسابيع الشهر وبداية الأسبوع وتذكير المستحقات';
+
+  @override
+  String get moneyHubSettingsCurrencies => 'العملة الأساسية والأسعار';
+
+  @override
+  String moneyHubSettingsCurrencyCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n عملة',
+      many: '$n عملة',
+      few: '$n عملات',
+      two: 'عملتان',
+      one: 'عملة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get moneyHubSettingsWeeks => 'أسابيع الشهر';
+
+  @override
+  String moneyHubSettingsWeeksSummary(String weeks) {
+    return '$weeks · للتحويل بين الأسبوعي والشهري';
+  }
+
+  @override
+  String get moneyHubSettingsWeekStart => 'بداية الأسبوع';
+
+  @override
+  String get moneyHubSettingsWeekStartHint =>
+      'للبنود الأسبوعية في الميزانية وتقارير الأسبوع في الدفتر';
+
+  @override
+  String get moneyHubWeekSaturday => 'السبت';
+
+  @override
+  String get moneyHubWeekSunday => 'الأحد';
+
+  @override
+  String get moneyHubWeekMonday => 'الإثنين';
+
+  @override
+  String get moneyHubSettingsReminders => 'تذكير المستحقات';
+
+  @override
+  String get moneyHubSettingsRemindersOff => 'متوقف';
+
+  @override
+  String get moneyHubSettingsRemindersOnDay => 'في يوم الاستحقاق';
+
+  @override
+  String moneyHubSettingsRemindersBoth(String lead) {
+    return '$lead وفي يومه';
+  }
+
+  @override
+  String moneyHubSettingsRemindersAt(String when, String time) {
+    return '$when · الساعة $time';
+  }
+
+  @override
   String get workTitle => 'العمل';
 
   @override
@@ -17094,4 +17272,4140 @@ class L10nAr extends L10n {
 
   @override
   String get bodyNotifyHint => 'يحتاج إذن الإشعارات على الهاتف.';
+
+  @override
+  String get cmodTitle => 'متتبّعات وقوائم';
+
+  @override
+  String get cmodNewModule => 'وحدة جديدة';
+
+  @override
+  String cmodModulesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count وحدة',
+      many: '$count وحدة',
+      few: '$count وحدات',
+      two: 'وحدتان',
+      one: 'وحدة واحدة',
+      zero: 'لا وحدات بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodLoggedToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إدخال اليوم',
+      many: '$count إدخالًا اليوم',
+      few: '$count إدخالات اليوم',
+      two: 'إدخالان اليوم',
+      one: 'إدخال واحد اليوم',
+      zero: 'لم تسجّل شيئًا اليوم بعد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodEntriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إدخال',
+      many: '$count إدخالًا',
+      few: '$count إدخالات',
+      two: 'إدخالان',
+      one: 'إدخال واحد',
+      zero: 'لا إدخالات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عنصر',
+      many: '$count عنصرًا',
+      few: '$count عناصر',
+      two: 'عنصران',
+      one: 'عنصر واحد',
+      zero: 'لا عناصر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsProgress(String done, String total) {
+    return '$done من $total منجز';
+  }
+
+  @override
+  String cmodOpenItems(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عنصر متبقٍّ',
+      many: '$count عنصرًا متبقيًا',
+      few: '$count عناصر متبقية',
+      two: 'عنصران متبقيان',
+      one: 'عنصر واحد متبقٍّ',
+      zero: 'لا شيء متبقٍّ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodEmptyTitle => 'اصنع متتبّعك الأول';
+
+  @override
+  String get cmodEmptyBody =>
+      'تتبّع ما يهمّك بحقولك أنت: سجلّ قراءة، أذكار بعد الصلاة، قائمة عادات… ويظهر كل ذلك في كواكبك.';
+
+  @override
+  String get cmodEmptyAction => 'أنشئ وحدة';
+
+  @override
+  String get cmodArchivedSection => 'المؤرشفة';
+
+  @override
+  String get cmodKindTracker => 'متتبّع';
+
+  @override
+  String get cmodKindList => 'قائمة';
+
+  @override
+  String get cmodKindTrackerHint => 'قيم تسجّلها مع الأيام، برسوم بيانية';
+
+  @override
+  String get cmodKindListHint => 'عناصر تشطبها وترتّبها';
+
+  @override
+  String get cmodLastToday => 'آخر إدخال اليوم';
+
+  @override
+  String get cmodLastYesterday => 'آخر إدخال أمس';
+
+  @override
+  String cmodLastDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر إدخال قبل $count يوم',
+      many: 'آخر إدخال قبل $count يومًا',
+      few: 'آخر إدخال قبل $count أيام',
+      two: 'آخر إدخال قبل يومين',
+      one: 'آخر إدخال قبل يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodNoEntries => 'لا إدخالات بعد';
+
+  @override
+  String cmodStreakBadge(String count) {
+    return 'سلسلة $count';
+  }
+
+  @override
+  String get cmodActionArchive => 'أرشفة';
+
+  @override
+  String get cmodActionUnarchive => 'إعادة من الأرشيف';
+
+  @override
+  String get cmodActionAddEntry => 'إدخال جديد';
+
+  @override
+  String get cmodActionOpen => 'فتح';
+
+  @override
+  String get cmodActionExport => 'مشاركة كملف CSV';
+
+  @override
+  String get cmodActionUncheck => 'إعادة فتح';
+
+  @override
+  String get cmodActionCheck => 'إنجاز';
+
+  @override
+  String cmodToastArchived(String name) {
+    return 'أُرشفت «$name»';
+  }
+
+  @override
+  String cmodToastUnarchived(String name) {
+    return 'عادت «$name» من الأرشيف';
+  }
+
+  @override
+  String cmodToastDeleted(String name) {
+    return 'حُذفت «$name»';
+  }
+
+  @override
+  String cmodToastDuplicated(String name) {
+    return 'نُسخت «$name»';
+  }
+
+  @override
+  String cmodToastLogged(String name) {
+    return 'سُجّل في «$name»';
+  }
+
+  @override
+  String get cmodToastUnchecked => 'أُلغي تسجيل اليوم';
+
+  @override
+  String get cmodToastEntryDeleted => 'حُذف الإدخال';
+
+  @override
+  String get cmodToastEntryDuplicated => 'نُسخ الإدخال';
+
+  @override
+  String get cmodToastItemDone => 'أُنجز العنصر';
+
+  @override
+  String get cmodToastItemReopened => 'أُعيد فتح العنصر';
+
+  @override
+  String get cmodToastCleared => 'مُسحت العناصر المنجزة';
+
+  @override
+  String cmodToastSaved(String name) {
+    return 'حُفظت «$name»';
+  }
+
+  @override
+  String get cmodToastReminderDeleted => 'حُذف التذكير';
+
+  @override
+  String get cmodToastReminderAdded => 'أُضيف التذكير';
+
+  @override
+  String get cmodQuickDone => 'تمّ اليوم';
+
+  @override
+  String get cmodQuickDoneHint => 'سجّل إنجاز اليوم بلمسة';
+
+  @override
+  String get cmodQuickChecked => 'أُنجز اليوم';
+
+  @override
+  String get cmodQuickCheckedHint => 'المس لإلغاء تسجيل اليوم';
+
+  @override
+  String get cmodQuickAddOne => 'سجّل مرّة';
+
+  @override
+  String get cmodQuickRate => 'قيّم اليوم';
+
+  @override
+  String cmodRateStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نجمة',
+      many: '$count نجمة',
+      few: '$count نجوم',
+      two: 'نجمتان',
+      one: 'نجمة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodBuilderNewTitle => 'وحدة جديدة';
+
+  @override
+  String get cmodBuilderEditTitle => 'تعديل الوحدة';
+
+  @override
+  String get cmodSectionBasics => 'الأساسيات';
+
+  @override
+  String get cmodName => 'الاسم';
+
+  @override
+  String get cmodNameHint => 'مثال: سجلّ القراءة';
+
+  @override
+  String get cmodKind => 'النوع';
+
+  @override
+  String get cmodIcon => 'الأيقونة';
+
+  @override
+  String get cmodColor => 'اللون';
+
+  @override
+  String get cmodPlanet => 'الكوكب';
+
+  @override
+  String get cmodPlanetNone => 'بلا كوكب';
+
+  @override
+  String get cmodPlanetHint =>
+      'كل إدخال يُنعش هذا الكوكب في المدار، ويدور حوله قمرًا';
+
+  @override
+  String get cmodWindow => 'وقت الصلاة';
+
+  @override
+  String get cmodWindowHint => 'متى تتوقّع أن تسجّل عادةً';
+
+  @override
+  String get cmodSectionFields => 'الحقول';
+
+  @override
+  String get cmodAddField => 'أضف حقلًا';
+
+  @override
+  String get cmodFieldsEmptyTracker =>
+      'بلا حقول يصبح المتتبّع عدّادًا بلمسة واحدة';
+
+  @override
+  String get cmodFieldsEmptyList => 'أضف حقلًا واحدًا على الأقل، كاسم العنصر';
+
+  @override
+  String get cmodHiddenFields => 'حقول مخفية';
+
+  @override
+  String get cmodHiddenFieldsHint =>
+      'أُزيلت من النموذج، وبياناتها القديمة محفوظة';
+
+  @override
+  String get cmodRestoreField => 'إظهار';
+
+  @override
+  String get cmodSectionChart => 'الرسم البياني';
+
+  @override
+  String get cmodChartField => 'ما يُرسم';
+
+  @override
+  String get cmodChartEntries => 'عدد الإدخالات';
+
+  @override
+  String get cmodChartStyle => 'الشكل';
+
+  @override
+  String get cmodChartRange => 'المدة';
+
+  @override
+  String get cmodChartLine => 'خط';
+
+  @override
+  String get cmodChartBar => 'أعمدة';
+
+  @override
+  String get cmodChartHeat => 'تقويم';
+
+  @override
+  String get cmodChartStreak => 'سلسلة';
+
+  @override
+  String get cmodChartEmpty => 'لا بيانات في هذه المدة بعد';
+
+  @override
+  String cmodRangeDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodSave => 'حفظ';
+
+  @override
+  String get cmodCreate => 'إنشاء';
+
+  @override
+  String get cmodCancel => 'إلغاء';
+
+  @override
+  String get cmodDiscardTitle => 'تجاهل التغييرات؟';
+
+  @override
+  String get cmodDiscardBody => 'لم تُحفظ تعديلاتك على هذه الوحدة.';
+
+  @override
+  String get cmodDiscard => 'تجاهل';
+
+  @override
+  String get cmodKeepEditing => 'متابعة التعديل';
+
+  @override
+  String get cmodPreviewUntitled => 'وحدة بلا اسم';
+
+  @override
+  String get cmodIssueNameMissing => 'اكتب اسمًا للوحدة';
+
+  @override
+  String get cmodIssueNameTooLong => 'الاسم طويل جدًا';
+
+  @override
+  String get cmodIssueNoFields => 'أضف حقلًا واحدًا على الأقل';
+
+  @override
+  String cmodIssueTooManyFields(String max) {
+    return 'الحد الأقصى $max حقلًا';
+  }
+
+  @override
+  String get cmodIssueLabelMissing => 'حقل بلا اسم';
+
+  @override
+  String get cmodIssueLabelDuplicate => 'اسم الحقل مكرّر';
+
+  @override
+  String get cmodIssueNoOptions => 'أضف خيارًا واحدًا على الأقل';
+
+  @override
+  String get cmodIssueOptionLabelMissing => 'خيار بلا اسم';
+
+  @override
+  String get cmodIssueOptionDuplicate => 'خيار مكرّر';
+
+  @override
+  String get cmodIssueRangeInverted => 'الحد الأدنى أكبر من الأعلى';
+
+  @override
+  String get cmodIssueCurrencyCode => 'رمز العملة غير صالح';
+
+  @override
+  String get cmodMigrationTitle => 'قبل الحفظ';
+
+  @override
+  String get cmodMigrationBlockedTitle => 'هذا التغيير سيضيّع بيانات';
+
+  @override
+  String get cmodMigrationBlockedBody =>
+      'لم يُحفظ شيء. أعد النوع كما كان، أو أضف حقلًا جديدًا بالنوع الذي تريده.';
+
+  @override
+  String get cmodMigrationOk => 'حسنًا';
+
+  @override
+  String cmodMigTypeBlocked(String field, String entries, String type) {
+    return '«$field»: $entries لا تصلح بنوع «$type»';
+  }
+
+  @override
+  String cmodMigRatingBlocked(String field, String entries) {
+    return '«$field»: $entries فيها نجوم أكثر من المقياس الجديد';
+  }
+
+  @override
+  String cmodMigFieldHidden(String field, String entries) {
+    return '«$field» سيُخفى، وتبقى قيمه في $entries';
+  }
+
+  @override
+  String cmodMigOptionHidden(String field) {
+    return 'الخيارات المحذوفة من «$field» والمستخدمة ستُخفى ولن تُحذف';
+  }
+
+  @override
+  String cmodMigConverted(String field, String entries, String type) {
+    return 'قيم «$field» في $entries ستتحوّل إلى «$type»';
+  }
+
+  @override
+  String cmodMigOutOfRange(String field, String entries) {
+    return '$entries في «$field» خارج الحدود الجديدة وستبقى كما هي';
+  }
+
+  @override
+  String cmodMigNewlyRequired(String field, String entries) {
+    return '$entries بلا قيمة لـ«$field» الذي صار مطلوبًا';
+  }
+
+  @override
+  String get cmodTypeText => 'نص';
+
+  @override
+  String get cmodTypeNumber => 'رقم';
+
+  @override
+  String get cmodTypeDate => 'تاريخ';
+
+  @override
+  String get cmodTypeTime => 'وقت';
+
+  @override
+  String get cmodTypeCheckbox => 'خانة إنجاز';
+
+  @override
+  String get cmodTypeSingle => 'اختيار واحد';
+
+  @override
+  String get cmodTypeMulti => 'اختيارات متعددة';
+
+  @override
+  String get cmodTypeRating => 'تقييم بالنجوم';
+
+  @override
+  String get cmodTypeCurrency => 'مبلغ';
+
+  @override
+  String get cmodTypeTextHint => 'ملاحظة، عنوان كتاب…';
+
+  @override
+  String get cmodTypeNumberHint => 'صفحات، دقائق، مرّات…';
+
+  @override
+  String get cmodTypeDateHint => 'موعد أو مناسبة';
+
+  @override
+  String get cmodTypeTimeHint => 'وقت النوم، وقت البدء…';
+
+  @override
+  String get cmodTypeCheckboxHint => 'تمّ أو لم يتمّ';
+
+  @override
+  String get cmodTypeSingleHint => 'خيار واحد من قائمتك';
+
+  @override
+  String get cmodTypeMultiHint => 'عدّة خيارات من قائمتك';
+
+  @override
+  String get cmodTypeRatingHint => 'من نجمتين إلى عشر';
+
+  @override
+  String get cmodTypeCurrencyHint => 'مبلغ بعملة تختارها';
+
+  @override
+  String get cmodPickType => 'نوع الحقل';
+
+  @override
+  String get cmodFieldNew => 'حقل جديد';
+
+  @override
+  String get cmodFieldEdit => 'تعديل الحقل';
+
+  @override
+  String get cmodFieldLabel => 'اسم الحقل';
+
+  @override
+  String get cmodFieldLabelHint => 'مثال: الصفحات';
+
+  @override
+  String get cmodFieldRequired => 'مطلوب';
+
+  @override
+  String get cmodFieldRequiredHint => 'لا يُحفظ الإدخال دونه';
+
+  @override
+  String get cmodFieldUnit => 'الوحدة';
+
+  @override
+  String get cmodFieldUnitHint => 'صفحة، دقيقة، كغ…';
+
+  @override
+  String get cmodFieldMin => 'الحد الأدنى';
+
+  @override
+  String get cmodFieldMax => 'الحد الأعلى';
+
+  @override
+  String get cmodFieldNoLimit => 'بلا حد';
+
+  @override
+  String get cmodFieldDecimals => 'الخانات العشرية';
+
+  @override
+  String get cmodFieldScale => 'المقياس';
+
+  @override
+  String get cmodFieldCurrency => 'العملة';
+
+  @override
+  String get cmodFieldOptions => 'الخيارات';
+
+  @override
+  String get cmodAddOption => 'أضف خيارًا';
+
+  @override
+  String get cmodOptionHint => 'اسم الخيار';
+
+  @override
+  String get cmodRemoveOption => 'احذف الخيار';
+
+  @override
+  String get cmodFieldMultiline => 'نص طويل';
+
+  @override
+  String get cmodFieldMultilineHint => 'يتّسع لعدّة أسطر';
+
+  @override
+  String get cmodFieldDelete => 'احذف الحقل';
+
+  @override
+  String cmodFieldCopyLabel(String label) {
+    return '$label (نسخة)';
+  }
+
+  @override
+  String get cmodFieldTypeNote =>
+      'إن غيّرت النوع تتحوّل القيم القديمة حين يمكن ذلك، وإلا لا يُحفظ التغيير.';
+
+  @override
+  String cmodFieldOptionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count خيار',
+      many: '$count خيارًا',
+      few: '$count خيارات',
+      two: 'خياران',
+      one: 'خيار واحد',
+      zero: 'بلا خيارات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodFieldRange(String min, String max) {
+    return '$min – $max';
+  }
+
+  @override
+  String cmodFieldAtLeast(String min) {
+    return 'من $min';
+  }
+
+  @override
+  String cmodFieldAtMost(String max) {
+    return 'حتى $max';
+  }
+
+  @override
+  String cmodFieldDeleted(String name) {
+    return 'حُذف «$name» من النموذج';
+  }
+
+  @override
+  String get cmodFieldDuplicated => 'نُسخ الحقل';
+
+  @override
+  String get cmodGalleryTitle => 'ابدأ وحدة';
+
+  @override
+  String get cmodGallerySubtitle => 'من الصفر أو من قالب، وكل شيء قابل للتعديل';
+
+  @override
+  String get cmodBlankTracker => 'متتبّع فارغ';
+
+  @override
+  String get cmodBlankList => 'قائمة فارغة';
+
+  @override
+  String get cmodTemplatesHeader => 'قوالب للبدء';
+
+  @override
+  String get cmodTplReadingLog => 'سجلّ القراءة';
+
+  @override
+  String get cmodTplReadingLogDesc => 'الكتاب والصفحات وتقييمك';
+
+  @override
+  String get cmodTplDhikr => 'أذكار بعد الصلاة';
+
+  @override
+  String get cmodTplDhikrDesc => 'كم مرّة ذكرت الله، وبعد أي صلاة';
+
+  @override
+  String get cmodTplHabit => 'عادة يومية';
+
+  @override
+  String get cmodTplHabitDesc => 'لمسة واحدة كل يوم، وسلسلة تكبر';
+
+  @override
+  String get cmodTplHabitList => 'قائمة عادات';
+
+  @override
+  String get cmodTplHabitListDesc => 'عادات تريد بناءها وكم تتكرّر';
+
+  @override
+  String get cmodTplSleep => 'سجلّ النوم';
+
+  @override
+  String get cmodTplSleepDesc => 'النوم والاستيقاظ والساعات والجودة';
+
+  @override
+  String get cmodTplGifts => 'أفكار هدايا';
+
+  @override
+  String get cmodTplGiftsDesc => 'الفكرة ولمن والميزانية والمناسبة';
+
+  @override
+  String get cmodTplBook => 'الكتاب';
+
+  @override
+  String get cmodTplPages => 'الصفحات';
+
+  @override
+  String get cmodTplRating => 'التقييم';
+
+  @override
+  String get cmodTplUnitPages => 'صفحة';
+
+  @override
+  String get cmodTplAfterPrayer => 'بعد صلاة';
+
+  @override
+  String get cmodTplCount => 'العدد';
+
+  @override
+  String get cmodTplUnitTimes => 'مرّة';
+
+  @override
+  String get cmodTplDone => 'تمّ';
+
+  @override
+  String get cmodTplNote => 'ملاحظة';
+
+  @override
+  String get cmodTplHabitItem => 'العادة';
+
+  @override
+  String get cmodTplFrequency => 'التكرار';
+
+  @override
+  String get cmodTplDaily => 'يوميًا';
+
+  @override
+  String get cmodTplWeekly => 'أسبوعيًا';
+
+  @override
+  String get cmodTplMonthly => 'شهريًا';
+
+  @override
+  String get cmodTplBedtime => 'وقت النوم';
+
+  @override
+  String get cmodTplWake => 'وقت الاستيقاظ';
+
+  @override
+  String get cmodTplHours => 'ساعات النوم';
+
+  @override
+  String get cmodTplUnitHours => 'ساعة';
+
+  @override
+  String get cmodTplQuality => 'الجودة';
+
+  @override
+  String get cmodTplIdea => 'الفكرة';
+
+  @override
+  String get cmodTplFor => 'لمن';
+
+  @override
+  String get cmodTplBudget => 'الميزانية';
+
+  @override
+  String get cmodTplOccasion => 'المناسبة';
+
+  @override
+  String get cmodTplNotes => 'ملاحظات';
+
+  @override
+  String get cmodAddEntry => 'إدخال جديد';
+
+  @override
+  String get cmodAddItem => 'عنصر جديد';
+
+  @override
+  String get cmodEntriesSection => 'الإدخالات';
+
+  @override
+  String get cmodItemsSection => 'العناصر';
+
+  @override
+  String get cmodDoneSection => 'المنجزة';
+
+  @override
+  String get cmodClearDone => 'امسح المنجزة';
+
+  @override
+  String get cmodToday => 'اليوم';
+
+  @override
+  String get cmodYesterday => 'أمس';
+
+  @override
+  String get cmodEntriesEmpty => 'لا إدخالات بعد. أول إدخال يبدأ الحكاية.';
+
+  @override
+  String get cmodItemsEmpty => 'القائمة فارغة. أضف أول عنصر.';
+
+  @override
+  String get cmodAllDone => 'أنجزت كل شيء، ما شاء الله';
+
+  @override
+  String get cmodStatStreak => 'السلسلة';
+
+  @override
+  String get cmodStatBest => 'الأفضل';
+
+  @override
+  String get cmodStatTotal => 'المجموع';
+
+  @override
+  String get cmodStatAverage => 'المتوسط';
+
+  @override
+  String get cmodStatActive => 'أيام نشطة';
+
+  @override
+  String get cmodStatEntries => 'الإدخالات';
+
+  @override
+  String get cmodStatRate => 'نسبة الإنجاز';
+
+  @override
+  String cmodDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم',
+      zero: '٠ يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodReminders => 'التذكيرات';
+
+  @override
+  String get cmodAddReminder => 'أضف تذكيرًا';
+
+  @override
+  String get cmodRemindersEmpty => 'ذكّرني بعد صلاة أو في وقت أحدّده';
+
+  @override
+  String get cmodReminderPaused => 'متوقّف';
+
+  @override
+  String get cmodReminderToggle => 'تشغيل التذكير';
+
+  @override
+  String get cmodModuleMenu => 'خيارات الوحدة';
+
+  @override
+  String cmodHiddenValue(String label) {
+    return '$label (مخفي)';
+  }
+
+  @override
+  String get cmodNotifyGroup => 'المتتبّعات والقوائم';
+
+  @override
+  String get cmodNotifyChannel => 'تذكيرات المتتبّعات والقوائم';
+
+  @override
+  String get cmodNotifyChannelDescription =>
+      'تذكيرات لطيفة لتسجيل متتبّعاتك ومراجعة قوائمك';
+
+  @override
+  String get cmodNotifyBodyTracker => 'حان وقت التسجيل';
+
+  @override
+  String get cmodNotifyBodyList => 'ألقِ نظرة على قائمتك';
+
+  @override
+  String get cmodEntryNew => 'إدخال جديد';
+
+  @override
+  String get cmodEntryEdit => 'تعديل الإدخال';
+
+  @override
+  String get cmodItemNew => 'عنصر جديد';
+
+  @override
+  String get cmodItemEdit => 'تعديل العنصر';
+
+  @override
+  String get cmodEntryWhen => 'متى';
+
+  @override
+  String get cmodEntryDone => 'منجز';
+
+  @override
+  String get cmodEntryCounter => 'هذه الوحدة عدّاد: الحفظ يسجّل مرّة واحدة.';
+
+  @override
+  String get cmodErrRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get cmodErrNumber => 'اكتب رقمًا';
+
+  @override
+  String get cmodErrWhole => 'رقم صحيح فقط';
+
+  @override
+  String cmodErrPrecise(String count) {
+    return '$count خانات عشرية على الأكثر';
+  }
+
+  @override
+  String cmodErrMin(String value) {
+    return 'لا يقلّ عن $value';
+  }
+
+  @override
+  String cmodErrMax(String value) {
+    return 'لا يزيد على $value';
+  }
+
+  @override
+  String get cmodErrDate => 'تاريخ غير صالح';
+
+  @override
+  String get cmodErrTime => 'وقت غير صالح';
+
+  @override
+  String get cmodErrOption => 'اختر من القائمة';
+
+  @override
+  String get cmodErrScale => 'خارج المقياس';
+
+  @override
+  String get cmodErrTooLong => 'النص طويل جدًا';
+
+  @override
+  String get cmodPickDate => 'اختر تاريخًا';
+
+  @override
+  String get cmodPickTime => 'اختر وقتًا';
+
+  @override
+  String get cmodClear => 'مسح';
+
+  @override
+  String get cmodYes => 'نعم';
+
+  @override
+  String get cmodNo => 'لا';
+
+  @override
+  String get cmodChecked => 'تمّ';
+
+  @override
+  String get cmodUnchecked => 'لم يتمّ';
+
+  @override
+  String get cmodCardTitle => 'متتبّعاتك هنا';
+
+  @override
+  String get cmodCardSeeAll => 'عرض الكل';
+
+  @override
+  String get cmodCardEmpty => 'أنشئ متتبّعًا لهذا الكوكب';
+
+  @override
+  String get cmodCardEmptyHint => 'عدّاد، أو سجلّ، أو قائمة: بحقولك أنت';
+
+  @override
+  String get cmodExportDate => 'التاريخ';
+
+  @override
+  String get cmodExportTime => 'الوقت';
+
+  @override
+  String get cmodExportDone => 'منجز';
+
+  @override
+  String get cmodExportEntries => 'الإدخالات';
+
+  @override
+  String get cmodExportLastEntry => 'آخر إدخال';
+
+  @override
+  String get cmodExportOpen => 'متبقٍّ';
+
+  @override
+  String cmodExportLastDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'آخر $count يوم',
+      many: 'آخر $count يومًا',
+      few: 'آخر $count أيام',
+      two: 'آخر يومين',
+      one: 'آخر يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportActiveDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم نشط',
+      many: '$count يومًا نشطًا',
+      few: '$count أيام نشطة',
+      two: 'يومان نشطان',
+      one: 'يوم نشط واحد',
+      zero: 'لا أيام نشطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportTotal(String value) {
+    return 'المجموع $value';
+  }
+
+  @override
+  String cmodExportAverage(String value) {
+    return 'المتوسط $value';
+  }
+
+  @override
+  String cmodExportStreak(String current, String best) {
+    return 'السلسلة $current (الأفضل $best)';
+  }
+
+  @override
+  String get cmodExportHidden => 'مخفي';
+
+  @override
+  String get cinemaTitle => 'سينما مدار';
+
+  @override
+  String get cinemaHallSubtitle => 'ألعاب أصلية بروح السينما الكلاسيكية';
+
+  @override
+  String get cinemaFeatures => 'الأفلام الطويلة';
+
+  @override
+  String get cinemaShorts => 'الأفلام القصيرة';
+
+  @override
+  String get cinemaComingSoon => 'قريبًا';
+
+  @override
+  String get cinemaPlay => 'إلى العرض';
+
+  @override
+  String get cinemaGameViewLabel => 'شاشة اللعبة';
+
+  @override
+  String get cinemaPause => 'إيقاف مؤقت';
+
+  @override
+  String get cinemaIntermission => 'استراحة';
+
+  @override
+  String get cinemaResume => 'متابعة العرض';
+
+  @override
+  String get cinemaRestart => 'من البداية';
+
+  @override
+  String get cinemaLeave => 'مغادرة القاعة';
+
+  @override
+  String get cinemaPlayAgain => 'عرض آخر';
+
+  @override
+  String get cinemaTheEnd => 'النهاية';
+
+  @override
+  String get cinemaGameOver => 'انتهى العرض';
+
+  @override
+  String cinemaScoreLine(String score) {
+    return 'النتيجة: $score';
+  }
+
+  @override
+  String cinemaBestLine(String score) {
+    return 'أفضل نتيجة: $score';
+  }
+
+  @override
+  String get cinemaEraSilent => 'العشرينيات الصامتة';
+
+  @override
+  String get cinemaEraRubberHose => 'كرتون الثلاثينيات';
+
+  @override
+  String get cinemaEraNoir => 'نوار الأربعينيات';
+
+  @override
+  String get cinemaEraTechnicolor => 'ألوان الخمسينيات';
+
+  @override
+  String get cinemaEraGrindhouse => 'سينما السبعينيات';
+
+  @override
+  String get cinemaEraVhs => 'فيديو الثمانينيات';
+
+  @override
+  String get cinemaDemoTitle => 'بروفة';
+
+  @override
+  String get cinemaDemoTagline => 'مشهد تجريبي لمحرّك بكرة الفيلم';
+
+  @override
+  String get cinemaDemoOpening => 'المشهد الأول';
+
+  @override
+  String get cinemaDemoOpeningSubtitle => 'المس الشاشة لتقفز فوق البراميل!';
+
+  @override
+  String get cinemaFlappyOrbitTitle => 'رفرفة المدار';
+
+  @override
+  String get cinemaFlappyOrbitTagline => 'رفرف بين الكواكب على أنغام السوينغ';
+
+  @override
+  String get cinemaFlappyOrbitHomage =>
+      'تحية لرسوم الخرطوم المطاطي في الثلاثينيات';
+
+  @override
+  String get cinemaMetropolisTitle => 'آلة المتروبوليس';
+
+  @override
+  String get cinemaMetropolisTagline => 'واجه الآلات العملاقة واحدة تلو الأخرى';
+
+  @override
+  String get cinemaMetropolisHomage =>
+      'تحية لفيلم «متروبوليس» الصامت من العشرينيات';
+
+  @override
+  String get cinemaCaravanTitle => 'سباق القافلة';
+
+  @override
+  String get cinemaCaravanTagline => 'اعبر الكثبان بألوان التكنيكولور';
+
+  @override
+  String get cinemaCaravanHomage => 'تحية لملاحم الصحراء في الخمسينيات';
+
+  @override
+  String get cinemaNoirTitle => 'أسطح النوار';
+
+  @override
+  String get cinemaNoirTagline => 'طارد الظلال فوق أسطح المدينة الممطرة';
+
+  @override
+  String get cinemaNoirHomage => 'تحية لأفلام النوار في الأربعينيات';
+
+  @override
+  String get cinemaNeonSoukTitle => 'متسابق سوق النيون';
+
+  @override
+  String get cinemaNeonSoukTagline => 'انطلق عبر سوق من أضواء النيون';
+
+  @override
+  String get cinemaNeonSoukHomage =>
+      'تحية لأفلام الخيال العلمي على أشرطة الفيديو';
+
+  @override
+  String get cinemaSavedGames => 'ألعابي المحفوظة';
+
+  @override
+  String get cinemaSavedGamesEmpty =>
+      'أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.';
+
+  @override
+  String get cinemaSavedGamesNote =>
+      'تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.';
+
+  @override
+  String get cinemaAddGame => 'إضافة لعبة';
+
+  @override
+  String get cinemaGameName => 'اسم اللعبة';
+
+  @override
+  String get cinemaGameUrl => 'رابط اللعبة';
+
+  @override
+  String get cinemaInvalidUrl => 'أدخل رابطًا صحيحًا يبدأ بـ https://';
+
+  @override
+  String get cinemaRemoveGame => 'إزالة';
+
+  @override
+  String get cinemaOpenGameFailed => 'تعذّر فتح الرابط';
+
+  @override
+  String get cinemaSave => 'حفظ';
+
+  @override
+  String get cinemaCancel => 'إلغاء';
+
+  @override
+  String get cinemaFxTestCard => 'بطاقة المعايرة';
+
+  @override
+  String get cinemaFxFilmLook => 'مظهر الفيلم';
+
+  @override
+  String get cinemaFxQualityLowPower => 'توفير الطاقة';
+
+  @override
+  String get cinemaFxQualityBalanced => 'متوازن';
+
+  @override
+  String get cinemaFxQualityFull => 'أعلى دقة';
+
+  @override
+  String get cinemaFxReelLabel => 'بكرة';
+
+  @override
+  String get cinemaRigCast => 'طاقم التمثيل';
+
+  @override
+  String get cinemaRigNujaym => 'نُجيم';
+
+  @override
+  String get cinemaRigNujaymRole => 'طائر النجمة الشجاع، بطل «رفرفة المدار»';
+
+  @override
+  String get cinemaRigZunbruk => 'البارون زُنبُرك';
+
+  @override
+  String get cinemaRigZunbrukRole => 'رئيس العمّال الآلي في «آلة المتروبوليس»';
+
+  @override
+  String get cinemaRigZajil => 'زاجل';
+
+  @override
+  String get cinemaRigZajilRole => 'الجمل ساعي البريد في «سباق القافلة»';
+
+  @override
+  String get cinemaRigMishmish => 'المفتش مِشمِش';
+
+  @override
+  String get cinemaRigMishmishRole => 'القط المحقق ذو المعطف في «أسطح النوار»';
+
+  @override
+  String get cinemaRigSarab => 'سراب';
+
+  @override
+  String get cinemaRigSarabRole =>
+      'راكبة الدراجة الطائرة في «متسابق سوق النيون»';
+
+  @override
+  String get cinemaRigBean => 'حبّة';
+
+  @override
+  String get cinemaRigBeanRole => 'نجم البروفة، حبّة فاصولياء بقفازين أبيضين';
+
+  @override
+  String get dataCentreTitle => 'بياناتك';
+
+  @override
+  String get dataHeroTitle => 'بياناتك تبقى معك';
+
+  @override
+  String get dataHeroBody =>
+      'يحفظ مَدار كل شيء مشفّرًا على هذا الهاتف، ولا يرفع شيئًا إلى أي مكان. لا يغادر ملفٌّ التطبيقَ إلا حين تشاركه أو تحفظه بنفسك.';
+
+  @override
+  String get dataStatRecords => 'السجلات';
+
+  @override
+  String get dataStatLastBackup => 'آخر نسخة احتياطية';
+
+  @override
+  String get dataLastBackupNever => 'لم تُنشأ بعد';
+
+  @override
+  String get dataLastBackupToday => 'اليوم';
+
+  @override
+  String dataLastBackupDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'قبل $days يوم',
+      many: 'قبل $days يومًا',
+      few: 'قبل $days أيام',
+      two: 'قبل يومين',
+      one: 'أمس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataBackupSection => 'النسخ الاحتياطي';
+
+  @override
+  String get dataBackupSectionHint =>
+      'ملف واحد مشفّر لنقل بياناتك أو حفظها بأمان';
+
+  @override
+  String get dataBackupCreateTitle => 'نسخة احتياطية مشفّرة';
+
+  @override
+  String get dataBackupCreateBody =>
+      'ملف واحد يُقفَل بعبارة مرور لا يعرفها أحد غيرك. احتفظ به في مكان آمن لتنقل بياناتك إلى هاتف جديد.';
+
+  @override
+  String get dataBackupCreateAction => 'إنشاء نسخة احتياطية';
+
+  @override
+  String get dataRestoreTitle => 'الاستعادة من نسخة احتياطية';
+
+  @override
+  String get dataRestoreBody =>
+      'تستبدل كل ما في مَدار بمحتوى ملف النسخة. نحفظ أولًا نسخة أمان من بياناتك الحالية على الهاتف.';
+
+  @override
+  String get dataRestoreAction => 'اختيار ملف النسخة';
+
+  @override
+  String dataSafetyCopiesLine(int count, String date) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نسخة أمان على الهاتف',
+      many: '$count نسخة أمان على الهاتف',
+      few: '$count نسخ أمان على الهاتف',
+      two: 'نسختا أمان على الهاتف',
+      one: 'نسخة أمان واحدة على الهاتف',
+    );
+    return '$_temp0 · آخرها $date';
+  }
+
+  @override
+  String get dataExportSection => 'التصدير';
+
+  @override
+  String get dataExportSectionHint => 'نسخ مقروءة لبياناتك – غير مشفّرة';
+
+  @override
+  String get dataExportSummaryTitle => 'ملخّص جاهز للذكاء الاصطناعي';
+
+  @override
+  String get dataExportSummaryBody =>
+      'نظرة موجزة بصيغة Markdown تراجعها قسمًا قسمًا قبل مشاركتها.';
+
+  @override
+  String get dataExportCsvTitle => 'جداول (CSV)';
+
+  @override
+  String get dataExportCsvBody =>
+      'التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.';
+
+  @override
+  String get dataExportJsonTitle => 'كل البيانات (JSON)';
+
+  @override
+  String get dataExportJsonBody =>
+      'كل السجلات في ملف واحد، لأرشيفك الخاص أو لتطبيقات أخرى.';
+
+  @override
+  String get dataExportPlainWarning =>
+      'ملفات التصدير غير مشفّرة: من يحصل عليها يستطيع قراءتها. شاركها مع من تثق به فقط.';
+
+  @override
+  String get dataImportSection => 'الاستيراد';
+
+  @override
+  String get dataImportTitle => 'الاستيراد من نموذج مَدار الأول';
+
+  @override
+  String get dataImportBody =>
+      'أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.';
+
+  @override
+  String get dataFooter =>
+      'لا يرفع مَدار بياناتك إلى أي خادم. أنت وحدك تقرّر أين تذهب ملفاتك.';
+
+  @override
+  String get dataAreaOther => 'الإعدادات والسجلّ';
+
+  @override
+  String get dataShareAction => 'مشاركة';
+
+  @override
+  String get dataSaveAction => 'حفظ في…';
+
+  @override
+  String get dataCopyAction => 'نسخ';
+
+  @override
+  String get dataDoneAction => 'تم';
+
+  @override
+  String get dataCancelAction => 'إلغاء';
+
+  @override
+  String get dataTryAgainAction => 'حاول مجددًا';
+
+  @override
+  String get dataFileReadyTitle => 'ملفّك جاهز';
+
+  @override
+  String get dataFileReadySubtitle => 'اختر أين يذهب – لا شيء يُرسَل تلقائيًا';
+
+  @override
+  String get dataFileEncryptedNote =>
+      'مشفّر بعبارة المرور. لا يُفتح إلا بها – احتفظ بها بعيدًا عن الملف.';
+
+  @override
+  String get dataFilePlainNote =>
+      'غير مشفّر: من يحصل على هذا الملف يستطيع قراءته.';
+
+  @override
+  String get dataFileShared => 'أُرسل إلى قائمة المشاركة.';
+
+  @override
+  String get dataFileSaved => 'حُفظ في المكان الذي اخترته.';
+
+  @override
+  String get dataFileSendFailed => 'تعذّر ذلك. لم يُرسَل شيء – حاول مجددًا.';
+
+  @override
+  String get dataExportFailed => 'تعذّر تجهيز الملف. بياناتك لم تتغيّر.';
+
+  @override
+  String dataRecordsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سجل',
+      many: '$count سجلًّا',
+      few: '$count سجلات',
+      two: 'سجلّان',
+      one: 'سجل واحد',
+      zero: 'لا سجلات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSizeBytes(String size) {
+    return '$size بايت';
+  }
+
+  @override
+  String dataSizeKb(String size) {
+    return '$size ك.ب';
+  }
+
+  @override
+  String dataSizeMb(String size) {
+    return '$size م.ب';
+  }
+
+  @override
+  String get dataBackupSheetTitle => 'نسخة احتياطية مشفّرة';
+
+  @override
+  String get dataBackupSheetSubtitle =>
+      'AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك';
+
+  @override
+  String get dataBackupSheetBody =>
+      'اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.';
+
+  @override
+  String get dataPassphraseLabel => 'عبارة المرور';
+
+  @override
+  String get dataPassphraseConfirmLabel => 'أعد كتابة عبارة المرور';
+
+  @override
+  String get dataPassphraseMismatch => 'العبارتان غير متطابقتين.';
+
+  @override
+  String get dataPassphraseShow => 'إظهار عبارة المرور';
+
+  @override
+  String get dataPassphraseHide => 'إخفاء عبارة المرور';
+
+  @override
+  String get dataPassphraseNeverStored =>
+      'لا تُحفظ عبارة المرور في أي مكان. بدونها لا يمكن فتح النسخة – ولا حتى بواسطتنا.';
+
+  @override
+  String get dataStrengthLabel => 'القوة';
+
+  @override
+  String get dataStrengthEmpty => '—';
+
+  @override
+  String get dataStrengthVeryWeak => 'ضعيفة جدًا';
+
+  @override
+  String get dataStrengthWeak => 'ضعيفة';
+
+  @override
+  String get dataStrengthFair => 'مقبولة';
+
+  @override
+  String get dataStrengthStrong => 'قوية';
+
+  @override
+  String get dataStrengthVeryStrong => 'قوية جدًا';
+
+  @override
+  String dataStrengthHintShort(String min) {
+    return 'استخدم $min أحرف على الأقل – جملة قصيرة تفي بالغرض.';
+  }
+
+  @override
+  String get dataStrengthHintCommon => 'هذه عبارة شائعة يسهل تخمينها.';
+
+  @override
+  String get dataStrengthHintPattern =>
+      'تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.';
+
+  @override
+  String get dataStrengthHintDigits => 'الأرقام وحدها سهلة التخمين؛ أضف كلمات.';
+
+  @override
+  String get dataStrengthHintWords =>
+      'جيدة. كلمة أو كلمتان إضافيتان تجعلانها أقوى بكثير.';
+
+  @override
+  String get dataBackupWorking => 'نقفل بياناتك…';
+
+  @override
+  String get dataBackupWorkingHint =>
+      'يستغرق هذا بضع ثوانٍ عن قصد، ليصعب تخمين عبارة المرور.';
+
+  @override
+  String get dataBackupReadyTitle => 'النسخة الاحتياطية جاهزة';
+
+  @override
+  String get dataBackupReadySubtitle => 'شاركها أو احفظها في مكان آمن';
+
+  @override
+  String get dataBackupReadyHint =>
+      'احفظ الملف وعبارة المرور في مكانين مختلفين. ستحتاج إلى كليهما للاستعادة.';
+
+  @override
+  String get dataBackupShareSubject => 'نسخة مَدار الاحتياطية';
+
+  @override
+  String get dataBackupFailed =>
+      'تعذّر إنشاء النسخة. بياناتك كما هي – حاول مجددًا.';
+
+  @override
+  String dataBackupMadeOn(String date) {
+    return 'أُنشئت في $date';
+  }
+
+  @override
+  String get dataCsvSheetTitle => 'تصدير جدول';
+
+  @override
+  String get dataCsvSheetSubtitle => 'ملف CSV يُفتح في برامج الجداول';
+
+  @override
+  String get dataCsvWhat => 'ماذا';
+
+  @override
+  String get dataCsvWhen => 'الفترة';
+
+  @override
+  String get dataCsvLabs => 'التحاليل';
+
+  @override
+  String get dataCsvTransactions => 'المعاملات';
+
+  @override
+  String get dataCsvPain => 'الألم';
+
+  @override
+  String get dataCsvMood => 'المزاج';
+
+  @override
+  String get dataRange30 => '30 يومًا';
+
+  @override
+  String get dataRange90 => '90 يومًا';
+
+  @override
+  String get dataRangeYear => '12 شهرًا';
+
+  @override
+  String get dataRangeAll => 'الكل';
+
+  @override
+  String get dataRangeCustom => 'مخصّصة…';
+
+  @override
+  String get dataRangeAllTime => 'كل السجلات منذ البداية';
+
+  @override
+  String dataRangeFromTo(String from, String to) {
+    return 'من $from إلى $to';
+  }
+
+  @override
+  String dataCsvFormatNote(String example) {
+    return 'التواريخ بصيغة $example والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.';
+  }
+
+  @override
+  String get dataCsvCreate => 'إنشاء الملف';
+
+  @override
+  String dataCsvCreateRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'إنشاء الملف ($count صف)',
+      many: 'إنشاء الملف ($count صفًّا)',
+      few: 'إنشاء الملف ($count صفوف)',
+      two: 'إنشاء الملف (صفّان)',
+      one: 'إنشاء الملف (صف واحد)',
+      zero: 'لا صفوف في هذه الفترة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataCsvDate => 'التاريخ';
+
+  @override
+  String get dataCsvTime => 'الوقت';
+
+  @override
+  String get dataCsvTest => 'التحليل';
+
+  @override
+  String get dataCsvCategory => 'الفئة';
+
+  @override
+  String get dataCsvValue => 'القيمة';
+
+  @override
+  String get dataCsvTextResult => 'نتيجة نصية';
+
+  @override
+  String get dataCsvUnit => 'الوحدة';
+
+  @override
+  String get dataCsvRangeLow => 'الحد الأدنى';
+
+  @override
+  String get dataCsvRangeHigh => 'الحد الأعلى';
+
+  @override
+  String get dataCsvFlag => 'العلامة';
+
+  @override
+  String get dataCsvNote => 'ملاحظة';
+
+  @override
+  String get dataCsvNotes => 'ملاحظات';
+
+  @override
+  String get dataCsvKind => 'النوع';
+
+  @override
+  String get dataCsvWallet => 'المحفظة';
+
+  @override
+  String get dataCsvCurrency => 'العملة';
+
+  @override
+  String get dataCsvAmount => 'المبلغ';
+
+  @override
+  String get dataCsvAmountBase => 'المبلغ بالعملة الأساسية';
+
+  @override
+  String get dataCsvBaseCurrency => 'العملة الأساسية';
+
+  @override
+  String get dataCsvBudgetItem => 'بند الميزانية';
+
+  @override
+  String get dataCsvToWallet => 'إلى المحفظة';
+
+  @override
+  String get dataCsvToAmount => 'المبلغ المستلم';
+
+  @override
+  String get dataCsvToCurrency => 'عملة الاستلام';
+
+  @override
+  String get dataCsvTags => 'الوسوم';
+
+  @override
+  String get dataCsvPainScore => 'شدة الألم (0-10)';
+
+  @override
+  String get dataCsvLocations => 'المواضع';
+
+  @override
+  String get dataCsvTriggers => 'المحفّزات';
+
+  @override
+  String get dataCsvBodyPoints => 'نقاط خريطة الجسم';
+
+  @override
+  String get dataCsvMoodScore => 'المزاج (1-5)';
+
+  @override
+  String get dataCsvStress => 'التوتر (0-10)';
+
+  @override
+  String get dataCsvAnxiety => 'القلق (0-10)';
+
+  @override
+  String get dataCsvEnergy => 'الطاقة (0-10)';
+
+  @override
+  String get dataCsvSleepHours => 'ساعات النوم';
+
+  @override
+  String get dataCsvCaffeine => 'أكواب الكافيين';
+
+  @override
+  String get dataCsvFactors => 'العوامل';
+
+  @override
+  String get dataFlagLow => 'منخفض';
+
+  @override
+  String get dataFlagBorderlineLow => 'على الحد الأدنى';
+
+  @override
+  String get dataFlagInRange => 'ضمن المعدل';
+
+  @override
+  String get dataFlagBorderlineHigh => 'على الحد الأعلى';
+
+  @override
+  String get dataFlagHigh => 'مرتفع';
+
+  @override
+  String get dataTxExpense => 'مصروف';
+
+  @override
+  String get dataTxIncome => 'دخل';
+
+  @override
+  String get dataTxTransfer => 'تحويل';
+
+  @override
+  String get dataTxAdjustment => 'تسوية';
+
+  @override
+  String get dataSummarySubtitle =>
+      'يُعدّ على هاتفك · راجع كل قسم قبل المشاركة';
+
+  @override
+  String get dataSummaryIntro =>
+      'لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.';
+
+  @override
+  String get dataSummaryPreparing => 'نجهّز الملخّص على هاتفك…';
+
+  @override
+  String get dataSummarySections => 'الأقسام المضمَّنة';
+
+  @override
+  String dataSummarySectionsOf(String selected, String total) {
+    return '$selected من $total أقسام';
+  }
+
+  @override
+  String dataSummaryTokens(String count) {
+    return '≈ $count رمز';
+  }
+
+  @override
+  String get dataSummaryNoData => 'لا بيانات بعد';
+
+  @override
+  String get dataSummaryProfileHint => 'اختياري';
+
+  @override
+  String get dataSummaryPreviewTitle => 'ما سيُشارَك بالضبط';
+
+  @override
+  String get dataSummaryCopied => 'نُسخ الملخّص إلى الحافظة.';
+
+  @override
+  String get dataSummaryUse => 'استخدام هذا الملخّص';
+
+  @override
+  String get dataProfileChoose => 'اختر ما يُذكر عنك:';
+
+  @override
+  String get dataProfileAboutHint =>
+      'مثلًا: العمر أو ما يهمّك أن يعرفه المساعد';
+
+  @override
+  String get dataRestoreFlowTitle => 'الاستعادة';
+
+  @override
+  String get dataRestoreChooseTitle => 'استعادة بياناتك';
+
+  @override
+  String dataRestoreChooseBody(String ext) {
+    return 'اختر ملف نسخة ينتهي بـ $ext. سترى ما فيه قبل أن يتغيّر أي شيء.';
+  }
+
+  @override
+  String get dataRestorePickFile => 'اختيار ملف النسخة';
+
+  @override
+  String get dataRestoreNothingChanges =>
+      'لن يتغيّر شيء في بياناتك الحالية حتى تؤكّد الاستبدال في الخطوة الأخيرة.';
+
+  @override
+  String get dataSafetyCopiesTitle => 'نسخ الأمان على هذا الهاتف';
+
+  @override
+  String get dataSafetyCopiesHint =>
+      'تُنشأ تلقائيًا قبل كل استعادة، وتُفتح بعبارة المرور التي استُخدمت حينها.';
+
+  @override
+  String get dataRestoreUnlockBody =>
+      'اكتب عبارة المرور التي أقفلت بها هذه النسخة.';
+
+  @override
+  String get dataRestoreUnlockAction => 'فتح النسخة';
+
+  @override
+  String get dataRestoreOtherFile => 'اختيار ملف آخر';
+
+  @override
+  String get dataRestoreOpening => 'نتحقق من النسخة…';
+
+  @override
+  String get dataRestoreOpeningHint =>
+      'نتأكد أن الملف سليم ولم يُعدَّل، ثم نفكّ تشفيره على هاتفك.';
+
+  @override
+  String get dataRestorePreviewTitle => 'النسخة سليمة';
+
+  @override
+  String get dataRestoreInBackup => 'في النسخة';
+
+  @override
+  String get dataRestoreOnPhone => 'على الهاتف الآن';
+
+  @override
+  String get dataRestoreWhatsInside => 'ما في هذه النسخة';
+
+  @override
+  String get dataRestoreReplaceWarning =>
+      'ستحلّ هذه النسخة محلّ كل البيانات الموجودة في مَدار الآن. قبل ذلك نحفظ بياناتك الحالية نسخةَ أمان على هذا الهاتف، تُفتح بعبارة المرور نفسها.';
+
+  @override
+  String get dataRestoreUnderstand => 'فهمت أن بياناتي الحالية ستُستبدل';
+
+  @override
+  String get dataRestoreConfirmAction => 'استبدال بياناتي';
+
+  @override
+  String get dataRestoreSavingSafety => 'نحفظ نسخة أمان من بياناتك الحالية…';
+
+  @override
+  String get dataRestoreRestoring => 'نستعيد بياناتك…';
+
+  @override
+  String get dataRestoreKeepOpen => 'أبقِ التطبيق مفتوحًا لحظات.';
+
+  @override
+  String get dataRestoreDoneTitle => 'تمت الاستعادة';
+
+  @override
+  String dataRestoreDoneBody(String count) {
+    return 'عادت سجلاتك ($count) إلى مَدار.';
+  }
+
+  @override
+  String get dataRestoreSafetyKept =>
+      'نسخة أمان من بياناتك السابقة محفوظة على هذا الهاتف، وتُفتح بعبارة المرور نفسها.';
+
+  @override
+  String get dataSafetyCopySave => 'حفظ نسخة الأمان في مكان آخر';
+
+  @override
+  String get dataSafetyCopyTitle => 'نسخة الأمان';
+
+  @override
+  String get dataNothingChanged => 'لم يتغيّر شيء في بياناتك.';
+
+  @override
+  String get dataErrWrongPassphrase =>
+      'عبارة المرور هذه لا تفتح النسخة. تحقّق من الأحرف وحاول مجددًا.';
+
+  @override
+  String get dataErrNotBackupTitle => 'هذا ليس ملف نسخة من مَدار';
+
+  @override
+  String dataErrNotBackupBody(String ext) {
+    return 'اختر ملفًا ينتهي بـ $ext أنشأته من «إنشاء نسخة احتياطية».';
+  }
+
+  @override
+  String get dataErrNewerTitle => 'أُنشئت بإصدار أحدث من مَدار';
+
+  @override
+  String get dataErrNewerBody => 'حدّث مَدار على هذا الهاتف ثم حاول مجددًا.';
+
+  @override
+  String get dataErrTruncatedTitle => 'الملف غير مكتمل';
+
+  @override
+  String get dataErrTruncatedBody =>
+      'ربما لم يكتمل نسخه أو تنزيله. انسخه مرة أخرى ثم حاول.';
+
+  @override
+  String get dataErrCorruptedTitle => 'الملف تالف';
+
+  @override
+  String get dataErrCorruptedBody =>
+      'تغيّر الملف أو تلف بعد إنشائه، فلا يمكن الوثوق به.';
+
+  @override
+  String get dataErrUnreadableTitle => 'تعذّرت قراءة الملف';
+
+  @override
+  String get dataErrUnreadableBody =>
+      'جرّب ملفًا آخر أو انسخه إلى الهاتف أولًا.';
+
+  @override
+  String get dataErrSafetyTitle => 'تعذّر حفظ نسخة الأمان';
+
+  @override
+  String get dataErrSafetyBody =>
+      'لذلك لم نستبدل بياناتك. وفّر بعض المساحة ثم حاول مجددًا.';
+
+  @override
+  String get dataErrRejectedTitle => 'تعذّرت استعادة هذه النسخة';
+
+  @override
+  String get dataErrRejectedBody => 'لم تجتز بياناتها فحوص السلامة.';
+
+  @override
+  String dataSumHeading(String date) {
+    return 'ملخّص مَدار — $date';
+  }
+
+  @override
+  String get dataSumPreamble =>
+      'بيانات متابعة شخصية من تطبيق مَدار، أُعدّت على هاتف المستخدم نفسه. التواريخ بصيغة سنة-شهر-يوم والكسور العشرية بنقطة. لا تُضمَّن الملاحظات ولا أرقام الهواتف ولا أرقام الوثائق أو الحسابات.';
+
+  @override
+  String get dataSumNoData => 'لا بيانات بعد.';
+
+  @override
+  String get dataSumListSep => '، ';
+
+  @override
+  String dataSumLastDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'آخر $days يوم',
+      many: 'آخر $days يومًا',
+      few: 'آخر $days أيام',
+      two: 'آخر يومين',
+      one: 'اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSumPreviousDays(String days) {
+    return 'الأيام الـ$days السابقة';
+  }
+
+  @override
+  String dataSumMore(String count) {
+    return 'غير معروضة: $count';
+  }
+
+  @override
+  String get dataSumProfile => 'نبذة شخصية';
+
+  @override
+  String get dataSumFaith => 'الإيمان';
+
+  @override
+  String get dataSumHealth => 'الصحة';
+
+  @override
+  String get dataSumMoney => 'المال';
+
+  @override
+  String get dataSumFamily => 'العائلة';
+
+  @override
+  String get dataSumWork => 'العمل';
+
+  @override
+  String get dataSumGrowth => 'النمو';
+
+  @override
+  String get dataSumBody => 'الجسد';
+
+  @override
+  String get dataSumTravel => 'السفر';
+
+  @override
+  String get dataSumCustom => 'متتبّعات مخصّصة';
+
+  @override
+  String get dataSumCity => 'المدينة';
+
+  @override
+  String get dataSumTimeZone => 'المنطقة الزمنية';
+
+  @override
+  String get dataSumBaseCurrency => 'العملة الأساسية';
+
+  @override
+  String get dataSumLanguage => 'لغة التطبيق';
+
+  @override
+  String get dataSumLanguageName => 'العربية';
+
+  @override
+  String get dataSumAboutMe => 'عنّي';
+
+  @override
+  String get dataSumPrayersTitle => 'الصلاة';
+
+  @override
+  String dataSumObligatory(String window) {
+    return '$window (الفرائض)';
+  }
+
+  @override
+  String dataSumLogged(String logged, String expected) {
+    return 'المسجّل: $logged/$expected';
+  }
+
+  @override
+  String dataSumOnTime(String count) {
+    return 'في وقتها: $count';
+  }
+
+  @override
+  String dataSumLate(String count) {
+    return 'متأخرة: $count';
+  }
+
+  @override
+  String dataSumMadeUp(String count) {
+    return 'قضاء: $count';
+  }
+
+  @override
+  String dataSumMissed(String count) {
+    return 'فائتة: $count';
+  }
+
+  @override
+  String dataSumInCongregation(String count) {
+    return 'جماعة: $count';
+  }
+
+  @override
+  String dataSumVoluntary(String window) {
+    return '$window (النوافل)';
+  }
+
+  @override
+  String get dataSumQuranTitle => 'القرآن والورد';
+
+  @override
+  String dataSumSessions(String count) {
+    return 'الجلسات: $count';
+  }
+
+  @override
+  String dataSumPages(String count) {
+    return 'الصفحات: $count';
+  }
+
+  @override
+  String dataSumMinutes(String count) {
+    return '$count د';
+  }
+
+  @override
+  String dataSumLastSession(String date) {
+    return 'آخر جلسة: $date';
+  }
+
+  @override
+  String dataSumWird(String name) {
+    return 'الورد «$name»';
+  }
+
+  @override
+  String dataSumPerDay(String amount, String unit) {
+    return '$unit يوميًا: $amount';
+  }
+
+  @override
+  String get dataSumUnitPages => 'الصفحات';
+
+  @override
+  String get dataSumUnitJuz => 'الأجزاء';
+
+  @override
+  String get dataSumUnitHizb => 'الأحزاب';
+
+  @override
+  String get dataSumUnitAyat => 'الآيات';
+
+  @override
+  String dataSumSince(String date) {
+    return 'منذ $date';
+  }
+
+  @override
+  String dataSumBy(String date) {
+    return 'حتى $date';
+  }
+
+  @override
+  String get dataSumHifzTitle => 'الحفظ';
+
+  @override
+  String dataSumItems(String count) {
+    return 'المحفوظات: $count';
+  }
+
+  @override
+  String dataSumNew(String count) {
+    return 'جديدة: $count';
+  }
+
+  @override
+  String dataSumDueToday(String count) {
+    return 'مستحقة للمراجعة اليوم: $count';
+  }
+
+  @override
+  String dataSumReviews(String count) {
+    return 'المراجعات: $count';
+  }
+
+  @override
+  String dataSumAvgGrade(String value) {
+    return 'متوسط التقييم: $value/5';
+  }
+
+  @override
+  String get dataSumAlertsTitle => 'تنبيهات دائمة';
+
+  @override
+  String get dataSumSeverityCritical => 'حرج';
+
+  @override
+  String get dataSumSeverityWarning => 'تنبيه';
+
+  @override
+  String get dataSumSeverityInfo => 'ملاحظة';
+
+  @override
+  String get dataSumConditionsTitle => 'الحالات الصحية';
+
+  @override
+  String get dataSumMedsTitle => 'الأدوية الحالية';
+
+  @override
+  String get dataSumKindSupplement => 'مكمّل';
+
+  @override
+  String get dataSumKindInjection => 'حقنة';
+
+  @override
+  String get dataSumWithEmptyStomach => 'على معدة فارغة';
+
+  @override
+  String get dataSumWithBreakfast => 'مع الفطور';
+
+  @override
+  String get dataSumWithLunch => 'مع الغداء';
+
+  @override
+  String get dataSumWithDinner => 'مع العشاء';
+
+  @override
+  String get dataSumWithBedtime => 'قبل النوم';
+
+  @override
+  String get dataSumWithCourse => 'حسب خطة العلاج';
+
+  @override
+  String get dataSumLabsTitle => 'أحدث التحاليل';
+
+  @override
+  String dataSumLabsWindow(String months) {
+    return 'آخر نتيجة لكل تحليل خلال آخر $months شهرًا؛ العلامة مقارنةً بالمعدل المحفوظ في التطبيق.';
+  }
+
+  @override
+  String get dataSumColTest => 'التحليل';
+
+  @override
+  String get dataSumColDate => 'التاريخ';
+
+  @override
+  String get dataSumColResult => 'النتيجة';
+
+  @override
+  String get dataSumColRange => 'المعدل';
+
+  @override
+  String get dataSumColFlag => 'العلامة';
+
+  @override
+  String get dataSumColPrevious => 'السابقة';
+
+  @override
+  String get dataSumPainTitle => 'الألم (متابعة)';
+
+  @override
+  String dataSumEntries(String count) {
+    return 'الإدخالات: $count';
+  }
+
+  @override
+  String dataSumAverageOf(String value, String max) {
+    return 'المتوسط: $value/$max';
+  }
+
+  @override
+  String dataSumHighest(String value, String max) {
+    return 'الأعلى: $value/$max';
+  }
+
+  @override
+  String get dataSumTopPlaces => 'أكثر المواضع تسجيلًا';
+
+  @override
+  String get dataSumTopTriggers => 'أكثر المحفّزات تسجيلًا';
+
+  @override
+  String get dataSumMoodTitle => 'المزاج (متابعة)';
+
+  @override
+  String dataSumMoodAvg(String value) {
+    return 'المزاج: $value/5';
+  }
+
+  @override
+  String dataSumStressAvg(String value) {
+    return 'التوتر: $value/10';
+  }
+
+  @override
+  String dataSumAnxietyAvg(String value) {
+    return 'القلق: $value/10';
+  }
+
+  @override
+  String dataSumEnergyAvg(String value) {
+    return 'الطاقة: $value/10';
+  }
+
+  @override
+  String dataSumSleepAvg(String value) {
+    return 'النوم: $value س';
+  }
+
+  @override
+  String dataSumCaffeineAvg(String value) {
+    return 'الكافيين: $value كوب';
+  }
+
+  @override
+  String get dataSumTopFactors => 'العوامل الأكثر تكرارًا';
+
+  @override
+  String get dataSumWalletsTitle => 'المحافظ';
+
+  @override
+  String dataSumConvertedTo(String code) {
+    return 'محوّلة إلى $code بأسعار الصرف المحفوظة في التطبيق.';
+  }
+
+  @override
+  String get dataSumColWallet => 'المحفظة';
+
+  @override
+  String get dataSumColBalance => 'الرصيد';
+
+  @override
+  String dataSumColInBase(String code) {
+    return 'بـ$code';
+  }
+
+  @override
+  String dataSumTotal(String amount) {
+    return 'الإجمالي: $amount';
+  }
+
+  @override
+  String dataSumBudgetTitle(String month) {
+    return 'الميزانية — $month';
+  }
+
+  @override
+  String dataSumPlanned(String amount) {
+    return 'المخطط: $amount';
+  }
+
+  @override
+  String dataSumSpent(String amount) {
+    return 'المصروف: $amount';
+  }
+
+  @override
+  String dataSumRemaining(String amount) {
+    return 'المتبقي: $amount';
+  }
+
+  @override
+  String get dataSumOverPlan => 'تجاوز الخطة';
+
+  @override
+  String dataSumUnassigned(String amount) {
+    return 'مصروف بلا بند: $amount';
+  }
+
+  @override
+  String dataSumDueTitle(String days) {
+    return 'المستحق خلال الأيام الـ$days القادمة';
+  }
+
+  @override
+  String dataSumDueOn(String date) {
+    return 'يستحق $date';
+  }
+
+  @override
+  String dataSumOverdueSince(String date) {
+    return 'متأخر منذ $date';
+  }
+
+  @override
+  String get dataSumDebtsTitle => 'الديون';
+
+  @override
+  String dataSumIOwe(String person, String left, String total) {
+    return 'عليّ لـ$person: المتبقي $left من $total';
+  }
+
+  @override
+  String dataSumOwedToMe(String person, String left, String total) {
+    return 'لي عند $person: المتبقي $left من $total';
+  }
+
+  @override
+  String get dataSumJarsTitle => 'حصّالات الادخار';
+
+  @override
+  String dataSumJar(String name, String saved, String target, String percent) {
+    return '$name: $saved من $target ($percent%)';
+  }
+
+  @override
+  String dataSumEvery(String days) {
+    return 'الإيقاع (أيام): $days';
+  }
+
+  @override
+  String dataSumLastContact(String days) {
+    return 'أيام منذ آخر تواصل: $days';
+  }
+
+  @override
+  String get dataSumNeverContacted => 'لم يُسجَّل تواصل بعد';
+
+  @override
+  String dataSumOverdueBy(String days) {
+    return 'متأخر (أيام): $days';
+  }
+
+  @override
+  String get dataSumDueTodayStatus => 'مستحق اليوم';
+
+  @override
+  String dataSumDueIn(String days) {
+    return 'يستحق بعد (أيام): $days';
+  }
+
+  @override
+  String dataSumNoRhythm(int count) {
+    return 'آخرون بلا إيقاع تواصل: $count';
+  }
+
+  @override
+  String dataSumPeopleNoRhythm(int count) {
+    return 'أشخاص بلا إيقاع تواصل: $count';
+  }
+
+  @override
+  String get dataSumTop3Title => 'أهم 3';
+
+  @override
+  String dataSumOnBoard(String board) {
+    return 'اللوحة: $board';
+  }
+
+  @override
+  String get dataSumBoardsTitle => 'اللوحات';
+
+  @override
+  String get dataSumOther => 'أخرى';
+
+  @override
+  String get dataSumProjectsTitle => 'المشاريع';
+
+  @override
+  String get dataSumStatusActive => 'نشط';
+
+  @override
+  String get dataSumStatusPaused => 'متوقف مؤقتًا';
+
+  @override
+  String dataSumDoneOf(String done, String total) {
+    return 'المنجز: $done/$total';
+  }
+
+  @override
+  String dataSumDeadline(String date) {
+    return 'الموعد النهائي: $date';
+  }
+
+  @override
+  String dataSumProgress(String current, String target, String unit) {
+    return '$current من $target $unit';
+  }
+
+  @override
+  String dataSumRecentGain(String amount, String window) {
+    return '$window: $amount';
+  }
+
+  @override
+  String get dataSumExercisePlanTitle => 'خطة التمارين';
+
+  @override
+  String get dataSumWeekdays =>
+      'الإثنين,الثلاثاء,الأربعاء,الخميس,الجمعة,السبت,الأحد';
+
+  @override
+  String dataSumSets(String count) {
+    return 'المجموعات: $count';
+  }
+
+  @override
+  String dataSumKg(String value) {
+    return '$value كغ';
+  }
+
+  @override
+  String dataSumWorkouts(String count) {
+    return 'التمارين المنجزة: $count';
+  }
+
+  @override
+  String dataSumFasting(String count, String hours) {
+    return 'الصيام: $count · المتوسط: $hours س';
+  }
+
+  @override
+  String dataSumTargetHours(String hours) {
+    return 'الهدف: $hours س';
+  }
+
+  @override
+  String dataSumWater(String days, String ml) {
+    return 'الماء خلال آخر $days أيام: $ml مل يوميًا في المتوسط';
+  }
+
+  @override
+  String dataSumTargetMl(String ml) {
+    return 'الهدف: $ml مل';
+  }
+
+  @override
+  String get dataSumAvoidTitle => 'تجنّب';
+
+  @override
+  String get dataSumTripsTitle => 'الرحلات القادمة';
+
+  @override
+  String get dataSumTripPlanned => 'مخطط لها';
+
+  @override
+  String get dataSumTripUnderWay => 'جارية الآن';
+
+  @override
+  String get dataSumDocumentsTitle => 'الوثائق (لا تُضمَّن أرقامها أبدًا)';
+
+  @override
+  String dataSumExpiresIn(String date, String days) {
+    return 'تنتهي $date (الأيام المتبقية: $days)';
+  }
+
+  @override
+  String dataSumExpired(String date) {
+    return 'انتهت $date';
+  }
+
+  @override
+  String get dataSumNoExpiry => 'بلا تاريخ انتهاء';
+
+  @override
+  String get dataSumModuleTracker => 'متتبّع';
+
+  @override
+  String get dataSumModuleList => 'قائمة';
+
+  @override
+  String dataSumOpen(String count) {
+    return 'مفتوحة: $count';
+  }
+
+  @override
+  String dataSumDone(String count) {
+    return 'منجزة: $count';
+  }
+
+  @override
+  String dataSumInWindow(String count, String window) {
+    return '$window: $count';
+  }
+
+  @override
+  String dataSumLastOn(String date) {
+    return 'الأخير: $date';
+  }
+
+  @override
+  String dataSumAverage(String value) {
+    return 'المتوسط: $value';
+  }
+
+  @override
+  String dataSumMin(String value) {
+    return 'الأدنى: $value';
+  }
+
+  @override
+  String dataSumMax(String value) {
+    return 'الأعلى: $value';
+  }
+
+  @override
+  String dataSumSum(String value) {
+    return 'المجموع: $value';
+  }
+
+  @override
+  String dataSumTicked(String count, String total) {
+    return 'مؤشَّر عليها: $count/$total';
+  }
+
+  @override
+  String get searchTitle => 'البحث';
+
+  @override
+  String get searchFieldHint => 'ابحث في المهام والملاحظات والأشخاص والآيات…';
+
+  @override
+  String get searchLauncherHint => 'ابحث في مَدار';
+
+  @override
+  String get searchLauncherTooltip => 'البحث في كل شيء';
+
+  @override
+  String get searchClear => 'مسح النص';
+
+  @override
+  String get searchRecentTitle => 'عمليات البحث الأخيرة';
+
+  @override
+  String get searchRecentClear => 'مسح السجل';
+
+  @override
+  String searchRecentRemove(String query) {
+    return 'حذف «$query» من السجل';
+  }
+
+  @override
+  String get searchIntroTitle => 'ابحث في مدارك كله';
+
+  @override
+  String get searchIntroBody =>
+      'المهام والملاحظات والأشخاص والمال والآيات في مكان واحد. يجري البحث على هاتفك فقط.';
+
+  @override
+  String get searchPreparing => 'نُجهّز فهرس البحث…';
+
+  @override
+  String searchNoResultsTitle(String query) {
+    return 'لا نتائج لـ «$query»';
+  }
+
+  @override
+  String get searchNoResultsBody => 'جرّب كلمات أقل أو تهجئة أخرى.';
+
+  @override
+  String get searchNoResultsFiltered => 'لا شيء هنا ضمن التصفية الحالية.';
+
+  @override
+  String get searchClearFilters => 'إزالة التصفية';
+
+  @override
+  String get searchAll => 'الكل';
+
+  @override
+  String searchResultsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نتيجة',
+      many: '$count نتيجة',
+      few: '$count نتائج',
+      two: 'نتيجتان',
+      one: 'نتيجة واحدة',
+      zero: 'لا نتائج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchShowAll(String count) {
+    return 'عرض الكل ($count)';
+  }
+
+  @override
+  String searchGroupSemantics(String module, String count) {
+    return '$module، $count';
+  }
+
+  @override
+  String get searchPartial => 'لم نجد كل الكلمات معًا؛ هذه أقرب النتائج.';
+
+  @override
+  String get searchCannotOpen => 'لا يمكن فتح هذه النتيجة من هنا بعد.';
+
+  @override
+  String get searchToday => 'اليوم';
+
+  @override
+  String get searchYesterday => 'أمس';
+
+  @override
+  String get searchTomorrow => 'غدًا';
+
+  @override
+  String get searchFilterPlanets => 'التصفية حسب الكوكب';
+
+  @override
+  String get searchFilterModules => 'التصفية حسب القسم';
+
+  @override
+  String get searchPlanetCustom => 'وحدات مخصصة';
+
+  @override
+  String get searchKeyboardHint => '↑ ↓ للتنقل، Enter للفتح، Esc للمسح';
+
+  @override
+  String get searchDone => 'منجزة';
+
+  @override
+  String get searchArchived => 'مؤرشفة';
+
+  @override
+  String get searchTxExpense => 'مصروف';
+
+  @override
+  String get searchTxIncome => 'دخل';
+
+  @override
+  String get searchTxTransfer => 'تحويل';
+
+  @override
+  String get searchTxAdjustment => 'تسوية';
+
+  @override
+  String get searchDebtIOwe => 'دين عليّ';
+
+  @override
+  String get searchDebtOwedToMe => 'دين لي';
+
+  @override
+  String get searchChannelCall => 'مكالمة';
+
+  @override
+  String get searchChannelVisit => 'زيارة';
+
+  @override
+  String get searchChannelMessage => 'رسالة';
+
+  @override
+  String get searchChannelOther => 'تواصل';
+
+  @override
+  String searchPainTitle(String score, String max) {
+    return 'ألم $score/$max';
+  }
+
+  @override
+  String get searchMoodTitle => 'المزاج';
+
+  @override
+  String get searchFastingTitle => 'صيام';
+
+  @override
+  String searchAyahPlace(String surah, String ayah) {
+    return '$surah، الآية $ayah';
+  }
+
+  @override
+  String searchAyahRange(String surah, String from, String to) {
+    return '$surah $from–$to';
+  }
+
+  @override
+  String searchSurahNumber(String number) {
+    return 'سورة $number';
+  }
+
+  @override
+  String get searchSourceTasks => 'المهام';
+
+  @override
+  String get searchSourcePrayerLogs => 'سجل الصلوات';
+
+  @override
+  String get searchSourceMedications => 'الأدوية';
+
+  @override
+  String get searchSourceMedCourses => 'الكورسات العلاجية';
+
+  @override
+  String get searchSourceMedDoses => 'ملاحظات الجرعات';
+
+  @override
+  String get searchSourceConditions => 'الحالات الصحية';
+
+  @override
+  String get searchSourceHealthAlerts => 'التنبيهات الصحية';
+
+  @override
+  String get searchSourceLabTests => 'التحاليل';
+
+  @override
+  String get searchSourceLabReadings => 'نتائج التحاليل';
+
+  @override
+  String get searchSourceAppointments => 'المواعيد';
+
+  @override
+  String get searchSourceDoctorQuestions => 'أسئلة الطبيب';
+
+  @override
+  String get searchSourcePain => 'سجل الألم';
+
+  @override
+  String get searchSourceMood => 'سجل المزاج';
+
+  @override
+  String get searchSourceHabits => 'العادات';
+
+  @override
+  String get searchSourceWorries => 'المخاوف';
+
+  @override
+  String get searchSourceWallets => 'المحافظ';
+
+  @override
+  String get searchSourceTransactions => 'المعاملات';
+
+  @override
+  String get searchSourceBudget => 'الميزانية';
+
+  @override
+  String get searchSourceJars => 'الحصّالات';
+
+  @override
+  String get searchSourceJarDeposits => 'إيداعات الحصّالات';
+
+  @override
+  String get searchSourceDebts => 'الديون';
+
+  @override
+  String get searchSourceDebtPayments => 'سداد الديون';
+
+  @override
+  String get searchSourceObligations => 'الالتزامات';
+
+  @override
+  String get searchSourcePeople => 'الأشخاص';
+
+  @override
+  String get searchSourceContactLogs => 'سجل التواصل';
+
+  @override
+  String get searchSourceProjects => 'المشاريع';
+
+  @override
+  String get searchSourceProjectItems => 'بنود المشاريع';
+
+  @override
+  String get searchSourceBoards => 'اللوحات';
+
+  @override
+  String get searchSourceCards => 'البطاقات';
+
+  @override
+  String get searchSourceTrips => 'الرحلات';
+
+  @override
+  String get searchSourceTripItems => 'أغراض الرحلات';
+
+  @override
+  String get searchSourcePackingTemplates => 'قوائم التجهيز';
+
+  @override
+  String get searchSourceTravelDocuments => 'وثائق السفر';
+
+  @override
+  String get searchSourceLearningGoals => 'أهداف التعلّم';
+
+  @override
+  String get searchSourceGoalLogs => 'سجل الأهداف';
+
+  @override
+  String get searchSourceExercises => 'التمارين';
+
+  @override
+  String get searchSourceWorkouts => 'سجل التمارين';
+
+  @override
+  String get searchSourceAvoidItems => 'قائمة التجنّب';
+
+  @override
+  String get searchSourceFasting => 'الصيام المتقطع';
+
+  @override
+  String get searchSourceCustomModules => 'الوحدات المخصصة';
+
+  @override
+  String get searchSourceCustomEntries => 'سجلات الوحدات';
+
+  @override
+  String get searchSourceQuranAyat => 'آيات القرآن';
+
+  @override
+  String get searchSourceQuranBookmarks => 'علامات المصحف';
+
+  @override
+  String get searchSourceWirdPlans => 'خطط الورد';
+
+  @override
+  String get searchSourceHifz => 'الحفظ';
+
+  @override
+  String get searchSourcePlanets => 'الكواكب';
+
+  @override
+  String get ncTitle => 'الإشعارات';
+
+  @override
+  String get ncTabUpcoming => 'القادمة';
+
+  @override
+  String get ncTabRecent => 'الأخيرة';
+
+  @override
+  String ncTabWithCount(String label, String count) {
+    return '$label، $count';
+  }
+
+  @override
+  String get ncOpenSettings => 'إعدادات الإشعارات';
+
+  @override
+  String get ncUpcomingEmptyTitle => 'لا شيء مجدول';
+
+  @override
+  String get ncUpcomingEmptyBody =>
+      'ما تفعّله من أذان وتذكيرات سيصطفّ هنا للأيام السبعة القادمة.';
+
+  @override
+  String get ncRecentEmptyTitle => 'لا جديد';
+
+  @override
+  String get ncRecentEmptyBody =>
+      'ما يصلك من إشعارات يبقى هنا أسبوعين، لتعود إليه متى شئت.';
+
+  @override
+  String get ncClearAll => 'مسح الكل';
+
+  @override
+  String ncClearedAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'مُسح $count إشعار',
+      many: 'مُسح $count إشعارًا',
+      few: 'مُسحت $count إشعارات',
+      two: 'مُسح إشعاران',
+      one: 'مُسح إشعار واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncDismissed => 'أُزيل من القائمة';
+
+  @override
+  String get ncSkippedToast => 'لن يصل هذا التذكير';
+
+  @override
+  String get ncRestoredToast => 'سيصل في وقته';
+
+  @override
+  String ncShowMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'عرض $count أخرى',
+      many: 'عرض $count أخرى',
+      few: 'عرض $count أخرى',
+      two: 'عرض اثنين آخرين',
+      one: 'عرض واحد آخر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncShowLess => 'عرض أقل';
+
+  @override
+  String ncSectionLabel(String group, String count) {
+    return '$group، $count';
+  }
+
+  @override
+  String get ncGroupPrayer => 'الصلاة والأذان';
+
+  @override
+  String get ncGroupAdhkar => 'الأذكار';
+
+  @override
+  String get ncGroupMedications => 'الأدوية';
+
+  @override
+  String get ncGroupHealth => 'الصحة';
+
+  @override
+  String get ncGroupMoney => 'المستحقات المالية';
+
+  @override
+  String get ncGroupFamily => 'العائلة';
+
+  @override
+  String get ncGroupTravel => 'وثائق السفر';
+
+  @override
+  String get ncGroupWird => 'الوِرد';
+
+  @override
+  String get ncGroupCustom => 'الوحدات المخصّصة';
+
+  @override
+  String get ncGroupOther => 'أخرى';
+
+  @override
+  String ncKindAdhan(String prayer) {
+    return 'أذان $prayer';
+  }
+
+  @override
+  String ncKindPreAdhan(String prayer, String minutes) {
+    return '$prayer بعد $minutes';
+  }
+
+  @override
+  String ncKindPreAdhanShort(String prayer) {
+    return 'تذكير قبل $prayer';
+  }
+
+  @override
+  String get ncKindSunrise => 'الشروق';
+
+  @override
+  String get ncKindAdhanTest => 'أذان تجريبي';
+
+  @override
+  String get ncKindAdhkarMorning => 'أذكار الصباح';
+
+  @override
+  String get ncKindAdhkarEvening => 'أذكار المساء';
+
+  @override
+  String get ncKindAdhkar => 'تذكير بالأذكار';
+
+  @override
+  String get ncKindDose => 'موعد جرعة';
+
+  @override
+  String get ncKindRefill => 'حان وقت إعادة التعبئة';
+
+  @override
+  String get ncKindMedsNotice => 'إجابة لم تُسجَّل';
+
+  @override
+  String get ncKindAppointment => 'موعد طبي';
+
+  @override
+  String get ncKindWorry => 'نافذة القلق';
+
+  @override
+  String get ncKindFastGoal => 'هدف الصيام';
+
+  @override
+  String get ncKindEatingClose => 'نافذة الأكل تُغلق';
+
+  @override
+  String get ncKindDebt => 'دَين مستحق';
+
+  @override
+  String get ncKindObligation => 'التزام مستحق';
+
+  @override
+  String get ncKindFamilyDigest => 'صلة الرحم';
+
+  @override
+  String get ncKindBirthdayEve => 'عيد ميلاد غدًا';
+
+  @override
+  String get ncKindBirthday => 'عيد ميلاد اليوم';
+
+  @override
+  String get ncKindDocAhead => 'وثيقة تقترب من الانتهاء';
+
+  @override
+  String get ncKindDocToday => 'وثيقة تنتهي اليوم';
+
+  @override
+  String get ncKindWird => 'الوِرد اليومي';
+
+  @override
+  String get ncKindCustom => 'تذكير وحدة';
+
+  @override
+  String get ncKindOther => 'إشعار';
+
+  @override
+  String ncAtTime(String time) {
+    return 'الساعة $time';
+  }
+
+  @override
+  String get ncStateMuted => 'مكتوم';
+
+  @override
+  String get ncStateSkipped => 'متخطّى';
+
+  @override
+  String ncStateSnoozedUntil(String time) {
+    return 'مؤجّل حتى $time';
+  }
+
+  @override
+  String get ncStateLive => 'ظاهر الآن';
+
+  @override
+  String get ncStateSilenced => 'وصل صامتًا';
+
+  @override
+  String get ncStateOpened => 'فُتح';
+
+  @override
+  String ncStateAnswered(String action) {
+    return 'أُجيب: $action';
+  }
+
+  @override
+  String get ncStateSnoozed => 'أُجّل';
+
+  @override
+  String get ncStateNew => 'جديد';
+
+  @override
+  String get ncTimeNow => 'الآن';
+
+  @override
+  String ncTimeIn(String duration) {
+    return 'بعد $duration';
+  }
+
+  @override
+  String ncTimeAgo(String duration) {
+    return 'قبل $duration';
+  }
+
+  @override
+  String ncTimeToday(String time) {
+    return 'اليوم $time';
+  }
+
+  @override
+  String ncTimeTomorrow(String time) {
+    return 'غدًا $time';
+  }
+
+  @override
+  String ncTimeYesterday(String time) {
+    return 'أمس $time';
+  }
+
+  @override
+  String ncTimeOnDay(String day, String time) {
+    return '$day $time';
+  }
+
+  @override
+  String get ncActionTaken => 'أخذتها';
+
+  @override
+  String get ncActionSnooze => 'أجِّل';
+
+  @override
+  String get ncActionSkip => 'تخطَّ';
+
+  @override
+  String get ncActionStop => 'إيقاف';
+
+  @override
+  String get ncActionOpen => 'افتح';
+
+  @override
+  String get ncActionSkipOne => 'لا ترسل هذا';
+
+  @override
+  String get ncActionRestore => 'أعِده';
+
+  @override
+  String ncActionSnoozeFor(String duration) {
+    return 'أجِّل $duration';
+  }
+
+  @override
+  String ncActionMuteGroup(String group) {
+    return 'اكتم $group';
+  }
+
+  @override
+  String get ncActionUnmute => 'ألغِ الكتم';
+
+  @override
+  String get ncActionSettings => 'إعدادات التذكير';
+
+  @override
+  String get ncActionDismiss => 'أزِل';
+
+  @override
+  String get ncActionFailed => 'تعذّر ذلك الآن، حاول مرة أخرى';
+
+  @override
+  String ncSnoozedToast(String time) {
+    return 'أُجّل حتى $time';
+  }
+
+  @override
+  String ncMutedToast(String group, String when) {
+    return '$group مكتوم حتى $when';
+  }
+
+  @override
+  String ncUnmutedToast(String group) {
+    return 'عاد $group إلى وضعه';
+  }
+
+  @override
+  String ncMuteTitle(String group) {
+    return 'اكتم $group';
+  }
+
+  @override
+  String get ncMuteSubtitle =>
+      'لن يصدر شيء من هذه المجموعة خلال المدة، وستجده هنا في القائمة.';
+
+  @override
+  String ncMuteForHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ساعة',
+      many: '$count ساعة',
+      few: '$count ساعات',
+      two: 'ساعتين',
+      one: 'ساعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncMuteUntilMorning => 'حتى صباح الغد';
+
+  @override
+  String get ncMuteWeek => 'أسبوعًا';
+
+  @override
+  String ncMutedUntil(String when) {
+    return 'مكتوم حتى $when';
+  }
+
+  @override
+  String get ncSettingsTitle => 'الإشعارات';
+
+  @override
+  String get ncSettingsSubtitle => 'ما يرسله كل جزء من مَدار، في مكان واحد';
+
+  @override
+  String get ncSettingsOn => 'مفعّلة';
+
+  @override
+  String get ncSettingsOff => 'متوقفة';
+
+  @override
+  String ncSettingsSome(String on, String total) {
+    return '$on من $total مفعّلة';
+  }
+
+  @override
+  String get ncSettingsPerItem => 'تُضبط لكل عنصر';
+
+  @override
+  String ncSettingsComing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count قادم',
+      many: '$count قادمًا',
+      few: '$count قادمة',
+      two: 'اثنان قادمان',
+      one: 'واحد قادم',
+      zero: 'لا شيء قادم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncSettingsOpen(String group) {
+    return 'افتح إعدادات $group';
+  }
+
+  @override
+  String get ncSettingsMute => 'اكتم';
+
+  @override
+  String get ncPermissionOff =>
+      'إشعارات مَدار متوقفة من إعدادات الهاتف، فلن يصل شيء مما هنا.';
+
+  @override
+  String get ncPermissionTurnOn => 'فعّلها';
+
+  @override
+  String ncBellLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'الإشعارات، $count جديد',
+      many: 'الإشعارات، $count جديدًا',
+      few: 'الإشعارات، $count جديدة',
+      two: 'الإشعارات، اثنان جديدان',
+      one: 'الإشعارات، واحد جديد',
+      zero: 'الإشعارات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncActionCancelSnooze => 'ألغِ التأجيل';
+
+  @override
+  String get ncActionSnoozeMenu => 'أجِّل…';
+
+  @override
+  String get ncSnoozeTitle => 'أعِده بعد قليل';
+
+  @override
+  String get ncSnoozeSubtitle =>
+      'يختفي الآن، ثم يصلك من جديد في الوقت الذي تختاره.';
+
+  @override
+  String ncOptionUntil(String time) {
+    return 'حتى $time';
+  }
+
+  @override
+  String ncOptionAt(String time) {
+    return 'يعود $time';
+  }
+
+  @override
+  String ncRecentCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشعار',
+      many: '$count إشعارًا',
+      few: '$count إشعارات',
+      two: 'إشعاران',
+      one: 'إشعار واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUpcomingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشعار في الأيام السبعة القادمة',
+      many: '$count إشعارًا في الأيام السبعة القادمة',
+      few: '$count إشعارات في الأيام السبعة القادمة',
+      two: 'إشعاران في الأيام السبعة القادمة',
+      one: 'إشعار واحد في الأيام السبعة القادمة',
+      zero: 'لا شيء في الأيام السبعة القادمة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncNewCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جديد',
+      many: '$count جديدًا',
+      few: '$count جديدة',
+      two: 'اثنان جديدان',
+      one: 'واحد جديد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUntilTomorrow(String time) {
+    return 'غدًا $time';
+  }
+
+  @override
+  String get aiChatTitle => 'المحادثة الذكية';
+
+  @override
+  String get aiChatNewChat => 'محادثة جديدة';
+
+  @override
+  String get aiChatListTitle => 'المحادثات';
+
+  @override
+  String get aiChatSettingsTitle => 'إعدادات الذكاء الاصطناعي';
+
+  @override
+  String get aiChatSettingsRowSubtitle => 'المفاتيح والنموذج وطول الرد';
+
+  @override
+  String get aiChatAskAi => 'اسأل الذكاء الاصطناعي';
+
+  @override
+  String get aiChatAskAiSubtitle => 'بمفتاحك الخاص، وأنت تختار ما يُرسل';
+
+  @override
+  String aiChatAskAbout(String area) {
+    return 'اسأل عن $area';
+  }
+
+  @override
+  String get aiChatMenu => 'المزيد';
+
+  @override
+  String get aiChatOpenList => 'كل المحادثات';
+
+  @override
+  String get aiChatInputHint => 'اكتب رسالتك…';
+
+  @override
+  String get aiChatSend => 'إرسال';
+
+  @override
+  String get aiChatStop => 'إيقاف';
+
+  @override
+  String get aiChatThinking => 'يفكّر…';
+
+  @override
+  String get aiChatWriting => 'يكتب الرد';
+
+  @override
+  String get aiChatWillSend => 'سيُرسل';
+
+  @override
+  String get aiChatContextReviewFirst => 'ستراجع ملخّصك قبل الإرسال';
+
+  @override
+  String get aiChatContextNone => 'بلا سياق شخصي';
+
+  @override
+  String aiChatContextSections(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count قسم من ملخّصك',
+      many: '$count قسمًا من ملخّصك',
+      few: '$count أقسام من ملخّصك',
+      two: 'قسمان من ملخّصك',
+      one: 'قسم واحد من ملخّصك',
+      zero: 'لا أقسام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatMessagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count رسالة',
+      many: '$count رسالة',
+      few: '$count رسائل',
+      two: 'رسالتان',
+      one: 'رسالة واحدة',
+      zero: 'لا رسائل',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatApproxTokens(String count) {
+    return '≈ $count رمز';
+  }
+
+  @override
+  String aiChatStripSemantics(String summary) {
+    return 'سيُرسل: $summary. انقر للمراجعة أو التغيير';
+  }
+
+  @override
+  String aiChatOmitted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count رسالة أقدم لن تُرسل',
+      many: '$count رسالة أقدم لن تُرسل',
+      few: '$count رسائل أقدم لن تُرسل',
+      two: 'رسالتان أقدم لن تُرسلا',
+      one: 'رسالة أقدم لن تُرسل',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aiChatContextTitle => 'ما الذي سيُرسل';
+
+  @override
+  String get aiChatContextSubtitle => 'لا يُرسل شيء إلا حين تضغط «إرسال»';
+
+  @override
+  String get aiChatContextFromSummary => 'من ملخّصك';
+
+  @override
+  String get aiChatContextChange => 'مراجعة الأقسام';
+
+  @override
+  String get aiChatContextChoose => 'اختيار الأقسام';
+
+  @override
+  String get aiChatContextNoneHint =>
+      'لن يُرسل شيء من بياناتك، فقط رسائل هذه المحادثة.';
+
+  @override
+  String get aiChatContextUnsetHint =>
+      'عند أول إرسال ستظهر معاينة الملخّص لتختار الأقسام أو تستبعد ما تشاء.';
+
+  @override
+  String get aiChatContextUse => 'استخدمه في المحادثة';
+
+  @override
+  String get aiChatContextUseAndSend => 'استخدمه وأرسل';
+
+  @override
+  String aiChatContextReviewed(String when) {
+    return 'راجعته $when';
+  }
+
+  @override
+  String get aiChatContextCancelled => 'لم يُرسل شيء.';
+
+  @override
+  String aiChatServiceModel(String service, String model) {
+    return '$service · $model';
+  }
+
+  @override
+  String get aiChatViewPayload => 'عرض الطلب كما سيُرسل';
+
+  @override
+  String get aiChatDone => 'تم';
+
+  @override
+  String get aiChatPayloadTitle => 'الطلب كما سيُرسل';
+
+  @override
+  String get aiChatPayloadEndpoint => 'العنوان';
+
+  @override
+  String get aiChatPayloadHeaders => 'الترويسات (المفتاح مخفي)';
+
+  @override
+  String get aiChatPayloadSystem => 'التعليمات والسياق';
+
+  @override
+  String get aiChatPayloadMessages => 'الرسائل';
+
+  @override
+  String get aiChatPayloadRaw => 'النص الكامل (JSON)';
+
+  @override
+  String get aiChatPayloadDraftNote =>
+      'يشمل رسالتك الجاري كتابتها. لن يُرسل إلا حين تضغط «إرسال».';
+
+  @override
+  String get aiChatPayloadNoDraft => 'اكتب رسالة لترى الطلب كاملًا.';
+
+  @override
+  String aiChatPayloadSize(String size, String tokens) {
+    return '$size · ≈ $tokens رمز';
+  }
+
+  @override
+  String aiChatBytes(String count) {
+    return '$count بايت';
+  }
+
+  @override
+  String aiChatKiloBytes(String count) {
+    return '$count ك.ب';
+  }
+
+  @override
+  String get aiChatRoleUser => 'أنت';
+
+  @override
+  String get aiChatRoleAssistant => 'المساعد';
+
+  @override
+  String get aiChatCopy => 'نسخ';
+
+  @override
+  String get aiChatCopied => 'نُسخ';
+
+  @override
+  String get aiChatCopyCode => 'نسخ الشيفرة';
+
+  @override
+  String get aiChatRegenerate => 'إعادة كتابة الرد';
+
+  @override
+  String get aiChatRetry => 'إعادة المحاولة';
+
+  @override
+  String get aiChatStopped => 'أوقفتَ الرد';
+
+  @override
+  String get aiChatCutShort =>
+      'توقّف الرد عند حدّ الطول. يمكنك رفعه من الإعدادات.';
+
+  @override
+  String get aiChatRefused => 'امتنع النموذج عن الإجابة.';
+
+  @override
+  String get aiChatFiltered => 'أوقف مرشّح المحتوى الرد.';
+
+  @override
+  String get aiChatHealthNote =>
+      'للمتابعة فقط وليس نصيحة طبية؛ استشر طبيبك في أي قرار صحي.';
+
+  @override
+  String aiChatOpenLink(String url) {
+    return 'فتح الرابط $url';
+  }
+
+  @override
+  String get aiChatLinkFailed => 'تعذّر فتح الرابط.';
+
+  @override
+  String aiChatErrorNoKey(String service) {
+    return 'أضف مفتاح $service أولًا.';
+  }
+
+  @override
+  String aiChatErrorBadKey(String service) {
+    return 'رفضت $service المفتاح. تحقّق منه أو استبدله في الإعدادات.';
+  }
+
+  @override
+  String get aiChatErrorForbidden =>
+      'لا يملك هذا المفتاح صلاحية استخدام هذا النموذج.';
+
+  @override
+  String get aiChatErrorRateLimited =>
+      'طلبات كثيرة الآن. انتظر قليلًا ثم أعد المحاولة.';
+
+  @override
+  String aiChatErrorRetryAfter(String seconds) {
+    return 'يمكنك المحاولة بعد $seconds ث.';
+  }
+
+  @override
+  String aiChatErrorQuota(String service) {
+    return 'نفد الرصيد أو بلغتَ حدّ الإنفاق لدى $service.';
+  }
+
+  @override
+  String aiChatErrorOverloaded(String service) {
+    return '$service مشغولة الآن. أعد المحاولة بعد قليل.';
+  }
+
+  @override
+  String aiChatErrorServer(String service) {
+    return 'حدث خلل لدى $service. أعد المحاولة.';
+  }
+
+  @override
+  String aiChatErrorModelNotFound(String model) {
+    return 'النموذج «$model» غير متاح لهذا المفتاح. اختر نموذجًا آخر.';
+  }
+
+  @override
+  String get aiChatErrorTemperature =>
+      'لا يقبل هذا النموذج درجة حرارة مخصّصة. اجعلها «افتراضي النموذج» في الإعدادات.';
+
+  @override
+  String get aiChatErrorContextTooLong =>
+      'المحادثة أطول مما يحتمله النموذج. ابدأ محادثة جديدة أو شارك أقسامًا أقل.';
+
+  @override
+  String aiChatErrorBadRequest(String service) {
+    return 'رفضت $service الطلب.';
+  }
+
+  @override
+  String get aiChatErrorNetwork => 'لا اتصال بالإنترنت، أو انقطع الاتصال.';
+
+  @override
+  String get aiChatErrorTimeout => 'لم يصل ردّ في الوقت المناسب.';
+
+  @override
+  String get aiChatErrorBadResponse => 'وصل ردّ تعذّرت قراءته.';
+
+  @override
+  String get aiChatErrorUnknown => 'حدث خطأ غير متوقّع.';
+
+  @override
+  String get aiChatOpenSettings => 'فتح الإعدادات';
+
+  @override
+  String get aiChatSetupTitle => 'اربط مفتاحك الخاص';
+
+  @override
+  String get aiChatSetupBody =>
+      'تعمل المحادثة بمفتاح API منك لدى Anthropic أو OpenAI. يُحفظ مشفّرًا على هذا الهاتف فقط، ولا يدخل النسخ الاحتياطية ولا التصدير.';
+
+  @override
+  String aiChatSetupAdd(String service) {
+    return 'إضافة مفتاح $service';
+  }
+
+  @override
+  String get aiChatSetupPrivacy =>
+      'لا يُرسل شيء إلا حين تضغط «إرسال»، وترى قبلها ما سيُرسل بالضبط.';
+
+  @override
+  String get aiChatEmptyTitle => 'بمَ أساعدك اليوم؟';
+
+  @override
+  String get aiChatEmptyBody =>
+      'اسأل عن يومك أو صلاتك أو ميزانيتك أو أهدافك. تختار ما يُشارك من ملخّصك قبل الإرسال.';
+
+  @override
+  String get aiChatSuggestWeek => 'لخّص أسبوعي في نقاط قليلة';
+
+  @override
+  String get aiChatSuggestBudget => 'كيف أحسّن ميزانيتي هذا الشهر؟';
+
+  @override
+  String get aiChatSuggestPlan => 'ساعدني أخطّط لغدٍ متوازن';
+
+  @override
+  String get aiChatSuggestPrayer => 'كيف أحافظ على الصلاة في وقتها؟';
+
+  @override
+  String get aiChatListEmptyTitle => 'لا محادثات بعد';
+
+  @override
+  String get aiChatListEmptyBody => 'ابدأ محادثة، وتُحفظ هنا مشفّرة على هاتفك.';
+
+  @override
+  String get aiChatRename => 'إعادة التسمية';
+
+  @override
+  String get aiChatRenameField => 'اسم المحادثة';
+
+  @override
+  String get aiChatRenameSave => 'حفظ الاسم';
+
+  @override
+  String get aiChatDelete => 'حذف المحادثة';
+
+  @override
+  String get aiChatDeleted => 'حُذفت المحادثة';
+
+  @override
+  String get aiChatDeleteAll => 'حذف كل المحادثات';
+
+  @override
+  String get aiChatDeletedAll => 'حُذفت كل المحادثات';
+
+  @override
+  String get aiChatUntitled => 'محادثة بلا عنوان';
+
+  @override
+  String aiChatListLimitNote(String count) {
+    return 'تُحفظ آخر $count محادثة؛ الأقدم يُحذف تلقائيًا.';
+  }
+
+  @override
+  String aiChatListUpdated(String when, String messages) {
+    return '$when · $messages';
+  }
+
+  @override
+  String get aiChatToday => 'اليوم';
+
+  @override
+  String get aiChatYesterday => 'أمس';
+
+  @override
+  String get aiChatSettingsService => 'الخدمة';
+
+  @override
+  String get aiChatSettingsServiceModel => 'الخدمة والنموذج';
+
+  @override
+  String get aiChatServiceAnthropic => 'Anthropic';
+
+  @override
+  String get aiChatServiceOpenai => 'OpenAI';
+
+  @override
+  String get aiChatSettingsKeys => 'مفاتيح API';
+
+  @override
+  String aiChatKeyTitle(String service) {
+    return 'مفتاح $service';
+  }
+
+  @override
+  String aiChatKeySaved(String mask) {
+    return 'محفوظ · $mask';
+  }
+
+  @override
+  String get aiChatKeyNotSet => 'لم يُضف بعد';
+
+  @override
+  String get aiChatKeySheetSubtitle => 'يُحفظ مشفّرًا على هذا الهاتف فقط.';
+
+  @override
+  String get aiChatKeyCurrent => 'المفتاح الحالي';
+
+  @override
+  String get aiChatKeyField => 'المفتاح';
+
+  @override
+  String get aiChatKeyFieldHint => 'الصق المفتاح هنا';
+
+  @override
+  String get aiChatKeyPaste => 'لصق';
+
+  @override
+  String get aiChatKeySave => 'حفظ المفتاح';
+
+  @override
+  String get aiChatKeyReplace => 'استبدال المفتاح';
+
+  @override
+  String get aiChatKeyDelete => 'حذف المفتاح';
+
+  @override
+  String get aiChatKeyDeleted => 'حُذف المفتاح';
+
+  @override
+  String get aiChatKeySavedNotice => 'حُفظ المفتاح.';
+
+  @override
+  String get aiChatKeyTest => 'اختبار المفتاح';
+
+  @override
+  String get aiChatKeyTestOk => 'المفتاح يعمل.';
+
+  @override
+  String get aiChatKeyTestNote =>
+      'الاختبار يطلب قائمة النماذج فقط، ولا يرسل أي بيانات منك.';
+
+  @override
+  String get aiChatKeyWhere => 'أين أجد مفتاحي؟';
+
+  @override
+  String get aiChatKeyProblemEmpty => 'الصق المفتاح أولًا.';
+
+  @override
+  String get aiChatKeyProblemShort => 'هذا أقصر من أن يكون مفتاحًا.';
+
+  @override
+  String get aiChatKeyProblemSpaces => 'في المفتاح مسافات؛ انسخه مرة أخرى.';
+
+  @override
+  String aiChatKeyProblemProvider(String service) {
+    return 'هذا المفتاح خاص بخدمة $service، لذا لم يُحفظ هنا حتى لا يُرسل إلى خدمة أخرى. أضِفه ضمن $service.';
+  }
+
+  @override
+  String get aiChatSettingsModel => 'النموذج';
+
+  @override
+  String get aiChatModelPickerTitle => 'اختر النموذج';
+
+  @override
+  String get aiChatModelYourList => 'قائمتك';
+
+  @override
+  String aiChatModelsAvailable(String service) {
+    return 'متاح لدى $service';
+  }
+
+  @override
+  String get aiChatModelCustom => 'إضافة معرّف نموذج';
+
+  @override
+  String get aiChatModelCustomField => 'معرّف النموذج';
+
+  @override
+  String get aiChatModelCustomHint => 'مثل claude-sonnet-5-5';
+
+  @override
+  String get aiChatModelInvalid => 'معرّف غير صالح.';
+
+  @override
+  String get aiChatModelUse => 'استخدام';
+
+  @override
+  String get aiChatModelRefresh => 'تحديث قائمة النماذج';
+
+  @override
+  String aiChatModelRefreshed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نموذج متاح',
+      many: '$count نموذجًا متاحًا',
+      few: '$count نماذج متاحة',
+      two: 'نموذجان متاحان',
+      one: 'نموذج واحد متاح',
+      zero: 'لا نماذج متاحة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatModelRefreshNote(String service) {
+    return 'يطلب القائمة من $service حين تضغط فقط.';
+  }
+
+  @override
+  String get aiChatModelReset => 'استعادة القائمة الأصلية';
+
+  @override
+  String aiChatModelRemove(String model) {
+    return 'إزالة $model من القائمة';
+  }
+
+  @override
+  String get aiChatModelSelected => 'المختار';
+
+  @override
+  String aiChatModelChip(String model) {
+    return 'النموذج: $model. انقر للتغيير';
+  }
+
+  @override
+  String get aiChatSettingsReply => 'الرد';
+
+  @override
+  String get aiChatMaxTokens => 'أقصى طول للرد';
+
+  @override
+  String get aiChatMaxTokensNote => 'بالرموز، ويشمل تفكير النموذج إن وُجد.';
+
+  @override
+  String get aiChatTemperature => 'درجة الحرارة';
+
+  @override
+  String get aiChatTemperatureDefault => 'افتراضي النموذج (موصى به)';
+
+  @override
+  String get aiChatTemperatureNote =>
+      'النماذج الأحدث لا تقبل إلا القيمة الافتراضية. قيمة أقل = ردود أثبت.';
+
+  @override
+  String get aiChatSettingsPrivacy => 'الخصوصية';
+
+  @override
+  String get aiChatPrivacyKeys =>
+      'المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.';
+
+  @override
+  String get aiChatPrivacyCalls =>
+      'لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.';
+
+  @override
+  String aiChatPrivacyHistory(String count) {
+    return 'تُحفظ المحادثات مشفّرة على هاتفك (آخر $count)، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.';
+  }
+
+  @override
+  String get aiChatKeyProblemChars =>
+      'في المفتاح رموز لا تكون في المفاتيح (ربما من النسخ)؛ انسخه مرة أخرى.';
+
+  @override
+  String get aiChatLinkTitle => 'فتح هذا الرابط؟';
+
+  @override
+  String get aiChatLinkBody =>
+      'يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.';
+
+  @override
+  String get aiChatLinkOpen => 'فتح الرابط';
+
+  @override
+  String get widgetsPrayerName => 'الصلاة القادمة';
+
+  @override
+  String get widgetsMedsName => 'أدوية اليوم';
+
+  @override
+  String get widgetsTasksName => 'أهم ثلاث اليوم';
+
+  @override
+  String get widgetsBudgetName => 'المتبقي من الميزانية';
+
+  @override
+  String widgetsCountdown(String time) {
+    return 'بعد $time';
+  }
+
+  @override
+  String widgetsPrayerNotePlace(String date, String place) {
+    return '$date · $place';
+  }
+
+  @override
+  String widgetsFraction(String done, String total) {
+    return '$done/$total';
+  }
+
+  @override
+  String widgetsMedsNext(String time, String name) {
+    return 'التالية $time: $name';
+  }
+
+  @override
+  String widgetsMedsPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جرعة بانتظارك',
+      many: '$count جرعة بانتظارك',
+      few: '$count جرعات بانتظارك',
+      two: 'جرعتان بانتظارك',
+      one: 'جرعة واحدة بانتظارك',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get widgetsMedsAllDone => 'جرعات اليوم كلها مسجّلة';
+
+  @override
+  String get widgetsMedsNoneToday => 'لا جرعات اليوم';
+
+  @override
+  String get widgetsMedsSetUp => 'أضف أدويتك في مدار';
+
+  @override
+  String widgetsMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count جرعة أخرى',
+      many: 'و$count جرعة أخرى',
+      few: 'و$count جرعات أخرى',
+      two: 'وجرعتان أخريان',
+      one: 'وجرعة أخرى',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetsTasksLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بقيت $count',
+      two: 'بقيت اثنتان',
+      one: 'بقيت واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get widgetsTasksAllDone => 'أنجزت أهم ثلاث اليوم';
+
+  @override
+  String get widgetsTasksEmpty => 'اختر أهم ثلاث لليوم في مدار';
+
+  @override
+  String widgetsTasksCarried(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count لم تكتمل أمس',
+      two: 'اثنتان لم تكتملا أمس',
+      one: 'واحدة لم تكتمل أمس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetsBudgetOf(String amount) {
+    return 'من $amount';
+  }
+
+  @override
+  String widgetsBudgetOverBy(String amount) {
+    return 'تجاوزت بـ$amount';
+  }
+
+  @override
+  String get widgetsBudgetOver => 'تجاوزت الميزانية';
+
+  @override
+  String get widgetsBudgetLeftMonth => 'متبقٍّ لهذا الشهر';
+
+  @override
+  String get widgetsBudgetLeftWeek => 'متبقٍّ لهذا الأسبوع';
+
+  @override
+  String widgetsBudgetDaysLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم متبقٍّ',
+      many: '$count يومًا متبقيًا',
+      few: '$count أيام متبقية',
+      two: 'يومان متبقيان',
+      one: 'يوم واحد متبقٍّ',
+      zero: 'آخر يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get widgetsBudgetNone => 'ضع ميزانيتك في مدار';
+
+  @override
+  String get widgetsStale => 'افتح مدار لتحديث هذه الأداة';
+
+  @override
+  String get widgetsSettingsTitle => 'أدوات الشاشة الرئيسية';
+
+  @override
+  String get widgetsSettingsIntro =>
+      'أضف أدوات مدار من شاشتك الرئيسية: اضغط مطولًا على مساحة فارغة، ثم «الأدوات»، ثم مدار.';
+
+  @override
+  String get widgetsShowDetails => 'إظهار التفاصيل';
+
+  @override
+  String get widgetsDetailsShown =>
+      'الأسماء والأوقات والمبالغ ظاهرة على الشاشة الرئيسية';
+
+  @override
+  String get widgetsDetailsHidden => 'الأعداد فقط — لا أسماء ولا مبالغ';
+
+  @override
+  String get widgetsPrayerDetailsShown => 'يظهر اسم مدينتك تحت التاريخ الهجري';
+
+  @override
+  String get widgetsPrayerDetailsHidden =>
+      'الصلاة ووقتها والتاريخ فقط — دون المدينة';
+
+  @override
+  String get widgetsOnHomeScreen => 'على شاشتك الرئيسية';
+
+  @override
+  String get widgetsNotAdded => 'لم تُضف بعد';
+
+  @override
+  String get widgetsLockNote =>
+      'قفل التطبيق مفعّل، لذلك تعرض الأدوات الأعداد فقط ما لم تختر غير ذلك هنا.';
+
+  @override
+  String get widgetsPrivacyNote =>
+      'تُكتب بيانات الأدوات على جهازك فقط، مشفّرة، ولا تُكتب لأداة لم تضفها، وتُمحى مع «حذف كل البيانات».';
+
+  @override
+  String get widgetsBudgetPeriod => 'فترة الميزانية';
+
+  @override
+  String get widgetsPeriodMonth => 'هذا الشهر';
+
+  @override
+  String get widgetsPeriodWeek => 'هذا الأسبوع';
 }

@@ -1,0 +1,1939 @@
+{
+  "dataCentreTitle": {
+    "ar": "بياناتك",
+    "en": "Your data",
+    "description": "Data centre screen title"
+  },
+  "dataHeroTitle": {
+    "ar": "بياناتك تبقى معك",
+    "en": "Your data stays with you"
+  },
+  "dataHeroBody": {
+    "ar": "يحفظ مَدار كل شيء مشفّرًا على هذا الهاتف، ولا يرفع شيئًا إلى أي مكان. لا يغادر ملفٌّ التطبيقَ إلا حين تشاركه أو تحفظه بنفسك.",
+    "en": "Madar keeps everything encrypted on this phone and uploads nothing. A file leaves only when you share or save it yourself."
+  },
+  "dataStatRecords": {
+    "ar": "السجلات",
+    "en": "Records"
+  },
+  "dataStatLastBackup": {
+    "ar": "آخر نسخة احتياطية",
+    "en": "Last backup"
+  },
+  "dataLastBackupNever": {
+    "ar": "لم تُنشأ بعد",
+    "en": "Not yet"
+  },
+  "dataLastBackupToday": {
+    "ar": "اليوم",
+    "en": "Today"
+  },
+  "dataLastBackupDaysAgo": {
+    "ar": "{days, plural, =1{أمس} =2{قبل يومين} few{قبل {days} أيام} many{قبل {days} يومًا} other{قبل {days} يوم}}",
+    "en": "{days, plural, =1{Yesterday} other{{days} days ago}}",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataBackupSection": {
+    "ar": "النسخ الاحتياطي",
+    "en": "Backup"
+  },
+  "dataBackupSectionHint": {
+    "ar": "ملف واحد مشفّر لنقل بياناتك أو حفظها بأمان",
+    "en": "One encrypted file to move or safeguard your data"
+  },
+  "dataBackupCreateTitle": {
+    "ar": "نسخة احتياطية مشفّرة",
+    "en": "Encrypted backup"
+  },
+  "dataBackupCreateBody": {
+    "ar": "ملف واحد يُقفَل بعبارة مرور لا يعرفها أحد غيرك. احتفظ به في مكان آمن لتنقل بياناتك إلى هاتف جديد.",
+    "en": "One file, locked with a passphrase only you know. Keep it somewhere safe to move your data to a new phone."
+  },
+  "dataBackupCreateAction": {
+    "ar": "إنشاء نسخة احتياطية",
+    "en": "Create backup"
+  },
+  "dataRestoreTitle": {
+    "ar": "الاستعادة من نسخة احتياطية",
+    "en": "Restore from a backup"
+  },
+  "dataRestoreBody": {
+    "ar": "تستبدل كل ما في مَدار بمحتوى ملف النسخة. نحفظ أولًا نسخة أمان من بياناتك الحالية على الهاتف.",
+    "en": "Replaces everything in Madar with a backup file. A safety copy of your current data is kept on this phone first."
+  },
+  "dataRestoreAction": {
+    "ar": "اختيار ملف النسخة",
+    "en": "Choose a backup file"
+  },
+  "dataSafetyCopiesLine": {
+    "ar": "{count, plural, =1{نسخة أمان واحدة على الهاتف} =2{نسختا أمان على الهاتف} few{{count} نسخ أمان على الهاتف} many{{count} نسخة أمان على الهاتف} other{{count} نسخة أمان على الهاتف}} · آخرها {date}",
+    "en": "{count, plural, =1{1 safety copy on this phone} other{{count} safety copies on this phone}} · latest {date}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataExportSection": {
+    "ar": "التصدير",
+    "en": "Export"
+  },
+  "dataExportSectionHint": {
+    "ar": "نسخ مقروءة لبياناتك – غير مشفّرة",
+    "en": "Readable copies of your data – not encrypted"
+  },
+  "dataExportSummaryTitle": {
+    "ar": "ملخّص جاهز للذكاء الاصطناعي",
+    "en": "AI-ready summary"
+  },
+  "dataExportSummaryBody": {
+    "ar": "نظرة موجزة بصيغة Markdown تراجعها قسمًا قسمًا قبل مشاركتها.",
+    "en": "A short Markdown overview you review section by section before sharing."
+  },
+  "dataExportCsvTitle": {
+    "ar": "جداول (CSV)",
+    "en": "Spreadsheets (CSV)"
+  },
+  "dataExportCsvBody": {
+    "ar": "التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.",
+    "en": "Labs, transactions, pain and mood – for Excel or Sheets."
+  },
+  "dataExportJsonTitle": {
+    "ar": "كل البيانات (JSON)",
+    "en": "Everything (JSON)"
+  },
+  "dataExportJsonBody": {
+    "ar": "كل السجلات في ملف واحد، لأرشيفك الخاص أو لتطبيقات أخرى.",
+    "en": "Every record in one file, for your own archive or other apps."
+  },
+  "dataExportPlainWarning": {
+    "ar": "ملفات التصدير غير مشفّرة: من يحصل عليها يستطيع قراءتها. شاركها مع من تثق به فقط.",
+    "en": "Exported files are not encrypted: anyone who gets them can read them. Share them only with people you trust."
+  },
+  "dataImportSection": {
+    "ar": "الاستيراد",
+    "en": "Import"
+  },
+  "dataImportTitle": {
+    "ar": "الاستيراد من نموذج مَدار الأول",
+    "en": "Import from the Madar prototype"
+  },
+  "dataImportBody": {
+    "ar": "أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.",
+    "en": "Bring in data exported from the earlier version (a JSON file)."
+  },
+  "dataFooter": {
+    "ar": "لا يرفع مَدار بياناتك إلى أي خادم. أنت وحدك تقرّر أين تذهب ملفاتك.",
+    "en": "Madar never uploads your data to any server. You alone decide where your files go."
+  },
+  "dataAreaOther": {
+    "ar": "الإعدادات والسجلّ",
+    "en": "Settings & history"
+  },
+  "dataShareAction": {
+    "ar": "مشاركة",
+    "en": "Share"
+  },
+  "dataSaveAction": {
+    "ar": "حفظ في…",
+    "en": "Save to…"
+  },
+  "dataCopyAction": {
+    "ar": "نسخ",
+    "en": "Copy"
+  },
+  "dataDoneAction": {
+    "ar": "تم",
+    "en": "Done"
+  },
+  "dataCancelAction": {
+    "ar": "إلغاء",
+    "en": "Cancel"
+  },
+  "dataTryAgainAction": {
+    "ar": "حاول مجددًا",
+    "en": "Try again"
+  },
+  "dataFileReadyTitle": {
+    "ar": "ملفّك جاهز",
+    "en": "Your file is ready"
+  },
+  "dataFileReadySubtitle": {
+    "ar": "اختر أين يذهب – لا شيء يُرسَل تلقائيًا",
+    "en": "Choose where it goes – nothing is sent automatically"
+  },
+  "dataFileEncryptedNote": {
+    "ar": "مشفّر بعبارة المرور. لا يُفتح إلا بها – احتفظ بها بعيدًا عن الملف.",
+    "en": "Encrypted with your passphrase and opens only with it – keep the two apart."
+  },
+  "dataFilePlainNote": {
+    "ar": "غير مشفّر: من يحصل على هذا الملف يستطيع قراءته.",
+    "en": "Not encrypted: anyone who gets this file can read it."
+  },
+  "dataFileShared": {
+    "ar": "أُرسل إلى قائمة المشاركة.",
+    "en": "Handed to the share sheet."
+  },
+  "dataFileSaved": {
+    "ar": "حُفظ في المكان الذي اخترته.",
+    "en": "Saved where you chose."
+  },
+  "dataFileSendFailed": {
+    "ar": "تعذّر ذلك. لم يُرسَل شيء – حاول مجددًا.",
+    "en": "That didn’t work. Nothing was sent – please try again."
+  },
+  "dataExportFailed": {
+    "ar": "تعذّر تجهيز الملف. بياناتك لم تتغيّر.",
+    "en": "Couldn’t prepare the file. Your data is unchanged."
+  },
+  "dataRecordsCount": {
+    "ar": "{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلّان} few{{count} سجلات} many{{count} سجلًّا} other{{count} سجل}}",
+    "en": "{count, plural, =0{no records} =1{1 record} other{{count} records}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSizeBytes": {
+    "ar": "{size} بايت",
+    "en": "{size} bytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeKb": {
+    "ar": "{size} ك.ب",
+    "en": "{size} KB",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeMb": {
+    "ar": "{size} م.ب",
+    "en": "{size} MB",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataBackupSheetTitle": {
+    "ar": "نسخة احتياطية مشفّرة",
+    "en": "Encrypted backup"
+  },
+  "dataBackupSheetSubtitle": {
+    "ar": "AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك",
+    "en": "AES-256 · keys derived with Argon2id on your phone"
+  },
+  "dataBackupSheetBody": {
+    "ar": "اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.",
+    "en": "Choose a passphrase to lock the backup file. Madar never stores it and can’t recover it, so write it down somewhere you trust."
+  },
+  "dataPassphraseLabel": {
+    "ar": "عبارة المرور",
+    "en": "Passphrase"
+  },
+  "dataPassphraseConfirmLabel": {
+    "ar": "أعد كتابة عبارة المرور",
+    "en": "Type the passphrase again"
+  },
+  "dataPassphraseMismatch": {
+    "ar": "العبارتان غير متطابقتين.",
+    "en": "The two don’t match."
+  },
+  "dataPassphraseShow": {
+    "ar": "إظهار عبارة المرور",
+    "en": "Show passphrase"
+  },
+  "dataPassphraseHide": {
+    "ar": "إخفاء عبارة المرور",
+    "en": "Hide passphrase"
+  },
+  "dataPassphraseNeverStored": {
+    "ar": "لا تُحفظ عبارة المرور في أي مكان. بدونها لا يمكن فتح النسخة – ولا حتى بواسطتنا.",
+    "en": "The passphrase is never stored anywhere. Without it the backup can’t be opened – not even by us."
+  },
+  "dataStrengthLabel": {
+    "ar": "القوة",
+    "en": "Strength"
+  },
+  "dataStrengthEmpty": {
+    "ar": "—",
+    "en": "—"
+  },
+  "dataStrengthVeryWeak": {
+    "ar": "ضعيفة جدًا",
+    "en": "Very weak"
+  },
+  "dataStrengthWeak": {
+    "ar": "ضعيفة",
+    "en": "Weak"
+  },
+  "dataStrengthFair": {
+    "ar": "مقبولة",
+    "en": "Fair"
+  },
+  "dataStrengthStrong": {
+    "ar": "قوية",
+    "en": "Strong"
+  },
+  "dataStrengthVeryStrong": {
+    "ar": "قوية جدًا",
+    "en": "Very strong"
+  },
+  "dataStrengthHintShort": {
+    "ar": "استخدم {min} أحرف على الأقل – جملة قصيرة تفي بالغرض.",
+    "en": "Use at least {min} characters – a short sentence works well.",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "dataStrengthHintCommon": {
+    "ar": "هذه عبارة شائعة يسهل تخمينها.",
+    "en": "This is a common password that’s easy to guess."
+  },
+  "dataStrengthHintPattern": {
+    "ar": "تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.",
+    "en": "Avoid repeats and runs like 1234 or aaaa."
+  },
+  "dataStrengthHintDigits": {
+    "ar": "الأرقام وحدها سهلة التخمين؛ أضف كلمات.",
+    "en": "Digits alone are easy to guess; add some words."
+  },
+  "dataStrengthHintWords": {
+    "ar": "جيدة. كلمة أو كلمتان إضافيتان تجعلانها أقوى بكثير.",
+    "en": "Good. One or two more words make it much stronger."
+  },
+  "dataBackupWorking": {
+    "ar": "نقفل بياناتك…",
+    "en": "Locking your data…"
+  },
+  "dataBackupWorkingHint": {
+    "ar": "يستغرق هذا بضع ثوانٍ عن قصد، ليصعب تخمين عبارة المرور.",
+    "en": "This takes a few seconds on purpose – it makes the passphrase hard to guess."
+  },
+  "dataBackupReadyTitle": {
+    "ar": "النسخة الاحتياطية جاهزة",
+    "en": "Backup ready"
+  },
+  "dataBackupReadySubtitle": {
+    "ar": "شاركها أو احفظها في مكان آمن",
+    "en": "Share it or save it somewhere safe"
+  },
+  "dataBackupReadyHint": {
+    "ar": "احفظ الملف وعبارة المرور في مكانين مختلفين. ستحتاج إلى كليهما للاستعادة.",
+    "en": "Keep the file and the passphrase in different places. You’ll need both to restore."
+  },
+  "dataBackupShareSubject": {
+    "ar": "نسخة مَدار الاحتياطية",
+    "en": "Madar backup"
+  },
+  "dataBackupFailed": {
+    "ar": "تعذّر إنشاء النسخة. بياناتك كما هي – حاول مجددًا.",
+    "en": "Couldn’t create the backup. Your data is untouched – please try again."
+  },
+  "dataBackupMadeOn": {
+    "ar": "أُنشئت في {date}",
+    "en": "Made on {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvSheetTitle": {
+    "ar": "تصدير جدول",
+    "en": "Spreadsheet export"
+  },
+  "dataCsvSheetSubtitle": {
+    "ar": "ملف CSV يُفتح في برامج الجداول",
+    "en": "CSV · UTF-8 · opens in Excel and Sheets"
+  },
+  "dataCsvWhat": {
+    "ar": "ماذا",
+    "en": "What"
+  },
+  "dataCsvWhen": {
+    "ar": "الفترة",
+    "en": "When"
+  },
+  "dataCsvLabs": {
+    "ar": "التحاليل",
+    "en": "Labs"
+  },
+  "dataCsvTransactions": {
+    "ar": "المعاملات",
+    "en": "Transactions"
+  },
+  "dataCsvPain": {
+    "ar": "الألم",
+    "en": "Pain"
+  },
+  "dataCsvMood": {
+    "ar": "المزاج",
+    "en": "Mood"
+  },
+  "dataRange30": {
+    "ar": "30 يومًا",
+    "en": "30 days"
+  },
+  "dataRange90": {
+    "ar": "90 يومًا",
+    "en": "90 days"
+  },
+  "dataRangeYear": {
+    "ar": "12 شهرًا",
+    "en": "12 months"
+  },
+  "dataRangeAll": {
+    "ar": "الكل",
+    "en": "All time"
+  },
+  "dataRangeCustom": {
+    "ar": "مخصّصة…",
+    "en": "Custom…"
+  },
+  "dataRangeAllTime": {
+    "ar": "كل السجلات منذ البداية",
+    "en": "Every record since the start"
+  },
+  "dataRangeFromTo": {
+    "ar": "من {from} إلى {to}",
+    "en": "From {from} to {to}",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvFormatNote": {
+    "ar": "التواريخ بصيغة {example} والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.",
+    "en": "Dates look like {example} and numbers use a decimal point, so any spreadsheet opens them as they are.",
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvCreate": {
+    "ar": "إنشاء الملف",
+    "en": "Create file"
+  },
+  "dataCsvCreateRows": {
+    "ar": "{count, plural, =0{لا صفوف في هذه الفترة} =1{إنشاء الملف (صف واحد)} =2{إنشاء الملف (صفّان)} few{إنشاء الملف ({count} صفوف)} many{إنشاء الملف ({count} صفًّا)} other{إنشاء الملف ({count} صف)}}",
+    "en": "{count, plural, =0{No rows in this range} =1{Create file (1 row)} other{Create file ({count} rows)}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataCsvDate": {
+    "ar": "التاريخ",
+    "en": "date"
+  },
+  "dataCsvTime": {
+    "ar": "الوقت",
+    "en": "time"
+  },
+  "dataCsvTest": {
+    "ar": "التحليل",
+    "en": "test"
+  },
+  "dataCsvCategory": {
+    "ar": "الفئة",
+    "en": "category"
+  },
+  "dataCsvValue": {
+    "ar": "القيمة",
+    "en": "value"
+  },
+  "dataCsvTextResult": {
+    "ar": "نتيجة نصية",
+    "en": "text_result"
+  },
+  "dataCsvUnit": {
+    "ar": "الوحدة",
+    "en": "unit"
+  },
+  "dataCsvRangeLow": {
+    "ar": "الحد الأدنى",
+    "en": "range_low"
+  },
+  "dataCsvRangeHigh": {
+    "ar": "الحد الأعلى",
+    "en": "range_high"
+  },
+  "dataCsvFlag": {
+    "ar": "العلامة",
+    "en": "flag"
+  },
+  "dataCsvNote": {
+    "ar": "ملاحظة",
+    "en": "note"
+  },
+  "dataCsvNotes": {
+    "ar": "ملاحظات",
+    "en": "notes"
+  },
+  "dataCsvKind": {
+    "ar": "النوع",
+    "en": "kind"
+  },
+  "dataCsvWallet": {
+    "ar": "المحفظة",
+    "en": "wallet"
+  },
+  "dataCsvCurrency": {
+    "ar": "العملة",
+    "en": "currency"
+  },
+  "dataCsvAmount": {
+    "ar": "المبلغ",
+    "en": "amount"
+  },
+  "dataCsvAmountBase": {
+    "ar": "المبلغ بالعملة الأساسية",
+    "en": "amount_base"
+  },
+  "dataCsvBaseCurrency": {
+    "ar": "العملة الأساسية",
+    "en": "base_currency"
+  },
+  "dataCsvBudgetItem": {
+    "ar": "بند الميزانية",
+    "en": "budget_item"
+  },
+  "dataCsvToWallet": {
+    "ar": "إلى المحفظة",
+    "en": "to_wallet"
+  },
+  "dataCsvToAmount": {
+    "ar": "المبلغ المستلم",
+    "en": "to_amount"
+  },
+  "dataCsvToCurrency": {
+    "ar": "عملة الاستلام",
+    "en": "to_currency"
+  },
+  "dataCsvTags": {
+    "ar": "الوسوم",
+    "en": "tags"
+  },
+  "dataCsvPainScore": {
+    "ar": "شدة الألم (0-10)",
+    "en": "score_0_10"
+  },
+  "dataCsvLocations": {
+    "ar": "المواضع",
+    "en": "locations"
+  },
+  "dataCsvTriggers": {
+    "ar": "المحفّزات",
+    "en": "triggers"
+  },
+  "dataCsvBodyPoints": {
+    "ar": "نقاط خريطة الجسم",
+    "en": "body_points"
+  },
+  "dataCsvMoodScore": {
+    "ar": "المزاج (1-5)",
+    "en": "mood_1_5"
+  },
+  "dataCsvStress": {
+    "ar": "التوتر (0-10)",
+    "en": "stress_0_10"
+  },
+  "dataCsvAnxiety": {
+    "ar": "القلق (0-10)",
+    "en": "anxiety_0_10"
+  },
+  "dataCsvEnergy": {
+    "ar": "الطاقة (0-10)",
+    "en": "energy_0_10"
+  },
+  "dataCsvSleepHours": {
+    "ar": "ساعات النوم",
+    "en": "sleep_hours"
+  },
+  "dataCsvCaffeine": {
+    "ar": "أكواب الكافيين",
+    "en": "caffeine_cups"
+  },
+  "dataCsvFactors": {
+    "ar": "العوامل",
+    "en": "factors"
+  },
+  "dataFlagLow": {
+    "ar": "منخفض",
+    "en": "low"
+  },
+  "dataFlagBorderlineLow": {
+    "ar": "على الحد الأدنى",
+    "en": "borderline low"
+  },
+  "dataFlagInRange": {
+    "ar": "ضمن المعدل",
+    "en": "in range"
+  },
+  "dataFlagBorderlineHigh": {
+    "ar": "على الحد الأعلى",
+    "en": "borderline high"
+  },
+  "dataFlagHigh": {
+    "ar": "مرتفع",
+    "en": "high"
+  },
+  "dataTxExpense": {
+    "ar": "مصروف",
+    "en": "expense"
+  },
+  "dataTxIncome": {
+    "ar": "دخل",
+    "en": "income"
+  },
+  "dataTxTransfer": {
+    "ar": "تحويل",
+    "en": "transfer"
+  },
+  "dataTxAdjustment": {
+    "ar": "تسوية",
+    "en": "adjustment"
+  },
+  "dataSummarySubtitle": {
+    "ar": "يُعدّ على هاتفك · راجع كل قسم قبل المشاركة",
+    "en": "Made on your phone · review each section before sharing"
+  },
+  "dataSummaryIntro": {
+    "ar": "لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.",
+    "en": "Nothing goes anywhere until you choose. The preview below is exactly what would leave – notes, phone numbers and document or account numbers are never included."
+  },
+  "dataSummaryPreparing": {
+    "ar": "نجهّز الملخّص على هاتفك…",
+    "en": "Preparing the summary on your phone…"
+  },
+  "dataSummarySections": {
+    "ar": "الأقسام المضمَّنة",
+    "en": "Sections to include"
+  },
+  "dataSummarySectionsOf": {
+    "ar": "{selected} من {total} أقسام",
+    "en": "{selected} of {total} sections",
+    "placeholders": {
+      "selected": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryTokens": {
+    "ar": "≈ {count} رمز",
+    "en": "≈ {count} tokens",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryNoData": {
+    "ar": "لا بيانات بعد",
+    "en": "No data yet"
+  },
+  "dataSummaryProfileHint": {
+    "ar": "اختياري",
+    "en": "Optional"
+  },
+  "dataSummaryPreviewTitle": {
+    "ar": "ما سيُشارَك بالضبط",
+    "en": "Exactly what will be shared"
+  },
+  "dataSummaryCopied": {
+    "ar": "نُسخ الملخّص إلى الحافظة.",
+    "en": "Summary copied to the clipboard."
+  },
+  "dataSummaryUse": {
+    "ar": "استخدام هذا الملخّص",
+    "en": "Use this summary"
+  },
+  "dataProfileChoose": {
+    "ar": "اختر ما يُذكر عنك:",
+    "en": "Choose what to mention about you:"
+  },
+  "dataProfileAboutHint": {
+    "ar": "مثلًا: العمر أو ما يهمّك أن يعرفه المساعد",
+    "en": "e.g. your age, or anything the assistant should know"
+  },
+  "dataRestoreFlowTitle": {
+    "ar": "الاستعادة",
+    "en": "Restore"
+  },
+  "dataRestoreChooseTitle": {
+    "ar": "استعادة بياناتك",
+    "en": "Bring your data back"
+  },
+  "dataRestoreChooseBody": {
+    "ar": "اختر ملف نسخة ينتهي بـ {ext}. سترى ما فيه قبل أن يتغيّر أي شيء.",
+    "en": "Pick a {ext} file. You’ll see what’s inside before anything changes.",
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestorePickFile": {
+    "ar": "اختيار ملف النسخة",
+    "en": "Choose backup file"
+  },
+  "dataRestoreNothingChanges": {
+    "ar": "لن يتغيّر شيء في بياناتك الحالية حتى تؤكّد الاستبدال في الخطوة الأخيرة.",
+    "en": "Nothing in your current data changes until you confirm the replacement in the last step."
+  },
+  "dataSafetyCopiesTitle": {
+    "ar": "نسخ الأمان على هذا الهاتف",
+    "en": "Safety copies on this phone"
+  },
+  "dataSafetyCopiesHint": {
+    "ar": "تُنشأ تلقائيًا قبل كل استعادة، وتُفتح بعبارة المرور التي استُخدمت حينها.",
+    "en": "Made automatically before each restore; each opens with the passphrase used for that restore."
+  },
+  "dataRestoreUnlockBody": {
+    "ar": "اكتب عبارة المرور التي أقفلت بها هذه النسخة.",
+    "en": "Enter the passphrase this backup was locked with."
+  },
+  "dataRestoreUnlockAction": {
+    "ar": "فتح النسخة",
+    "en": "Unlock backup"
+  },
+  "dataRestoreOtherFile": {
+    "ar": "اختيار ملف آخر",
+    "en": "Choose another file"
+  },
+  "dataRestoreOpening": {
+    "ar": "نتحقق من النسخة…",
+    "en": "Checking the backup…"
+  },
+  "dataRestoreOpeningHint": {
+    "ar": "نتأكد أن الملف سليم ولم يُعدَّل، ثم نفكّ تشفيره على هاتفك.",
+    "en": "Making sure the file is intact and unchanged, then decrypting it on your phone."
+  },
+  "dataRestorePreviewTitle": {
+    "ar": "النسخة سليمة",
+    "en": "The backup is intact"
+  },
+  "dataRestoreInBackup": {
+    "ar": "في النسخة",
+    "en": "In the backup"
+  },
+  "dataRestoreOnPhone": {
+    "ar": "على الهاتف الآن",
+    "en": "On this phone now"
+  },
+  "dataRestoreWhatsInside": {
+    "ar": "ما في هذه النسخة",
+    "en": "What’s inside"
+  },
+  "dataRestoreReplaceWarning": {
+    "ar": "ستحلّ هذه النسخة محلّ كل البيانات الموجودة في مَدار الآن. قبل ذلك نحفظ بياناتك الحالية نسخةَ أمان على هذا الهاتف، تُفتح بعبارة المرور نفسها.",
+    "en": "This backup will replace all data in Madar now. First, your current data is saved as a safety copy on this phone, opening with the same passphrase."
+  },
+  "dataRestoreUnderstand": {
+    "ar": "فهمت أن بياناتي الحالية ستُستبدل",
+    "en": "I understand my current data will be replaced"
+  },
+  "dataRestoreConfirmAction": {
+    "ar": "استبدال بياناتي",
+    "en": "Replace my data"
+  },
+  "dataRestoreSavingSafety": {
+    "ar": "نحفظ نسخة أمان من بياناتك الحالية…",
+    "en": "Saving a safety copy of your current data…"
+  },
+  "dataRestoreRestoring": {
+    "ar": "نستعيد بياناتك…",
+    "en": "Restoring your data…"
+  },
+  "dataRestoreKeepOpen": {
+    "ar": "أبقِ التطبيق مفتوحًا لحظات.",
+    "en": "Keep the app open for a moment."
+  },
+  "dataRestoreDoneTitle": {
+    "ar": "تمت الاستعادة",
+    "en": "Restored"
+  },
+  "dataRestoreDoneBody": {
+    "ar": "عادت سجلاتك ({count}) إلى مَدار.",
+    "en": "Your records ({count}) are back in Madar.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestoreSafetyKept": {
+    "ar": "نسخة أمان من بياناتك السابقة محفوظة على هذا الهاتف، وتُفتح بعبارة المرور نفسها.",
+    "en": "A safety copy of your previous data is kept on this phone and opens with the same passphrase."
+  },
+  "dataSafetyCopySave": {
+    "ar": "حفظ نسخة الأمان في مكان آخر",
+    "en": "Save the safety copy elsewhere"
+  },
+  "dataSafetyCopyTitle": {
+    "ar": "نسخة الأمان",
+    "en": "Safety copy"
+  },
+  "dataNothingChanged": {
+    "ar": "لم يتغيّر شيء في بياناتك.",
+    "en": "Nothing in your data was changed."
+  },
+  "dataErrWrongPassphrase": {
+    "ar": "عبارة المرور هذه لا تفتح النسخة. تحقّق من الأحرف وحاول مجددًا.",
+    "en": "That passphrase doesn’t open this backup. Check for typos and try again."
+  },
+  "dataErrNotBackupTitle": {
+    "ar": "هذا ليس ملف نسخة من مَدار",
+    "en": "This isn’t a Madar backup"
+  },
+  "dataErrNotBackupBody": {
+    "ar": "اختر ملفًا ينتهي بـ {ext} أنشأته من «إنشاء نسخة احتياطية».",
+    "en": "Choose a file ending in {ext}, made with “Create backup”.",
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "dataErrNewerTitle": {
+    "ar": "أُنشئت بإصدار أحدث من مَدار",
+    "en": "Made by a newer Madar"
+  },
+  "dataErrNewerBody": {
+    "ar": "حدّث مَدار على هذا الهاتف ثم حاول مجددًا.",
+    "en": "Update Madar on this phone, then try again."
+  },
+  "dataErrTruncatedTitle": {
+    "ar": "الملف غير مكتمل",
+    "en": "The file is incomplete"
+  },
+  "dataErrTruncatedBody": {
+    "ar": "ربما لم يكتمل نسخه أو تنزيله. انسخه مرة أخرى ثم حاول.",
+    "en": "It may not have finished copying or downloading. Copy it again and retry."
+  },
+  "dataErrCorruptedTitle": {
+    "ar": "الملف تالف",
+    "en": "The file is damaged"
+  },
+  "dataErrCorruptedBody": {
+    "ar": "تغيّر الملف أو تلف بعد إنشائه، فلا يمكن الوثوق به.",
+    "en": "It changed or was damaged after it was made, so it can’t be trusted."
+  },
+  "dataErrUnreadableTitle": {
+    "ar": "تعذّرت قراءة الملف",
+    "en": "Couldn’t read the file"
+  },
+  "dataErrUnreadableBody": {
+    "ar": "جرّب ملفًا آخر أو انسخه إلى الهاتف أولًا.",
+    "en": "Try another file, or copy it to the phone first."
+  },
+  "dataErrSafetyTitle": {
+    "ar": "تعذّر حفظ نسخة الأمان",
+    "en": "Couldn’t save a safety copy"
+  },
+  "dataErrSafetyBody": {
+    "ar": "لذلك لم نستبدل بياناتك. وفّر بعض المساحة ثم حاول مجددًا.",
+    "en": "So your data was not replaced. Free some space and try again."
+  },
+  "dataErrRejectedTitle": {
+    "ar": "تعذّرت استعادة هذه النسخة",
+    "en": "This backup couldn’t be restored"
+  },
+  "dataErrRejectedBody": {
+    "ar": "لم تجتز بياناتها فحوص السلامة.",
+    "en": "Its data didn’t pass the safety checks."
+  },
+  "dataSumHeading": {
+    "ar": "ملخّص مَدار — {date}",
+    "en": "Madar summary — {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPreamble": {
+    "ar": "بيانات متابعة شخصية من تطبيق مَدار، أُعدّت على هاتف المستخدم نفسه. التواريخ بصيغة سنة-شهر-يوم والكسور العشرية بنقطة. لا تُضمَّن الملاحظات ولا أرقام الهواتف ولا أرقام الوثائق أو الحسابات.",
+    "en": "Personal tracking data from the Madar app, prepared on the user’s own phone. Dates are yyyy-mm-dd; decimals use a point. Notes, phone numbers and document or account numbers are never included."
+  },
+  "dataSumNoData": {
+    "ar": "لا بيانات بعد.",
+    "en": "No data yet."
+  },
+  "dataSumListSep": {
+    "ar": "، ",
+    "en": ", "
+  },
+  "dataSumLastDays": {
+    "ar": "{days, plural, =1{اليوم} =2{آخر يومين} few{آخر {days} أيام} many{آخر {days} يومًا} other{آخر {days} يوم}}",
+    "en": "{days, plural, =1{Today} other{Last {days} days}}",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPreviousDays": {
+    "ar": "الأيام الـ{days} السابقة",
+    "en": "The {days} days before",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMore": {
+    "ar": "غير معروضة: {count}",
+    "en": "not shown: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProfile": {
+    "ar": "نبذة شخصية",
+    "en": "Profile"
+  },
+  "dataSumFaith": {
+    "ar": "الإيمان",
+    "en": "Faith"
+  },
+  "dataSumHealth": {
+    "ar": "الصحة",
+    "en": "Health"
+  },
+  "dataSumMoney": {
+    "ar": "المال",
+    "en": "Money"
+  },
+  "dataSumFamily": {
+    "ar": "العائلة",
+    "en": "Family"
+  },
+  "dataSumWork": {
+    "ar": "العمل",
+    "en": "Work"
+  },
+  "dataSumGrowth": {
+    "ar": "النمو",
+    "en": "Growth"
+  },
+  "dataSumBody": {
+    "ar": "الجسد",
+    "en": "Body"
+  },
+  "dataSumTravel": {
+    "ar": "السفر",
+    "en": "Travel"
+  },
+  "dataSumCustom": {
+    "ar": "متتبّعات مخصّصة",
+    "en": "Custom trackers"
+  },
+  "dataSumCity": {
+    "ar": "المدينة",
+    "en": "City"
+  },
+  "dataSumTimeZone": {
+    "ar": "المنطقة الزمنية",
+    "en": "Time zone"
+  },
+  "dataSumBaseCurrency": {
+    "ar": "العملة الأساسية",
+    "en": "Base currency"
+  },
+  "dataSumLanguage": {
+    "ar": "لغة التطبيق",
+    "en": "App language"
+  },
+  "dataSumLanguageName": {
+    "ar": "العربية",
+    "en": "English"
+  },
+  "dataSumAboutMe": {
+    "ar": "عنّي",
+    "en": "About me"
+  },
+  "dataSumPrayersTitle": {
+    "ar": "الصلاة",
+    "en": "Prayers"
+  },
+  "dataSumObligatory": {
+    "ar": "{window} (الفرائض)",
+    "en": "{window} (obligatory)",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLogged": {
+    "ar": "المسجّل: {logged}/{expected}",
+    "en": "logged: {logged}/{expected}",
+    "placeholders": {
+      "logged": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOnTime": {
+    "ar": "في وقتها: {count}",
+    "en": "on time: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLate": {
+    "ar": "متأخرة: {count}",
+    "en": "late: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMadeUp": {
+    "ar": "قضاء: {count}",
+    "en": "made up: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMissed": {
+    "ar": "فائتة: {count}",
+    "en": "missed: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInCongregation": {
+    "ar": "جماعة: {count}",
+    "en": "in congregation: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumVoluntary": {
+    "ar": "{window} (النوافل)",
+    "en": "{window} (voluntary)",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumQuranTitle": {
+    "ar": "القرآن والورد",
+    "en": "Quran and wird"
+  },
+  "dataSumSessions": {
+    "ar": "الجلسات: {count}",
+    "en": "sessions: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPages": {
+    "ar": "الصفحات: {count}",
+    "en": "pages: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMinutes": {
+    "ar": "{count} د",
+    "en": "{count} min",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastSession": {
+    "ar": "آخر جلسة: {date}",
+    "en": "Last session: {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWird": {
+    "ar": "الورد «{name}»",
+    "en": "Wird “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPerDay": {
+    "ar": "{unit} يوميًا: {amount}",
+    "en": "{amount} {unit} a day",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumUnitPages": {
+    "ar": "الصفحات",
+    "en": "pages"
+  },
+  "dataSumUnitJuz": {
+    "ar": "الأجزاء",
+    "en": "juz"
+  },
+  "dataSumUnitHizb": {
+    "ar": "الأحزاب",
+    "en": "hizb"
+  },
+  "dataSumUnitAyat": {
+    "ar": "الآيات",
+    "en": "ayat"
+  },
+  "dataSumSince": {
+    "ar": "منذ {date}",
+    "en": "since {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBy": {
+    "ar": "حتى {date}",
+    "en": "by {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHifzTitle": {
+    "ar": "الحفظ",
+    "en": "Hifz"
+  },
+  "dataSumItems": {
+    "ar": "المحفوظات: {count}",
+    "en": "items: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNew": {
+    "ar": "جديدة: {count}",
+    "en": "new: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueToday": {
+    "ar": "مستحقة للمراجعة اليوم: {count}",
+    "en": "due today: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumReviews": {
+    "ar": "المراجعات: {count}",
+    "en": "reviews: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvgGrade": {
+    "ar": "متوسط التقييم: {value}/5",
+    "en": "average grade: {value}/5",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAlertsTitle": {
+    "ar": "تنبيهات دائمة",
+    "en": "Standing alerts"
+  },
+  "dataSumSeverityCritical": {
+    "ar": "حرج",
+    "en": "critical"
+  },
+  "dataSumSeverityWarning": {
+    "ar": "تنبيه",
+    "en": "warning"
+  },
+  "dataSumSeverityInfo": {
+    "ar": "ملاحظة",
+    "en": "note"
+  },
+  "dataSumConditionsTitle": {
+    "ar": "الحالات الصحية",
+    "en": "Conditions"
+  },
+  "dataSumMedsTitle": {
+    "ar": "الأدوية الحالية",
+    "en": "Active medications"
+  },
+  "dataSumKindSupplement": {
+    "ar": "مكمّل",
+    "en": "supplement"
+  },
+  "dataSumKindInjection": {
+    "ar": "حقنة",
+    "en": "injection"
+  },
+  "dataSumWithEmptyStomach": {
+    "ar": "على معدة فارغة",
+    "en": "on an empty stomach"
+  },
+  "dataSumWithBreakfast": {
+    "ar": "مع الفطور",
+    "en": "with breakfast"
+  },
+  "dataSumWithLunch": {
+    "ar": "مع الغداء",
+    "en": "with lunch"
+  },
+  "dataSumWithDinner": {
+    "ar": "مع العشاء",
+    "en": "with dinner"
+  },
+  "dataSumWithBedtime": {
+    "ar": "قبل النوم",
+    "en": "at bedtime"
+  },
+  "dataSumWithCourse": {
+    "ar": "حسب خطة العلاج",
+    "en": "per course plan"
+  },
+  "dataSumLabsTitle": {
+    "ar": "أحدث التحاليل",
+    "en": "Recent labs"
+  },
+  "dataSumLabsWindow": {
+    "ar": "آخر نتيجة لكل تحليل خلال آخر {months} شهرًا؛ العلامة مقارنةً بالمعدل المحفوظ في التطبيق.",
+    "en": "Latest result per test in the last {months} months; flags compare with the range saved in the app.",
+    "placeholders": {
+      "months": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColTest": {
+    "ar": "التحليل",
+    "en": "Test"
+  },
+  "dataSumColDate": {
+    "ar": "التاريخ",
+    "en": "Date"
+  },
+  "dataSumColResult": {
+    "ar": "النتيجة",
+    "en": "Result"
+  },
+  "dataSumColRange": {
+    "ar": "المعدل",
+    "en": "Range"
+  },
+  "dataSumColFlag": {
+    "ar": "العلامة",
+    "en": "Flag"
+  },
+  "dataSumColPrevious": {
+    "ar": "السابقة",
+    "en": "Previous"
+  },
+  "dataSumPainTitle": {
+    "ar": "الألم (متابعة)",
+    "en": "Pain (tracking)"
+  },
+  "dataSumEntries": {
+    "ar": "الإدخالات: {count}",
+    "en": "entries: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverageOf": {
+    "ar": "المتوسط: {value}/{max}",
+    "en": "average: {value}/{max}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHighest": {
+    "ar": "الأعلى: {value}/{max}",
+    "en": "highest: {value}/{max}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopPlaces": {
+    "ar": "أكثر المواضع تسجيلًا",
+    "en": "Most logged places"
+  },
+  "dataSumTopTriggers": {
+    "ar": "أكثر المحفّزات تسجيلًا",
+    "en": "Most logged triggers"
+  },
+  "dataSumMoodTitle": {
+    "ar": "المزاج (متابعة)",
+    "en": "Mood (tracking)"
+  },
+  "dataSumMoodAvg": {
+    "ar": "المزاج: {value}/5",
+    "en": "mood: {value}/5",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumStressAvg": {
+    "ar": "التوتر: {value}/10",
+    "en": "stress: {value}/10",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAnxietyAvg": {
+    "ar": "القلق: {value}/10",
+    "en": "anxiety: {value}/10",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEnergyAvg": {
+    "ar": "الطاقة: {value}/10",
+    "en": "energy: {value}/10",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSleepAvg": {
+    "ar": "النوم: {value} س",
+    "en": "sleep: {value} h",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumCaffeineAvg": {
+    "ar": "الكافيين: {value} كوب",
+    "en": "caffeine: {value} cups",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopFactors": {
+    "ar": "العوامل الأكثر تكرارًا",
+    "en": "Common factors"
+  },
+  "dataSumWalletsTitle": {
+    "ar": "المحافظ",
+    "en": "Wallets"
+  },
+  "dataSumConvertedTo": {
+    "ar": "محوّلة إلى {code} بأسعار الصرف المحفوظة في التطبيق.",
+    "en": "Converted to {code} with the exchange rates saved in the app.",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColWallet": {
+    "ar": "المحفظة",
+    "en": "Wallet"
+  },
+  "dataSumColBalance": {
+    "ar": "الرصيد",
+    "en": "Balance"
+  },
+  "dataSumColInBase": {
+    "ar": "بـ{code}",
+    "en": "In {code}",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTotal": {
+    "ar": "الإجمالي: {amount}",
+    "en": "Total: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBudgetTitle": {
+    "ar": "الميزانية — {month}",
+    "en": "Budget — {month}",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPlanned": {
+    "ar": "المخطط: {amount}",
+    "en": "planned: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSpent": {
+    "ar": "المصروف: {amount}",
+    "en": "spent: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRemaining": {
+    "ar": "المتبقي: {amount}",
+    "en": "remaining: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverPlan": {
+    "ar": "تجاوز الخطة",
+    "en": "Over plan"
+  },
+  "dataSumUnassigned": {
+    "ar": "مصروف بلا بند: {amount}",
+    "en": "Spent without a budget item: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTitle": {
+    "ar": "المستحق خلال الأيام الـ{days} القادمة",
+    "en": "Due in the next {days} days",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueOn": {
+    "ar": "يستحق {date}",
+    "en": "due {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverdueSince": {
+    "ar": "متأخر منذ {date}",
+    "en": "overdue since {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDebtsTitle": {
+    "ar": "الديون",
+    "en": "Debts"
+  },
+  "dataSumIOwe": {
+    "ar": "عليّ لـ{person}: المتبقي {left} من {total}",
+    "en": "I owe {person}: {left} left of {total}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOwedToMe": {
+    "ar": "لي عند {person}: المتبقي {left} من {total}",
+    "en": "{person} owes me: {left} left of {total}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumJarsTitle": {
+    "ar": "حصّالات الادخار",
+    "en": "Savings jars"
+  },
+  "dataSumJar": {
+    "ar": "{name}: {saved} من {target} ({percent}%)",
+    "en": "{name}: {saved} of {target} ({percent}%)",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEvery": {
+    "ar": "الإيقاع (أيام): {days}",
+    "en": "rhythm: every {days} days",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastContact": {
+    "ar": "أيام منذ آخر تواصل: {days}",
+    "en": "days since last contact: {days}",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNeverContacted": {
+    "ar": "لم يُسجَّل تواصل بعد",
+    "en": "no contact logged yet"
+  },
+  "dataSumOverdueBy": {
+    "ar": "متأخر (أيام): {days}",
+    "en": "overdue by (days): {days}",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTodayStatus": {
+    "ar": "مستحق اليوم",
+    "en": "due today"
+  },
+  "dataSumDueIn": {
+    "ar": "يستحق بعد (أيام): {days}",
+    "en": "due in (days): {days}",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoRhythm": {
+    "ar": "آخرون بلا إيقاع تواصل: {count}",
+    "en": "{count, plural, =1{1 more person without a contact rhythm} other{{count} more people without a contact rhythm}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPeopleNoRhythm": {
+    "ar": "أشخاص بلا إيقاع تواصل: {count}",
+    "en": "{count, plural, =1{1 person, no contact rhythm set} other{{count} people, no contact rhythm set}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumTop3Title": {
+    "ar": "أهم 3",
+    "en": "Top 3"
+  },
+  "dataSumOnBoard": {
+    "ar": "اللوحة: {board}",
+    "en": "board: {board}",
+    "placeholders": {
+      "board": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBoardsTitle": {
+    "ar": "اللوحات",
+    "en": "Boards"
+  },
+  "dataSumOther": {
+    "ar": "أخرى",
+    "en": "Other"
+  },
+  "dataSumProjectsTitle": {
+    "ar": "المشاريع",
+    "en": "Projects"
+  },
+  "dataSumStatusActive": {
+    "ar": "نشط",
+    "en": "active"
+  },
+  "dataSumStatusPaused": {
+    "ar": "متوقف مؤقتًا",
+    "en": "paused"
+  },
+  "dataSumDoneOf": {
+    "ar": "المنجز: {done}/{total}",
+    "en": "items done: {done}/{total}",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDeadline": {
+    "ar": "الموعد النهائي: {date}",
+    "en": "deadline: {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProgress": {
+    "ar": "{current} من {target} {unit}",
+    "en": "{current} of {target} {unit}",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRecentGain": {
+    "ar": "{window}: {amount}",
+    "en": "{window}: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExercisePlanTitle": {
+    "ar": "خطة التمارين",
+    "en": "Exercise plan"
+  },
+  "dataSumWeekdays": {
+    "ar": "الإثنين,الثلاثاء,الأربعاء,الخميس,الجمعة,السبت,الأحد",
+    "en": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+    "description": "Seven comma-separated weekday names, Monday first"
+  },
+  "dataSumSets": {
+    "ar": "المجموعات: {count}",
+    "en": "sets: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumKg": {
+    "ar": "{value} كغ",
+    "en": "{value} kg",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWorkouts": {
+    "ar": "التمارين المنجزة: {count}",
+    "en": "workouts: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumFasting": {
+    "ar": "الصيام: {count} · المتوسط: {hours} س",
+    "en": "fasts: {count} · average: {hours} h",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetHours": {
+    "ar": "الهدف: {hours} س",
+    "en": "target: {hours} h",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWater": {
+    "ar": "الماء خلال آخر {days} أيام: {ml} مل يوميًا في المتوسط",
+    "en": "Water, last {days} days: {ml} ml a day on average",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetMl": {
+    "ar": "الهدف: {ml} مل",
+    "en": "target: {ml} ml",
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvoidTitle": {
+    "ar": "تجنّب",
+    "en": "Avoid"
+  },
+  "dataSumTripsTitle": {
+    "ar": "الرحلات القادمة",
+    "en": "Upcoming trips"
+  },
+  "dataSumTripPlanned": {
+    "ar": "مخطط لها",
+    "en": "planned"
+  },
+  "dataSumTripUnderWay": {
+    "ar": "جارية الآن",
+    "en": "under way"
+  },
+  "dataSumDocumentsTitle": {
+    "ar": "الوثائق (لا تُضمَّن أرقامها أبدًا)",
+    "en": "Documents (numbers are never included)"
+  },
+  "dataSumExpiresIn": {
+    "ar": "تنتهي {date} (الأيام المتبقية: {days})",
+    "en": "expires {date} (days left: {days})",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExpired": {
+    "ar": "انتهت {date}",
+    "en": "expired {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoExpiry": {
+    "ar": "بلا تاريخ انتهاء",
+    "en": "no expiry date"
+  },
+  "dataSumModuleTracker": {
+    "ar": "متتبّع",
+    "en": "tracker"
+  },
+  "dataSumModuleList": {
+    "ar": "قائمة",
+    "en": "list"
+  },
+  "dataSumOpen": {
+    "ar": "مفتوحة: {count}",
+    "en": "open: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDone": {
+    "ar": "منجزة: {count}",
+    "en": "done: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInWindow": {
+    "ar": "{window}: {count}",
+    "en": "{window}: {count}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastOn": {
+    "ar": "الأخير: {date}",
+    "en": "last: {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverage": {
+    "ar": "المتوسط: {value}",
+    "en": "average: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMin": {
+    "ar": "الأدنى: {value}",
+    "en": "min: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMax": {
+    "ar": "الأعلى: {value}",
+    "en": "max: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSum": {
+    "ar": "المجموع: {value}",
+    "en": "total: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTicked": {
+    "ar": "مؤشَّر عليها: {count}/{total}",
+    "en": "ticked: {count}/{total}",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  }
+}

@@ -90,7 +90,11 @@ class GoalsJarGlyph extends StatelessWidget {
     final emoji = GoalsIcons.jarEmoji(icon);
     if (emoji == null) return Icon(GoalsIcons.jar(icon), size: size, color: color);
     return ExcludeSemantics(
-      child: Text(emoji, style: TextStyle(fontSize: size * 0.9, height: 1.1), textAlign: TextAlign.center),
+      child: Text(
+        emoji,
+        style: TextStyle(fontSize: size * 0.9, height: 1.1),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
@@ -366,7 +370,8 @@ class GoalsFigure extends StatelessWidget {
         crossAxisAlignment: crossAxisAlignment,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(label, style: text.labelMedium?.copyWith(color: t.textSecondary), maxLines: 1),
+          // Wraps rather than being cut at a large text size.
+          Text(label, style: text.labelMedium?.copyWith(color: t.textSecondary), maxLines: 2),
           const SizedBox(height: 2),
           FittedBox(
             fit: BoxFit.scaleDown,

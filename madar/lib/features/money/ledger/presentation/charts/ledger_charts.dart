@@ -586,7 +586,10 @@ class BalanceLine extends StatelessWidget {
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 24,
-                    interval: math.max(1, (n - 1) / 3).toDouble(),
+                    // First, middle and last day: with four labels the last
+                    // two collided once the edge date was nudged inside
+                    // ("August 29September 29").
+                    interval: math.max(1, (n - 1) / 2).toDouble(),
                     getTitlesWidget: (value, meta) {
                       final i = rtl ? n - 1 - value.round() : value.round();
                       if (i < 0 || i >= n || n < 2) return const SizedBox.shrink();

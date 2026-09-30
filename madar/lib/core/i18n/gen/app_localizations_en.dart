@@ -12886,6 +12886,184 @@ class L10nEn extends L10n {
       'No wallet: wallet balances stay as they are.';
 
   @override
+  String get moneyHubNetWorthTitle => 'Net worth';
+
+  @override
+  String moneyHubNetWorthIn(String code) {
+    return 'in $code';
+  }
+
+  @override
+  String get moneyHubNetWorthEmpty =>
+      'Add your first wallet to see your net worth here, in your base currency.';
+
+  @override
+  String get moneyHubPartWallets => 'Wallets';
+
+  @override
+  String get moneyHubPartJars => 'Jars';
+
+  @override
+  String get moneyHubPartOwedToMe => 'Owed to you';
+
+  @override
+  String get moneyHubPartIOwe => 'You owe';
+
+  @override
+  String moneyHubNetWorthSemantics(
+    String total,
+    String wallets,
+    String jars,
+    String owed,
+    String owe,
+  ) {
+    return 'Net worth $total: wallets $wallets, jars $jars, owed to you $owed, you owe $owe';
+  }
+
+  @override
+  String get moneyHubRatesAction => 'Currencies';
+
+  @override
+  String get moneyHubQuickTitle => 'Add an entry';
+
+  @override
+  String get moneyHubAddExpenseHint => 'Add an expense';
+
+  @override
+  String get moneyHubAddIncomeHint => 'Add income';
+
+  @override
+  String get moneyHubAddTransferHint => 'Move money between wallets';
+
+  @override
+  String get moneyHubWalletsTitle => 'Your wallets';
+
+  @override
+  String get moneyHubLedgerAction => 'Ledger';
+
+  @override
+  String get moneyHubPlanTitle => 'This month\'s plan';
+
+  @override
+  String get moneyHubBudgetAction => 'Budget';
+
+  @override
+  String get moneyHubDuesTitle => 'Dues & savings';
+
+  @override
+  String get moneyHubGoalsAction => 'All';
+
+  @override
+  String get moneyHubToolsTitle => 'Money tools';
+
+  @override
+  String get moneyHubToolLedger => 'Ledger';
+
+  @override
+  String get moneyHubToolLedgerHint => 'Wallets, balances and recent entries';
+
+  @override
+  String get moneyHubToolTransactions => 'Entries';
+
+  @override
+  String get moneyHubToolTransactionsHint =>
+      'Every entry, searchable and filtered';
+
+  @override
+  String get moneyHubToolBudget => 'Budget';
+
+  @override
+  String get moneyHubToolBudgetHint =>
+      'The nested plan and spending against it';
+
+  @override
+  String get moneyHubToolJars => 'Savings jars';
+
+  @override
+  String get moneyHubToolJarsHint => 'Targets, deadlines and deposits';
+
+  @override
+  String get moneyHubToolDebts => 'Debts';
+
+  @override
+  String get moneyHubToolDebtsHint =>
+      'What you owe and are owed, with due dates';
+
+  @override
+  String get moneyHubToolBills => 'Bills';
+
+  @override
+  String get moneyHubToolBillsHint =>
+      'Recurring bills; “Paid” moves the next due date';
+
+  @override
+  String get moneyHubMoonOpenWallet => 'Open wallet';
+
+  @override
+  String get moneyHubSettingsSection => 'Money';
+
+  @override
+  String get moneyHubSettingsSectionHint =>
+      'Currencies, weeks per month, the week\'s start and due reminders';
+
+  @override
+  String get moneyHubSettingsCurrencies => 'Base currency & rates';
+
+  @override
+  String moneyHubSettingsCurrencyCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n currencies',
+      one: '1 currency',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get moneyHubSettingsWeeks => 'Weeks per month';
+
+  @override
+  String moneyHubSettingsWeeksSummary(String weeks) {
+    return '$weeks · converts weekly and monthly amounts';
+  }
+
+  @override
+  String get moneyHubSettingsWeekStart => 'Week starts on';
+
+  @override
+  String get moneyHubSettingsWeekStartHint =>
+      'For weekly budget items and the ledger\'s weekly reports';
+
+  @override
+  String get moneyHubWeekSaturday => 'Saturday';
+
+  @override
+  String get moneyHubWeekSunday => 'Sunday';
+
+  @override
+  String get moneyHubWeekMonday => 'Monday';
+
+  @override
+  String get moneyHubSettingsReminders => 'Due reminders';
+
+  @override
+  String get moneyHubSettingsRemindersOff => 'Off';
+
+  @override
+  String get moneyHubSettingsRemindersOnDay => 'On the due day';
+
+  @override
+  String moneyHubSettingsRemindersBoth(String lead) {
+    return '$lead and on the day';
+  }
+
+  @override
+  String moneyHubSettingsRemindersAt(String when, String time) {
+    return '$when · at $time';
+  }
+
+  @override
   String get workTitle => 'Work';
 
   @override
@@ -16577,4 +16755,4069 @@ class L10nEn extends L10n {
 
   @override
   String get bodyNotifyHint => 'Needs notification permission on the phone.';
+
+  @override
+  String get cmodTitle => 'Trackers & lists';
+
+  @override
+  String get cmodNewModule => 'New module';
+
+  @override
+  String cmodModulesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count modules',
+      one: '1 module',
+      zero: 'No modules yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodLoggedToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries today',
+      one: '1 entry today',
+      zero: 'Nothing logged today yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodEntriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+      zero: 'no entries',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+      zero: 'no items',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodItemsProgress(String done, String total) {
+    return '$done of $total done';
+  }
+
+  @override
+  String cmodOpenItems(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items left',
+      one: '1 item left',
+      zero: 'Nothing left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodEmptyTitle => 'Build your first tracker';
+
+  @override
+  String get cmodEmptyBody =>
+      'Track what matters with your own fields – a reading log, dhikr after prayer, a habit list… and watch it feed your planets.';
+
+  @override
+  String get cmodEmptyAction => 'Create a module';
+
+  @override
+  String get cmodArchivedSection => 'Archived';
+
+  @override
+  String get cmodKindTracker => 'Tracker';
+
+  @override
+  String get cmodKindList => 'List';
+
+  @override
+  String get cmodKindTrackerHint => 'Values you log over time, with charts';
+
+  @override
+  String get cmodKindListHint => 'Items you check off and reorder';
+
+  @override
+  String get cmodLastToday => 'Last entry today';
+
+  @override
+  String get cmodLastYesterday => 'Last entry yesterday';
+
+  @override
+  String cmodLastDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Last entry $count days ago',
+      one: 'Last entry a day ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodNoEntries => 'No entries yet';
+
+  @override
+  String cmodStreakBadge(String count) {
+    return '$count-day streak';
+  }
+
+  @override
+  String get cmodActionArchive => 'Archive';
+
+  @override
+  String get cmodActionUnarchive => 'Unarchive';
+
+  @override
+  String get cmodActionAddEntry => 'New entry';
+
+  @override
+  String get cmodActionOpen => 'Open';
+
+  @override
+  String get cmodActionExport => 'Share as CSV';
+
+  @override
+  String get cmodActionUncheck => 'Reopen';
+
+  @override
+  String get cmodActionCheck => 'Check off';
+
+  @override
+  String cmodToastArchived(String name) {
+    return 'Archived “$name”';
+  }
+
+  @override
+  String cmodToastUnarchived(String name) {
+    return '“$name” is back';
+  }
+
+  @override
+  String cmodToastDeleted(String name) {
+    return 'Deleted “$name”';
+  }
+
+  @override
+  String cmodToastDuplicated(String name) {
+    return 'Duplicated “$name”';
+  }
+
+  @override
+  String cmodToastLogged(String name) {
+    return 'Logged to “$name”';
+  }
+
+  @override
+  String get cmodToastUnchecked => 'Today’s check-in removed';
+
+  @override
+  String get cmodToastEntryDeleted => 'Entry deleted';
+
+  @override
+  String get cmodToastEntryDuplicated => 'Entry duplicated';
+
+  @override
+  String get cmodToastItemDone => 'Item done';
+
+  @override
+  String get cmodToastItemReopened => 'Item reopened';
+
+  @override
+  String get cmodToastCleared => 'Done items cleared';
+
+  @override
+  String cmodToastSaved(String name) {
+    return 'Saved “$name”';
+  }
+
+  @override
+  String get cmodToastReminderDeleted => 'Reminder deleted';
+
+  @override
+  String get cmodToastReminderAdded => 'Reminder added';
+
+  @override
+  String get cmodQuickDone => 'Done today';
+
+  @override
+  String get cmodQuickDoneHint => 'Log today with one tap';
+
+  @override
+  String get cmodQuickChecked => 'Done for today';
+
+  @override
+  String get cmodQuickCheckedHint => 'Tap to undo today’s check-in';
+
+  @override
+  String get cmodQuickAddOne => 'Log one';
+
+  @override
+  String get cmodQuickRate => 'Rate today';
+
+  @override
+  String cmodRateStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stars',
+      one: '1 star',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodBuilderNewTitle => 'New module';
+
+  @override
+  String get cmodBuilderEditTitle => 'Edit module';
+
+  @override
+  String get cmodSectionBasics => 'Basics';
+
+  @override
+  String get cmodName => 'Name';
+
+  @override
+  String get cmodNameHint => 'e.g. Reading log';
+
+  @override
+  String get cmodKind => 'Kind';
+
+  @override
+  String get cmodIcon => 'Icon';
+
+  @override
+  String get cmodColor => 'Colour';
+
+  @override
+  String get cmodPlanet => 'Planet';
+
+  @override
+  String get cmodPlanetNone => 'No planet';
+
+  @override
+  String get cmodPlanetHint =>
+      'Every entry brings this planet to life and circles it as a moon';
+
+  @override
+  String get cmodWindow => 'Prayer window';
+
+  @override
+  String get cmodWindowHint => 'When you usually log it';
+
+  @override
+  String get cmodSectionFields => 'Fields';
+
+  @override
+  String get cmodAddField => 'Add field';
+
+  @override
+  String get cmodFieldsEmptyTracker =>
+      'With no fields, a tracker is a one-tap counter';
+
+  @override
+  String get cmodFieldsEmptyList =>
+      'Add at least one field, such as the item’s name';
+
+  @override
+  String get cmodHiddenFields => 'Hidden fields';
+
+  @override
+  String get cmodHiddenFieldsHint =>
+      'Removed from the form – their old data is kept';
+
+  @override
+  String get cmodRestoreField => 'Show again';
+
+  @override
+  String get cmodSectionChart => 'Chart';
+
+  @override
+  String get cmodChartField => 'What to plot';
+
+  @override
+  String get cmodChartEntries => 'Number of entries';
+
+  @override
+  String get cmodChartStyle => 'Style';
+
+  @override
+  String get cmodChartRange => 'Period';
+
+  @override
+  String get cmodChartLine => 'Line';
+
+  @override
+  String get cmodChartBar => 'Bars';
+
+  @override
+  String get cmodChartHeat => 'Calendar';
+
+  @override
+  String get cmodChartStreak => 'Streak';
+
+  @override
+  String get cmodChartEmpty => 'No data in this period yet';
+
+  @override
+  String cmodRangeDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodSave => 'Save';
+
+  @override
+  String get cmodCreate => 'Create';
+
+  @override
+  String get cmodCancel => 'Cancel';
+
+  @override
+  String get cmodDiscardTitle => 'Discard changes?';
+
+  @override
+  String get cmodDiscardBody => 'Your changes to this module are not saved.';
+
+  @override
+  String get cmodDiscard => 'Discard';
+
+  @override
+  String get cmodKeepEditing => 'Keep editing';
+
+  @override
+  String get cmodPreviewUntitled => 'Untitled module';
+
+  @override
+  String get cmodIssueNameMissing => 'Give the module a name';
+
+  @override
+  String get cmodIssueNameTooLong => 'The name is too long';
+
+  @override
+  String get cmodIssueNoFields => 'Add at least one field';
+
+  @override
+  String cmodIssueTooManyFields(String max) {
+    return '$max fields at most';
+  }
+
+  @override
+  String get cmodIssueLabelMissing => 'A field has no name';
+
+  @override
+  String get cmodIssueLabelDuplicate => 'Two fields share this name';
+
+  @override
+  String get cmodIssueNoOptions => 'Add at least one option';
+
+  @override
+  String get cmodIssueOptionLabelMissing => 'An option has no name';
+
+  @override
+  String get cmodIssueOptionDuplicate => 'Two options share a name';
+
+  @override
+  String get cmodIssueRangeInverted => 'The minimum is above the maximum';
+
+  @override
+  String get cmodIssueCurrencyCode => 'Not a valid currency code';
+
+  @override
+  String get cmodMigrationTitle => 'Before saving';
+
+  @override
+  String get cmodMigrationBlockedTitle => 'This change would lose data';
+
+  @override
+  String get cmodMigrationBlockedBody =>
+      'Nothing was saved. Change the type back, or add a new field with the type you want.';
+
+  @override
+  String get cmodMigrationOk => 'OK';
+
+  @override
+  String cmodMigTypeBlocked(String field, String entries, String type) {
+    return '“$field”: $entries can’t become “$type”';
+  }
+
+  @override
+  String cmodMigRatingBlocked(String field, String entries) {
+    return '“$field”: $entries have more stars than the new scale';
+  }
+
+  @override
+  String cmodMigFieldHidden(String field, String entries) {
+    return '“$field” will be hidden; its values in $entries are kept';
+  }
+
+  @override
+  String cmodMigOptionHidden(String field) {
+    return 'Removed options of “$field” that are in use will be hidden, not deleted';
+  }
+
+  @override
+  String cmodMigConverted(String field, String entries, String type) {
+    return 'Values of “$field” in $entries will be converted to “$type”';
+  }
+
+  @override
+  String cmodMigOutOfRange(String field, String entries) {
+    return '$entries in “$field” are outside the new limits and stay as they are';
+  }
+
+  @override
+  String cmodMigNewlyRequired(String field, String entries) {
+    return '$entries have no value for “$field”, now required';
+  }
+
+  @override
+  String get cmodTypeText => 'Text';
+
+  @override
+  String get cmodTypeNumber => 'Number';
+
+  @override
+  String get cmodTypeDate => 'Date';
+
+  @override
+  String get cmodTypeTime => 'Time';
+
+  @override
+  String get cmodTypeCheckbox => 'Checkbox';
+
+  @override
+  String get cmodTypeSingle => 'Single choice';
+
+  @override
+  String get cmodTypeMulti => 'Multiple choice';
+
+  @override
+  String get cmodTypeRating => 'Star rating';
+
+  @override
+  String get cmodTypeCurrency => 'Amount';
+
+  @override
+  String get cmodTypeTextHint => 'A note, a book title…';
+
+  @override
+  String get cmodTypeNumberHint => 'Pages, minutes, times…';
+
+  @override
+  String get cmodTypeDateHint => 'An appointment or occasion';
+
+  @override
+  String get cmodTypeTimeHint => 'Bedtime, start time…';
+
+  @override
+  String get cmodTypeCheckboxHint => 'Done or not';
+
+  @override
+  String get cmodTypeSingleHint => 'One option from your list';
+
+  @override
+  String get cmodTypeMultiHint => 'Several options from your list';
+
+  @override
+  String get cmodTypeRatingHint => 'Two to ten stars';
+
+  @override
+  String get cmodTypeCurrencyHint => 'Money in the currency you choose';
+
+  @override
+  String get cmodPickType => 'Field type';
+
+  @override
+  String get cmodFieldNew => 'New field';
+
+  @override
+  String get cmodFieldEdit => 'Edit field';
+
+  @override
+  String get cmodFieldLabel => 'Field name';
+
+  @override
+  String get cmodFieldLabelHint => 'e.g. Pages';
+
+  @override
+  String get cmodFieldRequired => 'Required';
+
+  @override
+  String get cmodFieldRequiredHint => 'An entry can’t be saved without it';
+
+  @override
+  String get cmodFieldUnit => 'Unit';
+
+  @override
+  String get cmodFieldUnitHint => 'pages, min, kg…';
+
+  @override
+  String get cmodFieldMin => 'Minimum';
+
+  @override
+  String get cmodFieldMax => 'Maximum';
+
+  @override
+  String get cmodFieldNoLimit => 'No limit';
+
+  @override
+  String get cmodFieldDecimals => 'Decimal places';
+
+  @override
+  String get cmodFieldScale => 'Scale';
+
+  @override
+  String get cmodFieldCurrency => 'Currency';
+
+  @override
+  String get cmodFieldOptions => 'Options';
+
+  @override
+  String get cmodAddOption => 'Add option';
+
+  @override
+  String get cmodOptionHint => 'Option name';
+
+  @override
+  String get cmodRemoveOption => 'Remove option';
+
+  @override
+  String get cmodFieldMultiline => 'Long text';
+
+  @override
+  String get cmodFieldMultilineHint => 'Room for several lines';
+
+  @override
+  String get cmodFieldDelete => 'Delete field';
+
+  @override
+  String cmodFieldCopyLabel(String label) {
+    return '$label (copy)';
+  }
+
+  @override
+  String get cmodFieldTypeNote =>
+      'Changing the type converts old values when possible; otherwise the change is not saved.';
+
+  @override
+  String cmodFieldOptionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count options',
+      one: '1 option',
+      zero: 'no options',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodFieldRange(String min, String max) {
+    return '$min – $max';
+  }
+
+  @override
+  String cmodFieldAtLeast(String min) {
+    return 'from $min';
+  }
+
+  @override
+  String cmodFieldAtMost(String max) {
+    return 'up to $max';
+  }
+
+  @override
+  String cmodFieldDeleted(String name) {
+    return 'Removed “$name” from the form';
+  }
+
+  @override
+  String get cmodFieldDuplicated => 'Field duplicated';
+
+  @override
+  String get cmodGalleryTitle => 'Start a module';
+
+  @override
+  String get cmodGallerySubtitle =>
+      'From scratch or a template – everything stays editable';
+
+  @override
+  String get cmodBlankTracker => 'Blank tracker';
+
+  @override
+  String get cmodBlankList => 'Blank list';
+
+  @override
+  String get cmodTemplatesHeader => 'Starter templates';
+
+  @override
+  String get cmodTplReadingLog => 'Reading log';
+
+  @override
+  String get cmodTplReadingLogDesc => 'Book, pages and your rating';
+
+  @override
+  String get cmodTplDhikr => 'Dhikr after prayer';
+
+  @override
+  String get cmodTplDhikrDesc => 'How many times, and after which prayer';
+
+  @override
+  String get cmodTplHabit => 'Daily habit';
+
+  @override
+  String get cmodTplHabitDesc => 'One tap a day, and a growing streak';
+
+  @override
+  String get cmodTplHabitList => 'Habit list';
+
+  @override
+  String get cmodTplHabitListDesc => 'Habits to build, and how often';
+
+  @override
+  String get cmodTplSleep => 'Sleep log';
+
+  @override
+  String get cmodTplSleepDesc => 'Bedtime, wake-up, hours and quality';
+
+  @override
+  String get cmodTplGifts => 'Gift ideas';
+
+  @override
+  String get cmodTplGiftsDesc => 'The idea, who for, budget and occasion';
+
+  @override
+  String get cmodTplBook => 'Book';
+
+  @override
+  String get cmodTplPages => 'Pages';
+
+  @override
+  String get cmodTplRating => 'Rating';
+
+  @override
+  String get cmodTplUnitPages => 'pages';
+
+  @override
+  String get cmodTplAfterPrayer => 'After prayer';
+
+  @override
+  String get cmodTplCount => 'Count';
+
+  @override
+  String get cmodTplUnitTimes => 'times';
+
+  @override
+  String get cmodTplDone => 'Done';
+
+  @override
+  String get cmodTplNote => 'Note';
+
+  @override
+  String get cmodTplHabitItem => 'Habit';
+
+  @override
+  String get cmodTplFrequency => 'How often';
+
+  @override
+  String get cmodTplDaily => 'Daily';
+
+  @override
+  String get cmodTplWeekly => 'Weekly';
+
+  @override
+  String get cmodTplMonthly => 'Monthly';
+
+  @override
+  String get cmodTplBedtime => 'Bedtime';
+
+  @override
+  String get cmodTplWake => 'Wake-up';
+
+  @override
+  String get cmodTplHours => 'Hours';
+
+  @override
+  String get cmodTplUnitHours => 'h';
+
+  @override
+  String get cmodTplQuality => 'Quality';
+
+  @override
+  String get cmodTplIdea => 'Idea';
+
+  @override
+  String get cmodTplFor => 'Who for';
+
+  @override
+  String get cmodTplBudget => 'Budget';
+
+  @override
+  String get cmodTplOccasion => 'Occasion';
+
+  @override
+  String get cmodTplNotes => 'Notes';
+
+  @override
+  String get cmodAddEntry => 'New entry';
+
+  @override
+  String get cmodAddItem => 'New item';
+
+  @override
+  String get cmodEntriesSection => 'Entries';
+
+  @override
+  String get cmodItemsSection => 'Items';
+
+  @override
+  String get cmodDoneSection => 'Done';
+
+  @override
+  String get cmodClearDone => 'Clear done';
+
+  @override
+  String get cmodToday => 'Today';
+
+  @override
+  String get cmodYesterday => 'Yesterday';
+
+  @override
+  String get cmodEntriesEmpty =>
+      'No entries yet. The first one starts the story.';
+
+  @override
+  String get cmodItemsEmpty => 'The list is empty. Add the first item.';
+
+  @override
+  String get cmodAllDone => 'All done – well done';
+
+  @override
+  String get cmodStatStreak => 'Streak';
+
+  @override
+  String get cmodStatBest => 'Best';
+
+  @override
+  String get cmodStatTotal => 'Total';
+
+  @override
+  String get cmodStatAverage => 'Average';
+
+  @override
+  String get cmodStatActive => 'Active days';
+
+  @override
+  String get cmodStatEntries => 'Entries';
+
+  @override
+  String get cmodStatRate => 'Check-in rate';
+
+  @override
+  String cmodDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cmodReminders => 'Reminders';
+
+  @override
+  String get cmodAddReminder => 'Add reminder';
+
+  @override
+  String get cmodRemindersEmpty => 'Remind me after a prayer or at a set time';
+
+  @override
+  String get cmodReminderPaused => 'Paused';
+
+  @override
+  String get cmodReminderToggle => 'Reminder on';
+
+  @override
+  String get cmodModuleMenu => 'Module options';
+
+  @override
+  String cmodHiddenValue(String label) {
+    return '$label (hidden)';
+  }
+
+  @override
+  String get cmodNotifyGroup => 'Trackers & lists';
+
+  @override
+  String get cmodNotifyChannel => 'Tracker & list reminders';
+
+  @override
+  String get cmodNotifyChannelDescription =>
+      'Gentle nudges to log your trackers and review your lists';
+
+  @override
+  String get cmodNotifyBodyTracker => 'Time to log it';
+
+  @override
+  String get cmodNotifyBodyList => 'Take a look at your list';
+
+  @override
+  String get cmodEntryNew => 'New entry';
+
+  @override
+  String get cmodEntryEdit => 'Edit entry';
+
+  @override
+  String get cmodItemNew => 'New item';
+
+  @override
+  String get cmodItemEdit => 'Edit item';
+
+  @override
+  String get cmodEntryWhen => 'When';
+
+  @override
+  String get cmodEntryDone => 'Done';
+
+  @override
+  String get cmodEntryCounter => 'This module is a counter: saving logs one.';
+
+  @override
+  String get cmodErrRequired => 'This field is required';
+
+  @override
+  String get cmodErrNumber => 'Enter a number';
+
+  @override
+  String get cmodErrWhole => 'Whole numbers only';
+
+  @override
+  String cmodErrPrecise(String count) {
+    return 'At most $count decimal places';
+  }
+
+  @override
+  String cmodErrMin(String value) {
+    return 'At least $value';
+  }
+
+  @override
+  String cmodErrMax(String value) {
+    return 'At most $value';
+  }
+
+  @override
+  String get cmodErrDate => 'Not a valid date';
+
+  @override
+  String get cmodErrTime => 'Not a valid time';
+
+  @override
+  String get cmodErrOption => 'Pick from the list';
+
+  @override
+  String get cmodErrScale => 'Outside the scale';
+
+  @override
+  String get cmodErrTooLong => 'The text is too long';
+
+  @override
+  String get cmodPickDate => 'Pick a date';
+
+  @override
+  String get cmodPickTime => 'Pick a time';
+
+  @override
+  String get cmodClear => 'Clear';
+
+  @override
+  String get cmodYes => 'Yes';
+
+  @override
+  String get cmodNo => 'No';
+
+  @override
+  String get cmodChecked => 'Done';
+
+  @override
+  String get cmodUnchecked => 'Not done';
+
+  @override
+  String get cmodCardTitle => 'Your trackers here';
+
+  @override
+  String get cmodCardSeeAll => 'See all';
+
+  @override
+  String get cmodCardEmpty => 'Create a tracker for this planet';
+
+  @override
+  String get cmodCardEmptyHint =>
+      'A counter, a log or a list – with your own fields';
+
+  @override
+  String get cmodExportDate => 'date';
+
+  @override
+  String get cmodExportTime => 'time';
+
+  @override
+  String get cmodExportDone => 'done';
+
+  @override
+  String get cmodExportEntries => 'Entries';
+
+  @override
+  String get cmodExportLastEntry => 'Last entry';
+
+  @override
+  String get cmodExportOpen => 'Open';
+
+  @override
+  String cmodExportLastDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Last $count days',
+      one: 'Last day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportActiveDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count active days',
+      one: '1 active day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cmodExportTotal(String value) {
+    return 'total $value';
+  }
+
+  @override
+  String cmodExportAverage(String value) {
+    return 'average $value';
+  }
+
+  @override
+  String cmodExportStreak(String current, String best) {
+    return 'streak $current (best $best)';
+  }
+
+  @override
+  String get cmodExportHidden => 'hidden';
+
+  @override
+  String get cinemaTitle => 'Madar Cinema';
+
+  @override
+  String get cinemaHallSubtitle =>
+      'Original games in the spirit of classic cinema';
+
+  @override
+  String get cinemaFeatures => 'Features';
+
+  @override
+  String get cinemaShorts => 'Shorts';
+
+  @override
+  String get cinemaComingSoon => 'Coming soon';
+
+  @override
+  String get cinemaPlay => 'Play';
+
+  @override
+  String get cinemaGameViewLabel => 'Game screen';
+
+  @override
+  String get cinemaPause => 'Pause';
+
+  @override
+  String get cinemaIntermission => 'Intermission';
+
+  @override
+  String get cinemaResume => 'Resume';
+
+  @override
+  String get cinemaRestart => 'Restart';
+
+  @override
+  String get cinemaLeave => 'Leave';
+
+  @override
+  String get cinemaPlayAgain => 'Play again';
+
+  @override
+  String get cinemaTheEnd => 'The End';
+
+  @override
+  String get cinemaGameOver => 'Show\'s Over';
+
+  @override
+  String cinemaScoreLine(String score) {
+    return 'Score: $score';
+  }
+
+  @override
+  String cinemaBestLine(String score) {
+    return 'Best: $score';
+  }
+
+  @override
+  String get cinemaEraSilent => 'Silent 1920s';
+
+  @override
+  String get cinemaEraRubberHose => '1930s Cartoon';
+
+  @override
+  String get cinemaEraNoir => '1940s Noir';
+
+  @override
+  String get cinemaEraTechnicolor => '1950s Technicolor';
+
+  @override
+  String get cinemaEraGrindhouse => '1970s Grindhouse';
+
+  @override
+  String get cinemaEraVhs => '1980s VHS';
+
+  @override
+  String get cinemaDemoTitle => 'Rehearsal';
+
+  @override
+  String get cinemaDemoTagline => 'A test scene for the Film Reel Engine';
+
+  @override
+  String get cinemaDemoOpening => 'Scene One';
+
+  @override
+  String get cinemaDemoOpeningSubtitle => 'Tap to jump over the barrels!';
+
+  @override
+  String get cinemaFlappyOrbitTitle => 'Flappy Orbit';
+
+  @override
+  String get cinemaFlappyOrbitTagline => 'Flap between planets to a swing beat';
+
+  @override
+  String get cinemaFlappyOrbitHomage => 'Homage to 1930s rubber-hose cartoons';
+
+  @override
+  String get cinemaMetropolisTitle => 'Metropolis Machine';
+
+  @override
+  String get cinemaMetropolisTagline => 'Take on the giant machines one by one';
+
+  @override
+  String get cinemaMetropolisHomage =>
+      'Homage to the silent film Metropolis (1927)';
+
+  @override
+  String get cinemaCaravanTitle => 'Caravan Dash';
+
+  @override
+  String get cinemaCaravanTagline => 'Race the dunes in Technicolor';
+
+  @override
+  String get cinemaCaravanHomage => 'Homage to 1950s desert epics';
+
+  @override
+  String get cinemaNoirTitle => 'Noir Rooftops';
+
+  @override
+  String get cinemaNoirTagline => 'Chase shadows across rain-soaked rooftops';
+
+  @override
+  String get cinemaNoirHomage => 'Homage to 1940s film noir';
+
+  @override
+  String get cinemaNeonSoukTitle => 'Neon Souk Racer';
+
+  @override
+  String get cinemaNeonSoukTagline => 'Race through a souk of neon lights';
+
+  @override
+  String get cinemaNeonSoukHomage => 'Homage to 1980s sci-fi on VHS';
+
+  @override
+  String get cinemaSavedGames => 'Saved games';
+
+  @override
+  String get cinemaSavedGamesEmpty =>
+      'Add a web game by its link to play it here full screen.';
+
+  @override
+  String get cinemaSavedGamesNote =>
+      'Games open from their original link; nothing is copied into the app.';
+
+  @override
+  String get cinemaAddGame => 'Add game';
+
+  @override
+  String get cinemaGameName => 'Game name';
+
+  @override
+  String get cinemaGameUrl => 'Game link';
+
+  @override
+  String get cinemaInvalidUrl => 'Enter a valid link starting with https://';
+
+  @override
+  String get cinemaRemoveGame => 'Remove';
+
+  @override
+  String get cinemaOpenGameFailed => 'Couldn\'t open the link';
+
+  @override
+  String get cinemaSave => 'Save';
+
+  @override
+  String get cinemaCancel => 'Cancel';
+
+  @override
+  String get cinemaFxTestCard => 'Calibration card';
+
+  @override
+  String get cinemaFxFilmLook => 'Film look';
+
+  @override
+  String get cinemaFxQualityLowPower => 'Power saver';
+
+  @override
+  String get cinemaFxQualityBalanced => 'Balanced';
+
+  @override
+  String get cinemaFxQualityFull => 'Full quality';
+
+  @override
+  String get cinemaFxReelLabel => 'Reel';
+
+  @override
+  String get cinemaRigCast => 'The Cast';
+
+  @override
+  String get cinemaRigNujaym => 'Nujaym';
+
+  @override
+  String get cinemaRigNujaymRole => 'The plucky star-bird of Flappy Orbit';
+
+  @override
+  String get cinemaRigZunbruk => 'Baron Zunbruk';
+
+  @override
+  String get cinemaRigZunbrukRole =>
+      'The clockwork foreman of Metropolis Machine';
+
+  @override
+  String get cinemaRigZajil => 'Zajil';
+
+  @override
+  String get cinemaRigZajilRole => 'The camel courier of Caravan Dash';
+
+  @override
+  String get cinemaRigMishmish => 'Inspector Mishmish';
+
+  @override
+  String get cinemaRigMishmishRole =>
+      'The trench-coat detective cat of Noir Rooftops';
+
+  @override
+  String get cinemaRigSarab => 'Sarab';
+
+  @override
+  String get cinemaRigSarabRole => 'The hover-bike courier of Neon Souk Racer';
+
+  @override
+  String get cinemaRigBean => 'Habba';
+
+  @override
+  String get cinemaRigBeanRole =>
+      'Star of the rehearsal, a bean in white gloves';
+
+  @override
+  String get dataCentreTitle => 'Your data';
+
+  @override
+  String get dataHeroTitle => 'Your data stays with you';
+
+  @override
+  String get dataHeroBody =>
+      'Madar keeps everything encrypted on this phone and uploads nothing. A file leaves only when you share or save it yourself.';
+
+  @override
+  String get dataStatRecords => 'Records';
+
+  @override
+  String get dataStatLastBackup => 'Last backup';
+
+  @override
+  String get dataLastBackupNever => 'Not yet';
+
+  @override
+  String get dataLastBackupToday => 'Today';
+
+  @override
+  String dataLastBackupDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days ago',
+      one: 'Yesterday',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataBackupSection => 'Backup';
+
+  @override
+  String get dataBackupSectionHint =>
+      'One encrypted file to move or safeguard your data';
+
+  @override
+  String get dataBackupCreateTitle => 'Encrypted backup';
+
+  @override
+  String get dataBackupCreateBody =>
+      'One file, locked with a passphrase only you know. Keep it somewhere safe to move your data to a new phone.';
+
+  @override
+  String get dataBackupCreateAction => 'Create backup';
+
+  @override
+  String get dataRestoreTitle => 'Restore from a backup';
+
+  @override
+  String get dataRestoreBody =>
+      'Replaces everything in Madar with a backup file. A safety copy of your current data is kept on this phone first.';
+
+  @override
+  String get dataRestoreAction => 'Choose a backup file';
+
+  @override
+  String dataSafetyCopiesLine(int count, String date) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count safety copies on this phone',
+      one: '1 safety copy on this phone',
+    );
+    return '$_temp0 · latest $date';
+  }
+
+  @override
+  String get dataExportSection => 'Export';
+
+  @override
+  String get dataExportSectionHint =>
+      'Readable copies of your data – not encrypted';
+
+  @override
+  String get dataExportSummaryTitle => 'AI-ready summary';
+
+  @override
+  String get dataExportSummaryBody =>
+      'A short Markdown overview you review section by section before sharing.';
+
+  @override
+  String get dataExportCsvTitle => 'Spreadsheets (CSV)';
+
+  @override
+  String get dataExportCsvBody =>
+      'Labs, transactions, pain and mood – for Excel or Sheets.';
+
+  @override
+  String get dataExportJsonTitle => 'Everything (JSON)';
+
+  @override
+  String get dataExportJsonBody =>
+      'Every record in one file, for your own archive or other apps.';
+
+  @override
+  String get dataExportPlainWarning =>
+      'Exported files are not encrypted: anyone who gets them can read them. Share them only with people you trust.';
+
+  @override
+  String get dataImportSection => 'Import';
+
+  @override
+  String get dataImportTitle => 'Import from the Madar prototype';
+
+  @override
+  String get dataImportBody =>
+      'Bring in data exported from the earlier version (a JSON file).';
+
+  @override
+  String get dataFooter =>
+      'Madar never uploads your data to any server. You alone decide where your files go.';
+
+  @override
+  String get dataAreaOther => 'Settings & history';
+
+  @override
+  String get dataShareAction => 'Share';
+
+  @override
+  String get dataSaveAction => 'Save to…';
+
+  @override
+  String get dataCopyAction => 'Copy';
+
+  @override
+  String get dataDoneAction => 'Done';
+
+  @override
+  String get dataCancelAction => 'Cancel';
+
+  @override
+  String get dataTryAgainAction => 'Try again';
+
+  @override
+  String get dataFileReadyTitle => 'Your file is ready';
+
+  @override
+  String get dataFileReadySubtitle =>
+      'Choose where it goes – nothing is sent automatically';
+
+  @override
+  String get dataFileEncryptedNote =>
+      'Encrypted with your passphrase and opens only with it – keep the two apart.';
+
+  @override
+  String get dataFilePlainNote =>
+      'Not encrypted: anyone who gets this file can read it.';
+
+  @override
+  String get dataFileShared => 'Handed to the share sheet.';
+
+  @override
+  String get dataFileSaved => 'Saved where you chose.';
+
+  @override
+  String get dataFileSendFailed =>
+      'That didn’t work. Nothing was sent – please try again.';
+
+  @override
+  String get dataExportFailed =>
+      'Couldn’t prepare the file. Your data is unchanged.';
+
+  @override
+  String dataRecordsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records',
+      one: '1 record',
+      zero: 'no records',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSizeBytes(String size) {
+    return '$size bytes';
+  }
+
+  @override
+  String dataSizeKb(String size) {
+    return '$size KB';
+  }
+
+  @override
+  String dataSizeMb(String size) {
+    return '$size MB';
+  }
+
+  @override
+  String get dataBackupSheetTitle => 'Encrypted backup';
+
+  @override
+  String get dataBackupSheetSubtitle =>
+      'AES-256 · keys derived with Argon2id on your phone';
+
+  @override
+  String get dataBackupSheetBody =>
+      'Choose a passphrase to lock the backup file. Madar never stores it and can’t recover it, so write it down somewhere you trust.';
+
+  @override
+  String get dataPassphraseLabel => 'Passphrase';
+
+  @override
+  String get dataPassphraseConfirmLabel => 'Type the passphrase again';
+
+  @override
+  String get dataPassphraseMismatch => 'The two don’t match.';
+
+  @override
+  String get dataPassphraseShow => 'Show passphrase';
+
+  @override
+  String get dataPassphraseHide => 'Hide passphrase';
+
+  @override
+  String get dataPassphraseNeverStored =>
+      'The passphrase is never stored anywhere. Without it the backup can’t be opened – not even by us.';
+
+  @override
+  String get dataStrengthLabel => 'Strength';
+
+  @override
+  String get dataStrengthEmpty => '—';
+
+  @override
+  String get dataStrengthVeryWeak => 'Very weak';
+
+  @override
+  String get dataStrengthWeak => 'Weak';
+
+  @override
+  String get dataStrengthFair => 'Fair';
+
+  @override
+  String get dataStrengthStrong => 'Strong';
+
+  @override
+  String get dataStrengthVeryStrong => 'Very strong';
+
+  @override
+  String dataStrengthHintShort(String min) {
+    return 'Use at least $min characters – a short sentence works well.';
+  }
+
+  @override
+  String get dataStrengthHintCommon =>
+      'This is a common password that’s easy to guess.';
+
+  @override
+  String get dataStrengthHintPattern =>
+      'Avoid repeats and runs like 1234 or aaaa.';
+
+  @override
+  String get dataStrengthHintDigits =>
+      'Digits alone are easy to guess; add some words.';
+
+  @override
+  String get dataStrengthHintWords =>
+      'Good. One or two more words make it much stronger.';
+
+  @override
+  String get dataBackupWorking => 'Locking your data…';
+
+  @override
+  String get dataBackupWorkingHint =>
+      'This takes a few seconds on purpose – it makes the passphrase hard to guess.';
+
+  @override
+  String get dataBackupReadyTitle => 'Backup ready';
+
+  @override
+  String get dataBackupReadySubtitle => 'Share it or save it somewhere safe';
+
+  @override
+  String get dataBackupReadyHint =>
+      'Keep the file and the passphrase in different places. You’ll need both to restore.';
+
+  @override
+  String get dataBackupShareSubject => 'Madar backup';
+
+  @override
+  String get dataBackupFailed =>
+      'Couldn’t create the backup. Your data is untouched – please try again.';
+
+  @override
+  String dataBackupMadeOn(String date) {
+    return 'Made on $date';
+  }
+
+  @override
+  String get dataCsvSheetTitle => 'Spreadsheet export';
+
+  @override
+  String get dataCsvSheetSubtitle => 'CSV · UTF-8 · opens in Excel and Sheets';
+
+  @override
+  String get dataCsvWhat => 'What';
+
+  @override
+  String get dataCsvWhen => 'When';
+
+  @override
+  String get dataCsvLabs => 'Labs';
+
+  @override
+  String get dataCsvTransactions => 'Transactions';
+
+  @override
+  String get dataCsvPain => 'Pain';
+
+  @override
+  String get dataCsvMood => 'Mood';
+
+  @override
+  String get dataRange30 => '30 days';
+
+  @override
+  String get dataRange90 => '90 days';
+
+  @override
+  String get dataRangeYear => '12 months';
+
+  @override
+  String get dataRangeAll => 'All time';
+
+  @override
+  String get dataRangeCustom => 'Custom…';
+
+  @override
+  String get dataRangeAllTime => 'Every record since the start';
+
+  @override
+  String dataRangeFromTo(String from, String to) {
+    return 'From $from to $to';
+  }
+
+  @override
+  String dataCsvFormatNote(String example) {
+    return 'Dates look like $example and numbers use a decimal point, so any spreadsheet opens them as they are.';
+  }
+
+  @override
+  String get dataCsvCreate => 'Create file';
+
+  @override
+  String dataCsvCreateRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Create file ($count rows)',
+      one: 'Create file (1 row)',
+      zero: 'No rows in this range',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataCsvDate => 'date';
+
+  @override
+  String get dataCsvTime => 'time';
+
+  @override
+  String get dataCsvTest => 'test';
+
+  @override
+  String get dataCsvCategory => 'category';
+
+  @override
+  String get dataCsvValue => 'value';
+
+  @override
+  String get dataCsvTextResult => 'text_result';
+
+  @override
+  String get dataCsvUnit => 'unit';
+
+  @override
+  String get dataCsvRangeLow => 'range_low';
+
+  @override
+  String get dataCsvRangeHigh => 'range_high';
+
+  @override
+  String get dataCsvFlag => 'flag';
+
+  @override
+  String get dataCsvNote => 'note';
+
+  @override
+  String get dataCsvNotes => 'notes';
+
+  @override
+  String get dataCsvKind => 'kind';
+
+  @override
+  String get dataCsvWallet => 'wallet';
+
+  @override
+  String get dataCsvCurrency => 'currency';
+
+  @override
+  String get dataCsvAmount => 'amount';
+
+  @override
+  String get dataCsvAmountBase => 'amount_base';
+
+  @override
+  String get dataCsvBaseCurrency => 'base_currency';
+
+  @override
+  String get dataCsvBudgetItem => 'budget_item';
+
+  @override
+  String get dataCsvToWallet => 'to_wallet';
+
+  @override
+  String get dataCsvToAmount => 'to_amount';
+
+  @override
+  String get dataCsvToCurrency => 'to_currency';
+
+  @override
+  String get dataCsvTags => 'tags';
+
+  @override
+  String get dataCsvPainScore => 'score_0_10';
+
+  @override
+  String get dataCsvLocations => 'locations';
+
+  @override
+  String get dataCsvTriggers => 'triggers';
+
+  @override
+  String get dataCsvBodyPoints => 'body_points';
+
+  @override
+  String get dataCsvMoodScore => 'mood_1_5';
+
+  @override
+  String get dataCsvStress => 'stress_0_10';
+
+  @override
+  String get dataCsvAnxiety => 'anxiety_0_10';
+
+  @override
+  String get dataCsvEnergy => 'energy_0_10';
+
+  @override
+  String get dataCsvSleepHours => 'sleep_hours';
+
+  @override
+  String get dataCsvCaffeine => 'caffeine_cups';
+
+  @override
+  String get dataCsvFactors => 'factors';
+
+  @override
+  String get dataFlagLow => 'low';
+
+  @override
+  String get dataFlagBorderlineLow => 'borderline low';
+
+  @override
+  String get dataFlagInRange => 'in range';
+
+  @override
+  String get dataFlagBorderlineHigh => 'borderline high';
+
+  @override
+  String get dataFlagHigh => 'high';
+
+  @override
+  String get dataTxExpense => 'expense';
+
+  @override
+  String get dataTxIncome => 'income';
+
+  @override
+  String get dataTxTransfer => 'transfer';
+
+  @override
+  String get dataTxAdjustment => 'adjustment';
+
+  @override
+  String get dataSummarySubtitle =>
+      'Made on your phone · review each section before sharing';
+
+  @override
+  String get dataSummaryIntro =>
+      'Nothing goes anywhere until you choose. The preview below is exactly what would leave – notes, phone numbers and document or account numbers are never included.';
+
+  @override
+  String get dataSummaryPreparing => 'Preparing the summary on your phone…';
+
+  @override
+  String get dataSummarySections => 'Sections to include';
+
+  @override
+  String dataSummarySectionsOf(String selected, String total) {
+    return '$selected of $total sections';
+  }
+
+  @override
+  String dataSummaryTokens(String count) {
+    return '≈ $count tokens';
+  }
+
+  @override
+  String get dataSummaryNoData => 'No data yet';
+
+  @override
+  String get dataSummaryProfileHint => 'Optional';
+
+  @override
+  String get dataSummaryPreviewTitle => 'Exactly what will be shared';
+
+  @override
+  String get dataSummaryCopied => 'Summary copied to the clipboard.';
+
+  @override
+  String get dataSummaryUse => 'Use this summary';
+
+  @override
+  String get dataProfileChoose => 'Choose what to mention about you:';
+
+  @override
+  String get dataProfileAboutHint =>
+      'e.g. your age, or anything the assistant should know';
+
+  @override
+  String get dataRestoreFlowTitle => 'Restore';
+
+  @override
+  String get dataRestoreChooseTitle => 'Bring your data back';
+
+  @override
+  String dataRestoreChooseBody(String ext) {
+    return 'Pick a $ext file. You’ll see what’s inside before anything changes.';
+  }
+
+  @override
+  String get dataRestorePickFile => 'Choose backup file';
+
+  @override
+  String get dataRestoreNothingChanges =>
+      'Nothing in your current data changes until you confirm the replacement in the last step.';
+
+  @override
+  String get dataSafetyCopiesTitle => 'Safety copies on this phone';
+
+  @override
+  String get dataSafetyCopiesHint =>
+      'Made automatically before each restore; each opens with the passphrase used for that restore.';
+
+  @override
+  String get dataRestoreUnlockBody =>
+      'Enter the passphrase this backup was locked with.';
+
+  @override
+  String get dataRestoreUnlockAction => 'Unlock backup';
+
+  @override
+  String get dataRestoreOtherFile => 'Choose another file';
+
+  @override
+  String get dataRestoreOpening => 'Checking the backup…';
+
+  @override
+  String get dataRestoreOpeningHint =>
+      'Making sure the file is intact and unchanged, then decrypting it on your phone.';
+
+  @override
+  String get dataRestorePreviewTitle => 'The backup is intact';
+
+  @override
+  String get dataRestoreInBackup => 'In the backup';
+
+  @override
+  String get dataRestoreOnPhone => 'On this phone now';
+
+  @override
+  String get dataRestoreWhatsInside => 'What’s inside';
+
+  @override
+  String get dataRestoreReplaceWarning =>
+      'This backup will replace all data in Madar now. First, your current data is saved as a safety copy on this phone, opening with the same passphrase.';
+
+  @override
+  String get dataRestoreUnderstand =>
+      'I understand my current data will be replaced';
+
+  @override
+  String get dataRestoreConfirmAction => 'Replace my data';
+
+  @override
+  String get dataRestoreSavingSafety =>
+      'Saving a safety copy of your current data…';
+
+  @override
+  String get dataRestoreRestoring => 'Restoring your data…';
+
+  @override
+  String get dataRestoreKeepOpen => 'Keep the app open for a moment.';
+
+  @override
+  String get dataRestoreDoneTitle => 'Restored';
+
+  @override
+  String dataRestoreDoneBody(String count) {
+    return 'Your records ($count) are back in Madar.';
+  }
+
+  @override
+  String get dataRestoreSafetyKept =>
+      'A safety copy of your previous data is kept on this phone and opens with the same passphrase.';
+
+  @override
+  String get dataSafetyCopySave => 'Save the safety copy elsewhere';
+
+  @override
+  String get dataSafetyCopyTitle => 'Safety copy';
+
+  @override
+  String get dataNothingChanged => 'Nothing in your data was changed.';
+
+  @override
+  String get dataErrWrongPassphrase =>
+      'That passphrase doesn’t open this backup. Check for typos and try again.';
+
+  @override
+  String get dataErrNotBackupTitle => 'This isn’t a Madar backup';
+
+  @override
+  String dataErrNotBackupBody(String ext) {
+    return 'Choose a file ending in $ext, made with “Create backup”.';
+  }
+
+  @override
+  String get dataErrNewerTitle => 'Made by a newer Madar';
+
+  @override
+  String get dataErrNewerBody => 'Update Madar on this phone, then try again.';
+
+  @override
+  String get dataErrTruncatedTitle => 'The file is incomplete';
+
+  @override
+  String get dataErrTruncatedBody =>
+      'It may not have finished copying or downloading. Copy it again and retry.';
+
+  @override
+  String get dataErrCorruptedTitle => 'The file is damaged';
+
+  @override
+  String get dataErrCorruptedBody =>
+      'It changed or was damaged after it was made, so it can’t be trusted.';
+
+  @override
+  String get dataErrUnreadableTitle => 'Couldn’t read the file';
+
+  @override
+  String get dataErrUnreadableBody =>
+      'Try another file, or copy it to the phone first.';
+
+  @override
+  String get dataErrSafetyTitle => 'Couldn’t save a safety copy';
+
+  @override
+  String get dataErrSafetyBody =>
+      'So your data was not replaced. Free some space and try again.';
+
+  @override
+  String get dataErrRejectedTitle => 'This backup couldn’t be restored';
+
+  @override
+  String get dataErrRejectedBody => 'Its data didn’t pass the safety checks.';
+
+  @override
+  String dataSumHeading(String date) {
+    return 'Madar summary — $date';
+  }
+
+  @override
+  String get dataSumPreamble =>
+      'Personal tracking data from the Madar app, prepared on the user’s own phone. Dates are yyyy-mm-dd; decimals use a point. Notes, phone numbers and document or account numbers are never included.';
+
+  @override
+  String get dataSumNoData => 'No data yet.';
+
+  @override
+  String get dataSumListSep => ', ';
+
+  @override
+  String dataSumLastDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Last $days days',
+      one: 'Today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSumPreviousDays(String days) {
+    return 'The $days days before';
+  }
+
+  @override
+  String dataSumMore(String count) {
+    return 'not shown: $count';
+  }
+
+  @override
+  String get dataSumProfile => 'Profile';
+
+  @override
+  String get dataSumFaith => 'Faith';
+
+  @override
+  String get dataSumHealth => 'Health';
+
+  @override
+  String get dataSumMoney => 'Money';
+
+  @override
+  String get dataSumFamily => 'Family';
+
+  @override
+  String get dataSumWork => 'Work';
+
+  @override
+  String get dataSumGrowth => 'Growth';
+
+  @override
+  String get dataSumBody => 'Body';
+
+  @override
+  String get dataSumTravel => 'Travel';
+
+  @override
+  String get dataSumCustom => 'Custom trackers';
+
+  @override
+  String get dataSumCity => 'City';
+
+  @override
+  String get dataSumTimeZone => 'Time zone';
+
+  @override
+  String get dataSumBaseCurrency => 'Base currency';
+
+  @override
+  String get dataSumLanguage => 'App language';
+
+  @override
+  String get dataSumLanguageName => 'English';
+
+  @override
+  String get dataSumAboutMe => 'About me';
+
+  @override
+  String get dataSumPrayersTitle => 'Prayers';
+
+  @override
+  String dataSumObligatory(String window) {
+    return '$window (obligatory)';
+  }
+
+  @override
+  String dataSumLogged(String logged, String expected) {
+    return 'logged: $logged/$expected';
+  }
+
+  @override
+  String dataSumOnTime(String count) {
+    return 'on time: $count';
+  }
+
+  @override
+  String dataSumLate(String count) {
+    return 'late: $count';
+  }
+
+  @override
+  String dataSumMadeUp(String count) {
+    return 'made up: $count';
+  }
+
+  @override
+  String dataSumMissed(String count) {
+    return 'missed: $count';
+  }
+
+  @override
+  String dataSumInCongregation(String count) {
+    return 'in congregation: $count';
+  }
+
+  @override
+  String dataSumVoluntary(String window) {
+    return '$window (voluntary)';
+  }
+
+  @override
+  String get dataSumQuranTitle => 'Quran and wird';
+
+  @override
+  String dataSumSessions(String count) {
+    return 'sessions: $count';
+  }
+
+  @override
+  String dataSumPages(String count) {
+    return 'pages: $count';
+  }
+
+  @override
+  String dataSumMinutes(String count) {
+    return '$count min';
+  }
+
+  @override
+  String dataSumLastSession(String date) {
+    return 'Last session: $date';
+  }
+
+  @override
+  String dataSumWird(String name) {
+    return 'Wird “$name”';
+  }
+
+  @override
+  String dataSumPerDay(String amount, String unit) {
+    return '$amount $unit a day';
+  }
+
+  @override
+  String get dataSumUnitPages => 'pages';
+
+  @override
+  String get dataSumUnitJuz => 'juz';
+
+  @override
+  String get dataSumUnitHizb => 'hizb';
+
+  @override
+  String get dataSumUnitAyat => 'ayat';
+
+  @override
+  String dataSumSince(String date) {
+    return 'since $date';
+  }
+
+  @override
+  String dataSumBy(String date) {
+    return 'by $date';
+  }
+
+  @override
+  String get dataSumHifzTitle => 'Hifz';
+
+  @override
+  String dataSumItems(String count) {
+    return 'items: $count';
+  }
+
+  @override
+  String dataSumNew(String count) {
+    return 'new: $count';
+  }
+
+  @override
+  String dataSumDueToday(String count) {
+    return 'due today: $count';
+  }
+
+  @override
+  String dataSumReviews(String count) {
+    return 'reviews: $count';
+  }
+
+  @override
+  String dataSumAvgGrade(String value) {
+    return 'average grade: $value/5';
+  }
+
+  @override
+  String get dataSumAlertsTitle => 'Standing alerts';
+
+  @override
+  String get dataSumSeverityCritical => 'critical';
+
+  @override
+  String get dataSumSeverityWarning => 'warning';
+
+  @override
+  String get dataSumSeverityInfo => 'note';
+
+  @override
+  String get dataSumConditionsTitle => 'Conditions';
+
+  @override
+  String get dataSumMedsTitle => 'Active medications';
+
+  @override
+  String get dataSumKindSupplement => 'supplement';
+
+  @override
+  String get dataSumKindInjection => 'injection';
+
+  @override
+  String get dataSumWithEmptyStomach => 'on an empty stomach';
+
+  @override
+  String get dataSumWithBreakfast => 'with breakfast';
+
+  @override
+  String get dataSumWithLunch => 'with lunch';
+
+  @override
+  String get dataSumWithDinner => 'with dinner';
+
+  @override
+  String get dataSumWithBedtime => 'at bedtime';
+
+  @override
+  String get dataSumWithCourse => 'per course plan';
+
+  @override
+  String get dataSumLabsTitle => 'Recent labs';
+
+  @override
+  String dataSumLabsWindow(String months) {
+    return 'Latest result per test in the last $months months; flags compare with the range saved in the app.';
+  }
+
+  @override
+  String get dataSumColTest => 'Test';
+
+  @override
+  String get dataSumColDate => 'Date';
+
+  @override
+  String get dataSumColResult => 'Result';
+
+  @override
+  String get dataSumColRange => 'Range';
+
+  @override
+  String get dataSumColFlag => 'Flag';
+
+  @override
+  String get dataSumColPrevious => 'Previous';
+
+  @override
+  String get dataSumPainTitle => 'Pain (tracking)';
+
+  @override
+  String dataSumEntries(String count) {
+    return 'entries: $count';
+  }
+
+  @override
+  String dataSumAverageOf(String value, String max) {
+    return 'average: $value/$max';
+  }
+
+  @override
+  String dataSumHighest(String value, String max) {
+    return 'highest: $value/$max';
+  }
+
+  @override
+  String get dataSumTopPlaces => 'Most logged places';
+
+  @override
+  String get dataSumTopTriggers => 'Most logged triggers';
+
+  @override
+  String get dataSumMoodTitle => 'Mood (tracking)';
+
+  @override
+  String dataSumMoodAvg(String value) {
+    return 'mood: $value/5';
+  }
+
+  @override
+  String dataSumStressAvg(String value) {
+    return 'stress: $value/10';
+  }
+
+  @override
+  String dataSumAnxietyAvg(String value) {
+    return 'anxiety: $value/10';
+  }
+
+  @override
+  String dataSumEnergyAvg(String value) {
+    return 'energy: $value/10';
+  }
+
+  @override
+  String dataSumSleepAvg(String value) {
+    return 'sleep: $value h';
+  }
+
+  @override
+  String dataSumCaffeineAvg(String value) {
+    return 'caffeine: $value cups';
+  }
+
+  @override
+  String get dataSumTopFactors => 'Common factors';
+
+  @override
+  String get dataSumWalletsTitle => 'Wallets';
+
+  @override
+  String dataSumConvertedTo(String code) {
+    return 'Converted to $code with the exchange rates saved in the app.';
+  }
+
+  @override
+  String get dataSumColWallet => 'Wallet';
+
+  @override
+  String get dataSumColBalance => 'Balance';
+
+  @override
+  String dataSumColInBase(String code) {
+    return 'In $code';
+  }
+
+  @override
+  String dataSumTotal(String amount) {
+    return 'Total: $amount';
+  }
+
+  @override
+  String dataSumBudgetTitle(String month) {
+    return 'Budget — $month';
+  }
+
+  @override
+  String dataSumPlanned(String amount) {
+    return 'planned: $amount';
+  }
+
+  @override
+  String dataSumSpent(String amount) {
+    return 'spent: $amount';
+  }
+
+  @override
+  String dataSumRemaining(String amount) {
+    return 'remaining: $amount';
+  }
+
+  @override
+  String get dataSumOverPlan => 'Over plan';
+
+  @override
+  String dataSumUnassigned(String amount) {
+    return 'Spent without a budget item: $amount';
+  }
+
+  @override
+  String dataSumDueTitle(String days) {
+    return 'Due in the next $days days';
+  }
+
+  @override
+  String dataSumDueOn(String date) {
+    return 'due $date';
+  }
+
+  @override
+  String dataSumOverdueSince(String date) {
+    return 'overdue since $date';
+  }
+
+  @override
+  String get dataSumDebtsTitle => 'Debts';
+
+  @override
+  String dataSumIOwe(String person, String left, String total) {
+    return 'I owe $person: $left left of $total';
+  }
+
+  @override
+  String dataSumOwedToMe(String person, String left, String total) {
+    return '$person owes me: $left left of $total';
+  }
+
+  @override
+  String get dataSumJarsTitle => 'Savings jars';
+
+  @override
+  String dataSumJar(String name, String saved, String target, String percent) {
+    return '$name: $saved of $target ($percent%)';
+  }
+
+  @override
+  String dataSumEvery(String days) {
+    return 'rhythm: every $days days';
+  }
+
+  @override
+  String dataSumLastContact(String days) {
+    return 'days since last contact: $days';
+  }
+
+  @override
+  String get dataSumNeverContacted => 'no contact logged yet';
+
+  @override
+  String dataSumOverdueBy(String days) {
+    return 'overdue by (days): $days';
+  }
+
+  @override
+  String get dataSumDueTodayStatus => 'due today';
+
+  @override
+  String dataSumDueIn(String days) {
+    return 'due in (days): $days';
+  }
+
+  @override
+  String dataSumNoRhythm(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more people without a contact rhythm',
+      one: '1 more person without a contact rhythm',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dataSumPeopleNoRhythm(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people, no contact rhythm set',
+      one: '1 person, no contact rhythm set',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dataSumTop3Title => 'Top 3';
+
+  @override
+  String dataSumOnBoard(String board) {
+    return 'board: $board';
+  }
+
+  @override
+  String get dataSumBoardsTitle => 'Boards';
+
+  @override
+  String get dataSumOther => 'Other';
+
+  @override
+  String get dataSumProjectsTitle => 'Projects';
+
+  @override
+  String get dataSumStatusActive => 'active';
+
+  @override
+  String get dataSumStatusPaused => 'paused';
+
+  @override
+  String dataSumDoneOf(String done, String total) {
+    return 'items done: $done/$total';
+  }
+
+  @override
+  String dataSumDeadline(String date) {
+    return 'deadline: $date';
+  }
+
+  @override
+  String dataSumProgress(String current, String target, String unit) {
+    return '$current of $target $unit';
+  }
+
+  @override
+  String dataSumRecentGain(String amount, String window) {
+    return '$window: $amount';
+  }
+
+  @override
+  String get dataSumExercisePlanTitle => 'Exercise plan';
+
+  @override
+  String get dataSumWeekdays => 'Mon,Tue,Wed,Thu,Fri,Sat,Sun';
+
+  @override
+  String dataSumSets(String count) {
+    return 'sets: $count';
+  }
+
+  @override
+  String dataSumKg(String value) {
+    return '$value kg';
+  }
+
+  @override
+  String dataSumWorkouts(String count) {
+    return 'workouts: $count';
+  }
+
+  @override
+  String dataSumFasting(String count, String hours) {
+    return 'fasts: $count · average: $hours h';
+  }
+
+  @override
+  String dataSumTargetHours(String hours) {
+    return 'target: $hours h';
+  }
+
+  @override
+  String dataSumWater(String days, String ml) {
+    return 'Water, last $days days: $ml ml a day on average';
+  }
+
+  @override
+  String dataSumTargetMl(String ml) {
+    return 'target: $ml ml';
+  }
+
+  @override
+  String get dataSumAvoidTitle => 'Avoid';
+
+  @override
+  String get dataSumTripsTitle => 'Upcoming trips';
+
+  @override
+  String get dataSumTripPlanned => 'planned';
+
+  @override
+  String get dataSumTripUnderWay => 'under way';
+
+  @override
+  String get dataSumDocumentsTitle => 'Documents (numbers are never included)';
+
+  @override
+  String dataSumExpiresIn(String date, String days) {
+    return 'expires $date (days left: $days)';
+  }
+
+  @override
+  String dataSumExpired(String date) {
+    return 'expired $date';
+  }
+
+  @override
+  String get dataSumNoExpiry => 'no expiry date';
+
+  @override
+  String get dataSumModuleTracker => 'tracker';
+
+  @override
+  String get dataSumModuleList => 'list';
+
+  @override
+  String dataSumOpen(String count) {
+    return 'open: $count';
+  }
+
+  @override
+  String dataSumDone(String count) {
+    return 'done: $count';
+  }
+
+  @override
+  String dataSumInWindow(String count, String window) {
+    return '$window: $count';
+  }
+
+  @override
+  String dataSumLastOn(String date) {
+    return 'last: $date';
+  }
+
+  @override
+  String dataSumAverage(String value) {
+    return 'average: $value';
+  }
+
+  @override
+  String dataSumMin(String value) {
+    return 'min: $value';
+  }
+
+  @override
+  String dataSumMax(String value) {
+    return 'max: $value';
+  }
+
+  @override
+  String dataSumSum(String value) {
+    return 'total: $value';
+  }
+
+  @override
+  String dataSumTicked(String count, String total) {
+    return 'ticked: $count/$total';
+  }
+
+  @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get searchFieldHint => 'Search tasks, notes, people, ayat…';
+
+  @override
+  String get searchLauncherHint => 'Search Madar';
+
+  @override
+  String get searchLauncherTooltip => 'Search everything';
+
+  @override
+  String get searchClear => 'Clear text';
+
+  @override
+  String get searchRecentTitle => 'Recent searches';
+
+  @override
+  String get searchRecentClear => 'Clear history';
+
+  @override
+  String searchRecentRemove(String query) {
+    return 'Remove “$query” from history';
+  }
+
+  @override
+  String get searchIntroTitle => 'Search your whole orbit';
+
+  @override
+  String get searchIntroBody =>
+      'Tasks, notes, people, money and ayat in one place. Search runs on your phone only.';
+
+  @override
+  String get searchPreparing => 'Preparing the search index…';
+
+  @override
+  String searchNoResultsTitle(String query) {
+    return 'No results for “$query”';
+  }
+
+  @override
+  String get searchNoResultsBody => 'Try fewer words or another spelling.';
+
+  @override
+  String get searchNoResultsFiltered => 'Nothing here with the current filter.';
+
+  @override
+  String get searchClearFilters => 'Clear filter';
+
+  @override
+  String get searchAll => 'All';
+
+  @override
+  String searchResultsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+      zero: 'No results',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchShowAll(String count) {
+    return 'Show all ($count)';
+  }
+
+  @override
+  String searchGroupSemantics(String module, String count) {
+    return '$module, $count';
+  }
+
+  @override
+  String get searchPartial =>
+      'Not every word was found together; these are the closest matches.';
+
+  @override
+  String get searchCannotOpen => 'This result can’t be opened from here yet.';
+
+  @override
+  String get searchToday => 'Today';
+
+  @override
+  String get searchYesterday => 'Yesterday';
+
+  @override
+  String get searchTomorrow => 'Tomorrow';
+
+  @override
+  String get searchFilterPlanets => 'Filter by planet';
+
+  @override
+  String get searchFilterModules => 'Filter by section';
+
+  @override
+  String get searchPlanetCustom => 'Custom modules';
+
+  @override
+  String get searchKeyboardHint => '↑ ↓ to move, Enter to open, Esc to clear';
+
+  @override
+  String get searchDone => 'Done';
+
+  @override
+  String get searchArchived => 'Archived';
+
+  @override
+  String get searchTxExpense => 'Expense';
+
+  @override
+  String get searchTxIncome => 'Income';
+
+  @override
+  String get searchTxTransfer => 'Transfer';
+
+  @override
+  String get searchTxAdjustment => 'Adjustment';
+
+  @override
+  String get searchDebtIOwe => 'I owe';
+
+  @override
+  String get searchDebtOwedToMe => 'Owed to me';
+
+  @override
+  String get searchChannelCall => 'Call';
+
+  @override
+  String get searchChannelVisit => 'Visit';
+
+  @override
+  String get searchChannelMessage => 'Message';
+
+  @override
+  String get searchChannelOther => 'Contact';
+
+  @override
+  String searchPainTitle(String score, String max) {
+    return 'Pain $score/$max';
+  }
+
+  @override
+  String get searchMoodTitle => 'Mood';
+
+  @override
+  String get searchFastingTitle => 'Fast';
+
+  @override
+  String searchAyahPlace(String surah, String ayah) {
+    return '$surah · ayah $ayah';
+  }
+
+  @override
+  String searchAyahRange(String surah, String from, String to) {
+    return '$surah · $from–$to';
+  }
+
+  @override
+  String searchSurahNumber(String number) {
+    return 'Surah $number';
+  }
+
+  @override
+  String get searchSourceTasks => 'Tasks';
+
+  @override
+  String get searchSourcePrayerLogs => 'Prayer log';
+
+  @override
+  String get searchSourceMedications => 'Medications';
+
+  @override
+  String get searchSourceMedCourses => 'Treatment courses';
+
+  @override
+  String get searchSourceMedDoses => 'Dose notes';
+
+  @override
+  String get searchSourceConditions => 'Conditions';
+
+  @override
+  String get searchSourceHealthAlerts => 'Health alerts';
+
+  @override
+  String get searchSourceLabTests => 'Lab tests';
+
+  @override
+  String get searchSourceLabReadings => 'Lab results';
+
+  @override
+  String get searchSourceAppointments => 'Appointments';
+
+  @override
+  String get searchSourceDoctorQuestions => 'Doctor questions';
+
+  @override
+  String get searchSourcePain => 'Pain log';
+
+  @override
+  String get searchSourceMood => 'Mood log';
+
+  @override
+  String get searchSourceHabits => 'Habits';
+
+  @override
+  String get searchSourceWorries => 'Worries';
+
+  @override
+  String get searchSourceWallets => 'Wallets';
+
+  @override
+  String get searchSourceTransactions => 'Transactions';
+
+  @override
+  String get searchSourceBudget => 'Budget';
+
+  @override
+  String get searchSourceJars => 'Savings jars';
+
+  @override
+  String get searchSourceJarDeposits => 'Jar deposits';
+
+  @override
+  String get searchSourceDebts => 'Debts';
+
+  @override
+  String get searchSourceDebtPayments => 'Debt payments';
+
+  @override
+  String get searchSourceObligations => 'Obligations';
+
+  @override
+  String get searchSourcePeople => 'People';
+
+  @override
+  String get searchSourceContactLogs => 'Contact log';
+
+  @override
+  String get searchSourceProjects => 'Projects';
+
+  @override
+  String get searchSourceProjectItems => 'Project items';
+
+  @override
+  String get searchSourceBoards => 'Boards';
+
+  @override
+  String get searchSourceCards => 'Cards';
+
+  @override
+  String get searchSourceTrips => 'Trips';
+
+  @override
+  String get searchSourceTripItems => 'Trip items';
+
+  @override
+  String get searchSourcePackingTemplates => 'Packing lists';
+
+  @override
+  String get searchSourceTravelDocuments => 'Travel documents';
+
+  @override
+  String get searchSourceLearningGoals => 'Learning goals';
+
+  @override
+  String get searchSourceGoalLogs => 'Goal log';
+
+  @override
+  String get searchSourceExercises => 'Exercises';
+
+  @override
+  String get searchSourceWorkouts => 'Workout log';
+
+  @override
+  String get searchSourceAvoidItems => 'Avoid list';
+
+  @override
+  String get searchSourceFasting => 'Fasting';
+
+  @override
+  String get searchSourceCustomModules => 'Custom modules';
+
+  @override
+  String get searchSourceCustomEntries => 'Module entries';
+
+  @override
+  String get searchSourceQuranAyat => 'Quran ayat';
+
+  @override
+  String get searchSourceQuranBookmarks => 'Quran bookmarks';
+
+  @override
+  String get searchSourceWirdPlans => 'Wird plans';
+
+  @override
+  String get searchSourceHifz => 'Hifz';
+
+  @override
+  String get searchSourcePlanets => 'Planets';
+
+  @override
+  String get ncTitle => 'Notifications';
+
+  @override
+  String get ncTabUpcoming => 'Upcoming';
+
+  @override
+  String get ncTabRecent => 'Recent';
+
+  @override
+  String ncTabWithCount(String label, String count) {
+    return '$label, $count';
+  }
+
+  @override
+  String get ncOpenSettings => 'Notification settings';
+
+  @override
+  String get ncUpcomingEmptyTitle => 'Nothing scheduled';
+
+  @override
+  String get ncUpcomingEmptyBody =>
+      'The adhan and reminders you switch on line up here for the next seven days.';
+
+  @override
+  String get ncRecentEmptyTitle => 'All caught up';
+
+  @override
+  String get ncRecentEmptyBody =>
+      'Notifications that arrive stay here for two weeks, so you can come back to them.';
+
+  @override
+  String get ncClearAll => 'Clear all';
+
+  @override
+  String ncClearedAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Cleared $count notifications',
+      one: 'Cleared 1 notification',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncDismissed => 'Dismissed';
+
+  @override
+  String get ncSkippedToast => 'This one won\'t arrive';
+
+  @override
+  String get ncRestoredToast => 'It will arrive on time';
+
+  @override
+  String ncShowMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Show $count more',
+      one: 'Show 1 more',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncShowLess => 'Show less';
+
+  @override
+  String ncSectionLabel(String group, String count) {
+    return '$group, $count';
+  }
+
+  @override
+  String get ncGroupPrayer => 'Prayer & adhan';
+
+  @override
+  String get ncGroupAdhkar => 'Adhkar';
+
+  @override
+  String get ncGroupMedications => 'Medications';
+
+  @override
+  String get ncGroupHealth => 'Health';
+
+  @override
+  String get ncGroupMoney => 'Money dues';
+
+  @override
+  String get ncGroupFamily => 'Family';
+
+  @override
+  String get ncGroupTravel => 'Travel documents';
+
+  @override
+  String get ncGroupWird => 'Wird';
+
+  @override
+  String get ncGroupCustom => 'Custom modules';
+
+  @override
+  String get ncGroupOther => 'Other';
+
+  @override
+  String ncKindAdhan(String prayer) {
+    return '$prayer adhan';
+  }
+
+  @override
+  String ncKindPreAdhan(String prayer, String minutes) {
+    return '$prayer in $minutes';
+  }
+
+  @override
+  String ncKindPreAdhanShort(String prayer) {
+    return 'Before $prayer';
+  }
+
+  @override
+  String get ncKindSunrise => 'Sunrise';
+
+  @override
+  String get ncKindAdhanTest => 'Test adhan';
+
+  @override
+  String get ncKindAdhkarMorning => 'Morning adhkar';
+
+  @override
+  String get ncKindAdhkarEvening => 'Evening adhkar';
+
+  @override
+  String get ncKindAdhkar => 'Adhkar reminder';
+
+  @override
+  String get ncKindDose => 'Dose reminder';
+
+  @override
+  String get ncKindRefill => 'Time to refill';
+
+  @override
+  String get ncKindMedsNotice => 'Answer not recorded';
+
+  @override
+  String get ncKindAppointment => 'Appointment';
+
+  @override
+  String get ncKindWorry => 'Worry window';
+
+  @override
+  String get ncKindFastGoal => 'Fasting goal';
+
+  @override
+  String get ncKindEatingClose => 'Eating window closing';
+
+  @override
+  String get ncKindDebt => 'Debt due';
+
+  @override
+  String get ncKindObligation => 'Payment due';
+
+  @override
+  String get ncKindFamilyDigest => 'Keep in touch';
+
+  @override
+  String get ncKindBirthdayEve => 'Birthday tomorrow';
+
+  @override
+  String get ncKindBirthday => 'Birthday today';
+
+  @override
+  String get ncKindDocAhead => 'Document expiring soon';
+
+  @override
+  String get ncKindDocToday => 'Document expires today';
+
+  @override
+  String get ncKindWird => 'Daily wird';
+
+  @override
+  String get ncKindCustom => 'Module reminder';
+
+  @override
+  String get ncKindOther => 'Notification';
+
+  @override
+  String ncAtTime(String time) {
+    return 'at $time';
+  }
+
+  @override
+  String get ncStateMuted => 'Muted';
+
+  @override
+  String get ncStateSkipped => 'Skipped';
+
+  @override
+  String ncStateSnoozedUntil(String time) {
+    return 'Snoozed until $time';
+  }
+
+  @override
+  String get ncStateLive => 'Showing now';
+
+  @override
+  String get ncStateSilenced => 'Arrived muted';
+
+  @override
+  String get ncStateOpened => 'Opened';
+
+  @override
+  String ncStateAnswered(String action) {
+    return 'Answered: $action';
+  }
+
+  @override
+  String get ncStateSnoozed => 'Snoozed';
+
+  @override
+  String get ncStateNew => 'New';
+
+  @override
+  String get ncTimeNow => 'Now';
+
+  @override
+  String ncTimeIn(String duration) {
+    return 'in $duration';
+  }
+
+  @override
+  String ncTimeAgo(String duration) {
+    return '$duration ago';
+  }
+
+  @override
+  String ncTimeToday(String time) {
+    return 'Today $time';
+  }
+
+  @override
+  String ncTimeTomorrow(String time) {
+    return 'Tomorrow $time';
+  }
+
+  @override
+  String ncTimeYesterday(String time) {
+    return 'Yesterday $time';
+  }
+
+  @override
+  String ncTimeOnDay(String day, String time) {
+    return '$day, $time';
+  }
+
+  @override
+  String get ncActionTaken => 'Taken';
+
+  @override
+  String get ncActionSnooze => 'Snooze';
+
+  @override
+  String get ncActionSkip => 'Skip';
+
+  @override
+  String get ncActionStop => 'Stop';
+
+  @override
+  String get ncActionOpen => 'Open';
+
+  @override
+  String get ncActionSkipOne => 'Skip this one';
+
+  @override
+  String get ncActionRestore => 'Restore';
+
+  @override
+  String ncActionSnoozeFor(String duration) {
+    return 'Snooze $duration';
+  }
+
+  @override
+  String ncActionMuteGroup(String group) {
+    return 'Mute $group';
+  }
+
+  @override
+  String get ncActionUnmute => 'Unmute';
+
+  @override
+  String get ncActionSettings => 'Reminder settings';
+
+  @override
+  String get ncActionDismiss => 'Dismiss';
+
+  @override
+  String get ncActionFailed => 'Couldn\'t do that right now – try again';
+
+  @override
+  String ncSnoozedToast(String time) {
+    return 'Snoozed until $time';
+  }
+
+  @override
+  String ncMutedToast(String group, String when) {
+    return '$group muted until $when';
+  }
+
+  @override
+  String ncUnmutedToast(String group) {
+    return '$group is back on';
+  }
+
+  @override
+  String ncMuteTitle(String group) {
+    return 'Mute $group';
+  }
+
+  @override
+  String get ncMuteSubtitle =>
+      'Nothing from this group will sound for a while – you\'ll still find it listed here.';
+
+  @override
+  String ncMuteForHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hours',
+      one: '1 hour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncMuteUntilMorning => 'Until tomorrow morning';
+
+  @override
+  String get ncMuteWeek => 'A week';
+
+  @override
+  String ncMutedUntil(String when) {
+    return 'Muted until $when';
+  }
+
+  @override
+  String get ncSettingsTitle => 'Notifications';
+
+  @override
+  String get ncSettingsSubtitle =>
+      'What each part of Madar sends you, in one place';
+
+  @override
+  String get ncSettingsOn => 'On';
+
+  @override
+  String get ncSettingsOff => 'Off';
+
+  @override
+  String ncSettingsSome(String on, String total) {
+    return '$on of $total on';
+  }
+
+  @override
+  String get ncSettingsPerItem => 'Set per item';
+
+  @override
+  String ncSettingsComing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count coming',
+      one: '1 coming',
+      zero: 'Nothing coming',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncSettingsOpen(String group) {
+    return 'Open $group settings';
+  }
+
+  @override
+  String get ncSettingsMute => 'Mute';
+
+  @override
+  String get ncPermissionOff =>
+      'Madar\'s notifications are off in the phone\'s settings, so none of this will arrive.';
+
+  @override
+  String get ncPermissionTurnOn => 'Turn on';
+
+  @override
+  String ncBellLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notifications, $count new',
+      one: 'Notifications, 1 new',
+      zero: 'Notifications',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncActionCancelSnooze => 'Cancel snooze';
+
+  @override
+  String get ncActionSnoozeMenu => 'Snooze…';
+
+  @override
+  String get ncSnoozeTitle => 'Bring it back later';
+
+  @override
+  String get ncSnoozeSubtitle =>
+      'It leaves now and arrives again when you choose.';
+
+  @override
+  String ncOptionUntil(String time) {
+    return 'until $time';
+  }
+
+  @override
+  String ncOptionAt(String time) {
+    return 'back $time';
+  }
+
+  @override
+  String ncRecentCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count notifications',
+      one: '1 notification',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUpcomingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count notifications in the next seven days',
+      one: '1 notification in the next seven days',
+      zero: 'Nothing in the next seven days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncNewCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new',
+      one: '1 new',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ncUntilTomorrow(String time) {
+    return 'tomorrow $time';
+  }
+
+  @override
+  String get aiChatTitle => 'AI chat';
+
+  @override
+  String get aiChatNewChat => 'New chat';
+
+  @override
+  String get aiChatListTitle => 'Conversations';
+
+  @override
+  String get aiChatSettingsTitle => 'AI settings';
+
+  @override
+  String get aiChatSettingsRowSubtitle => 'Keys, model and reply length';
+
+  @override
+  String get aiChatAskAi => 'Ask AI';
+
+  @override
+  String get aiChatAskAiSubtitle =>
+      'With your own key – you choose what’s sent';
+
+  @override
+  String aiChatAskAbout(String area) {
+    return 'Ask about $area';
+  }
+
+  @override
+  String get aiChatMenu => 'More';
+
+  @override
+  String get aiChatOpenList => 'All conversations';
+
+  @override
+  String get aiChatInputHint => 'Write your message…';
+
+  @override
+  String get aiChatSend => 'Send';
+
+  @override
+  String get aiChatStop => 'Stop';
+
+  @override
+  String get aiChatThinking => 'Thinking…';
+
+  @override
+  String get aiChatWriting => 'Writing a reply';
+
+  @override
+  String get aiChatWillSend => 'Will send';
+
+  @override
+  String get aiChatContextReviewFirst => 'you’ll review your summary first';
+
+  @override
+  String get aiChatContextNone => 'No personal context';
+
+  @override
+  String aiChatContextSections(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count summary sections',
+      one: '1 summary section',
+      zero: 'No sections',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatMessagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+      zero: 'No messages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatApproxTokens(String count) {
+    return '≈ $count tokens';
+  }
+
+  @override
+  String aiChatStripSemantics(String summary) {
+    return 'Will send: $summary. Tap to review or change';
+  }
+
+  @override
+  String aiChatOmitted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count older messages left out',
+      one: '1 older message left out',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aiChatContextTitle => 'What will be sent';
+
+  @override
+  String get aiChatContextSubtitle => 'Nothing is sent until you tap Send';
+
+  @override
+  String get aiChatContextFromSummary => 'From your summary';
+
+  @override
+  String get aiChatContextChange => 'Review sections';
+
+  @override
+  String get aiChatContextChoose => 'Choose sections';
+
+  @override
+  String get aiChatContextNoneHint =>
+      'Nothing from your data is sent – only this conversation’s messages.';
+
+  @override
+  String get aiChatContextUnsetHint =>
+      'On the first send, the summary preview opens so you can pick sections or leave any out.';
+
+  @override
+  String get aiChatContextUse => 'Use in this chat';
+
+  @override
+  String get aiChatContextUseAndSend => 'Use and send';
+
+  @override
+  String aiChatContextReviewed(String when) {
+    return 'Reviewed $when';
+  }
+
+  @override
+  String get aiChatContextCancelled => 'Nothing was sent.';
+
+  @override
+  String aiChatServiceModel(String service, String model) {
+    return '$service · $model';
+  }
+
+  @override
+  String get aiChatViewPayload => 'View the exact request';
+
+  @override
+  String get aiChatDone => 'Done';
+
+  @override
+  String get aiChatPayloadTitle => 'The exact request';
+
+  @override
+  String get aiChatPayloadEndpoint => 'Endpoint';
+
+  @override
+  String get aiChatPayloadHeaders => 'Headers (key hidden)';
+
+  @override
+  String get aiChatPayloadSystem => 'Instructions and context';
+
+  @override
+  String get aiChatPayloadMessages => 'Messages';
+
+  @override
+  String get aiChatPayloadRaw => 'Full body (JSON)';
+
+  @override
+  String get aiChatPayloadDraftNote =>
+      'Includes the message you’re typing. It’s sent only when you tap Send.';
+
+  @override
+  String get aiChatPayloadNoDraft =>
+      'Write a message to see the complete request.';
+
+  @override
+  String aiChatPayloadSize(String size, String tokens) {
+    return '$size · ≈ $tokens tokens';
+  }
+
+  @override
+  String aiChatBytes(String count) {
+    return '$count bytes';
+  }
+
+  @override
+  String aiChatKiloBytes(String count) {
+    return '$count KB';
+  }
+
+  @override
+  String get aiChatRoleUser => 'You';
+
+  @override
+  String get aiChatRoleAssistant => 'Assistant';
+
+  @override
+  String get aiChatCopy => 'Copy';
+
+  @override
+  String get aiChatCopied => 'Copied';
+
+  @override
+  String get aiChatCopyCode => 'Copy code';
+
+  @override
+  String get aiChatRegenerate => 'Regenerate';
+
+  @override
+  String get aiChatRetry => 'Try again';
+
+  @override
+  String get aiChatStopped => 'You stopped the reply';
+
+  @override
+  String get aiChatCutShort =>
+      'The reply hit the length limit. You can raise it in settings.';
+
+  @override
+  String get aiChatRefused => 'The model declined to answer.';
+
+  @override
+  String get aiChatFiltered => 'The content filter stopped the reply.';
+
+  @override
+  String get aiChatHealthNote =>
+      'For tracking only, not medical advice – ask your clinician about any health decision.';
+
+  @override
+  String aiChatOpenLink(String url) {
+    return 'Open link $url';
+  }
+
+  @override
+  String get aiChatLinkFailed => 'Couldn’t open the link.';
+
+  @override
+  String aiChatErrorNoKey(String service) {
+    return 'Add your $service key first.';
+  }
+
+  @override
+  String aiChatErrorBadKey(String service) {
+    return '$service rejected the key. Check it or replace it in settings.';
+  }
+
+  @override
+  String get aiChatErrorForbidden =>
+      'This key isn’t allowed to use this model.';
+
+  @override
+  String get aiChatErrorRateLimited =>
+      'Too many requests right now. Wait a moment, then try again.';
+
+  @override
+  String aiChatErrorRetryAfter(String seconds) {
+    return 'You can try again in $seconds s.';
+  }
+
+  @override
+  String aiChatErrorQuota(String service) {
+    return 'You’re out of credit or at your spend limit with $service.';
+  }
+
+  @override
+  String aiChatErrorOverloaded(String service) {
+    return '$service is busy right now. Try again shortly.';
+  }
+
+  @override
+  String aiChatErrorServer(String service) {
+    return '$service had a problem. Try again.';
+  }
+
+  @override
+  String aiChatErrorModelNotFound(String model) {
+    return 'The model “$model” isn’t available to this key. Pick another model.';
+  }
+
+  @override
+  String get aiChatErrorTemperature =>
+      'This model doesn’t accept a custom temperature. Set it to “Model default” in settings.';
+
+  @override
+  String get aiChatErrorContextTooLong =>
+      'The conversation is too long for the model. Start a new chat or share fewer sections.';
+
+  @override
+  String aiChatErrorBadRequest(String service) {
+    return '$service rejected the request.';
+  }
+
+  @override
+  String get aiChatErrorNetwork =>
+      'No internet connection, or the connection dropped.';
+
+  @override
+  String get aiChatErrorTimeout => 'No answer came in time.';
+
+  @override
+  String get aiChatErrorBadResponse => 'The answer couldn’t be read.';
+
+  @override
+  String get aiChatErrorUnknown => 'Something unexpected went wrong.';
+
+  @override
+  String get aiChatOpenSettings => 'Open settings';
+
+  @override
+  String get aiChatSetupTitle => 'Connect your own key';
+
+  @override
+  String get aiChatSetupBody =>
+      'The chat uses your own Anthropic or OpenAI API key. It’s stored encrypted on this phone only – never in backups or exports.';
+
+  @override
+  String aiChatSetupAdd(String service) {
+    return 'Add $service key';
+  }
+
+  @override
+  String get aiChatSetupPrivacy =>
+      'Nothing is sent until you tap Send, and you see exactly what goes out first.';
+
+  @override
+  String get aiChatEmptyTitle => 'How can I help today?';
+
+  @override
+  String get aiChatEmptyBody =>
+      'Ask about your day, prayers, budget or goals. You choose what’s shared from your summary before sending.';
+
+  @override
+  String get aiChatSuggestWeek => 'Sum up my week in a few points';
+
+  @override
+  String get aiChatSuggestBudget => 'How can I improve my budget this month?';
+
+  @override
+  String get aiChatSuggestPlan => 'Help me plan a balanced tomorrow';
+
+  @override
+  String get aiChatSuggestPrayer => 'How can I keep my prayers on time?';
+
+  @override
+  String get aiChatListEmptyTitle => 'No conversations yet';
+
+  @override
+  String get aiChatListEmptyBody =>
+      'Start a chat – it’s kept here, encrypted on your phone.';
+
+  @override
+  String get aiChatRename => 'Rename';
+
+  @override
+  String get aiChatRenameField => 'Conversation name';
+
+  @override
+  String get aiChatRenameSave => 'Save name';
+
+  @override
+  String get aiChatDelete => 'Delete chat';
+
+  @override
+  String get aiChatDeleted => 'Chat deleted';
+
+  @override
+  String get aiChatDeleteAll => 'Delete all chats';
+
+  @override
+  String get aiChatDeletedAll => 'All chats deleted';
+
+  @override
+  String get aiChatUntitled => 'Untitled chat';
+
+  @override
+  String aiChatListLimitNote(String count) {
+    return 'The latest $count chats are kept; older ones are removed automatically.';
+  }
+
+  @override
+  String aiChatListUpdated(String when, String messages) {
+    return '$when · $messages';
+  }
+
+  @override
+  String get aiChatToday => 'Today';
+
+  @override
+  String get aiChatYesterday => 'Yesterday';
+
+  @override
+  String get aiChatSettingsService => 'Service';
+
+  @override
+  String get aiChatSettingsServiceModel => 'Service and model';
+
+  @override
+  String get aiChatServiceAnthropic => 'Anthropic';
+
+  @override
+  String get aiChatServiceOpenai => 'OpenAI';
+
+  @override
+  String get aiChatSettingsKeys => 'API keys';
+
+  @override
+  String aiChatKeyTitle(String service) {
+    return '$service key';
+  }
+
+  @override
+  String aiChatKeySaved(String mask) {
+    return 'Saved · $mask';
+  }
+
+  @override
+  String get aiChatKeyNotSet => 'Not added yet';
+
+  @override
+  String get aiChatKeySheetSubtitle => 'Stored encrypted on this phone only.';
+
+  @override
+  String get aiChatKeyCurrent => 'Current key';
+
+  @override
+  String get aiChatKeyField => 'Key';
+
+  @override
+  String get aiChatKeyFieldHint => 'Paste the key here';
+
+  @override
+  String get aiChatKeyPaste => 'Paste';
+
+  @override
+  String get aiChatKeySave => 'Save key';
+
+  @override
+  String get aiChatKeyReplace => 'Replace key';
+
+  @override
+  String get aiChatKeyDelete => 'Delete key';
+
+  @override
+  String get aiChatKeyDeleted => 'Key deleted';
+
+  @override
+  String get aiChatKeySavedNotice => 'Key saved.';
+
+  @override
+  String get aiChatKeyTest => 'Test key';
+
+  @override
+  String get aiChatKeyTestOk => 'The key works.';
+
+  @override
+  String get aiChatKeyTestNote =>
+      'The test only asks for the model list – none of your data is sent.';
+
+  @override
+  String get aiChatKeyWhere => 'Where do I get a key?';
+
+  @override
+  String get aiChatKeyProblemEmpty => 'Paste the key first.';
+
+  @override
+  String get aiChatKeyProblemShort => 'That’s too short to be a key.';
+
+  @override
+  String get aiChatKeyProblemSpaces =>
+      'The key contains spaces – copy it again.';
+
+  @override
+  String aiChatKeyProblemProvider(String service) {
+    return 'This key belongs to $service, so it wasn’t saved here – it would be sent to the wrong service. Add it under $service.';
+  }
+
+  @override
+  String get aiChatSettingsModel => 'Model';
+
+  @override
+  String get aiChatModelPickerTitle => 'Choose a model';
+
+  @override
+  String get aiChatModelYourList => 'Your list';
+
+  @override
+  String aiChatModelsAvailable(String service) {
+    return 'Available from $service';
+  }
+
+  @override
+  String get aiChatModelCustom => 'Add a model id';
+
+  @override
+  String get aiChatModelCustomField => 'Model id';
+
+  @override
+  String get aiChatModelCustomHint => 'e.g. claude-sonnet-5-5';
+
+  @override
+  String get aiChatModelInvalid => 'Not a valid model id.';
+
+  @override
+  String get aiChatModelUse => 'Use';
+
+  @override
+  String get aiChatModelRefresh => 'Refresh models';
+
+  @override
+  String aiChatModelRefreshed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count models available',
+      one: '1 model available',
+      zero: 'No models available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String aiChatModelRefreshNote(String service) {
+    return 'Asks $service for the list only when you tap.';
+  }
+
+  @override
+  String get aiChatModelReset => 'Reset the list';
+
+  @override
+  String aiChatModelRemove(String model) {
+    return 'Remove $model from the list';
+  }
+
+  @override
+  String get aiChatModelSelected => 'Selected';
+
+  @override
+  String aiChatModelChip(String model) {
+    return 'Model: $model. Tap to change';
+  }
+
+  @override
+  String get aiChatSettingsReply => 'Reply';
+
+  @override
+  String get aiChatMaxTokens => 'Longest reply';
+
+  @override
+  String get aiChatMaxTokensNote => 'In tokens, including any model reasoning.';
+
+  @override
+  String get aiChatTemperature => 'Temperature';
+
+  @override
+  String get aiChatTemperatureDefault => 'Model default (recommended)';
+
+  @override
+  String get aiChatTemperatureNote =>
+      'Newer models accept only the default. Lower = steadier replies.';
+
+  @override
+  String get aiChatSettingsPrivacy => 'Privacy';
+
+  @override
+  String get aiChatPrivacyKeys =>
+      'Keys live in the phone’s encrypted storage – not in the database, backups or exports.';
+
+  @override
+  String get aiChatPrivacyCalls =>
+      'Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background.';
+
+  @override
+  String aiChatPrivacyHistory(String count) {
+    return 'Chats are kept encrypted on your phone (the latest $count), each with the summary you approved for it. They are part of your backups and your full data export.';
+  }
+
+  @override
+  String get aiChatKeyProblemChars =>
+      'The key has characters no key has (maybe from copying) – copy it again.';
+
+  @override
+  String get aiChatLinkTitle => 'Open this link?';
+
+  @override
+  String get aiChatLinkBody =>
+      'It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it.';
+
+  @override
+  String get aiChatLinkOpen => 'Open link';
+
+  @override
+  String get widgetsPrayerName => 'Next prayer';
+
+  @override
+  String get widgetsMedsName => 'Today’s meds';
+
+  @override
+  String get widgetsTasksName => 'Today’s Top 3';
+
+  @override
+  String get widgetsBudgetName => 'Budget left';
+
+  @override
+  String widgetsCountdown(String time) {
+    return 'in $time';
+  }
+
+  @override
+  String widgetsPrayerNotePlace(String date, String place) {
+    return '$date · $place';
+  }
+
+  @override
+  String widgetsFraction(String done, String total) {
+    return '$done/$total';
+  }
+
+  @override
+  String widgetsMedsNext(String time, String name) {
+    return 'Next at $time: $name';
+  }
+
+  @override
+  String widgetsMedsPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count doses to go',
+      one: '1 dose to go',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get widgetsMedsAllDone => 'Every dose of today is logged';
+
+  @override
+  String get widgetsMedsNoneToday => 'No doses today';
+
+  @override
+  String get widgetsMedsSetUp => 'Add your medications in Madar';
+
+  @override
+  String widgetsMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '+$count more doses',
+      one: '+1 more dose',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetsTasksLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count to go',
+      one: '1 to go',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get widgetsTasksAllDone => 'Today’s Top 3 are done';
+
+  @override
+  String get widgetsTasksEmpty => 'Choose today’s Top 3 in Madar';
+
+  @override
+  String widgetsTasksCarried(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count unfinished from yesterday',
+      one: '1 unfinished from yesterday',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetsBudgetOf(String amount) {
+    return 'of $amount';
+  }
+
+  @override
+  String widgetsBudgetOverBy(String amount) {
+    return 'Over by $amount';
+  }
+
+  @override
+  String get widgetsBudgetOver => 'Over budget';
+
+  @override
+  String get widgetsBudgetLeftMonth => 'left this month';
+
+  @override
+  String get widgetsBudgetLeftWeek => 'left this week';
+
+  @override
+  String widgetsBudgetDaysLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days left',
+      one: '1 day left',
+      zero: 'Last day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get widgetsBudgetNone => 'Set up your budget in Madar';
+
+  @override
+  String get widgetsStale => 'Open Madar to refresh this widget';
+
+  @override
+  String get widgetsSettingsTitle => 'Home-screen widgets';
+
+  @override
+  String get widgetsSettingsIntro =>
+      'Add Madar’s widgets from your home screen: long-press an empty spot, choose Widgets, then Madar.';
+
+  @override
+  String get widgetsShowDetails => 'Show details';
+
+  @override
+  String get widgetsDetailsShown =>
+      'Names, times and amounts show on the home screen';
+
+  @override
+  String get widgetsDetailsHidden => 'Counts only — no names or amounts';
+
+  @override
+  String get widgetsPrayerDetailsShown =>
+      'Your city’s name shows under the Hijri date';
+
+  @override
+  String get widgetsPrayerDetailsHidden =>
+      'The prayer, its time and the date — no city';
+
+  @override
+  String get widgetsOnHomeScreen => 'On your home screen';
+
+  @override
+  String get widgetsNotAdded => 'Not added yet';
+
+  @override
+  String get widgetsLockNote =>
+      'App Lock is on, so widgets show counts only unless you choose otherwise here.';
+
+  @override
+  String get widgetsPrivacyNote =>
+      'Widget data is written on this device only, encrypted, never for a widget you have not added, and erased with “Delete all data”.';
+
+  @override
+  String get widgetsBudgetPeriod => 'Budget period';
+
+  @override
+  String get widgetsPeriodMonth => 'This month';
+
+  @override
+  String get widgetsPeriodWeek => 'This week';
 }

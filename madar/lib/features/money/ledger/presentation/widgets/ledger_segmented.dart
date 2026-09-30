@@ -101,13 +101,18 @@ class LedgerSegmented<T> extends StatelessWidget {
                                   const SizedBox(width: Space.xs),
                                 ],
                                 Flexible(
-                                  child: AnimatedDefaultTextStyle(
-                                    duration: context.motion(MadarMotion.short),
-                                    style: text.labelLarge!.copyWith(
-                                      color: v == value ? onTint : t.textSecondary,
-                                      height: 1.2,
+                                  // Shrinks rather than cutting a label
+                                  // ("Adjustm…", "٣ أ…") at a large text size.
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: AnimatedDefaultTextStyle(
+                                      duration: context.motion(MadarMotion.short),
+                                      style: text.labelLarge!.copyWith(
+                                        color: v == value ? onTint : t.textSecondary,
+                                        height: 1.2,
+                                      ),
+                                      child: Text(labels[v] ?? '', maxLines: 1),
                                     ),
-                                    child: Text(labels[v] ?? '', maxLines: 1, overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
                               ],

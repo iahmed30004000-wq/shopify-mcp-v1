@@ -14,6 +14,7 @@ import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../health/hub/health_hub.dart';
+import '../../../money/hub/money_hub.dart';
 import '../../data/orbit_providers.dart';
 import '../../domain/neglect_text.dart';
 import '../../domain/orbit_labels.dart';
@@ -36,7 +37,8 @@ import 'world_modules.dart';
 /// itself stays behind the header as a giant, slowly turning hero (it is the
 /// orbit scene underneath this transparent route), and a glass sheet slides
 /// up with its balance ring, the world's own hub (Faith: the day around the
-/// prayers – [FaithHub]; Health: the body's care – [HealthHub]), what needs
+/// prayers – [FaithHub]; Health: the body's care – [HealthHub]; Money: the
+/// net worth, wallets, plan, dues and savings – [MoneyHub]), what needs
 /// care, its moons (tappable – each is a real record) and what feeds its
 /// score.
 class PlanetModulePage extends ConsumerStatefulWidget {
@@ -566,6 +568,9 @@ class _Sheet extends StatelessWidget {
           // Health's hub of the body's care: the standing alerts, today's
           // doses, wellbeing and pain, the doctor's side, the tools.
           if (planet.key == 'health') ...[const SizedBox(height: Space.l), const HealthHub(firstIndex: 1)],
+          // Money's hub: the net worth, one-tap entries, the wallets, this
+          // month's plan, the dues and savings, the tools.
+          if (planet.key == 'money') ...[const SizedBox(height: Space.l), const MoneyHub(firstIndex: 1)],
           // … and every world's tasks of the day.
           StaggerItem(index: 1, child: section(l.orbitUiWorldTasksTitle)),
           StaggerItem(index: 1, child: WorldTasksModule(planetKey: planet.key)),

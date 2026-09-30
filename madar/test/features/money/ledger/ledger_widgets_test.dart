@@ -196,6 +196,6 @@ void main() {
       () => LedgerService(Repositories(db)).addWallet(name: 'الصندوق', currency: 'JOD', openingMilli: 1234500),
     );
     await _pump(tester, db, const MoneyLedgerScreen(), locale: const Locale('ar'));
-    expect(find.text('١٬٢٣٤٫٥٠٠\u00A0\u2068د.أ\u2069'), findsWidgets);
+    expect(find.text('١\u202F٢٣٤٫٥٠٠\u00A0\u2068د.أ\u2069'), findsWidgets);
   });
 }

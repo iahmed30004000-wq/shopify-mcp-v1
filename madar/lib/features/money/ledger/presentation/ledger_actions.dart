@@ -20,13 +20,18 @@ import 'ledger_ui.dart';
 import 'money_ledger_screen.dart';
 import 'transactions_screen.dart';
 import 'wallet_screen.dart';
+import 'sheets/budget_item_picker.dart';
 import 'sheets/transaction_sheet.dart';
 import 'widgets/tx_tile.dart';
+
+/// Picks a budget item for an entry or a filter: `(id: <item>)`, `(id: null)`
+/// for "no item", or null when dismissed.
+typedef LedgerBudgetPicker = Future<({String? id})?> Function(BuildContext context, {String? selected, String? title});
 
 /// Where the ledger's screens lead. The defaults push plain routes; the app
 /// can override [ledgerRoutesProvider] to route through go_router instead.
 class LedgerRoutes {
-  const LedgerRoutes({this.ledger, this.wallet, this.transactions, this.currencies, this.linked});
+  const LedgerRoutes({this.ledger, this.wallet, this.transactions, this.currencies, this.linked, this.budgetPicker});
 
   final void Function(BuildContext context)? ledger;
   final void Function(BuildContext context, String walletId)? wallet;
@@ -37,6 +42,11 @@ class LedgerRoutes {
   /// ([LedgerLinks]; [LedgerLinks.sourceId] is the movement / payment id).
   /// Null: linked rows are shown without actions.
   final void Function(BuildContext context, LedgerTx tx, LedgerLink link)? linked;
+
+  /// The budget item picker of the transaction sheet and of the item
+  /// filter (the app hands in the budget package's tree picker). Null: the
+  /// ledger's own picker.
+  final LedgerBudgetPicker? budgetPicker;
 }
 
 final ledgerRoutesProvider = Provider<LedgerRoutes>((ref) => const LedgerRoutes());
@@ -72,6 +82,26 @@ abstract final class LedgerActions {
     final custom = ref.read(ledgerRoutesProvider).currencies;
     if (custom != null) return custom(context);
     _push(context, const CurrenciesScreen());
+  }
+
+  /// Picks a budget item through [LedgerRoutes.budgetPicker] (else the
+  /// ledger's own picker): an item id, [BudgetPick.none] for "no item", or
+  /// null when dismissed.
+  static Future<String?> pickBudgetItem(
+    BuildContext context,
+    WidgetRef ref, {
+    required LedgerBook book,
+    required String? selected,
+    required DateTime today,
+    String? title,
+  }) async {
+    final custom = ref.read(ledgerRoutesProvider).budgetPicker;
+    if (custom == null) {
+      return showBudgetItemPicker(context, book: book, selected: selected, today: today, title: title);
+    }
+    final picked = await custom(context, selected: selected, title: title);
+    if (picked == null) return null;
+    return picked.id ?? BudgetPick.none;
   }
 
   // ----------------------------------------------------- transactions ----

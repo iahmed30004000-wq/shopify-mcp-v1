@@ -5,6 +5,8 @@ import '../../../core/db/repositories/repositories.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/interaction/quick_add/parser.dart';
 import '../../../core/interaction/quick_add/quick_add_handler.dart';
+import '../../money/ledger/data/ledger_service.dart';
+import '../../money/ledger/domain/tx_draft.dart' show TxWrite;
 import 'home_tasks.dart';
 import 'prayer_day.dart';
 
@@ -18,6 +20,7 @@ class QuickAddContext {
     required this.prayerDay,
     required this.focusedWindow,
     required this.defaultWalletName,
+    this.ledger,
   });
 
   final Repositories Function() repositories;
@@ -30,6 +33,11 @@ class QuickAddContext {
 
   /// Localised name of the wallet quick add creates on demand.
   final String Function() defaultWalletName;
+
+  /// The ledger's service (the app's records through the orbit's pulse
+  /// hub, so the Money world pulses); null: a plain [LedgerService] over
+  /// [repositories].
+  final LedgerService Function()? ledger;
 }
 
 /// The app's quick-add handler: routes each [QuickAddKind] to a small
@@ -91,6 +99,8 @@ class TaskQuickAdd extends QuickAddHandler {
 
 /// Expenses and income into the first open wallet of the intent's currency
 /// (the base currency when none was stated). A wallet is created on demand.
+/// The entry is written by the ledger's own service, exactly like one added
+/// in the ledger (activity `money.tx`, the Money world pulses).
 class MoneyQuickAdd extends QuickAddHandler {
   const MoneyQuickAdd(this.c);
 
@@ -104,23 +114,16 @@ class MoneyQuickAdd extends QuickAddHandler {
     final repos = c.repositories();
     final currency = intent.currency ?? (await repos.currencies.base())?.code ?? 'JOD';
     final wallet = await walletFor(repos, currency, c.defaultWalletName());
-    final now = c.clock();
-    final tx = await repos.transactions.insert(
-      TransactionsCompanion.insert(
+    final ledger = c.ledger?.call() ?? LedgerService(repos, clock: c.clock);
+    final note = intent.title.trim();
+    await ledger.add(
+      TxWrite(
         walletId: wallet.id,
         kind: kind,
         amountMilli: amount,
-        date: intent.dateTime ?? now,
-        note: Value(intent.title.trim().isEmpty ? null : intent.title.trim()),
+        date: intent.dateTime ?? c.clock(),
+        note: note.isEmpty ? null : note,
       ),
-    );
-    await repos.activity.log(
-      planetKey: 'money',
-      kind: kind == TxKind.income ? 'money.income' : 'money.expense',
-      refTable: 'transactions',
-      refId: tx.id,
-      at: now,
-      value: amount / 1000,
     );
     return true;
   }

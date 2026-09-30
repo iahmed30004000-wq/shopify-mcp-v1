@@ -1,0 +1,261 @@
+{
+  "widgetsPrayerName": {
+    "ar": "الصلاة القادمة",
+    "en": "Next prayer",
+    "description": "Home-screen widget: the next prayer (widget title and its name in settings)"
+  },
+  "widgetsMedsName": {
+    "ar": "أدوية اليوم",
+    "en": "Today’s meds",
+    "description": "Home-screen widget: today's doses (widget title and its name in settings)"
+  },
+  "widgetsTasksName": {
+    "ar": "أهم ثلاث اليوم",
+    "en": "Today’s Top 3",
+    "description": "Home-screen widget: today's Top 3 (widget title and its name in settings)"
+  },
+  "widgetsBudgetName": {
+    "ar": "المتبقي من الميزانية",
+    "en": "Budget left",
+    "description": "Home-screen widget: what is left of the budget (widget title and its name in settings)"
+  },
+  "widgetsCountdown": {
+    "ar": "بعد {time}",
+    "en": "in {time}",
+    "description": "Widget countdown to the next prayer; {time} is a ticking h:mm:ss filled in by Android",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsPrayerNotePlace": {
+    "ar": "{date} · {place}",
+    "en": "{date} · {place}",
+    "description": "Widget: Hijri date and the location's name",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsFraction": {
+    "ar": "{done}/{total}",
+    "en": "{done}/{total}",
+    "description": "Widget headline: answered doses or finished tasks out of the total (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsMedsNext": {
+    "ar": "التالية {time}: {name}",
+    "en": "Next at {time}: {name}",
+    "description": "Widget: the next dose of today (details shown)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsMedsPending": {
+    "ar": "{count, plural, =1{جرعة واحدة بانتظارك} =2{جرعتان بانتظارك} few{{count} جرعات بانتظارك} many{{count} جرعة بانتظارك} other{{count} جرعة بانتظارك}}",
+    "en": "{count, plural, =1{1 dose to go} other{{count} doses to go}}",
+    "description": "Widget: doses of today still without an answer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsMedsAllDone": {
+    "ar": "جرعات اليوم كلها مسجّلة",
+    "en": "Every dose of today is logged",
+    "description": "Widget: all of today's doses answered"
+  },
+  "widgetsMedsNoneToday": {
+    "ar": "لا جرعات اليوم",
+    "en": "No doses today",
+    "description": "Widget: nothing is planned today"
+  },
+  "widgetsMedsSetUp": {
+    "ar": "أضف أدويتك في مدار",
+    "en": "Add your medications in Madar",
+    "description": "Widget: no medications yet"
+  },
+  "widgetsMore": {
+    "ar": "{count, plural, =1{وجرعة أخرى} =2{وجرعتان أخريان} few{و{count} جرعات أخرى} many{و{count} جرعة أخرى} other{و{count} جرعة أخرى}}",
+    "en": "{count, plural, =1{+1 more dose} other{+{count} more doses}}",
+    "description": "Widget: doses that do not fit in the list",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsTasksLeft": {
+    "ar": "{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} other{بقيت {count}}}",
+    "en": "{count, plural, =1{1 to go} other{{count} to go}}",
+    "description": "Widget: Top 3 items not done yet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsTasksAllDone": {
+    "ar": "أنجزت أهم ثلاث اليوم",
+    "en": "Today’s Top 3 are done",
+    "description": "Widget: every Top 3 item is done"
+  },
+  "widgetsTasksEmpty": {
+    "ar": "اختر أهم ثلاث لليوم في مدار",
+    "en": "Choose today’s Top 3 in Madar",
+    "description": "Widget: no Top 3 chosen for today"
+  },
+  "widgetsTasksCarried": {
+    "ar": "{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} other{{count} لم تكتمل أمس}}",
+    "en": "{count, plural, =1{1 unfinished from yesterday} other{{count} unfinished from yesterday}}",
+    "description": "Widget after midnight: yesterday's unfinished Top 3 waiting for the carry-over",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsBudgetOf": {
+    "ar": "من {amount}",
+    "en": "of {amount}",
+    "description": "Widget: the planned total under what is left",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsBudgetOverBy": {
+    "ar": "تجاوزت بـ{amount}",
+    "en": "Over by {amount}",
+    "description": "Widget: spent more than planned",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsBudgetOver": {
+    "ar": "تجاوزت الميزانية",
+    "en": "Over budget",
+    "description": "Widget (counts only): spent more than planned"
+  },
+  "widgetsBudgetLeftMonth": {
+    "ar": "متبقٍّ لهذا الشهر",
+    "en": "left this month",
+    "description": "Widget (counts only) under the percentage"
+  },
+  "widgetsBudgetLeftWeek": {
+    "ar": "متبقٍّ لهذا الأسبوع",
+    "en": "left this week",
+    "description": "Widget (counts only) under the percentage"
+  },
+  "widgetsBudgetDaysLeft": {
+    "ar": "{count, plural, =0{آخر يوم} =1{يوم واحد متبقٍّ} =2{يومان متبقيان} few{{count} أيام متبقية} many{{count} يومًا متبقيًا} other{{count} يوم متبقٍّ}}",
+    "en": "{count, plural, =0{Last day} =1{1 day left} other{{count} days left}}",
+    "description": "Widget: days left in the budget period after today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsBudgetNone": {
+    "ar": "ضع ميزانيتك في مدار",
+    "en": "Set up your budget in Madar",
+    "description": "Widget: nothing is planned"
+  },
+  "widgetsStale": {
+    "ar": "افتح مدار لتحديث هذه الأداة",
+    "en": "Open Madar to refresh this widget",
+    "description": "Widget: its data ran out (the app has not run for a while)"
+  },
+  "widgetsSettingsTitle": {
+    "ar": "أدوات الشاشة الرئيسية",
+    "en": "Home-screen widgets",
+    "description": "Settings page / section title"
+  },
+  "widgetsSettingsIntro": {
+    "ar": "أضف أدوات مدار من شاشتك الرئيسية: اضغط مطولًا على مساحة فارغة، ثم «الأدوات»، ثم مدار.",
+    "en": "Add Madar’s widgets from your home screen: long-press an empty spot, choose Widgets, then Madar.",
+    "description": "Settings: how to add a widget"
+  },
+  "widgetsShowDetails": {
+    "ar": "إظهار التفاصيل",
+    "en": "Show details",
+    "description": "Settings switch: names, times and amounts on the widget"
+  },
+  "widgetsDetailsShown": {
+    "ar": "الأسماء والأوقات والمبالغ ظاهرة على الشاشة الرئيسية",
+    "en": "Names, times and amounts show on the home screen",
+    "description": "Settings: subtitle while details are shown"
+  },
+  "widgetsDetailsHidden": {
+    "ar": "الأعداد فقط — لا أسماء ولا مبالغ",
+    "en": "Counts only — no names or amounts",
+    "description": "Settings: subtitle while details are hidden"
+  },
+  "widgetsPrayerDetailsShown": {
+    "ar": "يظهر اسم مدينتك تحت التاريخ الهجري",
+    "en": "Your city’s name shows under the Hijri date",
+    "description": "Settings (prayer widget): subtitle while details are shown"
+  },
+  "widgetsPrayerDetailsHidden": {
+    "ar": "الصلاة ووقتها والتاريخ فقط — دون المدينة",
+    "en": "The prayer, its time and the date — no city",
+    "description": "Settings (prayer widget): subtitle while details are hidden"
+  },
+  "widgetsOnHomeScreen": {
+    "ar": "على شاشتك الرئيسية",
+    "en": "On your home screen",
+    "description": "Settings: this widget has been added"
+  },
+  "widgetsNotAdded": {
+    "ar": "لم تُضف بعد",
+    "en": "Not added yet",
+    "description": "Settings: this widget is not on the home screen"
+  },
+  "widgetsLockNote": {
+    "ar": "قفل التطبيق مفعّل، لذلك تعرض الأدوات الأعداد فقط ما لم تختر غير ذلك هنا.",
+    "en": "App Lock is on, so widgets show counts only unless you choose otherwise here.",
+    "description": "Settings: why details are hidden by default"
+  },
+  "widgetsPrivacyNote": {
+    "ar": "تُكتب بيانات الأدوات على جهازك فقط، مشفّرة، ولا تُكتب لأداة لم تضفها، وتُمحى مع «حذف كل البيانات».",
+    "en": "Widget data is written on this device only, encrypted, never for a widget you have not added, and erased with “Delete all data”.",
+    "description": "Settings: privacy note"
+  },
+  "widgetsBudgetPeriod": {
+    "ar": "فترة الميزانية",
+    "en": "Budget period",
+    "description": "Settings: the budget widget shows this month or this week"
+  },
+  "widgetsPeriodMonth": {
+    "ar": "هذا الشهر",
+    "en": "This month",
+    "description": "Settings option"
+  },
+  "widgetsPeriodWeek": {
+    "ar": "هذا الأسبوع",
+    "en": "This week",
+    "description": "Settings option"
+  }
+}

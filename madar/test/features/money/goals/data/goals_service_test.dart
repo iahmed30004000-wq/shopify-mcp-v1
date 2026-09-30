@@ -362,8 +362,9 @@ void main() {
       expect(tx!.kind, TxKind.expense);
       expect(tx.walletId, usd);
       expect(tx.budgetItemId, item.id);
-      // 150 JOD at 0.709 JOD per USD = 211.565 USD (exact, half-up).
-      expect(tx.amountMilli, 211566);
+      // 150 JOD at 0.709 JOD per USD = 211.565 6… USD, rounded once to the
+      // wallet's cent: 211.57 USD.
+      expect(tx.amountMilli, 211570);
       expect(tx.date, d(2026, 1, 30));
       expect(tx.tags, ['obligation']);
       expect((await env.repos.obligations.byId(ob.id))!.nextDue, d(2026, 2, 28));

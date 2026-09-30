@@ -6,6 +6,7 @@ library;
 import 'package:meta/meta.dart';
 
 import '../../../../core/domain/enums.dart';
+import '../../../../core/domain/money.dart';
 import 'ledger_math.dart';
 import 'ledger_models.dart';
 
@@ -122,9 +123,11 @@ class TxDraft {
     negative: negative ?? this.negative,
   );
 
-  /// The received amount of a transfer: the typed one, else the same number
-  /// (same currency), else converted with [rates] and rounded to the
-  /// destination's minor unit ([toDecimals]). Null when it cannot be known.
+  /// The received amount of a transfer: always the same number between two
+  /// wallets of one currency (money moved there is neither lost nor made,
+  /// whatever an earlier save stored); else the typed one, else converted
+  /// with [rates] and rounded to the destination's minor unit
+  /// ([toDecimals]). Null when it cannot be known.
   int? resolvedToAmount({
     required String? fromCurrency,
     required String? toCurrency,
@@ -132,10 +135,29 @@ class TxDraft {
     int? toDecimals,
   }) {
     if (!isTransfer) return null;
+    final same = fromCurrency != null && toCurrency != null && fromCurrency.toUpperCase() == toCurrency.toUpperCase();
+    if (same) return amountMilli;
     if (toAmountMilli != null && toAmountMilli! > 0) return toAmountMilli;
     if (fromCurrency == null || toCurrency == null) return null;
-    if (fromCurrency.toUpperCase() == toCurrency.toUpperCase()) return amountMilli;
     return rates.convert(amountMilli, fromCurrency, toCurrency, decimals: toDecimals);
+  }
+
+  /// What arrives when a stored cross-currency transfer of [sentMilli] →
+  /// [receivedMilli] is edited to send [newSentMilli]: the transfer's own
+  /// rate is kept (not today's), exactly, rounded half-up once to the
+  /// destination's minor unit ([toDecimals]; 3 = milli).
+  static int rescaleReceived({
+    required int sentMilli,
+    required int receivedMilli,
+    required int newSentMilli,
+    int toDecimals = 3,
+  }) {
+    if (sentMilli == 0 || newSentMilli == 0) return 0;
+    final exact = Rational.fromInt(receivedMilli.abs()) * Rational.fromInt(newSentMilli.abs(), sentMilli.abs());
+    final d = toDecimals.clamp(0, 3);
+    if (d >= 3) return exact.roundHalfUp();
+    final step = BigInt.from(10).pow(3 - d).toInt();
+    return (exact / Rational.fromInt(step)).roundHalfUp() * step;
   }
 
   /// The signed amount an adjustment stores, given the wallet's current

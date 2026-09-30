@@ -130,7 +130,7 @@ void main() {
       const fmt = LedgerMoneyFormat(arabic: true, arabicIndic: true);
       final f = fmt.withCurrencies(book.currencyByCode);
       expect(f.amount(book.balanceOf(cash.id), 'JOD'), '٧٠٠٫٠٠٠\u00A0\u2068د.أ\u2069');
-      expect(f.amount(book.balanceOf(usd.id), 'USD'), startsWith('\u061C-١٬٢٣٤٫٥٠'));
+      expect(f.amount(book.balanceOf(usd.id), 'USD'), startsWith('\u061C-١\u202F٢٣٤٫٥٠'));
 
       final protein = book.transactions.singleWhere((t) => t.amountMilli == 42750);
       expect(book.budgetPath(protein.budgetItemId), 'طعام البيت › بروتينات');

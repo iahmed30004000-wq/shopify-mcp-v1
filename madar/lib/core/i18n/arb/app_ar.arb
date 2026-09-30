@@ -13317,6 +13317,250 @@
   "@goalsDebtNoWalletHint": {
     "description": "Debt editor preview without a wallet"
   },
+  "moneyHubNetWorthTitle": "صافي ثروتك",
+  "@moneyHubNetWorthTitle": {
+    "description": "Money page: title of the net worth card (wallets + jars + owed to you − you owe, in the base currency)"
+  },
+  "moneyHubNetWorthIn": "بعملة {code}",
+  "@moneyHubNetWorthIn": {
+    "description": "Money page: the base currency the net worth is shown in",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubNetWorthEmpty": "أضف محفظتك الأولى ليظهر هنا صافي ثروتك بعملتك الأساسية.",
+  "@moneyHubNetWorthEmpty": {
+    "description": "Money page: net worth card on a fresh install"
+  },
+  "moneyHubPartWallets": "المحافظ",
+  "@moneyHubPartWallets": {
+    "description": "Money page: part of the net worth – the wallets' balances"
+  },
+  "moneyHubPartJars": "الحصّالات",
+  "@moneyHubPartJars": {
+    "description": "Money page: part of the net worth – money in savings jars"
+  },
+  "moneyHubPartOwedToMe": "لك عند الناس",
+  "@moneyHubPartOwedToMe": {
+    "description": "Money page: part of the net worth – open debts owed to the user"
+  },
+  "moneyHubPartIOwe": "عليك",
+  "@moneyHubPartIOwe": {
+    "description": "Money page: part of the net worth – open debts the user owes (subtracted)"
+  },
+  "moneyHubNetWorthSemantics": "صافي ثروتك {total}: المحافظ {wallets}، الحصّالات {jars}، لك {owed}، عليك {owe}",
+  "@moneyHubNetWorthSemantics": {
+    "description": "Money page: screen-reader summary of the net worth card",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "wallets": {
+        "type": "String"
+      },
+      "jars": {
+        "type": "String"
+      },
+      "owed": {
+        "type": "String"
+      },
+      "owe": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubRatesAction": "العملات",
+  "@moneyHubRatesAction": {
+    "description": "Money page: button on the net worth card opening currencies and rates"
+  },
+  "moneyHubQuickTitle": "سجّل حركة",
+  "@moneyHubQuickTitle": {
+    "description": "Money page: title of the quick add row (expense, income, transfer)"
+  },
+  "moneyHubAddExpenseHint": "سجّل مصروفًا",
+  "@moneyHubAddExpenseHint": {
+    "description": "Money page: screen-reader label of the quick expense button"
+  },
+  "moneyHubAddIncomeHint": "سجّل دخلًا",
+  "@moneyHubAddIncomeHint": {
+    "description": "Money page: screen-reader label of the quick income button"
+  },
+  "moneyHubAddTransferHint": "حوّل بين محفظتين",
+  "@moneyHubAddTransferHint": {
+    "description": "Money page: screen-reader label of the quick transfer button"
+  },
+  "moneyHubWalletsTitle": "محافظك",
+  "@moneyHubWalletsTitle": {
+    "description": "Money page: section of the wallets summary"
+  },
+  "moneyHubLedgerAction": "الدفتر",
+  "@moneyHubLedgerAction": {
+    "description": "Money page: section action opening the ledger"
+  },
+  "moneyHubPlanTitle": "خطة هذا الشهر",
+  "@moneyHubPlanTitle": {
+    "description": "Money page: section of the budget status (plan vs spent, warnings)"
+  },
+  "moneyHubBudgetAction": "الميزانية",
+  "@moneyHubBudgetAction": {
+    "description": "Money page: section action opening the budget"
+  },
+  "moneyHubDuesTitle": "المستحقات والادّخار",
+  "@moneyHubDuesTitle": {
+    "description": "Money page: section of upcoming dues (bills, debts) and savings jars"
+  },
+  "moneyHubGoalsAction": "الكل",
+  "@moneyHubGoalsAction": {
+    "description": "Money page: section action opening savings, debts and bills"
+  },
+  "moneyHubToolsTitle": "أدوات المال",
+  "@moneyHubToolsTitle": {
+    "description": "Money page: section of links to the money screens"
+  },
+  "moneyHubToolLedger": "الدفتر",
+  "@moneyHubToolLedger": {
+    "description": "Money tool: the ledger (wallets, balances, recent entries)"
+  },
+  "moneyHubToolLedgerHint": "المحافظ وأرصدتها وآخر الحركات",
+  "@moneyHubToolLedgerHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolTransactions": "الحركات",
+  "@moneyHubToolTransactions": {
+    "description": "Money tool: every transaction"
+  },
+  "moneyHubToolTransactionsHint": "كل الحركات مع البحث والتصفية",
+  "@moneyHubToolTransactionsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBudget": "الميزانية",
+  "@moneyHubToolBudget": {
+    "description": "Money tool: the nested budget"
+  },
+  "moneyHubToolBudgetHint": "الخطة المتداخلة والإنفاق مقابلها",
+  "@moneyHubToolBudgetHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolJars": "الحصّالات",
+  "@moneyHubToolJars": {
+    "description": "Money tool: savings jars"
+  },
+  "moneyHubToolJarsHint": "الأهداف والمواعيد والإيداعات",
+  "@moneyHubToolJarsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolDebts": "الديون",
+  "@moneyHubToolDebts": {
+    "description": "Money tool: debts (I owe / owed to me)"
+  },
+  "moneyHubToolDebtsHint": "ما عليك وما لك، ومواعيد السداد",
+  "@moneyHubToolDebtsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubToolBills": "الالتزامات",
+  "@moneyHubToolBills": {
+    "description": "Money tool: recurring obligations"
+  },
+  "moneyHubToolBillsHint": "الالتزامات المتكررة؛ «دُفع» ينقل الموعد التالي",
+  "@moneyHubToolBillsHint": {
+    "description": "Money tool hint (screen readers)"
+  },
+  "moneyHubMoonOpenWallet": "افتح المحفظة",
+  "@moneyHubMoonOpenWallet": {
+    "description": "Wallet moon sheet: button opening the wallet's screen"
+  },
+  "moneyHubSettingsSection": "المال",
+  "@moneyHubSettingsSection": {
+    "description": "Settings: section of the money preferences"
+  },
+  "moneyHubSettingsSectionHint": "العملات وأسابيع الشهر وبداية الأسبوع وتذكير المستحقات",
+  "@moneyHubSettingsSectionHint": {
+    "description": "Settings: subtitle of the money section"
+  },
+  "moneyHubSettingsCurrencies": "العملة الأساسية والأسعار",
+  "@moneyHubSettingsCurrencies": {
+    "description": "Settings › Money: entry opening the currencies and manual exchange rates"
+  },
+  "moneyHubSettingsCurrencyCount": "{count, plural, =1{عملة واحدة} =2{عملتان} few{{n} عملات} many{{n} عملة} other{{n} عملة}}",
+  "@moneyHubSettingsCurrencyCount": {
+    "description": "Settings › Money: how many currencies are set up",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeeks": "أسابيع الشهر",
+  "@moneyHubSettingsWeeks": {
+    "description": "Settings › Money: weeks per month (weekly ↔ monthly budget conversion)"
+  },
+  "moneyHubSettingsWeeksSummary": "{weeks} · للتحويل بين الأسبوعي والشهري",
+  "@moneyHubSettingsWeeksSummary": {
+    "description": "Settings › Money: the weeks-per-month value",
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsWeekStart": "بداية الأسبوع",
+  "@moneyHubSettingsWeekStart": {
+    "description": "Settings › Money: first day of the week in weekly budgets and reports"
+  },
+  "moneyHubSettingsWeekStartHint": "للبنود الأسبوعية في الميزانية وتقارير الأسبوع في الدفتر",
+  "@moneyHubSettingsWeekStartHint": {
+    "description": "Settings › Money: hint under the week start choice"
+  },
+  "moneyHubWeekSaturday": "السبت",
+  "@moneyHubWeekSaturday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekSunday": "الأحد",
+  "@moneyHubWeekSunday": {
+    "description": "Week start choice"
+  },
+  "moneyHubWeekMonday": "الإثنين",
+  "@moneyHubWeekMonday": {
+    "description": "Week start choice"
+  },
+  "moneyHubSettingsReminders": "تذكير المستحقات",
+  "@moneyHubSettingsReminders": {
+    "description": "Settings › Money: entry opening the debt and bill due reminder options"
+  },
+  "moneyHubSettingsRemindersOff": "متوقف",
+  "@moneyHubSettingsRemindersOff": {
+    "description": "Settings › Money: due reminders switched off"
+  },
+  "moneyHubSettingsRemindersOnDay": "في يوم الاستحقاق",
+  "@moneyHubSettingsRemindersOnDay": {
+    "description": "Settings › Money: reminders only on the due day"
+  },
+  "moneyHubSettingsRemindersBoth": "{lead} وفي يومه",
+  "@moneyHubSettingsRemindersBoth": {
+    "description": "Settings › Money: an early reminder and one on the due day",
+    "placeholders": {
+      "lead": {
+        "type": "String"
+      }
+    }
+  },
+  "moneyHubSettingsRemindersAt": "{when} · الساعة {time}",
+  "@moneyHubSettingsRemindersAt": {
+    "description": "Settings › Money: when the due reminders arrive",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "workTitle": "العمل",
   "@workTitle": {
     "description": "Work planet screen title"
@@ -16902,5 +17146,3012 @@
       }
     }
   },
-  "bodyNotifyHint": "يحتاج إذن الإشعارات على الهاتف."
+  "bodyNotifyHint": "يحتاج إذن الإشعارات على الهاتف.",
+  "cmodTitle": "متتبّعات وقوائم",
+  "@cmodTitle": {
+    "description": "Custom modules screen title"
+  },
+  "cmodNewModule": "وحدة جديدة",
+  "cmodModulesCount": "{count, plural, =0{لا وحدات بعد} =1{وحدة واحدة} =2{وحدتان} few{{count} وحدات} many{{count} وحدة} other{{count} وحدة}}",
+  "@cmodModulesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodLoggedToday": "{count, plural, =0{لم تسجّل شيئًا اليوم بعد} =1{إدخال واحد اليوم} =2{إدخالان اليوم} few{{count} إدخالات اليوم} many{{count} إدخالًا اليوم} other{{count} إدخال اليوم}}",
+  "@cmodLoggedToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEntriesCount": "{count, plural, =0{لا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}",
+  "@cmodEntriesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsCount": "{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}",
+  "@cmodItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsProgress": "{done} من {total} منجز",
+  "@cmodItemsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodOpenItems": "{count, plural, =0{لا شيء متبقٍّ} =1{عنصر واحد متبقٍّ} =2{عنصران متبقيان} few{{count} عناصر متبقية} many{{count} عنصرًا متبقيًا} other{{count} عنصر متبقٍّ}}",
+  "@cmodOpenItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEmptyTitle": "اصنع متتبّعك الأول",
+  "cmodEmptyBody": "تتبّع ما يهمّك بحقولك أنت: سجلّ قراءة، أذكار بعد الصلاة، قائمة عادات… ويظهر كل ذلك في كواكبك.",
+  "cmodEmptyAction": "أنشئ وحدة",
+  "cmodArchivedSection": "المؤرشفة",
+  "cmodKindTracker": "متتبّع",
+  "cmodKindList": "قائمة",
+  "cmodKindTrackerHint": "قيم تسجّلها مع الأيام، برسوم بيانية",
+  "cmodKindListHint": "عناصر تشطبها وترتّبها",
+  "cmodLastToday": "آخر إدخال اليوم",
+  "cmodLastYesterday": "آخر إدخال أمس",
+  "cmodLastDaysAgo": "{count, plural, =1{آخر إدخال قبل يوم} =2{آخر إدخال قبل يومين} few{آخر إدخال قبل {count} أيام} many{آخر إدخال قبل {count} يومًا} other{آخر إدخال قبل {count} يوم}}",
+  "@cmodLastDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodNoEntries": "لا إدخالات بعد",
+  "cmodStreakBadge": "سلسلة {count}",
+  "@cmodStreakBadge": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodActionArchive": "أرشفة",
+  "cmodActionUnarchive": "إعادة من الأرشيف",
+  "cmodActionAddEntry": "إدخال جديد",
+  "cmodActionOpen": "فتح",
+  "cmodActionExport": "مشاركة كملف CSV",
+  "cmodActionUncheck": "إعادة فتح",
+  "cmodActionCheck": "إنجاز",
+  "cmodToastArchived": "أُرشفت «{name}»",
+  "@cmodToastArchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnarchived": "عادت «{name}» من الأرشيف",
+  "@cmodToastUnarchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDeleted": "حُذفت «{name}»",
+  "@cmodToastDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDuplicated": "نُسخت «{name}»",
+  "@cmodToastDuplicated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastLogged": "سُجّل في «{name}»",
+  "@cmodToastLogged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnchecked": "أُلغي تسجيل اليوم",
+  "cmodToastEntryDeleted": "حُذف الإدخال",
+  "cmodToastEntryDuplicated": "نُسخ الإدخال",
+  "cmodToastItemDone": "أُنجز العنصر",
+  "cmodToastItemReopened": "أُعيد فتح العنصر",
+  "cmodToastCleared": "مُسحت العناصر المنجزة",
+  "cmodToastSaved": "حُفظت «{name}»",
+  "@cmodToastSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastReminderDeleted": "حُذف التذكير",
+  "cmodToastReminderAdded": "أُضيف التذكير",
+  "cmodQuickDone": "تمّ اليوم",
+  "cmodQuickDoneHint": "سجّل إنجاز اليوم بلمسة",
+  "cmodQuickChecked": "أُنجز اليوم",
+  "cmodQuickCheckedHint": "المس لإلغاء تسجيل اليوم",
+  "cmodQuickAddOne": "سجّل مرّة",
+  "cmodQuickRate": "قيّم اليوم",
+  "cmodRateStars": "{count, plural, =1{نجمة واحدة} =2{نجمتان} few{{count} نجوم} many{{count} نجمة} other{{count} نجمة}}",
+  "@cmodRateStars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodBuilderNewTitle": "وحدة جديدة",
+  "cmodBuilderEditTitle": "تعديل الوحدة",
+  "cmodSectionBasics": "الأساسيات",
+  "cmodName": "الاسم",
+  "cmodNameHint": "مثال: سجلّ القراءة",
+  "cmodKind": "النوع",
+  "cmodIcon": "الأيقونة",
+  "cmodColor": "اللون",
+  "cmodPlanet": "الكوكب",
+  "cmodPlanetNone": "بلا كوكب",
+  "cmodPlanetHint": "كل إدخال يُنعش هذا الكوكب في المدار، ويدور حوله قمرًا",
+  "cmodWindow": "وقت الصلاة",
+  "cmodWindowHint": "متى تتوقّع أن تسجّل عادةً",
+  "cmodSectionFields": "الحقول",
+  "cmodAddField": "أضف حقلًا",
+  "cmodFieldsEmptyTracker": "بلا حقول يصبح المتتبّع عدّادًا بلمسة واحدة",
+  "cmodFieldsEmptyList": "أضف حقلًا واحدًا على الأقل، كاسم العنصر",
+  "cmodHiddenFields": "حقول مخفية",
+  "cmodHiddenFieldsHint": "أُزيلت من النموذج، وبياناتها القديمة محفوظة",
+  "cmodRestoreField": "إظهار",
+  "cmodSectionChart": "الرسم البياني",
+  "cmodChartField": "ما يُرسم",
+  "cmodChartEntries": "عدد الإدخالات",
+  "cmodChartStyle": "الشكل",
+  "cmodChartRange": "المدة",
+  "cmodChartLine": "خط",
+  "cmodChartBar": "أعمدة",
+  "cmodChartHeat": "تقويم",
+  "cmodChartStreak": "سلسلة",
+  "cmodChartEmpty": "لا بيانات في هذه المدة بعد",
+  "cmodRangeDays": "{count, plural, =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@cmodRangeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodSave": "حفظ",
+  "cmodCreate": "إنشاء",
+  "cmodCancel": "إلغاء",
+  "cmodDiscardTitle": "تجاهل التغييرات؟",
+  "cmodDiscardBody": "لم تُحفظ تعديلاتك على هذه الوحدة.",
+  "cmodDiscard": "تجاهل",
+  "cmodKeepEditing": "متابعة التعديل",
+  "cmodPreviewUntitled": "وحدة بلا اسم",
+  "cmodIssueNameMissing": "اكتب اسمًا للوحدة",
+  "cmodIssueNameTooLong": "الاسم طويل جدًا",
+  "cmodIssueNoFields": "أضف حقلًا واحدًا على الأقل",
+  "cmodIssueTooManyFields": "الحد الأقصى {max} حقلًا",
+  "@cmodIssueTooManyFields": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodIssueLabelMissing": "حقل بلا اسم",
+  "cmodIssueLabelDuplicate": "اسم الحقل مكرّر",
+  "cmodIssueNoOptions": "أضف خيارًا واحدًا على الأقل",
+  "cmodIssueOptionLabelMissing": "خيار بلا اسم",
+  "cmodIssueOptionDuplicate": "خيار مكرّر",
+  "cmodIssueRangeInverted": "الحد الأدنى أكبر من الأعلى",
+  "cmodIssueCurrencyCode": "رمز العملة غير صالح",
+  "cmodMigrationTitle": "قبل الحفظ",
+  "cmodMigrationBlockedTitle": "هذا التغيير سيضيّع بيانات",
+  "cmodMigrationBlockedBody": "لم يُحفظ شيء. أعد النوع كما كان، أو أضف حقلًا جديدًا بالنوع الذي تريده.",
+  "cmodMigrationOk": "حسنًا",
+  "cmodMigTypeBlocked": "«{field}»: {entries} لا تصلح بنوع «{type}»",
+  "@cmodMigTypeBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigRatingBlocked": "«{field}»: {entries} فيها نجوم أكثر من المقياس الجديد",
+  "@cmodMigRatingBlocked": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigFieldHidden": "«{field}» سيُخفى، وتبقى قيمه في {entries}",
+  "@cmodMigFieldHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOptionHidden": "الخيارات المحذوفة من «{field}» والمستخدمة ستُخفى ولن تُحذف",
+  "@cmodMigOptionHidden": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigConverted": "قيم «{field}» في {entries} ستتحوّل إلى «{type}»",
+  "@cmodMigConverted": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOutOfRange": "{entries} في «{field}» خارج الحدود الجديدة وستبقى كما هي",
+  "@cmodMigOutOfRange": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigNewlyRequired": "{entries} بلا قيمة لـ«{field}» الذي صار مطلوبًا",
+  "@cmodMigNewlyRequired": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodTypeText": "نص",
+  "cmodTypeNumber": "رقم",
+  "cmodTypeDate": "تاريخ",
+  "cmodTypeTime": "وقت",
+  "cmodTypeCheckbox": "خانة إنجاز",
+  "cmodTypeSingle": "اختيار واحد",
+  "cmodTypeMulti": "اختيارات متعددة",
+  "cmodTypeRating": "تقييم بالنجوم",
+  "cmodTypeCurrency": "مبلغ",
+  "cmodTypeTextHint": "ملاحظة، عنوان كتاب…",
+  "cmodTypeNumberHint": "صفحات، دقائق، مرّات…",
+  "cmodTypeDateHint": "موعد أو مناسبة",
+  "cmodTypeTimeHint": "وقت النوم، وقت البدء…",
+  "cmodTypeCheckboxHint": "تمّ أو لم يتمّ",
+  "cmodTypeSingleHint": "خيار واحد من قائمتك",
+  "cmodTypeMultiHint": "عدّة خيارات من قائمتك",
+  "cmodTypeRatingHint": "من نجمتين إلى عشر",
+  "cmodTypeCurrencyHint": "مبلغ بعملة تختارها",
+  "cmodPickType": "نوع الحقل",
+  "cmodFieldNew": "حقل جديد",
+  "cmodFieldEdit": "تعديل الحقل",
+  "cmodFieldLabel": "اسم الحقل",
+  "cmodFieldLabelHint": "مثال: الصفحات",
+  "cmodFieldRequired": "مطلوب",
+  "cmodFieldRequiredHint": "لا يُحفظ الإدخال دونه",
+  "cmodFieldUnit": "الوحدة",
+  "cmodFieldUnitHint": "صفحة، دقيقة، كغ…",
+  "cmodFieldMin": "الحد الأدنى",
+  "cmodFieldMax": "الحد الأعلى",
+  "cmodFieldNoLimit": "بلا حد",
+  "cmodFieldDecimals": "الخانات العشرية",
+  "cmodFieldScale": "المقياس",
+  "cmodFieldCurrency": "العملة",
+  "cmodFieldOptions": "الخيارات",
+  "cmodAddOption": "أضف خيارًا",
+  "cmodOptionHint": "اسم الخيار",
+  "cmodRemoveOption": "احذف الخيار",
+  "cmodFieldMultiline": "نص طويل",
+  "cmodFieldMultilineHint": "يتّسع لعدّة أسطر",
+  "cmodFieldDelete": "احذف الحقل",
+  "cmodFieldCopyLabel": "{label} (نسخة)",
+  "@cmodFieldCopyLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldTypeNote": "إن غيّرت النوع تتحوّل القيم القديمة حين يمكن ذلك، وإلا لا يُحفظ التغيير.",
+  "cmodFieldOptionsCount": "{count, plural, =0{بلا خيارات} =1{خيار واحد} =2{خياران} few{{count} خيارات} many{{count} خيارًا} other{{count} خيار}}",
+  "@cmodFieldOptionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodFieldRange": "{min} – {max}",
+  "@cmodFieldRange": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtLeast": "من {min}",
+  "@cmodFieldAtLeast": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtMost": "حتى {max}",
+  "@cmodFieldAtMost": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDeleted": "حُذف «{name}» من النموذج",
+  "@cmodFieldDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDuplicated": "نُسخ الحقل",
+  "cmodGalleryTitle": "ابدأ وحدة",
+  "cmodGallerySubtitle": "من الصفر أو من قالب، وكل شيء قابل للتعديل",
+  "cmodBlankTracker": "متتبّع فارغ",
+  "cmodBlankList": "قائمة فارغة",
+  "cmodTemplatesHeader": "قوالب للبدء",
+  "cmodTplReadingLog": "سجلّ القراءة",
+  "cmodTplReadingLogDesc": "الكتاب والصفحات وتقييمك",
+  "cmodTplDhikr": "أذكار بعد الصلاة",
+  "cmodTplDhikrDesc": "كم مرّة ذكرت الله، وبعد أي صلاة",
+  "cmodTplHabit": "عادة يومية",
+  "cmodTplHabitDesc": "لمسة واحدة كل يوم، وسلسلة تكبر",
+  "cmodTplHabitList": "قائمة عادات",
+  "cmodTplHabitListDesc": "عادات تريد بناءها وكم تتكرّر",
+  "cmodTplSleep": "سجلّ النوم",
+  "cmodTplSleepDesc": "النوم والاستيقاظ والساعات والجودة",
+  "cmodTplGifts": "أفكار هدايا",
+  "cmodTplGiftsDesc": "الفكرة ولمن والميزانية والمناسبة",
+  "cmodTplBook": "الكتاب",
+  "cmodTplPages": "الصفحات",
+  "cmodTplRating": "التقييم",
+  "cmodTplUnitPages": "صفحة",
+  "cmodTplAfterPrayer": "بعد صلاة",
+  "cmodTplCount": "العدد",
+  "cmodTplUnitTimes": "مرّة",
+  "cmodTplDone": "تمّ",
+  "cmodTplNote": "ملاحظة",
+  "cmodTplHabitItem": "العادة",
+  "cmodTplFrequency": "التكرار",
+  "cmodTplDaily": "يوميًا",
+  "cmodTplWeekly": "أسبوعيًا",
+  "cmodTplMonthly": "شهريًا",
+  "cmodTplBedtime": "وقت النوم",
+  "cmodTplWake": "وقت الاستيقاظ",
+  "cmodTplHours": "ساعات النوم",
+  "cmodTplUnitHours": "ساعة",
+  "cmodTplQuality": "الجودة",
+  "cmodTplIdea": "الفكرة",
+  "cmodTplFor": "لمن",
+  "cmodTplBudget": "الميزانية",
+  "cmodTplOccasion": "المناسبة",
+  "cmodTplNotes": "ملاحظات",
+  "cmodAddEntry": "إدخال جديد",
+  "cmodAddItem": "عنصر جديد",
+  "cmodEntriesSection": "الإدخالات",
+  "cmodItemsSection": "العناصر",
+  "cmodDoneSection": "المنجزة",
+  "cmodClearDone": "امسح المنجزة",
+  "cmodToday": "اليوم",
+  "cmodYesterday": "أمس",
+  "cmodEntriesEmpty": "لا إدخالات بعد. أول إدخال يبدأ الحكاية.",
+  "cmodItemsEmpty": "القائمة فارغة. أضف أول عنصر.",
+  "cmodAllDone": "أنجزت كل شيء، ما شاء الله",
+  "cmodStatStreak": "السلسلة",
+  "cmodStatBest": "الأفضل",
+  "cmodStatTotal": "المجموع",
+  "cmodStatAverage": "المتوسط",
+  "cmodStatActive": "أيام نشطة",
+  "cmodStatEntries": "الإدخالات",
+  "cmodStatRate": "نسبة الإنجاز",
+  "cmodDays": "{count, plural, =0{٠ يوم} =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@cmodDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodReminders": "التذكيرات",
+  "cmodAddReminder": "أضف تذكيرًا",
+  "cmodRemindersEmpty": "ذكّرني بعد صلاة أو في وقت أحدّده",
+  "cmodReminderPaused": "متوقّف",
+  "cmodReminderToggle": "تشغيل التذكير",
+  "cmodModuleMenu": "خيارات الوحدة",
+  "cmodHiddenValue": "{label} (مخفي)",
+  "@cmodHiddenValue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodNotifyGroup": "المتتبّعات والقوائم",
+  "cmodNotifyChannel": "تذكيرات المتتبّعات والقوائم",
+  "cmodNotifyChannelDescription": "تذكيرات لطيفة لتسجيل متتبّعاتك ومراجعة قوائمك",
+  "cmodNotifyBodyTracker": "حان وقت التسجيل",
+  "cmodNotifyBodyList": "ألقِ نظرة على قائمتك",
+  "cmodEntryNew": "إدخال جديد",
+  "cmodEntryEdit": "تعديل الإدخال",
+  "cmodItemNew": "عنصر جديد",
+  "cmodItemEdit": "تعديل العنصر",
+  "cmodEntryWhen": "متى",
+  "cmodEntryDone": "منجز",
+  "cmodEntryCounter": "هذه الوحدة عدّاد: الحفظ يسجّل مرّة واحدة.",
+  "cmodErrRequired": "هذا الحقل مطلوب",
+  "cmodErrNumber": "اكتب رقمًا",
+  "cmodErrWhole": "رقم صحيح فقط",
+  "cmodErrPrecise": "{count} خانات عشرية على الأكثر",
+  "@cmodErrPrecise": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMin": "لا يقلّ عن {value}",
+  "@cmodErrMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMax": "لا يزيد على {value}",
+  "@cmodErrMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrDate": "تاريخ غير صالح",
+  "cmodErrTime": "وقت غير صالح",
+  "cmodErrOption": "اختر من القائمة",
+  "cmodErrScale": "خارج المقياس",
+  "cmodErrTooLong": "النص طويل جدًا",
+  "cmodPickDate": "اختر تاريخًا",
+  "cmodPickTime": "اختر وقتًا",
+  "cmodClear": "مسح",
+  "cmodYes": "نعم",
+  "cmodNo": "لا",
+  "cmodChecked": "تمّ",
+  "cmodUnchecked": "لم يتمّ",
+  "cmodCardTitle": "متتبّعاتك هنا",
+  "cmodCardSeeAll": "عرض الكل",
+  "cmodCardEmpty": "أنشئ متتبّعًا لهذا الكوكب",
+  "cmodCardEmptyHint": "عدّاد، أو سجلّ، أو قائمة: بحقولك أنت",
+  "cmodExportDate": "التاريخ",
+  "cmodExportTime": "الوقت",
+  "cmodExportDone": "منجز",
+  "cmodExportEntries": "الإدخالات",
+  "cmodExportLastEntry": "آخر إدخال",
+  "cmodExportOpen": "متبقٍّ",
+  "cmodExportLastDays": "{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}",
+  "@cmodExportLastDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportActiveDays": "{count, plural, =0{لا أيام نشطة} =1{يوم نشط واحد} =2{يومان نشطان} few{{count} أيام نشطة} many{{count} يومًا نشطًا} other{{count} يوم نشط}}",
+  "@cmodExportActiveDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportTotal": "المجموع {value}",
+  "@cmodExportTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportAverage": "المتوسط {value}",
+  "@cmodExportAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportStreak": "السلسلة {current} (الأفضل {best})",
+  "@cmodExportStreak": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "best": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportHidden": "مخفي",
+  "cinemaTitle": "سينما مدار",
+  "@cinemaTitle": {
+    "description": "Name of the games hub"
+  },
+  "cinemaHallSubtitle": "ألعاب أصلية بروح السينما الكلاسيكية",
+  "cinemaFeatures": "الأفلام الطويلة",
+  "@cinemaFeatures": {
+    "description": "Tier 1 games section"
+  },
+  "cinemaShorts": "الأفلام القصيرة",
+  "@cinemaShorts": {
+    "description": "Tier 2 games section"
+  },
+  "cinemaComingSoon": "قريبًا",
+  "cinemaPlay": "إلى العرض",
+  "cinemaGameViewLabel": "شاشة اللعبة",
+  "cinemaPause": "إيقاف مؤقت",
+  "cinemaIntermission": "استراحة",
+  "@cinemaIntermission": {
+    "description": "Pause card title"
+  },
+  "cinemaResume": "متابعة العرض",
+  "cinemaRestart": "من البداية",
+  "cinemaLeave": "مغادرة القاعة",
+  "cinemaPlayAgain": "عرض آخر",
+  "cinemaTheEnd": "النهاية",
+  "cinemaGameOver": "انتهى العرض",
+  "@cinemaGameOver": {
+    "description": "Game over card"
+  },
+  "cinemaScoreLine": "النتيجة: {score}",
+  "@cinemaScoreLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaBestLine": "أفضل نتيجة: {score}",
+  "@cinemaBestLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaEraSilent": "العشرينيات الصامتة",
+  "cinemaEraRubberHose": "كرتون الثلاثينيات",
+  "cinemaEraNoir": "نوار الأربعينيات",
+  "cinemaEraTechnicolor": "ألوان الخمسينيات",
+  "cinemaEraGrindhouse": "سينما السبعينيات",
+  "cinemaEraVhs": "فيديو الثمانينيات",
+  "cinemaDemoTitle": "بروفة",
+  "@cinemaDemoTitle": {
+    "description": "Engine demo scene"
+  },
+  "cinemaDemoTagline": "مشهد تجريبي لمحرّك بكرة الفيلم",
+  "cinemaDemoOpening": "المشهد الأول",
+  "cinemaDemoOpeningSubtitle": "المس الشاشة لتقفز فوق البراميل!",
+  "cinemaFlappyOrbitTitle": "رفرفة المدار",
+  "cinemaFlappyOrbitTagline": "رفرف بين الكواكب على أنغام السوينغ",
+  "cinemaFlappyOrbitHomage": "تحية لرسوم الخرطوم المطاطي في الثلاثينيات",
+  "cinemaMetropolisTitle": "آلة المتروبوليس",
+  "cinemaMetropolisTagline": "واجه الآلات العملاقة واحدة تلو الأخرى",
+  "cinemaMetropolisHomage": "تحية لفيلم «متروبوليس» الصامت من العشرينيات",
+  "cinemaCaravanTitle": "سباق القافلة",
+  "cinemaCaravanTagline": "اعبر الكثبان بألوان التكنيكولور",
+  "cinemaCaravanHomage": "تحية لملاحم الصحراء في الخمسينيات",
+  "cinemaNoirTitle": "أسطح النوار",
+  "cinemaNoirTagline": "طارد الظلال فوق أسطح المدينة الممطرة",
+  "cinemaNoirHomage": "تحية لأفلام النوار في الأربعينيات",
+  "cinemaNeonSoukTitle": "متسابق سوق النيون",
+  "cinemaNeonSoukTagline": "انطلق عبر سوق من أضواء النيون",
+  "cinemaNeonSoukHomage": "تحية لأفلام الخيال العلمي على أشرطة الفيديو",
+  "cinemaSavedGames": "ألعابي المحفوظة",
+  "cinemaSavedGamesEmpty": "أضف لعبة ويب برابطها لتلعبها هنا بملء الشاشة.",
+  "cinemaSavedGamesNote": "تُفتح الألعاب من رابطها الأصلي، ولا يُنسخ شيء منها داخل التطبيق.",
+  "cinemaAddGame": "إضافة لعبة",
+  "cinemaGameName": "اسم اللعبة",
+  "cinemaGameUrl": "رابط اللعبة",
+  "cinemaInvalidUrl": "أدخل رابطًا صحيحًا يبدأ بـ https://",
+  "cinemaRemoveGame": "إزالة",
+  "cinemaOpenGameFailed": "تعذّر فتح الرابط",
+  "cinemaSave": "حفظ",
+  "cinemaCancel": "إلغاء",
+  "cinemaFxTestCard": "بطاقة المعايرة",
+  "@cinemaFxTestCard": {
+    "description": "Projector check card that shows the film look of an era"
+  },
+  "cinemaFxFilmLook": "مظهر الفيلم",
+  "@cinemaFxFilmLook": {
+    "description": "Setting: strength and quality of the old-film effect in Madar Cinema"
+  },
+  "cinemaFxQualityLowPower": "توفير الطاقة",
+  "@cinemaFxQualityLowPower": {
+    "description": "Film look quality: cheapest"
+  },
+  "cinemaFxQualityBalanced": "متوازن",
+  "@cinemaFxQualityBalanced": {
+    "description": "Film look quality: default"
+  },
+  "cinemaFxQualityFull": "أعلى دقة",
+  "@cinemaFxQualityFull": {
+    "description": "Film look quality: best"
+  },
+  "cinemaFxReelLabel": "بكرة",
+  "@cinemaFxReelLabel": {
+    "description": "Label on a film-leader card before a reel number"
+  },
+  "cinemaRigCast": "طاقم التمثيل",
+  "@cinemaRigCast": {
+    "description": "Heading of the list of original Madar Cinema characters"
+  },
+  "cinemaRigNujaym": "نُجيم",
+  "@cinemaRigNujaym": {
+    "description": "Name of the star-bird hero of Flappy Orbit (means 'little star')"
+  },
+  "cinemaRigNujaymRole": "طائر النجمة الشجاع، بطل «رفرفة المدار»",
+  "cinemaRigZunbruk": "البارون زُنبُرك",
+  "@cinemaRigZunbruk": {
+    "description": "Name of the clockwork boss of Metropolis Machine (zunbruk = mainspring)"
+  },
+  "cinemaRigZunbrukRole": "رئيس العمّال الآلي في «آلة المتروبوليس»",
+  "cinemaRigZajil": "زاجل",
+  "@cinemaRigZajil": {
+    "description": "Name of the camel courier of Caravan Dash (means 'messenger')"
+  },
+  "cinemaRigZajilRole": "الجمل ساعي البريد في «سباق القافلة»",
+  "cinemaRigMishmish": "المفتش مِشمِش",
+  "@cinemaRigMishmish": {
+    "description": "Name of the detective cat of Noir Rooftops"
+  },
+  "cinemaRigMishmishRole": "القط المحقق ذو المعطف في «أسطح النوار»",
+  "cinemaRigSarab": "سراب",
+  "@cinemaRigSarab": {
+    "description": "Name of the hover-bike rider of Neon Souk Racer (means 'mirage')"
+  },
+  "cinemaRigSarabRole": "راكبة الدراجة الطائرة في «متسابق سوق النيون»",
+  "cinemaRigBean": "حبّة",
+  "@cinemaRigBean": {
+    "description": "Name of the bean-shaped hero of the engine demo"
+  },
+  "cinemaRigBeanRole": "نجم البروفة، حبّة فاصولياء بقفازين أبيضين",
+  "dataCentreTitle": "بياناتك",
+  "@dataCentreTitle": {
+    "description": "Data centre screen title"
+  },
+  "dataHeroTitle": "بياناتك تبقى معك",
+  "dataHeroBody": "يحفظ مَدار كل شيء مشفّرًا على هذا الهاتف، ولا يرفع شيئًا إلى أي مكان. لا يغادر ملفٌّ التطبيقَ إلا حين تشاركه أو تحفظه بنفسك.",
+  "dataStatRecords": "السجلات",
+  "dataStatLastBackup": "آخر نسخة احتياطية",
+  "dataLastBackupNever": "لم تُنشأ بعد",
+  "dataLastBackupToday": "اليوم",
+  "dataLastBackupDaysAgo": "{days, plural, =1{أمس} =2{قبل يومين} few{قبل {days} أيام} many{قبل {days} يومًا} other{قبل {days} يوم}}",
+  "@dataLastBackupDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataBackupSection": "النسخ الاحتياطي",
+  "dataBackupSectionHint": "ملف واحد مشفّر لنقل بياناتك أو حفظها بأمان",
+  "dataBackupCreateTitle": "نسخة احتياطية مشفّرة",
+  "dataBackupCreateBody": "ملف واحد يُقفَل بعبارة مرور لا يعرفها أحد غيرك. احتفظ به في مكان آمن لتنقل بياناتك إلى هاتف جديد.",
+  "dataBackupCreateAction": "إنشاء نسخة احتياطية",
+  "dataRestoreTitle": "الاستعادة من نسخة احتياطية",
+  "dataRestoreBody": "تستبدل كل ما في مَدار بمحتوى ملف النسخة. نحفظ أولًا نسخة أمان من بياناتك الحالية على الهاتف.",
+  "dataRestoreAction": "اختيار ملف النسخة",
+  "dataSafetyCopiesLine": "{count, plural, =1{نسخة أمان واحدة على الهاتف} =2{نسختا أمان على الهاتف} few{{count} نسخ أمان على الهاتف} many{{count} نسخة أمان على الهاتف} other{{count} نسخة أمان على الهاتف}} · آخرها {date}",
+  "@dataSafetyCopiesLine": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataExportSection": "التصدير",
+  "dataExportSectionHint": "نسخ مقروءة لبياناتك – غير مشفّرة",
+  "dataExportSummaryTitle": "ملخّص جاهز للذكاء الاصطناعي",
+  "dataExportSummaryBody": "نظرة موجزة بصيغة Markdown تراجعها قسمًا قسمًا قبل مشاركتها.",
+  "dataExportCsvTitle": "جداول (CSV)",
+  "dataExportCsvBody": "التحاليل والمعاملات والألم والمزاج، لتفتحها في برامج الجداول.",
+  "dataExportJsonTitle": "كل البيانات (JSON)",
+  "dataExportJsonBody": "كل السجلات في ملف واحد، لأرشيفك الخاص أو لتطبيقات أخرى.",
+  "dataExportPlainWarning": "ملفات التصدير غير مشفّرة: من يحصل عليها يستطيع قراءتها. شاركها مع من تثق به فقط.",
+  "dataImportSection": "الاستيراد",
+  "dataImportTitle": "الاستيراد من نموذج مَدار الأول",
+  "dataImportBody": "أدخل البيانات التي صدّرتها من النسخة الأولى من مَدار.",
+  "dataFooter": "لا يرفع مَدار بياناتك إلى أي خادم. أنت وحدك تقرّر أين تذهب ملفاتك.",
+  "dataAreaOther": "الإعدادات والسجلّ",
+  "dataShareAction": "مشاركة",
+  "dataSaveAction": "حفظ في…",
+  "dataCopyAction": "نسخ",
+  "dataDoneAction": "تم",
+  "dataCancelAction": "إلغاء",
+  "dataTryAgainAction": "حاول مجددًا",
+  "dataFileReadyTitle": "ملفّك جاهز",
+  "dataFileReadySubtitle": "اختر أين يذهب – لا شيء يُرسَل تلقائيًا",
+  "dataFileEncryptedNote": "مشفّر بعبارة المرور. لا يُفتح إلا بها – احتفظ بها بعيدًا عن الملف.",
+  "dataFilePlainNote": "غير مشفّر: من يحصل على هذا الملف يستطيع قراءته.",
+  "dataFileShared": "أُرسل إلى قائمة المشاركة.",
+  "dataFileSaved": "حُفظ في المكان الذي اخترته.",
+  "dataFileSendFailed": "تعذّر ذلك. لم يُرسَل شيء – حاول مجددًا.",
+  "dataExportFailed": "تعذّر تجهيز الملف. بياناتك لم تتغيّر.",
+  "dataRecordsCount": "{count, plural, =0{لا سجلات} =1{سجل واحد} =2{سجلّان} few{{count} سجلات} many{{count} سجلًّا} other{{count} سجل}}",
+  "@dataRecordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSizeBytes": "{size} بايت",
+  "@dataSizeBytes": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeKb": "{size} ك.ب",
+  "@dataSizeKb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSizeMb": "{size} م.ب",
+  "@dataSizeMb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "dataBackupSheetTitle": "نسخة احتياطية مشفّرة",
+  "dataBackupSheetSubtitle": "AES-256 · تُشتقّ المفاتيح بـArgon2id على هاتفك",
+  "dataBackupSheetBody": "اختر عبارة مرور تقفل ملف النسخة. لا يحفظها مَدار ولا يستطيع استرجاعها، فاكتبها في مكان تثق به.",
+  "dataPassphraseLabel": "عبارة المرور",
+  "dataPassphraseConfirmLabel": "أعد كتابة عبارة المرور",
+  "dataPassphraseMismatch": "العبارتان غير متطابقتين.",
+  "dataPassphraseShow": "إظهار عبارة المرور",
+  "dataPassphraseHide": "إخفاء عبارة المرور",
+  "dataPassphraseNeverStored": "لا تُحفظ عبارة المرور في أي مكان. بدونها لا يمكن فتح النسخة – ولا حتى بواسطتنا.",
+  "dataStrengthLabel": "القوة",
+  "dataStrengthEmpty": "—",
+  "dataStrengthVeryWeak": "ضعيفة جدًا",
+  "dataStrengthWeak": "ضعيفة",
+  "dataStrengthFair": "مقبولة",
+  "dataStrengthStrong": "قوية",
+  "dataStrengthVeryStrong": "قوية جدًا",
+  "dataStrengthHintShort": "استخدم {min} أحرف على الأقل – جملة قصيرة تفي بالغرض.",
+  "@dataStrengthHintShort": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "dataStrengthHintCommon": "هذه عبارة شائعة يسهل تخمينها.",
+  "dataStrengthHintPattern": "تجنّب التكرار والتسلسلات مثل 1234 أو aaaa.",
+  "dataStrengthHintDigits": "الأرقام وحدها سهلة التخمين؛ أضف كلمات.",
+  "dataStrengthHintWords": "جيدة. كلمة أو كلمتان إضافيتان تجعلانها أقوى بكثير.",
+  "dataBackupWorking": "نقفل بياناتك…",
+  "dataBackupWorkingHint": "يستغرق هذا بضع ثوانٍ عن قصد، ليصعب تخمين عبارة المرور.",
+  "dataBackupReadyTitle": "النسخة الاحتياطية جاهزة",
+  "dataBackupReadySubtitle": "شاركها أو احفظها في مكان آمن",
+  "dataBackupReadyHint": "احفظ الملف وعبارة المرور في مكانين مختلفين. ستحتاج إلى كليهما للاستعادة.",
+  "dataBackupShareSubject": "نسخة مَدار الاحتياطية",
+  "dataBackupFailed": "تعذّر إنشاء النسخة. بياناتك كما هي – حاول مجددًا.",
+  "dataBackupMadeOn": "أُنشئت في {date}",
+  "@dataBackupMadeOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvSheetTitle": "تصدير جدول",
+  "dataCsvSheetSubtitle": "ملف CSV يُفتح في برامج الجداول",
+  "dataCsvWhat": "ماذا",
+  "dataCsvWhen": "الفترة",
+  "dataCsvLabs": "التحاليل",
+  "dataCsvTransactions": "المعاملات",
+  "dataCsvPain": "الألم",
+  "dataCsvMood": "المزاج",
+  "dataRange30": "30 يومًا",
+  "dataRange90": "90 يومًا",
+  "dataRangeYear": "12 شهرًا",
+  "dataRangeAll": "الكل",
+  "dataRangeCustom": "مخصّصة…",
+  "dataRangeAllTime": "كل السجلات منذ البداية",
+  "dataRangeFromTo": "من {from} إلى {to}",
+  "@dataRangeFromTo": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvFormatNote": "التواريخ بصيغة {example} والأرقام بنقطة عشرية، فيفتحها أي برنامج جداول كما هي.",
+  "@dataCsvFormatNote": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "dataCsvCreate": "إنشاء الملف",
+  "dataCsvCreateRows": "{count, plural, =0{لا صفوف في هذه الفترة} =1{إنشاء الملف (صف واحد)} =2{إنشاء الملف (صفّان)} few{إنشاء الملف ({count} صفوف)} many{إنشاء الملف ({count} صفًّا)} other{إنشاء الملف ({count} صف)}}",
+  "@dataCsvCreateRows": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataCsvDate": "التاريخ",
+  "dataCsvTime": "الوقت",
+  "dataCsvTest": "التحليل",
+  "dataCsvCategory": "الفئة",
+  "dataCsvValue": "القيمة",
+  "dataCsvTextResult": "نتيجة نصية",
+  "dataCsvUnit": "الوحدة",
+  "dataCsvRangeLow": "الحد الأدنى",
+  "dataCsvRangeHigh": "الحد الأعلى",
+  "dataCsvFlag": "العلامة",
+  "dataCsvNote": "ملاحظة",
+  "dataCsvNotes": "ملاحظات",
+  "dataCsvKind": "النوع",
+  "dataCsvWallet": "المحفظة",
+  "dataCsvCurrency": "العملة",
+  "dataCsvAmount": "المبلغ",
+  "dataCsvAmountBase": "المبلغ بالعملة الأساسية",
+  "dataCsvBaseCurrency": "العملة الأساسية",
+  "dataCsvBudgetItem": "بند الميزانية",
+  "dataCsvToWallet": "إلى المحفظة",
+  "dataCsvToAmount": "المبلغ المستلم",
+  "dataCsvToCurrency": "عملة الاستلام",
+  "dataCsvTags": "الوسوم",
+  "dataCsvPainScore": "شدة الألم (0-10)",
+  "dataCsvLocations": "المواضع",
+  "dataCsvTriggers": "المحفّزات",
+  "dataCsvBodyPoints": "نقاط خريطة الجسم",
+  "dataCsvMoodScore": "المزاج (1-5)",
+  "dataCsvStress": "التوتر (0-10)",
+  "dataCsvAnxiety": "القلق (0-10)",
+  "dataCsvEnergy": "الطاقة (0-10)",
+  "dataCsvSleepHours": "ساعات النوم",
+  "dataCsvCaffeine": "أكواب الكافيين",
+  "dataCsvFactors": "العوامل",
+  "dataFlagLow": "منخفض",
+  "dataFlagBorderlineLow": "على الحد الأدنى",
+  "dataFlagInRange": "ضمن المعدل",
+  "dataFlagBorderlineHigh": "على الحد الأعلى",
+  "dataFlagHigh": "مرتفع",
+  "dataTxExpense": "مصروف",
+  "dataTxIncome": "دخل",
+  "dataTxTransfer": "تحويل",
+  "dataTxAdjustment": "تسوية",
+  "dataSummarySubtitle": "يُعدّ على هاتفك · راجع كل قسم قبل المشاركة",
+  "dataSummaryIntro": "لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.",
+  "dataSummaryPreparing": "نجهّز الملخّص على هاتفك…",
+  "dataSummarySections": "الأقسام المضمَّنة",
+  "dataSummarySectionsOf": "{selected} من {total} أقسام",
+  "@dataSummarySectionsOf": {
+    "placeholders": {
+      "selected": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryTokens": "≈ {count} رمز",
+  "@dataSummaryTokens": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSummaryNoData": "لا بيانات بعد",
+  "dataSummaryProfileHint": "اختياري",
+  "dataSummaryPreviewTitle": "ما سيُشارَك بالضبط",
+  "dataSummaryCopied": "نُسخ الملخّص إلى الحافظة.",
+  "dataSummaryUse": "استخدام هذا الملخّص",
+  "dataProfileChoose": "اختر ما يُذكر عنك:",
+  "dataProfileAboutHint": "مثلًا: العمر أو ما يهمّك أن يعرفه المساعد",
+  "dataRestoreFlowTitle": "الاستعادة",
+  "dataRestoreChooseTitle": "استعادة بياناتك",
+  "dataRestoreChooseBody": "اختر ملف نسخة ينتهي بـ {ext}. سترى ما فيه قبل أن يتغيّر أي شيء.",
+  "@dataRestoreChooseBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestorePickFile": "اختيار ملف النسخة",
+  "dataRestoreNothingChanges": "لن يتغيّر شيء في بياناتك الحالية حتى تؤكّد الاستبدال في الخطوة الأخيرة.",
+  "dataSafetyCopiesTitle": "نسخ الأمان على هذا الهاتف",
+  "dataSafetyCopiesHint": "تُنشأ تلقائيًا قبل كل استعادة، وتُفتح بعبارة المرور التي استُخدمت حينها.",
+  "dataRestoreUnlockBody": "اكتب عبارة المرور التي أقفلت بها هذه النسخة.",
+  "dataRestoreUnlockAction": "فتح النسخة",
+  "dataRestoreOtherFile": "اختيار ملف آخر",
+  "dataRestoreOpening": "نتحقق من النسخة…",
+  "dataRestoreOpeningHint": "نتأكد أن الملف سليم ولم يُعدَّل، ثم نفكّ تشفيره على هاتفك.",
+  "dataRestorePreviewTitle": "النسخة سليمة",
+  "dataRestoreInBackup": "في النسخة",
+  "dataRestoreOnPhone": "على الهاتف الآن",
+  "dataRestoreWhatsInside": "ما في هذه النسخة",
+  "dataRestoreReplaceWarning": "ستحلّ هذه النسخة محلّ كل البيانات الموجودة في مَدار الآن. قبل ذلك نحفظ بياناتك الحالية نسخةَ أمان على هذا الهاتف، تُفتح بعبارة المرور نفسها.",
+  "dataRestoreUnderstand": "فهمت أن بياناتي الحالية ستُستبدل",
+  "dataRestoreConfirmAction": "استبدال بياناتي",
+  "dataRestoreSavingSafety": "نحفظ نسخة أمان من بياناتك الحالية…",
+  "dataRestoreRestoring": "نستعيد بياناتك…",
+  "dataRestoreKeepOpen": "أبقِ التطبيق مفتوحًا لحظات.",
+  "dataRestoreDoneTitle": "تمت الاستعادة",
+  "dataRestoreDoneBody": "عادت سجلاتك ({count}) إلى مَدار.",
+  "@dataRestoreDoneBody": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataRestoreSafetyKept": "نسخة أمان من بياناتك السابقة محفوظة على هذا الهاتف، وتُفتح بعبارة المرور نفسها.",
+  "dataSafetyCopySave": "حفظ نسخة الأمان في مكان آخر",
+  "dataSafetyCopyTitle": "نسخة الأمان",
+  "dataNothingChanged": "لم يتغيّر شيء في بياناتك.",
+  "dataErrWrongPassphrase": "عبارة المرور هذه لا تفتح النسخة. تحقّق من الأحرف وحاول مجددًا.",
+  "dataErrNotBackupTitle": "هذا ليس ملف نسخة من مَدار",
+  "dataErrNotBackupBody": "اختر ملفًا ينتهي بـ {ext} أنشأته من «إنشاء نسخة احتياطية».",
+  "@dataErrNotBackupBody": {
+    "placeholders": {
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "dataErrNewerTitle": "أُنشئت بإصدار أحدث من مَدار",
+  "dataErrNewerBody": "حدّث مَدار على هذا الهاتف ثم حاول مجددًا.",
+  "dataErrTruncatedTitle": "الملف غير مكتمل",
+  "dataErrTruncatedBody": "ربما لم يكتمل نسخه أو تنزيله. انسخه مرة أخرى ثم حاول.",
+  "dataErrCorruptedTitle": "الملف تالف",
+  "dataErrCorruptedBody": "تغيّر الملف أو تلف بعد إنشائه، فلا يمكن الوثوق به.",
+  "dataErrUnreadableTitle": "تعذّرت قراءة الملف",
+  "dataErrUnreadableBody": "جرّب ملفًا آخر أو انسخه إلى الهاتف أولًا.",
+  "dataErrSafetyTitle": "تعذّر حفظ نسخة الأمان",
+  "dataErrSafetyBody": "لذلك لم نستبدل بياناتك. وفّر بعض المساحة ثم حاول مجددًا.",
+  "dataErrRejectedTitle": "تعذّرت استعادة هذه النسخة",
+  "dataErrRejectedBody": "لم تجتز بياناتها فحوص السلامة.",
+  "dataSumHeading": "ملخّص مَدار — {date}",
+  "@dataSumHeading": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPreamble": "بيانات متابعة شخصية من تطبيق مَدار، أُعدّت على هاتف المستخدم نفسه. التواريخ بصيغة سنة-شهر-يوم والكسور العشرية بنقطة. لا تُضمَّن الملاحظات ولا أرقام الهواتف ولا أرقام الوثائق أو الحسابات.",
+  "dataSumNoData": "لا بيانات بعد.",
+  "dataSumListSep": "، ",
+  "dataSumLastDays": "{days, plural, =1{اليوم} =2{آخر يومين} few{آخر {days} أيام} many{آخر {days} يومًا} other{آخر {days} يوم}}",
+  "@dataSumLastDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPreviousDays": "الأيام الـ{days} السابقة",
+  "@dataSumPreviousDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMore": "غير معروضة: {count}",
+  "@dataSumMore": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProfile": "نبذة شخصية",
+  "dataSumFaith": "الإيمان",
+  "dataSumHealth": "الصحة",
+  "dataSumMoney": "المال",
+  "dataSumFamily": "العائلة",
+  "dataSumWork": "العمل",
+  "dataSumGrowth": "النمو",
+  "dataSumBody": "الجسد",
+  "dataSumTravel": "السفر",
+  "dataSumCustom": "متتبّعات مخصّصة",
+  "dataSumCity": "المدينة",
+  "dataSumTimeZone": "المنطقة الزمنية",
+  "dataSumBaseCurrency": "العملة الأساسية",
+  "dataSumLanguage": "لغة التطبيق",
+  "dataSumLanguageName": "العربية",
+  "dataSumAboutMe": "عنّي",
+  "dataSumPrayersTitle": "الصلاة",
+  "dataSumObligatory": "{window} (الفرائض)",
+  "@dataSumObligatory": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLogged": "المسجّل: {logged}/{expected}",
+  "@dataSumLogged": {
+    "placeholders": {
+      "logged": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOnTime": "في وقتها: {count}",
+  "@dataSumOnTime": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLate": "متأخرة: {count}",
+  "@dataSumLate": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMadeUp": "قضاء: {count}",
+  "@dataSumMadeUp": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMissed": "فائتة: {count}",
+  "@dataSumMissed": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInCongregation": "جماعة: {count}",
+  "@dataSumInCongregation": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumVoluntary": "{window} (النوافل)",
+  "@dataSumVoluntary": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumQuranTitle": "القرآن والورد",
+  "dataSumSessions": "الجلسات: {count}",
+  "@dataSumSessions": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPages": "الصفحات: {count}",
+  "@dataSumPages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMinutes": "{count} د",
+  "@dataSumMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastSession": "آخر جلسة: {date}",
+  "@dataSumLastSession": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWird": "الورد «{name}»",
+  "@dataSumWird": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPerDay": "{unit} يوميًا: {amount}",
+  "@dataSumPerDay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumUnitPages": "الصفحات",
+  "dataSumUnitJuz": "الأجزاء",
+  "dataSumUnitHizb": "الأحزاب",
+  "dataSumUnitAyat": "الآيات",
+  "dataSumSince": "منذ {date}",
+  "@dataSumSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBy": "حتى {date}",
+  "@dataSumBy": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHifzTitle": "الحفظ",
+  "dataSumItems": "المحفوظات: {count}",
+  "@dataSumItems": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNew": "جديدة: {count}",
+  "@dataSumNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueToday": "مستحقة للمراجعة اليوم: {count}",
+  "@dataSumDueToday": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumReviews": "المراجعات: {count}",
+  "@dataSumReviews": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvgGrade": "متوسط التقييم: {value}/5",
+  "@dataSumAvgGrade": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAlertsTitle": "تنبيهات دائمة",
+  "dataSumSeverityCritical": "حرج",
+  "dataSumSeverityWarning": "تنبيه",
+  "dataSumSeverityInfo": "ملاحظة",
+  "dataSumConditionsTitle": "الحالات الصحية",
+  "dataSumMedsTitle": "الأدوية الحالية",
+  "dataSumKindSupplement": "مكمّل",
+  "dataSumKindInjection": "حقنة",
+  "dataSumWithEmptyStomach": "على معدة فارغة",
+  "dataSumWithBreakfast": "مع الفطور",
+  "dataSumWithLunch": "مع الغداء",
+  "dataSumWithDinner": "مع العشاء",
+  "dataSumWithBedtime": "قبل النوم",
+  "dataSumWithCourse": "حسب خطة العلاج",
+  "dataSumLabsTitle": "أحدث التحاليل",
+  "dataSumLabsWindow": "آخر نتيجة لكل تحليل خلال آخر {months} شهرًا؛ العلامة مقارنةً بالمعدل المحفوظ في التطبيق.",
+  "@dataSumLabsWindow": {
+    "placeholders": {
+      "months": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColTest": "التحليل",
+  "dataSumColDate": "التاريخ",
+  "dataSumColResult": "النتيجة",
+  "dataSumColRange": "المعدل",
+  "dataSumColFlag": "العلامة",
+  "dataSumColPrevious": "السابقة",
+  "dataSumPainTitle": "الألم (متابعة)",
+  "dataSumEntries": "الإدخالات: {count}",
+  "@dataSumEntries": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverageOf": "المتوسط: {value}/{max}",
+  "@dataSumAverageOf": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumHighest": "الأعلى: {value}/{max}",
+  "@dataSumHighest": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopPlaces": "أكثر المواضع تسجيلًا",
+  "dataSumTopTriggers": "أكثر المحفّزات تسجيلًا",
+  "dataSumMoodTitle": "المزاج (متابعة)",
+  "dataSumMoodAvg": "المزاج: {value}/5",
+  "@dataSumMoodAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumStressAvg": "التوتر: {value}/10",
+  "@dataSumStressAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAnxietyAvg": "القلق: {value}/10",
+  "@dataSumAnxietyAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEnergyAvg": "الطاقة: {value}/10",
+  "@dataSumEnergyAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSleepAvg": "النوم: {value} س",
+  "@dataSumSleepAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumCaffeineAvg": "الكافيين: {value} كوب",
+  "@dataSumCaffeineAvg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTopFactors": "العوامل الأكثر تكرارًا",
+  "dataSumWalletsTitle": "المحافظ",
+  "dataSumConvertedTo": "محوّلة إلى {code} بأسعار الصرف المحفوظة في التطبيق.",
+  "@dataSumConvertedTo": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumColWallet": "المحفظة",
+  "dataSumColBalance": "الرصيد",
+  "dataSumColInBase": "بـ{code}",
+  "@dataSumColInBase": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTotal": "الإجمالي: {amount}",
+  "@dataSumTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBudgetTitle": "الميزانية — {month}",
+  "@dataSumBudgetTitle": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumPlanned": "المخطط: {amount}",
+  "@dataSumPlanned": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSpent": "المصروف: {amount}",
+  "@dataSumSpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRemaining": "المتبقي: {amount}",
+  "@dataSumRemaining": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverPlan": "تجاوز الخطة",
+  "dataSumUnassigned": "مصروف بلا بند: {amount}",
+  "@dataSumUnassigned": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTitle": "المستحق خلال الأيام الـ{days} القادمة",
+  "@dataSumDueTitle": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueOn": "يستحق {date}",
+  "@dataSumDueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOverdueSince": "متأخر منذ {date}",
+  "@dataSumOverdueSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDebtsTitle": "الديون",
+  "dataSumIOwe": "عليّ لـ{person}: المتبقي {left} من {total}",
+  "@dataSumIOwe": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumOwedToMe": "لي عند {person}: المتبقي {left} من {total}",
+  "@dataSumOwedToMe": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumJarsTitle": "حصّالات الادخار",
+  "dataSumJar": "{name}: {saved} من {target} ({percent}%)",
+  "@dataSumJar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumEvery": "الإيقاع (أيام): {days}",
+  "@dataSumEvery": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastContact": "أيام منذ آخر تواصل: {days}",
+  "@dataSumLastContact": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNeverContacted": "لم يُسجَّل تواصل بعد",
+  "dataSumOverdueBy": "متأخر (أيام): {days}",
+  "@dataSumOverdueBy": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDueTodayStatus": "مستحق اليوم",
+  "dataSumDueIn": "يستحق بعد (أيام): {days}",
+  "@dataSumDueIn": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoRhythm": "آخرون بلا إيقاع تواصل: {count}",
+  "@dataSumNoRhythm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumPeopleNoRhythm": "أشخاص بلا إيقاع تواصل: {count}",
+  "@dataSumPeopleNoRhythm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataSumTop3Title": "أهم 3",
+  "dataSumOnBoard": "اللوحة: {board}",
+  "@dataSumOnBoard": {
+    "placeholders": {
+      "board": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumBoardsTitle": "اللوحات",
+  "dataSumOther": "أخرى",
+  "dataSumProjectsTitle": "المشاريع",
+  "dataSumStatusActive": "نشط",
+  "dataSumStatusPaused": "متوقف مؤقتًا",
+  "dataSumDoneOf": "المنجز: {done}/{total}",
+  "@dataSumDoneOf": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDeadline": "الموعد النهائي: {date}",
+  "@dataSumDeadline": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumProgress": "{current} من {target} {unit}",
+  "@dataSumProgress": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumRecentGain": "{window}: {amount}",
+  "@dataSumRecentGain": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExercisePlanTitle": "خطة التمارين",
+  "dataSumWeekdays": "الإثنين,الثلاثاء,الأربعاء,الخميس,الجمعة,السبت,الأحد",
+  "@dataSumWeekdays": {
+    "description": "Seven comma-separated weekday names, Monday first"
+  },
+  "dataSumSets": "المجموعات: {count}",
+  "@dataSumSets": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumKg": "{value} كغ",
+  "@dataSumKg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWorkouts": "التمارين المنجزة: {count}",
+  "@dataSumWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumFasting": "الصيام: {count} · المتوسط: {hours} س",
+  "@dataSumFasting": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetHours": "الهدف: {hours} س",
+  "@dataSumTargetHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumWater": "الماء خلال آخر {days} أيام: {ml} مل يوميًا في المتوسط",
+  "@dataSumWater": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTargetMl": "الهدف: {ml} مل",
+  "@dataSumTargetMl": {
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAvoidTitle": "تجنّب",
+  "dataSumTripsTitle": "الرحلات القادمة",
+  "dataSumTripPlanned": "مخطط لها",
+  "dataSumTripUnderWay": "جارية الآن",
+  "dataSumDocumentsTitle": "الوثائق (لا تُضمَّن أرقامها أبدًا)",
+  "dataSumExpiresIn": "تنتهي {date} (الأيام المتبقية: {days})",
+  "@dataSumExpiresIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumExpired": "انتهت {date}",
+  "@dataSumExpired": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumNoExpiry": "بلا تاريخ انتهاء",
+  "dataSumModuleTracker": "متتبّع",
+  "dataSumModuleList": "قائمة",
+  "dataSumOpen": "مفتوحة: {count}",
+  "@dataSumOpen": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumDone": "منجزة: {count}",
+  "@dataSumDone": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumInWindow": "{window}: {count}",
+  "@dataSumInWindow": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumLastOn": "الأخير: {date}",
+  "@dataSumLastOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumAverage": "المتوسط: {value}",
+  "@dataSumAverage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMin": "الأدنى: {value}",
+  "@dataSumMin": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumMax": "الأعلى: {value}",
+  "@dataSumMax": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumSum": "المجموع: {value}",
+  "@dataSumSum": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSumTicked": "مؤشَّر عليها: {count}/{total}",
+  "@dataSumTicked": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "searchTitle": "البحث",
+  "@searchTitle": {
+    "description": "Global search screen title"
+  },
+  "searchFieldHint": "ابحث في المهام والملاحظات والأشخاص والآيات…",
+  "searchLauncherHint": "ابحث في مَدار",
+  "@searchLauncherHint": {
+    "description": "Compact search launcher on home / app bars"
+  },
+  "searchLauncherTooltip": "البحث في كل شيء",
+  "searchClear": "مسح النص",
+  "searchRecentTitle": "عمليات البحث الأخيرة",
+  "searchRecentClear": "مسح السجل",
+  "searchRecentRemove": "حذف «{query}» من السجل",
+  "@searchRecentRemove": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchIntroTitle": "ابحث في مدارك كله",
+  "searchIntroBody": "المهام والملاحظات والأشخاص والمال والآيات في مكان واحد. يجري البحث على هاتفك فقط.",
+  "searchPreparing": "نُجهّز فهرس البحث…",
+  "searchNoResultsTitle": "لا نتائج لـ «{query}»",
+  "@searchNoResultsTitle": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "searchNoResultsBody": "جرّب كلمات أقل أو تهجئة أخرى.",
+  "searchNoResultsFiltered": "لا شيء هنا ضمن التصفية الحالية.",
+  "searchClearFilters": "إزالة التصفية",
+  "searchAll": "الكل",
+  "searchResultsCount": "{count, plural, =0{لا نتائج} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}",
+  "@searchResultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchShowAll": "عرض الكل ({count})",
+  "@searchShowAll": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchGroupSemantics": "{module}، {count}",
+  "@searchGroupSemantics": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "searchPartial": "لم نجد كل الكلمات معًا؛ هذه أقرب النتائج.",
+  "searchCannotOpen": "لا يمكن فتح هذه النتيجة من هنا بعد.",
+  "searchToday": "اليوم",
+  "searchYesterday": "أمس",
+  "searchTomorrow": "غدًا",
+  "searchFilterPlanets": "التصفية حسب الكوكب",
+  "searchFilterModules": "التصفية حسب القسم",
+  "searchPlanetCustom": "وحدات مخصصة",
+  "searchKeyboardHint": "↑ ↓ للتنقل، Enter للفتح، Esc للمسح",
+  "searchDone": "منجزة",
+  "searchArchived": "مؤرشفة",
+  "searchTxExpense": "مصروف",
+  "searchTxIncome": "دخل",
+  "searchTxTransfer": "تحويل",
+  "searchTxAdjustment": "تسوية",
+  "searchDebtIOwe": "دين عليّ",
+  "searchDebtOwedToMe": "دين لي",
+  "searchChannelCall": "مكالمة",
+  "searchChannelVisit": "زيارة",
+  "searchChannelMessage": "رسالة",
+  "searchChannelOther": "تواصل",
+  "searchPainTitle": "ألم {score}/{max}",
+  "@searchPainTitle": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "searchMoodTitle": "المزاج",
+  "searchFastingTitle": "صيام",
+  "searchAyahPlace": "{surah}، الآية {ayah}",
+  "@searchAyahPlace": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "searchAyahRange": "{surah} {from}–{to}",
+  "@searchAyahRange": {
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSurahNumber": "سورة {number}",
+  "@searchSurahNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "searchSourceTasks": "المهام",
+  "searchSourcePrayerLogs": "سجل الصلوات",
+  "searchSourceMedications": "الأدوية",
+  "searchSourceMedCourses": "الكورسات العلاجية",
+  "searchSourceMedDoses": "ملاحظات الجرعات",
+  "searchSourceConditions": "الحالات الصحية",
+  "searchSourceHealthAlerts": "التنبيهات الصحية",
+  "searchSourceLabTests": "التحاليل",
+  "searchSourceLabReadings": "نتائج التحاليل",
+  "searchSourceAppointments": "المواعيد",
+  "searchSourceDoctorQuestions": "أسئلة الطبيب",
+  "searchSourcePain": "سجل الألم",
+  "searchSourceMood": "سجل المزاج",
+  "searchSourceHabits": "العادات",
+  "searchSourceWorries": "المخاوف",
+  "searchSourceWallets": "المحافظ",
+  "searchSourceTransactions": "المعاملات",
+  "searchSourceBudget": "الميزانية",
+  "searchSourceJars": "الحصّالات",
+  "searchSourceJarDeposits": "إيداعات الحصّالات",
+  "searchSourceDebts": "الديون",
+  "searchSourceDebtPayments": "سداد الديون",
+  "searchSourceObligations": "الالتزامات",
+  "searchSourcePeople": "الأشخاص",
+  "searchSourceContactLogs": "سجل التواصل",
+  "searchSourceProjects": "المشاريع",
+  "searchSourceProjectItems": "بنود المشاريع",
+  "searchSourceBoards": "اللوحات",
+  "searchSourceCards": "البطاقات",
+  "searchSourceTrips": "الرحلات",
+  "searchSourceTripItems": "أغراض الرحلات",
+  "searchSourcePackingTemplates": "قوائم التجهيز",
+  "searchSourceTravelDocuments": "وثائق السفر",
+  "searchSourceLearningGoals": "أهداف التعلّم",
+  "searchSourceGoalLogs": "سجل الأهداف",
+  "searchSourceExercises": "التمارين",
+  "searchSourceWorkouts": "سجل التمارين",
+  "searchSourceAvoidItems": "قائمة التجنّب",
+  "searchSourceFasting": "الصيام المتقطع",
+  "searchSourceCustomModules": "الوحدات المخصصة",
+  "searchSourceCustomEntries": "سجلات الوحدات",
+  "searchSourceQuranAyat": "آيات القرآن",
+  "searchSourceQuranBookmarks": "علامات المصحف",
+  "searchSourceWirdPlans": "خطط الورد",
+  "searchSourceHifz": "الحفظ",
+  "searchSourcePlanets": "الكواكب",
+  "ncTitle": "الإشعارات",
+  "@ncTitle": {
+    "description": "Title of the notification center"
+  },
+  "ncTabUpcoming": "القادمة",
+  "@ncTabUpcoming": {
+    "description": "Notification center tab: scheduled notifications"
+  },
+  "ncTabRecent": "الأخيرة",
+  "@ncTabRecent": {
+    "description": "Notification center tab: delivered notifications"
+  },
+  "ncTabWithCount": "{label}، {count}",
+  "@ncTabWithCount": {
+    "description": "Screen-reader label of a tab with its count",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOpenSettings": "إعدادات الإشعارات",
+  "ncUpcomingEmptyTitle": "لا شيء مجدول",
+  "ncUpcomingEmptyBody": "ما تفعّله من أذان وتذكيرات سيصطفّ هنا للأيام السبعة القادمة.",
+  "ncRecentEmptyTitle": "لا جديد",
+  "ncRecentEmptyBody": "ما يصلك من إشعارات يبقى هنا أسبوعين، لتعود إليه متى شئت.",
+  "ncClearAll": "مسح الكل",
+  "ncClearedAll": "{count, plural, =1{مُسح إشعار واحد} =2{مُسح إشعاران} few{مُسحت {count} إشعارات} many{مُسح {count} إشعارًا} other{مُسح {count} إشعار}}",
+  "@ncClearedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncDismissed": "أُزيل من القائمة",
+  "ncSkippedToast": "لن يصل هذا التذكير",
+  "ncRestoredToast": "سيصل في وقته",
+  "ncShowMore": "{count, plural, =1{عرض واحد آخر} =2{عرض اثنين آخرين} few{عرض {count} أخرى} many{عرض {count} أخرى} other{عرض {count} أخرى}}",
+  "@ncShowMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncShowLess": "عرض أقل",
+  "ncSectionLabel": "{group}، {count}",
+  "@ncSectionLabel": {
+    "description": "Screen-reader label of a group section",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncGroupPrayer": "الصلاة والأذان",
+  "ncGroupAdhkar": "الأذكار",
+  "ncGroupMedications": "الأدوية",
+  "ncGroupHealth": "الصحة",
+  "ncGroupMoney": "المستحقات المالية",
+  "ncGroupFamily": "العائلة",
+  "ncGroupTravel": "وثائق السفر",
+  "ncGroupWird": "الوِرد",
+  "ncGroupCustom": "الوحدات المخصّصة",
+  "ncGroupOther": "أخرى",
+  "ncKindAdhan": "أذان {prayer}",
+  "@ncKindAdhan": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhan": "{prayer} بعد {minutes}",
+  "@ncKindPreAdhan": {
+    "description": "A reminder some minutes before a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhanShort": "تذكير قبل {prayer}",
+  "@ncKindPreAdhanShort": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindSunrise": "الشروق",
+  "ncKindAdhanTest": "أذان تجريبي",
+  "ncKindAdhkarMorning": "أذكار الصباح",
+  "ncKindAdhkarEvening": "أذكار المساء",
+  "ncKindAdhkar": "تذكير بالأذكار",
+  "ncKindDose": "موعد جرعة",
+  "ncKindRefill": "حان وقت إعادة التعبئة",
+  "ncKindMedsNotice": "إجابة لم تُسجَّل",
+  "ncKindAppointment": "موعد طبي",
+  "ncKindWorry": "نافذة القلق",
+  "ncKindFastGoal": "هدف الصيام",
+  "ncKindEatingClose": "نافذة الأكل تُغلق",
+  "ncKindDebt": "دَين مستحق",
+  "ncKindObligation": "التزام مستحق",
+  "ncKindFamilyDigest": "صلة الرحم",
+  "ncKindBirthdayEve": "عيد ميلاد غدًا",
+  "ncKindBirthday": "عيد ميلاد اليوم",
+  "ncKindDocAhead": "وثيقة تقترب من الانتهاء",
+  "ncKindDocToday": "وثيقة تنتهي اليوم",
+  "ncKindWird": "الوِرد اليومي",
+  "ncKindCustom": "تذكير وحدة",
+  "ncKindOther": "إشعار",
+  "ncAtTime": "الساعة {time}",
+  "@ncAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateMuted": "مكتوم",
+  "ncStateSkipped": "متخطّى",
+  "ncStateSnoozedUntil": "مؤجّل حتى {time}",
+  "@ncStateSnoozedUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateLive": "ظاهر الآن",
+  "ncStateSilenced": "وصل صامتًا",
+  "ncStateOpened": "فُتح",
+  "ncStateAnswered": "أُجيب: {action}",
+  "@ncStateAnswered": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateSnoozed": "أُجّل",
+  "ncStateNew": "جديد",
+  "ncTimeNow": "الآن",
+  "ncTimeIn": "بعد {duration}",
+  "@ncTimeIn": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeAgo": "قبل {duration}",
+  "@ncTimeAgo": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeToday": "اليوم {time}",
+  "@ncTimeToday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeTomorrow": "غدًا {time}",
+  "@ncTimeTomorrow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeYesterday": "أمس {time}",
+  "@ncTimeYesterday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeOnDay": "{day} {time}",
+  "@ncTimeOnDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionTaken": "أخذتها",
+  "@ncActionTaken": {
+    "description": "Dose answered from the notification center"
+  },
+  "ncActionSnooze": "أجِّل",
+  "ncActionSkip": "تخطَّ",
+  "ncActionStop": "إيقاف",
+  "@ncActionStop": {
+    "description": "Stops a sounding adhan"
+  },
+  "ncActionOpen": "افتح",
+  "ncActionSkipOne": "لا ترسل هذا",
+  "ncActionRestore": "أعِده",
+  "ncActionSnoozeFor": "أجِّل {duration}",
+  "@ncActionSnoozeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionMuteGroup": "اكتم {group}",
+  "@ncActionMuteGroup": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionUnmute": "ألغِ الكتم",
+  "ncActionSettings": "إعدادات التذكير",
+  "ncActionDismiss": "أزِل",
+  "ncActionFailed": "تعذّر ذلك الآن، حاول مرة أخرى",
+  "ncSnoozedToast": "أُجّل حتى {time}",
+  "@ncSnoozedToast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedToast": "{group} مكتوم حتى {when}",
+  "@ncMutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncUnmutedToast": "عاد {group} إلى وضعه",
+  "@ncUnmutedToast": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteTitle": "اكتم {group}",
+  "@ncMuteTitle": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteSubtitle": "لن يصدر شيء من هذه المجموعة خلال المدة، وستجده هنا في القائمة.",
+  "ncMuteForHours": "{count, plural, =1{ساعة} =2{ساعتين} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}",
+  "@ncMuteForHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncMuteUntilMorning": "حتى صباح الغد",
+  "ncMuteWeek": "أسبوعًا",
+  "ncMutedUntil": "مكتوم حتى {when}",
+  "@ncMutedUntil": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsTitle": "الإشعارات",
+  "ncSettingsSubtitle": "ما يرسله كل جزء من مَدار، في مكان واحد",
+  "ncSettingsOn": "مفعّلة",
+  "ncSettingsOff": "متوقفة",
+  "ncSettingsSome": "{on} من {total} مفعّلة",
+  "@ncSettingsSome": {
+    "placeholders": {
+      "on": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsPerItem": "تُضبط لكل عنصر",
+  "ncSettingsComing": "{count, plural, =0{لا شيء قادم} =1{واحد قادم} =2{اثنان قادمان} few{{count} قادمة} many{{count} قادمًا} other{{count} قادم}}",
+  "@ncSettingsComing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsOpen": "افتح إعدادات {group}",
+  "@ncSettingsOpen": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsMute": "اكتم",
+  "ncPermissionOff": "إشعارات مَدار متوقفة من إعدادات الهاتف، فلن يصل شيء مما هنا.",
+  "ncPermissionTurnOn": "فعّلها",
+  "ncBellLabel": "{count, plural, =0{الإشعارات} =1{الإشعارات، واحد جديد} =2{الإشعارات، اثنان جديدان} few{الإشعارات، {count} جديدة} many{الإشعارات، {count} جديدًا} other{الإشعارات، {count} جديد}}",
+  "@ncBellLabel": {
+    "description": "Screen-reader label of the notification bell",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncActionCancelSnooze": "ألغِ التأجيل",
+  "ncActionSnoozeMenu": "أجِّل…",
+  "ncSnoozeTitle": "أعِده بعد قليل",
+  "ncSnoozeSubtitle": "يختفي الآن، ثم يصلك من جديد في الوقت الذي تختاره.",
+  "ncOptionUntil": "حتى {time}",
+  "@ncOptionUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOptionAt": "يعود {time}",
+  "@ncOptionAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncRecentCount": "{count, plural, =1{إشعار واحد} =2{إشعاران} few{{count} إشعارات} many{{count} إشعارًا} other{{count} إشعار}}",
+  "@ncRecentCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUpcomingCount": "{count, plural, =0{لا شيء في الأيام السبعة القادمة} =1{إشعار واحد في الأيام السبعة القادمة} =2{إشعاران في الأيام السبعة القادمة} few{{count} إشعارات في الأيام السبعة القادمة} many{{count} إشعارًا في الأيام السبعة القادمة} other{{count} إشعار في الأيام السبعة القادمة}}",
+  "@ncUpcomingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncNewCount": "{count, plural, =1{واحد جديد} =2{اثنان جديدان} few{{count} جديدة} many{{count} جديدًا} other{{count} جديد}}",
+  "@ncNewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUntilTomorrow": "غدًا {time}",
+  "@ncUntilTomorrow": {
+    "description": "End of a mute or snooze tomorrow, after 'until'",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatTitle": "المحادثة الذكية",
+  "@aiChatTitle": {
+    "description": "AI chat screen title"
+  },
+  "aiChatNewChat": "محادثة جديدة",
+  "aiChatListTitle": "المحادثات",
+  "aiChatSettingsTitle": "إعدادات الذكاء الاصطناعي",
+  "aiChatSettingsRowSubtitle": "المفاتيح والنموذج وطول الرد",
+  "@aiChatSettingsRowSubtitle": {
+    "description": "Subtitle of the Settings row that opens the AI settings"
+  },
+  "aiChatAskAi": "اسأل الذكاء الاصطناعي",
+  "@aiChatAskAi": {
+    "description": "Entry point on hubs"
+  },
+  "aiChatAskAiSubtitle": "بمفتاحك الخاص، وأنت تختار ما يُرسل",
+  "aiChatAskAbout": "اسأل عن {area}",
+  "@aiChatAskAbout": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatMenu": "المزيد",
+  "aiChatOpenList": "كل المحادثات",
+  "aiChatInputHint": "اكتب رسالتك…",
+  "aiChatSend": "إرسال",
+  "aiChatStop": "إيقاف",
+  "aiChatThinking": "يفكّر…",
+  "aiChatWriting": "يكتب الرد",
+  "aiChatWillSend": "سيُرسل",
+  "aiChatContextReviewFirst": "ستراجع ملخّصك قبل الإرسال",
+  "aiChatContextNone": "بلا سياق شخصي",
+  "aiChatContextSections": "{count, plural, =0{لا أقسام} =1{قسم واحد من ملخّصك} =2{قسمان من ملخّصك} few{{count} أقسام من ملخّصك} many{{count} قسمًا من ملخّصك} other{{count} قسم من ملخّصك}}",
+  "@aiChatContextSections": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatMessagesCount": "{count, plural, =0{لا رسائل} =1{رسالة واحدة} =2{رسالتان} few{{count} رسائل} many{{count} رسالة} other{{count} رسالة}}",
+  "@aiChatMessagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatApproxTokens": "≈ {count} رمز",
+  "@aiChatApproxTokens": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatStripSemantics": "سيُرسل: {summary}. انقر للمراجعة أو التغيير",
+  "@aiChatStripSemantics": {
+    "placeholders": {
+      "summary": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatOmitted": "{count, plural, =1{رسالة أقدم لن تُرسل} =2{رسالتان أقدم لن تُرسلا} few{{count} رسائل أقدم لن تُرسل} many{{count} رسالة أقدم لن تُرسل} other{{count} رسالة أقدم لن تُرسل}}",
+  "@aiChatOmitted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatContextTitle": "ما الذي سيُرسل",
+  "aiChatContextSubtitle": "لا يُرسل شيء إلا حين تضغط «إرسال»",
+  "aiChatContextFromSummary": "من ملخّصك",
+  "aiChatContextChange": "مراجعة الأقسام",
+  "aiChatContextChoose": "اختيار الأقسام",
+  "aiChatContextNoneHint": "لن يُرسل شيء من بياناتك، فقط رسائل هذه المحادثة.",
+  "aiChatContextUnsetHint": "عند أول إرسال ستظهر معاينة الملخّص لتختار الأقسام أو تستبعد ما تشاء.",
+  "aiChatContextUse": "استخدمه في المحادثة",
+  "@aiChatContextUse": {
+    "description": "Confirm button of the summary preview opened from the AI chat"
+  },
+  "aiChatContextUseAndSend": "استخدمه وأرسل",
+  "@aiChatContextUseAndSend": {
+    "description": "Confirm button of the summary preview opened by the first Send"
+  },
+  "aiChatContextReviewed": "راجعته {when}",
+  "@aiChatContextReviewed": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatContextCancelled": "لم يُرسل شيء.",
+  "aiChatServiceModel": "{service} · {model}",
+  "@aiChatServiceModel": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatViewPayload": "عرض الطلب كما سيُرسل",
+  "aiChatDone": "تم",
+  "aiChatPayloadTitle": "الطلب كما سيُرسل",
+  "aiChatPayloadEndpoint": "العنوان",
+  "aiChatPayloadHeaders": "الترويسات (المفتاح مخفي)",
+  "aiChatPayloadSystem": "التعليمات والسياق",
+  "aiChatPayloadMessages": "الرسائل",
+  "aiChatPayloadRaw": "النص الكامل (JSON)",
+  "aiChatPayloadDraftNote": "يشمل رسالتك الجاري كتابتها. لن يُرسل إلا حين تضغط «إرسال».",
+  "aiChatPayloadNoDraft": "اكتب رسالة لترى الطلب كاملًا.",
+  "aiChatPayloadSize": "{size} · ≈ {tokens} رمز",
+  "@aiChatPayloadSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "tokens": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatBytes": "{count} بايت",
+  "@aiChatBytes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKiloBytes": "{count} ك.ب",
+  "@aiChatKiloBytes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatRoleUser": "أنت",
+  "aiChatRoleAssistant": "المساعد",
+  "aiChatCopy": "نسخ",
+  "aiChatCopied": "نُسخ",
+  "aiChatCopyCode": "نسخ الشيفرة",
+  "aiChatRegenerate": "إعادة كتابة الرد",
+  "aiChatRetry": "إعادة المحاولة",
+  "aiChatStopped": "أوقفتَ الرد",
+  "aiChatCutShort": "توقّف الرد عند حدّ الطول. يمكنك رفعه من الإعدادات.",
+  "aiChatRefused": "امتنع النموذج عن الإجابة.",
+  "aiChatFiltered": "أوقف مرشّح المحتوى الرد.",
+  "aiChatHealthNote": "للمتابعة فقط وليس نصيحة طبية؛ استشر طبيبك في أي قرار صحي.",
+  "aiChatOpenLink": "فتح الرابط {url}",
+  "@aiChatOpenLink": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatLinkFailed": "تعذّر فتح الرابط.",
+  "aiChatErrorNoKey": "أضف مفتاح {service} أولًا.",
+  "@aiChatErrorNoKey": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorBadKey": "رفضت {service} المفتاح. تحقّق منه أو استبدله في الإعدادات.",
+  "@aiChatErrorBadKey": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorForbidden": "لا يملك هذا المفتاح صلاحية استخدام هذا النموذج.",
+  "aiChatErrorRateLimited": "طلبات كثيرة الآن. انتظر قليلًا ثم أعد المحاولة.",
+  "aiChatErrorRetryAfter": "يمكنك المحاولة بعد {seconds} ث.",
+  "@aiChatErrorRetryAfter": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorQuota": "نفد الرصيد أو بلغتَ حدّ الإنفاق لدى {service}.",
+  "@aiChatErrorQuota": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorOverloaded": "{service} مشغولة الآن. أعد المحاولة بعد قليل.",
+  "@aiChatErrorOverloaded": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorServer": "حدث خلل لدى {service}. أعد المحاولة.",
+  "@aiChatErrorServer": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorModelNotFound": "النموذج «{model}» غير متاح لهذا المفتاح. اختر نموذجًا آخر.",
+  "@aiChatErrorModelNotFound": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorTemperature": "لا يقبل هذا النموذج درجة حرارة مخصّصة. اجعلها «افتراضي النموذج» في الإعدادات.",
+  "aiChatErrorContextTooLong": "المحادثة أطول مما يحتمله النموذج. ابدأ محادثة جديدة أو شارك أقسامًا أقل.",
+  "aiChatErrorBadRequest": "رفضت {service} الطلب.",
+  "@aiChatErrorBadRequest": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatErrorNetwork": "لا اتصال بالإنترنت، أو انقطع الاتصال.",
+  "aiChatErrorTimeout": "لم يصل ردّ في الوقت المناسب.",
+  "aiChatErrorBadResponse": "وصل ردّ تعذّرت قراءته.",
+  "aiChatErrorUnknown": "حدث خطأ غير متوقّع.",
+  "aiChatOpenSettings": "فتح الإعدادات",
+  "aiChatSetupTitle": "اربط مفتاحك الخاص",
+  "aiChatSetupBody": "تعمل المحادثة بمفتاح API منك لدى Anthropic أو OpenAI. يُحفظ مشفّرًا على هذا الهاتف فقط، ولا يدخل النسخ الاحتياطية ولا التصدير.",
+  "aiChatSetupAdd": "إضافة مفتاح {service}",
+  "@aiChatSetupAdd": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSetupPrivacy": "لا يُرسل شيء إلا حين تضغط «إرسال»، وترى قبلها ما سيُرسل بالضبط.",
+  "aiChatEmptyTitle": "بمَ أساعدك اليوم؟",
+  "aiChatEmptyBody": "اسأل عن يومك أو صلاتك أو ميزانيتك أو أهدافك. تختار ما يُشارك من ملخّصك قبل الإرسال.",
+  "aiChatSuggestWeek": "لخّص أسبوعي في نقاط قليلة",
+  "aiChatSuggestBudget": "كيف أحسّن ميزانيتي هذا الشهر؟",
+  "aiChatSuggestPlan": "ساعدني أخطّط لغدٍ متوازن",
+  "aiChatSuggestPrayer": "كيف أحافظ على الصلاة في وقتها؟",
+  "aiChatListEmptyTitle": "لا محادثات بعد",
+  "aiChatListEmptyBody": "ابدأ محادثة، وتُحفظ هنا مشفّرة على هاتفك.",
+  "aiChatRename": "إعادة التسمية",
+  "aiChatRenameField": "اسم المحادثة",
+  "aiChatRenameSave": "حفظ الاسم",
+  "aiChatDelete": "حذف المحادثة",
+  "aiChatDeleted": "حُذفت المحادثة",
+  "aiChatDeleteAll": "حذف كل المحادثات",
+  "aiChatDeletedAll": "حُذفت كل المحادثات",
+  "aiChatUntitled": "محادثة بلا عنوان",
+  "aiChatListLimitNote": "تُحفظ آخر {count} محادثة؛ الأقدم يُحذف تلقائيًا.",
+  "@aiChatListLimitNote": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatListUpdated": "{when} · {messages}",
+  "@aiChatListUpdated": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "messages": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatToday": "اليوم",
+  "aiChatYesterday": "أمس",
+  "aiChatSettingsService": "الخدمة",
+  "aiChatSettingsServiceModel": "الخدمة والنموذج",
+  "aiChatServiceAnthropic": "Anthropic",
+  "aiChatServiceOpenai": "OpenAI",
+  "aiChatSettingsKeys": "مفاتيح API",
+  "aiChatKeyTitle": "مفتاح {service}",
+  "@aiChatKeyTitle": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeySaved": "محفوظ · {mask}",
+  "@aiChatKeySaved": {
+    "placeholders": {
+      "mask": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeyNotSet": "لم يُضف بعد",
+  "aiChatKeySheetSubtitle": "يُحفظ مشفّرًا على هذا الهاتف فقط.",
+  "aiChatKeyCurrent": "المفتاح الحالي",
+  "aiChatKeyField": "المفتاح",
+  "aiChatKeyFieldHint": "الصق المفتاح هنا",
+  "aiChatKeyPaste": "لصق",
+  "aiChatKeySave": "حفظ المفتاح",
+  "aiChatKeyReplace": "استبدال المفتاح",
+  "aiChatKeyDelete": "حذف المفتاح",
+  "aiChatKeyDeleted": "حُذف المفتاح",
+  "aiChatKeySavedNotice": "حُفظ المفتاح.",
+  "aiChatKeyTest": "اختبار المفتاح",
+  "aiChatKeyTestOk": "المفتاح يعمل.",
+  "aiChatKeyTestNote": "الاختبار يطلب قائمة النماذج فقط، ولا يرسل أي بيانات منك.",
+  "aiChatKeyWhere": "أين أجد مفتاحي؟",
+  "aiChatKeyProblemEmpty": "الصق المفتاح أولًا.",
+  "aiChatKeyProblemShort": "هذا أقصر من أن يكون مفتاحًا.",
+  "aiChatKeyProblemSpaces": "في المفتاح مسافات؛ انسخه مرة أخرى.",
+  "aiChatKeyProblemProvider": "هذا المفتاح خاص بخدمة {service}، لذا لم يُحفظ هنا حتى لا يُرسل إلى خدمة أخرى. أضِفه ضمن {service}.",
+  "@aiChatKeyProblemProvider": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSettingsModel": "النموذج",
+  "aiChatModelPickerTitle": "اختر النموذج",
+  "aiChatModelYourList": "قائمتك",
+  "aiChatModelsAvailable": "متاح لدى {service}",
+  "@aiChatModelsAvailable": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelCustom": "إضافة معرّف نموذج",
+  "aiChatModelCustomField": "معرّف النموذج",
+  "aiChatModelCustomHint": "مثل claude-sonnet-5-5",
+  "aiChatModelInvalid": "معرّف غير صالح.",
+  "aiChatModelUse": "استخدام",
+  "aiChatModelRefresh": "تحديث قائمة النماذج",
+  "aiChatModelRefreshed": "{count, plural, =0{لا نماذج متاحة} =1{نموذج واحد متاح} =2{نموذجان متاحان} few{{count} نماذج متاحة} many{{count} نموذجًا متاحًا} other{{count} نموذج متاح}}",
+  "@aiChatModelRefreshed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiChatModelRefreshNote": "يطلب القائمة من {service} حين تضغط فقط.",
+  "@aiChatModelRefreshNote": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelReset": "استعادة القائمة الأصلية",
+  "aiChatModelRemove": "إزالة {model} من القائمة",
+  "@aiChatModelRemove": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatModelSelected": "المختار",
+  "aiChatModelChip": "النموذج: {model}. انقر للتغيير",
+  "@aiChatModelChip": {
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatSettingsReply": "الرد",
+  "aiChatMaxTokens": "أقصى طول للرد",
+  "aiChatMaxTokensNote": "بالرموز، ويشمل تفكير النموذج إن وُجد.",
+  "aiChatTemperature": "درجة الحرارة",
+  "aiChatTemperatureDefault": "افتراضي النموذج (موصى به)",
+  "aiChatTemperatureNote": "النماذج الأحدث لا تقبل إلا القيمة الافتراضية. قيمة أقل = ردود أثبت.",
+  "aiChatSettingsPrivacy": "الخصوصية",
+  "aiChatPrivacyKeys": "المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.",
+  "aiChatPrivacyCalls": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
+  "aiChatPrivacyHistory": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count})، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.",
+  "@aiChatPrivacyHistory": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "aiChatKeyProblemChars": "في المفتاح رموز لا تكون في المفاتيح (ربما من النسخ)؛ انسخه مرة أخرى.",
+  "aiChatLinkTitle": "فتح هذا الرابط؟",
+  "@aiChatLinkTitle": {
+    "description": "Sheet shown before a link in an AI reply opens"
+  },
+  "aiChatLinkBody": "يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.",
+  "aiChatLinkOpen": "فتح الرابط",
+  "widgetsPrayerName": "الصلاة القادمة",
+  "@widgetsPrayerName": {
+    "description": "Home-screen widget: the next prayer (widget title and its name in settings)"
+  },
+  "widgetsMedsName": "أدوية اليوم",
+  "@widgetsMedsName": {
+    "description": "Home-screen widget: today's doses (widget title and its name in settings)"
+  },
+  "widgetsTasksName": "أهم ثلاث اليوم",
+  "@widgetsTasksName": {
+    "description": "Home-screen widget: today's Top 3 (widget title and its name in settings)"
+  },
+  "widgetsBudgetName": "المتبقي من الميزانية",
+  "@widgetsBudgetName": {
+    "description": "Home-screen widget: what is left of the budget (widget title and its name in settings)"
+  },
+  "widgetsCountdown": "بعد {time}",
+  "@widgetsCountdown": {
+    "description": "Widget countdown to the next prayer; {time} is a ticking h:mm:ss filled in by Android",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsPrayerNotePlace": "{date} · {place}",
+  "@widgetsPrayerNotePlace": {
+    "description": "Widget: Hijri date and the location's name",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsFraction": "{done}/{total}",
+  "@widgetsFraction": {
+    "description": "Widget headline: answered doses or finished tasks out of the total (numbers pre-formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsMedsNext": "التالية {time}: {name}",
+  "@widgetsMedsNext": {
+    "description": "Widget: the next dose of today (details shown)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsMedsPending": "{count, plural, =1{جرعة واحدة بانتظارك} =2{جرعتان بانتظارك} few{{count} جرعات بانتظارك} many{{count} جرعة بانتظارك} other{{count} جرعة بانتظارك}}",
+  "@widgetsMedsPending": {
+    "description": "Widget: doses of today still without an answer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsMedsAllDone": "جرعات اليوم كلها مسجّلة",
+  "@widgetsMedsAllDone": {
+    "description": "Widget: all of today's doses answered"
+  },
+  "widgetsMedsNoneToday": "لا جرعات اليوم",
+  "@widgetsMedsNoneToday": {
+    "description": "Widget: nothing is planned today"
+  },
+  "widgetsMedsSetUp": "أضف أدويتك في مدار",
+  "@widgetsMedsSetUp": {
+    "description": "Widget: no medications yet"
+  },
+  "widgetsMore": "{count, plural, =1{وجرعة أخرى} =2{وجرعتان أخريان} few{و{count} جرعات أخرى} many{و{count} جرعة أخرى} other{و{count} جرعة أخرى}}",
+  "@widgetsMore": {
+    "description": "Widget: doses that do not fit in the list",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsTasksLeft": "{count, plural, =1{بقيت واحدة} =2{بقيت اثنتان} other{بقيت {count}}}",
+  "@widgetsTasksLeft": {
+    "description": "Widget: Top 3 items not done yet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsTasksAllDone": "أنجزت أهم ثلاث اليوم",
+  "@widgetsTasksAllDone": {
+    "description": "Widget: every Top 3 item is done"
+  },
+  "widgetsTasksEmpty": "اختر أهم ثلاث لليوم في مدار",
+  "@widgetsTasksEmpty": {
+    "description": "Widget: no Top 3 chosen for today"
+  },
+  "widgetsTasksCarried": "{count, plural, =1{واحدة لم تكتمل أمس} =2{اثنتان لم تكتملا أمس} other{{count} لم تكتمل أمس}}",
+  "@widgetsTasksCarried": {
+    "description": "Widget after midnight: yesterday's unfinished Top 3 waiting for the carry-over",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsBudgetOf": "من {amount}",
+  "@widgetsBudgetOf": {
+    "description": "Widget: the planned total under what is left",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsBudgetOverBy": "تجاوزت بـ{amount}",
+  "@widgetsBudgetOverBy": {
+    "description": "Widget: spent more than planned",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetsBudgetOver": "تجاوزت الميزانية",
+  "@widgetsBudgetOver": {
+    "description": "Widget (counts only): spent more than planned"
+  },
+  "widgetsBudgetLeftMonth": "متبقٍّ لهذا الشهر",
+  "@widgetsBudgetLeftMonth": {
+    "description": "Widget (counts only) under the percentage"
+  },
+  "widgetsBudgetLeftWeek": "متبقٍّ لهذا الأسبوع",
+  "@widgetsBudgetLeftWeek": {
+    "description": "Widget (counts only) under the percentage"
+  },
+  "widgetsBudgetDaysLeft": "{count, plural, =0{آخر يوم} =1{يوم واحد متبقٍّ} =2{يومان متبقيان} few{{count} أيام متبقية} many{{count} يومًا متبقيًا} other{{count} يوم متبقٍّ}}",
+  "@widgetsBudgetDaysLeft": {
+    "description": "Widget: days left in the budget period after today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetsBudgetNone": "ضع ميزانيتك في مدار",
+  "@widgetsBudgetNone": {
+    "description": "Widget: nothing is planned"
+  },
+  "widgetsStale": "افتح مدار لتحديث هذه الأداة",
+  "@widgetsStale": {
+    "description": "Widget: its data ran out (the app has not run for a while)"
+  },
+  "widgetsSettingsTitle": "أدوات الشاشة الرئيسية",
+  "@widgetsSettingsTitle": {
+    "description": "Settings page / section title"
+  },
+  "widgetsSettingsIntro": "أضف أدوات مدار من شاشتك الرئيسية: اضغط مطولًا على مساحة فارغة، ثم «الأدوات»، ثم مدار.",
+  "@widgetsSettingsIntro": {
+    "description": "Settings: how to add a widget"
+  },
+  "widgetsShowDetails": "إظهار التفاصيل",
+  "@widgetsShowDetails": {
+    "description": "Settings switch: names, times and amounts on the widget"
+  },
+  "widgetsDetailsShown": "الأسماء والأوقات والمبالغ ظاهرة على الشاشة الرئيسية",
+  "@widgetsDetailsShown": {
+    "description": "Settings: subtitle while details are shown"
+  },
+  "widgetsDetailsHidden": "الأعداد فقط — لا أسماء ولا مبالغ",
+  "@widgetsDetailsHidden": {
+    "description": "Settings: subtitle while details are hidden"
+  },
+  "widgetsPrayerDetailsShown": "يظهر اسم مدينتك تحت التاريخ الهجري",
+  "@widgetsPrayerDetailsShown": {
+    "description": "Settings (prayer widget): subtitle while details are shown"
+  },
+  "widgetsPrayerDetailsHidden": "الصلاة ووقتها والتاريخ فقط — دون المدينة",
+  "@widgetsPrayerDetailsHidden": {
+    "description": "Settings (prayer widget): subtitle while details are hidden"
+  },
+  "widgetsOnHomeScreen": "على شاشتك الرئيسية",
+  "@widgetsOnHomeScreen": {
+    "description": "Settings: this widget has been added"
+  },
+  "widgetsNotAdded": "لم تُضف بعد",
+  "@widgetsNotAdded": {
+    "description": "Settings: this widget is not on the home screen"
+  },
+  "widgetsLockNote": "قفل التطبيق مفعّل، لذلك تعرض الأدوات الأعداد فقط ما لم تختر غير ذلك هنا.",
+  "@widgetsLockNote": {
+    "description": "Settings: why details are hidden by default"
+  },
+  "widgetsPrivacyNote": "تُكتب بيانات الأدوات على جهازك فقط، مشفّرة، ولا تُكتب لأداة لم تضفها، وتُمحى مع «حذف كل البيانات».",
+  "@widgetsPrivacyNote": {
+    "description": "Settings: privacy note"
+  },
+  "widgetsBudgetPeriod": "فترة الميزانية",
+  "@widgetsBudgetPeriod": {
+    "description": "Settings: the budget widget shows this month or this week"
+  },
+  "widgetsPeriodMonth": "هذا الشهر",
+  "@widgetsPeriodMonth": {
+    "description": "Settings option"
+  },
+  "widgetsPeriodWeek": "هذا الأسبوع",
+  "@widgetsPeriodWeek": {
+    "description": "Settings option"
+  }
 }

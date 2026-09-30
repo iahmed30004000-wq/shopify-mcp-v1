@@ -21,6 +21,7 @@ import 'app_gate.dart';
 import 'app_preferences.dart';
 import 'faith_services.dart';
 import 'health_services.dart';
+import 'money_services.dart';
 
 /// The root overrides of the Madar provider scope – shared by `bootstrap`
 /// and the test harness so both run the same wiring.
@@ -34,6 +35,10 @@ import 'health_services.dart';
 ///   a route.
 /// * The health packages' hooks ([healthHookOverrides]): the medical
 ///   record's screens open as routes.
+/// * The money packages' hooks ([moneyHookOverrides]): the ledger's and the
+///   goals' screens open as routes, linked entries open their jar / debt /
+///   obligation, the ledger picks budget items with the budget's picker,
+///   and weekly views follow the user's week start.
 List<Override> madarAppOverrides({
   required SharedPreferences prefs,
   required SoundService sound,
@@ -46,6 +51,7 @@ List<Override> madarAppOverrides({
   quickAddHandlerProvider.overrideWith((ref) => ref.watch(shellQuickAddHandlerProvider)),
   ...faithHookOverrides(),
   ...healthHookOverrides(),
+  ...moneyHookOverrides(),
 ];
 
 /// The app's [ThemeData], rebuilt only when an input of the theme changes

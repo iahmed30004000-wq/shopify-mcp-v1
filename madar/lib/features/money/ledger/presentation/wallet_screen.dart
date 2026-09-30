@@ -311,11 +311,13 @@ class _ActionButton extends StatelessWidget {
             children: [
               LedgerMedallion(icon: icon, color: color, size: 36),
               const SizedBox(height: Space.xs + 2),
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: text.labelMedium?.copyWith(color: t.textSecondary),
+              // Shrinks rather than cutting "Adjustment" at a large text size.
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Space.xs),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(label, maxLines: 1, style: text.labelMedium?.copyWith(color: t.textSecondary)),
+                ),
               ),
             ],
           ),
