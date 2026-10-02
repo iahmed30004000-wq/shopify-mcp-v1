@@ -105,6 +105,8 @@ rule sets disagree, that ruling decided the default below; the other ways stay a
 
 ## Still open – confirm with the owner
 
+> **Owner ruling (2026-10-02):** the owner confirmed every default below as proposed – Tarneeb all-pass = same dealer redeals; Trix partnership `partnerCaptureRule: noBonus` and `doublingReveal: simultaneous`; Hand `jokerPenalty: 15`, `wildIndicator: false`; Konkan = its own game, elimination over 301; Basra `sevenDiamonds: sweep`; 41 `partnerRule: positive`. Targets (31/41/61, 101) stay a per-match choice. These items are no longer open.
+
 The most important detail questions per game (defaults in brackets). Each game section has the full list.
 
 - **Tarneeb:** (1) all four pass – the same dealer deals again [yes], or the deal passes on (`redealNextDealer`), or

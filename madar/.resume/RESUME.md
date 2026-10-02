@@ -54,6 +54,7 @@ Every decision or report to the owner: plain Jordanian Arabic, no technical word
 ## Owner decisions
 - EveryAyah recitations: approved (stream on play / download on request; credited).
 - Card and board games: Jordanian rules as defaults.
+- 2026-10-02: owner accepted all 9 proposed rule defaults (Tarneeb all-pass same dealer, Trix partner double no bonus, Hand joker 15 / printed jokers only, Konkan own game to 301, Basra 7♦ sweeps, Ludo pairs captured, Tawla 31 contrary layout, dominoes lock ends round). No code change needed – all were already the defaults.
 
 ## Next
 1. Money integration green → snapshot build → APK.

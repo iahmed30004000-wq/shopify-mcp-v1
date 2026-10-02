@@ -1037,6 +1037,8 @@ of this file:
 
 ### 9.2 Still open – ☐ Confirm with the owner
 
+> **Owner ruling (2026-10-02):** confirmed as proposed – Ludo pairs are captured whole (`safePairs: false`, `blockades: false`); Tawla 31 `layout31: contrary`; dominoes locked line ends the round at once; the 101 target stays a per-match choice. These items are no longer open.
+
 Each item is one option or default in code; the most important come first
 within each game.
 
