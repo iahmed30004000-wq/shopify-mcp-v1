@@ -62,7 +62,7 @@ final List<_World> _worlds = [
     now: wh.workTestNow,
     seed: (db, lang) async {
       await wh.seedWork(wh.WorkTestEnv(db, wh.RecordingHaptics(), SilentSoundService(), wh.workTestNow), lang: lang);
-      await seedCustom(db, languageCode: lang);
+      await seedCustom(db, languageCode: lang, now: wh.workTestNow);
     },
     first: Top3Card,
   ),
@@ -71,7 +71,7 @@ final List<_World> _worlds = [
     now: familyTestNow,
     seed: (db, lang) async {
       await seedFamily(db, arabic: lang == 'ar');
-      await seedCustom(db, languageCode: lang);
+      await seedCustom(db, languageCode: lang, now: familyTestNow);
     },
     first: FamilyTodayCard,
   ),
@@ -80,7 +80,7 @@ final List<_World> _worlds = [
     now: travelTestNow,
     seed: (db, lang) async {
       await seedTravelScenario(db, lang: lang);
-      await seedCustom(db, languageCode: lang);
+      await seedCustom(db, languageCode: lang, now: travelTestNow);
     },
     first: TravelTodayCard,
   ),
@@ -89,7 +89,7 @@ final List<_World> _worlds = [
     now: growthTestNow,
     seed: (db, lang) async {
       await seedScenario(db, lang: lang);
-      await seedCustom(db, languageCode: lang);
+      await seedCustom(db, languageCode: lang, now: growthTestNow);
     },
     first: GrowthTodayCard,
   ),
@@ -98,7 +98,7 @@ final List<_World> _worlds = [
     now: bodyTestNow,
     seed: (db, lang) async {
       await seedBody(db, BodySeed.full, now: bodyTestNow, arabic: lang == 'ar');
-      await seedCustom(db, languageCode: lang);
+      await seedCustom(db, languageCode: lang, now: bodyTestNow);
     },
     first: BodyTodayCard,
   ),

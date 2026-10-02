@@ -140,10 +140,13 @@ Future<void> settleCustom(WidgetTester tester) async {
 // ---------------------------------------------------------------- seed --
 
 /// Generic sample modules (template names in [languageCode]) with a month
-/// of entries ending at [customTestNow]. Returns module ids by template.
-Future<Map<ModuleTemplateKey, String>> seedCustom(MadarDatabase db, {String languageCode = 'ar'}) async {
+/// of entries ending at [now] (default [customTestNow]; another world's
+/// sample clock when the trackers sit beside its data). Returns module ids
+/// by template.
+Future<Map<ModuleTemplateKey, String>> seedCustom(MadarDatabase db, {String languageCode = 'ar', DateTime? now}) async {
+  final at = now ?? customTestNow;
   final repos = Repositories(db);
-  final service = CustomModulesService(repos, clock: () => customTestNow);
+  final service = CustomModulesService(repos, clock: () => at);
   final tx = CustomTexts.forLanguage(languageCode);
   final ids = <ModuleTemplateKey, String>{};
   Future<String> create(ModuleTemplateKey k, {ModuleDefinition Function(ModuleDefinition)? edit}) async {
@@ -155,7 +158,7 @@ Future<Map<ModuleTemplateKey, String>> seedCustom(MadarDatabase db, {String lang
   }
 
   DateTime day(int back, int hour, [int minute = 0]) =>
-      DateTime(customTestNow.year, customTestNow.month, customTestNow.day - back, hour, minute);
+      DateTime(at.year, at.month, at.day - back, hour, minute);
 
   // A habit ticked most days: a live streak of 6 (today included).
   final habit = await create(ModuleTemplateKey.dailyHabit);
