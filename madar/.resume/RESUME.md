@@ -48,6 +48,9 @@ All six runs were resumed with resumeFromRunId (completed agents replay from cac
 ## PAUSED by the owner after APK #14 – nothing is running
 Resume the three PAUSED runs above when the owner says so; keep ≤ ~6 concurrent agents and the strict memory rule.
 
+## Talking to the owner (standing rule)
+Every decision or report to the owner: plain Jordanian Arabic, no technical words, one concrete example per item, options أ/ب/ج with the current one marked, short answer format. Full rule + example in /CLAUDE.md.
+
 ## Owner decisions
 - EveryAyah recitations: approved (stream on play / download on request; credited).
 - Card and board games: Jordanian rules as defaults.
