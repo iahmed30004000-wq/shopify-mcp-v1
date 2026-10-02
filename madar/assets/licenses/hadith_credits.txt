@@ -1,0 +1,61 @@
+Madar – hadith content credits (assets/hadith/nawawi40.json)
+============================================================
+
+An-Nawawi's Forty Hadith (الأربعون النووية), compiled by Imam Yahya ibn
+Sharaf an-Nawawi (d. 676 AH / 1277 CE): 42 hadith, Arabic text with the
+takhrij (who recorded each hadith and its grading). The Arabic text of the
+collection is a classical work in the public domain.
+
+Source dataset
+  fawazahmed0/hadith-api – editions/ara-nawawi.json (branch "1")
+  https://github.com/fawazahmed0/hadith-api
+  https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/editions/ara-nawawi.json
+  Retrieved 2026-09-28; SHA-256 of the file as downloaded:
+  91f559b90422005b768bb449426d87d2e6fabbb43ac3a31e5c24c50ca77465e6
+  Licence: The Unlicense (public-domain dedication, text below).
+
+What Madar changed (display clean-up only; no word of a narration was
+altered):
+  - removed HTML line breaks, stray quotation marks, directional
+    formatting characters and bracketed page / number references
+    (e.g. "[رقم: 2318]", "2/246");
+  - joined "و سلم" into "وسلم", tidied spaces around punctuation;
+  - split the takhrij ("رواه البخاري ومسلم" …) into its own field; for
+    hadith 5 and 19 the additional narration quoted by an-Nawawi ("وفي
+    رواية لمسلم …", "وفي رواية غير الترمذي …") stays with the text;
+  - removed one duplicated takhrij (hadith 13).
+  The short Arabic and English titles of each hadith were written for
+  Madar (they are descriptive labels, not translations).
+
+English translation: NOT bundled. The dataset also offers an English
+edition (eng-nawawi) but names no translator or source, so its licence
+cannot be confirmed as open; Madar shows the Arabic text in both
+languages, with English titles only.
+
+----------------------------------------------------------------------
+The Unlicense
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>

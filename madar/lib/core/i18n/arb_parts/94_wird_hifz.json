@@ -1,0 +1,1576 @@
+{
+  "wirdSep": {
+    "ar": "، ",
+    "en": " · ",
+    "description": "List separator (Arabic comma: a middle dot reads as the digit zero ٠)"
+  },
+  "wirdTitle": {
+    "ar": "الوِرد اليومي",
+    "en": "Daily wird",
+    "description": "Wird screen title"
+  },
+  "wirdTodayTitle": {
+    "ar": "وِرد اليوم",
+    "en": "Today's wird",
+    "description": "Card / section: today's portion"
+  },
+  "wirdReadNow": {
+    "ar": "اقرأ الآن",
+    "en": "Read now",
+    "description": "Button: open the reader at today's portion"
+  },
+  "wirdContinue": {
+    "ar": "أكمِل القراءة",
+    "en": "Continue reading",
+    "description": "Button: open the reader where the user stopped"
+  },
+  "wirdMarkDone": {
+    "ar": "أتممتُه",
+    "en": "Mark done",
+    "description": "Button: record today's portion as read"
+  },
+  "wirdStoppedAt": {
+    "ar": "توقّفتُ عند…",
+    "en": "I stopped at…",
+    "description": "Button: record partial reading"
+  },
+  "wirdStoppedAtTitle": {
+    "ar": "أين توقّفت؟",
+    "en": "Where did you stop?",
+    "description": "Sheet title: partial reading"
+  },
+  "wirdStoppedAtHint": {
+    "ar": "حرّك المؤشّر إلى آخر آية قرأتها",
+    "en": "Move the marker to the last ayah you read",
+    "description": "Sheet subtitle: partial reading"
+  },
+  "wirdSaveProgress": {
+    "ar": "سجّل",
+    "en": "Save",
+    "description": "Sheet button: save partial reading"
+  },
+  "wirdDoneToast": {
+    "ar": "سُجّل وِرد اليوم، تقبّل الله",
+    "en": "Today's wird recorded — may Allah accept it",
+    "description": "Toast after marking done"
+  },
+  "wirdPartialToast": {
+    "ar": "سُجّلت قراءتك حتى {ayah}",
+    "en": "Reading recorded up to {ayah}",
+    "description": "Toast after partial reading",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdMetToday": {
+    "ar": "أتممتَ وِرد اليوم، تقبّل الله منك",
+    "en": "Today's wird is done — may Allah accept it",
+    "description": "Status: today's portion read"
+  },
+  "wirdRestToday": {
+    "ar": "لا شيء عليك اليوم، فأنت متقدّم على خطّتك",
+    "en": "Nothing due today — you're ahead of your plan",
+    "description": "Status: ahead, nothing owed"
+  },
+  "wirdPausedNote": {
+    "ar": "الخطة متوقّفة مؤقتًا",
+    "en": "This plan is paused",
+    "description": "Status: plan paused"
+  },
+  "wirdNotStarted": {
+    "ar": "تبدأ الخطة {date}",
+    "en": "Starts {date}",
+    "description": "Status: plan starts later",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdKhatmaDone": {
+    "ar": "ختمتَ القرآن، تقبّل الله منك",
+    "en": "Khatma complete — may Allah accept it",
+    "description": "Status: khatma finished"
+  },
+  "wirdBehindSpread": {
+    "ar": "متأخّر بمقدار {amount}، ووُزِّع على الأيام القادمة",
+    "en": "{amount} behind — spread over the coming days",
+    "description": "Status: behind, spread",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdBehindAll": {
+    "ar": "متأخّر بمقدار {amount}، وأُضيف إلى وِرد اليوم",
+    "en": "{amount} behind — added to today",
+    "description": "Status: behind, all today",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdAhead": {
+    "ar": "متقدّم بمقدار {amount}، أحسنت",
+    "en": "{amount} ahead — well done",
+    "description": "Status: ahead",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdBehindShort": {
+    "ar": "متأخّر {amount}",
+    "en": "{amount} behind",
+    "description": "Short status: behind",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdAheadShort": {
+    "ar": "متقدّم {amount}",
+    "en": "{amount} ahead",
+    "description": "Short status: ahead",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdTodayLine": {
+    "ar": "اليوم: {range}",
+    "en": "Today: {range}",
+    "description": "Plan tile: today's portion",
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPagePosition": {
+    "ar": "عند ص {page}",
+    "en": "At p. {page}",
+    "description": "Plan tile: where an open-ended plan stands",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdLeftToday": {
+    "ar": "بقي {amount}",
+    "en": "{amount} to go",
+    "description": "Status: remaining today",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdAyahRef": {
+    "ar": "{surah}\u00a0{ayah}",
+    "en": "{surah}\u00a0{ayah}",
+    "description": "An ayah: surah name and ayah number",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdRangeSameSurah": {
+    "ar": "{surah}\u00a0{from}–{to}",
+    "en": "{surah}\u00a0{from}–{to}",
+    "description": "Ayah range inside one surah",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdRangeCross": {
+    "ar": "{from} – {to}",
+    "en": "{from} – {to}",
+    "description": "Ayah range across surahs",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPageRange": {
+    "ar": "ص {from}–{to}",
+    "en": "pp. {from}–{to}",
+    "description": "Mushaf page range",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPageSingle": {
+    "ar": "ص {page}",
+    "en": "p. {page}",
+    "description": "One mushaf page",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdUnitPages": {
+    "ar": "{count, plural, =0{لا صفحات} =1{صفحة واحدة} =2{صفحتان} few{{count} صفحات} many{{count} صفحة} other{{count} صفحة}}",
+    "en": "{count, plural, =0{0 pages} =1{1 page} other{{count} pages}}",
+    "description": "Whole pages",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitJuz": {
+    "ar": "{count, plural, =0{لا أجزاء} =1{جزء واحد} =2{جزآن} few{{count} أجزاء} many{{count} جزءًا} other{{count} جزء}}",
+    "en": "{count, plural, =0{0 juz} =1{1 juz} other{{count} juz}}",
+    "description": "Whole juz",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitHizb": {
+    "ar": "{count, plural, =0{لا أحزاب} =1{حزب واحد} =2{حزبان} few{{count} أحزاب} many{{count} حزبًا} other{{count} حزب}}",
+    "en": "{count, plural, =0{0 hizb} =1{1 hizb} other{{count} hizb}}",
+    "description": "Whole hizb",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitAyat": {
+    "ar": "{count, plural, =0{لا آيات} =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}",
+    "en": "{count, plural, =0{0 ayat} =1{1 ayah} other{{count} ayat}}",
+    "description": "Ayat count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdUnitPagesDecimal": {
+    "ar": "{amount} صفحة",
+    "en": "{amount} pages",
+    "description": "Fractional pages, e.g. 20.1",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdUnitJuzDecimal": {
+    "ar": "{amount} جزء",
+    "en": "{amount} juz",
+    "description": "Fractional juz",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdUnitHizbDecimal": {
+    "ar": "{amount} حزب",
+    "en": "{amount} hizb",
+    "description": "Fractional hizb",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdDays": {
+    "ar": "{count, plural, =0{لا أيام} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =0{0 days} =1{1 day} other{{count} days}}",
+    "description": "A number of days",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdTemplateKhatma": {
+    "ar": "ختمة",
+    "en": "Khatma",
+    "description": "Plan type: finish the Quran in N days"
+  },
+  "wirdTemplatePages": {
+    "ar": "صفحات",
+    "en": "Pages",
+    "description": "Plan type: N pages a day"
+  },
+  "wirdTemplateJuz": {
+    "ar": "أجزاء",
+    "en": "Juz",
+    "description": "Plan type: N juz a day"
+  },
+  "wirdTemplateHizb": {
+    "ar": "أحزاب",
+    "en": "Hizb",
+    "description": "Plan type: N hizb a day"
+  },
+  "wirdTemplateAyat": {
+    "ar": "آيات",
+    "en": "Ayat",
+    "description": "Plan type: N ayat a day"
+  },
+  "wirdSummaryKhatma": {
+    "ar": "ختمة في {days}، {amount} يوميًا",
+    "en": "Khatma in {days} · {amount} a day",
+    "description": "Plan summary line (khatma)",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdSummaryDaily": {
+    "ar": "{amount} يوميًا",
+    "en": "{amount} a day",
+    "description": "Plan summary line (daily amount)",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdDefaultNameKhatma": {
+    "ar": "ختمة في {days}",
+    "en": "Khatma in {days}",
+    "description": "Default plan name (khatma)",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdDefaultNameDaily": {
+    "ar": "{amount} كل يوم",
+    "en": "{amount} every day",
+    "description": "Default plan name (daily amount)",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdWindowAfter": {
+    "ar": "بعد {prayer}",
+    "en": "After {prayer}",
+    "description": "Plan window: after a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdWindowDuha": {
+    "ar": "وقت الضحى",
+    "en": "Duha time",
+    "description": "Plan window: duha"
+  },
+  "wirdWindowAnytime": {
+    "ar": "أي وقت",
+    "en": "Any time",
+    "description": "Plan window: none"
+  },
+  "wirdPlansTitle": {
+    "ar": "خططي",
+    "en": "My plans",
+    "description": "Section: the plans list"
+  },
+  "wirdAddPlan": {
+    "ar": "خطة جديدة",
+    "en": "New plan",
+    "description": "Button: add a plan"
+  },
+  "wirdPrimary": {
+    "ar": "الأساسية",
+    "en": "Primary",
+    "description": "Badge: the primary plan"
+  },
+  "wirdMakePrimary": {
+    "ar": "اجعلها الأساسية",
+    "en": "Make primary",
+    "description": "Action: make a plan primary"
+  },
+  "wirdPause": {
+    "ar": "إيقاف مؤقت",
+    "en": "Pause",
+    "description": "Action: pause a plan"
+  },
+  "wirdResume": {
+    "ar": "استئناف",
+    "en": "Resume",
+    "description": "Action: resume a plan"
+  },
+  "wirdPaused": {
+    "ar": "متوقّفة",
+    "en": "Paused",
+    "description": "Badge: paused plan"
+  },
+  "wirdEdit": {
+    "ar": "تعديل",
+    "en": "Edit",
+    "description": "Action: edit a plan"
+  },
+  "wirdDelete": {
+    "ar": "حذف",
+    "en": "Delete",
+    "description": "Action: delete a plan"
+  },
+  "wirdDeletedToast": {
+    "ar": "حُذفت الخطة",
+    "en": "Plan deleted",
+    "description": "Undo toast: plan deleted"
+  },
+  "wirdPausedToast": {
+    "ar": "أُوقفت الخطة مؤقتًا",
+    "en": "Plan paused",
+    "description": "Undo toast: plan paused"
+  },
+  "wirdResumedToast": {
+    "ar": "استُؤنفت الخطة",
+    "en": "Plan resumed",
+    "description": "Undo toast: plan resumed"
+  },
+  "wirdPrimaryToast": {
+    "ar": "صارت «{name}» خطّتك الأساسية",
+    "en": "“{name}” is now your primary plan",
+    "description": "Undo toast: primary changed",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdSavedToast": {
+    "ar": "حُفظت الخطة",
+    "en": "Plan saved",
+    "description": "Undo toast: plan edited"
+  },
+  "wirdCreatedToast": {
+    "ar": "بدأت خطة «{name}»، يسّر الله لك",
+    "en": "“{name}” has begun — may Allah make it easy",
+    "description": "Undo toast: plan created",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdEmptyTitle": {
+    "ar": "لا خطة وِرد بعد",
+    "en": "No wird plan yet",
+    "description": "Empty state title"
+  },
+  "wirdEmptyBody": {
+    "ar": "اختر ختمة في ثلاثين يومًا أو قدرًا يوميًا يناسبك، ونذكّرك به بعد الصلاة.",
+    "en": "Choose a khatma in thirty days or a daily amount that suits you — we'll remind you after the prayer.",
+    "description": "Empty state body"
+  },
+  "wirdEmptyAction": {
+    "ar": "ابدأ خطة",
+    "en": "Start a plan",
+    "description": "Empty state button"
+  },
+  "wirdStreak": {
+    "ar": "السلسلة",
+    "en": "Streak",
+    "description": "Stat label: streak"
+  },
+  "wirdBestStreak": {
+    "ar": "الأطول: {days}",
+    "en": "Best: {days}",
+    "description": "Stat caption: best streak",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdFinish": {
+    "ar": "الختم المتوقّع",
+    "en": "Projected finish",
+    "description": "Stat label: projected finish"
+  },
+  "wirdTargetDate": {
+    "ar": "الموعد {date}",
+    "en": "Target {date}",
+    "description": "Stat caption: khatma target date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdProgress": {
+    "ar": "التقدّم",
+    "en": "Progress",
+    "description": "Stat label: overall progress"
+  },
+  "wirdKhatmas": {
+    "ar": "{count, plural, =0{لم تُختم بعد} =1{ختمة واحدة} =2{ختمتان} few{{count} ختمات} many{{count} ختمة} other{{count} ختمة}}",
+    "en": "{count, plural, =0{No khatma yet} =1{1 khatma} other{{count} khatmas}}",
+    "description": "Stat caption: khatmas finished",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdNoProjection": {
+    "ar": "لم يتّضح بعد",
+    "en": "Not yet known",
+    "description": "Stat value: no projection"
+  },
+  "wirdProgressOf": {
+    "ar": "{done} من {quota}",
+    "en": "{done} of {quota}",
+    "description": "Progress ring value",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "quota": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdProgressOfShort": {
+    "ar": "من {quota}",
+    "en": "of {quota}",
+    "description": "Ring caption under the number read",
+    "placeholders": {
+      "quota": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdHistoryTitle": {
+    "ar": "السجلّ",
+    "en": "History",
+    "description": "Section: history calendar"
+  },
+  "wirdLegendMet": {
+    "ar": "أُتمّ",
+    "en": "Done",
+    "description": "Calendar legend: met"
+  },
+  "wirdLegendPartial": {
+    "ar": "بعضه",
+    "en": "Partly",
+    "description": "Calendar legend: partial"
+  },
+  "wirdLegendMissed": {
+    "ar": "فات",
+    "en": "Missed",
+    "description": "Calendar legend: missed"
+  },
+  "wirdLegendRest": {
+    "ar": "لا شيء عليه",
+    "en": "Nothing due",
+    "description": "Calendar legend: rest"
+  },
+  "wirdLegendPaused": {
+    "ar": "متوقّف",
+    "en": "Paused",
+    "description": "Calendar legend: paused"
+  },
+  "wirdPrevMonth": {
+    "ar": "الشهر السابق",
+    "en": "Previous month",
+    "description": "Calendar button"
+  },
+  "wirdNextMonth": {
+    "ar": "الشهر التالي",
+    "en": "Next month",
+    "description": "Calendar button"
+  },
+  "wirdNewPlanTitle": {
+    "ar": "خطة وِرد جديدة",
+    "en": "New wird plan",
+    "description": "Plan sheet title (new)"
+  },
+  "wirdEditPlanTitle": {
+    "ar": "تعديل الخطة",
+    "en": "Edit plan",
+    "description": "Plan sheet title (edit)"
+  },
+  "wirdPlanSheetSubtitle": {
+    "ar": "قليلٌ دائم خيرٌ من كثيرٍ منقطع",
+    "en": "A little, done steadily, is better than a lot, abandoned",
+    "description": "Plan sheet subtitle"
+  },
+  "wirdFieldName": {
+    "ar": "الاسم",
+    "en": "Name",
+    "description": "Plan field"
+  },
+  "wirdFieldType": {
+    "ar": "نوع الخطة",
+    "en": "Plan type",
+    "description": "Plan field"
+  },
+  "wirdFieldDays": {
+    "ar": "المدّة",
+    "en": "Duration",
+    "description": "Plan field: khatma length"
+  },
+  "wirdFieldCustom": {
+    "ar": "أخرى",
+    "en": "Other",
+    "description": "Choice: custom duration / amount"
+  },
+  "wirdFieldAmount": {
+    "ar": "المقدار اليومي",
+    "en": "Daily amount",
+    "description": "Plan field"
+  },
+  "wirdFieldStart": {
+    "ar": "نقطة البداية",
+    "en": "Start from",
+    "description": "Plan field"
+  },
+  "wirdFieldStartDate": {
+    "ar": "تاريخ البدء",
+    "en": "Start date",
+    "description": "Plan field"
+  },
+  "wirdStartToday": {
+    "ar": "اليوم",
+    "en": "Today",
+    "description": "Start date choice"
+  },
+  "wirdStartTomorrow": {
+    "ar": "غدًا",
+    "en": "Tomorrow",
+    "description": "Start date choice"
+  },
+  "wirdFinishesOn": {
+    "ar": "تختم يوم {date}",
+    "en": "Finishes on {date}",
+    "description": "Plan sheet: computed finish date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPerDayPreview": {
+    "ar": "نحو {amount} كل يوم",
+    "en": "About {amount} a day",
+    "description": "Plan sheet: computed daily amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdFieldWindow": {
+    "ar": "وقت الوِرد",
+    "en": "Wird time",
+    "description": "Plan field: prayer window"
+  },
+  "wirdFieldCatchUp": {
+    "ar": "إذا فاتك شيء",
+    "en": "If you fall behind",
+    "description": "Plan field: catch-up mode"
+  },
+  "wirdCatchUpSpread": {
+    "ar": "وزّعه على الأيام",
+    "en": "Spread it out",
+    "description": "Catch-up choice"
+  },
+  "wirdCatchUpAll": {
+    "ar": "أضِفه إلى اليوم",
+    "en": "Add it to today",
+    "description": "Catch-up choice"
+  },
+  "wirdCatchUpSpreadHint": {
+    "ar": "يُقسَّم ما فاتك على الأيام القادمة فلا يثقل عليك يوم",
+    "en": "What you missed is shared across the coming days, so no single day is heavy",
+    "description": "Catch-up hint"
+  },
+  "wirdCatchUpAllHint": {
+    "ar": "يُضاف ما فاتك كلّه إلى وِرد اليوم التالي",
+    "en": "Everything you missed is added to the next day's portion",
+    "description": "Catch-up hint"
+  },
+  "wirdFieldRemind": {
+    "ar": "ذكّرني بعد الصلاة",
+    "en": "Remind me after the prayer",
+    "description": "Plan field: reminder"
+  },
+  "wirdRemindAfter": {
+    "ar": "بعد {minutes}",
+    "en": "{minutes} after",
+    "description": "Reminder offset choice",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdMinutes": {
+    "ar": "{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}",
+    "en": "{count, plural, =1{1 min} other{{count} min}}",
+    "description": "Minutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wirdDecrease": {
+    "ar": "إنقاص",
+    "en": "Decrease",
+    "description": "Stepper button"
+  },
+  "wirdIncrease": {
+    "ar": "زيادة",
+    "en": "Increase",
+    "description": "Stepper button"
+  },
+  "wirdSurah": {
+    "ar": "السورة",
+    "en": "Surah",
+    "description": "Field: surah"
+  },
+  "wirdAyah": {
+    "ar": "الآية",
+    "en": "Ayah",
+    "description": "Field: ayah"
+  },
+  "wirdStartJuzShortcut": {
+    "ar": "أول الجزء",
+    "en": "Juz start",
+    "description": "Start shortcut label"
+  },
+  "wirdJuzNumber": {
+    "ar": "الجزء {n}",
+    "en": "Juz {n}",
+    "description": "A juz",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdChooseSurah": {
+    "ar": "اختر السورة",
+    "en": "Choose a surah",
+    "description": "Surah picker title"
+  },
+  "wirdSearchSurah": {
+    "ar": "ابحث باسم السورة أو رقمها",
+    "en": "Search by name or number",
+    "description": "Surah picker search hint"
+  },
+  "wirdCreate": {
+    "ar": "ابدأ الخطة",
+    "en": "Start plan",
+    "description": "Plan sheet button (new)"
+  },
+  "wirdSave": {
+    "ar": "حفظ",
+    "en": "Save",
+    "description": "Plan sheet button (edit)"
+  },
+  "wirdNameRequired": {
+    "ar": "اكتب اسمًا للخطة",
+    "en": "Give the plan a name",
+    "description": "Validation"
+  },
+  "wirdReminderChannelName": {
+    "ar": "تذكير الوِرد",
+    "en": "Wird reminders",
+    "description": "Notification channel name"
+  },
+  "wirdReminderChannelDescription": {
+    "ar": "تذكير بوِردك اليومي بعد الصلاة التي تختارها",
+    "en": "A reminder for your daily wird after the prayer you choose",
+    "description": "Notification channel description"
+  },
+  "wirdReminderTitle": {
+    "ar": "حان وقت وِردك",
+    "en": "Time for your wird",
+    "description": "Reminder title"
+  },
+  "wirdReminderBodyToday": {
+    "ar": "{plan}: {range}",
+    "en": "{plan}: {range}",
+    "description": "Reminder body naming today's portion",
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdReminderBody": {
+    "ar": "{plan} — {window}",
+    "en": "{plan} — {window}",
+    "description": "Reminder body",
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdCatalogError": {
+    "ar": "تعذّر تحميل بيانات المصحف",
+    "en": "Couldn't load the Quran data",
+    "description": "Error: catalog unavailable"
+  },
+  "wirdOverallOf": {
+    "ar": "{percent} من الختمة",
+    "en": "{percent} of the khatma",
+    "description": "Overall progress caption",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdPositionIn": {
+    "ar": "{percent} من المصحف",
+    "en": "{percent} through the mushaf",
+    "description": "Open-ended progress caption",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "wirdOpenAll": {
+    "ar": "كل الخطط",
+    "en": "All plans",
+    "description": "Card link: wird screen"
+  },
+  "wirdStartPlanCta": {
+    "ar": "ابدأ وِردًا يوميًا",
+    "en": "Start a daily wird",
+    "description": "Card: no plan yet"
+  },
+  "wirdDayStatusSemantics": {
+    "ar": "{date}: {status}",
+    "en": "{date}: {status}",
+    "description": "Calendar day for screen readers",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzTitle": {
+    "ar": "الحفظ",
+    "en": "Hifz",
+    "description": "Hifz screen title"
+  },
+  "hifzTodayTitle": {
+    "ar": "مراجعة الحفظ",
+    "en": "Hifz review",
+    "description": "Hifz card title"
+  },
+  "hifzStartReview": {
+    "ar": "ابدأ المراجعة",
+    "en": "Start review",
+    "description": "Button"
+  },
+  "hifzContinueReview": {
+    "ar": "واصل المراجعة",
+    "en": "Keep reviewing",
+    "description": "Button when some reviews are done today"
+  },
+  "hifzNothingDue": {
+    "ar": "لا مراجعة اليوم",
+    "en": "Nothing to review today",
+    "description": "Status"
+  },
+  "hifzAllCaughtUp": {
+    "ar": "راجعتَ كلّ ما استحقّ اليوم، بارك الله فيك",
+    "en": "All caught up for today — barakAllahu feek",
+    "description": "Status"
+  },
+  "hifzDueCount": {
+    "ar": "{count, plural, =0{لا مراجعة} =1{مقطع للمراجعة} =2{مقطعان للمراجعة} few{{count} مقاطع للمراجعة} many{{count} مقطعًا للمراجعة} other{{count} مقطع للمراجعة}}",
+    "en": "{count, plural, =0{Nothing due} =1{1 to review} other{{count} to review}}",
+    "description": "Count of due items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzNewCount": {
+    "ar": "{count, plural, =0{لا جديد} =1{مقطع جديد} =2{مقطعان جديدان} few{{count} مقاطع جديدة} many{{count} مقطعًا جديدًا} other{{count} مقطع جديد}}",
+    "en": "{count, plural, =0{No new} =1{1 new} other{{count} new}}",
+    "description": "Count of new items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzTabDue": {
+    "ar": "المستحق",
+    "en": "Due",
+    "description": "Tab"
+  },
+  "hifzTabNew": {
+    "ar": "الجديد",
+    "en": "New",
+    "description": "Tab"
+  },
+  "hifzTabLearned": {
+    "ar": "المحفوظ",
+    "en": "Learned",
+    "description": "Tab"
+  },
+  "hifzStatDue": {
+    "ar": "اليوم",
+    "en": "Today",
+    "description": "Stat label"
+  },
+  "hifzStatLearned": {
+    "ar": "محفوظ",
+    "en": "Learned",
+    "description": "Stat label"
+  },
+  "hifzStatRetention": {
+    "ar": "التذكّر",
+    "en": "Retention",
+    "description": "Stat label: share of reviews recalled"
+  },
+  "hifzStatStreak": {
+    "ar": "السلسلة",
+    "en": "Streak",
+    "description": "Stat label"
+  },
+  "hifzRetentionCaption": {
+    "ar": "آخر {days} يومًا",
+    "en": "Last {days} days",
+    "description": "Stat caption: the retention window (days is a formatted number)",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzForecastTitle": {
+    "ar": "المراجعات في الأسبوع القادم",
+    "en": "Reviews in the week ahead",
+    "description": "Forecast chart title"
+  },
+  "hifzForecastToday": {
+    "ar": "اليوم",
+    "en": "Today",
+    "description": "Forecast: today column"
+  },
+  "hifzKindAyat": {
+    "ar": "آيات",
+    "en": "Ayat",
+    "description": "Item kind"
+  },
+  "hifzKindHadith": {
+    "ar": "حديث",
+    "en": "Hadith",
+    "description": "Item kind"
+  },
+  "hifzKindCustom": {
+    "ar": "نص",
+    "en": "Text",
+    "description": "Item kind"
+  },
+  "hifzDueIn": {
+    "ar": "{count, plural, =0{اليوم} =1{غدًا} =2{بعد يومين} few{بعد {count} أيام} many{بعد {count} يومًا} other{بعد {count} يوم}}",
+    "en": "{count, plural, =0{today} =1{tomorrow} other{in {count} days}}",
+    "description": "When an item is due",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzOverdue": {
+    "ar": "{count, plural, =1{فات موعده أمس} =2{فات موعده منذ يومين} few{فات موعده منذ {count} أيام} many{فات موعده منذ {count} يومًا} other{فات موعده منذ {count} يوم}}",
+    "en": "{count, plural, =1{1 day overdue} other{{count} days overdue}}",
+    "description": "Overdue item",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzReviews": {
+    "ar": "{count, plural, =0{لم يُراجَع بعد} =1{مراجعة واحدة} =2{مراجعتان} few{{count} مراجعات} many{{count} مراجعة} other{{count} مراجعة}}",
+    "en": "{count, plural, =0{Not reviewed yet} =1{1 review} other{{count} reviews}}",
+    "description": "Reviews count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzLapses": {
+    "ar": "{count, plural, =1{نُسي مرة} =2{نُسي مرتين} few{نُسي {count} مرات} many{نُسي {count} مرة} other{نُسي {count} مرة}}",
+    "en": "{count, plural, =1{forgotten once} other{forgotten {count} times}}",
+    "description": "Lapses count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzNewBadge": {
+    "ar": "جديد",
+    "en": "New",
+    "description": "Badge"
+  },
+  "hifzSuspendedBadge": {
+    "ar": "معلّق",
+    "en": "Suspended",
+    "description": "Badge"
+  },
+  "hifzAdd": {
+    "ar": "أضِف",
+    "en": "Add",
+    "description": "Button: add items"
+  },
+  "hifzAddTitle": {
+    "ar": "إضافة إلى الحفظ",
+    "en": "Add to Hifz",
+    "description": "Add sheet title"
+  },
+  "hifzAddSubtitle": {
+    "ar": "ما تحفظه اليوم يعود إليك قبل أن يُنسى",
+    "en": "What you learn today comes back before it fades",
+    "description": "Add sheet subtitle"
+  },
+  "hifzAddAyat": {
+    "ar": "آيات من القرآن",
+    "en": "Ayat of the Quran",
+    "description": "Add choice"
+  },
+  "hifzAddAyatHint": {
+    "ar": "اختر سورة وآيات، وتُقسَّم إلى مقاطع قصيرة",
+    "en": "Pick a surah and ayat — split into short chunks",
+    "description": "Add choice hint"
+  },
+  "hifzAddHadith": {
+    "ar": "حديث من الأربعين النووية",
+    "en": "A hadith from An-Nawawi's Forty",
+    "description": "Add choice"
+  },
+  "hifzAddHadithHint": {
+    "ar": "اثنان وأربعون حديثًا من جوامع الكلم",
+    "en": "Forty-two concise, comprehensive hadith",
+    "description": "Add choice hint"
+  },
+  "hifzAddCustom": {
+    "ar": "نصّ من اختيارك",
+    "en": "Your own text",
+    "description": "Add choice"
+  },
+  "hifzAddCustomHint": {
+    "ar": "دعاء أو متن أو أيّ نصّ تريد حفظه",
+    "en": "A dua, a classical text — anything you want to memorise",
+    "description": "Add choice hint"
+  },
+  "hifzFromAyah": {
+    "ar": "من الآية",
+    "en": "From ayah",
+    "description": "Field"
+  },
+  "hifzToAyah": {
+    "ar": "إلى الآية",
+    "en": "To ayah",
+    "description": "Field"
+  },
+  "hifzChunkSize": {
+    "ar": "آيات كل مقطع",
+    "en": "Ayat per chunk",
+    "description": "Field"
+  },
+  "hifzChunks": {
+    "ar": "{count, plural, =0{لا مقاطع} =1{مقطع واحد} =2{مقطعان} few{{count} مقاطع} many{{count} مقطعًا} other{{count} مقطع}}",
+    "en": "{count, plural, =0{No chunks} =1{1 chunk} other{{count} chunks}}",
+    "description": "Chunk count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzChunkPreview": {
+    "ar": "{chunks}: {ranges}",
+    "en": "{chunks}: {ranges}",
+    "description": "Chunk preview line",
+    "placeholders": {
+      "chunks": {
+        "type": "String"
+      },
+      "ranges": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzAddButton": {
+    "ar": "أضِف إلى الحفظ",
+    "en": "Add to Hifz",
+    "description": "Sheet button"
+  },
+  "hifzAdded": {
+    "ar": "{count, plural, =1{أُضيف مقطع إلى الحفظ} =2{أُضيف مقطعان إلى الحفظ} few{أُضيفت {count} مقاطع إلى الحفظ} many{أُضيف {count} مقطعًا إلى الحفظ} other{أُضيف {count} مقطع إلى الحفظ}}",
+    "en": "{count, plural, =1{1 item added to Hifz} other{{count} items added to Hifz}}",
+    "description": "Undo toast: items added",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzInHifz": {
+    "ar": "في الحفظ",
+    "en": "In Hifz",
+    "description": "Badge: hadith already added"
+  },
+  "hifzCustomTitle": {
+    "ar": "العنوان",
+    "en": "Title",
+    "description": "Field"
+  },
+  "hifzCustomTitleHint": {
+    "ar": "مثلًا: دعاء الاستخارة",
+    "en": "e.g. The istikhara dua",
+    "description": "Field hint"
+  },
+  "hifzCustomBody": {
+    "ar": "النص",
+    "en": "Text",
+    "description": "Field"
+  },
+  "hifzCustomSource": {
+    "ar": "المصدر (اختياري)",
+    "en": "Source (optional)",
+    "description": "Field"
+  },
+  "hifzBodyRequired": {
+    "ar": "اكتب النصّ الذي تريد حفظه",
+    "en": "Write the text you want to memorise",
+    "description": "Validation"
+  },
+  "hifzEdit": {
+    "ar": "تعديل",
+    "en": "Edit",
+    "description": "Action"
+  },
+  "hifzEditTitle": {
+    "ar": "تعديل المقطع",
+    "en": "Edit item",
+    "description": "Sheet title"
+  },
+  "hifzSuspend": {
+    "ar": "تعليق",
+    "en": "Suspend",
+    "description": "Action: stop scheduling an item"
+  },
+  "hifzUnsuspend": {
+    "ar": "إعادة إلى المراجعة",
+    "en": "Back to reviews",
+    "description": "Action: unsuspend"
+  },
+  "hifzResetProgress": {
+    "ar": "البدء فيه من جديد",
+    "en": "Start it over",
+    "description": "Action: reset SM-2 state"
+  },
+  "hifzDelete": {
+    "ar": "حذف",
+    "en": "Delete",
+    "description": "Action"
+  },
+  "hifzReviewNow": {
+    "ar": "راجِعه الآن",
+    "en": "Review now",
+    "description": "Action: review one item"
+  },
+  "hifzDeletedToast": {
+    "ar": "حُذف من الحفظ",
+    "en": "Removed from Hifz",
+    "description": "Undo toast"
+  },
+  "hifzSuspendedToast": {
+    "ar": "عُلّق المقطع",
+    "en": "Item suspended",
+    "description": "Undo toast"
+  },
+  "hifzUnsuspendedToast": {
+    "ar": "عاد المقطع إلى المراجعة",
+    "en": "Item back in reviews",
+    "description": "Undo toast"
+  },
+  "hifzResetToast": {
+    "ar": "عاد المقطع جديدًا",
+    "en": "Item is new again",
+    "description": "Undo toast"
+  },
+  "hifzSavedToast": {
+    "ar": "حُفظت التعديلات",
+    "en": "Changes saved",
+    "description": "Undo toast"
+  },
+  "hifzReviewTitle": {
+    "ar": "المراجعة",
+    "en": "Review",
+    "description": "Review screen title"
+  },
+  "hifzReviewProgress": {
+    "ar": "{done} من {total}",
+    "en": "{done} of {total}",
+    "description": "Review progress",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzRecitePrompt": {
+    "ar": "اقرأ من حفظك، ثم اكشف النصّ وقيّم نفسك بصدق",
+    "en": "Recite from memory, then reveal the text and grade yourself honestly",
+    "description": "Review hint"
+  },
+  "hifzRevealFirstLetters": {
+    "ar": "أوائل الكلمات",
+    "en": "First letters",
+    "description": "Reveal stage"
+  },
+  "hifzRevealNextWord": {
+    "ar": "الكلمة التالية",
+    "en": "Next word",
+    "description": "Reveal button"
+  },
+  "hifzRevealAll": {
+    "ar": "أظهِر النصّ",
+    "en": "Show all",
+    "description": "Reveal button"
+  },
+  "hifzRevealHide": {
+    "ar": "أخفِ",
+    "en": "Hide",
+    "description": "Reveal button"
+  },
+  "hifzListen": {
+    "ar": "استمع",
+    "en": "Listen",
+    "description": "Button: play recitation"
+  },
+  "hifzListenStop": {
+    "ar": "أوقِف",
+    "en": "Stop",
+    "description": "Button: stop recitation"
+  },
+  "hifzRepeatTimes": {
+    "ar": "{count, plural, =1{مرة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =1{once} =2{twice} other{{count} times}}",
+    "description": "Repeat count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzRedrill": {
+    "ar": "نعيده حتى يبلغ «جيد»",
+    "en": "Once more, until it's “good”",
+    "description": "Badge: same-session re-drill"
+  },
+  "hifzNewItem": {
+    "ar": "مقطع جديد",
+    "en": "New item",
+    "description": "Badge: first review"
+  },
+  "hifzGradePrompt": {
+    "ar": "كيف كان استحضارك؟",
+    "en": "How well did you recall it?",
+    "description": "Grade prompt"
+  },
+  "hifzGrade0": {
+    "ar": "نسيته",
+    "en": "Blank",
+    "description": "SM-2 grade 0"
+  },
+  "hifzGrade0Hint": {
+    "ar": "لم أستحضر شيئًا",
+    "en": "Couldn't recall anything",
+    "description": "SM-2 grade 0 meaning"
+  },
+  "hifzGrade1": {
+    "ar": "أخطأت",
+    "en": "Wrong",
+    "description": "SM-2 grade 1"
+  },
+  "hifzGrade1Hint": {
+    "ar": "أخطأت، وعرفته حين رأيته",
+    "en": "Wrong; recognised it when shown",
+    "description": "SM-2 grade 1 meaning"
+  },
+  "hifzGrade2": {
+    "ar": "قريب",
+    "en": "Almost",
+    "description": "SM-2 grade 2"
+  },
+  "hifzGrade2Hint": {
+    "ar": "أخطأت، وبدا سهلًا حين رأيته",
+    "en": "Wrong, but it seemed easy once shown",
+    "description": "SM-2 grade 2 meaning"
+  },
+  "hifzGrade3": {
+    "ar": "بصعوبة",
+    "en": "Hard",
+    "description": "SM-2 grade 3"
+  },
+  "hifzGrade3Hint": {
+    "ar": "صحيح بجهدٍ كبير",
+    "en": "Correct, with serious effort",
+    "description": "SM-2 grade 3 meaning"
+  },
+  "hifzGrade4": {
+    "ar": "جيد",
+    "en": "Good",
+    "description": "SM-2 grade 4"
+  },
+  "hifzGrade4Hint": {
+    "ar": "صحيح بعد تردّد يسير",
+    "en": "Correct after a little hesitation",
+    "description": "SM-2 grade 4 meaning"
+  },
+  "hifzGrade5": {
+    "ar": "متقَن",
+    "en": "Perfect",
+    "description": "SM-2 grade 5"
+  },
+  "hifzGrade5Hint": {
+    "ar": "صحيح بلا تردّد",
+    "en": "Correct, without hesitation",
+    "description": "SM-2 grade 5 meaning"
+  },
+  "hifzUndoGrade": {
+    "ar": "تراجع عن التقييم",
+    "en": "Undo grade",
+    "description": "Button"
+  },
+  "hifzNextReview": {
+    "ar": "المراجعة القادمة {when}",
+    "en": "Next review {when}",
+    "description": "After grading",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzFinish": {
+    "ar": "إنهاء",
+    "en": "Finish",
+    "description": "Button: end session early"
+  },
+  "hifzSummaryTitle": {
+    "ar": "أتممتَ المراجعة",
+    "en": "Review complete",
+    "description": "Summary title"
+  },
+  "hifzSummarySubtitle": {
+    "ar": "«خيرُكم من تعلّم القرآن وعلّمه»",
+    "en": "“The best of you are those who learn the Quran and teach it”",
+    "description": "Summary subtitle (hadith)"
+  },
+  "hifzSummaryReviewed": {
+    "ar": "راجعت",
+    "en": "Reviewed",
+    "description": "Summary stat"
+  },
+  "hifzSummaryNew": {
+    "ar": "جديد",
+    "en": "New",
+    "description": "Summary stat"
+  },
+  "hifzSummaryAgain": {
+    "ar": "أُعيد",
+    "en": "Repeated",
+    "description": "Summary stat: re-drills"
+  },
+  "hifzSummaryRecall": {
+    "ar": "تذكّرت",
+    "en": "Recalled",
+    "description": "Summary stat: share graded ≥3"
+  },
+  "hifzSummaryTomorrow": {
+    "ar": "غدًا: {count}",
+    "en": "Tomorrow: {count}",
+    "description": "Summary: due tomorrow",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzSummaryDone": {
+    "ar": "تمّ",
+    "en": "Done",
+    "description": "Summary button"
+  },
+  "hifzEmptySession": {
+    "ar": "لا شيء للمراجعة الآن",
+    "en": "Nothing to review right now",
+    "description": "Review screen empty"
+  },
+  "hifzEmptyTitle": {
+    "ar": "ابدأ رحلة الحفظ",
+    "en": "Begin your Hifz",
+    "description": "Empty state"
+  },
+  "hifzEmptyBody": {
+    "ar": "أضِف آيات أو حديثًا، ويعيدها التكرار المتباعد إليك قبل أن تُنسى.",
+    "en": "Add ayat or a hadith — spaced repetition brings them back before they fade.",
+    "description": "Empty state"
+  },
+  "hifzEmptyDue": {
+    "ar": "لا شيء مستحقّ اليوم",
+    "en": "Nothing due today",
+    "description": "Empty tab"
+  },
+  "hifzEmptyNew": {
+    "ar": "لا مقاطع جديدة تنتظر",
+    "en": "No new items waiting",
+    "description": "Empty tab"
+  },
+  "hifzEmptyLearned": {
+    "ar": "تظهر هنا المقاطع بعد أول مراجعة لها",
+    "en": "Items appear here after their first review",
+    "description": "Empty tab"
+  },
+  "hifzSettingsTitle": {
+    "ar": "إعدادات الحفظ",
+    "en": "Hifz settings",
+    "description": "Settings sheet title"
+  },
+  "hifzNewPerDay": {
+    "ar": "مقاطع جديدة كل يوم",
+    "en": "New items a day",
+    "description": "Setting"
+  },
+  "hifzListenRepeat": {
+    "ar": "تكرار الاستماع لكل آية",
+    "en": "Listening repeats per ayah",
+    "description": "Setting"
+  },
+  "hifzHadithNumber": {
+    "ar": "الحديث {n}",
+    "en": "Hadith {n}",
+    "description": "Hadith number",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzHadithSource": {
+    "ar": "{collection}، {n}",
+    "en": "{collection} · {n}",
+    "description": "Hadith source line",
+    "placeholders": {
+      "collection": {
+        "type": "String"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzCatalogError": {
+    "ar": "تعذّر تحميل بيانات المصحف",
+    "en": "Couldn't load the Quran data",
+    "description": "Error"
+  },
+  "hifzEase": {
+    "ar": "السهولة {value}",
+    "en": "Ease {value}",
+    "description": "SM-2 ease factor",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzEveryDay": {
+    "ar": "كل يوم",
+    "en": "Every day",
+    "description": "SM-2 interval of one day"
+  },
+  "hifzInterval": {
+    "ar": "كل {days}",
+    "en": "Every {days}",
+    "description": "SM-2 interval",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzOpenAll": {
+    "ar": "كل المقاطع",
+    "en": "All items",
+    "description": "Card link"
+  },
+  "hifzStartCta": {
+    "ar": "ابدأ الحفظ",
+    "en": "Start memorising",
+    "description": "Card: nothing added yet"
+  }
+}

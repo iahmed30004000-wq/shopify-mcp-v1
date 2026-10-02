@@ -1,0 +1,43 @@
+{
+  "planetsSystemSemantics": {
+    "ar": "{count, plural, =0{مدار حياتك بلا عوالم ظاهرة} =1{مدار حياتك: عالم واحد يدور حول نجمك} =2{مدار حياتك: عالمان يدوران حول نجمك} few{مدار حياتك: {n} عوالم تدور حول نجمك} many{مدار حياتك: {n} عالمًا يدور حول نجمك} other{مدار حياتك: {n} عالم يدور حول نجمك}}",
+    "en": "{count, plural, =0{Your life's orbit, no worlds shown} =1{Your life's orbit: 1 world circling your star} other{Your life's orbit: {n} worlds circling your star}}",
+    "description": "Screen-reader label of the planet layer of the orbit (n = count formatted with the user's digits)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "planetsOpenHint": {
+    "ar": "ادخل إلى هذا العالم",
+    "en": "Fly into this world",
+    "description": "Screen-reader hint for tapping a planet (a cinematic fly-in opens its module)"
+  },
+  "planetsCustomizeHint": {
+    "ar": "خصّص هذا العالم",
+    "en": "Customise this world",
+    "description": "Screen-reader hint for long-pressing a planet (opens its customisation sheet)"
+  },
+  "planetsMoonOpenHint": {
+    "ar": "افتح",
+    "en": "Open",
+    "description": "Screen-reader hint for tapping a data moon (opens that person, wallet, board or trip)"
+  },
+  "planetsMoonsCount": {
+    "ar": "{count, plural, =0{بلا أقمار} =1{قمر واحد} =2{قمران} few{{n} أقمار} many{{n} قمرًا} other{{n} قمر}}",
+    "en": "{count, plural, =0{no moons} =1{1 moon} other{{n} moons}}",
+    "description": "How many data moons orbit a planet, read after the planet's label (n = count formatted with the user's digits)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  }
+}

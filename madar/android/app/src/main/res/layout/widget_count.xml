@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Meds / Top 3 with details hidden (counts only), at 2×2, or with nothing
+     to list: title, the big count, a line and the state dots. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:gravity="center_vertical"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/widget_title"
+        style="@style/widget_text_title" />
+
+    <TextView
+        android:id="@+id/widget_headline"
+        style="@style/widget_text_headline"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/widget_accent"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/widget_detail"
+        style="@style/widget_text_detail"
+        android:maxLines="2" />
+
+    <TextView
+        android:id="@+id/widget_note"
+        style="@style/widget_text_accent"
+        android:layout_marginTop="4dp"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_empty"
+        style="@style/widget_text_detail"
+        android:layout_marginTop="4dp"
+        android:maxLines="3"
+        android:textColor="@color/widget_text_primary" />
+</LinearLayout>

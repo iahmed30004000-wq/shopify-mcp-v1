@@ -1,0 +1,261 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Network: only for Quran text/audio fetch, optional downloads and user-initiated AI calls. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Adhan (lib/features/adhan, lib/core/notifications) ======================
+         * RECEIVE_BOOT_COMPLETED – flutter_local_notifications re-arms the adhan
+           alarms after a reboot / app update (alarms do not survive either).
+         * Exact alarms – the adhan must sound at the exact minute:
+           USE_EXACT_ALARM (Android 13+) is granted at install and cannot be
+           revoked – right for an alarm-clock-like core feature (Madar is not
+           distributed through Google Play; if it ever is, Play restricts
+           USE_EXACT_ALARM to alarm / calendar apps – then drop it and remove
+           maxSdkVersion from SCHEDULE_EXACT_ALARM; the in-app permission card
+           already asks for it). SCHEDULE_EXACT_ALARM covers Android 12 / 12L,
+           where it is granted by default.
+         * USE_FULL_SCREEN_INTENT – the adhan screen over the lock screen
+           (Android 14+ lets the user revoke it; the permission card checks).
+         * WAKE_LOCK – keep the CPU up while an alarm is delivered (and, for
+           the recitation below, while audio_service's service plays).
+         * REQUEST_IGNORE_BATTERY_OPTIMIZATIONS – the permission card asks for
+           the battery-optimisation exemption (OEM task killers; audio_service
+           also needs it to restart its foreground service from the
+           background on Android 12+). -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- Recitation (lib/features/recitation): audio_service's media-playback
+         foreground service keeps a recitation playing with the screen off,
+         with its notification, lock-screen and headset controls.
+         FOREGROUND_SERVICE_MEDIA_PLAYBACK is required for that service type
+         from Android 14 (API 34). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <!-- Prayer times: location for the offline calculation (one fix, only when
+         the user asks; a manual city works without it). Approximate location
+         is all prayer times and the qibla need (a few km), so only
+         ACCESS_COARSE_LOCATION is declared: geolocator then asks for
+         approximate location only (geolocator_android PermissionManager
+         requests exactly the location permissions the manifest lists), which
+         matches the in-app rationale ("your approximate location"). -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- geolocator_android declares a location foreground service (and its
+         permission) for background tracking; Madar only takes one
+         approximate fix in the foreground and never starts it, so the
+         permission is dropped from the merged manifest (privacy). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" tools:node="remove" />
+
+    <!-- Qibla (lib/features/qibla): the compass reads the magnetometer and
+         accelerometer (no permission needed) but does not require them – the
+         sun compass and the night diagram cover phones without them. -->
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+
+    <application
+        android:label="@string/app_name"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+        <!-- showWhenLocked / turnScreenOn are set at run time by MainActivity,
+             only while one of Madar's own adhan notifications launches it
+             full-screen – never for the whole activity, which would expose the
+             app over the lock screen whenever it was left open. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- flutter_local_notifications 21 (README › AndroidManifest.xml setup):
+             scheduled notifications, their reboot restore and action buttons. -->
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+
+        <!-- Runs before the plugin's boot receiver (higher priority, same
+             process): drops adhan alarms that passed while the phone was off
+             (so Fajr never sounds at 9:00) and re-grants the muezzin
+             recordings to the system. 999: 1000 (SYSTEM_HIGH_PRIORITY) and
+             above are reserved for the system; any value above the plugin's
+             default 0 keeps the order. -->
+        <receiver android:exported="false" android:name=".AdhanBootGuard">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Read-only access for the system to the muezzin recordings the user
+             attached (notification channel sounds); per-URI grants only. -->
+        <provider
+            android:name=".AdhanSoundProvider"
+            android:authorities="${applicationId}.adhansounds"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <!-- audio_service 0.18.19 (README › Android setup; the plugin's own
+             manifest is empty): the media service a recitation runs in while
+             Madar is in the background, and the receiver for headset /
+             Bluetooth media buttons and the notification's buttons. Exported:
+             the system's media browser and media-button dispatch bind to them.
+             Same process as MainActivity, whose FlutterEngine the service
+             shares (AudioServiceFragmentActivity). The recitation's Dart side
+             (AudioServiceBackground) starts it only on the user's first play,
+             and falls back to foreground-only playback if it cannot. -->
+        <service
+            android:name="com.ryanheise.audioservice.AudioService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Home-screen widgets (lib/features/widgets, kotlin/…/widgets): next
+             prayer, today's meds, Top 3, budget left. Each draws from the
+             encrypted snapshot the app wrote (nothing is written for a widget
+             that is not on a home screen), turns its pages at their own times
+             with a non-waking alarm and redraws on clock / time-zone changes.
+             Home screen only (widgetCategory) – never the lock screen. Not
+             exported: only the system's widget service and the app's own
+             alarms reach them. -->
+        <receiver
+            android:name=".widgets.PrayerWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_prayer_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_prayer" />
+        </receiver>
+        <receiver
+            android:name=".widgets.MedsWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_meds_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_meds" />
+        </receiver>
+        <receiver
+            android:name=".widgets.TasksWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_tasks_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_tasks" />
+        </receiver>
+        <receiver
+            android:name=".widgets.BudgetWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_budget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_budget" />
+        </receiver>
+
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- SystemUI plays notification sounds: it must be visible to grant it
+             read access to the muezzin recordings (AdhanSoundProvider). -->
+        <package android:name="com.android.systemui" />
+        <!-- Health › Wellbeing: the support note's "Call 911" opens the
+             phone's dialler through url_launcher's tel: link (the user
+             presses call; Madar never calls by itself). Android 11+ package
+             visibility needs the tel: scheme declared (url_launcher README). -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tel" />
+        </intent>
+        <!-- Family: a person's SMS and WhatsApp (wa.me over https) open only
+             on an explicit tap (url_launcher; Android 11+ package visibility
+             needs the schemes declared). Madar never sends by itself. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="sms" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+</manifest>

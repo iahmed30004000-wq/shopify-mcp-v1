@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- الأدوات على الشاشة الرئيسية: أسماؤها في قائمة الأدوات ووصفها ونص
+     «افتح مدار» ونصوص المعاينة. ما تعرضه الأداة الحية يأتي من التطبيق بلغته. -->
+<resources>
+    <string name="widget_prayer_label">الصلاة القادمة</string>
+    <string name="widget_meds_label">أدوية اليوم</string>
+    <string name="widget_tasks_label">أهم ثلاث اليوم</string>
+    <string name="widget_budget_label">المتبقي من الميزانية</string>
+
+    <string name="widget_prayer_title">الصلاة القادمة</string>
+    <string name="widget_meds_title">أدوية اليوم</string>
+    <string name="widget_tasks_title">أهم ثلاث اليوم</string>
+    <string name="widget_budget_title">المتبقي من الميزانية</string>
+
+    <string name="widget_prayer_description">الصلاة القادمة على أسطرلاب صغير، ووقتها، وعدّ تنازلي، والتاريخ الهجري.</string>
+    <string name="widget_meds_description">جرعات اليوم، المأخوذة والباقية. الأعداد فقط ما دام قفل التطبيق مفعّلًا.</string>
+    <string name="widget_tasks_description">أهم ثلاث اليوم وما أُنجز منها. الأعداد فقط ما دام قفل التطبيق مفعّلًا.</string>
+    <string name="widget_budget_description">المتبقي من ميزانية هذا الشهر. النسبة فقط ما دام قفل التطبيق مفعّلًا.</string>
+
+    <string name="widget_placeholder">افتح مدار لإعداد هذه الأداة</string>
+
+    <string name="widget_sample_prayer">العصر</string>
+    <string name="widget_sample_prayer_time">٣:٢١ م</string>
+    <string name="widget_sample_countdown">بعد ١:٤٢:١٠</string>
+    <string name="widget_sample_hijri">٨ ربيع الآخر ١٤٤٨ هـ</string>
+    <string name="widget_sample_meds_count">٢/٤</string>
+    <string name="widget_sample_meds_next">التالية ٢:٠٠ م</string>
+    <string name="widget_sample_meds_row_1">✓  فيتامين د · كبسولة</string>
+    <string name="widget_sample_meds_row_2">✓  ميتفورمين · ٥٠٠ ملغ</string>
+    <string name="widget_sample_meds_row_3">○  ميتفورمين · ٥٠٠ ملغ</string>
+    <string name="widget_sample_tasks_count">١/٣</string>
+    <string name="widget_sample_tasks_left">بقيت اثنتان</string>
+    <string name="widget_sample_tasks_row_1">✓  الاتصال بالبنك</string>
+    <string name="widget_sample_tasks_row_2">○  إنهاء التقرير</string>
+    <string name="widget_sample_tasks_row_3">○  زيارة الجدة</string>
+    <string name="widget_sample_budget_amount">١٨٢٫٥٠٠ د.أ</string>
+    <string name="widget_sample_budget_of">من ٤٥٠٫٠٠٠ د.أ</string>
+    <string name="widget_sample_budget_days">١٢ يومًا متبقيًا</string>
+</resources>

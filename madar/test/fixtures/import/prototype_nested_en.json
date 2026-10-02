@@ -1,0 +1,146 @@
+{
+  "version": 3,
+  "exportedAt": "2026-09-06T10:00:00Z",
+  "data": {
+    "settings": {
+      "baseCurrency": "JOD",
+      "rates": {"USD": 0.709, "EGP": 0.0145}
+    },
+    "health": {
+      "alerts": [
+        {"id": "al1", "text": "Check with a doctor before any new medication", "severity": "high"}
+      ],
+      "conditions": [
+        {"id": "c1", "name": "Seasonal allergy", "since": "2020-04-01"}
+      ],
+      "meds": [
+        {"id": "m1", "name": "Vitamin D", "dose": "1000 IU", "times": ["08:00"], "takenWith": "breakfast", "type": "supplement"},
+        {"id": "m2", "name": "Omega 3", "dosage": "2 caps", "time": "08:00, 20:00", "with": "with dinner"},
+        {"id": "m3", "name": "Magnesium", "dose": "200 mg", "schedule": "9pm", "timing": "bedtime", "stock": 40},
+        {"id": "m4", "name": "Iron", "dose": "65 mg", "times": "07:30 and 13:00", "takenWith": "empty stomach"}
+      ],
+      "labs": [
+        {
+          "id": "t1", "name": "HbA1c", "unit": "%", "refLow": 4, "refHigh": 5.6,
+          "readings": [
+            {"date": "2026-01-10", "value": 5.4},
+            {"date": "2026-04-12", "value": 5.5},
+            {"date": "2026-07-15", "value": 5.3}
+          ]
+        },
+        {
+          "id": "t2", "name": "Vitamin D (25-OH)", "unit": "ng/mL", "range": "30-100",
+          "history": {"2026-02-01": 22, "2026-06-01": 34}
+        },
+        {"id": "t3", "name": "Ferritin", "unit": "ng/mL", "min": 30, "max": 400}
+      ],
+      "labReadings": [
+        {"testId": "t3", "date": "05/03/2026", "value": "18"},
+        {"test": "Ferritin", "date": 1780000000000, "value": 45}
+      ],
+      "appointments": [
+        {"id": "ap1", "title": "Annual check-up", "doctor": "Family doctor", "date": "2026-10-05", "time": "10:30",
+         "questions": ["Should the iron dose change?"]}
+      ],
+      "habits": [
+        {"id": "h1", "name": "Evening walk", "log": {"2026-08-30": true, "2026-08-31": false, "2026-09-01": true}}
+      ]
+    },
+    "money": {
+      "wallets": [
+        {"id": "w1", "name": "Cash", "currency": "JOD", "opening": 150},
+        {"id": "w2", "name": "Dollar card", "currency": "USD", "balance": "1,250.50"}
+      ],
+      "budget": {
+        "weeksPerMonth": 4,
+        "items": [
+          {"id": "b1", "name": "Home food", "amount": 200, "children": [
+            {"id": "b1a", "name": "Proteins", "amount": 100},
+            {"id": "b1b", "name": "Spices", "amount": 20},
+            {"id": "b1c", "name": "Treats", "amount": 30},
+            {"id": "b1d", "name": "Fruit & vegetables", "amount": 50}
+          ]},
+          {"id": "b2", "name": "Car fuel", "amount": 100},
+          {"id": "b3", "name": "Emergency", "amount": "30 JOD"},
+          {"id": "b4", "name": "Wife's allowance", "amount": 5, "period": "weekly"}
+        ]
+      },
+      "transactions": [
+        {"id": "x1", "walletId": "w1", "type": "expense", "amount": 42.75, "date": "2026-09-02", "category": "b1a", "note": "Groceries"},
+        {"id": "x2", "wallet": "Cash", "type": "expense", "amount": "12.5", "date": "2026-09-03T18:20:00", "category": "Car fuel"},
+        {"id": "x3", "walletId": "w2", "type": "expense", "amount": "$19.99", "date": "2026-09-04", "note": "Subscription"},
+        {"id": "x4", "walletId": "w1", "type": "income", "amount": 500, "date": "2026-09-01", "note": "Salary"},
+        {"id": "x5", "type": "expense", "amount": "150 EGP", "date": "2026-09-05", "note": "Books"}
+      ],
+      "savings": [
+        {"id": "j1", "name": "Travel fund", "target": 800, "saved": 120, "deadline": "2027-06-01"}
+      ],
+      "debts": [
+        {"id": "d1", "person": "A friend", "direction": "owed to me", "amount": 40, "due": "2026-10-01"}
+      ],
+      "bills": [
+        {"id": "o1", "name": "Internet", "amount": 25, "frequency": "monthly", "dayOfMonth": 12, "category": "Emergency"}
+      ]
+    },
+    "family": {
+      "people": [
+        {"id": "p1", "name": "Mother", "relation": "Mother", "rhythm": "weekly", "phone": "+000000000",
+         "calls": [{"date": "2026-08-28", "type": "call"}]},
+        {"id": "p2", "name": "Brother", "relationship": "Brother", "everyDays": 14}
+      ]
+    },
+    "work": {
+      "boards": [
+        {"id": "bd1", "name": "Jordan", "country": "JO", "cards": [
+          {"id": "cd1", "title": "Renew trade licence", "status": "todo"},
+          {"id": "cd2", "title": "Quarterly report", "status": "in progress", "due": "2026-09-30"},
+          {"id": "cd3", "title": "Hire a designer", "status": "done"}
+        ]},
+        {"id": "bd2", "name": "Egypt", "columns": [
+          {"id": "todo", "label": "To do", "cards": [{"title": "Open a bank account"}]},
+          {"id": "review", "label": "Review", "cards": [{"title": "Supplier contract"}]}
+        ]}
+      ],
+      "projects": [
+        {"id": "pr1", "name": "Home library", "status": "active", "items": [{"text": "Buy shelves", "done": true}, "Sort books"]}
+      ]
+    },
+    "growth": {
+      "goals": [{"id": "g1", "name": "Read Quran", "unit": "pages", "target": 604, "current": 120}]
+    },
+    "body": {
+      "exercises": [{"id": "e1", "name": "Squats", "days": ["Mon", "Wed", "Fri"], "sets": 3, "reps": 12}],
+      "avoid": ["Heavy lifting", {"text": "Running on concrete", "reason": "Knees"}]
+    },
+    "travel": {
+      "trips": [
+        {"id": "tr1", "destination": "Istanbul", "country": "TR", "start": "2027-04-10", "end": "2027-04-17", "packing": ["Passport", "Charger"]}
+      ]
+    },
+    "readingList": [
+      {"title": "The Book of Healing", "author": "Unknown", "rating": 4, "finished": true, "startedOn": "2026-05-01"},
+      {"title": "A History of Science", "author": "Unknown", "rating": 5, "finished": false, "startedOn": "2026-07-12"}
+    ],
+    "theme": "dark"
+  },
+  "logs": {
+    "pain": [
+      {"date": "2026-09-01", "score": 4, "location": "lower back", "trigger": "sitting"},
+      {"at": "2026-09-02T21:00:00", "level": "6", "locations": ["knees", "hips"]}
+    ],
+    "mood": [
+      {"date": "2026-09-01", "mood": 4, "stress": 3, "sleep": 7.5},
+      {"date": "2026-09-02", "mood": "ok", "stress": 6}
+    ],
+    "doses": [
+      {"medId": "m1", "date": "2026-09-01", "time": "08:05", "taken": true},
+      {"med": "Omega 3", "date": "2026-09-01", "status": "skipped"}
+    ],
+    "water": {"2026-09-01": 6, "2026-09-02": 1750},
+    "prayers": {
+      "2026-09-01": {"fajr": true, "dhuhr": "late", "asr": true, "maghrib": "jamaah", "isha": false}
+    },
+    "workouts": [{"exercise": "Squats", "date": "2026-09-01", "sets": 3, "reps": 12}],
+    "fasting": [{"start": "2026-09-01T20:00:00", "end": "2026-09-02T12:00:00"}]
+  }
+}
