@@ -18,9 +18,9 @@ import '../../../core/sound/sound_api.dart';
 import '../data/together_providers.dart';
 import '../domain/play_modes.dart';
 import '../transport/online/online_config.dart';
+import '../transport/online/online_rooms.dart';
 import '../transport/online/rtdb.dart';
 import '../transport/online/security_rules.dart';
-import '../transport/pairing_state.dart';
 import '../transport/together_net_providers.dart';
 import 'pairing_texts.dart';
 
@@ -228,8 +228,7 @@ class _OnlinePlaySheetState extends ConsumerState<OnlinePlaySheet> {
       final client = await ref.read(rtdbClientFactoryProvider)(config);
       try {
         await client.signIn();
-        // Readable by any signed-in user under the online-play rules only.
-        await client.read('rooms/000000/gm');
+        await OnlineRooms.checkRules(client);
       } finally {
         await client.close();
       }
@@ -237,16 +236,7 @@ class _OnlinePlaySheetState extends ConsumerState<OnlinePlaySheet> {
       _say(px.l.togetherNetTestOk);
     } on RtdbException catch (e) {
       Fx.fire(Sfx.error);
-      _say(
-        px.failure(switch (e.kind) {
-          RtdbErrorKind.permissionDenied => PairingFailure.rules,
-          RtdbErrorKind.network => PairingFailure.network,
-          RtdbErrorKind.setup => PairingFailure.setup,
-          RtdbErrorKind.signIn => PairingFailure.signIn,
-          RtdbErrorKind.unknown => PairingFailure.unknown,
-        }),
-        good: false,
-      );
+      _say(px.failure(PairingTexts.failureOf(e)), good: false);
     } on Object {
       Fx.fire(Sfx.error);
       _say(px.l.togetherNetFailUnknown, good: false);

@@ -58,6 +58,11 @@ final class ProceduralMusicDirector implements MusicDirector {
   /// Longest wait for a bar line before falling back to the next beat.
   static const Duration maxBarWait = Duration(milliseconds: 2400);
 
+  /// How long a stinger waits for the stinger kit to finish loading (a
+  /// scene that opens instantly, e.g. a restart, fires `sceneStart` before
+  /// the kit is in; it still lands as soon as the kit is there).
+  static const Duration stingerPatience = Duration(milliseconds: 1500);
+
   /// Prefetch order after the opening cue.
   static const prefetchOrder = [
     MusicMood.adventure,
@@ -85,7 +90,7 @@ final class ProceduralMusicDirector implements MusicDirector {
   _Pending? _pending;
   _Playback? _current;
   final List<_Playback> _fading = [];
-  final List<Stinger> _stingerQueue = [];
+  final List<(Stinger, Duration)> _stingerQueue = [];
   final List<(int, Duration)> _stingerVoices = [];
   final Map<MusicMood, _LoadedCue> _cues = {};
   final List<MusicMood> _renderQueue = [];
@@ -154,7 +159,7 @@ final class ProceduralMusicDirector implements MusicDirector {
   @override
   void stinger(Stinger stinger) {
     if (_disposed || _prayerMuted || !_live) return;
-    if (_stingerQueue.length < 4) _stingerQueue.add(stinger);
+    if (_stingerQueue.length < 4) _stingerQueue.add((stinger, mixer.now));
   }
 
   @override
@@ -346,15 +351,21 @@ final class ProceduralMusicDirector implements MusicDirector {
 
   void _playStingers() {
     final kit = _stingers;
+    if (kit == null) {
+      // Still loading: keep recent requests for when it lands.
+      final now = mixer.now;
+      _stingerQueue.removeWhere((e) => now - e.$2 > stingerPatience);
+      return;
+    }
     final pendingJingle = _pending != null && (_pending!.mood == MusicMood.victory || _pending!.mood == MusicMood.defeat);
     final curJingle = _current != null && !_current!.info.loops && mixer.now < _current!.loopAt;
-    for (final s in _stingerQueue) {
+    for (final (s, _) in _stingerQueue) {
       // The victory / defeat jingles open with their own hit.
       if ((s == Stinger.victory || s == Stinger.defeat) && (pendingJingle || curJingle)) {
         _note('stinger ${s.name} (in jingle)');
         continue;
       }
-      if (kit == null || _prayerMuted) continue;
+      if (_prayerMuted) continue;
       final clips = kit.kit.clips[s];
       if (clips == null) continue;
       final now = mixer.now;

@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/cinema/engine/audio/era_scores.dart';
+import 'package:madar/features/cinema/engine/audio/music/stingers.dart';
 import 'package:madar/features/cinema/engine/audio/runtime/music_director.dart';
 import 'package:madar/features/cinema/engine/core/audio.dart';
 import 'package:madar/features/cinema/engine/core/era.dart';
+import 'package:madar/features/cinema/engine/core/era_skin.dart';
 
 import 'fake_mixer.dart';
 
@@ -215,4 +218,43 @@ void main() {
     expect(director.playingMood, MusicMood.boss);
     expect(director.loadedBytes, lessThanOrEqualTo((bytes * 2.5).round()));
   });
+  test('a stinger fired before the kit is loaded waits for it; a stale one is dropped', () async {
+    mixer = FakeCinemaMixer();
+    final gated = _GatedStingers();
+    source = gated;
+    director = ProceduralMusicDirector(_ctx(), mixer: mixer, source: source, prefetch: false);
+    director.cue(MusicMood.adventure);
+    unawaited(director.prepare());
+    await pumpEventQueue();
+    director.update(1 / 60);
+    expect(director.playingMood, MusicMood.adventure, reason: 'the cue does not wait for the stingers');
+    director
+      ..stinger(Stinger.sceneStart)
+      ..update(1 / 60);
+    expect(mixer.active('stinger'), isEmpty, reason: 'kit not loaded yet');
+    // An old request is forgotten; a fresh one is kept.
+    mixer.advance(ProceduralMusicDirector.stingerPatience + const Duration(milliseconds: 1));
+    director
+      ..update(1 / 60)
+      ..stinger(Stinger.hit)
+      ..update(1 / 60);
+    gated.release();
+    await pumpEventQueue();
+    director.update(1 / 60);
+    expect(mixer.active('stinger-sceneStart'), isEmpty, reason: 'stale request dropped');
+    expect(mixer.active('stinger-hit'), isNotEmpty, reason: 'recent request lands once the kit is in');
+  });
+}
+
+/// A [FakeCueSource] whose stinger kit only arrives after [release].
+class _GatedStingers extends FakeCueSource {
+  final _gate = Completer<void>();
+
+  void release() => _gate.complete();
+
+  @override
+  Future<StingerKit> renderStingers(ScoreStyle style, int seed) async {
+    await _gate.future;
+    return super.renderStingers(style, seed);
+  }
 }

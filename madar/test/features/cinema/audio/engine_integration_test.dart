@@ -51,6 +51,7 @@ void main() {
           supportedLocales: L10n.supportedLocales,
           localizationsDelegates: L10n.localizationsDelegates,
           home: CinemaGameView(
+            skipOpening: true, // the opening pumps render the film pass in software; the stinger still fires
             kit: kit,
             builder: (ctx) => game = _Game(context: ctx),
           ),
@@ -61,7 +62,11 @@ void main() {
       await tester.pump(const Duration(milliseconds: 50));
     }
     expect(game.state, SceneState.playing);
-    await tester.pump(const Duration(milliseconds: 16)); // the stinger lands on the next tick
+    // The stinger kit may still be loading when the (instant) opening ends;
+    // the director keeps the request and plays it on a later tick.
+    for (var i = 0; i < 20 && !music!.log.any((l) => l.startsWith('stinger sceneStart')); i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
     expect(music!.isReady, isTrue);
     expect(sfx!.isReady, isTrue);
     expect(music!.playingMood, game.openingMood);

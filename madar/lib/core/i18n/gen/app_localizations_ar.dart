@@ -23418,6 +23418,10 @@ class L10nAr extends L10n {
       'رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان';
 
   @override
+  String get togetherNetFailRulesOpen =>
+      'قاعدة البيانات مفتوحة للجميع — الصقا قواعد الأمان قبل اللعب';
+
+  @override
   String get togetherNetFailPeerLeft => 'غادر الطرف الآخر';
 
   @override

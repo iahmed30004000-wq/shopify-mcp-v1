@@ -231,6 +231,10 @@
     "ar": "رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان",
     "en": "The database refused access — paste the security rules"
   },
+  "togetherNetFailRulesOpen": {
+    "ar": "قاعدة البيانات مفتوحة للجميع — الصقا قواعد الأمان قبل اللعب",
+    "en": "The database is open to everyone — paste the security rules before playing"
+  },
   "togetherNetFailPeerLeft": {
     "ar": "غادر الطرف الآخر",
     "en": "The other player left"

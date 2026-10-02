@@ -149,6 +149,9 @@ class FakeNearbyApi implements NearbyApi {
   /// Fails this many connection requests (a radio hiccup).
   int failRequests = 0;
 
+  /// While set, starting discovery waits for it (a slow radio).
+  Completer<void>? discoveryGate;
+
   @override
   int maxPayloadBytes = 32 * 1024;
 
@@ -183,6 +186,8 @@ class FakeNearbyApi implements NearbyApi {
   @override
   Future<void> startDiscovery({required String name, required String serviceId}) async {
     calls.add('startDiscovery');
+    final gate = discoveryGate;
+    if (gate != null) await gate.future;
     discoveringService = serviceId;
     for (final p in air.phones) {
       if (p.advertising) air._found(this, p);
@@ -380,6 +385,10 @@ class FakeRtdb {
   /// The rules are the online-play rules (false: Firebase's locked default).
   bool rulesInstalled = true;
 
+  /// The console's "test mode": every signed-in user may read and write
+  /// everything (the online-play rules were never pasted).
+  bool rulesPublic = false;
+
   void advance(Duration d) {
     nowMs += d.inMilliseconds;
     _notify();
@@ -467,7 +476,9 @@ class FakeRtdb {
   static const int _sixHours = 21600000;
 
   bool canRead(String? uid, String path) {
-    if (!rulesInstalled || uid == null) return false;
+    if (uid == null) return false;
+    if (rulesPublic) return true;
+    if (!rulesInstalled) return false;
     final p = _split(path);
     if (p.length < 2 || p[0] != 'rooms') return false;
     final room = _get(root, ['rooms', p[1]]);
@@ -477,6 +488,7 @@ class FakeRtdb {
   }
 
   bool _canWrite(String uid, List<String> p, Map<String, Object?> newRoot) {
+    if (rulesPublic) return true;
     if (!rulesInstalled || p.length < 2 || p[0] != 'rooms') return false;
     final code = p[1];
     final data = _get(root, ['rooms', code]);
@@ -548,6 +560,7 @@ class FakeRtdb {
   }
 
   bool _validate(Map<String, Object?> newRoot, List<List<String>> written) {
+    if (rulesPublic) return true;
     for (final p in written) {
       if (p.length < 2) return false;
       final room = _get(newRoot, ['rooms', p[1]]);
@@ -577,18 +590,23 @@ class FakeRtdb {
   }
 
   /// Applies [changes] (path → value) atomically if the rules allow them all.
+  /// As in Firebase, each location of a multi-path update is authorised as a
+  /// write of its own: `newData` there does not see the other locations of
+  /// the same update.
   bool _write(String uid, Map<String, Object?> changes) {
     var next = root;
     final written = <List<String>>[];
     final resolved = <String, Object?>{};
+    var allowed = true;
     for (final e in changes.entries) {
       final p = _split(e.key);
       final v = _resolve(e.value);
       resolved[e.key] = v;
+      if (!_canWrite(uid, p, _with(root, p, v))) allowed = false;
       next = _with(next, p, v);
       written.add(p);
     }
-    final allowed = written.every((p) => _canWrite(uid, p, next)) && _validate(next, written);
+    allowed = allowed && _validate(next, written);
     for (final e in resolved.entries) {
       (allowed ? writes : refused).add((uid: uid, path: e.key, value: e.value));
     }

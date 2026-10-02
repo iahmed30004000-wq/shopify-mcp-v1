@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../transport/online/online_config.dart';
+import '../transport/online/rtdb.dart';
 import '../transport/pairing_state.dart';
 import '../transport/turn_alerts.dart';
 
@@ -31,6 +32,7 @@ class PairingTexts {
     PairingFailure.setup => l.togetherNetFailSetup,
     PairingFailure.signIn => l.togetherNetFailSignIn,
     PairingFailure.rules => l.togetherNetFailRules,
+    PairingFailure.rulesOpen => l.togetherNetFailRulesOpen,
     PairingFailure.peerLeft => l.togetherNetFailPeerLeft,
     PairingFailure.unknown => l.togetherNetFailUnknown,
   };
@@ -47,6 +49,16 @@ class PairingTexts {
     OnlineConfigProblem.missing => l.togetherNetErrMissing,
     OnlineConfigProblem.format => l.togetherNetErrFormat,
     OnlineConfigProblem.mismatch => l.togetherNetErrMismatch,
+  };
+
+  /// The pairing failure a database error means.
+  static PairingFailure failureOf(RtdbException e) => switch (e.kind) {
+    RtdbErrorKind.permissionDenied => PairingFailure.rules,
+    RtdbErrorKind.network => PairingFailure.network,
+    RtdbErrorKind.setup => PairingFailure.setup,
+    RtdbErrorKind.signIn => PairingFailure.signIn,
+    RtdbErrorKind.rulesOpen => PairingFailure.rulesOpen,
+    RtdbErrorKind.unknown => PairingFailure.unknown,
   };
 
   /// "Your turn" in [gameName] after [peerName] played.

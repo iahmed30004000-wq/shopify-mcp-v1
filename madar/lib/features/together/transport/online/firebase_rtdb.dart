@@ -53,6 +53,13 @@ class FirebaseRtdbClient implements RtdbClient {
     } on Object catch (e) {
       throw RtdbException(RtdbErrorKind.setup, '$e');
     }
+    // No analytics, no Crashlytics, no automatic data collection of any kind:
+    // this app exists for anonymous sign-in and the room, nothing else.
+    try {
+      await app.setAutomaticDataCollectionEnabled(false);
+    } on Object {
+      // Not every platform implements it; nothing collects on those either.
+    }
     final db = FirebaseDatabase.instanceFor(app: app, databaseURL: config.databaseUrl);
     await db.goOnline();
     return FirebaseRtdbClient._(FirebaseAuth.instanceFor(app: app), db);
@@ -93,7 +100,9 @@ class FirebaseRtdbClient implements RtdbClient {
     if (e is RtdbException) return e;
     if (e is FirebaseException) {
       final code = e.code.toLowerCase();
-      if (code.contains('permission')) return RtdbException(RtdbErrorKind.permissionDenied, e.message);
+      if (code.contains('permission') || code.contains('denied')) {
+        return RtdbException(RtdbErrorKind.permissionDenied, e.message);
+      }
       if (code.contains('network') || code.contains('unavailable') || code.contains('disconnected')) {
         return RtdbException(RtdbErrorKind.network, e.message);
       }

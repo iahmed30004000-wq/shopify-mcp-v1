@@ -78,6 +78,23 @@ abstract final class OnlineRooms {
 
   static int ms(DateTime t) => t.millisecondsSinceEpoch;
 
+  /// Checks – signed in – that the online-play rules are in place: a locked
+  /// database refuses the game-id read ([RtdbErrorKind.permissionDenied]: the
+  /// rules are missing), an open one lets anybody list every room
+  /// ([RtdbErrorKind.rulesOpen]: frames and names would be public). The
+  /// transports run it before writing a room; "Test connection" shows it.
+  static Future<void> checkRules(RtdbClient client) async {
+    // Readable by any signed-in user under the online-play rules only.
+    await client.read('$root/000000/gm');
+    try {
+      await client.read(root);
+    } on RtdbException catch (e) {
+      if (e.kind == RtdbErrorKind.permissionDenied) return;
+      rethrow;
+    }
+    throw const RtdbException(RtdbErrorKind.rulesOpen, 'rooms are readable by every signed-in user');
+  }
+
   /// A fresh room for [host].
   static Map<String, Object?> newRoom({
     required String hostUid,

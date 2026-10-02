@@ -216,6 +216,61 @@ void main() {
       expect(o.host.pairing.value.phase, PairingPhase.hosting);
     });
 
+    test('a database left in "test mode" (open rules) is refused before any room is written', () async {
+      final open = FakeRtdb()..rulesPublic = true;
+      final t = OnlineTransport(
+        request: const TransportRequest(mode: PlayMode.online, host: true, gameId: 'fourInARow'),
+        connect: () async => open.client(),
+      );
+      addTearDown(t.close);
+      await t.host(_me(PlayerSlot.one, 'Ali'));
+      await settle();
+      expect(t.pairing.value.phase, PairingPhase.failed);
+      expect(t.pairing.value.failure, PairingFailure.rulesOpen, reason: 'frames would be readable by anyone');
+      expect(open.writes, isEmpty, reason: 'no room (no name, no frame) goes into an open database');
+      // The settings sheet's "Test connection" says the same.
+      final probe = open.client();
+      await probe.signIn();
+      await expectLater(
+        OnlineRooms.checkRules(probe),
+        throwsA(isA<RtdbException>().having((e) => e.kind, 'kind', RtdbErrorKind.rulesOpen)),
+      );
+      // The proper rules pass the probe; the locked default fails it as "rules".
+      final o = _Online();
+      addTearDown(o.dispose);
+      final fine = o.db.client(uid: 'uid-probe');
+      await fine.signIn();
+      await OnlineRooms.checkRules(fine);
+      final locked = (FakeRtdb()..rulesInstalled = false).client();
+      await locked.signIn();
+      await expectLater(
+        OnlineRooms.checkRules(locked),
+        throwsA(isA<RtdbException>().having((e) => e.kind, 'kind', RtdbErrorKind.permissionDenied)),
+      );
+    });
+
+    test('the guest\'s join is written so that every location passes its own rule', () async {
+      // Firebase authorises each location of a multi-path update on its own:
+      // a profile or expiry written together with the guest seat would be
+      // refused (its rule looks for the guest uid in existing data).
+      final o = _Online();
+      addTearDown(o.dispose);
+      await o.hostRoom();
+      await o.guest.join('123456', o.sara);
+      await settle();
+      expect(o.db.refused, isEmpty);
+      expect(o.guest.pairing.value.phase, PairingPhase.waitingForPeer);
+      final room = o.db.room('123456')!;
+      expect(room['g'], 'uid-sara');
+      expect(room['pg'], {'n': 'Sara', 'a': 'e9:🌙', 'k': 3});
+      expect(room['x'], o.db.nowMs + OnlineRooms.ttl.inMilliseconds);
+      final guestWrites = o.db.writes.where((w) => w.uid == 'uid-sara').map((w) => w.path).toList();
+      expect(guestWrites.first, 'rooms/123456/g', reason: 'the seat is claimed first, on its own');
+      // The host saw the joiner with the profile, not a nameless "?".
+      expect(o.host.pairing.value.phase, PairingPhase.confirm);
+      expect(o.host.pairing.value.peer!.name, 'Sara');
+    });
+
     test('setup problems: online play off, anonymous sign-in off, rules missing', () async {
       final off = OnlineTransport(
         request: const TransportRequest(mode: PlayMode.online, host: true, gameId: 'fourInARow'),
@@ -304,6 +359,31 @@ void main() {
       guest.dispose();
       await settle();
       await o.dispose();
+    });
+
+    test('the host starts before the guest\'s session exists: the guest still gets the start', () async {
+      final o = _Online();
+      addTearDown(o.dispose);
+      await o.pair();
+      final kit = boardGameKits[BoardGameId.connectFour]!;
+      final host = PairedLink(transport: o.host, identity: o.ali).session(
+        adapter: BoardKitTogetherAdapter(kit),
+        firstPlayer: PlayerSlot.one,
+      );
+      await host.start(seed: 11);
+      await settle();
+      // The start sat in the transport with nobody listening; the sheet's
+      // hand-over delay makes this the normal order on the guest's phone.
+      final guest = PairedLink(transport: o.guest, identity: o.sara).session(
+        adapter: BoardKitTogetherAdapter(kit),
+        firstPlayer: PlayerSlot.one,
+      );
+      await settle(60);
+      expect(guest.phase, SessionPhase.playing);
+      expect(guest.stateHash, host.stateHash);
+      host.dispose();
+      guest.dispose();
+      await settle();
     });
 
     test('leaving deletes the room; the partner hears the bye and sees the room gone', () async {

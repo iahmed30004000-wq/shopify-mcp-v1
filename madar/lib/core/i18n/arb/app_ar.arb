@@ -21613,6 +21613,7 @@
   "togetherNetFailSetup": "رفض Firebase إعدادات المشروع — راجعاها في «اللعب عبر الإنترنت»",
   "togetherNetFailSignIn": "تعذّر الدخول المجهول — فعّلاه في مشروع Firebase",
   "togetherNetFailRules": "رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان",
+  "togetherNetFailRulesOpen": "قاعدة البيانات مفتوحة للجميع — الصقا قواعد الأمان قبل اللعب",
   "togetherNetFailPeerLeft": "غادر الطرف الآخر",
   "togetherNetFailUnknown": "حدث خطأ غير متوقع",
   "togetherNetCreateCode": "إنشاء رمز",

@@ -36249,6 +36249,12 @@ abstract class L10n {
   /// **'رفضت قاعدة البيانات الوصول — الصقا قواعد الأمان'**
   String get togetherNetFailRules;
 
+  /// No description provided for @togetherNetFailRulesOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعدة البيانات مفتوحة للجميع — الصقا قواعد الأمان قبل اللعب'**
+  String get togetherNetFailRulesOpen;
+
   /// No description provided for @togetherNetFailPeerLeft.
   ///
   /// In ar, this message translates to:

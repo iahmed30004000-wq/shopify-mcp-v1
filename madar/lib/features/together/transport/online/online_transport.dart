@@ -123,7 +123,9 @@ class OnlineTransport extends PairingTransportBase {
       setPairing(PairingState(PairingPhase.hosting, code: code, expiresAt: now.add(joinWindow)));
       _joinTimer = Timer(joinWindow, _onJoinWindowOver);
       final room = OnlineRooms.room(code);
-      _subs.add(client.watch('$room/g').listen(_onGuest, onError: _onListenError));
+      // The guest claims the seat (`g`) first and writes the profile (`pg`)
+      // after it: the profile's arrival means both are there.
+      _subs.add(client.watch('$room/pg').listen(_onGuest, onError: _onListenError));
       _subs.add(client.watch('$room/h').listen(_onHostField, onError: _onListenError));
       return;
     }
@@ -131,19 +133,20 @@ class OnlineTransport extends PairingTransportBase {
     _fail(PairingFailure.rules);
   }
 
-  Future<void> _onGuest(Object? uid) async {
+  Future<void> _onGuest(Object? profile) async {
     if (closed || _paired || roleValue != SessionRole.host || state.phase != PairingPhase.hosting) return;
-    if (uid is! String || uid.isEmpty) return;
+    if (profile is! Map) return;
     final client = _client;
     final code = _code;
     if (client == null || code == null) return;
-    Object? profile;
+    Object? uid;
     try {
-      profile = await client.read('${OnlineRooms.room(code)}/pg');
+      uid = await client.read('${OnlineRooms.room(code)}/g');
     } on RtdbException {
-      profile = null;
+      uid = null;
     }
     if (closed || state.phase != PairingPhase.hosting) return;
+    if (uid is! String || uid.isEmpty) return;
     setPairing(PairingState(PairingPhase.confirm, peer: OnlineRooms.peerOf(uid, profile), code: code));
   }
 
@@ -224,20 +227,34 @@ class OnlineTransport extends PairingTransportBase {
       _fail(_failureOf(e));
       return;
     }
+    // Each location of a multi-path update is authorised on its own, so the
+    // seat goes first: the profile's and the expiry's rules look for this uid
+    // in the room's existing data.
     try {
-      await client.update(room, {
-        'g': uid,
-        'pg': OnlineRooms.profileOf(me),
-        'x': OnlineRooms.ms(client.serverNow().add(OnlineRooms.ttl)),
-      });
+      await client.set('$room/g', uid);
     } on RtdbException catch (e) {
       // Someone else was quicker (or the code just expired).
       _fail(e.kind == RtdbErrorKind.permissionDenied ? PairingFailure.taken : _failureOf(e));
       return;
     }
-    if (closed) return;
+    if (closed) {
+      await _quietly(() => client.remove(room));
+      return;
+    }
     _code = code;
     await _quietly(() async => ledger?.add(code));
+    try {
+      await client.update(room, {
+        'pg': OnlineRooms.profileOf(me),
+        'x': OnlineRooms.ms(client.serverNow().add(OnlineRooms.ttl)),
+      });
+    } on RtdbException catch (e) {
+      // The seat is taken but the host will never see us: give the room back.
+      await _resetRoom();
+      _fail(_failureOf(e));
+      return;
+    }
+    if (closed) return;
     try {
       final hostUid = await client.read('$room/h');
       _hostUid = hostUid is String ? hostUid : null;
@@ -373,6 +390,9 @@ class OnlineTransport extends PairingTransportBase {
       final client = _client ??= await connect();
       await client.signIn();
       if (closed) return null;
+      // Never put a room – a name, a frame – into a database anyone can read.
+      await OnlineRooms.checkRules(client);
+      if (closed) return null;
       await _cleanUpLeftovers(client);
       return client;
     } on OnlineNotConfigured {
@@ -404,6 +424,7 @@ class OnlineTransport extends PairingTransportBase {
     RtdbErrorKind.network => PairingFailure.network,
     RtdbErrorKind.setup => PairingFailure.setup,
     RtdbErrorKind.signIn => PairingFailure.signIn,
+    RtdbErrorKind.rulesOpen => PairingFailure.rulesOpen,
     RtdbErrorKind.unknown => PairingFailure.unknown,
   };
 

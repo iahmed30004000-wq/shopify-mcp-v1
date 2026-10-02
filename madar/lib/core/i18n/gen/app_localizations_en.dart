@@ -22807,6 +22807,10 @@ class L10nEn extends L10n {
       'The database refused access — paste the security rules';
 
   @override
+  String get togetherNetFailRulesOpen =>
+      'The database is open to everyone — paste the security rules before playing';
+
+  @override
   String get togetherNetFailPeerLeft => 'The other player left';
 
   @override

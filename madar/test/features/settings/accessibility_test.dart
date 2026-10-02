@@ -21,9 +21,13 @@ const _pages = [
   AppRoutes.adhanSettings,
 ];
 
+/// The life worlds' pages (Phase 6), reached from Settings › Life and the
+/// worlds: the hub screens, not their records.
+const _lifePages = [AppRoutes.work, AppRoutes.family, AppRoutes.travel, AppRoutes.growth, AppRoutes.body, AppRoutes.modules];
+
 void main() {
   for (final lang in ['ar', 'en']) {
-    for (final page in _pages) {
+    for (final page in [..._pages, ..._lifePages]) {
       testWidgets('$page ($lang): 48 dp targets and labelled tappables', (tester) async {
         final handle = tester.ensureSemantics();
         await pumpMadarApp(
@@ -40,7 +44,7 @@ void main() {
     }
 
     for (final scale in [1.3, 1.6]) {
-      for (final page in [..._pages, AppRoutes.import]) {
+      for (final page in [..._pages, AppRoutes.import, ..._lifePages]) {
         testWidgets('$page ($lang) at $scale× text: no overflow, scrolled end to end', (tester) async {
           tester.platformDispatcher.textScaleFactorTestValue = scale;
           addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
@@ -52,12 +56,17 @@ void main() {
           );
           await pumpFrames(tester);
           // Layout overflows are reported as exceptions; scroll the whole
-          // page so every row gets laid out.
+          // page – until the end, however long it grows – so every row gets
+          // laid out.
           final scrollable = find.byType(Scrollable);
           if (scrollable.evaluate().isNotEmpty) {
-            for (var i = 0; i < 8; i++) {
+            var last = double.nan;
+            for (var i = 0; i < 24; i++) {
               await tester.drag(scrollable.first, const Offset(0, -400), warnIfMissed: false);
               await pumpFrames(tester, total: const Duration(milliseconds: 300));
+              final pixels = tester.state<ScrollableState>(scrollable.first).position.pixels;
+              if (pixels == last) break;
+              last = pixels;
             }
           }
           expect(tester.takeException(), isNull);

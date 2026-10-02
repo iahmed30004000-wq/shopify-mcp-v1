@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -535,6 +536,45 @@ void main() {
       await settle();
       expect(host.turn, 2);
       expect(host.stateHash, guest.stateHash);
+      host.dispose();
+      guest.dispose();
+      await settle();
+      await p.dispose();
+    });
+
+    test('a radio start still in flight when the phones reconnect is undone: nothing keeps scanning', () async {
+      final p = _Pair(grace: const Duration(seconds: 5));
+      await p.pair();
+      // Phone A's discovery is slow to start; B finds A's advertising and
+      // reconnects before A's discovery start has returned.
+      final gate = Completer<void>();
+      p.phoneA.discoveryGate = gate;
+      p.air.cut(p.phoneA, p.phoneB);
+      await settle();
+      expect(p.a.pairing.value.phase, PairingPhase.connected);
+      expect(p.b.pairing.value.phase, PairingPhase.connected);
+      gate.complete();
+      await settle();
+      expect(p.phoneA.discovering, isFalse, reason: 'a late start must not leave discovery running (battery, privacy)');
+      expect(p.phoneA.advertising, isFalse);
+      expect(p.phoneB.discovering, isFalse);
+      expect(p.phoneB.advertising, isFalse);
+      await p.dispose();
+    });
+
+    test('the host starts before the guest\'s session exists: the guest still gets the start', () async {
+      final p = _Pair();
+      await p.pair();
+      final kit = boardGameKits[BoardGameId.connectFour]!;
+      final hostLink = PairedLink(transport: p.host, identity: p.host == p.a ? p.ali : p.sara);
+      final guestLink = PairedLink(transport: p.guest, identity: p.guest == p.a ? p.ali : p.sara);
+      final host = hostLink.session(adapter: BoardKitTogetherAdapter(kit), firstPlayer: PlayerSlot.one);
+      await host.start(seed: 11);
+      await settle();
+      final guest = guestLink.session(adapter: BoardKitTogetherAdapter(kit), firstPlayer: PlayerSlot.one);
+      await settle(60);
+      expect(guest.phase, SessionPhase.playing);
+      expect(guest.stateHash, host.stateHash);
       host.dispose();
       guest.dispose();
       await settle();

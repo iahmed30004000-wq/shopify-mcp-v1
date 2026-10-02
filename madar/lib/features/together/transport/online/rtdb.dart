@@ -29,6 +29,11 @@ enum RtdbErrorKind {
   /// Anonymous sign-in failed.
   signIn,
 
+  /// The database lets any signed-in user read everything (the console's
+  /// "test mode"): the online-play rules were never pasted. Nothing is
+  /// written to such a database.
+  rulesOpen,
+
   unknown,
 }
 

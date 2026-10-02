@@ -105,6 +105,10 @@ enum PairingFailure {
   /// or different.
   rules,
 
+  /// Online: the database is open to every signed-in user (the console's
+  /// "test mode") – the security rules must be pasted before playing.
+  rulesOpen,
+
   /// The partner left.
   peerLeft,
 

@@ -646,7 +646,7 @@ class _PairingSheetState extends ConsumerState<PairingSheet> {
         );
       case PairingPhase.failed:
         final setupProblem = switch (s.failure) {
-          PairingFailure.setup || PairingFailure.signIn || PairingFailure.rules => true,
+          PairingFailure.setup || PairingFailure.signIn || PairingFailure.rules || PairingFailure.rulesOpen => true,
           _ => false,
         };
         return _TwoButtons(

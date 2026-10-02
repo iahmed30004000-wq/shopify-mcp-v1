@@ -21613,6 +21613,7 @@
   "togetherNetFailSetup": "Firebase refused the project settings — check them in Online play",
   "togetherNetFailSignIn": "Anonymous sign-in failed — enable it in your Firebase project",
   "togetherNetFailRules": "The database refused access — paste the security rules",
+  "togetherNetFailRulesOpen": "The database is open to everyone — paste the security rules before playing",
   "togetherNetFailPeerLeft": "The other player left",
   "togetherNetFailUnknown": "Something went wrong",
   "togetherNetCreateCode": "Create a code",

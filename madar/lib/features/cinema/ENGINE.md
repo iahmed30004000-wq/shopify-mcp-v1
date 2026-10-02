@@ -34,7 +34,7 @@ your row is read-only for you. Need a change elsewhere? See §10.
 | `rules/**` | rules agents | Pure-Dart Tier 2 rules and AI (cards, board games, puzzles). No Flutter or Flame imports. |
 | `test/features/cinema/<same path>` | same owner as the code | `test/features/cinema/{core,shaders,demo,hall}` + `cinema_fakes.dart` are the architect's. |
 | `lib/core/i18n/arb_parts/c0_cinema.json` | architect | Shared strings (hub, overlays, eras, Tier 1 names). |
-| `c1_cinema_fx.json` · `c2_cinema_rig.json` · `c3_cinema_audio.json` · `c4_cinema_stage.json` · `c5_cinema_hall.json` · `c6…cZ_cinema_<game>.json` | one per agent / game | Key prefixes: `cinemaFx…`, `cinemaRig…`, `cinemaAudio…`, `cinemaStage…`, `cinemaHall…`, `cinema<Game>…`. |
+| `c1_cinema_fx.json` · `c2_cinema_rig.json` · `c3_cinema_audio.json` · `c1_cinema_hall.json` (hall + stage) · `c6…cZ_cinema_<game>.json` | one per agent / game | Key prefixes: `cinemaFx…`, `cinemaRig…`, `cinemaAudio…`, `cinemaHall…` and `cinemaStage…` (both in the hall file), `cinema<Game>…`. |
 | `pubspec.yaml` | architect | Shader registration only. All 10 slots are registered already. |
 
 **Entry points.** The standard kit imports only these symbols from the agent

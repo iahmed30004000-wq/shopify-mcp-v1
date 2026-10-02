@@ -274,22 +274,47 @@ class NearbyTransport extends PairingTransportBase {
     await _radiosOn();
   }
 
-  Future<void> _radiosOn() async {
+  /// Radio calls run one after another: a start still in flight when the
+  /// radios are no longer wanted (the phones connected, the app went to the
+  /// background, the transport closed) is followed by its stop instead of
+  /// racing it – nothing is ever left scanning.
+  Future<void> _radioChain = Future<void>.value();
+
+  Future<void> _radio(Future<void> Function() op) {
+    final next = _radioChain.then((_) => op());
+    _radioChain = next.catchError((Object _) {});
+    return next;
+  }
+
+  Future<void> _radiosOn() {
     _wantRadios = true;
+    return _radio(_startRadiosNow);
+  }
+
+  bool get _radiosWanted => _wantRadios && !closed && _me != null && _foreground.value;
+
+  Future<void> _startRadiosNow() async {
     final me = _me;
-    if (closed || me == null || !_foreground.value) return;
+    if (!_radiosWanted || me == null) return;
     try {
       if (!_advertising) {
         _advertising = true;
         await api.startAdvertising(name: me.name, serviceId: serviceId);
+        if (!_radiosWanted) {
+          await _stopRadiosNow();
+          return;
+        }
       }
       if (!_discovering) {
         _discovering = true;
         await api.startDiscovery(name: me.name, serviceId: serviceId);
+        if (!_radiosWanted) await _stopRadiosNow();
       }
     } on NearbyApiException catch (e) {
       if (e.kind == NearbyErrorKind.alreadyActive || closed) return;
-      await _radiosOff();
+      _wantRadios = false;
+      _autoTimer?.cancel();
+      await _stopRadiosNow();
       if (e.kind == NearbyErrorKind.permission) {
         setPairing(PairingState(PairingPhase.permissionDenied, need: await permissions.need()));
       } else {
@@ -304,9 +329,13 @@ class NearbyTransport extends PairingTransportBase {
     }
   }
 
-  Future<void> _radiosOff({bool keepWanted = false}) async {
+  Future<void> _radiosOff({bool keepWanted = false}) {
     if (!keepWanted) _wantRadios = false;
     _autoTimer?.cancel();
+    return _radio(_stopRadiosNow);
+  }
+
+  Future<void> _stopRadiosNow() async {
     if (_advertising) {
       _advertising = false;
       await _quietly(api.stopAdvertising);
@@ -446,7 +475,7 @@ class NearbyTransport extends PairingTransportBase {
   Future<void> _restartRadios() async {
     _found.clear();
     await _radiosOff(keepWanted: true);
-    if (!closed && state.phase == PairingPhase.reconnecting) await _radiosOn();
+    if (!closed && state.phase == PairingPhase.reconnecting && _endpoint == null) await _radiosOn();
   }
 
   Future<void> _onInitiated(NearbyConnectionInitiated e) async {
@@ -501,10 +530,9 @@ class NearbyTransport extends PairingTransportBase {
         _graceTimer?.cancel();
         _connectTimer?.cancel();
         _reassembler.reset();
-        await _radiosOff();
-        if (closed) return;
         setStatus(TransportStatus.connected);
         setPairing(PairingState(PairingPhase.connected, peer: peerValue, role: roleValue, token: _initiatingToken));
+        await _radiosOff();
       case NearbyConnectionStatus.rejected:
         if (state.phase == PairingPhase.reconnecting) return;
         final peer = state.peer;

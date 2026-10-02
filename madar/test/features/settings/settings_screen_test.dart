@@ -22,6 +22,11 @@ void main() {
     for (final title in [_ar.settingsPersonal, _ar.settingsSectionMotionPower, _ar.settingsData, _ar.settingsAbout]) {
       expect(find.text(title), findsWidgets, reason: title);
     }
+    // The inline money and life groups sit between health and motion.
+    for (final title in [_ar.moneyHubSettingsSection, _ar.lifeHubSettingsSection]) {
+      await tester.scrollUntilVisible(find.text(title), 200, scrollable: find.byType(Scrollable).first);
+      expect(find.text(title), findsOneWidget, reason: title);
+    }
     await tester.tap(find.text(_ar.settingsAppearance).last);
     await settleApp(tester);
     expect(find.byType(AppearanceScreen), findsOneWidget);
