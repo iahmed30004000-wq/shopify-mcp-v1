@@ -45,6 +45,8 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 ## Container restart #2 (09:28 UTC)
 All six runs were resumed with resumeFromRunId (completed agents replay from cache; interrupted ones re-run with a RESUMING note + strict memory rule): money review wf_ad90daa6-564 (scratchpad/phase5_integrate.js), engine wf_4495c71d-7d5 (scratchpad/phase7_engine.js; hall no longer builds Saved Games), cards wf_94413da5-0be (scratchpad/jordan_cards.js), together wf_ab7dcc7b-712, widgets wf_54ac8044-8f2, saved games wf_1fb242c0-188.
 
+## Container restart #3 (20:33 UTC, three agents running tests at once). All test runs now go through scratchpad/ft (flock-serialised, -j 1, memory wait). Life+System integration relaunched fresh (little lost: its work was in 47b2644); engine audio+hall re-run with resumeFromRunId.
+
 ## Resumed 2026-10-02 on the owner's «كمل»: Life+System integration (new run wf_73ea237d-651), Together transports review (wf_7135f615-749), engine audio+hall (wf_4495c71d-7d5) – all RUNNING with RESUMING notes.
 
 ## Talking to the owner (standing rule)
