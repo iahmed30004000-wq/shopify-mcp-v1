@@ -15269,6 +15269,9 @@ class L10nEn extends L10n {
   String get travelTripNotFound => 'This trip no longer exists';
 
   @override
+  String get travelTemplateNotFound => 'This packing list no longer exists';
+
+  @override
   String get growthTitle => 'Learning goals';
 
   @override
@@ -17678,7 +17681,7 @@ class L10nEn extends L10n {
   String get cmodCardSeeAll => 'See all';
 
   @override
-  String get cmodCardEmpty => 'Create a tracker for this planet';
+  String get cmodCardEmpty => 'Create a tracker for this world';
 
   @override
   String get cmodCardEmptyHint =>
@@ -18182,6 +18185,27 @@ class L10nEn extends L10n {
   @override
   String get cinemaRigBeanRole =>
       'Star of the rehearsal, a bean in white gloves';
+
+  @override
+  String get cinemaWiringEnterHall => 'Enter the hall';
+
+  @override
+  String cinemaWiringShowsReady(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shows ready to play',
+      one: '1 show ready to play',
+      zero: 'Shows in preparation',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cinemaWiringCreditGames => 'Madar Cinema word & knowledge games';
+
+  @override
+  String get cinemaWiringCreditGamesRole => 'Word lists and quiz content';
 
   @override
   String get cinemaDemoTapToJump => 'Tap to jump!';

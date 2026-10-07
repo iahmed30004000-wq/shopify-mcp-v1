@@ -223,7 +223,8 @@ class QuickAmountChips extends StatelessWidget {
     final color = GrowthColors.goal(t, goal.color);
     return Wrap(
       spacing: Space.s,
-      runSpacing: Space.s,
+      // Dense chips carry 6 dp of tap area above and below already.
+      runSpacing: dense ? 0 : Space.s,
       children: [
         for (final a in goal.quickAmounts)
           AmountChip(
@@ -281,29 +282,33 @@ class AmountChip extends StatelessWidget {
       selected: selected,
       semanticLabel: semanticLabel ?? label,
       excludeSemantics: true,
-      child: AnimatedContainer(
-        duration: context.motion(MadarMotion.short),
-        constraints: BoxConstraints(minHeight: dense ? 36 : 44, minWidth: dense ? 48 : 56),
-        padding: EdgeInsetsDirectional.symmetric(horizontal: dense ? Space.m : Space.l),
-        decoration: BoxDecoration(
-          color: selected ? color.withValues(alpha: t.isDark ? 0.26 : 0.16) : t.glassFill,
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: selected ? color : color.withValues(alpha: 0.45), width: selected ? 1.5 : 1),
-          boxShadow: selected ? [BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 12)] : null,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null) ...[Icon(icon, size: 16, color: color), const SizedBox(width: Space.xs)],
-            Text(
-              label,
-              style: (dense ? text.labelLarge : text.titleSmall)!.copyWith(
-                color: t.textPrimary,
-                fontFeatures: const [FontFeature.tabularFigures()],
+      // A 48 dp target (Android): the dense pill is drawn 36 high inside it.
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: dense ? 6 : 0),
+        child: AnimatedContainer(
+          duration: context.motion(MadarMotion.short),
+          constraints: BoxConstraints(minHeight: dense ? 36 : 48, minWidth: dense ? 48 : 56),
+          padding: EdgeInsetsDirectional.symmetric(horizontal: dense ? Space.m : Space.l),
+          decoration: BoxDecoration(
+            color: selected ? color.withValues(alpha: t.isDark ? 0.26 : 0.16) : t.glassFill,
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: selected ? color : color.withValues(alpha: 0.45), width: selected ? 1.5 : 1),
+            boxShadow: selected ? [BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 12)] : null,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null) ...[Icon(icon, size: 16, color: color), const SizedBox(width: Space.xs)],
+              Text(
+                label,
+                style: (dense ? text.labelLarge : text.titleSmall)!.copyWith(
+                  color: t.textPrimary,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -402,8 +407,10 @@ class GrowthLink extends StatelessWidget {
       onTap: onTap,
       sfx: null,
       semanticLabel: label,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(vertical: Space.xs),
+      excludeChildSemantics: true,
+      // A 48 dp target (Android) around the small link.
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

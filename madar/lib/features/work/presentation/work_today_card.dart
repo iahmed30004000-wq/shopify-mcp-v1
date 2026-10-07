@@ -49,18 +49,22 @@ class WorkTodayCard extends ConsumerWidget {
       }
     }
 
+    // The whole header is the link, 48 dp high (Android); its texts are its
+    // label ("Work today, Open Work"), each read once.
     final header = MadarPressable(
       onTap: open,
       sfx: null,
-      semanticLabel: l.workOpenAll,
-      child: Row(
-        children: [
-          Icon(Icons.work_rounded, size: 18, color: t.accent),
-          const SizedBox(width: Space.s),
-          Expanded(child: Text(l.workTodayTitle, style: text.titleMedium)),
-          Text(l.workOpenAll, style: text.labelLarge!.copyWith(color: t.accent)),
-          Icon(Icons.chevron_right_rounded, size: 18, color: t.accent),
-        ],
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48),
+        child: Row(
+          children: [
+            Icon(Icons.work_rounded, size: 18, color: t.accent),
+            const SizedBox(width: Space.s),
+            Expanded(child: Text(l.workTodayTitle, style: text.titleMedium)),
+            Text(l.workOpenAll, style: text.labelLarge!.copyWith(color: t.accent)),
+            Icon(Icons.chevron_right_rounded, size: 18, color: t.accent),
+          ],
+        ),
       ),
     );
 
@@ -126,7 +130,7 @@ class WorkTodayCard extends ConsumerWidget {
             onTap: () => WorkActions.editCard(context, ref, c),
             onCompleteSwipe: b.doneColumnId == null ? null : () => WorkActions.moveToColumn(context, ref, b, c, b.doneColumnId!),
             borderRadius: BorderRadius.circular(t.radiusM),
-            semanticLabel: c.title,
+            // No semanticLabel: title, board and due are read once each.
             actions: ItemActions(
               onEdit: () => WorkActions.editCard(context, ref, c),
               extra: [

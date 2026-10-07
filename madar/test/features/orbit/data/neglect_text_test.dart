@@ -22,7 +22,7 @@ void main() {
   String tEn(ReasonCode c, Map<String, Object> a) => neglectReasonText(en, r(c, a), enFmt);
 
   test('the brief\'s examples', () {
-    expect(tAr(ReasonCode.personOverdue, {'name': 'أبي', 'days': 3}), '${iso('أبي')} — متأخر ٣ أيام');
+    expect(tAr(ReasonCode.personOverdue, {'name': 'أبي', 'days': 3}), '${iso('أبي')} — فات الموعد بـ٣ أيام');
     expect(tEn(ReasonCode.personOverdue, {'name': 'Father', 'days': 3}), '${iso('Father')} — 3 days overdue');
     expect(tAr(ReasonCode.dosesPastDue, {'count': 2}), 'جرعتان فائتتان');
     expect(tEn(ReasonCode.dosesPastDue, {'count': 2}), '2 doses past due');
@@ -31,14 +31,14 @@ void main() {
   test('Arabic plural categories: one, two, few (3–10), many (11–99), other (100+)', () {
     String days(int n) => tAr(ReasonCode.personOverdue, {'name': 'أمي', 'days': n});
     final name = iso('أمي');
-    expect(days(1), '$name — متأخر يومًا واحدًا');
-    expect(days(2), '$name — متأخر يومين');
-    expect(days(3), '$name — متأخر ٣ أيام');
-    expect(days(10), '$name — متأخر ١٠ أيام');
-    expect(days(11), '$name — متأخر ١١ يومًا');
-    expect(days(99), '$name — متأخر ٩٩ يومًا');
-    expect(days(100), '$name — متأخر ١٠٠ يوم');
-    expect(days(103), '$name — متأخر ١٠٣ أيام');
+    expect(days(1), '$name — فات الموعد بيوم');
+    expect(days(2), '$name — فات الموعد بيومين');
+    expect(days(3), '$name — فات الموعد بـ٣ أيام');
+    expect(days(10), '$name — فات الموعد بـ١٠ أيام');
+    expect(days(11), '$name — فات الموعد بـ١١ يومًا');
+    expect(days(99), '$name — فات الموعد بـ٩٩ يومًا');
+    expect(days(100), '$name — فات الموعد بـ١٠٠ يوم');
+    expect(days(103), '$name — فات الموعد بـ١٠٣ أيام');
 
     String doses(int n) => tAr(ReasonCode.dosesPastDue, {'count': n});
     expect(doses(1), 'جرعة فائتة');

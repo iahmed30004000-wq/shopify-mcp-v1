@@ -58,7 +58,7 @@ class ProjectTile extends StatelessWidget {
             strokeWidth: 5,
             color: prog.complete || done ? t.success : color,
             glow: prog.complete,
-            semanticLabel: p.name,
+            // The name is the tile's title right beside: the ring says its share.
             semanticValue: texts.fmt.formatPercent(prog.fraction),
             child: prog.complete || done
                 ? Icon(Icons.check_rounded, color: t.success, size: 22)

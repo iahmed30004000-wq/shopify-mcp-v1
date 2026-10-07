@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/design/contrast.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/i18n/formatters.dart';
@@ -219,11 +220,19 @@ class _DayDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    // The letter at AA on what it sits on: the darker or lighter ink on a
+    // filled day, whichever reads (a light letter on a paused grey dot read
+    // 2.3 : 1 on Pearl); secondary text on an empty one.
+    final fill = MadarContrast.over(color.withValues(alpha: 0.92), t.space1);
+    var onInk = t.isDark ? t.space0 : t.textOnAccent;
+    for (final c in [t.space0, t.textOnAccent, const Color(0xFF14110C), Colors.white]) {
+      if (MadarContrast.ratio(c, fill) > MadarContrast.ratio(onInk, fill) + 0.5) onInk = c;
+    }
     final style = Theme.of(context).textTheme.labelSmall?.copyWith(
       fontSize: size * 0.46,
       height: 1,
       fontWeight: on ? FontWeight.w700 : FontWeight.w400,
-      color: on ? (t.isDark ? t.space0 : t.textOnAccent) : t.textTertiary,
+      color: on ? onInk : t.textSecondary,
     );
     return Container(
       width: size,
@@ -457,16 +466,20 @@ class BodyTabBar<T> extends StatelessWidget {
                       top: 0,
                       bottom: 0,
                       width: w,
+                      // A solid accent pill with its own on-accent ink, like
+                      // Travel's: a translucent tint left the 11 px label
+                      // under AA on Aurora (3.8–4.5 : 1).
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(t.radiusL - 4),
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                            colors: [t.accent.withValues(alpha: 0.32), t.accent.withValues(alpha: 0.16)],
+                            colors: [Color.lerp(t.accent, t.starTint, 0.18)!, t.accent],
                           ),
-                          border: Border.all(color: t.accent.withValues(alpha: 0.55)),
-                          boxShadow: [BoxShadow(color: t.accentGlow.withValues(alpha: 0.25), blurRadius: 12)],
+                          boxShadow: t.isDark
+                              ? [BoxShadow(color: t.accentGlow.withValues(alpha: 0.35), blurRadius: 14)]
+                              : null,
                         ),
                       ),
                     );
@@ -487,12 +500,12 @@ class BodyTabBar<T> extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(icons[tab], size: 18, color: tab == value ? t.textPrimary : t.textTertiary),
+                              Icon(icons[tab], size: 18, color: tab == value ? t.textOnAccent : t.textTertiary),
                               const SizedBox(height: 2),
                               AnimatedDefaultTextStyle(
                                 duration: context.motion(MadarMotion.short),
                                 style: (text.labelSmall ?? const TextStyle()).copyWith(
-                                  color: tab == value ? t.textPrimary : t.textSecondary,
+                                  color: tab == value ? t.textOnAccent : t.textSecondary,
                                   fontWeight: tab == value ? FontWeight.w600 : FontWeight.w400,
                                 ),
                                 child: Text(labels[tab]!, maxLines: 1, overflow: TextOverflow.fade, softWrap: false),

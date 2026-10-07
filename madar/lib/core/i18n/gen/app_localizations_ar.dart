@@ -2228,11 +2228,11 @@ class L10nAr extends L10n {
     String _temp0 = intl.Intl.pluralLogic(
       days,
       locale: localeName,
-      other: 'متأخر $n يوم',
-      many: 'متأخر $n يومًا',
-      few: 'متأخر $n أيام',
-      two: 'متأخر يومين',
-      one: 'متأخر يومًا واحدًا',
+      other: 'فات الموعد بـ$n يوم',
+      many: 'فات الموعد بـ$n يومًا',
+      few: 'فات الموعد بـ$n أيام',
+      two: 'فات الموعد بيومين',
+      one: 'فات الموعد بيوم',
     );
     return '$name — $_temp0';
   }
@@ -15728,6 +15728,9 @@ class L10nAr extends L10n {
   String get travelTripNotFound => 'لم تعد هذه الرحلة موجودة';
 
   @override
+  String get travelTemplateNotFound => 'لم تعد قائمة التجهيز هذه موجودة';
+
+  @override
   String get growthTitle => 'أهداف التعلّم';
 
   @override
@@ -18223,7 +18226,7 @@ class L10nAr extends L10n {
   String get cmodCardSeeAll => 'عرض الكل';
 
   @override
-  String get cmodCardEmpty => 'أنشئ متتبّعًا لهذا الكوكب';
+  String get cmodCardEmpty => 'أنشئ متتبّعًا لهذا العالم';
 
   @override
   String get cmodCardEmptyHint => 'عدّاد، أو سجلّ، أو قائمة: بحقولك أنت';
@@ -18731,6 +18734,30 @@ class L10nAr extends L10n {
 
   @override
   String get cinemaRigBeanRole => 'نجم البروفة، حبّة فاصولياء بقفازين أبيضين';
+
+  @override
+  String get cinemaWiringEnterHall => 'ادخل القاعة';
+
+  @override
+  String cinemaWiringShowsReady(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عرض جاهز للعب',
+      many: '$count عرضًا جاهزًا للعب',
+      few: '$count عروض جاهزة للعب',
+      two: 'عرضان جاهزان للعب',
+      one: 'عرض واحد جاهز للعب',
+      zero: 'العروض قيد التحضير',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cinemaWiringCreditGames => 'ألعاب الكلمات والمعرفة في سينما مَدار';
+
+  @override
+  String get cinemaWiringCreditGamesRole => 'قوائم الكلمات وأسئلة المسابقات';
 
   @override
   String get cinemaDemoTapToJump => 'المس الشاشة لتقفز!';

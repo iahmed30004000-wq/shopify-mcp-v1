@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/design/contrast.dart';
+import '../../../../core/design/themes.dart' show MadarPalettes;
 import '../../../../core/design/tokens.dart';
 import '../../../../core/domain/enums.dart';
 import '../../../../core/interaction/interaction.dart';
@@ -39,7 +41,7 @@ abstract final class ModuleIcons {
 /// text and icons on glass.
 class ModuleColors {
   ModuleColors(this.base, MadarTokens t)
-    : ink = t.isDark ? _lift(base, 0.72) : _deepen(base, 0.42),
+    : ink = _inkOf(base, t),
       soft = base.withValues(alpha: t.isDark ? 0.18 : 0.16),
       glow = base.withValues(alpha: t.isDark ? 0.55 : 0.35);
 
@@ -50,8 +52,49 @@ class ModuleColors {
   final Color soft;
   final Color glow;
 
-  /// Text / icon colour on a filled [base] surface.
-  Color get onBase => base.computeLuminance() > 0.45 ? const Color(0xFF14110C) : Colors.white;
+  /// Text / icon colour on a filled [base] surface: whichever of white and
+  /// the near-black ink reads better on it (the planets' mid-tone colours –
+  /// Growth's green, Health's teal – need the dark ink to reach AA).
+  Color get onBase => _bestOn([base]);
+
+  /// [base] a little lighter: the far end of a filled surface's gradient
+  /// (the module screen's "Done for today" banner).
+  Color get sheen {
+    final hsl = HSLColor.fromColor(base);
+    return hsl.withLightness(math.min(1, hsl.lightness + 0.08)).toColor();
+  }
+
+  /// Text / icon colour on a [base] → [sheen] gradient.
+  Color get onSheen => _bestOn([base, sheen]);
+
+  static const Color _darkInk = Color(0xFF14110C);
+
+  static Color _bestOn(List<Color> fills) =>
+      MadarContrast.minRatio(_darkInk, fills) > MadarContrast.minRatio(Colors.white, fills) ? _darkInk : Colors.white;
+
+  /// [base] lifted (night themes) or deepened (Pearl), then made legible
+  /// ([legibleOn]): Faith's gold and Growth's green read at 2.3–2.9 : 1 on
+  /// Pearl with the shift alone.
+  static Color _inkOf(Color base, MadarTokens t) =>
+      legibleOn(t.isDark ? _lift(base, 0.72) : _deepen(base, 0.42), t, tint: base);
+
+  static final Map<(Color, Color, MadarTokens, double), Color> _legible = {};
+
+  /// [color] moved just enough in lightness to read (AA) as small text on a
+  /// [wash] of [tint] (default: itself) – a chip, a badge, a tracker's
+  /// number – over every text surface of the theme and over the darker
+  /// ground a tracker's tinted tile or a planet's sheet puts under it.
+  static Color legibleOn(Color color, MadarTokens t, {Color? tint, double wash = 0.2}) {
+    if (_legible.length > 96) _legible.clear();
+    final c = tint ?? color;
+    return _legible.putIfAbsent((color, c, t, wash), () {
+      final fill = Color.alphaBlend(c.withValues(alpha: wash), t.glassFill);
+      return MadarContrast.ensure(color, [
+        for (final s in MadarPalettes.textSurfaces(t)) MadarContrast.over(fill, s),
+        MadarContrast.over(fill, Color.lerp(t.glassLit, t.textTertiary, 0.25)!),
+      ]);
+    });
+  }
 
   static Color _lift(Color c, double minLightness) {
     final hsl = HSLColor.fromColor(c);
@@ -212,6 +255,9 @@ class ModuleBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final text = Theme.of(context).textTheme;
+    // The label at AA on the pill's own wash (the gold streak badge read
+    // 4.3 : 1 on a tinted tracker tile on Pearl).
+    final ink = ModuleColors.legibleOn(color, context.tokens, wash: filled ? 0.2 : 0.1);
     return Container(
       padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.s, vertical: 3),
       decoration: BoxDecoration(
@@ -223,7 +269,7 @@ class ModuleBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: 13, color: color),
+            Icon(icon, size: 13, color: ink),
             const SizedBox(width: 4),
           ],
           Flexible(
@@ -231,7 +277,7 @@ class ModuleBadge extends StatelessWidget {
               label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: text.labelSmall!.copyWith(color: color, fontWeight: FontWeight.w600, height: 1.2),
+              style: text.labelSmall!.copyWith(color: ink, fontWeight: FontWeight.w600, height: 1.2),
             ),
           ),
         ],
@@ -361,7 +407,12 @@ class ModuleSectionTitle extends StatelessWidget {
               header: true,
               child: Text(
                 title,
-                style: text.titleSmall!.copyWith(color: c, letterSpacing: 0.3, fontWeight: FontWeight.w700),
+                // Brass as an ink: deepened on Pearl until it reads (3.5–4.1 : 1 raw).
+                style: text.titleSmall!.copyWith(
+                  color: MadarContrast.ensure(c, MadarPalettes.textSurfaces(t)),
+                  letterSpacing: 0.3,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),

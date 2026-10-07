@@ -303,6 +303,31 @@ abstract final class AppRoutes {
   /// Location of the tracker or list [moduleId].
   static String moduleOf(String moduleId) => '/modules/module/${Uri.encodeComponent(moduleId)}';
 
+  // Phase 7 – Madar Cinema. The hall opens from the Growth world's page;
+  // the hall pushes its own game screen and Saved Games pages, and these
+  // locations serve deep links (search, notifications, shared links).
+
+  /// The Madar Cinema hall (the games' lobby).
+  static const String cinema = '/cinema';
+
+  /// One programme entry played full screen (`/cinema/game/<id>`); an
+  /// unknown or not-yet-playable id shows the hall's "not open yet" stage.
+  static const String cinemaGame = '/cinema/game/:id';
+
+  /// Location of the programme entry [gameId].
+  static String cinemaGameOf(String gameId) => '/cinema/game/${Uri.encodeComponent(gameId)}';
+
+  /// The user's saved web games (`?text=` opens the add sheet with the link
+  /// found in shared text).
+  static const String savedGames = '/saved-games';
+
+  /// Location of the saved games, pre-filling the add sheet from
+  /// [sharedText].
+  static String savedGamesOf({String? sharedText}) => Uri(
+    path: savedGames,
+    queryParameters: sharedText == null || sharedText.trim().isEmpty ? null : {'text': sharedText},
+  ).toString();
+
   static String _withTab(String path, String? tab, String home) =>
       Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
 

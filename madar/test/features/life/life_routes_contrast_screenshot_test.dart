@@ -1,13 +1,14 @@
-// PROBE (Life UX finder; art director + accessibility lens). Renders every
+// Life UX sweep (art director + accessibility lens; from the Life UX
+// finder's probe). Renders every
 // Life route screen inside the real app (router, AppGate, lock, real fonts
 // and shaders) in Arabic and English across Lapis, Pearl and Aurora, with
 // the packages' realistic sample data and with no data at all; writes PNGs
-// to madar/screenshots/probes/life_ux/routes/ and FAILS when a painted text
+// to madar/screenshots/phase6/ux/routes/ and FAILS when a painted text
 // misses WCAG AA contrast (rendered pixels, not declared tokens) or the
 // layout overflows. Each screen is shot at the top and one page further
 // down (`_p2`).
 //
-//   scratchpad/ft --tags screenshot test/probes/life_ux_routes_shots_test.dart --plain-name 'route work'
+//   scratchpad/ft --tags screenshot test/features/life/life_routes_contrast_screenshot_test.dart --plain-name 'route work'
 @Tags(['screenshot'])
 @Timeout(Duration(minutes: 60))
 library;
@@ -28,20 +29,20 @@ import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/custom_modules/custom_modules.dart' show ModuleTemplateKey;
 import 'package:madar/features/prayer/prayer.dart' show cityDatabaseProvider;
 
-import '../core/design/rendered_contrast.dart';
-import '../features/body/body_harness.dart' show bodyTestNow;
-import '../features/body/body_seed.dart';
-import '../features/custom_modules/custom_harness.dart' show customTestNow, seedCustom;
-import '../features/family/family_seed.dart';
-import '../features/growth/growth_harness.dart' show growthTestNow, seedScenario;
-import '../features/lock/lock_test_utils.dart';
-import '../features/orbit/presentation/orbit_scene_fixtures.dart' show preloadOrbitShaders;
-import '../features/travel/travel_harness.dart' show seedTravelScenario, travelTestCities, travelTestNow;
-import '../features/work/work_harness.dart' as wh;
-import '../helpers/screenshot_harness.dart';
-import '../helpers/test_app.dart';
+import '../../core/design/rendered_contrast.dart';
+import '../body/body_harness.dart' show bodyTestNow;
+import '../body/body_seed.dart';
+import '../custom_modules/custom_harness.dart' show customTestNow, seedCustom;
+import '../family/family_seed.dart';
+import '../growth/growth_harness.dart' show growthTestNow, seedScenario;
+import '../lock/lock_test_utils.dart';
+import '../orbit/presentation/orbit_scene_fixtures.dart' show preloadOrbitShaders;
+import '../travel/travel_harness.dart' show seedTravelScenario, travelTestCities, travelTestNow;
+import '../work/work_harness.dart' as wh;
+import '../../helpers/screenshot_harness.dart';
+import '../../helpers/test_app.dart';
 
-const _dir = 'probes/life_ux/routes';
+const _dir = 'phase6/ux/routes';
 
 /// A route of a Life world: its name, the package's sample "now", and a
 /// seed that fills the database and returns the location to open.

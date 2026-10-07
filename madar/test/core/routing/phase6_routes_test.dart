@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
+import 'package:madar/core/design/widgets/orbit_loader.dart';
+import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/motion/transitions.dart';
 import 'package:madar/core/routing/life_route_pages.dart';
 import 'package:madar/core/routing/router.dart';
@@ -139,6 +141,33 @@ void main() {
         expect(app.location, AppRoutes.travel);
         await tester.pump(const Duration(seconds: 6));
       });
+
+      // A deleted list's stale search hit or link (C1) ends in a page.
+      testWidgets('a link to a packing template that is gone says so', (tester) async {
+        // settle: false – a page that loaded forever would never settle.
+        final app = await pumpMadarApp(
+          tester,
+          settings: AppSettings(onboarded: true, languageCode: lang),
+          initialLocation: AppRoutes.travelTemplateOf('gone'),
+          overrides: LockFixture.empty().overrides,
+          settle: false,
+        );
+        for (var i = 0; i < 10; i++) {
+          await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
+          await tester.pump(const Duration(milliseconds: 500));
+        }
+        final location = app.router.state.uri.toString();
+        final screens = find.byType(PackingTemplateScreen).evaluate().length;
+        final spinning = find.byType(OrbitLoader).evaluate().isNotEmpty;
+        final gone = find.text(lookupL10n(Locale(lang)).travelTemplateNotFound).evaluate().length;
+        // Take the app down before the checks (a loader never settles).
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 6));
+        expect(location, '/travel/template/gone');
+        expect(screens, 1);
+        expect(spinning, isFalse, reason: 'still spinning after 5 s for a deleted template');
+        expect(gone, 1);
+      }, timeout: const Timeout(Duration(minutes: 2)));
     });
   }
 

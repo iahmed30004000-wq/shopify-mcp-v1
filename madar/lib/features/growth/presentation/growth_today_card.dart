@@ -153,30 +153,34 @@ class _CardRow extends ConsumerWidget {
             sfx: null,
             semanticLabel: texts.semantics(goal),
             excludeChildSemantics: true,
-            child: Row(
-              children: [
-                GoalRing(goal: goal, size: 46, strokeWidth: 4),
-                const SizedBox(width: Space.m),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        goal.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: text.titleSmall!.copyWith(color: t.textPrimary),
-                      ),
-                      Text(
-                        texts.paceLine(goal),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: text.labelMedium!.copyWith(color: paceColor),
-                      ),
-                    ],
+            // 48 dp high (Android) even when the pace line is one line.
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 48),
+              child: Row(
+                children: [
+                  GoalRing(goal: goal, size: 46, strokeWidth: 4),
+                  const SizedBox(width: Space.m),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          goal.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: text.titleSmall!.copyWith(color: t.textPrimary),
+                        ),
+                        Text(
+                          texts.paceLine(goal),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: text.labelMedium!.copyWith(color: paceColor),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

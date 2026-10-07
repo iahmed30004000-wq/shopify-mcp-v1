@@ -86,24 +86,62 @@ class FamilyTexts implements FamilyReminderTexts {
   }
 
   /// The suggestion key whose label (in either language) is [typed], so a
-  /// typed «أمي» or "Mother" is stored as `mother`. Arabic marks are
-  /// ignored: «جدتي» is «جدّتي».
+  /// typed «أمي» or "Mother" is stored as `mother`. Spelling is forgiven the
+  /// way people type (see [matchForm]: «امي» and «إمي» are «أمي», «جدتي» is
+  /// «جدّتي»), and the everyday Jordanian words count too: «أبوي»، «بابا»،
+  /// «اخوي»، «ستي»، «خالو» …
   static String? relationKeyFor(String typed) {
-    final t = _plain(typed);
+    final t = matchForm(typed);
     if (t.isEmpty) return null;
     for (final lang in const ['ar', 'en']) {
       final texts = FamilyTexts.forLanguage(lang);
       for (final k in FamilyRelations.keys) {
-        if (_plain(texts.relation(k)!) == t) return k;
+        if (matchForm(texts.relation(k)!) == t) return k;
       }
     }
-    return null;
+    return _relationWords[t];
   }
 
-  /// Arabic short vowels, shadda, sukun and tatweel.
-  static final RegExp _marks = RegExp('[\u064B-\u0652\u0640]');
+  /// How a typed name or relation is compared: trimmed, lower case, without
+  /// Arabic marks or tatweel, every alef form (أ إ آ ٱ) as «ا» and «ى» as «ي».
+  static String matchForm(String s) => s
+      .trim()
+      .toLowerCase()
+      .replaceAll(_marks, '')
+      .replaceAll(_alefs, '\u0627')
+      .replaceAll('\u0649', '\u064A')
+      .replaceAll(RegExp(r'\s+'), ' ');
 
-  static String _plain(String s) => s.trim().toLowerCase().replaceAll(_marks, '');
+  /// Arabic short vowels, shadda, sukun, the dagger alef and tatweel.
+  static final RegExp _marks = RegExp('[\u064B-\u0652\u0670\u0640]');
+
+  /// أ إ آ ٱ
+  static final RegExp _alefs = RegExp('[\u0623\u0625\u0622\u0671]');
+
+  /// Everyday words for a relation, in [matchForm]. The suggestion labels
+  /// themselves (أبي، أمي …) are matched before this table.
+  static const Map<String, String> _relationWords = {
+    // father
+    'ابوي': 'father', 'ابويا': 'father', 'بابا': 'father', 'بابي': 'father', 'والدي': 'father',
+    'الوالد': 'father', 'dad': 'father', 'daddy': 'father', 'my father': 'father',
+    // mother
+    'ماما': 'mother', 'امي': 'mother', 'يما': 'mother', 'والدتي': 'mother',
+    'الوالده': 'mother', 'الوالدة': 'mother', 'mum': 'mother', 'mom': 'mother', 'mummy': 'mother',
+    'mommy': 'mother', 'mama': 'mother', 'my mother': 'mother',
+    // brother / sister
+    'اخوي': 'brother', 'خيي': 'brother', 'خوي': 'brother', 'اخويا': 'brother',
+    'اختي': 'sister', 'خيتي': 'sister', 'اختيا': 'sister',
+    // grandparents
+    'سيدي': 'grandfather', 'جدو': 'grandfather', 'جدي': 'grandfather', 'grandpa': 'grandfather',
+    'ستي': 'grandmother', 'تيتا': 'grandmother', 'جدتي': 'grandmother', 'ستو': 'grandmother',
+    'grandma': 'grandmother', 'granny': 'grandmother', 'nana': 'grandmother',
+    // uncles and aunts
+    'عمو': 'uncle', 'عمي': 'uncle', 'خالو': 'maternalUncle', 'خالي': 'maternalUncle',
+    'عمتو': 'aunt', 'عمتي': 'aunt', 'خالتو': 'maternalAunt', 'خالتي': 'maternalAunt',
+    // spouse and children
+    'مرتي': 'wife', 'زوجتي': 'wife', 'المدام': 'wife', 'جوزي': 'husband', 'زوجي': 'husband',
+    'ابني': 'son', 'بنتي': 'daughter', 'ابنتي': 'daughter',
+  };
 
   // ----------------------------------------------------------------- rhythm
 

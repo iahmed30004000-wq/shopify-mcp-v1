@@ -310,7 +310,8 @@ class _DocumentRow extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ActionableItem(
       key: ValueKey(row.id),
-      semanticLabel: row.name,
+      // No semanticLabel: the row's own texts say it once (a title-only label
+      // made screen readers read the title twice).
       onTap: () async {
         final action = await TravelActions.editDocument(context, ref, row);
         if (action != null && context.mounted) await showUndoToast(context, action);

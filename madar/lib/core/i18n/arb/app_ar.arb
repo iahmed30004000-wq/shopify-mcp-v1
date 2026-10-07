@@ -1583,9 +1583,9 @@
   "@settingsCreditQiblaRole": {
     "description": "Content credit subtitle"
   },
-  "orbitReasonPersonOverdue": "{name} — {days, plural, =1{متأخر يومًا واحدًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}",
+  "orbitReasonPersonOverdue": "{name} — {days, plural, =1{فات الموعد بيوم} =2{فات الموعد بيومين} few{فات الموعد بـ{n} أيام} many{فات الموعد بـ{n} يومًا} other{فات الموعد بـ{n} يوم}}",
   "@orbitReasonPersonOverdue": {
-    "description": "Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits",
+    "description": "Neglect Radar: a person whose contact rhythm is overdue – the Family card's own wording, which fits a man or a woman. n = days formatted in the user's digits",
     "placeholders": {
       "name": {
         "type": "String"
@@ -15494,6 +15494,7 @@
   "travelMore": "المزيد",
   "travelEdit": "تعديل",
   "travelTripNotFound": "لم تعد هذه الرحلة موجودة",
+  "travelTemplateNotFound": "لم تعد قائمة التجهيز هذه موجودة",
   "growthTitle": "أهداف التعلّم",
   "@growthTitle": {
     "description": "Growth screen title"
@@ -17686,7 +17687,7 @@
   "cmodUnchecked": "لم يتمّ",
   "cmodCardTitle": "متتبّعاتك هنا",
   "cmodCardSeeAll": "عرض الكل",
-  "cmodCardEmpty": "أنشئ متتبّعًا لهذا الكوكب",
+  "cmodCardEmpty": "أنشئ متتبّعًا لهذا العالم",
   "cmodCardEmptyHint": "عدّاد، أو سجلّ، أو قائمة: بحقولك أنت",
   "cmodExportDate": "التاريخ",
   "cmodExportTime": "الوقت",
@@ -18097,6 +18098,27 @@
     "description": "Name of the bean-shaped hero of the engine demo"
   },
   "cinemaRigBeanRole": "نجم البروفة، حبّة فاصولياء بقفازين أبيضين",
+  "cinemaWiringEnterHall": "ادخل القاعة",
+  "@cinemaWiringEnterHall": {
+    "description": "Ticket on the Growth page's Madar Cinema card: opens the cinema hall"
+  },
+  "cinemaWiringShowsReady": "{count, plural, =0{العروض قيد التحضير} =1{عرض واحد جاهز للعب} =2{عرضان جاهزان للعب} few{{count} عروض جاهزة للعب} many{{count} عرضًا جاهزًا للعب} other{{count} عرض جاهز للعب}}",
+  "@cinemaWiringShowsReady": {
+    "description": "Madar Cinema card: how many shows (games) of the programme can be played now",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cinemaWiringCreditGames": "ألعاب الكلمات والمعرفة في سينما مَدار",
+  "@cinemaWiringCreditGames": {
+    "description": "Settings › Fonts & credits: the word and quiz content bundled for the cinema's games"
+  },
+  "cinemaWiringCreditGamesRole": "قوائم الكلمات وأسئلة المسابقات",
+  "@cinemaWiringCreditGamesRole": {
+    "description": "Settings › Fonts & credits: what the games' content credit covers"
+  },
   "cinemaDemoTapToJump": "المس الشاشة لتقفز!",
   "@cinemaDemoTapToJump": {
     "description": "Demo opening card subtitle"

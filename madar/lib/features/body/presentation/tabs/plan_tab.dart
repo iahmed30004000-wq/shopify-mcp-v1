@@ -5,7 +5,6 @@ import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
-import '../../../../core/motion/motion_kit.dart';
 import '../../data/body_providers.dart';
 import '../../domain/body_clock.dart';
 import '../../domain/body_week.dart';
@@ -253,69 +252,67 @@ class ExerciseTile extends ConsumerWidget {
           onPressed: () => BodyActions.deleteExercise(context, ref, e.id),
         ),
       ],
-      child: AnimatedOpacity(
-        opacity: e.active ? 1 : 0.55,
-        duration: context.motion(MadarMotion.short),
-        child: GlassCard(
-          padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.xs, Space.m),
-          borderRadius: BorderRadius.circular(t.radiusL),
-          child: Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(colors: [p.training.withValues(alpha: 0.35), p.training.withValues(alpha: 0.08)]),
-                  border: Border.all(color: p.training.withValues(alpha: 0.5)),
-                ),
-                child: Icon(
-                  e.durationMin != null && e.reps == null ? Icons.timer_outlined : Icons.fitness_center_rounded,
-                  size: 20,
-                  color: p.training,
-                ),
+      // A paused exercise says so with its pill and grey days; its text keeps
+      // AA (a 0.55 fade of the whole card read 2.3–3.1 : 1).
+      child: GlassCard(
+        padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.xs, Space.m),
+        borderRadius: BorderRadius.circular(t.radiusL),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(colors: [p.training.withValues(alpha: 0.35), p.training.withValues(alpha: 0.08)]),
+                border: Border.all(color: p.training.withValues(alpha: 0.5)),
               ),
-              const SizedBox(width: Space.m),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(e.name, style: text.titleSmall, maxLines: 2, overflow: TextOverflow.ellipsis),
-                        ),
-                        if (!e.active) ...[
-                          const SizedBox(width: Space.xs),
-                          BodyPill(label: l.bodyPaused, icon: Icons.pause_rounded, color: t.warning, dense: true),
-                        ],
-                      ],
-                    ),
-                    const SizedBox(height: Space.xs),
-                    WeekdayDots(weekdays: e.weekdays, color: p.training, size: 19, dimmed: !e.active),
-                    const SizedBox(height: Space.xs),
-                    Text(
-                      [
-                        if (summary.isNotEmpty) summary,
-                        tx.fmt.localizeDigits(l.bodyPerWeek(perWeek, tx.fmt.formatInt(perWeek))),
-                      ].join(tx.sep),
-                      style: text.bodySmall?.copyWith(color: t.textSecondary),
-                    ),
-                    if (e.notes != null) ...[
-                      const SizedBox(height: 2),
-                      Text(
-                        e.notes!,
-                        style: text.bodySmall?.copyWith(color: t.textTertiary),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+              child: Icon(
+                e.durationMin != null && e.reps == null ? Icons.timer_outlined : Icons.fitness_center_rounded,
+                size: 20,
+                color: p.training,
+              ),
+            ),
+            const SizedBox(width: Space.m),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(e.name, style: text.titleSmall, maxLines: 2, overflow: TextOverflow.ellipsis),
                       ),
+                      if (!e.active) ...[
+                        const SizedBox(width: Space.xs),
+                        BodyPill(label: l.bodyPaused, icon: Icons.pause_rounded, color: t.warning, dense: true),
+                      ],
                     ],
+                  ),
+                  const SizedBox(height: Space.xs),
+                  WeekdayDots(weekdays: e.weekdays, color: p.training, size: 19, dimmed: !e.active),
+                  const SizedBox(height: Space.xs),
+                  Text(
+                    [
+                      if (summary.isNotEmpty) summary,
+                      tx.fmt.localizeDigits(l.bodyPerWeek(perWeek, tx.fmt.formatInt(perWeek))),
+                    ].join(tx.sep),
+                    style: text.bodySmall?.copyWith(color: t.textSecondary),
+                  ),
+                  if (e.notes != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      e.notes!,
+                      style: text.bodySmall?.copyWith(color: t.textTertiary),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
-                ),
+                ],
               ),
-              ?grip,
-            ],
-          ),
+            ),
+            ?grip,
+          ],
         ),
       ),
     );

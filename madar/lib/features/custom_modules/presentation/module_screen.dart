@@ -339,7 +339,7 @@ class _QuickCard extends ConsumerWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(t.radiusL),
             gradient: checked
-                ? LinearGradient(colors: [c.base, HSLColor.fromColor(c.base).withLightness(0.62).toColor()])
+                ? LinearGradient(colors: [c.base, c.sheen])
                 : null,
             color: checked ? null : c.soft,
             border: Border.all(color: c.base.withValues(alpha: checked ? 0.9 : 0.5), width: 1.2),
@@ -347,28 +347,28 @@ class _QuickCard extends ConsumerWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 30, color: checked ? c.onBase : c.ink),
+              Icon(icon, size: 30, color: checked ? c.onSheen : c.ink),
               const SizedBox(width: Space.m),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(label, style: text.titleMedium!.copyWith(color: checked ? c.onBase : t.textPrimary)),
+                    Text(label, style: text.titleMedium!.copyWith(color: checked ? c.onSheen : t.textPrimary)),
                     Text(
                         sub,
                         style: text.bodySmall!.copyWith(
-                          color: checked ? c.onBase.withValues(alpha: 0.8) : t.textSecondary,
+                          color: checked ? c.onSheen.withValues(alpha: 0.86) : t.textSecondary,
                         ),
                       ),
                   ],
                 ),
               ),
               if ((summary.chart?.currentStreak ?? 0) > 0) ...[
-                Icon(Icons.local_fire_department_rounded, size: 20, color: checked ? c.onBase : t.gold),
+                Icon(Icons.local_fire_department_rounded, size: 20, color: checked ? c.onSheen : t.gold),
                 const SizedBox(width: 2),
                 Text(
                   tx.count(summary.chart!.currentStreak),
-                  style: text.titleMedium!.copyWith(color: checked ? c.onBase : t.gold, fontWeight: FontWeight.w700),
+                  style: text.titleMedium!.copyWith(color: checked ? c.onSheen : t.gold, fontWeight: FontWeight.w700),
                 ),
               ],
             ],
@@ -595,7 +595,8 @@ class _RemindersSection extends ConsumerWidget {
             padding: const EdgeInsetsDirectional.only(bottom: Space.s),
             child: ActionableItem(
               key: ValueKey(r.id),
-              semanticLabel: describeReminder(context, r.rule) ?? l.cmodReminders,
+              // No semanticLabel: the rule's line is read once; the switch is
+              // its own toggle.
               borderRadius: BorderRadius.circular(t.radiusM),
               swipeEnabled: false,
               onTap: () => unawaited(CustomModulesActions.editReminder(context, ref, r)),
@@ -622,7 +623,7 @@ class _RemindersSection extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    GlassSwitch(
+                    _TallSwitch(
                       value: r.enabled,
                       semanticLabel: l.cmodReminderToggle,
                       onChanged: (v) => unawaited(CustomModulesActions.setReminderEnabled(ref, r, v)),
@@ -635,6 +636,39 @@ class _RemindersSection extends ConsumerWidget {
       ],
     );
   }
+}
+
+/// A [GlassSwitch] inside a 48 dp target (Android): the 54×32 track is
+/// drawn as before; a tap anywhere in the target flips it, and a screen
+/// reader finds one 48 dp toggle.
+class _TallSwitch extends StatelessWidget {
+  const _TallSwitch({required this.value, required this.onChanged, required this.semanticLabel});
+
+  final bool value;
+  final ValueChanged<bool> onChanged;
+  final String semanticLabel;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    container: true,
+    toggled: value,
+    label: semanticLabel,
+    onTap: () => onChanged(!value),
+    child: ExcludeSemantics(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          Fx.fire(value ? Sfx.toggleOff : Sfx.toggleOn);
+          onChanged(!value);
+        },
+        child: SizedBox(
+          width: 62,
+          height: 48,
+          child: Center(child: GlassSwitch(value: value, semanticLabel: semanticLabel, onChanged: onChanged)),
+        ),
+      ),
+    ),
+  );
 }
 
 // ----------------------------------------------------------------- list --

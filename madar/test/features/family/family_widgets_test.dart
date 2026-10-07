@@ -299,6 +299,22 @@ void main() {
       expect(FamilyTexts.relationKeyFor('أمي'), 'mother');
       expect(FamilyTexts.relationKeyFor(' Brother '), 'brother');
       expect(FamilyTexts.relationKeyFor('Cousin Ali'), isNull);
+      // Hamza / alef forms and the everyday Jordanian words.
+      expect(FamilyTexts.relationKeyFor('امي'), 'mother');
+      expect(FamilyTexts.relationKeyFor('إمي'), 'mother');
+      expect(FamilyTexts.relationKeyFor('ماما'), 'mother');
+      expect(FamilyTexts.relationKeyFor('أبوي'), 'father');
+      expect(FamilyTexts.relationKeyFor('ابوي'), 'father');
+      expect(FamilyTexts.relationKeyFor('بابا'), 'father');
+      expect(FamilyTexts.relationKeyFor('ابي'), 'father');
+      expect(FamilyTexts.relationKeyFor('اخوي'), 'brother');
+      expect(FamilyTexts.relationKeyFor('خيتي'), 'sister');
+      expect(FamilyTexts.relationKeyFor('ستي'), 'grandmother');
+      expect(FamilyTexts.relationKeyFor('سيدي'), 'grandfather');
+      expect(FamilyTexts.relationKeyFor('عمو'), 'uncle');
+      expect(FamilyTexts.relationKeyFor('خالو'), 'maternalUncle');
+      expect(FamilyTexts.relationKeyFor('Mum'), 'mother');
+      expect(FamilyTexts.relationKeyFor('أبو يوسف'), isNull);
       final ar = FamilyTexts.forLanguage('ar');
       expect(ar.relation('mother'), 'أمي');
       expect(ar.relation('ابن خالتي'), 'ابن خالتي');

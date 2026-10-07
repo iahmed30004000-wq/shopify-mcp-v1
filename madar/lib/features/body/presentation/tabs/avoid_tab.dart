@@ -74,7 +74,7 @@ class AvoidTile extends ConsumerWidget {
     final reason = item.reason;
     return ActionableItem(
       key: ValueKey('body.avoid.${item.id}'),
-      semanticLabel: [item.body, ?reason].join('. '),
+      // No semanticLabel: the item and its reason are read once each.
       borderRadius: BorderRadius.circular(t.radiusL),
       onTap: () => BodyActions.editAvoid(context, ref, item),
       actions: ItemActions(

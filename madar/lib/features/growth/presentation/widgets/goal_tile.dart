@@ -106,13 +106,21 @@ class GoalTile extends StatelessWidget {
       ],
       child: GlassCard(
         padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.m, Space.s, Space.m),
-        child: Opacity(
-          opacity: paused ? 0.72 : 1,
-          child: Row(
-            children: [
-              GoalRing(goal: goal, size: 54),
-              const SizedBox(width: Space.m),
-              Expanded(
+        // Paused: the ring fades and the pace line says so; the texts keep
+        // AA (a 0.72 fade of the whole tile read 3.4 : 1 on Pearl).
+        child: Row(
+          children: [
+            // The row's semanticLabel already says all of this once; the
+            // log button and the grip stay reachable.
+            ExcludeSemantics(
+              child: Opacity(
+                opacity: paused ? 0.72 : 1,
+                child: GoalRing(goal: goal, size: 54),
+              ),
+            ),
+            const SizedBox(width: Space.m),
+            Expanded(
+              child: ExcludeSemantics(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -146,20 +154,20 @@ class GoalTile extends StatelessWidget {
                   ],
                 ),
               ),
-              if (canLog) ...[
-                const SizedBox(width: Space.xs),
-                MadarButton.icon(
-                  icon: Icons.add_rounded,
-                  onPressed: () => onLog(),
-                  semanticLabel: l.growthLogProgress,
-                  size: MadarButtonSize.small,
-                  variant: MadarButtonVariant.secondary,
-                  sfx: Sfx.tap,
-                ),
-              ],
-              ?grip,
+            ),
+            if (canLog) ...[
+              const SizedBox(width: Space.xs),
+              MadarButton.icon(
+                icon: Icons.add_rounded,
+                onPressed: () => onLog(),
+                semanticLabel: l.growthLogProgress,
+                size: MadarButtonSize.small,
+                variant: MadarButtonVariant.secondary,
+                sfx: Sfx.tap,
+              ),
             ],
-          ),
+            ?grip,
+          ],
         ),
       ),
     );

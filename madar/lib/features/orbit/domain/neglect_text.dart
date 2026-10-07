@@ -5,7 +5,7 @@ import 'planet_scores.dart';
 import 'score_sources.dart';
 
 /// Localised, human sentence for a Neglect Radar reason, e.g.
-/// «أبي — متأخر ٣ أيام» / "Father — 3 days overdue",
+/// «أبي — فات الموعد بـ٣ أيام» / "Father — 3 days overdue",
 /// «جرعتان فائتتان» / "2 doses past due".
 ///
 /// Numbers follow [fmt]'s digit style (Arabic-Indic in Arabic by default);

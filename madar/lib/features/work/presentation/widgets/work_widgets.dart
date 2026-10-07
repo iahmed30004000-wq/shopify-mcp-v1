@@ -143,17 +143,19 @@ class AssigneePill extends StatelessWidget {
     final t = context.tokens;
     final trimmed = name.trim();
     final initial = trimmed.isEmpty ? '?' : String.fromCharCode(trimmed.runes.first);
+    // The name in the theme's secondary text colour (the theme's
+    // `secondary` hue is a fill, not an ink: 2.2–2.4 : 1 on Lapis glass);
+    // the hue stays on the initial's dot.
     return WorkPill(
       label: trimmed,
-      color: t.secondary,
       leading: Container(
-        width: 14,
-        height: 14,
+        width: 16,
+        height: 16,
         alignment: Alignment.center,
         decoration: BoxDecoration(color: t.secondary.withValues(alpha: 0.35), shape: BoxShape.circle),
         child: Text(
           initial.toUpperCase(),
-          style: TextStyle(fontSize: 8.5, height: 1, fontWeight: FontWeight.w700, color: t.textPrimary),
+          style: TextStyle(fontSize: 10.5, height: 1, fontWeight: FontWeight.w700, color: t.textPrimary),
         ),
       ),
     );

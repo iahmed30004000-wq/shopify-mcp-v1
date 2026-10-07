@@ -102,6 +102,36 @@ void main() {
     expect(created.relation, 'uncle', reason: 'a relation word is stored as its key (marks ignored)');
   });
 
+  // How people in Amman actually type it: no hamza, dialect words.
+  for (final (typed, relation) in const [
+    ('اتصلت بأبوي', 'father'), // the parser's own example (parser_test)
+    ('كلمت امي امبارح', 'mother'),
+    ('اتصلت بإمي', 'mother'),
+    ('زرت اخوي', 'brother'),
+    ('اتصلت بستي', 'grandmother'),
+    ('كلمت خالو', 'maternalUncle'),
+  ]) {
+    test('«$typed» reaches the one person whose relation is $relation', () async {
+      final person = await repos.people.insert(PeopleCompanion.insert(name: 'سالم', relation: Value(relation)));
+      final intent = QuickAddParser.parse(typed, now: now);
+      expect(intent.kind, QuickAddKind.contact, reason: 'the parser reads a contact');
+      expect(await handler.handle(intent), isTrue);
+      expect(
+        (await repos.people.getAll()).map((p) => p.name).toList(),
+        ['سالم'],
+        reason: 'no new person named «${intent.title}» next to the saved $relation',
+      );
+      expect((await repos.contactLogs.getAll()).single.personId, person.id);
+    });
+  }
+
+  test('a name is found whatever the hamza: «امي» is the person saved as «أمي»', () async {
+    final mum = await repos.people.insert(PeopleCompanion.insert(name: 'أمي'));
+    expect(await add('كلمت امي امبارح'), isTrue);
+    expect(await repos.people.count(), 1);
+    expect((await repos.contactLogs.getAll()).single.personId, mum.id);
+  });
+
   test('water, pain, mood and contact are recorded too', () async {
     expect(await add('شربت 500 مل ماء'), isTrue);
     expect((await repos.waterLogs.getAll()).single.ml, 500);

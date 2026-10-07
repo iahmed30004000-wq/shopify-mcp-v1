@@ -108,6 +108,12 @@ final List<ContentCredit> madarContentCredits = [
     role: (l) => l.settingsCreditQiblaRole,
     licenseAsset: MadarLicenses.content['Madar qibla compass (WMM2025)']!,
   ),
+  ContentCredit(
+    icon: Icons.theaters_rounded,
+    name: (l) => l.cinemaWiringCreditGames,
+    role: (l) => l.cinemaWiringCreditGamesRole,
+    licenseAsset: MadarLicenses.content['Madar Cinema – word & knowledge games']!,
+  ),
 ];
 
 /// Licence text of a bundled asset (overridable in tests).
@@ -117,8 +123,8 @@ final licenseTextProvider = FutureProvider.autoDispose.family<String, String>(
 
 /// Fonts & sources: each font's name set in itself, its role, and its full
 /// licence text on demand; then the content (the Quran, hadith, adhkar,
-/// city list, adhan tones, recitations, the qibla's magnetic model) with the
-/// full credits of its sources.
+/// city list, adhan tones, recitations, the qibla's magnetic model, the
+/// cinema's word and quiz content) with the full credits of its sources.
 class LicensesScreen extends StatelessWidget {
   const LicensesScreen({super.key});
 

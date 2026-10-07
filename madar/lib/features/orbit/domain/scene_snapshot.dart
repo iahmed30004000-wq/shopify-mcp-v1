@@ -173,7 +173,7 @@ class RadarEntry {
   final double score;
   final NeglectReason reason;
 
-  /// Localised sentence, e.g. «أبي — متأخر ٣ أيام».
+  /// Localised sentence, e.g. «أبي — فات الموعد بـ٣ أيام».
   final String text;
 
   /// The record to open, or null → open the planet itself.

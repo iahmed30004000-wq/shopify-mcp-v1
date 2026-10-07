@@ -226,7 +226,8 @@ class _TripScreenState extends ConsumerState<TripScreen> {
         TravelActions.togglePacked(context, ref, item, celebrateFrom: _ringKey.currentContext);
     return ActionableItem(
       key: ValueKey(item.id),
-      semanticLabel: item.body,
+      // No semanticLabel: the row's own texts say it once (a title-only label
+      // made screen readers read the title twice).
       onTap: () async {
         await toggle();
       },

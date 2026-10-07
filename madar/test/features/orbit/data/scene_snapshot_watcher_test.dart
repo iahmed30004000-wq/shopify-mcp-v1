@@ -63,7 +63,7 @@ void main() {
     expect(seen, hasLength(2));
     expect(seen.last.planet('family')!.state, PlanetState.neglected);
     expect(seen.last.planet('family')!.moons.single.label, 'أبي');
-    expect(seen.last.radar.single.text, contains('متأخر ٤ أيام'));
+    expect(seen.last.radar.single.text, contains('فات الموعد بـ٤ أيام'));
   });
 
   test('paused (or in the background) it does no work; resuming catches up once', () async {

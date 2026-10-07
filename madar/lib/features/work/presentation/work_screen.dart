@@ -52,7 +52,8 @@ class _WorkScreenState extends ConsumerState<WorkScreen> {
     Widget boardItem(BoardSummary s, {Widget? grip}) => ActionableItem(
       onTap: () => WorkNavigation.toBoard(context, ref, s.board.id),
       borderRadius: BorderRadius.circular(t.radiusL),
-      semanticLabel: s.board.name,
+      // No semanticLabel: the row's own texts are its label (a title-only
+      // label made screen readers read the title twice).
       actions: ItemActions(
         onEdit: () async {
           final a = await WorkActions.editBoard(context, ref, s.board);

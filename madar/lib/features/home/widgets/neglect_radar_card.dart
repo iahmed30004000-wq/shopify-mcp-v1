@@ -17,7 +17,7 @@ import '../../orbit/presentation/planet/planet_modules.dart';
 typedef OpenPlanet = void Function(String planetKey, {String? item});
 
 /// The Neglect Radar in the home panel: the three weakest worlds, each with
-/// its most urgent concrete reason («أبي — متأخر ٣ أيام», "2 doses past
+/// its most urgent concrete reason («أبي — فات الموعد بـ٣ أيام», "2 doses past
 /// due"); tapping one flies to that world (with the record highlighted).
 /// When nothing is slipping it says so in one calm line.
 ///

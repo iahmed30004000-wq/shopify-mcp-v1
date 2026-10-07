@@ -13,6 +13,7 @@ import '../../../../core/interaction/interaction.dart';
 import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../domain/family_models.dart';
+import '../../family_texts.dart' show FamilyTexts;
 import '../../domain/rhythm.dart';
 
 /// The colour a rhythm state speaks in.
@@ -47,8 +48,27 @@ IconData channelIcon(ContactChannel c) => switch (c) {
 String personInitial(String name) {
   final t = BidiIsolate.strip(name).trim();
   if (t.isEmpty) return '·';
-  return t.characters.first.toUpperCase();
+  // The person's own name, not the title or kinship word before it: «أختي
+  // ليلى» is «ل», "Mr. Jones" is "J" – unless that word is all there is
+  // («أمي» stays «أ»).
+  final words = t.split(RegExp(r'\s+'));
+  var i = 0;
+  while (i < words.length - 1 && _leadWords.contains(FamilyTexts.matchForm(words[i]).replaceAll('.', ''))) {
+    i++;
+  }
+  return words[i].characters.first.toUpperCase();
 }
+
+/// Titles and kinship words that come before a name (in [FamilyTexts.matchForm]).
+const Set<String> _leadWords = {
+  // titles
+  'م', 'د', 'ا', 'الاستاذ', 'استاذ', 'الاستاذه', 'استاذه', 'الدكتور', 'دكتور', 'الدكتوره', 'دكتوره',
+  'المهندس', 'مهندس', 'الحاج', 'حاج', 'الحاجه', 'حجي', 'الشيخ', 'شيخ', 'السيد', 'السيده',
+  'mr', 'mrs', 'ms', 'miss', 'dr', 'eng', 'prof', 'sir', 'uncle', 'aunt', 'auntie', 'grandma', 'grandpa',
+  // kinship
+  'اخي', 'اختي', 'اخوي', 'خالي', 'خالتي', 'عمي', 'عمتي', 'خالو', 'خالتو', 'عمو', 'عمتو', 'ابن', 'بنت',
+  'جدي', 'جدتي', 'ستي', 'سيدي', 'ابني', 'بنتي', 'ابنتي', 'صديقي', 'صديقتي', 'زميلي', 'زميلتي', 'جاري', 'جارتي',
+};
 
 /// A person's orb: their colour with the initial, ringed by how much of the
 /// rhythm has passed (green → gold → amber → red).
@@ -215,7 +235,8 @@ class _ContactedButtonState extends State<ContactedButton> {
       semanticLabel: widget.semanticLabel,
       focusRadius: BorderRadius.circular(widget.size),
       child: SizedBox.square(
-        dimension: math.max(widget.size, 44),
+        // The hit area is 48 dp (Android) whatever the drawn heart.
+        dimension: math.max(widget.size, 48),
         child: Center(
           child: AnimatedContainer(
             duration: context.motion(MadarMotion.short),
@@ -275,24 +296,28 @@ class FamilyRoundAction extends StatelessWidget {
       semanticLabel: label,
       excludeChildSemantics: true,
       focusRadius: BorderRadius.circular(t.radiusM),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 46,
-            height: 46,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: c.withValues(alpha: t.isDark ? 0.16 : 0.1),
-              border: Border.all(color: c.withValues(alpha: 0.5), width: 0.9),
+      // At least 48 dp wide even when the label under the circle is short.
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: c.withValues(alpha: t.isDark ? 0.16 : 0.1),
+                border: Border.all(color: c.withValues(alpha: 0.5), width: 0.9),
+              ),
+              child: Icon(icon, size: 21, color: c),
             ),
-            child: Icon(icon, size: 21, color: c),
-          ),
-          if (showLabel) ...[
-            const SizedBox(height: Space.xs),
-            Text(label, style: text.labelSmall!.copyWith(color: t.textSecondary)),
+            if (showLabel) ...[
+              const SizedBox(height: Space.xs),
+              Text(label, style: text.labelSmall!.copyWith(color: t.textSecondary)),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

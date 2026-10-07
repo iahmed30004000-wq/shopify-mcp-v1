@@ -273,7 +273,7 @@ void main() {
           neglectReasonText(l, snap.planet(planet)!.score.reasons.firstWhere((r) => r.code == code), f);
 
       expect(textOf('family', ReasonCode.personOverdue, en, enFmt), '${iso('Father')} — 3 days overdue');
-      expect(textOf('family', ReasonCode.personOverdue, ar, arFmt), '${iso('Father')} — متأخر ٣ أيام');
+      expect(textOf('family', ReasonCode.personOverdue, ar, arFmt), '${iso('Father')} — فات الموعد بـ٣ أيام');
       // Today's 08:00 Metformin and 09:00 Vitamin D.
       expect(textOf('health', ReasonCode.dosesPastDue, en, enFmt), '2 doses past due');
       expect(textOf('health', ReasonCode.dosesPastDue, ar, arFmt), 'جرعتان فائتتان');

@@ -111,7 +111,8 @@ class ProjectRowItem extends ConsumerWidget {
             },
       completeLabel: l.workStatusDone,
       borderRadius: BorderRadius.circular(t.radiusM),
-      semanticLabel: p.name,
+      // No semanticLabel: the row's own texts are its label (a title-only
+      // label made screen readers read the title twice).
       actions: ItemActions(
         onEdit: () => WorkActions.editProject(context, ref, p),
         onDuplicate: () => WorkActions.duplicateProject(context, ref, p),

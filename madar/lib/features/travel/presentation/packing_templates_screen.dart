@@ -78,7 +78,8 @@ class PackingTemplatesView extends ConsumerWidget {
       itemBuilder: (context, t, index, handle) => ActionableItem(
         key: ValueKey(t.id),
         onTap: () => TravelActions.openTemplate(context, t.id),
-        semanticLabel: t.name,
+        // No semanticLabel: the row's own texts say it once (a title-only label
+        // made screen readers read the title twice).
         actions: ItemActions(
           onEdit: () => TravelActions.openTemplate(context, t.id),
           onDuplicate: () => TravelActions.duplicateTemplate(context, ref, t),
@@ -219,12 +220,20 @@ class _PackingTemplateScreenState extends ConsumerState<PackingTemplateScreen> {
     final t = context.tokens;
     final tx = TravelTexts.of(context);
     final text = Theme.of(context).textTheme;
-    final template = ref.watch(travelTemplateProvider(widget.templateId)).value;
+    final async = ref.watch(travelTemplateProvider(widget.templateId));
+    final template = async.value;
     if (template == null) {
+      // Loaded and gone (a deleted list's old search hit or link): say so
+      // instead of loading forever.
+      final gone = async.hasValue || async.hasError;
       return MadarScaffold(
         title: l.travelTemplatesTitle,
         animateBackdrop: widget.animateBackdrop,
-        body: const Center(child: OrbitLoader(size: 36)),
+        body: Center(
+          child: gone
+              ? AnimatedEmptyState(kind: EmptyStateKind.noResults, title: l.travelTemplateNotFound, body: '')
+              : const OrbitLoader(size: 36),
+        ),
       );
     }
     final items = PackingTemplateMath.decodeAll(template.items);
@@ -239,9 +248,10 @@ class _PackingTemplateScreenState extends ConsumerState<PackingTemplateScreen> {
             onTap: () => _pickCategory(items),
             sfx: Sfx.sheetOpen,
             semanticLabel: l.travelAddItemIn(tx.category(_category)),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.all(Space.s),
-              child: Icon(categoryIcon(_category), color: t.accent, size: 22),
+            // A 48 dp target (Android), the icon centred in it.
+            child: SizedBox.square(
+              dimension: 48,
+              child: Center(child: Icon(categoryIcon(_category), color: t.accent, size: 22)),
             ),
           ),
           Expanded(
@@ -309,7 +319,8 @@ class _PackingTemplateScreenState extends ConsumerState<PackingTemplateScreen> {
           final item = e.$2;
           return ActionableItem(
             key: ValueKey('${e.$1}:${item.encode()}'),
-            semanticLabel: item.body,
+            // No semanticLabel: the row's own texts say it once (a title-only label
+            // made screen readers read the title twice).
             onTap: () => _editItem(template, items, e.$1),
             actions: ItemActions(
               onEdit: () => _editItem(template, items, e.$1),

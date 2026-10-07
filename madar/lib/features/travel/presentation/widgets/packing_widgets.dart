@@ -205,21 +205,19 @@ class PackingItemTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: Space.xs),
+          // Packed reads quieter through the secondary colour and the
+          // strike, never below AA (a 0.6 fade read 3.7 : 1 on Lapis).
           Expanded(
-            child: AnimatedOpacity(
-              opacity: packed ? 0.6 : 1,
-              duration: duration,
-              child: Text(
-                item.body,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textDirection: BidiIsolate.directionOf(item.body),
-                textAlign: uiStart,
-                style: text.bodyLarge!.copyWith(
-                  color: packed ? t.textSecondary : t.textPrimary,
-                  decoration: packed ? TextDecoration.lineThrough : null,
-                  decorationColor: t.textTertiary,
-                ),
+            child: Text(
+              item.body,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textDirection: BidiIsolate.directionOf(item.body),
+              textAlign: uiStart,
+              style: text.bodyLarge!.copyWith(
+                color: packed ? t.textSecondary : t.textPrimary,
+                decoration: packed ? TextDecoration.lineThrough : null,
+                decorationColor: t.textTertiary,
               ),
             ),
           ),
@@ -276,9 +274,10 @@ class _PackingAddRowState extends State<PackingAddRow> {
             onTap: widget.onPickCategory,
             sfx: Sfx.sheetOpen,
             semanticLabel: l.travelAddItemIn(tx.category(widget.category)),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.all(Space.s),
-              child: Icon(categoryIcon(widget.category), color: t.accent, size: 22),
+            // A 48 dp target (Android), the icon centred in it.
+            child: SizedBox.square(
+              dimension: 48,
+              child: Center(child: Icon(categoryIcon(widget.category), color: t.accent, size: 22)),
             ),
           ),
           Expanded(

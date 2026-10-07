@@ -3811,10 +3811,10 @@ abstract class L10n {
   /// **'نموذج WMM من NOAA وBGS، ملكٌ عام'**
   String get settingsCreditQiblaRole;
 
-  /// Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits
+  /// Neglect Radar: a person whose contact rhythm is overdue – the Family card's own wording, which fits a man or a woman. n = days formatted in the user's digits
   ///
   /// In ar, this message translates to:
-  /// **'{name} — {days, plural, =1{متأخر يومًا واحدًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}'**
+  /// **'{name} — {days, plural, =1{فات الموعد بيوم} =2{فات الموعد بيومين} few{فات الموعد بـ{n} أيام} many{فات الموعد بـ{n} يومًا} other{فات الموعد بـ{n} يوم}}'**
   String orbitReasonPersonOverdue(String name, int days, String n);
 
   /// Neglect Radar: medication doses due today that were not taken
@@ -24159,6 +24159,12 @@ abstract class L10n {
   /// **'لم تعد هذه الرحلة موجودة'**
   String get travelTripNotFound;
 
+  /// No description provided for @travelTemplateNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تعد قائمة التجهيز هذه موجودة'**
+  String get travelTemplateNotFound;
+
   /// Growth screen title
   ///
   /// In ar, this message translates to:
@@ -27990,7 +27996,7 @@ abstract class L10n {
   /// No description provided for @cmodCardEmpty.
   ///
   /// In ar, this message translates to:
-  /// **'أنشئ متتبّعًا لهذا الكوكب'**
+  /// **'أنشئ متتبّعًا لهذا العالم'**
   String get cmodCardEmpty;
 
   /// No description provided for @cmodCardEmptyHint.
@@ -28874,6 +28880,30 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'نجم البروفة، حبّة فاصولياء بقفازين أبيضين'**
   String get cinemaRigBeanRole;
+
+  /// Ticket on the Growth page's Madar Cinema card: opens the cinema hall
+  ///
+  /// In ar, this message translates to:
+  /// **'ادخل القاعة'**
+  String get cinemaWiringEnterHall;
+
+  /// Madar Cinema card: how many shows (games) of the programme can be played now
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{العروض قيد التحضير} =1{عرض واحد جاهز للعب} =2{عرضان جاهزان للعب} few{{count} عروض جاهزة للعب} many{{count} عرضًا جاهزًا للعب} other{{count} عرض جاهز للعب}}'**
+  String cinemaWiringShowsReady(int count);
+
+  /// Settings › Fonts & credits: the word and quiz content bundled for the cinema's games
+  ///
+  /// In ar, this message translates to:
+  /// **'ألعاب الكلمات والمعرفة في سينما مَدار'**
+  String get cinemaWiringCreditGames;
+
+  /// Settings › Fonts & credits: what the games' content credit covers
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم الكلمات وأسئلة المسابقات'**
+  String get cinemaWiringCreditGamesRole;
 
   /// Demo opening card subtitle
   ///

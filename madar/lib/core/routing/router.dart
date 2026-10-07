@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/adhan/presentation/adhan_settings_screen.dart';
 import '../../features/adhkar/adhkar.dart' show AdhkarCategoryId, TasbeehScreen;
+import '../../features/cinema/hall/hall.dart' show CinemaGameScreen, CinemaHallScreen, SavedGamesScreen;
 import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/hifz/hifz.dart' show HifzCard;
 import '../../features/home/home_screen.dart';
@@ -24,6 +25,7 @@ import '../../features/settings/sound_settings_screen.dart';
 import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
+import 'cinema_route_pages.dart';
 import 'health_route_pages.dart';
 import 'life_route_pages.dart';
 import 'money_route_pages.dart';
@@ -71,8 +73,10 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// goals and a jar) and the life pages (Work, a board, the projects, a
 /// project, Family, a person, Travel on its tabs, a trip, a packing
 /// template, the learning goals, a learning goal, the Body on its tabs, the
-/// trackers and a tracker) move along the reading direction (shared axis);
-/// the tasbeeh, the qibla compass, guided
+/// trackers and a tracker) and the saved web games (`/saved-games`) move
+/// along the reading direction (shared axis); the cinema hall (`/cinema`)
+/// fades through, and a show (`/cinema/game/<id>`) opens through the hall's
+/// iris over black; the tasbeeh, the qibla compass, guided
 /// breathing and the design gallery zoom in (scaled shared axis); the
 /// importer rises as a sheet, and the full recitation player
 /// (`/now-playing`) as an interaction sheet over the page beneath; a planet
@@ -525,6 +529,30 @@ List<RouteBase> madarRoutes() => [
             ),
           ),
         ],
+      ),
+      // Phase 7 – Madar Cinema.
+      GoRoute(
+        path: 'cinema',
+        pageBuilder: (context, state) =>
+            MadarTransitions.fadeThrough<void>(context: context, key: state.pageKey, child: const CinemaHallScreen()),
+        routes: [
+          GoRoute(
+            path: 'game/:id',
+            pageBuilder: (context, state) => CinemaRoutePages.iris(
+              context: context,
+              key: state.pageKey,
+              child: CinemaGameScreen(gameId: state.pathParameters['id']!),
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: 'saved-games',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: SavedGamesScreen(initialSharedText: state.uri.queryParameters['text']),
+        ),
       ),
       GoRoute(
         path: 'now-playing',

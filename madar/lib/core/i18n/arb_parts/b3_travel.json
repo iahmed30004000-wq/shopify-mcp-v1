@@ -297,5 +297,6 @@
   "travelOpenTrip": {"ar": "افتح رحلة {destination}", "en": "Open the trip to {destination}", "placeholders": {"destination": {"type": "String"}}},
   "travelMore": {"ar": "المزيد", "en": "More"},
   "travelEdit": {"ar": "تعديل", "en": "Edit"},
-  "travelTripNotFound": {"ar": "لم تعد هذه الرحلة موجودة", "en": "This trip no longer exists"}
+  "travelTripNotFound": {"ar": "لم تعد هذه الرحلة موجودة", "en": "This trip no longer exists"},
+  "travelTemplateNotFound": {"ar": "لم تعد قائمة التجهيز هذه موجودة", "en": "This packing list no longer exists"}
 }

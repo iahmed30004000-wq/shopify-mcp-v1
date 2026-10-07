@@ -7,6 +7,7 @@
 //   of the shared `reminders` namespace;
 // * a tap opens its page, cold or warm, under the app lock like every deep
 //   link, and never before onboarding.
+import 'package:flutter/widgets.dart' show SizedBox;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/app/app_services.dart';
 import 'package:madar/app/life_services.dart';
@@ -243,6 +244,58 @@ void main() {
       await tester.pump(const Duration(seconds: 6));
     });
   }
+
+  // Already on the page's link, but on another tab: the tap still shows
+  // the tab it names (Body › Fasting, then Water, then "goal reached").
+  testWidgets('a fasting notice shows the fasting tab even if the user moved to another tab', (tester) async {
+    final app = await pumpMadarApp(
+      tester,
+      settings: _english,
+      now: _now,
+      initialLocation: AppRoutes.bodyOf(tab: BodyTab.fasting.name),
+      overrides: LockFixture.empty().overrides,
+    );
+    BodyTabBar<BodyTab> bar() => tester.widget<BodyTabBar<BodyTab>>(find.byType(BodyTabBar<BodyTab>));
+    expect(bar().value, BodyTab.fasting);
+    bar().onChanged(BodyTab.water);
+    await settleApp(tester);
+    expect(bar().value, BodyTab.water);
+
+    app.notifications.tap(_fasting());
+    await settleApp(tester);
+    final location = app.router.state.uri.toString();
+    final tab = bar().value;
+    // Take the app down and let its timers run out before checking (the
+    // runner otherwise stalls after a failed check).
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 6));
+    expect(location, '/body?tab=fasting');
+    expect(tab, BodyTab.fasting, reason: 'the tapped fasting notice left the user on the water tab');
+  });
+
+  testWidgets('a document reminder shows the documents tab even if the user moved to another tab', (tester) async {
+    final app = await pumpMadarApp(
+      tester,
+      settings: _english,
+      now: _now,
+      initialLocation: AppRoutes.travelOf(tab: TravelTab.documents.name),
+      overrides: LockFixture.empty().overrides,
+    );
+    TravelTabBar<TravelTab> bar() => tester.widget<TravelTabBar<TravelTab>>(find.byType(TravelTabBar<TravelTab>));
+    expect(bar().value, TravelTab.documents);
+    bar().onChanged(TravelTab.trips);
+    await settleApp(tester);
+    expect(bar().value, TravelTab.trips);
+
+    app.notifications.tap(_document('d1'));
+    await settleApp(tester);
+    final location = app.router.state.uri.toString();
+    final tab = bar().value;
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 6));
+    expect(location, '/travel?tab=documents');
+    expect(tab, TravelTab.documents, reason: 'the tapped document reminder left the user on the trips tab');
+  });
 
   testWidgets('a life reminder tapped while locked moves the router under the lock', (tester) async {
     final fx = await LockFixture.configured(biometrics: false);

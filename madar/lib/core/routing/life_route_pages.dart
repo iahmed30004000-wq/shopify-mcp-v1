@@ -11,6 +11,7 @@ import '../../features/growth/growth.dart' show GoalScreen, GrowthScreen;
 import '../../features/travel/travel.dart' show PackingTemplateScreen, TravelScreen, TravelTab, TripScreen;
 import '../../features/work/work.dart' show BoardScreen, ProjectScreen, ProjectsScreen, WorkRoutes, WorkScreen;
 import '../settings/app_settings.dart';
+import 'notification_landing.dart';
 import 'routes.dart';
 
 /// Adapters between the router and the Phase 6 life screens (Work, Family,
@@ -237,9 +238,14 @@ class TravelRoutePage extends ConsumerWidget {
 
   static TravelTab tabOf(String? name) => _named(TravelTab.values, name, TravelTab.trips);
 
+  /// A notification that lands here again opens the screen afresh on [tab]
+  /// (see [notificationLandingProvider]).
   @override
-  Widget build(BuildContext context, WidgetRef ref) =>
-      TravelScreen(key: ValueKey('travel:${tab.name}'), initialTab: tab, animateBackdrop: !_saver(ref));
+  Widget build(BuildContext context, WidgetRef ref) => TravelScreen(
+    key: ValueKey('travel:${tab.name}:${ref.watch(notificationLandingProvider)}'),
+    initialTab: tab,
+    animateBackdrop: !_saver(ref),
+  );
 }
 
 /// `/travel/trip/:id` (an unknown trip shows the screen's own "not found").
@@ -296,9 +302,14 @@ class BodyRoutePage extends ConsumerWidget {
 
   static BodyTab tabOf(String? name) => _named(BodyTab.values, name, BodyTab.today);
 
+  /// A notification that lands here again opens the screen afresh on [tab]
+  /// (see [notificationLandingProvider]).
   @override
-  Widget build(BuildContext context, WidgetRef ref) =>
-      BodyScreen(key: ValueKey('body:${tab.name}'), initialTab: tab, animateBackdrop: !_saver(ref));
+  Widget build(BuildContext context, WidgetRef ref) => BodyScreen(
+    key: ValueKey('body:${tab.name}:${ref.watch(notificationLandingProvider)}'),
+    initialTab: tab,
+    animateBackdrop: !_saver(ref),
+  );
 }
 
 /// `/modules` – the user's own trackers and lists; each opens as its

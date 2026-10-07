@@ -310,7 +310,8 @@ class _ItemRow extends ConsumerWidget {
       },
       onCompleteSwipe: item.done ? null : toggle,
       borderRadius: BorderRadius.circular(t.radiusM),
-      semanticLabel: item.body,
+      // No semanticLabel: the row's own texts are its label (a title-only
+      // label made screen readers read the title twice).
       actions: ItemActions(
         onEdit: () async {
           final a = await WorkActions.editItem(context, ref, item);
@@ -387,12 +388,15 @@ class _TaskRow extends ConsumerWidget {
       },
       onCompleteSwipe: task.done ? null : () => WorkActions.toggleTask(context, ref, task),
       borderRadius: BorderRadius.circular(t.radiusM),
-      semanticLabel: task.title,
+      // No semanticLabel: the row's own texts are its label (a title-only
+      // label made screen readers read the title twice).
       actions: ItemActions(
         onMove: () => WorkActions.moveTask(context, ref, task),
         onDelete: () => WorkActions.deleteTask(context, ref, task),
       ),
       child: Container(
+        // A 48 dp target (Android) for a one-line task.
+        constraints: const BoxConstraints(minHeight: 48),
         padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.s, Space.m, Space.s),
         decoration: BoxDecoration(
           color: t.glassFill,

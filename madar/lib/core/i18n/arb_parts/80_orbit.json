@@ -1,8 +1,8 @@
 {
   "orbitReasonPersonOverdue": {
-    "ar": "{name} — {days, plural, =1{متأخر يومًا واحدًا} =2{متأخر يومين} few{متأخر {n} أيام} many{متأخر {n} يومًا} other{متأخر {n} يوم}}",
+    "ar": "{name} — {days, plural, =1{فات الموعد بيوم} =2{فات الموعد بيومين} few{فات الموعد بـ{n} أيام} many{فات الموعد بـ{n} يومًا} other{فات الموعد بـ{n} يوم}}",
     "en": "{name} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
-    "description": "Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits",
+    "description": "Neglect Radar: a person whose contact rhythm is overdue – the Family card's own wording, which fits a man or a woman. n = days formatted in the user's digits",
     "placeholders": {
       "name": {
         "type": "String"

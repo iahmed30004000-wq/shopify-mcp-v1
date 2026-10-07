@@ -408,7 +408,12 @@ class _ColumnTabs extends StatelessWidget {
                         style: text.labelLarge!.copyWith(color: c.id == visible ? t.textPrimary : t.textSecondary),
                       ),
                       const SizedBox(width: Space.xs + 2),
-                      CountPill(text: texts.n(counts[c.id] ?? 0), color: c.isDone ? t.success : null),
+                      // On the selected (tinted) tab the count takes the primary
+                      // ink, like its label (secondary read 4.2 : 1 on Aurora).
+                      CountPill(
+                        text: texts.n(counts[c.id] ?? 0),
+                        color: c.isDone ? t.success : (c.id == visible ? t.textPrimary : null),
+                      ),
                     ],
                   ),
                 ),

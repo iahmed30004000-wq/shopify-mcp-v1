@@ -80,8 +80,10 @@ class FamilyTodayCard extends ConsumerWidget {
                   onTap: open,
                   sfx: null,
                   semanticLabel: l.familyOpenAll,
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.symmetric(vertical: Space.xs),
+                  excludeChildSemantics: true,
+                  // A 48 dp target (Android) around the small link.
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -149,9 +151,15 @@ class FamilyTodayCard extends ConsumerWidget {
                   onTap: open,
                   sfx: null,
                   semanticLabel: l.familyOpenAll,
-                  child: Text(
-                    l.familyCardMore(tx.count(due.length - maxPeople)),
-                    style: text.labelMedium!.copyWith(color: t.accent),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 48),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        l.familyCardMore(tx.count(due.length - maxPeople)),
+                        style: text.labelMedium!.copyWith(color: t.accent),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -163,9 +171,10 @@ class FamilyTodayCard extends ConsumerWidget {
                 MadarPressable(
                   onTap: () => openPerson(p.id),
                   sfx: null,
-                  semanticLabel: tx.birthdayUpcoming(p.name, p.birthday!),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.symmetric(vertical: Space.xs),
+                  // No semanticLabel: the line and the age are read once each.
+                  // 48 dp high (Android).
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 48),
                     child: Row(
                       children: [
                         Icon(Icons.cake_rounded, size: 16, color: t.gold),
@@ -213,39 +222,43 @@ class _DueRow extends ConsumerWidget {
             child: MadarPressable(
               onTap: onOpen,
               sfx: null,
-              semanticLabel: '${person.name}${tx.l.familyDot}${tx.status(r)}',
-              child: Row(
-                children: [
-                  PersonAvatar(person: person, size: 38),
-                  const SizedBox(width: Space.m),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(text: tx.name(person.name), style: text.titleSmall),
-                              if (relation != null)
-                                TextSpan(
-                                  text: '${tx.l.familyDot}${tx.name(relation)}',
-                                  style: text.labelSmall!.copyWith(color: t.textTertiary),
-                                ),
-                            ],
+              // No semanticLabel: name, relation and status are read once each.
+              // 48 dp high (Android).
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 48),
+                child: Row(
+                  children: [
+                    PersonAvatar(person: person, size: 38),
+                    const SizedBox(width: Space.m),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(text: tx.name(person.name), style: text.titleSmall),
+                                if (relation != null)
+                                  TextSpan(
+                                    text: '${tx.l.familyDot}${tx.name(relation)}',
+                                    style: text.labelSmall!.copyWith(color: t.textTertiary),
+                                  ),
+                              ],
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          tx.status(r),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: text.labelSmall!.copyWith(color: familyStatusColor(r.status, t)),
-                        ),
-                      ],
+                          Text(
+                            tx.status(r),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: text.labelSmall!.copyWith(color: familyStatusColor(r.status, t)),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

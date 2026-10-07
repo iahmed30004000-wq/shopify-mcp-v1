@@ -198,8 +198,15 @@ class _PlanetModulePageState extends ConsumerState<PlanetModulePage> {
         return Stack(
           fit: StackFit.expand,
           children: [
+            // Taps on the hero's moons. Not a screen-reader target: a
+            // double-tap lands mid-screen, never on a moon, and every moon
+            // is a labelled row in the sheet's moons list.
             Positioned.fill(
-              child: GestureDetector(behavior: HitTestBehavior.translucent, onTapUp: _onHeroTap),
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                excludeFromSemantics: true,
+                onTapUp: _onHeroTap,
+              ),
             ),
             PositionedDirectional(
               top: 0,
@@ -968,7 +975,9 @@ class _Meter extends StatelessWidget {
           children: [
             Text(
               text,
-              maxLines: 1,
+              // "Waiting on you" may take two short lines; it is never cut.
+              maxLines: 2,
+              textAlign: TextAlign.end,
               overflow: TextOverflow.ellipsis,
               style: theme.labelSmall!.copyWith(color: low ? t.warning : t.textSecondary),
             ),

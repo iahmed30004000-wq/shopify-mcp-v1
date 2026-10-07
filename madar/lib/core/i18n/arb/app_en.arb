@@ -1585,7 +1585,7 @@
   },
   "orbitReasonPersonOverdue": "{name} — {days, plural, =1{1 day overdue} other{{n} days overdue}}",
   "@orbitReasonPersonOverdue": {
-    "description": "Neglect Radar: a person whose contact rhythm is overdue. n = days formatted in the user's digits",
+    "description": "Neglect Radar: a person whose contact rhythm is overdue – the Family card's own wording, which fits a man or a woman. n = days formatted in the user's digits",
     "placeholders": {
       "name": {
         "type": "String"
@@ -15494,6 +15494,7 @@
   "travelMore": "More",
   "travelEdit": "Edit",
   "travelTripNotFound": "This trip no longer exists",
+  "travelTemplateNotFound": "This packing list no longer exists",
   "growthTitle": "Learning goals",
   "@growthTitle": {
     "description": "Growth screen title"
@@ -17686,7 +17687,7 @@
   "cmodUnchecked": "Not done",
   "cmodCardTitle": "Your trackers here",
   "cmodCardSeeAll": "See all",
-  "cmodCardEmpty": "Create a tracker for this planet",
+  "cmodCardEmpty": "Create a tracker for this world",
   "cmodCardEmptyHint": "A counter, a log or a list – with your own fields",
   "cmodExportDate": "date",
   "cmodExportTime": "time",
@@ -18097,6 +18098,27 @@
     "description": "Name of the bean-shaped hero of the engine demo"
   },
   "cinemaRigBeanRole": "Star of the rehearsal, a bean in white gloves",
+  "cinemaWiringEnterHall": "Enter the hall",
+  "@cinemaWiringEnterHall": {
+    "description": "Ticket on the Growth page's Madar Cinema card: opens the cinema hall"
+  },
+  "cinemaWiringShowsReady": "{count, plural, =0{Shows in preparation} =1{1 show ready to play} other{{count} shows ready to play}}",
+  "@cinemaWiringShowsReady": {
+    "description": "Madar Cinema card: how many shows (games) of the programme can be played now",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cinemaWiringCreditGames": "Madar Cinema word & knowledge games",
+  "@cinemaWiringCreditGames": {
+    "description": "Settings › Fonts & credits: the word and quiz content bundled for the cinema's games"
+  },
+  "cinemaWiringCreditGamesRole": "Word lists and quiz content",
+  "@cinemaWiringCreditGamesRole": {
+    "description": "Settings › Fonts & credits: what the games' content credit covers"
+  },
   "cinemaDemoTapToJump": "Tap to jump!",
   "@cinemaDemoTapToJump": {
     "description": "Demo opening card subtitle"

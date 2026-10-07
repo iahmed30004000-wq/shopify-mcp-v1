@@ -511,10 +511,11 @@ class _TaskItemState extends ConsumerState<TaskItem> {
     final rule = ref.watch(homeTaskRemindersProvider.select((r) => r.value?[task.id]));
     final planet = task.planetKey == null ? null : planets[task.planetKey];
     final actions = TaskActions(ref, context);
-    final label = task.done ? '${task.title}. ${l.homeTaskDone}' : task.title;
     return ActionableItem(
       key: ValueKey('item-${task.id}'),
-      semanticLabel: label,
+      // The tile's texts (title, window, planet) are read once each; only
+      // the done state, shown by an icon, is said here.
+      semanticLabel: task.done ? l.homeTaskDone : null,
       onTap: () => actions.edit(task),
       completeIcon: task.done ? Icons.replay_rounded : Icons.check_rounded,
       completeLabel: task.done ? l.homeTaskReopen : null,

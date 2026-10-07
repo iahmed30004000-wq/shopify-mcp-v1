@@ -75,7 +75,7 @@ void main() {
       ),
     );
     await until(() => snapshots.last.planet('family')!.state == PlanetState.neglected, what: 'family neglected');
-    expect(snapshots.last.radar.single.text, contains('متأخر ٣ أيام'));
+    expect(snapshots.last.radar.single.text, contains('فات الموعد بـ٣ أيام'));
     expect(snapshots.last.planet('family')!.moons.single.label, 'أبي');
 
     await container.read(appSettingsProvider.notifier).update((s) => s.copyWith(languageCode: 'en'));

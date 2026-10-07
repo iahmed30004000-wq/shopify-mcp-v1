@@ -46,11 +46,16 @@ Future<TestApp> _settings(WidgetTester tester, {String lang = 'en'}) => pumpMada
   overrides: LockFixture.empty().overrides,
   beforePump: (db) async {
     final modules = CustomModulesService(Repositories(db));
-    for (final name in ['Reading', 'Sleep', 'Groceries']) {
-      await modules.createModule(
-        ModuleTemplates.build(ModuleTemplateKey.readingLog, (t) => t.name).copyWith(name: name),
+    final ids = <String>[];
+    for (final name in ['Reading', 'Sleep', 'Groceries', 'Old diet']) {
+      ids.add(
+        (await modules.createModule(
+          ModuleTemplates.build(ModuleTemplateKey.readingLog, (t) => t.name).copyWith(name: name),
+        )).id,
       );
     }
+    // Put away: not one of "your trackers" (the count below stays 3).
+    await modules.setArchived(ids.last, true);
   },
 );
 
@@ -93,7 +98,11 @@ void main() {
       expect(row(l.bodyFastingTitle), findsOneWidget);
       expect(row(l.travelTabTemplates), findsOneWidget);
       expect(row(l.cmodTitle), findsOneWidget);
-      expect(row(l.lifeHubSettingsModulesCount(3, fmt.formatInt(3))), findsOneWidget);
+      expect(
+        row(l.lifeHubSettingsModulesCount(3, fmt.formatInt(3))),
+        findsOneWidget,
+        reason: 'the archived "Old diet" is not counted',
+      );
       expect(Directionality.of(tester.element(section)), lang == 'ar' ? TextDirection.rtl : TextDirection.ltr);
       await tester.pump(const Duration(seconds: 6));
     });

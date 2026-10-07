@@ -207,11 +207,15 @@ class _SettingRow extends StatelessWidget {
       ],
     );
     if (onTap == null) return row;
+    // No semanticLabel: title, subtitle and value are read once each.
     return MadarPressable(
       onTap: onTap,
       sfx: Sfx.sheetOpen,
-      semanticLabel: title,
-      child: Padding(padding: const EdgeInsets.symmetric(vertical: Space.xs), child: row),
+      // 48 dp high (Android).
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48),
+        child: Padding(padding: const EdgeInsets.symmetric(vertical: Space.xs), child: row),
+      ),
     );
   }
 }

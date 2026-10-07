@@ -336,9 +336,10 @@ class _CheckOrb extends StatelessWidget {
       semanticLabel: label,
       pressScale: 0.86,
       excludeChildSemantics: true,
+      // A 48 dp target (Android) around the 32 dp orb.
       child: SizedBox(
-        width: 44,
-        height: 44,
+        width: 48,
+        height: 48,
         child: Center(
           child: SpringBuilder(
             value: done ? 1 : 0,

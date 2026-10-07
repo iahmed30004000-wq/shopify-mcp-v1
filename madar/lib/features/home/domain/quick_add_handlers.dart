@@ -239,14 +239,15 @@ class ContactQuickAdd extends QuickAddHandler {
     final at = intent.dateTime ?? now;
     // A contact planned for later ("زيارة بكرا") is a task, not a log.
     if (at.isAfter(now)) return TaskQuickAdd(c).handle(intent);
-    final key = name.toLowerCase();
+    final key = FamilyTexts.matchForm(name);
     final people = await repos.people.getAll();
-    // «اتصلت بأمي»: the person saved by name, else the one person whose
-    // relation is that word (never a guess between two uncles), else a new
+    // «اتصلت بأمي» / «كلمت امي» / «زرت اخوي»: the person saved by that name
+    // (hamza and marks forgiven), else the one person whose relation is that
+    // word, dialect included (never a guess between two uncles), else a new
     // person who keeps the relation.
     final relation = FamilyTexts.relationKeyFor(name);
     final person =
-        people.where((p) => p.name.trim().toLowerCase() == key).firstOrNull ??
+        people.where((p) => FamilyTexts.matchForm(p.name) == key).firstOrNull ??
         (relation == null ? null : people.where((p) => p.relation == relation).singleOrNull) ??
         await repos.people.insert(PeopleCompanion.insert(name: name, relation: Value(relation)));
     final log = await repos.contactLogs.insert(

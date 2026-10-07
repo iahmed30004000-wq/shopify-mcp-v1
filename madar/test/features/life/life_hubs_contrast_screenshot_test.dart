@@ -1,13 +1,14 @@
-// PROBE (Life UX finder; art director + accessibility lens). The five Life
+// Life UX sweep (art director + accessibility lens; from the Life UX
+// finder's probe). The five Life
 // worlds' planet pages (Work, Family, Travel, Growth, Body) inside the real
 // app, in Arabic and English across Lapis, Pearl and Aurora, with every
 // Life package's realistic sample data and with no data at all. Three
 // stops down the sheet: the hub's first card, its tools, the world's
-// trackers. Writes PNGs to madar/screenshots/probes/life_ux/hubs/ and FAILS
+// trackers. Writes PNGs to madar/screenshots/phase6/ux/hubs/ and FAILS
 // when painted text misses WCAG AA (rendered pixels; text scrolled under
 // the planet is ignored) or the layout overflows.
 //
-//   scratchpad/ft --tags screenshot test/probes/life_ux_hubs_shots_test.dart --name 'hub work ar'
+//   scratchpad/ft --tags screenshot test/features/life/life_hubs_contrast_screenshot_test.dart --name 'hub work ar'
 @Tags(['screenshot'])
 @Timeout(Duration(minutes: 60))
 library;
@@ -35,20 +36,20 @@ import 'package:madar/features/prayer/prayer.dart' show cityDatabaseProvider;
 import 'package:madar/features/travel/travel.dart' show TravelTodayCard;
 import 'package:madar/features/work/work.dart' show Top3Card;
 
-import '../core/design/rendered_contrast.dart';
-import '../features/body/body_harness.dart' show bodyTestNow;
-import '../features/body/body_seed.dart';
-import '../features/custom_modules/custom_harness.dart' show seedCustom;
-import '../features/family/family_seed.dart';
-import '../features/growth/growth_harness.dart' show growthTestNow, seedScenario;
-import '../features/lock/lock_test_utils.dart';
-import '../features/orbit/presentation/orbit_scene_fixtures.dart' show preloadOrbitShaders;
-import '../features/travel/travel_harness.dart' show seedTravelScenario, travelTestCities, travelTestNow;
-import '../features/work/work_harness.dart' as wh;
-import '../helpers/screenshot_harness.dart';
-import '../helpers/test_app.dart';
+import '../../core/design/rendered_contrast.dart';
+import '../body/body_harness.dart' show bodyTestNow;
+import '../body/body_seed.dart';
+import '../custom_modules/custom_harness.dart' show seedCustom;
+import '../family/family_seed.dart';
+import '../growth/growth_harness.dart' show growthTestNow, seedScenario;
+import '../lock/lock_test_utils.dart';
+import '../orbit/presentation/orbit_scene_fixtures.dart' show preloadOrbitShaders;
+import '../travel/travel_harness.dart' show seedTravelScenario, travelTestCities, travelTestNow;
+import '../work/work_harness.dart' as wh;
+import '../../helpers/screenshot_harness.dart';
+import '../../helpers/test_app.dart';
 
-const _dir = 'probes/life_ux/hubs';
+const _dir = 'phase6/ux/hubs';
 
 typedef _World = ({String key, DateTime now, Type first, Future<void> Function(MadarDatabase db, String lang) seed});
 

@@ -7,6 +7,7 @@ import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/motion/motion_kit.dart';
+import '../../../../core/routing/cinema_route_pages.dart';
 import '../../../../core/routing/life_route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../body/body.dart' show BodyTab, BodyTodayCard, FastingCard, WaterCard;
@@ -15,6 +16,7 @@ import '../../../family/family.dart' show FamilyActions, FamilyTodayCard;
 import '../../../growth/growth.dart' show GrowthTodayCard;
 import '../../../travel/travel.dart' show TravelTab, TravelTodayCard;
 import '../../../work/work.dart' show Top3Card, WorkTodayCard;
+import 'cinema_entry_card.dart';
 
 /// The Phase 6 life worlds' own page content (the hubs under the balance
 /// ring of Work, Family, Travel, Growth and Body): the packages' compact
@@ -166,8 +168,9 @@ class TravelHub extends StatelessWidget {
   }
 }
 
-/// Growth: the learning goals in progress with their pace, then all goals
-/// and the projects (a project can belong to Growth and feed its balance).
+/// Growth: the learning goals in progress with their pace, the door to
+/// Madar Cinema (the games live under Growth), then all goals and the
+/// projects (a project can belong to Growth and feed its balance).
 class GrowthHub extends StatelessWidget {
   const GrowthHub({super.key, this.firstIndex = 1});
 
@@ -179,6 +182,7 @@ class GrowthHub extends StatelessWidget {
     final l = L10n.of(context);
     final hub = _HubColumn(firstIndex)
       ..card(const GrowthTodayCard(onOpen: LifeNav.growth))
+      ..card(const CinemaEntryCard(onOpen: CinemaNav.hall))
       ..header(l.lifeHubToolsTitle)
       ..card(
         _LifeTools(

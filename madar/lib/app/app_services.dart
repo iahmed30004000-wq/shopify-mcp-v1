@@ -5,12 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/notifications/notifications.dart';
+import '../core/routing/notification_landing.dart';
 import '../core/routing/router.dart';
 import '../core/settings/app_settings.dart';
 import '../features/adhkar/adhkar.dart' show AdhkarReminderTaps, adhkarReminderSyncProvider;
 import '../features/prayer/domain/time_zones.dart';
 import '../features/quran/quran.dart' show quranMetaProvider;
 import '../features/recitation/recitation.dart' show RecitationPlayer, recitationPlayerProvider;
+import '../features/saved_games/saved_games.dart' show savedGamesLegacyImportProvider;
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
 import 'health_services.dart';
@@ -105,7 +107,15 @@ class AppNotificationRouter {
     if (location == null || !_ref.mounted) return;
     // Before onboarding nothing is scheduled; a stale tap must not skip it.
     if (!_ref.read(appSettingsProvider).onboarded) return;
-    _ref.read(routerProvider).go(location);
+    final router = _ref.read(routerProvider);
+    // Already there (the user may have moved to another tab since): open
+    // the page afresh on the tab the notification names.
+    // (The delegate's configuration, not `router.state`: it is safe before
+    // the first route is parsed, e.g. a cold-launch tap.)
+    if (router.routerDelegate.currentConfiguration.uri.toString() == location) {
+      _ref.read(notificationLandingProvider.notifier).landed();
+    }
+    router.go(location);
   }
 
   void dispose() => unawaited(_taps.cancel());
@@ -139,7 +149,11 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 /// * a card placed in a prayer window stays in step with its task, the Top
 ///   3 settles at midnight, trips follow their dates, and the family's,
 ///   travel documents', fasting and trackers' reminders stay planned
-///   ([watchLifeServices]).
+///   ([watchLifeServices]);
+/// * the cinema hall's first list of web games (`cinema.savedGames`) moves
+///   into Saved Games once, at start, so the games are there before the
+///   hall is first opened ([savedGamesLegacyImportProvider]; one-shot – the
+///   old row is removed).
 ///
 /// The adhan's own services (alarm planning, prayer quiet, the full-screen
 /// adhan) live in `AdhanHost`, directly below this.
@@ -157,6 +171,12 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // One-shot: later reads (the hall reads it too) find the old row gone.
+    try {
+      ref.read(savedGamesLegacyImportProvider);
+    } catch (e) {
+      if (kDebugMode) debugPrint('Madar: saved games import failed: $e');
+    }
   }
 
   @override

@@ -33,7 +33,9 @@ class LifeSettingsSection extends ConsumerWidget {
     final fmt = MadarFormatter.of(context);
     final family = ref.watch(familySettingsProvider).value;
     final water = ref.watch(bodyWaterTargetProvider);
-    final modules = ref.watch(customModulesProvider).value;
+    // The trackers the user keeps: an archived one is put away (the trackers
+    // page lists it apart; the worlds and the reminders ignore it).
+    final modules = ref.watch(customModulesProvider).value?.where((m) => !m.archived).length;
     return SettingsSection(
       title: l.lifeHubSettingsSection,
       subtitle: l.lifeHubSettingsSectionHint,
@@ -73,7 +75,7 @@ class LifeSettingsSection extends ConsumerWidget {
           title: l.cmodTitle,
           subtitle: modules == null
               ? null
-              : l.lifeHubSettingsModulesCount(modules.length, fmt.formatInt(modules.length)),
+              : l.lifeHubSettingsModulesCount(modules, fmt.formatInt(modules)),
           navigates: true,
           onTap: () => context.push(AppRoutes.modules),
         ),

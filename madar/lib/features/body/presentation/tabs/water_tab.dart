@@ -99,13 +99,17 @@ class WaterTile extends ConsumerWidget {
       child: GlassCard(
         padding: const EdgeInsetsDirectional.fromSTEB(Space.m, Space.s + 2, Space.m, Space.s + 2),
         borderRadius: BorderRadius.circular(t.radiusM),
-        child: Row(
-          children: [
-            Icon(row.ml >= 500 ? Icons.water_drop_rounded : Icons.local_drink_rounded, color: p.water, size: 20),
-            const SizedBox(width: Space.m),
-            Expanded(child: Text(tx.ml(row.ml), style: text.titleSmall)),
-            Text(tx.fmt.formatTime(row.at), style: text.labelMedium?.copyWith(color: t.textTertiary)),
-          ],
+        // A 48 dp target (Android).
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 48 - 2 * (Space.s + 2)),
+          child: Row(
+            children: [
+              Icon(row.ml >= 500 ? Icons.water_drop_rounded : Icons.local_drink_rounded, color: p.water, size: 20),
+              const SizedBox(width: Space.m),
+              Expanded(child: Text(tx.ml(row.ml), style: text.titleSmall)),
+              Text(tx.fmt.formatTime(row.at), style: text.labelMedium?.copyWith(color: t.textTertiary)),
+            ],
+          ),
         ),
       ),
     );
