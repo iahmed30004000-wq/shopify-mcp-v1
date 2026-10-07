@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/features/cinema/engine/cinema_engine.dart';
 import 'package:madar/features/cinema/games/catalog.dart';
+import 'package:madar/features/cinema/hall/cinema_hall_screen.dart' show TicketButton;
 import 'package:madar/features/cinema/hall/hall.dart';
 import 'package:madar/features/cinema/hall/lobby/programme.dart';
 
@@ -22,8 +23,27 @@ class _Tiny extends CinemaGame {
   Future<void> onSceneLoad() async {}
 }
 
+/// A feature that is announced but has no builder: the not-open path stays
+/// tested even once every real show is playable.
+final GameCatalogEntry _announced = GameCatalogEntry(
+  id: 'announced_feature',
+  title: (l) => l.cinemaNoirTitle,
+  tagline: (l) => l.cinemaNoirTagline,
+  era: Era.noir,
+  tier: GameTier.feature,
+  genre: GameGenre.platformer,
+);
+
 void main() {
   final ar = lookupL10n(const Locale('ar'));
+  final playable = [
+    for (final e in CinemaCatalog.all)
+      if (e.isPlayable) e,
+  ];
+  final announced = [
+    for (final e in CinemaCatalog.all)
+      if (!e.isPlayable) e,
+  ];
 
   setUpAll(() async => CinemaShaders.preload());
 
@@ -31,6 +51,7 @@ void main() {
     WidgetTester tester, {
     CinemaRecords records = CinemaRecords.empty,
     List<Override> extra = const [],
+    List<GameCatalogEntry>? catalog,
   }) async {
     tester.view.physicalSize = const Size(412, 5200) * 2;
     tester.view.devicePixelRatio = 2;
@@ -39,7 +60,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [...env.overrides, ...extra],
-        child: madarScreenshotApp(home: const CinemaHallScreen()),
+        child: madarScreenshotApp(home: CinemaHallScreen(catalog: catalog)),
       ),
     );
     for (var i = 0; i < 6; i++) {
@@ -53,10 +74,11 @@ void main() {
     expect(find.text(ar.cinemaTitle), findsOneWidget);
     expect(find.text(ar.cinemaHallNowShowing), findsOneWidget);
     expect(find.text(ar.cinemaHallProgramme), findsOneWidget);
-    // The first feature's billing and a coming-soon ticket.
+    // The first feature's billing, with a ticket to play – or a coming-soon
+    // plate when it has no builder yet.
     final first = CinemaCatalog.ofTier(GameTier.feature).first;
     expect(find.text(first.tagline(ar)), findsOneWidget);
-    expect(find.text(ar.cinemaComingSoon), findsOneWidget);
+    expect(find.widgetWithText(TicketButton, first.isPlayable ? ar.cinemaPlay : ar.cinemaComingSoon), findsOneWidget);
     // Shelves: features, five announced Tier 2 kinds, backstage (the demo).
     for (final s in [ar.cinemaFeatures, ar.cinemaHallGenreCards, ar.cinemaHallGenreWord, ar.cinemaHallBackstage]) {
       expect(find.text(s), findsWidgets, reason: s);
@@ -78,12 +100,27 @@ void main() {
   testWidgets('filters by era, by kind and to ready-to-play shows', (tester) async {
     await pumpHall(tester);
     await tapChip(tester, ar.cinemaEraTechnicolor);
-    expect(find.byType(MiniPoster), findsOneWidget, reason: 'Caravan Dash is the only 1950s show');
+    final fifties = [
+      for (final e in CinemaCatalog.all)
+        if (e.era == Era.technicolor) e,
+    ];
+    expect(fifties, isNotEmpty, reason: 'Caravan Dash is a 1950s show');
+    expect(find.byType(MiniPoster), findsNWidgets(fifties.length), reason: 'only the 1950s shows');
+    for (final e in fifties) {
+      expect(find.widgetWithText(MiniPoster, e.title(ar)), findsOneWidget, reason: e.id);
+    }
     expect(find.byType(LockedSlot), findsNothing);
     await tapChip(tester, ar.cinemaHallAllEras);
     await tapChip(tester, ar.cinemaHallReadyOnly);
-    expect(find.byType(MiniPoster), findsOneWidget, reason: 'only the rehearsal is playable today');
-    expect(find.text(ar.cinemaHallBackstage), findsWidgets);
+    // Exactly the shows with a builder (the rehearsal always is one).
+    expect(find.byType(MiniPoster), findsNWidgets(playable.length), reason: 'only playable shows');
+    for (final e in playable) {
+      expect(find.widgetWithText(MiniPoster, e.title(ar)), findsOneWidget, reason: '${e.id} is playable');
+    }
+    for (final e in announced) {
+      expect(find.widgetWithText(MiniPoster, e.title(ar)), findsNothing, reason: '${e.id} is not playable yet');
+    }
+    expect(find.byType(LockedSlot), findsNothing);
     await tapChip(tester, ar.cinemaHallReadyOnly);
     await tapChip(tester, ar.cinemaHallGenreCards);
     expect(find.byType(LockedSlot), findsNWidgets(3));
@@ -91,8 +128,21 @@ void main() {
   });
 
   testWidgets('a coming-soon show explains itself instead of opening', (tester) async {
-    await pumpHall(tester);
-    await tester.tap(find.text(ar.cinemaComingSoon));
+    await pumpHall(tester, catalog: [_announced, CinemaCatalog.byId('demo')!]);
+    // Its billing: a coming-soon plate, not a ticket to play.
+    expect(find.widgetWithText(TicketButton, ar.cinemaPlay), findsNothing);
+    await tester.tap(find.widgetWithText(TicketButton, ar.cinemaComingSoon));
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text(ar.cinemaHallLockedHint), findsOneWidget);
+    expect(find.byType(CinemaGameScreen), findsNothing);
+  });
+
+  testWidgets('a poster of a show without a builder does not open either', (tester) async {
+    await pumpHall(tester, catalog: [_announced, CinemaCatalog.byId('demo')!]);
+    final poster = find.widgetWithText(MiniPoster, _announced.title(ar));
+    await tester.ensureVisible(poster);
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.tap(poster);
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.text(ar.cinemaHallLockedHint), findsOneWidget);
     expect(find.byType(CinemaGameScreen), findsNothing);
@@ -136,7 +186,20 @@ void main() {
     expect(shelves.first.entries, hasLength(5));
     expect(shelves.last.shelf, ProgrammeShelf.backstage);
     filter.readyOnly = true;
-    expect(programmeShelves(CinemaCatalog.all, filter).map((s) => s.shelf), [ProgrammeShelf.backstage]);
+    // Ready to play: exactly the entries with a builder, on their shelves, no
+    // locked slots.
+    final ready = programmeShelves(CinemaCatalog.all, filter);
+    expect(ready.map((s) => s.shelf), [
+      for (final s in ProgrammeShelf.values)
+        if (playable.any((e) => shelfOf(e) == s)) s,
+    ]);
+    expect(ready.map((s) => s.shelf), contains(ProgrammeShelf.backstage), reason: 'the rehearsal is always playable');
+    expect([for (final s in ready) ...s.entries.map((e) => e.id)], unorderedEquals(playable.map((e) => e.id)));
+    expect(ready.every((s) => s.locked == 0), isTrue);
+    // A show without a builder never passes the filter.
+    expect(programmeShelves([_announced, CinemaCatalog.byId('demo')!], filter).map((s) => s.shelf), [
+      ProgrammeShelf.backstage,
+    ]);
     final short = GameCatalogEntry(
       id: 'tarneeb',
       title: (l) => 'x',

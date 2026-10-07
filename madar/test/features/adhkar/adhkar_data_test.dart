@@ -11,6 +11,7 @@ import 'package:madar/core/domain/enums.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/notifications/fake_notification_platform.dart';
 import 'package:madar/core/notifications/notification_providers.dart';
+import 'package:madar/core/notifications/notification_service.dart';
 import 'package:madar/core/providers.dart';
 import 'package:madar/core/sound/prayer_mute.dart';
 import 'package:madar/core/sound/sound_api.dart';
@@ -103,6 +104,12 @@ void main() {
         hapticsServiceProvider.overrideWithValue(RecordingHaptics()),
         adhkarLibraryProvider.overrideWith((ref) async => library),
         notificationPlatformProvider.overrideWithValue(FakeNotificationPlatform()),
+        // On the test clock, not the wall clock (requests in its past are dropped).
+        notificationServiceProvider.overrideWith((ref) {
+          final service = NotificationService(ref.watch(notificationPlatformProvider), clock: () => now);
+          ref.onDispose(service.dispose);
+          return service;
+        }),
         ...overrides.cast(),
       ],
     );

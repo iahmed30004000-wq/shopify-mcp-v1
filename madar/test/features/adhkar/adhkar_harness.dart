@@ -18,6 +18,7 @@ import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/notifications/fake_notification_platform.dart';
 import 'package:madar/core/notifications/notification_providers.dart';
+import 'package:madar/core/notifications/notification_service.dart';
 import 'package:madar/core/motion/motion_kit.dart';
 import 'package:madar/core/providers.dart';
 import 'package:madar/core/settings/app_settings.dart';
@@ -186,6 +187,14 @@ Future<(Widget, AdhkarTestEnv)> buildAdhkarApp(
       dhikrAudioStoreProvider.overrideWithValue(audioStore),
       dhikrAudioPlayerProvider.overrideWithValue(player),
       notificationPlatformProvider.overrideWithValue(env.notifications),
+      // The notification service drops requests in its past: give it the
+      // frozen test clock, not the wall clock (else the plan depends on the
+      // day the test runs).
+      notificationServiceProvider.overrideWith((ref) {
+        final service = NotificationService(env.notifications, clock: () => clock);
+        ref.onDispose(service.dispose);
+        return service;
+      }),
       ...overrides,
     ],
     child: Consumer(

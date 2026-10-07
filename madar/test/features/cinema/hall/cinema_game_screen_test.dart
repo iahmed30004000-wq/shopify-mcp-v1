@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/features/cinema/engine/cinema_engine.dart';
+import 'package:madar/features/cinema/games/catalog.dart';
 import 'package:madar/features/cinema/hall/hall.dart';
 
 import '../../../helpers/screenshot_harness.dart';
@@ -88,10 +89,38 @@ void main() {
   testWidgets('an announced show that is not playable yet keeps its curtains drawn', (tester) async {
     phone(tester);
     final env = HallTestEnv();
-    await tester.pumpWidget(env.app(const CinemaGameScreen(gameId: 'flappy_orbit')));
+    await tester.pumpWidget(env.app(CinemaGameScreen(gameId: 'test_show', entry: entry(playable: false))));
     await frames(tester);
-    expect(find.text(ar.cinemaFlappyOrbitTitle), findsOneWidget);
+    expect(find.byType(NotOpenYetStage), findsOneWidget);
+    expect(find.text(ar.cinemaNoirTitle), findsOneWidget);
     expect(find.text(ar.cinemaHallComingSoonTitle), findsOneWidget);
+    expect(built, isEmpty, reason: 'nothing is built for a show without a builder');
+    expect(env.session.calls, isEmpty, reason: 'no immersive session for a closed show');
+  });
+
+  testWidgets('every catalog show without a builder, opened by id, keeps its curtains drawn', (tester) async {
+    phone(tester);
+    final announced = [
+      for (final e in CinemaCatalog.all)
+        if (!e.isPlayable) e,
+    ];
+    for (final e in announced) {
+      final env = HallTestEnv();
+      // A fresh scope per show (keyed), opened by id only: the real lookup.
+      await tester.pumpWidget(
+        KeyedSubtree(
+          key: ValueKey(e.id),
+          child: env.app(CinemaGameScreen(gameId: e.id)),
+        ),
+      );
+      await frames(tester);
+      expect(find.byType(NotOpenYetStage), findsOneWidget, reason: e.id);
+      expect(find.text(e.title(ar)), findsOneWidget, reason: e.id);
+      expect(find.text(ar.cinemaHallComingSoonTitle), findsOneWidget, reason: e.id);
+      expect(env.session.calls, isEmpty, reason: '${e.id}: no immersive session for a closed show');
+    }
+    await tester.pumpWidget(const SizedBox());
+    await frames(tester, 2);
   });
 
   testWidgets('a show runs immersive, knows its best, reports its result and restores the chrome', (tester) async {
@@ -179,7 +208,8 @@ void main() {
         Builder(
           builder: (context) => Center(
             child: TextButton(
-              onPressed: () => Navigator.of(context).push(CinemaGameScreen.route('flappy_orbit')),
+              onPressed: () =>
+                  Navigator.of(context).push(CinemaGameScreen.route('test_show', entry: entry(playable: false))),
               child: const Text('open'),
             ),
           ),

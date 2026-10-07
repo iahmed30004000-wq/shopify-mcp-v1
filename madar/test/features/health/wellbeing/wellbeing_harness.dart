@@ -14,6 +14,7 @@ import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/core/motion/motion_kit.dart';
 import 'package:madar/core/notifications/fake_notification_platform.dart';
 import 'package:madar/core/notifications/notification_providers.dart';
+import 'package:madar/core/notifications/notification_service.dart';
 import 'package:madar/core/providers.dart';
 import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/core/sound/sound_api.dart';
@@ -71,6 +72,14 @@ Future<(Widget, WellbeingTestEnv)> buildWellbeingApp(
       databaseProvider.overrideWithValue(db),
       homeClockProvider.overrideWithValue(() => clock),
       notificationPlatformProvider.overrideWithValue(env.notifications),
+      // The notification service drops requests in its past: give it the
+      // frozen test clock, not the wall clock (else the plan depends on the
+      // day the test runs).
+      notificationServiceProvider.overrideWith((ref) {
+        final service = NotificationService(env.notifications, clock: () => clock);
+        ref.onDispose(service.dispose);
+        return service;
+      }),
       worryReminderSchedulerProvider.overrideWithValue(env.reminders),
       phoneDialerProvider.overrideWithValue(env.dialer),
       appSettingsProvider.overrideWith(() => _FixedSettings(AppSettings(languageCode: locale.languageCode))),
