@@ -32,6 +32,12 @@ void main() {
         all.channels.first.setRange(at, at + p.frames, p.channels.first);
         at += p.frames + gap;
         final x = p.channels.first;
+        // Every effect of every era: under the ceiling, at rest at both
+        // ends (no clicks), short.
+        expect(peakDb(x), lessThanOrEqualTo(-0.9), reason: '${era.name} $key peak');
+        expect(x.first.abs(), lessThan(0.02), reason: '${era.name} $key starts at rest');
+        expect(x.last.abs(), lessThan(0.002), reason: '${era.name} $key ends at rest');
+        expect(p.seconds, lessThanOrEqualTo(key == 'extra:gong' ? 4.5 : 3.0), reason: '${era.name} $key length');
         lines.add(
           '${key.padRight(20)} ${(p.seconds * 1000).round().toString().padLeft(5)}ms peak ${peakDb(x).toStringAsFixed(1)} '
           'rms ${rmsDb(x, sr).toStringAsFixed(1)} start ${x.first.abs().toStringAsFixed(4)} end ${x.last.abs().toStringAsFixed(4)} '
@@ -74,6 +80,7 @@ void _stingerReel(Era era) {
     at += p.frames + gap;
   }
   final pcm = Pcm(sr, [reel]);
+  expect(peakDb(reel), lessThanOrEqualTo(-1.0), reason: '${era.name} stingers: tonal + drums never clip together');
   writePreview('stingers_${era.name}', pcm);
   writeSpectrogram('stingers_${era.name}', pcm, seconds: pcm.seconds);
   // ignore: avoid_print

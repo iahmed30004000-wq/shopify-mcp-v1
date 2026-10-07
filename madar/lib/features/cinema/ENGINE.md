@@ -308,14 +308,39 @@ Flutter overlays (pause / results cards) sit above, ungraded, with real buttons.
 
 ## 4. The demo (`games/demo/`)
 
-`DemoGame` ("Rehearsal"): tap to jump the rolling barrels; 12 cleared wins,
-3 hits loses. `CinemaDemoScreen(initialEra, autoplay, showEraPicker)` has an
-era switcher. It runs *only* through the contracts and the standard kit, so
-every agent sees its piece in context as soon as its entry point returns the
-real implementation. Screenshots:
-`flutter test --tags screenshot test/features/cinema/demo` writes
-`screenshots/cinema/demo/demo_<era>.png`, `demo_opening_card.png` and
-`demo_iris_in.png`. **Look at them after every change.**
+`DemoGame` ("Rehearsal", بروفة) is the engine's 30-second vignette, one per
+era, and the reference for how a Tier 1 game composes the pieces:
+
+* **Cast.** The era's star from the rig cast is the hero (`DemoHero.build`:
+  Habba 1920s, Nujaym 1930s, Mishmish 1940s, Zajil 1950s, a 70s stunt bean,
+  Sarab 1980s); Baron Zunbruk is the mini boss in every era (he re-skins).
+* **Set** (`demo_sets.dart`). A sky plane (plain canvas, cached gradients:
+  searchlights, rain, stars, a grid) plus parallax `SetLayer`s of cached
+  `InkProp`s on a repeating tile: every flat is inked with the rig toolkit
+  (`InkSketch` / `InkBuild`), so scenery boils, shades (halftone, hatch,
+  cel, neon) and re-colours like the cast. Six sets: a machine hall,
+  cartoon countryside, rooftops at night, a Technicolor desert, a desert
+  highway at sundown, a neon souk.
+* **Script** (`DemoAct`): opening card → iris in (curtains part) → act
+  one (pooled `Hazard` rollers, one design per era; progress film strip)
+  → chapter card while the Baron rolls on → act two (boss bar, wind-up
+  tell, slam shockwave + screen shake, a lobbed gear, each dodge knocks a
+  phase off him) → curtain call (cheer, follow-spot) → iris out → end card
+  → results marquee. Tap to jump; `autoplay` is the attract mode.
+* **Feedback.** `feedback()` sounds + haptics, `kick()` flash / shake /
+  print damage, `stage.pulse`, `stage.spotlight`, music moods and stingers
+  (`adventure` → `boss` → `victory`), `PuffPool` dust for landings and
+  stomps.
+
+Tests: `test/features/cinema/demo/demo_game_test.dart` plays every era
+through headlessly (`runUntil` drives game time without rendering) and
+measures update / recording cost; the screenshot test renders chosen
+*moments* through the real kit: `demo_<era>_play.png` (mid-jump) and
+`demo_<era>_boss.png` (the slam) for every era, and the whole arc on the
+1930s reel (`card`, `iris`, `hit`, `chapter`, `taunt`, `blast`, `bosshurt`,
+`finale`, `irisout`, `end`, `results`). **Look at them after every engine
+change.** `CinemaDemoScreen(initialEra, autoplay, showEraPicker)` hosts it
+with an era switcher.
 
 ---
 

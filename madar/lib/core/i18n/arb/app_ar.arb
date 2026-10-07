@@ -18097,6 +18097,18 @@
     "description": "Name of the bean-shaped hero of the engine demo"
   },
   "cinemaRigBeanRole": "نجم البروفة، حبّة فاصولياء بقفازين أبيضين",
+  "cinemaDemoTapToJump": "المس الشاشة لتقفز!",
+  "@cinemaDemoTapToJump": {
+    "description": "Demo opening card subtitle"
+  },
+  "cinemaDemoActTwo": "الفصل الثاني",
+  "@cinemaDemoActTwo": {
+    "description": "Demo chapter card before the boss"
+  },
+  "cinemaDemoBossEnters": "البارون زُنبُرك يدخل المسرح",
+  "@cinemaDemoBossEnters": {
+    "description": "Demo chapter card subtitle"
+  },
   "dataCentreTitle": "بياناتك",
   "@dataCentreTitle": {
     "description": "Data centre screen title"

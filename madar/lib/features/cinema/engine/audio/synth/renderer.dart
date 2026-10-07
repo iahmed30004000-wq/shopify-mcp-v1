@@ -144,7 +144,10 @@ final class CueRenderer {
     final tailN = introN > 0 ? (introTailSeconds * sr).round() : 0;
     final rng = SynthRandom(seed * 7919 + score.mood.index * 131 + score.style.index * 17 + index * 104729);
     final voices = VoiceBox(sr, score.style, seed ^ 0x5eed ^ (index * 977));
-    final cache = <int, Float64List>{};
+    // Voices are rendered once per (instrument, pitch, length, velocity,
+    // articulation) and reused; the record key is exact, so no two notes
+    // can ever share a buffer by hash collision.
+    final cache = <(Inst, int, int, int, int, int), Float64List>{};
     final stem = StemAudio._(score.stems[index], introN + tailN, loopN, sr);
     final introSec = score.introSeconds;
     final loopSec = loopN / sr;
@@ -159,7 +162,7 @@ final class CueRenderer {
       final velQ = (vel * 20).round() / 20;
       final hold = math.max(0.015, end - start);
       final holdQ = (hold * 100).round() / 100;
-      final key = Object.hash(e.inst, (e.pitch * 100).round(), (holdQ * 100).round(), (velQ * 20).round(), e.fx, (e.glideFrom * 100).round());
+      final key = (e.inst, (e.pitch * 100).round(), (holdQ * 100).round(), (velQ * 20).round(), e.fx, (e.glideFrom * 100).round());
       final voice = cache[key] ??= voices.render(NoteEvent(0, e.dur, e.pitch, velQ, e.inst, fx: e.fx, glideFrom: e.glideFrom), holdQ);
       final t = math.max(0.0, start + jitter);
       final pan = _eventPan(e, stem.spec);

@@ -18732,6 +18732,15 @@ class L10nAr extends L10n {
   String get cinemaRigBeanRole => 'نجم البروفة، حبّة فاصولياء بقفازين أبيضين';
 
   @override
+  String get cinemaDemoTapToJump => 'المس الشاشة لتقفز!';
+
+  @override
+  String get cinemaDemoActTwo => 'الفصل الثاني';
+
+  @override
+  String get cinemaDemoBossEnters => 'البارون زُنبُرك يدخل المسرح';
+
+  @override
   String get dataCentreTitle => 'بياناتك';
 
   @override

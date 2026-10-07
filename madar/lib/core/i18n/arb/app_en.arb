@@ -18097,6 +18097,18 @@
     "description": "Name of the bean-shaped hero of the engine demo"
   },
   "cinemaRigBeanRole": "Star of the rehearsal, a bean in white gloves",
+  "cinemaDemoTapToJump": "Tap to jump!",
+  "@cinemaDemoTapToJump": {
+    "description": "Demo opening card subtitle"
+  },
+  "cinemaDemoActTwo": "Act Two",
+  "@cinemaDemoActTwo": {
+    "description": "Demo chapter card before the boss"
+  },
+  "cinemaDemoBossEnters": "Baron Zunbruk takes the stage",
+  "@cinemaDemoBossEnters": {
+    "description": "Demo chapter card subtitle"
+  },
   "dataCentreTitle": "Your data",
   "@dataCentreTitle": {
     "description": "Data centre screen title"

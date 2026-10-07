@@ -130,7 +130,7 @@ final class VoiceBox {
       Inst.clave => _clave(vel),
       Inst.cowbell => _cowbell(vel),
       Inst.shaker => _shaker(vel, hold),
-      Inst.timpani => _timpani(e, f, vel),
+      Inst.timpani => _timpani(e, f, hold, vel),
       Inst.clap => _clap(vel),
       Inst.tambourine => _tambourine(vel),
       Inst.gong => _gong(vel),
@@ -1053,10 +1053,12 @@ final class VoiceBox {
     return out;
   }
 
-  Float64List _timpani(NoteEvent e, double f, double vel) {
+  Float64List _timpani(NoteEvent e, double f, double holdSec, double vel) {
     final roll = e.has(Art.trem);
     final t60 = 1.8;
-    final hold = roll ? e.dur : 0.0;
+    // A roll lasts the written length (in seconds, so it follows the
+    // tempo); a single stroke just rings.
+    final hold = roll ? holdSec : 0.0;
     final n = framesFor(sr, hold + t60 * 1.1);
     final out = Float64List(n);
     final hits = roll ? math.max(1, (hold * 14).round()) : 1;

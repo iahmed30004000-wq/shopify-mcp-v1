@@ -18183,6 +18183,15 @@ class L10nEn extends L10n {
       'Star of the rehearsal, a bean in white gloves';
 
   @override
+  String get cinemaDemoTapToJump => 'Tap to jump!';
+
+  @override
+  String get cinemaDemoActTwo => 'Act Two';
+
+  @override
+  String get cinemaDemoBossEnters => 'Baron Zunbruk takes the stage';
+
+  @override
   String get dataCentreTitle => 'Your data';
 
   @override

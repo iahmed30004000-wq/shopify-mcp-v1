@@ -29,8 +29,9 @@ class TravelTabBar<T> extends StatelessWidget {
     return Semantics(
       container: true,
       explicitChildNodes: true,
+      // 58 − 2 × 4 padding − 2 × 1 border: every tab is a 48 dp target.
       child: Container(
-        height: 52,
+        height: 58,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(99),

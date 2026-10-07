@@ -28875,6 +28875,24 @@ abstract class L10n {
   /// **'نجم البروفة، حبّة فاصولياء بقفازين أبيضين'**
   String get cinemaRigBeanRole;
 
+  /// Demo opening card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'المس الشاشة لتقفز!'**
+  String get cinemaDemoTapToJump;
+
+  /// Demo chapter card before the boss
+  ///
+  /// In ar, this message translates to:
+  /// **'الفصل الثاني'**
+  String get cinemaDemoActTwo;
+
+  /// Demo chapter card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'البارون زُنبُرك يدخل المسرح'**
+  String get cinemaDemoBossEnters;
+
   /// Data centre screen title
   ///
   /// In ar, this message translates to:

@@ -107,6 +107,38 @@ class PosterPainter extends CustomPainter {
   /// Paints [tp] centred at [c].
   void _center(Canvas c, TextPainter tp, Offset at) => tp.paint(c, at - Offset(tp.width / 2, tp.height / 2));
 
+  /// Where the fine print (tagline, billing) sits: centred on a playable
+  /// poster; on a coming-soon one it is pushed clear of the sash that
+  /// crosses the bottom end corner, so no word is ever cut by the band.
+  double get _fineX => entry.isPlayable ? 150 : (direction == TextDirection.rtl ? 190 : 110);
+  double get _fineWidth => entry.isPlayable ? 270 : 172;
+
+  /// One line of fine print: the font shrinks (to 70 %) before a word would
+  /// be cut or wrapped – beside the sash there is no room for a second line.
+  TextPainter _fitLine(String text, TextStyle style, double maxWidth) {
+    final tp = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: direction,
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      ellipsis: '…',
+    )..layout();
+    if (tp.width > maxWidth) {
+      final scale = math.max(0.7, maxWidth / tp.width);
+      tp.text = TextSpan(
+        text: text,
+        style: style.copyWith(fontSize: (style.fontSize ?? 12) * scale),
+      );
+      tp.layout(maxWidth: maxWidth);
+    }
+    return tp;
+  }
+
+  /// The tagline: two centred lines on a playable poster, one fitted line
+  /// beside the coming-soon sash.
+  TextPainter _taglineText(TextStyle style) =>
+      entry.isPlayable ? _text(_tagline, style) : _fitLine(_tagline, style, _fineWidth);
+
   String get _title => entry.title(l10n);
   String get _tagline => entry.tagline(l10n);
 
@@ -265,7 +297,13 @@ class PosterPainter extends CustomPainter {
   }
 
   /// Studio billing: the orbit emblem and the house name.
-  void _billing(Canvas c, Offset at, Color ink, {Color? accent}) {
+  void _billing(Canvas c, Offset at, Color ink, {Color? accent, double maxWidth = 270}) {
+    if (!entry.isPlayable) {
+      // The credit line sits lower than the tagline, where the sash reaches
+      // further in: push it a little more and keep it short.
+      at += Offset(direction == TextDirection.rtl ? 17 : -17, 0);
+      maxWidth = math.min(maxWidth, 150);
+    }
     Ornaments.orbitEmblem(
       c,
       at - const Offset(0, 1),
@@ -275,9 +313,10 @@ class PosterPainter extends CustomPainter {
       ink: ink.withValues(alpha: 0),
       lineWidth: 1,
     );
-    final tp = _text(
+    final tp = _fitLine(
       '${l10n.cinemaTitle}  ·  ${entry.era.label(l10n)}',
       TextStyle(fontFamily: 'PlexArabic', fontSize: 9.5, color: ink, letterSpacing: 0.2),
+      maxWidth,
     );
     _center(c, tp, at + const Offset(0, 14));
   }
@@ -408,10 +447,10 @@ class PosterPainter extends CustomPainter {
     if (!compact) {
       _center(
         c,
-        _text(_tagline, const TextStyle(fontFamily: 'Amiri', fontSize: 12.5, color: Color(0xFFD9C29A))),
-        const Offset(150, 412),
+        _taglineText(const TextStyle(fontFamily: 'Amiri', fontSize: 12.5, color: Color(0xFFD9C29A))),
+        Offset(_fineX, 412),
       );
-      _billing(c, const Offset(150, 426), const Color(0xFFBFA57C));
+      _billing(c, Offset(_fineX, 426), const Color(0xFFBFA57C), maxWidth: _fineWidth + 14);
     }
     // Ornate double frame with corner fleurons.
     final f1 = const Rect.fromLTWH(7, 7, 286, 436);
@@ -483,8 +522,8 @@ class PosterPainter extends CustomPainter {
     // Cartoon title ribbon at the top.
     _ribbon(c, _title, top: 22, ink: ink, face: pal.paper);
     if (!compact) {
-      _center(c, _text(_tagline, TextStyle(fontFamily: 'ReemKufi', fontSize: 13, color: ink)), const Offset(150, 404));
-      _billing(c, const Offset(150, 420), ink);
+      _center(c, _taglineText(TextStyle(fontFamily: 'ReemKufi', fontSize: 13, color: ink)), Offset(_fineX, 404));
+      _billing(c, Offset(_fineX, 420), ink, maxWidth: _fineWidth + 14);
     }
     // Rounded white border, thick ink.
     final f = RRect.fromRectAndRadius(r.deflate(6), const Radius.circular(18));
@@ -739,10 +778,10 @@ class PosterPainter extends CustomPainter {
     if (!compact) {
       _center(
         c,
-        _text(_tagline, const TextStyle(fontFamily: 'PlexArabic', fontSize: 11.5, color: Color(0xFFAAA8A0))),
-        const Offset(150, 408),
+        _taglineText(const TextStyle(fontFamily: 'PlexArabic', fontSize: 11.5, color: Color(0xFFAAA8A0))),
+        Offset(_fineX, 408),
       );
-      _billing(c, const Offset(150, 424), const Color(0xFF8E8C86));
+      _billing(c, Offset(_fineX, 424), const Color(0xFF8E8C86), maxWidth: _fineWidth + 14);
     }
     Ornaments.line(c, Path()..addRect(r.deflate(8)), const Color(0x88EDE8DA), 0.8);
     _grainVignette(c, strength: 0.55, tint: const Color(0xFF000000));
@@ -843,19 +882,18 @@ class PosterPainter extends CustomPainter {
     _center(c, outline, at);
     _center(c, face, at);
     if (!compact) {
-      final tag = const Rect.fromLTWH(30, 392, 240, 26);
+      final tag = entry.isPlayable ? const Rect.fromLTWH(30, 392, 240, 26) : Rect.fromLTWH(_fineX - 84, 392, 168, 26);
       Ornaments.inked(c, Path()..addRRect(RRect.fromRectAndRadius(tag, const Radius.circular(13))), pal.paper, ink, 2);
       _center(
         c,
-        _text(
+        _fitLine(
           _tagline,
           TextStyle(fontFamily: 'PlexArabic', fontSize: 11.5, fontWeight: FontWeight.w600, color: ink),
-          maxWidth: 226,
-          maxLines: 1,
+          tag.width - 14,
         ),
         tag.center,
       );
-      _billing(c, const Offset(150, 426), ink, accent: pal.accent);
+      _billing(c, Offset(_fineX, 426), ink, accent: pal.accent, maxWidth: _fineWidth + 14);
     }
     final f = r.deflate(6);
     final border = Path()
@@ -1019,10 +1057,10 @@ class PosterPainter extends CustomPainter {
     if (!compact) {
       _center(
         c,
-        _text(_tagline, TextStyle(fontFamily: 'PlexArabic', fontSize: 11.5, color: m.neonB)),
-        const Offset(150, 404),
+        _taglineText(TextStyle(fontFamily: 'PlexArabic', fontSize: 11.5, color: m.neonB)),
+        Offset(_fineX, 404),
       );
-      _billing(c, const Offset(150, 422), m.neonB, accent: m.neonA);
+      _billing(c, Offset(_fineX, 422), m.neonB, accent: m.neonA, maxWidth: _fineWidth + 14);
     }
     // Rainbow spine at the start edge.
     final rtl = direction == TextDirection.rtl;
