@@ -446,6 +446,22 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
   final Paint _lanePaint = Paint()
     ..style = PaintingStyle.stroke
     ..strokeCap = StrokeCap.round;
+  late final Path _lanePath = _buildLane();
+
+  static Path _buildLane() {
+    // Three rows of dashes, one period (40 units) longer than the stage so
+    // the canvas can slide them without rebuilding.
+    final p = Path();
+    for (var k = -1; k <= 1; k++) {
+      final y = k * 34.0;
+      for (var x = OrbitStage.paintLeft - 40; x < OrbitStage.paintRight + 40; x += 40) {
+        p
+          ..moveTo(x, y)
+          ..lineTo(x + 18, y);
+      }
+    }
+    return p;
+  }
 
   int get activeNotes {
     var n = 0;
@@ -565,12 +581,11 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
         ..color = pal.ink.withValues(alpha: 0.35 * lanePreview)
         ..strokeWidth = 3 / math.max(0.4, ctx.pixelScale);
       final phase = (game.clock.time * 260) % 40;
-      for (var k = 0; k < 3; k++) {
-        final y = lane + (k - 1) * 34.0;
-        for (var x = OrbitStage.paintRight - phase; x > OrbitStage.paintLeft; x -= 40) {
-          canvas.drawLine(Offset(x, y), Offset(x - 18, y), _lanePaint);
-        }
-      }
+      canvas
+        ..save()
+        ..translate(-phase, lane)
+        ..drawPath(_lanePath, _lanePaint)
+        ..restore();
     }
     for (var i = 0; i < gustCount; i++) {
       if (!_gActive[i]) continue;
