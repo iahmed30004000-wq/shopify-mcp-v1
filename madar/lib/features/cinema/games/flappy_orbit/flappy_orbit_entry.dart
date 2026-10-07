@@ -1,8 +1,7 @@
 import '../../engine/cinema_engine.dart';
+import 'flappy_orbit_game.dart';
 
-/// Catalog entry – announced, not playable yet. Owner: the game agent that
-/// builds this game (set [GameCatalogEntry.builder] when it is playable;
-/// keep the id).
+/// Catalog entry of "Flappy Orbit" (Tier 1, 1930s rubber-hose flyer).
 final GameCatalogEntry flappyOrbitEntry = GameCatalogEntry(
   id: 'flappy_orbit',
   title: (l) => l.cinemaFlappyOrbitTitle,
@@ -11,4 +10,5 @@ final GameCatalogEntry flappyOrbitEntry = GameCatalogEntry(
   era: Era.rubberHose,
   tier: GameTier.feature,
   genre: GameGenre.flyer,
+  builder: (context) => FlappyOrbitGame(context: context),
 );

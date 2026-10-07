@@ -1,8 +1,7 @@
 import '../../engine/cinema_engine.dart';
+import 'metropolis_game.dart';
 
-/// Catalog entry – announced, not playable yet. Owner: the game agent that
-/// builds this game (set [GameCatalogEntry.builder] when it is playable;
-/// keep the id).
+/// Catalog entry of Metropolis Machine (1920s silent sepia boss rush).
 final GameCatalogEntry metropolisMachineEntry = GameCatalogEntry(
   id: 'metropolis_machine',
   title: (l) => l.cinemaMetropolisTitle,
@@ -11,4 +10,5 @@ final GameCatalogEntry metropolisMachineEntry = GameCatalogEntry(
   era: Era.silent,
   tier: GameTier.feature,
   genre: GameGenre.bossRush,
+  builder: (context) => MetropolisGame(context: context),
 );

@@ -18109,6 +18109,202 @@
   "@cinemaDemoBossEnters": {
     "description": "Demo chapter card subtitle"
   },
+  "cinemaFlappyOrbitTapToBoost": "المس الشاشة لتدفع الصاروخ!",
+  "@cinemaFlappyOrbitTapToBoost": {
+    "description": "Flappy Orbit opening card subtitle"
+  },
+  "cinemaFlappyOrbitLaunchHint": "المس الشاشة للإقلاع",
+  "@cinemaFlappyOrbitLaunchHint": {
+    "description": "Flappy Orbit HUD hint on the launch pad"
+  },
+  "cinemaFlappyOrbitHeroName": "فَلَك",
+  "@cinemaFlappyOrbitHeroName": {
+    "description": "Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')"
+  },
+  "cinemaFlappyOrbitBossName": "المايسترو غَيم",
+  "@cinemaFlappyOrbitBossName": {
+    "description": "Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)"
+  },
+  "cinemaFlappyOrbitActTwo": "الفصل الثاني",
+  "@cinemaFlappyOrbitActTwo": {
+    "description": "Chapter card before the first boss"
+  },
+  "cinemaFlappyOrbitActThree": "الفصل الثالث",
+  "@cinemaFlappyOrbitActThree": {
+    "description": "Chapter card before the second boss"
+  },
+  "cinemaFlappyOrbitActFinal": "الفصل الأخير",
+  "@cinemaFlappyOrbitActFinal": {
+    "description": "Chapter card before the last boss"
+  },
+  "cinemaFlappyOrbitBossEnters": "المايسترو غَيم يصعد المسرح",
+  "@cinemaFlappyOrbitBossEnters": {
+    "description": "Chapter card subtitle when the boss enters"
+  },
+  "cinemaFlappyOrbitNearMiss": "مرور خطر!",
+  "@cinemaFlappyOrbitNearMiss": {
+    "description": "HUD callout for grazing a gate"
+  },
+  "cinemaFlappyOrbitOnBeat": "على الإيقاع!",
+  "@cinemaFlappyOrbitOnBeat": {
+    "description": "HUD callout for a streak of boosts on the music's beat"
+  },
+  "cinemaFlappyOrbitGusted": "عاصفة!",
+  "@cinemaFlappyOrbitGusted": {
+    "description": "HUD callout when the boss's gust catches the hero"
+  },
+  "cinemaFlappyOrbitPhaseThunder": "نوتات رعدية!",
+  "@cinemaFlappyOrbitPhaseThunder": {
+    "description": "HUD callout when the boss enters his second phase"
+  },
+  "cinemaFlappyOrbitPhaseSpin": "المسرح كله يدور!",
+  "@cinemaFlappyOrbitPhaseSpin": {
+    "description": "HUD callout when the boss enters his third phase"
+  },
+  "cinemaFlappyOrbitBossDown": "المايسترو طار مع الريح!",
+  "@cinemaFlappyOrbitBossDown": {
+    "description": "HUD callout when the boss is defeated"
+  },
+  "cinemaFlappyOrbitEndLoop": "لفّة كاملة وهبوط بطولي!",
+  "@cinemaFlappyOrbitEndLoop": {
+    "description": "End card subtitle after beating every boss"
+  },
+  "cinemaFlappyOrbitEndPie": "هبط في فطيرة الجيران!",
+  "@cinemaFlappyOrbitEndPie": {
+    "description": "End card subtitle after losing all lives"
+  },
+  "cinemaMetropolisOpeningSubtitle": "الوردية الليلية… والآلات صحيت وحدها",
+  "@cinemaMetropolisOpeningSubtitle": {
+    "description": "Metropolis Machine opening card subtitle"
+  },
+  "cinemaMetropolisControlsHint": "اضغط يسار أو يمين لتركض، المس لتضرب بالمفتاح، اسحب لتندفع",
+  "@cinemaMetropolisControlsHint": {
+    "description": "Controls line on the opening card"
+  },
+  "cinemaMetropolisHero": "مِفتاح",
+  "@cinemaMetropolisHero": {
+    "description": "Name of the hero, the night engineer (miftah = wrench/key)"
+  },
+  "cinemaMetropolisIntroOne": "دقّ جرس الوردية… ولم يخرج أحد من المصنع.",
+  "@cinemaMetropolisIntroOne": {
+    "description": "Opening dialogue card 1"
+  },
+  "cinemaMetropolisIntroTwo": "مِفتاح، مهندس الليل، حمل مفتاحه وفانوسه ودخل.",
+  "@cinemaMetropolisIntroTwo": {
+    "description": "Opening dialogue card 2"
+  },
+  "cinemaMetropolisMachineOf": "الآلة {index} من {total}",
+  "@cinemaMetropolisMachineOf": {
+    "description": "Chapter card subtitle before a boss; numbers are pre-formatted",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaMetropolisHudMachine": "آلة {index}/{total}",
+  "@cinemaMetropolisHudMachine": {
+    "description": "HUD plaque: which boss of how many",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaMetropolisPressName": "المِكبَس الساعاتي",
+  "@cinemaMetropolisPressName": {
+    "description": "Boss 1 name"
+  },
+  "cinemaMetropolisPressLine": "يدقّ الساعة في الأرض. لا تقف حيث تقع الدقّة.",
+  "@cinemaMetropolisPressLine": {
+    "description": "Boss 1 chapter line"
+  },
+  "cinemaMetropolisBoilerName": "القلب المِرجَل",
+  "@cinemaMetropolisBoilerName": {
+    "description": "Boss 2 name"
+  },
+  "cinemaMetropolisBoilerLine": "ينفث بخاره بنظام. اقرأ النظام قبل أن يقرأك.",
+  "@cinemaMetropolisBoilerLine": {
+    "description": "Boss 2 chapter line"
+  },
+  "cinemaMetropolisSpiderName": "عنكبوت لوحة التحويل",
+  "@cinemaMetropolisSpiderName": {
+    "description": "Boss 3 name"
+  },
+  "cinemaMetropolisSpiderLine": "أرجلها أسلاك، وكل سلك يبحث عن مقبس… وأنت المقبس.",
+  "@cinemaMetropolisSpiderLine": {
+    "description": "Boss 3 chapter line"
+  },
+  "cinemaMetropolisTitanName": "عملاق المصعد",
+  "@cinemaMetropolisTitanName": {
+    "description": "Boss 4 name"
+  },
+  "cinemaMetropolisTitanLine": "يرفع ويخفض كما يشاء. اركب المنصّات ولا تثق بالأرض.",
+  "@cinemaMetropolisTitanLine": {
+    "description": "Boss 4 chapter line"
+  },
+  "cinemaMetropolisDynamoName": "الدينامو الأم",
+  "@cinemaMetropolisDynamoName": {
+    "description": "Boss 5 name"
+  },
+  "cinemaMetropolisDynamoLine": "قلب المدينة كلّه. كل ما تعلّمته… دفعة واحدة.",
+  "@cinemaMetropolisDynamoLine": {
+    "description": "Boss 5 chapter line"
+  },
+  "cinemaMetropolisTauntOne": "«مكبس واحد؟ عندي مدينة كاملة من الآلات!»",
+  "@cinemaMetropolisTauntOne": {
+    "description": "Baron Zunbruk's taunt after boss 1"
+  },
+  "cinemaMetropolisTauntTwo": "«بخار، أسلاك، مصاعد… اختر كيف تسقط.»",
+  "@cinemaMetropolisTauntTwo": {
+    "description": "Taunt after boss 2"
+  },
+  "cinemaMetropolisTauntThree": "«الطابق الأخير يا مهندس. هذا المصعد ينزل فقط.»",
+  "@cinemaMetropolisTauntThree": {
+    "description": "Taunt after boss 3"
+  },
+  "cinemaMetropolisTauntFour": "«كفى! سأشغّل الأم بنفسي!»",
+  "@cinemaMetropolisTauntFour": {
+    "description": "Taunt after boss 4, before the final boss"
+  },
+  "cinemaMetropolisBaronBeaten": "«هذا… ليس في الجدول!»",
+  "@cinemaMetropolisBaronBeaten": {
+    "description": "The Baron's line when the final boss falls"
+  },
+  "cinemaMetropolisTauntSigned": "البارون زُنبُرك",
+  "@cinemaMetropolisTauntSigned": {
+    "description": "Signature line under a taunt card"
+  },
+  "cinemaMetropolisEndTitle": "انتهت الوردية",
+  "@cinemaMetropolisEndTitle": {
+    "description": "Winning end card"
+  },
+  "cinemaMetropolisEndSubtitle": "وعادت أنوار المدينة تشتعل واحدًا واحدًا.",
+  "@cinemaMetropolisEndSubtitle": {
+    "description": "Winning end card subtitle"
+  },
+  "cinemaMetropolisLostSubtitle": "ربحت الآلات هذه الوردية. غدًا وردية أخرى.",
+  "@cinemaMetropolisLostSubtitle": {
+    "description": "Losing end card subtitle"
+  },
+  "cinemaMetropolisReelBack": "استعدت بكرة!",
+  "@cinemaMetropolisReelBack": {
+    "description": "HUD flash when a life comes back after a boss"
+  },
+  "cinemaMetropolisPhaseUp": "الآلة تغضب!",
+  "@cinemaMetropolisPhaseUp": {
+    "description": "HUD flash when a boss enters its next phase"
+  },
+  "cinemaMetropolisParry": "صَدّ!",
+  "@cinemaMetropolisParry": {
+    "description": "HUD flash on a parry"
+  },
   "dataCentreTitle": "بياناتك",
   "@dataCentreTitle": {
     "description": "Data centre screen title"

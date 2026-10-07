@@ -18192,6 +18192,160 @@ class L10nEn extends L10n {
   String get cinemaDemoBossEnters => 'Baron Zunbruk takes the stage';
 
   @override
+  String get cinemaFlappyOrbitTapToBoost => 'Tap to boost the rocket!';
+
+  @override
+  String get cinemaFlappyOrbitLaunchHint => 'Tap to launch';
+
+  @override
+  String get cinemaFlappyOrbitHeroName => 'Falak';
+
+  @override
+  String get cinemaFlappyOrbitBossName => 'Maestro Ghaym';
+
+  @override
+  String get cinemaFlappyOrbitActTwo => 'Act Two';
+
+  @override
+  String get cinemaFlappyOrbitActThree => 'Act Three';
+
+  @override
+  String get cinemaFlappyOrbitActFinal => 'The Final Act';
+
+  @override
+  String get cinemaFlappyOrbitBossEnters => 'Maestro Ghaym takes the stage';
+
+  @override
+  String get cinemaFlappyOrbitNearMiss => 'Near miss!';
+
+  @override
+  String get cinemaFlappyOrbitOnBeat => 'On the beat!';
+
+  @override
+  String get cinemaFlappyOrbitGusted => 'Gust!';
+
+  @override
+  String get cinemaFlappyOrbitPhaseThunder => 'Thunder notes!';
+
+  @override
+  String get cinemaFlappyOrbitPhaseSpin => 'The whole stage spins!';
+
+  @override
+  String get cinemaFlappyOrbitBossDown => 'The Maestro blows away!';
+
+  @override
+  String get cinemaFlappyOrbitEndLoop => 'A full loop and a hero\'s landing!';
+
+  @override
+  String get cinemaFlappyOrbitEndPie => 'Crash-landed in the neighbours\' pie!';
+
+  @override
+  String get cinemaMetropolisOpeningSubtitle =>
+      'The night shift… and the machines woke up on their own';
+
+  @override
+  String get cinemaMetropolisControlsHint =>
+      'Hold left or right to run, tap to swing the wrench, swipe to dash';
+
+  @override
+  String get cinemaMetropolisHero => 'Miftah';
+
+  @override
+  String get cinemaMetropolisIntroOne =>
+      'The shift bell rang… and nobody came out of the works.';
+
+  @override
+  String get cinemaMetropolisIntroTwo =>
+      'Miftah, the night engineer, took his wrench and his lantern and went in.';
+
+  @override
+  String cinemaMetropolisMachineOf(String index, String total) {
+    return 'Machine $index of $total';
+  }
+
+  @override
+  String cinemaMetropolisHudMachine(String index, String total) {
+    return 'Machine $index/$total';
+  }
+
+  @override
+  String get cinemaMetropolisPressName => 'The Clock-Press';
+
+  @override
+  String get cinemaMetropolisPressLine =>
+      'It stamps the hour into the floor. Never stand where the beat falls.';
+
+  @override
+  String get cinemaMetropolisBoilerName => 'The Boiler-Heart';
+
+  @override
+  String get cinemaMetropolisBoilerLine =>
+      'It vents its steam in patterns. Read the pattern before it reads you.';
+
+  @override
+  String get cinemaMetropolisSpiderName => 'The Switchboard-Spider';
+
+  @override
+  String get cinemaMetropolisSpiderLine =>
+      'Its legs are cables, and every cable wants a socket. You are the socket.';
+
+  @override
+  String get cinemaMetropolisTitanName => 'The Lift-Titan';
+
+  @override
+  String get cinemaMetropolisTitanLine =>
+      'It raises and lowers as it pleases. Ride the platforms and trust no floor.';
+
+  @override
+  String get cinemaMetropolisDynamoName => 'The Mother-Dynamo';
+
+  @override
+  String get cinemaMetropolisDynamoLine =>
+      'The heart of the whole city. Everything you learned, all at once.';
+
+  @override
+  String get cinemaMetropolisTauntOne =>
+      '“One press? I have a whole city of machines!”';
+
+  @override
+  String get cinemaMetropolisTauntTwo =>
+      '“Steam, cables, lifts… choose how you fall.”';
+
+  @override
+  String get cinemaMetropolisTauntThree =>
+      '“Top floor, engineer. This lift only goes down.”';
+
+  @override
+  String get cinemaMetropolisTauntFour =>
+      '“Enough! I will run the Mother myself!”';
+
+  @override
+  String get cinemaMetropolisBaronBeaten => '“This… was not on the schedule!”';
+
+  @override
+  String get cinemaMetropolisTauntSigned => 'Baron Zunbruk';
+
+  @override
+  String get cinemaMetropolisEndTitle => 'The shift is over';
+
+  @override
+  String get cinemaMetropolisEndSubtitle =>
+      'And the city\'s lights came back on, one by one.';
+
+  @override
+  String get cinemaMetropolisLostSubtitle =>
+      'The machines won this shift. Tomorrow is another.';
+
+  @override
+  String get cinemaMetropolisReelBack => 'Reel recovered!';
+
+  @override
+  String get cinemaMetropolisPhaseUp => 'The machine rages!';
+
+  @override
+  String get cinemaMetropolisParry => 'Parry!';
+
+  @override
   String get dataCentreTitle => 'Your data';
 
   @override

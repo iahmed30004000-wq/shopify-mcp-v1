@@ -18741,6 +18741,158 @@ class L10nAr extends L10n {
   String get cinemaDemoBossEnters => 'البارون زُنبُرك يدخل المسرح';
 
   @override
+  String get cinemaFlappyOrbitTapToBoost => 'المس الشاشة لتدفع الصاروخ!';
+
+  @override
+  String get cinemaFlappyOrbitLaunchHint => 'المس الشاشة للإقلاع';
+
+  @override
+  String get cinemaFlappyOrbitHeroName => 'فَلَك';
+
+  @override
+  String get cinemaFlappyOrbitBossName => 'المايسترو غَيم';
+
+  @override
+  String get cinemaFlappyOrbitActTwo => 'الفصل الثاني';
+
+  @override
+  String get cinemaFlappyOrbitActThree => 'الفصل الثالث';
+
+  @override
+  String get cinemaFlappyOrbitActFinal => 'الفصل الأخير';
+
+  @override
+  String get cinemaFlappyOrbitBossEnters => 'المايسترو غَيم يصعد المسرح';
+
+  @override
+  String get cinemaFlappyOrbitNearMiss => 'مرور خطر!';
+
+  @override
+  String get cinemaFlappyOrbitOnBeat => 'على الإيقاع!';
+
+  @override
+  String get cinemaFlappyOrbitGusted => 'عاصفة!';
+
+  @override
+  String get cinemaFlappyOrbitPhaseThunder => 'نوتات رعدية!';
+
+  @override
+  String get cinemaFlappyOrbitPhaseSpin => 'المسرح كله يدور!';
+
+  @override
+  String get cinemaFlappyOrbitBossDown => 'المايسترو طار مع الريح!';
+
+  @override
+  String get cinemaFlappyOrbitEndLoop => 'لفّة كاملة وهبوط بطولي!';
+
+  @override
+  String get cinemaFlappyOrbitEndPie => 'هبط في فطيرة الجيران!';
+
+  @override
+  String get cinemaMetropolisOpeningSubtitle =>
+      'الوردية الليلية… والآلات صحيت وحدها';
+
+  @override
+  String get cinemaMetropolisControlsHint =>
+      'اضغط يسار أو يمين لتركض، المس لتضرب بالمفتاح، اسحب لتندفع';
+
+  @override
+  String get cinemaMetropolisHero => 'مِفتاح';
+
+  @override
+  String get cinemaMetropolisIntroOne =>
+      'دقّ جرس الوردية… ولم يخرج أحد من المصنع.';
+
+  @override
+  String get cinemaMetropolisIntroTwo =>
+      'مِفتاح، مهندس الليل، حمل مفتاحه وفانوسه ودخل.';
+
+  @override
+  String cinemaMetropolisMachineOf(String index, String total) {
+    return 'الآلة $index من $total';
+  }
+
+  @override
+  String cinemaMetropolisHudMachine(String index, String total) {
+    return 'آلة $index/$total';
+  }
+
+  @override
+  String get cinemaMetropolisPressName => 'المِكبَس الساعاتي';
+
+  @override
+  String get cinemaMetropolisPressLine =>
+      'يدقّ الساعة في الأرض. لا تقف حيث تقع الدقّة.';
+
+  @override
+  String get cinemaMetropolisBoilerName => 'القلب المِرجَل';
+
+  @override
+  String get cinemaMetropolisBoilerLine =>
+      'ينفث بخاره بنظام. اقرأ النظام قبل أن يقرأك.';
+
+  @override
+  String get cinemaMetropolisSpiderName => 'عنكبوت لوحة التحويل';
+
+  @override
+  String get cinemaMetropolisSpiderLine =>
+      'أرجلها أسلاك، وكل سلك يبحث عن مقبس… وأنت المقبس.';
+
+  @override
+  String get cinemaMetropolisTitanName => 'عملاق المصعد';
+
+  @override
+  String get cinemaMetropolisTitanLine =>
+      'يرفع ويخفض كما يشاء. اركب المنصّات ولا تثق بالأرض.';
+
+  @override
+  String get cinemaMetropolisDynamoName => 'الدينامو الأم';
+
+  @override
+  String get cinemaMetropolisDynamoLine =>
+      'قلب المدينة كلّه. كل ما تعلّمته… دفعة واحدة.';
+
+  @override
+  String get cinemaMetropolisTauntOne =>
+      '«مكبس واحد؟ عندي مدينة كاملة من الآلات!»';
+
+  @override
+  String get cinemaMetropolisTauntTwo => '«بخار، أسلاك، مصاعد… اختر كيف تسقط.»';
+
+  @override
+  String get cinemaMetropolisTauntThree =>
+      '«الطابق الأخير يا مهندس. هذا المصعد ينزل فقط.»';
+
+  @override
+  String get cinemaMetropolisTauntFour => '«كفى! سأشغّل الأم بنفسي!»';
+
+  @override
+  String get cinemaMetropolisBaronBeaten => '«هذا… ليس في الجدول!»';
+
+  @override
+  String get cinemaMetropolisTauntSigned => 'البارون زُنبُرك';
+
+  @override
+  String get cinemaMetropolisEndTitle => 'انتهت الوردية';
+
+  @override
+  String get cinemaMetropolisEndSubtitle =>
+      'وعادت أنوار المدينة تشتعل واحدًا واحدًا.';
+
+  @override
+  String get cinemaMetropolisLostSubtitle =>
+      'ربحت الآلات هذه الوردية. غدًا وردية أخرى.';
+
+  @override
+  String get cinemaMetropolisReelBack => 'استعدت بكرة!';
+
+  @override
+  String get cinemaMetropolisPhaseUp => 'الآلة تغضب!';
+
+  @override
+  String get cinemaMetropolisParry => 'صَدّ!';
+
+  @override
   String get dataCentreTitle => 'بياناتك';
 
   @override

@@ -28893,6 +28893,276 @@ abstract class L10n {
   /// **'البارون زُنبُرك يدخل المسرح'**
   String get cinemaDemoBossEnters;
 
+  /// Flappy Orbit opening card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'المس الشاشة لتدفع الصاروخ!'**
+  String get cinemaFlappyOrbitTapToBoost;
+
+  /// Flappy Orbit HUD hint on the launch pad
+  ///
+  /// In ar, this message translates to:
+  /// **'المس الشاشة للإقلاع'**
+  String get cinemaFlappyOrbitLaunchHint;
+
+  /// Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')
+  ///
+  /// In ar, this message translates to:
+  /// **'فَلَك'**
+  String get cinemaFlappyOrbitHeroName;
+
+  /// Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)
+  ///
+  /// In ar, this message translates to:
+  /// **'المايسترو غَيم'**
+  String get cinemaFlappyOrbitBossName;
+
+  /// Chapter card before the first boss
+  ///
+  /// In ar, this message translates to:
+  /// **'الفصل الثاني'**
+  String get cinemaFlappyOrbitActTwo;
+
+  /// Chapter card before the second boss
+  ///
+  /// In ar, this message translates to:
+  /// **'الفصل الثالث'**
+  String get cinemaFlappyOrbitActThree;
+
+  /// Chapter card before the last boss
+  ///
+  /// In ar, this message translates to:
+  /// **'الفصل الأخير'**
+  String get cinemaFlappyOrbitActFinal;
+
+  /// Chapter card subtitle when the boss enters
+  ///
+  /// In ar, this message translates to:
+  /// **'المايسترو غَيم يصعد المسرح'**
+  String get cinemaFlappyOrbitBossEnters;
+
+  /// HUD callout for grazing a gate
+  ///
+  /// In ar, this message translates to:
+  /// **'مرور خطر!'**
+  String get cinemaFlappyOrbitNearMiss;
+
+  /// HUD callout for a streak of boosts on the music's beat
+  ///
+  /// In ar, this message translates to:
+  /// **'على الإيقاع!'**
+  String get cinemaFlappyOrbitOnBeat;
+
+  /// HUD callout when the boss's gust catches the hero
+  ///
+  /// In ar, this message translates to:
+  /// **'عاصفة!'**
+  String get cinemaFlappyOrbitGusted;
+
+  /// HUD callout when the boss enters his second phase
+  ///
+  /// In ar, this message translates to:
+  /// **'نوتات رعدية!'**
+  String get cinemaFlappyOrbitPhaseThunder;
+
+  /// HUD callout when the boss enters his third phase
+  ///
+  /// In ar, this message translates to:
+  /// **'المسرح كله يدور!'**
+  String get cinemaFlappyOrbitPhaseSpin;
+
+  /// HUD callout when the boss is defeated
+  ///
+  /// In ar, this message translates to:
+  /// **'المايسترو طار مع الريح!'**
+  String get cinemaFlappyOrbitBossDown;
+
+  /// End card subtitle after beating every boss
+  ///
+  /// In ar, this message translates to:
+  /// **'لفّة كاملة وهبوط بطولي!'**
+  String get cinemaFlappyOrbitEndLoop;
+
+  /// End card subtitle after losing all lives
+  ///
+  /// In ar, this message translates to:
+  /// **'هبط في فطيرة الجيران!'**
+  String get cinemaFlappyOrbitEndPie;
+
+  /// Metropolis Machine opening card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'الوردية الليلية… والآلات صحيت وحدها'**
+  String get cinemaMetropolisOpeningSubtitle;
+
+  /// Controls line on the opening card
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط يسار أو يمين لتركض، المس لتضرب بالمفتاح، اسحب لتندفع'**
+  String get cinemaMetropolisControlsHint;
+
+  /// Name of the hero, the night engineer (miftah = wrench/key)
+  ///
+  /// In ar, this message translates to:
+  /// **'مِفتاح'**
+  String get cinemaMetropolisHero;
+
+  /// Opening dialogue card 1
+  ///
+  /// In ar, this message translates to:
+  /// **'دقّ جرس الوردية… ولم يخرج أحد من المصنع.'**
+  String get cinemaMetropolisIntroOne;
+
+  /// Opening dialogue card 2
+  ///
+  /// In ar, this message translates to:
+  /// **'مِفتاح، مهندس الليل، حمل مفتاحه وفانوسه ودخل.'**
+  String get cinemaMetropolisIntroTwo;
+
+  /// Chapter card subtitle before a boss; numbers are pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'الآلة {index} من {total}'**
+  String cinemaMetropolisMachineOf(String index, String total);
+
+  /// HUD plaque: which boss of how many
+  ///
+  /// In ar, this message translates to:
+  /// **'آلة {index}/{total}'**
+  String cinemaMetropolisHudMachine(String index, String total);
+
+  /// Boss 1 name
+  ///
+  /// In ar, this message translates to:
+  /// **'المِكبَس الساعاتي'**
+  String get cinemaMetropolisPressName;
+
+  /// Boss 1 chapter line
+  ///
+  /// In ar, this message translates to:
+  /// **'يدقّ الساعة في الأرض. لا تقف حيث تقع الدقّة.'**
+  String get cinemaMetropolisPressLine;
+
+  /// Boss 2 name
+  ///
+  /// In ar, this message translates to:
+  /// **'القلب المِرجَل'**
+  String get cinemaMetropolisBoilerName;
+
+  /// Boss 2 chapter line
+  ///
+  /// In ar, this message translates to:
+  /// **'ينفث بخاره بنظام. اقرأ النظام قبل أن يقرأك.'**
+  String get cinemaMetropolisBoilerLine;
+
+  /// Boss 3 name
+  ///
+  /// In ar, this message translates to:
+  /// **'عنكبوت لوحة التحويل'**
+  String get cinemaMetropolisSpiderName;
+
+  /// Boss 3 chapter line
+  ///
+  /// In ar, this message translates to:
+  /// **'أرجلها أسلاك، وكل سلك يبحث عن مقبس… وأنت المقبس.'**
+  String get cinemaMetropolisSpiderLine;
+
+  /// Boss 4 name
+  ///
+  /// In ar, this message translates to:
+  /// **'عملاق المصعد'**
+  String get cinemaMetropolisTitanName;
+
+  /// Boss 4 chapter line
+  ///
+  /// In ar, this message translates to:
+  /// **'يرفع ويخفض كما يشاء. اركب المنصّات ولا تثق بالأرض.'**
+  String get cinemaMetropolisTitanLine;
+
+  /// Boss 5 name
+  ///
+  /// In ar, this message translates to:
+  /// **'الدينامو الأم'**
+  String get cinemaMetropolisDynamoName;
+
+  /// Boss 5 chapter line
+  ///
+  /// In ar, this message translates to:
+  /// **'قلب المدينة كلّه. كل ما تعلّمته… دفعة واحدة.'**
+  String get cinemaMetropolisDynamoLine;
+
+  /// Baron Zunbruk's taunt after boss 1
+  ///
+  /// In ar, this message translates to:
+  /// **'«مكبس واحد؟ عندي مدينة كاملة من الآلات!»'**
+  String get cinemaMetropolisTauntOne;
+
+  /// Taunt after boss 2
+  ///
+  /// In ar, this message translates to:
+  /// **'«بخار، أسلاك، مصاعد… اختر كيف تسقط.»'**
+  String get cinemaMetropolisTauntTwo;
+
+  /// Taunt after boss 3
+  ///
+  /// In ar, this message translates to:
+  /// **'«الطابق الأخير يا مهندس. هذا المصعد ينزل فقط.»'**
+  String get cinemaMetropolisTauntThree;
+
+  /// Taunt after boss 4, before the final boss
+  ///
+  /// In ar, this message translates to:
+  /// **'«كفى! سأشغّل الأم بنفسي!»'**
+  String get cinemaMetropolisTauntFour;
+
+  /// The Baron's line when the final boss falls
+  ///
+  /// In ar, this message translates to:
+  /// **'«هذا… ليس في الجدول!»'**
+  String get cinemaMetropolisBaronBeaten;
+
+  /// Signature line under a taunt card
+  ///
+  /// In ar, this message translates to:
+  /// **'البارون زُنبُرك'**
+  String get cinemaMetropolisTauntSigned;
+
+  /// Winning end card
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت الوردية'**
+  String get cinemaMetropolisEndTitle;
+
+  /// Winning end card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'وعادت أنوار المدينة تشتعل واحدًا واحدًا.'**
+  String get cinemaMetropolisEndSubtitle;
+
+  /// Losing end card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'ربحت الآلات هذه الوردية. غدًا وردية أخرى.'**
+  String get cinemaMetropolisLostSubtitle;
+
+  /// HUD flash when a life comes back after a boss
+  ///
+  /// In ar, this message translates to:
+  /// **'استعدت بكرة!'**
+  String get cinemaMetropolisReelBack;
+
+  /// HUD flash when a boss enters its next phase
+  ///
+  /// In ar, this message translates to:
+  /// **'الآلة تغضب!'**
+  String get cinemaMetropolisPhaseUp;
+
+  /// HUD flash on a parry
+  ///
+  /// In ar, this message translates to:
+  /// **'صَدّ!'**
+  String get cinemaMetropolisParry;
+
   /// Data centre screen title
   ///
   /// In ar, this message translates to:

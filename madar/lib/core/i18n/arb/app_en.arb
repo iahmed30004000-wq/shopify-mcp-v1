@@ -18109,6 +18109,202 @@
   "@cinemaDemoBossEnters": {
     "description": "Demo chapter card subtitle"
   },
+  "cinemaFlappyOrbitTapToBoost": "Tap to boost the rocket!",
+  "@cinemaFlappyOrbitTapToBoost": {
+    "description": "Flappy Orbit opening card subtitle"
+  },
+  "cinemaFlappyOrbitLaunchHint": "Tap to launch",
+  "@cinemaFlappyOrbitLaunchHint": {
+    "description": "Flappy Orbit HUD hint on the launch pad"
+  },
+  "cinemaFlappyOrbitHeroName": "Falak",
+  "@cinemaFlappyOrbitHeroName": {
+    "description": "Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')"
+  },
+  "cinemaFlappyOrbitBossName": "Maestro Ghaym",
+  "@cinemaFlappyOrbitBossName": {
+    "description": "Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)"
+  },
+  "cinemaFlappyOrbitActTwo": "Act Two",
+  "@cinemaFlappyOrbitActTwo": {
+    "description": "Chapter card before the first boss"
+  },
+  "cinemaFlappyOrbitActThree": "Act Three",
+  "@cinemaFlappyOrbitActThree": {
+    "description": "Chapter card before the second boss"
+  },
+  "cinemaFlappyOrbitActFinal": "The Final Act",
+  "@cinemaFlappyOrbitActFinal": {
+    "description": "Chapter card before the last boss"
+  },
+  "cinemaFlappyOrbitBossEnters": "Maestro Ghaym takes the stage",
+  "@cinemaFlappyOrbitBossEnters": {
+    "description": "Chapter card subtitle when the boss enters"
+  },
+  "cinemaFlappyOrbitNearMiss": "Near miss!",
+  "@cinemaFlappyOrbitNearMiss": {
+    "description": "HUD callout for grazing a gate"
+  },
+  "cinemaFlappyOrbitOnBeat": "On the beat!",
+  "@cinemaFlappyOrbitOnBeat": {
+    "description": "HUD callout for a streak of boosts on the music's beat"
+  },
+  "cinemaFlappyOrbitGusted": "Gust!",
+  "@cinemaFlappyOrbitGusted": {
+    "description": "HUD callout when the boss's gust catches the hero"
+  },
+  "cinemaFlappyOrbitPhaseThunder": "Thunder notes!",
+  "@cinemaFlappyOrbitPhaseThunder": {
+    "description": "HUD callout when the boss enters his second phase"
+  },
+  "cinemaFlappyOrbitPhaseSpin": "The whole stage spins!",
+  "@cinemaFlappyOrbitPhaseSpin": {
+    "description": "HUD callout when the boss enters his third phase"
+  },
+  "cinemaFlappyOrbitBossDown": "The Maestro blows away!",
+  "@cinemaFlappyOrbitBossDown": {
+    "description": "HUD callout when the boss is defeated"
+  },
+  "cinemaFlappyOrbitEndLoop": "A full loop and a hero's landing!",
+  "@cinemaFlappyOrbitEndLoop": {
+    "description": "End card subtitle after beating every boss"
+  },
+  "cinemaFlappyOrbitEndPie": "Crash-landed in the neighbours' pie!",
+  "@cinemaFlappyOrbitEndPie": {
+    "description": "End card subtitle after losing all lives"
+  },
+  "cinemaMetropolisOpeningSubtitle": "The night shift… and the machines woke up on their own",
+  "@cinemaMetropolisOpeningSubtitle": {
+    "description": "Metropolis Machine opening card subtitle"
+  },
+  "cinemaMetropolisControlsHint": "Hold left or right to run, tap to swing the wrench, swipe to dash",
+  "@cinemaMetropolisControlsHint": {
+    "description": "Controls line on the opening card"
+  },
+  "cinemaMetropolisHero": "Miftah",
+  "@cinemaMetropolisHero": {
+    "description": "Name of the hero, the night engineer (miftah = wrench/key)"
+  },
+  "cinemaMetropolisIntroOne": "The shift bell rang… and nobody came out of the works.",
+  "@cinemaMetropolisIntroOne": {
+    "description": "Opening dialogue card 1"
+  },
+  "cinemaMetropolisIntroTwo": "Miftah, the night engineer, took his wrench and his lantern and went in.",
+  "@cinemaMetropolisIntroTwo": {
+    "description": "Opening dialogue card 2"
+  },
+  "cinemaMetropolisMachineOf": "Machine {index} of {total}",
+  "@cinemaMetropolisMachineOf": {
+    "description": "Chapter card subtitle before a boss; numbers are pre-formatted",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaMetropolisHudMachine": "Machine {index}/{total}",
+  "@cinemaMetropolisHudMachine": {
+    "description": "HUD plaque: which boss of how many",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaMetropolisPressName": "The Clock-Press",
+  "@cinemaMetropolisPressName": {
+    "description": "Boss 1 name"
+  },
+  "cinemaMetropolisPressLine": "It stamps the hour into the floor. Never stand where the beat falls.",
+  "@cinemaMetropolisPressLine": {
+    "description": "Boss 1 chapter line"
+  },
+  "cinemaMetropolisBoilerName": "The Boiler-Heart",
+  "@cinemaMetropolisBoilerName": {
+    "description": "Boss 2 name"
+  },
+  "cinemaMetropolisBoilerLine": "It vents its steam in patterns. Read the pattern before it reads you.",
+  "@cinemaMetropolisBoilerLine": {
+    "description": "Boss 2 chapter line"
+  },
+  "cinemaMetropolisSpiderName": "The Switchboard-Spider",
+  "@cinemaMetropolisSpiderName": {
+    "description": "Boss 3 name"
+  },
+  "cinemaMetropolisSpiderLine": "Its legs are cables, and every cable wants a socket. You are the socket.",
+  "@cinemaMetropolisSpiderLine": {
+    "description": "Boss 3 chapter line"
+  },
+  "cinemaMetropolisTitanName": "The Lift-Titan",
+  "@cinemaMetropolisTitanName": {
+    "description": "Boss 4 name"
+  },
+  "cinemaMetropolisTitanLine": "It raises and lowers as it pleases. Ride the platforms and trust no floor.",
+  "@cinemaMetropolisTitanLine": {
+    "description": "Boss 4 chapter line"
+  },
+  "cinemaMetropolisDynamoName": "The Mother-Dynamo",
+  "@cinemaMetropolisDynamoName": {
+    "description": "Boss 5 name"
+  },
+  "cinemaMetropolisDynamoLine": "The heart of the whole city. Everything you learned, all at once.",
+  "@cinemaMetropolisDynamoLine": {
+    "description": "Boss 5 chapter line"
+  },
+  "cinemaMetropolisTauntOne": "“One press? I have a whole city of machines!”",
+  "@cinemaMetropolisTauntOne": {
+    "description": "Baron Zunbruk's taunt after boss 1"
+  },
+  "cinemaMetropolisTauntTwo": "“Steam, cables, lifts… choose how you fall.”",
+  "@cinemaMetropolisTauntTwo": {
+    "description": "Taunt after boss 2"
+  },
+  "cinemaMetropolisTauntThree": "“Top floor, engineer. This lift only goes down.”",
+  "@cinemaMetropolisTauntThree": {
+    "description": "Taunt after boss 3"
+  },
+  "cinemaMetropolisTauntFour": "“Enough! I will run the Mother myself!”",
+  "@cinemaMetropolisTauntFour": {
+    "description": "Taunt after boss 4, before the final boss"
+  },
+  "cinemaMetropolisBaronBeaten": "“This… was not on the schedule!”",
+  "@cinemaMetropolisBaronBeaten": {
+    "description": "The Baron's line when the final boss falls"
+  },
+  "cinemaMetropolisTauntSigned": "Baron Zunbruk",
+  "@cinemaMetropolisTauntSigned": {
+    "description": "Signature line under a taunt card"
+  },
+  "cinemaMetropolisEndTitle": "The shift is over",
+  "@cinemaMetropolisEndTitle": {
+    "description": "Winning end card"
+  },
+  "cinemaMetropolisEndSubtitle": "And the city's lights came back on, one by one.",
+  "@cinemaMetropolisEndSubtitle": {
+    "description": "Winning end card subtitle"
+  },
+  "cinemaMetropolisLostSubtitle": "The machines won this shift. Tomorrow is another.",
+  "@cinemaMetropolisLostSubtitle": {
+    "description": "Losing end card subtitle"
+  },
+  "cinemaMetropolisReelBack": "Reel recovered!",
+  "@cinemaMetropolisReelBack": {
+    "description": "HUD flash when a life comes back after a boss"
+  },
+  "cinemaMetropolisPhaseUp": "The machine rages!",
+  "@cinemaMetropolisPhaseUp": {
+    "description": "HUD flash when a boss enters its next phase"
+  },
+  "cinemaMetropolisParry": "Parry!",
+  "@cinemaMetropolisParry": {
+    "description": "HUD flash on a parry"
+  },
   "dataCentreTitle": "Your data",
   "@dataCentreTitle": {
     "description": "Data centre screen title"

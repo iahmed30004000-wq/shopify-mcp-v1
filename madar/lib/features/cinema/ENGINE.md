@@ -342,6 +342,24 @@ measures update / recording cost; the screenshot test renders chosen
 change.** `CinemaDemoScreen(initialEra, autoplay, showEraPicker)` hosts it
 with an era switcher.
 
+Critic's notes for the Tier 1 agents (lessons from the vignette):
+
+* **Count attacks where they launch.** Pick the next attack (slam / blast /
+  …) and bump the counter at the wind-up → attack transition, never in the
+  recover step: recover also runs after the intro and after every hit, and
+  the parity drifts (the Baron blasted forever and never slammed).
+* **Dark sets need HUD contrast checked per era.** Anything inked `m.ink`
+  on a dark plaque (noir) vanishes; use `HudPlaque.textColor` /
+  `m.plaqueText` for glyphs on plaques and look at the noir screenshot.
+* **No per-frame geometry.** Scale a `const` unit rect / oval with
+  `canvas.scale` instead of building a `Rect` every frame (the hero
+  shadow), keep `Paint`s and `Path`s as fields, cache `worldToScreen`
+  results until `onGameResize`.
+* **Screenshot the moments, not the start.** Drive the game headlessly
+  (`runUntil`) to a precise state (`boss.actionTime` window, a hit frame,
+  iris coverage) and capture there; a timeout in such a wait is a real
+  regression signal, not flakiness.
+
 ---
 
 ## 5. Performance budget (60 fps on a mid-range phone, 120 Hz friendly)

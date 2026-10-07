@@ -368,11 +368,15 @@ class DemoGame extends CinemaGame {
           puffs.spawn(bossX + 10, groundY - bossHeight * 1.02, size: 34, life: 0.9, driftY: -50);
         }
         if (_bossTimer >= windUp) {
+          // Slam, blast, slam… counted here (not in recover, which also
+          // runs after the intro and after every hit and used to skew the
+          // parity so he only ever blasted).
           boss
             ..windUp = 0
             ..attack = _attackNo.isEven ? BossAttack.slam : BossAttack.blast
             ..expression = RigExpression.angry
             ..act(RigAction.attack, restart: true);
+          _attackNo++;
           _bossStep = 1;
           _bossTimer = 0;
           _launched = false;
@@ -408,7 +412,6 @@ class DemoGame extends CinemaGame {
         if (_bossTimer >= 0.8) {
           _bossStep = 0;
           _bossTimer = 0;
-          _attackNo++;
         }
     }
   }
@@ -470,12 +473,19 @@ class _HeroShadow extends Component {
 
   final DemoGame game;
   final Paint _paint = Paint();
+  static const Rect _unit = Rect.fromLTRB(-1, -1, 1, 1);
 
   @override
   void render(Canvas canvas) {
     final lift = (DemoGame.groundY - game.heroY).clamp(0.0, 260.0) / 260;
     final w = game.hero.rig.bounds.width * 0.4 * (1 - lift * 0.45);
     _paint.color = game.skin.palette.ink.withValues(alpha: 0.22 * (1 - lift * 0.6));
-    canvas.drawOval(Rect.fromCenter(center: const Offset(DemoGame.heroX, DemoGame.groundY + 2), width: w * 2, height: w * 0.42), _paint);
+    // A unit oval scaled in place: no Rect per frame.
+    canvas
+      ..save()
+      ..translate(DemoGame.heroX, DemoGame.groundY + 2)
+      ..scale(w, w * 0.21)
+      ..drawOval(_unit, _paint)
+      ..restore();
   }
 }

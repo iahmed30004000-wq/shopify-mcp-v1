@@ -192,10 +192,13 @@ class ScoreHudItem extends HudItem {
       canvas.drawPath(_icon, _s);
       return;
     }
-    _p.color = ctx.skin.era.isMonochrome ? m.ink : ctx.skin.palette.accent;
+    // Ink on paper plaques; on the dark noir nameplate the star is a paper
+    // ticket stub with a steel edge (ink on ink was invisible).
+    final dark = ctx.skin.titles.frame == TitleFrame.plain;
+    _p.color = dark ? m.plaqueText : (ctx.skin.era.isMonochrome ? m.ink : ctx.skin.palette.accent);
     canvas.drawPath(_icon, _p);
     _s
-      ..color = m.ink
+      ..color = dark ? m.gilt : m.ink
       ..strokeWidth = 1.4 * ctx.scale;
     canvas.drawPath(_icon, _s);
   }

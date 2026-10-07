@@ -167,13 +167,22 @@ class HudPlaque {
           ..strokeWidth = 2.6 * s;
         canvas.drawRRect(rr, _stroke);
       case TitleFrame.plain:
+        // A brushed-steel nameplate: on the noir set (black on black) it
+        // needs a real edge, so a dark drop, a bright bevel and a thin
+        // inner rule.
         final rr = RRect.fromRectAndRadius(r, Radius.circular(round ? r.shortestSide / 2 : 3 * s));
-        _fill.color = Color.lerp(m.plaque, pal.midtone, flash)!.withValues(alpha: 0.88);
+        _fill.color = m.wallDark.withValues(alpha: 0.85);
+        canvas.drawRRect(rr.shift(Offset(0, 2 * s)), _fill);
+        _fill.color = Color.lerp(m.plaque, pal.midtone, flash)!.withValues(alpha: 0.92);
         canvas.drawRRect(rr, _fill);
         _stroke
-          ..color = m.gilt.withValues(alpha: 0.9)
-          ..strokeWidth = 1 * s;
-        canvas.drawRRect(rr.deflate(2.5 * s), _stroke);
+          ..color = m.giltLight.withValues(alpha: 0.95)
+          ..strokeWidth = 1.5 * s;
+        canvas.drawRRect(rr, _stroke);
+        _stroke
+          ..color = m.gilt.withValues(alpha: 0.7)
+          ..strokeWidth = 0.8 * s;
+        canvas.drawRRect(rr.deflate(3 * s), _stroke);
       case TitleFrame.marquee:
         final rr = RRect.fromRectAndRadius(r, Radius.circular(round ? r.shortestSide / 2 : 4 * s));
         _fill.color = m.ink;
