@@ -46,6 +46,28 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 All six runs were resumed with resumeFromRunId (completed agents replay from cache; interrupted ones re-run with a RESUMING note + strict memory rule): money review wf_ad90daa6-564 (scratchpad/phase5_integrate.js), engine wf_4495c71d-7d5 (scratchpad/phase7_engine.js; hall no longer builds Saved Games), cards wf_94413da5-0be (scratchpad/jordan_cards.js), together wf_ab7dcc7b-712, widgets wf_54ac8044-8f2, saved games wf_1fb242c0-188.
 
 ## PAUSED UNTIL NEXT WEEK (owner request, 2026-10-07). Nothing is running.
+
+## Owner feedback on APK #15 + new requests (2026-10-07) – ALL FOR NEXT WEEK
+Work style: one part at a time → APK after each part; save tokens; 1–2 agents max.
+1. GAMES BUG (first): «ما بقدر اعمل مغادرة» – he cannot leave a game (no working exit/back from the game screen).
+   Also unfinished games show in the hall – make it obvious which are playable (or hide unfinished).
+2. DIET / MEAL PLAN: a meal plan with times («الساعة كذا آكل كذا، بعدين كذا») + log/track everything eaten
+   (likely under the Body planet next to fasting/water; reminders per meal; planned vs eaten).
+3. NEW IDEA – "learn from a source" planets (owner's own words, summarised):
+   He picks any source he admires (e.g. a doctor's YouTube channel on OCD treatment, a philosophy channel,
+   a porn-addiction recovery method, gym exercises), extracts its method/style/content with Gemini as a JSON file,
+   imports it into a NEW planet in Madar. Madar turns it into a program: daily tasks, exercises, quizzes,
+   interactive practice, graded step by step until he masters it; it evaluates his daily results, picks the next
+   step from them, and keeps him going when he slacks or gets bored (plays on what motivates him).
+   Design notes: we define the JSON format + a ready Gemini prompt; progression ladder with pass criteria so it
+   works offline; health/therapy topics stay "practice & track" with a gentle note to see a professional
+   (no diagnosis/treatment claims); content is his own import, stays on device.
+4. AI LINK: he asked about "login with ChatGPT/Claude" to send/receive JSON, else API. Proposed (awaiting choice):
+   A) copy/share the prompt → paste the JSON back (no key, no cost) [recommended]; B) his own API key (already built
+   in ai_chat); C) account login – not offered to third-party apps.
+5. Pending from before: «Flappy Orbit» name question (A keep / B Orbit Flutter / C new name).
+Then continue the earlier plan (system integration, remaining Tier 1 games, Tier 2 batches).
+
 Preview APK #15 shipped: commit d9d5204, CI run 37652536745 green, artifact madar-apk-15 (id 11500185799).
 It contains: everything up to Money (APK #14) + Life planets (integrated, reviewed, fixed) + Madar Cinema hall
 (Growth planet card) with the demo, Metropolis Machine, Flappy Orbit and Saved Games.

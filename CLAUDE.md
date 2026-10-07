@@ -37,5 +37,12 @@ Example of the right style:
 >
 > جاوب بحرف وحد، مثلاً: «1ب».
 
+## How to work (standing rule, set by the owner)
+
+- Work **one part at a time**: finish it, verify it, ship an APK, report — then the next part.
+- **Save tokens**: no big parallel fan-outs. At most 1–2 agents at a time; do small things directly.
+  No duplicate verification passes when CI already runs the same checks.
+- Never leave several half-finished things running; stop only at resumable points.
+
 The project itself lives in `madar/` (see `madar/README.md`; while work is paused or
 interrupted, `madar/.resume/RESUME.md` says what is in progress and how to resume).
