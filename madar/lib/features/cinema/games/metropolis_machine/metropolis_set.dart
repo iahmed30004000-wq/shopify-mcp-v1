@@ -9,7 +9,7 @@ import 'metropolis_rules.dart';
 
 // The machine city of Metropolis Machine, inked with the rig toolkit so the
 // set boils and hatches like the cast: a sky of light shafts, stepped
-// towers with a ten-hour shift clock, a catwalk where the shift change
+// towers with a shift clock, a catwalk where the shift change
 // trudges past, one wall of machinery per hall (gears, pipes, cable
 // panels, lift shafts, turbines) that slides to the next hall on the
 // conveyor between bosses, pumping pistons, and riveted floor plates.
@@ -204,7 +204,7 @@ void _windows(InkBuild b, double x, double w, double h, double cell, Color lit, 
 }
 
 // ---------------------------------------------------------------------------
-// The far city with the ten-hour shift clock
+// The far city with the shift clock
 
 class _FarCity extends _Plane {
   _FarCity(this.game, this.state, {super.priority}) : super(parallax: 0.1, period: 500, scroll: () => state.scroll) {
@@ -258,20 +258,20 @@ class _FarCity extends _Plane {
     _windows(b, 324, 122, 350, 14, lit, darkWin, litShare: share * 0.85, salt: 4);
     _windows(b, 464, 52, 195, 14, lit, darkWin, litShare: share, salt: 5);
     b.endLayer();
-    // The ten-hour shift clock on the tallest tower: the hour hand climbs a
-    // notch per machine beaten.
+    // The shift clock on the tallest tower (a plain twelve-hour dial): the
+    // hour hand climbs an hour per machine beaten.
     const cx = 155.0, cy = -372.0, r = 34.0;
     b.layer();
     b.shape(_mix(c.fill(PaletteRole.paper), c.fill(PaletteRole.midtone), 0.25), ink: 0.9);
     b.pen.circle(cx, cy, r);
     b.inkLine(b.lw * 0.5);
-    for (var i = 0; i < 10; i++) {
-      final a = i * math.pi * 2 / 10 - math.pi / 2;
+    for (var i = 0; i < 12; i++) {
+      final a = i * math.pi * 2 / 12 - math.pi / 2;
       b.pen
         ..moveTo(cx + math.cos(a) * r * 0.82, cy + math.sin(a) * r * 0.82)
         ..lineTo(cx + math.cos(a) * r * 0.94, cy + math.sin(a) * r * 0.94);
     }
-    final hour = -math.pi / 2 + (state.hall + 1) * math.pi * 2 / 10;
+    final hour = -math.pi / 2 + (state.hall + 1) * math.pi * 2 / 12;
     final minute = -math.pi / 2 + (b.time * 0.4) % (math.pi * 2);
     b.inkFill();
     b.pen

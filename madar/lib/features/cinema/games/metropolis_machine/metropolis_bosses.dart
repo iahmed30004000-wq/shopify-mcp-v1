@@ -163,7 +163,7 @@ abstract class MachineRig extends HoseRig {
 // ---------------------------------------------------------------------------
 
 /// **The Clock-Press** (المِكبَس الساعاتي): a riveted art-deco column with a
-/// ten-hour dial for a face and a grille mouth, an overhead rail across the
+/// plain twelve-hour dial for a face and a grille mouth, an overhead rail across the
 /// hall and a piston hammer that slides along it, winds up with a ratchet
 /// and stamps the floor where the hero stood. The hammer head rests on the
 /// floor after a stamp – that is when the wrench can reach its gear hub.
@@ -337,9 +337,9 @@ class ClockPressRig extends MachineRig {
     pen.circle(dialX, dialY, dr * 1.16);
     b.shape(paper, ink: 0.8);
     pen.circle(dialX, dialY, dr);
-    for (var i = 0; i < 10; i++) {
-      final a = -math.pi / 2 + i * math.pi / 5;
-      b.inkLine(b.lw * (i.isEven ? 0.9 : 0.55));
+    for (var i = 0; i < 12; i++) {
+      final a = -math.pi / 2 + i * math.pi / 6;
+      b.inkLine(b.lw * (i % 3 == 0 ? 0.9 : 0.55));
       pen
         ..moveTo(dialX + math.cos(a) * dr * 0.74, dialY + math.sin(a) * dr * 0.74)
         ..lineTo(dialX + math.cos(a) * dr * 0.9, dialY + math.sin(a) * dr * 0.9);
@@ -1199,8 +1199,12 @@ class DynamoRig extends MachineRig {
   double _wheel = 0;
   double _wobble = 0;
 
+  /// Design x of the cockpit's centre: over the housing's crown, inside the
+  /// stage (further out, the right curtain hid the Baron all fight long).
+  static const double _cockpitX = 0.04;
+
   /// The cockpit's floor in character space (where the Baron stands).
-  Offset get cockpitAnchor => Offset(-dir * hh * 0.12, -hh * 0.98 + _lean.value * hh * 0.1);
+  Offset get cockpitAnchor => Offset(dir * hh * _cockpitX, -hh * 0.98 + _lean.value * hh * 0.1);
 
   @override
   void animate(double h) {
@@ -1337,19 +1341,20 @@ class DynamoRig extends MachineRig {
     // Cockpit rail on top (the Baron rides here).
     b.layer();
     b.inkLine(b.lw * 0.9);
+    const k0 = _cockpitX - 0.18, k1 = _cockpitX + 0.18;
     pen
-      ..moveTo(-hh * 0.3, -hh * 0.98)
-      ..lineTo(-hh * 0.3, -hh * 1.12)
-      ..lineTo(hh * 0.06, -hh * 1.12)
-      ..lineTo(hh * 0.06, -hh * 0.98);
+      ..moveTo(hh * k0, -hh * 0.98)
+      ..lineTo(hh * k0, -hh * 1.12)
+      ..lineTo(hh * k1, -hh * 1.12)
+      ..lineTo(hh * k1, -hh * 0.98);
     for (var i = 1; i < 4; i++) {
-      final x = -hh * 0.3 + i * hh * 0.09;
+      final x = hh * k0 + i * hh * 0.09;
       pen
         ..moveTo(x, -hh * 0.98)
         ..lineTo(x, -hh * 1.12);
     }
     b.shape(iron, ink: 0.8);
-    pen.roundRect(-hh * 0.34, -hh * 1.0, hh * 0.1, -hh * 0.94, hh * 0.006);
+    pen.roundRect(hh * (k0 - 0.04), -hh * 1.0, hh * (k1 + 0.04), -hh * 0.94, hh * 0.006);
     b.endLayer();
 
     // The great eye: a porthole with shutter plates.

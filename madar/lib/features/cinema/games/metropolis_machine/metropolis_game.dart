@@ -84,7 +84,10 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   bool _entering = false;
   double _enterFrom = 0;
   bool _ended = false;
-  String _machineLabel = '';
+  /// Bumped whenever the show's flow is cut (dispose, a debug jump): a card
+  /// that completes afterwards must not resume a stale continuation
+  /// (`transitions.clear()` completes pending cards).
+  int _flow = 0;
   Offset? _heroSpot;
   bool _baronFlying = false;
   bool _finaleCardShown = false;
@@ -129,10 +132,13 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       : IntertitleCard(text: l10n.cinemaGameOver, subtitle: l10n.cinemaMetropolisLostSubtitle, kind: IntertitleKind.gameOver);
 
   @override
+  // One row up top: score at the start, the reels in the middle, pause at
+  // the end. The machine's number rides on the boss bar's name plate
+  // («القلب المِرجَل — ٢/٥»): a fourth item in the top row collided with the
+  // score once it reached four digits (and at once in English).
   List<(HudSlot, HudItem)> buildHud() => [
     (HudSlot.topStart, hudKit.score()),
     (HudSlot.topCenter, hudKit.lives()),
-    (HudSlot.topCenter, hudKit.label(() => _machineLabel)),
     (HudSlot.topEnd, hudKit.pauseButton(pauseGame)),
     (HudSlot.bottomCenter, hudKit.bossBar()),
   ];
@@ -227,6 +233,9 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     MetroBoss.motherDynamo => l10n.cinemaMetropolisDynamoName,
   };
 
+  /// The boss bar's name plate: the machine's name and its number.
+  String bossPlate(int index) => l10n.cinemaMetropolisBossPlate(bossName(index), digits(index + 1), digits(MetroStage.bossCount));
+
   String _bossLine(int index) => switch (MetroBoss.values[index]) {
     MetroBoss.clockPress => l10n.cinemaMetropolisPressLine,
     MetroBoss.boilerHeart => l10n.cinemaMetropolisBoilerLine,
@@ -276,7 +285,6 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     hud
       ..lives = MetroLives.start
       ..maxLives = MetroLives.max;
-    _machineLabel = l10n.cinemaMetropolisHudMachine(digits(1), digits(MetroStage.bossCount));
     final sink = context.scoreSink;
     if (sink != null) {
       unawaited(
@@ -335,11 +343,12 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       actTime = 200; // once
       final one = IntertitleCard(text: l10n.cinemaMetropolisIntroOne, kind: IntertitleKind.dialogue);
       final two = IntertitleCard(text: l10n.cinemaMetropolisIntroTwo, subtitle: l10n.cinemaMetropolisControlsHint, kind: IntertitleKind.dialogue);
+      final flow = _flow;
       unawaited(
         transitions.intertitle(one, hold: const Duration(milliseconds: 2400)).then((_) async {
-          if (_ended) return;
+          if (!_live(flow)) return;
           await transitions.intertitle(two, hold: const Duration(milliseconds: 3600));
-          if (_ended) return;
+          if (!_live(flow)) return;
           _crowdVisible = false;
           _showBossCard();
         }),
@@ -354,9 +363,10 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     if (last) music.stinger(Stinger.drumroll);
     final subtitle = '${l10n.cinemaMetropolisMachineOf(digits(bossIndex + 1), digits(MetroStage.bossCount))} — ${_bossLine(bossIndex)}';
     final card = IntertitleCard(text: bossName(bossIndex), subtitle: subtitle, kind: IntertitleKind.chapter);
+    final flow = _flow;
     unawaited(
       transitions.intertitle(card, hold: const Duration(milliseconds: 2900)).then((_) {
-        if (_ended) return;
+        if (!_live(flow)) return;
         _enterBoss();
       }),
     );
@@ -398,10 +408,9 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     _entering = true;
     fightTime = 0;
     flawless = true;
-    _machineLabel = l10n.cinemaMetropolisHudMachine(digits(bossIndex + 1), digits(MetroStage.bossCount));
     hud
       ..bossHealth = 1
-      ..bossName = bossName(bossIndex)
+      ..bossName = bossPlate(bossIndex)
       ..progress = null;
     heroBody
       ..maxX = kind.heroLimit
@@ -999,7 +1008,10 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
         feedback(CinemaSound.pop, volume: 0.5, pitch: 0.6 + _rng.nextDouble() * 0.3);
       }
     }
-    if (actTime >= 2.4) {
+    // Once: the sentinel jumps past the window (a bare `>= 2.4` re-fired
+    // the taunt every tick until the first card's continuation started the
+    // conveyor – under the card, with the stinger doubled).
+    if (actTime >= 2.4 && actTime < 100) {
       actTime = 1000;
       if (bossIndex >= MetroStage.bossCount - 1) {
         _startFinale();
@@ -1012,9 +1024,10 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   void _showTaunt() {
     final card = IntertitleCard(text: _taunt(bossIndex), subtitle: l10n.cinemaMetropolisTauntSigned, kind: IntertitleKind.dialogue);
     music.stinger(Stinger.rimshot);
+    final flow = _flow;
     unawaited(
       transitions.intertitle(card, hold: const Duration(milliseconds: 2600)).then((_) {
-        if (_ended) return;
+        if (!_live(flow)) return;
         _startTransit();
       }),
     );
@@ -1126,6 +1139,40 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     if (b != null && act == MetroAct.fight) hud.bossHealth = b.health;
   }
 
+  /// Whether a continuation captured at [flow] may still run.
+  bool _live(int flow) => !_ended && flow == _flow;
+
+  /// The intermission (pause button, back, backgrounding) lets go of every
+  /// held control: the engine forwards no tap-cancel, so a finger that was
+  /// on the pad when the app went to the background would otherwise keep
+  /// the hero running after the resume.
+  @override
+  void pauseGame() {
+    releaseControls();
+    super.pauseGame();
+  }
+
+  /// Lets go of the pad, the buttons and any half-made swipe.
+  void releaseControls() {
+    _padHeld = false;
+    _padDir = 0;
+    _padSwiped = false;
+    _actionDown = false;
+    _swipeDone = false;
+    _jumpHeldButton = false;
+    _jumpHeldSwipe = false;
+    input.clear();
+  }
+
+  @override
+  void onDispose() {
+    // Disposing clears the transitions, which completes any pending card:
+    // its continuation must find the show over.
+    _flow++;
+    _ended = true;
+    super.onDispose();
+  }
+
   @override
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
@@ -1229,6 +1276,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     bossIndex = index.clamp(0, MetroStage.bossCount - 1);
     _hallSlide = 0;
     _crowdVisible = false;
+    _flow++;
     transitions.clear();
     _enterBoss();
     final comp = _bossComponent!, b = brain!;
@@ -1279,6 +1327,7 @@ class _HeroShadow extends Component {
 
   final MetropolisGame game;
   final Paint _paint = Paint();
+  static const Rect _unit = Rect.fromLTRB(-1, -1, 1, 1);
 
   @override
   void render(Canvas canvas) {
@@ -1290,6 +1339,12 @@ class _HeroShadow extends Component {
     final lift = (floor - hb.y).clamp(0.0, 260.0) / 260;
     final w = 30 * (1 - lift * 0.45);
     _paint.color = game.skin.palette.ink.withValues(alpha: 0.22 * (1 - lift * 0.6));
-    canvas.drawOval(Rect.fromCenter(center: Offset(hb.x, floor + 2), width: w * 2, height: w * 0.42), _paint);
+    // A const unit oval, scaled: no geometry built per frame.
+    canvas
+      ..save()
+      ..translate(hb.x, floor + 2)
+      ..scale(w, w * 0.21)
+      ..drawOval(_unit, _paint)
+      ..restore();
   }
 }

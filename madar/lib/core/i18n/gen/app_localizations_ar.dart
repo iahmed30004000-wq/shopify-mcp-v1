@@ -18473,7 +18473,8 @@ class L10nAr extends L10n {
   String get cinemaFlappyOrbitTitle => 'رفرفة المدار';
 
   @override
-  String get cinemaFlappyOrbitTagline => 'رفرف بين الكواكب على أنغام السوينغ';
+  String get cinemaFlappyOrbitTagline =>
+      'رفرف فوق سطوح المدينة على أنغام السوينغ';
 
   @override
   String get cinemaFlappyOrbitHomage =>
@@ -18787,11 +18788,11 @@ class L10nAr extends L10n {
 
   @override
   String get cinemaMetropolisOpeningSubtitle =>
-      'الوردية الليلية… والآلات صحيت وحدها';
+      'الوردية الليلية… والآلات استيقظت وحدها';
 
   @override
   String get cinemaMetropolisControlsHint =>
-      'اضغط يسار أو يمين لتركض، المس لتضرب بالمفتاح، اسحب لتندفع';
+      'اضغط يسارًا أو يمينًا لتركض، المس لتضرب بالمفتاح، اسحب للأعلى لتقفز وللجانب لتندفع';
 
   @override
   String get cinemaMetropolisHero => 'مِفتاح';
@@ -18810,8 +18811,8 @@ class L10nAr extends L10n {
   }
 
   @override
-  String cinemaMetropolisHudMachine(String index, String total) {
-    return 'آلة $index/$total';
+  String cinemaMetropolisBossPlate(String name, String index, String total) {
+    return '$name — $index/$total';
   }
 
   @override

@@ -17923,7 +17923,8 @@ class L10nEn extends L10n {
   String get cinemaFlappyOrbitTitle => 'Flappy Orbit';
 
   @override
-  String get cinemaFlappyOrbitTagline => 'Flap between planets to a swing beat';
+  String get cinemaFlappyOrbitTagline =>
+      'Flap over the rooftops to a swing beat';
 
   @override
   String get cinemaFlappyOrbitHomage => 'Homage to 1930s rubber-hose cartoons';
@@ -18242,7 +18243,7 @@ class L10nEn extends L10n {
 
   @override
   String get cinemaMetropolisControlsHint =>
-      'Hold left or right to run, tap to swing the wrench, swipe to dash';
+      'Hold left or right to run, tap to swing the wrench, swipe up to jump and sideways to dash';
 
   @override
   String get cinemaMetropolisHero => 'Miftah';
@@ -18261,8 +18262,8 @@ class L10nEn extends L10n {
   }
 
   @override
-  String cinemaMetropolisHudMachine(String index, String total) {
-    return 'Machine $index/$total';
+  String cinemaMetropolisBossPlate(String name, String index, String total) {
+    return '$name — $index/$total';
   }
 
   @override

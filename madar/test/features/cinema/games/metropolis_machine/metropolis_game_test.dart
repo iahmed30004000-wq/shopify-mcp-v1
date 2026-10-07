@@ -100,9 +100,17 @@ void main() {
     expect(g.state, SceneState.playing, reason: 'the attract bot never runs out of reels');
     expect(g.hud.lives, greaterThanOrEqualTo(1));
     expect(kit.music.last.log, contains('cue boss'));
-    // Now beat every machine through the cheat and watch the arc.
+    // Now beat every machine through the cheat and watch the arc; the world
+    // holds the same components in every hall (one machine at a time, plus
+    // the Baron in the last one): nothing leaks between machines.
+    // (The bot may already have beaten the first machine in its 30 s, so
+    // the count is taken at the first fight of the loop.)
+    int? perHall;
     for (var i = g.bossIndex; i < MetroStage.bossCount; i++) {
       await runUntil(g, () => g.brain != null && !g.entering && !g.transitions.isActive && g.act == MetroAct.fight && g.bossIndex == i, maxSeconds: 40, what: 'fight $i');
+      final components = g.world.children.length - (i == MetroStage.bossCount - 1 ? 1 : 0);
+      perHall ??= components;
+      expect(components, perHall, reason: 'components in hall $i');
       g.debugDefeatBoss();
       expect(g.act, MetroAct.bossFall);
       expect(kit.music.last.log, contains('stinger bossDefeat'));
@@ -259,8 +267,8 @@ void main() {
       await toFight(g);
       g.debugPeaceful = true;
       final layer = g.children.whereType<HudLayer>().single;
-      final placements = layer.placements;
-      expect(placements.length, 5);
+      var placements = layer.placements;
+      expect(placements.length, 4);
       // The items are private to the layer: identify them by slot and order.
       Rect ofSlot(HudSlot s, int n) => placements.where((p) => p.$1 == s).elementAt(n).$2;
       final pad = g.padHintRect;
@@ -288,9 +296,188 @@ void main() {
       } else {
         expect(score.left, lessThan(pause.left));
       }
+      // The machine's number rides on the boss bar's plate.
+      expect(g.hud.bossName, g.bossPlate(0));
+      expect(g.hud.bossName, contains(g.bossName(0)));
+      expect(g.hud.bossName, contains(g.digits(MetroStage.bossCount)));
+      // The top row never collides, from the first point to a long show.
+      for (final points in const [0, 7, 120, 1000, 9000, 50000]) {
+        g.addScore(points);
+        await runFor(g, 1.2);
+        placements = layer.placements;
+        final top = placements.where((p) => p.$1 == HudSlot.topStart || p.$1 == HudSlot.topCenter || p.$1 == HudSlot.topEnd).map((p) => p.$2).toList();
+        expect(top.length, 3);
+        for (var i = 0; i < top.length; i++) {
+          for (var j = i + 1; j < top.length; j++) {
+            expect(top[i].overlaps(top[j]), isFalse, reason: 'top row items overlap at score ${g.hud.score} in $locale: ${top[i]} vs ${top[j]}');
+          }
+        }
+      }
       await tester.pump(const Duration(seconds: 1));
     });
   }
+
+  testWidgets('a beaten machine: one taunt card, one rimshot; the conveyor waits for the card', (tester) async {
+    final g = await mount(tester);
+    await toFight(g);
+    g.debugDefeatBoss();
+    await runUntil(g, () => g.transitions.isActive && g.transitions.coverage > 0.95, maxSeconds: 10, what: 'the taunt card');
+    await runFor(g, 0.5);
+    expect(g.act, MetroAct.bossFall, reason: 'the conveyor waits for the card');
+    expect(g.bossRig, isNotNull, reason: 'the beaten machine stays on stage under the card');
+    await runUntil(g, () => g.act == MetroAct.transit, maxSeconds: 10, what: 'transit');
+    expect(g.transitions.isActive, isFalse);
+    expect(kit.music.last.log.where((l) => l == 'stinger rimshot').length, 1, reason: 'one card, one rimshot');
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('leaving during a card never resumes the show on the disposed game', (tester) async {
+    final g = await mount(tester);
+    await toFight(g);
+    g.debugDefeatBoss();
+    await runUntil(g, () => g.transitions.isActive && g.transitions.coverage > 0.95, maxSeconds: 10, what: 'the taunt card');
+    expect(g.act, MetroAct.bossFall);
+    // Leave the hall: the view is torn down, the transitions are cleared and
+    // the pending card completes.
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump();
+    await null;
+    expect(g.act, MetroAct.bossFall, reason: 'the conveyor must not start on a disposed game');
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a cut flow is not resumed by its stale card (debug jumps mid-card)', (tester) async {
+    final g = await mount(tester);
+    await toFight(g);
+    g.debugDefeatBoss();
+    await runUntil(g, () => g.transitions.isActive && g.transitions.coverage > 0.95, maxSeconds: 10, what: 'the taunt card');
+    g.debugJumpToBoss(2);
+    await runFor(g, 0.5);
+    expect(g.act, MetroAct.fight, reason: 'the stale taunt card does not start the conveyor');
+    expect(g.bossIndex, 2);
+    expect(g.brain!.kind, MetroBoss.switchboardSpider);
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('the intermission and backgrounding let go of a held control; input is ignored while paused', (tester) async {
+    final g = await mount(tester);
+    await toFight(g);
+    g.debugPeaceful = true;
+    final pad = g.padZone;
+    final padRight = Offset(pad.left + pad.width * 0.8, pad.bottom - 30);
+    // Hold the pad, then pause (the finger is still down when the booth opens).
+    g.onScreenTapDown(Vector2.zero(), padRight);
+    await runFor(g, 0.3);
+    expect(g.heroBody.vx, greaterThan(100));
+    g.pauseGame();
+    expect(g.state, SceneState.paused);
+    expect(g.moveHeld, 0);
+    // Taps on the paused stage do nothing.
+    final play = g.playRect;
+    g.onScreenTapDown(Vector2.zero(), play.center);
+    g.onScreenTapUp(Vector2.zero(), play.center);
+    g.resumeGame();
+    await runFor(g, 0.4);
+    expect(g.heroBody.vx, 0, reason: 'no phantom run after the intermission');
+    expect(g.heroBody.swinging, isFalse, reason: 'the tap on the booth never swings');
+    // The same with the app sent to the background mid-hold.
+    g.onScreenTapDown(Vector2.zero(), padRight);
+    await runFor(g, 0.2);
+    g.lifecycleStateChange(ui.AppLifecycleState.paused);
+    expect(g.state, SceneState.paused);
+    g.lifecycleStateChange(ui.AppLifecycleState.resumed);
+    g.resumeGame();
+    await runFor(g, 0.4);
+    expect(g.heroBody.vx, 0, reason: 'no phantom run after coming back');
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('pausing during a chapter card: the machine waits for the resume, then the fight goes on', (tester) async {
+    final g = await mount(tester);
+    await toFight(g);
+    g.debugDefeatBoss();
+    await runUntil(g, () => g.act == MetroAct.transit, maxSeconds: 20, what: 'transit');
+    await runUntil(g, () => g.transitions.isActive && g.transitions.coverage > 0.95, maxSeconds: 10, what: 'the chapter card');
+    g.pauseGame();
+    final at = g.clock.time;
+    await runFor(g, 6);
+    expect(g.state, SceneState.paused);
+    expect(g.entering, isTrue, reason: 'the machine waits for the show to resume');
+    expect(g.clock.time - at, greaterThan(5.9));
+    g.resumeGame();
+    await runUntil(g, () => g.brain != null && !g.entering && g.brain!.fighting, maxSeconds: 10, what: 'the second machine');
+    expect(g.bossIndex, 1);
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('the same seed plays the same show', (tester) async {
+    Future<List<Object>> play(int seed) async {
+      await tester.pumpWidget(
+        metroHost(
+          kit: TestKit().kit,
+          skipOpening: true,
+          builder: (ctx) => MetropolisGame(
+            autoplay: true,
+            context: CinemaContext(kit: ctx.kit, l10n: ctx.l10n, sound: ctx.sound, direction: ctx.direction, skipOpening: true, seed: seed),
+          ),
+        ),
+      );
+      for (var i = 0; i < 4; i++) {
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      final g = mountedMetro(tester);
+      await runUntil(g, () => g.state != SceneState.loading, maxSeconds: 2, what: 'load');
+      await toFight(g);
+      await runFor(g, 25);
+      final out = <Object>[
+        g.hud.score,
+        g.hud.lives,
+        g.bossIndex,
+        g.act.name,
+        g.brain?.attackNo ?? -1,
+        g.brain?.hp ?? -1,
+        g.heroBody.x.toStringAsFixed(3),
+        g.strikesLanded,
+        g.livesLost,
+        g.parries,
+      ];
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump(const Duration(seconds: 1));
+      return out;
+    }
+
+    final a = await play(42);
+    final b = await play(42);
+    expect(b, a, reason: 'deterministic with the seed');
+  });
+
+  testWidgets('restart: a fresh show, nothing carried over from the old one', (tester) async {
+    final g = await mount(tester, autoplay: true);
+    await toFight(g);
+    g.debugJumpToBoss(3, phase: 1);
+    g.addScore(400);
+    g.debugHurtHero();
+    await runFor(g, 0.5);
+    g.requestRestart();
+    for (var i = 0; i < 6; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    final fresh = mountedMetro(tester);
+    expect(identical(fresh, g), isFalse);
+    await runUntil(fresh, () => fresh.state != SceneState.loading, maxSeconds: 2, what: 'load');
+    await toFight(fresh);
+    expect(fresh.bossIndex, 0);
+    expect(fresh.hud.score, 0);
+    expect(fresh.hud.lives, MetroLives.start);
+    expect(fresh.brain!.kind, MetroBoss.clockPress);
+    expect(fresh.platforms.where((p) => p.active), isEmpty);
+    expect(fresh.livesLost, 0);
+    expect(fresh.strikesLanded, 0);
+    expect(fresh.flawless, isTrue);
+    expect(fresh.assist, 0);
+    expect(tester.takeException(), isNull);
+    await tester.pump(const Duration(seconds: 1));
+  });
 
   testWidgets('every machine comes on stage with its phases and its platforms', (tester) async {
     final g = await mount(tester);

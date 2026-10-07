@@ -168,6 +168,33 @@ void main() {
     await settleTaps(tester);
   });
 
+  testWidgets('the chapter card hides the sky, so it never costs a life (no tap needed)', (tester) async {
+    final g = await mountOrbit(tester, kit: kit, haptics: haptics, autoplay: true, gatesPerBoss: 2);
+    await runUntil(g, () => g.isPlaying, maxSeconds: 3, what: 'play');
+    await runUntil(g, () => g.act == FlappyAct.bossIntro, maxSeconds: 30, what: 'the chapter card');
+    // The player reads the card and does not tap.
+    g.autoplay = false;
+    final lives = g.hud.lives;
+    await runUntil(g, () => g.transitions.isActive, maxSeconds: 2, what: 'the card');
+    await runFor(g, 0.1);
+    g.onScreenTapDown(Vector2.zero(), Offset.zero);
+    expect(g.flight.vy, 0, reason: 'a tap behind the card is ignored: the rocket hovers');
+    var hiddenTime = 0.0;
+    await runUntil(
+      g,
+      () {
+        if (g.transitions.isActive) hiddenTime += 1 / 60;
+        return g.bossCardDone && !g.transitions.isActive;
+      },
+      maxSeconds: 8,
+      what: 'the card to lift',
+    );
+    expect(hiddenTime, greaterThan(1), reason: 'the card really covered the sky');
+    expect(g.hud.lives, lives, reason: 'no life lost behind the card');
+    expect(g.heroY, lessThan(FlightTuning.floor - 120), reason: 'the rocket is left at a fair height');
+    await settleTaps(tester);
+  });
+
   testWidgets('one Maestro and the loop-the-loop ending', (tester) async {
     final g = await mountOrbit(tester, kit: kit, haptics: haptics, autoplay: true, gatesPerBoss: 2, bossCount: 1, onResult: (r) => reported = r);
     await runUntil(g, () => g.isPlaying, maxSeconds: 3, what: 'play');

@@ -28392,7 +28392,7 @@ abstract class L10n {
   /// No description provided for @cinemaFlappyOrbitTagline.
   ///
   /// In ar, this message translates to:
-  /// **'رفرف بين الكواكب على أنغام السوينغ'**
+  /// **'رفرف فوق سطوح المدينة على أنغام السوينغ'**
   String get cinemaFlappyOrbitTagline;
 
   /// No description provided for @cinemaFlappyOrbitHomage.
@@ -28986,13 +28986,13 @@ abstract class L10n {
   /// Metropolis Machine opening card subtitle
   ///
   /// In ar, this message translates to:
-  /// **'الوردية الليلية… والآلات صحيت وحدها'**
+  /// **'الوردية الليلية… والآلات استيقظت وحدها'**
   String get cinemaMetropolisOpeningSubtitle;
 
   /// Controls line on the opening card
   ///
   /// In ar, this message translates to:
-  /// **'اضغط يسار أو يمين لتركض، المس لتضرب بالمفتاح، اسحب لتندفع'**
+  /// **'اضغط يسارًا أو يمينًا لتركض، المس لتضرب بالمفتاح، اسحب للأعلى لتقفز وللجانب لتندفع'**
   String get cinemaMetropolisControlsHint;
 
   /// Name of the hero, the night engineer (miftah = wrench/key)
@@ -29019,11 +29019,11 @@ abstract class L10n {
   /// **'الآلة {index} من {total}'**
   String cinemaMetropolisMachineOf(String index, String total);
 
-  /// HUD plaque: which boss of how many
+  /// Boss bar name plate: the machine name and which machine of how many; numbers are pre-formatted
   ///
   /// In ar, this message translates to:
-  /// **'آلة {index}/{total}'**
-  String cinemaMetropolisHudMachine(String index, String total);
+  /// **'{name} — {index}/{total}'**
+  String cinemaMetropolisBossPlate(String name, String index, String total);
 
   /// Boss 1 name
   ///

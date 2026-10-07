@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/cinema/engine/cinema_engine.dart';
 import 'package:madar/features/cinema/games/flappy_orbit/flappy_orbit_game.dart';
+import 'package:madar/features/cinema/games/flappy_orbit/flappy_orbit_gates.dart';
 import 'package:madar/features/cinema/games/flappy_orbit/flappy_orbit_logic.dart';
 
 import '../../../../helpers/screenshot_harness.dart';
@@ -94,10 +95,21 @@ void main() {
 
   for (final locale in const [Locale('ar'), Locale('en')]) {
     testWidgets('mid-flight – ${locale.languageCode}', (tester) async {
-      await shoot(tester, 'play', (g) async {
-        await toPlay(g);
-        await runUntil(g, () => g.gatesPassed >= 3 && g.pilot.action == RigAction.jump && g.pilot.actionTime < 0.2, maxSeconds: 30, what: 'a boost between gates');
-      }, locale: locale, gatesPerBoss: 8);
+      await shoot(
+        tester,
+        'play',
+        (g) async {
+          await toPlay(g);
+          await runUntil(
+            g,
+            () => g.gatesPassed >= 3 && g.pilot.action == RigAction.jump && g.pilot.actionTime < 0.2,
+            maxSeconds: 30,
+            what: 'a boost between gates',
+          );
+        },
+        locale: locale,
+        gatesPerBoss: 8,
+      );
     });
   }
 
@@ -153,7 +165,17 @@ void main() {
     await shoot(tester, 'boss2', (g) async {
       await toBoss(g);
       await runUntil(g, () => g.brain!.phase == BossPhase.thunder, maxSeconds: 60, what: 'phase two');
-      await runUntil(g, () => g.attacks.activeNotes > 0 && g.attacks.noteX(0) < 260, maxSeconds: 20, what: 'notes in the air');
+      // A note in flight, half-way to the rocket (any pool slot: a free
+      // slot keeps the x of its last flight).
+      bool noteInFlight() {
+        for (var i = 0; i < BossAttacks.noteCount; i++) {
+          final x = g.attacks.noteX(i);
+          if (g.attacks.noteActive(i) && x < 185 && x > FlappyOrbitGame.heroX + 35) return true;
+        }
+        return false;
+      }
+
+      await runUntil(g, noteInFlight, maxSeconds: 20, what: 'a note in flight');
     });
   });
 
@@ -200,20 +222,34 @@ void main() {
 
   for (final locale in const [Locale('ar'), Locale('en')]) {
     testWidgets('intermission – ${locale.languageCode}', (tester) async {
-      await shoot(tester, 'pause', (g) async {
-        await toPlay(g);
-        await runFor(g, 2.5);
-        g.pauseGame();
-      }, locale: locale, gatesPerBoss: 8, trailingFrames: 14);
+      await shoot(
+        tester,
+        'pause',
+        (g) async {
+          await toPlay(g);
+          await runFor(g, 2.5);
+          g.pauseGame();
+        },
+        locale: locale,
+        gatesPerBoss: 8,
+        trailingFrames: 14,
+      );
     });
 
     testWidgets('results – ${locale.languageCode}', (tester) async {
-      await shoot(tester, 'results', (g) async {
-        await toPlay(g);
-        await runFor(g, 4);
-        g.autoplay = false;
-        await runUntil(g, () => g.state == SceneState.ended, maxSeconds: 60, what: 'results');
-      }, locale: locale, gatesPerBoss: 8, trailingFrames: 26);
+      await shoot(
+        tester,
+        'results',
+        (g) async {
+          await toPlay(g);
+          await runFor(g, 4);
+          g.autoplay = false;
+          await runUntil(g, () => g.state == SceneState.ended, maxSeconds: 60, what: 'results');
+        },
+        locale: locale,
+        gatesPerBoss: 8,
+        trailingFrames: 26,
+      );
     });
   }
 }

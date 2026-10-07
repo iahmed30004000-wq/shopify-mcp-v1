@@ -17916,7 +17916,7 @@
   "cinemaDemoOpening": "المشهد الأول",
   "cinemaDemoOpeningSubtitle": "المس الشاشة لتقفز فوق البراميل!",
   "cinemaFlappyOrbitTitle": "رفرفة المدار",
-  "cinemaFlappyOrbitTagline": "رفرف بين الكواكب على أنغام السوينغ",
+  "cinemaFlappyOrbitTagline": "رفرف فوق سطوح المدينة على أنغام السوينغ",
   "cinemaFlappyOrbitHomage": "تحية لرسوم الخرطوم المطاطي في الثلاثينيات",
   "cinemaMetropolisTitle": "آلة المتروبوليس",
   "cinemaMetropolisTagline": "واجه الآلات العملاقة واحدة تلو الأخرى",
@@ -18169,11 +18169,11 @@
   "@cinemaFlappyOrbitEndPie": {
     "description": "End card subtitle after losing all lives"
   },
-  "cinemaMetropolisOpeningSubtitle": "الوردية الليلية… والآلات صحيت وحدها",
+  "cinemaMetropolisOpeningSubtitle": "الوردية الليلية… والآلات استيقظت وحدها",
   "@cinemaMetropolisOpeningSubtitle": {
     "description": "Metropolis Machine opening card subtitle"
   },
-  "cinemaMetropolisControlsHint": "اضغط يسار أو يمين لتركض، المس لتضرب بالمفتاح، اسحب لتندفع",
+  "cinemaMetropolisControlsHint": "اضغط يسارًا أو يمينًا لتركض، المس لتضرب بالمفتاح، اسحب للأعلى لتقفز وللجانب لتندفع",
   "@cinemaMetropolisControlsHint": {
     "description": "Controls line on the opening card"
   },
@@ -18201,10 +18201,13 @@
       }
     }
   },
-  "cinemaMetropolisHudMachine": "آلة {index}/{total}",
-  "@cinemaMetropolisHudMachine": {
-    "description": "HUD plaque: which boss of how many",
+  "cinemaMetropolisBossPlate": "{name} — {index}/{total}",
+  "@cinemaMetropolisBossPlate": {
+    "description": "Boss bar name plate: the machine name and which machine of how many; numbers are pre-formatted",
     "placeholders": {
+      "name": {
+        "type": "String"
+      },
       "index": {
         "type": "String"
       },

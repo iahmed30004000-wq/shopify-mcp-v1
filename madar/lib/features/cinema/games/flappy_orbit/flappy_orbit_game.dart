@@ -159,6 +159,11 @@ class FlappyOrbitGame extends CinemaGame {
   Vector2 get maestroCentre => _maestroCentre;
   final Vector2 _maestroCentre = Vector2.zero();
 
+  /// Where the follow-spot aims (world units). The stage spot is a floor
+  /// light: its bright pool would wash the ink out of a face, so it aims at
+  /// the floor of the air just under the star and the beam lights them.
+  final Vector2 _spotAt = Vector2.zero();
+
   bool get _bossOnStage => act == FlappyAct.bossIntro || act == FlappyAct.boss || act == FlappyAct.bossOutro;
 
   @override
@@ -240,6 +245,8 @@ class FlappyOrbitGame extends CinemaGame {
     switch (act) {
       case FlappyAct.launch:
         _liftoff();
+      case FlappyAct.bossIntro when transitions.isActive:
+        break; // The chapter card hides the rocket (it hovers, see _hover).
       case FlappyAct.flight || FlappyAct.bossIntro || FlappyAct.boss || FlappyAct.bossOutro:
         _flap();
       case FlappyAct.liftoff || FlappyAct.finale || FlappyAct.crash:
@@ -325,7 +332,11 @@ class FlappyOrbitGame extends CinemaGame {
         music.setIntensity((0.4 + difficulty.ramp * 0.4 + difficulty.tier * 0.08).clamp(0.0, 1.0));
       case FlappyAct.bossIntro:
         speed = difficulty.speed;
-        _fly(dt);
+        if (transitions.isActive) {
+          _hover(dt);
+        } else {
+          _fly(dt);
+        }
         _moveGates(dt);
         _bossEntrance(dt);
       case FlappyAct.boss:
@@ -376,6 +387,16 @@ class FlappyOrbitGame extends CinemaGame {
       spawner.deal(OrbitStage.width + 100, difficulty);
       music.stinger(Stinger.pickup);
     }
+  }
+
+  /// While the chapter card hides the sky the rocket hovers back to cruise
+  /// height: no gravity, no rooftop, no taps. A player who stops to read the
+  /// card loses nothing, and the fight starts from a fair height.
+  void _hover(double dt) {
+    flight
+      ..y += (cruiseY - flight.y) * (1 - math.exp(-dt * 3))
+      ..vy = 0;
+    pilot.velocity = Offset(speed * 0.3, 0);
   }
 
   /// Gravity, boosts, the ceiling bonk and the rooftop crash.
@@ -562,7 +583,8 @@ class FlappyOrbitGame extends CinemaGame {
     _spotIn -= dt;
     if (_spotIn <= 0) {
       _spotIn = 0.4;
-      stage.spotlight(worldToScreen(_maestroCentre));
+      _spotAt.setValues(p.x, p.y + 14);
+      stage.spotlight(worldToScreen(_spotAt));
     }
     // A thunder-note leaves the baton a beat into the slash, when it points
     // at the hero.
@@ -771,8 +793,8 @@ class FlappyOrbitGame extends CinemaGame {
     _spotIn -= dt;
     if (_spotIn <= 0) {
       _spotIn = 0.3;
-      _maestroCentre.setValues(hero.position.x, flight.y);
-      stage.spotlight(worldToScreen(_maestroCentre));
+      _spotAt.setValues(hero.position.x, flight.y + 46);
+      stage.spotlight(worldToScreen(_spotAt));
     }
     if (t > 3.1) {
       stage.spotlight(null);
@@ -904,6 +926,8 @@ class FlappyOrbitGame extends CinemaGame {
         return;
       case FlappyAct.liftoff || FlappyAct.finale || FlappyAct.crash:
         return;
+      case FlappyAct.bossIntro when transitions.isActive:
+        return; // Hovering behind the chapter card.
       case FlappyAct.flight || FlappyAct.bossIntro || FlappyAct.boss || FlappyAct.bossOutro:
         break;
     }

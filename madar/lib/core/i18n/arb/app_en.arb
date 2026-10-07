@@ -17916,7 +17916,7 @@
   "cinemaDemoOpening": "Scene One",
   "cinemaDemoOpeningSubtitle": "Tap to jump over the barrels!",
   "cinemaFlappyOrbitTitle": "Flappy Orbit",
-  "cinemaFlappyOrbitTagline": "Flap between planets to a swing beat",
+  "cinemaFlappyOrbitTagline": "Flap over the rooftops to a swing beat",
   "cinemaFlappyOrbitHomage": "Homage to 1930s rubber-hose cartoons",
   "cinemaMetropolisTitle": "Metropolis Machine",
   "cinemaMetropolisTagline": "Take on the giant machines one by one",
@@ -18173,7 +18173,7 @@
   "@cinemaMetropolisOpeningSubtitle": {
     "description": "Metropolis Machine opening card subtitle"
   },
-  "cinemaMetropolisControlsHint": "Hold left or right to run, tap to swing the wrench, swipe to dash",
+  "cinemaMetropolisControlsHint": "Hold left or right to run, tap to swing the wrench, swipe up to jump and sideways to dash",
   "@cinemaMetropolisControlsHint": {
     "description": "Controls line on the opening card"
   },
@@ -18201,10 +18201,13 @@
       }
     }
   },
-  "cinemaMetropolisHudMachine": "Machine {index}/{total}",
-  "@cinemaMetropolisHudMachine": {
-    "description": "HUD plaque: which boss of how many",
+  "cinemaMetropolisBossPlate": "{name} — {index}/{total}",
+  "@cinemaMetropolisBossPlate": {
+    "description": "Boss bar name plate: the machine name and which machine of how many; numbers are pre-formatted",
     "placeholders": {
+      "name": {
+        "type": "String"
+      },
       "index": {
         "type": "String"
       },
