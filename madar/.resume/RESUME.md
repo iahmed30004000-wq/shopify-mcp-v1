@@ -62,10 +62,17 @@ Work style: one part at a time → APK after each part; save tokens; 1–2 agent
    Design notes: we define the JSON format + a ready Gemini prompt; progression ladder with pass criteria so it
    works offline; health/therapy topics stay "practice & track" with a gentle note to see a professional
    (no diagnosis/treatment claims); content is his own import, stays on device.
-4. AI LINK: he asked about "login with ChatGPT/Claude" to send/receive JSON, else API. Proposed (awaiting choice):
-   A) copy/share the prompt → paste the JSON back (no key, no cost) [recommended]; B) his own API key (already built
-   in ai_chat); C) account login – not offered to third-party apps.
-6. ORBIT RESET BUTTON: the «reset view» pill (hotfix e2aa71a, lib/features/orbit/presentation/... orbit_scene.dart) must become an icon-only button (no text) that appears ONLY when the view is off its default (planets moved / zoomed / rotated away), and hides again after reset. Keep 48 dp target + a semantics label for TalkBack; double-tap on empty sky still resets.
+4. AI LINK – DECIDED (owner, 2026-10-07): NO login. Copy/share round trip with any AI app (Gemini/ChatGPT/Claude):
+   a) Madar EXPORTS everything he picks as one JSON (+ a ready prompt that tells the AI what to analyse and the exact
+      JSON shape to answer in) → share sheet / copy.
+   b) The AI analyses and answers with a "Madar plan" JSON (schema we define: suggested tasks, habits, routines,
+      meal-plan changes, budget tweaks, learning-planet programs, reminders, notes – each item with a reason).
+   c) He shares/pastes that JSON back into Madar → Madar validates it, shows every suggested change as a card with
+      the AI's reason, he approves/edits/rejects each one, and only approved items are applied (never silent changes;
+      health items stay "track & practice", no diagnosis). Madar keeps a history of applied plans and later shows
+      what improved (before/after from his own data).
+   Same import pipe also carries the "learn from a source" planet JSON (item 3). The existing data package already has
+   the full JSON export + AI-ready Markdown summary with per-section choice – reuse it; the API-key chat stays optional.
 5. Pending from before: «Flappy Orbit» name question (A keep / B Orbit Flutter / C new name).
 Then continue the earlier plan (system integration, remaining Tier 1 games, Tier 2 batches).
 
