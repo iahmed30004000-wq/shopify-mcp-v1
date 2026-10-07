@@ -45,7 +45,22 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 ## Container restart #2 (09:28 UTC)
 All six runs were resumed with resumeFromRunId (completed agents replay from cache; interrupted ones re-run with a RESUMING note + strict memory rule): money review wf_ad90daa6-564 (scratchpad/phase5_integrate.js), engine wf_4495c71d-7d5 (scratchpad/phase7_engine.js; hall no longer builds Saved Games), cards wf_94413da5-0be (scratchpad/jordan_cards.js), together wf_ab7dcc7b-712, widgets wf_54ac8044-8f2, saved games wf_1fb242c0-188.
 
-## WRAP-UP FOR THE OWNER'S PREVIEW (2026-10-07, owner: «finish the right things, then stop until next week»)
+## PAUSED UNTIL NEXT WEEK (owner request, 2026-10-07). Nothing is running.
+Preview APK #15 shipped: commit d9d5204, CI run 37652536745 green, artifact madar-apk-15 (id 11500185799).
+It contains: everything up to Money (APK #14) + Life planets (integrated, reviewed, fixed) + Madar Cinema hall
+(Growth planet card) with the demo, Metropolis Machine, Flappy Orbit and Saved Games.
+
+NEXT WEEK, in this order:
+1. System integration: run the System part of scratchpad/life_system_integration.js (system:integrate → 2 finders → fix):
+   search, notification center + NotificationGate (safety wiring as specified), data export/backup, AI chat,
+   home-screen widgets, Together (route, settings tile, togetherTransportOverrides, manifest Nearby permissions
+   from scratchpad/phase10_packages.md, delete-all keys). Deferred Life items are skipped tests (ai_summary_life_labels,
+   search_life_labels, life_cohesion) – un-skip them there.
+2. Tier 1 games: Caravan Dash (partial on disk), Noir Rooftops, Neon Souk Racer – scratchpad/tier1_games.js pattern
+   (build → critic). Title note: the critic flagged that "Flappy Orbit" echoes "Flappy Bird" (owner's own spec name – ask).
+3. Tier 2 game UIs in batches of 5 (rules engines done), APK per batch; Together game modes; performance pass; final delivery.
+
+## WRAP-UP FOR THE OWNER'S PREVIEW (2026-10-07, owner: «finish the right things, then stop until next week») – DONE
 Running now:
 1. scratchpad/wrapup_life_cinema.js (wf_2352f0e4-20e): Life integrate (resume) → 2 finders → fix → wire /cinema, /cinema/game/:id, /saved-games + Growth hub card.
 2. scratchpad/wrapup_games.js (wf_88b3ab12-7ae): Metropolis Machine critic; Flappy Orbit build (resume, ~4k lines on disk) → critic.
