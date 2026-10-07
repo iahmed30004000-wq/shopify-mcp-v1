@@ -44,7 +44,17 @@ extension MetroBossInfo on MetroBoss {
     MetroBoss.boilerHeart => 284,
     MetroBoss.switchboardSpider => 258,
     MetroBoss.liftTitan => 274,
-    MetroBoss.motherDynamo => 272,
+    MetroBoss.motherDynamo => 302,
+  };
+
+  /// The hero cannot run past this x while the machine stands: its body
+  /// is solid (every weak spot stays within the wrench's reach from here).
+  double get heroLimit => switch (this) {
+    MetroBoss.clockPress => standX - 82,
+    MetroBoss.boilerHeart => standX - 126,
+    MetroBoss.switchboardSpider => standX - 96,
+    MetroBoss.liftTitan => standX - 96,
+    MetroBoss.motherDynamo => standX - 128,
   };
 
   int get maxHp => switch (this) {
@@ -191,6 +201,9 @@ class HeroBody {
   double facing = 1;
   bool onGround = true;
 
+  /// The right-hand wall (a machine's body while it stands).
+  double maxX = MetroStage.heroMaxX;
+
   /// Index of the platform ridden, −1 on the floor / in the air.
   int platform = -1;
 
@@ -233,6 +246,7 @@ class HeroBody {
 
   void reset({double? x}) {
     if (x != null) this.x = x;
+    if (this.x > maxX) this.x = maxX;
     y = MetroStage.groundY;
     vx = 0;
     vy = 0;
@@ -353,8 +367,8 @@ class HeroBody {
     if (x < MetroStage.heroMinX) {
       x = MetroStage.heroMinX;
       if (vx < 0) vx = 0;
-    } else if (x > MetroStage.heroMaxX) {
-      x = MetroStage.heroMaxX;
+    } else if (x > maxX) {
+      x = maxX;
       if (vx > 0) vx = 0;
     }
 
@@ -788,6 +802,11 @@ class BossBrain {
   /// Seconds left of the hurt pose after a hit.
   double hurtLeft = 0;
 
+  /// Wrench hits taken in the current window; the machine recoils after
+  /// [hitsPerWindow] so a fight is a rhythm of openings, not a beating.
+  int windowHits = 0;
+  static const int hitsPerWindow = 2;
+
   /// Sub-step of multi-part attacks (a sweep's stamps).
   int step = 0;
 
@@ -884,7 +903,7 @@ class BossBrain {
     forcedAttack = null;
     attackNo++;
     step = 0;
-    targetX = heroX.clamp(MetroStage.heroMinX + 30, MetroStage.heroMaxX - 24);
+    targetX = heroX.clamp(MetroStage.heroMinX + 30, math.min(kind.heroLimit, MetroStage.heroMaxX - 24));
     targetY = heroY;
     _enter(BossMode.telegraph, _telegraphLen());
     _emit(BossEventKind.telegraph, x: targetX, y: targetY);
@@ -939,6 +958,7 @@ class BossBrain {
 
   void _afterAttack() {
     _placeWeakBox();
+    windowHits = 0;
     _enter(BossMode.open, MetroTuning.openWindow(kind, phase, assist));
     _emit(BossEventKind.open, x: weakX, y: weakY);
   }
@@ -954,9 +974,9 @@ class BossBrain {
         weakH = 64;
       case MetroBoss.boilerHeart:
         // The valve in the open furnace door.
-        weakX = standX - 96;
+        weakX = standX - 100;
         weakY = MetroStage.groundY - 10;
-        weakW = 56;
+        weakW = 60;
         weakH = 78;
       case MetroBoss.switchboardSpider:
         if (attack == AttackKind.stab) {
@@ -971,14 +991,14 @@ class BossBrain {
           weakH = 76;
         }
       case MetroBoss.liftTitan:
-        weakX = standX - 54;
+        weakX = standX - 62;
         weakY = MetroStage.groundY - (phase == 2 ? 150 : 46);
-        weakW = 70;
+        weakW = 76;
         weakH = 70;
       case MetroBoss.motherDynamo:
-        weakX = standX - 66;
+        weakX = standX - 76;
         weakY = MetroStage.groundY - 104;
-        weakW = 72;
+        weakW = 80;
         weakH = 72;
     }
   }
@@ -1001,6 +1021,12 @@ class BossBrain {
       _emit(BossEventKind.phase, i: phase);
       _emit(BossEventKind.close);
       _enter(BossMode.recover, 1.3);
+    } else if (mode == BossMode.open) {
+      windowHits++;
+      if (windowHits >= hitsPerWindow) {
+        _emit(BossEventKind.close);
+        _enter(BossMode.recover, 0.7 * MetroTuning.speed(kind, phase, assist));
+      }
     }
     return true;
   }
@@ -1049,29 +1075,43 @@ class HeroBot {
     var mustJump = false;
     var mustDrop = false;
     var danger = 0.0;
+    var lowThreat = false;
+    final left = hero.x - MetroStage.heroMinX, right = hero.maxX - hero.x;
     for (final h in hazards.items) {
       if (!h.active) continue;
       final box = h.box;
       final dx = h.x - hero.x;
       switch (h.kind) {
         case HazardKind.stamp || HazardKind.piston || HazardKind.cableStab || HazardKind.steamJet:
-          // Standing under a tell: step out of it.
+          // Standing under a tell: step out of it – or hop it at the last
+          // moment when cornered against a wall.
           final reach = h.w / 2 + HeroTuning.halfWidth + 24;
           if (dx.abs() < reach) {
-            final left = hero.x - MetroStage.heroMinX, right = MetroStage.heroMaxX - hero.x;
-            dangerDir += dx > 0 ? -1 : 1;
-            if (dx.abs() < 6) dangerDir += left > right ? -1 : 1;
+            var dir = dx > 0 ? -1.0 : 1.0;
+            if (dx.abs() < 6) dir = left > right ? -1 : 1;
+            final room = dir < 0 ? left : right;
+            if (room < reach - dx.abs() + 10 && h.kind != HazardKind.steamJet) {
+              if (h.telegraph < 0.22) mustJump = true;
+              dir = -dir;
+            }
+            dangerDir += dir;
             danger = math.max(danger, 1);
           }
         case HazardKind.shockwave || HazardKind.steamBlast || HazardKind.cableSweep || HazardKind.spark || HazardKind.rivet || HazardKind.cog:
           if (!h.armed || h.parried) continue;
           final towards = (h.vx > 0 && dx < 0) || (h.vx < 0 && dx > 0) || h.vx == 0;
-          if (towards && dx.abs() < 95 && box.top > hero.y - 150) {
-            if (h.kind.parryable && dx.abs() < 60 && dx.abs() > 18 && hero.onGround) {
+          final falling = h.kind.projectile && h.vy > 0 && box.bottom < hero.y - 60;
+          if (falling && dx.abs() < 70) {
+            // Something coming down on him: sidestep, never jump into it.
+            dangerDir += dx >= 0 ? -1 : 1;
+            danger = math.max(danger, 0.6);
+          } else if (towards && dx.abs() < 100 && box.top > hero.y - 150) {
+            if (h.kind.parryable && dx.abs() < 60 && dx.abs() > 18 && hero.onGround && !hero.swinging) {
               input.strike = true;
               hero.facing = dx > 0 ? 1 : -1;
-            } else if (dx.abs() < 70) {
+            } else if (dx.abs() < 95) {
               mustJump = true;
+              if (dx.abs() < 45) lowThreat = true;
             }
           }
         case HazardKind.bolt:
@@ -1097,6 +1137,10 @@ class HeroBot {
         input.dash = dangerDir.sign.toInt();
         _dashCool = 1.4;
       }
+    } else if (lowThreat && !hero.onGround && _dashCool <= 0) {
+      // Caught in the air over a wave: dash through it on i-frames.
+      input.dash = hero.facing >= 0 ? 1 : -1;
+      _dashCool = 1.4;
     } else if (brain != null && brain.vulnerable) {
       final wb = brain.weakBox;
       final tx = wb.center.dx;

@@ -173,7 +173,7 @@ void main() {
       expect(b.survived, 0);
     });
 
-    test('three dodges clear a phase, thunder volleys fire twice, nine blow him away', () {
+    test('three dodges clear a phase, spin-phase volleys fire twice, nine blow him away', () {
       final b = BossBrain()..arrive();
       final all = drive(b, 90);
       final phaseUps = all.where((s) => s == BossSignal.phaseUp).length;
@@ -182,9 +182,9 @@ void main() {
       expect(b.isDefeated, isTrue);
       expect(b.health, 0);
       expect(all, contains(BossSignal.fireSecond));
-      // The thunder phase came after the gusts, the spin last.
-      final firstPhaseUp = all.indexOf(BossSignal.phaseUp);
-      expect(all.sublist(0, firstPhaseUp), isNot(contains(BossSignal.fireSecond)));
+      // Single notes in the thunder phase; pairs only once the stage spins.
+      final secondPhaseUp = all.lastIndexOf(BossSignal.phaseUp);
+      expect(all.sublist(0, secondPhaseUp), isNot(contains(BossSignal.fireSecond)));
       expect(drive(b, 2), isEmpty, reason: 'nothing more once he has left');
     });
 
@@ -202,7 +202,7 @@ void main() {
         if (b.update(1 / 60) == BossSignal.fire) kinds.add(b.attack);
         t += 1 / 60;
       }
-      expect(kinds, [BossAttackKind.thunder, BossAttackKind.gust, BossAttackKind.thunder]);
+      expect(kinds, [BossAttackKind.gust, BossAttackKind.thunder, BossAttackKind.gust], reason: 'the seventh attack is even-numbered');
       expect(b.spinning, isFalse, reason: 'the stage stops once he has left');
     });
 
@@ -214,9 +214,9 @@ void main() {
 
   group('AutoPilot', () {
     test('boosts when about to drop under the target, not while shooting up', () {
-      expect(AutoPilot.shouldFlap(y: 420, vy: 200, targetY: 400), isTrue);
+      expect(AutoPilot.shouldFlap(y: 440, vy: 200, targetY: 400), isTrue);
       expect(AutoPilot.shouldFlap(y: 300, vy: 0, targetY: 400), isFalse);
-      expect(AutoPilot.shouldFlap(y: 420, vy: -400, targetY: 400), isFalse);
+      expect(AutoPilot.shouldFlap(y: 440, vy: -400, targetY: 400), isFalse);
     });
 
     test('holds a height for ten seconds without touching the sky or the roofs', () {
@@ -229,7 +229,7 @@ void main() {
           cooldown = 0.08;
         }
         expect(f.step(1 / 60), FlightContact.none);
-        expect(f.y, inInclusiveRange(270, 530));
+        expect(f.y, inInclusiveRange(340, 460));
       }
     });
   });

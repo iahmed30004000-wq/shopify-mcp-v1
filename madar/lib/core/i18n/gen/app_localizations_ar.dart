@@ -18747,9 +18747,6 @@ class L10nAr extends L10n {
   String get cinemaFlappyOrbitLaunchHint => 'المس الشاشة للإقلاع';
 
   @override
-  String get cinemaFlappyOrbitHeroName => 'فَلَك';
-
-  @override
   String get cinemaFlappyOrbitBossName => 'المايسترو غَيم';
 
   @override
@@ -18891,6 +18888,105 @@ class L10nAr extends L10n {
 
   @override
   String get cinemaMetropolisParry => 'صَدّ!';
+
+  @override
+  String get cinemaCaravanOpeningSubtitle =>
+      'نوّارة وزاجل… وقافلة واحدة في سباق إلى الواحة الكبرى';
+
+  @override
+  String get cinemaCaravanControlsHint =>
+      'المس لتقفز، اضغط مطوّلًا لتنزلق، اسحب للأعلى أو للأسفل لتغيّر المسار، اسحب جانبًا لترمي تمرة';
+
+  @override
+  String get cinemaCaravanHero => 'نوّارة';
+
+  @override
+  String get cinemaCaravanBossName => 'رَمّال، جنّي الرمل';
+
+  @override
+  String get cinemaCaravanScorpionName => 'العقربة النحاسية';
+
+  @override
+  String get cinemaCaravanLegOne => 'المرحلة الأولى: بحر الكثبان';
+
+  @override
+  String get cinemaCaravanLegTwo => 'المرحلة الثانية: الواحة وسوق الليل';
+
+  @override
+  String get cinemaCaravanLegThree => 'المرحلة الأخيرة: طريق الواحة الكبرى';
+
+  @override
+  String get cinemaCaravanMapHint => 'قافلة واحدة… وجنّي يريد حمولتها';
+
+  @override
+  String cinemaCaravanHudLeg(String index, String total) {
+    return 'المرحلة $index/$total';
+  }
+
+  @override
+  String get cinemaCaravanSandstorm => 'عاصفة رملية!';
+
+  @override
+  String get cinemaCaravanNightMarket => 'سوق الليل';
+
+  @override
+  String get cinemaCaravanLanternLit => 'الفانوس يضيء الدرب!';
+
+  @override
+  String get cinemaCaravanDjinnEnters => 'رَمّال يطلع من الرمل';
+
+  @override
+  String get cinemaCaravanDjinnBarrels => '«براميلي راح تدحرجكم للرمل!»';
+
+  @override
+  String get cinemaCaravanDjinnWhirls => '«زوابعي بتعرف وين تختبئوا!»';
+
+  @override
+  String get cinemaCaravanDjinnScorpion => '«عقربتي النحاسية أسرع من أي جمل!»';
+
+  @override
+  String get cinemaCaravanDjinnSigned => 'رَمّال';
+
+  @override
+  String get cinemaCaravanDjinnBeaten => '«هذا… مش عدل!»';
+
+  @override
+  String get cinemaCaravanDjinnFlees => 'رَمّال يهرب!';
+
+  @override
+  String get cinemaCaravanThrowHint => 'اسحب جانبًا لترمي التمر!';
+
+  @override
+  String get cinemaCaravanOutrun => 'اسبقه!';
+
+  @override
+  String get cinemaCaravanEndTitle => 'وصلت القافلة';
+
+  @override
+  String get cinemaCaravanEndSubtitle =>
+      'واستقبلت الواحة نوّارة وزاجل بالطبول والتمر.';
+
+  @override
+  String get cinemaCaravanLostSubtitle =>
+      'ضاعت القافلة في الرمل هالمرة. الواحة بتستنى محاولة ثانية.';
+
+  @override
+  String get cinemaCaravanLifeBack => 'استعدت بكرة!';
+
+  @override
+  String get cinemaCaravanLegDone => 'اكتملت المرحلة!';
+
+  @override
+  String get cinemaCaravanPouchFull => 'الجراب ممتلئ!';
+
+  @override
+  String get cinemaCaravanBossHit => 'إصابة!';
+
+  @override
+  String get cinemaCaravanDodged => 'نجوت!';
+
+  @override
+  String get cinemaCaravanDatePouch => 'جراب التمر';
 
   @override
   String get dataCentreTitle => 'بياناتك';

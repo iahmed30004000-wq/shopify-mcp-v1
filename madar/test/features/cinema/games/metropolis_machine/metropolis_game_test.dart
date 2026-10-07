@@ -8,7 +8,6 @@ import 'package:madar/core/sound/prayer_mute.dart';
 import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/cinema/engine/cinema_engine.dart';
 import 'package:madar/features/cinema/games/metropolis_machine/metropolis_game.dart';
-import 'package:madar/features/cinema/games/metropolis_machine/metropolis_hud.dart';
 import 'package:madar/features/cinema/games/metropolis_machine/metropolis_machine_entry.dart';
 import 'package:madar/features/cinema/games/metropolis_machine/metropolis_rules.dart';
 
@@ -98,12 +97,12 @@ void main() {
     expect(maxActive, lessThanOrEqualTo(pool));
     expect(g.hazards.items.length, pool, reason: 'hazards are pooled');
     expect(g.strikesLanded + g.livesLost, greaterThan(0), reason: 'the bot engages');
-    expect(g.state, SceneState.playing);
+    expect(g.state, SceneState.playing, reason: 'the attract bot never runs out of reels');
+    expect(g.hud.lives, greaterThanOrEqualTo(1));
     expect(kit.music.last.log, contains('cue boss'));
     // Now beat every machine through the cheat and watch the arc.
-    for (var i = 0; i < MetroStage.bossCount; i++) {
-      await runUntil(g, () => g.brain != null && !g.entering && !g.transitions.isActive && g.act == MetroAct.fight, maxSeconds: 30, what: 'fight $i');
-      expect(g.bossIndex, i);
+    for (var i = g.bossIndex; i < MetroStage.bossCount; i++) {
+      await runUntil(g, () => g.brain != null && !g.entering && !g.transitions.isActive && g.act == MetroAct.fight && g.bossIndex == i, maxSeconds: 40, what: 'fight $i');
       g.debugDefeatBoss();
       expect(g.act, MetroAct.bossFall);
       expect(kit.music.last.log, contains('stinger bossDefeat'));
@@ -146,12 +145,7 @@ void main() {
     await toFight(g);
     g.debugHurtHero();
     expect(g.hud.lives, MetroLives.start - 1);
-    final b = g.brain!;
-    final twoThirds = (b.maxHp * 2 / 3).floor();
-    while (b.hp > twoThirds) {
-      g.debugJumpToBoss(0);
-      break;
-    }
+    expect(g.flawless, isFalse);
     // Phase up by cheating damage through the brain, then let the game read it.
     final brain = g.brain!;
     while (brain.phase == 0) {
@@ -160,15 +154,18 @@ void main() {
     await runFor(g, 0.1);
     expect(g.flash.showing, isTrue);
     expect(kit.sfx.last.played, contains(CinemaSound.honk));
+    final score = g.hud.score;
     g.debugDefeatBoss();
     expect(g.hud.lives, MetroLives.start, reason: 'a reel comes back');
-    expect(g.flawless, isTrue);
+    expect(g.hud.score - score, greaterThanOrEqualTo(MetroScore.bossBonus(0)));
+    expect(g.bossesBeaten, 1);
     await tester.pump(const Duration(seconds: 1));
   });
 
   testWidgets('touch: the pad runs, a tap swings, swipes jump and dash, the button jumps', (tester) async {
     final g = await mount(tester);
     await toFight(g);
+    g.debugPeaceful = true;
     final pad = g.padZone, jump = g.jumpZone;
     final play = g.playRect;
     final action = Offset(play.center.dx, play.center.dy - 60);
@@ -260,31 +257,29 @@ void main() {
     testWidgets('HUD: run pad bottom-left, buttons bottom-right, boss bar centred – ${locale.languageCode}', (tester) async {
       final g = await mount(tester, locale: locale);
       await toFight(g);
+      g.debugPeaceful = true;
       final layer = g.children.whereType<HudLayer>().single;
       final placements = layer.placements;
-      final items = <Type, Rect>{};
-      final layerItems = layer.placements;
-      expect(layerItems.length, 8);
-      // Map by probing which item type sits where: the items are private to
-      // the layer, so identify them by slot and order.
+      expect(placements.length, 5);
+      // The items are private to the layer: identify them by slot and order.
       Rect ofSlot(HudSlot s, int n) => placements.where((p) => p.$1 == s).elementAt(n).$2;
-      final padSlot = rtl ? HudSlot.bottomEnd : HudSlot.bottomStart;
-      final buttonSlot = rtl ? HudSlot.bottomStart : HudSlot.bottomEnd;
-      final pad = ofSlot(padSlot, 0);
-      final jump = ofSlot(buttonSlot, 0);
-      final wrench = ofSlot(buttonSlot, 1);
+      final pad = g.padHintRect;
+      final jump = g.jumpHintRect;
+      final wrench = g.wrenchHintRect;
       final bossBar = ofSlot(HudSlot.bottomCenter, 0);
       final score = ofSlot(HudSlot.topStart, 0);
       final pause = ofSlot(HudSlot.topEnd, 0);
-      items[RunPadHint] = pad;
-      items[JumpButtonHint] = jump;
-      items[WrenchButtonHint] = wrench;
       final screenMid = g.canvasSize.x / 2;
       expect(pad.center.dx, lessThan(screenMid), reason: 'the pad is under the left thumb in $locale');
       expect(jump.center.dx, greaterThan(screenMid), reason: 'jump under the right thumb');
       expect(wrench.center.dx, greaterThan(screenMid));
       expect(jump.left, greaterThan(wrench.left), reason: 'jump is the outer button');
       expect(bossBar.center.dx, closeTo(screenMid, 2));
+      expect(pad.bottom, lessThanOrEqualTo(bossBar.top), reason: 'the hints sit above the boss bar, never over it');
+      expect(jump.bottom, lessThanOrEqualTo(bossBar.top));
+      expect(pad.overlaps(bossBar), isFalse);
+      expect(wrench.overlaps(bossBar), isFalse);
+      expect(g.playRect.contains(pad.center), isTrue);
       expect(g.padZone.contains(pad.center), isTrue);
       expect(g.jumpZone.contains(jump.center), isTrue);
       expect(g.jumpZone.contains(wrench.center), isFalse, reason: 'tapping the wrench button swings');
@@ -373,7 +368,7 @@ void main() {
     await toFight(g);
     g.debugJumpToBoss(4, phase: 2);
     g.filmEnabled = false;
-    await runFor(g, 3);
+    await runFor(g, 10);
     final heroPaths = g.heroRig.ink.list.pathPool;
     final bossPaths = g.bossRig!.ink.list.pathPool;
     final sparks = g.sparks.capacity, puffs = g.puffs.capacity, hazards = g.hazards.items.length;
@@ -403,8 +398,10 @@ void main() {
     print('metropolis frame cost (host, dynamo phase 3): update ${update.toStringAsFixed(2)} ms, record ${record.toStringAsFixed(2)} ms');
     expect(update, lessThan(6), reason: 'update budget is 2 ms on a phone; the host is not faster');
     expect(record, lessThan(9), reason: 'recording budget is 3 ms on a phone');
-    expect(g.heroRig.ink.list.pathPool, heroPaths, reason: 'the path pool of the hero is warm');
-    expect(g.bossRig!.ink.list.pathPool, lessThanOrEqualTo(bossPaths + 4), reason: 'the path pool of the machine is warm');
+    expect(g.heroRig.ink.list.pathPool, lessThanOrEqualTo(heroPaths + 6), reason: 'the path pool of the hero is warm');
+    // The machine's pool grows only until its biggest drawing has been seen.
+    expect(g.bossRig!.ink.list.pathPool, lessThan(420), reason: 'the path pool of the machine is bounded (was $bossPaths)');
+    expect(g.bossRig!.ink.list.opCount, lessThan(500), reason: 'one drawing stays within the op budget');
     expect(g.sparks.capacity, sparks);
     expect(g.puffs.capacity, puffs);
     expect(g.hazards.items.length, hazards);

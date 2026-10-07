@@ -18117,10 +18117,6 @@
   "@cinemaFlappyOrbitLaunchHint": {
     "description": "Flappy Orbit HUD hint on the launch pad"
   },
-  "cinemaFlappyOrbitHeroName": "فَلَك",
-  "@cinemaFlappyOrbitHeroName": {
-    "description": "Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')"
-  },
   "cinemaFlappyOrbitBossName": "المايسترو غَيم",
   "@cinemaFlappyOrbitBossName": {
     "description": "Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)"
@@ -18304,6 +18300,138 @@
   "cinemaMetropolisParry": "صَدّ!",
   "@cinemaMetropolisParry": {
     "description": "HUD flash on a parry"
+  },
+  "cinemaCaravanOpeningSubtitle": "نوّارة وزاجل… وقافلة واحدة في سباق إلى الواحة الكبرى",
+  "@cinemaCaravanOpeningSubtitle": {
+    "description": "Caravan Dash opening card subtitle"
+  },
+  "cinemaCaravanControlsHint": "المس لتقفز، اضغط مطوّلًا لتنزلق، اسحب للأعلى أو للأسفل لتغيّر المسار، اسحب جانبًا لترمي تمرة",
+  "@cinemaCaravanControlsHint": {
+    "description": "Controls line shown on the map at the start"
+  },
+  "cinemaCaravanHero": "نوّارة",
+  "@cinemaCaravanHero": {
+    "description": "Name of the young caravaneer riding the camel Zajil"
+  },
+  "cinemaCaravanBossName": "رَمّال، جنّي الرمل",
+  "@cinemaCaravanBossName": {
+    "description": "Name of the caravan-thief boss (rammal = sand-reader)"
+  },
+  "cinemaCaravanScorpionName": "العقربة النحاسية",
+  "@cinemaCaravanScorpionName": {
+    "description": "Name of the boss's clockwork mount in the last phase"
+  },
+  "cinemaCaravanLegOne": "المرحلة الأولى: بحر الكثبان",
+  "@cinemaCaravanLegOne": {
+    "description": "Map caption of the first leg"
+  },
+  "cinemaCaravanLegTwo": "المرحلة الثانية: الواحة وسوق الليل",
+  "@cinemaCaravanLegTwo": {
+    "description": "Map caption of the second leg"
+  },
+  "cinemaCaravanLegThree": "المرحلة الأخيرة: طريق الواحة الكبرى",
+  "@cinemaCaravanLegThree": {
+    "description": "Map caption of the third leg"
+  },
+  "cinemaCaravanMapHint": "قافلة واحدة… وجنّي يريد حمولتها",
+  "@cinemaCaravanMapHint": {
+    "description": "Line under the map on the first showing"
+  },
+  "cinemaCaravanHudLeg": "المرحلة {index}/{total}",
+  "@cinemaCaravanHudLeg": {
+    "description": "HUD plaque: which leg of how many; numbers are pre-formatted",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaCaravanSandstorm": "عاصفة رملية!",
+  "@cinemaCaravanSandstorm": {
+    "description": "Callout when the sandstorm set piece begins"
+  },
+  "cinemaCaravanNightMarket": "سوق الليل",
+  "@cinemaCaravanNightMarket": {
+    "description": "Callout when the night market set piece begins"
+  },
+  "cinemaCaravanLanternLit": "الفانوس يضيء الدرب!",
+  "@cinemaCaravanLanternLit": {
+    "description": "Callout on the first lantern picked up in the dark"
+  },
+  "cinemaCaravanDjinnEnters": "رَمّال يطلع من الرمل",
+  "@cinemaCaravanDjinnEnters": {
+    "description": "Chapter card subtitle when the boss arrives"
+  },
+  "cinemaCaravanDjinnBarrels": "«براميلي راح تدحرجكم للرمل!»",
+  "@cinemaCaravanDjinnBarrels": {
+    "description": "Boss taunt before the barrel phase"
+  },
+  "cinemaCaravanDjinnWhirls": "«زوابعي بتعرف وين تختبئوا!»",
+  "@cinemaCaravanDjinnWhirls": {
+    "description": "Boss taunt before the sand-whirl phase"
+  },
+  "cinemaCaravanDjinnScorpion": "«عقربتي النحاسية أسرع من أي جمل!»",
+  "@cinemaCaravanDjinnScorpion": {
+    "description": "Boss taunt before the scorpion chase"
+  },
+  "cinemaCaravanDjinnSigned": "رَمّال",
+  "@cinemaCaravanDjinnSigned": {
+    "description": "Signature line under a taunt card"
+  },
+  "cinemaCaravanDjinnBeaten": "«هذا… مش عدل!»",
+  "@cinemaCaravanDjinnBeaten": {
+    "description": "The boss's line when his scorpion breaks down"
+  },
+  "cinemaCaravanDjinnFlees": "رَمّال يهرب!",
+  "@cinemaCaravanDjinnFlees": {
+    "description": "Callout when a boss phase is beaten"
+  },
+  "cinemaCaravanThrowHint": "اسحب جانبًا لترمي التمر!",
+  "@cinemaCaravanThrowHint": {
+    "description": "Callout at the start of the scorpion chase"
+  },
+  "cinemaCaravanOutrun": "اسبقه!",
+  "@cinemaCaravanOutrun": {
+    "description": "Callout when the scorpion breaks and the camel sprints"
+  },
+  "cinemaCaravanEndTitle": "وصلت القافلة",
+  "@cinemaCaravanEndTitle": {
+    "description": "Winning end card"
+  },
+  "cinemaCaravanEndSubtitle": "واستقبلت الواحة نوّارة وزاجل بالطبول والتمر.",
+  "@cinemaCaravanEndSubtitle": {
+    "description": "Winning end card subtitle"
+  },
+  "cinemaCaravanLostSubtitle": "ضاعت القافلة في الرمل هالمرة. الواحة بتستنى محاولة ثانية.",
+  "@cinemaCaravanLostSubtitle": {
+    "description": "Losing end card subtitle"
+  },
+  "cinemaCaravanLifeBack": "استعدت بكرة!",
+  "@cinemaCaravanLifeBack": {
+    "description": "Callout when a life comes back after a boss phase"
+  },
+  "cinemaCaravanLegDone": "اكتملت المرحلة!",
+  "@cinemaCaravanLegDone": {
+    "description": "Callout when a leg ends"
+  },
+  "cinemaCaravanPouchFull": "الجراب ممتلئ!",
+  "@cinemaCaravanPouchFull": {
+    "description": "Callout when the date pouch is full"
+  },
+  "cinemaCaravanBossHit": "إصابة!",
+  "@cinemaCaravanBossHit": {
+    "description": "Callout when a thrown date hits the boss"
+  },
+  "cinemaCaravanDodged": "نجوت!",
+  "@cinemaCaravanDodged": {
+    "description": "Callout when a boss attack is dodged"
+  },
+  "cinemaCaravanDatePouch": "جراب التمر",
+  "@cinemaCaravanDatePouch": {
+    "description": "Semantics label of the date-pouch HUD plaque"
   },
   "dataCentreTitle": "بياناتك",
   "@dataCentreTitle": {

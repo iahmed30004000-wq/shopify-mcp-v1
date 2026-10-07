@@ -169,26 +169,26 @@ class WorkerRig extends ToonRig {
   void drawFrontAccessories(InkBuild b) {
     final h = spec.height;
     final c = b.colors;
-    // The wrench rides the near hand, swinging through a strike.
+    // The wrench rides the near hand: carried head-forward, tucked back in
+    // a dash, and chopped overhead through a strike.
     final near = hands[1];
-    final swing = _swing();
-    final hx = near.x, hy = near.y;
-    // Approximate forearm direction: from the shoulder root to the hand.
-    final shY = shoulderDY;
-    final rootX = bx(bodyW * 0.4, shY), rootY = by(bodyW * 0.4, shY);
-    final angle = math.atan2(hy - rootY, hx - rootX);
-    _wrench(b, hx, hy, angle + swing, Color.lerp(c.fill(PaletteRole.midtone), c.fill(PaletteRole.paper), 0.45)!, h);
+    _wrench(b, near.x, near.y, _wrenchAngle(), Color.lerp(c.fill(PaletteRole.midtone), c.fill(PaletteRole.paper), 0.45)!, h);
     // The lantern hangs from the far hand.
     final far = hands[0];
     _lantern(b, far.x, far.y + h * 0.02, _lanternSwing.value, h);
   }
 
-  double _swing() {
-    if (action != RigAction.attack) return dashing ? -1.1 : -0.35;
+  /// Absolute wrench angle in design space (facing +x, y down).
+  double _wrenchAngle() {
+    const rest = 0.55, back = math.pi - 0.25, raised = -2.25, down = 0.95;
+    if (action != RigAction.attack) {
+      if (dashing) return back;
+      return rest + math.sin(time * 2) * 0.04;
+    }
     final t = actionTime;
-    if (t < 0.05) return Bounce.lerp(-0.35, -1.3, t / 0.05);
-    if (t < 0.2) return Bounce.lerp(-1.3, 0.75, Bounce.out((t - 0.05) / 0.15));
-    return Bounce.lerp(0.75, -0.35, Bounce.smooth((t - 0.2) / 0.12));
+    if (t < 0.05) return Bounce.lerp(rest, raised, Bounce.smooth(t / 0.05));
+    if (t < 0.2) return Bounce.lerp(raised, down, Bounce.out((t - 0.05) / 0.15));
+    return Bounce.lerp(down, rest, Bounce.smooth((t - 0.2) / 0.12));
   }
 
   void _wrench(InkBuild b, double x, double y, double angle, Color metal, double h) {
@@ -196,7 +196,7 @@ class WorkerRig extends ToonRig {
       ..save()
       ..translate(x, y)
       ..rotate(angle);
-    final len = h * 0.46, w = h * 0.045;
+    final len = h * 0.36, w = h * 0.042;
     b.layer();
     b.shape(metal);
     pen.roundRect(-w * 2.2, -w, len * 0.74, w, w * 0.7);
@@ -219,19 +219,19 @@ class WorkerRig extends ToonRig {
     pen.circle(-w * 2.2, 0, w * 0.6);
     b.brushQuad(3, len * 0.05, -w * 0.45, len * 0.35, -w * 0.6, len * 0.6, -w * 0.45, b.lw * 0.5, color: b.colors.shine);
     b.endLayer();
-    // The swing's whoosh.
-    if (emanata && action == RigAction.attack && actionTime > 0.05 && actionTime < 0.2) {
+    // The swing's whoosh: arcs trailing behind the head.
+    if (emanata && action == RigAction.attack && actionTime > 0.07 && actionTime < 0.2) {
       b.layer();
       for (var i = 0; i < 3; i++) {
-        final r = len * (0.75 + i * 0.18);
+        final r = len * (0.8 + i * 0.2);
         b.brushQuad(
           2,
-          math.cos(-1.1) * r,
-          math.sin(-1.1) * r,
-          math.cos(-0.55) * r * 1.05,
-          math.sin(-0.55) * r * 1.05,
-          math.cos(0.1) * r,
-          math.sin(0.1) * r,
+          math.cos(-1.3) * r,
+          math.sin(-1.3) * r,
+          math.cos(-0.7) * r * 1.08,
+          math.sin(-0.7) * r * 1.08,
+          math.cos(-0.1) * r,
+          math.sin(-0.1) * r,
           b.lw * (0.9 - i * 0.2),
           taperIn: 0.3,
           taperOut: 0.3,
@@ -249,35 +249,45 @@ class WorkerRig extends ToonRig {
       ..translate(x, y)
       ..rotate(swing);
     final s = h * 0.1;
-    final dark = c.fill(PaletteRole.shadow);
-    // Warm halo (no outline).
+    final brass = Color.lerp(c.fill(PaletteRole.accent2), c.fill(PaletteRole.paper), 0.3)!;
+    // Warm halo (no outline), breathing on the boil.
     b.layer();
-    b.shape(c.hot.withValues(alpha: 0.22), ink: 0);
-    pen.circle(0, s * 1.75, s * 1.7 + b.ja(71, 1.2));
+    b.shape(c.hot.withValues(alpha: 0.3), ink: 0);
+    pen.circle(0, s * 1.8, s * 2.1 + b.ja(71, 1.4));
     b.endLayer();
     b.layer();
-    b.inkLine(b.lw * 0.7);
+    // Ring and chain.
+    b.inkLine(b.lw * 0.8);
     pen
-      ..circle(0, s * 0.3, s * 0.26)
-      ..moveTo(0, s * 0.56)
-      ..lineTo(0, s * 0.92);
-    b.shape(dark);
-    pen.roundRect(-s * 0.46, s * 0.9, s * 0.46, s * 1.16, s * 0.12);
-    b.shape(c.hot, ink: 0.8);
-    pen.roundRect(-s * 0.5, s * 1.12, s * 0.5, s * 2.32, s * 0.14);
-    b.shape(dark);
-    pen.roundRect(-s * 0.56, s * 2.28, s * 0.56, s * 2.52, s * 0.1);
-    b.inkLine(b.lw * 0.55);
+      ..circle(0, s * 0.3, s * 0.28)
+      ..moveTo(0, s * 0.58)
+      ..lineTo(0, s * 0.95);
+    // Cap, glass bulb, base.
+    b.shape(brass);
     pen
-      ..moveTo(-s * 0.2, s * 1.14)
-      ..lineTo(-s * 0.2, s * 2.3)
-      ..moveTo(s * 0.2, s * 1.14)
-      ..lineTo(s * 0.2, s * 2.3);
+      ..moveTo(-s * 0.55, s * 1.2)
+      ..lineTo(0, s * 0.85)
+      ..lineTo(s * 0.55, s * 1.2)
+      ..close();
+    b.shape(c.hot, ink: 0.9);
+    pen.capsule(0, s * 1.5, 0, s * 2.15, s * 0.58, s * 0.5);
+    b.shape(brass);
+    pen.roundRect(-s * 0.5, s * 2.5, s * 0.5, s * 2.75, s * 0.1);
+    b.inkLine(b.lw * 0.5);
+    pen
+      ..moveTo(-s * 0.42, s * 1.3)
+      ..lineTo(-s * 0.42, s * 2.5)
+      ..moveTo(s * 0.42, s * 1.3)
+      ..lineTo(s * 0.42, s * 2.5);
     // The flame flickers on the boil.
     b.fill(c.fill(PaletteRole.highlight));
-    pen.ellipse(b.ja(72, 0.4), s * 1.74 + b.ja(73, 0.3), s * 0.15, s * 0.3 + b.ja(74, 0.6).abs());
+    pen
+      ..moveTo(0, s * 2.35)
+      ..quadTo(-s * 0.3, s * 1.95, b.ja(72, 0.5), s * (1.45 + b.ja(73, 0.3).abs()))
+      ..quadTo(s * 0.3, s * 1.95, 0, s * 2.35)
+      ..close();
     b.inkFill(c.dark);
-    pen.ellipse(0, s * 1.86, s * 0.05, s * 0.09);
+    pen.ellipse(0, s * 2.1, s * 0.06, s * 0.1);
     b.endLayer();
     pen.restore();
   }

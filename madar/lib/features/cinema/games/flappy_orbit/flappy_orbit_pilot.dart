@@ -369,7 +369,7 @@ class OrbitPilot extends HoseRig {
     b.layer();
     b.blob(torso, c.fill(spec.accent), depth: hh * 0.05, threshold: 0.25);
     // Jacket buttons and a collar.
-    b.inkFill();
+    b.fill(paper);
     pen
       ..circle(hh * 0.07, -hh * 0.2, hh * 0.013)
       ..circle(hh * 0.065, -hh * 0.13, hh * 0.013);
@@ -564,7 +564,8 @@ class OrbitPilot extends HoseRig {
   void _scarf(InkBuild b, InkColors c) {
     final pen = b.pen;
     final hh = spec.height;
-    final fill = c.fill(spec.accent);
+    // A white silk aviator's scarf (it reads against the dark jacket).
+    final fill = c.fill(spec.trim);
     b.layer();
     b.shape(fill, ink: 0.8);
     final px = -hh * 0.06, py = axisY - hh * 0.5;

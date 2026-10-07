@@ -28905,12 +28905,6 @@ abstract class L10n {
   /// **'المس الشاشة للإقلاع'**
   String get cinemaFlappyOrbitLaunchHint;
 
-  /// Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')
-  ///
-  /// In ar, this message translates to:
-  /// **'فَلَك'**
-  String get cinemaFlappyOrbitHeroName;
-
   /// Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)
   ///
   /// In ar, this message translates to:
@@ -29162,6 +29156,192 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'صَدّ!'**
   String get cinemaMetropolisParry;
+
+  /// Caravan Dash opening card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'نوّارة وزاجل… وقافلة واحدة في سباق إلى الواحة الكبرى'**
+  String get cinemaCaravanOpeningSubtitle;
+
+  /// Controls line shown on the map at the start
+  ///
+  /// In ar, this message translates to:
+  /// **'المس لتقفز، اضغط مطوّلًا لتنزلق، اسحب للأعلى أو للأسفل لتغيّر المسار، اسحب جانبًا لترمي تمرة'**
+  String get cinemaCaravanControlsHint;
+
+  /// Name of the young caravaneer riding the camel Zajil
+  ///
+  /// In ar, this message translates to:
+  /// **'نوّارة'**
+  String get cinemaCaravanHero;
+
+  /// Name of the caravan-thief boss (rammal = sand-reader)
+  ///
+  /// In ar, this message translates to:
+  /// **'رَمّال، جنّي الرمل'**
+  String get cinemaCaravanBossName;
+
+  /// Name of the boss's clockwork mount in the last phase
+  ///
+  /// In ar, this message translates to:
+  /// **'العقربة النحاسية'**
+  String get cinemaCaravanScorpionName;
+
+  /// Map caption of the first leg
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة الأولى: بحر الكثبان'**
+  String get cinemaCaravanLegOne;
+
+  /// Map caption of the second leg
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة الثانية: الواحة وسوق الليل'**
+  String get cinemaCaravanLegTwo;
+
+  /// Map caption of the third leg
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة الأخيرة: طريق الواحة الكبرى'**
+  String get cinemaCaravanLegThree;
+
+  /// Line under the map on the first showing
+  ///
+  /// In ar, this message translates to:
+  /// **'قافلة واحدة… وجنّي يريد حمولتها'**
+  String get cinemaCaravanMapHint;
+
+  /// HUD plaque: which leg of how many; numbers are pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'المرحلة {index}/{total}'**
+  String cinemaCaravanHudLeg(String index, String total);
+
+  /// Callout when the sandstorm set piece begins
+  ///
+  /// In ar, this message translates to:
+  /// **'عاصفة رملية!'**
+  String get cinemaCaravanSandstorm;
+
+  /// Callout when the night market set piece begins
+  ///
+  /// In ar, this message translates to:
+  /// **'سوق الليل'**
+  String get cinemaCaravanNightMarket;
+
+  /// Callout on the first lantern picked up in the dark
+  ///
+  /// In ar, this message translates to:
+  /// **'الفانوس يضيء الدرب!'**
+  String get cinemaCaravanLanternLit;
+
+  /// Chapter card subtitle when the boss arrives
+  ///
+  /// In ar, this message translates to:
+  /// **'رَمّال يطلع من الرمل'**
+  String get cinemaCaravanDjinnEnters;
+
+  /// Boss taunt before the barrel phase
+  ///
+  /// In ar, this message translates to:
+  /// **'«براميلي راح تدحرجكم للرمل!»'**
+  String get cinemaCaravanDjinnBarrels;
+
+  /// Boss taunt before the sand-whirl phase
+  ///
+  /// In ar, this message translates to:
+  /// **'«زوابعي بتعرف وين تختبئوا!»'**
+  String get cinemaCaravanDjinnWhirls;
+
+  /// Boss taunt before the scorpion chase
+  ///
+  /// In ar, this message translates to:
+  /// **'«عقربتي النحاسية أسرع من أي جمل!»'**
+  String get cinemaCaravanDjinnScorpion;
+
+  /// Signature line under a taunt card
+  ///
+  /// In ar, this message translates to:
+  /// **'رَمّال'**
+  String get cinemaCaravanDjinnSigned;
+
+  /// The boss's line when his scorpion breaks down
+  ///
+  /// In ar, this message translates to:
+  /// **'«هذا… مش عدل!»'**
+  String get cinemaCaravanDjinnBeaten;
+
+  /// Callout when a boss phase is beaten
+  ///
+  /// In ar, this message translates to:
+  /// **'رَمّال يهرب!'**
+  String get cinemaCaravanDjinnFlees;
+
+  /// Callout at the start of the scorpion chase
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب جانبًا لترمي التمر!'**
+  String get cinemaCaravanThrowHint;
+
+  /// Callout when the scorpion breaks and the camel sprints
+  ///
+  /// In ar, this message translates to:
+  /// **'اسبقه!'**
+  String get cinemaCaravanOutrun;
+
+  /// Winning end card
+  ///
+  /// In ar, this message translates to:
+  /// **'وصلت القافلة'**
+  String get cinemaCaravanEndTitle;
+
+  /// Winning end card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'واستقبلت الواحة نوّارة وزاجل بالطبول والتمر.'**
+  String get cinemaCaravanEndSubtitle;
+
+  /// Losing end card subtitle
+  ///
+  /// In ar, this message translates to:
+  /// **'ضاعت القافلة في الرمل هالمرة. الواحة بتستنى محاولة ثانية.'**
+  String get cinemaCaravanLostSubtitle;
+
+  /// Callout when a life comes back after a boss phase
+  ///
+  /// In ar, this message translates to:
+  /// **'استعدت بكرة!'**
+  String get cinemaCaravanLifeBack;
+
+  /// Callout when a leg ends
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت المرحلة!'**
+  String get cinemaCaravanLegDone;
+
+  /// Callout when the date pouch is full
+  ///
+  /// In ar, this message translates to:
+  /// **'الجراب ممتلئ!'**
+  String get cinemaCaravanPouchFull;
+
+  /// Callout when a thrown date hits the boss
+  ///
+  /// In ar, this message translates to:
+  /// **'إصابة!'**
+  String get cinemaCaravanBossHit;
+
+  /// Callout when a boss attack is dodged
+  ///
+  /// In ar, this message translates to:
+  /// **'نجوت!'**
+  String get cinemaCaravanDodged;
+
+  /// Semantics label of the date-pouch HUD plaque
+  ///
+  /// In ar, this message translates to:
+  /// **'جراب التمر'**
+  String get cinemaCaravanDatePouch;
 
   /// Data centre screen title
   ///

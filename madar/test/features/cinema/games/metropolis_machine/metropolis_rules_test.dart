@@ -32,7 +32,7 @@ void main() {
       expect(hero.facing, -1);
     });
 
-    test('is walled in at the stage edges', () {
+    test('is walled in at the stage edges, and by a machine while it stands', () {
       final hero = HeroBody();
       final input = HeroInput()..move = -1;
       step(hero, input, ticks: 240);
@@ -41,6 +41,13 @@ void main() {
       input.move = 1;
       step(hero, input, ticks: 300);
       expect(hero.x, MetroStage.heroMaxX);
+      hero.maxX = MetroBoss.boilerHeart.heroLimit;
+      step(hero, input, ticks: 10);
+      expect(hero.x, MetroBoss.boilerHeart.heroLimit);
+      for (final kind in MetroBoss.values) {
+        expect(kind.heroLimit, lessThan(kind.standX));
+        expect(kind.heroLimit, greaterThan(MetroStage.heroMinX + 120), reason: 'room to dodge in front of $kind');
+      }
     });
 
     test('jumps with a held button higher than with a tap, and lands', () {
@@ -352,6 +359,10 @@ void main() {
       expect(b.weakBox.width, greaterThan(0));
       expect(b.damage(), isTrue);
       expect(b.hurtLeft, greaterThan(0));
+      expect(b.vulnerable, isTrue, reason: 'one more hit allowed');
+      expect(b.damage(), isTrue);
+      expect(b.vulnerable, isFalse, reason: 'after two hits the machine recoils');
+      expect(b.events.last.kind, BossEventKind.close);
     });
 
     test('phases change at two thirds and one third, closing the window', () {

@@ -245,7 +245,7 @@ enum BossSignal {
   /// Launch the attack now.
   fire,
 
-  /// The second thunder-note of a volley.
+  /// The second thunder-note of a volley (spin phase only).
   fireSecond,
 
   /// The hero dodged the whole attack: the Maestro takes it badly.
@@ -287,7 +287,11 @@ class BossBrain {
 
   double get pace => 1 - level * 0.12;
   double get windUpTime => (phase == BossPhase.spin ? 0.5 : 0.72) * pace;
-  double get attackTime => (attack == BossAttackKind.gust ? 1.15 : 1.05) * pace;
+  /// How long an attack stays "live" (the lane blows / the notes land).
+  double get attackTime => (attack == BossAttackKind.gust ? 1.15 : (volleySize == 2 ? 1.55 : 1.15)) * pace;
+
+  /// Thunder-notes per volley: one, two once the stage spins.
+  int get volleySize => phase == BossPhase.spin ? 2 : 1;
   double get recoverTime =>
       switch (phase) {
         BossPhase.gusts => 1.2,
@@ -330,7 +334,7 @@ class BossBrain {
         attackNo++;
         return BossSignal.fire;
       case BossStep.attacking:
-        if (attack == BossAttackKind.thunder && !_secondFired && timer >= 0.34) {
+        if (attack == BossAttackKind.thunder && volleySize == 2 && !_secondFired && timer >= 0.34) {
           _secondFired = true;
           return BossSignal.fireSecond;
         }
@@ -370,20 +374,17 @@ class BossBrain {
   }
 }
 
-/// The attract-mode / test pilot: boosts when the rocket is about to drop
-/// under where it wants to be, so it hovers in a band one boost tall
-/// (about 73 units) just around the target.
+/// The attract-mode / test pilot: boosts the moment the rocket sinks
+/// below the target band, so it hovers in a band one boost tall (about 73
+/// units) centred a little under [bandOffset] above the target.
 abstract final class AutoPilot {
-  /// Reaction time (s) the pilot looks ahead.
-  static const double lookAhead = 0.1;
+  /// A touch of look-ahead for the 60 Hz decision (s).
+  static const double lookAhead = 0.03;
 
-  /// The band sits from [targetY] − rise + [bandOffset] to [targetY] + [bandOffset].
+  /// The boost fires when the rocket passes [targetY] + [bandOffset].
   static const double bandOffset = 30;
 
   /// Whether to boost now to hold [targetY] (world y, down positive).
-  static bool shouldFlap({required double y, required double vy, required double targetY}) {
-    const t = lookAhead;
-    final predicted = y + vy * t + 0.5 * FlightTuning.gravity * t * t;
-    return predicted > targetY + bandOffset && vy > -100;
-  }
+  static bool shouldFlap({required double y, required double vy, required double targetY}) =>
+      y + vy * lookAhead > targetY + bandOffset && vy > -100;
 }

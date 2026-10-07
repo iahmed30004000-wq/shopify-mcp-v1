@@ -18117,10 +18117,6 @@
   "@cinemaFlappyOrbitLaunchHint": {
     "description": "Flappy Orbit HUD hint on the launch pad"
   },
-  "cinemaFlappyOrbitHeroName": "Falak",
-  "@cinemaFlappyOrbitHeroName": {
-    "description": "Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')"
-  },
   "cinemaFlappyOrbitBossName": "Maestro Ghaym",
   "@cinemaFlappyOrbitBossName": {
     "description": "Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)"
@@ -18304,6 +18300,138 @@
   "cinemaMetropolisParry": "Parry!",
   "@cinemaMetropolisParry": {
     "description": "HUD flash on a parry"
+  },
+  "cinemaCaravanOpeningSubtitle": "Nawwara and Zajil… one caravan racing to the Great Oasis",
+  "@cinemaCaravanOpeningSubtitle": {
+    "description": "Caravan Dash opening card subtitle"
+  },
+  "cinemaCaravanControlsHint": "Tap to jump, hold to slide, swipe up or down to change lane, swipe sideways to throw a date",
+  "@cinemaCaravanControlsHint": {
+    "description": "Controls line shown on the map at the start"
+  },
+  "cinemaCaravanHero": "Nawwara",
+  "@cinemaCaravanHero": {
+    "description": "Name of the young caravaneer riding the camel Zajil"
+  },
+  "cinemaCaravanBossName": "Rammal the Sand-Djinn",
+  "@cinemaCaravanBossName": {
+    "description": "Name of the caravan-thief boss (rammal = sand-reader)"
+  },
+  "cinemaCaravanScorpionName": "The Brass Scorpion",
+  "@cinemaCaravanScorpionName": {
+    "description": "Name of the boss's clockwork mount in the last phase"
+  },
+  "cinemaCaravanLegOne": "Leg One: The Sea of Dunes",
+  "@cinemaCaravanLegOne": {
+    "description": "Map caption of the first leg"
+  },
+  "cinemaCaravanLegTwo": "Leg Two: The Oasis and the Night Market",
+  "@cinemaCaravanLegTwo": {
+    "description": "Map caption of the second leg"
+  },
+  "cinemaCaravanLegThree": "The Last Leg: The Road to the Great Oasis",
+  "@cinemaCaravanLegThree": {
+    "description": "Map caption of the third leg"
+  },
+  "cinemaCaravanMapHint": "One caravan… and a djinn who wants its cargo",
+  "@cinemaCaravanMapHint": {
+    "description": "Line under the map on the first showing"
+  },
+  "cinemaCaravanHudLeg": "Leg {index}/{total}",
+  "@cinemaCaravanHudLeg": {
+    "description": "HUD plaque: which leg of how many; numbers are pre-formatted",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cinemaCaravanSandstorm": "Sandstorm!",
+  "@cinemaCaravanSandstorm": {
+    "description": "Callout when the sandstorm set piece begins"
+  },
+  "cinemaCaravanNightMarket": "The night market",
+  "@cinemaCaravanNightMarket": {
+    "description": "Callout when the night market set piece begins"
+  },
+  "cinemaCaravanLanternLit": "The lantern lights the way!",
+  "@cinemaCaravanLanternLit": {
+    "description": "Callout on the first lantern picked up in the dark"
+  },
+  "cinemaCaravanDjinnEnters": "Rammal rises from the sand",
+  "@cinemaCaravanDjinnEnters": {
+    "description": "Chapter card subtitle when the boss arrives"
+  },
+  "cinemaCaravanDjinnBarrels": "“My barrels will roll you into the sand!”",
+  "@cinemaCaravanDjinnBarrels": {
+    "description": "Boss taunt before the barrel phase"
+  },
+  "cinemaCaravanDjinnWhirls": "“My whirlwinds know where you hide!”",
+  "@cinemaCaravanDjinnWhirls": {
+    "description": "Boss taunt before the sand-whirl phase"
+  },
+  "cinemaCaravanDjinnScorpion": "“My brass scorpion outruns any camel!”",
+  "@cinemaCaravanDjinnScorpion": {
+    "description": "Boss taunt before the scorpion chase"
+  },
+  "cinemaCaravanDjinnSigned": "Rammal",
+  "@cinemaCaravanDjinnSigned": {
+    "description": "Signature line under a taunt card"
+  },
+  "cinemaCaravanDjinnBeaten": "“That's… not fair!”",
+  "@cinemaCaravanDjinnBeaten": {
+    "description": "The boss's line when his scorpion breaks down"
+  },
+  "cinemaCaravanDjinnFlees": "Rammal flees!",
+  "@cinemaCaravanDjinnFlees": {
+    "description": "Callout when a boss phase is beaten"
+  },
+  "cinemaCaravanThrowHint": "Swipe sideways to throw dates!",
+  "@cinemaCaravanThrowHint": {
+    "description": "Callout at the start of the scorpion chase"
+  },
+  "cinemaCaravanOutrun": "Outrun him!",
+  "@cinemaCaravanOutrun": {
+    "description": "Callout when the scorpion breaks and the camel sprints"
+  },
+  "cinemaCaravanEndTitle": "The caravan has arrived",
+  "@cinemaCaravanEndTitle": {
+    "description": "Winning end card"
+  },
+  "cinemaCaravanEndSubtitle": "And the oasis welcomed Nawwara and Zajil with drums and dates.",
+  "@cinemaCaravanEndSubtitle": {
+    "description": "Winning end card subtitle"
+  },
+  "cinemaCaravanLostSubtitle": "The caravan was lost to the sand this time. The oasis waits for another try.",
+  "@cinemaCaravanLostSubtitle": {
+    "description": "Losing end card subtitle"
+  },
+  "cinemaCaravanLifeBack": "Reel recovered!",
+  "@cinemaCaravanLifeBack": {
+    "description": "Callout when a life comes back after a boss phase"
+  },
+  "cinemaCaravanLegDone": "Leg complete!",
+  "@cinemaCaravanLegDone": {
+    "description": "Callout when a leg ends"
+  },
+  "cinemaCaravanPouchFull": "Pouch full!",
+  "@cinemaCaravanPouchFull": {
+    "description": "Callout when the date pouch is full"
+  },
+  "cinemaCaravanBossHit": "Hit!",
+  "@cinemaCaravanBossHit": {
+    "description": "Callout when a thrown date hits the boss"
+  },
+  "cinemaCaravanDodged": "Dodged!",
+  "@cinemaCaravanDodged": {
+    "description": "Callout when a boss attack is dodged"
+  },
+  "cinemaCaravanDatePouch": "Date pouch",
+  "@cinemaCaravanDatePouch": {
+    "description": "Semantics label of the date-pouch HUD plaque"
   },
   "dataCentreTitle": "Your data",
   "@dataCentreTitle": {

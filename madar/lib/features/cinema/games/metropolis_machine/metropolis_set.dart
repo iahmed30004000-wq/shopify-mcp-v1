@@ -353,36 +353,50 @@ class _Crowd extends Component with HasGameReference<CinemaGame> {
   void _draw(InkBuild b) {
     final c = b.colors;
     final pen = b.pen;
-    final ink = _mix(c.fill(PaletteRole.shadow), c.ink, 0.5);
+    final ink = _mix(c.fill(PaletteRole.shadow), c.ink, 0.6);
     final t = b.time;
     for (var i = 0; i < 7; i++) {
-      final x = i * 52.0 + (i.isOdd ? 8 : 0);
-      final ph = t * 7 + i * 1.3;
-      final bob = math.sin(ph * 2).abs() * 2;
-      final h = 46.0 + (i % 3) * 4;
+      final x = i * 54.0 + (i.isOdd ? 10 : 0);
+      final ph = t * 6.5 + i * 1.3;
+      final bob = math.sin(ph * 2).abs() * 2.5;
+      final h = 56.0 + (i % 3) * 5;
+      final slump = 0.08 + (i % 2) * 0.05;
       b.layer();
-      // Body, head and cap.
-      b.shape(ink, ink: 0.4);
-      pen.roundRect(x - 7, -h * 0.72 - bob, x + 7, -h * 0.28 - bob, 3);
-      b.shape(ink, ink: 0.4);
-      pen.circle(x + 1, -h * 0.84 - bob, h * 0.11);
-      b.shape(ink, ink: 0.4);
-      pen.roundRect(x - 7, -h * 0.94 - bob, x + 8, -h * 0.9 - bob, 1);
-      // Legs.
-      final sw = math.sin(ph) * 6;
-      b.stroke(ink, 3.2);
+      // Slumped shoulders, a round head under a flat cap – all one silhouette.
+      b.shape(ink, ink: 0.3);
       pen
-        ..moveTo(x - 3, -h * 0.3 - bob)
-        ..lineTo(x - 3 + sw, 0)
-        ..moveTo(x + 3, -h * 0.3 - bob)
-        ..lineTo(x + 3 - sw, 0);
-      // An arm and a lunch pail.
-      b.stroke(ink, 2.6);
+        ..moveTo(x - h * 0.17, -h * 0.3 - bob)
+        ..lineTo(x - h * 0.2, -h * 0.68 - bob)
+        ..quadTo(x - h * 0.1, -h * 0.78 - bob, x, -h * 0.76 - bob)
+        ..quadTo(x + h * 0.12, -h * 0.78 - bob, x + h * 0.2, -h * 0.68 - bob)
+        ..lineTo(x + h * 0.17, -h * 0.3 - bob)
+        ..close();
+      b.shape(ink, ink: 0.3);
+      pen.circle(x - h * slump, -h * 0.87 - bob, h * 0.12);
+      b.shape(ink, ink: 0.3);
       pen
-        ..moveTo(x + 6, -h * 0.6 - bob)
-        ..lineTo(x + 11, -h * 0.4 - bob);
-      b.shape(ink, ink: 0.4);
-      pen.roundRect(x + 8, -h * 0.4 - bob, x + 15, -h * 0.3 - bob, 1);
+        ..moveTo(x - h * (slump + 0.16), -h * 0.93 - bob)
+        ..lineTo(x - h * (slump - 0.2), -h * 0.95 - bob)
+        ..lineTo(x - h * (slump - 0.1), -h * 0.99 - bob)
+        ..lineTo(x - h * (slump + 0.12), -h * 0.98 - bob)
+        ..close();
+      // Legs trudging.
+      final sw = math.sin(ph) * h * 0.13;
+      b.stroke(ink, h * 0.07);
+      pen
+        ..moveTo(x - h * 0.07, -h * 0.32 - bob)
+        ..lineTo(x - h * 0.07 - sw, 0)
+        ..moveTo(x + h * 0.07, -h * 0.32 - bob)
+        ..lineTo(x + h * 0.07 + sw, 0);
+      // Arms: one swinging, one carrying the lunch pail.
+      b.stroke(ink, h * 0.055);
+      pen
+        ..moveTo(x + h * 0.16, -h * 0.64 - bob)
+        ..lineTo(x + h * 0.2 - sw * 0.5, -h * 0.4 - bob)
+        ..moveTo(x - h * 0.16, -h * 0.64 - bob)
+        ..lineTo(x - h * 0.22, -h * 0.38 - bob);
+      b.shape(ink, ink: 0.3);
+      pen.roundRect(x - h * 0.3, -h * 0.38 - bob, x - h * 0.14, -h * 0.26 - bob, 1.5);
       b.endLayer();
     }
   }

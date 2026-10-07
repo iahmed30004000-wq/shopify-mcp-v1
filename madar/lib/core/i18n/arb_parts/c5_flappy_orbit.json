@@ -1,7 +1,6 @@
 {
   "cinemaFlappyOrbitTapToBoost": {"ar": "المس الشاشة لتدفع الصاروخ!", "en": "Tap to boost the rocket!", "description": "Flappy Orbit opening card subtitle"},
   "cinemaFlappyOrbitLaunchHint": {"ar": "المس الشاشة للإقلاع", "en": "Tap to launch", "description": "Flappy Orbit HUD hint on the launch pad"},
-  "cinemaFlappyOrbitHeroName": {"ar": "فَلَك", "en": "Falak", "description": "Name of the astrolabe-headed pilot hero of Flappy Orbit (means 'orbit')"},
   "cinemaFlappyOrbitBossName": {"ar": "المايسترو غَيم", "en": "Maestro Ghaym", "description": "Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)"},
   "cinemaFlappyOrbitActTwo": {"ar": "الفصل الثاني", "en": "Act Two", "description": "Chapter card before the first boss"},
   "cinemaFlappyOrbitActThree": {"ar": "الفصل الثالث", "en": "Act Three", "description": "Chapter card before the second boss"},

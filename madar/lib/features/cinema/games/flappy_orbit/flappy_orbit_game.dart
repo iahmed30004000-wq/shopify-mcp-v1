@@ -106,6 +106,8 @@ class FlappyOrbitGame extends CinemaGame {
   double _flapCooldown = 0;
   double _spotIn = 0;
   double _stageAngle = 0;
+  double _gustDir = -1;
+  double _noteLaunchIn = -1;
   double _loopBaseY = cruiseY;
   double _crashT = -1;
   bool _cardDone = false;
@@ -136,7 +138,8 @@ class FlappyOrbitGame extends CinemaGame {
     ...super.buildHud(),
     (HudSlot.bottomCenter, hudKit.progress()),
     (HudSlot.bottomCenter, hudKit.bossBar()),
-    (HudSlot.bottomStart, hudKit.label(() => _calloutTime > 0 ? _callout : '')),
+    // At the end side: the boss bar's name plate sits at the start side.
+    (HudSlot.bottomEnd, hudKit.label(() => _calloutTime > 0 ? _callout : '')),
   ];
 
   /// Beats since the scene started, at the era's tempo (the cast bounces on
@@ -181,7 +184,7 @@ class FlappyOrbitGame extends CinemaGame {
       ..facing = -1
       ..expression = RigExpression.happy
       ..lookAt(const Offset(-1, 0.2));
-    _birdC = _OffstageRig(rig: bird, position: Vector2(heroX + 72, OrbitStage.groundY), priority: 9);
+    _birdC = _OffstageRig(rig: bird, position: Vector2(heroX + 98, OrbitStage.groundY), priority: 9);
     world
       ..add(_padC)
       ..add(gates)
@@ -561,14 +564,23 @@ class FlappyOrbitGame extends CinemaGame {
       _spotIn = 0.4;
       stage.spotlight(worldToScreen(_maestroCentre));
     }
+    // A thunder-note leaves the baton a beat into the slash, when it points
+    // at the hero.
+    if (_noteLaunchIn > 0) {
+      _noteLaunchIn -= dt;
+      if (_noteLaunchIn <= 0) _fireNote(p, flight.y);
+    }
     if (b.step == BossStep.windUp) {
       final k = (b.timer / b.windUpTime).clamp(0.0, 1.0);
       maestro
         ..windUp = k
         ..attack = b.attack == BossAttackKind.gust ? CloudAttack.gust : CloudAttack.thunder;
       attacks.lanePreview = b.attack == BossAttackKind.gust ? k : 0;
+    } else if (attacks.activeGusts > 0) {
+      attacks.lanePreview = 1;
     } else {
       attacks.lanePreview = math.max(0, attacks.lanePreview - dt * 4);
+      if (attacks.lanePreview <= 0) attacks.laneY = null;
     }
     switch (b.update(dt)) {
       case BossSignal.none:
@@ -577,24 +589,23 @@ class FlappyOrbitGame extends CinemaGame {
         maestro.attack = b.attack == BossAttackKind.gust ? CloudAttack.gust : CloudAttack.thunder;
         maestro.lookAt(const Offset(-1, 0));
         // He inhales looking at where you are: the gust's lane is fixed now.
-        attacks.laneY = flight.y;
+        if (b.attack == BossAttackKind.gust) attacks.laneY = flight.y;
         feedback(b.attack == BossAttackKind.gust ? CinemaSound.slideUp : CinemaSound.tick, volume: 0.6);
       case BossSignal.fire:
         maestro
           ..windUp = 0
           ..act(RigAction.attack, restart: true);
         if (b.attack == BossAttackKind.gust) {
-          final dir = b.attackNo.isEven ? 1.0 : -1.0;
-          attacks.blowGust(p.x + maestro.mouthX - 30, attacks.laneY ?? flight.y, dir);
-          attacks.laneY = null;
+          _gustDir = -_gustDir;
+          attacks.blowGust(p.x + maestro.mouthX - 20, attacks.laneY ?? flight.y, _gustDir);
           feedback(CinemaSound.whoosh, volume: 1, pitch: 0.7);
           kick(shake: 0.2);
           puffs.spawn(p.x + maestro.mouthX - 50, p.y + maestro.mouthY, size: 34, life: 0.6, driftY: 0, vx: -200);
         } else {
-          _fireNote(p, flight.y);
+          _noteLaunchIn = 0.16;
         }
       case BossSignal.fireSecond:
-        _fireNote(p, flight.y + (flight.vy > 0 ? 70 : -70));
+        _noteLaunchIn = 0.16;
       case BossSignal.dodged:
         _maestroHurt(b);
       case BossSignal.shrugged:
@@ -613,8 +624,10 @@ class FlappyOrbitGame extends CinemaGame {
   }
 
   void _fireNote(Vector2 p, double targetY) {
-    final x = p.x + maestro.batonX, y = p.y + maestro.batonY;
-    attacks.fireNote(x, y, heroX, targetY, flightTime: 0.9 * brain!.pace);
+    // From the baton tip, but never closer than a readable flight away (his
+    // reach is long enough to tap the rocket).
+    final x = math.max(p.x + maestro.batonX, heroX + 120), y = p.y + maestro.batonY;
+    attacks.fireNote(x, y, heroX, targetY, flightTime: 0.62 * brain!.pace);
     feedback(CinemaSound.zap, volume: 0.8);
     kick(flash: 0.12);
     stars.burst(x, y, count: 4, speed: 120, size: 5);
@@ -636,6 +649,11 @@ class FlappyOrbitGame extends CinemaGame {
 
   void _phaseUp(BossBrain b) {
     maestro.phase = b.phase.index;
+    // A clean breather: whatever is still in the air is gone.
+    attacks
+      ..clear()
+      ..laneY = null;
+    _noteLaunchIn = -1;
     addScore(5);
     kick(flash: 0.3, shake: 0.5, damage: 0.2);
     switch (b.phase) {
@@ -667,6 +685,7 @@ class FlappyOrbitGame extends CinemaGame {
     attacks
       ..clear()
       ..laneY = null;
+    _noteLaunchIn = -1;
     music.stinger(Stinger.bossDefeat);
     addScore(10);
     hud.bossHealth = 0;
@@ -833,25 +852,25 @@ class FlappyOrbitGame extends CinemaGame {
   void _birdUpdate(double dt) {
     final p = _birdC.position;
     if (_birdLeaving) {
-      p.x += 300 * dt;
-      p.y -= 220 * dt;
+      p.x += 170 * dt;
+      p.y -= 290 * dt;
       bird
         ..speed = 300
-        ..velocity = const Offset(300, -220);
+        ..velocity = const Offset(170, -290);
       if (bird.action != RigAction.run && bird.actionTime > 0.3) bird.act(RigAction.run);
-      if (p.x > OrbitStage.width + 200) {
+      if (p.y < -160) {
         _birdLeaving = false;
         p.setValues(OrbitStage.width + 400, 0);
         bird.velocity = Offset.zero;
       }
     } else if (_birdReturning) {
-      final tx = hero.position.x - 76, ty = flight.y + 56;
+      final tx = hero.position.x - 112, ty = flight.y + 92;
       p.x += (tx - p.x) * math.min(1, dt * 2.5);
       p.y += (ty - p.y) * math.min(1, dt * 2.5);
       bird.velocity = Offset((tx - p.x) * 2, (ty - p.y) * 2);
       if ((tx - p.x).abs() < 12 && bird.action != RigAction.cheer) bird.act(RigAction.cheer);
     } else if (act == FlappyAct.launch) {
-      p.x = _padC.position.x + 68;
+      p.x = _padC.position.x + 94;
     }
   }
 
@@ -895,22 +914,27 @@ class FlappyOrbitGame extends CinemaGame {
         if (!g.active || g.passed || g.x + GateSlot.halfWidth < heroX - 30) continue;
         if (next == null || g.x < next.x) next = g;
       }
-      if (next != null) target = next.centreAt(beat + 0.5) + 8;
+      if (next != null) target = next.centreAt(beat + 0.5) - 10;
     } else if (act == FlappyAct.boss) {
+      // Keep clear of the lane the Maestro is blowing (or about to), and of
+      // the thunder-note whose mark is nearest: stay on the side you are on
+      // while there is room, dropping being quicker than climbing.
+      var threat = double.nan, nearest = double.infinity;
       for (var i = 0; i < BossAttacks.noteCount; i++) {
-        if (!attacks.noteActive(i)) continue;
-        final nx = attacks.noteX(i);
-        if (nx < heroX - 10) continue;
+        if (!attacks.noteActive(i) || attacks.noteX(i) < heroX - 10) continue;
         final ny = attacks.noteYAt(i, heroX);
-        if ((ny - flight.y).abs() < 110) target = ny > flight.y ? ny - 150 : ny + 150;
+        final d = (ny - flight.y).abs();
+        if (d < nearest) {
+          nearest = d;
+          threat = ny;
+        }
       }
       final lane = attacks.laneY;
-      if (lane != null && (lane - flight.y).abs() < 120) target = lane > flight.y ? lane - 150 : lane + 150;
-      for (var i = 0; i < BossAttacks.gustCount; i++) {
-        if (!attacks.gustActive(i)) continue;
-        final gx = attacks.gustX(i), gy = attacks.gustY(i);
-        if (gx < heroX - 10) continue;
-        if ((gy - flight.y).abs() < 120) target = gy > flight.y ? gy - 150 : gy + 150;
+      if (lane != null) threat = lane;
+      if (!threat.isNaN) {
+        final roomBelow = FlightTuning.floor - 70 - threat, roomAbove = threat - (FlightTuning.ceiling + 50);
+        final below = flight.y >= threat;
+        target = (below && roomBelow >= 120) || roomAbove < 120 ? threat + 150 : threat - 150;
       }
     }
     target = target.clamp(FlightTuning.ceiling + 50, FlightTuning.floor - 70);

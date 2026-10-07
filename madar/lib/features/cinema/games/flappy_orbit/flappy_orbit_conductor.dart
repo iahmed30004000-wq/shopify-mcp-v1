@@ -142,9 +142,10 @@ class ConductorCloud extends HoseRig {
             batonA = -1.3;
             _shape[0] = _shape[1] = HandShape.open;
           } else {
-            h1x = shX + hh * 0.05 + windUp * hh * 0.12;
-            h1y = shY - hh * 0.45 - windUp * hh * 0.4;
-            batonA = -1.4 - windUp * 0.9;
+            // The baton rises straight overhead, quivering at the top.
+            h1x = hh * 0.12 + windUp * hh * 0.06;
+            h1y = shY - hh * 0.5 - windUp * hh * 0.38 + math.sin(time * 30) * hh * 0.01 * windUp;
+            batonA = -1.65 - windUp * 0.35;
             h0x = -shX - hh * 0.08;
             h0y = shY - hh * 0.2 * windUp;
             mouth = 0.3 * windUp;
@@ -165,11 +166,12 @@ class ConductorCloud extends HoseRig {
             batonA = -1.0;
             _shape[0] = _shape[1] = HandShape.open;
           case CloudAttack.thunder:
+            // The baton slashes from overhead down and forward.
             final slash = Bounce.span(t, 0, 0.14), rec = Bounce.span(t, 0.4, 0.7);
             final k = slash * (1 - rec);
-            h1x = shX + hh * 0.3 + k * hh * 0.2;
-            h1y = Bounce.lerp(shY - hh * 0.85, shY + hh * 0.15, k);
-            batonA = Bounce.lerp(-2.2, 0.55, k);
+            h1x = Bounce.lerp(hh * 0.18, shX + hh * 0.06, k);
+            h1y = Bounce.lerp(shY - hh * 0.88, shY + hh * 0.1, k);
+            batonA = Bounce.lerp(-2.0, 0.55, k);
             h0x = -shX - hh * 0.12 - k * hh * 0.08;
             h0y = shY - hh * 0.15 + k * hh * 0.1;
             mouth = 0.8 * k;
@@ -178,9 +180,9 @@ class ConductorCloud extends HoseRig {
       case RigAction.hurt:
         final k = Bounce.span(t, 0, 0.1) * (1 - Bounce.span(t, 0.35, 0.6));
         mouth = 0.6 * k;
-        h0x = -shX - hh * 0.2 - k * hh * 0.1;
+        h0x = -shX - hh * 0.12 - k * hh * 0.06;
         h0y = shY - hh * 0.3 * k;
-        h1x = shX + hh * 0.2 + k * hh * 0.1;
+        h1x = shX + hh * 0.12 + k * hh * 0.06;
         h1y = shY - hh * 0.35 * k;
         batonA = -0.3;
         _shape[0] = _shape[1] = HandShape.open;
@@ -464,7 +466,7 @@ class ConductorCloud extends HoseRig {
         Emanata.sweat(b, fx + fr * 1.1, fy - fr * 0.4, hh * 0.07, 1, (actionTime * 2) % 1);
         Emanata.sweat(b, fx - fr * 1.1, fy - fr * 0.4, hh * 0.07, -1, (actionTime * 2 + 0.3) % 1);
       }
-      if (action == RigAction.hurt && actionTime < 0.2) Emanata.impact(b, 0, cy, hh * 0.55);
+      if (action == RigAction.hurt && actionTime < 0.2) Emanata.impact(b, -w * 0.55, cy - hv * 0.5, hh * 0.3);
       if (ph >= 1 && action == RigAction.idle) {
         Emanata.steam(b, -w * 0.9, cy - hv * 0.3, hh * 0.05, (time * 1.3) % 1, drift: -0.4);
       }

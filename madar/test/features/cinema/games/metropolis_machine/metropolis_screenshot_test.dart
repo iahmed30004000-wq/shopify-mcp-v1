@@ -121,7 +121,7 @@ void main() {
     (0, 1, AttackKind.stamp, 0.2),
     (0, 2, AttackKind.stampSweep, 0.6),
     (1, 0, AttackKind.jets, 0.4),
-    (1, 1, AttackKind.blast, 0.35),
+    (1, 1, AttackKind.blast, 0.12),
     (1, 2, AttackKind.rivets, 0.5),
     (2, 0, AttackKind.stab, 0.15),
     (2, 1, AttackKind.drop, 0.3),

@@ -18198,9 +18198,6 @@ class L10nEn extends L10n {
   String get cinemaFlappyOrbitLaunchHint => 'Tap to launch';
 
   @override
-  String get cinemaFlappyOrbitHeroName => 'Falak';
-
-  @override
   String get cinemaFlappyOrbitBossName => 'Maestro Ghaym';
 
   @override
@@ -18344,6 +18341,109 @@ class L10nEn extends L10n {
 
   @override
   String get cinemaMetropolisParry => 'Parry!';
+
+  @override
+  String get cinemaCaravanOpeningSubtitle =>
+      'Nawwara and Zajil… one caravan racing to the Great Oasis';
+
+  @override
+  String get cinemaCaravanControlsHint =>
+      'Tap to jump, hold to slide, swipe up or down to change lane, swipe sideways to throw a date';
+
+  @override
+  String get cinemaCaravanHero => 'Nawwara';
+
+  @override
+  String get cinemaCaravanBossName => 'Rammal the Sand-Djinn';
+
+  @override
+  String get cinemaCaravanScorpionName => 'The Brass Scorpion';
+
+  @override
+  String get cinemaCaravanLegOne => 'Leg One: The Sea of Dunes';
+
+  @override
+  String get cinemaCaravanLegTwo => 'Leg Two: The Oasis and the Night Market';
+
+  @override
+  String get cinemaCaravanLegThree =>
+      'The Last Leg: The Road to the Great Oasis';
+
+  @override
+  String get cinemaCaravanMapHint =>
+      'One caravan… and a djinn who wants its cargo';
+
+  @override
+  String cinemaCaravanHudLeg(String index, String total) {
+    return 'Leg $index/$total';
+  }
+
+  @override
+  String get cinemaCaravanSandstorm => 'Sandstorm!';
+
+  @override
+  String get cinemaCaravanNightMarket => 'The night market';
+
+  @override
+  String get cinemaCaravanLanternLit => 'The lantern lights the way!';
+
+  @override
+  String get cinemaCaravanDjinnEnters => 'Rammal rises from the sand';
+
+  @override
+  String get cinemaCaravanDjinnBarrels =>
+      '“My barrels will roll you into the sand!”';
+
+  @override
+  String get cinemaCaravanDjinnWhirls => '“My whirlwinds know where you hide!”';
+
+  @override
+  String get cinemaCaravanDjinnScorpion =>
+      '“My brass scorpion outruns any camel!”';
+
+  @override
+  String get cinemaCaravanDjinnSigned => 'Rammal';
+
+  @override
+  String get cinemaCaravanDjinnBeaten => '“That\'s… not fair!”';
+
+  @override
+  String get cinemaCaravanDjinnFlees => 'Rammal flees!';
+
+  @override
+  String get cinemaCaravanThrowHint => 'Swipe sideways to throw dates!';
+
+  @override
+  String get cinemaCaravanOutrun => 'Outrun him!';
+
+  @override
+  String get cinemaCaravanEndTitle => 'The caravan has arrived';
+
+  @override
+  String get cinemaCaravanEndSubtitle =>
+      'And the oasis welcomed Nawwara and Zajil with drums and dates.';
+
+  @override
+  String get cinemaCaravanLostSubtitle =>
+      'The caravan was lost to the sand this time. The oasis waits for another try.';
+
+  @override
+  String get cinemaCaravanLifeBack => 'Reel recovered!';
+
+  @override
+  String get cinemaCaravanLegDone => 'Leg complete!';
+
+  @override
+  String get cinemaCaravanPouchFull => 'Pouch full!';
+
+  @override
+  String get cinemaCaravanBossHit => 'Hit!';
+
+  @override
+  String get cinemaCaravanDodged => 'Dodged!';
+
+  @override
+  String get cinemaCaravanDatePouch => 'Date pouch';
 
   @override
   String get dataCentreTitle => 'Your data';

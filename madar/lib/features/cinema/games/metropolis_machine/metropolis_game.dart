@@ -84,10 +84,10 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   bool _entering = false;
   double _enterFrom = 0;
   bool _ended = false;
-  double _bossShadeTick = 0;
   String _machineLabel = '';
   Offset? _heroSpot;
   bool _baronFlying = false;
+  bool _finaleCardShown = false;
   double _baronVx = 0, _baronVy = 0, _baronSpin = 0;
   double _cityLights = 0;
   double _scroll = 0;
@@ -129,22 +129,49 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       : IntertitleCard(text: l10n.cinemaGameOver, subtitle: l10n.cinemaMetropolisLostSubtitle, kind: IntertitleKind.gameOver);
 
   @override
-  List<(HudSlot, HudItem)> buildHud() {
-    final rtl = env.direction == TextDirection.rtl;
-    // The run pad always sits bottom-left, the buttons bottom-right (hands,
-    // not reading direction); the slots mirror, so pick them accordingly.
-    final padSlot = rtl ? HudSlot.bottomEnd : HudSlot.bottomStart;
-    final buttonSlot = rtl ? HudSlot.bottomStart : HudSlot.bottomEnd;
-    return [
-      (HudSlot.topStart, hudKit.score()),
-      (HudSlot.topCenter, hudKit.lives()),
-      (HudSlot.topCenter, hudKit.label(() => _machineLabel)),
-      (HudSlot.topEnd, hudKit.pauseButton(pauseGame)),
-      (HudSlot.bottomCenter, hudKit.bossBar()),
-      (padSlot, RunPadHint(this)),
-      (buttonSlot, JumpButtonHint(this)),
-      (buttonSlot, WrenchButtonHint(this)),
-    ];
+  List<(HudSlot, HudItem)> buildHud() => [
+    (HudSlot.topStart, hudKit.score()),
+    (HudSlot.topCenter, hudKit.lives()),
+    (HudSlot.topCenter, hudKit.label(() => _machineLabel)),
+    (HudSlot.topEnd, hudKit.pauseButton(pauseGame)),
+    (HudSlot.bottomCenter, hudKit.bossBar()),
+  ];
+
+  // The control hints sit above the HUD's bottom row, inside the play
+  // area: the run pad under the left thumb, the buttons under the right one
+  // (hands, not reading direction), clear of the boss bar.
+  late final RunPadHint _padHint = RunPadHint(this);
+  late final JumpButtonHint _jumpHint = JumpButtonHint(this);
+  late final WrenchButtonHint _wrenchHint = WrenchButtonHint(this);
+  Rect _padHintRect = Rect.zero, _jumpHintRect = Rect.zero, _wrenchHintRect = Rect.zero;
+  Rect _controlsFor = Rect.zero;
+
+  Rect get padHintRect => _padHintRect;
+  Rect get jumpHintRect => _jumpHintRect;
+  Rect get wrenchHintRect => _wrenchHintRect;
+
+  void _layoutControls() {
+    final r = playRect;
+    if (r.isEmpty) return;
+    final ctx = hudContext;
+    final s = ctx.scale;
+    final bottom = math.min(r.bottom - 10 * s, stage.hudRect.bottom - 52 * s - 8 * s);
+    final pad = _padHint.layoutSize(ctx), jump = _jumpHint.layoutSize(ctx), wrench = _wrenchHint.layoutSize(ctx);
+    final left = math.max(r.left, stage.hudRect.left) + 6 * s;
+    final right = math.min(r.right, stage.hudRect.right) - 6 * s;
+    _padHintRect = Rect.fromLTWH(left, bottom - pad.height, pad.width, pad.height);
+    _jumpHintRect = Rect.fromLTWH(right - jump.width, bottom - jump.height, jump.width, jump.height);
+    _wrenchHintRect = Rect.fromLTWH(_jumpHintRect.left - 10 * s - wrench.width, bottom - wrench.height, wrench.width, wrench.height);
+    _controlsFor = r;
+  }
+
+  void _paintControls(Canvas canvas) {
+    if (!isPlaying && state != SceneState.paused) return;
+    if (_controlsFor != playRect) _layoutControls();
+    final ctx = hudContext;
+    _padHint.paint(canvas, _padHintRect, ctx);
+    _jumpHint.paint(canvas, _jumpHintRect, ctx);
+    _wrenchHint.paint(canvas, _wrenchHintRect, ctx);
   }
 
   // ----------------------------------------------------- set / hud state
@@ -169,17 +196,24 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   @override
   bool get dashLit => _dashLit > 0;
 
-  /// The run pad's touch zone (screen px).
+  /// The run pad's touch zone (screen px): the bottom-left of the play
+  /// area, generous around the painted pad.
   Rect get padZone {
     final r = playRect;
-    return Rect.fromLTRB(r.left - 40, r.bottom - r.height * 0.3, r.left + r.width * 0.42, r.bottom + 80);
+    if (_controlsFor != r) _layoutControls();
+    return Rect.fromLTRB(r.left - 40, _padHintRect.top - r.height * 0.14, r.left + r.width * 0.42, r.bottom + 80);
   }
 
-  /// The jump button's touch zone (screen px).
+  /// The jump button's touch zone (screen px): the outer button plus a
+  /// margin, so the wrench button next to it stays a plain tap.
   Rect get jumpZone {
     final r = playRect;
-    return Rect.fromLTRB(r.right - r.width * 0.2, r.bottom - r.height * 0.22, r.right + 40, r.bottom + 80);
+    if (_controlsFor != r) _layoutControls();
+    return Rect.fromLTRB(_jumpHintRect.left - 6, _jumpHintRect.top - 16, r.right + 40, r.bottom + 80);
   }
+
+  /// Tests: the machine stands idle (no attacks), so input can be probed.
+  bool debugPeaceful = false;
 
   /// True while a cinematic or a card has the stage (input ignored).
   bool get cinematic => act != MetroAct.fight || _entering || transitions.isActive;
@@ -238,6 +272,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     for (var i = 0; i < hazards.items.length; i++) {
       _wasArmed.add(false);
     }
+    add(_PaintLayer(_paintControls)..priority = 150);
     hud
       ..lives = MetroLives.start
       ..maxLives = MetroLives.max;
@@ -273,7 +308,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     act = MetroAct.opening;
     actTime = 0;
     _crowdVisible = true;
-    _crowdX = 380;
+    _crowdX = 40;
     heroRig
       ..act(RigAction.walk)
       ..speed = 120
@@ -284,7 +319,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
 
   void _openingTick(double dt) {
     actTime += dt;
-    _crowdX -= 36 * dt;
+    _crowdX -= 30 * dt;
     if (actTime < 2.8) {
       // The hero walks in from the wings.
       final k = Bounce.smooth(actTime / 2.8);
@@ -368,7 +403,9 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       ..bossHealth = 1
       ..bossName = bossName(bossIndex)
       ..progress = null;
-    heroBody.reset(x: MetroStage.heroStartX);
+    heroBody
+      ..maxX = kind.heroLimit
+      ..reset(x: MetroStage.heroStartX);
     heroRig
       ..act(RigAction.idle)
       ..speed = 0
@@ -380,15 +417,26 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     _placePlatforms(kind, 0);
   }
 
-  void _placePlatforms(MetroBoss kind, int phase) {
-    for (final p in platforms) {
-      p.active = false;
-    }
+  /// Puts the hall's lift cars in place (the Titan's two, the Dynamo's one
+  /// from its last phase); on a phase change the Titan's only speed up.
+  void _placePlatforms(MetroBoss kind, int phase, {bool reset = true}) {
     if (kind == MetroBoss.liftTitan) {
       final speed = 40.0 + phase * 32;
-      platforms[0].place(96, t: 0.1, dir: 1, speed: speed);
-      platforms[1].place(206, t: 0.9, dir: -1, speed: speed);
-    } else if (kind == MetroBoss.motherDynamo && phase >= 2) {
+      if (reset || !platforms[0].active) {
+        platforms[0].place(96, t: 0.1, dir: 1, speed: speed);
+        platforms[1].place(206, t: 0.9, dir: -1, speed: speed);
+      } else {
+        platforms[0].speed = speed;
+        platforms[1].speed = speed;
+      }
+      return;
+    }
+    if (reset) {
+      for (final p in platforms) {
+        p.active = false;
+      }
+    }
+    if (kind == MetroBoss.motherDynamo && phase >= 2 && !platforms[0].active) {
       platforms[0].place(150, t: 0.2, dir: 1, speed: 70, w: 100);
     }
   }
@@ -421,6 +469,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   }
 
   void _removeBoss() {
+    heroBody.maxX = MetroStage.heroMaxX;
     _bossComponent?.removeFromParent();
     _bossComponent = null;
     bossRig = null;
@@ -497,7 +546,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       p.update(dt);
     }
     // The machine.
-    if (!cards) {
+    if (!cards && !debugPeaceful) {
       b.update(dt, heroBody.x, heroBody.y);
       for (final e in b.events) {
         _onBossEvent(e);
@@ -510,10 +559,6 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       _collide();
       _strikes();
     }
-    if (b.hurtLeft > 0.3 && _bossShadeTick <= 0) {
-      _bossShadeTick = 0.1;
-    }
-    if (_bossShadeTick > 0) _bossShadeTick -= dt;
     // The ragtime follows the fight.
     music.setIntensity(MetroTuning.intensity(b.kind, b.phase) + (b.mode == BossMode.telegraph ? 0.05 : 0));
   }
@@ -658,9 +703,11 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
         _spawn(HazardKind.stamp, x: e.x, w: 104, h: 72, telegraph: tell, life: 0.25);
         feedback(CinemaSound.tick, volume: 0.7, pitch: 0.8);
       case AttackKind.pistons:
-        final other = e.x < 170 ? e.x + 125 : e.x - 125;
-        _spawn(HazardKind.piston, x: e.x, w: 112, h: 72, telegraph: tell, life: 0.3);
-        _spawn(HazardKind.piston, x: other.clamp(MetroStage.heroMinX + 30, MetroStage.heroMaxX - 30), w: 112, h: 72, telegraph: tell + 0.25, life: 0.3);
+        // Two heads: one on the hero, one on the other side of his room.
+        final mid = (MetroStage.heroMinX + b.kind.heroLimit) / 2;
+        final other = e.x < mid ? e.x + 110 : e.x - 110;
+        _spawn(HazardKind.piston, x: e.x, w: 104, h: 72, telegraph: tell, life: 0.3);
+        _spawn(HazardKind.piston, x: other.clamp(MetroStage.heroMinX + 30, b.kind.heroLimit), w: 104, h: 72, telegraph: tell + 0.25, life: 0.3);
         feedback(CinemaSound.tick, volume: 0.8, pitch: 0.7);
       case AttackKind.overload:
         _spawn(HazardKind.piston, x: e.x, w: 112, h: 72, telegraph: tell, life: 0.3);
@@ -738,7 +785,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
       case AttackKind.whistle:
         music.stinger(Stinger.rimshot);
       case AttackKind.blast:
-        _spawn(HazardKind.steamBlast, x: sx - 125, w: 120, h: 64, vx: -430, life: 1.25);
+        _spawn(HazardKind.steamBlast, x: sx - 125, w: 140, h: 64, vx: -330, life: 1.4);
         feedback(CinemaSound.whoosh, volume: 0.9, pitch: 0.6);
         kick(shake: 0.3 * _shakeScale);
         puffs.spawn(sx - 110, MetroStage.groundY - 20, size: 40, life: 0.6, driftX: -120);
@@ -784,7 +831,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     sparks.burst(sx - 40, MetroStage.groundY - 160, count: (18 * _particleScale).round(), speed: 360);
     puffs.spawn(sx - 60, MetroStage.groundY - 140, size: 44, life: 0.9, driftY: -60);
     puffs.spawn(sx + 20, MetroStage.groundY - 200, size: 40, life: 0.9, driftY: -60);
-    _placePlatforms(b.kind, phase);
+    _placePlatforms(b.kind, phase, reset: false);
   }
 
   // ------------------------------------------------------ collisions
@@ -867,7 +914,8 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   void _hurt(double fromX) {
     final hb = heroBody;
     hb.hurt(fromX);
-    hud.lives = math.max(0, hud.lives - 1);
+    // The attract bot never loses the last reel: the preview keeps playing.
+    if (!autoplay || hud.lives > 1) hud.lives = math.max(0, hud.lives - 1);
     livesLost++;
     flawless = false;
     assist = math.min(2, assist + 1);
@@ -1024,22 +1072,21 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
     sfx.playExtra(CinemaSfx.crowdCheer, volume: 0.9);
     feedback(CinemaSound.boing, volume: 0.8, pitch: 0.7);
     _crowdVisible = true;
-    _crowdX = 420;
+    _crowdX = 300;
     heroRig
       ..act(RigAction.cheer)
       ..expression = RigExpression.happy;
-    unawaited(
-      Future<void>.delayed(Duration.zero).then((_) async {
-        // Runs on game time via the card itself.
-        if (_ended) return;
-        await transitions.intertitle(IntertitleCard(text: l10n.cinemaMetropolisBaronBeaten, subtitle: l10n.cinemaMetropolisTauntSigned, kind: IntertitleKind.dialogue), hold: const Duration(milliseconds: 2200));
-      }),
-    );
+    _finaleCardShown = false;
   }
 
   void _finaleTick(double dt) {
     actTime += dt;
     _cityLights = (actTime / 3).clamp(0.0, 1.0);
+    if (!_finaleCardShown && actTime > 1.1) {
+      _finaleCardShown = true;
+      final card = IntertitleCard(text: l10n.cinemaMetropolisBaronBeaten, subtitle: l10n.cinemaMetropolisTauntSigned, kind: IntertitleKind.dialogue);
+      unawaited(transitions.intertitle(card, hold: const Duration(milliseconds: 2200)));
+    }
     _crowdX -= 40 * dt;
     final bc = _baronComponent;
     if (bc != null && _baronFlying) {
@@ -1083,6 +1130,7 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
     _heroSpot = null;
+    _controlsFor = Rect.zero;
   }
 
   // ----------------------------------------------------------- input
@@ -1213,6 +1261,16 @@ class MetropolisGame extends CinemaGame implements MetroSetState, MetroControlSt
 
   /// Whether the entrance is still playing.
   bool get entering => _entering;
+}
+
+/// Screen-space layer that delegates painting (the control hints).
+class _PaintLayer extends Component {
+  _PaintLayer(this._paint);
+
+  final void Function(Canvas canvas) _paint;
+
+  @override
+  void render(Canvas canvas) => _paint(canvas);
 }
 
 /// The hero's contact shadow: shrinks and fades as he rises.

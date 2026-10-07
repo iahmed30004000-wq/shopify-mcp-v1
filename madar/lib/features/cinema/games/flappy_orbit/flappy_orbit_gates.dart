@@ -401,16 +401,17 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
 
   static const int noteCount = 4;
   static const int gustCount = 2;
-  static const double noteRadius = 17;
+  static const double noteRadius = 21;
+  static const double noteScale = 1.3;
   static const double gustHalfHeight = 52;
 
-  /// Notes are lobbed: gravity pulls them down onto their mark.
+  /// Gravity of a lobbed note (0 = a straight flick).
   static const double noteGravity = 900;
 
-  /// A gust starts slowly and accelerates across the sky.
-  static const double gustSpeed0 = 150;
-  static const double gustAccel = 700;
-  static const double gustSpeedMax = 560;
+  /// The wind's streaks race along the lane at this speed; the lane blows
+  /// for [gustBlow] seconds once fired (it was previewed during the tell).
+  static const double gustStreakSpeed = 620;
+  static const double gustBlow = 0.9;
 
   late final InkSketch _note;
   late final InkSketch _gust;
@@ -422,6 +423,7 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
   final List<double> _nvx = List.filled(noteCount, 0);
   final List<double> _nvy = List.filled(noteCount, 0);
   final List<double> _nage = List.filled(noteCount, 0);
+  final List<double> _ng = List.filled(noteCount, 0);
   // Gusts: active, x, y, dir (+1 pushes down, -1 up), age, shoved.
   final List<bool> _gActive = List.filled(gustCount, false);
   final List<double> _gx = List.filled(gustCount, 0);
@@ -487,17 +489,19 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
   double gustDir(int i) => _gdir[i];
   bool gustActive(int i) => _gActive[i];
 
-  /// Lobs a note from ([x], [y]) so that it lands on ([tx], [ty]) after
-  /// [flightTime] seconds (an arc the hero can read).
-  void fireNote(double x, double y, double tx, double ty, {double flightTime = 0.85}) {
+  /// Flicks a note from ([x], [y]) so that it reaches ([tx], [ty]) after
+  /// [flightTime] seconds: a straight flight by default (the danger is one
+  /// line the hero can read), an arc with [gravity].
+  void fireNote(double x, double y, double tx, double ty, {double flightTime = 0.62, double gravity = 0}) {
     for (var i = 0; i < noteCount; i++) {
       if (_nActive[i]) continue;
-      final t = math.max(0.3, flightTime);
+      final t = math.max(0.25, flightTime);
       _nActive[i] = true;
       _nx[i] = x;
       _ny[i] = y;
       _nvx[i] = (tx - x) / t;
-      _nvy[i] = (ty - y) / t - 0.5 * noteGravity * t;
+      _nvy[i] = (ty - y) / t - 0.5 * gravity * t;
+      _ng[i] = gravity;
       _nage[i] = 0;
       return;
     }
@@ -508,7 +512,7 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
     final vx = _nvx[i];
     if (vx.abs() < 1e-6) return _ny[i];
     final t = math.max(0.0, (atX - _nx[i]) / vx);
-    return _ny[i] + _nvy[i] * t + 0.5 * noteGravity * t * t;
+    return _ny[i] + _nvy[i] * t + 0.5 * _ng[i] * t * t;
   }
 
   /// Blows a gust from [x] across the band centred on [y].
@@ -541,7 +545,7 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
     for (var i = 0; i < noteCount; i++) {
       if (!_nActive[i]) continue;
       _nage[i] += dt;
-      _nvy[i] += noteGravity * dt;
+      _nvy[i] += _ng[i] * dt;
       _nx[i] += _nvx[i] * dt;
       _ny[i] += _nvy[i] * dt;
       if (_nx[i] < OrbitStage.paintLeft || _ny[i] < -200 || _ny[i] > OrbitStage.height + 200) {
@@ -558,12 +562,15 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
     for (var i = 0; i < gustCount; i++) {
       if (!_gActive[i]) continue;
       _gage[i] += dt;
-      _gx[i] -= math.min(gustSpeedMax, gustSpeed0 + gustAccel * _gage[i]) * dt;
-      if (_gx[i] < OrbitStage.paintLeft - 60) {
+      _gx[i] -= gustStreakSpeed * dt;
+      if (_gage[i] > gustBlow + 0.4) {
         _gActive[i] = false;
         continue;
       }
-      if (!_gShoved[i] && (_gx[i] - heroX).abs() < 70 && (_gy[i] - heroY).abs() < gustHalfHeight + heroRadius * 0.5) {
+      // Once the leading streak has passed the hero, anyone in the lane is
+      // blown (once) for as long as it blows.
+      final blowing = _gage[i] <= gustBlow && _gx[i] < heroX + 60;
+      if (!_gShoved[i] && blowing && (_gy[i] - heroY).abs() < gustHalfHeight + heroRadius * 0.5) {
         _gShoved[i] = true;
         onGust?.call(_gdir[i]);
       }
@@ -590,19 +597,28 @@ class BossAttacks extends Component with HasGameReference<CinemaGame> {
     for (var i = 0; i < gustCount; i++) {
       if (!_gActive[i]) continue;
       final grow = math.min(1.0, _gage[i] * 4);
-      canvas
-        ..save()
-        ..translate(_gx[i], _gy[i])
-        ..scale(grow, _gdir[i] * grow);
-      _gust.paint(canvas, ctx);
-      canvas.restore();
+      final fade = (1 - (_gage[i] - gustBlow) / 0.4).clamp(0.0, 1.0);
+      // A train of three streak bursts follows the leading one down the lane.
+      for (var k = 0; k < 3; k++) {
+        final x = _gx[i] + k * 150.0;
+        if (x - 90 > OrbitStage.paintRight || x + 90 < OrbitStage.paintLeft) continue;
+        final s = grow * fade * (1 - k * 0.12);
+        if (s <= 0.02) continue;
+        canvas
+          ..save()
+          ..translate(x, _gy[i] + math.sin(game.clock.time * 9 + k) * 6)
+          ..scale(s, _gdir[i] * s);
+        _gust.paint(canvas, ctx);
+        canvas.restore();
+      }
     }
     for (var i = 0; i < noteCount; i++) {
       if (!_nActive[i]) continue;
       canvas
         ..save()
         ..translate(_nx[i], _ny[i])
-        ..rotate(math.sin(_nage[i] * 14) * 0.25);
+        ..rotate(math.sin(_nage[i] * 14) * 0.25)
+        ..scale(noteScale);
       _note.paint(canvas, ctx);
       canvas.restore();
     }

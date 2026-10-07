@@ -286,12 +286,24 @@ class ClockPressRig extends MachineRig {
     col.wobble(b.amp, b.frame, b.seed, 1);
     b.layer();
     b.blob(col, iron, depth: hh * 0.06, threshold: 0.2);
-    // Deco flutes.
+    // Riveted bands and deco flutes between them.
+    for (final by in [-hh * 0.3, -hh * 0.96]) {
+      b.fill(dark);
+      pen.roundRect(-hh * 0.2, by - hh * 0.018, hh * 0.145, by + hh * 0.018, hh * 0.006);
+    }
     b.inkLine(b.lw * 0.5);
     for (var i = -1; i <= 1; i++) {
       pen
-        ..moveTo(-hh * 0.03 + i * hh * 0.07, -hh * 0.95)
-        ..lineTo(-hh * 0.03 + i * hh * 0.07 + b.ja(10 + i, 0.5), -hh * 0.32);
+        ..moveTo(-hh * 0.03 + i * hh * 0.07, -hh * 0.93)
+        ..lineTo(-hh * 0.03 + i * hh * 0.07 + b.ja(10 + i, 0.5), -hh * 0.33);
+    }
+    b.endLayer();
+    b.layer();
+    for (var i = 0; i < 6; i++) {
+      final rx = -hh * 0.18 + i * hh * 0.065;
+      if (ph >= 1 && i == 4) continue;
+      Mechanics.rivet(b, rx, -hh * 0.3, hh * 0.009);
+      Mechanics.rivet(b, rx, -hh * 0.96, hh * 0.009);
     }
     b.endLayer();
     // Stepped crown.
@@ -1192,11 +1204,15 @@ class DynamoRig extends MachineRig {
 
   @override
   void animate(double h) {
-    var shutter = 0.0, lean = 0.0;
+    // The shutter plates narrow the great eye to a slit while it attacks
+    // and fly wide open – the weak spot – after each move.
+    var shutter = 0.72, lean = 0.0;
     switch (brain.mode) {
       case BossMode.telegraph:
+        shutter = 0.72 - 0.25 * brain.windUp;
         lean = -0.03 * brain.windUp;
       case BossMode.attack:
+        shutter = 0.5;
         lean = 0.04;
       case BossMode.open:
         shutter = 1;
@@ -1239,7 +1255,7 @@ class DynamoRig extends MachineRig {
     // The flywheel behind (wobbling in phase 2).
     pen
       ..save()
-      ..translate(-hh * 0.28 + sh, -hh * 0.52)
+      ..translate(-hh * 0.2 + sh, -hh * 0.56)
       ..scale(1 + _wobble, 1 - _wobble);
     b.layer();
     b.shape(dark, ink: 0.9);
@@ -1286,9 +1302,9 @@ class DynamoRig extends MachineRig {
       ..save()
       ..rotateAbout(_lean.value, 0, 0)
       ..translate(sh, 0);
-    plate(b, -hh * 0.62, -hh * 0.12, hh * 0.52, 0, dark, radius: hh * 0.012, rivets: 6);
+    plate(b, -hh * 0.5, -hh * 0.12, hh * 0.46, 0, dark, radius: hh * 0.012, rivets: 6);
     final hull = body..clear();
-    hull.blob(pen, -hh * 0.05, -hh * 0.5, hh * 0.5, hh * 0.4, taper: 0.12, box: 0.5, samples: 48);
+    hull.blob(pen, -hh * 0.03, -hh * 0.5, hh * 0.42, hh * 0.4, taper: 0.12, box: 0.5, samples: 48);
     hull.wobble(b.amp, b.frame, b.seed, 1);
     b.layer();
     b.blob(hull, iron, depth: hh * 0.1, threshold: 0.2);
