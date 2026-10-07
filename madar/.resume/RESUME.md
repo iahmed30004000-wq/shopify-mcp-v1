@@ -65,6 +65,7 @@ Work style: one part at a time → APK after each part; save tokens; 1–2 agent
 4. AI LINK: he asked about "login with ChatGPT/Claude" to send/receive JSON, else API. Proposed (awaiting choice):
    A) copy/share the prompt → paste the JSON back (no key, no cost) [recommended]; B) his own API key (already built
    in ai_chat); C) account login – not offered to third-party apps.
+6. ORBIT RESET BUTTON: the «reset view» pill (hotfix e2aa71a, lib/features/orbit/presentation/... orbit_scene.dart) must become an icon-only button (no text) that appears ONLY when the view is off its default (planets moved / zoomed / rotated away), and hides again after reset. Keep 48 dp target + a semantics label for TalkBack; double-tap on empty sky still resets.
 5. Pending from before: «Flappy Orbit» name question (A keep / B Orbit Flutter / C new name).
 Then continue the earlier plan (system integration, remaining Tier 1 games, Tier 2 batches).
 
