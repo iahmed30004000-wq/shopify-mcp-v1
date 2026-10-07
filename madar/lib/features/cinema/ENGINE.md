@@ -218,9 +218,22 @@ Flutter overlays (pause / results cards) sit above, ungraded, with real buttons.
   `isActive`, `layout`, `update`, `paint`, `dispose`. Futures run on game
   time. `IntertitleCard { text, subtitle, kind }` holds text the game has
   already localised.
+* **Transitions freeze with the show.** While the game is paused or the app
+  is in the background (`game.isTransitionFrozen`), `CinemaGame` updates
+  the transitions with `dt = 0`: an iris stops where it was, and a card
+  opened just before the Intermission keeps its full reading time and is
+  still there when the player resumes. The film clock, curtains and HUD keep
+  rolling.
 * Overlays: `CinemaOverlays.pause` ("Intermission": resume, restart, leave)
   and `CinemaOverlays.results` (score, play again, leave) are Flutter
   widgets built by `CinemaOverlayBuilder(context, game)`.
+* **Text direction.** Every line on the stage follows the game's reading
+  direction (`env.direction`, right-to-left in Arabic): the HUD and the
+  intertitle painters lay out with it, and the Flutter overlays wrap their
+  card in `OverlayScene.directed` because Flame's `GameWidget` puts its
+  overlays in a left-to-right `Directionality` whatever the app language
+  (which moved the Arabic "." and "!" to the start of the line). A custom
+  overlay must do the same. Only clock digits (`١:٠٥`) stay left-to-right.
 * **Implementations (stage agent, `engine/stage/`, toolkit barrel
   `stage/stage_kit.dart`):** `ReelStage` (velvet curtains on physics:
   `CurtainMotion` hauls a rope, the leading edge follows on a spring, the
@@ -248,8 +261,18 @@ Flutter overlays (pause / results cards) sit above, ungraded, with real buttons.
 * **Optional hooks:** `worldSize`, `openingCard()`, `endingCard(result)`,
   `openingMood`, `buildHud()` (default: score at top-start, lives at
   top-center, pause at top-end), `onSceneStart()`, `onGameplayUpdate(dt)`,
-  `onScreenTapDown/Up(worldPoint, screenPoint)`, `onScreenDrag`,
-  `onScreenDragEnd` (input nobody else handled).
+  `onScreenTapDown/Up(worldPoint, screenPoint)`, `onScreenTapCancel()`,
+  `onScreenDrag`, `onScreenDragCancel()`, `onScreenDragEnd` (input nobody
+  else handled), `releaseInput()`.
+* **Input contract.** Every tap down ends with exactly one
+  `onScreenTapUp` or `onScreenTapCancel` (the finger slid into a drag, the
+  system took the pointer); every drag ends with exactly one
+  `onScreenDragEnd`, and a cancelled drag gets `onScreenDragCancel` just
+  before it. `pauseGame()` calls `releaseInput()`, which cancels every open
+  tap and drag that way and drops the rest of those gestures (moves, the
+  lift behind the Intermission card). Override `releaseInput` to let go of
+  your own held state too, and call `super`. The cancel hooks default to
+  doing nothing.
 * **Call:** `addScore(n)`, `hud.*`, `feedback(CinemaSound)`,
   `kick(flash:, shake:, damage:)`, `music.cue(...)`, `stage.spotlight(...)`,
   `pauseGame()`/`resumeGame()`, `endScene(won:, stats:)`,

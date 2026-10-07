@@ -42,8 +42,11 @@ void main() {
     await tester.pumpAndSettle();
     final row = find.descendant(of: section, matching: find.text(l.lifeHubSettingsModulesCount(2, fmt.formatInt(2))));
     final wrong = find.descendant(of: section, matching: find.text(l.lifeHubSettingsModulesCount(3, fmt.formatInt(3))));
-    expect(wrong, findsNothing, reason: 'the archived "Old diet" is counted as a tracker');
-    expect(row, findsOneWidget);
+    final counted3 = wrong.evaluate().length;
+    final counted2 = row.evaluate().length;
+    // Let the app's timers run out before checking.
     await tester.pump(const Duration(seconds: 6));
+    expect(counted3, 0, reason: 'the archived "Old diet" is counted as a tracker ("3 trackers")');
+    expect(counted2, 1);
   });
 }

@@ -164,7 +164,9 @@ class IntertitleCard {
 /// The transition layer is painted above the HUD but BELOW the film grade,
 /// so grain and flicker dance on the black and on the cards. Futures
 /// complete when the animation finishes (driven by [update], i.e. game
-/// time – they freeze while the app is backgrounded).
+/// time). CinemaGame passes `dt = 0` during the Intermission and while the
+/// app is backgrounded (`isTransitionFrozen`), so an iris or a card and its
+/// reading hold wait there and pick up where they stopped.
 abstract interface class CinemaTransitions {
   /// True while something is animating or a card is showing.
   bool get isActive;

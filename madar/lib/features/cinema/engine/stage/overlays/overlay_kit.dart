@@ -37,6 +37,15 @@ class OverlayScene {
   bool get neon => frame == TitleFrame.osd;
   bool get dark => frame == TitleFrame.plain || frame == TitleFrame.osd;
 
+  /// The game's reading direction (right-to-left in Arabic).
+  TextDirection get direction => game.env.direction;
+
+  /// Lays [card] out in the game's reading direction. Flame's GameWidget
+  /// wraps its overlays in a left-to-right [Directionality] whatever the
+  /// app's language, which put Arabic full stops and exclamation marks at
+  /// the start of the line (".البكرة تستريح…", "!رقم قياسي جديد").
+  Widget directed(Widget card) => Directionality(textDirection: direction, child: card);
+
   /// Ink colour of text on this era's cards.
   Color get text => switch (frame) {
     TitleFrame.plain => materials.paper,

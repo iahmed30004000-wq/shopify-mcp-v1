@@ -35,8 +35,11 @@ class _ProjectorBoothOverlayState extends State<ProjectorBoothOverlay> {
     super.dispose();
   }
 
+  // Laid out in the game's reading direction (see OverlayScene.directed).
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => _scene.directed(Builder(builder: _card));
+
+  Widget _card(BuildContext context) {
     final game = widget.game;
     final l10n = game.l10n;
     final s = _scene;

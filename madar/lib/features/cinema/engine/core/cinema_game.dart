@@ -119,10 +119,24 @@ abstract class CinemaGame extends FlameGame<CinemaWorld> {
   /// Taps/drags nobody else handled (world components with TapCallbacks and
   /// interactive HUD items get theirs first). Positions in world units and
   /// screen px.
+  ///
+  /// Every tap down ends with exactly one [onScreenTapUp] or
+  /// [onScreenTapCancel]; every drag ends with exactly one [onScreenDragEnd]
+  /// (a cancelled drag gets [onScreenDragCancel] first).
   void onScreenTapDown(Vector2 worldPoint, ui.Offset screenPoint) {}
   void onScreenTapUp(Vector2 worldPoint, ui.Offset screenPoint) {}
+
+  /// A tap that went down will not come up: the finger slid into a drag,
+  /// the system took the pointer, or [releaseInput] let go of it. No
+  /// [onScreenTapUp] follows. Default: nothing.
+  void onScreenTapCancel() {}
   void onScreenDrag(Vector2 worldDelta, ui.Offset screenPoint) {}
   void onScreenDragEnd() {}
+
+  /// A drag was cancelled (the system took the pointer, or [releaseInput]
+  /// let go of it). [onScreenDragEnd] still follows right after, so a game
+  /// that only tracks drag ends never keeps a stuck drag. Default: nothing.
+  void onScreenDragCancel() {}
 
   // ---------------------------------------------------------------------------
   // Engine state.
@@ -169,8 +183,17 @@ abstract class CinemaGame extends FlameGame<CinemaWorld> {
   bool _ready = false;
   bool _prayerMuted = false;
   bool _disposed = false;
+  bool _backgrounded = false;
   double _playTime = 0;
   late final HudLayer _hudLayer;
+  _InputLayer? _input;
+
+  /// Transitions (iris, burn, glitch, intertitle cards and their reading
+  /// holds) stand still while this is true: during the Intermission (a card
+  /// opened just before the pause waits behind it with its reading time
+  /// intact) and while the app is in the background. The film clock, the
+  /// stage and the HUD keep rolling.
+  bool get isTransitionFrozen => state == SceneState.paused || _backgrounded;
 
   /// The stage's play area in screen px.
   ui.Rect get playRect => stage.playRect;
@@ -203,9 +226,21 @@ abstract class CinemaGame extends FlameGame<CinemaWorld> {
     if (_ready && flash > 0) stage.pulse(flash);
   }
 
-  /// Intermission (only from [SceneState.playing]).
+  /// Lets go of every gesture in progress: each open tap gets
+  /// [onScreenTapCancel], each open drag [onScreenDragCancel] then
+  /// [onScreenDragEnd], and the rest of those gestures (moves, the finger
+  /// lifting) no longer reaches the game. [pauseGame] calls it before the
+  /// Intermission covers the screen (the lift may never arrive, or arrive
+  /// behind the card). Override to drop held state of your own (buttons,
+  /// charge meters) and call super.
+  @mustCallSuper
+  void releaseInput() => _input?.release();
+
+  /// Intermission (only from [SceneState.playing]). Releases the held input
+  /// ([releaseInput]) and freezes the world and the transitions.
   void pauseGame() {
     if (!isPlaying || _disposed) return;
+    releaseInput();
     sceneState.value = SceneState.paused;
     music.setDucked(true);
     overlays.add(CinemaOverlays.pause);
@@ -280,7 +315,7 @@ abstract class CinemaGame extends FlameGame<CinemaWorld> {
     // Not awaited: children of the root load when the game mounts, i.e.
     // after this onLoad returns (awaiting here would deadlock).
     addAll([
-      _InputLayer()..priority = -1000,
+      _input = _InputLayer()..priority = -1000,
       _PaintLayer((c) => stage.paintBack(c))..priority = -100,
       _PaintLayer((c) => stage.paintFront(c))..priority = 100,
       _hudLayer,
@@ -356,7 +391,7 @@ abstract class CinemaGame extends FlameGame<CinemaWorld> {
     if (_ready) {
       filmFx.update(step, clock);
       stage.update(step, clock);
-      transitions.update(step, clock);
+      transitions.update(isTransitionFrozen ? 0 : step, clock);
       music.update(step);
       if (isPlaying) _playTime += step;
     }
@@ -393,6 +428,11 @@ abstract class CinemaGame extends FlameGame<CinemaWorld> {
   @override
   void lifecycleStateChange(ui.AppLifecycleState state) {
     super.lifecycleStateChange(state);
+    _backgrounded = switch (state) {
+      ui.AppLifecycleState.resumed => false,
+      ui.AppLifecycleState.inactive => _backgrounded,
+      _ => true,
+    };
     if (!_ready || _disposed) return;
     switch (state) {
       case ui.AppLifecycleState.resumed:
@@ -451,8 +491,19 @@ class _PaintLayer extends Component {
   void render(ui.Canvas canvas) => _paint(canvas);
 }
 
-/// Full-screen catcher for taps and drags nobody else handled.
+/// Full-screen catcher for taps and drags nobody else handled. Tracks which
+/// pointers have an open tap or drag so that [release] can cancel them and
+/// drop the rest of those gestures.
 class _InputLayer extends PositionComponent with TapCallbacks, DragCallbacks, HasGameReference<CinemaGame> {
+  /// Pointers with a tap down and no up / cancel yet.
+  final Set<int> _taps = {};
+
+  /// Pointers with a drag in progress (seen by the game).
+  final Set<int> _drags = {};
+
+  /// Pointers let go of by [release]: their later events are dropped.
+  final Set<int> _released = {};
+
   @override
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
@@ -462,21 +513,57 @@ class _InputLayer extends PositionComponent with TapCallbacks, DragCallbacks, Ha
   @override
   bool containsLocalPoint(Vector2 point) => true;
 
+  /// Cancels every open tap and drag for the game (see
+  /// [CinemaGame.releaseInput]); the rest of those gestures is dropped.
+  void release() {
+    if (_taps.isEmpty && _drags.isEmpty) return;
+    final taps = _taps.length, drags = _drags.length;
+    _released
+      ..addAll(_taps)
+      ..addAll(_drags);
+    _taps.clear();
+    _drags.clear();
+    for (var i = 0; i < taps; i++) {
+      game.onScreenTapCancel();
+    }
+    for (var i = 0; i < drags; i++) {
+      game
+        ..onScreenDragCancel()
+        ..onScreenDragEnd();
+    }
+  }
+
   @override
   void onTapDown(TapDownEvent event) {
+    _taps.add(event.pointerId);
     final p = event.canvasPosition;
     game.onScreenTapDown(game.screenToWorld(ui.Offset(p.x, p.y)), ui.Offset(p.x, p.y));
   }
 
   @override
   void onTapUp(TapUpEvent event) {
+    _released.remove(event.pointerId);
+    if (!_taps.remove(event.pointerId)) return;
     final p = event.canvasPosition;
     game.onScreenTapUp(game.screenToWorld(ui.Offset(p.x, p.y)), ui.Offset(p.x, p.y));
   }
 
   @override
+  void onTapCancel(TapCancelEvent event) {
+    // A released pointer stays in _released: it may still turn into a drag.
+    if (_taps.remove(event.pointerId)) game.onScreenTapCancel();
+  }
+
+  @override
+  void onDragStart(DragStartEvent event) {
+    super.onDragStart(event);
+    if (!_released.contains(event.pointerId)) _drags.add(event.pointerId);
+  }
+
+  @override
   void onDragUpdate(DragUpdateEvent event) {
     super.onDragUpdate(event);
+    if (!_drags.contains(event.pointerId)) return;
     final zoom = game.camera.viewfinder.zoom;
     final p = event.canvasEndPosition;
     game.onScreenDrag(event.canvasDelta / (zoom == 0 ? 1 : zoom), ui.Offset(p.x, p.y));
@@ -485,7 +572,15 @@ class _InputLayer extends PositionComponent with TapCallbacks, DragCallbacks, Ha
   @override
   void onDragEnd(DragEndEvent event) {
     super.onDragEnd(event);
-    game.onScreenDragEnd();
+    _released.remove(event.pointerId);
+    if (_drags.remove(event.pointerId)) game.onScreenDragEnd();
+  }
+
+  @override
+  void onDragCancel(DragCancelEvent event) {
+    if (_drags.contains(event.pointerId)) game.onScreenDragCancel();
+    // Flame ends a cancelled drag: onDragEnd above sends onScreenDragEnd.
+    super.onDragCancel(event);
   }
 }
 
