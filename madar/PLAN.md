@@ -116,7 +116,9 @@ AI app (Gemini, ChatGPT, Claude) by handing over a file and taking one back.
 
 ## Part 5 — The kitchen planet (for his wife)  → APK #20
 
-A new planet, Arabic name to confirm with the owner («المطبخ» / «السفرة» / «المونة»).
+A new planet named **«السفرة»** (owner's choice, 2026-10-09). No separate lock or private
+space: he will simply give his wife her own copy of the app on her phone, so «السفرة» is a
+normal planet for both of them (and on her copy it is the one she lives in).
 
 - **Pantry**: what is in the house (item, quantity, unit, expiry, where it is), fast add,
   low-stock marks, and a shopping list that flows into Part 8's budget lists.
@@ -127,7 +129,8 @@ A new planet, Arabic name to confirm with the owner («المطبخ» / «الس
 - **Constraints**: special requests, allergies, who is eating, time available, diet mode
   (ties into Part 4's meal plan when the owner wants to eat to a plan).
 - Offline-first; AI help (new recipes from the pantry) via the Part 3 round trip.
-- Her own space inside the app: simple, fast, and nothing from his health or money data.
+- Simple and fast, and it shows nothing from Health or Money – not for privacy (she gets her
+  own copy of the app), but because a kitchen screen should stay a kitchen screen.
 
 ---
 
@@ -215,8 +218,7 @@ written and tested; what is left is the hand-inked look, the animation and the H
 - Arcade: Snake, Brick Breaker, Star Hunter, Asteroid Belt, Paddle Duel, Stack Tower,
   Fruit Slice, Sky Jumper, Maze Chase, Road Crossing, Pinball.
 
-**Open question for the owner:** the name "Flappy Orbit" echoes "Flappy Bird"
-(A keep / B "Orbit Flutter" / C a new name).
+**Decided:** the name "Flappy Orbit" / «رفرفة المدار» stays as it is (owner, 2026-10-09).
 
 ---
 
@@ -256,12 +258,17 @@ input, scores and networking (original characters and courts only).
 
 ## Open questions waiting on the owner
 
-| # | Question | Options |
-|---|---|---|
-| 1 | The name "Flappy Orbit" (echoes "Flappy Bird") | A keep · B "Orbit Flutter" · C a new name |
-| 2 | The kitchen planet's Arabic name | «المطبخ» · «السفرة» · «المونة» · his own |
-| 3 | Does the kitchen planet need its own simple lock/space for his wife? | yes · no |
+None. Everything asked so far is decided:
 
-**Decided already:** adhan audio = he supplies the file (A). AI link = copy/share JSON round
-trip, no login. Card and board games = Jordanian rules, all nine defaults accepted.
-EveryAyah recitations = approved.
+- "Flappy Orbit" / «رفرفة المدار» keeps its name.
+- The kitchen planet is **«السفرة»**, with no separate lock – his wife gets her own copy of
+  the app on her phone.
+- Adhan audio: he supplies the file himself; the procedural tone stays as the fallback.
+- AI link: the copy/share JSON round trip, no login; the API key stays optional.
+- Card and board games: Jordanian rules; all nine proposed defaults accepted.
+- EveryAyah recitations: approved (stream on play / download on request, credited).
+
+Note for a later part: since his wife runs her own copy, two things are worth asking when we
+get there – whether «السفرة» should sync pantry and recipes between the two copies through
+Together Mode's existing link, and whether her copy should start with the other planets
+hidden.
