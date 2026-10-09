@@ -46,6 +46,42 @@ Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
 All six runs were resumed with resumeFromRunId (completed agents replay from cache; interrupted ones re-run with a RESUMING note + strict memory rule): money review wf_ad90daa6-564 (scratchpad/phase5_integrate.js), engine wf_4495c71d-7d5 (scratchpad/phase7_engine.js; hall no longer builds Saved Games), cards wf_94413da5-0be (scratchpad/jordan_cards.js), together wf_ab7dcc7b-712, widgets wf_54ac8044-8f2, saved games wf_1fb242c0-188.
 
 ## PAUSED UNTIL NEXT WEEK (owner request, 2026-10-07). Nothing is running.
+## OWNER FEEDBACK ON APK #15 (2026-10-09) – two screenshots attached in chat
+### A. BUGS (fix first, one batch → APK)
+B1. Overlapping text: the Money goals screen (المدّخرات والالتزامات) draws the empty states of ALL THREE tabs
+    (الالتزامات / الديون / الحصّالات) on top of each other – title, body and buttons stacked. Screenshot 1.
+    Likely the tab bodies are all built/painted at once (IndexedStack/Offstage/AnimatedSwitcher misuse) – check every
+    tabbed screen built the same way (travel, body, goals …), not only this one.
+B2. Orbit: planet motion is wrong/not nice; moons of each planet do not show at all.
+B3. Back from a planet: screenshot 2 – returning shows the home panel pulled up over the screen (the sheet is at full
+    height, blurred content behind) and back does not restore it; the user has to drag it down, and pressing back
+    again exits the app. Fix the sheet state restore on pop + back behaviour (back should collapse the sheet first,
+    then leave the planet, never exit the app from there).
+B4. Tasks: the "+" (add task) button only shows for the first task; afterwards it disappears and the user must repeat
+    actions to get it back.
+B5. Reset-view button → icon only, no text, appears only when the orbit is off its default (already noted).
+### B. CHANGES / NEW FEATURES (each one its own part + APK, in this order unless the owner says otherwise)
+C1. Budget → shopping lists: when a budget item is e.g. "بقالة", be able to attach a list of things to buy
+    (items, qty, optional price, check off, turn the checked list into one transaction).
+C2. Work: a real workspace + kanban board like Trello (drag cards between columns) – the board exists but the owner
+    could not find/use it; make it the main view with drag & drop.
+C3. Body/gym: advanced exercise library – per exercise: photo of the machine, a video of the movement (user-added or
+    a link), sets/reps/weight, rest timer, history and progression. Today it is too basic.
+C4. Food tracker: log what he ate today, the app classifies it (type + a "how risky for you" rating) – tied to C5.
+C5. Chronic conditions: record his chronic illnesses and connect everything to them (meals, meds, pain, labs, habits)
+    so warnings/insights are condition-aware. Keep it tracking-only, no diagnosis.
+C6. Daily chat as the main input: a chat where he types everything that happened during the day and the app files it
+    into the right places (plus the manual entry that exists), and he can ask "شو صار اليوم؟" – on top of the AI chat
+    with his own key (ai_chat package exists; the copy/share JSON round trip is the agreed default).
+C7. Quran reader: reading themes independent of the app theme – white page, brown/sepia paper, reading mode.
+C8. Adhan: real muezzin audio (owner asks for it). NOTE for the owner: we found no openly licensed recording;
+    options = he supplies/records a file, we bundle a user-chosen file, or keep procedural. ASK before building.
+C9. Adhkar notifications: show on time as a heads-up/overlay above the screen, with "done" / dismiss actions from the
+    notification itself.
+C10. NEW PLANET for his wife – kitchen/food («المطبخ» or similar): what is in the house (pantry), suggests dishes from
+    what is available, never repeats the same dish, with quantities and step-by-step method, and constraints
+    (special requests, allergies, time, diet). Offline-first; AI suggestions via the copy/share JSON round trip.
+
 
 ## Owner feedback on APK #15 + new requests (2026-10-07) – ALL FOR NEXT WEEK
 Work style: one part at a time → APK after each part; save tokens; 1–2 agents max.
