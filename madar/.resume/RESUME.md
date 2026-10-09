@@ -1,51 +1,26 @@
-# Resume point (usage-limit checkpoint 07:20 UTC; refreshed after a container restart)
+# Where we are right now
 
-All agents were stopped deliberately at ~95 % of the 5-hour usage limit.
-This commit is a WORK-IN-PROGRESS checkpoint (`[skip ci]`): several
-packages below are PARTIAL and may not compile or pass tests yet. Nothing
-here is "done" unless listed as done. Last verified, CI-green commit:
-08f9cb1 (APK madar-apk-10 = c8ea1af + foundation; feature APK: madar-apk-9).
+**Read `madar/PLAN.md` first** – it is the complete ordered plan (every part, in order,
+one APK each). This file keeps only the live state and the raw owner feedback.
 
-## Done and verified before this checkpoint
-- Phases 0–3 (pushed, CI green).
-- Phase 4 builders finished (not yet integrated/reviewed):
-  meds (lib/features/health/meds), record (lib/features/health/record),
-  wellbeing (lib/features/health/wellbeing).
+## State (2026-10-09)
+- Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
+- Last shipped: **APK #15**, commit d9d5204, CI run 37652536745, artifact madar-apk-15.
+- Next: **PLAN.md Part 1** (the APK #15 bug fixes) – finish it fully, ship an APK, report,
+  then Part 2. One part at a time, 1–2 agents max.
+- The owner reviews each APK on his phone and his feedback becomes the next part.
 
-## State (updated after Phase 4 shipped)
-If a run below was interrupted, re-run it with
-"a previous attempt left partial work in your folder: review it, verify
-everything, finish what is missing; do not assume anything works".
-Workflow scripts: scratchpad/*.js and ~/.claude/projects/*/workflows/scripts/.
+## How work is organised
+- Working rule (standing): one part at a time → verify → APK → report in plain Arabic with
+  an example → next part. Full rule in `/CLAUDE.md`.
+- Test runs go through `scratchpad/ft` only (serialised, -j 1, waits for free memory).
+- WIP commits are `[skip ci]`; a release commit is a normal commit (CI builds the APK).
+- Never commit the keystore, `key.properties` or any `*.jks`.
 
-| Work | Owned paths | State |
-|---|---|---|
-| Health (meds, record, wellbeing, hub) | lib/features/health/** | DONE, shipped 375be67 (APK #12) |
-| Hotfix: auto fingerprint + orbit reset view | lock, orbit | DONE, shipped e2aa71a (APK #11) |
-| Money ledger / budget / goals builders | lib/features/money/{ledger,budget,goals} | built + verified |
-| Money integration + review | routing, app, settings, orbit planet, money/hub, a9_money_hub.json | DONE (review fixes: net worth w/ archived jars, rebase keeps budget, goals decimals, AA contrast, 96 screenshots) |
-| Money APK release | release commit 6bd956e | DONE – CI run #14 green, artifact madar-apk-14 (id 11105002945) sent to the owner |
-| Integration plans (read-only) | scratchpad/integration_plan_{life,system}.md, integration_conflicts.md | DONE |
-| Life + System integration (Life integrate → 2 finders → fix → System integrate → 2 finders → fix) | shared files (routing, app, settings, home, orbit, manifest) | RUNNING again (wf_73ea237d-651); earlier attempt was mid-way (partial edits on disk, nothing cached). Resume: add a RESUMING note to the life:integrate prompt in scratchpad/life_system_integration.js, then Workflow({scriptPath}) |
-| Work, Family, Travel, Growth, Body, Custom Modules builders | lib/features/{work,family,travel,growth,body,custom_modules} | built + verified; integration NOT started |
-| Game rules: cards, board, puzzles, arcade, words/quiz | lib/features/cinema/rules/** | built + verified |
-| Jordanian rules: board (dama, tawla ×3, dominoes, ludo) | cinema/rules/board/** | DONE (561 tests); open detail questions in board/RULES.md §9.2 |
-| Jordanian rules: cards (Tarneeb/41, Trix/Complex, Hand/partners, Konkan, Basra, Baloot) + new Solitaire, Blackjack | cinema/rules/cards/** | DONE (977 tests); open owner questions in cards/RULES.md 'Still open' |
-| Deps webview_flutter 4.14.1, nearby_connections 4.3.0, firebase_core/auth/database | pubspec | CI probe 008ccec GREEN (run #13); added to main pubspec |
-| Film Reel Engine (Phase 7) | lib/features/cinema/engine, hall, shaders/cinema | DONE: core, fx, rig, audio, stage+hall, critic (reports: scratchpad/phase7_engine_packages.md). Needs wiring: /cinema route → CinemaHallScreen, SavedGames route/tile; full-suite chunks before the next release |
-| Data export + encrypted backup | lib/features/data, d1_data.json | built + verified (report in scratchpad/phase9_packages.md); needs routing |
-| AI chat (own Anthropic/OpenAI keys) | lib/features/ai_chat, d4_ai_chat.json | built + security-reviewed (163 tests); needs routes /ai, /ai/chats, /settings/ai, AskAi entries, AiKeyStore.deleteAll() in delete-all-data |
-| Together Mode core + couple specials | lib/features/together, e1_together.json | DONE (core reviewed: 17 fixes; specials: know-me quiz, weekly challenge, co-op goal; 162+ tests) – needs wiring later (route, settings tile, SpecialsRepository.allKeys in delete-all) |
-| Together transports (Nearby + optional Firebase online) + FLAG_SECURE channel | lib/features/together/{transport,pairing}, e4_together_net.json, android .../together | DONE + reviewed (226 tests; 3 real defects fixed incl. open-database guard). Needs wiring: togetherTransportOverrides(), manifest Nearby permissions (text in scratchpad/phase10_packages.md '# together transports' → manifest_needs), turn-alert id block 170000–170999 documented, together route/settings tile, SpecialsRepository.allKeys + together keys in delete-all |
-| Saved Games (web games by URL, WebView) | lib/features/saved_games, e3_saved_games.json, android .../savedgames | built + reviewed (Dart 117 tests; Kotlin channel type-checked, registered in MainActivity); needs route + SavedGamesShelf in the cinema hall + savedGamesLegacyImportProvider read once |
-| Home-screen widgets | lib/features/widgets, android .../widgets, res widget_*, e2_widgets.json | built + reviewed (89 tests, kotlinc type-check OK); manifest receivers + MainActivity register line already added; needs watchWidgetServices(ref) in AppServices, clearWidgetData() in delete-all, /settings/widgets route |
-| Global search | lib/features/search, d2_search.json | built + reviewed (26 findings fixed, 183 tests); needs route + opener + launcher |
-| Notification center | lib/features/notification_center, d3_notifications.json | built + safety-reviewed (24 fixes, 138 tests); needs wiring per scratchpad/phase9_packages.md (gate inside Suspending wrapper, meds background gate, AdhanEventHub.withholds, AppServices watch, reserve ids 160000–160999) |
+---
 
-## Container restart #2 (09:28 UTC)
-All six runs were resumed with resumeFromRunId (completed agents replay from cache; interrupted ones re-run with a RESUMING note + strict memory rule): money review wf_ad90daa6-564 (scratchpad/phase5_integrate.js), engine wf_4495c71d-7d5 (scratchpad/phase7_engine.js; hall no longer builds Saved Games), cards wf_94413da5-0be (scratchpad/jordan_cards.js), together wf_ab7dcc7b-712, widgets wf_54ac8044-8f2, saved games wf_1fb242c0-188.
+# Raw history and owner feedback (source material for PLAN.md)
 
-## PAUSED UNTIL NEXT WEEK (owner request, 2026-10-07). Nothing is running.
 ## OWNER FEEDBACK ON APK #15 (2026-10-09) – two screenshots attached in chat
 ### A. BUGS (fix first, one batch → APK)
 B1. Overlapping text: the Money goals screen (المدّخرات والالتزامات) draws the empty states of ALL THREE tabs
