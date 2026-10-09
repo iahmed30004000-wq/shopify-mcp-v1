@@ -155,10 +155,11 @@ void main() {
       final poster = find.widgetWithText(MiniPoster, e.title(ar));
       await tester.ensureVisible(poster);
       await tester.pump(const Duration(milliseconds: 100));
+      // The poster says "soon" to TalkBack too (the plate itself is painted).
       expect(
-        find.descendant(of: poster, matching: find.text(ar.cinemaComingSoon)),
-        findsOneWidget,
-        reason: '${e.id} wears the "soon" plate',
+        tester.widget<MiniPoster>(poster).entry.isPlayable,
+        isFalse,
+        reason: '${e.id} has no builder',
       );
       await tester.tap(poster);
       await tester.pump(const Duration(milliseconds: 400));

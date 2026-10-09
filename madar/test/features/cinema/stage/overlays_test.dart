@@ -96,7 +96,8 @@ void main() {
     g = built.last;
     g.pauseGame();
     await pumpSeconds(tester, 0.8);
-    await tester.tap(find.text(ar.cinemaLeave));
+    // The Intermission's way out says it plainly (APK #15).
+    await tester.tap(find.text(ar.cinemaExitGame));
     await pumpSeconds(tester, 1);
   });
 
