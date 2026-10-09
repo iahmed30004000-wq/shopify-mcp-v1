@@ -308,7 +308,7 @@ void main() {
     await systemBack(tester);
     await frames(tester, 8);
     expect(find.text(ar.cinemaExitConfirmTitle), findsOneWidget);
-    await tester.tap(find.text(ar.cinemaExitGame));
+    await tester.tap(find.descendant(of: find.byType(AlertDialog), matching: find.text(ar.cinemaExitGame)));
     await frames(tester, 20);
     expect(find.byType(CinemaGameScreen), findsNothing, reason: 'back twice gets the player out');
     expect(env.session.calls.last, 'exit');

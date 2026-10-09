@@ -107,7 +107,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
   void _onProgress() {
     final p = _progress.value;
     _gone.value = p >= HomeScreen.panelGoneAt;
-    _canLeave.value = p <= 0 && _expand.value <= _collapsedEnough;
+    _canLeave.value = _expand.value <= _collapsedEnough;
     if (p > 0) {
       if (!_flying) _flying = true;
       return;
@@ -120,7 +120,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
 
   void _onExpand() {
     _expanded.value = _expand.value > 0.5;
-    _canLeave.value = !_flying && _progress.value <= 0 && _expand.value <= _collapsedEnough;
+    _canLeave.value = _expand.value <= _collapsedEnough;
   }
 
   /// Below this the panel counts as collapsed (back then leaves home).

@@ -185,8 +185,14 @@ class _CinemaGameScreenState extends ConsumerState<CinemaGameScreen> {
     return game;
   }
 
+  /// Leaves the show. `pop`, never `maybePop`: the game view's PopScope
+  /// (which turns the system back into the Intermission) answers `maybePop`
+  /// by *not* popping, so the Intermission's own "leave the game" button
+  /// used to bounce back into the game instead of leaving it (APK #15).
   void _exit() {
-    if (mounted) unawaited(Navigator.of(context).maybePop());
+    if (!mounted) return;
+    final nav = Navigator.of(context);
+    if (nav.canPop()) nav.pop();
   }
 
   /// Android back from the Intermission: ask, so one stray back never

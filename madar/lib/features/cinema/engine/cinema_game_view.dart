@@ -125,9 +125,12 @@ class _CinemaGameViewState extends ConsumerState<CinemaGameView> {
     final onExit = widget.onExit;
     if (onExit != null) {
       onExit();
-    } else {
-      Navigator.of(context).maybePop();
+      return;
     }
+    // `pop`, not `maybePop`: the PopScope below would answer `maybePop` by
+    // refusing to pop and sending us straight back into [_onBack].
+    final nav = Navigator.of(context);
+    if (nav.canPop()) nav.pop();
   }
 
   /// Back: play → Intermission → leave (asking first). It never resumes:

@@ -148,6 +148,25 @@ void main() {
     expect(find.byType(CinemaGameScreen), findsNothing);
   });
 
+  testWidgets('every show in the real catalog without a builder is marked "soon" and opens nothing', (tester) async {
+    await pumpHall(tester);
+    expect(announced, isNotEmpty, reason: 'derived from the catalog (builder == null), never from names');
+    for (final e in announced) {
+      final poster = find.widgetWithText(MiniPoster, e.title(ar));
+      await tester.ensureVisible(poster);
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(
+        find.descendant(of: poster, matching: find.text(ar.cinemaComingSoon)),
+        findsOneWidget,
+        reason: '${e.id} wears the "soon" plate',
+      );
+      await tester.tap(poster);
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.byType(CinemaGameScreen), findsNothing, reason: '${e.id} never opens an empty show');
+      expect(find.text(ar.cinemaHallLockedHint), findsOneWidget, reason: '${e.id} explains itself');
+    }
+  });
+
   testWidgets('the ticket book shows plays, happy endings, time and the favourite', (tester) async {
     await pumpHall(
       tester,
