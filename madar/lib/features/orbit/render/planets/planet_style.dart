@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'dart:ui' show Color;
 
 import 'package:flutter/painting.dart' show HSLColor;
@@ -112,28 +111,13 @@ abstract final class PlanetStyle {
 abstract final class MoonStyle {
   static const derived = Color(0x00000000);
 
-  /// Smallest a moon is ever drawn (logical px radius). At overview scale a
-  /// world is only ~22 px across its radius, so the plain relative size put
-  /// its moons at 3 px – dust, not moons, and under the 7 px a finger can
-  /// aim at. Below this the whole swarm is scaled up instead.
-  static const double minScreenRadius = 6;
-
-  /// The most a moon may grow relative to its world, whatever the floor
-  /// asks for (it still has to look like a moon beside its planet).
-  static const double maxFactor = 0.33;
-
   /// Relative moon radius (of the parent's disc radius) for an item size
   /// 0..1: large enough to read at overview scale, never rivalling the world.
   /// [parentPx] (the world's radius on screen) is the level of detail: as
   /// the camera flies in, moons shrink relative to their world (to 60 % at
-  /// hero scale) so they frame the surface instead of covering it; while the
-  /// world is small they grow instead, so a moon is never smaller than
-  /// [minScreenRadius] on screen. Without [parentPx] this is the plain
-  /// geometric size (what the lane clearance is measured against).
+  /// hero scale) so they frame the surface instead of covering it.
   static double radiusFactor(double size, {double parentPx = 0}) {
     final t = ((parentPx - 50) / 170).clamp(0.0, 1.0);
-    final f = (0.16 + 0.09 * size.clamp(0.0, 1.0)) * (1 - 0.4 * t * t * (3 - 2 * t));
-    if (parentPx <= 0) return f;
-    return math.min(maxFactor, math.max(f, minScreenRadius / parentPx));
+    return (0.13 + 0.11 * size.clamp(0.0, 1.0)) * (1 - 0.4 * t * t * (3 - 2 * t));
   }
 }

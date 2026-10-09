@@ -23,8 +23,8 @@ class PlanetSystemLayout {
     this.outerRadius = 1.18,
     this.minLaneGap = 0.06,
     this.bodyRadius = 0.14,
-    this.innerPeriod = 330,
-    this.keplerExponent = 0.8,
+    this.innerPeriod = 210,
+    this.keplerExponent = 0.9,
     this.maxInclination = 0.045,
   });
 
@@ -41,15 +41,10 @@ class PlanetSystemLayout {
   /// Disc radius of a typical world (× [PlanetStyle.sizeFactorOf]).
   final double bodyRadius;
 
-  /// Seconds per revolution of the innermost world: five and a half
-  /// minutes, so the system reads as a slow orrery – you see it move if you
-  /// watch, never out of the corner of your eye.
+  /// Seconds per revolution of the innermost world.
   final double innerPeriod;
 
   /// Period ∝ radius^k (1.5 would be Kepler; lower keeps the drift calm).
-  /// The lanes sit close together, so a small exponent also keeps the
-  /// worlds' *relative* drift gentle: they hold their even spread for many
-  /// minutes instead of shuffling into each other.
   final double keplerExponent;
 
   /// Largest tilt of an orbit out of the common plane (radians).
@@ -125,19 +120,13 @@ class PlanetSystemLayout {
 /// Lanes of the data moons around their planet (in the parent's disc radii,
 /// so the whole cluster scales with the world).
 ///
-/// The band is deliberately narrow: from [PlanetStyle.moonLaneStartOf] out
-/// to [span] beyond it, so every moon stays visibly *around its own world*
-/// instead of wandering a lane's width away (the planet lanes are only
-/// ~0.3 disc radii apart, and the astrolabe's brass limb is barely further
-/// in than the innermost lane – a wide band had the moons crossing both,
-/// where they read as loose specks and vanished under the dial).
-///
-/// Each moon keeps its own gently inclined plane (0.2–0.44 rad, turned by a
-/// per-moon node) so the family reads as a small 3-D swarm rather than one
-/// flat ring; inner moons are faster.
+/// Moons sit in evenly spaced lanes from [PlanetStyle.moonLaneStartOf] out to
+/// [span] beyond it, each on its own inclined plane (0.2–0.62 rad, turned by
+/// a per-moon node) so a family of moons reads as a 3-D swarm around the
+/// world rather than one flat ring; inner moons are faster.
 abstract final class MoonLayout {
   /// Radial width of the moon band (disc radii).
-  static const span = 0.38;
+  static const span = 0.95;
 
   /// Lane of the [index]-th of [count] moons around a world of [parent].
   static double laneOf(int index, int count, PlanetArchetype parent) {
@@ -146,13 +135,12 @@ abstract final class MoonLayout {
     return start + span * index / (count - 1);
   }
 
-  /// Seconds per revolution on [lane] (disc radii): ~78 s close in, ~105 s
-  /// at the outer edge of a normal band – slow enough to watch a moon come
-  /// round, never a twitch at the edge of the eye.
-  static double periodOf(double lane) => 78 * math.pow(lane / 1.62, 1.5).toDouble();
+  /// Seconds per revolution on [lane] (disc radii): 26 s close in, ~46 s at
+  /// the outer edge of a normal band.
+  static double periodOf(double lane) => 26 * math.pow(lane / 1.62, 1.5).toDouble();
 
   /// Orbit tilt of a moon from its seed (radians).
-  static double inclinationOf(double seed) => 0.2 + 0.24 * _fract(seed * 0.7548776662 + 0.11);
+  static double inclinationOf(double seed) => 0.2 + 0.42 * _fract(seed * 0.7548776662 + 0.11);
 
   /// Line of nodes of a moon's orbit from its seed.
   static double nodeOf(double seed) => 2 * math.pi * _fract(seed * 0.5698402910 + 0.73);

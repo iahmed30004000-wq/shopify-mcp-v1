@@ -66,12 +66,9 @@ void main() {
         for (final m in b.moons) {
           if (!m.visible) continue;
           seen.add(m.id);
-          // Big enough to see (and to put a finger on).
-          expect(
-            m.radius,
-            greaterThanOrEqualTo(MoonStyle.minScreenRadius * 0.8),
-            reason: '${m.moon.label} on ${b.key} is a moon, not a speck',
-          );
+          // Big enough to see (and to put a finger on): APK #15 drew these
+          // at 3–5 px radius, which on a phone is dust.
+          expect(m.radius, greaterThanOrEqualTo(5.4), reason: '${m.moon.label} on ${b.key} is a moon, not a speck');
           expect(m.radius, greaterThan(MoonHitTest.minTappableMoonRadius));
           // Close enough to belong to its own world: inside the moon band,
           // never halfway to the next lane.
@@ -138,7 +135,7 @@ void main() {
     for (var count = 1; count <= 12; count++) {
       for (var j = 0; j < count; j++) {
         final lane = MoonLayout.laneOf(j, count, PlanetArchetype.terracotta);
-        expect(lane - MoonStyle.maxFactor, greaterThan(1), reason: 'moon $j of $count');
+        expect(lane - MoonStyle.radiusFactor(1), greaterThan(1), reason: 'moon $j of $count');
       }
     }
   });
