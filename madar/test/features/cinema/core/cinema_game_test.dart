@@ -58,7 +58,12 @@ void main() {
     reported = null;
   });
 
-  Future<_TestGame> pumpGame(WidgetTester tester, {bool skipOpening = true}) async {
+  Future<_TestGame> pumpGame(
+    WidgetTester tester, {
+    bool skipOpening = true,
+    VoidCallback? onExit,
+    Future<bool> Function()? confirmLeave,
+  }) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -74,6 +79,8 @@ void main() {
             kit: kit.kit,
             skipOpening: skipOpening,
             onResult: (r) => reported = r,
+            onExit: onExit,
+            confirmLeave: confirmLeave,
             builder: (ctx) {
               final g = _TestGame(context: ctx);
               built.add(g);
@@ -201,14 +208,50 @@ void main() {
     expect(g.state, SceneState.playing);
   });
 
-  testWidgets('system back pauses, back again resumes', (tester) async {
-    final g = await pumpGame(tester);
+  // APK #15: back used to resume, so back could never get the player out.
+  testWidgets('system back pauses; back again leaves instead of resuming', (tester) async {
+    var asked = 0;
+    var exits = 0;
+    final g = await pumpGame(
+      tester,
+      onExit: () => exits++,
+      confirmLeave: () async {
+        asked++;
+        return true;
+      },
+    );
     await tester.binding.handlePopRoute();
     await tester.pump();
     expect(g.state, SceneState.paused);
+    expect(asked, 0, reason: 'the first back only pauses');
+
     await tester.binding.handlePopRoute();
     await tester.pump();
-    expect(g.state, SceneState.playing);
+    await tester.pump();
+    expect(asked, 1, reason: 'a stray back is confirmed first');
+    expect(exits, 1);
+    expect(g.state, SceneState.paused, reason: 'back never puts the player back into the show');
+  });
+
+  testWidgets('a refused confirm stays in the Intermission', (tester) async {
+    var exits = 0;
+    final g = await pumpGame(tester, onExit: () => exits++, confirmLeave: () async => false);
+    await tester.binding.handlePopRoute();
+    await tester.pump();
+    await tester.binding.handlePopRoute();
+    await tester.pump();
+    await tester.pump();
+    expect(exits, 0);
+    expect(g.state, SceneState.paused);
+  });
+
+  testWidgets('a running show carries a pause plate; the Intermission replaces it', (tester) async {
+    final g = await pumpGame(tester);
+    expect(find.byType(PausePlate), findsOneWidget);
+    await tester.tap(find.byType(PausePlate));
+    await tester.pump();
+    expect(g.state, SceneState.paused);
+    expect(find.byType(PausePlate), findsNothing);
   });
 
   testWidgets('backgrounding pauses the show and the music', (tester) async {

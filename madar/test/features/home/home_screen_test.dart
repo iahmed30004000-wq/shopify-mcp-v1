@@ -811,8 +811,8 @@ void main() {
       AmbientMotion.debugOverride = true;
       addTearDown(() => AmbientMotion.debugOverride = null);
       final c = _scene(tester);
-      // Minutes of orbiting at different speeds.
-      for (var s = 0; s < 900 && !c.planets.crowded(c.viewport); s++) {
+      // Minutes of orbiting at different speeds (the drift is slow now).
+      for (var s = 0; s < 3600 && !c.planets.crowded(c.viewport); s++) {
         c.planets.advanceSeconds(1);
       }
       c.refresh();

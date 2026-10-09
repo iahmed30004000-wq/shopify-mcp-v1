@@ -355,8 +355,10 @@ void main() {
     test('also when the worlds drift into each other – after a moment, and it leaves again', () {
       final c = _scene();
       addTearDown(c.dispose);
-      // Orbit on until two worlds overlap.
-      for (var s = 0; s < 900 && !c.planets.crowded(_phone); s++) {
+      // Orbit on until two worlds overlap (the worlds drift slowly now –
+      // minutes, not seconds – so this watches for the best part of an hour
+      // of scene time; it stops the moment they touch).
+      for (var s = 0; s < 3600 && !c.planets.crowded(_phone); s++) {
         c.planets.advanceSeconds(1);
         c.refresh();
       }
