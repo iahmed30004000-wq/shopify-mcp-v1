@@ -525,48 +525,18 @@ class BodyTabBar<T> extends StatelessWidget {
   }
 }
 
-/// Builds a tab when first shown, keeps it alive afterwards and cross-fades
-/// between them.
-class BodyFadeStack extends StatefulWidget {
+/// Shows the selected tab only and cross-fades between them: a thin name
+/// for [MadarFadeStack] (see it for why nothing is kept hidden behind).
+class BodyFadeStack extends StatelessWidget {
   const BodyFadeStack({super.key, required this.index, required this.children});
 
   final int index;
   final List<Widget> children;
 
   @override
-  State<BodyFadeStack> createState() => _BodyFadeStackState();
+  Widget build(BuildContext context) => MadarFadeStack(index: index, children: children);
 }
 
-class _BodyFadeStackState extends State<BodyFadeStack> {
-  final Set<int> _built = {};
-
-  @override
-  Widget build(BuildContext context) {
-    final d = context.motion(MadarMotion.short);
-    final index = widget.index;
-    final children = widget.children;
-    _built.add(index);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        for (var i = 0; i < children.length; i++)
-          if (!_built.contains(i))
-            const SizedBox.shrink()
-          else
-            IgnorePointer(
-              ignoring: i != index,
-              child: ExcludeSemantics(
-                excluding: i != index,
-                child: TickerMode(
-                  enabled: i == index,
-                  child: AnimatedOpacity(opacity: i == index ? 1 : 0, duration: d, child: children[i]),
-                ),
-              ),
-            ),
-      ],
-    );
-  }
-}
 
 /// Rebuilds [builder] with the Body clock's "now" once a second while it is
 /// visible (TickerMode on). Rebuilds only when the second actually changed,

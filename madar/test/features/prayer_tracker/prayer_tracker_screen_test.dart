@@ -369,6 +369,24 @@ void main() {
     });
   });
 
+  // B1 (APK #15): the tab bodies used to pile up on each other.
+  testWidgets('only the selected tab is in the tree', (tester) async {
+    await _pump(tester, now: afterAsr());
+    void only(String key) {
+      for (final k in ['tracker.today', 'tracker.history']) {
+        expect(find.byKey(ValueKey(k)), k == key ? findsOneWidget : findsNothing, reason: 'expected only $key');
+      }
+    }
+
+    only('tracker.today');
+    await tester.tap(find.bySemanticsLabel(_ar.trackerTabHistory).first);
+    await settleApp(tester);
+    only('tracker.history');
+    await tester.tap(find.bySemanticsLabel(_ar.trackerTabToday).first);
+    await settleApp(tester);
+    only('tracker.today');
+  });
+
   testWidgets('reduced motion still logs and shows no shake', (tester) async {
     final t = await _pump(tester, now: afterAsr(), reducedMotion: true);
     await tester.tap(_visible(_ar.prayerMaghrib));

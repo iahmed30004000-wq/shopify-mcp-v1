@@ -437,6 +437,24 @@ void main() {
     });
   });
 
+  // B1 (APK #15): the tab bodies used to pile up on each other.
+  testWidgets('only the selected tab is in the tree', (tester) async {
+    final b = await _pump(tester, spending: true);
+    void only(String key) {
+      for (final k in ['budget.plan', 'budget.spending']) {
+        expect(find.byKey(ValueKey(k)), k == key ? findsOneWidget : findsNothing, reason: 'expected only $key');
+      }
+    }
+
+    only('budget.plan');
+    await tester.tap(find.bySemanticsLabel('Spending').first);
+    await b.settle(30);
+    only('budget.spending');
+    await tester.tap(find.bySemanticsLabel('Plan').first);
+    await b.settle(30);
+    only('budget.plan');
+  });
+
   testWidgets('reduced motion and Arabic render the plan', (tester) async {
     await _pump(tester, locale: const Locale('ar'), reducedMotion: true);
     expect(find.text('الخطة الشهرية'), findsOneWidget);

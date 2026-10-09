@@ -17,6 +17,7 @@ import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/routing/route_pages.dart';
 import '../../../core/settings/app_settings.dart';
+import '../../../core/sound/sound_api.dart';
 import '../../work/work.dart' show FocusItem, FocusKind, WorkActions;
 import '../home_providers.dart';
 import 'neglect_radar_card.dart';
@@ -187,6 +188,14 @@ class TaskPanel extends ConsumerWidget {
                           onReorder: (order) =>
                               ref.read(homeTasksServiceProvider).reorder([for (final x in order) x.id]),
                           itemBuilder: (context, task, index, handle) => TaskItem(task: task, dragHandle: handle),
+                          // The "add a task" affordance the empty state
+                          // shows has to stay once the window has tasks
+                          // (APK #15, B4). A footer is outside the
+                          // reorderable range: it cannot be dragged and it
+                          // does not shift any row's index.
+                          footer: _AddTaskRow(
+                            onAdd: () => TaskActions(ref, context).add(window: focused, day: day),
+                          ),
                         ),
                       ),
               ),
@@ -357,6 +366,54 @@ class _Radar extends StatelessWidget {
           children: [if (f < 1) part(line, 1 - f), if (f > 0) part(cards, f)],
         );
       },
+    );
+  }
+}
+
+/// "New task" at the end of the task list: the panel's always-present "+"
+/// once the window is no longer empty. Not a list item, so it never takes
+/// part in a reorder.
+class _AddTaskRow extends StatelessWidget {
+  const _AddTaskRow({required this.onAdd});
+
+  final VoidCallback onAdd;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = L10n.of(context);
+    final text = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(0, Space.xs, 0, Space.xs),
+      child: MadarPressable(
+        onTap: onAdd,
+        semanticLabel: l.homeAddTask,
+        sfx: Sfx.sheetOpen,
+        excludeChildSemantics: true,
+        focusRadius: BorderRadius.circular(t.radiusM),
+        minTapTarget: MadarPressable.minTouchTarget,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 48),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(t.radiusM),
+            color: t.glassFill,
+            border: Border.all(color: t.accent.withValues(alpha: 0.35)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.add_rounded, size: 20, color: t.accent),
+              const SizedBox(width: Space.s),
+              Text(
+                l.homeAddTask,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: text.labelLarge?.copyWith(color: t.textSecondary),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

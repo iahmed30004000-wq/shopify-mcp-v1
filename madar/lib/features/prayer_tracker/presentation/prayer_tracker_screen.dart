@@ -51,9 +51,9 @@ class _PrayerTrackerScreenState extends State<PrayerTrackerScreen> {
               id: _tab,
               child: _FadeStack(
                 index: _tab.index,
-                // Both tabs stay alive, so they keep their scroll offsets
-                // without PageStorage (whose shared slot would also hand
-                // the list's offset to nested horizontal scrollers).
+                // Only the selected tab is built (MadarFadeStack): a tab
+                // opens at its top again, and no PageStorage slot is shared
+                // with the nested horizontal scrollers inside it.
                 children: const [
                   _EdgeFade(child: TrackerTodayView(key: ValueKey('tracker.today'))),
                   _EdgeFade(child: TrackerHistoryView(key: ValueKey('tracker.history'))),
@@ -181,8 +181,8 @@ class _EdgeFade extends StatelessWidget {
   }
 }
 
-/// Keeps every tab alive and cross-fades to [index] (hidden tabs stop
-/// ticking and ignore input).
+/// Shows the selected tab only and cross-fades between them: a thin name
+/// for [MadarFadeStack] (see it for why nothing is kept hidden behind).
 class _FadeStack extends StatelessWidget {
   const _FadeStack({required this.index, required this.children});
 
@@ -190,32 +190,6 @@ class _FadeStack extends StatelessWidget {
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) {
-    final duration = context.motion(MadarMotion.medium);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        for (var i = 0; i < children.length; i++)
-          IgnorePointer(
-            ignoring: i != index,
-            child: ExcludeSemantics(
-              excluding: i != index,
-              // The fade runs outside the TickerMode: a hidden tab stops
-              // ticking, but its own fade-out still has to finish.
-              child: AnimatedOpacity(
-                opacity: i == index ? 1 : 0,
-                duration: duration,
-                curve: MadarMotion.standard,
-                child: AnimatedSlide(
-                  offset: i == index ? Offset.zero : const Offset(0, 0.015),
-                  duration: duration,
-                  curve: MadarMotion.decelerate,
-                  child: TickerMode(enabled: i == index, child: children[i]),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => MadarFadeStack(index: index, children: children);
 }
+

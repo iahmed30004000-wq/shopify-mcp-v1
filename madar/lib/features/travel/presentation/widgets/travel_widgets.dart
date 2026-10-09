@@ -103,8 +103,8 @@ class TravelTabBar<T> extends StatelessWidget {
   }
 }
 
-/// Keeps every tab alive and cross-fades to [index] (hidden tabs stop
-/// ticking and ignore input).
+/// Shows the selected tab only and cross-fades between them: a thin name
+/// for [MadarFadeStack] (see it for why nothing is kept hidden behind).
 class TravelFadeStack extends StatelessWidget {
   const TravelFadeStack({super.key, required this.index, required this.children});
 
@@ -112,32 +112,7 @@ class TravelFadeStack extends StatelessWidget {
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) {
-    final duration = context.motion(MadarMotion.medium);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        for (var i = 0; i < children.length; i++)
-          IgnorePointer(
-            ignoring: i != index,
-            child: ExcludeSemantics(
-              excluding: i != index,
-              child: AnimatedOpacity(
-                opacity: i == index ? 1 : 0,
-                duration: duration,
-                curve: MadarMotion.standard,
-                child: AnimatedSlide(
-                  offset: i == index ? Offset.zero : const Offset(0, 0.015),
-                  duration: duration,
-                  curve: MadarMotion.decelerate,
-                  child: TickerMode(enabled: i == index, child: children[i]),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => MadarFadeStack(index: index, children: children);
 }
 
 /// Softens the top edge where a list scrolls under a pinned bar.

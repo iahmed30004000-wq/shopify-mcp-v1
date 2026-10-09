@@ -985,28 +985,40 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
                   top: widget.sceneInsets.top + widget.resetInset,
                   child: ValueListenableBuilder<bool>(
                     valueListenable: _cue,
-                    builder: (context, shown, child) => AnimatedOpacity(
-                      opacity: shown ? 1 : 0,
-                      duration: context.motion(MadarMotion.medium),
-                      curve: MadarMotion.standard,
-                      child: IgnorePointer(
-                        ignoring: !shown,
-                        // Screen readers only meet it while it is offered;
-                        // then as its own node, never merged into the
-                        // scene's (whose double tap would otherwise reset
-                        // the view).
-                        child: ExcludeSemantics(
-                          excluding: !shown,
-                          child: Semantics(container: true, child: child),
+                    builder: (context, shown, child) {
+                      // It grows in and shrinks away with its fade, so it
+                      // never blinks on and off over the sky.
+                      final motion = context.motion(MadarMotion.medium);
+                      return AnimatedScale(
+                        scale: shown ? 1 : 0.72,
+                        duration: motion,
+                        curve: MadarMotion.standard,
+                        child: AnimatedOpacity(
+                          opacity: shown ? 1 : 0,
+                          duration: motion,
+                          curve: MadarMotion.standard,
+                          child: IgnorePointer(
+                            ignoring: !shown,
+                            // Screen readers only meet it while it is
+                            // offered; then as its own node, never merged
+                            // into the scene's (whose double tap would
+                            // otherwise reset the view).
+                            child: ExcludeSemantics(
+                              excluding: !shown,
+                              child: Semantics(container: true, child: child),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    // A labelled glass pill, 48 dp tall (a full touch
-                    // target you can see): what it does is written on it.
-                    child: MadarButton(
+                      );
+                    },
+                    // A round glass button, 48 dp (a full touch target):
+                    // just the icon, so nothing sits over the sky while the
+                    // orbit is where it belongs. Its name is the screen
+                    // reader's (and the long-press tooltip's).
+                    child: MadarButton.icon(
                       key: _resetKey,
-                      label: l10n.orbitUiRecenter,
                       icon: Icons.restart_alt_rounded,
+                      semanticLabel: l10n.orbitUiRecenter,
                       variant: MadarButtonVariant.secondary,
                       size: MadarButtonSize.medium,
                       // The same sound as a double tap on the sky.

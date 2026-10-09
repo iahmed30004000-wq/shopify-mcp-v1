@@ -235,48 +235,18 @@ class WellbeingTabBar extends StatelessWidget {
   }
 }
 
-/// Builds a tab when first shown, keeps it alive afterwards and cross-fades
-/// between them.
-class _FadeStack extends StatefulWidget {
+/// Shows the selected tab only and cross-fades between them: a thin name
+/// for [MadarFadeStack] (see it for why nothing is kept hidden behind).
+class _FadeStack extends StatelessWidget {
   const _FadeStack({required this.index, required this.children});
 
   final int index;
   final List<Widget> children;
 
   @override
-  State<_FadeStack> createState() => _FadeStackState();
+  Widget build(BuildContext context) => MadarFadeStack(index: index, children: children);
 }
 
-class _FadeStackState extends State<_FadeStack> {
-  final Set<int> _built = {};
-
-  @override
-  Widget build(BuildContext context) {
-    final d = context.motion(MadarMotion.short);
-    final index = widget.index;
-    final children = widget.children;
-    _built.add(index);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        for (var i = 0; i < children.length; i++)
-          if (!_built.contains(i))
-            const SizedBox.shrink()
-          else
-            IgnorePointer(
-              ignoring: i != index,
-              child: ExcludeSemantics(
-                excluding: i != index,
-                child: TickerMode(
-                  enabled: i == index,
-                  child: AnimatedOpacity(opacity: i == index ? 1 : 0, duration: d, child: children[i]),
-                ),
-              ),
-            ),
-      ],
-    );
-  }
-}
 
 /// Bottom padding every tab leaves for the floating button.
 const double wbTabBottomPadding = 112;

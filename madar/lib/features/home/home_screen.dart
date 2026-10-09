@@ -74,7 +74,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
 
   /// The panel is (mostly) expanded: the radar shows its cards.
   final ValueNotifier<bool> _expanded = ValueNotifier(false);
+
+  /// Whether a back press may leave home (false while the panel is open:
+  /// back closes it first – it must never drop the user out of the app).
+  final ValueNotifier<bool> _canLeave = ValueNotifier(true);
   double _range = 1;
+
+  /// How far open the panel rests (0 peeking … 1 open) – its extent, kept
+  /// across a flight to a planet page and back.
+  double _restExtent = 0;
+
+  /// A flight to a planet page is (or was) under way.
+  bool _flying = false;
 
   @override
   void initState() {
@@ -88,9 +99,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
     _expand.addListener(_onExpand);
   }
 
-  void _onProgress() => _gone.value = _progress.value >= HomeScreen.panelGoneAt;
+  /// The flight's progress: the panel steps aside on the way out and comes
+  /// back exactly as open as it was. A planet page is a route *over* home,
+  /// so home keeps its state – but nothing used to put the panel back, and
+  /// a panel opened before the flight (its Neglect Radar cards are how you
+  /// reach a world from an open panel) returned covering the whole sky.
+  void _onProgress() {
+    final p = _progress.value;
+    _gone.value = p >= HomeScreen.panelGoneAt;
+    _canLeave.value = p <= 0 && _expand.value <= _collapsedEnough;
+    if (p > 0) {
+      if (!_flying) _flying = true;
+      return;
+    }
+    if (!_flying) return;
+    _flying = false;
+    // Back from the planet: restore the extent the panel rested at.
+    if ((_expand.value - _restExtent).abs() > 0.001) _expand.value = _restExtent;
+  }
 
-  void _onExpand() => _expanded.value = _expand.value > 0.5;
+  void _onExpand() {
+    _expanded.value = _expand.value > 0.5;
+    _canLeave.value = !_flying && _progress.value <= 0 && _expand.value <= _collapsedEnough;
+  }
+
+  /// Below this the panel counts as collapsed (back then leaves home).
+  static const double _collapsedEnough = 0.02;
 
   @override
   void dispose() {
@@ -101,6 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
     _panel.dispose();
     _gone.dispose();
     _expanded.dispose();
+    _canLeave.dispose();
     _expand.dispose();
     super.dispose();
   }
@@ -116,6 +151,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
   }
 
   void _settle(double target, [double velocity = 0]) {
+    _restExtent = target.clamp(0.0, 1.0);
     Fx.fire(target > 0.5 ? Sfx.sheetOpen : Sfx.sheetClose);
     if (context.reducedMotion) {
       _expand.animateTo(target, duration: MadarMotion.reduced, curve: Curves.easeOut);
@@ -129,133 +165,147 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
   /// Opens the peeking panel all the way (a tap on its grabber).
   void _toggle() => _settle(_expand.value > 0.5 ? 0 : 1);
 
+  /// Android back on home: an open panel closes first (and a planet page
+  /// has already been left by then), so back never drops out of the app
+  /// while something is still open. Only a back press on the plain,
+  /// peeking home leaves Madar.
+  void _onPop(bool didPop, Object? result) {
+    if (didPop || _expand.value <= _collapsedEnough) return;
+    _settle(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final padding = MediaQuery.paddingOf(context);
     final viewPadding = MediaQuery.viewPaddingOf(context);
     final textScale = MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 1.6);
-    return Scaffold(
-      backgroundColor: t.space0,
-      // The orbit keeps its size under the keyboard; the panel lifts itself.
-      resizeToAvoidBottomInset: false,
-      body: LayoutBuilder(
-        builder: (context, box) {
-          final h = box.maxHeight;
-          final top = padding.top;
-          final headerBottom = top + HomeScreen.headerHeight * (0.7 + 0.3 * textScale);
-          final peek = HomeScreen.peekHeight * (0.45 + 0.55 * textScale) + viewPadding.bottom;
-          final collapsedTop = math.max(headerBottom + 220, math.min(h * HomeScreen.collapsedPanelTop, h - peek));
-          final expandedTop = headerBottom + Space.xs;
-          _range = (collapsedTop - expandedTop).clamp(1.0, double.infinity);
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              // The scene never depends on the keyboard: it is not rebuilt
-              // (nor its painters recreated) while the keyboard animates.
-              Positioned.fill(
-                child: _Scene(
-                  sceneInsets: EdgeInsets.only(top: headerBottom + Space.xs, bottom: h - collapsedTop + Space.s),
-                  onOpenPlanet: _openPlanet,
+    return ValueListenableBuilder<bool>(
+      valueListenable: _canLeave,
+      builder: (context, canLeave, child) =>
+          PopScope<Object?>(canPop: canLeave, onPopInvokedWithResult: _onPop, child: child!),
+      child: Scaffold(
+        backgroundColor: t.space0,
+        // The orbit keeps its size under the keyboard; the panel lifts itself.
+        resizeToAvoidBottomInset: false,
+        body: LayoutBuilder(
+          builder: (context, box) {
+            final h = box.maxHeight;
+            final top = padding.top;
+            final headerBottom = top + HomeScreen.headerHeight * (0.7 + 0.3 * textScale);
+            final peek = HomeScreen.peekHeight * (0.45 + 0.55 * textScale) + viewPadding.bottom;
+            final collapsedTop = math.max(headerBottom + 220, math.min(h * HomeScreen.collapsedPanelTop, h - peek));
+            final expandedTop = headerBottom + Space.xs;
+            _range = (collapsedTop - expandedTop).clamp(1.0, double.infinity);
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                // The scene never depends on the keyboard: it is not rebuilt
+                // (nor its painters recreated) while the keyboard animates.
+                Positioned.fill(
+                  child: _Scene(
+                    sceneInsets: EdgeInsets.only(top: headerBottom + Space.xs, bottom: h - collapsedTop + Space.s),
+                    onOpenPlanet: _openPlanet,
+                  ),
                 ),
-              ),
-              PositionedDirectional(
-                top: 0,
-                start: 0,
-                end: 0,
-                height: headerBottom + Space.xl,
-                child: FadeTransition(
-                  opacity: ReverseAnimation(_chrome),
-                  child: Stack(
-                    children: [
-                      // A soft scrim keeps the date legible over a world or a
-                      // ring drifting up under the header – it never takes a
-                      // touch meant for the scene.
-                      Positioned.fill(
-                        child: IgnorePointer(
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  t.space0.withValues(alpha: t.isDark ? 0.42 : 0.5),
-                                  t.space0.withValues(alpha: t.isDark ? 0.22 : 0.28),
-                                  t.space0.withValues(alpha: 0),
-                                ],
-                                stops: const [0, 0.6, 1],
+                PositionedDirectional(
+                  top: 0,
+                  start: 0,
+                  end: 0,
+                  height: headerBottom + Space.xl,
+                  child: FadeTransition(
+                    opacity: ReverseAnimation(_chrome),
+                    child: Stack(
+                      children: [
+                        // A soft scrim keeps the date legible over a world or a
+                        // ring drifting up under the header – it never takes a
+                        // touch meant for the scene.
+                        Positioned.fill(
+                          child: IgnorePointer(
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    t.space0.withValues(alpha: t.isDark ? 0.42 : 0.5),
+                                    t.space0.withValues(alpha: t.isDark ? 0.22 : 0.28),
+                                    t.space0.withValues(alpha: 0),
+                                  ],
+                                  stops: const [0, 0.6, 1],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.only(top: top, bottom: Space.xl),
-                        child: const _HomeHeader(),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(top: top, bottom: Space.xl),
+                          child: const _HomeHeader(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              // The mini player rides on the panel's top edge while a
-              // recitation plays – above the chips and the quick-add bar,
-              // never over them – and steps aside as the panel opens, for
-              // the keyboard and for a planet page.
-              _NowPlayingPerch(
-                expand: _expand,
-                chrome: _chrome,
-                gone: _gone,
-                height: h,
-                collapsedTop: collapsedTop,
-                expandedTop: expandedTop,
-              ),
-              _PanelFrame(
-                expand: _expand,
-                collapsedTop: collapsedTop,
-                expandedTop: expandedTop,
-                child: ValueListenableBuilder<bool>(
-                  valueListenable: _gone,
-                  builder: (context, gone, child) => Offstage(offstage: gone, child: child),
-                  // The fly-in carries the panel straight down off the screen
-                  // (ease-in, gone by 45 % of the flight) at full opacity: no
-                  // frame shows a half-faded panel over an empty scene.
-                  child: SlideTransition(
-                    position: Tween(begin: Offset.zero, end: const Offset(0, 1.02)).animate(_panel),
-                    child: EntranceChoreo(
-                      id: 'home',
-                      child: StaggerItem(
-                        index: 1,
-                        from: EntranceFrom.bottom,
-                        distance: 36,
-                        // A fading ancestor would hide the backdrop blur until the end.
-                        fade: false,
-                        child: BackdropGroup(
-                          child: Consumer(
-                            // Only the glass tint follows the sky (once a minute); the
-                            // panel content is passed through untouched.
-                            builder: (context, ref, child) => GlassPanel(
-                              padding: EdgeInsetsDirectional.zero,
-                              borderRadius: BorderRadiusDirectional.vertical(top: Radius.circular(t.radiusXL)),
-                              tint: _panelTint(t, ref.watch(homeSkyDaylightProvider)),
-                              seed: 0.61,
-                              // A still sheen: a drifting one would redraw the
-                              // panel (and its backdrop blur) every vsync while
-                              // the scene idles at 30 fps.
-                              animateSheen: false,
-                              child: child!,
-                            ),
-                            child: SafeArea(
-                              top: false,
-                              child: TaskPanel(
-                                onOpenPlanet: _openPlanet,
-                                expanded: _expanded,
-                                expansion: _expand,
-                                onToggle: _toggle,
-                                dragArea: (child) => GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onVerticalDragUpdate: _onDragUpdate,
-                                  onVerticalDragEnd: _onDragEnd,
-                                  child: child,
+                // The mini player rides on the panel's top edge while a
+                // recitation plays – above the chips and the quick-add bar,
+                // never over them – and steps aside as the panel opens, for
+                // the keyboard and for a planet page.
+                _NowPlayingPerch(
+                  expand: _expand,
+                  chrome: _chrome,
+                  gone: _gone,
+                  height: h,
+                  collapsedTop: collapsedTop,
+                  expandedTop: expandedTop,
+                ),
+                _PanelFrame(
+                  expand: _expand,
+                  collapsedTop: collapsedTop,
+                  expandedTop: expandedTop,
+                  child: ValueListenableBuilder<bool>(
+                    valueListenable: _gone,
+                    builder: (context, gone, child) => Offstage(offstage: gone, child: child),
+                    // The fly-in carries the panel straight down off the screen
+                    // (ease-in, gone by 45 % of the flight) at full opacity: no
+                    // frame shows a half-faded panel over an empty scene.
+                    child: SlideTransition(
+                      position: Tween(begin: Offset.zero, end: const Offset(0, 1.02)).animate(_panel),
+                      child: EntranceChoreo(
+                        id: 'home',
+                        child: StaggerItem(
+                          index: 1,
+                          from: EntranceFrom.bottom,
+                          distance: 36,
+                          // A fading ancestor would hide the backdrop blur until the end.
+                          fade: false,
+                          child: BackdropGroup(
+                            child: Consumer(
+                              // Only the glass tint follows the sky (once a minute); the
+                              // panel content is passed through untouched.
+                              builder: (context, ref, child) => GlassPanel(
+                                padding: EdgeInsetsDirectional.zero,
+                                borderRadius: BorderRadiusDirectional.vertical(top: Radius.circular(t.radiusXL)),
+                                tint: _panelTint(t, ref.watch(homeSkyDaylightProvider)),
+                                seed: 0.61,
+                                // A still sheen: a drifting one would redraw the
+                                // panel (and its backdrop blur) every vsync while
+                                // the scene idles at 30 fps.
+                                animateSheen: false,
+                                child: child!,
+                              ),
+                              child: SafeArea(
+                                top: false,
+                                child: TaskPanel(
+                                  onOpenPlanet: _openPlanet,
+                                  expanded: _expanded,
+                                  expansion: _expand,
+                                  onToggle: _toggle,
+                                  dragArea: (child) => GestureDetector(
+                                    behavior: HitTestBehavior.translucent,
+                                    onVerticalDragUpdate: _onDragUpdate,
+                                    onVerticalDragEnd: _onDragEnd,
+                                    child: child,
+                                  ),
                                 ),
                               ),
                             ),
@@ -265,10 +315,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -361,10 +411,7 @@ class _NowPlayingPerch extends StatelessWidget {
       child: ValueListenableBuilder<bool>(
         valueListenable: gone,
         builder: (context, gone, child) => Offstage(offstage: gone, child: child),
-        child: FadeTransition(
-          opacity: ReverseAnimation(chrome),
-          child: const NowPlayingBar(),
-        ),
+        child: FadeTransition(opacity: ReverseAnimation(chrome), child: const NowPlayingBar()),
       ),
     );
   }

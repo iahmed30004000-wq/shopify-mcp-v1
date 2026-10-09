@@ -141,6 +141,12 @@ OCD, a philosophy channel, a recovery method, a gym programme), extract its meth
 Gemini into a JSON file, import it as a new planet, and let Madar turn it into a programme.
 
 - **The JSON format** we define + **a ready prompt** he gives to Gemini with the source link.
+  A real worked example from the owner already exists (a metabolic-protocol video he sent on 2026-10-09,
+  extracted by hand into `scratchpad/learning_sources/metabolic_protocol.json`): design the format against it –
+  it has a model (thesis, drivers, signs), a protocol (avoid / reduce / use / increase / timing / add-ons),
+  flagged over-claims, the owner's own additions, and a mapping into Madar (meal plan, habits, avoid list,
+  tracked signs, labs, safety). It also shows two things the format must handle: a partial source, and claims
+  that must be flagged rather than obeyed.
 - **Programme builder**: the import becomes a ladder of levels – daily tasks, exercises,
   quizzes, reflection prompts, interactive practice – with pass criteria per step so the whole
   thing works offline.

@@ -114,8 +114,8 @@ class _EdgeFade extends StatelessWidget {
   }
 }
 
-/// Keeps both tabs alive and cross-fades to [index] (the hidden tab stops
-/// ticking and ignores input).
+/// Shows the selected tab only and cross-fades between them: a thin name
+/// for [MadarFadeStack] (see it for why nothing is kept hidden behind).
 class _FadeStack extends StatelessWidget {
   const _FadeStack({required this.index, required this.children});
 
@@ -123,30 +123,6 @@ class _FadeStack extends StatelessWidget {
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) {
-    final duration = context.motion(MadarMotion.medium);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        for (var i = 0; i < children.length; i++)
-          IgnorePointer(
-            ignoring: i != index,
-            child: ExcludeSemantics(
-              excluding: i != index,
-              child: AnimatedOpacity(
-                opacity: i == index ? 1 : 0,
-                duration: duration,
-                curve: MadarMotion.standard,
-                child: AnimatedSlide(
-                  offset: i == index ? Offset.zero : const Offset(0, 0.015),
-                  duration: duration,
-                  curve: MadarMotion.decelerate,
-                  child: TickerMode(enabled: i == index, child: children[i]),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => MadarFadeStack(index: index, children: children);
 }
+

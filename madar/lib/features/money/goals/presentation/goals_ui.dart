@@ -237,48 +237,18 @@ class GoalsTabBar<T> extends StatelessWidget {
   }
 }
 
-/// Builds a tab when first shown, keeps it alive afterwards and cross-fades
-/// between them.
-class GoalsFadeStack extends StatefulWidget {
+/// Shows the selected tab only and cross-fades between them: a thin name
+/// for [MadarFadeStack] (see it for why nothing is kept hidden behind).
+class GoalsFadeStack extends StatelessWidget {
   const GoalsFadeStack({super.key, required this.index, required this.children});
 
   final int index;
   final List<Widget> children;
 
   @override
-  State<GoalsFadeStack> createState() => _GoalsFadeStackState();
+  Widget build(BuildContext context) => MadarFadeStack(index: index, children: children);
 }
 
-class _GoalsFadeStackState extends State<GoalsFadeStack> {
-  final Set<int> _built = {};
-
-  @override
-  Widget build(BuildContext context) {
-    final d = context.motion(MadarMotion.short);
-    final index = widget.index;
-    final children = widget.children;
-    _built.add(index);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        for (var i = 0; i < children.length; i++)
-          if (!_built.contains(i))
-            const SizedBox.shrink()
-          else
-            IgnorePointer(
-              ignoring: i != index,
-              child: ExcludeSemantics(
-                excluding: i != index,
-                child: TickerMode(
-                  enabled: i == index,
-                  child: AnimatedOpacity(opacity: i == index ? 1 : 0, duration: d, child: children[i]),
-                ),
-              ),
-            ),
-      ],
-    );
-  }
-}
 
 /// A small rounded status label ("متأخر يومين", "على المسار").
 class GoalsPill extends StatelessWidget {

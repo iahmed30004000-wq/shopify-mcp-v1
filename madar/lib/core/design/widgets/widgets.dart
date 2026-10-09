@@ -5,6 +5,7 @@ library;
 export 'ambient_motion.dart';
 export 'cosmos_backdrop.dart';
 export 'empty_state.dart';
+export 'fade_stack.dart';
 export 'glass.dart';
 export 'madar_button.dart';
 export 'madar_chip.dart';

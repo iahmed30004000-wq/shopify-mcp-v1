@@ -2,6 +2,8 @@ import 'package:drift/drift.dart' show Value;
 
 import 'dart:ui' show SemanticsAction;
 
+import 'package:flutter/services.dart' show JSONMethodCodec, MethodCall;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -66,6 +68,21 @@ Future<void> _pumpFrames(WidgetTester tester, int n) async {
   for (var i = 0; i < n; i++) {
     await tester.pump(const Duration(milliseconds: 16));
   }
+}
+
+/// The Android back button / gesture. Returns whether the app handled it –
+/// false means the framework would let Android close Madar.
+Future<bool> _systemBack(WidgetTester tester) async {
+  var handled = true;
+  await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+    'flutter/navigation',
+    const JSONMethodCodec().encodeMethodCall(const MethodCall('popRoute')),
+    (data) {
+      if (data != null) handled = const JSONMethodCodec().decodeEnvelope(data) as bool;
+    },
+  );
+  await tester.pumpAndSettle();
+  return handled;
 }
 
 OrbitSceneState _sceneState(WidgetTester tester) => tester.state<OrbitSceneState>(find.byType(OrbitScene));
@@ -299,6 +316,82 @@ void main() {
     await tester.drag(find.byType(WindowChips), const Offset(0, 500));
     await settleApp(tester);
     expect(tester.getTopLeft(panel).dy, closeTo(collapsed, 1));
+  });
+
+  group('back from a planet', () {
+    Future<TestApp> home(WidgetTester tester) => pumpMadarApp(
+      tester,
+      beforePump: (db) async {
+        await _prayerSettings(db);
+        await seedLivedIn(Repositories(db), now: testNow, thriving: false);
+      },
+    );
+
+    double panelTop(WidgetTester tester) => tester.getTopLeft(find.byType(GlassPanel).first).dy;
+
+    testWidgets('the panel comes back exactly as open as it was left', (tester) async {
+      final app = await home(tester);
+      final collapsed = panelTop(tester);
+
+      // Open the panel (its Neglect Radar cards are how a world is reached
+      // from an open panel), then fly to a world and come back.
+      await tester.drag(find.byType(WindowChips), const Offset(0, -400));
+      await settleApp(tester);
+      final expanded = panelTop(tester);
+      expect(expanded, lessThan(collapsed - 200));
+
+      app.router.go(AppRoutes.planetOf('family'));
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(find.byType(PlanetModulePage), findsOneWidget);
+      expect(await _systemBack(tester), isTrue, reason: 'back leaves the planet, it never leaves Madar');
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(app.location, AppRoutes.home);
+      expect(panelTop(tester), closeTo(expanded, 1), reason: 'the extent it rested at');
+
+      // And a peeking panel comes back peeking.
+      await tester.drag(find.byType(WindowChips), const Offset(0, 500));
+      await settleApp(tester);
+      expect(panelTop(tester), closeTo(collapsed, 1));
+      app.router.go(AppRoutes.planetOf('work'));
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(await _systemBack(tester), isTrue);
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(panelTop(tester), closeTo(collapsed, 1), reason: 'never stuck open over the sky');
+    });
+
+    testWidgets('back closes an open panel first, and only then may leave Madar', (tester) async {
+      final app = await home(tester);
+      final collapsed = panelTop(tester);
+      await tester.drag(find.byType(WindowChips), const Offset(0, -400));
+      await settleApp(tester);
+      expect(panelTop(tester), lessThan(collapsed - 200));
+
+      // First back: the panel closes, the app stays.
+      expect(await _systemBack(tester), isTrue, reason: 'an open panel swallows the back press');
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(panelTop(tester), closeTo(collapsed, 1));
+      expect(app.location, AppRoutes.home);
+
+      // Only now does back leave the app.
+      expect(await _systemBack(tester), isFalse, reason: 'plain, peeking home: back leaves Madar');
+    });
+
+    testWidgets('while a planet is open, back only flies home', (tester) async {
+      final app = await home(tester);
+      app.router.go(AppRoutes.planetOf('family'));
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(await _systemBack(tester), isTrue);
+      await _pumpFrames(tester, 60);
+      await settleApp(tester);
+      expect(app.location, AppRoutes.home);
+      expect(find.byType(PlanetModulePage), findsNothing);
+    });
   });
 
   group('the orbit', () {
@@ -579,7 +672,7 @@ void main() {
 
   group('reset view', () {
     Finder resetPill() => find.bySemanticsLabel(_ar.orbitUiRecenter);
-    Finder pillButton() => find.byWidgetPredicate((w) => w is MadarButton && w.label == _ar.orbitUiRecenter);
+    Finder pillButton() => find.byWidgetPredicate((w) => w is MadarButton && w.semanticLabel == _ar.orbitUiRecenter);
 
     /// The pill is faded in and takes touches.
     bool pillShown(WidgetTester tester) {
@@ -638,8 +731,10 @@ void main() {
       expect(pillShown(tester), isTrue);
       expect(resetPill(), findsOneWidget);
       final size = tester.getSize(resetPill());
-      expect(size.height, greaterThanOrEqualTo(44), reason: 'a real touch target');
-      expect(find.text(_ar.orbitUiRecenter), findsOneWidget, reason: 'labelled, not a cryptic icon');
+      expect(size.height, greaterThanOrEqualTo(48), reason: 'a real touch target');
+      expect(size.width, lessThan(72), reason: 'an icon, not a pill with text over the sky');
+      expect(find.text(_ar.orbitUiRecenter), findsNothing, reason: 'icon only – the name is the screen reader\'s');
+      expect(find.descendant(of: pillButton(), matching: find.byIcon(Icons.restart_alt_rounded)), findsOneWidget);
       // Names never slide under it.
       expect(c.planets.labelKeepOut, isNotEmpty);
 
