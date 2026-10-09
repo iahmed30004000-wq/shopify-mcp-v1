@@ -17881,6 +17881,13 @@
   "cinemaResume": "متابعة العرض",
   "cinemaRestart": "من البداية",
   "cinemaLeave": "مغادرة القاعة",
+  "cinemaExitGame": "الخروج من اللعبة",
+  "cinemaExitConfirmTitle": "بدك تطلع من اللعبة؟",
+  "cinemaExitConfirmBody": "إذا طلعت هلأ، الجولة الحالية تنتهي وما تنحفظ نتيجتها.",
+  "@cinemaExitConfirmBody": {
+    "description": "Asked when the Android back button leaves a paused game"
+  },
+  "cinemaExitStay": "أكمل اللعب",
   "cinemaPlayAgain": "عرض آخر",
   "cinemaTheEnd": "النهاية",
   "cinemaGameOver": "انتهى العرض",

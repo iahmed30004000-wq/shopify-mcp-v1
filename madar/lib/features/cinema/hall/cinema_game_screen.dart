@@ -22,6 +22,11 @@ import 'cinema_records.dart';
 ///   on leave.
 /// * Scores and play statistics go to the hall's records
 ///   ([cinemaRecordsStoreProvider]); the HUD shows the best score.
+/// * Leaving: the pause plate (top reading corner) opens the Intermission,
+///   whose card offers "leave the game"; Android back opens the
+///   Intermission too, and a second back leaves after a confirm. Every exit
+///   path runs through [dispose], which gives the phone back its
+///   orientation, its system bars and its screen timeout.
 /// * Lifecycle: backgrounding pauses (CinemaGame); when something opaque
 ///   covers the game – a pushed page or the adhan (AdhanHost turns tickers
 ///   off beneath it) – the show pauses, its music stops and the engine
@@ -184,6 +189,26 @@ class _CinemaGameScreenState extends ConsumerState<CinemaGameScreen> {
     if (mounted) unawaited(Navigator.of(context).maybePop());
   }
 
+  /// Android back from the Intermission: ask, so one stray back never
+  /// throws a run away. The Intermission's own "leave the game" button is
+  /// deliberate and leaves without asking.
+  Future<bool> _confirmLeave() async {
+    if (!mounted) return false;
+    final l10n = L10n.of(context);
+    final answer = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.cinemaExitConfirmTitle),
+        content: Text(l10n.cinemaExitConfirmBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(l10n.cinemaExitStay)),
+          TextButton(onPressed: () => Navigator.of(context).pop(true), child: Text(l10n.cinemaExitGame)),
+        ],
+      ),
+    );
+    return answer ?? false;
+  }
+
   @override
   void dispose() {
     _tickers?.removeListener(_onTickers);
@@ -210,6 +235,7 @@ class _CinemaGameScreenState extends ConsumerState<CinemaGameScreen> {
             scoreSink: _store,
             skipOpening: widget.skipOpening,
             onExit: _exit,
+            confirmLeave: _confirmLeave,
           ),
           if (_muted)
             PositionedDirectional(

@@ -17874,6 +17874,19 @@ class L10nEn extends L10n {
   String get cinemaLeave => 'Leave';
 
   @override
+  String get cinemaExitGame => 'Leave the game';
+
+  @override
+  String get cinemaExitConfirmTitle => 'Leave the game?';
+
+  @override
+  String get cinemaExitConfirmBody =>
+      'Leaving now ends this run and its score is not saved.';
+
+  @override
+  String get cinemaExitStay => 'Keep playing';
+
+  @override
   String get cinemaPlayAgain => 'Play again';
 
   @override

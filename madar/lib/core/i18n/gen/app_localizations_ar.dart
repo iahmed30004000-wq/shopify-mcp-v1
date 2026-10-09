@@ -18424,6 +18424,19 @@ class L10nAr extends L10n {
   String get cinemaLeave => 'مغادرة القاعة';
 
   @override
+  String get cinemaExitGame => 'الخروج من اللعبة';
+
+  @override
+  String get cinemaExitConfirmTitle => 'بدك تطلع من اللعبة؟';
+
+  @override
+  String get cinemaExitConfirmBody =>
+      'إذا طلعت هلأ، الجولة الحالية تنتهي وما تنحفظ نتيجتها.';
+
+  @override
+  String get cinemaExitStay => 'أكمل اللعب';
+
+  @override
   String get cinemaPlayAgain => 'عرض آخر';
 
   @override

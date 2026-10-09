@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -9,11 +11,19 @@ import '../../../core/providers.dart';
 import '../../../core/sound/prayer_mute.dart';
 import '../../../core/sound/sound_api.dart';
 import 'cinema_engine.dart';
+import 'stage/stage_materials.dart';
 
 /// Hosts one [CinemaGame] full-bleed: builds it with the app's services
 /// (sound, haptics, score sink, locale, direction, reduced motion), wires the
-/// prayer mute, turns the system back gesture into "intermission", rebuilds
-/// the game on restart and disposes everything with the widget.
+/// prayer mute, rebuilds the game on restart and disposes everything with the
+/// widget.
+///
+/// Leaving a show (APK #15: "you cannot leave a game"):
+/// * a pause plate sits in the top reading corner of every running show, so
+///   there is always something visible to tap;
+/// * Android back opens the Intermission, which offers "leave the game";
+/// * Android back again leaves, after [confirmLeave] (so a stray back never
+///   throws a run away).
 class CinemaGameView extends ConsumerStatefulWidget {
   const CinemaGameView({
     super.key,
@@ -22,6 +32,7 @@ class CinemaGameView extends ConsumerStatefulWidget {
     this.scoreSink,
     this.onResult,
     this.onExit,
+    this.confirmLeave,
     this.skipOpening = false,
     this.seed = 0,
   });
@@ -37,6 +48,10 @@ class CinemaGameView extends ConsumerStatefulWidget {
 
   /// Defaults to popping the route.
   final VoidCallback? onExit;
+
+  /// Asked before the second Android back leaves a paused show; `true`
+  /// leaves. Without it, back from the Intermission leaves straight away.
+  final Future<bool> Function()? confirmLeave;
 
   /// Straight into gameplay (attract mode, screenshots).
   final bool skipOpening;
@@ -115,17 +130,33 @@ class _CinemaGameViewState extends ConsumerState<CinemaGameView> {
     }
   }
 
+  /// Back: play → Intermission → leave (asking first). It never resumes:
+  /// pressing back twice has to get the player out, not back into the show.
   void _onBack() {
     final game = _game;
-    if (game == null) return;
+    if (game == null) {
+      _exit();
+      return;
+    }
     switch (game.state) {
       case SceneState.playing:
         game.pauseGame();
       case SceneState.paused:
-        game.resumeGame();
+        unawaited(_leaveFromBack());
       case SceneState.loading || SceneState.opening || SceneState.ending || SceneState.ended:
         _exit();
     }
+  }
+
+  Future<void> _leaveFromBack() async {
+    final ask = widget.confirmLeave;
+    if (ask == null) {
+      _exit();
+      return;
+    }
+    final leave = await ask();
+    if (!mounted) return;
+    if (leave) _exit();
   }
 
   @override
@@ -151,13 +182,75 @@ class _CinemaGameViewState extends ConsumerState<CinemaGameView> {
         },
         child: ColoredBox(
           color: const Color(0xFF000000),
-          child: GameWidget<CinemaGame>(
-            key: ValueKey(_generation),
-            game: game,
-            overlayBuilderMap: {
-              for (final e in overlays.entries) e.key: (BuildContext context, CinemaGame game) => e.value(context, game),
-            },
-            loadingBuilder: (_) => const SizedBox.expand(),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              GameWidget<CinemaGame>(
+                key: ValueKey(_generation),
+                game: game,
+                overlayBuilderMap: {
+                  for (final e in overlays.entries)
+                    e.key: (BuildContext context, CinemaGame game) => e.value(context, game),
+                },
+                loadingBuilder: (_) => const SizedBox.expand(),
+              ),
+              // The one thing always on screen while the show runs: the way
+              // to the Intermission (and from there out of the game).
+              ValueListenableBuilder<SceneState>(
+                valueListenable: game.sceneState,
+                builder: (context, state, _) => state == SceneState.playing
+                    ? SafeArea(
+                        child: Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: PausePlate(game: game),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The pause plate: a small brass plaque in the show's own era colours, in
+/// the top reading corner of every running show. Tapping it opens the
+/// Intermission, whose card offers resume, restart and "leave the game".
+class PausePlate extends StatelessWidget {
+  const PausePlate({super.key, required this.game});
+
+  final CinemaGame game;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final m = StageMaterials.of(game.skin);
+    return Semantics(
+      button: true,
+      label: l10n.cinemaPause,
+      excludeSemantics: true,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: game.pauseGame,
+        // 48 dp of touch around a 40 dp plaque.
+        child: SizedBox.square(
+          dimension: 48,
+          child: Center(
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: m.plaque.withValues(alpha: 0.92),
+                shape: BoxShape.circle,
+                border: Border.all(color: m.gilt, width: 2),
+              ),
+              child: Center(child: Icon(Icons.pause_rounded, size: 22, color: m.plaqueText)),
+            ),
           ),
         ),
       ),

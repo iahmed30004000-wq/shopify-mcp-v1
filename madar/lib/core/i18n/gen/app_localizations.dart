@@ -28299,6 +28299,30 @@ abstract class L10n {
   /// **'مغادرة القاعة'**
   String get cinemaLeave;
 
+  /// No description provided for @cinemaExitGame.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخروج من اللعبة'**
+  String get cinemaExitGame;
+
+  /// No description provided for @cinemaExitConfirmTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدك تطلع من اللعبة؟'**
+  String get cinemaExitConfirmTitle;
+
+  /// Asked when the Android back button leaves a paused game
+  ///
+  /// In ar, this message translates to:
+  /// **'إذا طلعت هلأ، الجولة الحالية تنتهي وما تنحفظ نتيجتها.'**
+  String get cinemaExitConfirmBody;
+
+  /// No description provided for @cinemaExitStay.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكمل اللعب'**
+  String get cinemaExitStay;
+
   /// No description provided for @cinemaPlayAgain.
   ///
   /// In ar, this message translates to:

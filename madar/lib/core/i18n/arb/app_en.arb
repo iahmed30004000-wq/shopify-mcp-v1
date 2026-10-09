@@ -17881,6 +17881,13 @@
   "cinemaResume": "Resume",
   "cinemaRestart": "Restart",
   "cinemaLeave": "Leave",
+  "cinemaExitGame": "Leave the game",
+  "cinemaExitConfirmTitle": "Leave the game?",
+  "cinemaExitConfirmBody": "Leaving now ends this run and its score is not saved.",
+  "@cinemaExitConfirmBody": {
+    "description": "Asked when the Android back button leaves a paused game"
+  },
+  "cinemaExitStay": "Keep playing",
   "cinemaPlayAgain": "Play again",
   "cinemaTheEnd": "The End",
   "cinemaGameOver": "Show's Over",

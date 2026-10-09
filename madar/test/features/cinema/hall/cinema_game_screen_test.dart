@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show JSONMethodCodec, MethodCall;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 import 'package:madar/features/cinema/engine/cinema_engine.dart';
@@ -223,6 +224,94 @@ void main() {
     expect(find.byType(IrisRouteTransition), findsOneWidget);
     await frames(tester, 12);
     expect(find.byType(NotOpenYetStage), findsOneWidget);
+  });
+
+  // ---------------------------------------------------------------------------
+  // B6 (APK #15): "you cannot leave a game".
+
+  /// The Android back button / gesture.
+  Future<void> systemBack(WidgetTester tester) async {
+    await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+      'flutter/navigation',
+      const JSONMethodCodec().encodeMethodCall(const MethodCall('popRoute')),
+      (_) {},
+    );
+    await tester.pump();
+  }
+
+  /// A running show on a route of its own, so leaving it can pop.
+  Future<void> openShow(WidgetTester tester, HallTestEnv env) async {
+    await tester.pumpWidget(
+      env.app(
+        Builder(
+          builder: (context) => Center(
+            child: TextButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      CinemaGameScreen(gameId: 'test_show', entry: entry(), kit: kit.kit, skipOpening: true),
+                ),
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await frames(tester, 12);
+  }
+
+  testWidgets('a running show always shows the pause plate, and the Intermission leads out', (tester) async {
+    phone(tester);
+    final env = HallTestEnv();
+    await openShow(tester, env);
+    final g = built.single;
+    expect(g.state, SceneState.playing);
+    expect(env.session.calls, ['enter portrait']);
+    expect(find.byType(PausePlate), findsOneWidget, reason: 'something visible to tap while playing');
+    // 48 dp of touch target, as every Madar control has.
+    expect(tester.getSize(find.byType(PausePlate)), const Size(48, 48));
+
+    await tester.tap(find.byType(PausePlate));
+    await frames(tester, 10);
+    expect(g.state, SceneState.paused);
+    expect(find.byType(PausePlate), findsNothing, reason: 'the plate steps aside for the Intermission');
+    expect(find.text(ar.cinemaExitGame), findsOneWidget, reason: 'the plain way out');
+
+    await tester.tap(find.text(ar.cinemaExitGame));
+    await frames(tester, 16);
+    expect(find.byType(CinemaGameScreen), findsNothing);
+    expect(env.session.calls.last, 'exit', reason: 'orientation, system bars and screen timeout restored');
+  });
+
+  testWidgets('back opens the Intermission, back again leaves after a confirm', (tester) async {
+    phone(tester);
+    final env = HallTestEnv();
+    await openShow(tester, env);
+    final g = built.single;
+
+    await systemBack(tester);
+    await frames(tester, 8);
+    expect(g.state, SceneState.paused, reason: 'the first back pauses');
+    expect(find.byType(CinemaGameScreen), findsOneWidget);
+
+    // A stray second back asks first, and "keep playing" stays in the show.
+    await systemBack(tester);
+    await frames(tester, 8);
+    expect(find.text(ar.cinemaExitConfirmTitle), findsOneWidget);
+    await tester.tap(find.text(ar.cinemaExitStay));
+    await frames(tester, 8);
+    expect(find.byType(CinemaGameScreen), findsOneWidget, reason: 'a stray back never throws the run away');
+    expect(env.session.calls, isNot(contains('exit')));
+
+    await systemBack(tester);
+    await frames(tester, 8);
+    expect(find.text(ar.cinemaExitConfirmTitle), findsOneWidget);
+    await tester.tap(find.text(ar.cinemaExitGame));
+    await frames(tester, 20);
+    expect(find.byType(CinemaGameScreen), findsNothing, reason: 'back twice gets the player out');
+    expect(env.session.calls.last, 'exit');
   });
 
   test(

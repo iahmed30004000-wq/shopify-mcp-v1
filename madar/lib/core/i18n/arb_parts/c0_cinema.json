@@ -11,6 +11,14 @@
   "cinemaResume": {"ar": "متابعة العرض", "en": "Resume"},
   "cinemaRestart": {"ar": "من البداية", "en": "Restart"},
   "cinemaLeave": {"ar": "مغادرة القاعة", "en": "Leave"},
+  "cinemaExitGame": {"ar": "الخروج من اللعبة", "en": "Leave the game"},
+  "cinemaExitConfirmTitle": {"ar": "بدك تطلع من اللعبة؟", "en": "Leave the game?"},
+  "cinemaExitConfirmBody": {
+    "ar": "إذا طلعت هلأ، الجولة الحالية تنتهي وما تنحفظ نتيجتها.",
+    "en": "Leaving now ends this run and its score is not saved.",
+    "description": "Asked when the Android back button leaves a paused game"
+  },
+  "cinemaExitStay": {"ar": "أكمل اللعب", "en": "Keep playing"},
   "cinemaPlayAgain": {"ar": "عرض آخر", "en": "Play again"},
   "cinemaTheEnd": {"ar": "النهاية", "en": "The End"},
   "cinemaGameOver": {"ar": "انتهى العرض", "en": "Show's Over", "description": "Game over card"},

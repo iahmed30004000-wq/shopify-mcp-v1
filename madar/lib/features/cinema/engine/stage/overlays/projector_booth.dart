@@ -14,7 +14,8 @@ import 'overlay_kit.dart';
 /// booth: the projector idles on its stand – reels turning, lamp flickering,
 /// its beam leaving through the booth's porthole with dust in it (a VCR
 /// paused on "‖" in the 80s) – above the era's title plate and three real
-/// buttons: resume, restart, leave. Animated on game time (the stage beat).
+/// buttons: resume, restart and the plain way out ("leave the game").
+/// Animated on game time (the stage beat).
 class ProjectorBoothOverlay extends StatefulWidget {
   const ProjectorBoothOverlay({super.key, required this.game});
 
@@ -118,7 +119,7 @@ class _ProjectorBoothOverlayState extends State<ProjectorBoothOverlay> {
                                     Expanded(
                                       child: StageButton(
                                         scene: s,
-                                        label: l10n.cinemaLeave,
+                                        label: l10n.cinemaExitGame,
                                         onPressed: game.requestExit,
                                       ),
                                     ),
