@@ -3,12 +3,20 @@
 **Read `madar/PLAN.md` first** – it is the complete ordered plan (every part, in order,
 one APK each). This file keeps only the live state and the raw owner feedback.
 
-## State (2026-10-09)
+## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped: **APK #15**, commit d9d5204, CI run 37652536745, artifact madar-apk-15.
-- Next: **PLAN.md Part 1** (the APK #15 bug fixes) – finish it fully, ship an APK, report,
-  then Part 2. One part at a time, 1–2 agents max.
-- The owner reviews each APK on his phone and his feedback becomes the next part.
+- Last shipped: **APK #17**, commit d2dca93, CI run 38017924662, artifact madar-apk-17 (id 11657279276).
+- **PLAN.md Part 1 is DONE** – all six APK #15 bugs fixed and verified:
+  overlapping tabs (one shared cause in 8 screens → new `MadarFadeStack` in core/design),
+  the task "+" footer row, leaving a game (PopScope/maybePop deadlock + a visible pause
+  plate), moons (size floor, tight band, slow laps), the home panel's extent on returning
+  from a planet + PopScope back handling, and the icon-only reset-view button.
+  Full suite run locally in folder chunks: ~6,500 tests green, analyze clean, l10n in sync.
+- Next: **PLAN.md Part 2** (wire the finished system packages: search, notification centre +
+  gate, export/backup, AI chat, widgets, Together) – but WAIT for the owner's feedback on
+  APK #17 first; his feedback becomes the next part.
+- Note: the CI workflow only triggers on changes under `madar/**` – an empty or docs-only
+  commit outside that path will not build.
 
 ## How work is organised
 - Working rule (standing): one part at a time → verify → APK → report in plain Arabic with
