@@ -96,3 +96,23 @@ enum WirdUnit { pages, juz, hizb, ayat }
 
 /// What a Hifz item holds: a Quran ayah range, a hadith, or free text.
 enum HifzKind { ayat, hadith, custom }
+
+/// What one of the user's own food rules matches (schema v3, Nutrition).
+///
+/// Never a medical judgement of ours: the user writes the rule himself and
+/// picks what it matches.
+enum FoodRuleTarget {
+  /// One food of his library.
+  food,
+
+  /// One of his own tags («مقلي»، «ملح عالي»).
+  tag,
+
+  /// Anything eaten (used with a time window or a daily count, e.g.
+  /// "anything after 22:00").
+  anyFood,
+}
+
+/// How heavily one of the user's own food rules weighs on a condition – his
+/// choice, in his words («خفيف / متوسط / عالي»).
+enum RiskWeight { low, medium, high }

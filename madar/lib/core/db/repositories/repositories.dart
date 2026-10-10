@@ -43,6 +43,12 @@ class Repositories {
       habits = EntityRepository(db, db.habits),
       habitLogs = EntityRepository(db, db.habitLogs),
       worries = EntityRepository(db, db.worries),
+      foods = EntityRepository(db, db.foods),
+      foodLogs = EntityRepository(db, db.foodLogs),
+      mealPlans = EntityRepository(db, db.mealPlans),
+      mealSlots = EntityRepository(db, db.mealSlots),
+      mealSlotFoods = EntityRepository(db, db.mealSlotFoods),
+      foodRules = EntityRepository(db, db.foodRules),
       wallets = EntityRepository(db, db.wallets),
       budgetItems = EntityRepository(db, db.budgetItems),
       transactions = EntityRepository(db, db.transactions),
@@ -107,6 +113,14 @@ class Repositories {
   final EntityRepository<$HabitsTable, HabitRow> habits;
   final EntityRepository<$HabitLogsTable, HabitLogRow> habitLogs;
   final EntityRepository<$WorriesTable, WorryRow> worries;
+
+  // Nutrition (food library, log, meal plan, the user's own food rules)
+  final EntityRepository<$FoodsTable, FoodRow> foods;
+  final EntityRepository<$FoodLogsTable, FoodLogRow> foodLogs;
+  final EntityRepository<$MealPlansTable, MealPlanRow> mealPlans;
+  final EntityRepository<$MealSlotsTable, MealSlotRow> mealSlots;
+  final EntityRepository<$MealSlotFoodsTable, MealSlotFoodRow> mealSlotFoods;
+  final EntityRepository<$FoodRulesTable, FoodRuleRow> foodRules;
 
   // Money
   final EntityRepository<$WalletsTable, WalletRow> wallets;
@@ -178,6 +192,12 @@ class Repositories {
       habits,
       habitLogs,
       worries,
+      foods,
+      foodLogs,
+      mealPlans,
+      mealSlots,
+      mealSlotFoods,
+      foodRules,
       wallets,
       budgetItems,
       transactions,

@@ -20,6 +20,7 @@ part 'database.g.dart';
   HealthAlerts, Conditions, Medications, MedCourses, MedRules, MedDoses,
   LabTests, LabReadings, Appointments, DoctorQuestions, PainEntries,
   MoodEntries, TagOptions, Habits, HabitLogs, Worries,
+  Foods, FoodLogs, MealPlans, MealSlots, MealSlotFoods, FoodRules,
   Currencies, Wallets, BudgetItems, Transactions, Jars, JarDeposits, Debts,
   DebtPayments, Obligations, ObligationPayments,
   People, ContactLogs, Projects, ProjectItems, Boards, BoardCards, Trips,
@@ -39,7 +40,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -54,6 +55,17 @@ class MadarDatabase extends _$MadarDatabase {
             await m.createTable(wirdPlans);
             await m.createTable(hifzItems);
             await m.createTable(hifzReviews);
+          }
+          // v3: the food library, the food log, the meal plan and the
+          // user's own food rules, plus a colour on his conditions.
+          if (from < 3) {
+            await m.createTable(foods);
+            await m.createTable(foodLogs);
+            await m.createTable(mealPlans);
+            await m.createTable(mealSlots);
+            await m.createTable(mealSlotFoods);
+            await m.createTable(foodRules);
+            await m.addColumn(conditions, conditions.color);
           }
         },
         beforeOpen: (details) async {

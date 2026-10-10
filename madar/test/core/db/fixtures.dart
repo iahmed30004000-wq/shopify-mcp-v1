@@ -111,10 +111,12 @@ Future<void> populateAllTables(MadarDatabase db) async {
     );
     b.insertAll(db.conditions, [
       ConditionsCompanion.insert(
+        id: const Value('condition-full'),
         name: 'Generic condition',
         notes: const Value('n'),
         since: Value(tLocal),
         active: const Value(false),
+        color: const Value(0xFF8E44AD),
       ),
       ConditionsCompanion.insert(name: 'sparse'),
     ]);
@@ -580,6 +582,81 @@ Future<void> populateAllTables(MadarDatabase db) async {
         done: const Value(true),
       ),
       CustomEntriesCompanion.insert(moduleId: 'module-1'),
+    ]);
+    // Schema v3: food library, food log, meal plan, the user's own rules.
+    b.insertAll(db.foods, [
+      FoodsCompanion.insert(
+        id: const Value('food-full'),
+        name: 'مقلوبة',
+        notes: const Value('line 1\nline 2'),
+        tags: const Value(['نشويات', 'مقلي', 'tag with "quotes"']),
+        defaultPortion: const Value(1.5),
+        unit: const Value('طبق'),
+        favorite: const Value(true),
+        archived: const Value(true),
+        sortOrder: const Value(7),
+      ),
+      FoodsCompanion.insert(name: 'sparse food'),
+    ]);
+    b.insertAll(db.foodLogs, [
+      FoodLogsCompanion.insert(
+        id: const Value('log-full'),
+        foodId: const Value('food-full'),
+        name: 'مقلوبة',
+        at: tLocal,
+        portion: const Value(-2.5),
+        unit: const Value('طبق'),
+        tags: const Value(['زيارة']),
+        note: const Value('بيت الوالدة'),
+        slotId: const Value('slot-full'),
+      ),
+      FoodLogsCompanion.insert(name: 'sparse log', at: tUtc),
+    ]);
+    b.insertAll(db.mealPlans, [
+      MealPlansCompanion.insert(
+        id: const Value('plan-meals'),
+        name: 'خطة رمضان',
+        notes: const Value('n'),
+        active: const Value(true),
+      ),
+      MealPlansCompanion.insert(name: 'sparse plan'),
+    ]);
+    b.insertAll(db.mealSlots, [
+      MealSlotsCompanion.insert(
+        id: const Value('slot-full'),
+        planId: 'plan-meals',
+        name: 'فطور',
+        timeMinutes: 480,
+        weekdays: const Value([1, 3, 5, 7]),
+        remind: const Value(true),
+        notes: const Value('بعد الفجر'),
+      ),
+      MealSlotsCompanion.insert(planId: 'plan-meals', name: 'sparse slot', timeMinutes: 0),
+    ]);
+    b.insertAll(db.mealSlotFoods, [
+      MealSlotFoodsCompanion.insert(
+        slotId: 'slot-full',
+        foodId: const Value('food-full'),
+        name: 'مقلوبة',
+        portion: const Value(1),
+        unit: const Value('طبق'),
+      ),
+      MealSlotFoodsCompanion.insert(slotId: 'slot-full', name: 'sparse planned food'),
+    ]);
+    b.insertAll(db.foodRules, [
+      FoodRulesCompanion.insert(
+        conditionId: const Value('condition-full'),
+        target: const Value(FoodRuleTarget.tag),
+        tag: const Value('مقلي'),
+        minPortion: const Value(2),
+        fromMinutes: const Value(1320),
+        toMinutes: const Value(360),
+        maxPerDay: const Value(2),
+        weight: const Value(RiskWeight.high),
+        note: const Value('المقلي يتعبني'),
+        active: const Value(false),
+      ),
+      FoodRulesCompanion.insert(target: const Value(FoodRuleTarget.anyFood)),
     ]);
     // Schema v2: Quran, wird, Hifz.
     b.insertAll(db.quranBookmarks, [

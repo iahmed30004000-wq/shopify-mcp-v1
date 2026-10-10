@@ -37154,6 +37154,42 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'انتهى دور {name} — حان دورك'**
   String togetherNetTurnBody(String name);
+
+  /// Notification channel group for meal reminders
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكل'**
+  String get nutritionNotifyGroup;
+
+  /// No description provided for @nutritionNotifyChannel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات الوجبات'**
+  String get nutritionNotifyChannel;
+
+  /// No description provided for @nutritionNotifyChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بوجبات خطتك بوقتها'**
+  String get nutritionNotifyChannelDescription;
+
+  /// No description provided for @nutritionNotifyMealBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد وجبتك عند {time}.'**
+  String nutritionNotifyMealBody(String time);
+
+  /// No description provided for @nutritionNotifyMealBodyWithFoods.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند {time}: {foods}.'**
+  String nutritionNotifyMealBodyWithFoods(String time, String foods);
+
+  /// Marker label for insights: an entry logged at or after 21:00
+  ///
+  /// In ar, this message translates to:
+  /// **'أكل متأخر'**
+  String get nutritionLateMealLabel;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

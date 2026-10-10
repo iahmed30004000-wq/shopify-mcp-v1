@@ -23931,4 +23931,26 @@ class L10nAr extends L10n {
   String togetherNetTurnBody(String name) {
     return 'انتهى دور $name — حان دورك';
   }
+
+  @override
+  String get nutritionNotifyGroup => 'الأكل';
+
+  @override
+  String get nutritionNotifyChannel => 'تنبيهات الوجبات';
+
+  @override
+  String get nutritionNotifyChannelDescription => 'تذكير بوجبات خطتك بوقتها';
+
+  @override
+  String nutritionNotifyMealBody(String time) {
+    return 'موعد وجبتك عند $time.';
+  }
+
+  @override
+  String nutritionNotifyMealBodyWithFoods(String time, String foods) {
+    return 'عند $time: $foods.';
+  }
+
+  @override
+  String get nutritionLateMealLabel => 'أكل متأخر';
 }

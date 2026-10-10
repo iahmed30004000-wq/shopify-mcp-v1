@@ -22086,5 +22086,34 @@
         "type": "String"
       }
     }
+  },
+  "nutritionNotifyGroup": "الأكل",
+  "@nutritionNotifyGroup": {
+    "description": "Notification channel group for meal reminders"
+  },
+  "nutritionNotifyChannel": "تنبيهات الوجبات",
+  "nutritionNotifyChannelDescription": "تذكير بوجبات خطتك بوقتها",
+  "nutritionNotifyMealBody": "موعد وجبتك عند {time}.",
+  "@nutritionNotifyMealBody": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNotifyMealBodyWithFoods": "عند {time}: {foods}.",
+  "@nutritionNotifyMealBodyWithFoods": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "foods": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLateMealLabel": "أكل متأخر",
+  "@nutritionLateMealLabel": {
+    "description": "Marker label for insights: an entry logged at or after 21:00"
   }
 }

@@ -23326,4 +23326,27 @@ class L10nEn extends L10n {
   String togetherNetTurnBody(String name) {
     return '$name played — it\'s your move';
   }
+
+  @override
+  String get nutritionNotifyGroup => 'Food';
+
+  @override
+  String get nutritionNotifyChannel => 'Meal reminders';
+
+  @override
+  String get nutritionNotifyChannelDescription =>
+      'A reminder at each meal of your plan';
+
+  @override
+  String nutritionNotifyMealBody(String time) {
+    return 'Your meal is at $time.';
+  }
+
+  @override
+  String nutritionNotifyMealBodyWithFoods(String time, String foods) {
+    return 'At $time: $foods.';
+  }
+
+  @override
+  String get nutritionLateMealLabel => 'Ate late';
 }
