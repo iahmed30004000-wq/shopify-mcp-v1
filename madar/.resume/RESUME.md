@@ -5,7 +5,8 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 
 ## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped before this: **APK #17**, commit d2dca93, CI run 38017924662, artifact madar-apk-17.
+- Last shipped: **APK #19**, commit e6cb0fc, CI run 38047046018, artifact madar-apk-19 (id 11668927387).
+  (#18 was the engine commit 0632fcc; #17 was the Part 1 bug fixes, d2dca93.)
 - **PLAN.md Part 1 is DONE** - all six APK #15 bugs fixed and verified (overlapping tabs via the
   new `MadarFadeStack`, the task "+" footer row, leaving a game, moons, the home panel extent +
   back handling, the icon-only reset-view button).
