@@ -67,7 +67,8 @@ void _log(String what, Object error, StackTrace stack) {
 ///   the family's reach-out digest the Family page (`/family`), a birthday that
 ///   person's page (`/family/person/<id>`), a travel document's expiry the
 ///   documents (`/travel?tab=documents`), a fasting notice the fasting tab
-///   (`/body?tab=fasting`) and a tracker's reminder that tracker
+///   (`/body?tab=fasting`), a meal reminder the food of that day
+///   (`/body?tab=food`) and a tracker's reminder that tracker
 ///   (`/modules/module/<id>`) – whether it launched the app (cold start) or
 ///   reached it running (warm). A dose's Taken / Snooze / Skip
 ///   buttons never navigate: they are recorded ([healthNotificationLocation]).
@@ -148,8 +149,8 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///   ([watchMoneyServices]);
 /// * a card placed in a prayer window stays in step with its task, the Top
 ///   3 settles at midnight, trips follow their dates, and the family's,
-///   travel documents', fasting and trackers' reminders stay planned
-///   ([watchLifeServices]);
+///   travel documents', fasting, meal and trackers' reminders stay planned
+///   ([watchLifeServices], which watches `nutritionReminderSyncProvider`);
 /// * the cinema hall's first list of web games (`cinema.savedGames`) moves
 ///   into Saved Games once, at start, so the games are there before the
 ///   hall is first opened ([savedGamesLegacyImportProvider]; one-shot – the

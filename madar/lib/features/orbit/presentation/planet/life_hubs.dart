@@ -11,6 +11,7 @@ import '../../../../core/routing/cinema_route_pages.dart';
 import '../../../../core/routing/life_route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../body/body.dart' show BodyTab, BodyTodayCard, FastingCard, WaterCard;
+import '../../../nutrition/presentation/nutrition_ui.dart' show NutritionTodayCard;
 import '../../../custom_modules/custom_modules.dart' show CustomModulesCard, customPlanetModulesProvider;
 import '../../../family/family.dart' show FamilyActions, FamilyTodayCard;
 import '../../../growth/growth.dart' show GrowthTodayCard;
@@ -197,7 +198,8 @@ class GrowthHub extends StatelessWidget {
 }
 
 /// Body: today's session, water and the fasting clock at a glance, the
-/// fast and the water compact, then the training plan and the avoid list.
+/// fast, the water and the food of the day compact, then the training plan
+/// and the avoid list.
 class BodyHub extends StatelessWidget {
   const BodyHub({super.key, this.firstIndex = 1});
 
@@ -211,6 +213,7 @@ class BodyHub extends StatelessWidget {
       ..card(BodyTodayCard(onOpen: () => LifeNav.body(context)))
       ..card(FastingCard(compact: true, onOpen: () => LifeNav.body(context, tab: BodyTab.fasting)))
       ..card(WaterCard(compact: true, onOpen: () => LifeNav.body(context, tab: BodyTab.water)))
+      ..card(NutritionTodayCard(onOpen: () => LifeNav.body(context, tab: BodyTab.food)))
       ..header(l.lifeHubToolsTitle)
       ..card(
         _LifeTools(

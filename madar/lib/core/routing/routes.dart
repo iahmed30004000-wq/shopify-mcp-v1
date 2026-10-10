@@ -287,12 +287,26 @@ abstract final class AppRoutes {
   /// Location of the learning goal [goalId].
   static String growthGoalOf(String goalId) => '/growth/goal/${Uri.encodeComponent(goalId)}';
 
-  /// The body (`?tab=plan|fasting|water|avoid`; none: today).
+  /// The body (`?tab=plan|fasting|water|avoid|food`; none: today).
   static const String body = '/body';
 
   /// Location of the body on [tab] (`today`, `plan`, `fasting`, `water`,
-  /// `avoid`; null or `today`: the plain location).
+  /// `avoid`, `food`; null or `today`: the plain location).
   static String bodyOf({String? tab}) => _withTab(body, tab, 'today');
+
+  /// Food: the library, the meal plan, his conditions with his own rules,
+  /// and the observations. The day itself lives on the Body planet
+  /// (`/body?tab=food`).
+  static const String foodLibrary = '/food/library';
+
+  /// The meal plan: build it, and planned against eaten.
+  static const String foodPlan = '/food/plan';
+
+  /// His chronic conditions and his own food rules.
+  static const String foodRules = '/food/rules';
+
+  /// The plain observations over his own food log.
+  static const String foodInsights = '/food/insights';
 
   /// The user's own trackers and lists.
   static const String modules = '/modules';

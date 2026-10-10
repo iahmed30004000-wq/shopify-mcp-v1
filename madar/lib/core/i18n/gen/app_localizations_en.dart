@@ -23349,4 +23349,977 @@ class L10nEn extends L10n {
 
   @override
   String get nutritionLateMealLabel => 'Ate late';
+
+  @override
+  String get nutritionTitle => 'Food';
+
+  @override
+  String get nutritionTabFood => 'Food';
+
+  @override
+  String get nutritionSave => 'Save';
+
+  @override
+  String get nutritionDelete => 'Delete';
+
+  @override
+  String get nutritionEdit => 'Edit';
+
+  @override
+  String get nutritionNameRequired => 'Enter a name';
+
+  @override
+  String get nutritionPartsSep => ' · ';
+
+  @override
+  String get nutritionListSep => ', ';
+
+  @override
+  String nutritionListAnd(String head, String last) {
+    return '$head and $last';
+  }
+
+  @override
+  String nutritionPortionValue(String amount, String unit) {
+    return '$amount $unit';
+  }
+
+  @override
+  String nutritionPortionPlain(String amount) {
+    return '$amount portion';
+  }
+
+  @override
+  String get nutritionNoPortion => 'No amount';
+
+  @override
+  String nutritionTimeAt(String time) {
+    return 'At $time';
+  }
+
+  @override
+  String get nutritionCardTitle => 'Today\'s food';
+
+  @override
+  String get nutritionCardOpen => 'Open food';
+
+  @override
+  String nutritionEntriesToday(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n items today',
+      one: '1 item today',
+      zero: 'Nothing logged today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nutritionLoggedDays(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n days this week',
+      one: '1 day this week',
+      zero: 'No days logged this week',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nutritionQuickLog => 'Log food';
+
+  @override
+  String get nutritionTodayTitle => 'What you ate today';
+
+  @override
+  String get nutritionTodayEmptyTitle => 'Nothing logged today';
+
+  @override
+  String get nutritionTodayEmptyBody =>
+      'Tap “Log food” and pick what you usually eat — it takes seconds.';
+
+  @override
+  String get nutritionEmptyTitle => 'No food logged yet';
+
+  @override
+  String get nutritionEmptyBody =>
+      'Everything you log shows up here with its time, and becomes the base of your plan and your observations.';
+
+  @override
+  String get nutritionOpenLibrary => 'Food library';
+
+  @override
+  String get nutritionOpenLibraryHint =>
+      'Your foods and your own words for them';
+
+  @override
+  String get nutritionOpenPlan => 'Meal plan';
+
+  @override
+  String get nutritionOpenPlanHint =>
+      'Your meals with their times, planned against eaten';
+
+  @override
+  String get nutritionOpenRules => 'Conditions and rules';
+
+  @override
+  String get nutritionOpenRulesHint => 'Mark what is heavy for you, and why';
+
+  @override
+  String get nutritionOpenInsights => 'Observations';
+
+  @override
+  String get nutritionOpenInsightsHint =>
+      'Counts over your own data, no verdicts';
+
+  @override
+  String get nutritionNextMeal => 'Next meal';
+
+  @override
+  String get nutritionAteIt => 'I ate it';
+
+  @override
+  String nutritionAteItLabel(String name) {
+    return 'Log “$name” as planned';
+  }
+
+  @override
+  String nutritionSlotPlanned(String foods) {
+    return 'Planned: $foods';
+  }
+
+  @override
+  String get nutritionSlotNoFoods => 'No foods set for this meal';
+
+  @override
+  String get nutritionNoPlanTitle => 'No meal plan yet';
+
+  @override
+  String get nutritionNoPlanBody =>
+      'Build a plan — “breakfast at eight, lunch at one …” — and get a reminder at each one.';
+
+  @override
+  String get nutritionMakePlan => 'Build a plan';
+
+  @override
+  String get nutritionTodayRating => 'Today\'s rating';
+
+  @override
+  String get nutritionRatingWhy => 'Why?';
+
+  @override
+  String get nutritionLevelClear => 'Nothing from your rules';
+
+  @override
+  String get nutritionLevelLow => 'Light';
+
+  @override
+  String get nutritionLevelMedium => 'Medium';
+
+  @override
+  String get nutritionLevelHigh => 'Heavy';
+
+  @override
+  String get nutritionWeightLow => 'Matters a little';
+
+  @override
+  String get nutritionWeightMedium => 'Matters';
+
+  @override
+  String get nutritionWeightHigh => 'Matters a lot';
+
+  @override
+  String get nutritionNoRulesTitle => 'No rules yet — so no rating';
+
+  @override
+  String get nutritionNoRulesBody =>
+      'Madar judges nothing on its own. Write your own rule — “fried food is heavy on my gut” — and a rating appears, always with its reason.';
+
+  @override
+  String get nutritionWriteFirstRule => 'Write your first rule';
+
+  @override
+  String get nutritionReasonsTitle => 'The reasons — all of them yours';
+
+  @override
+  String nutritionReasonTag(String tag) {
+    return 'Because you marked “$tag”';
+  }
+
+  @override
+  String nutritionReasonFood(String food) {
+    return 'Because you marked “$food”';
+  }
+
+  @override
+  String get nutritionReasonAny => 'Because you marked any food in this case';
+
+  @override
+  String nutritionReasonForCondition(String condition) {
+    return 'for $condition';
+  }
+
+  @override
+  String nutritionReasonWindow(String window) {
+    return 'between $window';
+  }
+
+  @override
+  String nutritionReasonMinPortion(String amount) {
+    return 'from $amount up';
+  }
+
+  @override
+  String nutritionReasonDayCount(int count, String n, String max) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n times that day, your limit is $max',
+      one: 'once that day, your limit is $max',
+      zero: 'never',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nutritionReasonPoints(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n points',
+      one: '1 point',
+      zero: 'no points',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nutritionNoRatingShort => 'No rating';
+
+  @override
+  String get nutritionLogTitle => 'What did you eat?';
+
+  @override
+  String get nutritionLogSubtitle => 'Tap a food and it is logged at once';
+
+  @override
+  String get nutritionSearchHint => 'Search a food, or just type it';
+
+  @override
+  String get nutritionSearchLabel => 'Search your foods';
+
+  @override
+  String get nutritionFrequent => 'What you eat most';
+
+  @override
+  String get nutritionRecent => 'Eaten recently';
+
+  @override
+  String nutritionTimesCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n×',
+      one: 'once',
+      zero: 'never',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nutritionAddNew(String name) {
+    return 'Add “$name”';
+  }
+
+  @override
+  String get nutritionAddNewHint =>
+      'It joins your library and is logged at the same time';
+
+  @override
+  String get nutritionNoResults =>
+      'No matches — type it and it is logged as it is';
+
+  @override
+  String get nutritionLogNow => 'Now';
+
+  @override
+  String get nutritionLogWhen => 'Time';
+
+  @override
+  String get nutritionChangeTime => 'Change the time';
+
+  @override
+  String get nutritionPortionLabel => 'Amount (optional)';
+
+  @override
+  String get nutritionUnitLabel => 'Your unit';
+
+  @override
+  String get nutritionUnitHint => 'loaf, cup, plate …';
+
+  @override
+  String get nutritionLogSaveMore => 'Log with details';
+
+  @override
+  String nutritionLoggedToast(String name) {
+    return 'Logged “$name”';
+  }
+
+  @override
+  String get nutritionLogUpdated => 'Entry updated';
+
+  @override
+  String nutritionLogDeleted(String name) {
+    return 'Removed “$name”';
+  }
+
+  @override
+  String nutritionSlotLoggedToast(String name) {
+    return 'Logged your “$name”';
+  }
+
+  @override
+  String get nutritionEditEntry => 'Edit what you ate';
+
+  @override
+  String get nutritionEntryName => 'Food';
+
+  @override
+  String get nutritionEntryNote => 'Note';
+
+  @override
+  String get nutritionEntryNoteHint => 'e.g. ate it in a hurry';
+
+  @override
+  String get nutritionLibraryTitle => 'Food library';
+
+  @override
+  String get nutritionAddFood => 'Add a food';
+
+  @override
+  String get nutritionEditFood => 'Edit the food';
+
+  @override
+  String get nutritionFoodName => 'Name';
+
+  @override
+  String get nutritionFoodNameHint => 'rice, coffee, bread …';
+
+  @override
+  String get nutritionFoodTags => 'Your own words for it';
+
+  @override
+  String get nutritionFoodTagsHint => 'fried, sweet, salty …';
+
+  @override
+  String get nutritionFoodPortion => 'Your usual amount';
+
+  @override
+  String get nutritionFoodNotes => 'Note';
+
+  @override
+  String get nutritionFavorite => 'Favourite';
+
+  @override
+  String get nutritionUnfavorite => 'Remove from favourites';
+
+  @override
+  String nutritionFavoritedToast(String name) {
+    return '“$name” is a favourite';
+  }
+
+  @override
+  String nutritionUnfavoritedToast(String name) {
+    return '“$name” is no longer a favourite';
+  }
+
+  @override
+  String get nutritionArchive => 'Archive';
+
+  @override
+  String get nutritionUnarchive => 'Bring it back';
+
+  @override
+  String nutritionArchivedToast(String name) {
+    return 'Archived “$name”';
+  }
+
+  @override
+  String nutritionUnarchivedToast(String name) {
+    return '“$name” is back';
+  }
+
+  @override
+  String nutritionFoodDeleted(String name) {
+    return 'Deleted “$name”';
+  }
+
+  @override
+  String nutritionFoodSaved(String name) {
+    return 'Saved “$name”';
+  }
+
+  @override
+  String get nutritionArchivedLabel => 'Archived';
+
+  @override
+  String get nutritionShowArchived => 'Show archived';
+
+  @override
+  String get nutritionTagsTitle => 'Your words';
+
+  @override
+  String get nutritionAllTags => 'All';
+
+  @override
+  String get nutritionLibraryEmptyTitle => 'Your library is empty';
+
+  @override
+  String get nutritionLibraryEmptyBody =>
+      'Add a food once and logging it later is one tap. Every word you put on it can carry a rule.';
+
+  @override
+  String get nutritionLibraryNoMatch => 'No food with that word';
+
+  @override
+  String nutritionFoodsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n foods',
+      one: '1 food',
+      zero: 'No foods',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nutritionLoggedCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Logged $n×',
+      one: 'Logged once',
+      zero: 'Not logged yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nutritionPlanTitle => 'Meal plan';
+
+  @override
+  String get nutritionPlanTabBuild => 'The plan';
+
+  @override
+  String get nutritionPlanTabCompare => 'Planned vs eaten';
+
+  @override
+  String get nutritionAddPlan => 'New plan';
+
+  @override
+  String get nutritionEditPlan => 'Edit the plan';
+
+  @override
+  String get nutritionPlanName => 'Plan name';
+
+  @override
+  String get nutritionPlanNameHint => 'My plan this month';
+
+  @override
+  String get nutritionPlanNotes => 'Note';
+
+  @override
+  String get nutritionActivate => 'Make it active';
+
+  @override
+  String get nutritionDeactivate => 'Back to a draft';
+
+  @override
+  String get nutritionActiveLabel => 'Active';
+
+  @override
+  String get nutritionDraftLabel => 'Draft';
+
+  @override
+  String nutritionActivatedToast(String name) {
+    return '“$name” is the active plan now';
+  }
+
+  @override
+  String nutritionDeactivatedToast(String name) {
+    return '“$name” is a draft again';
+  }
+
+  @override
+  String get nutritionDuplicate => 'Duplicate';
+
+  @override
+  String nutritionCopyName(String name) {
+    return '$name — copy';
+  }
+
+  @override
+  String nutritionDuplicatedToast(String name) {
+    return 'Duplicated “$name”';
+  }
+
+  @override
+  String nutritionPlanDeleted(String name) {
+    return 'Deleted the plan “$name”';
+  }
+
+  @override
+  String get nutritionAddSlot => 'Add a meal';
+
+  @override
+  String get nutritionEditSlot => 'Edit the meal';
+
+  @override
+  String get nutritionSlotName => 'Meal name';
+
+  @override
+  String get nutritionSlotNameHint => 'breakfast, lunch, dinner …';
+
+  @override
+  String get nutritionSlotTime => 'Time';
+
+  @override
+  String get nutritionSlotDays => 'Its days';
+
+  @override
+  String get nutritionSlotNotes => 'Note';
+
+  @override
+  String get nutritionEveryDay => 'Every day';
+
+  @override
+  String get nutritionSlotRemind => 'Remind me at its time';
+
+  @override
+  String get nutritionSlotRemindHint =>
+      'A notification on your phone at the meal\'s time';
+
+  @override
+  String nutritionRemindOnToast(String name) {
+    return 'You will be reminded at “$name”';
+  }
+
+  @override
+  String nutritionRemindOffToast(String name) {
+    return 'Reminder off for “$name”';
+  }
+
+  @override
+  String get nutritionRemindNeedsPermission => 'Allow notifications first';
+
+  @override
+  String nutritionSlotDeleted(String name) {
+    return 'Deleted the meal “$name”';
+  }
+
+  @override
+  String nutritionSlotSaved(String name) {
+    return 'Saved the meal “$name”';
+  }
+
+  @override
+  String get nutritionAddSlotFood => 'Add a food to this meal';
+
+  @override
+  String nutritionSlotFoodDeleted(String name) {
+    return 'Removed “$name” from the meal';
+  }
+
+  @override
+  String nutritionSlotFoodRemove(String name) {
+    return 'Remove “$name” from the meal';
+  }
+
+  @override
+  String get nutritionPlansEmptyTitle => 'No plan yet';
+
+  @override
+  String get nutritionPlansEmptyBody =>
+      'Make one plan and put your meals in it with their times and days. You can keep several and switch the active one.';
+
+  @override
+  String get nutritionSlotsEmptyTitle => 'The plan is empty';
+
+  @override
+  String get nutritionSlotsEmptyBody =>
+      'Add the first meal: its name, its time and its days.';
+
+  @override
+  String nutritionSlotsCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n meals',
+      one: '1 meal',
+      zero: 'No meals',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nutritionStatusOnTime => 'Eaten on time';
+
+  @override
+  String get nutritionStatusLate => 'Eaten late';
+
+  @override
+  String get nutritionStatusSwapped => 'Ate something else';
+
+  @override
+  String get nutritionStatusSkipped => 'Missed';
+
+  @override
+  String get nutritionStatusPending => 'Still to come';
+
+  @override
+  String nutritionLateBy(String duration) {
+    return '$duration late';
+  }
+
+  @override
+  String nutritionAdherence(String percent) {
+    return '$percent on plan';
+  }
+
+  @override
+  String get nutritionAdherenceNone => 'Not yet';
+
+  @override
+  String get nutritionUnplannedTitle => 'Eaten off plan';
+
+  @override
+  String nutritionAteInstead(String foods) {
+    return 'You ate: $foods';
+  }
+
+  @override
+  String get nutritionLast7Days => 'The last seven days';
+
+  @override
+  String get nutritionCompareToday => 'Today';
+
+  @override
+  String get nutritionCompareNoPlanBody =>
+      'Make a plan active and there is something to compare what you ate against.';
+
+  @override
+  String get nutritionDayNothing => 'Nothing on this day';
+
+  @override
+  String get nutritionConditionsTitle => 'Conditions and rules';
+
+  @override
+  String get nutritionAddCondition => 'Add a condition';
+
+  @override
+  String get nutritionEditCondition => 'Edit the condition';
+
+  @override
+  String get nutritionConditionName => 'Name';
+
+  @override
+  String get nutritionConditionNameHint => 'gut, blood pressure, diabetes …';
+
+  @override
+  String get nutritionConditionNotes => 'Your notes';
+
+  @override
+  String get nutritionConditionSince => 'Since';
+
+  @override
+  String get nutritionConditionColor => 'Its colour';
+
+  @override
+  String get nutritionConditionActive => 'Active';
+
+  @override
+  String get nutritionConditionActiveHint =>
+      'Switch it off and its rules stop counting — nothing is thrown away';
+
+  @override
+  String get nutritionConditionPaused => 'Paused';
+
+  @override
+  String nutritionConditionSinceLabel(String date) {
+    return 'since $date';
+  }
+
+  @override
+  String nutritionConditionSaved(String name) {
+    return 'Saved “$name”';
+  }
+
+  @override
+  String nutritionConditionDeleted(String name) {
+    return 'Deleted “$name”';
+  }
+
+  @override
+  String nutritionConditionResumed(String name) {
+    return '“$name” is active again';
+  }
+
+  @override
+  String nutritionConditionStopped(String name) {
+    return '“$name” is paused';
+  }
+
+  @override
+  String get nutritionConditionsEmptyTitle => 'No conditions yet';
+
+  @override
+  String get nutritionConditionsEmptyBody =>
+      'Record the condition you live with, then write your own rules under it: what is heavy for you, when, and how much it matters.';
+
+  @override
+  String get nutritionGeneralRules => 'Rules without a condition';
+
+  @override
+  String nutritionRulesUnder(String condition) {
+    return 'Your rules for $condition';
+  }
+
+  @override
+  String nutritionRulesCount(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n rules',
+      one: '1 rule',
+      zero: 'No rules',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nutritionAddRule => 'Add a rule';
+
+  @override
+  String get nutritionEditRule => 'Edit the rule';
+
+  @override
+  String get nutritionRuleSubtitle =>
+      'Write it as you would say it: what, how much, when, and how much it matters';
+
+  @override
+  String get nutritionRuleTarget => 'About what';
+
+  @override
+  String get nutritionTargetFood => 'One food';
+
+  @override
+  String get nutritionTargetTag => 'One of your words';
+
+  @override
+  String get nutritionTargetAny => 'Any food';
+
+  @override
+  String get nutritionRuleFood => 'The food';
+
+  @override
+  String get nutritionRuleTag => 'The word';
+
+  @override
+  String get nutritionRuleNeedsFood => 'Pick a food';
+
+  @override
+  String get nutritionRuleNeedsTag => 'Pick a word';
+
+  @override
+  String get nutritionRuleMinPortion => 'From this amount (optional)';
+
+  @override
+  String get nutritionRuleFrom => 'From';
+
+  @override
+  String get nutritionRuleTo => 'To';
+
+  @override
+  String get nutritionRuleWindowHint =>
+      'Leave both empty if the rule holds at any time';
+
+  @override
+  String get nutritionRuleMaxPerDay =>
+      'More than how many times a day (optional)';
+
+  @override
+  String get nutritionRuleMaxPerDayHint =>
+      'Set it and the rule counts for the whole day, not one item';
+
+  @override
+  String get nutritionRuleWeight => 'How much it matters';
+
+  @override
+  String get nutritionRuleCondition => 'For which condition';
+
+  @override
+  String get nutritionRuleNoCondition => 'No condition';
+
+  @override
+  String get nutritionRuleNote => 'Your own words';
+
+  @override
+  String get nutritionRuleNoteHint => 'e.g. salt raises my blood pressure';
+
+  @override
+  String get nutritionRuleActive => 'On';
+
+  @override
+  String get nutritionRulePaused => 'Off';
+
+  @override
+  String get nutritionRulePreviewTitle =>
+      'If you had written this rule earlier';
+
+  @override
+  String nutritionRulePreview(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'It would have matched $n entries you logged',
+      one: 'It would have matched 1 entry you logged',
+      zero: 'It would have matched nothing you logged',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nutritionRuleSaved => 'Rule saved';
+
+  @override
+  String get nutritionRuleDeleted => 'Rule deleted';
+
+  @override
+  String get nutritionRuleTurnedOn => 'Rule on';
+
+  @override
+  String get nutritionRuleTurnedOff => 'Rule off';
+
+  @override
+  String get nutritionRulesEmptyTitle => 'No rules under this condition';
+
+  @override
+  String get nutritionRulesEmptyBody =>
+      'Write one rule and a rating with its reason starts showing on what you eat.';
+
+  @override
+  String get nutritionRuleWholeDay => 'A whole-day rule';
+
+  @override
+  String get nutritionInsightsTitle => 'Observations';
+
+  @override
+  String get nutritionInsightsLead =>
+      'These are counts over your own data. They say nothing about one thing causing another.';
+
+  @override
+  String get nutritionNotReadyTitle => 'Not yet';
+
+  @override
+  String nutritionNotReadyBody(String needed, String done) {
+    return 'Log $needed days and we can show you the pattern — you are at $done.';
+  }
+
+  @override
+  String nutritionNotReadyMore(String days) {
+    return '$days to go';
+  }
+
+  @override
+  String get nutritionWhatWeLookAt =>
+      'Once the days add up, we compare your food with these numbers you log yourself';
+
+  @override
+  String get nutritionInsightsEmptyTitle => 'Nothing clear yet';
+
+  @override
+  String get nutritionInsightsEmptyBody =>
+      'You have logged enough days, but no difference between them is big enough to state. Keep logging and we will look again.';
+
+  @override
+  String get nutritionWorstDaysTitle => 'Your hardest days';
+
+  @override
+  String nutritionWorstDaysLine(
+    String worst,
+    String metric,
+    String marker,
+    String inWorst,
+    String other,
+    String inOther,
+  ) {
+    return 'On the $worst hardest days for $metric: “$marker” happened on $inWorst of them, and on $inOther of the other $other days.';
+  }
+
+  @override
+  String get nutritionMeansTitle => 'Days with it and days without';
+
+  @override
+  String nutritionMeansLine(
+    String marker,
+    String withDays,
+    String metric,
+    String meanWith,
+    String withoutDays,
+    String meanWithout,
+  ) {
+    return 'On the days with “$marker” ($withDays): your average $metric was $meanWith. On the rest ($withoutDays): $meanWithout.';
+  }
+
+  @override
+  String nutritionWindowNote(String days) {
+    return 'over the last $days days';
+  }
+
+  @override
+  String get nutritionMetricPain => 'pain';
+
+  @override
+  String get nutritionMetricMood => 'mood';
+
+  @override
+  String get nutritionMetricSleep => 'sleep';
+
+  @override
+  String get nutritionMetricWater => 'water';
+
+  @override
+  String get nutritionMetricFasting => 'fasting';
+
+  @override
+  String get nutritionOpenDays => 'See the days';
+
+  @override
+  String get nutritionDaysBehindTitle => 'The days behind the number';
+
+  @override
+  String nutritionDaysWith(String marker) {
+    return 'Days with “$marker”';
+  }
+
+  @override
+  String get nutritionDaysWithout => 'Days without it';
+
+  @override
+  String nutritionDayEntries(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n items',
+      one: '1 item',
+      zero: 'Nothing logged',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ncKindMeal => 'Meal reminder';
 }

@@ -37190,6 +37190,1502 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'أكل متأخر'**
   String get nutritionLateMealLabel;
+
+  /// Nutrition screens title
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكل'**
+  String get nutritionTitle;
+
+  /// The food tab on the Body planet
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكل'**
+  String get nutritionTabFood;
+
+  /// No description provided for @nutritionSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get nutritionSave;
+
+  /// No description provided for @nutritionDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get nutritionDelete;
+
+  /// No description provided for @nutritionEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل'**
+  String get nutritionEdit;
+
+  /// No description provided for @nutritionNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسمًا'**
+  String get nutritionNameRequired;
+
+  /// Between parts of a one-line summary
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get nutritionPartsSep;
+
+  /// No description provided for @nutritionListSep.
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get nutritionListSep;
+
+  /// No description provided for @nutritionListAnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'{head} و{last}'**
+  String nutritionListAnd(String head, String last);
+
+  /// No description provided for @nutritionPortionValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} {unit}'**
+  String nutritionPortionValue(String amount, String unit);
+
+  /// No description provided for @nutritionPortionPlain.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية {amount}'**
+  String nutritionPortionPlain(String amount);
+
+  /// No description provided for @nutritionNoPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون كمية'**
+  String get nutritionNoPortion;
+
+  /// No description provided for @nutritionTimeAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة {time}'**
+  String nutritionTimeAt(String time);
+
+  /// No description provided for @nutritionCardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكل اليوم'**
+  String get nutritionCardTitle;
+
+  /// No description provided for @nutritionCardOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح الأكل'**
+  String get nutritionCardOpen;
+
+  /// No description provided for @nutritionEntriesToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما سجّلت أكل اليوم} =1{أكلة واحدة اليوم} =2{أكلتان اليوم} few{{n} أكلات اليوم} many{{n} أكلة اليوم} other{{n} أكلة اليوم}}'**
+  String nutritionEntriesToday(int count, String n);
+
+  /// No description provided for @nutritionLoggedDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما سجّلت هذا الأسبوع} =1{يوم واحد هذا الأسبوع} =2{يومان هذا الأسبوع} few{{n} أيام هذا الأسبوع} many{{n} يومًا هذا الأسبوع} other{{n} يوم هذا الأسبوع}}'**
+  String nutritionLoggedDays(int count, String n);
+
+  /// No description provided for @nutritionQuickLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل أكلة'**
+  String get nutritionQuickLog;
+
+  /// No description provided for @nutritionTodayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي أكلته اليوم'**
+  String get nutritionTodayTitle;
+
+  /// No description provided for @nutritionTodayEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما سجّلت أكل اليوم'**
+  String get nutritionTodayEmptyTitle;
+
+  /// No description provided for @nutritionTodayEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط «سجّل أكلة» واختار من اللي بتأكله عادة — بياخذ ثانيتين.'**
+  String get nutritionTodayEmptyBody;
+
+  /// No description provided for @nutritionEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بعد سجّلت أكل'**
+  String get nutritionEmptyTitle;
+
+  /// No description provided for @nutritionEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل أكلة بتسجّلها بتظهر هون بوقتها، وبتصير أساس خطتك وملاحظاتك.'**
+  String get nutritionEmptyBody;
+
+  /// No description provided for @nutritionOpenLibrary.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتبة الأكل'**
+  String get nutritionOpenLibrary;
+
+  /// No description provided for @nutritionOpenLibraryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلاتك وكلماتك عليها'**
+  String get nutritionOpenLibraryHint;
+
+  /// No description provided for @nutritionOpenPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة الوجبات'**
+  String get nutritionOpenPlan;
+
+  /// No description provided for @nutritionOpenPlanHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجباتك بأوقاتها، والمخطّط مقابل اللي صار'**
+  String get nutritionOpenPlanHint;
+
+  /// No description provided for @nutritionOpenRules.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمراضي وقواعدي'**
+  String get nutritionOpenRules;
+
+  /// No description provided for @nutritionOpenRulesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'علّم شو ثقيل عليك وليش'**
+  String get nutritionOpenRulesHint;
+
+  /// No description provided for @nutritionOpenInsights.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملاحظات'**
+  String get nutritionOpenInsights;
+
+  /// No description provided for @nutritionOpenInsightsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّ على بياناتك أنت، بدون أحكام'**
+  String get nutritionOpenInsightsHint;
+
+  /// No description provided for @nutritionNextMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجبة القادمة'**
+  String get nutritionNextMeal;
+
+  /// No description provided for @nutritionAteIt.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلتها'**
+  String get nutritionAteIt;
+
+  /// No description provided for @nutritionAteItLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل «{name}» كما هي بالخطة'**
+  String nutritionAteItLabel(String name);
+
+  /// No description provided for @nutritionSlotPlanned.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخطّط: {foods}'**
+  String nutritionSlotPlanned(String foods);
+
+  /// No description provided for @nutritionSlotNoFoods.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما حدّدت أكل لهاي الوجبة'**
+  String get nutritionSlotNoFoods;
+
+  /// No description provided for @nutritionNoPlanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في خطة وجبات بعد'**
+  String get nutritionNoPlanTitle;
+
+  /// No description provided for @nutritionNoPlanBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعمل خطة: «الساعة ثمانية فطور، الساعة واحدة غدا…» وبتوصلك تذكيرة بوقتها.'**
+  String get nutritionNoPlanBody;
+
+  /// No description provided for @nutritionMakePlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعمل خطة'**
+  String get nutritionMakePlan;
+
+  /// No description provided for @nutritionTodayRating.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقييم اليوم'**
+  String get nutritionTodayRating;
+
+  /// No description provided for @nutritionRatingWhy.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليش؟'**
+  String get nutritionRatingWhy;
+
+  /// No description provided for @nutritionLevelClear.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في شي من قواعدك'**
+  String get nutritionLevelClear;
+
+  /// No description provided for @nutritionLevelLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'بسيط'**
+  String get nutritionLevelLow;
+
+  /// No description provided for @nutritionLevelMedium.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط'**
+  String get nutritionLevelMedium;
+
+  /// No description provided for @nutritionLevelHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'كبير'**
+  String get nutritionLevelHigh;
+
+  /// No description provided for @nutritionWeightLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'يهمّني شوي'**
+  String get nutritionWeightLow;
+
+  /// No description provided for @nutritionWeightMedium.
+  ///
+  /// In ar, this message translates to:
+  /// **'يهمّني'**
+  String get nutritionWeightMedium;
+
+  /// No description provided for @nutritionWeightHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'يهمّني كثير'**
+  String get nutritionWeightHigh;
+
+  /// No description provided for @nutritionNoRulesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في قواعد بعد — فما في تقييم'**
+  String get nutritionNoRulesTitle;
+
+  /// No description provided for @nutritionNoRulesBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'مَدار ما بيحكم على أكلك من عندو. اكتب قاعدتك أنت، مثل «المقلي ثقيل على قولوني»، وبعدها بيصير في تقييم ومعه سببه.'**
+  String get nutritionNoRulesBody;
+
+  /// No description provided for @nutritionWriteFirstRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب أول قاعدة'**
+  String get nutritionWriteFirstRule;
+
+  /// No description provided for @nutritionReasonsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسباب — كلها من قواعدك'**
+  String get nutritionReasonsTitle;
+
+  /// No description provided for @nutritionReasonTag.
+  ///
+  /// In ar, this message translates to:
+  /// **'لأنك علّمت «{tag}»'**
+  String nutritionReasonTag(String tag);
+
+  /// No description provided for @nutritionReasonFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'لأنك علّمت «{food}»'**
+  String nutritionReasonFood(String food);
+
+  /// No description provided for @nutritionReasonAny.
+  ///
+  /// In ar, this message translates to:
+  /// **'لأنك علّمت أي أكل بهذا الحال'**
+  String get nutritionReasonAny;
+
+  /// No description provided for @nutritionReasonForCondition.
+  ///
+  /// In ar, this message translates to:
+  /// **'على {condition}'**
+  String nutritionReasonForCondition(String condition);
+
+  /// No description provided for @nutritionReasonWindow.
+  ///
+  /// In ar, this message translates to:
+  /// **'بين {window}'**
+  String nutritionReasonWindow(String window);
+
+  /// No description provided for @nutritionReasonMinPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {amount} وأكثر'**
+  String nutritionReasonMinPortion(String amount);
+
+  /// No description provided for @nutritionReasonDayCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا تكرار} =1{مرة واحدة بهذا اليوم، وحدّك {max}} =2{مرتان بهذا اليوم، وحدّك {max}} few{{n} مرات بهذا اليوم، وحدّك {max}} many{{n} مرة بهذا اليوم، وحدّك {max}} other{{n} مرة بهذا اليوم، وحدّك {max}}}'**
+  String nutritionReasonDayCount(int count, String n, String max);
+
+  /// No description provided for @nutritionReasonPoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا نقاط} =1{نقطة واحدة} =2{نقطتان} few{{n} نقاط} many{{n} نقطة} other{{n} نقطة}}'**
+  String nutritionReasonPoints(int count, String n);
+
+  /// No description provided for @nutritionNoRatingShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا تقييم'**
+  String get nutritionNoRatingShort;
+
+  /// No description provided for @nutritionLogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو أكلت؟'**
+  String get nutritionLogTitle;
+
+  /// No description provided for @nutritionLogSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط على أكلة وبتتسجّل فورًا'**
+  String get nutritionLogSubtitle;
+
+  /// No description provided for @nutritionSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'دوّر على أكلة، أو اكتبها كما هي'**
+  String get nutritionSearchHint;
+
+  /// No description provided for @nutritionSearchLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث في أكلاتك'**
+  String get nutritionSearchLabel;
+
+  /// No description provided for @nutritionFrequent.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي بتأكله كثير'**
+  String get nutritionFrequent;
+
+  /// No description provided for @nutritionRecent.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر شي أكلته'**
+  String get nutritionRecent;
+
+  /// No description provided for @nutritionTimesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ولا مرة} =1{مرة} =2{مرتان} few{{n} مرات} many{{n} مرة} other{{n} مرة}}'**
+  String nutritionTimesCount(int count, String n);
+
+  /// No description provided for @nutritionAddNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف «{name}»'**
+  String nutritionAddNew(String name);
+
+  /// No description provided for @nutritionAddNewHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنضاف لمكتبتك وتتسجّل بنفس اللحظة'**
+  String get nutritionAddNewHint;
+
+  /// No description provided for @nutritionNoResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في نتائج — اكتبها وبتتسجّل زي ما هي'**
+  String get nutritionNoResults;
+
+  /// No description provided for @nutritionLogNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'هلأ'**
+  String get nutritionLogNow;
+
+  /// No description provided for @nutritionLogWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت'**
+  String get nutritionLogWhen;
+
+  /// No description provided for @nutritionChangeTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'غيّر الوقت'**
+  String get nutritionChangeTime;
+
+  /// No description provided for @nutritionPortionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية (اختياري)'**
+  String get nutritionPortionLabel;
+
+  /// No description provided for @nutritionUnitLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدتك'**
+  String get nutritionUnitLabel;
+
+  /// No description provided for @nutritionUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رغيف، كوب، صحن…'**
+  String get nutritionUnitHint;
+
+  /// No description provided for @nutritionLogSaveMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل بالتفاصيل'**
+  String get nutritionLogSaveMore;
+
+  /// No description provided for @nutritionLoggedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّل «{name}»'**
+  String nutritionLoggedToast(String name);
+
+  /// No description provided for @nutritionLogUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّلت التسجيل'**
+  String get nutritionLogUpdated;
+
+  /// No description provided for @nutritionLogDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت «{name}»'**
+  String nutritionLogDeleted(String name);
+
+  /// No description provided for @nutritionSlotLoggedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت وجبة «{name}»'**
+  String nutritionSlotLoggedToast(String name);
+
+  /// No description provided for @nutritionEditEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل اللي أكلته'**
+  String get nutritionEditEntry;
+
+  /// No description provided for @nutritionEntryName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكلة'**
+  String get nutritionEntryName;
+
+  /// No description provided for @nutritionEntryNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get nutritionEntryNote;
+
+  /// No description provided for @nutritionEntryNoteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلاً: أكلت بسرعة'**
+  String get nutritionEntryNoteHint;
+
+  /// No description provided for @nutritionLibraryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتبة الأكل'**
+  String get nutritionLibraryTitle;
+
+  /// No description provided for @nutritionAddFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أكلة'**
+  String get nutritionAddFood;
+
+  /// No description provided for @nutritionEditFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل الأكلة'**
+  String get nutritionEditFood;
+
+  /// No description provided for @nutritionFoodName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get nutritionFoodName;
+
+  /// No description provided for @nutritionFoodNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'منسف، قهوة، خبز…'**
+  String get nutritionFoodNameHint;
+
+  /// No description provided for @nutritionFoodTags.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلماتك عليها'**
+  String get nutritionFoodTags;
+
+  /// No description provided for @nutritionFoodTagsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقلي، حلو، مالح…'**
+  String get nutritionFoodTagsHint;
+
+  /// No description provided for @nutritionFoodPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'كميتك المعتادة'**
+  String get nutritionFoodPortion;
+
+  /// No description provided for @nutritionFoodNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get nutritionFoodNotes;
+
+  /// No description provided for @nutritionFavorite.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفضّلة'**
+  String get nutritionFavorite;
+
+  /// No description provided for @nutritionUnfavorite.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيلها من المفضّلة'**
+  String get nutritionUnfavorite;
+
+  /// No description provided for @nutritionFavoritedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» بالمفضّلة'**
+  String nutritionFavoritedToast(String name);
+
+  /// No description provided for @nutritionUnfavoritedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» طلعت من المفضّلة'**
+  String nutritionUnfavoritedToast(String name);
+
+  /// No description provided for @nutritionArchive.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرشفة'**
+  String get nutritionArchive;
+
+  /// No description provided for @nutritionUnarchive.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّعها'**
+  String get nutritionUnarchive;
+
+  /// No description provided for @nutritionArchivedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرشفت «{name}»'**
+  String nutritionArchivedToast(String name);
+
+  /// No description provided for @nutritionUnarchivedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّعت «{name}»'**
+  String nutritionUnarchivedToast(String name);
+
+  /// No description provided for @nutritionFoodDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت «{name}»'**
+  String nutritionFoodDeleted(String name);
+
+  /// No description provided for @nutritionFoodSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت «{name}»'**
+  String nutritionFoodSaved(String name);
+
+  /// No description provided for @nutritionArchivedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤرشفة'**
+  String get nutritionArchivedLabel;
+
+  /// No description provided for @nutritionShowArchived.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهر المؤرشفة'**
+  String get nutritionShowArchived;
+
+  /// No description provided for @nutritionTagsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلماتك'**
+  String get nutritionTagsTitle;
+
+  /// No description provided for @nutritionAllTags.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get nutritionAllTags;
+
+  /// No description provided for @nutritionLibraryEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتبتك فاضية'**
+  String get nutritionLibraryEmptyTitle;
+
+  /// No description provided for @nutritionLibraryEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أكلاتك مرة واحدة، وبعدها تسجيلها بضغطة. وكل كلمة بتكتبها عليها بتقدر تبني عليها قاعدة.'**
+  String get nutritionLibraryEmptyBody;
+
+  /// No description provided for @nutritionLibraryNoMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في أكلة بهاي الكلمة'**
+  String get nutritionLibraryNoMatch;
+
+  /// No description provided for @nutritionFoodsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في أكلات} =1{أكلة واحدة} =2{أكلتان} few{{n} أكلات} many{{n} أكلة} other{{n} أكلة}}'**
+  String nutritionFoodsCount(int count, String n);
+
+  /// No description provided for @nutritionLoggedCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما سجّلتها بعد} =1{سجّلتها مرة} =2{سجّلتها مرتين} few{سجّلتها {n} مرات} many{سجّلتها {n} مرة} other{سجّلتها {n} مرة}}'**
+  String nutritionLoggedCount(int count, String n);
+
+  /// No description provided for @nutritionPlanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة الوجبات'**
+  String get nutritionPlanTitle;
+
+  /// No description provided for @nutritionPlanTabBuild.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get nutritionPlanTabBuild;
+
+  /// No description provided for @nutritionPlanTabCompare.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخطّط واللي صار'**
+  String get nutritionPlanTabCompare;
+
+  /// No description provided for @nutritionAddPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة جديدة'**
+  String get nutritionAddPlan;
+
+  /// No description provided for @nutritionEditPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل الخطة'**
+  String get nutritionEditPlan;
+
+  /// No description provided for @nutritionPlanName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الخطة'**
+  String get nutritionPlanName;
+
+  /// No description provided for @nutritionPlanNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطتي هذا الشهر'**
+  String get nutritionPlanNameHint;
+
+  /// No description provided for @nutritionPlanNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get nutritionPlanNotes;
+
+  /// No description provided for @nutritionActivate.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّلها'**
+  String get nutritionActivate;
+
+  /// No description provided for @nutritionDeactivate.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّعها مسوّدة'**
+  String get nutritionDeactivate;
+
+  /// No description provided for @nutritionActiveLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّالة'**
+  String get nutritionActiveLabel;
+
+  /// No description provided for @nutritionDraftLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسوّدة'**
+  String get nutritionDraftLabel;
+
+  /// No description provided for @nutritionActivatedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» صارت الخطة الشغّالة'**
+  String nutritionActivatedToast(String name);
+
+  /// No description provided for @nutritionDeactivatedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» رجعت مسوّدة'**
+  String nutritionDeactivatedToast(String name);
+
+  /// No description provided for @nutritionDuplicate.
+  ///
+  /// In ar, this message translates to:
+  /// **'انسخها'**
+  String get nutritionDuplicate;
+
+  /// No description provided for @nutritionCopyName.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} — نسخة'**
+  String nutritionCopyName(String name);
+
+  /// No description provided for @nutritionDuplicatedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخت «{name}»'**
+  String nutritionDuplicatedToast(String name);
+
+  /// No description provided for @nutritionPlanDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت خطة «{name}»'**
+  String nutritionPlanDeleted(String name);
+
+  /// No description provided for @nutritionAddSlot.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف وجبة'**
+  String get nutritionAddSlot;
+
+  /// No description provided for @nutritionEditSlot.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل الوجبة'**
+  String get nutritionEditSlot;
+
+  /// No description provided for @nutritionSlotName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الوجبة'**
+  String get nutritionSlotName;
+
+  /// No description provided for @nutritionSlotNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'فطور، غدا، عشا…'**
+  String get nutritionSlotNameHint;
+
+  /// No description provided for @nutritionSlotTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة'**
+  String get nutritionSlotTime;
+
+  /// No description provided for @nutritionSlotDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيامها'**
+  String get nutritionSlotDays;
+
+  /// No description provided for @nutritionSlotNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get nutritionSlotNotes;
+
+  /// No description provided for @nutritionEveryDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل يوم'**
+  String get nutritionEveryDay;
+
+  /// No description provided for @nutritionSlotRemind.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذكّرني بوقتها'**
+  String get nutritionSlotRemind;
+
+  /// No description provided for @nutritionSlotRemindHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه على التلفون بوقت الوجبة'**
+  String get nutritionSlotRemindHint;
+
+  /// No description provided for @nutritionRemindOnToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتوصلك تذكيرة قبل «{name}»'**
+  String nutritionRemindOnToast(String name);
+
+  /// No description provided for @nutritionRemindOffToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقّفت تذكيرة «{name}»'**
+  String nutritionRemindOffToast(String name);
+
+  /// No description provided for @nutritionRemindNeedsPermission.
+  ///
+  /// In ar, this message translates to:
+  /// **'لازم تسمح للتطبيق بالتنبيهات أول'**
+  String get nutritionRemindNeedsPermission;
+
+  /// No description provided for @nutritionSlotDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت وجبة «{name}»'**
+  String nutritionSlotDeleted(String name);
+
+  /// No description provided for @nutritionSlotSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت وجبة «{name}»'**
+  String nutritionSlotSaved(String name);
+
+  /// No description provided for @nutritionAddSlotFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أكلة للوجبة'**
+  String get nutritionAddSlotFood;
+
+  /// No description provided for @nutritionSlotFoodDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيلت «{name}» من الوجبة'**
+  String nutritionSlotFoodDeleted(String name);
+
+  /// No description provided for @nutritionSlotFoodRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيل «{name}» من الوجبة'**
+  String nutritionSlotFoodRemove(String name);
+
+  /// No description provided for @nutritionPlansEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في خطة بعد'**
+  String get nutritionPlansEmptyTitle;
+
+  /// No description provided for @nutritionPlansEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعمل خطة واحدة، وحطّ فيها وجباتك بأوقاتها وأيامها. بتقدر تعمل أكثر من خطة وتشغّل واحدة.'**
+  String get nutritionPlansEmptyBody;
+
+  /// No description provided for @nutritionSlotsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة فاضية'**
+  String get nutritionSlotsEmptyTitle;
+
+  /// No description provided for @nutritionSlotsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف أول وجبة: اسمها، وقتها، وأيامها.'**
+  String get nutritionSlotsEmptyBody;
+
+  /// No description provided for @nutritionSlotsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا وجبات} =1{وجبة واحدة} =2{وجبتان} few{{n} وجبات} many{{n} وجبة} other{{n} وجبة}}'**
+  String nutritionSlotsCount(int count, String n);
+
+  /// No description provided for @nutritionStatusOnTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلتها بوقتها'**
+  String get nutritionStatusOnTime;
+
+  /// No description provided for @nutritionStatusLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلتها متأخّر'**
+  String get nutritionStatusLate;
+
+  /// No description provided for @nutritionStatusSwapped.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلت غيرها'**
+  String get nutritionStatusSwapped;
+
+  /// No description provided for @nutritionStatusSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما أكلتها'**
+  String get nutritionStatusSkipped;
+
+  /// No description provided for @nutritionStatusPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعدها جاي'**
+  String get nutritionStatusPending;
+
+  /// No description provided for @nutritionLateBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخّر {duration}'**
+  String nutritionLateBy(String duration);
+
+  /// No description provided for @nutritionAdherence.
+  ///
+  /// In ar, this message translates to:
+  /// **'التزامك {percent}'**
+  String nutritionAdherence(String percent);
+
+  /// No description provided for @nutritionAdherenceNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بعد'**
+  String get nutritionAdherenceNone;
+
+  /// No description provided for @nutritionUnplannedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكل خارج الخطة'**
+  String get nutritionUnplannedTitle;
+
+  /// No description provided for @nutritionAteInstead.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلت: {foods}'**
+  String nutritionAteInstead(String foods);
+
+  /// No description provided for @nutritionLast7Days.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر سبع أيام'**
+  String get nutritionLast7Days;
+
+  /// No description provided for @nutritionCompareToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get nutritionCompareToday;
+
+  /// No description provided for @nutritionCompareNoPlanBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّل خطة وبعدها بيصير في «مخطّط» نقارنه باللي أكلته.'**
+  String get nutritionCompareNoPlanBody;
+
+  /// No description provided for @nutritionDayNothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في شي بهذا اليوم'**
+  String get nutritionDayNothing;
+
+  /// No description provided for @nutritionConditionsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمراضي وقواعدي'**
+  String get nutritionConditionsTitle;
+
+  /// No description provided for @nutritionAddCondition.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف مرض'**
+  String get nutritionAddCondition;
+
+  /// No description provided for @nutritionEditCondition.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل المرض'**
+  String get nutritionEditCondition;
+
+  /// No description provided for @nutritionConditionName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get nutritionConditionName;
+
+  /// No description provided for @nutritionConditionNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'قولون، ضغط، سكري…'**
+  String get nutritionConditionNameHint;
+
+  /// No description provided for @nutritionConditionNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظاتك'**
+  String get nutritionConditionNotes;
+
+  /// No description provided for @nutritionConditionSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'من إيمتى'**
+  String get nutritionConditionSince;
+
+  /// No description provided for @nutritionConditionColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'لونه'**
+  String get nutritionConditionColor;
+
+  /// No description provided for @nutritionConditionActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّال'**
+  String get nutritionConditionActive;
+
+  /// No description provided for @nutritionConditionActiveHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما توقّفه، قواعده بتوقف عن الحساب وما بينحذف شي'**
+  String get nutritionConditionActiveHint;
+
+  /// No description provided for @nutritionConditionPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقّف'**
+  String get nutritionConditionPaused;
+
+  /// No description provided for @nutritionConditionSinceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {date}'**
+  String nutritionConditionSinceLabel(String date);
+
+  /// No description provided for @nutritionConditionSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت «{name}»'**
+  String nutritionConditionSaved(String name);
+
+  /// No description provided for @nutritionConditionDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت «{name}»'**
+  String nutritionConditionDeleted(String name);
+
+  /// No description provided for @nutritionConditionResumed.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّعت «{name}»'**
+  String nutritionConditionResumed(String name);
+
+  /// No description provided for @nutritionConditionStopped.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقّفت «{name}»'**
+  String nutritionConditionStopped(String name);
+
+  /// No description provided for @nutritionConditionsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما سجّلت أمراضك بعد'**
+  String get nutritionConditionsEmptyTitle;
+
+  /// No description provided for @nutritionConditionsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل المرض اللي بتعاني منه، وبعدين اكتب تحته قواعدك: شو ثقيل عليك، وبأي وقت، وقدّيش يهمّك.'**
+  String get nutritionConditionsEmptyBody;
+
+  /// No description provided for @nutritionGeneralRules.
+  ///
+  /// In ar, this message translates to:
+  /// **'قواعد بدون مرض'**
+  String get nutritionGeneralRules;
+
+  /// No description provided for @nutritionRulesUnder.
+  ///
+  /// In ar, this message translates to:
+  /// **'قواعدك على {condition}'**
+  String nutritionRulesUnder(String condition);
+
+  /// No description provided for @nutritionRulesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا قواعد} =1{قاعدة واحدة} =2{قاعدتان} few{{n} قواعد} many{{n} قاعدة} other{{n} قاعدة}}'**
+  String nutritionRulesCount(int count, String n);
+
+  /// No description provided for @nutritionAddRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف قاعدة'**
+  String get nutritionAddRule;
+
+  /// No description provided for @nutritionEditRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل القاعدة'**
+  String get nutritionEditRule;
+
+  /// No description provided for @nutritionRuleSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتبها كما بتحكيها: شو، قدّيش، إيمتى، وقدّيش يهمّك'**
+  String get nutritionRuleSubtitle;
+
+  /// No description provided for @nutritionRuleTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'على شو'**
+  String get nutritionRuleTarget;
+
+  /// No description provided for @nutritionTargetFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلة بذاتها'**
+  String get nutritionTargetFood;
+
+  /// No description provided for @nutritionTargetTag.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة من كلماتك'**
+  String get nutritionTargetTag;
+
+  /// No description provided for @nutritionTargetAny.
+  ///
+  /// In ar, this message translates to:
+  /// **'أي أكل'**
+  String get nutritionTargetAny;
+
+  /// No description provided for @nutritionRuleFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكلة'**
+  String get nutritionRuleFood;
+
+  /// No description provided for @nutritionRuleTag.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكلمة'**
+  String get nutritionRuleTag;
+
+  /// No description provided for @nutritionRuleNeedsFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختار أكلة'**
+  String get nutritionRuleNeedsFood;
+
+  /// No description provided for @nutritionRuleNeedsTag.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختار كلمة'**
+  String get nutritionRuleNeedsTag;
+
+  /// No description provided for @nutritionRuleMinPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'من كمية (اختياري)'**
+  String get nutritionRuleMinPortion;
+
+  /// No description provided for @nutritionRuleFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'من ساعة'**
+  String get nutritionRuleFrom;
+
+  /// No description provided for @nutritionRuleTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'لساعة'**
+  String get nutritionRuleTo;
+
+  /// No description provided for @nutritionRuleWindowHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتركهم فاضيين إذا القاعدة بأي وقت'**
+  String get nutritionRuleWindowHint;
+
+  /// No description provided for @nutritionRuleMaxPerDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر من كم مرة بالنهار (اختياري)'**
+  String get nutritionRuleMaxPerDay;
+
+  /// No description provided for @nutritionRuleMaxPerDayHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما تحدّدها، القاعدة بتحسب على اليوم كلّه مش على أكلة'**
+  String get nutritionRuleMaxPerDayHint;
+
+  /// No description provided for @nutritionRuleWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'قدّيش يهمّك'**
+  String get nutritionRuleWeight;
+
+  /// No description provided for @nutritionRuleCondition.
+  ///
+  /// In ar, this message translates to:
+  /// **'على أي مرض'**
+  String get nutritionRuleCondition;
+
+  /// No description provided for @nutritionRuleNoCondition.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون مرض'**
+  String get nutritionRuleNoCondition;
+
+  /// No description provided for @nutritionRuleNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلامك أنت'**
+  String get nutritionRuleNote;
+
+  /// No description provided for @nutritionRuleNoteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلاً: الملح يرفع ضغطي'**
+  String get nutritionRuleNoteHint;
+
+  /// No description provided for @nutritionRuleActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّالة'**
+  String get nutritionRuleActive;
+
+  /// No description provided for @nutritionRulePaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقّفة'**
+  String get nutritionRulePaused;
+
+  /// No description provided for @nutritionRulePreviewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لو كانت هاي القاعدة عندك من قبل'**
+  String get nutritionRulePreviewTitle;
+
+  /// No description provided for @nutritionRulePreview.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما كانت بتنطبق على شي سجّلته قبل} =1{كانت بتنطبق على أكلة واحدة سجّلتها قبل} =2{كانت بتنطبق على أكلتين سجّلتهم قبل} few{كانت بتنطبق على {n} أكلات سجّلتهم قبل} many{كانت بتنطبق على {n} أكلة سجّلتها قبل} other{كانت بتنطبق على {n} أكلة سجّلتها قبل}}'**
+  String nutritionRulePreview(int count, String n);
+
+  /// No description provided for @nutritionRuleSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت القاعدة'**
+  String get nutritionRuleSaved;
+
+  /// No description provided for @nutritionRuleDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت القاعدة'**
+  String get nutritionRuleDeleted;
+
+  /// No description provided for @nutritionRuleTurnedOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّلت القاعدة'**
+  String get nutritionRuleTurnedOn;
+
+  /// No description provided for @nutritionRuleTurnedOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقّفت القاعدة'**
+  String get nutritionRuleTurnedOff;
+
+  /// No description provided for @nutritionRulesEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في قواعد تحت هذا المرض'**
+  String get nutritionRulesEmptyTitle;
+
+  /// No description provided for @nutritionRulesEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب قاعدة وحدة وبتبدأ تشوف تقييم مع سببه على كل أكلة.'**
+  String get nutritionRulesEmptyBody;
+
+  /// No description provided for @nutritionRuleWholeDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعدة على اليوم كلّه'**
+  String get nutritionRuleWholeDay;
+
+  /// No description provided for @nutritionInsightsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملاحظات'**
+  String get nutritionInsightsTitle;
+
+  /// No description provided for @nutritionInsightsLead.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا عدّ على بياناتك أنت. ما بيقول إن شي سبّب شي.'**
+  String get nutritionInsightsLead;
+
+  /// No description provided for @nutritionNotReadyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد شوي'**
+  String get nutritionNotReadyTitle;
+
+  /// No description provided for @nutritionNotReadyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل {needed} يوم لنقدر نوريك النمط — صار عندك {done}.'**
+  String nutritionNotReadyBody(String needed, String done);
+
+  /// No description provided for @nutritionNotReadyMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'باقي {days}'**
+  String nutritionNotReadyMore(String days);
+
+  /// No description provided for @nutritionWhatWeLookAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما تجمع الأيام، بنقارن أكلك بهاي الأرقام اللي بتسجّلها أنت'**
+  String get nutritionWhatWeLookAt;
+
+  /// No description provided for @nutritionInsightsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في شي واضح لهلأ'**
+  String get nutritionInsightsEmptyTitle;
+
+  /// No description provided for @nutritionInsightsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلت كفاية أيام، بس ما في فرق كبير بين أيامك لنقوله. كمّل تسجيل وبنرجع نحسب.'**
+  String get nutritionInsightsEmptyBody;
+
+  /// No description provided for @nutritionWorstDaysTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أصعب أيامك'**
+  String get nutritionWorstDaysTitle;
+
+  /// No description provided for @nutritionWorstDaysLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'بأصعب {worst} أيام من ناحية {metric}: «{marker}» صار بـ{inWorst} منهم، ومن باقي {other} أيام صار بـ{inOther}.'**
+  String nutritionWorstDaysLine(
+    String worst,
+    String metric,
+    String marker,
+    String inWorst,
+    String other,
+    String inOther,
+  );
+
+  /// No description provided for @nutritionMeansTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بالأيام اللي فيها وبالأيام اللي بدونها'**
+  String get nutritionMeansTitle;
+
+  /// No description provided for @nutritionMeansLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'بالأيام اللي فيها «{marker}» ({withDays}): معدّل {metric} كان {meanWith}. وبالأيام الباقية ({withoutDays}): {meanWithout}.'**
+  String nutritionMeansLine(
+    String marker,
+    String withDays,
+    String metric,
+    String meanWith,
+    String withoutDays,
+    String meanWithout,
+  );
+
+  /// No description provided for @nutritionWindowNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلال آخر {days} يوم'**
+  String nutritionWindowNote(String days);
+
+  /// No description provided for @nutritionMetricPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجع'**
+  String get nutritionMetricPain;
+
+  /// No description provided for @nutritionMetricMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج'**
+  String get nutritionMetricMood;
+
+  /// No description provided for @nutritionMetricSleep.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوم'**
+  String get nutritionMetricSleep;
+
+  /// No description provided for @nutritionMetricWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماء'**
+  String get nutritionMetricWater;
+
+  /// No description provided for @nutritionMetricFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيام'**
+  String get nutritionMetricFasting;
+
+  /// No description provided for @nutritionOpenDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'شوف الأيام'**
+  String get nutritionOpenDays;
+
+  /// No description provided for @nutritionDaysBehindTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام اللي ورا الرقم'**
+  String get nutritionDaysBehindTitle;
+
+  /// No description provided for @nutritionDaysWith.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام فيها «{marker}»'**
+  String nutritionDaysWith(String marker);
+
+  /// No description provided for @nutritionDaysWithout.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام بدونها'**
+  String get nutritionDaysWithout;
+
+  /// No description provided for @nutritionDayEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا أكل مسجّل} =1{أكلة واحدة} =2{أكلتان} few{{n} أكلات} many{{n} أكلة} other{{n} أكلة}}'**
+  String nutritionDayEntries(int count, String n);
+
+  /// Notification centre: a meal reminder row's kind
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه وجبة'**
+  String get ncKindMeal;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

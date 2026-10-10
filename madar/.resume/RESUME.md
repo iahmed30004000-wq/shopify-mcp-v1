@@ -5,18 +5,30 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 
 ## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped: **APK #17**, commit d2dca93, CI run 38017924662, artifact madar-apk-17 (id 11657279276).
-- **PLAN.md Part 1 is DONE** – all six APK #15 bugs fixed and verified:
-  overlapping tabs (one shared cause in 8 screens → new `MadarFadeStack` in core/design),
-  the task "+" footer row, leaving a game (PopScope/maybePop deadlock + a visible pause
-  plate), moons (size floor, tight band, slow laps), the home panel's extent on returning
-  from a planet + PopScope back handling, and the icon-only reset-view button.
-  Full suite run locally in folder chunks: ~6,500 tests green, analyze clean, l10n in sync.
-- Next: **PLAN.md Part 2** (wire the finished system packages: search, notification centre +
-  gate, export/backup, AI chat, widgets, Together) – but WAIT for the owner's feedback on
-  APK #17 first; his feedback becomes the next part.
-- Note: the CI workflow only triggers on changes under `madar/**` – an empty or docs-only
-  commit outside that path will not build.
+- Last shipped before this: **APK #17**, commit d2dca93, CI run 38017924662, artifact madar-apk-17.
+- **PLAN.md Part 1 is DONE** - all six APK #15 bugs fixed and verified (overlapping tabs via the
+  new `MadarFadeStack`, the task "+" footer row, leaving a game, moons, the home panel extent +
+  back handling, the icon-only reset-view button).
+- **PLAN.md Part 4 is DONE** (pulled ahead of Part 2 at the owner's request - the food tracker and
+  chronic conditions). Two commits:
+  - `0632fcc` the engine: schema **v3** (foods, food_logs, meal_plans, meal_slots, meal_slot_foods,
+    food_rules + `conditions.color`), `lib/features/nutrition/**` pure models/engines/providers,
+    meal reminders on the free id block **139000-139499**.
+  - the UI commit: `lib/features/nutrition/presentation/**` - the «الأكل» tab on the Body planet,
+    quick log, food library, meal plan (build + planned-vs-eaten), conditions and his own rules with
+    the live-preview rule editor, observations gated on `nutritionReadinessProvider`; routes
+    `/food/{library,plan,rules,insights}`; `nutritionReminderSyncProvider` watched in
+    `watchLifeServices`; `MealReminderTaps` -> `/body?tab=food`; `MealDescriber` in the notification
+    centre; the six tables mapped in `data_areas.dart`; `NutritionTodayCard` on the Body hub.
+  - 52 widget tests + 26 screenshots, ARB part `f2_nutrition_ui.json`, analyze clean.
+- Known gaps from Part 4 (small follow-ups, not blockers): a meal reminder opens the day but does not
+  highlight the slot it named (a `/food/plan?day=` deep link would fix it); no drag reorder for rules
+  or conditions; the rule editor lists the whole library as chips with no search; importing rules from
+  an AI plan is Part 3.
+- Next: **PLAN.md Part 2** (wire the finished system packages: search, notification centre + gate,
+  export/backup, AI chat, widgets, Together) - unless the owner's feedback on the new APK changes it.
+- Note: the CI workflow only triggers on changes under `madar/**` - an empty or docs-only commit
+  outside that path will not build.
 
 ## How work is organised
 - Working rule (standing): one part at a time → verify → APK → report in plain Arabic with

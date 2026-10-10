@@ -14,6 +14,7 @@ import '../../health/meds/data/meds_notifications.dart' show MedsNotificationTap
 import '../../health/record/data/appointment_reminders.dart' show AppointmentReminderTaps;
 import '../../health/wellbeing/data/worry_reminders.dart' show WorryReminderTaps;
 import '../../money/goals/data/goals_notifications.dart' show GoalsReminderTaps;
+import '../../nutrition/data/nutrition_reminders.dart' show MealReminderTaps;
 import '../../money/goals/domain/due_reminders.dart' show DueReminderKind;
 import '../../travel/data/travel_notifications.dart' show TravelReminderTaps;
 import '../../travel/domain/document_reminders.dart' show DocumentReminderKind;
@@ -36,6 +37,7 @@ import 'describers.dart';
 /// |            | 136xxx family  | [FamilyDescriber]   | family           |
 /// |            | 137xxx modules | [CustomModuleDescriber] | customModules |
 /// |            | 138xxx travel  | [TravelDescriber]   | travel           |
+/// |            | 1390xx meals   | [MealDescriber]     | health           |
 /// |            | 1398xx body    | [FastingDescriber]  | health           |
 /// | wird       | 140000–140999  | [WirdDescriber]     | wird             |
 /// | health     | 150000–150399 appointments, 1509xx worry | [HealthDescriber] | health |
@@ -45,6 +47,7 @@ List<NotificationDescriber> builtInDescribers() => const [
   MedsDescriber(),
   HealthDescriber(),
   FastingDescriber(),
+  MealDescriber(),
   MoneyDueDescriber(),
   FamilyDescriber(),
   TravelDescriber(),
@@ -306,6 +309,27 @@ class FastingDescriber extends NotificationDescriber {
       subject: 'fasting',
     );
   }
+}
+
+/// A meal of the active meal plan, at its time.
+class MealDescriber extends NotificationDescriber {
+  const MealDescriber();
+
+  @override
+  String get id => 'nutrition.meal';
+
+  @override
+  NotificationGroup? groupOf(CenterNotice n) => MealReminderTaps.matches(n.toTap()) ? NotificationGroup.health : null;
+
+  @override
+  NotificationDescription describe(CenterNotice n, CenterTexts t) => NotificationDescription(
+    group: NotificationGroup.health,
+    kind: t.l.ncKindMeal,
+    title: n.title ?? t.l.ncKindMeal,
+    body: n.body,
+    icon: Icons.restaurant_rounded,
+    subject: 'meal:${MealReminderTaps.slotOf(n.toTap()) ?? ''}',
+  );
 }
 
 /// Debt and obligation due reminders.

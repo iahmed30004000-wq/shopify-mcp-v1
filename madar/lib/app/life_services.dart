@@ -18,6 +18,7 @@ import '../features/custom_modules/custom_modules.dart'
     show CustomModuleNotificationTaps, customModulesReminderSyncProvider;
 import '../features/family/family.dart' show FamilyNotificationTaps, familyReminderSyncProvider;
 import '../features/growth/growth.dart' show growthOpenGoalProvider;
+import '../features/nutrition/nutrition.dart' show MealReminderTaps, nutritionReminderSyncProvider;
 import '../features/orbit/data/orbit_providers.dart' show orbitTodayProvider;
 import '../features/prayer/prayer.dart' show GeoFix, prayerSettingsControllerProvider;
 import '../features/travel/travel.dart'
@@ -61,8 +62,9 @@ List<Override> lifeHookOverrides() => [
 ///   ([workTop3SettleProvider]);
 /// * the family's reach-out digest and birthdays ([familyReminderSyncProvider]),
 ///   the travel documents' expiry ([travelReminderSyncProvider]), the
-///   fasting goal and eating window ([bodyReminderSyncProvider]) and the
-///   trackers' own reminders ([customModulesReminderSyncProvider]) stay
+///   fasting goal and eating window ([bodyReminderSyncProvider]), the meal
+///   reminders of the active meal plan ([nutritionReminderSyncProvider]) and
+///   the trackers' own reminders ([customModulesReminderSyncProvider]) stay
 ///   planned;
 /// * a trip's status follows its dates, so a finished trip stops being a
 ///   moon of Travel ([travelStatusSyncProvider]).
@@ -77,6 +79,7 @@ void watchLifeServices(WidgetRef ref) {
   ref.watch(travelStatusSyncProvider);
   ref.watch(travelReminderSyncProvider);
   ref.watch(bodyReminderSyncProvider);
+  ref.watch(nutritionReminderSyncProvider);
   ref.watch(customModulesReminderSyncProvider);
 }
 
@@ -127,6 +130,8 @@ Future<void> useTripAsPrayerLocation(Ref ref, BuildContext context, TripPlace pl
 /// * a travel document's expiry → the documents (`/travel?tab=documents`);
 /// * a fasting goal or eating-window notice → the fasting tab
 ///   (`/body?tab=fasting`);
+/// * a meal reminder → the food of that day, the day it fires for
+///   (`/body?tab=food`), where the meal it named is the next one up;
 /// * a tracker's reminder → that tracker (`/modules/module/<id>`).
 String? lifeNotificationLocation(NotificationTap tap) {
   if (FamilyNotificationTaps.isFamily(tap)) {
@@ -135,6 +140,7 @@ String? lifeNotificationLocation(NotificationTap tap) {
   }
   if (TravelReminderTaps.documentOf(tap) != null) return AppRoutes.travelOf(tab: TravelTab.documents.name);
   if (BodyReminderTaps.matches(tap)) return AppRoutes.bodyOf(tab: BodyTab.fasting.name);
+  if (MealReminderTaps.matches(tap)) return AppRoutes.bodyOf(tab: BodyTab.food.name);
   final module = CustomModuleNotificationTaps.moduleOf(tap);
   if (module != null) return AppRoutes.moduleOf(module);
   return null;

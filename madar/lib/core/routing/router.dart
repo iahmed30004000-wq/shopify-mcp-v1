@@ -516,6 +516,45 @@ List<RouteBase> madarRoutes() => [
         ),
       ),
       GoRoute(
+        path: 'food',
+        redirect: (context, state) => state.uri.path == '/food' ? AppRoutes.foodLibrary : null,
+        builder: (context, state) => const FoodLibraryRoutePage(),
+        routes: [
+          GoRoute(
+            path: 'library',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const FoodLibraryRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'plan',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const FoodPlanRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'rules',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const FoodRulesRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'insights',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const FoodInsightsRoutePage(),
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
         path: 'modules',
         pageBuilder: (context, state) =>
             MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const ModulesRoutePage()),

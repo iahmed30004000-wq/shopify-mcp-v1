@@ -8,6 +8,8 @@ import '../../features/body/body.dart' show BodyScreen, BodyTab;
 import '../../features/custom_modules/custom_modules.dart' show CustomModulesScreen, ModuleScreen;
 import '../../features/family/family.dart' show FamilyScreen, PersonScreen;
 import '../../features/growth/growth.dart' show GoalScreen, GrowthScreen;
+import '../../features/nutrition/presentation/nutrition_ui.dart'
+    show ConditionsScreen, FoodLibraryScreen, MealPlanScreen, NutritionInsightsScreen;
 import '../../features/travel/travel.dart' show PackingTemplateScreen, TravelScreen, TravelTab, TripScreen;
 import '../../features/work/work.dart' show BoardScreen, ProjectScreen, ProjectsScreen, WorkRoutes, WorkScreen;
 import '../settings/app_settings.dart';
@@ -57,6 +59,14 @@ abstract final class LifeNav {
   static void body(BuildContext context, {BodyTab tab = BodyTab.today}) =>
       unawaited(context.push<void>(AppRoutes.bodyOf(tab: tab.name)));
 
+  static void foodLibrary(BuildContext context) => unawaited(context.push<void>(AppRoutes.foodLibrary));
+
+  static void foodPlan(BuildContext context) => unawaited(context.push<void>(AppRoutes.foodPlan));
+
+  static void foodRules(BuildContext context) => unawaited(context.push<void>(AppRoutes.foodRules));
+
+  static void foodInsights(BuildContext context) => unawaited(context.push<void>(AppRoutes.foodInsights));
+
   static void modules(BuildContext context) => unawaited(context.push<void>(AppRoutes.modules));
 
   static void module(BuildContext context, String moduleId) =>
@@ -77,6 +87,10 @@ abstract final class LifeNav {
 /// | learning_goals, goal_logs (`goalId`) | `/growth/goal/<id>` | `/growth` |
 /// | exercises, workout_logs | `/body?tab=plan` | same |
 /// | fasting_sessions / water_logs / avoid_items | `/body?tab=fasting` / `water` / `avoid` | same |
+/// | food_logs | `/body?tab=food` | same |
+/// | foods | `/food/library` | same |
+/// | meal_plans, meal_slots, meal_slot_foods | `/food/plan` | same |
+/// | food_rules | `/food/rules` | same |
 /// | custom_modules, custom_entries (`moduleId`) | `/modules/module/<id>` | `/modules` |
 ///
 /// A child record (a card, a contact, a log) opens its parent, named by
@@ -101,6 +115,12 @@ abstract final class LifeRecordLinks {
     'fasting_sessions',
     'water_logs',
     'avoid_items',
+    'foods',
+    'food_logs',
+    'meal_plans',
+    'meal_slots',
+    'meal_slot_foods',
+    'food_rules',
     'custom_modules',
     'custom_entries',
   };
@@ -136,6 +156,10 @@ abstract final class LifeRecordLinks {
       'fasting_sessions' => AppRoutes.bodyOf(tab: BodyTab.fasting.name),
       'water_logs' => AppRoutes.bodyOf(tab: BodyTab.water.name),
       'avoid_items' => AppRoutes.bodyOf(tab: BodyTab.avoid.name),
+      'food_logs' => AppRoutes.bodyOf(tab: BodyTab.food.name),
+      'foods' => AppRoutes.foodLibrary,
+      'meal_plans' || 'meal_slots' || 'meal_slot_foods' => AppRoutes.foodPlan,
+      'food_rules' => AppRoutes.foodRules,
       'custom_modules' => either(id, AppRoutes.moduleOf, AppRoutes.modules),
       'custom_entries' => either(of('moduleId'), AppRoutes.moduleOf, AppRoutes.modules),
       _ => null,
@@ -310,6 +334,38 @@ class BodyRoutePage extends ConsumerWidget {
     initialTab: tab,
     animateBackdrop: !_saver(ref),
   );
+}
+
+/// `/food/library` – his food library.
+class FoodLibraryRoutePage extends ConsumerWidget {
+  const FoodLibraryRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => FoodLibraryScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/food/plan` – the meal plan, built and compared against what he ate.
+class FoodPlanRoutePage extends ConsumerWidget {
+  const FoodPlanRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => MealPlanScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/food/rules` – his chronic conditions and his own food rules.
+class FoodRulesRoutePage extends ConsumerWidget {
+  const FoodRulesRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => ConditionsScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/food/insights` – the plain observations over his own log.
+class FoodInsightsRoutePage extends ConsumerWidget {
+  const FoodInsightsRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => NutritionInsightsScreen(animateBackdrop: !_saver(ref));
 }
 
 /// `/modules` – the user's own trackers and lists; each opens as its

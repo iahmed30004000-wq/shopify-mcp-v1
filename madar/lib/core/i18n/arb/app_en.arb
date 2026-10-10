@@ -22115,5 +22115,745 @@
   "nutritionLateMealLabel": "Ate late",
   "@nutritionLateMealLabel": {
     "description": "Marker label for insights: an entry logged at or after 21:00"
+  },
+  "nutritionTitle": "Food",
+  "@nutritionTitle": {
+    "description": "Nutrition screens title"
+  },
+  "nutritionTabFood": "Food",
+  "@nutritionTabFood": {
+    "description": "The food tab on the Body planet"
+  },
+  "nutritionSave": "Save",
+  "nutritionDelete": "Delete",
+  "nutritionEdit": "Edit",
+  "nutritionNameRequired": "Enter a name",
+  "nutritionPartsSep": " · ",
+  "@nutritionPartsSep": {
+    "description": "Between parts of a one-line summary"
+  },
+  "nutritionListSep": ", ",
+  "nutritionListAnd": "{head} and {last}",
+  "@nutritionListAnd": {
+    "placeholders": {
+      "head": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPortionValue": "{amount} {unit}",
+  "@nutritionPortionValue": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPortionPlain": "{amount} portion",
+  "@nutritionPortionPlain": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNoPortion": "No amount",
+  "nutritionTimeAt": "At {time}",
+  "@nutritionTimeAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionCardTitle": "Today's food",
+  "nutritionCardOpen": "Open food",
+  "nutritionEntriesToday": "{count, plural, =0{Nothing logged today} =1{1 item today} other{{n} items today}}",
+  "@nutritionEntriesToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLoggedDays": "{count, plural, =0{No days logged this week} =1{1 day this week} other{{n} days this week}}",
+  "@nutritionLoggedDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionQuickLog": "Log food",
+  "nutritionTodayTitle": "What you ate today",
+  "nutritionTodayEmptyTitle": "Nothing logged today",
+  "nutritionTodayEmptyBody": "Tap “Log food” and pick what you usually eat — it takes seconds.",
+  "nutritionEmptyTitle": "No food logged yet",
+  "nutritionEmptyBody": "Everything you log shows up here with its time, and becomes the base of your plan and your observations.",
+  "nutritionOpenLibrary": "Food library",
+  "nutritionOpenLibraryHint": "Your foods and your own words for them",
+  "nutritionOpenPlan": "Meal plan",
+  "nutritionOpenPlanHint": "Your meals with their times, planned against eaten",
+  "nutritionOpenRules": "Conditions and rules",
+  "nutritionOpenRulesHint": "Mark what is heavy for you, and why",
+  "nutritionOpenInsights": "Observations",
+  "nutritionOpenInsightsHint": "Counts over your own data, no verdicts",
+  "nutritionNextMeal": "Next meal",
+  "nutritionAteIt": "I ate it",
+  "nutritionAteItLabel": "Log “{name}” as planned",
+  "@nutritionAteItLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotPlanned": "Planned: {foods}",
+  "@nutritionSlotPlanned": {
+    "placeholders": {
+      "foods": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotNoFoods": "No foods set for this meal",
+  "nutritionNoPlanTitle": "No meal plan yet",
+  "nutritionNoPlanBody": "Build a plan — “breakfast at eight, lunch at one …” — and get a reminder at each one.",
+  "nutritionMakePlan": "Build a plan",
+  "nutritionTodayRating": "Today's rating",
+  "nutritionRatingWhy": "Why?",
+  "nutritionLevelClear": "Nothing from your rules",
+  "nutritionLevelLow": "Light",
+  "nutritionLevelMedium": "Medium",
+  "nutritionLevelHigh": "Heavy",
+  "nutritionWeightLow": "Matters a little",
+  "nutritionWeightMedium": "Matters",
+  "nutritionWeightHigh": "Matters a lot",
+  "nutritionNoRulesTitle": "No rules yet — so no rating",
+  "nutritionNoRulesBody": "Madar judges nothing on its own. Write your own rule — “fried food is heavy on my gut” — and a rating appears, always with its reason.",
+  "nutritionWriteFirstRule": "Write your first rule",
+  "nutritionReasonsTitle": "The reasons — all of them yours",
+  "nutritionReasonTag": "Because you marked “{tag}”",
+  "@nutritionReasonTag": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonFood": "Because you marked “{food}”",
+  "@nutritionReasonFood": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonAny": "Because you marked any food in this case",
+  "nutritionReasonForCondition": "for {condition}",
+  "@nutritionReasonForCondition": {
+    "placeholders": {
+      "condition": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonWindow": "between {window}",
+  "@nutritionReasonWindow": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonMinPortion": "from {amount} up",
+  "@nutritionReasonMinPortion": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonDayCount": "{count, plural, =0{never} =1{once that day, your limit is {max}} other{{n} times that day, your limit is {max}}}",
+  "@nutritionReasonDayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonPoints": "{count, plural, =0{no points} =1{1 point} other{{n} points}}",
+  "@nutritionReasonPoints": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNoRatingShort": "No rating",
+  "nutritionLogTitle": "What did you eat?",
+  "nutritionLogSubtitle": "Tap a food and it is logged at once",
+  "nutritionSearchHint": "Search a food, or just type it",
+  "nutritionSearchLabel": "Search your foods",
+  "nutritionFrequent": "What you eat most",
+  "nutritionRecent": "Eaten recently",
+  "nutritionTimesCount": "{count, plural, =0{never} =1{once} other{{n}×}}",
+  "@nutritionTimesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddNew": "Add “{name}”",
+  "@nutritionAddNew": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddNewHint": "It joins your library and is logged at the same time",
+  "nutritionNoResults": "No matches — type it and it is logged as it is",
+  "nutritionLogNow": "Now",
+  "nutritionLogWhen": "Time",
+  "nutritionChangeTime": "Change the time",
+  "nutritionPortionLabel": "Amount (optional)",
+  "nutritionUnitLabel": "Your unit",
+  "nutritionUnitHint": "loaf, cup, plate …",
+  "nutritionLogSaveMore": "Log with details",
+  "nutritionLoggedToast": "Logged “{name}”",
+  "@nutritionLoggedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLogUpdated": "Entry updated",
+  "nutritionLogDeleted": "Removed “{name}”",
+  "@nutritionLogDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotLoggedToast": "Logged your “{name}”",
+  "@nutritionSlotLoggedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionEditEntry": "Edit what you ate",
+  "nutritionEntryName": "Food",
+  "nutritionEntryNote": "Note",
+  "nutritionEntryNoteHint": "e.g. ate it in a hurry",
+  "nutritionLibraryTitle": "Food library",
+  "nutritionAddFood": "Add a food",
+  "nutritionEditFood": "Edit the food",
+  "nutritionFoodName": "Name",
+  "nutritionFoodNameHint": "rice, coffee, bread …",
+  "nutritionFoodTags": "Your own words for it",
+  "nutritionFoodTagsHint": "fried, sweet, salty …",
+  "nutritionFoodPortion": "Your usual amount",
+  "nutritionFoodNotes": "Note",
+  "nutritionFavorite": "Favourite",
+  "nutritionUnfavorite": "Remove from favourites",
+  "nutritionFavoritedToast": "“{name}” is a favourite",
+  "@nutritionFavoritedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionUnfavoritedToast": "“{name}” is no longer a favourite",
+  "@nutritionUnfavoritedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionArchive": "Archive",
+  "nutritionUnarchive": "Bring it back",
+  "nutritionArchivedToast": "Archived “{name}”",
+  "@nutritionArchivedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionUnarchivedToast": "“{name}” is back",
+  "@nutritionUnarchivedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionFoodDeleted": "Deleted “{name}”",
+  "@nutritionFoodDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionFoodSaved": "Saved “{name}”",
+  "@nutritionFoodSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionArchivedLabel": "Archived",
+  "nutritionShowArchived": "Show archived",
+  "nutritionTagsTitle": "Your words",
+  "nutritionAllTags": "All",
+  "nutritionLibraryEmptyTitle": "Your library is empty",
+  "nutritionLibraryEmptyBody": "Add a food once and logging it later is one tap. Every word you put on it can carry a rule.",
+  "nutritionLibraryNoMatch": "No food with that word",
+  "nutritionFoodsCount": "{count, plural, =0{No foods} =1{1 food} other{{n} foods}}",
+  "@nutritionFoodsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLoggedCount": "{count, plural, =0{Not logged yet} =1{Logged once} other{Logged {n}×}}",
+  "@nutritionLoggedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPlanTitle": "Meal plan",
+  "nutritionPlanTabBuild": "The plan",
+  "nutritionPlanTabCompare": "Planned vs eaten",
+  "nutritionAddPlan": "New plan",
+  "nutritionEditPlan": "Edit the plan",
+  "nutritionPlanName": "Plan name",
+  "nutritionPlanNameHint": "My plan this month",
+  "nutritionPlanNotes": "Note",
+  "nutritionActivate": "Make it active",
+  "nutritionDeactivate": "Back to a draft",
+  "nutritionActiveLabel": "Active",
+  "nutritionDraftLabel": "Draft",
+  "nutritionActivatedToast": "“{name}” is the active plan now",
+  "@nutritionActivatedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDeactivatedToast": "“{name}” is a draft again",
+  "@nutritionDeactivatedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDuplicate": "Duplicate",
+  "nutritionCopyName": "{name} — copy",
+  "@nutritionCopyName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDuplicatedToast": "Duplicated “{name}”",
+  "@nutritionDuplicatedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPlanDeleted": "Deleted the plan “{name}”",
+  "@nutritionPlanDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddSlot": "Add a meal",
+  "nutritionEditSlot": "Edit the meal",
+  "nutritionSlotName": "Meal name",
+  "nutritionSlotNameHint": "breakfast, lunch, dinner …",
+  "nutritionSlotTime": "Time",
+  "nutritionSlotDays": "Its days",
+  "nutritionSlotNotes": "Note",
+  "nutritionEveryDay": "Every day",
+  "nutritionSlotRemind": "Remind me at its time",
+  "nutritionSlotRemindHint": "A notification on your phone at the meal's time",
+  "nutritionRemindOnToast": "You will be reminded at “{name}”",
+  "@nutritionRemindOnToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRemindOffToast": "Reminder off for “{name}”",
+  "@nutritionRemindOffToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRemindNeedsPermission": "Allow notifications first",
+  "nutritionSlotDeleted": "Deleted the meal “{name}”",
+  "@nutritionSlotDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotSaved": "Saved the meal “{name}”",
+  "@nutritionSlotSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddSlotFood": "Add a food to this meal",
+  "nutritionSlotFoodDeleted": "Removed “{name}” from the meal",
+  "@nutritionSlotFoodDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotFoodRemove": "Remove “{name}” from the meal",
+  "@nutritionSlotFoodRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPlansEmptyTitle": "No plan yet",
+  "nutritionPlansEmptyBody": "Make one plan and put your meals in it with their times and days. You can keep several and switch the active one.",
+  "nutritionSlotsEmptyTitle": "The plan is empty",
+  "nutritionSlotsEmptyBody": "Add the first meal: its name, its time and its days.",
+  "nutritionSlotsCount": "{count, plural, =0{No meals} =1{1 meal} other{{n} meals}}",
+  "@nutritionSlotsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionStatusOnTime": "Eaten on time",
+  "nutritionStatusLate": "Eaten late",
+  "nutritionStatusSwapped": "Ate something else",
+  "nutritionStatusSkipped": "Missed",
+  "nutritionStatusPending": "Still to come",
+  "nutritionLateBy": "{duration} late",
+  "@nutritionLateBy": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAdherence": "{percent} on plan",
+  "@nutritionAdherence": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAdherenceNone": "Not yet",
+  "nutritionUnplannedTitle": "Eaten off plan",
+  "nutritionAteInstead": "You ate: {foods}",
+  "@nutritionAteInstead": {
+    "placeholders": {
+      "foods": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLast7Days": "The last seven days",
+  "nutritionCompareToday": "Today",
+  "nutritionCompareNoPlanBody": "Make a plan active and there is something to compare what you ate against.",
+  "nutritionDayNothing": "Nothing on this day",
+  "nutritionConditionsTitle": "Conditions and rules",
+  "nutritionAddCondition": "Add a condition",
+  "nutritionEditCondition": "Edit the condition",
+  "nutritionConditionName": "Name",
+  "nutritionConditionNameHint": "gut, blood pressure, diabetes …",
+  "nutritionConditionNotes": "Your notes",
+  "nutritionConditionSince": "Since",
+  "nutritionConditionColor": "Its colour",
+  "nutritionConditionActive": "Active",
+  "nutritionConditionActiveHint": "Switch it off and its rules stop counting — nothing is thrown away",
+  "nutritionConditionPaused": "Paused",
+  "nutritionConditionSinceLabel": "since {date}",
+  "@nutritionConditionSinceLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionSaved": "Saved “{name}”",
+  "@nutritionConditionSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionDeleted": "Deleted “{name}”",
+  "@nutritionConditionDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionResumed": "“{name}” is active again",
+  "@nutritionConditionResumed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionStopped": "“{name}” is paused",
+  "@nutritionConditionStopped": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionsEmptyTitle": "No conditions yet",
+  "nutritionConditionsEmptyBody": "Record the condition you live with, then write your own rules under it: what is heavy for you, when, and how much it matters.",
+  "nutritionGeneralRules": "Rules without a condition",
+  "nutritionRulesUnder": "Your rules for {condition}",
+  "@nutritionRulesUnder": {
+    "placeholders": {
+      "condition": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRulesCount": "{count, plural, =0{No rules} =1{1 rule} other{{n} rules}}",
+  "@nutritionRulesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddRule": "Add a rule",
+  "nutritionEditRule": "Edit the rule",
+  "nutritionRuleSubtitle": "Write it as you would say it: what, how much, when, and how much it matters",
+  "nutritionRuleTarget": "About what",
+  "nutritionTargetFood": "One food",
+  "nutritionTargetTag": "One of your words",
+  "nutritionTargetAny": "Any food",
+  "nutritionRuleFood": "The food",
+  "nutritionRuleTag": "The word",
+  "nutritionRuleNeedsFood": "Pick a food",
+  "nutritionRuleNeedsTag": "Pick a word",
+  "nutritionRuleMinPortion": "From this amount (optional)",
+  "nutritionRuleFrom": "From",
+  "nutritionRuleTo": "To",
+  "nutritionRuleWindowHint": "Leave both empty if the rule holds at any time",
+  "nutritionRuleMaxPerDay": "More than how many times a day (optional)",
+  "nutritionRuleMaxPerDayHint": "Set it and the rule counts for the whole day, not one item",
+  "nutritionRuleWeight": "How much it matters",
+  "nutritionRuleCondition": "For which condition",
+  "nutritionRuleNoCondition": "No condition",
+  "nutritionRuleNote": "Your own words",
+  "nutritionRuleNoteHint": "e.g. salt raises my blood pressure",
+  "nutritionRuleActive": "On",
+  "nutritionRulePaused": "Off",
+  "nutritionRulePreviewTitle": "If you had written this rule earlier",
+  "nutritionRulePreview": "{count, plural, =0{It would have matched nothing you logged} =1{It would have matched 1 entry you logged} other{It would have matched {n} entries you logged}}",
+  "@nutritionRulePreview": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRuleSaved": "Rule saved",
+  "nutritionRuleDeleted": "Rule deleted",
+  "nutritionRuleTurnedOn": "Rule on",
+  "nutritionRuleTurnedOff": "Rule off",
+  "nutritionRulesEmptyTitle": "No rules under this condition",
+  "nutritionRulesEmptyBody": "Write one rule and a rating with its reason starts showing on what you eat.",
+  "nutritionRuleWholeDay": "A whole-day rule",
+  "nutritionInsightsTitle": "Observations",
+  "nutritionInsightsLead": "These are counts over your own data. They say nothing about one thing causing another.",
+  "nutritionNotReadyTitle": "Not yet",
+  "nutritionNotReadyBody": "Log {needed} days and we can show you the pattern — you are at {done}.",
+  "@nutritionNotReadyBody": {
+    "placeholders": {
+      "needed": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNotReadyMore": "{days} to go",
+  "@nutritionNotReadyMore": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionWhatWeLookAt": "Once the days add up, we compare your food with these numbers you log yourself",
+  "nutritionInsightsEmptyTitle": "Nothing clear yet",
+  "nutritionInsightsEmptyBody": "You have logged enough days, but no difference between them is big enough to state. Keep logging and we will look again.",
+  "nutritionWorstDaysTitle": "Your hardest days",
+  "nutritionWorstDaysLine": "On the {worst} hardest days for {metric}: “{marker}” happened on {inWorst} of them, and on {inOther} of the other {other} days.",
+  "@nutritionWorstDaysLine": {
+    "placeholders": {
+      "worst": {
+        "type": "String"
+      },
+      "metric": {
+        "type": "String"
+      },
+      "marker": {
+        "type": "String"
+      },
+      "inWorst": {
+        "type": "String"
+      },
+      "other": {
+        "type": "String"
+      },
+      "inOther": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionMeansTitle": "Days with it and days without",
+  "nutritionMeansLine": "On the days with “{marker}” ({withDays}): your average {metric} was {meanWith}. On the rest ({withoutDays}): {meanWithout}.",
+  "@nutritionMeansLine": {
+    "placeholders": {
+      "marker": {
+        "type": "String"
+      },
+      "withDays": {
+        "type": "String"
+      },
+      "metric": {
+        "type": "String"
+      },
+      "meanWith": {
+        "type": "String"
+      },
+      "withoutDays": {
+        "type": "String"
+      },
+      "meanWithout": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionWindowNote": "over the last {days} days",
+  "@nutritionWindowNote": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionMetricPain": "pain",
+  "nutritionMetricMood": "mood",
+  "nutritionMetricSleep": "sleep",
+  "nutritionMetricWater": "water",
+  "nutritionMetricFasting": "fasting",
+  "nutritionOpenDays": "See the days",
+  "nutritionDaysBehindTitle": "The days behind the number",
+  "nutritionDaysWith": "Days with “{marker}”",
+  "@nutritionDaysWith": {
+    "placeholders": {
+      "marker": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDaysWithout": "Days without it",
+  "nutritionDayEntries": "{count, plural, =0{Nothing logged} =1{1 item} other{{n} items}}",
+  "@nutritionDayEntries": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindMeal": "Meal reminder",
+  "@ncKindMeal": {
+    "description": "Notification centre: a meal reminder row's kind"
   }
 }

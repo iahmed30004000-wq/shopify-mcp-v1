@@ -22115,5 +22115,745 @@
   "nutritionLateMealLabel": "أكل متأخر",
   "@nutritionLateMealLabel": {
     "description": "Marker label for insights: an entry logged at or after 21:00"
+  },
+  "nutritionTitle": "الأكل",
+  "@nutritionTitle": {
+    "description": "Nutrition screens title"
+  },
+  "nutritionTabFood": "الأكل",
+  "@nutritionTabFood": {
+    "description": "The food tab on the Body planet"
+  },
+  "nutritionSave": "حفظ",
+  "nutritionDelete": "حذف",
+  "nutritionEdit": "عدّل",
+  "nutritionNameRequired": "اكتب اسمًا",
+  "nutritionPartsSep": "، ",
+  "@nutritionPartsSep": {
+    "description": "Between parts of a one-line summary"
+  },
+  "nutritionListSep": "، ",
+  "nutritionListAnd": "{head} و{last}",
+  "@nutritionListAnd": {
+    "placeholders": {
+      "head": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPortionValue": "{amount} {unit}",
+  "@nutritionPortionValue": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPortionPlain": "كمية {amount}",
+  "@nutritionPortionPlain": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNoPortion": "بدون كمية",
+  "nutritionTimeAt": "الساعة {time}",
+  "@nutritionTimeAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionCardTitle": "أكل اليوم",
+  "nutritionCardOpen": "افتح الأكل",
+  "nutritionEntriesToday": "{count, plural, =0{ما سجّلت أكل اليوم} =1{أكلة واحدة اليوم} =2{أكلتان اليوم} few{{n} أكلات اليوم} many{{n} أكلة اليوم} other{{n} أكلة اليوم}}",
+  "@nutritionEntriesToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLoggedDays": "{count, plural, =0{ما سجّلت هذا الأسبوع} =1{يوم واحد هذا الأسبوع} =2{يومان هذا الأسبوع} few{{n} أيام هذا الأسبوع} many{{n} يومًا هذا الأسبوع} other{{n} يوم هذا الأسبوع}}",
+  "@nutritionLoggedDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionQuickLog": "سجّل أكلة",
+  "nutritionTodayTitle": "اللي أكلته اليوم",
+  "nutritionTodayEmptyTitle": "ما سجّلت أكل اليوم",
+  "nutritionTodayEmptyBody": "اضغط «سجّل أكلة» واختار من اللي بتأكله عادة — بياخذ ثانيتين.",
+  "nutritionEmptyTitle": "ما بعد سجّلت أكل",
+  "nutritionEmptyBody": "كل أكلة بتسجّلها بتظهر هون بوقتها، وبتصير أساس خطتك وملاحظاتك.",
+  "nutritionOpenLibrary": "مكتبة الأكل",
+  "nutritionOpenLibraryHint": "أكلاتك وكلماتك عليها",
+  "nutritionOpenPlan": "خطة الوجبات",
+  "nutritionOpenPlanHint": "وجباتك بأوقاتها، والمخطّط مقابل اللي صار",
+  "nutritionOpenRules": "أمراضي وقواعدي",
+  "nutritionOpenRulesHint": "علّم شو ثقيل عليك وليش",
+  "nutritionOpenInsights": "الملاحظات",
+  "nutritionOpenInsightsHint": "عدّ على بياناتك أنت، بدون أحكام",
+  "nutritionNextMeal": "الوجبة القادمة",
+  "nutritionAteIt": "أكلتها",
+  "nutritionAteItLabel": "سجّل «{name}» كما هي بالخطة",
+  "@nutritionAteItLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotPlanned": "المخطّط: {foods}",
+  "@nutritionSlotPlanned": {
+    "placeholders": {
+      "foods": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotNoFoods": "ما حدّدت أكل لهاي الوجبة",
+  "nutritionNoPlanTitle": "ما في خطة وجبات بعد",
+  "nutritionNoPlanBody": "اعمل خطة: «الساعة ثمانية فطور، الساعة واحدة غدا…» وبتوصلك تذكيرة بوقتها.",
+  "nutritionMakePlan": "اعمل خطة",
+  "nutritionTodayRating": "تقييم اليوم",
+  "nutritionRatingWhy": "ليش؟",
+  "nutritionLevelClear": "ما في شي من قواعدك",
+  "nutritionLevelLow": "بسيط",
+  "nutritionLevelMedium": "متوسط",
+  "nutritionLevelHigh": "كبير",
+  "nutritionWeightLow": "يهمّني شوي",
+  "nutritionWeightMedium": "يهمّني",
+  "nutritionWeightHigh": "يهمّني كثير",
+  "nutritionNoRulesTitle": "ما في قواعد بعد — فما في تقييم",
+  "nutritionNoRulesBody": "مَدار ما بيحكم على أكلك من عندو. اكتب قاعدتك أنت، مثل «المقلي ثقيل على قولوني»، وبعدها بيصير في تقييم ومعه سببه.",
+  "nutritionWriteFirstRule": "اكتب أول قاعدة",
+  "nutritionReasonsTitle": "الأسباب — كلها من قواعدك",
+  "nutritionReasonTag": "لأنك علّمت «{tag}»",
+  "@nutritionReasonTag": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonFood": "لأنك علّمت «{food}»",
+  "@nutritionReasonFood": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonAny": "لأنك علّمت أي أكل بهذا الحال",
+  "nutritionReasonForCondition": "على {condition}",
+  "@nutritionReasonForCondition": {
+    "placeholders": {
+      "condition": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonWindow": "بين {window}",
+  "@nutritionReasonWindow": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonMinPortion": "من {amount} وأكثر",
+  "@nutritionReasonMinPortion": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonDayCount": "{count, plural, =0{بلا تكرار} =1{مرة واحدة بهذا اليوم، وحدّك {max}} =2{مرتان بهذا اليوم، وحدّك {max}} few{{n} مرات بهذا اليوم، وحدّك {max}} many{{n} مرة بهذا اليوم، وحدّك {max}} other{{n} مرة بهذا اليوم، وحدّك {max}}}",
+  "@nutritionReasonDayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionReasonPoints": "{count, plural, =0{بلا نقاط} =1{نقطة واحدة} =2{نقطتان} few{{n} نقاط} many{{n} نقطة} other{{n} نقطة}}",
+  "@nutritionReasonPoints": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNoRatingShort": "بلا تقييم",
+  "nutritionLogTitle": "شو أكلت؟",
+  "nutritionLogSubtitle": "اضغط على أكلة وبتتسجّل فورًا",
+  "nutritionSearchHint": "دوّر على أكلة، أو اكتبها كما هي",
+  "nutritionSearchLabel": "بحث في أكلاتك",
+  "nutritionFrequent": "اللي بتأكله كثير",
+  "nutritionRecent": "آخر شي أكلته",
+  "nutritionTimesCount": "{count, plural, =0{ولا مرة} =1{مرة} =2{مرتان} few{{n} مرات} many{{n} مرة} other{{n} مرة}}",
+  "@nutritionTimesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddNew": "أضف «{name}»",
+  "@nutritionAddNew": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddNewHint": "بتنضاف لمكتبتك وتتسجّل بنفس اللحظة",
+  "nutritionNoResults": "ما في نتائج — اكتبها وبتتسجّل زي ما هي",
+  "nutritionLogNow": "هلأ",
+  "nutritionLogWhen": "الوقت",
+  "nutritionChangeTime": "غيّر الوقت",
+  "nutritionPortionLabel": "الكمية (اختياري)",
+  "nutritionUnitLabel": "وحدتك",
+  "nutritionUnitHint": "رغيف، كوب، صحن…",
+  "nutritionLogSaveMore": "سجّل بالتفاصيل",
+  "nutritionLoggedToast": "سُجّل «{name}»",
+  "@nutritionLoggedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLogUpdated": "عدّلت التسجيل",
+  "nutritionLogDeleted": "حذفت «{name}»",
+  "@nutritionLogDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotLoggedToast": "سُجّلت وجبة «{name}»",
+  "@nutritionSlotLoggedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionEditEntry": "عدّل اللي أكلته",
+  "nutritionEntryName": "الأكلة",
+  "nutritionEntryNote": "ملاحظة",
+  "nutritionEntryNoteHint": "مثلاً: أكلت بسرعة",
+  "nutritionLibraryTitle": "مكتبة الأكل",
+  "nutritionAddFood": "أضف أكلة",
+  "nutritionEditFood": "عدّل الأكلة",
+  "nutritionFoodName": "الاسم",
+  "nutritionFoodNameHint": "منسف، قهوة، خبز…",
+  "nutritionFoodTags": "كلماتك عليها",
+  "nutritionFoodTagsHint": "مقلي، حلو، مالح…",
+  "nutritionFoodPortion": "كميتك المعتادة",
+  "nutritionFoodNotes": "ملاحظة",
+  "nutritionFavorite": "مفضّلة",
+  "nutritionUnfavorite": "شيلها من المفضّلة",
+  "nutritionFavoritedToast": "«{name}» بالمفضّلة",
+  "@nutritionFavoritedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionUnfavoritedToast": "«{name}» طلعت من المفضّلة",
+  "@nutritionUnfavoritedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionArchive": "أرشفة",
+  "nutritionUnarchive": "رجّعها",
+  "nutritionArchivedToast": "أُرشفت «{name}»",
+  "@nutritionArchivedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionUnarchivedToast": "رجّعت «{name}»",
+  "@nutritionUnarchivedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionFoodDeleted": "حذفت «{name}»",
+  "@nutritionFoodDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionFoodSaved": "حفظت «{name}»",
+  "@nutritionFoodSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionArchivedLabel": "مؤرشفة",
+  "nutritionShowArchived": "أظهر المؤرشفة",
+  "nutritionTagsTitle": "كلماتك",
+  "nutritionAllTags": "الكل",
+  "nutritionLibraryEmptyTitle": "مكتبتك فاضية",
+  "nutritionLibraryEmptyBody": "أضف أكلاتك مرة واحدة، وبعدها تسجيلها بضغطة. وكل كلمة بتكتبها عليها بتقدر تبني عليها قاعدة.",
+  "nutritionLibraryNoMatch": "ما في أكلة بهاي الكلمة",
+  "nutritionFoodsCount": "{count, plural, =0{ما في أكلات} =1{أكلة واحدة} =2{أكلتان} few{{n} أكلات} many{{n} أكلة} other{{n} أكلة}}",
+  "@nutritionFoodsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLoggedCount": "{count, plural, =0{ما سجّلتها بعد} =1{سجّلتها مرة} =2{سجّلتها مرتين} few{سجّلتها {n} مرات} many{سجّلتها {n} مرة} other{سجّلتها {n} مرة}}",
+  "@nutritionLoggedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPlanTitle": "خطة الوجبات",
+  "nutritionPlanTabBuild": "الخطة",
+  "nutritionPlanTabCompare": "المخطّط واللي صار",
+  "nutritionAddPlan": "خطة جديدة",
+  "nutritionEditPlan": "عدّل الخطة",
+  "nutritionPlanName": "اسم الخطة",
+  "nutritionPlanNameHint": "خطتي هذا الشهر",
+  "nutritionPlanNotes": "ملاحظة",
+  "nutritionActivate": "شغّلها",
+  "nutritionDeactivate": "رجّعها مسوّدة",
+  "nutritionActiveLabel": "شغّالة",
+  "nutritionDraftLabel": "مسوّدة",
+  "nutritionActivatedToast": "«{name}» صارت الخطة الشغّالة",
+  "@nutritionActivatedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDeactivatedToast": "«{name}» رجعت مسوّدة",
+  "@nutritionDeactivatedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDuplicate": "انسخها",
+  "nutritionCopyName": "{name} — نسخة",
+  "@nutritionCopyName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDuplicatedToast": "نسخت «{name}»",
+  "@nutritionDuplicatedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPlanDeleted": "حذفت خطة «{name}»",
+  "@nutritionPlanDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddSlot": "أضف وجبة",
+  "nutritionEditSlot": "عدّل الوجبة",
+  "nutritionSlotName": "اسم الوجبة",
+  "nutritionSlotNameHint": "فطور، غدا، عشا…",
+  "nutritionSlotTime": "الساعة",
+  "nutritionSlotDays": "أيامها",
+  "nutritionSlotNotes": "ملاحظة",
+  "nutritionEveryDay": "كل يوم",
+  "nutritionSlotRemind": "ذكّرني بوقتها",
+  "nutritionSlotRemindHint": "تنبيه على التلفون بوقت الوجبة",
+  "nutritionRemindOnToast": "بتوصلك تذكيرة قبل «{name}»",
+  "@nutritionRemindOnToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRemindOffToast": "وقّفت تذكيرة «{name}»",
+  "@nutritionRemindOffToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRemindNeedsPermission": "لازم تسمح للتطبيق بالتنبيهات أول",
+  "nutritionSlotDeleted": "حذفت وجبة «{name}»",
+  "@nutritionSlotDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotSaved": "حفظت وجبة «{name}»",
+  "@nutritionSlotSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddSlotFood": "أضف أكلة للوجبة",
+  "nutritionSlotFoodDeleted": "شيلت «{name}» من الوجبة",
+  "@nutritionSlotFoodDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionSlotFoodRemove": "شيل «{name}» من الوجبة",
+  "@nutritionSlotFoodRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionPlansEmptyTitle": "ما في خطة بعد",
+  "nutritionPlansEmptyBody": "اعمل خطة واحدة، وحطّ فيها وجباتك بأوقاتها وأيامها. بتقدر تعمل أكثر من خطة وتشغّل واحدة.",
+  "nutritionSlotsEmptyTitle": "الخطة فاضية",
+  "nutritionSlotsEmptyBody": "أضف أول وجبة: اسمها، وقتها، وأيامها.",
+  "nutritionSlotsCount": "{count, plural, =0{بلا وجبات} =1{وجبة واحدة} =2{وجبتان} few{{n} وجبات} many{{n} وجبة} other{{n} وجبة}}",
+  "@nutritionSlotsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionStatusOnTime": "أكلتها بوقتها",
+  "nutritionStatusLate": "أكلتها متأخّر",
+  "nutritionStatusSwapped": "أكلت غيرها",
+  "nutritionStatusSkipped": "ما أكلتها",
+  "nutritionStatusPending": "بعدها جاي",
+  "nutritionLateBy": "متأخّر {duration}",
+  "@nutritionLateBy": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAdherence": "التزامك {percent}",
+  "@nutritionAdherence": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAdherenceNone": "ما بعد",
+  "nutritionUnplannedTitle": "أكل خارج الخطة",
+  "nutritionAteInstead": "أكلت: {foods}",
+  "@nutritionAteInstead": {
+    "placeholders": {
+      "foods": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionLast7Days": "آخر سبع أيام",
+  "nutritionCompareToday": "اليوم",
+  "nutritionCompareNoPlanBody": "شغّل خطة وبعدها بيصير في «مخطّط» نقارنه باللي أكلته.",
+  "nutritionDayNothing": "ما في شي بهذا اليوم",
+  "nutritionConditionsTitle": "أمراضي وقواعدي",
+  "nutritionAddCondition": "أضف مرض",
+  "nutritionEditCondition": "عدّل المرض",
+  "nutritionConditionName": "الاسم",
+  "nutritionConditionNameHint": "قولون، ضغط، سكري…",
+  "nutritionConditionNotes": "ملاحظاتك",
+  "nutritionConditionSince": "من إيمتى",
+  "nutritionConditionColor": "لونه",
+  "nutritionConditionActive": "شغّال",
+  "nutritionConditionActiveHint": "لما توقّفه، قواعده بتوقف عن الحساب وما بينحذف شي",
+  "nutritionConditionPaused": "موقّف",
+  "nutritionConditionSinceLabel": "من {date}",
+  "@nutritionConditionSinceLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionSaved": "حفظت «{name}»",
+  "@nutritionConditionSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionDeleted": "حذفت «{name}»",
+  "@nutritionConditionDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionResumed": "رجّعت «{name}»",
+  "@nutritionConditionResumed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionStopped": "وقّفت «{name}»",
+  "@nutritionConditionStopped": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionConditionsEmptyTitle": "ما سجّلت أمراضك بعد",
+  "nutritionConditionsEmptyBody": "سجّل المرض اللي بتعاني منه، وبعدين اكتب تحته قواعدك: شو ثقيل عليك، وبأي وقت، وقدّيش يهمّك.",
+  "nutritionGeneralRules": "قواعد بدون مرض",
+  "nutritionRulesUnder": "قواعدك على {condition}",
+  "@nutritionRulesUnder": {
+    "placeholders": {
+      "condition": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRulesCount": "{count, plural, =0{بلا قواعد} =1{قاعدة واحدة} =2{قاعدتان} few{{n} قواعد} many{{n} قاعدة} other{{n} قاعدة}}",
+  "@nutritionRulesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionAddRule": "أضف قاعدة",
+  "nutritionEditRule": "عدّل القاعدة",
+  "nutritionRuleSubtitle": "اكتبها كما بتحكيها: شو، قدّيش، إيمتى، وقدّيش يهمّك",
+  "nutritionRuleTarget": "على شو",
+  "nutritionTargetFood": "أكلة بذاتها",
+  "nutritionTargetTag": "كلمة من كلماتك",
+  "nutritionTargetAny": "أي أكل",
+  "nutritionRuleFood": "الأكلة",
+  "nutritionRuleTag": "الكلمة",
+  "nutritionRuleNeedsFood": "اختار أكلة",
+  "nutritionRuleNeedsTag": "اختار كلمة",
+  "nutritionRuleMinPortion": "من كمية (اختياري)",
+  "nutritionRuleFrom": "من ساعة",
+  "nutritionRuleTo": "لساعة",
+  "nutritionRuleWindowHint": "اتركهم فاضيين إذا القاعدة بأي وقت",
+  "nutritionRuleMaxPerDay": "أكثر من كم مرة بالنهار (اختياري)",
+  "nutritionRuleMaxPerDayHint": "لما تحدّدها، القاعدة بتحسب على اليوم كلّه مش على أكلة",
+  "nutritionRuleWeight": "قدّيش يهمّك",
+  "nutritionRuleCondition": "على أي مرض",
+  "nutritionRuleNoCondition": "بدون مرض",
+  "nutritionRuleNote": "كلامك أنت",
+  "nutritionRuleNoteHint": "مثلاً: الملح يرفع ضغطي",
+  "nutritionRuleActive": "شغّالة",
+  "nutritionRulePaused": "موقّفة",
+  "nutritionRulePreviewTitle": "لو كانت هاي القاعدة عندك من قبل",
+  "nutritionRulePreview": "{count, plural, =0{ما كانت بتنطبق على شي سجّلته قبل} =1{كانت بتنطبق على أكلة واحدة سجّلتها قبل} =2{كانت بتنطبق على أكلتين سجّلتهم قبل} few{كانت بتنطبق على {n} أكلات سجّلتهم قبل} many{كانت بتنطبق على {n} أكلة سجّلتها قبل} other{كانت بتنطبق على {n} أكلة سجّلتها قبل}}",
+  "@nutritionRulePreview": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionRuleSaved": "حفظت القاعدة",
+  "nutritionRuleDeleted": "حذفت القاعدة",
+  "nutritionRuleTurnedOn": "شغّلت القاعدة",
+  "nutritionRuleTurnedOff": "وقّفت القاعدة",
+  "nutritionRulesEmptyTitle": "ما في قواعد تحت هذا المرض",
+  "nutritionRulesEmptyBody": "اكتب قاعدة وحدة وبتبدأ تشوف تقييم مع سببه على كل أكلة.",
+  "nutritionRuleWholeDay": "قاعدة على اليوم كلّه",
+  "nutritionInsightsTitle": "الملاحظات",
+  "nutritionInsightsLead": "هذا عدّ على بياناتك أنت. ما بيقول إن شي سبّب شي.",
+  "nutritionNotReadyTitle": "بعد شوي",
+  "nutritionNotReadyBody": "سجّل {needed} يوم لنقدر نوريك النمط — صار عندك {done}.",
+  "@nutritionNotReadyBody": {
+    "placeholders": {
+      "needed": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionNotReadyMore": "باقي {days}",
+  "@nutritionNotReadyMore": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionWhatWeLookAt": "لما تجمع الأيام، بنقارن أكلك بهاي الأرقام اللي بتسجّلها أنت",
+  "nutritionInsightsEmptyTitle": "ما في شي واضح لهلأ",
+  "nutritionInsightsEmptyBody": "سجّلت كفاية أيام، بس ما في فرق كبير بين أيامك لنقوله. كمّل تسجيل وبنرجع نحسب.",
+  "nutritionWorstDaysTitle": "أصعب أيامك",
+  "nutritionWorstDaysLine": "بأصعب {worst} أيام من ناحية {metric}: «{marker}» صار بـ{inWorst} منهم، ومن باقي {other} أيام صار بـ{inOther}.",
+  "@nutritionWorstDaysLine": {
+    "placeholders": {
+      "worst": {
+        "type": "String"
+      },
+      "metric": {
+        "type": "String"
+      },
+      "marker": {
+        "type": "String"
+      },
+      "inWorst": {
+        "type": "String"
+      },
+      "other": {
+        "type": "String"
+      },
+      "inOther": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionMeansTitle": "بالأيام اللي فيها وبالأيام اللي بدونها",
+  "nutritionMeansLine": "بالأيام اللي فيها «{marker}» ({withDays}): معدّل {metric} كان {meanWith}. وبالأيام الباقية ({withoutDays}): {meanWithout}.",
+  "@nutritionMeansLine": {
+    "placeholders": {
+      "marker": {
+        "type": "String"
+      },
+      "withDays": {
+        "type": "String"
+      },
+      "metric": {
+        "type": "String"
+      },
+      "meanWith": {
+        "type": "String"
+      },
+      "withoutDays": {
+        "type": "String"
+      },
+      "meanWithout": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionWindowNote": "خلال آخر {days} يوم",
+  "@nutritionWindowNote": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionMetricPain": "الوجع",
+  "nutritionMetricMood": "المزاج",
+  "nutritionMetricSleep": "النوم",
+  "nutritionMetricWater": "الماء",
+  "nutritionMetricFasting": "الصيام",
+  "nutritionOpenDays": "شوف الأيام",
+  "nutritionDaysBehindTitle": "الأيام اللي ورا الرقم",
+  "nutritionDaysWith": "أيام فيها «{marker}»",
+  "@nutritionDaysWith": {
+    "placeholders": {
+      "marker": {
+        "type": "String"
+      }
+    }
+  },
+  "nutritionDaysWithout": "أيام بدونها",
+  "nutritionDayEntries": "{count, plural, =0{بلا أكل مسجّل} =1{أكلة واحدة} =2{أكلتان} few{{n} أكلات} many{{n} أكلة} other{{n} أكلة}}",
+  "@nutritionDayEntries": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindMeal": "تنبيه وجبة",
+  "@ncKindMeal": {
+    "description": "Notification centre: a meal reminder row's kind"
   }
 }
