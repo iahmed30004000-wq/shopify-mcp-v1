@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Next prayer, 4×2: the astrolabe beside the name, time, countdown and the
+     Hijri date. The astrolabe has a left and a right slot: the renderer
+     shows the one on the reading side's start. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:gravity="center_vertical"
+    android:layoutDirection="ltr"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <FrameLayout
+        android:id="@+id/widget_slot_left"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginRight="12dp">
+
+        <ImageView
+            android:id="@+id/widget_astro_day_left"
+            style="@style/widget_astro_day"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/widget_astro_night_left"
+            style="@style/widget_astro_night"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/widget_title"
+            style="@style/widget_text_title" />
+
+        <TextView
+            android:id="@+id/widget_headline"
+            style="@style/widget_text_headline"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/widget_detail"
+            style="@style/widget_text_detail"
+            android:textColor="@color/widget_text_primary"
+            android:textSize="14sp" />
+
+        <Chronometer
+            android:id="@+id/widget_countdown"
+            style="@style/widget_text_accent"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/widget_note"
+            style="@style/widget_text_note"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/widget_slot_right"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="12dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/widget_astro_day_right"
+            style="@style/widget_astro_day"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/widget_astro_night_right"
+            style="@style/widget_astro_night"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter" />
+    </FrameLayout>
+</LinearLayout>

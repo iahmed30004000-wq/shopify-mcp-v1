@@ -1,0 +1,12 @@
+{
+  "nutritionNotifyGroup": {"ar": "الأكل", "en": "Food", "description": "Notification channel group for meal reminders"},
+  "nutritionNotifyChannel": {"ar": "تنبيهات الوجبات", "en": "Meal reminders"},
+  "nutritionNotifyChannelDescription": {"ar": "تذكير بوجبات خطتك بوقتها", "en": "A reminder at each meal of your plan"},
+  "nutritionNotifyMealBody": {"ar": "موعد وجبتك عند {time}.", "en": "Your meal is at {time}.", "placeholders": {"time": {"type": "String"}}},
+  "nutritionNotifyMealBodyWithFoods": {
+    "ar": "عند {time}: {foods}.",
+    "en": "At {time}: {foods}.",
+    "placeholders": {"time": {"type": "String"}, "foods": {"type": "String"}}
+  },
+  "nutritionLateMealLabel": {"ar": "أكل متأخر", "en": "Ate late", "description": "Marker label for insights: an entry logged at or after 21:00"}
+}

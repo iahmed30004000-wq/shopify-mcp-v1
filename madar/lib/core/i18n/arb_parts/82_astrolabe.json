@@ -1,0 +1,258 @@
+{
+  "astrolabeCountdown": {
+    "ar": "{prayer} بعد {time}",
+    "en": "{prayer} in {time}",
+    "description": "Countdown engraved on the astrolabe's inner ring, e.g. «العصر بعد ١:٢٣:٠٥»",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdownNow": {
+    "ar": "حان وقت {prayer}",
+    "en": "Time for {prayer}",
+    "description": "Engraved on the inner ring in the moment the next prayer begins",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeSemantics": {
+    "ar": "أسطرلاب يومك. {window}. {countdown}. صلّيت {done} من {total}.",
+    "en": "Your day's astrolabe. {window}. {countdown}. {done} of {total} prayers done.",
+    "description": "Screen-reader summary of the astrolabe centrepiece",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "countdown": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeWindowNow": {
+    "ar": "الآن وقت {window}",
+    "en": "Now: {window}",
+    "description": "Current prayer window, used in the astrolabe's screen-reader summary",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerPrayed": {
+    "ar": "{prayer}: صلّيتها",
+    "en": "{prayer}: prayed",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerDue": {
+    "ar": "{prayer}: حان وقتها",
+    "en": "{prayer}: it's time",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerUpcoming": {
+    "ar": "{prayer}: الساعة {time}",
+    "en": "{prayer}: at {time}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabePrayerMissed": {
+    "ar": "{prayer}: فاتت",
+    "en": "{prayer}: missed",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeMakersMark": {
+    "ar": "مَدار",
+    "en": "MADAR",
+    "description": "Maker's mark engraved on the lower half of the astrolabe's inner ring (like a signed museum astrolabe)"
+  },
+  "astrolabeStarDenebKaitos": {
+    "ar": "ذنب قيطس",
+    "en": "Deneb Kaitos",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarMenkar": {
+    "ar": "منخر قيطس",
+    "en": "Menkar",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarAldebaran": {
+    "ar": "الدبران",
+    "en": "Aldebaran",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarRigel": {
+    "ar": "رجل الجبار",
+    "en": "Rigel",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarBetelgeuse": {
+    "ar": "يد الجوزاء",
+    "en": "Betelgeuse",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarSirius": {
+    "ar": "الشعرى اليمانية",
+    "en": "Sirius",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarProcyon": {
+    "ar": "الشعرى الشامية",
+    "en": "Procyon",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarAlphard": {
+    "ar": "فرد الشجاع",
+    "en": "Alphard",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarRegulus": {
+    "ar": "قلب الأسد",
+    "en": "Regulus",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarDenebola": {
+    "ar": "ذنب الأسد",
+    "en": "Denebola",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarSpica": {
+    "ar": "السماك الأعزل",
+    "en": "Spica",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarArcturus": {
+    "ar": "السماك الرامح",
+    "en": "Arcturus",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarUnukalhai": {
+    "ar": "عنق الحية",
+    "en": "Unukalhai",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarRasAlhague": {
+    "ar": "رأس الحوّاء",
+    "en": "Rasalhague",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarAltair": {
+    "ar": "النسر الطائر",
+    "en": "Altair",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarDenebAlgedi": {
+    "ar": "ذنب الجدي",
+    "en": "Deneb Algedi",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeStarMarkab": {
+    "ar": "مركب الفرس",
+    "en": "Markab",
+    "description": "Star name engraved on the astrolabe rete pointer (traditional Arabic star name)"
+  },
+  "astrolabeZodiacAries": {
+    "ar": "الحمل",
+    "en": "Aries",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacTaurus": {
+    "ar": "الثور",
+    "en": "Taurus",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacGemini": {
+    "ar": "الجوزاء",
+    "en": "Gemini",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacCancer": {
+    "ar": "السرطان",
+    "en": "Cancer",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacLeo": {
+    "ar": "الأسد",
+    "en": "Leo",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacVirgo": {
+    "ar": "السنبلة",
+    "en": "Virgo",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacLibra": {
+    "ar": "الميزان",
+    "en": "Libra",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacScorpio": {
+    "ar": "العقرب",
+    "en": "Scorpio",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacSagittarius": {
+    "ar": "القوس",
+    "en": "Sagittarius",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacCapricorn": {
+    "ar": "الجدي",
+    "en": "Capricorn",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacAquarius": {
+    "ar": "الدلو",
+    "en": "Aquarius",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeZodiacPisces": {
+    "ar": "الحوت",
+    "en": "Pisces",
+    "description": "Zodiac sign engraved on the astrolabe ecliptic ring (traditional Arabic name)"
+  },
+  "astrolabeCountdownUntil": {
+    "ar": "حتى {prayer}",
+    "en": "to {prayer}",
+    "description": "Lower band of a small astrolabe hub under the engraved clock: which prayer the countdown runs to, e.g. «حتى العصر»",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "astrolabeCountdownNowBand": {
+    "ar": "حان وقتها",
+    "en": "it is time",
+    "description": "Lower band of a small astrolabe hub (under the prayer name) the moment the prayer begins"
+  }
+}

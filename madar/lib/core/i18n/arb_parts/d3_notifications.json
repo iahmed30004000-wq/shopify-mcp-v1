@@ -1,0 +1,652 @@
+{
+  "ncTitle": {
+    "ar": "الإشعارات",
+    "en": "Notifications",
+    "description": "Title of the notification center"
+  },
+  "ncTabUpcoming": {
+    "ar": "القادمة",
+    "en": "Upcoming",
+    "description": "Notification center tab: scheduled notifications"
+  },
+  "ncTabRecent": {
+    "ar": "الأخيرة",
+    "en": "Recent",
+    "description": "Notification center tab: delivered notifications"
+  },
+  "ncTabWithCount": {
+    "ar": "{label}، {count}",
+    "en": "{label}, {count}",
+    "description": "Screen-reader label of a tab with its count",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOpenSettings": {
+    "ar": "إعدادات الإشعارات",
+    "en": "Notification settings"
+  },
+  "ncUpcomingEmptyTitle": {
+    "ar": "لا شيء مجدول",
+    "en": "Nothing scheduled"
+  },
+  "ncUpcomingEmptyBody": {
+    "ar": "ما تفعّله من أذان وتذكيرات سيصطفّ هنا للأيام السبعة القادمة.",
+    "en": "The adhan and reminders you switch on line up here for the next seven days."
+  },
+  "ncRecentEmptyTitle": {
+    "ar": "لا جديد",
+    "en": "All caught up"
+  },
+  "ncRecentEmptyBody": {
+    "ar": "ما يصلك من إشعارات يبقى هنا أسبوعين، لتعود إليه متى شئت.",
+    "en": "Notifications that arrive stay here for two weeks, so you can come back to them."
+  },
+  "ncClearAll": {
+    "ar": "مسح الكل",
+    "en": "Clear all"
+  },
+  "ncClearedAll": {
+    "ar": "{count, plural, =1{مُسح إشعار واحد} =2{مُسح إشعاران} few{مُسحت {count} إشعارات} many{مُسح {count} إشعارًا} other{مُسح {count} إشعار}}",
+    "en": "{count, plural, =1{Cleared 1 notification} other{Cleared {count} notifications}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncDismissed": {
+    "ar": "أُزيل من القائمة",
+    "en": "Dismissed"
+  },
+  "ncSkippedToast": {
+    "ar": "لن يصل هذا التذكير",
+    "en": "This one won't arrive"
+  },
+  "ncRestoredToast": {
+    "ar": "سيصل في وقته",
+    "en": "It will arrive on time"
+  },
+  "ncShowMore": {
+    "ar": "{count, plural, =1{عرض واحد آخر} =2{عرض اثنين آخرين} few{عرض {count} أخرى} many{عرض {count} أخرى} other{عرض {count} أخرى}}",
+    "en": "{count, plural, =1{Show 1 more} other{Show {count} more}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncShowLess": {
+    "ar": "عرض أقل",
+    "en": "Show less"
+  },
+  "ncSectionLabel": {
+    "ar": "{group}، {count}",
+    "en": "{group}, {count}",
+    "description": "Screen-reader label of a group section",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ncGroupPrayer": {
+    "ar": "الصلاة والأذان",
+    "en": "Prayer & adhan"
+  },
+  "ncGroupAdhkar": {
+    "ar": "الأذكار",
+    "en": "Adhkar"
+  },
+  "ncGroupMedications": {
+    "ar": "الأدوية",
+    "en": "Medications"
+  },
+  "ncGroupHealth": {
+    "ar": "الصحة",
+    "en": "Health"
+  },
+  "ncGroupMoney": {
+    "ar": "المستحقات المالية",
+    "en": "Money dues"
+  },
+  "ncGroupFamily": {
+    "ar": "العائلة",
+    "en": "Family"
+  },
+  "ncGroupTravel": {
+    "ar": "وثائق السفر",
+    "en": "Travel documents"
+  },
+  "ncGroupWird": {
+    "ar": "الوِرد",
+    "en": "Wird"
+  },
+  "ncGroupCustom": {
+    "ar": "الوحدات المخصّصة",
+    "en": "Custom modules"
+  },
+  "ncGroupOther": {
+    "ar": "أخرى",
+    "en": "Other"
+  },
+  "ncKindAdhan": {
+    "ar": "أذان {prayer}",
+    "en": "{prayer} adhan",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhan": {
+    "ar": "{prayer} بعد {minutes}",
+    "en": "{prayer} in {minutes}",
+    "description": "A reminder some minutes before a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindPreAdhanShort": {
+    "ar": "تذكير قبل {prayer}",
+    "en": "Before {prayer}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "ncKindSunrise": {
+    "ar": "الشروق",
+    "en": "Sunrise"
+  },
+  "ncKindAdhanTest": {
+    "ar": "أذان تجريبي",
+    "en": "Test adhan"
+  },
+  "ncKindAdhkarMorning": {
+    "ar": "أذكار الصباح",
+    "en": "Morning adhkar"
+  },
+  "ncKindAdhkarEvening": {
+    "ar": "أذكار المساء",
+    "en": "Evening adhkar"
+  },
+  "ncKindAdhkar": {
+    "ar": "تذكير بالأذكار",
+    "en": "Adhkar reminder"
+  },
+  "ncKindDose": {
+    "ar": "موعد جرعة",
+    "en": "Dose reminder"
+  },
+  "ncKindRefill": {
+    "ar": "حان وقت إعادة التعبئة",
+    "en": "Time to refill"
+  },
+  "ncKindMedsNotice": {
+    "ar": "إجابة لم تُسجَّل",
+    "en": "Answer not recorded"
+  },
+  "ncKindAppointment": {
+    "ar": "موعد طبي",
+    "en": "Appointment"
+  },
+  "ncKindWorry": {
+    "ar": "نافذة القلق",
+    "en": "Worry window"
+  },
+  "ncKindFastGoal": {
+    "ar": "هدف الصيام",
+    "en": "Fasting goal"
+  },
+  "ncKindEatingClose": {
+    "ar": "نافذة الأكل تُغلق",
+    "en": "Eating window closing"
+  },
+  "ncKindDebt": {
+    "ar": "دَين مستحق",
+    "en": "Debt due"
+  },
+  "ncKindObligation": {
+    "ar": "التزام مستحق",
+    "en": "Payment due"
+  },
+  "ncKindFamilyDigest": {
+    "ar": "صلة الرحم",
+    "en": "Keep in touch"
+  },
+  "ncKindBirthdayEve": {
+    "ar": "عيد ميلاد غدًا",
+    "en": "Birthday tomorrow"
+  },
+  "ncKindBirthday": {
+    "ar": "عيد ميلاد اليوم",
+    "en": "Birthday today"
+  },
+  "ncKindDocAhead": {
+    "ar": "وثيقة تقترب من الانتهاء",
+    "en": "Document expiring soon"
+  },
+  "ncKindDocToday": {
+    "ar": "وثيقة تنتهي اليوم",
+    "en": "Document expires today"
+  },
+  "ncKindWird": {
+    "ar": "الوِرد اليومي",
+    "en": "Daily wird"
+  },
+  "ncKindCustom": {
+    "ar": "تذكير وحدة",
+    "en": "Module reminder"
+  },
+  "ncKindOther": {
+    "ar": "إشعار",
+    "en": "Notification"
+  },
+  "ncAtTime": {
+    "ar": "الساعة {time}",
+    "en": "at {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateMuted": {
+    "ar": "مكتوم",
+    "en": "Muted"
+  },
+  "ncStateSkipped": {
+    "ar": "متخطّى",
+    "en": "Skipped"
+  },
+  "ncStateSnoozedUntil": {
+    "ar": "مؤجّل حتى {time}",
+    "en": "Snoozed until {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateLive": {
+    "ar": "ظاهر الآن",
+    "en": "Showing now"
+  },
+  "ncStateSilenced": {
+    "ar": "وصل صامتًا",
+    "en": "Arrived muted"
+  },
+  "ncStateOpened": {
+    "ar": "فُتح",
+    "en": "Opened"
+  },
+  "ncStateAnswered": {
+    "ar": "أُجيب: {action}",
+    "en": "Answered: {action}",
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "ncStateSnoozed": {
+    "ar": "أُجّل",
+    "en": "Snoozed"
+  },
+  "ncStateNew": {
+    "ar": "جديد",
+    "en": "New"
+  },
+  "ncTimeNow": {
+    "ar": "الآن",
+    "en": "Now"
+  },
+  "ncTimeIn": {
+    "ar": "بعد {duration}",
+    "en": "in {duration}",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeAgo": {
+    "ar": "قبل {duration}",
+    "en": "{duration} ago",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeToday": {
+    "ar": "اليوم {time}",
+    "en": "Today {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeTomorrow": {
+    "ar": "غدًا {time}",
+    "en": "Tomorrow {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeYesterday": {
+    "ar": "أمس {time}",
+    "en": "Yesterday {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncTimeOnDay": {
+    "ar": "{day} {time}",
+    "en": "{day}, {time}",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionTaken": {
+    "ar": "أخذتها",
+    "en": "Taken",
+    "description": "Dose answered from the notification center"
+  },
+  "ncActionSnooze": {
+    "ar": "أجِّل",
+    "en": "Snooze"
+  },
+  "ncActionSkip": {
+    "ar": "تخطَّ",
+    "en": "Skip"
+  },
+  "ncActionStop": {
+    "ar": "إيقاف",
+    "en": "Stop",
+    "description": "Stops a sounding adhan"
+  },
+  "ncActionOpen": {
+    "ar": "افتح",
+    "en": "Open"
+  },
+  "ncActionSkipOne": {
+    "ar": "لا ترسل هذا",
+    "en": "Skip this one"
+  },
+  "ncActionRestore": {
+    "ar": "أعِده",
+    "en": "Restore"
+  },
+  "ncActionSnoozeFor": {
+    "ar": "أجِّل {duration}",
+    "en": "Snooze {duration}",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionMuteGroup": {
+    "ar": "اكتم {group}",
+    "en": "Mute {group}",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncActionUnmute": {
+    "ar": "ألغِ الكتم",
+    "en": "Unmute"
+  },
+  "ncActionSettings": {
+    "ar": "إعدادات التذكير",
+    "en": "Reminder settings"
+  },
+  "ncActionDismiss": {
+    "ar": "أزِل",
+    "en": "Dismiss"
+  },
+  "ncActionFailed": {
+    "ar": "تعذّر ذلك الآن، حاول مرة أخرى",
+    "en": "Couldn't do that right now – try again"
+  },
+  "ncSnoozedToast": {
+    "ar": "أُجّل حتى {time}",
+    "en": "Snoozed until {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMutedToast": {
+    "ar": "{group} مكتوم حتى {when}",
+    "en": "{group} muted until {when}",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncUnmutedToast": {
+    "ar": "عاد {group} إلى وضعه",
+    "en": "{group} is back on",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteTitle": {
+    "ar": "اكتم {group}",
+    "en": "Mute {group}",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncMuteSubtitle": {
+    "ar": "لن يصدر شيء من هذه المجموعة خلال المدة، وستجده هنا في القائمة.",
+    "en": "Nothing from this group will sound for a while – you'll still find it listed here."
+  },
+  "ncMuteForHours": {
+    "ar": "{count, plural, =1{ساعة} =2{ساعتين} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}",
+    "en": "{count, plural, =1{1 hour} other{{count} hours}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncMuteUntilMorning": {
+    "ar": "حتى صباح الغد",
+    "en": "Until tomorrow morning"
+  },
+  "ncMuteWeek": {
+    "ar": "أسبوعًا",
+    "en": "A week"
+  },
+  "ncMutedUntil": {
+    "ar": "مكتوم حتى {when}",
+    "en": "Muted until {when}",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsTitle": {
+    "ar": "الإشعارات",
+    "en": "Notifications"
+  },
+  "ncSettingsSubtitle": {
+    "ar": "ما يرسله كل جزء من مَدار، في مكان واحد",
+    "en": "What each part of Madar sends you, in one place"
+  },
+  "ncSettingsOn": {
+    "ar": "مفعّلة",
+    "en": "On"
+  },
+  "ncSettingsOff": {
+    "ar": "متوقفة",
+    "en": "Off"
+  },
+  "ncSettingsSome": {
+    "ar": "{on} من {total} مفعّلة",
+    "en": "{on} of {total} on",
+    "placeholders": {
+      "on": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsPerItem": {
+    "ar": "تُضبط لكل عنصر",
+    "en": "Set per item"
+  },
+  "ncSettingsComing": {
+    "ar": "{count, plural, =0{لا شيء قادم} =1{واحد قادم} =2{اثنان قادمان} few{{count} قادمة} many{{count} قادمًا} other{{count} قادم}}",
+    "en": "{count, plural, =0{Nothing coming} =1{1 coming} other{{count} coming}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncSettingsOpen": {
+    "ar": "افتح إعدادات {group}",
+    "en": "Open {group} settings",
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "ncSettingsMute": {
+    "ar": "اكتم",
+    "en": "Mute"
+  },
+  "ncPermissionOff": {
+    "ar": "إشعارات مَدار متوقفة من إعدادات الهاتف، فلن يصل شيء مما هنا.",
+    "en": "Madar's notifications are off in the phone's settings, so none of this will arrive."
+  },
+  "ncPermissionTurnOn": {
+    "ar": "فعّلها",
+    "en": "Turn on"
+  },
+  "ncBellLabel": {
+    "ar": "{count, plural, =0{الإشعارات} =1{الإشعارات، واحد جديد} =2{الإشعارات، اثنان جديدان} few{الإشعارات، {count} جديدة} many{الإشعارات، {count} جديدًا} other{الإشعارات، {count} جديد}}",
+    "en": "{count, plural, =0{Notifications} =1{Notifications, 1 new} other{Notifications, {count} new}}",
+    "description": "Screen-reader label of the notification bell",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncActionCancelSnooze": {
+    "ar": "ألغِ التأجيل",
+    "en": "Cancel snooze"
+  },
+  "ncActionSnoozeMenu": {
+    "ar": "أجِّل…",
+    "en": "Snooze…"
+  },
+  "ncSnoozeTitle": {
+    "ar": "أعِده بعد قليل",
+    "en": "Bring it back later"
+  },
+  "ncSnoozeSubtitle": {
+    "ar": "يختفي الآن، ثم يصلك من جديد في الوقت الذي تختاره.",
+    "en": "It leaves now and arrives again when you choose."
+  },
+  "ncOptionUntil": {
+    "ar": "حتى {time}",
+    "en": "until {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncOptionAt": {
+    "ar": "يعود {time}",
+    "en": "back {time}",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ncRecentCount": {
+    "ar": "{count, plural, =1{إشعار واحد} =2{إشعاران} few{{count} إشعارات} many{{count} إشعارًا} other{{count} إشعار}}",
+    "en": "{count, plural, =1{1 notification} other{{count} notifications}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUpcomingCount": {
+    "ar": "{count, plural, =0{لا شيء في الأيام السبعة القادمة} =1{إشعار واحد في الأيام السبعة القادمة} =2{إشعاران في الأيام السبعة القادمة} few{{count} إشعارات في الأيام السبعة القادمة} many{{count} إشعارًا في الأيام السبعة القادمة} other{{count} إشعار في الأيام السبعة القادمة}}",
+    "en": "{count, plural, =0{Nothing in the next seven days} =1{1 notification in the next seven days} other{{count} notifications in the next seven days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncNewCount": {
+    "ar": "{count, plural, =1{واحد جديد} =2{اثنان جديدان} few{{count} جديدة} many{{count} جديدًا} other{{count} جديد}}",
+    "en": "{count, plural, =1{1 new} other{{count} new}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ncUntilTomorrow": {
+    "ar": "غدًا {time}",
+    "en": "tomorrow {time}",
+    "description": "End of a mute or snooze tomorrow, after 'until'",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
+}

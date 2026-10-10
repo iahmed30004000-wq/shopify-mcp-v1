@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget picker's preview of the budget widget (Android 12+). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        style="@style/widget_text_title"
+        android:gravity="start"
+        android:text="@string/widget_budget_title" />
+
+    <TextView
+        style="@style/widget_text_headline"
+        android:layout_marginTop="2dp"
+        android:gravity="start"
+        android:text="@string/widget_sample_budget_amount" />
+
+    <TextView
+        style="@style/widget_text_detail"
+        android:gravity="start"
+        android:text="@string/widget_sample_budget_of" />
+
+    <ProgressBar
+        style="@style/widget_bar"
+        android:layout_marginTop="8dp"
+        android:progress="405" />
+
+    <TextView
+        style="@style/widget_text_note"
+        android:layout_marginTop="6dp"
+        android:gravity="start"
+        android:text="@string/widget_sample_budget_days" />
+</LinearLayout>

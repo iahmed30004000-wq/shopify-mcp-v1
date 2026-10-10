@@ -1,0 +1,73 @@
+{
+  "designLoading": {"ar": "جارٍ التحميل", "en": "Loading", "description": "Semantic label of the orbit loader / loading buttons"},
+  "designEmptyListTitle": {"ar": "لا شيء هنا بعد", "en": "Nothing here yet"},
+  "designEmptyListBody": {"ar": "أضف أول عنصر، ودَعْ مداره يبدأ بالدوران.", "en": "Add your first item and set its orbit in motion."},
+  "designNoDataTitle": {"ar": "لا بيانات بعد", "en": "No data yet"},
+  "designNoDataBody": {"ar": "ستظهر الرسوم هنا حين تتجمّع لديك بضعة أيام.", "en": "Charts appear here once a few days are recorded."},
+  "designNoResultsTitle": {"ar": "لا نتائج", "en": "No results"},
+  "designNoResultsBody": {"ar": "جرّب كلمة أخرى، أو وسّع نطاق البحث.", "en": "Try another word, or widen your search."},
+
+  "designGalleryTitle": {"ar": "معرض التصميم", "en": "Design gallery"},
+  "designGallerySubtitle": {"ar": "مكوّنات مَدار كلّها في مكان واحد", "en": "Every Madar component in one place"},
+  "designGalleryTheme": {"ar": "السِّمة", "en": "Theme"},
+  "designGalleryDirection": {"ar": "اتجاه الكتابة", "en": "Writing direction"},
+  "designDirectionRtl": {"ar": "من اليمين", "en": "Right to left"},
+  "designDirectionLtr": {"ar": "من اليسار", "en": "Left to right"},
+  "designThemeLapis": {"ar": "لازَوَرد", "en": "Lapis"},
+  "designThemeEmerald": {"ar": "زُمُرُّد", "en": "Emerald"},
+  "designThemeDesert": {"ar": "صحراء", "en": "Desert"},
+  "designThemeAurora": {"ar": "شَفَق", "en": "Aurora"},
+  "designThemePearl": {"ar": "لؤلؤ", "en": "Pearl"},
+
+  "designSectionSurfaces": {"ar": "الأسطح الزجاجية", "en": "Glass surfaces"},
+  "designSectionButtons": {"ar": "الأزرار", "en": "Buttons"},
+  "designSectionChips": {"ar": "الاختيارات", "en": "Choices"},
+  "designSectionToggles": {"ar": "المفاتيح", "en": "Toggles"},
+  "designSectionProgress": {"ar": "التقدّم", "en": "Progress"},
+  "designSectionStats": {"ar": "الإحصاءات", "en": "Stats"},
+  "designSectionOrnaments": {"ar": "الزخارف", "en": "Ornaments"},
+  "designSectionLoaders": {"ar": "الانتظار", "en": "Loading"},
+  "designSectionEmpty": {"ar": "الحالات الفارغة", "en": "Empty states"},
+  "designSectionType": {"ar": "الخطوط والألوان", "en": "Type & colour"},
+  "designSeeAll": {"ar": "عرض الكل", "en": "See all"},
+
+  "designPanelTitle": {"ar": "لوحة زجاجية", "en": "Glass panel"},
+  "designPanelBody": {"ar": "ضبابية حقيقية فوق الكون الحيّ، بإطار ذهبي رفيع ولمعة تنساب على مهل.", "en": "Real blur over the living cosmos, with a fine gold hairline and a slowly drifting sheen."},
+  "designCardBody": {"ar": "زجاج مُحاكى للقوائم الطويلة: بلا ضبابية، وبالأناقة نفسها.", "en": "Faux glass for long lists: no blur, the same elegance."},
+
+  "designButtonPrimary": {"ar": "ابدأ يومك", "en": "Start your day"},
+  "designButtonSecondary": {"ar": "لاحقًا", "en": "Later"},
+  "designButtonGhost": {"ar": "التفاصيل", "en": "Details"},
+  "designChipsSingle": {"ar": "اختيار واحد", "en": "Single choice"},
+  "designChipsMulti": {"ar": "اختيارات متعددة", "en": "Multiple choice"},
+
+  "designToggleSound": {"ar": "أصوات الواجهة", "en": "Interface sounds"},
+  "designToggleHaptics": {"ar": "الاهتزاز اللمسي", "en": "Haptics"},
+  "designToggleReduceMotion": {"ar": "تقليل الحركة", "en": "Reduce motion"},
+
+  "designRingDaily": {"ar": "هدف اليوم", "en": "Daily goal"},
+  "designRingPrayers": {"ar": "الصلوات", "en": "Prayers"},
+  "designRingDone": {"ar": "اكتمل", "en": "Complete"},
+
+  "designStatStreak": {"ar": "سلسلة الصلاة", "en": "Prayer streak"},
+  "designStatSteps": {"ar": "الخطوات", "en": "Steps"},
+  "designStatWater": {"ar": "الماء", "en": "Water"},
+  "designStatFocus": {"ar": "التركيز", "en": "Focus"},
+  "designStatVsLastWeek": {"ar": "مقارنةً بالأسبوع الماضي", "en": "vs last week"},
+  "designUnitDays": {
+    "ar": "{count, plural, =0{يوم} =1{يوم} =2{يومان} few{أيام} many{يومًا} other{يوم}}",
+    "en": "{count, plural, =1{day} other{days}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "designUnitLitres": {"ar": "لتر", "en": "L"},
+  "designUnitHours": {"ar": "ساعة", "en": "h"},
+
+  "designOrnamentStar": {"ar": "نجمة ثُمانية", "en": "Eight-point star"},
+  "designOrnamentStar12": {"ar": "نجمة اثنا عشرية", "en": "Twelve-point star"},
+  "designOrnamentRub": {"ar": "ربع الحزب", "en": "Rub el Hizb"},
+  "designOrnamentRosette": {"ar": "وردة هندسية متشابكة", "en": "Girih rosette"},
+  "designOrnamentAstrolabe": {"ar": "حلقة الأسطرلاب", "en": "Astrolabe ring"},
+  "designOrnamentArabesque": {"ar": "إفريز الأرابيسك", "en": "Arabesque band"},
+
+  "designTypeSample": {"ar": "يتنفّس الخطّ العربي هنا براحة: سطور رحبة، وتشكيل واضح، وأرقام منتظمة.", "en": "Arabic breathes easy here: generous lines, clear diacritics, tidy numerals."}
+}

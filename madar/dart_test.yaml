@@ -1,0 +1,4 @@
+tags:
+  screenshot:
+    # Renders full screens to PNG for visual critic passes (not run in CI).
+    timeout: 3x

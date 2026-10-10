@@ -1,0 +1,53 @@
+Madar Quran data build – sources pinned by commit and SHA-256
+  tanzil_full: https://raw.githubusercontent.com/TarteelAI/quran-assets/a5284b17034d36567e4a4bac982a17ba56837448/text/quran-uthmani.txt
+      sha256 9cf746b2c7501b4497d5db95589b99feab1e641a04bf1856c55a74cba39ecbf3
+  tanzil_plain: https://raw.githubusercontent.com/luobeibei0710/quran_offline_demo/54df631cc19cf0a4e454fdcc3840e3bb41773a74/resources/broadcast_quran/tanzil_1_1/quran-uthmani.txt
+      sha256 bf4f57b968d03f4131c070b1e285da9be0e0a108a21c910e872801ca273312c8
+  tanzil_meta: https://raw.githubusercontent.com/TarteelAI/quran-assets/a5284b17034d36567e4a4bac982a17ba56837448/metadata/quran-data.js
+      sha256 4e6ef95731235bc5fbc5ab24090f0cf4c0c7910c380de337fc3678108d1c2af1
+  tanzil_102: https://raw.githubusercontent.com/JQuranTree/jqurantree/09ef93e475685035575909c1e482970a89e17199/src/main/resources/tanzil/quran-uthmani.xml
+      sha256 caeeb8784961f66183efaf7ec86448c65e7a1536ca4204158a972a897b8420be
+  cpfair_tajweed: https://raw.githubusercontent.com/cpfair/quran-tajweed/496f71cd191da00fa2a37ded79dbbddb033bb0ad/output/tajweed.hafs.uthmani-pause-sajdah.json
+      sha256 151d616ad37a4cc21a80f20d5e1104c5b408375107ddd4d71247dea4c05ebf67
+  fawaz_info: https://raw.githubusercontent.com/fawazahmed0/quran-api/47ca096b0976443ba2eab2e45cdf0fb4096a2610/info.json
+      sha256 99c654caeea7c63bf9634703167ea0f806d90c55f98d23e2e82d3e3d1b74075c
+  kfgqpc_hafs: https://raw.githubusercontent.com/fawazahmed0/quran-api/47ca096b0976443ba2eab2e45cdf0fb4096a2610/editions/ara-quranuthmanihaf.json
+      sha256 1102ef9e0bab89a28c90b513b5281687948dddc905dcef2e1af9206bb151b91f
+  qurancom_pages: https://raw.githubusercontent.com/TarteelAI/quran-assets/a5284b17034d36567e4a4bac982a17ba56837448/metadata/page-indices-lookup.json
+      sha256 a0a98c20a4baa67782c77d231b5e520dcc8ab1c9d7f071e8449771f00de9734d
+OK   Tanzil 1.1 (shipped variant) has 6236 ayat
+OK   Tanzil 1.1 (second copy) has 6236 ayat
+OK   both Tanzil 1.1 copies agree letter for letter once the optional signs are removed (0 differing ayat)
+OK   Tanzil copyright block found (Uthmani, Version 1.1)
+OK   114 suras in the metadata
+OK   metadata ayah counts sum to 6236
+OK   every sura has its metadata ayah count
+OK   604 pages (+ the closing sentinel)
+OK   30 juz, 240 hizb quarters
+OK   every juz starts on its first hizb quarter
+OK   15 sajdat
+OK   page / juz / quarter starts ascend
+OK   every page start is a real ayah (0 bad)
+OK   every juz start is a real ayah (0 bad)
+OK   every quarter start is a real ayah (0 bad)
+OK   the 15 ayat carrying ۩ are exactly the metadata sajdat
+OK   ۞ opens 199 ayat: exactly the 199 hizb-quarter starts inside a sura (after fixing {(15, 50): (15, 49)})
+OK   the quarter fix is where the text puts ۞
+OK   page starts agree with fawazahmed0/quran-api
+OK   juz starts agree with fawazahmed0/quran-api
+OK   sajdat (and their kind) agree with fawazahmed0/quran-api
+OK   page starts agree with the Quran.com-derived index ([])
+OK   letter skeletons equal to the independent KFGQPC Hafs text for 6236/6236 ayat ([])
+OK   spot check: 25 well-known ayat match KFGQPC letter for letter ([])
+OK   Tanzil 1.0.2 (annotation base) has 6236 ayat
+OK   cpfair annotations cover 6236 ayat
+OK   all 60057 annotations land on their letters in the 1.0.2 text (out of range 0, misplaced {})
+OK   every rule has a code (set())
+INFO 1.0.2 → 1.1 alignment edits: {'equal': 16953, 'insert': 10616, 'replace': 317}
+OK   after re-indexing, all 60057 annotations land on their letters in the shipped text (out of range 0, misplaced {})
+OK   1890 unchanged ayat keep their offsets exactly (0 moved)
+OK   60057/60057 annotations cover the same letters after re-indexing (0 changed)
+WROTE quran-uthmani.txt: 1396684 bytes, sha256 7f30c647331a61100ebf24a80507dc0fcdd9f2df97f1312b5b2dfcb982a7f326
+WROTE quran-meta.json: 13048 bytes, sha256 fe7f9d0edd8f73aab31f23b09da3104094ed2e4099e0ff72a28674e0196a764c
+WROTE quran-tajweed.txt: 490257 bytes, sha256 f790513d6c2c8554051008c9b01426af1a8032dfbe9f13b19b8b295adb4677d1
+RESULT PASS (0 failed checks)
