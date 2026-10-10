@@ -22936,5 +22936,513 @@
   "ncKindMeal": "تنبيه وجبة",
   "@ncKindMeal": {
     "description": "Notification centre: a meal reminder row's kind"
-  }
+  },
+  "aiPlanExportTitle": "استشارة ذكاء اصطناعي",
+  "@aiPlanExportTitle": {
+    "description": "Data centre tile + sheet title for the AI bridge export"
+  },
+  "aiPlanExportBody": "ملف واحد فيه خلاصة بياناتك والسؤال. ابعته لأي تطبيق ذكاء اصطناعي ورجّع الجواب لمَدار.",
+  "aiPlanExportSubtitle": "بلا حساب وبلا مفتاح",
+  "aiPlanStepChoose": "اختار شو تبعت",
+  "aiPlanStepChooseBody": "نفس الأقسام اللي بتختارها للخلاصة: الصلاة، الصحة، المصاري، الأهل، الشغل، التعلّم، الجسم والسفر.",
+  "aiPlanChooseAction": "اختار الأقسام",
+  "aiPlanChangeChoice": "بدّل الأقسام",
+  "aiPlanChooseFirst": "اختار الأقسام أول، بعدها ينفتح الملف.",
+  "aiPlanAskLabel": "شو بدك تسأله؟",
+  "aiPlanAskHint": "مثلاً: شو أحسن إشي أعمله الشهر الجاي؟",
+  "aiPlanAskOptional": "اختياري، وبينبعت مع الملف كما كتبته.",
+  "aiPlanFileReady": "ملفك جاهز",
+  "aiPlanHowTo": "افتح تطبيق الذكاء الاصطناعي، أرفق الملف أو الصق النص، وارجع بالجواب لمَدار.",
+  "aiPlanLeftOut": "اللي ضل بالجوال: ملاحظاتك المكتوبة، كلام القلق والوجع، ملاحظات الأكل، أرقام الهاتف وأرقام الوثائق والحسابات.",
+  "aiPlanPromptIncluded": "جوا الملف كمان الطلب نفسه وشكل الجواب المطلوب، فما بتحتاج تكتب إشي.",
+  "aiPlanAnswerBack": "لما يرجع الجواب، افتح «استيراد خطة» وشوف كل اقتراح مع سببه قبل ما توافق.",
+  "aiPlanDefaultName": "خطة {date}",
+  "@aiPlanDefaultName": {
+    "description": "Default, editable name of an imported plan",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProgress": "{done} من {total}",
+  "@aiPlanProgress": {
+    "description": "Checklist counter of an imported plan",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistEmpty": "لسا ما وافقت على ولا اقتراح من هذي الخطة.",
+  "aiPlanClaimsTitle": "ادّعاءات لازم تاخدها بحذر",
+  "aiPlanSourcePartial": "المصدر ناقص: {detail}",
+  "@aiPlanSourcePartial": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanKindTask": "مهمة",
+  "aiPlanKindHabit": "عادة",
+  "aiPlanKindRoutine": "روتين",
+  "aiPlanKindReminder": "تذكير",
+  "aiPlanKindNote": "ملاحظة",
+  "aiPlanKindFood": "أكل جديد",
+  "aiPlanKindMealChange": "تغيير بخطة الأكل",
+  "aiPlanKindAvoidItem": "ممنوع",
+  "aiPlanKindTrackedSign": "علامة تتابعها",
+  "aiPlanKindLabTracker": "تحليل تتابعه",
+  "aiPlanKindBudgetTweak": "تعديل بالميزانية",
+  "aiPlanKindLearningProgram": "برنامج تعلّم",
+  "aiPlanKindRecipe": "وصفة",
+  "aiPlanKindPantryItem": "مونة",
+  "aiPlanChangeChecklist": "بيتسجّل سطر بالقائمة تشطّبه لما تعمله.",
+  "aiPlanChangeTaskWhen": "موعده: {when}",
+  "@aiPlanChangeTaskWhen": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeHabitAdd": "بتتزاد عادة جديدة: «{name}»",
+  "@aiPlanChangeHabitAdd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeHabitBack": "بترجع تشغّل عادة «{name}» اللي كانت مطفية",
+  "@aiPlanChangeHabitBack": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRoutineTimes": "أوقاتها: {times}",
+  "@aiPlanChangeRoutineTimes": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRoutineSteps": "جواها خطوات: {steps}",
+  "@aiPlanChangeRoutineSteps": {
+    "placeholders": {
+      "steps": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeReminder": "تذكير على «{owner}» الساعة {time}",
+  "@aiPlanChangeReminder": {
+    "placeholders": {
+      "owner": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeNote": "ملاحظة بتتخزّن مع الخطة، وما بتغيّر إشي ببياناتك.",
+  "aiPlanChangeFoodAdd": "بيتزاد «{name}» لمكتبة أكلك",
+  "@aiPlanChangeFoodAdd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeFoodUpdate": "بيتعدّل «{name}» بمكتبة أكلك",
+  "@aiPlanChangeFoodUpdate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealAdd": "بيتزاد «{food}» على وجبة «{slot}»",
+  "@aiPlanChangeMealAdd": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "slot": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealRemove": "بينشال «{food}» من وجبة «{slot}»",
+  "@aiPlanChangeMealRemove": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "slot": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealNewSlot": "وجبة جديدة «{name}» الساعة {time}",
+  "@aiPlanChangeMealNewSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealMove": "وجبة «{slot}» بتصير الساعة {time}",
+  "@aiPlanChangeMealMove": {
+    "placeholders": {
+      "slot": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeAvoid": "بيتزاد «{name}» على قائمة الممنوعات",
+  "@aiPlanChangeAvoid": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeSign": "بتصير تتابع «{name}» كل يوم",
+  "@aiPlanChangeSign": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeLab": "بيتزاد تحليل «{name}» للمتابعة",
+  "@aiPlanChangeLab": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeBudgetAmount": "«{name}» بتصير {amount}",
+  "@aiPlanChangeBudgetAmount": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeBudgetPercent": "«{name}» بتصير {percent}٪",
+  "@aiPlanChangeBudgetPercent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeGoal": "هدف تعلّم جديد: «{name}» — {target}",
+  "@aiPlanChangeGoal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeDeferred": "محفوظ للنسخة الجاية، وما بينطبّق هلأ.",
+  "aiPlanBeforeNothing": "ما في إشي زي هيك عندك هلأ.",
+  "aiPlanBeforeHabitOff": "عندك عادة «{name}» بس مطفية.",
+  "@aiPlanBeforeHabitOff": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeHabitOn": "عادة «{name}» شغالة عندك من قبل.",
+  "@aiPlanBeforeHabitOn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeEnvelope": "هلأ «{name}»: {detail}",
+  "@aiPlanBeforeEnvelope": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeSlot": "وجبة «{name}» هلأ الساعة {detail}",
+  "@aiPlanBeforeSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeFoodKnown": "«{name}» موجود بمكتبة أكلك.",
+  "@aiPlanBeforeFoodKnown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeFoodInSlot": "وجبة «{name}» موجودة عندك.",
+  "@aiPlanBeforeFoodInSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeGoal": "عندك هدف «{name}»: {detail}",
+  "@aiPlanBeforeGoal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeLab": "تحليل «{name}» موجود عندك.",
+  "@aiPlanBeforeLab": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeTracker": "عندك متابعة باسم «{name}».",
+  "@aiPlanBeforeTracker": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeAvoid": "«{name}» موجود بقائمة الممنوعات.",
+  "@aiPlanBeforeAvoid": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanStatusReady": "جاهز لموافقتك",
+  "aiPlanStatusNeedsEdit": "محتاج تعديل منك",
+  "aiPlanStatusBlocked": "لازم توافق على اقتراح قبله",
+  "aiPlanStatusDeferred": "محفوظ لبعدين",
+  "aiPlanStatusRejected": "مرفوض",
+  "aiPlanEditDayPassed": "اليوم اللي حدّده فات؛ اختار يوم جديد.",
+  "aiPlanEditEnvelopeMode": "هذا المصروف محسوب بطريقة ثانية (مبلغ مقابل نسبة)؛ عدّل القيمة.",
+  "aiPlanEditFoodMissing": "الأكل المذكور مش بمكتبتك؛ أضفه أو بدّله.",
+  "aiPlanEditMealPlanMissing": "ما عندك خطة أكل تزيد عليها وجبة.",
+  "aiPlanProblemNotJson": "الجواب اللي رجع مش ملف خطة؛ انسخ جواب الذكاء الاصطناعي كامل وجرّب كمان مرة.",
+  "aiPlanProblemNotAnObject": "الملف فيه قيمة وحدة بس، مش خطة.",
+  "aiPlanProblemNotAPlan": "هذا الملف مش «خطة مدار». تأكد إنك بعتت طلب مَدار ورجّعت الجواب كامل.",
+  "aiPlanProblemVersion": "الخطة مكتوبة بنسخة ثانية ({value})؛ هذي النسخة من مَدار بتقرا نسخة {expected}.",
+  "@aiPlanProblemVersion": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemTooBig": "الملف كبير كثير ({size})؛ أكبر حجم مقبول {limit}.",
+  "@aiPlanProblemTooBig": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemTooDeep": "شكل الملف متشعّب كثير، وفي إشي غلط فيه.",
+  "aiPlanProblemTrailingText": "كان في كلام زيادة حول الملف؛ أخذنا الخطة اللي جواه بس.",
+  "aiPlanProblemNoItems": "ما في ولا اقتراح جوا الخطة.",
+  "aiPlanProblemTooMany": "عدد الاقتراحات أكبر من اللي بنقبله ({limit}).",
+  "@aiPlanProblemTooMany": {
+    "placeholders": {
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemDuplicate": "في اقتراحين بنفس الرقم «{value}»، فما قدرنا نفرّق بينهم.",
+  "@aiPlanProblemDuplicate": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemMissingField": "ناقص «{field}».",
+  "@aiPlanProblemMissingField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemMissingReason": "الاقتراح بدون سبب، ومَدار ما بيقبل اقتراح بدون سبب.",
+  "aiPlanProblemWrongType": "القيمة في «{field}» نوعها غلط.",
+  "@aiPlanProblemWrongType": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBlank": "«{field}» فاضي.",
+  "@aiPlanProblemBlank": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemTooLong": "«{field}» طويل كثير؛ الحد {limit}.",
+  "@aiPlanProblemTooLong": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownField": "في معلومة ما بنعرفها: «{field}». مَدار ما بياخد إشي مش مكتوب بالاتفاق.",
+  "@aiPlanProblemUnknownField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownKind": "نوع اقتراح مش معروف: «{value}».",
+  "@aiPlanProblemUnknownKind": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownValue": "قيمة مش معروفة في «{field}»: «{value}».",
+  "@aiPlanProblemUnknownValue": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemOutOfRange": "الرقم في «{field}» خارج الحدود المسموحة.",
+  "@aiPlanProblemOutOfRange": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBadDay": "تاريخ مش مفهوم أو بعيد كثير: «{value}».",
+  "@aiPlanProblemBadDay": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBadTime": "وقت مش مفهوم: «{value}».",
+  "@aiPlanProblemBadTime": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBadWeekday": "يوم أسبوع غلط: «{value}».",
+  "@aiPlanProblemBadWeekday": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownRef": "«{value}» مش موجود عندك بمَدار؛ الذكاء الاصطناعي اختلق الاسم، وما بنقدر نطبّقه.",
+  "@aiPlanProblemUnknownRef": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemMissingDep": "هذا الاقتراح بيعتمد على اقتراح «{value}» اللي مش موجود بالخطة.",
+  "@aiPlanProblemMissingDep": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemCircularDep": "في اقتراحات بتعتمد على بعضها بشكل دائري.",
+  "aiPlanProblemControlChars": "في رموز غريبة جوا «{field}».",
+  "@aiPlanProblemControlChars": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemHealth": "هذا اقتراح طبي («{value}»). مَدار بيرفض أي تشخيص أو علاج أو دوا أو جرعة؛ الصحة هون متابعة وممارسة بس، والدوا مرجعه دكتورك.",
+  "@aiPlanProblemHealth": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemDeferred": "هذا النوع لسا مش جاهز بهذي النسخة؛ محفوظ ورح يظهر لما تجهز «السفرة».",
+  "aiPlanProblemUnknown": "في إشي غلط بهذا البند."
 }

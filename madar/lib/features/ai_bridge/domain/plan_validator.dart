@@ -303,7 +303,7 @@ class PlanValidator {
         );
         reason = _clip(reason, PlanLimits.maxReasonLength);
       }
-      _controls(reason, '$path.reason', id);
+      if (reason != null) _controls(reason, '$path.reason', id);
     }
     if (title == null || reason == null) return null;
 

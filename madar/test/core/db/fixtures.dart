@@ -714,5 +714,46 @@ Future<void> populateAllTables(MadarDatabase db) async {
       HifzReviewsCompanion.insert(itemId: 'hifz-1', at: tLocal, grade: 4, intervalBefore: 1, intervalAfter: 6, easeAfter: 2.36),
       HifzReviewsCompanion.insert(itemId: 'hifz-1', at: tLocal, grade: 0, intervalBefore: 6, intervalAfter: 1, easeAfter: 2.16),
     ]);
+    // ------------------------------------------- the AI bridge (schema v4)
+    b.insertAll(db.appliedPlans, [
+      AppliedPlansCompanion.insert(
+        id: const Value('plan-ai-1'),
+        planKey: 'a' * 64,
+        name: 'خطة الشهر',
+        raw: '{"madar":"plan","version":1,"items":[]}',
+        formatVersion: const Value(1),
+        title: const Value('خطة قصيرة'),
+        summary: const Value('ملخص'),
+        origin: const Value(PlanOrigin.share),
+        source: const Value({
+          'kind': 'video',
+          'claimsFlagged': ['ادّعاء كبير'],
+        }),
+        importedAt: Value(tLocal),
+        itemCount: const Value(2),
+      ),
+      AppliedPlansCompanion.insert(planKey: 'b' * 64, name: 'sparse', raw: '{}'),
+    ]);
+    b.insertAll(db.appliedPlanItems, [
+      AppliedPlanItemsCompanion.insert(
+        id: const Value('plan-item-1'),
+        planId: 'plan-ai-1',
+        itemKey: 'h1',
+        kind: 'habit',
+        title: 'مشي بعد العشا',
+        reason: 'لأن بياناتك تقول إنك ما مشيت',
+        state: const Value(PlanItemState.applied),
+        payload: const Value({'id': 'h1', 'kind': 'habit'}),
+        beforeJson: const Value({'kind': 'nothingYet'}),
+        afterJson: const Value({'name': 'مشي بعد العشا'}),
+        refTable: const Value('habits'),
+        refId: const Value('habit-1'),
+        decidedAt: Value(tLocal),
+        done: const Value(true),
+        doneAt: Value(tMicros),
+        sortOrder: const Value(3),
+      ),
+      AppliedPlanItemsCompanion.insert(planId: 'plan-ai-1', itemKey: 't1', kind: 'task', title: 'مهمة', reason: 'سبب'),
+    ]);
   });
 }

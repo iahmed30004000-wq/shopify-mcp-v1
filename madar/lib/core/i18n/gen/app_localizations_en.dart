@@ -24464,4 +24464,444 @@ class L10nEn extends L10n {
 
   @override
   String get ncKindMeal => 'Meal reminder';
+
+  @override
+  String get aiPlanExportTitle => 'Ask an AI';
+
+  @override
+  String get aiPlanExportBody =>
+      'One file with a summary of your data and the question. Send it to any AI app and bring the answer back to Madar.';
+
+  @override
+  String get aiPlanExportSubtitle => 'No account, no key';
+
+  @override
+  String get aiPlanStepChoose => 'Choose what to send';
+
+  @override
+  String get aiPlanStepChooseBody =>
+      'The same sections you pick for the summary: prayer, health, money, family, work, learning, body and travel.';
+
+  @override
+  String get aiPlanChooseAction => 'Pick the sections';
+
+  @override
+  String get aiPlanChangeChoice => 'Change the sections';
+
+  @override
+  String get aiPlanChooseFirst =>
+      'Pick the sections first, then the file is built.';
+
+  @override
+  String get aiPlanAskLabel => 'What do you want to ask?';
+
+  @override
+  String get aiPlanAskHint =>
+      'For example: what is the best thing I can do next month?';
+
+  @override
+  String get aiPlanAskOptional =>
+      'Optional, and it goes out with the file exactly as you wrote it.';
+
+  @override
+  String get aiPlanFileReady => 'Your file is ready';
+
+  @override
+  String get aiPlanHowTo =>
+      'Open your AI app, attach the file or paste the text, then bring the answer back to Madar.';
+
+  @override
+  String get aiPlanLeftOut =>
+      'Staying on the phone: your written notes, worry and pain text, food notes, phone, document and account numbers.';
+
+  @override
+  String get aiPlanPromptIncluded =>
+      'The file also carries the request itself and the exact answer shape, so you need not write anything.';
+
+  @override
+  String get aiPlanAnswerBack =>
+      'When the answer comes back, open “Import a plan” and read every suggestion with its reason before you approve it.';
+
+  @override
+  String aiPlanDefaultName(String date) {
+    return 'Plan of $date';
+  }
+
+  @override
+  String aiPlanProgress(String done, String total) {
+    return '$done of $total';
+  }
+
+  @override
+  String get aiPlanChecklistEmpty =>
+      'You have not approved any suggestion from this plan yet.';
+
+  @override
+  String get aiPlanClaimsTitle => 'Claims to take with care';
+
+  @override
+  String aiPlanSourcePartial(String detail) {
+    return 'The source is incomplete: $detail';
+  }
+
+  @override
+  String get aiPlanKindTask => 'Task';
+
+  @override
+  String get aiPlanKindHabit => 'Habit';
+
+  @override
+  String get aiPlanKindRoutine => 'Routine';
+
+  @override
+  String get aiPlanKindReminder => 'Reminder';
+
+  @override
+  String get aiPlanKindNote => 'Note';
+
+  @override
+  String get aiPlanKindFood => 'New food';
+
+  @override
+  String get aiPlanKindMealChange => 'Meal plan change';
+
+  @override
+  String get aiPlanKindAvoidItem => 'Avoid';
+
+  @override
+  String get aiPlanKindTrackedSign => 'Sign to track';
+
+  @override
+  String get aiPlanKindLabTracker => 'Lab to track';
+
+  @override
+  String get aiPlanKindBudgetTweak => 'Budget change';
+
+  @override
+  String get aiPlanKindLearningProgram => 'Learning programme';
+
+  @override
+  String get aiPlanKindRecipe => 'Recipe';
+
+  @override
+  String get aiPlanKindPantryItem => 'Pantry item';
+
+  @override
+  String get aiPlanChangeChecklist =>
+      'It becomes a line on the list that you tick off when you have done it.';
+
+  @override
+  String aiPlanChangeTaskWhen(String when) {
+    return 'When: $when';
+  }
+
+  @override
+  String aiPlanChangeHabitAdd(String name) {
+    return 'A new habit: “$name”';
+  }
+
+  @override
+  String aiPlanChangeHabitBack(String name) {
+    return 'Switches your habit “$name” back on';
+  }
+
+  @override
+  String aiPlanChangeRoutineTimes(String times) {
+    return 'Its times: $times';
+  }
+
+  @override
+  String aiPlanChangeRoutineSteps(String steps) {
+    return 'Its steps: $steps';
+  }
+
+  @override
+  String aiPlanChangeReminder(String owner, String time) {
+    return 'A reminder on “$owner” at $time';
+  }
+
+  @override
+  String get aiPlanChangeNote =>
+      'A note kept with the plan; it changes nothing in your data.';
+
+  @override
+  String aiPlanChangeFoodAdd(String name) {
+    return 'Adds “$name” to your food library';
+  }
+
+  @override
+  String aiPlanChangeFoodUpdate(String name) {
+    return 'Updates “$name” in your food library';
+  }
+
+  @override
+  String aiPlanChangeMealAdd(String food, String slot) {
+    return 'Adds “$food” to the meal “$slot”';
+  }
+
+  @override
+  String aiPlanChangeMealRemove(String food, String slot) {
+    return 'Removes “$food” from the meal “$slot”';
+  }
+
+  @override
+  String aiPlanChangeMealNewSlot(String name, String time) {
+    return 'A new meal “$name” at $time';
+  }
+
+  @override
+  String aiPlanChangeMealMove(String slot, String time) {
+    return 'The meal “$slot” moves to $time';
+  }
+
+  @override
+  String aiPlanChangeAvoid(String name) {
+    return 'Adds “$name” to your avoid list';
+  }
+
+  @override
+  String aiPlanChangeSign(String name) {
+    return 'You start tracking “$name” every day';
+  }
+
+  @override
+  String aiPlanChangeLab(String name) {
+    return 'Adds the lab test “$name” to follow';
+  }
+
+  @override
+  String aiPlanChangeBudgetAmount(String name, String amount) {
+    return '“$name” becomes $amount';
+  }
+
+  @override
+  String aiPlanChangeBudgetPercent(String name, String percent) {
+    return '“$name” becomes $percent%';
+  }
+
+  @override
+  String aiPlanChangeGoal(String name, String target) {
+    return 'A new learning goal: “$name” — $target';
+  }
+
+  @override
+  String get aiPlanChangeDeferred =>
+      'Kept for a later version; nothing is applied now.';
+
+  @override
+  String get aiPlanBeforeNothing => 'You have nothing like it today.';
+
+  @override
+  String aiPlanBeforeHabitOff(String name) {
+    return 'You have the habit “$name”, switched off.';
+  }
+
+  @override
+  String aiPlanBeforeHabitOn(String name) {
+    return 'The habit “$name” is already on.';
+  }
+
+  @override
+  String aiPlanBeforeEnvelope(String name, String detail) {
+    return 'Today “$name”: $detail';
+  }
+
+  @override
+  String aiPlanBeforeSlot(String name, String detail) {
+    return 'The meal “$name” is at $detail today';
+  }
+
+  @override
+  String aiPlanBeforeFoodKnown(String name) {
+    return '“$name” is already in your food library.';
+  }
+
+  @override
+  String aiPlanBeforeFoodInSlot(String name) {
+    return 'You already have the meal “$name”.';
+  }
+
+  @override
+  String aiPlanBeforeGoal(String name, String detail) {
+    return 'You have the goal “$name”: $detail';
+  }
+
+  @override
+  String aiPlanBeforeLab(String name) {
+    return 'The lab test “$name” already exists.';
+  }
+
+  @override
+  String aiPlanBeforeTracker(String name) {
+    return 'You already track “$name”.';
+  }
+
+  @override
+  String aiPlanBeforeAvoid(String name) {
+    return '“$name” is already on your avoid list.';
+  }
+
+  @override
+  String get aiPlanStatusReady => 'Ready for your yes';
+
+  @override
+  String get aiPlanStatusNeedsEdit => 'Needs an edit from you';
+
+  @override
+  String get aiPlanStatusBlocked => 'Approve another suggestion first';
+
+  @override
+  String get aiPlanStatusDeferred => 'Kept for later';
+
+  @override
+  String get aiPlanStatusRejected => 'Refused';
+
+  @override
+  String get aiPlanEditDayPassed =>
+      'The day it names has passed; pick a new one.';
+
+  @override
+  String get aiPlanEditEnvelopeMode =>
+      'This envelope is set the other way round (amount versus percentage); edit the value.';
+
+  @override
+  String get aiPlanEditFoodMissing =>
+      'That food is not in your library; add it or change it.';
+
+  @override
+  String get aiPlanEditMealPlanMissing =>
+      'You have no meal plan to add a meal to.';
+
+  @override
+  String get aiPlanProblemNotJson =>
+      'The answer is not a plan file; copy the AI’s whole answer and try again.';
+
+  @override
+  String get aiPlanProblemNotAnObject =>
+      'The file holds a single value, not a plan.';
+
+  @override
+  String get aiPlanProblemNotAPlan =>
+      'This file is not a Madar plan. Check that you sent Madar’s request and brought the whole answer back.';
+
+  @override
+  String aiPlanProblemVersion(String value, String expected) {
+    return 'The plan uses another version ($value); this Madar reads version $expected.';
+  }
+
+  @override
+  String aiPlanProblemTooBig(String size, String limit) {
+    return 'The file is too big ($size); the most Madar takes is $limit.';
+  }
+
+  @override
+  String get aiPlanProblemTooDeep =>
+      'The file nests far too deep; something is wrong with it.';
+
+  @override
+  String get aiPlanProblemTrailingText =>
+      'There was extra text around the file; only the plan inside it was taken.';
+
+  @override
+  String get aiPlanProblemNoItems => 'The plan carries no suggestion at all.';
+
+  @override
+  String aiPlanProblemTooMany(String limit) {
+    return 'There are more suggestions than Madar takes ($limit).';
+  }
+
+  @override
+  String aiPlanProblemDuplicate(String value) {
+    return 'Two suggestions share the id “$value”, so they cannot be told apart.';
+  }
+
+  @override
+  String aiPlanProblemMissingField(String field) {
+    return '“$field” is missing.';
+  }
+
+  @override
+  String get aiPlanProblemMissingReason =>
+      'The suggestion gives no reason, and Madar does not accept a suggestion without one.';
+
+  @override
+  String aiPlanProblemWrongType(String field) {
+    return 'The value of “$field” is the wrong kind.';
+  }
+
+  @override
+  String aiPlanProblemBlank(String field) {
+    return '“$field” is empty.';
+  }
+
+  @override
+  String aiPlanProblemTooLong(String field, String limit) {
+    return '“$field” is too long; the limit is $limit.';
+  }
+
+  @override
+  String aiPlanProblemUnknownField(String field) {
+    return 'There is a field Madar does not know: “$field”. Madar takes nothing that is not in the contract.';
+  }
+
+  @override
+  String aiPlanProblemUnknownKind(String value) {
+    return 'Unknown kind of suggestion: “$value”.';
+  }
+
+  @override
+  String aiPlanProblemUnknownValue(String field, String value) {
+    return 'Unknown value in “$field”: “$value”.';
+  }
+
+  @override
+  String aiPlanProblemOutOfRange(String field) {
+    return 'The number in “$field” is out of range.';
+  }
+
+  @override
+  String aiPlanProblemBadDay(String value) {
+    return 'A date that cannot be read, or is far too far away: “$value”.';
+  }
+
+  @override
+  String aiPlanProblemBadTime(String value) {
+    return 'A time that cannot be read: “$value”.';
+  }
+
+  @override
+  String aiPlanProblemBadWeekday(String value) {
+    return 'A weekday that is not right: “$value”.';
+  }
+
+  @override
+  String aiPlanProblemUnknownRef(String value) {
+    return '“$value” does not exist in your Madar; the AI invented the name, so it cannot be applied.';
+  }
+
+  @override
+  String aiPlanProblemMissingDep(String value) {
+    return 'This suggestion depends on “$value”, which is not in the plan.';
+  }
+
+  @override
+  String get aiPlanProblemCircularDep =>
+      'Some suggestions depend on each other in a circle.';
+
+  @override
+  String aiPlanProblemControlChars(String field) {
+    return 'There are odd characters inside “$field”.';
+  }
+
+  @override
+  String aiPlanProblemHealth(String value) {
+    return 'This is medical advice (“$value”). Madar refuses any diagnosis, treatment, medicine or dose; health here is tracking and practising only, and medication is your doctor’s.';
+  }
+
+  @override
+  String get aiPlanProblemDeferred =>
+      'This kind is not ready in this version; it is kept and will show once the kitchen planet arrives.';
+
+  @override
+  String get aiPlanProblemUnknown => 'Something about this item is wrong.';
 }

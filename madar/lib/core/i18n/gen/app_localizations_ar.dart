@@ -25094,4 +25094,435 @@ class L10nAr extends L10n {
 
   @override
   String get ncKindMeal => 'تنبيه وجبة';
+
+  @override
+  String get aiPlanExportTitle => 'استشارة ذكاء اصطناعي';
+
+  @override
+  String get aiPlanExportBody =>
+      'ملف واحد فيه خلاصة بياناتك والسؤال. ابعته لأي تطبيق ذكاء اصطناعي ورجّع الجواب لمَدار.';
+
+  @override
+  String get aiPlanExportSubtitle => 'بلا حساب وبلا مفتاح';
+
+  @override
+  String get aiPlanStepChoose => 'اختار شو تبعت';
+
+  @override
+  String get aiPlanStepChooseBody =>
+      'نفس الأقسام اللي بتختارها للخلاصة: الصلاة، الصحة، المصاري، الأهل، الشغل، التعلّم، الجسم والسفر.';
+
+  @override
+  String get aiPlanChooseAction => 'اختار الأقسام';
+
+  @override
+  String get aiPlanChangeChoice => 'بدّل الأقسام';
+
+  @override
+  String get aiPlanChooseFirst => 'اختار الأقسام أول، بعدها ينفتح الملف.';
+
+  @override
+  String get aiPlanAskLabel => 'شو بدك تسأله؟';
+
+  @override
+  String get aiPlanAskHint => 'مثلاً: شو أحسن إشي أعمله الشهر الجاي؟';
+
+  @override
+  String get aiPlanAskOptional => 'اختياري، وبينبعت مع الملف كما كتبته.';
+
+  @override
+  String get aiPlanFileReady => 'ملفك جاهز';
+
+  @override
+  String get aiPlanHowTo =>
+      'افتح تطبيق الذكاء الاصطناعي، أرفق الملف أو الصق النص، وارجع بالجواب لمَدار.';
+
+  @override
+  String get aiPlanLeftOut =>
+      'اللي ضل بالجوال: ملاحظاتك المكتوبة، كلام القلق والوجع، ملاحظات الأكل، أرقام الهاتف وأرقام الوثائق والحسابات.';
+
+  @override
+  String get aiPlanPromptIncluded =>
+      'جوا الملف كمان الطلب نفسه وشكل الجواب المطلوب، فما بتحتاج تكتب إشي.';
+
+  @override
+  String get aiPlanAnswerBack =>
+      'لما يرجع الجواب، افتح «استيراد خطة» وشوف كل اقتراح مع سببه قبل ما توافق.';
+
+  @override
+  String aiPlanDefaultName(String date) {
+    return 'خطة $date';
+  }
+
+  @override
+  String aiPlanProgress(String done, String total) {
+    return '$done من $total';
+  }
+
+  @override
+  String get aiPlanChecklistEmpty =>
+      'لسا ما وافقت على ولا اقتراح من هذي الخطة.';
+
+  @override
+  String get aiPlanClaimsTitle => 'ادّعاءات لازم تاخدها بحذر';
+
+  @override
+  String aiPlanSourcePartial(String detail) {
+    return 'المصدر ناقص: $detail';
+  }
+
+  @override
+  String get aiPlanKindTask => 'مهمة';
+
+  @override
+  String get aiPlanKindHabit => 'عادة';
+
+  @override
+  String get aiPlanKindRoutine => 'روتين';
+
+  @override
+  String get aiPlanKindReminder => 'تذكير';
+
+  @override
+  String get aiPlanKindNote => 'ملاحظة';
+
+  @override
+  String get aiPlanKindFood => 'أكل جديد';
+
+  @override
+  String get aiPlanKindMealChange => 'تغيير بخطة الأكل';
+
+  @override
+  String get aiPlanKindAvoidItem => 'ممنوع';
+
+  @override
+  String get aiPlanKindTrackedSign => 'علامة تتابعها';
+
+  @override
+  String get aiPlanKindLabTracker => 'تحليل تتابعه';
+
+  @override
+  String get aiPlanKindBudgetTweak => 'تعديل بالميزانية';
+
+  @override
+  String get aiPlanKindLearningProgram => 'برنامج تعلّم';
+
+  @override
+  String get aiPlanKindRecipe => 'وصفة';
+
+  @override
+  String get aiPlanKindPantryItem => 'مونة';
+
+  @override
+  String get aiPlanChangeChecklist => 'بيتسجّل سطر بالقائمة تشطّبه لما تعمله.';
+
+  @override
+  String aiPlanChangeTaskWhen(String when) {
+    return 'موعده: $when';
+  }
+
+  @override
+  String aiPlanChangeHabitAdd(String name) {
+    return 'بتتزاد عادة جديدة: «$name»';
+  }
+
+  @override
+  String aiPlanChangeHabitBack(String name) {
+    return 'بترجع تشغّل عادة «$name» اللي كانت مطفية';
+  }
+
+  @override
+  String aiPlanChangeRoutineTimes(String times) {
+    return 'أوقاتها: $times';
+  }
+
+  @override
+  String aiPlanChangeRoutineSteps(String steps) {
+    return 'جواها خطوات: $steps';
+  }
+
+  @override
+  String aiPlanChangeReminder(String owner, String time) {
+    return 'تذكير على «$owner» الساعة $time';
+  }
+
+  @override
+  String get aiPlanChangeNote =>
+      'ملاحظة بتتخزّن مع الخطة، وما بتغيّر إشي ببياناتك.';
+
+  @override
+  String aiPlanChangeFoodAdd(String name) {
+    return 'بيتزاد «$name» لمكتبة أكلك';
+  }
+
+  @override
+  String aiPlanChangeFoodUpdate(String name) {
+    return 'بيتعدّل «$name» بمكتبة أكلك';
+  }
+
+  @override
+  String aiPlanChangeMealAdd(String food, String slot) {
+    return 'بيتزاد «$food» على وجبة «$slot»';
+  }
+
+  @override
+  String aiPlanChangeMealRemove(String food, String slot) {
+    return 'بينشال «$food» من وجبة «$slot»';
+  }
+
+  @override
+  String aiPlanChangeMealNewSlot(String name, String time) {
+    return 'وجبة جديدة «$name» الساعة $time';
+  }
+
+  @override
+  String aiPlanChangeMealMove(String slot, String time) {
+    return 'وجبة «$slot» بتصير الساعة $time';
+  }
+
+  @override
+  String aiPlanChangeAvoid(String name) {
+    return 'بيتزاد «$name» على قائمة الممنوعات';
+  }
+
+  @override
+  String aiPlanChangeSign(String name) {
+    return 'بتصير تتابع «$name» كل يوم';
+  }
+
+  @override
+  String aiPlanChangeLab(String name) {
+    return 'بيتزاد تحليل «$name» للمتابعة';
+  }
+
+  @override
+  String aiPlanChangeBudgetAmount(String name, String amount) {
+    return '«$name» بتصير $amount';
+  }
+
+  @override
+  String aiPlanChangeBudgetPercent(String name, String percent) {
+    return '«$name» بتصير $percent٪';
+  }
+
+  @override
+  String aiPlanChangeGoal(String name, String target) {
+    return 'هدف تعلّم جديد: «$name» — $target';
+  }
+
+  @override
+  String get aiPlanChangeDeferred => 'محفوظ للنسخة الجاية، وما بينطبّق هلأ.';
+
+  @override
+  String get aiPlanBeforeNothing => 'ما في إشي زي هيك عندك هلأ.';
+
+  @override
+  String aiPlanBeforeHabitOff(String name) {
+    return 'عندك عادة «$name» بس مطفية.';
+  }
+
+  @override
+  String aiPlanBeforeHabitOn(String name) {
+    return 'عادة «$name» شغالة عندك من قبل.';
+  }
+
+  @override
+  String aiPlanBeforeEnvelope(String name, String detail) {
+    return 'هلأ «$name»: $detail';
+  }
+
+  @override
+  String aiPlanBeforeSlot(String name, String detail) {
+    return 'وجبة «$name» هلأ الساعة $detail';
+  }
+
+  @override
+  String aiPlanBeforeFoodKnown(String name) {
+    return '«$name» موجود بمكتبة أكلك.';
+  }
+
+  @override
+  String aiPlanBeforeFoodInSlot(String name) {
+    return 'وجبة «$name» موجودة عندك.';
+  }
+
+  @override
+  String aiPlanBeforeGoal(String name, String detail) {
+    return 'عندك هدف «$name»: $detail';
+  }
+
+  @override
+  String aiPlanBeforeLab(String name) {
+    return 'تحليل «$name» موجود عندك.';
+  }
+
+  @override
+  String aiPlanBeforeTracker(String name) {
+    return 'عندك متابعة باسم «$name».';
+  }
+
+  @override
+  String aiPlanBeforeAvoid(String name) {
+    return '«$name» موجود بقائمة الممنوعات.';
+  }
+
+  @override
+  String get aiPlanStatusReady => 'جاهز لموافقتك';
+
+  @override
+  String get aiPlanStatusNeedsEdit => 'محتاج تعديل منك';
+
+  @override
+  String get aiPlanStatusBlocked => 'لازم توافق على اقتراح قبله';
+
+  @override
+  String get aiPlanStatusDeferred => 'محفوظ لبعدين';
+
+  @override
+  String get aiPlanStatusRejected => 'مرفوض';
+
+  @override
+  String get aiPlanEditDayPassed => 'اليوم اللي حدّده فات؛ اختار يوم جديد.';
+
+  @override
+  String get aiPlanEditEnvelopeMode =>
+      'هذا المصروف محسوب بطريقة ثانية (مبلغ مقابل نسبة)؛ عدّل القيمة.';
+
+  @override
+  String get aiPlanEditFoodMissing =>
+      'الأكل المذكور مش بمكتبتك؛ أضفه أو بدّله.';
+
+  @override
+  String get aiPlanEditMealPlanMissing => 'ما عندك خطة أكل تزيد عليها وجبة.';
+
+  @override
+  String get aiPlanProblemNotJson =>
+      'الجواب اللي رجع مش ملف خطة؛ انسخ جواب الذكاء الاصطناعي كامل وجرّب كمان مرة.';
+
+  @override
+  String get aiPlanProblemNotAnObject => 'الملف فيه قيمة وحدة بس، مش خطة.';
+
+  @override
+  String get aiPlanProblemNotAPlan =>
+      'هذا الملف مش «خطة مدار». تأكد إنك بعتت طلب مَدار ورجّعت الجواب كامل.';
+
+  @override
+  String aiPlanProblemVersion(String value, String expected) {
+    return 'الخطة مكتوبة بنسخة ثانية ($value)؛ هذي النسخة من مَدار بتقرا نسخة $expected.';
+  }
+
+  @override
+  String aiPlanProblemTooBig(String size, String limit) {
+    return 'الملف كبير كثير ($size)؛ أكبر حجم مقبول $limit.';
+  }
+
+  @override
+  String get aiPlanProblemTooDeep => 'شكل الملف متشعّب كثير، وفي إشي غلط فيه.';
+
+  @override
+  String get aiPlanProblemTrailingText =>
+      'كان في كلام زيادة حول الملف؛ أخذنا الخطة اللي جواه بس.';
+
+  @override
+  String get aiPlanProblemNoItems => 'ما في ولا اقتراح جوا الخطة.';
+
+  @override
+  String aiPlanProblemTooMany(String limit) {
+    return 'عدد الاقتراحات أكبر من اللي بنقبله ($limit).';
+  }
+
+  @override
+  String aiPlanProblemDuplicate(String value) {
+    return 'في اقتراحين بنفس الرقم «$value»، فما قدرنا نفرّق بينهم.';
+  }
+
+  @override
+  String aiPlanProblemMissingField(String field) {
+    return 'ناقص «$field».';
+  }
+
+  @override
+  String get aiPlanProblemMissingReason =>
+      'الاقتراح بدون سبب، ومَدار ما بيقبل اقتراح بدون سبب.';
+
+  @override
+  String aiPlanProblemWrongType(String field) {
+    return 'القيمة في «$field» نوعها غلط.';
+  }
+
+  @override
+  String aiPlanProblemBlank(String field) {
+    return '«$field» فاضي.';
+  }
+
+  @override
+  String aiPlanProblemTooLong(String field, String limit) {
+    return '«$field» طويل كثير؛ الحد $limit.';
+  }
+
+  @override
+  String aiPlanProblemUnknownField(String field) {
+    return 'في معلومة ما بنعرفها: «$field». مَدار ما بياخد إشي مش مكتوب بالاتفاق.';
+  }
+
+  @override
+  String aiPlanProblemUnknownKind(String value) {
+    return 'نوع اقتراح مش معروف: «$value».';
+  }
+
+  @override
+  String aiPlanProblemUnknownValue(String field, String value) {
+    return 'قيمة مش معروفة في «$field»: «$value».';
+  }
+
+  @override
+  String aiPlanProblemOutOfRange(String field) {
+    return 'الرقم في «$field» خارج الحدود المسموحة.';
+  }
+
+  @override
+  String aiPlanProblemBadDay(String value) {
+    return 'تاريخ مش مفهوم أو بعيد كثير: «$value».';
+  }
+
+  @override
+  String aiPlanProblemBadTime(String value) {
+    return 'وقت مش مفهوم: «$value».';
+  }
+
+  @override
+  String aiPlanProblemBadWeekday(String value) {
+    return 'يوم أسبوع غلط: «$value».';
+  }
+
+  @override
+  String aiPlanProblemUnknownRef(String value) {
+    return '«$value» مش موجود عندك بمَدار؛ الذكاء الاصطناعي اختلق الاسم، وما بنقدر نطبّقه.';
+  }
+
+  @override
+  String aiPlanProblemMissingDep(String value) {
+    return 'هذا الاقتراح بيعتمد على اقتراح «$value» اللي مش موجود بالخطة.';
+  }
+
+  @override
+  String get aiPlanProblemCircularDep =>
+      'في اقتراحات بتعتمد على بعضها بشكل دائري.';
+
+  @override
+  String aiPlanProblemControlChars(String field) {
+    return 'في رموز غريبة جوا «$field».';
+  }
+
+  @override
+  String aiPlanProblemHealth(String value) {
+    return 'هذا اقتراح طبي («$value»). مَدار بيرفض أي تشخيص أو علاج أو دوا أو جرعة؛ الصحة هون متابعة وممارسة بس، والدوا مرجعه دكتورك.';
+  }
+
+  @override
+  String get aiPlanProblemDeferred =>
+      'هذا النوع لسا مش جاهز بهذي النسخة؛ محفوظ ورح يظهر لما تجهز «السفرة».';
+
+  @override
+  String get aiPlanProblemUnknown => 'في إشي غلط بهذا البند.';
 }

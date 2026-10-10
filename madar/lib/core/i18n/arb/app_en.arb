@@ -22936,5 +22936,513 @@
   "ncKindMeal": "Meal reminder",
   "@ncKindMeal": {
     "description": "Notification centre: a meal reminder row's kind"
-  }
+  },
+  "aiPlanExportTitle": "Ask an AI",
+  "@aiPlanExportTitle": {
+    "description": "Data centre tile + sheet title for the AI bridge export"
+  },
+  "aiPlanExportBody": "One file with a summary of your data and the question. Send it to any AI app and bring the answer back to Madar.",
+  "aiPlanExportSubtitle": "No account, no key",
+  "aiPlanStepChoose": "Choose what to send",
+  "aiPlanStepChooseBody": "The same sections you pick for the summary: prayer, health, money, family, work, learning, body and travel.",
+  "aiPlanChooseAction": "Pick the sections",
+  "aiPlanChangeChoice": "Change the sections",
+  "aiPlanChooseFirst": "Pick the sections first, then the file is built.",
+  "aiPlanAskLabel": "What do you want to ask?",
+  "aiPlanAskHint": "For example: what is the best thing I can do next month?",
+  "aiPlanAskOptional": "Optional, and it goes out with the file exactly as you wrote it.",
+  "aiPlanFileReady": "Your file is ready",
+  "aiPlanHowTo": "Open your AI app, attach the file or paste the text, then bring the answer back to Madar.",
+  "aiPlanLeftOut": "Staying on the phone: your written notes, worry and pain text, food notes, phone, document and account numbers.",
+  "aiPlanPromptIncluded": "The file also carries the request itself and the exact answer shape, so you need not write anything.",
+  "aiPlanAnswerBack": "When the answer comes back, open “Import a plan” and read every suggestion with its reason before you approve it.",
+  "aiPlanDefaultName": "Plan of {date}",
+  "@aiPlanDefaultName": {
+    "description": "Default, editable name of an imported plan",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProgress": "{done} of {total}",
+  "@aiPlanProgress": {
+    "description": "Checklist counter of an imported plan",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistEmpty": "You have not approved any suggestion from this plan yet.",
+  "aiPlanClaimsTitle": "Claims to take with care",
+  "aiPlanSourcePartial": "The source is incomplete: {detail}",
+  "@aiPlanSourcePartial": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanKindTask": "Task",
+  "aiPlanKindHabit": "Habit",
+  "aiPlanKindRoutine": "Routine",
+  "aiPlanKindReminder": "Reminder",
+  "aiPlanKindNote": "Note",
+  "aiPlanKindFood": "New food",
+  "aiPlanKindMealChange": "Meal plan change",
+  "aiPlanKindAvoidItem": "Avoid",
+  "aiPlanKindTrackedSign": "Sign to track",
+  "aiPlanKindLabTracker": "Lab to track",
+  "aiPlanKindBudgetTweak": "Budget change",
+  "aiPlanKindLearningProgram": "Learning programme",
+  "aiPlanKindRecipe": "Recipe",
+  "aiPlanKindPantryItem": "Pantry item",
+  "aiPlanChangeChecklist": "It becomes a line on the list that you tick off when you have done it.",
+  "aiPlanChangeTaskWhen": "When: {when}",
+  "@aiPlanChangeTaskWhen": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeHabitAdd": "A new habit: “{name}”",
+  "@aiPlanChangeHabitAdd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeHabitBack": "Switches your habit “{name}” back on",
+  "@aiPlanChangeHabitBack": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRoutineTimes": "Its times: {times}",
+  "@aiPlanChangeRoutineTimes": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRoutineSteps": "Its steps: {steps}",
+  "@aiPlanChangeRoutineSteps": {
+    "placeholders": {
+      "steps": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeReminder": "A reminder on “{owner}” at {time}",
+  "@aiPlanChangeReminder": {
+    "placeholders": {
+      "owner": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeNote": "A note kept with the plan; it changes nothing in your data.",
+  "aiPlanChangeFoodAdd": "Adds “{name}” to your food library",
+  "@aiPlanChangeFoodAdd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeFoodUpdate": "Updates “{name}” in your food library",
+  "@aiPlanChangeFoodUpdate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealAdd": "Adds “{food}” to the meal “{slot}”",
+  "@aiPlanChangeMealAdd": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "slot": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealRemove": "Removes “{food}” from the meal “{slot}”",
+  "@aiPlanChangeMealRemove": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "slot": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealNewSlot": "A new meal “{name}” at {time}",
+  "@aiPlanChangeMealNewSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeMealMove": "The meal “{slot}” moves to {time}",
+  "@aiPlanChangeMealMove": {
+    "placeholders": {
+      "slot": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeAvoid": "Adds “{name}” to your avoid list",
+  "@aiPlanChangeAvoid": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeSign": "You start tracking “{name}” every day",
+  "@aiPlanChangeSign": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeLab": "Adds the lab test “{name}” to follow",
+  "@aiPlanChangeLab": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeBudgetAmount": "“{name}” becomes {amount}",
+  "@aiPlanChangeBudgetAmount": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeBudgetPercent": "“{name}” becomes {percent}%",
+  "@aiPlanChangeBudgetPercent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeGoal": "A new learning goal: “{name}” — {target}",
+  "@aiPlanChangeGoal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeDeferred": "Kept for a later version; nothing is applied now.",
+  "aiPlanBeforeNothing": "You have nothing like it today.",
+  "aiPlanBeforeHabitOff": "You have the habit “{name}”, switched off.",
+  "@aiPlanBeforeHabitOff": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeHabitOn": "The habit “{name}” is already on.",
+  "@aiPlanBeforeHabitOn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeEnvelope": "Today “{name}”: {detail}",
+  "@aiPlanBeforeEnvelope": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeSlot": "The meal “{name}” is at {detail} today",
+  "@aiPlanBeforeSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeFoodKnown": "“{name}” is already in your food library.",
+  "@aiPlanBeforeFoodKnown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeFoodInSlot": "You already have the meal “{name}”.",
+  "@aiPlanBeforeFoodInSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeGoal": "You have the goal “{name}”: {detail}",
+  "@aiPlanBeforeGoal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeLab": "The lab test “{name}” already exists.",
+  "@aiPlanBeforeLab": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeTracker": "You already track “{name}”.",
+  "@aiPlanBeforeTracker": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeAvoid": "“{name}” is already on your avoid list.",
+  "@aiPlanBeforeAvoid": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanStatusReady": "Ready for your yes",
+  "aiPlanStatusNeedsEdit": "Needs an edit from you",
+  "aiPlanStatusBlocked": "Approve another suggestion first",
+  "aiPlanStatusDeferred": "Kept for later",
+  "aiPlanStatusRejected": "Refused",
+  "aiPlanEditDayPassed": "The day it names has passed; pick a new one.",
+  "aiPlanEditEnvelopeMode": "This envelope is set the other way round (amount versus percentage); edit the value.",
+  "aiPlanEditFoodMissing": "That food is not in your library; add it or change it.",
+  "aiPlanEditMealPlanMissing": "You have no meal plan to add a meal to.",
+  "aiPlanProblemNotJson": "The answer is not a plan file; copy the AI’s whole answer and try again.",
+  "aiPlanProblemNotAnObject": "The file holds a single value, not a plan.",
+  "aiPlanProblemNotAPlan": "This file is not a Madar plan. Check that you sent Madar’s request and brought the whole answer back.",
+  "aiPlanProblemVersion": "The plan uses another version ({value}); this Madar reads version {expected}.",
+  "@aiPlanProblemVersion": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemTooBig": "The file is too big ({size}); the most Madar takes is {limit}.",
+  "@aiPlanProblemTooBig": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemTooDeep": "The file nests far too deep; something is wrong with it.",
+  "aiPlanProblemTrailingText": "There was extra text around the file; only the plan inside it was taken.",
+  "aiPlanProblemNoItems": "The plan carries no suggestion at all.",
+  "aiPlanProblemTooMany": "There are more suggestions than Madar takes ({limit}).",
+  "@aiPlanProblemTooMany": {
+    "placeholders": {
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemDuplicate": "Two suggestions share the id “{value}”, so they cannot be told apart.",
+  "@aiPlanProblemDuplicate": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemMissingField": "“{field}” is missing.",
+  "@aiPlanProblemMissingField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemMissingReason": "The suggestion gives no reason, and Madar does not accept a suggestion without one.",
+  "aiPlanProblemWrongType": "The value of “{field}” is the wrong kind.",
+  "@aiPlanProblemWrongType": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBlank": "“{field}” is empty.",
+  "@aiPlanProblemBlank": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemTooLong": "“{field}” is too long; the limit is {limit}.",
+  "@aiPlanProblemTooLong": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownField": "There is a field Madar does not know: “{field}”. Madar takes nothing that is not in the contract.",
+  "@aiPlanProblemUnknownField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownKind": "Unknown kind of suggestion: “{value}”.",
+  "@aiPlanProblemUnknownKind": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownValue": "Unknown value in “{field}”: “{value}”.",
+  "@aiPlanProblemUnknownValue": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemOutOfRange": "The number in “{field}” is out of range.",
+  "@aiPlanProblemOutOfRange": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBadDay": "A date that cannot be read, or is far too far away: “{value}”.",
+  "@aiPlanProblemBadDay": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBadTime": "A time that cannot be read: “{value}”.",
+  "@aiPlanProblemBadTime": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemBadWeekday": "A weekday that is not right: “{value}”.",
+  "@aiPlanProblemBadWeekday": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemUnknownRef": "“{value}” does not exist in your Madar; the AI invented the name, so it cannot be applied.",
+  "@aiPlanProblemUnknownRef": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemMissingDep": "This suggestion depends on “{value}”, which is not in the plan.",
+  "@aiPlanProblemMissingDep": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemCircularDep": "Some suggestions depend on each other in a circle.",
+  "aiPlanProblemControlChars": "There are odd characters inside “{field}”.",
+  "@aiPlanProblemControlChars": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemHealth": "This is medical advice (“{value}”). Madar refuses any diagnosis, treatment, medicine or dose; health here is tracking and practising only, and medication is your doctor’s.",
+  "@aiPlanProblemHealth": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanProblemDeferred": "This kind is not ready in this version; it is kept and will show once the kitchen planet arrives.",
+  "aiPlanProblemUnknown": "Something about this item is wrong."
 }

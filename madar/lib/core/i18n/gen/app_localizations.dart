@@ -38920,6 +38920,636 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'تنبيه وجبة'**
   String get ncKindMeal;
+
+  /// Data centre tile + sheet title for the AI bridge export
+  ///
+  /// In ar, this message translates to:
+  /// **'استشارة ذكاء اصطناعي'**
+  String get aiPlanExportTitle;
+
+  /// No description provided for @aiPlanExportBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف واحد فيه خلاصة بياناتك والسؤال. ابعته لأي تطبيق ذكاء اصطناعي ورجّع الجواب لمَدار.'**
+  String get aiPlanExportBody;
+
+  /// No description provided for @aiPlanExportSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا حساب وبلا مفتاح'**
+  String get aiPlanExportSubtitle;
+
+  /// No description provided for @aiPlanStepChoose.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختار شو تبعت'**
+  String get aiPlanStepChoose;
+
+  /// No description provided for @aiPlanStepChooseBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفس الأقسام اللي بتختارها للخلاصة: الصلاة، الصحة، المصاري، الأهل، الشغل، التعلّم، الجسم والسفر.'**
+  String get aiPlanStepChooseBody;
+
+  /// No description provided for @aiPlanChooseAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختار الأقسام'**
+  String get aiPlanChooseAction;
+
+  /// No description provided for @aiPlanChangeChoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدّل الأقسام'**
+  String get aiPlanChangeChoice;
+
+  /// No description provided for @aiPlanChooseFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختار الأقسام أول، بعدها ينفتح الملف.'**
+  String get aiPlanChooseFirst;
+
+  /// No description provided for @aiPlanAskLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو بدك تسأله؟'**
+  String get aiPlanAskLabel;
+
+  /// No description provided for @aiPlanAskHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلاً: شو أحسن إشي أعمله الشهر الجاي؟'**
+  String get aiPlanAskHint;
+
+  /// No description provided for @aiPlanAskOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري، وبينبعت مع الملف كما كتبته.'**
+  String get aiPlanAskOptional;
+
+  /// No description provided for @aiPlanFileReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملفك جاهز'**
+  String get aiPlanFileReady;
+
+  /// No description provided for @aiPlanHowTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح تطبيق الذكاء الاصطناعي، أرفق الملف أو الصق النص، وارجع بالجواب لمَدار.'**
+  String get aiPlanHowTo;
+
+  /// No description provided for @aiPlanLeftOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي ضل بالجوال: ملاحظاتك المكتوبة، كلام القلق والوجع، ملاحظات الأكل، أرقام الهاتف وأرقام الوثائق والحسابات.'**
+  String get aiPlanLeftOut;
+
+  /// No description provided for @aiPlanPromptIncluded.
+  ///
+  /// In ar, this message translates to:
+  /// **'جوا الملف كمان الطلب نفسه وشكل الجواب المطلوب، فما بتحتاج تكتب إشي.'**
+  String get aiPlanPromptIncluded;
+
+  /// No description provided for @aiPlanAnswerBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما يرجع الجواب، افتح «استيراد خطة» وشوف كل اقتراح مع سببه قبل ما توافق.'**
+  String get aiPlanAnswerBack;
+
+  /// Default, editable name of an imported plan
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة {date}'**
+  String aiPlanDefaultName(String date);
+
+  /// Checklist counter of an imported plan
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String aiPlanProgress(String done, String total);
+
+  /// No description provided for @aiPlanChecklistEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا ما وافقت على ولا اقتراح من هذي الخطة.'**
+  String get aiPlanChecklistEmpty;
+
+  /// No description provided for @aiPlanClaimsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ادّعاءات لازم تاخدها بحذر'**
+  String get aiPlanClaimsTitle;
+
+  /// No description provided for @aiPlanSourcePartial.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصدر ناقص: {detail}'**
+  String aiPlanSourcePartial(String detail);
+
+  /// No description provided for @aiPlanKindTask.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة'**
+  String get aiPlanKindTask;
+
+  /// No description provided for @aiPlanKindHabit.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادة'**
+  String get aiPlanKindHabit;
+
+  /// No description provided for @aiPlanKindRoutine.
+  ///
+  /// In ar, this message translates to:
+  /// **'روتين'**
+  String get aiPlanKindRoutine;
+
+  /// No description provided for @aiPlanKindReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير'**
+  String get aiPlanKindReminder;
+
+  /// No description provided for @aiPlanKindNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get aiPlanKindNote;
+
+  /// No description provided for @aiPlanKindFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكل جديد'**
+  String get aiPlanKindFood;
+
+  /// No description provided for @aiPlanKindMealChange.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير بخطة الأكل'**
+  String get aiPlanKindMealChange;
+
+  /// No description provided for @aiPlanKindAvoidItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'ممنوع'**
+  String get aiPlanKindAvoidItem;
+
+  /// No description provided for @aiPlanKindTrackedSign.
+  ///
+  /// In ar, this message translates to:
+  /// **'علامة تتابعها'**
+  String get aiPlanKindTrackedSign;
+
+  /// No description provided for @aiPlanKindLabTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل تتابعه'**
+  String get aiPlanKindLabTracker;
+
+  /// No description provided for @aiPlanKindBudgetTweak.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل بالميزانية'**
+  String get aiPlanKindBudgetTweak;
+
+  /// No description provided for @aiPlanKindLearningProgram.
+  ///
+  /// In ar, this message translates to:
+  /// **'برنامج تعلّم'**
+  String get aiPlanKindLearningProgram;
+
+  /// No description provided for @aiPlanKindRecipe.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصفة'**
+  String get aiPlanKindRecipe;
+
+  /// No description provided for @aiPlanKindPantryItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'مونة'**
+  String get aiPlanKindPantryItem;
+
+  /// No description provided for @aiPlanChangeChecklist.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتسجّل سطر بالقائمة تشطّبه لما تعمله.'**
+  String get aiPlanChangeChecklist;
+
+  /// No description provided for @aiPlanChangeTaskWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعده: {when}'**
+  String aiPlanChangeTaskWhen(String when);
+
+  /// No description provided for @aiPlanChangeHabitAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتتزاد عادة جديدة: «{name}»'**
+  String aiPlanChangeHabitAdd(String name);
+
+  /// No description provided for @aiPlanChangeHabitBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'بترجع تشغّل عادة «{name}» اللي كانت مطفية'**
+  String aiPlanChangeHabitBack(String name);
+
+  /// No description provided for @aiPlanChangeRoutineTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقاتها: {times}'**
+  String aiPlanChangeRoutineTimes(String times);
+
+  /// No description provided for @aiPlanChangeRoutineSteps.
+  ///
+  /// In ar, this message translates to:
+  /// **'جواها خطوات: {steps}'**
+  String aiPlanChangeRoutineSteps(String steps);
+
+  /// No description provided for @aiPlanChangeReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير على «{owner}» الساعة {time}'**
+  String aiPlanChangeReminder(String owner, String time);
+
+  /// No description provided for @aiPlanChangeNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة بتتخزّن مع الخطة، وما بتغيّر إشي ببياناتك.'**
+  String get aiPlanChangeNote;
+
+  /// No description provided for @aiPlanChangeFoodAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتزاد «{name}» لمكتبة أكلك'**
+  String aiPlanChangeFoodAdd(String name);
+
+  /// No description provided for @aiPlanChangeFoodUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتعدّل «{name}» بمكتبة أكلك'**
+  String aiPlanChangeFoodUpdate(String name);
+
+  /// No description provided for @aiPlanChangeMealAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتزاد «{food}» على وجبة «{slot}»'**
+  String aiPlanChangeMealAdd(String food, String slot);
+
+  /// No description provided for @aiPlanChangeMealRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'بينشال «{food}» من وجبة «{slot}»'**
+  String aiPlanChangeMealRemove(String food, String slot);
+
+  /// No description provided for @aiPlanChangeMealNewSlot.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجبة جديدة «{name}» الساعة {time}'**
+  String aiPlanChangeMealNewSlot(String name, String time);
+
+  /// No description provided for @aiPlanChangeMealMove.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجبة «{slot}» بتصير الساعة {time}'**
+  String aiPlanChangeMealMove(String slot, String time);
+
+  /// No description provided for @aiPlanChangeAvoid.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتزاد «{name}» على قائمة الممنوعات'**
+  String aiPlanChangeAvoid(String name);
+
+  /// No description provided for @aiPlanChangeSign.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتصير تتابع «{name}» كل يوم'**
+  String aiPlanChangeSign(String name);
+
+  /// No description provided for @aiPlanChangeLab.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتزاد تحليل «{name}» للمتابعة'**
+  String aiPlanChangeLab(String name);
+
+  /// No description provided for @aiPlanChangeBudgetAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» بتصير {amount}'**
+  String aiPlanChangeBudgetAmount(String name, String amount);
+
+  /// No description provided for @aiPlanChangeBudgetPercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» بتصير {percent}٪'**
+  String aiPlanChangeBudgetPercent(String name, String percent);
+
+  /// No description provided for @aiPlanChangeGoal.
+  ///
+  /// In ar, this message translates to:
+  /// **'هدف تعلّم جديد: «{name}» — {target}'**
+  String aiPlanChangeGoal(String name, String target);
+
+  /// No description provided for @aiPlanChangeDeferred.
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظ للنسخة الجاية، وما بينطبّق هلأ.'**
+  String get aiPlanChangeDeferred;
+
+  /// No description provided for @aiPlanBeforeNothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في إشي زي هيك عندك هلأ.'**
+  String get aiPlanBeforeNothing;
+
+  /// No description provided for @aiPlanBeforeHabitOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'عندك عادة «{name}» بس مطفية.'**
+  String aiPlanBeforeHabitOff(String name);
+
+  /// No description provided for @aiPlanBeforeHabitOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادة «{name}» شغالة عندك من قبل.'**
+  String aiPlanBeforeHabitOn(String name);
+
+  /// No description provided for @aiPlanBeforeEnvelope.
+  ///
+  /// In ar, this message translates to:
+  /// **'هلأ «{name}»: {detail}'**
+  String aiPlanBeforeEnvelope(String name, String detail);
+
+  /// No description provided for @aiPlanBeforeSlot.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجبة «{name}» هلأ الساعة {detail}'**
+  String aiPlanBeforeSlot(String name, String detail);
+
+  /// No description provided for @aiPlanBeforeFoodKnown.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» موجود بمكتبة أكلك.'**
+  String aiPlanBeforeFoodKnown(String name);
+
+  /// No description provided for @aiPlanBeforeFoodInSlot.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجبة «{name}» موجودة عندك.'**
+  String aiPlanBeforeFoodInSlot(String name);
+
+  /// No description provided for @aiPlanBeforeGoal.
+  ///
+  /// In ar, this message translates to:
+  /// **'عندك هدف «{name}»: {detail}'**
+  String aiPlanBeforeGoal(String name, String detail);
+
+  /// No description provided for @aiPlanBeforeLab.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل «{name}» موجود عندك.'**
+  String aiPlanBeforeLab(String name);
+
+  /// No description provided for @aiPlanBeforeTracker.
+  ///
+  /// In ar, this message translates to:
+  /// **'عندك متابعة باسم «{name}».'**
+  String aiPlanBeforeTracker(String name);
+
+  /// No description provided for @aiPlanBeforeAvoid.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» موجود بقائمة الممنوعات.'**
+  String aiPlanBeforeAvoid(String name);
+
+  /// No description provided for @aiPlanStatusReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهز لموافقتك'**
+  String get aiPlanStatusReady;
+
+  /// No description provided for @aiPlanStatusNeedsEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'محتاج تعديل منك'**
+  String get aiPlanStatusNeedsEdit;
+
+  /// No description provided for @aiPlanStatusBlocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لازم توافق على اقتراح قبله'**
+  String get aiPlanStatusBlocked;
+
+  /// No description provided for @aiPlanStatusDeferred.
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظ لبعدين'**
+  String get aiPlanStatusDeferred;
+
+  /// No description provided for @aiPlanStatusRejected.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرفوض'**
+  String get aiPlanStatusRejected;
+
+  /// No description provided for @aiPlanEditDayPassed.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم اللي حدّده فات؛ اختار يوم جديد.'**
+  String get aiPlanEditDayPassed;
+
+  /// No description provided for @aiPlanEditEnvelopeMode.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا المصروف محسوب بطريقة ثانية (مبلغ مقابل نسبة)؛ عدّل القيمة.'**
+  String get aiPlanEditEnvelopeMode;
+
+  /// No description provided for @aiPlanEditFoodMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكل المذكور مش بمكتبتك؛ أضفه أو بدّله.'**
+  String get aiPlanEditFoodMissing;
+
+  /// No description provided for @aiPlanEditMealPlanMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عندك خطة أكل تزيد عليها وجبة.'**
+  String get aiPlanEditMealPlanMissing;
+
+  /// No description provided for @aiPlanProblemNotJson.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجواب اللي رجع مش ملف خطة؛ انسخ جواب الذكاء الاصطناعي كامل وجرّب كمان مرة.'**
+  String get aiPlanProblemNotJson;
+
+  /// No description provided for @aiPlanProblemNotAnObject.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف فيه قيمة وحدة بس، مش خطة.'**
+  String get aiPlanProblemNotAnObject;
+
+  /// No description provided for @aiPlanProblemNotAPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الملف مش «خطة مدار». تأكد إنك بعتت طلب مَدار ورجّعت الجواب كامل.'**
+  String get aiPlanProblemNotAPlan;
+
+  /// No description provided for @aiPlanProblemVersion.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة مكتوبة بنسخة ثانية ({value})؛ هذي النسخة من مَدار بتقرا نسخة {expected}.'**
+  String aiPlanProblemVersion(String value, String expected);
+
+  /// No description provided for @aiPlanProblemTooBig.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف كبير كثير ({size})؛ أكبر حجم مقبول {limit}.'**
+  String aiPlanProblemTooBig(String size, String limit);
+
+  /// No description provided for @aiPlanProblemTooDeep.
+  ///
+  /// In ar, this message translates to:
+  /// **'شكل الملف متشعّب كثير، وفي إشي غلط فيه.'**
+  String get aiPlanProblemTooDeep;
+
+  /// No description provided for @aiPlanProblemTrailingText.
+  ///
+  /// In ar, this message translates to:
+  /// **'كان في كلام زيادة حول الملف؛ أخذنا الخطة اللي جواه بس.'**
+  String get aiPlanProblemTrailingText;
+
+  /// No description provided for @aiPlanProblemNoItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في ولا اقتراح جوا الخطة.'**
+  String get aiPlanProblemNoItems;
+
+  /// No description provided for @aiPlanProblemTooMany.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الاقتراحات أكبر من اللي بنقبله ({limit}).'**
+  String aiPlanProblemTooMany(String limit);
+
+  /// No description provided for @aiPlanProblemDuplicate.
+  ///
+  /// In ar, this message translates to:
+  /// **'في اقتراحين بنفس الرقم «{value}»، فما قدرنا نفرّق بينهم.'**
+  String aiPlanProblemDuplicate(String value);
+
+  /// No description provided for @aiPlanProblemMissingField.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقص «{field}».'**
+  String aiPlanProblemMissingField(String field);
+
+  /// No description provided for @aiPlanProblemMissingReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاقتراح بدون سبب، ومَدار ما بيقبل اقتراح بدون سبب.'**
+  String get aiPlanProblemMissingReason;
+
+  /// No description provided for @aiPlanProblemWrongType.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيمة في «{field}» نوعها غلط.'**
+  String aiPlanProblemWrongType(String field);
+
+  /// No description provided for @aiPlanProblemBlank.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{field}» فاضي.'**
+  String aiPlanProblemBlank(String field);
+
+  /// No description provided for @aiPlanProblemTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{field}» طويل كثير؛ الحد {limit}.'**
+  String aiPlanProblemTooLong(String field, String limit);
+
+  /// No description provided for @aiPlanProblemUnknownField.
+  ///
+  /// In ar, this message translates to:
+  /// **'في معلومة ما بنعرفها: «{field}». مَدار ما بياخد إشي مش مكتوب بالاتفاق.'**
+  String aiPlanProblemUnknownField(String field);
+
+  /// No description provided for @aiPlanProblemUnknownKind.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع اقتراح مش معروف: «{value}».'**
+  String aiPlanProblemUnknownKind(String value);
+
+  /// No description provided for @aiPlanProblemUnknownValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة مش معروفة في «{field}»: «{value}».'**
+  String aiPlanProblemUnknownValue(String field, String value);
+
+  /// No description provided for @aiPlanProblemOutOfRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم في «{field}» خارج الحدود المسموحة.'**
+  String aiPlanProblemOutOfRange(String field);
+
+  /// No description provided for @aiPlanProblemBadDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ مش مفهوم أو بعيد كثير: «{value}».'**
+  String aiPlanProblemBadDay(String value);
+
+  /// No description provided for @aiPlanProblemBadTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت مش مفهوم: «{value}».'**
+  String aiPlanProblemBadTime(String value);
+
+  /// No description provided for @aiPlanProblemBadWeekday.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم أسبوع غلط: «{value}».'**
+  String aiPlanProblemBadWeekday(String value);
+
+  /// No description provided for @aiPlanProblemUnknownRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{value}» مش موجود عندك بمَدار؛ الذكاء الاصطناعي اختلق الاسم، وما بنقدر نطبّقه.'**
+  String aiPlanProblemUnknownRef(String value);
+
+  /// No description provided for @aiPlanProblemMissingDep.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الاقتراح بيعتمد على اقتراح «{value}» اللي مش موجود بالخطة.'**
+  String aiPlanProblemMissingDep(String value);
+
+  /// No description provided for @aiPlanProblemCircularDep.
+  ///
+  /// In ar, this message translates to:
+  /// **'في اقتراحات بتعتمد على بعضها بشكل دائري.'**
+  String get aiPlanProblemCircularDep;
+
+  /// No description provided for @aiPlanProblemControlChars.
+  ///
+  /// In ar, this message translates to:
+  /// **'في رموز غريبة جوا «{field}».'**
+  String aiPlanProblemControlChars(String field);
+
+  /// No description provided for @aiPlanProblemHealth.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا اقتراح طبي («{value}»). مَدار بيرفض أي تشخيص أو علاج أو دوا أو جرعة؛ الصحة هون متابعة وممارسة بس، والدوا مرجعه دكتورك.'**
+  String aiPlanProblemHealth(String value);
+
+  /// No description provided for @aiPlanProblemDeferred.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا النوع لسا مش جاهز بهذي النسخة؛ محفوظ ورح يظهر لما تجهز «السفرة».'**
+  String get aiPlanProblemDeferred;
+
+  /// No description provided for @aiPlanProblemUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'في إشي غلط بهذا البند.'**
+  String get aiPlanProblemUnknown;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -109,6 +109,9 @@ enum PlanEditReason {
 
   /// The food is not in his library yet and the plan does not add it.
   foodMissing,
+
+  /// A new meal was suggested but he has no meal plan to add it to.
+  mealPlanMissing,
 }
 
 /// One card of the review screen.
@@ -274,6 +277,11 @@ class PlanPreviewBuilder {
           } else if (!appliedIds.contains(local.id)) {
             waiting.add(local.id);
           }
+        }
+        if (item.str('op') == 'newSlot' &&
+            targets[PlanTargetSlot.mealPlan] == null &&
+            catalog.mealPlans.isEmpty) {
+          edits.add(PlanEditReason.mealPlanMissing);
         }
         if (slot != null) {
           before = PlanBefore(

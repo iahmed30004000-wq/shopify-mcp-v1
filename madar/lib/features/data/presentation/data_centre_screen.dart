@@ -8,6 +8,7 @@ import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/sound/sound_api.dart';
+import '../../ai_bridge/presentation/ai_bridge_export_sheet.dart';
 import '../../import/import_screen.dart';
 import '../data/backup_service.dart';
 import '../data/data_providers.dart';
@@ -229,6 +230,13 @@ class _DataCentreScreenState extends ConsumerState<DataCentreScreen> {
             title: l.dataExportSummaryTitle,
             subtitle: l.dataExportSummaryBody,
             onTap: () => showExportPreviewSheet(context),
+          ),
+          DataTile(
+            icon: Icons.auto_awesome_motion_rounded,
+            iconColor: t.accent,
+            title: l.aiPlanExportTitle,
+            subtitle: l.aiPlanExportBody,
+            onTap: () => showAiBridgeExportSheet(context),
           ),
           DataTile(
             icon: Icons.table_chart_rounded,

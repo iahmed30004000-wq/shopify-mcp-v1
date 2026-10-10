@@ -143,16 +143,16 @@
 ///   instead of adding a second one).
 /// * **routine** – `times` REQUIRED (1‥6 × `HH:mm`), `weekdays` ([1‥7]),
 ///   `category`, `steps` (≤ 12 × `{"title":"…","note":"…"}`).
-///   Applies as one habit plus one reminder per time – exactly what he gets
-///   when he sets a task reminder himself.
+///   Applies as one habit plus one reminder row per time on that habit –
+///   the same kind of row the app already stores for a tracker's reminder.
 /// * **reminder** – `time` REQUIRED unless `at` is given, `at` (ISO date-time),
 ///   `repeat` (`day|week`), `weekdays`, `ownerRef`
 ///   (`{"table":"habits","id":"…"}` – one of his own records, which must
 ///   exist). With an owner the apply sets that record's reminder; without
 ///   one the item is a checklist line only (it never invents a task to
 ///   hang on).
-/// * **note** – `body` REQUIRED (1‥2000). Stored as a worry-free note on the
-///   plan itself; nothing of his is overwritten.
+/// * **note** – `body` REQUIRED (1‥2000). Kept with the plan and shown on
+///   its checklist line; no record of his is created or overwritten.
 /// * **food** – `tags` (≤ 8 × ≤ 24), `portion` (> 0, ≤ 10000), `unit` (≤ 24),
 ///   `notes` (≤ 300). Adds a food to his library so a meal change can use
 ///   it; the food's name is the item's `title`.

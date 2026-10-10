@@ -174,7 +174,7 @@ abstract final class PlanPrompt {
   static Map<String, Object?> contract(String languageCode) => {
     'envelope': {
       madarPlanMarkerKey: 'plan (required, exactly this)',
-      'version': '${madarPlanVersion} (required integer)',
+      'version': '$madarPlanVersion (required integer)',
       'title': 'optional short name for the plan',
       'summary': 'optional, up to ${PlanLimits.maxSummaryLength} characters',
       'requestId': 'optional, copy it from this file so he can match answer to request',

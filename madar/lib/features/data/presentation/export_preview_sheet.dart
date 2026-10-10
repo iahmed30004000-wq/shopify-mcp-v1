@@ -31,22 +31,40 @@ enum ExportPreviewMode {
 /// Opens the AI-ready summary preview. In [ExportPreviewMode.select] the
 /// future completes with the exact Markdown the user approved (null when
 /// dismissed); in share mode it completes with null.
+///
+/// [onApproved] reports the choices behind that Markdown at the moment he
+/// confirms. The AI bridge needs them: it has to know which sections went
+/// out, so the request carries only those areas' names (no envelopes when
+/// Money stayed home) and can say what was deliberately left out. Nothing
+/// else uses it, and it never changes what the sheet sends.
 Future<String?> showExportPreviewSheet(
   BuildContext context, {
   ExportPreviewMode mode = ExportPreviewMode.share,
   String? confirmLabel,
+  ValueChanged<AiSummaryOptions>? onApproved,
 }) => showInteractionSheet<String>(
   context,
-  builder: (_) => ExportPreviewSheet(mode: mode, confirmLabel: confirmLabel),
+  builder: (_) => ExportPreviewSheet(mode: mode, confirmLabel: confirmLabel, onApproved: onApproved),
 );
 
 /// Builds the summary on the device and shows exactly what would go out,
 /// with a switch per section, the profile basics the user opts into, and a
 /// size estimate. Choices are remembered (in the encrypted database).
 class ExportPreviewSheet extends ConsumerStatefulWidget {
-  const ExportPreviewSheet({super.key, this.mode = ExportPreviewMode.share, this.confirmLabel, this.input});
+  const ExportPreviewSheet({
+    super.key,
+    this.mode = ExportPreviewMode.share,
+    this.confirmLabel,
+    this.input,
+    this.onApproved,
+  });
 
   final ExportPreviewMode mode;
+
+  /// Called with the section choices behind the returned Markdown, just
+  /// before the sheet closes in [ExportPreviewMode.select] (see
+  /// [showExportPreviewSheet]).
+  final ValueChanged<AiSummaryOptions>? onApproved;
 
   /// Label of the select-mode button (defaults to "Use this summary").
   final String? confirmLabel;
@@ -261,7 +279,10 @@ class _ExportPreviewSheetState extends ConsumerState<ExportPreviewSheet> {
             icon: Icons.check_rounded,
             primary: true,
             enabled: canSend,
-            onPressed: () => Navigator.of(context).pop(markdown),
+            onPressed: () {
+              widget.onApproved?.call(options);
+              Navigator.of(context).pop(markdown);
+            },
           )
         : Row(
             children: [
