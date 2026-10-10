@@ -3,10 +3,15 @@
 A personal life operating system whose day orbits the five prayers.
 Arabic-first (RTL), offline-first, encrypted on device, built in Flutter.
 
-> Status: **Phases 0–3 complete** (foundation, The Astrolabe Orbit, prayer &
-> faith essentials, Quran) —
-> see [Feature checklist](#feature-checklist). This README is updated at the
-> end of every phase.
+> Status: **Phases 0–7 in the app** — foundation, The Astrolabe Orbit, prayer &
+> faith essentials, Quran, Health, Money, the six Life planets, and Madar
+> Cinema (the Film Reel Engine with the demo, Metropolis Machine, Flappy Orbit
+> and Saved Games). Built and tested but not yet wired into the app: global
+> search, the notification centre, export & encrypted backup, AI chat,
+> home-screen widgets, Together Mode, and the rules engines for the Tier 2
+> games — see [`PLAN.md`](PLAN.md) for the ordered plan of what is left.
+> See also the [Feature checklist](#feature-checklist). This README is updated
+> at the end of every phase.
 
 ---
 
@@ -176,10 +181,10 @@ Legend: ✅ done · 🟡 partial · ⏳ planned phase
 | Phase 1 – The Astrolabe Orbit: astrolabe prayer dial, 8 living procedural worlds + data moons, real sky (sun, moon phase, 2,068 real stars, Milky Way), camera & gestures, fly-in pages, glass panel with windows / tasks / Neglect Radar, performance & power modes | ✅ (device profiling pending) |
 | Phase 2 – app lock (fingerprint + PIN; the fingerprint prompt opens by itself while the astrolabe assembles), themes + i18n audit, prayer times (21 methods, GPS or 809 offline cities, Hijri, time zones), exact full-screen adhan (alarm-clock alarms a week ahead, per-prayer sounds, pre-adhan reminders, permissions card), prayer tracker (sunnah, Duha, Witr, Qiyam, jamaah, mosque, streaks, qada), adhkar (Hisn al-Muslim) + tasbeeh, Faith hub | ✅ (device checks pending: adhan on a locked phone, after reboot, in battery saver) |
 | Phase 3 – Quran (offline Tanzil Uthmani text, 18-rule tajweed colouring, mushaf pages + verse list, search, bookmarks, Quran.com v4 on demand), recitation (19 EveryAyah reciters, per-ayah highlighting, repeats, background playback, offline downloads), daily wird plans, Hifz with SM-2 (ayat + An-Nawawi's 40), Qibla astrolabe compass (WMM declination, sun-compass fallback) | ✅ (device checks pending: streaming, background playback, compass) |
-| Phase 4 – Health | ⏳ |
-| Phase 5 – Money | ⏳ |
-| Phase 6 – Life + Custom Modules Builder | ⏳ |
-| Phase 7 – Film Reel Engine + Tier 1 games | ⏳ |
+| Phase 4 – Health: medications & supplements with timing rules, titration and injection courses, labs with reference bands and a doctor-ready PDF, appointments and doctor questions, pain tracker with a body map, mood & stress with a worry window and guided breathing | ✅ (device checks pending) |
+| Phase 5 – Money: multi-currency wallets with manual rates, transactions, nested budget by amount or percent, savings jars, debts, recurring obligations with due reminders, and the Money hub on its planet | ✅ (device checks pending) |
+| Phase 6 – Life: Work (boards, projects, Top 3), Family (people, contact rhythm, one-tap contact), Travel (trips, packing templates, document expiry), Growth (learning goals), Body (exercises, fasting, water), and the Custom Modules Builder — each on its planet with routes, reminders and settings | ✅ (device checks pending) |
+| Phase 7 – Film Reel Engine (six era skins, film FX shaders, rubber-hose rig, procedural score and SFX, stage, HUD, transitions) + the movie-palace hall reached from the Growth planet; Tier 1 games: Metropolis Machine and Flappy Orbit playable, Caravan Dash / Noir Rooftops / Neon Souk Racer still to come | 🔄 2 of 5 games |
 | Phase 8 – Tier 2 games | ⏳ |
 | Phase 9 – AI Bridge, notifications, widgets, search, backup | ⏳ |
 | Phase 10 – Together Mode | ⏳ |
