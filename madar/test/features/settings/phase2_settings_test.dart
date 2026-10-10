@@ -81,7 +81,12 @@ void main() {
       overrides: LockFixture.empty().overrides,
     );
     await _show(tester, find.byType(AdhanPermissionsCard));
-    expect(find.text(_en.adhanPermNotifications), findsOneWidget);
+    // (Settings › Notifications is a section of its own now, with the same
+    // English word, so look inside the card.)
+    expect(
+      find.descendant(of: find.byType(AdhanPermissionsCard), matching: find.text(_en.adhanPermNotifications)),
+      findsOneWidget,
+    );
     await tester.tap(find.text(_en.adhanPermAllow).first);
     await settleApp(tester);
     expect(platform.requestNotificationsCalls, 1);

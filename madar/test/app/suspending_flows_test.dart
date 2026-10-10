@@ -9,9 +9,11 @@ import 'package:madar/app/suspending_flows.dart';
 import 'package:madar/core/notifications/notifications.dart';
 import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/features/adhan/adhan.dart';
+import 'package:madar/features/data/data.dart' show dataFileBridgeProvider;
 import 'package:madar/features/family/family.dart'
     show ContactLaunch, RecordingContactLauncher, familyContactLauncherProvider;
 import 'package:madar/features/lock/application/lock_controller.dart';
+import 'package:madar/features/saved_games/saved_games.dart' show gameLinkOpenerProvider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/lock/lock_test_utils.dart';
@@ -141,8 +143,17 @@ void main() {
   test('the production overrides cover every flow', () {
     final overrides = suspendingFlowOverrides();
     // Phase 2–3's seven, the doctor report's exporter and the support
-    // note's dialler (Phase 4 – see health_notification_routing_test), and
-    // the family's contact launcher (Phase 6).
-    expect(overrides, hasLength(10));
+    // note's dialler (Phase 4 – see health_notification_routing_test), the
+    // family's contact launcher (Phase 6), and the system shell's two
+    // (Phase 9): «بياناتك» sharing / saving / picking a file, and a saved
+    // web game opened in the phone's browser.
+    expect(overrides, hasLength(12));
+  });
+
+  test('«بياناتك» and a saved game\'s link leave the app as his own trip out', () {
+    final container = ProviderContainer(overrides: suspendingFlowOverrides());
+    addTearDown(container.dispose);
+    expect(container.read(dataFileBridgeProvider), isA<SuspendingDataFileBridge>());
+    expect(container.read(gameLinkOpenerProvider), isA<SuspendingGameLinkOpener>());
   });
 }

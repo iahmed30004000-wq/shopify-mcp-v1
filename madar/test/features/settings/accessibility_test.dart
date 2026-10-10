@@ -25,9 +25,20 @@ const _pages = [
 /// worlds: the hub screens, not their records.
 const _lifePages = [AppRoutes.work, AppRoutes.family, AppRoutes.travel, AppRoutes.growth, AppRoutes.body, AppRoutes.modules];
 
+/// The system shell's own settings pages (Phase 9), reached from the new
+/// Settings rows.
+const _systemPages = [
+  AppRoutes.notificationSettings,
+  AppRoutes.dataCentre,
+  AppRoutes.dataRestore,
+  AppRoutes.aiSettings,
+  AppRoutes.widgetsSettings,
+  AppRoutes.together,
+];
+
 void main() {
   for (final lang in ['ar', 'en']) {
-    for (final page in [..._pages, ..._lifePages]) {
+    for (final page in [..._pages, ..._lifePages, ..._systemPages]) {
       testWidgets('$page ($lang): 48 dp targets and labelled tappables', (tester) async {
         final handle = tester.ensureSemantics();
         await pumpMadarApp(
@@ -44,7 +55,7 @@ void main() {
     }
 
     for (final scale in [1.3, 1.6]) {
-      for (final page in [..._pages, AppRoutes.import, ..._lifePages]) {
+      for (final page in [..._pages, AppRoutes.import, ..._lifePages, ..._systemPages]) {
         testWidgets('$page ($lang) at $scale× text: no overflow, scrolled end to end', (tester) async {
           tester.platformDispatcher.textScaleFactorTestValue = scale;
           addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);

@@ -16,8 +16,7 @@ class SummaryPlace {
   final String? timeZone;
 
   /// The city name in [languageCode], falling back to the other names.
-  String? cityFor(String languageCode) =>
-      (languageCode == 'ar' ? (cityAr ?? cityEn) : (cityEn ?? cityAr)) ?? city;
+  String? cityFor(String languageCode) => (languageCode == 'ar' ? (cityAr ?? cityEn) : (cityEn ?? cityAr)) ?? city;
 
   static SummaryPlace fromJson(Object? json) {
     if (json is! Map) return const SummaryPlace();
@@ -90,6 +89,12 @@ class SummaryInput {
     this.waterLogs = const [],
     this.waterTargetMl,
     this.avoidItems = const [],
+    this.foods = const [],
+    this.foodLogs = const [],
+    this.mealPlans = const [],
+    this.mealSlots = const [],
+    this.mealSlotFoods = const [],
+    this.foodRules = const [],
     // Travel
     this.trips = const [],
     this.travelDocuments = const [],
@@ -149,6 +154,15 @@ class SummaryInput {
   final List<WaterLogRow> waterLogs;
   final int? waterTargetMl;
   final List<AvoidItemRow> avoidItems;
+
+  /// His food library, his log of what he ate, his meal plans and their
+  /// meals, and the risk rules he wrote himself (schema v3).
+  final List<FoodRow> foods;
+  final List<FoodLogRow> foodLogs;
+  final List<MealPlanRow> mealPlans;
+  final List<MealSlotRow> mealSlots;
+  final List<MealSlotFoodRow> mealSlotFoods;
+  final List<FoodRuleRow> foodRules;
 
   final List<TripRow> trips;
   final List<TravelDocumentRow> travelDocuments;

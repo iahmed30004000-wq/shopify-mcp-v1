@@ -3,10 +3,16 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart' show LaunchMode, launchUrl;
 
+import '../../app/system_services.dart' show afterRestoreProvider;
+import '../../features/ai_chat/ai_chat.dart' show AiChatListScreen, AiChatScreen;
+import '../../features/data/data.dart' show DataCentreScreen, RestoreFlow;
+import '../../features/lock/application/lock_controller.dart' show lockControllerProvider;
 import '../../features/notification_center/notification_center.dart'
     show CenterTab, NotificationCenterScreen, NotificationSettingsSummary;
 import '../../features/search/search.dart' show GlobalSearchScreen, SearchDoc;
+import '../../features/together/together.dart' show TogetherHomeScreen;
 import '../design/tokens.dart' show Space;
 import '../design/widgets/widgets.dart' show MadarScaffold;
 import '../i18n/gen/app_localizations.dart';
@@ -89,6 +95,88 @@ class NotificationSettingsRoutePage extends StatelessWidget {
   );
 }
 
+/// `/settings/data` – «بياناتك»: the full JSON, the AI-ready summary, the
+/// CSV files, the encrypted backup and the way into the restore.
+///
+/// A restore done from here (or from `/settings/data/restore`) is reported
+/// to [afterRestoreProvider], which is bound to the root container – so the
+/// re-planning of every reminder finishes even after these screens close.
+class DataCentreRoutePage extends ConsumerWidget {
+  const DataCentreRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => DataCentreScreen(
+    onOpenImport: () => unawaited(context.push<void>(AppRoutes.import)),
+    onOpenRestore: () => unawaited(context.push<void>(AppRoutes.dataRestore)),
+    onRestored: (result) => unawaited(ref.read(afterRestoreProvider)(result)),
+  );
+}
+
+/// `/settings/data/restore` – the restore flow on its own (the file, the
+/// passphrase, the preview, the safety copy, then Done).
+class RestoreRoutePage extends ConsumerWidget {
+  const RestoreRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => RestoreFlow(
+    onRestored: (result) => unawaited(ref.read(afterRestoreProvider)(result)),
+    onDone: () => context.canPop() ? context.pop() : context.go(AppRoutes.home),
+  );
+}
+
+/// `/ai?q=` (a new chat, the question only typed) and `/ai/chat/<id>` (a
+/// saved one).
+///
+/// Nothing is ever sent without a tap on Send: [initialDraft] only fills
+/// the field.
+class AiChatRoutePage extends ConsumerWidget {
+  const AiChatRoutePage({super.key, this.conversationId, this.initialDraft});
+
+  final String? conversationId;
+  final String? initialDraft;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => AiChatScreen(
+    conversationId: conversationId,
+    initialDraft: initialDraft,
+    onOpenSettings: () => unawaited(context.push<void>(AppRoutes.aiSettings)),
+    onOpenList: () => unawaited(context.push<void>(AppRoutes.aiChats)),
+    // A link in a reply leaves Madar: the app lock treats that as his own
+    // trip out (no privacy cover, no lock on return within the grace).
+    onOpenLink: (uri) => ref
+        .read(lockControllerProvider.notifier)
+        .whileSuspended<bool>(() => launchUrl(uri, mode: LaunchMode.externalApplication)),
+  );
+}
+
+/// `/ai/chats` – the saved conversations (a sibling of `/ai`, so no empty
+/// chat is left underneath).
+class AiChatListRoutePage extends StatelessWidget {
+  const AiChatListRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context) => AiChatListScreen(
+    onOpenConversation: (id) => unawaited(context.push<void>(id == null ? AppRoutes.ai : AppRoutes.aiChatOf(id))),
+    onOpenSettings: () => unawaited(context.push<void>(AppRoutes.aiSettings)),
+  );
+}
+
+/// `/together` – Together Mode: the two profiles, the head-to-head, and the
+/// doors to the Hall of Fame and the three couple specials (each its own
+/// route, so Android back returns here).
+class TogetherRoutePage extends ConsumerWidget {
+  const TogetherRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => TogetherHomeScreen(
+    animateBackdrop: !ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver)),
+    onOpenHallOfFame: () => unawaited(context.push<void>(AppRoutes.togetherHallOfFame)),
+    onOpenKnowMe: () => unawaited(context.push<void>(AppRoutes.togetherKnowMe)),
+    onOpenWeekly: () => unawaited(context.push<void>(AppRoutes.togetherWeekly)),
+    onOpenGoal: () => unawaited(context.push<void>(AppRoutes.togetherGoal)),
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Global search: every result's route
 
@@ -149,7 +237,9 @@ String? searchTargetOf(SearchDoc doc) {
     // An entry has no screen of its own: its wallet's list, filtered.
     'transactions' => _or(
       e('walletId'),
-      (w) => AppRoutes.transactionsOf({'wallet': [w]}),
+      (w) => AppRoutes.transactionsOf({
+        'wallet': [w],
+      }),
       AppRoutes.ledger,
     ),
     'budget_items' => AppRoutes.budgetOf(),

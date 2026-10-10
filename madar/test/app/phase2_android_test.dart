@@ -18,8 +18,46 @@ void main() {
     ]) {
       expect(manifest, contains('android.permission.$p'), reason: p);
     }
-    expect(manifest, isNot(contains('ACCESS_FINE_LOCATION')));
-    expect(manifest, isNot(contains('ACCESS_BACKGROUND_LOCATION')));
+    // Prayer times and the qibla take approximate location only. Precise
+    // location exists in the manifest for exactly one reason – a Bluetooth /
+    // Wi-Fi scan on Android 12L and older, which Together Mode's "two phones
+    // nearby" needs – so it must be bounded to API 32 and never declared
+    // open-endedly. Background location is never asked for at all.
+    final declarations = manifest.replaceAll(RegExp(r'<!--.*?-->', dotAll: true), '');
+    final fine = RegExp(
+      r'<uses-permission\s+android:name="android.permission.ACCESS_FINE_LOCATION"([^>]*)/>',
+    ).allMatches(declarations).map((m) => m.group(1)!).toList();
+    expect(fine, hasLength(1), reason: 'precise location is declared exactly once');
+    expect(fine.single, contains('android:maxSdkVersion="32"'));
+    expect(declarations, isNot(contains('ACCESS_BACKGROUND_LOCATION')));
+  });
+
+  test('Together Mode\'s nearby permissions are declared, and none of them derives location', () {
+    for (final p in [
+      'BLUETOOTH_SCAN',
+      'BLUETOOTH_ADVERTISE',
+      'BLUETOOTH_CONNECT',
+      'NEARBY_WIFI_DEVICES',
+      'ACCESS_WIFI_STATE',
+      'CHANGE_WIFI_STATE',
+    ]) {
+      expect(manifest, contains('android.permission.$p'), reason: p);
+    }
+    // The two scanning permissions must say they are not used for location,
+    // or Android treats them as location access.
+    for (final p in ['BLUETOOTH_SCAN', 'NEARBY_WIFI_DEVICES']) {
+      final line = RegExp('<uses-permission[^>]*$p[^>]*/>').firstMatch(manifest)?.group(0);
+      expect(line, isNotNull, reason: p);
+      expect(line, contains('android:usesPermissionFlags="neverForLocation"'), reason: p);
+    }
+    // Nothing here may keep Madar off a phone without the radios.
+    for (final f in ['android.hardware.bluetooth', 'android.hardware.wifi.direct']) {
+      expect(
+        RegExp('<uses-feature\\s+android:name="$f"\\s+android:required="false"\\s*/>').hasMatch(manifest),
+        isTrue,
+        reason: f,
+      );
+    }
   });
 
   test("geolocator's unused location foreground service permission is removed from the merged manifest", () {

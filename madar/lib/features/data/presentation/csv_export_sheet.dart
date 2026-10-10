@@ -62,6 +62,7 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
     DataCsvKind.transactions => l.dataCsvTransactions,
     DataCsvKind.pain => l.dataCsvPain,
     DataCsvKind.mood => l.dataCsvMood,
+    DataCsvKind.food => l.systemShellCsvFood,
   };
 
   static IconData kindIcon(DataCsvKind k) => switch (k) {
@@ -69,6 +70,7 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
     DataCsvKind.transactions => Icons.account_balance_wallet_rounded,
     DataCsvKind.pain => Icons.healing_rounded,
     DataCsvKind.mood => Icons.mood_rounded,
+    DataCsvKind.food => Icons.restaurant_rounded,
   };
 
   Future<void> _pickCustom() async {
@@ -147,7 +149,9 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
                     ChoiceOption(
                       value: k,
                       icon: kindIcon(k),
-                      label: _counts == null ? kindLabel(l, k) : '${kindLabel(l, k)} · ${fmt.formatInt(_counts![k] ?? 0)}',
+                      label: _counts == null
+                          ? kindLabel(l, k)
+                          : '${kindLabel(l, k)} · ${fmt.formatInt(_counts![k] ?? 0)}',
                     ),
                 ],
                 selected: _kind,
@@ -164,7 +168,11 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
                   ChoiceOption(value: ExportRangePreset.days90, label: fmt.localizeDigits(l.dataRangeDays(90))),
                   ChoiceOption(value: ExportRangePreset.year, label: fmt.localizeDigits(l.dataRangeMonths(12))),
                   ChoiceOption(value: ExportRangePreset.all, label: l.dataRangeAll),
-                  ChoiceOption(value: ExportRangePreset.custom, label: l.dataRangeCustom, icon: Icons.date_range_rounded),
+                  ChoiceOption(
+                    value: ExportRangePreset.custom,
+                    label: l.dataRangeCustom,
+                    icon: Icons.date_range_rounded,
+                  ),
                 ],
                 selected: _preset,
                 onChanged: (p) {
@@ -185,7 +193,9 @@ class _CsvExportSheetState extends ConsumerState<CsvExportSheet> {
                 children: [
                   Icon(Icons.event_rounded, size: 16, color: t.textTertiary),
                   const SizedBox(width: Space.xs),
-                  Expanded(child: Text(_rangeText(l, fmt), style: text.bodySmall!.copyWith(color: t.textSecondary))),
+                  Expanded(
+                    child: Text(_rangeText(l, fmt), style: text.bodySmall!.copyWith(color: t.textSecondary)),
+                  ),
                 ],
               ),
               const SizedBox(height: Space.l),

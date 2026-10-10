@@ -7,10 +7,10 @@
 //   focus item (Work shows it once and its window task is that same card),
 //   so it must be listed once, not twice.
 //
-// SKIPPED until the System phase: the AI summary is not reachable in the
-// app yet (the Data centre has no route), and C18/C22 assign these fixes
-// to the data package's integration (use FamilyTexts.relation, Work's
-// localised default columns, and WorkFocus/Top3Rules for the Top 3).
+// Fixed in the System phase, when «بياناتك» got its route: the builder now
+// reads a relation through FamilyTexts.relation, names a board's default
+// columns through BoardColumns.defaultKindOf, and counts a card placed in a
+// prayer window once, the way WorkFocus.collect does (C18/C22).
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter/widgets.dart' show Locale;
 import 'package:flutter_test/flutter_test.dart';
@@ -24,8 +24,6 @@ import 'package:madar/features/data/domain/ai_summary_builder.dart';
 import 'package:madar/features/work/work.dart';
 
 import '../../helpers/test_app.dart';
-
-const _systemPhase = 'System phase (C18/C22): the summary is not routed yet; fix in the data integration';
 
 void main() {
   final now = DateTime(2026, 9, 27, 13, 10);
@@ -53,7 +51,7 @@ void main() {
     final ar = await section(SummarySectionId.family, 'ar');
     expect(ar, isNot(contains('mother')), reason: 'raw relation key in the Arabic summary:\n$ar');
     expect(ar, contains('أمي'));
-  }, skip: _systemPhase);
+  });
 
   test("a Top 3 card placed in a prayer window is listed once", () async {
     final work = WorkService(repos, clock: () => now);
@@ -70,7 +68,7 @@ void main() {
       1,
       reason: 'the same focus item appears more than once in the Top 3:\n$en',
     );
-  }, skip: _systemPhase);
+  });
 
   test("a board's default columns are named in the summary language", () async {
     final work = WorkService(repos, clock: () => now);
@@ -78,5 +76,5 @@ void main() {
     await work.addCard(board.id, const CardDraft(title: 'اتصل بالمورد'));
     final ar = await section(SummarySectionId.work, 'ar');
     expect(ar, isNot(contains('To-do')), reason: 'English default column names in the Arabic summary:\n$ar');
-  }, skip: _systemPhase);
+  });
 }

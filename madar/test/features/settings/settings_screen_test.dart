@@ -19,13 +19,26 @@ final _en = lookupL10n(const Locale('en'));
 void main() {
   testWidgets('settings hub lists every section and opens appearance', (tester) async {
     final app = await pumpMadarApp(tester, initialLocation: AppRoutes.settings);
-    for (final title in [_ar.settingsPersonal, _ar.settingsSectionMotionPower, _ar.settingsData, _ar.settingsAbout]) {
+    for (final title in [
+      _ar.settingsPersonal,
+      _ar.settingsSectionMotionPower,
+      _ar.dataCentreTitle,
+      _ar.settingsAbout,
+    ]) {
       expect(find.text(title), findsWidgets, reason: title);
     }
-    // The inline money and life groups sit between health and motion.
-    for (final title in [_ar.moneyHubSettingsSection, _ar.lifeHubSettingsSection]) {
-      await tester.scrollUntilVisible(find.text(title), 200, scrollable: find.byType(Scrollable).first);
-      expect(find.text(title), findsOneWidget, reason: title);
+    // The inline money, life and system-shell groups sit between health and
+    // motion.
+    for (final title in [
+      _ar.moneyHubSettingsSection,
+      _ar.lifeHubSettingsSection,
+      _ar.ncTitle,
+      _ar.widgetsSettingsTitle,
+      _ar.togetherTitle,
+      _ar.systemShellAiSection,
+    ]) {
+      await tester.scrollUntilVisible(find.text(title).first, 200, scrollable: find.byType(Scrollable).first);
+      expect(find.text(title), findsWidgets, reason: title);
     }
     await tester.tap(find.text(_ar.settingsAppearance).last);
     await settleApp(tester);

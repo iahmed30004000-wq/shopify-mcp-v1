@@ -17,7 +17,13 @@ import '../domain/summary_input.dart';
 
 /// A file ready to be shared or saved.
 class DataFile {
-  const DataFile({required this.name, required this.bytes, required this.mimeType, required this.encrypted, this.records});
+  const DataFile({
+    required this.name,
+    required this.bytes,
+    required this.mimeType,
+    required this.encrypted,
+    this.records,
+  });
 
   final String name;
   final Uint8List bytes;
@@ -76,7 +82,8 @@ class DataExportRepository {
   }
 
   static Future<Uint8List> encodeJson(Map<String, Object?> data, {bool pretty = false, bool useIsolate = true}) {
-    Uint8List work() => Uint8List.fromList(utf8.encode(pretty ? const JsonEncoder.withIndent(' ').convert(data) : jsonEncode(data)));
+    Uint8List work() =>
+        Uint8List.fromList(utf8.encode(pretty ? const JsonEncoder.withIndent(' ').convert(data) : jsonEncode(data)));
     return useIsolate ? Isolate.run(work) : Future.value(work());
   }
 
@@ -99,6 +106,11 @@ class DataExportRepository {
       ),
       DataCsvKind.pain => builder.pain(await db.select(db.painEntries).get(), range: range),
       DataCsvKind.mood => builder.mood(await db.select(db.moodEntries).get(), range: range),
+      DataCsvKind.food => builder.food(
+        logs: await db.select(db.foodLogs).get(),
+        slots: await db.select(db.mealSlots).get(),
+        range: range,
+      ),
     };
   }
 
@@ -107,9 +119,15 @@ class DataExportRepository {
     DataCsvKind.transactions => 'transactions',
     DataCsvKind.pain => 'pain',
     DataCsvKind.mood => 'mood',
+    DataCsvKind.food => 'food',
   };
 
-  Future<DataFile> csvExport(DataCsvKind kind, L10n l, DateTime now, {ExportDateRange range = ExportDateRange.all}) async {
+  Future<DataFile> csvExport(
+    DataCsvKind kind,
+    L10n l,
+    DateTime now, {
+    ExportDateRange range = ExportDateRange.all,
+  }) async {
     final table = await csvTable(kind, l, range: range);
     return DataFile(
       name: fileName(csvStem(kind), 'csv', now, tag: range.isAll ? null : range.fileTag),
@@ -126,13 +144,16 @@ class DataExportRepository {
     DataCsvKind.transactions: (await db.select(db.transactions).get()).where((r) => range.contains(r.date)).length,
     DataCsvKind.pain: (await db.select(db.painEntries).get()).where((r) => range.contains(r.at)).length,
     DataCsvKind.mood: (await db.select(db.moodEntries).get()).where((r) => range.contains(r.at)).length,
+    DataCsvKind.food: (await db.select(db.foodLogs).get()).where((r) => range.contains(r.at)).length,
   };
 
   // ------------------------------------------------------------ summary --
 
-  Future<AiSummaryOptions> summaryOptions() async => AiSummaryOptions.fromJson(await _kv.getJson(AiSummaryOptions.storageKey));
+  Future<AiSummaryOptions> summaryOptions() async =>
+      AiSummaryOptions.fromJson(await _kv.getJson(AiSummaryOptions.storageKey));
 
-  Future<void> saveSummaryOptions(AiSummaryOptions options) => _kv.setJson(AiSummaryOptions.storageKey, options.toJson());
+  Future<void> saveSummaryOptions(AiSummaryOptions options) =>
+      _kv.setJson(AiSummaryOptions.storageKey, options.toJson());
 
   static DataFile summaryFile(String markdown, DateTime now) => DataFile(
     name: fileName('summary', 'md', now),
@@ -193,6 +214,12 @@ class DataExportRepository {
       waterLogs: await all(db.waterLogs),
       waterTargetMl: water is num && water > 0 ? water.round() : null,
       avoidItems: await all(db.avoidItems),
+      foods: await all(db.foods),
+      foodLogs: await all(db.foodLogs),
+      mealPlans: await all(db.mealPlans),
+      mealSlots: await all(db.mealSlots),
+      mealSlotFoods: await all(db.mealSlotFoods),
+      foodRules: await all(db.foodRules),
       trips: await all(db.trips),
       travelDocuments: await all(db.travelDocuments),
       customModules: await all(db.customModules),

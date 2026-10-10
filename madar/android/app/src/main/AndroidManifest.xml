@@ -54,6 +54,36 @@
          permission is dropped from the merged manifest (privacy). -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" tools:node="remove" />
 
+    <!-- Together Mode on two phones side by side (lib/features/together/transport/nearby,
+         Google Nearby Connections): Bluetooth plus Wi-Fi Direct / hotspot, with no
+         internet at all. Nothing is advertised or discovered until "Play together" is
+         tapped, and Madar derives no location from a scan.
+         `tools:node="replace"` wherever nearby_connections' own manifest declares the
+         same permission: its versions carry no maxSdkVersion and would otherwise widen
+         the merged permission. -->
+    <!-- Android 11 and older: legacy Bluetooth (normal permissions). -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" tools:node="replace" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" tools:node="replace" />
+    <!-- Android 12+: the runtime "Nearby devices" permission (one dialog). -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" tools:node="replace" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" tools:node="replace" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" tools:node="replace" />
+    <!-- Android 13+: Wi-Fi Direct / hotspot discovery without location. -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" android:usesPermissionFlags="neverForLocation" tools:targetApi="tiramisu" tools:node="replace" />
+    <!-- The Wi-Fi medium's state (normal permissions, every version). -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- Android 12L and older only: a Bluetooth / Wi-Fi scan needs location there.
+         FINE is required from API 29; it is bounded to API 32 so newer phones never
+         ask for it, and ACCESS_COARSE_LOCATION (prayer times, above) stays unbounded.
+         ACCESS_BACKGROUND_LOCATION is never declared. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="32" tools:node="replace" />
+    <!-- Not required hardware: Madar stays installable on a phone without them. -->
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+    <uses-feature android:name="android.hardware.wifi.direct" android:required="false" />
+
     <!-- Qibla (lib/features/qibla): the compass reads the magnetometer and
          accelerometer (no permission needed) but does not require them – the
          sun compass and the night diagram cover phones without them. -->

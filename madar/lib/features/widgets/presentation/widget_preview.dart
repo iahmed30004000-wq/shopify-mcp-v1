@@ -94,27 +94,33 @@ class MadarWidgetPreview extends StatelessWidget {
         MadarWidgetKind.budget => _budget(snapshot, page, c),
       };
     }
-    return Directionality(
-      textDirection: snapshot.rtl ? TextDirection.rtl : TextDirection.ltr,
-      child: DefaultTextStyle(
-        style: TextStyle(
-          fontFamily: 'PlexArabic',
-          color: c.primary,
-          fontSize: 13,
-          height: 1.25,
-          decoration: TextDecoration.none,
-        ),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        child: SizedBox.fromSize(
-          size: size,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: c.surface,
-              borderRadius: BorderRadius.circular(22),
-              border: Border.all(color: c.stroke),
+    // The preview is a picture of what Android draws on the home screen, at
+    // the widget's own fixed size: it must not follow the phone's text
+    // scale, or a large setting would push the drawing out of the frame
+    // (the real widget is laid out by Android, not by this code).
+    return MediaQuery.withNoTextScaling(
+      child: Directionality(
+        textDirection: snapshot.rtl ? TextDirection.rtl : TextDirection.ltr,
+        child: DefaultTextStyle(
+          style: TextStyle(
+            fontFamily: 'PlexArabic',
+            color: c.primary,
+            fontSize: 13,
+            height: 1.25,
+            decoration: TextDecoration.none,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          child: SizedBox.fromSize(
+            size: size,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.surface,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: c.stroke),
+              ),
+              child: Padding(padding: const EdgeInsets.all(12), child: body),
             ),
-            child: Padding(padding: const EdgeInsets.all(12), child: body),
           ),
         ),
       ),
@@ -185,7 +191,10 @@ class MadarWidgetPreview extends StatelessWidget {
       Text(s.title, style: TextStyle(color: c.secondary, fontSize: 12)),
       if (page.empty == null) ...[
         if (page.headline != null)
-          Text(page.headline!, style: TextStyle(color: c.accent, fontSize: 28, fontWeight: FontWeight.w700)),
+          Text(
+            page.headline!,
+            style: TextStyle(color: c.accent, fontSize: 28, fontWeight: FontWeight.w700),
+          ),
         if (page.detail != null) Text(page.detail!, style: TextStyle(color: c.secondary), maxLines: 2),
       ],
       if (page.note != null) _Dots.orText(page.note!, TextStyle(color: c.accent, fontSize: 12), c.accent),
@@ -202,9 +211,14 @@ class MadarWidgetPreview extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(child: Text(s.title, style: const TextStyle(fontWeight: FontWeight.w700))),
+            Expanded(
+              child: Text(s.title, style: const TextStyle(fontWeight: FontWeight.w700)),
+            ),
             if (page.headline != null)
-              Text(page.headline!, style: TextStyle(color: c.accent, fontWeight: FontWeight.w700)),
+              Text(
+                page.headline!,
+                style: TextStyle(color: c.accent, fontWeight: FontWeight.w700),
+              ),
           ],
         ),
         if (page.detail != null) Text(page.detail!, style: TextStyle(color: c.secondary, fontSize: 12)),
@@ -339,8 +353,17 @@ class _Placeholder extends StatelessWidget {
     children: [
       Icon(Icons.brightness_7_outlined, color: colors.accent, size: 28),
       const SizedBox(height: 6),
-      Text(title, style: TextStyle(color: colors.accent, fontWeight: FontWeight.w700), textAlign: TextAlign.center),
-      Text(message, style: TextStyle(color: colors.secondary), maxLines: 2, textAlign: TextAlign.center),
+      Text(
+        title,
+        style: TextStyle(color: colors.accent, fontWeight: FontWeight.w700),
+        textAlign: TextAlign.center,
+      ),
+      Text(
+        message,
+        style: TextStyle(color: colors.secondary),
+        maxLines: 2,
+        textAlign: TextAlign.center,
+      ),
     ],
   );
 }

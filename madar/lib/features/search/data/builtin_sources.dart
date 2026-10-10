@@ -6,6 +6,7 @@ import '../../../core/db/repositories/repositories.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../family/family_texts.dart' show FamilyTexts;
+import '../../nutrition/presentation/nutrition_texts.dart' show NutritionTexts;
 import '../../work/domain/board_columns.dart' show BoardColumns;
 import '../../work/presentation/work_labels.dart' show WorkTexts;
 import '../domain/search_doc.dart';
@@ -1009,10 +1010,138 @@ abstract final class BuiltInSearchSources {
       ],
     ),
 
+    // ------------------------------------------------------------- food
+    // Everything the user wrote about his eating: the library, the log,
+    // the plans and their meals, and the rules he wrote himself. Raw keys
+    // are never indexed – a rule's target and weight are read in his
+    // language, and its condition by that condition's own name – and
+    // `meal_slot_foods` is not a source: a planned food is text he already
+    // wrote in the library or in its slot.
+    _rows(
+      id: 'foods',
+      planet: 'body',
+      icon: Icons.restaurant_rounded,
+      label: 'systemShellSourceFoods',
+      table: (r) => r.foods,
+      // His own tags («مقلي»، «نشويات») are what his rules hang on, so they
+      // are indexed beside the name; the usual portion is shown with them.
+      map: (f, c) => SearchDoc(
+        id: f.id,
+        refTable: 'foods',
+        refId: f.id,
+        title: f.name,
+        subtitle: c.join([_portion(c, f.defaultPortion, f.unit), ...f.tags]),
+        body: f.notes ?? '',
+        planetKey: 'body',
+      ),
+    ),
+    _rows(
+      id: 'food_logs',
+      planet: 'body',
+      icon: Icons.dinner_dining_rounded,
+      label: 'systemShellSourceFoodLogs',
+      weight: 0.9,
+      table: (r) => r.foodLogs,
+      // The name is stored on the entry, so an entry still reads right
+      // after the food was renamed or deleted; his note about that one
+      // time («بيت الوالدة») is the body.
+      map: (x, c) => SearchDoc(
+        id: x.id,
+        refTable: 'food_logs',
+        refId: x.id,
+        title: x.name,
+        subtitle: c.join([_portion(c, x.portion, x.unit), ...x.tags]),
+        body: x.note ?? '',
+        date: x.at,
+        planetKey: 'body',
+        extra: {'foodId': ?x.foodId},
+      ),
+    ),
+    _rows(
+      id: 'meal_plans',
+      planet: 'body',
+      icon: Icons.event_note_rounded,
+      label: 'systemShellSourceMealPlans',
+      table: (r) => r.mealPlans,
+      map: (p, c) => SearchDoc(
+        id: p.id,
+        refTable: 'meal_plans',
+        refId: p.id,
+        title: p.name,
+        subtitle: p.active ? c.l10n.nutritionActiveLabel : '',
+        body: p.notes ?? '',
+        planetKey: 'body',
+      ),
+    ),
+    SearchSource(
+      id: 'meal_slots',
+      planetKey: 'body',
+      icon: Icons.schedule_rounded,
+      labelKey: 'systemShellSourceMealSlots',
+      weight: 0.9,
+      tables: const {'meal_slots', 'meal_plans'},
+      load: (c) async {
+        final plans = {for (final p in await c.repos.mealPlans.getAll()) p.id: p.name};
+        final tx = NutritionTexts(c.l10n, c.formatter);
+        return c.mapRows(
+          c.repos.mealSlots,
+          (slot) => SearchDoc(
+            id: slot.id,
+            refTable: 'meal_slots',
+            refId: slot.id,
+            title: slot.name,
+            subtitle: c.join([tx.clock(slot.timeMinutes), plans[slot.planId]]),
+            body: slot.notes ?? '',
+            planetKey: 'body',
+            extra: {'planId': slot.planId},
+          ),
+        );
+      },
+    ),
+    SearchSource(
+      id: 'food_rules',
+      planetKey: 'body',
+      icon: Icons.rule_rounded,
+      labelKey: 'systemShellSourceFoodRules',
+      tables: const {'food_rules', 'foods', 'conditions'},
+      load: (c) async {
+        final foods = {for (final f in await c.repos.foods.getAll()) f.id: f.name};
+        final conditions = {for (final x in await c.repos.conditions.getAll()) x.id: x.name};
+        final tx = NutritionTexts(c.l10n, c.formatter);
+        return c.mapRows(
+          c.repos.foodRules,
+          (rule) => SearchDoc(
+            id: rule.id,
+            refTable: 'food_rules',
+            refId: rule.id,
+            // What the rule is about, in his own words: his tag, his food,
+            // or "any food" read in the app's language.
+            title: switch (rule.target) {
+              FoodRuleTarget.tag => rule.tag ?? tx.target(rule.target),
+              FoodRuleTarget.food => foods[rule.foodId] ?? tx.target(rule.target),
+              FoodRuleTarget.anyFood => tx.target(rule.target),
+            },
+            subtitle: c.join([conditions[rule.conditionId], tx.weight(rule.weight)]),
+            // His own wording for why – the only reason a rating ever gives.
+            body: rule.note ?? '',
+            planetKey: 'body',
+            extra: {'conditionId': ?rule.conditionId, 'foodId': ?rule.foodId},
+          ),
+        );
+      },
+    ),
+
     // ------------------------------------------------- custom modules
     CustomModuleSearch.modules(),
     CustomModuleSearch.entries(),
   ];
+
+  /// «١.٥ طبق» – a portion in his own unit word (nothing when he gave none).
+  static String? _portion(SearchLoadContext c, double? portion, String? unit) {
+    if (portion == null || portion <= 0) return _has(unit) ? unit!.trim() : null;
+    final amount = c.number(portion);
+    return _has(unit) ? '$amount ${unit!.trim()}' : amount;
+  }
 
   static String _workout(SearchLoadContext c, int? sets, int? reps, double? weight, int? minutes) => c.join([
     if (sets != null && reps != null)
@@ -1039,5 +1168,8 @@ abstract final class BuiltInSearchSources {
     'hifz_reviews',
     'currencies',
     'obligation_payments',
+    // A planned food inside a meal is the library food's or the slot's own
+    // text, already indexed by `foods` and `meal_slots`.
+    'meal_slot_foods',
   };
 }

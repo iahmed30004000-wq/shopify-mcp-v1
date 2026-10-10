@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/adhan/presentation/adhan_settings_screen.dart';
 import '../../features/adhkar/adhkar.dart' show AdhkarCategoryId, TasbeehScreen;
+import '../../features/ai_chat/ai_chat.dart' show AiSettingsScreen;
 import '../../features/cinema/hall/hall.dart' show CinemaGameScreen, CinemaHallScreen, SavedGamesScreen;
 import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/hifz/hifz.dart' show HifzCard;
@@ -22,6 +23,9 @@ import '../../features/settings/reminders_settings_screen.dart';
 import '../../features/settings/security_settings_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/settings/sound_settings_screen.dart';
+import '../../features/together/together.dart' show HallOfFameScreen;
+import '../../features/together/specials/specials.dart' show CoopGoalScreen, KnowMeScreen, WeeklyChallengeScreen;
+import '../../features/widgets/widgets.dart' show WidgetsSettingsScreen;
 import '../motion/motion.dart';
 import '../motion/transitions.dart';
 import '../settings/app_settings.dart';
@@ -75,7 +79,11 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// project, Family, a person, Travel on its tabs, a trip, a packing
 /// template, the learning goals, a learning goal, the Body on its tabs, the
 /// trackers and a tracker) and the saved web games (`/saved-games`) and the
-/// notification centre (`/notifications`, Settings › Notifications) move
+/// notification centre (`/notifications`, Settings › Notifications) and the
+/// system shell's own pages (Settings › Your data and its restore flow,
+/// Settings › AI, Settings › Home-screen widgets, the AI chat, the saved
+/// chats, Together Mode with its Hall of Fame and its three couple
+/// specials) move
 /// along the reading direction (shared axis); global search (`/search`) and
 /// the cinema hall (`/cinema`)
 /// fades through, and a show (`/cinema/game/<id>`) opens through the hall's
@@ -199,6 +207,40 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: const NotificationSettingsRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'data',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const DataCentreRoutePage(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'restore',
+                pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+                  context: context,
+                  key: state.pageKey,
+                  child: const RestoreRoutePage(),
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'ai',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const AiSettingsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'widgets',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const WidgetsSettingsScreen(),
             ),
           ),
         ],
@@ -622,6 +664,76 @@ List<RouteBase> madarRoutes() => [
           key: state.pageKey,
           child: NotificationsRoutePage(tab: NotificationsRoutePage.tabOf(state.uri.queryParameters['tab'])),
         ),
+      ),
+      // The AI chat (his own key): a new chat, the saved ones, and one of
+      // them. `/ai/chats` and `/ai/chat/<id>` are siblings of `/ai`, so an
+      // empty new chat is never stacked underneath a saved one.
+      GoRoute(
+        path: 'ai',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: AiChatRoutePage(initialDraft: state.uri.queryParameters['q']),
+        ),
+      ),
+      GoRoute(
+        path: 'ai/chats',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const AiChatListRoutePage(),
+        ),
+      ),
+      GoRoute(
+        path: 'ai/chat/:id',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: AiChatRoutePage(conversationId: state.pathParameters['id']!),
+        ),
+      ),
+      // Together Mode and its pages.
+      GoRoute(
+        path: 'together',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const TogetherRoutePage(),
+        ),
+        routes: [
+          GoRoute(
+            path: 'hall-of-fame',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const HallOfFameScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'know-me',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const KnowMeScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'weekly',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const WeeklyChallengeScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'goal',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const CoopGoalScreen(),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: 'now-playing',

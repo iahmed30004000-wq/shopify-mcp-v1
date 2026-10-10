@@ -5,8 +5,10 @@
 // data had planned in their own blocks (family, trackers, travel documents,
 // fasting), leaving ids no feature owns alone.
 //
-// (Once the system services add their delete-all extras – AI keys, widget
-// data, … – this test overrides `resetExtrasProvider` with a no-op.)
+// (The system services' delete-all extras – the AI keys, the widgets' data,
+// Together's online project, every armed alarm, the safety copies – are
+// tested in `phase9b_system_test.dart`; this test overrides the whole
+// `databaseResetProvider`, so they do not run here.)
 import 'dart:io';
 
 import 'package:flutter/widgets.dart' show Locale;

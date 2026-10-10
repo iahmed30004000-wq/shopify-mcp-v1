@@ -24,6 +24,7 @@ import 'life_settings_section.dart';
 import 'money_settings_section.dart';
 import 'reminders_settings_screen.dart' show faithRemindersOnProvider;
 import 'settings_controller.dart';
+import 'system_settings_sections.dart';
 import 'widgets/appearance_pickers.dart';
 import 'widgets/settings_widgets.dart';
 
@@ -36,9 +37,14 @@ import 'widgets/settings_widgets.dart';
 /// [MoneySettingsSection]); life (inline: the family's reach-out
 /// reminders, the water target, fasting, the packing lists and the
 /// trackers – see [LifeSettingsSection]); motion and power (inline);
-/// privacy and security (the app lock's page); data (import); about
-/// (version, fonts and content sources, licences) and the design gallery.
-/// Every change applies instantly.
+/// the system shell (inline: the notification centre and what each part
+/// sends, the home-screen widgets, Together Mode and its two sheets, and
+/// the AI's key, model and saved chats – see [SystemSettingsSections]);
+/// motion and power (inline); privacy and security (the app lock's page);
+/// «بياناتك» (the backup, the exports, the restore and the prototype
+/// import – see [YourDataSection]); about (version, fonts and content
+/// sources, licences) and the design gallery. Every change applies
+/// instantly.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
@@ -154,6 +160,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
               const MoneySettingsSection(),
               const LifeSettingsSection(),
+              const SystemSettingsSections(),
               SettingsSection(
                 title: l.settingsSectionMotionPower,
                 seed: 0.3,
@@ -196,22 +203,7 @@ class SettingsScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              SettingsSection(
-                title: l.settingsData,
-                seed: 0.5,
-                children: [
-                  SettingsTile(
-                    icon: Icons.move_to_inbox_rounded,
-                    title: l.settingsImport,
-                    subtitle: l.settingsImportHint,
-                    navigates: true,
-                    // push: back returns here, not to Home (/import is
-                    // not nested under /settings).
-                    onTap: () => context.push(AppRoutes.import),
-                  ),
-                  SettingsNote(l.settingsPrivacyNote, icon: Icons.lock_rounded),
-                ],
-              ),
+              const YourDataSection(),
               SettingsSection(
                 title: l.settingsAbout,
                 seed: 0.7,

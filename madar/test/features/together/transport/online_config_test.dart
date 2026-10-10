@@ -245,6 +245,12 @@ const firebaseConfig = {
       const ns = TogetherNotifications.namespace;
       expect(ns.contains(TogetherNotifications.yourTurnId), isTrue);
       for (final other in [...NotificationNamespaces.all, const NotificationNamespace('center', 160000, 160999)]) {
+        // Together's own block is in `NotificationNamespaces.all` now (the
+        // same const value), so it is the one entry it may equal.
+        if (other.name == ns.name) {
+          expect(other, ns, reason: 'the core block and Together\'s must stay the same ids');
+          continue;
+        }
         expect(ns.first > other.last || ns.last < other.first, isTrue, reason: other.name);
       }
     });

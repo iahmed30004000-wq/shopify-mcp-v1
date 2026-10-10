@@ -17,12 +17,14 @@ import '../core/settings/app_settings.dart';
 import '../core/sound/sound_api.dart';
 import '../core/sound/sound_settings_sync.dart';
 import '../features/home/home_providers.dart';
+import '../features/together/pairing/pairing.dart' show togetherTransportOverrides;
 import 'app_gate.dart';
 import 'app_preferences.dart';
 import 'faith_services.dart';
 import 'health_services.dart';
 import 'life_services.dart';
 import 'money_services.dart';
+import 'suspending_flows.dart' show lockSuspender;
 import 'system_services.dart';
 
 /// The root overrides of the Madar provider scope – shared by `bootstrap`
@@ -48,6 +50,11 @@ import 'system_services.dart';
 ///   opens its own screen, a notification-centre row opens what it is
 ///   about and each group's reminder settings, and the in-app full-screen
 ///   adhan is held back when the centre has muted or skipped it.
+/// * Together Mode's two-phone transports ([togetherTransportOverrides]):
+///   "two phones nearby" and the optional online play become choosable
+///   instead of "coming soon", and Nearby's permission dialog goes through
+///   the app lock. Registering them touches no radio and opens no
+///   connection: nothing happens until he taps "Play together".
 List<Override> madarAppOverrides({
   required SharedPreferences prefs,
   required SoundService sound,
@@ -63,6 +70,7 @@ List<Override> madarAppOverrides({
   ...moneyHookOverrides(),
   ...lifeHookOverrides(),
   ...systemHookOverrides(),
+  ...togetherTransportOverrides(suspender: lockSuspender),
 ];
 
 /// The app's [ThemeData], rebuilt only when an input of the theme changes

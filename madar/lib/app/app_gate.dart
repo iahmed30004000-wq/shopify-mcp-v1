@@ -18,6 +18,7 @@ import '../core/sound/sound_api.dart';
 import '../features/adhan/presentation/adhan_host.dart';
 import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
 import 'app_services.dart';
+import 'system_services.dart' show resetExtrasProvider;
 import 'lock_gate.dart';
 import 'splash.dart';
 
@@ -34,7 +35,17 @@ final databaseOpenerProvider = Provider<DatabaseOpener>((ref) {
 /// open when it runs).
 final databaseResetProvider = Provider<Future<void> Function()>((ref) {
   final keyStore = ref.watch(databaseKeyStoreProvider);
-  return () => deleteAllMadarData(keyStore: keyStore);
+  final extras = ref.watch(resetExtrasProvider);
+  return () async {
+    // The encrypted file and its key first: this one must succeed.
+    await deleteAllMadarData(keyStore: keyStore);
+    // Then everything that lives outside the database – the AI keys, the
+    // widgets' data, the games' site data, Together's online project, every
+    // scheduled alarm, the safety copies and the share cache. Each step is
+    // best effort, all of them run, and the first error is rethrown so the
+    // gate says the reset failed and a retry repeats them.
+    await extras();
+  };
 });
 
 /// The unlocked database, opened once per app run.

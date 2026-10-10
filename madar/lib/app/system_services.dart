@@ -9,10 +9,13 @@ import '../core/notifications/notifications.dart';
 import '../core/routing/routes.dart';
 import '../core/routing/system_route_pages.dart';
 import '../features/adhan/adhan.dart' show AdhanEvent, adhanInAppHoldProvider;
+import '../features/ai_chat/ai_chat.dart' show aiKeyHintsProvider, aiKeyStoreProvider, aiSettingsProvider;
 import '../features/adhkar/adhkar.dart' show adhkarReminderSyncProvider;
 import '../features/body/body.dart' show BodyReminderTaps, BodyTab, bodyReminderSyncProvider;
 import '../features/custom_modules/custom_modules.dart'
     show CustomModuleNotificationTaps, customModulesReminderSyncProvider;
+import '../features/data/data.dart'
+    show PlatformDataFileBridge, RestoreResult, lastBackupAtProvider, safetyCopiesDirectoryProvider;
 import '../features/family/family.dart' show familyReminderSyncProvider;
 import '../features/health/record/record.dart' show AppointmentReminderTaps, recordReminderSyncProvider;
 import '../features/health/wellbeing/wellbeing.dart' show worryReminderSyncProvider;
@@ -20,6 +23,7 @@ import '../features/money/goals/goals.dart' show DueReminderKind, GoalsReminderT
 import '../features/notification_center/notification_center.dart'
     show
         CenterNotice,
+        GatedNotificationPlatform,
         NotificationCenterLinks,
         NotificationGroup,
         NotificationReplanHooks,
@@ -28,10 +32,14 @@ import '../features/notification_center/notification_center.dart'
         notificationGateProvider,
         notificationReplanHooksProvider;
 import '../features/nutrition/nutrition.dart' show MealReminderTaps, nutritionReminderSyncProvider;
+import '../features/saved_games/saved_games.dart' show gameWebDataCleanerProvider;
 import '../features/search/search.dart' show searchOpenerProvider;
+import '../features/together/pairing/pairing.dart' show OnlineConfigStore, OnlineRoomLedger, togetherSecretsProvider;
 import '../features/travel/travel.dart' show TravelTab, travelReminderSyncProvider;
+import '../features/widgets/widgets.dart' show clearWidgetData, watchWidgetServices;
 import '../features/wird/wird.dart' show wirdReminderSyncProvider;
 import 'app_services.dart' show AppNotificationRouter;
+import 'suspending_flows.dart' show SuspendingNotificationPlatform;
 
 /// The Phase 9 system packages' cross-feature hooks, wired once for the
 /// whole app (bootstrap and the test harness share them through
@@ -203,3 +211,147 @@ final systemReplanHooksProvider = Provider<NotificationReplanHooks>((ref) {
     );
   return hooks;
 });
+
+/// The home-screen widgets, watched **last** of all the app's services:
+/// Android is asked which of the four widgets are really on a home screen,
+/// and only those are kept up to date (at start, on resume, on a data
+/// change, at midnight and when one is added or removed), plus the routing
+/// of a tap on one. Off Android it does nothing and creates no timers.
+void watchSystemServices(WidgetRef ref) => watchWidgetServices(ref);
+
+/// What has to happen after a backup has been restored over the running
+/// app, bound to the root container so it finishes even once the restore
+/// screens are gone:
+///
+/// 1. the notification centre is rebuilt **first**, so the centre that was
+///    running cannot save its pre-restore history, "seen" mark or mute
+///    policy over the rows the restore just wrote; rebuilding it loads the
+///    restored policy into the gate (which sweeps what is now muted);
+/// 2. the caches that read a key/value row only once are dropped (the AI
+///    settings, the "last backup" line in Settings › Your data); every
+///    other settings provider is a stream over `key_values` and follows by
+///    itself;
+/// 3. every namespace re-plans its reminders against the restored data and
+///    the restored policy, so the old data's alarms are cancelled and the
+///    restored ones armed – doses, appointments, dues, birthdays,
+///    documents, fasting, meals, trackers, adhkar and the wird;
+/// 4. the centre looks again: restored snoozes still due are re-armed and
+///    the counts are recomputed.
+///
+/// Every step is guarded on its own: one failure never stops the rest, and
+/// the restore itself has already succeeded by the time this runs.
+final afterRestoreProvider = Provider<Future<void> Function(RestoreResult)>(
+  (ref) => (result) async {
+    Future<void> guard(String what, FutureOr<void> Function() step) async {
+      try {
+        await step();
+      } catch (e) {
+        debugPrint('Madar: after a restore, $what failed (${e.runtimeType})');
+      }
+    }
+
+    ref.invalidate(notificationCenterProvider);
+    ref.invalidate(aiSettingsProvider);
+    ref.invalidate(lastBackupAtProvider);
+    final hooks = ref.read(systemReplanHooksProvider);
+    for (final namespace in hooks.namespaces.toList()) {
+      await guard('re-planning $namespace', () => hooks[namespace]!());
+    }
+    await guard('the notification centre\'s refresh', () => ref.read(notificationCenterProvider.notifier).refresh());
+  },
+);
+
+/// Everything "Delete all data" must erase **besides** the encrypted
+/// database file and its key (`deleteAllMadarData`, which runs first):
+///
+/// * his **AI keys**, which live in the phone's secure storage, outside the
+///   database – and the hints (the last four characters) the app shows;
+/// * the **widgets' data**: every widget file and the widgets' own
+///   Keystore key, so the four widgets go back to "Open Madar";
+/// * the **saved games' site data** (cookies, local storage, cache of the
+///   web games he saved);
+/// * **Together Mode's** online project and its room codes, which are the
+///   only Together values outside the database (the profiles, the
+///   head-to-head, the trophies, the couple specials and this phone's slot
+///   are `key_values` rows and go with the database file);
+/// * every **scheduled alarm** still in Android: cancelled on the raw
+///   plugin, under the gate, so a dose or an adhan of deleted data can
+///   never fire afterwards (going through the notification service would
+///   hide snoozes and leave them armed);
+/// * the data package's leftovers: the **safety copies** of a restore
+///   (encrypted files holding the data a restore replaced) and the
+///   **share cache** (plain exports shared minutes ago).
+///
+/// It runs while the database is closed, so no step may touch it. Each step
+/// is guarded and all of them run; the first error is rethrown at the end,
+/// so the gate says "could not reset" and a retry repeats the same
+/// idempotent steps.
+final resetExtrasProvider = Provider<Future<void> Function()>((ref) {
+  final keys = ref.watch(aiKeyStoreProvider);
+  final secrets = ref.watch(togetherSecretsProvider);
+  final games = ref.watch(gameWebDataCleanerProvider);
+  final safetyCopies = ref.watch(safetyCopiesDirectoryProvider);
+  final platform = ref.watch(notificationPlatformProvider);
+  return () async {
+    Object? first;
+    StackTrace? firstStack;
+    Future<void> step(String what, Future<void> Function() run) async {
+      try {
+        await run();
+      } catch (e, s) {
+        debugPrint('Madar: deleting all data – $what failed (${e.runtimeType})');
+        first ??= e;
+        firstStack ??= s;
+      }
+    }
+
+    await step('the AI keys', () async {
+      await keys.deleteAll();
+      ref.invalidate(aiKeyHintsProvider);
+    });
+    await step('the widgets', clearWidgetData);
+    await step('the saved games\' site data', games.clearAll);
+    await step('Together\'s online project', () async {
+      await secrets.delete(OnlineConfigStore.key);
+      await secrets.delete(OnlineRoomLedger.key);
+    });
+    await step('the scheduled alarms', () async {
+      if (ref.exists(notificationCenterProvider)) ref.invalidate(notificationCenterProvider);
+      final raw = rawNotificationPlatform(platform);
+      for (final pending in await raw.pending()) {
+        await raw.cancel(pending.id);
+      }
+      for (final id in await raw.activeIds()) {
+        await raw.cancel(id);
+      }
+    });
+    await step('the safety copies', () async {
+      final directory = await safetyCopies();
+      if (directory.existsSync()) await directory.delete(recursive: true);
+    });
+    await step('the share cache', () => PlatformDataFileBridge.cleanShareCache(age: Duration.zero));
+    if (first != null) Error.throwWithStackTrace(first!, firstStack ?? StackTrace.current);
+  };
+});
+
+/// The real plugin under the app's decorators (`SuspendingNotificationPlatform`
+/// around `GatedNotificationPlatform` around the plugin – see
+/// `suspendingFlowOverrides`).
+///
+/// "Delete all data" cancels on it directly: the notification service's own
+/// `pending()` hides the centre's moved snoozes, so cancelling through it
+/// would leave them armed and an alarm of deleted data would still fire.
+NotificationPlatform rawNotificationPlatform(NotificationPlatform platform) {
+  var p = platform;
+  // Bounded: the chain is two decorators deep, and a cycle is impossible.
+  for (var i = 0; i < 4; i++) {
+    final next = switch (p) {
+      SuspendingNotificationPlatform(:final inner) => inner,
+      GatedNotificationPlatform(:final inner) => inner,
+      _ => null,
+    };
+    if (next == null) break;
+    p = next;
+  }
+  return p;
+}

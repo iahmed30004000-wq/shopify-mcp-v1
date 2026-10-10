@@ -21771,6 +21771,149 @@ class L10nAr extends L10n {
   String get aiChatLinkOpen => 'فتح الرابط';
 
   @override
+  String get systemShellDataRow => 'النسخة الاحتياطية والتصدير والاستعادة';
+
+  @override
+  String get systemShellDataRowNever => 'ما عملت نسخة احتياطية بعد';
+
+  @override
+  String systemShellDataRowLast(String date) {
+    return 'آخر نسخة احتياطية: $date';
+  }
+
+  @override
+  String get systemShellPrivacyNote =>
+      'بياناتك مشفّرة على هذا الهاتف، وما بتطلع منه إلا لمّا تشاركها أو تحفظها أو تبعتها أنت بنفسك.';
+
+  @override
+  String get systemShellNotificationCenterRow => 'مركز الإشعارات';
+
+  @override
+  String get systemShellNotificationCenterHint =>
+      'اللي وصلك واللي جاي، مع الكتم والتأجيل';
+
+  @override
+  String get systemShellNotificationGroupsRow => 'شو يرسل كل قسم';
+
+  @override
+  String systemShellNotificationsMuted(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n قسم مكتوم',
+      many: '$n قسمًا مكتومًا',
+      few: '$n أقسام مكتومة',
+      two: 'قسمان مكتومان',
+      one: 'قسم واحد مكتوم',
+      zero: 'ما في شي مكتوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get systemShellWidgetsRowHint =>
+      'الصلاة والدوا وأهم ثلاث والميزانية على الشاشة الرئيسية';
+
+  @override
+  String get systemShellTogetherRowHint => 'ملفّا اللاعبَين وقاعة مجدنا';
+
+  @override
+  String get systemShellAiSection => 'الذكاء الاصطناعي';
+
+  @override
+  String get systemShellAiChatsRowHint => 'محادثاتك محفوظة على هذا الهاتف';
+
+  @override
+  String get systemShellAskFaithPrompt =>
+      'ساعدني أرتّب وردي اليومي على قد وقتي';
+
+  @override
+  String get systemShellAskHealthPrompt =>
+      'لخّص لي شو سجّلت هذا الأسبوع من دوا ومزاج ووجع';
+
+  @override
+  String get systemShellAskMoneyPrompt =>
+      'راجع ميزانية هذا الشهر وقلّي وين أقدر أوفّر';
+
+  @override
+  String get systemShellAskWorkPrompt =>
+      'رتّب لي أهم ثلاث أشياء لبكرا من لوحاتي ومشاريعي';
+
+  @override
+  String get systemShellAskFamilyPrompt =>
+      'مين صار وقته أسأل عنه، وشو أحكي له؟';
+
+  @override
+  String get systemShellAskTravelPrompt => 'راجع سفرتي الجاي وقلّي شو ناسي';
+
+  @override
+  String get systemShellAskGrowthPrompt =>
+      'شو أحسن خطة أكمّل فيها اللي عمّال أتعلمه؟';
+
+  @override
+  String get systemShellAskBodyPrompt =>
+      'لخّص لي أكلي ورياضتي وصيامي هذا الأسبوع';
+
+  @override
+  String get systemShellSourceFoods => 'مكتبة الأكل';
+
+  @override
+  String get systemShellSourceFoodLogs => 'اللي أكلته';
+
+  @override
+  String get systemShellSourceMealPlans => 'خطط الوجبات';
+
+  @override
+  String get systemShellSourceMealSlots => 'الوجبات';
+
+  @override
+  String get systemShellSourceFoodRules => 'قواعد الأكل';
+
+  @override
+  String get systemShellSumFoodTitle => 'الأكل (متابعة)';
+
+  @override
+  String get systemShellSumFoodTopFoods => 'أكثر ما سجّلته';
+
+  @override
+  String get systemShellSumFoodTopTags => 'أكثر كلماتك تكرارًا';
+
+  @override
+  String systemShellSumMealPlanTitle(String name) {
+    return 'خطة الوجبات «$name»';
+  }
+
+  @override
+  String get systemShellSumFoodRulesTitle => 'قواعدي للأكل (أنا كتبتها)';
+
+  @override
+  String get systemShellSumFoodAnyFood => 'أي أكل';
+
+  @override
+  String get systemShellCsvFood => 'الأكل';
+
+  @override
+  String get systemShellCsvFoodName => 'الأكلة';
+
+  @override
+  String get systemShellCsvPortion => 'الكمية';
+
+  @override
+  String get systemShellCsvUnit => 'الوحدة';
+
+  @override
+  String get systemShellCsvTags => 'كلماتك';
+
+  @override
+  String get systemShellCsvMeal => 'الوجبة';
+
+  @override
+  String get systemShellWidgetsRow => 'أدواتك الأربعة';
+
+  @override
+  String get systemShellTogetherRow => 'أنتما الاثنان';
+
+  @override
   String get togetherTitle => 'معًا';
 
   @override

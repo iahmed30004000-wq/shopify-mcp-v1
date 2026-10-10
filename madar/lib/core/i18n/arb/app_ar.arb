@@ -20628,6 +20628,87 @@
   },
   "aiChatLinkBody": "يُفتح خارج مَدار، وكل ما في العنوان يصل إلى ذلك الموقع. افتحه فقط إن كنت تثق به.",
   "aiChatLinkOpen": "فتح الرابط",
+  "systemShellDataRow": "النسخة الاحتياطية والتصدير والاستعادة",
+  "@systemShellDataRow": {
+    "description": "Settings › Your data: the row that opens the data centre"
+  },
+  "systemShellDataRowNever": "ما عملت نسخة احتياطية بعد",
+  "systemShellDataRowLast": "آخر نسخة احتياطية: {date}",
+  "@systemShellDataRowLast": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellPrivacyNote": "بياناتك مشفّرة على هذا الهاتف، وما بتطلع منه إلا لمّا تشاركها أو تحفظها أو تبعتها أنت بنفسك.",
+  "systemShellNotificationCenterRow": "مركز الإشعارات",
+  "systemShellNotificationCenterHint": "اللي وصلك واللي جاي، مع الكتم والتأجيل",
+  "systemShellNotificationGroupsRow": "شو يرسل كل قسم",
+  "systemShellNotificationsMuted": "{count, plural, =0{ما في شي مكتوم} =1{قسم واحد مكتوم} =2{قسمان مكتومان} few{{n} أقسام مكتومة} many{{n} قسمًا مكتومًا} other{{n} قسم مكتوم}}",
+  "@systemShellNotificationsMuted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellWidgetsRowHint": "الصلاة والدوا وأهم ثلاث والميزانية على الشاشة الرئيسية",
+  "systemShellTogetherRowHint": "ملفّا اللاعبَين وقاعة مجدنا",
+  "systemShellAiSection": "الذكاء الاصطناعي",
+  "systemShellAiChatsRowHint": "محادثاتك محفوظة على هذا الهاتف",
+  "systemShellAskFaithPrompt": "ساعدني أرتّب وردي اليومي على قد وقتي",
+  "systemShellAskHealthPrompt": "لخّص لي شو سجّلت هذا الأسبوع من دوا ومزاج ووجع",
+  "systemShellAskMoneyPrompt": "راجع ميزانية هذا الشهر وقلّي وين أقدر أوفّر",
+  "systemShellAskWorkPrompt": "رتّب لي أهم ثلاث أشياء لبكرا من لوحاتي ومشاريعي",
+  "systemShellAskFamilyPrompt": "مين صار وقته أسأل عنه، وشو أحكي له؟",
+  "systemShellAskTravelPrompt": "راجع سفرتي الجاي وقلّي شو ناسي",
+  "systemShellAskGrowthPrompt": "شو أحسن خطة أكمّل فيها اللي عمّال أتعلمه؟",
+  "systemShellAskBodyPrompt": "لخّص لي أكلي ورياضتي وصيامي هذا الأسبوع",
+  "systemShellSourceFoods": "مكتبة الأكل",
+  "@systemShellSourceFoods": {
+    "description": "Search source: the user's own food library"
+  },
+  "systemShellSourceFoodLogs": "اللي أكلته",
+  "systemShellSourceMealPlans": "خطط الوجبات",
+  "systemShellSourceMealSlots": "الوجبات",
+  "systemShellSourceFoodRules": "قواعد الأكل",
+  "systemShellSumFoodTitle": "الأكل (متابعة)",
+  "@systemShellSumFoodTitle": {
+    "description": "AI summary sub-heading of the food log"
+  },
+  "systemShellSumFoodTopFoods": "أكثر ما سجّلته",
+  "systemShellSumFoodTopTags": "أكثر كلماتك تكرارًا",
+  "systemShellSumMealPlanTitle": "خطة الوجبات «{name}»",
+  "@systemShellSumMealPlanTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellSumFoodRulesTitle": "قواعدي للأكل (أنا كتبتها)",
+  "systemShellSumFoodAnyFood": "أي أكل",
+  "systemShellCsvFood": "الأكل",
+  "@systemShellCsvFood": {
+    "description": "CSV export: the food log"
+  },
+  "systemShellCsvFoodName": "الأكلة",
+  "systemShellCsvPortion": "الكمية",
+  "systemShellCsvUnit": "الوحدة",
+  "systemShellCsvTags": "كلماتك",
+  "systemShellCsvMeal": "الوجبة",
+  "systemShellWidgetsRow": "أدواتك الأربعة",
+  "@systemShellWidgetsRow": {
+    "description": "Settings row that opens the widgets page"
+  },
+  "systemShellTogetherRow": "أنتما الاثنان",
+  "@systemShellTogetherRow": {
+    "description": "Settings row that opens Together Mode"
+  },
   "togetherTitle": "معًا",
   "@togetherTitle": {
     "description": "Together Mode home title"

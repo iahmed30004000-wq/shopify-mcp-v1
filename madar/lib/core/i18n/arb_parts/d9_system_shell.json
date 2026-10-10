@@ -1,0 +1,182 @@
+{
+  "systemShellDataRow": {
+    "ar": "النسخة الاحتياطية والتصدير والاستعادة",
+    "en": "Backup, export and restore",
+    "description": "Settings › Your data: the row that opens the data centre"
+  },
+  "systemShellDataRowNever": {
+    "ar": "ما عملت نسخة احتياطية بعد",
+    "en": "No backup yet"
+  },
+  "systemShellDataRowLast": {
+    "ar": "آخر نسخة احتياطية: {date}",
+    "en": "Last backup: {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellPrivacyNote": {
+    "ar": "بياناتك مشفّرة على هذا الهاتف، وما بتطلع منه إلا لمّا تشاركها أو تحفظها أو تبعتها أنت بنفسك.",
+    "en": "Your data is encrypted on this phone. It leaves only when you share, save or send it yourself."
+  },
+  "systemShellNotificationCenterRow": {
+    "ar": "مركز الإشعارات",
+    "en": "Notification centre"
+  },
+  "systemShellNotificationCenterHint": {
+    "ar": "اللي وصلك واللي جاي، مع الكتم والتأجيل",
+    "en": "What arrived and what is coming, with mute and snooze"
+  },
+  "systemShellNotificationGroupsRow": {
+    "ar": "شو يرسل كل قسم",
+    "en": "What each part sends"
+  },
+  "systemShellNotificationsMuted": {
+    "ar": "{count, plural, =0{ما في شي مكتوم} =1{قسم واحد مكتوم} =2{قسمان مكتومان} few{{n} أقسام مكتومة} many{{n} قسمًا مكتومًا} other{{n} قسم مكتوم}}",
+    "en": "{count, plural, =0{Nothing muted} =1{1 group muted} other{{n} groups muted}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellWidgetsRowHint": {
+    "ar": "الصلاة والدوا وأهم ثلاث والميزانية على الشاشة الرئيسية",
+    "en": "Prayer, meds, your top three and the budget on your home screen"
+  },
+  "systemShellTogetherRowHint": {
+    "ar": "ملفّا اللاعبَين وقاعة مجدنا",
+    "en": "Your two profiles and Our Hall of Fame"
+  },
+  "systemShellAiSection": {
+    "ar": "الذكاء الاصطناعي",
+    "en": "AI"
+  },
+  "systemShellAiChatsRowHint": {
+    "ar": "محادثاتك محفوظة على هذا الهاتف",
+    "en": "Your chats, kept on this phone"
+  },
+  "systemShellAskFaithPrompt": {
+    "ar": "ساعدني أرتّب وردي اليومي على قد وقتي",
+    "en": "Help me plan a daily wird that fits my time"
+  },
+  "systemShellAskHealthPrompt": {
+    "ar": "لخّص لي شو سجّلت هذا الأسبوع من دوا ومزاج ووجع",
+    "en": "Summarise what I logged this week: doses, mood and pain"
+  },
+  "systemShellAskMoneyPrompt": {
+    "ar": "راجع ميزانية هذا الشهر وقلّي وين أقدر أوفّر",
+    "en": "Review this month's budget and suggest where I can save"
+  },
+  "systemShellAskWorkPrompt": {
+    "ar": "رتّب لي أهم ثلاث أشياء لبكرا من لوحاتي ومشاريعي",
+    "en": "Put my boards and projects in order and pick tomorrow's Top 3"
+  },
+  "systemShellAskFamilyPrompt": {
+    "ar": "مين صار وقته أسأل عنه، وشو أحكي له؟",
+    "en": "Who is due a call from me, and what should I say?"
+  },
+  "systemShellAskTravelPrompt": {
+    "ar": "راجع سفرتي الجاي وقلّي شو ناسي",
+    "en": "Review my next trip and tell me what I forgot"
+  },
+  "systemShellAskGrowthPrompt": {
+    "ar": "شو أحسن خطة أكمّل فيها اللي عمّال أتعلمه؟",
+    "en": "What is the best plan to keep going with what I am learning?"
+  },
+  "systemShellAskBodyPrompt": {
+    "ar": "لخّص لي أكلي ورياضتي وصيامي هذا الأسبوع",
+    "en": "Summarise my food, exercise and fasting this week"
+  },
+  "systemShellSourceFoods": {
+    "ar": "مكتبة الأكل",
+    "en": "Food library",
+    "description": "Search source: the user's own food library"
+  },
+  "systemShellSourceFoodLogs": {
+    "ar": "اللي أكلته",
+    "en": "What you ate"
+  },
+  "systemShellSourceMealPlans": {
+    "ar": "خطط الوجبات",
+    "en": "Meal plans"
+  },
+  "systemShellSourceMealSlots": {
+    "ar": "الوجبات",
+    "en": "Meals"
+  },
+  "systemShellSourceFoodRules": {
+    "ar": "قواعد الأكل",
+    "en": "Food rules"
+  },
+  "systemShellSumFoodTitle": {
+    "ar": "الأكل (متابعة)",
+    "en": "Food (tracking)",
+    "description": "AI summary sub-heading of the food log"
+  },
+  "systemShellSumFoodTopFoods": {
+    "ar": "أكثر ما سجّلته",
+    "en": "Most logged foods"
+  },
+  "systemShellSumFoodTopTags": {
+    "ar": "أكثر كلماتك تكرارًا",
+    "en": "Most used words"
+  },
+  "systemShellSumMealPlanTitle": {
+    "ar": "خطة الوجبات «{name}»",
+    "en": "Meal plan “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellSumFoodRulesTitle": {
+    "ar": "قواعدي للأكل (أنا كتبتها)",
+    "en": "My own food rules"
+  },
+  "systemShellSumFoodAnyFood": {
+    "ar": "أي أكل",
+    "en": "any food"
+  },
+  "systemShellCsvFood": {
+    "ar": "الأكل",
+    "en": "Food",
+    "description": "CSV export: the food log"
+  },
+  "systemShellCsvFoodName": {
+    "ar": "الأكلة",
+    "en": "Food"
+  },
+  "systemShellCsvPortion": {
+    "ar": "الكمية",
+    "en": "Portion"
+  },
+  "systemShellCsvUnit": {
+    "ar": "الوحدة",
+    "en": "Unit"
+  },
+  "systemShellCsvTags": {
+    "ar": "كلماتك",
+    "en": "Your words"
+  },
+  "systemShellCsvMeal": {
+    "ar": "الوجبة",
+    "en": "Meal"
+  },
+  "systemShellWidgetsRow": {
+    "ar": "أدواتك الأربعة",
+    "en": "Your four widgets",
+    "description": "Settings row that opens the widgets page"
+  },
+  "systemShellTogetherRow": {
+    "ar": "أنتما الاثنان",
+    "en": "The two of you",
+    "description": "Settings row that opens Together Mode"
+  }
+}

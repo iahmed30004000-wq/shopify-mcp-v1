@@ -103,8 +103,8 @@ _Converted to JOD with the exchange rates saved in the app._
 ### Savings jars
 - Travel: 450.000 JOD of 1000.000 JOD (45%) · by 2026-12-31''',
   SummarySectionId.family: '''
-- Brother Ahmad (brother) · rhythm: every 7 days · days since last contact: 12 · overdue by (days): 5
-- Mother (mother) · rhythm: every 3 days · days since last contact: 0 · due in (days): 3
+- Brother Ahmad (Brother) · rhythm: every 7 days · days since last contact: 12 · overdue by (days): 5
+- Mother (Mother) · rhythm: every 3 days · days since last contact: 0 · due in (days): 3
 - Sami ••• · rhythm: every 30 days · no contact logged yet · due in (days): 20
 - 2 more people without a contact rhythm''',
   SummarySectionId.work: '''

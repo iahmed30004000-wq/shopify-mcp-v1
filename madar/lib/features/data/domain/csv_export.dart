@@ -22,7 +22,7 @@ import '../../health/record/domain/lab_flags.dart';
 import 'export_range.dart';
 import 'plain_numbers.dart';
 
-enum DataCsvKind { labs, transactions, pain, mood }
+enum DataCsvKind { labs, transactions, pain, mood, food }
 
 /// A CSV table before encoding.
 @immutable
@@ -87,15 +87,16 @@ class DataCsvBuilder {
 
   CsvTable labs(List<LabTestRow> tests, List<LabReadingRow> readings, {ExportDateRange range = ExportDateRange.all}) {
     final byId = {for (final t in tests) t.id: t};
-    final rows = [
-      for (final r in readings)
-        if (range.contains(r.date)) r,
-    ]..sort((a, b) {
-        final c = a.date.compareTo(b.date);
-        if (c != 0) return c;
-        final n = (byId[a.testId]?.name ?? '').compareTo(byId[b.testId]?.name ?? '');
-        return n != 0 ? n : a.id.compareTo(b.id);
-      });
+    final rows =
+        [
+          for (final r in readings)
+            if (range.contains(r.date)) r,
+        ]..sort((a, b) {
+          final c = a.date.compareTo(b.date);
+          if (c != 0) return c;
+          final n = (byId[a.testId]?.name ?? '').compareTo(byId[b.testId]?.name ?? '');
+          return n != 0 ? n : a.id.compareTo(b.id);
+        });
     return CsvTable(
       header: [
         l.dataCsvDate,
@@ -114,7 +115,11 @@ class DataCsvBuilder {
         for (final r in rows)
           () {
             final t = byId[r.testId];
-            final flag = LabFlags.classify(r.value, LabRange(low: t?.low, high: t?.high), margin: labMargin);
+            final flag = LabFlags.classify(
+              r.value,
+              LabRange(low: t?.low, high: t?.high),
+              margin: labMargin,
+            );
             return <String?>[
               isoDay(r.date),
               t?.name ?? '',
@@ -170,8 +175,7 @@ class DataCsvBuilder {
       return parts.join(' › ');
     }
 
-    int decimalsOf(String code) =>
-        currencyByCode[code.toUpperCase()]?.decimals ?? CurrencyCatalog.decimalsFor(code);
+    int decimalsOf(String code) => currencyByCode[code.toUpperCase()]?.decimals ?? CurrencyCatalog.decimalsFor(code);
 
     String? toBase(int milli, String code) {
       if (baseCode == null) return null;
@@ -181,15 +185,16 @@ class DataCsvBuilder {
       return PlainNumbers.milli(Money(milli, code.toUpperCase()).toBase(rate, baseCode).milli, decimals: baseDecimals);
     }
 
-    final rows = [
-      for (final t in transactions)
-        if (range.contains(t.date)) t,
-    ]..sort((a, b) {
-        final c = a.date.compareTo(b.date);
-        if (c != 0) return c;
-        final k = a.createdAt.compareTo(b.createdAt);
-        return k != 0 ? k : a.id.compareTo(b.id);
-      });
+    final rows =
+        [
+          for (final t in transactions)
+            if (range.contains(t.date)) t,
+        ]..sort((a, b) {
+          final c = a.date.compareTo(b.date);
+          if (c != 0) return c;
+          final k = a.createdAt.compareTo(b.createdAt);
+          return k != 0 ? k : a.id.compareTo(b.id);
+        });
 
     return CsvTable(
       header: [
@@ -251,13 +256,14 @@ class DataCsvBuilder {
   // ------------------------------------------------------------------ pain --
 
   CsvTable pain(List<PainEntryRow> entries, {ExportDateRange range = ExportDateRange.all}) {
-    final rows = [
-      for (final e in entries)
-        if (range.contains(e.at)) e,
-    ]..sort((a, b) {
-        final c = a.at.compareTo(b.at);
-        return c != 0 ? c : a.id.compareTo(b.id);
-      });
+    final rows =
+        [
+          for (final e in entries)
+            if (range.contains(e.at)) e,
+        ]..sort((a, b) {
+          final c = a.at.compareTo(b.at);
+          return c != 0 ? c : a.id.compareTo(b.id);
+        });
     return CsvTable(
       header: [
         l.dataCsvDate,
@@ -287,13 +293,14 @@ class DataCsvBuilder {
   // ------------------------------------------------------------------ mood --
 
   CsvTable mood(List<MoodEntryRow> entries, {ExportDateRange range = ExportDateRange.all}) {
-    final rows = [
-      for (final e in entries)
-        if (range.contains(e.at)) e,
-    ]..sort((a, b) {
-        final c = a.at.compareTo(b.at);
-        return c != 0 ? c : a.id.compareTo(b.id);
-      });
+    final rows =
+        [
+          for (final e in entries)
+            if (range.contains(e.at)) e,
+        ]..sort((a, b) {
+          final c = a.at.compareTo(b.at);
+          return c != 0 ? c : a.id.compareTo(b.id);
+        });
     String? n(num? v) => v == null ? null : PlainNumbers.decimal(v);
     return CsvTable(
       header: [
@@ -322,6 +329,53 @@ class DataCsvBuilder {
             n(e.caffeineCups),
             e.factors.isEmpty ? null : _list(e.factors),
             e.notes,
+          ],
+      ],
+    );
+  }
+
+  // ------------------------------------------------------------------ food --
+
+  /// What he ate, one row per entry: the day and time, his own name for it,
+  /// the portion in his own unit word, his words on it, the meal of the plan
+  /// it filled, and his note.
+  CsvTable food({
+    required List<FoodLogRow> logs,
+    required List<MealSlotRow> slots,
+    ExportDateRange range = ExportDateRange.all,
+  }) {
+    final slotName = {for (final s in slots) s.id: s.name};
+    final rows =
+        [
+          for (final e in logs)
+            if (range.contains(e.at)) e,
+        ]..sort((a, b) {
+          final c = a.at.compareTo(b.at);
+          return c != 0 ? c : a.id.compareTo(b.id);
+        });
+    return CsvTable(
+      header: [
+        l.dataCsvDate,
+        l.dataCsvTime,
+        l.systemShellCsvFoodName,
+        l.systemShellCsvPortion,
+        l.systemShellCsvUnit,
+        l.systemShellCsvTags,
+        l.systemShellCsvMeal,
+        l.dataCsvNotes,
+      ],
+      textColumns: const {2, 4, 5, 6, 7},
+      rows: [
+        for (final e in rows)
+          [
+            isoDay(e.at),
+            isoTime(e.at),
+            e.name,
+            e.portion == null ? null : PlainNumbers.decimal(e.portion!),
+            e.unit,
+            e.tags.isEmpty ? null : _list(e.tags),
+            e.slotId == null ? null : slotName[e.slotId],
+            e.note,
           ],
       ],
     );

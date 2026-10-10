@@ -262,7 +262,14 @@ void main() {
       expect(ranged.name, 'madar-labs-2026-09-01_2026-09-30.csv');
       expect(ranged.records, 3);
       final counts = await repo.csvCounts(range: ExportDateRange.forPreset(ExportRangePreset.days30, now));
-      expect(counts, {DataCsvKind.labs: 3, DataCsvKind.transactions: 5, DataCsvKind.pain: 2, DataCsvKind.mood: 2});
+      expect(counts, {
+        DataCsvKind.labs: 3,
+        DataCsvKind.transactions: 5,
+        DataCsvKind.pain: 2,
+        DataCsvKind.mood: 2,
+        // The food log is its own CSV; this fixture logs no food.
+        DataCsvKind.food: 0,
+      });
     });
   });
 }

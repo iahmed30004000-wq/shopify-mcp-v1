@@ -366,6 +366,43 @@ abstract final class AppRoutes {
   /// Settings › Notifications: what each part of Madar sends, and the mutes.
   static const String notificationSettings = '/settings/notifications';
 
+  /// Settings › Your data: the backup, the exports and the restore.
+  static const String dataCentre = '/settings/data';
+
+  /// The restore flow on its own (reachable from the data centre).
+  static const String dataRestore = '/settings/data/restore';
+
+  /// A new AI chat (`?q=` types a question into the field – never sent).
+  static const String ai = '/ai';
+
+  /// Location of a new AI chat with [draft] already typed in.
+  static String aiOf({String? draft}) => Uri(
+    path: ai,
+    queryParameters: draft == null || draft.trim().isEmpty ? null : {'q': draft},
+  ).toString();
+
+  /// The saved AI conversations.
+  static const String aiChats = '/ai/chats';
+
+  /// One saved AI conversation (`/ai/chat/<id>`).
+  static const String aiChat = '/ai/chat/:id';
+
+  /// Location of the saved conversation [id].
+  static String aiChatOf(String id) => '/ai/chat/${Uri.encodeComponent(id)}';
+
+  /// Settings › AI: his own key, the model, the reply length, the privacy.
+  static const String aiSettings = '/settings/ai';
+
+  /// Settings › Home-screen widgets.
+  static const String widgetsSettings = '/settings/widgets';
+
+  /// Together Mode (the two players, the Hall of Fame, the specials).
+  static const String together = '/together';
+  static const String togetherHallOfFame = '/together/hall-of-fame';
+  static const String togetherKnowMe = '/together/know-me';
+  static const String togetherWeekly = '/together/weekly';
+  static const String togetherGoal = '/together/goal';
+
   static String _withTab(String path, String? tab, String home) =>
       Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
 

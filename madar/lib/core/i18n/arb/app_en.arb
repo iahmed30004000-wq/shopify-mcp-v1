@@ -20628,6 +20628,87 @@
   },
   "aiChatLinkBody": "It opens outside Madar, and everything in the address goes to that site. Open it only if you trust it.",
   "aiChatLinkOpen": "Open link",
+  "systemShellDataRow": "Backup, export and restore",
+  "@systemShellDataRow": {
+    "description": "Settings › Your data: the row that opens the data centre"
+  },
+  "systemShellDataRowNever": "No backup yet",
+  "systemShellDataRowLast": "Last backup: {date}",
+  "@systemShellDataRowLast": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellPrivacyNote": "Your data is encrypted on this phone. It leaves only when you share, save or send it yourself.",
+  "systemShellNotificationCenterRow": "Notification centre",
+  "systemShellNotificationCenterHint": "What arrived and what is coming, with mute and snooze",
+  "systemShellNotificationGroupsRow": "What each part sends",
+  "systemShellNotificationsMuted": "{count, plural, =0{Nothing muted} =1{1 group muted} other{{n} groups muted}}",
+  "@systemShellNotificationsMuted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellWidgetsRowHint": "Prayer, meds, your top three and the budget on your home screen",
+  "systemShellTogetherRowHint": "Your two profiles and Our Hall of Fame",
+  "systemShellAiSection": "AI",
+  "systemShellAiChatsRowHint": "Your chats, kept on this phone",
+  "systemShellAskFaithPrompt": "Help me plan a daily wird that fits my time",
+  "systemShellAskHealthPrompt": "Summarise what I logged this week: doses, mood and pain",
+  "systemShellAskMoneyPrompt": "Review this month's budget and suggest where I can save",
+  "systemShellAskWorkPrompt": "Put my boards and projects in order and pick tomorrow's Top 3",
+  "systemShellAskFamilyPrompt": "Who is due a call from me, and what should I say?",
+  "systemShellAskTravelPrompt": "Review my next trip and tell me what I forgot",
+  "systemShellAskGrowthPrompt": "What is the best plan to keep going with what I am learning?",
+  "systemShellAskBodyPrompt": "Summarise my food, exercise and fasting this week",
+  "systemShellSourceFoods": "Food library",
+  "@systemShellSourceFoods": {
+    "description": "Search source: the user's own food library"
+  },
+  "systemShellSourceFoodLogs": "What you ate",
+  "systemShellSourceMealPlans": "Meal plans",
+  "systemShellSourceMealSlots": "Meals",
+  "systemShellSourceFoodRules": "Food rules",
+  "systemShellSumFoodTitle": "Food (tracking)",
+  "@systemShellSumFoodTitle": {
+    "description": "AI summary sub-heading of the food log"
+  },
+  "systemShellSumFoodTopFoods": "Most logged foods",
+  "systemShellSumFoodTopTags": "Most used words",
+  "systemShellSumMealPlanTitle": "Meal plan “{name}”",
+  "@systemShellSumMealPlanTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "systemShellSumFoodRulesTitle": "My own food rules",
+  "systemShellSumFoodAnyFood": "any food",
+  "systemShellCsvFood": "Food",
+  "@systemShellCsvFood": {
+    "description": "CSV export: the food log"
+  },
+  "systemShellCsvFoodName": "Food",
+  "systemShellCsvPortion": "Portion",
+  "systemShellCsvUnit": "Unit",
+  "systemShellCsvTags": "Your words",
+  "systemShellCsvMeal": "Meal",
+  "systemShellWidgetsRow": "Your four widgets",
+  "@systemShellWidgetsRow": {
+    "description": "Settings row that opens the widgets page"
+  },
+  "systemShellTogetherRow": "The two of you",
+  "@systemShellTogetherRow": {
+    "description": "Settings row that opens Together Mode"
+  },
   "togetherTitle": "Together",
   "@togetherTitle": {
     "description": "Together Mode home title"

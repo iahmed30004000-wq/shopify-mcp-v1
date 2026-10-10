@@ -19,8 +19,11 @@ import '../../../core/db/database.dart';
 import '../../../core/domain/budget_math.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/domain/money.dart';
+import '../../../core/i18n/formatters.dart' show MadarFormatter;
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../family/domain/rhythm.dart';
+import '../../family/family_texts.dart' show FamilyTexts;
+import '../../work/domain/board_columns.dart' show BoardColumn, BoardColumns, DefaultColumnKind;
 import '../../health/record/domain/lab_flags.dart';
 import 'ai_summary.dart';
 import 'csv_export.dart' show DataCsvBuilder;
@@ -73,6 +76,23 @@ class AiSummaryBuilder {
   // ------------------------------------------------------------ helpers --
 
   static String _clean(String? s) => SummaryText.clean(s);
+
+  /// «فاطمة (أمي)» – the person, and the relation read in the summary's
+  /// language (the stored value is a key like `mother`; anything he typed
+  /// himself is kept as he wrote it).
+  String _person(PersonRow p) {
+    final relation = _clean(FamilyTexts(l, MadarFormatter(languageCode: languageCode)).relation(p.relation));
+    return relation.isEmpty ? _clean(p.name) : '${_clean(p.name)} ($relation)';
+  }
+
+  /// A board column's name in the summary's language while it is still one
+  /// of the defaults, and as he renamed it afterwards.
+  String _column(BoardColumn c) => switch (BoardColumns.defaultKindOf(c)) {
+    DefaultColumnKind.todo => l.workColTodo,
+    DefaultColumnKind.doing => l.workColDoing,
+    DefaultColumnKind.done => l.workColDone,
+    null => c.label.trim().isEmpty ? l.workColumnUntitled : _clean(c.label),
+  };
 
   String get _sep => ' · ';
   String _list(Iterable<String> items) => items.join(l.dataSumListSep);
@@ -185,14 +205,7 @@ class AiSummaryBuilder {
       }
       if (logged == 0) continue;
       prayers.add(
-        '- ${l.dataSumObligatory(_windowLabel(days))} — ${_join([
-          l.dataSumLogged('$logged', '${days * _obligatory.length}'),
-          l.dataSumOnTime('$onTime'),
-          if (late > 0) l.dataSumLate('$late'),
-          if (qada > 0) l.dataSumMadeUp('$qada'),
-          if (missed > 0) l.dataSumMissed('$missed'),
-          if (jamaah > 0) l.dataSumInCongregation('$jamaah'),
-        ])}',
+        '- ${l.dataSumObligatory(_windowLabel(days))} — ${_join([l.dataSumLogged('$logged', '${days * _obligatory.length}'), l.dataSumOnTime('$onTime'), if (late > 0) l.dataSumLate('$late'), if (qada > 0) l.dataSumMadeUp('$qada'), if (missed > 0) l.dataSumMissed('$missed'), if (jamaah > 0) l.dataSumInCongregation('$jamaah')])}',
       );
     }
     final voluntary = input.prayerLogs.where((r) {
@@ -211,11 +224,7 @@ class AiSummaryBuilder {
       final pages = s.fold<double>(0, (a, q) => a + q.pages);
       final minutes = (s.fold<int>(0, (a, q) => a + q.seconds) / 60).round();
       quran.add(
-        '- ${_windowLabel(days)} — ${_join([
-          l.dataSumSessions('${s.length}'),
-          l.dataSumPages(_num(pages)),
-          if (minutes > 0) l.dataSumMinutes('$minutes'),
-        ])}',
+        '- ${_windowLabel(days)} — ${_join([l.dataSumSessions('${s.length}'), l.dataSumPages(_num(pages)), if (minutes > 0) l.dataSumMinutes('$minutes')])}',
       );
     }
     if (quran.isEmpty && input.quranSessions.isNotEmpty) {
@@ -232,11 +241,7 @@ class AiSummaryBuilder {
         WirdUnit.ayat => l.dataSumUnitAyat,
       };
       quran.add(
-        '- ${l.dataSumWird(_clean(w.name))}: ${_join([
-          l.dataSumPerDay(_num(w.amountPerDay), unit),
-          l.dataSumSince(isoDay(w.startDate)),
-          if (w.targetDate != null) l.dataSumBy(isoDay(w.targetDate!)),
-        ])}',
+        '- ${l.dataSumWird(_clean(w.name))}: ${_join([l.dataSumPerDay(_num(w.amountPerDay), unit), l.dataSumSince(isoDay(w.startDate)), if (w.targetDate != null) l.dataSumBy(isoDay(w.targetDate!))])}',
       );
     }
     md.sub(l.dataSumQuranTitle, quran);
@@ -249,16 +254,9 @@ class AiSummaryBuilder {
       final reviews = input.hifzReviews.where((r) => _within(r.at, window)).toList();
       final avg = _avg(reviews.map((r) => r.grade));
       md.sub(l.dataSumHifzTitle, [
-        '- ${_join([
-          l.dataSumItems('${items.length}'),
-          if (fresh > 0) l.dataSumNew('$fresh'),
-          l.dataSumDueToday('$due'),
-        ])}',
+        '- ${_join([l.dataSumItems('${items.length}'), if (fresh > 0) l.dataSumNew('$fresh'), l.dataSumDueToday('$due')])}',
         if (reviews.isNotEmpty)
-          '- ${_windowLabel(window)} — ${_join([
-            l.dataSumReviews('${reviews.length}'),
-            if (avg != null) l.dataSumAvgGrade(_num(avg), '5'),
-          ])}',
+          '- ${_windowLabel(window)} — ${_join([l.dataSumReviews('${reviews.length}'), if (avg != null) l.dataSumAvgGrade(_num(avg), '5')])}',
       ]);
     }
     return md.text;
@@ -293,24 +291,19 @@ class AiSummaryBuilder {
       ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id));
     md.sub(l.dataSumMedsTitle, [
       for (final m in meds)
-        '- ${_join([
-          switch (m.kind) {
-            MedKind.supplement => '${_clean(m.name)} (${l.dataSumKindSupplement})',
-            MedKind.injection => '${_clean(m.name)} (${l.dataSumKindInjection})',
-            _ => _clean(m.name),
-          },
-          if (m.dose != null && m.dose!.trim().isNotEmpty) _clean(m.dose),
-          if (m.times.isNotEmpty) (List.of(m.times)..sort()).map(_clean).join(', '),
-          switch (m.takenWith) {
-            TakenWith.emptyStomach => l.dataSumWithEmptyStomach,
-            TakenWith.breakfast => l.dataSumWithBreakfast,
-            TakenWith.lunch => l.dataSumWithLunch,
-            TakenWith.dinner => l.dataSumWithDinner,
-            TakenWith.bedtime => l.dataSumWithBedtime,
-            TakenWith.perCourse => l.dataSumWithCourse,
-            TakenWith.other || TakenWith.anytime => null,
-          },
-        ])}',
+        '- ${_join([switch (m.kind) {
+          MedKind.supplement => '${_clean(m.name)} (${l.dataSumKindSupplement})',
+          MedKind.injection => '${_clean(m.name)} (${l.dataSumKindInjection})',
+          _ => _clean(m.name),
+        }, if (m.dose != null && m.dose!.trim().isNotEmpty) _clean(m.dose), if (m.times.isNotEmpty) (List.of(m.times)..sort()).map(_clean).join(', '), switch (m.takenWith) {
+          TakenWith.emptyStomach => l.dataSumWithEmptyStomach,
+          TakenWith.breakfast => l.dataSumWithBreakfast,
+          TakenWith.lunch => l.dataSumWithLunch,
+          TakenWith.dinner => l.dataSumWithDinner,
+          TakenWith.bedtime => l.dataSumWithBedtime,
+          TakenWith.perCourse => l.dataSumWithCourse,
+          TakenWith.other || TakenWith.anytime => null,
+        }])}',
     ]);
 
     md.sub(l.dataSumLabsTitle, _labs(input));
@@ -368,7 +361,14 @@ class AiSummaryBuilder {
     return [
       '_${l.dataSumLabsWindow('$labMonths')}_',
       '',
-      _tableRow([l.dataSumColTest, l.dataSumColDate, l.dataSumColResult, l.dataSumColRange, l.dataSumColFlag, l.dataSumColPrevious]),
+      _tableRow([
+        l.dataSumColTest,
+        l.dataSumColDate,
+        l.dataSumColResult,
+        l.dataSumColRange,
+        l.dataSumColFlag,
+        l.dataSumColPrevious,
+      ]),
       _tableRow(List.filled(6, '---')),
       for (final r in shown) _tableRow(r.$3),
       if (rows.length > shown.length) ...['', '- ${l.dataSumMore('${rows.length - shown.length}')}'],
@@ -384,21 +384,14 @@ class AiSummaryBuilder {
     final out = <String>[];
     if (recent.isNotEmpty) {
       out.add(
-        '- ${_windowLabel(window)} — ${_join([
-          l.dataSumEntries('${recent.length}'),
-          l.dataSumAverageOf(_num(_avg(recent.map((p) => p.score))!), '10'),
-          l.dataSumHighest('${recent.map((p) => p.score).reduce(math.max)}', '10'),
-        ])}',
+        '- ${_windowLabel(window)} — ${_join([l.dataSumEntries('${recent.length}'), l.dataSumAverageOf(_num(_avg(recent.map((p) => p.score))!), '10'), l.dataSumHighest('${recent.map((p) => p.score).reduce(math.max)}', '10')])}',
       );
     } else {
       out.add('- ${_windowLabel(window)} — ${l.dataSumEntries('0')}');
     }
     if (previous.isNotEmpty) {
       out.add(
-        '- ${l.dataSumPreviousDays('$window')} — ${_join([
-          l.dataSumEntries('${previous.length}'),
-          l.dataSumAverageOf(_num(_avg(previous.map((p) => p.score))!), '10'),
-        ])}',
+        '- ${l.dataSumPreviousDays('$window')} — ${_join([l.dataSumEntries('${previous.length}'), l.dataSumAverageOf(_num(_avg(previous.map((p) => p.score))!), '10')])}',
       );
     }
     final places = _top(recent.expand((p) => p.locations));
@@ -446,7 +439,8 @@ class AiSummaryBuilder {
     final base = input.currencies.where((c) => c.isBase).firstOrNull;
     final baseCode = base?.code.toUpperCase();
     int decimals(String code) => currencies[code.toUpperCase()]?.decimals ?? CurrencyCatalog.decimalsFor(code);
-    String amount(int milli, String code) => '${PlainNumbers.milli(milli, decimals: decimals(code))} ${code.toUpperCase()}';
+    String amount(int milli, String code) =>
+        '${PlainNumbers.milli(milli, decimals: decimals(code))} ${code.toUpperCase()}';
     num? rate(String code) {
       if (baseCode == null) return null;
       if (code.toUpperCase() == baseCode) return 1;
@@ -466,7 +460,8 @@ class AiSummaryBuilder {
     final balances = {for (final w in input.wallets) w.id: w.openingMilli};
     for (final t in input.transactions) {
       if (balances.containsKey(t.walletId)) {
-        balances[t.walletId] = balances[t.walletId]! +
+        balances[t.walletId] =
+            balances[t.walletId]! +
             switch (t.kind) {
               TxKind.income => t.amountMilli.abs(),
               TxKind.expense || TxKind.transfer => -t.amountMilli.abs(),
@@ -490,11 +485,13 @@ class AiSummaryBuilder {
         final b = balances[w.id] ?? 0;
         final converted = inBase(b, w.currency);
         if (converted != null) total += converted;
-        lines.add(_tableRow([
-          _clean(w.name),
-          amount(b, w.currency),
-          if (baseCode != null) converted == null ? '—' : PlainNumbers.milli(converted, decimals: decimals(baseCode)),
-        ]));
+        lines.add(
+          _tableRow([
+            _clean(w.name),
+            amount(b, w.currency),
+            if (baseCode != null) converted == null ? '—' : PlainNumbers.milli(converted, decimals: decimals(baseCode)),
+          ]),
+        );
       }
       if (baseCode != null) lines.addAll(['', '- ${l.dataSumTotal(amount(total, baseCode))}']);
       md.sub(l.dataSumWalletsTitle, lines);
@@ -506,24 +503,21 @@ class AiSummaryBuilder {
         for (final c in input.currencies)
           if (rate(c.code) != null) c.code.toUpperCase(): rate(c.code)!,
       };
-      final budget = BudgetMath(
-        [
-          for (final b in input.budgetItems)
-            BudgetNode(
-              id: b.id,
-              name: b.name,
-              parentId: b.parentId,
-              mode: b.mode,
-              amountMilli: b.amountMilli,
-              percent: b.percent,
-              percentOf: b.percentOf,
-              period: b.period,
-              currency: b.currency,
-              sortOrder: b.sortOrder,
-            ),
-        ],
-        settings: BudgetSettings(weeksPerMonth: input.weeksPerMonth, baseCurrency: baseCode, ratesToBase: rates),
-      );
+      final budget = BudgetMath([
+        for (final b in input.budgetItems)
+          BudgetNode(
+            id: b.id,
+            name: b.name,
+            parentId: b.parentId,
+            mode: b.mode,
+            amountMilli: b.amountMilli,
+            percent: b.percent,
+            percentOf: b.percentOf,
+            period: b.period,
+            currency: b.currency,
+            sortOrder: b.sortOrder,
+          ),
+      ], settings: BudgetSettings(weeksPerMonth: input.weeksPerMonth, baseCurrency: baseCode, ratesToBase: rates));
       final report = budget.spend([
         for (final t in input.transactions)
           BudgetTx(
@@ -537,23 +531,22 @@ class AiSummaryBuilder {
       final planned = report.totalPlannedMilli, spent = report.totalSpentMilli;
       final pct = PlainNumbers.percent(spent, planned);
       final lines = <String>[
-        '- ${_join([
-          l.dataSumPlanned(amount(planned, baseCode)),
-          l.dataSumSpent(amount(spent, baseCode)) + (pct == null ? '' : ' ($pct%)'),
-          l.dataSumRemaining(amount(planned - spent, baseCode)),
-        ])}',
+        '- ${_join([l.dataSumPlanned(amount(planned, baseCode)), l.dataSumSpent(amount(spent, baseCode)) + (pct == null ? '' : ' ($pct%)'), l.dataSumRemaining(amount(planned - spent, baseCode))])}',
       ];
       final names = {for (final b in input.budgetItems) b.id: b.name};
-      final over = [
-        for (final w in report.warnings)
-          if (w.kind == BudgetWarningKind.overspent && w.nodeId != null && names.containsKey(w.nodeId))
-            (names[w.nodeId]!, w.amountMilli ?? 0),
-      ]..sort((a, b) {
-          final c = b.$2.compareTo(a.$2);
-          return c != 0 ? c : a.$1.compareTo(b.$1);
-        });
+      final over =
+          [
+            for (final w in report.warnings)
+              if (w.kind == BudgetWarningKind.overspent && w.nodeId != null && names.containsKey(w.nodeId))
+                (names[w.nodeId]!, w.amountMilli ?? 0),
+          ]..sort((a, b) {
+            final c = b.$2.compareTo(a.$2);
+            return c != 0 ? c : a.$1.compareTo(b.$1);
+          });
       if (over.isNotEmpty) {
-        lines.add('- ${l.dataSumOverPlan}: ${_list([for (final o in over.take(5)) '${_clean(o.$1)} +${PlainNumbers.milli(o.$2, decimals: decimals(baseCode))}'])}');
+        lines.add(
+          '- ${l.dataSumOverPlan}: ${_list([for (final o in over.take(5)) '${_clean(o.$1)} +${PlainNumbers.milli(o.$2, decimals: decimals(baseCode))}'])}',
+        );
       }
       if (report.unassignedMilli > 0) lines.add('- ${l.dataSumUnassigned(amount(report.unassignedMilli, baseCode))}');
       final month = '${_today.year}-${_today.month.toString().padLeft(2, '0')}';
@@ -585,12 +578,7 @@ class AiSummaryBuilder {
     ]..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.person, b.person, a.id, b.id));
     md.sub(l.dataSumDebtsTitle, [
       for (final d in debts)
-        '- ${_join([
-          d.direction == DebtDirection.iOwe
-              ? l.dataSumIOwe(_clean(d.person), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency))
-              : l.dataSumOwedToMe(_clean(d.person), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)),
-          if (d.dueDate != null) l.dataSumDueOn(isoDay(d.dueDate!)),
-        ])}',
+        '- ${_join([d.direction == DebtDirection.iOwe ? l.dataSumIOwe(_clean(d.person), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)) : l.dataSumOwedToMe(_clean(d.person), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)), if (d.dueDate != null) l.dataSumDueOn(isoDay(d.dueDate!))])}',
     ]);
 
     // Jars.
@@ -602,15 +590,7 @@ class AiSummaryBuilder {
       ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id));
     md.sub(l.dataSumJarsTitle, [
       for (final j in jars)
-        '- ${_join([
-          l.dataSumJar(
-            _clean(j.name),
-            amount(saved[j.id] ?? 0, j.currency),
-            amount(j.targetMilli, j.currency),
-            '${PlainNumbers.percent(saved[j.id] ?? 0, j.targetMilli) ?? 0}',
-          ),
-          if (j.deadline != null) l.dataSumBy(isoDay(j.deadline!)),
-        ])}',
+        '- ${_join([l.dataSumJar(_clean(j.name), amount(saved[j.id] ?? 0, j.currency), amount(j.targetMilli, j.currency), '${PlainNumbers.percent(saved[j.id] ?? 0, j.targetMilli) ?? 0}'), if (j.deadline != null) l.dataSumBy(isoDay(j.deadline!))])}',
     ]);
     return md.text;
   }
@@ -630,23 +610,25 @@ class AiSummaryBuilder {
         without++;
         continue;
       }
-      final last = RhythmEngine.effectiveLastContact(stored: p.lastContact, logs: logs[p.id] ?? const [], now: input.now);
-      withRhythm.add((p, RhythmEngine.evaluate(rhythmDays: rhythm, lastContact: last, createdAt: p.createdAt, now: input.now)));
+      final last = RhythmEngine.effectiveLastContact(
+        stored: p.lastContact,
+        logs: logs[p.id] ?? const [],
+        now: input.now,
+      );
+      withRhythm.add((
+        p,
+        RhythmEngine.evaluate(rhythmDays: rhythm, lastContact: last, createdAt: p.createdAt, now: input.now),
+      ));
     }
     final ordered = RhythmEngine.byUrgency(withRhythm, (e) => e.$2);
     final lines = <String>[
       for (final (p, s) in ordered)
-        '- ${_join([
-          p.relation == null || p.relation!.trim().isEmpty ? _clean(p.name) : '${_clean(p.name)} (${_clean(p.relation)})',
-          l.dataSumEvery('${s.rhythmDays}'),
-          s.daysSinceContact == null ? l.dataSumNeverContacted : l.dataSumLastContact('${s.daysSinceContact}'),
-          switch (s.status) {
-            RhythmStatus.overdue => l.dataSumOverdueBy('${s.daysOverdue}'),
-            RhythmStatus.dueToday => l.dataSumDueTodayStatus,
-            RhythmStatus.dueSoon || RhythmStatus.ok => l.dataSumDueIn('${s.daysUntilDue}'),
-            RhythmStatus.none => null,
-          },
-        ])}',
+        '- ${_join([_person(p), l.dataSumEvery('${s.rhythmDays}'), s.daysSinceContact == null ? l.dataSumNeverContacted : l.dataSumLastContact('${s.daysSinceContact}'), switch (s.status) {
+          RhythmStatus.overdue => l.dataSumOverdueBy('${s.daysOverdue}'),
+          RhythmStatus.dueToday => l.dataSumDueTodayStatus,
+          RhythmStatus.dueSoon || RhythmStatus.ok => l.dataSumDueIn('${s.daysUntilDue}'),
+          RhythmStatus.none => null,
+        }])}',
       if (without > 0 && withRhythm.isNotEmpty) '- ${l.dataSumNoRhythm(without)}',
       if (without > 0 && withRhythm.isEmpty) '- ${l.dataSumPeopleNoRhythm(without)}',
     ];
@@ -660,10 +642,10 @@ class AiSummaryBuilder {
     final boards = input.boards.where((b) => !input.archivedBoardIds.contains(b.id)).toList()
       ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id));
     final boardById = {for (final b in input.boards) b.id: b};
-    List<(String, String)> columnsOf(BoardRow b) => [
-      for (final c in b.columns)
-        if (c is Map && c['id'] is String) (c['id'] as String, '${c['label'] ?? c['id']}'),
-    ];
+    // The columns as the board screen names them: a default column that has
+    // never been renamed reads in the summary's language («المطلوب»), not as
+    // the English label the database wrote.
+    List<(String, String)> columnsOf(BoardRow b) => [for (final c in BoardColumns.parse(b.columns)) (c.id, _column(c))];
     bool cardDone(BoardCardRow c) {
       final b = boardById[c.boardId];
       if (b == null) return false;
@@ -671,14 +653,26 @@ class AiSummaryBuilder {
       return cols.isNotEmpty && cols.last.$1 == c.columnId;
     }
 
+    // A card placed in a prayer window keeps a task of its own, and Work
+    // counts the two as ONE focus item (the card). Listing the task too
+    // would show the same thing twice (`WorkFocus.collect`).
+    final cardIds = {for (final c in input.boardCards) c.id};
     final top = <String>[
-      for (final t in input.tasks.where((t) => t.isTop3 && !t.done).toList()
-        ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.title, b.title, a.id, b.id)))
+      for (final t
+          in input.tasks.where((t) => t.isTop3 && !t.done && !(t.cardId != null && cardIds.contains(t.cardId))).toList()
+            ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.title, b.title, a.id, b.id)))
         '- ${_clean(t.title)}',
-      for (final c in input.boardCards.where(
-        (c) => c.isTop3 && !cardDone(c) && !input.archivedBoardIds.contains(c.boardId) && boardById.containsKey(c.boardId),
-      ).toList()
-        ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.title, b.title, a.id, b.id)))
+      for (final c
+          in input.boardCards
+              .where(
+                (c) =>
+                    c.isTop3 &&
+                    !cardDone(c) &&
+                    !input.archivedBoardIds.contains(c.boardId) &&
+                    boardById.containsKey(c.boardId),
+              )
+              .toList()
+            ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.title, b.title, a.id, b.id)))
         '- ${_clean(c.title)} (${l.dataSumOnBoard(_clean(boardById[c.boardId]!.name))})',
     ];
     md.sub(l.dataSumTop3Title('3'), top);
@@ -694,7 +688,9 @@ class AiSummaryBuilder {
             if (cards.any((c) => !known.contains(c.columnId)))
               '${l.dataSumOther} ${cards.where((c) => !known.contains(c.columnId)).length}',
           ];
-          final name = b.country == null || b.country!.trim().isEmpty ? _clean(b.name) : '${_clean(b.name)} (${_clean(b.country)})';
+          final name = b.country == null || b.country!.trim().isEmpty
+              ? _clean(b.name)
+              : '${_clean(b.name)} (${_clean(b.country)})';
           return '- $name: ${counts.join(_sep)}';
         }(),
     ]);
@@ -709,11 +705,7 @@ class AiSummaryBuilder {
         () {
           final items = input.projectItems.where((i) => i.projectId == p.id).toList();
           final status = p.status == ProjectStatus.paused ? l.dataSumStatusPaused : l.dataSumStatusActive;
-          return '- ${_join([
-            '${_clean(p.name)} ($status)',
-            if (items.isNotEmpty) l.dataSumDoneOf('${items.where((i) => i.done).length}', '${items.length}'),
-            if (p.deadline != null) l.dataSumDeadline(isoDay(p.deadline!)),
-          ])}';
+          return '- ${_join(['${_clean(p.name)} ($status)', if (items.isNotEmpty) l.dataSumDoneOf('${items.where((i) => i.done).length}', '${items.length}'), if (p.deadline != null) l.dataSumDeadline(isoDay(p.deadline!))])}';
         }(),
     ]);
     return md.text;
@@ -732,11 +724,7 @@ class AiSummaryBuilder {
           final recent = logs.where((x) => _within(x.at, window)).fold<double>(0, (a, x) => a + x.amount);
           final unit = _clean(g.unit);
           final pct = g.target > 0 && g.target.isFinite ? (current * 100 / g.target).round() : null;
-          return '- ${_join([
-            '${_clean(g.name)}: ${l.dataSumProgress(_num(current), _num(g.target), unit)}'.trim() + (pct == null ? '' : ' ($pct%)'),
-            if (recent != 0) l.dataSumRecentGain('${recent > 0 ? '+' : ''}${_num(recent)}', _windowLabel(window)),
-            if (g.deadline != null) l.dataSumBy(isoDay(g.deadline!)),
-          ])}';
+          return '- ${_join(['${_clean(g.name)}: ${l.dataSumProgress(_num(current), _num(g.target), unit)}'.trim() + (pct == null ? '' : ' ($pct%)'), if (recent != 0) l.dataSumRecentGain('${recent > 0 ? '+' : ''}${_num(recent)}', _windowLabel(window)), if (g.deadline != null) l.dataSumBy(isoDay(g.deadline!))])}';
         }(),
     ].join('\n');
   }
@@ -754,19 +742,17 @@ class AiSummaryBuilder {
       ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id));
     md.sub(l.dataSumExercisePlanTitle, [
       for (final e in exercises)
-        '- ${_clean(e.name)}: ${_join([
-          if (e.weekdays.isNotEmpty) dayNames(e.weekdays),
-          if (e.sets != null && e.reps != null) '${e.sets}×${e.reps}' else if (e.sets != null) l.dataSumSets('${e.sets}'),
-          if (e.durationMin != null) l.dataSumMinutes('${e.durationMin}'),
-          if (e.weight != null) l.dataSumKg(_num(e.weight!)),
-        ])}'.replaceFirst(RegExp(r': $'), ''),
+        '- ${_clean(e.name)}: ${_join([if (e.weekdays.isNotEmpty) dayNames(e.weekdays), if (e.sets != null && e.reps != null) '${e.sets}×${e.reps}' else if (e.sets != null) l.dataSumSets('${e.sets}'), if (e.durationMin != null) l.dataSumMinutes('${e.durationMin}'), if (e.weight != null) l.dataSumKg(_num(e.weight!))])}'
+            .replaceFirst(RegExp(r': $'), ''),
     ]);
 
     final recent = <String>[];
     final workouts = input.workoutLogs.where((w) => _within(w.at, window)).toList();
     if (workouts.isNotEmpty) {
       final minutes = workouts.fold<int>(0, (a, w) => a + (w.durationMin ?? 0));
-      recent.add('- ${_join([l.dataSumWorkouts('${workouts.length}'), if (minutes > 0) l.dataSumMinutes('$minutes')])}');
+      recent.add(
+        '- ${_join([l.dataSumWorkouts('${workouts.length}'), if (minutes > 0) l.dataSumMinutes('$minutes')])}',
+      );
     }
     final fasts = input.fastingSessions.where((f) => f.end != null && _within(f.start, window)).toList();
     if (fasts.isNotEmpty) {
@@ -778,10 +764,7 @@ class AiSummaryBuilder {
     if (water.isNotEmpty) {
       final avg = (water.fold<int>(0, (a, w) => a + w.ml) / shortWindow).round();
       recent.add(
-        '- ${_join([
-          l.dataSumWater('$shortWindow', '$avg'),
-          if (input.waterTargetMl != null) l.dataSumTargetMl('${input.waterTargetMl}'),
-        ])}',
+        '- ${_join([l.dataSumWater('$shortWindow', '$avg'), if (input.waterTargetMl != null) l.dataSumTargetMl('${input.waterTargetMl}')])}',
       );
     }
     md.sub(_windowLabel(window), recent);
@@ -790,33 +773,96 @@ class AiSummaryBuilder {
       ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.body, b.body, a.id, b.id));
     md.sub(l.dataSumAvoidTitle, [
       for (final a in avoid)
-        a.reason == null || a.reason!.trim().isEmpty ? '- ${_clean(a.body)}' : '- ${_clean(a.body)} — ${_clean(a.reason)}',
+        a.reason == null || a.reason!.trim().isEmpty
+            ? '- ${_clean(a.body)}'
+            : '- ${_clean(a.body)} — ${_clean(a.reason)}',
     ]);
+    _food(md, input);
     return md.text;
+  }
+
+  /// What he eats, inside the Body section: how much he logged in the last
+  /// 30 days with the foods and the words he used most, his active meal
+  /// plan's meals with their times, and the risk rules **he** wrote (the
+  /// only thing a rating ever comes from).
+  ///
+  /// His free text never travels: an entry's note and a food's or a rule's
+  /// note stay on the phone, exactly as for pain and worries.
+  void _food(_Md md, SummaryInput input) {
+    final logs = input.foodLogs.where((f) => _within(f.at, window)).toList();
+    final foodById = {for (final f in input.foods) f.id: f};
+    final tags = <String>[
+      for (final log in logs) ...[...log.tags, ...?foodById[log.foodId]?.tags],
+    ];
+    md.sub(l.systemShellSumFoodTitle, [
+      if (logs.isNotEmpty) '- ${_join([_windowLabel(window), l.dataSumEntries('${logs.length}')])}',
+      if (_top(logs.map((f) => f.name)) case final t when t.isNotEmpty) '- ${l.systemShellSumFoodTopFoods}: $t',
+      if (_top(tags) case final t when t.isNotEmpty) '- ${l.systemShellSumFoodTopTags}: $t',
+    ]);
+
+    final plan = input.mealPlans.where((p) => p.active).firstOrNull;
+    if (plan != null) {
+      final slots = input.mealSlots.where((x) => x.planId == plan.id).toList()
+        ..sort((a, b) {
+          final c = a.timeMinutes.compareTo(b.timeMinutes);
+          return c != 0 ? c : _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id);
+        });
+      final weekdays = l.dataSumWeekdays.split(',');
+      md.sub(l.systemShellSumMealPlanTitle(_clean(plan.name)), [
+        for (final slot in slots.take(maxListItems))
+          '- ${_join([
+            '${_clean(slot.name)} ${_clock(slot.timeMinutes)}',
+            if (slot.weekdays.isNotEmpty && weekdays.length == 7) _list([for (final d in (slot.weekdays.toSet().toList()..sort()))
+                if (d >= 1 && d <= 7) weekdays[d - 1].trim()]),
+          ])}',
+        if (slots.length > maxListItems) '- ${l.dataSumMore('${slots.length - maxListItems}')}',
+      ]);
+    }
+
+    final conditions = {for (final c in input.conditions) c.id: c.name};
+    final rules = input.foodRules.where((r) => r.active).toList()
+      ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.tag ?? '', b.tag ?? '', a.id, b.id));
+    md.sub(l.systemShellSumFoodRulesTitle, [
+      for (final rule in rules.take(maxListItems))
+        '- ${_join([switch (rule.target) {
+          FoodRuleTarget.tag => _clean(rule.tag).isEmpty ? l.systemShellSumFoodAnyFood : _clean(rule.tag),
+          FoodRuleTarget.food => _clean(foodById[rule.foodId]?.name).isEmpty ? l.systemShellSumFoodAnyFood : _clean(foodById[rule.foodId]?.name),
+          FoodRuleTarget.anyFood => l.systemShellSumFoodAnyFood,
+        }, if (conditions[rule.conditionId] case final name?) _clean(name), switch (rule.weight) {
+          RiskWeight.low => l.nutritionWeightLow,
+          RiskWeight.medium => l.nutritionWeightMedium,
+          RiskWeight.high => l.nutritionWeightHigh,
+        }])}',
+      if (rules.length > maxListItems) '- ${l.dataSumMore('${rules.length - maxListItems}')}',
+    ]);
+  }
+
+  /// `08:00` – a meal's time of day, in the summary's plain, deterministic
+  /// form (Western digits, like every number in the document).
+  static String _clock(int minutes) {
+    final m = minutes.clamp(0, 24 * 60 - 1);
+    String two(int n) => n.toString().padLeft(2, '0');
+    return '${two(m ~/ 60)}:${two(m % 60)}';
   }
 
   // ------------------------------------------------------------- travel --
 
   String _travel(SummaryInput input) {
     final md = _Md();
-    final trips = input.trips
-        .where((t) => t.status != TripStatus.done && (t.endDate == null || !_day(t.endDate!).isBefore(_today)))
-        .toList()
-      ..sort((a, b) {
-        final sa = a.startDate, sb = b.startDate;
-        if (sa != null && sb != null && sa != sb) return sa.compareTo(sb);
-        if (sa == null && sb != null) return 1;
-        if (sa != null && sb == null) return -1;
-        return _bySortThenName(a.sortOrder, b.sortOrder, a.destination, b.destination, a.id, b.id);
-      });
+    final trips =
+        input.trips
+            .where((t) => t.status != TripStatus.done && (t.endDate == null || !_day(t.endDate!).isBefore(_today)))
+            .toList()
+          ..sort((a, b) {
+            final sa = a.startDate, sb = b.startDate;
+            if (sa != null && sb != null && sa != sb) return sa.compareTo(sb);
+            if (sa == null && sb != null) return 1;
+            if (sa != null && sb == null) return -1;
+            return _bySortThenName(a.sortOrder, b.sortOrder, a.destination, b.destination, a.id, b.id);
+          });
     md.sub(l.dataSumTripsTitle, [
       for (final t in trips)
-        '- ${_join([
-          t.country == null || t.country!.trim().isEmpty ? _clean(t.destination) : '${_clean(t.destination)} (${_clean(t.country)})',
-          if (t.startDate != null || t.endDate != null)
-            '${t.startDate == null ? '…' : isoDay(t.startDate!)} → ${t.endDate == null ? '…' : isoDay(t.endDate!)}',
-          t.status == TripStatus.active ? l.dataSumTripUnderWay : l.dataSumTripPlanned,
-        ])}',
+        '- ${_join([t.country == null || t.country!.trim().isEmpty ? _clean(t.destination) : '${_clean(t.destination)} (${_clean(t.country)})', if (t.startDate != null || t.endDate != null) '${t.startDate == null ? '…' : isoDay(t.startDate!)} → ${t.endDate == null ? '…' : isoDay(t.endDate!)}', t.status == TripStatus.active ? l.dataSumTripUnderWay : l.dataSumTripPlanned])}',
     ]);
 
     final docs = List.of(input.travelDocuments)
@@ -858,11 +904,7 @@ class AiSummaryBuilder {
         final recent = entries.where((e) => _within(e.at, window)).toList();
         final last = entries.isEmpty ? null : entries.map((e) => e.at).reduce((a, b) => a.isAfter(b) ? a : b);
         lines.add(
-          '- ${_join([
-            l.dataSumEntries('${entries.length}'),
-            l.dataSumInWindow('${recent.length}', _windowLabel(window)),
-            if (last != null) l.dataSumLastOn(isoDay(last)),
-          ])}',
+          '- ${_join([l.dataSumEntries('${entries.length}'), l.dataSumInWindow('${recent.length}', _windowLabel(window)), if (last != null) l.dataSumLastOn(isoDay(last))])}',
         );
         var shown = 0;
         for (final f in _fields(m.fields)) {
@@ -891,8 +933,10 @@ class AiSummaryBuilder {
           options: {
             if (f['options'] is List)
               for (final o in f['options'] as List)
-                if (o is Map && o['id'] != null) '${o['id']}': '${o['label'] ?? o['name'] ?? o['id']}'
-                else if (o is String) o: o,
+                if (o is Map && o['id'] != null)
+                  '${o['id']}': '${o['label'] ?? o['name'] ?? o['id']}'
+                else if (o is String)
+                  o: o,
           },
         ),
   ];
@@ -915,12 +959,7 @@ class AiSummaryBuilder {
         }
         if (values.isEmpty) return null;
         final total = values.fold<double>(0, (a, b) => a + b);
-        return '$label: ${_join([
-          l.dataSumAverage(_num(total / values.length)),
-          l.dataSumMin(_num(values.reduce(math.min))),
-          l.dataSumMax(_num(values.reduce(math.max))),
-          if (f.type != FieldType.rating) l.dataSumSum(_num(total)),
-        ])}';
+        return '$label: ${_join([l.dataSumAverage(_num(total / values.length)), l.dataSumMin(_num(values.reduce(math.min))), l.dataSumMax(_num(values.reduce(math.max))), if (f.type != FieldType.rating) l.dataSumSum(_num(total))])}';
       case FieldType.checkbox:
         final answered = entries.where((e) => e.entryValues[f.id] is bool).toList();
         if (answered.isEmpty) return null;

@@ -209,7 +209,12 @@ abstract final class NotificationNamespaces {
   /// it.
   static const center = NotificationNamespace('center', 160000, 160999);
 
-  static const all = [adhan, adhkar, meds, reminders, wird, health];
+  /// Together Mode's "your turn" alert while a game runs in the background
+  /// (`TogetherNotifications.namespace`, the identical const value): one id,
+  /// replaced and never stacked.
+  static const together = NotificationNamespace('together', 170000, 170999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird, health, together];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {

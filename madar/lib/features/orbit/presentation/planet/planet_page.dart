@@ -30,6 +30,7 @@ import 'customize_sheet.dart';
 import 'faith_hub.dart';
 import 'life_hubs.dart';
 import 'moon_sheet.dart';
+import 'planet_ask_ai.dart';
 import 'planet_modules.dart';
 import 'record_open.dart';
 import 'world_modules.dart';
@@ -43,7 +44,8 @@ import 'world_modules.dart';
 /// Travel, Growth and Body: the package's "today" cards and the world's
 /// tools – [LifeHubs]), every world's own trackers and lists
 /// ([PlanetModulesSection]), what needs care, its moons (tappable – each is
-/// a real record) and what feeds its score.
+/// a real record), what feeds its score, and last "Ask about this world" –
+/// a new AI chat with the question typed in ([PlanetAskAi]).
 class PlanetModulePage extends ConsumerStatefulWidget {
   const PlanetModulePage({super.key, required this.planetKey, this.item});
 
@@ -661,6 +663,11 @@ class _Sheet extends StatelessWidget {
                 child: _SourceRow(label: sources[i].label, value: sources[i].value, color: planet.palette.glow),
               ),
           ],
+          // Last on the page: "Ask about this world" – a new AI chat with
+          // the question already typed in. Nothing is sent until he taps
+          // Send, and the first Send shows him exactly what would go.
+          if (PlanetAskAi.supports(planet.key))
+            StaggerItem(index: 18, child: PlanetAskAi(planetKey: planet.key, area: planet.name)),
         ],
       ),
     );

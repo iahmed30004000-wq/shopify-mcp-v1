@@ -58,7 +58,18 @@ Future<TestApp> _page(
 final Finder _sheet = find.descendant(of: find.byType(PlanetModulePage), matching: find.byType(Scrollable)).first;
 
 /// Scrolls the planet page's sheet until [finder] is built and visible.
+///
+/// The sheet is a lazy list, so a tile far above the viewport has already
+/// been disposed and scrolling further down would never find it: start from
+/// the top of the sheet every time (the world page grew a foot – the
+/// trackers, the reasons, the moons and "Ask about this world" – so this
+/// happens on every hub now).
 Future<void> _reveal(WidgetTester tester, Finder finder) async {
+  final position = tester.state<ScrollableState>(_sheet).position;
+  if (finder.evaluate().isEmpty && position.pixels > 0) {
+    position.jumpTo(0);
+    await tester.pumpAndSettle();
+  }
   await tester.scrollUntilVisible(finder, 250, scrollable: _sheet);
   await tester.ensureVisible(finder);
   await tester.pumpAndSettle();

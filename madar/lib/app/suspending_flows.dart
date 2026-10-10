@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import '../core/notifications/notifications.dart';
 import '../features/adhan/adhan.dart';
 import '../features/adhkar/adhkar.dart' show dhikrAudioPickerProvider, pickDhikrAudio;
+import '../features/data/data.dart'
+    show DataFile, DataFileBridge, PickedDataFile, PlatformDataFileBridge, dataFileBridgeProvider;
 import '../features/family/family.dart'
     show ContactLaunch, ContactLauncher, UrlContactLauncher, familyContactLauncherProvider;
 import '../features/health/record/record.dart'
@@ -13,6 +15,8 @@ import '../features/import/import_controller.dart' show importFilePickerProvider
 import '../features/lock/application/lock_controller.dart';
 import '../features/notification_center/notification_center.dart' show gatedNotificationPlatform;
 import '../features/prayer/prayer.dart';
+import '../features/saved_games/saved_games.dart'
+    show GameLinkOpener, UrlLauncherGameLinkOpener, gameLinkOpenerProvider;
 import 'background_notifications.dart';
 
 /// Runs an app-opened system flow (a permission dialog, a system settings
@@ -33,7 +37,10 @@ SuspendRunner lockSuspender(Ref ref) =>
 /// pickers (muezzin recordings, dhikr recordings, the importer), and the
 /// health flows that leave the app: the doctor report's share sheet and
 /// save dialog, and the support note's dialler; and the family's call, SMS
-/// and WhatsApp (the dialler, the messages app or WhatsApp open on a tap).
+/// and WhatsApp (the dialler, the messages app or WhatsApp open on a tap);
+/// and the system shell's own trips out: «بياناتك» sharing or saving an
+/// export or a backup and picking a backup file to restore, and a saved web
+/// game opened in the phone's browser.
 ///
 /// The notifications plugin is also where a dose's Taken / Snooze / Skip
 /// buttons land when they are pressed in the shade: they never open the
@@ -99,7 +106,46 @@ List<Override> suspendingFlowOverrides() => [
   familyContactLauncherProvider.overrideWith(
     (ref) => SuspendingContactLauncher(const UrlContactLauncher(), lockSuspender(ref)),
   ),
+  dataFileBridgeProvider.overrideWith(
+    (ref) => SuspendingDataFileBridge(const PlatformDataFileBridge(), lockSuspender(ref)),
+  ),
+  gameLinkOpenerProvider.overrideWith(
+    (ref) => SuspendingGameLinkOpener(const UrlLauncherGameLinkOpener(), lockSuspender(ref)),
+  ),
 ];
+
+/// «بياناتك»: the share sheet, the save-as dialog and the file picker
+/// suspended (copying to the clipboard never leaves Madar, so it passes
+/// straight through).
+class SuspendingDataFileBridge implements DataFileBridge {
+  SuspendingDataFileBridge(this.inner, this.suspend);
+
+  final DataFileBridge inner;
+  final SuspendRunner suspend;
+
+  @override
+  Future<bool> share(DataFile file, {String? subject}) => suspend(() => inner.share(file, subject: subject));
+
+  @override
+  Future<bool> save(DataFile file) => suspend(() => inner.save(file));
+
+  @override
+  Future<PickedDataFile?> pickFile() => suspend(inner.pickFile);
+
+  @override
+  Future<void> copyText(String text) => inner.copyText(text);
+}
+
+/// A saved web game opened in the phone's own browser suspended.
+class SuspendingGameLinkOpener implements GameLinkOpener {
+  SuspendingGameLinkOpener(this.inner, this.suspend);
+
+  final GameLinkOpener inner;
+  final SuspendRunner suspend;
+
+  @override
+  Future<bool> openExternally(Uri url) => suspend(() => inner.openExternally(url));
+}
 
 /// The doctor report's share sheet and save dialog suspended.
 class SuspendingReportExporter implements ReportExporter {

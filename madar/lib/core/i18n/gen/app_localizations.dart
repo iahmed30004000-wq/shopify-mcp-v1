@@ -33669,6 +33669,240 @@ abstract class L10n {
   /// **'فتح الرابط'**
   String get aiChatLinkOpen;
 
+  /// Settings › Your data: the row that opens the data centre
+  ///
+  /// In ar, this message translates to:
+  /// **'النسخة الاحتياطية والتصدير والاستعادة'**
+  String get systemShellDataRow;
+
+  /// No description provided for @systemShellDataRowNever.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عملت نسخة احتياطية بعد'**
+  String get systemShellDataRowNever;
+
+  /// No description provided for @systemShellDataRowLast.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نسخة احتياطية: {date}'**
+  String systemShellDataRowLast(String date);
+
+  /// No description provided for @systemShellPrivacyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'بياناتك مشفّرة على هذا الهاتف، وما بتطلع منه إلا لمّا تشاركها أو تحفظها أو تبعتها أنت بنفسك.'**
+  String get systemShellPrivacyNote;
+
+  /// No description provided for @systemShellNotificationCenterRow.
+  ///
+  /// In ar, this message translates to:
+  /// **'مركز الإشعارات'**
+  String get systemShellNotificationCenterRow;
+
+  /// No description provided for @systemShellNotificationCenterHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي وصلك واللي جاي، مع الكتم والتأجيل'**
+  String get systemShellNotificationCenterHint;
+
+  /// No description provided for @systemShellNotificationGroupsRow.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو يرسل كل قسم'**
+  String get systemShellNotificationGroupsRow;
+
+  /// No description provided for @systemShellNotificationsMuted.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في شي مكتوم} =1{قسم واحد مكتوم} =2{قسمان مكتومان} few{{n} أقسام مكتومة} many{{n} قسمًا مكتومًا} other{{n} قسم مكتوم}}'**
+  String systemShellNotificationsMuted(int count, String n);
+
+  /// No description provided for @systemShellWidgetsRowHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة والدوا وأهم ثلاث والميزانية على الشاشة الرئيسية'**
+  String get systemShellWidgetsRowHint;
+
+  /// No description provided for @systemShellTogetherRowHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملفّا اللاعبَين وقاعة مجدنا'**
+  String get systemShellTogetherRowHint;
+
+  /// No description provided for @systemShellAiSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الذكاء الاصطناعي'**
+  String get systemShellAiSection;
+
+  /// No description provided for @systemShellAiChatsRowHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'محادثاتك محفوظة على هذا الهاتف'**
+  String get systemShellAiChatsRowHint;
+
+  /// No description provided for @systemShellAskFaithPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعدني أرتّب وردي اليومي على قد وقتي'**
+  String get systemShellAskFaithPrompt;
+
+  /// No description provided for @systemShellAskHealthPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'لخّص لي شو سجّلت هذا الأسبوع من دوا ومزاج ووجع'**
+  String get systemShellAskHealthPrompt;
+
+  /// No description provided for @systemShellAskMoneyPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'راجع ميزانية هذا الشهر وقلّي وين أقدر أوفّر'**
+  String get systemShellAskMoneyPrompt;
+
+  /// No description provided for @systemShellAskWorkPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'رتّب لي أهم ثلاث أشياء لبكرا من لوحاتي ومشاريعي'**
+  String get systemShellAskWorkPrompt;
+
+  /// No description provided for @systemShellAskFamilyPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'مين صار وقته أسأل عنه، وشو أحكي له؟'**
+  String get systemShellAskFamilyPrompt;
+
+  /// No description provided for @systemShellAskTravelPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'راجع سفرتي الجاي وقلّي شو ناسي'**
+  String get systemShellAskTravelPrompt;
+
+  /// No description provided for @systemShellAskGrowthPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو أحسن خطة أكمّل فيها اللي عمّال أتعلمه؟'**
+  String get systemShellAskGrowthPrompt;
+
+  /// No description provided for @systemShellAskBodyPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'لخّص لي أكلي ورياضتي وصيامي هذا الأسبوع'**
+  String get systemShellAskBodyPrompt;
+
+  /// Search source: the user's own food library
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتبة الأكل'**
+  String get systemShellSourceFoods;
+
+  /// No description provided for @systemShellSourceFoodLogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي أكلته'**
+  String get systemShellSourceFoodLogs;
+
+  /// No description provided for @systemShellSourceMealPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الوجبات'**
+  String get systemShellSourceMealPlans;
+
+  /// No description provided for @systemShellSourceMealSlots.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجبات'**
+  String get systemShellSourceMealSlots;
+
+  /// No description provided for @systemShellSourceFoodRules.
+  ///
+  /// In ar, this message translates to:
+  /// **'قواعد الأكل'**
+  String get systemShellSourceFoodRules;
+
+  /// AI summary sub-heading of the food log
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكل (متابعة)'**
+  String get systemShellSumFoodTitle;
+
+  /// No description provided for @systemShellSumFoodTopFoods.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر ما سجّلته'**
+  String get systemShellSumFoodTopFoods;
+
+  /// No description provided for @systemShellSumFoodTopTags.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر كلماتك تكرارًا'**
+  String get systemShellSumFoodTopTags;
+
+  /// No description provided for @systemShellSumMealPlanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة الوجبات «{name}»'**
+  String systemShellSumMealPlanTitle(String name);
+
+  /// No description provided for @systemShellSumFoodRulesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قواعدي للأكل (أنا كتبتها)'**
+  String get systemShellSumFoodRulesTitle;
+
+  /// No description provided for @systemShellSumFoodAnyFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'أي أكل'**
+  String get systemShellSumFoodAnyFood;
+
+  /// CSV export: the food log
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكل'**
+  String get systemShellCsvFood;
+
+  /// No description provided for @systemShellCsvFoodName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكلة'**
+  String get systemShellCsvFoodName;
+
+  /// No description provided for @systemShellCsvPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get systemShellCsvPortion;
+
+  /// No description provided for @systemShellCsvUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get systemShellCsvUnit;
+
+  /// No description provided for @systemShellCsvTags.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلماتك'**
+  String get systemShellCsvTags;
+
+  /// No description provided for @systemShellCsvMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجبة'**
+  String get systemShellCsvMeal;
+
+  /// Settings row that opens the widgets page
+  ///
+  /// In ar, this message translates to:
+  /// **'أدواتك الأربعة'**
+  String get systemShellWidgetsRow;
+
+  /// Settings row that opens Together Mode
+  ///
+  /// In ar, this message translates to:
+  /// **'أنتما الاثنان'**
+  String get systemShellTogetherRow;
+
   /// Together Mode home title
   ///
   /// In ar, this message translates to:

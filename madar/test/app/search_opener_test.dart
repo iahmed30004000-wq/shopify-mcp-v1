@@ -147,10 +147,16 @@ void main() {
         doc: _doc('custom_entries', extra: {'moduleId': 'm1'}),
         target: '/modules/module/m1',
       ),
-      // Nutrition (Part 4) – routed, though nothing indexes it yet.
+      // Nutrition: indexed by the five food sources (Part 2, second half).
       (name: 'a food opens the library', doc: _doc('foods'), target: AppRoutes.foodLibrary),
       (name: 'a food log opens the food of the day', doc: _doc('food_logs'), target: '/body?tab=food'),
       (name: 'a meal plan opens the plan', doc: _doc('meal_plans'), target: AppRoutes.foodPlan),
+      (name: 'a meal of a plan opens the plan', doc: _doc('meal_slots', refId: 's1'), target: AppRoutes.foodPlan),
+      (
+        name: 'a planned food opens the plan too',
+        doc: _doc('meal_slot_foods', refId: 'sf1'),
+        target: AppRoutes.foodPlan,
+      ),
       (name: 'a food rule opens the rules', doc: _doc('food_rules'), target: AppRoutes.foodRules),
     ];
 

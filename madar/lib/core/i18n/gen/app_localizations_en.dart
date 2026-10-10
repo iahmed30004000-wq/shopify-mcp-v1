@@ -21191,6 +21191,148 @@ class L10nEn extends L10n {
   String get aiChatLinkOpen => 'Open link';
 
   @override
+  String get systemShellDataRow => 'Backup, export and restore';
+
+  @override
+  String get systemShellDataRowNever => 'No backup yet';
+
+  @override
+  String systemShellDataRowLast(String date) {
+    return 'Last backup: $date';
+  }
+
+  @override
+  String get systemShellPrivacyNote =>
+      'Your data is encrypted on this phone. It leaves only when you share, save or send it yourself.';
+
+  @override
+  String get systemShellNotificationCenterRow => 'Notification centre';
+
+  @override
+  String get systemShellNotificationCenterHint =>
+      'What arrived and what is coming, with mute and snooze';
+
+  @override
+  String get systemShellNotificationGroupsRow => 'What each part sends';
+
+  @override
+  String systemShellNotificationsMuted(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n groups muted',
+      one: '1 group muted',
+      zero: 'Nothing muted',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get systemShellWidgetsRowHint =>
+      'Prayer, meds, your top three and the budget on your home screen';
+
+  @override
+  String get systemShellTogetherRowHint =>
+      'Your two profiles and Our Hall of Fame';
+
+  @override
+  String get systemShellAiSection => 'AI';
+
+  @override
+  String get systemShellAiChatsRowHint => 'Your chats, kept on this phone';
+
+  @override
+  String get systemShellAskFaithPrompt =>
+      'Help me plan a daily wird that fits my time';
+
+  @override
+  String get systemShellAskHealthPrompt =>
+      'Summarise what I logged this week: doses, mood and pain';
+
+  @override
+  String get systemShellAskMoneyPrompt =>
+      'Review this month\'s budget and suggest where I can save';
+
+  @override
+  String get systemShellAskWorkPrompt =>
+      'Put my boards and projects in order and pick tomorrow\'s Top 3';
+
+  @override
+  String get systemShellAskFamilyPrompt =>
+      'Who is due a call from me, and what should I say?';
+
+  @override
+  String get systemShellAskTravelPrompt =>
+      'Review my next trip and tell me what I forgot';
+
+  @override
+  String get systemShellAskGrowthPrompt =>
+      'What is the best plan to keep going with what I am learning?';
+
+  @override
+  String get systemShellAskBodyPrompt =>
+      'Summarise my food, exercise and fasting this week';
+
+  @override
+  String get systemShellSourceFoods => 'Food library';
+
+  @override
+  String get systemShellSourceFoodLogs => 'What you ate';
+
+  @override
+  String get systemShellSourceMealPlans => 'Meal plans';
+
+  @override
+  String get systemShellSourceMealSlots => 'Meals';
+
+  @override
+  String get systemShellSourceFoodRules => 'Food rules';
+
+  @override
+  String get systemShellSumFoodTitle => 'Food (tracking)';
+
+  @override
+  String get systemShellSumFoodTopFoods => 'Most logged foods';
+
+  @override
+  String get systemShellSumFoodTopTags => 'Most used words';
+
+  @override
+  String systemShellSumMealPlanTitle(String name) {
+    return 'Meal plan “$name”';
+  }
+
+  @override
+  String get systemShellSumFoodRulesTitle => 'My own food rules';
+
+  @override
+  String get systemShellSumFoodAnyFood => 'any food';
+
+  @override
+  String get systemShellCsvFood => 'Food';
+
+  @override
+  String get systemShellCsvFoodName => 'Food';
+
+  @override
+  String get systemShellCsvPortion => 'Portion';
+
+  @override
+  String get systemShellCsvUnit => 'Unit';
+
+  @override
+  String get systemShellCsvTags => 'Your words';
+
+  @override
+  String get systemShellCsvMeal => 'Meal';
+
+  @override
+  String get systemShellWidgetsRow => 'Your four widgets';
+
+  @override
+  String get systemShellTogetherRow => 'The two of you';
+
+  @override
   String get togetherTitle => 'Together';
 
   @override

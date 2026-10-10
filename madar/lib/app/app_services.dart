@@ -162,6 +162,11 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///   hall is first opened ([savedGamesLegacyImportProvider]; one-shot – the
 ///   old row is removed).
 ///
+/// * last of all, the four home-screen widgets are kept up to date and a
+///   tap on one is routed ([watchSystemServices]): it runs after every
+///   feature above, so a widget is written from data that is already in
+///   step.
+///
 /// The adhan's own services (alarm planning, prayer quiet, the full-screen
 /// adhan) live in `AdhanHost`, directly below this.
 class AppServices extends ConsumerStatefulWidget {
@@ -219,6 +224,8 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     watchHealthServices(ref);
     watchMoneyServices(ref);
     watchLifeServices(ref);
+    // LAST: the home-screen widgets publish what everything above produced.
+    watchSystemServices(ref);
     return widget.child;
   }
 }
