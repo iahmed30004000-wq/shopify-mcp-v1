@@ -123,8 +123,9 @@ void main() {
   });
 
   test('the moon band is slow, tight and clear of its world', () {
-    // Slow enough to be cinematic: more than a minute a lap, never a twitch.
-    expect(MoonLayout.periodOf(PlanetStyle.moonLaneStartOf(PlanetArchetype.terracotta)), greaterThan(60));
+    // Alive but not a whirl: a lap takes well over half a minute (the first
+    // version's 26 s read as a twitch) and well under three.
+    expect(MoonLayout.periodOf(PlanetStyle.moonLaneStartOf(PlanetArchetype.terracotta)), greaterThan(35));
     expect(MoonLayout.periodOf(PlanetStyle.moonLaneStartOf(PlanetArchetype.terracotta)), lessThan(180));
     // The band is narrower than the gap between two planet lanes measured in
     // world units, so a moon never wanders into a neighbour's lane.

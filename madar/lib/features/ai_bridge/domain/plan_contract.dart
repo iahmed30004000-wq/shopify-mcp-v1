@@ -67,7 +67,7 @@
 /// {
 ///   "id": "h1",                 // REQUIRED, unique in the plan, ≤ 64, [A-Za-z0-9_.:-]
 ///   "kind": "habit",            // REQUIRED, one of PlanItemKind
-///   "title": "نوم قبل منتصف الليل", // REQUIRED, 1‥120 chars, what he reads on the card
+///   "title": "نوم قبل منتصف الليل", // REQUIRED, 1‥120 chars, ONE short line
 ///   "reason": "…",              // REQUIRED, 3‥500 chars – why, from HIS data
 ///   "area": "health",           // optional planet key: faith|health|money|family|
 ///                               //   work|growth|body|travel
@@ -87,7 +87,12 @@
 ///   applying idempotent, so a duplicate id is a hard error, not a nuisance;
 /// * `kind` is missing or unknown → `unknownKind`;
 /// * `title` is missing, blank after trimming, or longer than 120 →
-///   `missingField` / `blankText` / `tooLong`;
+///   `missingField` / `blankText` / `tooLong`. The title has to read as
+///   **one line of a checklist**: the suggestions he approves gather into a
+///   named list he ticks off one by one («خطة تشرين الأول» → ☐ مشي ٢٠ دقيقة
+///   بعد العشا), so the prompt asks for at most about 60 characters, no
+///   full stops and no two sentences. [PlanItemPreview.oneLine] is the line
+///   the checklist shows;
 /// * **`reason` is missing or blank** → `missingReason`. An item with no
 ///   reason is invalid, full stop: the whole point of the round trip is that
 ///   he sees *why* before he says yes;
@@ -125,10 +130,14 @@
 /// milli-units) and is converted exactly on apply. Every key is optional
 /// unless marked REQUIRED.
 ///
-/// * **task** – `day` (ISO day), `window` (`fajr|dhuhr|asr|maghrib|isha|anytime`),
-///   `priority` (int 0‥3), `top3` (bool), `notes` (≤ 500),
+/// * **task** – one thing to do, which becomes a line of the plan's
+///   checklist (and nothing else): `day` (ISO day), `window`
+///   (`fajr|dhuhr|asr|maghrib|isha|anytime`), `priority` (int 0‥3),
+///   `top3` (bool), `notes` (≤ 500),
 ///   `repeat` (`{"every":"day"|"week"|"month","weekdays":[1‥7]}`),
-///   `projectRef` (an existing project id or exact name).
+///   `projectRef` (an existing project id or exact name). The day, window
+///   and repeat are shown on the line; they are not written into his task
+///   list.
 /// * **habit** – `category` (≤ 40, his own word), `planetKey`,
 ///   `existingRef` (one of his habits: the apply switches it back on
 ///   instead of adding a second one).
@@ -137,9 +146,11 @@
 ///   Applies as one habit plus one reminder per time – exactly what he gets
 ///   when he sets a task reminder himself.
 /// * **reminder** – `time` REQUIRED unless `at` is given, `at` (ISO date-time),
-///   `repeat` (`day|week`), `weekdays`, `ownerRef` (`{"table":"tasks","id":"…"}`,
-///   which must exist). Without an owner the apply creates the task the
-///   reminder belongs to.
+///   `repeat` (`day|week`), `weekdays`, `ownerRef`
+///   (`{"table":"habits","id":"…"}` – one of his own records, which must
+///   exist). With an owner the apply sets that record's reminder; without
+///   one the item is a checklist line only (it never invents a task to
+///   hang on).
 /// * **note** – `body` REQUIRED (1‥2000). Stored as a worry-free note on the
 ///   plan itself; nothing of his is overwritten.
 /// * **food** – `tags` (≤ 8 × ≤ 24), `portion` (> 0, ≤ 10000), `unit` (≤ 24),
@@ -166,8 +177,20 @@
 ///   Exactly one of `newAmount` / `newPercent`.
 /// * **learningProgram** – `target` (> 0, ≤ 100 000), `unit` (≤ 24),
 ///   `deadline` (ISO day), `steps` (≤ 60 × `{"title":"…","day":"…","note":"…"}`).
-///   Applies as a learning goal plus one task per step.
+///   Applies as a learning goal on the Growth planet; its steps are shown
+///   on the card and kept with the item (never written as tasks).
 /// * **recipe**, **pantryItem** – accepted, shown, deferred (Part 5).
+///
+/// ## The checklist, and what an apply may touch
+///
+/// Approving an item does two things: it writes the item's own change (a
+/// habit, a food, an envelope amount …) and it adds **one line to the
+/// plan's checklist**, which he ticks off as he does it. The checklist is
+/// the plan's own rows (`applied_plan_items`) – an approved suggestion is
+/// never turned into a task in the home panel's task list, and no apply in
+/// this engine writes to `tasks`. Items whose only effect is the line
+/// itself ([PlanItemKind.task], [PlanItemKind.note], a reminder with no
+/// owner) say so in their preview.
 ///
 /// ## What the validator deliberately does *not* do
 ///

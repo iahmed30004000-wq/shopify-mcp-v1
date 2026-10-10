@@ -1017,7 +1017,10 @@ class OrbitSceneState extends ConsumerState<OrbitScene> with SingleTickerProvide
                     // reader's (and the long-press tooltip's).
                     child: MadarButton.icon(
                       key: _resetKey,
-                      icon: Icons.restart_alt_rounded,
+                      // A re-centring crosshair, not the "restart" arrow the
+                      // rest of the app uses for starting something over:
+                      // this puts the camera back, it does not reset the sky.
+                      icon: Icons.center_focus_strong_rounded,
                       semanticLabel: l10n.orbitUiRecenter,
                       variant: MadarButtonVariant.secondary,
                       size: MadarButtonSize.medium,

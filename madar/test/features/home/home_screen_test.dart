@@ -734,7 +734,7 @@ void main() {
       expect(size.height, greaterThanOrEqualTo(48), reason: 'a real touch target');
       expect(size.width, lessThan(72), reason: 'an icon, not a pill with text over the sky');
       expect(find.text(_ar.orbitUiRecenter), findsNothing, reason: 'icon only – the name is the screen reader\'s');
-      expect(find.descendant(of: pillButton(), matching: find.byIcon(Icons.restart_alt_rounded)), findsOneWidget);
+      expect(find.descendant(of: pillButton(), matching: find.byIcon(Icons.center_focus_strong_rounded)), findsOneWidget);
       // Names never slide under it.
       expect(c.planets.labelKeepOut, isNotEmpty);
 

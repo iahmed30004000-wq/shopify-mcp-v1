@@ -23,7 +23,7 @@ class PlanetSystemLayout {
     this.outerRadius = 1.18,
     this.minLaneGap = 0.06,
     this.bodyRadius = 0.14,
-    this.innerPeriod = 330,
+    this.innerPeriod = 170,
     this.keplerExponent = 0.8,
     this.maxInclination = 0.045,
   });
@@ -41,9 +41,10 @@ class PlanetSystemLayout {
   /// Disc radius of a typical world (× [PlanetStyle.sizeFactorOf]).
   final double bodyRadius;
 
-  /// Seconds per revolution of the innermost world: five and a half
-  /// minutes, so the system reads as a slow orrery – you see it move if you
-  /// watch, never out of the corner of your eye.
+  /// Seconds per revolution of the innermost world: under three minutes, so
+  /// the sky is alive whenever he looks at it. It was twice this and read as
+  /// still (owner, 2026-10-10: «حركة الكواكب بطيئة»); it is still slow enough
+  /// that nothing twitches at the edge of the eye.
   final double innerPeriod;
 
   /// Period ∝ radius^k (1.5 would be Kepler; lower keeps the drift calm).
@@ -146,10 +147,10 @@ abstract final class MoonLayout {
     return start + span * index / (count - 1);
   }
 
-  /// Seconds per revolution on [lane] (disc radii): ~78 s close in, ~105 s
-  /// at the outer edge of a normal band – slow enough to watch a moon come
-  /// round, never a twitch at the edge of the eye.
-  static double periodOf(double lane) => 78 * math.pow(lane / 1.62, 1.5).toDouble();
+  /// Seconds per revolution on [lane] (disc radii): ~42 s close in, ~57 s at
+  /// the outer edge of a normal band – a moon comes round while he is
+  /// looking at its world, without the 26 s whirl of the first version.
+  static double periodOf(double lane) => 42 * math.pow(lane / 1.62, 1.5).toDouble();
 
   /// Orbit tilt of a moon from its seed (radians).
   static double inclinationOf(double seed) => 0.2 + 0.24 * _fract(seed * 0.7548776662 + 0.11);

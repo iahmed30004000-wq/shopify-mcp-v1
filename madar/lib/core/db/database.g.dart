@@ -37357,6 +37357,15 @@ class $AppliedPlansTable extends AppliedPlans
     requiredDuringInsert: true,
     defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
   );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _formatVersionMeta = const VerificationMeta(
     'formatVersion',
   );
@@ -37448,6 +37457,7 @@ class $AppliedPlansTable extends AppliedPlans
     createdAt,
     updatedAt,
     planKey,
+    name,
     formatVersion,
     title,
     summary,
@@ -37491,6 +37501,14 @@ class $AppliedPlansTable extends AppliedPlans
       );
     } else if (isInserting) {
       context.missing(_planKeyMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
     }
     if (data.containsKey('format_version')) {
       context.handle(
@@ -37558,6 +37576,10 @@ class $AppliedPlansTable extends AppliedPlans
         DriftSqlType.string,
         data['${effectivePrefix}plan_key'],
       )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       formatVersion: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}format_version'],
@@ -37617,6 +37639,10 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
   /// same plan, which is what makes applying idempotent.
   final String planKey;
 
+  /// His own name for the list, editable and the one he sees («خطة تشرين
+  /// الأول»). Defaults to a plain name built from the day it arrived.
+  final String name;
+
   /// `version` of the plan contract the payload declared.
   final int formatVersion;
 
@@ -37640,6 +37666,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
     required this.createdAt,
     required this.updatedAt,
     required this.planKey,
+    required this.name,
     required this.formatVersion,
     this.title,
     this.summary,
@@ -37656,6 +37683,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     map['plan_key'] = Variable<String>(planKey);
+    map['name'] = Variable<String>(name);
     map['format_version'] = Variable<int>(formatVersion);
     if (!nullToAbsent || title != null) {
       map['title'] = Variable<String>(title);
@@ -37685,6 +37713,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
       planKey: Value(planKey),
+      name: Value(name),
       formatVersion: Value(formatVersion),
       title: title == null && nullToAbsent
           ? const Value.absent()
@@ -37710,6 +37739,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
       planKey: serializer.fromJson<String>(json['planKey']),
+      name: serializer.fromJson<String>(json['name']),
       formatVersion: serializer.fromJson<int>(json['formatVersion']),
       title: serializer.fromJson<String?>(json['title']),
       summary: serializer.fromJson<String?>(json['summary']),
@@ -37730,6 +37760,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
       'planKey': serializer.toJson<String>(planKey),
+      'name': serializer.toJson<String>(name),
       'formatVersion': serializer.toJson<int>(formatVersion),
       'title': serializer.toJson<String?>(title),
       'summary': serializer.toJson<String?>(summary),
@@ -37748,6 +37779,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
     DateTime? createdAt,
     DateTime? updatedAt,
     String? planKey,
+    String? name,
     int? formatVersion,
     Value<String?> title = const Value.absent(),
     Value<String?> summary = const Value.absent(),
@@ -37761,6 +37793,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
     planKey: planKey ?? this.planKey,
+    name: name ?? this.name,
     formatVersion: formatVersion ?? this.formatVersion,
     title: title.present ? title.value : this.title,
     summary: summary.present ? summary.value : this.summary,
@@ -37776,6 +37809,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
       planKey: data.planKey.present ? data.planKey.value : this.planKey,
+      name: data.name.present ? data.name.value : this.name,
       formatVersion: data.formatVersion.present
           ? data.formatVersion.value
           : this.formatVersion,
@@ -37798,6 +37832,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('planKey: $planKey, ')
+          ..write('name: $name, ')
           ..write('formatVersion: $formatVersion, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
@@ -37816,6 +37851,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
     createdAt,
     updatedAt,
     planKey,
+    name,
     formatVersion,
     title,
     summary,
@@ -37833,6 +37869,7 @@ class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.planKey == this.planKey &&
+          other.name == this.name &&
           other.formatVersion == this.formatVersion &&
           other.title == this.title &&
           other.summary == this.summary &&
@@ -37848,6 +37885,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
   final Value<String> planKey;
+  final Value<String> name;
   final Value<int> formatVersion;
   final Value<String?> title;
   final Value<String?> summary;
@@ -37862,6 +37900,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.planKey = const Value.absent(),
+    this.name = const Value.absent(),
     this.formatVersion = const Value.absent(),
     this.title = const Value.absent(),
     this.summary = const Value.absent(),
@@ -37877,6 +37916,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     required String planKey,
+    required String name,
     this.formatVersion = const Value.absent(),
     this.title = const Value.absent(),
     this.summary = const Value.absent(),
@@ -37887,12 +37927,14 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
     required String raw,
     this.rowid = const Value.absent(),
   }) : planKey = Value(planKey),
+       name = Value(name),
        raw = Value(raw);
   static Insertable<AppliedPlanRow> custom({
     Expression<String>? id,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
     Expression<String>? planKey,
+    Expression<String>? name,
     Expression<int>? formatVersion,
     Expression<String>? title,
     Expression<String>? summary,
@@ -37908,6 +37950,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (planKey != null) 'plan_key': planKey,
+      if (name != null) 'name': name,
       if (formatVersion != null) 'format_version': formatVersion,
       if (title != null) 'title': title,
       if (summary != null) 'summary': summary,
@@ -37925,6 +37968,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
     Value<DateTime>? createdAt,
     Value<DateTime>? updatedAt,
     Value<String>? planKey,
+    Value<String>? name,
     Value<int>? formatVersion,
     Value<String?>? title,
     Value<String?>? summary,
@@ -37940,6 +37984,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       planKey: planKey ?? this.planKey,
+      name: name ?? this.name,
       formatVersion: formatVersion ?? this.formatVersion,
       title: title ?? this.title,
       summary: summary ?? this.summary,
@@ -37966,6 +38011,9 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
     }
     if (planKey.present) {
       map['plan_key'] = Variable<String>(planKey.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
     }
     if (formatVersion.present) {
       map['format_version'] = Variable<int>(formatVersion.value);
@@ -38008,6 +38056,7 @@ class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('planKey: $planKey, ')
+          ..write('name: $name, ')
           ..write('formatVersion: $formatVersion, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
@@ -38201,6 +38250,28 @@ class $AppliedPlanItemsTable extends AppliedPlanItems
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _doneMeta = const VerificationMeta('done');
+  @override
+  late final GeneratedColumn<bool> done = GeneratedColumn<bool>(
+    'done',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("done" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _doneAtMeta = const VerificationMeta('doneAt');
+  @override
+  late final GeneratedColumn<DateTime> doneAt = GeneratedColumn<DateTime>(
+    'done_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -38219,6 +38290,8 @@ class $AppliedPlanItemsTable extends AppliedPlanItems
     refTable,
     refId,
     decidedAt,
+    done,
+    doneAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -38311,6 +38384,18 @@ class $AppliedPlanItemsTable extends AppliedPlanItems
         decidedAt.isAcceptableOrUnknown(data['decided_at']!, _decidedAtMeta),
       );
     }
+    if (data.containsKey('done')) {
+      context.handle(
+        _doneMeta,
+        done.isAcceptableOrUnknown(data['done']!, _doneMeta),
+      );
+    }
+    if (data.containsKey('done_at')) {
+      context.handle(
+        _doneAtMeta,
+        doneAt.isAcceptableOrUnknown(data['done_at']!, _doneAtMeta),
+      );
+    }
     return context;
   }
 
@@ -38396,6 +38481,14 @@ class $AppliedPlanItemsTable extends AppliedPlanItems
         DriftSqlType.dateTime,
         data['${effectivePrefix}decided_at'],
       ),
+      done: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}done'],
+      )!,
+      doneAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}done_at'],
+      ),
     );
   }
 
@@ -38443,12 +38536,20 @@ class AppliedPlanItemRow extends DataClass
   final Map<String, Object?> beforeJson;
   final Map<String, Object?> afterJson;
 
-  /// The record the apply created or changed (`tasks`, `habits`, …).
+  /// The record the apply created or changed (`habits`, `budget_items`, …;
+  /// never `tasks`).
   final String? refTable;
   final String? refId;
 
   /// When he decided (applied, rejected or undone).
   final DateTime? decidedAt;
+
+  /// Ticked off the checklist. Only an approved ([PlanItemState.applied])
+  /// item can be ticked.
+  final bool done;
+
+  /// When he ticked it (null while it is open again).
+  final DateTime? doneAt;
   const AppliedPlanItemRow({
     required this.id,
     required this.createdAt,
@@ -38466,6 +38567,8 @@ class AppliedPlanItemRow extends DataClass
     this.refTable,
     this.refId,
     this.decidedAt,
+    required this.done,
+    this.doneAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -38508,6 +38611,10 @@ class AppliedPlanItemRow extends DataClass
     if (!nullToAbsent || decidedAt != null) {
       map['decided_at'] = Variable<DateTime>(decidedAt);
     }
+    map['done'] = Variable<bool>(done);
+    if (!nullToAbsent || doneAt != null) {
+      map['done_at'] = Variable<DateTime>(doneAt);
+    }
     return map;
   }
 
@@ -38535,6 +38642,10 @@ class AppliedPlanItemRow extends DataClass
       decidedAt: decidedAt == null && nullToAbsent
           ? const Value.absent()
           : Value(decidedAt),
+      done: Value(done),
+      doneAt: doneAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(doneAt),
     );
   }
 
@@ -38562,6 +38673,8 @@ class AppliedPlanItemRow extends DataClass
       refTable: serializer.fromJson<String?>(json['refTable']),
       refId: serializer.fromJson<String?>(json['refId']),
       decidedAt: serializer.fromJson<DateTime?>(json['decidedAt']),
+      done: serializer.fromJson<bool>(json['done']),
+      doneAt: serializer.fromJson<DateTime?>(json['doneAt']),
     );
   }
   @override
@@ -38586,6 +38699,8 @@ class AppliedPlanItemRow extends DataClass
       'refTable': serializer.toJson<String?>(refTable),
       'refId': serializer.toJson<String?>(refId),
       'decidedAt': serializer.toJson<DateTime?>(decidedAt),
+      'done': serializer.toJson<bool>(done),
+      'doneAt': serializer.toJson<DateTime?>(doneAt),
     };
   }
 
@@ -38606,6 +38721,8 @@ class AppliedPlanItemRow extends DataClass
     Value<String?> refTable = const Value.absent(),
     Value<String?> refId = const Value.absent(),
     Value<DateTime?> decidedAt = const Value.absent(),
+    bool? done,
+    Value<DateTime?> doneAt = const Value.absent(),
   }) => AppliedPlanItemRow(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -38623,6 +38740,8 @@ class AppliedPlanItemRow extends DataClass
     refTable: refTable.present ? refTable.value : this.refTable,
     refId: refId.present ? refId.value : this.refId,
     decidedAt: decidedAt.present ? decidedAt.value : this.decidedAt,
+    done: done ?? this.done,
+    doneAt: doneAt.present ? doneAt.value : this.doneAt,
   );
   AppliedPlanItemRow copyWithCompanion(AppliedPlanItemsCompanion data) {
     return AppliedPlanItemRow(
@@ -38644,6 +38763,8 @@ class AppliedPlanItemRow extends DataClass
       refTable: data.refTable.present ? data.refTable.value : this.refTable,
       refId: data.refId.present ? data.refId.value : this.refId,
       decidedAt: data.decidedAt.present ? data.decidedAt.value : this.decidedAt,
+      done: data.done.present ? data.done.value : this.done,
+      doneAt: data.doneAt.present ? data.doneAt.value : this.doneAt,
     );
   }
 
@@ -38665,7 +38786,9 @@ class AppliedPlanItemRow extends DataClass
           ..write('afterJson: $afterJson, ')
           ..write('refTable: $refTable, ')
           ..write('refId: $refId, ')
-          ..write('decidedAt: $decidedAt')
+          ..write('decidedAt: $decidedAt, ')
+          ..write('done: $done, ')
+          ..write('doneAt: $doneAt')
           ..write(')'))
         .toString();
   }
@@ -38688,6 +38811,8 @@ class AppliedPlanItemRow extends DataClass
     refTable,
     refId,
     decidedAt,
+    done,
+    doneAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -38708,7 +38833,9 @@ class AppliedPlanItemRow extends DataClass
           other.afterJson == this.afterJson &&
           other.refTable == this.refTable &&
           other.refId == this.refId &&
-          other.decidedAt == this.decidedAt);
+          other.decidedAt == this.decidedAt &&
+          other.done == this.done &&
+          other.doneAt == this.doneAt);
 }
 
 class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
@@ -38728,6 +38855,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
   final Value<String?> refTable;
   final Value<String?> refId;
   final Value<DateTime?> decidedAt;
+  final Value<bool> done;
+  final Value<DateTime?> doneAt;
   final Value<int> rowid;
   const AppliedPlanItemsCompanion({
     this.id = const Value.absent(),
@@ -38746,6 +38875,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
     this.refTable = const Value.absent(),
     this.refId = const Value.absent(),
     this.decidedAt = const Value.absent(),
+    this.done = const Value.absent(),
+    this.doneAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   AppliedPlanItemsCompanion.insert({
@@ -38765,6 +38896,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
     this.refTable = const Value.absent(),
     this.refId = const Value.absent(),
     this.decidedAt = const Value.absent(),
+    this.done = const Value.absent(),
+    this.doneAt = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : planId = Value(planId),
        itemKey = Value(itemKey),
@@ -38788,6 +38921,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
     Expression<String>? refTable,
     Expression<String>? refId,
     Expression<DateTime>? decidedAt,
+    Expression<bool>? done,
+    Expression<DateTime>? doneAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -38807,6 +38942,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
       if (refTable != null) 'ref_table': refTable,
       if (refId != null) 'ref_id': refId,
       if (decidedAt != null) 'decided_at': decidedAt,
+      if (done != null) 'done': done,
+      if (doneAt != null) 'done_at': doneAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -38828,6 +38965,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
     Value<String?>? refTable,
     Value<String?>? refId,
     Value<DateTime?>? decidedAt,
+    Value<bool>? done,
+    Value<DateTime?>? doneAt,
     Value<int>? rowid,
   }) {
     return AppliedPlanItemsCompanion(
@@ -38847,6 +38986,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
       refTable: refTable ?? this.refTable,
       refId: refId ?? this.refId,
       decidedAt: decidedAt ?? this.decidedAt,
+      done: done ?? this.done,
+      doneAt: doneAt ?? this.doneAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -38910,6 +39051,12 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
     if (decidedAt.present) {
       map['decided_at'] = Variable<DateTime>(decidedAt.value);
     }
+    if (done.present) {
+      map['done'] = Variable<bool>(done.value);
+    }
+    if (doneAt.present) {
+      map['done_at'] = Variable<DateTime>(doneAt.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -38935,6 +39082,8 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
           ..write('refTable: $refTable, ')
           ..write('refId: $refId, ')
           ..write('decidedAt: $decidedAt, ')
+          ..write('done: $done, ')
+          ..write('doneAt: $doneAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();

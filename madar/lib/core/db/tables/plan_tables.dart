@@ -11,6 +11,12 @@ import 'converters.dart';
 // before/after view – what his data looked like before an item was applied
 // and what the apply wrote.
 //
+// They are also the plan's **checklist**: the suggestions he approved are
+// the list he ticks off one by one («خطة تشرين الأول»، ٢ من ٤), so the
+// counter and the before/after read from the same rows. A checklist line is
+// a record of an approved suggestion – never a task in the home panel's
+// task list, and nothing here ever writes into `tasks`.
+//
 // Nothing here is a medical record and nothing here is applied on its own:
 // a row only ever reaches [PlanItemState.applied] through his explicit
 // approval of that one item.
@@ -23,6 +29,10 @@ class AppliedPlans extends Table with Entity {
   /// SHA-256 of the normalised payload: the same file imported twice is the
   /// same plan, which is what makes applying idempotent.
   TextColumn get planKey => text().unique()();
+
+  /// His own name for the list, editable and the one he sees («خطة تشرين
+  /// الأول»). Defaults to a plain name built from the day it arrived.
+  TextColumn get name => text()();
 
   /// `version` of the plan contract the payload declared.
   IntColumn get formatVersion => integer().withDefault(const Constant(1))();
@@ -73,12 +83,20 @@ class AppliedPlanItems extends Table with Entity, Ordered {
   TextColumn get beforeJson => text().map(const JsonMapConverter()).withDefault(const Constant('{}'))();
   TextColumn get afterJson => text().map(const JsonMapConverter()).withDefault(const Constant('{}'))();
 
-  /// The record the apply created or changed (`tasks`, `habits`, …).
+  /// The record the apply created or changed (`habits`, `budget_items`, …;
+  /// never `tasks`).
   TextColumn get refTable => text().nullable()();
   TextColumn get refId => text().nullable()();
 
   /// When he decided (applied, rejected or undone).
   DateTimeColumn get decidedAt => dateTime().nullable()();
+
+  /// Ticked off the checklist. Only an approved ([PlanItemState.applied])
+  /// item can be ticked.
+  BoolColumn get done => boolean().withDefault(const Constant(false))();
+
+  /// When he ticked it (null while it is open again).
+  DateTimeColumn get doneAt => dateTime().nullable()();
 
   @override
   List<Set<Column<Object>>> get uniqueKeys => [
