@@ -193,7 +193,7 @@ class NotificationGate {
   /// The center's own ids – outside every feature's namespace – for a
   /// snooze its feature's re-plan would otherwise replace ([GateMarks.moved]).
   /// Keep them out of `NotificationNamespaces`' blocks.
-  static const NotificationNamespace snoozeIds = NotificationNamespace('center', 160000, 160999);
+  static const NotificationNamespace snoozeIds = NotificationNamespaces.center;
 
   /// The group that decides whether [notice] is held. The adhan and the
   /// medication tracker are pinned to their own groups: a describer a

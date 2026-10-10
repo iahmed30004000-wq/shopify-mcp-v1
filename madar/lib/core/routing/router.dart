@@ -32,6 +32,7 @@ import 'money_route_pages.dart';
 import 'now_playing_dock.dart';
 import 'route_pages.dart';
 import 'routes.dart';
+import 'system_route_pages.dart';
 
 export 'routes.dart';
 
@@ -73,8 +74,10 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// goals and a jar) and the life pages (Work, a board, the projects, a
 /// project, Family, a person, Travel on its tabs, a trip, a packing
 /// template, the learning goals, a learning goal, the Body on its tabs, the
-/// trackers and a tracker) and the saved web games (`/saved-games`) move
-/// along the reading direction (shared axis); the cinema hall (`/cinema`)
+/// trackers and a tracker) and the saved web games (`/saved-games`) and the
+/// notification centre (`/notifications`, Settings › Notifications) move
+/// along the reading direction (shared axis); global search (`/search`) and
+/// the cinema hall (`/cinema`)
 /// fades through, and a show (`/cinema/game/<id>`) opens through the hall's
 /// iris over black; the tasbeeh, the qibla compass, guided
 /// breathing and the design gallery zoom in (scaled shared axis); the
@@ -187,6 +190,15 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: const HealthSettingsScreen(),
+            ),
+          ),
+          // Phase 9 – the system shell.
+          GoRoute(
+            path: 'notifications',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const NotificationSettingsRoutePage(),
             ),
           ),
         ],
@@ -591,6 +603,24 @@ List<RouteBase> madarRoutes() => [
           context: context,
           key: state.pageKey,
           child: SavedGamesScreen(initialSharedText: state.uri.queryParameters['text']),
+        ),
+      ),
+      // Phase 9 – the system shell: global search and the notification
+      // centre, both reached from the home header.
+      GoRoute(
+        path: 'search',
+        pageBuilder: (context, state) => MadarTransitions.fadeThrough<void>(
+          context: context,
+          key: state.pageKey,
+          child: SearchRoutePage(initialQuery: state.uri.queryParameters['q'] ?? ''),
+        ),
+      ),
+      GoRoute(
+        path: 'notifications',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: NotificationsRoutePage(tab: NotificationsRoutePage.tabOf(state.uri.queryParameters['tab'])),
         ),
       ),
       GoRoute(

@@ -5,6 +5,9 @@ import '../../../core/db/database.dart';
 import '../../../core/db/repositories/repositories.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
+import '../../family/family_texts.dart' show FamilyTexts;
+import '../../work/domain/board_columns.dart' show BoardColumns;
+import '../../work/presentation/work_labels.dart' show WorkTexts;
 import '../domain/search_doc.dart';
 import 'custom_module_source.dart';
 import 'search_source.dart';
@@ -683,13 +686,15 @@ abstract final class BuiltInSearchSources {
       label: 'searchSourcePeople',
       weight: 1.1,
       table: (r) => r.people,
-      // The phone number is never indexed.
+      // The phone number is never indexed. The relation is shown – and
+      // indexed – in the UI language, so «أمي» is both what the row reads
+      // and what finds it (the stored key is English).
       map: (p, c) => SearchDoc(
         id: p.id,
         refTable: 'people',
         refId: p.id,
         title: p.name,
-        subtitle: p.relation ?? '',
+        subtitle: FamilyTexts(c.l10n, c.formatter).relation(p.relation) ?? '',
         body: p.notes ?? '',
         date: p.lastContact,
         planetKey: 'family',
@@ -785,9 +790,13 @@ abstract final class BuiltInSearchSources {
       tables: const {'board_cards', 'boards'},
       load: (c) async {
         final boards = {for (final b in await c.repos.boards.getAll()) b.id: b};
+        // A column the user has not renamed still carries its English
+        // database default ("To-do"): the Work labels turn it back into the
+        // UI language, exactly as the board itself reads.
+        final labels = WorkTexts(c.l10n, c.formatter);
         String? column(BoardRow? b, String id) {
-          for (final col in b?.columns ?? const <Object?>[]) {
-            if (col is Map && col['id'] == id) return '${col['label'] ?? id}';
+          for (final col in BoardColumns.parse(b?.columns)) {
+            if (col.id == id) return labels.column(col);
           }
           return null;
         }

@@ -24,6 +24,8 @@ import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/adhan/adhan.dart';
 import 'package:madar/app/faith_services.dart' show recitationNotificationClicksProvider;
 import 'package:madar/features/home/home_providers.dart';
+import 'package:madar/features/notification_center/notification_center.dart'
+    show gatedNotificationPlatform, notificationCenterClockProvider;
 import 'package:madar/features/qibla/qibla.dart' show headingSourceProvider;
 import 'package:madar/features/quran/quran.dart'
     show MemoryQuranCacheStore, QuranStore, quranCacheStoreProvider, quranStoreProvider;
@@ -170,17 +172,30 @@ class TestAppSetup {
 /// plugins have no platform side under flutter_tester): notifications
 /// ([notifications], clocked at [clock]), the adhan's Android bridge,
 /// battery optimisation (exempt) and adhan audio.
+///
+/// With [gated] the fake plugin sits behind the notification centre's
+/// `NotificationGate`, exactly as production does, so a test can see what a
+/// mute or a skip holds back. The notification service is always built from
+/// `notificationPlatformProvider`, so it goes through the same chain.
 List<Override> platformFakeOverrides({
   required FakeNotificationPlatform notifications,
   required FakeAdhanSystem adhanSystem,
   required DateTime Function() clock,
+  bool gated = false,
 }) => [
-  notificationPlatformProvider.overrideWithValue(notifications),
+  if (gated)
+    notificationPlatformProvider.overrideWith((ref) => gatedNotificationPlatform(ref, notifications))
+  else
+    notificationPlatformProvider.overrideWithValue(notifications),
   notificationServiceProvider.overrideWith((ref) {
-    final service = NotificationService(notifications, clock: clock);
+    final service = NotificationService(ref.watch(notificationPlatformProvider), clock: clock);
     ref.onDispose(service.dispose);
     return service;
   }),
+  // The notification centre reads the same frozen "now" as the rest of the
+  // app (its default is DateTime.now, which would let a seeded mute expire
+  // between the fixture's date and the day the test runs).
+  notificationCenterClockProvider.overrideWithValue(clock),
   adhanSystemProvider.overrideWithValue(adhanSystem),
   batteryGateProvider.overrideWithValue(FakeBatteryGate(exempt: true)),
   adhanAudioProvider.overrideWithValue(FakeAdhanAudio()),
@@ -206,6 +221,8 @@ Future<TestAppSetup> buildMadarTestApp(
   FakeNotificationPlatform? notifications,
   FakeAdhanSystem? adhanSystem,
   DateTime Function()? clock,
+  bool gated = false,
+  List<ProviderObserver> observers = const [],
 }) async {
   SharedPreferences.setMockInitialValues({});
   final prefs = (await tester.runAsync(SharedPreferences.getInstance))!;
@@ -226,12 +243,13 @@ Future<TestAppSetup> buildMadarTestApp(
   final faith = FaithFakes();
   addTearDown(faith.dispose);
   final app = ProviderScope(
+    observers: observers,
     overrides: [
       ...madarAppOverrides(prefs: prefs, sound: sound, haptics: haptics),
       if (db != null) databaseUnlockProvider.overrideWithValue(AsyncValue.data(db)),
       routerInitialLocationProvider.overrideWithValue(initialLocation),
       homeClockProvider.overrideWithValue(wall),
-      ...platformFakeOverrides(notifications: platform, adhanSystem: system, clock: wall),
+      ...platformFakeOverrides(notifications: platform, adhanSystem: system, clock: wall, gated: gated),
       ...faith.overrides,
       ...overrides,
     ],
@@ -255,6 +273,8 @@ Future<TestApp> pumpMadarApp(
   FakeNotificationPlatform? notifications,
   FakeAdhanSystem? adhanSystem,
   DateTime Function()? clock,
+  bool gated = false,
+  List<ProviderObserver> observers = const [],
 }) async {
   if (phone) usePhoneSurface(tester);
   final setup = await buildMadarTestApp(
@@ -269,6 +289,8 @@ Future<TestApp> pumpMadarApp(
     notifications: notifications,
     adhanSystem: adhanSystem,
     clock: clock,
+    gated: gated,
+    observers: observers,
   );
   await tester.pumpWidget(setup.app);
   if (settle) await settleApp(tester);

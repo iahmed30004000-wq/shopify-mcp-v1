@@ -10,6 +10,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:madar/app/background_notifications.dart';
 import 'package:madar/app/health_services.dart';
 import 'package:madar/app/suspending_flows.dart';
 import 'package:madar/core/db/database.dart';
@@ -22,6 +23,7 @@ import 'package:madar/features/health/meds/meds.dart';
 import 'package:madar/features/health/record/record.dart';
 import 'package:madar/features/health/wellbeing/wellbeing.dart';
 import 'package:madar/features/lock/presentation/lock_screen.dart';
+import 'package:madar/features/notification_center/notification_center.dart' show GatedNotificationPlatform;
 import 'package:madar/features/orbit/data/orbit_repository.dart';
 
 import '../features/lock/lock_test_utils.dart';
@@ -203,14 +205,23 @@ void main() {
     await tester.pump(const Duration(seconds: 6));
   });
 
-  test('production hands the shade\'s dose buttons to the meds background entry', () {
+  test('production hands the shade\'s dose buttons to the app\'s background entry', () {
     final container = ProviderContainer(overrides: suspendingFlowOverrides());
     addTearDown(container.dispose);
     final platform = container.read(notificationPlatformProvider);
     expect(platform, isA<SuspendingNotificationPlatform>());
-    final inner = (platform as SuspendingNotificationPlatform).inner;
-    expect(inner, isA<FlutterLocalNotificationsPlatform>());
-    expect((inner as FlutterLocalNotificationsPlatform).backgroundHandler, same(medsNotificationBackgroundTap));
+    // Since Phase 9 the notification centre's gate sits between the wrapper
+    // and the plugin, and the entry point is the app's gated one (it loads
+    // the stored mutes before the background re-plan). The whole chain is
+    // asserted in `test/app/notification_wiring_test.dart`.
+    final gated = (platform as SuspendingNotificationPlatform).inner;
+    expect(gated, isA<GatedNotificationPlatform>());
+    final plugin = (gated as GatedNotificationPlatform).inner;
+    expect(plugin, isA<FlutterLocalNotificationsPlatform>());
+    expect(
+      (plugin as FlutterLocalNotificationsPlatform).backgroundHandler,
+      same(madarAppNotificationBackgroundTap),
+    );
   });
 
   test('the doctor report and the dialler leave the app suspended (the lock never trips on them)', () async {

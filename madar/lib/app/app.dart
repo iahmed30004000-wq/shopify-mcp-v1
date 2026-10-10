@@ -23,6 +23,7 @@ import 'faith_services.dart';
 import 'health_services.dart';
 import 'life_services.dart';
 import 'money_services.dart';
+import 'system_services.dart';
 
 /// The root overrides of the Madar provider scope – shared by `bootstrap`
 /// and the test harness so both run the same wiring.
@@ -43,6 +44,10 @@ import 'money_services.dart';
 /// * The life packages' hooks ([lifeHookOverrides]): Work's boards and
 ///   projects and a learning goal open as routes, and a trip's destination
 ///   can become the prayer location while travelling.
+/// * The system packages' hooks ([systemHookOverrides]): a search result
+///   opens its own screen, a notification-centre row opens what it is
+///   about and each group's reminder settings, and the in-app full-screen
+///   adhan is held back when the centre has muted or skipped it.
 List<Override> madarAppOverrides({
   required SharedPreferences prefs,
   required SoundService sound,
@@ -57,6 +62,7 @@ List<Override> madarAppOverrides({
   ...healthHookOverrides(),
   ...moneyHookOverrides(),
   ...lifeHookOverrides(),
+  ...systemHookOverrides(),
 ];
 
 /// The app's [ThemeData], rebuilt only when an input of the theme changes

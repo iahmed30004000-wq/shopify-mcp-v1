@@ -19,6 +19,7 @@ import 'package:madar/features/family/family.dart';
 import 'package:madar/features/growth/growth.dart';
 import 'package:madar/features/health/hub/health_hub.dart';
 import 'package:madar/features/money/hub/money_hub.dart';
+import 'package:madar/features/nutrition/presentation/nutrition_ui.dart' show NutritionTodayCard;
 import 'package:madar/features/orbit/data/planet_customization_service.dart';
 import 'package:madar/features/orbit/presentation/planet/faith_hub.dart';
 import 'package:madar/features/orbit/presentation/planet/life_hubs.dart';
@@ -159,7 +160,8 @@ void main() {
       key: 'growth',
       hub: GrowthHub,
       cards: [GrowthTodayCard],
-      tools: [((l) => l.growthCardOpenAll, AppRoutes.growth), ((l) => l.workProjects, AppRoutes.workProjects)],
+      // «كل الأهداف» is the card's own door; the tools never repeat it.
+      tools: [((l) => l.workProjects, AppRoutes.workProjects)],
       opens: [
         (
           AppRoutes.growth,
@@ -171,12 +173,16 @@ void main() {
     (
       key: 'body',
       hub: BodyHub,
-      cards: [BodyTodayCard, FastingCard, WaterCard],
+      // Today's water and fast are read once, on BodyTodayCard; their own
+      // cards (with +250 and start / end) live on the Body screen.
+      cards: [BodyTodayCard, NutritionTodayCard],
       tools: [((l) => l.bodyTabPlan, '/body?tab=plan'), ((l) => l.bodyTabAvoid, '/body?tab=avoid')],
       opens: [
         (AppRoutes.body, (t) => t.widget<BodyTodayCard>(find.byType(BodyTodayCard)).onOpen!()),
-        ('/body?tab=fasting', (t) => t.widget<FastingCard>(find.byType(FastingCard)).onOpen!()),
-        ('/body?tab=water', (t) => t.widget<WaterCard>(find.byType(WaterCard)).onOpen!()),
+        (
+          '/body?tab=food',
+          (t) => t.widget<NutritionTodayCard>(find.byType(NutritionTodayCard)).onOpen!(),
+        ),
       ],
     ),
   ];

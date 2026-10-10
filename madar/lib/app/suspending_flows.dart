@@ -6,13 +6,14 @@ import '../features/adhan/adhan.dart';
 import '../features/adhkar/adhkar.dart' show dhikrAudioPickerProvider, pickDhikrAudio;
 import '../features/family/family.dart'
     show ContactLaunch, ContactLauncher, UrlContactLauncher, familyContactLauncherProvider;
-import '../features/health/meds/meds.dart' show medsNotificationBackgroundTap;
 import '../features/health/record/record.dart'
     show DoctorReportFile, PlatformReportExporter, ReportExporter, reportExporterProvider;
 import '../features/health/wellbeing/wellbeing.dart' show PhoneDialer, UrlLauncherPhoneDialer, phoneDialerProvider;
 import '../features/import/import_controller.dart' show importFilePickerProvider, pickJsonFile;
 import '../features/lock/application/lock_controller.dart';
+import '../features/notification_center/notification_center.dart' show gatedNotificationPlatform;
 import '../features/prayer/prayer.dart';
+import 'background_notifications.dart';
 
 /// Runs an app-opened system flow (a permission dialog, a system settings
 /// page, the document picker) so the app lock treats it as the owner's own:
@@ -37,15 +38,37 @@ SuspendRunner lockSuspender(Ref ref) =>
 /// The notifications plugin is also where a dose's Taken / Snooze / Skip
 /// buttons land when they are pressed in the shade: they never open the
 /// app, so Android hands them to the plugin's background isolate, whose
-/// entry point [medsNotificationBackgroundTap] records them (see
-/// `meds_background.dart`); every other background response is left alone.
+/// entry point [madarAppNotificationBackgroundTap] records them through a
+/// background notification gate carrying the owner's stored mutes (see
+/// `background_notifications.dart`); every other background response is
+/// left alone.
+///
+/// The plugin itself is wrapped by the notification centre's gate
+/// ([gatedNotificationPlatform]) – one gate, directly around the plugin,
+/// inside the suspending wrapper – so a muted group, a skipped call and a
+/// snooze are enforced for every feature at the one place every
+/// notification passes through.
 ///
 /// Tests replace these providers with fakes, so they are installed by
 /// `bootstrap` only; the decorators themselves are unit-tested.
 List<Override> suspendingFlowOverrides() => [
+  // The notification gate sits DIRECTLY around the real plugin and INSIDE
+  // the suspending wrapper – exactly one gate, and the innermost decorator:
+  //
+  // * outside the wrapper it would never see the tray (the wrapper does not
+  //   forward ActiveNotificationQuery), so the centre could not read what
+  //   is showing nor rewrite a moved snooze's tap;
+  // * a second gate anywhere in this chain would hold alarms in an instance
+  //   nothing can un-hold, and his medicine reminders would vanish.
+  //
+  // `gatedNotificationPlatform` fails open: if the gate cannot be built the
+  // plain plugin is returned, so every alarm is still scheduled.
   notificationPlatformProvider.overrideWith(
     (ref) => SuspendingNotificationPlatform(
-      FlutterLocalNotificationsPlatform(backgroundHandler: medsNotificationBackgroundTap),
+      gatedNotificationPlatform(
+        ref,
+        FlutterLocalNotificationsPlatform(backgroundHandler: madarAppNotificationBackgroundTap),
+      ),
       lockSuspender(ref),
     ),
   ),

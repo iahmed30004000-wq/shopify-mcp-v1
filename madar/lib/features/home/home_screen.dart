@@ -15,7 +15,9 @@ import '../../core/interaction/interaction.dart';
 import '../../core/motion/motion_kit.dart';
 import '../../core/routing/route_pages.dart';
 import '../../core/routing/routes.dart';
+import '../../core/routing/system_route_pages.dart' show SystemNav;
 import '../../core/sound/sound_api.dart';
+import '../notification_center/notification_center.dart' show NotificationBell;
 import '../orbit/presentation/orbit_ui_providers.dart';
 import '../orbit/presentation/planet/customize_sheet.dart';
 import '../orbit/presentation/prayer/prayer_sheet.dart';
@@ -489,6 +491,25 @@ class _HomeHeader extends ConsumerWidget {
               ],
             ),
           ),
+          // Search everything, then the bell with its unread badge, then
+          // settings – all small and secondary, so the date line keeps the
+          // room it needs at 320 dp and 1.3× text.
+          MadarButton.icon(
+            icon: Icons.search_rounded,
+            semanticLabel: l.searchLauncherTooltip,
+            size: MadarButtonSize.small,
+            sfx: Sfx.navigate,
+            onPressed: () => SystemNav.search(context),
+          ),
+          const SizedBox(width: Space.xs),
+          // The bell plays Sfx.navigate itself and carries the unread badge;
+          // secondary, so it wears the same glass circle as its neighbours.
+          NotificationBell(
+            variant: MadarButtonVariant.secondary,
+            size: MadarButtonSize.small,
+            onPressed: () => SystemNav.notifications(context),
+          ),
+          const SizedBox(width: Space.xs),
           MadarButton.icon(
             icon: Icons.tune_rounded,
             semanticLabel: l.homeOpenSettings,

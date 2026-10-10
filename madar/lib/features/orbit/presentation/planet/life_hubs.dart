@@ -10,11 +10,12 @@ import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/routing/cinema_route_pages.dart';
 import '../../../../core/routing/life_route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
-import '../../../body/body.dart' show BodyTab, BodyTodayCard, FastingCard, WaterCard;
+import '../../../body/body.dart' show BodyTab, BodyTodayCard;
 import '../../../nutrition/presentation/nutrition_ui.dart' show NutritionTodayCard;
 import '../../../custom_modules/custom_modules.dart' show CustomModulesCard, customPlanetModulesProvider;
 import '../../../family/family.dart' show FamilyActions, FamilyTodayCard;
 import '../../../growth/growth.dart' show GrowthTodayCard;
+import '../../../money/hub/money_hub.dart' show MoneyTools;
 import '../../../travel/travel.dart' show TravelTab, TravelTodayCard;
 import '../../../work/work.dart' show Top3Card, WorkTodayCard;
 import 'cinema_entry_card.dart';
@@ -169,9 +170,10 @@ class TravelHub extends StatelessWidget {
   }
 }
 
-/// Growth: the learning goals in progress with their pace, the door to
-/// Madar Cinema (the games live under Growth), then all goals and the
-/// projects (a project can belong to Growth and feed its balance).
+/// Growth: the learning goals in progress with their pace (the card's own
+/// link is the one door to all of them), the door to Madar Cinema (the
+/// games live under Growth), then the projects (a project can belong to
+/// Growth and feed its balance).
 class GrowthHub extends StatelessWidget {
   const GrowthHub({super.key, this.firstIndex = 1});
 
@@ -188,7 +190,8 @@ class GrowthHub extends StatelessWidget {
       ..card(
         _LifeTools(
           tools: [
-            (Icons.school_rounded, l.growthCardOpenAll, l.lifeHubToolGoalsHint, () => LifeNav.growth(context)),
+            // No goals tile: the card above already opens all of them, and
+            // one screen gets one door, named once (life_cohesion_test).
             (Icons.rocket_launch_outlined, l.workProjects, l.lifeHubToolProjectsHint, () => LifeNav.projects(context)),
           ],
         ),
@@ -197,9 +200,10 @@ class GrowthHub extends StatelessWidget {
   }
 }
 
-/// Body: today's session, water and the fasting clock at a glance, the
-/// fast, the water and the food of the day compact, then the training plan
-/// and the avoid list.
+/// Body: today's session, water and the fasting clock at a glance (read
+/// once, on that one card – the fast's start / end and the water's +250 sit
+/// on the Body screen's Today tab, a tap away through the card), the food
+/// of the day, then the training plan and the avoid list.
 class BodyHub extends StatelessWidget {
   const BodyHub({super.key, this.firstIndex = 1});
 
@@ -211,8 +215,6 @@ class BodyHub extends StatelessWidget {
     final l = L10n.of(context);
     final hub = _HubColumn(firstIndex)
       ..card(BodyTodayCard(onOpen: () => LifeNav.body(context)))
-      ..card(FastingCard(compact: true, onOpen: () => LifeNav.body(context, tab: BodyTab.fasting)))
-      ..card(WaterCard(compact: true, onOpen: () => LifeNav.body(context, tab: BodyTab.water)))
       ..card(NutritionTodayCard(onOpen: () => LifeNav.body(context, tab: BodyTab.food)))
       ..header(l.lifeHubToolsTitle)
       ..card(
@@ -289,10 +291,16 @@ class _Header extends StatelessWidget {
 /// Icon, name, hint (for screen readers) and where it leads.
 typedef _Tool = (IconData, String, String, VoidCallback);
 
-/// A world's tools: one row of equal tiles (the Faith, Health and Money
-/// tools' seal) – a tile per screen the hub leads to.
+/// A world's tools: a tile per screen the hub leads to, on the very grid
+/// Faith, Health and Money use – three to a row, so a tool tile is the
+/// same size on every world's page and they all wear one seal. A row with
+/// fewer tools keeps the empty cells, rather than stretching two tiles
+/// across the page.
 class _LifeTools extends StatelessWidget {
   const _LifeTools({required this.tools, this.sfx = const []});
+
+  /// Tools in a row – the Money hub's grid.
+  static const int columns = MoneyTools.columns;
 
   final List<_Tool> tools;
 
@@ -300,19 +308,30 @@ class _LifeTools extends StatelessWidget {
   final List<Sfx> sfx;
 
   @override
-  Widget build(BuildContext context) => IntrinsicHeight(
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        for (var i = 0; i < tools.length; i++) ...[
-          if (i > 0) const SizedBox(width: Space.s),
-          Expanded(
-            child: _ToolTile(tool: tools[i], sfx: i < sfx.length ? sfx[i] : Sfx.navigate),
+  Widget build(BuildContext context) {
+    final rows = <Widget>[];
+    for (var i = 0; i < tools.length; i += columns) {
+      if (i > 0) rows.add(const SizedBox(height: Space.s));
+      rows.add(
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (var j = i; j < i + columns; j++) ...[
+                if (j > i) const SizedBox(width: Space.s),
+                Expanded(
+                  child: j < tools.length
+                      ? _ToolTile(tool: tools[j], sfx: j < sfx.length ? sfx[j] : Sfx.navigate)
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ],
           ),
-        ],
-      ],
-    ),
-  );
+        ),
+      );
+    }
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+  }
 }
 
 class _ToolTile extends StatelessWidget {

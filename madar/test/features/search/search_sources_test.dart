@@ -171,7 +171,8 @@ void main() {
     });
 
     test('family, work, travel, growth and body', () {
-      expect(only('people', (d) => d.refId == 'person-1').subtitle, 'friend');
+      // The stored relation key is shown – and indexed – in the UI language.
+      expect(only('people', (d) => d.refId == 'person-1').subtitle, 'Friend');
       final log = bySource['contact_logs']!.single;
       expect(log.title, 'Test person');
       expect(log.subtitle, 'Visit');

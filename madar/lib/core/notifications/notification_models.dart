@@ -174,6 +174,23 @@ class NotificationNamespace {
 
 /// The id blocks of every Madar feature. Add new features here (never
 /// overlap; android ids are 32-bit ints).
+///
+/// Sub-blocks of [reminders] (each feature syncs with `keep:` / `owns()`:
+/// never touch another's ids):
+/// * 132000–132999 money due reminders (`GoalsReminderIds`)
+/// * 136000–136999 family (`FamilyNotificationIds`)
+/// * 137000–137999 custom modules (`CustomModuleReminderIds`)
+/// * 138000–138999 travel documents (`TravelReminderIds`)
+/// * 139000–139499 meals (`MealReminderIds`)
+/// * 139800–139803 body – fasting (`BodyReminderIds`)
+///
+/// Sub-blocks of [health]: 150000–150399 appointments (`AppointmentReminderIds`),
+/// 150900–150906 the worry window (`WorryReminderIds`).
+///
+/// RESERVED – not a feature namespace, never in [all]:
+/// * 160000–160999 [center] – the notification centre's own ids for
+///   snoozes moved off a feature's positional id
+///   (`NotificationGate.snoozeIds`). No feature may schedule here.
 abstract final class NotificationNamespaces {
   static const adhan = NotificationNamespace('adhan', 100000, 101999);
   static const adhkar = NotificationNamespace('adhkar', 110000, 111999);
@@ -185,6 +202,12 @@ abstract final class NotificationNamespaces {
 
   /// Health besides doses: appointments, refills, the worry window.
   static const health = NotificationNamespace('health', 150000, 150999);
+
+  /// Reserved for the notification centre (see above), so a moved snooze
+  /// can never collide with a feature's own id. Deliberately **not** in
+  /// [all]: [owning] and [byName] never report it, and no sync ever sweeps
+  /// it.
+  static const center = NotificationNamespace('center', 160000, 160999);
 
   static const all = [adhan, adhkar, meds, reminders, wird, health];
 

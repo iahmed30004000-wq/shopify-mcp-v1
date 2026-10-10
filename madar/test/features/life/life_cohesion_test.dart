@@ -3,11 +3,11 @@
 // Neglect Radar agreeing with the Family card about the same person, a
 // person's own initial on their orb, meters read in full. Real fonts.
 //
-// Three checks are SKIPPED until the owner's design pass (next week): they
-// are layout choices, not defects – the Body hub showing today's water and
-// fast in two adjacent cards, the Life hubs' 2-across tools vs the 3-column
-// grid of Faith/Health/Money, and Growth's "All goals" both as the card's
-// link and as a tool tile.
+// The three layout choices that were deferred are decided and live: the
+// Body hub reads today's water and fast once (the fast's and the water's
+// own cards live on the Body screen), every world's tools sit on the
+// 3-column grid of Faith/Health/Money, and Growth's "All goals" is one
+// door, named once.
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show RenderParagraph;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -110,10 +110,6 @@ Future<void> _unmount(WidgetTester tester) async {
   await _frames(tester, 4);
 }
 
-/// Skipped until the design pass with the owner (next week): a layout
-/// choice, not a defect (see the header).
-const _design = true;
-
 void main() {
   // Real glyph widths (the test font's square glyphs would truncate more).
   setUpAll(loadMadarFonts);
@@ -152,7 +148,7 @@ void main() {
         reason:
             'the Body hub repeats today\'s water ($water) and the fast ($fast) in adjacent cards, in different units/precision',
       );
-    }, skip: _design);
+    });
   }
 
   testWidgets('planet family ar: the Radar speaks of mum the way her card does', (tester) async {
@@ -190,7 +186,7 @@ void main() {
           'a Work tool tile is ${work.toStringAsFixed(1)} dp wide, a Money tool tile ${money.toStringAsFixed(1)} dp '
           '(Faith, Health and Money lay their tools on a 3-column grid; the Life hubs stretch 2 tools across the row)',
     );
-  }, skip: _design);
+  });
 
   test('family avatars: the initial is the person\'s, not a title or kinship word', () {
     // The sample family (family_seed.dart) as the user names them: in Arabic
@@ -262,5 +258,5 @@ void main() {
       reason:
           '"${l.growthCardOpenAll}" appears $count times on the Growth hub (the card\'s header link and a tool tile), both to /growth',
     );
-  }, skip: _design);
+  });
 }

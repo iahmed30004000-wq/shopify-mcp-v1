@@ -299,15 +299,41 @@ class _BackgroundNotificationPlatform implements NotificationPlatform {
 
 /// Runs a dose answer given in the notification shade (production wiring
 /// of [MedsBackgroundHandler]).
-Future<MedsBackgroundOutcome> runMedsBackgroundAction(NotificationTap tap) async {
+///
+/// Two seams the app shell uses, and nothing else does (see
+/// `lib/app/background_notifications.dart`):
+///
+/// * [wrapPlatform] decorates the plugin – the app passes a
+///   `GatedNotificationPlatform` over a background `NotificationGate`, so a
+///   re-plan here cannot re-arm doses the owner has muted in the
+///   notification centre;
+/// * [beforeReplan] runs once the database is open and before the re-plan –
+///   the app loads the stored mute policy into that gate there. It never
+///   blocks the answer: an error is swallowed, because the dose log matters
+///   more than the reminders.
+Future<MedsBackgroundOutcome> runMedsBackgroundAction(
+  NotificationTap tap, {
+  NotificationPlatform Function(NotificationPlatform platform)? wrapPlatform,
+  Future<void> Function(KeyValueRepository keyValues)? beforeReplan,
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
-  final notifications = NotificationService(_BackgroundNotificationPlatform(FlutterLocalNotificationsPlatform()));
+  final NotificationPlatform base = _BackgroundNotificationPlatform(FlutterLocalNotificationsPlatform());
+  final notifications = NotificationService(wrapPlatform?.call(base) ?? base);
   final handler = MedsBackgroundHandler(
     transport: const IsolateMedsActionTransport(),
     openDatabase: openExistingMadarDatabase,
     notifications: notifications,
-    engineFor: (service, tap) => buildBackgroundEngine(service, tap, notifications),
+    engineFor: (service, tap) async {
+      if (beforeReplan != null) {
+        try {
+          await beforeReplan(service.repos.keyValues);
+        } catch (e) {
+          debugPrint('meds: loading the stored notification policy failed: $e');
+        }
+      }
+      return buildBackgroundEngine(service, tap, notifications);
+    },
   );
   return handler.handle(tap);
 }

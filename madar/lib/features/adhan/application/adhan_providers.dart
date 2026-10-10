@@ -318,6 +318,14 @@ class AdhanSync extends Notifier<AdhanSyncState> {
 /// The adhan / reminder being presented (null = none). Fed by notification
 /// taps, the launch notification (full-screen intent on a cold start) and –
 /// while Madar is open – the exact adhan time itself.
+/// Whether the in-app full-screen adhan of [alarm] is held back – the
+/// prayer group muted, or that call skipped, in the notification centre.
+/// The app shell wires it to `NotificationGate.withholds` (see
+/// `system_services.dart`); nothing is held by default, and a check that
+/// throws presents the adhan (fails open), because a silenced adhan is the
+/// worse mistake.
+final adhanInAppHoldProvider = Provider<bool Function(AdhanAlarm alarm)>((ref) => (_) => false);
+
 final adhanEventProvider = NotifierProvider<AdhanEventHub, AdhanEvent?>(AdhanEventHub.new);
 
 class AdhanEventHub extends Notifier<AdhanEvent?> {
@@ -449,7 +457,16 @@ class AdhanEventHub extends Notifier<AdhanEvent?> {
     _next = Timer(wait, () async {
       if (!ref.mounted) return;
       final event = AdhanEvent.fromAlarm(next, source: AdhanEventSource.foreground);
-      if (!_handled.contains(event.key)) {
+      // Muted or skipped in the notification centre: the notification was
+      // held back, so the full-screen adhan must not sound either. The next
+      // call is still armed below.
+      var held = false;
+      try {
+        held = ref.read(adhanInAppHoldProvider)(next);
+      } catch (e) {
+        debugPrint('adhan: the in-app hold check failed (${e.runtimeType}); presenting');
+      }
+      if (!held && !_handled.contains(event.key)) {
         final notifying = await ref.read(notificationServiceProvider).notificationsEnabled();
         if (!ref.mounted) return;
         present(event.copyWith(playInApp: !notifying));

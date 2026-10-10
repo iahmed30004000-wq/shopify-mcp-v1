@@ -342,6 +342,30 @@ abstract final class AppRoutes {
     queryParameters: sharedText == null || sharedText.trim().isEmpty ? null : {'text': sharedText},
   ).toString();
 
+  // Phase 9 – the system shell. Global search and the notification centre
+  // are reached from the home header; these locations also serve deep
+  // links (a search result, a notification row, Settings).
+
+  /// Global search over every module (`?q=` opens with a query typed).
+  static const String search = '/search';
+
+  /// Location of the search, with [query] already in the field.
+  static String searchOf({String? query}) => Uri(
+    path: search,
+    queryParameters: query == null || query.trim().isEmpty ? null : {'q': query},
+  ).toString();
+
+  /// The notification centre (`?tab=upcoming|recent`; with none the centre
+  /// opens on Recent when something is new).
+  static const String notifications = '/notifications';
+
+  /// Location of the notification centre on [tab].
+  static String notificationsOf({String? tab}) =>
+      Uri(path: notifications, queryParameters: tab == null ? null : {'tab': tab}).toString();
+
+  /// Settings › Notifications: what each part of Madar sends, and the mutes.
+  static const String notificationSettings = '/settings/notifications';
+
   static String _withTab(String path, String? tab, String home) =>
       Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
 

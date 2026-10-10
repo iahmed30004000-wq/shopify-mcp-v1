@@ -18,6 +18,7 @@ import 'faith_services.dart';
 import 'health_services.dart';
 import 'life_services.dart';
 import 'money_services.dart';
+import 'system_services.dart';
 
 /// Prepares the services the app needs soon but never on the first frame:
 /// the full time-zone database (prayer times of a location in another zone,
@@ -132,6 +133,11 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 /// gate (they read the encrypted database) and outside the app lock (they
 /// run while it is locked):
 ///
+/// * the notification centre is alive before everything else: it loads the
+///   stored mutes and skips into the notification gate, records arrivals,
+///   taps and answers while its screen is closed, re-arms dropped snoozes
+///   and registers every namespace's re-plan hook
+///   ([watchNotificationCenter]);
 /// * adhkar reminders stay planned (re-planned on settings, location,
 ///   language and day changes – [adhkarReminderSyncProvider]);
 /// * wird reminders likewise, a week ahead after each plan's prayer
@@ -200,8 +206,11 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
-    // Slot kept free for the notification centre (Phase 9): it is watched
-    // FIRST, so its policy is in the gate before any sync below re-plans.
+    // FIRST, always: the notification centre loads the owner's stored
+    // mutes and skips into the notification gate before any sync below
+    // re-plans, so a muted group is never re-armed behind his back. Moving
+    // this line down silently breaks that (notification_order_test).
+    watchNotificationCenter(ref);
     ref.watch(adhkarReminderSyncProvider);
     ref.watch(wirdReminderSyncProvider);
     ref.watch(wirdCompletionSyncProvider);
