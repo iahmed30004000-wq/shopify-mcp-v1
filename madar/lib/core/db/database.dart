@@ -8,6 +8,7 @@ import 'tables/faith_tables.dart';
 import 'tables/health_tables.dart';
 import 'tables/life_tables.dart';
 import 'tables/money_tables.dart';
+import 'tables/plan_tables.dart';
 import '../domain/enums.dart';
 
 export 'seed/seeder.dart' show SeedOptions;
@@ -28,6 +29,7 @@ part 'database.g.dart';
   Exercises, WorkoutLogs, AvoidItems, FastingSessions, WaterLogs,
   CustomModules, CustomEntries,
   QuranBookmarks, QuranSessions, WirdPlans, HifzItems, HifzReviews,
+  AppliedPlans, AppliedPlanItems,
 ])
 class MadarDatabase extends _$MadarDatabase {
   /// Wraps an executor. Pass [seed] to seed the generic defaults (planets,
@@ -40,7 +42,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -66,6 +68,12 @@ class MadarDatabase extends _$MadarDatabase {
             await m.createTable(mealSlotFoods);
             await m.createTable(foodRules);
             await m.addColumn(conditions, conditions.color);
+          }
+          // v4: the AI bridge's history – imported plans and the decision
+          // he made on every suggestion in them.
+          if (from < 4) {
+            await m.createTable(appliedPlans);
+            await m.createTable(appliedPlanItems);
           }
         },
         beforeOpen: (details) async {

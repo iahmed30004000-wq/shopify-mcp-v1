@@ -116,3 +116,41 @@ enum FoodRuleTarget {
 /// How heavily one of the user's own food rules weighs on a condition – his
 /// choice, in his words («خفيف / متوسط / عالي»).
 enum RiskWeight { low, medium, high }
+
+// ------------------------------------------- the AI bridge (schema v4) ----
+
+/// How a «خطة مدار» JSON reached the phone (Part 3's AI bridge). Never a
+/// network fetch: Madar only ever reads a file, a share intent or the
+/// clipboard.
+enum PlanOrigin {
+  /// Picked with the file picker.
+  file,
+
+  /// Pasted into the import box.
+  paste,
+
+  /// Arrived through the Android share sheet.
+  share,
+
+  /// Came back through the optional own-key AI chat.
+  chat,
+}
+
+/// What the user decided about one suggestion of an imported plan.
+enum PlanItemState {
+  /// Shown, not decided yet.
+  pending,
+
+  /// Approved and written to his data.
+  applied,
+
+  /// He said no (or the validator refused it).
+  rejected,
+
+  /// Applied and then undone.
+  undone,
+
+  /// A kind this version cannot apply yet (a recipe, a pantry item): kept
+  /// in the history so nothing is lost.
+  deferred,
+}

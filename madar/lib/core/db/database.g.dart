@@ -37305,6 +37305,1642 @@ class HifzReviewsCompanion extends UpdateCompanion<HifzReviewRow> {
   }
 }
 
+class $AppliedPlansTable extends AppliedPlans
+    with TableInfo<$AppliedPlansTable, AppliedPlanRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppliedPlansTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _planKeyMeta = const VerificationMeta(
+    'planKey',
+  );
+  @override
+  late final GeneratedColumn<String> planKey = GeneratedColumn<String>(
+    'plan_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
+  );
+  static const VerificationMeta _formatVersionMeta = const VerificationMeta(
+    'formatVersion',
+  );
+  @override
+  late final GeneratedColumn<int> formatVersion = GeneratedColumn<int>(
+    'format_version',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _summaryMeta = const VerificationMeta(
+    'summary',
+  );
+  @override
+  late final GeneratedColumn<String> summary = GeneratedColumn<String>(
+    'summary',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<PlanOrigin, String> origin =
+      GeneratedColumn<String>(
+        'origin',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(PlanOrigin.file.name),
+      ).withConverter<PlanOrigin>($AppliedPlansTable.$converterorigin);
+  @override
+  late final GeneratedColumnWithTypeConverter<Map<String, Object?>, String>
+  source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('{}'),
+  ).withConverter<Map<String, Object?>>($AppliedPlansTable.$convertersource);
+  static const VerificationMeta _importedAtMeta = const VerificationMeta(
+    'importedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> importedAt = GeneratedColumn<DateTime>(
+    'imported_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _itemCountMeta = const VerificationMeta(
+    'itemCount',
+  );
+  @override
+  late final GeneratedColumn<int> itemCount = GeneratedColumn<int>(
+    'item_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _rawMeta = const VerificationMeta('raw');
+  @override
+  late final GeneratedColumn<String> raw = GeneratedColumn<String>(
+    'raw',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    planKey,
+    formatVersion,
+    title,
+    summary,
+    origin,
+    source,
+    importedAt,
+    itemCount,
+    raw,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'applied_plans';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AppliedPlanRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('plan_key')) {
+      context.handle(
+        _planKeyMeta,
+        planKey.isAcceptableOrUnknown(data['plan_key']!, _planKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_planKeyMeta);
+    }
+    if (data.containsKey('format_version')) {
+      context.handle(
+        _formatVersionMeta,
+        formatVersion.isAcceptableOrUnknown(
+          data['format_version']!,
+          _formatVersionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    }
+    if (data.containsKey('summary')) {
+      context.handle(
+        _summaryMeta,
+        summary.isAcceptableOrUnknown(data['summary']!, _summaryMeta),
+      );
+    }
+    if (data.containsKey('imported_at')) {
+      context.handle(
+        _importedAtMeta,
+        importedAt.isAcceptableOrUnknown(data['imported_at']!, _importedAtMeta),
+      );
+    }
+    if (data.containsKey('item_count')) {
+      context.handle(
+        _itemCountMeta,
+        itemCount.isAcceptableOrUnknown(data['item_count']!, _itemCountMeta),
+      );
+    }
+    if (data.containsKey('raw')) {
+      context.handle(
+        _rawMeta,
+        raw.isAcceptableOrUnknown(data['raw']!, _rawMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_rawMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AppliedPlanRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppliedPlanRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      planKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}plan_key'],
+      )!,
+      formatVersion: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}format_version'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      ),
+      summary: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}summary'],
+      ),
+      origin: $AppliedPlansTable.$converterorigin.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}origin'],
+        )!,
+      ),
+      source: $AppliedPlansTable.$convertersource.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}source'],
+        )!,
+      ),
+      importedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}imported_at'],
+      )!,
+      itemCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}item_count'],
+      )!,
+      raw: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}raw'],
+      )!,
+    );
+  }
+
+  @override
+  $AppliedPlansTable createAlias(String alias) {
+    return $AppliedPlansTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<PlanOrigin, String, String> $converterorigin =
+      const EnumNameConverter<PlanOrigin>(PlanOrigin.values);
+  static TypeConverter<Map<String, Object?>, String> $convertersource =
+      const JsonMapConverter();
+}
+
+class AppliedPlanRow extends DataClass implements Insertable<AppliedPlanRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  /// SHA-256 of the normalised payload: the same file imported twice is the
+  /// same plan, which is what makes applying idempotent.
+  final String planKey;
+
+  /// `version` of the plan contract the payload declared.
+  final int formatVersion;
+
+  /// The AI's own title and one-paragraph overview (its words, not ours).
+  final String? title;
+  final String? summary;
+  final PlanOrigin origin;
+
+  /// The payload's `source` block: what the AI read (a video, an article),
+  /// how complete it was, and the claims it flagged rather than obeyed.
+  final Map<String, Object?> source;
+  final DateTime importedAt;
+
+  /// Suggestions the payload carried (including the ones he rejected).
+  final int itemCount;
+
+  /// The payload as it arrived (pretty-printed JSON text).
+  final String raw;
+  const AppliedPlanRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.planKey,
+    required this.formatVersion,
+    this.title,
+    this.summary,
+    required this.origin,
+    required this.source,
+    required this.importedAt,
+    required this.itemCount,
+    required this.raw,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['plan_key'] = Variable<String>(planKey);
+    map['format_version'] = Variable<int>(formatVersion);
+    if (!nullToAbsent || title != null) {
+      map['title'] = Variable<String>(title);
+    }
+    if (!nullToAbsent || summary != null) {
+      map['summary'] = Variable<String>(summary);
+    }
+    {
+      map['origin'] = Variable<String>(
+        $AppliedPlansTable.$converterorigin.toSql(origin),
+      );
+    }
+    {
+      map['source'] = Variable<String>(
+        $AppliedPlansTable.$convertersource.toSql(source),
+      );
+    }
+    map['imported_at'] = Variable<DateTime>(importedAt);
+    map['item_count'] = Variable<int>(itemCount);
+    map['raw'] = Variable<String>(raw);
+    return map;
+  }
+
+  AppliedPlansCompanion toCompanion(bool nullToAbsent) {
+    return AppliedPlansCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      planKey: Value(planKey),
+      formatVersion: Value(formatVersion),
+      title: title == null && nullToAbsent
+          ? const Value.absent()
+          : Value(title),
+      summary: summary == null && nullToAbsent
+          ? const Value.absent()
+          : Value(summary),
+      origin: Value(origin),
+      source: Value(source),
+      importedAt: Value(importedAt),
+      itemCount: Value(itemCount),
+      raw: Value(raw),
+    );
+  }
+
+  factory AppliedPlanRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppliedPlanRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      planKey: serializer.fromJson<String>(json['planKey']),
+      formatVersion: serializer.fromJson<int>(json['formatVersion']),
+      title: serializer.fromJson<String?>(json['title']),
+      summary: serializer.fromJson<String?>(json['summary']),
+      origin: $AppliedPlansTable.$converterorigin.fromJson(
+        serializer.fromJson<String>(json['origin']),
+      ),
+      source: serializer.fromJson<Map<String, Object?>>(json['source']),
+      importedAt: serializer.fromJson<DateTime>(json['importedAt']),
+      itemCount: serializer.fromJson<int>(json['itemCount']),
+      raw: serializer.fromJson<String>(json['raw']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'planKey': serializer.toJson<String>(planKey),
+      'formatVersion': serializer.toJson<int>(formatVersion),
+      'title': serializer.toJson<String?>(title),
+      'summary': serializer.toJson<String?>(summary),
+      'origin': serializer.toJson<String>(
+        $AppliedPlansTable.$converterorigin.toJson(origin),
+      ),
+      'source': serializer.toJson<Map<String, Object?>>(source),
+      'importedAt': serializer.toJson<DateTime>(importedAt),
+      'itemCount': serializer.toJson<int>(itemCount),
+      'raw': serializer.toJson<String>(raw),
+    };
+  }
+
+  AppliedPlanRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? planKey,
+    int? formatVersion,
+    Value<String?> title = const Value.absent(),
+    Value<String?> summary = const Value.absent(),
+    PlanOrigin? origin,
+    Map<String, Object?>? source,
+    DateTime? importedAt,
+    int? itemCount,
+    String? raw,
+  }) => AppliedPlanRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    planKey: planKey ?? this.planKey,
+    formatVersion: formatVersion ?? this.formatVersion,
+    title: title.present ? title.value : this.title,
+    summary: summary.present ? summary.value : this.summary,
+    origin: origin ?? this.origin,
+    source: source ?? this.source,
+    importedAt: importedAt ?? this.importedAt,
+    itemCount: itemCount ?? this.itemCount,
+    raw: raw ?? this.raw,
+  );
+  AppliedPlanRow copyWithCompanion(AppliedPlansCompanion data) {
+    return AppliedPlanRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      planKey: data.planKey.present ? data.planKey.value : this.planKey,
+      formatVersion: data.formatVersion.present
+          ? data.formatVersion.value
+          : this.formatVersion,
+      title: data.title.present ? data.title.value : this.title,
+      summary: data.summary.present ? data.summary.value : this.summary,
+      origin: data.origin.present ? data.origin.value : this.origin,
+      source: data.source.present ? data.source.value : this.source,
+      importedAt: data.importedAt.present
+          ? data.importedAt.value
+          : this.importedAt,
+      itemCount: data.itemCount.present ? data.itemCount.value : this.itemCount,
+      raw: data.raw.present ? data.raw.value : this.raw,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppliedPlanRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('planKey: $planKey, ')
+          ..write('formatVersion: $formatVersion, ')
+          ..write('title: $title, ')
+          ..write('summary: $summary, ')
+          ..write('origin: $origin, ')
+          ..write('source: $source, ')
+          ..write('importedAt: $importedAt, ')
+          ..write('itemCount: $itemCount, ')
+          ..write('raw: $raw')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    planKey,
+    formatVersion,
+    title,
+    summary,
+    origin,
+    source,
+    importedAt,
+    itemCount,
+    raw,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppliedPlanRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.planKey == this.planKey &&
+          other.formatVersion == this.formatVersion &&
+          other.title == this.title &&
+          other.summary == this.summary &&
+          other.origin == this.origin &&
+          other.source == this.source &&
+          other.importedAt == this.importedAt &&
+          other.itemCount == this.itemCount &&
+          other.raw == this.raw);
+}
+
+class AppliedPlansCompanion extends UpdateCompanion<AppliedPlanRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<String> planKey;
+  final Value<int> formatVersion;
+  final Value<String?> title;
+  final Value<String?> summary;
+  final Value<PlanOrigin> origin;
+  final Value<Map<String, Object?>> source;
+  final Value<DateTime> importedAt;
+  final Value<int> itemCount;
+  final Value<String> raw;
+  final Value<int> rowid;
+  const AppliedPlansCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.planKey = const Value.absent(),
+    this.formatVersion = const Value.absent(),
+    this.title = const Value.absent(),
+    this.summary = const Value.absent(),
+    this.origin = const Value.absent(),
+    this.source = const Value.absent(),
+    this.importedAt = const Value.absent(),
+    this.itemCount = const Value.absent(),
+    this.raw = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  AppliedPlansCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    required String planKey,
+    this.formatVersion = const Value.absent(),
+    this.title = const Value.absent(),
+    this.summary = const Value.absent(),
+    this.origin = const Value.absent(),
+    this.source = const Value.absent(),
+    this.importedAt = const Value.absent(),
+    this.itemCount = const Value.absent(),
+    required String raw,
+    this.rowid = const Value.absent(),
+  }) : planKey = Value(planKey),
+       raw = Value(raw);
+  static Insertable<AppliedPlanRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? planKey,
+    Expression<int>? formatVersion,
+    Expression<String>? title,
+    Expression<String>? summary,
+    Expression<String>? origin,
+    Expression<String>? source,
+    Expression<DateTime>? importedAt,
+    Expression<int>? itemCount,
+    Expression<String>? raw,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (planKey != null) 'plan_key': planKey,
+      if (formatVersion != null) 'format_version': formatVersion,
+      if (title != null) 'title': title,
+      if (summary != null) 'summary': summary,
+      if (origin != null) 'origin': origin,
+      if (source != null) 'source': source,
+      if (importedAt != null) 'imported_at': importedAt,
+      if (itemCount != null) 'item_count': itemCount,
+      if (raw != null) 'raw': raw,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  AppliedPlansCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<String>? planKey,
+    Value<int>? formatVersion,
+    Value<String?>? title,
+    Value<String?>? summary,
+    Value<PlanOrigin>? origin,
+    Value<Map<String, Object?>>? source,
+    Value<DateTime>? importedAt,
+    Value<int>? itemCount,
+    Value<String>? raw,
+    Value<int>? rowid,
+  }) {
+    return AppliedPlansCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      planKey: planKey ?? this.planKey,
+      formatVersion: formatVersion ?? this.formatVersion,
+      title: title ?? this.title,
+      summary: summary ?? this.summary,
+      origin: origin ?? this.origin,
+      source: source ?? this.source,
+      importedAt: importedAt ?? this.importedAt,
+      itemCount: itemCount ?? this.itemCount,
+      raw: raw ?? this.raw,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (planKey.present) {
+      map['plan_key'] = Variable<String>(planKey.value);
+    }
+    if (formatVersion.present) {
+      map['format_version'] = Variable<int>(formatVersion.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (summary.present) {
+      map['summary'] = Variable<String>(summary.value);
+    }
+    if (origin.present) {
+      map['origin'] = Variable<String>(
+        $AppliedPlansTable.$converterorigin.toSql(origin.value),
+      );
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(
+        $AppliedPlansTable.$convertersource.toSql(source.value),
+      );
+    }
+    if (importedAt.present) {
+      map['imported_at'] = Variable<DateTime>(importedAt.value);
+    }
+    if (itemCount.present) {
+      map['item_count'] = Variable<int>(itemCount.value);
+    }
+    if (raw.present) {
+      map['raw'] = Variable<String>(raw.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppliedPlansCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('planKey: $planKey, ')
+          ..write('formatVersion: $formatVersion, ')
+          ..write('title: $title, ')
+          ..write('summary: $summary, ')
+          ..write('origin: $origin, ')
+          ..write('source: $source, ')
+          ..write('importedAt: $importedAt, ')
+          ..write('itemCount: $itemCount, ')
+          ..write('raw: $raw, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $AppliedPlanItemsTable extends AppliedPlanItems
+    with TableInfo<$AppliedPlanItemsTable, AppliedPlanItemRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppliedPlanItemsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _planIdMeta = const VerificationMeta('planId');
+  @override
+  late final GeneratedColumn<String> planId = GeneratedColumn<String>(
+    'plan_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _itemKeyMeta = const VerificationMeta(
+    'itemKey',
+  );
+  @override
+  late final GeneratedColumn<String> itemKey = GeneratedColumn<String>(
+    'item_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _kindMeta = const VerificationMeta('kind');
+  @override
+  late final GeneratedColumn<String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _reasonMeta = const VerificationMeta('reason');
+  @override
+  late final GeneratedColumn<String> reason = GeneratedColumn<String>(
+    'reason',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<PlanItemState, String> state =
+      GeneratedColumn<String>(
+        'state',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(PlanItemState.pending.name),
+      ).withConverter<PlanItemState>($AppliedPlanItemsTable.$converterstate);
+  @override
+  late final GeneratedColumnWithTypeConverter<Map<String, Object?>, String>
+  payload =
+      GeneratedColumn<String>(
+        'payload',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('{}'),
+      ).withConverter<Map<String, Object?>>(
+        $AppliedPlanItemsTable.$converterpayload,
+      );
+  @override
+  late final GeneratedColumnWithTypeConverter<Map<String, Object?>, String>
+  beforeJson =
+      GeneratedColumn<String>(
+        'before_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('{}'),
+      ).withConverter<Map<String, Object?>>(
+        $AppliedPlanItemsTable.$converterbeforeJson,
+      );
+  @override
+  late final GeneratedColumnWithTypeConverter<Map<String, Object?>, String>
+  afterJson =
+      GeneratedColumn<String>(
+        'after_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('{}'),
+      ).withConverter<Map<String, Object?>>(
+        $AppliedPlanItemsTable.$converterafterJson,
+      );
+  static const VerificationMeta _refTableMeta = const VerificationMeta(
+    'refTable',
+  );
+  @override
+  late final GeneratedColumn<String> refTable = GeneratedColumn<String>(
+    'ref_table',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _refIdMeta = const VerificationMeta('refId');
+  @override
+  late final GeneratedColumn<String> refId = GeneratedColumn<String>(
+    'ref_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _decidedAtMeta = const VerificationMeta(
+    'decidedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> decidedAt = GeneratedColumn<DateTime>(
+    'decided_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    planId,
+    itemKey,
+    kind,
+    title,
+    reason,
+    state,
+    payload,
+    beforeJson,
+    afterJson,
+    refTable,
+    refId,
+    decidedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'applied_plan_items';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AppliedPlanItemRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('plan_id')) {
+      context.handle(
+        _planIdMeta,
+        planId.isAcceptableOrUnknown(data['plan_id']!, _planIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_planIdMeta);
+    }
+    if (data.containsKey('item_key')) {
+      context.handle(
+        _itemKeyMeta,
+        itemKey.isAcceptableOrUnknown(data['item_key']!, _itemKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_itemKeyMeta);
+    }
+    if (data.containsKey('kind')) {
+      context.handle(
+        _kindMeta,
+        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_kindMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('reason')) {
+      context.handle(
+        _reasonMeta,
+        reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_reasonMeta);
+    }
+    if (data.containsKey('ref_table')) {
+      context.handle(
+        _refTableMeta,
+        refTable.isAcceptableOrUnknown(data['ref_table']!, _refTableMeta),
+      );
+    }
+    if (data.containsKey('ref_id')) {
+      context.handle(
+        _refIdMeta,
+        refId.isAcceptableOrUnknown(data['ref_id']!, _refIdMeta),
+      );
+    }
+    if (data.containsKey('decided_at')) {
+      context.handle(
+        _decidedAtMeta,
+        decidedAt.isAcceptableOrUnknown(data['decided_at']!, _decidedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {planId, itemKey},
+  ];
+  @override
+  AppliedPlanItemRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppliedPlanItemRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      planId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}plan_id'],
+      )!,
+      itemKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}item_key'],
+      )!,
+      kind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kind'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      reason: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reason'],
+      )!,
+      state: $AppliedPlanItemsTable.$converterstate.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}state'],
+        )!,
+      ),
+      payload: $AppliedPlanItemsTable.$converterpayload.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}payload'],
+        )!,
+      ),
+      beforeJson: $AppliedPlanItemsTable.$converterbeforeJson.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}before_json'],
+        )!,
+      ),
+      afterJson: $AppliedPlanItemsTable.$converterafterJson.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}after_json'],
+        )!,
+      ),
+      refTable: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}ref_table'],
+      ),
+      refId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}ref_id'],
+      ),
+      decidedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}decided_at'],
+      ),
+    );
+  }
+
+  @override
+  $AppliedPlanItemsTable createAlias(String alias) {
+    return $AppliedPlanItemsTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<PlanItemState, String, String> $converterstate =
+      const EnumNameConverter<PlanItemState>(PlanItemState.values);
+  static TypeConverter<Map<String, Object?>, String> $converterpayload =
+      const JsonMapConverter();
+  static TypeConverter<Map<String, Object?>, String> $converterbeforeJson =
+      const JsonMapConverter();
+  static TypeConverter<Map<String, Object?>, String> $converterafterJson =
+      const JsonMapConverter();
+}
+
+class AppliedPlanItemRow extends DataClass
+    implements Insertable<AppliedPlanItemRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final String planId;
+
+  /// The item's `id` inside the payload – unique within one plan, which is
+  /// what `(planId, itemKey)` keys idempotence on.
+  final String itemKey;
+
+  /// `PlanItemKind.name`. Plain text, not an enum column, so a plan written
+  /// against a newer contract still stores and still shows in the history.
+  final String kind;
+
+  /// What he saw on the card: the suggestion and the AI's reason for it.
+  final String title;
+  final String reason;
+  final PlanItemState state;
+
+  /// The item's payload as approved (his edits included).
+  final Map<String, Object?> payload;
+
+  /// His data before the apply, and what the apply wrote – the two halves
+  /// of the before/after view.
+  final Map<String, Object?> beforeJson;
+  final Map<String, Object?> afterJson;
+
+  /// The record the apply created or changed (`tasks`, `habits`, …).
+  final String? refTable;
+  final String? refId;
+
+  /// When he decided (applied, rejected or undone).
+  final DateTime? decidedAt;
+  const AppliedPlanItemRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.planId,
+    required this.itemKey,
+    required this.kind,
+    required this.title,
+    required this.reason,
+    required this.state,
+    required this.payload,
+    required this.beforeJson,
+    required this.afterJson,
+    this.refTable,
+    this.refId,
+    this.decidedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['plan_id'] = Variable<String>(planId);
+    map['item_key'] = Variable<String>(itemKey);
+    map['kind'] = Variable<String>(kind);
+    map['title'] = Variable<String>(title);
+    map['reason'] = Variable<String>(reason);
+    {
+      map['state'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterstate.toSql(state),
+      );
+    }
+    {
+      map['payload'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterpayload.toSql(payload),
+      );
+    }
+    {
+      map['before_json'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterbeforeJson.toSql(beforeJson),
+      );
+    }
+    {
+      map['after_json'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterafterJson.toSql(afterJson),
+      );
+    }
+    if (!nullToAbsent || refTable != null) {
+      map['ref_table'] = Variable<String>(refTable);
+    }
+    if (!nullToAbsent || refId != null) {
+      map['ref_id'] = Variable<String>(refId);
+    }
+    if (!nullToAbsent || decidedAt != null) {
+      map['decided_at'] = Variable<DateTime>(decidedAt);
+    }
+    return map;
+  }
+
+  AppliedPlanItemsCompanion toCompanion(bool nullToAbsent) {
+    return AppliedPlanItemsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      planId: Value(planId),
+      itemKey: Value(itemKey),
+      kind: Value(kind),
+      title: Value(title),
+      reason: Value(reason),
+      state: Value(state),
+      payload: Value(payload),
+      beforeJson: Value(beforeJson),
+      afterJson: Value(afterJson),
+      refTable: refTable == null && nullToAbsent
+          ? const Value.absent()
+          : Value(refTable),
+      refId: refId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(refId),
+      decidedAt: decidedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(decidedAt),
+    );
+  }
+
+  factory AppliedPlanItemRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppliedPlanItemRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      planId: serializer.fromJson<String>(json['planId']),
+      itemKey: serializer.fromJson<String>(json['itemKey']),
+      kind: serializer.fromJson<String>(json['kind']),
+      title: serializer.fromJson<String>(json['title']),
+      reason: serializer.fromJson<String>(json['reason']),
+      state: $AppliedPlanItemsTable.$converterstate.fromJson(
+        serializer.fromJson<String>(json['state']),
+      ),
+      payload: serializer.fromJson<Map<String, Object?>>(json['payload']),
+      beforeJson: serializer.fromJson<Map<String, Object?>>(json['beforeJson']),
+      afterJson: serializer.fromJson<Map<String, Object?>>(json['afterJson']),
+      refTable: serializer.fromJson<String?>(json['refTable']),
+      refId: serializer.fromJson<String?>(json['refId']),
+      decidedAt: serializer.fromJson<DateTime?>(json['decidedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'planId': serializer.toJson<String>(planId),
+      'itemKey': serializer.toJson<String>(itemKey),
+      'kind': serializer.toJson<String>(kind),
+      'title': serializer.toJson<String>(title),
+      'reason': serializer.toJson<String>(reason),
+      'state': serializer.toJson<String>(
+        $AppliedPlanItemsTable.$converterstate.toJson(state),
+      ),
+      'payload': serializer.toJson<Map<String, Object?>>(payload),
+      'beforeJson': serializer.toJson<Map<String, Object?>>(beforeJson),
+      'afterJson': serializer.toJson<Map<String, Object?>>(afterJson),
+      'refTable': serializer.toJson<String?>(refTable),
+      'refId': serializer.toJson<String?>(refId),
+      'decidedAt': serializer.toJson<DateTime?>(decidedAt),
+    };
+  }
+
+  AppliedPlanItemRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? planId,
+    String? itemKey,
+    String? kind,
+    String? title,
+    String? reason,
+    PlanItemState? state,
+    Map<String, Object?>? payload,
+    Map<String, Object?>? beforeJson,
+    Map<String, Object?>? afterJson,
+    Value<String?> refTable = const Value.absent(),
+    Value<String?> refId = const Value.absent(),
+    Value<DateTime?> decidedAt = const Value.absent(),
+  }) => AppliedPlanItemRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    planId: planId ?? this.planId,
+    itemKey: itemKey ?? this.itemKey,
+    kind: kind ?? this.kind,
+    title: title ?? this.title,
+    reason: reason ?? this.reason,
+    state: state ?? this.state,
+    payload: payload ?? this.payload,
+    beforeJson: beforeJson ?? this.beforeJson,
+    afterJson: afterJson ?? this.afterJson,
+    refTable: refTable.present ? refTable.value : this.refTable,
+    refId: refId.present ? refId.value : this.refId,
+    decidedAt: decidedAt.present ? decidedAt.value : this.decidedAt,
+  );
+  AppliedPlanItemRow copyWithCompanion(AppliedPlanItemsCompanion data) {
+    return AppliedPlanItemRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      planId: data.planId.present ? data.planId.value : this.planId,
+      itemKey: data.itemKey.present ? data.itemKey.value : this.itemKey,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      title: data.title.present ? data.title.value : this.title,
+      reason: data.reason.present ? data.reason.value : this.reason,
+      state: data.state.present ? data.state.value : this.state,
+      payload: data.payload.present ? data.payload.value : this.payload,
+      beforeJson: data.beforeJson.present
+          ? data.beforeJson.value
+          : this.beforeJson,
+      afterJson: data.afterJson.present ? data.afterJson.value : this.afterJson,
+      refTable: data.refTable.present ? data.refTable.value : this.refTable,
+      refId: data.refId.present ? data.refId.value : this.refId,
+      decidedAt: data.decidedAt.present ? data.decidedAt.value : this.decidedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppliedPlanItemRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('planId: $planId, ')
+          ..write('itemKey: $itemKey, ')
+          ..write('kind: $kind, ')
+          ..write('title: $title, ')
+          ..write('reason: $reason, ')
+          ..write('state: $state, ')
+          ..write('payload: $payload, ')
+          ..write('beforeJson: $beforeJson, ')
+          ..write('afterJson: $afterJson, ')
+          ..write('refTable: $refTable, ')
+          ..write('refId: $refId, ')
+          ..write('decidedAt: $decidedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    planId,
+    itemKey,
+    kind,
+    title,
+    reason,
+    state,
+    payload,
+    beforeJson,
+    afterJson,
+    refTable,
+    refId,
+    decidedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppliedPlanItemRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.planId == this.planId &&
+          other.itemKey == this.itemKey &&
+          other.kind == this.kind &&
+          other.title == this.title &&
+          other.reason == this.reason &&
+          other.state == this.state &&
+          other.payload == this.payload &&
+          other.beforeJson == this.beforeJson &&
+          other.afterJson == this.afterJson &&
+          other.refTable == this.refTable &&
+          other.refId == this.refId &&
+          other.decidedAt == this.decidedAt);
+}
+
+class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> planId;
+  final Value<String> itemKey;
+  final Value<String> kind;
+  final Value<String> title;
+  final Value<String> reason;
+  final Value<PlanItemState> state;
+  final Value<Map<String, Object?>> payload;
+  final Value<Map<String, Object?>> beforeJson;
+  final Value<Map<String, Object?>> afterJson;
+  final Value<String?> refTable;
+  final Value<String?> refId;
+  final Value<DateTime?> decidedAt;
+  final Value<int> rowid;
+  const AppliedPlanItemsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.planId = const Value.absent(),
+    this.itemKey = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.title = const Value.absent(),
+    this.reason = const Value.absent(),
+    this.state = const Value.absent(),
+    this.payload = const Value.absent(),
+    this.beforeJson = const Value.absent(),
+    this.afterJson = const Value.absent(),
+    this.refTable = const Value.absent(),
+    this.refId = const Value.absent(),
+    this.decidedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  AppliedPlanItemsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String planId,
+    required String itemKey,
+    required String kind,
+    required String title,
+    required String reason,
+    this.state = const Value.absent(),
+    this.payload = const Value.absent(),
+    this.beforeJson = const Value.absent(),
+    this.afterJson = const Value.absent(),
+    this.refTable = const Value.absent(),
+    this.refId = const Value.absent(),
+    this.decidedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : planId = Value(planId),
+       itemKey = Value(itemKey),
+       kind = Value(kind),
+       title = Value(title),
+       reason = Value(reason);
+  static Insertable<AppliedPlanItemRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? planId,
+    Expression<String>? itemKey,
+    Expression<String>? kind,
+    Expression<String>? title,
+    Expression<String>? reason,
+    Expression<String>? state,
+    Expression<String>? payload,
+    Expression<String>? beforeJson,
+    Expression<String>? afterJson,
+    Expression<String>? refTable,
+    Expression<String>? refId,
+    Expression<DateTime>? decidedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (planId != null) 'plan_id': planId,
+      if (itemKey != null) 'item_key': itemKey,
+      if (kind != null) 'kind': kind,
+      if (title != null) 'title': title,
+      if (reason != null) 'reason': reason,
+      if (state != null) 'state': state,
+      if (payload != null) 'payload': payload,
+      if (beforeJson != null) 'before_json': beforeJson,
+      if (afterJson != null) 'after_json': afterJson,
+      if (refTable != null) 'ref_table': refTable,
+      if (refId != null) 'ref_id': refId,
+      if (decidedAt != null) 'decided_at': decidedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  AppliedPlanItemsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? planId,
+    Value<String>? itemKey,
+    Value<String>? kind,
+    Value<String>? title,
+    Value<String>? reason,
+    Value<PlanItemState>? state,
+    Value<Map<String, Object?>>? payload,
+    Value<Map<String, Object?>>? beforeJson,
+    Value<Map<String, Object?>>? afterJson,
+    Value<String?>? refTable,
+    Value<String?>? refId,
+    Value<DateTime?>? decidedAt,
+    Value<int>? rowid,
+  }) {
+    return AppliedPlanItemsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      planId: planId ?? this.planId,
+      itemKey: itemKey ?? this.itemKey,
+      kind: kind ?? this.kind,
+      title: title ?? this.title,
+      reason: reason ?? this.reason,
+      state: state ?? this.state,
+      payload: payload ?? this.payload,
+      beforeJson: beforeJson ?? this.beforeJson,
+      afterJson: afterJson ?? this.afterJson,
+      refTable: refTable ?? this.refTable,
+      refId: refId ?? this.refId,
+      decidedAt: decidedAt ?? this.decidedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (planId.present) {
+      map['plan_id'] = Variable<String>(planId.value);
+    }
+    if (itemKey.present) {
+      map['item_key'] = Variable<String>(itemKey.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(kind.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (reason.present) {
+      map['reason'] = Variable<String>(reason.value);
+    }
+    if (state.present) {
+      map['state'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterstate.toSql(state.value),
+      );
+    }
+    if (payload.present) {
+      map['payload'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterpayload.toSql(payload.value),
+      );
+    }
+    if (beforeJson.present) {
+      map['before_json'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterbeforeJson.toSql(beforeJson.value),
+      );
+    }
+    if (afterJson.present) {
+      map['after_json'] = Variable<String>(
+        $AppliedPlanItemsTable.$converterafterJson.toSql(afterJson.value),
+      );
+    }
+    if (refTable.present) {
+      map['ref_table'] = Variable<String>(refTable.value);
+    }
+    if (refId.present) {
+      map['ref_id'] = Variable<String>(refId.value);
+    }
+    if (decidedAt.present) {
+      map['decided_at'] = Variable<DateTime>(decidedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppliedPlanItemsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('planId: $planId, ')
+          ..write('itemKey: $itemKey, ')
+          ..write('kind: $kind, ')
+          ..write('title: $title, ')
+          ..write('reason: $reason, ')
+          ..write('state: $state, ')
+          ..write('payload: $payload, ')
+          ..write('beforeJson: $beforeJson, ')
+          ..write('afterJson: $afterJson, ')
+          ..write('refTable: $refTable, ')
+          ..write('refId: $refId, ')
+          ..write('decidedAt: $decidedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$MadarDatabase extends GeneratedDatabase {
   _$MadarDatabase(QueryExecutor e) : super(e);
   late final $PlanetsTable planets = $PlanetsTable(this);
@@ -37379,6 +39015,10 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
   late final $WirdPlansTable wirdPlans = $WirdPlansTable(this);
   late final $HifzItemsTable hifzItems = $HifzItemsTable(this);
   late final $HifzReviewsTable hifzReviews = $HifzReviewsTable(this);
+  late final $AppliedPlansTable appliedPlans = $AppliedPlansTable(this);
+  late final $AppliedPlanItemsTable appliedPlanItems = $AppliedPlanItemsTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -37447,6 +39087,8 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
     wirdPlans,
     hifzItems,
     hifzReviews,
+    appliedPlans,
+    appliedPlanItems,
   ];
   @override
   DriftDatabaseOptions get options =>

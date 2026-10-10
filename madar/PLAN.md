@@ -89,10 +89,34 @@ AI app (Gemini, ChatGPT, Claude) by handing over a file and taking one back.
    changes, budget tweaks, learning programs, reminders, notes; every item carries its reason.
 3. **Import**: share/paste back → validate → show every suggestion as a card with its reason →
    he approves / edits / rejects each one → only approved items are applied. Nothing silent.
-4. **History**: keep applied plans and later show before/after from his own data.
-5. Health suggestions stay "track & practise", never diagnosis or treatment.
-6. The same import pipe carries the learning-planet JSON (Part 6) and kitchen data (Part 5).
-7. The API-key chat stays as an optional shortcut for the same round trip.
+4. **The approved items become a checkable list** (owner, 2026-10-10, option A of two he
+   picked): the items he approves gather under one named plan - his own name, editable - and
+   he ticks them off one by one and sees «٢ من ٤». A ticked item is a record of an approved
+   suggestion, **not** a row in the home panel's task list; "send this to my tasks" may come
+   later as its own action. Example he gave: he sends a month of data, gets 7 suggestions,
+   approves 4, and has «خطة تشرين الأول» with ☐ walk 20 minutes after dinner · ☐ check the
+   electricity bill · ☐ log your food 5 days running · ☐ call your mother on Friday.
+5. **History**: keep applied plans and later show before/after from his own data.
+6. Health suggestions stay "track & practise", never diagnosis or treatment.
+7. The same import pipe carries the learning-planet JSON (Part 6) and kitchen data (Part 5).
+8. The API-key chat stays as an optional shortcut for the same round trip.
+
+---
+
+## Part 3b — Checklists anywhere  → APK after Part 3
+
+Owner, 2026-10-10 (option B of the two he picked, pulled forward out of Part 8): a tick-list
+inside anything, not only inside an AI plan.
+
+- One shared list engine: a list belongs to a host record (a budget item, a trip, a pantry, a
+  custom module, a note), has ordered items with an optional quantity and an optional price,
+  and every item ticks and un-ticks with undo. Reuse it everywhere rather than three copies.
+- **Shopping list under a budget item** (this was Part 8 / APK #23): «بقالة» → a list he ticks
+  as he buys, then turns the ticked part into one transaction on that budget item. Example:
+  ☐ رز ☐ زيت ☐ لبن, ticked in the shop, then «٣ أغراض - ٨ د.أ» posted to «بقالة».
+- **Packing list on a trip**: ☐ جواز ☐ شاحن ☐ دوا before he travels.
+- The kitchen pantry (Part 5) is the same engine with a different host.
+- Part 8's #23 keeps only the kanban board; its shopping-list bullet moves here.
 
 ---
 
@@ -174,9 +198,7 @@ Gemini into a JSON file, import it as a new planet, and let Madar turn it into a
 ## Part 8 — Module upgrades  → APK #23 and #24
 
 **#23 – Money + Work**
-- **Shopping lists under a budget item**: e.g. "بقالة" → a list (item, qty, optional price),
-  tick as you buy, then turn the ticked list into one transaction on that budget item.
-  Shares the list engine with the kitchen pantry (Part 5).
+- Shopping lists moved to **Part 3b** (the owner asked for checklists everywhere, sooner).
 - **Work: a real workspace with a Trello-style kanban** as the main Work view: columns per
   board, drag cards between columns (the brief asks for drag between kanban columns),
   assignee, due date, Top 3 for today, cards placed into prayer windows.

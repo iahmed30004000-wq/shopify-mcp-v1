@@ -82,6 +82,8 @@ class Repositories {
       wirdPlans = EntityRepository(db, db.wirdPlans),
       hifzItems = EntityRepository(db, db.hifzItems),
       hifzReviews = EntityRepository(db, db.hifzReviews),
+      appliedPlans = EntityRepository(db, db.appliedPlans),
+      appliedPlanItems = EntityRepository(db, db.appliedPlanItems),
       keyValues = KeyValueRepository(db),
       activity = ActivityRepository(db),
       currencies = CurrencyRepository(db);
@@ -161,6 +163,10 @@ class Repositories {
   final EntityRepository<$HifzItemsTable, HifzItemRow> hifzItems;
   final EntityRepository<$HifzReviewsTable, HifzReviewRow> hifzReviews;
 
+  // The AI bridge's history (imported plans and his decision per suggestion)
+  final EntityRepository<$AppliedPlansTable, AppliedPlanRow> appliedPlans;
+  final EntityRepository<$AppliedPlanItemsTable, AppliedPlanItemRow> appliedPlanItems;
+
   // Special-purpose
   final KeyValueRepository keyValues;
   final ActivityRepository activity;
@@ -231,6 +237,8 @@ class Repositories {
       wirdPlans,
       hifzItems,
       hifzReviews,
+      appliedPlans,
+      appliedPlanItems,
     ])
       r.tableName: r,
   };
