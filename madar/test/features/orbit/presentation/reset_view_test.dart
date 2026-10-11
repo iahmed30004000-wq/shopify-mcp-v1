@@ -241,16 +241,36 @@ void main() {
       c.planets.respread();
       var last = {for (final b in c.planets.frameFor(_phone).bodies) b.key: b.center};
       var maxStep = 0.0;
+      final steps = <double>[];
       for (var i = 0; i < 80; i++) {
         c.planets.advanceSeconds(1 / 60);
         c.refresh();
         final now = {for (final b in c.planets.frameFor(_phone).bodies) b.key: b.center};
+        var frameStep = 0.0;
         for (final e in now.entries) {
-          maxStep = math.max(maxStep, (e.value - last[e.key]!).distance);
+          frameStep = math.max(frameStep, (e.value - last[e.key]!).distance);
         }
+        steps.add(frameStep);
+        maxStep = math.max(maxStep, frameStep);
         last = now;
       }
-      expect(maxStep, lessThan(24));
+      // Two guarantees, neither of which may be bought back by slowing the
+      // orbits down (the first version's flat 24 px budget silently encoded
+      // PlanetSystemLayout.innerPeriod and broke when the sky sped up):
+      //  * nothing teleports – the worst frame moves a world less than a
+      //    fourteenth of the screen's width;
+      expect(maxStep, lessThan(_phone.width / 14), reason: 'a world teleported');
+      //  * nothing stutters – the worst frame is not a spike out of the
+      //    glide, which is what "smooth" actually means and is the same
+      //    assertion at any orbital speed.
+      // Measured on the current layout: the worst frame moves 25 px, the
+      // typical one 4 px, and the step never changes by more than 4.3 px
+      // between frames - a spring easing out, not a stutter.
+      var maxJerk = 0.0;
+      for (var i = 1; i < steps.length; i++) {
+        maxJerk = math.max(maxJerk, (steps[i] - steps[i - 1]).abs());
+      }
+      expect(maxJerk, lessThan(_phone.width / 40), reason: 'one frame spiked out of the glide');
     });
 
     test('without animation (reduced motion) it is a cut', () {
