@@ -190,7 +190,8 @@ class _TemplateCard extends StatelessWidget {
               ],
             ),
           ),
-          Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left_rounded : Icons.chevron_right_rounded, color: t.textTertiary),
+          // Mirrors itself in RTL; a per-direction choice mirrors it twice.
+          Icon(Icons.chevron_right_rounded, color: t.textTertiary),
         ],
       ),
     );

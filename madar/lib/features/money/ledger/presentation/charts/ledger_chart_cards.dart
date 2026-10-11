@@ -272,11 +272,12 @@ class _NavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final rtl = Directionality.of(context) == TextDirection.rtl;
     // "Back in time" points to where the timeline starts: right in Arabic.
     final glyph = back
-        ? (rtl ? Icons.chevron_right_rounded : Icons.chevron_left_rounded)
-        : (rtl ? Icons.chevron_left_rounded : Icons.chevron_right_rounded);
+        // Both mirror themselves in RTL (matchTextDirection), so "back" is
+        // always the left one and "forward" always the right one.
+        ? Icons.chevron_left_rounded
+        : Icons.chevron_right_rounded;
     return Opacity(
       opacity: onTap == null ? 0.3 : 1,
       child: SpringPress(

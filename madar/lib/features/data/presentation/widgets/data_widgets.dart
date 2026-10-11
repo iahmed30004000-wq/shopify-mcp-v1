@@ -155,7 +155,6 @@ class DataTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
-    final rtl = Directionality.of(context) == TextDirection.rtl;
     return MadarPressable(
       onTap: busy ? null : onTap,
       sfx: Sfx.navigate,
@@ -188,7 +187,10 @@ class DataTile extends StatelessWidget {
             else if (busy)
               OrbitLoader(size: 22, color: t.accent)
             else
-              Icon(rtl ? Icons.chevron_left_rounded : Icons.chevron_right_rounded, color: t.textTertiary),
+              // chevron_right_rounded already carries matchTextDirection, so it
+              // points the right way on its own; picking "left" in Arabic
+              // mirrors it twice and sends it backwards.
+              Icon(Icons.chevron_right_rounded, color: t.textTertiary),
           ],
         ),
       ),

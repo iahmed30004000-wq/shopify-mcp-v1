@@ -23444,5 +23444,173 @@
     }
   },
   "aiPlanProblemDeferred": "هذا النوع لسا مش جاهز بهذي النسخة؛ محفوظ ورح يظهر لما تجهز «السفرة».",
-  "aiPlanProblemUnknown": "في إشي غلط بهذا البند."
+  "aiPlanProblemUnknown": "في إشي غلط بهذا البند.",
+  "aiPlanImportTitle": "استيراد خطة",
+  "@aiPlanImportTitle": {
+    "description": "Title of the screen that takes an AI answer in"
+  },
+  "aiPlanImportTileBody": "الصق جواب تطبيق الذكاء الاصطناعي أو اختار ملفه، وشوف كل اقتراح مع سببه قبل ما توافق.",
+  "aiPlanImportBody": "مَدار بيقرا الجواب على الجوال بس: ولا إشي بينبعت للإنترنت، وولا اقتراح بينطبّق إلا لما تضغط «وافق» عليه لحاله.",
+  "aiPlanPasteLabel": "الصق الجواب هون",
+  "aiPlanPasteHint": "افتح تطبيق الذكاء الاصطناعي، انسخ جوابه، والصقه هون.",
+  "aiPlanPasteAction": "اقرا اللي لصقته",
+  "aiPlanPickAction": "اختار ملف من الجوال",
+  "aiPlanPasteEmpty": "ما في إشي ملصوق لنقراه.",
+  "aiPlanImportBusy": "عم نقرا الجواب…",
+  "aiPlanImportFailed": "ما قدرنا نقرا الملف. جرّب تنسخ الجواب وتلصقه.",
+  "aiPlanProblemsTitle": "ليش الجواب ما مشي",
+  "aiPlanProblemsHint": "صحّح الجواب عند تطبيق الذكاء الاصطناعي وارجع الصقه هون. ما تغيّر ولا إشي ببياناتك.",
+  "aiPlanImportShared": "وصل جواب من تطبيق تاني.",
+  "aiPlanImportAgain": "هذي الخطة كنت مستوردها من قبل، وقراراتك عليها محفوظة.",
+  "aiPlanSuggestionCount": "{count, plural, =0{ما في اقتراحات} =1{اقتراح واحد} =2{اقتراحين} few{{count} اقتراحات} many{{count} اقتراحًا} other{{count} اقتراح}}",
+  "@aiPlanSuggestionCount": {
+    "description": "How many suggestions a plan carries",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiPlanTabItems": "الاقتراحات",
+  "aiPlanTabList": "قائمتك",
+  "aiPlanRenameAction": "غيّر اسم الخطة",
+  "aiPlanRenameField": "اسم الخطة",
+  "aiPlanRenamedToast": "صار اسمها «{name}»",
+  "@aiPlanRenamedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanMissing": "الخطة هذي مش موجودة.",
+  "aiPlanSummaryTitle": "كلام الذكاء الاصطناعي",
+  "aiPlanSourceTitle": "من وين جاي هذا الجواب",
+  "aiPlanSourceKindVideo": "فيديو",
+  "aiPlanSourceKindArticle": "مقال",
+  "aiPlanSourceKindChannel": "قناة",
+  "aiPlanSourceKindBook": "كتاب",
+  "aiPlanSourceKindChat": "محادثة",
+  "aiPlanSourceKindOther": "مصدر تاني",
+  "aiPlanClaimsBody": "هذا كلام المصدر نفسه، ومَدار ما بيعمل منه ولا بند وما بيبني عليه إشي. لأي إشي طبي، دكتورك هو المرجع.",
+  "aiPlanOriginPaste": "لصقته بإيدك",
+  "aiPlanOriginFile": "من ملف",
+  "aiPlanOriginShare": "من مشاركة",
+  "aiPlanOriginChat": "من محادثة مَدار",
+  "aiPlanImportedOn": "وصلت {date}",
+  "@aiPlanImportedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeTitle": "شو بيصير لو وافقت",
+  "aiPlanReasonTitle": "السبب اللي قاله",
+  "aiPlanBeforeTitle": "اللي عندك هلأ",
+  "aiPlanEvidenceTitle": "من أرقامك",
+  "aiPlanApproveAction": "وافق",
+  "aiPlanRejectAction": "ارفض",
+  "aiPlanEditAction": "عدّل",
+  "aiPlanApprovedToast": "وافقت على «{name}»",
+  "@aiPlanApprovedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanRejectedToast": "رفضت «{name}»",
+  "@aiPlanRejectedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanEditedToast": "عدّلت «{name}»",
+  "@aiPlanEditedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAlreadyApplied": "هذا الاقتراح موافَق عليه من قبل.",
+  "aiPlanBadgeApplied": "موافَق عليه",
+  "aiPlanBadgeRejected": "رفضته",
+  "aiPlanBadgeUndone": "رجّعته",
+  "aiPlanWaitingFor": "مستني موافقتك على: {names}",
+  "@aiPlanWaitingFor": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistOnly": "هذا البند سطر بقائمتك وبس؛ ما بيغيّر إشي ببياناتك.",
+  "aiPlanCannotApprove": "هذا البند مرفوض، وما في طريقة توافق عليه.",
+  "aiPlanItemsEmpty": "ما في اقتراحات بهذي الخطة.",
+  "aiPlanMealPlanFirst": "اعمل خطة أكل أول",
+  "aiPlanEditTitle": "عدّل الاقتراح",
+  "aiPlanEditDayField": "اليوم الجديد",
+  "aiPlanEditAmountField": "المبلغ الجديد",
+  "aiPlanEditPercentField": "النسبة الجديدة",
+  "aiPlanEditFoodField": "اختار من أكلك",
+  "aiPlanEditNothing": "هذا الإشي ما بينعدّل من هون.",
+  "aiPlanTickedToast": "شطّبت «{name}»",
+  "@aiPlanTickedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanUntickedToast": "رجّعت «{name}»",
+  "@aiPlanUntickedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistAllDone": "خلّصت القائمة كلها. عفية!",
+  "aiPlanChecklistHint": "اشطب السطر لما تعمله، وارجعه لو غلطت.",
+  "aiPlanAfterBefore": "قبل: {text}",
+  "@aiPlanAfterBefore": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAfterNow": "بعد الموافقة: {text}",
+  "@aiPlanAfterNow": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAfterMoved": "اللي عندك هلأ مختلف عن اللي ثبّتته الخطة؛ تغيّر بعدها لسبب ما إله علاقة بهذي الخطة.",
+  "aiPlanAfterGone": "الإشي اللي عدّلته الخطة مش موجود عندك هلأ.",
+  "aiPlanHistoryTitle": "خططك",
+  "aiPlanHistoryBody": "كل جواب رجّعته، من الأحدث، وكل واحد بينفتح من جديد على بياناتك زي ما هي اليوم.",
+  "aiPlanHistoryEmptyTitle": "ما في خطط لسا",
+  "aiPlanHistoryEmptyBody": "ابعت خلاصة بياناتك لأي تطبيق ذكاء اصطناعي، ولما يرجع الجواب الصقه هون؛ بتلاقي الخطة بهذي الصفحة.",
+  "aiPlanOpenAction": "افتح الخطة",
+  "aiPlanHomeTitle": "قائمة خطتك",
+  "aiPlanHomeOpenHint": "افتح القائمة واشطب اللي عملته",
+  "aiPlanRefLine": "{name}: {detail}",
+  "@aiPlanRefLine": {
+    "description": "One compact side of the before/after: a record and its current detail",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  }
 }

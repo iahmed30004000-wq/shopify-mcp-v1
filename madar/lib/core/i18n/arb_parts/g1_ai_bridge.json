@@ -719,5 +719,375 @@
   "aiPlanProblemUnknown": {
     "ar": "في إشي غلط بهذا البند.",
     "en": "Something about this item is wrong."
+  },
+  "aiPlanImportTitle": {
+    "ar": "استيراد خطة",
+    "en": "Import a plan",
+    "description": "Title of the screen that takes an AI answer in"
+  },
+  "aiPlanImportTileBody": {
+    "ar": "الصق جواب تطبيق الذكاء الاصطناعي أو اختار ملفه، وشوف كل اقتراح مع سببه قبل ما توافق.",
+    "en": "Paste the AI app’s answer or pick its file, and read every suggestion with its reason before you approve it."
+  },
+  "aiPlanImportBody": {
+    "ar": "مَدار بيقرا الجواب على الجوال بس: ولا إشي بينبعت للإنترنت، وولا اقتراح بينطبّق إلا لما تضغط «وافق» عليه لحاله.",
+    "en": "Madar reads the answer on the phone only: nothing goes to the internet, and no suggestion is applied until you tap “Approve” on it."
+  },
+  "aiPlanPasteLabel": {
+    "ar": "الصق الجواب هون",
+    "en": "Paste the answer here"
+  },
+  "aiPlanPasteHint": {
+    "ar": "افتح تطبيق الذكاء الاصطناعي، انسخ جوابه، والصقه هون.",
+    "en": "Open your AI app, copy its answer and paste it here."
+  },
+  "aiPlanPasteAction": {
+    "ar": "اقرا اللي لصقته",
+    "en": "Read what you pasted"
+  },
+  "aiPlanPickAction": {
+    "ar": "اختار ملف من الجوال",
+    "en": "Pick a file from the phone"
+  },
+  "aiPlanPasteEmpty": {
+    "ar": "ما في إشي ملصوق لنقراه.",
+    "en": "There is nothing pasted to read."
+  },
+  "aiPlanImportBusy": {
+    "ar": "عم نقرا الجواب…",
+    "en": "Reading the answer…"
+  },
+  "aiPlanImportFailed": {
+    "ar": "ما قدرنا نقرا الملف. جرّب تنسخ الجواب وتلصقه.",
+    "en": "The file could not be read. Try copying the answer and pasting it instead."
+  },
+  "aiPlanProblemsTitle": {
+    "ar": "ليش الجواب ما مشي",
+    "en": "Why it did not get through"
+  },
+  "aiPlanProblemsHint": {
+    "ar": "صحّح الجواب عند تطبيق الذكاء الاصطناعي وارجع الصقه هون. ما تغيّر ولا إشي ببياناتك.",
+    "en": "Fix the answer in your AI app and paste it here again. Nothing in your data changed."
+  },
+  "aiPlanImportShared": {
+    "ar": "وصل جواب من تطبيق تاني.",
+    "en": "An answer arrived from another app."
+  },
+  "aiPlanImportAgain": {
+    "ar": "هذي الخطة كنت مستوردها من قبل، وقراراتك عليها محفوظة.",
+    "en": "You imported this plan before, and your decisions on it are kept."
+  },
+  "aiPlanSuggestionCount": {
+    "ar": "{count, plural, =0{ما في اقتراحات} =1{اقتراح واحد} =2{اقتراحين} few{{count} اقتراحات} many{{count} اقتراحًا} other{{count} اقتراح}}",
+    "en": "{count, plural, =0{No suggestions} =1{1 suggestion} other{{count} suggestions}}",
+    "description": "How many suggestions a plan carries",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiPlanTabItems": {
+    "ar": "الاقتراحات",
+    "en": "Suggestions"
+  },
+  "aiPlanTabList": {
+    "ar": "قائمتك",
+    "en": "Your list"
+  },
+  "aiPlanRenameAction": {
+    "ar": "غيّر اسم الخطة",
+    "en": "Rename the plan"
+  },
+  "aiPlanRenameField": {
+    "ar": "اسم الخطة",
+    "en": "The plan’s name"
+  },
+  "aiPlanRenamedToast": {
+    "ar": "صار اسمها «{name}»",
+    "en": "It is now “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanMissing": {
+    "ar": "الخطة هذي مش موجودة.",
+    "en": "This plan is not here."
+  },
+  "aiPlanSummaryTitle": {
+    "ar": "كلام الذكاء الاصطناعي",
+    "en": "What the AI wrote"
+  },
+  "aiPlanSourceTitle": {
+    "ar": "من وين جاي هذا الجواب",
+    "en": "Where this answer came from"
+  },
+  "aiPlanSourceKindVideo": {
+    "ar": "فيديو",
+    "en": "A video"
+  },
+  "aiPlanSourceKindArticle": {
+    "ar": "مقال",
+    "en": "An article"
+  },
+  "aiPlanSourceKindChannel": {
+    "ar": "قناة",
+    "en": "A channel"
+  },
+  "aiPlanSourceKindBook": {
+    "ar": "كتاب",
+    "en": "A book"
+  },
+  "aiPlanSourceKindChat": {
+    "ar": "محادثة",
+    "en": "A chat"
+  },
+  "aiPlanSourceKindOther": {
+    "ar": "مصدر تاني",
+    "en": "Another source"
+  },
+  "aiPlanClaimsBody": {
+    "ar": "هذا كلام المصدر نفسه، ومَدار ما بيعمل منه ولا بند وما بيبني عليه إشي. لأي إشي طبي، دكتورك هو المرجع.",
+    "en": "These are the source’s own words; Madar makes no item out of them and builds nothing on them. For anything medical, your doctor is the reference."
+  },
+  "aiPlanOriginPaste": {
+    "ar": "لصقته بإيدك",
+    "en": "You pasted it"
+  },
+  "aiPlanOriginFile": {
+    "ar": "من ملف",
+    "en": "From a file"
+  },
+  "aiPlanOriginShare": {
+    "ar": "من مشاركة",
+    "en": "Shared in"
+  },
+  "aiPlanOriginChat": {
+    "ar": "من محادثة مَدار",
+    "en": "From a Madar chat"
+  },
+  "aiPlanImportedOn": {
+    "ar": "وصلت {date}",
+    "en": "Arrived {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeTitle": {
+    "ar": "شو بيصير لو وافقت",
+    "en": "What happens if you approve"
+  },
+  "aiPlanReasonTitle": {
+    "ar": "السبب اللي قاله",
+    "en": "The reason it gave"
+  },
+  "aiPlanBeforeTitle": {
+    "ar": "اللي عندك هلأ",
+    "en": "What you have today"
+  },
+  "aiPlanEvidenceTitle": {
+    "ar": "من أرقامك",
+    "en": "From your own numbers"
+  },
+  "aiPlanApproveAction": {
+    "ar": "وافق",
+    "en": "Approve"
+  },
+  "aiPlanRejectAction": {
+    "ar": "ارفض",
+    "en": "Refuse"
+  },
+  "aiPlanEditAction": {
+    "ar": "عدّل",
+    "en": "Edit"
+  },
+  "aiPlanApprovedToast": {
+    "ar": "وافقت على «{name}»",
+    "en": "You approved “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanRejectedToast": {
+    "ar": "رفضت «{name}»",
+    "en": "You refused “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanEditedToast": {
+    "ar": "عدّلت «{name}»",
+    "en": "You edited “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAlreadyApplied": {
+    "ar": "هذا الاقتراح موافَق عليه من قبل.",
+    "en": "You approved this suggestion already."
+  },
+  "aiPlanBadgeApplied": {
+    "ar": "موافَق عليه",
+    "en": "Approved"
+  },
+  "aiPlanBadgeRejected": {
+    "ar": "رفضته",
+    "en": "You refused it"
+  },
+  "aiPlanBadgeUndone": {
+    "ar": "رجّعته",
+    "en": "You took it back"
+  },
+  "aiPlanWaitingFor": {
+    "ar": "مستني موافقتك على: {names}",
+    "en": "Waiting for your yes on: {names}",
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistOnly": {
+    "ar": "هذا البند سطر بقائمتك وبس؛ ما بيغيّر إشي ببياناتك.",
+    "en": "This item is only a line on your list; it changes nothing in your data."
+  },
+  "aiPlanCannotApprove": {
+    "ar": "هذا البند مرفوض، وما في طريقة توافق عليه.",
+    "en": "This item is refused, and there is no way to approve it."
+  },
+  "aiPlanItemsEmpty": {
+    "ar": "ما في اقتراحات بهذي الخطة.",
+    "en": "This plan carries no suggestions."
+  },
+  "aiPlanMealPlanFirst": {
+    "ar": "اعمل خطة أكل أول",
+    "en": "Build a meal plan first"
+  },
+  "aiPlanEditTitle": {
+    "ar": "عدّل الاقتراح",
+    "en": "Edit the suggestion"
+  },
+  "aiPlanEditDayField": {
+    "ar": "اليوم الجديد",
+    "en": "The new day"
+  },
+  "aiPlanEditAmountField": {
+    "ar": "المبلغ الجديد",
+    "en": "The new amount"
+  },
+  "aiPlanEditPercentField": {
+    "ar": "النسبة الجديدة",
+    "en": "The new share"
+  },
+  "aiPlanEditFoodField": {
+    "ar": "اختار من أكلك",
+    "en": "Pick from your foods"
+  },
+  "aiPlanEditNothing": {
+    "ar": "هذا الإشي ما بينعدّل من هون.",
+    "en": "This cannot be edited from here."
+  },
+  "aiPlanTickedToast": {
+    "ar": "شطّبت «{name}»",
+    "en": "You ticked “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanUntickedToast": {
+    "ar": "رجّعت «{name}»",
+    "en": "You un-ticked “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistAllDone": {
+    "ar": "خلّصت القائمة كلها. عفية!",
+    "en": "The whole list is done. Well done!"
+  },
+  "aiPlanChecklistHint": {
+    "ar": "اشطب السطر لما تعمله، وارجعه لو غلطت.",
+    "en": "Tick a line when you have done it, and un-tick it if you tapped by mistake."
+  },
+  "aiPlanAfterBefore": {
+    "ar": "قبل: {text}",
+    "en": "Before: {text}",
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAfterNow": {
+    "ar": "بعد الموافقة: {text}",
+    "en": "After you approved: {text}",
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAfterMoved": {
+    "ar": "اللي عندك هلأ مختلف عن اللي ثبّتته الخطة؛ تغيّر بعدها لسبب ما إله علاقة بهذي الخطة.",
+    "en": "What you have now is different from what the plan set; it moved afterwards for a reason that has nothing to do with this plan."
+  },
+  "aiPlanAfterGone": {
+    "ar": "الإشي اللي عدّلته الخطة مش موجود عندك هلأ.",
+    "en": "The thing the plan changed is no longer in your data."
+  },
+  "aiPlanHistoryTitle": {
+    "ar": "خططك",
+    "en": "Your plans"
+  },
+  "aiPlanHistoryBody": {
+    "ar": "كل جواب رجّعته، من الأحدث، وكل واحد بينفتح من جديد على بياناتك زي ما هي اليوم.",
+    "en": "Every answer you brought back, newest first, each one opening again against your data as it is today."
+  },
+  "aiPlanHistoryEmptyTitle": {
+    "ar": "ما في خطط لسا",
+    "en": "No plans yet"
+  },
+  "aiPlanHistoryEmptyBody": {
+    "ar": "ابعت خلاصة بياناتك لأي تطبيق ذكاء اصطناعي، ولما يرجع الجواب الصقه هون؛ بتلاقي الخطة بهذي الصفحة.",
+    "en": "Send a summary of your data to any AI app, and paste the answer here when it comes back; the plan will be on this page."
+  },
+  "aiPlanOpenAction": {
+    "ar": "افتح الخطة",
+    "en": "Open the plan"
+  },
+  "aiPlanHomeTitle": {
+    "ar": "قائمة خطتك",
+    "en": "Your plan’s list"
+  },
+  "aiPlanHomeOpenHint": {
+    "ar": "افتح القائمة واشطب اللي عملته",
+    "en": "Open the list and tick what you have done"
+  },
+  "aiPlanRefLine": {
+    "ar": "{name}: {detail}",
+    "en": "{name}: {detail}",
+    "description": "One compact side of the before/after: a record and its current detail",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
   }
 }

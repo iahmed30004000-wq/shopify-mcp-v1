@@ -24904,4 +24904,277 @@ class L10nEn extends L10n {
 
   @override
   String get aiPlanProblemUnknown => 'Something about this item is wrong.';
+
+  @override
+  String get aiPlanImportTitle => 'Import a plan';
+
+  @override
+  String get aiPlanImportTileBody =>
+      'Paste the AI app’s answer or pick its file, and read every suggestion with its reason before you approve it.';
+
+  @override
+  String get aiPlanImportBody =>
+      'Madar reads the answer on the phone only: nothing goes to the internet, and no suggestion is applied until you tap “Approve” on it.';
+
+  @override
+  String get aiPlanPasteLabel => 'Paste the answer here';
+
+  @override
+  String get aiPlanPasteHint =>
+      'Open your AI app, copy its answer and paste it here.';
+
+  @override
+  String get aiPlanPasteAction => 'Read what you pasted';
+
+  @override
+  String get aiPlanPickAction => 'Pick a file from the phone';
+
+  @override
+  String get aiPlanPasteEmpty => 'There is nothing pasted to read.';
+
+  @override
+  String get aiPlanImportBusy => 'Reading the answer…';
+
+  @override
+  String get aiPlanImportFailed =>
+      'The file could not be read. Try copying the answer and pasting it instead.';
+
+  @override
+  String get aiPlanProblemsTitle => 'Why it did not get through';
+
+  @override
+  String get aiPlanProblemsHint =>
+      'Fix the answer in your AI app and paste it here again. Nothing in your data changed.';
+
+  @override
+  String get aiPlanImportShared => 'An answer arrived from another app.';
+
+  @override
+  String get aiPlanImportAgain =>
+      'You imported this plan before, and your decisions on it are kept.';
+
+  @override
+  String aiPlanSuggestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count suggestions',
+      one: '1 suggestion',
+      zero: 'No suggestions',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aiPlanTabItems => 'Suggestions';
+
+  @override
+  String get aiPlanTabList => 'Your list';
+
+  @override
+  String get aiPlanRenameAction => 'Rename the plan';
+
+  @override
+  String get aiPlanRenameField => 'The plan’s name';
+
+  @override
+  String aiPlanRenamedToast(String name) {
+    return 'It is now “$name”';
+  }
+
+  @override
+  String get aiPlanMissing => 'This plan is not here.';
+
+  @override
+  String get aiPlanSummaryTitle => 'What the AI wrote';
+
+  @override
+  String get aiPlanSourceTitle => 'Where this answer came from';
+
+  @override
+  String get aiPlanSourceKindVideo => 'A video';
+
+  @override
+  String get aiPlanSourceKindArticle => 'An article';
+
+  @override
+  String get aiPlanSourceKindChannel => 'A channel';
+
+  @override
+  String get aiPlanSourceKindBook => 'A book';
+
+  @override
+  String get aiPlanSourceKindChat => 'A chat';
+
+  @override
+  String get aiPlanSourceKindOther => 'Another source';
+
+  @override
+  String get aiPlanClaimsBody =>
+      'These are the source’s own words; Madar makes no item out of them and builds nothing on them. For anything medical, your doctor is the reference.';
+
+  @override
+  String get aiPlanOriginPaste => 'You pasted it';
+
+  @override
+  String get aiPlanOriginFile => 'From a file';
+
+  @override
+  String get aiPlanOriginShare => 'Shared in';
+
+  @override
+  String get aiPlanOriginChat => 'From a Madar chat';
+
+  @override
+  String aiPlanImportedOn(String date) {
+    return 'Arrived $date';
+  }
+
+  @override
+  String get aiPlanChangeTitle => 'What happens if you approve';
+
+  @override
+  String get aiPlanReasonTitle => 'The reason it gave';
+
+  @override
+  String get aiPlanBeforeTitle => 'What you have today';
+
+  @override
+  String get aiPlanEvidenceTitle => 'From your own numbers';
+
+  @override
+  String get aiPlanApproveAction => 'Approve';
+
+  @override
+  String get aiPlanRejectAction => 'Refuse';
+
+  @override
+  String get aiPlanEditAction => 'Edit';
+
+  @override
+  String aiPlanApprovedToast(String name) {
+    return 'You approved “$name”';
+  }
+
+  @override
+  String aiPlanRejectedToast(String name) {
+    return 'You refused “$name”';
+  }
+
+  @override
+  String aiPlanEditedToast(String name) {
+    return 'You edited “$name”';
+  }
+
+  @override
+  String get aiPlanAlreadyApplied => 'You approved this suggestion already.';
+
+  @override
+  String get aiPlanBadgeApplied => 'Approved';
+
+  @override
+  String get aiPlanBadgeRejected => 'You refused it';
+
+  @override
+  String get aiPlanBadgeUndone => 'You took it back';
+
+  @override
+  String aiPlanWaitingFor(String names) {
+    return 'Waiting for your yes on: $names';
+  }
+
+  @override
+  String get aiPlanChecklistOnly =>
+      'This item is only a line on your list; it changes nothing in your data.';
+
+  @override
+  String get aiPlanCannotApprove =>
+      'This item is refused, and there is no way to approve it.';
+
+  @override
+  String get aiPlanItemsEmpty => 'This plan carries no suggestions.';
+
+  @override
+  String get aiPlanMealPlanFirst => 'Build a meal plan first';
+
+  @override
+  String get aiPlanEditTitle => 'Edit the suggestion';
+
+  @override
+  String get aiPlanEditDayField => 'The new day';
+
+  @override
+  String get aiPlanEditAmountField => 'The new amount';
+
+  @override
+  String get aiPlanEditPercentField => 'The new share';
+
+  @override
+  String get aiPlanEditFoodField => 'Pick from your foods';
+
+  @override
+  String get aiPlanEditNothing => 'This cannot be edited from here.';
+
+  @override
+  String aiPlanTickedToast(String name) {
+    return 'You ticked “$name”';
+  }
+
+  @override
+  String aiPlanUntickedToast(String name) {
+    return 'You un-ticked “$name”';
+  }
+
+  @override
+  String get aiPlanChecklistAllDone => 'The whole list is done. Well done!';
+
+  @override
+  String get aiPlanChecklistHint =>
+      'Tick a line when you have done it, and un-tick it if you tapped by mistake.';
+
+  @override
+  String aiPlanAfterBefore(String text) {
+    return 'Before: $text';
+  }
+
+  @override
+  String aiPlanAfterNow(String text) {
+    return 'After you approved: $text';
+  }
+
+  @override
+  String get aiPlanAfterMoved =>
+      'What you have now is different from what the plan set; it moved afterwards for a reason that has nothing to do with this plan.';
+
+  @override
+  String get aiPlanAfterGone =>
+      'The thing the plan changed is no longer in your data.';
+
+  @override
+  String get aiPlanHistoryTitle => 'Your plans';
+
+  @override
+  String get aiPlanHistoryBody =>
+      'Every answer you brought back, newest first, each one opening again against your data as it is today.';
+
+  @override
+  String get aiPlanHistoryEmptyTitle => 'No plans yet';
+
+  @override
+  String get aiPlanHistoryEmptyBody =>
+      'Send a summary of your data to any AI app, and paste the answer here when it comes back; the plan will be on this page.';
+
+  @override
+  String get aiPlanOpenAction => 'Open the plan';
+
+  @override
+  String get aiPlanHomeTitle => 'Your plan’s list';
+
+  @override
+  String get aiPlanHomeOpenHint => 'Open the list and tick what you have done';
+
+  @override
+  String aiPlanRefLine(String name, String detail) {
+    return '$name: $detail';
+  }
 }

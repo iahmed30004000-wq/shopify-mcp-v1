@@ -123,6 +123,33 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <!-- The AI bridge (Part 3, lib/features/ai_bridge, ShareIntakeChannel.kt):
+                 the answer half of the copy/share round trip. Madar hands an AI app one
+                 JSON and takes a «خطة مدار» back, and these two filters are the third
+                 way back in beside the paste box and the file picker.
+                 * ACTION_SEND – "Share" in Gemini / ChatGPT / any notes app: the answer
+                   as text (EXTRA_TEXT) or attached as a JSON file (EXTRA_STREAM).
+                   text/plain is where a copied answer comes from; application/json is
+                   where a saved file does.
+                 * ACTION_VIEW – "Open with Madar" on a .json in a file manager or a
+                   download. BROWSABLE is deliberately NOT declared: a web page must not
+                   be able to hand Madar a plan, only an app the user picked.
+                 Both land on MainActivity (launchMode singleTop, so a share into the
+                 running app arrives through onNewIntent) and are read ONCE. Nothing is
+                 fetched, nothing of the owner's is written: the share only opens
+                 «استيراد خطة», where every suggestion is approved by hand. -->
+            <intent-filter android:label="@string/share_plan_label">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="application/json"/>
+            </intent-filter>
+            <intent-filter android:label="@string/share_plan_label">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="content" android:mimeType="application/json"/>
+                <data android:scheme="file" android:mimeType="application/json"/>
+            </intent-filter>
         </activity>
 
         <!-- flutter_local_notifications 21 (README › AndroidManifest.xml setup):

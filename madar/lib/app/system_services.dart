@@ -6,9 +6,12 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:go_router/go_router.dart';
 
 import '../core/notifications/notifications.dart';
+import '../core/routing/router.dart' show routerProvider;
 import '../core/routing/routes.dart';
 import '../core/routing/system_route_pages.dart';
+import '../core/settings/app_settings.dart' show appSettingsProvider;
 import '../features/adhan/adhan.dart' show AdhanEvent, adhanInAppHoldProvider;
+import '../features/ai_bridge/ai_bridge.dart' show SharedPlanPayload, pendingSharedPlanProvider, shareIntakeProvider;
 import '../features/ai_chat/ai_chat.dart' show aiKeyHintsProvider, aiKeyStoreProvider, aiSettingsProvider;
 import '../features/adhkar/adhkar.dart' show adhkarReminderSyncProvider;
 import '../features/body/body.dart' show BodyReminderTaps, BodyTab, bodyReminderSyncProvider;
@@ -212,12 +215,70 @@ final systemReplanHooksProvider = Provider<NotificationReplanHooks>((ref) {
   return hooks;
 });
 
+/// An answer shared into Madar out of another app (Gemini, ChatGPT, a file
+/// manager): the text is parked for the import screen and «استيراد خطة»
+/// opens on it.
+///
+/// It deliberately does **not** read the answer here: reading one needs
+/// his language (the plan's plain default name, «خطة ١٠ تشرين الأول») and
+/// a screen he can read the problems on when the payload is refused. So
+/// this router only ever navigates – not one row of his is touched by a
+/// share, and nothing at all is applied until he taps Approve on a card.
+///
+/// Both ways in are covered: a share that launched the app
+/// ([ShareIntake.takeLaunchShare]) and one that reached it running
+/// ([ShareIntake.shares]). Before onboarding nothing is opened: a stale
+/// share must not skip it.
+class PlanShareRouter {
+  PlanShareRouter(this._ref) {
+    _shares = _ref.read(shareIntakeProvider).shares.listen(_onShare);
+    unawaited(_readLaunch());
+  }
+
+  final Ref _ref;
+  late final StreamSubscription<SharedPlanPayload> _shares;
+
+  Future<void> _readLaunch() async {
+    try {
+      final payload = await _ref.read(shareIntakeProvider).takeLaunchShare();
+      if (payload != null) _onShare(payload);
+    } catch (e) {
+      debugPrint('Madar: reading the shared answer failed (${e.runtimeType})');
+    }
+  }
+
+  void _onShare(SharedPlanPayload payload) {
+    if (!_ref.mounted) return;
+    if (!_ref.read(appSettingsProvider).onboarded) return;
+    // Parked first, navigated second: a second answer shared while the
+    // import screen is already open is picked up by its own listener.
+    _ref.read(pendingSharedPlanProvider.notifier).offer(payload);
+    _ref.read(routerProvider).go(AppRoutes.planImport);
+  }
+
+  void dispose() => unawaited(_shares.cancel());
+}
+
+final planShareRouterProvider = Provider<PlanShareRouter>((ref) {
+  final router = PlanShareRouter(ref);
+  ref.onDispose(router.dispose);
+  return router;
+});
+
 /// The home-screen widgets, watched **last** of all the app's services:
 /// Android is asked which of the four widgets are really on a home screen,
 /// and only those are kept up to date (at start, on resume, on a data
 /// change, at midnight and when one is added or removed), plus the routing
 /// of a tap on one. Off Android it does nothing and creates no timers.
-void watchSystemServices(WidgetRef ref) => watchWidgetServices(ref);
+///
+/// The AI bridge's share intake ([PlanShareRouter]) is watched here too: an
+/// answer shared out of another app parks itself and opens «استيراد خطة».
+/// It is read **first**, so a share that launched the app is picked up
+/// before the widgets' work starts.
+void watchSystemServices(WidgetRef ref) {
+  ref.watch(planShareRouterProvider);
+  watchWidgetServices(ref);
+}
 
 /// What has to happen after a backup has been restored over the running
 /// app, bound to the root container so it finishes even once the restore

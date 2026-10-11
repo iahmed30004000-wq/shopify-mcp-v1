@@ -369,8 +369,28 @@ abstract final class AppRoutes {
   /// Settings › Your data: the backup, the exports and the restore.
   static const String dataCentre = '/settings/data';
 
+  /// The «خطة مدار» answers he brought back from an AI app, newest first
+  /// (Part 3's history). Reached from Settings › Your data and from the
+  /// card on the home panel.
+  static const String plans = '/plans';
+
+  /// Bringing an answer in: paste it, pick its file, or let another app
+  /// share it in (an `ACTION_SEND` / `ACTION_VIEW` intent lands here).
+  static const String planImport = '/plans/import';
+
+  /// One plan: its suggestions and the list he ticks
+  /// (`/plans/plan/<id>?tab=list`).
+  static const String plan = '/plans/plan/:id';
+
   /// The restore flow on its own (reachable from the data centre).
   static const String dataRestore = '/settings/data/restore';
+
+  /// Location of the plan [planId], on [tab] (`items` – the suggestions,
+  /// the default – or `list`, the checklist).
+  static String planOf(String planId, {String? tab}) => Uri(
+    path: '/plans/plan/${Uri.encodeComponent(planId)}',
+    queryParameters: tab == null || tab == 'items' ? null : {'tab': tab},
+  ).toString();
 
   /// A new AI chat (`?q=` types a question into the field – never sent).
   static const String ai = '/ai';

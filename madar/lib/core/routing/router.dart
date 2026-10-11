@@ -83,7 +83,8 @@ final routerProvider = Provider<GoRouter>((ref) {
 /// system shell's own pages (Settings › Your data and its restore flow,
 /// Settings › AI, Settings › Home-screen widgets, the AI chat, the saved
 /// chats, Together Mode with its Hall of Fame and its three couple
-/// specials) move
+/// specials) and the AI bridge's own pages (the plans he brought back,
+/// bringing an answer in, and one plan with its checklist) move
 /// along the reading direction (shared axis); global search (`/search`) and
 /// the cinema hall (`/cinema`)
 /// fades through, and a show (`/cinema/game/<id>`) opens through the hall's
@@ -635,6 +636,38 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: CinemaGameScreen(gameId: state.pathParameters['id']!),
+            ),
+          ),
+        ],
+      ),
+      // Part 3 – the AI bridge: the answers he brought back. `/plans` is a
+      // sibling of home (not of Settings) because the card on the home
+      // panel and the share intent both open it directly.
+      GoRoute(
+        path: 'plans',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const PlanHistoryRoutePage(),
+        ),
+        routes: [
+          GoRoute(
+            path: 'import',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const PlanImportRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'plan/:id',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: PlanRoutePage(
+                planId: state.pathParameters['id']!,
+                tab: PlanRoutePage.tabOf(state.uri.queryParameters['tab']),
+              ),
             ),
           ),
         ],

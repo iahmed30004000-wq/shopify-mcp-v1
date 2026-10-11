@@ -23444,5 +23444,173 @@
     }
   },
   "aiPlanProblemDeferred": "This kind is not ready in this version; it is kept and will show once the kitchen planet arrives.",
-  "aiPlanProblemUnknown": "Something about this item is wrong."
+  "aiPlanProblemUnknown": "Something about this item is wrong.",
+  "aiPlanImportTitle": "Import a plan",
+  "@aiPlanImportTitle": {
+    "description": "Title of the screen that takes an AI answer in"
+  },
+  "aiPlanImportTileBody": "Paste the AI app’s answer or pick its file, and read every suggestion with its reason before you approve it.",
+  "aiPlanImportBody": "Madar reads the answer on the phone only: nothing goes to the internet, and no suggestion is applied until you tap “Approve” on it.",
+  "aiPlanPasteLabel": "Paste the answer here",
+  "aiPlanPasteHint": "Open your AI app, copy its answer and paste it here.",
+  "aiPlanPasteAction": "Read what you pasted",
+  "aiPlanPickAction": "Pick a file from the phone",
+  "aiPlanPasteEmpty": "There is nothing pasted to read.",
+  "aiPlanImportBusy": "Reading the answer…",
+  "aiPlanImportFailed": "The file could not be read. Try copying the answer and pasting it instead.",
+  "aiPlanProblemsTitle": "Why it did not get through",
+  "aiPlanProblemsHint": "Fix the answer in your AI app and paste it here again. Nothing in your data changed.",
+  "aiPlanImportShared": "An answer arrived from another app.",
+  "aiPlanImportAgain": "You imported this plan before, and your decisions on it are kept.",
+  "aiPlanSuggestionCount": "{count, plural, =0{No suggestions} =1{1 suggestion} other{{count} suggestions}}",
+  "@aiPlanSuggestionCount": {
+    "description": "How many suggestions a plan carries",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiPlanTabItems": "Suggestions",
+  "aiPlanTabList": "Your list",
+  "aiPlanRenameAction": "Rename the plan",
+  "aiPlanRenameField": "The plan’s name",
+  "aiPlanRenamedToast": "It is now “{name}”",
+  "@aiPlanRenamedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanMissing": "This plan is not here.",
+  "aiPlanSummaryTitle": "What the AI wrote",
+  "aiPlanSourceTitle": "Where this answer came from",
+  "aiPlanSourceKindVideo": "A video",
+  "aiPlanSourceKindArticle": "An article",
+  "aiPlanSourceKindChannel": "A channel",
+  "aiPlanSourceKindBook": "A book",
+  "aiPlanSourceKindChat": "A chat",
+  "aiPlanSourceKindOther": "Another source",
+  "aiPlanClaimsBody": "These are the source’s own words; Madar makes no item out of them and builds nothing on them. For anything medical, your doctor is the reference.",
+  "aiPlanOriginPaste": "You pasted it",
+  "aiPlanOriginFile": "From a file",
+  "aiPlanOriginShare": "Shared in",
+  "aiPlanOriginChat": "From a Madar chat",
+  "aiPlanImportedOn": "Arrived {date}",
+  "@aiPlanImportedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeTitle": "What happens if you approve",
+  "aiPlanReasonTitle": "The reason it gave",
+  "aiPlanBeforeTitle": "What you have today",
+  "aiPlanEvidenceTitle": "From your own numbers",
+  "aiPlanApproveAction": "Approve",
+  "aiPlanRejectAction": "Refuse",
+  "aiPlanEditAction": "Edit",
+  "aiPlanApprovedToast": "You approved “{name}”",
+  "@aiPlanApprovedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanRejectedToast": "You refused “{name}”",
+  "@aiPlanRejectedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanEditedToast": "You edited “{name}”",
+  "@aiPlanEditedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAlreadyApplied": "You approved this suggestion already.",
+  "aiPlanBadgeApplied": "Approved",
+  "aiPlanBadgeRejected": "You refused it",
+  "aiPlanBadgeUndone": "You took it back",
+  "aiPlanWaitingFor": "Waiting for your yes on: {names}",
+  "@aiPlanWaitingFor": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistOnly": "This item is only a line on your list; it changes nothing in your data.",
+  "aiPlanCannotApprove": "This item is refused, and there is no way to approve it.",
+  "aiPlanItemsEmpty": "This plan carries no suggestions.",
+  "aiPlanMealPlanFirst": "Build a meal plan first",
+  "aiPlanEditTitle": "Edit the suggestion",
+  "aiPlanEditDayField": "The new day",
+  "aiPlanEditAmountField": "The new amount",
+  "aiPlanEditPercentField": "The new share",
+  "aiPlanEditFoodField": "Pick from your foods",
+  "aiPlanEditNothing": "This cannot be edited from here.",
+  "aiPlanTickedToast": "You ticked “{name}”",
+  "@aiPlanTickedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanUntickedToast": "You un-ticked “{name}”",
+  "@aiPlanUntickedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChecklistAllDone": "The whole list is done. Well done!",
+  "aiPlanChecklistHint": "Tick a line when you have done it, and un-tick it if you tapped by mistake.",
+  "aiPlanAfterBefore": "Before: {text}",
+  "@aiPlanAfterBefore": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAfterNow": "After you approved: {text}",
+  "@aiPlanAfterNow": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanAfterMoved": "What you have now is different from what the plan set; it moved afterwards for a reason that has nothing to do with this plan.",
+  "aiPlanAfterGone": "The thing the plan changed is no longer in your data.",
+  "aiPlanHistoryTitle": "Your plans",
+  "aiPlanHistoryBody": "Every answer you brought back, newest first, each one opening again against your data as it is today.",
+  "aiPlanHistoryEmptyTitle": "No plans yet",
+  "aiPlanHistoryEmptyBody": "Send a summary of your data to any AI app, and paste the answer here when it comes back; the plan will be on this page.",
+  "aiPlanOpenAction": "Open the plan",
+  "aiPlanHomeTitle": "Your plan’s list",
+  "aiPlanHomeOpenHint": "Open the list and tick what you have done",
+  "aiPlanRefLine": "{name}: {detail}",
+  "@aiPlanRefLine": {
+    "description": "One compact side of the before/after: a record and its current detail",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  }
 }

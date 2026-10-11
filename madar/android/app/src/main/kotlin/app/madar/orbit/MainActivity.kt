@@ -52,6 +52,12 @@ import java.lang.ref.WeakReference
  * Alarms: `app.madar.orbit/alarms` → `armed(ids)` tells Dart which of the
  * notification plugin's alarms still exist (see [armedAlarmIds]).
  *
+ * Shares: an answer another app sends Madar (`ACTION_SEND` text or a JSON
+ * file, `ACTION_VIEW` of a `.json`) is read by [ShareIntakeChannel] — held
+ * when it launched the app, pushed straight to Dart when it reached a
+ * running one. Dart only opens «استيراد خطة» with it; nothing of the
+ * owner's is written by a share.
+ *
  * Both channels answer from the application context, so they keep working
  * while the engine runs without an activity; only `lockScreen` needs the
  * attached one ([channelHost]).
@@ -168,15 +174,22 @@ class MainActivity : AudioServiceFragmentActivity() {
     /** A notification launch to hand to an already running Dart app. */
     private var warmLaunch: Intent? = null
 
+    /** Whether this activity attached to an engine that was already running. */
+    private var warmEngine = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Before super.onCreate, which creates the shared engine if needed.
         val warm = FlutterEngineCache.getInstance().contains(AudioServicePlugin.getFlutterEngineId())
+        warmEngine = warm
         // A restored activity (process death, then back from recents) still
         // carries the intent that first launched it: never a lock-screen
         // launch then.
         if (savedInstanceState == null) {
             if (isOwnAdhanLaunch(intent)) setLockScreenMode(true)
             if (warm && isNotificationLaunch(intent)) warmLaunch = intent
+            // A share that launched Madar: held until Dart asks for it
+            // (a warm engine is handed it in configureFlutterEngine).
+            ShareIntakeChannel.offer(applicationContext, intent, running = false)
         }
         if (warm && displayModeId != 0) {
             window.attributes = window.attributes.apply { preferredDisplayModeId = displayModeId }
@@ -191,6 +204,8 @@ class MainActivity : AudioServiceFragmentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         if (isOwnAdhanLaunch(intent)) setLockScreenMode(true)
+        // A share into a running Madar reaches Dart straight away.
+        ShareIntakeChannel.offer(applicationContext, intent, running = true)
         super.onNewIntent(intent)
     }
 
@@ -279,6 +294,7 @@ class MainActivity : AudioServiceFragmentActivity() {
         MadarWidgetsChannel.register(flutterEngine, app)
         SavedGamesChannel.register(flutterEngine)
         TogetherChannels.register(flutterEngine)
+        ShareIntakeChannel.register(flutterEngine, deliverPending = warmEngine)
         // The plugins are attached to this activity by now (the engine attaches
         // them before it calls configureFlutterEngine): deliver the launch the
         // way flutter_local_notifications reports a tap to a running app.

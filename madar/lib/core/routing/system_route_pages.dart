@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart' show LaunchMode, launchUrl;
 
 import '../../app/system_services.dart' show afterRestoreProvider;
+import '../../features/ai_bridge/ai_bridge.dart'
+    show PlanHistoryScreen, PlanImportScreen, PlanScreen, PlanTab;
 import '../../features/ai_chat/ai_chat.dart' show AiChatListScreen, AiChatScreen;
 import '../../features/data/data.dart' show DataCentreScreen, RestoreFlow;
 import '../../features/lock/application/lock_controller.dart' show lockControllerProvider;
@@ -44,6 +46,24 @@ abstract final class SystemNav {
 
   static void notifications(BuildContext context, {String? tab}) =>
       unawaited(context.push<void>(AppRoutes.notificationsOf(tab: tab)));
+}
+
+/// How the AI bridge's pages open from the rest of the app (the card on
+/// the home panel, Settings › Your data, a share intent).
+abstract final class PlanNav {
+  /// The plans he brought back.
+  static void plans(BuildContext context) => unawaited(context.push<void>(AppRoutes.plans));
+
+  /// Bringing an answer in.
+  static void import(BuildContext context) => unawaited(context.push<void>(AppRoutes.planImport));
+
+  /// One plan's suggestions.
+  static void plan(BuildContext context, String planId) =>
+      unawaited(context.push<void>(AppRoutes.planOf(planId)));
+
+  /// One plan straight on its checklist – where the home panel's line goes.
+  static void checklist(BuildContext context, String planId) =>
+      unawaited(context.push<void>(AppRoutes.planOf(planId, tab: 'list')));
 }
 
 /// `/search?q=` – global search, opening every result through
@@ -109,6 +129,8 @@ class DataCentreRoutePage extends ConsumerWidget {
     onOpenImport: () => unawaited(context.push<void>(AppRoutes.import)),
     onOpenRestore: () => unawaited(context.push<void>(AppRoutes.dataRestore)),
     onRestored: (result) => unawaited(ref.read(afterRestoreProvider)(result)),
+    onOpenPlanImport: () => unawaited(context.push<void>(AppRoutes.planImport)),
+    onOpenPlans: () => unawaited(context.push<void>(AppRoutes.plans)),
   );
 }
 
@@ -121,6 +143,60 @@ class RestoreRoutePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => RestoreFlow(
     onRestored: (result) => unawaited(ref.read(afterRestoreProvider)(result)),
     onDone: () => context.canPop() ? context.pop() : context.go(AppRoutes.home),
+  );
+}
+
+/// `/plans` – the «خطة مدار» answers he brought back, newest first. Each
+/// one opens again through `PlanApplyService.reopen`, so an old plan is
+/// read against his data as it is today.
+class PlanHistoryRoutePage extends ConsumerWidget {
+  const PlanHistoryRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => PlanHistoryScreen(
+    animateBackdrop: !ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver)),
+    onOpenPlan: (id) => unawaited(context.push<void>(AppRoutes.planOf(id))),
+    onImport: () => unawaited(context.push<void>(AppRoutes.planImport)),
+  );
+}
+
+/// `/plans/import` – paste an answer or pick its file; an answer shared
+/// out of another app lands here too (`pendingSharedPlanProvider`).
+///
+/// The plan it reads **replaces** this screen, so Android back from the
+/// review returns to the plans instead of to the paste box.
+class PlanImportRoutePage extends ConsumerWidget {
+  const PlanImportRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => PlanImportScreen(
+    animateBackdrop: !ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver)),
+    onOpenPlan: (id) => context.pushReplacement(AppRoutes.planOf(id)),
+  );
+}
+
+/// `/plans/plan/<id>?tab=items|list` – one plan: the suggestions, decided
+/// one at a time, and the list he ticks off.
+class PlanRoutePage extends ConsumerWidget {
+  const PlanRoutePage({super.key, required this.planId, this.tab});
+
+  final String planId;
+  final PlanTab? tab;
+
+  /// The tab named by the `tab` query parameter (null: the suggestions).
+  static PlanTab? tabOf(String? name) {
+    for (final t in PlanTab.values) {
+      if (t.name == name) return t;
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => PlanScreen(
+    planId: planId,
+    initialTab: tab ?? PlanTab.items,
+    animateBackdrop: !ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver)),
+    onOpenMealPlan: () => unawaited(context.push<void>(AppRoutes.foodPlan)),
   );
 }
 

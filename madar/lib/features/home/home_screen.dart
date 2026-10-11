@@ -17,6 +17,7 @@ import '../../core/routing/route_pages.dart';
 import '../../core/routing/routes.dart';
 import '../../core/routing/system_route_pages.dart' show SystemNav;
 import '../../core/sound/sound_api.dart';
+import '../ai_bridge/ai_bridge.dart' show PlanChecklistStrip, openPlanChecklistProvider;
 import '../notification_center/notification_center.dart' show NotificationBell;
 import '../orbit/presentation/orbit_ui_providers.dart';
 import '../orbit/presentation/planet/customize_sheet.dart';
@@ -54,7 +55,8 @@ class HomeScreen extends ConsumerStatefulWidget {
   static const double collapsedPanelTop = 0.72;
 
   /// Height of the peeking panel's content at text scale 1 (grabber, chips,
-  /// one-line radar, window title, quick-add bar).
+  /// one-line radar, window title, quick-add bar). An open plan's
+  /// checklist line adds [PlanChecklistStrip.peekHeight] on top.
   static const double peekHeight = 250;
 
   /// The flight has carried the panel off screen (its blur and paint stop).
@@ -195,7 +197,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
             final h = box.maxHeight;
             final top = padding.top;
             final headerBottom = top + HomeScreen.headerHeight * (0.7 + 0.3 * textScale);
-            final peek = HomeScreen.peekHeight * (0.45 + 0.55 * textScale) + viewPadding.bottom;
+            // Part 3's plan line sits in the peeking panel too (above the
+            // window's header), so the peek makes room for it – and only
+            // while a plan really has something left to tick.
+            final planLine = ref.watch(openPlanChecklistProvider).value == null ? 0.0 : PlanChecklistStrip.peekHeight;
+            final peek = (HomeScreen.peekHeight + planLine) * (0.45 + 0.55 * textScale) + viewPadding.bottom;
             final collapsedTop = math.max(headerBottom + 220, math.min(h * HomeScreen.collapsedPanelTop, h - peek));
             final expandedTop = headerBottom + Space.xs;
             _range = (collapsedTop - expandedTop).clamp(1.0, double.infinity);

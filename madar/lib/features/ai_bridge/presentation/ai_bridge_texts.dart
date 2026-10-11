@@ -2,10 +2,12 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../core/db/database.dart' show AppliedPlanRow;
+import '../../../core/domain/enums.dart' show PlanOrigin;
 import '../../../core/i18n/formatters.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../data/domain/plain_numbers.dart';
 import '../data/plan_apply_service.dart' show PlanProgress;
+import '../domain/plan_catalog.dart' show PlanRef;
 import '../domain/plan_contract.dart';
 import '../domain/plan_preview.dart';
 import '../domain/plan_problems.dart';
@@ -36,6 +38,18 @@ class AiBridgeTexts {
   String name(String value) => fmt.isolate(value);
 
   String _digits(String text) => fmt.localizeDigits(text);
+
+  /// A record's machine-readable detail, made readable: the catalogue
+  /// writes «120.000 JOD monthly» (plain text in every language, so the AI
+  /// reads the same thing he sent), and the screens show his digits and
+  /// his own words for the period.
+  String _detail(String raw) {
+    var text = _digits(raw);
+    for (final (machine, word) in [('monthly', l.budgetMonthly), ('weekly', l.budgetWeekly)]) {
+      text = text.replaceAll(machine, word);
+    }
+    return text.trim();
+  }
 
   /// The plain default name of a plan that just arrived («خطة ١٠ تشرين الأول»).
   String defaultPlanName(DateTime day) => l.aiPlanDefaultName(fmt.formatDate(day, style: MadarDateStyle.medium));
@@ -179,22 +193,86 @@ class AiBridgeTexts {
       PlanBeforeKind.nothingYet => [l.aiPlanBeforeNothing],
       PlanBeforeKind.habitOff => [l.aiPlanBeforeHabitOff(name(ref?.name ?? ''))],
       PlanBeforeKind.habitOn => [l.aiPlanBeforeHabitOn(name(ref?.name ?? ''))],
-      PlanBeforeKind.envelope => [l.aiPlanBeforeEnvelope(name(ref?.name ?? ''), _digits(ref?.detail ?? ''))],
-      PlanBeforeKind.slotTime => [l.aiPlanBeforeSlot(name(ref?.name ?? ''), _digits(ref?.detail ?? ''))],
+      PlanBeforeKind.envelope => [l.aiPlanBeforeEnvelope(name(ref?.name ?? ''), _detail(ref?.detail ?? ''))],
+      PlanBeforeKind.slotTime => [l.aiPlanBeforeSlot(name(ref?.name ?? ''), _detail(ref?.detail ?? ''))],
       PlanBeforeKind.foodKnown => [l.aiPlanBeforeFoodKnown(name(ref?.name ?? ''))],
       PlanBeforeKind.foodInSlot => [l.aiPlanBeforeFoodInSlot(name(ref?.name ?? ''))],
-      PlanBeforeKind.goal => [l.aiPlanBeforeGoal(name(ref?.name ?? ''), _digits(ref?.detail ?? ''))],
+      PlanBeforeKind.goal => [l.aiPlanBeforeGoal(name(ref?.name ?? ''), _detail(ref?.detail ?? ''))],
       PlanBeforeKind.lab => [l.aiPlanBeforeLab(name(ref?.name ?? ''))],
       PlanBeforeKind.tracker => [l.aiPlanBeforeTracker(name(ref?.name ?? ''))],
       PlanBeforeKind.avoidKnown => [l.aiPlanBeforeAvoid(name(ref?.name ?? ''))],
     };
   }
 
-  /// Every reason the item cannot be applied as it stands, in order.
-  List<String> blockers(PlanItemPreview p) => [
-    for (final r in p.editReasons) editReason(r),
-    for (final problem in p.problems) this.problem(problem),
-  ];
+  /// Every reason the item cannot be applied as it stands, in order. A
+  /// refused item always says something: an item the validator threw out
+  /// without a sentence we can read still gets one.
+  List<String> blockers(PlanItemPreview p) {
+    final lines = [
+      for (final r in p.editReasons) editReason(r),
+      for (final problem in p.problems) this.problem(problem),
+    ];
+    if (lines.isEmpty && p.status == PlanItemStatus.rejected) return [l.aiPlanProblemUnknown];
+    return lines;
+  }
+
+  /// How the answer reached the phone – never a download.
+  String origin(PlanOrigin origin) => switch (origin) {
+    PlanOrigin.paste => l.aiPlanOriginPaste,
+    PlanOrigin.file => l.aiPlanOriginFile,
+    PlanOrigin.share => l.aiPlanOriginShare,
+    PlanOrigin.chat => l.aiPlanOriginChat,
+  };
+
+  /// What the AI said it read («فيديو»، «مقال»).
+  String sourceKind(String? kind) => switch (kind) {
+    'video' => l.aiPlanSourceKindVideo,
+    'article' => l.aiPlanSourceKindArticle,
+    'channel' => l.aiPlanSourceKindChannel,
+    'book' => l.aiPlanSourceKindBook,
+    'chat' => l.aiPlanSourceKindChat,
+    _ => l.aiPlanSourceKindOther,
+  };
+
+  /// «وصلت ١٠ تشرين الأول».
+  String importedOn(DateTime at) => l.aiPlanImportedOn(fmt.formatDate(at, style: MadarDateStyle.medium));
+
+  /// «١ من ٤ اقتراحات» – how many suggestions a plan carries.
+  String suggestionCount(int count) => _digits(l.aiPlanSuggestionCount(count));
+
+  /// One compact side of the before/after: «بقالة: ١٢٠.٠٠٠ JOD monthly»,
+  /// or null when there is no record to name (nothing like it yet).
+  String? refLine(PlanBefore? before) {
+    final ref = before?.ref;
+    if (ref == null) return null;
+    return _refLine(ref);
+  }
+
+  String _refLine(PlanRef ref) {
+    final detail = ref.detail?.trim();
+    return detail == null || detail.isEmpty ? name(ref.name) : l.aiPlanRefLine(name(ref.name), _detail(detail));
+  }
+
+  /// The names of the suggestions one item is waiting for – never an id.
+  String waitingFor(Iterable<String> names) => l.aiPlanWaitingFor(names.map(name).join(l.recordListSeparator));
+
+  /// What the plan's own `source` block says, as lines he can read. The
+  /// flagged claims are **not** in here: they are a warning of their own
+  /// ([L10n.aiPlanClaimsTitle]), never something to approve.
+  List<String> sourceLines(PlanSource source) {
+    final title = source.title?.trim();
+    final url = source.url?.trim();
+    final partial = source.completeness?.trim();
+    return [
+      if (source.kind != null || (title != null && title.isNotEmpty))
+        [
+          sourceKind(source.kind),
+          if (title != null && title.isNotEmpty) name(title),
+        ].join(l.recordListSeparator),
+      if (url != null && url.isNotEmpty) name(url),
+      if (partial != null && partial.isNotEmpty) l.aiPlanSourcePartial(name(partial)),
+    ];
+  }
 
   /// One problem as a sentence he can act on.
   String problem(PlanProblem p) {

@@ -52,7 +52,9 @@ class WalletsSummaryCard extends ConsumerWidget {
           child: Text(l.ledgerWallets, style: text.titleMedium?.copyWith(color: t.textPrimary)),
         ),
         Icon(
-          Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left_rounded : Icons.chevron_right_rounded,
+          // Mirrors itself in RTL (matchTextDirection); choosing per
+          // direction would mirror it twice.
+          Icons.chevron_right_rounded,
           color: t.textTertiary,
         ),
       ],

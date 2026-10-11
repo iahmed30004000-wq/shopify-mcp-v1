@@ -25525,4 +25525,277 @@ class L10nAr extends L10n {
 
   @override
   String get aiPlanProblemUnknown => 'في إشي غلط بهذا البند.';
+
+  @override
+  String get aiPlanImportTitle => 'استيراد خطة';
+
+  @override
+  String get aiPlanImportTileBody =>
+      'الصق جواب تطبيق الذكاء الاصطناعي أو اختار ملفه، وشوف كل اقتراح مع سببه قبل ما توافق.';
+
+  @override
+  String get aiPlanImportBody =>
+      'مَدار بيقرا الجواب على الجوال بس: ولا إشي بينبعت للإنترنت، وولا اقتراح بينطبّق إلا لما تضغط «وافق» عليه لحاله.';
+
+  @override
+  String get aiPlanPasteLabel => 'الصق الجواب هون';
+
+  @override
+  String get aiPlanPasteHint =>
+      'افتح تطبيق الذكاء الاصطناعي، انسخ جوابه، والصقه هون.';
+
+  @override
+  String get aiPlanPasteAction => 'اقرا اللي لصقته';
+
+  @override
+  String get aiPlanPickAction => 'اختار ملف من الجوال';
+
+  @override
+  String get aiPlanPasteEmpty => 'ما في إشي ملصوق لنقراه.';
+
+  @override
+  String get aiPlanImportBusy => 'عم نقرا الجواب…';
+
+  @override
+  String get aiPlanImportFailed =>
+      'ما قدرنا نقرا الملف. جرّب تنسخ الجواب وتلصقه.';
+
+  @override
+  String get aiPlanProblemsTitle => 'ليش الجواب ما مشي';
+
+  @override
+  String get aiPlanProblemsHint =>
+      'صحّح الجواب عند تطبيق الذكاء الاصطناعي وارجع الصقه هون. ما تغيّر ولا إشي ببياناتك.';
+
+  @override
+  String get aiPlanImportShared => 'وصل جواب من تطبيق تاني.';
+
+  @override
+  String get aiPlanImportAgain =>
+      'هذي الخطة كنت مستوردها من قبل، وقراراتك عليها محفوظة.';
+
+  @override
+  String aiPlanSuggestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count اقتراح',
+      many: '$count اقتراحًا',
+      few: '$count اقتراحات',
+      two: 'اقتراحين',
+      one: 'اقتراح واحد',
+      zero: 'ما في اقتراحات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aiPlanTabItems => 'الاقتراحات';
+
+  @override
+  String get aiPlanTabList => 'قائمتك';
+
+  @override
+  String get aiPlanRenameAction => 'غيّر اسم الخطة';
+
+  @override
+  String get aiPlanRenameField => 'اسم الخطة';
+
+  @override
+  String aiPlanRenamedToast(String name) {
+    return 'صار اسمها «$name»';
+  }
+
+  @override
+  String get aiPlanMissing => 'الخطة هذي مش موجودة.';
+
+  @override
+  String get aiPlanSummaryTitle => 'كلام الذكاء الاصطناعي';
+
+  @override
+  String get aiPlanSourceTitle => 'من وين جاي هذا الجواب';
+
+  @override
+  String get aiPlanSourceKindVideo => 'فيديو';
+
+  @override
+  String get aiPlanSourceKindArticle => 'مقال';
+
+  @override
+  String get aiPlanSourceKindChannel => 'قناة';
+
+  @override
+  String get aiPlanSourceKindBook => 'كتاب';
+
+  @override
+  String get aiPlanSourceKindChat => 'محادثة';
+
+  @override
+  String get aiPlanSourceKindOther => 'مصدر تاني';
+
+  @override
+  String get aiPlanClaimsBody =>
+      'هذا كلام المصدر نفسه، ومَدار ما بيعمل منه ولا بند وما بيبني عليه إشي. لأي إشي طبي، دكتورك هو المرجع.';
+
+  @override
+  String get aiPlanOriginPaste => 'لصقته بإيدك';
+
+  @override
+  String get aiPlanOriginFile => 'من ملف';
+
+  @override
+  String get aiPlanOriginShare => 'من مشاركة';
+
+  @override
+  String get aiPlanOriginChat => 'من محادثة مَدار';
+
+  @override
+  String aiPlanImportedOn(String date) {
+    return 'وصلت $date';
+  }
+
+  @override
+  String get aiPlanChangeTitle => 'شو بيصير لو وافقت';
+
+  @override
+  String get aiPlanReasonTitle => 'السبب اللي قاله';
+
+  @override
+  String get aiPlanBeforeTitle => 'اللي عندك هلأ';
+
+  @override
+  String get aiPlanEvidenceTitle => 'من أرقامك';
+
+  @override
+  String get aiPlanApproveAction => 'وافق';
+
+  @override
+  String get aiPlanRejectAction => 'ارفض';
+
+  @override
+  String get aiPlanEditAction => 'عدّل';
+
+  @override
+  String aiPlanApprovedToast(String name) {
+    return 'وافقت على «$name»';
+  }
+
+  @override
+  String aiPlanRejectedToast(String name) {
+    return 'رفضت «$name»';
+  }
+
+  @override
+  String aiPlanEditedToast(String name) {
+    return 'عدّلت «$name»';
+  }
+
+  @override
+  String get aiPlanAlreadyApplied => 'هذا الاقتراح موافَق عليه من قبل.';
+
+  @override
+  String get aiPlanBadgeApplied => 'موافَق عليه';
+
+  @override
+  String get aiPlanBadgeRejected => 'رفضته';
+
+  @override
+  String get aiPlanBadgeUndone => 'رجّعته';
+
+  @override
+  String aiPlanWaitingFor(String names) {
+    return 'مستني موافقتك على: $names';
+  }
+
+  @override
+  String get aiPlanChecklistOnly =>
+      'هذا البند سطر بقائمتك وبس؛ ما بيغيّر إشي ببياناتك.';
+
+  @override
+  String get aiPlanCannotApprove => 'هذا البند مرفوض، وما في طريقة توافق عليه.';
+
+  @override
+  String get aiPlanItemsEmpty => 'ما في اقتراحات بهذي الخطة.';
+
+  @override
+  String get aiPlanMealPlanFirst => 'اعمل خطة أكل أول';
+
+  @override
+  String get aiPlanEditTitle => 'عدّل الاقتراح';
+
+  @override
+  String get aiPlanEditDayField => 'اليوم الجديد';
+
+  @override
+  String get aiPlanEditAmountField => 'المبلغ الجديد';
+
+  @override
+  String get aiPlanEditPercentField => 'النسبة الجديدة';
+
+  @override
+  String get aiPlanEditFoodField => 'اختار من أكلك';
+
+  @override
+  String get aiPlanEditNothing => 'هذا الإشي ما بينعدّل من هون.';
+
+  @override
+  String aiPlanTickedToast(String name) {
+    return 'شطّبت «$name»';
+  }
+
+  @override
+  String aiPlanUntickedToast(String name) {
+    return 'رجّعت «$name»';
+  }
+
+  @override
+  String get aiPlanChecklistAllDone => 'خلّصت القائمة كلها. عفية!';
+
+  @override
+  String get aiPlanChecklistHint => 'اشطب السطر لما تعمله، وارجعه لو غلطت.';
+
+  @override
+  String aiPlanAfterBefore(String text) {
+    return 'قبل: $text';
+  }
+
+  @override
+  String aiPlanAfterNow(String text) {
+    return 'بعد الموافقة: $text';
+  }
+
+  @override
+  String get aiPlanAfterMoved =>
+      'اللي عندك هلأ مختلف عن اللي ثبّتته الخطة؛ تغيّر بعدها لسبب ما إله علاقة بهذي الخطة.';
+
+  @override
+  String get aiPlanAfterGone => 'الإشي اللي عدّلته الخطة مش موجود عندك هلأ.';
+
+  @override
+  String get aiPlanHistoryTitle => 'خططك';
+
+  @override
+  String get aiPlanHistoryBody =>
+      'كل جواب رجّعته، من الأحدث، وكل واحد بينفتح من جديد على بياناتك زي ما هي اليوم.';
+
+  @override
+  String get aiPlanHistoryEmptyTitle => 'ما في خطط لسا';
+
+  @override
+  String get aiPlanHistoryEmptyBody =>
+      'ابعت خلاصة بياناتك لأي تطبيق ذكاء اصطناعي، ولما يرجع الجواب الصقه هون؛ بتلاقي الخطة بهذي الصفحة.';
+
+  @override
+  String get aiPlanOpenAction => 'افتح الخطة';
+
+  @override
+  String get aiPlanHomeTitle => 'قائمة خطتك';
+
+  @override
+  String get aiPlanHomeOpenHint => 'افتح القائمة واشطب اللي عملته';
+
+  @override
+  String aiPlanRefLine(String name, String detail) {
+    return '$name: $detail';
+  }
 }

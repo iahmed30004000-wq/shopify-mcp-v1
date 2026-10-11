@@ -35,7 +35,14 @@ final dataRecordCountProvider = FutureProvider.autoDispose<int>(
 /// CSV, full JSON) and the prototype import – everything that moves data in
 /// or out of Madar, always on the user's explicit action.
 class DataCentreScreen extends ConsumerStatefulWidget {
-  const DataCentreScreen({super.key, this.onOpenImport, this.onOpenRestore, this.onRestored});
+  const DataCentreScreen({
+    super.key,
+    this.onOpenImport,
+    this.onOpenRestore,
+    this.onRestored,
+    this.onOpenPlanImport,
+    this.onOpenPlans,
+  });
 
   /// Opens the prototype import (defaults to pushing [ImportScreen]).
   final VoidCallback? onOpenImport;
@@ -45,6 +52,13 @@ class DataCentreScreen extends ConsumerStatefulWidget {
 
   /// Forwarded to the default [RestoreFlow].
   final ValueChanged<RestoreResult>? onRestored;
+
+  /// Opens the AI bridge's «استيراد خطة» (the other half of the round trip
+  /// that «استشارة ذكاء اصطناعي» above it starts).
+  final VoidCallback? onOpenPlanImport;
+
+  /// Opens the plans he already brought back.
+  final VoidCallback? onOpenPlans;
 
   @override
   ConsumerState<DataCentreScreen> createState() => _DataCentreScreenState();
@@ -265,6 +279,27 @@ class _DataCentreScreenState extends ConsumerState<DataCentreScreen> {
       DataGroup(
         seed: 3,
         children: [
+          // The answer half of the AI bridge, right under the export that
+          // starts it: he sends a file from the tile above and brings the
+          // «خطة مدار» back here.
+          if (widget.onOpenPlanImport != null)
+            DataTile(
+              key: const ValueKey('data.planImport'),
+              icon: Icons.auto_awesome_motion_rounded,
+              iconColor: t.accent,
+              title: l.aiPlanImportTitle,
+              subtitle: l.aiPlanImportTileBody,
+              onTap: widget.onOpenPlanImport,
+            ),
+          if (widget.onOpenPlans != null)
+            DataTile(
+              key: const ValueKey('data.plans'),
+              icon: Icons.checklist_rounded,
+              iconColor: t.success,
+              title: l.aiPlanHistoryTitle,
+              subtitle: l.aiPlanHistoryBody,
+              onTap: widget.onOpenPlans,
+            ),
           DataTile(icon: Icons.move_to_inbox_rounded, title: l.dataImportTitle, subtitle: l.dataImportBody, onTap: _import),
         ],
       ),

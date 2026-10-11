@@ -16,8 +16,10 @@ import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/routing/route_pages.dart';
+import '../../../core/routing/system_route_pages.dart' show PlanNav;
 import '../../../core/settings/app_settings.dart';
 import '../../../core/sound/sound_api.dart';
+import '../../ai_bridge/ai_bridge.dart' show PlanChecklistStrip;
 import '../../work/work.dart' show FocusItem, FocusKind, WorkActions;
 import '../home_providers.dart';
 import 'neglect_radar_card.dart';
@@ -27,7 +29,8 @@ import 'window_chips.dart';
 
 /// Content of the home screen's bottom glass panel: the six window chips,
 /// the Neglect Radar (one line while the panel peeks, its cards once it is
-/// [expanded]), the focused window's header (title + progress), its
+/// [expanded]), the open plan's checklist line (Part 3; absent when there
+/// is none), the focused window's header (title + progress), its
 /// reorderable task list and the quick-add bar (the panel's one "+").
 /// [dragArea] wraps the top part so the screen can turn vertical drags into
 /// panel expansion; the grabber toggles it ([onToggle]).
@@ -84,6 +87,11 @@ class TaskPanel extends ConsumerWidget {
           const SizedBox(height: Space.s + 2),
           _Radar(expansion: expansion, onOpen: onOpenPlanet!),
         ],
+        // Part 3's payoff: one line for the plan he still has something to
+        // tick off, right where he already reads the radar. It renders
+        // nothing at all when no plan has an open line, so a fresh install
+        // (and a finished plan) leave the panel exactly as it was.
+        PlanChecklistStrip(onOpen: (planId) => PlanNav.checklist(context, planId)),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.l, Space.xs),
           child: Row(
