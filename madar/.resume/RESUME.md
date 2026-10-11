@@ -5,8 +5,28 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 
 ## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped: **APK #22**, commit c76a47d, CI run 38085862986, artifact madar-apk-22 (id 11683476497).
-  (#19 was Part 4's UI e6cb0fc; #20 was Part 2's first half bb59f54; #21 failed on one test, fixed in c76a47d.)
+- Last shipped: **APK #24**, commit a908442, CI run 38111440767, artifact madar-apk-24 (id 11692542010).
+  (#22 was Part 2, c76a47d; #19 was Part 4's UI, e6cb0fc.)
+- **PLAN.md Part 3 is DONE** (commit `7c3d498`, with `a908442` fixing one test):
+  the «خطة مدار» v1 contract and engine (`lib/features/ai_bridge/`), the export tile under
+  Settings > «بياناتك», the paste box / file picker / **Android share intent**, the per-item
+  review screen, the checklist with its home-panel line, and the history. Schema **v4**
+  (`applied_plans`, `applied_plan_items`). 129 tests in `test/features/ai_bridge`.
+  Owner additions folded in (2026-10-10): approved items become a named checklist he ticks
+  («٢ من ٤»), and a line on the home panel under the Neglect Radar while anything is unticked.
+- Known gaps from Part 3: an edited suggestion's stored `payload` keeps the AI's original
+  value (the applied data and the screen are right; an engine change); `mealPlanMissing` has
+  no edit sheet; the share intent is proven by aapt2/kotlinc and a Dart fake, never on a
+  device; no duplicate detection, so the same answer imported twice makes two plans.
+- **Orbit feedback on APK #22, fixed** (`cf1045c`, `79ea8d5`, `a908442`): the sky read as
+  still, so the inner lane went 330 s -> 170 s a revolution and the moons 78 s -> 42 s; and
+  the reset button wore the app's "restart" arrow, so it now wears a centre-focus crosshair.
+  Two orbit tests had baked the old speed into a magic number - a 600-step ghost hunt that
+  timed the whole file out, and a flat 24 px glide cap. Both were rewritten to assert the
+  thing they meant (laps, and smoothness) rather than a number that only held at one speed.
+- **Part 3b is next** (checklists anywhere: a shopping list under a budget item, a packing
+  list on a trip, the kitchen pantry - one shared list engine), unless the owner's feedback
+  on APK #24 changes it.
 - **PLAN.md Part 1 is DONE** - all six APK #15 bugs fixed and verified (overlapping tabs via the
   new `MadarFadeStack`, the task "+" footer row, leaving a game, moons, the home panel extent +
   back handling, the icon-only reset-view button).
