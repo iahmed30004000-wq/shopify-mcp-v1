@@ -134,8 +134,8 @@ void main() {
 
   group('one suggestion is refused, the rest survive', () {
     test('9. no reason', () {
-      final items = (goodPlan()['items']! as List).toList();
-      items[0] = Map<String, Object?>.from(items.first as Map)..remove('reason');
+      final items = List<Object?>.from(goodPlan()['items']! as List);
+      items[0] = Map<String, Object?>.from(items.first! as Map)..remove('reason');
       final v = check({'madar': 'plan', 'version': 1, 'items': items});
       expect(v.problemsFor('h1').map((p) => p.code), contains(PlanProblemCode.missingReason));
       expect(v.rejected, contains('h1'));

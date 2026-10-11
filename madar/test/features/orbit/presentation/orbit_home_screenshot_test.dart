@@ -17,6 +17,7 @@ import 'package:madar/core/interaction/interaction.dart';
 import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/features/orbit/data/orbit_repository.dart';
 import 'package:madar/features/orbit/presentation/scene/orbit_scene.dart';
+import 'package:madar/features/orbit/render/planets/planet_layout.dart';
 
 import '../../../helpers/test_app.dart';
 import '../data/orbit_fixtures.dart';
@@ -168,15 +169,27 @@ void main() {
     c.rig
       ..begin()
       ..dragBy(Offset(0, -c.viewport.height * 0.3), c.viewport, baseElevation: c.baseCamera.elevation);
+    // The tilt is applied once; after that only the orbits move, so the
+    // search advances the scene and reads the projected frame without
+    // recomposing the camera every step (refresh() is what made this loop
+    // cost minutes and time the test out).
+    c.refresh();
+    // Search a window measured in laps, not in a fixed number of steps, so a
+    // change to PlanetSystemLayout.innerPeriod can never starve it: three
+    // revolutions of the outermost world, sampled fine enough that the
+    // occlusion window cannot be stepped over.
+    const layout = PlanetSystemLayout();
+    final window = 3 * layout.periodFor(layout.outerRadius);
+    final step = layout.innerPeriod / 720;
     String? ghost;
-    for (var i = 0; i < 600 && ghost == null; i++) {
-      c.planets.advanceSeconds(0.5);
-      c.refresh();
+    for (var t = 0.0; t < window && ghost == null; t += step) {
+      c.planets.advanceSeconds(step);
       for (final b in c.planets.frameFor(c.viewport).bodies) {
         if (b.ghosted && b.coreOcclusion > 0.72) ghost = b.key;
       }
     }
-    expect(ghost, isNotNull);
+    expect(ghost, isNotNull, reason: 'a world passes behind the dial within three outer laps');
+    c.refresh();
     await shots.frames(const Duration(milliseconds: 200));
     final b = c.planets.frameFor(c.viewport).body(ghost!)!;
     expect(c.hitTest(b.center)?.planetKey, ghost);
