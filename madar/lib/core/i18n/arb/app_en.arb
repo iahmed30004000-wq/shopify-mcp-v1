@@ -23815,5 +23815,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "listsAllTitle": "All lists",
+  "listsAllEmptyTitle": "No lists yet",
+  "listsAllEmptyBody": "Any budget envelope or any trip can carry a list you tick off.",
+  "listsOrphanGroup": "Lists with no record",
+  "listsOrphanGroupBody": "The record they hung on was deleted; the lists stayed yours."
 }

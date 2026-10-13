@@ -610,6 +610,14 @@ List<RouteBase> madarRoutes() => [
         ],
       ),
       GoRoute(
+        path: 'lists',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const RecordListsAllRoutePage(),
+        ),
+      ),
+      GoRoute(
         path: 'lists/:table/:id',
         pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
           context: context,

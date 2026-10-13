@@ -322,6 +322,11 @@ abstract final class AppRoutes {
   // of its own (its id is unique), which is what search results and the
   // Neglect Radar link to.
 
+  /// Every list he has, grouped by the record it hangs on – where a list
+  /// link with nothing to point at lands, and the only way to an orphan
+  /// list whose record was deleted.
+  static const String recordListsAll = '/lists';
+
   /// The lists of one record (`/lists/budget_items/<id>`).
   static const String recordLists = '/lists/:table/:id';
 

@@ -23815,5 +23815,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "listsAllTitle": "كل القوائم",
+  "listsAllEmptyTitle": "ما في ولا قائمة لهلأ",
+  "listsAllEmptyBody": "أي بند بالميزانية أو أي رحلة بتقدر تعمل تحته قائمة وتشطّب عليها.",
+  "listsOrphanGroup": "قوائم بلا سجل",
+  "listsOrphanGroupBody": "السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك."
 }

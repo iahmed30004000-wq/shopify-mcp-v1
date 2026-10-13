@@ -26128,4 +26128,21 @@ class L10nAr extends L10n {
   String listsUnder(String name) {
     return 'تحت $name';
   }
+
+  @override
+  String get listsAllTitle => 'كل القوائم';
+
+  @override
+  String get listsAllEmptyTitle => 'ما في ولا قائمة لهلأ';
+
+  @override
+  String get listsAllEmptyBody =>
+      'أي بند بالميزانية أو أي رحلة بتقدر تعمل تحته قائمة وتشطّب عليها.';
+
+  @override
+  String get listsOrphanGroup => 'قوائم بلا سجل';
+
+  @override
+  String get listsOrphanGroupBody =>
+      'السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.';
 }

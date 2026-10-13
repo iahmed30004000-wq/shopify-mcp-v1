@@ -137,7 +137,11 @@ void main() {
         LifeRecordLinks.locationOf('record_list_items', 'i-1', extra: {'listId': 'l-1'}),
         AppRoutes.recordListOf('l-1'),
       );
-      expect(LifeRecordLinks.locationOf('record_list_items', 'i-1'), isNull, reason: 'without its list, nowhere');
+      expect(
+        LifeRecordLinks.locationOf('record_list_items', 'i-1'),
+        AppRoutes.recordListsAll,
+        reason: 'without its list it still lands somewhere: all of his lists',
+      );
       for (final table in ['record_lists', 'record_list_items']) {
         expect(LifeRecordLinks.tables, contains(table));
       }

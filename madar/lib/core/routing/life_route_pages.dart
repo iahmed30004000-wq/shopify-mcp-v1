@@ -8,7 +8,8 @@ import '../../features/body/body.dart' show BodyScreen, BodyTab;
 import '../../features/custom_modules/custom_modules.dart' show CustomModulesScreen, ModuleScreen;
 import '../../features/family/family.dart' show FamilyScreen, PersonScreen;
 import '../../features/growth/growth.dart' show GoalScreen, GrowthScreen;
-import '../../features/lists/lists.dart' show HostListsScreen, ListHost, ListScreen, listBundleProvider;
+import '../../features/lists/lists.dart'
+    show AllListsScreen, HostListsScreen, ListHost, ListScreen, listBundleProvider;
 import '../../features/money/budget/presentation/shopping_post_bar.dart' show ShoppingPostBar;
 import '../../features/nutrition/presentation/nutrition_ui.dart'
     show ConditionsScreen, FoodLibraryScreen, MealPlanScreen, NutritionInsightsScreen;
@@ -74,6 +75,9 @@ abstract final class LifeNav {
   static void module(BuildContext context, String moduleId) =>
       unawaited(context.push<void>(AppRoutes.moduleOf(moduleId)));
 
+  /// Every list he has, grouped by the record it belongs to.
+  static void allLists(BuildContext context) => unawaited(context.push<void>(AppRoutes.recordListsAll));
+
   /// The lists of one record (its own screen opens them).
   static void recordLists(BuildContext context, String hostTable, String hostId) =>
       unawaited(context.push<void>(AppRoutes.recordListsOf(hostTable, hostId)));
@@ -102,8 +106,8 @@ abstract final class LifeNav {
 /// | meal_plans, meal_slots, meal_slot_foods | `/food/plan` | same |
 /// | food_rules | `/food/rules` | same |
 /// | custom_modules, custom_entries (`moduleId`) | `/modules/module/<id>` | `/modules` |
-/// | record_lists | `/list/<id>` | the list's host screen (`hostTable`/`hostId`) |
-/// | record_list_items (`listId`) | `/list/<listId>` | — |
+/// | record_lists | `/list/<id>` | its host's lists (`hostTable`/`hostId`), else `/lists` |
+/// | record_list_items (`listId`) | `/list/<listId>` | `/lists` |
 ///
 /// A child record (a card, a contact, a log) opens its parent, named by
 /// [extra] (the search documents carry it). Anything else: null.
@@ -177,13 +181,16 @@ abstract final class LifeRecordLinks {
       'custom_modules' => either(id, AppRoutes.moduleOf, AppRoutes.modules),
       'custom_entries' => either(of('moduleId'), AppRoutes.moduleOf, AppRoutes.modules),
       // A list opens itself; without its id, its host's lists (the search
-      // documents carry the host pair).
+      // documents carry the host pair); with neither, all of his lists –
+      // a list link never dead-ends.
       'record_lists' => id != null
           ? AppRoutes.recordListOf(id)
           : (of('hostTable') != null && of('hostId') != null
                 ? AppRoutes.recordListsOf(of('hostTable')!, of('hostId')!)
-                : null),
-      'record_list_items' => of('listId') == null ? null : AppRoutes.recordListOf(of('listId')!),
+                : AppRoutes.recordListsAll),
+      'record_list_items' => of('listId') == null
+          ? AppRoutes.recordListsAll
+          : AppRoutes.recordListOf(of('listId')!),
       _ => null,
     };
   }
@@ -449,4 +456,14 @@ class RecordListRoutePage extends ConsumerWidget {
       animateBackdrop: !_saver(ref),
     );
   }
+}
+
+/// `/lists` – every list he has, grouped by the record it hangs on (and
+/// the ones whose record is gone at the end).
+class RecordListsAllRoutePage extends ConsumerWidget {
+  const RecordListsAllRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) =>
+      AllListsScreen(onOpenList: LifeNav.recordList, animateBackdrop: !_saver(ref));
 }

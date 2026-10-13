@@ -114,6 +114,97 @@ class HostListsScreen extends ConsumerWidget {
   }
 }
 
+/// Every list he has, grouped by the record it hangs on – and, at the
+/// end, the ones whose record was deleted, which this screen is the only
+/// way to reach.
+///
+/// Where a list link with nothing to point at lands (`/lists`): a search
+/// result, a reason or a moon about lists can never dead-end.
+class AllListsScreen extends ConsumerWidget {
+  const AllListsScreen({super.key, required this.onOpenList, this.animateBackdrop = true});
+
+  /// Opens one list (the route pushes `/list/<id>`).
+  final void Function(BuildContext context, String listId) onOpenList;
+
+  /// Pass false in battery-saver mode.
+  final bool animateBackdrop;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = L10n.of(context);
+    final texts = ListTexts.of(context, ref.watch(listCurrenciesProvider).value ?? ListCurrencies.fallback);
+    final rows = ref.watch(allListsProvider).value;
+    final totals = ref.watch(allListTotalsProvider).value ?? const <String, ListTotals>{};
+
+    // His own order, grouped by host: each host keeps the place of its
+    // first list, and the records that are gone come last.
+    final groups = <ListHost, List<RecordListRow>>{};
+    for (final row in rows ?? const <RecordListRow>[]) {
+      (groups[ListHost(row.hostTable, row.hostId)] ??= []).add(row);
+    }
+    final named = <(String, List<RecordListRow>)>[];
+    final orphans = <RecordListRow>[];
+    for (final MapEntry(key: host, value: lists) in groups.entries) {
+      final name = ref.watch(hostNameProvider(host));
+      if (!name.hasValue) continue; // one frame, while the record is read
+      final title = name.value;
+      if (title == null) {
+        orphans.addAll(lists);
+      } else {
+        named.add((title, lists));
+      }
+    }
+
+    Widget row(RecordListRow r) => Padding(
+      padding: const EdgeInsetsDirectional.only(bottom: Space.s),
+      child: _ListRow(
+        row: r,
+        totals: totals[r.id] ?? ListTotals.empty,
+        texts: texts,
+        onOpen: () => onOpenList(context, r.id),
+      ),
+    );
+
+    return MadarScaffold(
+      title: l.listsAllTitle,
+      backdropSeed: 6.9,
+      animateBackdrop: animateBackdrop,
+      body: rows == null
+          ? const Center(child: OrbitLoader())
+          : ListView(
+              key: const PageStorageKey('lists.all'),
+              padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.xl),
+              children: [
+                if (rows.isEmpty)
+                  AnimatedEmptyState(
+                    key: const ValueKey('lists.all.empty'),
+                    kind: EmptyStateKind.emptyList,
+                    title: l.listsAllEmptyTitle,
+                    body: l.listsAllEmptyBody,
+                  ),
+                for (final (title, lists) in named) ...[
+                  SectionHeader(
+                    title: title,
+                    subtitle: texts.lists(lists.length),
+                    padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.m, Space.xs, Space.s),
+                  ),
+                  for (final r in lists) row(r),
+                ],
+                if (orphans.isNotEmpty) ...[
+                  SectionHeader(
+                    key: const ValueKey('lists.all.orphans'),
+                    title: l.listsOrphanGroup,
+                    subtitle: l.listsOrphanGroupBody,
+                    padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.m, Space.xs, Space.s),
+                  ),
+                  for (final r in orphans) row(r),
+                ],
+              ],
+            ),
+    );
+  }
+}
+
 class _HostGoneCard extends StatelessWidget {
   const _HostGoneCard({super.key});
 
@@ -152,14 +243,17 @@ class _ListRow extends ConsumerWidget {
     required this.row,
     required this.totals,
     required this.texts,
-    required this.grip,
     required this.onOpen,
+    this.grip,
   });
 
   final RecordListRow row;
   final ListTotals totals;
   final ListTexts texts;
-  final Widget grip;
+
+  /// The drag handle, where the lists can be reordered (one host's
+  /// screen); null where they cannot (all of them together).
+  final Widget? grip;
   final VoidCallback onOpen;
 
   @override
@@ -199,7 +293,10 @@ class _ListRow extends ConsumerWidget {
                 amountMilli: posted ? row.postedAmountMilli : (totals.doneAmountMilli == 0 ? null : totals.doneAmountMilli),
               ),
             ),
-            SizedBox(width: 40, height: 48, child: Center(child: grip)),
+            if (grip != null)
+              SizedBox(width: 40, height: 48, child: Center(child: grip))
+            else
+              const SizedBox(width: Space.s),
           ],
         ),
       ),

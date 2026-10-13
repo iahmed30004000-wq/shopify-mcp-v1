@@ -25496,4 +25496,21 @@ class L10nEn extends L10n {
   String listsUnder(String name) {
     return 'under $name';
   }
+
+  @override
+  String get listsAllTitle => 'All lists';
+
+  @override
+  String get listsAllEmptyTitle => 'No lists yet';
+
+  @override
+  String get listsAllEmptyBody =>
+      'Any budget envelope or any trip can carry a list you tick off.';
+
+  @override
+  String get listsOrphanGroup => 'Lists with no record';
+
+  @override
+  String get listsOrphanGroupBody =>
+      'The record they hung on was deleted; the lists stayed yours.';
 }

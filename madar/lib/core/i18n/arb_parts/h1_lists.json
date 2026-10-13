@@ -418,5 +418,25 @@
         "type": "String"
       }
     }
+  },
+  "listsAllTitle": {
+    "ar": "كل القوائم",
+    "en": "All lists"
+  },
+  "listsAllEmptyTitle": {
+    "ar": "ما في ولا قائمة لهلأ",
+    "en": "No lists yet"
+  },
+  "listsAllEmptyBody": {
+    "ar": "أي بند بالميزانية أو أي رحلة بتقدر تعمل تحته قائمة وتشطّب عليها.",
+    "en": "Any budget envelope or any trip can carry a list you tick off."
+  },
+  "listsOrphanGroup": {
+    "ar": "قوائم بلا سجل",
+    "en": "Lists with no record"
+  },
+  "listsOrphanGroupBody": {
+    "ar": "السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.",
+    "en": "The record they hung on was deleted; the lists stayed yours."
   }
 }

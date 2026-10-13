@@ -40504,6 +40504,36 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'تحت {name}'**
   String listsUnder(String name);
+
+  /// No description provided for @listsAllTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل القوائم'**
+  String get listsAllTitle;
+
+  /// No description provided for @listsAllEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في ولا قائمة لهلأ'**
+  String get listsAllEmptyTitle;
+
+  /// No description provided for @listsAllEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أي بند بالميزانية أو أي رحلة بتقدر تعمل تحته قائمة وتشطّب عليها.'**
+  String get listsAllEmptyBody;
+
+  /// No description provided for @listsOrphanGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم بلا سجل'**
+  String get listsOrphanGroup;
+
+  /// No description provided for @listsOrphanGroupBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.'**
+  String get listsOrphanGroupBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

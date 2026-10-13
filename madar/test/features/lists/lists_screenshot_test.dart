@@ -60,6 +60,9 @@ void main() {
   /// A list of any other host: the plain shared screen.
   Widget Function(String? id) plainScreen() => (id) => ListScreen(listId: id ?? 'none');
 
+  /// Every list he has, the way the router composes `/lists`.
+  Widget Function(String? id) allScreen() => (_) => AllListsScreen(onOpenList: (_, _) {});
+
   Widget Function(String? id) hostScreen(ListHost host) =>
       (_) => HostListsScreen(host: host, onOpenList: (_, _) {});
 
@@ -154,6 +157,34 @@ void main() {
 
   testWidgets('a list that is gone – English, Lapis', (tester) async {
     await shot(tester, 'gone_en_lapis', plainScreen(), seed: ListsSeed.empty, locale: const Locale('en'));
+  });
+
+  // ------------------------------------------------ all of his lists ----
+
+  testWidgets('every list, grouped by its record – Arabic, Lapis', (tester) async {
+    await shot(tester, 'all_ar_lapis', allScreen(), seed: ListsSeed.manyHosts);
+  });
+
+  testWidgets('every list, grouped by its record – English, Aurora', (tester) async {
+    await shot(
+      tester,
+      'all_en_aurora',
+      allScreen(),
+      seed: ListsSeed.manyHosts,
+      theme: MadarThemeId.aurora,
+      locale: const Locale('en'),
+    );
+  });
+
+  testWidgets('no lists at all – text scale 1.3, Arabic, Pearl', (tester) async {
+    await shot(
+      tester,
+      'all_empty_ar_pearl_scale130',
+      allScreen(),
+      seed: ListsSeed.empty,
+      theme: MadarThemeId.pearl,
+      textScale: 1.3,
+    );
   });
 
   // ------------------------------------------- where he reaches it from ----

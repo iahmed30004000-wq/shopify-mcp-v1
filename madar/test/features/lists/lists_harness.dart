@@ -61,6 +61,10 @@ enum ListsSeed {
 
   /// A trip with a packing list: ☐ جواز ☐ شاحن ☐ دوا.
   trip,
+
+  /// Lists on two different records, plus one whose record was deleted
+  /// (the all-lists screen).
+  manyHosts,
 }
 
 /// Fills [db] for [seed] and returns the list the screens open.
@@ -78,6 +82,31 @@ Future<String?> seedLists(MadarDatabase db, ListsSeed seed, {DateTime? now}) asy
   if (seed == ListsSeed.newList) {
     final (row, _) = await service.addList(listsEnvelope, const ListDraft(name: 'أغراض البقالة', currency: 'JOD'));
     return row.id;
+  }
+
+  if (seed == ListsSeed.manyHosts) {
+    await repos.trips.insert(
+      TripsCompanion.insert(
+        id: const Value('trip-1'),
+        destination: 'عمّان',
+        startDate: Value(DateTime(at.year, at.month, at.day + 20)),
+        endDate: Value(DateTime(at.year, at.month, at.day + 27)),
+      ),
+    );
+    final (shopping, _) = await service.addList(listsEnvelope, const ListDraft(name: 'أغراض البقالة', currency: 'JOD'));
+    await service.addItem(shopping.id, const ListItemDraft(title: 'رز', quantity: 2, unit: 'كيلو', priceMilli: 1500));
+    await service.addItem(shopping.id, const ListItemDraft(title: 'زيت', priceMilli: 2500));
+    await service.setDone((await service.itemRows(shopping.id)).first, true);
+    final (trip, _) = await service.addList(listsTrip, const ListDraft(name: 'شنطة السفر'));
+    await service.addItems(trip.id, ['جواز', 'شاحن', 'دوا']);
+    // A list whose record was deleted: nothing cascades, so it is his
+    // still – and this screen is the only way back to it.
+    final (orphan, _) = await service.addList(
+      const ListHost(ListHost.budgetItems, 'gone'),
+      const ListDraft(name: 'أغراض العيد', currency: 'JOD'),
+    );
+    await service.addItems(orphan.id, ['كعك', 'قهوة']);
+    return shopping.id;
   }
 
   if (seed == ListsSeed.trip) {

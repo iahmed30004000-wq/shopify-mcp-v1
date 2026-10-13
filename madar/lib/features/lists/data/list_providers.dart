@@ -34,6 +34,18 @@ final listHostCountsProvider = StreamProvider.family<Map<String, int>, String>(
   (ref, table) => ref.watch(listServiceProvider).watchHostCounts(table),
 );
 
+/// Every list in the database, in his own order (the all-lists screen,
+/// which groups them by host itself).
+final allListsProvider = StreamProvider<List<RecordListRow>>(
+  (ref) => ref.watch(listServiceProvider).watchAllLists(),
+);
+
+/// Ticked / total and the exact amounts of **every** list, keyed by list
+/// id (a list with no items of its own is simply absent).
+final allListTotalsProvider = StreamProvider<Map<String, ListTotals>>(
+  (ref) => ref.watch(listServiceProvider).watchAllTotals(),
+);
+
 /// One list with its lines and totals (null once it is deleted).
 final listBundleProvider = StreamProvider.family<ListBundle?, String>(
   (ref, listId) => ref.watch(listServiceProvider).watchBundle(listId),
