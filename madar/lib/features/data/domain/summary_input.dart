@@ -101,6 +101,8 @@ class SummaryInput {
     // Custom
     this.customModules = const [],
     this.customEntries = const [],
+    this.recordLists = const [],
+    this.recordListItems = const [],
   });
 
   /// The moment the summary describes (windows end today).
@@ -169,4 +171,10 @@ class SummaryInput {
 
   final List<CustomModuleRow> customModules;
   final List<CustomEntryRow> customEntries;
+
+  /// His tick lists on any record and their lines (schema v5). Only the
+  /// names and the ticked / open counts ever reach the summary – never a
+  /// note he wrote on a line, and never a price.
+  final List<RecordListRow> recordLists;
+  final List<RecordListItemRow> recordListItems;
 }

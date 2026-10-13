@@ -7,6 +7,7 @@ import 'tables/core_tables.dart';
 import 'tables/faith_tables.dart';
 import 'tables/health_tables.dart';
 import 'tables/life_tables.dart';
+import 'tables/list_tables.dart';
 import 'tables/money_tables.dart';
 import 'tables/plan_tables.dart';
 import '../domain/enums.dart';
@@ -30,6 +31,7 @@ part 'database.g.dart';
   CustomModules, CustomEntries,
   QuranBookmarks, QuranSessions, WirdPlans, HifzItems, HifzReviews,
   AppliedPlans, AppliedPlanItems,
+  RecordLists, RecordListItems,
 ])
 class MadarDatabase extends _$MadarDatabase {
   /// Wraps an executor. Pass [seed] to seed the generic defaults (planets,
@@ -42,7 +44,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -74,6 +76,12 @@ class MadarDatabase extends _$MadarDatabase {
           if (from < 4) {
             await m.createTable(appliedPlans);
             await m.createTable(appliedPlanItems);
+          }
+          // v5: the shared list engine – a tick list on any record (a
+          // budget envelope's shopping list, a trip's list, the pantry).
+          if (from < 5) {
+            await m.createTable(recordLists);
+            await m.createTable(recordListItems);
           }
         },
         beforeOpen: (details) async {

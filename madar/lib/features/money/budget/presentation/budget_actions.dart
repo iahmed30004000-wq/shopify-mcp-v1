@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/domain/budget_math.dart';
 import '../../../../core/i18n/formatters.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/sound/sound_api.dart';
+import '../../../lists/lists.dart' show ListHost;
 import '../data/budget_providers.dart';
 import '../data/budget_repository.dart';
 import '../domain/budget_edits.dart';
@@ -113,6 +116,14 @@ class BudgetActions {
     final label = MadarFormatter.of(context).localizeDigits(_l.budgetDeletedWithChildren(children));
     final undo = await _repo.deleteSubtree(id);
     return UndoableAction(label: label, undo: undo);
+  }
+
+  /// His own lists under this envelope («أغراض البقالة»): he builds one
+  /// at home, ticks it in the shop, and turns the ticked part into one
+  /// expense on this very envelope.
+  Future<void> openLists(String itemId) async {
+    Fx.fire(Sfx.navigate);
+    await context.push<void>(AppRoutes.recordListsOf(ListHost.budgetItems, itemId));
   }
 
   /// Stores a new order of one group of siblings.

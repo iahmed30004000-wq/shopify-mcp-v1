@@ -23612,5 +23612,208 @@
         "type": "String"
       }
     }
+  },
+  "listsTitle": "القوائم",
+  "@listsTitle": {
+    "description": "Part 3b: the shared tick lists"
+  },
+  "listsOfHost": "قوائم {name}",
+  "@listsOfHost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsBudgetTile": "قائمة الأغراض",
+  "listsTripTile": "قوائم ثانية للرحلة",
+  "listsTripTileHint": "غير قائمة التجهيز: أغراض تشتريها هناك، أماكن تزورها",
+  "listsOpenList": "افتح القائمة",
+  "listsNewList": "قائمة جديدة",
+  "listsNameLabel": "اسم القائمة",
+  "listsNameHint": "أغراض البقالة",
+  "listsNoteLabel": "ملاحظة",
+  "listsRename": "غيّر الاسم",
+  "listsEmptyTitle": "ما في قوائم لهون",
+  "listsEmptyBody": "اعمل قائمة وحُط فيها اللي بدك تشطّب عليه واحد واحد.",
+  "listsItemsEmptyTitle": "القائمة فاضية",
+  "listsItemsEmptyBody": "اكتب أول غرض فوق، وزيد عليه وقت ما تتذكر.",
+  "listsAddItemHint": "زيد غرض…",
+  "listsAddItem": "زيد",
+  "listsItemLabel": "الغرض",
+  "listsQuantityLabel": "الكمية",
+  "listsUnitLabel": "الوحدة",
+  "listsUnitHint": "كيلو، علبة، حبة",
+  "listsPriceLabel": "السعر",
+  "listsPricePerUnit": "السعر للـ{unit}",
+  "@listsPricePerUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "listsLineTotal": "المجموع {amount}",
+  "@listsLineTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsProgress": "{done} من {total}",
+  "@listsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "listsItemsCount": "{count, plural, =0{ما في أغراض} =1{غرض واحد} =2{غرضين} few{{count} أغراض} many{{count} غرضًا} other{{count} غرض}}",
+  "@listsItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsRemainingCount": "{count, plural, =1{باقي غرض واحد} =2{باقي غرضين} few{باقي {count} أغراض} many{باقي {count} غرضًا} other{باقي {count} غرض}}",
+  "@listsRemainingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsListsCount": "{count, plural, =0{ما في قوائم} =1{قائمة وحدة} =2{قائمتين} few{{count} قوائم} many{{count} قائمة} other{{count} قائمة}}",
+  "@listsListsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsAllDone": "خلّصت القائمة",
+  "listsNothingTicked": "ما شطّبت على شي لهلأ",
+  "listsOpenAmount": "الباقي بيكلّف {amount}",
+  "@listsOpenAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsTickedAmount": "المشطوب {amount}",
+  "@listsTickedAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsUntickAll": "شيل كل الإشارات",
+  "listsClearDone": "احذف المشطوب",
+  "listsTickedToast": "تشطّب",
+  "listsUntickedToast": "رجع للقائمة",
+  "listsItemAdded": "تزاد للقائمة",
+  "listsItemSaved": "تعدّل الغرض",
+  "listsItemDeleted": "تحذف الغرض",
+  "listsListAdded": "تعملت القائمة",
+  "listsListSaved": "تعدّلت القائمة",
+  "listsListDeleted": "تحذفت القائمة",
+  "listsListCopied": "تنسخت القائمة",
+  "listsCopySuffix": "نسخة",
+  "listsUntickedAllToast": "تشالت كل الإشارات",
+  "listsDoneClearedToast": "{count, plural, =1{تحذف غرض واحد} =2{تحذفوا غرضين} few{تحذفوا {count} أغراض} many{تحذفوا {count} غرضًا} other{تحذف {count} غرض}}",
+  "@listsDoneClearedToast": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsHostGoneTitle": "السجل اللي تحته انحذف",
+  "listsHostGoneBody": "القائمة لسا محفوظة، بس السجل اللي كانت تحته ما صار موجود.",
+  "listsGoneTitle": "القائمة ما صارت موجودة",
+  "listsPostButton": "سجّلها مصروف",
+  "listsPostSummary": "{count, plural, =1{غرض واحد — {amount}} =2{غرضين — {amount}} few{{count} أغراض — {amount}} many{{count} غرضًا — {amount}} other{{count} غرض — {amount}}}",
+  "@listsPostSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostOnEnvelope": "على {name}",
+  "@listsPostOnEnvelope": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostedBadge": "مسجّل مصروف",
+  "listsPostedNote": "تسجّل مصروف {amount} على {name}",
+  "@listsPostedNote": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostedKeepsOpen": "اللي ما شطّبت عليه ضل بالقائمة.",
+  "listsPostRefusedAlready": "هاي القائمة تسجّلت مرة، ما بتتسجّل مرتين.",
+  "listsPostRefusedNothing": "شطّب على اللي اشتريته أول",
+  "listsPostRefusedNoAmount": "حُط سعر للأغراض اللي شطّبت عليها",
+  "listsPostRefusedNoWallet": "لازم محفظة بنفس العملة قبل التسجيل",
+  "listsPostWalletTitle": "من أي محفظة؟",
+  "listsPostToast": "تسجّل {amount} على {name}",
+  "@listsPostToast": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostUndoneToast": "ترجّع المصروف",
+  "listsSearchLists": "القوائم",
+  "listsSearchItems": "أغراض القوائم",
+  "listsSumTitle": "القوائم",
+  "listsCsvList": "القائمة",
+  "listsCsvItem": "الغرض",
+  "listsCsvQuantity": "الكمية",
+  "listsCsvUnit": "الوحدة",
+  "listsCsvPrice": "السعر",
+  "listsCsvDone": "مشطوب",
+  "listsItemTicked": "مشطوب",
+  "listsItemOpen": "بعده بالقائمة",
+  "listsTick": "شطّب",
+  "listsUntick": "رجّعه للقائمة",
+  "listsDeleteList": "احذف القائمة",
+  "listsNewItemTitle": "غرض جديد",
+  "listsEditItemTitle": "تعديل الغرض",
+  "listsEditListTitle": "تعديل القائمة",
+  "listsDragHint": "اسحب من المقبض لترتيب الأغراض",
+  "listsPostRefusedGone": "القائمة ما صارت موجودة",
+  "listsPostRefusedHost": "هاي القائمة ما هي تحت بند بالميزانية",
+  "listsUnder": "تحت {name}",
+  "@listsUnder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/db/database.dart';
 import '../../../core/design/tokens.dart';
@@ -9,7 +10,9 @@ import '../../../core/design/widgets/widgets.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/interaction/interaction.dart';
+import '../../../core/routing/routes.dart';
 import '../../../core/sound/sound_api.dart';
+import '../../lists/lists.dart' show ListHost, ListTexts, ListsHostTile, hostListsProvider;
 import '../data/travel_providers.dart';
 import '../domain/packing.dart';
 import '../domain/travel_overview.dart';
@@ -144,6 +147,8 @@ class _TripScreenState extends ConsumerState<TripScreen> {
     final footer = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        const SizedBox(height: Space.l),
+        _TripListsTile(tripId: row.id),
         if (!prayerFirst) prayerCard,
         if (notes != null && notes.isNotEmpty) ...[
           const SizedBox(height: Space.l),
@@ -283,6 +288,32 @@ class _TripScreenState extends ConsumerState<TripScreen> {
             onSelected: () => TravelActions.setStatus(context, ref, row, null),
           ),
       ],
+    );
+  }
+}
+
+/// The trip's lists (Part 3b's shared engine with the trip as the host):
+/// anything he wants to tick off for this trip – ☐ جواز ☐ شاحن ☐ دوا, a
+/// shopping list for the road, the gifts to buy – beside the packing list
+/// the trip already has.
+class _TripListsTile extends ConsumerWidget {
+  const _TripListsTile({required this.tripId});
+
+  final String tripId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = L10n.of(context);
+    final host = ListHost(ListHost.trips, tripId);
+    final count = ref.watch(hostListsProvider(host)).value?.length ?? 0;
+    return ListsHostTile(
+      key: const ValueKey('travel.trip.lists'),
+      title: l.listsTripTile,
+      // The trip already has «قائمة التجهيز» of its own; this one must never
+      // read as a second packing list, so when it is empty it says what it
+      // is for instead of «٠ قوائم».
+      subtitle: count == 0 ? l.listsTripTileHint : ListTexts.of(context).lists(count),
+      onOpen: () => unawaited(context.push<void>(AppRoutes.recordListsOf(host.table, host.id))),
     );
   }
 }

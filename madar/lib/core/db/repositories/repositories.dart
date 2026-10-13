@@ -84,6 +84,8 @@ class Repositories {
       hifzReviews = EntityRepository(db, db.hifzReviews),
       appliedPlans = EntityRepository(db, db.appliedPlans),
       appliedPlanItems = EntityRepository(db, db.appliedPlanItems),
+      recordLists = EntityRepository(db, db.recordLists),
+      recordListItems = EntityRepository(db, db.recordListItems),
       keyValues = KeyValueRepository(db),
       activity = ActivityRepository(db),
       currencies = CurrencyRepository(db);
@@ -167,6 +169,11 @@ class Repositories {
   final EntityRepository<$AppliedPlansTable, AppliedPlanRow> appliedPlans;
   final EntityRepository<$AppliedPlanItemsTable, AppliedPlanItemRow> appliedPlanItems;
 
+  // The shared list engine: a tick list on any host record (a budget
+  // envelope's shopping list, a trip's list, the kitchen pantry).
+  final EntityRepository<$RecordListsTable, RecordListRow> recordLists;
+  final EntityRepository<$RecordListItemsTable, RecordListItemRow> recordListItems;
+
   // Special-purpose
   final KeyValueRepository keyValues;
   final ActivityRepository activity;
@@ -239,6 +246,8 @@ class Repositories {
       hifzReviews,
       appliedPlans,
       appliedPlanItems,
+      recordLists,
+      recordListItems,
     ])
       r.tableName: r,
   };

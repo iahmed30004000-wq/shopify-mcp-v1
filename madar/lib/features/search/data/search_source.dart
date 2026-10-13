@@ -317,6 +317,8 @@ abstract final class SearchLabels {
     'systemShellSourceMealPlans' => l.systemShellSourceMealPlans,
     'systemShellSourceMealSlots' => l.systemShellSourceMealSlots,
     'systemShellSourceFoodRules' => l.systemShellSourceFoodRules,
+    'listsSearchLists' => l.listsSearchLists,
+    'listsSearchItems' => l.listsSearchItems,
     'searchSourceCustomModules' => l.searchSourceCustomModules,
     'searchSourceCustomEntries' => l.searchSourceCustomEntries,
     'searchSourceQuranAyat' => l.searchSourceQuranAyat,

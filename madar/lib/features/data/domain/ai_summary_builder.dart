@@ -919,7 +919,31 @@ class AiSummaryBuilder {
       md.sub('${_clean(m.name)} ($kind)', lines);
     }
     if (modules.length > maxModules) md.lines(['- ${l.dataSumMore('${modules.length - maxModules}')}']);
+    _lists(md, input);
     return md.text;
+  }
+
+  /// His tick lists (Part 3b), wherever they hang: the name, the record it
+  /// belongs to, and how much of it is still open. Never a line's note and
+  /// never a price – the amounts are his, and they stay on the phone.
+  void _lists(_Md md, SummaryInput input) {
+    final lists = input.recordLists.toList()
+      ..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.name, b.name, a.id, b.id));
+    if (lists.isEmpty) return;
+    final hosts = <String, String>{
+      for (final b in input.budgetItems) 'budget_items/${b.id}': b.name,
+      for (final t in input.trips) 'trips/${t.id}': t.destination,
+    };
+    final lines = <String>[];
+    for (final row in lists.take(maxModules)) {
+      final items = input.recordListItems.where((i) => i.listId == row.id).toList();
+      final done = items.where((i) => i.done).length;
+      final host = hosts['${row.hostTable}/${row.hostId}'];
+      final name = host == null ? _clean(row.name) : '${_clean(row.name)} (${_clean(host)})';
+      lines.add('- $name: ${_join([l.dataSumOpen('${items.length - done}'), l.dataSumDone('$done')])}');
+    }
+    if (lists.length > maxModules) lines.add('- ${l.dataSumMore('${lists.length - maxModules}')}');
+    md.sub(l.listsSumTitle, lines);
   }
 
   static List<_Field> _fields(List<Object?> raw) => [

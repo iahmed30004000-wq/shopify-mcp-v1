@@ -43,4 +43,7 @@ const madarIndexStatements = <String>[
   'CREATE INDEX IF NOT EXISTS idx_applied_plan_items_plan_done ON applied_plan_items (plan_id, done)',
   'CREATE INDEX IF NOT EXISTS idx_applied_plan_items_state ON applied_plan_items (state)',
   'CREATE INDEX IF NOT EXISTS idx_applied_plan_items_ref ON applied_plan_items (ref_table, ref_id)',
+  'CREATE INDEX IF NOT EXISTS idx_record_lists_host ON record_lists (host_table, host_id)',
+  'CREATE INDEX IF NOT EXISTS idx_record_list_items_list ON record_list_items (list_id)',
+  'CREATE INDEX IF NOT EXISTS idx_record_list_items_list_done ON record_list_items (list_id, done)',
 ];

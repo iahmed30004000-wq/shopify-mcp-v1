@@ -317,6 +317,24 @@ abstract final class AppRoutes {
   /// Location of the tracker or list [moduleId].
   static String moduleOf(String moduleId) => '/modules/module/${Uri.encodeComponent(moduleId)}';
 
+  // Part 3b – the shared tick lists. A list belongs to a host record, so
+  // its lists open from that record's own screen; one list has a location
+  // of its own (its id is unique), which is what search results and the
+  // Neglect Radar link to.
+
+  /// The lists of one record (`/lists/budget_items/<id>`).
+  static const String recordLists = '/lists/:table/:id';
+
+  /// Location of the lists of the record [hostId] of [hostTable].
+  static String recordListsOf(String hostTable, String hostId) =>
+      '/lists/${Uri.encodeComponent(hostTable)}/${Uri.encodeComponent(hostId)}';
+
+  /// One list with its items (`/list/<id>`).
+  static const String recordList = '/list/:id';
+
+  /// Location of the list [listId].
+  static String recordListOf(String listId) => '/list/${Uri.encodeComponent(listId)}';
+
   // Phase 7 – Madar Cinema. The hall opens from the Growth world's page;
   // the hall pushes its own game screen and Saved Games pages, and these
   // locations serve deep links (search, notifications, shared links).

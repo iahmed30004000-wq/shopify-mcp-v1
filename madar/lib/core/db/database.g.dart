@@ -39090,6 +39090,1493 @@ class AppliedPlanItemsCompanion extends UpdateCompanion<AppliedPlanItemRow> {
   }
 }
 
+class $RecordListsTable extends RecordLists
+    with TableInfo<$RecordListsTable, RecordListRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RecordListsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _hostTableMeta = const VerificationMeta(
+    'hostTable',
+  );
+  @override
+  late final GeneratedColumn<String> hostTable = GeneratedColumn<String>(
+    'host_table',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _hostIdMeta = const VerificationMeta('hostId');
+  @override
+  late final GeneratedColumn<String> hostId = GeneratedColumn<String>(
+    'host_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _currencyMeta = const VerificationMeta(
+    'currency',
+  );
+  @override
+  late final GeneratedColumn<String> currency = GeneratedColumn<String>(
+    'currency',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _postedAtMeta = const VerificationMeta(
+    'postedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> postedAt = GeneratedColumn<DateTime>(
+    'posted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _postedTxIdMeta = const VerificationMeta(
+    'postedTxId',
+  );
+  @override
+  late final GeneratedColumn<String> postedTxId = GeneratedColumn<String>(
+    'posted_tx_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _postedAmountMilliMeta = const VerificationMeta(
+    'postedAmountMilli',
+  );
+  @override
+  late final GeneratedColumn<int> postedAmountMilli = GeneratedColumn<int>(
+    'posted_amount_milli',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _postedItemCountMeta = const VerificationMeta(
+    'postedItemCount',
+  );
+  @override
+  late final GeneratedColumn<int> postedItemCount = GeneratedColumn<int>(
+    'posted_item_count',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    hostTable,
+    hostId,
+    name,
+    currency,
+    note,
+    postedAt,
+    postedTxId,
+    postedAmountMilli,
+    postedItemCount,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'record_lists';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RecordListRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('host_table')) {
+      context.handle(
+        _hostTableMeta,
+        hostTable.isAcceptableOrUnknown(data['host_table']!, _hostTableMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_hostTableMeta);
+    }
+    if (data.containsKey('host_id')) {
+      context.handle(
+        _hostIdMeta,
+        hostId.isAcceptableOrUnknown(data['host_id']!, _hostIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_hostIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('currency')) {
+      context.handle(
+        _currencyMeta,
+        currency.isAcceptableOrUnknown(data['currency']!, _currencyMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('posted_at')) {
+      context.handle(
+        _postedAtMeta,
+        postedAt.isAcceptableOrUnknown(data['posted_at']!, _postedAtMeta),
+      );
+    }
+    if (data.containsKey('posted_tx_id')) {
+      context.handle(
+        _postedTxIdMeta,
+        postedTxId.isAcceptableOrUnknown(
+          data['posted_tx_id']!,
+          _postedTxIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('posted_amount_milli')) {
+      context.handle(
+        _postedAmountMilliMeta,
+        postedAmountMilli.isAcceptableOrUnknown(
+          data['posted_amount_milli']!,
+          _postedAmountMilliMeta,
+        ),
+      );
+    }
+    if (data.containsKey('posted_item_count')) {
+      context.handle(
+        _postedItemCountMeta,
+        postedItemCount.isAcceptableOrUnknown(
+          data['posted_item_count']!,
+          _postedItemCountMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RecordListRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RecordListRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      hostTable: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}host_table'],
+      )!,
+      hostId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}host_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      currency: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}currency'],
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+      postedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}posted_at'],
+      ),
+      postedTxId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}posted_tx_id'],
+      ),
+      postedAmountMilli: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}posted_amount_milli'],
+      ),
+      postedItemCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}posted_item_count'],
+      ),
+    );
+  }
+
+  @override
+  $RecordListsTable createAlias(String alias) {
+    return $RecordListsTable(attachedDatabase, alias);
+  }
+}
+
+class RecordListRow extends DataClass implements Insertable<RecordListRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+
+  /// SQL table of the record this list belongs to (`budget_items`,
+  /// `trips` …) – the same pair `LifeRecordLinks` resolves.
+  final String hostTable;
+
+  /// Id of that record. The row may be gone (nothing cascades here): a
+  /// list whose host was deleted still reads, and simply has no host.
+  final String hostId;
+
+  /// His own name for the list («أغراض البقالة», «شنطة عمّان»).
+  final String name;
+
+  /// The currency every price on this list is in (null = the base
+  /// currency). Resolved once, when the list is created, from the host –
+  /// a budget envelope's own currency – so no amount on a list is ever
+  /// converted behind his back.
+  final String? currency;
+  final String? note;
+
+  /// When the ticked part of this list was turned into one ledger entry
+  /// (null while it was never posted). A posted list says so and refuses
+  /// to post again, so he can never be charged twice for one shop.
+  final DateTime? postedAt;
+
+  /// The `transactions` row that posting wrote (null when never posted,
+  /// or after an undo).
+  final String? postedTxId;
+
+  /// What was posted, kept here so the list can say «٣ أغراض — ٨٫٠٠٠ د.أ»
+  /// without reading the ledger back.
+  final int? postedAmountMilli;
+  final int? postedItemCount;
+  const RecordListRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.hostTable,
+    required this.hostId,
+    required this.name,
+    this.currency,
+    this.note,
+    this.postedAt,
+    this.postedTxId,
+    this.postedAmountMilli,
+    this.postedItemCount,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['host_table'] = Variable<String>(hostTable);
+    map['host_id'] = Variable<String>(hostId);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || currency != null) {
+      map['currency'] = Variable<String>(currency);
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    if (!nullToAbsent || postedAt != null) {
+      map['posted_at'] = Variable<DateTime>(postedAt);
+    }
+    if (!nullToAbsent || postedTxId != null) {
+      map['posted_tx_id'] = Variable<String>(postedTxId);
+    }
+    if (!nullToAbsent || postedAmountMilli != null) {
+      map['posted_amount_milli'] = Variable<int>(postedAmountMilli);
+    }
+    if (!nullToAbsent || postedItemCount != null) {
+      map['posted_item_count'] = Variable<int>(postedItemCount);
+    }
+    return map;
+  }
+
+  RecordListsCompanion toCompanion(bool nullToAbsent) {
+    return RecordListsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      hostTable: Value(hostTable),
+      hostId: Value(hostId),
+      name: Value(name),
+      currency: currency == null && nullToAbsent
+          ? const Value.absent()
+          : Value(currency),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      postedAt: postedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(postedAt),
+      postedTxId: postedTxId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(postedTxId),
+      postedAmountMilli: postedAmountMilli == null && nullToAbsent
+          ? const Value.absent()
+          : Value(postedAmountMilli),
+      postedItemCount: postedItemCount == null && nullToAbsent
+          ? const Value.absent()
+          : Value(postedItemCount),
+    );
+  }
+
+  factory RecordListRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RecordListRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      hostTable: serializer.fromJson<String>(json['hostTable']),
+      hostId: serializer.fromJson<String>(json['hostId']),
+      name: serializer.fromJson<String>(json['name']),
+      currency: serializer.fromJson<String?>(json['currency']),
+      note: serializer.fromJson<String?>(json['note']),
+      postedAt: serializer.fromJson<DateTime?>(json['postedAt']),
+      postedTxId: serializer.fromJson<String?>(json['postedTxId']),
+      postedAmountMilli: serializer.fromJson<int?>(json['postedAmountMilli']),
+      postedItemCount: serializer.fromJson<int?>(json['postedItemCount']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'hostTable': serializer.toJson<String>(hostTable),
+      'hostId': serializer.toJson<String>(hostId),
+      'name': serializer.toJson<String>(name),
+      'currency': serializer.toJson<String?>(currency),
+      'note': serializer.toJson<String?>(note),
+      'postedAt': serializer.toJson<DateTime?>(postedAt),
+      'postedTxId': serializer.toJson<String?>(postedTxId),
+      'postedAmountMilli': serializer.toJson<int?>(postedAmountMilli),
+      'postedItemCount': serializer.toJson<int?>(postedItemCount),
+    };
+  }
+
+  RecordListRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? hostTable,
+    String? hostId,
+    String? name,
+    Value<String?> currency = const Value.absent(),
+    Value<String?> note = const Value.absent(),
+    Value<DateTime?> postedAt = const Value.absent(),
+    Value<String?> postedTxId = const Value.absent(),
+    Value<int?> postedAmountMilli = const Value.absent(),
+    Value<int?> postedItemCount = const Value.absent(),
+  }) => RecordListRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    hostTable: hostTable ?? this.hostTable,
+    hostId: hostId ?? this.hostId,
+    name: name ?? this.name,
+    currency: currency.present ? currency.value : this.currency,
+    note: note.present ? note.value : this.note,
+    postedAt: postedAt.present ? postedAt.value : this.postedAt,
+    postedTxId: postedTxId.present ? postedTxId.value : this.postedTxId,
+    postedAmountMilli: postedAmountMilli.present
+        ? postedAmountMilli.value
+        : this.postedAmountMilli,
+    postedItemCount: postedItemCount.present
+        ? postedItemCount.value
+        : this.postedItemCount,
+  );
+  RecordListRow copyWithCompanion(RecordListsCompanion data) {
+    return RecordListRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      hostTable: data.hostTable.present ? data.hostTable.value : this.hostTable,
+      hostId: data.hostId.present ? data.hostId.value : this.hostId,
+      name: data.name.present ? data.name.value : this.name,
+      currency: data.currency.present ? data.currency.value : this.currency,
+      note: data.note.present ? data.note.value : this.note,
+      postedAt: data.postedAt.present ? data.postedAt.value : this.postedAt,
+      postedTxId: data.postedTxId.present
+          ? data.postedTxId.value
+          : this.postedTxId,
+      postedAmountMilli: data.postedAmountMilli.present
+          ? data.postedAmountMilli.value
+          : this.postedAmountMilli,
+      postedItemCount: data.postedItemCount.present
+          ? data.postedItemCount.value
+          : this.postedItemCount,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecordListRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('hostTable: $hostTable, ')
+          ..write('hostId: $hostId, ')
+          ..write('name: $name, ')
+          ..write('currency: $currency, ')
+          ..write('note: $note, ')
+          ..write('postedAt: $postedAt, ')
+          ..write('postedTxId: $postedTxId, ')
+          ..write('postedAmountMilli: $postedAmountMilli, ')
+          ..write('postedItemCount: $postedItemCount')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    hostTable,
+    hostId,
+    name,
+    currency,
+    note,
+    postedAt,
+    postedTxId,
+    postedAmountMilli,
+    postedItemCount,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecordListRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.hostTable == this.hostTable &&
+          other.hostId == this.hostId &&
+          other.name == this.name &&
+          other.currency == this.currency &&
+          other.note == this.note &&
+          other.postedAt == this.postedAt &&
+          other.postedTxId == this.postedTxId &&
+          other.postedAmountMilli == this.postedAmountMilli &&
+          other.postedItemCount == this.postedItemCount);
+}
+
+class RecordListsCompanion extends UpdateCompanion<RecordListRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> hostTable;
+  final Value<String> hostId;
+  final Value<String> name;
+  final Value<String?> currency;
+  final Value<String?> note;
+  final Value<DateTime?> postedAt;
+  final Value<String?> postedTxId;
+  final Value<int?> postedAmountMilli;
+  final Value<int?> postedItemCount;
+  final Value<int> rowid;
+  const RecordListsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.hostTable = const Value.absent(),
+    this.hostId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.currency = const Value.absent(),
+    this.note = const Value.absent(),
+    this.postedAt = const Value.absent(),
+    this.postedTxId = const Value.absent(),
+    this.postedAmountMilli = const Value.absent(),
+    this.postedItemCount = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RecordListsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String hostTable,
+    required String hostId,
+    required String name,
+    this.currency = const Value.absent(),
+    this.note = const Value.absent(),
+    this.postedAt = const Value.absent(),
+    this.postedTxId = const Value.absent(),
+    this.postedAmountMilli = const Value.absent(),
+    this.postedItemCount = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : hostTable = Value(hostTable),
+       hostId = Value(hostId),
+       name = Value(name);
+  static Insertable<RecordListRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? hostTable,
+    Expression<String>? hostId,
+    Expression<String>? name,
+    Expression<String>? currency,
+    Expression<String>? note,
+    Expression<DateTime>? postedAt,
+    Expression<String>? postedTxId,
+    Expression<int>? postedAmountMilli,
+    Expression<int>? postedItemCount,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (hostTable != null) 'host_table': hostTable,
+      if (hostId != null) 'host_id': hostId,
+      if (name != null) 'name': name,
+      if (currency != null) 'currency': currency,
+      if (note != null) 'note': note,
+      if (postedAt != null) 'posted_at': postedAt,
+      if (postedTxId != null) 'posted_tx_id': postedTxId,
+      if (postedAmountMilli != null) 'posted_amount_milli': postedAmountMilli,
+      if (postedItemCount != null) 'posted_item_count': postedItemCount,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RecordListsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? hostTable,
+    Value<String>? hostId,
+    Value<String>? name,
+    Value<String?>? currency,
+    Value<String?>? note,
+    Value<DateTime?>? postedAt,
+    Value<String?>? postedTxId,
+    Value<int?>? postedAmountMilli,
+    Value<int?>? postedItemCount,
+    Value<int>? rowid,
+  }) {
+    return RecordListsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      hostTable: hostTable ?? this.hostTable,
+      hostId: hostId ?? this.hostId,
+      name: name ?? this.name,
+      currency: currency ?? this.currency,
+      note: note ?? this.note,
+      postedAt: postedAt ?? this.postedAt,
+      postedTxId: postedTxId ?? this.postedTxId,
+      postedAmountMilli: postedAmountMilli ?? this.postedAmountMilli,
+      postedItemCount: postedItemCount ?? this.postedItemCount,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (hostTable.present) {
+      map['host_table'] = Variable<String>(hostTable.value);
+    }
+    if (hostId.present) {
+      map['host_id'] = Variable<String>(hostId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (currency.present) {
+      map['currency'] = Variable<String>(currency.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (postedAt.present) {
+      map['posted_at'] = Variable<DateTime>(postedAt.value);
+    }
+    if (postedTxId.present) {
+      map['posted_tx_id'] = Variable<String>(postedTxId.value);
+    }
+    if (postedAmountMilli.present) {
+      map['posted_amount_milli'] = Variable<int>(postedAmountMilli.value);
+    }
+    if (postedItemCount.present) {
+      map['posted_item_count'] = Variable<int>(postedItemCount.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecordListsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('hostTable: $hostTable, ')
+          ..write('hostId: $hostId, ')
+          ..write('name: $name, ')
+          ..write('currency: $currency, ')
+          ..write('note: $note, ')
+          ..write('postedAt: $postedAt, ')
+          ..write('postedTxId: $postedTxId, ')
+          ..write('postedAmountMilli: $postedAmountMilli, ')
+          ..write('postedItemCount: $postedItemCount, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RecordListItemsTable extends RecordListItems
+    with TableInfo<$RecordListItemsTable, RecordListItemRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RecordListItemsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _listIdMeta = const VerificationMeta('listId');
+  @override
+  late final GeneratedColumn<String> listId = GeneratedColumn<String>(
+    'list_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _quantityMeta = const VerificationMeta(
+    'quantity',
+  );
+  @override
+  late final GeneratedColumn<double> quantity = GeneratedColumn<double>(
+    'quantity',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _unitMeta = const VerificationMeta('unit');
+  @override
+  late final GeneratedColumn<String> unit = GeneratedColumn<String>(
+    'unit',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _priceMilliMeta = const VerificationMeta(
+    'priceMilli',
+  );
+  @override
+  late final GeneratedColumn<int> priceMilli = GeneratedColumn<int>(
+    'price_milli',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _doneMeta = const VerificationMeta('done');
+  @override
+  late final GeneratedColumn<bool> done = GeneratedColumn<bool>(
+    'done',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("done" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _doneAtMeta = const VerificationMeta('doneAt');
+  @override
+  late final GeneratedColumn<DateTime> doneAt = GeneratedColumn<DateTime>(
+    'done_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    listId,
+    title,
+    quantity,
+    unit,
+    priceMilli,
+    done,
+    doneAt,
+    note,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'record_list_items';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RecordListItemRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('list_id')) {
+      context.handle(
+        _listIdMeta,
+        listId.isAcceptableOrUnknown(data['list_id']!, _listIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_listIdMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('quantity')) {
+      context.handle(
+        _quantityMeta,
+        quantity.isAcceptableOrUnknown(data['quantity']!, _quantityMeta),
+      );
+    }
+    if (data.containsKey('unit')) {
+      context.handle(
+        _unitMeta,
+        unit.isAcceptableOrUnknown(data['unit']!, _unitMeta),
+      );
+    }
+    if (data.containsKey('price_milli')) {
+      context.handle(
+        _priceMilliMeta,
+        priceMilli.isAcceptableOrUnknown(data['price_milli']!, _priceMilliMeta),
+      );
+    }
+    if (data.containsKey('done')) {
+      context.handle(
+        _doneMeta,
+        done.isAcceptableOrUnknown(data['done']!, _doneMeta),
+      );
+    }
+    if (data.containsKey('done_at')) {
+      context.handle(
+        _doneAtMeta,
+        doneAt.isAcceptableOrUnknown(data['done_at']!, _doneAtMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RecordListItemRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RecordListItemRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      listId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}list_id'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      quantity: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}quantity'],
+      ),
+      unit: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}unit'],
+      ),
+      priceMilli: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}price_milli'],
+      ),
+      done: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}done'],
+      )!,
+      doneAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}done_at'],
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $RecordListItemsTable createAlias(String alias) {
+    return $RecordListItemsTable(attachedDatabase, alias);
+  }
+}
+
+class RecordListItemRow extends DataClass
+    implements Insertable<RecordListItemRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final String listId;
+
+  /// His own words («رز», «جواز»).
+  final String title;
+
+  /// How much (2 kg, 3 pieces); null when he gave none.
+  final double? quantity;
+
+  /// His own unit word («كيلو», «علبة»); never a list we invent.
+  final String? unit;
+
+  /// Price in milli-units of the list's currency: **per [unit]** when a
+  /// [quantity] is given, else the price of the whole line. Null when he
+  /// gave no price (a packing list has none).
+  final int? priceMilli;
+
+  /// Ticked off (bought, packed …).
+  final bool done;
+
+  /// When he ticked it (null while it is open).
+  final DateTime? doneAt;
+  final String? note;
+  const RecordListItemRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.listId,
+    required this.title,
+    this.quantity,
+    this.unit,
+    this.priceMilli,
+    required this.done,
+    this.doneAt,
+    this.note,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['list_id'] = Variable<String>(listId);
+    map['title'] = Variable<String>(title);
+    if (!nullToAbsent || quantity != null) {
+      map['quantity'] = Variable<double>(quantity);
+    }
+    if (!nullToAbsent || unit != null) {
+      map['unit'] = Variable<String>(unit);
+    }
+    if (!nullToAbsent || priceMilli != null) {
+      map['price_milli'] = Variable<int>(priceMilli);
+    }
+    map['done'] = Variable<bool>(done);
+    if (!nullToAbsent || doneAt != null) {
+      map['done_at'] = Variable<DateTime>(doneAt);
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  RecordListItemsCompanion toCompanion(bool nullToAbsent) {
+    return RecordListItemsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      listId: Value(listId),
+      title: Value(title),
+      quantity: quantity == null && nullToAbsent
+          ? const Value.absent()
+          : Value(quantity),
+      unit: unit == null && nullToAbsent ? const Value.absent() : Value(unit),
+      priceMilli: priceMilli == null && nullToAbsent
+          ? const Value.absent()
+          : Value(priceMilli),
+      done: Value(done),
+      doneAt: doneAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(doneAt),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory RecordListItemRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RecordListItemRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      listId: serializer.fromJson<String>(json['listId']),
+      title: serializer.fromJson<String>(json['title']),
+      quantity: serializer.fromJson<double?>(json['quantity']),
+      unit: serializer.fromJson<String?>(json['unit']),
+      priceMilli: serializer.fromJson<int?>(json['priceMilli']),
+      done: serializer.fromJson<bool>(json['done']),
+      doneAt: serializer.fromJson<DateTime?>(json['doneAt']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'listId': serializer.toJson<String>(listId),
+      'title': serializer.toJson<String>(title),
+      'quantity': serializer.toJson<double?>(quantity),
+      'unit': serializer.toJson<String?>(unit),
+      'priceMilli': serializer.toJson<int?>(priceMilli),
+      'done': serializer.toJson<bool>(done),
+      'doneAt': serializer.toJson<DateTime?>(doneAt),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  RecordListItemRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? listId,
+    String? title,
+    Value<double?> quantity = const Value.absent(),
+    Value<String?> unit = const Value.absent(),
+    Value<int?> priceMilli = const Value.absent(),
+    bool? done,
+    Value<DateTime?> doneAt = const Value.absent(),
+    Value<String?> note = const Value.absent(),
+  }) => RecordListItemRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    listId: listId ?? this.listId,
+    title: title ?? this.title,
+    quantity: quantity.present ? quantity.value : this.quantity,
+    unit: unit.present ? unit.value : this.unit,
+    priceMilli: priceMilli.present ? priceMilli.value : this.priceMilli,
+    done: done ?? this.done,
+    doneAt: doneAt.present ? doneAt.value : this.doneAt,
+    note: note.present ? note.value : this.note,
+  );
+  RecordListItemRow copyWithCompanion(RecordListItemsCompanion data) {
+    return RecordListItemRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      listId: data.listId.present ? data.listId.value : this.listId,
+      title: data.title.present ? data.title.value : this.title,
+      quantity: data.quantity.present ? data.quantity.value : this.quantity,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      priceMilli: data.priceMilli.present
+          ? data.priceMilli.value
+          : this.priceMilli,
+      done: data.done.present ? data.done.value : this.done,
+      doneAt: data.doneAt.present ? data.doneAt.value : this.doneAt,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecordListItemRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('listId: $listId, ')
+          ..write('title: $title, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('priceMilli: $priceMilli, ')
+          ..write('done: $done, ')
+          ..write('doneAt: $doneAt, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    listId,
+    title,
+    quantity,
+    unit,
+    priceMilli,
+    done,
+    doneAt,
+    note,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecordListItemRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.listId == this.listId &&
+          other.title == this.title &&
+          other.quantity == this.quantity &&
+          other.unit == this.unit &&
+          other.priceMilli == this.priceMilli &&
+          other.done == this.done &&
+          other.doneAt == this.doneAt &&
+          other.note == this.note);
+}
+
+class RecordListItemsCompanion extends UpdateCompanion<RecordListItemRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> listId;
+  final Value<String> title;
+  final Value<double?> quantity;
+  final Value<String?> unit;
+  final Value<int?> priceMilli;
+  final Value<bool> done;
+  final Value<DateTime?> doneAt;
+  final Value<String?> note;
+  final Value<int> rowid;
+  const RecordListItemsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.listId = const Value.absent(),
+    this.title = const Value.absent(),
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.priceMilli = const Value.absent(),
+    this.done = const Value.absent(),
+    this.doneAt = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RecordListItemsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String listId,
+    required String title,
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.priceMilli = const Value.absent(),
+    this.done = const Value.absent(),
+    this.doneAt = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : listId = Value(listId),
+       title = Value(title);
+  static Insertable<RecordListItemRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? listId,
+    Expression<String>? title,
+    Expression<double>? quantity,
+    Expression<String>? unit,
+    Expression<int>? priceMilli,
+    Expression<bool>? done,
+    Expression<DateTime>? doneAt,
+    Expression<String>? note,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (listId != null) 'list_id': listId,
+      if (title != null) 'title': title,
+      if (quantity != null) 'quantity': quantity,
+      if (unit != null) 'unit': unit,
+      if (priceMilli != null) 'price_milli': priceMilli,
+      if (done != null) 'done': done,
+      if (doneAt != null) 'done_at': doneAt,
+      if (note != null) 'note': note,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RecordListItemsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? listId,
+    Value<String>? title,
+    Value<double?>? quantity,
+    Value<String?>? unit,
+    Value<int?>? priceMilli,
+    Value<bool>? done,
+    Value<DateTime?>? doneAt,
+    Value<String?>? note,
+    Value<int>? rowid,
+  }) {
+    return RecordListItemsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      listId: listId ?? this.listId,
+      title: title ?? this.title,
+      quantity: quantity ?? this.quantity,
+      unit: unit ?? this.unit,
+      priceMilli: priceMilli ?? this.priceMilli,
+      done: done ?? this.done,
+      doneAt: doneAt ?? this.doneAt,
+      note: note ?? this.note,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (listId.present) {
+      map['list_id'] = Variable<String>(listId.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (quantity.present) {
+      map['quantity'] = Variable<double>(quantity.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(unit.value);
+    }
+    if (priceMilli.present) {
+      map['price_milli'] = Variable<int>(priceMilli.value);
+    }
+    if (done.present) {
+      map['done'] = Variable<bool>(done.value);
+    }
+    if (doneAt.present) {
+      map['done_at'] = Variable<DateTime>(doneAt.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecordListItemsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('listId: $listId, ')
+          ..write('title: $title, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('priceMilli: $priceMilli, ')
+          ..write('done: $done, ')
+          ..write('doneAt: $doneAt, ')
+          ..write('note: $note, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$MadarDatabase extends GeneratedDatabase {
   _$MadarDatabase(QueryExecutor e) : super(e);
   late final $PlanetsTable planets = $PlanetsTable(this);
@@ -39168,6 +40655,10 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
   late final $AppliedPlanItemsTable appliedPlanItems = $AppliedPlanItemsTable(
     this,
   );
+  late final $RecordListsTable recordLists = $RecordListsTable(this);
+  late final $RecordListItemsTable recordListItems = $RecordListItemsTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -39238,6 +40729,8 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
     hifzReviews,
     appliedPlans,
     appliedPlanItems,
+    recordLists,
+    recordListItems,
   ];
   @override
   DriftDatabaseOptions get options =>

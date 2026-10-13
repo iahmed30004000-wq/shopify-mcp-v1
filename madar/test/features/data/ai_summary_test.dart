@@ -149,7 +149,10 @@ _Converted to JOD with the exchange rates saved in the app._
 - entries: 3 · Last 30 days: 2 · last: 2026-09-29
 - Pages (p): average: 15 · min: 10 · max: 20 · total: 30
 - Finished: ticked: 1/2
-- Genre: History (2)''',
+- Genre: History (2)
+
+### Lists
+- Shopping list (Food): open: 1 · done: 1''',
 };
 
 void main() {

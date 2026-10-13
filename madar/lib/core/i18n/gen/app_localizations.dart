@@ -40006,6 +40006,504 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'{name}: {detail}'**
   String aiPlanRefLine(String name, String detail);
+
+  /// Part 3b: the shared tick lists
+  ///
+  /// In ar, this message translates to:
+  /// **'القوائم'**
+  String get listsTitle;
+
+  /// No description provided for @listsOfHost.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم {name}'**
+  String listsOfHost(String name);
+
+  /// No description provided for @listsBudgetTile.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة الأغراض'**
+  String get listsBudgetTile;
+
+  /// No description provided for @listsTripTile.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم ثانية للرحلة'**
+  String get listsTripTile;
+
+  /// No description provided for @listsTripTileHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير قائمة التجهيز: أغراض تشتريها هناك، أماكن تزورها'**
+  String get listsTripTileHint;
+
+  /// No description provided for @listsOpenList.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح القائمة'**
+  String get listsOpenList;
+
+  /// No description provided for @listsNewList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة جديدة'**
+  String get listsNewList;
+
+  /// No description provided for @listsNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم القائمة'**
+  String get listsNameLabel;
+
+  /// No description provided for @listsNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أغراض البقالة'**
+  String get listsNameHint;
+
+  /// No description provided for @listsNoteLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get listsNoteLabel;
+
+  /// No description provided for @listsRename.
+  ///
+  /// In ar, this message translates to:
+  /// **'غيّر الاسم'**
+  String get listsRename;
+
+  /// No description provided for @listsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في قوائم لهون'**
+  String get listsEmptyTitle;
+
+  /// No description provided for @listsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعمل قائمة وحُط فيها اللي بدك تشطّب عليه واحد واحد.'**
+  String get listsEmptyBody;
+
+  /// No description provided for @listsItemsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة فاضية'**
+  String get listsItemsEmptyTitle;
+
+  /// No description provided for @listsItemsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب أول غرض فوق، وزيد عليه وقت ما تتذكر.'**
+  String get listsItemsEmptyBody;
+
+  /// No description provided for @listsAddItemHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيد غرض…'**
+  String get listsAddItemHint;
+
+  /// No description provided for @listsAddItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيد'**
+  String get listsAddItem;
+
+  /// No description provided for @listsItemLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الغرض'**
+  String get listsItemLabel;
+
+  /// No description provided for @listsQuantityLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get listsQuantityLabel;
+
+  /// No description provided for @listsUnitLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get listsUnitLabel;
+
+  /// No description provided for @listsUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيلو، علبة، حبة'**
+  String get listsUnitHint;
+
+  /// No description provided for @listsPriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر'**
+  String get listsPriceLabel;
+
+  /// No description provided for @listsPricePerUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر للـ{unit}'**
+  String listsPricePerUnit(String unit);
+
+  /// No description provided for @listsLineTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع {amount}'**
+  String listsLineTotal(String amount);
+
+  /// No description provided for @listsProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {total}'**
+  String listsProgress(String done, String total);
+
+  /// No description provided for @listsItemsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في أغراض} =1{غرض واحد} =2{غرضين} few{{count} أغراض} many{{count} غرضًا} other{{count} غرض}}'**
+  String listsItemsCount(int count);
+
+  /// No description provided for @listsRemainingCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{باقي غرض واحد} =2{باقي غرضين} few{باقي {count} أغراض} many{باقي {count} غرضًا} other{باقي {count} غرض}}'**
+  String listsRemainingCount(int count);
+
+  /// No description provided for @listsListsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في قوائم} =1{قائمة وحدة} =2{قائمتين} few{{count} قوائم} many{{count} قائمة} other{{count} قائمة}}'**
+  String listsListsCount(int count);
+
+  /// No description provided for @listsAllDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت القائمة'**
+  String get listsAllDone;
+
+  /// No description provided for @listsNothingTicked.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما شطّبت على شي لهلأ'**
+  String get listsNothingTicked;
+
+  /// No description provided for @listsOpenAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الباقي بيكلّف {amount}'**
+  String listsOpenAmount(String amount);
+
+  /// No description provided for @listsTickedAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشطوب {amount}'**
+  String listsTickedAmount(String amount);
+
+  /// No description provided for @listsUntickAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيل كل الإشارات'**
+  String get listsUntickAll;
+
+  /// No description provided for @listsClearDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف المشطوب'**
+  String get listsClearDone;
+
+  /// No description provided for @listsTickedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشطّب'**
+  String get listsTickedToast;
+
+  /// No description provided for @listsUntickedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجع للقائمة'**
+  String get listsUntickedToast;
+
+  /// No description provided for @listsItemAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'تزاد للقائمة'**
+  String get listsItemAdded;
+
+  /// No description provided for @listsItemSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعدّل الغرض'**
+  String get listsItemSaved;
+
+  /// No description provided for @listsItemDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحذف الغرض'**
+  String get listsItemDeleted;
+
+  /// No description provided for @listsListAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعملت القائمة'**
+  String get listsListAdded;
+
+  /// No description provided for @listsListSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعدّلت القائمة'**
+  String get listsListSaved;
+
+  /// No description provided for @listsListDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحذفت القائمة'**
+  String get listsListDeleted;
+
+  /// No description provided for @listsListCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنسخت القائمة'**
+  String get listsListCopied;
+
+  /// No description provided for @listsCopySuffix.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة'**
+  String get listsCopySuffix;
+
+  /// No description provided for @listsUntickedAllToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشالت كل الإشارات'**
+  String get listsUntickedAllToast;
+
+  /// No description provided for @listsDoneClearedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تحذف غرض واحد} =2{تحذفوا غرضين} few{تحذفوا {count} أغراض} many{تحذفوا {count} غرضًا} other{تحذف {count} غرض}}'**
+  String listsDoneClearedToast(int count);
+
+  /// No description provided for @listsHostGoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل اللي تحته انحذف'**
+  String get listsHostGoneTitle;
+
+  /// No description provided for @listsHostGoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة لسا محفوظة، بس السجل اللي كانت تحته ما صار موجود.'**
+  String get listsHostGoneBody;
+
+  /// No description provided for @listsGoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة ما صارت موجودة'**
+  String get listsGoneTitle;
+
+  /// No description provided for @listsPostButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلها مصروف'**
+  String get listsPostButton;
+
+  /// No description provided for @listsPostSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{غرض واحد — {amount}} =2{غرضين — {amount}} few{{count} أغراض — {amount}} many{{count} غرضًا — {amount}} other{{count} غرض — {amount}}}'**
+  String listsPostSummary(int count, String amount);
+
+  /// No description provided for @listsPostOnEnvelope.
+  ///
+  /// In ar, this message translates to:
+  /// **'على {name}'**
+  String listsPostOnEnvelope(String name);
+
+  /// No description provided for @listsPostedBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسجّل مصروف'**
+  String get listsPostedBadge;
+
+  /// No description provided for @listsPostedNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجّل مصروف {amount} على {name}'**
+  String listsPostedNote(String amount, String name);
+
+  /// No description provided for @listsPostedKeepsOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي ما شطّبت عليه ضل بالقائمة.'**
+  String get listsPostedKeepsOpen;
+
+  /// No description provided for @listsPostRefusedAlready.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاي القائمة تسجّلت مرة، ما بتتسجّل مرتين.'**
+  String get listsPostRefusedAlready;
+
+  /// No description provided for @listsPostRefusedNothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'شطّب على اللي اشتريته أول'**
+  String get listsPostRefusedNothing;
+
+  /// No description provided for @listsPostRefusedNoAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُط سعر للأغراض اللي شطّبت عليها'**
+  String get listsPostRefusedNoAmount;
+
+  /// No description provided for @listsPostRefusedNoWallet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لازم محفظة بنفس العملة قبل التسجيل'**
+  String get listsPostRefusedNoWallet;
+
+  /// No description provided for @listsPostWalletTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'من أي محفظة؟'**
+  String get listsPostWalletTitle;
+
+  /// No description provided for @listsPostToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجّل {amount} على {name}'**
+  String listsPostToast(String amount, String name);
+
+  /// No description provided for @listsPostUndoneToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترجّع المصروف'**
+  String get listsPostUndoneToast;
+
+  /// No description provided for @listsSearchLists.
+  ///
+  /// In ar, this message translates to:
+  /// **'القوائم'**
+  String get listsSearchLists;
+
+  /// No description provided for @listsSearchItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'أغراض القوائم'**
+  String get listsSearchItems;
+
+  /// No description provided for @listsSumTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القوائم'**
+  String get listsSumTitle;
+
+  /// No description provided for @listsCsvList.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة'**
+  String get listsCsvList;
+
+  /// No description provided for @listsCsvItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'الغرض'**
+  String get listsCsvItem;
+
+  /// No description provided for @listsCsvQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get listsCsvQuantity;
+
+  /// No description provided for @listsCsvUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get listsCsvUnit;
+
+  /// No description provided for @listsCsvPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر'**
+  String get listsCsvPrice;
+
+  /// No description provided for @listsCsvDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشطوب'**
+  String get listsCsvDone;
+
+  /// No description provided for @listsItemTicked.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشطوب'**
+  String get listsItemTicked;
+
+  /// No description provided for @listsItemOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعده بالقائمة'**
+  String get listsItemOpen;
+
+  /// No description provided for @listsTick.
+  ///
+  /// In ar, this message translates to:
+  /// **'شطّب'**
+  String get listsTick;
+
+  /// No description provided for @listsUntick.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّعه للقائمة'**
+  String get listsUntick;
+
+  /// No description provided for @listsDeleteList.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف القائمة'**
+  String get listsDeleteList;
+
+  /// No description provided for @listsNewItemTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'غرض جديد'**
+  String get listsNewItemTitle;
+
+  /// No description provided for @listsEditItemTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الغرض'**
+  String get listsEditItemTitle;
+
+  /// No description provided for @listsEditListTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل القائمة'**
+  String get listsEditListTitle;
+
+  /// No description provided for @listsDragHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب من المقبض لترتيب الأغراض'**
+  String get listsDragHint;
+
+  /// No description provided for @listsPostRefusedGone.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة ما صارت موجودة'**
+  String get listsPostRefusedGone;
+
+  /// No description provided for @listsPostRefusedHost.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاي القائمة ما هي تحت بند بالميزانية'**
+  String get listsPostRefusedHost;
+
+  /// No description provided for @listsUnder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحت {name}'**
+  String listsUnder(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

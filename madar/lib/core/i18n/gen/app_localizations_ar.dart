@@ -25798,4 +25798,334 @@ class L10nAr extends L10n {
   String aiPlanRefLine(String name, String detail) {
     return '$name: $detail';
   }
+
+  @override
+  String get listsTitle => 'القوائم';
+
+  @override
+  String listsOfHost(String name) {
+    return 'قوائم $name';
+  }
+
+  @override
+  String get listsBudgetTile => 'قائمة الأغراض';
+
+  @override
+  String get listsTripTile => 'قوائم ثانية للرحلة';
+
+  @override
+  String get listsTripTileHint =>
+      'غير قائمة التجهيز: أغراض تشتريها هناك، أماكن تزورها';
+
+  @override
+  String get listsOpenList => 'افتح القائمة';
+
+  @override
+  String get listsNewList => 'قائمة جديدة';
+
+  @override
+  String get listsNameLabel => 'اسم القائمة';
+
+  @override
+  String get listsNameHint => 'أغراض البقالة';
+
+  @override
+  String get listsNoteLabel => 'ملاحظة';
+
+  @override
+  String get listsRename => 'غيّر الاسم';
+
+  @override
+  String get listsEmptyTitle => 'ما في قوائم لهون';
+
+  @override
+  String get listsEmptyBody =>
+      'اعمل قائمة وحُط فيها اللي بدك تشطّب عليه واحد واحد.';
+
+  @override
+  String get listsItemsEmptyTitle => 'القائمة فاضية';
+
+  @override
+  String get listsItemsEmptyBody => 'اكتب أول غرض فوق، وزيد عليه وقت ما تتذكر.';
+
+  @override
+  String get listsAddItemHint => 'زيد غرض…';
+
+  @override
+  String get listsAddItem => 'زيد';
+
+  @override
+  String get listsItemLabel => 'الغرض';
+
+  @override
+  String get listsQuantityLabel => 'الكمية';
+
+  @override
+  String get listsUnitLabel => 'الوحدة';
+
+  @override
+  String get listsUnitHint => 'كيلو، علبة، حبة';
+
+  @override
+  String get listsPriceLabel => 'السعر';
+
+  @override
+  String listsPricePerUnit(String unit) {
+    return 'السعر للـ$unit';
+  }
+
+  @override
+  String listsLineTotal(String amount) {
+    return 'المجموع $amount';
+  }
+
+  @override
+  String listsProgress(String done, String total) {
+    return '$done من $total';
+  }
+
+  @override
+  String listsItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count غرض',
+      many: '$count غرضًا',
+      few: '$count أغراض',
+      two: 'غرضين',
+      one: 'غرض واحد',
+      zero: 'ما في أغراض',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listsRemainingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'باقي $count غرض',
+      many: 'باقي $count غرضًا',
+      few: 'باقي $count أغراض',
+      two: 'باقي غرضين',
+      one: 'باقي غرض واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listsListsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count قائمة',
+      many: '$count قائمة',
+      few: '$count قوائم',
+      two: 'قائمتين',
+      one: 'قائمة وحدة',
+      zero: 'ما في قوائم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get listsAllDone => 'خلّصت القائمة';
+
+  @override
+  String get listsNothingTicked => 'ما شطّبت على شي لهلأ';
+
+  @override
+  String listsOpenAmount(String amount) {
+    return 'الباقي بيكلّف $amount';
+  }
+
+  @override
+  String listsTickedAmount(String amount) {
+    return 'المشطوب $amount';
+  }
+
+  @override
+  String get listsUntickAll => 'شيل كل الإشارات';
+
+  @override
+  String get listsClearDone => 'احذف المشطوب';
+
+  @override
+  String get listsTickedToast => 'تشطّب';
+
+  @override
+  String get listsUntickedToast => 'رجع للقائمة';
+
+  @override
+  String get listsItemAdded => 'تزاد للقائمة';
+
+  @override
+  String get listsItemSaved => 'تعدّل الغرض';
+
+  @override
+  String get listsItemDeleted => 'تحذف الغرض';
+
+  @override
+  String get listsListAdded => 'تعملت القائمة';
+
+  @override
+  String get listsListSaved => 'تعدّلت القائمة';
+
+  @override
+  String get listsListDeleted => 'تحذفت القائمة';
+
+  @override
+  String get listsListCopied => 'تنسخت القائمة';
+
+  @override
+  String get listsCopySuffix => 'نسخة';
+
+  @override
+  String get listsUntickedAllToast => 'تشالت كل الإشارات';
+
+  @override
+  String listsDoneClearedToast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تحذف $count غرض',
+      many: 'تحذفوا $count غرضًا',
+      few: 'تحذفوا $count أغراض',
+      two: 'تحذفوا غرضين',
+      one: 'تحذف غرض واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get listsHostGoneTitle => 'السجل اللي تحته انحذف';
+
+  @override
+  String get listsHostGoneBody =>
+      'القائمة لسا محفوظة، بس السجل اللي كانت تحته ما صار موجود.';
+
+  @override
+  String get listsGoneTitle => 'القائمة ما صارت موجودة';
+
+  @override
+  String get listsPostButton => 'سجّلها مصروف';
+
+  @override
+  String listsPostSummary(int count, String amount) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count غرض — $amount',
+      many: '$count غرضًا — $amount',
+      few: '$count أغراض — $amount',
+      two: 'غرضين — $amount',
+      one: 'غرض واحد — $amount',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listsPostOnEnvelope(String name) {
+    return 'على $name';
+  }
+
+  @override
+  String get listsPostedBadge => 'مسجّل مصروف';
+
+  @override
+  String listsPostedNote(String amount, String name) {
+    return 'تسجّل مصروف $amount على $name';
+  }
+
+  @override
+  String get listsPostedKeepsOpen => 'اللي ما شطّبت عليه ضل بالقائمة.';
+
+  @override
+  String get listsPostRefusedAlready =>
+      'هاي القائمة تسجّلت مرة، ما بتتسجّل مرتين.';
+
+  @override
+  String get listsPostRefusedNothing => 'شطّب على اللي اشتريته أول';
+
+  @override
+  String get listsPostRefusedNoAmount => 'حُط سعر للأغراض اللي شطّبت عليها';
+
+  @override
+  String get listsPostRefusedNoWallet => 'لازم محفظة بنفس العملة قبل التسجيل';
+
+  @override
+  String get listsPostWalletTitle => 'من أي محفظة؟';
+
+  @override
+  String listsPostToast(String amount, String name) {
+    return 'تسجّل $amount على $name';
+  }
+
+  @override
+  String get listsPostUndoneToast => 'ترجّع المصروف';
+
+  @override
+  String get listsSearchLists => 'القوائم';
+
+  @override
+  String get listsSearchItems => 'أغراض القوائم';
+
+  @override
+  String get listsSumTitle => 'القوائم';
+
+  @override
+  String get listsCsvList => 'القائمة';
+
+  @override
+  String get listsCsvItem => 'الغرض';
+
+  @override
+  String get listsCsvQuantity => 'الكمية';
+
+  @override
+  String get listsCsvUnit => 'الوحدة';
+
+  @override
+  String get listsCsvPrice => 'السعر';
+
+  @override
+  String get listsCsvDone => 'مشطوب';
+
+  @override
+  String get listsItemTicked => 'مشطوب';
+
+  @override
+  String get listsItemOpen => 'بعده بالقائمة';
+
+  @override
+  String get listsTick => 'شطّب';
+
+  @override
+  String get listsUntick => 'رجّعه للقائمة';
+
+  @override
+  String get listsDeleteList => 'احذف القائمة';
+
+  @override
+  String get listsNewItemTitle => 'غرض جديد';
+
+  @override
+  String get listsEditItemTitle => 'تعديل الغرض';
+
+  @override
+  String get listsEditListTitle => 'تعديل القائمة';
+
+  @override
+  String get listsDragHint => 'اسحب من المقبض لترتيب الأغراض';
+
+  @override
+  String get listsPostRefusedGone => 'القائمة ما صارت موجودة';
+
+  @override
+  String get listsPostRefusedHost => 'هاي القائمة ما هي تحت بند بالميزانية';
+
+  @override
+  String listsUnder(String name) {
+    return 'تحت $name';
+  }
 }

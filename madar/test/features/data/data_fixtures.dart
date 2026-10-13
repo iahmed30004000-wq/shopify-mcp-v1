@@ -61,6 +61,9 @@ Map<String, String> _names(String lang) => lang == 'ar'
         'history': 'تاريخ',
         'fiqh': 'فقه',
         'groceries': 'المشتريات',
+        'shopping': 'أغراض البقالة',
+        'rice': 'رز',
+        'oil': 'زيت',
       }
     : {
         'khatma': 'Monthly khatma',
@@ -111,6 +114,9 @@ Map<String, String> _names(String lang) => lang == 'ar'
         'history': 'History',
         'fiqh': 'Fiqh',
         'groceries': 'Groceries',
+        'shopping': 'Shopping list',
+        'rice': 'Rice',
+        'oil': 'Oil',
       };
 
 /// Fills [db] with the scenario (no seeding needed).
@@ -405,6 +411,32 @@ Future<void> seedSummaryScenario(MadarDatabase db, {String lang = 'en'}) async {
       CustomEntriesCompanion.insert(moduleId: 'm-list', entryValues: const Value({'title': 'Milk'})),
       CustomEntriesCompanion.insert(moduleId: 'm-list', entryValues: const Value({'title': 'Bread'})),
       CustomEntriesCompanion.insert(moduleId: 'm-list', entryValues: const Value({'title': 'Dates'}), done: const Value(true)),
+    ]);
+    // His tick lists (Part 3b): one under a budget envelope, with a price
+    // and a note the summary must never carry.
+    b.insert(
+      db.recordLists,
+      RecordListsCompanion.insert(
+        id: const Value('rl-1'),
+        hostTable: 'budget_items',
+        hostId: 'b-food',
+        name: n['shopping']!,
+        currency: const Value('JOD'),
+        note: const Value('private list note'),
+      ),
+    );
+    b.insertAll(db.recordListItems, [
+      RecordListItemsCompanion.insert(
+        listId: 'rl-1',
+        title: n['rice']!,
+        quantity: const Value(2),
+        unit: const Value('kg'),
+        priceMilli: const Value(1500),
+        done: const Value(true),
+        doneAt: Value(DateTime(2026, 9, 29, 19)),
+        note: const Value('private item note'),
+      ),
+      RecordListItemsCompanion.insert(listId: 'rl-1', title: n['oil']!, priceMilli: const Value(2500)),
     ]);
   });
 }

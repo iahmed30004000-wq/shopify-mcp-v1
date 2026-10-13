@@ -8,6 +8,7 @@ import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
 import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/sound/sound_api.dart';
+import '../../../lists/lists.dart' show ListHost, listHostCountsProvider;
 import '../data/budget_providers.dart';
 import '../data/budget_repository.dart';
 import '../domain/budget_plan.dart';
@@ -41,6 +42,9 @@ class BudgetPlanView extends ConsumerWidget {
     final f = BudgetFormat.of(context, currencies);
     final colors = budgetLineColors(plan, context.tokens, stored: stored);
     final actions = BudgetActions(ref, context);
+    // Which envelopes already carry one of his lists (the pill that opens
+    // it; without one, the row's menu makes the first).
+    final listCounts = ref.watch(listHostCountsProvider(ListHost.budgetItems)).value ?? const <String, int>{};
 
     if (plan.isEmpty) {
       return ListView(
@@ -60,7 +64,7 @@ class BudgetPlanView extends ConsumerWidget {
       );
     }
 
-    final data = _PlanData(plan: plan, format: f, colors: colors, actions: actions);
+    final data = _PlanData(plan: plan, format: f, colors: colors, actions: actions, listCounts: listCounts);
     return ReorderableGlassList<BudgetLine>(
       key: const PageStorageKey('budget.plan'),
       items: plan.roots,
@@ -96,12 +100,21 @@ class BudgetPlanView extends ConsumerWidget {
 /// explicitly (not inherited): a dragged row is rebuilt in the overlay,
 /// outside this view.
 class _PlanData {
-  const _PlanData({required this.plan, required this.format, required this.colors, required this.actions});
+  const _PlanData({
+    required this.plan,
+    required this.format,
+    required this.colors,
+    required this.actions,
+    this.listCounts = const {},
+  });
 
   final BudgetPlan plan;
   final BudgetFormat format;
   final Map<String, Color> colors;
   final BudgetActions actions;
+
+  /// Envelope id → how many of his lists hang on it.
+  final Map<String, int> listCounts;
 }
 
 // ---------------------------------------------------------------- header --
@@ -475,6 +488,7 @@ class _ItemRow extends StatelessWidget {
     final root = line.depth == 0;
     final byPercent = line.setByPercent;
     final money = f.money(line.plannedMilli, line.currency);
+    final hasList = (data.listCounts[line.id] ?? 0) > 0;
 
     // The value the user set, and what it is worth in the other terms.
     final primary = byPercent ? f.percent(line.percentOfBase) : money;
@@ -570,7 +584,7 @@ class _ItemRow extends StatelessWidget {
               SizedBox(width: 40, height: 44, child: Center(child: grip)),
             ],
           ),
-          if (line.issues.isNotEmpty)
+          if (line.issues.isNotEmpty || hasList)
             Padding(
               padding: EdgeInsetsDirectional.only(
                 top: Space.xs,
@@ -586,6 +600,22 @@ class _ItemRow extends StatelessWidget {
                       label: BudgetLabels.badge(l, f, i),
                       color: BudgetLabels.severityColor(t, i.severity),
                       icon: BudgetLabels.issueIcon(i.kind),
+                    ),
+                  // His list under this envelope, one tap away.
+                  if (hasList)
+                    MadarPressable(
+                      key: ValueKey('budget.lists.\${line.id}'),
+                      onTap: () => actions.openLists(line.id),
+                      sfx: null,
+                      semanticLabel: l.listsBudgetTile,
+                      excludeChildSemantics: true,
+                      focusRadius: BorderRadius.circular(99),
+                      minTapTarget: const Size(48, 32),
+                      child: BudgetBadge(
+                        label: l.listsBudgetTile,
+                        color: t.accent,
+                        icon: Icons.checklist_rtl_rounded,
+                      ),
                     ),
                 ],
               ),
@@ -603,6 +633,15 @@ class _ItemRow extends StatelessWidget {
         onMove: () => actions.move(line.id),
         onDelete: () => actions.delete(line.id),
         extra: [
+          ItemAction(
+            icon: Icons.checklist_rtl_rounded,
+            label: l.listsBudgetTile,
+            tone: ActionTone.accent,
+            onSelected: () async {
+              await actions.openLists(line.id);
+              return null;
+            },
+          ),
           ItemAction(
             icon: Icons.subdirectory_arrow_left_rounded,
             label: l.budgetAddChild,
@@ -624,10 +663,10 @@ class _ItemRow extends StatelessWidget {
       ),
       quickActions: [
         QuickAction(
-          icon: Icons.subdirectory_arrow_left_rounded,
-          label: l.budgetAddChild,
+          icon: Icons.checklist_rtl_rounded,
+          label: l.listsBudgetTile,
           onPressed: () async {
-            await actions.add(parentId: line.id);
+            await actions.openLists(line.id);
             return null;
           },
         ),

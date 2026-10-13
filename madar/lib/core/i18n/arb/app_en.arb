@@ -23612,5 +23612,208 @@
         "type": "String"
       }
     }
+  },
+  "listsTitle": "Lists",
+  "@listsTitle": {
+    "description": "Part 3b: the shared tick lists"
+  },
+  "listsOfHost": "{name} · lists",
+  "@listsOfHost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsBudgetTile": "Shopping list",
+  "listsTripTile": "Other lists for this trip",
+  "listsTripTileHint": "Besides the packing list: things to buy there, places to visit",
+  "listsOpenList": "Open the list",
+  "listsNewList": "New list",
+  "listsNameLabel": "List name",
+  "listsNameHint": "Groceries",
+  "listsNoteLabel": "Note",
+  "listsRename": "Rename",
+  "listsEmptyTitle": "No lists here yet",
+  "listsEmptyBody": "Make a list and put in the things you want to tick off one by one.",
+  "listsItemsEmptyTitle": "This list is empty",
+  "listsItemsEmptyBody": "Type the first item above, and add more whenever you remember.",
+  "listsAddItemHint": "Add an item…",
+  "listsAddItem": "Add",
+  "listsItemLabel": "Item",
+  "listsQuantityLabel": "Quantity",
+  "listsUnitLabel": "Unit",
+  "listsUnitHint": "kg, box, piece",
+  "listsPriceLabel": "Price",
+  "listsPricePerUnit": "Price per {unit}",
+  "@listsPricePerUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "listsLineTotal": "Total {amount}",
+  "@listsLineTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsProgress": "{done} of {total}",
+  "@listsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "listsItemsCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@listsItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsRemainingCount": "{count, plural, =1{1 left} other{{count} left}}",
+  "@listsRemainingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsListsCount": "{count, plural, =0{No lists} =1{1 list} other{{count} lists}}",
+  "@listsListsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsAllDone": "The whole list is done",
+  "listsNothingTicked": "Nothing ticked yet",
+  "listsOpenAmount": "The rest costs {amount}",
+  "@listsOpenAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsTickedAmount": "Ticked: {amount}",
+  "@listsTickedAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsUntickAll": "Untick everything",
+  "listsClearDone": "Remove ticked",
+  "listsTickedToast": "Ticked",
+  "listsUntickedToast": "Back on the list",
+  "listsItemAdded": "Added to the list",
+  "listsItemSaved": "Item saved",
+  "listsItemDeleted": "Item deleted",
+  "listsListAdded": "List created",
+  "listsListSaved": "List saved",
+  "listsListDeleted": "List deleted",
+  "listsListCopied": "List copied",
+  "listsCopySuffix": "copy",
+  "listsUntickedAllToast": "Everything unticked",
+  "listsDoneClearedToast": "{count, plural, =1{1 item removed} other{{count} items removed}}",
+  "@listsDoneClearedToast": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsHostGoneTitle": "The record it belonged to is gone",
+  "listsHostGoneBody": "The list is still here, but the record it hung on was deleted.",
+  "listsGoneTitle": "This list is gone",
+  "listsPostButton": "Post as one expense",
+  "listsPostSummary": "{count, plural, =1{1 item — {amount}} other{{count} items — {amount}}}",
+  "@listsPostSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostOnEnvelope": "on {name}",
+  "@listsPostOnEnvelope": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostedBadge": "Posted",
+  "listsPostedNote": "Posted {amount} on {name}",
+  "@listsPostedNote": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostedKeepsOpen": "Whatever you did not tick stayed on the list.",
+  "listsPostRefusedAlready": "This list was already posted; it is never posted twice.",
+  "listsPostRefusedNothing": "Tick what you bought first",
+  "listsPostRefusedNoAmount": "Put a price on the items you ticked",
+  "listsPostRefusedNoWallet": "You need a wallet in the same currency first",
+  "listsPostWalletTitle": "From which wallet?",
+  "listsPostToast": "{amount} posted on {name}",
+  "@listsPostToast": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostUndoneToast": "The expense was taken back",
+  "listsSearchLists": "Lists",
+  "listsSearchItems": "List items",
+  "listsSumTitle": "Lists",
+  "listsCsvList": "List",
+  "listsCsvItem": "Item",
+  "listsCsvQuantity": "Quantity",
+  "listsCsvUnit": "Unit",
+  "listsCsvPrice": "Price",
+  "listsCsvDone": "Ticked",
+  "listsItemTicked": "Ticked",
+  "listsItemOpen": "Still on the list",
+  "listsTick": "Tick",
+  "listsUntick": "Untick",
+  "listsDeleteList": "Delete the list",
+  "listsNewItemTitle": "New item",
+  "listsEditItemTitle": "Edit the item",
+  "listsEditListTitle": "Edit the list",
+  "listsDragHint": "Drag a handle to reorder the items",
+  "listsPostRefusedGone": "The list is gone",
+  "listsPostRefusedHost": "This list does not hang on a budget envelope",
+  "listsUnder": "under {name}",
+  "@listsUnder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }

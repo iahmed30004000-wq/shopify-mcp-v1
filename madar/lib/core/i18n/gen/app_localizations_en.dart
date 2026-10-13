@@ -25177,4 +25177,323 @@ class L10nEn extends L10n {
   String aiPlanRefLine(String name, String detail) {
     return '$name: $detail';
   }
+
+  @override
+  String get listsTitle => 'Lists';
+
+  @override
+  String listsOfHost(String name) {
+    return '$name · lists';
+  }
+
+  @override
+  String get listsBudgetTile => 'Shopping list';
+
+  @override
+  String get listsTripTile => 'Other lists for this trip';
+
+  @override
+  String get listsTripTileHint =>
+      'Besides the packing list: things to buy there, places to visit';
+
+  @override
+  String get listsOpenList => 'Open the list';
+
+  @override
+  String get listsNewList => 'New list';
+
+  @override
+  String get listsNameLabel => 'List name';
+
+  @override
+  String get listsNameHint => 'Groceries';
+
+  @override
+  String get listsNoteLabel => 'Note';
+
+  @override
+  String get listsRename => 'Rename';
+
+  @override
+  String get listsEmptyTitle => 'No lists here yet';
+
+  @override
+  String get listsEmptyBody =>
+      'Make a list and put in the things you want to tick off one by one.';
+
+  @override
+  String get listsItemsEmptyTitle => 'This list is empty';
+
+  @override
+  String get listsItemsEmptyBody =>
+      'Type the first item above, and add more whenever you remember.';
+
+  @override
+  String get listsAddItemHint => 'Add an item…';
+
+  @override
+  String get listsAddItem => 'Add';
+
+  @override
+  String get listsItemLabel => 'Item';
+
+  @override
+  String get listsQuantityLabel => 'Quantity';
+
+  @override
+  String get listsUnitLabel => 'Unit';
+
+  @override
+  String get listsUnitHint => 'kg, box, piece';
+
+  @override
+  String get listsPriceLabel => 'Price';
+
+  @override
+  String listsPricePerUnit(String unit) {
+    return 'Price per $unit';
+  }
+
+  @override
+  String listsLineTotal(String amount) {
+    return 'Total $amount';
+  }
+
+  @override
+  String listsProgress(String done, String total) {
+    return '$done of $total';
+  }
+
+  @override
+  String listsItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+      zero: 'No items',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listsRemainingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count left',
+      one: '1 left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listsListsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lists',
+      one: '1 list',
+      zero: 'No lists',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get listsAllDone => 'The whole list is done';
+
+  @override
+  String get listsNothingTicked => 'Nothing ticked yet';
+
+  @override
+  String listsOpenAmount(String amount) {
+    return 'The rest costs $amount';
+  }
+
+  @override
+  String listsTickedAmount(String amount) {
+    return 'Ticked: $amount';
+  }
+
+  @override
+  String get listsUntickAll => 'Untick everything';
+
+  @override
+  String get listsClearDone => 'Remove ticked';
+
+  @override
+  String get listsTickedToast => 'Ticked';
+
+  @override
+  String get listsUntickedToast => 'Back on the list';
+
+  @override
+  String get listsItemAdded => 'Added to the list';
+
+  @override
+  String get listsItemSaved => 'Item saved';
+
+  @override
+  String get listsItemDeleted => 'Item deleted';
+
+  @override
+  String get listsListAdded => 'List created';
+
+  @override
+  String get listsListSaved => 'List saved';
+
+  @override
+  String get listsListDeleted => 'List deleted';
+
+  @override
+  String get listsListCopied => 'List copied';
+
+  @override
+  String get listsCopySuffix => 'copy';
+
+  @override
+  String get listsUntickedAllToast => 'Everything unticked';
+
+  @override
+  String listsDoneClearedToast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items removed',
+      one: '1 item removed',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get listsHostGoneTitle => 'The record it belonged to is gone';
+
+  @override
+  String get listsHostGoneBody =>
+      'The list is still here, but the record it hung on was deleted.';
+
+  @override
+  String get listsGoneTitle => 'This list is gone';
+
+  @override
+  String get listsPostButton => 'Post as one expense';
+
+  @override
+  String listsPostSummary(int count, String amount) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items — $amount',
+      one: '1 item — $amount',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listsPostOnEnvelope(String name) {
+    return 'on $name';
+  }
+
+  @override
+  String get listsPostedBadge => 'Posted';
+
+  @override
+  String listsPostedNote(String amount, String name) {
+    return 'Posted $amount on $name';
+  }
+
+  @override
+  String get listsPostedKeepsOpen =>
+      'Whatever you did not tick stayed on the list.';
+
+  @override
+  String get listsPostRefusedAlready =>
+      'This list was already posted; it is never posted twice.';
+
+  @override
+  String get listsPostRefusedNothing => 'Tick what you bought first';
+
+  @override
+  String get listsPostRefusedNoAmount => 'Put a price on the items you ticked';
+
+  @override
+  String get listsPostRefusedNoWallet =>
+      'You need a wallet in the same currency first';
+
+  @override
+  String get listsPostWalletTitle => 'From which wallet?';
+
+  @override
+  String listsPostToast(String amount, String name) {
+    return '$amount posted on $name';
+  }
+
+  @override
+  String get listsPostUndoneToast => 'The expense was taken back';
+
+  @override
+  String get listsSearchLists => 'Lists';
+
+  @override
+  String get listsSearchItems => 'List items';
+
+  @override
+  String get listsSumTitle => 'Lists';
+
+  @override
+  String get listsCsvList => 'List';
+
+  @override
+  String get listsCsvItem => 'Item';
+
+  @override
+  String get listsCsvQuantity => 'Quantity';
+
+  @override
+  String get listsCsvUnit => 'Unit';
+
+  @override
+  String get listsCsvPrice => 'Price';
+
+  @override
+  String get listsCsvDone => 'Ticked';
+
+  @override
+  String get listsItemTicked => 'Ticked';
+
+  @override
+  String get listsItemOpen => 'Still on the list';
+
+  @override
+  String get listsTick => 'Tick';
+
+  @override
+  String get listsUntick => 'Untick';
+
+  @override
+  String get listsDeleteList => 'Delete the list';
+
+  @override
+  String get listsNewItemTitle => 'New item';
+
+  @override
+  String get listsEditItemTitle => 'Edit the item';
+
+  @override
+  String get listsEditListTitle => 'Edit the list';
+
+  @override
+  String get listsDragHint => 'Drag a handle to reorder the items';
+
+  @override
+  String get listsPostRefusedGone => 'The list is gone';
+
+  @override
+  String get listsPostRefusedHost =>
+      'This list does not hang on a budget envelope';
+
+  @override
+  String listsUnder(String name) {
+    return 'under $name';
+  }
 }

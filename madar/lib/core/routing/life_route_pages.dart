@@ -8,6 +8,8 @@ import '../../features/body/body.dart' show BodyScreen, BodyTab;
 import '../../features/custom_modules/custom_modules.dart' show CustomModulesScreen, ModuleScreen;
 import '../../features/family/family.dart' show FamilyScreen, PersonScreen;
 import '../../features/growth/growth.dart' show GoalScreen, GrowthScreen;
+import '../../features/lists/lists.dart' show HostListsScreen, ListHost, ListScreen, listBundleProvider;
+import '../../features/money/budget/presentation/shopping_post_bar.dart' show ShoppingPostBar;
 import '../../features/nutrition/presentation/nutrition_ui.dart'
     show ConditionsScreen, FoodLibraryScreen, MealPlanScreen, NutritionInsightsScreen;
 import '../../features/travel/travel.dart' show PackingTemplateScreen, TravelScreen, TravelTab, TripScreen;
@@ -71,6 +73,14 @@ abstract final class LifeNav {
 
   static void module(BuildContext context, String moduleId) =>
       unawaited(context.push<void>(AppRoutes.moduleOf(moduleId)));
+
+  /// The lists of one record (its own screen opens them).
+  static void recordLists(BuildContext context, String hostTable, String hostId) =>
+      unawaited(context.push<void>(AppRoutes.recordListsOf(hostTable, hostId)));
+
+  /// One list with its items.
+  static void recordList(BuildContext context, String listId) =>
+      unawaited(context.push<void>(AppRoutes.recordListOf(listId)));
 }
 
 /// Where a life record leads (pure) – one source of truth for the Neglect
@@ -92,6 +102,8 @@ abstract final class LifeNav {
 /// | meal_plans, meal_slots, meal_slot_foods | `/food/plan` | same |
 /// | food_rules | `/food/rules` | same |
 /// | custom_modules, custom_entries (`moduleId`) | `/modules/module/<id>` | `/modules` |
+/// | record_lists | `/list/<id>` | the list's host screen (`hostTable`/`hostId`) |
+/// | record_list_items (`listId`) | `/list/<listId>` | — |
 ///
 /// A child record (a card, a contact, a log) opens its parent, named by
 /// [extra] (the search documents carry it). Anything else: null.
@@ -123,6 +135,8 @@ abstract final class LifeRecordLinks {
     'food_rules',
     'custom_modules',
     'custom_entries',
+    'record_lists',
+    'record_list_items',
   };
 
   static String? locationOf(String? refTable, String? refId, {Map<String, Object?> extra = const {}}) {
@@ -162,6 +176,14 @@ abstract final class LifeRecordLinks {
       'food_rules' => AppRoutes.foodRules,
       'custom_modules' => either(id, AppRoutes.moduleOf, AppRoutes.modules),
       'custom_entries' => either(of('moduleId'), AppRoutes.moduleOf, AppRoutes.modules),
+      // A list opens itself; without its id, its host's lists (the search
+      // documents carry the host pair).
+      'record_lists' => id != null
+          ? AppRoutes.recordListOf(id)
+          : (of('hostTable') != null && of('hostId') != null
+                ? AppRoutes.recordListsOf(of('hostTable')!, of('hostId')!)
+                : null),
+      'record_list_items' => of('listId') == null ? null : AppRoutes.recordListOf(of('listId')!),
       _ => null,
     };
   }
@@ -388,4 +410,43 @@ class ModuleRoutePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) =>
       ModuleScreen(key: ValueKey('module:$moduleId'), moduleId: moduleId, animateBackdrop: !_saver(ref));
+}
+
+/// `/lists/:table/:id` – the lists of one record, reached from that
+/// record's own screen (a budget envelope, a trip, later the pantry).
+class RecordListsRoutePage extends ConsumerWidget {
+  const RecordListsRoutePage({super.key, required this.hostTable, required this.hostId});
+
+  final String hostTable;
+  final String hostId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => HostListsScreen(
+    key: ValueKey('lists:$hostTable/$hostId'),
+    host: ListHost(hostTable, hostId),
+    onOpenList: LifeNav.recordList,
+    animateBackdrop: !_saver(ref),
+  );
+}
+
+/// `/list/:id` – one list (an unknown id shows the screen's own "gone").
+///
+/// A list of a budget envelope carries Money's post bar underneath – the
+/// one place the ticked part becomes an expense; every other host gets the
+/// plain list.
+class RecordListRoutePage extends ConsumerWidget {
+  const RecordListRoutePage({super.key, required this.listId});
+
+  final String listId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final host = ref.watch(listBundleProvider(listId)).value?.host;
+    return ListScreen(
+      key: ValueKey('list:$listId'),
+      listId: listId,
+      bottomBar: host?.table == ListHost.budgetItems ? ShoppingPostBar(listId: listId) : null,
+      animateBackdrop: !_saver(ref),
+    );
+  }
 }

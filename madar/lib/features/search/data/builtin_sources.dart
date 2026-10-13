@@ -1131,10 +1131,97 @@ abstract final class BuiltInSearchSources {
       },
     ),
 
+    // ------------------------------------------------- his tick lists
+    // Part 3b: a list hangs on a host record, so both sources carry the
+    // pair that opens it (`LifeRecordLinks`) and sit on the host's own
+    // planet – a shopping list under «بقالة» is found in Money, a trip's
+    // list in Travel. Only his own words are indexed (the name, the item,
+    // his unit and his note); a price is shown with the item, never a
+    // number we invented.
+    SearchSource(
+      id: 'record_lists',
+      planetKey: 'money',
+      icon: Icons.checklist_rtl_rounded,
+      labelKey: 'listsSearchLists',
+      tables: const {'record_lists', 'budget_items', 'trips'},
+      load: (c) async {
+        final hosts = await _listHosts(c);
+        return c.mapRows(
+          c.repos.recordLists,
+          (row) => SearchDoc(
+            id: row.id,
+            refTable: 'record_lists',
+            refId: row.id,
+            title: row.name,
+            subtitle: c.join([hosts[_hostKey(row.hostTable, row.hostId)]]),
+            body: row.note ?? '',
+            date: row.postedAt,
+            planetKey: _listPlanet(row.hostTable),
+            extra: {'hostTable': row.hostTable, 'hostId': row.hostId},
+          ),
+        );
+      },
+    ),
+    SearchSource(
+      id: 'record_list_items',
+      planetKey: 'money',
+      icon: Icons.shopping_basket_rounded,
+      labelKey: 'listsSearchItems',
+      weight: 0.9,
+      tables: const {'record_list_items', 'record_lists'},
+      load: (c) async {
+        final lists = {for (final l in await c.repos.recordLists.getAll()) l.id: l};
+        return c.mapRows(
+          c.repos.recordListItems,
+          (item) {
+            final list = lists[item.listId];
+            return SearchDoc(
+              id: item.id,
+              refTable: 'record_list_items',
+              refId: item.id,
+              title: item.title,
+              subtitle: c.join([
+                list?.name,
+                _portion(c, item.quantity, item.unit),
+                if (item.priceMilli != null) c.money(item.priceMilli!, list?.currency ?? 'JOD'),
+                if (item.done) c.l10n.listsItemTicked,
+              ]),
+              body: item.note ?? '',
+              date: item.doneAt,
+              planetKey: _listPlanet(list?.hostTable),
+              extra: {'listId': item.listId},
+            );
+          },
+        );
+      },
+    ),
+
     // ------------------------------------------------- custom modules
     CustomModuleSearch.modules(),
     CustomModuleSearch.entries(),
   ];
+
+  /// The planet a list belongs to – its host's (an unknown host is one of
+  /// his own things: `custom`).
+  static String _listPlanet(String? hostTable) => switch (hostTable) {
+    'budget_items' => 'money',
+    'trips' => 'travel',
+    _ => 'custom',
+  };
+
+  static String _hostKey(String table, String id) => '$table/$id';
+
+  /// Name of every record a list can hang on today, by `table/id`.
+  static Future<Map<String, String>> _listHosts(SearchLoadContext c) async {
+    final out = <String, String>{};
+    for (final b in await c.repos.budgetItems.getAll()) {
+      out[_hostKey('budget_items', b.id)] = b.name;
+    }
+    for (final t in await c.repos.trips.getAll()) {
+      out[_hostKey('trips', t.id)] = t.destination;
+    }
+    return out;
+  }
 
   /// «١.٥ طبق» – a portion in his own unit word (nothing when he gave none).
   static String? _portion(SearchLoadContext c, double? portion, String? unit) {

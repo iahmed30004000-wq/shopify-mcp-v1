@@ -224,6 +224,8 @@ class DataExportRepository {
       travelDocuments: await all(db.travelDocuments),
       customModules: await all(db.customModules),
       customEntries: await all(db.customEntries),
+      recordLists: await all(db.recordLists),
+      recordListItems: await all(db.recordListItems),
     );
   }
 }

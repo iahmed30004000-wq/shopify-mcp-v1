@@ -63,6 +63,12 @@ abstract final class DataAreas {
     'travel_documents': DataArea.travel,
     'custom_modules': DataArea.custom,
     'custom_entries': DataArea.custom,
+    // His own tick lists (Part 3b). They hang on records of several
+    // planets (a budget envelope, a trip, later the pantry), so they are
+    // counted with the rest of the things he made himself rather than
+    // split across areas.
+    'record_lists': DataArea.custom,
+    'record_list_items': DataArea.custom,
   };
 
   /// The area of an SQL table (settings, reminders, activity history and

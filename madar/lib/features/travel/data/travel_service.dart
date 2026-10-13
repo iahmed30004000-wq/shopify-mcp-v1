@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import '../../../core/db/database.dart';
 import '../../../core/db/repositories/repositories.dart';
 import '../../../core/domain/enums.dart';
+import '../../lists/data/list_service.dart' show ListService;
+import '../../lists/domain/record_list.dart' show ListHost;
 import '../domain/packing.dart';
 import '../domain/trip_timeline.dart';
 
@@ -242,6 +244,8 @@ class TravelService {
   Future<TravelUndo> deleteTrip(TripRow trip) async {
     final wasManual = (await manualStatusIds()).contains(trip.id);
     final items = await repos.tripItems.deleteWhere((t) => t.tripId.equals(trip.id));
+    // The trip's own tick lists (Part 3b) go with it, and come back with it.
+    final undoLists = await ListService(repos, clock: _clock).deleteForHost(ListHost(ListHost.trips, trip.id));
     final activity = <ActivityRow>[
       ...await repos.activity.removeFor(refTable: 'trips', refId: trip.id),
       for (final i in items) ...await repos.activity.removeFor(refTable: 'trip_items', refId: i.id),
@@ -252,6 +256,7 @@ class TravelService {
       if (row != null) await repos.trips.restore(row);
       await repos.tripItems.restoreAll(items);
       await repos.activityLog.restoreAll(activity);
+      await undoLists();
       if (wasManual) await _setManual(trip.id, true);
     };
   }

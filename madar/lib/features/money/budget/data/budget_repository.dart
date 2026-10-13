@@ -7,6 +7,7 @@ import '../../../../core/db/tables/converters.dart' show CalendarDayConverter, n
 import '../../../../core/domain/budget_math.dart';
 import '../../../../core/domain/enums.dart';
 import '../../../../core/domain/money.dart';
+import '../../../lists/data/list_service.dart' show ListService, ListUndo;
 import '../domain/budget_edits.dart';
 
 /// Restores exactly what a budget write changed.
@@ -226,6 +227,7 @@ class BudgetRepository {
     walk(id);
     final heir = byId[id]!.parentId;
     late List<BudgetItemRow> removed;
+    ListUndo undoLists = () async {};
     final txRefs = <String, String?>{};
     final obligationRefs = <String, String?>{};
     await _db.transaction(() async {
@@ -248,10 +250,14 @@ class BudgetRepository {
         );
       }
       removed = await repos.budgetItems.deleteWhere((b) => b.id.isIn(ids));
+      // His shopping lists under those envelopes go with them – a deleted
+      // envelope leaves no orphan list in the search or the exports.
+      undoLists = await ListService(repos, clock: _clock).deleteForHosts('budget_items', ids);
     });
     await _log(id, 'delete', payload: {'count': ids.length});
     return () => _db.transaction(() async {
       await repos.budgetItems.restoreAll(removed);
+      await undoLists();
       for (final e in txRefs.entries) {
         await (_db.update(
           _db.transactions,

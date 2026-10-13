@@ -755,5 +755,39 @@ Future<void> populateAllTables(MadarDatabase db) async {
       ),
       AppliedPlanItemsCompanion.insert(planId: 'plan-ai-1', itemKey: 't1', kind: 'task', title: 'مهمة', reason: 'سبب'),
     ]);
+    // ------------------------------------- the shared tick lists (schema v5)
+    b.insertAll(db.recordLists, [
+      RecordListsCompanion.insert(
+        id: const Value('list-1'),
+        hostTable: 'budget_items',
+        hostId: 'budget-food',
+        name: 'أغراض البقالة',
+        currency: const Value('JOD'),
+        note: const Value('اللي ناقص البيت'),
+        postedAt: Value(tLocal),
+        postedTxId: const Value('tx-1'),
+        postedAmountMilli: const Value(8000),
+        postedItemCount: const Value(3),
+        sortOrder: const Value(2),
+        createdAt: Value(tUtc),
+        updatedAt: Value(tMicros),
+      ),
+      RecordListsCompanion.insert(hostTable: 'trips', hostId: 'trip-1', name: 'شنطة السفر'),
+    ]);
+    b.insertAll(db.recordListItems, [
+      RecordListItemsCompanion.insert(
+        id: const Value('list-item-1'),
+        listId: 'list-1',
+        title: 'رز',
+        quantity: const Value(2.5),
+        unit: const Value('كيلو'),
+        priceMilli: const Value(1500),
+        done: const Value(true),
+        doneAt: Value(tLocal),
+        note: const Value('من عند أبو علي'),
+        sortOrder: const Value(5),
+      ),
+      RecordListItemsCompanion.insert(listId: 'list-1', title: 'زيت'),
+    ]);
   });
 }
