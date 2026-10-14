@@ -73,14 +73,12 @@ class SearchLoadContext {
 
   /// Rows read per page by [mapRows].
   ///
-  /// This is the knob that decides the longest the UI isolate is blocked
-  /// while the index is built: a page is read, mapped and handed on without
-  /// a frame in between, so the block grows with the page. 400 rows cost
-  /// ~100 ms on a phone-class CPU over a database of tens of thousands of
-  /// rows, which is six frames; 128 keeps it near one. The warm-up takes
-  /// marginally longer in total and nothing else changes - the pages are
-  /// read in id order and the result is identical.
-  static const int pageSize = 128;
+  /// Measured, not guessed: dropping this to 128 to shorten the longest
+  /// UI-isolate block made it *worse* (73-96 ms became 111-182 ms) and the
+  /// warm-up a second longer, because the per-page round trip costs more
+  /// than mapping the rows does. The block is not the mapping of one page,
+  /// so do not tune this number hoping to move it.
+  static const int pageSize = 400;
 
   /// The records of [repo]'s rows (those matching [where]), made by [map]
   /// (null skips a row). The rows are read and mapped a page at a time:

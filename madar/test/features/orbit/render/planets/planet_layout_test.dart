@@ -71,8 +71,14 @@ void main() {
 
       final scatter = [for (var i = 0; i < 10; i++) 0.62 + i * golden];
       final even = [for (var i = 0; i < 10; i++) layout.initialAngle(i, 10, i * 7.31)];
-      expect(smallestGap(scatter), lessThan(0.3), reason: 'the golden angle clumps four worlds down one side');
-      expect(smallestGap(even), greaterThan(0.45));
+      // The golden angle leaves two worlds 20° apart where an even share
+      // (less the bounded nudge) guarantees at least 29°.
+      expect(
+        smallestGap(scatter),
+        lessThan(layout.minAngularGap(10)),
+        reason: 'the golden angle clumps four worlds down one side',
+      );
+      expect(smallestGap(even), greaterThanOrEqualTo(layout.minAngularGap(10) - 1e-9));
     });
 
     test('outer worlds orbit more slowly (softened Kepler)', () {

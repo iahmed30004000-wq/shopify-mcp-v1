@@ -30,6 +30,7 @@ class PlanetSystemLayout {
     this.innerRadius = 0.76,
     this.outerRadius = 1.18,
     this.laneFloorCount = 16,
+    this.fullSizeCount = 10,
     this.maxLaneGap = 0.2,
     this.bodyRadius = 0.14,
     this.innerPeriod = 170,
@@ -47,6 +48,11 @@ class PlanetSystemLayout {
   /// It sets [minLaneGap]; beyond this count the system grows outward and
   /// the overview camera pulls back to keep it framed.
   final int laneFloorCount;
+
+  /// Worlds up to this many are drawn at full size (today's ten, so the
+  /// sky he knows does not change size). Past it the ring runs out of
+  /// room and every disc shrinks – see [crowdingScale].
+  final int fullSizeCount;
 
   /// Widest a lane gap ever gets (with two or three worlds), so a nearly
   /// empty sky still reads as a system and not as two distant rings.
@@ -135,7 +141,9 @@ class PlanetSystemLayout {
   /// never fall below [minAngularGap].
   double initialAngle(int index, int count, double seed) {
     final share = 2 * math.pi / math.max(1, count);
-    return firstAngle + index * share + share * angleJitter * (2 * _fract(seed * 0.7548776662 + 0.37) - 1);
+    // A multiplier of its own (the plastic number's fraction), so the nudge
+    // does not march in step with the tilt, the node or the spin.
+    return firstAngle + index * share + share * angleJitter * (2 * _fract(seed * 0.3247179572 + 0.37) - 1);
   }
 
   /// Smallest angle between two of [count] worlds at rest (radians).
@@ -147,8 +155,23 @@ class PlanetSystemLayout {
   /// Line of nodes of the tilted orbit, stable per planet.
   double nodeOf(double seed) => 2 * math.pi * _fract(seed * 0.3819660113 + 0.47);
 
-  /// Disc radius of a world of archetype [a] (world units).
-  double bodyRadiusOf(PlanetArchetype a) => bodyRadius * PlanetStyle.sizeFactorOf(a);
+  /// How much every disc shrinks with [count] worlds in the sky.
+  ///
+  /// Two neighbours stand `2π ÷ count` apart, so the room between them
+  /// closes as `sin(π ÷ count)` – at sixteen worlds it is 63 % of what
+  /// ten have. The discs give up the *square root* of that squeeze: half
+  /// the loss, which is enough to keep sixteen worlds from touching
+  /// without turning them into specks. Up to [fullSizeCount] nothing
+  /// changes at all.
+  double crowdingScale(int count) {
+    if (count <= fullSizeCount) return 1;
+    return math.sqrt(math.sin(math.pi / count) / math.sin(math.pi / fullSizeCount));
+  }
+
+  /// Disc radius of a world of archetype [a] (world units). [count] is how
+  /// many worlds share the sky; leave it out for the plain size of one.
+  double bodyRadiusOf(PlanetArchetype a, {int count = 0}) =>
+      bodyRadius * PlanetStyle.sizeFactorOf(a) * (count <= 0 ? 1 : crowdingScale(count));
 
   /// Position on a circular orbit of [radius] at [angle], tilted by
   /// [inclination] about x, then turned by [node] about y – the same maths

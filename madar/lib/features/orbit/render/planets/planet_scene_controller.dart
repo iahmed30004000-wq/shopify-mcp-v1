@@ -40,10 +40,15 @@ class _MoonState {
 }
 
 class _BodyState {
-  _BodyState(this.body, {required double lane, required this.angle, required PlanetSystemLayout layout})
-    : lane = SpringMotion(spring: LivingSprings.lane, value: lane, tolerance: MadarSprings.unit),
-      frame = BodyFrame(body) {
-    restyle(layout);
+  _BodyState(
+    this.body, {
+    required double lane,
+    required this.angle,
+    required PlanetSystemLayout layout,
+    required int count,
+  }) : lane = SpringMotion(spring: LivingSprings.lane, value: lane, tolerance: MadarSprings.unit),
+       frame = BodyFrame(body) {
+    restyle(layout, count);
   }
 
   PlanetBody body;
@@ -58,14 +63,17 @@ class _BodyState {
 
   late double inclination, node, tilt, spinPeriod, spinPhase, worldRadius;
 
-  void restyle(PlanetSystemLayout layout) {
+  /// [count] is how many worlds share the sky: past
+  /// [PlanetSystemLayout.fullSizeCount] the discs shrink so the ring still
+  /// has room between them.
+  void restyle(PlanetSystemLayout layout, int count) {
     final seed = body.seed;
     inclination = layout.inclinationOf(seed);
     node = layout.nodeOf(seed);
     tilt = PlanetStyle.axialTiltOf(body.archetype, seed);
     spinPeriod = PlanetStyle.spinPeriodOf(seed);
     spinPhase = 2 * math.pi * ((seed * 0.4142135) % 1);
-    worldRadius = layout.bodyRadiusOf(body.archetype);
+    worldRadius = layout.bodyRadiusOf(body.archetype, count: count);
   }
 }
 
@@ -157,14 +165,18 @@ class PlanetSceneController extends ChangeNotifier {
               layout.nodeOf(body.seed) +
               layout.angularSpeedFor(laneTarget) * _time,
           layout: layout,
+          count: count,
         );
         changed = true;
       } else {
+        // The disc size follows the world count too, so a sky that gained
+        // or lost a world restyles every body, not just a changed one.
+        final restyle =
+            st.body.archetype != body.archetype || st.body.seed != body.seed || _bodies.length != count;
         if (!st.body.sameAs(body)) changed = true;
-        final restyle = st.body.archetype != body.archetype || st.body.seed != body.seed;
         st.body = body;
         st.frame.body = body;
-        if (restyle) st.restyle(layout);
+        if (restyle) st.restyle(layout, count);
         if (st.lane.target != laneTarget) {
           changed = true;
           if (animate && !_reducedMotion) {

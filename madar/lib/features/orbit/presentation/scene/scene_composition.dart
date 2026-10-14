@@ -54,15 +54,19 @@ class OrbitComposition {
   /// core is well under `innerRadius × sin(elevation)` (the far side of
   /// the ellipse is farther away, so perspective pulls it in toward the
   /// vanishing point), and the orbit's tilt pulls it in again. 0.9 left
-  /// the ring grazing the brass at 1.005 × the limb; 0.96 holds it clear
-  /// at every world count, with the gap plainly visible.
+  /// the innermost ring grazing the brass at 1.005 × the limb – a scratch
+  /// on the dial, not an orbit; 0.95 holds it at 1.04 × or better at every
+  /// world count from one to sixteen.
+  ///
   /// [PlanetSystemLayout.outerRadius] is then the widest band that still
-  /// leaves the worlds ~19–30 px across at overview scale once the camera
-  /// has pulled back far enough to keep every disc on screen.
+  /// leaves the dial over 78 px – the radius below which it gives up the
+  /// countdown and the prayer names – once the camera has pulled back far
+  /// enough to keep every disc on screen with [margin] to spare: 1.2
+  /// leaves the dial 81–93 px and the worlds 17–28 px across.
   static const defaultLayout = PlanetSystemLayout(
-    innerRadius: 0.96,
-    outerRadius: 1.26,
-    bodyRadius: 0.155,
+    innerRadius: 0.95,
+    outerRadius: 1.2,
+    bodyRadius: 0.15,
   );
 
   final PlanetSystemLayout layout;
@@ -177,7 +181,9 @@ class OrbitComposition {
       final body = lanes[i];
       // The disc and the brightest part of its glow (a gas giant's faint
       // outer rings may brush the edge).
-      final r = layout.bodyRadiusOf(body.archetype) * math.min(PlanetStyle.haloFactorOf(body.archetype), haloAllowance);
+      final r =
+          layout.bodyRadiusOf(body.archetype, count: lanes.length) *
+          math.min(PlanetStyle.haloFactorOf(body.archetype), haloAllowance);
       final inc = layout.inclinationOf(body.seed), node = layout.nodeOf(body.seed);
       for (var k = 0; k < samples; k++) {
         final p = PlanetSystemLayout.orbitPoint(lane, 2 * math.pi * k / samples, inclination: inc, node: node);

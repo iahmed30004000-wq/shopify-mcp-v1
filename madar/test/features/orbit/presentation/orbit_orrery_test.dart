@@ -18,7 +18,7 @@
 //
 // The eye-check behind these numbers is `orbit_counts_screenshot_test.dart`.
 import 'dart:math' as math;
-import 'dart:ui' show Locale, Offset, Rect, Size;
+import 'dart:ui' show Locale, Rect, Size;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/domain/enums.dart';
@@ -32,6 +32,12 @@ import 'package:madar/features/orbit/render/astrolabe/astrolabe.dart';
 import 'package:madar/features/orbit/render/planets/planets.dart';
 
 import '../render/planets/planet_fixtures.dart';
+
+/// How far outside the brass limb the innermost lane has to stay, as a
+/// multiple of the dial's own radius. The lane rings are drawn over the
+/// sky, so one that grazes the limb reads as a scratch on the brass. The
+/// composition holds 1.04–1.14 at the counts below; this is the floor.
+const double _limbClearance = 1.035;
 
 const _phone = Size(412, 915);
 const _small = Size(360, 740);
@@ -120,7 +126,7 @@ void main() {
           for (var i = 0; i < n; i++) {
             final b = bodies[i];
             final lane = layout.laneRadius(i, n);
-            final r = layout.bodyRadiusOf(b.archetype);
+            final r = layout.bodyRadiusOf(b.archetype, count: n);
             // All the way round the orbit, at its own tilt and node.
             for (var k = 0; k < 360; k++) {
               final p = PlanetSystemLayout.orbitPoint(
@@ -195,7 +201,7 @@ void main() {
             final d = (cam.project(p, _phone).offset - core).distance;
             expect(
               d / corePx,
-              greaterThan(limbClearance),
+              greaterThan(_limbClearance),
               reason: '${b.key}\'s lane passes ${(d / corePx).toStringAsFixed(3)} × the limb at $k°',
             );
           }
@@ -204,15 +210,24 @@ void main() {
     }
 
     test('the discs are a family, not a jumble', () {
-      final sizes = PlanetArchetype.values.map(layout.bodyRadiusOf);
+      final sizes = PlanetArchetype.values.map((a) => layout.bodyRadiusOf(a, count: 10));
       expect(sizes.reduce(math.max) / sizes.reduce(math.min), lessThanOrEqualTo(PlanetStyle.maxSizeRatio + 1e-9));
       // Character is kept: Travel is still the big one, ice the small one.
-      expect(sizes.reduce(math.max), layout.bodyRadiusOf(PlanetArchetype.gasGiant));
-      expect(sizes.reduce(math.min), layout.bodyRadiusOf(PlanetArchetype.ice));
+      expect(sizes.reduce(math.max), layout.bodyRadiusOf(PlanetArchetype.gasGiant, count: 10));
+      expect(sizes.reduce(math.min), layout.bodyRadiusOf(PlanetArchetype.ice, count: 10));
       // …and on screen, where depth adds its own spread, still well under 2.
       final c = _scene(_worlds(10));
       final discs = c.planets.frameFor(c.viewport).bodies.map((b) => b.radius);
       expect(discs.reduce(math.max) / discs.reduce(math.min), lessThan(1.6));
+    });
+
+    test('past ten worlds the discs give way, never the frame', () {
+      expect(layout.crowdingScale(layout.fullSizeCount), 1);
+      expect(layout.crowdingScale(1), 1);
+      for (var n = layout.fullSizeCount + 1; n <= 20; n++) {
+        expect(layout.crowdingScale(n), lessThan(layout.crowdingScale(n - 1)), reason: '$n worlds');
+        expect(layout.crowdingScale(n), greaterThan(0.65), reason: '$n worlds must not be specks');
+      }
     });
 
     test('the dial stays readable at every count', () {
@@ -286,8 +301,3 @@ void main() {
     });
   });
 }
-
-/// How far outside the brass limb the innermost lane has to stay, as a
-/// multiple of the dial's own radius. The lane rings are drawn over the
-/// sky, so one that grazed the limb read as a scratch on the brass.
-const double limbClearance = 1.04;
