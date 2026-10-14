@@ -5,8 +5,25 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 
 ## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped: **APK #24**, commit a908442, CI run 38111440767, artifact madar-apk-24 (id 11692542010).
-  (#22 was Part 2, c76a47d; #19 was Part 4's UI, e6cb0fc.)
+- Last shipped: **APK #25**, commit 08e2fd0, CI run 38487850797, artifact madar-apk-25 (id 11861134974).
+  (#24 was Part 3, a908442; #22 was Part 2, c76a47d; #19 was Part 4's UI, e6cb0fc.)
+- **PLAN.md Part 3b is DONE** (`08e2fd0`): `lib/features/lists/` on schema **v5**
+  (`record_lists`, `record_list_items`), addressed by the same `(hostTable, hostId)` pair
+  `LifeRecordLinks` resolves, so Part 5's pantry is a new host and nothing more. Shopping
+  lists under a budget envelope post the ticked part as one transaction through the ledger's
+  own service, claimed inside the writing transaction so it cannot charge twice; trips carry
+  «قوائم ثانية للرحلة» beside their own packing list; `/lists` is every list grouped by its
+  record, orphans last. Lists and items are searchable in his words and export.
+- Known gaps from Part 3b: the trip's own `trip_items` packing list is still a second
+  hand-rolled tick list (migrating it ripples through Orbit, Import and Search - its own
+  part); no list CSV kind; ticking logs no activity row, so the Neglect Radar does not know
+  about an unticked list; posting always uses today.
+- **Measurement note**: `test/features/search/systems_perf_regression_test.dart` budgets the
+  first query's UI block at <100 ms. Alone on this container it measures 73-96 ms; inside a
+  whole-suite `-j 1` run the container is loaded and it reads 109-127 ms and fails. CI passes
+  it. Do not "fix" it by raising the budget without measuring the same scope twice - an
+  earlier comparison of mine was wrong because one side ran a single test and the other ran
+  two hundred.
 - **PLAN.md Part 3 is DONE** (commit `7c3d498`, with `a908442` fixing one test):
   the «خطة مدار» v1 contract and engine (`lib/features/ai_bridge/`), the export tile under
   Settings > «بياناتك», the paste box / file picker / **Android share intent**, the per-item
