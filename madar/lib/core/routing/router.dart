@@ -609,6 +609,64 @@ List<RouteBase> madarRoutes() => [
           ),
         ],
       ),
+      // Part 5 – «السفرة», the kitchen world (hers). Its screens are
+      // siblings, not children of one another: each one is pushed from the
+      // world's page, so back returns to the world and never to a second
+      // copy of «شو نطبخ اليوم». `/sufra` alone opens it, which is what she
+      // came for.
+      GoRoute(
+        path: 'sufra',
+        redirect: (context, state) => state.uri.path == '/sufra' ? AppRoutes.sufraTonight : null,
+        builder: (context, state) => const SufraTonightRoutePage(),
+      ),
+      GoRoute(
+        path: 'sufra/tonight',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const SufraTonightRoutePage(),
+        ),
+      ),
+      GoRoute(
+        path: 'sufra/pantry',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const SufraPantryRoutePage(),
+        ),
+      ),
+      GoRoute(
+        path: 'sufra/recipes',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const SufraRecipesRoutePage(),
+        ),
+      ),
+      GoRoute(
+        path: 'sufra/recipe/:id',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: SufraRecipeRoutePage(recipeId: state.pathParameters['id']!),
+        ),
+      ),
+      GoRoute(
+        path: 'sufra/rules',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const SufraRulesRoutePage(),
+        ),
+      ),
+      GoRoute(
+        path: 'sufra/history',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: const SufraHistoryRoutePage(),
+        ),
+      ),
       GoRoute(
         path: 'lists',
         pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(

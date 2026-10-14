@@ -178,10 +178,24 @@ request, who is eating, time, and `DietLink` which stays off unless the owner sw
 `dietMode` on). The AI bridge's `recipe` and `pantryItem` items **apply** now, through the same
 validator and the same `HealthGuard`, and an AI dish is stored with its source so she always knows
 it came from an answer and not from her aunt. A fresh install is empty: no bundled recipes.
-**Left for step 2**: the screens (the planet, the pantry, a dish, the suggestions, the history,
-her constraints), the orbit planet row and the routes, the search sources for the new tables, and
-a «السفرة» section of its own in the data export summary (its tables travel in the backup and are
-counted today under «اللي عملته بنفسك»).
+**Built (step 2 of 2: the world and its screens)**: «السفرة» is the **ninth planet** – seeded
+(key `sufra`, pomegranate palette, the `desert` archetype, the fork-and-knife icon, last in the
+orbit) and reaching an install that already exists without re-seeding anything else. Its score is
+deliberately quiet: `{tasks: 1, activity: 0}`, so a kitchen nobody opened today is **dormant** – a
+calm world, off the Neglect Radar and out of the balance – until she files a task under it
+herself. Its hub card («سفرة اليوم») sits on the world's page with the four screens under it:
+«شو في بالبيت» (the attention list worst first, her places, drag inside a place, every write
+undoable), «طبخاتي» + one dish (ingredients judged against the house, her method, her photos –
+copied into Madar's own folder and deleted with the dish), «شو نطبخ اليوم» (ready now, nearly,
+**the three refusals as honesty with the one tap that fixes each**, held by the window with the
+override, and «ممنوعة اليوم» with the word and the person behind it), «محدداتي» (her rules plus
+the window, the expiry warning, how many eat and how near is «قريبة») and «اللي طبخناه». Routes
+`/sufra/...`, deep links for all five tables through `LifeRecordLinks`, and five search sources
+over **her own words** (the ingredient source asks whether there is a line to index before it
+reads a single dish name). The diet link stays off.
+**Left**: a «السفرة» section of its own in the data export summary – its tables travel in the
+backup already and are counted today under «اللي عملته بنفسك»; whether her pantry may go into an
+AI summary at all is the owner's call.
 
 ---
 

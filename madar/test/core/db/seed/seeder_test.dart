@@ -34,10 +34,20 @@ void main() {
     setUp(() async => db = await openInMemoryMadarDatabase());
     tearDown(() => db.close());
 
-    test('eight planets with palettes, archetypes, equal weights and sources', () async {
+    test('nine planets with palettes, archetypes, equal weights and sources', () async {
       final planets = await (db.select(db.planets)..orderBy([(t) => OrderingTerm.asc(t.sortOrder)])).get();
-      expect(planets.map((p) => p.key), ['faith', 'health', 'family', 'work', 'money', 'growth', 'body', 'travel']);
-      expect(planets.map((p) => p.sortOrder), [0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(planets.map((p) => p.key), [
+        'faith',
+        'health',
+        'family',
+        'work',
+        'money',
+        'growth',
+        'body',
+        'travel',
+        'sufra',
+      ]);
+      expect(planets.map((p) => p.sortOrder), [0, 1, 2, 3, 4, 5, 6, 7, 8]);
       expect(planets.map((p) => p.archetype), [
         PlanetArchetype.faith,
         PlanetArchetype.ocean,
@@ -47,6 +57,7 @@ void main() {
         PlanetArchetype.verdant,
         PlanetArchetype.volcanic,
         PlanetArchetype.gasGiant,
+        PlanetArchetype.desert,
       ]);
       for (final p in planets) {
         expect(p.color, PlanetPalettes.byKey[p.key]!.surface.toARGB32(), reason: p.key);
@@ -57,8 +68,22 @@ void main() {
       }
       expect(planets.first.nameAr, 'الإيمان');
       expect(planets.first.nameEn, 'Faith');
-      expect(planets.last.nameAr, 'السفر');
-      expect(planets.last.nameEn, 'Travel');
+      expect(planets[7].nameAr, 'السفر');
+      expect(planets[7].nameEn, 'Travel');
+      expect(planets.last.nameAr, 'السفرة');
+      expect(planets.last.nameEn, 'The kitchen');
+    });
+
+    // «السفرة» is a kitchen, not a discipline: a pantry nobody opened today
+    // is not a neglected life. Its only source is the tasks she files under
+    // it herself, and the implicit "nothing was recorded here lately"
+    // fallback is switched off, so the world stays calm and off the Neglect
+    // Radar until she puts something of her own on it.
+    test('the kitchen is scored only by her own tasks, with the activity fallback off', () async {
+      final sufra = await (db.select(db.planets)..where((t) => t.key.equals('sufra'))).getSingle();
+      expect(sufra.sources['tasks'], 1.0);
+      expect(sufra.sources['activity'], 0.0);
+      expect(sufra.sources.keys, hasLength(2));
     });
 
     test('currencies: JOD base with 3 decimals, editable reference rates', () async {
@@ -116,10 +141,36 @@ void main() {
       // An explicit seed only adds what is missing.
       await MadarSeeder(db).seed();
       final after = await counts(db);
-      expect(after['planets'], 8);
+      expect(after['planets'], 9);
       expect(after['currencies'], 5);
       expect(after['tag_options'], before['tag_options']);
       expect(after['habits'], 11);
+    });
+
+    // «السفرة» arrived after the first eight worlds (Part 5). An install
+    // that is already seeded must still get it – and nothing else: the
+    // habits he deleted stay deleted.
+    test('a world added by a later release reaches an already-seeded database', () async {
+      await (db.delete(db.planets)..where((t) => t.key.equals('sufra'))).go();
+      await db.delete(db.habits).go();
+      expect(await MadarSeeder(db).seedIfNeeded(), isTrue);
+      final keys = (await db.select(db.planets).get()).map((p) => p.key);
+      expect(keys, contains('sufra'));
+      expect(keys, hasLength(9));
+      expect(await db.select(db.habits).get(), isEmpty, reason: 'only the worlds are re-added');
+      // And once it is there, nothing happens again.
+      expect(await MadarSeeder(db).seedIfNeeded(), isFalse);
+    });
+
+    test('a world she renamed, recoloured or hid is left exactly as it is', () async {
+      await (db.update(db.planets)..where((t) => t.key.equals('sufra'))).write(
+        const PlanetsCompanion(nameAr: Value('المطبخ'), hidden: Value(true), color: Value(0xFF123456)),
+      );
+      expect(await MadarSeeder(db).seedIfNeeded(), isFalse);
+      final sufra = await (db.select(db.planets)..where((t) => t.key.equals('sufra'))).getSingle();
+      expect(sufra.nameAr, 'المطبخ');
+      expect(sufra.hidden, isTrue);
+      expect(sufra.color, 0xFF123456);
     });
 
     test('a user-chosen base currency survives a re-seed', () async {

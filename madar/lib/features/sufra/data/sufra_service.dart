@@ -236,6 +236,7 @@ class SufraBoard {
       recipes: recipes,
       cooked: sorted,
       rules: rules,
+      constraints: constraints,
       matches: PantryMatcher.rank(
         recipes,
         pantry: pantry,
@@ -254,6 +255,7 @@ class SufraBoard {
     required this.cooked,
     required this.rules,
     required this.matches,
+    this.constraints = KitchenConstraints.none,
   });
 
   final SufraSettings settings;
@@ -273,6 +275,13 @@ class SufraBoard {
   /// Every dish ranked, best first (see [PantryMatcher.rank]).
   final List<RecipeMatch> matches;
 
+  /// Everything that was asked of the ranking: her standing rules, how
+  /// many are eating, how long she has, the window – already merged with
+  /// her settings. Kept so a screen can ask the matcher a second question
+  /// with the **same** conditions ([blocked]) instead of merging them
+  /// again and drifting.
+  final KitchenConstraints constraints;
+
   /// The dishes she can cook right now.
   List<RecipeMatch> get cookNow => PantryMatcher.cookNow(matches);
 
@@ -285,6 +294,24 @@ class SufraBoard {
 
   /// What is low, finished or expired.
   List<PantryStock> get attention => pantry.attention;
+
+  /// The dishes a **hard** rule says no to today – an allergy, or a
+  /// request for tonight. [matches] leaves them out (they are not on
+  /// offer), and this is where a screen shows them anyway, each with the
+  /// word and the person behind it, so a dish never disappears without a
+  /// reason she can read.
+  List<RecipeMatch> get blocked => [
+    for (final m in PantryMatcher.rank(
+      recipes,
+      pantry: pantry,
+      constraints: constraints,
+      cookedLog: cooked,
+      nearlyLimit: settings.nearlyLimit,
+      today: pantry.today,
+      includeBlocked: true,
+    ))
+      if (m.blocked) m,
+  ];
 
   /// A fresh install: nothing in the house and no recipes.
   bool get isEmpty => pantry.isEmpty && recipes.isEmpty;

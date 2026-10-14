@@ -24,6 +24,7 @@ import 'package:madar/features/orbit/data/planet_customization_service.dart';
 import 'package:madar/features/orbit/presentation/planet/faith_hub.dart';
 import 'package:madar/features/orbit/presentation/planet/life_hubs.dart';
 import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
+import 'package:madar/features/sufra/sufra.dart' show SufraTodayCard;
 import 'package:madar/features/travel/travel.dart';
 import 'package:madar/features/work/work.dart';
 
@@ -95,8 +96,8 @@ void _testWidgets(String description, WidgetTesterCallback body) =>
     testWidgets(description, body, timeout: const Timeout(Duration(minutes: 3)));
 
 void main() {
-  test('the hubs cover the five life worlds only', () {
-    expect(LifeHubs.keys, {'work', 'family', 'travel', 'growth', 'body'});
+  test('the hubs cover the six life worlds only', () {
+    expect(LifeHubs.keys, {'work', 'family', 'travel', 'growth', 'body', 'sufra'});
     for (final k in LifeHubs.keys) {
       expect(LifeHubs.has(k), isTrue);
     }
@@ -108,6 +109,7 @@ void main() {
     expect(LifeHubs.of('travel'), isA<TravelHub>());
     expect(LifeHubs.of('growth'), isA<GrowthHub>());
     expect(LifeHubs.of('body'), isA<BodyHub>());
+    expect(LifeHubs.of('sufra'), isA<SufraHub>());
   });
 
   final hubs = <_Hub>[
@@ -194,6 +196,22 @@ void main() {
           '/body?tab=food',
           (t) => t.widget<NutritionTodayCard>(find.byType(NutritionTodayCard)).onOpen!(),
         ),
+      ],
+    ),
+    // «السفرة» (Part 5), hers: the kitchen's own card and its four screens.
+    // Nothing of Health or Money is on this world.
+    (
+      key: 'sufra',
+      hub: SufraHub,
+      cards: [SufraTodayCard],
+      tools: [
+        ((l) => l.sufraPantryTitle, AppRoutes.sufraPantry),
+        ((l) => l.sufraRecipesTitle, AppRoutes.sufraRecipes),
+        ((l) => l.sufraConstraintsTitle, AppRoutes.sufraRules),
+        ((l) => l.sufraHistoryTitle, AppRoutes.sufraHistory),
+      ],
+      opens: [
+        (AppRoutes.sufraTonight, (t) => t.widget<SufraTodayCard>(find.byType(SufraTodayCard)).onOpen()),
       ],
     ),
   ];

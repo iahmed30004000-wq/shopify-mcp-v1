@@ -122,7 +122,7 @@ void main() {
 
   test('snapshotRowCounts previews the content', () async {
     final counts = snapshotRowCounts(await exportSnapshot(source));
-    expect(counts['planets'], 9); // 8 seeded + 1 fixture
+    expect(counts['planets'], 10); // 9 seeded (the kitchen included) + 1 fixture
     expect(counts['tasks'], 2);
     expect(counts.keys, containsAll(['currencies', 'key_values', 'custom_entries']));
   });

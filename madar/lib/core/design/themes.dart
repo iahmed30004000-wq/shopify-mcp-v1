@@ -297,6 +297,11 @@ abstract final class PlanetPalettes {
   static const body = PlanetPalette(Color(0xFFFF5A36), Color(0xFFFFB02E), Color(0xFF3A0E08));
   static const travel = PlanetPalette(Color(0xFF9C8CFF), Color(0xFFE6D3FF), Color(0xFF2A1F5C));
 
+  /// «السفرة» (Part 5): pomegranate – the one warm hue no other world
+  /// holds (Family is clay-orange, Faith is gold), so her kitchen is
+  /// recognisable in the sky at a glance.
+  static const sufra = PlanetPalette(Color(0xFFDE6E8F), Color(0xFFFFC6D8), Color(0xFF5A1430));
+
   static const byKey = <String, PlanetPalette>{
     'faith': faith,
     'health': health,
@@ -306,6 +311,7 @@ abstract final class PlanetPalettes {
     'growth': growth,
     'body': body,
     'travel': travel,
+    'sufra': sufra,
   };
 
   /// Palette for any colour (user-added planets / recolouring).

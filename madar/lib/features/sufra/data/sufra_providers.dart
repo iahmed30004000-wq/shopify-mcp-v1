@@ -50,6 +50,11 @@ final kitchenRuleRowsProvider = StreamProvider<List<KitchenRuleRow>>(
   (ref) => ref.watch(sufraServiceProvider).watchRuleRows(),
 );
 
+/// The cooked log as rows – deleting one entry needs its row.
+final cookedRowsProvider = StreamProvider<List<CookedMealRow>>(
+  (ref) => ref.watch(repositoriesProvider).cookedMeals.watchAll(),
+);
+
 // ----------------------------------------------------------- the models ----
 
 /// Her recipes with their ingredients, in her own order.
@@ -159,6 +164,11 @@ final nearlyProvider = Provider<List<RecipeMatch>>((ref) => ref.watch(sufraBoard
 /// One suggestion for tonight, or null (and then the screen shows the warm
 /// empty state – never an invented dish).
 final tonightProvider = Provider<RecipeMatch?>((ref) => ref.watch(sufraBoardProvider).tonight);
+
+/// The dishes a hard rule blocks today, each with the word and the person
+/// behind it. Never offered as cookable – only shown, so nothing vanishes
+/// without a reason.
+final blockedMatchesProvider = Provider<List<RecipeMatch>>((ref) => ref.watch(sufraBoardProvider).blocked);
 
 /// One dish's match, by recipe id (null while it is not in the board).
 final recipeMatchProvider = Provider.family<RecipeMatch?, String>(

@@ -24,7 +24,7 @@ void main() {
   test('opens a file database on a background isolate, seeds once and persists', () async {
     var db = await openMadarDatabase(key: key, file: file);
     expect(file.existsSync(), isTrue);
-    expect(await db.select(db.planets).get(), hasLength(8));
+    expect(await db.select(db.planets).get(), hasLength(9));
     await db.into(db.tasks).insert(TasksCompanion.insert(title: 'persisted'));
     final journal = await db.customSelect('PRAGMA journal_mode').getSingle();
     expect(journal.data.values.single, 'wal');
@@ -34,7 +34,7 @@ void main() {
 
     db = await openMadarDatabase(key: key, file: file);
     expect((await db.select(db.tasks).get()).single.title, 'persisted');
-    expect(await db.select(db.planets).get(), hasLength(8), reason: 'no duplicate seeding');
+    expect(await db.select(db.planets).get(), hasLength(9), reason: 'no duplicate seeding');
     await db.close();
   });
 

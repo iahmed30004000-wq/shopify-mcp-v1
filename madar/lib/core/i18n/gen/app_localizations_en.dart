@@ -25871,4 +25871,561 @@ class L10nEn extends L10n {
     );
     return '$_temp0';
   }
+
+  @override
+  String get sufraHubCardTitle => 'Today\'s kitchen';
+
+  @override
+  String get sufraHubOpen => 'Open the kitchen';
+
+  @override
+  String get sufraToolPantryHint =>
+      'Everything in the house, and what is low or finished';
+
+  @override
+  String get sufraToolRecipesHint =>
+      'Your dishes with their ingredients and method';
+
+  @override
+  String get sufraToolRulesHint =>
+      'Allergies, what you avoid, and the special requests';
+
+  @override
+  String get sufraToolHistoryHint => 'What you cooked and when';
+
+  @override
+  String get sufraToolTonightHint =>
+      'What you can cook from what is in the house';
+
+  @override
+  String get sufraAttentionTitle => 'Needs your attention';
+
+  @override
+  String get sufraAttentionNone => 'Everything in the cupboard is fine';
+
+  @override
+  String sufraAttentionGroup(String label, String names) {
+    return '$label: $names';
+  }
+
+  @override
+  String get sufraAddPantryItem => 'Add something to the house';
+
+  @override
+  String get sufraEditPantryItem => 'Edit the item';
+
+  @override
+  String get sufraItemName => 'Name';
+
+  @override
+  String get sufraItemNameHint => 'e.g. rice';
+
+  @override
+  String get sufraItemAliases => 'Other names for the same thing';
+
+  @override
+  String get sufraItemQuantity => 'Quantity';
+
+  @override
+  String get sufraItemUnit => 'Unit';
+
+  @override
+  String get sufraItemUnitHint => 'kilo, tin, cup …';
+
+  @override
+  String get sufraItemPlace => 'Where it is kept';
+
+  @override
+  String get sufraItemPlaceHint => 'the pantry, the freezer …';
+
+  @override
+  String get sufraItemExpiry => 'Expiry date';
+
+  @override
+  String get sufraItemLowAt => 'Count it low at or below';
+
+  @override
+  String get sufraItemLowNow => 'It is low';
+
+  @override
+  String get sufraItemStaple => 'Always keep it in the house';
+
+  @override
+  String get sufraItemNote => 'Note';
+
+  @override
+  String get sufraNoPlace => 'No place given';
+
+  @override
+  String sufraPantryCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count things in the house',
+      one: '1 thing in the house',
+      zero: 'Nothing in the house',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraUsedSome => 'I used some';
+
+  @override
+  String get sufraUsedHowMuch => 'How much did you use';
+
+  @override
+  String sufraCouldNotDeductUnit(String name, String haveUnit) {
+    return 'I could not take it off: your “$name” is in $haveUnit, and I only convert between units when it is certain. Write the amount in the same unit and I will.';
+  }
+
+  @override
+  String sufraCouldNotDeductNoAmount(String name) {
+    return 'I could not take it off: you never said how much “$name” there is. Write the amount and I will.';
+  }
+
+  @override
+  String get sufraMarkOut => 'It is finished';
+
+  @override
+  String get sufraMarkLow => 'Mark it low';
+
+  @override
+  String get sufraUnmarkLow => 'It is fine again';
+
+  @override
+  String get sufraArchiveItem => 'Put it away';
+
+  @override
+  String get sufraUnarchiveItem => 'Bring it back';
+
+  @override
+  String get sufraArchivedLabel => 'Put away';
+
+  @override
+  String get sufraShowArchived => 'Show what I put away';
+
+  @override
+  String get sufraDelete => 'Delete';
+
+  @override
+  String sufraItemAdded(String name) {
+    return 'Added $name';
+  }
+
+  @override
+  String sufraItemUpdated(String name) {
+    return 'Updated $name';
+  }
+
+  @override
+  String sufraItemDeleted(String name) {
+    return 'Deleted $name';
+  }
+
+  @override
+  String sufraItemArchived(String name) {
+    return 'Put $name away';
+  }
+
+  @override
+  String sufraQuantityChanged(String name) {
+    return 'Changed how much $name is left';
+  }
+
+  @override
+  String get sufraLowToList => 'Put what is low on the house list';
+
+  @override
+  String get sufraOpenList => 'Open the list';
+
+  @override
+  String get sufraAddRecipe => 'Add a dish';
+
+  @override
+  String get sufraEditRecipe => 'Edit the dish';
+
+  @override
+  String get sufraRecipeName => 'Name of the dish';
+
+  @override
+  String get sufraRecipeNameHint => 'e.g. mloukhieh';
+
+  @override
+  String get sufraRecipeServings => 'How many it feeds';
+
+  @override
+  String get sufraRecipeMinutes => 'How long it takes';
+
+  @override
+  String get sufraRecipeMinutesUnit => 'minutes';
+
+  @override
+  String get sufraRecipeTags => 'Tags';
+
+  @override
+  String get sufraRecipeSteps => 'The method';
+
+  @override
+  String get sufraRecipeStepsHint => 'one step per line';
+
+  @override
+  String get sufraRecipeNotes => 'Notes';
+
+  @override
+  String get sufraRecipeFavoriteField => 'Favourite';
+
+  @override
+  String get sufraRecipeFromWho => 'Whose it is';
+
+  @override
+  String get sufraRecipeFromWhoHint => 'e.g. my aunt';
+
+  @override
+  String get sufraFavorite => 'Make it a favourite';
+
+  @override
+  String get sufraUnfavorite => 'Remove from favourites';
+
+  @override
+  String get sufraArchiveRecipe => 'Put the dish away';
+
+  @override
+  String get sufraUnarchiveRecipe => 'Bring the dish back';
+
+  @override
+  String get sufraDuplicateRecipe => 'Copy the dish';
+
+  @override
+  String sufraCopySuffix(String name) {
+    return '$name (copy)';
+  }
+
+  @override
+  String sufraRecipeAdded(String name) {
+    return 'Added $name';
+  }
+
+  @override
+  String sufraRecipeUpdated(String name) {
+    return 'Updated $name';
+  }
+
+  @override
+  String sufraRecipeDeleted(String name) {
+    return 'Deleted $name';
+  }
+
+  @override
+  String sufraRecipeDuplicated(String name) {
+    return 'Copied $name';
+  }
+
+  @override
+  String get sufraRecipeGone => 'This dish is not here any more';
+
+  @override
+  String sufraRecipesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count dishes',
+      one: '1 dish',
+      zero: 'No dishes',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraIngredientsTitle => 'Ingredients';
+
+  @override
+  String get sufraAddIngredient => 'Add an ingredient';
+
+  @override
+  String get sufraEditIngredient => 'Edit the ingredient';
+
+  @override
+  String get sufraIngredientName => 'Ingredient';
+
+  @override
+  String get sufraIngredientNameHint => 'e.g. yoghurt';
+
+  @override
+  String get sufraIngredientOptional => 'The dish works without it';
+
+  @override
+  String get sufraNoIngredients =>
+      'You have not written any ingredients for this dish yet';
+
+  @override
+  String get sufraStepsTitle => 'The method';
+
+  @override
+  String get sufraNoSteps => 'No method written';
+
+  @override
+  String sufraStepNumber(String number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get sufraPhotosTitle => 'Photos';
+
+  @override
+  String get sufraAddPhoto => 'Add a photo';
+
+  @override
+  String get sufraRemovePhoto => 'Remove the photo';
+
+  @override
+  String get sufraPhotoAdded => 'Photo added';
+
+  @override
+  String get sufraPhotoRemoved => 'Photo removed';
+
+  @override
+  String get sufraPhotoFailed => 'I could not bring the photo in';
+
+  @override
+  String get sufraPhotoTooBig => 'That photo is too big';
+
+  @override
+  String get sufraPhotoWrongKind => 'That has to be a picture';
+
+  @override
+  String get sufraPhotoMissing => 'The photo is gone';
+
+  @override
+  String sufraPhotoOf(String name) {
+    return 'Photo of $name';
+  }
+
+  @override
+  String get sufraCookNowTitle => 'Ready to cook now';
+
+  @override
+  String get sufraNearlyTitle => 'Nearly there';
+
+  @override
+  String get sufraUnsureTitle => 'Needs a word from you';
+
+  @override
+  String get sufraHeldTitle => 'Waiting a while';
+
+  @override
+  String get sufraBlockedTitle => 'Not today';
+
+  @override
+  String get sufraMissingTitle => 'What is missing';
+
+  @override
+  String get sufraUnsureNote =>
+      'I am not putting it among the dishes you can cook, because I honestly cannot tell whether there is enough. Clear it up and it comes back.';
+
+  @override
+  String get sufraFixUnit => 'Write it in the same unit';
+
+  @override
+  String get sufraFixAmount => 'Say how much there is';
+
+  @override
+  String sufraMakeAlias(String name) {
+    return 'Treat it as “$name”';
+  }
+
+  @override
+  String sufraAliasAdded(String word, String name) {
+    return '“$word” now means “$name”';
+  }
+
+  @override
+  String get sufraTonightChoicesTitle => 'For today';
+
+  @override
+  String get sufraClearChoices => 'Clear the choices';
+
+  @override
+  String get sufraAnyPeople => 'As usual';
+
+  @override
+  String get sufraAnyTime => 'No limit';
+
+  @override
+  String sufraPeopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people',
+      one: '1 person',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraThingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count things',
+      one: '1 thing',
+      zero: 'nothing',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraCookedToast(String name) {
+    return 'Logged “$name”';
+  }
+
+  @override
+  String sufraCookedAndTook(String name) {
+    return 'Logged “$name” and took off what I could work out';
+  }
+
+  @override
+  String get sufraTagFilter => 'Tags';
+
+  @override
+  String get sufraAllTags => 'All';
+
+  @override
+  String get sufraAddRule => 'Add a constraint';
+
+  @override
+  String get sufraEditRule => 'Edit the constraint';
+
+  @override
+  String get sufraRuleKindField => 'Kind of constraint';
+
+  @override
+  String get sufraRuleTerm => 'The word';
+
+  @override
+  String get sufraRuleTermHint => 'e.g. peanuts';
+
+  @override
+  String get sufraRuleWho => 'Who it is for';
+
+  @override
+  String get sufraRuleWhoHint => 'e.g. Ahmad';
+
+  @override
+  String get sufraRuleNote => 'Note';
+
+  @override
+  String get sufraRuleActive => 'Switched on';
+
+  @override
+  String get sufraRuleOff => 'Switched off';
+
+  @override
+  String get sufraRuleAdded => 'Constraint added';
+
+  @override
+  String get sufraRuleUpdated => 'Constraint updated';
+
+  @override
+  String get sufraRuleDeleted => 'Constraint deleted';
+
+  @override
+  String get sufraRulesEmptyTitle => 'No constraints';
+
+  @override
+  String get sufraRulesEmptyBody =>
+      'Write an allergy, or something you would rather avoid, and I will hold a dish back and say why.';
+
+  @override
+  String get sufraRuleHardNote =>
+      'An allergy and a special request stop a dish outright. “I would rather avoid” pushes it down and says why. “I prefer it” only moves it up.';
+
+  @override
+  String get sufraSettingsSectionTitle => 'Kitchen settings';
+
+  @override
+  String get sufraExpiryWarningLabel => 'Warn me before the expiry date';
+
+  @override
+  String sufraDaysBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: 'a day',
+      zero: 'on the day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraDefaultPeopleLabel => 'How many usually eat';
+
+  @override
+  String get sufraNearlyLimitLabel =>
+      'Call a dish nearly there when it is missing up to';
+
+  @override
+  String get sufraSettingsSaved => 'Settings saved';
+
+  @override
+  String get sufraHistoryEmptyTitle => 'Nothing logged yet';
+
+  @override
+  String get sufraHistoryEmptyBody =>
+      'Every time you tap “I cooked it” it lands here, and that is how I know what not to repeat on you.';
+
+  @override
+  String get sufraCookFreeText => 'Log a dish without a recipe';
+
+  @override
+  String get sufraFreeTextName => 'What did you cook';
+
+  @override
+  String get sufraFreeTextHint => 'e.g. eggs and makdous';
+
+  @override
+  String get sufraCookedDay => 'Day';
+
+  @override
+  String get sufraDeleteCooked => 'Delete the entry';
+
+  @override
+  String sufraCookedDeleted(String name) {
+    return 'Deleted the entry for “$name”';
+  }
+
+  @override
+  String sufraCookedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Cooked $count times',
+      one: 'Cooked once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraSearchPantry => 'The house pantry';
+
+  @override
+  String get sufraSearchRecipes => 'Dishes';
+
+  @override
+  String get sufraSearchIngredients => 'Ingredients';
+
+  @override
+  String get sufraSearchCooked => 'What we cooked';
+
+  @override
+  String get sufraSearchRules => 'Kitchen constraints';
+
+  @override
+  String sufraCouldNotDeductNoUnit(String name) {
+    return 'I could not take it off: your “$name” has no unit written on it. Write the unit, or leave the unit off what you used.';
+  }
+
+  @override
+  String get sufraNoPhotos => 'No photos on this dish yet';
 }

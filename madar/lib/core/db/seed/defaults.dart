@@ -30,9 +30,13 @@ abstract final class PlanetSourceKeys {
   static const fasting = 'fasting';
   static const trips = 'trips';
   static const documents = 'documents';
+
+  /// How recently anything was recorded for the planet. Seeded at **0** for
+  /// «السفرة» on purpose: see [MadarDefaults.planets].
+  static const activity = 'activity';
 }
 
-/// One of the eight built-in planets.
+/// One of the built-in planets.
 @immutable
 class DefaultPlanet {
   const DefaultPlanet({required this.key, required this.archetype, required this.icon, required this.sources});
@@ -60,6 +64,8 @@ class DefaultPlanet {
     'growth' => l10n.planetGrowth,
     'body' => l10n.planetBody,
     'travel' => l10n.planetTravel,
+    // «السفرة» is named by the owner; the kitchen's own string file holds it.
+    'sufra' => l10n.sufraTitle,
     _ => key,
   };
 }
@@ -105,7 +111,7 @@ class DefaultHabit {
 
 /// Generic first-run content. Nothing here is personal.
 abstract final class MadarDefaults {
-  /// The eight built-in planets in orbit order, all with equal weight 1.0.
+  /// The nine built-in planets in orbit order, all with equal weight 1.0.
   static const planets = <DefaultPlanet>[
     DefaultPlanet(
       key: 'faith',
@@ -166,6 +172,32 @@ abstract final class MadarDefaults {
       archetype: PlanetArchetype.gasGiant,
       icon: 'plane',
       sources: {PlanetSourceKeys.trips: 0.6, PlanetSourceKeys.documents: 0.4},
+    ),
+    // «السفرة» (Part 5) – the kitchen, the ninth world.
+    //
+    // Its score is deliberately **not** a measure of the kitchen. A pantry
+    // that was not touched today, a dish not cooked tonight, an expiry three
+    // days out: none of that is a neglected life, and a world that dimmed
+    // for it would be lying on the sky. So:
+    //
+    // * `activity: 0` switches the implicit "nothing was recorded here
+    //   lately" fallback **off** – without it the engine would fade the
+    //   world and raise «ما فتحتي السفرة من ٧ أيام» the moment anything was
+    //   ever logged for it;
+    // * `tasks: 1` is the one source, and `tasks` is an *attached* source:
+    //   it is computed only from the tasks she herself filed under this
+    //   world. With none, the planet is **dormant** – a calm neutral world,
+    //   kept off the Neglect Radar – which is exactly the truth about a
+    //   kitchen the app knows nothing about.
+    //
+    // Everything the kitchen does know (what is low, what is past its date,
+    // what she can cook tonight) is on its own screens, where it is useful,
+    // and never as a score out of ten.
+    DefaultPlanet(
+      key: 'sufra',
+      archetype: PlanetArchetype.desert,
+      icon: 'food',
+      sources: {PlanetSourceKeys.tasks: 1.0, PlanetSourceKeys.activity: 0.0},
     ),
   ];
 

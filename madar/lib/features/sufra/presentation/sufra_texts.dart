@@ -170,6 +170,24 @@ class SufraTexts {
       ? null
       : l.sufraUsesExpiring([for (final s in match.usesExpiring) name(s.item.name)].join(l.recordListSeparator));
 
+  /// «٤ أشخاص» – a number of people in her digits.
+  String people(int count) => fmt.localizeDigits(l.sufraPeopleCount(count));
+
+  /// «٣ إشيا» – a plain count of things, in her digits.
+  String things(int count) => fmt.localizeDigits(l.sufraThingsCount(count));
+
+  /// «بـ٣ أيام» – how early an expiry warns.
+  String daysBefore(int count) => fmt.localizeDigits(l.sufraDaysBefore(count));
+
+  /// «٧ إشيا بالبيت».
+  String pantryCount(int count) => fmt.localizeDigits(l.sufraPantryCount(count));
+
+  /// «٤ طبخات».
+  String recipesCount(int count) => fmt.localizeDigits(l.sufraRecipesCount(count));
+
+  /// «طبختيها ٣ مرات».
+  String cookedTimes(int count) => fmt.localizeDigits(l.sufraCookedTimes(count));
+
   /// Her window, as a chip («يومين», «بلا حد»).
   String window(int days) => fmt.localizeDigits(l.sufraWindowDays(days));
 

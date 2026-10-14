@@ -24171,5 +24171,354 @@
         "type": "int"
       }
     }
-  }
+  },
+  "sufraHubCardTitle": "Today's kitchen",
+  "sufraHubOpen": "Open the kitchen",
+  "sufraToolPantryHint": "Everything in the house, and what is low or finished",
+  "sufraToolRecipesHint": "Your dishes with their ingredients and method",
+  "sufraToolRulesHint": "Allergies, what you avoid, and the special requests",
+  "sufraToolHistoryHint": "What you cooked and when",
+  "sufraToolTonightHint": "What you can cook from what is in the house",
+  "sufraAttentionTitle": "Needs your attention",
+  "sufraAttentionNone": "Everything in the cupboard is fine",
+  "sufraAttentionGroup": "{label}: {names}",
+  "@sufraAttentionGroup": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraAddPantryItem": "Add something to the house",
+  "sufraEditPantryItem": "Edit the item",
+  "sufraItemName": "Name",
+  "sufraItemNameHint": "e.g. rice",
+  "sufraItemAliases": "Other names for the same thing",
+  "sufraItemQuantity": "Quantity",
+  "sufraItemUnit": "Unit",
+  "sufraItemUnitHint": "kilo, tin, cup …",
+  "sufraItemPlace": "Where it is kept",
+  "sufraItemPlaceHint": "the pantry, the freezer …",
+  "sufraItemExpiry": "Expiry date",
+  "sufraItemLowAt": "Count it low at or below",
+  "sufraItemLowNow": "It is low",
+  "sufraItemStaple": "Always keep it in the house",
+  "sufraItemNote": "Note",
+  "sufraNoPlace": "No place given",
+  "sufraPantryCount": "{count, plural, =0{Nothing in the house} =1{1 thing in the house} other{{count} things in the house}}",
+  "@sufraPantryCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraUsedSome": "I used some",
+  "sufraUsedHowMuch": "How much did you use",
+  "sufraCouldNotDeductUnit": "I could not take it off: your “{name}” is in {haveUnit}, and I only convert between units when it is certain. Write the amount in the same unit and I will.",
+  "@sufraCouldNotDeductUnit": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "haveUnit": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCouldNotDeductNoAmount": "I could not take it off: you never said how much “{name}” there is. Write the amount and I will.",
+  "@sufraCouldNotDeductNoAmount": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraMarkOut": "It is finished",
+  "sufraMarkLow": "Mark it low",
+  "sufraUnmarkLow": "It is fine again",
+  "sufraArchiveItem": "Put it away",
+  "sufraUnarchiveItem": "Bring it back",
+  "sufraArchivedLabel": "Put away",
+  "sufraShowArchived": "Show what I put away",
+  "sufraDelete": "Delete",
+  "sufraItemAdded": "Added {name}",
+  "@sufraItemAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraItemUpdated": "Updated {name}",
+  "@sufraItemUpdated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraItemDeleted": "Deleted {name}",
+  "@sufraItemDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraItemArchived": "Put {name} away",
+  "@sufraItemArchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraQuantityChanged": "Changed how much {name} is left",
+  "@sufraQuantityChanged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraLowToList": "Put what is low on the house list",
+  "sufraOpenList": "Open the list",
+  "sufraAddRecipe": "Add a dish",
+  "sufraEditRecipe": "Edit the dish",
+  "sufraRecipeName": "Name of the dish",
+  "sufraRecipeNameHint": "e.g. mloukhieh",
+  "sufraRecipeServings": "How many it feeds",
+  "sufraRecipeMinutes": "How long it takes",
+  "sufraRecipeMinutesUnit": "minutes",
+  "sufraRecipeTags": "Tags",
+  "sufraRecipeSteps": "The method",
+  "sufraRecipeStepsHint": "one step per line",
+  "sufraRecipeNotes": "Notes",
+  "sufraRecipeFavoriteField": "Favourite",
+  "sufraRecipeFromWho": "Whose it is",
+  "sufraRecipeFromWhoHint": "e.g. my aunt",
+  "sufraFavorite": "Make it a favourite",
+  "sufraUnfavorite": "Remove from favourites",
+  "sufraArchiveRecipe": "Put the dish away",
+  "sufraUnarchiveRecipe": "Bring the dish back",
+  "sufraDuplicateRecipe": "Copy the dish",
+  "sufraCopySuffix": "{name} (copy)",
+  "@sufraCopySuffix": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeAdded": "Added {name}",
+  "@sufraRecipeAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeUpdated": "Updated {name}",
+  "@sufraRecipeUpdated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeDeleted": "Deleted {name}",
+  "@sufraRecipeDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeDuplicated": "Copied {name}",
+  "@sufraRecipeDuplicated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeGone": "This dish is not here any more",
+  "sufraRecipesCount": "{count, plural, =0{No dishes} =1{1 dish} other{{count} dishes}}",
+  "@sufraRecipesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraIngredientsTitle": "Ingredients",
+  "sufraAddIngredient": "Add an ingredient",
+  "sufraEditIngredient": "Edit the ingredient",
+  "sufraIngredientName": "Ingredient",
+  "sufraIngredientNameHint": "e.g. yoghurt",
+  "sufraIngredientOptional": "The dish works without it",
+  "sufraNoIngredients": "You have not written any ingredients for this dish yet",
+  "sufraStepsTitle": "The method",
+  "sufraNoSteps": "No method written",
+  "sufraStepNumber": "Step {number}",
+  "@sufraStepNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraPhotosTitle": "Photos",
+  "sufraAddPhoto": "Add a photo",
+  "sufraRemovePhoto": "Remove the photo",
+  "sufraPhotoAdded": "Photo added",
+  "sufraPhotoRemoved": "Photo removed",
+  "sufraPhotoFailed": "I could not bring the photo in",
+  "sufraPhotoTooBig": "That photo is too big",
+  "sufraPhotoWrongKind": "That has to be a picture",
+  "sufraPhotoMissing": "The photo is gone",
+  "sufraPhotoOf": "Photo of {name}",
+  "@sufraPhotoOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCookNowTitle": "Ready to cook now",
+  "sufraNearlyTitle": "Nearly there",
+  "sufraUnsureTitle": "Needs a word from you",
+  "sufraHeldTitle": "Waiting a while",
+  "sufraBlockedTitle": "Not today",
+  "sufraMissingTitle": "What is missing",
+  "sufraUnsureNote": "I am not putting it among the dishes you can cook, because I honestly cannot tell whether there is enough. Clear it up and it comes back.",
+  "sufraFixUnit": "Write it in the same unit",
+  "sufraFixAmount": "Say how much there is",
+  "sufraMakeAlias": "Treat it as “{name}”",
+  "@sufraMakeAlias": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraAliasAdded": "“{word}” now means “{name}”",
+  "@sufraAliasAdded": {
+    "placeholders": {
+      "word": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraTonightChoicesTitle": "For today",
+  "sufraClearChoices": "Clear the choices",
+  "sufraAnyPeople": "As usual",
+  "sufraAnyTime": "No limit",
+  "sufraPeopleCount": "{count, plural, =1{1 person} other{{count} people}}",
+  "@sufraPeopleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraThingsCount": "{count, plural, =0{nothing} =1{1 thing} other{{count} things}}",
+  "@sufraThingsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraCookedToast": "Logged “{name}”",
+  "@sufraCookedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCookedAndTook": "Logged “{name}” and took off what I could work out",
+  "@sufraCookedAndTook": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraTagFilter": "Tags",
+  "sufraAllTags": "All",
+  "sufraAddRule": "Add a constraint",
+  "sufraEditRule": "Edit the constraint",
+  "sufraRuleKindField": "Kind of constraint",
+  "sufraRuleTerm": "The word",
+  "sufraRuleTermHint": "e.g. peanuts",
+  "sufraRuleWho": "Who it is for",
+  "sufraRuleWhoHint": "e.g. Ahmad",
+  "sufraRuleNote": "Note",
+  "sufraRuleActive": "Switched on",
+  "sufraRuleOff": "Switched off",
+  "sufraRuleAdded": "Constraint added",
+  "sufraRuleUpdated": "Constraint updated",
+  "sufraRuleDeleted": "Constraint deleted",
+  "sufraRulesEmptyTitle": "No constraints",
+  "sufraRulesEmptyBody": "Write an allergy, or something you would rather avoid, and I will hold a dish back and say why.",
+  "sufraRuleHardNote": "An allergy and a special request stop a dish outright. “I would rather avoid” pushes it down and says why. “I prefer it” only moves it up.",
+  "sufraSettingsSectionTitle": "Kitchen settings",
+  "sufraExpiryWarningLabel": "Warn me before the expiry date",
+  "sufraDaysBefore": "{count, plural, =0{on the day} =1{a day} other{{count} days}}",
+  "@sufraDaysBefore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraDefaultPeopleLabel": "How many usually eat",
+  "sufraNearlyLimitLabel": "Call a dish nearly there when it is missing up to",
+  "sufraSettingsSaved": "Settings saved",
+  "sufraHistoryEmptyTitle": "Nothing logged yet",
+  "sufraHistoryEmptyBody": "Every time you tap “I cooked it” it lands here, and that is how I know what not to repeat on you.",
+  "sufraCookFreeText": "Log a dish without a recipe",
+  "sufraFreeTextName": "What did you cook",
+  "sufraFreeTextHint": "e.g. eggs and makdous",
+  "sufraCookedDay": "Day",
+  "sufraDeleteCooked": "Delete the entry",
+  "sufraCookedDeleted": "Deleted the entry for “{name}”",
+  "@sufraCookedDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCookedTimes": "{count, plural, =1{Cooked once} other{Cooked {count} times}}",
+  "@sufraCookedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraSearchPantry": "The house pantry",
+  "sufraSearchRecipes": "Dishes",
+  "sufraSearchIngredients": "Ingredients",
+  "sufraSearchCooked": "What we cooked",
+  "sufraSearchRules": "Kitchen constraints",
+  "sufraCouldNotDeductNoUnit": "I could not take it off: your “{name}” has no unit written on it. Write the unit, or leave the unit off what you used.",
+  "@sufraCouldNotDeductNoUnit": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraNoPhotos": "No photos on this dish yet"
 }

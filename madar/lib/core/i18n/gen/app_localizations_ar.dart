@@ -26530,4 +26530,573 @@ class L10nAr extends L10n {
     );
     return '$_temp0';
   }
+
+  @override
+  String get sufraHubCardTitle => 'سفرة اليوم';
+
+  @override
+  String get sufraHubOpen => 'فتحي السفرة';
+
+  @override
+  String get sufraToolPantryHint => 'كل إشي محطوط بالبيت، وشو قلّ أو خلص';
+
+  @override
+  String get sufraToolRecipesHint => 'طبخاتك بالمكونات والطريقة';
+
+  @override
+  String get sufraToolRulesHint => 'الحساسية، اللي بتبعدي عنه، والطلبات الخاصة';
+
+  @override
+  String get sufraToolHistoryHint => 'اللي طبختيه ومتى';
+
+  @override
+  String get sufraToolTonightHint => 'شو بتقدري تطبخي من اللي بالبيت';
+
+  @override
+  String get sufraAttentionTitle => 'لازم تنتبهي';
+
+  @override
+  String get sufraAttentionNone => 'كل إشي بالخزانة تمام';
+
+  @override
+  String sufraAttentionGroup(String label, String names) {
+    return '$label: $names';
+  }
+
+  @override
+  String get sufraAddPantryItem => 'ضيفي إشي للبيت';
+
+  @override
+  String get sufraEditPantryItem => 'عدّلي الإشي';
+
+  @override
+  String get sufraItemName => 'الاسم';
+
+  @override
+  String get sufraItemNameHint => 'زي: رز';
+
+  @override
+  String get sufraItemAliases => 'أسماء ثانية لنفس الإشي';
+
+  @override
+  String get sufraItemQuantity => 'الكمية';
+
+  @override
+  String get sufraItemUnit => 'العيار';
+
+  @override
+  String get sufraItemUnitHint => 'كيلو، علبة، كوب…';
+
+  @override
+  String get sufraItemPlace => 'وين محطوطة';
+
+  @override
+  String get sufraItemPlaceHint => 'خزانة المونة، الفريزر…';
+
+  @override
+  String get sufraItemExpiry => 'تاريخ الانتهاء';
+
+  @override
+  String get sufraItemLowAt => 'اعتبريها قلّت لما تنزل عن';
+
+  @override
+  String get sufraItemLowNow => 'قلّت';
+
+  @override
+  String get sufraItemStaple => 'لازم تكون دايمًا بالبيت';
+
+  @override
+  String get sufraItemNote => 'ملاحظة';
+
+  @override
+  String get sufraNoPlace => 'بدون مكان';
+
+  @override
+  String sufraPantryCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشي بالبيت',
+      many: '$count إشيًا بالبيت',
+      few: '$count إشيا بالبيت',
+      two: 'إشيين بالبيت',
+      one: 'إشي واحد بالبيت',
+      zero: 'ما في إشي بالبيت',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraUsedSome => 'استعملت منها';
+
+  @override
+  String get sufraUsedHowMuch => 'قديش استعملتي';
+
+  @override
+  String sufraCouldNotDeductUnit(String name, String haveUnit) {
+    return 'ما قدرت أنقّص الكمية: «$name» عندك بـ$haveUnit، وأنا ما بحوّل عيار لعيار إلا إذا كان أكيد. اكتبي الكمية بنفس العيار وبنقّصها.';
+  }
+
+  @override
+  String sufraCouldNotDeductNoAmount(String name) {
+    return 'ما قدرت أنقّص الكمية: ما كتبتي قديش في من «$name». اكتبي الكمية وبنقّصها.';
+  }
+
+  @override
+  String get sufraMarkOut => 'خلصت';
+
+  @override
+  String get sufraMarkLow => 'علّميها إنها قلّت';
+
+  @override
+  String get sufraUnmarkLow => 'رجعت تمام';
+
+  @override
+  String get sufraArchiveItem => 'شيليها من القائمة';
+
+  @override
+  String get sufraUnarchiveItem => 'رجّعيها للقائمة';
+
+  @override
+  String get sufraArchivedLabel => 'مشيّلة';
+
+  @override
+  String get sufraShowArchived => 'ورّيني المشيّلة';
+
+  @override
+  String get sufraDelete => 'احذفي';
+
+  @override
+  String sufraItemAdded(String name) {
+    return 'انضافت $name';
+  }
+
+  @override
+  String sufraItemUpdated(String name) {
+    return 'تعدّلت $name';
+  }
+
+  @override
+  String sufraItemDeleted(String name) {
+    return 'انحذفت $name';
+  }
+
+  @override
+  String sufraItemArchived(String name) {
+    return 'انشالت $name';
+  }
+
+  @override
+  String sufraQuantityChanged(String name) {
+    return 'تغيّرت كمية $name';
+  }
+
+  @override
+  String get sufraLowToList => 'حطّي الناقص بقائمة البيت';
+
+  @override
+  String get sufraOpenList => 'فتحي القائمة';
+
+  @override
+  String get sufraAddRecipe => 'ضيفي طبخة';
+
+  @override
+  String get sufraEditRecipe => 'عدّلي الطبخة';
+
+  @override
+  String get sufraRecipeName => 'اسم الطبخة';
+
+  @override
+  String get sufraRecipeNameHint => 'زي: ملوخية';
+
+  @override
+  String get sufraRecipeServings => 'تكفي كم شخص';
+
+  @override
+  String get sufraRecipeMinutes => 'قديش بتاخد وقت';
+
+  @override
+  String get sufraRecipeMinutesUnit => 'دقيقة';
+
+  @override
+  String get sufraRecipeTags => 'وسوم';
+
+  @override
+  String get sufraRecipeSteps => 'طريقة التحضير';
+
+  @override
+  String get sufraRecipeStepsHint => 'خطوة بكل سطر';
+
+  @override
+  String get sufraRecipeNotes => 'ملاحظات';
+
+  @override
+  String get sufraRecipeFavoriteField => 'مفضلة';
+
+  @override
+  String get sufraRecipeFromWho => 'من مين';
+
+  @override
+  String get sufraRecipeFromWhoHint => 'زي: خالتي أم محمد';
+
+  @override
+  String get sufraFavorite => 'خليها مفضلة';
+
+  @override
+  String get sufraUnfavorite => 'شيليها من المفضلة';
+
+  @override
+  String get sufraArchiveRecipe => 'شيلي الطبخة من القائمة';
+
+  @override
+  String get sufraUnarchiveRecipe => 'رجّعي الطبخة';
+
+  @override
+  String get sufraDuplicateRecipe => 'انسخي الطبخة';
+
+  @override
+  String sufraCopySuffix(String name) {
+    return '$name (نسخة)';
+  }
+
+  @override
+  String sufraRecipeAdded(String name) {
+    return 'انضافت $name';
+  }
+
+  @override
+  String sufraRecipeUpdated(String name) {
+    return 'تعدّلت $name';
+  }
+
+  @override
+  String sufraRecipeDeleted(String name) {
+    return 'انحذفت $name';
+  }
+
+  @override
+  String sufraRecipeDuplicated(String name) {
+    return 'انتسخت $name';
+  }
+
+  @override
+  String get sufraRecipeGone => 'الطبخة هاي مش موجودة';
+
+  @override
+  String sufraRecipesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count طبخة',
+      many: '$count طبخة',
+      few: '$count طبخات',
+      two: 'طبختين',
+      one: 'طبخة واحدة',
+      zero: 'ما في طبخات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraIngredientsTitle => 'المكونات';
+
+  @override
+  String get sufraAddIngredient => 'ضيفي مكوّن';
+
+  @override
+  String get sufraEditIngredient => 'عدّلي المكوّن';
+
+  @override
+  String get sufraIngredientName => 'المكوّن';
+
+  @override
+  String get sufraIngredientNameHint => 'زي: لبن';
+
+  @override
+  String get sufraIngredientOptional => 'الطبخة تنفع بدونها';
+
+  @override
+  String get sufraNoIngredients => 'ما كتبتي مكونات لهاي الطبخة لسا';
+
+  @override
+  String get sufraStepsTitle => 'الطريقة';
+
+  @override
+  String get sufraNoSteps => 'ما في طريقة مكتوبة';
+
+  @override
+  String sufraStepNumber(String number) {
+    return 'خطوة $number';
+  }
+
+  @override
+  String get sufraPhotosTitle => 'الصور';
+
+  @override
+  String get sufraAddPhoto => 'ضيفي صورة';
+
+  @override
+  String get sufraRemovePhoto => 'شيلي الصورة';
+
+  @override
+  String get sufraPhotoAdded => 'انضافت الصورة';
+
+  @override
+  String get sufraPhotoRemoved => 'انشالت الصورة';
+
+  @override
+  String get sufraPhotoFailed => 'ما قدرت أجيب الصورة';
+
+  @override
+  String get sufraPhotoTooBig => 'الصورة كبيرة كثير';
+
+  @override
+  String get sufraPhotoWrongKind => 'لازم تكون صورة';
+
+  @override
+  String get sufraPhotoMissing => 'الصورة مش موجودة';
+
+  @override
+  String sufraPhotoOf(String name) {
+    return 'صورة $name';
+  }
+
+  @override
+  String get sufraCookNowTitle => 'جاهزة تنطبخ هلأ';
+
+  @override
+  String get sufraNearlyTitle => 'قريبة';
+
+  @override
+  String get sufraUnsureTitle => 'بدها توضيح منك';
+
+  @override
+  String get sufraHeldTitle => 'مستنيّة شوي';
+
+  @override
+  String get sufraBlockedTitle => 'ممنوعة اليوم';
+
+  @override
+  String get sufraMissingTitle => 'الناقص';
+
+  @override
+  String get sufraUnsureNote =>
+      'ما بحطها بين اللي بتقدري تطبخيها، لأني فعليًا ما بعرف إذا بتكفي. وضّحيلي وبترجع.';
+
+  @override
+  String get sufraFixUnit => 'اكتبيها بنفس العيار';
+
+  @override
+  String get sufraFixAmount => 'اكتبي قديش في منها';
+
+  @override
+  String sufraMakeAlias(String name) {
+    return 'خليها نفس «$name»';
+  }
+
+  @override
+  String sufraAliasAdded(String word, String name) {
+    return '«$word» صارت نفس «$name»';
+  }
+
+  @override
+  String get sufraTonightChoicesTitle => 'لهاد اليوم';
+
+  @override
+  String get sufraClearChoices => 'صفّري الاختيارات';
+
+  @override
+  String get sufraAnyPeople => 'زي العادة';
+
+  @override
+  String get sufraAnyTime => 'بلا حد';
+
+  @override
+  String sufraPeopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شخص',
+      many: '$count شخصًا',
+      few: '$count أشخاص',
+      two: 'شخصين',
+      one: 'شخص واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraThingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشي',
+      many: '$count إشيًا',
+      few: '$count إشيا',
+      two: 'إشيين',
+      one: 'إشي واحد',
+      zero: 'ولا إشي',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraCookedToast(String name) {
+    return 'سجّلت «$name»';
+  }
+
+  @override
+  String sufraCookedAndTook(String name) {
+    return 'سجّلت «$name» ونقّصت اللي قدرت أحسبه';
+  }
+
+  @override
+  String get sufraTagFilter => 'الوسوم';
+
+  @override
+  String get sufraAllTags => 'الكل';
+
+  @override
+  String get sufraAddRule => 'ضيفي محدد';
+
+  @override
+  String get sufraEditRule => 'عدّلي المحدد';
+
+  @override
+  String get sufraRuleKindField => 'نوع المحدد';
+
+  @override
+  String get sufraRuleTerm => 'الكلمة';
+
+  @override
+  String get sufraRuleTermHint => 'زي: فول سوداني';
+
+  @override
+  String get sufraRuleWho => 'لمين';
+
+  @override
+  String get sufraRuleWhoHint => 'زي: أحمد';
+
+  @override
+  String get sufraRuleNote => 'ملاحظة';
+
+  @override
+  String get sufraRuleActive => 'مشغّل';
+
+  @override
+  String get sufraRuleOff => 'مطفي';
+
+  @override
+  String get sufraRuleAdded => 'انضاف المحدد';
+
+  @override
+  String get sufraRuleUpdated => 'تعدّل المحدد';
+
+  @override
+  String get sufraRuleDeleted => 'انحذف المحدد';
+
+  @override
+  String get sufraRulesEmptyTitle => 'ما في محددات';
+
+  @override
+  String get sufraRulesEmptyBody =>
+      'اكتبي حساسية أو إشي بتفضّلي تبعدي عنه، وأنا بوقّف الطبخة اللي فيها وبقولك ليش.';
+
+  @override
+  String get sufraRuleHardNote =>
+      'الحساسية والطلب الخاص بيمنعوا الطبخة خلص. «أفضّل أبعد عنه» بينزّلها تحت وبيقول ليش. «أفضّله» بس بيقدّمها.';
+
+  @override
+  String get sufraSettingsSectionTitle => 'إعدادات السفرة';
+
+  @override
+  String get sufraExpiryWarningLabel => 'نبّهيني قبل تاريخ الانتهاء';
+
+  @override
+  String sufraDaysBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'بـ$count يوم',
+      many: 'بـ$count يومًا',
+      few: 'بـ$count أيام',
+      two: 'بيومين',
+      one: 'بيوم',
+      zero: 'نفس اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraDefaultPeopleLabel => 'كم واحد بياكل عادة';
+
+  @override
+  String get sufraNearlyLimitLabel => 'اعتبري الطبخة قريبة إذا ناقصها لحد';
+
+  @override
+  String get sufraSettingsSaved => 'انحفظت الإعدادات';
+
+  @override
+  String get sufraHistoryEmptyTitle => 'ما في إشي مسجّل';
+
+  @override
+  String get sufraHistoryEmptyBody =>
+      'كل مرة تضغطي «طبختها» بتنزل هون، ومن هون بعرف شو ما بكرّره عليكي.';
+
+  @override
+  String get sufraCookFreeText => 'سجّلي طبخة بدون وصفة';
+
+  @override
+  String get sufraFreeTextName => 'شو طبختي';
+
+  @override
+  String get sufraFreeTextHint => 'زي: بيض ومقدوس';
+
+  @override
+  String get sufraCookedDay => 'يوم';
+
+  @override
+  String get sufraDeleteCooked => 'احذفي السجل';
+
+  @override
+  String sufraCookedDeleted(String name) {
+    return 'انحذف سجل «$name»';
+  }
+
+  @override
+  String sufraCookedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'طبختيها $count مرة',
+      many: 'طبختيها $count مرة',
+      few: 'طبختيها $count مرات',
+      two: 'طبختيها مرتين',
+      one: 'طبختيها مرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraSearchPantry => 'مونة البيت';
+
+  @override
+  String get sufraSearchRecipes => 'طبخات';
+
+  @override
+  String get sufraSearchIngredients => 'مكونات';
+
+  @override
+  String get sufraSearchCooked => 'اللي طبخناه';
+
+  @override
+  String get sufraSearchRules => 'محددات المطبخ';
+
+  @override
+  String sufraCouldNotDeductNoUnit(String name) {
+    return 'ما قدرت أنقّص الكمية: «$name» بالبيت بدون عيار. اكتبي العيار، أو احذفي العيار من اللي استعملتيه.';
+  }
+
+  @override
+  String get sufraNoPhotos => 'ما في صور لهاي الطبخة';
 }

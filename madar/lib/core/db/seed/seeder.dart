@@ -53,12 +53,30 @@ class MadarSeeder {
 
   /// Seeds when this database has not been seeded with [version] yet.
   /// Returns whether anything was done.
+  ///
+  /// An already-seeded database still receives a **world** that a later
+  /// release added – «السفرة», the kitchen (Part 5), arrived after the
+  /// first eight. The planets are the only section treated this way, and
+  /// safely: a built-in world cannot be deleted, only hidden, so adding a
+  /// missing key never brings back something the user threw away. Habits
+  /// and tag options he deleted stay deleted, which is why this is not a
+  /// seed-version bump.
   Future<bool> seedIfNeeded() {
     return db.transaction(() async {
-      if (await _storedVersion() >= version) return false;
+      if (await _storedVersion() >= version) return _addMissingPlanets();
       await seed();
       return true;
     });
+  }
+
+  /// Inserts the built-in planets this database does not have yet (an
+  /// upgrade), keeping every planet the user renamed, recoloured, reordered
+  /// or hid exactly as it is. Returns whether a world was added.
+  Future<bool> _addMissingPlanets() async {
+    final existing = (await db.select(db.planets).get()).map((p) => p.key).toSet();
+    if (MadarDefaults.planets.every((p) => existing.contains(p.key))) return false;
+    await _seedPlanets(lookupL10n(const Locale('ar')), lookupL10n(const Locale('en')));
+    return true;
   }
 
   /// Seeds unconditionally (still only adds what is missing) and stamps the

@@ -317,6 +317,32 @@ abstract final class AppRoutes {
   /// Location of the tracker or list [moduleId].
   static String moduleOf(String moduleId) => '/modules/module/${Uri.encodeComponent(moduleId)}';
 
+  // Part 5 – «السفرة», the kitchen world (hers). Its own page is its hub
+  // (`planetOf('sufra')`); every screen below opens from it, from a search
+  // result or from a deep link. Nothing here reads Health or Money.
+
+  /// What is in the house: the pantry, worst first.
+  static const String sufraPantry = '/sufra/pantry';
+
+  /// Her dishes.
+  static const String sufraRecipes = '/sufra/recipes';
+
+  /// One dish: its ingredients against the house, its method, its photos
+  /// (`/sufra/recipe/<id>`).
+  static const String sufraRecipe = '/sufra/recipe/:id';
+
+  /// Location of the dish [recipeId].
+  static String sufraRecipeOf(String recipeId) => '/sufra/recipe/${Uri.encodeComponent(recipeId)}';
+
+  /// «شو نطبخ اليوم»: what she can cook now, and what is nearly there.
+  static const String sufraTonight = '/sufra/tonight';
+
+  /// Her standing constraints and the no-repeat window.
+  static const String sufraRules = '/sufra/rules';
+
+  /// The cooked log «بدون تكرار» reads.
+  static const String sufraHistory = '/sufra/history';
+
   // Part 3b – the shared tick lists. A list belongs to a host record, so
   // its lists open from that record's own screen; one list has a location
   // of its own (its id is unique), which is what search results and the

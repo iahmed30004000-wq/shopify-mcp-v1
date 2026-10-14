@@ -1201,10 +1201,135 @@ abstract final class BuiltInSearchSources {
       },
     ),
 
+    // ------------------------------------------- «السفرة» · her kitchen
+    // Part 5: her own words only – what she called the thing, her other
+    // names for it, where she keeps it, her note. Not the quantity she has
+    // left (it changes every day and is on the pantry screen) and nothing
+    // from Health: the kitchen's rows sit on the kitchen's own world.
+    _rows(
+      id: 'pantry_items',
+      planet: 'sufra',
+      icon: Icons.kitchen_outlined,
+      label: 'sufraSearchPantry',
+      table: (r) => r.pantryItems,
+      map: (item, c) => SearchDoc(
+        id: item.id,
+        refTable: 'pantry_items',
+        refId: item.id,
+        title: item.name,
+        subtitle: c.join([
+          ...item.aliases,
+          item.place,
+          if (item.archived) c.l10n.sufraArchivedLabel,
+        ]),
+        body: item.note ?? '',
+        planetKey: 'sufra',
+      ),
+    ),
+    _rows(
+      id: 'recipes',
+      planet: 'sufra',
+      icon: Icons.restaurant_rounded,
+      label: 'sufraSearchRecipes',
+      table: (r) => r.recipes,
+      map: (recipe, c) => SearchDoc(
+        id: recipe.id,
+        refTable: 'recipes',
+        refId: recipe.id,
+        title: recipe.name,
+        subtitle: c.join([
+          ...recipe.tags,
+          recipe.sourceName,
+          if (recipe.archived) c.l10n.sufraArchivedLabel,
+        ]),
+        // Her method and her notes: the words she would search for when
+        // she cannot remember which dish had the garlic in it.
+        body: _lines([...recipe.steps, recipe.notes]),
+        planetKey: 'sufra',
+      ),
+    ),
+    SearchSource(
+      id: 'recipe_ingredients',
+      planetKey: 'sufra',
+      icon: Icons.eco_outlined,
+      labelKey: 'sufraSearchIngredients',
+      weight: 0.9,
+      tables: const {'recipe_ingredients', 'recipes'},
+      load: (c) async {
+        // The dish names cost the whole recipes table, so ask whether
+        // there is a single ingredient line first (Part 3b's lesson: an
+        // empty feature must cost nothing on the first query).
+        if (!await _hasAny(c.repos.recipeIngredients)) return const [];
+        final dishes = {for (final r in await c.repos.recipes.getAll()) r.id: r.name};
+        return c.mapRows(
+          c.repos.recipeIngredients,
+          (line) => SearchDoc(
+            id: line.id,
+            refTable: 'recipe_ingredients',
+            refId: line.id,
+            title: line.name,
+            subtitle: c.join([
+              dishes[line.recipeId],
+              _portion(c, line.quantity, line.unit),
+              if (line.optional) c.l10n.sufraOptionalIngredient,
+            ]),
+            body: line.note ?? '',
+            planetKey: 'sufra',
+            extra: {'recipeId': line.recipeId},
+          ),
+        );
+      },
+    ),
+    _rows(
+      id: 'cooked_meals',
+      planet: 'sufra',
+      icon: Icons.local_fire_department_rounded,
+      label: 'sufraSearchCooked',
+      weight: 0.8,
+      table: (r) => r.cookedMeals,
+      map: (meal, c) => SearchDoc(
+        id: meal.id,
+        refTable: 'cooked_meals',
+        refId: meal.id,
+        // The dish's name as it was on the day she cooked it.
+        title: meal.name,
+        subtitle: c.join([c.date(meal.day), if (meal.overrode) c.l10n.sufraCookedAnyway]),
+        body: meal.note ?? '',
+        date: meal.day,
+        planetKey: 'sufra',
+        extra: {'recipeId': ?meal.recipeId},
+      ),
+    ),
+    _rows(
+      id: 'kitchen_rules',
+      planet: 'sufra',
+      icon: Icons.rule_rounded,
+      label: 'sufraSearchRules',
+      table: (r) => r.kitchenRules,
+      map: (rule, c) => SearchDoc(
+        id: rule.id,
+        refTable: 'kitchen_rules',
+        refId: rule.id,
+        // Her word, and who it is for – never a diagnosis.
+        title: rule.term,
+        subtitle: c.join([_ruleKind(c.l10n, rule.kind), rule.who, if (!rule.active) c.l10n.sufraRuleOff]),
+        body: rule.note ?? '',
+        planetKey: 'sufra',
+      ),
+    ),
+
     // ------------------------------------------------- custom modules
     CustomModuleSearch.modules(),
     CustomModuleSearch.entries(),
   ];
+
+  /// What one of her kitchen constraints is called.
+  static String _ruleKind(L10n l, KitchenRuleKind kind) => switch (kind) {
+    KitchenRuleKind.allergy => l.sufraRuleAllergy,
+    KitchenRuleKind.avoid => l.sufraRuleAvoid,
+    KitchenRuleKind.prefer => l.sufraRulePrefer,
+    KitchenRuleKind.request => l.sufraRuleRequest,
+  };
 
   /// The planet a list belongs to – its host's (an unknown host is one of
   /// his own things: `custom`).

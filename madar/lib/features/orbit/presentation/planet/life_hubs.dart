@@ -12,6 +12,7 @@ import '../../../../core/routing/life_route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../body/body.dart' show BodyTab, BodyTodayCard;
 import '../../../nutrition/presentation/nutrition_ui.dart' show NutritionTodayCard;
+import '../../../sufra/presentation/sufra_ui.dart' show SufraTodayCard;
 import '../../../custom_modules/custom_modules.dart' show CustomModulesCard, customPlanetModulesProvider;
 import '../../../family/family.dart' show FamilyActions, FamilyTodayCard;
 import '../../../growth/growth.dart' show GrowthTodayCard;
@@ -26,7 +27,7 @@ import 'cinema_entry_card.dart';
 /// ([LifeNav]); every part is a [StaggerItem] of the planet page's
 /// entrance.
 abstract final class LifeHubs {
-  static const Set<String> keys = {'work', 'family', 'travel', 'growth', 'body'};
+  static const Set<String> keys = {'work', 'family', 'travel', 'growth', 'body', 'sufra'};
 
   /// Whether [planetKey] has a life hub.
   static bool has(String planetKey) => keys.contains(planetKey);
@@ -37,6 +38,7 @@ abstract final class LifeHubs {
     'family' => FamilyHub(firstIndex: firstIndex),
     'travel' => TravelHub(firstIndex: firstIndex),
     'growth' => GrowthHub(firstIndex: firstIndex),
+    'sufra' => SufraHub(firstIndex: firstIndex),
     _ => BodyHub(firstIndex: firstIndex),
   };
 }
@@ -231,6 +233,56 @@ class BodyHub extends StatelessWidget {
               l.bodyTabAvoid,
               l.lifeHubToolAvoidHint,
               () => LifeNav.body(context, tab: BodyTab.avoid),
+            ),
+          ],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// «السفرة» (Part 5), hers: what needs attention in the house and the one
+/// dish Madar can honestly suggest tonight, then the kitchen's four
+/// screens. Nothing on this world reads Health or Money – a kitchen screen
+/// stays a kitchen screen.
+class SufraHub extends StatelessWidget {
+  const SufraHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(
+        SufraTodayCard(
+          onOpen: () => LifeNav.sufraTonight(context),
+          onOpenPantry: () => LifeNav.sufraPantry(context),
+        ),
+      )
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            (
+              Icons.kitchen_outlined,
+              l.sufraPantryTitle,
+              l.sufraToolPantryHint,
+              () => LifeNav.sufraPantry(context),
+            ),
+            (
+              Icons.menu_book_rounded,
+              l.sufraRecipesTitle,
+              l.sufraToolRecipesHint,
+              () => LifeNav.sufraRecipes(context),
+            ),
+            (Icons.rule_rounded, l.sufraConstraintsTitle, l.sufraToolRulesHint, () => LifeNav.sufraRules(context)),
+            (
+              Icons.history_rounded,
+              l.sufraHistoryTitle,
+              l.sufraToolHistoryHint,
+              () => LifeNav.sufraHistory(context),
             ),
           ],
         ),

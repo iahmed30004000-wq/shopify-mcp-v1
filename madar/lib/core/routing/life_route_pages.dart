@@ -13,6 +13,8 @@ import '../../features/lists/lists.dart'
 import '../../features/money/budget/presentation/shopping_post_bar.dart' show ShoppingPostBar;
 import '../../features/nutrition/presentation/nutrition_ui.dart'
     show ConditionsScreen, FoodLibraryScreen, MealPlanScreen, NutritionInsightsScreen;
+import '../../features/sufra/presentation/sufra_ui.dart'
+    show CookedHistoryScreen, KitchenRulesScreen, PantryScreen, RecipeScreen, RecipesScreen, TonightScreen;
 import '../../features/travel/travel.dart' show PackingTemplateScreen, TravelScreen, TravelTab, TripScreen;
 import '../../features/work/work.dart' show BoardScreen, ProjectScreen, ProjectsScreen, WorkRoutes, WorkScreen;
 import '../settings/app_settings.dart';
@@ -70,6 +72,20 @@ abstract final class LifeNav {
 
   static void foodInsights(BuildContext context) => unawaited(context.push<void>(AppRoutes.foodInsights));
 
+  /// «السفرة» (Part 5) – her kitchen.
+  static void sufraTonight(BuildContext context) => unawaited(context.push<void>(AppRoutes.sufraTonight));
+
+  static void sufraPantry(BuildContext context) => unawaited(context.push<void>(AppRoutes.sufraPantry));
+
+  static void sufraRecipes(BuildContext context) => unawaited(context.push<void>(AppRoutes.sufraRecipes));
+
+  static void sufraRecipe(BuildContext context, String recipeId) =>
+      unawaited(context.push<void>(AppRoutes.sufraRecipeOf(recipeId)));
+
+  static void sufraRules(BuildContext context) => unawaited(context.push<void>(AppRoutes.sufraRules));
+
+  static void sufraHistory(BuildContext context) => unawaited(context.push<void>(AppRoutes.sufraHistory));
+
   static void modules(BuildContext context) => unawaited(context.push<void>(AppRoutes.modules));
 
   static void module(BuildContext context, String moduleId) =>
@@ -105,6 +121,10 @@ abstract final class LifeNav {
 /// | foods | `/food/library` | same |
 /// | meal_plans, meal_slots, meal_slot_foods | `/food/plan` | same |
 /// | food_rules | `/food/rules` | same |
+/// | pantry_items | `/sufra/pantry` | same |
+/// | recipes, recipe_ingredients (`recipeId`) | `/sufra/recipe/<id>` | `/sufra/recipes` |
+/// | cooked_meals | `/sufra/history` | same |
+/// | kitchen_rules | `/sufra/rules` | same |
 /// | custom_modules, custom_entries (`moduleId`) | `/modules/module/<id>` | `/modules` |
 /// | record_lists | `/list/<id>` | its host's lists (`hostTable`/`hostId`), else `/lists` |
 /// | record_list_items (`listId`) | `/list/<listId>` | `/lists` |
@@ -141,6 +161,11 @@ abstract final class LifeRecordLinks {
     'custom_entries',
     'record_lists',
     'record_list_items',
+    'pantry_items',
+    'recipes',
+    'recipe_ingredients',
+    'cooked_meals',
+    'kitchen_rules',
   };
 
   static String? locationOf(String? refTable, String? refId, {Map<String, Object?> extra = const {}}) {
@@ -178,6 +203,14 @@ abstract final class LifeRecordLinks {
       'foods' => AppRoutes.foodLibrary,
       'meal_plans' || 'meal_slots' || 'meal_slot_foods' => AppRoutes.foodPlan,
       'food_rules' => AppRoutes.foodRules,
+      // Part 5 – «السفرة». An item of the house opens the pantry (its own
+      // screen is the one list it lives in); a dish opens itself, and one
+      // of its ingredient lines opens the dish it belongs to.
+      'pantry_items' => AppRoutes.sufraPantry,
+      'recipes' => either(id, AppRoutes.sufraRecipeOf, AppRoutes.sufraRecipes),
+      'recipe_ingredients' => either(of('recipeId'), AppRoutes.sufraRecipeOf, AppRoutes.sufraRecipes),
+      'cooked_meals' => AppRoutes.sufraHistory,
+      'kitchen_rules' => AppRoutes.sufraRules,
       'custom_modules' => either(id, AppRoutes.moduleOf, AppRoutes.modules),
       'custom_entries' => either(of('moduleId'), AppRoutes.moduleOf, AppRoutes.modules),
       // A list opens itself; without its id, its host's lists (the search
@@ -224,6 +257,58 @@ T _named<T extends Enum>(List<T> values, String? name, T fallback) {
     if (v.name == name) return v;
   }
   return fallback;
+}
+
+/// `/sufra/tonight` – «شو نطبخ اليوم», the heart of her kitchen.
+class SufraTonightRoutePage extends ConsumerWidget {
+  const SufraTonightRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => TonightScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/sufra/pantry` – what is in the house.
+class SufraPantryRoutePage extends ConsumerWidget {
+  const SufraPantryRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => PantryScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/sufra/recipes` – her dishes.
+class SufraRecipesRoutePage extends ConsumerWidget {
+  const SufraRecipesRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => RecipesScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/sufra/recipe/:id` (a dish that is gone shows the screen's own
+/// "not here any more").
+class SufraRecipeRoutePage extends ConsumerWidget {
+  const SufraRecipeRoutePage({super.key, required this.recipeId});
+
+  final String recipeId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) =>
+      RecipeScreen(key: ValueKey('recipe:$recipeId'), recipeId: recipeId, animateBackdrop: !_saver(ref));
+}
+
+/// `/sufra/rules` – her constraints and the kitchen's few settings.
+class SufraRulesRoutePage extends ConsumerWidget {
+  const SufraRulesRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => KitchenRulesScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/sufra/history` – the cooked log «بدون تكرار» reads.
+class SufraHistoryRoutePage extends ConsumerWidget {
+  const SufraHistoryRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => CookedHistoryScreen(animateBackdrop: !_saver(ref));
 }
 
 /// `/work` (the Work screens have no backdrop switch of their own).

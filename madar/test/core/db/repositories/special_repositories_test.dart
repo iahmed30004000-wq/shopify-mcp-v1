@@ -176,6 +176,6 @@ void main() {
     addTearDown(container.dispose);
     final r = container.read(repositoriesProvider);
     expect(r.db, same(db));
-    expect(await r.planets.count(), 8);
+    expect(await r.planets.count(), 9);
   });
 }

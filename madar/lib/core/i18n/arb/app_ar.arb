@@ -24171,5 +24171,354 @@
         "type": "int"
       }
     }
-  }
+  },
+  "sufraHubCardTitle": "سفرة اليوم",
+  "sufraHubOpen": "فتحي السفرة",
+  "sufraToolPantryHint": "كل إشي محطوط بالبيت، وشو قلّ أو خلص",
+  "sufraToolRecipesHint": "طبخاتك بالمكونات والطريقة",
+  "sufraToolRulesHint": "الحساسية، اللي بتبعدي عنه، والطلبات الخاصة",
+  "sufraToolHistoryHint": "اللي طبختيه ومتى",
+  "sufraToolTonightHint": "شو بتقدري تطبخي من اللي بالبيت",
+  "sufraAttentionTitle": "لازم تنتبهي",
+  "sufraAttentionNone": "كل إشي بالخزانة تمام",
+  "sufraAttentionGroup": "{label}: {names}",
+  "@sufraAttentionGroup": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraAddPantryItem": "ضيفي إشي للبيت",
+  "sufraEditPantryItem": "عدّلي الإشي",
+  "sufraItemName": "الاسم",
+  "sufraItemNameHint": "زي: رز",
+  "sufraItemAliases": "أسماء ثانية لنفس الإشي",
+  "sufraItemQuantity": "الكمية",
+  "sufraItemUnit": "العيار",
+  "sufraItemUnitHint": "كيلو، علبة، كوب…",
+  "sufraItemPlace": "وين محطوطة",
+  "sufraItemPlaceHint": "خزانة المونة، الفريزر…",
+  "sufraItemExpiry": "تاريخ الانتهاء",
+  "sufraItemLowAt": "اعتبريها قلّت لما تنزل عن",
+  "sufraItemLowNow": "قلّت",
+  "sufraItemStaple": "لازم تكون دايمًا بالبيت",
+  "sufraItemNote": "ملاحظة",
+  "sufraNoPlace": "بدون مكان",
+  "sufraPantryCount": "{count, plural, =0{ما في إشي بالبيت} =1{إشي واحد بالبيت} =2{إشيين بالبيت} few{{count} إشيا بالبيت} many{{count} إشيًا بالبيت} other{{count} إشي بالبيت}}",
+  "@sufraPantryCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraUsedSome": "استعملت منها",
+  "sufraUsedHowMuch": "قديش استعملتي",
+  "sufraCouldNotDeductUnit": "ما قدرت أنقّص الكمية: «{name}» عندك بـ{haveUnit}، وأنا ما بحوّل عيار لعيار إلا إذا كان أكيد. اكتبي الكمية بنفس العيار وبنقّصها.",
+  "@sufraCouldNotDeductUnit": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "haveUnit": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCouldNotDeductNoAmount": "ما قدرت أنقّص الكمية: ما كتبتي قديش في من «{name}». اكتبي الكمية وبنقّصها.",
+  "@sufraCouldNotDeductNoAmount": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraMarkOut": "خلصت",
+  "sufraMarkLow": "علّميها إنها قلّت",
+  "sufraUnmarkLow": "رجعت تمام",
+  "sufraArchiveItem": "شيليها من القائمة",
+  "sufraUnarchiveItem": "رجّعيها للقائمة",
+  "sufraArchivedLabel": "مشيّلة",
+  "sufraShowArchived": "ورّيني المشيّلة",
+  "sufraDelete": "احذفي",
+  "sufraItemAdded": "انضافت {name}",
+  "@sufraItemAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraItemUpdated": "تعدّلت {name}",
+  "@sufraItemUpdated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraItemDeleted": "انحذفت {name}",
+  "@sufraItemDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraItemArchived": "انشالت {name}",
+  "@sufraItemArchived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraQuantityChanged": "تغيّرت كمية {name}",
+  "@sufraQuantityChanged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraLowToList": "حطّي الناقص بقائمة البيت",
+  "sufraOpenList": "فتحي القائمة",
+  "sufraAddRecipe": "ضيفي طبخة",
+  "sufraEditRecipe": "عدّلي الطبخة",
+  "sufraRecipeName": "اسم الطبخة",
+  "sufraRecipeNameHint": "زي: ملوخية",
+  "sufraRecipeServings": "تكفي كم شخص",
+  "sufraRecipeMinutes": "قديش بتاخد وقت",
+  "sufraRecipeMinutesUnit": "دقيقة",
+  "sufraRecipeTags": "وسوم",
+  "sufraRecipeSteps": "طريقة التحضير",
+  "sufraRecipeStepsHint": "خطوة بكل سطر",
+  "sufraRecipeNotes": "ملاحظات",
+  "sufraRecipeFavoriteField": "مفضلة",
+  "sufraRecipeFromWho": "من مين",
+  "sufraRecipeFromWhoHint": "زي: خالتي أم محمد",
+  "sufraFavorite": "خليها مفضلة",
+  "sufraUnfavorite": "شيليها من المفضلة",
+  "sufraArchiveRecipe": "شيلي الطبخة من القائمة",
+  "sufraUnarchiveRecipe": "رجّعي الطبخة",
+  "sufraDuplicateRecipe": "انسخي الطبخة",
+  "sufraCopySuffix": "{name} (نسخة)",
+  "@sufraCopySuffix": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeAdded": "انضافت {name}",
+  "@sufraRecipeAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeUpdated": "تعدّلت {name}",
+  "@sufraRecipeUpdated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeDeleted": "انحذفت {name}",
+  "@sufraRecipeDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeDuplicated": "انتسخت {name}",
+  "@sufraRecipeDuplicated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraRecipeGone": "الطبخة هاي مش موجودة",
+  "sufraRecipesCount": "{count, plural, =0{ما في طبخات} =1{طبخة واحدة} =2{طبختين} few{{count} طبخات} many{{count} طبخة} other{{count} طبخة}}",
+  "@sufraRecipesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraIngredientsTitle": "المكونات",
+  "sufraAddIngredient": "ضيفي مكوّن",
+  "sufraEditIngredient": "عدّلي المكوّن",
+  "sufraIngredientName": "المكوّن",
+  "sufraIngredientNameHint": "زي: لبن",
+  "sufraIngredientOptional": "الطبخة تنفع بدونها",
+  "sufraNoIngredients": "ما كتبتي مكونات لهاي الطبخة لسا",
+  "sufraStepsTitle": "الطريقة",
+  "sufraNoSteps": "ما في طريقة مكتوبة",
+  "sufraStepNumber": "خطوة {number}",
+  "@sufraStepNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraPhotosTitle": "الصور",
+  "sufraAddPhoto": "ضيفي صورة",
+  "sufraRemovePhoto": "شيلي الصورة",
+  "sufraPhotoAdded": "انضافت الصورة",
+  "sufraPhotoRemoved": "انشالت الصورة",
+  "sufraPhotoFailed": "ما قدرت أجيب الصورة",
+  "sufraPhotoTooBig": "الصورة كبيرة كثير",
+  "sufraPhotoWrongKind": "لازم تكون صورة",
+  "sufraPhotoMissing": "الصورة مش موجودة",
+  "sufraPhotoOf": "صورة {name}",
+  "@sufraPhotoOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCookNowTitle": "جاهزة تنطبخ هلأ",
+  "sufraNearlyTitle": "قريبة",
+  "sufraUnsureTitle": "بدها توضيح منك",
+  "sufraHeldTitle": "مستنيّة شوي",
+  "sufraBlockedTitle": "ممنوعة اليوم",
+  "sufraMissingTitle": "الناقص",
+  "sufraUnsureNote": "ما بحطها بين اللي بتقدري تطبخيها، لأني فعليًا ما بعرف إذا بتكفي. وضّحيلي وبترجع.",
+  "sufraFixUnit": "اكتبيها بنفس العيار",
+  "sufraFixAmount": "اكتبي قديش في منها",
+  "sufraMakeAlias": "خليها نفس «{name}»",
+  "@sufraMakeAlias": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraAliasAdded": "«{word}» صارت نفس «{name}»",
+  "@sufraAliasAdded": {
+    "placeholders": {
+      "word": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraTonightChoicesTitle": "لهاد اليوم",
+  "sufraClearChoices": "صفّري الاختيارات",
+  "sufraAnyPeople": "زي العادة",
+  "sufraAnyTime": "بلا حد",
+  "sufraPeopleCount": "{count, plural, =1{شخص واحد} =2{شخصين} few{{count} أشخاص} many{{count} شخصًا} other{{count} شخص}}",
+  "@sufraPeopleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraThingsCount": "{count, plural, =0{ولا إشي} =1{إشي واحد} =2{إشيين} few{{count} إشيا} many{{count} إشيًا} other{{count} إشي}}",
+  "@sufraThingsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraCookedToast": "سجّلت «{name}»",
+  "@sufraCookedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCookedAndTook": "سجّلت «{name}» ونقّصت اللي قدرت أحسبه",
+  "@sufraCookedAndTook": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraTagFilter": "الوسوم",
+  "sufraAllTags": "الكل",
+  "sufraAddRule": "ضيفي محدد",
+  "sufraEditRule": "عدّلي المحدد",
+  "sufraRuleKindField": "نوع المحدد",
+  "sufraRuleTerm": "الكلمة",
+  "sufraRuleTermHint": "زي: فول سوداني",
+  "sufraRuleWho": "لمين",
+  "sufraRuleWhoHint": "زي: أحمد",
+  "sufraRuleNote": "ملاحظة",
+  "sufraRuleActive": "مشغّل",
+  "sufraRuleOff": "مطفي",
+  "sufraRuleAdded": "انضاف المحدد",
+  "sufraRuleUpdated": "تعدّل المحدد",
+  "sufraRuleDeleted": "انحذف المحدد",
+  "sufraRulesEmptyTitle": "ما في محددات",
+  "sufraRulesEmptyBody": "اكتبي حساسية أو إشي بتفضّلي تبعدي عنه، وأنا بوقّف الطبخة اللي فيها وبقولك ليش.",
+  "sufraRuleHardNote": "الحساسية والطلب الخاص بيمنعوا الطبخة خلص. «أفضّل أبعد عنه» بينزّلها تحت وبيقول ليش. «أفضّله» بس بيقدّمها.",
+  "sufraSettingsSectionTitle": "إعدادات السفرة",
+  "sufraExpiryWarningLabel": "نبّهيني قبل تاريخ الانتهاء",
+  "sufraDaysBefore": "{count, plural, =0{نفس اليوم} =1{بيوم} =2{بيومين} few{بـ{count} أيام} many{بـ{count} يومًا} other{بـ{count} يوم}}",
+  "@sufraDaysBefore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraDefaultPeopleLabel": "كم واحد بياكل عادة",
+  "sufraNearlyLimitLabel": "اعتبري الطبخة قريبة إذا ناقصها لحد",
+  "sufraSettingsSaved": "انحفظت الإعدادات",
+  "sufraHistoryEmptyTitle": "ما في إشي مسجّل",
+  "sufraHistoryEmptyBody": "كل مرة تضغطي «طبختها» بتنزل هون، ومن هون بعرف شو ما بكرّره عليكي.",
+  "sufraCookFreeText": "سجّلي طبخة بدون وصفة",
+  "sufraFreeTextName": "شو طبختي",
+  "sufraFreeTextHint": "زي: بيض ومقدوس",
+  "sufraCookedDay": "يوم",
+  "sufraDeleteCooked": "احذفي السجل",
+  "sufraCookedDeleted": "انحذف سجل «{name}»",
+  "@sufraCookedDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraCookedTimes": "{count, plural, =1{طبختيها مرة} =2{طبختيها مرتين} few{طبختيها {count} مرات} many{طبختيها {count} مرة} other{طبختيها {count} مرة}}",
+  "@sufraCookedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraSearchPantry": "مونة البيت",
+  "sufraSearchRecipes": "طبخات",
+  "sufraSearchIngredients": "مكونات",
+  "sufraSearchCooked": "اللي طبخناه",
+  "sufraSearchRules": "محددات المطبخ",
+  "sufraCouldNotDeductNoUnit": "ما قدرت أنقّص الكمية: «{name}» بالبيت بدون عيار. اكتبي العيار، أو احذفي العيار من اللي استعملتيه.",
+  "@sufraCouldNotDeductNoUnit": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraNoPhotos": "ما في صور لهاي الطبخة"
 }

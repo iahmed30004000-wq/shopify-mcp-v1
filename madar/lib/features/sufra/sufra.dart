@@ -103,6 +103,13 @@
 ///    computed, and offer the alias that fixes it;
 /// 2. always show the reason a dish is held back, with the override;
 /// 3. a missing amount of `null` is shown **without a number**.
+///
+/// The screens themselves are step 2
+/// (`presentation/sufra_ui.dart` – read its doc comment): the world's hub
+/// card, «شو في بالبيت», «طبخاتي», one dish, «شو نطبخ اليوم», «محدداتي»
+/// and «اللي طبخناه». The photos she adds are Madar's own copies
+/// (`data/recipe_photos.dart`): `recipes.photos` holds file names, never a
+/// path into the gallery.
 library;
 
 export 'data/sufra_providers.dart';
@@ -115,4 +122,6 @@ export 'domain/pantry_match.dart';
 export 'domain/recipe.dart';
 export 'domain/shopping_lines.dart';
 export 'domain/sufra_settings.dart';
+export 'data/recipe_photos.dart';
 export 'presentation/sufra_texts.dart';
+export 'presentation/sufra_ui.dart';

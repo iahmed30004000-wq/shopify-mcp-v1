@@ -34,7 +34,7 @@ void main() {
   tearDown(() => db.close());
 
   group('fresh install', () {
-    test('eight dormant planets in seeded order, calm balance, empty radar', () async {
+    test('nine dormant planets in seeded order, calm balance, empty radar', () async {
       final snap = await repo.snapshot();
       expect(snap.planets.map((p) => p.key), [
         'faith',
@@ -45,6 +45,7 @@ void main() {
         'growth',
         'body',
         'travel',
+        'sufra',
       ]);
       expect(snap.planets.map((p) => p.name), [
         'الإيمان',
@@ -55,6 +56,7 @@ void main() {
         'النمو',
         'الجسد',
         'السفر',
+        'السفرة',
       ]);
       expect(snap.planets.every((p) => p.state == PlanetState.dormant), isTrue);
       expect(snap.balanceDormant, isTrue);
