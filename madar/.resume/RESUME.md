@@ -5,7 +5,29 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 
 ## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped: **APK #25**, commit 08e2fd0, CI run 38487850797, artifact madar-apk-25 (id 11861134974).
+- Last shipped: **APK #26**, commit 9ac81f8, CI run 38591194158, artifact madar-apk-26 (id 11911001031).
+- **PLAN.md Part 5 is DONE** (`2a9b4da` engine + `9ac81f8` screens): «السفرة», a ninth planet
+  for his wife - pantry (its own tables, schema **v6**), recipes with photos copied into app
+  storage, the matcher that refuses to guess a conversion, the no-repeat window with her
+  override, her constraints, and the missing becoming a list through Part 3b's engine. The
+  world is dormant until she files a task under it (`{tasks: 1, activity: 0}`), so an unopened
+  kitchen never dims the sky or reaches the Neglect Radar. An existing install gains the world
+  through `_addMissingPlanets()` without re-seeding anything else. The AI bridge's `recipe` and
+  `pantryItem` kinds now apply.
+- Known gaps from Part 5: no «السفرة» section in the AI export summary (deliberate - that
+  would put her pantry into an AI prompt, and it is the owner's call); the diet link to Part 4
+  is still `DietLink.off` with no producer; no kitchen notifications; `useUp`'s silent refusal
+  is answered in the action layer, not the service.
+- **Owner asked (2026-10-14)**: the games become their own planet (decided: it must NOT count
+  in the balance or the Neglect Radar - the app must never scold him for not playing), and he
+  asked about filing daily tasks under a planet, which already exists (tasks carry `planetKey`,
+  the add sheet has a picker, the home row shows the planet's name and colour) - he may just
+  not have noticed it.
+- **Owner's concern (2026-10-14)**: a lot is left. Put to him: ~7 parts for the life side, but
+  51 games is 10-12 APKs on its own. Recommended finishing the life side first and then doing
+  games in batches with no deadline, and asked him to name the games he actually plays - every
+  rules engine is already written and tested, so only the look of each is left.
+- Last shipped before: APK #25, commit 08e2fd0, CI run 38487850797 (Part 3b).
   (#24 was Part 3, a908442; #22 was Part 2, c76a47d; #19 was Part 4's UI, e6cb0fc.)
 - **PLAN.md Part 3b is DONE** (`08e2fd0`): `lib/features/lists/` on schema **v5**
   (`record_lists`, `record_list_items`), addressed by the same `(hostTable, hostId)` pair
