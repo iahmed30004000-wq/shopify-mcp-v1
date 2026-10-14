@@ -41926,6 +41926,594 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'{count, plural, =1{لعبة واحدة إلها نتيجة} =2{لعبتان إلهما نتيجة} few{{count} ألعاب إلها نتيجة} many{{count} لعبةً إلها نتيجة} other{{count} لعبة إلها نتيجة}}'**
   String gamesWorldPlayedGames(int count);
+
+  /// Daily chat: name of a piece kind (Money out)
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف'**
+  String get dayChatKindExpense;
+
+  /// Daily chat: name of a piece kind (Money in)
+  ///
+  /// In ar, this message translates to:
+  /// **'دخل'**
+  String get dayChatKindIncome;
+
+  /// Daily chat: name of a piece kind (A meal)
+  ///
+  /// In ar, this message translates to:
+  /// **'أكل'**
+  String get dayChatKindMeal;
+
+  /// Daily chat: name of a piece kind (A workout)
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين'**
+  String get dayChatKindWorkout;
+
+  /// Daily chat: name of a piece kind (Water)
+  ///
+  /// In ar, this message translates to:
+  /// **'مي'**
+  String get dayChatKindWater;
+
+  /// Daily chat: name of a piece kind (Pain)
+  ///
+  /// In ar, this message translates to:
+  /// **'وجع'**
+  String get dayChatKindPain;
+
+  /// Daily chat: name of a piece kind (A tracked sign)
+  ///
+  /// In ar, this message translates to:
+  /// **'قياس'**
+  String get dayChatKindSign;
+
+  /// Daily chat: name of a piece kind (A prayer)
+  ///
+  /// In ar, this message translates to:
+  /// **'صلاة'**
+  String get dayChatKindPrayer;
+
+  /// Daily chat: name of a piece kind (A finished task)
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة خلّصتها'**
+  String get dayChatKindTaskDone;
+
+  /// Daily chat: name of a piece kind (A task to do)
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة'**
+  String get dayChatKindTaskTodo;
+
+  /// Daily chat: name of a piece kind (Mood)
+  ///
+  /// In ar, this message translates to:
+  /// **'مزاج'**
+  String get dayChatKindMood;
+
+  /// Daily chat: name of a piece kind (A note)
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get dayChatKindNote;
+
+  /// Daily chat: name of a piece kind (A contact)
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصل'**
+  String get dayChatKindContact;
+
+  /// Daily chat: name of a piece kind (An entry in a module he built)
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل بوحدتك'**
+  String get dayChatKindModule;
+
+  /// Daily chat: name of a piece kind (Not understood)
+  ///
+  /// In ar, this message translates to:
+  /// **'ما فهمتها'**
+  String get dayChatKindUnread;
+
+  /// No description provided for @dayChatTitleExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'صرفت {amount} على {note}'**
+  String dayChatTitleExpense(String amount, String note);
+
+  /// No description provided for @dayChatTitleExpenseBare.
+  ///
+  /// In ar, this message translates to:
+  /// **'صرفت {amount}'**
+  String dayChatTitleExpenseBare(String amount);
+
+  /// No description provided for @dayChatTitleIncome.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبضت {amount} – {note}'**
+  String dayChatTitleIncome(String amount, String note);
+
+  /// No description provided for @dayChatTitleIncomeBare.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبضت {amount}'**
+  String dayChatTitleIncomeBare(String amount);
+
+  /// No description provided for @dayChatTitleMeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلت {food}'**
+  String dayChatTitleMeal(String food);
+
+  /// No description provided for @dayChatTitleMealAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكلت {food} الساعة {time}'**
+  String dayChatTitleMealAt(String food, String time);
+
+  /// No description provided for @dayChatTitleWorkout.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين {name}'**
+  String dayChatTitleWorkout(String name);
+
+  /// No description provided for @dayChatTitleWorkoutSets.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين {name} {sets}×{reps}'**
+  String dayChatTitleWorkoutSets(String name, String sets, String reps);
+
+  /// No description provided for @dayChatTitleWorkoutWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'{title} بوزن {weight}'**
+  String dayChatTitleWorkoutWeight(String title, String weight);
+
+  /// No description provided for @dayChatTitleWorkoutMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{title} {minutes, plural, =1{دقيقة} =2{دقيقتين} few{{minutes} دقايق} many{{minutes} دقيقة} other{{minutes} دقيقة}}'**
+  String dayChatTitleWorkoutMinutes(String title, int minutes);
+
+  /// No description provided for @dayChatTitleWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'شربت {amount}'**
+  String dayChatTitleWater(String amount);
+
+  /// No description provided for @dayChatTitlePain.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجع درجته {score}'**
+  String dayChatTitlePain(String score);
+
+  /// No description provided for @dayChatTitlePainWhere.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجع {where} درجته {score}'**
+  String dayChatTitlePainWhere(String where, String score);
+
+  /// No description provided for @dayChatTitleMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'مزاجي {score}'**
+  String dayChatTitleMood(String score);
+
+  /// No description provided for @dayChatTitlePrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {prayer}'**
+  String dayChatTitlePrayer(String prayer);
+
+  /// No description provided for @dayChatTitlePrayerMosque.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {prayer} بالمسجد'**
+  String dayChatTitlePrayerMosque(String prayer);
+
+  /// No description provided for @dayChatTitlePrayerJamaah.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {prayer} جماعة'**
+  String dayChatTitlePrayerJamaah(String prayer);
+
+  /// No description provided for @dayChatTitlePrayerLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {prayer} متأخر'**
+  String dayChatTitlePrayerLate(String prayer);
+
+  /// No description provided for @dayChatTitlePrayerMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتتني {prayer}'**
+  String dayChatTitlePrayerMissed(String prayer);
+
+  /// No description provided for @dayChatTitlePrayerQada.
+  ///
+  /// In ar, this message translates to:
+  /// **'قضيت {prayer}'**
+  String dayChatTitlePrayerQada(String prayer);
+
+  /// No description provided for @dayChatTitleTaskDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت «{task}»'**
+  String dayChatTitleTaskDone(String task);
+
+  /// No description provided for @dayChatTitleTaskNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت «{task}» – بتتسجّل مهمة خالصة'**
+  String dayChatTitleTaskNew(String task);
+
+  /// No description provided for @dayChatTitleTodo.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة: {task}'**
+  String dayChatTitleTodo(String task);
+
+  /// No description provided for @dayChatTitleTodoWhen.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهمة: {task} – {when}'**
+  String dayChatTitleTodoWhen(String task, String when);
+
+  /// No description provided for @dayChatTitleNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة: {text}'**
+  String dayChatTitleNote(String text);
+
+  /// No description provided for @dayChatTitleCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'حكيت مع {person}'**
+  String dayChatTitleCall(String person);
+
+  /// No description provided for @dayChatTitleVisit.
+  ///
+  /// In ar, this message translates to:
+  /// **'زرت {person}'**
+  String dayChatTitleVisit(String person);
+
+  /// No description provided for @dayChatTitleMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعتت لـ{person}'**
+  String dayChatTitleMessage(String person);
+
+  /// No description provided for @dayChatTitleContactOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'تواصلت مع {person}'**
+  String dayChatTitleContactOther(String person);
+
+  /// No description provided for @dayChatTitleModule.
+  ///
+  /// In ar, this message translates to:
+  /// **'{module}: {value}'**
+  String dayChatTitleModule(String module, String value);
+
+  /// No description provided for @dayChatTitleModuleTick.
+  ///
+  /// In ar, this message translates to:
+  /// **'{module}: تم'**
+  String dayChatTitleModuleTick(String module);
+
+  /// No description provided for @dayChatTitleSign.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}: {value}'**
+  String dayChatTitleSign(String name, String value);
+
+  /// No description provided for @dayChatTitleUnread.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما فهمت هاي'**
+  String get dayChatTitleUnread;
+
+  /// No description provided for @dayChatGapAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في مبلغ – اكتب المبلغ وبنسجّله'**
+  String get dayChatGapAmount;
+
+  /// No description provided for @dayChatGapCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قلت العملة، بنحسبها {currency}'**
+  String dayChatGapCurrency(String currency);
+
+  /// No description provided for @dayChatGapPerson.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» مش بأهلك – بنضيفه جديد'**
+  String dayChatGapPerson(String name);
+
+  /// No description provided for @dayChatGapFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» مش بمكتبة أكلك – بنسجّله بالاسم'**
+  String dayChatGapFood(String name);
+
+  /// No description provided for @dayChatGapExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» مش بتمارينك – بنسجّله بالاسم'**
+  String dayChatGapExercise(String name);
+
+  /// No description provided for @dayChatGapModule.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بعرف لوين هاد الرقم – اختار وحدة من وحداتك'**
+  String get dayChatGapModule;
+
+  /// No description provided for @dayChatGapField.
+  ///
+  /// In ar, this message translates to:
+  /// **'{module}: اختار أي خانة'**
+  String dayChatGapField(String module);
+
+  /// No description provided for @dayChatGapValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقص رقم لـ{label}'**
+  String dayChatGapValue(String label);
+
+  /// No description provided for @dayChatGapMeasure.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قلت المجموعات ولا المدة'**
+  String get dayChatGapMeasure;
+
+  /// No description provided for @dayChatGapPrayerName.
+  ///
+  /// In ar, this message translates to:
+  /// **'أي صلاة؟'**
+  String get dayChatGapPrayerName;
+
+  /// No description provided for @dayChatGapTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قلت الوقت – بنحسبها هلأ'**
+  String get dayChatGapTime;
+
+  /// No description provided for @dayChatGapTaskMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما لقيت مهمة باسم «{name}»'**
+  String dayChatGapTaskMatch(String name);
+
+  /// No description provided for @dayChatGapGuard.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيها «{match}» – جرعة أو تشخيص. بنحفظها ملاحظة بكلامك بس: مَدار بيسجّل وبيرسم، والدوا لدكتورك.'**
+  String dayChatGapGuard(String match);
+
+  /// No description provided for @dayChatGapMeaning.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما فهمت هاي – بتزبطها أو بتخليها ملاحظة'**
+  String get dayChatGapMeaning;
+
+  /// No description provided for @dayChatWhereMoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بالمصاري'**
+  String get dayChatWhereMoney;
+
+  /// No description provided for @dayChatWhereFood.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بالأكل'**
+  String get dayChatWhereFood;
+
+  /// No description provided for @dayChatWhereBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بالجسم'**
+  String get dayChatWhereBody;
+
+  /// No description provided for @dayChatWhereHealth.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بالصحة'**
+  String get dayChatWhereHealth;
+
+  /// No description provided for @dayChatWhereFaith.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بمتابعة الصلاة'**
+  String get dayChatWhereFaith;
+
+  /// No description provided for @dayChatWhereTasks.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بمهامك'**
+  String get dayChatWhereTasks;
+
+  /// No description provided for @dayChatWhereFamily.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بالأهل'**
+  String get dayChatWhereFamily;
+
+  /// No description provided for @dayChatWhereModule.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل بـ{module}'**
+  String dayChatWhereModule(String module);
+
+  /// No description provided for @dayChatWhereNowhere.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بتنزل لحتى تقلّي'**
+  String get dayChatWhereNowhere;
+
+  /// No description provided for @dayChatSure.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأكد'**
+  String get dayChatSure;
+
+  /// No description provided for @dayChatMaybe.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الأغلب'**
+  String get dayChatMaybe;
+
+  /// No description provided for @dayChatUnsure.
+  ///
+  /// In ar, this message translates to:
+  /// **'مش متأكد'**
+  String get dayChatUnsure;
+
+  /// No description provided for @dayChatSummaryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو صار اليوم – {date}'**
+  String dayChatSummaryTitle(String date);
+
+  /// No description provided for @dayChatSummaryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا ما سجّلت إشي اليوم. اكتبلي شو صار وأنا بوزّعه.'**
+  String get dayChatSummaryEmpty;
+
+  /// No description provided for @dayChatSumPrayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما سجّلت صلاة} =1{صلّيت فرض واحد} =2{صلّيت فرضين} few{صلّيت {count} فروض} many{صلّيت {count} فرضًا} other{صلّيت {count} فرض}}'**
+  String dayChatSumPrayers(int count);
+
+  /// No description provided for @dayChatSumPrayersMosque.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{منها واحدة بالمسجد} =2{منها اثنتين بالمسجد} few{منها {count} بالمسجد} many{منها {count} بالمسجد} other{منها {count} بالمسجد}}'**
+  String dayChatSumPrayersMosque(int count);
+
+  /// No description provided for @dayChatSumPrayersMissed.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وفاتتك صلاة} =2{وفاتتك صلاتين} few{وفاتتك {count} صلوات} many{وفاتتك {count} صلاة} other{وفاتتك {count} صلاة}}'**
+  String dayChatSumPrayersMissed(int count);
+
+  /// No description provided for @dayChatSumSunnah.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وسنّة وحدة} =2{وسنّتين} few{و{count} سنن} many{و{count} سنّة} other{و{count} سنّة}}'**
+  String dayChatSumSunnah(int count);
+
+  /// No description provided for @dayChatSumSpent.
+  ///
+  /// In ar, this message translates to:
+  /// **'صرفت {amount}'**
+  String dayChatSumSpent(String amount);
+
+  /// No description provided for @dayChatSumReceived.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبضت {amount}'**
+  String dayChatSumReceived(String amount);
+
+  /// No description provided for @dayChatSumMeals.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{أكلت أكلة وحدة} =2{أكلت أكلتين} few{أكلت {count} أكلات} many{أكلت {count} أكلة} other{أكلت {count} أكلة}}'**
+  String dayChatSumMeals(int count);
+
+  /// No description provided for @dayChatSumWater.
+  ///
+  /// In ar, this message translates to:
+  /// **'شربت {amount} مي'**
+  String dayChatSumWater(String amount);
+
+  /// No description provided for @dayChatSumWaterTarget.
+  ///
+  /// In ar, this message translates to:
+  /// **'شربت {amount} مي من {target}'**
+  String dayChatSumWaterTarget(String amount, String target);
+
+  /// No description provided for @dayChatSumWorkouts.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تمرين واحد} =2{تمرينين} few{{count} تمارين} many{{count} تمرين} other{{count} تمرين}}'**
+  String dayChatSumWorkouts(int count);
+
+  /// No description provided for @dayChatSumMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقايق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String dayChatSumMinutes(int count);
+
+  /// No description provided for @dayChatSumPain.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى وجع اليوم {score}'**
+  String dayChatSumPain(String score);
+
+  /// No description provided for @dayChatSumPainWhere.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى وجع اليوم {score} ({where})'**
+  String dayChatSumPainWhere(String score, String where);
+
+  /// No description provided for @dayChatSumMood.
+  ///
+  /// In ar, this message translates to:
+  /// **'مزاجك {score}'**
+  String dayChatSumMood(String score);
+
+  /// No description provided for @dayChatSumTasksDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما خلّصت مهمة} =1{خلّصت مهمة} =2{خلّصت مهمتين} few{خلّصت {count} مهام} many{خلّصت {count} مهمة} other{خلّصت {count} مهمة}}'**
+  String dayChatSumTasksDone(int count);
+
+  /// No description provided for @dayChatSumTasksOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{وباقي عندك مهمة} =2{وباقي عندك مهمتين} few{وباقي عندك {count} مهام} many{وباقي عندك {count} مهمة} other{وباقي عندك {count} مهمة}}'**
+  String dayChatSumTasksOpen(int count);
+
+  /// No description provided for @dayChatSumPeople.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تواصلت مع واحد} =2{تواصلت مع اثنين} few{تواصلت مع {count} أشخاص} many{تواصلت مع {count} شخص} other{تواصلت مع {count} شخص}}'**
+  String dayChatSumPeople(int count);
+
+  /// No description provided for @dayChatSumModules.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{سجّلت قياس واحد} =2{سجّلت قياسين} few{سجّلت {count} قياسات} many{سجّلت {count} قياس} other{سجّلت {count} قياس}}'**
+  String dayChatSumModules(int count);
+
+  /// No description provided for @dayChatSumChat.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{من الشات: ما سجّلت إشي لهلأ} =1{من الشات: سجّلت إشي واحد} =2{من الشات: سجّلت إشيين} few{من الشات: سجّلت {count} إشيات} many{من الشات: سجّلت {count} إشي} other{من الشات: سجّلت {count} إشي}}'**
+  String dayChatSumChat(int count);
+
+  /// No description provided for @dayChatSumWith.
+  ///
+  /// In ar, this message translates to:
+  /// **'({names})'**
+  String dayChatSumWith(String names);
+
+  /// No description provided for @dayChatSumMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'وكمان {count}'**
+  String dayChatSumMore(String count);
+
+  /// Daily chat: separator between his own words in a summary line
+  ///
+  /// In ar, this message translates to:
+  /// **'، '**
+  String get dayChatListSep;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

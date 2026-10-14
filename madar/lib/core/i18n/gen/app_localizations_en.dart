@@ -26452,4 +26452,508 @@ class L10nEn extends L10n {
     );
     return '$_temp0';
   }
+
+  @override
+  String get dayChatKindExpense => 'Expense';
+
+  @override
+  String get dayChatKindIncome => 'Income';
+
+  @override
+  String get dayChatKindMeal => 'Meal';
+
+  @override
+  String get dayChatKindWorkout => 'Workout';
+
+  @override
+  String get dayChatKindWater => 'Water';
+
+  @override
+  String get dayChatKindPain => 'Pain';
+
+  @override
+  String get dayChatKindSign => 'Reading';
+
+  @override
+  String get dayChatKindPrayer => 'Prayer';
+
+  @override
+  String get dayChatKindTaskDone => 'Task done';
+
+  @override
+  String get dayChatKindTaskTodo => 'Task';
+
+  @override
+  String get dayChatKindMood => 'Mood';
+
+  @override
+  String get dayChatKindNote => 'Note';
+
+  @override
+  String get dayChatKindContact => 'Contact';
+
+  @override
+  String get dayChatKindModule => 'Your module';
+
+  @override
+  String get dayChatKindUnread => 'Not understood';
+
+  @override
+  String dayChatTitleExpense(String amount, String note) {
+    return 'Spent $amount on $note';
+  }
+
+  @override
+  String dayChatTitleExpenseBare(String amount) {
+    return 'Spent $amount';
+  }
+
+  @override
+  String dayChatTitleIncome(String amount, String note) {
+    return 'Received $amount – $note';
+  }
+
+  @override
+  String dayChatTitleIncomeBare(String amount) {
+    return 'Received $amount';
+  }
+
+  @override
+  String dayChatTitleMeal(String food) {
+    return 'Ate $food';
+  }
+
+  @override
+  String dayChatTitleMealAt(String food, String time) {
+    return 'Ate $food at $time';
+  }
+
+  @override
+  String dayChatTitleWorkout(String name) {
+    return '$name workout';
+  }
+
+  @override
+  String dayChatTitleWorkoutSets(String name, String sets, String reps) {
+    return '$name $sets×$reps';
+  }
+
+  @override
+  String dayChatTitleWorkoutWeight(String title, String weight) {
+    return '$title, $weight';
+  }
+
+  @override
+  String dayChatTitleWorkoutMinutes(String title, int minutes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      minutes,
+      locale: localeName,
+      other: '$minutes minutes',
+      one: '1 minute',
+    );
+    return '$title, $_temp0';
+  }
+
+  @override
+  String dayChatTitleWater(String amount) {
+    return 'Drank $amount';
+  }
+
+  @override
+  String dayChatTitlePain(String score) {
+    return 'Pain $score';
+  }
+
+  @override
+  String dayChatTitlePainWhere(String where, String score) {
+    return '$where pain $score';
+  }
+
+  @override
+  String dayChatTitleMood(String score) {
+    return 'Mood $score';
+  }
+
+  @override
+  String dayChatTitlePrayer(String prayer) {
+    return 'Prayed $prayer';
+  }
+
+  @override
+  String dayChatTitlePrayerMosque(String prayer) {
+    return 'Prayed $prayer at the mosque';
+  }
+
+  @override
+  String dayChatTitlePrayerJamaah(String prayer) {
+    return 'Prayed $prayer in congregation';
+  }
+
+  @override
+  String dayChatTitlePrayerLate(String prayer) {
+    return 'Prayed $prayer late';
+  }
+
+  @override
+  String dayChatTitlePrayerMissed(String prayer) {
+    return 'Missed $prayer';
+  }
+
+  @override
+  String dayChatTitlePrayerQada(String prayer) {
+    return 'Made up $prayer';
+  }
+
+  @override
+  String dayChatTitleTaskDone(String task) {
+    return 'Finished «$task»';
+  }
+
+  @override
+  String dayChatTitleTaskNew(String task) {
+    return 'Finished «$task» – filed as a task already done';
+  }
+
+  @override
+  String dayChatTitleTodo(String task) {
+    return 'To do: $task';
+  }
+
+  @override
+  String dayChatTitleTodoWhen(String task, String when) {
+    return 'To do: $task – $when';
+  }
+
+  @override
+  String dayChatTitleNote(String text) {
+    return 'Note: $text';
+  }
+
+  @override
+  String dayChatTitleCall(String person) {
+    return 'Called $person';
+  }
+
+  @override
+  String dayChatTitleVisit(String person) {
+    return 'Visited $person';
+  }
+
+  @override
+  String dayChatTitleMessage(String person) {
+    return 'Messaged $person';
+  }
+
+  @override
+  String dayChatTitleContactOther(String person) {
+    return 'Contacted $person';
+  }
+
+  @override
+  String dayChatTitleModule(String module, String value) {
+    return '$module: $value';
+  }
+
+  @override
+  String dayChatTitleModuleTick(String module) {
+    return '$module: done';
+  }
+
+  @override
+  String dayChatTitleSign(String name, String value) {
+    return '$name: $value';
+  }
+
+  @override
+  String get dayChatTitleUnread => 'I did not understand this one';
+
+  @override
+  String get dayChatGapAmount => 'No amount – type it and it gets filed';
+
+  @override
+  String dayChatGapCurrency(String currency) {
+    return 'No currency said, taken as $currency';
+  }
+
+  @override
+  String dayChatGapPerson(String name) {
+    return '«$name» is not in your people yet – it adds them';
+  }
+
+  @override
+  String dayChatGapFood(String name) {
+    return '«$name» is not in your food library – logged by name';
+  }
+
+  @override
+  String dayChatGapExercise(String name) {
+    return '«$name» is not in your exercises – logged by name';
+  }
+
+  @override
+  String get dayChatGapModule =>
+      'I do not know which tracker this number is for – pick one of yours';
+
+  @override
+  String dayChatGapField(String module) {
+    return '$module: pick which field';
+  }
+
+  @override
+  String dayChatGapValue(String label) {
+    return '$label needs a number';
+  }
+
+  @override
+  String get dayChatGapMeasure => 'No sets or duration said';
+
+  @override
+  String get dayChatGapPrayerName => 'Which prayer?';
+
+  @override
+  String get dayChatGapTime => 'No time said – taken as now';
+
+  @override
+  String dayChatGapTaskMatch(String name) {
+    return 'No open task of yours called «$name»';
+  }
+
+  @override
+  String dayChatGapGuard(String match) {
+    return 'It carries «$match» – a dose or a diagnosis. It is kept as your own note only: Madar tracks and charts, medicine is your doctor’s.';
+  }
+
+  @override
+  String get dayChatGapMeaning =>
+      'Not understood – correct it, or keep it as a note';
+
+  @override
+  String get dayChatWhereMoney => 'Goes to Money';
+
+  @override
+  String get dayChatWhereFood => 'Goes to Food';
+
+  @override
+  String get dayChatWhereBody => 'Goes to Body';
+
+  @override
+  String get dayChatWhereHealth => 'Goes to Health';
+
+  @override
+  String get dayChatWhereFaith => 'Goes to the prayer tracker';
+
+  @override
+  String get dayChatWhereTasks => 'Goes to your tasks';
+
+  @override
+  String get dayChatWhereFamily => 'Goes to Family';
+
+  @override
+  String dayChatWhereModule(String module) {
+    return 'Goes to $module';
+  }
+
+  @override
+  String get dayChatWhereNowhere => 'Nothing is filed until you say so';
+
+  @override
+  String get dayChatSure => 'Sure';
+
+  @override
+  String get dayChatMaybe => 'Probably';
+
+  @override
+  String get dayChatUnsure => 'Not sure';
+
+  @override
+  String dayChatSummaryTitle(String date) {
+    return 'Your day – $date';
+  }
+
+  @override
+  String get dayChatSummaryEmpty =>
+      'Nothing logged today yet. Type what happened and it gets filed.';
+
+  @override
+  String dayChatSumPrayers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Prayed $count obligatory prayers',
+      one: 'Prayed 1 obligatory prayer',
+      zero: 'No prayers logged',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPrayersMosque(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count of them at the mosque',
+      one: '1 of them at the mosque',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPrayersMissed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'and $count were missed',
+      one: 'and 1 was missed',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumSunnah(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'and $count voluntary prayers',
+      one: 'and 1 voluntary prayer',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumSpent(String amount) {
+    return 'Spent $amount';
+  }
+
+  @override
+  String dayChatSumReceived(String amount) {
+    return 'Received $amount';
+  }
+
+  @override
+  String dayChatSumMeals(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ate $count things',
+      one: 'Ate 1 thing',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumWater(String amount) {
+    return 'Drank $amount of water';
+  }
+
+  @override
+  String dayChatSumWaterTarget(String amount, String target) {
+    return 'Drank $amount of water out of $target';
+  }
+
+  @override
+  String dayChatSumWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count workouts',
+      one: '1 workout',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPain(String score) {
+    return 'Worst pain today $score';
+  }
+
+  @override
+  String dayChatSumPainWhere(String score, String where) {
+    return 'Worst pain today $score ($where)';
+  }
+
+  @override
+  String dayChatSumMood(String score) {
+    return 'Mood $score';
+  }
+
+  @override
+  String dayChatSumTasksDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Finished $count tasks',
+      one: 'Finished 1 task',
+      zero: 'No tasks finished',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumTasksOpen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'and $count are still open',
+      one: 'and 1 is still open',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPeople(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Contacted $count people',
+      one: 'Contacted 1 person',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumModules(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Logged $count readings',
+      one: 'Logged 1 reading',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumChat(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'From the chat: $count things filed',
+      one: 'From the chat: 1 thing filed',
+      zero: 'From the chat: nothing filed yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumWith(String names) {
+    return '($names)';
+  }
+
+  @override
+  String dayChatSumMore(String count) {
+    return 'and $count more';
+  }
+
+  @override
+  String get dayChatListSep => ', ';
 }

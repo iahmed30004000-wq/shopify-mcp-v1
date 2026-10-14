@@ -40,8 +40,8 @@ class DayChatField {
     label: f.label,
     type: f.type,
     unit: f.unit,
-    min: f.min,
-    max: f.max,
+    min: f.min?.toDouble(),
+    max: f.max?.toDouble(),
     options: [for (final o in f.options) DayChatOption(o.id, o.label)],
   );
 

@@ -24535,5 +24535,631 @@
         "type": "int"
       }
     }
+  },
+  "dayChatKindExpense": "Expense",
+  "@dayChatKindExpense": {
+    "description": "Daily chat: name of a piece kind (Money out)"
+  },
+  "dayChatKindIncome": "Income",
+  "@dayChatKindIncome": {
+    "description": "Daily chat: name of a piece kind (Money in)"
+  },
+  "dayChatKindMeal": "Meal",
+  "@dayChatKindMeal": {
+    "description": "Daily chat: name of a piece kind (A meal)"
+  },
+  "dayChatKindWorkout": "Workout",
+  "@dayChatKindWorkout": {
+    "description": "Daily chat: name of a piece kind (A workout)"
+  },
+  "dayChatKindWater": "Water",
+  "@dayChatKindWater": {
+    "description": "Daily chat: name of a piece kind (Water)"
+  },
+  "dayChatKindPain": "Pain",
+  "@dayChatKindPain": {
+    "description": "Daily chat: name of a piece kind (Pain)"
+  },
+  "dayChatKindSign": "Reading",
+  "@dayChatKindSign": {
+    "description": "Daily chat: name of a piece kind (A tracked sign)"
+  },
+  "dayChatKindPrayer": "Prayer",
+  "@dayChatKindPrayer": {
+    "description": "Daily chat: name of a piece kind (A prayer)"
+  },
+  "dayChatKindTaskDone": "Task done",
+  "@dayChatKindTaskDone": {
+    "description": "Daily chat: name of a piece kind (A finished task)"
+  },
+  "dayChatKindTaskTodo": "Task",
+  "@dayChatKindTaskTodo": {
+    "description": "Daily chat: name of a piece kind (A task to do)"
+  },
+  "dayChatKindMood": "Mood",
+  "@dayChatKindMood": {
+    "description": "Daily chat: name of a piece kind (Mood)"
+  },
+  "dayChatKindNote": "Note",
+  "@dayChatKindNote": {
+    "description": "Daily chat: name of a piece kind (A note)"
+  },
+  "dayChatKindContact": "Contact",
+  "@dayChatKindContact": {
+    "description": "Daily chat: name of a piece kind (A contact)"
+  },
+  "dayChatKindModule": "Your module",
+  "@dayChatKindModule": {
+    "description": "Daily chat: name of a piece kind (An entry in a module he built)"
+  },
+  "dayChatKindUnread": "Not understood",
+  "@dayChatKindUnread": {
+    "description": "Daily chat: name of a piece kind (Not understood)"
+  },
+  "dayChatTitleExpense": "Spent {amount} on {note}",
+  "@dayChatTitleExpense": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleExpenseBare": "Spent {amount}",
+  "@dayChatTitleExpenseBare": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleIncome": "Received {amount} – {note}",
+  "@dayChatTitleIncome": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleIncomeBare": "Received {amount}",
+  "@dayChatTitleIncomeBare": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMeal": "Ate {food}",
+  "@dayChatTitleMeal": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMealAt": "Ate {food} at {time}",
+  "@dayChatTitleMealAt": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkout": "{name} workout",
+  "@dayChatTitleWorkout": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkoutSets": "{name} {sets}×{reps}",
+  "@dayChatTitleWorkoutSets": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sets": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkoutWeight": "{title}, {weight}",
+  "@dayChatTitleWorkoutWeight": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkoutMinutes": "{title}, {minutes, plural, =1{1 minute} other{{minutes} minutes}}",
+  "@dayChatTitleWorkoutMinutes": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatTitleWater": "Drank {amount}",
+  "@dayChatTitleWater": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePain": "Pain {score}",
+  "@dayChatTitlePain": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePainWhere": "{where} pain {score}",
+  "@dayChatTitlePainWhere": {
+    "placeholders": {
+      "where": {
+        "type": "String"
+      },
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMood": "Mood {score}",
+  "@dayChatTitleMood": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayer": "Prayed {prayer}",
+  "@dayChatTitlePrayer": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerMosque": "Prayed {prayer} at the mosque",
+  "@dayChatTitlePrayerMosque": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerJamaah": "Prayed {prayer} in congregation",
+  "@dayChatTitlePrayerJamaah": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerLate": "Prayed {prayer} late",
+  "@dayChatTitlePrayerLate": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerMissed": "Missed {prayer}",
+  "@dayChatTitlePrayerMissed": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerQada": "Made up {prayer}",
+  "@dayChatTitlePrayerQada": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTaskDone": "Finished «{task}»",
+  "@dayChatTitleTaskDone": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTaskNew": "Finished «{task}» – filed as a task already done",
+  "@dayChatTitleTaskNew": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTodo": "To do: {task}",
+  "@dayChatTitleTodo": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTodoWhen": "To do: {task} – {when}",
+  "@dayChatTitleTodoWhen": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleNote": "Note: {text}",
+  "@dayChatTitleNote": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleCall": "Called {person}",
+  "@dayChatTitleCall": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleVisit": "Visited {person}",
+  "@dayChatTitleVisit": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMessage": "Messaged {person}",
+  "@dayChatTitleMessage": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleContactOther": "Contacted {person}",
+  "@dayChatTitleContactOther": {
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleModule": "{module}: {value}",
+  "@dayChatTitleModule": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleModuleTick": "{module}: done",
+  "@dayChatTitleModuleTick": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleSign": "{name}: {value}",
+  "@dayChatTitleSign": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleUnread": "I did not understand this one",
+  "dayChatGapAmount": "No amount – type it and it gets filed",
+  "dayChatGapCurrency": "No currency said, taken as {currency}",
+  "@dayChatGapCurrency": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapPerson": "«{name}» is not in your people yet – it adds them",
+  "@dayChatGapPerson": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapFood": "«{name}» is not in your food library – logged by name",
+  "@dayChatGapFood": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapExercise": "«{name}» is not in your exercises – logged by name",
+  "@dayChatGapExercise": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapModule": "I do not know which tracker this number is for – pick one of yours",
+  "dayChatGapField": "{module}: pick which field",
+  "@dayChatGapField": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapValue": "{label} needs a number",
+  "@dayChatGapValue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapMeasure": "No sets or duration said",
+  "dayChatGapPrayerName": "Which prayer?",
+  "dayChatGapTime": "No time said – taken as now",
+  "dayChatGapTaskMatch": "No open task of yours called «{name}»",
+  "@dayChatGapTaskMatch": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapGuard": "It carries «{match}» – a dose or a diagnosis. It is kept as your own note only: Madar tracks and charts, medicine is your doctor’s.",
+  "@dayChatGapGuard": {
+    "placeholders": {
+      "match": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapMeaning": "Not understood – correct it, or keep it as a note",
+  "dayChatWhereMoney": "Goes to Money",
+  "dayChatWhereFood": "Goes to Food",
+  "dayChatWhereBody": "Goes to Body",
+  "dayChatWhereHealth": "Goes to Health",
+  "dayChatWhereFaith": "Goes to the prayer tracker",
+  "dayChatWhereTasks": "Goes to your tasks",
+  "dayChatWhereFamily": "Goes to Family",
+  "dayChatWhereModule": "Goes to {module}",
+  "@dayChatWhereModule": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatWhereNowhere": "Nothing is filed until you say so",
+  "dayChatSure": "Sure",
+  "dayChatMaybe": "Probably",
+  "dayChatUnsure": "Not sure",
+  "dayChatSummaryTitle": "Your day – {date}",
+  "@dayChatSummaryTitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSummaryEmpty": "Nothing logged today yet. Type what happened and it gets filed.",
+  "dayChatSumPrayers": "{count, plural, =0{No prayers logged} =1{Prayed 1 obligatory prayer} other{Prayed {count} obligatory prayers}}",
+  "@dayChatSumPrayers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPrayersMosque": "{count, plural, =1{1 of them at the mosque} other{{count} of them at the mosque}}",
+  "@dayChatSumPrayersMosque": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPrayersMissed": "{count, plural, =1{and 1 was missed} other{and {count} were missed}}",
+  "@dayChatSumPrayersMissed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumSunnah": "{count, plural, =1{and 1 voluntary prayer} other{and {count} voluntary prayers}}",
+  "@dayChatSumSunnah": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumSpent": "Spent {amount}",
+  "@dayChatSumSpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumReceived": "Received {amount}",
+  "@dayChatSumReceived": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumMeals": "{count, plural, =1{Ate 1 thing} other{Ate {count} things}}",
+  "@dayChatSumMeals": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumWater": "Drank {amount} of water",
+  "@dayChatSumWater": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumWaterTarget": "Drank {amount} of water out of {target}",
+  "@dayChatSumWaterTarget": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumWorkouts": "{count, plural, =1{1 workout} other{{count} workouts}}",
+  "@dayChatSumWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumMinutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+  "@dayChatSumMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPain": "Worst pain today {score}",
+  "@dayChatSumPain": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumPainWhere": "Worst pain today {score} ({where})",
+  "@dayChatSumPainWhere": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "where": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumMood": "Mood {score}",
+  "@dayChatSumMood": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumTasksDone": "{count, plural, =0{No tasks finished} =1{Finished 1 task} other{Finished {count} tasks}}",
+  "@dayChatSumTasksDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumTasksOpen": "{count, plural, =1{and 1 is still open} other{and {count} are still open}}",
+  "@dayChatSumTasksOpen": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPeople": "{count, plural, =1{Contacted 1 person} other{Contacted {count} people}}",
+  "@dayChatSumPeople": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumModules": "{count, plural, =1{Logged 1 reading} other{Logged {count} readings}}",
+  "@dayChatSumModules": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumChat": "{count, plural, =0{From the chat: nothing filed yet} =1{From the chat: 1 thing filed} other{From the chat: {count} things filed}}",
+  "@dayChatSumChat": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumWith": "({names})",
+  "@dayChatSumWith": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumMore": "and {count} more",
+  "@dayChatSumMore": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatListSep": ", ",
+  "@dayChatListSep": {
+    "description": "Daily chat: separator between his own words in a summary line"
   }
 }

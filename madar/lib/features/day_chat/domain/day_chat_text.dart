@@ -53,7 +53,10 @@ abstract final class DayChatText {
   static final RegExp _marks = RegExp('[ً-ٰٟـۖ-ۭ]');
 
   /// Bidi marks and isolates, the zero-width characters and the BOM.
-  static final RegExp _invisible = RegExp('[​-‏‪-‮⁦-⁩؜﻿]', unicode: true);
+  static final RegExp _invisible = RegExp(
+    '[\u200B-\u200F\u202A-\u202E\u2066-\u2069\u061C\uFEFF]',
+    unicode: true,
+  );
 
   static bool _drop(int c) =>
       _marks.hasMatch(String.fromCharCode(c)) || _invisible.hasMatch(String.fromCharCode(c));

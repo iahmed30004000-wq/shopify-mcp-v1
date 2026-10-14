@@ -27126,4 +27126,546 @@ class L10nAr extends L10n {
     );
     return '$_temp0';
   }
+
+  @override
+  String get dayChatKindExpense => 'مصروف';
+
+  @override
+  String get dayChatKindIncome => 'دخل';
+
+  @override
+  String get dayChatKindMeal => 'أكل';
+
+  @override
+  String get dayChatKindWorkout => 'تمرين';
+
+  @override
+  String get dayChatKindWater => 'مي';
+
+  @override
+  String get dayChatKindPain => 'وجع';
+
+  @override
+  String get dayChatKindSign => 'قياس';
+
+  @override
+  String get dayChatKindPrayer => 'صلاة';
+
+  @override
+  String get dayChatKindTaskDone => 'مهمة خلّصتها';
+
+  @override
+  String get dayChatKindTaskTodo => 'مهمة';
+
+  @override
+  String get dayChatKindMood => 'مزاج';
+
+  @override
+  String get dayChatKindNote => 'ملاحظة';
+
+  @override
+  String get dayChatKindContact => 'تواصل';
+
+  @override
+  String get dayChatKindModule => 'تسجيل بوحدتك';
+
+  @override
+  String get dayChatKindUnread => 'ما فهمتها';
+
+  @override
+  String dayChatTitleExpense(String amount, String note) {
+    return 'صرفت $amount على $note';
+  }
+
+  @override
+  String dayChatTitleExpenseBare(String amount) {
+    return 'صرفت $amount';
+  }
+
+  @override
+  String dayChatTitleIncome(String amount, String note) {
+    return 'قبضت $amount – $note';
+  }
+
+  @override
+  String dayChatTitleIncomeBare(String amount) {
+    return 'قبضت $amount';
+  }
+
+  @override
+  String dayChatTitleMeal(String food) {
+    return 'أكلت $food';
+  }
+
+  @override
+  String dayChatTitleMealAt(String food, String time) {
+    return 'أكلت $food الساعة $time';
+  }
+
+  @override
+  String dayChatTitleWorkout(String name) {
+    return 'تمرين $name';
+  }
+
+  @override
+  String dayChatTitleWorkoutSets(String name, String sets, String reps) {
+    return 'تمرين $name $sets×$reps';
+  }
+
+  @override
+  String dayChatTitleWorkoutWeight(String title, String weight) {
+    return '$title بوزن $weight';
+  }
+
+  @override
+  String dayChatTitleWorkoutMinutes(String title, int minutes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      minutes,
+      locale: localeName,
+      other: '$minutes دقيقة',
+      many: '$minutes دقيقة',
+      few: '$minutes دقايق',
+      two: 'دقيقتين',
+      one: 'دقيقة',
+    );
+    return '$title $_temp0';
+  }
+
+  @override
+  String dayChatTitleWater(String amount) {
+    return 'شربت $amount';
+  }
+
+  @override
+  String dayChatTitlePain(String score) {
+    return 'وجع درجته $score';
+  }
+
+  @override
+  String dayChatTitlePainWhere(String where, String score) {
+    return 'وجع $where درجته $score';
+  }
+
+  @override
+  String dayChatTitleMood(String score) {
+    return 'مزاجي $score';
+  }
+
+  @override
+  String dayChatTitlePrayer(String prayer) {
+    return 'صلّيت $prayer';
+  }
+
+  @override
+  String dayChatTitlePrayerMosque(String prayer) {
+    return 'صلّيت $prayer بالمسجد';
+  }
+
+  @override
+  String dayChatTitlePrayerJamaah(String prayer) {
+    return 'صلّيت $prayer جماعة';
+  }
+
+  @override
+  String dayChatTitlePrayerLate(String prayer) {
+    return 'صلّيت $prayer متأخر';
+  }
+
+  @override
+  String dayChatTitlePrayerMissed(String prayer) {
+    return 'فاتتني $prayer';
+  }
+
+  @override
+  String dayChatTitlePrayerQada(String prayer) {
+    return 'قضيت $prayer';
+  }
+
+  @override
+  String dayChatTitleTaskDone(String task) {
+    return 'خلّصت «$task»';
+  }
+
+  @override
+  String dayChatTitleTaskNew(String task) {
+    return 'خلّصت «$task» – بتتسجّل مهمة خالصة';
+  }
+
+  @override
+  String dayChatTitleTodo(String task) {
+    return 'مهمة: $task';
+  }
+
+  @override
+  String dayChatTitleTodoWhen(String task, String when) {
+    return 'مهمة: $task – $when';
+  }
+
+  @override
+  String dayChatTitleNote(String text) {
+    return 'ملاحظة: $text';
+  }
+
+  @override
+  String dayChatTitleCall(String person) {
+    return 'حكيت مع $person';
+  }
+
+  @override
+  String dayChatTitleVisit(String person) {
+    return 'زرت $person';
+  }
+
+  @override
+  String dayChatTitleMessage(String person) {
+    return 'بعتت لـ$person';
+  }
+
+  @override
+  String dayChatTitleContactOther(String person) {
+    return 'تواصلت مع $person';
+  }
+
+  @override
+  String dayChatTitleModule(String module, String value) {
+    return '$module: $value';
+  }
+
+  @override
+  String dayChatTitleModuleTick(String module) {
+    return '$module: تم';
+  }
+
+  @override
+  String dayChatTitleSign(String name, String value) {
+    return '$name: $value';
+  }
+
+  @override
+  String get dayChatTitleUnread => 'ما فهمت هاي';
+
+  @override
+  String get dayChatGapAmount => 'ما في مبلغ – اكتب المبلغ وبنسجّله';
+
+  @override
+  String dayChatGapCurrency(String currency) {
+    return 'ما قلت العملة، بنحسبها $currency';
+  }
+
+  @override
+  String dayChatGapPerson(String name) {
+    return '«$name» مش بأهلك – بنضيفه جديد';
+  }
+
+  @override
+  String dayChatGapFood(String name) {
+    return '«$name» مش بمكتبة أكلك – بنسجّله بالاسم';
+  }
+
+  @override
+  String dayChatGapExercise(String name) {
+    return '«$name» مش بتمارينك – بنسجّله بالاسم';
+  }
+
+  @override
+  String get dayChatGapModule =>
+      'ما بعرف لوين هاد الرقم – اختار وحدة من وحداتك';
+
+  @override
+  String dayChatGapField(String module) {
+    return '$module: اختار أي خانة';
+  }
+
+  @override
+  String dayChatGapValue(String label) {
+    return 'ناقص رقم لـ$label';
+  }
+
+  @override
+  String get dayChatGapMeasure => 'ما قلت المجموعات ولا المدة';
+
+  @override
+  String get dayChatGapPrayerName => 'أي صلاة؟';
+
+  @override
+  String get dayChatGapTime => 'ما قلت الوقت – بنحسبها هلأ';
+
+  @override
+  String dayChatGapTaskMatch(String name) {
+    return 'ما لقيت مهمة باسم «$name»';
+  }
+
+  @override
+  String dayChatGapGuard(String match) {
+    return 'فيها «$match» – جرعة أو تشخيص. بنحفظها ملاحظة بكلامك بس: مَدار بيسجّل وبيرسم، والدوا لدكتورك.';
+  }
+
+  @override
+  String get dayChatGapMeaning => 'ما فهمت هاي – بتزبطها أو بتخليها ملاحظة';
+
+  @override
+  String get dayChatWhereMoney => 'بتنزل بالمصاري';
+
+  @override
+  String get dayChatWhereFood => 'بتنزل بالأكل';
+
+  @override
+  String get dayChatWhereBody => 'بتنزل بالجسم';
+
+  @override
+  String get dayChatWhereHealth => 'بتنزل بالصحة';
+
+  @override
+  String get dayChatWhereFaith => 'بتنزل بمتابعة الصلاة';
+
+  @override
+  String get dayChatWhereTasks => 'بتنزل بمهامك';
+
+  @override
+  String get dayChatWhereFamily => 'بتنزل بالأهل';
+
+  @override
+  String dayChatWhereModule(String module) {
+    return 'بتنزل بـ$module';
+  }
+
+  @override
+  String get dayChatWhereNowhere => 'ما بتنزل لحتى تقلّي';
+
+  @override
+  String get dayChatSure => 'متأكد';
+
+  @override
+  String get dayChatMaybe => 'على الأغلب';
+
+  @override
+  String get dayChatUnsure => 'مش متأكد';
+
+  @override
+  String dayChatSummaryTitle(String date) {
+    return 'شو صار اليوم – $date';
+  }
+
+  @override
+  String get dayChatSummaryEmpty =>
+      'لسا ما سجّلت إشي اليوم. اكتبلي شو صار وأنا بوزّعه.';
+
+  @override
+  String dayChatSumPrayers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'صلّيت $count فرض',
+      many: 'صلّيت $count فرضًا',
+      few: 'صلّيت $count فروض',
+      two: 'صلّيت فرضين',
+      one: 'صلّيت فرض واحد',
+      zero: 'ما سجّلت صلاة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPrayersMosque(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'منها $count بالمسجد',
+      many: 'منها $count بالمسجد',
+      few: 'منها $count بالمسجد',
+      two: 'منها اثنتين بالمسجد',
+      one: 'منها واحدة بالمسجد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPrayersMissed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'وفاتتك $count صلاة',
+      many: 'وفاتتك $count صلاة',
+      few: 'وفاتتك $count صلوات',
+      two: 'وفاتتك صلاتين',
+      one: 'وفاتتك صلاة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumSunnah(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count سنّة',
+      many: 'و$count سنّة',
+      few: 'و$count سنن',
+      two: 'وسنّتين',
+      one: 'وسنّة وحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumSpent(String amount) {
+    return 'صرفت $amount';
+  }
+
+  @override
+  String dayChatSumReceived(String amount) {
+    return 'قبضت $amount';
+  }
+
+  @override
+  String dayChatSumMeals(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'أكلت $count أكلة',
+      many: 'أكلت $count أكلة',
+      few: 'أكلت $count أكلات',
+      two: 'أكلت أكلتين',
+      one: 'أكلت أكلة وحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumWater(String amount) {
+    return 'شربت $amount مي';
+  }
+
+  @override
+  String dayChatSumWaterTarget(String amount, String target) {
+    return 'شربت $amount مي من $target';
+  }
+
+  @override
+  String dayChatSumWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تمرين',
+      many: '$count تمرين',
+      few: '$count تمارين',
+      two: 'تمرينين',
+      one: 'تمرين واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دقيقة',
+      many: '$count دقيقة',
+      few: '$count دقايق',
+      two: 'دقيقتين',
+      one: 'دقيقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPain(String score) {
+    return 'أعلى وجع اليوم $score';
+  }
+
+  @override
+  String dayChatSumPainWhere(String score, String where) {
+    return 'أعلى وجع اليوم $score ($where)';
+  }
+
+  @override
+  String dayChatSumMood(String score) {
+    return 'مزاجك $score';
+  }
+
+  @override
+  String dayChatSumTasksDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'خلّصت $count مهمة',
+      many: 'خلّصت $count مهمة',
+      few: 'خلّصت $count مهام',
+      two: 'خلّصت مهمتين',
+      one: 'خلّصت مهمة',
+      zero: 'ما خلّصت مهمة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumTasksOpen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'وباقي عندك $count مهمة',
+      many: 'وباقي عندك $count مهمة',
+      few: 'وباقي عندك $count مهام',
+      two: 'وباقي عندك مهمتين',
+      one: 'وباقي عندك مهمة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumPeople(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تواصلت مع $count شخص',
+      many: 'تواصلت مع $count شخص',
+      few: 'تواصلت مع $count أشخاص',
+      two: 'تواصلت مع اثنين',
+      one: 'تواصلت مع واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumModules(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سجّلت $count قياس',
+      many: 'سجّلت $count قياس',
+      few: 'سجّلت $count قياسات',
+      two: 'سجّلت قياسين',
+      one: 'سجّلت قياس واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumChat(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'من الشات: سجّلت $count إشي',
+      many: 'من الشات: سجّلت $count إشي',
+      few: 'من الشات: سجّلت $count إشيات',
+      two: 'من الشات: سجّلت إشيين',
+      one: 'من الشات: سجّلت إشي واحد',
+      zero: 'من الشات: ما سجّلت إشي لهلأ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dayChatSumWith(String names) {
+    return '($names)';
+  }
+
+  @override
+  String dayChatSumMore(String count) {
+    return 'وكمان $count';
+  }
+
+  @override
+  String get dayChatListSep => '، ';
 }

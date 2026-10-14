@@ -483,7 +483,8 @@ class DayChatPiece {
             g.kind == DayChatGapKind.amount ||
             g.kind == DayChatGapKind.module ||
             g.kind == DayChatGapKind.field ||
-            g.kind == DayChatGapKind.value,
+            g.kind == DayChatGapKind.value ||
+            g.kind == DayChatGapKind.prayerName,
       );
 
   /// What applying this piece would write right now.

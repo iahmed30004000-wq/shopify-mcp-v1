@@ -74,22 +74,39 @@ class TaskQuickAdd extends QuickAddHandler {
     if (title.isEmpty) return false;
     final day = c.prayerDay();
     final now = c.clock();
-    final at = intent.dateTime;
-    final PrayerWindow window;
-    if (intent.window != null && intent.window != PrayerWindow.anytime) {
-      window = intent.window!;
-    } else if (intent.time != null) {
-      final (h, m) = _hm(intent.time!);
-      window = day.windowAt(DateTime(now.year, now.month, now.day, h, m));
-    } else {
-      window = c.focusedWindow();
-    }
-    final date = at ?? intent.date ?? day.prayerDayOf(now);
+    final window = windowFor(
+      stated: intent.window,
+      time: intent.time,
+      day: day,
+      now: now,
+      focused: c.focusedWindow(),
+    );
+    final date = intent.dateTime ?? intent.date ?? day.prayerDayOf(now);
     await HomeTasksService(
       c.repositories(),
       clock: c.clock,
     ).add(title: title, window: window, date: date, planetKey: intent.planetKey);
     return true;
+  }
+
+  /// Which window a typed to-do lands in: the window he said, else the
+  /// window of the clock time he said, else the one he is looking at.
+  ///
+  /// Shared with the daily chat (Part 7), so a to-do typed in the chat lands
+  /// exactly where the same words would land in the quick-add bar.
+  static PrayerWindow windowFor({
+    required PrayerWindow? stated,
+    required String? time,
+    required PrayerDayTimes day,
+    required DateTime now,
+    required PrayerWindow focused,
+  }) {
+    if (stated != null && stated != PrayerWindow.anytime) return stated;
+    if (time != null) {
+      final (h, m) = _hm(time);
+      return day.windowAt(DateTime(now.year, now.month, now.day, h, m));
+    }
+    return focused;
   }
 
   static (int, int) _hm(String hhmm) {

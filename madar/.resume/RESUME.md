@@ -5,7 +5,21 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 
 ## State (2026-10-10)
 - Nothing is running. Everything is committed and pushed on `claude/madar-life-os-nmoysk`.
-- Last shipped: **APK #26**, commit 9ac81f8, CI run 38591194158, artifact madar-apk-26 (id 11911001031).
+- Last shipped: **APK #28**, commit 94b68a3, CI run 38629797819, artifact madar-apk-28 (id 11928037229)
+  - the games world and the re-laid-out orrery. (#26 was Part 5, 9ac81f8; #25 Part 3b; #24 Part 3.)
+- **«الألعاب» is the tenth world** (`c3b80b4`), outside the balance and the Neglect Radar by two
+  independent guards: every source spelled out at 0 (an *absent* source falls back to 0.2) and
+  `weight: 0`, which makes `SceneSnapshotBuilder` skip it whatever its score. Growth lost the
+  cinema card.
+- **The orrery was re-laid-out for any count 1-16** (`99e0bd8`): `minLaneGap` derived from the
+  band and a 16-world floor instead of a constant, the camera's 0.06 hero-bleed deleted (it had
+  been pushing discs 18-20 px off-screen **even at eight worlds** - the owner spotted it at ten),
+  `innerRadius` 0.95 measured off the dial's limb, even angular shares with a 10% jitter instead
+  of the golden angle, the size spread clamped to 1.18, and discs shrinking past ten worlds.
+  Cost: the system and the dial are 13% smaller. Put to the owner; if he wants it grander the
+  lever is the camera elevation (opening the ellipses) or `coreRadius`, not the band.
+- Fixed with it: a custom-modules test that tapped a row hidden under the sticky save bar (now
+  `.hitTestable()`), and the search perf budget - see the measurement note below.
 - **PLAN.md Part 5 is DONE** (`2a9b4da` engine + `9ac81f8` screens): «السفرة», a ninth planet
   for his wife - pantry (its own tables, schema **v6**), recipes with photos copied into app
   storage, the matcher that refuses to guess a conversion, the no-repeat window with her

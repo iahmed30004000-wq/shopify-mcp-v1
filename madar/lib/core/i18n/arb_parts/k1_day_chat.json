@@ -1,0 +1,764 @@
+{
+  "dayChatKindExpense": {
+    "ar": "مصروف",
+    "en": "Expense",
+    "description": "Daily chat: name of a piece kind (Money out)"
+  },
+  "dayChatKindIncome": {
+    "ar": "دخل",
+    "en": "Income",
+    "description": "Daily chat: name of a piece kind (Money in)"
+  },
+  "dayChatKindMeal": {
+    "ar": "أكل",
+    "en": "Meal",
+    "description": "Daily chat: name of a piece kind (A meal)"
+  },
+  "dayChatKindWorkout": {
+    "ar": "تمرين",
+    "en": "Workout",
+    "description": "Daily chat: name of a piece kind (A workout)"
+  },
+  "dayChatKindWater": {
+    "ar": "مي",
+    "en": "Water",
+    "description": "Daily chat: name of a piece kind (Water)"
+  },
+  "dayChatKindPain": {
+    "ar": "وجع",
+    "en": "Pain",
+    "description": "Daily chat: name of a piece kind (Pain)"
+  },
+  "dayChatKindSign": {
+    "ar": "قياس",
+    "en": "Reading",
+    "description": "Daily chat: name of a piece kind (A tracked sign)"
+  },
+  "dayChatKindPrayer": {
+    "ar": "صلاة",
+    "en": "Prayer",
+    "description": "Daily chat: name of a piece kind (A prayer)"
+  },
+  "dayChatKindTaskDone": {
+    "ar": "مهمة خلّصتها",
+    "en": "Task done",
+    "description": "Daily chat: name of a piece kind (A finished task)"
+  },
+  "dayChatKindTaskTodo": {
+    "ar": "مهمة",
+    "en": "Task",
+    "description": "Daily chat: name of a piece kind (A task to do)"
+  },
+  "dayChatKindMood": {
+    "ar": "مزاج",
+    "en": "Mood",
+    "description": "Daily chat: name of a piece kind (Mood)"
+  },
+  "dayChatKindNote": {
+    "ar": "ملاحظة",
+    "en": "Note",
+    "description": "Daily chat: name of a piece kind (A note)"
+  },
+  "dayChatKindContact": {
+    "ar": "تواصل",
+    "en": "Contact",
+    "description": "Daily chat: name of a piece kind (A contact)"
+  },
+  "dayChatKindModule": {
+    "ar": "تسجيل بوحدتك",
+    "en": "Your module",
+    "description": "Daily chat: name of a piece kind (An entry in a module he built)"
+  },
+  "dayChatKindUnread": {
+    "ar": "ما فهمتها",
+    "en": "Not understood",
+    "description": "Daily chat: name of a piece kind (Not understood)"
+  },
+  "dayChatTitleExpense": {
+    "ar": "صرفت {amount} على {note}",
+    "en": "Spent {amount} on {note}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleExpenseBare": {
+    "ar": "صرفت {amount}",
+    "en": "Spent {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleIncome": {
+    "ar": "قبضت {amount} – {note}",
+    "en": "Received {amount} – {note}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleIncomeBare": {
+    "ar": "قبضت {amount}",
+    "en": "Received {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMeal": {
+    "ar": "أكلت {food}",
+    "en": "Ate {food}",
+    "placeholders": {
+      "food": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMealAt": {
+    "ar": "أكلت {food} الساعة {time}",
+    "en": "Ate {food} at {time}",
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkout": {
+    "ar": "تمرين {name}",
+    "en": "{name} workout",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkoutSets": {
+    "ar": "تمرين {name} {sets}×{reps}",
+    "en": "{name} {sets}×{reps}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sets": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkoutWeight": {
+    "ar": "{title} بوزن {weight}",
+    "en": "{title}, {weight}",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleWorkoutMinutes": {
+    "ar": "{title} {minutes, plural, =1{دقيقة} =2{دقيقتين} few{{minutes} دقايق} many{{minutes} دقيقة} other{{minutes} دقيقة}}",
+    "en": "{title}, {minutes, plural, =1{1 minute} other{{minutes} minutes}}",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatTitleWater": {
+    "ar": "شربت {amount}",
+    "en": "Drank {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePain": {
+    "ar": "وجع درجته {score}",
+    "en": "Pain {score}",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePainWhere": {
+    "ar": "وجع {where} درجته {score}",
+    "en": "{where} pain {score}",
+    "placeholders": {
+      "where": {
+        "type": "String"
+      },
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMood": {
+    "ar": "مزاجي {score}",
+    "en": "Mood {score}",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayer": {
+    "ar": "صلّيت {prayer}",
+    "en": "Prayed {prayer}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerMosque": {
+    "ar": "صلّيت {prayer} بالمسجد",
+    "en": "Prayed {prayer} at the mosque",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerJamaah": {
+    "ar": "صلّيت {prayer} جماعة",
+    "en": "Prayed {prayer} in congregation",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerLate": {
+    "ar": "صلّيت {prayer} متأخر",
+    "en": "Prayed {prayer} late",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerMissed": {
+    "ar": "فاتتني {prayer}",
+    "en": "Missed {prayer}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitlePrayerQada": {
+    "ar": "قضيت {prayer}",
+    "en": "Made up {prayer}",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTaskDone": {
+    "ar": "خلّصت «{task}»",
+    "en": "Finished «{task}»",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTaskNew": {
+    "ar": "خلّصت «{task}» – بتتسجّل مهمة خالصة",
+    "en": "Finished «{task}» – filed as a task already done",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTodo": {
+    "ar": "مهمة: {task}",
+    "en": "To do: {task}",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleTodoWhen": {
+    "ar": "مهمة: {task} – {when}",
+    "en": "To do: {task} – {when}",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleNote": {
+    "ar": "ملاحظة: {text}",
+    "en": "Note: {text}",
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleCall": {
+    "ar": "حكيت مع {person}",
+    "en": "Called {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleVisit": {
+    "ar": "زرت {person}",
+    "en": "Visited {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleMessage": {
+    "ar": "بعتت لـ{person}",
+    "en": "Messaged {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleContactOther": {
+    "ar": "تواصلت مع {person}",
+    "en": "Contacted {person}",
+    "placeholders": {
+      "person": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleModule": {
+    "ar": "{module}: {value}",
+    "en": "{module}: {value}",
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleModuleTick": {
+    "ar": "{module}: تم",
+    "en": "{module}: done",
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleSign": {
+    "ar": "{name}: {value}",
+    "en": "{name}: {value}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleUnread": {
+    "ar": "ما فهمت هاي",
+    "en": "I did not understand this one"
+  },
+  "dayChatGapAmount": {
+    "ar": "ما في مبلغ – اكتب المبلغ وبنسجّله",
+    "en": "No amount – type it and it gets filed"
+  },
+  "dayChatGapCurrency": {
+    "ar": "ما قلت العملة، بنحسبها {currency}",
+    "en": "No currency said, taken as {currency}",
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapPerson": {
+    "ar": "«{name}» مش بأهلك – بنضيفه جديد",
+    "en": "«{name}» is not in your people yet – it adds them",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapFood": {
+    "ar": "«{name}» مش بمكتبة أكلك – بنسجّله بالاسم",
+    "en": "«{name}» is not in your food library – logged by name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapExercise": {
+    "ar": "«{name}» مش بتمارينك – بنسجّله بالاسم",
+    "en": "«{name}» is not in your exercises – logged by name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapModule": {
+    "ar": "ما بعرف لوين هاد الرقم – اختار وحدة من وحداتك",
+    "en": "I do not know which tracker this number is for – pick one of yours"
+  },
+  "dayChatGapField": {
+    "ar": "{module}: اختار أي خانة",
+    "en": "{module}: pick which field",
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapValue": {
+    "ar": "ناقص رقم لـ{label}",
+    "en": "{label} needs a number",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapMeasure": {
+    "ar": "ما قلت المجموعات ولا المدة",
+    "en": "No sets or duration said"
+  },
+  "dayChatGapPrayerName": {
+    "ar": "أي صلاة؟",
+    "en": "Which prayer?"
+  },
+  "dayChatGapTime": {
+    "ar": "ما قلت الوقت – بنحسبها هلأ",
+    "en": "No time said – taken as now"
+  },
+  "dayChatGapTaskMatch": {
+    "ar": "ما لقيت مهمة باسم «{name}»",
+    "en": "No open task of yours called «{name}»",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapGuard": {
+    "ar": "فيها «{match}» – جرعة أو تشخيص. بنحفظها ملاحظة بكلامك بس: مَدار بيسجّل وبيرسم، والدوا لدكتورك.",
+    "en": "It carries «{match}» – a dose or a diagnosis. It is kept as your own note only: Madar tracks and charts, medicine is your doctor’s.",
+    "placeholders": {
+      "match": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatGapMeaning": {
+    "ar": "ما فهمت هاي – بتزبطها أو بتخليها ملاحظة",
+    "en": "Not understood – correct it, or keep it as a note"
+  },
+  "dayChatWhereMoney": {
+    "ar": "بتنزل بالمصاري",
+    "en": "Goes to Money"
+  },
+  "dayChatWhereFood": {
+    "ar": "بتنزل بالأكل",
+    "en": "Goes to Food"
+  },
+  "dayChatWhereBody": {
+    "ar": "بتنزل بالجسم",
+    "en": "Goes to Body"
+  },
+  "dayChatWhereHealth": {
+    "ar": "بتنزل بالصحة",
+    "en": "Goes to Health"
+  },
+  "dayChatWhereFaith": {
+    "ar": "بتنزل بمتابعة الصلاة",
+    "en": "Goes to the prayer tracker"
+  },
+  "dayChatWhereTasks": {
+    "ar": "بتنزل بمهامك",
+    "en": "Goes to your tasks"
+  },
+  "dayChatWhereFamily": {
+    "ar": "بتنزل بالأهل",
+    "en": "Goes to Family"
+  },
+  "dayChatWhereModule": {
+    "ar": "بتنزل بـ{module}",
+    "en": "Goes to {module}",
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatWhereNowhere": {
+    "ar": "ما بتنزل لحتى تقلّي",
+    "en": "Nothing is filed until you say so"
+  },
+  "dayChatSure": {
+    "ar": "متأكد",
+    "en": "Sure"
+  },
+  "dayChatMaybe": {
+    "ar": "على الأغلب",
+    "en": "Probably"
+  },
+  "dayChatUnsure": {
+    "ar": "مش متأكد",
+    "en": "Not sure"
+  },
+  "dayChatSummaryTitle": {
+    "ar": "شو صار اليوم – {date}",
+    "en": "Your day – {date}",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSummaryEmpty": {
+    "ar": "لسا ما سجّلت إشي اليوم. اكتبلي شو صار وأنا بوزّعه.",
+    "en": "Nothing logged today yet. Type what happened and it gets filed."
+  },
+  "dayChatSumPrayers": {
+    "ar": "{count, plural, =0{ما سجّلت صلاة} =1{صلّيت فرض واحد} =2{صلّيت فرضين} few{صلّيت {count} فروض} many{صلّيت {count} فرضًا} other{صلّيت {count} فرض}}",
+    "en": "{count, plural, =0{No prayers logged} =1{Prayed 1 obligatory prayer} other{Prayed {count} obligatory prayers}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPrayersMosque": {
+    "ar": "{count, plural, =1{منها واحدة بالمسجد} =2{منها اثنتين بالمسجد} few{منها {count} بالمسجد} many{منها {count} بالمسجد} other{منها {count} بالمسجد}}",
+    "en": "{count, plural, =1{1 of them at the mosque} other{{count} of them at the mosque}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPrayersMissed": {
+    "ar": "{count, plural, =1{وفاتتك صلاة} =2{وفاتتك صلاتين} few{وفاتتك {count} صلوات} many{وفاتتك {count} صلاة} other{وفاتتك {count} صلاة}}",
+    "en": "{count, plural, =1{and 1 was missed} other{and {count} were missed}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumSunnah": {
+    "ar": "{count, plural, =1{وسنّة وحدة} =2{وسنّتين} few{و{count} سنن} many{و{count} سنّة} other{و{count} سنّة}}",
+    "en": "{count, plural, =1{and 1 voluntary prayer} other{and {count} voluntary prayers}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumSpent": {
+    "ar": "صرفت {amount}",
+    "en": "Spent {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumReceived": {
+    "ar": "قبضت {amount}",
+    "en": "Received {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumMeals": {
+    "ar": "{count, plural, =1{أكلت أكلة وحدة} =2{أكلت أكلتين} few{أكلت {count} أكلات} many{أكلت {count} أكلة} other{أكلت {count} أكلة}}",
+    "en": "{count, plural, =1{Ate 1 thing} other{Ate {count} things}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumWater": {
+    "ar": "شربت {amount} مي",
+    "en": "Drank {amount} of water",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumWaterTarget": {
+    "ar": "شربت {amount} مي من {target}",
+    "en": "Drank {amount} of water out of {target}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumWorkouts": {
+    "ar": "{count, plural, =1{تمرين واحد} =2{تمرينين} few{{count} تمارين} many{{count} تمرين} other{{count} تمرين}}",
+    "en": "{count, plural, =1{1 workout} other{{count} workouts}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumMinutes": {
+    "ar": "{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقايق} many{{count} دقيقة} other{{count} دقيقة}}",
+    "en": "{count, plural, =1{1 minute} other{{count} minutes}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPain": {
+    "ar": "أعلى وجع اليوم {score}",
+    "en": "Worst pain today {score}",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumPainWhere": {
+    "ar": "أعلى وجع اليوم {score} ({where})",
+    "en": "Worst pain today {score} ({where})",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "where": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumMood": {
+    "ar": "مزاجك {score}",
+    "en": "Mood {score}",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumTasksDone": {
+    "ar": "{count, plural, =0{ما خلّصت مهمة} =1{خلّصت مهمة} =2{خلّصت مهمتين} few{خلّصت {count} مهام} many{خلّصت {count} مهمة} other{خلّصت {count} مهمة}}",
+    "en": "{count, plural, =0{No tasks finished} =1{Finished 1 task} other{Finished {count} tasks}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumTasksOpen": {
+    "ar": "{count, plural, =1{وباقي عندك مهمة} =2{وباقي عندك مهمتين} few{وباقي عندك {count} مهام} many{وباقي عندك {count} مهمة} other{وباقي عندك {count} مهمة}}",
+    "en": "{count, plural, =1{and 1 is still open} other{and {count} are still open}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumPeople": {
+    "ar": "{count, plural, =1{تواصلت مع واحد} =2{تواصلت مع اثنين} few{تواصلت مع {count} أشخاص} many{تواصلت مع {count} شخص} other{تواصلت مع {count} شخص}}",
+    "en": "{count, plural, =1{Contacted 1 person} other{Contacted {count} people}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumModules": {
+    "ar": "{count, plural, =1{سجّلت قياس واحد} =2{سجّلت قياسين} few{سجّلت {count} قياسات} many{سجّلت {count} قياس} other{سجّلت {count} قياس}}",
+    "en": "{count, plural, =1{Logged 1 reading} other{Logged {count} readings}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumChat": {
+    "ar": "{count, plural, =0{من الشات: ما سجّلت إشي لهلأ} =1{من الشات: سجّلت إشي واحد} =2{من الشات: سجّلت إشيين} few{من الشات: سجّلت {count} إشيات} many{من الشات: سجّلت {count} إشي} other{من الشات: سجّلت {count} إشي}}",
+    "en": "{count, plural, =0{From the chat: nothing filed yet} =1{From the chat: 1 thing filed} other{From the chat: {count} things filed}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayChatSumWith": {
+    "ar": "({names})",
+    "en": "({names})",
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatSumMore": {
+    "ar": "وكمان {count}",
+    "en": "and {count} more",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatListSep": {
+    "ar": "، ",
+    "en": ", ",
+    "description": "Daily chat: separator between his own words in a summary line"
+  }
+}
