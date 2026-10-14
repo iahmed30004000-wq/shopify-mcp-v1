@@ -34,7 +34,7 @@ void main() {
     setUp(() async => db = await openInMemoryMadarDatabase());
     tearDown(() => db.close());
 
-    test('nine planets with palettes, archetypes, equal weights and sources', () async {
+    test('ten planets with palettes, archetypes, weights and sources', () async {
       final planets = await (db.select(db.planets)..orderBy([(t) => OrderingTerm.asc(t.sortOrder)])).get();
       expect(planets.map((p) => p.key), [
         'faith',
@@ -46,8 +46,9 @@ void main() {
         'body',
         'travel',
         'sufra',
+        'games',
       ]);
-      expect(planets.map((p) => p.sortOrder), [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      expect(planets.map((p) => p.sortOrder), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
       expect(planets.map((p) => p.archetype), [
         PlanetArchetype.faith,
         PlanetArchetype.ocean,
@@ -58,20 +59,37 @@ void main() {
         PlanetArchetype.volcanic,
         PlanetArchetype.gasGiant,
         PlanetArchetype.desert,
+        PlanetArchetype.ice,
       ]);
+      // Every world has its own signature colour and its own style.
+      expect(planets.map((p) => p.color).toSet(), hasLength(planets.length));
+      expect(planets.map((p) => p.archetype).toSet(), hasLength(planets.length));
       for (final p in planets) {
         expect(p.color, PlanetPalettes.byKey[p.key]!.surface.toARGB32(), reason: p.key);
-        expect(p.weight, 1.0);
         expect(p.hidden, isFalse);
         final total = p.sources.values.fold<double>(0, (s, v) => s + (v! as num).toDouble());
-        expect(total, closeTo(1.0, 1e-9), reason: p.key);
+        if (p.key == 'games') {
+          // A world that is not counted has nothing to normalise: it ships
+          // with no weighted source at all, and every source it names is
+          // switched off (see MadarDefaults.planets).
+          expect(p.weight, 0.0, reason: 'the games must never count in the balance');
+          expect(total, 0.0);
+          expect(p.sources.values, everyElement(0.0));
+          expect(p.sources, isNotEmpty, reason: 'the sources it switches off are spelled out');
+        } else {
+          expect(p.weight, 1.0, reason: p.key);
+          expect(total, closeTo(1.0, 1e-9), reason: p.key);
+        }
       }
       expect(planets.first.nameAr, 'الإيمان');
       expect(planets.first.nameEn, 'Faith');
       expect(planets[7].nameAr, 'السفر');
       expect(planets[7].nameEn, 'Travel');
-      expect(planets.last.nameAr, 'السفرة');
-      expect(planets.last.nameEn, 'The kitchen');
+      expect(planets[8].nameAr, 'السفرة');
+      expect(planets[8].nameEn, 'The kitchen');
+      expect(planets.last.nameAr, 'الألعاب');
+      expect(planets.last.nameEn, 'Games');
+      expect(planets.last.icon, 'games');
     });
 
     // «السفرة» is a kitchen, not a discipline: a pantry nobody opened today
@@ -84,6 +102,19 @@ void main() {
       expect(sufra.sources['tasks'], 1.0);
       expect(sufra.sources['activity'], 0.0);
       expect(sufra.sources.keys, hasLength(2));
+    });
+
+    // «الألعاب» is a place to rest, not a duty. Its three attached sources
+    // are spelled out at 0 (an absent source would weigh the engine's 0.2
+    // default the moment a task or a habit was filed here), the activity
+    // fallback is off, and the world weighs 0 in the balance – so neither
+    // the balance nor the Neglect Radar can ever reach it.
+    test('the games world is scored by nothing at all and weighs 0', () async {
+      final games = await (db.select(db.planets)..where((t) => t.key.equals('games'))).getSingle();
+      expect(games.weight, 0.0);
+      expect(games.sources, {'tasks': 0.0, 'habits': 0.0, 'projects': 0.0, 'activity': 0.0});
+      expect(games.archetype, PlanetArchetype.ice);
+      expect(games.color, PlanetPalettes.games.surface.toARGB32());
     });
 
     test('currencies: JOD base with 3 decimals, editable reference rates', () async {
@@ -141,22 +172,27 @@ void main() {
       // An explicit seed only adds what is missing.
       await MadarSeeder(db).seed();
       final after = await counts(db);
-      expect(after['planets'], 9);
+      expect(after['planets'], 10);
       expect(after['currencies'], 5);
       expect(after['tag_options'], before['tag_options']);
       expect(after['habits'], 11);
     });
 
-    // «السفرة» arrived after the first eight worlds (Part 5). An install
-    // that is already seeded must still get it – and nothing else: the
-    // habits he deleted stay deleted.
+    // «السفرة» arrived after the first eight worlds (Part 5) and «الألعاب»
+    // after the nine. An install that is already seeded must still get
+    // them – and nothing else: the habits he deleted stay deleted.
     test('a world added by a later release reaches an already-seeded database', () async {
-      await (db.delete(db.planets)..where((t) => t.key.equals('sufra'))).go();
+      await (db.delete(db.planets)..where((t) => t.key.isIn(['sufra', 'games']))).go();
       await db.delete(db.habits).go();
       expect(await MadarSeeder(db).seedIfNeeded(), isTrue);
-      final keys = (await db.select(db.planets).get()).map((p) => p.key);
-      expect(keys, contains('sufra'));
-      expect(keys, hasLength(9));
+      final rows = await db.select(db.planets).get();
+      final keys = rows.map((p) => p.key);
+      expect(keys, containsAll(['sufra', 'games']));
+      expect(keys, hasLength(10));
+      // And it arrives whole: the games world is still the one that does
+      // not count (an upgrade must not seed it at weight 1).
+      expect(rows.firstWhere((p) => p.key == 'games').weight, 0.0);
+      expect(rows.firstWhere((p) => p.key == 'games').sources.values, everyElement(0.0));
       expect(await db.select(db.habits).get(), isEmpty, reason: 'only the worlds are re-added');
       // And once it is there, nothing happens again.
       expect(await MadarSeeder(db).seedIfNeeded(), isFalse);

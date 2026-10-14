@@ -26428,4 +26428,28 @@ class L10nEn extends L10n {
 
   @override
   String get sufraNoPhotos => 'No photos on this dish yet';
+
+  @override
+  String get gamesWorldTitle => 'Games';
+
+  @override
+  String get gamesWorldBestTitle => 'Your best scores';
+
+  @override
+  String get gamesWorldBestEmpty =>
+      'You haven\'t played anything yet. Open the hall and pick a game.';
+
+  @override
+  String get gamesWorldBestSeeAll => 'The ticket book';
+
+  @override
+  String gamesWorldPlayedGames(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count games with a score',
+      one: '1 game with a score',
+    );
+    return '$_temp0';
+  }
 }

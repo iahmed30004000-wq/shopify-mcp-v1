@@ -21,9 +21,12 @@ import 'package:madar/features/health/hub/health_hub.dart';
 import 'package:madar/features/money/hub/money_hub.dart';
 import 'package:madar/features/nutrition/presentation/nutrition_ui.dart' show NutritionTodayCard;
 import 'package:madar/features/orbit/data/planet_customization_service.dart';
+import 'package:madar/features/orbit/presentation/planet/cinema_entry_card.dart';
 import 'package:madar/features/orbit/presentation/planet/faith_hub.dart';
+import 'package:madar/features/orbit/presentation/planet/games_scores_card.dart';
 import 'package:madar/features/orbit/presentation/planet/life_hubs.dart';
 import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
+import 'package:madar/features/saved_games/saved_games.dart' show SavedGamesShelf;
 import 'package:madar/features/sufra/sufra.dart' show SufraTodayCard;
 import 'package:madar/features/travel/travel.dart';
 import 'package:madar/features/work/work.dart';
@@ -96,8 +99,8 @@ void _testWidgets(String description, WidgetTesterCallback body) =>
     testWidgets(description, body, timeout: const Timeout(Duration(minutes: 3)));
 
 void main() {
-  test('the hubs cover the six life worlds only', () {
-    expect(LifeHubs.keys, {'work', 'family', 'travel', 'growth', 'body', 'sufra'});
+  test('the hubs cover the seven life worlds only', () {
+    expect(LifeHubs.keys, {'work', 'family', 'travel', 'growth', 'body', 'sufra', 'games'});
     for (final k in LifeHubs.keys) {
       expect(LifeHubs.has(k), isTrue);
     }
@@ -110,6 +113,7 @@ void main() {
     expect(LifeHubs.of('growth'), isA<GrowthHub>());
     expect(LifeHubs.of('body'), isA<BodyHub>());
     expect(LifeHubs.of('sufra'), isA<SufraHub>());
+    expect(LifeHubs.of('games'), isA<GamesHub>());
   });
 
   final hubs = <_Hub>[
@@ -172,6 +176,7 @@ void main() {
     (
       key: 'growth',
       hub: GrowthHub,
+      // No cinema card: the games are «الألعاب», their own world.
       cards: [GrowthTodayCard],
       // «كل الأهداف» is the card's own door; the tools never repeat it.
       tools: [((l) => l.workProjects, AppRoutes.workProjects)],
@@ -213,6 +218,20 @@ void main() {
       opens: [
         (AppRoutes.sufraTonight, (t) => t.widget<SufraTodayCard>(find.byType(SufraTodayCard)).onOpen()),
       ],
+    ),
+    // «الألعاب» – the games' own world: the hall's door, his best scores
+    // and the games he saved from a link.
+    (
+      key: 'games',
+      hub: GamesHub,
+      cards: [CinemaEntryCard, GamesScoresCard, SavedGamesShelf],
+      // No tools row: both of this world's screens are already a card
+      // above, each with its own door (one screen, one door, named once).
+      tools: [],
+      // The cards' own taps (the marquee into the hall, the scores card
+      // into the ticket book) are proven in games_world_test.dart, where
+      // the records are seeded.
+      opens: [],
     ),
   ];
 
@@ -324,7 +343,7 @@ void main() {
     await _frames(tester, 60);
     await settleApp(tester);
     expect(key, startsWith('custom_'));
-    for (final hub in [WorkHub, FamilyHub, TravelHub, GrowthHub, BodyHub]) {
+    for (final hub in [WorkHub, FamilyHub, TravelHub, GrowthHub, BodyHub, GamesHub]) {
       expect(find.byType(hub), findsNothing);
     }
     await _reveal(tester, find.byType(CustomModulesCard));

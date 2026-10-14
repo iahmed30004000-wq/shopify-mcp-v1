@@ -55,12 +55,12 @@ class MadarSeeder {
   /// Returns whether anything was done.
   ///
   /// An already-seeded database still receives a **world** that a later
-  /// release added – «السفرة», the kitchen (Part 5), arrived after the
-  /// first eight. The planets are the only section treated this way, and
-  /// safely: a built-in world cannot be deleted, only hidden, so adding a
-  /// missing key never brings back something the user threw away. Habits
-  /// and tag options he deleted stay deleted, which is why this is not a
-  /// seed-version bump.
+  /// release added – «السفرة», the kitchen (Part 5), arrived after the first
+  /// eight, and «الألعاب», the games' own world, after the nine. The planets
+  /// are the only section treated this way, and safely: a built-in world
+  /// cannot be deleted, only hidden, so adding a missing key never brings
+  /// back something the user threw away. Habits and tag options he deleted
+  /// stay deleted, which is why this is not a seed-version bump.
   Future<bool> seedIfNeeded() {
     return db.transaction(() async {
       if (await _storedVersion() >= version) return _addMissingPlanets();
@@ -179,7 +179,7 @@ class MadarSeeder {
             color: p.color,
             archetype: p.archetype,
             icon: Value(p.icon),
-            weight: const Value(1.0),
+            weight: Value(p.weight),
             sources: Value(Map<String, Object?>.of(p.sources)),
             sortOrder: Value(order++),
           ),

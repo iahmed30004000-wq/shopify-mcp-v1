@@ -345,6 +345,7 @@ abstract final class SearchLabels {
     'body' => l.planetBody,
     'travel' => l.planetTravel,
     'sufra' => l.sufraTitle,
+    'games' => l.gamesWorldTitle,
     'custom' => l.searchPlanetCustom,
     _ => null,
   };

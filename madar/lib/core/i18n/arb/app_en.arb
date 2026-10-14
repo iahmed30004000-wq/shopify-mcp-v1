@@ -24520,5 +24520,20 @@
       }
     }
   },
-  "sufraNoPhotos": "No photos on this dish yet"
+  "sufraNoPhotos": "No photos on this dish yet",
+  "gamesWorldTitle": "Games",
+  "@gamesWorldTitle": {
+    "description": "The games world (planet key `games`) – the hall, the saved games and the records"
+  },
+  "gamesWorldBestTitle": "Your best scores",
+  "gamesWorldBestEmpty": "You haven't played anything yet. Open the hall and pick a game.",
+  "gamesWorldBestSeeAll": "The ticket book",
+  "gamesWorldPlayedGames": "{count, plural, =1{1 game with a score} other{{count} games with a score}}",
+  "@gamesWorldPlayedGames": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

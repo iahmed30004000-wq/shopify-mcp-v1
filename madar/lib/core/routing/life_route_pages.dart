@@ -128,11 +128,15 @@ abstract final class LifeNav {
 /// | custom_modules, custom_entries (`moduleId`) | `/modules/module/<id>` | `/modules` |
 /// | record_lists | `/list/<id>` | its host's lists (`hostTable`/`hostId`), else `/lists` |
 /// | record_list_items (`listId`) | `/list/<listId>` | `/lists` |
+/// | game (a programme entry) | `/cinema/game/<id>` | `/cinema` (the hall) |
+/// | savedGame | `/saved-games` | same |
 ///
 /// A child record (a card, a contact, a log) opens its parent, named by
 /// [extra] (the search documents carry it). Anything else: null.
 abstract final class LifeRecordLinks {
-  /// The tables [locationOf] maps.
+  /// The record kinds [locationOf] maps – a table name, except for the two
+  /// kinds of game, which are not rows in a table (`game` is one of Madar
+  /// Cinema's own shows, `savedGame` one he saved from a link).
   static const Set<String> tables = {
     'people',
     'contact_logs',
@@ -166,6 +170,11 @@ abstract final class LifeRecordLinks {
     'recipe_ingredients',
     'cooked_meals',
     'kitchen_rules',
+    // «الألعاب» – the games' own world. A game is not a row in a table, but
+    // a link to one must still land somewhere: in the hall, where it is
+    // played, which is this world's first door.
+    'game',
+    'savedGame',
   };
 
   static String? locationOf(String? refTable, String? refId, {Map<String, Object?> extra = const {}}) {
@@ -211,6 +220,11 @@ abstract final class LifeRecordLinks {
       'recipe_ingredients' => either(of('recipeId'), AppRoutes.sufraRecipeOf, AppRoutes.sufraRecipes),
       'cooked_meals' => AppRoutes.sufraHistory,
       'kitchen_rules' => AppRoutes.sufraRules,
+      // «الألعاب». A show opens itself, full screen; without an id (or with
+      // one the programme no longer has) the hall opens, so a game link
+      // never dead-ends. The games he saved from a link have their own page.
+      'game' => either(id, AppRoutes.cinemaGameOf, AppRoutes.cinema),
+      'savedGame' => AppRoutes.savedGames,
       'custom_modules' => either(id, AppRoutes.moduleOf, AppRoutes.modules),
       'custom_entries' => either(of('moduleId'), AppRoutes.moduleOf, AppRoutes.modules),
       // A list opens itself; without its id, its host's lists (the search

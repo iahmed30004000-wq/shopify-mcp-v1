@@ -1,8 +1,8 @@
-// Madar Cinema's door on the Growth world's page, in the real app with a
-// realistic Growth (learning goals in progress), in Arabic and English on
-// every theme. Writes screenshots/cinema/wiring/growth_card_<lang>_<theme>.png
-// (the page scrolled to the card) and FAILS when text painted on the card
-// misses WCAG AA (rendered pixels) or the layout overflows. LOOK at them.
+// Madar Cinema's door on «الألعاب»'s page (the games' own world), in the
+// real app, in Arabic and English on every theme. Writes
+// screenshots/cinema/wiring/games_card_<lang>_<theme>.png (the page
+// scrolled to the card) and FAILS when text painted on the card misses
+// WCAG AA (rendered pixels) or the layout overflows. LOOK at them.
 //
 //   scratchpad/ft --tags screenshot test/features/orbit/presentation/cinema_entry_card_screenshot_test.dart
 @Tags(['screenshot'])
@@ -22,7 +22,6 @@ import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
 import '../../../core/design/rendered_contrast.dart';
 import '../../../helpers/screenshot_harness.dart';
 import '../../../helpers/test_app.dart';
-import '../../growth/growth_harness.dart' show growthTestNow, seedScenario;
 import '../../lock/lock_test_utils.dart';
 import 'orbit_scene_fixtures.dart' show preloadOrbitShaders;
 
@@ -55,15 +54,18 @@ Future<void> _sheetTo(WidgetTester tester, Finder target, {double below = 120}) 
   await _frames(tester, 12);
 }
 
+/// An evening, when he would actually open the hall.
+final DateTime _now = DateTime(2026, 10, 14, 20, 30);
+
 Future<void> _shot(WidgetTester tester, String lang, MadarThemeId theme) async {
   await preloadOrbitShaders(tester);
+  // A fresh install: the card must read well before anything was played.
   final db = await openTestDatabase(tester, languageCode: lang);
-  await tester.runAsync(() => seedScenario(db, lang: lang));
   final setup = await buildMadarTestApp(
     tester,
     settings: AppSettings(onboarded: true, languageCode: lang, themeId: theme),
-    initialLocation: AppRoutes.planetOf('growth'),
-    now: growthTestNow,
+    initialLocation: AppRoutes.planetOf('games'),
+    now: _now,
     database: false,
     overrides: [databaseUnlockProvider.overrideWithValue(AsyncValue.data(db)), ...LockFixture.empty().overrides],
   );
@@ -73,7 +75,7 @@ Future<void> _shot(WidgetTester tester, String lang, MadarThemeId theme) async {
   await captureScreen(
     tester,
     RepaintBoundary(key: boundary, child: setup.app),
-    'cinema/wiring/growth_card_${lang}_${theme.name}',
+    'cinema/wiring/games_card_${lang}_${theme.name}',
     settle: const Duration(milliseconds: 1400),
     beforeCapture: (tester) async {
       final card = find.byType(CinemaEntryCard);
@@ -91,7 +93,7 @@ Future<void> _shot(WidgetTester tester, String lang, MadarThemeId theme) async {
   );
   await tester.pumpWidget(const SizedBox());
   await _frames(tester, 4);
-  expect(error, isNull, reason: 'layout overflow or error on the Growth page');
+  expect(error, isNull, reason: 'layout overflow or error on the games page');
   expect(misses, isEmpty, reason: 'text on the cinema card below WCAG AA ($lang ${theme.name})');
 }
 
@@ -105,6 +107,6 @@ void main() {
     ('ar', MadarThemeId.emerald),
     ('ar', MadarThemeId.desert),
   ]) {
-    testWidgets('growth card $lang ${theme.name}', (tester) => _shot(tester, lang, theme));
+    testWidgets('games card $lang ${theme.name}', (tester) => _shot(tester, lang, theme));
   }
 }

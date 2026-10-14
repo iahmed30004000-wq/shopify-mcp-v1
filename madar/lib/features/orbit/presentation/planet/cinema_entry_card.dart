@@ -10,10 +10,11 @@ import '../../../../core/motion/motion.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../cinema/games/catalog.dart';
 
-/// Madar Cinema's door on the Growth world's page: a small marquee – a sign
-/// ringed with bulbs that chase once when the card appears and then stay
-/// lit (lit at once under reduced motion) – with the cinema's name and
-/// line, how many shows can be played now, and a ticket into the hall.
+/// Madar Cinema's door on «الألعاب»'s page (the games' own world): a small
+/// marquee – a sign ringed with bulbs that chase once when the card appears
+/// and then stay lit (lit at once under reduced motion) – with the cinema's
+/// name and line, how many shows can be played now, and a ticket into the
+/// hall.
 ///
 /// The whole card is one button ([onOpen]); it reads as "Madar Cinema, its
 /// line, the shows ready". Theme tokens only: on Pearl the bulbs and ink

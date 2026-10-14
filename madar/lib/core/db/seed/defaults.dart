@@ -39,7 +39,13 @@ abstract final class PlanetSourceKeys {
 /// One of the built-in planets.
 @immutable
 class DefaultPlanet {
-  const DefaultPlanet({required this.key, required this.archetype, required this.icon, required this.sources});
+  const DefaultPlanet({
+    required this.key,
+    required this.archetype,
+    required this.icon,
+    required this.sources,
+    this.weight = 1.0,
+  });
 
   /// Stable key (`Planets.key`).
   final String key;
@@ -48,8 +54,16 @@ class DefaultPlanet {
   /// Icon name (`Planets.icon`), resolved to a glyph by the UI.
   final String icon;
 
-  /// Default score sources → weight (sums to 1).
+  /// Default score sources → weight. They sum to 1 for every world that
+  /// counts; a world that does not count ([weight] 0) has every source at
+  /// 0 instead – there is nothing to normalise.
   final Map<String, double> sources;
+
+  /// How much this world counts in the overall balance (`Planets.weight`).
+  /// **0 means it never counts** – `SceneSnapshot` skips a planet of weight
+  /// 0 both when it averages the balance and when it fills the Neglect
+  /// Radar. Only «الألعاب» ships that way; see [MadarDefaults.planets].
+  final double weight;
 
   /// Signature surface colour from [PlanetPalettes] as ARGB.
   int get color => PlanetPalettes.byKey[key]!.surface.toARGB32();
@@ -66,6 +80,7 @@ class DefaultPlanet {
     'travel' => l10n.planetTravel,
     // «السفرة» is named by the owner; the kitchen's own string file holds it.
     'sufra' => l10n.sufraTitle,
+    'games' => l10n.gamesWorldTitle,
     _ => key,
   };
 }
@@ -111,7 +126,8 @@ class DefaultHabit {
 
 /// Generic first-run content. Nothing here is personal.
 abstract final class MadarDefaults {
-  /// The nine built-in planets in orbit order, all with equal weight 1.0.
+  /// The ten built-in planets in orbit order. All weigh 1.0 in the balance
+  /// except «الألعاب», which weighs 0 on purpose (see below).
   static const planets = <DefaultPlanet>[
     DefaultPlanet(
       key: 'faith',
@@ -198,6 +214,56 @@ abstract final class MadarDefaults {
       archetype: PlanetArchetype.desert,
       icon: 'food',
       sources: {PlanetSourceKeys.tasks: 1.0, PlanetSourceKeys.activity: 0.0},
+    ),
+    // «الألعاب» – the games' own world (the hall, the saved games and the
+    // ticket book). It is a *place*, not a discipline, and the one rule the
+    // owner set for it is absolute: **it must never count in the balance
+    // and must never reach the Neglect Radar.** Madar scolding him for not
+    // playing would be absurd. Two independent guards, so neither can be
+    // the single point of failure:
+    //
+    // * `weight: 0` – `SceneSnapshot.build` skips a planet of weight 0 both
+    //   when it averages the balance and when it fills the radar, whatever
+    //   its score says. This is the guarantee, and it holds even for the
+    //   things this file cannot foresee: a task he files here, a habit, a
+    //   project, a tracker of his own attached to this world.
+    // * `activity: 0` – switches off `PlanetScoreEngine`'s implicit
+    //   "nothing was recorded here lately" decay, the same way «السفرة»
+    //   does, so an evening he did not play never dims the world either.
+    //
+    // Unlike «السفرة», `tasks` is **not** a source here: not because a task
+    // under the games is forbidden (he may file one, and it opens from this
+    // world like any other), but because a game is never owed. A task that
+    // slipped is a reason, and a games world that could raise a reason –
+    // even one he brought on himself – is exactly the scolding that was
+    // ruled out. The three *attached* sources are therefore spelled out at
+    // 0 rather than left absent: an absent source still weighs the engine's
+    // 0.2 default the moment a record of that kind is attached, while an
+    // explicit 0 keeps it out of the score **and** stops the engine from
+    // deriving its reasons at all.
+    //
+    // With every weighted source off, `wsum == 0` and the world is
+    // **dormant**: a calm neutral «—» instead of a score out of ten, which
+    // is the honest reading of a place one goes to rest. (A tracker of his
+    // own attached to this world is the one thing that can still score it –
+    // its id cannot be known here – and that is what `weight: 0` is for.)
+    //
+    // Sources therefore sum to 0, not to 1: a world that is not counted has
+    // nothing to normalise. Every *counted* world still sums to 1.
+    //
+    // His best scores and his play time are on this world's own hub, where
+    // they are a pleasure, and never as a mark against him.
+    DefaultPlanet(
+      key: 'games',
+      archetype: PlanetArchetype.ice,
+      icon: 'games',
+      weight: 0,
+      sources: {
+        PlanetSourceKeys.tasks: 0.0,
+        PlanetSourceKeys.habits: 0.0,
+        PlanetSourceKeys.projects: 0.0,
+        PlanetSourceKeys.activity: 0.0,
+      },
     ),
   ];
 

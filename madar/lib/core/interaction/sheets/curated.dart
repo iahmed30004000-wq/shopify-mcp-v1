@@ -79,6 +79,7 @@ abstract final class InteractionIcons {
     'gift': Icons.card_giftcard_rounded,
     'party': Icons.celebration_rounded,
     'trophy': Icons.emoji_events_rounded,
+    'games': Icons.sports_esports_rounded,
     'flag': Icons.flag_rounded,
     'bolt': Icons.bolt_rounded,
     'fire': Icons.local_fire_department_rounded,

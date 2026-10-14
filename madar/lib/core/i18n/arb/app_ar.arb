@@ -24520,5 +24520,20 @@
       }
     }
   },
-  "sufraNoPhotos": "ما في صور لهاي الطبخة"
+  "sufraNoPhotos": "ما في صور لهاي الطبخة",
+  "gamesWorldTitle": "الألعاب",
+  "@gamesWorldTitle": {
+    "description": "The games world (planet key `games`) – the hall, the saved games and the records"
+  },
+  "gamesWorldBestTitle": "أحسن نتائجك",
+  "gamesWorldBestEmpty": "لسا ما لعبت ولا لعبة. افتح القاعة واختار واحدة.",
+  "gamesWorldBestSeeAll": "دفتر التذاكر",
+  "gamesWorldPlayedGames": "{count, plural, =1{لعبة واحدة إلها نتيجة} =2{لعبتان إلهما نتيجة} few{{count} ألعاب إلها نتيجة} many{{count} لعبةً إلها نتيجة} other{{count} لعبة إلها نتيجة}}",
+  "@gamesWorldPlayedGames": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

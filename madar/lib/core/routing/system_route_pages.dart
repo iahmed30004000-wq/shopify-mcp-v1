@@ -262,8 +262,9 @@ class TogetherRoutePage extends ConsumerWidget {
 ///
 /// The life worlds' records (people, boards, projects, trips, documents,
 /// templates, learning goals, the body's tabs, the food library, plan and
-/// rules, the trackers) go through [LifeRecordLinks], so the search and the
-/// Neglect Radar never disagree about where a record lives.
+/// rules, the trackers, the kitchen, and the games' two kinds) go through
+/// [LifeRecordLinks], so the search and the Neglect Radar never disagree
+/// about where a record lives.
 String? searchTargetOf(SearchDoc doc) {
   final id = doc.refId.isEmpty ? null : doc.refId;
   String? e(String key) {
@@ -326,9 +327,8 @@ String? searchTargetOf(SearchDoc doc) {
     'debt_payments' => _or(e('debtId'), (d) => AppRoutes.goalsOf(debt: d), AppRoutes.goalsOf(tab: 'debts')),
     'obligations' => _or(id, (o) => AppRoutes.goalsOf(obligation: o), AppRoutes.goalsOf(tab: 'obligations')),
 
-    // --------------------------------------------------- Madar Cinema
-    'game' => id == null ? AppRoutes.cinema : AppRoutes.cinemaGameOf(id),
-    'savedGame' => AppRoutes.savedGames,
+    // The games («الألعاب», `game` / `savedGame`) go through
+    // [LifeRecordLinks] with the other worlds' records, above.
 
     _ => null,
   };

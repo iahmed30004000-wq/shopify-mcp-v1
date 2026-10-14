@@ -27099,4 +27099,31 @@ class L10nAr extends L10n {
 
   @override
   String get sufraNoPhotos => 'ما في صور لهاي الطبخة';
+
+  @override
+  String get gamesWorldTitle => 'الألعاب';
+
+  @override
+  String get gamesWorldBestTitle => 'أحسن نتائجك';
+
+  @override
+  String get gamesWorldBestEmpty =>
+      'لسا ما لعبت ولا لعبة. افتح القاعة واختار واحدة.';
+
+  @override
+  String get gamesWorldBestSeeAll => 'دفتر التذاكر';
+
+  @override
+  String gamesWorldPlayedGames(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count لعبة إلها نتيجة',
+      many: '$count لعبةً إلها نتيجة',
+      few: '$count ألعاب إلها نتيجة',
+      two: 'لعبتان إلهما نتيجة',
+      one: 'لعبة واحدة إلها نتيجة',
+    );
+    return '$_temp0';
+  }
 }

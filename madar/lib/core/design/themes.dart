@@ -302,6 +302,12 @@ abstract final class PlanetPalettes {
   /// recognisable in the sky at a glance.
   static const sufra = PlanetPalette(Color(0xFFDE6E8F), Color(0xFFFFC6D8), Color(0xFF5A1430));
 
+  /// «الألعاب» (the games world): arcade azure – the one pure blue no other
+  /// world holds (Health is teal-cyan, Travel is lavender), so the games
+  /// read as their own planet at a glance. Its `ice` style frosts the disc
+  /// a shade cooler; the vivid blue stays its label's and its hub's colour.
+  static const games = PlanetPalette(Color(0xFF3E8FF0), Color(0xFFAFD8FF), Color(0xFF0C2A5C));
+
   static const byKey = <String, PlanetPalette>{
     'faith': faith,
     'health': health,
@@ -312,6 +318,7 @@ abstract final class PlanetPalettes {
     'body': body,
     'travel': travel,
     'sufra': sufra,
+    'games': games,
   };
 
   /// Palette for any colour (user-added planets / recolouring).

@@ -366,9 +366,12 @@ abstract final class AppRoutes {
   /// Location of the list [listId].
   static String recordListOf(String listId) => '/list/${Uri.encodeComponent(listId)}';
 
-  // Phase 7 – Madar Cinema. The hall opens from the Growth world's page;
-  // the hall pushes its own game screen and Saved Games pages, and these
-  // locations serve deep links (search, notifications, shared links).
+  // Phase 7 – Madar Cinema, under «الألعاب», the games' own world
+  // (`planetOf('games')` is that world's page, and the hall's door is the
+  // first card on it). The hall pushes its own game screen and Saved Games
+  // pages, and these locations serve deep links (search, notifications,
+  // shared links); `LifeRecordLinks` maps a `game` / `savedGame` link onto
+  // them.
 
   /// The Madar Cinema hall (the games' lobby).
   static const String cinema = '/cinema';

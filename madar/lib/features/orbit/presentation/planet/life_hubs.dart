@@ -17,9 +17,11 @@ import '../../../custom_modules/custom_modules.dart' show CustomModulesCard, cus
 import '../../../family/family.dart' show FamilyActions, FamilyTodayCard;
 import '../../../growth/growth.dart' show GrowthTodayCard;
 import '../../../money/hub/money_hub.dart' show MoneyTools;
+import '../../../saved_games/saved_games.dart' show SavedGamesShelf;
 import '../../../travel/travel.dart' show TravelTab, TravelTodayCard;
 import '../../../work/work.dart' show Top3Card, WorkTodayCard;
 import 'cinema_entry_card.dart';
+import 'games_scores_card.dart';
 
 /// The Phase 6 life worlds' own page content (the hubs under the balance
 /// ring of Work, Family, Travel, Growth and Body): the packages' compact
@@ -27,7 +29,7 @@ import 'cinema_entry_card.dart';
 /// ([LifeNav]); every part is a [StaggerItem] of the planet page's
 /// entrance.
 abstract final class LifeHubs {
-  static const Set<String> keys = {'work', 'family', 'travel', 'growth', 'body', 'sufra'};
+  static const Set<String> keys = {'work', 'family', 'travel', 'growth', 'body', 'sufra', 'games'};
 
   /// Whether [planetKey] has a life hub.
   static bool has(String planetKey) => keys.contains(planetKey);
@@ -39,6 +41,7 @@ abstract final class LifeHubs {
     'travel' => TravelHub(firstIndex: firstIndex),
     'growth' => GrowthHub(firstIndex: firstIndex),
     'sufra' => SufraHub(firstIndex: firstIndex),
+    'games' => GamesHub(firstIndex: firstIndex),
     _ => BodyHub(firstIndex: firstIndex),
   };
 }
@@ -62,6 +65,13 @@ class _HubColumn {
         ),
       ),
     );
+  }
+
+  /// A part that paints to both edges and brings its own insets (a
+  /// horizontal shelf, whose posters must not be clipped by the gutter).
+  void wide(Widget child) {
+    if (children.isNotEmpty && children.last is! _Header) children.add(const SizedBox(height: Space.m));
+    children.add(StaggerItem(index: index++, child: child));
   }
 
   void header(String title) => children.add(_Header(index: index, title: title));
@@ -173,9 +183,12 @@ class TravelHub extends StatelessWidget {
 }
 
 /// Growth: the learning goals in progress with their pace (the card's own
-/// link is the one door to all of them), the door to Madar Cinema (the
-/// games live under Growth), then the projects (a project can belong to
-/// Growth and feed its balance).
+/// link is the one door to all of them), then the projects (a project can
+/// belong to Growth and feed its balance).
+///
+/// The games used to have their door here. They do not any more: playing is
+/// not self-improvement, and they are «الألعاب», a world of their own
+/// ([GamesHub]). Growth keeps what is actually growth.
 class GrowthHub extends StatelessWidget {
   const GrowthHub({super.key, this.firstIndex = 1});
 
@@ -187,7 +200,6 @@ class GrowthHub extends StatelessWidget {
     final l = L10n.of(context);
     final hub = _HubColumn(firstIndex)
       ..card(const GrowthTodayCard(onOpen: LifeNav.growth))
-      ..card(const CinemaEntryCard(onOpen: CinemaNav.hall))
       ..header(l.lifeHubToolsTitle)
       ..card(
         _LifeTools(
@@ -287,6 +299,38 @@ class SufraHub extends StatelessWidget {
           ],
         ),
       );
+    return hub.build();
+  }
+}
+
+/// «الألعاب» – the games' own world: the hall's door (the marquee card,
+/// which counts the shows ready to play), then his best scores, then the
+/// games he saved from a link.
+///
+/// No row of tools: this world has two screens and both are already a full
+/// card here, with their own door. A tool tile would be the same screen
+/// named twice (the Growth hub leaves out its goals tile for the same
+/// reason).
+///
+/// This world never counts in the balance and never reaches the Neglect
+/// Radar (`weight: 0`, see `MadarDefaults.planets`), so nothing on this hub
+/// is a duty: no streak, no "you have not played in 7 days", no score out
+/// of ten. A fresh install shows the hall with its shows, an empty ticket
+/// book and the invitation to save a game – never a made-up score.
+class GamesHub extends StatelessWidget {
+  const GamesHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final hub = _HubColumn(firstIndex)
+      ..card(const CinemaEntryCard(onOpen: CinemaNav.hall))
+      ..card(GamesScoresCard(onOpen: CinemaNav.hall))
+      // The shelf's posters run to both edges and it brings its own header
+      // and insets, so it is not wrapped in the cards' gutter.
+      ..wide(SavedGamesShelf(onSeeAll: () => CinemaNav.savedGames(context)));
     return hub.build();
   }
 }

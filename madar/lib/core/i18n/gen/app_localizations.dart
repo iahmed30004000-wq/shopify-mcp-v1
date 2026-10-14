@@ -41896,6 +41896,36 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'ما في صور لهاي الطبخة'**
   String get sufraNoPhotos;
+
+  /// The games world (planet key `games`) – the hall, the saved games and the records
+  ///
+  /// In ar, this message translates to:
+  /// **'الألعاب'**
+  String get gamesWorldTitle;
+
+  /// No description provided for @gamesWorldBestTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسن نتائجك'**
+  String get gamesWorldBestTitle;
+
+  /// No description provided for @gamesWorldBestEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا ما لعبت ولا لعبة. افتح القاعة واختار واحدة.'**
+  String get gamesWorldBestEmpty;
+
+  /// No description provided for @gamesWorldBestSeeAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفتر التذاكر'**
+  String get gamesWorldBestSeeAll;
+
+  /// No description provided for @gamesWorldPlayedGames.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{لعبة واحدة إلها نتيجة} =2{لعبتان إلهما نتيجة} few{{count} ألعاب إلها نتيجة} many{{count} لعبةً إلها نتيجة} other{{count} لعبة إلها نتيجة}}'**
+  String gamesWorldPlayedGames(int count);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -13,8 +13,8 @@ import 'routes.dart';
 /// and (later) search hits and shared links share one stack.
 ///
 /// In-app links `push` (back returns to the page they were opened from –
-/// the Growth world's page, Settings …). Inside the hall, the hall itself
-/// pushes its game screen (through its iris) and the Saved Games page.
+/// «الألعاب»'s page, Settings …). Inside the hall, the hall itself pushes
+/// its game screen (through its iris) and the Saved Games page.
 abstract final class CinemaNav {
   /// The cinema hall.
   static void hall(BuildContext context) => unawaited(context.push<void>(AppRoutes.cinema));

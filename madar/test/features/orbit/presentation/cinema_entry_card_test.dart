@@ -1,8 +1,8 @@
-// Madar Cinema's door on the Growth world's page: the marquee card sits in
-// the Growth hub, reads as one button ("Madar Cinema. <line>. <shows>"),
-// counts the programme's playable shows, chases its bulbs once (lit at once
-// under reduced motion) and opens the hall as a route; back returns to the
-// Growth page. In both languages.
+// Madar Cinema's door on «الألعاب»'s page: the marquee card is the first
+// card of the games hub, reads as one button ("Madar Cinema. <line>.
+// <shows>"), counts the programme's playable shows, chases its bulbs once
+// (lit at once under reduced motion) and opens the hall as a route; back
+// returns to the games world. In both languages.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
@@ -12,8 +12,8 @@ import 'package:madar/core/settings/app_settings.dart';
 import 'package:madar/core/sound/sound_api.dart';
 import 'package:madar/features/cinema/games/catalog.dart';
 import 'package:madar/features/cinema/hall/hall.dart' show CinemaHallScreen;
-import 'package:madar/features/growth/growth.dart' show GrowthTodayCard;
 import 'package:madar/features/orbit/presentation/planet/cinema_entry_card.dart';
+import 'package:madar/features/orbit/presentation/planet/games_scores_card.dart';
 import 'package:madar/features/orbit/presentation/planet/life_hubs.dart';
 import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
 
@@ -36,24 +36,26 @@ void main() {
   });
 
   for (final lang in ['ar', 'en']) {
-    testWidgets('$lang: the Growth page\'s cinema card opens the hall; back returns to Growth', (tester) async {
+    testWidgets('$lang: the games page\'s cinema card opens the hall; back returns to the world', (tester) async {
       final l = lookupL10n(Locale(lang));
       final app = await pumpMadarApp(
         tester,
         settings: AppSettings(onboarded: true, languageCode: lang),
-        initialLocation: AppRoutes.planetOf('growth'),
+        initialLocation: AppRoutes.planetOf('games'),
         overrides: LockFixture.empty().overrides,
         settle: false,
       );
       await _frames(tester, 60);
       await settleApp(tester);
       final card = find.byType(CinemaEntryCard);
-      expect(find.descendant(of: find.byType(GrowthHub), matching: card), findsOneWidget);
+      expect(find.descendant(of: find.byType(GamesHub), matching: card), findsOneWidget);
+      // It never lives on the Growth world any more.
+      expect(find.byType(GrowthHub), findsNothing);
       await tester.scrollUntilVisible(card, 250, scrollable: _sheet);
       await tester.ensureVisible(card);
       await tester.pumpAndSettle();
-      // Right below today's learning card, above the tools.
-      expect(tester.getTopLeft(card).dy, greaterThan(tester.getTopLeft(find.byType(GrowthTodayCard)).dy));
+      // The world's first card, above his best scores.
+      expect(tester.getTopLeft(card).dy, lessThan(tester.getTopLeft(find.byType(GamesScoresCard)).dy));
       expect(Directionality.of(tester.element(card)), lang == 'ar' ? TextDirection.rtl : TextDirection.ltr);
       final count = CinemaEntryCard.playableShows;
       final shows = l.cinemaWiringShowsReady(count);
@@ -86,8 +88,8 @@ void main() {
       await tester.binding.handlePopRoute();
       await _frames(tester, 30);
       expect(find.byType(CinemaHallScreen), findsNothing);
-      expect(app.router.state.uri.toString(), AppRoutes.planetOf('growth'));
-      expect(find.byType(GrowthHub), findsOneWidget);
+      expect(app.router.state.uri.toString(), AppRoutes.planetOf('games'));
+      expect(find.byType(GamesHub), findsOneWidget);
       await tester.pump(const Duration(seconds: 6));
     }, timeout: const Timeout(Duration(minutes: 3)));
   }
