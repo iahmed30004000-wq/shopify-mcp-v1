@@ -46,13 +46,33 @@ void main() {
       }
     });
 
-    test('lanes are wider apart than two typical worlds are high on screen', () {
-      // Adjacent worlds start a golden angle apart, so even when their lanes
-      // are close they begin well separated along the orbit.
-      for (var i = 1; i < 8; i++) {
-        final d = _wrap(layout.initialAngle(i) - layout.initialAngle(i - 1)).abs();
-        expect(d, greaterThan(math.pi / 3), reason: 'planet $i');
+    test('neighbouring lanes never begin at nearly the same angle', () {
+      // Each world takes its own even share of the circle, nudged a little;
+      // the nudge is bounded, so however close two lanes are, the worlds on
+      // them begin well apart along the orbit.
+      for (final n in [2, 3, 8, 10, 13, 16]) {
+        for (var i = 1; i < n; i++) {
+          final d = _wrap(layout.initialAngle(i, n, i * 7.31) - layout.initialAngle(i - 1, n, (i - 1) * 7.31)).abs();
+          expect(d, greaterThanOrEqualTo(layout.minAngularGap(n) - 1e-9), reason: '$n worlds, planet $i');
+        }
       }
+    });
+
+    test('ten worlds are spread far more evenly than a golden angle left them', () {
+      const golden = 2.399963229728653;
+      double smallestGap(List<double> angles) {
+        final sorted = [for (final a in angles) a % (2 * math.pi)]..sort();
+        var min = sorted.first + 2 * math.pi - sorted.last;
+        for (var i = 1; i < sorted.length; i++) {
+          min = math.min(min, sorted[i] - sorted[i - 1]);
+        }
+        return min;
+      }
+
+      final scatter = [for (var i = 0; i < 10; i++) 0.62 + i * golden];
+      final even = [for (var i = 0; i < 10; i++) layout.initialAngle(i, 10, i * 7.31)];
+      expect(smallestGap(scatter), lessThan(0.3), reason: 'the golden angle clumps four worlds down one side');
+      expect(smallestGap(even), greaterThan(0.45));
     });
 
     test('outer worlds orbit more slowly (softened Kepler)', () {
@@ -97,10 +117,11 @@ void main() {
       for (final a in PlanetArchetype.values) {
         expect(layout.bodyRadiusOf(a), inInclusiveRange(layout.bodyRadius * 0.8, layout.bodyRadius * 1.2));
       }
-      expect(
-        PlanetArchetype.values.map(layout.bodyRadiusOf).reduce(math.max),
-        layout.bodyRadiusOf(PlanetArchetype.gasGiant),
-      );
+      final sizes = PlanetArchetype.values.map(layout.bodyRadiusOf);
+      expect(sizes.reduce(math.max), layout.bodyRadiusOf(PlanetArchetype.gasGiant));
+      // The family is tightened: the biggest world is only a little bigger
+      // than the smallest, so none of them looks like a mistake.
+      expect(sizes.reduce(math.max) / sizes.reduce(math.min), lessThanOrEqualTo(PlanetStyle.maxSizeRatio + 1e-9));
     });
   });
 

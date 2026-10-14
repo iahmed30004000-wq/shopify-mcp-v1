@@ -26,17 +26,13 @@ final _band = Rect.fromLTRB(0, 68, 412, 915 * 0.575 - 8);
 
 List<LaneBody> _lanesOf(List<PlanetBody> bodies) => [for (final b in bodies) (archetype: b.archetype, seed: b.seed)];
 
-/// Every world's disc (all the way round its orbit) inside [rect] – the
-/// sides widened by the composition's bleed (a world may graze the screen
-/// edge for a moment).
+/// Every world's disc (all the way round its orbit) inside [rect]: the
+/// scene band top and bottom, the screen left and right, every edge kept
+/// clear by the composition's margin. Nothing may graze an edge – a world
+/// cut off by the screen is exactly what the owner reported seeing.
 void _expectFits(OrbitComposition c, OrbitCamera cam, Size viewport, Rect band, List<PlanetBody> bodies) {
   final l = c.layout;
-  final rect = Rect.fromLTRB(
-    band.left - viewport.width * c.bleed,
-    band.top,
-    band.right + viewport.width * c.bleed,
-    band.bottom,
-  );
+  final rect = Rect.fromLTRB(0, band.top, viewport.width, band.bottom).deflate(c.margin);
   for (var i = 0; i < bodies.length; i++) {
     final b = bodies[i];
     final lane = l.laneRadius(i, bodies.length);

@@ -72,7 +72,15 @@ class SearchLoadContext {
       parts.where((p) => p != null && p.trim().isNotEmpty).join(separator);
 
   /// Rows read per page by [mapRows].
-  static const int pageSize = 400;
+  ///
+  /// This is the knob that decides the longest the UI isolate is blocked
+  /// while the index is built: a page is read, mapped and handed on without
+  /// a frame in between, so the block grows with the page. 400 rows cost
+  /// ~100 ms on a phone-class CPU over a database of tens of thousands of
+  /// rows, which is six frames; 128 keeps it near one. The warm-up takes
+  /// marginally longer in total and nothing else changes - the pages are
+  /// read in id order and the result is identical.
+  static const int pageSize = 128;
 
   /// The records of [repo]'s rows (those matching [where]), made by [map]
   /// (null skips a row). The rows are read and mapped a page at a time:
