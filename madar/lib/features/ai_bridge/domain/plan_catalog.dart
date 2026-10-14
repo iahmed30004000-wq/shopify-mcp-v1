@@ -97,6 +97,8 @@ class PlanCatalog {
     PlanRefSet? trackers,
     PlanRefSet? avoidItems,
     PlanRefSet? tasks,
+    PlanRefSet? recipes,
+    PlanRefSet? pantryItems,
   }) : budgetItems = budgetItems ?? PlanRefSet.empty,
        wallets = wallets ?? PlanRefSet.empty,
        foods = foods ?? PlanRefSet.empty,
@@ -109,7 +111,9 @@ class PlanCatalog {
        learningGoals = learningGoals ?? PlanRefSet.empty,
        trackers = trackers ?? PlanRefSet.empty,
        avoidItems = avoidItems ?? PlanRefSet.empty,
-       tasks = tasks ?? PlanRefSet.empty;
+       tasks = tasks ?? PlanRefSet.empty,
+       recipes = recipes ?? PlanRefSet.empty,
+       pantryItems = pantryItems ?? PlanRefSet.empty;
 
   /// The day the request was built / the plan is checked against.
   final DateTime today;
@@ -145,6 +149,12 @@ class PlanCatalog {
   /// Open tasks (so a reminder can attach to one he already has).
   final PlanRefSet tasks;
 
+  /// «السفرة» (Part 5): her dishes and what is in the house, so an AI
+  /// recipe is built out of **her** words and Madar can tell a dish it
+  /// already has from a new one.
+  final PlanRefSet recipes;
+  final PlanRefSet pantryItems;
+
   /// The catalogue as it travels in the request – only the non-empty sets.
   Map<String, Object?> toJson() {
     final out = <String, Object?>{};
@@ -166,6 +176,8 @@ class PlanCatalog {
     add('learningGoals', learningGoals);
     add('trackers', trackers);
     add('tasks', tasks);
+    add('recipes', recipes);
+    add('pantryItems', pantryItems);
     return out;
   }
 }

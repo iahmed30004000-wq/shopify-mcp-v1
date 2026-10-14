@@ -29,9 +29,18 @@ class ListHost {
   /// A trip: its lists (☐ جواز ☐ شاحن ☐ دوا).
   static const String trips = 'trips';
 
+  /// A dish of «السفرة» (Part 5): the list of what is missing for it.
+  static const String recipes = 'recipes';
+
+  /// The pantry of «السفرة» as a **place**: its one standing shopping
+  /// list, `('pantry', 'house')`. The pantry is not a row, so this host
+  /// has no record to read a name from and the all-lists screen names it
+  /// itself.
+  static const String pantry = 'pantry';
+
   /// The hosts that have a screen today. Not a limit of the engine: a list
   /// of any other table still stores, reads and ticks.
-  static const Set<String> knownTables = {budgetItems, trips};
+  static const Set<String> knownTables = {budgetItems, trips, recipes, pantry};
 
   final String table;
   final String id;

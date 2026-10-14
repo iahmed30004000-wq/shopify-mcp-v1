@@ -40577,6 +40577,3463 @@ class RecordListItemsCompanion extends UpdateCompanion<RecordListItemRow> {
   }
 }
 
+class $PantryItemsTable extends PantryItems
+    with TableInfo<$PantryItemsTable, PantryItemRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PantryItemsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> aliases =
+      GeneratedColumn<String>(
+        'aliases',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($PantryItemsTable.$converteraliases);
+  static const VerificationMeta _quantityMeta = const VerificationMeta(
+    'quantity',
+  );
+  @override
+  late final GeneratedColumn<double> quantity = GeneratedColumn<double>(
+    'quantity',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _unitMeta = const VerificationMeta('unit');
+  @override
+  late final GeneratedColumn<String> unit = GeneratedColumn<String>(
+    'unit',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _placeMeta = const VerificationMeta('place');
+  @override
+  late final GeneratedColumn<String> place = GeneratedColumn<String>(
+    'place',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lowAtMeta = const VerificationMeta('lowAt');
+  @override
+  late final GeneratedColumn<double> lowAt = GeneratedColumn<double>(
+    'low_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lowMeta = const VerificationMeta('low');
+  @override
+  late final GeneratedColumn<bool> low = GeneratedColumn<bool>(
+    'low',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("low" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> expires =
+      GeneratedColumn<DateTime>(
+        'expires',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($PantryItemsTable.$converterexpiresn);
+  static const VerificationMeta _stapleMeta = const VerificationMeta('staple');
+  @override
+  late final GeneratedColumn<bool> staple = GeneratedColumn<bool>(
+    'staple',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("staple" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _archivedMeta = const VerificationMeta(
+    'archived',
+  );
+  @override
+  late final GeneratedColumn<bool> archived = GeneratedColumn<bool>(
+    'archived',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("archived" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    name,
+    aliases,
+    quantity,
+    unit,
+    place,
+    lowAt,
+    low,
+    expires,
+    staple,
+    note,
+    archived,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'pantry_items';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<PantryItemRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('quantity')) {
+      context.handle(
+        _quantityMeta,
+        quantity.isAcceptableOrUnknown(data['quantity']!, _quantityMeta),
+      );
+    }
+    if (data.containsKey('unit')) {
+      context.handle(
+        _unitMeta,
+        unit.isAcceptableOrUnknown(data['unit']!, _unitMeta),
+      );
+    }
+    if (data.containsKey('place')) {
+      context.handle(
+        _placeMeta,
+        place.isAcceptableOrUnknown(data['place']!, _placeMeta),
+      );
+    }
+    if (data.containsKey('low_at')) {
+      context.handle(
+        _lowAtMeta,
+        lowAt.isAcceptableOrUnknown(data['low_at']!, _lowAtMeta),
+      );
+    }
+    if (data.containsKey('low')) {
+      context.handle(
+        _lowMeta,
+        low.isAcceptableOrUnknown(data['low']!, _lowMeta),
+      );
+    }
+    if (data.containsKey('staple')) {
+      context.handle(
+        _stapleMeta,
+        staple.isAcceptableOrUnknown(data['staple']!, _stapleMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('archived')) {
+      context.handle(
+        _archivedMeta,
+        archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PantryItemRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PantryItemRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      aliases: $PantryItemsTable.$converteraliases.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}aliases'],
+        )!,
+      ),
+      quantity: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}quantity'],
+      ),
+      unit: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}unit'],
+      ),
+      place: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}place'],
+      ),
+      lowAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}low_at'],
+      ),
+      low: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}low'],
+      )!,
+      expires: $PantryItemsTable.$converterexpiresn.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}expires'],
+        ),
+      ),
+      staple: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}staple'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+      archived: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}archived'],
+      )!,
+    );
+  }
+
+  @override
+  $PantryItemsTable createAlias(String alias) {
+    return $PantryItemsTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<List<String>, String> $converteraliases =
+      const StringListConverter();
+  static TypeConverter<DateTime, DateTime> $converterexpires =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $converterexpiresn =
+      NullAwareTypeConverter.wrap($converterexpires);
+}
+
+class PantryItemRow extends DataClass implements Insertable<PantryItemRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+
+  /// Her own word («رز»، «زيت»، «بندورة»).
+  final String name;
+
+  /// Her own other names for the same thing («طماطم» for «بندورة»), so a
+  /// recipe written with one word still finds it. Only ever hers: Madar
+  /// ships no synonyms.
+  final List<String> aliases;
+
+  /// How much there is, in [unit]. Null means «في» without an amount – and
+  /// the matcher treats that as "present, amount unknown" rather than
+  /// inventing one.
+  final double? quantity;
+
+  /// Her own unit word («كيلو»، «غرام»، «لتر»، «حبة»، «كوب»). Converted
+  /// only where a conversion is certain – see `KitchenUnits`.
+  final String? unit;
+
+  /// Where it is kept, in her words («الفريزر»، «خزانة المونة»).
+  final String? place;
+
+  /// At or below this much (in [unit]) it counts as low. Null = no
+  /// threshold, so only [low] and a zero quantity can mark it.
+  final double? lowAt;
+
+  /// She marked it low herself – which works even when she never typed a
+  /// quantity («الزيت قرب يخلص»).
+  final bool low;
+
+  /// The expiry day (stored zone-free, like every calendar day in Madar).
+  final DateTime? expires;
+
+  /// Always keep this in the house: when it finishes it goes on the
+  /// shopping list by itself.
+  final bool staple;
+  final String? note;
+
+  /// Out of the pickers but kept for history.
+  final bool archived;
+  const PantryItemRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.name,
+    required this.aliases,
+    this.quantity,
+    this.unit,
+    this.place,
+    this.lowAt,
+    required this.low,
+    this.expires,
+    required this.staple,
+    this.note,
+    required this.archived,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['name'] = Variable<String>(name);
+    {
+      map['aliases'] = Variable<String>(
+        $PantryItemsTable.$converteraliases.toSql(aliases),
+      );
+    }
+    if (!nullToAbsent || quantity != null) {
+      map['quantity'] = Variable<double>(quantity);
+    }
+    if (!nullToAbsent || unit != null) {
+      map['unit'] = Variable<String>(unit);
+    }
+    if (!nullToAbsent || place != null) {
+      map['place'] = Variable<String>(place);
+    }
+    if (!nullToAbsent || lowAt != null) {
+      map['low_at'] = Variable<double>(lowAt);
+    }
+    map['low'] = Variable<bool>(low);
+    if (!nullToAbsent || expires != null) {
+      map['expires'] = Variable<DateTime>(
+        $PantryItemsTable.$converterexpiresn.toSql(expires),
+      );
+    }
+    map['staple'] = Variable<bool>(staple);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    map['archived'] = Variable<bool>(archived);
+    return map;
+  }
+
+  PantryItemsCompanion toCompanion(bool nullToAbsent) {
+    return PantryItemsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      name: Value(name),
+      aliases: Value(aliases),
+      quantity: quantity == null && nullToAbsent
+          ? const Value.absent()
+          : Value(quantity),
+      unit: unit == null && nullToAbsent ? const Value.absent() : Value(unit),
+      place: place == null && nullToAbsent
+          ? const Value.absent()
+          : Value(place),
+      lowAt: lowAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lowAt),
+      low: Value(low),
+      expires: expires == null && nullToAbsent
+          ? const Value.absent()
+          : Value(expires),
+      staple: Value(staple),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      archived: Value(archived),
+    );
+  }
+
+  factory PantryItemRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PantryItemRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      name: serializer.fromJson<String>(json['name']),
+      aliases: serializer.fromJson<List<String>>(json['aliases']),
+      quantity: serializer.fromJson<double?>(json['quantity']),
+      unit: serializer.fromJson<String?>(json['unit']),
+      place: serializer.fromJson<String?>(json['place']),
+      lowAt: serializer.fromJson<double?>(json['lowAt']),
+      low: serializer.fromJson<bool>(json['low']),
+      expires: serializer.fromJson<DateTime?>(json['expires']),
+      staple: serializer.fromJson<bool>(json['staple']),
+      note: serializer.fromJson<String?>(json['note']),
+      archived: serializer.fromJson<bool>(json['archived']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'name': serializer.toJson<String>(name),
+      'aliases': serializer.toJson<List<String>>(aliases),
+      'quantity': serializer.toJson<double?>(quantity),
+      'unit': serializer.toJson<String?>(unit),
+      'place': serializer.toJson<String?>(place),
+      'lowAt': serializer.toJson<double?>(lowAt),
+      'low': serializer.toJson<bool>(low),
+      'expires': serializer.toJson<DateTime?>(expires),
+      'staple': serializer.toJson<bool>(staple),
+      'note': serializer.toJson<String?>(note),
+      'archived': serializer.toJson<bool>(archived),
+    };
+  }
+
+  PantryItemRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? name,
+    List<String>? aliases,
+    Value<double?> quantity = const Value.absent(),
+    Value<String?> unit = const Value.absent(),
+    Value<String?> place = const Value.absent(),
+    Value<double?> lowAt = const Value.absent(),
+    bool? low,
+    Value<DateTime?> expires = const Value.absent(),
+    bool? staple,
+    Value<String?> note = const Value.absent(),
+    bool? archived,
+  }) => PantryItemRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    name: name ?? this.name,
+    aliases: aliases ?? this.aliases,
+    quantity: quantity.present ? quantity.value : this.quantity,
+    unit: unit.present ? unit.value : this.unit,
+    place: place.present ? place.value : this.place,
+    lowAt: lowAt.present ? lowAt.value : this.lowAt,
+    low: low ?? this.low,
+    expires: expires.present ? expires.value : this.expires,
+    staple: staple ?? this.staple,
+    note: note.present ? note.value : this.note,
+    archived: archived ?? this.archived,
+  );
+  PantryItemRow copyWithCompanion(PantryItemsCompanion data) {
+    return PantryItemRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      name: data.name.present ? data.name.value : this.name,
+      aliases: data.aliases.present ? data.aliases.value : this.aliases,
+      quantity: data.quantity.present ? data.quantity.value : this.quantity,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      place: data.place.present ? data.place.value : this.place,
+      lowAt: data.lowAt.present ? data.lowAt.value : this.lowAt,
+      low: data.low.present ? data.low.value : this.low,
+      expires: data.expires.present ? data.expires.value : this.expires,
+      staple: data.staple.present ? data.staple.value : this.staple,
+      note: data.note.present ? data.note.value : this.note,
+      archived: data.archived.present ? data.archived.value : this.archived,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PantryItemRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('name: $name, ')
+          ..write('aliases: $aliases, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('place: $place, ')
+          ..write('lowAt: $lowAt, ')
+          ..write('low: $low, ')
+          ..write('expires: $expires, ')
+          ..write('staple: $staple, ')
+          ..write('note: $note, ')
+          ..write('archived: $archived')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    name,
+    aliases,
+    quantity,
+    unit,
+    place,
+    lowAt,
+    low,
+    expires,
+    staple,
+    note,
+    archived,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PantryItemRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.name == this.name &&
+          other.aliases == this.aliases &&
+          other.quantity == this.quantity &&
+          other.unit == this.unit &&
+          other.place == this.place &&
+          other.lowAt == this.lowAt &&
+          other.low == this.low &&
+          other.expires == this.expires &&
+          other.staple == this.staple &&
+          other.note == this.note &&
+          other.archived == this.archived);
+}
+
+class PantryItemsCompanion extends UpdateCompanion<PantryItemRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> name;
+  final Value<List<String>> aliases;
+  final Value<double?> quantity;
+  final Value<String?> unit;
+  final Value<String?> place;
+  final Value<double?> lowAt;
+  final Value<bool> low;
+  final Value<DateTime?> expires;
+  final Value<bool> staple;
+  final Value<String?> note;
+  final Value<bool> archived;
+  final Value<int> rowid;
+  const PantryItemsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.name = const Value.absent(),
+    this.aliases = const Value.absent(),
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.place = const Value.absent(),
+    this.lowAt = const Value.absent(),
+    this.low = const Value.absent(),
+    this.expires = const Value.absent(),
+    this.staple = const Value.absent(),
+    this.note = const Value.absent(),
+    this.archived = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PantryItemsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String name,
+    this.aliases = const Value.absent(),
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.place = const Value.absent(),
+    this.lowAt = const Value.absent(),
+    this.low = const Value.absent(),
+    this.expires = const Value.absent(),
+    this.staple = const Value.absent(),
+    this.note = const Value.absent(),
+    this.archived = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : name = Value(name);
+  static Insertable<PantryItemRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? name,
+    Expression<String>? aliases,
+    Expression<double>? quantity,
+    Expression<String>? unit,
+    Expression<String>? place,
+    Expression<double>? lowAt,
+    Expression<bool>? low,
+    Expression<DateTime>? expires,
+    Expression<bool>? staple,
+    Expression<String>? note,
+    Expression<bool>? archived,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (name != null) 'name': name,
+      if (aliases != null) 'aliases': aliases,
+      if (quantity != null) 'quantity': quantity,
+      if (unit != null) 'unit': unit,
+      if (place != null) 'place': place,
+      if (lowAt != null) 'low_at': lowAt,
+      if (low != null) 'low': low,
+      if (expires != null) 'expires': expires,
+      if (staple != null) 'staple': staple,
+      if (note != null) 'note': note,
+      if (archived != null) 'archived': archived,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PantryItemsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? name,
+    Value<List<String>>? aliases,
+    Value<double?>? quantity,
+    Value<String?>? unit,
+    Value<String?>? place,
+    Value<double?>? lowAt,
+    Value<bool>? low,
+    Value<DateTime?>? expires,
+    Value<bool>? staple,
+    Value<String?>? note,
+    Value<bool>? archived,
+    Value<int>? rowid,
+  }) {
+    return PantryItemsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      name: name ?? this.name,
+      aliases: aliases ?? this.aliases,
+      quantity: quantity ?? this.quantity,
+      unit: unit ?? this.unit,
+      place: place ?? this.place,
+      lowAt: lowAt ?? this.lowAt,
+      low: low ?? this.low,
+      expires: expires ?? this.expires,
+      staple: staple ?? this.staple,
+      note: note ?? this.note,
+      archived: archived ?? this.archived,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (aliases.present) {
+      map['aliases'] = Variable<String>(
+        $PantryItemsTable.$converteraliases.toSql(aliases.value),
+      );
+    }
+    if (quantity.present) {
+      map['quantity'] = Variable<double>(quantity.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(unit.value);
+    }
+    if (place.present) {
+      map['place'] = Variable<String>(place.value);
+    }
+    if (lowAt.present) {
+      map['low_at'] = Variable<double>(lowAt.value);
+    }
+    if (low.present) {
+      map['low'] = Variable<bool>(low.value);
+    }
+    if (expires.present) {
+      map['expires'] = Variable<DateTime>(
+        $PantryItemsTable.$converterexpiresn.toSql(expires.value),
+      );
+    }
+    if (staple.present) {
+      map['staple'] = Variable<bool>(staple.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (archived.present) {
+      map['archived'] = Variable<bool>(archived.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PantryItemsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('name: $name, ')
+          ..write('aliases: $aliases, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('place: $place, ')
+          ..write('lowAt: $lowAt, ')
+          ..write('low: $low, ')
+          ..write('expires: $expires, ')
+          ..write('staple: $staple, ')
+          ..write('note: $note, ')
+          ..write('archived: $archived, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RecipesTable extends Recipes with TableInfo<$RecipesTable, RecipeRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RecipesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> steps =
+      GeneratedColumn<String>(
+        'steps',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($RecipesTable.$convertersteps);
+  static const VerificationMeta _servingsMeta = const VerificationMeta(
+    'servings',
+  );
+  @override
+  late final GeneratedColumn<int> servings = GeneratedColumn<int>(
+    'servings',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _minutesMeta = const VerificationMeta(
+    'minutes',
+  );
+  @override
+  late final GeneratedColumn<int> minutes = GeneratedColumn<int>(
+    'minutes',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> tags =
+      GeneratedColumn<String>(
+        'tags',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($RecipesTable.$convertertags);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> photos =
+      GeneratedColumn<String>(
+        'photos',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($RecipesTable.$converterphotos);
+  static const VerificationMeta _notesMeta = const VerificationMeta('notes');
+  @override
+  late final GeneratedColumn<String> notes = GeneratedColumn<String>(
+    'notes',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<RecipeSource, String> source =
+      GeneratedColumn<String>(
+        'source',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(RecipeSource.mine.name),
+      ).withConverter<RecipeSource>($RecipesTable.$convertersource);
+  static const VerificationMeta _sourceNameMeta = const VerificationMeta(
+    'sourceName',
+  );
+  @override
+  late final GeneratedColumn<String> sourceName = GeneratedColumn<String>(
+    'source_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _favoriteMeta = const VerificationMeta(
+    'favorite',
+  );
+  @override
+  late final GeneratedColumn<bool> favorite = GeneratedColumn<bool>(
+    'favorite',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("favorite" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _archivedMeta = const VerificationMeta(
+    'archived',
+  );
+  @override
+  late final GeneratedColumn<bool> archived = GeneratedColumn<bool>(
+    'archived',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("archived" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    name,
+    steps,
+    servings,
+    minutes,
+    tags,
+    photos,
+    notes,
+    source,
+    sourceName,
+    favorite,
+    archived,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'recipes';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RecipeRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('servings')) {
+      context.handle(
+        _servingsMeta,
+        servings.isAcceptableOrUnknown(data['servings']!, _servingsMeta),
+      );
+    }
+    if (data.containsKey('minutes')) {
+      context.handle(
+        _minutesMeta,
+        minutes.isAcceptableOrUnknown(data['minutes']!, _minutesMeta),
+      );
+    }
+    if (data.containsKey('notes')) {
+      context.handle(
+        _notesMeta,
+        notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
+      );
+    }
+    if (data.containsKey('source_name')) {
+      context.handle(
+        _sourceNameMeta,
+        sourceName.isAcceptableOrUnknown(data['source_name']!, _sourceNameMeta),
+      );
+    }
+    if (data.containsKey('favorite')) {
+      context.handle(
+        _favoriteMeta,
+        favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta),
+      );
+    }
+    if (data.containsKey('archived')) {
+      context.handle(
+        _archivedMeta,
+        archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RecipeRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RecipeRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      steps: $RecipesTable.$convertersteps.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}steps'],
+        )!,
+      ),
+      servings: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}servings'],
+      ),
+      minutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}minutes'],
+      ),
+      tags: $RecipesTable.$convertertags.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}tags'],
+        )!,
+      ),
+      photos: $RecipesTable.$converterphotos.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}photos'],
+        )!,
+      ),
+      notes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}notes'],
+      ),
+      source: $RecipesTable.$convertersource.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}source'],
+        )!,
+      ),
+      sourceName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_name'],
+      ),
+      favorite: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}favorite'],
+      )!,
+      archived: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}archived'],
+      )!,
+    );
+  }
+
+  @override
+  $RecipesTable createAlias(String alias) {
+    return $RecipesTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<List<String>, String> $convertersteps =
+      const StringListConverter();
+  static TypeConverter<List<String>, String> $convertertags =
+      const StringListConverter();
+  static TypeConverter<List<String>, String> $converterphotos =
+      const StringListConverter();
+  static JsonTypeConverter2<RecipeSource, String, String> $convertersource =
+      const EnumNameConverter<RecipeSource>(RecipeSource.values);
+}
+
+class RecipeRow extends DataClass implements Insertable<RecipeRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+
+  /// Her own name for it («ملوخية»، «مقلوبة دجاج»).
+  final String name;
+
+  /// The method, step by step, in her words – one entry per step.
+  final List<String> steps;
+
+  /// How many people it feeds (null when she did not say). The matcher
+  /// scales the ingredients by it when she cooks for more.
+  final int? servings;
+
+  /// How long it takes, in minutes (null when she did not say).
+  final int? minutes;
+
+  /// Her own tags («سريع»، «رمضان»، «للأولاد»).
+  final List<String> tags;
+
+  /// Photos she added: file paths inside the app's own storage. Never a
+  /// URL and never fetched.
+  final List<String> photos;
+  final String? notes;
+
+  /// Where it came from. Hers by default; an imported one says so.
+  final RecipeSource source;
+
+  /// Who or what it came from, in plain words («خالتي أم محمد»، «خطة مدار
+  /// ٢٠٢٦-١٠-١٤»، «كتاب الطبخ»). Shown on an imported dish so she always
+  /// knows whose recipe she is cooking.
+  final String? sourceName;
+
+  /// Pinned for the quick picks.
+  final bool favorite;
+
+  /// Out of the suggestions but kept (an old dish she stopped cooking).
+  final bool archived;
+  const RecipeRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.name,
+    required this.steps,
+    this.servings,
+    this.minutes,
+    required this.tags,
+    required this.photos,
+    this.notes,
+    required this.source,
+    this.sourceName,
+    required this.favorite,
+    required this.archived,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['name'] = Variable<String>(name);
+    {
+      map['steps'] = Variable<String>(
+        $RecipesTable.$convertersteps.toSql(steps),
+      );
+    }
+    if (!nullToAbsent || servings != null) {
+      map['servings'] = Variable<int>(servings);
+    }
+    if (!nullToAbsent || minutes != null) {
+      map['minutes'] = Variable<int>(minutes);
+    }
+    {
+      map['tags'] = Variable<String>($RecipesTable.$convertertags.toSql(tags));
+    }
+    {
+      map['photos'] = Variable<String>(
+        $RecipesTable.$converterphotos.toSql(photos),
+      );
+    }
+    if (!nullToAbsent || notes != null) {
+      map['notes'] = Variable<String>(notes);
+    }
+    {
+      map['source'] = Variable<String>(
+        $RecipesTable.$convertersource.toSql(source),
+      );
+    }
+    if (!nullToAbsent || sourceName != null) {
+      map['source_name'] = Variable<String>(sourceName);
+    }
+    map['favorite'] = Variable<bool>(favorite);
+    map['archived'] = Variable<bool>(archived);
+    return map;
+  }
+
+  RecipesCompanion toCompanion(bool nullToAbsent) {
+    return RecipesCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      name: Value(name),
+      steps: Value(steps),
+      servings: servings == null && nullToAbsent
+          ? const Value.absent()
+          : Value(servings),
+      minutes: minutes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(minutes),
+      tags: Value(tags),
+      photos: Value(photos),
+      notes: notes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(notes),
+      source: Value(source),
+      sourceName: sourceName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sourceName),
+      favorite: Value(favorite),
+      archived: Value(archived),
+    );
+  }
+
+  factory RecipeRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RecipeRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      name: serializer.fromJson<String>(json['name']),
+      steps: serializer.fromJson<List<String>>(json['steps']),
+      servings: serializer.fromJson<int?>(json['servings']),
+      minutes: serializer.fromJson<int?>(json['minutes']),
+      tags: serializer.fromJson<List<String>>(json['tags']),
+      photos: serializer.fromJson<List<String>>(json['photos']),
+      notes: serializer.fromJson<String?>(json['notes']),
+      source: $RecipesTable.$convertersource.fromJson(
+        serializer.fromJson<String>(json['source']),
+      ),
+      sourceName: serializer.fromJson<String?>(json['sourceName']),
+      favorite: serializer.fromJson<bool>(json['favorite']),
+      archived: serializer.fromJson<bool>(json['archived']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'name': serializer.toJson<String>(name),
+      'steps': serializer.toJson<List<String>>(steps),
+      'servings': serializer.toJson<int?>(servings),
+      'minutes': serializer.toJson<int?>(minutes),
+      'tags': serializer.toJson<List<String>>(tags),
+      'photos': serializer.toJson<List<String>>(photos),
+      'notes': serializer.toJson<String?>(notes),
+      'source': serializer.toJson<String>(
+        $RecipesTable.$convertersource.toJson(source),
+      ),
+      'sourceName': serializer.toJson<String?>(sourceName),
+      'favorite': serializer.toJson<bool>(favorite),
+      'archived': serializer.toJson<bool>(archived),
+    };
+  }
+
+  RecipeRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? name,
+    List<String>? steps,
+    Value<int?> servings = const Value.absent(),
+    Value<int?> minutes = const Value.absent(),
+    List<String>? tags,
+    List<String>? photos,
+    Value<String?> notes = const Value.absent(),
+    RecipeSource? source,
+    Value<String?> sourceName = const Value.absent(),
+    bool? favorite,
+    bool? archived,
+  }) => RecipeRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    name: name ?? this.name,
+    steps: steps ?? this.steps,
+    servings: servings.present ? servings.value : this.servings,
+    minutes: minutes.present ? minutes.value : this.minutes,
+    tags: tags ?? this.tags,
+    photos: photos ?? this.photos,
+    notes: notes.present ? notes.value : this.notes,
+    source: source ?? this.source,
+    sourceName: sourceName.present ? sourceName.value : this.sourceName,
+    favorite: favorite ?? this.favorite,
+    archived: archived ?? this.archived,
+  );
+  RecipeRow copyWithCompanion(RecipesCompanion data) {
+    return RecipeRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      name: data.name.present ? data.name.value : this.name,
+      steps: data.steps.present ? data.steps.value : this.steps,
+      servings: data.servings.present ? data.servings.value : this.servings,
+      minutes: data.minutes.present ? data.minutes.value : this.minutes,
+      tags: data.tags.present ? data.tags.value : this.tags,
+      photos: data.photos.present ? data.photos.value : this.photos,
+      notes: data.notes.present ? data.notes.value : this.notes,
+      source: data.source.present ? data.source.value : this.source,
+      sourceName: data.sourceName.present
+          ? data.sourceName.value
+          : this.sourceName,
+      favorite: data.favorite.present ? data.favorite.value : this.favorite,
+      archived: data.archived.present ? data.archived.value : this.archived,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecipeRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('name: $name, ')
+          ..write('steps: $steps, ')
+          ..write('servings: $servings, ')
+          ..write('minutes: $minutes, ')
+          ..write('tags: $tags, ')
+          ..write('photos: $photos, ')
+          ..write('notes: $notes, ')
+          ..write('source: $source, ')
+          ..write('sourceName: $sourceName, ')
+          ..write('favorite: $favorite, ')
+          ..write('archived: $archived')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    name,
+    steps,
+    servings,
+    minutes,
+    tags,
+    photos,
+    notes,
+    source,
+    sourceName,
+    favorite,
+    archived,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecipeRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.name == this.name &&
+          other.steps == this.steps &&
+          other.servings == this.servings &&
+          other.minutes == this.minutes &&
+          other.tags == this.tags &&
+          other.photos == this.photos &&
+          other.notes == this.notes &&
+          other.source == this.source &&
+          other.sourceName == this.sourceName &&
+          other.favorite == this.favorite &&
+          other.archived == this.archived);
+}
+
+class RecipesCompanion extends UpdateCompanion<RecipeRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> name;
+  final Value<List<String>> steps;
+  final Value<int?> servings;
+  final Value<int?> minutes;
+  final Value<List<String>> tags;
+  final Value<List<String>> photos;
+  final Value<String?> notes;
+  final Value<RecipeSource> source;
+  final Value<String?> sourceName;
+  final Value<bool> favorite;
+  final Value<bool> archived;
+  final Value<int> rowid;
+  const RecipesCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.name = const Value.absent(),
+    this.steps = const Value.absent(),
+    this.servings = const Value.absent(),
+    this.minutes = const Value.absent(),
+    this.tags = const Value.absent(),
+    this.photos = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.source = const Value.absent(),
+    this.sourceName = const Value.absent(),
+    this.favorite = const Value.absent(),
+    this.archived = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RecipesCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String name,
+    this.steps = const Value.absent(),
+    this.servings = const Value.absent(),
+    this.minutes = const Value.absent(),
+    this.tags = const Value.absent(),
+    this.photos = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.source = const Value.absent(),
+    this.sourceName = const Value.absent(),
+    this.favorite = const Value.absent(),
+    this.archived = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : name = Value(name);
+  static Insertable<RecipeRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? name,
+    Expression<String>? steps,
+    Expression<int>? servings,
+    Expression<int>? minutes,
+    Expression<String>? tags,
+    Expression<String>? photos,
+    Expression<String>? notes,
+    Expression<String>? source,
+    Expression<String>? sourceName,
+    Expression<bool>? favorite,
+    Expression<bool>? archived,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (name != null) 'name': name,
+      if (steps != null) 'steps': steps,
+      if (servings != null) 'servings': servings,
+      if (minutes != null) 'minutes': minutes,
+      if (tags != null) 'tags': tags,
+      if (photos != null) 'photos': photos,
+      if (notes != null) 'notes': notes,
+      if (source != null) 'source': source,
+      if (sourceName != null) 'source_name': sourceName,
+      if (favorite != null) 'favorite': favorite,
+      if (archived != null) 'archived': archived,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RecipesCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? name,
+    Value<List<String>>? steps,
+    Value<int?>? servings,
+    Value<int?>? minutes,
+    Value<List<String>>? tags,
+    Value<List<String>>? photos,
+    Value<String?>? notes,
+    Value<RecipeSource>? source,
+    Value<String?>? sourceName,
+    Value<bool>? favorite,
+    Value<bool>? archived,
+    Value<int>? rowid,
+  }) {
+    return RecipesCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      name: name ?? this.name,
+      steps: steps ?? this.steps,
+      servings: servings ?? this.servings,
+      minutes: minutes ?? this.minutes,
+      tags: tags ?? this.tags,
+      photos: photos ?? this.photos,
+      notes: notes ?? this.notes,
+      source: source ?? this.source,
+      sourceName: sourceName ?? this.sourceName,
+      favorite: favorite ?? this.favorite,
+      archived: archived ?? this.archived,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (steps.present) {
+      map['steps'] = Variable<String>(
+        $RecipesTable.$convertersteps.toSql(steps.value),
+      );
+    }
+    if (servings.present) {
+      map['servings'] = Variable<int>(servings.value);
+    }
+    if (minutes.present) {
+      map['minutes'] = Variable<int>(minutes.value);
+    }
+    if (tags.present) {
+      map['tags'] = Variable<String>(
+        $RecipesTable.$convertertags.toSql(tags.value),
+      );
+    }
+    if (photos.present) {
+      map['photos'] = Variable<String>(
+        $RecipesTable.$converterphotos.toSql(photos.value),
+      );
+    }
+    if (notes.present) {
+      map['notes'] = Variable<String>(notes.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(
+        $RecipesTable.$convertersource.toSql(source.value),
+      );
+    }
+    if (sourceName.present) {
+      map['source_name'] = Variable<String>(sourceName.value);
+    }
+    if (favorite.present) {
+      map['favorite'] = Variable<bool>(favorite.value);
+    }
+    if (archived.present) {
+      map['archived'] = Variable<bool>(archived.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecipesCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('name: $name, ')
+          ..write('steps: $steps, ')
+          ..write('servings: $servings, ')
+          ..write('minutes: $minutes, ')
+          ..write('tags: $tags, ')
+          ..write('photos: $photos, ')
+          ..write('notes: $notes, ')
+          ..write('source: $source, ')
+          ..write('sourceName: $sourceName, ')
+          ..write('favorite: $favorite, ')
+          ..write('archived: $archived, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RecipeIngredientsTable extends RecipeIngredients
+    with TableInfo<$RecipeIngredientsTable, RecipeIngredientRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RecipeIngredientsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _recipeIdMeta = const VerificationMeta(
+    'recipeId',
+  );
+  @override
+  late final GeneratedColumn<String> recipeId = GeneratedColumn<String>(
+    'recipe_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _quantityMeta = const VerificationMeta(
+    'quantity',
+  );
+  @override
+  late final GeneratedColumn<double> quantity = GeneratedColumn<double>(
+    'quantity',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _unitMeta = const VerificationMeta('unit');
+  @override
+  late final GeneratedColumn<String> unit = GeneratedColumn<String>(
+    'unit',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _optionalMeta = const VerificationMeta(
+    'optional',
+  );
+  @override
+  late final GeneratedColumn<bool> optional = GeneratedColumn<bool>(
+    'optional',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("optional" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    recipeId,
+    name,
+    quantity,
+    unit,
+    optional,
+    note,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'recipe_ingredients';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RecipeIngredientRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('recipe_id')) {
+      context.handle(
+        _recipeIdMeta,
+        recipeId.isAcceptableOrUnknown(data['recipe_id']!, _recipeIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_recipeIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('quantity')) {
+      context.handle(
+        _quantityMeta,
+        quantity.isAcceptableOrUnknown(data['quantity']!, _quantityMeta),
+      );
+    }
+    if (data.containsKey('unit')) {
+      context.handle(
+        _unitMeta,
+        unit.isAcceptableOrUnknown(data['unit']!, _unitMeta),
+      );
+    }
+    if (data.containsKey('optional')) {
+      context.handle(
+        _optionalMeta,
+        optional.isAcceptableOrUnknown(data['optional']!, _optionalMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RecipeIngredientRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RecipeIngredientRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      recipeId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recipe_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      quantity: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}quantity'],
+      ),
+      unit: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}unit'],
+      ),
+      optional: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}optional'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $RecipeIngredientsTable createAlias(String alias) {
+    return $RecipeIngredientsTable(attachedDatabase, alias);
+  }
+}
+
+class RecipeIngredientRow extends DataClass
+    implements Insertable<RecipeIngredientRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final String recipeId;
+
+  /// Her own word for it – matched against a pantry item's name or one of
+  /// its aliases, folded the way the app's search folds Arabic.
+  final String name;
+
+  /// How much the dish needs, in [unit]. Null = "some", and then having
+  /// the thing at all is enough.
+  final double? quantity;
+  final String? unit;
+
+  /// She can cook it without this one (a garnish). An optional ingredient
+  /// that is missing never stops a dish.
+  final bool optional;
+  final String? note;
+  const RecipeIngredientRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.recipeId,
+    required this.name,
+    this.quantity,
+    this.unit,
+    required this.optional,
+    this.note,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['recipe_id'] = Variable<String>(recipeId);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || quantity != null) {
+      map['quantity'] = Variable<double>(quantity);
+    }
+    if (!nullToAbsent || unit != null) {
+      map['unit'] = Variable<String>(unit);
+    }
+    map['optional'] = Variable<bool>(optional);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  RecipeIngredientsCompanion toCompanion(bool nullToAbsent) {
+    return RecipeIngredientsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      recipeId: Value(recipeId),
+      name: Value(name),
+      quantity: quantity == null && nullToAbsent
+          ? const Value.absent()
+          : Value(quantity),
+      unit: unit == null && nullToAbsent ? const Value.absent() : Value(unit),
+      optional: Value(optional),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory RecipeIngredientRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RecipeIngredientRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      recipeId: serializer.fromJson<String>(json['recipeId']),
+      name: serializer.fromJson<String>(json['name']),
+      quantity: serializer.fromJson<double?>(json['quantity']),
+      unit: serializer.fromJson<String?>(json['unit']),
+      optional: serializer.fromJson<bool>(json['optional']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'recipeId': serializer.toJson<String>(recipeId),
+      'name': serializer.toJson<String>(name),
+      'quantity': serializer.toJson<double?>(quantity),
+      'unit': serializer.toJson<String?>(unit),
+      'optional': serializer.toJson<bool>(optional),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  RecipeIngredientRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? recipeId,
+    String? name,
+    Value<double?> quantity = const Value.absent(),
+    Value<String?> unit = const Value.absent(),
+    bool? optional,
+    Value<String?> note = const Value.absent(),
+  }) => RecipeIngredientRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    recipeId: recipeId ?? this.recipeId,
+    name: name ?? this.name,
+    quantity: quantity.present ? quantity.value : this.quantity,
+    unit: unit.present ? unit.value : this.unit,
+    optional: optional ?? this.optional,
+    note: note.present ? note.value : this.note,
+  );
+  RecipeIngredientRow copyWithCompanion(RecipeIngredientsCompanion data) {
+    return RecipeIngredientRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      recipeId: data.recipeId.present ? data.recipeId.value : this.recipeId,
+      name: data.name.present ? data.name.value : this.name,
+      quantity: data.quantity.present ? data.quantity.value : this.quantity,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      optional: data.optional.present ? data.optional.value : this.optional,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecipeIngredientRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('recipeId: $recipeId, ')
+          ..write('name: $name, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('optional: $optional, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    recipeId,
+    name,
+    quantity,
+    unit,
+    optional,
+    note,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecipeIngredientRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.recipeId == this.recipeId &&
+          other.name == this.name &&
+          other.quantity == this.quantity &&
+          other.unit == this.unit &&
+          other.optional == this.optional &&
+          other.note == this.note);
+}
+
+class RecipeIngredientsCompanion extends UpdateCompanion<RecipeIngredientRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> recipeId;
+  final Value<String> name;
+  final Value<double?> quantity;
+  final Value<String?> unit;
+  final Value<bool> optional;
+  final Value<String?> note;
+  final Value<int> rowid;
+  const RecipeIngredientsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.recipeId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.optional = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RecipeIngredientsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String recipeId,
+    required String name,
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.optional = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : recipeId = Value(recipeId),
+       name = Value(name);
+  static Insertable<RecipeIngredientRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? recipeId,
+    Expression<String>? name,
+    Expression<double>? quantity,
+    Expression<String>? unit,
+    Expression<bool>? optional,
+    Expression<String>? note,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (recipeId != null) 'recipe_id': recipeId,
+      if (name != null) 'name': name,
+      if (quantity != null) 'quantity': quantity,
+      if (unit != null) 'unit': unit,
+      if (optional != null) 'optional': optional,
+      if (note != null) 'note': note,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RecipeIngredientsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? recipeId,
+    Value<String>? name,
+    Value<double?>? quantity,
+    Value<String?>? unit,
+    Value<bool>? optional,
+    Value<String?>? note,
+    Value<int>? rowid,
+  }) {
+    return RecipeIngredientsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      recipeId: recipeId ?? this.recipeId,
+      name: name ?? this.name,
+      quantity: quantity ?? this.quantity,
+      unit: unit ?? this.unit,
+      optional: optional ?? this.optional,
+      note: note ?? this.note,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (recipeId.present) {
+      map['recipe_id'] = Variable<String>(recipeId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (quantity.present) {
+      map['quantity'] = Variable<double>(quantity.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(unit.value);
+    }
+    if (optional.present) {
+      map['optional'] = Variable<bool>(optional.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecipeIngredientsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('recipeId: $recipeId, ')
+          ..write('name: $name, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('optional: $optional, ')
+          ..write('note: $note, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CookedMealsTable extends CookedMeals
+    with TableInfo<$CookedMealsTable, CookedMealRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CookedMealsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _recipeIdMeta = const VerificationMeta(
+    'recipeId',
+  );
+  @override
+  late final GeneratedColumn<String> recipeId = GeneratedColumn<String>(
+    'recipe_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> day =
+      GeneratedColumn<DateTime>(
+        'day',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($CookedMealsTable.$converterday);
+  static const VerificationMeta _servingsMeta = const VerificationMeta(
+    'servings',
+  );
+  @override
+  late final GeneratedColumn<int> servings = GeneratedColumn<int>(
+    'servings',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _overrodeMeta = const VerificationMeta(
+    'overrode',
+  );
+  @override
+  late final GeneratedColumn<bool> overrode = GeneratedColumn<bool>(
+    'overrode',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("overrode" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    recipeId,
+    name,
+    day,
+    servings,
+    overrode,
+    note,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'cooked_meals';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<CookedMealRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('recipe_id')) {
+      context.handle(
+        _recipeIdMeta,
+        recipeId.isAcceptableOrUnknown(data['recipe_id']!, _recipeIdMeta),
+      );
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('servings')) {
+      context.handle(
+        _servingsMeta,
+        servings.isAcceptableOrUnknown(data['servings']!, _servingsMeta),
+      );
+    }
+    if (data.containsKey('overrode')) {
+      context.handle(
+        _overrodeMeta,
+        overrode.isAcceptableOrUnknown(data['overrode']!, _overrodeMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CookedMealRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CookedMealRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      recipeId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recipe_id'],
+      ),
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      day: $CookedMealsTable.$converterday.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}day'],
+        )!,
+      ),
+      servings: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}servings'],
+      ),
+      overrode: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}overrode'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $CookedMealsTable createAlias(String alias) {
+    return $CookedMealsTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<DateTime, DateTime> $converterday =
+      const CalendarDayConverter();
+}
+
+class CookedMealRow extends DataClass implements Insertable<CookedMealRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  /// The recipe, or null for something she cooked without one.
+  final String? recipeId;
+
+  /// The dish's name as it should read in the history, so the log survives
+  /// renaming or deleting the recipe.
+  final String name;
+
+  /// The day it was cooked (zone-free calendar day).
+  final DateTime day;
+
+  /// How many it fed (null when she did not say).
+  final int? servings;
+
+  /// She chose it although the no-repeat window held it back. Kept so the
+  /// history is honest about what she decided.
+  final bool overrode;
+  final String? note;
+  const CookedMealRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    this.recipeId,
+    required this.name,
+    required this.day,
+    this.servings,
+    required this.overrode,
+    this.note,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    if (!nullToAbsent || recipeId != null) {
+      map['recipe_id'] = Variable<String>(recipeId);
+    }
+    map['name'] = Variable<String>(name);
+    {
+      map['day'] = Variable<DateTime>(
+        $CookedMealsTable.$converterday.toSql(day),
+      );
+    }
+    if (!nullToAbsent || servings != null) {
+      map['servings'] = Variable<int>(servings);
+    }
+    map['overrode'] = Variable<bool>(overrode);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  CookedMealsCompanion toCompanion(bool nullToAbsent) {
+    return CookedMealsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      recipeId: recipeId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(recipeId),
+      name: Value(name),
+      day: Value(day),
+      servings: servings == null && nullToAbsent
+          ? const Value.absent()
+          : Value(servings),
+      overrode: Value(overrode),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory CookedMealRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CookedMealRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      recipeId: serializer.fromJson<String?>(json['recipeId']),
+      name: serializer.fromJson<String>(json['name']),
+      day: serializer.fromJson<DateTime>(json['day']),
+      servings: serializer.fromJson<int?>(json['servings']),
+      overrode: serializer.fromJson<bool>(json['overrode']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'recipeId': serializer.toJson<String?>(recipeId),
+      'name': serializer.toJson<String>(name),
+      'day': serializer.toJson<DateTime>(day),
+      'servings': serializer.toJson<int?>(servings),
+      'overrode': serializer.toJson<bool>(overrode),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  CookedMealRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    Value<String?> recipeId = const Value.absent(),
+    String? name,
+    DateTime? day,
+    Value<int?> servings = const Value.absent(),
+    bool? overrode,
+    Value<String?> note = const Value.absent(),
+  }) => CookedMealRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    recipeId: recipeId.present ? recipeId.value : this.recipeId,
+    name: name ?? this.name,
+    day: day ?? this.day,
+    servings: servings.present ? servings.value : this.servings,
+    overrode: overrode ?? this.overrode,
+    note: note.present ? note.value : this.note,
+  );
+  CookedMealRow copyWithCompanion(CookedMealsCompanion data) {
+    return CookedMealRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      recipeId: data.recipeId.present ? data.recipeId.value : this.recipeId,
+      name: data.name.present ? data.name.value : this.name,
+      day: data.day.present ? data.day.value : this.day,
+      servings: data.servings.present ? data.servings.value : this.servings,
+      overrode: data.overrode.present ? data.overrode.value : this.overrode,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CookedMealRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('recipeId: $recipeId, ')
+          ..write('name: $name, ')
+          ..write('day: $day, ')
+          ..write('servings: $servings, ')
+          ..write('overrode: $overrode, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    recipeId,
+    name,
+    day,
+    servings,
+    overrode,
+    note,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CookedMealRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.recipeId == this.recipeId &&
+          other.name == this.name &&
+          other.day == this.day &&
+          other.servings == this.servings &&
+          other.overrode == this.overrode &&
+          other.note == this.note);
+}
+
+class CookedMealsCompanion extends UpdateCompanion<CookedMealRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<String?> recipeId;
+  final Value<String> name;
+  final Value<DateTime> day;
+  final Value<int?> servings;
+  final Value<bool> overrode;
+  final Value<String?> note;
+  final Value<int> rowid;
+  const CookedMealsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.recipeId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.day = const Value.absent(),
+    this.servings = const Value.absent(),
+    this.overrode = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CookedMealsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.recipeId = const Value.absent(),
+    required String name,
+    required DateTime day,
+    this.servings = const Value.absent(),
+    this.overrode = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : name = Value(name),
+       day = Value(day);
+  static Insertable<CookedMealRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? recipeId,
+    Expression<String>? name,
+    Expression<DateTime>? day,
+    Expression<int>? servings,
+    Expression<bool>? overrode,
+    Expression<String>? note,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (recipeId != null) 'recipe_id': recipeId,
+      if (name != null) 'name': name,
+      if (day != null) 'day': day,
+      if (servings != null) 'servings': servings,
+      if (overrode != null) 'overrode': overrode,
+      if (note != null) 'note': note,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CookedMealsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<String?>? recipeId,
+    Value<String>? name,
+    Value<DateTime>? day,
+    Value<int?>? servings,
+    Value<bool>? overrode,
+    Value<String?>? note,
+    Value<int>? rowid,
+  }) {
+    return CookedMealsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      recipeId: recipeId ?? this.recipeId,
+      name: name ?? this.name,
+      day: day ?? this.day,
+      servings: servings ?? this.servings,
+      overrode: overrode ?? this.overrode,
+      note: note ?? this.note,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (recipeId.present) {
+      map['recipe_id'] = Variable<String>(recipeId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (day.present) {
+      map['day'] = Variable<DateTime>(
+        $CookedMealsTable.$converterday.toSql(day.value),
+      );
+    }
+    if (servings.present) {
+      map['servings'] = Variable<int>(servings.value);
+    }
+    if (overrode.present) {
+      map['overrode'] = Variable<bool>(overrode.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CookedMealsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('recipeId: $recipeId, ')
+          ..write('name: $name, ')
+          ..write('day: $day, ')
+          ..write('servings: $servings, ')
+          ..write('overrode: $overrode, ')
+          ..write('note: $note, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $KitchenRulesTable extends KitchenRules
+    with TableInfo<$KitchenRulesTable, KitchenRuleRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $KitchenRulesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<KitchenRuleKind, String> kind =
+      GeneratedColumn<String>(
+        'kind',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(KitchenRuleKind.avoid.name),
+      ).withConverter<KitchenRuleKind>($KitchenRulesTable.$converterkind);
+  static const VerificationMeta _termMeta = const VerificationMeta('term');
+  @override
+  late final GeneratedColumn<String> term = GeneratedColumn<String>(
+    'term',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _whoMeta = const VerificationMeta('who');
+  @override
+  late final GeneratedColumn<String> who = GeneratedColumn<String>(
+    'who',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _activeMeta = const VerificationMeta('active');
+  @override
+  late final GeneratedColumn<bool> active = GeneratedColumn<bool>(
+    'active',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("active" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    kind,
+    term,
+    who,
+    note,
+    active,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'kitchen_rules';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<KitchenRuleRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('term')) {
+      context.handle(
+        _termMeta,
+        term.isAcceptableOrUnknown(data['term']!, _termMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_termMeta);
+    }
+    if (data.containsKey('who')) {
+      context.handle(
+        _whoMeta,
+        who.isAcceptableOrUnknown(data['who']!, _whoMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('active')) {
+      context.handle(
+        _activeMeta,
+        active.isAcceptableOrUnknown(data['active']!, _activeMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  KitchenRuleRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return KitchenRuleRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      kind: $KitchenRulesTable.$converterkind.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}kind'],
+        )!,
+      ),
+      term: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}term'],
+      )!,
+      who: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}who'],
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+      active: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}active'],
+      )!,
+    );
+  }
+
+  @override
+  $KitchenRulesTable createAlias(String alias) {
+    return $KitchenRulesTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<KitchenRuleKind, String, String> $converterkind =
+      const EnumNameConverter<KitchenRuleKind>(KitchenRuleKind.values);
+}
+
+class KitchenRuleRow extends DataClass implements Insertable<KitchenRuleRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final KitchenRuleKind kind;
+
+  /// The word it is about – an ingredient name or one of her recipe tags
+  /// («فول سوداني»، «حار»). Matched folded, like everything else.
+  final String term;
+
+  /// Who it is for, in her words («أحمد»، «الكل»). Shown with the reason a
+  /// dish was held back, so she knows why.
+  final String? who;
+  final String? note;
+
+  /// Off while it does not apply (a guest who is not here tonight).
+  final bool active;
+  const KitchenRuleRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.kind,
+    required this.term,
+    this.who,
+    this.note,
+    required this.active,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    {
+      map['kind'] = Variable<String>(
+        $KitchenRulesTable.$converterkind.toSql(kind),
+      );
+    }
+    map['term'] = Variable<String>(term);
+    if (!nullToAbsent || who != null) {
+      map['who'] = Variable<String>(who);
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    map['active'] = Variable<bool>(active);
+    return map;
+  }
+
+  KitchenRulesCompanion toCompanion(bool nullToAbsent) {
+    return KitchenRulesCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      kind: Value(kind),
+      term: Value(term),
+      who: who == null && nullToAbsent ? const Value.absent() : Value(who),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      active: Value(active),
+    );
+  }
+
+  factory KitchenRuleRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return KitchenRuleRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      kind: $KitchenRulesTable.$converterkind.fromJson(
+        serializer.fromJson<String>(json['kind']),
+      ),
+      term: serializer.fromJson<String>(json['term']),
+      who: serializer.fromJson<String?>(json['who']),
+      note: serializer.fromJson<String?>(json['note']),
+      active: serializer.fromJson<bool>(json['active']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'kind': serializer.toJson<String>(
+        $KitchenRulesTable.$converterkind.toJson(kind),
+      ),
+      'term': serializer.toJson<String>(term),
+      'who': serializer.toJson<String?>(who),
+      'note': serializer.toJson<String?>(note),
+      'active': serializer.toJson<bool>(active),
+    };
+  }
+
+  KitchenRuleRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    KitchenRuleKind? kind,
+    String? term,
+    Value<String?> who = const Value.absent(),
+    Value<String?> note = const Value.absent(),
+    bool? active,
+  }) => KitchenRuleRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    kind: kind ?? this.kind,
+    term: term ?? this.term,
+    who: who.present ? who.value : this.who,
+    note: note.present ? note.value : this.note,
+    active: active ?? this.active,
+  );
+  KitchenRuleRow copyWithCompanion(KitchenRulesCompanion data) {
+    return KitchenRuleRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      term: data.term.present ? data.term.value : this.term,
+      who: data.who.present ? data.who.value : this.who,
+      note: data.note.present ? data.note.value : this.note,
+      active: data.active.present ? data.active.value : this.active,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('KitchenRuleRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('kind: $kind, ')
+          ..write('term: $term, ')
+          ..write('who: $who, ')
+          ..write('note: $note, ')
+          ..write('active: $active')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    kind,
+    term,
+    who,
+    note,
+    active,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is KitchenRuleRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.kind == this.kind &&
+          other.term == this.term &&
+          other.who == this.who &&
+          other.note == this.note &&
+          other.active == this.active);
+}
+
+class KitchenRulesCompanion extends UpdateCompanion<KitchenRuleRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<KitchenRuleKind> kind;
+  final Value<String> term;
+  final Value<String?> who;
+  final Value<String?> note;
+  final Value<bool> active;
+  final Value<int> rowid;
+  const KitchenRulesCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.term = const Value.absent(),
+    this.who = const Value.absent(),
+    this.note = const Value.absent(),
+    this.active = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  KitchenRulesCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.kind = const Value.absent(),
+    required String term,
+    this.who = const Value.absent(),
+    this.note = const Value.absent(),
+    this.active = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : term = Value(term);
+  static Insertable<KitchenRuleRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? kind,
+    Expression<String>? term,
+    Expression<String>? who,
+    Expression<String>? note,
+    Expression<bool>? active,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (kind != null) 'kind': kind,
+      if (term != null) 'term': term,
+      if (who != null) 'who': who,
+      if (note != null) 'note': note,
+      if (active != null) 'active': active,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  KitchenRulesCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<KitchenRuleKind>? kind,
+    Value<String>? term,
+    Value<String?>? who,
+    Value<String?>? note,
+    Value<bool>? active,
+    Value<int>? rowid,
+  }) {
+    return KitchenRulesCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      kind: kind ?? this.kind,
+      term: term ?? this.term,
+      who: who ?? this.who,
+      note: note ?? this.note,
+      active: active ?? this.active,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(
+        $KitchenRulesTable.$converterkind.toSql(kind.value),
+      );
+    }
+    if (term.present) {
+      map['term'] = Variable<String>(term.value);
+    }
+    if (who.present) {
+      map['who'] = Variable<String>(who.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (active.present) {
+      map['active'] = Variable<bool>(active.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('KitchenRulesCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('kind: $kind, ')
+          ..write('term: $term, ')
+          ..write('who: $who, ')
+          ..write('note: $note, ')
+          ..write('active: $active, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$MadarDatabase extends GeneratedDatabase {
   _$MadarDatabase(QueryExecutor e) : super(e);
   late final $PlanetsTable planets = $PlanetsTable(this);
@@ -40659,6 +44116,12 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
   late final $RecordListItemsTable recordListItems = $RecordListItemsTable(
     this,
   );
+  late final $PantryItemsTable pantryItems = $PantryItemsTable(this);
+  late final $RecipesTable recipes = $RecipesTable(this);
+  late final $RecipeIngredientsTable recipeIngredients =
+      $RecipeIngredientsTable(this);
+  late final $CookedMealsTable cookedMeals = $CookedMealsTable(this);
+  late final $KitchenRulesTable kitchenRules = $KitchenRulesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -40731,6 +44194,11 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
     appliedPlanItems,
     recordLists,
     recordListItems,
+    pantryItems,
+    recipes,
+    recipeIngredients,
+    cookedMeals,
+    kitchenRules,
   ];
   @override
   DriftDatabaseOptions get options =>

@@ -86,6 +86,11 @@ class Repositories {
       appliedPlanItems = EntityRepository(db, db.appliedPlanItems),
       recordLists = EntityRepository(db, db.recordLists),
       recordListItems = EntityRepository(db, db.recordListItems),
+      pantryItems = EntityRepository(db, db.pantryItems),
+      recipes = EntityRepository(db, db.recipes),
+      recipeIngredients = EntityRepository(db, db.recipeIngredients),
+      cookedMeals = EntityRepository(db, db.cookedMeals),
+      kitchenRules = EntityRepository(db, db.kitchenRules),
       keyValues = KeyValueRepository(db),
       activity = ActivityRepository(db),
       currencies = CurrencyRepository(db);
@@ -174,6 +179,14 @@ class Repositories {
   final EntityRepository<$RecordListsTable, RecordListRow> recordLists;
   final EntityRepository<$RecordListItemsTable, RecordListItemRow> recordListItems;
 
+  // «السفرة» (Part 5): what is in the house, her recipes and their
+  // ingredients, the cooked log and her own constraints.
+  final EntityRepository<$PantryItemsTable, PantryItemRow> pantryItems;
+  final EntityRepository<$RecipesTable, RecipeRow> recipes;
+  final EntityRepository<$RecipeIngredientsTable, RecipeIngredientRow> recipeIngredients;
+  final EntityRepository<$CookedMealsTable, CookedMealRow> cookedMeals;
+  final EntityRepository<$KitchenRulesTable, KitchenRuleRow> kitchenRules;
+
   // Special-purpose
   final KeyValueRepository keyValues;
   final ActivityRepository activity;
@@ -248,6 +261,11 @@ class Repositories {
       appliedPlanItems,
       recordLists,
       recordListItems,
+      pantryItems,
+      recipes,
+      recipeIngredients,
+      cookedMeals,
+      kitchenRules,
     ])
       r.tableName: r,
   };

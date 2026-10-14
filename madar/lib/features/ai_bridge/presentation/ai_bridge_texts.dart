@@ -180,8 +180,27 @@ class AiBridgeTexts {
           ),
         );
       case PlanItemKind.recipe:
+        out.add(
+          p.before.kind == PlanBeforeKind.recipeKnown
+              ? l.aiPlanChangeRecipeUpdate(name(item.title))
+              : l.aiPlanChangeRecipeAdd(name(item.title)),
+        );
+        final ingredients = item.maps('ingredients').length;
+        final steps = item.strings('steps').length;
+        if (ingredients > 0 || steps > 0) {
+          out.add(
+            l.aiPlanChangeRecipeParts(
+              _digits(PlainNumbers.decimal(ingredients.toDouble())),
+              _digits(PlainNumbers.decimal(steps.toDouble())),
+            ),
+          );
+        }
       case PlanItemKind.pantryItem:
-        out.add(l.aiPlanChangeDeferred);
+        out.add(
+          p.before.kind == PlanBeforeKind.pantryKnown
+              ? l.aiPlanChangePantryUpdate(name(item.title))
+              : l.aiPlanChangePantryAdd(name(item.title)),
+        );
     }
     return out;
   }
@@ -201,6 +220,10 @@ class AiBridgeTexts {
       PlanBeforeKind.lab => [l.aiPlanBeforeLab(name(ref?.name ?? ''))],
       PlanBeforeKind.tracker => [l.aiPlanBeforeTracker(name(ref?.name ?? ''))],
       PlanBeforeKind.avoidKnown => [l.aiPlanBeforeAvoid(name(ref?.name ?? ''))],
+      PlanBeforeKind.recipeKnown => [l.aiPlanBeforeRecipeKnown(name(ref?.name ?? ''))],
+      PlanBeforeKind.pantryKnown => [
+        l.aiPlanBeforePantryKnown(name(ref?.name ?? ''), _detail(ref?.detail ?? '')),
+      ],
     };
   }
 

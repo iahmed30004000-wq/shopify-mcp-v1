@@ -24689,6 +24689,41 @@ class L10nEn extends L10n {
       'Kept for a later version; nothing is applied now.';
 
   @override
+  String aiPlanChangeRecipeAdd(String name) {
+    return 'Adds the dish “$name” to the kitchen, marked as coming from an AI answer.';
+  }
+
+  @override
+  String aiPlanChangeRecipeUpdate(String name) {
+    return 'Fills in what is missing on your dish “$name”, and leaves your ingredients alone.';
+  }
+
+  @override
+  String aiPlanChangeRecipeParts(String ingredients, String steps) {
+    return 'Ingredients: $ingredients · steps: $steps';
+  }
+
+  @override
+  String aiPlanChangePantryAdd(String name) {
+    return 'Adds “$name” to what is in the house.';
+  }
+
+  @override
+  String aiPlanChangePantryUpdate(String name) {
+    return 'Updates “$name” in the house.';
+  }
+
+  @override
+  String aiPlanBeforeRecipeKnown(String name) {
+    return 'You already have a dish with that name: “$name”.';
+  }
+
+  @override
+  String aiPlanBeforePantryKnown(String name, String detail) {
+    return '“$name” is in the house: $detail';
+  }
+
+  @override
   String get aiPlanBeforeNothing => 'You have nothing like it today.';
 
   @override
@@ -25513,4 +25548,327 @@ class L10nEn extends L10n {
   @override
   String get listsOrphanGroupBody =>
       'The record they hung on was deleted; the lists stayed yours.';
+
+  @override
+  String get sufraTitle => 'The kitchen';
+
+  @override
+  String get sufraPantryTitle => 'What is in the house';
+
+  @override
+  String get sufraRecipesTitle => 'My dishes';
+
+  @override
+  String get sufraSuggestionsTitle => 'What shall we cook today';
+
+  @override
+  String get sufraHistoryTitle => 'What we have cooked';
+
+  @override
+  String get sufraConstraintsTitle => 'My constraints';
+
+  @override
+  String get sufraPantryEmptyTitle => 'Nothing in the house yet';
+
+  @override
+  String get sufraPantryEmptyBody =>
+      'Add the first thing in your cupboard, and the kitchen can start suggesting.';
+
+  @override
+  String get sufraRecipesEmptyTitle => 'No dishes yet';
+
+  @override
+  String get sufraRecipesEmptyBody =>
+      'Write your dish in your own words, or bring it in from a file. The app ships no recipes at all.';
+
+  @override
+  String get sufraSuggestionsEmptyTitle => 'Nothing I can suggest';
+
+  @override
+  String get sufraSuggestionsEmptyBody =>
+      'Once there are dishes and things in the house, what you can cook now shows up here.';
+
+  @override
+  String get sufraHouseListHost => 'The house pantry';
+
+  @override
+  String get sufraHouseListName => 'What the house needs';
+
+  @override
+  String sufraRecipeListName(String dish) {
+    return 'Missing for $dish';
+  }
+
+  @override
+  String get sufraStateOut => 'Finished';
+
+  @override
+  String get sufraStateLow => 'Running low';
+
+  @override
+  String get sufraStateExpired => 'Past its date';
+
+  @override
+  String get sufraStateExpiringSoon => 'Date is close';
+
+  @override
+  String get sufraStateOk => 'In the house';
+
+  @override
+  String sufraExpiresInDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days left',
+      one: '1 day left',
+      zero: 'Today is the last day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraExpiredDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'by $count days',
+      one: 'by a day',
+    );
+    return 'Past its date $_temp0';
+  }
+
+  @override
+  String sufraAmountOf(String amount, String unit) {
+    return '$amount $unit';
+  }
+
+  @override
+  String get sufraNoAmount => 'No amount given';
+
+  @override
+  String get sufraVerdictCookNow => 'You can cook it now';
+
+  @override
+  String get sufraVerdictNearly => 'Nearly there — a little is missing';
+
+  @override
+  String get sufraVerdictUnsure => 'I cannot work it out';
+
+  @override
+  String get sufraVerdictFar => 'A lot is missing';
+
+  @override
+  String sufraMissingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count things',
+      one: '1 thing',
+    );
+    return '$_temp0 missing';
+  }
+
+  @override
+  String sufraMissingLine(String amount, String name) {
+    return 'Missing $amount $name';
+  }
+
+  @override
+  String sufraMissingLineNoAmount(String name) {
+    return 'Missing $name';
+  }
+
+  @override
+  String sufraShortLine(String have, String need, String name) {
+    return 'You have $have but it needs $need — $name';
+  }
+
+  @override
+  String sufraUnknownUnitLine(String need, String name, String haveUnit) {
+    return 'I cannot work it out: the dish needs $need and your “$name” is in $haveUnit. Write it in the same measure and I will.';
+  }
+
+  @override
+  String sufraUnknownAmountLine(String name) {
+    return '“$name” is there but you did not say how much, so I cannot say whether it is enough.';
+  }
+
+  @override
+  String sufraAmbiguousLine(String name, String candidates) {
+    return 'More than one thing could be “$name”: $candidates. Which one?';
+  }
+
+  @override
+  String sufraLooseMatch(String name) {
+    return 'Worked out from “$name”';
+  }
+
+  @override
+  String sufraUsesExpiring(String name) {
+    return 'Uses up $name before its date';
+  }
+
+  @override
+  String sufraScaledFor(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people',
+      one: '1 person',
+    );
+    return 'Worked out for $_temp0';
+  }
+
+  @override
+  String sufraHeldByWindow(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days ago',
+      one: 'yesterday',
+      zero: 'today',
+    );
+    return 'You cooked it $_temp0';
+  }
+
+  @override
+  String sufraFreeFrom(String day) {
+    return 'Back in the suggestions on $day';
+  }
+
+  @override
+  String get sufraShowRepeats => 'Show the ones I have cooked too';
+
+  @override
+  String get sufraWindowLabel => 'Not the same dish within';
+
+  @override
+  String sufraWindowDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: 'a day',
+      zero: 'no limit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraCookedIt => 'I cooked it';
+
+  @override
+  String get sufraCookedAnyway => 'Cooked although it repeats';
+
+  @override
+  String get sufraRuleAllergy => 'Allergy';
+
+  @override
+  String get sufraRuleAvoid => 'I would rather avoid';
+
+  @override
+  String get sufraRulePrefer => 'I prefer it';
+
+  @override
+  String get sufraRuleRequest => 'Special request';
+
+  @override
+  String sufraBreachAllergy(String term, String who) {
+    return 'It has $term, and $who is allergic to it';
+  }
+
+  @override
+  String sufraBreachAllergyAnyone(String term) {
+    return 'It has $term, which is on the allergy list';
+  }
+
+  @override
+  String sufraBreachRequest(String term) {
+    return 'Today\'s request: without $term';
+  }
+
+  @override
+  String sufraBreachAvoid(String term) {
+    return 'It has $term, which you would rather avoid';
+  }
+
+  @override
+  String get sufraBreachTooLong => 'It needs more time than you have';
+
+  @override
+  String sufraBreachMissingTag(String term) {
+    return 'It is not tagged “$term”';
+  }
+
+  @override
+  String sufraBreachDiet(String term) {
+    return '$term is on the meal-plan list';
+  }
+
+  @override
+  String get sufraPeopleLabel => 'How many are eating';
+
+  @override
+  String get sufraTimeLabel => 'How much time I have';
+
+  @override
+  String sufraMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraServings(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people',
+      one: '1 person',
+    );
+    return 'Feeds $_temp0';
+  }
+
+  @override
+  String get sufraSourceMine => 'Mine';
+
+  @override
+  String get sufraSourceImported => 'Brought in';
+
+  @override
+  String get sufraSourceAi => 'From an AI answer';
+
+  @override
+  String sufraSourceFrom(String who) {
+    return 'From $who';
+  }
+
+  @override
+  String get sufraOptionalIngredient => 'Can be left out';
+
+  @override
+  String get sufraDietModeLabel => 'Tie the kitchen to the meal plan';
+
+  @override
+  String get sufraDietModeHint =>
+      'Off. When you turn it on, only the plan\'s words reach the kitchen — nothing from Health.';
+
+  @override
+  String get sufraAddToList => 'Put what is missing on the list';
+
+  @override
+  String sufraAddedToList(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count things added',
+      one: '1 thing added',
+      zero: 'Nothing new for the list',
+    );
+    return '$_temp0';
+  }
 }

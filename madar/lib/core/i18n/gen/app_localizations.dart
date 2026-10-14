@@ -39257,6 +39257,48 @@ abstract class L10n {
   /// **'محفوظ للنسخة الجاية، وما بينطبّق هلأ.'**
   String get aiPlanChangeDeferred;
 
+  /// No description provided for @aiPlanChangeRecipeAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنزل طبخة «{name}» على السفرة، ومكتوب إنها جاية من ردّ الذكاء.'**
+  String aiPlanChangeRecipeAdd(String name);
+
+  /// No description provided for @aiPlanChangeRecipeUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتكمّل الناقص بطبخة «{name}» اللي عندك، وما بتلمس مكوّناتك.'**
+  String aiPlanChangeRecipeUpdate(String name);
+
+  /// No description provided for @aiPlanChangeRecipeParts.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكوّنات: {ingredients} · خطوات: {steps}'**
+  String aiPlanChangeRecipeParts(String ingredients, String steps);
+
+  /// No description provided for @aiPlanChangePantryAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتضيف «{name}» لما في البيت.'**
+  String aiPlanChangePantryAdd(String name);
+
+  /// No description provided for @aiPlanChangePantryUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتظبّط «{name}» اللي بالبيت.'**
+  String aiPlanChangePantryUpdate(String name);
+
+  /// No description provided for @aiPlanBeforeRecipeKnown.
+  ///
+  /// In ar, this message translates to:
+  /// **'عندك طبخة بنفس الاسم: «{name}».'**
+  String aiPlanBeforeRecipeKnown(String name);
+
+  /// No description provided for @aiPlanBeforePantryKnown.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» موجودة بالبيت: {detail}'**
+  String aiPlanBeforePantryKnown(String name, String detail);
+
   /// No description provided for @aiPlanBeforeNothing.
   ///
   /// In ar, this message translates to:
@@ -40534,6 +40576,420 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.'**
   String get listsOrphanGroupBody;
+
+  /// Part 5: the kitchen planet, named by the owner
+  ///
+  /// In ar, this message translates to:
+  /// **'السفرة'**
+  String get sufraTitle;
+
+  /// No description provided for @sufraPantryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو في بالبيت'**
+  String get sufraPantryTitle;
+
+  /// No description provided for @sufraRecipesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبخاتي'**
+  String get sufraRecipesTitle;
+
+  /// No description provided for @sufraSuggestionsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو نطبخ اليوم'**
+  String get sufraSuggestionsTitle;
+
+  /// No description provided for @sufraHistoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي طبخناه'**
+  String get sufraHistoryTitle;
+
+  /// No description provided for @sufraConstraintsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'محدداتي'**
+  String get sufraConstraintsTitle;
+
+  /// No description provided for @sufraPantryEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيت لسا فاضي هون'**
+  String get sufraPantryEmptyTitle;
+
+  /// No description provided for @sufraPantryEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضيفي أول إشي عندك بالخزانة، وبعدها السفرة بتعرف تقترح عليكي.'**
+  String get sufraPantryEmptyBody;
+
+  /// No description provided for @sufraRecipesEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في طبخات لسا'**
+  String get sufraRecipesEmptyTitle;
+
+  /// No description provided for @sufraRecipesEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتبي طبختك بكلماتك، أو جيبيها من ملف. ما في ولا وصفة جاهزة بالتطبيق.'**
+  String get sufraRecipesEmptyBody;
+
+  /// No description provided for @sufraSuggestionsEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في إشي بقدر أقترحه'**
+  String get sufraSuggestionsEmptyTitle;
+
+  /// No description provided for @sufraSuggestionsEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما يكون في طبخات ومونة بالبيت، بطلع هون اللي بتقدري تطبخيه هلأ.'**
+  String get sufraSuggestionsEmptyBody;
+
+  /// The host title of the standing shopping list in the all-lists screen
+  ///
+  /// In ar, this message translates to:
+  /// **'مونة البيت'**
+  String get sufraHouseListHost;
+
+  /// No description provided for @sufraHouseListName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي ناقص البيت'**
+  String get sufraHouseListName;
+
+  /// No description provided for @sufraRecipeListName.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقص لـ{dish}'**
+  String sufraRecipeListName(String dish);
+
+  /// No description provided for @sufraStateOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلص'**
+  String get sufraStateOut;
+
+  /// No description provided for @sufraStateLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'قلّ'**
+  String get sufraStateLow;
+
+  /// No description provided for @sufraStateExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'فات تاريخه'**
+  String get sufraStateExpired;
+
+  /// No description provided for @sufraStateExpiringSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرب يخلص تاريخه'**
+  String get sufraStateExpiringSoon;
+
+  /// No description provided for @sufraStateOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'في منه'**
+  String get sufraStateOk;
+
+  /// No description provided for @sufraExpiresInDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'باقي {count, plural, =0{اليوم آخر يوم} =1{يوم واحد} =2{يومين} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String sufraExpiresInDays(int count);
+
+  /// No description provided for @sufraExpiredDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'فات تاريخه {count, plural, =1{من يوم} =2{من يومين} few{من {count} أيام} many{من {count} يومًا} other{من {count} يوم}}'**
+  String sufraExpiredDaysAgo(int count);
+
+  /// No description provided for @sufraAmountOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} {unit}'**
+  String sufraAmountOf(String amount, String unit);
+
+  /// No description provided for @sufraNoAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون كمية'**
+  String get sufraNoAmount;
+
+  /// No description provided for @sufraVerdictCookNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتقدري تطبخيها هلأ'**
+  String get sufraVerdictCookNow;
+
+  /// No description provided for @sufraVerdictNearly.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبة — ناقصها إشي بسيط'**
+  String get sufraVerdictNearly;
+
+  /// No description provided for @sufraVerdictUnsure.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بقدر أحسبها'**
+  String get sufraVerdictUnsure;
+
+  /// No description provided for @sufraVerdictFar.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقصها كثير'**
+  String get sufraVerdictFar;
+
+  /// No description provided for @sufraMissingCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقص {count, plural, =1{إشي واحد} =2{إشيين} few{{count} إشيا} many{{count} إشيًا} other{{count} إشي}}'**
+  String sufraMissingCount(int count);
+
+  /// No description provided for @sufraMissingLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقص {amount} {name}'**
+  String sufraMissingLine(String amount, String name);
+
+  /// No description provided for @sufraMissingLineNoAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقص {name}'**
+  String sufraMissingLineNoAmount(String name);
+
+  /// No description provided for @sufraShortLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'في {have} بس بدها {need} — {name}'**
+  String sufraShortLine(String have, String need, String name);
+
+  /// The honest refusal: never a guessed conversion
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بعرف أحسب: الطبخة بدها {need} و«{name}» عندك بـ{haveUnit}. اكتبيها بنفس العيار وبحسبها.'**
+  String sufraUnknownUnitLine(String need, String name, String haveUnit);
+
+  /// No description provided for @sufraUnknownAmountLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» موجودة بس ما كتبتي قديش، فما بقدر أقول إذا بتكفي.'**
+  String sufraUnknownAmountLine(String name);
+
+  /// No description provided for @sufraAmbiguousLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'عندي أكثر من إشي بنفس الاسم لـ«{name}»: {candidates}. أي واحد منهم؟'**
+  String sufraAmbiguousLine(String name, String candidates);
+
+  /// No description provided for @sufraLooseMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسبتها من «{name}»'**
+  String sufraLooseMatch(String name);
+
+  /// No description provided for @sufraUsesExpiring.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتستهلك {name} قبل ما يخلص تاريخه'**
+  String sufraUsesExpiring(String name);
+
+  /// No description provided for @sufraScaledFor.
+  ///
+  /// In ar, this message translates to:
+  /// **'محسوبة لـ{count, plural, =1{شخص واحد} =2{شخصين} few{{count} أشخاص} many{{count} شخصًا} other{{count} شخص}}'**
+  String sufraScaledFor(int count);
+
+  /// No description provided for @sufraHeldByWindow.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبختيها {count, plural, =0{اليوم} =1{امبارح} =2{قبل يومين} few{قبل {count} أيام} many{قبل {count} يومًا} other{قبل {count} يوم}}'**
+  String sufraHeldByWindow(int count);
+
+  /// No description provided for @sufraFreeFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'بترجع بالاقتراحات يوم {day}'**
+  String sufraFreeFrom(String day);
+
+  /// No description provided for @sufraShowRepeats.
+  ///
+  /// In ar, this message translates to:
+  /// **'ورّيني اللي طبختها كمان'**
+  String get sufraShowRepeats;
+
+  /// No description provided for @sufraWindowLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مش نفس الطبخة بآخر'**
+  String get sufraWindowLabel;
+
+  /// No description provided for @sufraWindowDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلا حد} =1{يوم} =2{يومين} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String sufraWindowDays(int count);
+
+  /// No description provided for @sufraCookedIt.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبختها'**
+  String get sufraCookedIt;
+
+  /// No description provided for @sufraCookedAnyway.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبختها غصبًا عن التكرار'**
+  String get sufraCookedAnyway;
+
+  /// No description provided for @sufraRuleAllergy.
+  ///
+  /// In ar, this message translates to:
+  /// **'حساسية'**
+  String get sufraRuleAllergy;
+
+  /// No description provided for @sufraRuleAvoid.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفضّل أبعد عنه'**
+  String get sufraRuleAvoid;
+
+  /// No description provided for @sufraRulePrefer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفضّله'**
+  String get sufraRulePrefer;
+
+  /// No description provided for @sufraRuleRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب خاص'**
+  String get sufraRuleRequest;
+
+  /// No description provided for @sufraBreachAllergy.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيها {term} و{who} عنده حساسية منها'**
+  String sufraBreachAllergy(String term, String who);
+
+  /// No description provided for @sufraBreachAllergyAnyone.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيها {term} وهاد على قائمة الحساسية'**
+  String sufraBreachAllergyAnyone(String term);
+
+  /// No description provided for @sufraBreachRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'في طلب اليوم: بلا {term}'**
+  String sufraBreachRequest(String term);
+
+  /// No description provided for @sufraBreachAvoid.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيها {term} واللي بتفضّلي تبعدي عنه'**
+  String sufraBreachAvoid(String term);
+
+  /// No description provided for @sufraBreachTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدها وقت أكثر من اللي عندك'**
+  String get sufraBreachTooLong;
+
+  /// No description provided for @sufraBreachMissingTag.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عليها «{term}»'**
+  String sufraBreachMissingTag(String term);
+
+  /// No description provided for @sufraBreachDiet.
+  ///
+  /// In ar, this message translates to:
+  /// **'{term} على قائمة خطة الأكل'**
+  String sufraBreachDiet(String term);
+
+  /// No description provided for @sufraPeopleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كم واحد ياكل'**
+  String get sufraPeopleLabel;
+
+  /// No description provided for @sufraTimeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'قديش عندي وقت'**
+  String get sufraTimeLabel;
+
+  /// No description provided for @sufraMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقايق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String sufraMinutes(int count);
+
+  /// No description provided for @sufraServings.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكفي {count, plural, =1{شخص واحد} =2{شخصين} few{{count} أشخاص} many{{count} شخصًا} other{{count} شخص}}'**
+  String sufraServings(int count);
+
+  /// No description provided for @sufraSourceMine.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبختي'**
+  String get sufraSourceMine;
+
+  /// No description provided for @sufraSourceImported.
+  ///
+  /// In ar, this message translates to:
+  /// **'من برا'**
+  String get sufraSourceImported;
+
+  /// No description provided for @sufraSourceAi.
+  ///
+  /// In ar, this message translates to:
+  /// **'من ردّ الذكاء'**
+  String get sufraSourceAi;
+
+  /// No description provided for @sufraSourceFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {who}'**
+  String sufraSourceFrom(String who);
+
+  /// No description provided for @sufraOptionalIngredient.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنفع بدونها'**
+  String get sufraOptionalIngredient;
+
+  /// No description provided for @sufraDietModeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اربط السفرة بخطة الأكل'**
+  String get sufraDietModeLabel;
+
+  /// No description provided for @sufraDietModeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطفي. لما تشغّله، بس كلمات الخطة بتوصل للسفرة — ولا إشي من الصحة.'**
+  String get sufraDietModeHint;
+
+  /// No description provided for @sufraAddToList.
+  ///
+  /// In ar, this message translates to:
+  /// **'حطّ الناقص بالقائمة'**
+  String get sufraAddToList;
+
+  /// No description provided for @sufraAddedToList.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في إشي جديد للقائمة} =1{انضاف إشي للقائمة} =2{انضافوا إشيين} few{انضافوا {count} إشيا} many{انضافوا {count} إشيًا} other{انضاف {count} إشي}}'**
+  String sufraAddedToList(int count);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

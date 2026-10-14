@@ -343,20 +343,122 @@ void main() {
       expect(await service.checklist(result.plan!.id), isEmpty);
     });
 
-    test('a kind kept for later is stored as deferred and refuses to apply', () async {
+    test('an AI recipe lands in «السفرة» with its ingredients, and undoes', () async {
       final result = await import(
         planWith({
           'id': 'k1',
           'kind': 'recipe',
           'title': 'شوربة عدس',
           'reason': 'لأن المونة عندك فيها عدس.',
-          'data': {'servings': 4},
+          'area': 'kitchen',
+          'data': {
+            'servings': 4,
+            'minutes': 30,
+            'tags': ['سريع'],
+            'ingredients': [
+              {'name': 'عدس', 'quantity': 1, 'unit': 'كوب'},
+              {'name': 'كزبرة', 'optional': true},
+            ],
+            'steps': ['اغلي العدس', 'اضربيه بالخلاط'],
+          },
         }, only: false),
       );
-      final recipe = result.preview('k1')!;
-      expect(recipe.status, PlanItemStatus.deferred);
-      await expectLater(() => service.applyItem(result.plan!, recipe), throwsA(isA<PlanApplyRefused>()));
-      expect((await service.itemRow(result.plan!.id, 'k1'))!.state, PlanItemState.deferred);
+      final preview = result.preview('k1')!;
+      expect(preview.status, PlanItemStatus.ready);
+      final outcome = await service.applyItem(result.plan!, preview);
+      final recipe = (await repos.recipes.getAll()).single;
+      expect(recipe.name, 'شوربة عدس');
+      expect(recipe.servings, 4);
+      expect(recipe.minutes, 30);
+      expect(recipe.steps, ['اغلي العدس', 'اضربيه بالخلاط']);
+      expect(recipe.source, RecipeSource.ai, reason: 'she must always know it came from an AI answer');
+      expect(recipe.sourceName, isNotNull);
+      final ingredients = await repos.recipeIngredients.getAll();
+      expect([for (final i in ingredients) i.name], ['عدس', 'كزبرة']);
+      expect(ingredients.first.quantity, 1);
+      expect(ingredients.first.unit, 'كوب');
+      expect(ingredients.last.optional, isTrue);
+      expect((await service.itemRow(result.plan!.id, 'k1'))!.state, PlanItemState.applied);
+      await outcome.undo();
+      expect(await repos.recipes.count(), 0);
+      expect(await repos.recipeIngredients.count(), 0);
+      expect((await service.itemRow(result.plan!.id, 'k1'))!.state, PlanItemState.undone);
+    });
+
+    test('a dish she already has is filled in, never overwritten, and undoes', () async {
+      await repos.recipes.insert(
+        RecipesCompanion.insert(id: const Value('r-mine'), name: 'شوربة عدس', notes: const Value('طريقتي')),
+      );
+      await repos.recipeIngredients.insert(
+        RecipeIngredientsCompanion.insert(recipeId: 'r-mine', name: 'عدس أحمر', quantity: const Value(2)),
+      );
+      final result = await import(
+        planWith({
+          'id': 'k1',
+          'kind': 'recipe',
+          'title': 'شوربة عدس',
+          'reason': 'لأن المونة عندك فيها عدس.',
+          'data': {
+            'servings': 6,
+            'ingredients': [
+              {'name': 'عدس'},
+            ],
+          },
+        }, only: false),
+      );
+      final preview = result.preview('k1')!;
+      expect(preview.before.kind, PlanBeforeKind.recipeKnown);
+      final outcome = await service.applyItem(result.plan!, preview);
+      final recipe = (await repos.recipes.getAll()).single;
+      expect(recipe.id, 'r-mine', reason: 'no near-duplicate dish was created');
+      expect(recipe.servings, 6, reason: 'the empty field was filled in');
+      expect(recipe.notes, 'طريقتي', reason: 'what she wrote is untouched');
+      final ingredients = await repos.recipeIngredients.getAll();
+      expect([for (final i in ingredients) i.name], ['عدس أحمر'], reason: 'her ingredient list is never replaced');
+      await outcome.undo();
+      expect((await repos.recipes.getAll()).single.servings, isNull);
+    });
+
+    test('a pantry item lands in the house, and an existing one is updated', () async {
+      final result = await import(
+        planWith({
+          'id': 'p1',
+          'kind': 'pantryItem',
+          'title': 'عدس',
+          'reason': 'لأنك بتطبخيه كثير.',
+          'data': {'quantity': 2, 'unit': 'كيلو', 'place': 'خزانة المونة', 'expires': '2026-12-01'},
+        }, only: false),
+      );
+      final outcome = await service.applyItem(result.plan!, result.preview('p1')!);
+      final item = (await repos.pantryItems.getAll()).single;
+      expect(item.name, 'عدس');
+      expect(item.quantity, 2);
+      expect(item.unit, 'كيلو');
+      expect(item.place, 'خزانة المونة');
+      expect(item.expires, DateTime(2026, 12, 1));
+      await outcome.undo();
+      expect(await repos.pantryItems.count(), 0);
+
+      // Now she already has it: the same suggestion updates the row.
+      await repos.pantryItems.insert(
+        PantryItemsCompanion.insert(id: const Value('p-lentils'), name: 'عدس', quantity: const Value(0)),
+      );
+      final second = await import(
+        planWith({
+          'id': 'p2',
+          'kind': 'pantryItem',
+          'title': 'عدس',
+          'reason': 'لأنها خلصت.',
+          'data': {'quantity': 3, 'unit': 'كيلو'},
+        }, only: false),
+      );
+      final preview = second.preview('p2')!;
+      expect(preview.before.kind, PlanBeforeKind.pantryKnown);
+      final outcome2 = await service.applyItem(second.plan!, preview);
+      expect(await repos.pantryItems.count(), 1);
+      expect((await repos.pantryItems.byId('p-lentils'))!.quantity, 3);
+      await outcome2.undo();
+      expect((await repos.pantryItems.byId('p-lentils'))!.quantity, 0);
     });
 
     test('he can say no, and change his mind', () async {

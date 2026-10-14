@@ -25314,6 +25314,41 @@ class L10nAr extends L10n {
   String get aiPlanChangeDeferred => 'محفوظ للنسخة الجاية، وما بينطبّق هلأ.';
 
   @override
+  String aiPlanChangeRecipeAdd(String name) {
+    return 'بتنزل طبخة «$name» على السفرة، ومكتوب إنها جاية من ردّ الذكاء.';
+  }
+
+  @override
+  String aiPlanChangeRecipeUpdate(String name) {
+    return 'بتكمّل الناقص بطبخة «$name» اللي عندك، وما بتلمس مكوّناتك.';
+  }
+
+  @override
+  String aiPlanChangeRecipeParts(String ingredients, String steps) {
+    return 'مكوّنات: $ingredients · خطوات: $steps';
+  }
+
+  @override
+  String aiPlanChangePantryAdd(String name) {
+    return 'بتضيف «$name» لما في البيت.';
+  }
+
+  @override
+  String aiPlanChangePantryUpdate(String name) {
+    return 'بتظبّط «$name» اللي بالبيت.';
+  }
+
+  @override
+  String aiPlanBeforeRecipeKnown(String name) {
+    return 'عندك طبخة بنفس الاسم: «$name».';
+  }
+
+  @override
+  String aiPlanBeforePantryKnown(String name, String detail) {
+    return '«$name» موجودة بالبيت: $detail';
+  }
+
+  @override
   String get aiPlanBeforeNothing => 'ما في إشي زي هيك عندك هلأ.';
 
   @override
@@ -26145,4 +26180,354 @@ class L10nAr extends L10n {
   @override
   String get listsOrphanGroupBody =>
       'السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.';
+
+  @override
+  String get sufraTitle => 'السفرة';
+
+  @override
+  String get sufraPantryTitle => 'شو في بالبيت';
+
+  @override
+  String get sufraRecipesTitle => 'طبخاتي';
+
+  @override
+  String get sufraSuggestionsTitle => 'شو نطبخ اليوم';
+
+  @override
+  String get sufraHistoryTitle => 'اللي طبخناه';
+
+  @override
+  String get sufraConstraintsTitle => 'محدداتي';
+
+  @override
+  String get sufraPantryEmptyTitle => 'البيت لسا فاضي هون';
+
+  @override
+  String get sufraPantryEmptyBody =>
+      'ضيفي أول إشي عندك بالخزانة، وبعدها السفرة بتعرف تقترح عليكي.';
+
+  @override
+  String get sufraRecipesEmptyTitle => 'ما في طبخات لسا';
+
+  @override
+  String get sufraRecipesEmptyBody =>
+      'اكتبي طبختك بكلماتك، أو جيبيها من ملف. ما في ولا وصفة جاهزة بالتطبيق.';
+
+  @override
+  String get sufraSuggestionsEmptyTitle => 'ما في إشي بقدر أقترحه';
+
+  @override
+  String get sufraSuggestionsEmptyBody =>
+      'لما يكون في طبخات ومونة بالبيت، بطلع هون اللي بتقدري تطبخيه هلأ.';
+
+  @override
+  String get sufraHouseListHost => 'مونة البيت';
+
+  @override
+  String get sufraHouseListName => 'اللي ناقص البيت';
+
+  @override
+  String sufraRecipeListName(String dish) {
+    return 'ناقص لـ$dish';
+  }
+
+  @override
+  String get sufraStateOut => 'خلص';
+
+  @override
+  String get sufraStateLow => 'قلّ';
+
+  @override
+  String get sufraStateExpired => 'فات تاريخه';
+
+  @override
+  String get sufraStateExpiringSoon => 'قرب يخلص تاريخه';
+
+  @override
+  String get sufraStateOk => 'في منه';
+
+  @override
+  String sufraExpiresInDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومين',
+      one: 'يوم واحد',
+      zero: 'اليوم آخر يوم',
+    );
+    return 'باقي $_temp0';
+  }
+
+  @override
+  String sufraExpiredDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'من $count يوم',
+      many: 'من $count يومًا',
+      few: 'من $count أيام',
+      two: 'من يومين',
+      one: 'من يوم',
+    );
+    return 'فات تاريخه $_temp0';
+  }
+
+  @override
+  String sufraAmountOf(String amount, String unit) {
+    return '$amount $unit';
+  }
+
+  @override
+  String get sufraNoAmount => 'بدون كمية';
+
+  @override
+  String get sufraVerdictCookNow => 'بتقدري تطبخيها هلأ';
+
+  @override
+  String get sufraVerdictNearly => 'قريبة — ناقصها إشي بسيط';
+
+  @override
+  String get sufraVerdictUnsure => 'ما بقدر أحسبها';
+
+  @override
+  String get sufraVerdictFar => 'ناقصها كثير';
+
+  @override
+  String sufraMissingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إشي',
+      many: '$count إشيًا',
+      few: '$count إشيا',
+      two: 'إشيين',
+      one: 'إشي واحد',
+    );
+    return 'ناقص $_temp0';
+  }
+
+  @override
+  String sufraMissingLine(String amount, String name) {
+    return 'ناقص $amount $name';
+  }
+
+  @override
+  String sufraMissingLineNoAmount(String name) {
+    return 'ناقص $name';
+  }
+
+  @override
+  String sufraShortLine(String have, String need, String name) {
+    return 'في $have بس بدها $need — $name';
+  }
+
+  @override
+  String sufraUnknownUnitLine(String need, String name, String haveUnit) {
+    return 'ما بعرف أحسب: الطبخة بدها $need و«$name» عندك بـ$haveUnit. اكتبيها بنفس العيار وبحسبها.';
+  }
+
+  @override
+  String sufraUnknownAmountLine(String name) {
+    return '«$name» موجودة بس ما كتبتي قديش، فما بقدر أقول إذا بتكفي.';
+  }
+
+  @override
+  String sufraAmbiguousLine(String name, String candidates) {
+    return 'عندي أكثر من إشي بنفس الاسم لـ«$name»: $candidates. أي واحد منهم؟';
+  }
+
+  @override
+  String sufraLooseMatch(String name) {
+    return 'حسبتها من «$name»';
+  }
+
+  @override
+  String sufraUsesExpiring(String name) {
+    return 'بتستهلك $name قبل ما يخلص تاريخه';
+  }
+
+  @override
+  String sufraScaledFor(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شخص',
+      many: '$count شخصًا',
+      few: '$count أشخاص',
+      two: 'شخصين',
+      one: 'شخص واحد',
+    );
+    return 'محسوبة لـ$_temp0';
+  }
+
+  @override
+  String sufraHeldByWindow(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'قبل $count يوم',
+      many: 'قبل $count يومًا',
+      few: 'قبل $count أيام',
+      two: 'قبل يومين',
+      one: 'امبارح',
+      zero: 'اليوم',
+    );
+    return 'طبختيها $_temp0';
+  }
+
+  @override
+  String sufraFreeFrom(String day) {
+    return 'بترجع بالاقتراحات يوم $day';
+  }
+
+  @override
+  String get sufraShowRepeats => 'ورّيني اللي طبختها كمان';
+
+  @override
+  String get sufraWindowLabel => 'مش نفس الطبخة بآخر';
+
+  @override
+  String sufraWindowDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومين',
+      one: 'يوم',
+      zero: 'بلا حد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sufraCookedIt => 'طبختها';
+
+  @override
+  String get sufraCookedAnyway => 'طبختها غصبًا عن التكرار';
+
+  @override
+  String get sufraRuleAllergy => 'حساسية';
+
+  @override
+  String get sufraRuleAvoid => 'أفضّل أبعد عنه';
+
+  @override
+  String get sufraRulePrefer => 'أفضّله';
+
+  @override
+  String get sufraRuleRequest => 'طلب خاص';
+
+  @override
+  String sufraBreachAllergy(String term, String who) {
+    return 'فيها $term و$who عنده حساسية منها';
+  }
+
+  @override
+  String sufraBreachAllergyAnyone(String term) {
+    return 'فيها $term وهاد على قائمة الحساسية';
+  }
+
+  @override
+  String sufraBreachRequest(String term) {
+    return 'في طلب اليوم: بلا $term';
+  }
+
+  @override
+  String sufraBreachAvoid(String term) {
+    return 'فيها $term واللي بتفضّلي تبعدي عنه';
+  }
+
+  @override
+  String get sufraBreachTooLong => 'بدها وقت أكثر من اللي عندك';
+
+  @override
+  String sufraBreachMissingTag(String term) {
+    return 'ما عليها «$term»';
+  }
+
+  @override
+  String sufraBreachDiet(String term) {
+    return '$term على قائمة خطة الأكل';
+  }
+
+  @override
+  String get sufraPeopleLabel => 'كم واحد ياكل';
+
+  @override
+  String get sufraTimeLabel => 'قديش عندي وقت';
+
+  @override
+  String sufraMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دقيقة',
+      many: '$count دقيقة',
+      few: '$count دقايق',
+      two: 'دقيقتين',
+      one: 'دقيقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sufraServings(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شخص',
+      many: '$count شخصًا',
+      few: '$count أشخاص',
+      two: 'شخصين',
+      one: 'شخص واحد',
+    );
+    return 'تكفي $_temp0';
+  }
+
+  @override
+  String get sufraSourceMine => 'طبختي';
+
+  @override
+  String get sufraSourceImported => 'من برا';
+
+  @override
+  String get sufraSourceAi => 'من ردّ الذكاء';
+
+  @override
+  String sufraSourceFrom(String who) {
+    return 'من $who';
+  }
+
+  @override
+  String get sufraOptionalIngredient => 'تنفع بدونها';
+
+  @override
+  String get sufraDietModeLabel => 'اربط السفرة بخطة الأكل';
+
+  @override
+  String get sufraDietModeHint =>
+      'مطفي. لما تشغّله، بس كلمات الخطة بتوصل للسفرة — ولا إشي من الصحة.';
+
+  @override
+  String get sufraAddToList => 'حطّ الناقص بالقائمة';
+
+  @override
+  String sufraAddedToList(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'انضاف $count إشي',
+      many: 'انضافوا $count إشيًا',
+      few: 'انضافوا $count إشيا',
+      two: 'انضافوا إشيين',
+      one: 'انضاف إشي للقائمة',
+      zero: 'ما في إشي جديد للقائمة',
+    );
+    return '$_temp0';
+  }
 }

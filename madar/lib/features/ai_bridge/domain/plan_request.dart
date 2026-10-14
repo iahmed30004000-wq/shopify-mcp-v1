@@ -260,8 +260,23 @@ abstract final class PlanPrompt {
         'deadline': 'yyyy-MM-dd',
         'steps': 'list of {title, day, note}, up to ${PlanLimits.maxProgramSteps}',
       },
-      'recipe': 'kept for the kitchen planet; shown, applied by a later version',
-      'pantryItem': 'kept for the pantry; shown, applied by a later version',
+      'recipe': {
+        'ingredients':
+            'list of {name (required, one of myThings.pantryItems when he has it), quantity, unit, optional, note}, '
+                'up to ${PlanLimits.maxRecipeIngredients}',
+        'steps': 'the method as plain strings in order, up to ${PlanLimits.maxRecipeSteps}',
+        'servings': 'number of people > 0',
+        'minutes': 'how long it takes > 0',
+        'tags': 'up to ${PlanLimits.maxTags} of her own words',
+        'notes': 'optional',
+      },
+      'pantryItem': {
+        'quantity': 'number >= 0 (0 means it is finished)',
+        'unit': 'her own unit word',
+        'place': 'where it is kept, her own word',
+        'expires': 'yyyy-MM-dd',
+        'notes': 'optional',
+      },
     },
     'rejected': {
       'noReason': 'an item without "reason"',

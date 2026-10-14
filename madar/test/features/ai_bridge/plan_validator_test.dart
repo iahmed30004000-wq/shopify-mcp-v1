@@ -422,22 +422,91 @@ void main() {
     });
   });
 
-  group('kinds kept for later', () {
-    test('a recipe validates, is flagged as deferred and never rejected', () {
+  group('the kitchen kinds («السفرة», schema v6)', () {
+    test('a recipe with its ingredients and its method validates cleanly', () {
       final v = check(
         planWith({
           'id': 'k1',
           'kind': 'recipe',
           'title': 'شوربة عدس',
           'reason': 'لأن المونة عندك فيها عدس.',
-          'data': {'servings': 4, 'minutes': 30},
+          'area': 'kitchen',
+          'data': {
+            'servings': 4,
+            'minutes': 30,
+            'tags': ['سريع'],
+            'ingredients': [
+              {'name': 'عدس', 'quantity': 1, 'unit': 'كوب'},
+              {'name': 'كزبرة', 'optional': true},
+            ],
+            'steps': ['اغلي العدس', 'اضربيه بالخلاط'],
+          },
         }),
       );
       expect(v.fatal, isEmpty);
-      expect(v.accepted.map((i) => i.id), contains('k1'));
-      final problems = v.problemsFor('k1');
-      expect(problems.single.code, PlanProblemCode.deferredKind);
-      expect(problems.single.rejects, isFalse);
+      expect(v.problemsFor('k1'), isEmpty, reason: 'no kind is deferred any more');
+      final item = v.accepted.firstWhere((i) => i.id == 'k1');
+      expect(item.maps('ingredients'), hasLength(2));
+      expect(item.strings('steps'), hasLength(2));
+    });
+
+    test('an ingredient without a name is refused, and so is a step that is not text', () {
+      final v = check(
+        planWith({
+          'id': 'k1',
+          'kind': 'recipe',
+          'title': 'شوربة عدس',
+          'reason': 'سبب كافي.',
+          'data': {
+            'ingredients': [
+              {'quantity': 1, 'unit': 'كوب'},
+            ],
+            'steps': [7],
+          },
+        }),
+      );
+      expect(codesOf(v), contains(PlanProblemCode.missingField));
+      expect(codesOf(v), contains(PlanProblemCode.wrongType));
+    });
+
+    test('a pantry item validates, and «خلص» (zero) is a real amount', () {
+      final v = check(
+        planWith({
+          'id': 'p1',
+          'kind': 'pantryItem',
+          'title': 'عدس',
+          'reason': 'لأنك بتطبخيه كثير.',
+          'data': {'quantity': 0, 'unit': 'كيلو', 'place': 'خزانة المونة', 'expires': '2026-12-01'},
+        }),
+      );
+      expect(v.fatal, isEmpty);
+      expect(v.problemsFor('p1'), isEmpty);
+    });
+
+    test('a key the contract does not list is still refused in the kitchen', () {
+      final v = check(
+        planWith({
+          'id': 'p1',
+          'kind': 'pantryItem',
+          'title': 'عدس',
+          'reason': 'سبب كافي.',
+          'data': {'calories': 300},
+        }),
+      );
+      expect(codesOf(v), contains(PlanProblemCode.unknownField));
+    });
+
+    test('a dose hidden in a recipe step is still a dose', () {
+      final v = check(
+        planWith({
+          'id': 'k1',
+          'kind': 'recipe',
+          'title': 'شوربة عدس',
+          'reason': 'سبب كافي.',
+          'data': {'steps': ['خذي حبة بنادول ٥٠٠ ملغ قبل الأكل']},
+        }),
+      );
+      expect(codesOf(v), contains(PlanProblemCode.healthAdvice));
     });
   });
 

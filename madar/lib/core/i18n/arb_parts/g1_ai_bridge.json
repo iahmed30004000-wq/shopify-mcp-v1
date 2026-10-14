@@ -358,6 +358,75 @@
     "ar": "محفوظ للنسخة الجاية، وما بينطبّق هلأ.",
     "en": "Kept for a later version; nothing is applied now."
   },
+  "aiPlanChangeRecipeAdd": {
+    "ar": "بتنزل طبخة «{name}» على السفرة، ومكتوب إنها جاية من ردّ الذكاء.",
+    "en": "Adds the dish “{name}” to the kitchen, marked as coming from an AI answer.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRecipeUpdate": {
+    "ar": "بتكمّل الناقص بطبخة «{name}» اللي عندك، وما بتلمس مكوّناتك.",
+    "en": "Fills in what is missing on your dish “{name}”, and leaves your ingredients alone.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRecipeParts": {
+    "ar": "مكوّنات: {ingredients} · خطوات: {steps}",
+    "en": "Ingredients: {ingredients} · steps: {steps}",
+    "placeholders": {
+      "ingredients": {
+        "type": "String"
+      },
+      "steps": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangePantryAdd": {
+    "ar": "بتضيف «{name}» لما في البيت.",
+    "en": "Adds “{name}” to what is in the house.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangePantryUpdate": {
+    "ar": "بتظبّط «{name}» اللي بالبيت.",
+    "en": "Updates “{name}” in the house.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeRecipeKnown": {
+    "ar": "عندك طبخة بنفس الاسم: «{name}».",
+    "en": "You already have a dish with that name: “{name}”.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforePantryKnown": {
+    "ar": "«{name}» موجودة بالبيت: {detail}",
+    "en": "“{name}” is in the house: {detail}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
   "aiPlanBeforeNothing": {
     "ar": "ما في إشي زي هيك عندك هلأ.",
     "en": "You have nothing like it today."

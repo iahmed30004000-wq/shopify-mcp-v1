@@ -660,9 +660,149 @@ class PlanApplyService {
         );
 
       case PlanItemKind.recipe:
+        return _recipe(plan, p);
+
       case PlanItemKind.pantryItem:
-        throw PlanApplyRefused('${item.id}: ${item.kind.name} is not applied by this version');
+        return _pantryItem(p);
     }
+  }
+
+  /// A dish into «السفرة».
+  ///
+  /// A dish she already has by that name is **never overwritten**: only the
+  /// facts she left empty are filled in (servings, minutes, the method, the
+  /// notes), and her ingredient list is touched only when it is empty. The
+  /// undo restores the row exactly and removes anything that was added.
+  ///
+  /// A new dish is stored with its source set to `ai` and the plan's name
+  /// as `sourceName`, so she always knows this recipe came from an AI
+  /// answer and not from her aunt.
+  Future<_Effect> _recipe(AppliedPlanRow plan, PlanItemPreview p) async {
+    final item = p.item;
+    final ingredients = item.maps('ingredients');
+    final steps = item.strings('steps');
+    final servings = item.integer('servings');
+    final minutes = item.integer('minutes');
+    final existing = p.target(PlanTargetSlot.recipe);
+
+    RecipeIngredientsCompanion line(String recipeId, Map<String, Object?> m) {
+      final name = m['name'];
+      final quantity = m['quantity'];
+      final unit = m['unit'];
+      final note = m['note'];
+      return RecipeIngredientsCompanion.insert(
+        recipeId: recipeId,
+        name: name is String ? name.trim() : '',
+        quantity: Value(quantity is num && quantity.isFinite ? quantity.toDouble() : null),
+        unit: Value(unit is String && unit.trim().isNotEmpty ? unit.trim() : null),
+        optional: Value(m['optional'] == true),
+        note: Value(note is String && note.trim().isNotEmpty ? note.trim() : null),
+      );
+    }
+
+    if (existing != null) {
+      final before = await repos.recipes.byId(existing.id);
+      if (before == null) throw PlanApplyRefused('${existing.id}: gone');
+      final had = await repos.recipeIngredients.getAll(where: (t) => t.recipeId.equals(existing.id));
+      await repos.recipes.setColumns(existing.id, {
+        if (before.steps.isEmpty && steps.isNotEmpty) 'steps': steps,
+        if (before.servings == null && servings != null) 'servings': servings,
+        if (before.minutes == null && minutes != null) 'minutes': minutes,
+        if (before.tags.isEmpty && item.strings('tags').isNotEmpty) 'tags': item.strings('tags'),
+        if (before.notes == null && item.str('notes') != null) 'notes': item.str('notes'),
+      });
+      final added = <String>[];
+      if (had.isEmpty) {
+        for (final m in ingredients) {
+          final row = await repos.recipeIngredients.insert(line(existing.id, m));
+          added.add(row.id);
+        }
+      }
+      return _Effect(
+        table: 'recipes',
+        id: existing.id,
+        after: {'updated': true, 'ingredientsAdded': added.length},
+        undo: () async {
+          for (final id in added) {
+            await repos.recipeIngredients.delete(id);
+          }
+          await repos.recipes.update(before);
+        },
+      );
+    }
+
+    final row = await repos.recipes.insert(
+      RecipesCompanion.insert(
+        name: item.title,
+        steps: Value(steps),
+        servings: Value(servings),
+        minutes: Value(minutes),
+        tags: Value(item.strings('tags')),
+        notes: Value(item.str('notes')),
+        source: const Value(RecipeSource.ai),
+        sourceName: Value(plan.name),
+      ),
+    );
+    for (final m in ingredients) {
+      await repos.recipeIngredients.insert(line(row.id, m));
+    }
+    return _Effect(
+      table: 'recipes',
+      id: row.id,
+      after: {'name': row.name, 'ingredients': ingredients.length, 'steps': steps.length},
+      undo: () async {
+        await repos.recipeIngredients.deleteWhere((t) => t.recipeId.equals(row.id));
+        await repos.recipes.delete(row.id);
+      },
+    );
+  }
+
+  /// A thing into the house. Something already there has its amount, unit,
+  /// place and expiry set to what the suggestion says; the undo restores
+  /// the row exactly.
+  Future<_Effect> _pantryItem(PlanItemPreview p) async {
+    final item = p.item;
+    final quantity = item.number('quantity');
+    final unit = item.str('unit');
+    final place = item.str('place');
+    final expires = item.str('expires');
+    final day = expires == null ? null : planParseDay(expires);
+    final existing = p.target(PlanTargetSlot.pantryItem);
+
+    if (existing != null) {
+      final before = await repos.pantryItems.byId(existing.id);
+      if (before == null) throw PlanApplyRefused('${existing.id}: gone');
+      await repos.pantryItems.setColumns(existing.id, {
+        'quantity': ?quantity,
+        'unit': ?unit,
+        'place': ?place,
+        'expires': ?day,
+        'note': ?item.str('notes'),
+      });
+      return _Effect(
+        table: 'pantry_items',
+        id: existing.id,
+        after: {'updated': true},
+        undo: () async => repos.pantryItems.update(before),
+      );
+    }
+
+    final row = await repos.pantryItems.insert(
+      PantryItemsCompanion.insert(
+        name: item.title,
+        quantity: Value(quantity),
+        unit: Value(unit),
+        place: Value(place),
+        expires: Value(day),
+        note: Value(item.str('notes')),
+      ),
+    );
+    return _Effect(
+      table: 'pantry_items',
+      id: row.id,
+      after: {'name': row.name, 'quantity': ?quantity, 'unit': ?unit},
+      undo: () async => repos.pantryItems.delete(row.id).then((_) {}),
+    );
   }
 
   Future<_Effect> _mealChange(AppliedPlanRow plan, PlanItemPreview p) async {

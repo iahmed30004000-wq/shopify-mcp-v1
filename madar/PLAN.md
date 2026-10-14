@@ -165,6 +165,24 @@ normal planet for both of them (and on her copy it is the one she lives in).
 - Simple and fast, and it shows nothing from Health or Money – not for privacy (she gets her
   own copy of the app), but because a kitchen screen should stay a kitchen screen.
 
+**Built (step 1 of 2: the data and the engines)**: `lib/features/sufra/` on schema **v6**
+(`pantry_items`, `recipes`, `recipe_ingredients`, `cooked_meals`, `kitchen_rules`). The pantry is
+its own table because it is stock, not a tick line (a quantity that goes down, a unit the matcher
+computes in, a place, an expiry, a low mark); the **shopping list is Part 3b's engine unchanged**,
+on the hosts `('pantry','house')` for the house's standing list and `('recipes', id)` for «ناقص
+لهذي الطبخة». Pure engines: `KitchenUnits` (kg↔g and l↔ml only – a cup in grams comes back
+*unknown*, never guessed), `PantryBoard` (low / finished / expiring, worst first), `PantryMatcher`
+(cookNow / nearly / **unsure** / far, with what is missing and how much), `NoRepeat` (her window,
+read off a real cooked log, with her override), `KitchenConstraints` (allergy, avoid, prefer,
+request, who is eating, time, and `DietLink` which stays off unless the owner switches
+`dietMode` on). The AI bridge's `recipe` and `pantryItem` items **apply** now, through the same
+validator and the same `HealthGuard`, and an AI dish is stored with its source so she always knows
+it came from an answer and not from her aunt. A fresh install is empty: no bundled recipes.
+**Left for step 2**: the screens (the planet, the pantry, a dish, the suggestions, the history,
+her constraints), the orbit planet row and the routes, the search sources for the new tables, and
+a «السفرة» section of its own in the data export summary (its tables travel in the backup and are
+counted today under «اللي عملته بنفسك»).
+
 ---
 
 ## Part 6 — "Learn from a source" planets  → APK #21

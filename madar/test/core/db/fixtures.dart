@@ -789,5 +789,85 @@ Future<void> populateAllTables(MadarDatabase db) async {
       ),
       RecordListItemsCompanion.insert(listId: 'list-1', title: 'زيت'),
     ]);
+    // ------------------------------------------- «السفرة» · the kitchen (v6)
+    b.insertAll(db.pantryItems, [
+      PantryItemsCompanion.insert(
+        id: const Value('pantry-rice'),
+        name: 'رز',
+        aliases: const Value(['رز بسمتي', 'ارز']),
+        quantity: const Value(2.5),
+        unit: const Value('كيلو'),
+        place: const Value('خزانة المونة'),
+        lowAt: const Value(1),
+        low: const Value(true),
+        expires: Value(tLocal),
+        staple: const Value(true),
+        note: const Value('من عند أبو علي'),
+        archived: const Value(true),
+        sortOrder: const Value(4),
+        createdAt: Value(tUtc),
+        updatedAt: Value(tMicros),
+      ),
+      PantryItemsCompanion.insert(name: 'زيت'),
+    ]);
+    b.insertAll(db.recipes, [
+      RecipesCompanion.insert(
+        id: const Value('recipe-mloukhieh'),
+        name: 'ملوخية',
+        steps: const Value(['سخّني الزيت', 'ضيفي الثوم', 'اتركيها عشر دقايق']),
+        servings: const Value(5),
+        minutes: const Value(45),
+        tags: const Value(['رمضان', 'سهلة']),
+        photos: const Value(['sufra/mloukhieh.jpg']),
+        notes: const Value('بتصير أطيب تاني يوم'),
+        source: const Value(RecipeSource.imported),
+        sourceName: const Value('خالتي أم محمد'),
+        favorite: const Value(true),
+        archived: const Value(true),
+        sortOrder: const Value(7),
+        createdAt: Value(tUtc),
+        updatedAt: Value(tMicros),
+      ),
+      RecipesCompanion.insert(name: 'مجدرة'),
+    ]);
+    b.insertAll(db.recipeIngredients, [
+      RecipeIngredientsCompanion.insert(
+        id: const Value('ingredient-1'),
+        recipeId: 'recipe-mloukhieh',
+        name: 'رز',
+        quantity: const Value(1.5),
+        unit: const Value('كوب'),
+        optional: const Value(true),
+        note: const Value('أو برغل'),
+        sortOrder: const Value(2),
+      ),
+      RecipeIngredientsCompanion.insert(recipeId: 'recipe-mloukhieh', name: 'ثوم'),
+    ]);
+    b.insertAll(db.cookedMeals, [
+      CookedMealsCompanion.insert(
+        id: const Value('cooked-1'),
+        recipeId: const Value('recipe-mloukhieh'),
+        name: 'ملوخية',
+        day: tLocal,
+        servings: const Value(5),
+        overrode: const Value(true),
+        note: const Value('ضيوف'),
+        createdAt: Value(tUtc),
+        updatedAt: Value(tMicros),
+      ),
+      CookedMealsCompanion.insert(name: 'بيض ومقدوس', day: tUtc),
+    ]);
+    b.insertAll(db.kitchenRules, [
+      KitchenRulesCompanion.insert(
+        id: const Value('rule-1'),
+        kind: const Value(KitchenRuleKind.allergy),
+        term: 'فول سوداني',
+        who: const Value('أحمد'),
+        note: const Value('حساسية'),
+        active: const Value(false),
+        sortOrder: const Value(3),
+      ),
+      KitchenRulesCompanion.insert(term: 'حار'),
+    ]);
   });
 }

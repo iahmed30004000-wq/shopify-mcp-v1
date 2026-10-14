@@ -1,0 +1,440 @@
+{
+  "sufraTitle": {
+    "ar": "السفرة",
+    "en": "The kitchen",
+    "description": "Part 5: the kitchen planet, named by the owner"
+  },
+  "sufraPantryTitle": {
+    "ar": "شو في بالبيت",
+    "en": "What is in the house"
+  },
+  "sufraRecipesTitle": {
+    "ar": "طبخاتي",
+    "en": "My dishes"
+  },
+  "sufraSuggestionsTitle": {
+    "ar": "شو نطبخ اليوم",
+    "en": "What shall we cook today"
+  },
+  "sufraHistoryTitle": {
+    "ar": "اللي طبخناه",
+    "en": "What we have cooked"
+  },
+  "sufraConstraintsTitle": {
+    "ar": "محدداتي",
+    "en": "My constraints"
+  },
+  "sufraPantryEmptyTitle": {
+    "ar": "البيت لسا فاضي هون",
+    "en": "Nothing in the house yet"
+  },
+  "sufraPantryEmptyBody": {
+    "ar": "ضيفي أول إشي عندك بالخزانة، وبعدها السفرة بتعرف تقترح عليكي.",
+    "en": "Add the first thing in your cupboard, and the kitchen can start suggesting."
+  },
+  "sufraRecipesEmptyTitle": {
+    "ar": "ما في طبخات لسا",
+    "en": "No dishes yet"
+  },
+  "sufraRecipesEmptyBody": {
+    "ar": "اكتبي طبختك بكلماتك، أو جيبيها من ملف. ما في ولا وصفة جاهزة بالتطبيق.",
+    "en": "Write your dish in your own words, or bring it in from a file. The app ships no recipes at all."
+  },
+  "sufraSuggestionsEmptyTitle": {
+    "ar": "ما في إشي بقدر أقترحه",
+    "en": "Nothing I can suggest"
+  },
+  "sufraSuggestionsEmptyBody": {
+    "ar": "لما يكون في طبخات ومونة بالبيت، بطلع هون اللي بتقدري تطبخيه هلأ.",
+    "en": "Once there are dishes and things in the house, what you can cook now shows up here."
+  },
+  "sufraHouseListHost": {
+    "ar": "مونة البيت",
+    "en": "The house pantry",
+    "description": "The host title of the standing shopping list in the all-lists screen"
+  },
+  "sufraHouseListName": {
+    "ar": "اللي ناقص البيت",
+    "en": "What the house needs"
+  },
+  "sufraRecipeListName": {
+    "ar": "ناقص لـ{dish}",
+    "en": "Missing for {dish}",
+    "placeholders": {
+      "dish": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraStateOut": {
+    "ar": "خلص",
+    "en": "Finished"
+  },
+  "sufraStateLow": {
+    "ar": "قلّ",
+    "en": "Running low"
+  },
+  "sufraStateExpired": {
+    "ar": "فات تاريخه",
+    "en": "Past its date"
+  },
+  "sufraStateExpiringSoon": {
+    "ar": "قرب يخلص تاريخه",
+    "en": "Date is close"
+  },
+  "sufraStateOk": {
+    "ar": "في منه",
+    "en": "In the house"
+  },
+  "sufraExpiresInDays": {
+    "ar": "باقي {count, plural, =0{اليوم آخر يوم} =1{يوم واحد} =2{يومين} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =0{Today is the last day} =1{1 day left} other{{count} days left}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraExpiredDaysAgo": {
+    "ar": "فات تاريخه {count, plural, =1{من يوم} =2{من يومين} few{من {count} أيام} many{من {count} يومًا} other{من {count} يوم}}",
+    "en": "Past its date {count, plural, =1{by a day} other{by {count} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraAmountOf": {
+    "ar": "{amount} {unit}",
+    "en": "{amount} {unit}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraNoAmount": {
+    "ar": "بدون كمية",
+    "en": "No amount given"
+  },
+  "sufraVerdictCookNow": {
+    "ar": "بتقدري تطبخيها هلأ",
+    "en": "You can cook it now"
+  },
+  "sufraVerdictNearly": {
+    "ar": "قريبة — ناقصها إشي بسيط",
+    "en": "Nearly there — a little is missing"
+  },
+  "sufraVerdictUnsure": {
+    "ar": "ما بقدر أحسبها",
+    "en": "I cannot work it out"
+  },
+  "sufraVerdictFar": {
+    "ar": "ناقصها كثير",
+    "en": "A lot is missing"
+  },
+  "sufraMissingCount": {
+    "ar": "ناقص {count, plural, =1{إشي واحد} =2{إشيين} few{{count} إشيا} many{{count} إشيًا} other{{count} إشي}}",
+    "en": "{count, plural, =1{1 thing} other{{count} things}} missing",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraMissingLine": {
+    "ar": "ناقص {amount} {name}",
+    "en": "Missing {amount} {name}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraMissingLineNoAmount": {
+    "ar": "ناقص {name}",
+    "en": "Missing {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraShortLine": {
+    "ar": "في {have} بس بدها {need} — {name}",
+    "en": "You have {have} but it needs {need} — {name}",
+    "placeholders": {
+      "have": {
+        "type": "String"
+      },
+      "need": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraUnknownUnitLine": {
+    "ar": "ما بعرف أحسب: الطبخة بدها {need} و«{name}» عندك بـ{haveUnit}. اكتبيها بنفس العيار وبحسبها.",
+    "en": "I cannot work it out: the dish needs {need} and your “{name}” is in {haveUnit}. Write it in the same measure and I will.",
+    "description": "The honest refusal: never a guessed conversion",
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "haveUnit": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraUnknownAmountLine": {
+    "ar": "«{name}» موجودة بس ما كتبتي قديش، فما بقدر أقول إذا بتكفي.",
+    "en": "“{name}” is there but you did not say how much, so I cannot say whether it is enough.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraAmbiguousLine": {
+    "ar": "عندي أكثر من إشي بنفس الاسم لـ«{name}»: {candidates}. أي واحد منهم؟",
+    "en": "More than one thing could be “{name}”: {candidates}. Which one?",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "candidates": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraLooseMatch": {
+    "ar": "حسبتها من «{name}»",
+    "en": "Worked out from “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraUsesExpiring": {
+    "ar": "بتستهلك {name} قبل ما يخلص تاريخه",
+    "en": "Uses up {name} before its date",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraScaledFor": {
+    "ar": "محسوبة لـ{count, plural, =1{شخص واحد} =2{شخصين} few{{count} أشخاص} many{{count} شخصًا} other{{count} شخص}}",
+    "en": "Worked out for {count, plural, =1{1 person} other{{count} people}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraHeldByWindow": {
+    "ar": "طبختيها {count, plural, =0{اليوم} =1{امبارح} =2{قبل يومين} few{قبل {count} أيام} many{قبل {count} يومًا} other{قبل {count} يوم}}",
+    "en": "You cooked it {count, plural, =0{today} =1{yesterday} other{{count} days ago}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraFreeFrom": {
+    "ar": "بترجع بالاقتراحات يوم {day}",
+    "en": "Back in the suggestions on {day}",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraShowRepeats": {
+    "ar": "ورّيني اللي طبختها كمان",
+    "en": "Show the ones I have cooked too"
+  },
+  "sufraWindowLabel": {
+    "ar": "مش نفس الطبخة بآخر",
+    "en": "Not the same dish within"
+  },
+  "sufraWindowDays": {
+    "ar": "{count, plural, =0{بلا حد} =1{يوم} =2{يومين} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =0{no limit} =1{a day} other{{count} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraCookedIt": {
+    "ar": "طبختها",
+    "en": "I cooked it"
+  },
+  "sufraCookedAnyway": {
+    "ar": "طبختها غصبًا عن التكرار",
+    "en": "Cooked although it repeats"
+  },
+  "sufraRuleAllergy": {
+    "ar": "حساسية",
+    "en": "Allergy"
+  },
+  "sufraRuleAvoid": {
+    "ar": "أفضّل أبعد عنه",
+    "en": "I would rather avoid"
+  },
+  "sufraRulePrefer": {
+    "ar": "أفضّله",
+    "en": "I prefer it"
+  },
+  "sufraRuleRequest": {
+    "ar": "طلب خاص",
+    "en": "Special request"
+  },
+  "sufraBreachAllergy": {
+    "ar": "فيها {term} و{who} عنده حساسية منها",
+    "en": "It has {term}, and {who} is allergic to it",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      },
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachAllergyAnyone": {
+    "ar": "فيها {term} وهاد على قائمة الحساسية",
+    "en": "It has {term}, which is on the allergy list",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachRequest": {
+    "ar": "في طلب اليوم: بلا {term}",
+    "en": "Today's request: without {term}",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachAvoid": {
+    "ar": "فيها {term} واللي بتفضّلي تبعدي عنه",
+    "en": "It has {term}, which you would rather avoid",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachTooLong": {
+    "ar": "بدها وقت أكثر من اللي عندك",
+    "en": "It needs more time than you have"
+  },
+  "sufraBreachMissingTag": {
+    "ar": "ما عليها «{term}»",
+    "en": "It is not tagged “{term}”",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachDiet": {
+    "ar": "{term} على قائمة خطة الأكل",
+    "en": "{term} is on the meal-plan list",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraPeopleLabel": {
+    "ar": "كم واحد ياكل",
+    "en": "How many are eating"
+  },
+  "sufraTimeLabel": {
+    "ar": "قديش عندي وقت",
+    "en": "How much time I have"
+  },
+  "sufraMinutes": {
+    "ar": "{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقايق} many{{count} دقيقة} other{{count} دقيقة}}",
+    "en": "{count, plural, =1{1 minute} other{{count} minutes}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraServings": {
+    "ar": "تكفي {count, plural, =1{شخص واحد} =2{شخصين} few{{count} أشخاص} many{{count} شخصًا} other{{count} شخص}}",
+    "en": "Feeds {count, plural, =1{1 person} other{{count} people}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraSourceMine": {
+    "ar": "طبختي",
+    "en": "Mine"
+  },
+  "sufraSourceImported": {
+    "ar": "من برا",
+    "en": "Brought in"
+  },
+  "sufraSourceAi": {
+    "ar": "من ردّ الذكاء",
+    "en": "From an AI answer"
+  },
+  "sufraSourceFrom": {
+    "ar": "من {who}",
+    "en": "From {who}",
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraOptionalIngredient": {
+    "ar": "تنفع بدونها",
+    "en": "Can be left out"
+  },
+  "sufraDietModeLabel": {
+    "ar": "اربط السفرة بخطة الأكل",
+    "en": "Tie the kitchen to the meal plan"
+  },
+  "sufraDietModeHint": {
+    "ar": "مطفي. لما تشغّله، بس كلمات الخطة بتوصل للسفرة — ولا إشي من الصحة.",
+    "en": "Off. When you turn it on, only the plan's words reach the kitchen — nothing from Health."
+  },
+  "sufraAddToList": {
+    "ar": "حطّ الناقص بالقائمة",
+    "en": "Put what is missing on the list"
+  },
+  "sufraAddedToList": {
+    "ar": "{count, plural, =0{ما في إشي جديد للقائمة} =1{انضاف إشي للقائمة} =2{انضافوا إشيين} few{انضافوا {count} إشيا} many{انضافوا {count} إشيًا} other{انضاف {count} إشي}}",
+    "en": "{count, plural, =0{Nothing new for the list} =1{1 thing added} other{{count} things added}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}

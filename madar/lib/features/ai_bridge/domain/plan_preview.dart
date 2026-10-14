@@ -45,7 +45,7 @@ enum PlanItemStatus {
 }
 
 /// Which existing record a suggestion points at.
-enum PlanTargetSlot { food, slot, mealPlan, envelope, habit, project, owner, goal, tracker, lab }
+enum PlanTargetSlot { food, slot, mealPlan, envelope, habit, project, owner, goal, tracker, lab, recipe, pantryItem }
 
 /// What his data says today about the thing a suggestion touches.
 enum PlanBeforeKind {
@@ -81,6 +81,12 @@ enum PlanBeforeKind {
 
   /// The line is already on his avoid list.
   avoidKnown,
+
+  /// She already has a dish with that name («السفرة»).
+  recipeKnown,
+
+  /// That thing is already in the house, with what there is of it.
+  pantryKnown,
 }
 
 /// The "before" half of the before/after.
@@ -323,8 +329,17 @@ class PlanPreviewBuilder {
           before = PlanBefore(PlanBeforeKind.goal, ref: existing);
         }
       case PlanItemKind.recipe:
+        final existing = _sameName(catalog.recipes, item.title);
+        if (existing != null) {
+          targets[PlanTargetSlot.recipe] = existing;
+          before = PlanBefore(PlanBeforeKind.recipeKnown, ref: existing);
+        }
       case PlanItemKind.pantryItem:
-        break;
+        final existing = _sameName(catalog.pantryItems, item.title);
+        if (existing != null) {
+          targets[PlanTargetSlot.pantryItem] = existing;
+          before = PlanBefore(PlanBeforeKind.pantryKnown, ref: existing);
+        }
     }
 
     // Dependencies the AI declared, on top of the ones we worked out.

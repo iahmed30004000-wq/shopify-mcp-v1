@@ -6,6 +6,7 @@ import 'tables/converters.dart';
 import 'tables/core_tables.dart';
 import 'tables/faith_tables.dart';
 import 'tables/health_tables.dart';
+import 'tables/kitchen_tables.dart';
 import 'tables/life_tables.dart';
 import 'tables/list_tables.dart';
 import 'tables/money_tables.dart';
@@ -32,6 +33,7 @@ part 'database.g.dart';
   QuranBookmarks, QuranSessions, WirdPlans, HifzItems, HifzReviews,
   AppliedPlans, AppliedPlanItems,
   RecordLists, RecordListItems,
+  PantryItems, Recipes, RecipeIngredients, CookedMeals, KitchenRules,
 ])
 class MadarDatabase extends _$MadarDatabase {
   /// Wraps an executor. Pass [seed] to seed the generic defaults (planets,
@@ -44,7 +46,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -82,6 +84,17 @@ class MadarDatabase extends _$MadarDatabase {
           if (from < 5) {
             await m.createTable(recordLists);
             await m.createTable(recordListItems);
+          }
+          // v6: «السفرة» – the pantry, her recipes with their ingredients,
+          // the cooked log the no-repeat window reads, and her own
+          // constraints. Nothing of ours is written: a fresh install is
+          // empty and she fills it.
+          if (from < 6) {
+            await m.createTable(pantryItems);
+            await m.createTable(recipes);
+            await m.createTable(recipeIngredients);
+            await m.createTable(cookedMeals);
+            await m.createTable(kitchenRules);
           }
         },
         beforeOpen: (details) async {

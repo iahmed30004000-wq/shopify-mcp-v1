@@ -465,12 +465,19 @@ class PlanValidator {
         _day(d, 'deadline', p, itemId: id);
         _steps(d, p, id, PlanLimits.maxProgramSteps);
       case PlanItemKind.recipe:
+        _ingredients(d, p, id);
+        _recipeSteps(d, p, id);
+        _number(d, 'servings', p, itemId: id, min: 0, max: PlanLimits.maxServings, exclusiveMin: true);
+        _number(d, 'minutes', p, itemId: id, min: 0, max: PlanLimits.maxMinutes, exclusiveMin: true);
+        _tags(d, p, id);
+        _text(d, 'notes', p, itemId: id, max: PlanLimits.maxNoteLength);
       case PlanItemKind.pantryItem:
-        // Part 5 owns their payloads; the texts are still checked for
-        // control characters, length and the health rule.
-        for (final MapEntry(:key, :value) in d.entries) {
-          if (value is String) _text(d, key, p, itemId: id, max: PlanLimits.maxNoteLength);
-        }
+        // Zero is allowed: «خلص» is a real amount, and the pantry says so.
+        _number(d, 'quantity', p, itemId: id, min: 0, max: PlanLimits.maxPortion);
+        _text(d, 'unit', p, itemId: id, max: PlanLimits.maxUnitLength);
+        _text(d, 'place', p, itemId: id, max: PlanLimits.maxNameLength);
+        _day(d, 'expires', p, itemId: id);
+        _text(d, 'notes', p, itemId: id, max: PlanLimits.maxTextLength);
     }
   }
 
@@ -709,6 +716,65 @@ class PlanValidator {
       _text(m, 'title', at, itemId: itemId, max: PlanLimits.maxTitleLength, required: true);
       _day(m, 'day', at, itemId: itemId);
       _text(m, 'note', at, itemId: itemId, max: PlanLimits.maxTextLength);
+    }
+  }
+
+  /// A dish's ingredient lines: `{name, quantity, unit, optional, note}`,
+  /// the name required on each. An amount in a unit Madar cannot convert is
+  /// **not** an error here – it is kept as she would write it and the
+  /// matcher refuses to guess later.
+  void _ingredients(Map<String, Object?> map, String path, String itemId) {
+    final raw = map['ingredients'];
+    if (raw == null) return;
+    final at = '$path.ingredients';
+    if (raw is! List) {
+      _problems.add(PlanProblem(PlanProblemCode.wrongType, itemId: itemId, path: at, detail: _preview(raw)));
+      return;
+    }
+    if (raw.length > PlanLimits.maxRecipeIngredients) {
+      _problems.add(
+        PlanProblem(PlanProblemCode.outOfRange, itemId: itemId, path: at, limit: PlanLimits.maxRecipeIngredients),
+      );
+    }
+    for (final e in raw) {
+      if (e is! Map) {
+        _problems.add(PlanProblem(PlanProblemCode.wrongType, itemId: itemId, path: at, detail: _preview(e)));
+        continue;
+      }
+      final m = e.cast<String, Object?>();
+      _unknownKeys(m, const {'name', 'quantity', 'unit', 'optional', 'note'}, at, itemId: itemId);
+      _text(m, 'name', at, itemId: itemId, max: PlanLimits.maxNameLength, required: true);
+      _number(m, 'quantity', at, itemId: itemId, min: 0, max: PlanLimits.maxPortion, exclusiveMin: true);
+      _text(m, 'unit', at, itemId: itemId, max: PlanLimits.maxUnitLength);
+      _bool(m, 'optional', at, itemId);
+      _text(m, 'note', at, itemId: itemId, max: PlanLimits.maxTextLength);
+    }
+  }
+
+  /// A dish's method: plain strings, in order.
+  void _recipeSteps(Map<String, Object?> map, String path, String itemId) {
+    final raw = map['steps'];
+    if (raw == null) return;
+    final at = '$path.steps';
+    if (raw is! List) {
+      _problems.add(PlanProblem(PlanProblemCode.wrongType, itemId: itemId, path: at, detail: _preview(raw)));
+      return;
+    }
+    if (raw.length > PlanLimits.maxRecipeSteps) {
+      _problems.add(
+        PlanProblem(PlanProblemCode.outOfRange, itemId: itemId, path: at, limit: PlanLimits.maxRecipeSteps),
+      );
+    }
+    for (final e in raw) {
+      if (e is! String || e.trim().isEmpty) {
+        _problems.add(PlanProblem(PlanProblemCode.wrongType, itemId: itemId, path: at, detail: _preview(e)));
+      } else if (e.trim().length > PlanLimits.maxNoteLength) {
+        _problems.add(
+          PlanProblem(PlanProblemCode.tooLong, itemId: itemId, path: at, limit: PlanLimits.maxNoteLength),
+        );
+      } else {
+        _controls(e, at, itemId);
+      }
     }
   }
 

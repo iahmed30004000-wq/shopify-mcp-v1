@@ -154,3 +154,34 @@ enum PlanItemState {
   /// in the history so nothing is lost.
   deferred,
 }
+
+// --------------------------------------- «السفرة» · the kitchen (v6) ----
+
+/// Where a dish came from. Her own by default; an imported one always says
+/// so, and `recipes.sourceName` says whose.
+enum RecipeSource {
+  /// She wrote it herself.
+  mine,
+
+  /// She brought it in from somewhere (a person, a book, a file).
+  imported,
+
+  /// It arrived through Part 3's «خطة مدار» file round trip.
+  ai,
+}
+
+/// What one of her standing kitchen constraints is. None of these carries
+/// any medical meaning of ours: a rule is her own word plus who it is for.
+enum KitchenRuleKind {
+  /// Someone at the table cannot eat it at all («فول سوداني لأحمد»).
+  allergy,
+
+  /// She would rather not cook with it.
+  avoid,
+
+  /// She would rather cook with it (a nudge up the list, never a filter).
+  prefer,
+
+  /// A special request for now («بدون بصل اليوم»).
+  request,
+}

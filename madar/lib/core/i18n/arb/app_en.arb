@@ -23172,6 +23172,68 @@
     }
   },
   "aiPlanChangeDeferred": "Kept for a later version; nothing is applied now.",
+  "aiPlanChangeRecipeAdd": "Adds the dish “{name}” to the kitchen, marked as coming from an AI answer.",
+  "@aiPlanChangeRecipeAdd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRecipeUpdate": "Fills in what is missing on your dish “{name}”, and leaves your ingredients alone.",
+  "@aiPlanChangeRecipeUpdate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangeRecipeParts": "Ingredients: {ingredients} · steps: {steps}",
+  "@aiPlanChangeRecipeParts": {
+    "placeholders": {
+      "ingredients": {
+        "type": "String"
+      },
+      "steps": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangePantryAdd": "Adds “{name}” to what is in the house.",
+  "@aiPlanChangePantryAdd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanChangePantryUpdate": "Updates “{name}” in the house.",
+  "@aiPlanChangePantryUpdate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforeRecipeKnown": "You already have a dish with that name: “{name}”.",
+  "@aiPlanBeforeRecipeKnown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aiPlanBeforePantryKnown": "“{name}” is in the house: {detail}",
+  "@aiPlanBeforePantryKnown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
   "aiPlanBeforeNothing": "You have nothing like it today.",
   "aiPlanBeforeHabitOff": "You have the habit “{name}”, switched off.",
   "@aiPlanBeforeHabitOff": {
@@ -23820,5 +23882,294 @@
   "listsAllEmptyTitle": "No lists yet",
   "listsAllEmptyBody": "Any budget envelope or any trip can carry a list you tick off.",
   "listsOrphanGroup": "Lists with no record",
-  "listsOrphanGroupBody": "The record they hung on was deleted; the lists stayed yours."
+  "listsOrphanGroupBody": "The record they hung on was deleted; the lists stayed yours.",
+  "sufraTitle": "The kitchen",
+  "@sufraTitle": {
+    "description": "Part 5: the kitchen planet, named by the owner"
+  },
+  "sufraPantryTitle": "What is in the house",
+  "sufraRecipesTitle": "My dishes",
+  "sufraSuggestionsTitle": "What shall we cook today",
+  "sufraHistoryTitle": "What we have cooked",
+  "sufraConstraintsTitle": "My constraints",
+  "sufraPantryEmptyTitle": "Nothing in the house yet",
+  "sufraPantryEmptyBody": "Add the first thing in your cupboard, and the kitchen can start suggesting.",
+  "sufraRecipesEmptyTitle": "No dishes yet",
+  "sufraRecipesEmptyBody": "Write your dish in your own words, or bring it in from a file. The app ships no recipes at all.",
+  "sufraSuggestionsEmptyTitle": "Nothing I can suggest",
+  "sufraSuggestionsEmptyBody": "Once there are dishes and things in the house, what you can cook now shows up here.",
+  "sufraHouseListHost": "The house pantry",
+  "@sufraHouseListHost": {
+    "description": "The host title of the standing shopping list in the all-lists screen"
+  },
+  "sufraHouseListName": "What the house needs",
+  "sufraRecipeListName": "Missing for {dish}",
+  "@sufraRecipeListName": {
+    "placeholders": {
+      "dish": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraStateOut": "Finished",
+  "sufraStateLow": "Running low",
+  "sufraStateExpired": "Past its date",
+  "sufraStateExpiringSoon": "Date is close",
+  "sufraStateOk": "In the house",
+  "sufraExpiresInDays": "{count, plural, =0{Today is the last day} =1{1 day left} other{{count} days left}}",
+  "@sufraExpiresInDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraExpiredDaysAgo": "Past its date {count, plural, =1{by a day} other{by {count} days}}",
+  "@sufraExpiredDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraAmountOf": "{amount} {unit}",
+  "@sufraAmountOf": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraNoAmount": "No amount given",
+  "sufraVerdictCookNow": "You can cook it now",
+  "sufraVerdictNearly": "Nearly there — a little is missing",
+  "sufraVerdictUnsure": "I cannot work it out",
+  "sufraVerdictFar": "A lot is missing",
+  "sufraMissingCount": "{count, plural, =1{1 thing} other{{count} things}} missing",
+  "@sufraMissingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraMissingLine": "Missing {amount} {name}",
+  "@sufraMissingLine": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraMissingLineNoAmount": "Missing {name}",
+  "@sufraMissingLineNoAmount": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraShortLine": "You have {have} but it needs {need} — {name}",
+  "@sufraShortLine": {
+    "placeholders": {
+      "have": {
+        "type": "String"
+      },
+      "need": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraUnknownUnitLine": "I cannot work it out: the dish needs {need} and your “{name}” is in {haveUnit}. Write it in the same measure and I will.",
+  "@sufraUnknownUnitLine": {
+    "description": "The honest refusal: never a guessed conversion",
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "haveUnit": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraUnknownAmountLine": "“{name}” is there but you did not say how much, so I cannot say whether it is enough.",
+  "@sufraUnknownAmountLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraAmbiguousLine": "More than one thing could be “{name}”: {candidates}. Which one?",
+  "@sufraAmbiguousLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "candidates": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraLooseMatch": "Worked out from “{name}”",
+  "@sufraLooseMatch": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraUsesExpiring": "Uses up {name} before its date",
+  "@sufraUsesExpiring": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraScaledFor": "Worked out for {count, plural, =1{1 person} other{{count} people}}",
+  "@sufraScaledFor": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraHeldByWindow": "You cooked it {count, plural, =0{today} =1{yesterday} other{{count} days ago}}",
+  "@sufraHeldByWindow": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraFreeFrom": "Back in the suggestions on {day}",
+  "@sufraFreeFrom": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraShowRepeats": "Show the ones I have cooked too",
+  "sufraWindowLabel": "Not the same dish within",
+  "sufraWindowDays": "{count, plural, =0{no limit} =1{a day} other{{count} days}}",
+  "@sufraWindowDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraCookedIt": "I cooked it",
+  "sufraCookedAnyway": "Cooked although it repeats",
+  "sufraRuleAllergy": "Allergy",
+  "sufraRuleAvoid": "I would rather avoid",
+  "sufraRulePrefer": "I prefer it",
+  "sufraRuleRequest": "Special request",
+  "sufraBreachAllergy": "It has {term}, and {who} is allergic to it",
+  "@sufraBreachAllergy": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      },
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachAllergyAnyone": "It has {term}, which is on the allergy list",
+  "@sufraBreachAllergyAnyone": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachRequest": "Today's request: without {term}",
+  "@sufraBreachRequest": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachAvoid": "It has {term}, which you would rather avoid",
+  "@sufraBreachAvoid": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachTooLong": "It needs more time than you have",
+  "sufraBreachMissingTag": "It is not tagged “{term}”",
+  "@sufraBreachMissingTag": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraBreachDiet": "{term} is on the meal-plan list",
+  "@sufraBreachDiet": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraPeopleLabel": "How many are eating",
+  "sufraTimeLabel": "How much time I have",
+  "sufraMinutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+  "@sufraMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraServings": "Feeds {count, plural, =1{1 person} other{{count} people}}",
+  "@sufraServings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sufraSourceMine": "Mine",
+  "sufraSourceImported": "Brought in",
+  "sufraSourceAi": "From an AI answer",
+  "sufraSourceFrom": "From {who}",
+  "@sufraSourceFrom": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "sufraOptionalIngredient": "Can be left out",
+  "sufraDietModeLabel": "Tie the kitchen to the meal plan",
+  "sufraDietModeHint": "Off. When you turn it on, only the plan's words reach the kitchen — nothing from Health.",
+  "sufraAddToList": "Put what is missing on the list",
+  "sufraAddedToList": "{count, plural, =0{Nothing new for the list} =1{1 thing added} other{{count} things added}}",
+  "@sufraAddedToList": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

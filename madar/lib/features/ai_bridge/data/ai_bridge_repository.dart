@@ -69,6 +69,18 @@ class AiBridgeRepository {
         ? await repos.customModules.getAll(where: (m) => m.archived.equals(false))
         : const <CustomModuleRow>[];
 
+    // «السفرة» (Part 5): her dishes and what is in the house, so an AI
+    // recipe is built out of **her** words. It travels under the same
+    // switch as the rest of the things the household made itself – there
+    // is no kitchen section of its own yet – and it carries names, units
+    // and places only: no health of his is anywhere near it.
+    final kitchenRecipes = custom
+        ? await repos.recipes.getAll(where: (r) => r.archived.equals(false))
+        : const <RecipeRow>[];
+    final pantry = custom
+        ? await repos.pantryItems.getAll(where: (i) => i.archived.equals(false))
+        : const <PantryItemRow>[];
+
     final planName = {for (final p in plans) p.id: p.name};
 
     return PlanCatalog(
@@ -151,6 +163,26 @@ class AiBridgeRepository {
       ]),
       trackers: PlanRefSet([
         for (final m in trackers) PlanRef(id: m.id, name: m.name, extra: {'planetKey': m.planetKey}),
+      ]),
+      recipes: PlanRefSet([
+        for (final r in kitchenRecipes)
+          PlanRef(
+            id: r.id,
+            name: r.name,
+            detail: r.tags.isEmpty ? null : r.tags.join(', '),
+            extra: {'servings': r.servings, 'minutes': r.minutes, 'tags': r.tags},
+          ),
+      ]),
+      pantryItems: PlanRefSet([
+        for (final i in pantry)
+          PlanRef(
+            id: i.id,
+            name: i.name,
+            detail: i.quantity == null
+                ? i.place
+                : '${PlainNumbers.decimal(i.quantity!)} ${i.unit ?? ''}'.trim(),
+            extra: {'quantity': i.quantity, 'unit': i.unit, 'place': i.place},
+          ),
       ]),
     );
   }

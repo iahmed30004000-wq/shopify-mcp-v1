@@ -69,6 +69,14 @@ abstract final class DataAreas {
     // split across areas.
     'record_lists': DataArea.custom,
     'record_list_items': DataArea.custom,
+    // «السفرة» (Part 5). It is her planet, not a slice of his body or his
+    // money: it is counted with the things the household made itself, so a
+    // restore preview never files her pantry under his health.
+    'pantry_items': DataArea.custom,
+    'recipes': DataArea.custom,
+    'recipe_ingredients': DataArea.custom,
+    'cooked_meals': DataArea.custom,
+    'kitchen_rules': DataArea.custom,
   };
 
   /// The area of an SQL table (settings, reminders, activity history and

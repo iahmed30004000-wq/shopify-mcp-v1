@@ -120,6 +120,15 @@ class HostListsScreen extends ConsumerWidget {
 ///
 /// Where a list link with nothing to point at lands (`/lists`): a search
 /// result, a reason or a moon about lists can never dead-end.
+/// A host that is a **place** rather than a record, and so has no row to
+/// read a name from: «السفرة»'s standing list of the house hangs on
+/// `('pantry', 'house')`, because the pantry is one place and not one of
+/// her items. Named here (and not in the kitchen) so the all-lists screen
+/// stays the one screen that knows every host, and so the lists engine
+/// keeps depending on nothing.
+String? _placeHostTitle(L10n l, ListHost host) =>
+    host.table == 'pantry' && host.id == 'house' ? l.sufraHouseListHost : null;
+
 class AllListsScreen extends ConsumerWidget {
   const AllListsScreen({super.key, required this.onOpenList, this.animateBackdrop = true});
 
@@ -147,7 +156,7 @@ class AllListsScreen extends ConsumerWidget {
     for (final MapEntry(key: host, value: lists) in groups.entries) {
       final name = ref.watch(hostNameProvider(host));
       if (!name.hasValue) continue; // one frame, while the record is read
-      final title = name.value;
+      final title = name.value ?? _placeHostTitle(l, host);
       if (title == null) {
         orphans.addAll(lists);
       } else {

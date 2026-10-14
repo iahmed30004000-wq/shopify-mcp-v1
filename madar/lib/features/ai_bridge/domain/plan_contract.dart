@@ -119,10 +119,10 @@
 ///   dose hidden in a task title is still a dose. A health suggestion may
 ///   only ever be something to **track** or to **practise**.
 ///
-/// Items of a kind this version cannot write yet ([PlanItemKind.recipe],
-/// [PlanItemKind.pantryItem] – Part 5's kitchen) are **not** rejected: they
-/// validate, they are shown, and they are stored in the history as
-/// `deferred`. The same pipe will apply them when «السفرة» exists.
+/// Every kind applies. [PlanItemKind.recipe] and [PlanItemKind.pantryItem]
+/// were accepted and stored as `deferred` before «السفرة» existed; since
+/// schema v6 the same pipe writes them to her kitchen, and the old
+/// `deferred` rows in the history keep reading as what they were.
 ///
 /// ## `data` by kind
 ///
@@ -179,7 +179,18 @@
 ///   `deadline` (ISO day), `steps` (≤ 60 × `{"title":"…","day":"…","note":"…"}`).
 ///   Applies as a learning goal on the Growth planet; its steps are shown
 ///   on the card and kept with the item (never written as tasks).
-/// * **recipe**, **pantryItem** – accepted, shown, deferred (Part 5).
+/// * **recipe** – a dish for «السفرة»: `ingredients` (≤ 40 ×
+///   `{"name":"…","quantity":1.5,"unit":"كوب","optional":false,"note":"…"}`,
+///   the name REQUIRED on each), `steps` (≤ 40 plain strings, the method in
+///   order), `servings` (int > 0), `minutes` (int > 0), `tags` (her own
+///   words), `notes`. The item's `title` is the dish's name, and the dish
+///   is stored with its source set to the plan, so she always knows the
+///   recipe came from an AI answer and not from her aunt. An amount in a
+///   unit Madar will not convert is kept as she wrote it: the matcher says
+///   «ما بعرف أحسب» rather than guessing.
+/// * **pantryItem** – a thing in the house: `quantity` (≥ 0), `unit`,
+///   `place` (her own word for where it is kept), `expires` (ISO day),
+///   `notes`. The item's `title` is the thing's name.
 ///
 /// ## The checklist, and what an apply may touch
 ///
@@ -238,6 +249,12 @@ abstract final class PlanLimits {
   static const int maxRoutineSteps = 12;
   static const int maxProgramSteps = 60;
 
+  /// A dish's ingredient lines and method steps («السفرة»).
+  static const int maxRecipeIngredients = 40;
+  static const int maxRecipeSteps = 40;
+  static const int maxServings = 100;
+  static const int maxMinutes = 24 * 60;
+
   /// How far a suggested day may lie from today, either way.
   static const int maxDayDistance = 365;
 
@@ -286,14 +303,18 @@ enum PlanItemKind {
   /// A learning goal with its steps.
   learningProgram,
 
-  /// Part 5 (the kitchen): accepted and shown, applied by a later version.
+  /// Part 5 (the kitchen): a dish with its ingredients and its method.
   recipe,
 
-  /// Part 5 (the pantry): accepted and shown, applied by a later version.
+  /// Part 5 (the pantry): a thing for the house, with how much, where it
+  /// is kept and when it expires.
   pantryItem;
 
-  /// Kinds this build can write to his data.
-  bool get isApplicable => this != recipe && this != pantryItem;
+  /// Kinds this build can write to his data – all of them since schema v6
+  /// («السفرة» exists, so a recipe and a pantry item apply like anything
+  /// else). Kept as a getter because a plan imported before v6 still has
+  /// `deferred` rows in its history, and they must keep reading as that.
+  bool get isApplicable => true;
 
   static PlanItemKind? parse(String? raw) {
     for (final k in values) {
@@ -553,7 +574,17 @@ const Map<PlanItemKind, Set<String>> planDataKeys = {
 const Set<String> planWindows = {'fajr', 'dhuhr', 'asr', 'maghrib', 'isha', 'anytime'};
 
 /// Planet keys an item's `area` may name.
-const Set<String> planAreas = {'faith', 'health', 'money', 'family', 'work', 'growth', 'body', 'travel'};
+const Set<String> planAreas = {
+  'faith',
+  'health',
+  'money',
+  'family',
+  'work',
+  'growth',
+  'body',
+  'travel',
+  'kitchen',
+};
 
 /// `mealChange.op` values.
 const Set<String> planMealOps = {'addFood', 'removeFood', 'newSlot', 'moveSlot'};
