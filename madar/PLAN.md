@@ -103,7 +103,7 @@ AI app (Gemini, ChatGPT, Claude) by handing over a file and taking one back.
 
 ---
 
-## Part 3b — Checklists anywhere  → APK after Part 3
+## Part 3b — Checklists anywhere  ✅ DONE
 
 Owner, 2026-10-10 (option B of the two he picked, pulled forward out of Part 8): a tick-list
 inside anything, not only inside an AI plan.
@@ -117,6 +117,15 @@ inside anything, not only inside an AI plan.
 - **Packing list on a trip**: ☐ جواز ☐ شاحن ☐ دوا before he travels.
 - The kitchen pantry (Part 5) is the same engine with a different host.
 - Part 8's #23 keeps only the kanban board; its shopping-list bullet moves here.
+
+**Built**: `lib/features/lists/` on schema v5 (`record_lists`, `record_list_items`), addressed
+by the same `(hostTable, hostId)` pair `LifeRecordLinks` resolves, so a new host costs nothing.
+Shopping lists under a budget envelope post the ticked part as one transaction through the
+ledger's own service, once and only once; trips carry «قوائم ثانية للرحلة» beside their own
+packing list; `/lists` is every list grouped by its record, with the orphans last.
+**Left for later**: the trip's own `trip_items` packing list is still a second hand-rolled tick
+list (migrating it would ripple through Orbit, Import and Search - its own part), and the
+list CSV export.
 
 ---
 
