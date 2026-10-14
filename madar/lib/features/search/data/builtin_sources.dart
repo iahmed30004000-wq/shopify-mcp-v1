@@ -1145,6 +1145,10 @@ abstract final class BuiltInSearchSources {
       labelKey: 'listsSearchLists',
       tables: const {'record_lists', 'budget_items', 'trips'},
       load: (c) async {
+        // Nothing to index until he makes a list, and the host map costs
+        // every budget item and every trip - so ask first. Without this the
+        // first query over a big database paid ~38 ms for two empty tables.
+        if (!await _hasAny(c.repos.recordLists)) return const [];
         final hosts = await _listHosts(c);
         return c.mapRows(
           c.repos.recordLists,
@@ -1170,6 +1174,7 @@ abstract final class BuiltInSearchSources {
       weight: 0.9,
       tables: const {'record_list_items', 'record_lists'},
       load: (c) async {
+        if (!await _hasAny(c.repos.recordListItems)) return const [];
         final lists = {for (final l in await c.repos.recordLists.getAll()) l.id: l};
         return c.mapRows(
           c.repos.recordListItems,
@@ -1212,6 +1217,14 @@ abstract final class BuiltInSearchSources {
   static String _hostKey(String table, String id) => '$table/$id';
 
   /// Name of every record a list can hang on today, by `table/id`.
+  /// Whether [repo]'s table holds any row at all, in one cheap query: a
+  /// source that would otherwise preload other tables to describe its rows
+  /// asks this first, so an empty feature costs nothing at index time.
+  static Future<bool> _hasAny<T extends Table, R extends DataClass>(EntityRepository<T, R> repo) async {
+    final query = repo.db.select(repo.table)..limit(1);
+    return (await query.get()).isNotEmpty;
+  }
+
   static Future<Map<String, String>> _listHosts(SearchLoadContext c) async {
     final out = <String, String>{};
     for (final b in await c.repos.budgetItems.getAll()) {
