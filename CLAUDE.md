@@ -43,6 +43,12 @@ Example of the right style:
 - **Save tokens**: no big parallel fan-outs. At most 1–2 agents at a time; do small things directly.
   No duplicate verification passes when CI already runs the same checks.
 - Never leave several half-finished things running; stop only at resumable points.
+- **Always say when you stop** (standing rule, set by the owner): whenever nothing is running
+  any more — a part is finished, work is blocked, a question needs him, the session is out of
+  budget, or you are simply waiting for him — say so plainly in that message, in one line:
+  «وقفت» and why, and what the next step is. Never go quiet and leave him guessing whether
+  something is still working. A message that ends without that line means work is still
+  running.
 
 The project itself lives in `madar/` (see `madar/README.md`; while work is paused or
 interrupted, `madar/.resume/RESUME.md` says what is in progress and how to resume).
