@@ -264,8 +264,34 @@ Gemini into a JSON file, import it as a new planet, and let Madar turn it into a
   settings flow to pick one or more audio files, assign one per prayer (and a separate
   pre-adhan), preview, and keep them through backup/restore. The procedural tone stays as
   the fallback when no file is chosen.
+- **«الإقامة»** (owner, 2026-10-15). Verified in the code first: there is an adhan scheduler
+  and a prayer tracker today and **no iqama anywhere**. For each of the five prayers, a
+  notification at *adhan + offset*: default **15 minutes**, editable per prayer, **Friday
+  Dhuhr with its own offset**, and each one can be switched off on its own. It reads
+  «قامت الصلاة» and carries two actions: **«صلّيت»**, which logs that prayer in the existing
+  tracker straight from the shade, and **«بعد شوي»**, one snooze. Its own audio file (or the
+  procedural tone), and it survives backup and restore the way the adhan's choice does.
+  Delivery guarantees are the adhan's, not weaker: the exact minute, a locked screen, Doze,
+  and after a reboot.
+
+  **DoD — works**: the five offsets and the Friday one are editable and persist; each prayer's
+  iqama can be off while its adhan is on; «صلّيت» writes the same row the tracker's own button
+  writes, once, and the notification clears; «بعد شوي» re-arms once and no further; the choice
+  of audio and every offset survive a backup and restore; its ids live in their own reserved
+  block, not inside the adhan's.
+  **DoD — tests**: scheduling at the minute for each prayer and for Friday; an iqama that lands
+  after the next adhan (a short offset, or Maghrib to Isha in winter) is never scheduled past
+  it; «صلّيت» from the shade with the app dead writes exactly one row (the meds background
+  isolate is the pattern); the snooze is once; `NotificationGate` holds it when the Faith
+  namespace is muted; restore re-arms it; the DST and the Amman-timezone cases the adhan tests
+  already cover.
+  **DoD — edge cases**: prayer times that move while a snooze is pending; a prayer already
+  logged by hand before the iqama arrives (no second row, and the notification says so); the
+  user travelling between time zones; an offset of 0; battery saver and Doze.
+  **DoD — blockers**: none - it builds on the adhan scheduler, the tracker and the gate, all
+  of which exist and are tested.
 - Re-check the brief's adhan guarantees on a real device: exact minute, locked screen, after
-  reboot, Doze and battery saver.
+  reboot, Doze and battery saver - and the iqama firing its own number of minutes later.
 
 ---
 
@@ -307,6 +333,178 @@ input, scores and networking (original characters and courts only).
 
 ---
 
+## Part 13 — «التسميع»: recitation checked on the phone  → its own APK
+
+Owner, 2026-10-15. Verified in the code first: recitation today is **listening only**
+(EveryAyah playback, `lib/features/recitation/`), there is **no speech recognition, no
+microphone permission and no checking** of what he recites. Hifz and wird exist
+(`lib/features/wird/`).
+
+The feature set he asked for, built as Madar's own design - **nothing copied from Tarteel's
+app**, only the same job done:
+- Follows his voice **verse by verse in real time** while he recites.
+- Flags **wrong words, missed words and extra words**, each against the exact text.
+- A **memorisation mode** that hides the verses and reveals each one as he recites it
+  correctly.
+- **Fill in the blank**.
+- A **log of his past mistakes**, and progress statistics over time.
+
+How: **on-device Quranic speech recognition** - an open model trained on recitation, whose
+licence is checked and credited before a line of code depends on it - aligned to the **exact
+Uthmani text of the app's own verified Quran data**, offline. **Hafs first.** Pronunciation
+detail (makharij) is deliberately **not** in this part; it goes to a later one.
+
+**DoD — works**: he presses record, recites, and the current verse advances as he goes, with
+each word marked right / wrong / missed / extra against the Uthmani text; the hiding mode
+reveals a verse only on a correct recitation of it; fill-in-the-blank scores the blank only;
+every mistake is written to his own log with the verse, the word and the date; the stats read
+off that log; it all works in flight mode; the microphone is used only while he is reciting
+and **no audio and no transcript ever leave the phone**.
+**DoD — tests**: alignment over recorded fixtures (a clean recitation, a dropped word, an
+inserted word, a wrong word, a restart mid-verse, a long pause, and a verse recited twice);
+the same ayah in both Uthmani and simple spelling resolves to one verse; the hiding mode's
+reveal is driven by the alignment, not by a timer; the log and the stats round-trip through
+the database and the backup; a denied microphone permission degrades to reading, never a
+crash; a licence test asserts the model's licence file ships and is credited in the About
+screen.
+**DoD — edge cases**: background noise and a second voice; a basmala before every surah;
+sajda verses; stopping mid-verse and resuming; a phone that cannot run the recogniser (it must
+say so plainly and keep listening-only working); very long verses (البقرة ٢٨٢) and memory.
+**DoD — blockers**: (1) an open recitation-trained model with a licence that permits shipping
+- this gates the whole part and must be settled before it starts; (2) `RECORD_AUDIO` and its
+rationale; (3) the verified Uthmani text with word-level offsets, which the Quran data must
+expose.
+
+---
+
+## Part 14 — «الحفظ»: memorisation at full strength  → its own APK
+
+Owner, 2026-10-15: the memorisation **methods, as modes** he can choose between, on top of the
+Hifz tracking that already exists.
+
+- **Listen and repeat**: a verse or a range played N times with a pause between, the reciter
+  of his choice.
+- **Chunking**: verse → group of verses → page.
+- **Progressive hiding**: the full text → first letters only → hidden.
+- **Fill in the blank.**
+- **Writing from memory** and comparing against the text.
+- **Linking**: the end of each verse to the start of the next.
+- **Reciting it** through Part 13's checker.
+
+And a **daily plan**: a new portion + **near review** (the last seven days) + **far review**
+(rotating through everything he has memorised), spaced by how strong each piece is, with a
+**page map coloured by strength**. **Missed days never pile up past a cap** - a week away must
+not return a wall of four hundred verses.
+
+**DoD — works**: each mode runs on a chosen range and records what happened; the daily plan
+produces today's three portions from his own strength data; strength rises and falls from real
+results (Part 13's checks, the hiding mode, the blanks), never from opening a screen; the page
+map's colours come from the same numbers; after days away the backlog is capped and he is told
+what was dropped rather than it vanishing silently; everything is offline.
+**DoD — tests**: the scheduler at the boundaries (nothing memorised; one page; the whole
+mushaf); the cap after 1, 7 and 60 missed days; strength up after a clean recitation and down
+after a failed one; near review never repeats the same verse twice in a day; far review covers
+everything over its cycle; the plan is deterministic for the same data and clock; the page map
+matches the strengths; every mode's state survives a backup and restore.
+**DoD — edge cases**: a range that crosses a surah or a juz'; a verse he marks as "not mine to
+review"; resetting a page's strength; a reciter whose audio is not downloaded; the plan on the
+day he first starts.
+**DoD — blockers**: Part 13 for the reciting mode (the other modes must work without it, so
+Part 14 does not stall if 13 slips).
+
+---
+
+## Part 15 — «الموديل على الجوال»: the model on his phone  → its own APK
+
+Owner, 2026-10-15, asked for **all of it on device**: understanding what he types in the daily
+chat offline, writing the day's summary, and answering questions about his own data - with
+nothing leaving the phone. Verified in the code first: there is **no on-device model today**;
+there is the API-key chat and Part 3's file round trip.
+
+His phone: **Samsung Galaxy S26 Ultra**. The path, in his order:
+1. **Gemma 4 (E2B fast / E4B full) through the ML Kit Prompt API on AICore** - a developer
+   preview on supported phones, where the weights belong to the system and not to the APK.
+   Check this on his phone first.
+2. **If AICore cannot serve it**, run the model inside the app (Google AI Edge: MediaPipe /
+   LiteRT), the weights as an **optional download**, never bundled into the APK.
+3. **If that is too heavy**, fall back to the existing Part 3 AI bridge - which already works
+   and stays the path on every phone that cannot run a model.
+
+The settings screen **says plainly what this phone can run**, and the choice is his.
+
+**The religious rule is absolute**: the model **never gives a religious ruling**, and **never
+quotes a verse or a hadith from its own memory**. Religious text reaches the screen only from
+the app's verified data, and a hadith always with its source and its grading.
+
+**DoD — works**: a capability check names which of the three paths this phone gets, with a
+reason he can read; the daily chat's hard sentences and «شو صار اليوم؟» and questions about his
+own data all run through whichever path is active, with identical behaviour from his side; the
+offline parser of Part 7 stays the **first** reader and the model only takes what it could not
+read; nothing is written without his confirmation; `HealthGuard` still refuses a dose or a
+diagnosis; the download is optional, resumable, and removable, and the app is fully usable
+without it.
+**DoD — tests**: the capability check on a phone with AICore, without it, and with too little
+memory, each choosing the right path; a fake model that returns a verse is **refused** by a
+guard and the refusal is tested; no network call on any on-device path (the same transport
+assertion Part 2 uses); the fallback to the AI bridge when the model fails mid-answer;
+cancelling a download; measured first-token, tokens a second, memory and battery recorded on
+the real device and written into the part.
+**DoD — edge cases**: another app taking the memory mid-answer; the phone heating; a preview
+API changing under us (it is a developer preview - pin and feature-detect, never assume);
+airplane mode; a very long day's chat.
+**DoD — blockers**: the ML Kit Prompt API is a **developer preview** and may not be available
+on his phone at all - that is what step 1 measures; and the decision between paths must be made
+on the real device, not from documentation.
+
+---
+
+## Part 16 — «مدار الصغار»: a kids section  → its own APK
+
+Owner, 2026-10-15: **a section inside Madar behind a lock, not a separate app**, for a
+**nine-year-old who reads Arabic**. Verified in the code first: there is **no kids version
+today**.
+
+**The lock is one-way.** Entering is one tap. **Leaving needs his PIN or fingerprint.** From
+inside, nothing else in Madar is reachable - not money, not health, not the chats, not
+settings, not the notification centre. It is built as **its own shell**, not a screen inside
+the app's navigation, so there is no back door through a deep link, a notification tap or the
+recents list. **Android app pinning** is offered when he enters, with one line saying what it
+does, so the child cannot leave Madar at all. **Screen time**: a limit he sets, and what
+happens when it runs out.
+
+**What is in it**, at that age: **Quran** - the short surahs, listened to with the word
+highlighted, and a kid-level recitation check borrowed from Part 13; **prayer and wudu**, step
+by step; **the prophets' stories**; **manners**; **Arabic letters**; **maths** for a
+nine-year-old (multiplication, division, simple fractions); **colouring**; **games** on the
+existing Cinema engine; and **rewards**.
+
+**No free chat with a model**, ever: any model use inside the kids section is **scripted over
+verified content only** - never an open prompt, never a generated answer to a child's
+question. **Verified sources only**, and **every religious item is signed off by a reviewer the
+owner names, before release**. **No ads, no accounts, nothing leaves the device.** **A design
+is approved by the owner before any screen is built.**
+
+**DoD — works**: entering is one tap and leaving demands the PIN or the fingerprint every
+time; from inside, no deep link, notification tap, back gesture or recents entry reaches the
+rest of Madar; app pinning is offered and explained; the screen-time limit is enforced and ends
+gently; every section above is present and usable by a nine-year-old reading Arabic; rewards
+are recorded on the device; there is no network call at all from inside the section.
+**DoD — tests**: an escape-hatch suite that tries every way out - every route in the app pushed
+while the section is open, a notification tap, a share intent, the back button held, and the
+app killed and relaunched - and asserts it lands back inside the kids shell or at the PIN;
+the PIN and the fingerprint both unlock and a wrong PIN does not; the screen-time limit at its
+boundary and across midnight; no transport is ever called; a content test asserts every
+religious item carries its verified source and its reviewer sign-off field, and that the build
+fails if one does not.
+**DoD — edge cases**: the child tapping a notification that arrives while the section is open;
+a phone call during a lesson; the owner's fingerprint not enrolled (PIN only); the battery
+dying mid-reward; a child who cannot yet read a word of a question.
+**DoD — blockers**: (1) the **reviewer the owner names** for the religious content - nothing
+religious ships unreviewed; (2) the **design approval** before any screen is built; (3)
+Part 13 for the kid-level recitation check (the rest must work without it).
+
+---
+
 ## Part 12 — Polish, performance, delivery  → final APK
 
 **Known performance debt (2026-10-14).** The first search of a session blocks the UI isolate
@@ -317,6 +515,27 @@ which says the cost is fixed rather than per-chunk - most likely the isolate spa
 GC over the documents the warm-up allocates. Fixing it properly needs an allocation profile,
 not another constant.
 
+- **«السما»** (owner, 2026-10-15): a complete upgrade of the sky - the motion of the planets,
+  and the universe and the galaxies behind everything. **Depth layers**: a parallax star field
+  built from the **real catalog already in the app** (`lib/features/orbit/render/sky/`),
+  nebulae, a slow galactic drift, and the planets on **eased** orbits rather than constant
+  ones. The orrery was re-laid out on 2026-10-14 so ten worlds sit evenly and nothing is
+  clipped, at the cost of the system and the dial being 13% smaller; this is where that is paid
+  back, by opening the orbit ellipses (camera elevation) or the dial (`coreRadius`) rather than
+  the band. **A visual reference is approved by the owner before any of it is built.**
+
+  **DoD — works**: the layers move at different rates with the camera and read as depth, not as
+  wallpaper; the star field is the real catalog, not noise; **60 fps** on a mid-range phone
+  while he drags, **30 fps** when the sky is idle, and a **still image in battery saver**;
+  reduced motion is respected; nothing is clipped at any world count, which the orrery tests
+  already assert and must keep asserting.
+  **DoD — tests**: the frame budget measured in the existing perf harness at 1, 10 and 16
+  worlds; the battery-saver still and the idle rate asserted, not assumed; the layout
+  invariants from 2026-10-14 all still pass; screenshots in every theme and both languages,
+  looked at.
+  **DoD — edge cases**: a weak GPU; the app resuming from background mid-drift; a very long
+  session (no leak in the layers); text scale 1.3 over the new depth.
+  **DoD — blockers**: the owner's approval of a visual reference first.
 - The brief's remaining visual promises: Rive state-machine icons and mascots that react to
   touch, and an animated illustration for every empty state (today they are static).
 - Performance pass on a real device: 60 fps everywhere on a mid-range phone, 120 Hz where
@@ -333,9 +552,33 @@ not another constant.
 
 ---
 
+## The order the owner set (2026-10-15)
+
+After Part 7 ships: **9 (with «الإقامة») → 13 «التسميع» → 14 «الحفظ» → 15 «الموديل على
+الجوال» → 16 «مدار الصغار»**. The remaining life and games parts (**6, 8, 10, 11**) come
+after those, and **Part 12 (with «السما») stays last**, unless he reorders.
+
+*(His note listed Part 4 among the remaining ones; Part 4 shipped as APK #19 on 2026-10-10,
+so it is left out here. Flagged to him rather than quietly corrected.)*
+
+---
+
 ## Open questions waiting on the owner
 
-None. Everything asked so far is decided:
+Three, all of them gates on parts that cannot start without him:
+
+1. **A reviewer for «مدار الصغار»'s religious content** - he names the person who signs off
+   the Quran, prayer, wudu, stories and manners material. Nothing religious ships unreviewed.
+2. **The design of «مدار الصغار»** - he approves a design before any screen of it is built
+   (his words: artistic and beautiful).
+3. **A visual reference for «السما»** - he approves one before the sky is rebuilt.
+
+Answered on 2026-10-15 and no longer open: the kids version is **a locked section inside
+Madar, not a separate app**, for a **nine-year-old**; the on-device model does **all of it**
+(the daily chat, the day's summary, questions about his own data) on a **Samsung Galaxy S26
+Ultra**, trying AICore first; and the **order** of the parts is approved (below).
+
+Everything decided before that:
 
 - "Flappy Orbit" / «رفرفة المدار» keeps its name.
 - The kitchen planet is **«السفرة»**, with no separate lock – his wife gets her own copy of
@@ -344,6 +587,11 @@ None. Everything asked so far is decided:
 - AI link: the copy/share JSON round trip, no login; the API key stays optional.
 - Card and board games: Jordanian rules; all nine proposed defaults accepted.
 - EveryAyah recitations: approved (stream on play / download on request, credited).
+- **Kids (2026-10-15)**: a locked section inside Madar, not a separate app; age nine; leaving
+  needs his PIN or fingerprint; Android app pinning offered; no free chat with a model there.
+- **The model on his phone (2026-10-15)**: all of it on device - the daily chat, the day's
+  summary and questions about his own data - trying Gemma 4 through AICore on the S26 Ultra
+  first, then Google AI Edge inside the app, then the existing AI bridge as the fallback.
 
 Note for a later part: since his wife runs her own copy, two things are worth asking when we
 get there – whether «السفرة» should sync pantry and recipes between the two copies through

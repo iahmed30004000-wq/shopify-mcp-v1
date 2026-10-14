@@ -104,6 +104,21 @@ one APK each). This file keeps only the live state and the raw owner feedback.
 - Note: the CI workflow only triggers on changes under `madar/**` - an empty or docs-only commit
   outside that path will not build.
 
+- **Owner's six new requests (2026-10-15) are written into PLAN.md, each with a definition of
+  done (works / tests / edge cases / blockers).** Where each landed: the iqama into **Part 9**;
+  recitation checking into the new **Part 13 «التسميع»**; memorisation methods into the new
+  **Part 14 «الحفظ»**; the on-device model into the new **Part 15**; the kids section into the
+  new **Part 16 «مدار الصغار»**; the sky upgrade into **Part 12 «السما»**.
+  Verified against the code before writing: there is no iqama, recitation is listening only
+  (EveryAyah) with no microphone permission anywhere, hifz and wird exist, the star catalog and
+  the orrery exist, there is no on-device model, and there is no kids version.
+- **The order he approved (2026-10-15)**: after Part 7 ships → 9 (with «الإقامة») → 13 → 14 →
+  15 → 16, then the remaining life and games parts (6, 8, 10, 11), and 12 (with «السما») last.
+  *(His note listed Part 4 among the remaining; Part 4 shipped as APK #19 - flagged to him.)*
+- **Three open questions, each a gate**: a reviewer he names for the kids section's religious
+  content; his approval of the kids design; his approval of a visual reference for «السما».
+- **Nothing new starts before Part 7 ships** - the working rule stands.
+
 ## How work is organised
 - Working rule (standing): one part at a time → verify → APK → report in plain Arabic with
   an example → next part. Full rule in `/CLAUDE.md`.
