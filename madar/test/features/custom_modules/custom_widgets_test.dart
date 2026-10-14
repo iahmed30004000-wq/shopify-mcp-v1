@@ -63,8 +63,11 @@ void main() {
       beforePump: (db) async => holder.add((await seedCustom(db))[ModuleTemplateKey.readingLog]!),
     );
     // Book (text, e.g. "a biography") → Number.
-    await tester.scrollUntilVisible(find.textContaining(ar.cmodTplBook), 300, scrollable: find.byType(Scrollable).first);
-    await tester.tap(find.textContaining(ar.cmodTplBook).first);
+    // .hitTestable(): the list scrolls under a sticky save bar, so a row
+    // can be in the tree and still unreachable. Scroll until it can
+    // actually be tapped.
+    await tester.scrollUntilVisible(find.textContaining(ar.cmodTplBook).hitTestable(), 300, scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.textContaining(ar.cmodTplBook).hitTestable().first);
     await settleCustom(tester);
     expect(find.text(ar.cmodFieldEdit), findsOneWidget);
     await tester.tap(find.text(ar.cmodTypeNumber));
@@ -88,8 +91,11 @@ void main() {
       ),
       beforePump: (db) async => holder.add((await seedCustom(db))[ModuleTemplateKey.readingLog]!),
     );
-    await tester.scrollUntilVisible(find.textContaining(ar.cmodTplPages), 300, scrollable: find.byType(Scrollable).first);
-    await tester.tap(find.textContaining(ar.cmodTplPages).first);
+    // .hitTestable(): the list scrolls under a sticky save bar, so a row
+    // can be in the tree and still unreachable. Scroll until it can
+    // actually be tapped.
+    await tester.scrollUntilVisible(find.textContaining(ar.cmodTplPages).hitTestable(), 300, scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.textContaining(ar.cmodTplPages).hitTestable().first);
     await settleCustom(tester);
     await tester.enterText(find.byType(TextField).first, 'صفحات اليوم');
     await tester.pump();
