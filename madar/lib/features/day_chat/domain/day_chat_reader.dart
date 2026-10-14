@@ -162,7 +162,8 @@ class DayChatReader {
 
   DayChatPiece? _prayer(DayChatSegment s, String folded, QuickAddIntent intent, DateTime now, DateTime day) {
     final missed = _prayerMissed.hasMatch(folded);
-    if (!missed && !_prayerVerb.hasMatch(folded)) return null;
+    final qada = _prayerQada.hasMatch(folded);
+    final said = _prayerVerb.hasMatch(folded);
     Prayer? prayer;
     for (final (name, p) in _prayerNames) {
       if (folded.contains(name)) {
@@ -180,11 +181,14 @@ class DayChatReader {
       PrayerWindow.duha => Prayer.duha,
       _ => null,
     };
+    // «قضيت الفجر» names no prayer verb: it is a prayer only because he
+    // named the prayer itself.
+    if (!missed && !said && !(qada && prayer != null)) return null;
     final mosque = _mosque.hasMatch(folded);
     final jamaah = _jamaah.hasMatch(folded) || mosque;
     final status = missed
         ? PrayerStatus.missed
-        : _prayerQada.hasMatch(folded)
+        : qada
         ? PrayerStatus.qada
         : _prayerLate.hasMatch(folded)
         ? PrayerStatus.late

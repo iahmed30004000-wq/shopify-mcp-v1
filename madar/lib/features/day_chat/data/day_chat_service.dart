@@ -568,14 +568,18 @@ class DayChatService {
     final theDay = day ?? today();
     final times = _prayerDay();
     bool onDay(DateTime at) => _sameDay(times.prayerDayOf(at), theDay);
+    // The ledger dates an entry by the calendar day (no clock time), so a
+    // prayer day would push a midnight date onto the day before.
+    bool onCalendarDay(DateTime at) => _sameDay(at, theDay);
     final chat = await store.day(theDay);
     return DaySummaryInput(
       day: theDay,
       now: clock(),
       transactions: [
         for (final t in await repos.transactions.getAll())
-          if (onDay(t.date)) t,
+          if (onCalendarDay(t.date)) t,
       ],
+      wallets: await repos.wallets.getAll(),
       foodLogs: [
         for (final f in await repos.foodLogs.getAll())
           if (onDay(f.at)) f,
