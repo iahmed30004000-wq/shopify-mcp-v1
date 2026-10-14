@@ -9,19 +9,28 @@ import 'planet_style.dart';
 /// orbital plane is x–z, the core star at the origin).
 ///
 /// The user's planet order is the lane order: the first planet runs the
-/// innermost orbit. Lanes spread evenly between [innerRadius] (just outside
-/// the astrolabe) and [outerRadius]; with few planets they keep a pleasant
-/// spacing instead of stretching to the edge. Worlds start a golden angle
-/// apart so neighbouring lanes never begin side by side, and orbit slowly on
-/// a softened Kepler law (outer worlds are slower, but only gently, so the
-/// system drifts like an orrery rather than shuffling).
+/// innermost orbit. Lanes spread evenly across the band between
+/// [innerRadius] (outside the astrolabe's brass limb, with room for the
+/// lane to pass over the dial without touching it) and [outerRadius] (what
+/// the overview camera frames). The band *holds its width*: as worlds are
+/// added the lanes compress toward each other rather than reaching further
+/// out, down to [minLaneGap] – the gap at which [laneFloorCount] worlds
+/// exactly fill the band. Only past that count does the system grow
+/// outward, and the camera then pulls back so nothing leaves the frame.
 ///
-/// Pure and deterministic – the same inputs always give the same sky.
+/// Worlds start one even share of the circle apart (2π ÷ count) with a
+/// small stable per-world offset, so the sky reads as a ring at any count
+/// instead of the clumps a golden-angle scatter leaves at ten. They orbit
+/// on a softened Kepler law (outer worlds are slower, but only gently, so
+/// the system drifts like an orrery rather than shuffling).
+///
+/// Pure and deterministic – the same worlds always give the same sky.
 class PlanetSystemLayout {
   const PlanetSystemLayout({
     this.innerRadius = 0.76,
     this.outerRadius = 1.18,
-    this.minLaneGap = 0.06,
+    this.laneFloorCount = 16,
+    this.maxLaneGap = 0.2,
     this.bodyRadius = 0.14,
     this.innerPeriod = 170,
     this.keplerExponent = 0.8,
@@ -34,9 +43,21 @@ class PlanetSystemLayout {
   /// Outermost lane radius (fits the default camera on a phone).
   final double outerRadius;
 
-  /// Lanes are never closer than this, even with many planets (the system
-  /// then grows beyond [outerRadius]).
-  final double minLaneGap;
+  /// How many worlds still fit inside the band `[innerRadius, outerRadius]`.
+  /// It sets [minLaneGap]; beyond this count the system grows outward and
+  /// the overview camera pulls back to keep it framed.
+  final int laneFloorCount;
+
+  /// Widest a lane gap ever gets (with two or three worlds), so a nearly
+  /// empty sky still reads as a system and not as two distant rings.
+  final double maxLaneGap;
+
+  /// Lanes are never closer than this: the band divided among
+  /// [laneFloorCount] worlds. Derived, not tuned – it is exactly the gap
+  /// at which the band is full, so the band can never overflow below that
+  /// count (and at ~160 px per world unit it still leaves the lane rings
+  /// visibly apart).
+  double get minLaneGap => (outerRadius - innerRadius) / (laneFloorCount - 1);
 
   /// Disc radius of a typical world (× [PlanetStyle.sizeFactorOf]).
   final double bodyRadius;
@@ -56,7 +77,16 @@ class PlanetSystemLayout {
   /// Largest tilt of an orbit out of the common plane (radians).
   final double maxInclination;
 
-  static const goldenAngle = 2.399963229728653;
+  /// How far a world may stand from its even share of the circle, as a
+  /// fraction of that share: enough that the ring never looks stamped out
+  /// by a machine, little enough that the smallest angular gap between two
+  /// worlds is still `(1 − 2 × this) × 2π ÷ count` – at ten worlds, 29°
+  /// instead of the 14° the golden-angle scatter left.
+  static const double angleJitter = 0.1;
+
+  /// Where the first world stands (radians): the old scatter's starting
+  /// point, kept so the sky is turned the same way as before.
+  static const double firstAngle = 0.62;
 
   /// The overview camera this layout is composed for: a phone in portrait
   /// looking down on the system at ~35°, so the orbits read as open
@@ -66,16 +96,25 @@ class PlanetSystemLayout {
   static const overviewCamera = OrbitCamera(elevation: 0.62, distance: 7.8, principal: Offset(0.5, 0.38));
 
   /// Lane radius of the [index]-th of [count] planets.
+  ///
+  /// The gap is the band divided among the worlds, held between
+  /// [minLaneGap] and [maxLaneGap]. Up to [laneFloorCount] worlds the span
+  /// can never exceed the band, so the outermost lane never passes
+  /// [outerRadius] – that is what keeps a world from being cut off by the
+  /// screen edge as worlds are added. Past that count the band grows and
+  /// the camera is what gives way.
   double laneRadius(int index, int count) {
-    if (count <= 1) return innerRadius + (outerRadius - innerRadius) * 0.35;
-    final gap = math.max(minLaneGap, math.min((outerRadius - innerRadius) / (count - 1), 0.2));
+    final band = outerRadius - innerRadius;
+    if (count <= 1) return innerRadius + band * 0.35;
+    final gap = math.max(minLaneGap, math.min(band / (count - 1), maxLaneGap));
     final span = gap * (count - 1);
     // Few planets: centre the band in the annulus instead of hugging the core.
-    final start = span >= outerRadius - innerRadius
-        ? innerRadius
-        : innerRadius + (outerRadius - innerRadius - span) * 0.35;
+    final start = span >= band ? innerRadius : innerRadius + (band - span) * 0.35;
     return start + gap * index;
   }
+
+  /// The outermost lane with [count] worlds (what the camera has to frame).
+  double outermostLane(int count) => count <= 0 ? innerRadius : laneRadius(count - 1, count);
 
   /// Seconds per revolution on a lane of [radius].
   double periodFor(double radius) =>
@@ -84,8 +123,23 @@ class PlanetSystemLayout {
   /// Radians per second on a lane of [radius] (prograde = positive).
   double angularSpeedFor(double radius) => 2 * math.pi / periodFor(radius);
 
-  /// Starting angle of the [index]-th planet.
-  double initialAngle(int index) => 0.62 + index * goldenAngle;
+  /// Starting angle of the [index]-th of [count] planets (of [seed]).
+  ///
+  /// Each world takes its own even share of the circle – `2π ÷ count` – so
+  /// ten worlds stand 36° apart around the dial instead of the 14°-to-55°
+  /// scatter a golden angle leaves at that count. The share is then nudged
+  /// by a stable per-world offset of at most [angleJitter] of a share, so
+  /// the ring breathes a little instead of looking stamped out; the nudge
+  /// is bounded, so the smallest gap between any two worlds – including
+  /// two on neighbouring lanes, which are only [minLaneGap] apart – can
+  /// never fall below [minAngularGap].
+  double initialAngle(int index, int count, double seed) {
+    final share = 2 * math.pi / math.max(1, count);
+    return firstAngle + index * share + share * angleJitter * (2 * _fract(seed * 0.7548776662 + 0.37) - 1);
+  }
+
+  /// Smallest angle between two of [count] worlds at rest (radians).
+  double minAngularGap(int count) => count <= 1 ? 2 * math.pi : (1 - 2 * angleJitter) * 2 * math.pi / count;
 
   /// Orbit tilt out of the common plane, stable per planet ([seed]).
   double inclinationOf(double seed) => maxInclination * (2 * _fract(seed * 0.5698402910 + 0.21) - 1);

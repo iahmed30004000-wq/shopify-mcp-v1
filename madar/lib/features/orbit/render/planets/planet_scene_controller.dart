@@ -146,12 +146,16 @@ class PlanetSceneController extends ChangeNotifier {
       final laneTarget = layout.laneRadius(i, count);
       var st = byKey.remove(body.key);
       if (st == null) {
-        // The line of nodes turns the orbit, so start at golden angle +
-        // node: the worlds' apparent longitudes are then evenly spread.
+        // The line of nodes turns the orbit by −node, so starting at
+        // initialAngle + node leaves the world's *apparent* longitude at
+        // initialAngle: the even share of the ring it was given.
         st = _BodyState(
           body,
           lane: laneTarget,
-          angle: layout.initialAngle(i) + layout.nodeOf(body.seed) + layout.angularSpeedFor(laneTarget) * _time,
+          angle:
+              layout.initialAngle(i, count, body.seed) +
+              layout.nodeOf(body.seed) +
+              layout.angularSpeedFor(laneTarget) * _time,
           layout: layout,
         );
         changed = true;
@@ -407,10 +411,10 @@ class PlanetSceneController extends ChangeNotifier {
 
   /// The angle the [index]-th of [count] worlds (of [seed]) stands at when
   /// the scene starts: [PlanetSystemLayout.initialAngle] turned by its line
-  /// of nodes, so the worlds' apparent longitudes are evenly spread and no
-  /// two of them overlap.
+  /// of nodes, so the worlds' apparent longitudes are its even share of the
+  /// ring and no two of them overlap.
   double homeAngleOf(int index, int count, double seed) =>
-      layout.initialAngle(index) +
+      layout.initialAngle(index, count, seed) +
       layout.nodeOf(seed) +
       layout.angularSpeedFor(layout.laneRadius(index, count)) * _startTime;
 

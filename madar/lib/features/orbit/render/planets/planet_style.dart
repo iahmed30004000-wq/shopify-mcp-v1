@@ -20,10 +20,23 @@ abstract final class PlanetStyle {
   /// Draw-rect half extent ÷ disc radius (the shader header's haloFactor).
   static double haloFactorOf(PlanetArchetype a) => shaderOf(a).haloFactor;
 
-  /// Relative disc size in the system (1 = a typical world). The gas giant
-  /// is a little larger (its rings add the rest of its presence), the
-  /// volcanic world a little smaller and denser.
-  static double sizeFactorOf(PlanetArchetype a) => switch (a) {
+  /// The widest the biggest world may be beside the smallest.
+  ///
+  /// Each archetype keeps its character (see [characterSizeOf]), but with
+  /// ten worlds on one screen the raw spread – the ringed gas giant at
+  /// 1.12 against the ice world at 0.86, a ratio of 1.30, and more than
+  /// 1.8 once the near side of the orbit is 1.5× the far side – read as an
+  /// accident rather than as a family. Compressing every character toward
+  /// 1 until the largest is at most 1.18× the smallest keeps the ranking
+  /// and the feel (Travel is still plainly the big one) while the discs
+  /// read as siblings.
+  static const double maxSizeRatio = 1.18;
+
+  /// Each archetype's *character* size (1 = a typical world), before the
+  /// family is tightened to [maxSizeRatio]. The gas giant is larger (its
+  /// rings add the rest of its presence), the volcanic world smaller and
+  /// denser.
+  static double characterSizeOf(PlanetArchetype a) => switch (a) {
     PlanetArchetype.faith => 1.0,
     PlanetArchetype.ocean => 0.96,
     PlanetArchetype.terracotta => 0.96,
@@ -35,6 +48,26 @@ abstract final class PlanetStyle {
     PlanetArchetype.ice => 0.86,
     PlanetArchetype.desert => 0.9,
   };
+
+  /// How far each character is pulled toward 1: derived from the real
+  /// spread of [characterSizeOf] and [maxSizeRatio], never tuned by hand,
+  /// so adding an archetype re-tightens the family on its own.
+  ///
+  /// With `hi` the largest character and `lo` the smallest, a pull of `t`
+  /// leaves `(1 + t(hi−1)) / (1 + t(lo−1)) = maxSizeRatio`, i.e.
+  /// `t = (R−1) / ((hi−1) + R(1−lo))`.
+  static final double _pull = () {
+    final values = PlanetArchetype.values.map(characterSizeOf);
+    final hi = values.reduce(math.max), lo = values.reduce(math.min);
+    if (hi <= lo) return 1.0;
+    final t = (maxSizeRatio - 1) / ((hi - 1) + maxSizeRatio * (1 - lo));
+    return t.clamp(0.0, 1.0);
+  }();
+
+  /// Relative disc size in the system (1 = a typical world): the
+  /// archetype's character, tightened so the family spans no more than
+  /// [maxSizeRatio].
+  static double sizeFactorOf(PlanetArchetype a) => 1 + _pull * (characterSizeOf(a) - 1);
 
   /// Where a label or moon may start without touching the world, as a
   /// multiple of the disc radius: the gas giant's rings reach 2.1 R but lie

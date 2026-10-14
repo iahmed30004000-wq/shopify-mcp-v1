@@ -22,10 +22,13 @@ typedef LaneBody = ({PlanetArchetype archetype, double seed});
 /// that every far-side world clears (or mostly clears) the brass – and
 /// rolled by [roll] for a slightly slanted, cinematic composition.
 /// [overview] solves the camera distance so the system fills the width
-/// (the outermost lanes may [bleed] a little past the screen edges, as a
-/// hero shot does) while its full height stays inside the scene rect (the
-/// band between the header and the glass panel), then centres it at
-/// [centerFraction] of that band.
+/// *inside* the screen – every disc, all the way round its (inclined)
+/// orbit, keeps [margin] clear of all four edges – while its full height
+/// stays inside the scene rect (the band between the header and the glass
+/// panel), then centres it at [centerFraction] of that band. Nothing is
+/// ever cut off: when worlds are added the lanes compress first (see
+/// [PlanetSystemLayout.laneRadius]) and only then does the camera give
+/// way.
 @immutable
 class OrbitComposition {
   const OrbitComposition({
@@ -34,8 +37,7 @@ class OrbitComposition {
     this.elevation = 0.78,
     this.roll = -0.05,
     this.fovY = 1.05,
-    this.margin = 6,
-    this.bleed = 0.06,
+    this.margin = 8,
     this.centerFraction = 0.53,
     this.maxCoreFraction = 0.36,
     this.heroFill = 0.8,
@@ -45,14 +47,21 @@ class OrbitComposition {
     this.coreZoomScale = 2.1,
   });
 
-  /// Lanes tuned around a 0.52-unit astrolabe: the innermost world clears
-  /// the brass rim with room to spare, the worlds are large enough to show
-  /// their living state (auroras, cracks, moons) at overview scale, and the
-  /// outermost lane still fits a 412-px-wide phone (with the bleed).
+  /// Lanes tuned around the 0.58-unit astrolabe.
+  ///
+  /// [PlanetSystemLayout.innerRadius] is set by the dial, not by taste:
+  /// seen from this camera the innermost lane's closest approach to the
+  /// core is well under `innerRadius × sin(elevation)` (the far side of
+  /// the ellipse is farther away, so perspective pulls it in toward the
+  /// vanishing point), and the orbit's tilt pulls it in again. 0.9 left
+  /// the ring grazing the brass at 1.005 × the limb; 0.96 holds it clear
+  /// at every world count, with the gap plainly visible.
+  /// [PlanetSystemLayout.outerRadius] is then the widest band that still
+  /// leaves the worlds ~19–30 px across at overview scale once the camera
+  /// has pulled back far enough to keep every disc on screen.
   static const defaultLayout = PlanetSystemLayout(
-    innerRadius: 0.9,
-    outerRadius: 1.2,
-    minLaneGap: 0.042,
+    innerRadius: 0.96,
+    outerRadius: 1.26,
     bodyRadius: 0.155,
   );
 
@@ -69,13 +78,11 @@ class OrbitComposition {
   /// clock face with stickers.
   final double elevation, roll, fovY;
 
-  /// Gap (logical px) kept between the system and the scene rect's top and
-  /// bottom edges.
+  /// Gap (logical px) kept between the system and every edge of its frame:
+  /// the scene rect's top and bottom, and the screen's left and right. The
+  /// system is measured out to [haloAllowance] × each disc, so the world
+  /// itself stands further in still.
   final double margin;
-
-  /// How far (fraction of the viewport width, per side) the outermost
-  /// lanes may run past the screen edges.
-  final double bleed;
 
   /// Where the system's centre sits in the scene rect (fraction of its
   /// height from the top).
@@ -119,7 +126,7 @@ class OrbitComposition {
   /// system inside [sceneRect] (see the class docs).
   OrbitCamera overview({required Size viewport, required Rect sceneRect, required List<LaneBody> lanes}) {
     if (viewport.isEmpty) return PlanetSystemLayout.overviewCamera;
-    final maxW = viewport.width * (1 + 2 * bleed);
+    final maxW = math.max(1.0, viewport.width - 2 * margin);
     final maxH = math.max(1.0, sceneRect.height - 2 * margin);
     var cam = OrbitCamera(elevation: elevation, roll: roll, fovY: fovY, distance: 8, principal: const Offset(0.5, 0.5));
     // Distance: the nearest camera whose projected system fits.
