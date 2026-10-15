@@ -25667,5 +25667,145 @@
   "dayChatTitleIncomeUnknownBare": "Received, but you did not say how much",
   "@dayChatTitleIncomeUnknownBare": {
     "description": "Daily chat: money in with no amount and nothing said about where from"
+  },
+  "tasmeeTitle": "Recitation check",
+  "@tasmeeTitle": {
+    "description": "Part 13: reciting out loud and being checked against the verified text"
+  },
+  "tasmeeSubtitle": "Recite, and the app follows you word by word",
+  "tasmeeHintNotRuling": "This is help for you, not a ruling. What the app hears can be wrong; the text in front of you is the reference.",
+  "tasmeeOfflineNote": "Everything happens on your phone. Neither your voice nor the words it heard ever leave it.",
+  "tasmeeHeardLabel": "What the app heard from you",
+  "@tasmeeHeardLabel": {
+    "description": "Always labelled, always in a different type: it is never Quran text"
+  },
+  "tasmeeVerifiedLabel": "The verified text",
+  "tasmeeWordRight": "Right",
+  "tasmeeWordWrong": "A different word",
+  "tasmeeWordSkipped": "A word you went past",
+  "tasmeeWordExtra": "An extra word",
+  "tasmeeWordUnsure": "The app was not sure",
+  "@tasmeeWordUnsure": {
+    "description": "Heard something but below the confidence floor; never counted as a mistake"
+  },
+  "tasmeeWordPending": "Not reached yet",
+  "tasmeeRepetitionNote": "You said words of the same verse again. That is not a mistake.",
+  "tasmeeBasmalaNote": "The basmala before a surah is fine, not an extra word.",
+  "tasmeePauseNote": "You stopped for a moment and carried on. A pause is not a mistake.",
+  "tasmeeTashkeelExperimental": "The diacritics check is experimental and normally off. The word itself is right.",
+  "tasmeeTashkeelToggle": "Also check the diacritics (experimental)",
+  "tasmeeHideMarkersToggle": "Hide the verse numbers while I recite",
+  "tasmeeNoModelTitle": "The recitation check is not ready in this build",
+  "tasmeeNoModelBody": "The speech recogniser is not on the phone yet. Reading and listening work as usual.",
+  "tasmeePhoneCannotRunTitle": "Your phone cannot run the recitation check",
+  "tasmeePhoneCannotRunBody": "The recogniser needs a stronger phone. Reading and listening work as usual.",
+  "tasmeeMicNeededTitle": "The microphone needs your permission",
+  "tasmeeMicNeededBody": "The microphone opens only while you recite; your voice is not saved and never leaves the phone.",
+  "tasmeeMicDeniedBody": "You refused the microphone before. Allow it in the phone's settings if you want to recite.",
+  "tasmeeStart": "Start reciting",
+  "tasmeeStop": "I am done",
+  "tasmeeDiscard": "Discard",
+  "tasmeeHiddenTitle": "The hidden verse",
+  "tasmeeHiddenBody": "The page is hidden, and a word appears when you recite it correctly.",
+  "tasmeePeek": "Show me a word",
+  "tasmeePeekCountsAsHint": "A revealed word counts as a hint, so your memorisation strength stays honest.",
+  "tasmeeHintsCount": "{count, plural, =0{No hints} =1{1 hint} other{{count} hints}}",
+  "@tasmeeHintsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeBlanksTitle": "Fill in the blank",
+  "tasmeeBlanksBody": "Some words are taken out; recite the whole verse. Only the missing words are scored.",
+  "tasmeeBlanksCount": "{count, plural, =0{No blanks} =1{1 blank} other{{count} blanks}}",
+  "@tasmeeBlanksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeBlanksScore": "{right} of {total} right",
+  "@tasmeeBlanksScore": {
+    "placeholders": {
+      "right": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeFindTitle": "Where is this verse",
+  "tasmeeFindBody": "Recite any phrase and the app names the surah and the verse, all on the phone.",
+  "tasmeeFindSure": "Found it",
+  "tasmeeFindSeveral": "This phrase is in more than one verse. Pick the one you mean.",
+  "tasmeeFindUnsure": "The closest thing found, but the app is not sure.",
+  "tasmeeFindNone": "That phrase was not found. Try reciting a little more.",
+  "tasmeeFindTooShort": "Recite at least three words; two words are everywhere.",
+  "tasmeeFindCandidates": "{count, plural, =0{No results} =1{1 result} other{{count} results}}",
+  "@tasmeeFindCandidates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeLogTitle": "My mistake log",
+  "tasmeeLogEmptyTitle": "The log is still empty",
+  "tasmeeLogEmptyBody": "Recite a verse and anything that went wrong lands here with its day and its word; you can delete it whenever you like.",
+  "tasmeeStatsTitle": "My progress",
+  "tasmeeStatsAccuracy": "Share right",
+  "tasmeeWeakWordsTitle": "Words you stumble on",
+  "tasmeeWeakAyatTitle": "Verses that need review",
+  "tasmeeMistakesCount": "{count, plural, =0{No mistakes} =1{1 mistake} other{{count} mistakes}}",
+  "@tasmeeMistakesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeWordsCount": "{count, plural, =0{No words} =1{1 word} other{{count} words}}",
+  "@tasmeeWordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeSessionsCount": "{count, plural, =0{Never} =1{1 time} other{{count} times}}",
+  "@tasmeeSessionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeStreakDays": "{count, plural, =0{Start today} =1{1 day in a row} other{{count} days in a row}}",
+  "@tasmeeStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeDeleteSession": "Delete this attempt",
+  "tasmeeClearLog": "Clear the whole log",
+  "tasmeeExportTitle": "Export the log",
+  "tasmeeExportBody": "One file with every attempt and every mistake, so the PC app can read it. It holds no audio at all.",
+  "tasmeeExportDone": "The file is ready",
+  "tasmeeRecogniserCredit": "Speech recognition: {name} ({licence})",
+  "@tasmeeRecogniserCredit": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "licence": {
+        "type": "String"
+      }
+    }
   }
 }

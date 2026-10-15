@@ -77,6 +77,12 @@ abstract final class DataAreas {
     'recipe_ingredients': DataArea.custom,
     'cooked_meals': DataArea.custom,
     'kitchen_rules': DataArea.custom,
+    // «التسميع» (Part 13): his recitation log. It belongs with the rest of
+    // his faith records, so a restore preview says «الإيمان · N» and never
+    // files his Quran work under something else.
+    'tasmee_sessions': DataArea.faith,
+    'tasmee_ayat': DataArea.faith,
+    'tasmee_mistakes': DataArea.faith,
   };
 
   /// The area of an SQL table (settings, reminders, activity history and

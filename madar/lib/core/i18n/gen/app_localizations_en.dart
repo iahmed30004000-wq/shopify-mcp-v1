@@ -27388,4 +27388,279 @@ class L10nEn extends L10n {
   @override
   String get dayChatTitleIncomeUnknownBare =>
       'Received, but you did not say how much';
+
+  @override
+  String get tasmeeTitle => 'Recitation check';
+
+  @override
+  String get tasmeeSubtitle => 'Recite, and the app follows you word by word';
+
+  @override
+  String get tasmeeHintNotRuling =>
+      'This is help for you, not a ruling. What the app hears can be wrong; the text in front of you is the reference.';
+
+  @override
+  String get tasmeeOfflineNote =>
+      'Everything happens on your phone. Neither your voice nor the words it heard ever leave it.';
+
+  @override
+  String get tasmeeHeardLabel => 'What the app heard from you';
+
+  @override
+  String get tasmeeVerifiedLabel => 'The verified text';
+
+  @override
+  String get tasmeeWordRight => 'Right';
+
+  @override
+  String get tasmeeWordWrong => 'A different word';
+
+  @override
+  String get tasmeeWordSkipped => 'A word you went past';
+
+  @override
+  String get tasmeeWordExtra => 'An extra word';
+
+  @override
+  String get tasmeeWordUnsure => 'The app was not sure';
+
+  @override
+  String get tasmeeWordPending => 'Not reached yet';
+
+  @override
+  String get tasmeeRepetitionNote =>
+      'You said words of the same verse again. That is not a mistake.';
+
+  @override
+  String get tasmeeBasmalaNote =>
+      'The basmala before a surah is fine, not an extra word.';
+
+  @override
+  String get tasmeePauseNote =>
+      'You stopped for a moment and carried on. A pause is not a mistake.';
+
+  @override
+  String get tasmeeTashkeelExperimental =>
+      'The diacritics check is experimental and normally off. The word itself is right.';
+
+  @override
+  String get tasmeeTashkeelToggle => 'Also check the diacritics (experimental)';
+
+  @override
+  String get tasmeeHideMarkersToggle => 'Hide the verse numbers while I recite';
+
+  @override
+  String get tasmeeNoModelTitle =>
+      'The recitation check is not ready in this build';
+
+  @override
+  String get tasmeeNoModelBody =>
+      'The speech recogniser is not on the phone yet. Reading and listening work as usual.';
+
+  @override
+  String get tasmeePhoneCannotRunTitle =>
+      'Your phone cannot run the recitation check';
+
+  @override
+  String get tasmeePhoneCannotRunBody =>
+      'The recogniser needs a stronger phone. Reading and listening work as usual.';
+
+  @override
+  String get tasmeeMicNeededTitle => 'The microphone needs your permission';
+
+  @override
+  String get tasmeeMicNeededBody =>
+      'The microphone opens only while you recite; your voice is not saved and never leaves the phone.';
+
+  @override
+  String get tasmeeMicDeniedBody =>
+      'You refused the microphone before. Allow it in the phone\'s settings if you want to recite.';
+
+  @override
+  String get tasmeeStart => 'Start reciting';
+
+  @override
+  String get tasmeeStop => 'I am done';
+
+  @override
+  String get tasmeeDiscard => 'Discard';
+
+  @override
+  String get tasmeeHiddenTitle => 'The hidden verse';
+
+  @override
+  String get tasmeeHiddenBody =>
+      'The page is hidden, and a word appears when you recite it correctly.';
+
+  @override
+  String get tasmeePeek => 'Show me a word';
+
+  @override
+  String get tasmeePeekCountsAsHint =>
+      'A revealed word counts as a hint, so your memorisation strength stays honest.';
+
+  @override
+  String tasmeeHintsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hints',
+      one: '1 hint',
+      zero: 'No hints',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasmeeBlanksTitle => 'Fill in the blank';
+
+  @override
+  String get tasmeeBlanksBody =>
+      'Some words are taken out; recite the whole verse. Only the missing words are scored.';
+
+  @override
+  String tasmeeBlanksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count blanks',
+      one: '1 blank',
+      zero: 'No blanks',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeBlanksScore(int right, int total) {
+    return '$right of $total right';
+  }
+
+  @override
+  String get tasmeeFindTitle => 'Where is this verse';
+
+  @override
+  String get tasmeeFindBody =>
+      'Recite any phrase and the app names the surah and the verse, all on the phone.';
+
+  @override
+  String get tasmeeFindSure => 'Found it';
+
+  @override
+  String get tasmeeFindSeveral =>
+      'This phrase is in more than one verse. Pick the one you mean.';
+
+  @override
+  String get tasmeeFindUnsure =>
+      'The closest thing found, but the app is not sure.';
+
+  @override
+  String get tasmeeFindNone =>
+      'That phrase was not found. Try reciting a little more.';
+
+  @override
+  String get tasmeeFindTooShort =>
+      'Recite at least three words; two words are everywhere.';
+
+  @override
+  String tasmeeFindCandidates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+      zero: 'No results',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasmeeLogTitle => 'My mistake log';
+
+  @override
+  String get tasmeeLogEmptyTitle => 'The log is still empty';
+
+  @override
+  String get tasmeeLogEmptyBody =>
+      'Recite a verse and anything that went wrong lands here with its day and its word; you can delete it whenever you like.';
+
+  @override
+  String get tasmeeStatsTitle => 'My progress';
+
+  @override
+  String get tasmeeStatsAccuracy => 'Share right';
+
+  @override
+  String get tasmeeWeakWordsTitle => 'Words you stumble on';
+
+  @override
+  String get tasmeeWeakAyatTitle => 'Verses that need review';
+
+  @override
+  String tasmeeMistakesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count mistakes',
+      one: '1 mistake',
+      zero: 'No mistakes',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeWordsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count words',
+      one: '1 word',
+      zero: 'No words',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeSessionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      one: '1 time',
+      zero: 'Never',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeStreakDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days in a row',
+      one: '1 day in a row',
+      zero: 'Start today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasmeeDeleteSession => 'Delete this attempt';
+
+  @override
+  String get tasmeeClearLog => 'Clear the whole log';
+
+  @override
+  String get tasmeeExportTitle => 'Export the log';
+
+  @override
+  String get tasmeeExportBody =>
+      'One file with every attempt and every mistake, so the PC app can read it. It holds no audio at all.';
+
+  @override
+  String get tasmeeExportDone => 'The file is ready';
+
+  @override
+  String tasmeeRecogniserCredit(String name, String licence) {
+    return 'Speech recognition: $name ($licence)';
+  }
 }

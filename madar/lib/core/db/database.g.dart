@@ -44034,6 +44034,3288 @@ class KitchenRulesCompanion extends UpdateCompanion<KitchenRuleRow> {
   }
 }
 
+class $TasmeeSessionsTable extends TasmeeSessions
+    with TableInfo<$TasmeeSessionsTable, TasmeeSessionRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TasmeeSessionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _startedAtMeta = const VerificationMeta(
+    'startedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> startedAt = GeneratedColumn<DateTime>(
+    'started_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> day =
+      GeneratedColumn<DateTime>(
+        'day',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($TasmeeSessionsTable.$converterday);
+  @override
+  late final GeneratedColumnWithTypeConverter<TasmeeMode, String> mode =
+      GeneratedColumn<String>(
+        'mode',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(TasmeeMode.recite.name),
+      ).withConverter<TasmeeMode>($TasmeeSessionsTable.$convertermode);
+  static const VerificationMeta _fromSurahMeta = const VerificationMeta(
+    'fromSurah',
+  );
+  @override
+  late final GeneratedColumn<int> fromSurah = GeneratedColumn<int>(
+    'from_surah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fromAyahMeta = const VerificationMeta(
+    'fromAyah',
+  );
+  @override
+  late final GeneratedColumn<int> fromAyah = GeneratedColumn<int>(
+    'from_ayah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _toSurahMeta = const VerificationMeta(
+    'toSurah',
+  );
+  @override
+  late final GeneratedColumn<int> toSurah = GeneratedColumn<int>(
+    'to_surah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _toAyahMeta = const VerificationMeta('toAyah');
+  @override
+  late final GeneratedColumn<int> toAyah = GeneratedColumn<int>(
+    'to_ayah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _wordCountMeta = const VerificationMeta(
+    'wordCount',
+  );
+  @override
+  late final GeneratedColumn<int> wordCount = GeneratedColumn<int>(
+    'word_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _rightCountMeta = const VerificationMeta(
+    'rightCount',
+  );
+  @override
+  late final GeneratedColumn<int> rightCount = GeneratedColumn<int>(
+    'right_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _wrongCountMeta = const VerificationMeta(
+    'wrongCount',
+  );
+  @override
+  late final GeneratedColumn<int> wrongCount = GeneratedColumn<int>(
+    'wrong_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _skippedCountMeta = const VerificationMeta(
+    'skippedCount',
+  );
+  @override
+  late final GeneratedColumn<int> skippedCount = GeneratedColumn<int>(
+    'skipped_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _unsureCountMeta = const VerificationMeta(
+    'unsureCount',
+  );
+  @override
+  late final GeneratedColumn<int> unsureCount = GeneratedColumn<int>(
+    'unsure_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _pendingCountMeta = const VerificationMeta(
+    'pendingCount',
+  );
+  @override
+  late final GeneratedColumn<int> pendingCount = GeneratedColumn<int>(
+    'pending_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _extraCountMeta = const VerificationMeta(
+    'extraCount',
+  );
+  @override
+  late final GeneratedColumn<int> extraCount = GeneratedColumn<int>(
+    'extra_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _hintCountMeta = const VerificationMeta(
+    'hintCount',
+  );
+  @override
+  late final GeneratedColumn<int> hintCount = GeneratedColumn<int>(
+    'hint_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _tashkeelDiffCountMeta = const VerificationMeta(
+    'tashkeelDiffCount',
+  );
+  @override
+  late final GeneratedColumn<int> tashkeelDiffCount = GeneratedColumn<int>(
+    'tashkeel_diff_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _secondsMeta = const VerificationMeta(
+    'seconds',
+  );
+  @override
+  late final GeneratedColumn<int> seconds = GeneratedColumn<int>(
+    'seconds',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _recogniserIdMeta = const VerificationMeta(
+    'recogniserId',
+  );
+  @override
+  late final GeneratedColumn<String> recogniserId = GeneratedColumn<String>(
+    'recogniser_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _recogniserVersionMeta = const VerificationMeta(
+    'recogniserVersion',
+  );
+  @override
+  late final GeneratedColumn<String> recogniserVersion =
+      GeneratedColumn<String>(
+        'recogniser_version',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant(''),
+      );
+  static const VerificationMeta _textSourceMeta = const VerificationMeta(
+    'textSource',
+  );
+  @override
+  late final GeneratedColumn<String> textSource = GeneratedColumn<String>(
+    'text_source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('tanzil-uthmani'),
+  );
+  static const VerificationMeta _tashkeelCheckedMeta = const VerificationMeta(
+    'tashkeelChecked',
+  );
+  @override
+  late final GeneratedColumn<bool> tashkeelChecked = GeneratedColumn<bool>(
+    'tashkeel_checked',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("tashkeel_checked" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _seedMeta = const VerificationMeta('seed');
+  @override
+  late final GeneratedColumn<int> seed = GeneratedColumn<int>(
+    'seed',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    startedAt,
+    day,
+    mode,
+    fromSurah,
+    fromAyah,
+    toSurah,
+    toAyah,
+    wordCount,
+    rightCount,
+    wrongCount,
+    skippedCount,
+    unsureCount,
+    pendingCount,
+    extraCount,
+    hintCount,
+    tashkeelDiffCount,
+    seconds,
+    recogniserId,
+    recogniserVersion,
+    textSource,
+    tashkeelChecked,
+    seed,
+    note,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'tasmee_sessions';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TasmeeSessionRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('started_at')) {
+      context.handle(
+        _startedAtMeta,
+        startedAt.isAcceptableOrUnknown(data['started_at']!, _startedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_startedAtMeta);
+    }
+    if (data.containsKey('from_surah')) {
+      context.handle(
+        _fromSurahMeta,
+        fromSurah.isAcceptableOrUnknown(data['from_surah']!, _fromSurahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fromSurahMeta);
+    }
+    if (data.containsKey('from_ayah')) {
+      context.handle(
+        _fromAyahMeta,
+        fromAyah.isAcceptableOrUnknown(data['from_ayah']!, _fromAyahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fromAyahMeta);
+    }
+    if (data.containsKey('to_surah')) {
+      context.handle(
+        _toSurahMeta,
+        toSurah.isAcceptableOrUnknown(data['to_surah']!, _toSurahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_toSurahMeta);
+    }
+    if (data.containsKey('to_ayah')) {
+      context.handle(
+        _toAyahMeta,
+        toAyah.isAcceptableOrUnknown(data['to_ayah']!, _toAyahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_toAyahMeta);
+    }
+    if (data.containsKey('word_count')) {
+      context.handle(
+        _wordCountMeta,
+        wordCount.isAcceptableOrUnknown(data['word_count']!, _wordCountMeta),
+      );
+    }
+    if (data.containsKey('right_count')) {
+      context.handle(
+        _rightCountMeta,
+        rightCount.isAcceptableOrUnknown(data['right_count']!, _rightCountMeta),
+      );
+    }
+    if (data.containsKey('wrong_count')) {
+      context.handle(
+        _wrongCountMeta,
+        wrongCount.isAcceptableOrUnknown(data['wrong_count']!, _wrongCountMeta),
+      );
+    }
+    if (data.containsKey('skipped_count')) {
+      context.handle(
+        _skippedCountMeta,
+        skippedCount.isAcceptableOrUnknown(
+          data['skipped_count']!,
+          _skippedCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('unsure_count')) {
+      context.handle(
+        _unsureCountMeta,
+        unsureCount.isAcceptableOrUnknown(
+          data['unsure_count']!,
+          _unsureCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('pending_count')) {
+      context.handle(
+        _pendingCountMeta,
+        pendingCount.isAcceptableOrUnknown(
+          data['pending_count']!,
+          _pendingCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('extra_count')) {
+      context.handle(
+        _extraCountMeta,
+        extraCount.isAcceptableOrUnknown(data['extra_count']!, _extraCountMeta),
+      );
+    }
+    if (data.containsKey('hint_count')) {
+      context.handle(
+        _hintCountMeta,
+        hintCount.isAcceptableOrUnknown(data['hint_count']!, _hintCountMeta),
+      );
+    }
+    if (data.containsKey('tashkeel_diff_count')) {
+      context.handle(
+        _tashkeelDiffCountMeta,
+        tashkeelDiffCount.isAcceptableOrUnknown(
+          data['tashkeel_diff_count']!,
+          _tashkeelDiffCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('seconds')) {
+      context.handle(
+        _secondsMeta,
+        seconds.isAcceptableOrUnknown(data['seconds']!, _secondsMeta),
+      );
+    }
+    if (data.containsKey('recogniser_id')) {
+      context.handle(
+        _recogniserIdMeta,
+        recogniserId.isAcceptableOrUnknown(
+          data['recogniser_id']!,
+          _recogniserIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('recogniser_version')) {
+      context.handle(
+        _recogniserVersionMeta,
+        recogniserVersion.isAcceptableOrUnknown(
+          data['recogniser_version']!,
+          _recogniserVersionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('text_source')) {
+      context.handle(
+        _textSourceMeta,
+        textSource.isAcceptableOrUnknown(data['text_source']!, _textSourceMeta),
+      );
+    }
+    if (data.containsKey('tashkeel_checked')) {
+      context.handle(
+        _tashkeelCheckedMeta,
+        tashkeelChecked.isAcceptableOrUnknown(
+          data['tashkeel_checked']!,
+          _tashkeelCheckedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('seed')) {
+      context.handle(
+        _seedMeta,
+        seed.isAcceptableOrUnknown(data['seed']!, _seedMeta),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TasmeeSessionRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TasmeeSessionRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      startedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}started_at'],
+      )!,
+      day: $TasmeeSessionsTable.$converterday.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}day'],
+        )!,
+      ),
+      mode: $TasmeeSessionsTable.$convertermode.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}mode'],
+        )!,
+      ),
+      fromSurah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}from_surah'],
+      )!,
+      fromAyah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}from_ayah'],
+      )!,
+      toSurah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}to_surah'],
+      )!,
+      toAyah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}to_ayah'],
+      )!,
+      wordCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}word_count'],
+      )!,
+      rightCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}right_count'],
+      )!,
+      wrongCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}wrong_count'],
+      )!,
+      skippedCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skipped_count'],
+      )!,
+      unsureCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}unsure_count'],
+      )!,
+      pendingCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}pending_count'],
+      )!,
+      extraCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}extra_count'],
+      )!,
+      hintCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}hint_count'],
+      )!,
+      tashkeelDiffCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}tashkeel_diff_count'],
+      )!,
+      seconds: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}seconds'],
+      )!,
+      recogniserId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recogniser_id'],
+      )!,
+      recogniserVersion: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recogniser_version'],
+      )!,
+      textSource: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}text_source'],
+      )!,
+      tashkeelChecked: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}tashkeel_checked'],
+      )!,
+      seed: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}seed'],
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $TasmeeSessionsTable createAlias(String alias) {
+    return $TasmeeSessionsTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<DateTime, DateTime> $converterday =
+      const CalendarDayConverter();
+  static JsonTypeConverter2<TasmeeMode, String, String> $convertermode =
+      const EnumNameConverter<TasmeeMode>(TasmeeMode.values);
+}
+
+class TasmeeSessionRow extends DataClass
+    implements Insertable<TasmeeSessionRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  /// When he started.
+  final DateTime startedAt;
+
+  /// The calendar day, stored zone-free like every day in Madar – what the
+  /// statistics and the streak group by.
+  final DateTime day;
+  final TasmeeMode mode;
+
+  /// The range he recited (inclusive, may cross a surah).
+  final int fromSurah;
+  final int fromAyah;
+  final int toSurah;
+  final int toAyah;
+  final int wordCount;
+  final int rightCount;
+  final int wrongCount;
+  final int skippedCount;
+
+  /// Heard, but the recogniser was not sure enough to judge. Never a
+  /// mistake.
+  final int unsureCount;
+  final int pendingCount;
+
+  /// Words that are not in the text here. The basmala before a surah and
+  /// words of the text said again are **not** counted in.
+  final int extraCount;
+
+  /// Peeks: words he was shown instead of remembering, so Part 14's
+  /// strength stays honest.
+  final int hintCount;
+
+  /// Words whose letters matched and whose harakat did not (experimental).
+  final int tashkeelDiffCount;
+
+  /// How long the recitation ran.
+  final int seconds;
+
+  /// Which recogniser judged it, and which version of it.
+  final String recogniserId;
+  final String recogniserVersion;
+
+  /// Which edition of the text it was checked against.
+  final String textSource;
+
+  /// Whether the **experimental** tashkeel check was on.
+  final bool tashkeelChecked;
+
+  /// The fill-in-the-blank seed, when the mode used one – so the same drill
+  /// can be rebuilt exactly.
+  final int? seed;
+  final String? note;
+  const TasmeeSessionRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.startedAt,
+    required this.day,
+    required this.mode,
+    required this.fromSurah,
+    required this.fromAyah,
+    required this.toSurah,
+    required this.toAyah,
+    required this.wordCount,
+    required this.rightCount,
+    required this.wrongCount,
+    required this.skippedCount,
+    required this.unsureCount,
+    required this.pendingCount,
+    required this.extraCount,
+    required this.hintCount,
+    required this.tashkeelDiffCount,
+    required this.seconds,
+    required this.recogniserId,
+    required this.recogniserVersion,
+    required this.textSource,
+    required this.tashkeelChecked,
+    this.seed,
+    this.note,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['started_at'] = Variable<DateTime>(startedAt);
+    {
+      map['day'] = Variable<DateTime>(
+        $TasmeeSessionsTable.$converterday.toSql(day),
+      );
+    }
+    {
+      map['mode'] = Variable<String>(
+        $TasmeeSessionsTable.$convertermode.toSql(mode),
+      );
+    }
+    map['from_surah'] = Variable<int>(fromSurah);
+    map['from_ayah'] = Variable<int>(fromAyah);
+    map['to_surah'] = Variable<int>(toSurah);
+    map['to_ayah'] = Variable<int>(toAyah);
+    map['word_count'] = Variable<int>(wordCount);
+    map['right_count'] = Variable<int>(rightCount);
+    map['wrong_count'] = Variable<int>(wrongCount);
+    map['skipped_count'] = Variable<int>(skippedCount);
+    map['unsure_count'] = Variable<int>(unsureCount);
+    map['pending_count'] = Variable<int>(pendingCount);
+    map['extra_count'] = Variable<int>(extraCount);
+    map['hint_count'] = Variable<int>(hintCount);
+    map['tashkeel_diff_count'] = Variable<int>(tashkeelDiffCount);
+    map['seconds'] = Variable<int>(seconds);
+    map['recogniser_id'] = Variable<String>(recogniserId);
+    map['recogniser_version'] = Variable<String>(recogniserVersion);
+    map['text_source'] = Variable<String>(textSource);
+    map['tashkeel_checked'] = Variable<bool>(tashkeelChecked);
+    if (!nullToAbsent || seed != null) {
+      map['seed'] = Variable<int>(seed);
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  TasmeeSessionsCompanion toCompanion(bool nullToAbsent) {
+    return TasmeeSessionsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      startedAt: Value(startedAt),
+      day: Value(day),
+      mode: Value(mode),
+      fromSurah: Value(fromSurah),
+      fromAyah: Value(fromAyah),
+      toSurah: Value(toSurah),
+      toAyah: Value(toAyah),
+      wordCount: Value(wordCount),
+      rightCount: Value(rightCount),
+      wrongCount: Value(wrongCount),
+      skippedCount: Value(skippedCount),
+      unsureCount: Value(unsureCount),
+      pendingCount: Value(pendingCount),
+      extraCount: Value(extraCount),
+      hintCount: Value(hintCount),
+      tashkeelDiffCount: Value(tashkeelDiffCount),
+      seconds: Value(seconds),
+      recogniserId: Value(recogniserId),
+      recogniserVersion: Value(recogniserVersion),
+      textSource: Value(textSource),
+      tashkeelChecked: Value(tashkeelChecked),
+      seed: seed == null && nullToAbsent ? const Value.absent() : Value(seed),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory TasmeeSessionRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TasmeeSessionRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      startedAt: serializer.fromJson<DateTime>(json['startedAt']),
+      day: serializer.fromJson<DateTime>(json['day']),
+      mode: $TasmeeSessionsTable.$convertermode.fromJson(
+        serializer.fromJson<String>(json['mode']),
+      ),
+      fromSurah: serializer.fromJson<int>(json['fromSurah']),
+      fromAyah: serializer.fromJson<int>(json['fromAyah']),
+      toSurah: serializer.fromJson<int>(json['toSurah']),
+      toAyah: serializer.fromJson<int>(json['toAyah']),
+      wordCount: serializer.fromJson<int>(json['wordCount']),
+      rightCount: serializer.fromJson<int>(json['rightCount']),
+      wrongCount: serializer.fromJson<int>(json['wrongCount']),
+      skippedCount: serializer.fromJson<int>(json['skippedCount']),
+      unsureCount: serializer.fromJson<int>(json['unsureCount']),
+      pendingCount: serializer.fromJson<int>(json['pendingCount']),
+      extraCount: serializer.fromJson<int>(json['extraCount']),
+      hintCount: serializer.fromJson<int>(json['hintCount']),
+      tashkeelDiffCount: serializer.fromJson<int>(json['tashkeelDiffCount']),
+      seconds: serializer.fromJson<int>(json['seconds']),
+      recogniserId: serializer.fromJson<String>(json['recogniserId']),
+      recogniserVersion: serializer.fromJson<String>(json['recogniserVersion']),
+      textSource: serializer.fromJson<String>(json['textSource']),
+      tashkeelChecked: serializer.fromJson<bool>(json['tashkeelChecked']),
+      seed: serializer.fromJson<int?>(json['seed']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'startedAt': serializer.toJson<DateTime>(startedAt),
+      'day': serializer.toJson<DateTime>(day),
+      'mode': serializer.toJson<String>(
+        $TasmeeSessionsTable.$convertermode.toJson(mode),
+      ),
+      'fromSurah': serializer.toJson<int>(fromSurah),
+      'fromAyah': serializer.toJson<int>(fromAyah),
+      'toSurah': serializer.toJson<int>(toSurah),
+      'toAyah': serializer.toJson<int>(toAyah),
+      'wordCount': serializer.toJson<int>(wordCount),
+      'rightCount': serializer.toJson<int>(rightCount),
+      'wrongCount': serializer.toJson<int>(wrongCount),
+      'skippedCount': serializer.toJson<int>(skippedCount),
+      'unsureCount': serializer.toJson<int>(unsureCount),
+      'pendingCount': serializer.toJson<int>(pendingCount),
+      'extraCount': serializer.toJson<int>(extraCount),
+      'hintCount': serializer.toJson<int>(hintCount),
+      'tashkeelDiffCount': serializer.toJson<int>(tashkeelDiffCount),
+      'seconds': serializer.toJson<int>(seconds),
+      'recogniserId': serializer.toJson<String>(recogniserId),
+      'recogniserVersion': serializer.toJson<String>(recogniserVersion),
+      'textSource': serializer.toJson<String>(textSource),
+      'tashkeelChecked': serializer.toJson<bool>(tashkeelChecked),
+      'seed': serializer.toJson<int?>(seed),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  TasmeeSessionRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    DateTime? startedAt,
+    DateTime? day,
+    TasmeeMode? mode,
+    int? fromSurah,
+    int? fromAyah,
+    int? toSurah,
+    int? toAyah,
+    int? wordCount,
+    int? rightCount,
+    int? wrongCount,
+    int? skippedCount,
+    int? unsureCount,
+    int? pendingCount,
+    int? extraCount,
+    int? hintCount,
+    int? tashkeelDiffCount,
+    int? seconds,
+    String? recogniserId,
+    String? recogniserVersion,
+    String? textSource,
+    bool? tashkeelChecked,
+    Value<int?> seed = const Value.absent(),
+    Value<String?> note = const Value.absent(),
+  }) => TasmeeSessionRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    startedAt: startedAt ?? this.startedAt,
+    day: day ?? this.day,
+    mode: mode ?? this.mode,
+    fromSurah: fromSurah ?? this.fromSurah,
+    fromAyah: fromAyah ?? this.fromAyah,
+    toSurah: toSurah ?? this.toSurah,
+    toAyah: toAyah ?? this.toAyah,
+    wordCount: wordCount ?? this.wordCount,
+    rightCount: rightCount ?? this.rightCount,
+    wrongCount: wrongCount ?? this.wrongCount,
+    skippedCount: skippedCount ?? this.skippedCount,
+    unsureCount: unsureCount ?? this.unsureCount,
+    pendingCount: pendingCount ?? this.pendingCount,
+    extraCount: extraCount ?? this.extraCount,
+    hintCount: hintCount ?? this.hintCount,
+    tashkeelDiffCount: tashkeelDiffCount ?? this.tashkeelDiffCount,
+    seconds: seconds ?? this.seconds,
+    recogniserId: recogniserId ?? this.recogniserId,
+    recogniserVersion: recogniserVersion ?? this.recogniserVersion,
+    textSource: textSource ?? this.textSource,
+    tashkeelChecked: tashkeelChecked ?? this.tashkeelChecked,
+    seed: seed.present ? seed.value : this.seed,
+    note: note.present ? note.value : this.note,
+  );
+  TasmeeSessionRow copyWithCompanion(TasmeeSessionsCompanion data) {
+    return TasmeeSessionRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
+      day: data.day.present ? data.day.value : this.day,
+      mode: data.mode.present ? data.mode.value : this.mode,
+      fromSurah: data.fromSurah.present ? data.fromSurah.value : this.fromSurah,
+      fromAyah: data.fromAyah.present ? data.fromAyah.value : this.fromAyah,
+      toSurah: data.toSurah.present ? data.toSurah.value : this.toSurah,
+      toAyah: data.toAyah.present ? data.toAyah.value : this.toAyah,
+      wordCount: data.wordCount.present ? data.wordCount.value : this.wordCount,
+      rightCount: data.rightCount.present
+          ? data.rightCount.value
+          : this.rightCount,
+      wrongCount: data.wrongCount.present
+          ? data.wrongCount.value
+          : this.wrongCount,
+      skippedCount: data.skippedCount.present
+          ? data.skippedCount.value
+          : this.skippedCount,
+      unsureCount: data.unsureCount.present
+          ? data.unsureCount.value
+          : this.unsureCount,
+      pendingCount: data.pendingCount.present
+          ? data.pendingCount.value
+          : this.pendingCount,
+      extraCount: data.extraCount.present
+          ? data.extraCount.value
+          : this.extraCount,
+      hintCount: data.hintCount.present ? data.hintCount.value : this.hintCount,
+      tashkeelDiffCount: data.tashkeelDiffCount.present
+          ? data.tashkeelDiffCount.value
+          : this.tashkeelDiffCount,
+      seconds: data.seconds.present ? data.seconds.value : this.seconds,
+      recogniserId: data.recogniserId.present
+          ? data.recogniserId.value
+          : this.recogniserId,
+      recogniserVersion: data.recogniserVersion.present
+          ? data.recogniserVersion.value
+          : this.recogniserVersion,
+      textSource: data.textSource.present
+          ? data.textSource.value
+          : this.textSource,
+      tashkeelChecked: data.tashkeelChecked.present
+          ? data.tashkeelChecked.value
+          : this.tashkeelChecked,
+      seed: data.seed.present ? data.seed.value : this.seed,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TasmeeSessionRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('day: $day, ')
+          ..write('mode: $mode, ')
+          ..write('fromSurah: $fromSurah, ')
+          ..write('fromAyah: $fromAyah, ')
+          ..write('toSurah: $toSurah, ')
+          ..write('toAyah: $toAyah, ')
+          ..write('wordCount: $wordCount, ')
+          ..write('rightCount: $rightCount, ')
+          ..write('wrongCount: $wrongCount, ')
+          ..write('skippedCount: $skippedCount, ')
+          ..write('unsureCount: $unsureCount, ')
+          ..write('pendingCount: $pendingCount, ')
+          ..write('extraCount: $extraCount, ')
+          ..write('hintCount: $hintCount, ')
+          ..write('tashkeelDiffCount: $tashkeelDiffCount, ')
+          ..write('seconds: $seconds, ')
+          ..write('recogniserId: $recogniserId, ')
+          ..write('recogniserVersion: $recogniserVersion, ')
+          ..write('textSource: $textSource, ')
+          ..write('tashkeelChecked: $tashkeelChecked, ')
+          ..write('seed: $seed, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+    id,
+    createdAt,
+    updatedAt,
+    startedAt,
+    day,
+    mode,
+    fromSurah,
+    fromAyah,
+    toSurah,
+    toAyah,
+    wordCount,
+    rightCount,
+    wrongCount,
+    skippedCount,
+    unsureCount,
+    pendingCount,
+    extraCount,
+    hintCount,
+    tashkeelDiffCount,
+    seconds,
+    recogniserId,
+    recogniserVersion,
+    textSource,
+    tashkeelChecked,
+    seed,
+    note,
+  ]);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TasmeeSessionRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.startedAt == this.startedAt &&
+          other.day == this.day &&
+          other.mode == this.mode &&
+          other.fromSurah == this.fromSurah &&
+          other.fromAyah == this.fromAyah &&
+          other.toSurah == this.toSurah &&
+          other.toAyah == this.toAyah &&
+          other.wordCount == this.wordCount &&
+          other.rightCount == this.rightCount &&
+          other.wrongCount == this.wrongCount &&
+          other.skippedCount == this.skippedCount &&
+          other.unsureCount == this.unsureCount &&
+          other.pendingCount == this.pendingCount &&
+          other.extraCount == this.extraCount &&
+          other.hintCount == this.hintCount &&
+          other.tashkeelDiffCount == this.tashkeelDiffCount &&
+          other.seconds == this.seconds &&
+          other.recogniserId == this.recogniserId &&
+          other.recogniserVersion == this.recogniserVersion &&
+          other.textSource == this.textSource &&
+          other.tashkeelChecked == this.tashkeelChecked &&
+          other.seed == this.seed &&
+          other.note == this.note);
+}
+
+class TasmeeSessionsCompanion extends UpdateCompanion<TasmeeSessionRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<DateTime> startedAt;
+  final Value<DateTime> day;
+  final Value<TasmeeMode> mode;
+  final Value<int> fromSurah;
+  final Value<int> fromAyah;
+  final Value<int> toSurah;
+  final Value<int> toAyah;
+  final Value<int> wordCount;
+  final Value<int> rightCount;
+  final Value<int> wrongCount;
+  final Value<int> skippedCount;
+  final Value<int> unsureCount;
+  final Value<int> pendingCount;
+  final Value<int> extraCount;
+  final Value<int> hintCount;
+  final Value<int> tashkeelDiffCount;
+  final Value<int> seconds;
+  final Value<String> recogniserId;
+  final Value<String> recogniserVersion;
+  final Value<String> textSource;
+  final Value<bool> tashkeelChecked;
+  final Value<int?> seed;
+  final Value<String?> note;
+  final Value<int> rowid;
+  const TasmeeSessionsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.startedAt = const Value.absent(),
+    this.day = const Value.absent(),
+    this.mode = const Value.absent(),
+    this.fromSurah = const Value.absent(),
+    this.fromAyah = const Value.absent(),
+    this.toSurah = const Value.absent(),
+    this.toAyah = const Value.absent(),
+    this.wordCount = const Value.absent(),
+    this.rightCount = const Value.absent(),
+    this.wrongCount = const Value.absent(),
+    this.skippedCount = const Value.absent(),
+    this.unsureCount = const Value.absent(),
+    this.pendingCount = const Value.absent(),
+    this.extraCount = const Value.absent(),
+    this.hintCount = const Value.absent(),
+    this.tashkeelDiffCount = const Value.absent(),
+    this.seconds = const Value.absent(),
+    this.recogniserId = const Value.absent(),
+    this.recogniserVersion = const Value.absent(),
+    this.textSource = const Value.absent(),
+    this.tashkeelChecked = const Value.absent(),
+    this.seed = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TasmeeSessionsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    required DateTime startedAt,
+    required DateTime day,
+    this.mode = const Value.absent(),
+    required int fromSurah,
+    required int fromAyah,
+    required int toSurah,
+    required int toAyah,
+    this.wordCount = const Value.absent(),
+    this.rightCount = const Value.absent(),
+    this.wrongCount = const Value.absent(),
+    this.skippedCount = const Value.absent(),
+    this.unsureCount = const Value.absent(),
+    this.pendingCount = const Value.absent(),
+    this.extraCount = const Value.absent(),
+    this.hintCount = const Value.absent(),
+    this.tashkeelDiffCount = const Value.absent(),
+    this.seconds = const Value.absent(),
+    this.recogniserId = const Value.absent(),
+    this.recogniserVersion = const Value.absent(),
+    this.textSource = const Value.absent(),
+    this.tashkeelChecked = const Value.absent(),
+    this.seed = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : startedAt = Value(startedAt),
+       day = Value(day),
+       fromSurah = Value(fromSurah),
+       fromAyah = Value(fromAyah),
+       toSurah = Value(toSurah),
+       toAyah = Value(toAyah);
+  static Insertable<TasmeeSessionRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<DateTime>? startedAt,
+    Expression<DateTime>? day,
+    Expression<String>? mode,
+    Expression<int>? fromSurah,
+    Expression<int>? fromAyah,
+    Expression<int>? toSurah,
+    Expression<int>? toAyah,
+    Expression<int>? wordCount,
+    Expression<int>? rightCount,
+    Expression<int>? wrongCount,
+    Expression<int>? skippedCount,
+    Expression<int>? unsureCount,
+    Expression<int>? pendingCount,
+    Expression<int>? extraCount,
+    Expression<int>? hintCount,
+    Expression<int>? tashkeelDiffCount,
+    Expression<int>? seconds,
+    Expression<String>? recogniserId,
+    Expression<String>? recogniserVersion,
+    Expression<String>? textSource,
+    Expression<bool>? tashkeelChecked,
+    Expression<int>? seed,
+    Expression<String>? note,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (startedAt != null) 'started_at': startedAt,
+      if (day != null) 'day': day,
+      if (mode != null) 'mode': mode,
+      if (fromSurah != null) 'from_surah': fromSurah,
+      if (fromAyah != null) 'from_ayah': fromAyah,
+      if (toSurah != null) 'to_surah': toSurah,
+      if (toAyah != null) 'to_ayah': toAyah,
+      if (wordCount != null) 'word_count': wordCount,
+      if (rightCount != null) 'right_count': rightCount,
+      if (wrongCount != null) 'wrong_count': wrongCount,
+      if (skippedCount != null) 'skipped_count': skippedCount,
+      if (unsureCount != null) 'unsure_count': unsureCount,
+      if (pendingCount != null) 'pending_count': pendingCount,
+      if (extraCount != null) 'extra_count': extraCount,
+      if (hintCount != null) 'hint_count': hintCount,
+      if (tashkeelDiffCount != null) 'tashkeel_diff_count': tashkeelDiffCount,
+      if (seconds != null) 'seconds': seconds,
+      if (recogniserId != null) 'recogniser_id': recogniserId,
+      if (recogniserVersion != null) 'recogniser_version': recogniserVersion,
+      if (textSource != null) 'text_source': textSource,
+      if (tashkeelChecked != null) 'tashkeel_checked': tashkeelChecked,
+      if (seed != null) 'seed': seed,
+      if (note != null) 'note': note,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TasmeeSessionsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<DateTime>? startedAt,
+    Value<DateTime>? day,
+    Value<TasmeeMode>? mode,
+    Value<int>? fromSurah,
+    Value<int>? fromAyah,
+    Value<int>? toSurah,
+    Value<int>? toAyah,
+    Value<int>? wordCount,
+    Value<int>? rightCount,
+    Value<int>? wrongCount,
+    Value<int>? skippedCount,
+    Value<int>? unsureCount,
+    Value<int>? pendingCount,
+    Value<int>? extraCount,
+    Value<int>? hintCount,
+    Value<int>? tashkeelDiffCount,
+    Value<int>? seconds,
+    Value<String>? recogniserId,
+    Value<String>? recogniserVersion,
+    Value<String>? textSource,
+    Value<bool>? tashkeelChecked,
+    Value<int?>? seed,
+    Value<String?>? note,
+    Value<int>? rowid,
+  }) {
+    return TasmeeSessionsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      startedAt: startedAt ?? this.startedAt,
+      day: day ?? this.day,
+      mode: mode ?? this.mode,
+      fromSurah: fromSurah ?? this.fromSurah,
+      fromAyah: fromAyah ?? this.fromAyah,
+      toSurah: toSurah ?? this.toSurah,
+      toAyah: toAyah ?? this.toAyah,
+      wordCount: wordCount ?? this.wordCount,
+      rightCount: rightCount ?? this.rightCount,
+      wrongCount: wrongCount ?? this.wrongCount,
+      skippedCount: skippedCount ?? this.skippedCount,
+      unsureCount: unsureCount ?? this.unsureCount,
+      pendingCount: pendingCount ?? this.pendingCount,
+      extraCount: extraCount ?? this.extraCount,
+      hintCount: hintCount ?? this.hintCount,
+      tashkeelDiffCount: tashkeelDiffCount ?? this.tashkeelDiffCount,
+      seconds: seconds ?? this.seconds,
+      recogniserId: recogniserId ?? this.recogniserId,
+      recogniserVersion: recogniserVersion ?? this.recogniserVersion,
+      textSource: textSource ?? this.textSource,
+      tashkeelChecked: tashkeelChecked ?? this.tashkeelChecked,
+      seed: seed ?? this.seed,
+      note: note ?? this.note,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (startedAt.present) {
+      map['started_at'] = Variable<DateTime>(startedAt.value);
+    }
+    if (day.present) {
+      map['day'] = Variable<DateTime>(
+        $TasmeeSessionsTable.$converterday.toSql(day.value),
+      );
+    }
+    if (mode.present) {
+      map['mode'] = Variable<String>(
+        $TasmeeSessionsTable.$convertermode.toSql(mode.value),
+      );
+    }
+    if (fromSurah.present) {
+      map['from_surah'] = Variable<int>(fromSurah.value);
+    }
+    if (fromAyah.present) {
+      map['from_ayah'] = Variable<int>(fromAyah.value);
+    }
+    if (toSurah.present) {
+      map['to_surah'] = Variable<int>(toSurah.value);
+    }
+    if (toAyah.present) {
+      map['to_ayah'] = Variable<int>(toAyah.value);
+    }
+    if (wordCount.present) {
+      map['word_count'] = Variable<int>(wordCount.value);
+    }
+    if (rightCount.present) {
+      map['right_count'] = Variable<int>(rightCount.value);
+    }
+    if (wrongCount.present) {
+      map['wrong_count'] = Variable<int>(wrongCount.value);
+    }
+    if (skippedCount.present) {
+      map['skipped_count'] = Variable<int>(skippedCount.value);
+    }
+    if (unsureCount.present) {
+      map['unsure_count'] = Variable<int>(unsureCount.value);
+    }
+    if (pendingCount.present) {
+      map['pending_count'] = Variable<int>(pendingCount.value);
+    }
+    if (extraCount.present) {
+      map['extra_count'] = Variable<int>(extraCount.value);
+    }
+    if (hintCount.present) {
+      map['hint_count'] = Variable<int>(hintCount.value);
+    }
+    if (tashkeelDiffCount.present) {
+      map['tashkeel_diff_count'] = Variable<int>(tashkeelDiffCount.value);
+    }
+    if (seconds.present) {
+      map['seconds'] = Variable<int>(seconds.value);
+    }
+    if (recogniserId.present) {
+      map['recogniser_id'] = Variable<String>(recogniserId.value);
+    }
+    if (recogniserVersion.present) {
+      map['recogniser_version'] = Variable<String>(recogniserVersion.value);
+    }
+    if (textSource.present) {
+      map['text_source'] = Variable<String>(textSource.value);
+    }
+    if (tashkeelChecked.present) {
+      map['tashkeel_checked'] = Variable<bool>(tashkeelChecked.value);
+    }
+    if (seed.present) {
+      map['seed'] = Variable<int>(seed.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TasmeeSessionsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('day: $day, ')
+          ..write('mode: $mode, ')
+          ..write('fromSurah: $fromSurah, ')
+          ..write('fromAyah: $fromAyah, ')
+          ..write('toSurah: $toSurah, ')
+          ..write('toAyah: $toAyah, ')
+          ..write('wordCount: $wordCount, ')
+          ..write('rightCount: $rightCount, ')
+          ..write('wrongCount: $wrongCount, ')
+          ..write('skippedCount: $skippedCount, ')
+          ..write('unsureCount: $unsureCount, ')
+          ..write('pendingCount: $pendingCount, ')
+          ..write('extraCount: $extraCount, ')
+          ..write('hintCount: $hintCount, ')
+          ..write('tashkeelDiffCount: $tashkeelDiffCount, ')
+          ..write('seconds: $seconds, ')
+          ..write('recogniserId: $recogniserId, ')
+          ..write('recogniserVersion: $recogniserVersion, ')
+          ..write('textSource: $textSource, ')
+          ..write('tashkeelChecked: $tashkeelChecked, ')
+          ..write('seed: $seed, ')
+          ..write('note: $note, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TasmeeAyatTable extends TasmeeAyat
+    with TableInfo<$TasmeeAyatTable, TasmeeAyahRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TasmeeAyatTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sessionIdMeta = const VerificationMeta(
+    'sessionId',
+  );
+  @override
+  late final GeneratedColumn<String> sessionId = GeneratedColumn<String>(
+    'session_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> day =
+      GeneratedColumn<DateTime>(
+        'day',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($TasmeeAyatTable.$converterday);
+  static const VerificationMeta _surahMeta = const VerificationMeta('surah');
+  @override
+  late final GeneratedColumn<int> surah = GeneratedColumn<int>(
+    'surah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ayahMeta = const VerificationMeta('ayah');
+  @override
+  late final GeneratedColumn<int> ayah = GeneratedColumn<int>(
+    'ayah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _wordCountMeta = const VerificationMeta(
+    'wordCount',
+  );
+  @override
+  late final GeneratedColumn<int> wordCount = GeneratedColumn<int>(
+    'word_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _rightCountMeta = const VerificationMeta(
+    'rightCount',
+  );
+  @override
+  late final GeneratedColumn<int> rightCount = GeneratedColumn<int>(
+    'right_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _wrongCountMeta = const VerificationMeta(
+    'wrongCount',
+  );
+  @override
+  late final GeneratedColumn<int> wrongCount = GeneratedColumn<int>(
+    'wrong_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _skippedCountMeta = const VerificationMeta(
+    'skippedCount',
+  );
+  @override
+  late final GeneratedColumn<int> skippedCount = GeneratedColumn<int>(
+    'skipped_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _unsureCountMeta = const VerificationMeta(
+    'unsureCount',
+  );
+  @override
+  late final GeneratedColumn<int> unsureCount = GeneratedColumn<int>(
+    'unsure_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _pendingCountMeta = const VerificationMeta(
+    'pendingCount',
+  );
+  @override
+  late final GeneratedColumn<int> pendingCount = GeneratedColumn<int>(
+    'pending_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _extraCountMeta = const VerificationMeta(
+    'extraCount',
+  );
+  @override
+  late final GeneratedColumn<int> extraCount = GeneratedColumn<int>(
+    'extra_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _hintCountMeta = const VerificationMeta(
+    'hintCount',
+  );
+  @override
+  late final GeneratedColumn<int> hintCount = GeneratedColumn<int>(
+    'hint_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _tashkeelDiffCountMeta = const VerificationMeta(
+    'tashkeelDiffCount',
+  );
+  @override
+  late final GeneratedColumn<int> tashkeelDiffCount = GeneratedColumn<int>(
+    'tashkeel_diff_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sessionId,
+    day,
+    surah,
+    ayah,
+    wordCount,
+    rightCount,
+    wrongCount,
+    skippedCount,
+    unsureCount,
+    pendingCount,
+    extraCount,
+    hintCount,
+    tashkeelDiffCount,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'tasmee_ayat';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TasmeeAyahRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('session_id')) {
+      context.handle(
+        _sessionIdMeta,
+        sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sessionIdMeta);
+    }
+    if (data.containsKey('surah')) {
+      context.handle(
+        _surahMeta,
+        surah.isAcceptableOrUnknown(data['surah']!, _surahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_surahMeta);
+    }
+    if (data.containsKey('ayah')) {
+      context.handle(
+        _ayahMeta,
+        ayah.isAcceptableOrUnknown(data['ayah']!, _ayahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ayahMeta);
+    }
+    if (data.containsKey('word_count')) {
+      context.handle(
+        _wordCountMeta,
+        wordCount.isAcceptableOrUnknown(data['word_count']!, _wordCountMeta),
+      );
+    }
+    if (data.containsKey('right_count')) {
+      context.handle(
+        _rightCountMeta,
+        rightCount.isAcceptableOrUnknown(data['right_count']!, _rightCountMeta),
+      );
+    }
+    if (data.containsKey('wrong_count')) {
+      context.handle(
+        _wrongCountMeta,
+        wrongCount.isAcceptableOrUnknown(data['wrong_count']!, _wrongCountMeta),
+      );
+    }
+    if (data.containsKey('skipped_count')) {
+      context.handle(
+        _skippedCountMeta,
+        skippedCount.isAcceptableOrUnknown(
+          data['skipped_count']!,
+          _skippedCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('unsure_count')) {
+      context.handle(
+        _unsureCountMeta,
+        unsureCount.isAcceptableOrUnknown(
+          data['unsure_count']!,
+          _unsureCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('pending_count')) {
+      context.handle(
+        _pendingCountMeta,
+        pendingCount.isAcceptableOrUnknown(
+          data['pending_count']!,
+          _pendingCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('extra_count')) {
+      context.handle(
+        _extraCountMeta,
+        extraCount.isAcceptableOrUnknown(data['extra_count']!, _extraCountMeta),
+      );
+    }
+    if (data.containsKey('hint_count')) {
+      context.handle(
+        _hintCountMeta,
+        hintCount.isAcceptableOrUnknown(data['hint_count']!, _hintCountMeta),
+      );
+    }
+    if (data.containsKey('tashkeel_diff_count')) {
+      context.handle(
+        _tashkeelDiffCountMeta,
+        tashkeelDiffCount.isAcceptableOrUnknown(
+          data['tashkeel_diff_count']!,
+          _tashkeelDiffCountMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TasmeeAyahRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TasmeeAyahRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sessionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}session_id'],
+      )!,
+      day: $TasmeeAyatTable.$converterday.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}day'],
+        )!,
+      ),
+      surah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}surah'],
+      )!,
+      ayah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}ayah'],
+      )!,
+      wordCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}word_count'],
+      )!,
+      rightCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}right_count'],
+      )!,
+      wrongCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}wrong_count'],
+      )!,
+      skippedCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}skipped_count'],
+      )!,
+      unsureCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}unsure_count'],
+      )!,
+      pendingCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}pending_count'],
+      )!,
+      extraCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}extra_count'],
+      )!,
+      hintCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}hint_count'],
+      )!,
+      tashkeelDiffCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}tashkeel_diff_count'],
+      )!,
+    );
+  }
+
+  @override
+  $TasmeeAyatTable createAlias(String alias) {
+    return $TasmeeAyatTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<DateTime, DateTime> $converterday =
+      const CalendarDayConverter();
+}
+
+class TasmeeAyahRow extends DataClass implements Insertable<TasmeeAyahRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  /// The session it belongs to (`tasmee_sessions.id`). Deleted with it by
+  /// the service, exactly as a recipe deletes its ingredient lines.
+  final String sessionId;
+  final DateTime day;
+  final int surah;
+  final int ayah;
+  final int wordCount;
+  final int rightCount;
+  final int wrongCount;
+  final int skippedCount;
+  final int unsureCount;
+  final int pendingCount;
+  final int extraCount;
+  final int hintCount;
+  final int tashkeelDiffCount;
+  const TasmeeAyahRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sessionId,
+    required this.day,
+    required this.surah,
+    required this.ayah,
+    required this.wordCount,
+    required this.rightCount,
+    required this.wrongCount,
+    required this.skippedCount,
+    required this.unsureCount,
+    required this.pendingCount,
+    required this.extraCount,
+    required this.hintCount,
+    required this.tashkeelDiffCount,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['session_id'] = Variable<String>(sessionId);
+    {
+      map['day'] = Variable<DateTime>(
+        $TasmeeAyatTable.$converterday.toSql(day),
+      );
+    }
+    map['surah'] = Variable<int>(surah);
+    map['ayah'] = Variable<int>(ayah);
+    map['word_count'] = Variable<int>(wordCount);
+    map['right_count'] = Variable<int>(rightCount);
+    map['wrong_count'] = Variable<int>(wrongCount);
+    map['skipped_count'] = Variable<int>(skippedCount);
+    map['unsure_count'] = Variable<int>(unsureCount);
+    map['pending_count'] = Variable<int>(pendingCount);
+    map['extra_count'] = Variable<int>(extraCount);
+    map['hint_count'] = Variable<int>(hintCount);
+    map['tashkeel_diff_count'] = Variable<int>(tashkeelDiffCount);
+    return map;
+  }
+
+  TasmeeAyatCompanion toCompanion(bool nullToAbsent) {
+    return TasmeeAyatCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sessionId: Value(sessionId),
+      day: Value(day),
+      surah: Value(surah),
+      ayah: Value(ayah),
+      wordCount: Value(wordCount),
+      rightCount: Value(rightCount),
+      wrongCount: Value(wrongCount),
+      skippedCount: Value(skippedCount),
+      unsureCount: Value(unsureCount),
+      pendingCount: Value(pendingCount),
+      extraCount: Value(extraCount),
+      hintCount: Value(hintCount),
+      tashkeelDiffCount: Value(tashkeelDiffCount),
+    );
+  }
+
+  factory TasmeeAyahRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TasmeeAyahRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sessionId: serializer.fromJson<String>(json['sessionId']),
+      day: serializer.fromJson<DateTime>(json['day']),
+      surah: serializer.fromJson<int>(json['surah']),
+      ayah: serializer.fromJson<int>(json['ayah']),
+      wordCount: serializer.fromJson<int>(json['wordCount']),
+      rightCount: serializer.fromJson<int>(json['rightCount']),
+      wrongCount: serializer.fromJson<int>(json['wrongCount']),
+      skippedCount: serializer.fromJson<int>(json['skippedCount']),
+      unsureCount: serializer.fromJson<int>(json['unsureCount']),
+      pendingCount: serializer.fromJson<int>(json['pendingCount']),
+      extraCount: serializer.fromJson<int>(json['extraCount']),
+      hintCount: serializer.fromJson<int>(json['hintCount']),
+      tashkeelDiffCount: serializer.fromJson<int>(json['tashkeelDiffCount']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sessionId': serializer.toJson<String>(sessionId),
+      'day': serializer.toJson<DateTime>(day),
+      'surah': serializer.toJson<int>(surah),
+      'ayah': serializer.toJson<int>(ayah),
+      'wordCount': serializer.toJson<int>(wordCount),
+      'rightCount': serializer.toJson<int>(rightCount),
+      'wrongCount': serializer.toJson<int>(wrongCount),
+      'skippedCount': serializer.toJson<int>(skippedCount),
+      'unsureCount': serializer.toJson<int>(unsureCount),
+      'pendingCount': serializer.toJson<int>(pendingCount),
+      'extraCount': serializer.toJson<int>(extraCount),
+      'hintCount': serializer.toJson<int>(hintCount),
+      'tashkeelDiffCount': serializer.toJson<int>(tashkeelDiffCount),
+    };
+  }
+
+  TasmeeAyahRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? sessionId,
+    DateTime? day,
+    int? surah,
+    int? ayah,
+    int? wordCount,
+    int? rightCount,
+    int? wrongCount,
+    int? skippedCount,
+    int? unsureCount,
+    int? pendingCount,
+    int? extraCount,
+    int? hintCount,
+    int? tashkeelDiffCount,
+  }) => TasmeeAyahRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sessionId: sessionId ?? this.sessionId,
+    day: day ?? this.day,
+    surah: surah ?? this.surah,
+    ayah: ayah ?? this.ayah,
+    wordCount: wordCount ?? this.wordCount,
+    rightCount: rightCount ?? this.rightCount,
+    wrongCount: wrongCount ?? this.wrongCount,
+    skippedCount: skippedCount ?? this.skippedCount,
+    unsureCount: unsureCount ?? this.unsureCount,
+    pendingCount: pendingCount ?? this.pendingCount,
+    extraCount: extraCount ?? this.extraCount,
+    hintCount: hintCount ?? this.hintCount,
+    tashkeelDiffCount: tashkeelDiffCount ?? this.tashkeelDiffCount,
+  );
+  TasmeeAyahRow copyWithCompanion(TasmeeAyatCompanion data) {
+    return TasmeeAyahRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
+      day: data.day.present ? data.day.value : this.day,
+      surah: data.surah.present ? data.surah.value : this.surah,
+      ayah: data.ayah.present ? data.ayah.value : this.ayah,
+      wordCount: data.wordCount.present ? data.wordCount.value : this.wordCount,
+      rightCount: data.rightCount.present
+          ? data.rightCount.value
+          : this.rightCount,
+      wrongCount: data.wrongCount.present
+          ? data.wrongCount.value
+          : this.wrongCount,
+      skippedCount: data.skippedCount.present
+          ? data.skippedCount.value
+          : this.skippedCount,
+      unsureCount: data.unsureCount.present
+          ? data.unsureCount.value
+          : this.unsureCount,
+      pendingCount: data.pendingCount.present
+          ? data.pendingCount.value
+          : this.pendingCount,
+      extraCount: data.extraCount.present
+          ? data.extraCount.value
+          : this.extraCount,
+      hintCount: data.hintCount.present ? data.hintCount.value : this.hintCount,
+      tashkeelDiffCount: data.tashkeelDiffCount.present
+          ? data.tashkeelDiffCount.value
+          : this.tashkeelDiffCount,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TasmeeAyahRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('day: $day, ')
+          ..write('surah: $surah, ')
+          ..write('ayah: $ayah, ')
+          ..write('wordCount: $wordCount, ')
+          ..write('rightCount: $rightCount, ')
+          ..write('wrongCount: $wrongCount, ')
+          ..write('skippedCount: $skippedCount, ')
+          ..write('unsureCount: $unsureCount, ')
+          ..write('pendingCount: $pendingCount, ')
+          ..write('extraCount: $extraCount, ')
+          ..write('hintCount: $hintCount, ')
+          ..write('tashkeelDiffCount: $tashkeelDiffCount')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sessionId,
+    day,
+    surah,
+    ayah,
+    wordCount,
+    rightCount,
+    wrongCount,
+    skippedCount,
+    unsureCount,
+    pendingCount,
+    extraCount,
+    hintCount,
+    tashkeelDiffCount,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TasmeeAyahRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sessionId == this.sessionId &&
+          other.day == this.day &&
+          other.surah == this.surah &&
+          other.ayah == this.ayah &&
+          other.wordCount == this.wordCount &&
+          other.rightCount == this.rightCount &&
+          other.wrongCount == this.wrongCount &&
+          other.skippedCount == this.skippedCount &&
+          other.unsureCount == this.unsureCount &&
+          other.pendingCount == this.pendingCount &&
+          other.extraCount == this.extraCount &&
+          other.hintCount == this.hintCount &&
+          other.tashkeelDiffCount == this.tashkeelDiffCount);
+}
+
+class TasmeeAyatCompanion extends UpdateCompanion<TasmeeAyahRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<String> sessionId;
+  final Value<DateTime> day;
+  final Value<int> surah;
+  final Value<int> ayah;
+  final Value<int> wordCount;
+  final Value<int> rightCount;
+  final Value<int> wrongCount;
+  final Value<int> skippedCount;
+  final Value<int> unsureCount;
+  final Value<int> pendingCount;
+  final Value<int> extraCount;
+  final Value<int> hintCount;
+  final Value<int> tashkeelDiffCount;
+  final Value<int> rowid;
+  const TasmeeAyatCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sessionId = const Value.absent(),
+    this.day = const Value.absent(),
+    this.surah = const Value.absent(),
+    this.ayah = const Value.absent(),
+    this.wordCount = const Value.absent(),
+    this.rightCount = const Value.absent(),
+    this.wrongCount = const Value.absent(),
+    this.skippedCount = const Value.absent(),
+    this.unsureCount = const Value.absent(),
+    this.pendingCount = const Value.absent(),
+    this.extraCount = const Value.absent(),
+    this.hintCount = const Value.absent(),
+    this.tashkeelDiffCount = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TasmeeAyatCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    required String sessionId,
+    required DateTime day,
+    required int surah,
+    required int ayah,
+    this.wordCount = const Value.absent(),
+    this.rightCount = const Value.absent(),
+    this.wrongCount = const Value.absent(),
+    this.skippedCount = const Value.absent(),
+    this.unsureCount = const Value.absent(),
+    this.pendingCount = const Value.absent(),
+    this.extraCount = const Value.absent(),
+    this.hintCount = const Value.absent(),
+    this.tashkeelDiffCount = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : sessionId = Value(sessionId),
+       day = Value(day),
+       surah = Value(surah),
+       ayah = Value(ayah);
+  static Insertable<TasmeeAyahRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? sessionId,
+    Expression<DateTime>? day,
+    Expression<int>? surah,
+    Expression<int>? ayah,
+    Expression<int>? wordCount,
+    Expression<int>? rightCount,
+    Expression<int>? wrongCount,
+    Expression<int>? skippedCount,
+    Expression<int>? unsureCount,
+    Expression<int>? pendingCount,
+    Expression<int>? extraCount,
+    Expression<int>? hintCount,
+    Expression<int>? tashkeelDiffCount,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sessionId != null) 'session_id': sessionId,
+      if (day != null) 'day': day,
+      if (surah != null) 'surah': surah,
+      if (ayah != null) 'ayah': ayah,
+      if (wordCount != null) 'word_count': wordCount,
+      if (rightCount != null) 'right_count': rightCount,
+      if (wrongCount != null) 'wrong_count': wrongCount,
+      if (skippedCount != null) 'skipped_count': skippedCount,
+      if (unsureCount != null) 'unsure_count': unsureCount,
+      if (pendingCount != null) 'pending_count': pendingCount,
+      if (extraCount != null) 'extra_count': extraCount,
+      if (hintCount != null) 'hint_count': hintCount,
+      if (tashkeelDiffCount != null) 'tashkeel_diff_count': tashkeelDiffCount,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TasmeeAyatCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<String>? sessionId,
+    Value<DateTime>? day,
+    Value<int>? surah,
+    Value<int>? ayah,
+    Value<int>? wordCount,
+    Value<int>? rightCount,
+    Value<int>? wrongCount,
+    Value<int>? skippedCount,
+    Value<int>? unsureCount,
+    Value<int>? pendingCount,
+    Value<int>? extraCount,
+    Value<int>? hintCount,
+    Value<int>? tashkeelDiffCount,
+    Value<int>? rowid,
+  }) {
+    return TasmeeAyatCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sessionId: sessionId ?? this.sessionId,
+      day: day ?? this.day,
+      surah: surah ?? this.surah,
+      ayah: ayah ?? this.ayah,
+      wordCount: wordCount ?? this.wordCount,
+      rightCount: rightCount ?? this.rightCount,
+      wrongCount: wrongCount ?? this.wrongCount,
+      skippedCount: skippedCount ?? this.skippedCount,
+      unsureCount: unsureCount ?? this.unsureCount,
+      pendingCount: pendingCount ?? this.pendingCount,
+      extraCount: extraCount ?? this.extraCount,
+      hintCount: hintCount ?? this.hintCount,
+      tashkeelDiffCount: tashkeelDiffCount ?? this.tashkeelDiffCount,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sessionId.present) {
+      map['session_id'] = Variable<String>(sessionId.value);
+    }
+    if (day.present) {
+      map['day'] = Variable<DateTime>(
+        $TasmeeAyatTable.$converterday.toSql(day.value),
+      );
+    }
+    if (surah.present) {
+      map['surah'] = Variable<int>(surah.value);
+    }
+    if (ayah.present) {
+      map['ayah'] = Variable<int>(ayah.value);
+    }
+    if (wordCount.present) {
+      map['word_count'] = Variable<int>(wordCount.value);
+    }
+    if (rightCount.present) {
+      map['right_count'] = Variable<int>(rightCount.value);
+    }
+    if (wrongCount.present) {
+      map['wrong_count'] = Variable<int>(wrongCount.value);
+    }
+    if (skippedCount.present) {
+      map['skipped_count'] = Variable<int>(skippedCount.value);
+    }
+    if (unsureCount.present) {
+      map['unsure_count'] = Variable<int>(unsureCount.value);
+    }
+    if (pendingCount.present) {
+      map['pending_count'] = Variable<int>(pendingCount.value);
+    }
+    if (extraCount.present) {
+      map['extra_count'] = Variable<int>(extraCount.value);
+    }
+    if (hintCount.present) {
+      map['hint_count'] = Variable<int>(hintCount.value);
+    }
+    if (tashkeelDiffCount.present) {
+      map['tashkeel_diff_count'] = Variable<int>(tashkeelDiffCount.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TasmeeAyatCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('day: $day, ')
+          ..write('surah: $surah, ')
+          ..write('ayah: $ayah, ')
+          ..write('wordCount: $wordCount, ')
+          ..write('rightCount: $rightCount, ')
+          ..write('wrongCount: $wrongCount, ')
+          ..write('skippedCount: $skippedCount, ')
+          ..write('unsureCount: $unsureCount, ')
+          ..write('pendingCount: $pendingCount, ')
+          ..write('extraCount: $extraCount, ')
+          ..write('hintCount: $hintCount, ')
+          ..write('tashkeelDiffCount: $tashkeelDiffCount, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TasmeeMistakesTable extends TasmeeMistakes
+    with TableInfo<$TasmeeMistakesTable, TasmeeMistakeRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TasmeeMistakesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sessionIdMeta = const VerificationMeta(
+    'sessionId',
+  );
+  @override
+  late final GeneratedColumn<String> sessionId = GeneratedColumn<String>(
+    'session_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _atMeta = const VerificationMeta('at');
+  @override
+  late final GeneratedColumn<DateTime> at = GeneratedColumn<DateTime>(
+    'at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DateTime, DateTime> day =
+      GeneratedColumn<DateTime>(
+        'day',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      ).withConverter<DateTime>($TasmeeMistakesTable.$converterday);
+  static const VerificationMeta _surahMeta = const VerificationMeta('surah');
+  @override
+  late final GeneratedColumn<int> surah = GeneratedColumn<int>(
+    'surah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ayahMeta = const VerificationMeta('ayah');
+  @override
+  late final GeneratedColumn<int> ayah = GeneratedColumn<int>(
+    'ayah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _wordIndexMeta = const VerificationMeta(
+    'wordIndex',
+  );
+  @override
+  late final GeneratedColumn<int> wordIndex = GeneratedColumn<int>(
+    'word_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<MistakeKind, String> kind =
+      GeneratedColumn<String>(
+        'kind',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<MistakeKind>($TasmeeMistakesTable.$converterkind);
+  static const VerificationMeta _expectedMeta = const VerificationMeta(
+    'expected',
+  );
+  @override
+  late final GeneratedColumn<String> expected = GeneratedColumn<String>(
+    'expected',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _spanStartMeta = const VerificationMeta(
+    'spanStart',
+  );
+  @override
+  late final GeneratedColumn<int> spanStart = GeneratedColumn<int>(
+    'span_start',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _spanEndMeta = const VerificationMeta(
+    'spanEnd',
+  );
+  @override
+  late final GeneratedColumn<int> spanEnd = GeneratedColumn<int>(
+    'span_end',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _heardMeta = const VerificationMeta('heard');
+  @override
+  late final GeneratedColumn<String> heard = GeneratedColumn<String>(
+    'heard',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _hintedMeta = const VerificationMeta('hinted');
+  @override
+  late final GeneratedColumn<bool> hinted = GeneratedColumn<bool>(
+    'hinted',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("hinted" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _confidenceMeta = const VerificationMeta(
+    'confidence',
+  );
+  @override
+  late final GeneratedColumn<double> confidence = GeneratedColumn<double>(
+    'confidence',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _tashkeelOnlyMeta = const VerificationMeta(
+    'tashkeelOnly',
+  );
+  @override
+  late final GeneratedColumn<bool> tashkeelOnly = GeneratedColumn<bool>(
+    'tashkeel_only',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("tashkeel_only" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sessionId,
+    at,
+    day,
+    surah,
+    ayah,
+    wordIndex,
+    kind,
+    expected,
+    spanStart,
+    spanEnd,
+    heard,
+    hinted,
+    confidence,
+    tashkeelOnly,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'tasmee_mistakes';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TasmeeMistakeRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('session_id')) {
+      context.handle(
+        _sessionIdMeta,
+        sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sessionIdMeta);
+    }
+    if (data.containsKey('at')) {
+      context.handle(_atMeta, at.isAcceptableOrUnknown(data['at']!, _atMeta));
+    } else if (isInserting) {
+      context.missing(_atMeta);
+    }
+    if (data.containsKey('surah')) {
+      context.handle(
+        _surahMeta,
+        surah.isAcceptableOrUnknown(data['surah']!, _surahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_surahMeta);
+    }
+    if (data.containsKey('ayah')) {
+      context.handle(
+        _ayahMeta,
+        ayah.isAcceptableOrUnknown(data['ayah']!, _ayahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ayahMeta);
+    }
+    if (data.containsKey('word_index')) {
+      context.handle(
+        _wordIndexMeta,
+        wordIndex.isAcceptableOrUnknown(data['word_index']!, _wordIndexMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_wordIndexMeta);
+    }
+    if (data.containsKey('expected')) {
+      context.handle(
+        _expectedMeta,
+        expected.isAcceptableOrUnknown(data['expected']!, _expectedMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_expectedMeta);
+    }
+    if (data.containsKey('span_start')) {
+      context.handle(
+        _spanStartMeta,
+        spanStart.isAcceptableOrUnknown(data['span_start']!, _spanStartMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_spanStartMeta);
+    }
+    if (data.containsKey('span_end')) {
+      context.handle(
+        _spanEndMeta,
+        spanEnd.isAcceptableOrUnknown(data['span_end']!, _spanEndMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_spanEndMeta);
+    }
+    if (data.containsKey('heard')) {
+      context.handle(
+        _heardMeta,
+        heard.isAcceptableOrUnknown(data['heard']!, _heardMeta),
+      );
+    }
+    if (data.containsKey('hinted')) {
+      context.handle(
+        _hintedMeta,
+        hinted.isAcceptableOrUnknown(data['hinted']!, _hintedMeta),
+      );
+    }
+    if (data.containsKey('confidence')) {
+      context.handle(
+        _confidenceMeta,
+        confidence.isAcceptableOrUnknown(data['confidence']!, _confidenceMeta),
+      );
+    }
+    if (data.containsKey('tashkeel_only')) {
+      context.handle(
+        _tashkeelOnlyMeta,
+        tashkeelOnly.isAcceptableOrUnknown(
+          data['tashkeel_only']!,
+          _tashkeelOnlyMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TasmeeMistakeRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TasmeeMistakeRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sessionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}session_id'],
+      )!,
+      at: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}at'],
+      )!,
+      day: $TasmeeMistakesTable.$converterday.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}day'],
+        )!,
+      ),
+      surah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}surah'],
+      )!,
+      ayah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}ayah'],
+      )!,
+      wordIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}word_index'],
+      )!,
+      kind: $TasmeeMistakesTable.$converterkind.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}kind'],
+        )!,
+      ),
+      expected: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}expected'],
+      )!,
+      spanStart: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}span_start'],
+      )!,
+      spanEnd: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}span_end'],
+      )!,
+      heard: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}heard'],
+      ),
+      hinted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}hinted'],
+      )!,
+      confidence: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}confidence'],
+      ),
+      tashkeelOnly: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}tashkeel_only'],
+      )!,
+    );
+  }
+
+  @override
+  $TasmeeMistakesTable createAlias(String alias) {
+    return $TasmeeMistakesTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<DateTime, DateTime> $converterday =
+      const CalendarDayConverter();
+  static JsonTypeConverter2<MistakeKind, String, String> $converterkind =
+      const EnumNameConverter<MistakeKind>(MistakeKind.values);
+}
+
+class TasmeeMistakeRow extends DataClass
+    implements Insertable<TasmeeMistakeRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  /// The session it belongs to (`tasmee_sessions.id`).
+  final String sessionId;
+
+  /// The moment it happened.
+  final DateTime at;
+
+  /// Its calendar day, zone-free.
+  final DateTime day;
+  final int surah;
+  final int ayah;
+
+  /// Which word of the ayah, 0-based, counting real words only (the Uthmani
+  /// pause and hizb signs are not words). For [MistakeKind.extra] it is the
+  /// word the extra came **before**.
+  final int wordIndex;
+  final MistakeKind kind;
+
+  /// The verified word, verbatim. Empty for an extra word, where the text
+  /// expected nothing.
+  final String expected;
+
+  /// Code-unit range of [expected] in the **original** ayah text. For an
+  /// extra word `span_start == span_end`, at the point it was heard.
+  final int spanStart;
+  final int spanEnd;
+
+  /// What the recogniser thought it heard. **Not Quran text**; null when
+  /// nothing was heard (a skipped word).
+  final String? heard;
+
+  /// A peek had already revealed this word.
+  final bool hinted;
+
+  /// The recogniser's own confidence, `0.0 … 1.0`.
+  final double? confidence;
+
+  /// The letters were right and only the harakat differed – the
+  /// experimental check. Kept out of every count.
+  final bool tashkeelOnly;
+  const TasmeeMistakeRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sessionId,
+    required this.at,
+    required this.day,
+    required this.surah,
+    required this.ayah,
+    required this.wordIndex,
+    required this.kind,
+    required this.expected,
+    required this.spanStart,
+    required this.spanEnd,
+    this.heard,
+    required this.hinted,
+    this.confidence,
+    required this.tashkeelOnly,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['session_id'] = Variable<String>(sessionId);
+    map['at'] = Variable<DateTime>(at);
+    {
+      map['day'] = Variable<DateTime>(
+        $TasmeeMistakesTable.$converterday.toSql(day),
+      );
+    }
+    map['surah'] = Variable<int>(surah);
+    map['ayah'] = Variable<int>(ayah);
+    map['word_index'] = Variable<int>(wordIndex);
+    {
+      map['kind'] = Variable<String>(
+        $TasmeeMistakesTable.$converterkind.toSql(kind),
+      );
+    }
+    map['expected'] = Variable<String>(expected);
+    map['span_start'] = Variable<int>(spanStart);
+    map['span_end'] = Variable<int>(spanEnd);
+    if (!nullToAbsent || heard != null) {
+      map['heard'] = Variable<String>(heard);
+    }
+    map['hinted'] = Variable<bool>(hinted);
+    if (!nullToAbsent || confidence != null) {
+      map['confidence'] = Variable<double>(confidence);
+    }
+    map['tashkeel_only'] = Variable<bool>(tashkeelOnly);
+    return map;
+  }
+
+  TasmeeMistakesCompanion toCompanion(bool nullToAbsent) {
+    return TasmeeMistakesCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sessionId: Value(sessionId),
+      at: Value(at),
+      day: Value(day),
+      surah: Value(surah),
+      ayah: Value(ayah),
+      wordIndex: Value(wordIndex),
+      kind: Value(kind),
+      expected: Value(expected),
+      spanStart: Value(spanStart),
+      spanEnd: Value(spanEnd),
+      heard: heard == null && nullToAbsent
+          ? const Value.absent()
+          : Value(heard),
+      hinted: Value(hinted),
+      confidence: confidence == null && nullToAbsent
+          ? const Value.absent()
+          : Value(confidence),
+      tashkeelOnly: Value(tashkeelOnly),
+    );
+  }
+
+  factory TasmeeMistakeRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TasmeeMistakeRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sessionId: serializer.fromJson<String>(json['sessionId']),
+      at: serializer.fromJson<DateTime>(json['at']),
+      day: serializer.fromJson<DateTime>(json['day']),
+      surah: serializer.fromJson<int>(json['surah']),
+      ayah: serializer.fromJson<int>(json['ayah']),
+      wordIndex: serializer.fromJson<int>(json['wordIndex']),
+      kind: $TasmeeMistakesTable.$converterkind.fromJson(
+        serializer.fromJson<String>(json['kind']),
+      ),
+      expected: serializer.fromJson<String>(json['expected']),
+      spanStart: serializer.fromJson<int>(json['spanStart']),
+      spanEnd: serializer.fromJson<int>(json['spanEnd']),
+      heard: serializer.fromJson<String?>(json['heard']),
+      hinted: serializer.fromJson<bool>(json['hinted']),
+      confidence: serializer.fromJson<double?>(json['confidence']),
+      tashkeelOnly: serializer.fromJson<bool>(json['tashkeelOnly']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sessionId': serializer.toJson<String>(sessionId),
+      'at': serializer.toJson<DateTime>(at),
+      'day': serializer.toJson<DateTime>(day),
+      'surah': serializer.toJson<int>(surah),
+      'ayah': serializer.toJson<int>(ayah),
+      'wordIndex': serializer.toJson<int>(wordIndex),
+      'kind': serializer.toJson<String>(
+        $TasmeeMistakesTable.$converterkind.toJson(kind),
+      ),
+      'expected': serializer.toJson<String>(expected),
+      'spanStart': serializer.toJson<int>(spanStart),
+      'spanEnd': serializer.toJson<int>(spanEnd),
+      'heard': serializer.toJson<String?>(heard),
+      'hinted': serializer.toJson<bool>(hinted),
+      'confidence': serializer.toJson<double?>(confidence),
+      'tashkeelOnly': serializer.toJson<bool>(tashkeelOnly),
+    };
+  }
+
+  TasmeeMistakeRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? sessionId,
+    DateTime? at,
+    DateTime? day,
+    int? surah,
+    int? ayah,
+    int? wordIndex,
+    MistakeKind? kind,
+    String? expected,
+    int? spanStart,
+    int? spanEnd,
+    Value<String?> heard = const Value.absent(),
+    bool? hinted,
+    Value<double?> confidence = const Value.absent(),
+    bool? tashkeelOnly,
+  }) => TasmeeMistakeRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sessionId: sessionId ?? this.sessionId,
+    at: at ?? this.at,
+    day: day ?? this.day,
+    surah: surah ?? this.surah,
+    ayah: ayah ?? this.ayah,
+    wordIndex: wordIndex ?? this.wordIndex,
+    kind: kind ?? this.kind,
+    expected: expected ?? this.expected,
+    spanStart: spanStart ?? this.spanStart,
+    spanEnd: spanEnd ?? this.spanEnd,
+    heard: heard.present ? heard.value : this.heard,
+    hinted: hinted ?? this.hinted,
+    confidence: confidence.present ? confidence.value : this.confidence,
+    tashkeelOnly: tashkeelOnly ?? this.tashkeelOnly,
+  );
+  TasmeeMistakeRow copyWithCompanion(TasmeeMistakesCompanion data) {
+    return TasmeeMistakeRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
+      at: data.at.present ? data.at.value : this.at,
+      day: data.day.present ? data.day.value : this.day,
+      surah: data.surah.present ? data.surah.value : this.surah,
+      ayah: data.ayah.present ? data.ayah.value : this.ayah,
+      wordIndex: data.wordIndex.present ? data.wordIndex.value : this.wordIndex,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      expected: data.expected.present ? data.expected.value : this.expected,
+      spanStart: data.spanStart.present ? data.spanStart.value : this.spanStart,
+      spanEnd: data.spanEnd.present ? data.spanEnd.value : this.spanEnd,
+      heard: data.heard.present ? data.heard.value : this.heard,
+      hinted: data.hinted.present ? data.hinted.value : this.hinted,
+      confidence: data.confidence.present
+          ? data.confidence.value
+          : this.confidence,
+      tashkeelOnly: data.tashkeelOnly.present
+          ? data.tashkeelOnly.value
+          : this.tashkeelOnly,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TasmeeMistakeRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('at: $at, ')
+          ..write('day: $day, ')
+          ..write('surah: $surah, ')
+          ..write('ayah: $ayah, ')
+          ..write('wordIndex: $wordIndex, ')
+          ..write('kind: $kind, ')
+          ..write('expected: $expected, ')
+          ..write('spanStart: $spanStart, ')
+          ..write('spanEnd: $spanEnd, ')
+          ..write('heard: $heard, ')
+          ..write('hinted: $hinted, ')
+          ..write('confidence: $confidence, ')
+          ..write('tashkeelOnly: $tashkeelOnly')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sessionId,
+    at,
+    day,
+    surah,
+    ayah,
+    wordIndex,
+    kind,
+    expected,
+    spanStart,
+    spanEnd,
+    heard,
+    hinted,
+    confidence,
+    tashkeelOnly,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TasmeeMistakeRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sessionId == this.sessionId &&
+          other.at == this.at &&
+          other.day == this.day &&
+          other.surah == this.surah &&
+          other.ayah == this.ayah &&
+          other.wordIndex == this.wordIndex &&
+          other.kind == this.kind &&
+          other.expected == this.expected &&
+          other.spanStart == this.spanStart &&
+          other.spanEnd == this.spanEnd &&
+          other.heard == this.heard &&
+          other.hinted == this.hinted &&
+          other.confidence == this.confidence &&
+          other.tashkeelOnly == this.tashkeelOnly);
+}
+
+class TasmeeMistakesCompanion extends UpdateCompanion<TasmeeMistakeRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<String> sessionId;
+  final Value<DateTime> at;
+  final Value<DateTime> day;
+  final Value<int> surah;
+  final Value<int> ayah;
+  final Value<int> wordIndex;
+  final Value<MistakeKind> kind;
+  final Value<String> expected;
+  final Value<int> spanStart;
+  final Value<int> spanEnd;
+  final Value<String?> heard;
+  final Value<bool> hinted;
+  final Value<double?> confidence;
+  final Value<bool> tashkeelOnly;
+  final Value<int> rowid;
+  const TasmeeMistakesCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sessionId = const Value.absent(),
+    this.at = const Value.absent(),
+    this.day = const Value.absent(),
+    this.surah = const Value.absent(),
+    this.ayah = const Value.absent(),
+    this.wordIndex = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.expected = const Value.absent(),
+    this.spanStart = const Value.absent(),
+    this.spanEnd = const Value.absent(),
+    this.heard = const Value.absent(),
+    this.hinted = const Value.absent(),
+    this.confidence = const Value.absent(),
+    this.tashkeelOnly = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TasmeeMistakesCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    required String sessionId,
+    required DateTime at,
+    required DateTime day,
+    required int surah,
+    required int ayah,
+    required int wordIndex,
+    required MistakeKind kind,
+    required String expected,
+    required int spanStart,
+    required int spanEnd,
+    this.heard = const Value.absent(),
+    this.hinted = const Value.absent(),
+    this.confidence = const Value.absent(),
+    this.tashkeelOnly = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : sessionId = Value(sessionId),
+       at = Value(at),
+       day = Value(day),
+       surah = Value(surah),
+       ayah = Value(ayah),
+       wordIndex = Value(wordIndex),
+       kind = Value(kind),
+       expected = Value(expected),
+       spanStart = Value(spanStart),
+       spanEnd = Value(spanEnd);
+  static Insertable<TasmeeMistakeRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? sessionId,
+    Expression<DateTime>? at,
+    Expression<DateTime>? day,
+    Expression<int>? surah,
+    Expression<int>? ayah,
+    Expression<int>? wordIndex,
+    Expression<String>? kind,
+    Expression<String>? expected,
+    Expression<int>? spanStart,
+    Expression<int>? spanEnd,
+    Expression<String>? heard,
+    Expression<bool>? hinted,
+    Expression<double>? confidence,
+    Expression<bool>? tashkeelOnly,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sessionId != null) 'session_id': sessionId,
+      if (at != null) 'at': at,
+      if (day != null) 'day': day,
+      if (surah != null) 'surah': surah,
+      if (ayah != null) 'ayah': ayah,
+      if (wordIndex != null) 'word_index': wordIndex,
+      if (kind != null) 'kind': kind,
+      if (expected != null) 'expected': expected,
+      if (spanStart != null) 'span_start': spanStart,
+      if (spanEnd != null) 'span_end': spanEnd,
+      if (heard != null) 'heard': heard,
+      if (hinted != null) 'hinted': hinted,
+      if (confidence != null) 'confidence': confidence,
+      if (tashkeelOnly != null) 'tashkeel_only': tashkeelOnly,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TasmeeMistakesCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<String>? sessionId,
+    Value<DateTime>? at,
+    Value<DateTime>? day,
+    Value<int>? surah,
+    Value<int>? ayah,
+    Value<int>? wordIndex,
+    Value<MistakeKind>? kind,
+    Value<String>? expected,
+    Value<int>? spanStart,
+    Value<int>? spanEnd,
+    Value<String?>? heard,
+    Value<bool>? hinted,
+    Value<double?>? confidence,
+    Value<bool>? tashkeelOnly,
+    Value<int>? rowid,
+  }) {
+    return TasmeeMistakesCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sessionId: sessionId ?? this.sessionId,
+      at: at ?? this.at,
+      day: day ?? this.day,
+      surah: surah ?? this.surah,
+      ayah: ayah ?? this.ayah,
+      wordIndex: wordIndex ?? this.wordIndex,
+      kind: kind ?? this.kind,
+      expected: expected ?? this.expected,
+      spanStart: spanStart ?? this.spanStart,
+      spanEnd: spanEnd ?? this.spanEnd,
+      heard: heard ?? this.heard,
+      hinted: hinted ?? this.hinted,
+      confidence: confidence ?? this.confidence,
+      tashkeelOnly: tashkeelOnly ?? this.tashkeelOnly,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sessionId.present) {
+      map['session_id'] = Variable<String>(sessionId.value);
+    }
+    if (at.present) {
+      map['at'] = Variable<DateTime>(at.value);
+    }
+    if (day.present) {
+      map['day'] = Variable<DateTime>(
+        $TasmeeMistakesTable.$converterday.toSql(day.value),
+      );
+    }
+    if (surah.present) {
+      map['surah'] = Variable<int>(surah.value);
+    }
+    if (ayah.present) {
+      map['ayah'] = Variable<int>(ayah.value);
+    }
+    if (wordIndex.present) {
+      map['word_index'] = Variable<int>(wordIndex.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(
+        $TasmeeMistakesTable.$converterkind.toSql(kind.value),
+      );
+    }
+    if (expected.present) {
+      map['expected'] = Variable<String>(expected.value);
+    }
+    if (spanStart.present) {
+      map['span_start'] = Variable<int>(spanStart.value);
+    }
+    if (spanEnd.present) {
+      map['span_end'] = Variable<int>(spanEnd.value);
+    }
+    if (heard.present) {
+      map['heard'] = Variable<String>(heard.value);
+    }
+    if (hinted.present) {
+      map['hinted'] = Variable<bool>(hinted.value);
+    }
+    if (confidence.present) {
+      map['confidence'] = Variable<double>(confidence.value);
+    }
+    if (tashkeelOnly.present) {
+      map['tashkeel_only'] = Variable<bool>(tashkeelOnly.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TasmeeMistakesCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('at: $at, ')
+          ..write('day: $day, ')
+          ..write('surah: $surah, ')
+          ..write('ayah: $ayah, ')
+          ..write('wordIndex: $wordIndex, ')
+          ..write('kind: $kind, ')
+          ..write('expected: $expected, ')
+          ..write('spanStart: $spanStart, ')
+          ..write('spanEnd: $spanEnd, ')
+          ..write('heard: $heard, ')
+          ..write('hinted: $hinted, ')
+          ..write('confidence: $confidence, ')
+          ..write('tashkeelOnly: $tashkeelOnly, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$MadarDatabase extends GeneratedDatabase {
   _$MadarDatabase(QueryExecutor e) : super(e);
   late final $PlanetsTable planets = $PlanetsTable(this);
@@ -44122,6 +47404,9 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
       $RecipeIngredientsTable(this);
   late final $CookedMealsTable cookedMeals = $CookedMealsTable(this);
   late final $KitchenRulesTable kitchenRules = $KitchenRulesTable(this);
+  late final $TasmeeSessionsTable tasmeeSessions = $TasmeeSessionsTable(this);
+  late final $TasmeeAyatTable tasmeeAyat = $TasmeeAyatTable(this);
+  late final $TasmeeMistakesTable tasmeeMistakes = $TasmeeMistakesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -44199,6 +47484,9 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
     recipeIngredients,
     cookedMeals,
     kitchenRules,
+    tasmeeSessions,
+    tasmeeAyat,
+    tasmeeMistakes,
   ];
   @override
   DriftDatabaseOptions get options =>

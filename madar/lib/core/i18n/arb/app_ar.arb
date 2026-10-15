@@ -25667,5 +25667,145 @@
   "dayChatTitleIncomeUnknownBare": "قبضت، بس ما قلت قديش",
   "@dayChatTitleIncomeUnknownBare": {
     "description": "Daily chat: money in with no amount and nothing said about where from"
+  },
+  "tasmeeTitle": "التسميع",
+  "@tasmeeTitle": {
+    "description": "Part 13: reciting out loud and being checked against the verified text"
+  },
+  "tasmeeSubtitle": "سمّع، والتطبيق يتابعك كلمة كلمة",
+  "tasmeeHintNotRuling": "هاي مساعدة إلك، مش حكم. اللي يسمعه التطبيق ممكن يغلط، والنص اللي بين إيديك هو المرجع.",
+  "tasmeeOfflineNote": "كل إشي يصير على جوالك. لا صوتك ولا الكلام اللي سمعه التطبيق يطلع من الجوال.",
+  "tasmeeHeardLabel": "اللي سمعه التطبيق منك",
+  "@tasmeeHeardLabel": {
+    "description": "Always labelled, always in a different type: it is never Quran text"
+  },
+  "tasmeeVerifiedLabel": "النص المصحفي",
+  "tasmeeWordRight": "صح",
+  "tasmeeWordWrong": "كلمة غير",
+  "tasmeeWordSkipped": "كلمة مرقت",
+  "tasmeeWordExtra": "كلمة زيادة",
+  "tasmeeWordUnsure": "التطبيق ما تأكد",
+  "@tasmeeWordUnsure": {
+    "description": "Heard something but below the confidence floor; never counted as a mistake"
+  },
+  "tasmeeWordPending": "لسا ما وصلتها",
+  "tasmeeRepetitionNote": "رجعت قلت كلمات من نفس الآية. هاد مش غلط.",
+  "tasmeeBasmalaNote": "البسملة قبل السورة محسوبة عادي، مش كلمة زيادة.",
+  "tasmeePauseNote": "وقفت شوي وكمّلت. الوقفة مش غلط.",
+  "tasmeeTashkeelExperimental": "فحص التشكيل تجربة أولية، ومطفي بالعادة. الكلمة نفسها صح.",
+  "tasmeeTashkeelToggle": "افحص التشكيل كمان (تجربة)",
+  "tasmeeHideMarkersToggle": "خفّي أرقام الآيات وأنا أسمّع",
+  "tasmeeNoModelTitle": "التسميع لسا مش جاهز بهاي النسخة",
+  "tasmeeNoModelBody": "برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. القراءة والسماع شغّالين متل العادة.",
+  "tasmeePhoneCannotRunTitle": "جوالك ما بيقدر يشغّل التسميع",
+  "tasmeePhoneCannotRunBody": "برنامج التعرّف على الصوت بدّه جوال أقوى. القراءة والسماع شغّالين متل العادة.",
+  "tasmeeMicNeededTitle": "بدنا إذن المايك",
+  "tasmeeMicNeededBody": "المايك يفتح وأنت تسمّع بس، وصوتك ما ينسجّل ولا يطلع من الجوال.",
+  "tasmeeMicDeniedBody": "رفضت إذن المايك قبل. افتح إعدادات الجوال وسمّحه إذا بدك تسمّع.",
+  "tasmeeStart": "ابدأ التسميع",
+  "tasmeeStop": "خلّصت",
+  "tasmeeDiscard": "ألغِ",
+  "tasmeeHiddenTitle": "الآية المخفية",
+  "tasmeeHiddenBody": "الصفحة مخفية، والكلمة تبيّن لمّا تسمّعها صح.",
+  "tasmeePeek": "ورّيني كلمة",
+  "tasmeePeekCountsAsHint": "لمّا تورّيك كلمة، بتُحسب مساعدة، عشان قوّة الحفظ تطلع صادقة.",
+  "tasmeeHintsCount": "{count, plural, =0{بدون أي مساعدة} =1{مساعدة واحدة} =2{مساعدتان} few{{count} مساعدات} many{{count} مساعدة} other{{count} مساعدة}}",
+  "@tasmeeHintsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeBlanksTitle": "املأ الفراغ",
+  "tasmeeBlanksBody": "شيلنا كلمات من الآية، وسمّعها كاملة. الحساب على الكلمات المشيلة بس.",
+  "tasmeeBlanksCount": "{count, plural, =0{ما في فراغات} =1{فراغ واحد} =2{فراغان} few{{count} فراغات} many{{count} فراغًا} other{{count} فراغ}}",
+  "@tasmeeBlanksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeBlanksScore": "{right} من {total} صح",
+  "@tasmeeBlanksScore": {
+    "placeholders": {
+      "right": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeFindTitle": "وين هاي الآية",
+  "tasmeeFindBody": "سمّع أي مقطع، والتطبيق يقلّك السورة والآية، وكل إشي على الجوال.",
+  "tasmeeFindSure": "لقيتها",
+  "tasmeeFindSeveral": "هاد المقطع بأكثر من آية. اختار اللي بدك.",
+  "tasmeeFindUnsure": "أقرب إشي لقيته، بس التطبيق مش متأكد.",
+  "tasmeeFindNone": "ما لقيت هاد المقطع. جرّب سمّع شوي أكثر.",
+  "tasmeeFindTooShort": "سمّع ثلاث كلمات على الأقل، كلمتين موجودات بكل مكان.",
+  "tasmeeFindCandidates": "{count, plural, =0{ما في ولا نتيجة} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}",
+  "@tasmeeFindCandidates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeLogTitle": "سجل أخطائي",
+  "tasmeeLogEmptyTitle": "السجل لسا فاضي",
+  "tasmeeLogEmptyBody": "سمّع آية، وأي غلط بينزل هون باليوم والكلمة، وتقدر تمحيه وقت ما بدك.",
+  "tasmeeStatsTitle": "تقدّمي",
+  "tasmeeStatsAccuracy": "نسبة الصح",
+  "tasmeeWeakWordsTitle": "كلمات بتتعثّر فيها",
+  "tasmeeWeakAyatTitle": "آيات بدها مراجعة",
+  "tasmeeMistakesCount": "{count, plural, =0{ما في ولا غلط} =1{غلط واحد} =2{غلطتان} few{{count} أغلاط} many{{count} غلطًا} other{{count} غلط}}",
+  "@tasmeeMistakesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeWordsCount": "{count, plural, =0{ما في كلمات} =1{كلمة واحدة} =2{كلمتان} few{{count} كلمات} many{{count} كلمة} other{{count} كلمة}}",
+  "@tasmeeWordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeSessionsCount": "{count, plural, =0{ولا مرة} =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+  "@tasmeeSessionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeStreakDays": "{count, plural, =0{بلّش من اليوم} =1{يوم ورا التاني} =2{يومان ورا بعض} few{{count} أيام ورا بعض} many{{count} يومًا ورا بعض} other{{count} يوم ورا بعض}}",
+  "@tasmeeStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasmeeDeleteSession": "امسح هاي المرة",
+  "tasmeeClearLog": "امسح السجل كله",
+  "tasmeeExportTitle": "صدّر السجل",
+  "tasmeeExportBody": "ملف واحد فيه كل مرة سمّعت فيها وكل غلط، عشان برنامج «فلك» على الكمبيوتر يقدر يقراه. ما فيه ولا صوت.",
+  "tasmeeExportDone": "الملف جاهز",
+  "tasmeeRecogniserCredit": "التعرّف على الصوت: {name} ({licence})",
+  "@tasmeeRecogniserCredit": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "licence": {
+        "type": "String"
+      }
+    }
   }
 }

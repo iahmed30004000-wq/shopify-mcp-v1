@@ -11,6 +11,7 @@ import 'tables/life_tables.dart';
 import 'tables/list_tables.dart';
 import 'tables/money_tables.dart';
 import 'tables/plan_tables.dart';
+import 'tables/tasmee_tables.dart';
 import '../domain/enums.dart';
 
 export 'seed/seeder.dart' show SeedOptions;
@@ -34,6 +35,7 @@ part 'database.g.dart';
   AppliedPlans, AppliedPlanItems,
   RecordLists, RecordListItems,
   PantryItems, Recipes, RecipeIngredients, CookedMeals, KitchenRules,
+  TasmeeSessions, TasmeeAyat, TasmeeMistakes,
 ])
 class MadarDatabase extends _$MadarDatabase {
   /// Wraps an executor. Pass [seed] to seed the generic defaults (planets,
@@ -46,7 +48,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 6;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -95,6 +97,15 @@ class MadarDatabase extends _$MadarDatabase {
             await m.createTable(recipeIngredients);
             await m.createTable(cookedMeals);
             await m.createTable(kitchenRules);
+          }
+          // v7: «التسميع» – the recitation log Part 13 writes and Part 14
+          // reads: one row per session, one per ayah of it, one per word
+          // that went wrong. Nothing of ours is written and no audio is
+          // stored: a fresh install is empty until he recites.
+          if (from < 7) {
+            await m.createTable(tasmeeSessions);
+            await m.createTable(tasmeeAyat);
+            await m.createTable(tasmeeMistakes);
           }
         },
         beforeOpen: (details) async {

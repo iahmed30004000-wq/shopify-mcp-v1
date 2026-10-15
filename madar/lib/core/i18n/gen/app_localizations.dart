@@ -43282,6 +43282,378 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'قبضت، بس ما قلت قديش'**
   String get dayChatTitleIncomeUnknownBare;
+
+  /// Part 13: reciting out loud and being checked against the verified text
+  ///
+  /// In ar, this message translates to:
+  /// **'التسميع'**
+  String get tasmeeTitle;
+
+  /// No description provided for @tasmeeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع، والتطبيق يتابعك كلمة كلمة'**
+  String get tasmeeSubtitle;
+
+  /// No description provided for @tasmeeHintNotRuling.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاي مساعدة إلك، مش حكم. اللي يسمعه التطبيق ممكن يغلط، والنص اللي بين إيديك هو المرجع.'**
+  String get tasmeeHintNotRuling;
+
+  /// No description provided for @tasmeeOfflineNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل إشي يصير على جوالك. لا صوتك ولا الكلام اللي سمعه التطبيق يطلع من الجوال.'**
+  String get tasmeeOfflineNote;
+
+  /// Always labelled, always in a different type: it is never Quran text
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي سمعه التطبيق منك'**
+  String get tasmeeHeardLabel;
+
+  /// No description provided for @tasmeeVerifiedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'النص المصحفي'**
+  String get tasmeeVerifiedLabel;
+
+  /// No description provided for @tasmeeWordRight.
+  ///
+  /// In ar, this message translates to:
+  /// **'صح'**
+  String get tasmeeWordRight;
+
+  /// No description provided for @tasmeeWordWrong.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة غير'**
+  String get tasmeeWordWrong;
+
+  /// No description provided for @tasmeeWordSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة مرقت'**
+  String get tasmeeWordSkipped;
+
+  /// No description provided for @tasmeeWordExtra.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة زيادة'**
+  String get tasmeeWordExtra;
+
+  /// Heard something but below the confidence floor; never counted as a mistake
+  ///
+  /// In ar, this message translates to:
+  /// **'التطبيق ما تأكد'**
+  String get tasmeeWordUnsure;
+
+  /// No description provided for @tasmeeWordPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا ما وصلتها'**
+  String get tasmeeWordPending;
+
+  /// No description provided for @tasmeeRepetitionNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجعت قلت كلمات من نفس الآية. هاد مش غلط.'**
+  String get tasmeeRepetitionNote;
+
+  /// No description provided for @tasmeeBasmalaNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'البسملة قبل السورة محسوبة عادي، مش كلمة زيادة.'**
+  String get tasmeeBasmalaNote;
+
+  /// No description provided for @tasmeePauseNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقفت شوي وكمّلت. الوقفة مش غلط.'**
+  String get tasmeePauseNote;
+
+  /// No description provided for @tasmeeTashkeelExperimental.
+  ///
+  /// In ar, this message translates to:
+  /// **'فحص التشكيل تجربة أولية، ومطفي بالعادة. الكلمة نفسها صح.'**
+  String get tasmeeTashkeelExperimental;
+
+  /// No description provided for @tasmeeTashkeelToggle.
+  ///
+  /// In ar, this message translates to:
+  /// **'افحص التشكيل كمان (تجربة)'**
+  String get tasmeeTashkeelToggle;
+
+  /// No description provided for @tasmeeHideMarkersToggle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خفّي أرقام الآيات وأنا أسمّع'**
+  String get tasmeeHideMarkersToggle;
+
+  /// No description provided for @tasmeeNoModelTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسميع لسا مش جاهز بهاي النسخة'**
+  String get tasmeeNoModelTitle;
+
+  /// No description provided for @tasmeeNoModelBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. القراءة والسماع شغّالين متل العادة.'**
+  String get tasmeeNoModelBody;
+
+  /// No description provided for @tasmeePhoneCannotRunTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جوالك ما بيقدر يشغّل التسميع'**
+  String get tasmeePhoneCannotRunTitle;
+
+  /// No description provided for @tasmeePhoneCannotRunBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'برنامج التعرّف على الصوت بدّه جوال أقوى. القراءة والسماع شغّالين متل العادة.'**
+  String get tasmeePhoneCannotRunBody;
+
+  /// No description provided for @tasmeeMicNeededTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدنا إذن المايك'**
+  String get tasmeeMicNeededTitle;
+
+  /// No description provided for @tasmeeMicNeededBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'المايك يفتح وأنت تسمّع بس، وصوتك ما ينسجّل ولا يطلع من الجوال.'**
+  String get tasmeeMicNeededBody;
+
+  /// No description provided for @tasmeeMicDeniedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفضت إذن المايك قبل. افتح إعدادات الجوال وسمّحه إذا بدك تسمّع.'**
+  String get tasmeeMicDeniedBody;
+
+  /// No description provided for @tasmeeStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ التسميع'**
+  String get tasmeeStart;
+
+  /// No description provided for @tasmeeStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت'**
+  String get tasmeeStop;
+
+  /// No description provided for @tasmeeDiscard.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألغِ'**
+  String get tasmeeDiscard;
+
+  /// No description provided for @tasmeeHiddenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية المخفية'**
+  String get tasmeeHiddenTitle;
+
+  /// No description provided for @tasmeeHiddenBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصفحة مخفية، والكلمة تبيّن لمّا تسمّعها صح.'**
+  String get tasmeeHiddenBody;
+
+  /// No description provided for @tasmeePeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'ورّيني كلمة'**
+  String get tasmeePeek;
+
+  /// No description provided for @tasmeePeekCountsAsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لمّا تورّيك كلمة، بتُحسب مساعدة، عشان قوّة الحفظ تطلع صادقة.'**
+  String get tasmeePeekCountsAsHint;
+
+  /// No description provided for @tasmeeHintsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بدون أي مساعدة} =1{مساعدة واحدة} =2{مساعدتان} few{{count} مساعدات} many{{count} مساعدة} other{{count} مساعدة}}'**
+  String tasmeeHintsCount(int count);
+
+  /// No description provided for @tasmeeBlanksTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'املأ الفراغ'**
+  String get tasmeeBlanksTitle;
+
+  /// No description provided for @tasmeeBlanksBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيلنا كلمات من الآية، وسمّعها كاملة. الحساب على الكلمات المشيلة بس.'**
+  String get tasmeeBlanksBody;
+
+  /// No description provided for @tasmeeBlanksCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في فراغات} =1{فراغ واحد} =2{فراغان} few{{count} فراغات} many{{count} فراغًا} other{{count} فراغ}}'**
+  String tasmeeBlanksCount(int count);
+
+  /// No description provided for @tasmeeBlanksScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'{right} من {total} صح'**
+  String tasmeeBlanksScore(int right, int total);
+
+  /// No description provided for @tasmeeFindTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'وين هاي الآية'**
+  String get tasmeeFindTitle;
+
+  /// No description provided for @tasmeeFindBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع أي مقطع، والتطبيق يقلّك السورة والآية، وكل إشي على الجوال.'**
+  String get tasmeeFindBody;
+
+  /// No description provided for @tasmeeFindSure.
+  ///
+  /// In ar, this message translates to:
+  /// **'لقيتها'**
+  String get tasmeeFindSure;
+
+  /// No description provided for @tasmeeFindSeveral.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاد المقطع بأكثر من آية. اختار اللي بدك.'**
+  String get tasmeeFindSeveral;
+
+  /// No description provided for @tasmeeFindUnsure.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقرب إشي لقيته، بس التطبيق مش متأكد.'**
+  String get tasmeeFindUnsure;
+
+  /// No description provided for @tasmeeFindNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما لقيت هاد المقطع. جرّب سمّع شوي أكثر.'**
+  String get tasmeeFindNone;
+
+  /// No description provided for @tasmeeFindTooShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع ثلاث كلمات على الأقل، كلمتين موجودات بكل مكان.'**
+  String get tasmeeFindTooShort;
+
+  /// No description provided for @tasmeeFindCandidates.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في ولا نتيجة} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}'**
+  String tasmeeFindCandidates(int count);
+
+  /// No description provided for @tasmeeLogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل أخطائي'**
+  String get tasmeeLogTitle;
+
+  /// No description provided for @tasmeeLogEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل لسا فاضي'**
+  String get tasmeeLogEmptyTitle;
+
+  /// No description provided for @tasmeeLogEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع آية، وأي غلط بينزل هون باليوم والكلمة، وتقدر تمحيه وقت ما بدك.'**
+  String get tasmeeLogEmptyBody;
+
+  /// No description provided for @tasmeeStatsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقدّمي'**
+  String get tasmeeStatsTitle;
+
+  /// No description provided for @tasmeeStatsAccuracy.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الصح'**
+  String get tasmeeStatsAccuracy;
+
+  /// No description provided for @tasmeeWeakWordsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمات بتتعثّر فيها'**
+  String get tasmeeWeakWordsTitle;
+
+  /// No description provided for @tasmeeWeakAyatTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'آيات بدها مراجعة'**
+  String get tasmeeWeakAyatTitle;
+
+  /// No description provided for @tasmeeMistakesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في ولا غلط} =1{غلط واحد} =2{غلطتان} few{{count} أغلاط} many{{count} غلطًا} other{{count} غلط}}'**
+  String tasmeeMistakesCount(int count);
+
+  /// No description provided for @tasmeeWordsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في كلمات} =1{كلمة واحدة} =2{كلمتان} few{{count} كلمات} many{{count} كلمة} other{{count} كلمة}}'**
+  String tasmeeWordsCount(int count);
+
+  /// No description provided for @tasmeeSessionsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ولا مرة} =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String tasmeeSessionsCount(int count);
+
+  /// No description provided for @tasmeeStreakDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بلّش من اليوم} =1{يوم ورا التاني} =2{يومان ورا بعض} few{{count} أيام ورا بعض} many{{count} يومًا ورا بعض} other{{count} يوم ورا بعض}}'**
+  String tasmeeStreakDays(int count);
+
+  /// No description provided for @tasmeeDeleteSession.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح هاي المرة'**
+  String get tasmeeDeleteSession;
+
+  /// No description provided for @tasmeeClearLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح السجل كله'**
+  String get tasmeeClearLog;
+
+  /// No description provided for @tasmeeExportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'صدّر السجل'**
+  String get tasmeeExportTitle;
+
+  /// No description provided for @tasmeeExportBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف واحد فيه كل مرة سمّعت فيها وكل غلط، عشان برنامج «فلك» على الكمبيوتر يقدر يقراه. ما فيه ولا صوت.'**
+  String get tasmeeExportBody;
+
+  /// No description provided for @tasmeeExportDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف جاهز'**
+  String get tasmeeExportDone;
+
+  /// No description provided for @tasmeeRecogniserCredit.
+  ///
+  /// In ar, this message translates to:
+  /// **'التعرّف على الصوت: {name} ({licence})'**
+  String tasmeeRecogniserCredit(String name, String licence);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

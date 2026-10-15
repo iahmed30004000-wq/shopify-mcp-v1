@@ -91,6 +91,9 @@ class Repositories {
       recipeIngredients = EntityRepository(db, db.recipeIngredients),
       cookedMeals = EntityRepository(db, db.cookedMeals),
       kitchenRules = EntityRepository(db, db.kitchenRules),
+      tasmeeSessions = EntityRepository(db, db.tasmeeSessions),
+      tasmeeAyat = EntityRepository(db, db.tasmeeAyat),
+      tasmeeMistakes = EntityRepository(db, db.tasmeeMistakes),
       keyValues = KeyValueRepository(db),
       activity = ActivityRepository(db),
       currencies = CurrencyRepository(db);
@@ -187,6 +190,12 @@ class Repositories {
   final EntityRepository<$CookedMealsTable, CookedMealRow> cookedMeals;
   final EntityRepository<$KitchenRulesTable, KitchenRuleRow> kitchenRules;
 
+  // «التسميع» (Part 13): the recitation log – a session, its ayat, and the
+  // words that went wrong. No audio anywhere.
+  final EntityRepository<$TasmeeSessionsTable, TasmeeSessionRow> tasmeeSessions;
+  final EntityRepository<$TasmeeAyatTable, TasmeeAyahRow> tasmeeAyat;
+  final EntityRepository<$TasmeeMistakesTable, TasmeeMistakeRow> tasmeeMistakes;
+
   // Special-purpose
   final KeyValueRepository keyValues;
   final ActivityRepository activity;
@@ -266,6 +275,9 @@ class Repositories {
       recipeIngredients,
       cookedMeals,
       kitchenRules,
+      tasmeeSessions,
+      tasmeeAyat,
+      tasmeeMistakes,
     ])
       r.tableName: r,
   };

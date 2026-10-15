@@ -51,4 +51,14 @@ const madarIndexStatements = <String>[
   'CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_recipe ON recipe_ingredients (recipe_id)',
   'CREATE INDEX IF NOT EXISTS idx_cooked_meals_day ON cooked_meals (day)',
   'CREATE INDEX IF NOT EXISTS idx_cooked_meals_recipe_day ON cooked_meals (recipe_id, day)',
+  // «التسميع» (Part 13): the log is read by day (the statistics and the
+  // streak), by session (a session with its ayat and its mistakes), and by
+  // ayah or by word (Part 14's weak spots and its review queue).
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_sessions_day ON tasmee_sessions (day)',
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_sessions_started ON tasmee_sessions (started_at)',
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_ayat_session ON tasmee_ayat (session_id)',
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_ayat_ref_day ON tasmee_ayat (surah, ayah, day)',
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_mistakes_session ON tasmee_mistakes (session_id)',
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_mistakes_day ON tasmee_mistakes (day)',
+  'CREATE INDEX IF NOT EXISTS idx_tasmee_mistakes_word ON tasmee_mistakes (surah, ayah, word_index)',
 ];

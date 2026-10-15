@@ -28092,4 +28092,292 @@ class L10nAr extends L10n {
 
   @override
   String get dayChatTitleIncomeUnknownBare => 'قبضت، بس ما قلت قديش';
+
+  @override
+  String get tasmeeTitle => 'التسميع';
+
+  @override
+  String get tasmeeSubtitle => 'سمّع، والتطبيق يتابعك كلمة كلمة';
+
+  @override
+  String get tasmeeHintNotRuling =>
+      'هاي مساعدة إلك، مش حكم. اللي يسمعه التطبيق ممكن يغلط، والنص اللي بين إيديك هو المرجع.';
+
+  @override
+  String get tasmeeOfflineNote =>
+      'كل إشي يصير على جوالك. لا صوتك ولا الكلام اللي سمعه التطبيق يطلع من الجوال.';
+
+  @override
+  String get tasmeeHeardLabel => 'اللي سمعه التطبيق منك';
+
+  @override
+  String get tasmeeVerifiedLabel => 'النص المصحفي';
+
+  @override
+  String get tasmeeWordRight => 'صح';
+
+  @override
+  String get tasmeeWordWrong => 'كلمة غير';
+
+  @override
+  String get tasmeeWordSkipped => 'كلمة مرقت';
+
+  @override
+  String get tasmeeWordExtra => 'كلمة زيادة';
+
+  @override
+  String get tasmeeWordUnsure => 'التطبيق ما تأكد';
+
+  @override
+  String get tasmeeWordPending => 'لسا ما وصلتها';
+
+  @override
+  String get tasmeeRepetitionNote => 'رجعت قلت كلمات من نفس الآية. هاد مش غلط.';
+
+  @override
+  String get tasmeeBasmalaNote =>
+      'البسملة قبل السورة محسوبة عادي، مش كلمة زيادة.';
+
+  @override
+  String get tasmeePauseNote => 'وقفت شوي وكمّلت. الوقفة مش غلط.';
+
+  @override
+  String get tasmeeTashkeelExperimental =>
+      'فحص التشكيل تجربة أولية، ومطفي بالعادة. الكلمة نفسها صح.';
+
+  @override
+  String get tasmeeTashkeelToggle => 'افحص التشكيل كمان (تجربة)';
+
+  @override
+  String get tasmeeHideMarkersToggle => 'خفّي أرقام الآيات وأنا أسمّع';
+
+  @override
+  String get tasmeeNoModelTitle => 'التسميع لسا مش جاهز بهاي النسخة';
+
+  @override
+  String get tasmeeNoModelBody =>
+      'برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. القراءة والسماع شغّالين متل العادة.';
+
+  @override
+  String get tasmeePhoneCannotRunTitle => 'جوالك ما بيقدر يشغّل التسميع';
+
+  @override
+  String get tasmeePhoneCannotRunBody =>
+      'برنامج التعرّف على الصوت بدّه جوال أقوى. القراءة والسماع شغّالين متل العادة.';
+
+  @override
+  String get tasmeeMicNeededTitle => 'بدنا إذن المايك';
+
+  @override
+  String get tasmeeMicNeededBody =>
+      'المايك يفتح وأنت تسمّع بس، وصوتك ما ينسجّل ولا يطلع من الجوال.';
+
+  @override
+  String get tasmeeMicDeniedBody =>
+      'رفضت إذن المايك قبل. افتح إعدادات الجوال وسمّحه إذا بدك تسمّع.';
+
+  @override
+  String get tasmeeStart => 'ابدأ التسميع';
+
+  @override
+  String get tasmeeStop => 'خلّصت';
+
+  @override
+  String get tasmeeDiscard => 'ألغِ';
+
+  @override
+  String get tasmeeHiddenTitle => 'الآية المخفية';
+
+  @override
+  String get tasmeeHiddenBody => 'الصفحة مخفية، والكلمة تبيّن لمّا تسمّعها صح.';
+
+  @override
+  String get tasmeePeek => 'ورّيني كلمة';
+
+  @override
+  String get tasmeePeekCountsAsHint =>
+      'لمّا تورّيك كلمة، بتُحسب مساعدة، عشان قوّة الحفظ تطلع صادقة.';
+
+  @override
+  String tasmeeHintsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مساعدة',
+      many: '$count مساعدة',
+      few: '$count مساعدات',
+      two: 'مساعدتان',
+      one: 'مساعدة واحدة',
+      zero: 'بدون أي مساعدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasmeeBlanksTitle => 'املأ الفراغ';
+
+  @override
+  String get tasmeeBlanksBody =>
+      'شيلنا كلمات من الآية، وسمّعها كاملة. الحساب على الكلمات المشيلة بس.';
+
+  @override
+  String tasmeeBlanksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count فراغ',
+      many: '$count فراغًا',
+      few: '$count فراغات',
+      two: 'فراغان',
+      one: 'فراغ واحد',
+      zero: 'ما في فراغات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeBlanksScore(int right, int total) {
+    return '$right من $total صح';
+  }
+
+  @override
+  String get tasmeeFindTitle => 'وين هاي الآية';
+
+  @override
+  String get tasmeeFindBody =>
+      'سمّع أي مقطع، والتطبيق يقلّك السورة والآية، وكل إشي على الجوال.';
+
+  @override
+  String get tasmeeFindSure => 'لقيتها';
+
+  @override
+  String get tasmeeFindSeveral => 'هاد المقطع بأكثر من آية. اختار اللي بدك.';
+
+  @override
+  String get tasmeeFindUnsure => 'أقرب إشي لقيته، بس التطبيق مش متأكد.';
+
+  @override
+  String get tasmeeFindNone => 'ما لقيت هاد المقطع. جرّب سمّع شوي أكثر.';
+
+  @override
+  String get tasmeeFindTooShort =>
+      'سمّع ثلاث كلمات على الأقل، كلمتين موجودات بكل مكان.';
+
+  @override
+  String tasmeeFindCandidates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نتيجة',
+      many: '$count نتيجة',
+      few: '$count نتائج',
+      two: 'نتيجتان',
+      one: 'نتيجة واحدة',
+      zero: 'ما في ولا نتيجة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasmeeLogTitle => 'سجل أخطائي';
+
+  @override
+  String get tasmeeLogEmptyTitle => 'السجل لسا فاضي';
+
+  @override
+  String get tasmeeLogEmptyBody =>
+      'سمّع آية، وأي غلط بينزل هون باليوم والكلمة، وتقدر تمحيه وقت ما بدك.';
+
+  @override
+  String get tasmeeStatsTitle => 'تقدّمي';
+
+  @override
+  String get tasmeeStatsAccuracy => 'نسبة الصح';
+
+  @override
+  String get tasmeeWeakWordsTitle => 'كلمات بتتعثّر فيها';
+
+  @override
+  String get tasmeeWeakAyatTitle => 'آيات بدها مراجعة';
+
+  @override
+  String tasmeeMistakesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count غلط',
+      many: '$count غلطًا',
+      few: '$count أغلاط',
+      two: 'غلطتان',
+      one: 'غلط واحد',
+      zero: 'ما في ولا غلط',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeWordsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count كلمة',
+      many: '$count كلمة',
+      few: '$count كلمات',
+      two: 'كلمتان',
+      one: 'كلمة واحدة',
+      zero: 'ما في كلمات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeSessionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مرة',
+      many: '$count مرة',
+      few: '$count مرات',
+      two: 'مرتان',
+      one: 'مرة واحدة',
+      zero: 'ولا مرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasmeeStreakDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم ورا بعض',
+      many: '$count يومًا ورا بعض',
+      few: '$count أيام ورا بعض',
+      two: 'يومان ورا بعض',
+      one: 'يوم ورا التاني',
+      zero: 'بلّش من اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasmeeDeleteSession => 'امسح هاي المرة';
+
+  @override
+  String get tasmeeClearLog => 'امسح السجل كله';
+
+  @override
+  String get tasmeeExportTitle => 'صدّر السجل';
+
+  @override
+  String get tasmeeExportBody =>
+      'ملف واحد فيه كل مرة سمّعت فيها وكل غلط، عشان برنامج «فلك» على الكمبيوتر يقدر يقراه. ما فيه ولا صوت.';
+
+  @override
+  String get tasmeeExportDone => 'الملف جاهز';
+
+  @override
+  String tasmeeRecogniserCredit(String name, String licence) {
+    return 'التعرّف على الصوت: $name ($licence)';
+  }
 }

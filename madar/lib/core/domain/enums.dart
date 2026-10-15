@@ -185,3 +185,35 @@ enum KitchenRuleKind {
   /// A special request for now («بدون بصل اليوم»).
   request,
 }
+
+// ------------------------------------- «التسميع» · recitation checked (v7) ----
+
+/// Which way he was using «التسميع» (Part 13).
+enum TasmeeMode {
+  /// He recited with the text in front of him and it was checked live.
+  recite,
+
+  /// The page was hidden and each word appeared as he recited it.
+  hidden,
+
+  /// Fill in the blank.
+  blanks,
+
+  /// «شازام القرآن» – he recited a phrase to be told where it is.
+  find,
+}
+
+/// What went wrong with one word of a recitation. Nothing else is a
+/// mistake: a word he never reached, a word the recogniser was unsure
+/// about, the basmala before a surah and words of the text recited twice
+/// are not mistakes and are never written as one.
+enum MistakeKind {
+  /// He said a different word in its place.
+  wrong,
+
+  /// He went past it.
+  skipped,
+
+  /// He said a word that is not in the text here.
+  extra,
+}
