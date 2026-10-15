@@ -5126,6 +5126,112 @@ class L10nAr extends L10n {
   }
 
   @override
+  String get iqamaTitle => 'الإقامة';
+
+  @override
+  String get iqamaSubtitle =>
+      'تنبيه بعد الأذان بالوقت اللي تختاره، وفيه «صلّيت»';
+
+  @override
+  String get iqamaSectionPrayers => 'الصلوات';
+
+  @override
+  String get iqamaSectionPrayersHint =>
+      'كل صلاة إلها وقتها الخاص بعد الأذان، وتقدر تطفيها لحالها والأذان يضلّ شغّال';
+
+  @override
+  String get iqamaSectionSound => 'الصوت والتنبيه';
+
+  @override
+  String get iqamaSectionSoundHint => 'صوت الإقامة مستقل عن صوت الأذان';
+
+  @override
+  String get iqamaWithAdhan => 'مع الأذان';
+
+  @override
+  String iqamaAfterAdhan(String minutes) {
+    return 'بعد الأذان بـ$minutes';
+  }
+
+  @override
+  String get iqamaOff => 'مطفية';
+
+  @override
+  String get iqamaAdhanOff => 'أذان هالصلاة مطفي';
+
+  @override
+  String iqamaPrayerLabel(String prayer) {
+    return 'إقامة $prayer';
+  }
+
+  @override
+  String get iqamaJumuah => 'الجمعة';
+
+  @override
+  String get iqamaJumuahHint => 'ظهر الجمعة إله وقته الخاص';
+
+  @override
+  String get iqamaFieldOn => 'نبّهني';
+
+  @override
+  String get iqamaFieldOffset => 'بعد الأذان بـ';
+
+  @override
+  String get iqamaSnoozeLength => 'طول «بعد شوي»';
+
+  @override
+  String get iqamaSnoozeHint => 'مرّة وحدة بس، وما بتتكرّر';
+
+  @override
+  String get iqamaVibrate => 'اهتزاز مع الإقامة';
+
+  @override
+  String get iqamaSound => 'صوت الإقامة';
+
+  @override
+  String get iqamaNote =>
+      'إذا وقع وقت الإقامة بعد أذان الصلاة اللي بعدها، ما بتوصلك – وقت الصلاة خلص.';
+
+  @override
+  String get iqamaNotifTitle => 'قامت الصلاة';
+
+  @override
+  String iqamaNotifBody(String prayer, String time) {
+    return '$prayer · أُذِّن الساعة $time';
+  }
+
+  @override
+  String get iqamaNotifSnoozeTitle => 'لسّا الصلاة قائمة';
+
+  @override
+  String get iqamaActionPrayed => 'صلّيت';
+
+  @override
+  String get iqamaActionLater => 'بعد شوي';
+
+  @override
+  String iqamaChannel(String sound) {
+    return 'الإقامة · $sound';
+  }
+
+  @override
+  String get iqamaChannelHint => 'تنبيه بعد الأذان بالوقت اللي تختاره';
+
+  @override
+  String iqamaAlreadyTitle(String prayer) {
+    return '$prayer مسجّلة من قبل';
+  }
+
+  @override
+  String get iqamaAlreadyBody => 'ما انسجّلت مرّتين؛ كنت سجّلتها بإيدك';
+
+  @override
+  String get iqamaFailedTitle => 'ما انسجّلت الصلاة';
+
+  @override
+  String get iqamaFailedBody => 'افتح مَدار وسجّلها من متابعة الصلاة';
+
+  @override
   String get adhkarTitle => 'الأذكار';
 
   @override

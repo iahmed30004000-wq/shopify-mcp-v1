@@ -10,6 +10,7 @@ import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/hifz/hifz.dart' show HifzCard;
 import '../../features/home/home_screen.dart';
 import '../../features/import/import_screen.dart';
+import '../../features/iqama/iqama.dart' show IqamaSettingsScreen;
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/orbit/presentation/planet/planet_route.dart';
 import '../../features/prayer/presentation/prayer_settings_screen.dart';
@@ -143,6 +144,14 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: const AdhanSettingsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'iqama',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const IqamaSettingsScreen(),
             ),
           ),
           GoRoute(

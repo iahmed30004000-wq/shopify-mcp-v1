@@ -18,6 +18,7 @@ import 'package:madar/features/family/domain/family_reminders.dart';
 import 'package:madar/features/health/meds/data/meds_notifications.dart';
 import 'package:madar/features/health/meds/data/meds_service.dart' show MedDoseAction, MedDoseActionKind;
 import 'package:madar/features/health/meds/meds_texts.dart';
+import 'package:madar/features/iqama/iqama.dart';
 import 'package:madar/features/health/record/data/appointment_reminders.dart';
 import 'package:madar/features/health/record/domain/appointment_plan.dart';
 import 'package:madar/features/health/wellbeing/data/worry_reminders.dart';
@@ -258,11 +259,30 @@ NotificationRequest moduleReminder(DateTime at) => CustomModulesReminderEngine.r
   ),
 );
 
+/// «الإقامة»: «قامت الصلاة» a quarter of an hour after the adhan, with
+/// «صلّيت» and the one «بعد شوي».
+NotificationRequest iqamaCall(AdhanSlot slot, DateTime at, {bool snooze = false}) => IqamaNotifications.request(
+  IqamaAlarm(
+    id: IqamaIds.of(_day(at), slot),
+    slot: slot,
+    at: at,
+    prayerAt: at.subtract(const Duration(minutes: 15)),
+    day: _day(at),
+    minutes: 15,
+    nextAdhanAt: at.add(const Duration(hours: 2)),
+  ),
+  settings: const IqamaSettings(),
+  texts: IqamaTexts.forLanguage('ar'),
+  channelId: 'madar.iqama.call.tone-chime.v.1',
+  snooze: snooze,
+);
+
 /// One of every notification Madar posts, keyed by a readable name.
 Map<String, NotificationRequest> everyKind(DateTime at) => {
   'adhan': adhanCall(AdhanSlot.maghrib, at),
   'preAdhan': adhanPre(AdhanSlot.isha, at, 10),
   'sunrise': sunriseAlert(at),
+  'iqama': iqamaCall(AdhanSlot.maghrib, at),
   'adhkarMorning': adhkar(AdhkarCategoryId.morning, at),
   'adhkarEvening': adhkar(AdhkarCategoryId.evening, at),
   'dose': medsDose(at),

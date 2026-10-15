@@ -10,6 +10,8 @@ import '../../adhan/application/adhan_providers.dart' show adhanEventProvider, a
 import '../../adhan/domain/adhan_event.dart' show AdhanActions, AdhanEvent;
 import '../../health/meds/data/meds_notifications.dart' show MedsNotificationTaps;
 import '../../health/meds/data/meds_providers.dart' show medsNotificationBridgeProvider, medsReminderSyncProvider;
+import '../../iqama/application/iqama_providers.dart' show iqamaBridgeProvider;
+import '../../iqama/domain/iqama_event.dart' show IqamaActions;
 import '../domain/center_models.dart';
 import 'center_providers.dart';
 
@@ -45,7 +47,9 @@ typedef CenterActionHandler = Future<bool> Function(CenterActionRequest request)
 ///   recorder (`MedsNotificationBridge.record`: the dose log, the stock,
 ///   the re-plan, the refill alert);
 /// * `adhan.stop` → cancels the sounding notification (its channel sound
-///   stops) and closes the full-screen adhan if it shows that very call.
+///   stops) and closes the full-screen adhan if it shows that very call;
+/// * `iqama.prayed` / `iqama.later` → the iqama's own bridge (the prayer
+///   log through the tracker's repository, or the one snooze).
 ///
 /// Features (or the lead) [register] more.
 class NotificationActionHandlers {
@@ -79,7 +83,13 @@ final notificationActionHandlersProvider = Provider<NotificationActionHandlers>(
     return true;
   }
 
+  // «صلّيت» / «بعد شوي» from a centre row take the very path the
+  // notification's own buttons take while the app runs.
+  Future<bool> iqama(CenterActionRequest r) => ref.read(iqamaBridgeProvider).handle(r.tap);
+
   return NotificationActionHandlers({
+    IqamaActions.prayed: iqama,
+    IqamaActions.later: iqama,
     MedsNotificationTaps.actionTaken: meds,
     MedsNotificationTaps.actionSnooze: meds,
     MedsNotificationTaps.actionSkip: meds,

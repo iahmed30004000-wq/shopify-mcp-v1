@@ -214,7 +214,13 @@ abstract final class NotificationNamespaces {
   /// replaced and never stacked.
   static const together = NotificationNamespace('together', 170000, 170999);
 
-  static const all = [adhan, adhkar, meds, reminders, wird, health, together];
+  /// «الإقامة»: the call at *adhan + offset* that the prayer is standing,
+  /// with «صلّيت» and «بعد شوي» (`IqamaIds`). Its own block, deliberately
+  /// **outside** [adhan]: the two are planned by different syncs, and
+  /// neither reconciliation may ever cancel the other's alarms.
+  static const iqama = NotificationNamespace('iqama', 180000, 180999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {

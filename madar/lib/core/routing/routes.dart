@@ -24,6 +24,9 @@ abstract final class AppRoutes {
   /// The adhan: sounds, reminders, full-screen, permissions.
   static const String adhanSettings = '/settings/adhan';
 
+  /// «الإقامة»: the call after each adhan, its offsets and its sound.
+  static const String iqamaSettings = '/settings/iqama';
+
   /// Settings › Security (app lock: PIN, fingerprint, time-out).
   static const String security = '/settings/security';
 

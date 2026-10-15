@@ -16,6 +16,7 @@ import '../features/saved_games/saved_games.dart' show savedGamesLegacyImportPro
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
 import 'health_services.dart';
+import 'iqama_services.dart';
 import 'life_services.dart';
 import 'money_services.dart';
 import 'system_services.dart';
@@ -92,7 +93,10 @@ class AppNotificationRouter {
     if (set != null) return AppRoutes.adhkarSetOf(set.name);
     final plan = WirdReminderTaps.planOf(tap);
     if (plan != null) return AppRoutes.wirdOf(plan);
-    return healthNotificationLocation(tap) ?? moneyNotificationLocation(tap) ?? lifeNotificationLocation(tap);
+    return iqamaNotificationLocation(tap) ??
+        healthNotificationLocation(tap) ??
+        moneyNotificationLocation(tap) ??
+        lifeNotificationLocation(tap);
   }
 
   Future<void> _readLaunch(NotificationService service) async {
@@ -216,6 +220,7 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     // re-plans, so a muted group is never re-armed behind his back. Moving
     // this line down silently breaks that (notification_order_test).
     watchNotificationCenter(ref);
+    watchIqamaServices(ref);
     ref.watch(adhkarReminderSyncProvider);
     ref.watch(wirdReminderSyncProvider);
     ref.watch(wirdCompletionSyncProvider);

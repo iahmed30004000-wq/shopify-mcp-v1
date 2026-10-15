@@ -116,6 +116,13 @@ class SettingsScreen extends ConsumerWidget {
                     onTap: () => context.go(AppRoutes.adhanSettings),
                   ),
                   SettingsTile(
+                    icon: Icons.groups_rounded,
+                    title: l.iqamaTitle,
+                    subtitle: l.iqamaSubtitle,
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.iqamaSettings),
+                  ),
+                  SettingsTile(
                     icon: Icons.auto_stories_rounded,
                     iconColor: t.gold,
                     title: l.settingsQuran,

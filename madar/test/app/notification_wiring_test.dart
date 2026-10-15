@@ -135,6 +135,7 @@ void main() {
       expect(hooks.namespaces, containsAll(<String>{
         NotificationNamespaces.adhan.name, // built in
         NotificationNamespaces.meds.name, // built in
+        NotificationNamespaces.iqama.name,
         NotificationNamespaces.adhkar.name,
         NotificationNamespaces.wird.name,
         NotificationNamespaces.health.name,

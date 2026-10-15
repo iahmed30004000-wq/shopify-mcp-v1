@@ -22,6 +22,7 @@ import '../features/data/data.dart'
 import '../features/family/family.dart' show familyReminderSyncProvider;
 import '../features/health/record/record.dart' show AppointmentReminderTaps, recordReminderSyncProvider;
 import '../features/health/wellbeing/wellbeing.dart' show worryReminderSyncProvider;
+import '../features/iqama/iqama.dart' show iqamaSyncProvider;
 import '../features/money/goals/goals.dart' show DueReminderKind, GoalsReminderTaps, goalsReminderSyncProvider;
 import '../features/notification_center/notification_center.dart'
     show
@@ -113,7 +114,11 @@ String? centerLocationOf(NotificationTap tap) =>
 /// `other` is deliberately absent: those rows show no settings link.
 final Map<NotificationGroup, FutureOr<void> Function(BuildContext, NotificationGroup, CenterNotice?)>
 centerSettingsLinks = {
-  NotificationGroup.prayer: (context, _, _) => context.push(AppRoutes.adhanSettings),
+  // The adhan's switches, or the iqama's own screen when the row is one
+  // of «الإقامة»'s.
+  NotificationGroup.prayer: (context, _, notice) => context.push(
+    notice?.namespace == NotificationNamespaces.iqama.name ? AppRoutes.iqamaSettings : AppRoutes.adhanSettings,
+  ),
   NotificationGroup.adhkar: (context, _, _) => context.push(AppRoutes.reminders),
   // The wird's reminder rows live in Settings › Reminders too.
   NotificationGroup.wird: (context, _, _) => context.push(AppRoutes.reminders),
@@ -168,6 +173,9 @@ final systemReplanHooksProvider = Provider<NotificationReplanHooks>((ref) {
   }
 
   hooks
+    ..register(NotificationNamespaces.iqama.name, () async {
+      if (ref.exists(iqamaSyncProvider)) await ref.read(iqamaSyncProvider.notifier).syncNow();
+    })
     ..register(NotificationNamespaces.adhkar.name, () async {
       if (ref.exists(adhkarReminderSyncProvider)) await ref.read(adhkarReminderSyncProvider.notifier).syncNow();
     })

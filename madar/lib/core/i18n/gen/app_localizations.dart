@@ -8164,6 +8164,192 @@ abstract class L10n {
   /// **'{label}: {value}'**
   String trackerValueOf(String label, String value);
 
+  /// Iqama settings screen title / entry
+  ///
+  /// In ar, this message translates to:
+  /// **'الإقامة'**
+  String get iqamaTitle;
+
+  /// Subtitle of the Iqama entry in the Adhan settings
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه بعد الأذان بالوقت اللي تختاره، وفيه «صلّيت»'**
+  String get iqamaSubtitle;
+
+  /// No description provided for @iqamaSectionPrayers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلوات'**
+  String get iqamaSectionPrayers;
+
+  /// No description provided for @iqamaSectionPrayersHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل صلاة إلها وقتها الخاص بعد الأذان، وتقدر تطفيها لحالها والأذان يضلّ شغّال'**
+  String get iqamaSectionPrayersHint;
+
+  /// No description provided for @iqamaSectionSound.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصوت والتنبيه'**
+  String get iqamaSectionSound;
+
+  /// No description provided for @iqamaSectionSoundHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت الإقامة مستقل عن صوت الأذان'**
+  String get iqamaSectionSoundHint;
+
+  /// No description provided for @iqamaWithAdhan.
+  ///
+  /// In ar, this message translates to:
+  /// **'مع الأذان'**
+  String get iqamaWithAdhan;
+
+  /// Delay of one prayer's iqama; minutes pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الأذان بـ{minutes}'**
+  String iqamaAfterAdhan(String minutes);
+
+  /// This prayer's iqama is switched off
+  ///
+  /// In ar, this message translates to:
+  /// **'مطفية'**
+  String get iqamaOff;
+
+  /// No description provided for @iqamaAdhanOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'أذان هالصلاة مطفي'**
+  String get iqamaAdhanOff;
+
+  /// Name of one prayer's iqama (row switch, edit sheet, notification centre)
+  ///
+  /// In ar, this message translates to:
+  /// **'إقامة {prayer}'**
+  String iqamaPrayerLabel(String prayer);
+
+  /// No description provided for @iqamaJumuah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجمعة'**
+  String get iqamaJumuah;
+
+  /// No description provided for @iqamaJumuahHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ظهر الجمعة إله وقته الخاص'**
+  String get iqamaJumuahHint;
+
+  /// No description provided for @iqamaFieldOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبّهني'**
+  String get iqamaFieldOn;
+
+  /// No description provided for @iqamaFieldOffset.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد الأذان بـ'**
+  String get iqamaFieldOffset;
+
+  /// No description provided for @iqamaSnoozeLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'طول «بعد شوي»'**
+  String get iqamaSnoozeLength;
+
+  /// No description provided for @iqamaSnoozeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّة وحدة بس، وما بتتكرّر'**
+  String get iqamaSnoozeHint;
+
+  /// No description provided for @iqamaVibrate.
+  ///
+  /// In ar, this message translates to:
+  /// **'اهتزاز مع الإقامة'**
+  String get iqamaVibrate;
+
+  /// No description provided for @iqamaSound.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت الإقامة'**
+  String get iqamaSound;
+
+  /// No description provided for @iqamaNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذا وقع وقت الإقامة بعد أذان الصلاة اللي بعدها، ما بتوصلك – وقت الصلاة خلص.'**
+  String get iqamaNote;
+
+  /// Iqama notification title
+  ///
+  /// In ar, this message translates to:
+  /// **'قامت الصلاة'**
+  String get iqamaNotifTitle;
+
+  /// Iqama notification body; time pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} · أُذِّن الساعة {time}'**
+  String iqamaNotifBody(String prayer, String time);
+
+  /// Title of the one snooze
+  ///
+  /// In ar, this message translates to:
+  /// **'لسّا الصلاة قائمة'**
+  String get iqamaNotifSnoozeTitle;
+
+  /// No description provided for @iqamaActionPrayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت'**
+  String get iqamaActionPrayed;
+
+  /// No description provided for @iqamaActionLater.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد شوي'**
+  String get iqamaActionLater;
+
+  /// Android notification channel name of an iqama sound
+  ///
+  /// In ar, this message translates to:
+  /// **'الإقامة · {sound}'**
+  String iqamaChannel(String sound);
+
+  /// No description provided for @iqamaChannelHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه بعد الأذان بالوقت اللي تختاره'**
+  String get iqamaChannelHint;
+
+  /// No description provided for @iqamaAlreadyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{prayer} مسجّلة من قبل'**
+  String iqamaAlreadyTitle(String prayer);
+
+  /// No description provided for @iqamaAlreadyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انسجّلت مرّتين؛ كنت سجّلتها بإيدك'**
+  String get iqamaAlreadyBody;
+
+  /// No description provided for @iqamaFailedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انسجّلت الصلاة'**
+  String get iqamaFailedTitle;
+
+  /// No description provided for @iqamaFailedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مَدار وسجّلها من متابعة الصلاة'**
+  String get iqamaFailedBody;
+
   /// Title of the adhkar home screen
   ///
   /// In ar, this message translates to:

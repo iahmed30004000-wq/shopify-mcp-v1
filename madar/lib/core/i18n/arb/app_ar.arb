@@ -4482,6 +4482,94 @@
       }
     }
   },
+  "iqamaTitle": "الإقامة",
+  "@iqamaTitle": {
+    "description": "Iqama settings screen title / entry"
+  },
+  "iqamaSubtitle": "تنبيه بعد الأذان بالوقت اللي تختاره، وفيه «صلّيت»",
+  "@iqamaSubtitle": {
+    "description": "Subtitle of the Iqama entry in the Adhan settings"
+  },
+  "iqamaSectionPrayers": "الصلوات",
+  "iqamaSectionPrayersHint": "كل صلاة إلها وقتها الخاص بعد الأذان، وتقدر تطفيها لحالها والأذان يضلّ شغّال",
+  "iqamaSectionSound": "الصوت والتنبيه",
+  "iqamaSectionSoundHint": "صوت الإقامة مستقل عن صوت الأذان",
+  "iqamaWithAdhan": "مع الأذان",
+  "iqamaAfterAdhan": "بعد الأذان بـ{minutes}",
+  "@iqamaAfterAdhan": {
+    "description": "Delay of one prayer's iqama; minutes pre-formatted",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaOff": "مطفية",
+  "@iqamaOff": {
+    "description": "This prayer's iqama is switched off"
+  },
+  "iqamaAdhanOff": "أذان هالصلاة مطفي",
+  "iqamaPrayerLabel": "إقامة {prayer}",
+  "@iqamaPrayerLabel": {
+    "description": "Name of one prayer's iqama (row switch, edit sheet, notification centre)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaJumuah": "الجمعة",
+  "iqamaJumuahHint": "ظهر الجمعة إله وقته الخاص",
+  "iqamaFieldOn": "نبّهني",
+  "iqamaFieldOffset": "بعد الأذان بـ",
+  "iqamaSnoozeLength": "طول «بعد شوي»",
+  "iqamaSnoozeHint": "مرّة وحدة بس، وما بتتكرّر",
+  "iqamaVibrate": "اهتزاز مع الإقامة",
+  "iqamaSound": "صوت الإقامة",
+  "iqamaNote": "إذا وقع وقت الإقامة بعد أذان الصلاة اللي بعدها، ما بتوصلك – وقت الصلاة خلص.",
+  "iqamaNotifTitle": "قامت الصلاة",
+  "@iqamaNotifTitle": {
+    "description": "Iqama notification title"
+  },
+  "iqamaNotifBody": "{prayer} · أُذِّن الساعة {time}",
+  "@iqamaNotifBody": {
+    "description": "Iqama notification body; time pre-formatted",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaNotifSnoozeTitle": "لسّا الصلاة قائمة",
+  "@iqamaNotifSnoozeTitle": {
+    "description": "Title of the one snooze"
+  },
+  "iqamaActionPrayed": "صلّيت",
+  "iqamaActionLater": "بعد شوي",
+  "iqamaChannel": "الإقامة · {sound}",
+  "@iqamaChannel": {
+    "description": "Android notification channel name of an iqama sound",
+    "placeholders": {
+      "sound": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaChannelHint": "تنبيه بعد الأذان بالوقت اللي تختاره",
+  "iqamaAlreadyTitle": "{prayer} مسجّلة من قبل",
+  "@iqamaAlreadyTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaAlreadyBody": "ما انسجّلت مرّتين؛ كنت سجّلتها بإيدك",
+  "iqamaFailedTitle": "ما انسجّلت الصلاة",
+  "iqamaFailedBody": "افتح مَدار وسجّلها من متابعة الصلاة",
   "adhkarTitle": "الأذكار",
   "@adhkarTitle": {
     "description": "Title of the adhkar home screen"

@@ -13,6 +13,7 @@ import '../../family/domain/family_reminders.dart' show FamilyNoticeKind, Family
 import '../../health/meds/data/meds_notifications.dart' show MedsNotificationTaps;
 import '../../health/record/data/appointment_reminders.dart' show AppointmentReminderTaps;
 import '../../health/wellbeing/data/worry_reminders.dart' show WorryReminderTaps;
+import '../../iqama/domain/iqama_event.dart' show IqamaActions, IqamaNotificationTaps;
 import '../../money/goals/data/goals_notifications.dart' show GoalsReminderTaps;
 import '../../nutrition/data/nutrition_reminders.dart' show MealReminderTaps;
 import '../../money/goals/domain/due_reminders.dart' show DueReminderKind;
@@ -31,6 +32,7 @@ import 'describers.dart';
 /// | namespace  | ids            | describer           | group            |
 /// |------------|----------------|---------------------|------------------|
 /// | adhan      | 100000–101999  | [AdhanDescriber]    | prayer           |
+/// | iqama      | 180000–180999  | [IqamaDescriber]    | prayer           |
 /// | adhkar     | 110000–111999  | [AdhkarDescriber]   | adhkar           |
 /// | meds       | 120000–129999  | [MedsDescriber]     | medications      |
 /// | reminders  | 132xxx goals   | [MoneyDueDescriber] | money            |
@@ -43,6 +45,7 @@ import 'describers.dart';
 /// | health     | 150000–150399 appointments, 1509xx worry | [HealthDescriber] | health |
 List<NotificationDescriber> builtInDescribers() => const [
   AdhanDescriber(),
+  IqamaDescriber(),
   AdhkarDescriber(),
   MedsDescriber(),
   HealthDescriber(),
@@ -131,6 +134,67 @@ class AdhanDescriber extends NotificationDescriber {
         subject: 'prayer:sunrise',
       ),
     };
+  }
+}
+
+/// «الإقامة» – «قامت الصلاة» a set time after each adhan, with «صلّيت»
+/// (logged in the prayer tracker) and the one «بعد شوي». Its own id block,
+/// and the Prayer group, so a Faith mute covers the adhan and the iqama
+/// together.
+class IqamaDescriber extends NotificationDescriber {
+  const IqamaDescriber();
+
+  @override
+  String get id => 'iqama';
+
+  @override
+  NotificationGroup? groupOf(CenterNotice n) =>
+      n.namespace == NotificationNamespaces.iqama.name ? NotificationGroup.prayer : null;
+
+  @override
+  NotificationDescription describe(CenterNotice n, CenterTexts t) {
+    final l = t.l;
+    final tap = n.toTap();
+    final slot = IqamaNotificationTaps.slotOf(tap);
+    if (slot == null || IqamaNotificationTaps.isNotice(tap)) {
+      return NotificationDescription(
+        group: NotificationGroup.prayer,
+        kind: l.iqamaTitle,
+        title: n.title ?? l.iqamaTitle,
+        body: n.body,
+        icon: Icons.mosque_outlined,
+        snoozable: false,
+      );
+    }
+    final prayer = _prayer(slot, t);
+    final prayerAt = IqamaNotificationTaps.prayerAtOf(tap);
+    final answerable = IqamaNotificationTaps.answerOf(n.toTap(actionId: IqamaActions.prayed)) != null;
+    final snoozable = IqamaNotificationTaps.answerOf(n.toTap(actionId: IqamaActions.later)) != null;
+    return NotificationDescription(
+      group: NotificationGroup.prayer,
+      kind: l.iqamaPrayerLabel(prayer),
+      title: n.title ?? l.iqamaNotifTitle,
+      body: prayerAt == null ? prayer : l.iqamaNotifBody(prayer, t.time(prayerAt)),
+      icon: Icons.mosque_rounded,
+      snoozable: false,
+      subject: 'prayer:${slot.name}',
+      actions: [
+        if (answerable)
+          CenterActionSpec(
+            id: IqamaActions.prayed,
+            label: l.iqamaActionPrayed,
+            icon: Icons.check_circle_rounded,
+            primary: true,
+          ),
+        if (snoozable)
+          CenterActionSpec(
+            id: IqamaActions.later,
+            label: l.iqamaActionLater,
+            icon: Icons.snooze_rounded,
+            liveOnly: true,
+          ),
+      ],
+    );
   }
 }
 

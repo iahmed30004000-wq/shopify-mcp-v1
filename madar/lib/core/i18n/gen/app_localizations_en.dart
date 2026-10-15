@@ -5003,6 +5003,114 @@ class L10nEn extends L10n {
   }
 
   @override
+  String get iqamaTitle => 'Iqama';
+
+  @override
+  String get iqamaSubtitle =>
+      'A call a set time after the adhan, with “I prayed”';
+
+  @override
+  String get iqamaSectionPrayers => 'Prayers';
+
+  @override
+  String get iqamaSectionPrayersHint =>
+      'Each prayer has its own delay after the adhan and its own switch – its adhan stays on';
+
+  @override
+  String get iqamaSectionSound => 'Sound & alert';
+
+  @override
+  String get iqamaSectionSoundHint =>
+      'The iqama\'s sound is its own, not the adhan\'s';
+
+  @override
+  String get iqamaWithAdhan => 'With the adhan';
+
+  @override
+  String iqamaAfterAdhan(String minutes) {
+    return '$minutes after the adhan';
+  }
+
+  @override
+  String get iqamaOff => 'Off';
+
+  @override
+  String get iqamaAdhanOff => 'This prayer\'s adhan is off';
+
+  @override
+  String iqamaPrayerLabel(String prayer) {
+    return '$prayer iqama';
+  }
+
+  @override
+  String get iqamaJumuah => 'Friday (Jumuah)';
+
+  @override
+  String get iqamaJumuahHint => 'Friday\'s Dhuhr has a delay of its own';
+
+  @override
+  String get iqamaFieldOn => 'Call me';
+
+  @override
+  String get iqamaFieldOffset => 'After the adhan';
+
+  @override
+  String get iqamaSnoozeLength => 'Length of “In a bit”';
+
+  @override
+  String get iqamaSnoozeHint => 'Once only – it never repeats';
+
+  @override
+  String get iqamaVibrate => 'Vibrate with the iqama';
+
+  @override
+  String get iqamaSound => 'Iqama sound';
+
+  @override
+  String get iqamaNote =>
+      'An iqama that would land after the next prayer\'s adhan is not sent – that prayer\'s time is over.';
+
+  @override
+  String get iqamaNotifTitle => 'The prayer has begun';
+
+  @override
+  String iqamaNotifBody(String prayer, String time) {
+    return '$prayer · adhan at $time';
+  }
+
+  @override
+  String get iqamaNotifSnoozeTitle => 'The prayer is still standing';
+
+  @override
+  String get iqamaActionPrayed => 'I prayed';
+
+  @override
+  String get iqamaActionLater => 'In a bit';
+
+  @override
+  String iqamaChannel(String sound) {
+    return 'Iqama · $sound';
+  }
+
+  @override
+  String get iqamaChannelHint => 'A call a set time after the adhan';
+
+  @override
+  String iqamaAlreadyTitle(String prayer) {
+    return '$prayer is already logged';
+  }
+
+  @override
+  String get iqamaAlreadyBody =>
+      'Nothing was logged twice – you had already recorded it';
+
+  @override
+  String get iqamaFailedTitle => 'The prayer was not recorded';
+
+  @override
+  String get iqamaFailedBody => 'Open Madar and log it in the prayer tracker';
+
+  @override
   String get adhkarTitle => 'Adhkar';
 
   @override

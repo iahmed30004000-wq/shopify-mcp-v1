@@ -32,6 +32,8 @@ abstract final class FaithNav {
 
   static void adhanSettings(BuildContext context) => context.push(AppRoutes.adhanSettings);
 
+  static void iqamaSettings(BuildContext context) => context.push(AppRoutes.iqamaSettings);
+
   static void tracker(BuildContext context, {bool history = false}) =>
       context.push(history ? AppRoutes.prayerTrackerHistory : AppRoutes.prayerTracker);
 

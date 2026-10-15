@@ -4482,6 +4482,94 @@
       }
     }
   },
+  "iqamaTitle": "Iqama",
+  "@iqamaTitle": {
+    "description": "Iqama settings screen title / entry"
+  },
+  "iqamaSubtitle": "A call a set time after the adhan, with “I prayed”",
+  "@iqamaSubtitle": {
+    "description": "Subtitle of the Iqama entry in the Adhan settings"
+  },
+  "iqamaSectionPrayers": "Prayers",
+  "iqamaSectionPrayersHint": "Each prayer has its own delay after the adhan and its own switch – its adhan stays on",
+  "iqamaSectionSound": "Sound & alert",
+  "iqamaSectionSoundHint": "The iqama's sound is its own, not the adhan's",
+  "iqamaWithAdhan": "With the adhan",
+  "iqamaAfterAdhan": "{minutes} after the adhan",
+  "@iqamaAfterAdhan": {
+    "description": "Delay of one prayer's iqama; minutes pre-formatted",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaOff": "Off",
+  "@iqamaOff": {
+    "description": "This prayer's iqama is switched off"
+  },
+  "iqamaAdhanOff": "This prayer's adhan is off",
+  "iqamaPrayerLabel": "{prayer} iqama",
+  "@iqamaPrayerLabel": {
+    "description": "Name of one prayer's iqama (row switch, edit sheet, notification centre)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaJumuah": "Friday (Jumuah)",
+  "iqamaJumuahHint": "Friday's Dhuhr has a delay of its own",
+  "iqamaFieldOn": "Call me",
+  "iqamaFieldOffset": "After the adhan",
+  "iqamaSnoozeLength": "Length of “In a bit”",
+  "iqamaSnoozeHint": "Once only – it never repeats",
+  "iqamaVibrate": "Vibrate with the iqama",
+  "iqamaSound": "Iqama sound",
+  "iqamaNote": "An iqama that would land after the next prayer's adhan is not sent – that prayer's time is over.",
+  "iqamaNotifTitle": "The prayer has begun",
+  "@iqamaNotifTitle": {
+    "description": "Iqama notification title"
+  },
+  "iqamaNotifBody": "{prayer} · adhan at {time}",
+  "@iqamaNotifBody": {
+    "description": "Iqama notification body; time pre-formatted",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaNotifSnoozeTitle": "The prayer is still standing",
+  "@iqamaNotifSnoozeTitle": {
+    "description": "Title of the one snooze"
+  },
+  "iqamaActionPrayed": "I prayed",
+  "iqamaActionLater": "In a bit",
+  "iqamaChannel": "Iqama · {sound}",
+  "@iqamaChannel": {
+    "description": "Android notification channel name of an iqama sound",
+    "placeholders": {
+      "sound": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaChannelHint": "A call a set time after the adhan",
+  "iqamaAlreadyTitle": "{prayer} is already logged",
+  "@iqamaAlreadyTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "iqamaAlreadyBody": "Nothing was logged twice – you had already recorded it",
+  "iqamaFailedTitle": "The prayer was not recorded",
+  "iqamaFailedBody": "Open Madar and log it in the prayer tracker",
   "adhkarTitle": "Adhkar",
   "@adhkarTitle": {
     "description": "Title of the adhkar home screen"
