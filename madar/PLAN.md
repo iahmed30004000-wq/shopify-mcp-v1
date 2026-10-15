@@ -375,6 +375,46 @@ say so plainly and keep listening-only working); very long verses (البقرة 
 rationale; (3) the verified Uthmani text with word-level offsets, which the Quran data must
 expose.
 
+### The owner's spec, 2026-10-15 (Tarteel's Play Store page as the bar)
+
+He sent Tarteel's page as the standard to match. **Tarteel needs internet; Madar must not** -
+the speech recognition and every model stay on the phone. His numbering: this is his
+**«Part 2»**; in this plan it is Part 13.
+
+1. **Recite-to-find — «شازام القرآن»**: he recites any phrase and Madar names the surah and
+   the ayah, **offline**. Pipeline: ASR → normalised text → an n-gram index over the verified
+   text.
+2. **Hidden-verse mode**: the page is hidden and the words appear as he recites them. He can
+   **tap to peek** a word, and **a peek is counted as a hint** (so the strength in Part 14 is
+   honest).
+3. **Live mistakes at word level**: wrong · skipped · extra, highlighted **on the verified
+   text**. **Tashkeel errors are experimental, labelled as such, and off by default.**
+4. **Live correction**: tapping a highlight shows **«اللي سمعه التطبيق منك»** beside the
+   verified ayah. The recogniser's output is shown **only** as "what was heard" and is **never
+   styled as Quran text** - different type, different colour, and labelled.
+5. **Mushaf**: Madani (Hafs) pages, with an option to **hide the ayah markers** while testing
+   himself. Indo-Pak script: 🧊 (not now).
+6. **Listening**: licensed reciters, **downloaded per reciter for offline use**, follow-along
+   highlighting (**word timings only from a licensed source**), and background play.
+
+**Engine (shared with Part 14)**
+- Part 13 brings **its own recitation ASR**: an open model **trained on Quranic recitation**,
+  run on the phone (e.g. a Quran-tuned Whisper through whisper.cpp) - **its licence verified
+  before a line of code depends on it**. A general model is **not** used for scoring, Gemma
+  included; Gemma stays for Part 15's other uses.
+- **Audio never leaves the phone**, and a recording is **deleted after scoring** unless he
+  chooses to keep it.
+- The **mistakes log and the goals are exportable as documented JSON**, so the PC app «فلك»
+  can read them later. Syncing between them is a later phase, not this one.
+- **Part 16 (the kids section) reuses this engine** for Juz' 30, with the material signed off
+  by the reviewer the owner names.
+
+**Risks he named, and what is done about them**
+- ⚠️ A general ASR mishears recitation and invents mistakes. 🔧 A Quran-specific model, and
+  **the result is a hint for him, never a ruling**: the wording on screen must say so.
+- ⚠️ Tashkeel detection is unreliable. 🔧 **Word level first**; tashkeel stays experimental,
+  labelled, and off until it earns its place.
+
 ---
 
 ## Part 14 — «الحفظ»: memorisation at full strength  → its own APK
@@ -411,6 +451,19 @@ review"; resetting a page's strength; a reciter whose audio is not downloaded; t
 day he first starts.
 **DoD — blockers**: Part 13 for the reciting mode (the other modes must work without it, so
 Part 14 does not stall if 13 slips).
+
+### The owner's spec, 2026-10-15 (his «Part 3»; Part 14 here)
+
+7. **A mistakes log per word and per ayah** → a **weak-spots list** → a **spaced review
+   queue** built from it. The log is the one in Part 13, read from the other side.
+8. **Three tracks**: **new** · **recent** (the last seven days) · **old** - with a
+   **repetition count per ayah**, and **each ayah linked to the one before it** (so the join
+   is practised, not only the verse).
+9. **Smart goals**, in his words: «الكهف كل جمعة» · «راجع جزء عمّ» · «N صفحات باليوم» - with
+   **reminders tied to the prayer times**, not to a clock alone.
+10. **Progress**: **streaks** and a **heatmap of strength per surah and ayah**.
+
+Exportable as documented JSON with Part 13's log, for «فلك» later.
 
 ---
 
@@ -553,6 +606,12 @@ not another constant.
 ---
 
 ## The order the owner set (2026-10-15)
+
+**His numbering vs this plan's** (he counts the remaining parts from one; the plan keeps its
+original numbers): his Part 1 = the iqama, inside **Part 9** · his Part 2 = **Part 13
+«التسميع»** · his Part 3 = **Part 14 «الحفظ»** · his Part 4 = **Part 15** (the model on the
+phone) · his Part 5 = **Part 16 «مدار الصغار»**.
+
 
 After Part 7 ships: **9 (with «الإقامة») → 13 «التسميع» → 14 «الحفظ» → 15 «الموديل على
 الجوال» → 16 «مدار الصغار»**. The remaining life and games parts (**6, 8, 10, 11**) come
