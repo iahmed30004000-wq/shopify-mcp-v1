@@ -33627,6 +33627,24 @@ abstract class L10n {
   /// **'الخصوصية'**
   String get aiChatSettingsPrivacy;
 
+  /// Title of the warning card in Settings › AI › Privacy
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: هاي المحادثة كلامها بيطلع برّا جوالك'**
+  String get aiChatPrivacyOutsideTitle;
+
+  /// Body of the warning card: what leaves the phone and to whom
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال (وفيه أقسام زي الصحة والدوا والعيلة إذا خلّيتها مفتوحة)، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.'**
+  String get aiChatPrivacyOutsideBody;
+
+  /// The fix line of the warning card: PLAN Part 15, the on-device model
+  ///
+  /// In ar, this message translates to:
+  /// **'الحل الجاي: «الموديل على الجوال» — ذكاء اصطناعي بشتغل جوّا جوالك نفسه، وقتها بتسأل وما يطلع ولا حرف برّا.'**
+  String get aiChatPrivacyOutsideFix;
+
   /// No description provided for @aiChatPrivacyKeys.
   ///
   /// In ar, this message translates to:

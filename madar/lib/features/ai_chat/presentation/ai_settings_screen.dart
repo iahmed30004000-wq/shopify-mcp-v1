@@ -25,6 +25,7 @@ class AiSettingsScreen extends ConsumerWidget {
 
   static Key keyRow(AiProviderId p) => ValueKey('ai-settings-key-${p.name}');
   static const Key modelRow = ValueKey('ai-settings-model');
+  static const Key outsideNotice = ValueKey('ai-settings-outside-notice');
   static const Key temperatureSwitch = ValueKey('ai-settings-temperature-default');
 
   Future<void> _deleteAll(BuildContext context, WidgetRef ref) async {
@@ -171,6 +172,7 @@ class AiSettingsScreen extends ConsumerWidget {
                 title: l.aiChatSettingsPrivacy,
                 seed: 0.4,
                 children: [
+                  const _OutsideNoticeCard(key: outsideNotice),
                   SettingsNote(l.aiChatPrivacyCalls, icon: Icons.wifi_off_rounded),
                   SettingsNote(
                     l.aiChatPrivacyHistory(fmt.formatInt(ConversationStore.maxConversations)),
@@ -187,6 +189,82 @@ class AiSettingsScreen extends ConsumerWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// The warning card at the top of Settings › AI › Privacy: in plain words,
+/// what leaves the phone (what he types, and the summary he approves), to
+/// whom (the service whose key he entered), and what will replace it one
+/// day – the model on the phone itself (PLAN Part 15). It is a notice
+/// only: it changes nothing about what the chat does.
+class _OutsideNoticeCard extends StatelessWidget {
+  const _OutsideNoticeCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.s, Space.l, Space.s),
+      child: Semantics(
+        container: true,
+        label: '${l.aiChatPrivacyOutsideTitle}. ${l.aiChatPrivacyOutsideBody} ${l.aiChatPrivacyOutsideFix}',
+        excludeSemantics: true,
+        child: Container(
+          padding: const EdgeInsetsDirectional.all(Space.m),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(t.radiusM),
+            color: t.warning.withValues(alpha: 0.1),
+            border: Border.all(color: t.warning.withValues(alpha: 0.32), width: 0.9),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.warning_amber_rounded, size: 18, color: t.warning),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyOutsideTitle,
+                      style: text.titleSmall!.copyWith(color: t.textPrimary, height: 1.4),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: Space.s),
+              Text(
+                l.aiChatPrivacyOutsideBody,
+                style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.5),
+              ),
+              const SizedBox(height: Space.m),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.handyman_outlined, size: 16, color: t.accent),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyOutsideFix,
+                      style: text.bodySmall!.copyWith(color: t.accent, height: 1.5),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

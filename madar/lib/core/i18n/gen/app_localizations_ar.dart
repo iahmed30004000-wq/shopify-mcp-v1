@@ -21744,6 +21744,18 @@ class L10nAr extends L10n {
   String get aiChatSettingsPrivacy => 'الخصوصية';
 
   @override
+  String get aiChatPrivacyOutsideTitle =>
+      'تنبيه: هاي المحادثة كلامها بيطلع برّا جوالك';
+
+  @override
+  String get aiChatPrivacyOutsideBody =>
+      'اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال (وفيه أقسام زي الصحة والدوا والعيلة إذا خلّيتها مفتوحة)، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.';
+
+  @override
+  String get aiChatPrivacyOutsideFix =>
+      'الحل الجاي: «الموديل على الجوال» — ذكاء اصطناعي بشتغل جوّا جوالك نفسه، وقتها بتسأل وما يطلع ولا حرف برّا.';
+
+  @override
   String get aiChatPrivacyKeys =>
       'المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.';
 

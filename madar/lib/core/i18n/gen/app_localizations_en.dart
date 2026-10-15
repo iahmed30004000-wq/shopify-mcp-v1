@@ -21164,6 +21164,18 @@ class L10nEn extends L10n {
   String get aiChatSettingsPrivacy => 'Privacy';
 
   @override
+  String get aiChatPrivacyOutsideTitle =>
+      'Heads up: this chat leaves your phone';
+
+  @override
+  String get aiChatPrivacyOutsideBody =>
+      'What you type here, and the summary you approve before sending (health, medication and family among its sections, if you leave them on), go to the computers of the company whose key you entered – Anthropic or OpenAI – and don’t stay on your phone. Not a letter goes out until you tap Send, and you see exactly what goes first.';
+
+  @override
+  String get aiChatPrivacyOutsideFix =>
+      'Coming next: the model on your phone – an AI that runs inside the phone itself, so you can ask and nothing leaves it.';
+
+  @override
   String get aiChatPrivacyKeys =>
       'Keys live in the phone’s encrypted storage – not in the database, backups or exports.';
 

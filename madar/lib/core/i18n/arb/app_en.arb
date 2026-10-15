@@ -20611,6 +20611,18 @@
   "aiChatTemperatureDefault": "Model default (recommended)",
   "aiChatTemperatureNote": "Newer models accept only the default. Lower = steadier replies.",
   "aiChatSettingsPrivacy": "Privacy",
+  "aiChatPrivacyOutsideTitle": "Heads up: this chat leaves your phone",
+  "@aiChatPrivacyOutsideTitle": {
+    "description": "Title of the warning card in Settings › AI › Privacy"
+  },
+  "aiChatPrivacyOutsideBody": "What you type here, and the summary you approve before sending (health, medication and family among its sections, if you leave them on), go to the computers of the company whose key you entered – Anthropic or OpenAI – and don’t stay on your phone. Not a letter goes out until you tap Send, and you see exactly what goes first.",
+  "@aiChatPrivacyOutsideBody": {
+    "description": "Body of the warning card: what leaves the phone and to whom"
+  },
+  "aiChatPrivacyOutsideFix": "Coming next: the model on your phone – an AI that runs inside the phone itself, so you can ask and nothing leaves it.",
+  "@aiChatPrivacyOutsideFix": {
+    "description": "The fix line of the warning card: PLAN Part 15, the on-device model"
+  },
   "aiChatPrivacyKeys": "Keys live in the phone’s encrypted storage – not in the database, backups or exports.",
   "aiChatPrivacyCalls": "Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background.",
   "aiChatPrivacyHistory": "Chats are kept encrypted on your phone (the latest {count}), each with the summary you approved for it. They are part of your backups and your full data export.",
