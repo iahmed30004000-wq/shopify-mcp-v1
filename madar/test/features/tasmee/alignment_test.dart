@@ -50,7 +50,9 @@ void main() {
         expect(text.substring(w.start, w.end), w.text);
       }
       final hizb = targetOfAyah(const AyahRef(2, 26));
-      expect(hizb.words.first.text, 'إِنَّ');
+      final hizbText = ayahText(const AyahRef(2, 26));
+      expect(hizbText.startsWith('\u06DE'), isTrue, reason: 'the ayah opens with the hizb sign');
+      expect(hizb.words.first.text, hizbText.split(' ')[1]);
       expect(hizb.words.first.start, greaterThan(0), reason: 'the hizb sign is still in the original text');
     });
   });

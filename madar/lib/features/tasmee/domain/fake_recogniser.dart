@@ -219,7 +219,13 @@ class FakeRecognitionRun implements RecognitionRun {
   Future<void> stop() async {
     _listening = false;
     closed = true;
-    if (!_controller.isClosed) await _controller.close();
+    if (_controller.isClosed) return;
+    // A single-subscription controller's `close()` does not complete until
+    // someone listens, so a run nobody read (he changed his mind before the
+    // first word) must not be awaited or the caller would hang.
+    final listened = _controller.hasListener;
+    final closing = _controller.close();
+    if (listened) await closing;
   }
 
   @override

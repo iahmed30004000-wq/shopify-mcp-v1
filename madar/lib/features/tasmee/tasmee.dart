@@ -93,6 +93,10 @@
 /// | `tasmee_mistakes` | one word that went wrong: expected, where, what was heard, whether a hint was used |
 library;
 
+// The two enums the log is written with live with every other stored enum
+// (`lib/core/domain/enums.dart`), and are re-exported here so a screen or a
+// test needs one import.
+export '../../core/domain/enums.dart' show MistakeKind, TasmeeMode;
 export 'data/tasmee_providers.dart';
 export 'data/tasmee_service.dart';
 export 'domain/alignment.dart';

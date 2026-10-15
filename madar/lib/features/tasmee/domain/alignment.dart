@@ -613,11 +613,16 @@ abstract final class TasmeeAligner {
     );
   }
 
-  /// A replacement always costs less than a skip plus an addition (so a
-  /// word said wrong reads as one wrong word, not two mistakes), and a near
-  /// miss costs a hair less than something unrelated so the aligner pairs
-  /// the words a human would.
-  static double _subCost(String want, String got) => 1.0 - 0.1 * TasmeeFold.similarity(want, got);
+  /// What one replacement costs.
+  ///
+  /// Just over one, so a word said wrong reads as **one** wrong word rather
+  /// than a skip plus an addition (which would cost two), while two
+  /// replacements in a row cost a shade more than a skip plus an addition –
+  /// so a dropped word followed by an inserted one is read as exactly
+  /// that, and not as a chain of wrong words shifted along. The surcharge
+  /// shrinks to nothing as the two words get closer, so a near miss really
+  /// is paired with the word it is a near miss of.
+  static double _subCost(String want, String got) => 1.0 + 0.1 * (1.0 - TasmeeFold.similarity(want, got));
 
   /// Which word of the target each heard word sits at, for the pauses.
   static List<int> _gapPerHeardWord(
@@ -662,41 +667,77 @@ abstract final class TasmeeAligner {
       }
       final run = [for (var k = at; k <= to; k++) extraAt[k].$2];
       final runFolded = [for (final w in run) TasmeeFold.word(w.heard)];
-      final reason = _reasonOf(target, expected, prelude, gap, runFolded);
-      for (final w in run) {
-        final unsureHeard = w.confidence < options.confidenceFloor;
-        out.add(_extraOf(target, gap, w, unsureHeard && reason == ExtraReason.inserted ? ExtraReason.unsure : reason));
+      final reasons = _reasonsOf(target, expected, prelude, gap, runFolded);
+      for (var k = 0; k < run.length; k++) {
+        final w = run[k];
+        var reason = reasons[k];
+        if (reason == ExtraReason.inserted && w.confidence < options.confidenceFloor) {
+          reason = ExtraReason.unsure;
+        }
+        out.add(_extraOf(target, gap, w, reason));
       }
       at = to + 1;
     }
     return out;
   }
 
-  static ExtraReason _reasonOf(
+  /// Why each word of one run of extras was heard.
+  ///
+  /// A run is read **piece by piece** from its start, because a reciter
+  /// does several forgivable things in a row: the basmala, then the verse,
+  /// then the verse again. Each piece is either a prelude the caller
+  /// allowed, or a stretch of the verified text said again, and whatever is
+  /// left over is a genuinely inserted word.
+  static List<ExtraReason> _reasonsOf(
     RecitationTarget target,
     List<AyahWord> expected,
     List<List<String>> prelude,
     int gap,
     List<String> run,
   ) {
-    // The basmala (or another allowed prelude) before an ayah's first word.
-    if (target.startsAyah(gap) || gap == 0) {
-      for (final p in prelude) {
-        if (p.length <= run.length && _same(run.sublist(0, p.length), p) && run.length == p.length) {
-          return ExtraReason.prelude;
+    final out = List<ExtraReason>.filled(run.length, ExtraReason.inserted);
+    final atAyahStart = gap == 0 || target.startsAyah(gap);
+    var i = 0;
+    while (i < run.length) {
+      // 1. the basmala (or another allowed prelude) before an ayah's first word.
+      if (atAyahStart) {
+        var matched = false;
+        for (final p in prelude) {
+          if (p.isEmpty || i + p.length > run.length) continue;
+          if (!_same(run.sublist(i, i + p.length), p)) continue;
+          for (var k = i; k < i + p.length; k++) {
+            out[k] = ExtraReason.prelude;
+          }
+          i += p.length;
+          matched = true;
+          break;
         }
+        if (matched) continue;
       }
+      // 2. words of the verified text said again: the longest stretch of
+      //    the text that starts here. Anywhere in the text when it is two
+      //    words or more; a single word only when it is the one just said
+      //    or the one about to be said (a stutter, a restart of one word).
+      var best = 0;
+      for (var s = 0; s < expected.length; s++) {
+        var len = 0;
+        while (i + len < run.length && s + len < expected.length && run[i + len] == expected[s + len].folded) {
+          len++;
+        }
+        if (len > best && (len >= 2 || s == gap - 1 || s == gap)) best = len;
+      }
+      if (best > 0) {
+        for (var k = i; k < i + best; k++) {
+          out[k] = ExtraReason.repetition;
+        }
+        i += best;
+        continue;
+      }
+      // 3. a word that is not in the text here at all.
+      out[i] = ExtraReason.inserted;
+      i++;
     }
-    final n = run.length;
-    // Words of the text said again – just before this point, or just after
-    // it (both shapes come out of an equally good alignment of a restart).
-    if (gap - n >= 0 && _same(run, [for (var k = gap - n; k < gap; k++) expected[k].folded])) {
-      return ExtraReason.repetition;
-    }
-    if (gap + n <= expected.length && _same(run, [for (var k = gap; k < gap + n; k++) expected[k].folded])) {
-      return ExtraReason.repetition;
-    }
-    return ExtraReason.inserted;
+    return out;
   }
 
   static bool _same(List<String> a, List<String> b) {
