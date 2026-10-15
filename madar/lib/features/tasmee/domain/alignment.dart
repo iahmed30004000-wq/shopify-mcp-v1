@@ -543,7 +543,14 @@ abstract final class TasmeeAligner {
       i = pi;
       j = pj;
     }
-    extraAt.sort((a, b) => a.$1.compareTo(b.$1));
+    // The walk ran backwards, so the extras came out in reverse order of
+    // what was heard; put them back and group them by where they sit (the
+    // sort is stable, so a run keeps the order he said it in).
+    final heardOrder = extraAt.reversed.toList();
+    heardOrder.sort((a, b) => a.$1.compareTo(b.$1));
+    extraAt
+      ..clear()
+      ..addAll(heardOrder);
 
     // ---- what he never reached is not a mistake -------------------------
     if (!options.countUnreachedAsSkipped) {
