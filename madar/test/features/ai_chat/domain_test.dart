@@ -107,7 +107,9 @@ void main() {
     const settings = AiSettings();
 
     test('system prompt carries exactly the approved summary; none carries nothing personal', () {
-      const md = '# Summary\n\n## Health\n\n- Pain: 3/10 average';
+      // Anything the chat may share goes out byte for byte. (A Health
+      // section would be cut here instead – see `chat_private_areas_test`.)
+      const md = '# Summary\n\n## Faith\n\n- Prayers logged: 34/35';
       final p = AiPayloadBuilder.build(
         conversation: _conv(context: const ChatContext.personal(md)),
         settings: settings,

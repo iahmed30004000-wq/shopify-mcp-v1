@@ -10,6 +10,17 @@
 ///   ([SummaryText.clean]);
 /// * health is tracking data only (scores, averages, tags, flags).
 ///
+/// With `forChat: true` it is narrower again, and not by a setting: the
+/// health, family and body sections are never built, so his medication,
+/// his conditions, his labs, his pain, his family – and his food, which
+/// lives under Body: the log, the meal plan and the rules he wrote – have
+/// no text to be chosen from or sent (`ChatSummaryScope`, the owner's rule
+/// of 2026-10-16). The six food tables and the two family tables are
+/// exactly the Body and Family areas of `DataAreas`, so nothing of his
+/// food or his people reaches the document through another section; the
+/// one place a person of his used to appear outside Family – the other
+/// side of a debt – carries no name in that mode.
+///
 /// Headings and labels follow the app language via [L10n]. Pure Dart.
 library;
 

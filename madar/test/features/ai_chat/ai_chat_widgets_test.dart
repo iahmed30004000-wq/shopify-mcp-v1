@@ -336,17 +336,27 @@ void main() {
 
     expect(env.anthropic.requests.length, 1);
     final system = env.anthropic.requests.single.system;
-    // What the preview approved, rebuilt independently from the same data and stored choices.
+    // What the preview approved, rebuilt independently from the same data
+    // and stored choices – with the chat's own narrower scope
+    // (`forChat: true`), which is what the preview was opened with.
     final expected = await tester.runAsync(() async {
       final repo = DataExportRepository(env.db);
       final input = await repo.loadSummaryInput(DateTime(2026, 9, 30, 10));
       final options = await repo.summaryOptions();
-      final summary = AiSummaryBuilder(await _l10n('en'), languageCode: 'en').build(input, profile: options.profile);
+      final summary = AiSummaryBuilder(
+        await _l10n('en'),
+        languageCode: 'en',
+        forChat: true,
+      ).build(input, profile: options.profile);
       return summary.compose(options.included);
     });
     expect(system, contains('${AiSystemPrompt.contextStart}\n${expected!.trimRight()}\n${AiSystemPrompt.contextEnd}'));
     expect(system, isNot(contains('## Money')));
     expect(system, contains('## Faith'));
+    // The three areas the chat can never carry were not even on offer.
+    for (final absent in ['## Health', '## Family', '## Body', 'Metformin', 'Mother']) {
+      expect(system, isNot(contains(absent)), reason: absent);
+    }
   });
 
   group('markdown + bidi rendering', () {
