@@ -490,9 +490,19 @@ void main() {
     expect(find.text(l.aiChatKeyNotSet), findsOneWidget);
     await tester.tap(find.text('8,192'));
     await settleAsync(tester, rounds: 4);
-    await tester.ensureVisible(find.byKey(AiSettingsScreen.temperatureSwitch));
+    // ensureVisible only brings it into the viewport, which on this page
+    // leaves it under the top bar - the privacy note made the page taller.
+    // Nudge the list back down until the switch is really pressable, bounded
+    // by the few nudges that can ever be needed.
+    final tempSwitch = find.byKey(AiSettingsScreen.temperatureSwitch);
+    await tester.ensureVisible(tempSwitch);
     await frames(tester, 6);
-    await tester.tap(find.byKey(AiSettingsScreen.temperatureSwitch));
+    for (var i = 0; i < 6 && tempSwitch.hitTestable().evaluate().isEmpty; i++) {
+      await tester.drag(find.byType(Scrollable).first, const Offset(0, 80));
+      await frames(tester, 4);
+    }
+    expect(tempSwitch.hitTestable(), findsOneWidget, reason: 'the switch never cleared the header');
+    await tester.tap(tempSwitch.hitTestable());
     await settleAsync(tester, rounds: 4);
     await frames(tester, 8);
     final stored = await tester.runAsync(() => KeyValueRepository(env.db).getJson(AiSettings.storageKey));

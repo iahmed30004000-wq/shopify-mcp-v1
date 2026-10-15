@@ -224,7 +224,7 @@ Gemini into a JSON file, import it as a new planet, and let Madar turn it into a
 
 ---
 
-## Part 7 — The daily chat as the main input  → APK #22
+## Part 7 — The daily chat as the main input  ✅ DONE
 
 - One chat where he types everything that happened ("صرفت ٥ دنانير قهوة، صليت العصر بالمسجد،
   تمرين صدر ٤×١٢، وجع الركبة ٦") and Madar **files each piece into the right place**, showing
