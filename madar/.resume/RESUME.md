@@ -119,6 +119,39 @@ one APK each). This file keeps only the live state and the raw owner feedback.
   content; his approval of the kids design; his approval of a visual reference for «السما».
 - **Nothing new starts before Part 7 ships** - the working rule stands.
 
+## STOPPED 2026-10-16 (weekly limit near; the OMS has priority until it renews Tue 20/10)
+
+**Where it stopped.** Everything is committed and pushed on `claude/madar-life-os-nmoysk`,
+head `39a84a1`, working tree clean. The last APK the owner has is **#36**
+(run 38691456442) - the daily chat, the iqama and Hifz.
+
+**The one thing outstanding, and it is the first step back:** the build of `f2b24aa`
+(the Work board + the gym) **failed on 3 tests out of 8399** and no APK came out of it, so the
+kanban, the gym and the AI-chat privacy work are on the branch but not yet in his hands. The
+three were never identified - a whole-suite run was in flight when work stopped.
+
+**First step when we return**, in order:
+1. `cd madar && $SCRATCHPAD/ftfull --exclude-tags screenshot` and read `Failing tests:` at the
+   end. Suites not re-run after the gym landed are the likely place: data, app, import, search,
+   notification_center, orbit, work. (The gym added schema **v10** and three tables, and touched
+   `data_areas.dart`, the routes and the deep links; the Work board added **v9** and two columns.)
+2. Fix them, push, and ship the APK - it carries the Work board, the gym and the chat privacy.
+3. Then the next part by his order. «الموديل على الجوال» is the next one and is **unblocked
+   now**: he decided on 2026-10-16 that the model is **not** bundled in the APK - the app
+   downloads it on first use of «التسميع», over Wi-Fi, behind his fingerprint, and keeps it on
+   the phone. Candidate reported to him and awaiting nothing: **tarteel-ai/whisper-base-ar-quran**,
+   **Apache 2.0**, Whisper Base (77M params), WER 5.75%, with a whisper.cpp/GGML conversion
+   available. One honesty note still to close before downloading: its model card does not
+   document the training data.
+4. Still waiting on him, and only when those parts come up: the reviewer for «مدار الصغار»'s
+   religious content, the kids design, and the visual reference for «السما».
+
+**Cancelled by the owner 2026-10-16:** linking the Work board to «فلك». No card-field document,
+and no further features on the board.
+
+**Answered 2026-10-16:** the Quran text is Tanzil (Uthmani, Hafs 'an 'Asim, v1.1), CC BY 3.0
+with Tanzil's terms, bundled verbatim and pinned by SHA-256.
+
 ## Night of 2026-10-15 → 16 (he was asleep; one agent at a time)
 
 Shipped, in his approved order, each its own commit:
