@@ -1,7 +1,9 @@
 /// The system prompt of every AI call: language, tone, the health boundary
-/// and – only when the user approved it – their Madar summary. Pure Dart.
+/// and – only when the user approved it, and only what may leave the phone
+/// at all ([ChatContextFilter]) – their Madar summary. Pure Dart.
 library;
 
+import 'context_filter.dart';
 import 'conversation.dart';
 
 abstract final class AiSystemPrompt {
@@ -28,7 +30,13 @@ abstract final class AiSystemPrompt {
         'health questions you may describe what the user has tracked and suggest they ask their clinician.',
       )
       ..writeln('- If you do not know something or it is not in the context, say so instead of guessing.');
-    if (context.isPersonal) {
+    // The one place a request's text is put together, and so the last gate:
+    // the owner's health, medication, food and family are cut out here,
+    // whatever the conversation carries and whatever he approved (his rule
+    // of 2026-10-16 – see [ChatContextFilter]). A document that carries
+    // none of them goes out exactly as he approved it, byte for byte.
+    final shared = context.isPersonal ? ChatContextFilter.sanitize(context.markdown!.trimRight()) : '';
+    if (shared.isNotEmpty) {
       b
         ..writeln(
           '- The user chose to share the summary below from Madar. It is private: use it only where it helps '
@@ -36,7 +44,7 @@ abstract final class AiSystemPrompt {
         )
         ..writeln()
         ..writeln(contextStart)
-        ..writeln(context.markdown!.trimRight())
+        ..writeln(shared)
         ..write(contextEnd);
     } else {
       b.write('- The user chose not to share personal context from Madar for this conversation.');

@@ -218,10 +218,13 @@ class AiSettingsScreen extends ConsumerWidget {
 
 /// The warning card at the top of Settings › AI › Privacy: in plain words,
 /// what leaves the phone (what he types, and the summary he approves), to
-/// whom (the service whose key he entered), that none of it happens until
-/// he turns the switch at the top of this screen on himself, and what will
-/// replace it one day – the model on the phone itself (PLAN Part 15).
-/// The card itself is a notice; the switch is what enforces it.
+/// whom (the service whose key he entered), what can never be in there at
+/// all – his health, his medication, his food and his family – that none
+/// of it happens until he turns the switch at the top of this screen on
+/// himself, and what will replace it one day – the model on the phone
+/// itself (PLAN Part 15). The card is a notice; the switch, the chat's own
+/// narrower summary (`ChatSummaryScope`) and `ChatContextFilter` are what
+/// enforce it.
 class _OutsideNoticeCard extends StatelessWidget {
   const _OutsideNoticeCard({super.key});
 
@@ -236,7 +239,7 @@ class _OutsideNoticeCard extends StatelessWidget {
         container: true,
         label:
             '${l.aiChatPrivacyOutsideTitle}. ${l.aiChatPrivacyOutsideBody} '
-            '${l.aiChatPrivacyOutsideSwitch} ${l.aiChatPrivacyOutsideFix}',
+            '${l.aiChatPrivacyNeverOut} ${l.aiChatPrivacyOutsideSwitch} ${l.aiChatPrivacyOutsideFix}',
         excludeSemantics: true,
         child: Container(
           padding: const EdgeInsetsDirectional.all(Space.m),
@@ -269,6 +272,26 @@ class _OutsideNoticeCard extends StatelessWidget {
               Text(
                 l.aiChatPrivacyOutsideBody,
                 style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.5),
+              ),
+              const SizedBox(height: Space.s),
+              // His second rule (2026-10-16): health, medication, food and
+              // family can never be in there at all. Enforced by
+              // `ChatSummaryScope` and `ChatContextFilter`, not by this card.
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.shield_outlined, size: 16, color: t.success),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyNeverOut,
+                      style: text.bodySmall!.copyWith(color: t.success, height: 1.5),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: Space.s),
               Row(

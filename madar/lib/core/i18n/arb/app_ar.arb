@@ -18850,6 +18850,10 @@
   "dataTxAdjustment": "تسوية",
   "dataSummarySubtitle": "يُعدّ على هاتفك · راجع كل قسم قبل المشاركة",
   "dataSummaryIntro": "لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.",
+  "dataSummaryChatExcluded": "الصحة والدوا والأكل والعيلة ما بتطلع أبدًا من هون، ولا حتى والمفتاح مفتوح. إذا بدّك تشاركها، بس من «استشارة ذكاء اصطناعي» بملف إنت بتبعته بإيدك.",
+  "@dataSummaryChatExcluded": {
+    "description": "Shown in the summary preview and the \"what will be sent\" sheet of the AI chat: the areas the chat can never carry"
+  },
   "dataSummaryPreparing": "نجهّز الملخّص على هاتفك…",
   "dataSummarySections": "الأقسام المضمَّنة",
   "dataSummarySectionsOf": "{selected} من {total} أقسام",
@@ -20703,9 +20707,13 @@
   "@aiChatPrivacyOutsideTitle": {
     "description": "Title of the warning card in Settings › AI › Privacy"
   },
-  "aiChatPrivacyOutsideBody": "اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال (وفيه أقسام زي الصحة والدوا والعيلة إذا خلّيتها مفتوحة)، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.",
+  "aiChatPrivacyOutsideBody": "اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.",
   "@aiChatPrivacyOutsideBody": {
     "description": "Body of the warning card: what leaves the phone and to whom"
+  },
+  "aiChatPrivacyNeverOut": "وصحتك وأدويتك وأكلك وعيلتك ما بتطلع أبدًا من هون، ولا حتى والمفتاح مفتوح: المحادثة أصلًا ما بتقدر تشيلهم، وما بتلاقيهم بالملخّص اللي بتوافق عليه.",
+  "@aiChatPrivacyNeverOut": {
+    "description": "The line the warning card gains after the owner's rule of 2026-10-16: the chat can never carry health, medication, food or family"
   },
   "aiChatPrivacyOutsideFix": "الحل الجاي: «الموديل على الجوال» — ذكاء اصطناعي بشتغل جوّا جوالك نفسه، وقتها بتسأل وما يطلع ولا حرف برّا.",
   "@aiChatPrivacyOutsideFix": {

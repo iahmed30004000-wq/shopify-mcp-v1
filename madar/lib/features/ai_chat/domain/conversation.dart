@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 
 import '../../data/domain/ai_summary.dart' show SummarySectionId;
 import 'ai_models.dart';
+import 'context_filter.dart';
 import 'markdown.dart';
 
 /// State of a message.
@@ -143,8 +144,10 @@ class ChatContext {
 
   bool get isPersonal => mode == ContextMode.personal && (markdown?.isNotEmpty ?? false);
 
-  /// The `## ` section headings of [markdown], in order.
-  List<String> get sectionTitles => sectionTitlesOf(markdown ?? '');
+  /// The `## ` section headings of what would actually be sent, in order –
+  /// the stored Markdown after [ChatContextFilter] (so the strip and the
+  /// preview can never name a section the request will not carry).
+  List<String> get sectionTitles => sectionTitlesOf(ChatContextFilter.sanitize(markdown ?? ''));
 
   static List<String> sectionTitlesOf(String markdown) => [
     for (final line in markdown.split('\n'))

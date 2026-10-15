@@ -80,6 +80,10 @@ final aiContextPickerProvider = Provider<AiContextPicker>(
       (context, {required andSend}) => showExportPreviewSheet(
         context,
         mode: ExportPreviewMode.select,
+        // The chat's own, narrower summary: health, family and body are
+        // not built, not offered and not sendable (the owner's rule of
+        // 2026-10-16 – see `ChatSummaryScope`).
+        forChat: true,
         confirmLabel: andSend ? L10n.of(context).aiChatContextUseAndSend : L10n.of(context).aiChatContextUse,
       ),
 );

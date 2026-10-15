@@ -19114,6 +19114,10 @@ class L10nEn extends L10n {
       'Nothing goes anywhere until you choose. The preview below is exactly what would leave – notes, phone numbers and document or account numbers are never included.';
 
   @override
+  String get dataSummaryChatExcluded =>
+      'Health, medication, food and family never leave from here – not even with the switch on. To share them you hand over a file yourself from “Ask an AI”.';
+
+  @override
   String get dataSummaryPreparing => 'Preparing the summary on your phone…';
 
   @override
@@ -21277,7 +21281,11 @@ class L10nEn extends L10n {
 
   @override
   String get aiChatPrivacyOutsideBody =>
-      'What you type here, and the summary you approve before sending (health, medication and family among its sections, if you leave them on), go to the computers of the company whose key you entered – Anthropic or OpenAI – and don’t stay on your phone. Not a letter goes out until you tap Send, and you see exactly what goes first.';
+      'What you type here, and the summary you approve before sending, go to the computers of the company whose key you entered – Anthropic or OpenAI – and don’t stay on your phone. Not a letter goes out until you tap Send, and you see exactly what goes first.';
+
+  @override
+  String get aiChatPrivacyNeverOut =>
+      'And your health, medication, food and family never leave from here – not even with the switch on: the chat cannot carry them at all, and you won’t find them in the summary you approve.';
 
   @override
   String get aiChatPrivacyOutsideFix =>

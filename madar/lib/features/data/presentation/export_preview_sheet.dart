@@ -42,9 +42,11 @@ Future<String?> showExportPreviewSheet(
   ExportPreviewMode mode = ExportPreviewMode.share,
   String? confirmLabel,
   ValueChanged<AiSummaryOptions>? onApproved,
+  bool forChat = false,
 }) => showInteractionSheet<String>(
   context,
-  builder: (_) => ExportPreviewSheet(mode: mode, confirmLabel: confirmLabel, onApproved: onApproved),
+  builder: (_) =>
+      ExportPreviewSheet(mode: mode, confirmLabel: confirmLabel, onApproved: onApproved, forChat: forChat),
 );
 
 /// Builds the summary on the device and shows exactly what would go out,
@@ -57,9 +59,16 @@ class ExportPreviewSheet extends ConsumerStatefulWidget {
     this.confirmLabel,
     this.input,
     this.onApproved,
+    this.forChat = false,
   });
 
   final ExportPreviewMode mode;
+
+  /// Opened by the AI chat. The summary is then built with
+  /// `forChat: true` (`ChatSummaryScope`): health, family and body are not
+  /// built, not listed and not offered – and the sheet says so in his own
+  /// words, so an absence never surprises him.
+  final bool forChat;
 
   /// Called with the section choices behind the returned Markdown, just
   /// before the sheet closes in [ExportPreviewMode.select] (see
@@ -71,6 +80,9 @@ class ExportPreviewSheet extends ConsumerStatefulWidget {
 
   /// Pre-loaded input (tests / screenshots); otherwise read from the database.
   final SummaryInput? input;
+
+  /// The «ما بيطلع أبدًا» line, for the tests.
+  static const Key excludedNote = ValueKey('summary-chat-excluded');
 
   @override
   ConsumerState<ExportPreviewSheet> createState() => _ExportPreviewSheetState();
@@ -139,9 +151,9 @@ class _ExportPreviewSheetState extends ConsumerState<ExportPreviewSheet> {
   }
 
   AiSummary _summaryFor(SummaryInput input, AiSummaryOptions o, L10n l, String lang) {
-    final key = (input, o.profile, lang);
+    final key = (input, o.profile, lang, widget.forChat);
     if (_summary == null || _summaryKey != key) {
-      _summary = AiSummaryBuilder(l, languageCode: lang).build(input, profile: o.profile);
+      _summary = AiSummaryBuilder(l, languageCode: lang, forChat: widget.forChat).build(input, profile: o.profile);
       _summaryKey = key;
     }
     return _summary!;
@@ -198,6 +210,15 @@ class _ExportPreviewSheetState extends ConsumerState<ExportPreviewSheet> {
         mainAxisSize: MainAxisSize.min,
         children: [
           DataNote(text: l.dataSummaryIntro, icon: Icons.shield_moon_outlined, color: t.accent),
+          if (widget.forChat) ...[
+            const SizedBox(height: Space.s),
+            DataNote(
+              key: ExportPreviewSheet.excludedNote,
+              text: l.dataSummaryChatExcluded,
+              icon: Icons.visibility_off_outlined,
+              color: t.warning,
+            ),
+          ],
           const SizedBox(height: Space.m),
           Wrap(
             spacing: Space.s,

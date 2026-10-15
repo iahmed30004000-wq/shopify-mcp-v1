@@ -14,6 +14,13 @@
 ///   exactly what is shared; after that the "will send" strip above the
 ///   field always shows the sections, message count and approximate size,
 ///   and "What will be sent" shows the exact request.
+/// * His health, his medication, his food and his family never leave the
+///   phone through the chat – not even with the switch on and nothing
+///   trimmed in the preview. The summary the chat builds has no health,
+///   family or body section at all (`ChatSummaryScope`, built with
+///   `forChat: true`), and [ChatContextFilter] cuts them again where the
+///   request's text is assembled. The file round trip (`ai_bridge`) is
+///   his own and unaffected: there he hands the file over himself.
 /// * Conversations are stored encrypted in the database (`key_values`,
 ///   bounded).
 ///
@@ -59,6 +66,7 @@ export 'data/transport.dart'
         IoAiTransport;
 export 'domain/ai_models.dart';
 export 'domain/ai_settings.dart';
+export 'domain/context_filter.dart' show ChatContextFilter;
 export 'domain/conversation.dart';
 export 'domain/payload.dart';
 export 'presentation/ai_chat_list_screen.dart' show AiChatListScreen;

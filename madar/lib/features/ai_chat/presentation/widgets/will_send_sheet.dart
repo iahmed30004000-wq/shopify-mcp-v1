@@ -52,6 +52,7 @@ class WillSendSheet extends StatelessWidget {
   final DateTime Function() clock;
 
   static const Key noneSwitchKey = ValueKey('ai-no-context-switch');
+  static const Key excludedKey = ValueKey('ai-context-excluded');
   static const Key chooseKey = ValueKey('ai-choose-sections');
   static const Key payloadKey = ValueKey('ai-view-payload');
 
@@ -149,6 +150,25 @@ class WillSendSheet extends StatelessWidget {
                     onPressed: () => onChooseSections(context),
                   ),
                 ),
+              const SizedBox(height: Space.m),
+              // What can never be in there, said before he looks for it.
+              Row(
+                key: excludedKey,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.shield_outlined, size: 16, color: t.warning),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.dataSummaryChatExcluded,
+                      style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.45),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: Space.m),
               GlassCard(
                 glow: false,

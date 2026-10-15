@@ -33,10 +33,17 @@ import 'summary_input.dart';
 import 'summary_text.dart';
 
 class AiSummaryBuilder {
-  AiSummaryBuilder(this.l, {required this.languageCode});
+  AiSummaryBuilder(this.l, {required this.languageCode, this.forChat = false});
 
   final L10n l;
   final String languageCode;
+
+  /// Building for the AI chat (the owner's rule of 2026-10-16, see
+  /// [ChatSummaryScope]): the health, family and body sections are not
+  /// built at all – their text is never assembled, so it cannot be chosen,
+  /// stored or sent – and the debts list carries the amounts without the
+  /// other person's name. Everything else is the same document.
+  final bool forChat;
 
   /// Look-back windows (days).
   static const int shortWindow = 7, window = 30, labMonths = 12;
@@ -55,18 +62,22 @@ class AiSummaryBuilder {
       return SummarySection(id: id, title: title, body: b.isEmpty ? l.dataSumNoData : b, isEmpty: b.isEmpty);
     }
 
+    // `forChat`: the forbidden sections are skipped before their body is
+    // built, so the chat never holds that text at all.
+    bool skip(SummarySectionId id) => forChat && ChatSummaryScope.forbidden.contains(id);
     return AiSummary(
       heading: l.dataSumHeading(isoDay(_today)),
       preamble: l.dataSumPreamble,
+      forChat: forChat,
       sections: [
         section(SummarySectionId.profile, l.dataSumProfile, _profile(input, profile)),
         section(SummarySectionId.faith, l.dataSumFaith, _faith(input)),
-        section(SummarySectionId.health, l.dataSumHealth, _health(input)),
+        if (!skip(SummarySectionId.health)) section(SummarySectionId.health, l.dataSumHealth, _health(input)),
         section(SummarySectionId.money, l.dataSumMoney, _money(input)),
-        section(SummarySectionId.family, l.dataSumFamily, _family(input)),
+        if (!skip(SummarySectionId.family)) section(SummarySectionId.family, l.dataSumFamily, _family(input)),
         section(SummarySectionId.work, l.dataSumWork, _work(input)),
         section(SummarySectionId.growth, l.dataSumGrowth, _growth(input)),
-        section(SummarySectionId.body, l.dataSumBody, _body(input)),
+        if (!skip(SummarySectionId.body)) section(SummarySectionId.body, l.dataSumBody, _body(input)),
         section(SummarySectionId.travel, l.dataSumTravel, _travel(input)),
         section(SummarySectionId.custom, l.dataSumCustom, _custom(input)),
       ],
@@ -576,9 +587,12 @@ class AiSummaryBuilder {
       for (final d in input.debts)
         if (d.settledAt == null && d.amountMilli - (paid[d.id] ?? 0) > 0) d,
     ]..sort((a, b) => _bySortThenName(a.sortOrder, b.sortOrder, a.person, b.person, a.id, b.id));
+    // A debt is money, but the other side of it is a person – often one of
+    // his own people. The chat gets the amounts without the name.
+    String who(DebtRow d) => forChat ? SummaryText.mask : _clean(d.person);
     md.sub(l.dataSumDebtsTitle, [
       for (final d in debts)
-        '- ${_join([d.direction == DebtDirection.iOwe ? l.dataSumIOwe(_clean(d.person), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)) : l.dataSumOwedToMe(_clean(d.person), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)), if (d.dueDate != null) l.dataSumDueOn(isoDay(d.dueDate!))])}',
+        '- ${_join([d.direction == DebtDirection.iOwe ? l.dataSumIOwe(who(d), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)) : l.dataSumOwedToMe(who(d), amount(d.amountMilli - (paid[d.id] ?? 0), d.currency), amount(d.amountMilli, d.currency)), if (d.dueDate != null) l.dataSumDueOn(isoDay(d.dueDate!))])}',
     ]);
 
     // Jars.

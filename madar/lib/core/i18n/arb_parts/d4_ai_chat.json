@@ -331,9 +331,14 @@
     "description": "Title of the warning card in Settings › AI › Privacy"
   },
   "aiChatPrivacyOutsideBody": {
-    "ar": "اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال (وفيه أقسام زي الصحة والدوا والعيلة إذا خلّيتها مفتوحة)، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.",
-    "en": "What you type here, and the summary you approve before sending (health, medication and family among its sections, if you leave them on), go to the computers of the company whose key you entered – Anthropic or OpenAI – and don’t stay on your phone. Not a letter goes out until you tap Send, and you see exactly what goes first.",
+    "ar": "اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.",
+    "en": "What you type here, and the summary you approve before sending, go to the computers of the company whose key you entered – Anthropic or OpenAI – and don’t stay on your phone. Not a letter goes out until you tap Send, and you see exactly what goes first.",
     "description": "Body of the warning card: what leaves the phone and to whom"
+  },
+  "aiChatPrivacyNeverOut": {
+    "ar": "وصحتك وأدويتك وأكلك وعيلتك ما بتطلع أبدًا من هون، ولا حتى والمفتاح مفتوح: المحادثة أصلًا ما بتقدر تشيلهم، وما بتلاقيهم بالملخّص اللي بتوافق عليه.",
+    "en": "And your health, medication, food and family never leave from here – not even with the switch on: the chat cannot carry them at all, and you won\u2019t find them in the summary you approve.",
+    "description": "The line the warning card gains after the owner's rule of 2026-10-16: the chat can never carry health, medication, food or family"
   },
   "aiChatPrivacyOutsideFix": {
     "ar": "الحل الجاي: «الموديل على الجوال» — ذكاء اصطناعي بشتغل جوّا جوالك نفسه، وقتها بتسأل وما يطلع ولا حرف برّا.",

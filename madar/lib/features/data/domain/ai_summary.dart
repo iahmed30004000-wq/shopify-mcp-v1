@@ -10,6 +10,48 @@ import 'package:meta/meta.dart';
 /// The sections of the summary, in document order.
 enum SummarySectionId { profile, faith, health, money, family, work, growth, body, travel, custom }
 
+/// What the AI chat may carry, and what it may never carry.
+///
+/// The owner's rule of 2026-10-16: «لازم ما يبعت أبدًا صحتي ولا أدويتي ولا
+/// أكلي ولا عيلتي حتى وهو شغّال» – even with his switch on, and whatever he
+/// approves in the preview, his health, his medication, his food and his
+/// family never leave the phone through the chat.
+///
+/// So the chat's set of sections is not a default he can flip: it is a
+/// [filter] applied where the document is assembled ([AiSummary.compose]
+/// of a summary built with `forChat: true`), which is why no screen – not
+/// even one written later – can put a forbidden section back. His food
+/// lives under Body (the log, the meal plan and his own food rules) and
+/// his medication under Health, so cutting those three sections cuts all
+/// four things he named. The file round trip (`ai_bridge`) is his own and
+/// is untouched: there he hands the file over himself.
+abstract final class ChatSummaryScope {
+  /// Never in a chat request.
+  static const Set<SummarySectionId> forbidden = {
+    SummarySectionId.health,
+    SummarySectionId.family,
+    SummarySectionId.body,
+  };
+
+  /// Everything else (see `chat_scope_test.dart`: the two sets together are
+  /// exactly [SummarySectionId.values]).
+  static const Set<SummarySectionId> allowed = {
+    SummarySectionId.profile,
+    SummarySectionId.faith,
+    SummarySectionId.money,
+    SummarySectionId.work,
+    SummarySectionId.growth,
+    SummarySectionId.travel,
+    SummarySectionId.custom,
+  };
+
+  /// [ids] without the forbidden ones.
+  static Set<SummarySectionId> filter(Iterable<SummarySectionId> ids) => {
+    for (final id in ids)
+      if (!forbidden.contains(id)) id,
+  };
+}
+
 /// Profile basics the user chose to share (all off by default).
 @immutable
 class SummaryProfileOptions {
@@ -156,7 +198,7 @@ class SummarySection {
 /// A built summary: the document header and every section.
 @immutable
 class AiSummary {
-  const AiSummary({required this.heading, required this.preamble, required this.sections});
+  const AiSummary({required this.heading, required this.preamble, required this.sections, this.forChat = false});
 
   /// `# …` line text (without `#`).
   final String heading;
@@ -165,13 +207,25 @@ class AiSummary {
   final String preamble;
   final List<SummarySection> sections;
 
+  /// Built for the AI chat: the sections [ChatSummaryScope] forbids were
+  /// never built, and [compose] filters the chosen ids again – so health,
+  /// family and body cannot enter the document from here even if a caller
+  /// asks for them.
+  final bool forChat;
+
   SummarySection section(SummarySectionId id) => sections.firstWhere((s) => s.id == id);
 
-  /// Sections that are [included] and hold data, in document order.
-  List<SummarySection> selected(Set<SummarySectionId> included) => [
-    for (final s in sections)
-      if (included.contains(s.id) && !s.isEmpty) s,
-  ];
+  /// Sections that are [included] and hold data, in document order. In a
+  /// [forChat] summary the forbidden ids are dropped here too, so the
+  /// counts a preview shows and the document [compose] writes can never
+  /// disagree.
+  List<SummarySection> selected(Set<SummarySectionId> included) {
+    final ids = forChat ? ChatSummaryScope.filter(included) : included;
+    return [
+      for (final s in sections)
+        if (ids.contains(s.id) && !s.isEmpty) s,
+    ];
+  }
 
   /// The Markdown document with the [included] sections (empty sections
   /// are always left out). Deterministic: same data + options → same text.

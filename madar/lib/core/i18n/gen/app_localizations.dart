@@ -30423,6 +30423,12 @@ abstract class L10n {
   /// **'لا يُرسَل شيء إلى أي مكان حتى تختار. ما تراه في المعاينة أدناه هو بالضبط ما سيخرج، ولا تُضمَّن الملاحظات أو أرقام الهواتف أو أرقام الوثائق والحسابات.'**
   String get dataSummaryIntro;
 
+  /// Shown in the summary preview and the "what will be sent" sheet of the AI chat: the areas the chat can never carry
+  ///
+  /// In ar, this message translates to:
+  /// **'الصحة والدوا والأكل والعيلة ما بتطلع أبدًا من هون، ولا حتى والمفتاح مفتوح. إذا بدّك تشاركها، بس من «استشارة ذكاء اصطناعي» بملف إنت بتبعته بإيدك.'**
+  String get dataSummaryChatExcluded;
+
   /// No description provided for @dataSummaryPreparing.
   ///
   /// In ar, this message translates to:
@@ -33822,8 +33828,14 @@ abstract class L10n {
   /// Body of the warning card: what leaves the phone and to whom
   ///
   /// In ar, this message translates to:
-  /// **'اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال (وفيه أقسام زي الصحة والدوا والعيلة إذا خلّيتها مفتوحة)، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.'**
+  /// **'اللي بتكتبه هون، والملخّص اللي توافق عليه قبل الإرسال، بينبعتوا لكمبيوترات الشركة اللي حطّيت مفتاحها — Anthropic أو OpenAI — وما بيضلّوا عندك عالجوال. وما بينبعت ولا حرف إلا لما تضغط «إرسال»، وبتشوف قبلها بالضبط شو رايح.'**
   String get aiChatPrivacyOutsideBody;
+
+  /// The line the warning card gains after the owner's rule of 2026-10-16: the chat can never carry health, medication, food or family
+  ///
+  /// In ar, this message translates to:
+  /// **'وصحتك وأدويتك وأكلك وعيلتك ما بتطلع أبدًا من هون، ولا حتى والمفتاح مفتوح: المحادثة أصلًا ما بتقدر تشيلهم، وما بتلاقيهم بالملخّص اللي بتوافق عليه.'**
+  String get aiChatPrivacyNeverOut;
 
   /// The fix line of the warning card: PLAN Part 15, the on-device model
   ///
