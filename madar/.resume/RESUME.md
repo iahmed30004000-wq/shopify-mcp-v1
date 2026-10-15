@@ -131,19 +131,26 @@ kanban, the gym and the AI-chat privacy work are on the branch but not yet in hi
 three were never identified - a whole-suite run was in flight when work stopped.
 
 **First step when we return**, in order:
-1. `cd madar && $SCRATCHPAD/ftfull --exclude-tags screenshot` and read `Failing tests:` at the
-   end. Suites not re-run after the gym landed are the likely place: data, app, import, search,
-   notification_center, orbit, work. (The gym added schema **v10** and three tables, and touched
-   `data_areas.dart`, the routes and the deep links; the Work board added **v9** and two columns.)
-2. Fix them, push, and ship the APK - it carries the Work board, the gym and the chat privacy.
-3. Then the next part by his order. «الموديل على الجوال» is the next one and is **unblocked
+1. **One of the three is already found** (a whole-suite run got 4 minutes in before work stopped):
+   `test/app/search_opener_test.dart:140` - the case `an exercise opens the plan` expects
+   `/body?tab=plan`, but the gym gave an exercise its own screen, so `searchTargetOf` now returns
+   `/body/gym/exercise/r1`. The new behaviour is the right one (search opens the exercise itself,
+   not the tab above it), so the fix is the test's expectation, not the code. Check line 141
+   (`a workout opens the plan`) in the same breath - it passed, but confirm it still should.
+2. The other two are unknown: re-run `$SCRATCHPAD/ftfull --exclude-tags screenshot` from `madar/`
+   and read `Failing tests:` at the end. The likely suites are the ones the gym and the board
+   touched: data, app, import, search, notification_center, orbit, work. (The gym added schema
+   **v10** and three tables and touched `data_areas.dart`, the routes and the deep links; the
+   Work board added **v9** and two columns.)
+3. Fix all three, push, and ship the APK - it carries the Work board, the gym and the chat privacy.
+4. Then the next part by his order. «الموديل على الجوال» is the next one and is **unblocked
    now**: he decided on 2026-10-16 that the model is **not** bundled in the APK - the app
    downloads it on first use of «التسميع», over Wi-Fi, behind his fingerprint, and keeps it on
    the phone. Candidate reported to him and awaiting nothing: **tarteel-ai/whisper-base-ar-quran**,
    **Apache 2.0**, Whisper Base (77M params), WER 5.75%, with a whisper.cpp/GGML conversion
    available. One honesty note still to close before downloading: its model card does not
    document the training data.
-4. Still waiting on him, and only when those parts come up: the reviewer for «مدار الصغار»'s
+5. Still waiting on him, and only when those parts come up: the reviewer for «مدار الصغار»'s
    religious content, the kids design, and the visual reference for «السما».
 
 **Cancelled by the owner 2026-10-16:** linking the Work board to «فلك». No card-field document,
