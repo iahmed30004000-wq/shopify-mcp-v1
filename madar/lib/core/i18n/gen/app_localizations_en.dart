@@ -27993,4 +27993,326 @@ class L10nEn extends L10n {
   @override
   String get hifzExportBody =>
       'The same recitation file, with your goals, today\'s plan and each verse\'s strength added for the PC app. It holds no audio.';
+
+  @override
+  String get hifzPlanScreenSubtitle =>
+      'Today\'s plan: something new, a near review and a far one.';
+
+  @override
+  String get hifzPlanOpenMap => 'The page map';
+
+  @override
+  String get hifzPlanOpenGoals => 'My goals';
+
+  @override
+  String get hifzPlanOpenFind => 'Find a verse';
+
+  @override
+  String get hifzPlanSettings => 'Plan settings';
+
+  @override
+  String hifzPlanTodaySummary(String ayat, String portions) {
+    return 'Today: $ayat across $portions';
+  }
+
+  @override
+  String hifzPortionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count passages',
+      one: '1 passage',
+      zero: 'no passages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzPlanCycleLine(String days) {
+    return 'A full turn of the far rotation takes $days';
+  }
+
+  @override
+  String hifzPlanMemorisedLine(String ayat) {
+    return 'Your list holds $ayat';
+  }
+
+  @override
+  String get hifzPlanStart => 'Start';
+
+  @override
+  String hifzPlanSuggestedMethod(String method) {
+    return 'Suggested method: $method';
+  }
+
+  @override
+  String get hifzPlanPickMethod => 'Pick a method';
+
+  @override
+  String get hifzPlanMethodsTitle => 'The memorisation methods';
+
+  @override
+  String get hifzPlanNothingTitle => 'No plan today';
+
+  @override
+  String get hifzPlanAddFirst => 'Add a passage to memorise';
+
+  @override
+  String get hifzDrillTypedBadge => 'Typed by you on the keyboard';
+
+  @override
+  String get hifzDrillCheck => 'Compare';
+
+  @override
+  String get hifzDrillSave => 'Save the result';
+
+  @override
+  String get hifzDrillSaved =>
+      'The result is saved and the verses\' strength is updated';
+
+  @override
+  String get hifzDrillAgain => 'Again';
+
+  @override
+  String get hifzDrillNothingYet => 'Write something first, then compare.';
+
+  @override
+  String get hifzDrillNoResultMode =>
+      'This method gives no score: you listen and repeat, and the strength changes when you recite or write.';
+
+  @override
+  String hifzDrillResultLine(
+    String right,
+    String wrong,
+    String missed,
+    String extra,
+  ) {
+    return '$right right · $wrong changed · $missed missed · $extra extra';
+  }
+
+  @override
+  String get hifzDrillWriteHint => 'Write the verses from memory here';
+
+  @override
+  String hifzBlankField(String number) {
+    return 'Blank number $number';
+  }
+
+  @override
+  String get hifzBlanksTypedBody =>
+      'Some words were taken out; type each one in its place. Only the missing words are scored.';
+
+  @override
+  String get hifzHidingTypedBody =>
+      'The page is hidden; write the verses from memory. A word appears when you type it correctly.';
+
+  @override
+  String get hifzHidingHarder => 'Make it harder';
+
+  @override
+  String get hifzHidingEasier => 'Make it easier';
+
+  @override
+  String hifzHidingStageNow(String stage) {
+    return 'Stage: $stage';
+  }
+
+  @override
+  String get hifzLinkingTypedBody =>
+      'The end of the verse is in front of you; type the first words of the next one.';
+
+  @override
+  String get hifzLinkingField => 'The start of the next verse';
+
+  @override
+  String hifzLinkingScore(String right, String total) {
+    return '$right links right out of $total';
+  }
+
+  @override
+  String get hifzLinkingNeedsTwo =>
+      'Linking needs at least two verses. Pick a longer passage.';
+
+  @override
+  String get hifzChunkLevelAyah => 'One verse at a time';
+
+  @override
+  String get hifzChunkLevelGroup => 'A group of verses';
+
+  @override
+  String get hifzChunkLevelPage => 'A whole page';
+
+  @override
+  String get hifzChunkBody =>
+      'Read one verse at a time, then in groups, then the whole page.';
+
+  @override
+  String hifzChunkCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count chunks',
+      one: '1 chunk',
+      zero: 'no chunks',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzListenPlan(String times, String passes) {
+    return 'Each verse plays $times, and the whole range $passes.';
+  }
+
+  @override
+  String hifzListenMissing(String count) {
+    return 'The audio of $count is not downloaded, so those will be skipped.';
+  }
+
+  @override
+  String get hifzMapOnlyMine => 'Only what is in my list';
+
+  @override
+  String get hifzMapWholeMushaf => 'The whole mushaf';
+
+  @override
+  String get hifzMapEmpty =>
+      'No page is yours yet. Add a passage to memorise and it shows up here.';
+
+  @override
+  String hifzMapPageTitle(String page) {
+    return 'Page $page';
+  }
+
+  @override
+  String hifzMapTestedLine(String tested) {
+    return '$tested of the page\'s verses have been tested';
+  }
+
+  @override
+  String get hifzMapColourMeans => 'What the colours mean';
+
+  @override
+  String get hifzGoalAdd => 'Add a goal';
+
+  @override
+  String get hifzGoalEditTitle => 'Edit the goal';
+
+  @override
+  String get hifzGoalFieldTitle => 'The goal in your own words';
+
+  @override
+  String get hifzGoalFieldTitleHint => 'For example: Al-Kahf every Friday';
+
+  @override
+  String get hifzGoalFieldKind => 'The kind of goal';
+
+  @override
+  String get hifzGoalFieldSurah => 'The surah';
+
+  @override
+  String get hifzGoalFieldFrom => 'From verse';
+
+  @override
+  String get hifzGoalFieldTo => 'To verse';
+
+  @override
+  String get hifzGoalFieldWeekday => 'The day of the week';
+
+  @override
+  String get hifzGoalFieldAmount => 'The amount each day';
+
+  @override
+  String get hifzGoalFieldUnit => 'The unit';
+
+  @override
+  String get hifzGoalFieldWindow => 'Remind after which prayer';
+
+  @override
+  String get hifzGoalFieldOffset => 'How many minutes after';
+
+  @override
+  String get hifzGoalFieldRemind => 'Remind me';
+
+  @override
+  String get hifzGoalFieldActive => 'The goal is on';
+
+  @override
+  String get hifzGoalSaved => 'The goal is saved';
+
+  @override
+  String get hifzGoalDeleted => 'The goal is deleted';
+
+  @override
+  String get hifzGoalDelete => 'Delete the goal';
+
+  @override
+  String get hifzGoalOffNow => 'Switched off';
+
+  @override
+  String get hifzGoalNotDueToday => 'Not asked for today';
+
+  @override
+  String get hifzGoalNoReminder => 'No reminder';
+
+  @override
+  String get hifzGoalReorderHint => 'Drag a goal up or down to reorder them.';
+
+  @override
+  String get hifzFindTypedTitle => 'Find a verse by typing';
+
+  @override
+  String get hifzFindTypedBody =>
+      'Type any phrase you remember and the app tells you where it is in the mushaf. All on the phone, with no internet. When the microphone is ready, the same thing with your voice.';
+
+  @override
+  String get hifzFindTypedHint => 'Type at least three words';
+
+  @override
+  String get hifzFindSearch => 'Search';
+
+  @override
+  String hifzFindYouTyped(String phrase) {
+    return 'What you typed: $phrase';
+  }
+
+  @override
+  String get hifzFindOpenInMushaf => 'Open it in the mushaf';
+
+  @override
+  String hifzFindMatchedWords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count words',
+      one: '1 word',
+      zero: 'no words',
+    );
+    return '$_temp0 of what you typed';
+  }
+
+  @override
+  String get hifzMicSoonTitle => 'By voice is not ready yet';
+
+  @override
+  String get hifzMicSoonBody =>
+      'The speech recogniser is not on the phone yet. Until it is, the same method works by typing.';
+
+  @override
+  String get hifzMicSoonNoTyping =>
+      'This method needs your voice, so it cannot be typed. Try writing from memory, or progressive hiding.';
+
+  @override
+  String get hifzFaithCardTitle => 'Today\'s memorisation';
+
+  @override
+  String get hifzFaithCardEmpty => 'Start your memorisation plan';
+
+  @override
+  String get hifzSettingsNewFromNone => 'No new portion';
+
+  @override
+  String get hifzSettingsRepetitions => 'How many times to repeat each verse';
+
+  @override
+  String get hifzSettingsSaved => 'The settings are saved';
 }

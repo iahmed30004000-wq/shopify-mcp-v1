@@ -340,6 +340,43 @@ List<RouteBase> madarRoutes() => [
         pageBuilder: (context, state) =>
             MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const HifzRoutePage()),
         routes: [
+          // Part 14 – «الحفظ»: the morning screen and the three pages it
+          // opens. They sit under `/hifz` because that is where he looks
+          // for them, but each is pushed on its own.
+          GoRoute(
+            path: 'plan',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const HifzPlanRoutePage(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'map',
+                pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+                  context: context,
+                  key: state.pageKey,
+                  child: const HifzMapRoutePage(),
+                ),
+              ),
+              GoRoute(
+                path: 'goals',
+                pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+                  context: context,
+                  key: state.pageKey,
+                  child: const HifzGoalsRoutePage(),
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'find',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: HifzFindRoutePage(query: state.uri.queryParameters['q'] ?? ''),
+            ),
+          ),
           GoRoute(
             path: 'review',
             pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(

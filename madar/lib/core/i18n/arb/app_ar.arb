@@ -26043,5 +26043,222 @@
   "hifzSettingsCapNote": "مهما غبت، اليوم ما بيزيد عن هاد الحد.",
   "hifzSettingsStartFrom": "الجديد بيبلّش من",
   "hifzExportTitle": "صدّر الحفظ مع السجل",
-  "hifzExportBody": "نفس ملف التسميع، وزيادة عليه أهدافك وخطة اليوم وقوة كل آية، عشان «فلك» يقراهم. ما فيه ولا صوت."
+  "hifzExportBody": "نفس ملف التسميع، وزيادة عليه أهدافك وخطة اليوم وقوة كل آية، عشان «فلك» يقراهم. ما فيه ولا صوت.",
+  "hifzPlanScreenSubtitle": "خطة اليوم: جديد، مراجعة قريبة، ومراجعة بعيدة.",
+  "hifzPlanOpenMap": "خريطة الصفحات",
+  "hifzPlanOpenGoals": "أهدافي",
+  "hifzPlanOpenFind": "دوّر على آية",
+  "hifzPlanSettings": "إعدادات الخطة",
+  "hifzPlanTodaySummary": "اليوم: {ayat} على {portions}",
+  "@hifzPlanTodaySummary": {
+    "placeholders": {
+      "ayat": {
+        "type": "String"
+      },
+      "portions": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPortionsCount": "{count, plural, =0{ولا مقطع} =1{مقطع واحد} =2{مقطعين} few{{count} مقاطع} many{{count} مقطعًا} other{{count} مقطع}}",
+  "@hifzPortionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzPlanCycleLine": "دورة المراجعة البعيدة بتكمل لفّة كل {days}",
+  "@hifzPlanCycleLine": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPlanMemorisedLine": "بقايمتك {ayat}",
+  "@hifzPlanMemorisedLine": {
+    "placeholders": {
+      "ayat": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPlanStart": "ابدأ",
+  "hifzPlanSuggestedMethod": "الطريقة المقترحة: {method}",
+  "@hifzPlanSuggestedMethod": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPlanPickMethod": "اختار طريقة",
+  "hifzPlanMethodsTitle": "طرق الحفظ",
+  "hifzPlanNothingTitle": "ما في خطة اليوم",
+  "hifzPlanAddFirst": "ضيف مقطع للحفظ",
+  "hifzDrillTypedBadge": "مكتوب منك على الكيبورد",
+  "@hifzDrillTypedBadge": {
+    "description": "Marks the owner's typed answer; it is never styled as Quran text"
+  },
+  "hifzDrillCheck": "قارن",
+  "hifzDrillSave": "احفظ النتيجة",
+  "hifzDrillSaved": "انحفظت النتيجة، وقوة الآيات تحدّثت",
+  "hifzDrillAgain": "من جديد",
+  "hifzDrillNothingYet": "اكتب إشي الأول، وبعدها قارن.",
+  "hifzDrillNoResultMode": "هاي الطريقة ما بتعطي علامة: إنت بتسمع وبتردّد، والقوة بتتغيّر لمّا تسمّع أو تكتب.",
+  "hifzDrillResultLine": "{right} صح · {wrong} غير · {missed} ناقصة · {extra} زيادة",
+  "@hifzDrillResultLine": {
+    "placeholders": {
+      "right": {
+        "type": "String"
+      },
+      "wrong": {
+        "type": "String"
+      },
+      "missed": {
+        "type": "String"
+      },
+      "extra": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzDrillWriteHint": "اكتب الآيات من حفظك هون",
+  "hifzBlankField": "الفراغ رقم {number}",
+  "@hifzBlankField": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzBlanksTypedBody": "شيلنا كلمات من النص، واكتب كل كلمة بمكانها. الحساب على الكلمات المشيلة بس.",
+  "hifzHidingTypedBody": "الصفحة مخفية، واكتب الآيات من حفظك. الكلمة بتبيّن لمّا تكتبها صح.",
+  "hifzHidingHarder": "صعّبها",
+  "hifzHidingEasier": "سهّلها",
+  "hifzHidingStageNow": "المرحلة: {stage}",
+  "@hifzHidingStageNow": {
+    "placeholders": {
+      "stage": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzLinkingTypedBody": "آخر كلمات الآية قدامك؛ اكتب أول كلمات الآية اللي بعدها.",
+  "hifzLinkingField": "أول الآية اللي بعدها",
+  "hifzLinkingScore": "{right} وصلة صح من {total}",
+  "@hifzLinkingScore": {
+    "placeholders": {
+      "right": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzLinkingNeedsTwo": "الربط بدّه آيتين على الأقل. اختار مقطع أطول.",
+  "hifzChunkLevelAyah": "آية آية",
+  "hifzChunkLevelGroup": "مجموعة آيات",
+  "hifzChunkLevelPage": "صفحة كاملة",
+  "hifzChunkBody": "اقرا آية آية، وبعدها جمّعهن مجموعات، وبعدها الصفحة كلها.",
+  "hifzChunkCount": "{count, plural, =0{ولا قطعة} =1{قطعة وحدة} =2{قطعتين} few{{count} قطع} many{{count} قطعة} other{{count} قطعة}}",
+  "@hifzChunkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzListenPlan": "كل آية بتنعاد {times}، واللفّة كلها {passes}.",
+  "@hifzListenPlan": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      },
+      "passes": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzListenMissing": "في {count} صوتهن مش منزّل، فهاي بتنحكى عليك.",
+  "@hifzListenMissing": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapOnlyMine": "اللي بقايمتي بس",
+  "hifzMapWholeMushaf": "المصحف كله",
+  "hifzMapEmpty": "لسا ما في ولا صفحة إلك. ضيف مقطع للحفظ وبتبيّن هون.",
+  "hifzMapPageTitle": "صفحة {page}",
+  "@hifzMapPageTitle": {
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapTestedLine": "{tested} من آيات الصفحة انختبرت عليها",
+  "@hifzMapTestedLine": {
+    "placeholders": {
+      "tested": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapColourMeans": "شو بتعني الألوان",
+  "hifzGoalAdd": "ضيف هدف",
+  "hifzGoalEditTitle": "عدّل الهدف",
+  "hifzGoalFieldTitle": "الهدف بكلامك",
+  "hifzGoalFieldTitleHint": "مثلًا: الكهف كل جمعة",
+  "hifzGoalFieldKind": "نوع الهدف",
+  "hifzGoalFieldSurah": "السورة",
+  "hifzGoalFieldFrom": "من آية",
+  "hifzGoalFieldTo": "لآية",
+  "hifzGoalFieldWeekday": "يوم الأسبوع",
+  "hifzGoalFieldAmount": "المقدار كل يوم",
+  "hifzGoalFieldUnit": "الوحدة",
+  "hifzGoalFieldWindow": "التذكير بعد أي صلاة",
+  "hifzGoalFieldOffset": "بعدها بكم دقيقة",
+  "hifzGoalFieldRemind": "ذكّرني",
+  "hifzGoalFieldActive": "الهدف شغّال",
+  "hifzGoalSaved": "انحفظ الهدف",
+  "hifzGoalDeleted": "انمسح الهدف",
+  "hifzGoalDelete": "امسح الهدف",
+  "hifzGoalOffNow": "مطفي",
+  "hifzGoalNotDueToday": "مش مطلوب اليوم",
+  "hifzGoalNoReminder": "بدون تذكير",
+  "hifzGoalReorderHint": "اسحب الهدف لفوق أو لتحت عشان ترتّبهن.",
+  "hifzFindTypedTitle": "دوّر على آية بالكتابة",
+  "hifzFindTypedBody": "اكتب أي مقطع بتتذكره، والتطبيق بيقلّك وين هو بالمصحف. كل إشي على الجوال، وبدون إنترنت. لمّا يجهز المايك، نفس الإشي بصوتك.",
+  "hifzFindTypedHint": "اكتب ثلاث كلمات على الأقل",
+  "hifzFindSearch": "دوّر",
+  "hifzFindYouTyped": "اللي كتبته: {phrase}",
+  "@hifzFindYouTyped": {
+    "placeholders": {
+      "phrase": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzFindOpenInMushaf": "افتحها بالمصحف",
+  "hifzFindMatchedWords": "{count, plural, =0{ولا كلمة} =1{كلمة وحدة} =2{كلمتين} few{{count} كلمات} many{{count} كلمة} other{{count} كلمة}} من اللي كتبته",
+  "@hifzFindMatchedWords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzMicSoonTitle": "بصوتك لسا مش جاهز",
+  "hifzMicSoonBody": "برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. لحد ما يجهز، نفس الطريقة بتشتغل بالكتابة.",
+  "hifzMicSoonNoTyping": "هاي الطريقة بدها صوتك، فما بتشتغل بالكتابة. جرّب «اكتب من حفظك» أو «الإخفاء التدريجي».",
+  "hifzFaithCardTitle": "حفظ اليوم",
+  "hifzFaithCardEmpty": "ابدأ خطة الحفظ",
+  "hifzSettingsNewFromNone": "ما في جديد",
+  "hifzSettingsRepetitions": "كم مرة تعيد كل آية",
+  "hifzSettingsSaved": "انحفظت الإعدادات"
 }

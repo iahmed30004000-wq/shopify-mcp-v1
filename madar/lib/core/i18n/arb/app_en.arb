@@ -26043,5 +26043,222 @@
   "hifzSettingsCapNote": "However long you are away, a day never grows past this.",
   "hifzSettingsStartFrom": "The new portion starts at",
   "hifzExportTitle": "Export memorisation with the log",
-  "hifzExportBody": "The same recitation file, with your goals, today's plan and each verse's strength added for the PC app. It holds no audio."
+  "hifzExportBody": "The same recitation file, with your goals, today's plan and each verse's strength added for the PC app. It holds no audio.",
+  "hifzPlanScreenSubtitle": "Today's plan: something new, a near review and a far one.",
+  "hifzPlanOpenMap": "The page map",
+  "hifzPlanOpenGoals": "My goals",
+  "hifzPlanOpenFind": "Find a verse",
+  "hifzPlanSettings": "Plan settings",
+  "hifzPlanTodaySummary": "Today: {ayat} across {portions}",
+  "@hifzPlanTodaySummary": {
+    "placeholders": {
+      "ayat": {
+        "type": "String"
+      },
+      "portions": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPortionsCount": "{count, plural, =0{no passages} =1{1 passage} other{{count} passages}}",
+  "@hifzPortionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzPlanCycleLine": "A full turn of the far rotation takes {days}",
+  "@hifzPlanCycleLine": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPlanMemorisedLine": "Your list holds {ayat}",
+  "@hifzPlanMemorisedLine": {
+    "placeholders": {
+      "ayat": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPlanStart": "Start",
+  "hifzPlanSuggestedMethod": "Suggested method: {method}",
+  "@hifzPlanSuggestedMethod": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzPlanPickMethod": "Pick a method",
+  "hifzPlanMethodsTitle": "The memorisation methods",
+  "hifzPlanNothingTitle": "No plan today",
+  "hifzPlanAddFirst": "Add a passage to memorise",
+  "hifzDrillTypedBadge": "Typed by you on the keyboard",
+  "@hifzDrillTypedBadge": {
+    "description": "Marks the owner's typed answer; it is never styled as Quran text"
+  },
+  "hifzDrillCheck": "Compare",
+  "hifzDrillSave": "Save the result",
+  "hifzDrillSaved": "The result is saved and the verses' strength is updated",
+  "hifzDrillAgain": "Again",
+  "hifzDrillNothingYet": "Write something first, then compare.",
+  "hifzDrillNoResultMode": "This method gives no score: you listen and repeat, and the strength changes when you recite or write.",
+  "hifzDrillResultLine": "{right} right · {wrong} changed · {missed} missed · {extra} extra",
+  "@hifzDrillResultLine": {
+    "placeholders": {
+      "right": {
+        "type": "String"
+      },
+      "wrong": {
+        "type": "String"
+      },
+      "missed": {
+        "type": "String"
+      },
+      "extra": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzDrillWriteHint": "Write the verses from memory here",
+  "hifzBlankField": "Blank number {number}",
+  "@hifzBlankField": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzBlanksTypedBody": "Some words were taken out; type each one in its place. Only the missing words are scored.",
+  "hifzHidingTypedBody": "The page is hidden; write the verses from memory. A word appears when you type it correctly.",
+  "hifzHidingHarder": "Make it harder",
+  "hifzHidingEasier": "Make it easier",
+  "hifzHidingStageNow": "Stage: {stage}",
+  "@hifzHidingStageNow": {
+    "placeholders": {
+      "stage": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzLinkingTypedBody": "The end of the verse is in front of you; type the first words of the next one.",
+  "hifzLinkingField": "The start of the next verse",
+  "hifzLinkingScore": "{right} links right out of {total}",
+  "@hifzLinkingScore": {
+    "placeholders": {
+      "right": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzLinkingNeedsTwo": "Linking needs at least two verses. Pick a longer passage.",
+  "hifzChunkLevelAyah": "One verse at a time",
+  "hifzChunkLevelGroup": "A group of verses",
+  "hifzChunkLevelPage": "A whole page",
+  "hifzChunkBody": "Read one verse at a time, then in groups, then the whole page.",
+  "hifzChunkCount": "{count, plural, =0{no chunks} =1{1 chunk} other{{count} chunks}}",
+  "@hifzChunkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzListenPlan": "Each verse plays {times}, and the whole range {passes}.",
+  "@hifzListenPlan": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      },
+      "passes": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzListenMissing": "The audio of {count} is not downloaded, so those will be skipped.",
+  "@hifzListenMissing": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapOnlyMine": "Only what is in my list",
+  "hifzMapWholeMushaf": "The whole mushaf",
+  "hifzMapEmpty": "No page is yours yet. Add a passage to memorise and it shows up here.",
+  "hifzMapPageTitle": "Page {page}",
+  "@hifzMapPageTitle": {
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapTestedLine": "{tested} of the page's verses have been tested",
+  "@hifzMapTestedLine": {
+    "placeholders": {
+      "tested": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapColourMeans": "What the colours mean",
+  "hifzGoalAdd": "Add a goal",
+  "hifzGoalEditTitle": "Edit the goal",
+  "hifzGoalFieldTitle": "The goal in your own words",
+  "hifzGoalFieldTitleHint": "For example: Al-Kahf every Friday",
+  "hifzGoalFieldKind": "The kind of goal",
+  "hifzGoalFieldSurah": "The surah",
+  "hifzGoalFieldFrom": "From verse",
+  "hifzGoalFieldTo": "To verse",
+  "hifzGoalFieldWeekday": "The day of the week",
+  "hifzGoalFieldAmount": "The amount each day",
+  "hifzGoalFieldUnit": "The unit",
+  "hifzGoalFieldWindow": "Remind after which prayer",
+  "hifzGoalFieldOffset": "How many minutes after",
+  "hifzGoalFieldRemind": "Remind me",
+  "hifzGoalFieldActive": "The goal is on",
+  "hifzGoalSaved": "The goal is saved",
+  "hifzGoalDeleted": "The goal is deleted",
+  "hifzGoalDelete": "Delete the goal",
+  "hifzGoalOffNow": "Switched off",
+  "hifzGoalNotDueToday": "Not asked for today",
+  "hifzGoalNoReminder": "No reminder",
+  "hifzGoalReorderHint": "Drag a goal up or down to reorder them.",
+  "hifzFindTypedTitle": "Find a verse by typing",
+  "hifzFindTypedBody": "Type any phrase you remember and the app tells you where it is in the mushaf. All on the phone, with no internet. When the microphone is ready, the same thing with your voice.",
+  "hifzFindTypedHint": "Type at least three words",
+  "hifzFindSearch": "Search",
+  "hifzFindYouTyped": "What you typed: {phrase}",
+  "@hifzFindYouTyped": {
+    "placeholders": {
+      "phrase": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzFindOpenInMushaf": "Open it in the mushaf",
+  "hifzFindMatchedWords": "{count, plural, =0{no words} =1{1 word} other{{count} words}} of what you typed",
+  "@hifzFindMatchedWords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzMicSoonTitle": "By voice is not ready yet",
+  "hifzMicSoonBody": "The speech recogniser is not on the phone yet. Until it is, the same method works by typing.",
+  "hifzMicSoonNoTyping": "This method needs your voice, so it cannot be typed. Try writing from memory, or progressive hiding.",
+  "hifzFaithCardTitle": "Today's memorisation",
+  "hifzFaithCardEmpty": "Start your memorisation plan",
+  "hifzSettingsNewFromNone": "No new portion",
+  "hifzSettingsRepetitions": "How many times to repeat each verse",
+  "hifzSettingsSaved": "The settings are saved"
 }

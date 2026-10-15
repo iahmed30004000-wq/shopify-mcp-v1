@@ -103,6 +103,30 @@ abstract final class AppRoutes {
   static String hifzReviewOf(String? cardId) =>
       Uri(path: hifzReview, queryParameters: cardId == null ? null : {'card': cardId}).toString();
 
+  // Part 14 – «الحفظ»: the daily plan, the page map, the goals, and
+  // «شازام القرآن» typed. They are siblings of `/hifz`, not children of
+  // one another: each is pushed on its own, so back returns to the Faith
+  // world and never to a second copy of the morning screen.
+
+  /// «الحفظ» – the morning screen: today's new portion, the near review
+  /// and the far rotation.
+  static const String hifzPlan = '/hifz/plan';
+
+  /// The mushaf coloured by how strongly each page is held.
+  static const String hifzMap = '/hifz/plan/map';
+
+  /// His memorisation goals, with their prayer-time reminders.
+  static const String hifzGoals = '/hifz/plan/goals';
+
+  /// «شازام القرآن», typed (`?q=` starts with a phrase).
+  static const String hifzFind = '/hifz/find';
+
+  /// Location of the finder already holding [phrase].
+  static String hifzFindOf(String? phrase) => Uri(
+    path: hifzFind,
+    queryParameters: phrase == null || phrase.isEmpty ? null : {'q': phrase},
+  ).toString();
+
   /// The qibla compass.
   static const String qibla = '/qibla';
 

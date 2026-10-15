@@ -125,6 +125,8 @@ abstract final class LifeNav {
 /// | recipes, recipe_ingredients (`recipeId`) | `/sufra/recipe/<id>` | `/sufra/recipes` |
 /// | cooked_meals | `/sufra/history` | same |
 /// | kitchen_rules | `/sufra/rules` | same |
+/// | hifz_goals | `/hifz/plan/goals` | same |
+/// | hifz_marks | `/hifz/plan/map` | same |
 /// | custom_modules, custom_entries (`moduleId`) | `/modules/module/<id>` | `/modules` |
 /// | record_lists | `/list/<id>` | its host's lists (`hostTable`/`hostId`), else `/lists` |
 /// | record_list_items (`listId`) | `/list/<listId>` | `/lists` |
@@ -170,6 +172,11 @@ abstract final class LifeRecordLinks {
     'recipe_ingredients',
     'cooked_meals',
     'kitchen_rules',
+    // Part 14 – «الحفظ». A goal opens the goals screen; a stretch he
+    // marked «مش عليّ» or reset opens the page map, where both marks are
+    // made and undone.
+    'hifz_goals',
+    'hifz_marks',
     // «الألعاب» – the games' own world. A game is not a row in a table, but
     // a link to one must still land somewhere: in the hall, where it is
     // played, which is this world's first door.
@@ -220,6 +227,10 @@ abstract final class LifeRecordLinks {
       'recipe_ingredients' => either(of('recipeId'), AppRoutes.sufraRecipeOf, AppRoutes.sufraRecipes),
       'cooked_meals' => AppRoutes.sufraHistory,
       'kitchen_rules' => AppRoutes.sufraRules,
+      // Part 14 – «الحفظ». The goals screen holds every goal (a goal has
+      // no page of its own), and the page map is where a mark lives.
+      'hifz_goals' => AppRoutes.hifzGoals,
+      'hifz_marks' => AppRoutes.hifzMap,
       // «الألعاب». A show opens itself, full screen; without an id (or with
       // one the programme no longer has) the hall opens, so a game link
       // never dead-ends. The games he saved from a link have their own page.

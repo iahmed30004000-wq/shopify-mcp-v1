@@ -28725,4 +28725,334 @@ class L10nAr extends L10n {
   @override
   String get hifzExportBody =>
       'نفس ملف التسميع، وزيادة عليه أهدافك وخطة اليوم وقوة كل آية، عشان «فلك» يقراهم. ما فيه ولا صوت.';
+
+  @override
+  String get hifzPlanScreenSubtitle =>
+      'خطة اليوم: جديد، مراجعة قريبة، ومراجعة بعيدة.';
+
+  @override
+  String get hifzPlanOpenMap => 'خريطة الصفحات';
+
+  @override
+  String get hifzPlanOpenGoals => 'أهدافي';
+
+  @override
+  String get hifzPlanOpenFind => 'دوّر على آية';
+
+  @override
+  String get hifzPlanSettings => 'إعدادات الخطة';
+
+  @override
+  String hifzPlanTodaySummary(String ayat, String portions) {
+    return 'اليوم: $ayat على $portions';
+  }
+
+  @override
+  String hifzPortionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مقطع',
+      many: '$count مقطعًا',
+      few: '$count مقاطع',
+      two: 'مقطعين',
+      one: 'مقطع واحد',
+      zero: 'ولا مقطع',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzPlanCycleLine(String days) {
+    return 'دورة المراجعة البعيدة بتكمل لفّة كل $days';
+  }
+
+  @override
+  String hifzPlanMemorisedLine(String ayat) {
+    return 'بقايمتك $ayat';
+  }
+
+  @override
+  String get hifzPlanStart => 'ابدأ';
+
+  @override
+  String hifzPlanSuggestedMethod(String method) {
+    return 'الطريقة المقترحة: $method';
+  }
+
+  @override
+  String get hifzPlanPickMethod => 'اختار طريقة';
+
+  @override
+  String get hifzPlanMethodsTitle => 'طرق الحفظ';
+
+  @override
+  String get hifzPlanNothingTitle => 'ما في خطة اليوم';
+
+  @override
+  String get hifzPlanAddFirst => 'ضيف مقطع للحفظ';
+
+  @override
+  String get hifzDrillTypedBadge => 'مكتوب منك على الكيبورد';
+
+  @override
+  String get hifzDrillCheck => 'قارن';
+
+  @override
+  String get hifzDrillSave => 'احفظ النتيجة';
+
+  @override
+  String get hifzDrillSaved => 'انحفظت النتيجة، وقوة الآيات تحدّثت';
+
+  @override
+  String get hifzDrillAgain => 'من جديد';
+
+  @override
+  String get hifzDrillNothingYet => 'اكتب إشي الأول، وبعدها قارن.';
+
+  @override
+  String get hifzDrillNoResultMode =>
+      'هاي الطريقة ما بتعطي علامة: إنت بتسمع وبتردّد، والقوة بتتغيّر لمّا تسمّع أو تكتب.';
+
+  @override
+  String hifzDrillResultLine(
+    String right,
+    String wrong,
+    String missed,
+    String extra,
+  ) {
+    return '$right صح · $wrong غير · $missed ناقصة · $extra زيادة';
+  }
+
+  @override
+  String get hifzDrillWriteHint => 'اكتب الآيات من حفظك هون';
+
+  @override
+  String hifzBlankField(String number) {
+    return 'الفراغ رقم $number';
+  }
+
+  @override
+  String get hifzBlanksTypedBody =>
+      'شيلنا كلمات من النص، واكتب كل كلمة بمكانها. الحساب على الكلمات المشيلة بس.';
+
+  @override
+  String get hifzHidingTypedBody =>
+      'الصفحة مخفية، واكتب الآيات من حفظك. الكلمة بتبيّن لمّا تكتبها صح.';
+
+  @override
+  String get hifzHidingHarder => 'صعّبها';
+
+  @override
+  String get hifzHidingEasier => 'سهّلها';
+
+  @override
+  String hifzHidingStageNow(String stage) {
+    return 'المرحلة: $stage';
+  }
+
+  @override
+  String get hifzLinkingTypedBody =>
+      'آخر كلمات الآية قدامك؛ اكتب أول كلمات الآية اللي بعدها.';
+
+  @override
+  String get hifzLinkingField => 'أول الآية اللي بعدها';
+
+  @override
+  String hifzLinkingScore(String right, String total) {
+    return '$right وصلة صح من $total';
+  }
+
+  @override
+  String get hifzLinkingNeedsTwo =>
+      'الربط بدّه آيتين على الأقل. اختار مقطع أطول.';
+
+  @override
+  String get hifzChunkLevelAyah => 'آية آية';
+
+  @override
+  String get hifzChunkLevelGroup => 'مجموعة آيات';
+
+  @override
+  String get hifzChunkLevelPage => 'صفحة كاملة';
+
+  @override
+  String get hifzChunkBody =>
+      'اقرا آية آية، وبعدها جمّعهن مجموعات، وبعدها الصفحة كلها.';
+
+  @override
+  String hifzChunkCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count قطعة',
+      many: '$count قطعة',
+      few: '$count قطع',
+      two: 'قطعتين',
+      one: 'قطعة وحدة',
+      zero: 'ولا قطعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzListenPlan(String times, String passes) {
+    return 'كل آية بتنعاد $times، واللفّة كلها $passes.';
+  }
+
+  @override
+  String hifzListenMissing(String count) {
+    return 'في $count صوتهن مش منزّل، فهاي بتنحكى عليك.';
+  }
+
+  @override
+  String get hifzMapOnlyMine => 'اللي بقايمتي بس';
+
+  @override
+  String get hifzMapWholeMushaf => 'المصحف كله';
+
+  @override
+  String get hifzMapEmpty =>
+      'لسا ما في ولا صفحة إلك. ضيف مقطع للحفظ وبتبيّن هون.';
+
+  @override
+  String hifzMapPageTitle(String page) {
+    return 'صفحة $page';
+  }
+
+  @override
+  String hifzMapTestedLine(String tested) {
+    return '$tested من آيات الصفحة انختبرت عليها';
+  }
+
+  @override
+  String get hifzMapColourMeans => 'شو بتعني الألوان';
+
+  @override
+  String get hifzGoalAdd => 'ضيف هدف';
+
+  @override
+  String get hifzGoalEditTitle => 'عدّل الهدف';
+
+  @override
+  String get hifzGoalFieldTitle => 'الهدف بكلامك';
+
+  @override
+  String get hifzGoalFieldTitleHint => 'مثلًا: الكهف كل جمعة';
+
+  @override
+  String get hifzGoalFieldKind => 'نوع الهدف';
+
+  @override
+  String get hifzGoalFieldSurah => 'السورة';
+
+  @override
+  String get hifzGoalFieldFrom => 'من آية';
+
+  @override
+  String get hifzGoalFieldTo => 'لآية';
+
+  @override
+  String get hifzGoalFieldWeekday => 'يوم الأسبوع';
+
+  @override
+  String get hifzGoalFieldAmount => 'المقدار كل يوم';
+
+  @override
+  String get hifzGoalFieldUnit => 'الوحدة';
+
+  @override
+  String get hifzGoalFieldWindow => 'التذكير بعد أي صلاة';
+
+  @override
+  String get hifzGoalFieldOffset => 'بعدها بكم دقيقة';
+
+  @override
+  String get hifzGoalFieldRemind => 'ذكّرني';
+
+  @override
+  String get hifzGoalFieldActive => 'الهدف شغّال';
+
+  @override
+  String get hifzGoalSaved => 'انحفظ الهدف';
+
+  @override
+  String get hifzGoalDeleted => 'انمسح الهدف';
+
+  @override
+  String get hifzGoalDelete => 'امسح الهدف';
+
+  @override
+  String get hifzGoalOffNow => 'مطفي';
+
+  @override
+  String get hifzGoalNotDueToday => 'مش مطلوب اليوم';
+
+  @override
+  String get hifzGoalNoReminder => 'بدون تذكير';
+
+  @override
+  String get hifzGoalReorderHint => 'اسحب الهدف لفوق أو لتحت عشان ترتّبهن.';
+
+  @override
+  String get hifzFindTypedTitle => 'دوّر على آية بالكتابة';
+
+  @override
+  String get hifzFindTypedBody =>
+      'اكتب أي مقطع بتتذكره، والتطبيق بيقلّك وين هو بالمصحف. كل إشي على الجوال، وبدون إنترنت. لمّا يجهز المايك، نفس الإشي بصوتك.';
+
+  @override
+  String get hifzFindTypedHint => 'اكتب ثلاث كلمات على الأقل';
+
+  @override
+  String get hifzFindSearch => 'دوّر';
+
+  @override
+  String hifzFindYouTyped(String phrase) {
+    return 'اللي كتبته: $phrase';
+  }
+
+  @override
+  String get hifzFindOpenInMushaf => 'افتحها بالمصحف';
+
+  @override
+  String hifzFindMatchedWords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count كلمة',
+      many: '$count كلمة',
+      few: '$count كلمات',
+      two: 'كلمتين',
+      one: 'كلمة وحدة',
+      zero: 'ولا كلمة',
+    );
+    return '$_temp0 من اللي كتبته';
+  }
+
+  @override
+  String get hifzMicSoonTitle => 'بصوتك لسا مش جاهز';
+
+  @override
+  String get hifzMicSoonBody =>
+      'برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. لحد ما يجهز، نفس الطريقة بتشتغل بالكتابة.';
+
+  @override
+  String get hifzMicSoonNoTyping =>
+      'هاي الطريقة بدها صوتك، فما بتشتغل بالكتابة. جرّب «اكتب من حفظك» أو «الإخفاء التدريجي».';
+
+  @override
+  String get hifzFaithCardTitle => 'حفظ اليوم';
+
+  @override
+  String get hifzFaithCardEmpty => 'ابدأ خطة الحفظ';
+
+  @override
+  String get hifzSettingsNewFromNone => 'ما في جديد';
+
+  @override
+  String get hifzSettingsRepetitions => 'كم مرة تعيد كل آية';
+
+  @override
+  String get hifzSettingsSaved => 'انحفظت الإعدادات';
 }

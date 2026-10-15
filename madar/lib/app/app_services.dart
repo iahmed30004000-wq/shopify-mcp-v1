@@ -13,6 +13,7 @@ import '../features/prayer/domain/time_zones.dart';
 import '../features/quran/quran.dart' show quranMetaProvider;
 import '../features/recitation/recitation.dart' show RecitationPlayer, recitationPlayerProvider;
 import '../features/saved_games/saved_games.dart' show savedGamesLegacyImportProvider;
+import '../features/hifz/hifz_plan.dart' show hifzGoalReminderSyncProvider;
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
 import 'health_services.dart';
@@ -145,7 +146,8 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 /// * adhkar reminders stay planned (re-planned on settings, location,
 ///   language and day changes – [adhkarReminderSyncProvider]);
 /// * wird reminders likewise, a week ahead after each plan's prayer
-///   ([wirdReminderSyncProvider]), and a wird portion read in the Quran
+///   ([wirdReminderSyncProvider]); «الحفظ»'s goal reminders, hung off the
+///   prayer times a week ahead ([hifzGoalReminderSyncProvider]); and a wird portion read in the Quran
 ///   reader is logged as done ([wirdCompletionSyncProvider]);
 /// * notification taps open their pages ([AppNotificationRouter]), a tap on
 ///   the recitation's media notification the full player
@@ -224,6 +226,9 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     ref.watch(adhkarReminderSyncProvider);
     ref.watch(wirdReminderSyncProvider);
     ref.watch(wirdCompletionSyncProvider);
+    // Part 14 – «الحفظ»: the goals' reminders, planned a week ahead off
+    // the prayer times (nothing fires unless this is watched).
+    ref.watch(hifzGoalReminderSyncProvider);
     ref.watch(appNotificationRouterProvider);
     ref.watch(recitationNotificationRouterProvider);
     watchHealthServices(ref);

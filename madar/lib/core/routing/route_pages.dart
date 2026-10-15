@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/adhkar/adhkar.dart';
 import '../../features/hifz/hifz.dart' show HifzCard, HifzReviewScreen, HifzScreen, hifzCardsProvider;
+import '../../features/hifz/hifz_plan.dart'
+    show HifzFindScreen, HifzGoalsScreen, HifzMapScreen, HifzPlanScreen;
 import '../../features/prayer/prayer.dart';
 import '../../features/prayer_tracker/prayer_tracker.dart';
 import '../../features/quran/quran.dart' show QuranHomeScreen, QuranReaderScreen, QuranSearchScreen;
@@ -62,6 +64,16 @@ abstract final class FaithNav {
   /// the page never waits for it).
   static void hifzReview(BuildContext context, {HifzCard? only}) =>
       context.push(AppRoutes.hifzReviewOf(only?.id), extra: only);
+
+  // Part 14 – «الحفظ»: the daily plan and everything it opens.
+
+  static void hifzPlan(BuildContext context) => context.push(AppRoutes.hifzPlan);
+
+  static void hifzMap(BuildContext context) => context.push(AppRoutes.hifzMap);
+
+  static void hifzGoals(BuildContext context) => context.push(AppRoutes.hifzGoals);
+
+  static void hifzFind(BuildContext context, {String? phrase}) => context.push(AppRoutes.hifzFindOf(phrase));
 
   static void qibla(BuildContext context) => context.push(AppRoutes.qibla);
 
@@ -238,6 +250,42 @@ class HifzReviewRoutePage extends ConsumerWidget {
       child: HifzReviewScreen(key: ValueKey('hifz-review:${only?.id}'), only: only, animateBackdrop: !_saver(ref)),
     );
   }
+}
+
+/// `/hifz/plan` – «الحفظ», the morning screen (Part 14).
+class HifzPlanRoutePage extends ConsumerWidget {
+  const HifzPlanRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) =>
+      NowPlayingDock(child: HifzPlanScreen(animateBackdrop: !_saver(ref)));
+}
+
+/// `/hifz/plan/map` – the mushaf coloured by strength.
+class HifzMapRoutePage extends ConsumerWidget {
+  const HifzMapRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => HifzMapScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/hifz/plan/goals` – his goals and their prayer-time reminders.
+class HifzGoalsRoutePage extends ConsumerWidget {
+  const HifzGoalsRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => HifzGoalsScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/hifz/find[?q=]` – «شازام القرآن», typed.
+class HifzFindRoutePage extends ConsumerWidget {
+  const HifzFindRoutePage({super.key, this.query = ''});
+
+  final String query;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) =>
+      HifzFindScreen(initialQuery: query, animateBackdrop: !_saver(ref));
 }
 
 class _Loading extends StatelessWidget {

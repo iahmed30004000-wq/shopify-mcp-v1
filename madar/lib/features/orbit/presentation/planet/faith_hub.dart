@@ -13,6 +13,7 @@ import '../../../../core/routing/route_pages.dart';
 import '../../../../core/sound/sound_api.dart';
 import '../../../adhkar/adhkar.dart' show AdhkarTodayCard;
 import '../../../hifz/hifz.dart' show HifzTodayCard, hifzStatsProvider;
+import '../../../hifz/hifz_plan.dart' show HifzPlanTodayCard;
 import '../../../home/home_providers.dart';
 import '../../../prayer/prayer.dart';
 import '../../../prayer_tracker/prayer_tracker.dart' show PrayerTodayCard;
@@ -31,9 +32,10 @@ import '../../data/orbit_providers.dart';
 ///   adhkar ([AdhkarTodayCard] – each set opens in the reader);
 /// * **with the Quran** – continue reading where the reader stopped
 ///   ([QuranContinueCard]), today's wird portion ([WirdTodayCard]: read now,
-///   mark done) and the Hifz reviews due ([HifzTodayCard], once there is
-///   something to memorise); the header's "Index" opens the Quran's front
-///   page;
+///   mark done), today's memorisation plan ([HifzPlanTodayCard] – Part 14's
+///   morning screen, the page map, the goals and «شازام القرآن») and the
+///   Hifz reviews due ([HifzTodayCard], once there is something to
+///   memorise); the header's "Index" opens the Quran's front page;
 /// * **tools** – the qibla ([QiblaCard], a still mini astrolabe: no sensor
 ///   runs on this page) over a grid of six: the mushaf, Hifz, recitation,
 ///   the tasbeeh, the prayer history and the adhan.
@@ -86,6 +88,9 @@ class FaithHub extends ConsumerWidget {
     );
     card(QuranContinueCard(onOpen: (context, {ayah, page}) => FaithNav.quranReader(context, ayah: ayah, page: page)));
     card(WirdTodayCard(onOpen: (context) => FaithNav.wird(context)));
+    // Part 14 – «الحفظ»: today's plan, the way in to the morning screen,
+    // the page map, the goals and «شازام القرآن».
+    card(HifzPlanTodayCard(onOpen: FaithNav.hifzPlan));
     if (hifz) {
       card(
         HifzTodayCard(
