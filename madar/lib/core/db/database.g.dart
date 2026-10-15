@@ -47316,6 +47316,1587 @@ class TasmeeMistakesCompanion extends UpdateCompanion<TasmeeMistakeRow> {
   }
 }
 
+class $HifzGoalsTable extends HifzGoals
+    with TableInfo<$HifzGoalsTable, HifzGoalRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $HifzGoalsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<HifzGoalKind, String> kind =
+      GeneratedColumn<String>(
+        'kind',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<HifzGoalKind>($HifzGoalsTable.$converterkind);
+  static const VerificationMeta _fromSurahMeta = const VerificationMeta(
+    'fromSurah',
+  );
+  @override
+  late final GeneratedColumn<int> fromSurah = GeneratedColumn<int>(
+    'from_surah',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _fromAyahMeta = const VerificationMeta(
+    'fromAyah',
+  );
+  @override
+  late final GeneratedColumn<int> fromAyah = GeneratedColumn<int>(
+    'from_ayah',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _toSurahMeta = const VerificationMeta(
+    'toSurah',
+  );
+  @override
+  late final GeneratedColumn<int> toSurah = GeneratedColumn<int>(
+    'to_surah',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _toAyahMeta = const VerificationMeta('toAyah');
+  @override
+  late final GeneratedColumn<int> toAyah = GeneratedColumn<int>(
+    'to_ayah',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _weekdayMeta = const VerificationMeta(
+    'weekday',
+  );
+  @override
+  late final GeneratedColumn<int> weekday = GeneratedColumn<int>(
+    'weekday',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _amountMeta = const VerificationMeta('amount');
+  @override
+  late final GeneratedColumn<double> amount = GeneratedColumn<double>(
+    'amount',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<WirdUnit, String> unit =
+      GeneratedColumn<String>(
+        'unit',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(WirdUnit.pages.name),
+      ).withConverter<WirdUnit>($HifzGoalsTable.$converterunit);
+  @override
+  late final GeneratedColumnWithTypeConverter<PrayerWindow?, String> window =
+      GeneratedColumn<String>(
+        'window',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      ).withConverter<PrayerWindow?>($HifzGoalsTable.$converterwindown);
+  static const VerificationMeta _offsetMinutesMeta = const VerificationMeta(
+    'offsetMinutes',
+  );
+  @override
+  late final GeneratedColumn<int> offsetMinutes = GeneratedColumn<int>(
+    'offset_minutes',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(15),
+  );
+  static const VerificationMeta _remindMeta = const VerificationMeta('remind');
+  @override
+  late final GeneratedColumn<bool> remind = GeneratedColumn<bool>(
+    'remind',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("remind" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  static const VerificationMeta _activeMeta = const VerificationMeta('active');
+  @override
+  late final GeneratedColumn<bool> active = GeneratedColumn<bool>(
+    'active',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("active" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    title,
+    kind,
+    fromSurah,
+    fromAyah,
+    toSurah,
+    toAyah,
+    weekday,
+    amount,
+    unit,
+    window,
+    offsetMinutes,
+    remind,
+    active,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'hifz_goals';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<HifzGoalRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('from_surah')) {
+      context.handle(
+        _fromSurahMeta,
+        fromSurah.isAcceptableOrUnknown(data['from_surah']!, _fromSurahMeta),
+      );
+    }
+    if (data.containsKey('from_ayah')) {
+      context.handle(
+        _fromAyahMeta,
+        fromAyah.isAcceptableOrUnknown(data['from_ayah']!, _fromAyahMeta),
+      );
+    }
+    if (data.containsKey('to_surah')) {
+      context.handle(
+        _toSurahMeta,
+        toSurah.isAcceptableOrUnknown(data['to_surah']!, _toSurahMeta),
+      );
+    }
+    if (data.containsKey('to_ayah')) {
+      context.handle(
+        _toAyahMeta,
+        toAyah.isAcceptableOrUnknown(data['to_ayah']!, _toAyahMeta),
+      );
+    }
+    if (data.containsKey('weekday')) {
+      context.handle(
+        _weekdayMeta,
+        weekday.isAcceptableOrUnknown(data['weekday']!, _weekdayMeta),
+      );
+    }
+    if (data.containsKey('amount')) {
+      context.handle(
+        _amountMeta,
+        amount.isAcceptableOrUnknown(data['amount']!, _amountMeta),
+      );
+    }
+    if (data.containsKey('offset_minutes')) {
+      context.handle(
+        _offsetMinutesMeta,
+        offsetMinutes.isAcceptableOrUnknown(
+          data['offset_minutes']!,
+          _offsetMinutesMeta,
+        ),
+      );
+    }
+    if (data.containsKey('remind')) {
+      context.handle(
+        _remindMeta,
+        remind.isAcceptableOrUnknown(data['remind']!, _remindMeta),
+      );
+    }
+    if (data.containsKey('active')) {
+      context.handle(
+        _activeMeta,
+        active.isAcceptableOrUnknown(data['active']!, _activeMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  HifzGoalRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return HifzGoalRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      kind: $HifzGoalsTable.$converterkind.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}kind'],
+        )!,
+      ),
+      fromSurah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}from_surah'],
+      ),
+      fromAyah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}from_ayah'],
+      ),
+      toSurah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}to_surah'],
+      ),
+      toAyah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}to_ayah'],
+      ),
+      weekday: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}weekday'],
+      ),
+      amount: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}amount'],
+      ),
+      unit: $HifzGoalsTable.$converterunit.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}unit'],
+        )!,
+      ),
+      window: $HifzGoalsTable.$converterwindown.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}window'],
+        ),
+      ),
+      offsetMinutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}offset_minutes'],
+      )!,
+      remind: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}remind'],
+      )!,
+      active: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}active'],
+      )!,
+    );
+  }
+
+  @override
+  $HifzGoalsTable createAlias(String alias) {
+    return $HifzGoalsTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<HifzGoalKind, String, String> $converterkind =
+      const EnumNameConverter<HifzGoalKind>(HifzGoalKind.values);
+  static JsonTypeConverter2<WirdUnit, String, String> $converterunit =
+      const EnumNameConverter<WirdUnit>(WirdUnit.values);
+  static JsonTypeConverter2<PrayerWindow, String, String> $converterwindow =
+      const EnumNameConverter<PrayerWindow>(PrayerWindow.values);
+  static JsonTypeConverter2<PrayerWindow?, String?, String?> $converterwindown =
+      JsonTypeConverter2.asNullable($converterwindow);
+}
+
+class HifzGoalRow extends DataClass implements Insertable<HifzGoalRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+
+  /// His own words for it («الكهف كل جمعة»). Never generated.
+  final String title;
+  final HifzGoalKind kind;
+
+  /// The stretch the goal is about (inclusive, may cross a surah). Null for
+  /// [HifzGoalKind.amountPerDay], which is about an amount, not a place.
+  final int? fromSurah;
+  final int? fromAyah;
+  final int? toSurah;
+  final int? toAyah;
+
+  /// For [HifzGoalKind.rangeOnWeekday]: `DateTime.monday … DateTime.sunday`
+  /// (1 … 7). Friday is 5.
+  final int? weekday;
+
+  /// For [HifzGoalKind.amountPerDay]: how much a day, in [unit].
+  final double? amount;
+  final WirdUnit unit;
+
+  /// The prayer the reminder hangs off – never a bare clock. Null means no
+  /// reminder is wanted even when [remind] is on.
+  final PrayerWindow? window;
+
+  /// Minutes after that prayer.
+  final int offsetMinutes;
+  final bool remind;
+  final bool active;
+  const HifzGoalRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.title,
+    required this.kind,
+    this.fromSurah,
+    this.fromAyah,
+    this.toSurah,
+    this.toAyah,
+    this.weekday,
+    this.amount,
+    required this.unit,
+    this.window,
+    required this.offsetMinutes,
+    required this.remind,
+    required this.active,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['title'] = Variable<String>(title);
+    {
+      map['kind'] = Variable<String>(
+        $HifzGoalsTable.$converterkind.toSql(kind),
+      );
+    }
+    if (!nullToAbsent || fromSurah != null) {
+      map['from_surah'] = Variable<int>(fromSurah);
+    }
+    if (!nullToAbsent || fromAyah != null) {
+      map['from_ayah'] = Variable<int>(fromAyah);
+    }
+    if (!nullToAbsent || toSurah != null) {
+      map['to_surah'] = Variable<int>(toSurah);
+    }
+    if (!nullToAbsent || toAyah != null) {
+      map['to_ayah'] = Variable<int>(toAyah);
+    }
+    if (!nullToAbsent || weekday != null) {
+      map['weekday'] = Variable<int>(weekday);
+    }
+    if (!nullToAbsent || amount != null) {
+      map['amount'] = Variable<double>(amount);
+    }
+    {
+      map['unit'] = Variable<String>(
+        $HifzGoalsTable.$converterunit.toSql(unit),
+      );
+    }
+    if (!nullToAbsent || window != null) {
+      map['window'] = Variable<String>(
+        $HifzGoalsTable.$converterwindown.toSql(window),
+      );
+    }
+    map['offset_minutes'] = Variable<int>(offsetMinutes);
+    map['remind'] = Variable<bool>(remind);
+    map['active'] = Variable<bool>(active);
+    return map;
+  }
+
+  HifzGoalsCompanion toCompanion(bool nullToAbsent) {
+    return HifzGoalsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      title: Value(title),
+      kind: Value(kind),
+      fromSurah: fromSurah == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fromSurah),
+      fromAyah: fromAyah == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fromAyah),
+      toSurah: toSurah == null && nullToAbsent
+          ? const Value.absent()
+          : Value(toSurah),
+      toAyah: toAyah == null && nullToAbsent
+          ? const Value.absent()
+          : Value(toAyah),
+      weekday: weekday == null && nullToAbsent
+          ? const Value.absent()
+          : Value(weekday),
+      amount: amount == null && nullToAbsent
+          ? const Value.absent()
+          : Value(amount),
+      unit: Value(unit),
+      window: window == null && nullToAbsent
+          ? const Value.absent()
+          : Value(window),
+      offsetMinutes: Value(offsetMinutes),
+      remind: Value(remind),
+      active: Value(active),
+    );
+  }
+
+  factory HifzGoalRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return HifzGoalRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      title: serializer.fromJson<String>(json['title']),
+      kind: $HifzGoalsTable.$converterkind.fromJson(
+        serializer.fromJson<String>(json['kind']),
+      ),
+      fromSurah: serializer.fromJson<int?>(json['fromSurah']),
+      fromAyah: serializer.fromJson<int?>(json['fromAyah']),
+      toSurah: serializer.fromJson<int?>(json['toSurah']),
+      toAyah: serializer.fromJson<int?>(json['toAyah']),
+      weekday: serializer.fromJson<int?>(json['weekday']),
+      amount: serializer.fromJson<double?>(json['amount']),
+      unit: $HifzGoalsTable.$converterunit.fromJson(
+        serializer.fromJson<String>(json['unit']),
+      ),
+      window: $HifzGoalsTable.$converterwindown.fromJson(
+        serializer.fromJson<String?>(json['window']),
+      ),
+      offsetMinutes: serializer.fromJson<int>(json['offsetMinutes']),
+      remind: serializer.fromJson<bool>(json['remind']),
+      active: serializer.fromJson<bool>(json['active']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'title': serializer.toJson<String>(title),
+      'kind': serializer.toJson<String>(
+        $HifzGoalsTable.$converterkind.toJson(kind),
+      ),
+      'fromSurah': serializer.toJson<int?>(fromSurah),
+      'fromAyah': serializer.toJson<int?>(fromAyah),
+      'toSurah': serializer.toJson<int?>(toSurah),
+      'toAyah': serializer.toJson<int?>(toAyah),
+      'weekday': serializer.toJson<int?>(weekday),
+      'amount': serializer.toJson<double?>(amount),
+      'unit': serializer.toJson<String>(
+        $HifzGoalsTable.$converterunit.toJson(unit),
+      ),
+      'window': serializer.toJson<String?>(
+        $HifzGoalsTable.$converterwindown.toJson(window),
+      ),
+      'offsetMinutes': serializer.toJson<int>(offsetMinutes),
+      'remind': serializer.toJson<bool>(remind),
+      'active': serializer.toJson<bool>(active),
+    };
+  }
+
+  HifzGoalRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? title,
+    HifzGoalKind? kind,
+    Value<int?> fromSurah = const Value.absent(),
+    Value<int?> fromAyah = const Value.absent(),
+    Value<int?> toSurah = const Value.absent(),
+    Value<int?> toAyah = const Value.absent(),
+    Value<int?> weekday = const Value.absent(),
+    Value<double?> amount = const Value.absent(),
+    WirdUnit? unit,
+    Value<PrayerWindow?> window = const Value.absent(),
+    int? offsetMinutes,
+    bool? remind,
+    bool? active,
+  }) => HifzGoalRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    title: title ?? this.title,
+    kind: kind ?? this.kind,
+    fromSurah: fromSurah.present ? fromSurah.value : this.fromSurah,
+    fromAyah: fromAyah.present ? fromAyah.value : this.fromAyah,
+    toSurah: toSurah.present ? toSurah.value : this.toSurah,
+    toAyah: toAyah.present ? toAyah.value : this.toAyah,
+    weekday: weekday.present ? weekday.value : this.weekday,
+    amount: amount.present ? amount.value : this.amount,
+    unit: unit ?? this.unit,
+    window: window.present ? window.value : this.window,
+    offsetMinutes: offsetMinutes ?? this.offsetMinutes,
+    remind: remind ?? this.remind,
+    active: active ?? this.active,
+  );
+  HifzGoalRow copyWithCompanion(HifzGoalsCompanion data) {
+    return HifzGoalRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      title: data.title.present ? data.title.value : this.title,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      fromSurah: data.fromSurah.present ? data.fromSurah.value : this.fromSurah,
+      fromAyah: data.fromAyah.present ? data.fromAyah.value : this.fromAyah,
+      toSurah: data.toSurah.present ? data.toSurah.value : this.toSurah,
+      toAyah: data.toAyah.present ? data.toAyah.value : this.toAyah,
+      weekday: data.weekday.present ? data.weekday.value : this.weekday,
+      amount: data.amount.present ? data.amount.value : this.amount,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      window: data.window.present ? data.window.value : this.window,
+      offsetMinutes: data.offsetMinutes.present
+          ? data.offsetMinutes.value
+          : this.offsetMinutes,
+      remind: data.remind.present ? data.remind.value : this.remind,
+      active: data.active.present ? data.active.value : this.active,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('HifzGoalRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('title: $title, ')
+          ..write('kind: $kind, ')
+          ..write('fromSurah: $fromSurah, ')
+          ..write('fromAyah: $fromAyah, ')
+          ..write('toSurah: $toSurah, ')
+          ..write('toAyah: $toAyah, ')
+          ..write('weekday: $weekday, ')
+          ..write('amount: $amount, ')
+          ..write('unit: $unit, ')
+          ..write('window: $window, ')
+          ..write('offsetMinutes: $offsetMinutes, ')
+          ..write('remind: $remind, ')
+          ..write('active: $active')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    title,
+    kind,
+    fromSurah,
+    fromAyah,
+    toSurah,
+    toAyah,
+    weekday,
+    amount,
+    unit,
+    window,
+    offsetMinutes,
+    remind,
+    active,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is HifzGoalRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.title == this.title &&
+          other.kind == this.kind &&
+          other.fromSurah == this.fromSurah &&
+          other.fromAyah == this.fromAyah &&
+          other.toSurah == this.toSurah &&
+          other.toAyah == this.toAyah &&
+          other.weekday == this.weekday &&
+          other.amount == this.amount &&
+          other.unit == this.unit &&
+          other.window == this.window &&
+          other.offsetMinutes == this.offsetMinutes &&
+          other.remind == this.remind &&
+          other.active == this.active);
+}
+
+class HifzGoalsCompanion extends UpdateCompanion<HifzGoalRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> title;
+  final Value<HifzGoalKind> kind;
+  final Value<int?> fromSurah;
+  final Value<int?> fromAyah;
+  final Value<int?> toSurah;
+  final Value<int?> toAyah;
+  final Value<int?> weekday;
+  final Value<double?> amount;
+  final Value<WirdUnit> unit;
+  final Value<PrayerWindow?> window;
+  final Value<int> offsetMinutes;
+  final Value<bool> remind;
+  final Value<bool> active;
+  final Value<int> rowid;
+  const HifzGoalsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.title = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.fromSurah = const Value.absent(),
+    this.fromAyah = const Value.absent(),
+    this.toSurah = const Value.absent(),
+    this.toAyah = const Value.absent(),
+    this.weekday = const Value.absent(),
+    this.amount = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.window = const Value.absent(),
+    this.offsetMinutes = const Value.absent(),
+    this.remind = const Value.absent(),
+    this.active = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  HifzGoalsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String title,
+    required HifzGoalKind kind,
+    this.fromSurah = const Value.absent(),
+    this.fromAyah = const Value.absent(),
+    this.toSurah = const Value.absent(),
+    this.toAyah = const Value.absent(),
+    this.weekday = const Value.absent(),
+    this.amount = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.window = const Value.absent(),
+    this.offsetMinutes = const Value.absent(),
+    this.remind = const Value.absent(),
+    this.active = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : title = Value(title),
+       kind = Value(kind);
+  static Insertable<HifzGoalRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? title,
+    Expression<String>? kind,
+    Expression<int>? fromSurah,
+    Expression<int>? fromAyah,
+    Expression<int>? toSurah,
+    Expression<int>? toAyah,
+    Expression<int>? weekday,
+    Expression<double>? amount,
+    Expression<String>? unit,
+    Expression<String>? window,
+    Expression<int>? offsetMinutes,
+    Expression<bool>? remind,
+    Expression<bool>? active,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (title != null) 'title': title,
+      if (kind != null) 'kind': kind,
+      if (fromSurah != null) 'from_surah': fromSurah,
+      if (fromAyah != null) 'from_ayah': fromAyah,
+      if (toSurah != null) 'to_surah': toSurah,
+      if (toAyah != null) 'to_ayah': toAyah,
+      if (weekday != null) 'weekday': weekday,
+      if (amount != null) 'amount': amount,
+      if (unit != null) 'unit': unit,
+      if (window != null) 'window': window,
+      if (offsetMinutes != null) 'offset_minutes': offsetMinutes,
+      if (remind != null) 'remind': remind,
+      if (active != null) 'active': active,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  HifzGoalsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? title,
+    Value<HifzGoalKind>? kind,
+    Value<int?>? fromSurah,
+    Value<int?>? fromAyah,
+    Value<int?>? toSurah,
+    Value<int?>? toAyah,
+    Value<int?>? weekday,
+    Value<double?>? amount,
+    Value<WirdUnit>? unit,
+    Value<PrayerWindow?>? window,
+    Value<int>? offsetMinutes,
+    Value<bool>? remind,
+    Value<bool>? active,
+    Value<int>? rowid,
+  }) {
+    return HifzGoalsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      title: title ?? this.title,
+      kind: kind ?? this.kind,
+      fromSurah: fromSurah ?? this.fromSurah,
+      fromAyah: fromAyah ?? this.fromAyah,
+      toSurah: toSurah ?? this.toSurah,
+      toAyah: toAyah ?? this.toAyah,
+      weekday: weekday ?? this.weekday,
+      amount: amount ?? this.amount,
+      unit: unit ?? this.unit,
+      window: window ?? this.window,
+      offsetMinutes: offsetMinutes ?? this.offsetMinutes,
+      remind: remind ?? this.remind,
+      active: active ?? this.active,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(
+        $HifzGoalsTable.$converterkind.toSql(kind.value),
+      );
+    }
+    if (fromSurah.present) {
+      map['from_surah'] = Variable<int>(fromSurah.value);
+    }
+    if (fromAyah.present) {
+      map['from_ayah'] = Variable<int>(fromAyah.value);
+    }
+    if (toSurah.present) {
+      map['to_surah'] = Variable<int>(toSurah.value);
+    }
+    if (toAyah.present) {
+      map['to_ayah'] = Variable<int>(toAyah.value);
+    }
+    if (weekday.present) {
+      map['weekday'] = Variable<int>(weekday.value);
+    }
+    if (amount.present) {
+      map['amount'] = Variable<double>(amount.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(
+        $HifzGoalsTable.$converterunit.toSql(unit.value),
+      );
+    }
+    if (window.present) {
+      map['window'] = Variable<String>(
+        $HifzGoalsTable.$converterwindown.toSql(window.value),
+      );
+    }
+    if (offsetMinutes.present) {
+      map['offset_minutes'] = Variable<int>(offsetMinutes.value);
+    }
+    if (remind.present) {
+      map['remind'] = Variable<bool>(remind.value);
+    }
+    if (active.present) {
+      map['active'] = Variable<bool>(active.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('HifzGoalsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('title: $title, ')
+          ..write('kind: $kind, ')
+          ..write('fromSurah: $fromSurah, ')
+          ..write('fromAyah: $fromAyah, ')
+          ..write('toSurah: $toSurah, ')
+          ..write('toAyah: $toAyah, ')
+          ..write('weekday: $weekday, ')
+          ..write('amount: $amount, ')
+          ..write('unit: $unit, ')
+          ..write('window: $window, ')
+          ..write('offsetMinutes: $offsetMinutes, ')
+          ..write('remind: $remind, ')
+          ..write('active: $active, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $HifzMarksTable extends HifzMarks
+    with TableInfo<$HifzMarksTable, HifzMarkRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $HifzMarksTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<HifzMarkKind, String> kind =
+      GeneratedColumn<String>(
+        'kind',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<HifzMarkKind>($HifzMarksTable.$converterkind);
+  static const VerificationMeta _fromSurahMeta = const VerificationMeta(
+    'fromSurah',
+  );
+  @override
+  late final GeneratedColumn<int> fromSurah = GeneratedColumn<int>(
+    'from_surah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fromAyahMeta = const VerificationMeta(
+    'fromAyah',
+  );
+  @override
+  late final GeneratedColumn<int> fromAyah = GeneratedColumn<int>(
+    'from_ayah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _toSurahMeta = const VerificationMeta(
+    'toSurah',
+  );
+  @override
+  late final GeneratedColumn<int> toSurah = GeneratedColumn<int>(
+    'to_surah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _toAyahMeta = const VerificationMeta('toAyah');
+  @override
+  late final GeneratedColumn<int> toAyah = GeneratedColumn<int>(
+    'to_ayah',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DateTime?, DateTime> since =
+      GeneratedColumn<DateTime>(
+        'since',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      ).withConverter<DateTime?>($HifzMarksTable.$convertersincen);
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    kind,
+    fromSurah,
+    fromAyah,
+    toSurah,
+    toAyah,
+    since,
+    note,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'hifz_marks';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<HifzMarkRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('from_surah')) {
+      context.handle(
+        _fromSurahMeta,
+        fromSurah.isAcceptableOrUnknown(data['from_surah']!, _fromSurahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fromSurahMeta);
+    }
+    if (data.containsKey('from_ayah')) {
+      context.handle(
+        _fromAyahMeta,
+        fromAyah.isAcceptableOrUnknown(data['from_ayah']!, _fromAyahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fromAyahMeta);
+    }
+    if (data.containsKey('to_surah')) {
+      context.handle(
+        _toSurahMeta,
+        toSurah.isAcceptableOrUnknown(data['to_surah']!, _toSurahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_toSurahMeta);
+    }
+    if (data.containsKey('to_ayah')) {
+      context.handle(
+        _toAyahMeta,
+        toAyah.isAcceptableOrUnknown(data['to_ayah']!, _toAyahMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_toAyahMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  HifzMarkRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return HifzMarkRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      kind: $HifzMarksTable.$converterkind.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}kind'],
+        )!,
+      ),
+      fromSurah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}from_surah'],
+      )!,
+      fromAyah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}from_ayah'],
+      )!,
+      toSurah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}to_surah'],
+      )!,
+      toAyah: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}to_ayah'],
+      )!,
+      since: $HifzMarksTable.$convertersincen.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}since'],
+        ),
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $HifzMarksTable createAlias(String alias) {
+    return $HifzMarksTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<HifzMarkKind, String, String> $converterkind =
+      const EnumNameConverter<HifzMarkKind>(HifzMarkKind.values);
+  static TypeConverter<DateTime, DateTime> $convertersince =
+      const CalendarDayConverter();
+  static TypeConverter<DateTime?, DateTime?> $convertersincen =
+      NullAwareTypeConverter.wrap($convertersince);
+}
+
+class HifzMarkRow extends DataClass implements Insertable<HifzMarkRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final HifzMarkKind kind;
+
+  /// The stretch (inclusive, may cross a surah).
+  final int fromSurah;
+  final int fromAyah;
+  final int toSurah;
+  final int toAyah;
+
+  /// For [HifzMarkKind.resetStrength]: the day the strength starts again
+  /// from; results before it are ignored and nothing is deleted. Stored
+  /// zone-free, like every day in Madar.
+  final DateTime? since;
+
+  /// His own note, when he wrote one.
+  final String? note;
+  const HifzMarkRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.kind,
+    required this.fromSurah,
+    required this.fromAyah,
+    required this.toSurah,
+    required this.toAyah,
+    this.since,
+    this.note,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    {
+      map['kind'] = Variable<String>(
+        $HifzMarksTable.$converterkind.toSql(kind),
+      );
+    }
+    map['from_surah'] = Variable<int>(fromSurah);
+    map['from_ayah'] = Variable<int>(fromAyah);
+    map['to_surah'] = Variable<int>(toSurah);
+    map['to_ayah'] = Variable<int>(toAyah);
+    if (!nullToAbsent || since != null) {
+      map['since'] = Variable<DateTime>(
+        $HifzMarksTable.$convertersincen.toSql(since),
+      );
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  HifzMarksCompanion toCompanion(bool nullToAbsent) {
+    return HifzMarksCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      kind: Value(kind),
+      fromSurah: Value(fromSurah),
+      fromAyah: Value(fromAyah),
+      toSurah: Value(toSurah),
+      toAyah: Value(toAyah),
+      since: since == null && nullToAbsent
+          ? const Value.absent()
+          : Value(since),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory HifzMarkRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return HifzMarkRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      kind: $HifzMarksTable.$converterkind.fromJson(
+        serializer.fromJson<String>(json['kind']),
+      ),
+      fromSurah: serializer.fromJson<int>(json['fromSurah']),
+      fromAyah: serializer.fromJson<int>(json['fromAyah']),
+      toSurah: serializer.fromJson<int>(json['toSurah']),
+      toAyah: serializer.fromJson<int>(json['toAyah']),
+      since: serializer.fromJson<DateTime?>(json['since']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'kind': serializer.toJson<String>(
+        $HifzMarksTable.$converterkind.toJson(kind),
+      ),
+      'fromSurah': serializer.toJson<int>(fromSurah),
+      'fromAyah': serializer.toJson<int>(fromAyah),
+      'toSurah': serializer.toJson<int>(toSurah),
+      'toAyah': serializer.toJson<int>(toAyah),
+      'since': serializer.toJson<DateTime?>(since),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  HifzMarkRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    HifzMarkKind? kind,
+    int? fromSurah,
+    int? fromAyah,
+    int? toSurah,
+    int? toAyah,
+    Value<DateTime?> since = const Value.absent(),
+    Value<String?> note = const Value.absent(),
+  }) => HifzMarkRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    kind: kind ?? this.kind,
+    fromSurah: fromSurah ?? this.fromSurah,
+    fromAyah: fromAyah ?? this.fromAyah,
+    toSurah: toSurah ?? this.toSurah,
+    toAyah: toAyah ?? this.toAyah,
+    since: since.present ? since.value : this.since,
+    note: note.present ? note.value : this.note,
+  );
+  HifzMarkRow copyWithCompanion(HifzMarksCompanion data) {
+    return HifzMarkRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      fromSurah: data.fromSurah.present ? data.fromSurah.value : this.fromSurah,
+      fromAyah: data.fromAyah.present ? data.fromAyah.value : this.fromAyah,
+      toSurah: data.toSurah.present ? data.toSurah.value : this.toSurah,
+      toAyah: data.toAyah.present ? data.toAyah.value : this.toAyah,
+      since: data.since.present ? data.since.value : this.since,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('HifzMarkRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('kind: $kind, ')
+          ..write('fromSurah: $fromSurah, ')
+          ..write('fromAyah: $fromAyah, ')
+          ..write('toSurah: $toSurah, ')
+          ..write('toAyah: $toAyah, ')
+          ..write('since: $since, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    kind,
+    fromSurah,
+    fromAyah,
+    toSurah,
+    toAyah,
+    since,
+    note,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is HifzMarkRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.kind == this.kind &&
+          other.fromSurah == this.fromSurah &&
+          other.fromAyah == this.fromAyah &&
+          other.toSurah == this.toSurah &&
+          other.toAyah == this.toAyah &&
+          other.since == this.since &&
+          other.note == this.note);
+}
+
+class HifzMarksCompanion extends UpdateCompanion<HifzMarkRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<HifzMarkKind> kind;
+  final Value<int> fromSurah;
+  final Value<int> fromAyah;
+  final Value<int> toSurah;
+  final Value<int> toAyah;
+  final Value<DateTime?> since;
+  final Value<String?> note;
+  final Value<int> rowid;
+  const HifzMarksCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.fromSurah = const Value.absent(),
+    this.fromAyah = const Value.absent(),
+    this.toSurah = const Value.absent(),
+    this.toAyah = const Value.absent(),
+    this.since = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  HifzMarksCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    required HifzMarkKind kind,
+    required int fromSurah,
+    required int fromAyah,
+    required int toSurah,
+    required int toAyah,
+    this.since = const Value.absent(),
+    this.note = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : kind = Value(kind),
+       fromSurah = Value(fromSurah),
+       fromAyah = Value(fromAyah),
+       toSurah = Value(toSurah),
+       toAyah = Value(toAyah);
+  static Insertable<HifzMarkRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? kind,
+    Expression<int>? fromSurah,
+    Expression<int>? fromAyah,
+    Expression<int>? toSurah,
+    Expression<int>? toAyah,
+    Expression<DateTime>? since,
+    Expression<String>? note,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (kind != null) 'kind': kind,
+      if (fromSurah != null) 'from_surah': fromSurah,
+      if (fromAyah != null) 'from_ayah': fromAyah,
+      if (toSurah != null) 'to_surah': toSurah,
+      if (toAyah != null) 'to_ayah': toAyah,
+      if (since != null) 'since': since,
+      if (note != null) 'note': note,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  HifzMarksCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<HifzMarkKind>? kind,
+    Value<int>? fromSurah,
+    Value<int>? fromAyah,
+    Value<int>? toSurah,
+    Value<int>? toAyah,
+    Value<DateTime?>? since,
+    Value<String?>? note,
+    Value<int>? rowid,
+  }) {
+    return HifzMarksCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      kind: kind ?? this.kind,
+      fromSurah: fromSurah ?? this.fromSurah,
+      fromAyah: fromAyah ?? this.fromAyah,
+      toSurah: toSurah ?? this.toSurah,
+      toAyah: toAyah ?? this.toAyah,
+      since: since ?? this.since,
+      note: note ?? this.note,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(
+        $HifzMarksTable.$converterkind.toSql(kind.value),
+      );
+    }
+    if (fromSurah.present) {
+      map['from_surah'] = Variable<int>(fromSurah.value);
+    }
+    if (fromAyah.present) {
+      map['from_ayah'] = Variable<int>(fromAyah.value);
+    }
+    if (toSurah.present) {
+      map['to_surah'] = Variable<int>(toSurah.value);
+    }
+    if (toAyah.present) {
+      map['to_ayah'] = Variable<int>(toAyah.value);
+    }
+    if (since.present) {
+      map['since'] = Variable<DateTime>(
+        $HifzMarksTable.$convertersincen.toSql(since.value),
+      );
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('HifzMarksCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('kind: $kind, ')
+          ..write('fromSurah: $fromSurah, ')
+          ..write('fromAyah: $fromAyah, ')
+          ..write('toSurah: $toSurah, ')
+          ..write('toAyah: $toAyah, ')
+          ..write('since: $since, ')
+          ..write('note: $note, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$MadarDatabase extends GeneratedDatabase {
   _$MadarDatabase(QueryExecutor e) : super(e);
   late final $PlanetsTable planets = $PlanetsTable(this);
@@ -47407,6 +48988,8 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
   late final $TasmeeSessionsTable tasmeeSessions = $TasmeeSessionsTable(this);
   late final $TasmeeAyatTable tasmeeAyat = $TasmeeAyatTable(this);
   late final $TasmeeMistakesTable tasmeeMistakes = $TasmeeMistakesTable(this);
+  late final $HifzGoalsTable hifzGoals = $HifzGoalsTable(this);
+  late final $HifzMarksTable hifzMarks = $HifzMarksTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -47487,6 +49070,8 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
     tasmeeSessions,
     tasmeeAyat,
     tasmeeMistakes,
+    hifzGoals,
+    hifzMarks,
   ];
   @override
   DriftDatabaseOptions get options =>

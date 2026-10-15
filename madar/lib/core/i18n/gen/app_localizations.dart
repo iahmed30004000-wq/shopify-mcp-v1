@@ -43654,6 +43654,474 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'التعرّف على الصوت: {name} ({licence})'**
   String tasmeeRecogniserCredit(String name, String licence);
+
+  /// Part 14: the memorisation modes, the daily plan, the page map and the goals
+  ///
+  /// In ar, this message translates to:
+  /// **'الحفظ'**
+  String get hifzPlanTitle;
+
+  /// No description provided for @hifzPlanSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جديد، ومراجعة قريبة، ومراجعة بعيدة – على قدّ ما حافظ'**
+  String get hifzPlanSubtitle;
+
+  /// No description provided for @hifzPlanNotRuling.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأرقام هون من نتائج تسميعك الحقيقية، مش حكم على حفظك. النص المصحفي هو المرجع دايمًا.'**
+  String get hifzPlanNotRuling;
+
+  /// No description provided for @hifzTrackFresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجديد'**
+  String get hifzTrackFresh;
+
+  /// No description provided for @hifzTrackNear.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعة القريبة'**
+  String get hifzTrackNear;
+
+  /// No description provided for @hifzTrackFar.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعة البعيدة'**
+  String get hifzTrackFar;
+
+  /// No description provided for @hifzTrackNearNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي سمّعته بآخر أسبوع، واللي لسا ما جرّبته، واللي ضعف.'**
+  String get hifzTrackNearNote;
+
+  /// No description provided for @hifzTrackFarNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'دورة بتلفّ على كل اللي حافظه، جزء كل يوم، لحد ما تخلص وترجع من الأول.'**
+  String get hifzTrackFarNote;
+
+  /// No description provided for @hifzMethodListenRepeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمع وردّد'**
+  String get hifzMethodListenRepeat;
+
+  /// No description provided for @hifzMethodChunking.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقطيع'**
+  String get hifzMethodChunking;
+
+  /// No description provided for @hifzMethodHiding.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإخفاء التدريجي'**
+  String get hifzMethodHiding;
+
+  /// No description provided for @hifzMethodBlanks.
+  ///
+  /// In ar, this message translates to:
+  /// **'املأ الفراغ'**
+  String get hifzMethodBlanks;
+
+  /// No description provided for @hifzMethodWriting.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب من حفظك'**
+  String get hifzMethodWriting;
+
+  /// No description provided for @hifzMethodLinking.
+  ///
+  /// In ar, this message translates to:
+  /// **'الربط بين الآيات'**
+  String get hifzMethodLinking;
+
+  /// No description provided for @hifzMethodReciting.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع بصوتك'**
+  String get hifzMethodReciting;
+
+  /// No description provided for @hifzMethodTypedOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتشتغل بالكتابة هلأ: ما في تعرّف على الصوت بهاي النسخة.'**
+  String get hifzMethodTypedOnly;
+
+  /// No description provided for @hifzMethodNoRecogniser.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسميع بالصوت لسا مش جاهز على هاد الجوال. كل الطرق التانية شغّالة.'**
+  String get hifzMethodNoRecogniser;
+
+  /// No description provided for @hifzMethodNoAudio.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت القارئ اللي اخترته مش منزّل على الجوال. نزّله أو اختر قارئ تاني.'**
+  String get hifzMethodNoAudio;
+
+  /// No description provided for @hifzStageFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'النص كامل قدامك'**
+  String get hifzStageFull;
+
+  /// No description provided for @hifzStageFirstLetters.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول حرف من كل كلمة'**
+  String get hifzStageFirstLetters;
+
+  /// No description provided for @hifzStageHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخفي كله'**
+  String get hifzStageHidden;
+
+  /// No result at all – deliberately not the same as weak
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انختبرت'**
+  String get hifzBandUnknown;
+
+  /// No description provided for @hifzBandWeak.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضعيفة'**
+  String get hifzBandWeak;
+
+  /// No description provided for @hifzBandShaky.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهزوزة'**
+  String get hifzBandShaky;
+
+  /// No description provided for @hifzBandFirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثابتة'**
+  String get hifzBandFirm;
+
+  /// No description provided for @hifzBandSolid.
+  ///
+  /// In ar, this message translates to:
+  /// **'متينة'**
+  String get hifzBandSolid;
+
+  /// No description provided for @hifzBandSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'مش عليّ'**
+  String get hifzBandSkipped;
+
+  /// No description provided for @hifzStrengthFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'القوة محسوبة من تسميعك: {attempts} · آخر مرة {when}'**
+  String hifzStrengthFrom(String attempts, String when);
+
+  /// No description provided for @hifzAttemptsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ولا مرة} =1{مرة وحدة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String hifzAttemptsCount(int count);
+
+  /// No description provided for @hifzAyatCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ولا آية} =1{آية وحدة} =2{آيتين} few{{count} آيات} many{{count} آية} other{{count} آية}}'**
+  String hifzAyatCount(int count);
+
+  /// No description provided for @hifzPagesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ولا صفحة} =1{صفحة وحدة} =2{صفحتين} few{{count} صفحات} many{{count} صفحة} other{{count} صفحة}}'**
+  String hifzPagesCount(int count);
+
+  /// No description provided for @hifzPlanRepeatTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة وحدة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String hifzPlanRepeatTimes(int count);
+
+  /// No description provided for @hifzPlanEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في إشي محفوظ لسا. ضيف أول مقطع وبلّش.'**
+  String get hifzPlanEmpty;
+
+  /// No description provided for @hifzPlanNoNewPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما حدّدت من وين يبلّش الجديد، فاليوم مراجعة بس.'**
+  String get hifzPlanNoNewPortion;
+
+  /// No description provided for @hifzPlanFirstDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول يوم إلك. اليوم جديد بس، والمراجعة بتبلّش بكرا.'**
+  String get hifzPlanFirstDay;
+
+  /// No description provided for @hifzPlanAllSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل اللي بالقايمة محدّد «مش عليّ»، فما في مراجعة اليوم.'**
+  String get hifzPlanAllSkipped;
+
+  /// No description provided for @hifzBacklogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'غبت عن المراجعة'**
+  String get hifzBacklogTitle;
+
+  /// No description provided for @hifzBacklogBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'غبت {days}. اليوم عندك {today}، و{back} رجعت لدورها بالمراجعة وما ضاعت.'**
+  String hifzBacklogBody(String days, String today, String back);
+
+  /// No description provided for @hifzBacklogDaysCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم} =2{يومين} few{{count} أيام} many{{count} يوم} other{{count} يوم}}'**
+  String hifzBacklogDaysCount(int count);
+
+  /// No description provided for @hifzBacklogCapped.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصلت سقف اليوم، فما حطّينا عليك أكتر. الباقي بدوره.'**
+  String get hifzBacklogCapped;
+
+  /// No description provided for @hifzBacklogDropped.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي رجع لدوره: {ranges}'**
+  String hifzBacklogDropped(String ranges);
+
+  /// No description provided for @hifzMapTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خريطة الصفحات'**
+  String get hifzMapTitle;
+
+  /// No description provided for @hifzMapLegend.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون الصفحة من قوة آياتها. الصفحة اللي ما انختبرت عليها بتضل بلا لون.'**
+  String get hifzMapLegend;
+
+  /// No description provided for @hifzMapPageLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة {page} · {memorised} من {total}'**
+  String hifzMapPageLine(String page, String memorised, String total);
+
+  /// No description provided for @hifzMarkSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاد مش عليّ'**
+  String get hifzMarkSkip;
+
+  /// No description provided for @hifzMarkSkipDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمام، طلّعناها من المراجعة وما بتدخل بالخريطة.'**
+  String get hifzMarkSkipDone;
+
+  /// No description provided for @hifzMarkResetPage.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفّر قوة هاي الصفحة'**
+  String get hifzMarkResetPage;
+
+  /// No description provided for @hifzMarkResetBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'منبلّش نحسب القوة من اليوم. سجل تسميعك القديم بيضل محفوظ، بس ما بيأثر على اللون.'**
+  String get hifzMarkResetBody;
+
+  /// No description provided for @hifzGoalsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهدافي'**
+  String get hifzGoalsTitle;
+
+  /// No description provided for @hifzGoalsEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب هدفك بكلامك، مثل «الكهف كل جمعة».'**
+  String get hifzGoalsEmpty;
+
+  /// No description provided for @hifzGoalKindWeekday.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقطع بيوم معيّن كل أسبوع'**
+  String get hifzGoalKindWeekday;
+
+  /// No description provided for @hifzGoalKindReview.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقطع تحت المراجعة دايمًا'**
+  String get hifzGoalKindReview;
+
+  /// No description provided for @hifzGoalKindAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقدار كل يوم'**
+  String get hifzGoalKindAmount;
+
+  /// No description provided for @hifzGoalProgressLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {target}'**
+  String hifzGoalProgressLine(String done, String target);
+
+  /// No description provided for @hifzGoalMet.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصته اليوم'**
+  String get hifzGoalMet;
+
+  /// No description provided for @hifzGoalReminderAfterPrayer.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير بعد {prayer} بـ {minutes}'**
+  String hifzGoalReminderAfterPrayer(String prayer, String minutes);
+
+  /// No description provided for @hifzGoalReminderExplain.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير مربوط بوقت الصلاة مش بالساعة، فبيتحرّك مع الفجر والمغرب طول السنة.'**
+  String get hifzGoalReminderExplain;
+
+  /// No description provided for @hifzGoalReminderTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الحفظ'**
+  String get hifzGoalReminderTitle;
+
+  /// No description provided for @hifzGoalReminderBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{goal} · {window}'**
+  String hifzGoalReminderBody(String goal, String window);
+
+  /// No description provided for @hifzGoalChannelName.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير أهداف الحفظ'**
+  String get hifzGoalChannelName;
+
+  /// No description provided for @hifzGoalChannelDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه بعد الصلاة لأهداف الحفظ اللي حطّيتها.'**
+  String get hifzGoalChannelDescription;
+
+  /// No description provided for @hifzProgressTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقدّمي'**
+  String get hifzProgressTitle;
+
+  /// No description provided for @hifzProgressStreak.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في سلسلة بعد} =1{يوم ورا التاني} =2{يومين ورا بعض} few{{count} أيام ورا بعض} many{{count} يوم ورا بعض} other{{count} يوم ورا بعض}}'**
+  String hifzProgressStreak(int count);
+
+  /// No description provided for @hifzProgressBest.
+  ///
+  /// In ar, this message translates to:
+  /// **'أطول سلسلة: {days}'**
+  String hifzProgressBest(String days);
+
+  /// No description provided for @hifzProgressTested.
+  ///
+  /// In ar, this message translates to:
+  /// **'{tested} من {memorised} انختبرت عليها'**
+  String hifzProgressTested(String tested, String memorised);
+
+  /// No description provided for @hifzWritingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب من حفظك'**
+  String get hifzWritingTitle;
+
+  /// No description provided for @hifzWritingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الآيات من حفظك، وبعدين قارن. التطبيق بيأشّر على الكلمة الناقصة والكلمة الغير.'**
+  String get hifzWritingHint;
+
+  /// Labelled and styled differently: it is never shown as Quran text
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي كتبته إنت'**
+  String get hifzWritingYours;
+
+  /// No description provided for @hifzWritingScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'{right} صح من {total}'**
+  String hifzWritingScore(String right, String total);
+
+  /// No description provided for @hifzLinkingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الربط'**
+  String get hifzLinkingTitle;
+
+  /// No description provided for @hifzLinkingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر كلمات الآية قدامك، وإنت كمّل أول الآية اللي بعدها.'**
+  String get hifzLinkingHint;
+
+  /// No description provided for @hifzListenRepeatHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنشغّل الآية {times}، وبين كل وحدة سكتة إلك ترددّ.'**
+  String hifzListenRepeatHint(String times);
+
+  /// No description provided for @hifzSettingsNewPerDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجديد كل يوم'**
+  String get hifzSettingsNewPerDay;
+
+  /// No description provided for @hifzSettingsCap.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكبر حجم لليوم'**
+  String get hifzSettingsCap;
+
+  /// No description provided for @hifzSettingsCapNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهما غبت، اليوم ما بيزيد عن هاد الحد.'**
+  String get hifzSettingsCapNote;
+
+  /// No description provided for @hifzSettingsStartFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجديد بيبلّش من'**
+  String get hifzSettingsStartFrom;
+
+  /// No description provided for @hifzExportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'صدّر الحفظ مع السجل'**
+  String get hifzExportTitle;
+
+  /// No description provided for @hifzExportBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفس ملف التسميع، وزيادة عليه أهدافك وخطة اليوم وقوة كل آية، عشان «فلك» يقراهم. ما فيه ولا صوت.'**
+  String get hifzExportBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

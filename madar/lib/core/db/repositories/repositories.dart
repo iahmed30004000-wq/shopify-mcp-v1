@@ -94,6 +94,8 @@ class Repositories {
       tasmeeSessions = EntityRepository(db, db.tasmeeSessions),
       tasmeeAyat = EntityRepository(db, db.tasmeeAyat),
       tasmeeMistakes = EntityRepository(db, db.tasmeeMistakes),
+      hifzGoals = EntityRepository(db, db.hifzGoals),
+      hifzMarks = EntityRepository(db, db.hifzMarks),
       keyValues = KeyValueRepository(db),
       activity = ActivityRepository(db),
       currencies = CurrencyRepository(db);
@@ -196,6 +198,10 @@ class Repositories {
   final EntityRepository<$TasmeeAyatTable, TasmeeAyahRow> tasmeeAyat;
   final EntityRepository<$TasmeeMistakesTable, TasmeeMistakeRow> tasmeeMistakes;
 
+  /// «الحفظ» (v8): his own goals, and the stretches he marked.
+  final EntityRepository<$HifzGoalsTable, HifzGoalRow> hifzGoals;
+  final EntityRepository<$HifzMarksTable, HifzMarkRow> hifzMarks;
+
   // Special-purpose
   final KeyValueRepository keyValues;
   final ActivityRepository activity;
@@ -278,6 +284,8 @@ class Repositories {
       tasmeeSessions,
       tasmeeAyat,
       tasmeeMistakes,
+      hifzGoals,
+      hifzMarks,
     ])
       r.tableName: r,
   };

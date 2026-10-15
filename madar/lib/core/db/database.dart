@@ -6,6 +6,7 @@ import 'tables/converters.dart';
 import 'tables/core_tables.dart';
 import 'tables/faith_tables.dart';
 import 'tables/health_tables.dart';
+import 'tables/hifz_plan_tables.dart';
 import 'tables/kitchen_tables.dart';
 import 'tables/life_tables.dart';
 import 'tables/list_tables.dart';
@@ -36,6 +37,7 @@ part 'database.g.dart';
   RecordLists, RecordListItems,
   PantryItems, Recipes, RecipeIngredients, CookedMeals, KitchenRules,
   TasmeeSessions, TasmeeAyat, TasmeeMistakes,
+  HifzGoals, HifzMarks,
 ])
 class MadarDatabase extends _$MadarDatabase {
   /// Wraps an executor. Pass [seed] to seed the generic defaults (planets,
@@ -48,7 +50,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 7;
+  int get schemaVersion => 8;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -106,6 +108,15 @@ class MadarDatabase extends _$MadarDatabase {
             await m.createTable(tasmeeSessions);
             await m.createTable(tasmeeAyat);
             await m.createTable(tasmeeMistakes);
+          }
+          // v8: «الحفظ» – his own memorisation goals («الكهف كل جمعة») and
+          // the stretches he marked («مش عليّ» / «صفّر القوة»). The
+          // strength per ayah is deliberately **not** a table: it is
+          // computed from the results in the v7 log every time it is
+          // asked for, so it can never drift away from what happened.
+          if (from < 8) {
+            await m.createTable(hifzGoals);
+            await m.createTable(hifzMarks);
           }
         },
         beforeOpen: (details) async {

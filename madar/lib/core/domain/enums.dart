@@ -201,6 +201,17 @@ enum TasmeeMode {
 
   /// «شازام القرآن» – he recited a phrase to be told where it is.
   find,
+
+  /// «الحفظ» (Part 14): he wrote the verses from memory and they were
+  /// compared, word by word, against the verified text.
+  write,
+
+  /// «الحفظ» (Part 14): the linking drill – the end of one verse to the
+  /// start of the next.
+  link,
+
+  /// «الحفظ» (Part 14): the first-letters stage of progressive hiding.
+  firstLetters,
 }
 
 /// What went wrong with one word of a recitation. Nothing else is a
@@ -216,4 +227,30 @@ enum MistakeKind {
 
   /// He said a word that is not in the text here.
   extra,
+}
+
+// ------------------------------------------- «الحفظ» · memorisation (v8) ----
+
+/// One of the owner's own memorisation goals, in his words (Part 14).
+enum HifzGoalKind {
+  /// «الكهف كل جمعة» – a range on one weekday of every week.
+  rangeOnWeekday,
+
+  /// «راجع جزء عمّ» – keep one range under review, every day.
+  rangeReview,
+
+  /// «N صفحات باليوم» – an amount of the mushaf every day.
+  amountPerDay,
+}
+
+/// What he marked on a stretch of the mushaf (Part 14).
+enum HifzMarkKind {
+  /// «مش عليّ» – not his to review: it is left out of the review tracks
+  /// and out of the page map's numbers, and no strength is claimed for it.
+  skipReview,
+
+  /// «صفّر القوة» – start this stretch's strength again from a day: every
+  /// result before that day is ignored, and nothing is deleted from the
+  /// log.
+  resetStrength,
 }

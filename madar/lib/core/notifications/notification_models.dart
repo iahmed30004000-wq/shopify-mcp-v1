@@ -220,7 +220,13 @@ abstract final class NotificationNamespaces {
   /// neither reconciliation may ever cancel the other's alarms.
   static const iqama = NotificationNamespace('iqama', 180000, 180999);
 
-  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama];
+  /// «الحفظ»: the reminders of his own memorisation goals («الكهف كل
+  /// جمعة»), each hung off a prayer time and not a bare clock
+  /// (`HifzGoalReminderIds`). Its own block, outside [wird]: the two are
+  /// planned by different syncs and neither may cancel the other's.
+  static const hifz = NotificationNamespace('hifz', 190000, 190999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama, hifz];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {

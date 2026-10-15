@@ -61,4 +61,9 @@ const madarIndexStatements = <String>[
   'CREATE INDEX IF NOT EXISTS idx_tasmee_mistakes_session ON tasmee_mistakes (session_id)',
   'CREATE INDEX IF NOT EXISTS idx_tasmee_mistakes_day ON tasmee_mistakes (day)',
   'CREATE INDEX IF NOT EXISTS idx_tasmee_mistakes_word ON tasmee_mistakes (surah, ayah, word_index)',
+
+  // «الحفظ» (v8): his goals in his own order, and the marked stretches by
+  // where they start (the planner asks "what did he mark around here?").
+  'CREATE INDEX IF NOT EXISTS idx_hifz_goals_active ON hifz_goals (active, sort_order)',
+  'CREATE INDEX IF NOT EXISTS idx_hifz_marks_kind_from ON hifz_marks (kind, from_surah, from_ayah)',
 ];

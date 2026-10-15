@@ -27663,4 +27663,334 @@ class L10nEn extends L10n {
   String tasmeeRecogniserCredit(String name, String licence) {
     return 'Speech recognition: $name ($licence)';
   }
+
+  @override
+  String get hifzPlanTitle => 'Memorisation';
+
+  @override
+  String get hifzPlanSubtitle =>
+      'Something new, a near review and a far one – measured by how well you hold it';
+
+  @override
+  String get hifzPlanNotRuling =>
+      'These numbers come from your own recitation results; they are not a judgement. The verified text is always the reference.';
+
+  @override
+  String get hifzTrackFresh => 'New';
+
+  @override
+  String get hifzTrackNear => 'Near review';
+
+  @override
+  String get hifzTrackFar => 'Far review';
+
+  @override
+  String get hifzTrackNearNote =>
+      'What you recited in the last week, what you have not tried yet, and whatever went weak.';
+
+  @override
+  String get hifzTrackFarNote =>
+      'A rotation over everything you have memorised, a share a day, then round again.';
+
+  @override
+  String get hifzMethodListenRepeat => 'Listen and repeat';
+
+  @override
+  String get hifzMethodChunking => 'Chunking';
+
+  @override
+  String get hifzMethodHiding => 'Progressive hiding';
+
+  @override
+  String get hifzMethodBlanks => 'Fill in the blank';
+
+  @override
+  String get hifzMethodWriting => 'Write from memory';
+
+  @override
+  String get hifzMethodLinking => 'Linking the verses';
+
+  @override
+  String get hifzMethodReciting => 'Recite out loud';
+
+  @override
+  String get hifzMethodTypedOnly =>
+      'It works by typing for now: there is no speech recognition in this build.';
+
+  @override
+  String get hifzMethodNoRecogniser =>
+      'Reciting out loud is not ready on this phone yet. Every other method works.';
+
+  @override
+  String get hifzMethodNoAudio =>
+      'The reciter you chose is not downloaded. Download him, or pick another one.';
+
+  @override
+  String get hifzStageFull => 'The whole text in front of you';
+
+  @override
+  String get hifzStageFirstLetters => 'The first letters only';
+
+  @override
+  String get hifzStageHidden => 'Hidden';
+
+  @override
+  String get hifzBandUnknown => 'Never tested';
+
+  @override
+  String get hifzBandWeak => 'Weak';
+
+  @override
+  String get hifzBandShaky => 'Shaky';
+
+  @override
+  String get hifzBandFirm => 'Firm';
+
+  @override
+  String get hifzBandSolid => 'Solid';
+
+  @override
+  String get hifzBandSkipped => 'Not mine to review';
+
+  @override
+  String hifzStrengthFrom(String attempts, String when) {
+    return 'Strength from your own attempts: $attempts · last time $when';
+  }
+
+  @override
+  String hifzAttemptsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count attempts',
+      one: '1 attempt',
+      zero: 'no attempts',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzAyatCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count verses',
+      one: '1 verse',
+      zero: 'no verses',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzPagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+      zero: 'no pages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzPlanRepeatTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      one: 'once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hifzPlanEmpty =>
+      'Nothing is memorised yet. Add your first passage and start.';
+
+  @override
+  String get hifzPlanNoNewPortion =>
+      'You have not said where the new portion starts, so today is review only.';
+
+  @override
+  String get hifzPlanFirstDay =>
+      'Your first day. Today is the new portion only; the review starts tomorrow.';
+
+  @override
+  String get hifzPlanAllSkipped =>
+      'Everything in your list is marked as not yours to review, so there is no review today.';
+
+  @override
+  String get hifzBacklogTitle => 'You were away';
+
+  @override
+  String hifzBacklogBody(String days, String today, String back) {
+    return 'You were away for $days. Today holds $today, and $back went back into the rotation instead of piling up.';
+  }
+
+  @override
+  String hifzBacklogDaysCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hifzBacklogCapped =>
+      'Today\'s cap was reached, so nothing more was added. The rest comes round in its turn.';
+
+  @override
+  String hifzBacklogDropped(String ranges) {
+    return 'Back into the rotation: $ranges';
+  }
+
+  @override
+  String get hifzMapTitle => 'The page map';
+
+  @override
+  String get hifzMapLegend =>
+      'A page\'s colour comes from the strength of its verses. A page you were never tested on stays uncoloured.';
+
+  @override
+  String hifzMapPageLine(String page, String memorised, String total) {
+    return 'Page $page · $memorised of $total';
+  }
+
+  @override
+  String get hifzMarkSkip => 'This one is not mine to review';
+
+  @override
+  String get hifzMarkSkipDone =>
+      'Done: it is out of the review and out of the map\'s numbers.';
+
+  @override
+  String get hifzMarkResetPage => 'Reset this page\'s strength';
+
+  @override
+  String get hifzMarkResetBody =>
+      'The strength starts again from today. Your old attempts stay in the log; they just stop colouring the page.';
+
+  @override
+  String get hifzGoalsTitle => 'My goals';
+
+  @override
+  String get hifzGoalsEmpty =>
+      'Write your goal in your own words, like \"Al-Kahf every Friday\".';
+
+  @override
+  String get hifzGoalKindWeekday => 'A passage on one day of every week';
+
+  @override
+  String get hifzGoalKindReview => 'A passage kept under review';
+
+  @override
+  String get hifzGoalKindAmount => 'An amount every day';
+
+  @override
+  String hifzGoalProgressLine(String done, String target) {
+    return '$done of $target';
+  }
+
+  @override
+  String get hifzGoalMet => 'Done today';
+
+  @override
+  String hifzGoalReminderAfterPrayer(String prayer, String minutes) {
+    return 'Reminder $minutes after $prayer';
+  }
+
+  @override
+  String get hifzGoalReminderExplain =>
+      'The reminder hangs off the prayer, not the clock, so it moves with Fajr and Maghrib all year.';
+
+  @override
+  String get hifzGoalReminderTitle => 'Time to memorise';
+
+  @override
+  String hifzGoalReminderBody(String goal, String window) {
+    return '$goal · $window';
+  }
+
+  @override
+  String get hifzGoalChannelName => 'Memorisation goal reminders';
+
+  @override
+  String get hifzGoalChannelDescription =>
+      'A nudge after the prayer for the memorisation goals you set.';
+
+  @override
+  String get hifzProgressTitle => 'My progress';
+
+  @override
+  String hifzProgressStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days in a row',
+      one: '1 day in a row',
+      zero: 'No streak yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hifzProgressBest(String days) {
+    return 'Longest streak: $days';
+  }
+
+  @override
+  String hifzProgressTested(String tested, String memorised) {
+    return '$tested of $memorised have been tested';
+  }
+
+  @override
+  String get hifzWritingTitle => 'Write from memory';
+
+  @override
+  String get hifzWritingHint =>
+      'Write the verses from memory, then compare. The app marks the word you missed and the word you changed.';
+
+  @override
+  String get hifzWritingYours => 'What you wrote';
+
+  @override
+  String hifzWritingScore(String right, String total) {
+    return '$right right out of $total';
+  }
+
+  @override
+  String get hifzLinkingTitle => 'Linking';
+
+  @override
+  String get hifzLinkingHint =>
+      'The end of the verse is in front of you; you carry on with the start of the next.';
+
+  @override
+  String hifzListenRepeatHint(String times) {
+    return 'The verse plays $times, with a pause after each one for you to repeat.';
+  }
+
+  @override
+  String get hifzSettingsNewPerDay => 'New material a day';
+
+  @override
+  String get hifzSettingsCap => 'The most in one day';
+
+  @override
+  String get hifzSettingsCapNote =>
+      'However long you are away, a day never grows past this.';
+
+  @override
+  String get hifzSettingsStartFrom => 'The new portion starts at';
+
+  @override
+  String get hifzExportTitle => 'Export memorisation with the log';
+
+  @override
+  String get hifzExportBody =>
+      'The same recitation file, with your goals, today\'s plan and each verse\'s strength added for the PC app. It holds no audio.';
 }

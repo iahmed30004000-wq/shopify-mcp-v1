@@ -964,5 +964,44 @@ Future<void> populateAllTables(MadarDatabase db) async {
         spanEnd: 8,
       ),
     ]);
+
+    // -------------------------------------------- «الحفظ» (schema v8)
+    b.insertAll(db.hifzGoals, [
+      HifzGoalsCompanion.insert(
+        id: const Value('hifz-goal-1'),
+        title: 'الكهف كل جمعة',
+        kind: HifzGoalKind.rangeOnWeekday,
+        fromSurah: const Value(18),
+        fromAyah: const Value(1),
+        toSurah: const Value(18),
+        toAyah: const Value(110),
+        weekday: const Value(DateTime.friday),
+        amount: const Value(2.5),
+        unit: const Value(WirdUnit.pages),
+        window: const Value(PrayerWindow.fajr),
+        offsetMinutes: const Value(30),
+        remind: const Value(false),
+        active: const Value(false),
+        sortOrder: const Value(3),
+        createdAt: Value(tUtc),
+        updatedAt: Value(tMicros),
+      ),
+      HifzGoalsCompanion.insert(title: 'صفحتين باليوم', kind: HifzGoalKind.amountPerDay),
+    ]);
+    b.insertAll(db.hifzMarks, [
+      HifzMarksCompanion.insert(
+        id: const Value('hifz-mark-1'),
+        kind: HifzMarkKind.resetStrength,
+        fromSurah: 2,
+        fromAyah: 1,
+        toSurah: 2,
+        toAyah: 5,
+        since: Value(tLocal),
+        note: const Value('بلّشت من جديد'),
+        createdAt: Value(tUtc),
+        updatedAt: Value(tMicros),
+      ),
+      HifzMarksCompanion.insert(kind: HifzMarkKind.skipReview, fromSurah: 9, fromAyah: 1, toSurah: 9, toAyah: 10),
+    ]);
   });
 }

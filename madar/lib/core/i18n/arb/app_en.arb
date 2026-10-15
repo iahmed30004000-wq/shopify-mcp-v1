@@ -25807,5 +25807,241 @@
         "type": "String"
       }
     }
-  }
+  },
+  "hifzPlanTitle": "Memorisation",
+  "@hifzPlanTitle": {
+    "description": "Part 14: the memorisation modes, the daily plan, the page map and the goals"
+  },
+  "hifzPlanSubtitle": "Something new, a near review and a far one – measured by how well you hold it",
+  "hifzPlanNotRuling": "These numbers come from your own recitation results; they are not a judgement. The verified text is always the reference.",
+  "hifzTrackFresh": "New",
+  "hifzTrackNear": "Near review",
+  "hifzTrackFar": "Far review",
+  "hifzTrackNearNote": "What you recited in the last week, what you have not tried yet, and whatever went weak.",
+  "hifzTrackFarNote": "A rotation over everything you have memorised, a share a day, then round again.",
+  "hifzMethodListenRepeat": "Listen and repeat",
+  "hifzMethodChunking": "Chunking",
+  "hifzMethodHiding": "Progressive hiding",
+  "hifzMethodBlanks": "Fill in the blank",
+  "hifzMethodWriting": "Write from memory",
+  "hifzMethodLinking": "Linking the verses",
+  "hifzMethodReciting": "Recite out loud",
+  "hifzMethodTypedOnly": "It works by typing for now: there is no speech recognition in this build.",
+  "hifzMethodNoRecogniser": "Reciting out loud is not ready on this phone yet. Every other method works.",
+  "hifzMethodNoAudio": "The reciter you chose is not downloaded. Download him, or pick another one.",
+  "hifzStageFull": "The whole text in front of you",
+  "hifzStageFirstLetters": "The first letters only",
+  "hifzStageHidden": "Hidden",
+  "hifzBandUnknown": "Never tested",
+  "@hifzBandUnknown": {
+    "description": "No result at all – deliberately not the same as weak"
+  },
+  "hifzBandWeak": "Weak",
+  "hifzBandShaky": "Shaky",
+  "hifzBandFirm": "Firm",
+  "hifzBandSolid": "Solid",
+  "hifzBandSkipped": "Not mine to review",
+  "hifzStrengthFrom": "Strength from your own attempts: {attempts} · last time {when}",
+  "@hifzStrengthFrom": {
+    "placeholders": {
+      "attempts": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzAttemptsCount": "{count, plural, =0{no attempts} =1{1 attempt} other{{count} attempts}}",
+  "@hifzAttemptsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzAyatCount": "{count, plural, =0{no verses} =1{1 verse} other{{count} verses}}",
+  "@hifzAyatCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzPagesCount": "{count, plural, =0{no pages} =1{1 page} other{{count} pages}}",
+  "@hifzPagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzPlanRepeatTimes": "{count, plural, =1{once} other{{count} times}}",
+  "@hifzPlanRepeatTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzPlanEmpty": "Nothing is memorised yet. Add your first passage and start.",
+  "hifzPlanNoNewPortion": "You have not said where the new portion starts, so today is review only.",
+  "hifzPlanFirstDay": "Your first day. Today is the new portion only; the review starts tomorrow.",
+  "hifzPlanAllSkipped": "Everything in your list is marked as not yours to review, so there is no review today.",
+  "hifzBacklogTitle": "You were away",
+  "hifzBacklogBody": "You were away for {days}. Today holds {today}, and {back} went back into the rotation instead of piling up.",
+  "@hifzBacklogBody": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      },
+      "today": {
+        "type": "String"
+      },
+      "back": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzBacklogDaysCount": "{count, plural, =1{1 day} other{{count} days}}",
+  "@hifzBacklogDaysCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzBacklogCapped": "Today's cap was reached, so nothing more was added. The rest comes round in its turn.",
+  "hifzBacklogDropped": "Back into the rotation: {ranges}",
+  "@hifzBacklogDropped": {
+    "placeholders": {
+      "ranges": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMapTitle": "The page map",
+  "hifzMapLegend": "A page's colour comes from the strength of its verses. A page you were never tested on stays uncoloured.",
+  "hifzMapPageLine": "Page {page} · {memorised} of {total}",
+  "@hifzMapPageLine": {
+    "placeholders": {
+      "page": {
+        "type": "String"
+      },
+      "memorised": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzMarkSkip": "This one is not mine to review",
+  "hifzMarkSkipDone": "Done: it is out of the review and out of the map's numbers.",
+  "hifzMarkResetPage": "Reset this page's strength",
+  "hifzMarkResetBody": "The strength starts again from today. Your old attempts stay in the log; they just stop colouring the page.",
+  "hifzGoalsTitle": "My goals",
+  "hifzGoalsEmpty": "Write your goal in your own words, like \"Al-Kahf every Friday\".",
+  "hifzGoalKindWeekday": "A passage on one day of every week",
+  "hifzGoalKindReview": "A passage kept under review",
+  "hifzGoalKindAmount": "An amount every day",
+  "hifzGoalProgressLine": "{done} of {target}",
+  "@hifzGoalProgressLine": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzGoalMet": "Done today",
+  "hifzGoalReminderAfterPrayer": "Reminder {minutes} after {prayer}",
+  "@hifzGoalReminderAfterPrayer": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzGoalReminderExplain": "The reminder hangs off the prayer, not the clock, so it moves with Fajr and Maghrib all year.",
+  "hifzGoalReminderTitle": "Time to memorise",
+  "hifzGoalReminderBody": "{goal} · {window}",
+  "@hifzGoalReminderBody": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzGoalChannelName": "Memorisation goal reminders",
+  "hifzGoalChannelDescription": "A nudge after the prayer for the memorisation goals you set.",
+  "hifzProgressTitle": "My progress",
+  "hifzProgressStreak": "{count, plural, =0{No streak yet} =1{1 day in a row} other{{count} days in a row}}",
+  "@hifzProgressStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hifzProgressBest": "Longest streak: {days}",
+  "@hifzProgressBest": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzProgressTested": "{tested} of {memorised} have been tested",
+  "@hifzProgressTested": {
+    "placeholders": {
+      "tested": {
+        "type": "String"
+      },
+      "memorised": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzWritingTitle": "Write from memory",
+  "hifzWritingHint": "Write the verses from memory, then compare. The app marks the word you missed and the word you changed.",
+  "hifzWritingYours": "What you wrote",
+  "@hifzWritingYours": {
+    "description": "Labelled and styled differently: it is never shown as Quran text"
+  },
+  "hifzWritingScore": "{right} right out of {total}",
+  "@hifzWritingScore": {
+    "placeholders": {
+      "right": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzLinkingTitle": "Linking",
+  "hifzLinkingHint": "The end of the verse is in front of you; you carry on with the start of the next.",
+  "hifzListenRepeatHint": "The verse plays {times}, with a pause after each one for you to repeat.",
+  "@hifzListenRepeatHint": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "hifzSettingsNewPerDay": "New material a day",
+  "hifzSettingsCap": "The most in one day",
+  "hifzSettingsCapNote": "However long you are away, a day never grows past this.",
+  "hifzSettingsStartFrom": "The new portion starts at",
+  "hifzExportTitle": "Export memorisation with the log",
+  "hifzExportBody": "The same recitation file, with your goals, today's plan and each verse's strength added for the PC app. It holds no audio."
 }
