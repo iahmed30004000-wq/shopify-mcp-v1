@@ -1,8 +1,15 @@
 /// The Work planet: kanban boards per country / business (editable
-/// columns with a done column, cards that drag between columns and swipe
-/// forward / back), today's Top 3 across cards and tasks with the morning
-/// carry-over, cards placed in prayer windows (kept in step with the task
-/// the home panel lists), and projects with checklists and countdowns.
+/// columns with a done column, cards that drag between columns, swipe
+/// forward / back, and move from a menu – the only way a screen reader
+/// can), today's Top 3 across cards and tasks with the morning carry-over,
+/// cards placed in prayer windows (kept in step with the task the home
+/// panel lists), and projects with checklists and countdowns.
+///
+/// **The board is the world's main view**: [WorkScreen] opens on the board
+/// he last looked at ([workSelectedBoardProvider]) with a strip above it to
+/// switch board, start one, or step into the overview (Top 3, every board,
+/// the projects) and back. A card carries his own label with its colour
+/// (`BoardCards.tag` / `tagColor`, schema v9).
 ///
 /// Screens: [WorkScreen], [BoardScreen], [ProjectsScreen], [ProjectScreen];
 /// cards for hubs: [Top3Card], [WorkTodayCard]; sheets: [CardSheet]

@@ -67,6 +67,19 @@ final workBoardCardsProvider = Provider.family<AsyncValue<List<BoardCardRow>>, S
   return ref.watch(workCardsProvider).whenData((all) => [for (final c in all) if (c.boardId == boardId) c]);
 });
 
+/// Which board the Work world is showing as its main view (null: the
+/// first one he has). Kept here, not in the screen, so leaving the world
+/// and coming back lands on the same board.
+final workSelectedBoardProvider = NotifierProvider<WorkSelectedBoard, String?>(WorkSelectedBoard.new);
+
+class WorkSelectedBoard extends Notifier<String?> {
+  @override
+  String? build() => null;
+
+  /// Null falls back to the first board that is not archived.
+  void select(String? boardId) => state = boardId;
+}
+
 /// Board tiles: counts per column, due today, overdue.
 final workBoardSummariesProvider = Provider<AsyncValue<List<BoardSummary>>>((ref) {
   final today = ref.watch(workTodayProvider);

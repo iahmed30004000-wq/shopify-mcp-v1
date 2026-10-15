@@ -1,0 +1,66 @@
+{
+  "kanbanTabBoard": {
+    "ar": "اللوحة",
+    "en": "Board",
+    "description": "Part 8 / #23: the Work world opens on the board itself"
+  },
+  "kanbanTabOverview": {
+    "ar": "الملخّص",
+    "en": "Overview"
+  },
+  "kanbanSwitchBoard": {
+    "ar": "بدّل اللوحة",
+    "en": "Switch board"
+  },
+  "kanbanBoardOf": {
+    "ar": "لوحة {name}",
+    "en": "{name} board",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanOpenOverview": {
+    "ar": "افتح الملخّص: أهم ثلاث، اللوحات والمشاريع",
+    "en": "Open the overview: Top 3, boards and projects"
+  },
+  "kanbanOpenBoard": {
+    "ar": "ارجع إلى اللوحة",
+    "en": "Back to the board"
+  },
+  "kanbanCardTag": {
+    "ar": "وسم البطاقة",
+    "en": "Card label"
+  },
+  "kanbanCardTagHint": {
+    "ar": "مرتجعات، عميل مهم، تحويل…",
+    "en": "Returns, key customer, transfer…"
+  },
+  "kanbanTagColor": {
+    "ar": "لون الوسم",
+    "en": "Label colour"
+  },
+  "kanbanTagSemantics": {
+    "ar": "وسم: {tag}",
+    "en": "Label: {tag}",
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanMoveSemantics": {
+    "ar": "انقل «{title}» إلى عمود",
+    "en": "Move “{title}” to a column",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanAlreadyHere": {
+    "ar": "البطاقة بهذا العمود أصلًا",
+    "en": "The card is already in that column"
+  }
+}

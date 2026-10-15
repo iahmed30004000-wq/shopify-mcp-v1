@@ -26260,5 +26260,41 @@
   "hifzFaithCardEmpty": "ابدأ خطة الحفظ",
   "hifzSettingsNewFromNone": "ما في جديد",
   "hifzSettingsRepetitions": "كم مرة تعيد كل آية",
-  "hifzSettingsSaved": "انحفظت الإعدادات"
+  "hifzSettingsSaved": "انحفظت الإعدادات",
+  "kanbanTabBoard": "اللوحة",
+  "@kanbanTabBoard": {
+    "description": "Part 8 / #23: the Work world opens on the board itself"
+  },
+  "kanbanTabOverview": "الملخّص",
+  "kanbanSwitchBoard": "بدّل اللوحة",
+  "kanbanBoardOf": "لوحة {name}",
+  "@kanbanBoardOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanOpenOverview": "افتح الملخّص: أهم ثلاث، اللوحات والمشاريع",
+  "kanbanOpenBoard": "ارجع إلى اللوحة",
+  "kanbanCardTag": "وسم البطاقة",
+  "kanbanCardTagHint": "مرتجعات، عميل مهم، تحويل…",
+  "kanbanTagColor": "لون الوسم",
+  "kanbanTagSemantics": "وسم: {tag}",
+  "@kanbanTagSemantics": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanMoveSemantics": "انقل «{title}» إلى عمود",
+  "@kanbanMoveSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanAlreadyHere": "البطاقة بهذا العمود أصلًا"
 }

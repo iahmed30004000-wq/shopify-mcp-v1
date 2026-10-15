@@ -244,6 +244,22 @@ Gemini into a JSON file, import it as a new planet, and let Madar turn it into a
   board, drag cards between columns (the brief asks for drag between kanban columns),
   assignee, due date, Top 3 for today, cards placed into prayer windows.
 
+**Built (the Work half)**: the board *is* the Work world now. `/work` opens on the board he
+last looked at (`workSelectedBoardProvider`), with a strip above it that switches board,
+starts one, and shows today's Top 3 as «٢ من ٣» - one tap into the overview (Top 3, every
+board with its counts, the projects) and one button back. The kanban itself was already
+built and stays: columns right-to-left in Arabic with paging and snap, a card dragged
+between columns with the pick-up / tick / drop haptics, swipe forward and back, and - new -
+**«نقل إلى عمود» on every card whatever the column count**, which is a custom semantics
+action, so TalkBack reaches the same move a drag makes. A card gained **his own label with
+its colour** (schema **v9**: `board_cards.tag` + `tag_color`; a colour is dropped unless
+there is a label, and clearing the label clears it), shown as a coloured pill above the
+title and searchable in his own words. Every write still undoes.
+**Left for later**: the label is one tag, not a set, and the board cannot be filtered by it;
+the AI summary still lists a card by title only (no label); an external file's "label" key
+still imports as the card's title, as before (a Madar backup round-trips `tag` / `tag_color`
+on its own, because the snapshot is column-wise).
+
 **#24 – Body / gym, properly**
 - An exercise library: per exercise a photo of the machine, a video of the movement (his own
   file or a link), target muscles, notes.

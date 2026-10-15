@@ -25998,6 +25998,26 @@ class $BoardCardsTable extends BoardCards
         type: DriftSqlType.string,
         requiredDuringInsert: false,
       ).withConverter<PrayerWindow?>($BoardCardsTable.$converterwindown);
+  static const VerificationMeta _tagMeta = const VerificationMeta('tag');
+  @override
+  late final GeneratedColumn<String> tag = GeneratedColumn<String>(
+    'tag',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _tagColorMeta = const VerificationMeta(
+    'tagColor',
+  );
+  @override
+  late final GeneratedColumn<int> tagColor = GeneratedColumn<int>(
+    'tag_color',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -26012,6 +26032,8 @@ class $BoardCardsTable extends BoardCards
     dueDate,
     isTop3,
     window,
+    tag,
+    tagColor,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -26086,6 +26108,18 @@ class $BoardCardsTable extends BoardCards
         isTop3.isAcceptableOrUnknown(data['is_top3']!, _isTop3Meta),
       );
     }
+    if (data.containsKey('tag')) {
+      context.handle(
+        _tagMeta,
+        tag.isAcceptableOrUnknown(data['tag']!, _tagMeta),
+      );
+    }
+    if (data.containsKey('tag_color')) {
+      context.handle(
+        _tagColorMeta,
+        tagColor.isAcceptableOrUnknown(data['tag_color']!, _tagColorMeta),
+      );
+    }
     return context;
   }
 
@@ -26147,6 +26181,14 @@ class $BoardCardsTable extends BoardCards
           data['${effectivePrefix}window'],
         ),
       ),
+      tag: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tag'],
+      ),
+      tagColor: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}tag_color'],
+      ),
     );
   }
 
@@ -26178,6 +26220,13 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
   final DateTime? dueDate;
   final bool isTop3;
   final PrayerWindow? window;
+
+  /// A short label of his own on the card («مرتجعات», «عميل مهم») with its
+  /// own colour, so one look at the board says what kind of work a card is.
+  /// Null until he gives the card one; the colour is an ARGB value from the
+  /// curated palette and means nothing without the label.
+  final String? tag;
+  final int? tagColor;
   const BoardCardRow({
     required this.id,
     required this.createdAt,
@@ -26191,6 +26240,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
     this.dueDate,
     required this.isTop3,
     this.window,
+    this.tag,
+    this.tagColor,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -26219,6 +26270,12 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
         $BoardCardsTable.$converterwindown.toSql(window),
       );
     }
+    if (!nullToAbsent || tag != null) {
+      map['tag'] = Variable<String>(tag);
+    }
+    if (!nullToAbsent || tagColor != null) {
+      map['tag_color'] = Variable<int>(tagColor);
+    }
     return map;
   }
 
@@ -26244,6 +26301,10 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
       window: window == null && nullToAbsent
           ? const Value.absent()
           : Value(window),
+      tag: tag == null && nullToAbsent ? const Value.absent() : Value(tag),
+      tagColor: tagColor == null && nullToAbsent
+          ? const Value.absent()
+          : Value(tagColor),
     );
   }
 
@@ -26267,6 +26328,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
       window: $BoardCardsTable.$converterwindown.fromJson(
         serializer.fromJson<String?>(json['window']),
       ),
+      tag: serializer.fromJson<String?>(json['tag']),
+      tagColor: serializer.fromJson<int?>(json['tagColor']),
     );
   }
   @override
@@ -26287,6 +26350,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
       'window': serializer.toJson<String?>(
         $BoardCardsTable.$converterwindown.toJson(window),
       ),
+      'tag': serializer.toJson<String?>(tag),
+      'tagColor': serializer.toJson<int?>(tagColor),
     };
   }
 
@@ -26303,6 +26368,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
     Value<DateTime?> dueDate = const Value.absent(),
     bool? isTop3,
     Value<PrayerWindow?> window = const Value.absent(),
+    Value<String?> tag = const Value.absent(),
+    Value<int?> tagColor = const Value.absent(),
   }) => BoardCardRow(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -26316,6 +26383,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
     dueDate: dueDate.present ? dueDate.value : this.dueDate,
     isTop3: isTop3 ?? this.isTop3,
     window: window.present ? window.value : this.window,
+    tag: tag.present ? tag.value : this.tag,
+    tagColor: tagColor.present ? tagColor.value : this.tagColor,
   );
   BoardCardRow copyWithCompanion(BoardCardsCompanion data) {
     return BoardCardRow(
@@ -26331,6 +26400,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
       dueDate: data.dueDate.present ? data.dueDate.value : this.dueDate,
       isTop3: data.isTop3.present ? data.isTop3.value : this.isTop3,
       window: data.window.present ? data.window.value : this.window,
+      tag: data.tag.present ? data.tag.value : this.tag,
+      tagColor: data.tagColor.present ? data.tagColor.value : this.tagColor,
     );
   }
 
@@ -26348,7 +26419,9 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
           ..write('assignee: $assignee, ')
           ..write('dueDate: $dueDate, ')
           ..write('isTop3: $isTop3, ')
-          ..write('window: $window')
+          ..write('window: $window, ')
+          ..write('tag: $tag, ')
+          ..write('tagColor: $tagColor')
           ..write(')'))
         .toString();
   }
@@ -26367,6 +26440,8 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
     dueDate,
     isTop3,
     window,
+    tag,
+    tagColor,
   );
   @override
   bool operator ==(Object other) =>
@@ -26383,7 +26458,9 @@ class BoardCardRow extends DataClass implements Insertable<BoardCardRow> {
           other.assignee == this.assignee &&
           other.dueDate == this.dueDate &&
           other.isTop3 == this.isTop3 &&
-          other.window == this.window);
+          other.window == this.window &&
+          other.tag == this.tag &&
+          other.tagColor == this.tagColor);
 }
 
 class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
@@ -26399,6 +26476,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
   final Value<DateTime?> dueDate;
   final Value<bool> isTop3;
   final Value<PrayerWindow?> window;
+  final Value<String?> tag;
+  final Value<int?> tagColor;
   final Value<int> rowid;
   const BoardCardsCompanion({
     this.id = const Value.absent(),
@@ -26413,6 +26492,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
     this.dueDate = const Value.absent(),
     this.isTop3 = const Value.absent(),
     this.window = const Value.absent(),
+    this.tag = const Value.absent(),
+    this.tagColor = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BoardCardsCompanion.insert({
@@ -26428,6 +26509,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
     this.dueDate = const Value.absent(),
     this.isTop3 = const Value.absent(),
     this.window = const Value.absent(),
+    this.tag = const Value.absent(),
+    this.tagColor = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : boardId = Value(boardId),
        title = Value(title);
@@ -26444,6 +26527,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
     Expression<DateTime>? dueDate,
     Expression<bool>? isTop3,
     Expression<String>? window,
+    Expression<String>? tag,
+    Expression<int>? tagColor,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -26459,6 +26544,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
       if (dueDate != null) 'due_date': dueDate,
       if (isTop3 != null) 'is_top3': isTop3,
       if (window != null) 'window': window,
+      if (tag != null) 'tag': tag,
+      if (tagColor != null) 'tag_color': tagColor,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -26476,6 +26563,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
     Value<DateTime?>? dueDate,
     Value<bool>? isTop3,
     Value<PrayerWindow?>? window,
+    Value<String?>? tag,
+    Value<int?>? tagColor,
     Value<int>? rowid,
   }) {
     return BoardCardsCompanion(
@@ -26491,6 +26580,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
       dueDate: dueDate ?? this.dueDate,
       isTop3: isTop3 ?? this.isTop3,
       window: window ?? this.window,
+      tag: tag ?? this.tag,
+      tagColor: tagColor ?? this.tagColor,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -26538,6 +26629,12 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
         $BoardCardsTable.$converterwindown.toSql(window.value),
       );
     }
+    if (tag.present) {
+      map['tag'] = Variable<String>(tag.value);
+    }
+    if (tagColor.present) {
+      map['tag_color'] = Variable<int>(tagColor.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -26559,6 +26656,8 @@ class BoardCardsCompanion extends UpdateCompanion<BoardCardRow> {
           ..write('dueDate: $dueDate, ')
           ..write('isTop3: $isTop3, ')
           ..write('window: $window, ')
+          ..write('tag: $tag, ')
+          ..write('tagColor: $tagColor, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();

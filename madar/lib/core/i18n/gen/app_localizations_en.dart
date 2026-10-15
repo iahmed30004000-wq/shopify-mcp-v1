@@ -28315,4 +28315,47 @@ class L10nEn extends L10n {
 
   @override
   String get hifzSettingsSaved => 'The settings are saved';
+
+  @override
+  String get kanbanTabBoard => 'Board';
+
+  @override
+  String get kanbanTabOverview => 'Overview';
+
+  @override
+  String get kanbanSwitchBoard => 'Switch board';
+
+  @override
+  String kanbanBoardOf(String name) {
+    return '$name board';
+  }
+
+  @override
+  String get kanbanOpenOverview =>
+      'Open the overview: Top 3, boards and projects';
+
+  @override
+  String get kanbanOpenBoard => 'Back to the board';
+
+  @override
+  String get kanbanCardTag => 'Card label';
+
+  @override
+  String get kanbanCardTagHint => 'Returns, key customer, transfer…';
+
+  @override
+  String get kanbanTagColor => 'Label colour';
+
+  @override
+  String kanbanTagSemantics(String tag) {
+    return 'Label: $tag';
+  }
+
+  @override
+  String kanbanMoveSemantics(String title) {
+    return 'Move “$title” to a column';
+  }
+
+  @override
+  String get kanbanAlreadyHere => 'The card is already in that column';
 }

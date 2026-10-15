@@ -44631,6 +44631,78 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'انحفظت الإعدادات'**
   String get hifzSettingsSaved;
+
+  /// Part 8 / #23: the Work world opens on the board itself
+  ///
+  /// In ar, this message translates to:
+  /// **'اللوحة'**
+  String get kanbanTabBoard;
+
+  /// No description provided for @kanbanTabOverview.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملخّص'**
+  String get kanbanTabOverview;
+
+  /// No description provided for @kanbanSwitchBoard.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدّل اللوحة'**
+  String get kanbanSwitchBoard;
+
+  /// No description provided for @kanbanBoardOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة {name}'**
+  String kanbanBoardOf(String name);
+
+  /// No description provided for @kanbanOpenOverview.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح الملخّص: أهم ثلاث، اللوحات والمشاريع'**
+  String get kanbanOpenOverview;
+
+  /// No description provided for @kanbanOpenBoard.
+  ///
+  /// In ar, this message translates to:
+  /// **'ارجع إلى اللوحة'**
+  String get kanbanOpenBoard;
+
+  /// No description provided for @kanbanCardTag.
+  ///
+  /// In ar, this message translates to:
+  /// **'وسم البطاقة'**
+  String get kanbanCardTag;
+
+  /// No description provided for @kanbanCardTagHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجعات، عميل مهم، تحويل…'**
+  String get kanbanCardTagHint;
+
+  /// No description provided for @kanbanTagColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون الوسم'**
+  String get kanbanTagColor;
+
+  /// No description provided for @kanbanTagSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'وسم: {tag}'**
+  String kanbanTagSemantics(String tag);
+
+  /// No description provided for @kanbanMoveSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقل «{title}» إلى عمود'**
+  String kanbanMoveSemantics(String title);
+
+  /// No description provided for @kanbanAlreadyHere.
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقة بهذا العمود أصلًا'**
+  String get kanbanAlreadyHere;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -13,6 +13,7 @@ const _v5Tables = ['record_lists', 'record_list_items'];
 const _v6Tables = ['pantry_items', 'recipes', 'recipe_ingredients', 'cooked_meals', 'kitchen_rules'];
 const _v7Tables = ['tasmee_sessions', 'tasmee_ayat', 'tasmee_mistakes'];
 const _v8Tables = ['hifz_goals', 'hifz_marks'];
+const _v9Columns = ['tag', 'tag_color'];
 
 Future<Set<String>> _columns(MadarDatabase db, String table) async {
   final rows = await db.customSelect('PRAGMA table_info($table)').get();
@@ -35,9 +36,9 @@ void main() {
 
   tearDown(() => dir.deleteSync(recursive: true));
 
-  test('a fresh database is created at schema v8 with the Quran / wird / Hifz, nutrition, AI-plan, list, kitchen and recitation tables', () async {
+  test('a fresh database is created at schema v9 with the Quran / wird / Hifz, nutrition, AI-plan, list, kitchen and recitation tables', () async {
     final db = MadarDatabase(NativeDatabase(file));
-    expect(db.schemaVersion, 8);
+    expect(db.schemaVersion, 9);
     expect(await _tables(db), containsAll([..._v2Tables, ..._v3Tables, ..._v4Tables, ..._v5Tables, ..._v6Tables, ..._v7Tables, ..._v8Tables]));
     expect(await _columns(db, 'record_lists'), containsAll(['host_table', 'host_id', 'name', 'currency', 'posted_at', 'posted_tx_id', 'posted_amount_milli', 'posted_item_count']));
     expect(await _columns(db, 'record_list_items'), containsAll(['list_id', 'title', 'quantity', 'unit', 'price_milli', 'done', 'done_at', 'note']));
@@ -55,6 +56,7 @@ void main() {
     );
     expect(await _columns(db, 'cooked_meals'), containsAll(['recipe_id', 'name', 'day', 'servings', 'overrode']));
     expect(await _columns(db, 'kitchen_rules'), containsAll(['kind', 'term', 'who', 'note', 'active']));
+    expect(await _columns(db, 'board_cards'), containsAll(_v9Columns));
     expect(
       await _columns(db, 'tasmee_sessions'),
       containsAll([
@@ -88,7 +90,7 @@ void main() {
     expect(await _columns(db, 'applied_plans'), contains('name'));
     expect(await _columns(db, 'applied_plan_items'), containsAll(['done', 'done_at', 'before_json', 'after_json']));
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
@@ -130,7 +132,7 @@ void main() {
     await db.close();
   });
 
-  test('a v1 database upgrades to v8 and keeps its data', () async {
+  test('a v1 database upgrades to v9 and keeps its data', () async {
     // Build a v1 file: the current schema minus the v2, v3, v4 and v5
     // tables and the v3 column, user_version 1.
     final v1 = MadarDatabase(NativeDatabase(file));
@@ -139,6 +141,9 @@ void main() {
       await v1.customStatement('DROP TABLE $t');
     }
     await v1.customStatement('ALTER TABLE conditions DROP COLUMN color');
+    for (final c in _v9Columns) {
+      await v1.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
+    }
     await v1.customStatement('PRAGMA user_version = 1');
     await v1.close();
 
@@ -157,11 +162,11 @@ void main() {
     expect(plan.unit, WirdUnit.pages);
     expect(plan.startDate, DateTime(2026, 10, 1));
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
-  test('a v2 database upgrades to v8, keeps its data and gets the nutrition tables', () async {
+  test('a v2 database upgrades to v9, keeps its data and gets the nutrition tables', () async {
     // Build a v2 file: the current schema minus the v3, v4 and v5 tables
     // and the colour column on conditions, user_version 2.
     final v2 = MadarDatabase(NativeDatabase(file));
@@ -174,6 +179,9 @@ void main() {
       await v2.customStatement('DROP TABLE $t');
     }
     await v2.customStatement('ALTER TABLE conditions DROP COLUMN color');
+    for (final c in _v9Columns) {
+      await v2.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
+    }
     await v2.customStatement('PRAGMA user_version = 2');
     await v2.close();
 
@@ -275,11 +283,11 @@ void main() {
     expect(rule.maxPerDay, isNull);
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
-  test('a v3 database upgrades to v8 and gets the AI-plan tables, usable with their defaults', () async {
+  test('a v3 database upgrades to v9 and gets the AI-plan tables, usable with their defaults', () async {
     // Build a v3 file: the current schema minus the v4 and v5 tables,
     // user_version 3.
     final v3 = MadarDatabase(NativeDatabase(file));
@@ -287,6 +295,9 @@ void main() {
     await v3.into(v3.foods).insert(FoodsCompanion.insert(id: const Value('f1'), name: 'فلافل'));
     for (final t in [..._v4Tables, ..._v5Tables, ..._v6Tables, ..._v7Tables, ..._v8Tables]) {
       await v3.customStatement('DROP TABLE $t');
+    }
+    for (final c in _v9Columns) {
+      await v3.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
     }
     await v3.customStatement('PRAGMA user_version = 3');
     await v3.close();
@@ -329,11 +340,11 @@ void main() {
     );
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
-  test('a v4 database upgrades to v8 and gets the list tables, usable with their defaults', () async {
+  test('a v4 database upgrades to v9 and gets the list tables, usable with their defaults', () async {
     // Build a v4 file: the current schema minus the v5 tables, user_version 4.
     final v4 = MadarDatabase(NativeDatabase(file));
     await v4.into(v4.tasks).insert(TasksCompanion.insert(title: 'مهمة من قبل'));
@@ -342,6 +353,9 @@ void main() {
         .insert(BudgetItemsCompanion.insert(id: const Value('b-food'), name: 'بقالة', amountMilli: const Value(200000)));
     for (final t in _v5Tables) {
       await v4.customStatement('DROP TABLE $t');
+    }
+    for (final c in _v9Columns) {
+      await v4.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
     }
     await v4.customStatement('PRAGMA user_version = 4');
     await v4.close();
@@ -378,11 +392,11 @@ void main() {
     expect(item.note, isNull);
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
-  test('a v5 database upgrades to v8 and gets the kitchen tables of «السفرة», usable with their defaults', () async {
+  test('a v5 database upgrades to v9 and gets the kitchen tables of «السفرة», usable with their defaults', () async {
     // Build a v5 file: the current schema minus the v6 tables, user_version 5.
     final v5 = MadarDatabase(NativeDatabase(file));
     await v5.into(v5.tasks).insert(TasksCompanion.insert(title: 'مهمة من قبل'));
@@ -391,6 +405,9 @@ void main() {
         .insert(RecordListsCompanion.insert(hostTable: 'trips', hostId: 't1', name: 'شنطة السفر'));
     for (final t in [..._v6Tables, ..._v7Tables, ..._v8Tables]) {
       await v5.customStatement('DROP TABLE $t');
+    }
+    for (final c in _v9Columns) {
+      await v5.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
     }
     await v5.customStatement('PRAGMA user_version = 5');
     await v5.close();
@@ -448,11 +465,11 @@ void main() {
     expect(rule.who, isNull);
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
-  test('a v6 database upgrades to v8 and gets «التسميع»\'s log, usable with its defaults', () async {
+  test('a v6 database upgrades to v9 and gets «التسميع»\'s log, usable with its defaults', () async {
     // Build a v6 file: the current schema minus the v7 and v8 tables,
     // user_version 6.
     final v6 = MadarDatabase(NativeDatabase(file));
@@ -460,6 +477,9 @@ void main() {
     await v6.into(v6.pantryItems).insert(PantryItemsCompanion.insert(name: 'رز'));
     for (final t in [..._v7Tables, ..._v8Tables]) {
       await v6.customStatement('DROP TABLE $t');
+    }
+    for (final c in _v9Columns) {
+      await v6.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
     }
     await v6.customStatement('PRAGMA user_version = 6');
     await v6.close();
@@ -523,11 +543,11 @@ void main() {
     expect(mistake.day, DateTime(2026, 10, 15));
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
     await db.close();
   });
 
-  test('a v7 database upgrades to v8 and gets «الحفظ»\'s goals and marks, keeping the recitation log', () async {
+  test('a v7 database upgrades to v9 and gets «الحفظ»\'s goals and marks, keeping the recitation log', () async {
     // Build a v7 file: the current schema minus the v8 tables, user_version 7.
     final v7 = MadarDatabase(NativeDatabase(file));
     await v7.into(v7.tasks).insert(TasksCompanion.insert(title: 'مهمة من قبل'));
@@ -547,6 +567,9 @@ void main() {
     );
     for (final t in _v8Tables) {
       await v7.customStatement('DROP TABLE $t');
+    }
+    for (final c in _v9Columns) {
+      await v7.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
     }
     await v7.customStatement('PRAGMA user_version = 7');
     await v7.close();
@@ -592,7 +615,39 @@ void main() {
     expect(mark.note, 'بلّشت من جديد');
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
-    expect(version.data.values.single, 8);
+    expect(version.data.values.single, 9);
+    await db.close();
+  });
+
+  test('a v8 database upgrades to v9 and gets the card label, keeping his cards', () async {
+    // Build a v8 file: the current schema minus the v9 columns, user_version 8.
+    final v8 = MadarDatabase(NativeDatabase(file));
+    await v8.into(v8.boards).insert(BoardsCompanion.insert(id: const Value('b1'), name: 'متجر الأردن'));
+    await v8.into(v8.boardCards).insert(
+      BoardCardsCompanion.insert(id: const Value('c1'), boardId: 'b1', title: 'متابعة المرتجعات'),
+    );
+    for (final c in _v9Columns) {
+      await v8.customStatement('ALTER TABLE board_cards DROP COLUMN $c');
+    }
+    await v8.customStatement('PRAGMA user_version = 8');
+    await v8.close();
+
+    final db = MadarDatabase(NativeDatabase(file));
+    expect(await _columns(db, 'board_cards'), containsAll(_v9Columns));
+    final before = (await db.select(db.boardCards).get()).single;
+    expect(before.title, 'متابعة المرتجعات', reason: 'his cards are untouched');
+    expect(before.tag, isNull, reason: 'nothing of ours is written: no label until he gives one');
+    expect(before.tagColor, isNull);
+
+    await (db.update(db.boardCards)..where((c) => c.id.equals('c1'))).write(
+      const BoardCardsCompanion(tag: Value('مرتجعات'), tagColor: Value(0xFF4F7BD9)),
+    );
+    final after = (await db.select(db.boardCards).get()).single;
+    expect(after.tag, 'مرتجعات');
+    expect(after.tagColor, 0xFF4F7BD9);
+
+    final version = await db.customSelect('PRAGMA user_version').getSingle();
+    expect(version.data.values.single, 9);
     await db.close();
   });
 }

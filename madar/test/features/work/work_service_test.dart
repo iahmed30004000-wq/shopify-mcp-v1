@@ -149,6 +149,48 @@ void main() {
     });
   });
 
+  group("a card's own label", () {
+    test('a label is stored with its colour; a colour without a label is dropped', () async {
+      final b = await work.createBoard(name: 'B');
+      final tagged = await work.addCard(b.id, const CardDraft(title: 'returns', tag: 'مرتجعات', tagColor: 0xFF4F7BD9));
+      expect(tagged.tag, 'مرتجعات');
+      expect(tagged.tagColor, 0xFF4F7BD9);
+      // A colour means nothing on its own, so it is not kept.
+      final plain = await work.addCard(b.id, const CardDraft(title: 'plain', tagColor: 0xFF4F7BD9));
+      expect(plain.tag, isNull);
+      expect(plain.tagColor, isNull);
+      // Blank is blank, whatever he typed and deleted.
+      final blank = await work.addCard(b.id, const CardDraft(title: 'blank', tag: '   ', tagColor: 0xFF4F7BD9));
+      expect(blank.tag, isNull);
+      expect(blank.tagColor, isNull);
+    });
+
+    test('clearing the label clears its colour, and undo brings both back', () async {
+      final b = await work.createBoard(name: 'B');
+      final c = await work.addCard(b.id, const CardDraft(title: 'returns', tag: 'مرتجعات', tagColor: 0xFF4F7BD9));
+      final undo = await work.editCard(c, CardDraft.of(c).copyWith(clearTag: true));
+      final cleared = await card(c.id);
+      expect(cleared.tag, isNull);
+      expect(cleared.tagColor, isNull);
+      await undo();
+      final back = await card(c.id);
+      expect(back.tag, 'مرتجعات');
+      expect(back.tagColor, 0xFF4F7BD9);
+    });
+
+    test('renaming the label keeps the colour; a copy carries the label along', () async {
+      final b = await work.createBoard(name: 'B');
+      final c = await work.addCard(b.id, const CardDraft(title: 'returns', tag: 'مرتجعات', tagColor: 0xFF4F7BD9));
+      await work.editCard(c, CardDraft.of(c).copyWith(tag: 'مرتجعات ليبيا'));
+      final renamed = await card(c.id);
+      expect(renamed.tag, 'مرتجعات ليبيا');
+      expect(renamed.tagColor, 0xFF4F7BD9);
+      final (copy, _) = await work.duplicateCard(c.id);
+      expect(copy.tag, 'مرتجعات ليبيا');
+      expect(copy.tagColor, 0xFF4F7BD9);
+    });
+  });
+
   group('card ⇄ task sync', () {
     late BoardRow b;
     late BoardCardRow c;

@@ -50,7 +50,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 8;
+  int get schemaVersion => 9;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -117,6 +117,15 @@ class MadarDatabase extends _$MadarDatabase {
           if (from < 8) {
             await m.createTable(hifzGoals);
             await m.createTable(hifzMarks);
+          }
+          // v9: a kanban card's own label and its colour – the Trello-style
+          // tag he puts on a card («مرتجعات», «عميل مهم») so one look at
+          // the board says what kind of work it is. Nothing of ours is
+          // written: every card he already has keeps no label until he
+          // gives it one.
+          if (from < 9) {
+            await m.addColumn(boardCards, boardCards.tag);
+            await m.addColumn(boardCards, boardCards.tagColor);
           }
         },
         beforeOpen: (details) async {

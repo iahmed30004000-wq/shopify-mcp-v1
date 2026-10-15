@@ -6,7 +6,7 @@ import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
 import '../../../core/domain/enums.dart';
 import '../../../core/interaction/interaction.dart';
-import '../../../core/interaction/sheets/field_inputs.dart' show kitInputDecoration;
+import '../../../core/interaction/sheets/field_inputs.dart' show SwatchPicker, kitInputDecoration;
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/sound/sound_api.dart';
 import '../data/work_models.dart';
@@ -31,8 +31,8 @@ Future<CardDraft?> showCardSheet(
 );
 
 /// Card editor: title, notes, assignee (free text with suggestions from
-/// past assignees), due date, column, prayer-window placement (and its day)
-/// and the Top 3 flag.
+/// past assignees), his own label with its colour, due date, column,
+/// prayer-window placement (and its day) and the Top 3 flag.
 class CardSheet extends ConsumerStatefulWidget {
   const CardSheet({super.key, required this.board, this.card, this.columnId, this.windowDay});
 
@@ -52,6 +52,8 @@ class _CardSheetState extends ConsumerState<CardSheet> {
   late final TextEditingController _title = TextEditingController(text: _card?.title ?? '');
   late final TextEditingController _notes = TextEditingController(text: _card?.notes ?? '');
   late final TextEditingController _assignee = TextEditingController(text: _card?.assignee ?? '');
+  late final TextEditingController _tag = TextEditingController(text: _card?.tag ?? '');
+  late int? _tagColor = _card?.tagColor ?? CuratedPalette.colors.first.toARGB32();
   late DateTime? _due = _card?.dueDate;
   late String _column = _card == null
       ? (widget.columnId ?? widget.board.columns.first.id)
@@ -66,6 +68,7 @@ class _CardSheetState extends ConsumerState<CardSheet> {
     _title.dispose();
     _notes.dispose();
     _assignee.dispose();
+    _tag.dispose();
     super.dispose();
   }
 
@@ -86,6 +89,8 @@ class _CardSheetState extends ConsumerState<CardSheet> {
         window: _window,
         windowDay: _window == null ? null : (_windowDay ?? today),
         isTop3: _top3,
+        tag: _tag.text,
+        tagColor: _tagColor,
       ),
     );
   }
@@ -189,6 +194,50 @@ class _CardSheetState extends ConsumerState<CardSheet> {
                               _assignee.selection = TextSelection.collapsed(offset: s.length);
                             }),
                           ),
+                      ],
+                    ),
+                  ),
+          ),
+          SheetSectionLabel(l.kanbanCardTag, icon: Icons.label_rounded),
+          TextField(
+            controller: _tag,
+            maxLength: 30,
+            textInputAction: TextInputAction.next,
+            onChanged: (_) => setState(() {}),
+            decoration: kitInputDecoration(
+              context,
+              hint: l.kanbanCardTagHint,
+              suffixIcon: _tag.text.isEmpty
+                  ? null
+                  : IconButton(
+                      tooltip: l.workClear,
+                      icon: const Icon(Icons.close_rounded, size: 18),
+                      onPressed: () {
+                        Fx.fire(Sfx.tap);
+                        setState(_tag.clear);
+                      },
+                    ),
+            ),
+          ),
+          // The colour is the label's: with no label there is nothing to
+          // colour, so the swatches only appear once he has typed one.
+          AnimatedSize(
+            duration: context.motion(MadarMotion.short),
+            alignment: AlignmentDirectional.topStart,
+            child: _tag.text.trim().isEmpty
+                ? const SizedBox(width: double.infinity)
+                : Padding(
+                    padding: const EdgeInsetsDirectional.only(top: Space.m),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(l.kanbanTagColor, style: text.labelSmall),
+                        const SizedBox(height: Space.s),
+                        SwatchPicker(
+                          colors: CuratedPalette.colors,
+                          value: _tagColor,
+                          onChanged: (c) => setState(() => _tagColor = c),
+                        ),
                       ],
                     ),
                   ),

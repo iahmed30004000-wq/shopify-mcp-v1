@@ -9,6 +9,7 @@ import '../../../core/motion/motion_kit.dart';
 import '../../../core/sound/sound_api.dart';
 import '../data/work_models.dart';
 import '../data/work_providers.dart';
+import 'board_screen.dart';
 import 'projects_screen.dart';
 import 'top3_card.dart';
 import 'widgets/work_widgets.dart';
@@ -16,14 +17,31 @@ import 'work_actions.dart';
 import 'work_labels.dart';
 import 'work_navigation.dart';
 
-/// The Work planet's home: today's Top 3, the boards (one per country /
-/// business, with counts and what is due today; drag to reorder, archived
-/// ones folded away) and the active projects.
+/// What the Work world is showing.
+enum WorkView {
+  /// The board itself – the world's main view.
+  board,
+
+  /// Today's Top 3, every board and the projects.
+  overview,
+}
+
+/// The Work planet: his **board** is the main view (the kanban of the
+/// board he last looked at, with a strip above it to switch board, add one
+/// or jump to today's Top 3), and the overview behind one button – today's
+/// Top 3, every board with its counts (drag to reorder, archived ones
+/// folded away) and the active projects.
+///
+/// With no board at all it opens on the overview, whose empty state offers
+/// the first board.
 class WorkScreen extends ConsumerStatefulWidget {
-  const WorkScreen({super.key, this.maxProjects = 3});
+  const WorkScreen({super.key, this.maxProjects = 3, this.initialView = WorkView.board});
 
   /// Active projects shown before "All projects".
   final int maxProjects;
+
+  /// Which view it opens on (the board, when he has one).
+  final WorkView initialView;
 
   @override
   ConsumerState<WorkScreen> createState() => _WorkScreenState();
@@ -31,9 +49,53 @@ class WorkScreen extends ConsumerStatefulWidget {
 
 class _WorkScreenState extends ConsumerState<WorkScreen> {
   bool _showArchived = false;
+  late WorkView _view = widget.initialView;
+
+  /// Shows [boardId] as the main view (and remembers it for next time).
+  void _openBoard(String boardId) {
+    ref.read(workSelectedBoardProvider.notifier).select(boardId);
+    setState(() => _view = WorkView.board);
+  }
+
+  /// The board the main view shows: his choice when it still exists, else
+  /// the first board that is not archived (null: he has none).
+  BoardSummary? _current(List<BoardSummary> all) {
+    final chosen = ref.watch(workSelectedBoardProvider);
+    if (chosen != null) {
+      final match = all.where((s) => s.board.id == chosen).firstOrNull;
+      if (match != null) return match;
+    }
+    return all.where((s) => !s.board.archived).firstOrNull;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final all = ref.watch(workBoardSummariesProvider).value;
+    final current = all == null ? null : _current(all);
+    if (_view == WorkView.board && current != null) {
+      return BoardScreen(
+        key: ValueKey('work-board:${current.board.id}'),
+        boardId: current.board.id,
+        header: _BoardSwitcher(
+          boards: [
+            for (final s in all!)
+              if (!s.board.archived || s.board.id == current.board.id) s,
+          ],
+          current: current.board.id,
+          onPick: _openBoard,
+          onOverview: () => setState(() => _view = WorkView.overview),
+        ),
+        onOverview: () => setState(() => _view = WorkView.overview),
+        onDeleted: () {
+          ref.read(workSelectedBoardProvider.notifier).select(null);
+          setState(() {});
+        },
+      );
+    }
+    return _overview(context, hasBoard: current != null);
+  }
+
+  Widget _overview(BuildContext context, {required bool hasBoard}) {
     ref.watch(workCardTaskSyncProvider);
     final t = context.tokens;
     final texts = WorkTexts.of(context);
@@ -50,7 +112,9 @@ class _WorkScreenState extends ConsumerState<WorkScreen> {
     ];
 
     Widget boardItem(BoardSummary s, {Widget? grip}) => ActionableItem(
-      onTap: () => WorkNavigation.toBoard(context, ref, s.board.id),
+      // The board opens here, as this world's main view – not on a page of
+      // its own on top of it.
+      onTap: () => _openBoard(s.board.id),
       borderRadius: BorderRadius.circular(t.radiusL),
       // No semanticLabel: the row's own texts are its label (a title-only
       // label made screen readers read the title twice).
@@ -184,6 +248,14 @@ class _WorkScreenState extends ConsumerState<WorkScreen> {
     return MadarScaffold(
       title: l.workTitle,
       actions: [
+        if (hasBoard)
+          MadarButton.icon(
+            icon: Icons.view_kanban_rounded,
+            semanticLabel: l.kanbanOpenBoard,
+            variant: MadarButtonVariant.ghost,
+            sfx: Sfx.navigate,
+            onPressed: () => setState(() => _view = WorkView.board),
+          ),
         MadarButton.icon(
           icon: Icons.add_rounded,
           semanticLabel: l.workNewBoard,
@@ -195,6 +267,68 @@ class _WorkScreenState extends ConsumerState<WorkScreen> {
       body: ListView(
         padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, Space.xxxl),
         children: [for (final (i, c) in children.indexed) StaggerItem(index: i, child: c)],
+      ),
+    );
+  }
+}
+
+/// The strip above the board: today's Top 3 as one chip (it opens the
+/// overview, where the three live), one chip per board – his order, the
+/// current one selected – and a chip that starts a new board. It scrolls
+/// in the reading direction, so in Arabic his first board sits on the
+/// right, like the board's own first column.
+class _BoardSwitcher extends ConsumerWidget {
+  const _BoardSwitcher({required this.boards, required this.current, required this.onPick, required this.onOverview});
+
+  final List<BoardSummary> boards;
+  final String current;
+  final ValueChanged<String> onPick;
+  final VoidCallback onOverview;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final t = context.tokens;
+    final texts = WorkTexts.of(context);
+    final l = texts.l;
+    final top3 = ref.watch(workTop3Provider).value;
+    final done = top3 == null ? 0 : top3.items.where((i) => i.done).length;
+    final total = top3?.items.length ?? 0;
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(bottom: Space.xs),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.only(end: Space.m),
+              child: MadarChip(
+                label: total == 0 ? l.workTop3Title : l.workTop3Progress(texts.n(done), texts.n(total)),
+                icon: Icons.star_rounded,
+                color: t.gold,
+                sfx: Sfx.navigate,
+                onSelected: (_) => onOverview(),
+              ),
+            ),
+            for (final s in boards)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(end: Space.s),
+                child: MadarChip(
+                  label: s.board.name,
+                  color: workColor(t, s.board.color),
+                  showDot: true,
+                  selected: s.board.id == current,
+                  onSelected: (_) => onPick(s.board.id),
+                ),
+              ),
+            MadarChip(
+              label: l.workNewBoard,
+              icon: Icons.add_rounded,
+              sfx: Sfx.sheetOpen,
+              onSelected: (_) => WorkActions.newBoard(context, ref),
+            ),
+          ],
+        ),
       ),
     );
   }

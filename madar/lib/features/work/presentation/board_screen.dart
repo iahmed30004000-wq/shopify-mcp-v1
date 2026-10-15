@@ -20,13 +20,24 @@ import 'work_labels.dart';
 /// One board as a kanban: column tabs, horizontally scrolling columns
 /// (right-to-left in Arabic), cards to drag / swipe / long-press, a filter
 /// by assignee and due date, and a button to add a card.
+///
+/// It is both the `/work/board/<id>` page and the Work world's own main
+/// view: [WorkScreen] shows it with a [header] (the board switcher and
+/// today's Top 3) and an [onOverview] button back to the world's summary.
 class BoardScreen extends ConsumerStatefulWidget {
-  const BoardScreen({super.key, required this.boardId, this.onDeleted});
+  const BoardScreen({super.key, required this.boardId, this.onDeleted, this.header, this.onOverview});
 
   final String boardId;
 
   /// Called after the board was deleted from its menu (default: pop).
   final VoidCallback? onDeleted;
+
+  /// A strip above the board: the Work world's board switcher.
+  final Widget? header;
+
+  /// When given, an app-bar button that leaves the board for the world's
+  /// overview (today's Top 3, the boards and the projects).
+  final VoidCallback? onOverview;
 
   @override
   ConsumerState<BoardScreen> createState() => _BoardScreenState();
@@ -146,6 +157,14 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
         ],
       ),
       actions: [
+        if (widget.onOverview != null)
+          MadarButton.icon(
+            icon: Icons.space_dashboard_rounded,
+            semanticLabel: l.kanbanOpenOverview,
+            variant: MadarButtonVariant.ghost,
+            sfx: Sfx.navigate,
+            onPressed: widget.onOverview,
+          ),
         _FilterButton(
           active: _filter.isActive,
           open: _showFilter,
@@ -170,6 +189,7 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          ?widget.header,
           AnimatedSize(
             duration: context.motion(MadarMotion.medium),
             curve: MadarMotion.emphasized,

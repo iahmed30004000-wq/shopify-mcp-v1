@@ -26260,5 +26260,41 @@
   "hifzFaithCardEmpty": "Start your memorisation plan",
   "hifzSettingsNewFromNone": "No new portion",
   "hifzSettingsRepetitions": "How many times to repeat each verse",
-  "hifzSettingsSaved": "The settings are saved"
+  "hifzSettingsSaved": "The settings are saved",
+  "kanbanTabBoard": "Board",
+  "@kanbanTabBoard": {
+    "description": "Part 8 / #23: the Work world opens on the board itself"
+  },
+  "kanbanTabOverview": "Overview",
+  "kanbanSwitchBoard": "Switch board",
+  "kanbanBoardOf": "{name} board",
+  "@kanbanBoardOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanOpenOverview": "Open the overview: Top 3, boards and projects",
+  "kanbanOpenBoard": "Back to the board",
+  "kanbanCardTag": "Card label",
+  "kanbanCardTagHint": "Returns, key customer, transfer…",
+  "kanbanTagColor": "Label colour",
+  "kanbanTagSemantics": "Label: {tag}",
+  "@kanbanTagSemantics": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanMoveSemantics": "Move “{title}” to a column",
+  "@kanbanMoveSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kanbanAlreadyHere": "The card is already in that column"
 }

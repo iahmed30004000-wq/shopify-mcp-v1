@@ -247,6 +247,8 @@ class WorkService {
         assignee: Value(_blank(draft.assignee)),
         dueDate: Value(draft.dueDate == null ? null : WorkDays.dateOnly(draft.dueDate!)),
         isTop3: Value(flag),
+        tag: Value(_blank(draft.tag)),
+        tagColor: Value(_blank(draft.tag) == null ? null : draft.tagColor),
       ),
     );
     if (board.isDone(row)) await _log(planetKey, cardDoneKind, cardsTable, row.id, _clock());
@@ -271,6 +273,8 @@ class WorkService {
         'notes': _blank(draft.notes),
         'assignee': _blank(draft.assignee),
         'dueDate': draft.dueDate == null ? null : WorkDays.dateOnly(draft.dueDate!),
+        'tag': _blank(draft.tag),
+        'tagColor': _blank(draft.tag) == null ? null : draft.tagColor,
       });
       for (final t in tasksBefore) {
         if (t.title != title) await _tasks.setColumn(t.id, 'title', title);

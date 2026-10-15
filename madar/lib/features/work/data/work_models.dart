@@ -95,6 +95,8 @@ class CardDraft {
     this.window,
     this.windowDay,
     this.isTop3 = false,
+    this.tag,
+    this.tagColor,
   });
 
   factory CardDraft.of(BoardCardRow card, {DateTime? windowDay}) => CardDraft(
@@ -106,6 +108,8 @@ class CardDraft {
     window: card.window,
     windowDay: windowDay,
     isTop3: card.isTop3,
+    tag: card.tag,
+    tagColor: card.tagColor,
   );
 
   final String title;
@@ -120,6 +124,11 @@ class CardDraft {
   final DateTime? windowDay;
   final bool isTop3;
 
+  /// His own short label on the card, and its colour (which means nothing
+  /// on its own: no label, no colour).
+  final String? tag;
+  final int? tagColor;
+
   CardDraft copyWith({
     String? title,
     String? notes,
@@ -131,6 +140,9 @@ class CardDraft {
     bool clearWindow = false,
     DateTime? windowDay,
     bool? isTop3,
+    String? tag,
+    bool clearTag = false,
+    int? tagColor,
   }) => CardDraft(
     title: title ?? this.title,
     notes: notes ?? this.notes,
@@ -140,6 +152,8 @@ class CardDraft {
     window: clearWindow ? null : window ?? this.window,
     windowDay: windowDay ?? this.windowDay,
     isTop3: isTop3 ?? this.isTop3,
+    tag: clearTag ? null : tag ?? this.tag,
+    tagColor: clearTag ? null : tagColor ?? this.tagColor,
   );
 }
 

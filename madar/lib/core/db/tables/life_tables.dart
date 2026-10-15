@@ -74,6 +74,13 @@ class BoardCards extends Table with Entity, Ordered {
   DateTimeColumn get dueDate => dateTime().map(const CalendarDayConverter()).nullable()();
   BoolColumn get isTop3 => boolean().withDefault(const Constant(false))();
   TextColumn get window => textEnum<PrayerWindow>().nullable()();
+
+  /// A short label of his own on the card («مرتجعات», «عميل مهم») with its
+  /// own colour, so one look at the board says what kind of work a card is.
+  /// Null until he gives the card one; the colour is an ARGB value from the
+  /// curated palette and means nothing without the label.
+  TextColumn get tag => text().nullable()();
+  IntColumn get tagColor => integer().nullable()();
 }
 
 // ---------------------------------------------------------------- Travel ----

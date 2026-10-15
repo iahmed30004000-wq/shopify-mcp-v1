@@ -29055,4 +29055,46 @@ class L10nAr extends L10n {
 
   @override
   String get hifzSettingsSaved => 'انحفظت الإعدادات';
+
+  @override
+  String get kanbanTabBoard => 'اللوحة';
+
+  @override
+  String get kanbanTabOverview => 'الملخّص';
+
+  @override
+  String get kanbanSwitchBoard => 'بدّل اللوحة';
+
+  @override
+  String kanbanBoardOf(String name) {
+    return 'لوحة $name';
+  }
+
+  @override
+  String get kanbanOpenOverview => 'افتح الملخّص: أهم ثلاث، اللوحات والمشاريع';
+
+  @override
+  String get kanbanOpenBoard => 'ارجع إلى اللوحة';
+
+  @override
+  String get kanbanCardTag => 'وسم البطاقة';
+
+  @override
+  String get kanbanCardTagHint => 'مرتجعات، عميل مهم، تحويل…';
+
+  @override
+  String get kanbanTagColor => 'لون الوسم';
+
+  @override
+  String kanbanTagSemantics(String tag) {
+    return 'وسم: $tag';
+  }
+
+  @override
+  String kanbanMoveSemantics(String title) {
+    return 'انقل «$title» إلى عمود';
+  }
+
+  @override
+  String get kanbanAlreadyHere => 'البطاقة بهذا العمود أصلًا';
 }

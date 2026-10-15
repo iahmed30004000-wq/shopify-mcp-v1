@@ -809,7 +809,9 @@ abstract final class BuiltInSearchSources {
             refTable: 'board_cards',
             refId: k.id,
             title: k.title,
-            subtitle: c.join([boards[k.boardId]?.name, column(boards[k.boardId], k.columnId), k.assignee]),
+            // His own label is searchable too: «مرتجعات» finds every card
+            // he tagged that way, whatever its title says.
+            subtitle: c.join([boards[k.boardId]?.name, column(boards[k.boardId], k.columnId), k.tag, k.assignee]),
             body: k.notes ?? '',
             date: k.dueDate,
             planetKey: 'work',

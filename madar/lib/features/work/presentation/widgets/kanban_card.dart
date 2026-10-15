@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/db/database.dart';
 import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
+import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
 import '../../../../core/motion/motion_kit.dart';
 import '../../../../core/sound/sound_api.dart';
@@ -18,8 +19,8 @@ import '../work_actions.dart';
 import '../work_labels.dart';
 import 'work_widgets.dart';
 
-/// The look of a kanban card: Top 3 star, title, a line of notes, and its
-/// due / prayer-window / assignee chips.
+/// The look of a kanban card: Top 3 star, his own coloured label, title, a
+/// line of notes, and its due / prayer-window / assignee chips.
 class KanbanCardView extends StatelessWidget {
   const KanbanCardView({
     super.key,
@@ -47,6 +48,7 @@ class KanbanCardView extends StatelessWidget {
     final status = DueRules.of(due, today, done: done);
     final accent = workColor(t, board.color);
     final notes = card.notes?.trim() ?? '';
+    final tag = card.tag?.trim() ?? '';
     final chips = <Widget>[
       if (due != null) DueBadge(due: due, today: today, done: done),
       if (card.window != null) WindowPill(window: card.window!, day: windowDay, today: today),
@@ -82,6 +84,25 @@ class KanbanCardView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    if (tag.isNotEmpty) ...[
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(bottom: Space.xs),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Semantics(
+                            label: L10n.of(context).kanbanTagSemantics(tag),
+                            child: ExcludeSemantics(
+                              child: WorkPill(
+                                label: tag,
+                                leading: ColorOrb(color: workColor(t, card.tagColor), size: 8),
+                                color: done ? t.textTertiary : t.textSecondary,
+                                filled: true,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -215,12 +236,14 @@ class _KanbanCardState extends ConsumerState<KanbanCard> {
           ),
         if (prev != null)
           ItemAction(icon: Icons.arrow_back_rounded, label: l.workMoveBack(name(prev)), onSelected: () => _move(prev)),
-        if (board.columns.length > 3)
-          ItemAction(
-            icon: Icons.view_column_rounded,
-            label: l.workMoveToColumn,
-            onSelected: () => WorkActions.pickColumn(context, ref, board, card),
-          ),
+        // Always offered, whatever the column count: a drag is out of
+        // reach for TalkBack, and this menu entry is a custom semantics
+        // action, so the same move is one gesture away there.
+        ItemAction(
+          icon: Icons.view_column_rounded,
+          label: l.workMoveToColumn,
+          onSelected: () => WorkActions.pickColumn(context, ref, board, card),
+        ),
       ],
     );
   }
