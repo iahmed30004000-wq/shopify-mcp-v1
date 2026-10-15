@@ -1,4 +1,8 @@
-/// One conversation's state and its calls. Every call starts from an
+/// One conversation's state and its calls. No call is made at all unless
+/// the owner turned the chat's own switch on (`AiSettings.outsideAllowed`,
+/// off on a fresh install): [send] and [regenerate] refuse while it is
+/// off, and the transport gate refuses again underneath them. Every call
+/// starts from an
 /// explicit user action ([send], [regenerate], [retry]) and only once the
 /// user has decided what personal context goes out – nothing here runs on
 /// a timer, on load or in the background. One call at a time (a double tap
@@ -23,6 +27,9 @@ import '../domain/payload.dart';
 
 /// Why Send can't go ahead right now.
 enum SendBlock {
+  /// The owner's own switch is off: nothing may leave the phone.
+  off,
+
   /// Nothing to send.
   empty,
 
@@ -136,10 +143,13 @@ class ChatController extends ChangeNotifier {
     }
   }
 
-  /// Why Send is blocked right now (null = it may go ahead).
-  SendBlock? blockFor(String text, {required bool hasKey}) {
+  /// Why Send is blocked right now (null = it may go ahead). [allowed] is
+  /// the owner's own switch: it comes before every other reason, so he is
+  /// never told to add a key for a chat that may not speak at all.
+  SendBlock? blockFor(String text, {required bool hasKey, required bool allowed}) {
     if (busy) return SendBlock.busy;
     if (text.trim().isEmpty) return SendBlock.empty;
+    if (!allowed) return SendBlock.off;
     if (!hasKey) return SendBlock.noKey;
     if (!conversation.context.isDecided) return SendBlock.needsContext;
     return null;
@@ -176,6 +186,7 @@ class ChatController extends ChangeNotifier {
   /// starting, or the screen is gone.
   Future<bool> send(String text, {required AiSettings settings, required String languageCode}) async {
     final trimmed = text.trim();
+    if (!settings.outsideAllowed) return false;
     if (trimmed.isEmpty || !_canStart || !conversation.context.isDecided) return false;
     _starting = true;
     final String? key;
@@ -200,6 +211,7 @@ class ChatController extends ChangeNotifier {
 
   /// Writes the last reply again – the user tapped Regenerate.
   Future<bool> regenerate({required AiSettings settings, required String languageCode}) async {
+    if (!settings.outsideAllowed) return false;
     if (!_canStart || !conversation.context.isDecided) return false;
     if (conversation.messages.lastIndexWhere((m) => m.isUser && m.isHistory) < 0) return false;
     _starting = true;

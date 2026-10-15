@@ -26,6 +26,7 @@ class AiSettingsScreen extends ConsumerWidget {
   static Key keyRow(AiProviderId p) => ValueKey('ai-settings-key-${p.name}');
   static const Key modelRow = ValueKey('ai-settings-model');
   static const Key outsideNotice = ValueKey('ai-settings-outside-notice');
+  static const Key outsideSwitch = ValueKey('ai-settings-outside-switch');
   static const Key temperatureSwitch = ValueKey('ai-settings-temperature-default');
 
   Future<void> _deleteAll(BuildContext context, WidgetRef ref) async {
@@ -61,6 +62,27 @@ class AiSettingsScreen extends ConsumerWidget {
             id: 'ai-settings',
             fade: false,
             children: [
+              SettingsSection(
+                title: l.aiChatOutsideSection,
+                seed: 0.05,
+                children: [
+                  MergeSemantics(
+                    child: SettingsTile(
+                      icon: settings.outsideAllowed ? Icons.cloud_upload_outlined : Icons.cloud_off_rounded,
+                      iconColor: settings.outsideAllowed ? t.warning : t.success,
+                      title: l.aiChatOutsideSwitch,
+                      subtitle: settings.outsideAllowed ? l.aiChatOutsideOn : l.aiChatOutsideOff,
+                      trailing: MadarSwitch(
+                        key: outsideSwitch,
+                        value: settings.outsideAllowed,
+                        semanticLabel: l.aiChatOutsideSwitch,
+                        onChanged: (v) => ctrl.change((s) => s.copyWith(outsideAllowed: v)),
+                      ),
+                    ),
+                  ),
+                  SettingsNote(l.aiChatOutsideNote, icon: Icons.shield_moon_outlined),
+                ],
+              ),
               SettingsSection(
                 title: l.aiChatSettingsServiceModel,
                 seed: 0.1,
@@ -196,9 +218,10 @@ class AiSettingsScreen extends ConsumerWidget {
 
 /// The warning card at the top of Settings › AI › Privacy: in plain words,
 /// what leaves the phone (what he types, and the summary he approves), to
-/// whom (the service whose key he entered), and what will replace it one
-/// day – the model on the phone itself (PLAN Part 15). It is a notice
-/// only: it changes nothing about what the chat does.
+/// whom (the service whose key he entered), that none of it happens until
+/// he turns the switch at the top of this screen on himself, and what will
+/// replace it one day – the model on the phone itself (PLAN Part 15).
+/// The card itself is a notice; the switch is what enforces it.
 class _OutsideNoticeCard extends StatelessWidget {
   const _OutsideNoticeCard({super.key});
 
@@ -211,7 +234,9 @@ class _OutsideNoticeCard extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.s, Space.l, Space.s),
       child: Semantics(
         container: true,
-        label: '${l.aiChatPrivacyOutsideTitle}. ${l.aiChatPrivacyOutsideBody} ${l.aiChatPrivacyOutsideFix}',
+        label:
+            '${l.aiChatPrivacyOutsideTitle}. ${l.aiChatPrivacyOutsideBody} '
+            '${l.aiChatPrivacyOutsideSwitch} ${l.aiChatPrivacyOutsideFix}',
         excludeSemantics: true,
         child: Container(
           padding: const EdgeInsetsDirectional.all(Space.m),
@@ -244,6 +269,23 @@ class _OutsideNoticeCard extends StatelessWidget {
               Text(
                 l.aiChatPrivacyOutsideBody,
                 style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.5),
+              ),
+              const SizedBox(height: Space.s),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.toggle_off_outlined, size: 16, color: t.textSecondary),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyOutsideSwitch,
+                      style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.5),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: Space.m),
               Row(

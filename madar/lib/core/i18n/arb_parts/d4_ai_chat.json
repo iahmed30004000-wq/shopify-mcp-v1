@@ -340,6 +340,66 @@
     "en": "Coming next: the model on your phone – an AI that runs inside the phone itself, so you can ask and nothing leaves it.",
     "description": "The fix line of the warning card: PLAN Part 15, the on-device model"
   },
+  "aiChatOutsideSection": {
+    "ar": "طلوع الكلام برّا الجوال",
+    "en": "Sending outside the phone",
+    "description": "Title of the first section of Settings \u203a AI: the master switch"
+  },
+  "aiChatOutsideSwitch": {
+    "ar": "اسمح للمحادثة الذكية تبعت برّا",
+    "en": "Let the AI chat send outside",
+    "description": "The master switch: off on a fresh install, no request is made until it is on"
+  },
+  "aiChatOutsideOn": {
+    "ar": "مفتوح: لما تضغط «إرسال»، كلامك والملخّص اللي وافقت عليه بيروحوا لـ Anthropic أو OpenAI.",
+    "en": "On: when you tap Send, your words and the summary you approved go to Anthropic or OpenAI.",
+    "description": "Subtitle of the master switch while it is on"
+  },
+  "aiChatOutsideOff": {
+    "ar": "مسكّر: ما بيطلع ولا حرف من جوالك، والمحادثة الذكية ما بتشتغل.",
+    "en": "Off: not a letter leaves your phone, and the AI chat doesn\u2019t work.",
+    "description": "Subtitle of the master switch while it is off"
+  },
+  "aiChatOutsideNote": {
+    "ar": "من أول ما تنزّل التطبيق بيكون مسكّر. واختيارك بينحفظ معك، وبيرجع زي ما تركته لما ترجّع نسختك الاحتياطية.",
+    "en": "It is off on a fresh install. Your choice is saved with you and comes back as you left it when you restore a backup.",
+    "description": "Note under the master switch: the default and that it survives backup and restore"
+  },
+  "aiChatPrivacyOutsideSwitch": {
+    "ar": "وهاد كله مسكّر من أول وجديد: ما بيطلع إشي إلا إذا إنت بإيدك فتحت مفتاح «اسمح للمحادثة الذكية تبعت برّا» من فوق.",
+    "en": "And all of this is off to begin with: nothing goes out unless you yourself turn on \u201cLet the AI chat send outside\u201d above.",
+    "description": "The line the warning card gains: it is off until he turns it on himself"
+  },
+  "aiChatOffTitle": {
+    "ar": "المحادثة الذكية مسكّرة",
+    "en": "The AI chat is off",
+    "description": "Title of the panel shown instead of the chat while the master switch is off"
+  },
+  "aiChatOffBody": {
+    "ar": "ما بتشتغل لأنها بتبعت كلامك برّا الجوال، وإنت طلبت تضل مسكّرة. إذا بدك تستعملها، افتح المفتاح من إعدادات الذكاء الاصطناعي — وبتقدر تسكّره بأي وقت.",
+    "en": "It doesn\u2019t run because it sends your words off the phone, and you asked for it to stay off. To use it, turn the switch on in the AI settings \u2013 and you can turn it off again any time.",
+    "description": "Body of the off panel"
+  },
+  "aiChatOffAction": {
+    "ar": "افتح المفتاح من الإعدادات",
+    "en": "Turn it on in settings",
+    "description": "Button of the off panel: opens Settings \u203a AI"
+  },
+  "aiChatOffSendNotice": {
+    "ar": "ما انبعت إشي: المحادثة الذكية مسكّرة.",
+    "en": "Nothing was sent: the AI chat is off.",
+    "description": "Shown when Send is tapped while the master switch is off"
+  },
+  "aiChatOffEntrySubtitle": {
+    "ar": "مسكّرة هلأ — افتحها إذا بدك تسأل",
+    "en": "Off right now \u2013 turn it on to ask",
+    "description": "Subtitle of the \u201cAsk about \u2026\u201d card while the master switch is off"
+  },
+  "aiChatErrorOutsideOff": {
+    "ar": "ما انبعت إشي: المحادثة الذكية مسكّرة. افتحها من الإعدادات.",
+    "en": "Nothing was sent: the AI chat is off. Turn it on in settings.",
+    "description": "Error message when something tried to call the service while the master switch is off"
+  },
   "aiChatPrivacyKeys": {
     "ar": "المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.",
     "en": "Keys live in the phone’s encrypted storage – not in the database, backups or exports."

@@ -11,6 +11,7 @@ import 'ai_models.dart';
 @immutable
 class AiSettings {
   const AiSettings({
+    this.outsideAllowed = false,
     this.provider = AiProviderId.anthropic,
     this.selected = defaultSelected,
     this.models = defaultModels,
@@ -44,6 +45,13 @@ class AiSettings {
 
   /// Most models kept per provider list.
   static const int maxModels = 40;
+
+  /// The owner's own permission for this chat to reach the network at
+  /// all. False on a fresh install: until he turns it on himself, not one
+  /// request is made – not Send, not Regenerate, not "Test key", not
+  /// "Refresh models" (see `AiOutsideGate`). It is stored here, so it goes
+  /// into his backup and comes back from a restore exactly as he left it.
+  final bool outsideAllowed;
 
   final AiProviderId provider;
   final Map<AiProviderId, String> selected;
@@ -88,6 +96,7 @@ class AiSettings {
   }
 
   AiSettings copyWith({
+    bool? outsideAllowed,
     AiProviderId? provider,
     Map<AiProviderId, String>? selected,
     Map<AiProviderId, List<String>>? models,
@@ -95,6 +104,7 @@ class AiSettings {
     double? Function()? temperature,
     int? maxTokens,
   }) => AiSettings(
+    outsideAllowed: outsideAllowed ?? this.outsideAllowed,
     provider: provider ?? this.provider,
     selected: selected ?? this.selected,
     models: models ?? this.models,
@@ -157,6 +167,7 @@ class AiSettings {
 
   Map<String, Object?> toJson() => {
     'v': 1,
+    'outside': outsideAllowed,
     'provider': provider.name,
     'selected': {for (final e in selected.entries) e.key.name: e.value},
     'models': {for (final e in models.entries) e.key.name: e.value},
@@ -198,6 +209,9 @@ class AiSettings {
     final t = json['temperature'];
     final m = json['maxTokens'];
     return AiSettings(
+      // Anything but a stored `true` means off – an older settings row,
+      // a damaged one or a fresh install all leave the chat silent.
+      outsideAllowed: json['outside'] == true,
       provider: AiProviderId.tryParse(json['provider']) ?? AiProviderId.anthropic,
       selected: {...defaultSelected, ...selected},
       models: {...defaultModels, ...models},
@@ -210,6 +224,7 @@ class AiSettings {
   @override
   bool operator ==(Object other) =>
       other is AiSettings &&
+      other.outsideAllowed == outsideAllowed &&
       other.provider == provider &&
       other.temperature == temperature &&
       other.maxTokens == maxTokens &&
@@ -218,7 +233,8 @@ class AiSettings {
       _listMapEq(other.fetched, fetched);
 
   @override
-  int get hashCode => Object.hash(provider, temperature, maxTokens, selected.length, models.length);
+  int get hashCode =>
+      Object.hash(outsideAllowed, provider, temperature, maxTokens, selected.length, models.length);
 
   static bool _mapEq<V>(Map<AiProviderId, V> a, Map<AiProviderId, V> b) {
     if (a.length != b.length) return false;

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/design/tokens.dart';
 import '../../../core/design/widgets/widgets.dart';
 import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/sound/sound_api.dart';
+import '../data/ai_chat_providers.dart';
 import 'ai_chat_screen.dart';
 
 /// Opens a new AI chat with [prompt] typed in (not sent) – the default of
@@ -15,7 +17,11 @@ void openAskAi(BuildContext context, {String? prompt}) {
 /// "Ask AI" card for hubs (health, money, faith …): opens a new chat,
 /// optionally with a suggested question already typed. Nothing is sent
 /// until the user reviews the context and taps Send.
-class AskAiEntry extends StatelessWidget {
+///
+/// While the owner's own switch is off (`AiSettings.outsideAllowed`) the
+/// card says so in its second line instead of promising an answer; it
+/// still opens the chat, which offers him the switch.
+class AskAiEntry extends ConsumerWidget {
   const AskAiEntry({super.key, this.area, this.prompt, this.onOpen, this.seed = 0});
 
   /// The hub's name for "Ask about {area}" (null = "Ask AI").
@@ -29,15 +35,17 @@ class AskAiEntry extends StatelessWidget {
   final double seed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = L10n.of(context);
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
     final title = area == null ? l.aiChatAskAi : l.aiChatAskAbout(area!);
+    final off = !ref.watch(aiOutsideAllowedProvider);
+    final subtitle = off ? l.aiChatOffEntrySubtitle : l.aiChatAskAiSubtitle;
     return GlassCard(
       seed: seed,
       padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.m, Space.m, Space.m),
-      semanticLabel: title,
+      semanticLabel: '$title. $subtitle',
       onTap: () {
         final open = onOpen;
         open != null ? open() : openAskAi(context, prompt: prompt);
@@ -52,7 +60,7 @@ class AskAiEntry extends StatelessWidget {
               gradient: RadialGradient(colors: [t.accentSoft, t.accent.withValues(alpha: 0.04)]),
               border: Border.all(color: t.accent.withValues(alpha: 0.5), width: 0.9),
             ),
-            child: Icon(Icons.auto_awesome_rounded, size: 19, color: t.accent),
+            child: Icon(off ? Icons.cloud_off_rounded : Icons.auto_awesome_rounded, size: 19, color: t.accent),
           ),
           const SizedBox(width: Space.m),
           Expanded(
@@ -61,7 +69,7 @@ class AskAiEntry extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(title, style: text.titleMedium!.copyWith(color: t.textPrimary)),
-                Text(l.aiChatAskAiSubtitle, style: text.bodySmall!.copyWith(color: t.textTertiary)),
+                Text(subtitle, style: text.bodySmall!.copyWith(color: t.textTertiary)),
               ],
             ),
           ),

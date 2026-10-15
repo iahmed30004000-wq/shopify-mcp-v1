@@ -3,8 +3,12 @@
 // 1. «بياناتك» – every export format carries the six food tables, and a
 //    restore keeps a safety copy of what it replaced and re-plans the
 //    reminders of the restored data;
-// 2. the AI chat – not one byte leaves the phone without a tap: opening the
-//    app, every AI page and the hubs' "Ask about …" card make no request;
+// 2. the AI chat – his own switch is off on a fresh install, so not one
+//    byte leaves the phone at all: opening the app, every AI page, the
+//    hubs' "Ask about …" card, a question handed over as a draft and even
+//    tapping Send make no request. With the switch on, and only then, a
+//    tap on Send reaches the service – and the switch itself survives a
+//    backup and a restore;
 // 3. "Delete all data" – the AI keys, the widgets' data, the games' site
 //    data, Together's online project, every scheduled alarm and the
 //    restore's safety copies are all gone afterwards;
@@ -43,7 +47,9 @@ import 'package:madar/features/together/together.dart'
     show PlayMode, TogetherHomeScreen, togetherTransportFactoriesProvider;
 import 'package:madar/features/widgets/widgets.dart' show MethodChannelWidgetPlatform, WidgetsSettingsScreen;
 
-import '../features/ai_chat/ai_chat_fakes.dart' show FakeTransport;
+import 'package:madar/features/ai_chat/presentation/widgets/composer.dart' show ChatComposer;
+
+import '../features/ai_chat/ai_chat_fakes.dart' show FakeReply, FakeTransport, anthropicSse;
 import '../features/data/data_harness.dart' show fastTestCodec;
 import '../features/lock/lock_test_utils.dart';
 import '../helpers/test_app.dart';
@@ -143,6 +149,10 @@ Future<void> _asyncFrames(WidgetTester tester, [int n = 14]) async {
     await tester.pump(const Duration(milliseconds: 100));
   }
 }
+
+/// Writes the AI settings row exactly as the owner's own switch would.
+Future<void> _allowOutside(MadarDatabase db, {bool allowed = true}) =>
+    KeyValueRepository(db).setJson(AiSettings.storageKey, AiSettings(outsideAllowed: allowed).toJson());
 
 void main() {
   // ------------------------------------------------------------------ 1 --
@@ -306,6 +316,137 @@ void main() {
       expect(transport.requests, isEmpty);
       await tester.pumpWidget(const SizedBox());
       await tester.pump(const Duration(seconds: 6));
+    });
+
+    testWidgets('his switch is off on a fresh install: every way in says so and sends nothing', (tester) async {
+      final transport = FakeTransport();
+      // A key is saved, so only the switch can be holding anything back.
+      final vault = MemorySecretStore({AiKeyStore.storageKey(AiProviderId.anthropic): 'sk-ant-${'x' * 40}'});
+      final app = await pumpMadarApp(
+        tester,
+        initialLocation: AppRoutes.planetOf('money'),
+        settle: false,
+        overrides: [
+          ...LockFixture.empty().overrides,
+          ..._systemOverrides(transport: transport, aiVault: vault),
+        ],
+      );
+      await _frames(tester, 30);
+      expect(transport.requests, isEmpty, reason: 'starting Madar must never call a service');
+
+      // 1. The "Ask about this world" card says it is off before he taps.
+      final card = find.text(_ar.aiChatAskAbout(_ar.planetMoney));
+      await tester.scrollUntilVisible(card, 200, scrollable: find.byType(Scrollable).last);
+      await _frames(tester, 6);
+      expect(find.text(_ar.aiChatOffEntrySubtitle), findsWidgets);
+      await Scrollable.ensureVisible(tester.element(card.last), alignment: 0.5);
+      await _frames(tester, 6);
+      await tester.tap(card.last);
+      await _frames(tester, 24);
+      expect(find.byType(AiOffCard), findsOneWidget, reason: 'the card must not open a chat that does nothing');
+      expect(
+        tester.widget<TextField>(find.byKey(ChatComposer.fieldKey)).controller!.text,
+        _ar.systemShellAskMoneyPrompt,
+        reason: 'his question is still there, waiting for him to decide',
+      );
+      expect(transport.requests, isEmpty);
+
+      // 2. Every AI page, and a draft handed over to a new chat.
+      for (final location in [
+        AppRoutes.ai,
+        AppRoutes.aiChats,
+        AppRoutes.aiSettings,
+        AppRoutes.aiOf(draft: 'راجع ميزانيتي'),
+      ]) {
+        app.router.go(location);
+        await _frames(tester, 24);
+        expect(tester.takeException(), isNull, reason: location);
+        expect(transport.requests, isEmpty, reason: '$location sent something while the switch was off');
+      }
+      // The handed-over draft landed on the "it is off" panel, not on a
+      // screen that silently does nothing.
+      expect(find.byType(AiOffCard), findsOneWidget);
+      expect(find.text(_ar.aiChatOffTitle), findsOneWidget);
+      expect(tester.widget<TextField>(find.byKey(ChatComposer.fieldKey)).controller!.text, 'راجع ميزانيتي');
+
+      // 3. He taps Send anyway: he is told, and nothing goes out.
+      await tester.tap(find.byKey(ChatComposer.sendKey));
+      await _frames(tester, 20);
+      expect(find.text(_ar.aiChatOffSendNotice), findsOneWidget);
+      expect(transport.requests, isEmpty, reason: 'Send while the switch is off must call nothing');
+
+      // 4. And the panel's own button takes him to the switch.
+      await tester.tap(find.byKey(AiOffCard.actionKey));
+      await _frames(tester, 24);
+      expect(find.byType(AiSettingsScreen), findsOneWidget);
+      expect(find.text(_ar.aiChatOutsideSwitch), findsOneWidget);
+      expect(transport.requests, isEmpty);
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump(const Duration(seconds: 6));
+    });
+
+    testWidgets('once he turns it on himself, Send reaches the service', (tester) async {
+      final transport = FakeTransport([
+        FakeReply.sse([anthropicSse(['تمام، هاد ملخّص أسبوعك.'])]),
+      ]);
+      final vault = MemorySecretStore({AiKeyStore.storageKey(AiProviderId.anthropic): 'sk-ant-${'x' * 40}'});
+      await pumpMadarApp(
+        tester,
+        initialLocation: AppRoutes.ai,
+        settle: false,
+        beforePump: _allowOutside,
+        overrides: [
+          ...LockFixture.empty().overrides,
+          ..._systemOverrides(transport: transport, aiVault: vault),
+          aiContextPickerProvider.overrideWithValue((context, {required andSend}) async => '## الإيمان\n\n- تمام'),
+        ],
+      );
+      await _frames(tester, 30);
+      expect(find.byType(AiOffCard), findsNothing, reason: 'he turned it on');
+      expect(transport.requests, isEmpty, reason: 'still nothing before the tap');
+
+      await tester.enterText(find.byKey(ChatComposer.fieldKey), 'كيف كان أسبوعي؟');
+      await _frames(tester, 4);
+      await tester.tap(find.byKey(ChatComposer.sendKey));
+      for (var i = 0; i < 14; i++) {
+        await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 15)));
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      expect(transport.requests, hasLength(1), reason: 'his own tap, with his own switch on');
+      expect(transport.requests.single.url.host, 'api.anthropic.com');
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump(const Duration(seconds: 6));
+    });
+
+    test('the switch survives a backup and a restore', () async {
+      final db = _memoryDb();
+      addTearDown(db.close);
+      await db.customSelect('SELECT 1').get();
+      final safety = Directory.systemTemp.createTempSync('madar_p9b_ai_switch_');
+      addTearDown(() => safety.deleteSync(recursive: true));
+      final backups = BackupService(
+        db,
+        codec: fastTestCodec,
+        safetyDirectory: () async => safety,
+        clock: () => DateTime(2026, 10, 15, 23),
+      );
+      const pass = 'a long enough passphrase ٢٠٢٦';
+
+      // He turned it on, then took a backup.
+      await _allowOutside(db);
+      final file = await backups.create(pass);
+
+      // Later he turned it off again.
+      await _allowOutside(db, allowed: false);
+      expect(AiSettings.fromJson(await KeyValueRepository(db).getJson(AiSettings.storageKey)).outsideAllowed, isFalse);
+
+      // Restoring that backup brings his own choice back with it.
+      await backups.restore(await backups.open(file.bytes, pass));
+      expect(
+        AiSettings.fromJson(await KeyValueRepository(db).getJson(AiSettings.storageKey)).outsideAllowed,
+        isTrue,
+        reason: 'his answer to "may it leave the phone" is part of his backup',
+      );
     });
   });
 

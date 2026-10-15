@@ -21756,6 +21756,48 @@ class L10nAr extends L10n {
       'الحل الجاي: «الموديل على الجوال» — ذكاء اصطناعي بشتغل جوّا جوالك نفسه، وقتها بتسأل وما يطلع ولا حرف برّا.';
 
   @override
+  String get aiChatOutsideSection => 'طلوع الكلام برّا الجوال';
+
+  @override
+  String get aiChatOutsideSwitch => 'اسمح للمحادثة الذكية تبعت برّا';
+
+  @override
+  String get aiChatOutsideOn =>
+      'مفتوح: لما تضغط «إرسال»، كلامك والملخّص اللي وافقت عليه بيروحوا لـ Anthropic أو OpenAI.';
+
+  @override
+  String get aiChatOutsideOff =>
+      'مسكّر: ما بيطلع ولا حرف من جوالك، والمحادثة الذكية ما بتشتغل.';
+
+  @override
+  String get aiChatOutsideNote =>
+      'من أول ما تنزّل التطبيق بيكون مسكّر. واختيارك بينحفظ معك، وبيرجع زي ما تركته لما ترجّع نسختك الاحتياطية.';
+
+  @override
+  String get aiChatPrivacyOutsideSwitch =>
+      'وهاد كله مسكّر من أول وجديد: ما بيطلع إشي إلا إذا إنت بإيدك فتحت مفتاح «اسمح للمحادثة الذكية تبعت برّا» من فوق.';
+
+  @override
+  String get aiChatOffTitle => 'المحادثة الذكية مسكّرة';
+
+  @override
+  String get aiChatOffBody =>
+      'ما بتشتغل لأنها بتبعت كلامك برّا الجوال، وإنت طلبت تضل مسكّرة. إذا بدك تستعملها، افتح المفتاح من إعدادات الذكاء الاصطناعي — وبتقدر تسكّره بأي وقت.';
+
+  @override
+  String get aiChatOffAction => 'افتح المفتاح من الإعدادات';
+
+  @override
+  String get aiChatOffSendNotice => 'ما انبعت إشي: المحادثة الذكية مسكّرة.';
+
+  @override
+  String get aiChatOffEntrySubtitle => 'مسكّرة هلأ — افتحها إذا بدك تسأل';
+
+  @override
+  String get aiChatErrorOutsideOff =>
+      'ما انبعت إشي: المحادثة الذكية مسكّرة. افتحها من الإعدادات.';
+
+  @override
   String get aiChatPrivacyKeys =>
       'المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.';
 

@@ -36,8 +36,16 @@ final aiSecretStoreProvider = Provider<SecretStore>((ref) => const FlutterSecret
 
 final aiKeyStoreProvider = Provider<AiKeyStore>((ref) => AiKeyStore(ref.watch(aiSecretStoreProvider)));
 
-/// The network (dart:io HttpClient).
+/// The network (dart:io HttpClient). Never used directly: it is always
+/// wrapped in an [AiOutsideGate] (see [aiProviderRegistryProvider]).
 final aiTransportProvider = Provider<AiTransport>((ref) => IoAiTransport());
+
+/// Whether the owner has turned the chat's outside connection on himself.
+/// Off until the settings row is loaded, and off whenever it can't be
+/// read – the quiet answer is always "send nothing".
+final aiOutsideAllowedProvider = Provider<bool>(
+  (ref) => ref.watch(aiSettingsProvider).value?.outsideAllowed ?? false,
+);
 
 /// The providers by id.
 class AiProviderRegistry {
@@ -53,8 +61,12 @@ class AiProviderRegistry {
   AiProvider operator [](AiProviderId id) => _providers[id]!;
 }
 
+/// Both services over the network, behind the owner's switch: while it is
+/// off every request is refused here, before any connection is opened.
 final aiProviderRegistryProvider = Provider<AiProviderRegistry>(
-  (ref) => AiProviderRegistry.http(ref.watch(aiTransportProvider)),
+  (ref) => AiProviderRegistry.http(
+    AiOutsideGate(ref.watch(aiTransportProvider), () => ref.read(aiOutsideAllowedProvider)),
+  ),
 );
 
 /// Shows the user exactly which summary sections would be sent and returns
@@ -163,6 +175,7 @@ class AiKeyHintsController extends AsyncNotifier<Map<AiProviderId, String?>> {
 
 /// A one-off "Test key" / "Refresh models" call, only on the user's tap.
 Future<List<AiModelInfo>> refreshAiModels(WidgetRef ref, AiProviderId p, {AiCancelToken? cancel}) async {
+  if (!ref.read(aiOutsideAllowedProvider)) throw const AiException(AiErrorKind.outsideOff);
   final key = await ref.read(aiKeyStoreProvider).read(p);
   if (key == null) throw const AiException(AiErrorKind.noKey);
   final models = await ref.read(aiProviderRegistryProvider)[p].listModels(apiKey: key, cancel: cancel);
@@ -171,6 +184,7 @@ Future<List<AiModelInfo>> refreshAiModels(WidgetRef ref, AiProviderId p, {AiCanc
 }
 
 Future<void> testAiKey(WidgetRef ref, AiProviderId p, {AiCancelToken? cancel}) async {
+  if (!ref.read(aiOutsideAllowedProvider)) throw const AiException(AiErrorKind.outsideOff);
   final key = await ref.read(aiKeyStoreProvider).read(p);
   if (key == null) throw const AiException(AiErrorKind.noKey);
   await ref.read(aiProviderRegistryProvider)[p].testKey(key, cancel: cancel);

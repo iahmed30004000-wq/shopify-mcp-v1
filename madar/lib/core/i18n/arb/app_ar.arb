@@ -20623,6 +20623,54 @@
   "@aiChatPrivacyOutsideFix": {
     "description": "The fix line of the warning card: PLAN Part 15, the on-device model"
   },
+  "aiChatOutsideSection": "طلوع الكلام برّا الجوال",
+  "@aiChatOutsideSection": {
+    "description": "Title of the first section of Settings › AI: the master switch"
+  },
+  "aiChatOutsideSwitch": "اسمح للمحادثة الذكية تبعت برّا",
+  "@aiChatOutsideSwitch": {
+    "description": "The master switch: off on a fresh install, no request is made until it is on"
+  },
+  "aiChatOutsideOn": "مفتوح: لما تضغط «إرسال»، كلامك والملخّص اللي وافقت عليه بيروحوا لـ Anthropic أو OpenAI.",
+  "@aiChatOutsideOn": {
+    "description": "Subtitle of the master switch while it is on"
+  },
+  "aiChatOutsideOff": "مسكّر: ما بيطلع ولا حرف من جوالك، والمحادثة الذكية ما بتشتغل.",
+  "@aiChatOutsideOff": {
+    "description": "Subtitle of the master switch while it is off"
+  },
+  "aiChatOutsideNote": "من أول ما تنزّل التطبيق بيكون مسكّر. واختيارك بينحفظ معك، وبيرجع زي ما تركته لما ترجّع نسختك الاحتياطية.",
+  "@aiChatOutsideNote": {
+    "description": "Note under the master switch: the default and that it survives backup and restore"
+  },
+  "aiChatPrivacyOutsideSwitch": "وهاد كله مسكّر من أول وجديد: ما بيطلع إشي إلا إذا إنت بإيدك فتحت مفتاح «اسمح للمحادثة الذكية تبعت برّا» من فوق.",
+  "@aiChatPrivacyOutsideSwitch": {
+    "description": "The line the warning card gains: it is off until he turns it on himself"
+  },
+  "aiChatOffTitle": "المحادثة الذكية مسكّرة",
+  "@aiChatOffTitle": {
+    "description": "Title of the panel shown instead of the chat while the master switch is off"
+  },
+  "aiChatOffBody": "ما بتشتغل لأنها بتبعت كلامك برّا الجوال، وإنت طلبت تضل مسكّرة. إذا بدك تستعملها، افتح المفتاح من إعدادات الذكاء الاصطناعي — وبتقدر تسكّره بأي وقت.",
+  "@aiChatOffBody": {
+    "description": "Body of the off panel"
+  },
+  "aiChatOffAction": "افتح المفتاح من الإعدادات",
+  "@aiChatOffAction": {
+    "description": "Button of the off panel: opens Settings › AI"
+  },
+  "aiChatOffSendNotice": "ما انبعت إشي: المحادثة الذكية مسكّرة.",
+  "@aiChatOffSendNotice": {
+    "description": "Shown when Send is tapped while the master switch is off"
+  },
+  "aiChatOffEntrySubtitle": "مسكّرة هلأ — افتحها إذا بدك تسأل",
+  "@aiChatOffEntrySubtitle": {
+    "description": "Subtitle of the “Ask about …” card while the master switch is off"
+  },
+  "aiChatErrorOutsideOff": "ما انبعت إشي: المحادثة الذكية مسكّرة. افتحها من الإعدادات.",
+  "@aiChatErrorOutsideOff": {
+    "description": "Error message when something tried to call the service while the master switch is off"
+  },
   "aiChatPrivacyKeys": "المفاتيح في التخزين المشفّر للهاتف، لا في قاعدة البيانات ولا في النسخ الاحتياطية أو التصدير.",
   "aiChatPrivacyCalls": "لا يتصل التطبيق بالخدمة إلا حين تضغط «إرسال» أو «إعادة كتابة الرد» أو «إعادة المحاولة» أو «اختبار المفتاح» أو «تحديث قائمة النماذج». لا شيء في الخلفية.",
   "aiChatPrivacyHistory": "تُحفظ المحادثات مشفّرة على هاتفك (آخر {count})، مع الملخّص الذي وافقت عليه لكل محادثة. وتدخل في نسختك الاحتياطية وفي تصدير بياناتك الكامل.",

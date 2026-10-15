@@ -20623,6 +20623,54 @@
   "@aiChatPrivacyOutsideFix": {
     "description": "The fix line of the warning card: PLAN Part 15, the on-device model"
   },
+  "aiChatOutsideSection": "Sending outside the phone",
+  "@aiChatOutsideSection": {
+    "description": "Title of the first section of Settings › AI: the master switch"
+  },
+  "aiChatOutsideSwitch": "Let the AI chat send outside",
+  "@aiChatOutsideSwitch": {
+    "description": "The master switch: off on a fresh install, no request is made until it is on"
+  },
+  "aiChatOutsideOn": "On: when you tap Send, your words and the summary you approved go to Anthropic or OpenAI.",
+  "@aiChatOutsideOn": {
+    "description": "Subtitle of the master switch while it is on"
+  },
+  "aiChatOutsideOff": "Off: not a letter leaves your phone, and the AI chat doesn’t work.",
+  "@aiChatOutsideOff": {
+    "description": "Subtitle of the master switch while it is off"
+  },
+  "aiChatOutsideNote": "It is off on a fresh install. Your choice is saved with you and comes back as you left it when you restore a backup.",
+  "@aiChatOutsideNote": {
+    "description": "Note under the master switch: the default and that it survives backup and restore"
+  },
+  "aiChatPrivacyOutsideSwitch": "And all of this is off to begin with: nothing goes out unless you yourself turn on “Let the AI chat send outside” above.",
+  "@aiChatPrivacyOutsideSwitch": {
+    "description": "The line the warning card gains: it is off until he turns it on himself"
+  },
+  "aiChatOffTitle": "The AI chat is off",
+  "@aiChatOffTitle": {
+    "description": "Title of the panel shown instead of the chat while the master switch is off"
+  },
+  "aiChatOffBody": "It doesn’t run because it sends your words off the phone, and you asked for it to stay off. To use it, turn the switch on in the AI settings – and you can turn it off again any time.",
+  "@aiChatOffBody": {
+    "description": "Body of the off panel"
+  },
+  "aiChatOffAction": "Turn it on in settings",
+  "@aiChatOffAction": {
+    "description": "Button of the off panel: opens Settings › AI"
+  },
+  "aiChatOffSendNotice": "Nothing was sent: the AI chat is off.",
+  "@aiChatOffSendNotice": {
+    "description": "Shown when Send is tapped while the master switch is off"
+  },
+  "aiChatOffEntrySubtitle": "Off right now – turn it on to ask",
+  "@aiChatOffEntrySubtitle": {
+    "description": "Subtitle of the “Ask about …” card while the master switch is off"
+  },
+  "aiChatErrorOutsideOff": "Nothing was sent: the AI chat is off. Turn it on in settings.",
+  "@aiChatErrorOutsideOff": {
+    "description": "Error message when something tried to call the service while the master switch is off"
+  },
   "aiChatPrivacyKeys": "Keys live in the phone’s encrypted storage – not in the database, backups or exports.",
   "aiChatPrivacyCalls": "Madar contacts the service only when you tap Send, Regenerate, Try again, Test key or Refresh models. Nothing runs in the background.",
   "aiChatPrivacyHistory": "Chats are kept encrypted on your phone (the latest {count}), each with the summary you approved for it. They are part of your backups and your full data export.",

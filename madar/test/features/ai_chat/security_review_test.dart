@@ -210,7 +210,7 @@ void main() {
     late FakeAiProvider anthropic;
     late AiProviderRegistry registry;
     var n = 0;
-    const settings = AiSettings();
+    const settings = AiSettings(outsideAllowed: true);
     final now = DateTime(2026, 9, 30, 10);
 
     setUp(() {

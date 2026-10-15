@@ -21176,6 +21176,48 @@ class L10nEn extends L10n {
       'Coming next: the model on your phone – an AI that runs inside the phone itself, so you can ask and nothing leaves it.';
 
   @override
+  String get aiChatOutsideSection => 'Sending outside the phone';
+
+  @override
+  String get aiChatOutsideSwitch => 'Let the AI chat send outside';
+
+  @override
+  String get aiChatOutsideOn =>
+      'On: when you tap Send, your words and the summary you approved go to Anthropic or OpenAI.';
+
+  @override
+  String get aiChatOutsideOff =>
+      'Off: not a letter leaves your phone, and the AI chat doesn’t work.';
+
+  @override
+  String get aiChatOutsideNote =>
+      'It is off on a fresh install. Your choice is saved with you and comes back as you left it when you restore a backup.';
+
+  @override
+  String get aiChatPrivacyOutsideSwitch =>
+      'And all of this is off to begin with: nothing goes out unless you yourself turn on “Let the AI chat send outside” above.';
+
+  @override
+  String get aiChatOffTitle => 'The AI chat is off';
+
+  @override
+  String get aiChatOffBody =>
+      'It doesn’t run because it sends your words off the phone, and you asked for it to stay off. To use it, turn the switch on in the AI settings – and you can turn it off again any time.';
+
+  @override
+  String get aiChatOffAction => 'Turn it on in settings';
+
+  @override
+  String get aiChatOffSendNotice => 'Nothing was sent: the AI chat is off.';
+
+  @override
+  String get aiChatOffEntrySubtitle => 'Off right now – turn it on to ask';
+
+  @override
+  String get aiChatErrorOutsideOff =>
+      'Nothing was sent: the AI chat is off. Turn it on in settings.';
+
+  @override
   String get aiChatPrivacyKeys =>
       'Keys live in the phone’s encrypted storage – not in the database, backups or exports.';
 

@@ -281,6 +281,7 @@ abstract class HttpAiProvider implements AiProvider {
   static AiException mapTransportError(Object e) => switch (e) {
     AiException() => e,
     TimeoutException() => const AiException(AiErrorKind.timeout),
+    AiOutsideOffException() => const AiException(AiErrorKind.outsideOff),
     AiInvalidHeaderException() => const AiException(AiErrorKind.badKey),
     AiHostNotAllowedException() => const AiException(AiErrorKind.network),
     SocketException() ||

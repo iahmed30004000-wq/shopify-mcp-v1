@@ -38,6 +38,19 @@ Future<void> _tapSend(WidgetTester tester) async {
   await frames(tester, 10);
 }
 
+/// `ensureVisible` can park a control under the frosted app bar, where a
+/// tap lands on the header instead. Nudge the list until it is pressable.
+Future<Finder> _pressable(WidgetTester tester, Finder target) async {
+  await tester.ensureVisible(target);
+  await frames(tester, 6);
+  for (var i = 0; i < 8 && target.hitTestable().evaluate().isEmpty; i++) {
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, 80));
+    await frames(tester, 4);
+  }
+  expect(target.hitTestable(), findsOneWidget, reason: 'the control never cleared the header');
+  return target.hitTestable();
+}
+
 /// The texts of every RichText on screen.
 Iterable<String> _allText(WidgetTester tester) =>
     tester.widgetList<RichText>(find.byType(RichText)).map((r) => r.text.toPlainText());
@@ -488,21 +501,13 @@ void main() {
     await frames(tester, 12);
     expect(find.text(l.aiChatKeySaved('\u2066••••WXYZ\u2069')), findsOneWidget);
     expect(find.text(l.aiChatKeyNotSet), findsOneWidget);
-    await tester.tap(find.text('8,192'));
+    // ensureVisible only brings a control into the viewport, which on this
+    // page leaves it under the top bar - the privacy note and the "send
+    // outside" switch made the page taller. Nudge the list back down until
+    // it is really pressable (see _pressable).
+    await tester.tap(await _pressable(tester, find.text('8,192')));
     await settleAsync(tester, rounds: 4);
-    // ensureVisible only brings it into the viewport, which on this page
-    // leaves it under the top bar - the privacy note made the page taller.
-    // Nudge the list back down until the switch is really pressable, bounded
-    // by the few nudges that can ever be needed.
-    final tempSwitch = find.byKey(AiSettingsScreen.temperatureSwitch);
-    await tester.ensureVisible(tempSwitch);
-    await frames(tester, 6);
-    for (var i = 0; i < 6 && tempSwitch.hitTestable().evaluate().isEmpty; i++) {
-      await tester.drag(find.byType(Scrollable).first, const Offset(0, 80));
-      await frames(tester, 4);
-    }
-    expect(tempSwitch.hitTestable(), findsOneWidget, reason: 'the switch never cleared the header');
-    await tester.tap(tempSwitch.hitTestable());
+    await tester.tap(await _pressable(tester, find.byKey(AiSettingsScreen.temperatureSwitch)));
     await settleAsync(tester, rounds: 4);
     await frames(tester, 8);
     final stored = await tester.runAsync(() => KeyValueRepository(env.db).getJson(AiSettings.storageKey));

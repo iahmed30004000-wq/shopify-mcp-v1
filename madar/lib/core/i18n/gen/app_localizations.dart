@@ -33645,6 +33645,78 @@ abstract class L10n {
   /// **'الحل الجاي: «الموديل على الجوال» — ذكاء اصطناعي بشتغل جوّا جوالك نفسه، وقتها بتسأل وما يطلع ولا حرف برّا.'**
   String get aiChatPrivacyOutsideFix;
 
+  /// Title of the first section of Settings › AI: the master switch
+  ///
+  /// In ar, this message translates to:
+  /// **'طلوع الكلام برّا الجوال'**
+  String get aiChatOutsideSection;
+
+  /// The master switch: off on a fresh install, no request is made until it is on
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمح للمحادثة الذكية تبعت برّا'**
+  String get aiChatOutsideSwitch;
+
+  /// Subtitle of the master switch while it is on
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوح: لما تضغط «إرسال»، كلامك والملخّص اللي وافقت عليه بيروحوا لـ Anthropic أو OpenAI.'**
+  String get aiChatOutsideOn;
+
+  /// Subtitle of the master switch while it is off
+  ///
+  /// In ar, this message translates to:
+  /// **'مسكّر: ما بيطلع ولا حرف من جوالك، والمحادثة الذكية ما بتشتغل.'**
+  String get aiChatOutsideOff;
+
+  /// Note under the master switch: the default and that it survives backup and restore
+  ///
+  /// In ar, this message translates to:
+  /// **'من أول ما تنزّل التطبيق بيكون مسكّر. واختيارك بينحفظ معك، وبيرجع زي ما تركته لما ترجّع نسختك الاحتياطية.'**
+  String get aiChatOutsideNote;
+
+  /// The line the warning card gains: it is off until he turns it on himself
+  ///
+  /// In ar, this message translates to:
+  /// **'وهاد كله مسكّر من أول وجديد: ما بيطلع إشي إلا إذا إنت بإيدك فتحت مفتاح «اسمح للمحادثة الذكية تبعت برّا» من فوق.'**
+  String get aiChatPrivacyOutsideSwitch;
+
+  /// Title of the panel shown instead of the chat while the master switch is off
+  ///
+  /// In ar, this message translates to:
+  /// **'المحادثة الذكية مسكّرة'**
+  String get aiChatOffTitle;
+
+  /// Body of the off panel
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بتشتغل لأنها بتبعت كلامك برّا الجوال، وإنت طلبت تضل مسكّرة. إذا بدك تستعملها، افتح المفتاح من إعدادات الذكاء الاصطناعي — وبتقدر تسكّره بأي وقت.'**
+  String get aiChatOffBody;
+
+  /// Button of the off panel: opens Settings › AI
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح المفتاح من الإعدادات'**
+  String get aiChatOffAction;
+
+  /// Shown when Send is tapped while the master switch is off
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انبعت إشي: المحادثة الذكية مسكّرة.'**
+  String get aiChatOffSendNotice;
+
+  /// Subtitle of the “Ask about …” card while the master switch is off
+  ///
+  /// In ar, this message translates to:
+  /// **'مسكّرة هلأ — افتحها إذا بدك تسأل'**
+  String get aiChatOffEntrySubtitle;
+
+  /// Error message when something tried to call the service while the master switch is off
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انبعت إشي: المحادثة الذكية مسكّرة. افتحها من الإعدادات.'**
+  String get aiChatErrorOutsideOff;
+
   /// No description provided for @aiChatPrivacyKeys.
   ///
   /// In ar, this message translates to:

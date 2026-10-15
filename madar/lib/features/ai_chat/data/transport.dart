@@ -113,6 +113,35 @@ abstract interface class AiTransport {
   Future<AiHttpResponse> send(AiHttpRequest request, {AiCancelToken? cancel});
 }
 
+/// The owner has not turned the AI chat's outside connection on
+/// (`AiSettings.outsideAllowed`). Nothing was sent – not a DNS lookup, not
+/// a socket.
+class AiOutsideOffException implements Exception {
+  const AiOutsideOffException();
+
+  // Deliberately without the URL or headers.
+  @override
+  String toString() => 'AiOutsideOffException';
+}
+
+/// The one gate every AI-chat request passes through: while the owner's
+/// own switch is off it refuses, so no code path – Send, Regenerate, Try
+/// again, "Test key", "Refresh models" or anything added later – can reach
+/// a service. [allowed] is read at the moment of the call, so turning the
+/// switch off stops the very next request.
+class AiOutsideGate implements AiTransport {
+  const AiOutsideGate(this.inner, this.allowed);
+
+  final AiTransport inner;
+  final bool Function() allowed;
+
+  @override
+  Future<AiHttpResponse> send(AiHttpRequest request, {AiCancelToken? cancel}) {
+    if (!allowed()) throw const AiOutsideOffException();
+    return inner.send(request, cancel: cancel);
+  }
+}
+
 /// [AiTransport] over `dart:io` [HttpClient] (a fresh client per request,
 /// closed as soon as the body is read or the request cancelled). Refuses
 /// every request [AiHostPolicy] doesn't allow, before any connection.

@@ -108,6 +108,9 @@ final class AiStreamDone extends AiStreamEvent {
 
 /// What went wrong, in terms the user can act on.
 enum AiErrorKind {
+  /// The owner's own switch is off, so nothing may leave the phone.
+  outsideOff,
+
   /// No key saved for the provider.
   noKey,
 

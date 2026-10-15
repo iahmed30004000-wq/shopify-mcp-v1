@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/encryption.dart';
+import 'package:madar/core/db/repositories/key_value_repository.dart';
 import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/i18n/formatters.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
@@ -84,6 +85,9 @@ Future<(Widget, AiTestEnv)> buildAiApp(
   Locale locale = const Locale('en'),
   bool reducedMotion = false,
   Map<String, String> keys = const {},
+  /// The owner's own "let the chat send outside" switch. False leaves the
+  /// settings row unwritten – exactly a fresh install.
+  bool outsideAllowed = true,
   FakePicker? picker,
   FakeTransport? transport,
   bool realPicker = false,
@@ -95,6 +99,11 @@ Future<(Widget, AiTestEnv)> buildAiApp(
   final db = aiTestDatabase();
   await tester.runAsync(() => db.customSelect('SELECT 1').get());
   addTearDown(() => tester.runAsync(db.close));
+  if (outsideAllowed) {
+    await tester.runAsync(
+      () => KeyValueRepository(db).setJson(AiSettings.storageKey, const AiSettings(outsideAllowed: true).toJson()),
+    );
+  }
   if (beforePump != null) await tester.runAsync(() => beforePump(db));
   final sound = SilentSoundService();
   final haptics = AiHaptics();

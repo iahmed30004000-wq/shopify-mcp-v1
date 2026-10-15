@@ -25,12 +25,16 @@ import 'widgets/key_sheet.dart';
 import 'widgets/markdown_view.dart';
 import 'widgets/message_bubble.dart';
 import 'widgets/model_sheet.dart';
+import 'widgets/off_card.dart';
 import 'widgets/payload_sheet.dart';
 import 'widgets/setup_card.dart';
 import 'widgets/will_send_sheet.dart';
 import 'widgets/will_send_strip.dart';
 
-/// The conversation. A call happens only when the user taps Send (or
+/// The conversation. Nothing is sent – and no request is made at all –
+/// while the owner's own switch is off (`AiSettings.outsideAllowed`): the
+/// screen then shows [AiOffCard] and Send says so instead of doing
+/// nothing. A call happens only when the user taps Send (or
 /// Regenerate / Try again): the first Send of a conversation opens the
 /// summary preview so the user sees and trims exactly what is shared; after
 /// that the "will send" strip above the field always shows what goes out.
@@ -144,8 +148,17 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
     final settings = _settings;
     final hints = ref.read(aiKeyHintsProvider).value ?? const {};
     final text = _input.text;
-    switch (_chat.blockFor(text, hasKey: hints[settings.provider] != null)) {
+    switch (_chat.blockFor(
+      text,
+      hasKey: hints[settings.provider] != null,
+      allowed: settings.outsideAllowed,
+    )) {
       case SendBlock.empty || SendBlock.busy:
+        return;
+      case SendBlock.off:
+        // Never a silent no-op: say it is off, the card below offers the
+        // switch, and the question he typed stays in the field.
+        _say(L10n.of(context).aiChatOffSendNotice);
         return;
       case SendBlock.noKey:
         await showAiKeySheet(context, settings.provider);
@@ -175,6 +188,10 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
   Future<void> _regenerate() async {
     if (!_settingsReady || _chat.busy) return;
     final settings = _settings;
+    if (!settings.outsideAllowed) {
+      _say(L10n.of(context).aiChatOffSendNotice);
+      return;
+    }
     final hints = ref.read(aiKeyHintsProvider).value ?? const {};
     if (hints[settings.provider] == null) {
       await showAiKeySheet(context, settings.provider);
@@ -358,6 +375,9 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
     final powerSaver = ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver));
     final hasKey = hints?[settings.provider] != null;
     final needsSetup = hints != null && !hasKey;
+    // His own switch comes first: while it is off nothing here may speak,
+    // so the screen says so rather than asking him for a key.
+    final off = settingsReady && !settings.outsideAllowed;
 
     return ListenableBuilder(
       listenable: _chat,
@@ -372,6 +392,13 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
           content = const Center(child: OrbitLoader(size: 40));
         } else if (_chat.missing) {
           content = AnimatedEmptyState(kind: EmptyStateKind.noResults, title: l.aiChatListEmptyTitle);
+        } else if (off && conversation.isEmpty) {
+          content = ListView(
+            padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.l, Space.gutter, Space.l),
+            children: [
+              AnimatedReveal(child: AiOffCard(onOpenSettings: _openSettings)),
+            ],
+          );
         } else if (needsSetup && conversation.isEmpty) {
           content = ListView(
             padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.l, Space.gutter, Space.l),
@@ -449,7 +476,13 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (hasKey && !_chat.loading) ...[
+                    if (off && !_chat.loading && !conversation.isEmpty) ...[
+                      // His saved chat stays readable; the strip says Send
+                      // will not work and takes him to the switch.
+                      AiOffStrip(onOpenSettings: _openSettings),
+                      const SizedBox(height: Space.s),
+                    ],
+                    if (hasKey && !off && !_chat.loading) ...[
                       WillSendStrip(
                         chatContext: conversation.context,
                         messageCount: payload.historyCount,

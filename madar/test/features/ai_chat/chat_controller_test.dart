@@ -15,7 +15,7 @@ void main() {
   late FakeAiProvider anthropic;
   late AiProviderRegistry registry;
   var n = 0;
-  const settings = AiSettings();
+  const settings = AiSettings(outsideAllowed: true);
   final now = DateTime(2026, 9, 30, 10);
 
   setUp(() {
@@ -43,15 +43,15 @@ void main() {
   test('nothing is sent until the context is decided and Send is called', () async {
     final c = make();
     await c.load();
-    expect(c.blockFor('', hasKey: true), SendBlock.empty);
-    expect(c.blockFor('hi', hasKey: false), SendBlock.noKey);
-    expect(c.blockFor('hi', hasKey: true), SendBlock.needsContext);
+    expect(c.blockFor('', hasKey: true, allowed: true), SendBlock.empty);
+    expect(c.blockFor('hi', hasKey: false, allowed: true), SendBlock.noKey);
+    expect(c.blockFor('hi', hasKey: true, allowed: true), SendBlock.needsContext);
     expect(await c.send('hi', settings: settings, languageCode: 'en'), isFalse);
     expect(anthropic.requests, isEmpty);
     expect(c.conversation.messages, isEmpty);
 
     c.setContext(const ChatContext.personal('## Faith\n\n- 5/5'));
-    expect(c.blockFor('hi', hasKey: true), isNull);
+    expect(c.blockFor('hi', hasKey: true, allowed: true), isNull);
     // Building the preview or the strip never sends anything.
     c.payloadFor(settings, 'en', draft: 'hi');
     expect(anthropic.requests, isEmpty);

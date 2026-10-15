@@ -15,6 +15,7 @@ extension AiChatLabels on L10n {
   String aiError(AiErrorKind kind, {required AiProviderId provider, required String model}) {
     final service = aiService(provider);
     return switch (kind) {
+      AiErrorKind.outsideOff => aiChatErrorOutsideOff,
       AiErrorKind.noKey => aiChatErrorNoKey(service),
       AiErrorKind.badKey => aiChatErrorBadKey(service),
       AiErrorKind.forbidden => aiChatErrorForbidden,
@@ -51,6 +52,7 @@ extension AiChatLabels on L10n {
 
 /// Errors that the settings screen fixes (key, model, temperature).
 bool aiErrorWantsSettings(AiErrorKind kind) => switch (kind) {
+  AiErrorKind.outsideOff ||
   AiErrorKind.noKey ||
   AiErrorKind.badKey ||
   AiErrorKind.forbidden ||
