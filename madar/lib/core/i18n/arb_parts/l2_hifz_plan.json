@@ -1,0 +1,334 @@
+{
+  "hifzPlanTitle": {
+    "ar": "الحفظ",
+    "en": "Memorisation",
+    "description": "Part 14: the memorisation modes, the daily plan, the page map and the goals"
+  },
+  "hifzPlanSubtitle": {
+    "ar": "جديد، ومراجعة قريبة، ومراجعة بعيدة – على قدّ ما حافظ",
+    "en": "Something new, a near review and a far one – measured by how well you hold it"
+  },
+  "hifzPlanNotRuling": {
+    "ar": "الأرقام هون من نتائج تسميعك الحقيقية، مش حكم على حفظك. النص المصحفي هو المرجع دايمًا.",
+    "en": "These numbers come from your own recitation results; they are not a judgement. The verified text is always the reference."
+  },
+  "hifzTrackFresh": {
+    "ar": "الجديد",
+    "en": "New"
+  },
+  "hifzTrackNear": {
+    "ar": "المراجعة القريبة",
+    "en": "Near review"
+  },
+  "hifzTrackFar": {
+    "ar": "المراجعة البعيدة",
+    "en": "Far review"
+  },
+  "hifzTrackNearNote": {
+    "ar": "اللي سمّعته بآخر أسبوع، واللي لسا ما جرّبته، واللي ضعف.",
+    "en": "What you recited in the last week, what you have not tried yet, and whatever went weak."
+  },
+  "hifzTrackFarNote": {
+    "ar": "دورة بتلفّ على كل اللي حافظه، جزء كل يوم، لحد ما تخلص وترجع من الأول.",
+    "en": "A rotation over everything you have memorised, a share a day, then round again."
+  },
+  "hifzMethodListenRepeat": {
+    "ar": "اسمع وردّد",
+    "en": "Listen and repeat"
+  },
+  "hifzMethodChunking": {
+    "ar": "التقطيع",
+    "en": "Chunking"
+  },
+  "hifzMethodHiding": {
+    "ar": "الإخفاء التدريجي",
+    "en": "Progressive hiding"
+  },
+  "hifzMethodBlanks": {
+    "ar": "املأ الفراغ",
+    "en": "Fill in the blank"
+  },
+  "hifzMethodWriting": {
+    "ar": "اكتب من حفظك",
+    "en": "Write from memory"
+  },
+  "hifzMethodLinking": {
+    "ar": "الربط بين الآيات",
+    "en": "Linking the verses"
+  },
+  "hifzMethodReciting": {
+    "ar": "سمّع بصوتك",
+    "en": "Recite out loud"
+  },
+  "hifzMethodTypedOnly": {
+    "ar": "بتشتغل بالكتابة هلأ: ما في تعرّف على الصوت بهاي النسخة.",
+    "en": "It works by typing for now: there is no speech recognition in this build."
+  },
+  "hifzMethodNoRecogniser": {
+    "ar": "التسميع بالصوت لسا مش جاهز على هاد الجوال. كل الطرق التانية شغّالة.",
+    "en": "Reciting out loud is not ready on this phone yet. Every other method works."
+  },
+  "hifzMethodNoAudio": {
+    "ar": "صوت القارئ اللي اخترته مش منزّل على الجوال. نزّله أو اختر قارئ تاني.",
+    "en": "The reciter you chose is not downloaded. Download him, or pick another one."
+  },
+  "hifzStageFull": {
+    "ar": "النص كامل قدامك",
+    "en": "The whole text in front of you"
+  },
+  "hifzStageFirstLetters": {
+    "ar": "أول حرف من كل كلمة",
+    "en": "The first letters only"
+  },
+  "hifzStageHidden": {
+    "ar": "مخفي كله",
+    "en": "Hidden"
+  },
+  "hifzBandUnknown": {
+    "ar": "ما انختبرت",
+    "en": "Never tested",
+    "description": "No result at all – deliberately not the same as weak"
+  },
+  "hifzBandWeak": {
+    "ar": "ضعيفة",
+    "en": "Weak"
+  },
+  "hifzBandShaky": {
+    "ar": "مهزوزة",
+    "en": "Shaky"
+  },
+  "hifzBandFirm": {
+    "ar": "ثابتة",
+    "en": "Firm"
+  },
+  "hifzBandSolid": {
+    "ar": "متينة",
+    "en": "Solid"
+  },
+  "hifzBandSkipped": {
+    "ar": "مش عليّ",
+    "en": "Not mine to review"
+  },
+  "hifzStrengthFrom": {
+    "ar": "القوة محسوبة من تسميعك: {attempts} · آخر مرة {when}",
+    "en": "Strength from your own attempts: {attempts} · last time {when}",
+    "placeholders": {"attempts": {"type": "String"}, "when": {"type": "String"}}
+  },
+  "hifzAttemptsCount": {
+    "ar": "{count, plural, =0{ولا مرة} =1{مرة وحدة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =0{no attempts} =1{1 attempt} other{{count} attempts}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzAyatCount": {
+    "ar": "{count, plural, =0{ولا آية} =1{آية وحدة} =2{آيتين} few{{count} آيات} many{{count} آية} other{{count} آية}}",
+    "en": "{count, plural, =0{no verses} =1{1 verse} other{{count} verses}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzPagesCount": {
+    "ar": "{count, plural, =0{ولا صفحة} =1{صفحة وحدة} =2{صفحتين} few{{count} صفحات} many{{count} صفحة} other{{count} صفحة}}",
+    "en": "{count, plural, =0{no pages} =1{1 page} other{{count} pages}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzPlanRepeatTimes": {
+    "ar": "{count, plural, =1{مرة وحدة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =1{once} other{{count} times}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzPlanEmpty": {
+    "ar": "ما في إشي محفوظ لسا. ضيف أول مقطع وبلّش.",
+    "en": "Nothing is memorised yet. Add your first passage and start."
+  },
+  "hifzPlanNoNewPortion": {
+    "ar": "ما حدّدت من وين يبلّش الجديد، فاليوم مراجعة بس.",
+    "en": "You have not said where the new portion starts, so today is review only."
+  },
+  "hifzPlanFirstDay": {
+    "ar": "أول يوم إلك. اليوم جديد بس، والمراجعة بتبلّش بكرا.",
+    "en": "Your first day. Today is the new portion only; the review starts tomorrow."
+  },
+  "hifzPlanAllSkipped": {
+    "ar": "كل اللي بالقايمة محدّد «مش عليّ»، فما في مراجعة اليوم.",
+    "en": "Everything in your list is marked as not yours to review, so there is no review today."
+  },
+  "hifzBacklogTitle": {
+    "ar": "غبت عن المراجعة",
+    "en": "You were away"
+  },
+  "hifzBacklogBody": {
+    "ar": "غبت {days}. اليوم عندك {today}، و{back} رجعت لدورها بالمراجعة وما ضاعت.",
+    "en": "You were away for {days}. Today holds {today}, and {back} went back into the rotation instead of piling up.",
+    "placeholders": {"days": {"type": "String"}, "today": {"type": "String"}, "back": {"type": "String"}}
+  },
+  "hifzBacklogDaysCount": {
+    "ar": "{count, plural, =1{يوم} =2{يومين} few{{count} أيام} many{{count} يوم} other{{count} يوم}}",
+    "en": "{count, plural, =1{1 day} other{{count} days}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzBacklogCapped": {
+    "ar": "وصلت سقف اليوم، فما حطّينا عليك أكتر. الباقي بدوره.",
+    "en": "Today's cap was reached, so nothing more was added. The rest comes round in its turn."
+  },
+  "hifzBacklogDropped": {
+    "ar": "اللي رجع لدوره: {ranges}",
+    "en": "Back into the rotation: {ranges}",
+    "placeholders": {"ranges": {"type": "String"}}
+  },
+  "hifzMapTitle": {
+    "ar": "خريطة الصفحات",
+    "en": "The page map"
+  },
+  "hifzMapLegend": {
+    "ar": "لون الصفحة من قوة آياتها. الصفحة اللي ما انختبرت عليها بتضل بلا لون.",
+    "en": "A page's colour comes from the strength of its verses. A page you were never tested on stays uncoloured."
+  },
+  "hifzMapPageLine": {
+    "ar": "صفحة {page} · {memorised} من {total}",
+    "en": "Page {page} · {memorised} of {total}",
+    "placeholders": {"page": {"type": "String"}, "memorised": {"type": "String"}, "total": {"type": "String"}}
+  },
+  "hifzMarkSkip": {
+    "ar": "هاد مش عليّ",
+    "en": "This one is not mine to review"
+  },
+  "hifzMarkSkipDone": {
+    "ar": "تمام، طلّعناها من المراجعة وما بتدخل بالخريطة.",
+    "en": "Done: it is out of the review and out of the map's numbers."
+  },
+  "hifzMarkResetPage": {
+    "ar": "صفّر قوة هاي الصفحة",
+    "en": "Reset this page's strength"
+  },
+  "hifzMarkResetBody": {
+    "ar": "منبلّش نحسب القوة من اليوم. سجل تسميعك القديم بيضل محفوظ، بس ما بيأثر على اللون.",
+    "en": "The strength starts again from today. Your old attempts stay in the log; they just stop colouring the page."
+  },
+  "hifzGoalsTitle": {
+    "ar": "أهدافي",
+    "en": "My goals"
+  },
+  "hifzGoalsEmpty": {
+    "ar": "اكتب هدفك بكلامك، مثل «الكهف كل جمعة».",
+    "en": "Write your goal in your own words, like \"Al-Kahf every Friday\"."
+  },
+  "hifzGoalKindWeekday": {
+    "ar": "مقطع بيوم معيّن كل أسبوع",
+    "en": "A passage on one day of every week"
+  },
+  "hifzGoalKindReview": {
+    "ar": "مقطع تحت المراجعة دايمًا",
+    "en": "A passage kept under review"
+  },
+  "hifzGoalKindAmount": {
+    "ar": "مقدار كل يوم",
+    "en": "An amount every day"
+  },
+  "hifzGoalProgressLine": {
+    "ar": "{done} من {target}",
+    "en": "{done} of {target}",
+    "placeholders": {"done": {"type": "String"}, "target": {"type": "String"}}
+  },
+  "hifzGoalMet": {
+    "ar": "خلّصته اليوم",
+    "en": "Done today"
+  },
+  "hifzGoalReminderAfterPrayer": {
+    "ar": "التذكير بعد {prayer} بـ {minutes}",
+    "en": "Reminder {minutes} after {prayer}",
+    "placeholders": {"prayer": {"type": "String"}, "minutes": {"type": "String"}}
+  },
+  "hifzGoalReminderExplain": {
+    "ar": "التذكير مربوط بوقت الصلاة مش بالساعة، فبيتحرّك مع الفجر والمغرب طول السنة.",
+    "en": "The reminder hangs off the prayer, not the clock, so it moves with Fajr and Maghrib all year."
+  },
+  "hifzGoalReminderTitle": {
+    "ar": "وقت الحفظ",
+    "en": "Time to memorise"
+  },
+  "hifzGoalReminderBody": {
+    "ar": "{goal} · {window}",
+    "en": "{goal} · {window}",
+    "placeholders": {"goal": {"type": "String"}, "window": {"type": "String"}}
+  },
+  "hifzGoalChannelName": {
+    "ar": "تذكير أهداف الحفظ",
+    "en": "Memorisation goal reminders"
+  },
+  "hifzGoalChannelDescription": {
+    "ar": "تنبيه بعد الصلاة لأهداف الحفظ اللي حطّيتها.",
+    "en": "A nudge after the prayer for the memorisation goals you set."
+  },
+  "hifzProgressTitle": {
+    "ar": "تقدّمي",
+    "en": "My progress"
+  },
+  "hifzProgressStreak": {
+    "ar": "{count, plural, =0{ما في سلسلة بعد} =1{يوم ورا التاني} =2{يومين ورا بعض} few{{count} أيام ورا بعض} many{{count} يوم ورا بعض} other{{count} يوم ورا بعض}}",
+    "en": "{count, plural, =0{No streak yet} =1{1 day in a row} other{{count} days in a row}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzProgressBest": {
+    "ar": "أطول سلسلة: {days}",
+    "en": "Longest streak: {days}",
+    "placeholders": {"days": {"type": "String"}}
+  },
+  "hifzProgressTested": {
+    "ar": "{tested} من {memorised} انختبرت عليها",
+    "en": "{tested} of {memorised} have been tested",
+    "placeholders": {"tested": {"type": "String"}, "memorised": {"type": "String"}}
+  },
+  "hifzWritingTitle": {
+    "ar": "اكتب من حفظك",
+    "en": "Write from memory"
+  },
+  "hifzWritingHint": {
+    "ar": "اكتب الآيات من حفظك، وبعدين قارن. التطبيق بيأشّر على الكلمة الناقصة والكلمة الغير.",
+    "en": "Write the verses from memory, then compare. The app marks the word you missed and the word you changed."
+  },
+  "hifzWritingYours": {
+    "ar": "اللي كتبته إنت",
+    "en": "What you wrote",
+    "description": "Labelled and styled differently: it is never shown as Quran text"
+  },
+  "hifzWritingScore": {
+    "ar": "{right} صح من {total}",
+    "en": "{right} right out of {total}",
+    "placeholders": {"right": {"type": "String"}, "total": {"type": "String"}}
+  },
+  "hifzLinkingTitle": {
+    "ar": "الربط",
+    "en": "Linking"
+  },
+  "hifzLinkingHint": {
+    "ar": "آخر كلمات الآية قدامك، وإنت كمّل أول الآية اللي بعدها.",
+    "en": "The end of the verse is in front of you; you carry on with the start of the next."
+  },
+  "hifzListenRepeatHint": {
+    "ar": "بنشغّل الآية {times}، وبين كل وحدة سكتة إلك ترددّ.",
+    "en": "The verse plays {times}, with a pause after each one for you to repeat.",
+    "placeholders": {"times": {"type": "String"}}
+  },
+  "hifzSettingsNewPerDay": {
+    "ar": "الجديد كل يوم",
+    "en": "New material a day"
+  },
+  "hifzSettingsCap": {
+    "ar": "أكبر حجم لليوم",
+    "en": "The most in one day"
+  },
+  "hifzSettingsCapNote": {
+    "ar": "مهما غبت، اليوم ما بيزيد عن هاد الحد.",
+    "en": "However long you are away, a day never grows past this."
+  },
+  "hifzSettingsStartFrom": {
+    "ar": "الجديد بيبلّش من",
+    "en": "The new portion starts at"
+  },
+  "hifzExportTitle": {
+    "ar": "صدّر الحفظ مع السجل",
+    "en": "Export memorisation with the log"
+  },
+  "hifzExportBody": {
+    "ar": "نفس ملف التسميع، وزيادة عليه أهدافك وخطة اليوم وقوة كل آية، عشان «فلك» يقراهم. ما فيه ولا صوت.",
+    "en": "The same recitation file, with your goals, today's plan and each verse's strength added for the PC app. It holds no audio."
+  }
+}

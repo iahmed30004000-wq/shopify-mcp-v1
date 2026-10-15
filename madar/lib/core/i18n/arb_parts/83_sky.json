@@ -1,0 +1,118 @@
+{
+  "skySemantics": {
+    "ar": "السماء الآن: {sky}. {moon}",
+    "en": "Sky now: {sky}. {moon}",
+    "description": "Screen-reader description of the living sky behind the orbit, e.g. «السماء الآن: ليل. القمر بدر، مضاء بنسبة ٩٨٪»",
+    "placeholders": {
+      "sky": {
+        "type": "String"
+      },
+      "moon": {
+        "type": "String"
+      }
+    }
+  },
+  "skyMoodNight": {
+    "ar": "ليل",
+    "en": "night",
+    "description": "Look of the sky: full night"
+  },
+  "skyMoodDawn": {
+    "ar": "فجر",
+    "en": "dawn",
+    "description": "Look of the sky: morning twilight (from Fajr)"
+  },
+  "skyMoodSunrise": {
+    "ar": "شروق",
+    "en": "sunrise",
+    "description": "Look of the sky: the sun rising"
+  },
+  "skyMoodDay": {
+    "ar": "نهار صافٍ",
+    "en": "clear day",
+    "description": "Look of the sky: daylight"
+  },
+  "skyMoodGoldenHour": {
+    "ar": "الساعة الذهبية",
+    "en": "golden hour",
+    "description": "Look of the sky: the low warm sun before sunset"
+  },
+  "skyMoodSunset": {
+    "ar": "غروب",
+    "en": "sunset",
+    "description": "Look of the sky: the sun setting (Maghrib)"
+  },
+  "skyMoodDusk": {
+    "ar": "شفق المغرب",
+    "en": "dusk",
+    "description": "Look of the sky: evening twilight after Maghrib"
+  },
+  "skyMoonBelow": {
+    "ar": "القمر تحت الأفق",
+    "en": "The moon is below the horizon",
+    "description": "Screen-reader note when the moon has not risen"
+  },
+  "skyMoonPhase": {
+    "ar": "القمر {phase}، مضاء بنسبة {percent}",
+    "en": "Moon: {phase}, {percent} lit",
+    "description": "Moon phase and illuminated fraction, e.g. «القمر بدر، مضاء بنسبة ٩٨٪»",
+    "placeholders": {
+      "phase": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "skyMoonNew": {
+    "ar": "محاق",
+    "en": "new moon",
+    "description": "Moon phase name"
+  },
+  "skyMoonWaxingCrescent": {
+    "ar": "هلال متزايد",
+    "en": "waxing crescent",
+    "description": "Moon phase name"
+  },
+  "skyMoonFirstQuarter": {
+    "ar": "تربيع أول",
+    "en": "first quarter",
+    "description": "Moon phase name"
+  },
+  "skyMoonWaxingGibbous": {
+    "ar": "أحدب متزايد",
+    "en": "waxing gibbous",
+    "description": "Moon phase name"
+  },
+  "skyMoonFull": {
+    "ar": "بدر",
+    "en": "full moon",
+    "description": "Moon phase name"
+  },
+  "skyMoonWaningGibbous": {
+    "ar": "أحدب متناقص",
+    "en": "waning gibbous",
+    "description": "Moon phase name"
+  },
+  "skyMoonLastQuarter": {
+    "ar": "تربيع أخير",
+    "en": "last quarter",
+    "description": "Moon phase name"
+  },
+  "skyMoonWaningCrescent": {
+    "ar": "هلال متناقص",
+    "en": "waning crescent",
+    "description": "Moon phase name"
+  },
+  "skyStarNames": {
+    "ar": "أسماء النجوم",
+    "en": "Star names",
+    "description": "Toggle: show the traditional names of the brightest stars in the sky"
+  },
+  "skyStarNamesHint": {
+    "ar": "تُنقش الأسماء العربية لألمع النجوم في سماء الليل",
+    "en": "Engraves the traditional Arabic names of the brightest stars in the night sky",
+    "description": "Explanation under the star-names toggle"
+  }
+}

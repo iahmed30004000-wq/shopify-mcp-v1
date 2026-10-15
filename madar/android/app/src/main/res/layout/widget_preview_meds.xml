@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget picker's preview of today's meds (Android 12+). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingTop="10dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        style="@style/widget_text_title"
+        android:gravity="start"
+        android:text="@string/widget_meds_title"
+        android:textColor="@color/widget_text_primary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        style="@style/widget_text_detail"
+        android:layout_marginBottom="4dp"
+        android:gravity="start"
+        android:text="@string/widget_sample_meds_next"
+        android:textSize="12sp" />
+
+    <TextView
+        style="@style/widget_text_row_done"
+        android:layout_height="24dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/widget_sample_meds_row_1" />
+
+    <TextView
+        style="@style/widget_text_row_done"
+        android:layout_height="24dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/widget_sample_meds_row_2" />
+
+    <TextView
+        style="@style/widget_text_row"
+        android:layout_height="24dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/widget_sample_meds_row_3" />
+</LinearLayout>

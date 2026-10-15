@@ -1,0 +1,145 @@
+Madar – Quran text and data credits (assets/quran/)
+=====================================================
+
+Madar bundles the Quran text, its structure and tajweed annotations for
+offline reading. Everything was taken from openly licensed sources, pinned
+by git commit and SHA-256, and rebuilt reproducibly by
+assets/quran/source/build_quran.py; its checks are recorded in
+assets/quran/source/verification_log.txt (RESULT PASS, 31 checks).
+
+
+1. Quran text – assets/quran/quran-uthmani.txt (bundled, verbatim)
+-------------------------------------------------------------------
+Tanzil Quran Text (Uthmani, Version 1.1), Copyright (C) 2007-2026 Tanzil
+Project, https://tanzil.net – licence: Creative Commons Attribution 3.0 with
+Tanzil's terms of use (verbatim copies only, source credited, link to
+tanzil.net). Riwayah: Hafs 'an 'Asim. Variant shipped: "with pause marks,
+sajdah signs, rub-el-hizb signs and tatweel below superscript alefs".
+
+The file is Tanzil's text unchanged, in Tanzil's own "text with aya
+numbers" format, with Tanzil's copyright block reproduced at its end. The
+app shows the basmala that Tanzil writes before ayah 1 of every sura (but 1
+and 9) as the sura's header; for display only, the space before a pause /
+sajdah sign is drawn as a no-break space. Nothing in the file is altered.
+
+Obtained from these copies of Tanzil's download (tanzil.net itself is not
+reachable from the build machine):
+  - https://github.com/TarteelAI/quran-assets
+    commit a5284b17034d36567e4a4bac982a17ba56837448, text/quran-uthmani.txt
+    (sha256 9cf746b2c7501b4497d5db95589b99feab1e641a04bf1856c55a74cba39ecbf3)
+  - https://github.com/luobeibei0710/quran_offline_demo
+    commit 54df631cc19cf0a4e454fdcc3840e3bb41773a74,
+    resources/broadcast_quran/tanzil_1_1/quran-uthmani.txt (sha256
+    bf4f57b968d03f4131c070b1e285da9be0e0a108a21c910e872801ca273312c8): an
+    independent copy of Tanzil 1.1 with the official copyright block. With
+    the optional signs removed, both copies agree letter for letter on all
+    6236 ayat.
+
+Integrity checks (build script): 6236 ayat, 114 suras, ayah counts equal
+to the metadata; the 15 sajdah signs (۩) sit exactly on the 15 sajdat;
+every hizb quarter inside a sura opens with ۞; the letter skeleton of every
+ayah equals the King Fahd Complex "Uthmani Hafs" text v13 (an independent
+encoding, via fawazahmed0/quran-api, verification only).
+
+Tanzil's copyright block, as shipped at the end of quran-uthmani.txt:
+
+    # PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
+    #====================================================================
+    #
+    #  Tanzil Quran Text (Uthmani, Version 1.1)
+    #  Copyright (C) 2007-2026 Tanzil Project
+    #  License: Creative Commons Attribution 3.0
+    #
+    #  This copy of the Quran text is carefully produced, highly 
+    #  verified and continuously monitored by a group of specialists 
+    #  at Tanzil Project.
+    #
+    #  TERMS OF USE:
+    #
+    #  - Permission is granted to copy and distribute verbatim copies 
+    #    of this text, but CHANGING IT IS NOT ALLOWED.
+    #
+    #  - This Quran text can be used in any website or application, 
+    #    provided that its source (Tanzil Project) is clearly indicated, 
+    #    and a link is made to tanzil.net to enable users to keep
+    #    track of changes.
+    #
+    #  - This copyright notice shall be included in all verbatim copies 
+    #    of the text, and shall be reproduced appropriately in all files 
+    #    derived from or containing substantial portion of this text.
+    #
+    #  Please check updates at: http://tanzil.net/updates/
+    #
+    #====================================================================
+
+
+2. Quran structure – assets/quran/quran-meta.json (bundled)
+------------------------------------------------------------
+Tanzil Quran Metadata (ver 1.0), Copyright (C) 2008-2009 Tanzil.info –
+licence: Creative Commons Attribution 3.0
+(https://creativecommons.org/licenses/by/3.0/). Used: sura ayah counts,
+revelation order, Makki/Madani, English meanings of the sura names, the 604
+Madani page starts, 30 juz, 240 hizb quarters and the 15 sajdat (with their
+recommended / obligatory kind).
+  https://github.com/TarteelAI/quran-assets
+  commit a5284b17034d36567e4a4bac982a17ba56837448, metadata/quran-data.js
+  (sha256 4e6ef95731235bc5fbc5ab24090f0cf4c0c7910c380de337fc3678108d1c2af1)
+
+Changes (Madar):
+  - Hizb quarter 106 (the second quarter of hizb 27) starts at 15:49
+    «نَبِّئْ عِبَادِىٓ», where Tanzil's own text places ۞ and the Madani mushaf
+    places it; the metadata says 15:50.
+  - Arabic sura names with the hamza spellings of the Madani mushaf headers
+    (إبراهيم، سبأ، الإنسان، النبأ، الانفطار، الانشقاق).
+  - English transliterated sura names written by Madar (common Quran.com-
+    style spelling, e.g. "Al-Baqarah").
+Cross-checked (verification only): page, juz and sajdah starts equal those
+of fawazahmed0/quran-api info.json (The Unlicense,
+https://github.com/fawazahmed0/quran-api commit
+47ca096b0976443ba2eab2e45cdf0fb4096a2610) and the page starts of the
+Quran.com-derived page index in TarteelAI/quran-assets
+(metadata/page-indices-lookup.json, same commit as above).
+
+
+3. Tajweed annotations – assets/quran/quran-tajweed.txt (bundled)
+------------------------------------------------------------------
+cpfair/quran-tajweed – "Tajweed annotations for the Qur'an (riwayat hafs)",
+by GitHub user cpfair, https://github.com/cpfair/quran-tajweed
+commit 496f71cd191da00fa2a37ded79dbbddb033bb0ad,
+output/tajweed.hafs.uthmani-pause-sajdah.json
+(sha256 151d616ad37a4cc21a80f20d5e1104c5b408375107ddd4d71247dea4c05ebf67)
+Licence: Creative Commons Attribution 4.0 International
+(https://creativecommons.org/licenses/by/4.0/). Built using information
+from ReciteQuran.com and the Dar al-Maarifah tajweed masahif.
+
+Changes (Madar): the annotations were computed on Tanzil Uthmani 1.0.2
+(from https://github.com/JQuranTree/jqurantree commit
+09ef93e475685035575909c1e482970a89e17199,
+src/main/resources/tanzil/quran-uthmani.xml, sha256
+caeeb8784961f66183efaf7ec86448c65e7a1536ca4204158a972a897b8420be, used only
+to re-index). Madar re-indexed every annotation onto the exact lines of the
+bundled Tanzil 1.1 text by per-ayah alignment and wrote rules as one-letter
+codes. All 60057 annotations land on their letters (checked per rule) and
+cover the same letters as before.
+
+
+4. Downloads on the user's request (not bundled)
+-------------------------------------------------
+Quran.com API v4 (https://api.quran.com/api/v4) – tajweed text
+(text_uthmani_tajweed) and translations, fetched only when the user taps a
+download button and kept on the device for personal use, under Quran.com's
+terms (https://quran.com/terms-and-conditions). The English translation
+offered is "Saheeh International" (© Saheeh International / Dar Abul-Qasim),
+provided by Quran.com; Madar does not bundle or redistribute it.
+
+
+5. Fonts
+--------
+Quran text: Amiri Quran (Khaled Hosny, SIL Open Font License 1.1) – see
+assets/fonts/licenses/amiriquran-OFL.txt; sura titles: Amiri
+(assets/fonts/licenses/amiri-OFL.txt).
+
+
+Colours: the tajweed colours are Madar's, derived from each theme's tokens
+(the red / green / blue / grey families of the printed tajweed mushafs).
+No AI-generated text or voice is used for the Quran.

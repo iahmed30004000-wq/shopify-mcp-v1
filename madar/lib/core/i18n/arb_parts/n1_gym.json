@@ -1,0 +1,532 @@
+{
+  "gymTitle": {
+    "ar": "الجيم",
+    "en": "Gym",
+    "description": "Part 8 / #24: the gym, properly – the exercise library, the sets, the session runner and his own numbers"
+  },
+  "gymSessionTitle": {
+    "ar": "جلسة اليوم",
+    "en": "Today's session"
+  },
+  "gymStartSession": {
+    "ar": "ابدأ الجلسة",
+    "en": "Start the session"
+  },
+  "gymTrainingDays": {
+    "ar": "أيام التمرين",
+    "en": "Training days"
+  },
+  "gymOpenExercise": {
+    "ar": "افتح التمرين",
+    "en": "Open the exercise"
+  },
+  "gymMachinePhoto": {
+    "ar": "صورة الجهاز",
+    "en": "The machine"
+  },
+  "gymPhotoOf": {
+    "ar": "صورة {name}",
+    "en": "Photo of {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymAddPhoto": {
+    "ar": "أضف صورة الجهاز",
+    "en": "Add the machine's photo"
+  },
+  "gymChangePhoto": {
+    "ar": "بدّل الصورة",
+    "en": "Change the photo"
+  },
+  "gymRemovePhoto": {
+    "ar": "احذف الصورة",
+    "en": "Remove the photo"
+  },
+  "gymPhotoAdded": {
+    "ar": "حفظت الصورة جوّة مدار",
+    "en": "The photo is saved inside Madar"
+  },
+  "gymPhotoRemoved": {
+    "ar": "شلت الصورة",
+    "en": "Photo removed"
+  },
+  "gymPhotoKept": {
+    "ar": "الصورة محفوظة جوّة مدار، فلو حذفتها من معرض الصور بتضل هنا ومع النسخة الاحتياطية",
+    "en": "The photo is copied inside Madar: deleting the original changes nothing, and it travels with the backup"
+  },
+  "gymPhotoMissing": {
+    "ar": "الصورة مش موجودة",
+    "en": "The photo is gone"
+  },
+  "gymPhotoWrongKind": {
+    "ar": "هذا الملف مش صورة بقدر أعرضها",
+    "en": "Madar cannot show this kind of file as a picture"
+  },
+  "gymPhotoTooBig": {
+    "ar": "الصورة أكبر من {size} ميغا",
+    "en": "The photo is larger than {size} MB",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "gymPhotoFailed": {
+    "ar": "ما قدرت أحفظ الصورة",
+    "en": "The photo could not be saved"
+  },
+  "gymVideo": {
+    "ar": "فيديو الحركة",
+    "en": "The movement"
+  },
+  "gymAddVideo": {
+    "ar": "أضف فيديو",
+    "en": "Add a video"
+  },
+  "gymVideoFromFiles": {
+    "ar": "من ملفاتي",
+    "en": "From my files"
+  },
+  "gymVideoFromLink": {
+    "ar": "رابط",
+    "en": "A link"
+  },
+  "gymVideoLinkLabel": {
+    "ar": "رابط الفيديو",
+    "en": "Video link"
+  },
+  "gymVideoLinkHint": {
+    "ar": "الصق الرابط هنا",
+    "en": "Paste the link here"
+  },
+  "gymVideoKept": {
+    "ar": "الفيديو بيضل بمكانه: مدار بيحفظ وينه بس، لأنه كبير. لو نقلته أو حذفته بيوقف يفتح",
+    "en": "A video stays where it is: Madar only remembers the place, because a clip is big. Move it or delete it and it stops opening"
+  },
+  "gymVideoMissing": {
+    "ar": "الملف مش موجود بمكانه",
+    "en": "The file is no longer there"
+  },
+  "gymVideoOpen": {
+    "ar": "شغّل الفيديو",
+    "en": "Play the video"
+  },
+  "gymVideoNoApp": {
+    "ar": "ما في شي بالهاتف فتح هذا الفيديو",
+    "en": "Nothing on the phone opened this video"
+  },
+  "gymVideoSaved": {
+    "ar": "حفظت مكان الفيديو",
+    "en": "The video's place is saved"
+  },
+  "gymRemoveVideo": {
+    "ar": "احذف الفيديو",
+    "en": "Remove the video"
+  },
+  "gymVideoRemoved": {
+    "ar": "شلت الفيديو",
+    "en": "Video removed"
+  },
+  "gymMuscles": {
+    "ar": "العضلات",
+    "en": "Muscles"
+  },
+  "gymMusclesHint": {
+    "ar": "صدر، كتف أمامي، ترايسبس…",
+    "en": "Chest, front shoulder, triceps…"
+  },
+  "gymNoMuscles": {
+    "ar": "ما حدّدت عضلات",
+    "en": "No muscles named yet"
+  },
+  "gymMedia": {
+    "ar": "الصورة والفيديو",
+    "en": "Photo and video"
+  },
+  "gymRest": {
+    "ar": "الراحة بين المجموعات",
+    "en": "Rest between sets"
+  },
+  "gymRestShort": {
+    "ar": "راحة",
+    "en": "Rest"
+  },
+  "gymWarmupSets": {
+    "ar": "مجموعات تسخين",
+    "en": "Warm-up sets"
+  },
+  "gymWarmup": {
+    "ar": "تسخين",
+    "en": "Warm-up"
+  },
+  "gymUnitSec": {
+    "ar": "ث",
+    "en": "s"
+  },
+  "gymSecondsValue": {
+    "ar": "{value} ث",
+    "en": "{value} s",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymNextTitle": {
+    "ar": "أرقامك للمرّة الجاي",
+    "en": "Your numbers for next time"
+  },
+  "gymNotAdvice": {
+    "ar": "هذا حساب على أرقامك إنت، مش نصيحة ولا برنامج ولا كلام طب",
+    "en": "This is arithmetic on your own numbers — not advice, not a programme, not a medical claim"
+  },
+  "gymLastTimeValue": {
+    "ar": "آخر مرّة: {value}",
+    "en": "Last time: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymBeforeThatValue": {
+    "ar": "وقبلها: {value}",
+    "en": "Before that: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymYourStep": {
+    "ar": "أصغر زيادة عملتها بإيدك: {value}",
+    "en": "The smallest step you took yourself: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSameStepLine": {
+    "ar": "نفس هذي الزيادة بتوصّل لـ {value}",
+    "en": "That same step comes to {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymRepeatLine": {
+    "ar": "نفس أرقام آخر مرّة: {value}",
+    "en": "The same numbers as last time: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymRepsUpLine": {
+    "ar": "ثبّتت الوزن وزاد التكرار: {value}",
+    "en": "You held the weight and the reps went up: {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymFromDays": {
+    "ar": "{count, plural, =0{ما في أيام تمرين} =1{محسوب من يوم تمرين واحد} =2{محسوب من يومين تمرين} few{محسوب من {count} أيام تمرين} many{محسوب من {count} يوم تمرين} other{محسوب من {count} يوم تمرين}}",
+    "en": "{count, plural, =0{No training days yet} =1{Read from one training day} other{Read from your last {count} training days}}",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymNothingYet": {
+    "ar": "لسّه ما سجّلت هذا التمرين",
+    "en": "You have not logged this one yet"
+  },
+  "gymNothingYetBody": {
+    "ar": "سجّل مجموعاتك مرّة، وبعدها بقدر أقرأ أرقامك وأحسبها",
+    "en": "Log your sets once and your own numbers can be read back"
+  },
+  "gymUseThese": {
+    "ar": "سجّل بهذي الأرقام",
+    "en": "Log with these numbers"
+  },
+  "gymBestSet": {
+    "ar": "أعلى مجموعة",
+    "en": "Heaviest set"
+  },
+  "gymBestReps": {
+    "ar": "أكثر تكرار بمجموعة",
+    "en": "Most reps in a set"
+  },
+  "gymBestOn": {
+    "ar": "يوم {day}",
+    "en": "on {day}",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetBy": {
+    "ar": "{reps} × {weight}",
+    "en": "{reps} × {weight}",
+    "placeholders": {
+      "reps": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "gymProgress": {
+    "ar": "التقدّم",
+    "en": "Progress"
+  },
+  "gymOpenHistory": {
+    "ar": "السجل كامل",
+    "en": "The whole log"
+  },
+  "gymLogSession": {
+    "ar": "سجّل جلسة",
+    "en": "Log a session"
+  },
+  "gymEditExerciseAction": {
+    "ar": "عدّل التمرين",
+    "en": "Edit the exercise"
+  },
+  "gymExerciseOf": {
+    "ar": "تمرين {index} من {total}",
+    "en": "Exercise {index} of {total}",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetOf": {
+    "ar": "مجموعة {index} من {total}",
+    "en": "Set {index} of {total}",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetDone": {
+    "ar": "خلّصت المجموعة",
+    "en": "Set done"
+  },
+  "gymSkipSet": {
+    "ar": "تخطّى المجموعة",
+    "en": "Skip the set"
+  },
+  "gymFinishExercise": {
+    "ar": "خلّصت التمرين",
+    "en": "Finish the exercise"
+  },
+  "gymNextExercise": {
+    "ar": "التمرين اللي بعده",
+    "en": "Next exercise"
+  },
+  "gymResting": {
+    "ar": "راحة",
+    "en": "Resting"
+  },
+  "gymRestOver": {
+    "ar": "خلصت الراحة",
+    "en": "Rest is over"
+  },
+  "gymRestCountingUp": {
+    "ar": "عدّاد الراحة شغّال",
+    "en": "The rest clock is running"
+  },
+  "gymSkipRest": {
+    "ar": "كمّل بدون راحة",
+    "en": "Carry on now"
+  },
+  "gymRestPlus": {
+    "ar": "زيد {value}",
+    "en": "Add {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSessionLogged": {
+    "ar": "سجّلت {name}",
+    "en": "{name} is logged",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSessionDoneTitle": {
+    "ar": "خلصت جلسة اليوم",
+    "en": "Today's session is done"
+  },
+  "gymSessionDoneBody": {
+    "ar": "كل اللي سجّلته محفوظ بسجلك، وبتلاقيه بتاريخ كل تمرين",
+    "en": "Everything you logged is in your log, and in each exercise's history"
+  },
+  "gymSessionEmptyTitle": {
+    "ar": "ما في جلسة اليوم",
+    "en": "Nothing is planned for today"
+  },
+  "gymSessionEmptyBody": {
+    "ar": "اليوم ما في تمارين بخطتك. افتح الخطة أو أيام التمرين لو بدّك تحدّد",
+    "en": "Your plan has no exercise today. Open the plan, or your training days, to set one"
+  },
+  "gymLeaveSession": {
+    "ar": "اطلع من الجلسة",
+    "en": "Leave the session"
+  },
+  "gymSetsSoFar": {
+    "ar": "{count, plural, =0{ما سجّلت ولا مجموعة} =1{مجموعة واحدة} =2{مجموعتين} few{{count} مجموعات} many{{count} مجموعة} other{{count} مجموعة}}",
+    "en": "{count, plural, =0{No sets yet} =1{One set} other{{count} sets}}",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymTemplatesTitle": {
+    "ar": "أيام التمرين",
+    "en": "Training days"
+  },
+  "gymTemplatesSubtitle": {
+    "ar": "يوم بإسمه، بأيامه، وبتمارينه بالترتيب",
+    "en": "A day with its name, its weekdays and its exercises in order"
+  },
+  "gymTemplatesEmptyTitle": {
+    "ar": "ما في يوم مسمّى",
+    "en": "No named day yet"
+  },
+  "gymTemplatesEmptyBody": {
+    "ar": "اعمل يوم زي «يوم صدر»، حدّد أيامه وتمارينه بالترتيب، وبيوم الإثنين بتلاقي جلستك جاهزة",
+    "en": "Build a day like “Chest day”, give it its weekdays and its exercises in order, and Monday's session is ready for you"
+  },
+  "gymAddTemplate": {
+    "ar": "يوم جديد",
+    "en": "New day"
+  },
+  "gymEditTemplate": {
+    "ar": "عدّل اليوم",
+    "en": "Edit the day"
+  },
+  "gymTemplateName": {
+    "ar": "اسم اليوم",
+    "en": "The day's name"
+  },
+  "gymTemplateNameHint": {
+    "ar": "يوم صدر، يوم أرجل…",
+    "en": "Chest day, leg day…"
+  },
+  "gymTemplateWeekdays": {
+    "ar": "أيام الأسبوع",
+    "en": "Weekdays"
+  },
+  "gymTemplateItems": {
+    "ar": "تمارين اليوم",
+    "en": "The day's exercises"
+  },
+  "gymAddTemplateItem": {
+    "ar": "أضف تمرين لليوم",
+    "en": "Add an exercise to the day"
+  },
+  "gymTemplateItemNumbers": {
+    "ar": "أرقام اليوم لهذا التمرين",
+    "en": "This day's numbers for this exercise"
+  },
+  "gymTemplateItemHint": {
+    "ar": "اللي تحدّده هنا بيغلب أرقام التمرين، بهذا اليوم بس. اتركه فاضي وبياخد أرقام التمرين",
+    "en": "What you set here beats the exercise's own numbers, on this day only. Leave it empty and it takes the exercise's"
+  },
+  "gymTemplateSaved": {
+    "ar": "حفظت اليوم",
+    "en": "The day is saved"
+  },
+  "gymTemplateDeleted": {
+    "ar": "حذفت {name}",
+    "en": "{name} is deleted",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateItemAdded": {
+    "ar": "ضفت {name} لليوم",
+    "en": "{name} is in the day",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateItemRemoved": {
+    "ar": "شلت {name} من اليوم",
+    "en": "{name} is out of the day",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateCount": {
+    "ar": "{count, plural, =0{ما في تمارين} =1{تمرين واحد} =2{تمرينين} few{{count} تمارين} many{{count} تمرين} other{{count} تمرين}}",
+    "en": "{count, plural, =0{No exercises} =1{One exercise} other{{count} exercises}}",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymTemplateNoDays": {
+    "ar": "ما حدّدت أيام لهذا اليوم",
+    "en": "No weekdays chosen for it"
+  },
+  "gymPickExercise": {
+    "ar": "اختر تمرين",
+    "en": "Pick an exercise"
+  },
+  "gymNoLibraryTitle": {
+    "ar": "مكتبة التمارين فاضية",
+    "en": "Your exercise library is empty"
+  },
+  "gymNoLibraryBody": {
+    "ar": "ضيف تمرينك إنت: الاسم، صورة الجهاز، فيديو الحركة، العضلات والأرقام. مدار ما بيحط تمارين من عنده",
+    "en": "Add your own: the name, the machine's photo, the movement's video, the muscles and the numbers. Madar ships none of its own"
+  },
+  "gymNoSetsYetHint": {
+    "ar": "بعد كل مجموعة اضغط «خلّصت المجموعة» وبتنزل هنا",
+    "en": "After each set tap “Set done” and it lands here"
+  },
+  "gymLibraryHint": {
+    "ar": "اضغط على التمرين تشوف صورته وفيديوه وتاريخك فيه",
+    "en": "Tap an exercise for its photo, its video and your history with it"
+  },
+  "gymSetsOfLog": {
+    "ar": "مجموعات هذا اليوم",
+    "en": "That day's sets"
+  }
+}

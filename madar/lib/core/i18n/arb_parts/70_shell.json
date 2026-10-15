@@ -1,0 +1,975 @@
+{
+  "shellSplashAssembling": {
+    "ar": "نُركّب أسطرلابك…",
+    "en": "Assembling your astrolabe…",
+    "description": "Splash caption while the encrypted database opens"
+  },
+  "shellSplashSemantics": {
+    "ar": "يجري فتح بياناتك المشفّرة",
+    "en": "Unlocking your encrypted data",
+    "description": "Screen-reader label of the splash"
+  },
+  "shellGateErrorTitle": {
+    "ar": "تعذّر فتح مَدار",
+    "en": "Madar couldn't open",
+    "description": "Title of the database-unlock error view"
+  },
+  "shellGateRetry": {
+    "ar": "أعِد المحاولة",
+    "en": "Try again"
+  },
+  "shellGateReset": {
+    "ar": "ابدأ من جديد",
+    "en": "Start fresh",
+    "description": "Offers deleting the unreadable database"
+  },
+  "shellGateResetTitle": {
+    "ar": "حذف جميع البيانات؟",
+    "en": "Delete all data?"
+  },
+  "shellGateResetBody": {
+    "ar": "سيُحذف ملف البيانات المشفّر نهائيًا ويبدأ مَدار من الصفر، ولا يمكن التراجع عن ذلك. إن لم تكن لديك نسخة احتياطية فلن تعود بياناتك القديمة.",
+    "en": "The encrypted data file will be permanently deleted and Madar will start from scratch. This can't be undone, and without a backup your old data won't come back."
+  },
+  "shellGateResetConfirm": {
+    "ar": "احذف وابدأ من جديد",
+    "en": "Delete and start fresh"
+  },
+  "shellGateResetFailed": {
+    "ar": "تعذّر حذف البيانات. أعد تشغيل التطبيق ثم حاول مجددًا.",
+    "en": "Couldn't delete the data. Restart the app and try again."
+  },
+  "shellDurationHoursMinutes": {
+    "ar": "{hours} س {minutes} د",
+    "en": "{hours}h {minutes}m",
+    "description": "Compact duration; numbers are pre-formatted",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationHours": {
+    "ar": "{hours} س",
+    "en": "{hours}h",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationMinutes": {
+    "ar": "{minutes} د",
+    "en": "{minutes} min",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "shellDurationLessThanMinute": {
+    "ar": "أقل من دقيقة",
+    "en": "under a minute"
+  },
+  "homeOpenSettings": {
+    "ar": "الإعدادات",
+    "en": "Settings",
+    "description": "Home header button"
+  },
+  "homeNow": {
+    "ar": "الآن",
+    "en": "Now",
+    "description": "Badge on the current prayer window"
+  },
+  "homeNextPrayer": {
+    "ar": "{prayer} بعد {duration}",
+    "en": "{prayer} in {duration}",
+    "description": "Countdown to the next prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "homePlaceholderBadge": {
+    "ar": "مواقيت تقريبية",
+    "en": "Approximate times",
+    "description": "Marks the static placeholder prayer times"
+  },
+  "homePlaceholderNote": {
+    "ar": "المواقيت الدقيقة لموقعك تصل قريبًا",
+    "en": "Exact times for your location are coming soon"
+  },
+  "homeWindowStarts": {
+    "ar": "{window}، يبدأ {time}",
+    "en": "{window}, starts {time}",
+    "description": "Screen-reader label of a window chip",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTasksCount": {
+    "ar": "{count, plural, =0{لا مهام بعد} =1{مهمة واحدة} =2{مهمتان} few{{count} مهام} many{{count} مهمة} other{{count} مهمة}}",
+    "en": "{count, plural, =0{No tasks yet} =1{1 task} other{{count} tasks}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeTasksProgress": {
+    "ar": "أنجزت {done} من {total}",
+    "en": "{done} of {total} done",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAddTask": {
+    "ar": "مهمة جديدة",
+    "en": "New task"
+  },
+  "homeEditTask": {
+    "ar": "تعديل المهمة",
+    "en": "Edit task"
+  },
+  "homeTaskTitleField": {
+    "ar": "المهمة",
+    "en": "Task"
+  },
+  "homeTaskTitleHint": {
+    "ar": "ماذا تودّ أن تنجز؟",
+    "en": "What would you like to get done?"
+  },
+  "homeTaskNotesField": {
+    "ar": "ملاحظات",
+    "en": "Notes"
+  },
+  "homeTaskWindowField": {
+    "ar": "وقتها من اليوم",
+    "en": "Time of day"
+  },
+  "homeTaskDateField": {
+    "ar": "اليوم",
+    "en": "Day"
+  },
+  "homeTaskPlanetField": {
+    "ar": "الكوكب",
+    "en": "Planet"
+  },
+  "homeTaskAdded": {
+    "ar": "أُضيفت المهمة",
+    "en": "Task added"
+  },
+  "homeTaskCompleted": {
+    "ar": "أُنجزت المهمة",
+    "en": "Task completed"
+  },
+  "homeTaskReopened": {
+    "ar": "أُعيد فتح المهمة",
+    "en": "Task reopened"
+  },
+  "homeTaskReopen": {
+    "ar": "إعادة فتح",
+    "en": "Reopen",
+    "description": "Swipe action on a completed task"
+  },
+  "homeTaskDone": {
+    "ar": "منجزة",
+    "en": "Done",
+    "description": "Screen-reader state of a completed task"
+  },
+  "homeMoveTitle": {
+    "ar": "انقلها إلى وقت آخر",
+    "en": "Move to another window"
+  },
+  "homeMoveSubtitle": {
+    "ar": "تبقى في اليوم نفسه",
+    "en": "It stays on the same day"
+  },
+  "homeReminderSet": {
+    "ar": "ضُبط التذكير",
+    "en": "Reminder set"
+  },
+  "homeReminderRemoved": {
+    "ar": "أُزيل التذكير",
+    "en": "Reminder removed"
+  },
+  "homeEmptyTitle": {
+    "ar": "هذا الوقت ما زال رحبًا",
+    "en": "This window is wide open"
+  },
+  "homeEmptyBody": {
+    "ar": "أضف مهمة، أو اكتب ما يدور في بالك في الشريط أدناه.",
+    "en": "Add a task, or type what's on your mind in the bar below."
+  },
+  "homeRadarTitle": {
+    "ar": "رادار الإهمال",
+    "en": "Neglect Radar"
+  },
+  "homeRadarBody": {
+    "ar": "سيلفت نظرك بلطف إلى جوانب حياتك التي غبت عنها طويلًا، ويصل مع المدار الحيّ.",
+    "en": "It will gently point you to the parts of life you've drifted from — arriving with the living orbit."
+  },
+  "homeRadarBadge": {
+    "ar": "قريبًا",
+    "en": "Soon"
+  },
+  "homeDefaultWallet": {
+    "ar": "المحفظة",
+    "en": "Wallet",
+    "description": "Name of the wallet created on demand by quick add"
+  },
+  "homeDialSemantics": {
+    "ar": "أسطرلاب اليوم: {window}، و{next}",
+    "en": "Today's astrolabe: {window}; {next}",
+    "placeholders": {
+      "window": {
+        "type": "String"
+      },
+      "next": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": {
+    "ar": "الإعدادات",
+    "en": "Settings"
+  },
+  "settingsPersonal": {
+    "ar": "التخصيص",
+    "en": "Personalisation"
+  },
+  "settingsGeneral": {
+    "ar": "عام",
+    "en": "General"
+  },
+  "settingsAppearance": {
+    "ar": "المظهر",
+    "en": "Appearance"
+  },
+  "settingsAppearanceSubtitle": {
+    "ar": "السمة ولون التمييز واللغة والأرقام",
+    "en": "Theme, accent, language and digits"
+  },
+  "settingsTheme": {
+    "ar": "السمة",
+    "en": "Theme"
+  },
+  "settingsThemeSelected": {
+    "ar": "السمة الحالية",
+    "en": "Current theme"
+  },
+  "settingsFollowSystem": {
+    "ar": "اتّباع وضع الجهاز",
+    "en": "Follow the device"
+  },
+  "settingsFollowSystemHint": {
+    "ar": "اللؤلؤ في الوضع الفاتح، وسمتك المختارة في الداكن",
+    "en": "Pearl in light mode, your chosen theme in dark mode"
+  },
+  "settingsThemeLightMode": {
+    "ar": "للوضع الفاتح",
+    "en": "Light mode",
+    "description": "Badge on the theme used while the device is in light mode (follow the device)"
+  },
+  "settingsThemeDarkMode": {
+    "ar": "للوضع الداكن",
+    "en": "Dark mode",
+    "description": "Badge on the theme used while the device is in dark mode (follow the device)"
+  },
+  "settingsAccent": {
+    "ar": "لون التمييز",
+    "en": "Accent colour"
+  },
+  "settingsAccentDefault": {
+    "ar": "لون السمة",
+    "en": "Theme colour"
+  },
+  "settingsAccentCustom": {
+    "ar": "لون مخصّص",
+    "en": "Custom colour"
+  },
+  "settingsAccentCustomHint": {
+    "ar": "اسحب على الطيف لاختيار أي لون؛ يُضبط سطوعه تلقائيًا ليبقى مقروءًا في كل سمة.",
+    "en": "Slide along the spectrum for any colour; its brightness adapts so it stays readable in every theme."
+  },
+  "settingsAccentPlanet": {
+    "ar": "لون {planet}",
+    "en": "{planet} colour",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccentHueValue": {
+    "ar": "درجة اللون {degrees}°",
+    "en": "Hue {degrees}°",
+    "placeholders": {
+      "degrees": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsLanguage": {
+    "ar": "اللغة",
+    "en": "Language"
+  },
+  "settingsLanguageArabic": {
+    "ar": "العربية",
+    "en": "العربية",
+    "description": "Always shown in Arabic"
+  },
+  "settingsLanguageEnglish": {
+    "ar": "English",
+    "en": "English",
+    "description": "Always shown in English"
+  },
+  "settingsDigits": {
+    "ar": "الأرقام",
+    "en": "Digits"
+  },
+  "settingsDigitsAuto": {
+    "ar": "تلقائية",
+    "en": "Automatic"
+  },
+  "settingsDigitsWestern": {
+    "ar": "غربية",
+    "en": "Western"
+  },
+  "settingsDigitsArabicIndic": {
+    "ar": "مشرقية",
+    "en": "Arabic-Indic"
+  },
+  "settingsDigitsHint": {
+    "ar": "التلقائية: مشرقية بالعربية وغربية بالإنجليزية",
+    "en": "Automatic: Arabic-Indic in Arabic, Western in English"
+  },
+  "settingsSound": {
+    "ar": "الصوت واللمس",
+    "en": "Sound & haptics"
+  },
+  "settingsSoundSubtitle": {
+    "ar": "المؤثرات والأجواء ومستويات الصوت",
+    "en": "Effects, ambience and volume levels"
+  },
+  "settingsSoundEnabled": {
+    "ar": "الأصوات",
+    "en": "Sounds"
+  },
+  "settingsSoundEnabledHint": {
+    "ar": "مفتاح عام لكل أصوات التطبيق",
+    "en": "One switch for every sound in the app"
+  },
+  "settingsHaptics": {
+    "ar": "الاهتزاز اللمسي",
+    "en": "Haptics"
+  },
+  "settingsHapticsHint": {
+    "ar": "نبضة خفيفة ترافق كل صوت",
+    "en": "A light pulse with every sound"
+  },
+  "settingsAmbient": {
+    "ar": "أجواء الفضاء",
+    "en": "Cosmic ambience"
+  },
+  "settingsAmbientHint": {
+    "ar": "طبقة صوتية هادئة تحت الواجهة",
+    "en": "A calm bed of sound beneath the interface"
+  },
+  "settingsVolumes": {
+    "ar": "مستويات الصوت",
+    "en": "Volume levels"
+  },
+  "settingsSoundProfile": {
+    "ar": "طابع الأصوات",
+    "en": "Sound character"
+  },
+  "settingsSoundProfileHint": {
+    "ar": "يتبدّل مع السمة",
+    "en": "Changes with the theme"
+  },
+  "settingsMotion": {
+    "ar": "الحركة",
+    "en": "Motion"
+  },
+  "settingsSectionMotionPower": {
+    "ar": "الحركة والطاقة",
+    "en": "Motion & power",
+    "description": "Settings section holding the motion and power-mode choices (the motion tile keeps its own title)"
+  },
+  "settingsMotionSystem": {
+    "ar": "حسب الجهاز",
+    "en": "Device"
+  },
+  "settingsMotionReduced": {
+    "ar": "مخفّفة",
+    "en": "Reduced"
+  },
+  "settingsMotionFull": {
+    "ar": "كاملة",
+    "en": "Full"
+  },
+  "settingsMotionHint": {
+    "ar": "المخفّفة تستبدل الانتقالات السينمائية بتلاشٍ هادئ",
+    "en": "Reduced swaps cinematic transitions for a calm fade"
+  },
+  "settingsPower": {
+    "ar": "وضع الطاقة",
+    "en": "Power mode"
+  },
+  "settingsPowerAuto": {
+    "ar": "تلقائي",
+    "en": "Automatic"
+  },
+  "settingsPowerSaver": {
+    "ar": "توفير البطارية",
+    "en": "Battery saver"
+  },
+  "settingsPowerHint": {
+    "ar": "توفير البطارية يُثبّت خلفية الفضاء ويخفّف العرض",
+    "en": "Battery saver stills the cosmic backdrop and lightens rendering"
+  },
+  "settingsData": {
+    "ar": "البيانات",
+    "en": "Data"
+  },
+  "settingsImport": {
+    "ar": "استيراد من النموذج الأوّلي",
+    "en": "Import from the prototype"
+  },
+  "settingsImportHint": {
+    "ar": "ملف JSON صدّرته من النسخة الأولى",
+    "en": "A JSON file exported from the first version"
+  },
+  "settingsPrivacyNote": {
+    "ar": "بياناتك مشفّرة وتبقى على جهازك وحده.",
+    "en": "Your data is encrypted and never leaves your device."
+  },
+  "settingsAbout": {
+    "ar": "حول مَدار",
+    "en": "About Madar"
+  },
+  "settingsVersion": {
+    "ar": "الإصدار {version}",
+    "en": "Version {version}",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsFonts": {
+    "ar": "الخطوط",
+    "en": "Fonts"
+  },
+  "settingsFontsBody": {
+    "ar": "خطوط حرّة مرخّصة برخصة SIL للخطوط المفتوحة {version}",
+    "en": "Open fonts under the SIL Open Font License {version}",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsLicenses": {
+    "ar": "تراخيص البرمجيات المفتوحة",
+    "en": "Open-source licences"
+  },
+  "settingsLicensesBody": {
+    "ar": "SQLCipher وOpenSSL وFlutter وكل حزمة بُني بها مَدار",
+    "en": "SQLCipher, OpenSSL, Flutter and every package Madar is built with"
+  },
+  "settingsFontRoleUi": {
+    "ar": "خط الواجهة",
+    "en": "Interface"
+  },
+  "settingsFontRoleDisplay": {
+    "ar": "خط العناوين",
+    "en": "Headings"
+  },
+  "settingsFontRoleQuran": {
+    "ar": "نص القرآن الكريم",
+    "en": "Quran text"
+  },
+  "settingsFontRoleNaskh": {
+    "ar": "النصوص الكلاسيكية",
+    "en": "Classical text"
+  },
+  "settingsFontPlex": {
+    "ar": "IBM Plex Sans Arabic",
+    "en": "IBM Plex Sans Arabic",
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontReemKufi": {
+    "ar": "Reem Kufi",
+    "en": "Reem Kufi",
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiriQuran": {
+    "ar": "Amiri Quran",
+    "en": "Amiri Quran",
+    "description": "Font name (proper noun)"
+  },
+  "settingsFontAmiri": {
+    "ar": "Amiri",
+    "en": "Amiri",
+    "description": "Font name (proper noun)"
+  },
+  "settingsLicense": {
+    "ar": "الترخيص",
+    "en": "Licence"
+  },
+  "settingsLicenseUnavailable": {
+    "ar": "تعذّر تحميل نص الترخيص",
+    "en": "Couldn't load the licence text"
+  },
+  "settingsGalleryHint": {
+    "ar": "كل مكوّنات الواجهة في مكان واحد",
+    "en": "Every interface component in one place"
+  },
+  "settingsDeveloper": {
+    "ar": "للمطوّرين",
+    "en": "Developer"
+  },
+  "settingsOpen": {
+    "ar": "فتح {name}",
+    "en": "Open {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingWelcomeTagline": {
+    "ar": "يومك يدور حول الصلوات الخمس",
+    "en": "Your day orbits the five prayers"
+  },
+  "onboardingWelcomeBody": {
+    "ar": "مهامك وصحتك ومالك وأهلك… لكلٍّ منها مداره، والصلاة هي المركز الذي يجمعها ويضبط إيقاعها.",
+    "en": "Tasks, health, money, family — each has its own orbit, and prayer is the centre that holds them together and sets their rhythm."
+  },
+  "onboardingStyleTitle": {
+    "ar": "لغتك وطابعك",
+    "en": "Your language and look"
+  },
+  "onboardingStyleBody": {
+    "ar": "جرّب وشاهد التغيير فورًا، ويمكنك تعديله متى شئت من الإعدادات.",
+    "en": "Try them and watch everything change live — you can adjust this anytime in Settings."
+  },
+  "onboardingStartTitle": {
+    "ar": "من أين نبدأ؟",
+    "en": "Where shall we begin?"
+  },
+  "onboardingStartBody": {
+    "ar": "بياناتك مشفّرة وتبقى على جهازك وحده.",
+    "en": "Your data is encrypted and stays on your device."
+  },
+  "onboardingStartFresh": {
+    "ar": "بداية جديدة",
+    "en": "Start fresh"
+  },
+  "onboardingStartFreshBody": {
+    "ar": "مدارٌ صافٍ ينتظر خطوتك الأولى",
+    "en": "A clear orbit, waiting for your first step"
+  },
+  "onboardingImport": {
+    "ar": "استيراد بياناتي",
+    "en": "Import my data"
+  },
+  "onboardingImportBody": {
+    "ar": "من ملف JSON صدّرته من النموذج الأوّلي",
+    "en": "From a JSON file exported by the prototype"
+  },
+  "onboardingBegin": {
+    "ar": "لنبدأ",
+    "en": "Let's begin"
+  },
+  "onboardingSkip": {
+    "ar": "تخطٍّ",
+    "en": "Skip"
+  },
+  "onboardingStep": {
+    "ar": "الخطوة {current} من {total}",
+    "en": "Step {current} of {total}",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsFaithSection": {
+    "ar": "الإيمان",
+    "en": "Faith",
+    "description": "Settings section: prayer, adhan, Quran, recitation and reminders"
+  },
+  "settingsFaithSectionHint": {
+    "ar": "الصلاة والقرآن والتذكير",
+    "en": "Prayer, the Quran and reminders",
+    "description": "Subtitle of the Faith settings section"
+  },
+  "settingsPrayerTimes": {
+    "ar": "المواقيت وطريقة الحساب",
+    "en": "Prayer times & calculation",
+    "description": "Settings entry opening the prayer-time settings"
+  },
+  "settingsAdhan": {
+    "ar": "الأذان والإشعارات",
+    "en": "Adhan & notifications",
+    "description": "Settings entry opening the adhan settings"
+  },
+  "settingsAdhkarReminders": {
+    "ar": "تذكير الأذكار",
+    "en": "Adhkar reminders",
+    "description": "Settings section title"
+  },
+  "settingsAdhkarMorning": {
+    "ar": "أذكار الصباح بعد الفجر",
+    "en": "Morning adhkar after Fajr",
+    "description": "Switch: remind of the morning adhkar after Fajr"
+  },
+  "settingsAdhkarEvening": {
+    "ar": "أذكار المساء بعد العصر",
+    "en": "Evening adhkar after Asr",
+    "description": "Switch: remind of the evening adhkar after Asr"
+  },
+  "settingsAdhkarAfter": {
+    "ar": "بعد الأذان بـ{offset}",
+    "en": "{offset} after the adhan",
+    "description": "Subtitle of an enabled adhkar reminder; offset is e.g. \"20 min\"",
+    "placeholders": {
+      "offset": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAdhkarOff": {
+    "ar": "لا تذكير",
+    "en": "No reminder",
+    "description": "Subtitle of a disabled adhkar reminder"
+  },
+  "settingsSecuritySection": {
+    "ar": "الخصوصية والأمان",
+    "en": "Privacy & security",
+    "description": "Settings section title"
+  },
+  "settingsAppLock": {
+    "ar": "قفل التطبيق",
+    "en": "App lock",
+    "description": "Settings entry opening the security page"
+  },
+  "settingsAppLockOff": {
+    "ar": "متوقف؛ اضبط رمزًا ليحمي مَدار",
+    "en": "Off – set a PIN to protect Madar",
+    "description": "App lock entry subtitle when no lock is set"
+  },
+  "settingsAppLockOn": {
+    "ar": "مفعّل بالرمز",
+    "en": "On, with your PIN",
+    "description": "App lock entry subtitle: PIN only"
+  },
+  "settingsAppLockOnBio": {
+    "ar": "مفعّل بالبصمة والرمز",
+    "en": "On, with fingerprint and PIN",
+    "description": "App lock entry subtitle: fingerprint and PIN"
+  },
+  "settingsSecurityNote": {
+    "ar": "يحجب القفلُ ما على الشاشة كلما غبت عن مَدار، أمّا بياناتك فمشفّرة على جهازك دائمًا، مقفلًا كان أو مفتوحًا.",
+    "en": "The lock hides what is on screen whenever you step away; your data is always encrypted on your device, locked or not.",
+    "description": "Note on the security page"
+  },
+  "settingsCredits": {
+    "ar": "الخطوط والمصادر",
+    "en": "Fonts & sources",
+    "description": "Settings entry / page listing the bundled fonts and content sources"
+  },
+  "settingsCreditsBody": {
+    "ar": "الخطوط المفتوحة، ومصادر القرآن والحديث والأذكار والمدن والنغمات",
+    "en": "Open fonts, and the sources of the Quran, hadith, adhkar, cities and tones",
+    "description": "Subtitle of the fonts & sources entry"
+  },
+  "settingsCreditsContent": {
+    "ar": "المحتوى ومصادره",
+    "en": "Content and its sources",
+    "description": "Section header on the credits page"
+  },
+  "settingsCreditsContentBody": {
+    "ar": "كل نصّ وبيانات وصوت في مَدار مرخّصٌ ترخيصًا مفتوحًا أو من صنعه، وهذه مصادره كاملة.",
+    "en": "Every text, dataset and sound in Madar is openly licensed or its own work – here are the full sources.",
+    "description": "Intro of the content credits"
+  },
+  "settingsCreditAdhkar": {
+    "ar": "الأذكار — حصن المسلم",
+    "en": "Adhkar – Hisn al-Muslim",
+    "description": "Content credit title"
+  },
+  "settingsCreditAdhkarRole": {
+    "ar": "بيانات مفتوحة (MIT)، ونص القرآن من quran-api",
+    "en": "Open datasets (MIT), the Quran text from quran-api",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditCities": {
+    "ar": "قائمة المدن",
+    "en": "City list",
+    "description": "Content credit title"
+  },
+  "settingsCreditCitiesRole": {
+    "ar": "Natural Earth وGeoNames وIANA وUnicode CLDR",
+    "en": "Natural Earth, GeoNames, IANA and Unicode CLDR",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditAdhan": {
+    "ar": "نغمات الأذان",
+    "en": "Adhan tones",
+    "description": "Content credit title"
+  },
+  "settingsCreditAdhanRole": {
+    "ar": "من صنع مَدار، ولا تسجيلات صوتية مضمّنة",
+    "en": "Madar’s own – no recordings bundled",
+    "description": "Content credit subtitle"
+  },
+  "onboardingLocationTitle": {
+    "ar": "أين تصلّي؟",
+    "en": "Where do you pray?",
+    "description": "Onboarding step: location for prayer times"
+  },
+  "onboardingLocationBody": {
+    "ar": "تُحسب مواقيت الصلاة على جهازك من موقعك، دون إنترنت. اختر مدينتك، أو استخدم موقعك التقريبي مرة واحدة.",
+    "en": "Prayer times are calculated on your device from your location, offline. Pick your city, or use your approximate location once."
+  },
+  "onboardingLocationSet": {
+    "ar": "اختر موقعك",
+    "en": "Choose your location",
+    "description": "Button opening the location sheet"
+  },
+  "onboardingLocationChange": {
+    "ar": "غيّر الموقع",
+    "en": "Change location",
+    "description": "Button opening the location sheet once a place is set"
+  },
+  "onboardingLocationFor": {
+    "ar": "مواقيتك في {place}",
+    "en": "Your times are for {place}",
+    "description": "The place prayer times are calculated for",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingAdhanTitle": {
+    "ar": "الأذان في وقته",
+    "en": "The adhan, on time",
+    "description": "Onboarding step: adhan permissions"
+  },
+  "onboardingAdhanBody": {
+    "ar": "ليُرفَع الأذان في دقيقته ولو كان الهاتف مقفلًا، يحتاج مَدار بعض أذونات أندرويد. امنحها الآن أو لاحقًا من الإعدادات.",
+    "en": "For the adhan to sound at its minute, even with the phone locked, Madar needs a few Android permissions. Grant them now or later in Settings."
+  },
+  "onboardingLockTitle": {
+    "ar": "احمِ مَدار",
+    "en": "Protect Madar",
+    "description": "Onboarding step: optional app lock"
+  },
+  "onboardingLockBody": {
+    "ar": "قفلٌ برمز وبصمة يُغلق مَدار كلما غبت عنه. لا حساب ولا خادم؛ يبقى الرمز على جهازك وحده.",
+    "en": "A lock with a PIN and your fingerprint closes Madar whenever you step away. No account, no server – the PIN stays on your device."
+  },
+  "onboardingLockSet": {
+    "ar": "اضبط رمزًا",
+    "en": "Set a PIN",
+    "description": "Button opening the PIN setup sheet"
+  },
+  "onboardingLockOn": {
+    "ar": "القفل مفعّل بالرمز",
+    "en": "The lock is on, with your PIN",
+    "description": "Shown once a PIN is set during onboarding"
+  },
+  "onboardingLockOnBio": {
+    "ar": "القفل مفعّل بالبصمة والرمز",
+    "en": "The lock is on, with fingerprint and PIN",
+    "description": "Shown once a PIN and fingerprint are set during onboarding"
+  },
+  "onboardingOptional": {
+    "ar": "خطوة اختيارية، ويمكنك ضبطها لاحقًا من الإعدادات",
+    "en": "Optional – you can set this later in Settings",
+    "description": "Hint under optional onboarding steps"
+  },
+  "homeDateWithHijri": {
+    "ar": "{gregorian} — {hijri}",
+    "en": "{gregorian} · {hijri}",
+    "description": "Home header: the Gregorian date then the Hijri date",
+    "placeholders": {
+      "gregorian": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAllTimes": {
+    "ar": "كل المواقيت",
+    "en": "All times",
+    "description": "Chip after the prayer windows opening the prayer times page"
+  },
+  "settingsQuran": {
+    "ar": "القراءة والمصحف",
+    "en": "Quran reading",
+    "description": "Settings entry / page: the Quran reader's settings"
+  },
+  "settingsQuranTajweedOn": {
+    "ar": "بألوان التجويد",
+    "en": "with tajweed colours",
+    "description": "Quran settings entry subtitle part: tajweed colours on"
+  },
+  "settingsQuranTajweedOff": {
+    "ar": "بلا ألوان التجويد",
+    "en": "without tajweed colours",
+    "description": "Quran settings entry subtitle part: tajweed colours off"
+  },
+  "settingsQuranReading": {
+    "ar": "القراءة",
+    "en": "Reading",
+    "description": "Quran settings: section of layout and text size"
+  },
+  "settingsQuranPreviewLabel": {
+    "ar": "معاينة حجم الخط",
+    "en": "Text size preview",
+    "description": "Screen-reader label of the text-size preview"
+  },
+  "settingsQuranDownloaded": {
+    "ar": "{count, plural, =0{لم يُنزَّل شيء بعد} =1{نُزِّل لسورة واحدة} =2{نُزِّل لسورتين} few{نُزِّل لـ{count} سور} many{نُزِّل لـ{count} سورة} other{نُزِّل لـ{count} سورة}}",
+    "en": "{count, plural, =0{Nothing downloaded yet} =1{Downloaded for 1 sura} other{Downloaded for {count} suras}}",
+    "description": "Quran settings: how many suras have the Quran.com tajweed / translation on the device",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsQuranDownloadNote": {
+    "ar": "تُنزَّل الترجمة وتجويد Quran.com سورةً سورة من إعدادات القارئ، ولا يتصل مَدار بالإنترنت إلا حين تطلب.",
+    "en": "The translation and the Quran.com tajweed download one sura at a time from the reader's settings – Madar goes online only when you ask.",
+    "description": "Quran settings: note on downloads"
+  },
+  "settingsQuranSourceNote": {
+    "ar": "نص المصحف العثماني برواية حفص من مشروع تنزيل، مضمَّن في التطبيق ويعمل دون إنترنت.",
+    "en": "The Uthmani text (Hafs) is Tanzil's, bundled with the app and fully offline.",
+    "description": "Quran settings: where the text comes from"
+  },
+  "settingsRecitation": {
+    "ar": "التلاوة والقرّاء",
+    "en": "Recitation & reciters",
+    "description": "Settings entry opening the recitation settings"
+  },
+  "settingsReminders": {
+    "ar": "التذكيرات",
+    "en": "Reminders",
+    "description": "Settings entry / page: adhkar and wird reminders"
+  },
+  "settingsRemindersCount": {
+    "ar": "{count, plural, =0{لا تذكير مفعّل} =1{تذكير واحد مفعّل} =2{تذكيران مفعّلان} few{{count} تذكيرات مفعّلة} many{{count} تذكيرًا مفعّلًا} other{{count} تذكير مفعّل}}",
+    "en": "{count, plural, =0{No reminders on} =1{1 reminder on} other{{count} reminders on}}",
+    "description": "Subtitle of the reminders entry",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsWirdReminders": {
+    "ar": "تذكير الوِرد",
+    "en": "Wird reminders",
+    "description": "Settings section title"
+  },
+  "settingsWirdNoPlans": {
+    "ar": "لا خطة وِرد بعد. ابدأ خطة، ويصلك تذكيرها بعد الصلاة التي تختارها.",
+    "en": "No wird plan yet. Start one, and its reminder comes after the prayer you choose.",
+    "description": "Wird reminders when there is no plan"
+  },
+  "settingsWirdOpen": {
+    "ar": "خطط الوِرد",
+    "en": "Wird plans",
+    "description": "Settings tile opening the wird screen"
+  },
+  "settingsWirdNoWindow": {
+    "ar": "اختر للخطة صلاةً ليصلك تذكيرها",
+    "en": "Pick a prayer for this plan to be reminded",
+    "description": "Wird reminder subtitle: the plan has no prayer window"
+  },
+  "settingsWirdPaused": {
+    "ar": "الخطة متوقفة، فلا تذكير",
+    "en": "Plan paused – no reminder",
+    "description": "Wird reminder subtitle: the plan is paused"
+  },
+  "settingsWirdEditPlan": {
+    "ar": "عدّل الخطة",
+    "en": "Edit the plan",
+    "description": "Button: open the plan editor to pick a prayer"
+  },
+  "settingsWirdReminderNote": {
+    "ar": "يصل التذكير بعد الصلاة التي اخترتها للخطة، ولا يصل يومَ تقرأ وِردك قبله.",
+    "en": "The reminder comes after the plan's prayer – not on a day you have already read your portion.",
+    "description": "Note under the wird reminders"
+  },
+  "settingsCreditQuran": {
+    "ar": "القرآن الكريم — تنزيل",
+    "en": "The Quran – Tanzil",
+    "description": "Content credit title"
+  },
+  "settingsCreditQuranRole": {
+    "ar": "النص العثماني وبياناته، وعلامات التجويد — تراخيص المشاع الإبداعي",
+    "en": "Uthmani text and metadata, tajweed annotations – Creative Commons",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditHadith": {
+    "ar": "الأربعون النووية",
+    "en": "An-Nawawi's Forty",
+    "description": "Content credit title"
+  },
+  "settingsCreditHadithRole": {
+    "ar": "النص العربي من hadith-api، ملكٌ عام",
+    "en": "Arabic text from hadith-api, public domain",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditRecitation": {
+    "ar": "التلاوات — EveryAyah",
+    "en": "Recitations – EveryAyah",
+    "description": "Content credit title"
+  },
+  "settingsCreditRecitationRole": {
+    "ar": "تُبثّ أو تُنزَّل بطلبك فقط، ولا صوت مضمَّن",
+    "en": "Streamed or downloaded only when you ask – no audio bundled",
+    "description": "Content credit subtitle"
+  },
+  "settingsCreditQibla": {
+    "ar": "بوصلة القبلة — النموذج المغناطيسي العالمي",
+    "en": "Qibla compass – World Magnetic Model",
+    "description": "Content credit title"
+  },
+  "settingsCreditQiblaRole": {
+    "ar": "نموذج WMM من NOAA وBGS، ملكٌ عام",
+    "en": "The WMM by NOAA and BGS, public domain",
+    "description": "Content credit subtitle"
+  }
+}

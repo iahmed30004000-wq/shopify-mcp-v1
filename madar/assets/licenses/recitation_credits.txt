@@ -1,0 +1,68 @@
+Madar – Quran recitation (lib/features/recitation)
+===================================================
+
+Recitation audio
+----------------
+Source: EveryAyah – https://everyayah.com/data/<folder>/<SSSAAA>.mp3
+(per-ayah MP3 files of human reciters; Madar never uses generated voices
+for the Quran).
+
+Madar bundles NO recitation audio. A file is fetched only when the user
+presses play (streaming) or starts a download; downloads are kept in the
+app's private storage for the user's own listening and are never shared.
+
+Licence status: everyayah.com publishes no licence or terms for these files
+(an audit by risan/quran-json, src/quranjson/config.py, records the status
+as "unknown": its licence/terms paths return 404). Madar therefore links to
+the files rather than redistributing them, and credits the site and every
+reciter. Could not be re-checked from the build machine (everyayah.com is
+not reachable there).
+
+Reciters offered (everyayah.com folder, bitrate):
+  Mujawwad
+    Abdul Basit Abdus-Samad ........ Abdul_Basit_Mujawwad_128kbps
+    Mohamed Siddiq al-Minshawi ..... Minshawy_Mujawwad_192kbps
+    Mahmoud Khalil al-Husary ....... Husary_128kbps_Mujawwad
+  Murattal
+    Abdul Basit Abdus-Samad ........ Abdul_Basit_Murattal_192kbps
+    Mohamed Siddiq al-Minshawi ..... Minshawy_Murattal_128kbps
+    Mahmoud Khalil al-Husary ....... Husary_128kbps
+    Mishary Rashid Alafasy ......... Alafasy_128kbps
+    Abdul Rahman al-Sudais ......... Abdurrahmaan_As-Sudais_192kbps
+    Saud al-Shuraim ................ Saood_ash-Shuraym_128kbps
+    Maher al-Muaiqly ............... MaherAlMuaiqly128kbps
+    Abu Bakr al-Shatri ............. Abu_Bakr_Ash-Shaatree_128kbps
+    Ali al-Hudhaifi ................ Hudhaify_128kbps
+    Muhammad Ayyub ................. Muhammad_Ayyoub_128kbps
+    Yasser al-Dosari ............... Yasser_Ad-Dussary_128kbps
+    Muhammad Jibreel ............... Muhammad_Jibreel_128kbps
+    Abdullah Basfar ................ Abdullah_Basfar_192kbps
+    Nasser al-Qatami ............... Nasser_Alqatami_128kbps
+    Saad al-Ghamdi ................. Ghamadi_40kbps
+  Muʿallim (teaching)
+    Mahmoud Khalil al-Husary ....... Husary_Muallim_128kbps
+
+Folder names were verified against two published copies of everyayah's
+recitation list (https://everyayah.com/data/recitations.js):
+  * risan/quran-json – data/audio/everyayah.json
+    https://github.com/risan/quran-json
+  * Alfanous – src/alfanous/configs/recitations.json
+    https://github.com/Alfanous-team/alfanous
+(Husary_Muallim_128kbps, Yasser_Ad-Dussary_128kbps and
+Nasser_Alqatami_128kbps appear only in the first, newer copy.)
+
+Basmala convention: ayah 1 of every surah except al-Fatihah and at-Tawbah is
+preceded by file 001001 (al-Fatihah's first ayah), as in the quran.com
+Android app (quran/quran_android, AudioQueue.kt) – convention only, no code
+taken.
+
+Ayah counts
+-----------
+The Hafs (Kufan) ayah counts (6236) in surah_ayah_counts.dart are the same
+in both lists above (facts, not a copyrighted work); they match Tanzil's
+quran-data (CC BY 3.0, https://tanzil.net).
+
+Libraries
+---------
+just_audio, audio_service, audio_session – Ryan Heise, MIT licence
+(https://github.com/ryanheise).

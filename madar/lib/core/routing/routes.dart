@@ -1,0 +1,563 @@
+import '../quran/ayah.dart';
+
+/// Every route location of the app. Navigate with `context.go(AppRoutes.x)`
+/// (routes below `/` are nested, so `go` builds the whole stack and the back
+/// button returns to the parent).
+abstract final class AppRoutes {
+  static const String home = '/';
+  static const String onboarding = '/onboarding';
+  static const String settings = '/settings';
+  static const String appearance = '/settings/appearance';
+  static const String sound = '/settings/sound';
+  static const String licenses = '/settings/licenses';
+  static const String import = '/import';
+  static const String gallery = '/gallery';
+
+  // Phase 2 – the day around the five prayers.
+
+  /// Prayer times (day and month views, next prayer, Hijri date).
+  static const String prayerTimes = '/prayer-times';
+
+  /// Calculation method, location, adjustments, Hijri offset, clock.
+  static const String prayerSettings = '/settings/prayer';
+
+  /// The adhan: sounds, reminders, full-screen, permissions.
+  static const String adhanSettings = '/settings/adhan';
+
+  /// «الإقامة»: the call after each adhan, its offsets and its sound.
+  static const String iqamaSettings = '/settings/iqama';
+
+  /// Settings › Security (app lock: PIN, fingerprint, time-out).
+  static const String security = '/settings/security';
+
+  /// The prayer tracker (`?tab=history` opens the history tab).
+  static const String prayerTracker = '/prayer-tracker';
+
+  /// Location of the tracker's history tab.
+  static const String prayerTrackerHistory = '/prayer-tracker?tab=history';
+
+  /// Adhkar (Hisn al-Muslim): the sets of the day.
+  static const String adhkar = '/adhkar';
+
+  /// The tasbeeh ring.
+  static const String tasbeeh = '/adhkar/tasbeeh';
+
+  /// One adhkar set in the reader (`/adhkar/morning`,
+  /// `/adhkar/afterPrayer?prayer=asr`).
+  static const String adhkarSet = '/adhkar/:set';
+
+  /// Location of the reader of [set] (an `AdhkarCategoryId` name), for the
+  /// after-prayer set optionally of [prayer] (a `Prayer` name).
+  static String adhkarSetOf(String set, {String? prayer}) => Uri(
+    path: '/adhkar/${Uri.encodeComponent(set)}',
+    queryParameters: prayer == null ? null : {'prayer': prayer},
+  ).toString();
+
+  /// A planet's page over the orbit (`/planet/faith?item=people:<id>`); the
+  /// orbit scene flies in underneath it.
+  static const String planet = '/planet/:key';
+
+  /// Location of [key]'s planet page, optionally highlighting the moon or
+  /// record [item] (`refTable:refId`).
+  static String planetOf(String key, {String? item}) => Uri(
+    path: '/planet/${Uri.encodeComponent(key)}',
+    queryParameters: item == null ? null : {'item': item},
+  ).toString();
+
+  // Phase 3 – the Quran, recitation, the wird, Hifz and the qibla.
+
+  /// The Quran's front page: continue reading, search, go to, the index.
+  static const String quran = '/quran';
+
+  /// The reader (`?ayah=2:255` or `?page=42`; neither: where it last
+  /// stopped).
+  static const String quranReader = '/quran/read';
+
+  /// Location of the reader at [ayah] (lit briefly) or at mushaf [page].
+  static String quranReaderOf({AyahRef? ayah, int? page}) => Uri(
+    path: quranReader,
+    queryParameters: ayah != null
+        ? {'ayah': '$ayah'}
+        : page != null
+        ? {'page': '$page'}
+        : null,
+  ).toString();
+
+  /// Search across the Arabic text (`?q=` starts with a query).
+  static const String quranSearch = '/quran/search';
+
+  /// The daily wird (`?plan=<id>` focuses one plan).
+  static const String wird = '/wird';
+
+  /// Location of the wird screen focused on [planId].
+  static String wirdOf(String? planId) =>
+      Uri(path: wird, queryParameters: planId == null ? null : {'plan': planId}).toString();
+
+  /// Hifz: due items, all items, stats.
+  static const String hifz = '/hifz';
+
+  /// A review session (`?card=<id>` reviews one item).
+  static const String hifzReview = '/hifz/review';
+
+  /// Location of a review of the card [cardId] only (all due when null).
+  static String hifzReviewOf(String? cardId) =>
+      Uri(path: hifzReview, queryParameters: cardId == null ? null : {'card': cardId}).toString();
+
+  // Part 14 – «الحفظ»: the daily plan, the page map, the goals, and
+  // «شازام القرآن» typed. They are siblings of `/hifz`, not children of
+  // one another: each is pushed on its own, so back returns to the Faith
+  // world and never to a second copy of the morning screen.
+
+  /// «الحفظ» – the morning screen: today's new portion, the near review
+  /// and the far rotation.
+  static const String hifzPlan = '/hifz/plan';
+
+  /// The mushaf coloured by how strongly each page is held.
+  static const String hifzMap = '/hifz/plan/map';
+
+  /// His memorisation goals, with their prayer-time reminders.
+  static const String hifzGoals = '/hifz/plan/goals';
+
+  /// «شازام القرآن», typed (`?q=` starts with a phrase).
+  static const String hifzFind = '/hifz/find';
+
+  /// Location of the finder already holding [phrase].
+  static String hifzFindOf(String? phrase) => Uri(
+    path: hifzFind,
+    queryParameters: phrase == null || phrase.isEmpty ? null : {'q': phrase},
+  ).toString();
+
+  /// The qibla compass.
+  static const String qibla = '/qibla';
+
+  /// The full recitation player (a sheet over the page underneath).
+  static const String nowPlaying = '/now-playing';
+
+  /// Settings › Quran reading (layout, text size, tajweed, translation).
+  static const String quranSettings = '/settings/quran';
+
+  /// Settings › Recitation (reciter, repeats, speed, downloads).
+  static const String recitationSettings = '/settings/recitation';
+
+  /// One reciter's per-surah downloads (`?reciter=<id>`).
+  static const String recitationDownloads = '/settings/recitation/downloads';
+
+  /// Location of [reciterId]'s downloads.
+  static String recitationDownloadsOf(String reciterId) =>
+      Uri(path: recitationDownloads, queryParameters: {'reciter': reciterId}).toString();
+
+  /// Settings › Reminders (adhkar and wird).
+  static const String reminders = '/settings/reminders';
+
+  // Phase 4 – health (tracking only). The Health world's own page is its
+  // hub (`planetOf('health')`); every health screen below opens from it.
+
+  /// Medications & supplements (`?tab=meds|courses`; none: today's doses).
+  static const String meds = '/meds';
+
+  /// Location of the medications screen on [tab] (`today`, `meds`,
+  /// `courses`; null or `today`: the plain location).
+  static String medsOf({String? tab}) => _withTab(meds, tab, 'today');
+
+  /// The medical record (`?tab=labs|appointments|questions|conditions`).
+  static const String record = '/record';
+
+  /// Location of the record on [tab] (null or `labs`: the plain location).
+  static String recordOf({String? tab}) => _withTab(record, tab, 'labs');
+
+  /// One lab test's readings and trend (`/record/lab/<id>`).
+  static const String labTest = '/record/lab/:id';
+
+  /// Location of the lab test [testId].
+  static String labTestOf(String testId) => '/record/lab/${Uri.encodeComponent(testId)}';
+
+  /// Upcoming and past appointments (`?highlight=<id>` lights one).
+  static const String appointments = '/record/appointments';
+
+  /// Location of the appointments, lighting [highlightId].
+  static String appointmentsOf({String? highlightId}) =>
+      Uri(path: appointments, queryParameters: highlightId == null ? null : {'highlight': highlightId}).toString();
+
+  /// Wellbeing: check-in, pain, habits, worries, insights
+  /// (`?tab=pain|habits|worries|insights`; none: today).
+  static const String wellbeing = '/wellbeing';
+
+  /// Location of wellbeing on [tab] (null or `today`: the plain location).
+  static String wellbeingOf({String? tab}) => _withTab(wellbeing, tab, 'today');
+
+  /// Guided breathing (`?pattern=478|box`; none: the user's last pattern).
+  static const String breathing = '/wellbeing/breathing';
+
+  /// Location of guided breathing with [pattern].
+  static String breathingOf({String? pattern}) =>
+      Uri(path: breathing, queryParameters: pattern == null ? null : {'pattern': pattern}).toString();
+
+  /// Settings › Health (meal times, reminders, worry window, emergency
+  /// number, lab margin, doctor report).
+  static const String healthSettings = '/settings/health';
+
+  // Phase 5 – money (no tax, VAT, fee or zakat anywhere). The Money world's
+  // own page is its hub (`planetOf('money')`); every money screen below
+  // opens from it.
+
+  /// The ledger: net balance, wallets, charts, recent entries.
+  static const String ledger = '/ledger';
+
+  /// One wallet's balance, chart and entries (`/ledger/wallet/<id>`).
+  static const String wallet = '/ledger/wallet/:id';
+
+  /// Location of the wallet [walletId].
+  static String walletOf(String walletId) => '/ledger/wallet/${Uri.encodeComponent(walletId)}';
+
+  /// Every entry, searchable and filtered (`?wallet=&kind=&item=&tag=&from=
+  /// &to=&scope=&unassigned=1&q=`; repeated keys for several values).
+  static const String transactions = '/ledger/transactions';
+
+  /// Location of the transactions filtered by [query] (see
+  /// `TxFilterQuery`); none: every entry.
+  static String transactionsOf([Map<String, List<String>>? query]) =>
+      Uri(path: transactions, queryParameters: query == null || query.isEmpty ? null : query).toString();
+
+  /// Currencies, the base currency and the manual exchange rates.
+  static const String currencies = '/ledger/currencies';
+
+  /// The nested budget (`?tab=spending`; none: the plan).
+  static const String budget = '/budget';
+
+  /// Location of the budget on [tab] (`plan`, `spending`; null or `plan`:
+  /// the plain location).
+  static String budgetOf({String? tab}) => _withTab(budget, tab, 'plan');
+
+  /// Savings jars, debts and recurring obligations (`?tab=debts|obligations`;
+  /// `&debt=<id>` / `&obligation=<id>` opens that one's sheet).
+  static const String goals = '/goals';
+
+  /// Location of the goals on [tab] (`jars`, `debts`, `obligations`),
+  /// opening the sheet of [debt] or [obligation] (their tab implied).
+  static String goalsOf({String? tab, String? debt, String? obligation}) {
+    final t = debt != null ? 'debts' : (obligation != null ? 'obligations' : tab);
+    return Uri(
+      path: goals,
+      queryParameters: {
+        if (t != null && t != 'jars') 'tab': t,
+        'debt': ?debt,
+        if (debt == null) 'obligation': ?obligation,
+      }.nullIfEmpty,
+    ).toString();
+  }
+
+  /// One savings jar: progress, plan, chart, movements (`/goals/jar/<id>`).
+  static const String jar = '/goals/jar/:id';
+
+  /// Location of the jar [jarId].
+  static String jarOf(String jarId) => '/goals/jar/${Uri.encodeComponent(jarId)}';
+
+  // Phase 6 – life: work, family, travel, growth, body and the user's own
+  // trackers. Each world's page (`planetOf('work')` …) is its hub; every
+  // screen below opens from it, from a moon, a reason or a notification.
+
+  /// Work: the boards, today's Top 3, the projects' summary.
+  static const String work = '/work';
+
+  /// One kanban board (`/work/board/<id>`).
+  static const String workBoard = '/work/board/:id';
+
+  /// Location of the board [boardId].
+  static String workBoardOf(String boardId) => '/work/board/${Uri.encodeComponent(boardId)}';
+
+  /// Every project, active first.
+  static const String workProjects = '/work/projects';
+
+  /// One project: checklist, countdown, linked tasks (`/work/project/<id>`).
+  static const String workProject = '/work/project/:id';
+
+  /// Location of the project [projectId].
+  static String workProjectOf(String projectId) => '/work/project/${Uri.encodeComponent(projectId)}';
+
+  /// Family & friends, most urgent first.
+  static const String family = '/family';
+
+  /// One person's page: rhythm, birthday, notes, history
+  /// (`/family/person/<id>`).
+  static const String familyPerson = '/family/person/:id';
+
+  /// Location of the person [personId].
+  static String familyPersonOf(String personId) => '/family/person/${Uri.encodeComponent(personId)}';
+
+  /// Travel (`?tab=documents|templates`; none: the trips).
+  static const String travel = '/travel';
+
+  /// Location of travel on [tab] (`trips`, `documents`, `templates`; null
+  /// or `trips`: the plain location).
+  static String travelOf({String? tab}) => _withTab(travel, tab, 'trips');
+
+  /// One trip: countdown, packing, the destination's prayer times
+  /// (`/travel/trip/<id>`).
+  static const String travelTrip = '/travel/trip/:id';
+
+  /// Location of the trip [tripId].
+  static String travelTripOf(String tripId) => '/travel/trip/${Uri.encodeComponent(tripId)}';
+
+  /// One packing template's items (`/travel/template/<id>`).
+  static const String travelTemplate = '/travel/template/:id';
+
+  /// Location of the packing template [templateId].
+  static String travelTemplateOf(String templateId) => '/travel/template/${Uri.encodeComponent(templateId)}';
+
+  /// Learning goals (never Money's savings `goals`).
+  static const String growth = '/growth';
+
+  /// One learning goal: progress, pace, streak, chart
+  /// (`/growth/goal/<id>`).
+  static const String growthGoal = '/growth/goal/:id';
+
+  /// Location of the learning goal [goalId].
+  static String growthGoalOf(String goalId) => '/growth/goal/${Uri.encodeComponent(goalId)}';
+
+  /// The body (`?tab=plan|fasting|water|avoid|food`; none: today).
+  static const String body = '/body';
+
+  /// Location of the body on [tab] (`today`, `plan`, `fasting`, `water`,
+  /// `avoid`, `food`; null or `today`: the plain location).
+  static String bodyOf({String? tab}) => _withTab(body, tab, 'today');
+
+  /// The gym (Part 8, «#24»): his exercise library's own page per
+  /// exercise, today's session set by set, and his named training days.
+  static const String gymExercise = '/body/gym/exercise/:id';
+
+  /// Location of the exercise [exerciseId]'s own page.
+  static String gymExerciseOf(String exerciseId) => '/body/gym/exercise/${Uri.encodeComponent(exerciseId)}';
+
+  /// Today's session, walked set by set.
+  static const String gymSession = '/body/gym/session';
+
+  /// His named training days («يوم صدر» on Monday and Thursday).
+  static const String gymTemplates = '/body/gym/days';
+
+  /// Food: the library, the meal plan, his conditions with his own rules,
+  /// and the observations. The day itself lives on the Body planet
+  /// (`/body?tab=food`).
+  static const String foodLibrary = '/food/library';
+
+  /// The meal plan: build it, and planned against eaten.
+  static const String foodPlan = '/food/plan';
+
+  /// His chronic conditions and his own food rules.
+  static const String foodRules = '/food/rules';
+
+  /// The plain observations over his own food log.
+  static const String foodInsights = '/food/insights';
+
+  /// The user's own trackers and lists.
+  static const String modules = '/modules';
+
+  /// One tracker or list (`/modules/module/<id>`).
+  static const String module = '/modules/module/:id';
+
+  /// Location of the tracker or list [moduleId].
+  static String moduleOf(String moduleId) => '/modules/module/${Uri.encodeComponent(moduleId)}';
+
+  // Part 5 – «السفرة», the kitchen world (hers). Its own page is its hub
+  // (`planetOf('sufra')`); every screen below opens from it, from a search
+  // result or from a deep link. Nothing here reads Health or Money.
+
+  /// What is in the house: the pantry, worst first.
+  static const String sufraPantry = '/sufra/pantry';
+
+  /// Her dishes.
+  static const String sufraRecipes = '/sufra/recipes';
+
+  /// One dish: its ingredients against the house, its method, its photos
+  /// (`/sufra/recipe/<id>`).
+  static const String sufraRecipe = '/sufra/recipe/:id';
+
+  /// Location of the dish [recipeId].
+  static String sufraRecipeOf(String recipeId) => '/sufra/recipe/${Uri.encodeComponent(recipeId)}';
+
+  /// «شو نطبخ اليوم»: what she can cook now, and what is nearly there.
+  static const String sufraTonight = '/sufra/tonight';
+
+  /// Her standing constraints and the no-repeat window.
+  static const String sufraRules = '/sufra/rules';
+
+  /// The cooked log «بدون تكرار» reads.
+  static const String sufraHistory = '/sufra/history';
+
+  // Part 3b – the shared tick lists. A list belongs to a host record, so
+  // its lists open from that record's own screen; one list has a location
+  // of its own (its id is unique), which is what search results and the
+  // Neglect Radar link to.
+
+  /// Every list he has, grouped by the record it hangs on – where a list
+  /// link with nothing to point at lands, and the only way to an orphan
+  /// list whose record was deleted.
+  static const String recordListsAll = '/lists';
+
+  /// The lists of one record (`/lists/budget_items/<id>`).
+  static const String recordLists = '/lists/:table/:id';
+
+  /// Location of the lists of the record [hostId] of [hostTable].
+  static String recordListsOf(String hostTable, String hostId) =>
+      '/lists/${Uri.encodeComponent(hostTable)}/${Uri.encodeComponent(hostId)}';
+
+  /// One list with its items (`/list/<id>`).
+  static const String recordList = '/list/:id';
+
+  /// Location of the list [listId].
+  static String recordListOf(String listId) => '/list/${Uri.encodeComponent(listId)}';
+
+  // Phase 7 – Madar Cinema, under «الألعاب», the games' own world
+  // (`planetOf('games')` is that world's page, and the hall's door is the
+  // first card on it). The hall pushes its own game screen and Saved Games
+  // pages, and these locations serve deep links (search, notifications,
+  // shared links); `LifeRecordLinks` maps a `game` / `savedGame` link onto
+  // them.
+
+  /// The Madar Cinema hall (the games' lobby).
+  static const String cinema = '/cinema';
+
+  /// One programme entry played full screen (`/cinema/game/<id>`); an
+  /// unknown or not-yet-playable id shows the hall's "not open yet" stage.
+  static const String cinemaGame = '/cinema/game/:id';
+
+  /// Location of the programme entry [gameId].
+  static String cinemaGameOf(String gameId) => '/cinema/game/${Uri.encodeComponent(gameId)}';
+
+  /// The user's saved web games (`?text=` opens the add sheet with the link
+  /// found in shared text).
+  static const String savedGames = '/saved-games';
+
+  /// Location of the saved games, pre-filling the add sheet from
+  /// [sharedText].
+  static String savedGamesOf({String? sharedText}) => Uri(
+    path: savedGames,
+    queryParameters: sharedText == null || sharedText.trim().isEmpty ? null : {'text': sharedText},
+  ).toString();
+
+  // Phase 9 – the system shell. Global search and the notification centre
+  // are reached from the home header; these locations also serve deep
+  // links (a search result, a notification row, Settings).
+
+  /// Global search over every module (`?q=` opens with a query typed).
+  static const String search = '/search';
+
+  /// Location of the search, with [query] already in the field.
+  static String searchOf({String? query}) => Uri(
+    path: search,
+    queryParameters: query == null || query.trim().isEmpty ? null : {'q': query},
+  ).toString();
+
+  /// The notification centre (`?tab=upcoming|recent`; with none the centre
+  /// opens on Recent when something is new).
+  static const String notifications = '/notifications';
+
+  /// Location of the notification centre on [tab].
+  static String notificationsOf({String? tab}) =>
+      Uri(path: notifications, queryParameters: tab == null ? null : {'tab': tab}).toString();
+
+  /// Settings › Notifications: what each part of Madar sends, and the mutes.
+  static const String notificationSettings = '/settings/notifications';
+
+  /// Settings › Your data: the backup, the exports and the restore.
+  static const String dataCentre = '/settings/data';
+
+  /// The «خطة مدار» answers he brought back from an AI app, newest first
+  /// (Part 3's history). Reached from Settings › Your data and from the
+  /// card on the home panel.
+  static const String plans = '/plans';
+
+  /// Bringing an answer in: paste it, pick its file, or let another app
+  /// share it in (an `ACTION_SEND` / `ACTION_VIEW` intent lands here).
+  static const String planImport = '/plans/import';
+
+  /// One plan: its suggestions and the list he ticks
+  /// (`/plans/plan/<id>?tab=list`).
+  static const String plan = '/plans/plan/:id';
+
+  /// The restore flow on its own (reachable from the data centre).
+  static const String dataRestore = '/settings/data/restore';
+
+  /// Location of the plan [planId], on [tab] (`items` – the suggestions,
+  /// the default – or `list`, the checklist).
+  static String planOf(String planId, {String? tab}) => Uri(
+    path: '/plans/plan/${Uri.encodeComponent(planId)}',
+    queryParameters: tab == null || tab == 'items' ? null : {'tab': tab},
+  ).toString();
+
+  /// Part 7 – the daily chat: he types his day and decides each piece
+  /// (`/day?day=2026-10-14&tab=summary&q=...`). `q` only **types** a line
+  /// into the box; nothing is read or written until he taps send.
+  static const String dayChat = '/day';
+
+  /// Location of the daily chat: of [day] (null: today), on [tab]
+  /// (`chat` – the default – or `summary`, «شو صار اليوم؟»), with [draft]
+  /// already typed into the box.
+  static String dayChatOf({DateTime? day, String? tab, String? draft}) => Uri(
+    path: dayChat,
+    queryParameters: {
+      if (day != null) 'day': _dayKey(day),
+      if (tab != null && tab != 'chat') 'tab': tab,
+      if (draft != null && draft.trim().isNotEmpty) 'q': draft,
+    }.nullIfEmpty,
+  ).toString();
+
+  /// `yyyy-mm-dd` of a day in a location (the daily chat's own key).
+  static String _dayKey(DateTime d) =>
+      '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  /// A new AI chat (`?q=` types a question into the field – never sent).
+  static const String ai = '/ai';
+
+  /// Location of a new AI chat with [draft] already typed in.
+  static String aiOf({String? draft}) => Uri(
+    path: ai,
+    queryParameters: draft == null || draft.trim().isEmpty ? null : {'q': draft},
+  ).toString();
+
+  /// The saved AI conversations.
+  static const String aiChats = '/ai/chats';
+
+  /// One saved AI conversation (`/ai/chat/<id>`).
+  static const String aiChat = '/ai/chat/:id';
+
+  /// Location of the saved conversation [id].
+  static String aiChatOf(String id) => '/ai/chat/${Uri.encodeComponent(id)}';
+
+  /// Settings › AI: his own key, the model, the reply length, the privacy.
+  static const String aiSettings = '/settings/ai';
+
+  /// Settings › Home-screen widgets.
+  static const String widgetsSettings = '/settings/widgets';
+
+  /// Together Mode (the two players, the Hall of Fame, the specials).
+  static const String together = '/together';
+  static const String togetherHallOfFame = '/together/hall-of-fame';
+  static const String togetherKnowMe = '/together/know-me';
+  static const String togetherWeekly = '/together/weekly';
+  static const String togetherGoal = '/together/goal';
+
+  static String _withTab(String path, String? tab, String home) =>
+      Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
+
+  /// Locations reachable before onboarding is finished (onboarding can hand
+  /// over to the importer).
+  static const Set<String> beforeOnboarding = {onboarding, import};
+}
+
+extension on Map<String, String> {
+  Map<String, String>? get nullIfEmpty => isEmpty ? null : this;
+}
+
+/// Where the router must send [location] (a matched location such as
+/// `/settings/sound`), or null to stay. Pure – unit-tested.
+///
+/// * Not onboarded → everything except [AppRoutes.beforeOnboarding] goes to
+///   onboarding.
+/// * Onboarded → onboarding is closed and goes home.
+String? onboardingRedirect({required bool onboarded, required String location}) {
+  final path = location.isEmpty ? AppRoutes.home : location;
+  if (!onboarded) {
+    return AppRoutes.beforeOnboarding.contains(path) ? null : AppRoutes.onboarding;
+  }
+  return path == AppRoutes.onboarding ? AppRoutes.home : null;
+}

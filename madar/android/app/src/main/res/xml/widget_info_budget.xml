@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The budget home-screen widget (MadarWidgetKind.BUDGET): home screen only –
+     never the lock screen (widgetCategory), resizable, redrawn at least every
+     60 minutes from the snapshot the app wrote (its pages turn at
+     their own times through an alarm in between). -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_budget_description"
+    android:initialLayout="@layout/widget_placeholder"
+    android:minWidth="110dp"
+    android:minHeight="110dp"
+    android:minResizeWidth="110dp"
+    android:minResizeHeight="100dp"
+    android:previewImage="@drawable/widget_picker_budget"
+    android:previewLayout="@layout/widget_preview_budget"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="2"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen" />

@@ -1,0 +1,48 @@
+Madar qibla compass – data and method credits
+=============================================
+
+1. World Magnetic Model WMM2025 (magnetic declination → true north)
+   Produced by the US National Oceanic and Atmospheric Administration
+   (NOAA) National Centers for Environmental Information (NCEI) and the
+   British Geological Survey (BGS) for the US National Geospatial-
+   Intelligence Agency and the UK Defence Geographic Centre.
+   Epoch 2025.0, valid 2025.0–2030.0, released 13 November 2024.
+   https://www.ncei.noaa.gov/products/world-magnetic-model
+   Licence: the WMM is a work of the US Government and is in the public
+   domain (not subject to copyright protection in the United States).
+   Coefficients (WMM.COF) as published in the pygeomag repository:
+   https://raw.githubusercontent.com/boxpet/pygeomag/main/pygeomag/wmm/WMM_2025.COF
+   (sha256 dfa8597825af4e0b87ff4198a5b4fb661b3c49f4cd090cd0164e0259b075582f),
+   transcribed into lib/features/qibla/domain/wmm2025_coefficients.dart.
+   Verified against NOAA's official WMM2025 test values
+   (WMM2025_TEST_VALUES.txt, 100 points, via
+   https://raw.githubusercontent.com/boxpet/pygeomag/main/test/test_values/WMM2025_TEST_VALUES.txt,
+   sha256 e6975b093dddeb6153e0b23cc418425c438167e7c5b1dd795da379cb654f5819):
+   declination and inclination agree within 0.005°, X/Y/Z within 0.1 nT.
+   The spherical-harmonic evaluation is Madar's own Dart implementation of
+   the algorithm in the WMM technical report (NOAA's public-domain
+   reference implementation).
+   pygeomag (the repository hosting the copies) is MIT-licensed; only the
+   NOAA data files above were used from it, not its code.
+
+2. Qibla bearing and distance
+   Initial great-circle bearing to the Kaaba (21.4225241 N, 39.8261818 E)
+   from the adhan_dart package (MIT licence, Copyright (c) 2020
+   prayer-timetable), through the prayer package's QiblaMath, and the
+   haversine great-circle distance (mean Earth radius 6371.0088 km).
+
+3. Sun compass
+   Solar azimuth and altitude from the NOAA solar position algorithm in
+   lib/core/astro/astronomy.dart (public-domain method).
+
+4. Tilt compensation and smoothing
+   Rotation from gravity and magnetic vectors as in Android's
+   SensorManager.getRotationMatrix (Android Open Source Project, Apache
+   License 2.0 – method only, re-implemented in Dart); the "1€ filter"
+   (Géry Casiez, Nicolas Roussel, Daniel Vogel, CHI 2012 – method only)
+   adapted to angles on the unit circle.
+
+5. Artwork
+   The astrolabe dial reuses Madar's own brushed-brass shader
+   (shaders/orbit/brass.frag) and astrolabe path helpers; no third-party
+   images or fonts are added by the qibla compass.

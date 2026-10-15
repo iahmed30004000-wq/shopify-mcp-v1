@@ -1,0 +1,145 @@
+{
+  "lifeHubToolsTitle": {
+    "ar": "أدوات",
+    "en": "Tools",
+    "description": "Work / Family / Travel / Growth / Body planet pages: title above the row of tool tiles"
+  },
+  "lifeHubPeople": {
+    "ar": "الأحبّة",
+    "en": "People",
+    "description": "Family planet page: tool tile that opens the list of people"
+  },
+  "lifeHubToolBoardsHint": {
+    "ar": "لوحات المهام وأعمدتها",
+    "en": "Your kanban boards and their columns",
+    "description": "Work planet page: screen-reader hint of the Boards tool tile"
+  },
+  "lifeHubToolProjectsHint": {
+    "ar": "المشاريع وقوائمها وعدّها التنازلي",
+    "en": "Projects, their checklists and countdowns",
+    "description": "Work / Growth planet pages: screen-reader hint of the Projects tool tile"
+  },
+  "lifeHubToolPeopleHint": {
+    "ar": "كل من تحبّ أن تبقى قريبًا منه",
+    "en": "Everyone you want to stay close to",
+    "description": "Family planet page: screen-reader hint of the People tool tile"
+  },
+  "lifeHubToolRemindersHint": {
+    "ar": "الملخّص اليومي وأعياد الميلاد",
+    "en": "The daily digest and birthdays",
+    "description": "Family planet page: screen-reader hint of the reach-out reminders tool tile"
+  },
+  "lifeHubToolTripsHint": {
+    "ar": "رحلاتك وعدّها التنازلي",
+    "en": "Your trips and their countdowns",
+    "description": "Travel planet page: screen-reader hint of the Trips tool tile"
+  },
+  "lifeHubToolDocumentsHint": {
+    "ar": "الجوازات والتأشيرات وتواريخ انتهائها",
+    "en": "Passports, visas and when they expire",
+    "description": "Travel planet page: screen-reader hint of the Documents tool tile"
+  },
+  "lifeHubToolGoalsHint": {
+    "ar": "أهداف التعلّم وتقدّمك فيها",
+    "en": "Your learning goals and progress",
+    "description": "Growth planet page: screen-reader hint of the All goals tool tile"
+  },
+  "lifeHubToolPlanHint": {
+    "ar": "تمارين الأسبوع حسب الأيام",
+    "en": "The week's training by weekday",
+    "description": "Body planet page: screen-reader hint of the training plan tool tile"
+  },
+  "lifeHubToolAvoidHint": {
+    "ar": "ما اخترت أن تبتعد عنه",
+    "en": "What you chose to stay away from",
+    "description": "Body planet page: screen-reader hint of the Avoid list tool tile"
+  },
+  "lifeHubMoonOpenPerson": {
+    "ar": "افتح صفحته",
+    "en": "Open their page",
+    "description": "Moon sheet of a person (Family world): opens the person's own page"
+  },
+  "lifeHubMoonOpenBoard": {
+    "ar": "افتح اللوحة",
+    "en": "Open board",
+    "description": "Moon sheet of a Work board: opens the board"
+  },
+  "lifeHubMoonOpenTrip": {
+    "ar": "افتح الرحلة",
+    "en": "Open trip",
+    "description": "Moon sheet of a trip: opens the trip"
+  },
+  "lifeHubMoonOpenModule": {
+    "ar": "افتح المتتبّع",
+    "en": "Open tracker",
+    "description": "Moon sheet of a custom tracker or list: opens it"
+  },
+  "lifeHubSettingsSection": {
+    "ar": "الحياة",
+    "en": "Life",
+    "description": "Settings: title of the Life section (family reminders, water, fasting, packing lists, trackers)"
+  },
+  "lifeHubSettingsSectionHint": {
+    "ar": "العائلة والجسد والسفر ومتتبّعاتك",
+    "en": "Family, body, travel and your trackers",
+    "description": "Settings: subtitle of the Life section"
+  },
+  "lifeHubSettingsFamilyOn": {
+    "ar": "ملخّص يومي الساعة {time}",
+    "en": "Daily digest at {time}",
+    "description": "Settings › Life: the reach-out reminders tile when the daily digest is on",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lifeHubSettingsFamilyBirthdays": {
+    "ar": "أعياد الميلاد فقط",
+    "en": "Birthdays only",
+    "description": "Settings › Life: the reach-out reminders tile when the digest is off but birthday reminders are on"
+  },
+  "lifeHubSettingsFamilyOff": {
+    "ar": "متوقّفة",
+    "en": "Off",
+    "description": "Settings › Life: the reach-out reminders tile when every family reminder is off"
+  },
+  "lifeHubSettingsWaterValue": {
+    "ar": "{ml} مل يوميًا",
+    "en": "{ml} ml a day",
+    "description": "Settings › Life: the daily water target (pre-formatted number of millilitres)",
+    "placeholders": {
+      "ml": {
+        "type": "String"
+      }
+    }
+  },
+  "lifeHubSettingsFastingHint": {
+    "ar": "الخطة والتنبيهات",
+    "en": "Plan and notifications",
+    "description": "Settings › Life: subtitle of the intermittent fasting tile (opens Body › Fasting)"
+  },
+  "lifeHubSettingsTemplatesHint": {
+    "ar": "قوائم جاهزة لكل رحلة",
+    "en": "Ready lists for every trip",
+    "description": "Settings › Life: subtitle of the packing lists tile; also the Travel page's packing lists tool hint"
+  },
+  "lifeHubSettingsModulesCount": {
+    "ar": "{count, plural, =0{لا متتبّعات بعد} =1{متتبّع واحد} =2{متتبّعان} few{{n} متتبّعات} many{{n} متتبّعًا} other{{n} متتبّع}}",
+    "en": "{count, plural, =0{None yet} =1{{n} tracker} other{{n} trackers}}",
+    "description": "Settings › Life: how many trackers and lists the user made",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "lifeHubPrayerDestination": {
+    "ar": "وجهتك",
+    "en": "your destination",
+    "description": "Travel: the place named in 'Your prayer times now follow {place}' when a trip's destination is known only by its coordinates"
+  }
+}

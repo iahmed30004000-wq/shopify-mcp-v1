@@ -1,0 +1,331 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
+import 'widget_kind.dart';
+
+/// What one row of a list widget (a dose, a Top 3 item) shows.
+enum WidgetRowState {
+  /// Waiting (a dose not answered yet, a task not done).
+  open('o'),
+
+  /// Taken / done.
+  done('d'),
+
+  /// Skipped (doses only).
+  skipped('s');
+
+  const WidgetRowState(this.wire);
+
+  final String wire;
+
+  static WidgetRowState fromWire(Object? wire) => switch (wire) {
+    'd' => done,
+    's' => skipped,
+    _ => open,
+  };
+}
+
+/// One row of a list widget.
+@immutable
+class WidgetRow {
+  const WidgetRow({required this.text, this.time, this.state = WidgetRowState.open, this.link});
+
+  final String text;
+
+  /// Shown at the row's end (a dose's time); null for none.
+  final String? time;
+  final WidgetRowState state;
+
+  /// App location a tap on the row opens (null: the widget's own link).
+  final String? link;
+
+  Map<String, Object?> toJson() => {
+    'text': text,
+    'time': ?time,
+    'st': state.wire,
+    'link': ?link,
+  };
+
+  factory WidgetRow.fromJson(Map<String, Object?> j) => WidgetRow(
+    text: j['text'] as String? ?? '',
+    time: j['time'] as String?,
+    state: WidgetRowState.fromWire(j['st']),
+    link: j['link'] as String?,
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      other is WidgetRow && other.text == text && other.time == time && other.state == state && other.link == link;
+
+  @override
+  int get hashCode => Object.hash(text, time, state, link);
+
+  @override
+  String toString() => 'WidgetRow($text, $time, ${state.name})';
+}
+
+/// What a widget shows from [from] until the next page's [from] (or the
+/// snapshot's [WidgetSnapshot.until]).
+///
+/// Every field is optional: the Android provider fills the views its
+/// layout has for the fields that are present (see `MadarWidgetRenderer`).
+@immutable
+class WidgetPage {
+  const WidgetPage({
+    required this.from,
+    this.headline,
+    this.detail,
+    this.note,
+    this.countdownTo,
+    this.countdownFormat,
+    this.image,
+    this.rows = const [],
+    this.more = const [],
+    this.empty,
+    this.bar,
+    this.warn = false,
+    this.link,
+  });
+
+  /// When the page starts (null: from the start – the first page).
+  final DateTime? from;
+
+  /// The big text (a prayer's name, "2/5", an amount, "62%").
+  final String? headline;
+
+  /// The line under it (a prayer's time, the next dose, "of 500 JOD").
+  final String? detail;
+
+  /// The small line at the bottom (the Hijri date, "12 days left").
+  final String? note;
+
+  /// A countdown Android ticks by itself (a `Chronometer`) to this instant.
+  final DateTime? countdownTo;
+
+  /// The countdown's text with one `%s` for the ticking time ("in %s").
+  final String? countdownFormat;
+
+  /// Key of the page's image (light and dark PNGs published with it).
+  final String? image;
+  final List<WidgetRow> rows;
+
+  /// The line under a list cut short: `more[k - 1]` when k rows do not fit
+  /// ("+2 more doses" – plurals are Dart's, the fit is Android's).
+  final List<String> more;
+
+  /// Shown instead of the rows when there are none.
+  final String? empty;
+
+  /// A progress bar, 0…1000 (the budget left).
+  final int? bar;
+
+  /// Draw the bar / headline in the warning colour.
+  final bool warn;
+
+  /// App location a tap on the widget opens (overrides the snapshot's).
+  final String? link;
+
+  /// [offset]: the phone's UTC offset at [from] when the texts were made
+  /// ([WidgetSnapshot.pageOffsets]); taken now when not given. [zoned]
+  /// false: none (see [WidgetSnapshot.zoneBound]).
+  Map<String, Object?> toJson({int? offset, bool zoned = true}) => {
+    if (from case final f?) 'from': f.millisecondsSinceEpoch,
+    if (zoned && from != null) 'off': offset ?? widgetPhoneOffsetOf(from!),
+    'big': ?headline,
+    'sub': ?detail,
+    'note': ?note,
+    if (countdownTo case final c?) 'cd': c.millisecondsSinceEpoch,
+    'cdFmt': ?countdownFormat,
+    'img': ?image,
+    if (rows.isNotEmpty) 'rows': [for (final r in rows) r.toJson()],
+    if (more.isNotEmpty) 'more': more,
+    'empty': ?empty,
+    'bar': ?bar,
+    if (warn) 'warn': true,
+    'link': ?link,
+  };
+
+  factory WidgetPage.fromJson(Map<String, Object?> j) {
+    DateTime? at(Object? ms) => ms is int ? DateTime.fromMillisecondsSinceEpoch(ms) : null;
+    return WidgetPage(
+      from: at(j['from']),
+      headline: j['big'] as String?,
+      detail: j['sub'] as String?,
+      note: j['note'] as String?,
+      countdownTo: at(j['cd']),
+      countdownFormat: j['cdFmt'] as String?,
+      image: j['img'] as String?,
+      rows: [
+        for (final r in (j['rows'] as List?) ?? const [])
+          if (r is Map) WidgetRow.fromJson(r.cast<String, Object?>()),
+      ],
+      more: [
+        for (final m in (j['more'] as List?) ?? const [])
+          if (m is String) m,
+      ],
+      empty: j['empty'] as String?,
+      bar: (j['bar'] as num?)?.toInt(),
+      warn: j['warn'] == true,
+      link: j['link'] as String?,
+    );
+  }
+
+  @override
+  String toString() => 'WidgetPage(from: $from, $headline | $detail | $note, rows: ${rows.length})';
+}
+
+/// The phone's UTC offset (minutes) at [at] – for a `TZDateTime` of another
+/// zone too (a prayer time of the location), which is why it goes through
+/// the epoch. Written beside each page start and [WidgetSnapshot.until]: the
+/// Android provider compares them with `TimeZone.getDefault()` and, once the
+/// phone has moved to another time zone, shows [WidgetSnapshot.stale]
+/// instead of the old zone's dose times, midnights and days
+/// (`MadarWidgetRenderer.Doc.zoneMatches`). Fixed by the instant and the
+/// zone's rules, so the JSON stays free of volatile values.
+int phoneOffsetMinutes(DateTime at) =>
+    DateTime.fromMillisecondsSinceEpoch(at.millisecondsSinceEpoch).timeZoneOffset.inMinutes;
+
+/// What the snapshots read the phone's offsets with ([phoneOffsetMinutes];
+/// tests stand in for a phone that changes time zone).
+@visibleForTesting
+int Function(DateTime at) widgetPhoneOffsetOf = phoneOffsetMinutes;
+
+/// Everything one home-screen widget shows until [until], as the Android
+/// provider reads it (`files/…/widgets/<kind>.bin`, encrypted there).
+///
+/// A snapshot is a *timeline*: [pages] start at their `from` instants
+/// (prayer times, midnight, the end of a budget period), so the widget moves
+/// on at those moments without the app – the provider shows the last page
+/// that has started and arms an alarm for the next one. After [until] it
+/// shows [stale] ("Open Madar to refresh").
+///
+/// Nothing volatile (no "generated at") goes into the JSON: equal content
+/// encodes equally, so the bridge writes only what changed.
+///
+/// The phone's UTC offsets are taken when the snapshot is made – with its
+/// wall-clock texts – not when it is written: a snapshot built before the
+/// phone changed time zone and written after (a widget added while the app
+/// sat in the background) keeps the old zone's offsets, so Android shows
+/// "Open Madar to refresh" instead of the old zone's dose times.
+@immutable
+class WidgetSnapshot {
+  WidgetSnapshot({
+    required this.kind,
+    required this.languageCode,
+    required this.private,
+    required this.title,
+    required this.until,
+    required this.stale,
+    required this.pages,
+    this.link,
+    this.zoneBound = true,
+  }) : untilOffset = zoneBound ? widgetPhoneOffsetOf(until) : null,
+       pageOffsets = List.unmodifiable([
+         for (final p in pages) zoneBound && p.from != null ? widgetPhoneOffsetOf(p.from!) : null,
+       ]);
+
+  static const int version = 1;
+
+  final MadarWidgetKind kind;
+  final String languageCode;
+
+  /// Details hidden (counts only): nothing personal is in the snapshot.
+  final bool private;
+  final String title;
+
+  /// The data runs out here.
+  final DateTime until;
+
+  /// Shown after [until].
+  final String stale;
+
+  /// In time order; the first page's `from` is null (from the start).
+  final List<WidgetPage> pages;
+
+  /// App location a tap on the widget opens.
+  final String? link;
+
+  /// Whether the texts are wall-clock times of the phone's zone (dose
+  /// times, the phone's midnights and days): then the phone's offsets go
+  /// into the JSON and Android shows [stale] once the phone is in another
+  /// zone. False for the prayer widget, whose times, midnights and dates
+  /// are the prayer location's whatever zone the phone is in.
+  final bool zoneBound;
+
+  /// The phone's UTC offset (minutes) at [until] and at each page's start
+  /// (null for the first page) when the snapshot was made; null when not
+  /// [zoneBound].
+  final int? untilOffset;
+  final List<int?> pageOffsets;
+
+  bool get rtl => languageCode == 'ar';
+
+  /// The page shown at [now] (what the Android provider picks), or null
+  /// after [until].
+  WidgetPage? pageAt(DateTime now) {
+    if (!now.isBefore(until) || pages.isEmpty) return null;
+    var current = pages.first;
+    for (final p in pages) {
+      final from = p.from;
+      if (from == null || !from.isAfter(now)) current = p;
+    }
+    return current;
+  }
+
+  /// When the widget has to change next after [now] (the next page, else
+  /// [until]).
+  DateTime nextChangeAfter(DateTime now) {
+    for (final p in pages) {
+      final from = p.from;
+      if (from != null && from.isAfter(now)) return from;
+    }
+    return until;
+  }
+
+  /// Image keys the pages use.
+  Set<String> get imageKeys => {for (final p in pages) ?p.image};
+
+  Map<String, Object?> toJson() => {
+    'v': version,
+    'kind': kind.wire,
+    'lang': languageCode,
+    'rtl': rtl,
+    'private': private,
+    'title': title,
+    'until': until.millisecondsSinceEpoch,
+    'untilOff': ?untilOffset,
+    'stale': stale,
+    'link': ?link,
+    'pages': [for (var i = 0; i < pages.length; i++) pages[i].toJson(offset: pageOffsets[i], zoned: zoneBound)],
+  };
+
+  String encode() => jsonEncode(toJson());
+
+  static WidgetSnapshot? decode(String json) {
+    try {
+      final j = (jsonDecode(json) as Map).cast<String, Object?>();
+      final kind = MadarWidgetKind.fromWire(j['kind']);
+      if (kind == null || j['v'] != version) return null;
+      return WidgetSnapshot(
+        kind: kind,
+        languageCode: j['lang'] as String? ?? 'ar',
+        private: j['private'] == true,
+        title: j['title'] as String? ?? '',
+        until: DateTime.fromMillisecondsSinceEpoch((j['until'] as num).toInt()),
+        stale: j['stale'] as String? ?? '',
+        link: j['link'] as String?,
+        zoneBound: j.containsKey('untilOff'),
+        pages: [
+          for (final p in (j['pages'] as List?) ?? const [])
+            if (p is Map) WidgetPage.fromJson(p.cast<String, Object?>()),
+        ],
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  String toString() => 'WidgetSnapshot(${kind.wire}, $languageCode, private: $private, ${pages.length} pages)';
+}

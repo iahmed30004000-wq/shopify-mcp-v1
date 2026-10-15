@@ -1,0 +1,336 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/design/tokens.dart';
+import '../../../core/design/widgets/widgets.dart';
+import '../../../core/i18n/formatters.dart';
+import '../../../core/i18n/gen/app_localizations.dart';
+import '../../../core/interaction/interaction.dart';
+import '../../../core/motion/motion_kit.dart';
+import '../../../core/settings/app_settings.dart';
+import '../../../core/sound/sound_api.dart';
+import '../../settings/widgets/settings_widgets.dart';
+import '../data/ai_chat_providers.dart';
+import '../data/conversation_store.dart';
+import '../domain/ai_models.dart';
+import '../domain/ai_settings.dart';
+import 'ai_labels.dart';
+import 'widgets/key_sheet.dart';
+import 'widgets/model_sheet.dart';
+
+/// Settings › AI: service, keys (masked, in secure storage), model, reply
+/// length and temperature, plus the privacy promises and "delete all chats".
+class AiSettingsScreen extends ConsumerWidget {
+  const AiSettingsScreen({super.key});
+
+  static Key keyRow(AiProviderId p) => ValueKey('ai-settings-key-${p.name}');
+  static const Key modelRow = ValueKey('ai-settings-model');
+  static const Key outsideNotice = ValueKey('ai-settings-outside-notice');
+  static const Key outsideSwitch = ValueKey('ai-settings-outside-switch');
+  static const Key temperatureSwitch = ValueKey('ai-settings-temperature-default');
+
+  Future<void> _deleteAll(BuildContext context, WidgetRef ref) async {
+    final l = L10n.of(context);
+    final store = ref.read(conversationStoreProvider);
+    final removed = await store.deleteAll();
+    if (removed.isEmpty || !context.mounted) return;
+    Fx.fire(Sfx.delete);
+    showUndoToast(context, UndoableAction(label: l.aiChatDeletedAll, undo: () => store.restore(removed)));
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = L10n.of(context);
+    final t = context.tokens;
+    final fmt = context.formatter;
+    final text = Theme.of(context).textTheme;
+    final settings = ref.watch(aiSettingsProvider).value ?? const AiSettings();
+    final hints = ref.watch(aiKeyHintsProvider).value ?? const <AiProviderId, String?>{};
+    final powerSaver = ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver));
+    final ctrl = ref.read(aiSettingsProvider.notifier);
+    final p = settings.provider;
+    final temperature = settings.temperature;
+
+    return MadarScaffold(
+      title: l.aiChatSettingsTitle,
+      extendBodyBehindAppBar: true,
+      animateBackdrop: !powerSaver,
+      backdropSeed: 0.47,
+      body: SettingsListView(
+        children: [
+          StaggerIn(
+            id: 'ai-settings',
+            fade: false,
+            children: [
+              SettingsSection(
+                title: l.aiChatOutsideSection,
+                seed: 0.05,
+                children: [
+                  MergeSemantics(
+                    child: SettingsTile(
+                      icon: settings.outsideAllowed ? Icons.cloud_upload_outlined : Icons.cloud_off_rounded,
+                      iconColor: settings.outsideAllowed ? t.warning : t.success,
+                      title: l.aiChatOutsideSwitch,
+                      subtitle: settings.outsideAllowed ? l.aiChatOutsideOn : l.aiChatOutsideOff,
+                      trailing: MadarSwitch(
+                        key: outsideSwitch,
+                        value: settings.outsideAllowed,
+                        semanticLabel: l.aiChatOutsideSwitch,
+                        onChanged: (v) => ctrl.change((s) => s.copyWith(outsideAllowed: v)),
+                      ),
+                    ),
+                  ),
+                  SettingsNote(l.aiChatOutsideNote, icon: Icons.shield_moon_outlined),
+                ],
+              ),
+              SettingsSection(
+                title: l.aiChatSettingsServiceModel,
+                seed: 0.1,
+                children: [
+                  SettingsChoiceTile<AiProviderId>(
+                    icon: aiServiceIcon(p),
+                    title: l.aiChatSettingsService,
+                    subtitle: l.aiService(p),
+                    options: [for (final s in AiProviderId.values) ChoiceOption(value: s, label: l.aiService(s))],
+                    selected: p,
+                    onChanged: (v) => ctrl.change((s) => s.copyWith(provider: v)),
+                  ),
+                  SettingsTile(
+                    key: modelRow,
+                    icon: Icons.memory_rounded,
+                    title: l.aiChatSettingsModel,
+                    // The id on its own line: it never breaks at its hyphens.
+                    subtitle:
+                        '${aiModelLabel(settings.model, displayName: settings.displayNameOf(p, settings.model))}'
+                        '\n${BidiIsolate.ltr(settings.model)}',
+                    navigates: true,
+                    onTap: () => showModelPickerSheet(context),
+                  ),
+                ],
+              ),
+              SettingsSection(
+                title: l.aiChatSettingsKeys,
+                seed: 0.2,
+                children: [
+                  for (final s in AiProviderId.values)
+                    SettingsTile(
+                      key: keyRow(s),
+                      icon: hints[s] != null ? Icons.lock_rounded : Icons.key_rounded,
+                      iconColor: hints[s] != null ? t.success : t.gold,
+                      title: l.aiChatKeyTitle(l.aiService(s)),
+                      subtitle: hints[s] != null
+                          ? l.aiChatKeySaved(BidiIsolate.ltr('••••${hints[s]}'))
+                          : l.aiChatKeyNotSet,
+                      navigates: true,
+                      onTap: () => showAiKeySheet(context, s),
+                    ),
+                  SettingsNote(l.aiChatPrivacyKeys, icon: Icons.shield_moon_outlined),
+                ],
+              ),
+              SettingsSection(
+                title: l.aiChatSettingsReply,
+                seed: 0.3,
+                children: [
+                  SettingsChoiceTile<int>(
+                    icon: Icons.short_text_rounded,
+                    title: l.aiChatMaxTokens,
+                    subtitle: l.aiChatMaxTokensNote,
+                    options: [
+                      for (final n in AiSettings.maxTokenChoices) ChoiceOption(value: n, label: fmt.formatInt(n)),
+                    ],
+                    selected: AiSettings.maxTokenChoices.contains(settings.maxTokens)
+                        ? settings.maxTokens
+                        : AiSettings.defaultMaxTokens,
+                    onChanged: (v) => ctrl.change((s) => s.copyWith(maxTokens: v)),
+                  ),
+                  SettingsTile(
+                    icon: Icons.thermostat_rounded,
+                    title: l.aiChatTemperature,
+                    subtitle: l.aiChatTemperatureDefault,
+                    trailing: MadarSwitch(
+                      key: temperatureSwitch,
+                      value: temperature == null,
+                      semanticLabel: l.aiChatTemperatureDefault,
+                      onChanged: (v) => ctrl.change((s) => s.copyWith(temperature: () => v ? null : 0.7)),
+                    ),
+                  ),
+                  AnimatedSize(
+                    duration: context.motion(MadarMotion.medium),
+                    curve: MadarMotion.emphasized,
+                    alignment: AlignmentDirectional.topCenter,
+                    child: temperature == null
+                        ? const SizedBox(width: double.infinity)
+                        : Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(Space.l, 0, Space.l, Space.xs),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Slider(
+                                    value: temperature,
+                                    divisions: 10,
+                                    activeColor: t.accent,
+                                    inactiveColor: t.glassBorder.withValues(alpha: 0.5),
+                                    thumbColor: t.gold,
+                                    semanticFormatterCallback: (v) => fmt.formatNumber(v, maxDecimals: 1),
+                                    onChanged: (v) => ctrl.change((s) => s.copyWith(temperature: () => v)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 36,
+                                  child: Text(
+                                    fmt.formatNumber(temperature, decimals: 1),
+                                    textAlign: TextAlign.end,
+                                    style: text.labelLarge!.copyWith(color: t.accent),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                  ),
+                  SettingsNote(l.aiChatTemperatureNote),
+                ],
+              ),
+              SettingsSection(
+                title: l.aiChatSettingsPrivacy,
+                seed: 0.4,
+                children: [
+                  const _OutsideNoticeCard(key: outsideNotice),
+                  SettingsNote(l.aiChatPrivacyCalls, icon: Icons.wifi_off_rounded),
+                  SettingsNote(
+                    l.aiChatPrivacyHistory(fmt.formatInt(ConversationStore.maxConversations)),
+                    icon: Icons.lock_outline_rounded,
+                  ),
+                  SettingsTile(
+                    icon: Icons.delete_sweep_outlined,
+                    iconColor: t.danger,
+                    title: l.aiChatDeleteAll,
+                    onTap: () => _deleteAll(context, ref),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The warning card at the top of Settings › AI › Privacy: in plain words,
+/// what leaves the phone (what he types, and the summary he approves), to
+/// whom (the service whose key he entered), what can never be in there at
+/// all – his health, his medication, his food and his family – that none
+/// of it happens until he turns the switch at the top of this screen on
+/// himself, and what will replace it one day – the model on the phone
+/// itself (PLAN Part 15). The card is a notice; the switch, the chat's own
+/// narrower summary (`ChatSummaryScope`) and `ChatContextFilter` are what
+/// enforce it.
+class _OutsideNoticeCard extends StatelessWidget {
+  const _OutsideNoticeCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(Space.l, Space.s, Space.l, Space.s),
+      child: Semantics(
+        container: true,
+        label:
+            '${l.aiChatPrivacyOutsideTitle}. ${l.aiChatPrivacyOutsideBody} '
+            '${l.aiChatPrivacyNeverOut} ${l.aiChatPrivacyOutsideSwitch} ${l.aiChatPrivacyOutsideFix}',
+        excludeSemantics: true,
+        child: Container(
+          padding: const EdgeInsetsDirectional.all(Space.m),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(t.radiusM),
+            color: t.warning.withValues(alpha: 0.1),
+            border: Border.all(color: t.warning.withValues(alpha: 0.32), width: 0.9),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.warning_amber_rounded, size: 18, color: t.warning),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyOutsideTitle,
+                      style: text.titleSmall!.copyWith(color: t.textPrimary, height: 1.4),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: Space.s),
+              Text(
+                l.aiChatPrivacyOutsideBody,
+                style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.5),
+              ),
+              const SizedBox(height: Space.s),
+              // His second rule (2026-10-16): health, medication, food and
+              // family can never be in there at all. Enforced by
+              // `ChatSummaryScope` and `ChatContextFilter`, not by this card.
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.shield_outlined, size: 16, color: t.success),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyNeverOut,
+                      style: text.bodySmall!.copyWith(color: t.success, height: 1.5),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: Space.s),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.toggle_off_outlined, size: 16, color: t.textSecondary),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyOutsideSwitch,
+                      style: text.bodySmall!.copyWith(color: t.textSecondary, height: 1.5),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: Space.m),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 1),
+                    child: Icon(Icons.handyman_outlined, size: 16, color: t.accent),
+                  ),
+                  const SizedBox(width: Space.s),
+                  Expanded(
+                    child: Text(
+                      l.aiChatPrivacyOutsideFix,
+                      style: text.bodySmall!.copyWith(color: t.accent, height: 1.5),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The prayer home-screen widget (MadarWidgetKind.PRAYER): home screen only –
+     never the lock screen (widgetCategory), resizable, redrawn at least every
+     30 minutes from the snapshot the app wrote (its pages turn at
+     their own times through an alarm in between). -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_prayer_description"
+    android:initialLayout="@layout/widget_placeholder"
+    android:minWidth="110dp"
+    android:minHeight="110dp"
+    android:minResizeWidth="110dp"
+    android:minResizeHeight="100dp"
+    android:previewImage="@drawable/widget_astro_preview"
+    android:previewLayout="@layout/widget_preview_prayer"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="2"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />

@@ -1,0 +1,228 @@
+{
+  "familyTitle": {"ar": "العائلة والأحبّة", "en": "Family & friends", "description": "Title of the Family screen (people and contact rhythm)"},
+  "familyTodayTitle": {"ar": "صلة اليوم", "en": "Today's reach-outs", "description": "Title of the compact card on the Family planet"},
+  "familyOpenAll": {"ar": "عرض الكل", "en": "See all"},
+  "familyAddPerson": {"ar": "إضافة شخص", "en": "Add a person"},
+  "familyEmptyTitle": {"ar": "دائرتك القريبة تبدأ هنا", "en": "Your close circle starts here"},
+  "familyEmptyBody": {"ar": "أضف من تحبّ أن تبقى على صلة به، واختر كل كم يومًا تتواصل — مثلًا: «أمي، كل يومين».", "en": "Add the people you want to stay close to and how often to reach out — for example “Mum, every 2 days”."},
+  "familySortUrgency": {"ar": "حسب الأولوية", "en": "By urgency"},
+  "familySortManual": {"ar": "ترتيبي الخاص", "en": "My own order"},
+  "familySortLabel": {"ar": "طريقة الترتيب", "en": "Sort order"},
+  "familyRemindersTitle": {"ar": "تذكيرات الصلة", "en": "Reach-out reminders"},
+
+  "familyGroupOverdue": {"ar": "فات موعدهم", "en": "Overdue"},
+  "familyGroupDueToday": {"ar": "موعدهم اليوم", "en": "Due today"},
+  "familyGroupThisWeek": {"ar": "خلال هذا الأسبوع", "en": "This week"},
+  "familyGroupInTouch": {"ar": "على تواصل", "en": "In touch"},
+  "familyGroupNoRhythm": {"ar": "بلا موعد محدّد", "en": "No set rhythm"},
+
+  "familyHeroWaiting": {
+    "ar": "{count, plural, =0{لا أحد ينتظر} =1{شخص واحد ينتظر سؤالك} =2{شخصان ينتظران سؤالك} few{{count} أشخاص ينتظرون سؤالك} many{{count} شخصًا ينتظرون سؤالك} other{{count} شخص ينتظرون سؤالك}}",
+    "en": "{count, plural, =0{Nobody is waiting} =1{1 person is waiting to hear from you} other{{count} people are waiting to hear from you}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyHeroAllGood": {"ar": "الجميع على تواصل", "en": "Everyone's in touch"},
+  "familyHeroBlessing": {"ar": "بارك الله في وصلك", "en": "May your ties stay blessed"},
+  "familyHeroInTouch": {
+    "ar": "{inTouch} من {total} على تواصل",
+    "en": "{inTouch} of {total} in touch",
+    "placeholders": {"inTouch": {"type": "String"}, "total": {"type": "String"}}
+  },
+  "familyHeroNoRhythm": {"ar": "حدّد كل كم تتواصل مع كل شخص لتظهر هنا مواعيدهم", "en": "Set how often to reach out to each person to see who's due"},
+
+  "familyStatusOverdue": {
+    "ar": "{count, plural, =1{فات الموعد بيوم} =2{فات الموعد بيومين} few{فات الموعد بـ{count} أيام} many{فات الموعد بـ{count} يومًا} other{فات الموعد بـ{count} يوم}}",
+    "en": "{count, plural, =1{1 day overdue} other{{count} days overdue}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyStatusDueToday": {"ar": "موعد السؤال اليوم", "en": "Due today"},
+  "familyStatusDueIn": {
+    "ar": "{count, plural, =1{الموعد غدًا} =2{الموعد بعد يومين} few{الموعد بعد {count} أيام} many{الموعد بعد {count} يومًا} other{الموعد بعد {count} يوم}}",
+    "en": "{count, plural, =1{Due tomorrow} other{Due in {count} days}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyStatusNoRhythm": {"ar": "بلا موعد", "en": "No rhythm"},
+
+  "familyLastNever": {"ar": "لم يُسجَّل تواصل بعد", "en": "No contact logged yet"},
+  "familyLastDaysAgo": {
+    "ar": "{count, plural, =0{آخر تواصل اليوم} =1{آخر تواصل أمس} =2{آخر تواصل قبل يومين} few{آخر تواصل قبل {count} أيام} many{آخر تواصل قبل {count} يومًا} other{آخر تواصل قبل {count} يوم}}",
+    "en": "{count, plural, =0{Last contact today} =1{Last contact yesterday} other{Last contact {count} days ago}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyInDays": {
+    "ar": "{count, plural, =0{اليوم} =1{غدًا} =2{بعد يومين} few{بعد {count} أيام} many{بعد {count} يومًا} other{بعد {count} يوم}}",
+    "en": "{count, plural, =0{today} =1{tomorrow} other{in {count} days}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyDaysAgo": {
+    "ar": "{count, plural, =0{اليوم} =1{أمس} =2{قبل يومين} few{قبل {count} أيام} many{قبل {count} يومًا} other{قبل {count} يوم}}",
+    "en": "{count, plural, =0{today} =1{yesterday} other{{count} days ago}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyDaysCount": {
+    "ar": "{count, plural, =0{{count} يوم} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =1{1 day} other{{count} days}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+
+  "familyRhythmEvery": {
+    "ar": "{count, plural, =1{يوميًا} =2{كل يومين} few{كل {count} أيام} many{كل {count} يومًا} other{كل {count} يوم}}",
+    "en": "{count, plural, =1{Daily} other{Every {count} days}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyRhythmWeekly": {"ar": "أسبوعيًا", "en": "Weekly"},
+  "familyRhythmBiweekly": {"ar": "كل أسبوعين", "en": "Every 2 weeks"},
+  "familyRhythmMonthly": {"ar": "شهريًا", "en": "Monthly"},
+  "familyRhythmNone": {"ar": "بلا إيقاع", "en": "No rhythm"},
+  "familyRhythmCustom": {"ar": "عدد آخر", "en": "Custom"},
+  "familyRhythmCustomLabel": {"ar": "كل كم يومًا؟", "en": "Every how many days?"},
+  "familyUnitDays": {"ar": "يوم", "en": "days"},
+
+  "familyChannelCall": {"ar": "مكالمة", "en": "Call"},
+  "familyChannelVisit": {"ar": "زيارة", "en": "Visit"},
+  "familyChannelMessage": {"ar": "رسالة", "en": "Message"},
+  "familyChannelOther": {"ar": "أخرى", "en": "Other"},
+
+  "familyContacted": {"ar": "تواصلت", "en": "Contacted"},
+  "familyContactedDetails": {"ar": "تواصلت… مع التفاصيل", "en": "Contacted… with details"},
+  "familyCall": {"ar": "اتصال", "en": "Call"},
+  "familySms": {"ar": "رسالة نصية", "en": "Text message"},
+  "familyWhatsApp": {"ar": "واتساب", "en": "WhatsApp"},
+  "familyLaunchFailed": {"ar": "تعذّر فتح التطبيق على هذا الجهاز", "en": "Couldn't open the app on this device"},
+  "familyMoonShow": {"ar": "أظهِر في المدار", "en": "Show in the orbit"},
+  "familyMoonHide": {"ar": "أخفِ من المدار", "en": "Hide from the orbit"},
+  "familyOpenProfile": {"ar": "فتح الملف", "en": "Open profile"},
+  "familyEdit": {"ar": "تعديل", "en": "Edit"},
+  "familyDelete": {"ar": "حذف", "en": "Delete"},
+
+  "familyContactedToast": {
+    "ar": "سُجِّل تواصلك مع {name}",
+    "en": "Logged: you reached out to {name}",
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "familyDeletedToast": {"ar": "حُذف {name}", "en": "{name} deleted", "placeholders": {"name": {"type": "String"}}},
+  "familySavedToast": {"ar": "حُفظ {name}", "en": "{name} saved", "placeholders": {"name": {"type": "String"}}},
+  "familyContactDeletedToast": {"ar": "حُذف التواصل من السجل", "en": "Contact removed from the history"},
+  "familyContactUpdatedToast": {"ar": "عُدِّل التواصل", "en": "Contact updated"},
+  "familyMoonShownToast": {"ar": "أُضيف {name} إلى المدار", "en": "{name} now orbits the Family planet", "placeholders": {"name": {"type": "String"}}},
+  "familyMoonHiddenToast": {"ar": "أُخفي {name} من المدار", "en": "{name} hidden from the orbit", "placeholders": {"name": {"type": "String"}}},
+
+  "familyNewPerson": {"ar": "شخص جديد", "en": "New person"},
+  "familyNewPersonSubtitle": {"ar": "من تحبّ أن تبقى قريبًا منه", "en": "Someone you want to stay close to"},
+  "familyEditTitle": {"ar": "تعديل {name}", "en": "Edit {name}", "placeholders": {"name": {"type": "String"}}},
+  "familyFieldName": {"ar": "الاسم", "en": "Name"},
+  "familyFieldNameHint": {"ar": "مثلًا: أمي، أحمد", "en": "e.g. Mum, Alex"},
+  "familyFieldNameRequired": {"ar": "اكتب الاسم", "en": "Enter a name"},
+  "familyFieldRelation": {"ar": "صلة القرابة", "en": "Relation"},
+  "familyFieldRelationHint": {"ar": "اختر أو اكتب", "en": "Pick or type"},
+  "familyFieldRhythm": {"ar": "كل كم تتواصل؟", "en": "How often to reach out?"},
+  "familyFieldLastContact": {"ar": "آخر تواصل", "en": "Last contact"},
+  "familyFieldPhone": {"ar": "رقم الهاتف", "en": "Phone number"},
+  "familyFieldPhoneHint": {"ar": "مع رمز الدولة ليعمل واتساب", "en": "With the country code, for WhatsApp"},
+  "familyFieldBirthday": {"ar": "تاريخ الميلاد", "en": "Birthday"},
+  "familyBirthdayYearUnknown": {"ar": "السنة غير معروفة", "en": "Year unknown"},
+  "familyBirthdayNone": {"ar": "بلا تاريخ", "en": "None"},
+  "familyFieldNotes": {"ar": "ملاحظات", "en": "Notes"},
+  "familyFieldNotesHint": {"ar": "اهتمامات، مناسبات، أفكار هدايا…", "en": "Interests, occasions, gift ideas…"},
+  "familyFieldColor": {"ar": "اللون", "en": "Colour"},
+  "familyFieldMoon": {"ar": "قمر في المدار", "en": "Moon in the orbit"},
+  "familyFieldMoonHint": {"ar": "يظهر قمرًا حول كوكب العائلة في الرئيسية", "en": "Shown as a moon around the Family planet on home"},
+  "familyMoreDetails": {"ar": "تفاصيل أكثر", "en": "More details"},
+  "familyFewerDetails": {"ar": "تفاصيل أقل", "en": "Fewer details"},
+  "familySave": {"ar": "حفظ", "en": "Save"},
+
+  "familyWhenNow": {"ar": "الآن", "en": "Now"},
+  "familyWhenToday": {"ar": "اليوم", "en": "Today"},
+  "familyWhenEarlierToday": {"ar": "في وقت سابق اليوم", "en": "Earlier today"},
+  "familyWhenYesterday": {"ar": "أمس", "en": "Yesterday"},
+  "familyWhenWeekAgo": {"ar": "قبل أسبوع", "en": "A week ago"},
+  "familyWhenUnknown": {"ar": "لا أذكر", "en": "Not sure"},
+  "familyWhenPick": {"ar": "تاريخ آخر", "en": "Another date"},
+
+  "familyContactedTitle": {"ar": "تواصلت مع {name}", "en": "You reached out to {name}", "placeholders": {"name": {"type": "String"}}},
+  "familyContactedSubtitle": {"ar": "سجّل كيف ومتى — ولو بكلمة", "en": "Log how and when — a word is enough"},
+  "familyEditContactTitle": {"ar": "تعديل التواصل", "en": "Edit contact"},
+  "familyFieldChannel": {"ar": "الطريقة", "en": "How"},
+  "familyFieldWhen": {"ar": "متى", "en": "When"},
+  "familyFieldNote": {"ar": "ملاحظة", "en": "Note"},
+  "familyFieldNoteHint": {"ar": "عمّ تحدّثتما؟", "en": "What did you talk about?"},
+  "familyFutureError": {"ar": "لا يمكن تسجيل تواصل في المستقبل", "en": "A contact can't be in the future"},
+  "familyLog": {"ar": "سجّل", "en": "Log it"},
+
+  "familyRhythmCardTitle": {"ar": "إيقاع الصلة", "en": "Rhythm"},
+  "familyStatAverage": {"ar": "متوسط الفاصل", "en": "Average gap"},
+  "familyStatOnRhythm": {"ar": "في الموعد", "en": "On rhythm"},
+  "familyStatLongestGap": {"ar": "أطول انقطاع", "en": "Longest gap"},
+  "familyStatRecent": {"ar": "آخر ٩٠ يومًا", "en": "Last 90 days"},
+  "familyStatTimes": {
+    "ar": "{count, plural, =0{لا مرّات} =1{مرّة واحدة} =2{مرّتان} few{{count} مرّات} many{{count} مرّة} other{{count} مرّة}}",
+    "en": "{count, plural, =0{none} =1{once} other{{count} times}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyVsRhythm": {"ar": "الإيقاع: {rhythm}", "en": "Rhythm: {rhythm}", "placeholders": {"rhythm": {"type": "String"}}},
+  "familyChartCaption": {"ar": "الفواصل بين آخر مرّات التواصل", "en": "Gaps between recent contacts"},
+  "familyStatsEmpty": {"ar": "بعد مرّتين أو ثلاث من التواصل تظهر هنا إحصاءاتك", "en": "After two or three contacts your stats appear here"},
+  "familyHistoryTitle": {"ar": "سجل التواصل", "en": "Contact history"},
+  "familyHistoryEmpty": {"ar": "لا تواصل مسجّل بعد. اضغط «تواصلت» بعد كل مكالمة أو زيارة.", "en": "Nothing logged yet. Tap “Contacted” after each call or visit."},
+  "familyNotesTitle": {"ar": "ملاحظات", "en": "Notes"},
+  "familyNotesAdd": {"ar": "أضف ملاحظة", "en": "Add a note"},
+  "familyBirthdayTitle": {"ar": "ذكرى الميلاد", "en": "Birthday"},
+  "familyBirthdayTodayBadge": {"ar": "اليوم!", "en": "Today!"},
+  "familyAgeTurning": {
+    "ar": "{count, plural, =1{عام واحد} =2{عامان} few{{count} أعوام} many{{count} عامًا} other{{count} عام}}",
+    "en": "{count, plural, =1{Turns 1} other{Turns {count}}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyBirthdayUpcoming": {
+    "ar": "ذكرى ميلاد {name} {when}",
+    "en": "{name}'s birthday {when}",
+    "placeholders": {"name": {"type": "String"}, "when": {"type": "String"}}
+  },
+  "familyCardMore": {"ar": "و{count} غيرهم", "en": "+{count} more", "placeholders": {"count": {"type": "String"}}},
+  "familyCardEmpty": {"ar": "أضف أحبّتك لتبقى على صلة بهم", "en": "Add your loved ones to stay in touch"},
+
+  "familyDigestTitle": {"ar": "ملخّص يومي لطيف", "en": "Gentle daily digest"},
+  "familyDigestHint": {"ar": "إشعار واحد في اليوم بمن حان موعد السؤال عنهم — لا إشعار لكل شخص", "en": "One notification a day listing who's due — never one per person"},
+  "familyDigestTime": {"ar": "وقت الملخّص", "en": "Digest time"},
+  "familyBirthdayReminders": {"ar": "تذكير بذكرى الميلاد", "en": "Birthday reminders"},
+  "familyBirthdayRemindersHint": {"ar": "قبلها بيوم وفي يومها", "en": "The day before and on the day"},
+  "familyBirthdayTime": {"ar": "وقت تذكير الميلاد", "en": "Birthday reminder time"},
+
+  "familyNotifyGroup": {"ar": "العائلة والأحبّة", "en": "Family & friends"},
+  "familyNotifyChannel": {"ar": "تذكيرات الصلة", "en": "Reach-out reminders"},
+  "familyNotifyChannelDescription": {"ar": "ملخّص الصلة اليومي وتذكيرات ذكرى الميلاد", "en": "The daily reach-out digest and birthday reminders"},
+  "familyDigestNotifyTitle": {
+    "ar": "{count, plural, =1{شخص واحد ينتظر سؤالك اليوم} =2{شخصان ينتظران سؤالك اليوم} few{{count} أشخاص ينتظرون سؤالك اليوم} many{{count} شخصًا ينتظرون سؤالك اليوم} other{{count} شخص ينتظرون سؤالك اليوم}}",
+    "en": "{count, plural, =1{1 person to reach out to today} other{{count} people to reach out to today}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "familyDigestNotifyBody": {"ar": "{names} — مكالمة قصيرة تكفي.", "en": "{names} — a short call is enough.", "placeholders": {"names": {"type": "String"}}},
+  "familyBirthdayEveTitle": {"ar": "غدًا ذكرى ميلاد {name}", "en": "{name}'s birthday is tomorrow", "placeholders": {"name": {"type": "String"}}},
+  "familyBirthdayEveBody": {"ar": "جهّز كلمة طيبة أو هدية صغيرة.", "en": "Get a kind word or a small gift ready."},
+  "familyBirthdayDayTitle": {"ar": "اليوم ذكرى ميلاد {name}", "en": "It's {name}'s birthday today", "placeholders": {"name": {"type": "String"}}},
+  "familyBirthdayDayBody": {"ar": "بادِر بالتهنئة.", "en": "Send your wishes."},
+  "familyListSep": {"ar": "، ", "en": ", ", "description": "Separator between names in a list"},
+  "familyDot": {"ar": " · ", "en": " · ", "description": "Separator between facts on one line"},
+
+  "familyRelFather": {"ar": "أبي", "en": "Father"},
+  "familyRelMother": {"ar": "أمي", "en": "Mother"},
+  "familyRelWife": {"ar": "زوجتي", "en": "Wife"},
+  "familyRelHusband": {"ar": "زوجي", "en": "Husband"},
+  "familyRelSon": {"ar": "ابني", "en": "Son"},
+  "familyRelDaughter": {"ar": "ابنتي", "en": "Daughter"},
+  "familyRelBrother": {"ar": "أخي", "en": "Brother"},
+  "familyRelSister": {"ar": "أختي", "en": "Sister"},
+  "familyRelGrandfather": {"ar": "جدّي", "en": "Grandfather"},
+  "familyRelGrandmother": {"ar": "جدّتي", "en": "Grandmother"},
+  "familyRelUncle": {"ar": "عمّي", "en": "Uncle (father's side)"},
+  "familyRelMaternalUncle": {"ar": "خالي", "en": "Uncle (mother's side)"},
+  "familyRelAunt": {"ar": "عمّتي", "en": "Aunt (father's side)"},
+  "familyRelMaternalAunt": {"ar": "خالتي", "en": "Aunt (mother's side)"},
+  "familyRelInLaw": {"ar": "نسيبي", "en": "In-law"},
+  "familyRelRelative": {"ar": "قريبي", "en": "Relative"},
+  "familyRelFriend": {"ar": "صديقي", "en": "Friend"},
+  "familyRelColleague": {"ar": "زميلي", "en": "Colleague"},
+  "familyRelPartner": {"ar": "شريكي", "en": "Business partner"},
+  "familyRelNeighbour": {"ar": "جاري", "en": "Neighbour"},
+  "familyRelTeacher": {"ar": "معلّمي", "en": "Teacher"}
+}
