@@ -119,6 +119,39 @@ one APK each). This file keeps only the live state and the raw owner feedback.
   content; his approval of the kids design; his approval of a visual reference for «السما».
 - **Nothing new starts before Part 7 ships** - the working rule stands.
 
+## Night of 2026-10-15 → 16 (he was asleep; one agent at a time)
+
+Shipped, in his approved order, each its own commit:
+- **Part 7 الشات اليومي** - engine + screen, reachable from the home panel's bar. APK **#32**.
+- **AI chat off by default** (he asked twice; the second time won): its own stored setting, off
+  on a fresh install, enforced at the transport **and** in the controller, with every way in
+  saying so. Proved zero requests in the real app with a key in the vault. The summary's
+  sections are untouched - he said the content itself was not his worry.
+- **Part 9 «الإقامة»** - adhan + his own offset per prayer, Friday its own, «صلّيت» logging from
+  the shade with the app dead (one row, never two), one «بعد شوي», id block 180000-180999.
+  APK **#33**.
+- **Part 13 «التسميع» step 1** - the checking engine against a **stub recogniser** (no model may
+  be downloaded: his disk was full). Schema v7. No type in the package can hold audio.
+- **Part 14 «الحفظ» step 1 + step 2** - the methods, the daily plan with its backlog cap, the
+  strength that is recomputed and never stored, goals on prayer windows (ids 190000-190999),
+  schema v8; then the screens, with the six typed methods working tonight and «سمّع بصوتك»
+  listed-but-dark until the model lands. Typed «شازام القرآن» works.
+
+**Disk**: started the night at **2.4 GB free**, under his 10 GB line. Deleted
+`madar/screenshots/**` (5.6 GB of gitignored review PNGs, regenerable) and stale
+`/tmp/flutter_tools.*` → **~8.7 GB**. No screenshot test was run after that, so no PNG exists
+for anything built tonight - the next visual pass must regenerate them.
+
+### «للصبح» - what waits for him
+1. **A recitation model for «التسميع»**: an open model trained on Quranic recitation, licence
+   checked, and the disk space to hold it. The engine is finished and the interface it must
+   satisfy is written at the top of `lib/features/tasmee/domain/recogniser.dart`. Until then
+   «سمّع بصوتك» is the one dark mode; everything else in Hifz works typed.
+2. **The three approvals already on the list**: a reviewer he names for «مدار الصغار»'s
+   religious content, the kids design, and a visual reference for «السما». None was started.
+3. **Not visually reviewed**: everything built tonight has no screenshot pass.
+4. **Planet size** stays 13% smaller unless he says otherwise (his instruction).
+
 ## How work is organised
 - Working rule (standing): one part at a time → verify → APK → report in plain Arabic with
   an example → next part. Full rule in `/CLAUDE.md`.
