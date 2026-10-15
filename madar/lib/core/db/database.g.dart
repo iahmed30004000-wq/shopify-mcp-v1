@@ -30139,6 +30139,56 @@ class $ExercisesTable extends Exercises
     ),
     defaultValue: const Constant(true),
   );
+  static const VerificationMeta _photoMeta = const VerificationMeta('photo');
+  @override
+  late final GeneratedColumn<String> photo = GeneratedColumn<String>(
+    'photo',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _videoMeta = const VerificationMeta('video');
+  @override
+  late final GeneratedColumn<String> video = GeneratedColumn<String>(
+    'video',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> muscles =
+      GeneratedColumn<String>(
+        'muscles',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($ExercisesTable.$convertermuscles);
+  static const VerificationMeta _restSecMeta = const VerificationMeta(
+    'restSec',
+  );
+  @override
+  late final GeneratedColumn<int> restSec = GeneratedColumn<int>(
+    'rest_sec',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _warmupSetsMeta = const VerificationMeta(
+    'warmupSets',
+  );
+  @override
+  late final GeneratedColumn<int> warmupSets = GeneratedColumn<int>(
+    'warmup_sets',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -30153,6 +30203,11 @@ class $ExercisesTable extends Exercises
     weight,
     notes,
     active,
+    photo,
+    video,
+    muscles,
+    restSec,
+    warmupSets,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -30234,6 +30289,30 @@ class $ExercisesTable extends Exercises
         active.isAcceptableOrUnknown(data['active']!, _activeMeta),
       );
     }
+    if (data.containsKey('photo')) {
+      context.handle(
+        _photoMeta,
+        photo.isAcceptableOrUnknown(data['photo']!, _photoMeta),
+      );
+    }
+    if (data.containsKey('video')) {
+      context.handle(
+        _videoMeta,
+        video.isAcceptableOrUnknown(data['video']!, _videoMeta),
+      );
+    }
+    if (data.containsKey('rest_sec')) {
+      context.handle(
+        _restSecMeta,
+        restSec.isAcceptableOrUnknown(data['rest_sec']!, _restSecMeta),
+      );
+    }
+    if (data.containsKey('warmup_sets')) {
+      context.handle(
+        _warmupSetsMeta,
+        warmupSets.isAcceptableOrUnknown(data['warmup_sets']!, _warmupSetsMeta),
+      );
+    }
     return context;
   }
 
@@ -30293,6 +30372,28 @@ class $ExercisesTable extends Exercises
         DriftSqlType.bool,
         data['${effectivePrefix}active'],
       )!,
+      photo: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}photo'],
+      ),
+      video: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}video'],
+      ),
+      muscles: $ExercisesTable.$convertermuscles.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}muscles'],
+        )!,
+      ),
+      restSec: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rest_sec'],
+      ),
+      warmupSets: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}warmup_sets'],
+      ),
     );
   }
 
@@ -30303,6 +30404,8 @@ class $ExercisesTable extends Exercises
 
   static TypeConverter<List<int>, String> $converterweekdays =
       const IntListConverter();
+  static TypeConverter<List<String>, String> $convertermuscles =
+      const StringListConverter();
 }
 
 class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
@@ -30320,6 +30423,28 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
   final double? weight;
   final String? notes;
   final bool active;
+
+  /// The machine's picture: a **file name** in Madar's own folder
+  /// (`gym_photos/a1b2c3.jpg`), never a path into the gallery – the picked
+  /// image is copied in, so deleting the original changes nothing. See
+  /// `features/body/data/gym_media.dart`.
+  final String? photo;
+
+  /// The movement's video: his own file path on the phone, or a link. It is
+  /// **not** copied (a clip is tens or hundreds of megabytes); Madar only
+  /// remembers where it is.
+  final String? video;
+
+  /// The muscles he says it works, in his own words (`["صدر","كتف"]`).
+  /// Nothing of ours is written here: a fresh install has no library.
+  final List<String> muscles;
+
+  /// Rest between sets, in seconds (null: no timer offered).
+  final int? restSec;
+
+  /// How many of the sets are warm-ups (they are logged, and left out of
+  /// the heaviest-set and volume arithmetic).
+  final int? warmupSets;
   const ExerciseRow({
     required this.id,
     required this.createdAt,
@@ -30333,6 +30458,11 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
     this.weight,
     this.notes,
     required this.active,
+    this.photo,
+    this.video,
+    required this.muscles,
+    this.restSec,
+    this.warmupSets,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -30363,6 +30493,23 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
       map['notes'] = Variable<String>(notes);
     }
     map['active'] = Variable<bool>(active);
+    if (!nullToAbsent || photo != null) {
+      map['photo'] = Variable<String>(photo);
+    }
+    if (!nullToAbsent || video != null) {
+      map['video'] = Variable<String>(video);
+    }
+    {
+      map['muscles'] = Variable<String>(
+        $ExercisesTable.$convertermuscles.toSql(muscles),
+      );
+    }
+    if (!nullToAbsent || restSec != null) {
+      map['rest_sec'] = Variable<int>(restSec);
+    }
+    if (!nullToAbsent || warmupSets != null) {
+      map['warmup_sets'] = Variable<int>(warmupSets);
+    }
     return map;
   }
 
@@ -30386,6 +30533,19 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
           ? const Value.absent()
           : Value(notes),
       active: Value(active),
+      photo: photo == null && nullToAbsent
+          ? const Value.absent()
+          : Value(photo),
+      video: video == null && nullToAbsent
+          ? const Value.absent()
+          : Value(video),
+      muscles: Value(muscles),
+      restSec: restSec == null && nullToAbsent
+          ? const Value.absent()
+          : Value(restSec),
+      warmupSets: warmupSets == null && nullToAbsent
+          ? const Value.absent()
+          : Value(warmupSets),
     );
   }
 
@@ -30407,6 +30567,11 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
       weight: serializer.fromJson<double?>(json['weight']),
       notes: serializer.fromJson<String?>(json['notes']),
       active: serializer.fromJson<bool>(json['active']),
+      photo: serializer.fromJson<String?>(json['photo']),
+      video: serializer.fromJson<String?>(json['video']),
+      muscles: serializer.fromJson<List<String>>(json['muscles']),
+      restSec: serializer.fromJson<int?>(json['restSec']),
+      warmupSets: serializer.fromJson<int?>(json['warmupSets']),
     );
   }
   @override
@@ -30425,6 +30590,11 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
       'weight': serializer.toJson<double?>(weight),
       'notes': serializer.toJson<String?>(notes),
       'active': serializer.toJson<bool>(active),
+      'photo': serializer.toJson<String?>(photo),
+      'video': serializer.toJson<String?>(video),
+      'muscles': serializer.toJson<List<String>>(muscles),
+      'restSec': serializer.toJson<int?>(restSec),
+      'warmupSets': serializer.toJson<int?>(warmupSets),
     };
   }
 
@@ -30441,6 +30611,11 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
     Value<double?> weight = const Value.absent(),
     Value<String?> notes = const Value.absent(),
     bool? active,
+    Value<String?> photo = const Value.absent(),
+    Value<String?> video = const Value.absent(),
+    List<String>? muscles,
+    Value<int?> restSec = const Value.absent(),
+    Value<int?> warmupSets = const Value.absent(),
   }) => ExerciseRow(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -30454,6 +30629,11 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
     weight: weight.present ? weight.value : this.weight,
     notes: notes.present ? notes.value : this.notes,
     active: active ?? this.active,
+    photo: photo.present ? photo.value : this.photo,
+    video: video.present ? video.value : this.video,
+    muscles: muscles ?? this.muscles,
+    restSec: restSec.present ? restSec.value : this.restSec,
+    warmupSets: warmupSets.present ? warmupSets.value : this.warmupSets,
   );
   ExerciseRow copyWithCompanion(ExercisesCompanion data) {
     return ExerciseRow(
@@ -30471,6 +30651,13 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
       weight: data.weight.present ? data.weight.value : this.weight,
       notes: data.notes.present ? data.notes.value : this.notes,
       active: data.active.present ? data.active.value : this.active,
+      photo: data.photo.present ? data.photo.value : this.photo,
+      video: data.video.present ? data.video.value : this.video,
+      muscles: data.muscles.present ? data.muscles.value : this.muscles,
+      restSec: data.restSec.present ? data.restSec.value : this.restSec,
+      warmupSets: data.warmupSets.present
+          ? data.warmupSets.value
+          : this.warmupSets,
     );
   }
 
@@ -30488,7 +30675,12 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
           ..write('durationMin: $durationMin, ')
           ..write('weight: $weight, ')
           ..write('notes: $notes, ')
-          ..write('active: $active')
+          ..write('active: $active, ')
+          ..write('photo: $photo, ')
+          ..write('video: $video, ')
+          ..write('muscles: $muscles, ')
+          ..write('restSec: $restSec, ')
+          ..write('warmupSets: $warmupSets')
           ..write(')'))
         .toString();
   }
@@ -30507,6 +30699,11 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
     weight,
     notes,
     active,
+    photo,
+    video,
+    muscles,
+    restSec,
+    warmupSets,
   );
   @override
   bool operator ==(Object other) =>
@@ -30523,7 +30720,12 @@ class ExerciseRow extends DataClass implements Insertable<ExerciseRow> {
           other.durationMin == this.durationMin &&
           other.weight == this.weight &&
           other.notes == this.notes &&
-          other.active == this.active);
+          other.active == this.active &&
+          other.photo == this.photo &&
+          other.video == this.video &&
+          other.muscles == this.muscles &&
+          other.restSec == this.restSec &&
+          other.warmupSets == this.warmupSets);
 }
 
 class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
@@ -30539,6 +30741,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
   final Value<double?> weight;
   final Value<String?> notes;
   final Value<bool> active;
+  final Value<String?> photo;
+  final Value<String?> video;
+  final Value<List<String>> muscles;
+  final Value<int?> restSec;
+  final Value<int?> warmupSets;
   final Value<int> rowid;
   const ExercisesCompanion({
     this.id = const Value.absent(),
@@ -30553,6 +30760,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
     this.weight = const Value.absent(),
     this.notes = const Value.absent(),
     this.active = const Value.absent(),
+    this.photo = const Value.absent(),
+    this.video = const Value.absent(),
+    this.muscles = const Value.absent(),
+    this.restSec = const Value.absent(),
+    this.warmupSets = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ExercisesCompanion.insert({
@@ -30568,6 +30780,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
     this.weight = const Value.absent(),
     this.notes = const Value.absent(),
     this.active = const Value.absent(),
+    this.photo = const Value.absent(),
+    this.video = const Value.absent(),
+    this.muscles = const Value.absent(),
+    this.restSec = const Value.absent(),
+    this.warmupSets = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : name = Value(name);
   static Insertable<ExerciseRow> custom({
@@ -30583,6 +30800,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
     Expression<double>? weight,
     Expression<String>? notes,
     Expression<bool>? active,
+    Expression<String>? photo,
+    Expression<String>? video,
+    Expression<String>? muscles,
+    Expression<int>? restSec,
+    Expression<int>? warmupSets,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -30598,6 +30820,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
       if (weight != null) 'weight': weight,
       if (notes != null) 'notes': notes,
       if (active != null) 'active': active,
+      if (photo != null) 'photo': photo,
+      if (video != null) 'video': video,
+      if (muscles != null) 'muscles': muscles,
+      if (restSec != null) 'rest_sec': restSec,
+      if (warmupSets != null) 'warmup_sets': warmupSets,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -30615,6 +30842,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
     Value<double?>? weight,
     Value<String?>? notes,
     Value<bool>? active,
+    Value<String?>? photo,
+    Value<String?>? video,
+    Value<List<String>>? muscles,
+    Value<int?>? restSec,
+    Value<int?>? warmupSets,
     Value<int>? rowid,
   }) {
     return ExercisesCompanion(
@@ -30630,6 +30862,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
       weight: weight ?? this.weight,
       notes: notes ?? this.notes,
       active: active ?? this.active,
+      photo: photo ?? this.photo,
+      video: video ?? this.video,
+      muscles: muscles ?? this.muscles,
+      restSec: restSec ?? this.restSec,
+      warmupSets: warmupSets ?? this.warmupSets,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -30675,6 +30912,23 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
     if (active.present) {
       map['active'] = Variable<bool>(active.value);
     }
+    if (photo.present) {
+      map['photo'] = Variable<String>(photo.value);
+    }
+    if (video.present) {
+      map['video'] = Variable<String>(video.value);
+    }
+    if (muscles.present) {
+      map['muscles'] = Variable<String>(
+        $ExercisesTable.$convertermuscles.toSql(muscles.value),
+      );
+    }
+    if (restSec.present) {
+      map['rest_sec'] = Variable<int>(restSec.value);
+    }
+    if (warmupSets.present) {
+      map['warmup_sets'] = Variable<int>(warmupSets.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -30696,6 +30950,11 @@ class ExercisesCompanion extends UpdateCompanion<ExerciseRow> {
           ..write('weight: $weight, ')
           ..write('notes: $notes, ')
           ..write('active: $active, ')
+          ..write('photo: $photo, ')
+          ..write('video: $video, ')
+          ..write('muscles: $muscles, ')
+          ..write('restSec: $restSec, ')
+          ..write('warmupSets: $warmupSets, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -31340,6 +31599,1661 @@ class WorkoutLogsCompanion extends UpdateCompanion<WorkoutLogRow> {
           ..write('weight: $weight, ')
           ..write('durationMin: $durationMin, ')
           ..write('notes: $notes, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $WorkoutSetsTable extends WorkoutSets
+    with TableInfo<$WorkoutSetsTable, WorkoutSetRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $WorkoutSetsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _logIdMeta = const VerificationMeta('logId');
+  @override
+  late final GeneratedColumn<String> logId = GeneratedColumn<String>(
+    'log_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _repsMeta = const VerificationMeta('reps');
+  @override
+  late final GeneratedColumn<int> reps = GeneratedColumn<int>(
+    'reps',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _weightMeta = const VerificationMeta('weight');
+  @override
+  late final GeneratedColumn<double> weight = GeneratedColumn<double>(
+    'weight',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _warmupMeta = const VerificationMeta('warmup');
+  @override
+  late final GeneratedColumn<bool> warmup = GeneratedColumn<bool>(
+    'warmup',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("warmup" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    logId,
+    reps,
+    weight,
+    warmup,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'workout_sets';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<WorkoutSetRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('log_id')) {
+      context.handle(
+        _logIdMeta,
+        logId.isAcceptableOrUnknown(data['log_id']!, _logIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_logIdMeta);
+    }
+    if (data.containsKey('reps')) {
+      context.handle(
+        _repsMeta,
+        reps.isAcceptableOrUnknown(data['reps']!, _repsMeta),
+      );
+    }
+    if (data.containsKey('weight')) {
+      context.handle(
+        _weightMeta,
+        weight.isAcceptableOrUnknown(data['weight']!, _weightMeta),
+      );
+    }
+    if (data.containsKey('warmup')) {
+      context.handle(
+        _warmupMeta,
+        warmup.isAcceptableOrUnknown(data['warmup']!, _warmupMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  WorkoutSetRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return WorkoutSetRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      logId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}log_id'],
+      )!,
+      reps: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}reps'],
+      ),
+      weight: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}weight'],
+      ),
+      warmup: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}warmup'],
+      )!,
+    );
+  }
+
+  @override
+  $WorkoutSetsTable createAlias(String alias) {
+    return $WorkoutSetsTable(attachedDatabase, alias);
+  }
+}
+
+class WorkoutSetRow extends DataClass implements Insertable<WorkoutSetRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final String logId;
+  final int? reps;
+  final double? weight;
+
+  /// A warm-up set: it counts as done, never as a personal best and never
+  /// in the volume.
+  final bool warmup;
+  const WorkoutSetRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.logId,
+    this.reps,
+    this.weight,
+    required this.warmup,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['log_id'] = Variable<String>(logId);
+    if (!nullToAbsent || reps != null) {
+      map['reps'] = Variable<int>(reps);
+    }
+    if (!nullToAbsent || weight != null) {
+      map['weight'] = Variable<double>(weight);
+    }
+    map['warmup'] = Variable<bool>(warmup);
+    return map;
+  }
+
+  WorkoutSetsCompanion toCompanion(bool nullToAbsent) {
+    return WorkoutSetsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      logId: Value(logId),
+      reps: reps == null && nullToAbsent ? const Value.absent() : Value(reps),
+      weight: weight == null && nullToAbsent
+          ? const Value.absent()
+          : Value(weight),
+      warmup: Value(warmup),
+    );
+  }
+
+  factory WorkoutSetRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return WorkoutSetRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      logId: serializer.fromJson<String>(json['logId']),
+      reps: serializer.fromJson<int?>(json['reps']),
+      weight: serializer.fromJson<double?>(json['weight']),
+      warmup: serializer.fromJson<bool>(json['warmup']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'logId': serializer.toJson<String>(logId),
+      'reps': serializer.toJson<int?>(reps),
+      'weight': serializer.toJson<double?>(weight),
+      'warmup': serializer.toJson<bool>(warmup),
+    };
+  }
+
+  WorkoutSetRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? logId,
+    Value<int?> reps = const Value.absent(),
+    Value<double?> weight = const Value.absent(),
+    bool? warmup,
+  }) => WorkoutSetRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    logId: logId ?? this.logId,
+    reps: reps.present ? reps.value : this.reps,
+    weight: weight.present ? weight.value : this.weight,
+    warmup: warmup ?? this.warmup,
+  );
+  WorkoutSetRow copyWithCompanion(WorkoutSetsCompanion data) {
+    return WorkoutSetRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      logId: data.logId.present ? data.logId.value : this.logId,
+      reps: data.reps.present ? data.reps.value : this.reps,
+      weight: data.weight.present ? data.weight.value : this.weight,
+      warmup: data.warmup.present ? data.warmup.value : this.warmup,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WorkoutSetRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('logId: $logId, ')
+          ..write('reps: $reps, ')
+          ..write('weight: $weight, ')
+          ..write('warmup: $warmup')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    logId,
+    reps,
+    weight,
+    warmup,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is WorkoutSetRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.logId == this.logId &&
+          other.reps == this.reps &&
+          other.weight == this.weight &&
+          other.warmup == this.warmup);
+}
+
+class WorkoutSetsCompanion extends UpdateCompanion<WorkoutSetRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> logId;
+  final Value<int?> reps;
+  final Value<double?> weight;
+  final Value<bool> warmup;
+  final Value<int> rowid;
+  const WorkoutSetsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.logId = const Value.absent(),
+    this.reps = const Value.absent(),
+    this.weight = const Value.absent(),
+    this.warmup = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  WorkoutSetsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String logId,
+    this.reps = const Value.absent(),
+    this.weight = const Value.absent(),
+    this.warmup = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : logId = Value(logId);
+  static Insertable<WorkoutSetRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? logId,
+    Expression<int>? reps,
+    Expression<double>? weight,
+    Expression<bool>? warmup,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (logId != null) 'log_id': logId,
+      if (reps != null) 'reps': reps,
+      if (weight != null) 'weight': weight,
+      if (warmup != null) 'warmup': warmup,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  WorkoutSetsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? logId,
+    Value<int?>? reps,
+    Value<double?>? weight,
+    Value<bool>? warmup,
+    Value<int>? rowid,
+  }) {
+    return WorkoutSetsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      logId: logId ?? this.logId,
+      reps: reps ?? this.reps,
+      weight: weight ?? this.weight,
+      warmup: warmup ?? this.warmup,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (logId.present) {
+      map['log_id'] = Variable<String>(logId.value);
+    }
+    if (reps.present) {
+      map['reps'] = Variable<int>(reps.value);
+    }
+    if (weight.present) {
+      map['weight'] = Variable<double>(weight.value);
+    }
+    if (warmup.present) {
+      map['warmup'] = Variable<bool>(warmup.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WorkoutSetsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('logId: $logId, ')
+          ..write('reps: $reps, ')
+          ..write('weight: $weight, ')
+          ..write('warmup: $warmup, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $WorkoutTemplatesTable extends WorkoutTemplates
+    with TableInfo<$WorkoutTemplatesTable, WorkoutTemplateRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $WorkoutTemplatesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<int>, String> weekdays =
+      GeneratedColumn<String>(
+        'weekdays',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<int>>($WorkoutTemplatesTable.$converterweekdays);
+  static const VerificationMeta _notesMeta = const VerificationMeta('notes');
+  @override
+  late final GeneratedColumn<String> notes = GeneratedColumn<String>(
+    'notes',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _activeMeta = const VerificationMeta('active');
+  @override
+  late final GeneratedColumn<bool> active = GeneratedColumn<bool>(
+    'active',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("active" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    name,
+    weekdays,
+    notes,
+    active,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'workout_templates';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<WorkoutTemplateRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('notes')) {
+      context.handle(
+        _notesMeta,
+        notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
+      );
+    }
+    if (data.containsKey('active')) {
+      context.handle(
+        _activeMeta,
+        active.isAcceptableOrUnknown(data['active']!, _activeMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  WorkoutTemplateRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return WorkoutTemplateRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      weekdays: $WorkoutTemplatesTable.$converterweekdays.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}weekdays'],
+        )!,
+      ),
+      notes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}notes'],
+      ),
+      active: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}active'],
+      )!,
+    );
+  }
+
+  @override
+  $WorkoutTemplatesTable createAlias(String alias) {
+    return $WorkoutTemplatesTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<List<int>, String> $converterweekdays =
+      const IntListConverter();
+}
+
+class WorkoutTemplateRow extends DataClass
+    implements Insertable<WorkoutTemplateRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final String name;
+
+  /// ISO weekdays 1 (Mon) … 7 (Sun).
+  final List<int> weekdays;
+  final String? notes;
+  final bool active;
+  const WorkoutTemplateRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.name,
+    required this.weekdays,
+    this.notes,
+    required this.active,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['name'] = Variable<String>(name);
+    {
+      map['weekdays'] = Variable<String>(
+        $WorkoutTemplatesTable.$converterweekdays.toSql(weekdays),
+      );
+    }
+    if (!nullToAbsent || notes != null) {
+      map['notes'] = Variable<String>(notes);
+    }
+    map['active'] = Variable<bool>(active);
+    return map;
+  }
+
+  WorkoutTemplatesCompanion toCompanion(bool nullToAbsent) {
+    return WorkoutTemplatesCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      name: Value(name),
+      weekdays: Value(weekdays),
+      notes: notes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(notes),
+      active: Value(active),
+    );
+  }
+
+  factory WorkoutTemplateRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return WorkoutTemplateRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      name: serializer.fromJson<String>(json['name']),
+      weekdays: serializer.fromJson<List<int>>(json['weekdays']),
+      notes: serializer.fromJson<String?>(json['notes']),
+      active: serializer.fromJson<bool>(json['active']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'name': serializer.toJson<String>(name),
+      'weekdays': serializer.toJson<List<int>>(weekdays),
+      'notes': serializer.toJson<String?>(notes),
+      'active': serializer.toJson<bool>(active),
+    };
+  }
+
+  WorkoutTemplateRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? name,
+    List<int>? weekdays,
+    Value<String?> notes = const Value.absent(),
+    bool? active,
+  }) => WorkoutTemplateRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    name: name ?? this.name,
+    weekdays: weekdays ?? this.weekdays,
+    notes: notes.present ? notes.value : this.notes,
+    active: active ?? this.active,
+  );
+  WorkoutTemplateRow copyWithCompanion(WorkoutTemplatesCompanion data) {
+    return WorkoutTemplateRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      name: data.name.present ? data.name.value : this.name,
+      weekdays: data.weekdays.present ? data.weekdays.value : this.weekdays,
+      notes: data.notes.present ? data.notes.value : this.notes,
+      active: data.active.present ? data.active.value : this.active,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WorkoutTemplateRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('name: $name, ')
+          ..write('weekdays: $weekdays, ')
+          ..write('notes: $notes, ')
+          ..write('active: $active')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    name,
+    weekdays,
+    notes,
+    active,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is WorkoutTemplateRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.name == this.name &&
+          other.weekdays == this.weekdays &&
+          other.notes == this.notes &&
+          other.active == this.active);
+}
+
+class WorkoutTemplatesCompanion extends UpdateCompanion<WorkoutTemplateRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> name;
+  final Value<List<int>> weekdays;
+  final Value<String?> notes;
+  final Value<bool> active;
+  final Value<int> rowid;
+  const WorkoutTemplatesCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.name = const Value.absent(),
+    this.weekdays = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.active = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  WorkoutTemplatesCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String name,
+    this.weekdays = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.active = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : name = Value(name);
+  static Insertable<WorkoutTemplateRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? name,
+    Expression<String>? weekdays,
+    Expression<String>? notes,
+    Expression<bool>? active,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (name != null) 'name': name,
+      if (weekdays != null) 'weekdays': weekdays,
+      if (notes != null) 'notes': notes,
+      if (active != null) 'active': active,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  WorkoutTemplatesCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? name,
+    Value<List<int>>? weekdays,
+    Value<String?>? notes,
+    Value<bool>? active,
+    Value<int>? rowid,
+  }) {
+    return WorkoutTemplatesCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      name: name ?? this.name,
+      weekdays: weekdays ?? this.weekdays,
+      notes: notes ?? this.notes,
+      active: active ?? this.active,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (weekdays.present) {
+      map['weekdays'] = Variable<String>(
+        $WorkoutTemplatesTable.$converterweekdays.toSql(weekdays.value),
+      );
+    }
+    if (notes.present) {
+      map['notes'] = Variable<String>(notes.value);
+    }
+    if (active.present) {
+      map['active'] = Variable<bool>(active.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WorkoutTemplatesCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('name: $name, ')
+          ..write('weekdays: $weekdays, ')
+          ..write('notes: $notes, ')
+          ..write('active: $active, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $WorkoutTemplateItemsTable extends WorkoutTemplateItems
+    with TableInfo<$WorkoutTemplateItemsTable, WorkoutTemplateItemRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $WorkoutTemplateItemsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    clientDefault: newId,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    clientDefault: DateTime.now,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _templateIdMeta = const VerificationMeta(
+    'templateId',
+  );
+  @override
+  late final GeneratedColumn<String> templateId = GeneratedColumn<String>(
+    'template_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _exerciseIdMeta = const VerificationMeta(
+    'exerciseId',
+  );
+  @override
+  late final GeneratedColumn<String> exerciseId = GeneratedColumn<String>(
+    'exercise_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _setsMeta = const VerificationMeta('sets');
+  @override
+  late final GeneratedColumn<int> sets = GeneratedColumn<int>(
+    'sets',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _repsMeta = const VerificationMeta('reps');
+  @override
+  late final GeneratedColumn<int> reps = GeneratedColumn<int>(
+    'reps',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _weightMeta = const VerificationMeta('weight');
+  @override
+  late final GeneratedColumn<double> weight = GeneratedColumn<double>(
+    'weight',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _restSecMeta = const VerificationMeta(
+    'restSec',
+  );
+  @override
+  late final GeneratedColumn<int> restSec = GeneratedColumn<int>(
+    'rest_sec',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _warmupSetsMeta = const VerificationMeta(
+    'warmupSets',
+  );
+  @override
+  late final GeneratedColumn<int> warmupSets = GeneratedColumn<int>(
+    'warmup_sets',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    templateId,
+    exerciseId,
+    sets,
+    reps,
+    weight,
+    restSec,
+    warmupSets,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'workout_template_items';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<WorkoutTemplateItemRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('template_id')) {
+      context.handle(
+        _templateIdMeta,
+        templateId.isAcceptableOrUnknown(data['template_id']!, _templateIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_templateIdMeta);
+    }
+    if (data.containsKey('exercise_id')) {
+      context.handle(
+        _exerciseIdMeta,
+        exerciseId.isAcceptableOrUnknown(data['exercise_id']!, _exerciseIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_exerciseIdMeta);
+    }
+    if (data.containsKey('sets')) {
+      context.handle(
+        _setsMeta,
+        sets.isAcceptableOrUnknown(data['sets']!, _setsMeta),
+      );
+    }
+    if (data.containsKey('reps')) {
+      context.handle(
+        _repsMeta,
+        reps.isAcceptableOrUnknown(data['reps']!, _repsMeta),
+      );
+    }
+    if (data.containsKey('weight')) {
+      context.handle(
+        _weightMeta,
+        weight.isAcceptableOrUnknown(data['weight']!, _weightMeta),
+      );
+    }
+    if (data.containsKey('rest_sec')) {
+      context.handle(
+        _restSecMeta,
+        restSec.isAcceptableOrUnknown(data['rest_sec']!, _restSecMeta),
+      );
+    }
+    if (data.containsKey('warmup_sets')) {
+      context.handle(
+        _warmupSetsMeta,
+        warmupSets.isAcceptableOrUnknown(data['warmup_sets']!, _warmupSetsMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  WorkoutTemplateItemRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return WorkoutTemplateItemRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      templateId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}template_id'],
+      )!,
+      exerciseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}exercise_id'],
+      )!,
+      sets: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sets'],
+      ),
+      reps: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}reps'],
+      ),
+      weight: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}weight'],
+      ),
+      restSec: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rest_sec'],
+      ),
+      warmupSets: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}warmup_sets'],
+      ),
+    );
+  }
+
+  @override
+  $WorkoutTemplateItemsTable createAlias(String alias) {
+    return $WorkoutTemplateItemsTable(attachedDatabase, alias);
+  }
+}
+
+class WorkoutTemplateItemRow extends DataClass
+    implements Insertable<WorkoutTemplateItemRow> {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int sortOrder;
+  final String templateId;
+  final String exerciseId;
+  final int? sets;
+  final int? reps;
+  final double? weight;
+  final int? restSec;
+  final int? warmupSets;
+  const WorkoutTemplateItemRow({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.sortOrder,
+    required this.templateId,
+    required this.exerciseId,
+    this.sets,
+    this.reps,
+    this.weight,
+    this.restSec,
+    this.warmupSets,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['template_id'] = Variable<String>(templateId);
+    map['exercise_id'] = Variable<String>(exerciseId);
+    if (!nullToAbsent || sets != null) {
+      map['sets'] = Variable<int>(sets);
+    }
+    if (!nullToAbsent || reps != null) {
+      map['reps'] = Variable<int>(reps);
+    }
+    if (!nullToAbsent || weight != null) {
+      map['weight'] = Variable<double>(weight);
+    }
+    if (!nullToAbsent || restSec != null) {
+      map['rest_sec'] = Variable<int>(restSec);
+    }
+    if (!nullToAbsent || warmupSets != null) {
+      map['warmup_sets'] = Variable<int>(warmupSets);
+    }
+    return map;
+  }
+
+  WorkoutTemplateItemsCompanion toCompanion(bool nullToAbsent) {
+    return WorkoutTemplateItemsCompanion(
+      id: Value(id),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      sortOrder: Value(sortOrder),
+      templateId: Value(templateId),
+      exerciseId: Value(exerciseId),
+      sets: sets == null && nullToAbsent ? const Value.absent() : Value(sets),
+      reps: reps == null && nullToAbsent ? const Value.absent() : Value(reps),
+      weight: weight == null && nullToAbsent
+          ? const Value.absent()
+          : Value(weight),
+      restSec: restSec == null && nullToAbsent
+          ? const Value.absent()
+          : Value(restSec),
+      warmupSets: warmupSets == null && nullToAbsent
+          ? const Value.absent()
+          : Value(warmupSets),
+    );
+  }
+
+  factory WorkoutTemplateItemRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return WorkoutTemplateItemRow(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      templateId: serializer.fromJson<String>(json['templateId']),
+      exerciseId: serializer.fromJson<String>(json['exerciseId']),
+      sets: serializer.fromJson<int?>(json['sets']),
+      reps: serializer.fromJson<int?>(json['reps']),
+      weight: serializer.fromJson<double?>(json['weight']),
+      restSec: serializer.fromJson<int?>(json['restSec']),
+      warmupSets: serializer.fromJson<int?>(json['warmupSets']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'templateId': serializer.toJson<String>(templateId),
+      'exerciseId': serializer.toJson<String>(exerciseId),
+      'sets': serializer.toJson<int?>(sets),
+      'reps': serializer.toJson<int?>(reps),
+      'weight': serializer.toJson<double?>(weight),
+      'restSec': serializer.toJson<int?>(restSec),
+      'warmupSets': serializer.toJson<int?>(warmupSets),
+    };
+  }
+
+  WorkoutTemplateItemRow copyWith({
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? sortOrder,
+    String? templateId,
+    String? exerciseId,
+    Value<int?> sets = const Value.absent(),
+    Value<int?> reps = const Value.absent(),
+    Value<double?> weight = const Value.absent(),
+    Value<int?> restSec = const Value.absent(),
+    Value<int?> warmupSets = const Value.absent(),
+  }) => WorkoutTemplateItemRow(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    sortOrder: sortOrder ?? this.sortOrder,
+    templateId: templateId ?? this.templateId,
+    exerciseId: exerciseId ?? this.exerciseId,
+    sets: sets.present ? sets.value : this.sets,
+    reps: reps.present ? reps.value : this.reps,
+    weight: weight.present ? weight.value : this.weight,
+    restSec: restSec.present ? restSec.value : this.restSec,
+    warmupSets: warmupSets.present ? warmupSets.value : this.warmupSets,
+  );
+  WorkoutTemplateItemRow copyWithCompanion(WorkoutTemplateItemsCompanion data) {
+    return WorkoutTemplateItemRow(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      templateId: data.templateId.present
+          ? data.templateId.value
+          : this.templateId,
+      exerciseId: data.exerciseId.present
+          ? data.exerciseId.value
+          : this.exerciseId,
+      sets: data.sets.present ? data.sets.value : this.sets,
+      reps: data.reps.present ? data.reps.value : this.reps,
+      weight: data.weight.present ? data.weight.value : this.weight,
+      restSec: data.restSec.present ? data.restSec.value : this.restSec,
+      warmupSets: data.warmupSets.present
+          ? data.warmupSets.value
+          : this.warmupSets,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WorkoutTemplateItemRow(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('templateId: $templateId, ')
+          ..write('exerciseId: $exerciseId, ')
+          ..write('sets: $sets, ')
+          ..write('reps: $reps, ')
+          ..write('weight: $weight, ')
+          ..write('restSec: $restSec, ')
+          ..write('warmupSets: $warmupSets')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    createdAt,
+    updatedAt,
+    sortOrder,
+    templateId,
+    exerciseId,
+    sets,
+    reps,
+    weight,
+    restSec,
+    warmupSets,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is WorkoutTemplateItemRow &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.sortOrder == this.sortOrder &&
+          other.templateId == this.templateId &&
+          other.exerciseId == this.exerciseId &&
+          other.sets == this.sets &&
+          other.reps == this.reps &&
+          other.weight == this.weight &&
+          other.restSec == this.restSec &&
+          other.warmupSets == this.warmupSets);
+}
+
+class WorkoutTemplateItemsCompanion
+    extends UpdateCompanion<WorkoutTemplateItemRow> {
+  final Value<String> id;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> sortOrder;
+  final Value<String> templateId;
+  final Value<String> exerciseId;
+  final Value<int?> sets;
+  final Value<int?> reps;
+  final Value<double?> weight;
+  final Value<int?> restSec;
+  final Value<int?> warmupSets;
+  final Value<int> rowid;
+  const WorkoutTemplateItemsCompanion({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.templateId = const Value.absent(),
+    this.exerciseId = const Value.absent(),
+    this.sets = const Value.absent(),
+    this.reps = const Value.absent(),
+    this.weight = const Value.absent(),
+    this.restSec = const Value.absent(),
+    this.warmupSets = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  WorkoutTemplateItemsCompanion.insert({
+    this.id = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    required String templateId,
+    required String exerciseId,
+    this.sets = const Value.absent(),
+    this.reps = const Value.absent(),
+    this.weight = const Value.absent(),
+    this.restSec = const Value.absent(),
+    this.warmupSets = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : templateId = Value(templateId),
+       exerciseId = Value(exerciseId);
+  static Insertable<WorkoutTemplateItemRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? sortOrder,
+    Expression<String>? templateId,
+    Expression<String>? exerciseId,
+    Expression<int>? sets,
+    Expression<int>? reps,
+    Expression<double>? weight,
+    Expression<int>? restSec,
+    Expression<int>? warmupSets,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (templateId != null) 'template_id': templateId,
+      if (exerciseId != null) 'exercise_id': exerciseId,
+      if (sets != null) 'sets': sets,
+      if (reps != null) 'reps': reps,
+      if (weight != null) 'weight': weight,
+      if (restSec != null) 'rest_sec': restSec,
+      if (warmupSets != null) 'warmup_sets': warmupSets,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  WorkoutTemplateItemsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? sortOrder,
+    Value<String>? templateId,
+    Value<String>? exerciseId,
+    Value<int?>? sets,
+    Value<int?>? reps,
+    Value<double?>? weight,
+    Value<int?>? restSec,
+    Value<int?>? warmupSets,
+    Value<int>? rowid,
+  }) {
+    return WorkoutTemplateItemsCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      sortOrder: sortOrder ?? this.sortOrder,
+      templateId: templateId ?? this.templateId,
+      exerciseId: exerciseId ?? this.exerciseId,
+      sets: sets ?? this.sets,
+      reps: reps ?? this.reps,
+      weight: weight ?? this.weight,
+      restSec: restSec ?? this.restSec,
+      warmupSets: warmupSets ?? this.warmupSets,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (templateId.present) {
+      map['template_id'] = Variable<String>(templateId.value);
+    }
+    if (exerciseId.present) {
+      map['exercise_id'] = Variable<String>(exerciseId.value);
+    }
+    if (sets.present) {
+      map['sets'] = Variable<int>(sets.value);
+    }
+    if (reps.present) {
+      map['reps'] = Variable<int>(reps.value);
+    }
+    if (weight.present) {
+      map['weight'] = Variable<double>(weight.value);
+    }
+    if (restSec.present) {
+      map['rest_sec'] = Variable<int>(restSec.value);
+    }
+    if (warmupSets.present) {
+      map['warmup_sets'] = Variable<int>(warmupSets.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WorkoutTemplateItemsCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('templateId: $templateId, ')
+          ..write('exerciseId: $exerciseId, ')
+          ..write('sets: $sets, ')
+          ..write('reps: $reps, ')
+          ..write('weight: $weight, ')
+          ..write('restSec: $restSec, ')
+          ..write('warmupSets: $warmupSets, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -49058,6 +50972,12 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
   late final $GoalLogsTable goalLogs = $GoalLogsTable(this);
   late final $ExercisesTable exercises = $ExercisesTable(this);
   late final $WorkoutLogsTable workoutLogs = $WorkoutLogsTable(this);
+  late final $WorkoutSetsTable workoutSets = $WorkoutSetsTable(this);
+  late final $WorkoutTemplatesTable workoutTemplates = $WorkoutTemplatesTable(
+    this,
+  );
+  late final $WorkoutTemplateItemsTable workoutTemplateItems =
+      $WorkoutTemplateItemsTable(this);
   late final $AvoidItemsTable avoidItems = $AvoidItemsTable(this);
   late final $FastingSessionsTable fastingSessions = $FastingSessionsTable(
     this,
@@ -49147,6 +51067,9 @@ abstract class _$MadarDatabase extends GeneratedDatabase {
     goalLogs,
     exercises,
     workoutLogs,
+    workoutSets,
+    workoutTemplates,
+    workoutTemplateItems,
     avoidItems,
     fastingSessions,
     waterLogs,

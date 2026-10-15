@@ -13,6 +13,7 @@ import '../../domain/body_week.dart';
 import '../../domain/training.dart';
 import '../body_actions.dart';
 import '../body_texts.dart';
+import '../gym_nav.dart';
 import '../sheets/exercise_history_sheet.dart';
 import '../widgets/body_widgets.dart';
 import '../widgets/fasting_card.dart';
@@ -41,6 +42,22 @@ class BodyTodayTab extends ConsumerWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.s, Space.gutter, bodyTabBottomPadding),
       children: [
         if (hasPlan) stagger(const _SessionHeader()),
+        // The way into the session itself: set by set, with the rest
+        // between them.
+        if (hasPlan && !day.isRestDay && !day.complete)
+          stagger(
+            Padding(
+              padding: const EdgeInsets.only(top: Space.s),
+              child: MadarButton(
+                key: const ValueKey('body.today.session'),
+                label: l.gymStartSession,
+                icon: Icons.play_arrow_rounded,
+                variant: MadarButtonVariant.primary,
+                sfx: Sfx.navigate,
+                onPressed: () => gymGo(context, ref, GymRoutes.session),
+              ),
+            ),
+          ),
         if (!hasPlan)
           stagger(
             Padding(

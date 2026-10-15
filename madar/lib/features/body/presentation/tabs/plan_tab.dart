@@ -5,14 +5,17 @@ import '../../../../core/design/tokens.dart';
 import '../../../../core/design/widgets/widgets.dart';
 import '../../../../core/i18n/gen/app_localizations.dart';
 import '../../../../core/interaction/interaction.dart';
+import '../../../../core/sound/sound_api.dart';
 import '../../data/body_providers.dart';
 import '../../domain/body_clock.dart';
 import '../../domain/body_week.dart';
 import '../../domain/training.dart';
 import '../body_actions.dart';
 import '../body_texts.dart';
+import '../gym_nav.dart';
 import '../sheets/exercise_history_sheet.dart';
 import '../widgets/body_widgets.dart';
+import '../widgets/gym_widgets.dart';
 
 /// The training plan: this week at a glance, then every exercise with its
 /// days (drag to reorder; tap to edit; long-press for history, pause,
@@ -37,7 +40,40 @@ class BodyPlanTab extends ConsumerWidget {
       spacing: Space.s,
       header: Padding(
         padding: const EdgeInsets.only(bottom: Space.m),
-        child: exercises.isEmpty ? const SizedBox.shrink() : const WeekStripCard(),
+        child: exercises.isEmpty
+            ? const SizedBox.shrink()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const WeekStripCard(),
+                  const SizedBox(height: Space.s),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: MadarButton(
+                          key: const ValueKey('body.plan.session'),
+                          label: l.gymStartSession,
+                          icon: Icons.play_arrow_rounded,
+                          variant: MadarButtonVariant.primary,
+                          sfx: Sfx.navigate,
+                          onPressed: () => gymGo(context, ref, GymRoutes.session),
+                        ),
+                      ),
+                      const SizedBox(width: Space.s),
+                      Expanded(
+                        child: MadarButton(
+                          key: const ValueKey('body.plan.templates'),
+                          label: l.gymTrainingDays,
+                          icon: Icons.event_note_rounded,
+                          variant: MadarButtonVariant.secondary,
+                          sfx: Sfx.navigate,
+                          onPressed: () => gymGo(context, ref, GymRoutes.templates),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
       ),
       footer: exercises.isEmpty
           ? Padding(
@@ -53,7 +89,14 @@ class BodyPlanTab extends ConsumerWidget {
             )
           : Padding(
               padding: const EdgeInsets.only(top: Space.m),
-              child: BodyHint(l.bodyPlanHint, icon: Icons.drag_indicator_rounded),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  BodyHint(l.gymLibraryHint, icon: Icons.touch_app_outlined),
+                  const SizedBox(height: Space.xs),
+                  BodyHint(l.bodyPlanHint, icon: Icons.drag_indicator_rounded),
+                ],
+              ),
             ),
       onReorder: (order) => ref.read(bodyServiceProvider).reorderExercises([for (final e in order) e.id]),
       itemBuilder: (context, e, index, grip) => ExerciseTile(exercise: e, grip: grip),
@@ -204,9 +247,16 @@ class ExerciseTile extends ConsumerWidget {
     final days = e.weekdays.isEmpty ? l.bodyNoDays : tx.weekdayList(BodyWeek.inDisplayOrder(e.weekdays, start));
     return ActionableItem(
       key: ValueKey('body.exercise.${e.id}'),
-      semanticLabel: [e.name, if (!e.active) l.bodyPaused, days, if (summary.isNotEmpty) summary].join('. '),
+      semanticLabel: [
+        e.name,
+        if (!e.active) l.bodyPaused,
+        days,
+        if (summary.isNotEmpty) summary,
+        if (e.muscles.isNotEmpty) e.muscles.join(l.bodyListSep),
+        l.gymOpenExercise,
+      ].join('. '),
       borderRadius: BorderRadius.circular(t.radiusL),
-      onTap: () => BodyActions.editExercise(context, ref, e.id),
+      onTap: () => gymGo(context, ref, GymRoutes.exercise(e.id)),
       actions: ItemActions(
         onEdit: () => BodyActions.editExercise(context, ref, e.id),
         onDuplicate: () => BodyActions.duplicateExercise(context, ref, e.id),
@@ -259,20 +309,25 @@ class ExerciseTile extends ConsumerWidget {
         borderRadius: BorderRadius.circular(t.radiusL),
         child: Row(
           children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(colors: [p.training.withValues(alpha: 0.35), p.training.withValues(alpha: 0.08)]),
-                border: Border.all(color: p.training.withValues(alpha: 0.5)),
+            if (e.photo != null)
+              GymPhotoView(key: ValueKey('body.exercise.photo.${e.id}'), photo: e.photo, name: e.name, size: 44)
+            else
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [p.training.withValues(alpha: 0.35), p.training.withValues(alpha: 0.08)],
+                  ),
+                  border: Border.all(color: p.training.withValues(alpha: 0.5)),
+                ),
+                child: Icon(
+                  e.durationMin != null && e.reps == null ? Icons.timer_outlined : Icons.fitness_center_rounded,
+                  size: 20,
+                  color: p.training,
+                ),
               ),
-              child: Icon(
-                e.durationMin != null && e.reps == null ? Icons.timer_outlined : Icons.fitness_center_rounded,
-                size: 20,
-                color: p.training,
-              ),
-            ),
             const SizedBox(width: Space.m),
             Expanded(
               child: Column(
@@ -299,6 +354,10 @@ class ExerciseTile extends ConsumerWidget {
                     ].join(tx.sep),
                     style: text.bodySmall?.copyWith(color: t.textSecondary),
                   ),
+                  if (e.muscles.isNotEmpty) ...[
+                    const SizedBox(height: Space.xs),
+                    GymMuscleChips(muscles: e.muscles),
+                  ],
                   if (e.notes != null) ...[
                     const SizedBox(height: 2),
                     Text(

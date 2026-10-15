@@ -72,6 +72,9 @@ class Repositories {
       goalLogs = EntityRepository(db, db.goalLogs),
       exercises = EntityRepository(db, db.exercises),
       workoutLogs = EntityRepository(db, db.workoutLogs),
+      workoutSets = EntityRepository(db, db.workoutSets),
+      workoutTemplates = EntityRepository(db, db.workoutTemplates),
+      workoutTemplateItems = EntityRepository(db, db.workoutTemplateItems),
       avoidItems = EntityRepository(db, db.avoidItems),
       fastingSessions = EntityRepository(db, db.fastingSessions),
       waterLogs = EntityRepository(db, db.waterLogs),
@@ -162,6 +165,9 @@ class Repositories {
   final EntityRepository<$GoalLogsTable, GoalLogRow> goalLogs;
   final EntityRepository<$ExercisesTable, ExerciseRow> exercises;
   final EntityRepository<$WorkoutLogsTable, WorkoutLogRow> workoutLogs;
+  final EntityRepository<$WorkoutSetsTable, WorkoutSetRow> workoutSets;
+  final EntityRepository<$WorkoutTemplatesTable, WorkoutTemplateRow> workoutTemplates;
+  final EntityRepository<$WorkoutTemplateItemsTable, WorkoutTemplateItemRow> workoutTemplateItems;
   final EntityRepository<$AvoidItemsTable, AvoidItemRow> avoidItems;
   final EntityRepository<$FastingSessionsTable, FastingSessionRow> fastingSessions;
   final EntityRepository<$WaterLogsTable, WaterLogRow> waterLogs;
@@ -262,6 +268,9 @@ class Repositories {
       goalLogs,
       exercises,
       workoutLogs,
+      workoutSets,
+      workoutTemplates,
+      workoutTemplateItems,
       avoidItems,
       fastingSessions,
       waterLogs,

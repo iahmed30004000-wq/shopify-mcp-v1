@@ -33,6 +33,8 @@ const madarIndexStatements = <String>[
   'CREATE INDEX IF NOT EXISTS idx_trip_items_trip ON trip_items (trip_id)',
   'CREATE INDEX IF NOT EXISTS idx_goal_logs_goal_at ON goal_logs (goal_id, "at")',
   'CREATE INDEX IF NOT EXISTS idx_workout_logs_at ON workout_logs ("at")',
+  'CREATE INDEX IF NOT EXISTS idx_workout_sets_log ON workout_sets (log_id, sort_order)',
+  'CREATE INDEX IF NOT EXISTS idx_workout_template_items_template ON workout_template_items (template_id, sort_order)',
   'CREATE INDEX IF NOT EXISTS idx_water_logs_at ON water_logs ("at")',
   'CREATE INDEX IF NOT EXISTS idx_quran_sessions_day ON quran_sessions (day)',
   'CREATE INDEX IF NOT EXISTS idx_hifz_items_due ON hifz_items (due)',

@@ -26296,5 +26296,270 @@
       }
     }
   },
-  "kanbanAlreadyHere": "The card is already in that column"
+  "kanbanAlreadyHere": "The card is already in that column",
+  "gymTitle": "Gym",
+  "@gymTitle": {
+    "description": "Part 8 / #24: the gym, properly – the exercise library, the sets, the session runner and his own numbers"
+  },
+  "gymSessionTitle": "Today's session",
+  "gymStartSession": "Start the session",
+  "gymTrainingDays": "Training days",
+  "gymOpenExercise": "Open the exercise",
+  "gymMachinePhoto": "The machine",
+  "gymPhotoOf": "Photo of {name}",
+  "@gymPhotoOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymAddPhoto": "Add the machine's photo",
+  "gymChangePhoto": "Change the photo",
+  "gymRemovePhoto": "Remove the photo",
+  "gymPhotoAdded": "The photo is saved inside Madar",
+  "gymPhotoRemoved": "Photo removed",
+  "gymPhotoKept": "The photo is copied inside Madar: deleting the original changes nothing, and it travels with the backup",
+  "gymPhotoMissing": "The photo is gone",
+  "gymPhotoWrongKind": "Madar cannot show this kind of file as a picture",
+  "gymPhotoTooBig": "The photo is larger than {size} MB",
+  "@gymPhotoTooBig": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "gymPhotoFailed": "The photo could not be saved",
+  "gymVideo": "The movement",
+  "gymAddVideo": "Add a video",
+  "gymVideoFromFiles": "From my files",
+  "gymVideoFromLink": "A link",
+  "gymVideoLinkLabel": "Video link",
+  "gymVideoLinkHint": "Paste the link here",
+  "gymVideoKept": "A video stays where it is: Madar only remembers the place, because a clip is big. Move it or delete it and it stops opening",
+  "gymVideoMissing": "The file is no longer there",
+  "gymVideoOpen": "Play the video",
+  "gymVideoNoApp": "Nothing on the phone opened this video",
+  "gymVideoSaved": "The video's place is saved",
+  "gymRemoveVideo": "Remove the video",
+  "gymVideoRemoved": "Video removed",
+  "gymMuscles": "Muscles",
+  "gymMusclesHint": "Chest, front shoulder, triceps…",
+  "gymNoMuscles": "No muscles named yet",
+  "gymMedia": "Photo and video",
+  "gymRest": "Rest between sets",
+  "gymRestShort": "Rest",
+  "gymWarmupSets": "Warm-up sets",
+  "gymWarmup": "Warm-up",
+  "gymUnitSec": "s",
+  "gymSecondsValue": "{value} s",
+  "@gymSecondsValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymNextTitle": "Your numbers for next time",
+  "gymNotAdvice": "This is arithmetic on your own numbers — not advice, not a programme, not a medical claim",
+  "gymLastTimeValue": "Last time: {value}",
+  "@gymLastTimeValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymBeforeThatValue": "Before that: {value}",
+  "@gymBeforeThatValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymYourStep": "The smallest step you took yourself: {value}",
+  "@gymYourStep": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSameStepLine": "That same step comes to {value}",
+  "@gymSameStepLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymRepeatLine": "The same numbers as last time: {value}",
+  "@gymRepeatLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymRepsUpLine": "You held the weight and the reps went up: {value}",
+  "@gymRepsUpLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymFromDays": "{count, plural, =0{No training days yet} =1{Read from one training day} other{Read from your last {count} training days}}",
+  "@gymFromDays": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymNothingYet": "You have not logged this one yet",
+  "gymNothingYetBody": "Log your sets once and your own numbers can be read back",
+  "gymUseThese": "Log with these numbers",
+  "gymBestSet": "Heaviest set",
+  "gymBestReps": "Most reps in a set",
+  "gymBestOn": "on {day}",
+  "@gymBestOn": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetBy": "{reps} × {weight}",
+  "@gymSetBy": {
+    "placeholders": {
+      "reps": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "gymProgress": "Progress",
+  "gymOpenHistory": "The whole log",
+  "gymLogSession": "Log a session",
+  "gymEditExerciseAction": "Edit the exercise",
+  "gymExerciseOf": "Exercise {index} of {total}",
+  "@gymExerciseOf": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetOf": "Set {index} of {total}",
+  "@gymSetOf": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetDone": "Set done",
+  "gymSkipSet": "Skip the set",
+  "gymFinishExercise": "Finish the exercise",
+  "gymNextExercise": "Next exercise",
+  "gymResting": "Resting",
+  "gymRestOver": "Rest is over",
+  "gymRestCountingUp": "The rest clock is running",
+  "gymSkipRest": "Carry on now",
+  "gymRestPlus": "Add {value}",
+  "@gymRestPlus": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSessionLogged": "{name} is logged",
+  "@gymSessionLogged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSessionDoneTitle": "Today's session is done",
+  "gymSessionDoneBody": "Everything you logged is in your log, and in each exercise's history",
+  "gymSessionEmptyTitle": "Nothing is planned for today",
+  "gymSessionEmptyBody": "Your plan has no exercise today. Open the plan, or your training days, to set one",
+  "gymLeaveSession": "Leave the session",
+  "gymSetsSoFar": "{count, plural, =0{No sets yet} =1{One set} other{{count} sets}}",
+  "@gymSetsSoFar": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymTemplatesTitle": "Training days",
+  "gymTemplatesSubtitle": "A day with its name, its weekdays and its exercises in order",
+  "gymTemplatesEmptyTitle": "No named day yet",
+  "gymTemplatesEmptyBody": "Build a day like “Chest day”, give it its weekdays and its exercises in order, and Monday's session is ready for you",
+  "gymAddTemplate": "New day",
+  "gymEditTemplate": "Edit the day",
+  "gymTemplateName": "The day's name",
+  "gymTemplateNameHint": "Chest day, leg day…",
+  "gymTemplateWeekdays": "Weekdays",
+  "gymTemplateItems": "The day's exercises",
+  "gymAddTemplateItem": "Add an exercise to the day",
+  "gymTemplateItemNumbers": "This day's numbers for this exercise",
+  "gymTemplateItemHint": "What you set here beats the exercise's own numbers, on this day only. Leave it empty and it takes the exercise's",
+  "gymTemplateSaved": "The day is saved",
+  "gymTemplateDeleted": "{name} is deleted",
+  "@gymTemplateDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateItemAdded": "{name} is in the day",
+  "@gymTemplateItemAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateItemRemoved": "{name} is out of the day",
+  "@gymTemplateItemRemoved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateCount": "{count, plural, =0{No exercises} =1{One exercise} other{{count} exercises}}",
+  "@gymTemplateCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymTemplateNoDays": "No weekdays chosen for it",
+  "gymPickExercise": "Pick an exercise",
+  "gymNoLibraryTitle": "Your exercise library is empty",
+  "gymNoLibraryBody": "Add your own: the name, the machine's photo, the movement's video, the muscles and the numbers. Madar ships none of its own",
+  "gymNoSetsYetHint": "After each set tap “Set done” and it lands here",
+  "gymLibraryHint": "Tap an exercise for its photo, its video and your history with it",
+  "gymSetsOfLog": "That day's sets"
 }

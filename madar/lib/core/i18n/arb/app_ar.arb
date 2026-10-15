@@ -26296,5 +26296,270 @@
       }
     }
   },
-  "kanbanAlreadyHere": "البطاقة بهذا العمود أصلًا"
+  "kanbanAlreadyHere": "البطاقة بهذا العمود أصلًا",
+  "gymTitle": "الجيم",
+  "@gymTitle": {
+    "description": "Part 8 / #24: the gym, properly – the exercise library, the sets, the session runner and his own numbers"
+  },
+  "gymSessionTitle": "جلسة اليوم",
+  "gymStartSession": "ابدأ الجلسة",
+  "gymTrainingDays": "أيام التمرين",
+  "gymOpenExercise": "افتح التمرين",
+  "gymMachinePhoto": "صورة الجهاز",
+  "gymPhotoOf": "صورة {name}",
+  "@gymPhotoOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymAddPhoto": "أضف صورة الجهاز",
+  "gymChangePhoto": "بدّل الصورة",
+  "gymRemovePhoto": "احذف الصورة",
+  "gymPhotoAdded": "حفظت الصورة جوّة مدار",
+  "gymPhotoRemoved": "شلت الصورة",
+  "gymPhotoKept": "الصورة محفوظة جوّة مدار، فلو حذفتها من معرض الصور بتضل هنا ومع النسخة الاحتياطية",
+  "gymPhotoMissing": "الصورة مش موجودة",
+  "gymPhotoWrongKind": "هذا الملف مش صورة بقدر أعرضها",
+  "gymPhotoTooBig": "الصورة أكبر من {size} ميغا",
+  "@gymPhotoTooBig": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "gymPhotoFailed": "ما قدرت أحفظ الصورة",
+  "gymVideo": "فيديو الحركة",
+  "gymAddVideo": "أضف فيديو",
+  "gymVideoFromFiles": "من ملفاتي",
+  "gymVideoFromLink": "رابط",
+  "gymVideoLinkLabel": "رابط الفيديو",
+  "gymVideoLinkHint": "الصق الرابط هنا",
+  "gymVideoKept": "الفيديو بيضل بمكانه: مدار بيحفظ وينه بس، لأنه كبير. لو نقلته أو حذفته بيوقف يفتح",
+  "gymVideoMissing": "الملف مش موجود بمكانه",
+  "gymVideoOpen": "شغّل الفيديو",
+  "gymVideoNoApp": "ما في شي بالهاتف فتح هذا الفيديو",
+  "gymVideoSaved": "حفظت مكان الفيديو",
+  "gymRemoveVideo": "احذف الفيديو",
+  "gymVideoRemoved": "شلت الفيديو",
+  "gymMuscles": "العضلات",
+  "gymMusclesHint": "صدر، كتف أمامي، ترايسبس…",
+  "gymNoMuscles": "ما حدّدت عضلات",
+  "gymMedia": "الصورة والفيديو",
+  "gymRest": "الراحة بين المجموعات",
+  "gymRestShort": "راحة",
+  "gymWarmupSets": "مجموعات تسخين",
+  "gymWarmup": "تسخين",
+  "gymUnitSec": "ث",
+  "gymSecondsValue": "{value} ث",
+  "@gymSecondsValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymNextTitle": "أرقامك للمرّة الجاي",
+  "gymNotAdvice": "هذا حساب على أرقامك إنت، مش نصيحة ولا برنامج ولا كلام طب",
+  "gymLastTimeValue": "آخر مرّة: {value}",
+  "@gymLastTimeValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymBeforeThatValue": "وقبلها: {value}",
+  "@gymBeforeThatValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymYourStep": "أصغر زيادة عملتها بإيدك: {value}",
+  "@gymYourStep": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSameStepLine": "نفس هذي الزيادة بتوصّل لـ {value}",
+  "@gymSameStepLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymRepeatLine": "نفس أرقام آخر مرّة: {value}",
+  "@gymRepeatLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymRepsUpLine": "ثبّتت الوزن وزاد التكرار: {value}",
+  "@gymRepsUpLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymFromDays": "{count, plural, =0{ما في أيام تمرين} =1{محسوب من يوم تمرين واحد} =2{محسوب من يومين تمرين} few{محسوب من {count} أيام تمرين} many{محسوب من {count} يوم تمرين} other{محسوب من {count} يوم تمرين}}",
+  "@gymFromDays": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymNothingYet": "لسّه ما سجّلت هذا التمرين",
+  "gymNothingYetBody": "سجّل مجموعاتك مرّة، وبعدها بقدر أقرأ أرقامك وأحسبها",
+  "gymUseThese": "سجّل بهذي الأرقام",
+  "gymBestSet": "أعلى مجموعة",
+  "gymBestReps": "أكثر تكرار بمجموعة",
+  "gymBestOn": "يوم {day}",
+  "@gymBestOn": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetBy": "{reps} × {weight}",
+  "@gymSetBy": {
+    "placeholders": {
+      "reps": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "gymProgress": "التقدّم",
+  "gymOpenHistory": "السجل كامل",
+  "gymLogSession": "سجّل جلسة",
+  "gymEditExerciseAction": "عدّل التمرين",
+  "gymExerciseOf": "تمرين {index} من {total}",
+  "@gymExerciseOf": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetOf": "مجموعة {index} من {total}",
+  "@gymSetOf": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSetDone": "خلّصت المجموعة",
+  "gymSkipSet": "تخطّى المجموعة",
+  "gymFinishExercise": "خلّصت التمرين",
+  "gymNextExercise": "التمرين اللي بعده",
+  "gymResting": "راحة",
+  "gymRestOver": "خلصت الراحة",
+  "gymRestCountingUp": "عدّاد الراحة شغّال",
+  "gymSkipRest": "كمّل بدون راحة",
+  "gymRestPlus": "زيد {value}",
+  "@gymRestPlus": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSessionLogged": "سجّلت {name}",
+  "@gymSessionLogged": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymSessionDoneTitle": "خلصت جلسة اليوم",
+  "gymSessionDoneBody": "كل اللي سجّلته محفوظ بسجلك، وبتلاقيه بتاريخ كل تمرين",
+  "gymSessionEmptyTitle": "ما في جلسة اليوم",
+  "gymSessionEmptyBody": "اليوم ما في تمارين بخطتك. افتح الخطة أو أيام التمرين لو بدّك تحدّد",
+  "gymLeaveSession": "اطلع من الجلسة",
+  "gymSetsSoFar": "{count, plural, =0{ما سجّلت ولا مجموعة} =1{مجموعة واحدة} =2{مجموعتين} few{{count} مجموعات} many{{count} مجموعة} other{{count} مجموعة}}",
+  "@gymSetsSoFar": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymTemplatesTitle": "أيام التمرين",
+  "gymTemplatesSubtitle": "يوم بإسمه، بأيامه، وبتمارينه بالترتيب",
+  "gymTemplatesEmptyTitle": "ما في يوم مسمّى",
+  "gymTemplatesEmptyBody": "اعمل يوم زي «يوم صدر»، حدّد أيامه وتمارينه بالترتيب، وبيوم الإثنين بتلاقي جلستك جاهزة",
+  "gymAddTemplate": "يوم جديد",
+  "gymEditTemplate": "عدّل اليوم",
+  "gymTemplateName": "اسم اليوم",
+  "gymTemplateNameHint": "يوم صدر، يوم أرجل…",
+  "gymTemplateWeekdays": "أيام الأسبوع",
+  "gymTemplateItems": "تمارين اليوم",
+  "gymAddTemplateItem": "أضف تمرين لليوم",
+  "gymTemplateItemNumbers": "أرقام اليوم لهذا التمرين",
+  "gymTemplateItemHint": "اللي تحدّده هنا بيغلب أرقام التمرين، بهذا اليوم بس. اتركه فاضي وبياخد أرقام التمرين",
+  "gymTemplateSaved": "حفظت اليوم",
+  "gymTemplateDeleted": "حذفت {name}",
+  "@gymTemplateDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateItemAdded": "ضفت {name} لليوم",
+  "@gymTemplateItemAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateItemRemoved": "شلت {name} من اليوم",
+  "@gymTemplateItemRemoved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gymTemplateCount": "{count, plural, =0{ما في تمارين} =1{تمرين واحد} =2{تمرينين} few{{count} تمارين} many{{count} تمرين} other{{count} تمرين}}",
+  "@gymTemplateCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gymTemplateNoDays": "ما حدّدت أيام لهذا اليوم",
+  "gymPickExercise": "اختر تمرين",
+  "gymNoLibraryTitle": "مكتبة التمارين فاضية",
+  "gymNoLibraryBody": "ضيف تمرينك إنت: الاسم، صورة الجهاز، فيديو الحركة، العضلات والأرقام. مدار ما بيحط تمارين من عنده",
+  "gymNoSetsYetHint": "بعد كل مجموعة اضغط «خلّصت المجموعة» وبتنزل هنا",
+  "gymLibraryHint": "اضغط على التمرين تشوف صورته وفيديوه وتاريخك فيه",
+  "gymSetsOfLog": "مجموعات هذا اليوم"
 }

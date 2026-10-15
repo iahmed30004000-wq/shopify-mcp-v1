@@ -532,6 +532,11 @@ Future<void> populateAllTables(MadarDatabase db) async {
         weight: const Value(17.5),
         notes: const Value('n'),
         active: const Value(false),
+        photo: const Value('a1b2c3d4e5f6.jpg'),
+        video: const Value('/storage/emulated/0/Movies/squat.mp4'),
+        muscles: const Value(['chest', 'shoulder']),
+        restSec: const Value(90),
+        warmupSets: const Value(1),
       ),
       ExercisesCompanion.insert(name: 'sparse'),
     ]);
@@ -546,7 +551,39 @@ Future<void> populateAllTables(MadarDatabase db) async {
         durationMin: const Value(18),
         notes: const Value('n'),
       ),
-      WorkoutLogsCompanion.insert(name: 'sparse', at: tUtc),
+      WorkoutLogsCompanion.insert(id: const Value('log-1'), name: 'sparse', at: tUtc),
+    ]);
+    b.insertAll(db.workoutSets, [
+      WorkoutSetsCompanion.insert(
+        logId: 'log-1',
+        reps: const Value(10),
+        weight: const Value(40),
+        warmup: const Value(true),
+        sortOrder: const Value(0),
+      ),
+      WorkoutSetsCompanion.insert(logId: 'log-1'),
+    ]);
+    b.insertAll(db.workoutTemplates, [
+      WorkoutTemplatesCompanion.insert(
+        id: const Value('wt-1'),
+        name: 'Chest day',
+        weekdays: const Value([1, 4]),
+        notes: const Value('n'),
+        active: const Value(false),
+      ),
+      WorkoutTemplatesCompanion.insert(name: 'sparse'),
+    ]);
+    b.insertAll(db.workoutTemplateItems, [
+      WorkoutTemplateItemsCompanion.insert(
+        templateId: 'wt-1',
+        exerciseId: 'ex-1',
+        sets: const Value(4),
+        reps: const Value(8),
+        weight: const Value(60),
+        restSec: const Value(120),
+        warmupSets: const Value(2),
+      ),
+      WorkoutTemplateItemsCompanion.insert(templateId: 'wt-1', exerciseId: 'ex-1'),
     ]);
     b.insertAll(db.avoidItems, [
       AvoidItemsCompanion.insert(body: 'item', reason: const Value('r')),

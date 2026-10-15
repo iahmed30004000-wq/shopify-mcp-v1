@@ -44703,6 +44703,624 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'البطاقة بهذا العمود أصلًا'**
   String get kanbanAlreadyHere;
+
+  /// Part 8 / #24: the gym, properly – the exercise library, the sets, the session runner and his own numbers
+  ///
+  /// In ar, this message translates to:
+  /// **'الجيم'**
+  String get gymTitle;
+
+  /// No description provided for @gymSessionTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جلسة اليوم'**
+  String get gymSessionTitle;
+
+  /// No description provided for @gymStartSession.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الجلسة'**
+  String get gymStartSession;
+
+  /// No description provided for @gymTrainingDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام التمرين'**
+  String get gymTrainingDays;
+
+  /// No description provided for @gymOpenExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح التمرين'**
+  String get gymOpenExercise;
+
+  /// No description provided for @gymMachinePhoto.
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة الجهاز'**
+  String get gymMachinePhoto;
+
+  /// No description provided for @gymPhotoOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة {name}'**
+  String gymPhotoOf(String name);
+
+  /// No description provided for @gymAddPhoto.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف صورة الجهاز'**
+  String get gymAddPhoto;
+
+  /// No description provided for @gymChangePhoto.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدّل الصورة'**
+  String get gymChangePhoto;
+
+  /// No description provided for @gymRemovePhoto.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف الصورة'**
+  String get gymRemovePhoto;
+
+  /// No description provided for @gymPhotoAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت الصورة جوّة مدار'**
+  String get gymPhotoAdded;
+
+  /// No description provided for @gymPhotoRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'شلت الصورة'**
+  String get gymPhotoRemoved;
+
+  /// No description provided for @gymPhotoKept.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصورة محفوظة جوّة مدار، فلو حذفتها من معرض الصور بتضل هنا ومع النسخة الاحتياطية'**
+  String get gymPhotoKept;
+
+  /// No description provided for @gymPhotoMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصورة مش موجودة'**
+  String get gymPhotoMissing;
+
+  /// No description provided for @gymPhotoWrongKind.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الملف مش صورة بقدر أعرضها'**
+  String get gymPhotoWrongKind;
+
+  /// No description provided for @gymPhotoTooBig.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصورة أكبر من {size} ميغا'**
+  String gymPhotoTooBig(String size);
+
+  /// No description provided for @gymPhotoFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قدرت أحفظ الصورة'**
+  String get gymPhotoFailed;
+
+  /// No description provided for @gymVideo.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيديو الحركة'**
+  String get gymVideo;
+
+  /// No description provided for @gymAddVideo.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف فيديو'**
+  String get gymAddVideo;
+
+  /// No description provided for @gymVideoFromFiles.
+  ///
+  /// In ar, this message translates to:
+  /// **'من ملفاتي'**
+  String get gymVideoFromFiles;
+
+  /// No description provided for @gymVideoFromLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'رابط'**
+  String get gymVideoFromLink;
+
+  /// No description provided for @gymVideoLinkLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رابط الفيديو'**
+  String get gymVideoLinkLabel;
+
+  /// No description provided for @gymVideoLinkHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق الرابط هنا'**
+  String get gymVideoLinkHint;
+
+  /// No description provided for @gymVideoKept.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفيديو بيضل بمكانه: مدار بيحفظ وينه بس، لأنه كبير. لو نقلته أو حذفته بيوقف يفتح'**
+  String get gymVideoKept;
+
+  /// No description provided for @gymVideoMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف مش موجود بمكانه'**
+  String get gymVideoMissing;
+
+  /// No description provided for @gymVideoOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّل الفيديو'**
+  String get gymVideoOpen;
+
+  /// No description provided for @gymVideoNoApp.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في شي بالهاتف فتح هذا الفيديو'**
+  String get gymVideoNoApp;
+
+  /// No description provided for @gymVideoSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت مكان الفيديو'**
+  String get gymVideoSaved;
+
+  /// No description provided for @gymRemoveVideo.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف الفيديو'**
+  String get gymRemoveVideo;
+
+  /// No description provided for @gymVideoRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'شلت الفيديو'**
+  String get gymVideoRemoved;
+
+  /// No description provided for @gymMuscles.
+  ///
+  /// In ar, this message translates to:
+  /// **'العضلات'**
+  String get gymMuscles;
+
+  /// No description provided for @gymMusclesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صدر، كتف أمامي، ترايسبس…'**
+  String get gymMusclesHint;
+
+  /// No description provided for @gymNoMuscles.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما حدّدت عضلات'**
+  String get gymNoMuscles;
+
+  /// No description provided for @gymMedia.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصورة والفيديو'**
+  String get gymMedia;
+
+  /// No description provided for @gymRest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الراحة بين المجموعات'**
+  String get gymRest;
+
+  /// No description provided for @gymRestShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'راحة'**
+  String get gymRestShort;
+
+  /// No description provided for @gymWarmupSets.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعات تسخين'**
+  String get gymWarmupSets;
+
+  /// No description provided for @gymWarmup.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسخين'**
+  String get gymWarmup;
+
+  /// No description provided for @gymUnitSec.
+  ///
+  /// In ar, this message translates to:
+  /// **'ث'**
+  String get gymUnitSec;
+
+  /// No description provided for @gymSecondsValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} ث'**
+  String gymSecondsValue(String value);
+
+  /// No description provided for @gymNextTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرقامك للمرّة الجاي'**
+  String get gymNextTitle;
+
+  /// No description provided for @gymNotAdvice.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا حساب على أرقامك إنت، مش نصيحة ولا برنامج ولا كلام طب'**
+  String get gymNotAdvice;
+
+  /// No description provided for @gymLastTimeValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر مرّة: {value}'**
+  String gymLastTimeValue(String value);
+
+  /// No description provided for @gymBeforeThatValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقبلها: {value}'**
+  String gymBeforeThatValue(String value);
+
+  /// No description provided for @gymYourStep.
+  ///
+  /// In ar, this message translates to:
+  /// **'أصغر زيادة عملتها بإيدك: {value}'**
+  String gymYourStep(String value);
+
+  /// No description provided for @gymSameStepLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفس هذي الزيادة بتوصّل لـ {value}'**
+  String gymSameStepLine(String value);
+
+  /// No description provided for @gymRepeatLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفس أرقام آخر مرّة: {value}'**
+  String gymRepeatLine(String value);
+
+  /// No description provided for @gymRepsUpLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثبّتت الوزن وزاد التكرار: {value}'**
+  String gymRepsUpLine(String value);
+
+  /// No description provided for @gymFromDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في أيام تمرين} =1{محسوب من يوم تمرين واحد} =2{محسوب من يومين تمرين} few{محسوب من {count} أيام تمرين} many{محسوب من {count} يوم تمرين} other{محسوب من {count} يوم تمرين}}'**
+  String gymFromDays(num count);
+
+  /// No description provided for @gymNothingYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسّه ما سجّلت هذا التمرين'**
+  String get gymNothingYet;
+
+  /// No description provided for @gymNothingYetBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل مجموعاتك مرّة، وبعدها بقدر أقرأ أرقامك وأحسبها'**
+  String get gymNothingYetBody;
+
+  /// No description provided for @gymUseThese.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل بهذي الأرقام'**
+  String get gymUseThese;
+
+  /// No description provided for @gymBestSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى مجموعة'**
+  String get gymBestSet;
+
+  /// No description provided for @gymBestReps.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر تكرار بمجموعة'**
+  String get gymBestReps;
+
+  /// No description provided for @gymBestOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم {day}'**
+  String gymBestOn(String day);
+
+  /// No description provided for @gymSetBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'{reps} × {weight}'**
+  String gymSetBy(String reps, String weight);
+
+  /// No description provided for @gymProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقدّم'**
+  String get gymProgress;
+
+  /// No description provided for @gymOpenHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل كامل'**
+  String get gymOpenHistory;
+
+  /// No description provided for @gymLogSession.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل جلسة'**
+  String get gymLogSession;
+
+  /// No description provided for @gymEditExerciseAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل التمرين'**
+  String get gymEditExerciseAction;
+
+  /// No description provided for @gymExerciseOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمرين {index} من {total}'**
+  String gymExerciseOf(String index, String total);
+
+  /// No description provided for @gymSetOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعة {index} من {total}'**
+  String gymSetOf(String index, String total);
+
+  /// No description provided for @gymSetDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت المجموعة'**
+  String get gymSetDone;
+
+  /// No description provided for @gymSkipSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطّى المجموعة'**
+  String get gymSkipSet;
+
+  /// No description provided for @gymFinishExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت التمرين'**
+  String get gymFinishExercise;
+
+  /// No description provided for @gymNextExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمرين اللي بعده'**
+  String get gymNextExercise;
+
+  /// No description provided for @gymResting.
+  ///
+  /// In ar, this message translates to:
+  /// **'راحة'**
+  String get gymResting;
+
+  /// No description provided for @gymRestOver.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلصت الراحة'**
+  String get gymRestOver;
+
+  /// No description provided for @gymRestCountingUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّاد الراحة شغّال'**
+  String get gymRestCountingUp;
+
+  /// No description provided for @gymSkipRest.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمّل بدون راحة'**
+  String get gymSkipRest;
+
+  /// No description provided for @gymRestPlus.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيد {value}'**
+  String gymRestPlus(String value);
+
+  /// No description provided for @gymSessionLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلت {name}'**
+  String gymSessionLogged(String name);
+
+  /// No description provided for @gymSessionDoneTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلصت جلسة اليوم'**
+  String get gymSessionDoneTitle;
+
+  /// No description provided for @gymSessionDoneBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل اللي سجّلته محفوظ بسجلك، وبتلاقيه بتاريخ كل تمرين'**
+  String get gymSessionDoneBody;
+
+  /// No description provided for @gymSessionEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في جلسة اليوم'**
+  String get gymSessionEmptyTitle;
+
+  /// No description provided for @gymSessionEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم ما في تمارين بخطتك. افتح الخطة أو أيام التمرين لو بدّك تحدّد'**
+  String get gymSessionEmptyBody;
+
+  /// No description provided for @gymLeaveSession.
+  ///
+  /// In ar, this message translates to:
+  /// **'اطلع من الجلسة'**
+  String get gymLeaveSession;
+
+  /// No description provided for @gymSetsSoFar.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما سجّلت ولا مجموعة} =1{مجموعة واحدة} =2{مجموعتين} few{{count} مجموعات} many{{count} مجموعة} other{{count} مجموعة}}'**
+  String gymSetsSoFar(num count);
+
+  /// No description provided for @gymTemplatesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام التمرين'**
+  String get gymTemplatesTitle;
+
+  /// No description provided for @gymTemplatesSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم بإسمه، بأيامه، وبتمارينه بالترتيب'**
+  String get gymTemplatesSubtitle;
+
+  /// No description provided for @gymTemplatesEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في يوم مسمّى'**
+  String get gymTemplatesEmptyTitle;
+
+  /// No description provided for @gymTemplatesEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اعمل يوم زي «يوم صدر»، حدّد أيامه وتمارينه بالترتيب، وبيوم الإثنين بتلاقي جلستك جاهزة'**
+  String get gymTemplatesEmptyBody;
+
+  /// No description provided for @gymAddTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم جديد'**
+  String get gymAddTemplate;
+
+  /// No description provided for @gymEditTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل اليوم'**
+  String get gymEditTemplate;
+
+  /// No description provided for @gymTemplateName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم اليوم'**
+  String get gymTemplateName;
+
+  /// No description provided for @gymTemplateNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم صدر، يوم أرجل…'**
+  String get gymTemplateNameHint;
+
+  /// No description provided for @gymTemplateWeekdays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام الأسبوع'**
+  String get gymTemplateWeekdays;
+
+  /// No description provided for @gymTemplateItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمارين اليوم'**
+  String get gymTemplateItems;
+
+  /// No description provided for @gymAddTemplateItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف تمرين لليوم'**
+  String get gymAddTemplateItem;
+
+  /// No description provided for @gymTemplateItemNumbers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرقام اليوم لهذا التمرين'**
+  String get gymTemplateItemNumbers;
+
+  /// No description provided for @gymTemplateItemHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللي تحدّده هنا بيغلب أرقام التمرين، بهذا اليوم بس. اتركه فاضي وبياخد أرقام التمرين'**
+  String get gymTemplateItemHint;
+
+  /// No description provided for @gymTemplateSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظت اليوم'**
+  String get gymTemplateSaved;
+
+  /// No description provided for @gymTemplateDeleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذفت {name}'**
+  String gymTemplateDeleted(String name);
+
+  /// No description provided for @gymTemplateItemAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضفت {name} لليوم'**
+  String gymTemplateItemAdded(String name);
+
+  /// No description provided for @gymTemplateItemRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'شلت {name} من اليوم'**
+  String gymTemplateItemRemoved(String name);
+
+  /// No description provided for @gymTemplateCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{ما في تمارين} =1{تمرين واحد} =2{تمرينين} few{{count} تمارين} many{{count} تمرين} other{{count} تمرين}}'**
+  String gymTemplateCount(num count);
+
+  /// No description provided for @gymTemplateNoDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما حدّدت أيام لهذا اليوم'**
+  String get gymTemplateNoDays;
+
+  /// No description provided for @gymPickExercise.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر تمرين'**
+  String get gymPickExercise;
+
+  /// No description provided for @gymNoLibraryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتبة التمارين فاضية'**
+  String get gymNoLibraryTitle;
+
+  /// No description provided for @gymNoLibraryBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضيف تمرينك إنت: الاسم، صورة الجهاز، فيديو الحركة، العضلات والأرقام. مدار ما بيحط تمارين من عنده'**
+  String get gymNoLibraryBody;
+
+  /// No description provided for @gymNoSetsYetHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد كل مجموعة اضغط «خلّصت المجموعة» وبتنزل هنا'**
+  String get gymNoSetsYetHint;
+
+  /// No description provided for @gymLibraryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط على التمرين تشوف صورته وفيديوه وتاريخك فيه'**
+  String get gymLibraryHint;
+
+  /// No description provided for @gymSetsOfLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعات هذا اليوم'**
+  String get gymSetsOfLog;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

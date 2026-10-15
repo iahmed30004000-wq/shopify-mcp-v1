@@ -15,6 +15,7 @@ import '../domain/body_clock.dart';
 import '../domain/body_reminder_plan.dart';
 import '../domain/body_week.dart';
 import '../domain/fasting.dart';
+import '../domain/gym.dart';
 import '../domain/training.dart';
 import '../domain/water.dart';
 import 'body_reminders.dart';
@@ -65,6 +66,21 @@ final bodyWorkoutRowsProvider = StreamProvider<List<WorkoutLogRow>>((ref) {
   return ref.watch(bodyServiceProvider).watchWorkouts(since: DateTime(today.year, today.month, today.day - 400));
 });
 
+/// The sets of those logs, in the order he did them.
+final bodyWorkoutSetRowsProvider = StreamProvider<List<WorkoutSetRow>>((ref) {
+  final today = ref.watch(bodyTodayProvider);
+  return ref.watch(bodyServiceProvider).watchSets(since: DateTime(today.year, today.month, today.day - 400));
+});
+
+/// His named training days, in his order.
+final bodyTemplateRowsProvider = StreamProvider<List<WorkoutTemplateRow>>(
+  (ref) => ref.watch(bodyServiceProvider).watchTemplates(),
+);
+
+final bodyTemplateItemRowsProvider = StreamProvider<List<WorkoutTemplateItemRow>>(
+  (ref) => ref.watch(bodyServiceProvider).watchTemplateItems(),
+);
+
 final bodyAvoidRowsProvider = StreamProvider<List<AvoidItemRow>>((ref) => ref.watch(bodyServiceProvider).watchAvoid());
 
 final bodyFastRowsProvider = StreamProvider<List<FastingSessionRow>>(
@@ -94,9 +110,26 @@ PlannedExercise plannedOf(ExerciseRow r) => PlannedExercise(
   weight: r.weight,
   notes: r.notes,
   active: r.active,
+  photo: r.photo,
+  video: r.video,
+  muscles: r.muscles,
+  restSec: r.restSec,
+  warmupSets: r.warmupSets,
 );
 
-WorkoutEntry workoutOf(WorkoutLogRow r) => WorkoutEntry(
+LoggedSet loggedSetOf(WorkoutSetRow r) => LoggedSet(id: r.id, reps: r.reps, weight: r.weight, warmup: r.warmup);
+
+TemplateExercise templateItemOf(WorkoutTemplateItemRow r) => TemplateExercise(
+  id: r.id,
+  exerciseId: r.exerciseId,
+  sets: r.sets,
+  reps: r.reps,
+  weight: r.weight,
+  restSec: r.restSec,
+  warmupSets: r.warmupSets,
+);
+
+WorkoutEntry workoutOf(WorkoutLogRow r, {List<LoggedSet> setLog = const []}) => WorkoutEntry(
   id: r.id,
   exerciseId: r.exerciseId,
   name: r.name,
@@ -106,6 +139,7 @@ WorkoutEntry workoutOf(WorkoutLogRow r) => WorkoutEntry(
   weight: r.weight,
   durationMin: r.durationMin,
   notes: r.notes,
+  setLog: setLog,
 );
 
 FastingSpan fastOf(FastingSessionRow r) =>
@@ -119,9 +153,51 @@ final bodyExercisesProvider = Provider<List<PlannedExercise>>(
   (ref) => [for (final r in ref.watch(bodyExerciseRowsProvider).value ?? const <ExerciseRow>[]) plannedOf(r)],
 );
 
-final bodyWorkoutsProvider = Provider<List<WorkoutEntry>>(
-  (ref) => [for (final r in ref.watch(bodyWorkoutRowsProvider).value ?? const <WorkoutLogRow>[]) workoutOf(r)],
-);
+/// Every logged workout with its own sets attached.
+final bodyWorkoutsProvider = Provider<List<WorkoutEntry>>((ref) {
+  final sets = <String, List<LoggedSet>>{};
+  for (final r in ref.watch(bodyWorkoutSetRowsProvider).value ?? const <WorkoutSetRow>[]) {
+    (sets[r.logId] ??= []).add(loggedSetOf(r));
+  }
+  return [
+    for (final r in ref.watch(bodyWorkoutRowsProvider).value ?? const <WorkoutLogRow>[])
+      workoutOf(r, setLog: sets[r.id] ?? const []),
+  ];
+});
+
+/// His named training days with their exercises, in his order.
+final bodyTemplatesProvider = Provider<List<WorkoutTemplate>>((ref) {
+  final items = <String, List<TemplateExercise>>{};
+  for (final r in ref.watch(bodyTemplateItemRowsProvider).value ?? const <WorkoutTemplateItemRow>[]) {
+    (items[r.templateId] ??= []).add(templateItemOf(r));
+  }
+  return [
+    for (final r in ref.watch(bodyTemplateRowsProvider).value ?? const <WorkoutTemplateRow>[])
+      WorkoutTemplate(
+        id: r.id,
+        name: r.name,
+        weekdays: r.weekdays,
+        notes: r.notes,
+        active: r.active,
+        items: items[r.id] ?? const [],
+      ),
+  ];
+});
+
+/// What a day asks for: its templates' exercises in his order, then
+/// anything scheduled on that weekday which no template of the day named.
+/// Without a single template this is exactly the old plan.
+final bodyDayPlanProvider = Provider<List<PlannedExercise> Function(DateTime day)>((ref) {
+  final exercises = ref.watch(bodyExercisesProvider);
+  final templates = ref.watch(bodyTemplatesProvider);
+  if (templates.every((t) => !t.active || t.items.isEmpty)) {
+    return (day) => [
+      for (final e in exercises)
+        if (e.trainsOn(day)) e,
+    ];
+  }
+  return (day) => SessionPlan.forDay(exercises: exercises, templates: templates, day: day);
+});
 
 /// Today's session: the plan for today's weekday and what was logged.
 final bodyTrainingTodayProvider = Provider<TrainingDay>(
@@ -130,7 +206,13 @@ final bodyTrainingTodayProvider = Provider<TrainingDay>(
     logs: ref.watch(bodyWorkoutsProvider),
     day: ref.watch(bodyTodayProvider),
     clock: ref.watch(bodyWallClockProvider),
+    planFor: ref.watch(bodyDayPlanProvider),
   ),
+);
+
+/// The templates that train today, in his order.
+final bodyTemplatesTodayProvider = Provider<List<WorkoutTemplate>>(
+  (ref) => SessionPlan.templatesOn(ref.watch(bodyTemplatesProvider), ref.watch(bodyTodayProvider)),
 );
 
 /// This display week's planned vs done sessions.
@@ -141,6 +223,7 @@ final bodyWeekAdherenceProvider = Provider<WeekAdherence>(
     today: ref.watch(bodyTodayProvider),
     weekStart: ref.watch(bodyWeekStartProvider),
     clock: ref.watch(bodyWallClockProvider),
+    planFor: ref.watch(bodyDayPlanProvider),
   ),
 );
 
@@ -153,6 +236,20 @@ final bodyExerciseProgressProvider = Provider.family<ExerciseProgress, String>((
     clock: ref.watch(bodyWallClockProvider),
   );
 });
+
+/// The numbers of his next session of one exercise, read off his own log
+/// (`NextLoad` – arithmetic, never advice).
+final bodyNextLoadProvider = Provider.family<NextLoad, String>(
+  (ref, exerciseId) => NextLoad.of(
+    ref.watch(bodyExerciseProgressProvider(exerciseId)),
+    clock: ref.watch(bodyWallClockProvider),
+  ),
+);
+
+/// One exercise of the library, watched by id (the exercise screen).
+final bodyExerciseProvider = Provider.family<PlannedExercise?, String>(
+  (ref, id) => ref.watch(bodyExercisesProvider.select((l) => l.where((e) => e.id == id).firstOrNull)),
+);
 
 final bodyFastsProvider = Provider<List<FastingSpan>>(
   (ref) => [for (final r in ref.watch(bodyFastRowsProvider).value ?? const <FastingSessionRow>[]) fastOf(r)],

@@ -158,6 +158,67 @@ class Exercises extends Table with Entity, Ordered {
   RealColumn get weight => real().nullable()();
   TextColumn get notes => text().nullable()();
   BoolColumn get active => boolean().withDefault(const Constant(true))();
+
+  /// The machine's picture: a **file name** in Madar's own folder
+  /// (`gym_photos/a1b2c3.jpg`), never a path into the gallery – the picked
+  /// image is copied in, so deleting the original changes nothing. See
+  /// `features/body/data/gym_media.dart`.
+  TextColumn get photo => text().nullable()();
+
+  /// The movement's video: his own file path on the phone, or a link. It is
+  /// **not** copied (a clip is tens or hundreds of megabytes); Madar only
+  /// remembers where it is.
+  TextColumn get video => text().nullable()();
+
+  /// The muscles he says it works, in his own words (`["صدر","كتف"]`).
+  /// Nothing of ours is written here: a fresh install has no library.
+  TextColumn get muscles => text().map(const StringListConverter()).withDefault(const Constant('[]'))();
+
+  /// Rest between sets, in seconds (null: no timer offered).
+  IntColumn get restSec => integer().nullable()();
+
+  /// How many of the sets are warm-ups (they are logged, and left out of
+  /// the heaviest-set and volume arithmetic).
+  IntColumn get warmupSets => integer().nullable()();
+}
+
+/// One set of a logged workout: the reps and the weight of that set alone.
+/// A log with no set rows is the older one-line kind and still reads.
+@DataClassName('WorkoutSetRow')
+class WorkoutSets extends Table with Entity, Ordered {
+  TextColumn get logId => text()();
+  IntColumn get reps => integer().nullable()();
+  RealColumn get weight => real().nullable()();
+
+  /// A warm-up set: it counts as done, never as a personal best and never
+  /// in the volume.
+  BoolColumn get warmup => boolean().withDefault(const Constant(false))();
+}
+
+/// A named training day of his own («يوم صدر»), on the weekdays he gives
+/// it. Nothing of ours is written: a fresh install has no template.
+@DataClassName('WorkoutTemplateRow')
+class WorkoutTemplates extends Table with Entity, Ordered {
+  TextColumn get name => text()();
+
+  /// ISO weekdays 1 (Mon) … 7 (Sun).
+  TextColumn get weekdays => text().map(const IntListConverter()).withDefault(const Constant('[]'))();
+  TextColumn get notes => text().nullable()();
+  BoolColumn get active => boolean().withDefault(const Constant(true))();
+}
+
+/// One exercise inside a template, in the order he wants to do it. The
+/// numbers here override the exercise's own for that day only; null means
+/// "whatever the exercise says".
+@DataClassName('WorkoutTemplateItemRow')
+class WorkoutTemplateItems extends Table with Entity, Ordered {
+  TextColumn get templateId => text()();
+  TextColumn get exerciseId => text()();
+  IntColumn get sets => integer().nullable()();
+  IntColumn get reps => integer().nullable()();
+  RealColumn get weight => real().nullable()();
+  IntColumn get restSec => integer().nullable()();
+  IntColumn get warmupSets => integer().nullable()();
 }
 
 @DataClassName('WorkoutLogRow')

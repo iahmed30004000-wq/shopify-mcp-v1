@@ -615,6 +615,32 @@ List<RouteBase> madarRoutes() => [
           key: state.pageKey,
           child: BodyRoutePage(tab: BodyRoutePage.tabOf(state.uri.queryParameters['tab'])),
         ),
+        routes: [
+          GoRoute(
+            path: 'gym/session',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const GymSessionRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'gym/days',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const GymTemplatesRoutePage(),
+            ),
+          ),
+          GoRoute(
+            path: 'gym/exercise/:id',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: GymExerciseRoutePage(exerciseId: state.pathParameters['id']!),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: 'food',

@@ -4,7 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/body/body.dart' show BodyScreen, BodyTab;
+import '../../features/body/body.dart'
+    show BodyScreen, BodyTab, GymExerciseScreen, GymSessionScreen, GymTemplatesScreen;
 import '../../features/custom_modules/custom_modules.dart' show CustomModulesScreen, ModuleScreen;
 import '../../features/family/family.dart' show FamilyScreen, PersonScreen;
 import '../../features/growth/growth.dart' show GoalScreen, GrowthScreen;
@@ -115,7 +116,9 @@ abstract final class LifeNav {
 /// | travel_documents | `/travel?tab=documents` | same |
 /// | packing_templates | `/travel/template/<id>` | `/travel?tab=templates` |
 /// | learning_goals, goal_logs (`goalId`) | `/growth/goal/<id>` | `/growth` |
-/// | exercises, workout_logs | `/body?tab=plan` | same |
+/// | exercises, workout_logs (`exerciseId`) | `/body/gym/exercise/<id>` | `/body?tab=plan` |
+/// | workout_sets | `/body?tab=plan` | same |
+/// | workout_templates, workout_template_items | `/body/gym/days` | same |
 /// | fasting_sessions / water_logs / avoid_items | `/body?tab=fasting` / `water` / `avoid` | same |
 /// | food_logs | `/body?tab=food` | same |
 /// | foods | `/food/library` | same |
@@ -154,6 +157,11 @@ abstract final class LifeRecordLinks {
     'goal_logs',
     'exercises',
     'workout_logs',
+    // Part 8 – the gym. A set opens the plan (it is read inside its own
+    // log); a day of his, and one of its lines, open his training days.
+    'workout_sets',
+    'workout_templates',
+    'workout_template_items',
     'fasting_sessions',
     'water_logs',
     'avoid_items',
@@ -211,7 +219,10 @@ abstract final class LifeRecordLinks {
       ),
       'learning_goals' => either(id, AppRoutes.growthGoalOf, AppRoutes.growth),
       'goal_logs' => either(of('goalId'), AppRoutes.growthGoalOf, AppRoutes.growth),
-      'exercises' || 'workout_logs' => AppRoutes.bodyOf(tab: BodyTab.plan.name),
+      'exercises' => either(id, AppRoutes.gymExerciseOf, AppRoutes.bodyOf(tab: BodyTab.plan.name)),
+      'workout_logs' => either(of('exerciseId'), AppRoutes.gymExerciseOf, AppRoutes.bodyOf(tab: BodyTab.plan.name)),
+      'workout_sets' => AppRoutes.bodyOf(tab: BodyTab.plan.name),
+      'workout_templates' || 'workout_template_items' => AppRoutes.gymTemplates,
       'fasting_sessions' => AppRoutes.bodyOf(tab: BodyTab.fasting.name),
       'water_logs' => AppRoutes.bodyOf(tab: BodyTab.water.name),
       'avoid_items' => AppRoutes.bodyOf(tab: BodyTab.avoid.name),
@@ -527,6 +538,37 @@ class BodyRoutePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => BodyScreen(
     key: ValueKey('body:${tab.name}:${ref.watch(notificationLandingProvider)}'),
     initialTab: tab,
+    animateBackdrop: !_saver(ref),
+  );
+}
+
+/// `/body/gym/session` – today's session, walked set by set.
+class GymSessionRoutePage extends ConsumerWidget {
+  const GymSessionRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => GymSessionScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/body/gym/days` – his named training days.
+class GymTemplatesRoutePage extends ConsumerWidget {
+  const GymTemplatesRoutePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => GymTemplatesScreen(animateBackdrop: !_saver(ref));
+}
+
+/// `/body/gym/exercise/<id>` – one exercise of his library: the machine,
+/// the movement, his history with it and what his own numbers come to.
+class GymExerciseRoutePage extends ConsumerWidget {
+  const GymExerciseRoutePage({super.key, required this.exerciseId});
+
+  final String exerciseId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => GymExerciseScreen(
+    key: ValueKey('gym.exercise:$exerciseId'),
+    exerciseId: exerciseId,
     animateBackdrop: !_saver(ref),
   );
 }

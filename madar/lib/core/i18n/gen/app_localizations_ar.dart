@@ -29097,4 +29097,408 @@ class L10nAr extends L10n {
 
   @override
   String get kanbanAlreadyHere => 'البطاقة بهذا العمود أصلًا';
+
+  @override
+  String get gymTitle => 'الجيم';
+
+  @override
+  String get gymSessionTitle => 'جلسة اليوم';
+
+  @override
+  String get gymStartSession => 'ابدأ الجلسة';
+
+  @override
+  String get gymTrainingDays => 'أيام التمرين';
+
+  @override
+  String get gymOpenExercise => 'افتح التمرين';
+
+  @override
+  String get gymMachinePhoto => 'صورة الجهاز';
+
+  @override
+  String gymPhotoOf(String name) {
+    return 'صورة $name';
+  }
+
+  @override
+  String get gymAddPhoto => 'أضف صورة الجهاز';
+
+  @override
+  String get gymChangePhoto => 'بدّل الصورة';
+
+  @override
+  String get gymRemovePhoto => 'احذف الصورة';
+
+  @override
+  String get gymPhotoAdded => 'حفظت الصورة جوّة مدار';
+
+  @override
+  String get gymPhotoRemoved => 'شلت الصورة';
+
+  @override
+  String get gymPhotoKept =>
+      'الصورة محفوظة جوّة مدار، فلو حذفتها من معرض الصور بتضل هنا ومع النسخة الاحتياطية';
+
+  @override
+  String get gymPhotoMissing => 'الصورة مش موجودة';
+
+  @override
+  String get gymPhotoWrongKind => 'هذا الملف مش صورة بقدر أعرضها';
+
+  @override
+  String gymPhotoTooBig(String size) {
+    return 'الصورة أكبر من $size ميغا';
+  }
+
+  @override
+  String get gymPhotoFailed => 'ما قدرت أحفظ الصورة';
+
+  @override
+  String get gymVideo => 'فيديو الحركة';
+
+  @override
+  String get gymAddVideo => 'أضف فيديو';
+
+  @override
+  String get gymVideoFromFiles => 'من ملفاتي';
+
+  @override
+  String get gymVideoFromLink => 'رابط';
+
+  @override
+  String get gymVideoLinkLabel => 'رابط الفيديو';
+
+  @override
+  String get gymVideoLinkHint => 'الصق الرابط هنا';
+
+  @override
+  String get gymVideoKept =>
+      'الفيديو بيضل بمكانه: مدار بيحفظ وينه بس، لأنه كبير. لو نقلته أو حذفته بيوقف يفتح';
+
+  @override
+  String get gymVideoMissing => 'الملف مش موجود بمكانه';
+
+  @override
+  String get gymVideoOpen => 'شغّل الفيديو';
+
+  @override
+  String get gymVideoNoApp => 'ما في شي بالهاتف فتح هذا الفيديو';
+
+  @override
+  String get gymVideoSaved => 'حفظت مكان الفيديو';
+
+  @override
+  String get gymRemoveVideo => 'احذف الفيديو';
+
+  @override
+  String get gymVideoRemoved => 'شلت الفيديو';
+
+  @override
+  String get gymMuscles => 'العضلات';
+
+  @override
+  String get gymMusclesHint => 'صدر، كتف أمامي، ترايسبس…';
+
+  @override
+  String get gymNoMuscles => 'ما حدّدت عضلات';
+
+  @override
+  String get gymMedia => 'الصورة والفيديو';
+
+  @override
+  String get gymRest => 'الراحة بين المجموعات';
+
+  @override
+  String get gymRestShort => 'راحة';
+
+  @override
+  String get gymWarmupSets => 'مجموعات تسخين';
+
+  @override
+  String get gymWarmup => 'تسخين';
+
+  @override
+  String get gymUnitSec => 'ث';
+
+  @override
+  String gymSecondsValue(String value) {
+    return '$value ث';
+  }
+
+  @override
+  String get gymNextTitle => 'أرقامك للمرّة الجاي';
+
+  @override
+  String get gymNotAdvice =>
+      'هذا حساب على أرقامك إنت، مش نصيحة ولا برنامج ولا كلام طب';
+
+  @override
+  String gymLastTimeValue(String value) {
+    return 'آخر مرّة: $value';
+  }
+
+  @override
+  String gymBeforeThatValue(String value) {
+    return 'وقبلها: $value';
+  }
+
+  @override
+  String gymYourStep(String value) {
+    return 'أصغر زيادة عملتها بإيدك: $value';
+  }
+
+  @override
+  String gymSameStepLine(String value) {
+    return 'نفس هذي الزيادة بتوصّل لـ $value';
+  }
+
+  @override
+  String gymRepeatLine(String value) {
+    return 'نفس أرقام آخر مرّة: $value';
+  }
+
+  @override
+  String gymRepsUpLine(String value) {
+    return 'ثبّتت الوزن وزاد التكرار: $value';
+  }
+
+  @override
+  String gymFromDays(num count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'محسوب من $countString يوم تمرين',
+      many: 'محسوب من $countString يوم تمرين',
+      few: 'محسوب من $countString أيام تمرين',
+      two: 'محسوب من يومين تمرين',
+      one: 'محسوب من يوم تمرين واحد',
+      zero: 'ما في أيام تمرين',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gymNothingYet => 'لسّه ما سجّلت هذا التمرين';
+
+  @override
+  String get gymNothingYetBody =>
+      'سجّل مجموعاتك مرّة، وبعدها بقدر أقرأ أرقامك وأحسبها';
+
+  @override
+  String get gymUseThese => 'سجّل بهذي الأرقام';
+
+  @override
+  String get gymBestSet => 'أعلى مجموعة';
+
+  @override
+  String get gymBestReps => 'أكثر تكرار بمجموعة';
+
+  @override
+  String gymBestOn(String day) {
+    return 'يوم $day';
+  }
+
+  @override
+  String gymSetBy(String reps, String weight) {
+    return '$reps × $weight';
+  }
+
+  @override
+  String get gymProgress => 'التقدّم';
+
+  @override
+  String get gymOpenHistory => 'السجل كامل';
+
+  @override
+  String get gymLogSession => 'سجّل جلسة';
+
+  @override
+  String get gymEditExerciseAction => 'عدّل التمرين';
+
+  @override
+  String gymExerciseOf(String index, String total) {
+    return 'تمرين $index من $total';
+  }
+
+  @override
+  String gymSetOf(String index, String total) {
+    return 'مجموعة $index من $total';
+  }
+
+  @override
+  String get gymSetDone => 'خلّصت المجموعة';
+
+  @override
+  String get gymSkipSet => 'تخطّى المجموعة';
+
+  @override
+  String get gymFinishExercise => 'خلّصت التمرين';
+
+  @override
+  String get gymNextExercise => 'التمرين اللي بعده';
+
+  @override
+  String get gymResting => 'راحة';
+
+  @override
+  String get gymRestOver => 'خلصت الراحة';
+
+  @override
+  String get gymRestCountingUp => 'عدّاد الراحة شغّال';
+
+  @override
+  String get gymSkipRest => 'كمّل بدون راحة';
+
+  @override
+  String gymRestPlus(String value) {
+    return 'زيد $value';
+  }
+
+  @override
+  String gymSessionLogged(String name) {
+    return 'سجّلت $name';
+  }
+
+  @override
+  String get gymSessionDoneTitle => 'خلصت جلسة اليوم';
+
+  @override
+  String get gymSessionDoneBody =>
+      'كل اللي سجّلته محفوظ بسجلك، وبتلاقيه بتاريخ كل تمرين';
+
+  @override
+  String get gymSessionEmptyTitle => 'ما في جلسة اليوم';
+
+  @override
+  String get gymSessionEmptyBody =>
+      'اليوم ما في تمارين بخطتك. افتح الخطة أو أيام التمرين لو بدّك تحدّد';
+
+  @override
+  String get gymLeaveSession => 'اطلع من الجلسة';
+
+  @override
+  String gymSetsSoFar(num count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString مجموعة',
+      many: '$countString مجموعة',
+      few: '$countString مجموعات',
+      two: 'مجموعتين',
+      one: 'مجموعة واحدة',
+      zero: 'ما سجّلت ولا مجموعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gymTemplatesTitle => 'أيام التمرين';
+
+  @override
+  String get gymTemplatesSubtitle => 'يوم بإسمه، بأيامه، وبتمارينه بالترتيب';
+
+  @override
+  String get gymTemplatesEmptyTitle => 'ما في يوم مسمّى';
+
+  @override
+  String get gymTemplatesEmptyBody =>
+      'اعمل يوم زي «يوم صدر»، حدّد أيامه وتمارينه بالترتيب، وبيوم الإثنين بتلاقي جلستك جاهزة';
+
+  @override
+  String get gymAddTemplate => 'يوم جديد';
+
+  @override
+  String get gymEditTemplate => 'عدّل اليوم';
+
+  @override
+  String get gymTemplateName => 'اسم اليوم';
+
+  @override
+  String get gymTemplateNameHint => 'يوم صدر، يوم أرجل…';
+
+  @override
+  String get gymTemplateWeekdays => 'أيام الأسبوع';
+
+  @override
+  String get gymTemplateItems => 'تمارين اليوم';
+
+  @override
+  String get gymAddTemplateItem => 'أضف تمرين لليوم';
+
+  @override
+  String get gymTemplateItemNumbers => 'أرقام اليوم لهذا التمرين';
+
+  @override
+  String get gymTemplateItemHint =>
+      'اللي تحدّده هنا بيغلب أرقام التمرين، بهذا اليوم بس. اتركه فاضي وبياخد أرقام التمرين';
+
+  @override
+  String get gymTemplateSaved => 'حفظت اليوم';
+
+  @override
+  String gymTemplateDeleted(String name) {
+    return 'حذفت $name';
+  }
+
+  @override
+  String gymTemplateItemAdded(String name) {
+    return 'ضفت $name لليوم';
+  }
+
+  @override
+  String gymTemplateItemRemoved(String name) {
+    return 'شلت $name من اليوم';
+  }
+
+  @override
+  String gymTemplateCount(num count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString تمرين',
+      many: '$countString تمرين',
+      few: '$countString تمارين',
+      two: 'تمرينين',
+      one: 'تمرين واحد',
+      zero: 'ما في تمارين',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gymTemplateNoDays => 'ما حدّدت أيام لهذا اليوم';
+
+  @override
+  String get gymPickExercise => 'اختر تمرين';
+
+  @override
+  String get gymNoLibraryTitle => 'مكتبة التمارين فاضية';
+
+  @override
+  String get gymNoLibraryBody =>
+      'ضيف تمرينك إنت: الاسم، صورة الجهاز، فيديو الحركة، العضلات والأرقام. مدار ما بيحط تمارين من عنده';
+
+  @override
+  String get gymNoSetsYetHint =>
+      'بعد كل مجموعة اضغط «خلّصت المجموعة» وبتنزل هنا';
+
+  @override
+  String get gymLibraryHint =>
+      'اضغط على التمرين تشوف صورته وفيديوه وتاريخك فيه';
+
+  @override
+  String get gymSetsOfLog => 'مجموعات هذا اليوم';
 }

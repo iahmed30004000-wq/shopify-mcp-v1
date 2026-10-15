@@ -30,7 +30,8 @@ part 'database.g.dart';
   DebtPayments, Obligations, ObligationPayments,
   People, ContactLogs, Projects, ProjectItems, Boards, BoardCards, Trips,
   TripItems, PackingTemplates, TravelDocuments, LearningGoals, GoalLogs,
-  Exercises, WorkoutLogs, AvoidItems, FastingSessions, WaterLogs,
+  Exercises, WorkoutLogs, WorkoutSets, WorkoutTemplates, WorkoutTemplateItems,
+  AvoidItems, FastingSessions, WaterLogs,
   CustomModules, CustomEntries,
   QuranBookmarks, QuranSessions, WirdPlans, HifzItems, HifzReviews,
   AppliedPlans, AppliedPlanItems,
@@ -50,7 +51,7 @@ class MadarDatabase extends _$MadarDatabase {
   final SeedOptions? seed;
 
   @override
-  int get schemaVersion => 9;
+  int get schemaVersion => 10;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -126,6 +127,24 @@ class MadarDatabase extends _$MadarDatabase {
           if (from < 9) {
             await m.addColumn(boardCards, boardCards.tag);
             await m.addColumn(boardCards, boardCards.tagColor);
+          }
+          // v10: the gym, properly – an exercise now carries the machine's
+          // picture, the movement's video, the muscles he says it works, the
+          // rest between sets and how many sets are warm-ups; a logged
+          // workout carries its sets one by one; and a training day can be a
+          // named template of his own on the weekdays he gives it. Nothing
+          // of ours is written: the library he already has keeps its
+          // numbers and gains empty media, and there is no template until
+          // he builds one.
+          if (from < 10) {
+            await m.addColumn(exercises, exercises.photo);
+            await m.addColumn(exercises, exercises.video);
+            await m.addColumn(exercises, exercises.muscles);
+            await m.addColumn(exercises, exercises.restSec);
+            await m.addColumn(exercises, exercises.warmupSets);
+            await m.createTable(workoutSets);
+            await m.createTable(workoutTemplates);
+            await m.createTable(workoutTemplateItems);
           }
         },
         beforeOpen: (details) async {

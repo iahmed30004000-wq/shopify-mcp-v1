@@ -28358,4 +28358,401 @@ class L10nEn extends L10n {
 
   @override
   String get kanbanAlreadyHere => 'The card is already in that column';
+
+  @override
+  String get gymTitle => 'Gym';
+
+  @override
+  String get gymSessionTitle => 'Today\'s session';
+
+  @override
+  String get gymStartSession => 'Start the session';
+
+  @override
+  String get gymTrainingDays => 'Training days';
+
+  @override
+  String get gymOpenExercise => 'Open the exercise';
+
+  @override
+  String get gymMachinePhoto => 'The machine';
+
+  @override
+  String gymPhotoOf(String name) {
+    return 'Photo of $name';
+  }
+
+  @override
+  String get gymAddPhoto => 'Add the machine\'s photo';
+
+  @override
+  String get gymChangePhoto => 'Change the photo';
+
+  @override
+  String get gymRemovePhoto => 'Remove the photo';
+
+  @override
+  String get gymPhotoAdded => 'The photo is saved inside Madar';
+
+  @override
+  String get gymPhotoRemoved => 'Photo removed';
+
+  @override
+  String get gymPhotoKept =>
+      'The photo is copied inside Madar: deleting the original changes nothing, and it travels with the backup';
+
+  @override
+  String get gymPhotoMissing => 'The photo is gone';
+
+  @override
+  String get gymPhotoWrongKind =>
+      'Madar cannot show this kind of file as a picture';
+
+  @override
+  String gymPhotoTooBig(String size) {
+    return 'The photo is larger than $size MB';
+  }
+
+  @override
+  String get gymPhotoFailed => 'The photo could not be saved';
+
+  @override
+  String get gymVideo => 'The movement';
+
+  @override
+  String get gymAddVideo => 'Add a video';
+
+  @override
+  String get gymVideoFromFiles => 'From my files';
+
+  @override
+  String get gymVideoFromLink => 'A link';
+
+  @override
+  String get gymVideoLinkLabel => 'Video link';
+
+  @override
+  String get gymVideoLinkHint => 'Paste the link here';
+
+  @override
+  String get gymVideoKept =>
+      'A video stays where it is: Madar only remembers the place, because a clip is big. Move it or delete it and it stops opening';
+
+  @override
+  String get gymVideoMissing => 'The file is no longer there';
+
+  @override
+  String get gymVideoOpen => 'Play the video';
+
+  @override
+  String get gymVideoNoApp => 'Nothing on the phone opened this video';
+
+  @override
+  String get gymVideoSaved => 'The video\'s place is saved';
+
+  @override
+  String get gymRemoveVideo => 'Remove the video';
+
+  @override
+  String get gymVideoRemoved => 'Video removed';
+
+  @override
+  String get gymMuscles => 'Muscles';
+
+  @override
+  String get gymMusclesHint => 'Chest, front shoulder, triceps…';
+
+  @override
+  String get gymNoMuscles => 'No muscles named yet';
+
+  @override
+  String get gymMedia => 'Photo and video';
+
+  @override
+  String get gymRest => 'Rest between sets';
+
+  @override
+  String get gymRestShort => 'Rest';
+
+  @override
+  String get gymWarmupSets => 'Warm-up sets';
+
+  @override
+  String get gymWarmup => 'Warm-up';
+
+  @override
+  String get gymUnitSec => 's';
+
+  @override
+  String gymSecondsValue(String value) {
+    return '$value s';
+  }
+
+  @override
+  String get gymNextTitle => 'Your numbers for next time';
+
+  @override
+  String get gymNotAdvice =>
+      'This is arithmetic on your own numbers — not advice, not a programme, not a medical claim';
+
+  @override
+  String gymLastTimeValue(String value) {
+    return 'Last time: $value';
+  }
+
+  @override
+  String gymBeforeThatValue(String value) {
+    return 'Before that: $value';
+  }
+
+  @override
+  String gymYourStep(String value) {
+    return 'The smallest step you took yourself: $value';
+  }
+
+  @override
+  String gymSameStepLine(String value) {
+    return 'That same step comes to $value';
+  }
+
+  @override
+  String gymRepeatLine(String value) {
+    return 'The same numbers as last time: $value';
+  }
+
+  @override
+  String gymRepsUpLine(String value) {
+    return 'You held the weight and the reps went up: $value';
+  }
+
+  @override
+  String gymFromDays(num count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Read from your last $countString training days',
+      one: 'Read from one training day',
+      zero: 'No training days yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gymNothingYet => 'You have not logged this one yet';
+
+  @override
+  String get gymNothingYetBody =>
+      'Log your sets once and your own numbers can be read back';
+
+  @override
+  String get gymUseThese => 'Log with these numbers';
+
+  @override
+  String get gymBestSet => 'Heaviest set';
+
+  @override
+  String get gymBestReps => 'Most reps in a set';
+
+  @override
+  String gymBestOn(String day) {
+    return 'on $day';
+  }
+
+  @override
+  String gymSetBy(String reps, String weight) {
+    return '$reps × $weight';
+  }
+
+  @override
+  String get gymProgress => 'Progress';
+
+  @override
+  String get gymOpenHistory => 'The whole log';
+
+  @override
+  String get gymLogSession => 'Log a session';
+
+  @override
+  String get gymEditExerciseAction => 'Edit the exercise';
+
+  @override
+  String gymExerciseOf(String index, String total) {
+    return 'Exercise $index of $total';
+  }
+
+  @override
+  String gymSetOf(String index, String total) {
+    return 'Set $index of $total';
+  }
+
+  @override
+  String get gymSetDone => 'Set done';
+
+  @override
+  String get gymSkipSet => 'Skip the set';
+
+  @override
+  String get gymFinishExercise => 'Finish the exercise';
+
+  @override
+  String get gymNextExercise => 'Next exercise';
+
+  @override
+  String get gymResting => 'Resting';
+
+  @override
+  String get gymRestOver => 'Rest is over';
+
+  @override
+  String get gymRestCountingUp => 'The rest clock is running';
+
+  @override
+  String get gymSkipRest => 'Carry on now';
+
+  @override
+  String gymRestPlus(String value) {
+    return 'Add $value';
+  }
+
+  @override
+  String gymSessionLogged(String name) {
+    return '$name is logged';
+  }
+
+  @override
+  String get gymSessionDoneTitle => 'Today\'s session is done';
+
+  @override
+  String get gymSessionDoneBody =>
+      'Everything you logged is in your log, and in each exercise\'s history';
+
+  @override
+  String get gymSessionEmptyTitle => 'Nothing is planned for today';
+
+  @override
+  String get gymSessionEmptyBody =>
+      'Your plan has no exercise today. Open the plan, or your training days, to set one';
+
+  @override
+  String get gymLeaveSession => 'Leave the session';
+
+  @override
+  String gymSetsSoFar(num count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString sets',
+      one: 'One set',
+      zero: 'No sets yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gymTemplatesTitle => 'Training days';
+
+  @override
+  String get gymTemplatesSubtitle =>
+      'A day with its name, its weekdays and its exercises in order';
+
+  @override
+  String get gymTemplatesEmptyTitle => 'No named day yet';
+
+  @override
+  String get gymTemplatesEmptyBody =>
+      'Build a day like “Chest day”, give it its weekdays and its exercises in order, and Monday\'s session is ready for you';
+
+  @override
+  String get gymAddTemplate => 'New day';
+
+  @override
+  String get gymEditTemplate => 'Edit the day';
+
+  @override
+  String get gymTemplateName => 'The day\'s name';
+
+  @override
+  String get gymTemplateNameHint => 'Chest day, leg day…';
+
+  @override
+  String get gymTemplateWeekdays => 'Weekdays';
+
+  @override
+  String get gymTemplateItems => 'The day\'s exercises';
+
+  @override
+  String get gymAddTemplateItem => 'Add an exercise to the day';
+
+  @override
+  String get gymTemplateItemNumbers => 'This day\'s numbers for this exercise';
+
+  @override
+  String get gymTemplateItemHint =>
+      'What you set here beats the exercise\'s own numbers, on this day only. Leave it empty and it takes the exercise\'s';
+
+  @override
+  String get gymTemplateSaved => 'The day is saved';
+
+  @override
+  String gymTemplateDeleted(String name) {
+    return '$name is deleted';
+  }
+
+  @override
+  String gymTemplateItemAdded(String name) {
+    return '$name is in the day';
+  }
+
+  @override
+  String gymTemplateItemRemoved(String name) {
+    return '$name is out of the day';
+  }
+
+  @override
+  String gymTemplateCount(num count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString exercises',
+      one: 'One exercise',
+      zero: 'No exercises',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gymTemplateNoDays => 'No weekdays chosen for it';
+
+  @override
+  String get gymPickExercise => 'Pick an exercise';
+
+  @override
+  String get gymNoLibraryTitle => 'Your exercise library is empty';
+
+  @override
+  String get gymNoLibraryBody =>
+      'Add your own: the name, the machine\'s photo, the movement\'s video, the muscles and the numbers. Madar ships none of its own';
+
+  @override
+  String get gymNoSetsYetHint =>
+      'After each set tap “Set done” and it lands here';
+
+  @override
+  String get gymLibraryHint =>
+      'Tap an exercise for its photo, its video and your history with it';
+
+  @override
+  String get gymSetsOfLog => 'That day\'s sets';
 }

@@ -5,6 +5,7 @@ import 'package:drift/drift.dart';
 import '../../../core/db/database.dart';
 import '../../../core/db/repositories/repositories.dart';
 import '../domain/fasting.dart';
+import '../domain/training.dart';
 import '../domain/water.dart';
 
 /// Reverses one change (the UI wraps it in an undo toast).
@@ -34,6 +35,11 @@ class ExerciseDraft {
     this.weight,
     this.notes,
     this.active = true,
+    this.photo,
+    this.video,
+    this.muscles = const [],
+    this.restSec,
+    this.warmupSets,
   });
 
   final String name;
@@ -44,6 +50,46 @@ class ExerciseDraft {
   final double? weight;
   final String? notes;
   final bool active;
+
+  /// A file name in Madar's own folder (`gym_media.dart`).
+  final String? photo;
+
+  /// A link, or a path to his own clip. Never copied.
+  final String? video;
+  final List<String> muscles;
+  final int? restSec;
+  final int? warmupSets;
+}
+
+/// One set of a workout he is logging.
+class SetDraft {
+  const SetDraft({this.reps, this.weight, this.warmup = false});
+
+  final int? reps;
+  final double? weight;
+  final bool warmup;
+}
+
+/// A new or edited template: a named training day of his own.
+class TemplateDraft {
+  const TemplateDraft({required this.name, this.weekdays = const [], this.notes, this.active = true});
+
+  final String name;
+  final List<int> weekdays;
+  final String? notes;
+  final bool active;
+}
+
+/// One exercise inside a template, with the numbers that day gives it.
+class TemplateItemDraft {
+  const TemplateItemDraft({required this.exerciseId, this.sets, this.reps, this.weight, this.restSec, this.warmupSets});
+
+  final String exerciseId;
+  final int? sets;
+  final int? reps;
+  final double? weight;
+  final int? restSec;
+  final int? warmupSets;
 }
 
 /// A new or edited workout log.
@@ -138,6 +184,14 @@ class BodyService {
     weight: Value(_positive(d.weight)),
     notes: Value(_clean(d.notes)),
     active: Value(d.active),
+    photo: Value(_clean(d.photo)),
+    video: Value(_clean(d.video)),
+    muscles: Value([
+      for (final m in d.muscles)
+        if (m.trim().isNotEmpty) m.trim(),
+    ]),
+    restSec: Value(_positiveInt(d.restSec)),
+    warmupSets: Value(_positiveInt(d.warmupSets)),
   );
 
   Future<(ExerciseRow, BodyUndo)> addExercise(ExerciseDraft d) async {
@@ -170,6 +224,22 @@ class BodyService {
 
   Future<void> reorderExercises(List<String> ids) => repos.exercises.reorder(ids);
 
+  /// Puts the machine's picture on the exercise (a file name in Madar's own
+  /// folder, or null to take it off). The **file** is the caller's to
+  /// delete, and only once the undo chance has passed – see
+  /// `GymActions.pickPhoto`.
+  Future<BodyUndo> setExercisePhoto(ExerciseRow row, String? photo) async {
+    await repos.exercises.setColumn(row.id, 'photo', _clean(photo));
+    return () => repos.exercises.setColumn(row.id, 'photo', row.photo);
+  }
+
+  /// Remembers where the movement's clip is (a link, or a path to his own
+  /// file). The clip itself is never read, copied or deleted.
+  Future<BodyUndo> setExerciseVideo(ExerciseRow row, String? video) async {
+    await repos.exercises.setColumn(row.id, 'video', _clean(video));
+    return () => repos.exercises.setColumn(row.id, 'video', row.video);
+  }
+
   // -------------------------------------------------------- workouts ----
 
   /// Workout logs at or after [since] (all when null), newest first.
@@ -191,20 +261,67 @@ class BodyService {
     notes: Value(_clean(d.notes)),
   );
 
+  /// The sets of workouts at or after [since], in the order they were
+  /// done. One query, joined on the log so an old log far back in the
+  /// history is not read for nothing.
+  Stream<List<WorkoutSetRow>> watchSets({required DateTime since}) {
+    final q = _db.select(_db.workoutSets).join([
+      innerJoin(_db.workoutLogs, _db.workoutLogs.id.equalsExp(_db.workoutSets.logId)),
+    ])
+      ..where(_db.workoutLogs.at.isBiggerOrEqualValue(since))
+      ..orderBy([OrderingTerm.asc(_db.workoutSets.sortOrder), OrderingTerm.asc(_db.workoutSets.createdAt)]);
+    return q.map((r) => r.readTable(_db.workoutSets)).watch();
+  }
+
+  /// One log's sets, in order.
+  Future<List<WorkoutSetRow>> setsOf(String logId) async {
+    final rows = await repos.workoutSets.getAll(where: (t) => t.logId.equals(logId));
+    return rows;
+  }
+
+  /// The one-line columns that stand for [sets]: how many working sets, and
+  /// the reps and weight of the heaviest of them. The volume and the
+  /// personal best are never read from these – they are summed over the set
+  /// rows themselves.
+  static ({int? sets, int? reps, double? weight}) summarise(List<SetDraft> sets) => SetMath.summarise([
+    for (final s in sets) LoggedSet(id: '', reps: _positiveInt(s.reps), weight: _positive(s.weight), warmup: s.warmup),
+  ]);
+
+  Future<void> _writeSets(String logId, List<SetDraft> sets) async {
+    for (var i = 0; i < sets.length; i++) {
+      final s = sets[i];
+      await repos.workoutSets.insert(
+        WorkoutSetsCompanion.insert(
+          logId: logId,
+          reps: Value(_positiveInt(s.reps)),
+          weight: Value(_positive(s.weight)),
+          warmup: Value(s.warmup),
+          sortOrder: Value(i),
+        ),
+      );
+    }
+  }
+
   /// Logs a workout (a planned exercise marked done, or an extra one).
-  Future<(WorkoutLogRow, BodyUndo)> logWorkout(WorkoutDraft d) async {
+  ///
+  /// With [sets] it is the gym's kind of log: one row per set he actually
+  /// did, warm-ups included, and the log's own sets / reps / weight become
+  /// the headline of those rows ([summarise]).
+  Future<(WorkoutLogRow, BodyUndo)> logWorkout(WorkoutDraft d, {List<SetDraft> sets = const []}) async {
+    final s = sets.isEmpty ? (sets: _positiveInt(d.sets), reps: _positiveInt(d.reps), weight: _positive(d.weight)) : summarise(sets);
     final row = await repos.workoutLogs.insert(
       WorkoutLogsCompanion.insert(
         exerciseId: Value(d.exerciseId),
         name: d.name.trim(),
         at: d.at,
-        sets: Value(_positiveInt(d.sets)),
-        reps: Value(_positiveInt(d.reps)),
-        weight: Value(_positive(d.weight)),
+        sets: Value(s.sets),
+        reps: Value(s.reps),
+        weight: Value(s.weight),
         durationMin: Value(_positiveInt(d.durationMin)),
         notes: Value(_clean(d.notes)),
       ),
     );
+    if (sets.isNotEmpty) await _writeSets(row.id, sets);
     await _record(
       kindWorkout,
       'workout_logs',
@@ -216,25 +333,122 @@ class BodyService {
     return (
       row,
       () async {
+        await repos.workoutSets.deleteWhere((t) => t.logId.equals(row.id));
         await repos.workoutLogs.delete(row.id);
         await _unrecord('workout_logs', row.id, kindWorkout);
       },
     );
   }
 
-  Future<BodyUndo> updateWorkout(WorkoutLogRow row, WorkoutDraft d) async {
-    await repos.workoutLogs.update(_workout(d).copyWith(id: Value(row.id)));
-    return () => repos.workoutLogs.update(row);
+  /// Edits a log. With [sets] its set rows are replaced wholesale; undo
+  /// puts the old ones back exactly.
+  Future<BodyUndo> updateWorkout(WorkoutLogRow row, WorkoutDraft d, {List<SetDraft>? sets}) async {
+    final before = sets == null ? const <WorkoutSetRow>[] : await setsOf(row.id);
+    var companion = _workout(d).copyWith(id: Value(row.id));
+    if (sets != null) {
+      final s = summarise(sets);
+      companion = companion.copyWith(sets: Value(s.sets), reps: Value(s.reps), weight: Value(s.weight));
+      await repos.workoutSets.deleteWhere((t) => t.logId.equals(row.id));
+      await _writeSets(row.id, sets);
+    }
+    await repos.workoutLogs.update(companion);
+    return () async {
+      if (sets != null) {
+        await repos.workoutSets.deleteWhere((t) => t.logId.equals(row.id));
+        await repos.workoutSets.restoreAll(before);
+      }
+      await repos.workoutLogs.update(row);
+    };
   }
 
   Future<BodyUndo> deleteWorkout(WorkoutLogRow row) async {
+    final sets = await repos.workoutSets.deleteWhere((t) => t.logId.equals(row.id));
     final gone = await repos.workoutLogs.delete(row.id);
     final activity = await _unrecord('workout_logs', row.id);
     return () async {
       if (gone != null) await repos.workoutLogs.restore(gone);
+      await repos.workoutSets.restoreAll(sets);
       await repos.activityLog.restoreAll(activity);
     };
   }
+
+  // -------------------------------------------------------- templates ----
+
+  /// His named training days, in his order.
+  Stream<List<WorkoutTemplateRow>> watchTemplates() => repos.workoutTemplates.watchAll();
+
+  /// Every template's exercises, in his order (the provider groups them).
+  Stream<List<WorkoutTemplateItemRow>> watchTemplateItems() => repos.workoutTemplateItems.watchAll();
+
+  WorkoutTemplatesCompanion _template(TemplateDraft d) => WorkoutTemplatesCompanion(
+    name: Value(d.name.trim()),
+    weekdays: Value(({for (final w in d.weekdays) if (w >= 1 && w <= 7) w}.toList()..sort())),
+    notes: Value(_clean(d.notes)),
+    active: Value(d.active),
+  );
+
+  Future<(WorkoutTemplateRow, BodyUndo)> addTemplate(TemplateDraft d) async {
+    final row = await repos.workoutTemplates.insert(_template(d));
+    return (row, () async => repos.workoutTemplates.delete(row.id).then((_) {}));
+  }
+
+  Future<BodyUndo> updateTemplate(WorkoutTemplateRow row, TemplateDraft d) async {
+    await repos.workoutTemplates.update(_template(d).copyWith(id: Value(row.id)));
+    return () => repos.workoutTemplates.update(row);
+  }
+
+  /// Deletes a template and the rows that said which exercises it holds.
+  /// His exercises themselves are never touched, and undo puts the day
+  /// back whole.
+  Future<BodyUndo> deleteTemplate(WorkoutTemplateRow row) async {
+    final items = await repos.workoutTemplateItems.deleteWhere((t) => t.templateId.equals(row.id));
+    final gone = await repos.workoutTemplates.delete(row.id);
+    return () async {
+      if (gone != null) await repos.workoutTemplates.restore(gone);
+      await repos.workoutTemplateItems.restoreAll(items);
+    };
+  }
+
+  Future<void> reorderTemplates(List<String> ids) => repos.workoutTemplates.reorder(ids);
+
+  WorkoutTemplateItemsCompanion _templateItem(String templateId, TemplateItemDraft d) => WorkoutTemplateItemsCompanion(
+    templateId: Value(templateId),
+    exerciseId: Value(d.exerciseId),
+    sets: Value(_positiveInt(d.sets)),
+    reps: Value(_positiveInt(d.reps)),
+    weight: Value(_positive(d.weight)),
+    restSec: Value(_positiveInt(d.restSec)),
+    warmupSets: Value(_positiveInt(d.warmupSets)),
+  );
+
+  Future<(WorkoutTemplateItemRow, BodyUndo)> addTemplateItem(String templateId, TemplateItemDraft d) async {
+    final row = await repos.workoutTemplateItems.insert(
+      WorkoutTemplateItemsCompanion.insert(
+        templateId: templateId,
+        exerciseId: d.exerciseId,
+        sets: Value(_positiveInt(d.sets)),
+        reps: Value(_positiveInt(d.reps)),
+        weight: Value(_positive(d.weight)),
+        restSec: Value(_positiveInt(d.restSec)),
+        warmupSets: Value(_positiveInt(d.warmupSets)),
+      ),
+    );
+    return (row, () async => repos.workoutTemplateItems.delete(row.id).then((_) {}));
+  }
+
+  Future<BodyUndo> updateTemplateItem(WorkoutTemplateItemRow row, TemplateItemDraft d) async {
+    await repos.workoutTemplateItems.update(_templateItem(row.templateId, d).copyWith(id: Value(row.id)));
+    return () => repos.workoutTemplateItems.update(row);
+  }
+
+  Future<BodyUndo> removeTemplateItem(WorkoutTemplateItemRow row) async {
+    final gone = await repos.workoutTemplateItems.delete(row.id);
+    return () async {
+      if (gone != null) await repos.workoutTemplateItems.restore(gone);
+    };
+  }
+
+  Future<void> reorderTemplateItems(List<String> ids) => repos.workoutTemplateItems.reorder(ids);
 
   // ----------------------------------------------------------- avoid ----
 

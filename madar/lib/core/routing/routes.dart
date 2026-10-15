@@ -321,6 +321,19 @@ abstract final class AppRoutes {
   /// `avoid`, `food`; null or `today`: the plain location).
   static String bodyOf({String? tab}) => _withTab(body, tab, 'today');
 
+  /// The gym (Part 8, «#24»): his exercise library's own page per
+  /// exercise, today's session set by set, and his named training days.
+  static const String gymExercise = '/body/gym/exercise/:id';
+
+  /// Location of the exercise [exerciseId]'s own page.
+  static String gymExerciseOf(String exerciseId) => '/body/gym/exercise/${Uri.encodeComponent(exerciseId)}';
+
+  /// Today's session, walked set by set.
+  static const String gymSession = '/body/gym/session';
+
+  /// His named training days («يوم صدر» on Monday and Thursday).
+  static const String gymTemplates = '/body/gym/days';
+
   /// Food: the library, the meal plan, his conditions with his own rules,
   /// and the observations. The day itself lives on the Body planet
   /// (`/body?tab=food`).
