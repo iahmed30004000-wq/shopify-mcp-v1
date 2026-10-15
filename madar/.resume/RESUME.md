@@ -143,14 +143,25 @@ three were never identified - a whole-suite run was in flight when work stopped.
    **v10** and three tables and touched `data_areas.dart`, the routes and the deep links; the
    Work board added **v9** and two columns.)
 3. Fix all three, push, and ship the APK - it carries the Work board, the gym and the chat privacy.
-4. Then the next part by his order. «الموديل على الجوال» is the next one and is **unblocked
+4. **Then the owner's new order, set 2026-10-16** (all seven additions are written up in
+   `PLAN.md`): (a) **the astrolabe hotfix** - the date/time text that vanished from the dial:
+   find in git history what it said, restore it, add a test that catches it vanishing again, and
+   tell him in one line what it was and why it went (do this together with the three failures
+   above, in the same push); (b) **Part 9b «تذكير الصيام»**; then his earlier order -
+   (c) **Part 15** the model on the phone, (d) **Part 16 «مدار الصغار»** with its new additions
+   and **a design image to him before any screen is built**; then (e) **Part 17 «كوكب القراءة»**,
+   (f) **Part 18 «الحج والعمرة»**, (g) **Part 19 «رمضان»** - which has a real deadline, about
+   **1 February 2027**, and is the only part that cannot be late. The standing religious-content
+   rule (source + grading on every hadith and dhikr; the kids' religious material behind a flag
+   until the sheikh is named) is at the top of `PLAN.md`.
+5. Then the next part by his order. «الموديل على الجوال» is the next one and is **unblocked
    now**: he decided on 2026-10-16 that the model is **not** bundled in the APK - the app
    downloads it on first use of «التسميع», over Wi-Fi, behind his fingerprint, and keeps it on
    the phone. Candidate reported to him and awaiting nothing: **tarteel-ai/whisper-base-ar-quran**,
    **Apache 2.0**, Whisper Base (77M params), WER 5.75%, with a whisper.cpp/GGML conversion
    available. One honesty note still to close before downloading: its model card does not
    document the training data.
-5. Still waiting on him, and only when those parts come up: the reviewer for «مدار الصغار»'s
+6. Still waiting on him, and only when those parts come up: the reviewer for «مدار الصغار»'s
    religious content, the kids design, and the visual reference for «السما».
 
 **Cancelled by the owner 2026-10-16:** linking the Work board to «فلك». No card-field document,
