@@ -27668,4 +27668,268 @@ class L10nAr extends L10n {
 
   @override
   String get dayChatListSep => '، ';
+
+  @override
+  String get dayChatTitle => 'شات اليوم';
+
+  @override
+  String get dayChatTabChat => 'الشات';
+
+  @override
+  String get dayChatTabSummary => 'شو صار اليوم؟';
+
+  @override
+  String get dayChatComposerHint =>
+      'احكيلي شو صار… «صرفت ٥ دنانير قهوة، صليت العصر بالمسجد»';
+
+  @override
+  String get dayChatSendAction => 'ابعت';
+
+  @override
+  String get dayChatEmptyTitle => 'احكيلي يومك';
+
+  @override
+  String get dayChatEmptyBody =>
+      'اكتب كل اللي صار بسطر واحد، وأنا أوزّعه على مكانه. ولا شي ينزل غير لما تضغط عليه بنفسك.';
+
+  @override
+  String get dayChatReadingLine => 'عمّال أقرأ كلامك…';
+
+  @override
+  String get dayChatNothingRead => 'ما طلع من هاد السطر شي أسجّله.';
+
+  @override
+  String get dayChatYourWords => 'من كلامك';
+
+  @override
+  String get dayChatDaysTitle => 'أيام الشات';
+
+  @override
+  String get dayChatDaysAction => 'اختر يوم';
+
+  @override
+  String get dayChatTodayLabel => 'اليوم';
+
+  @override
+  String get dayChatStatePending => 'بستناك';
+
+  @override
+  String get dayChatStateApplied => 'سجّلتها';
+
+  @override
+  String get dayChatStateRejected => 'قلت لأ';
+
+  @override
+  String get dayChatStateUndone => 'رجّعتها';
+
+  @override
+  String get dayChatEditedBadge => 'معدّلة';
+
+  @override
+  String get dayChatNeedsYou => 'ناقصها شي منك قبل ما أسجّلها.';
+
+  @override
+  String get dayChatGuardNote =>
+      'الدوا والتشخيص إلك ولدكتورك. هاي بتنزل ملاحظة بكلامك وبس.';
+
+  @override
+  String get dayChatUnreadBody =>
+      'قلّي شو تحب أعمل فيها: أخليها ملاحظة بكلامك، أو صحّحها وأنا أقرأها من جديد، أو تسأل عنها ذكاء اصطناعي بنفسك.';
+
+  @override
+  String get dayChatSignBody =>
+      'الرقم واضح، بس ما عندي متابعة بهاد الاسم. اعمل واحدة وأنا أسجّله فيها.';
+
+  @override
+  String get dayChatAiOffline => 'ولا حرف يطلع من تلفونك إلا لما تبعته بنفسك.';
+
+  @override
+  String get dayChatFileAction => 'سجّلها';
+
+  @override
+  String get dayChatEditAction => 'عدّلها';
+
+  @override
+  String get dayChatRejectAction => 'لأ';
+
+  @override
+  String get dayChatNoteAction => 'خليها ملاحظة';
+
+  @override
+  String get dayChatCorrectAction => 'صحّحها';
+
+  @override
+  String get dayChatAskAiAction => 'اسأل الذكاء';
+
+  @override
+  String get dayChatTrackerAction => 'اعمللي متابعة جديدة من هاي';
+
+  @override
+  String get dayChatOpenAction => 'فوتها';
+
+  @override
+  String dayChatFiledToast(String what) {
+    return 'سجّلت: $what';
+  }
+
+  @override
+  String dayChatRejectedToast(String what) {
+    return 'تركت: $what';
+  }
+
+  @override
+  String dayChatEditedToast(String what) {
+    return 'عدّلت: $what';
+  }
+
+  @override
+  String dayChatTrackerToast(String name) {
+    return 'عملت متابعة $name';
+  }
+
+  @override
+  String get dayChatAlreadyFiled => 'هاي مسجّلة من قبل، ما سجّلت شي ثاني.';
+
+  @override
+  String get dayChatCannotFileYet => 'ما بقدر أسجّلها قبل ما تكمّلها.';
+
+  @override
+  String get dayChatEditTitle => 'عدّلها قبل ما أسجّل';
+
+  @override
+  String get dayChatFieldAmount => 'المبلغ';
+
+  @override
+  String get dayChatFieldOnWhat => 'على شو';
+
+  @override
+  String get dayChatFieldPain => 'الوجع من صفر لعشرة';
+
+  @override
+  String get dayChatFieldPainWhere => 'وين الوجع';
+
+  @override
+  String get dayChatFieldMood => 'المزاج من واحد لخمسة';
+
+  @override
+  String get dayChatFieldWater => 'قديش مي';
+
+  @override
+  String get dayChatFieldMeal => 'شو أكلت';
+
+  @override
+  String get dayChatFieldPortion => 'الكمية';
+
+  @override
+  String get dayChatFieldWorkout => 'التمرين';
+
+  @override
+  String get dayChatFieldSets => 'مجموعات';
+
+  @override
+  String get dayChatFieldReps => 'تكرارات';
+
+  @override
+  String get dayChatFieldWeight => 'الوزن';
+
+  @override
+  String get dayChatFieldMinutes => 'دقايق';
+
+  @override
+  String get dayChatFieldPrayer => 'أي صلاة';
+
+  @override
+  String get dayChatFieldMosque => 'بالمسجد';
+
+  @override
+  String get dayChatFieldJamaah => 'بجماعة';
+
+  @override
+  String get dayChatFieldTask => 'المهمة';
+
+  @override
+  String get dayChatFieldTaskMatch => 'أي مهمة خلصت';
+
+  @override
+  String get dayChatFieldWindow => 'بأي وقت';
+
+  @override
+  String get dayChatFieldDate => 'التاريخ';
+
+  @override
+  String get dayChatFieldPerson => 'مين';
+
+  @override
+  String get dayChatFieldChannel => 'كيف';
+
+  @override
+  String get dayChatFieldNote => 'الملاحظة';
+
+  @override
+  String get dayChatFieldModule => 'أي متابعة';
+
+  @override
+  String get dayChatFieldModuleField => 'أي خانة';
+
+  @override
+  String get dayChatFieldValue => 'القيمة';
+
+  @override
+  String get dayChatNoModulesYet => 'ما عندك متابعات لسا.';
+
+  @override
+  String get dayChatNoOpenTasks => 'ما عندك مهام مفتوحة.';
+
+  @override
+  String get dayChatKeepNoTask => 'سجّلها مهمة جديدة خالصة';
+
+  @override
+  String get dayChatCorrectTitle => 'قولها بطريقة ثانية';
+
+  @override
+  String get dayChatCorrectField => 'كلامك';
+
+  @override
+  String get dayChatTrackerTitle => 'متابعة جديدة';
+
+  @override
+  String get dayChatTrackerName => 'اسم المتابعة';
+
+  @override
+  String get dayChatTrackerField => 'اسم الخانة';
+
+  @override
+  String get dayChatTrackerUnit => 'الوحدة';
+
+  @override
+  String get dayChatTrackerMin => 'أقل قيمة';
+
+  @override
+  String get dayChatTrackerMax => 'أعلى قيمة';
+
+  @override
+  String get dayChatTrackerReading => 'القراءة';
+
+  @override
+  String get dayChatSummaryOffline =>
+      'كله محسوب من بياناتك على التلفون، بدون إنترنت.';
+
+  @override
+  String get dayChatOpenFromBar => 'افتح شات اليوم';
+
+  @override
+  String dayChatTitleExpenseUnknown(String note) {
+    return 'صرفت على $note، بس ما قلت قديش';
+  }
+
+  @override
+  String get dayChatTitleExpenseUnknownBare => 'صرفت، بس ما قلت قديش';
+
+  @override
+  String dayChatTitleIncomeUnknown(String note) {
+    return 'قبضت من $note، بس ما قلت قديش';
+  }
+
+  @override
+  String get dayChatTitleIncomeUnknownBare => 'قبضت، بس ما قلت قديش';
 }

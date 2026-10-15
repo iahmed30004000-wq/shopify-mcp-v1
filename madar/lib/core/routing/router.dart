@@ -725,6 +725,21 @@ List<RouteBase> madarRoutes() => [
           ),
         ],
       ),
+      // Part 7 – the daily chat. A sibling of home, because the quick-add
+      // bar on the home panel is the one tap that opens it: his day's
+      // input must never be more than that.
+      GoRoute(
+        path: 'day',
+        pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+          context: context,
+          key: state.pageKey,
+          child: DayChatRoutePage(
+            day: DayChatRoutePage.dayOf(state.uri.queryParameters['day']),
+            tab: DayChatRoutePage.tabOf(state.uri.queryParameters['tab']),
+            initialDraft: state.uri.queryParameters['q'],
+          ),
+        ),
+      ),
       // Part 3 – the AI bridge: the answers he brought back. `/plans` is a
       // sibling of home (not of Settings) because the card on the home
       // panel and the share intent both open it directly.

@@ -16,7 +16,7 @@ import '../../../core/i18n/gen/app_localizations.dart';
 import '../../../core/interaction/interaction.dart';
 import '../../../core/motion/motion_kit.dart';
 import '../../../core/routing/route_pages.dart';
-import '../../../core/routing/system_route_pages.dart' show PlanNav;
+import '../../../core/routing/system_route_pages.dart' show DayChatNav, PlanNav;
 import '../../../core/settings/app_settings.dart';
 import '../../../core/sound/sound_api.dart';
 import '../../ai_bridge/ai_bridge.dart' show PlanChecklistStrip;
@@ -217,6 +217,11 @@ class TaskPanel extends ConsumerWidget {
             child: QuickAddBar(
               blur: false,
               clock: ref.read(homeClockProvider),
+              // Part 7: the bar is still the one place he types. This one
+              // button carries the same words into the daily chat, where a
+              // whole day gets a card per piece – a deeper room of the same
+              // input, never a second input to choose between.
+              onHandOver: (text) => DayChatNav.open(context, draft: text),
               onAdded: (intent) {
                 final w = intent.window;
                 final isTask = intent.kind == QuickAddKind.task || intent.kind == QuickAddKind.note;

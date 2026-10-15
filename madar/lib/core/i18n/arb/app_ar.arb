@@ -25161,5 +25161,363 @@
   "dayChatListSep": "، ",
   "@dayChatListSep": {
     "description": "Daily chat: separator between his own words in a summary line"
+  },
+  "dayChatTitle": "شات اليوم",
+  "@dayChatTitle": {
+    "description": "Daily chat: the screen title"
+  },
+  "dayChatTabChat": "الشات",
+  "@dayChatTabChat": {
+    "description": "Daily chat: the tab with his lines and their cards"
+  },
+  "dayChatTabSummary": "شو صار اليوم؟",
+  "@dayChatTabSummary": {
+    "description": "Daily chat: the tab that reads his day back to him"
+  },
+  "dayChatComposerHint": "احكيلي شو صار… «صرفت ٥ دنانير قهوة، صليت العصر بالمسجد»",
+  "@dayChatComposerHint": {
+    "description": "Daily chat: placeholder of the box he types his day into"
+  },
+  "dayChatSendAction": "ابعت",
+  "@dayChatSendAction": {
+    "description": "Daily chat: sends the line he typed (nothing is written yet)"
+  },
+  "dayChatEmptyTitle": "احكيلي يومك",
+  "@dayChatEmptyTitle": {
+    "description": "Daily chat: the warm invitation of an empty chat"
+  },
+  "dayChatEmptyBody": "اكتب كل اللي صار بسطر واحد، وأنا أوزّعه على مكانه. ولا شي ينزل غير لما تضغط عليه بنفسك.",
+  "@dayChatEmptyBody": {
+    "description": "Daily chat: the body of the empty state"
+  },
+  "dayChatReadingLine": "عمّال أقرأ كلامك…",
+  "@dayChatReadingLine": {
+    "description": "Daily chat: while one line is being read"
+  },
+  "dayChatNothingRead": "ما طلع من هاد السطر شي أسجّله.",
+  "@dayChatNothingRead": {
+    "description": "Daily chat: a line that produced no piece at all"
+  },
+  "dayChatYourWords": "من كلامك",
+  "@dayChatYourWords": {
+    "description": "Daily chat: the label over the exact part of his own sentence a card came from"
+  },
+  "dayChatDaysTitle": "أيام الشات",
+  "@dayChatDaysTitle": {
+    "description": "Daily chat: the list of days that have a chat"
+  },
+  "dayChatDaysAction": "اختر يوم",
+  "@dayChatDaysAction": {
+    "description": "Daily chat: opens the list of days"
+  },
+  "dayChatTodayLabel": "اليوم",
+  "@dayChatTodayLabel": {
+    "description": "Daily chat: the name of the current day in the day list"
+  },
+  "dayChatStatePending": "بستناك",
+  "@dayChatStatePending": {
+    "description": "Daily chat: a card he has not decided yet"
+  },
+  "dayChatStateApplied": "سجّلتها",
+  "@dayChatStateApplied": {
+    "description": "Daily chat: a card that was written into its feature"
+  },
+  "dayChatStateRejected": "قلت لأ",
+  "@dayChatStateRejected": {
+    "description": "Daily chat: a card he refused"
+  },
+  "dayChatStateUndone": "رجّعتها",
+  "@dayChatStateUndone": {
+    "description": "Daily chat: a card that was filed and then undone"
+  },
+  "dayChatEditedBadge": "معدّلة",
+  "@dayChatEditedBadge": {
+    "description": "Daily chat: he changed the card before filing it"
+  },
+  "dayChatNeedsYou": "ناقصها شي منك قبل ما أسجّلها.",
+  "@dayChatNeedsYou": {
+    "description": "Daily chat: why a card cannot be filed as it is"
+  },
+  "dayChatGuardNote": "الدوا والتشخيص إلك ولدكتورك. هاي بتنزل ملاحظة بكلامك وبس.",
+  "@dayChatGuardNote": {
+    "description": "Daily chat: the health guard, said on the card itself"
+  },
+  "dayChatUnreadBody": "قلّي شو تحب أعمل فيها: أخليها ملاحظة بكلامك، أو صحّحها وأنا أقرأها من جديد، أو تسأل عنها ذكاء اصطناعي بنفسك.",
+  "@dayChatUnreadBody": {
+    "description": "Daily chat: the three ways out of a sentence it could not read"
+  },
+  "dayChatSignBody": "الرقم واضح، بس ما عندي متابعة بهاد الاسم. اعمل واحدة وأنا أسجّله فيها.",
+  "@dayChatSignBody": {
+    "description": "Daily chat: a number with no tracker of his"
+  },
+  "dayChatAiOffline": "ولا حرف يطلع من تلفونك إلا لما تبعته بنفسك.",
+  "@dayChatAiOffline": {
+    "description": "Daily chat: said beside the ask-an-AI tap"
+  },
+  "dayChatFileAction": "سجّلها",
+  "@dayChatFileAction": {
+    "description": "Daily chat: writes this one piece into its feature"
+  },
+  "dayChatEditAction": "عدّلها",
+  "@dayChatEditAction": {
+    "description": "Daily chat: corrects this one piece before filing it"
+  },
+  "dayChatRejectAction": "لأ",
+  "@dayChatRejectAction": {
+    "description": "Daily chat: he does not want this piece"
+  },
+  "dayChatNoteAction": "خليها ملاحظة",
+  "@dayChatNoteAction": {
+    "description": "Daily chat: turns an unread sentence into his own note"
+  },
+  "dayChatCorrectAction": "صحّحها",
+  "@dayChatCorrectAction": {
+    "description": "Daily chat: he says the sentence another way and it is read again"
+  },
+  "dayChatAskAiAction": "اسأل الذكاء",
+  "@dayChatAskAiAction": {
+    "description": "Daily chat: hands one sentence to the AI round trip, on his tap only"
+  },
+  "dayChatTrackerAction": "اعمللي متابعة جديدة من هاي",
+  "@dayChatTrackerAction": {
+    "description": "Daily chat: builds a tracker for a number that has none"
+  },
+  "dayChatOpenAction": "فوتها",
+  "@dayChatOpenAction": {
+    "description": "Daily chat: opens the record a filed card created"
+  },
+  "dayChatFiledToast": "سجّلت: {what}",
+  "@dayChatFiledToast": {
+    "description": "Daily chat: undo toast after one piece was filed",
+    "placeholders": {
+      "what": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatRejectedToast": "تركت: {what}",
+  "@dayChatRejectedToast": {
+    "description": "Daily chat: undo toast after he refused one piece",
+    "placeholders": {
+      "what": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatEditedToast": "عدّلت: {what}",
+  "@dayChatEditedToast": {
+    "description": "Daily chat: undo toast after an edit that is not written yet",
+    "placeholders": {
+      "what": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTrackerToast": "عملت متابعة {name}",
+  "@dayChatTrackerToast": {
+    "description": "Daily chat: undo toast after a tracker was built from a number",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatAlreadyFiled": "هاي مسجّلة من قبل، ما سجّلت شي ثاني.",
+  "@dayChatAlreadyFiled": {
+    "description": "Daily chat: a second tap on a card that is already filed"
+  },
+  "dayChatCannotFileYet": "ما بقدر أسجّلها قبل ما تكمّلها.",
+  "@dayChatCannotFileYet": {
+    "description": "Daily chat: refused to file a piece that still needs him"
+  },
+  "dayChatEditTitle": "عدّلها قبل ما أسجّل",
+  "@dayChatEditTitle": {
+    "description": "Daily chat: title of the edit sheet"
+  },
+  "dayChatFieldAmount": "المبلغ",
+  "@dayChatFieldAmount": {
+    "description": "Daily chat edit sheet: the money amount"
+  },
+  "dayChatFieldOnWhat": "على شو",
+  "@dayChatFieldOnWhat": {
+    "description": "Daily chat edit sheet: what the money was for"
+  },
+  "dayChatFieldPain": "الوجع من صفر لعشرة",
+  "@dayChatFieldPain": {
+    "description": "Daily chat edit sheet: the pain score"
+  },
+  "dayChatFieldPainWhere": "وين الوجع",
+  "@dayChatFieldPainWhere": {
+    "description": "Daily chat edit sheet: where the pain is"
+  },
+  "dayChatFieldMood": "المزاج من واحد لخمسة",
+  "@dayChatFieldMood": {
+    "description": "Daily chat edit sheet: the mood score"
+  },
+  "dayChatFieldWater": "قديش مي",
+  "@dayChatFieldWater": {
+    "description": "Daily chat edit sheet: millilitres of water"
+  },
+  "dayChatFieldMeal": "شو أكلت",
+  "@dayChatFieldMeal": {
+    "description": "Daily chat edit sheet: the food name"
+  },
+  "dayChatFieldPortion": "الكمية",
+  "@dayChatFieldPortion": {
+    "description": "Daily chat edit sheet: how much of it"
+  },
+  "dayChatFieldWorkout": "التمرين",
+  "@dayChatFieldWorkout": {
+    "description": "Daily chat edit sheet: the exercise name"
+  },
+  "dayChatFieldSets": "مجموعات",
+  "@dayChatFieldSets": {
+    "description": "Daily chat edit sheet: how many sets"
+  },
+  "dayChatFieldReps": "تكرارات",
+  "@dayChatFieldReps": {
+    "description": "Daily chat edit sheet: how many reps"
+  },
+  "dayChatFieldWeight": "الوزن",
+  "@dayChatFieldWeight": {
+    "description": "Daily chat edit sheet: the weight lifted"
+  },
+  "dayChatFieldMinutes": "دقايق",
+  "@dayChatFieldMinutes": {
+    "description": "Daily chat edit sheet: how long the workout was"
+  },
+  "dayChatFieldPrayer": "أي صلاة",
+  "@dayChatFieldPrayer": {
+    "description": "Daily chat edit sheet: which of the five prayers"
+  },
+  "dayChatFieldMosque": "بالمسجد",
+  "@dayChatFieldMosque": {
+    "description": "Daily chat edit sheet: the prayer was at the mosque"
+  },
+  "dayChatFieldJamaah": "بجماعة",
+  "@dayChatFieldJamaah": {
+    "description": "Daily chat edit sheet: the prayer was in congregation"
+  },
+  "dayChatFieldTask": "المهمة",
+  "@dayChatFieldTask": {
+    "description": "Daily chat edit sheet: the task title"
+  },
+  "dayChatFieldTaskMatch": "أي مهمة خلصت",
+  "@dayChatFieldTaskMatch": {
+    "description": "Daily chat edit sheet: picks one of his open tasks"
+  },
+  "dayChatFieldWindow": "بأي وقت",
+  "@dayChatFieldWindow": {
+    "description": "Daily chat edit sheet: the prayer window of a to-do"
+  },
+  "dayChatFieldDate": "التاريخ",
+  "@dayChatFieldDate": {
+    "description": "Daily chat edit sheet: the day of a to-do"
+  },
+  "dayChatFieldPerson": "مين",
+  "@dayChatFieldPerson": {
+    "description": "Daily chat edit sheet: the person"
+  },
+  "dayChatFieldChannel": "كيف",
+  "@dayChatFieldChannel": {
+    "description": "Daily chat edit sheet: call, visit or message"
+  },
+  "dayChatFieldNote": "الملاحظة",
+  "@dayChatFieldNote": {
+    "description": "Daily chat edit sheet: the text of a note"
+  },
+  "dayChatFieldModule": "أي متابعة",
+  "@dayChatFieldModule": {
+    "description": "Daily chat edit sheet: picks one of his trackers"
+  },
+  "dayChatFieldModuleField": "أي خانة",
+  "@dayChatFieldModuleField": {
+    "description": "Daily chat edit sheet: picks a field of that tracker"
+  },
+  "dayChatFieldValue": "القيمة",
+  "@dayChatFieldValue": {
+    "description": "Daily chat edit sheet: the value of that field"
+  },
+  "dayChatNoModulesYet": "ما عندك متابعات لسا.",
+  "@dayChatNoModulesYet": {
+    "description": "Daily chat: there is no tracker to file a number in"
+  },
+  "dayChatNoOpenTasks": "ما عندك مهام مفتوحة.",
+  "@dayChatNoOpenTasks": {
+    "description": "Daily chat: there is no open task to tick off"
+  },
+  "dayChatKeepNoTask": "سجّلها مهمة جديدة خالصة",
+  "@dayChatKeepNoTask": {
+    "description": "Daily chat: the option when no open task of his matched"
+  },
+  "dayChatCorrectTitle": "قولها بطريقة ثانية",
+  "@dayChatCorrectTitle": {
+    "description": "Daily chat: title of the reword sheet"
+  },
+  "dayChatCorrectField": "كلامك",
+  "@dayChatCorrectField": {
+    "description": "Daily chat: the field of the reword sheet"
+  },
+  "dayChatTrackerTitle": "متابعة جديدة",
+  "@dayChatTrackerTitle": {
+    "description": "Daily chat: title of the sheet that builds a tracker"
+  },
+  "dayChatTrackerName": "اسم المتابعة",
+  "@dayChatTrackerName": {
+    "description": "Daily chat: the name of the new tracker"
+  },
+  "dayChatTrackerField": "اسم الخانة",
+  "@dayChatTrackerField": {
+    "description": "Daily chat: the name of the tracker’s one field"
+  },
+  "dayChatTrackerUnit": "الوحدة",
+  "@dayChatTrackerUnit": {
+    "description": "Daily chat: the unit of the tracked number"
+  },
+  "dayChatTrackerMin": "أقل قيمة",
+  "@dayChatTrackerMin": {
+    "description": "Daily chat: the smallest number the tracker accepts"
+  },
+  "dayChatTrackerMax": "أعلى قيمة",
+  "@dayChatTrackerMax": {
+    "description": "Daily chat: the largest number the tracker accepts"
+  },
+  "dayChatTrackerReading": "القراءة",
+  "@dayChatTrackerReading": {
+    "description": "Daily chat: the default name of the tracker’s field"
+  },
+  "dayChatSummaryOffline": "كله محسوب من بياناتك على التلفون، بدون إنترنت.",
+  "@dayChatSummaryOffline": {
+    "description": "Daily chat: said under the day summary"
+  },
+  "dayChatOpenFromBar": "افتح شات اليوم",
+  "@dayChatOpenFromBar": {
+    "description": "Daily chat: the button in the quick-add bar that moves what he typed into the chat"
+  },
+  "dayChatTitleExpenseUnknown": "صرفت على {note}، بس ما قلت قديش",
+  "@dayChatTitleExpenseUnknown": {
+    "description": "Daily chat: money out with no amount said – the card must not invent one",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleExpenseUnknownBare": "صرفت، بس ما قلت قديش",
+  "@dayChatTitleExpenseUnknownBare": {
+    "description": "Daily chat: money out with no amount and nothing said about what for"
+  },
+  "dayChatTitleIncomeUnknown": "قبضت من {note}، بس ما قلت قديش",
+  "@dayChatTitleIncomeUnknown": {
+    "description": "Daily chat: money in with no amount said",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleIncomeUnknownBare": "قبضت، بس ما قلت قديش",
+  "@dayChatTitleIncomeUnknownBare": {
+    "description": "Daily chat: money in with no amount and nothing said about where from"
   }
 }

@@ -204,9 +204,24 @@ class DayChatService {
   /// Keeps his line and the pieces it was read into, so the chat is still
   /// there tomorrow. Returns the stored line.
   Future<DayChatLine> remember(DayChatReading reading, {String? lineId, DateTime? at}) async {
+    final when = at ?? clock();
+    var id = lineId ?? 'l${when.microsecondsSinceEpoch}';
+    if (lineId == null) {
+      // Two lines that share a moment must not share an id: a second line
+      // would replace the first one (`withLine` is keyed by id). It happens
+      // whenever the clock does not move – a frozen clock in a test, and a
+      // clock of whole-second resolution on a device.
+      final stored = await store.day(reading.day);
+      var n = 1;
+      while (stored.lines.any((l) => l.id == id)) {
+        // Zero-padded, so the ids of one moment still sort in the order he
+        // typed them («…-002» before «…-010»).
+        id = 'l${when.microsecondsSinceEpoch}-${(n++).toString().padLeft(3, '0')}';
+      }
+    }
     final line = DayChatLine(
-      id: lineId ?? 'l${(at ?? clock()).microsecondsSinceEpoch}',
-      at: at ?? clock(),
+      id: id,
+      at: when,
       text: reading.raw,
       pieceIds: [for (final p in reading.pieces) p.id],
     );

@@ -83,6 +83,14 @@ class DayChatTexts {
       case MoneyFact():
         final amount = money.money(fact.amountMilli, fact.currency);
         final note = fact.note.trim();
+        // No amount at all: the card says so in words. Formatting a zero
+        // would put a number in his mouth that he never said.
+        if (fact.amountMilli <= 0) {
+          if (fact.income) {
+            return note.isEmpty ? l.dayChatTitleIncomeUnknownBare : l.dayChatTitleIncomeUnknown(name(note));
+          }
+          return note.isEmpty ? l.dayChatTitleExpenseUnknownBare : l.dayChatTitleExpenseUnknown(name(note));
+        }
         if (fact.income) {
           return note.isEmpty ? l.dayChatTitleIncomeBare(amount) : l.dayChatTitleIncome(amount, name(note));
         }

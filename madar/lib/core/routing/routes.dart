@@ -444,6 +444,27 @@ abstract final class AppRoutes {
     queryParameters: tab == null || tab == 'items' ? null : {'tab': tab},
   ).toString();
 
+  /// Part 7 – the daily chat: he types his day and decides each piece
+  /// (`/day?day=2026-10-14&tab=summary&q=...`). `q` only **types** a line
+  /// into the box; nothing is read or written until he taps send.
+  static const String dayChat = '/day';
+
+  /// Location of the daily chat: of [day] (null: today), on [tab]
+  /// (`chat` – the default – or `summary`, «شو صار اليوم؟»), with [draft]
+  /// already typed into the box.
+  static String dayChatOf({DateTime? day, String? tab, String? draft}) => Uri(
+    path: dayChat,
+    queryParameters: {
+      if (day != null) 'day': _dayKey(day),
+      if (tab != null && tab != 'chat') 'tab': tab,
+      if (draft != null && draft.trim().isNotEmpty) 'q': draft,
+    }.nullIfEmpty,
+  ).toString();
+
+  /// `yyyy-mm-dd` of a day in a location (the daily chat's own key).
+  static String _dayKey(DateTime d) =>
+      '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
   /// A new AI chat (`?q=` types a question into the field – never sent).
   static const String ai = '/ai';
 

@@ -243,6 +243,62 @@ abstract final class LifeRecordLinks {
   }
 }
 
+/// Where a **logged** row lives: everything [LifeRecordLinks] maps, plus the
+/// rows the rest of Madar logs and the daily chat (Part 7) can create – a
+/// ledger entry, a prayer log, a pain or mood entry, and a task.
+///
+/// It exists so a record a chat piece created can always be found, and so
+/// the chat, the global search and the Neglect Radar never disagree about
+/// where one lives: [searchTargetOf] routes those same five kinds through
+/// here, and [LifeRecordLinks] stays the one place the life worlds' own
+/// records are mapped.
+///
+/// Pure – table-tested.
+abstract final class LoggedRecordLinks {
+  /// The kinds this adds on top of [LifeRecordLinks.tables].
+  static const Set<String> tables = {'transactions', 'prayer_logs', 'pain_entries', 'mood_entries', 'tasks'};
+
+  /// Every kind that leads somewhere, the life worlds' included.
+  static Set<String> get allTables => {...LifeRecordLinks.tables, ...tables};
+
+  /// Where [refTable]/[refId] opens, or null when that kind has no screen.
+  ///
+  /// [planetKey] is needed for a task (a task is opened by its world's
+  /// page, which is also where its editor lives) and [walletId] places a
+  /// ledger entry in its own wallet's list; without them the call falls
+  /// back to the screen the row belongs to, and never dead-ends.
+  static String? locationOf(
+    String? refTable,
+    String? refId, {
+    String? planetKey,
+    String? walletId,
+    Map<String, Object?> extra = const {},
+  }) {
+    final id = (refId == null || refId.isEmpty) ? null : refId;
+    final life = LifeRecordLinks.locationOf(refTable, refId, extra: extra);
+    if (life != null) return life;
+    final wallet = walletId ?? (extra['walletId'] is String ? extra['walletId'] as String : null);
+    final planet = planetKey ?? (extra['planetKey'] is String ? extra['planetKey'] as String : null);
+    return switch (refTable) {
+      // An entry has no screen of its own: its wallet's list, filtered.
+      'transactions' => wallet == null || wallet.isEmpty
+          ? AppRoutes.ledger
+          : AppRoutes.transactionsOf({
+              'wallet': [wallet],
+            }),
+      'prayer_logs' => AppRoutes.prayerTrackerHistory,
+      'pain_entries' => AppRoutes.wellbeingOf(tab: 'pain'),
+      'mood_entries' => AppRoutes.wellbeing,
+      // The world's page opens the task's own editor (RecordOpener); a task
+      // filed under no world has nowhere of its own, which is the truth.
+      'tasks' => id == null || planet == null || planet.isEmpty
+          ? null
+          : AppRoutes.planetOf(planet, item: 'tasks:$id'),
+      _ => null,
+    };
+  }
+}
+
 /// The Work package's own navigation, routed (installed app-wide through
 /// `lifeHookOverrides`): its boards, projects and the Work screen open as
 /// routes. `WorkNavigation.toX` already fires `Sfx.navigate`.

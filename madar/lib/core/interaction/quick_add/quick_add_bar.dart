@@ -40,6 +40,8 @@ class QuickAddBar extends ConsumerStatefulWidget {
     this.clock,
     this.onIntentChanged,
     this.onAdded,
+    this.onHandOver,
+    this.handOverLabel,
   });
 
   /// Overrides [quickAddHandlerProvider] for this bar.
@@ -63,6 +65,18 @@ class QuickAddBar extends ConsumerStatefulWidget {
 
   /// Called after the handler accepted an intent.
   final ValueChanged<QuickAddIntent>? onAdded;
+
+  /// Hands whatever is in the field to a screen that can do more with it
+  /// (Part 7's daily chat: a whole day in one line, a card per piece).
+  ///
+  /// When set, the pill grows one ghost button that passes the text on and
+  /// clears the field – so the bar stays the **one** place he types, and
+  /// the longer line is a deeper room of the same input, not a second one
+  /// to choose between. The handler is not called and nothing is added.
+  final ValueChanged<String>? onHandOver;
+
+  /// TalkBack label of that button (defaults to «افتح شات اليوم»).
+  final String? handOverLabel;
 
   @override
   ConsumerState<QuickAddBar> createState() => QuickAddBarState();
@@ -201,6 +215,18 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
     return true;
   }
 
+  /// Passes what he has typed on (nothing is added, nothing is parsed into
+  /// a write) and leaves the field empty behind it, so the same words are
+  /// never sitting in two places.
+  void _handOver() {
+    final to = widget.onHandOver;
+    if (to == null) return;
+    final text = _controller.text;
+    _controller.clear();
+    _clearStatus();
+    to(text);
+  }
+
   /// Direction of the text as typed (Arabic → RTL, Latin → LTR), so mixed
   /// input reads naturally regardless of the UI language.
   static TextDirection? _typedDirection(String text) {
@@ -274,6 +300,13 @@ class QuickAddBarState extends ConsumerState<QuickAddBar> with TickerProviderSta
           ),
           const SizedBox(width: Space.s),
           Expanded(child: field),
+          if (widget.onHandOver != null) ...[
+            const SizedBox(width: Space.xxs),
+            _HandOverButton(
+              label: widget.handOverLabel ?? l10n.dayChatOpenFromBar,
+              onTap: _handOver,
+            ),
+          ],
           const SizedBox(width: Space.xs),
           _SendButton(enabled: hasText && !_busy, busy: _busy, label: l10n.actionAdd, onTap: submit),
         ],
@@ -559,6 +592,43 @@ class _OrbRingPainter extends CustomPainter {
       old.track != track ||
       old.success != success ||
       old.busy != busy;
+}
+
+/// The ghost button that hands the line on to the daily chat: the same
+/// words, a room with more space for them.
+class _HandOverButton extends StatelessWidget {
+  const _HandOverButton({required this.label, required this.onTap});
+
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return KitPressable(
+      onTap: onTap,
+      sfx: Sfx.navigate,
+      pressScale: 0.9,
+      semanticLabel: label,
+      excludeSemantics: true,
+      // 48 dp of target around a 40 dp face, so the pill stays slim.
+      child: SizedBox.square(
+        dimension: 48,
+        child: Center(
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: t.glassFill,
+              border: Border.all(color: t.glassBorder, width: 0.9),
+            ),
+            child: Icon(Icons.forum_rounded, size: 18, color: t.textSecondary),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _SendButton extends StatelessWidget {

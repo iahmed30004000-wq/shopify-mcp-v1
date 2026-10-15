@@ -67,3 +67,39 @@ final dayChatReadingProvider = FutureProvider.autoDispose.family<DayChatReading,
 final dayChatSummaryProvider = FutureProvider.autoDispose.family<DaySummary, DateTime>(
   (ref, day) => ref.watch(dayChatServiceProvider).summary(day: day),
 );
+
+/// His lines of one day, **without** the decisions: the chat re-reads a
+/// line only when he sends one, not every time he files a card.
+///
+/// (`watchDay` carries the lines and the decisions together; a chat that
+/// watched the whole day would re-run the reader on every tap.)
+final dayChatLinesProvider = StreamProvider.autoDispose.family<List<DayChatLine>, DateTime>(
+  (ref, day) => ref
+      .watch(dayChatServiceProvider)
+      .watchDay(day)
+      .map((d) => d.lines)
+      .distinct((a, b) => _sameLines(a, b)),
+);
+
+bool _sameLines(List<DayChatLine> a, List<DayChatLine> b) {
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].id != b[i].id || a[i].text != b[i].text) return false;
+  }
+  return true;
+}
+
+/// Every line of one day, read into proposals again – so the chat is still
+/// there after a restart, with the same piece ids (and therefore the same
+/// decisions) as when he typed it.
+///
+/// The reading is deliberately **not** stored: a line is read again from
+/// his own words, against his data as it is now, with the moment he sent it
+/// as "now" so the result is the same every time.
+final dayChatReadingsProvider = FutureProvider.autoDispose.family<List<DayChatReading>, DateTime>((ref, day) async {
+  final lines = await ref.watch(dayChatLinesProvider(day).future);
+  final service = ref.watch(dayChatServiceProvider);
+  return [
+    for (final line in lines) await service.read(line.text, now: line.at, day: day),
+  ];
+});

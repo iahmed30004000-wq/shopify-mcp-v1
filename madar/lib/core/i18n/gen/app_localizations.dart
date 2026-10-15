@@ -42514,6 +42514,498 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'، '**
   String get dayChatListSep;
+
+  /// Daily chat: the screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'شات اليوم'**
+  String get dayChatTitle;
+
+  /// Daily chat: the tab with his lines and their cards
+  ///
+  /// In ar, this message translates to:
+  /// **'الشات'**
+  String get dayChatTabChat;
+
+  /// Daily chat: the tab that reads his day back to him
+  ///
+  /// In ar, this message translates to:
+  /// **'شو صار اليوم؟'**
+  String get dayChatTabSummary;
+
+  /// Daily chat: placeholder of the box he types his day into
+  ///
+  /// In ar, this message translates to:
+  /// **'احكيلي شو صار… «صرفت ٥ دنانير قهوة، صليت العصر بالمسجد»'**
+  String get dayChatComposerHint;
+
+  /// Daily chat: sends the line he typed (nothing is written yet)
+  ///
+  /// In ar, this message translates to:
+  /// **'ابعت'**
+  String get dayChatSendAction;
+
+  /// Daily chat: the warm invitation of an empty chat
+  ///
+  /// In ar, this message translates to:
+  /// **'احكيلي يومك'**
+  String get dayChatEmptyTitle;
+
+  /// Daily chat: the body of the empty state
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب كل اللي صار بسطر واحد، وأنا أوزّعه على مكانه. ولا شي ينزل غير لما تضغط عليه بنفسك.'**
+  String get dayChatEmptyBody;
+
+  /// Daily chat: while one line is being read
+  ///
+  /// In ar, this message translates to:
+  /// **'عمّال أقرأ كلامك…'**
+  String get dayChatReadingLine;
+
+  /// Daily chat: a line that produced no piece at all
+  ///
+  /// In ar, this message translates to:
+  /// **'ما طلع من هاد السطر شي أسجّله.'**
+  String get dayChatNothingRead;
+
+  /// Daily chat: the label over the exact part of his own sentence a card came from
+  ///
+  /// In ar, this message translates to:
+  /// **'من كلامك'**
+  String get dayChatYourWords;
+
+  /// Daily chat: the list of days that have a chat
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام الشات'**
+  String get dayChatDaysTitle;
+
+  /// Daily chat: opens the list of days
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر يوم'**
+  String get dayChatDaysAction;
+
+  /// Daily chat: the name of the current day in the day list
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get dayChatTodayLabel;
+
+  /// Daily chat: a card he has not decided yet
+  ///
+  /// In ar, this message translates to:
+  /// **'بستناك'**
+  String get dayChatStatePending;
+
+  /// Daily chat: a card that was written into its feature
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلتها'**
+  String get dayChatStateApplied;
+
+  /// Daily chat: a card he refused
+  ///
+  /// In ar, this message translates to:
+  /// **'قلت لأ'**
+  String get dayChatStateRejected;
+
+  /// Daily chat: a card that was filed and then undone
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّعتها'**
+  String get dayChatStateUndone;
+
+  /// Daily chat: he changed the card before filing it
+  ///
+  /// In ar, this message translates to:
+  /// **'معدّلة'**
+  String get dayChatEditedBadge;
+
+  /// Daily chat: why a card cannot be filed as it is
+  ///
+  /// In ar, this message translates to:
+  /// **'ناقصها شي منك قبل ما أسجّلها.'**
+  String get dayChatNeedsYou;
+
+  /// Daily chat: the health guard, said on the card itself
+  ///
+  /// In ar, this message translates to:
+  /// **'الدوا والتشخيص إلك ولدكتورك. هاي بتنزل ملاحظة بكلامك وبس.'**
+  String get dayChatGuardNote;
+
+  /// Daily chat: the three ways out of a sentence it could not read
+  ///
+  /// In ar, this message translates to:
+  /// **'قلّي شو تحب أعمل فيها: أخليها ملاحظة بكلامك، أو صحّحها وأنا أقرأها من جديد، أو تسأل عنها ذكاء اصطناعي بنفسك.'**
+  String get dayChatUnreadBody;
+
+  /// Daily chat: a number with no tracker of his
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم واضح، بس ما عندي متابعة بهاد الاسم. اعمل واحدة وأنا أسجّله فيها.'**
+  String get dayChatSignBody;
+
+  /// Daily chat: said beside the ask-an-AI tap
+  ///
+  /// In ar, this message translates to:
+  /// **'ولا حرف يطلع من تلفونك إلا لما تبعته بنفسك.'**
+  String get dayChatAiOffline;
+
+  /// Daily chat: writes this one piece into its feature
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلها'**
+  String get dayChatFileAction;
+
+  /// Daily chat: corrects this one piece before filing it
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّلها'**
+  String get dayChatEditAction;
+
+  /// Daily chat: he does not want this piece
+  ///
+  /// In ar, this message translates to:
+  /// **'لأ'**
+  String get dayChatRejectAction;
+
+  /// Daily chat: turns an unread sentence into his own note
+  ///
+  /// In ar, this message translates to:
+  /// **'خليها ملاحظة'**
+  String get dayChatNoteAction;
+
+  /// Daily chat: he says the sentence another way and it is read again
+  ///
+  /// In ar, this message translates to:
+  /// **'صحّحها'**
+  String get dayChatCorrectAction;
+
+  /// Daily chat: hands one sentence to the AI round trip, on his tap only
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل الذكاء'**
+  String get dayChatAskAiAction;
+
+  /// Daily chat: builds a tracker for a number that has none
+  ///
+  /// In ar, this message translates to:
+  /// **'اعمللي متابعة جديدة من هاي'**
+  String get dayChatTrackerAction;
+
+  /// Daily chat: opens the record a filed card created
+  ///
+  /// In ar, this message translates to:
+  /// **'فوتها'**
+  String get dayChatOpenAction;
+
+  /// Daily chat: undo toast after one piece was filed
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلت: {what}'**
+  String dayChatFiledToast(String what);
+
+  /// Daily chat: undo toast after he refused one piece
+  ///
+  /// In ar, this message translates to:
+  /// **'تركت: {what}'**
+  String dayChatRejectedToast(String what);
+
+  /// Daily chat: undo toast after an edit that is not written yet
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّلت: {what}'**
+  String dayChatEditedToast(String what);
+
+  /// Daily chat: undo toast after a tracker was built from a number
+  ///
+  /// In ar, this message translates to:
+  /// **'عملت متابعة {name}'**
+  String dayChatTrackerToast(String name);
+
+  /// Daily chat: a second tap on a card that is already filed
+  ///
+  /// In ar, this message translates to:
+  /// **'هاي مسجّلة من قبل، ما سجّلت شي ثاني.'**
+  String get dayChatAlreadyFiled;
+
+  /// Daily chat: refused to file a piece that still needs him
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بقدر أسجّلها قبل ما تكمّلها.'**
+  String get dayChatCannotFileYet;
+
+  /// Daily chat: title of the edit sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّلها قبل ما أسجّل'**
+  String get dayChatEditTitle;
+
+  /// Daily chat edit sheet: the money amount
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get dayChatFieldAmount;
+
+  /// Daily chat edit sheet: what the money was for
+  ///
+  /// In ar, this message translates to:
+  /// **'على شو'**
+  String get dayChatFieldOnWhat;
+
+  /// Daily chat edit sheet: the pain score
+  ///
+  /// In ar, this message translates to:
+  /// **'الوجع من صفر لعشرة'**
+  String get dayChatFieldPain;
+
+  /// Daily chat edit sheet: where the pain is
+  ///
+  /// In ar, this message translates to:
+  /// **'وين الوجع'**
+  String get dayChatFieldPainWhere;
+
+  /// Daily chat edit sheet: the mood score
+  ///
+  /// In ar, this message translates to:
+  /// **'المزاج من واحد لخمسة'**
+  String get dayChatFieldMood;
+
+  /// Daily chat edit sheet: millilitres of water
+  ///
+  /// In ar, this message translates to:
+  /// **'قديش مي'**
+  String get dayChatFieldWater;
+
+  /// Daily chat edit sheet: the food name
+  ///
+  /// In ar, this message translates to:
+  /// **'شو أكلت'**
+  String get dayChatFieldMeal;
+
+  /// Daily chat edit sheet: how much of it
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get dayChatFieldPortion;
+
+  /// Daily chat edit sheet: the exercise name
+  ///
+  /// In ar, this message translates to:
+  /// **'التمرين'**
+  String get dayChatFieldWorkout;
+
+  /// Daily chat edit sheet: how many sets
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعات'**
+  String get dayChatFieldSets;
+
+  /// Daily chat edit sheet: how many reps
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرارات'**
+  String get dayChatFieldReps;
+
+  /// Daily chat edit sheet: the weight lifted
+  ///
+  /// In ar, this message translates to:
+  /// **'الوزن'**
+  String get dayChatFieldWeight;
+
+  /// Daily chat edit sheet: how long the workout was
+  ///
+  /// In ar, this message translates to:
+  /// **'دقايق'**
+  String get dayChatFieldMinutes;
+
+  /// Daily chat edit sheet: which of the five prayers
+  ///
+  /// In ar, this message translates to:
+  /// **'أي صلاة'**
+  String get dayChatFieldPrayer;
+
+  /// Daily chat edit sheet: the prayer was at the mosque
+  ///
+  /// In ar, this message translates to:
+  /// **'بالمسجد'**
+  String get dayChatFieldMosque;
+
+  /// Daily chat edit sheet: the prayer was in congregation
+  ///
+  /// In ar, this message translates to:
+  /// **'بجماعة'**
+  String get dayChatFieldJamaah;
+
+  /// Daily chat edit sheet: the task title
+  ///
+  /// In ar, this message translates to:
+  /// **'المهمة'**
+  String get dayChatFieldTask;
+
+  /// Daily chat edit sheet: picks one of his open tasks
+  ///
+  /// In ar, this message translates to:
+  /// **'أي مهمة خلصت'**
+  String get dayChatFieldTaskMatch;
+
+  /// Daily chat edit sheet: the prayer window of a to-do
+  ///
+  /// In ar, this message translates to:
+  /// **'بأي وقت'**
+  String get dayChatFieldWindow;
+
+  /// Daily chat edit sheet: the day of a to-do
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get dayChatFieldDate;
+
+  /// Daily chat edit sheet: the person
+  ///
+  /// In ar, this message translates to:
+  /// **'مين'**
+  String get dayChatFieldPerson;
+
+  /// Daily chat edit sheet: call, visit or message
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف'**
+  String get dayChatFieldChannel;
+
+  /// Daily chat edit sheet: the text of a note
+  ///
+  /// In ar, this message translates to:
+  /// **'الملاحظة'**
+  String get dayChatFieldNote;
+
+  /// Daily chat edit sheet: picks one of his trackers
+  ///
+  /// In ar, this message translates to:
+  /// **'أي متابعة'**
+  String get dayChatFieldModule;
+
+  /// Daily chat edit sheet: picks a field of that tracker
+  ///
+  /// In ar, this message translates to:
+  /// **'أي خانة'**
+  String get dayChatFieldModuleField;
+
+  /// Daily chat edit sheet: the value of that field
+  ///
+  /// In ar, this message translates to:
+  /// **'القيمة'**
+  String get dayChatFieldValue;
+
+  /// Daily chat: there is no tracker to file a number in
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عندك متابعات لسا.'**
+  String get dayChatNoModulesYet;
+
+  /// Daily chat: there is no open task to tick off
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عندك مهام مفتوحة.'**
+  String get dayChatNoOpenTasks;
+
+  /// Daily chat: the option when no open task of his matched
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلها مهمة جديدة خالصة'**
+  String get dayChatKeepNoTask;
+
+  /// Daily chat: title of the reword sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'قولها بطريقة ثانية'**
+  String get dayChatCorrectTitle;
+
+  /// Daily chat: the field of the reword sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'كلامك'**
+  String get dayChatCorrectField;
+
+  /// Daily chat: title of the sheet that builds a tracker
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة جديدة'**
+  String get dayChatTrackerTitle;
+
+  /// Daily chat: the name of the new tracker
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المتابعة'**
+  String get dayChatTrackerName;
+
+  /// Daily chat: the name of the tracker’s one field
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الخانة'**
+  String get dayChatTrackerField;
+
+  /// Daily chat: the unit of the tracked number
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة'**
+  String get dayChatTrackerUnit;
+
+  /// Daily chat: the smallest number the tracker accepts
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل قيمة'**
+  String get dayChatTrackerMin;
+
+  /// Daily chat: the largest number the tracker accepts
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى قيمة'**
+  String get dayChatTrackerMax;
+
+  /// Daily chat: the default name of the tracker’s field
+  ///
+  /// In ar, this message translates to:
+  /// **'القراءة'**
+  String get dayChatTrackerReading;
+
+  /// Daily chat: said under the day summary
+  ///
+  /// In ar, this message translates to:
+  /// **'كله محسوب من بياناتك على التلفون، بدون إنترنت.'**
+  String get dayChatSummaryOffline;
+
+  /// Daily chat: the button in the quick-add bar that moves what he typed into the chat
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح شات اليوم'**
+  String get dayChatOpenFromBar;
+
+  /// Daily chat: money out with no amount said – the card must not invent one
+  ///
+  /// In ar, this message translates to:
+  /// **'صرفت على {note}، بس ما قلت قديش'**
+  String dayChatTitleExpenseUnknown(String note);
+
+  /// Daily chat: money out with no amount and nothing said about what for
+  ///
+  /// In ar, this message translates to:
+  /// **'صرفت، بس ما قلت قديش'**
+  String get dayChatTitleExpenseUnknownBare;
+
+  /// Daily chat: money in with no amount said
+  ///
+  /// In ar, this message translates to:
+  /// **'قبضت من {note}، بس ما قلت قديش'**
+  String dayChatTitleIncomeUnknown(String note);
+
+  /// Daily chat: money in with no amount and nothing said about where from
+  ///
+  /// In ar, this message translates to:
+  /// **'قبضت، بس ما قلت قديش'**
+  String get dayChatTitleIncomeUnknownBare;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

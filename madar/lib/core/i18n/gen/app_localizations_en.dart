@@ -26956,4 +26956,274 @@ class L10nEn extends L10n {
 
   @override
   String get dayChatListSep => ', ';
+
+  @override
+  String get dayChatTitle => 'Today\'s chat';
+
+  @override
+  String get dayChatTabChat => 'Chat';
+
+  @override
+  String get dayChatTabSummary => 'What happened today?';
+
+  @override
+  String get dayChatComposerHint =>
+      'Tell me what happened… “spent 5 JD on coffee, prayed Asr at the mosque”';
+
+  @override
+  String get dayChatSendAction => 'Send';
+
+  @override
+  String get dayChatEmptyTitle => 'Tell me about your day';
+
+  @override
+  String get dayChatEmptyBody =>
+      'Write everything that happened in one line and I will sort it into place. Nothing is written until you tap it yourself.';
+
+  @override
+  String get dayChatReadingLine => 'Reading your words…';
+
+  @override
+  String get dayChatNothingRead =>
+      'Nothing in that line was something I could file.';
+
+  @override
+  String get dayChatYourWords => 'Your words';
+
+  @override
+  String get dayChatDaysTitle => 'Chat days';
+
+  @override
+  String get dayChatDaysAction => 'Pick a day';
+
+  @override
+  String get dayChatTodayLabel => 'Today';
+
+  @override
+  String get dayChatStatePending => 'Waiting for you';
+
+  @override
+  String get dayChatStateApplied => 'Filed';
+
+  @override
+  String get dayChatStateRejected => 'You said no';
+
+  @override
+  String get dayChatStateUndone => 'Taken back';
+
+  @override
+  String get dayChatEditedBadge => 'Edited';
+
+  @override
+  String get dayChatNeedsYou =>
+      'It needs something from you before I can file it.';
+
+  @override
+  String get dayChatGuardNote =>
+      'Medicine and diagnosis are between you and your doctor. This is kept as your own note and nothing else.';
+
+  @override
+  String get dayChatUnreadBody =>
+      'Tell me what to do with it: keep it as your own note, reword it and I will read it again, or ask an AI about it yourself.';
+
+  @override
+  String get dayChatSignBody =>
+      'The number is clear, but I have no tracker by that name. Make one and I will file the number in it.';
+
+  @override
+  String get dayChatAiOffline =>
+      'Not one letter leaves your phone until you send it yourself.';
+
+  @override
+  String get dayChatFileAction => 'File it';
+
+  @override
+  String get dayChatEditAction => 'Edit it';
+
+  @override
+  String get dayChatRejectAction => 'No';
+
+  @override
+  String get dayChatNoteAction => 'Keep it as a note';
+
+  @override
+  String get dayChatCorrectAction => 'Reword it';
+
+  @override
+  String get dayChatAskAiAction => 'Ask an AI';
+
+  @override
+  String get dayChatTrackerAction => 'Make a new tracker from this';
+
+  @override
+  String get dayChatOpenAction => 'Open it';
+
+  @override
+  String dayChatFiledToast(String what) {
+    return 'Filed: $what';
+  }
+
+  @override
+  String dayChatRejectedToast(String what) {
+    return 'Left out: $what';
+  }
+
+  @override
+  String dayChatEditedToast(String what) {
+    return 'Edited: $what';
+  }
+
+  @override
+  String dayChatTrackerToast(String name) {
+    return 'Tracker $name created';
+  }
+
+  @override
+  String get dayChatAlreadyFiled =>
+      'This was already filed, so nothing was written again.';
+
+  @override
+  String get dayChatCannotFileYet => 'I cannot file it before you complete it.';
+
+  @override
+  String get dayChatEditTitle => 'Edit it before I file it';
+
+  @override
+  String get dayChatFieldAmount => 'Amount';
+
+  @override
+  String get dayChatFieldOnWhat => 'What for';
+
+  @override
+  String get dayChatFieldPain => 'Pain, zero to ten';
+
+  @override
+  String get dayChatFieldPainWhere => 'Where it hurts';
+
+  @override
+  String get dayChatFieldMood => 'Mood, one to five';
+
+  @override
+  String get dayChatFieldWater => 'How much water';
+
+  @override
+  String get dayChatFieldMeal => 'What you ate';
+
+  @override
+  String get dayChatFieldPortion => 'Portion';
+
+  @override
+  String get dayChatFieldWorkout => 'The exercise';
+
+  @override
+  String get dayChatFieldSets => 'Sets';
+
+  @override
+  String get dayChatFieldReps => 'Reps';
+
+  @override
+  String get dayChatFieldWeight => 'Weight';
+
+  @override
+  String get dayChatFieldMinutes => 'Minutes';
+
+  @override
+  String get dayChatFieldPrayer => 'Which prayer';
+
+  @override
+  String get dayChatFieldMosque => 'At the mosque';
+
+  @override
+  String get dayChatFieldJamaah => 'In congregation';
+
+  @override
+  String get dayChatFieldTask => 'The task';
+
+  @override
+  String get dayChatFieldTaskMatch => 'Which task you finished';
+
+  @override
+  String get dayChatFieldWindow => 'Which window';
+
+  @override
+  String get dayChatFieldDate => 'Date';
+
+  @override
+  String get dayChatFieldPerson => 'Who';
+
+  @override
+  String get dayChatFieldChannel => 'How';
+
+  @override
+  String get dayChatFieldNote => 'The note';
+
+  @override
+  String get dayChatFieldModule => 'Which tracker';
+
+  @override
+  String get dayChatFieldModuleField => 'Which field';
+
+  @override
+  String get dayChatFieldValue => 'Value';
+
+  @override
+  String get dayChatNoModulesYet => 'You have no trackers yet.';
+
+  @override
+  String get dayChatNoOpenTasks => 'You have no open tasks.';
+
+  @override
+  String get dayChatKeepNoTask => 'File it as a new, finished task';
+
+  @override
+  String get dayChatCorrectTitle => 'Say it another way';
+
+  @override
+  String get dayChatCorrectField => 'Your words';
+
+  @override
+  String get dayChatTrackerTitle => 'A new tracker';
+
+  @override
+  String get dayChatTrackerName => 'Tracker name';
+
+  @override
+  String get dayChatTrackerField => 'Field name';
+
+  @override
+  String get dayChatTrackerUnit => 'Unit';
+
+  @override
+  String get dayChatTrackerMin => 'Lowest value';
+
+  @override
+  String get dayChatTrackerMax => 'Highest value';
+
+  @override
+  String get dayChatTrackerReading => 'Reading';
+
+  @override
+  String get dayChatSummaryOffline =>
+      'All counted from your own data on this phone, offline.';
+
+  @override
+  String get dayChatOpenFromBar => 'Open today’s chat';
+
+  @override
+  String dayChatTitleExpenseUnknown(String note) {
+    return 'Spent on $note, but you did not say how much';
+  }
+
+  @override
+  String get dayChatTitleExpenseUnknownBare =>
+      'Spent, but you did not say how much';
+
+  @override
+  String dayChatTitleIncomeUnknown(String note) {
+    return 'Received from $note, but you did not say how much';
+  }
+
+  @override
+  String get dayChatTitleIncomeUnknownBare =>
+      'Received, but you did not say how much';
 }

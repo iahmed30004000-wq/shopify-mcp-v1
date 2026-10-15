@@ -25161,5 +25161,363 @@
   "dayChatListSep": ", ",
   "@dayChatListSep": {
     "description": "Daily chat: separator between his own words in a summary line"
+  },
+  "dayChatTitle": "Today's chat",
+  "@dayChatTitle": {
+    "description": "Daily chat: the screen title"
+  },
+  "dayChatTabChat": "Chat",
+  "@dayChatTabChat": {
+    "description": "Daily chat: the tab with his lines and their cards"
+  },
+  "dayChatTabSummary": "What happened today?",
+  "@dayChatTabSummary": {
+    "description": "Daily chat: the tab that reads his day back to him"
+  },
+  "dayChatComposerHint": "Tell me what happened… “spent 5 JD on coffee, prayed Asr at the mosque”",
+  "@dayChatComposerHint": {
+    "description": "Daily chat: placeholder of the box he types his day into"
+  },
+  "dayChatSendAction": "Send",
+  "@dayChatSendAction": {
+    "description": "Daily chat: sends the line he typed (nothing is written yet)"
+  },
+  "dayChatEmptyTitle": "Tell me about your day",
+  "@dayChatEmptyTitle": {
+    "description": "Daily chat: the warm invitation of an empty chat"
+  },
+  "dayChatEmptyBody": "Write everything that happened in one line and I will sort it into place. Nothing is written until you tap it yourself.",
+  "@dayChatEmptyBody": {
+    "description": "Daily chat: the body of the empty state"
+  },
+  "dayChatReadingLine": "Reading your words…",
+  "@dayChatReadingLine": {
+    "description": "Daily chat: while one line is being read"
+  },
+  "dayChatNothingRead": "Nothing in that line was something I could file.",
+  "@dayChatNothingRead": {
+    "description": "Daily chat: a line that produced no piece at all"
+  },
+  "dayChatYourWords": "Your words",
+  "@dayChatYourWords": {
+    "description": "Daily chat: the label over the exact part of his own sentence a card came from"
+  },
+  "dayChatDaysTitle": "Chat days",
+  "@dayChatDaysTitle": {
+    "description": "Daily chat: the list of days that have a chat"
+  },
+  "dayChatDaysAction": "Pick a day",
+  "@dayChatDaysAction": {
+    "description": "Daily chat: opens the list of days"
+  },
+  "dayChatTodayLabel": "Today",
+  "@dayChatTodayLabel": {
+    "description": "Daily chat: the name of the current day in the day list"
+  },
+  "dayChatStatePending": "Waiting for you",
+  "@dayChatStatePending": {
+    "description": "Daily chat: a card he has not decided yet"
+  },
+  "dayChatStateApplied": "Filed",
+  "@dayChatStateApplied": {
+    "description": "Daily chat: a card that was written into its feature"
+  },
+  "dayChatStateRejected": "You said no",
+  "@dayChatStateRejected": {
+    "description": "Daily chat: a card he refused"
+  },
+  "dayChatStateUndone": "Taken back",
+  "@dayChatStateUndone": {
+    "description": "Daily chat: a card that was filed and then undone"
+  },
+  "dayChatEditedBadge": "Edited",
+  "@dayChatEditedBadge": {
+    "description": "Daily chat: he changed the card before filing it"
+  },
+  "dayChatNeedsYou": "It needs something from you before I can file it.",
+  "@dayChatNeedsYou": {
+    "description": "Daily chat: why a card cannot be filed as it is"
+  },
+  "dayChatGuardNote": "Medicine and diagnosis are between you and your doctor. This is kept as your own note and nothing else.",
+  "@dayChatGuardNote": {
+    "description": "Daily chat: the health guard, said on the card itself"
+  },
+  "dayChatUnreadBody": "Tell me what to do with it: keep it as your own note, reword it and I will read it again, or ask an AI about it yourself.",
+  "@dayChatUnreadBody": {
+    "description": "Daily chat: the three ways out of a sentence it could not read"
+  },
+  "dayChatSignBody": "The number is clear, but I have no tracker by that name. Make one and I will file the number in it.",
+  "@dayChatSignBody": {
+    "description": "Daily chat: a number with no tracker of his"
+  },
+  "dayChatAiOffline": "Not one letter leaves your phone until you send it yourself.",
+  "@dayChatAiOffline": {
+    "description": "Daily chat: said beside the ask-an-AI tap"
+  },
+  "dayChatFileAction": "File it",
+  "@dayChatFileAction": {
+    "description": "Daily chat: writes this one piece into its feature"
+  },
+  "dayChatEditAction": "Edit it",
+  "@dayChatEditAction": {
+    "description": "Daily chat: corrects this one piece before filing it"
+  },
+  "dayChatRejectAction": "No",
+  "@dayChatRejectAction": {
+    "description": "Daily chat: he does not want this piece"
+  },
+  "dayChatNoteAction": "Keep it as a note",
+  "@dayChatNoteAction": {
+    "description": "Daily chat: turns an unread sentence into his own note"
+  },
+  "dayChatCorrectAction": "Reword it",
+  "@dayChatCorrectAction": {
+    "description": "Daily chat: he says the sentence another way and it is read again"
+  },
+  "dayChatAskAiAction": "Ask an AI",
+  "@dayChatAskAiAction": {
+    "description": "Daily chat: hands one sentence to the AI round trip, on his tap only"
+  },
+  "dayChatTrackerAction": "Make a new tracker from this",
+  "@dayChatTrackerAction": {
+    "description": "Daily chat: builds a tracker for a number that has none"
+  },
+  "dayChatOpenAction": "Open it",
+  "@dayChatOpenAction": {
+    "description": "Daily chat: opens the record a filed card created"
+  },
+  "dayChatFiledToast": "Filed: {what}",
+  "@dayChatFiledToast": {
+    "description": "Daily chat: undo toast after one piece was filed",
+    "placeholders": {
+      "what": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatRejectedToast": "Left out: {what}",
+  "@dayChatRejectedToast": {
+    "description": "Daily chat: undo toast after he refused one piece",
+    "placeholders": {
+      "what": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatEditedToast": "Edited: {what}",
+  "@dayChatEditedToast": {
+    "description": "Daily chat: undo toast after an edit that is not written yet",
+    "placeholders": {
+      "what": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTrackerToast": "Tracker {name} created",
+  "@dayChatTrackerToast": {
+    "description": "Daily chat: undo toast after a tracker was built from a number",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatAlreadyFiled": "This was already filed, so nothing was written again.",
+  "@dayChatAlreadyFiled": {
+    "description": "Daily chat: a second tap on a card that is already filed"
+  },
+  "dayChatCannotFileYet": "I cannot file it before you complete it.",
+  "@dayChatCannotFileYet": {
+    "description": "Daily chat: refused to file a piece that still needs him"
+  },
+  "dayChatEditTitle": "Edit it before I file it",
+  "@dayChatEditTitle": {
+    "description": "Daily chat: title of the edit sheet"
+  },
+  "dayChatFieldAmount": "Amount",
+  "@dayChatFieldAmount": {
+    "description": "Daily chat edit sheet: the money amount"
+  },
+  "dayChatFieldOnWhat": "What for",
+  "@dayChatFieldOnWhat": {
+    "description": "Daily chat edit sheet: what the money was for"
+  },
+  "dayChatFieldPain": "Pain, zero to ten",
+  "@dayChatFieldPain": {
+    "description": "Daily chat edit sheet: the pain score"
+  },
+  "dayChatFieldPainWhere": "Where it hurts",
+  "@dayChatFieldPainWhere": {
+    "description": "Daily chat edit sheet: where the pain is"
+  },
+  "dayChatFieldMood": "Mood, one to five",
+  "@dayChatFieldMood": {
+    "description": "Daily chat edit sheet: the mood score"
+  },
+  "dayChatFieldWater": "How much water",
+  "@dayChatFieldWater": {
+    "description": "Daily chat edit sheet: millilitres of water"
+  },
+  "dayChatFieldMeal": "What you ate",
+  "@dayChatFieldMeal": {
+    "description": "Daily chat edit sheet: the food name"
+  },
+  "dayChatFieldPortion": "Portion",
+  "@dayChatFieldPortion": {
+    "description": "Daily chat edit sheet: how much of it"
+  },
+  "dayChatFieldWorkout": "The exercise",
+  "@dayChatFieldWorkout": {
+    "description": "Daily chat edit sheet: the exercise name"
+  },
+  "dayChatFieldSets": "Sets",
+  "@dayChatFieldSets": {
+    "description": "Daily chat edit sheet: how many sets"
+  },
+  "dayChatFieldReps": "Reps",
+  "@dayChatFieldReps": {
+    "description": "Daily chat edit sheet: how many reps"
+  },
+  "dayChatFieldWeight": "Weight",
+  "@dayChatFieldWeight": {
+    "description": "Daily chat edit sheet: the weight lifted"
+  },
+  "dayChatFieldMinutes": "Minutes",
+  "@dayChatFieldMinutes": {
+    "description": "Daily chat edit sheet: how long the workout was"
+  },
+  "dayChatFieldPrayer": "Which prayer",
+  "@dayChatFieldPrayer": {
+    "description": "Daily chat edit sheet: which of the five prayers"
+  },
+  "dayChatFieldMosque": "At the mosque",
+  "@dayChatFieldMosque": {
+    "description": "Daily chat edit sheet: the prayer was at the mosque"
+  },
+  "dayChatFieldJamaah": "In congregation",
+  "@dayChatFieldJamaah": {
+    "description": "Daily chat edit sheet: the prayer was in congregation"
+  },
+  "dayChatFieldTask": "The task",
+  "@dayChatFieldTask": {
+    "description": "Daily chat edit sheet: the task title"
+  },
+  "dayChatFieldTaskMatch": "Which task you finished",
+  "@dayChatFieldTaskMatch": {
+    "description": "Daily chat edit sheet: picks one of his open tasks"
+  },
+  "dayChatFieldWindow": "Which window",
+  "@dayChatFieldWindow": {
+    "description": "Daily chat edit sheet: the prayer window of a to-do"
+  },
+  "dayChatFieldDate": "Date",
+  "@dayChatFieldDate": {
+    "description": "Daily chat edit sheet: the day of a to-do"
+  },
+  "dayChatFieldPerson": "Who",
+  "@dayChatFieldPerson": {
+    "description": "Daily chat edit sheet: the person"
+  },
+  "dayChatFieldChannel": "How",
+  "@dayChatFieldChannel": {
+    "description": "Daily chat edit sheet: call, visit or message"
+  },
+  "dayChatFieldNote": "The note",
+  "@dayChatFieldNote": {
+    "description": "Daily chat edit sheet: the text of a note"
+  },
+  "dayChatFieldModule": "Which tracker",
+  "@dayChatFieldModule": {
+    "description": "Daily chat edit sheet: picks one of his trackers"
+  },
+  "dayChatFieldModuleField": "Which field",
+  "@dayChatFieldModuleField": {
+    "description": "Daily chat edit sheet: picks a field of that tracker"
+  },
+  "dayChatFieldValue": "Value",
+  "@dayChatFieldValue": {
+    "description": "Daily chat edit sheet: the value of that field"
+  },
+  "dayChatNoModulesYet": "You have no trackers yet.",
+  "@dayChatNoModulesYet": {
+    "description": "Daily chat: there is no tracker to file a number in"
+  },
+  "dayChatNoOpenTasks": "You have no open tasks.",
+  "@dayChatNoOpenTasks": {
+    "description": "Daily chat: there is no open task to tick off"
+  },
+  "dayChatKeepNoTask": "File it as a new, finished task",
+  "@dayChatKeepNoTask": {
+    "description": "Daily chat: the option when no open task of his matched"
+  },
+  "dayChatCorrectTitle": "Say it another way",
+  "@dayChatCorrectTitle": {
+    "description": "Daily chat: title of the reword sheet"
+  },
+  "dayChatCorrectField": "Your words",
+  "@dayChatCorrectField": {
+    "description": "Daily chat: the field of the reword sheet"
+  },
+  "dayChatTrackerTitle": "A new tracker",
+  "@dayChatTrackerTitle": {
+    "description": "Daily chat: title of the sheet that builds a tracker"
+  },
+  "dayChatTrackerName": "Tracker name",
+  "@dayChatTrackerName": {
+    "description": "Daily chat: the name of the new tracker"
+  },
+  "dayChatTrackerField": "Field name",
+  "@dayChatTrackerField": {
+    "description": "Daily chat: the name of the tracker’s one field"
+  },
+  "dayChatTrackerUnit": "Unit",
+  "@dayChatTrackerUnit": {
+    "description": "Daily chat: the unit of the tracked number"
+  },
+  "dayChatTrackerMin": "Lowest value",
+  "@dayChatTrackerMin": {
+    "description": "Daily chat: the smallest number the tracker accepts"
+  },
+  "dayChatTrackerMax": "Highest value",
+  "@dayChatTrackerMax": {
+    "description": "Daily chat: the largest number the tracker accepts"
+  },
+  "dayChatTrackerReading": "Reading",
+  "@dayChatTrackerReading": {
+    "description": "Daily chat: the default name of the tracker’s field"
+  },
+  "dayChatSummaryOffline": "All counted from your own data on this phone, offline.",
+  "@dayChatSummaryOffline": {
+    "description": "Daily chat: said under the day summary"
+  },
+  "dayChatOpenFromBar": "Open today’s chat",
+  "@dayChatOpenFromBar": {
+    "description": "Daily chat: the button in the quick-add bar that moves what he typed into the chat"
+  },
+  "dayChatTitleExpenseUnknown": "Spent on {note}, but you did not say how much",
+  "@dayChatTitleExpenseUnknown": {
+    "description": "Daily chat: money out with no amount said – the card must not invent one",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleExpenseUnknownBare": "Spent, but you did not say how much",
+  "@dayChatTitleExpenseUnknownBare": {
+    "description": "Daily chat: money out with no amount and nothing said about what for"
+  },
+  "dayChatTitleIncomeUnknown": "Received from {note}, but you did not say how much",
+  "@dayChatTitleIncomeUnknown": {
+    "description": "Daily chat: money in with no amount said",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "dayChatTitleIncomeUnknownBare": "Received, but you did not say how much",
+  "@dayChatTitleIncomeUnknownBare": {
+    "description": "Daily chat: money in with no amount and nothing said about where from"
   }
 }

@@ -10,6 +10,7 @@ import '../../features/ai_bridge/ai_bridge.dart'
     show PlanHistoryScreen, PlanImportScreen, PlanScreen, PlanTab;
 import '../../features/ai_chat/ai_chat.dart' show AiChatListScreen, AiChatScreen;
 import '../../features/data/data.dart' show DataCentreScreen, RestoreFlow;
+import '../../features/day_chat/day_chat.dart' show DayChatScreen, DayChatTab;
 import '../../features/lock/application/lock_controller.dart' show lockControllerProvider;
 import '../../features/notification_center/notification_center.dart'
     show CenterTab, NotificationCenterScreen, NotificationSettingsSummary;
@@ -21,7 +22,7 @@ import '../i18n/gen/app_localizations.dart';
 import '../quran/ayah.dart' show AyahRef;
 import '../settings/app_settings.dart';
 import '../sound/sound_api.dart';
-import 'life_route_pages.dart' show LifeRecordLinks;
+import 'life_route_pages.dart' show LifeRecordLinks, LoggedRecordLinks;
 import 'routes.dart';
 
 /// Adapters between the router and the Phase 9 system screens (global
@@ -64,6 +65,70 @@ abstract final class PlanNav {
   /// One plan straight on its checklist – where the home panel's line goes.
   static void checklist(BuildContext context, String planId) =>
       unawaited(context.push<void>(AppRoutes.planOf(planId, tab: 'list')));
+}
+
+/// Part 7 – how the daily chat opens: from the quick-add bar on the home
+/// panel (carrying whatever he already typed), and from anywhere else that
+/// wants his day.
+abstract final class DayChatNav {
+  /// The chat of today, with [draft] already typed into the box – never
+  /// sent: he still taps send, and then decides each card.
+  static void open(BuildContext context, {String? draft}) =>
+      unawaited(context.push<void>(AppRoutes.dayChatOf(draft: draft)));
+
+  /// «شو صار اليوم؟» straight away.
+  static void summary(BuildContext context, {DateTime? day}) =>
+      unawaited(context.push<void>(AppRoutes.dayChatOf(day: day, tab: 'summary')));
+
+  /// Another day of the chat **in place of** this one, so back leaves the
+  /// chat instead of walking through every day he looked at.
+  static void day(BuildContext context, DateTime day) =>
+      context.pushReplacement(AppRoutes.dayChatOf(day: day));
+}
+
+/// `/day?day=&tab=&q=` – the daily chat: he types his day, and every piece
+/// it was read into waits on its own card for his tap.
+///
+/// Nothing here writes or sends anything by itself: `q` only fills the box,
+/// and a card's own «سجّلها» is the only thing that writes.
+class DayChatRoutePage extends ConsumerWidget {
+  const DayChatRoutePage({super.key, this.day, this.tab, this.initialDraft});
+
+  final DateTime? day;
+  final DayChatTab? tab;
+  final String? initialDraft;
+
+  /// The tab named by the `tab` query parameter (null: the chat itself).
+  static DayChatTab? tabOf(String? name) {
+    for (final t in DayChatTab.values) {
+      if (t.name == name) return t;
+    }
+    return null;
+  }
+
+  /// The day named by the `day` query parameter (`yyyy-mm-dd`; null: today).
+  static DateTime? dayOf(String? key) {
+    if (key == null || key.isEmpty) return null;
+    final parsed = DateTime.tryParse(key);
+    return parsed == null ? null : DateTime(parsed.year, parsed.month, parsed.day);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => DayChatScreen(
+    day: day,
+    initialTab: tab ?? DayChatTab.chat,
+    initialDraft: initialDraft,
+    animateBackdrop: !ref.watch(appSettingsProvider.select((s) => s.powerMode == PowerMode.batterySaver)),
+    onOpenDay: (picked) => DayChatNav.day(context, picked),
+    // A filed card can be followed to the row it created, wherever that
+    // feature keeps it (the same map the global search uses).
+    onOpenRecord: (table, id) {
+      final target = LoggedRecordLinks.locationOf(table, id);
+      if (target == null) return;
+      Fx.fire(Sfx.navigate);
+      SystemNav.to(context, target);
+    },
+  );
 }
 
 /// `/search?q=` – global search, opening every result through
@@ -272,17 +337,24 @@ String? searchTargetOf(SearchDoc doc) {
     return v == null || v.isEmpty ? null : v;
   }
 
-  final life = LifeRecordLinks.locationOf(doc.openKey, id, extra: doc.extra);
-  if (life != null) return life;
+  // Everything the life worlds map, plus the logged rows the daily chat can
+  // create (a ledger entry, a prayer log, pain, mood, a task) – one source
+  // of truth for the search, the chat and the Neglect Radar. The planet
+  // page opens a task's editor (RecordOpener).
+  final logged = LoggedRecordLinks.locationOf(
+    doc.openKey,
+    id,
+    planetKey: doc.planetKey,
+    walletId: e('walletId'),
+    extra: doc.extra,
+  );
+  if (logged != null) return logged;
 
   return switch (doc.openKey) {
     // ------------------------------------------------------------- core
-    // The planet page opens the task's editor (RecordOpener).
-    'tasks' => id == null ? null : AppRoutes.planetOf(doc.planetKey, item: 'tasks:$id'),
     'planets' => id == null ? null : AppRoutes.planetOf(id),
 
     // ------------------------------------------------------------ faith
-    'prayer_logs' => AppRoutes.prayerTrackerHistory,
     'quran_bookmarks' => _ayah(e('surah'), e('ayah')),
     // QuranSearchSource's refId is the ayah itself («2:255»).
     'quran.ayah' => _ayahRef(id),
@@ -304,21 +376,11 @@ String? searchTargetOf(SearchDoc doc) {
       (a) => AppRoutes.appointmentsOf(highlightId: a),
       AppRoutes.recordOf(tab: 'questions'),
     ),
-    'pain_entries' => AppRoutes.wellbeingOf(tab: 'pain'),
-    'mood_entries' => AppRoutes.wellbeing,
     'habits' => AppRoutes.wellbeingOf(tab: 'habits'),
     'worries' => AppRoutes.wellbeingOf(tab: 'worries'),
 
     // ------------------------------------------------------------ money
     'wallets' => _or(id, AppRoutes.walletOf, AppRoutes.ledger),
-    // An entry has no screen of its own: its wallet's list, filtered.
-    'transactions' => _or(
-      e('walletId'),
-      (w) => AppRoutes.transactionsOf({
-        'wallet': [w],
-      }),
-      AppRoutes.ledger,
-    ),
     'budget_items' => AppRoutes.budgetOf(),
     'jars' => _or(id, AppRoutes.jarOf, AppRoutes.goals),
     'jar_deposits' => _or(e('jarId'), AppRoutes.jarOf, AppRoutes.goals),

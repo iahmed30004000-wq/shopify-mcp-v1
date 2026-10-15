@@ -208,9 +208,16 @@ class DayChatDay {
       for (final l in lines)
         if (l.id != line.id) l,
       line,
-    ]..sort((a, b) => a.at.compareTo(b.at)),
+    ]..sort(_byTime),
     decisions: decisions,
   );
+
+  /// Oldest first, and the id decides between two lines of the same moment
+  /// (Dart's sort is not stable, and the chat must not reshuffle his words).
+  static int _byTime(DayChatLine a, DayChatLine b) {
+    final when = a.at.compareTo(b.at);
+    return when != 0 ? when : a.id.compareTo(b.id);
+  }
 
   DayChatDay withDecision(DayChatDecision decision) =>
       DayChatDay(day: day, lines: lines, decisions: {...decisions, decision.pieceId: decision});

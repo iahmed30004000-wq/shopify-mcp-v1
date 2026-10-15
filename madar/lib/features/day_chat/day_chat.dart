@@ -16,6 +16,13 @@
 /// * medicine stays his doctor's: a sentence carrying a dose or a diagnosis
 ///   is kept as his own note and nothing else (`HealthGuard`).
 ///
+/// The screen (step 2):
+/// * [DayChatScreen] – his line, a card per piece under it with the words
+///   it came from underlined in his own bubble, **سجّلها / عدّلها / لأ** per
+///   card and no apply-all, and «شو صار اليوم؟» beside it;
+/// * [DayChatActions] – the one decision per card, each with the app's undo
+///   toast; the only door out of the phone is its «اسأل الذكاء» tap.
+///
 /// Where to start (the chat screen builds on these):
 /// * `dayChatServiceProvider` – `read` a line, `apply` / `applyEdited` /
 ///   `reject` one piece (each with an undo), `summary` for «شو صار اليوم؟»;
@@ -35,4 +42,12 @@ export 'domain/day_chat_segmenter.dart';
 export 'domain/day_chat_text.dart';
 export 'domain/day_chat_vocabulary.dart';
 export 'domain/day_summary.dart';
+export 'presentation/day_chat_actions.dart' show DayChatActions, DayChatFiled;
+export 'presentation/day_chat_edit.dart'
+    show DayChatEditResult, DayChatTrackerDraft, showDayChatEditSheet, showDayChatRewordSheet, showDayChatTrackerSheet;
+export 'presentation/day_chat_screen.dart' show DayChatScreen, DayChatTab;
 export 'presentation/day_chat_texts.dart';
+export 'presentation/widgets/day_chat_bubble.dart' show DayChatBubble;
+export 'presentation/widgets/day_chat_composer.dart' show DayChatComposer;
+export 'presentation/widgets/day_chat_piece_card.dart' show DayChatPieceCard;
+export 'presentation/widgets/day_summary_view.dart' show DaySummaryView;

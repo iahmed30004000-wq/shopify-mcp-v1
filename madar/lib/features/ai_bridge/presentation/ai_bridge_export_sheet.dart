@@ -27,18 +27,25 @@ import '../domain/plan_request.dart';
 /// package's own chooser, types his question if he wants one, and Madar
 /// hands him one file (or the same text on the clipboard) carrying his
 /// summary, the prompt and the exact answer shape.
-Future<void> showAiBridgeExportSheet(BuildContext context) =>
-    showInteractionSheet<void>(context, builder: (_) => const AiBridgeExportSheet());
+///
+/// [initialAsk] only **types** his question into the field (Part 7's daily
+/// chat hands over the one sentence it could not read): nothing is chosen,
+/// built or sent because of it.
+Future<void> showAiBridgeExportSheet(BuildContext context, {String? initialAsk}) =>
+    showInteractionSheet<void>(context, builder: (_) => AiBridgeExportSheet(initialAsk: initialAsk));
 
 class AiBridgeExportSheet extends ConsumerStatefulWidget {
-  const AiBridgeExportSheet({super.key});
+  const AiBridgeExportSheet({super.key, this.initialAsk});
+
+  /// A question already typed in – never sent (see [showAiBridgeExportSheet]).
+  final String? initialAsk;
 
   @override
   ConsumerState<AiBridgeExportSheet> createState() => _AiBridgeExportSheetState();
 }
 
 class _AiBridgeExportSheetState extends ConsumerState<AiBridgeExportSheet> {
-  final _ask = TextEditingController();
+  late final TextEditingController _ask = TextEditingController(text: widget.initialAsk ?? '');
 
   /// The Markdown he approved in the chooser, and the sections behind it.
   String? _markdown;
