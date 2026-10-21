@@ -119,6 +119,22 @@ one APK each). This file keeps only the live state and the raw owner feedback.
   content; his approval of the kids design; his approval of a visual reference for «السما».
 - **Nothing new starts before Part 7 ships** - the working rule stands.
 
+## 2026-10-21 - the rebuild is planned, waiting on him (plan only, nothing built)
+
+He asked for a complete rebuild (smooth, step-by-step, an in-app guide, an Islamic-inspired
+look with a GTA feel, real photos, ChatGPT for the art) and said **plan only, stop before
+building**. Done:
+- `PLAN.md` **Part R** - the findings, the new structure (R-S1..S10), the look (R-L1..L10), the
+  guide (R-G1..G5), smoothness (R-P1..P4), the build steps R0..R7, the tools list, and the
+  decisions taken without him.
+- The skill **`.claude/skills/madar-art-prompts/`** (rules, `prompts.json` = 13 round-1 + 40
+  round-2 prompts, `build_docx.js`), and the CLAUDE.md rule: prompts always go to him as one
+  Word file. The Word file was sent to him on 2026-10-21.
+
+**Waiting on him**: R-Q1 (where the rebuild goes in the order - recommended: right after the
+hotfix), R-Q2 (the home - recommended: «اليوم»), and his pick from ChatGPT round 1 (A/B/C, and
+the people question, image R1-A-05). **When he answers**: the hotfix first (unchanged), then R0.
+
 ## STOPPED 2026-10-16 (weekly limit near; the OMS has priority until it renews Tue 20/10)
 
 **Where it stopped.** Everything is committed and pushed on `claude/madar-life-os-nmoysk`,

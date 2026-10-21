@@ -53,6 +53,246 @@ in each theme, looked at.
 
 ---
 
+## Part R — «إعادة البناء»: the whole app rebuilt for ease, with a new look  → one APK per step
+
+**Proposed 2026-10-21, waiting on the owner's two answers (see «Open questions»). Plan only:
+nothing below is built until he says go.**
+
+**His words (2026-10-21), summarised:** rebuild the app completely so it is very smooth and easy
+to use, each step leading to the next - today it feels cluttered and very hard to deal with.
+Most important: smoothness, navigation, and an in-app guide that is very easy. The look must be
+legendary: inspired by Islamic art down to the graphics, with a GTA feel, using real images from
+the internet. Merge, delete or create anything that makes the whole system work smoothly.
+Pictures come from ChatGPT: prompts collected and always sent as one Word file, and saved in a
+skill (done: `.claude/skills/madar-art-prompts/`). Open-source tools, skills and model weights:
+tell him what to fetch; what runs on the phone or his PC now, what needs his server later.
+
+### What the code shows today (2026-10-21)
+
+1. **About 95 screens** (`AppRoutes`), **18 of them settings screens**.
+2. **The only home is a moving orrery**: reaching a section means tapping a planet that is
+   moving, then a page that opens over it. The header holds three small icons (search, bell,
+   settings) beside the date.
+3. **Five features live only inside Settings**: Together Mode, the AI chats, import, the
+   home-screen widgets and the data centre (backup). The **design gallery**, a developer tool,
+   also sits in his settings.
+4. **Four doors to "talk to the app"**: the daily chat (`/day`), the AI chat (`/ai`), the AI
+   bridge (copy/share JSON) and plans import (`/plans`).
+5. **Health and Body are two planets for one subject** (medication, records and wellbeing on
+   one; the gym and food on the other).
+6. **A planet page does two jobs at once**: the balance explanation (score, reasons, sources,
+   moons, meters) and the tools.
+7. **Three task-like things**: the home tasks, the lists (checklists anywhere) and the Work
+   board's cards - plus custom modules.
+
+### The yardstick for every decision
+
+1. **Today first**: opening the app answers "what now?" at a glance.
+2. **One step at a time**: every action leads to its natural next one; no dead ends.
+3. **Two taps**: the twelve most frequent actions are at most two taps from Today - measured
+   by a test, not eyeballed.
+4. **One way to do a thing**: one input, one add button, one settings place per area.
+5. **Same shape everywhere**: every planet page has the same three parts.
+6. **Explain in place**: every screen can explain itself with an example, in his kind of
+   Arabic.
+7. **Beauty never costs speed**: 60 fps (120 Hz on his phone), no transition over 400 ms,
+   nothing decorative ever blocks a tap.
+8. **Nothing of his is lost**: the rebuild deletes no data, and every old link, scheduled
+   notification and widget still lands on a screen.
+
+### The new structure
+
+- **R-S1 «اليوم» is the home.** Top: the astrolabe as the hero - alive, with the real time,
+  the real sky and the next prayer marked on its rim; pulling it down opens «الخريطة».
+  Under it, **«مهمتك هلّق»**: one card, one thing to do now, with «تم» / «بعدين» / «تخطّي»;
+  when it is done the next one slides in - this is "each step leads to the next". Under that,
+  **«يومك»**: today in time order (prayers, medicine, meals, tasks, the workout). At the
+  bottom, **the dock**: «الخريطة» · **＋** · «بحث» · «أنا». Tapping ＋ opens the assistant's
+  input; holding it opens **the quick-add wheel** (eight slices, his choice of which). The bell
+  stays at the top; an optional «جيبي» money chip is off by default and blurred until tapped.
+  The objective is chosen by **local rules only, no AI**: (1) a prayer whose adhan is within 15
+  minutes or whose time is in and not logged; (2) a medicine due within 30 minutes either side;
+  (3) a timed task due within the hour; (4) the adhkar window (morning after Fajr, evening
+  after Asr) or the wird; (5) a planned meal or workout; (6) the most neglected planet's
+  suggested action. «بعدين» snoozes 15/30/60 minutes; «تخطّي» clears it for today. It builds on
+  `home_tasks`, `prayer_day` and the existing time windows.
+- **R-S2 «الخريطة» is the orrery, made easy**: hit targets of at least 64 dp, labels always
+  readable, orbits pause under the finger, a planet that needs him pulses like a waypoint, and
+  a list view for accessibility.
+- **R-S3 Eight planets, same shape.** الإيمان · **صحتي** (Health and Body merged) · فلوسي ·
+  شغلي · عيلتي · نموّي · سفري · ألعابي; «السفرة» stays (dormant in his copy, full in hers);
+  later «القراءة» (Part 17) and «الصغار» (Part 16). Every planet page has **الآن** (its next
+  action), **الأدوات** (big tiles, at most six, the rest under «المزيد») and **التقدّم** (the
+  balance: score, reasons and sources, collapsed by default), plus ⚙️ for that planet's own
+  settings and «؟» for its guide.
+- **R-S4 One «المساعد» instead of four doors**: the daily chat, the AI chat, the AI bridge and
+  plans import on one screen. By default what he types is **filed on the phone** (today's daily
+  chat). **«اسأل الذكاء»** is a separate, explicit button, present only when he has switched the
+  outside AI on, and it **shows exactly what would be sent before sending**; the chat privacy
+  filter stays as it is (health, medication, food and family never leave). «انسخ للذكاء
+  الخارجي / الصق الرد» and «الصق خطة» are actions on the same screen; past days are a tab.
+- **R-S5 «مهامي»**: one «＋ مهمة» flow; a task can carry a checklist and belong to a planet;
+  the Work board is a view of work tasks; one index of every list. **The interface is unified
+  first, the tables are not merged** - no data risk in this pass.
+- **R-S6 Settings: one screen**, grouped and searchable - المظهر، الصوت، القفل، التنبيهات،
+  بياناتي (backup, restore, export, import), الذكاء، أدوات الشاشة، عن مدار. Every setting that
+  belongs to an area moves into that planet's ⚙️ (prayer, adhan, iqama, Quran and recitation →
+  Faith; health → صحتي; money → فلوسي; reminders → their features). The design gallery leaves
+  his settings and stays for tests and screenshots only.
+- **R-S7 The buried features get homes**: Together → «مع بعض» inside عيلتي (the couple
+  specials) and the two-player games inside ألعابي; AI chats → المساعد; import → بياناتي and the
+  first run; widgets → أدوات الشاشة; backup → بياناتي, with a gentle monthly nudge on Today.
+- **R-S8 Search also runs commands**: «أضف مصروف»، «افتح القبلة»; pull down on Today or tap
+  «بحث» on the dock.
+- **R-S9 Every add is a short stepper**: one question per step, an example under each field
+  («مثال: ٥ دنانير بنزين»), progress dots, «التالي» / «رجوع», a summary at the end, then at most
+  two "what next" chips, each dismissible for good. The flows: medicine, expense/income, debt,
+  budget, goal/jar, task, trip, workout day, food rule, custom module, Together pairing, backup
+  setup, prayer setup, Hifz plan, wird.
+- **R-S10 Old links keep working**: a redirect table from every old route to its new home, so
+  notifications scheduled before the update, pinned widgets, search results and backups that
+  carry old routes still open the right screen.
+
+### The look
+
+- **R-L1 The direction is his pick** from ChatGPT round 1 (A «قنديل المدينة» recommended, B
+  «الأندلس», C «شارع النيون»), then locked into a style bible.
+- **R-L2 The look follows the sun**: the five current themes become **three moods driven by
+  the prayer times** - نهار after sunrise, غروب around Maghrib, ليل after Isha - with "keep one"
+  as an option and his accent colour kept. The wallpaper art swaps with them (four times of day
+  and Ramadan).
+- **R-L3 Type**: Reem Kufi (already bundled) for headings; **Lalezar** (OFL) for poster
+  moments (مهمة منجزة, big numbers); IBM Plex Sans Arabic stays for reading; Amiri Quran stays
+  for the Quran; **Anton** (OFL) for English display. The colour fonts Reem Kufi Ink and Aref
+  Ruqaa Ink (OFL) only if they render correctly on his phone - tested first, the plain font is
+  the fallback.
+- **R-L4 Islamic geometry in code**: one pattern library (8-fold khatam, 12-fold rosette,
+  10-fold girih, 6-fold hexagonal) built with the polygons-in-contact method and cached as
+  pictures - textures, dividers, frames, progress rings shaped as stars, and the transition in
+  which the pattern draws itself outward from the tapped planet. Each planet gets its own family
+  and colour; the existing `IslamicStar` joins the library.
+- **R-L5 Components**: arch (mihrab) hero cards, mashrabiya-lattice glass (replacing most plain
+  blur, which is also cheaper), brass primary buttons, the objective card, the dock, the wheel,
+  the stepper scaffold, the guide sheet, coach marks, the empty-state template, the planet
+  header with its art, stamps for celebrations.
+- **R-L6 Motion**: 150 / 250 / 400 ms tokens; a planet opens with a shared-element zoom and the
+  pattern bloom over its art panel in at most 400 ms; pages slide on a shared axis that respects
+  RTL; sheets on springs; celebrations at most 1.2 s and skippable; reduced motion means fades
+  only; haptics on every commit.
+- **R-L7 Sound**: the procedural set stays; original cues for done, next and celebrate.
+- **R-L8 The GTA layer is a feeling, never an asset**: objective-led flow, the dock and the
+  wheel, the map with waypoints, mission-complete stamps for life tasks (a prayer gets a calm
+  «تقبّل الله» moment, not a stamp), bold poster type, sunset palettes, key-art panels. None of
+  GTA's logo, characters, fonts, screenshots or sounds (his own standing rule).
+- **R-L9 Real photos**, credited in About: Wikimedia Commons (per-file licence), NASA, ESA/Webb
+  (CC BY 4.0), Unsplash and Pexels - the deep sky behind the orrery from real Webb and Hubble
+  images (which is also a candidate visual reference for «السما», Part 12), stone and tile
+  textures, travel headers. As references fed to ChatGPT, only CC0, public domain, Unsplash or
+  Pexels.
+- **R-L10 Art budget**: at most 12 MB in the APK, WebP, decoded at display size.
+
+### The in-app guide
+
+- **R-G1 First run, six short steps** with art: welcome; city → prayer times; pick your planets;
+  the reminders permission, with why; the fingerprint lock; ready. Each skippable, each with an
+  example; "عندك نسخة احتياطية؟" offered at step one.
+- **R-G2 A three-to-four bubble tour** on the first visit of Today, the map and each planet;
+  never repeated; replayable from «؟».
+- **R-G3 «؟» on every screen**: what this screen is for, one example, the two or three things
+  he can do here.
+- **R-G4 «دليل مدار»**: a searchable guide, one card per feature with an example, reachable from
+  «أنا» and from search.
+- **R-G5 Empty states that teach**: art, one sentence, the first action's button.
+- All of it in plain Jordanian Arabic with examples (his communication rule), and in English.
+
+### Smoothness
+
+- **R-P1 Budgets**: 60 fps everywhere and 120 Hz on the S26 Ultra; cold start to first frame at
+  most 1.5 s; a planet opens in at most 400 ms; no janky frame in the main flows (the perf
+  harness).
+- **R-P2 The tap-budget test**: the twelve most frequent actions at most two taps from Today,
+  asserted from the route graph - log a prayer, mark a medicine taken, add an expense, add a
+  task, continue the Quran where he stopped, the morning or evening adhkar, the tasbeeh, the
+  qibla, log a meal, start today's workout, money left this month, today's wird.
+- **R-P3** The first-search hiccup (Part 12's debt), fixed properly from an allocation profile.
+- **R-P4 Effects budget**: blur only where it carries meaning; lattice textures prerendered;
+  shaders warmed up at start.
+
+### How it is built - one step at a time, each ending with an APK and a report
+
+**Before any of it**: the hotfix already queued (the astrolabe's missing date and time text,
+and the three tests failing on the Work-board-and-gym build), so the current APK exists.
+
+- **R0 The before-picture**: screenshots of every screen as it is, today's tap count for the
+  twelve actions, the list of every entry point. The app does not change. (So he can compare.)
+- **R1 The look, approved**: he runs ChatGPT round 1 → picks a direction and answers the people
+  question → the style bible is locked → three real screens (Today, one planet, one stepper)
+  are built behind a switch and sent to him as pictures. **Gate: his approval of those three.**
+- **R2 The new design system**: tokens, the three moods, the fonts, the pattern library, the
+  components, motion and sound - every screen picks it up at once. APK: the same app, new look.
+- **R3 The new shell**: Today, the objective engine, the dock, the wheel, the map, the
+  assistant, one settings screen, the old-route redirects. APK.
+- **R4a Faith in the new shape, with Part 9b (the voluntary fasts) and Part 19 (Ramadan)** -
+  Ramadan is the only part with an outside deadline (about 1 February 2027). APK.
+- **R4b «صحتي»**: the Health and Body merge, with a data-safe migration of the planet settings
+  and the balance history. APK.
+- **R4c «فلوسي» + «شغلي» + «مهامي».** APK.
+- **R4d «عيلتي» + «سفري» + «نموّي» + «ألعابي» + «السفرة».** APK.
+- **R5 The guide** (R-G1 to R-G5). APK.
+- **R6 The art**: ChatGPT round 2 brought in, the photos credited, the transitions, the
+  celebrations, the icon and the splash. APK.
+- **R7 Smoothness on his phone** (R-P1 to R-P4) and the device checks. APK.
+- Then the queue resumes, **built directly in the new shape**: Part 15 → 16 → 17 → 18 → the
+  rest; Part 12 stays last.
+
+**DoD — works**: Today answers "what now" at a glance and every objective leads to the next;
+the twelve actions are within two taps; every planet has the same three parts; one assistant,
+one add, one settings place per area; every old link lands on its new screen; the look follows
+the sun; the guide explains every screen with an example; none of his data is lost.
+**DoD — tests**: the tap-budget test over the route graph; the redirect test (every old route
+opens a screen); the objective engine's rules over a whole day (prayer windows, medicine,
+tasks, snooze, skip), in Ramadan and while travelling; migration tests for the Health and Body
+merge with his balance history kept, including a restore from an old backup; the assistant's
+privacy test (the existing chat test, extended to the merged screen); golden screenshots of
+every screen in the three moods, both languages and text scale 1.3; the perf budgets.
+**DoD — edge cases**: a notification scheduled before the update and tapped after it; a widget
+pinned before it; a backup from the old app restored into the new one; a planet he renamed or
+hid; the moods at a high latitude where Isha does not come; reduced motion; battery saver;
+TalkBack.
+**DoD — blockers**: (1) his pick from ChatGPT round 1, and the people question, before R1's
+screens; (2) his approval of R1's three screens before R2; (3) ChatGPT round 2's images before
+R6 - R2 to R5 do not wait for them (they use the code patterns and placeholders).
+
+### Tools to fetch - listed for him, nothing downloaded until he says go
+
+- **On his phone**: nothing. The app fetches its own models on first use (Part 15).
+- **In this environment, for me** (official sources only): the Flutter team's agent skills
+  (`flutter/skills`, BSD-3: responsive layout, layout fixes, declarative routing, widget
+  previews, integration tests); the official Dart and Flutter MCP server (it ships with the Dart
+  SDK: analyzer, tests, pub.dev search, a running app's widget tree and hot reload); Anthropic's
+  example skills (`anthropics/skills`, Apache 2.0: frontend-design, theme-factory,
+  canvas-design, algorithmic-art) for the design thinking; the fonts Lalezar and Anton (OFL).
+  Community skill packs are left out (unreviewed code that would run here).
+- **On his PC, optional**: ComfyUI (GPL-3.0) with FLUX.1 [schnell] (Apache 2.0; a strong NVIDIA
+  card, about 12 GB, or about 6 GB with a smaller quantised build; a free Hugging Face account)
+  to make images without ChatGPT; Upscayl (AGPL-3.0) to enlarge an image without blur. Neither
+  is needed while ChatGPT makes the art.
+- **On his server, later**: bigger image models (FLUX, Qwen-Image), a video model (Wan) for
+  animated planet openings, bigger language models - each licence checked when we get there.
+- **Already connected**: Google Drive, for handing the images over (a «مدار – رسومات» folder).
+
+### Decided without asking him (one line each in the report)
+
+- GTA is a feeling only, never its assets (his own rule on franchises).
+- No text inside generated images; all lettering is real fonts.
+- Real photos only from free-licensed sources, credited.
+- Prayer gets a calm acknowledgement, never a "mission passed" stamp.
+- The design gallery leaves his settings.
+- The money chip on Today is off by default.
+- Health and Body become one planet, «صحتي».
+
+---
+
 ## Part 1 — Bug fixes from APK #15  → APK #16
 
 Everything the owner hit on his phone. One batch, because they are all small.
@@ -895,7 +1135,19 @@ so it is left out here. Flagged to him rather than quietly corrected.)*
 
 ## Open questions waiting on the owner
 
-Three, all of them gates on parts that cannot start without him:
+**Asked 2026-10-21 (Part R, the rebuild):**
+
+- **R-Q1 Where the rebuild goes in the order.** Recommended: right after the small hotfix,
+  before Part 9b and Part 15 - otherwise each new part is built in the old shape and rebuilt;
+  Ramadan is protected by building it inside the rebuild (R4a). Other options: after his
+  2026-10-16 list; or only the look first and the structure later.
+- **R-Q2 What the home is.** Recommended: «اليوم» (the objective and the day) with the
+  astrolabe on top and the orrery one pull away. Other options: the orrery stays the home with
+  an objective bar over it; or a phone-style grid of the planets.
+- **ChatGPT round 1**: which direction (A, B or C), and whether people from behind belong in
+  the art (image R1-A-05).
+
+Older, still open - three, all of them gates on parts that cannot start without him:
 
 1. **The sheikh who reviews «مدار الصغار»'s religious content** - he names the person who signs
    off the Quran, prayer, wudu, stories and manners material. **Not a gate on building any

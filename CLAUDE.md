@@ -50,5 +50,13 @@ Example of the right style:
   something is still working. A message that ends without that line means work is still
   running.
 
+## Image prompts (standing rule, set by the owner, 2026-10-21)
+
+- ChatGPT makes Madar's pictures; I write the prompts and he runs them.
+- **Every image prompt is collected in one place and always sent to him as one Word file**
+  (the whole collection, rebuilt each time) - never scattered in chat. The source of truth and
+  the builder live in the skill `.claude/skills/madar-art-prompts/` (read its `SKILL.md`
+  before writing any prompt).
+
 The project itself lives in `madar/` (see `madar/README.md`; while work is paused or
 interrupted, `madar/.resume/RESUME.md` says what is in progress and how to resume).

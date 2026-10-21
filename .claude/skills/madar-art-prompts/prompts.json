@@ -1,0 +1,490 @@
+{
+  "version": 1,
+  "updated": "2026-10-21",
+  "recommended_style": "A",
+  "rules_en": "Rules: absolutely no text, letters, numbers, calligraphy, signatures, watermarks or logos anywhere in the image. No recognizable brands, franchises or existing characters. No weapons and no violence. If any people appear, they are small silhouettes seen from behind or far away, modestly dressed, and their faces are never visible. Never depict a prophet, a companion or any religious figure. Original artwork.",
+  "sizes": {
+    "portrait": {
+      "ar": "طولي 2:3",
+      "px": "1024x1536",
+      "en": "Aspect ratio: portrait 2:3 (1024x1536)."
+    },
+    "square": {
+      "ar": "مربّع 1:1",
+      "px": "1024x1024",
+      "en": "Aspect ratio: square 1:1 (1024x1024)."
+    },
+    "landscape": {
+      "ar": "عرضي 3:2",
+      "px": "1536x1024",
+      "en": "Aspect ratio: landscape 3:2 (1536x1024)."
+    }
+  },
+  "transparent_en": "Transparent background (PNG), the subject fully isolated.",
+  "styles": {
+    "A": {
+      "name_ar": "قنديل المدينة",
+      "about_ar": "مدينة عربية على جبال زي عمّان وقت المغرب وأول الليل. رسم قوي بخطوط سودا عريضة زي شاشات التحميل بالألعاب الكبيرة، والزخارف الإسلامية (النجمة الثمانية، المشربية) داخلة بالعمارة وبالضو. ألوانه: نيلي غامق، برتقالي وزهري للغروب، ذهبي ونحاسي، فيروزي. هاد اقتراحي لأنه بيجمع الإسلامي وإحساس GTA بالنص.",
+      "en": "Style: premium illustrated key art in the spirit of a modern open-world game loading screen, completely original: confident thick ink outlines, cel-shaded painting with smooth gradients and a subtle grain, dramatic low-angle cinematic composition, strong readable silhouettes. World: an Arab hill city inspired by Amman, Jordan: stacked limestone houses on steep hills, long stairways, cypress and olive trees, domes and slender minarets, rooftop water tanks, warm window lights. Islamic geometric art (eight-point stars, girih, mashrabiya lattice, arabesque) is woven into the architecture, the light and the sky. Palette: deep indigo sky, a tangerine-to-rose sunset band, brass and gold highlights, lapis blue, turquoise tile glints, warm limestone beige. Light: warm lantern glow, crisp rim light, a few neon-like geometric accents in turquoise and magenta. Mood: confident, cinematic, hopeful, modest."
+    },
+    "B": {
+      "name_ar": "الأندلس",
+      "about_ar": "هادي وراقي ونهاري: فسيفساء وأقواس وقباب ومقرنصات وذهب، أقرب للفن الإسلامي الكلاسيكي. إحساس GTA هون بيضل بس بالخط العريض وبلحظات الاحتفال جوّا التطبيق.",
+      "en": "Style: refined, luminous editorial illustration with crisp shapes, fine detail and a light paper grain, rooted in classical Islamic art and architecture (Andalusian, Mamluk and Ottoman): zellige tilework, carved stucco, horseshoe and pointed arches, muqarnas vaults, courtyard fountains, gold-leaf ornament. Palette: ivory, lapis blue, turquoise, emerald green, terracotta and gold leaf. Light: soft morning sun with long gentle shadows. Mood: calm, elegant, spiritual, timeless. Clean composition with generous negative space."
+    },
+    "C": {
+      "name_ar": "شارع النيون",
+      "about_ar": "أقرب شي لإحساس GTA: غروب نيون زهري وبرتقالي وبنفسجي، خطوط سودا تقيلة، سرعة وحركة. واللافتات المضوية كلها زخارف إسلامية بدون ولا حرف.",
+      "en": "Style: high-energy retro-futurist poster art: heavy black ink outlines, halftone and cel shading, saturated synthwave gradients (hot magenta, electric orange, deep purple, teal), dramatic perspective, motion light-streaks. World: an Arab hill city at night; its glowing signs are made only of Islamic geometric shapes (eight-point stars, arabesque curves, lattice) and never of letters; domes and minarets in silhouette against an enormous setting sun; car light trails winding up the hills. Mood: bold, fast, playful, cinematic."
+    }
+  },
+  "rounds": [
+    {
+      "id": "R1",
+      "title_ar": "الجولة 1: اختيار الشكل (هلأ)",
+      "per_style": true,
+      "styles": [
+        "A",
+        "B",
+        "C"
+      ],
+      "intro_ar": [
+        "هدفها إنك تشوف الأشكال الثلاثة على نفس الأشياء وتختار واحد.",
+        "افتح محادثة جديدة بـChatGPT لكل شكل (أ، ب، ج)، وابعت برومبتاته ورا بعض بنفس المحادثة.",
+        "بعدها قلّي: أي شكل؟ وصورة R1-A-05 (فيها ناس من بعيد): حلوة ولا لأ؟"
+      ],
+      "prompts": [
+        {
+          "id": "01",
+          "title_ar": "الخلفية الرئيسية (أول شاشة)",
+          "size": "portrait",
+          "use_ar": "خلفية شاشة «اليوم» اللي بتفتح عليها كل يوم.",
+          "subject_en": "A phone wallpaper. A giant ornate brass astrolabe floats in the sky above the city like a second moon; its rings are engraved with eight-point star patterns and glow softly; five small jewel-like planets orbit it on thin golden paths. The city fills the lower third, darker and calmer, so interface text can sit on top of it. No people.",
+          "transparent": false
+        },
+        {
+          "id": "02",
+          "title_ar": "كوكب الإيمان",
+          "size": "square",
+          "use_ar": "صورة كوكب الإيمان لما تفتحه.",
+          "subject_en": "A small world shaped like a golden celestial dome, its surface finely engraved with geometric patterns, floating above a calm mosque courtyard with a long reflecting pool, a crescent moon and the first stars. Serene and reverent. No people.",
+          "transparent": false
+        },
+        {
+          "id": "03",
+          "title_ar": "كوكب الشغل",
+          "size": "square",
+          "use_ar": "صورة كوكب الشغل، عشان تشوف الشكل على قسم «حياة» مش «إيمان».",
+          "subject_en": "A small world with a city-lights night side and brass gear rings, floating above a rooftop office at night: a laptop glow, neat stacks of parcels ready to ship, a delivery van light trail on the hill road below. Purposeful and energetic. No people.",
+          "transparent": false
+        },
+        {
+          "id": "04",
+          "title_ar": "ختم «مهمة منجزة»",
+          "size": "square",
+          "use_ar": "اللي بيطلعلك لما تخلّص مهمة.",
+          "subject_en": "A celebration emblem for finishing a task: a brass eight-point star medallion with a rosette burst of light rays and confetti made of tiny geometric tiles, bold outline, centered, isolated. Absolutely no text.",
+          "transparent": true
+        },
+        {
+          "id": "05",
+          "title_ar": "نفس الخلفية بس فيها ناس من بعيد",
+          "size": "portrait",
+          "use_ar": "تجربة: عشان تقرّر إذا بدك ناس بالرسومات أو لأ (من ظهرهم ومن بعيد بس).",
+          "subject_en": "Edit the previous wallpaper image: keep exactly the same composition, astrolabe and city, and add two small figures seen from behind on a rooftop in the foreground, watching the astrolabe. Modestly dressed; their faces are never visible.",
+          "transparent": false,
+          "only_styles": [
+            "A"
+          ],
+          "same_chat_ar": "ابعتها بنفس المحادثة بعد R1-A-01 مباشرة."
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "title_ar": "الجولة 2: المجموعة الكاملة (بعد ما تختار الشكل)",
+      "per_style": false,
+      "intro_ar": [
+        "لا تبلّش فيها قبل ما تختار من الجولة 1.",
+        "البرومبتات مكتوبة هون بالشكل المختار بأعلى الملف. إذا اخترت شكل غيره، قلّي وبرجعلك نفس الملف جاهز بشكلك.",
+        "ابعت كل مجموعة بمحادثة وحدة، عشان الصور تطلع من نفس العيلة."
+      ],
+      "groups": [
+        {
+          "title_ar": "الخلفية بأوقات اليوم",
+          "note_ar": "التطبيق بيبدّل الخلفية لحاله حسب أوقات الصلاة.",
+          "prompts": [
+            {
+              "id": "HOME-1",
+              "title_ar": "الخلفية وقت الفجر",
+              "size": "portrait",
+              "use_ar": "بتطلع من الفجر لطلوع الشمس.",
+              "subject_en": "Edit the approved wallpaper image: same composition, same astrolabe, same city. Time: just before sunrise (Fajr): a pale violet-blue sky, a thin line of first light on the horizon, the morning star bright, the city lights fading. No people.",
+              "transparent": false,
+              "same_chat_ar": "ابعتها بنفس المحادثة اللي فيها الخلفية الرئيسية اللي اخترتها، عشان تضل نفس المدينة ونفس الأسطرلاب."
+            },
+            {
+              "id": "HOME-2",
+              "title_ar": "الخلفية بالنهار",
+              "size": "portrait",
+              "use_ar": "بتطلع من الضحى للعصر.",
+              "subject_en": "Edit the approved wallpaper image: same composition, same astrolabe, same city. Time: bright late morning: a clear sky, crisp shadows on the limestone, the astrolabe catching the sunlight. No people.",
+              "transparent": false,
+              "same_chat_ar": "ابعتها بنفس المحادثة اللي فيها الخلفية الرئيسية اللي اخترتها، عشان تضل نفس المدينة ونفس الأسطرلاب."
+            },
+            {
+              "id": "HOME-3",
+              "title_ar": "الخلفية وقت المغرب",
+              "size": "portrait",
+              "use_ar": "بتطلع حوالين المغرب.",
+              "subject_en": "Edit the approved wallpaper image: same composition, same astrolabe, same city. Time: sunset (Maghrib): a tangerine and rose sky, long shadows, the first lanterns lighting up. No people.",
+              "transparent": false,
+              "same_chat_ar": "ابعتها بنفس المحادثة اللي فيها الخلفية الرئيسية اللي اخترتها، عشان تضل نفس المدينة ونفس الأسطرلاب."
+            },
+            {
+              "id": "HOME-4",
+              "title_ar": "الخلفية بالليل",
+              "size": "portrait",
+              "use_ar": "بتطلع بعد العشا.",
+              "subject_en": "Edit the approved wallpaper image: same composition, same astrolabe, same city. Time: night after Isha: a deep indigo sky full of stars, warm window lights, the astrolabe glowing gently. No people.",
+              "transparent": false,
+              "same_chat_ar": "ابعتها بنفس المحادثة اللي فيها الخلفية الرئيسية اللي اخترتها، عشان تضل نفس المدينة ونفس الأسطرلاب."
+            },
+            {
+              "id": "HOME-5",
+              "title_ar": "الخلفية برمضان",
+              "size": "portrait",
+              "use_ar": "بتطلع لحالها برمضان (جزء رمضان).",
+              "subject_en": "Edit the approved wallpaper image: same composition, same astrolabe, same city. A Ramadan night: strings of fanous lanterns across the rooftops, a thin crescent moon, a festive but calm glow. No people.",
+              "transparent": false,
+              "same_chat_ar": "ابعتها بنفس المحادثة اللي فيها الخلفية الرئيسية اللي اخترتها، عشان تضل نفس المدينة ونفس الأسطرلاب."
+            }
+          ]
+        },
+        {
+          "title_ar": "صور الكواكب",
+          "note_ar": "بتطلع لما تفتح الكوكب، وبتضل فوق صفحته.",
+          "prompts": [
+            {
+              "id": "PL-faith",
+              "title_ar": "كوكب الإيمان",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A golden celestial-dome world floating above a mosque courtyard at dusk: arches, a long reflecting pool, a crescent moon. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-health",
+              "title_ar": "كوكب صحتي (الصحة والجسد سوا)",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A glowing ocean world with bioluminescent currents floating above a quiet seaside promenade at sunrise: an olive tree, a water bottle on a bench, a running path along the shore. Fresh and calm. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-money",
+              "title_ar": "كوكب فلوسي",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A crystalline world with gold veins and emerald facets floating above an old souk street at dusk: brass scales, lantern-lit stalls, warm coin-like lights. Steady and prosperous. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-work",
+              "title_ar": "كوكب شغلي",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A city-lights world with brass gear rings floating above a rooftop office at night: a laptop glow, stacked parcels ready to ship, a delivery van light trail on the hill road. Purposeful. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-family",
+              "title_ar": "كوكب عيلتي",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A warm terracotta world circled by small moons floating above a family home courtyard in the evening: a lemon tree, string lights, a table set for dinner. Warm and safe. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-growth",
+              "title_ar": "كوكب نموّي",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A lush green world with expanding forests floating above a terrace library: plants climbing stone columns, open books, morning light. Hopeful. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-travel",
+              "title_ar": "كوكب سفري",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A ringed giant world with tiny ships along its rings floating above the red desert of Wadi Rum at golden hour: a winding road, sandstone cliffs, an airplane contrail. Adventurous. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-games",
+              "title_ar": "كوكب ألعابي",
+              "size": "portrait",
+              "use_ar": "صورة فتحة الكوكب، وفوق صفحته.",
+              "subject_en": "A playful world wrapped in rings of colored geometric lights floating above a night fair of original arcade machines and spinning lights made of geometric patterns. Fun and energetic. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people and no existing game characters.",
+              "transparent": false
+            },
+            {
+              "id": "PL-sufra",
+              "title_ar": "كوكب السفرة (المطبخ)",
+              "size": "portrait",
+              "use_ar": "لنسخة زوجتك.",
+              "subject_en": "A rose-colored world floating above a warm home kitchen: copper pots, jars of spices, fresh bread, a teapot with steam. Cozy and welcoming. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            },
+            {
+              "id": "PL-reading",
+              "title_ar": "كوكب القراءة",
+              "size": "portrait",
+              "use_ar": "لجزء كوكب القراءة (بعدين).",
+              "subject_en": "A deep-blue world with paper-like rings floating above a quiet reading nook by a big arched window over the city at night: stacks of old books, an oil lamp, a soft blanket. Quiet. Keep the main subject in the middle third: the top and bottom will be cropped for the screen header. No people.",
+              "transparent": false
+            }
+          ]
+        },
+        {
+          "title_ar": "الشرح بأول تشغيل",
+          "note_ar": "ست خطوات قصيرة، كل خطوة إلها صورة.",
+          "prompts": [
+            {
+              "id": "GD-1",
+              "title_ar": "الترحيب",
+              "size": "portrait",
+              "use_ar": "أول شاشة بأول تشغيل.",
+              "subject_en": "The great astrolabe opening like a carved door in the sky, warm light pouring out over the city. Keep the lower half calm and simple: text will sit there. No people.",
+              "transparent": false
+            },
+            {
+              "id": "GD-2",
+              "title_ar": "أوقات الصلاة",
+              "size": "portrait",
+              "use_ar": "خطوة اختيار مدينتك.",
+              "subject_en": "The city seen from above at dawn with a glowing arc of the sun's path across the sky and five small golden marks along the arc. Keep the lower half calm and simple: text will sit there. No people.",
+              "transparent": false
+            },
+            {
+              "id": "GD-3",
+              "title_ar": "اختيار الكواكب",
+              "size": "portrait",
+              "use_ar": "خطوة اختيار أقسام حياتك.",
+              "subject_en": "Jewel-like planets of different colors resting on a large engraved brass tray, softly glowing. Keep the lower half calm and simple: text will sit there.",
+              "transparent": false
+            },
+            {
+              "id": "GD-4",
+              "title_ar": "التنبيهات",
+              "size": "portrait",
+              "use_ar": "خطوة السماح بالتنبيهات.",
+              "subject_en": "A brass lantern gently ringing, its sound drawn as concentric geometric rings of light. Keep the lower half calm and simple: text will sit there.",
+              "transparent": false
+            },
+            {
+              "id": "GD-5",
+              "title_ar": "القفل بالبصمة",
+              "size": "portrait",
+              "use_ar": "خطوة قفل التطبيق.",
+              "subject_en": "A carved wooden door with an eight-point star lock that glows as if it recognises its owner. Keep the lower half calm and simple: text will sit there.",
+              "transparent": false
+            },
+            {
+              "id": "GD-6",
+              "title_ar": "جاهز",
+              "size": "portrait",
+              "use_ar": "آخر خطوة.",
+              "subject_en": "A stone stairway climbing into the city at sunrise, lanterns lighting the way. Keep the lower half calm and simple: text will sit there. No people.",
+              "transparent": false
+            }
+          ]
+        },
+        {
+          "title_ar": "الشاشات الفاضية",
+          "note_ar": "بدل شاشة فاضية ومملة: صورة صغيرة وجملة بتقلك شو تعمل.",
+          "prompts": [
+            {
+              "id": "EM-tasks",
+              "title_ar": "ما في مهام",
+              "size": "square",
+              "use_ar": "لما قائمة المهام فاضية.",
+              "subject_en": "A tidy wooden desk with a single unlit lantern and a closed notebook. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-money",
+              "title_ar": "ما في مصاريف",
+              "size": "square",
+              "use_ar": "لما ما في حركات فلوس.",
+              "subject_en": "An empty brass bowl beside a perfectly balanced brass scale. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-meds",
+              "title_ar": "ما في أدوية",
+              "size": "square",
+              "use_ar": "لما ما في أدوية مسجّلة.",
+              "subject_en": "A closed weekly pill organizer next to a glass of water and a small jasmine flower. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-lists",
+              "title_ar": "ما في قوائم",
+              "size": "square",
+              "use_ar": "لما ما في قوائم.",
+              "subject_en": "A blank rolled-out paper scroll with a reed pen beside it. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-trips",
+              "title_ar": "ما في سفرات",
+              "size": "square",
+              "use_ar": "لما ما في رحلات.",
+              "subject_en": "A folded old map, a compass and a small suitcase. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-gym",
+              "title_ar": "ما في تمارين",
+              "size": "square",
+              "use_ar": "لما ما في تمارين.",
+              "subject_en": "A resting dumbbell beside a water bottle and a folded towel. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-goals",
+              "title_ar": "ما في أهداف",
+              "size": "square",
+              "use_ar": "لما ما في أهداف.",
+              "subject_en": "A seed sprouting in a terracotta pot, a tiny eight-point star glowing above it. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-search",
+              "title_ar": "البحث ما لقى إشي",
+              "size": "square",
+              "use_ar": "لما البحث ما يلاقي.",
+              "subject_en": "A magnifying glass resting on a starry geometric tile. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-bell",
+              "title_ar": "ما في تنبيهات",
+              "size": "square",
+              "use_ar": "لما ما في تنبيهات.",
+              "subject_en": "A quiet brass bell on a windowsill with a cat sleeping beside it. One scene, a soft plain background, lots of empty space. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-games",
+              "title_ar": "ما في ألعاب محفوظة",
+              "size": "square",
+              "use_ar": "لما ما في ألعاب محفوظة.",
+              "subject_en": "A closed wooden treasure chest with geometric inlay. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-backup",
+              "title_ar": "ما في نسخة احتياطية",
+              "size": "square",
+              "use_ar": "لما ما عملت نسخة احتياطية.",
+              "subject_en": "A small brass safe with a geometric lock, closed and secure. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            },
+            {
+              "id": "EM-day",
+              "title_ar": "يومك لسّا فاضي",
+              "size": "square",
+              "use_ar": "لما ما كتبت إشي بيومك.",
+              "subject_en": "An open notebook with a pen and a glass of tea with fresh mint. One object, a soft plain background, lots of empty space around it. No people.",
+              "transparent": false
+            }
+          ]
+        },
+        {
+          "title_ar": "الاحتفالات",
+          "note_ar": "الصلاة بتاخد احتفال هادي، والمهام احتفال أقوى.",
+          "prompts": [
+            {
+              "id": "CE-done",
+              "title_ar": "مهمة منجزة (النسخة النهائية)",
+              "size": "square",
+              "use_ar": "لما تخلّص مهمة.",
+              "subject_en": "A celebration emblem for finishing a task: a brass eight-point star medallion with a rosette burst of light rays and confetti made of tiny geometric tiles, bold outline, centered, isolated. Absolutely no text.",
+              "transparent": true
+            },
+            {
+              "id": "CE-prayer",
+              "title_ar": "صلاة مسجّلة",
+              "size": "square",
+              "use_ar": "لما تسجّل صلاة: هادي مش احتفال صاخب.",
+              "subject_en": "A soft glowing crescent and a small star surrounded by gentle light, calm and reverent, centered, isolated.",
+              "transparent": true
+            },
+            {
+              "id": "CE-streak",
+              "title_ar": "سلسلة أيام",
+              "size": "square",
+              "use_ar": "لما تكمّل كذا يوم ورا بعض.",
+              "subject_en": "A gentle arc of small brass lanterns lighting up one after another, centered, isolated.",
+              "transparent": true
+            },
+            {
+              "id": "CE-goal",
+              "title_ar": "هدف تحقق",
+              "size": "square",
+              "use_ar": "لما توصل لهدف.",
+              "subject_en": "A brass dome-shaped trophy with a star rosette and ribbons, centered, isolated.",
+              "transparent": true
+            }
+          ]
+        },
+        {
+          "title_ar": "الأيقونة وشاشة الفتح",
+          "note_ar": "لازم تنقرى وهي صغيرة كثير على شاشة الجوال.",
+          "prompts": [
+            {
+              "id": "IC-fg",
+              "title_ar": "أيقونة التطبيق (الشكل)",
+              "size": "square",
+              "use_ar": "الأيقونة على شاشة جوالك.",
+              "subject_en": "An app icon emblem: a bold eight-point star inside a simple astrolabe ring, brass gold with a lapis inner glow, very simple shapes that stay readable at a tiny size, centered with wide empty margins, flat with subtle shading.",
+              "transparent": true
+            },
+            {
+              "id": "IC-bg",
+              "title_ar": "أيقونة التطبيق (الخلفية)",
+              "size": "square",
+              "use_ar": "خلفية الأيقونة.",
+              "subject_en": "A seamless deep indigo background with a faint geometric eight-point star pattern and no central object.",
+              "transparent": false
+            },
+            {
+              "id": "IC-splash",
+              "title_ar": "شاشة الفتح",
+              "size": "portrait",
+              "use_ar": "أول ثانية لما يفتح التطبيق.",
+              "subject_en": "The same eight-point star emblem glowing large in the night sky above a simple city silhouette; everything else dark and simple.",
+              "transparent": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "not_for_gpt_ar": [
+    "الزخارف الإسلامية: بنرسمها بالكود، دقيقة بالمسطرة وبتتحرك وما إلها حجم.",
+    "الأيقونات الصغيرة بالقوائم: بالكود، عشان تضل حادة ومتناسقة.",
+    "الكواكب اللي بتلف على الخريطة: موجودة ومتحرّكة بالكود.",
+    "أي كتابة أو خط عربي أو آية: بخطوط حقيقية مرخّصة، ولا مرة جوّا صورة."
+  ],
+  "log": [
+    {
+      "version": 1,
+      "date": "2026-10-21",
+      "ar": "أول نسخة: الجولة 1 (13 برومبت) والجولة 2 (40 برومبت)."
+    }
+  ]
+}
