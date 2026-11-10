@@ -119,6 +119,36 @@ one APK each). This file keeps only the live state and the raw owner feedback.
   content; his approval of the kids design; his approval of a visual reference for «السما».
 - **Nothing new starts before Part 7 ships** - the working rule stands.
 
+## 2026-11-10 (later) - four parts wired; stopped waiting on the owner
+
+**GitHub Actions is DISABLED on the repo** ("Actions has been disabled for this repository"; a
+workflow_dispatch was refused). No CI run exists since 2026-10-15 and NO APK can be built until the
+owner re-enables it (GitHub > repo > Settings > Actions > General > Allow all actions; check Billing if
+it will not). Every check below was therefore run locally through `ft` (whole `dart analyze lib test`
+clean; 1850 + 1067 + 1401 test runs over the touched areas all green; the whole suite was NOT run end to
+end because a container restart killed the 90-minute run at +936 with no failure).
+
+Wired this session and pushed (commits up to 07d7832):
+- **Part 9b «صيامي»** (fasting reminders, `/faith/fasting`), **Part 19 «رمضان»** (`/faith/ramadan`;
+  Ramadan 1448 starts about 8 Feb 2027), **Part 15 step A** («الذكاء على الجوال» frame, religious guard,
+  download manager; the real engine needs the S26 Ultra), **Part 16 «مدار الصغار»** (shell + escape suite +
+  seven open sections + five religious sections DARK behind `kidsReligiousUnlockedProvider`;
+  assembled in `lib/features/kids/kids.dart`, wired in `bootstrap.dart`).
+- The three failing tests of the gym build are fixed; the astrolabe finding is in the entry above.
+- `.claude/skills/madar-art-prompts` + the Word file of image prompts (sent). CLAUDE.md now says the
+  owner delegates decisions (choose the most suitable, ask only for what only he can give).
+
+**Waiting on the owner** (only he can): re-enable Actions; a phone screenshot of the home screen for the
+astrolabe question; the name of the sheikh (unlocks the kids' religious content, which also needs its
+content files: see `lib/features/kids/faith`, `assets/kids_religious/index.json`); his picks from the
+ChatGPT/Flow round 1 images (A/B/C style, people-from-behind yes/no) which unlock Part R (the rebuild:
+Today home, one assistant, one settings); the voice files (Fish/Hermes) and images go in Drive folders
+«مدار – رسومات» and «مدار – أصوات» (the Drive folder did not exist yet).
+**Not started (blocked or later)**: Part R (needs his style pick), Part 17 reading planet integration
+(a planet needs the rebuild's structure), Part 18 Hajj content (needs verified sources; the counter is built
+dark), Part 12 polish, parts 6/8/10/11. Known small debt: Faith hub at 320 dp / text 1.3 overflows 49 px in
+WirdTodayCard (also queued as a suggested task).
+
 ## 2026-11-10 - ten agents built ten dark blocks; the hotfix is half answered
 
 The owner said «كمل بس ب 10 ايجنت». The container was new: Flutter 3.47.5 was reinstalled at
