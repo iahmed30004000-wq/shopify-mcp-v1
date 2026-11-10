@@ -16,6 +16,7 @@ import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/orbit/presentation/planet/planet_route.dart';
 import '../../features/prayer/presentation/prayer_settings_screen.dart';
 import '../../features/qibla/qibla.dart' show QiblaScreen;
+import '../../features/ramadan/ramadan.dart' show RamadanScreen;
 import '../../features/recitation/recitation.dart' show RecitationSettingsScreen;
 import '../../features/settings/appearance_screen.dart';
 import '../../features/settings/health_settings_screen.dart';
@@ -327,6 +328,12 @@ List<RouteBase> madarRoutes() => [
             ),
           ),
         ],
+      ),
+      // Part 19 - «رمضان»: `/faith/ramadan`.
+      GoRoute(
+        path: 'faith/ramadan',
+        pageBuilder: (context, state) =>
+            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const RamadanScreen()),
       ),
       // Part 9b - «صيامي»: `/faith/fasting`.
       GoRoute(

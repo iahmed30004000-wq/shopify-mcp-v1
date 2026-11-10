@@ -21,6 +21,7 @@ import 'health_services.dart';
 import 'iqama_services.dart';
 import 'life_services.dart';
 import 'money_services.dart';
+import 'ramadan_services.dart';
 import 'system_services.dart';
 
 /// Prepares the services the app needs soon but never on the first frame:
@@ -97,6 +98,7 @@ class AppNotificationRouter {
     if (plan != null) return AppRoutes.wirdOf(plan);
     return iqamaNotificationLocation(tap) ??
         fastingNotificationLocation(tap) ??
+        ramadanNotificationLocation(tap) ??
         healthNotificationLocation(tap) ??
         moneyNotificationLocation(tap) ??
         lifeNotificationLocation(tap);
@@ -148,6 +150,9 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 /// * «تذكير الصيام» stays planned - the next 21 days, the night before after
 ///   Isha - and «ناوي» / «لأ» answered while Madar runs are written
 ///   ([watchFastingServices]);
+/// * «رمضان» stays planned - the suhoor, iftar, Taraweeh and last-ten-nights
+///   reminders of the current or next Ramadan - and «صلّيت» answered while
+///   Madar runs is written ([watchRamadanServices]);
 /// * adhkar reminders stay planned (re-planned on settings, location,
 ///   language and day changes – [adhkarReminderSyncProvider]);
 /// * wird reminders likewise, a week ahead after each plan's prayer
@@ -231,6 +236,8 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     // Part 9b - «تذكير الصيام»: right after the centre has loaded the mutes,
     // like the iqama (one gate; the Prayer group holds it).
     watchFastingServices(ref);
+    // Part 19 - «رمضان»: the same place and the same reason.
+    watchRamadanServices(ref);
     ref.watch(adhkarReminderSyncProvider);
     ref.watch(wirdReminderSyncProvider);
     ref.watch(wirdCompletionSyncProvider);

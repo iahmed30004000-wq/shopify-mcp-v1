@@ -26959,5 +26959,498 @@
   "gymNoLibraryBody": "Add your own: the name, the machine's photo, the movement's video, the muscles and the numbers. Madar ships none of its own",
   "gymNoSetsYetHint": "After each set tap “Set done” and it lands here",
   "gymLibraryHint": "Tap an exercise for its photo, its video and your history with it",
-  "gymSetsOfLog": "That day's sets"
+  "gymSetsOfLog": "That day's sets",
+  "ramadanTitle": "Ramadan",
+  "@ramadanTitle": {
+    "description": "Part 19: title of the Ramadan screen, its Faith tile and its Settings entry"
+  },
+  "ramadanSubtitle": "Iftar and suhoor, Taraweeh, your khatmah, the last ten nights and their reminders",
+  "@ramadanSubtitle": {
+    "description": "Subtitle of the Settings entry"
+  },
+  "ramadanHubHint": "Iftar, suhoor, Taraweeh and your khatmah",
+  "@ramadanHubHint": {
+    "description": "Screen-reader hint of the Faith tool tile"
+  },
+  "ramadanTabToday": "Today",
+  "ramadanTabTaraweeh": "Taraweeh",
+  "ramadanTabKhatmah": "Khatmah",
+  "ramadanTabLastTen": "Last ten",
+  "ramadanTabCompare": "Compare",
+  "ramadanMinutesCount": "{count, plural, =0{0 minutes} =1{1 minute} other{{count} minutes}}",
+  "@ramadanMinutesCount": {
+    "description": "A number of minutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanDaysCount": "{count, plural, =0{0 days} =1{1 day} other{{count} days}}",
+  "@ramadanDaysCount": {
+    "description": "A number of days",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanPagesCount": "{count, plural, =0{0 pages} =1{1 page} other{{count} pages}}",
+  "@ramadanPagesCount": {
+    "description": "A number of Quran pages",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanNightsCount": "{count, plural, =0{0 nights} =1{1 night} other{{count} nights}}",
+  "@ramadanNightsCount": {
+    "description": "A number of nights",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanRakaatCount": "{count, plural, =0{0 rakaat} =1{1 rakah} other{{count} rakaat}}",
+  "@ramadanRakaatCount": {
+    "description": "A number of rakaat",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanDayOf": "Day {day} of Ramadan",
+  "@ramadanDayOf": {
+    "description": "Headline of the Ramadan card; day is pre-formatted",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNightOf": "Night {night} of Ramadan",
+  "@ramadanNightOf": {
+    "description": "Headline on the first evening, before the first day; night is pre-formatted",
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanIftarIn": "Iftar in",
+  "ramadanSuhoorEndsIn": "Suhoor ends in",
+  "ramadanLastIftarDone": "The last iftar of the month is done",
+  "ramadanAtTime": "At {time}",
+  "@ramadanAtTime": {
+    "description": "The time of the iftar or of Fajr; time is pre-formatted",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanCountdownSemantics": "{label} {left}",
+  "@ramadanCountdownSemantics": {
+    "description": "Screen-reader text of the live countdown: the label then the time left in words",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanComingTitle": "Ramadan in {days}",
+  "@ramadanComingTitle": {
+    "description": "Countdown card in the last 30 days before Ramadan; days is pre-formatted with its unit",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanComingTomorrow": "Ramadan starts tomorrow",
+  "ramadanComingDate": "First day of Ramadan: {date}",
+  "@ramadanComingDate": {
+    "description": "date is pre-formatted with the weekday and both calendars",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanComingOpen": "Get ready for Ramadan",
+  "ramadanComingHint": "The reminders are set up by themselves a few weeks before Ramadan. Open Madar once in that time.",
+  "ramadanFarHint": "There is time yet. As Ramadan gets close everything appears here and the reminders switch on by themselves.",
+  "ramadanTaraweehTonight": "Tonight's Taraweeh (night {night})",
+  "@ramadanTaraweehTonight": {
+    "description": "night is pre-formatted",
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanTaraweehLogged": "Logged",
+  "ramadanTaraweehNotYet": "Tap to log it",
+  "ramadanTaraweehTonightSemantics": "Tonight's Taraweeh, night {night}",
+  "@ramadanTaraweehTonightSemantics": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanTaraweehSection": "Taraweeh log",
+  "ramadanTaraweehHint": "Tap a night to log it in one tap. You can add the number of rakaat if you like.",
+  "ramadanTaraweehSummary": "{nights} of {total} nights prayed",
+  "@ramadanTaraweehSummary": {
+    "description": "Both numbers pre-formatted",
+    "placeholders": {
+      "nights": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanTaraweehYear": "Ramadan {year} AH",
+  "@ramadanTaraweehYear": {
+    "description": "year is pre-formatted",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNightCell": "Night {night}, {state}",
+  "@ramadanNightCell": {
+    "description": "Screen-reader text of one night of the grid",
+    "placeholders": {
+      "night": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNightPrayed": "prayed",
+  "ramadanNightNotPrayed": "not yet",
+  "ramadanNightTitle": "Night {night}",
+  "@ramadanNightTitle": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNightPrayedSwitch": "I prayed Taraweeh",
+  "ramadanRakaatLabel": "Number of rakaat",
+  "ramadanRakaatOptional": "Optional",
+  "ramadanRakaatMore": "One more rakah",
+  "ramadanRakaatLess": "One less rakah",
+  "ramadanTaraweehLoggedToast": "The night was logged",
+  "ramadanTaraweehRemovedToast": "The night was taken out of the log",
+  "ramadanTaraweehRakaatToast": "The number of rakaat was saved",
+  "ramadanTaraweehEmptyTitle": "No log yet",
+  "ramadanTaraweehEmptyBody": "When Ramadan begins the nights of the month appear here, and you log each with one tap. You can also press “I prayed” on the Taraweeh notification.",
+  "ramadanKhatmahSection": "Ramadan khatmah",
+  "ramadanKhatmahDayOf": "Day {day} of {days}",
+  "@ramadanKhatmahDayOf": {
+    "description": "Both numbers pre-formatted",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanKhatmahPortion": "Today's portion",
+  "ramadanKhatmahPages": "Page {from} to page {to}",
+  "@ramadanKhatmahPages": {
+    "description": "Pre-formatted page numbers",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanKhatmahRead": "{read} of {total} read",
+  "@ramadanKhatmahRead": {
+    "description": "Pre-formatted pages",
+    "placeholders": {
+      "read": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanKhatmahMarkRead": "I read today's portion",
+  "ramadanKhatmahDoneToday": "Today's portion is read",
+  "ramadanKhatmahUnmark": "Undo today's reading",
+  "ramadanKhatmahOpenQuran": "Open the Quran",
+  "ramadanKhatmahOnTrack": "On track with the plan.",
+  "ramadanKhatmahBehind": "You are {behind} behind the plan. The rest is spread over the coming days: about {perDay} a day, never above the limit you set ({ceiling}).",
+  "@ramadanKhatmahBehind": {
+    "description": "All three pre-formatted with the unit",
+    "placeholders": {
+      "behind": {
+        "type": "String"
+      },
+      "perDay": {
+        "type": "String"
+      },
+      "ceiling": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanKhatmahShortfall": "At this limit the khatmah will not finish within the plan's days: {short} short. Suggestion: raise the limit, or carry on for {extra} more after the plan.",
+  "@ramadanKhatmahShortfall": {
+    "description": "Pre-formatted with units",
+    "placeholders": {
+      "short": {
+        "type": "String"
+      },
+      "extra": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanKhatmahOverdue": "The plan's days are over and {remaining} are left. Suggestion: carry on for {extra} more, within your daily limit.",
+  "@ramadanKhatmahOverdue": {
+    "description": "Pre-formatted with units",
+    "placeholders": {
+      "remaining": {
+        "type": "String"
+      },
+      "extra": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanKhatmahFinished": "You finished the whole khatmah.",
+  "ramadanKhatmahNotStarted": "The khatmah starts with the first day of Ramadan. This is the first day's portion, and you can set your limit now.",
+  "ramadanKhatmahCeiling": "Most pages in a day",
+  "ramadanKhatmahCeilingHint": "Today's portion never goes above this number, however many days you fall behind. Example: if you set twenty and fall behind, the portion stays twenty and we suggest extending instead.",
+  "ramadanKhatmahMarkedToast": "Today's portion was logged",
+  "ramadanKhatmahUnmarkedToast": "Today's reading was taken out",
+  "ramadanKhatmahCeilingToast": "The daily limit changed",
+  "ramadanKhatmahProgressSemantics": "{read} read out of {total}",
+  "@ramadanKhatmahProgressSemantics": {
+    "placeholders": {
+      "read": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanLastTenSection": "The last ten nights",
+  "ramadanLastTenHint": "The nights from the twenty-first to the end of the month. The odd nights carry a star. Tap a night to write your note.",
+  "ramadanLastTenNight": "Night {night}",
+  "@ramadanLastTenNight": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanLastTenOdd": "An odd night",
+  "ramadanLastTenTonight": "Tonight",
+  "ramadanLastTenStrip": "Last ten nights · night {night}",
+  "@ramadanLastTenStrip": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanLastTenEmpty": "The nights of the last ten appear here as Ramadan gets close.",
+  "ramadanNightNoteLabel": "Note for night {night}",
+  "@ramadanNightNoteLabel": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNightNoteHint": "Write what you want to remember about this night",
+  "ramadanNightNoteSaved": "The note was saved",
+  "ramadanQadrTitle": "The supplication of Laylat al-Qadr",
+  "ramadanQadrEmpty": "Add the supplication with its text and source",
+  "ramadanQadrEmptyHint": "This place is yours. The app writes no supplication for you: type it exactly as it is, with its source and grading, and it shows here and you can edit it any time.",
+  "ramadanQadrAdd": "Add the supplication",
+  "ramadanQadrEdit": "Edit the supplication",
+  "ramadanQadrSource": "Source: {source}",
+  "@ramadanQadrSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanQadrGrading": "Grading: {grading}",
+  "@ramadanQadrGrading": {
+    "placeholders": {
+      "grading": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanQadrNoSource": "You did not write the source. It is best to add it.",
+  "ramadanQadrTextLabel": "Text of the supplication",
+  "ramadanQadrSourceLabel": "Source (the book and the number)",
+  "ramadanQadrGradingLabel": "Grading",
+  "ramadanQadrSavedToast": "The supplication was saved",
+  "ramadanQadrClearedToast": "The supplication was removed",
+  "ramadanQadrClear": "Remove the supplication",
+  "ramadanCompareSection": "Compared with last year",
+  "ramadanCompareYear": "Ramadan {year}",
+  "@ramadanCompareYear": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanCompareNights": "Taraweeh nights",
+  "ramadanCompareRakaat": "Rakaat",
+  "ramadanComparePages": "Quran pages",
+  "ramadanCompareFasting": "Days fasted",
+  "ramadanCompareMore": "{n} more",
+  "@ramadanCompareMore": {
+    "description": "n is pre-formatted with its unit",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanCompareLess": "{n} fewer",
+  "@ramadanCompareLess": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanCompareSame": "Same as last year",
+  "ramadanCompareRow": "{label}: this year {thisYear}, last year {lastYear}",
+  "@ramadanCompareRow": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "thisYear": {
+        "type": "String"
+      },
+      "lastYear": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanCompareBoth": "Both years",
+  "ramadanCompareOnlyThis": "This year only",
+  "ramadanCompareOnlyLast": "Last year only",
+  "ramadanCompareNeither": "Neither",
+  "ramadanCompareEmptyTitle": "No other year to compare yet",
+  "ramadanCompareEmptyBody": "The Taraweeh and pages you log this year are kept. Next Ramadan you will see them here beside the new year, night by night.",
+  "ramadanSettingsSection": "Atmosphere and reminders",
+  "ramadanSettingsHint": "Everything runs by itself every year. Switch on or off what you like.",
+  "ramadanAtmosphere": "Ramadan atmosphere",
+  "ramadanAtmosphereHint": "A crescent, lanterns and a warmer tint on the Faith planet all month. It goes away by itself on the first day of Eid.",
+  "ramadanSuhoorReminder": "Suhoor reminder",
+  "ramadanSuhoorReminderHint": "Before the Fajr adhan",
+  "ramadanSuhoorLead": "Before Fajr by",
+  "ramadanIftarReminder": "Iftar reminder",
+  "ramadanIftarReminderHint": "Before the Maghrib adhan",
+  "ramadanIftarLead": "Before Maghrib by",
+  "ramadanTaraweehReminder": "Taraweeh reminder",
+  "ramadanTaraweehReminderHint": "After Isha each night, with an “I prayed” button",
+  "ramadanLastTenReminder": "Last ten nights reminder",
+  "ramadanLastTenReminderHint": "One more notice each night from the twenty-first",
+  "ramadanHubKhatmah": "Khatmah portion on the Faith card",
+  "ramadanHubKhatmahHint": "Today's portion and “Open the Quran” under the countdown",
+  "ramadanSettingChanged": "Setting changed",
+  "ramadanChannelGroup": "Ramadan",
+  "ramadanChannelName": "Ramadan reminders",
+  "ramadanChannelHint": "Iftar, suhoor, Taraweeh and the last ten nights",
+  "ramadanNotifSuhoorTitle": "Ramadan · Suhoor",
+  "ramadanNotifSuhoorBody": "In {minutes} the Fajr adhan is at {time}, and suhoor ends.",
+  "@ramadanNotifSuhoorBody": {
+    "description": "minutes pre-formatted with unit, time pre-formatted",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNotifIftarTitle": "Ramadan · Iftar",
+  "ramadanNotifIftarBody": "In {minutes} the Maghrib adhan is at {time}. Get your iftar ready.",
+  "@ramadanNotifIftarBody": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNotifTaraweehTitle": "Ramadan · Taraweeh",
+  "ramadanNotifTaraweehBody": "Night {night}: Taraweeh time, after Isha. When you finish press “I prayed” and it is kept in your log.",
+  "@ramadanNotifTaraweehBody": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNotifPrayed": "I prayed",
+  "ramadanNotifLastTenTitle": "Last ten nights · night {night}",
+  "@ramadanNotifLastTenTitle": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNotifLastTenBody": "Tonight is night {night} of Ramadan.",
+  "@ramadanNotifLastTenBody": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanNotifLastTenOddBody": "Tonight is night {night} of Ramadan, an odd night.",
+  "@ramadanNotifLastTenOddBody": {
+    "placeholders": {
+      "night": {
+        "type": "String"
+      }
+    }
+  },
+  "ramadanRunwayTitle": "Ramadan is near: set up the reminders",
+  "ramadanRunwayBody": "Open Madar once so the iftar, suhoor and Taraweeh reminders are set to your prayer times.",
+  "ramadanFailedTitle": "The Taraweeh night was not saved",
+  "ramadanFailedBody": "Open Madar and log it by hand."
 }

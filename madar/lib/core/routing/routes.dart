@@ -31,6 +31,11 @@ abstract final class AppRoutes {
   /// the days he fasted, the Hijri shift and the switches.
   static const String fasting = '/faith/fasting';
 
+  /// «رمضان» (Part 19): the month's countdown to iftar and suhoor, the
+  /// Taraweeh log, the khatmah plan, the last ten nights and last year beside
+  /// this one.
+  static const String ramadan = '/faith/ramadan';
+
   /// Settings › Security (app lock: PIN, fingerprint, time-out).
   static const String security = '/settings/security';
 

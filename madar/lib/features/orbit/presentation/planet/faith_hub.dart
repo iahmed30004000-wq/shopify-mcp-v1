@@ -19,6 +19,8 @@ import '../../../prayer/prayer.dart';
 import '../../../prayer_tracker/prayer_tracker.dart' show PrayerTodayCard;
 import '../../../qibla/qibla.dart' show QiblaCard;
 import '../../../quran/quran.dart' show QuranContinueCard;
+import '../../../ramadan/ramadan.dart'
+    show RamadanAtmosphereBand, RamadanAtmosphereScope, RamadanHubCard, ramadanAtmosphereProvider, ramadanTodayProvider;
 import '../../../wird/wird.dart' show WirdTodayCard;
 import '../../data/orbit_providers.dart';
 
@@ -26,7 +28,12 @@ import '../../data/orbit_providers.dart';
 /// prayers, in three movements under one hero:
 ///
 /// * the hero: today's Hijri and Gregorian dates, the next prayer and a live
-///   countdown ([NextPrayerCard] – opens prayer times);
+///   countdown ([NextPrayerCard] – opens prayer times); in Ramadan (Part 19)
+///   the crescent-and-lanterns strip above it and a warmer tint over the
+///   page, and under it the Ramadan card ([RamadanHubCard]: the day, the
+///   countdown to iftar or suhoor, tonight's Taraweeh, today's khatmah
+///   portion, the last ten nights) - in the last 30 days before, a countdown
+///   to Ramadan; all of it by itself, none of it outside the month;
 /// * **your day** – today's five prayers ([PrayerTodayCard]: tap cycles,
 ///   long-press for every option; its header opens the tracker) and today's
 ///   adhkar ([AdhkarTodayCard] – each set opens in the reader);
@@ -37,8 +44,9 @@ import '../../data/orbit_providers.dart';
 ///   Hifz reviews due ([HifzTodayCard], once there is something to
 ///   memorise); the header's "Index" opens the Quran's front page;
 /// * **tools** – the qibla ([QiblaCard], a still mini astrolabe: no sensor
-///   runs on this page) over a grid of seven: the mushaf, Hifz, recitation,
-///   the tasbeeh, the prayer history, the adhan and «صيامي» (Part 9b).
+///   runs on this page) over a grid of eight: the mushaf, Hifz, recitation,
+///   the tasbeeh, the prayer history, the adhan, «صيامي» (Part 9b) and
+///   «رمضان» (Part 19).
 ///
 /// Every part is a [StaggerItem] of the planet page's entrance (each
 /// movement's header rises with its first card), so the hub unfolds in step
@@ -75,7 +83,13 @@ class FaithHub extends ConsumerWidget {
     void header(String title, {String? action, VoidCallback? onAction}) =>
         children.add(_Header(index: index, title: title, action: action, onAction: onAction));
 
+    // Part 19 - «رمضان»: the atmosphere (a still strip, only while Ramadan is
+    // on and he has not switched it off) and the month's card.
+    if (ref.watch(ramadanAtmosphereProvider)) {
+      children.add(StaggerItem(index: index++, child: const RamadanAtmosphereBand()));
+    }
     card(const NextPrayerCard());
+    if (ref.watch(ramadanTodayProvider.select(RamadanHubCard.visible))) card(const RamadanHubCard());
 
     header(l.faithHubTodayTitle);
     card(PrayerTodayCard(onOpen: () => FaithNav.tracker(context)));
@@ -109,7 +123,9 @@ class FaithHub extends ConsumerWidget {
     // fallback text style (a yellow double underline).
     return Material(
       type: MaterialType.transparency,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: children),
+      child: RamadanAtmosphereScope(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: children),
+      ),
     );
   }
 }
@@ -285,8 +301,8 @@ class _CountdownState extends ConsumerState<_Countdown> {
 
 /// The faith tools: a grid of three by two glass tiles, each a brass seal
 /// around its icon over its name – the mushaf, Hifz and recitation, then
-/// the tasbeeh, the prayer history and the adhan, then «صيامي». Every tile opens its page
-/// with a navigation sound.
+/// the tasbeeh, the prayer history and the adhan, then «صيامي» and «رمضان».
+/// Every tile opens its page with a navigation sound.
 class FaithTools extends StatelessWidget {
   const FaithTools({super.key});
 
@@ -304,6 +320,9 @@ class FaithTools extends StatelessWidget {
       (Icons.notifications_active_rounded, l.faithHubAdhanTool, l.faithHubAdhanHint, () => FaithNav.adhanSettings(context)),
       // Part 9b - «صيامي»: the voluntary fasts and their log.
       (Icons.nightlight_round, l.fastRemTitle, l.fastRemHubHint, () => FaithNav.fasting(context)),
+      // Part 19 - «رمضان»: the month's tools (always there: its countdown and
+      // settings are useful before Ramadan too).
+      (Icons.mosque_rounded, l.ramadanTitle, l.ramadanHubHint, () => FaithNav.ramadan(context)),
     ];
     final rows = <Widget>[];
     for (var i = 0; i < tools.length; i += columns) {

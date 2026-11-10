@@ -38,6 +38,8 @@ abstract final class FaithNav {
 
   static void fasting(BuildContext context) => context.push(AppRoutes.fasting);
 
+  static void ramadan(BuildContext context) => context.push(AppRoutes.ramadan);
+
   static void tracker(BuildContext context, {bool history = false}) =>
       context.push(history ? AppRoutes.prayerTrackerHistory : AppRoutes.prayerTracker);
 

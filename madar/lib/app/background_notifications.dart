@@ -12,10 +12,12 @@ import '../features/health/meds/meds.dart'
 import '../features/iqama/iqama.dart' show IqamaNotificationTaps, runIqamaBackgroundAction;
 import '../features/notification_center/notification_center.dart'
     show GatedNotificationPlatform, NotificationGate, loadStoredNotificationPolicy;
+import '../features/ramadan/ramadan.dart' show RamadanNotificationTaps, runRamadanBackgroundAction;
 
 /// The app's background entry point for notification actions that never
 /// open Madar: a dose's Taken / Snooze / Skip pressed in the shade, the
-/// iqama's «صلّيت» / «بعد شوي» and the fasting reminder's «ناوي» / «لأ».
+/// iqama's «صلّيت» / «بعد شوي», the fasting reminder's «ناوي» / «لأ» and
+/// Ramadan's Taraweeh «صلّيت».
 ///
 /// It is the medication tracker's own handler with one difference, and that
 /// difference is the point: the re-plan runs **through a gate**
@@ -66,6 +68,12 @@ void madarAppNotificationBackgroundTap(NotificationResponse response) {
   // it goes through the gate like everything else.
   if (FastingNotificationTaps.isFasting(tap)) {
     unawaited(runFastingBackgroundAction(tap, wrapPlatform: seams.wrapPlatform));
+    return;
+  }
+  // «صلّيت» of «رمضان»: one entry in the Taraweeh log, written whatever the
+  // policy says; only the rare "not saved" notice is shown, through the gate.
+  if (RamadanNotificationTaps.isRamadan(tap)) {
+    unawaited(runRamadanBackgroundAction(tap, wrapPlatform: seams.wrapPlatform));
   }
 }
 

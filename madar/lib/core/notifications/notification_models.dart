@@ -231,7 +231,14 @@ abstract final class NotificationNamespaces {
   /// and held by the notification gate with the Faith (Prayer) group.
   static const fasting = NotificationNamespace('fasting', 200000, 200999);
 
-  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama, hifz, fasting];
+  /// «رمضان» (Part 19): the suhoor, iftar, Taraweeh and last-ten-nights
+  /// reminders of the month (`RamadanNotificationIds`), with «صلّيت» on the
+  /// Taraweeh one. Its own block, outside [fasting] (Part 9b): the two are
+  /// planned by different syncs and neither may cancel the other's. Held by
+  /// the notification gate with the Faith (Prayer) group.
+  static const ramadan = NotificationNamespace('ramadan', 210000, 210999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama, hifz, fasting, ramadan];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {

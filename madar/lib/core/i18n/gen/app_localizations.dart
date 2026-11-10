@@ -46142,6 +46142,864 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'مجموعات هذا اليوم'**
   String get gymSetsOfLog;
+
+  /// Part 19: title of the Ramadan screen, its Faith tile and its Settings entry
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان'**
+  String get ramadanTitle;
+
+  /// Subtitle of the Settings entry
+  ///
+  /// In ar, this message translates to:
+  /// **'الإفطار والسحور، التراويح، ختمتك والعشر الأواخر، وتذكيرات كلها'**
+  String get ramadanSubtitle;
+
+  /// Screen-reader hint of the Faith tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'إفطار وسحور وتراويح وختمة'**
+  String get ramadanHubHint;
+
+  /// No description provided for @ramadanTabToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get ramadanTabToday;
+
+  /// No description provided for @ramadanTabTaraweeh.
+  ///
+  /// In ar, this message translates to:
+  /// **'التراويح'**
+  String get ramadanTabTaraweeh;
+
+  /// No description provided for @ramadanTabKhatmah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الختمة'**
+  String get ramadanTabKhatmah;
+
+  /// No description provided for @ramadanTabLastTen.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشر'**
+  String get ramadanTabLastTen;
+
+  /// No description provided for @ramadanTabCompare.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقارنة'**
+  String get ramadanTabCompare;
+
+  /// A number of minutes
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا دقائق} =1{دقيقة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String ramadanMinutesCount(int count);
+
+  /// A number of days
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أيام} =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String ramadanDaysCount(int count);
+
+  /// A number of Quran pages
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا صفحات} =1{صفحة} =2{صفحتان} few{{count} صفحات} many{{count} صفحة} other{{count} صفحة}}'**
+  String ramadanPagesCount(int count);
+
+  /// A number of nights
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا ليالي} =1{ليلة} =2{ليلتان} few{{count} ليالٍ} many{{count} ليلة} other{{count} ليلة}}'**
+  String ramadanNightsCount(int count);
+
+  /// A number of rakaat
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا ركعات} =1{ركعة} =2{ركعتان} few{{count} ركعات} many{{count} ركعة} other{{count} ركعة}}'**
+  String ramadanRakaatCount(int count);
+
+  /// Headline of the Ramadan card; day is pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {day} من رمضان'**
+  String ramadanDayOf(String day);
+
+  /// Headline on the first evening, before the first day; night is pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلة {night} من رمضان'**
+  String ramadanNightOf(String night);
+
+  /// No description provided for @ramadanIftarIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإفطار بعد'**
+  String get ramadanIftarIn;
+
+  /// No description provided for @ramadanSuhoorEndsIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'السحور بيخلص بعد'**
+  String get ramadanSuhoorEndsIn;
+
+  /// No description provided for @ramadanLastIftarDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلص آخر إفطار بالشهر'**
+  String get ramadanLastIftarDone;
+
+  /// The time of the iftar or of Fajr; time is pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'الساعة {time}'**
+  String ramadanAtTime(String time);
+
+  /// Screen-reader text of the live countdown: the label then the time left in words
+  ///
+  /// In ar, this message translates to:
+  /// **'{label} {left}'**
+  String ramadanCountdownSemantics(String label, String left);
+
+  /// Countdown card in the last 30 days before Ramadan; days is pre-formatted with its unit
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان بعد {days}'**
+  String ramadanComingTitle(String days);
+
+  /// No description provided for @ramadanComingTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان بكرة'**
+  String get ramadanComingTomorrow;
+
+  /// date is pre-formatted with the weekday and both calendars
+  ///
+  /// In ar, this message translates to:
+  /// **'أول رمضان: {date}'**
+  String ramadanComingDate(String date);
+
+  /// No description provided for @ramadanComingOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهّز رمضان'**
+  String get ramadanComingOpen;
+
+  /// No description provided for @ramadanComingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات بتتجهّز لحالها قبل رمضان بكم أسبوع. افتح مدار مرّة بهالفترة.'**
+  String get ramadanComingHint;
+
+  /// No description provided for @ramadanFarHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا في وقت. لما يقرب رمضان بتظهر هون كل أدواته وبتتفعّل التذكيرات لحالها.'**
+  String get ramadanFarHint;
+
+  /// night is pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'تراويح الليلة (ليلة {night})'**
+  String ramadanTaraweehTonight(String night);
+
+  /// No description provided for @ramadanTaraweehLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسجّلة'**
+  String get ramadanTaraweehLogged;
+
+  /// No description provided for @ramadanTaraweehNotYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط لتسجّلها'**
+  String get ramadanTaraweehNotYet;
+
+  /// No description provided for @ramadanTaraweehTonightSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'تراويح الليلة، ليلة {night}'**
+  String ramadanTaraweehTonightSemantics(String night);
+
+  /// No description provided for @ramadanTaraweehSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ التراويح'**
+  String get ramadanTaraweehSection;
+
+  /// No description provided for @ramadanTaraweehHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط على الليلة لتسجّلها بضغطة وحدة. وبتقدر تضيف عدد الركعات إذا بدّك.'**
+  String get ramadanTaraweehHint;
+
+  /// Both numbers pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت {nights} من {total} ليلة'**
+  String ramadanTaraweehSummary(String nights, String total);
+
+  /// year is pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان {year} هـ'**
+  String ramadanTaraweehYear(String year);
+
+  /// Screen-reader text of one night of the grid
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلة {night}، {state}'**
+  String ramadanNightCell(String night, String state);
+
+  /// No description provided for @ramadanNightPrayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيتها'**
+  String get ramadanNightPrayed;
+
+  /// No description provided for @ramadanNightNotPrayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا'**
+  String get ramadanNightNotPrayed;
+
+  /// No description provided for @ramadanNightTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلة {night}'**
+  String ramadanNightTitle(String night);
+
+  /// No description provided for @ramadanNightPrayedSwitch.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت التراويح'**
+  String get ramadanNightPrayedSwitch;
+
+  /// No description provided for @ramadanRakaatLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الركعات'**
+  String get ramadanRakaatLabel;
+
+  /// No description provided for @ramadanRakaatOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري'**
+  String get ramadanRakaatOptional;
+
+  /// No description provided for @ramadanRakaatMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيد ركعة'**
+  String get ramadanRakaatMore;
+
+  /// No description provided for @ramadanRakaatLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقّص ركعة'**
+  String get ramadanRakaatLess;
+
+  /// No description provided for @ramadanTaraweehLoggedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انسجّلت الليلة'**
+  String get ramadanTaraweehLoggedToast;
+
+  /// No description provided for @ramadanTaraweehRemovedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انشالت الليلة من السجلّ'**
+  String get ramadanTaraweehRemovedToast;
+
+  /// No description provided for @ramadanTaraweehRakaatToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انحفظ عدد الركعات'**
+  String get ramadanTaraweehRakaatToast;
+
+  /// No description provided for @ramadanTaraweehEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في سجلّ لسا'**
+  String get ramadanTaraweehEmptyTitle;
+
+  /// No description provided for @ramadanTaraweehEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما يبدأ رمضان بتظهر هون ليالي الشهر، وكل ليلة بتسجّلها بضغطة. حتى من إشعار التراويح بتقدر تضغط «صلّيت».'**
+  String get ramadanTaraweehEmptyBody;
+
+  /// No description provided for @ramadanKhatmahSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'ختمة رمضان'**
+  String get ramadanKhatmahSection;
+
+  /// Both numbers pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم {day} من {days}'**
+  String ramadanKhatmahDayOf(String day, String days);
+
+  /// No description provided for @ramadanKhatmahPortion.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة اليوم'**
+  String get ramadanKhatmahPortion;
+
+  /// Pre-formatted page numbers
+  ///
+  /// In ar, this message translates to:
+  /// **'من صفحة {from} إلى صفحة {to}'**
+  String ramadanKhatmahPages(String from, String to);
+
+  /// Pre-formatted pages
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأت {read} من {total}'**
+  String ramadanKhatmahRead(String read, String total);
+
+  /// No description provided for @ramadanKhatmahMarkRead.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأت حصة اليوم'**
+  String get ramadanKhatmahMarkRead;
+
+  /// No description provided for @ramadanKhatmahDoneToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة اليوم مقروءة'**
+  String get ramadanKhatmahDoneToday;
+
+  /// No description provided for @ramadanKhatmahUnmark.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّع حصة اليوم'**
+  String get ramadanKhatmahUnmark;
+
+  /// No description provided for @ramadanKhatmahOpenQuran.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح القرآن'**
+  String get ramadanKhatmahOpenQuran;
+
+  /// No description provided for @ramadanKhatmahOnTrack.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماشي حسب الخطة.'**
+  String get ramadanKhatmahOnTrack;
+
+  /// All three pre-formatted with the unit
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر {behind} عن الخطة. الباقي اتوزّع على الأيام الجاية: حوالي {perDay} باليوم، وما بنتخطّى الحد اللي حطّيته ({ceiling}).'**
+  String ramadanKhatmahBehind(String behind, String perDay, String ceiling);
+
+  /// Pre-formatted with units
+  ///
+  /// In ar, this message translates to:
+  /// **'بهالحد ما بتلحق تخلّص الختمة بأيام الخطة: ناقص {short}. اقتراح: ارفع الحد، أو كمّل {extra} زيادة بعد الخطة.'**
+  String ramadanKhatmahShortfall(String short, String extra);
+
+  /// Pre-formatted with units
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام الخطة خلصت وضل {remaining}. اقتراح: كمّل {extra} زيادة، بحد أقصى حصتك اليومية.'**
+  String ramadanKhatmahOverdue(String remaining, String extra);
+
+  /// No description provided for @ramadanKhatmahFinished.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّصت الختمة كلها.'**
+  String get ramadanKhatmahFinished;
+
+  /// No description provided for @ramadanKhatmahNotStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'الختمة بتبدأ مع أول يوم من رمضان. هاي حصة اليوم الأول، وبتقدر تعدّل الحد من هلأ.'**
+  String get ramadanKhatmahNotStarted;
+
+  /// No description provided for @ramadanKhatmahCeiling.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى عدد صفحات باليوم'**
+  String get ramadanKhatmahCeiling;
+
+  /// No description provided for @ramadanKhatmahCeilingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة اليوم ما بتزيد عن هالرقم أبدًا، حتى لو تأخرت عدة أيام. مثال: لو حطّيتها عشرين وتأخرت، بتضل الحصة عشرين والباقي بنقترح تمديده.'**
+  String get ramadanKhatmahCeilingHint;
+
+  /// No description provided for @ramadanKhatmahMarkedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انسجّلت حصة اليوم'**
+  String get ramadanKhatmahMarkedToast;
+
+  /// No description provided for @ramadanKhatmahUnmarkedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انشالت قراءة اليوم'**
+  String get ramadanKhatmahUnmarkedToast;
+
+  /// No description provided for @ramadanKhatmahCeilingToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتغيّر الحد الأعلى'**
+  String get ramadanKhatmahCeilingToast;
+
+  /// No description provided for @ramadanKhatmahProgressSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأت {read} من أصل {total}'**
+  String ramadanKhatmahProgressSemantics(String read, String total);
+
+  /// No description provided for @ramadanLastTenSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشر الأواخر'**
+  String get ramadanLastTenSection;
+
+  /// No description provided for @ramadanLastTenHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الليالي من الحادية والعشرين لآخر الشهر. الليالي الوتر عليها نجمة. اضغط على ليلة لتكتب ملاحظتك.'**
+  String get ramadanLastTenHint;
+
+  /// No description provided for @ramadanLastTenNight.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلة {night}'**
+  String ramadanLastTenNight(String night);
+
+  /// No description provided for @ramadanLastTenOdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلة وتر'**
+  String get ramadanLastTenOdd;
+
+  /// No description provided for @ramadanLastTenTonight.
+  ///
+  /// In ar, this message translates to:
+  /// **'الليلة'**
+  String get ramadanLastTenTonight;
+
+  /// No description provided for @ramadanLastTenStrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشر الأواخر · ليلة {night}'**
+  String ramadanLastTenStrip(String night);
+
+  /// No description provided for @ramadanLastTenEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتظهر هون ليالي العشر الأواخر لما يقرب رمضان.'**
+  String get ramadanLastTenEmpty;
+
+  /// No description provided for @ramadanNightNoteLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة ليلة {night}'**
+  String ramadanNightNoteLabel(String night);
+
+  /// No description provided for @ramadanNightNoteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اللي بدّك تتذكره عن هالليلة'**
+  String get ramadanNightNoteHint;
+
+  /// No description provided for @ramadanNightNoteSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'انحفظت الملاحظة'**
+  String get ramadanNightNoteSaved;
+
+  /// No description provided for @ramadanQadrTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دعاء ليلة القدر'**
+  String get ramadanQadrTitle;
+
+  /// No description provided for @ramadanQadrEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضيف الدعاء بنصّه ومصدره'**
+  String get ramadanQadrEmpty;
+
+  /// No description provided for @ramadanQadrEmptyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاد المكان إلك. التطبيق ما بيكتب دعاء عنك: اكتب الدعاء مثل ما هو، مع مصدره ودرجته، وبيظهر هون وبتقدر تعدّله بأي وقت.'**
+  String get ramadanQadrEmptyHint;
+
+  /// No description provided for @ramadanQadrAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف الدعاء'**
+  String get ramadanQadrAdd;
+
+  /// No description provided for @ramadanQadrEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّل الدعاء'**
+  String get ramadanQadrEdit;
+
+  /// No description provided for @ramadanQadrSource.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصدر: {source}'**
+  String ramadanQadrSource(String source);
+
+  /// No description provided for @ramadanQadrGrading.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدرجة: {grading}'**
+  String ramadanQadrGrading(String grading);
+
+  /// No description provided for @ramadanQadrNoSource.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما كتبت المصدر. الأحسن تضيفه.'**
+  String get ramadanQadrNoSource;
+
+  /// No description provided for @ramadanQadrTextLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نص الدعاء'**
+  String get ramadanQadrTextLabel;
+
+  /// No description provided for @ramadanQadrSourceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصدر (الكتاب ورقم الحديث)'**
+  String get ramadanQadrSourceLabel;
+
+  /// No description provided for @ramadanQadrGradingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدرجة'**
+  String get ramadanQadrGradingLabel;
+
+  /// No description provided for @ramadanQadrSavedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انحفظ الدعاء'**
+  String get ramadanQadrSavedToast;
+
+  /// No description provided for @ramadanQadrClearedToast.
+  ///
+  /// In ar, this message translates to:
+  /// **'انمسح الدعاء'**
+  String get ramadanQadrClearedToast;
+
+  /// No description provided for @ramadanQadrClear.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح الدعاء'**
+  String get ramadanQadrClear;
+
+  /// No description provided for @ramadanCompareSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقارنة مع السنة الماضية'**
+  String get ramadanCompareSection;
+
+  /// No description provided for @ramadanCompareYear.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان {year}'**
+  String ramadanCompareYear(String year);
+
+  /// No description provided for @ramadanCompareNights.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليالي التراويح'**
+  String get ramadanCompareNights;
+
+  /// No description provided for @ramadanCompareRakaat.
+  ///
+  /// In ar, this message translates to:
+  /// **'الركعات'**
+  String get ramadanCompareRakaat;
+
+  /// No description provided for @ramadanComparePages.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحات القرآن'**
+  String get ramadanComparePages;
+
+  /// No description provided for @ramadanCompareFasting.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام الصيام'**
+  String get ramadanCompareFasting;
+
+  /// n is pre-formatted with its unit
+  ///
+  /// In ar, this message translates to:
+  /// **'{n} أكثر'**
+  String ramadanCompareMore(String n);
+
+  /// No description provided for @ramadanCompareLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'{n} أقل'**
+  String ramadanCompareLess(String n);
+
+  /// No description provided for @ramadanCompareSame.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل السنة الماضية'**
+  String get ramadanCompareSame;
+
+  /// No description provided for @ramadanCompareRow.
+  ///
+  /// In ar, this message translates to:
+  /// **'{label}: هالسنة {thisYear}، السنة الماضية {lastYear}'**
+  String ramadanCompareRow(String label, String thisYear, String lastYear);
+
+  /// No description provided for @ramadanCompareBoth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاثنتين'**
+  String get ramadanCompareBoth;
+
+  /// No description provided for @ramadanCompareOnlyThis.
+  ///
+  /// In ar, this message translates to:
+  /// **'هالسنة بس'**
+  String get ramadanCompareOnlyThis;
+
+  /// No description provided for @ramadanCompareOnlyLast.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماضية بس'**
+  String get ramadanCompareOnlyLast;
+
+  /// No description provided for @ramadanCompareNeither.
+  ///
+  /// In ar, this message translates to:
+  /// **'ولا وحدة'**
+  String get ramadanCompareNeither;
+
+  /// No description provided for @ramadanCompareEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في سنة لتقارنها لسا'**
+  String get ramadanCompareEmptyTitle;
+
+  /// No description provided for @ramadanCompareEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'التراويح والصفحات اللي بتسجّلها هالسنة بتنحفظ. وبرمضان الجاي بتشوفها هون جنب السنة الجديدة، ليلة ليلة.'**
+  String get ramadanCompareEmptyBody;
+
+  /// No description provided for @ramadanSettingsSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجواء والتذكيرات'**
+  String get ramadanSettingsSection;
+
+  /// No description provided for @ramadanSettingsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل شي بيشتغل لحاله كل سنة. شغّل أو طفّي اللي بدّك.'**
+  String get ramadanSettingsHint;
+
+  /// No description provided for @ramadanAtmosphere.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجواء رمضان'**
+  String get ramadanAtmosphere;
+
+  /// No description provided for @ramadanAtmosphereHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'هلال وفوانيس ولمسة دافية على كوكب الإيمان طول الشهر. بتختفي لحالها أول يوم العيد.'**
+  String get ramadanAtmosphereHint;
+
+  /// No description provided for @ramadanSuhoorReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير السحور'**
+  String get ramadanSuhoorReminder;
+
+  /// No description provided for @ramadanSuhoorReminderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل أذان الفجر'**
+  String get ramadanSuhoorReminderHint;
+
+  /// No description provided for @ramadanSuhoorLead.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل الفجر بـ'**
+  String get ramadanSuhoorLead;
+
+  /// No description provided for @ramadanIftarReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الإفطار'**
+  String get ramadanIftarReminder;
+
+  /// No description provided for @ramadanIftarReminderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل أذان المغرب'**
+  String get ramadanIftarReminderHint;
+
+  /// No description provided for @ramadanIftarLead.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل المغرب بـ'**
+  String get ramadanIftarLead;
+
+  /// No description provided for @ramadanTaraweehReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير التراويح'**
+  String get ramadanTaraweehReminder;
+
+  /// No description provided for @ramadanTaraweehReminderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد العشاء كل ليلة، مع زر «صلّيت»'**
+  String get ramadanTaraweehReminderHint;
+
+  /// No description provided for @ramadanLastTenReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير العشر الأواخر'**
+  String get ramadanLastTenReminder;
+
+  /// No description provided for @ramadanLastTenReminderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إشعار إضافي كل ليلة من الليلة الحادية والعشرين'**
+  String get ramadanLastTenReminderHint;
+
+  /// No description provided for @ramadanHubKhatmah.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة الختمة على بطاقة الإيمان'**
+  String get ramadanHubKhatmah;
+
+  /// No description provided for @ramadanHubKhatmahHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة اليوم وزر «افتح القرآن» تحت العدّ التنازلي'**
+  String get ramadanHubKhatmahHint;
+
+  /// No description provided for @ramadanSettingChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتغيّر الإعداد'**
+  String get ramadanSettingChanged;
+
+  /// No description provided for @ramadanChannelGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان'**
+  String get ramadanChannelGroup;
+
+  /// No description provided for @ramadanChannelName.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكيرات رمضان'**
+  String get ramadanChannelName;
+
+  /// No description provided for @ramadanChannelHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإفطار والسحور والتراويح والعشر الأواخر'**
+  String get ramadanChannelHint;
+
+  /// No description provided for @ramadanNotifSuhoorTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان · السحور'**
+  String get ramadanNotifSuhoorTitle;
+
+  /// minutes pre-formatted with unit, time pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {minutes} بيأذّن الفجر الساعة {time}، وبيخلص السحور.'**
+  String ramadanNotifSuhoorBody(String minutes, String time);
+
+  /// No description provided for @ramadanNotifIftarTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان · الإفطار'**
+  String get ramadanNotifIftarTitle;
+
+  /// No description provided for @ramadanNotifIftarBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد {minutes} بيأذّن المغرب الساعة {time}. جهّز فطورك.'**
+  String ramadanNotifIftarBody(String minutes, String time);
+
+  /// No description provided for @ramadanNotifTaraweehTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان · التراويح'**
+  String get ramadanNotifTaraweehTitle;
+
+  /// No description provided for @ramadanNotifTaraweehBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلة {night}: وقت التراويح بعد العشاء. لما تخلّص اضغط «صلّيت» وبتنحفظ بسجلّك.'**
+  String ramadanNotifTaraweehBody(String night);
+
+  /// No description provided for @ramadanNotifPrayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلّيت'**
+  String get ramadanNotifPrayed;
+
+  /// No description provided for @ramadanNotifLastTenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'العشر الأواخر · ليلة {night}'**
+  String ramadanNotifLastTenTitle(String night);
+
+  /// No description provided for @ramadanNotifLastTenBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'الليلة ليلة {night} من رمضان.'**
+  String ramadanNotifLastTenBody(String night);
+
+  /// No description provided for @ramadanNotifLastTenOddBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'الليلة ليلة {night} من رمضان، ليلة وتر.'**
+  String ramadanNotifLastTenOddBody(String night);
+
+  /// No description provided for @ramadanRunwayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمضان قريب: جهّز التذكيرات'**
+  String get ramadanRunwayTitle;
+
+  /// No description provided for @ramadanRunwayBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مدار مرّة وحدة عشان تنضبط تذكيرات الإفطار والسحور والتراويح على أوقات صلاتك.'**
+  String get ramadanRunwayBody;
+
+  /// No description provided for @ramadanFailedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انحفظت ليلة التراويح'**
+  String get ramadanFailedTitle;
+
+  /// No description provided for @ramadanFailedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مدار وسجّلها بإيدك.'**
+  String get ramadanFailedBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

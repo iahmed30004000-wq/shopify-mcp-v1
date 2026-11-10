@@ -29998,4 +29998,577 @@ class L10nAr extends L10n {
 
   @override
   String get gymSetsOfLog => 'مجموعات هذا اليوم';
+
+  @override
+  String get ramadanTitle => 'رمضان';
+
+  @override
+  String get ramadanSubtitle =>
+      'الإفطار والسحور، التراويح، ختمتك والعشر الأواخر، وتذكيرات كلها';
+
+  @override
+  String get ramadanHubHint => 'إفطار وسحور وتراويح وختمة';
+
+  @override
+  String get ramadanTabToday => 'اليوم';
+
+  @override
+  String get ramadanTabTaraweeh => 'التراويح';
+
+  @override
+  String get ramadanTabKhatmah => 'الختمة';
+
+  @override
+  String get ramadanTabLastTen => 'العشر';
+
+  @override
+  String get ramadanTabCompare => 'المقارنة';
+
+  @override
+  String ramadanMinutesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دقيقة',
+      many: '$count دقيقة',
+      few: '$count دقائق',
+      two: 'دقيقتان',
+      one: 'دقيقة',
+      zero: 'لا دقائق',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanDaysCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم',
+      zero: 'لا أيام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanPagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count صفحة',
+      many: '$count صفحة',
+      few: '$count صفحات',
+      two: 'صفحتان',
+      one: 'صفحة',
+      zero: 'لا صفحات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanNightsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ليلة',
+      many: '$count ليلة',
+      few: '$count ليالٍ',
+      two: 'ليلتان',
+      one: 'ليلة',
+      zero: 'لا ليالي',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanRakaatCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ركعة',
+      many: '$count ركعة',
+      few: '$count ركعات',
+      two: 'ركعتان',
+      one: 'ركعة',
+      zero: 'لا ركعات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanDayOf(String day) {
+    return 'اليوم $day من رمضان';
+  }
+
+  @override
+  String ramadanNightOf(String night) {
+    return 'ليلة $night من رمضان';
+  }
+
+  @override
+  String get ramadanIftarIn => 'الإفطار بعد';
+
+  @override
+  String get ramadanSuhoorEndsIn => 'السحور بيخلص بعد';
+
+  @override
+  String get ramadanLastIftarDone => 'خلص آخر إفطار بالشهر';
+
+  @override
+  String ramadanAtTime(String time) {
+    return 'الساعة $time';
+  }
+
+  @override
+  String ramadanCountdownSemantics(String label, String left) {
+    return '$label $left';
+  }
+
+  @override
+  String ramadanComingTitle(String days) {
+    return 'رمضان بعد $days';
+  }
+
+  @override
+  String get ramadanComingTomorrow => 'رمضان بكرة';
+
+  @override
+  String ramadanComingDate(String date) {
+    return 'أول رمضان: $date';
+  }
+
+  @override
+  String get ramadanComingOpen => 'جهّز رمضان';
+
+  @override
+  String get ramadanComingHint =>
+      'التذكيرات بتتجهّز لحالها قبل رمضان بكم أسبوع. افتح مدار مرّة بهالفترة.';
+
+  @override
+  String get ramadanFarHint =>
+      'لسا في وقت. لما يقرب رمضان بتظهر هون كل أدواته وبتتفعّل التذكيرات لحالها.';
+
+  @override
+  String ramadanTaraweehTonight(String night) {
+    return 'تراويح الليلة (ليلة $night)';
+  }
+
+  @override
+  String get ramadanTaraweehLogged => 'مسجّلة';
+
+  @override
+  String get ramadanTaraweehNotYet => 'اضغط لتسجّلها';
+
+  @override
+  String ramadanTaraweehTonightSemantics(String night) {
+    return 'تراويح الليلة، ليلة $night';
+  }
+
+  @override
+  String get ramadanTaraweehSection => 'سجلّ التراويح';
+
+  @override
+  String get ramadanTaraweehHint =>
+      'اضغط على الليلة لتسجّلها بضغطة وحدة. وبتقدر تضيف عدد الركعات إذا بدّك.';
+
+  @override
+  String ramadanTaraweehSummary(String nights, String total) {
+    return 'صلّيت $nights من $total ليلة';
+  }
+
+  @override
+  String ramadanTaraweehYear(String year) {
+    return 'رمضان $year هـ';
+  }
+
+  @override
+  String ramadanNightCell(String night, String state) {
+    return 'ليلة $night، $state';
+  }
+
+  @override
+  String get ramadanNightPrayed => 'صلّيتها';
+
+  @override
+  String get ramadanNightNotPrayed => 'لسا';
+
+  @override
+  String ramadanNightTitle(String night) {
+    return 'ليلة $night';
+  }
+
+  @override
+  String get ramadanNightPrayedSwitch => 'صلّيت التراويح';
+
+  @override
+  String get ramadanRakaatLabel => 'عدد الركعات';
+
+  @override
+  String get ramadanRakaatOptional => 'اختياري';
+
+  @override
+  String get ramadanRakaatMore => 'زيد ركعة';
+
+  @override
+  String get ramadanRakaatLess => 'نقّص ركعة';
+
+  @override
+  String get ramadanTaraweehLoggedToast => 'انسجّلت الليلة';
+
+  @override
+  String get ramadanTaraweehRemovedToast => 'انشالت الليلة من السجلّ';
+
+  @override
+  String get ramadanTaraweehRakaatToast => 'انحفظ عدد الركعات';
+
+  @override
+  String get ramadanTaraweehEmptyTitle => 'ما في سجلّ لسا';
+
+  @override
+  String get ramadanTaraweehEmptyBody =>
+      'لما يبدأ رمضان بتظهر هون ليالي الشهر، وكل ليلة بتسجّلها بضغطة. حتى من إشعار التراويح بتقدر تضغط «صلّيت».';
+
+  @override
+  String get ramadanKhatmahSection => 'ختمة رمضان';
+
+  @override
+  String ramadanKhatmahDayOf(String day, String days) {
+    return 'اليوم $day من $days';
+  }
+
+  @override
+  String get ramadanKhatmahPortion => 'حصة اليوم';
+
+  @override
+  String ramadanKhatmahPages(String from, String to) {
+    return 'من صفحة $from إلى صفحة $to';
+  }
+
+  @override
+  String ramadanKhatmahRead(String read, String total) {
+    return 'قرأت $read من $total';
+  }
+
+  @override
+  String get ramadanKhatmahMarkRead => 'قرأت حصة اليوم';
+
+  @override
+  String get ramadanKhatmahDoneToday => 'حصة اليوم مقروءة';
+
+  @override
+  String get ramadanKhatmahUnmark => 'رجّع حصة اليوم';
+
+  @override
+  String get ramadanKhatmahOpenQuran => 'افتح القرآن';
+
+  @override
+  String get ramadanKhatmahOnTrack => 'ماشي حسب الخطة.';
+
+  @override
+  String ramadanKhatmahBehind(String behind, String perDay, String ceiling) {
+    return 'متأخر $behind عن الخطة. الباقي اتوزّع على الأيام الجاية: حوالي $perDay باليوم، وما بنتخطّى الحد اللي حطّيته ($ceiling).';
+  }
+
+  @override
+  String ramadanKhatmahShortfall(String short, String extra) {
+    return 'بهالحد ما بتلحق تخلّص الختمة بأيام الخطة: ناقص $short. اقتراح: ارفع الحد، أو كمّل $extra زيادة بعد الخطة.';
+  }
+
+  @override
+  String ramadanKhatmahOverdue(String remaining, String extra) {
+    return 'أيام الخطة خلصت وضل $remaining. اقتراح: كمّل $extra زيادة، بحد أقصى حصتك اليومية.';
+  }
+
+  @override
+  String get ramadanKhatmahFinished => 'خلّصت الختمة كلها.';
+
+  @override
+  String get ramadanKhatmahNotStarted =>
+      'الختمة بتبدأ مع أول يوم من رمضان. هاي حصة اليوم الأول، وبتقدر تعدّل الحد من هلأ.';
+
+  @override
+  String get ramadanKhatmahCeiling => 'أعلى عدد صفحات باليوم';
+
+  @override
+  String get ramadanKhatmahCeilingHint =>
+      'حصة اليوم ما بتزيد عن هالرقم أبدًا، حتى لو تأخرت عدة أيام. مثال: لو حطّيتها عشرين وتأخرت، بتضل الحصة عشرين والباقي بنقترح تمديده.';
+
+  @override
+  String get ramadanKhatmahMarkedToast => 'انسجّلت حصة اليوم';
+
+  @override
+  String get ramadanKhatmahUnmarkedToast => 'انشالت قراءة اليوم';
+
+  @override
+  String get ramadanKhatmahCeilingToast => 'اتغيّر الحد الأعلى';
+
+  @override
+  String ramadanKhatmahProgressSemantics(String read, String total) {
+    return 'قرأت $read من أصل $total';
+  }
+
+  @override
+  String get ramadanLastTenSection => 'العشر الأواخر';
+
+  @override
+  String get ramadanLastTenHint =>
+      'الليالي من الحادية والعشرين لآخر الشهر. الليالي الوتر عليها نجمة. اضغط على ليلة لتكتب ملاحظتك.';
+
+  @override
+  String ramadanLastTenNight(String night) {
+    return 'ليلة $night';
+  }
+
+  @override
+  String get ramadanLastTenOdd => 'ليلة وتر';
+
+  @override
+  String get ramadanLastTenTonight => 'الليلة';
+
+  @override
+  String ramadanLastTenStrip(String night) {
+    return 'العشر الأواخر · ليلة $night';
+  }
+
+  @override
+  String get ramadanLastTenEmpty =>
+      'بتظهر هون ليالي العشر الأواخر لما يقرب رمضان.';
+
+  @override
+  String ramadanNightNoteLabel(String night) {
+    return 'ملاحظة ليلة $night';
+  }
+
+  @override
+  String get ramadanNightNoteHint => 'اكتب اللي بدّك تتذكره عن هالليلة';
+
+  @override
+  String get ramadanNightNoteSaved => 'انحفظت الملاحظة';
+
+  @override
+  String get ramadanQadrTitle => 'دعاء ليلة القدر';
+
+  @override
+  String get ramadanQadrEmpty => 'ضيف الدعاء بنصّه ومصدره';
+
+  @override
+  String get ramadanQadrEmptyHint =>
+      'هاد المكان إلك. التطبيق ما بيكتب دعاء عنك: اكتب الدعاء مثل ما هو، مع مصدره ودرجته، وبيظهر هون وبتقدر تعدّله بأي وقت.';
+
+  @override
+  String get ramadanQadrAdd => 'أضف الدعاء';
+
+  @override
+  String get ramadanQadrEdit => 'عدّل الدعاء';
+
+  @override
+  String ramadanQadrSource(String source) {
+    return 'المصدر: $source';
+  }
+
+  @override
+  String ramadanQadrGrading(String grading) {
+    return 'الدرجة: $grading';
+  }
+
+  @override
+  String get ramadanQadrNoSource => 'ما كتبت المصدر. الأحسن تضيفه.';
+
+  @override
+  String get ramadanQadrTextLabel => 'نص الدعاء';
+
+  @override
+  String get ramadanQadrSourceLabel => 'المصدر (الكتاب ورقم الحديث)';
+
+  @override
+  String get ramadanQadrGradingLabel => 'الدرجة';
+
+  @override
+  String get ramadanQadrSavedToast => 'انحفظ الدعاء';
+
+  @override
+  String get ramadanQadrClearedToast => 'انمسح الدعاء';
+
+  @override
+  String get ramadanQadrClear => 'امسح الدعاء';
+
+  @override
+  String get ramadanCompareSection => 'مقارنة مع السنة الماضية';
+
+  @override
+  String ramadanCompareYear(String year) {
+    return 'رمضان $year';
+  }
+
+  @override
+  String get ramadanCompareNights => 'ليالي التراويح';
+
+  @override
+  String get ramadanCompareRakaat => 'الركعات';
+
+  @override
+  String get ramadanComparePages => 'صفحات القرآن';
+
+  @override
+  String get ramadanCompareFasting => 'أيام الصيام';
+
+  @override
+  String ramadanCompareMore(String n) {
+    return '$n أكثر';
+  }
+
+  @override
+  String ramadanCompareLess(String n) {
+    return '$n أقل';
+  }
+
+  @override
+  String get ramadanCompareSame => 'مثل السنة الماضية';
+
+  @override
+  String ramadanCompareRow(String label, String thisYear, String lastYear) {
+    return '$label: هالسنة $thisYear، السنة الماضية $lastYear';
+  }
+
+  @override
+  String get ramadanCompareBoth => 'الاثنتين';
+
+  @override
+  String get ramadanCompareOnlyThis => 'هالسنة بس';
+
+  @override
+  String get ramadanCompareOnlyLast => 'الماضية بس';
+
+  @override
+  String get ramadanCompareNeither => 'ولا وحدة';
+
+  @override
+  String get ramadanCompareEmptyTitle => 'ما في سنة لتقارنها لسا';
+
+  @override
+  String get ramadanCompareEmptyBody =>
+      'التراويح والصفحات اللي بتسجّلها هالسنة بتنحفظ. وبرمضان الجاي بتشوفها هون جنب السنة الجديدة، ليلة ليلة.';
+
+  @override
+  String get ramadanSettingsSection => 'الأجواء والتذكيرات';
+
+  @override
+  String get ramadanSettingsHint =>
+      'كل شي بيشتغل لحاله كل سنة. شغّل أو طفّي اللي بدّك.';
+
+  @override
+  String get ramadanAtmosphere => 'أجواء رمضان';
+
+  @override
+  String get ramadanAtmosphereHint =>
+      'هلال وفوانيس ولمسة دافية على كوكب الإيمان طول الشهر. بتختفي لحالها أول يوم العيد.';
+
+  @override
+  String get ramadanSuhoorReminder => 'تذكير السحور';
+
+  @override
+  String get ramadanSuhoorReminderHint => 'قبل أذان الفجر';
+
+  @override
+  String get ramadanSuhoorLead => 'قبل الفجر بـ';
+
+  @override
+  String get ramadanIftarReminder => 'تذكير الإفطار';
+
+  @override
+  String get ramadanIftarReminderHint => 'قبل أذان المغرب';
+
+  @override
+  String get ramadanIftarLead => 'قبل المغرب بـ';
+
+  @override
+  String get ramadanTaraweehReminder => 'تذكير التراويح';
+
+  @override
+  String get ramadanTaraweehReminderHint => 'بعد العشاء كل ليلة، مع زر «صلّيت»';
+
+  @override
+  String get ramadanLastTenReminder => 'تذكير العشر الأواخر';
+
+  @override
+  String get ramadanLastTenReminderHint =>
+      'إشعار إضافي كل ليلة من الليلة الحادية والعشرين';
+
+  @override
+  String get ramadanHubKhatmah => 'حصة الختمة على بطاقة الإيمان';
+
+  @override
+  String get ramadanHubKhatmahHint =>
+      'حصة اليوم وزر «افتح القرآن» تحت العدّ التنازلي';
+
+  @override
+  String get ramadanSettingChanged => 'اتغيّر الإعداد';
+
+  @override
+  String get ramadanChannelGroup => 'رمضان';
+
+  @override
+  String get ramadanChannelName => 'تذكيرات رمضان';
+
+  @override
+  String get ramadanChannelHint => 'الإفطار والسحور والتراويح والعشر الأواخر';
+
+  @override
+  String get ramadanNotifSuhoorTitle => 'رمضان · السحور';
+
+  @override
+  String ramadanNotifSuhoorBody(String minutes, String time) {
+    return 'بعد $minutes بيأذّن الفجر الساعة $time، وبيخلص السحور.';
+  }
+
+  @override
+  String get ramadanNotifIftarTitle => 'رمضان · الإفطار';
+
+  @override
+  String ramadanNotifIftarBody(String minutes, String time) {
+    return 'بعد $minutes بيأذّن المغرب الساعة $time. جهّز فطورك.';
+  }
+
+  @override
+  String get ramadanNotifTaraweehTitle => 'رمضان · التراويح';
+
+  @override
+  String ramadanNotifTaraweehBody(String night) {
+    return 'ليلة $night: وقت التراويح بعد العشاء. لما تخلّص اضغط «صلّيت» وبتنحفظ بسجلّك.';
+  }
+
+  @override
+  String get ramadanNotifPrayed => 'صلّيت';
+
+  @override
+  String ramadanNotifLastTenTitle(String night) {
+    return 'العشر الأواخر · ليلة $night';
+  }
+
+  @override
+  String ramadanNotifLastTenBody(String night) {
+    return 'الليلة ليلة $night من رمضان.';
+  }
+
+  @override
+  String ramadanNotifLastTenOddBody(String night) {
+    return 'الليلة ليلة $night من رمضان، ليلة وتر.';
+  }
+
+  @override
+  String get ramadanRunwayTitle => 'رمضان قريب: جهّز التذكيرات';
+
+  @override
+  String get ramadanRunwayBody =>
+      'افتح مدار مرّة وحدة عشان تنضبط تذكيرات الإفطار والسحور والتراويح على أوقات صلاتك.';
+
+  @override
+  String get ramadanFailedTitle => 'ما انحفظت ليلة التراويح';
+
+  @override
+  String get ramadanFailedBody => 'افتح مدار وسجّلها بإيدك.';
 }

@@ -29251,4 +29251,568 @@ class L10nEn extends L10n {
 
   @override
   String get gymSetsOfLog => 'That day\'s sets';
+
+  @override
+  String get ramadanTitle => 'Ramadan';
+
+  @override
+  String get ramadanSubtitle =>
+      'Iftar and suhoor, Taraweeh, your khatmah, the last ten nights and their reminders';
+
+  @override
+  String get ramadanHubHint => 'Iftar, suhoor, Taraweeh and your khatmah';
+
+  @override
+  String get ramadanTabToday => 'Today';
+
+  @override
+  String get ramadanTabTaraweeh => 'Taraweeh';
+
+  @override
+  String get ramadanTabKhatmah => 'Khatmah';
+
+  @override
+  String get ramadanTabLastTen => 'Last ten';
+
+  @override
+  String get ramadanTabCompare => 'Compare';
+
+  @override
+  String ramadanMinutesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+      zero: '0 minutes',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanDaysCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+      zero: '0 days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanPagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+      zero: '0 pages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanNightsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count nights',
+      one: '1 night',
+      zero: '0 nights',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanRakaatCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rakaat',
+      one: '1 rakah',
+      zero: '0 rakaat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ramadanDayOf(String day) {
+    return 'Day $day of Ramadan';
+  }
+
+  @override
+  String ramadanNightOf(String night) {
+    return 'Night $night of Ramadan';
+  }
+
+  @override
+  String get ramadanIftarIn => 'Iftar in';
+
+  @override
+  String get ramadanSuhoorEndsIn => 'Suhoor ends in';
+
+  @override
+  String get ramadanLastIftarDone => 'The last iftar of the month is done';
+
+  @override
+  String ramadanAtTime(String time) {
+    return 'At $time';
+  }
+
+  @override
+  String ramadanCountdownSemantics(String label, String left) {
+    return '$label $left';
+  }
+
+  @override
+  String ramadanComingTitle(String days) {
+    return 'Ramadan in $days';
+  }
+
+  @override
+  String get ramadanComingTomorrow => 'Ramadan starts tomorrow';
+
+  @override
+  String ramadanComingDate(String date) {
+    return 'First day of Ramadan: $date';
+  }
+
+  @override
+  String get ramadanComingOpen => 'Get ready for Ramadan';
+
+  @override
+  String get ramadanComingHint =>
+      'The reminders are set up by themselves a few weeks before Ramadan. Open Madar once in that time.';
+
+  @override
+  String get ramadanFarHint =>
+      'There is time yet. As Ramadan gets close everything appears here and the reminders switch on by themselves.';
+
+  @override
+  String ramadanTaraweehTonight(String night) {
+    return 'Tonight\'s Taraweeh (night $night)';
+  }
+
+  @override
+  String get ramadanTaraweehLogged => 'Logged';
+
+  @override
+  String get ramadanTaraweehNotYet => 'Tap to log it';
+
+  @override
+  String ramadanTaraweehTonightSemantics(String night) {
+    return 'Tonight\'s Taraweeh, night $night';
+  }
+
+  @override
+  String get ramadanTaraweehSection => 'Taraweeh log';
+
+  @override
+  String get ramadanTaraweehHint =>
+      'Tap a night to log it in one tap. You can add the number of rakaat if you like.';
+
+  @override
+  String ramadanTaraweehSummary(String nights, String total) {
+    return '$nights of $total nights prayed';
+  }
+
+  @override
+  String ramadanTaraweehYear(String year) {
+    return 'Ramadan $year AH';
+  }
+
+  @override
+  String ramadanNightCell(String night, String state) {
+    return 'Night $night, $state';
+  }
+
+  @override
+  String get ramadanNightPrayed => 'prayed';
+
+  @override
+  String get ramadanNightNotPrayed => 'not yet';
+
+  @override
+  String ramadanNightTitle(String night) {
+    return 'Night $night';
+  }
+
+  @override
+  String get ramadanNightPrayedSwitch => 'I prayed Taraweeh';
+
+  @override
+  String get ramadanRakaatLabel => 'Number of rakaat';
+
+  @override
+  String get ramadanRakaatOptional => 'Optional';
+
+  @override
+  String get ramadanRakaatMore => 'One more rakah';
+
+  @override
+  String get ramadanRakaatLess => 'One less rakah';
+
+  @override
+  String get ramadanTaraweehLoggedToast => 'The night was logged';
+
+  @override
+  String get ramadanTaraweehRemovedToast =>
+      'The night was taken out of the log';
+
+  @override
+  String get ramadanTaraweehRakaatToast => 'The number of rakaat was saved';
+
+  @override
+  String get ramadanTaraweehEmptyTitle => 'No log yet';
+
+  @override
+  String get ramadanTaraweehEmptyBody =>
+      'When Ramadan begins the nights of the month appear here, and you log each with one tap. You can also press “I prayed” on the Taraweeh notification.';
+
+  @override
+  String get ramadanKhatmahSection => 'Ramadan khatmah';
+
+  @override
+  String ramadanKhatmahDayOf(String day, String days) {
+    return 'Day $day of $days';
+  }
+
+  @override
+  String get ramadanKhatmahPortion => 'Today\'s portion';
+
+  @override
+  String ramadanKhatmahPages(String from, String to) {
+    return 'Page $from to page $to';
+  }
+
+  @override
+  String ramadanKhatmahRead(String read, String total) {
+    return '$read of $total read';
+  }
+
+  @override
+  String get ramadanKhatmahMarkRead => 'I read today\'s portion';
+
+  @override
+  String get ramadanKhatmahDoneToday => 'Today\'s portion is read';
+
+  @override
+  String get ramadanKhatmahUnmark => 'Undo today\'s reading';
+
+  @override
+  String get ramadanKhatmahOpenQuran => 'Open the Quran';
+
+  @override
+  String get ramadanKhatmahOnTrack => 'On track with the plan.';
+
+  @override
+  String ramadanKhatmahBehind(String behind, String perDay, String ceiling) {
+    return 'You are $behind behind the plan. The rest is spread over the coming days: about $perDay a day, never above the limit you set ($ceiling).';
+  }
+
+  @override
+  String ramadanKhatmahShortfall(String short, String extra) {
+    return 'At this limit the khatmah will not finish within the plan\'s days: $short short. Suggestion: raise the limit, or carry on for $extra more after the plan.';
+  }
+
+  @override
+  String ramadanKhatmahOverdue(String remaining, String extra) {
+    return 'The plan\'s days are over and $remaining are left. Suggestion: carry on for $extra more, within your daily limit.';
+  }
+
+  @override
+  String get ramadanKhatmahFinished => 'You finished the whole khatmah.';
+
+  @override
+  String get ramadanKhatmahNotStarted =>
+      'The khatmah starts with the first day of Ramadan. This is the first day\'s portion, and you can set your limit now.';
+
+  @override
+  String get ramadanKhatmahCeiling => 'Most pages in a day';
+
+  @override
+  String get ramadanKhatmahCeilingHint =>
+      'Today\'s portion never goes above this number, however many days you fall behind. Example: if you set twenty and fall behind, the portion stays twenty and we suggest extending instead.';
+
+  @override
+  String get ramadanKhatmahMarkedToast => 'Today\'s portion was logged';
+
+  @override
+  String get ramadanKhatmahUnmarkedToast => 'Today\'s reading was taken out';
+
+  @override
+  String get ramadanKhatmahCeilingToast => 'The daily limit changed';
+
+  @override
+  String ramadanKhatmahProgressSemantics(String read, String total) {
+    return '$read read out of $total';
+  }
+
+  @override
+  String get ramadanLastTenSection => 'The last ten nights';
+
+  @override
+  String get ramadanLastTenHint =>
+      'The nights from the twenty-first to the end of the month. The odd nights carry a star. Tap a night to write your note.';
+
+  @override
+  String ramadanLastTenNight(String night) {
+    return 'Night $night';
+  }
+
+  @override
+  String get ramadanLastTenOdd => 'An odd night';
+
+  @override
+  String get ramadanLastTenTonight => 'Tonight';
+
+  @override
+  String ramadanLastTenStrip(String night) {
+    return 'Last ten nights · night $night';
+  }
+
+  @override
+  String get ramadanLastTenEmpty =>
+      'The nights of the last ten appear here as Ramadan gets close.';
+
+  @override
+  String ramadanNightNoteLabel(String night) {
+    return 'Note for night $night';
+  }
+
+  @override
+  String get ramadanNightNoteHint =>
+      'Write what you want to remember about this night';
+
+  @override
+  String get ramadanNightNoteSaved => 'The note was saved';
+
+  @override
+  String get ramadanQadrTitle => 'The supplication of Laylat al-Qadr';
+
+  @override
+  String get ramadanQadrEmpty =>
+      'Add the supplication with its text and source';
+
+  @override
+  String get ramadanQadrEmptyHint =>
+      'This place is yours. The app writes no supplication for you: type it exactly as it is, with its source and grading, and it shows here and you can edit it any time.';
+
+  @override
+  String get ramadanQadrAdd => 'Add the supplication';
+
+  @override
+  String get ramadanQadrEdit => 'Edit the supplication';
+
+  @override
+  String ramadanQadrSource(String source) {
+    return 'Source: $source';
+  }
+
+  @override
+  String ramadanQadrGrading(String grading) {
+    return 'Grading: $grading';
+  }
+
+  @override
+  String get ramadanQadrNoSource =>
+      'You did not write the source. It is best to add it.';
+
+  @override
+  String get ramadanQadrTextLabel => 'Text of the supplication';
+
+  @override
+  String get ramadanQadrSourceLabel => 'Source (the book and the number)';
+
+  @override
+  String get ramadanQadrGradingLabel => 'Grading';
+
+  @override
+  String get ramadanQadrSavedToast => 'The supplication was saved';
+
+  @override
+  String get ramadanQadrClearedToast => 'The supplication was removed';
+
+  @override
+  String get ramadanQadrClear => 'Remove the supplication';
+
+  @override
+  String get ramadanCompareSection => 'Compared with last year';
+
+  @override
+  String ramadanCompareYear(String year) {
+    return 'Ramadan $year';
+  }
+
+  @override
+  String get ramadanCompareNights => 'Taraweeh nights';
+
+  @override
+  String get ramadanCompareRakaat => 'Rakaat';
+
+  @override
+  String get ramadanComparePages => 'Quran pages';
+
+  @override
+  String get ramadanCompareFasting => 'Days fasted';
+
+  @override
+  String ramadanCompareMore(String n) {
+    return '$n more';
+  }
+
+  @override
+  String ramadanCompareLess(String n) {
+    return '$n fewer';
+  }
+
+  @override
+  String get ramadanCompareSame => 'Same as last year';
+
+  @override
+  String ramadanCompareRow(String label, String thisYear, String lastYear) {
+    return '$label: this year $thisYear, last year $lastYear';
+  }
+
+  @override
+  String get ramadanCompareBoth => 'Both years';
+
+  @override
+  String get ramadanCompareOnlyThis => 'This year only';
+
+  @override
+  String get ramadanCompareOnlyLast => 'Last year only';
+
+  @override
+  String get ramadanCompareNeither => 'Neither';
+
+  @override
+  String get ramadanCompareEmptyTitle => 'No other year to compare yet';
+
+  @override
+  String get ramadanCompareEmptyBody =>
+      'The Taraweeh and pages you log this year are kept. Next Ramadan you will see them here beside the new year, night by night.';
+
+  @override
+  String get ramadanSettingsSection => 'Atmosphere and reminders';
+
+  @override
+  String get ramadanSettingsHint =>
+      'Everything runs by itself every year. Switch on or off what you like.';
+
+  @override
+  String get ramadanAtmosphere => 'Ramadan atmosphere';
+
+  @override
+  String get ramadanAtmosphereHint =>
+      'A crescent, lanterns and a warmer tint on the Faith planet all month. It goes away by itself on the first day of Eid.';
+
+  @override
+  String get ramadanSuhoorReminder => 'Suhoor reminder';
+
+  @override
+  String get ramadanSuhoorReminderHint => 'Before the Fajr adhan';
+
+  @override
+  String get ramadanSuhoorLead => 'Before Fajr by';
+
+  @override
+  String get ramadanIftarReminder => 'Iftar reminder';
+
+  @override
+  String get ramadanIftarReminderHint => 'Before the Maghrib adhan';
+
+  @override
+  String get ramadanIftarLead => 'Before Maghrib by';
+
+  @override
+  String get ramadanTaraweehReminder => 'Taraweeh reminder';
+
+  @override
+  String get ramadanTaraweehReminderHint =>
+      'After Isha each night, with an “I prayed” button';
+
+  @override
+  String get ramadanLastTenReminder => 'Last ten nights reminder';
+
+  @override
+  String get ramadanLastTenReminderHint =>
+      'One more notice each night from the twenty-first';
+
+  @override
+  String get ramadanHubKhatmah => 'Khatmah portion on the Faith card';
+
+  @override
+  String get ramadanHubKhatmahHint =>
+      'Today\'s portion and “Open the Quran” under the countdown';
+
+  @override
+  String get ramadanSettingChanged => 'Setting changed';
+
+  @override
+  String get ramadanChannelGroup => 'Ramadan';
+
+  @override
+  String get ramadanChannelName => 'Ramadan reminders';
+
+  @override
+  String get ramadanChannelHint =>
+      'Iftar, suhoor, Taraweeh and the last ten nights';
+
+  @override
+  String get ramadanNotifSuhoorTitle => 'Ramadan · Suhoor';
+
+  @override
+  String ramadanNotifSuhoorBody(String minutes, String time) {
+    return 'In $minutes the Fajr adhan is at $time, and suhoor ends.';
+  }
+
+  @override
+  String get ramadanNotifIftarTitle => 'Ramadan · Iftar';
+
+  @override
+  String ramadanNotifIftarBody(String minutes, String time) {
+    return 'In $minutes the Maghrib adhan is at $time. Get your iftar ready.';
+  }
+
+  @override
+  String get ramadanNotifTaraweehTitle => 'Ramadan · Taraweeh';
+
+  @override
+  String ramadanNotifTaraweehBody(String night) {
+    return 'Night $night: Taraweeh time, after Isha. When you finish press “I prayed” and it is kept in your log.';
+  }
+
+  @override
+  String get ramadanNotifPrayed => 'I prayed';
+
+  @override
+  String ramadanNotifLastTenTitle(String night) {
+    return 'Last ten nights · night $night';
+  }
+
+  @override
+  String ramadanNotifLastTenBody(String night) {
+    return 'Tonight is night $night of Ramadan.';
+  }
+
+  @override
+  String ramadanNotifLastTenOddBody(String night) {
+    return 'Tonight is night $night of Ramadan, an odd night.';
+  }
+
+  @override
+  String get ramadanRunwayTitle => 'Ramadan is near: set up the reminders';
+
+  @override
+  String get ramadanRunwayBody =>
+      'Open Madar once so the iftar, suhoor and Taraweeh reminders are set to your prayer times.';
+
+  @override
+  String get ramadanFailedTitle => 'The Taraweeh night was not saved';
+
+  @override
+  String get ramadanFailedBody => 'Open Madar and log it by hand.';
 }
