@@ -26003,6 +26003,146 @@ class L10nAr extends L10n {
   }
 
   @override
+  String get guideHelpGlyph => '؟';
+
+  @override
+  String get guideHelpTooltip => 'شو هاي الشاشة؟';
+
+  @override
+  String get guideSheetPurposeHeading => 'شو بتعمل هاي الشاشة';
+
+  @override
+  String get guideSheetExampleHeading => 'مثال';
+
+  @override
+  String get guideSheetDoHeading => 'شو بتقدر تعمل هون';
+
+  @override
+  String get guideSheetRelatedHeading => 'ممكن يفيدك كمان';
+
+  @override
+  String get guideSheetBack => 'ارجع للشرح السابق';
+
+  @override
+  String get guideSheetMissing => 'ما عندنا شرح لهاي الشاشة لسّه.';
+
+  @override
+  String get guideReplayTour => 'أعد الجولة السريعة';
+
+  @override
+  String get guideTourNext => 'التالي';
+
+  @override
+  String get guideTourBack => 'السابق';
+
+  @override
+  String get guideTourSkip => 'تخطّي';
+
+  @override
+  String get guideTourDone => 'تمام، خلصنا';
+
+  @override
+  String guideTourStepOf(num current, num total) {
+    final intl.NumberFormat currentNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String currentString = currentNumberFormat.format(current);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return 'الخطوة $currentString من $totalString';
+  }
+
+  @override
+  String guideTourBubbleSemantics(
+    num current,
+    num total,
+    String title,
+    String body,
+  ) {
+    final intl.NumberFormat currentNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String currentString = currentNumberFormat.format(current);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return 'جولة سريعة، الخطوة $currentString من $totalString. $title. $body';
+  }
+
+  @override
+  String get guideTodayTitle => 'اليوم';
+
+  @override
+  String get guideTodayPurpose =>
+      'هون بتشوف يومك كله على شاشة وحدة: صلواتك ومهامك ومواعيدك.';
+
+  @override
+  String get guideTodayExample =>
+      'مثال: الساعة ٩ الصبح بتفتح التطبيق وبتشوف إنه باقي ٣ مهام، وإنه صلاة الظهر بعد ساعتين.';
+
+  @override
+  String get guideTodayDo1 => 'شطّب مهمة بضغطة وحدة أول ما تخلصها';
+
+  @override
+  String get guideTodayDo2 => 'اضغط على أي بطاقة عشان تفتح تفاصيلها';
+
+  @override
+  String get guideTodayDo3 => 'اضغط زر الزائد عشان تضيف شي جديد بسرعة';
+
+  @override
+  String get guideTodayKeywords =>
+      'يومي الرئيسية مهام مواعيد صلوات الصفحة الأولى';
+
+  @override
+  String get guideFaithTitle => 'الإيمان';
+
+  @override
+  String get guideFaithPurpose =>
+      'هذا مكان الصلاة والأذكار والقرآن، وكل شي بيخصّ عبادتك بمكان واحد.';
+
+  @override
+  String get guideFaithExample =>
+      'مثال: بدك تعرف كم باقي على صلاة العصر؟ افتح الكوكب وشوف العدّ التنازلي فوق.';
+
+  @override
+  String get guideFaithDo1 => 'شوف مواقيت الصلاة لمدينتك';
+
+  @override
+  String get guideFaithDo2 => 'سجّل الصلاة اللي صلّيتها';
+
+  @override
+  String get guideFaithDo3 => 'كمّل قراءتك من وين وقفت';
+
+  @override
+  String get guideFaithKeywords =>
+      'صلاة مواقيت أذكار قرآن تسبيح قبلة أذان عبادة';
+
+  @override
+  String get guideExpenseTitle => 'إضافة مصروف';
+
+  @override
+  String get guideExpensePurpose =>
+      'سجّل أي مبلغ دفعته بدقيقة، عشان تعرف وين بتروح فلوسك.';
+
+  @override
+  String get guideExpenseExample =>
+      'مثال: ٥ دنانير بنزين. اكتب ٥، اختار «بنزين»، واضغط حفظ.';
+
+  @override
+  String get guideExpenseDo1 => 'اكتب المبلغ والوصف';
+
+  @override
+  String get guideExpenseDo2 => 'اختار الفئة مثل أكل أو مواصلات';
+
+  @override
+  String get guideExpenseDo3 => 'إذا غلطت، اضغط تراجع بعد الحفظ';
+
+  @override
+  String get guideExpenseKeywords =>
+      'مصروف دفعت فلوس مبلغ شراء مصاريف سجل بنزين أكل';
+
+  @override
   String get listsTitle => 'القوائم';
 
   @override
@@ -26348,6 +26488,86 @@ class L10nAr extends L10n {
   @override
   String get listsOrphanGroupBody =>
       'السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.';
+
+  @override
+  String get hajjCounterTitle => 'عدّاد الأشواط';
+
+  @override
+  String get hajjCounterKindTawaf => 'الطواف';
+
+  @override
+  String get hajjCounterKindSai => 'السعي';
+
+  @override
+  String get hajjCounterKindLabel => 'نوع العدّ';
+
+  @override
+  String hajjCounterRoundOf(String n, String total) {
+    return 'الشوط $n من $total';
+  }
+
+  @override
+  String hajjCounterCountOf(String n, String total) {
+    return '$n من $total';
+  }
+
+  @override
+  String get hajjCounterHeadingSafa => 'متجه إلى الصفا';
+
+  @override
+  String get hajjCounterHeadingMarwa => 'متجه إلى المروة';
+
+  @override
+  String hajjCounterAnnounce(String round, String heading) {
+    return '$round، $heading';
+  }
+
+  @override
+  String get hajjCounterTapHint => 'اضغط في كل مرة تنهي فيها شوطًا';
+
+  @override
+  String get hajjCounterTapArea => 'اضغط هنا لعدّ شوط';
+
+  @override
+  String get hajjCounterUndo => 'تراجع';
+
+  @override
+  String get hajjCounterCorrect => 'تصحيح يدوي';
+
+  @override
+  String get hajjCounterCorrectTitle => 'في أي شوط أنت الآن؟';
+
+  @override
+  String hajjCounterCorrectOption(String n) {
+    return 'الشوط $n';
+  }
+
+  @override
+  String get hajjCounterPause => 'إيقاف مؤقت';
+
+  @override
+  String get hajjCounterResume => 'متابعة';
+
+  @override
+  String get hajjCounterPausedBanner => 'العدّ متوقف مؤقتًا. الضغط لا يُحتسب.';
+
+  @override
+  String get hajjCounterCompleteTawaf => 'اكتمل الطواف';
+
+  @override
+  String get hajjCounterCompleteSai => 'اكتمل السعي';
+
+  @override
+  String get hajjCounterStartAnotherTawaf => 'ابدأ طوافًا جديدًا';
+
+  @override
+  String get hajjCounterStartAnotherSai => 'ابدأ سعيًا جديدًا';
+
+  @override
+  String get hajjCounterSaved => 'محفوظ على جهازك، ولا يحتاج إنترنت';
+
+  @override
+  String get hajjCounterNotSaved => 'تعذّر الحفظ. العدّ ما زال ظاهرًا أمامك.';
 
   @override
   String get sufraTitle => 'السفرة';

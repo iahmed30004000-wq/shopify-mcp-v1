@@ -25384,6 +25384,146 @@ class L10nEn extends L10n {
   }
 
   @override
+  String get guideHelpGlyph => '?';
+
+  @override
+  String get guideHelpTooltip => 'What is this screen?';
+
+  @override
+  String get guideSheetPurposeHeading => 'What this screen is for';
+
+  @override
+  String get guideSheetExampleHeading => 'Example';
+
+  @override
+  String get guideSheetDoHeading => 'What you can do here';
+
+  @override
+  String get guideSheetRelatedHeading => 'You may also like';
+
+  @override
+  String get guideSheetBack => 'Back to the previous help';
+
+  @override
+  String get guideSheetMissing => 'There is no help for this screen yet.';
+
+  @override
+  String get guideReplayTour => 'Replay the quick tour';
+
+  @override
+  String get guideTourNext => 'Next';
+
+  @override
+  String get guideTourBack => 'Back';
+
+  @override
+  String get guideTourSkip => 'Skip';
+
+  @override
+  String get guideTourDone => 'Done';
+
+  @override
+  String guideTourStepOf(num current, num total) {
+    final intl.NumberFormat currentNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String currentString = currentNumberFormat.format(current);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return 'Step $currentString of $totalString';
+  }
+
+  @override
+  String guideTourBubbleSemantics(
+    num current,
+    num total,
+    String title,
+    String body,
+  ) {
+    final intl.NumberFormat currentNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String currentString = currentNumberFormat.format(current);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return 'Quick tour, step $currentString of $totalString. $title. $body';
+  }
+
+  @override
+  String get guideTodayTitle => 'Today';
+
+  @override
+  String get guideTodayPurpose =>
+      'Your whole day on one screen: prayers, tasks and appointments.';
+
+  @override
+  String get guideTodayExample =>
+      'Example: at 9 in the morning you open the app and see 3 tasks left and noon prayer in two hours.';
+
+  @override
+  String get guideTodayDo1 => 'Tick a task off with one tap when you finish it';
+
+  @override
+  String get guideTodayDo2 => 'Tap any card to open its details';
+
+  @override
+  String get guideTodayDo3 => 'Tap the plus button to add something new fast';
+
+  @override
+  String get guideTodayKeywords =>
+      'daily home tasks appointments prayers first page';
+
+  @override
+  String get guideFaithTitle => 'Faith';
+
+  @override
+  String get guideFaithPurpose =>
+      'The place for prayer, remembrance and the Quran, all together.';
+
+  @override
+  String get guideFaithExample =>
+      'Example: want to know how long until the afternoon prayer? Open the planet and read the countdown at the top.';
+
+  @override
+  String get guideFaithDo1 => 'See prayer times for your city';
+
+  @override
+  String get guideFaithDo2 => 'Log the prayers you have prayed';
+
+  @override
+  String get guideFaithDo3 => 'Continue reading from where you stopped';
+
+  @override
+  String get guideFaithKeywords =>
+      'prayer times adhkar quran tasbeeh qibla adhan worship';
+
+  @override
+  String get guideExpenseTitle => 'Add an expense';
+
+  @override
+  String get guideExpensePurpose =>
+      'Record anything you paid in a minute, so you know where your money goes.';
+
+  @override
+  String get guideExpenseExample =>
+      'Example: 5 dinars of petrol. Type 5, pick “Petrol”, and tap Save.';
+
+  @override
+  String get guideExpenseDo1 => 'Type the amount and a note';
+
+  @override
+  String get guideExpenseDo2 => 'Pick a category such as food or transport';
+
+  @override
+  String get guideExpenseDo3 => 'If you slipped, tap Undo after saving';
+
+  @override
+  String get guideExpenseKeywords =>
+      'expense spent money amount purchase spending log petrol food';
+
+  @override
   String get listsTitle => 'Lists';
 
   @override
@@ -25718,6 +25858,88 @@ class L10nEn extends L10n {
   @override
   String get listsOrphanGroupBody =>
       'The record they hung on was deleted; the lists stayed yours.';
+
+  @override
+  String get hajjCounterTitle => 'Round counter';
+
+  @override
+  String get hajjCounterKindTawaf => 'Tawaf';
+
+  @override
+  String get hajjCounterKindSai => 'Sa\'i';
+
+  @override
+  String get hajjCounterKindLabel => 'What to count';
+
+  @override
+  String hajjCounterRoundOf(String n, String total) {
+    return 'Round $n of $total';
+  }
+
+  @override
+  String hajjCounterCountOf(String n, String total) {
+    return '$n of $total';
+  }
+
+  @override
+  String get hajjCounterHeadingSafa => 'Heading to Safa';
+
+  @override
+  String get hajjCounterHeadingMarwa => 'Heading to Marwa';
+
+  @override
+  String hajjCounterAnnounce(String round, String heading) {
+    return '$round, $heading';
+  }
+
+  @override
+  String get hajjCounterTapHint => 'Tap each time you finish a round';
+
+  @override
+  String get hajjCounterTapArea => 'Tap here to count a round';
+
+  @override
+  String get hajjCounterUndo => 'Undo';
+
+  @override
+  String get hajjCounterCorrect => 'Correct by hand';
+
+  @override
+  String get hajjCounterCorrectTitle => 'Which round are you on now?';
+
+  @override
+  String hajjCounterCorrectOption(String n) {
+    return 'Round $n';
+  }
+
+  @override
+  String get hajjCounterPause => 'Pause';
+
+  @override
+  String get hajjCounterResume => 'Resume';
+
+  @override
+  String get hajjCounterPausedBanner =>
+      'Counting is paused. Taps are not counted.';
+
+  @override
+  String get hajjCounterCompleteTawaf => 'Tawaf complete';
+
+  @override
+  String get hajjCounterCompleteSai => 'Sa\'i complete';
+
+  @override
+  String get hajjCounterStartAnotherTawaf => 'Start another tawaf';
+
+  @override
+  String get hajjCounterStartAnotherSai => 'Start another sa\'i';
+
+  @override
+  String get hajjCounterSaved => 'Saved on your phone, no internet needed';
+
+  @override
+  String get hajjCounterNotSaved =>
+      'Could not save. Your count is still shown here.';
 
   @override
   String get sufraTitle => 'The kitchen';

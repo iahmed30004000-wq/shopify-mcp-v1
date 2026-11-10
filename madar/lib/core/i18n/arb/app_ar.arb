@@ -23831,6 +23831,78 @@
       }
     }
   },
+  "guideHelpGlyph": "؟",
+  "@guideHelpGlyph": {
+    "description": "The glyph on the help button («؟»)"
+  },
+  "guideHelpTooltip": "شو هاي الشاشة؟",
+  "@guideHelpTooltip": {
+    "description": "Help button tooltip and screen-reader label"
+  },
+  "guideSheetPurposeHeading": "شو بتعمل هاي الشاشة",
+  "guideSheetExampleHeading": "مثال",
+  "guideSheetDoHeading": "شو بتقدر تعمل هون",
+  "guideSheetRelatedHeading": "ممكن يفيدك كمان",
+  "guideSheetBack": "ارجع للشرح السابق",
+  "guideSheetMissing": "ما عندنا شرح لهاي الشاشة لسّه.",
+  "guideReplayTour": "أعد الجولة السريعة",
+  "guideTourNext": "التالي",
+  "guideTourBack": "السابق",
+  "guideTourSkip": "تخطّي",
+  "guideTourDone": "تمام، خلصنا",
+  "guideTourStepOf": "الخطوة {current} من {total}",
+  "@guideTourStepOf": {
+    "placeholders": {
+      "current": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "guideTourBubbleSemantics": "جولة سريعة، الخطوة {current} من {total}. {title}. {body}",
+  "@guideTourBubbleSemantics": {
+    "placeholders": {
+      "current": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "title": {
+        "type": "String"
+      },
+      "body": {
+        "type": "String"
+      }
+    }
+  },
+  "guideTodayTitle": "اليوم",
+  "guideTodayPurpose": "هون بتشوف يومك كله على شاشة وحدة: صلواتك ومهامك ومواعيدك.",
+  "guideTodayExample": "مثال: الساعة ٩ الصبح بتفتح التطبيق وبتشوف إنه باقي ٣ مهام، وإنه صلاة الظهر بعد ساعتين.",
+  "guideTodayDo1": "شطّب مهمة بضغطة وحدة أول ما تخلصها",
+  "guideTodayDo2": "اضغط على أي بطاقة عشان تفتح تفاصيلها",
+  "guideTodayDo3": "اضغط زر الزائد عشان تضيف شي جديد بسرعة",
+  "guideTodayKeywords": "يومي الرئيسية مهام مواعيد صلوات الصفحة الأولى",
+  "guideFaithTitle": "الإيمان",
+  "guideFaithPurpose": "هذا مكان الصلاة والأذكار والقرآن، وكل شي بيخصّ عبادتك بمكان واحد.",
+  "guideFaithExample": "مثال: بدك تعرف كم باقي على صلاة العصر؟ افتح الكوكب وشوف العدّ التنازلي فوق.",
+  "guideFaithDo1": "شوف مواقيت الصلاة لمدينتك",
+  "guideFaithDo2": "سجّل الصلاة اللي صلّيتها",
+  "guideFaithDo3": "كمّل قراءتك من وين وقفت",
+  "guideFaithKeywords": "صلاة مواقيت أذكار قرآن تسبيح قبلة أذان عبادة",
+  "guideExpenseTitle": "إضافة مصروف",
+  "guideExpensePurpose": "سجّل أي مبلغ دفعته بدقيقة، عشان تعرف وين بتروح فلوسك.",
+  "guideExpenseExample": "مثال: ٥ دنانير بنزين. اكتب ٥، اختار «بنزين»، واضغط حفظ.",
+  "guideExpenseDo1": "اكتب المبلغ والوصف",
+  "guideExpenseDo2": "اختار الفئة مثل أكل أو مواصلات",
+  "guideExpenseDo3": "إذا غلطت، اضغط تراجع بعد الحفظ",
+  "guideExpenseKeywords": "مصروف دفعت فلوس مبلغ شراء مصاريف سجل بنزين أكل",
   "listsTitle": "القوائم",
   "@listsTitle": {
     "description": "Part 3b: the shared tick lists"
@@ -24039,6 +24111,131 @@
   "listsAllEmptyBody": "أي بند بالميزانية أو أي رحلة بتقدر تعمل تحته قائمة وتشطّب عليها.",
   "listsOrphanGroup": "قوائم بلا سجل",
   "listsOrphanGroupBody": "السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.",
+  "hajjCounterTitle": "عدّاد الأشواط",
+  "@hajjCounterTitle": {
+    "description": "Part 18: the offline counter for the rounds of tawaf and sa'i"
+  },
+  "hajjCounterKindTawaf": "الطواف",
+  "@hajjCounterKindTawaf": {
+    "description": "Counter kind"
+  },
+  "hajjCounterKindSai": "السعي",
+  "@hajjCounterKindSai": {
+    "description": "Counter kind"
+  },
+  "hajjCounterKindLabel": "نوع العدّ",
+  "@hajjCounterKindLabel": {
+    "description": "Accessibility label of the tawaf / sa'i switch"
+  },
+  "hajjCounterRoundOf": "الشوط {n} من {total}",
+  "@hajjCounterRoundOf": {
+    "description": "The big line: the round being walked now (numbers pre-formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterCountOf": "{n} من {total}",
+  "@hajjCounterCountOf": {
+    "description": "Rounds counted so far, e.g. 7 of 7 (numbers pre-formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterHeadingSafa": "متجه إلى الصفا",
+  "@hajjCounterHeadingSafa": {
+    "description": "Sa'i: the point he is walking toward now"
+  },
+  "hajjCounterHeadingMarwa": "متجه إلى المروة",
+  "@hajjCounterHeadingMarwa": {
+    "description": "Sa'i: the point he is walking toward now"
+  },
+  "hajjCounterAnnounce": "{round}، {heading}",
+  "@hajjCounterAnnounce": {
+    "description": "Screen-reader announcement of the new round plus the direction (sa'i)",
+    "placeholders": {
+      "round": {
+        "type": "String"
+      },
+      "heading": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterTapHint": "اضغط في كل مرة تنهي فيها شوطًا",
+  "@hajjCounterTapHint": {
+    "description": "Hint under the big tap area and its accessibility hint"
+  },
+  "hajjCounterTapArea": "اضغط هنا لعدّ شوط",
+  "@hajjCounterTapArea": {
+    "description": "Visible label inside the big tap area"
+  },
+  "hajjCounterUndo": "تراجع",
+  "@hajjCounterUndo": {
+    "description": "Takes back the last counted tap"
+  },
+  "hajjCounterCorrect": "تصحيح يدوي",
+  "@hajjCounterCorrect": {
+    "description": "Opens the sheet to set the round by hand"
+  },
+  "hajjCounterCorrectTitle": "في أي شوط أنت الآن؟",
+  "@hajjCounterCorrectTitle": {
+    "description": "Title of the manual correction sheet"
+  },
+  "hajjCounterCorrectOption": "الشوط {n}",
+  "@hajjCounterCorrectOption": {
+    "description": "Accessibility label of one round button in the correction sheet",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterPause": "إيقاف مؤقت",
+  "@hajjCounterPause": {
+    "description": "Pause counting"
+  },
+  "hajjCounterResume": "متابعة",
+  "@hajjCounterResume": {
+    "description": "Resume counting"
+  },
+  "hajjCounterPausedBanner": "العدّ متوقف مؤقتًا. الضغط لا يُحتسب.",
+  "@hajjCounterPausedBanner": {
+    "description": "Shown in the tap area while paused"
+  },
+  "hajjCounterCompleteTawaf": "اكتمل الطواف",
+  "@hajjCounterCompleteTawaf": {
+    "description": "Shown when the last round of the tawaf was counted"
+  },
+  "hajjCounterCompleteSai": "اكتمل السعي",
+  "@hajjCounterCompleteSai": {
+    "description": "Shown when the last leg of the sa'i was counted"
+  },
+  "hajjCounterStartAnotherTawaf": "ابدأ طوافًا جديدًا",
+  "@hajjCounterStartAnotherTawaf": {
+    "description": "Starts a new tawaf session"
+  },
+  "hajjCounterStartAnotherSai": "ابدأ سعيًا جديدًا",
+  "@hajjCounterStartAnotherSai": {
+    "description": "Starts a new sa'i session"
+  },
+  "hajjCounterSaved": "محفوظ على جهازك، ولا يحتاج إنترنت",
+  "@hajjCounterSaved": {
+    "description": "Small reassurance under the counter"
+  },
+  "hajjCounterNotSaved": "تعذّر الحفظ. العدّ ما زال ظاهرًا أمامك.",
+  "@hajjCounterNotSaved": {
+    "description": "Shown quietly when writing to the phone failed"
+  },
   "sufraTitle": "السفرة",
   "@sufraTitle": {
     "description": "Part 5: the kitchen planet, named by the owner"

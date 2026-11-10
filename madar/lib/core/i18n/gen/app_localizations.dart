@@ -40337,6 +40337,227 @@ abstract class L10n {
   /// **'{name}: {detail}'**
   String aiPlanRefLine(String name, String detail);
 
+  /// The glyph on the help button («؟»)
+  ///
+  /// In ar, this message translates to:
+  /// **'؟'**
+  String get guideHelpGlyph;
+
+  /// Help button tooltip and screen-reader label
+  ///
+  /// In ar, this message translates to:
+  /// **'شو هاي الشاشة؟'**
+  String get guideHelpTooltip;
+
+  /// No description provided for @guideSheetPurposeHeading.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو بتعمل هاي الشاشة'**
+  String get guideSheetPurposeHeading;
+
+  /// No description provided for @guideSheetExampleHeading.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال'**
+  String get guideSheetExampleHeading;
+
+  /// No description provided for @guideSheetDoHeading.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو بتقدر تعمل هون'**
+  String get guideSheetDoHeading;
+
+  /// No description provided for @guideSheetRelatedHeading.
+  ///
+  /// In ar, this message translates to:
+  /// **'ممكن يفيدك كمان'**
+  String get guideSheetRelatedHeading;
+
+  /// No description provided for @guideSheetBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'ارجع للشرح السابق'**
+  String get guideSheetBack;
+
+  /// No description provided for @guideSheetMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عندنا شرح لهاي الشاشة لسّه.'**
+  String get guideSheetMissing;
+
+  /// No description provided for @guideReplayTour.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد الجولة السريعة'**
+  String get guideReplayTour;
+
+  /// No description provided for @guideTourNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get guideTourNext;
+
+  /// No description provided for @guideTourBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'السابق'**
+  String get guideTourBack;
+
+  /// No description provided for @guideTourSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطّي'**
+  String get guideTourSkip;
+
+  /// No description provided for @guideTourDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمام، خلصنا'**
+  String get guideTourDone;
+
+  /// No description provided for @guideTourStepOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوة {current} من {total}'**
+  String guideTourStepOf(num current, num total);
+
+  /// No description provided for @guideTourBubbleSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'جولة سريعة، الخطوة {current} من {total}. {title}. {body}'**
+  String guideTourBubbleSemantics(
+    num current,
+    num total,
+    String title,
+    String body,
+  );
+
+  /// No description provided for @guideTodayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get guideTodayTitle;
+
+  /// No description provided for @guideTodayPurpose.
+  ///
+  /// In ar, this message translates to:
+  /// **'هون بتشوف يومك كله على شاشة وحدة: صلواتك ومهامك ومواعيدك.'**
+  String get guideTodayPurpose;
+
+  /// No description provided for @guideTodayExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: الساعة ٩ الصبح بتفتح التطبيق وبتشوف إنه باقي ٣ مهام، وإنه صلاة الظهر بعد ساعتين.'**
+  String get guideTodayExample;
+
+  /// No description provided for @guideTodayDo1.
+  ///
+  /// In ar, this message translates to:
+  /// **'شطّب مهمة بضغطة وحدة أول ما تخلصها'**
+  String get guideTodayDo1;
+
+  /// No description provided for @guideTodayDo2.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط على أي بطاقة عشان تفتح تفاصيلها'**
+  String get guideTodayDo2;
+
+  /// No description provided for @guideTodayDo3.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط زر الزائد عشان تضيف شي جديد بسرعة'**
+  String get guideTodayDo3;
+
+  /// No description provided for @guideTodayKeywords.
+  ///
+  /// In ar, this message translates to:
+  /// **'يومي الرئيسية مهام مواعيد صلوات الصفحة الأولى'**
+  String get guideTodayKeywords;
+
+  /// No description provided for @guideFaithTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيمان'**
+  String get guideFaithTitle;
+
+  /// No description provided for @guideFaithPurpose.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا مكان الصلاة والأذكار والقرآن، وكل شي بيخصّ عبادتك بمكان واحد.'**
+  String get guideFaithPurpose;
+
+  /// No description provided for @guideFaithExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: بدك تعرف كم باقي على صلاة العصر؟ افتح الكوكب وشوف العدّ التنازلي فوق.'**
+  String get guideFaithExample;
+
+  /// No description provided for @guideFaithDo1.
+  ///
+  /// In ar, this message translates to:
+  /// **'شوف مواقيت الصلاة لمدينتك'**
+  String get guideFaithDo1;
+
+  /// No description provided for @guideFaithDo2.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل الصلاة اللي صلّيتها'**
+  String get guideFaithDo2;
+
+  /// No description provided for @guideFaithDo3.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمّل قراءتك من وين وقفت'**
+  String get guideFaithDo3;
+
+  /// No description provided for @guideFaithKeywords.
+  ///
+  /// In ar, this message translates to:
+  /// **'صلاة مواقيت أذكار قرآن تسبيح قبلة أذان عبادة'**
+  String get guideFaithKeywords;
+
+  /// No description provided for @guideExpenseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة مصروف'**
+  String get guideExpenseTitle;
+
+  /// No description provided for @guideExpensePurpose.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل أي مبلغ دفعته بدقيقة، عشان تعرف وين بتروح فلوسك.'**
+  String get guideExpensePurpose;
+
+  /// No description provided for @guideExpenseExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: ٥ دنانير بنزين. اكتب ٥، اختار «بنزين»، واضغط حفظ.'**
+  String get guideExpenseExample;
+
+  /// No description provided for @guideExpenseDo1.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب المبلغ والوصف'**
+  String get guideExpenseDo1;
+
+  /// No description provided for @guideExpenseDo2.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختار الفئة مثل أكل أو مواصلات'**
+  String get guideExpenseDo2;
+
+  /// No description provided for @guideExpenseDo3.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذا غلطت، اضغط تراجع بعد الحفظ'**
+  String get guideExpenseDo3;
+
+  /// No description provided for @guideExpenseKeywords.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف دفعت فلوس مبلغ شراء مصاريف سجل بنزين أكل'**
+  String get guideExpenseKeywords;
+
   /// Part 3b: the shared tick lists
   ///
   /// In ar, this message translates to:
@@ -40864,6 +41085,150 @@ abstract class L10n {
   /// In ar, this message translates to:
   /// **'السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.'**
   String get listsOrphanGroupBody;
+
+  /// Part 18: the offline counter for the rounds of tawaf and sa'i
+  ///
+  /// In ar, this message translates to:
+  /// **'عدّاد الأشواط'**
+  String get hajjCounterTitle;
+
+  /// Counter kind
+  ///
+  /// In ar, this message translates to:
+  /// **'الطواف'**
+  String get hajjCounterKindTawaf;
+
+  /// Counter kind
+  ///
+  /// In ar, this message translates to:
+  /// **'السعي'**
+  String get hajjCounterKindSai;
+
+  /// Accessibility label of the tawaf / sa'i switch
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع العدّ'**
+  String get hajjCounterKindLabel;
+
+  /// The big line: the round being walked now (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الشوط {n} من {total}'**
+  String hajjCounterRoundOf(String n, String total);
+
+  /// Rounds counted so far, e.g. 7 of 7 (numbers pre-formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{n} من {total}'**
+  String hajjCounterCountOf(String n, String total);
+
+  /// Sa'i: the point he is walking toward now
+  ///
+  /// In ar, this message translates to:
+  /// **'متجه إلى الصفا'**
+  String get hajjCounterHeadingSafa;
+
+  /// Sa'i: the point he is walking toward now
+  ///
+  /// In ar, this message translates to:
+  /// **'متجه إلى المروة'**
+  String get hajjCounterHeadingMarwa;
+
+  /// Screen-reader announcement of the new round plus the direction (sa'i)
+  ///
+  /// In ar, this message translates to:
+  /// **'{round}، {heading}'**
+  String hajjCounterAnnounce(String round, String heading);
+
+  /// Hint under the big tap area and its accessibility hint
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط في كل مرة تنهي فيها شوطًا'**
+  String get hajjCounterTapHint;
+
+  /// Visible label inside the big tap area
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط هنا لعدّ شوط'**
+  String get hajjCounterTapArea;
+
+  /// Takes back the last counted tap
+  ///
+  /// In ar, this message translates to:
+  /// **'تراجع'**
+  String get hajjCounterUndo;
+
+  /// Opens the sheet to set the round by hand
+  ///
+  /// In ar, this message translates to:
+  /// **'تصحيح يدوي'**
+  String get hajjCounterCorrect;
+
+  /// Title of the manual correction sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'في أي شوط أنت الآن؟'**
+  String get hajjCounterCorrectTitle;
+
+  /// Accessibility label of one round button in the correction sheet
+  ///
+  /// In ar, this message translates to:
+  /// **'الشوط {n}'**
+  String hajjCounterCorrectOption(String n);
+
+  /// Pause counting
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get hajjCounterPause;
+
+  /// Resume counting
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get hajjCounterResume;
+
+  /// Shown in the tap area while paused
+  ///
+  /// In ar, this message translates to:
+  /// **'العدّ متوقف مؤقتًا. الضغط لا يُحتسب.'**
+  String get hajjCounterPausedBanner;
+
+  /// Shown when the last round of the tawaf was counted
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل الطواف'**
+  String get hajjCounterCompleteTawaf;
+
+  /// Shown when the last leg of the sa'i was counted
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل السعي'**
+  String get hajjCounterCompleteSai;
+
+  /// Starts a new tawaf session
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ طوافًا جديدًا'**
+  String get hajjCounterStartAnotherTawaf;
+
+  /// Starts a new sa'i session
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ سعيًا جديدًا'**
+  String get hajjCounterStartAnotherSai;
+
+  /// Small reassurance under the counter
+  ///
+  /// In ar, this message translates to:
+  /// **'محفوظ على جهازك، ولا يحتاج إنترنت'**
+  String get hajjCounterSaved;
+
+  /// Shown quietly when writing to the phone failed
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الحفظ. العدّ ما زال ظاهرًا أمامك.'**
+  String get hajjCounterNotSaved;
 
   /// Part 5: the kitchen planet, named by the owner
   ///
