@@ -114,10 +114,16 @@ String? centerLocationOf(NotificationTap tap) =>
 /// `other` is deliberately absent: those rows show no settings link.
 final Map<NotificationGroup, FutureOr<void> Function(BuildContext, NotificationGroup, CenterNotice?)>
 centerSettingsLinks = {
-  // The adhan's switches, or the iqama's own screen when the row is one
-  // of «الإقامة»'s.
+  // The adhan's switches, or the own screen of the row's feature when it is
+  // one of «الإقامة»'s, «صيامي»'s or «رمضان»'s (they share this group so the
+  // Prayer mute holds them, but their switches live on their own screens).
   NotificationGroup.prayer: (context, _, notice) => context.push(
-    notice?.namespace == NotificationNamespaces.iqama.name ? AppRoutes.iqamaSettings : AppRoutes.adhanSettings,
+    switch (notice?.namespace) {
+      final n when n == NotificationNamespaces.iqama.name => AppRoutes.iqamaSettings,
+      final n when n == NotificationNamespaces.fasting.name => AppRoutes.fasting,
+      final n when n == NotificationNamespaces.ramadan.name => AppRoutes.ramadan,
+      _ => AppRoutes.adhanSettings,
+    },
   ),
   NotificationGroup.adhkar: (context, _, _) => context.push(AppRoutes.reminders),
   // The wird's reminder rows live in Settings › Reminders too.
