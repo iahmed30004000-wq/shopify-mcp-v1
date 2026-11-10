@@ -54,3 +54,7 @@ app.*.map.json
 
 # Visual review renders (screenshot tests)
 /screenshots/
+
+# Gradle output of a local APK build
+/android/build/
+/android/.kotlin/
