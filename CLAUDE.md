@@ -37,6 +37,13 @@ Example of the right style:
 >
 > جاوب بحرف وحد، مثلاً: «1ب».
 
+## Decisions (standing rule, set by the owner, 2026-11-10)
+
+He said: «انتا اختار الأنسب دائمًا» - I choose the most suitable option myself, always. So:
+- Do **not** stop to ask a question that has a sensible answer: take my best option, say in **one line** what I chose and why (with an example), and keep going. He can reverse it any time.
+- Ask only for what **only he** can give: accounts and keys, the name of the sheikh for the kids' religious content, files he must make (the pictures and voices), turning on a setting on GitHub/his phone, and the things he **explicitly reserved** (e.g. the kids design is shown to him as pictures before anything of it is built).
+- The tone rules above (plain Jordanian Arabic, an example for every item) still apply to every report.
+
 ## How to work (standing rule, set by the owner)
 
 - Work **one part at a time**: finish it, verify it, ship an APK, report — then the next part.
