@@ -1,0 +1,102 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>لوحة تصميم مدار الصغار</title><style>
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Regular.ttf');font-weight:400}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Medium.ttf');font-weight:500}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Bold.ttf');font-weight:700}
+@font-face{font-family:'Reem';src:url('../../../assets/fonts/ReemKufi-Variable.ttf');font-weight:400 700}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Regular.ttf');font-weight:400}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Bold.ttf');font-weight:700}
+@font-face{font-family:'AmiriQuran';src:url('../../../assets/fonts/AmiriQuran-Regular.ttf');font-weight:400}
+:root{
+--night900:#17143F;--night800:#221E5A;--night700:#2F2A78;--night500:#5650B0;--night300:#A9A5E6;--night100:#E6E4FA;--sun700:#A8680F;--sun500:#F5B431;--sun300:#FFD479;--sun100:#FFF0CC;--teal800:#0F5552;--teal700:#17706C;--teal500:#2FA59C;--teal200:#B6E6DF;--teal100:#E2F5F1;--rose700:#A93556;--rose500:#E26A89;--rose300:#F6A9BC;--rose100:#FCE3EA;--paper:#FFF8EA;--sand:#F7E9CF;--sand2:#EBD5A8;--ink:#26214F;--ink2:#5A5482;--retry:#F7A94B;--retry100:#FFEBD0;--retry700:#8A4B05;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:780px;overflow:hidden;background:#000}
+body{font-family:'Plex',sans-serif;color:var(--ink);direction:rtl;-webkit-font-smoothing:antialiased}
+.phone{position:relative;width:360px;height:780px;overflow:hidden;background:var(--paper)}
+.abs{position:absolute}
+.fill{position:absolute;inset:0;width:100%;height:100%}
+.status{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;font-weight:600;z-index:50}
+.status .r{display:flex;gap:6px;align-items:center}
+.h1{font-family:'Reem',serif;font-weight:700;font-size:32px;line-height:1.25;word-spacing:.18em}
+.h2{font-family:'Reem',serif;font-weight:700;font-size:26px;line-height:1.3;word-spacing:.18em}
+.h3{font-family:'Reem',serif;font-weight:600;font-size:22px;line-height:1.35;word-spacing:.16em}
+.body{font-size:20px;line-height:1.6;font-weight:500}
+.small{font-size:16px;line-height:1.5;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 28px;border-radius:32px;font-family:'Plex';font-weight:700;font-size:20px;border:0;box-shadow:0 5px 0 rgba(23,20,63,.22),0 14px 22px -10px rgba(23,20,63,.45)}
+.btn.gold{background:linear-gradient(180deg,#FFD479,#F5B431);color:var(--night900)}
+.btn.teal{background:linear-gradient(180deg,#2FA59C,#17706C);color:#fff}
+.btn.rose{background:linear-gradient(180deg,#F6A9BC,#E26A89);color:var(--night900)}
+.btn.night{background:linear-gradient(180deg,#3B3590,#221E5A);color:#fff}
+.btn.paper{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 rgba(23,20,63,.14),0 12px 20px -10px rgba(23,20,63,.35)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:none;border:2.5px solid currentColor}
+.round{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;font-weight:700;font-size:16px}
+.card{background:var(--paper);border-radius:28px;box-shadow:0 2px 0 rgba(255,255,255,.7) inset,0 14px 28px -14px rgba(38,33,79,.5)}
+.ph{display:inline-block;direction:rtl;font-family:'Plex';font-weight:600;font-size:14px;color:var(--sun700);background:var(--sun100);border:1.5px dashed var(--sun700);border-radius:10px;padding:2px 10px}
+.num{font-feature-settings:'tnum'}
+.topbar{position:absolute;top:28px;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:20}
+.topbar .title{font-family:'Reem';font-weight:700;font-size:26px;text-align:center;flex:1;word-spacing:.18em}
+
+html,body{width:1900px;height:auto;overflow:visible;background:#17143F}
+body{padding:40px 48px 56px;color:#fff;position:relative}
+.head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:34px;border-bottom:2px solid rgba(255,212,121,.3);padding-bottom:22px}
+.head h1{font-family:'Reem';font-weight:700;font-size:62px;word-spacing:.18em;color:#FFD479}
+.head p{font-size:19px;color:#E6E4FA;line-height:1.6;max-width:720px;text-align:left;direction:ltr}
+.grid{display:grid;grid-template-columns:repeat(6,276px);gap:44px 28px;justify-content:space-between}
+.frame{width:276px;padding:10px;border-radius:40px;background:#0B0A26;box-shadow:0 0 0 2px #3a3680,0 24px 40px -14px rgba(0,0,0,.7)}
+.frame img{display:block;border-radius:30px}
+.cell{width:276px}
+.cap{display:flex;align-items:center;gap:12px;margin-top:14px}
+.badge{flex:none;width:46px;height:46px;border-radius:50%;background:#F5B431;color:#17143F;font-family:'Reem';font-weight:700;font-size:21px;display:flex;align-items:center;justify-content:center}
+.ar{font-weight:700;font-size:21px;color:#fff}.en{font-size:15px;color:#A9A5E6;direction:ltr;text-align:right;font-weight:500}
+.panel{grid-column:span 2;background:#FFF8EA;color:#26214F;border-radius:32px;padding:26px 28px}
+.panel.dark{background:#221E5A;color:#fff;border:1.5px solid rgba(255,212,121,.3)}
+.ptitle{font-family:'Reem';font-weight:700;font-size:28px;margin-bottom:12px;word-spacing:.18em}
+.swg{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+.sw{display:flex;gap:12px;align-items:center;font-size:15px;line-height:1.35}.sw .dot{width:46px;height:46px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 2px rgba(0,0,0,.12)}.sw span{direction:ltr;unicode-bidi:isolate;color:#5A5482;font-weight:600}.sw i{color:#5A5482;font-style:normal;direction:ltr;unicode-bidi:isolate}
+.type{display:flex;flex-direction:column;gap:6px}
+.panel ul{list-style:none;display:flex;flex-direction:column;gap:12px;font-size:18px;line-height:1.5;font-weight:500}.panel li i{display:block;font-style:normal;font-size:14px;color:#A9A5E6;direction:ltr;text-align:right}
+</style></head><body>
+<div class="head"><h1>مدار الصغار · لوحة التصميم</h1><p>Madar Kids: design board for the owner's approval. Nothing is built yet. Gold dashed boxes are placeholders: all religious text and audio will come later from verified, licensed sources and stay hidden until the named sheikh approves.</p></div>
+<div class="grid"><div class="cell"><div class="frame"><img src="../png/01a-entry-main-app.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١أ</span><div><div class="ar">الدخول بلمسة وحدة</div><div class="en">Enter with one tap</div></div></div></div><div class="cell"><div class="frame"><img src="../png/01b-entry-pinning-offer.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١ب</span><div><div class="ar">تثبيت الشاشة</div><div class="en">Offer to pin the screen</div></div></div></div><div class="cell"><div class="frame"><img src="../png/01c-parent-gate.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١ج</span><div><div class="ar">بوابة الأهل</div><div class="en">Parent gate: PIN or fingerprint</div></div></div></div><div class="cell"><div class="frame"><img src="../png/02-kids-home.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٢</span><div><div class="ar">الرئيسية: كوكب العوالم</div><div class="en">Home: a planet of small worlds</div></div></div></div><div class="cell"><div class="frame"><img src="../png/03-juz-amma-reading.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٣</span><div><div class="ar">جزء عمّ: الكلمة تضيء</div><div class="en">Juz’ Amma, current word lit</div></div></div></div><div class="cell"><div class="frame"><img src="../png/04a-recitation-soft-retry.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٤أ</span><div><div class="ar">ما سمعت منيح، عيد</div><div class="en">Soft retry, never an error</div></div></div></div><div class="cell"><div class="frame"><img src="../png/04b-recitation-heard-well.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٤ب</span><div><div class="ar">أحسنت!</div><div class="en">Heard well</div></div></div></div><div class="cell"><div class="frame"><img src="../png/05-prayer-wudu.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٥</span><div><div class="ar">الصلاة والوضوء</div><div class="en">Wudu step by step (sheikh review)</div></div></div></div><div class="cell"><div class="frame"><img src="../png/06-prophet-story.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٦</span><div><div class="ar">القصص: مكان ونور وأغراض</div><div class="en">Stories: no face, no figure</div></div></div></div><div class="cell"><div class="frame"><img src="../png/07a-arabic-letters.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٧أ</span><div><div class="ar">الحروف</div><div class="en">Arabic letters</div></div></div></div><div class="cell"><div class="frame"><img src="../png/07b-maths.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٧ب</span><div><div class="ar">الحساب</div><div class="en">Maths: × ÷ and fractions</div></div></div></div><div class="cell"><div class="frame"><img src="../png/08a-colouring-import.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٨أ</span><div><div class="ar">التلوين: أضيف صورة</div><div class="en">Colouring gallery + import</div></div></div></div><div class="cell"><div class="frame"><img src="../png/08b-colouring-page.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٨ب</span><div><div class="ar">صفحة ملوّنة</div><div class="en">A coloured page</div></div></div></div><div class="cell"><div class="frame"><img src="../png/09a-voice-stories-child.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٩أ</span><div><div class="ar">حكايات بصوت بابا</div><div class="en">Stories in the parent’s voice</div></div></div></div><div class="cell"><div class="frame"><img src="../png/09b-voice-stories-parent-corner.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٩ب</span><div><div class="ar">ركن الأهل: التسجيل</div><div class="en">Record / re-record / delete</div></div></div></div><div class="cell"><div class="frame"><img src="../png/09c-interactive-story.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">٩ج</span><div><div class="ar">قصة تفاعلية</div><div class="en">Interactive story, voice + motion</div></div></div></div><div class="cell"><div class="frame"><img src="../png/10-game-card.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١٠</span><div><div class="ar">الألعاب</div><div class="en">A game card</div></div></div></div><div class="cell"><div class="frame"><img src="../png/11-rewards.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١١</span><div><div class="ar">جوائزي</div><div class="en">Rewards on the device</div></div></div></div>
+<div class="cell"><div class="frame"><img src="../png/12-screen-time-end.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١٢</span><div><div class="ar">انتهى وقت اللعب</div><div class="en">Screen time ends gently</div></div></div></div><div class="cell"><div class="frame"><img src="../png/13-adhkar.png" width="256" height="555"></div>
+  <div class="cap"><span class="badge">١٣</span><div><div class="ar">الأذكار للصغار</div><div class="en">Adhkar, kids version</div></div></div></div><div class="panel">
+  <div class="ptitle">الألوان · Palette</div>
+  <div class="swg">
+   <div class="sw"><div class="dot" style="background:#221E5A"></div><div><b>ليل النيلي</b><br><span>#221E5A</span><br><i>night indigo</i></div></div><div class="sw"><div class="dot" style="background:#17143F"></div><div><b>ليل أعمق</b><br><span>#17143F</span><br><i>deep night</i></div></div>
+   <div class="sw"><div class="dot" style="background:#F5B431"></div><div><b>ذهب الشروق</b><br><span>#F5B431</span><br><i>sunrise gold</i></div></div><div class="sw"><div class="dot" style="background:#FFD479"></div><div><b>ذهب فاتح</b><br><span>#FFD479</span><br><i>soft gold</i></div></div>
+   <div class="sw"><div class="dot" style="background:#2FA59C"></div><div><b>فيروزي هادئ</b><br><span>#2FA59C</span><br><i>soft teal</i></div></div><div class="sw"><div class="dot" style="background:#17706C"></div><div><b>فيروزي غامق</b><br><span>#17706C</span><br><i>teal, white text</i></div></div>
+   <div class="sw"><div class="dot" style="background:#E26A89"></div><div><b>وردي</b><br><span>#E26A89</span><br><i>rose</i></div></div><div class="sw"><div class="dot" style="background:#F6A9BC"></div><div><b>وردي فاتح</b><br><span>#F6A9BC</span><br><i>light rose</i></div></div>
+   <div class="sw"><div class="dot" style="background:#FFF8EA"></div><div><b>ورق</b><br><span>#FFF8EA</span><br><i>paper</i></div></div><div class="sw"><div class="dot" style="background:#F7A94B"></div><div><b>كهرمان «عيد»</b><br><span>#F7A94B</span><br><i>soft retry, never red</i></div></div>
+  </div>
+  <div class="ptitle" style="margin-top:18px">الخطوط · Type</div>
+  <div class="type"><div style="font-family:'Reem';font-weight:700;font-size:34px;word-spacing:.18em">ريم كوفي للعناوين</div><div style="font-size:20px;font-weight:500">إيبي إم بلكس للقراءة · ٢٠ بكسل</div><div style="font-family:'AmiriQuran';font-size:28px">أميري قرآن للنص القرآني</div></div>
+</div><div class="panel dark">
+  <div class="ptitle" style="color:#FFD479">القفل · Lock rules</div>
+  <ul><li>الدخول بلمسة، الخروج بالرقم السري أو البصمة <i>One-way lock</i></li>
+  <li>مقفول من الداخل: الصحة، الدواء، المحفظة، كوكب العائلة، المحادثة، لوحة العمل <i>Six areas out</i></li>
+  <li>لا محادثة حرّة مع نموذج، لا إنترنت، لا إعلانات <i>No chat, no network, no ads</i></li>
+  <li>لا وجه ولا صورة لنبيّ أو صحابي <i>No prophet or companion drawn</i></li>
+  <li>كل نصّ ديني مؤقّت (إطار ذهبي متقطّع) لحد ما الشيخ يوافق <i>Gold dashed = placeholder, flagged off</i></li></ul>
+</div></div>
+</body></html>

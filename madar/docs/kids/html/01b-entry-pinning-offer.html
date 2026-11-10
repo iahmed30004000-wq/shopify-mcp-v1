@@ -1,0 +1,76 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>مدار الصغار — تثبيت الشاشة</title>
+<meta name="viewport" content="width=360, initial-scale=1">
+<style>
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Regular.ttf');font-weight:400}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Medium.ttf');font-weight:500}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Bold.ttf');font-weight:700}
+@font-face{font-family:'Reem';src:url('../../../assets/fonts/ReemKufi-Variable.ttf');font-weight:400 700}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Regular.ttf');font-weight:400}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Bold.ttf');font-weight:700}
+@font-face{font-family:'AmiriQuran';src:url('../../../assets/fonts/AmiriQuran-Regular.ttf');font-weight:400}
+:root{
+--night900:#17143F;--night800:#221E5A;--night700:#2F2A78;--night500:#5650B0;--night300:#A9A5E6;--night100:#E6E4FA;--sun700:#A8680F;--sun500:#F5B431;--sun300:#FFD479;--sun100:#FFF0CC;--teal800:#0F5552;--teal700:#17706C;--teal500:#2FA59C;--teal200:#B6E6DF;--teal100:#E2F5F1;--rose700:#A93556;--rose500:#E26A89;--rose300:#F6A9BC;--rose100:#FCE3EA;--paper:#FFF8EA;--sand:#F7E9CF;--sand2:#EBD5A8;--ink:#26214F;--ink2:#5A5482;--retry:#F7A94B;--retry100:#FFEBD0;--retry700:#8A4B05;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:780px;overflow:hidden;background:#000}
+body{font-family:'Plex',sans-serif;color:var(--ink);direction:rtl;-webkit-font-smoothing:antialiased}
+.phone{position:relative;width:360px;height:780px;overflow:hidden;background:var(--paper)}
+.abs{position:absolute}
+.fill{position:absolute;inset:0;width:100%;height:100%}
+.status{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;font-weight:600;z-index:50}
+.status .r{display:flex;gap:6px;align-items:center}
+.h1{font-family:'Reem',serif;font-weight:700;font-size:32px;line-height:1.25;word-spacing:.18em}
+.h2{font-family:'Reem',serif;font-weight:700;font-size:26px;line-height:1.3;word-spacing:.18em}
+.h3{font-family:'Reem',serif;font-weight:600;font-size:22px;line-height:1.35;word-spacing:.16em}
+.body{font-size:20px;line-height:1.6;font-weight:500}
+.small{font-size:16px;line-height:1.5;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 28px;border-radius:32px;font-family:'Plex';font-weight:700;font-size:20px;border:0;box-shadow:0 5px 0 rgba(23,20,63,.22),0 14px 22px -10px rgba(23,20,63,.45)}
+.btn.gold{background:linear-gradient(180deg,#FFD479,#F5B431);color:var(--night900)}
+.btn.teal{background:linear-gradient(180deg,#2FA59C,#17706C);color:#fff}
+.btn.rose{background:linear-gradient(180deg,#F6A9BC,#E26A89);color:var(--night900)}
+.btn.night{background:linear-gradient(180deg,#3B3590,#221E5A);color:#fff}
+.btn.paper{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 rgba(23,20,63,.14),0 12px 20px -10px rgba(23,20,63,.35)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:none;border:2.5px solid currentColor}
+.round{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;font-weight:700;font-size:16px}
+.card{background:var(--paper);border-radius:28px;box-shadow:0 2px 0 rgba(255,255,255,.7) inset,0 14px 28px -14px rgba(38,33,79,.5)}
+.ph{display:inline-block;direction:rtl;font-family:'Plex';font-weight:600;font-size:14px;color:var(--sun700);background:var(--sun100);border:1.5px dashed var(--sun700);border-radius:10px;padding:2px 10px}
+.num{font-feature-settings:'tnum'}
+.topbar{position:absolute;top:28px;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:20}
+.topbar .title{font-family:'Reem';font-weight:700;font-size:26px;text-align:center;flex:1;word-spacing:.18em}
+</style></head><body>
+<div class="phone" style="background:linear-gradient(180deg,#17143F,#2F2A78 55%,#5650B0)">
+<svg width="0" height="0" style="position:absolute"><defs>
+  <radialGradient id="glowSun"><stop offset="0" stop-color="#FFD479" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD479" stop-opacity=".35"/><stop offset="1" stop-color="#FFD479" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowTeal"><stop offset="0" stop-color="#B6E6DF" stop-opacity=".9"/><stop offset="1" stop-color="#B6E6DF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowRose"><stop offset="0" stop-color="#F6A9BC" stop-opacity=".8"/><stop offset="1" stop-color="#F6A9BC" stop-opacity="0"/></radialGradient></defs></svg>
+<div class="status" style="color:#fff"><span class="num">٩:٤١</span><span class="r"><svg width="26" height="13" viewBox="0 0 26 13"><rect x=".7" y=".7" width="21" height="11.6" rx="3.2" fill="none" stroke="#fff" stroke-width="1.4"/><rect x="2.6" y="2.6" width="14" height="7.8" rx="1.6" fill="#fff"/><rect x="23" y="4" width="2.3" height="5" rx="1" fill="#fff"/></svg></span></div>
+
+  <svg class="fill" viewBox="0 0 360 780"><defs><pattern id="p2" width="64" height="64" patternUnits="userSpaceOnUse"><polygon points="0,-25.6 7.49,-18.09 18.1,-18.1 18.09,-7.49 25.6,0 18.09,7.49 18.1,18.1 7.49,18.09 0,25.6 -7.49,18.09 -18.1,18.1 -18.09,7.49 -25.6,0 -18.09,-7.49 -18.1,-18.1 -7.49,-18.09" fill="none" stroke="#FFD479" stroke-width="1"/><polygon points="64,-25.6 71.49,-18.09 82.1,-18.1 82.09,-7.49 89.6,0 82.09,7.49 82.1,18.1 71.49,18.09 64,25.6 56.51,18.09 45.9,18.1 45.91,7.49 38.4,0 45.91,-7.49 45.9,-18.1 56.51,-18.09" fill="none" stroke="#FFD479" stroke-width="1"/><polygon points="0,38.4 7.49,45.91 18.1,45.9 18.09,56.51 25.6,64 18.09,71.49 18.1,82.1 7.49,82.09 0,89.6 -7.49,82.09 -18.1,82.1 -18.09,71.49 -25.6,64 -18.09,56.51 -18.1,45.9 -7.49,45.91" fill="none" stroke="#FFD479" stroke-width="1"/><polygon points="64,38.4 71.49,45.91 82.1,45.9 82.09,56.51 89.6,64 82.09,71.49 82.1,82.1 71.49,82.09 64,89.6 56.51,82.09 45.9,82.1 45.91,71.49 38.4,64 45.91,56.51 45.9,45.9 56.51,45.91" fill="none" stroke="#FFD479" stroke-width="1"/><polygon points="38.61,16.04 41.35,22.65 47.96,25.39 45.22,32 47.96,38.61 41.35,41.35 38.61,47.96 32,45.22 25.39,47.96 22.65,41.35 16.04,38.61 18.78,32 16.04,25.39 22.65,22.65 25.39,16.04 32,18.78" fill="none" stroke="#FFD479" stroke-width="1"/><rect x="25.6" y="25.6" width="12.8" height="12.8" transform="rotate(45 32 32)" fill="none" stroke="#FFD479" stroke-width="1"/><polygon points="34.2,-5.32 35.12,-3.12 37.32,-2.2 36.41,0 37.32,2.2 35.12,3.12 34.2,5.32 32,4.41 29.8,5.32 28.88,3.12 26.68,2.2 27.59,0 26.68,-2.2 28.88,-3.12 29.8,-5.32 32,-4.41" fill="#FFD479" opacity=".7"/><polygon points="2.2,26.68 3.12,28.88 5.32,29.8 4.41,32 5.32,34.2 3.12,35.12 2.2,37.32 0,36.41 -2.2,37.32 -3.12,35.12 -5.32,34.2 -4.41,32 -5.32,29.8 -3.12,28.88 -2.2,26.68 0,27.59" fill="#FFD479" opacity=".7"/><polygon points="66.2,26.68 67.12,28.88 69.32,29.8 68.41,32 69.32,34.2 67.12,35.12 66.2,37.32 64,36.41 61.8,37.32 60.88,35.12 58.68,34.2 59.59,32 58.68,29.8 60.88,28.88 61.8,26.68 64,27.59" fill="#FFD479" opacity=".7"/><polygon points="34.2,58.68 35.12,60.88 37.32,61.8 36.41,64 37.32,66.2 35.12,67.12 34.2,69.32 32,68.41 29.8,69.32 28.88,67.12 26.68,66.2 27.59,64 26.68,61.8 28.88,60.88 29.8,58.68 32,59.59" fill="#FFD479" opacity=".7"/></pattern></defs>
+    <rect width="360" height="780" fill="url(#p2)" opacity=".10"/>
+    <polygon points="0.01,190.8 1.92,192.71 4.62,192.7 4.61,195.4 6.52,197.31 4.61,199.21 4.62,201.91 1.92,201.91 0.01,203.81 -1.89,201.91 -4.59,201.91 -4.59,199.21 -6.49,197.31 -4.59,195.4 -4.59,192.7 -1.89,192.71" fill="#FFF0CC" opacity="0.65"/><circle cx="330.3" cy="179.12" r="0.94" fill="#FFF0CC" opacity="0.44"/><circle cx="13.86" cy="275.12" r="1.21" fill="#FFF0CC" opacity="0.39"/><circle cx="130.83" cy="47.45" r="1.35" fill="#FFF0CC" opacity="0.53"/><polygon points="335.96,136.82 337.17,138.03 338.89,138.03 338.89,139.75 340.1,140.97 338.89,142.18 338.89,143.9 337.17,143.9 335.96,145.11 334.74,143.9 333.02,143.9 333.03,142.18 331.81,140.97 333.03,139.75 333.02,138.03 334.74,138.03" fill="#FFF0CC" opacity="0.73"/><circle cx="331.46" cy="115.62" r="1.58" fill="#FFF0CC" opacity="0.67"/><circle cx="122.84" cy="44.32" r="1.75" fill="#FFF0CC" opacity="0.66"/><circle cx="359.02" cy="132.86" r="0.96" fill="#FFF0CC" opacity="0.62"/>
+    <circle cx="180" cy="180" r="170" fill="url(#glowSun)"/>
+    <g>
+    <polygon points="180,69 208.1,97.15 247.88,97.12 247.85,136.9 276,165 247.85,193.1 247.88,232.88 208.1,232.85 180,261 151.9,232.85 112.12,232.88 112.15,193.1 84,165 112.15,136.9 112.12,97.12 151.9,97.15" fill="#F5B431" opacity=".95"/>
+    <polygon points="209.39,94.05 221.54,123.46 250.95,135.61 238.75,165 250.95,194.39 221.54,206.54 209.39,235.95 180,223.75 150.61,235.95 138.46,206.54 109.05,194.39 121.25,165 109.05,135.61 138.46,123.46 150.61,94.05 180,106.25" fill="none" stroke="#FFF0CC" stroke-width="1.4"/>
+    <polygon points="180,105.48 196.4,125.41 222.09,122.91 219.59,148.6 239.52,165 219.59,181.4 222.09,207.09 196.4,204.59 180,224.52 163.6,204.59 137.91,207.09 140.41,181.4 120.48,165 140.41,148.6 137.91,122.91 163.6,125.41" fill="#FFF0CC" opacity=".9"/>
+    <circle cx="180" cy="165" r="28.8" fill="#2FA59C"/>
+    <polygon points="188.08,145.49 191.42,153.58 199.51,156.92 196.16,165 199.51,173.08 191.42,176.42 188.08,184.51 180,181.16 171.92,184.51 168.58,176.42 160.49,173.08 163.84,165 160.49,156.92 168.58,153.58 171.92,145.49 180,148.84" fill="#FFF0CC"/>
+  </g>
+  </svg>
+  <div class="abs" style="top:262px;left:0;right:0;text-align:center;color:#fff">
+    <div style="font-family:'Reem';font-weight:700;font-size:38px;word-spacing:.18em">مدار الصغار</div>
+  </div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:420px;border-radius:40px 40px 0 0;background:#FFF8EA;box-shadow:0 -20px 50px rgba(10,8,40,.5);padding:28px 24px 0">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="round" style="width:64px;height:64px;background:#E2F5F1"><svg class="ico" width="38" height="38" viewBox="0 0 48 48" style="--a:#17706C;--b:#fff;--c:#F5B431;" aria-hidden="true"><path d="M24 4L40 10V23C40 33 33 40 24 44C15 40 8 33 8 23V10Z" fill="var(--a)"/><path d="M16 24L22 30L33 18" fill="none" stroke="var(--b)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><span class="chip" style="background:#E6E4FA;color:#2F2A78;height:32px;font-size:15px">للأهل</span>
+        <div class="h2" style="color:#221E5A;margin-top:2px">نثبّت الشاشة؟</div></div>
+    </div>
+    <div class="body" style="margin-top:16px;color:#26214F">تثبيت الشاشة بيخلّي الجوال على مدار الصغار فقط، وما بيطلع منه إلا الأهل.</div>
+    <div class="btn teal" style="margin-top:20px;width:100%;min-height:68px"><svg class="ico" width="28" height="28" viewBox="0 0 48 48" style="--a:#fff;--b:#17706C;--c:#F5B431;" aria-hidden="true"><path d="M24 4L40 10V23C40 33 33 40 24 44C15 40 8 33 8 23V10Z" fill="var(--a)"/><path d="M16 24L22 30L33 18" fill="none" stroke="var(--b)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ثبّت الشاشة</div>
+    <div class="btn ghost" style="margin-top:12px;width:100%;color:#5A5482;border-color:#EBD5A8;min-height:64px;font-size:18px">مش هلأ، كمّل بدون تثبيت</div>
+    <div class="small" style="margin-top:12px;color:#5A5482;text-align:center;font-size:15px">بتقدر تغيّرها بعدين من إعدادات الأهل.</div>
+  </div>
+</div></body></html>
