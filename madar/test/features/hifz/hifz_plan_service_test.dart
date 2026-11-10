@@ -291,7 +291,7 @@ void main() {
     final strengthsBefore = await service.strengths();
 
     final snapshot = await exportSnapshot(db, exportedAt: DateTime.utc(2026, 10, 15, 17));
-    expect(snapshot['schemaVersion'], 8);
+    expect(snapshot['schemaVersion'], db.schemaVersion);
     expect((snapshot['tables']! as Map)['hifz_goals'], isNotEmpty);
     expect((snapshot['tables']! as Map)['hifz_marks'], isNotEmpty);
 

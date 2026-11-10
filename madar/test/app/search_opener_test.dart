@@ -137,7 +137,7 @@ void main() {
       ),
       (name: 'a learning goal opens itself', doc: _doc('learning_goals', refId: 'g1'), target: '/growth/goal/g1'),
       (name: 'a goal log opens its goal', doc: _doc('goal_logs', extra: {'goalId': 'g1'}), target: '/growth/goal/g1'),
-      (name: 'an exercise opens the plan', doc: _doc('exercises'), target: '/body?tab=plan'),
+      (name: 'an exercise opens its own page', doc: _doc('exercises'), target: '/body/gym/exercise/r1'),
       (name: 'a workout opens the plan', doc: _doc('workout_logs'), target: '/body?tab=plan'),
       (name: 'an avoid item opens the avoid list', doc: _doc('avoid_items'), target: '/body?tab=avoid'),
       (name: 'a fast opens the fasting tab', doc: _doc('fasting_sessions'), target: '/body?tab=fasting'),
