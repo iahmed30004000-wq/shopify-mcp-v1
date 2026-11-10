@@ -1,0 +1,135 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>جوائزي</title>
+<meta name="viewport" content="width=360, initial-scale=1">
+<style>
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Regular.ttf');font-weight:400}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Medium.ttf');font-weight:500}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Bold.ttf');font-weight:700}
+@font-face{font-family:'Reem';src:url('../../../assets/fonts/ReemKufi-Variable.ttf');font-weight:400 700}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Regular.ttf');font-weight:400}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Bold.ttf');font-weight:700}
+@font-face{font-family:'AmiriQuran';src:url('../../../assets/fonts/AmiriQuran-Regular.ttf');font-weight:400}
+:root{
+--night900:#17143F;--night800:#221E5A;--night700:#2F2A78;--night500:#5650B0;--night300:#A9A5E6;--night100:#E6E4FA;--sun700:#A8680F;--sun500:#F5B431;--sun300:#FFD479;--sun100:#FFF0CC;--teal800:#0F5552;--teal700:#17706C;--teal500:#2FA59C;--teal200:#B6E6DF;--teal100:#E2F5F1;--rose700:#A93556;--rose500:#E26A89;--rose300:#F6A9BC;--rose100:#FCE3EA;--paper:#FFF8EA;--sand:#F7E9CF;--sand2:#EBD5A8;--ink:#26214F;--ink2:#5A5482;--retry:#F7A94B;--retry100:#FFEBD0;--retry700:#8A4B05;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:780px;overflow:hidden;background:#000}
+body{font-family:'Plex',sans-serif;color:var(--ink);direction:rtl;-webkit-font-smoothing:antialiased}
+.phone{position:relative;width:360px;height:780px;overflow:hidden;background:var(--paper)}
+.abs{position:absolute}
+.fill{position:absolute;inset:0;width:100%;height:100%}
+.status{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;font-weight:600;z-index:50}
+.status .r{display:flex;gap:6px;align-items:center}
+.h1{font-family:'Reem',serif;font-weight:700;font-size:32px;line-height:1.25;word-spacing:.18em}
+.h2{font-family:'Reem',serif;font-weight:700;font-size:26px;line-height:1.3;word-spacing:.18em}
+.h3{font-family:'Reem',serif;font-weight:600;font-size:22px;line-height:1.35;word-spacing:.16em}
+.body{font-size:20px;line-height:1.6;font-weight:500}
+.small{font-size:16px;line-height:1.5;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 28px;border-radius:32px;font-family:'Plex';font-weight:700;font-size:20px;border:0;box-shadow:0 5px 0 rgba(23,20,63,.22),0 14px 22px -10px rgba(23,20,63,.45)}
+.btn.gold{background:linear-gradient(180deg,#FFD479,#F5B431);color:var(--night900)}
+.btn.teal{background:linear-gradient(180deg,#2FA59C,#17706C);color:#fff}
+.btn.rose{background:linear-gradient(180deg,#F6A9BC,#E26A89);color:var(--night900)}
+.btn.night{background:linear-gradient(180deg,#3B3590,#221E5A);color:#fff}
+.btn.paper{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 rgba(23,20,63,.14),0 12px 20px -10px rgba(23,20,63,.35)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:none;border:2.5px solid currentColor}
+.round{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;font-weight:700;font-size:16px}
+.card{background:var(--paper);border-radius:28px;box-shadow:0 2px 0 rgba(255,255,255,.7) inset,0 14px 28px -14px rgba(38,33,79,.5)}
+.ph{display:inline-block;direction:rtl;font-family:'Plex';font-weight:600;font-size:14px;color:var(--sun700);background:var(--sun100);border:1.5px dashed var(--sun700);border-radius:10px;padding:2px 10px}
+.num{font-feature-settings:'tnum'}
+.topbar{position:absolute;top:28px;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:20}
+.topbar .title{font-family:'Reem';font-weight:700;font-size:26px;text-align:center;flex:1;word-spacing:.18em}
+</style></head><body>
+<div class="phone" style="background:linear-gradient(180deg,#FFF0CC,#FFF8EA 70%)">
+<svg width="0" height="0" style="position:absolute"><defs>
+  <radialGradient id="glowSun"><stop offset="0" stop-color="#FFD479" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD479" stop-opacity=".35"/><stop offset="1" stop-color="#FFD479" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowTeal"><stop offset="0" stop-color="#B6E6DF" stop-opacity=".9"/><stop offset="1" stop-color="#B6E6DF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowRose"><stop offset="0" stop-color="#F6A9BC" stop-opacity=".8"/><stop offset="1" stop-color="#F6A9BC" stop-opacity="0"/></radialGradient></defs></svg>
+<div class="status" style="color:#26214F"><span class="num">٩:٤١</span><span class="r"><svg width="26" height="13" viewBox="0 0 26 13"><rect x=".7" y=".7" width="21" height="11.6" rx="3.2" fill="none" stroke="#26214F" stroke-width="1.4"/><rect x="2.6" y="2.6" width="14" height="7.8" rx="1.6" fill="#26214F"/><rect x="23" y="4" width="2.3" height="5" rx="1" fill="#26214F"/></svg></span></div>
+<svg class="fill" viewBox="0 0 360 780"><defs><pattern id="p" width="64" height="64" patternUnits="userSpaceOnUse"><polygon points="0,-25.6 7.49,-18.09 18.1,-18.1 18.09,-7.49 25.6,0 18.09,7.49 18.1,18.1 7.49,18.09 0,25.6 -7.49,18.09 -18.1,18.1 -18.09,7.49 -25.6,0 -18.09,-7.49 -18.1,-18.1 -7.49,-18.09" fill="none" stroke="#F5B431" stroke-width="1"/><polygon points="64,-25.6 71.49,-18.09 82.1,-18.1 82.09,-7.49 89.6,0 82.09,7.49 82.1,18.1 71.49,18.09 64,25.6 56.51,18.09 45.9,18.1 45.91,7.49 38.4,0 45.91,-7.49 45.9,-18.1 56.51,-18.09" fill="none" stroke="#F5B431" stroke-width="1"/><polygon points="0,38.4 7.49,45.91 18.1,45.9 18.09,56.51 25.6,64 18.09,71.49 18.1,82.1 7.49,82.09 0,89.6 -7.49,82.09 -18.1,82.1 -18.09,71.49 -25.6,64 -18.09,56.51 -18.1,45.9 -7.49,45.91" fill="none" stroke="#F5B431" stroke-width="1"/><polygon points="64,38.4 71.49,45.91 82.1,45.9 82.09,56.51 89.6,64 82.09,71.49 82.1,82.1 71.49,82.09 64,89.6 56.51,82.09 45.9,82.1 45.91,71.49 38.4,64 45.91,56.51 45.9,45.9 56.51,45.91" fill="none" stroke="#F5B431" stroke-width="1"/><polygon points="38.61,16.04 41.35,22.65 47.96,25.39 45.22,32 47.96,38.61 41.35,41.35 38.61,47.96 32,45.22 25.39,47.96 22.65,41.35 16.04,38.61 18.78,32 16.04,25.39 22.65,22.65 25.39,16.04 32,18.78" fill="none" stroke="#F5B431" stroke-width="1"/><rect x="25.6" y="25.6" width="12.8" height="12.8" transform="rotate(45 32 32)" fill="none" stroke="#F5B431" stroke-width="1"/><polygon points="34.2,-5.32 35.12,-3.12 37.32,-2.2 36.41,0 37.32,2.2 35.12,3.12 34.2,5.32 32,4.41 29.8,5.32 28.88,3.12 26.68,2.2 27.59,0 26.68,-2.2 28.88,-3.12 29.8,-5.32 32,-4.41" fill="#F5B431" opacity=".7"/><polygon points="2.2,26.68 3.12,28.88 5.32,29.8 4.41,32 5.32,34.2 3.12,35.12 2.2,37.32 0,36.41 -2.2,37.32 -3.12,35.12 -5.32,34.2 -4.41,32 -5.32,29.8 -3.12,28.88 -2.2,26.68 0,27.59" fill="#F5B431" opacity=".7"/><polygon points="66.2,26.68 67.12,28.88 69.32,29.8 68.41,32 69.32,34.2 67.12,35.12 66.2,37.32 64,36.41 61.8,37.32 60.88,35.12 58.68,34.2 59.59,32 58.68,29.8 60.88,28.88 61.8,26.68 64,27.59" fill="#F5B431" opacity=".7"/><polygon points="34.2,58.68 35.12,60.88 37.32,61.8 36.41,64 37.32,66.2 35.12,67.12 34.2,69.32 32,68.41 29.8,69.32 28.88,67.12 26.68,66.2 27.59,64 26.68,61.8 28.88,60.88 29.8,58.68 32,59.59" fill="#F5B431" opacity=".7"/></pattern></defs><rect width="360" height="780" fill="url(#p)" opacity="0.12"/></svg><div class="topbar">
+    <div class="round" style="background:#FFF8EA;box-shadow:0 4px 0 rgba(23,20,63,.18)"><svg class="ico" width="32" height="32" viewBox="0 0 48 48" style="--a:#221E5A;--b:#FFF8EA;--c:#F5B431;" aria-hidden="true"><path d="M6 23L24 7L42 23" fill="none" stroke="var(--a)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 21V40H20V29H28V40H37V21L24 10Z" fill="var(--a)"/></svg></div>
+    <div class="title" style="color:#26214F">جوائزي</div>
+    <div style="width:64px"></div>
+  </div><div class="abs" style="top:118px;left:16px;right:16px;height:116px;border-radius:32px;background:linear-gradient(120deg,#221E5A,#2F2A78);box-shadow:0 14px 24px -14px rgba(23,20,63,.7);display:flex;align-items:center;gap:16px;padding:0 18px;color:#fff">
+    <div style="position:relative;width:84px;height:84px;flex:none"><svg class="fill" viewBox="0 0 64 64"><polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#F5B431" stroke="#FFF0CC" stroke-width="1.5"/><polygon points="39.65,13.52 42.18,21.82 50.48,24.35 46.4,32 50.48,39.65 42.18,42.18 39.65,50.48 32,46.4 24.35,50.48 21.82,42.18 13.52,39.65 17.6,32 13.52,24.35 21.82,21.82 24.35,13.52 32,17.6" fill="#FFD479"/></svg></div>
+    <div><div class="num" style="font-family:'Reem';font-weight:700;font-size:54px;line-height:1">٢٤</div><div style="font-weight:700;font-size:20px;color:#FFD479">نجمة جمعتها</div></div></div><div class="abs" style="top:248px;left:16px;right:16px"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:17px;color:#221E5A"><span>الفانوس الجاي</span><span class="num">باقي ٦ نجوم</span></div>
+    <div style="height:16px;border-radius:8px;background:#EBD5A8;margin-top:6px"><div style="width:70%;height:16px;border-radius:8px;background:linear-gradient(270deg,#F5B431,#FFD479);float:right;box-shadow:0 0 12px rgba(245,180,49,.6)"></div></div></div><div class="abs" style="top:322px;left:16px;right:16px;display:flex;flex-direction:column;gap:14px"><div style="position:relative;display:flex;justify-content:space-around;padding:0 6px;height:112px;align-items:flex-end">
+    <div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    <circle cx="0" cy="0" r="46" fill="url(#glowSun)"/>
+    <path d="M0 -34V-27" stroke="#221E5A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#221E5A"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#F5B431" stroke="#221E5A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#221E5A" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#221E5A"/>
+    <path d="M0 -10C6 -4 6 3 0 9C-6 3 -6 -4 0 -10Z" fill="#FFF8EA"/>
+  </g></svg></div><div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    <circle cx="0" cy="0" r="46" fill="url(#glowSun)"/>
+    <path d="M0 -34V-27" stroke="#221E5A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#221E5A"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#2FA59C" stroke="#221E5A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#221E5A" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#221E5A"/>
+    <path d="M0 -10C6 -4 6 3 0 9C-6 3 -6 -4 0 -10Z" fill="#FFF8EA"/>
+  </g></svg></div><div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    <circle cx="0" cy="0" r="46" fill="url(#glowSun)"/>
+    <path d="M0 -34V-27" stroke="#221E5A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#221E5A"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#E26A89" stroke="#221E5A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#221E5A" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#221E5A"/>
+    <path d="M0 -10C6 -4 6 3 0 9C-6 3 -6 -4 0 -10Z" fill="#FFF8EA"/>
+  </g></svg></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:10px;border-radius:5px;background:linear-gradient(180deg,#EBD5A8,#CBB27C);box-shadow:0 4px 0 rgba(38,33,79,.15)"></div></div><div style="position:relative;display:flex;justify-content:space-around;padding:0 6px;height:112px;align-items:flex-end">
+    <div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    <circle cx="0" cy="0" r="46" fill="url(#glowSun)"/>
+    <path d="M0 -34V-27" stroke="#221E5A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#221E5A"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#5650B0" stroke="#221E5A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#221E5A" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#221E5A"/>
+    <path d="M0 -10C6 -4 6 3 0 9C-6 3 -6 -4 0 -10Z" fill="#FFF8EA"/>
+  </g></svg></div><div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    <circle cx="0" cy="0" r="46" fill="url(#glowSun)"/>
+    <path d="M0 -34V-27" stroke="#221E5A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#221E5A"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#FFD479" stroke="#221E5A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#221E5A" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#221E5A"/>
+    <path d="M0 -10C6 -4 6 3 0 9C-6 3 -6 -4 0 -10Z" fill="#FFF8EA"/>
+  </g></svg></div><div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    
+    <path d="M0 -34V-27" stroke="#EBD5A8" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#EBD5A8"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#EBD5A8" stroke="#EBD5A8" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#EBD5A8" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#EBD5A8"/>
+    
+  </g></svg></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:10px;border-radius:5px;background:linear-gradient(180deg,#EBD5A8,#CBB27C);box-shadow:0 4px 0 rgba(38,33,79,.15)"></div></div><div style="position:relative;display:flex;justify-content:space-around;padding:0 6px;height:112px;align-items:flex-end">
+    <div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    
+    <path d="M0 -34V-27" stroke="#EBD5A8" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#EBD5A8"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#EBD5A8" stroke="#EBD5A8" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#EBD5A8" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#EBD5A8"/>
+    
+  </g></svg></div><div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    
+    <path d="M0 -34V-27" stroke="#EBD5A8" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#EBD5A8"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#EBD5A8" stroke="#EBD5A8" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#EBD5A8" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#EBD5A8"/>
+    
+  </g></svg></div><div style="width:92px;height:104px;display:flex;align-items:center;justify-content:center"><svg width="92" height="104" viewBox="-46 -50 92 104" style="overflow:visible"><g transform="translate(0 0) scale(1.18)">
+    
+    <path d="M0 -34V-27" stroke="#EBD5A8" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#EBD5A8"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#EBD5A8" stroke="#EBD5A8" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#EBD5A8" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#EBD5A8"/>
+    
+  </g></svg></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:10px;border-radius:5px;background:linear-gradient(180deg,#EBD5A8,#CBB27C);box-shadow:0 4px 0 rgba(38,33,79,.15)"></div></div></div><div class="abs" style="top:714px;left:16px;right:16px;display:flex;justify-content:center"><span class="chip" style="background:#E2F5F1;color:#0F5552;height:44px;font-size:16px"><svg class="ico" width="22" height="22" viewBox="0 0 48 48" style="--a:#17706C;--b:#fff;--c:#F5B431;" aria-hidden="true"><path d="M24 4L40 10V23C40 33 33 40 24 44C15 40 8 33 8 23V10Z" fill="var(--a)"/><path d="M16 24L22 30L33 18" fill="none" stroke="var(--b)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg> نجومك محفوظة على جوالك</span></div>
+</div></body></html>

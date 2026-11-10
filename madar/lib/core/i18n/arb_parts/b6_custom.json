@@ -1,0 +1,1320 @@
+{
+  "cmodTitle": {
+    "ar": "متتبّعات وقوائم",
+    "en": "Trackers & lists",
+    "description": "Custom modules screen title"
+  },
+  "cmodNewModule": {
+    "ar": "وحدة جديدة",
+    "en": "New module"
+  },
+  "cmodModulesCount": {
+    "ar": "{count, plural, =0{لا وحدات بعد} =1{وحدة واحدة} =2{وحدتان} few{{count} وحدات} many{{count} وحدة} other{{count} وحدة}}",
+    "en": "{count, plural, =0{No modules yet} =1{1 module} other{{count} modules}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodLoggedToday": {
+    "ar": "{count, plural, =0{لم تسجّل شيئًا اليوم بعد} =1{إدخال واحد اليوم} =2{إدخالان اليوم} few{{count} إدخالات اليوم} many{{count} إدخالًا اليوم} other{{count} إدخال اليوم}}",
+    "en": "{count, plural, =0{Nothing logged today yet} =1{1 entry today} other{{count} entries today}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEntriesCount": {
+    "ar": "{count, plural, =0{لا إدخالات} =1{إدخال واحد} =2{إدخالان} few{{count} إدخالات} many{{count} إدخالًا} other{{count} إدخال}}",
+    "en": "{count, plural, =0{no entries} =1{1 entry} other{{count} entries}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsCount": {
+    "ar": "{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}",
+    "en": "{count, plural, =0{no items} =1{1 item} other{{count} items}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodItemsProgress": {
+    "ar": "{done} من {total} منجز",
+    "en": "{done} of {total} done",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodOpenItems": {
+    "ar": "{count, plural, =0{لا شيء متبقٍّ} =1{عنصر واحد متبقٍّ} =2{عنصران متبقيان} few{{count} عناصر متبقية} many{{count} عنصرًا متبقيًا} other{{count} عنصر متبقٍّ}}",
+    "en": "{count, plural, =0{Nothing left} =1{1 item left} other{{count} items left}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodEmptyTitle": {
+    "ar": "اصنع متتبّعك الأول",
+    "en": "Build your first tracker"
+  },
+  "cmodEmptyBody": {
+    "ar": "تتبّع ما يهمّك بحقولك أنت: سجلّ قراءة، أذكار بعد الصلاة، قائمة عادات… ويظهر كل ذلك في كواكبك.",
+    "en": "Track what matters with your own fields – a reading log, dhikr after prayer, a habit list… and watch it feed your planets."
+  },
+  "cmodEmptyAction": {
+    "ar": "أنشئ وحدة",
+    "en": "Create a module"
+  },
+  "cmodArchivedSection": {
+    "ar": "المؤرشفة",
+    "en": "Archived"
+  },
+  "cmodKindTracker": {
+    "ar": "متتبّع",
+    "en": "Tracker"
+  },
+  "cmodKindList": {
+    "ar": "قائمة",
+    "en": "List"
+  },
+  "cmodKindTrackerHint": {
+    "ar": "قيم تسجّلها مع الأيام، برسوم بيانية",
+    "en": "Values you log over time, with charts"
+  },
+  "cmodKindListHint": {
+    "ar": "عناصر تشطبها وترتّبها",
+    "en": "Items you check off and reorder"
+  },
+  "cmodLastToday": {
+    "ar": "آخر إدخال اليوم",
+    "en": "Last entry today"
+  },
+  "cmodLastYesterday": {
+    "ar": "آخر إدخال أمس",
+    "en": "Last entry yesterday"
+  },
+  "cmodLastDaysAgo": {
+    "ar": "{count, plural, =1{آخر إدخال قبل يوم} =2{آخر إدخال قبل يومين} few{آخر إدخال قبل {count} أيام} many{آخر إدخال قبل {count} يومًا} other{آخر إدخال قبل {count} يوم}}",
+    "en": "{count, plural, =1{Last entry a day ago} other{Last entry {count} days ago}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodNoEntries": {
+    "ar": "لا إدخالات بعد",
+    "en": "No entries yet"
+  },
+  "cmodStreakBadge": {
+    "ar": "سلسلة {count}",
+    "en": "{count}-day streak",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodActionArchive": {
+    "ar": "أرشفة",
+    "en": "Archive"
+  },
+  "cmodActionUnarchive": {
+    "ar": "إعادة من الأرشيف",
+    "en": "Unarchive"
+  },
+  "cmodActionAddEntry": {
+    "ar": "إدخال جديد",
+    "en": "New entry"
+  },
+  "cmodActionOpen": {
+    "ar": "فتح",
+    "en": "Open"
+  },
+  "cmodActionExport": {
+    "ar": "مشاركة كملف CSV",
+    "en": "Share as CSV"
+  },
+  "cmodActionUncheck": {
+    "ar": "إعادة فتح",
+    "en": "Reopen"
+  },
+  "cmodActionCheck": {
+    "ar": "إنجاز",
+    "en": "Check off"
+  },
+  "cmodToastArchived": {
+    "ar": "أُرشفت «{name}»",
+    "en": "Archived “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnarchived": {
+    "ar": "عادت «{name}» من الأرشيف",
+    "en": "“{name}” is back",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDeleted": {
+    "ar": "حُذفت «{name}»",
+    "en": "Deleted “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastDuplicated": {
+    "ar": "نُسخت «{name}»",
+    "en": "Duplicated “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastLogged": {
+    "ar": "سُجّل في «{name}»",
+    "en": "Logged to “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastUnchecked": {
+    "ar": "أُلغي تسجيل اليوم",
+    "en": "Today’s check-in removed"
+  },
+  "cmodToastEntryDeleted": {
+    "ar": "حُذف الإدخال",
+    "en": "Entry deleted"
+  },
+  "cmodToastEntryDuplicated": {
+    "ar": "نُسخ الإدخال",
+    "en": "Entry duplicated"
+  },
+  "cmodToastItemDone": {
+    "ar": "أُنجز العنصر",
+    "en": "Item done"
+  },
+  "cmodToastItemReopened": {
+    "ar": "أُعيد فتح العنصر",
+    "en": "Item reopened"
+  },
+  "cmodToastCleared": {
+    "ar": "مُسحت العناصر المنجزة",
+    "en": "Done items cleared"
+  },
+  "cmodToastSaved": {
+    "ar": "حُفظت «{name}»",
+    "en": "Saved “{name}”",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodToastReminderDeleted": {
+    "ar": "حُذف التذكير",
+    "en": "Reminder deleted"
+  },
+  "cmodToastReminderAdded": {
+    "ar": "أُضيف التذكير",
+    "en": "Reminder added"
+  },
+  "cmodQuickDone": {
+    "ar": "تمّ اليوم",
+    "en": "Done today"
+  },
+  "cmodQuickDoneHint": {
+    "ar": "سجّل إنجاز اليوم بلمسة",
+    "en": "Log today with one tap"
+  },
+  "cmodQuickChecked": {
+    "ar": "أُنجز اليوم",
+    "en": "Done for today"
+  },
+  "cmodQuickCheckedHint": {
+    "ar": "المس لإلغاء تسجيل اليوم",
+    "en": "Tap to undo today’s check-in"
+  },
+  "cmodQuickAddOne": {
+    "ar": "سجّل مرّة",
+    "en": "Log one"
+  },
+  "cmodQuickRate": {
+    "ar": "قيّم اليوم",
+    "en": "Rate today"
+  },
+  "cmodRateStars": {
+    "ar": "{count, plural, =1{نجمة واحدة} =2{نجمتان} few{{count} نجوم} many{{count} نجمة} other{{count} نجمة}}",
+    "en": "{count, plural, =1{1 star} other{{count} stars}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodBuilderNewTitle": {
+    "ar": "وحدة جديدة",
+    "en": "New module"
+  },
+  "cmodBuilderEditTitle": {
+    "ar": "تعديل الوحدة",
+    "en": "Edit module"
+  },
+  "cmodSectionBasics": {
+    "ar": "الأساسيات",
+    "en": "Basics"
+  },
+  "cmodName": {
+    "ar": "الاسم",
+    "en": "Name"
+  },
+  "cmodNameHint": {
+    "ar": "مثال: سجلّ القراءة",
+    "en": "e.g. Reading log"
+  },
+  "cmodKind": {
+    "ar": "النوع",
+    "en": "Kind"
+  },
+  "cmodIcon": {
+    "ar": "الأيقونة",
+    "en": "Icon"
+  },
+  "cmodColor": {
+    "ar": "اللون",
+    "en": "Colour"
+  },
+  "cmodPlanet": {
+    "ar": "الكوكب",
+    "en": "Planet"
+  },
+  "cmodPlanetNone": {
+    "ar": "بلا كوكب",
+    "en": "No planet"
+  },
+  "cmodPlanetHint": {
+    "ar": "كل إدخال يُنعش هذا الكوكب في المدار، ويدور حوله قمرًا",
+    "en": "Every entry brings this planet to life and circles it as a moon"
+  },
+  "cmodWindow": {
+    "ar": "وقت الصلاة",
+    "en": "Prayer window"
+  },
+  "cmodWindowHint": {
+    "ar": "متى تتوقّع أن تسجّل عادةً",
+    "en": "When you usually log it"
+  },
+  "cmodSectionFields": {
+    "ar": "الحقول",
+    "en": "Fields"
+  },
+  "cmodAddField": {
+    "ar": "أضف حقلًا",
+    "en": "Add field"
+  },
+  "cmodFieldsEmptyTracker": {
+    "ar": "بلا حقول يصبح المتتبّع عدّادًا بلمسة واحدة",
+    "en": "With no fields, a tracker is a one-tap counter"
+  },
+  "cmodFieldsEmptyList": {
+    "ar": "أضف حقلًا واحدًا على الأقل، كاسم العنصر",
+    "en": "Add at least one field, such as the item’s name"
+  },
+  "cmodHiddenFields": {
+    "ar": "حقول مخفية",
+    "en": "Hidden fields"
+  },
+  "cmodHiddenFieldsHint": {
+    "ar": "أُزيلت من النموذج، وبياناتها القديمة محفوظة",
+    "en": "Removed from the form – their old data is kept"
+  },
+  "cmodRestoreField": {
+    "ar": "إظهار",
+    "en": "Show again"
+  },
+  "cmodSectionChart": {
+    "ar": "الرسم البياني",
+    "en": "Chart"
+  },
+  "cmodChartField": {
+    "ar": "ما يُرسم",
+    "en": "What to plot"
+  },
+  "cmodChartEntries": {
+    "ar": "عدد الإدخالات",
+    "en": "Number of entries"
+  },
+  "cmodChartStyle": {
+    "ar": "الشكل",
+    "en": "Style"
+  },
+  "cmodChartRange": {
+    "ar": "المدة",
+    "en": "Period"
+  },
+  "cmodChartLine": {
+    "ar": "خط",
+    "en": "Line"
+  },
+  "cmodChartBar": {
+    "ar": "أعمدة",
+    "en": "Bars"
+  },
+  "cmodChartHeat": {
+    "ar": "تقويم",
+    "en": "Calendar"
+  },
+  "cmodChartStreak": {
+    "ar": "سلسلة",
+    "en": "Streak"
+  },
+  "cmodChartEmpty": {
+    "ar": "لا بيانات في هذه المدة بعد",
+    "en": "No data in this period yet"
+  },
+  "cmodRangeDays": {
+    "ar": "{count, plural, =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =1{1 day} other{{count} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodSave": {
+    "ar": "حفظ",
+    "en": "Save"
+  },
+  "cmodCreate": {
+    "ar": "إنشاء",
+    "en": "Create"
+  },
+  "cmodCancel": {
+    "ar": "إلغاء",
+    "en": "Cancel"
+  },
+  "cmodDiscardTitle": {
+    "ar": "تجاهل التغييرات؟",
+    "en": "Discard changes?"
+  },
+  "cmodDiscardBody": {
+    "ar": "لم تُحفظ تعديلاتك على هذه الوحدة.",
+    "en": "Your changes to this module are not saved."
+  },
+  "cmodDiscard": {
+    "ar": "تجاهل",
+    "en": "Discard"
+  },
+  "cmodKeepEditing": {
+    "ar": "متابعة التعديل",
+    "en": "Keep editing"
+  },
+  "cmodPreviewUntitled": {
+    "ar": "وحدة بلا اسم",
+    "en": "Untitled module"
+  },
+  "cmodIssueNameMissing": {
+    "ar": "اكتب اسمًا للوحدة",
+    "en": "Give the module a name"
+  },
+  "cmodIssueNameTooLong": {
+    "ar": "الاسم طويل جدًا",
+    "en": "The name is too long"
+  },
+  "cmodIssueNoFields": {
+    "ar": "أضف حقلًا واحدًا على الأقل",
+    "en": "Add at least one field"
+  },
+  "cmodIssueTooManyFields": {
+    "ar": "الحد الأقصى {max} حقلًا",
+    "en": "{max} fields at most",
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodIssueLabelMissing": {
+    "ar": "حقل بلا اسم",
+    "en": "A field has no name"
+  },
+  "cmodIssueLabelDuplicate": {
+    "ar": "اسم الحقل مكرّر",
+    "en": "Two fields share this name"
+  },
+  "cmodIssueNoOptions": {
+    "ar": "أضف خيارًا واحدًا على الأقل",
+    "en": "Add at least one option"
+  },
+  "cmodIssueOptionLabelMissing": {
+    "ar": "خيار بلا اسم",
+    "en": "An option has no name"
+  },
+  "cmodIssueOptionDuplicate": {
+    "ar": "خيار مكرّر",
+    "en": "Two options share a name"
+  },
+  "cmodIssueRangeInverted": {
+    "ar": "الحد الأدنى أكبر من الأعلى",
+    "en": "The minimum is above the maximum"
+  },
+  "cmodIssueCurrencyCode": {
+    "ar": "رمز العملة غير صالح",
+    "en": "Not a valid currency code"
+  },
+  "cmodMigrationTitle": {
+    "ar": "قبل الحفظ",
+    "en": "Before saving"
+  },
+  "cmodMigrationBlockedTitle": {
+    "ar": "هذا التغيير سيضيّع بيانات",
+    "en": "This change would lose data"
+  },
+  "cmodMigrationBlockedBody": {
+    "ar": "لم يُحفظ شيء. أعد النوع كما كان، أو أضف حقلًا جديدًا بالنوع الذي تريده.",
+    "en": "Nothing was saved. Change the type back, or add a new field with the type you want."
+  },
+  "cmodMigrationOk": {
+    "ar": "حسنًا",
+    "en": "OK"
+  },
+  "cmodMigTypeBlocked": {
+    "ar": "«{field}»: {entries} لا تصلح بنوع «{type}»",
+    "en": "“{field}”: {entries} can’t become “{type}”",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigRatingBlocked": {
+    "ar": "«{field}»: {entries} فيها نجوم أكثر من المقياس الجديد",
+    "en": "“{field}”: {entries} have more stars than the new scale",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigFieldHidden": {
+    "ar": "«{field}» سيُخفى، وتبقى قيمه في {entries}",
+    "en": "“{field}” will be hidden; its values in {entries} are kept",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOptionHidden": {
+    "ar": "الخيارات المحذوفة من «{field}» والمستخدمة ستُخفى ولن تُحذف",
+    "en": "Removed options of “{field}” that are in use will be hidden, not deleted",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigConverted": {
+    "ar": "قيم «{field}» في {entries} ستتحوّل إلى «{type}»",
+    "en": "Values of “{field}” in {entries} will be converted to “{type}”",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigOutOfRange": {
+    "ar": "{entries} في «{field}» خارج الحدود الجديدة وستبقى كما هي",
+    "en": "{entries} in “{field}” are outside the new limits and stay as they are",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodMigNewlyRequired": {
+    "ar": "{entries} بلا قيمة لـ«{field}» الذي صار مطلوبًا",
+    "en": "{entries} have no value for “{field}”, now required",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "entries": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodTypeText": {
+    "ar": "نص",
+    "en": "Text"
+  },
+  "cmodTypeNumber": {
+    "ar": "رقم",
+    "en": "Number"
+  },
+  "cmodTypeDate": {
+    "ar": "تاريخ",
+    "en": "Date"
+  },
+  "cmodTypeTime": {
+    "ar": "وقت",
+    "en": "Time"
+  },
+  "cmodTypeCheckbox": {
+    "ar": "خانة إنجاز",
+    "en": "Checkbox"
+  },
+  "cmodTypeSingle": {
+    "ar": "اختيار واحد",
+    "en": "Single choice"
+  },
+  "cmodTypeMulti": {
+    "ar": "اختيارات متعددة",
+    "en": "Multiple choice"
+  },
+  "cmodTypeRating": {
+    "ar": "تقييم بالنجوم",
+    "en": "Star rating"
+  },
+  "cmodTypeCurrency": {
+    "ar": "مبلغ",
+    "en": "Amount"
+  },
+  "cmodTypeTextHint": {
+    "ar": "ملاحظة، عنوان كتاب…",
+    "en": "A note, a book title…"
+  },
+  "cmodTypeNumberHint": {
+    "ar": "صفحات، دقائق، مرّات…",
+    "en": "Pages, minutes, times…"
+  },
+  "cmodTypeDateHint": {
+    "ar": "موعد أو مناسبة",
+    "en": "An appointment or occasion"
+  },
+  "cmodTypeTimeHint": {
+    "ar": "وقت النوم، وقت البدء…",
+    "en": "Bedtime, start time…"
+  },
+  "cmodTypeCheckboxHint": {
+    "ar": "تمّ أو لم يتمّ",
+    "en": "Done or not"
+  },
+  "cmodTypeSingleHint": {
+    "ar": "خيار واحد من قائمتك",
+    "en": "One option from your list"
+  },
+  "cmodTypeMultiHint": {
+    "ar": "عدّة خيارات من قائمتك",
+    "en": "Several options from your list"
+  },
+  "cmodTypeRatingHint": {
+    "ar": "من نجمتين إلى عشر",
+    "en": "Two to ten stars"
+  },
+  "cmodTypeCurrencyHint": {
+    "ar": "مبلغ بعملة تختارها",
+    "en": "Money in the currency you choose"
+  },
+  "cmodPickType": {
+    "ar": "نوع الحقل",
+    "en": "Field type"
+  },
+  "cmodFieldNew": {
+    "ar": "حقل جديد",
+    "en": "New field"
+  },
+  "cmodFieldEdit": {
+    "ar": "تعديل الحقل",
+    "en": "Edit field"
+  },
+  "cmodFieldLabel": {
+    "ar": "اسم الحقل",
+    "en": "Field name"
+  },
+  "cmodFieldLabelHint": {
+    "ar": "مثال: الصفحات",
+    "en": "e.g. Pages"
+  },
+  "cmodFieldRequired": {
+    "ar": "مطلوب",
+    "en": "Required"
+  },
+  "cmodFieldRequiredHint": {
+    "ar": "لا يُحفظ الإدخال دونه",
+    "en": "An entry can’t be saved without it"
+  },
+  "cmodFieldUnit": {
+    "ar": "الوحدة",
+    "en": "Unit"
+  },
+  "cmodFieldUnitHint": {
+    "ar": "صفحة، دقيقة، كغ…",
+    "en": "pages, min, kg…"
+  },
+  "cmodFieldMin": {
+    "ar": "الحد الأدنى",
+    "en": "Minimum"
+  },
+  "cmodFieldMax": {
+    "ar": "الحد الأعلى",
+    "en": "Maximum"
+  },
+  "cmodFieldNoLimit": {
+    "ar": "بلا حد",
+    "en": "No limit"
+  },
+  "cmodFieldDecimals": {
+    "ar": "الخانات العشرية",
+    "en": "Decimal places"
+  },
+  "cmodFieldScale": {
+    "ar": "المقياس",
+    "en": "Scale"
+  },
+  "cmodFieldCurrency": {
+    "ar": "العملة",
+    "en": "Currency"
+  },
+  "cmodFieldOptions": {
+    "ar": "الخيارات",
+    "en": "Options"
+  },
+  "cmodAddOption": {
+    "ar": "أضف خيارًا",
+    "en": "Add option"
+  },
+  "cmodOptionHint": {
+    "ar": "اسم الخيار",
+    "en": "Option name"
+  },
+  "cmodRemoveOption": {
+    "ar": "احذف الخيار",
+    "en": "Remove option"
+  },
+  "cmodFieldMultiline": {
+    "ar": "نص طويل",
+    "en": "Long text"
+  },
+  "cmodFieldMultilineHint": {
+    "ar": "يتّسع لعدّة أسطر",
+    "en": "Room for several lines"
+  },
+  "cmodFieldDelete": {
+    "ar": "احذف الحقل",
+    "en": "Delete field"
+  },
+  "cmodFieldCopyLabel": {
+    "ar": "{label} (نسخة)",
+    "en": "{label} (copy)",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldTypeNote": {
+    "ar": "إن غيّرت النوع تتحوّل القيم القديمة حين يمكن ذلك، وإلا لا يُحفظ التغيير.",
+    "en": "Changing the type converts old values when possible; otherwise the change is not saved."
+  },
+  "cmodFieldOptionsCount": {
+    "ar": "{count, plural, =0{بلا خيارات} =1{خيار واحد} =2{خياران} few{{count} خيارات} many{{count} خيارًا} other{{count} خيار}}",
+    "en": "{count, plural, =0{no options} =1{1 option} other{{count} options}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodFieldRange": {
+    "ar": "{min} – {max}",
+    "en": "{min} – {max}",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtLeast": {
+    "ar": "من {min}",
+    "en": "from {min}",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldAtMost": {
+    "ar": "حتى {max}",
+    "en": "up to {max}",
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDeleted": {
+    "ar": "حُذف «{name}» من النموذج",
+    "en": "Removed “{name}” from the form",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodFieldDuplicated": {
+    "ar": "نُسخ الحقل",
+    "en": "Field duplicated"
+  },
+  "cmodGalleryTitle": {
+    "ar": "ابدأ وحدة",
+    "en": "Start a module"
+  },
+  "cmodGallerySubtitle": {
+    "ar": "من الصفر أو من قالب، وكل شيء قابل للتعديل",
+    "en": "From scratch or a template – everything stays editable"
+  },
+  "cmodBlankTracker": {
+    "ar": "متتبّع فارغ",
+    "en": "Blank tracker"
+  },
+  "cmodBlankList": {
+    "ar": "قائمة فارغة",
+    "en": "Blank list"
+  },
+  "cmodTemplatesHeader": {
+    "ar": "قوالب للبدء",
+    "en": "Starter templates"
+  },
+  "cmodTplReadingLog": {
+    "ar": "سجلّ القراءة",
+    "en": "Reading log"
+  },
+  "cmodTplReadingLogDesc": {
+    "ar": "الكتاب والصفحات وتقييمك",
+    "en": "Book, pages and your rating"
+  },
+  "cmodTplDhikr": {
+    "ar": "أذكار بعد الصلاة",
+    "en": "Dhikr after prayer"
+  },
+  "cmodTplDhikrDesc": {
+    "ar": "كم مرّة ذكرت الله، وبعد أي صلاة",
+    "en": "How many times, and after which prayer"
+  },
+  "cmodTplHabit": {
+    "ar": "عادة يومية",
+    "en": "Daily habit"
+  },
+  "cmodTplHabitDesc": {
+    "ar": "لمسة واحدة كل يوم، وسلسلة تكبر",
+    "en": "One tap a day, and a growing streak"
+  },
+  "cmodTplHabitList": {
+    "ar": "قائمة عادات",
+    "en": "Habit list"
+  },
+  "cmodTplHabitListDesc": {
+    "ar": "عادات تريد بناءها وكم تتكرّر",
+    "en": "Habits to build, and how often"
+  },
+  "cmodTplSleep": {
+    "ar": "سجلّ النوم",
+    "en": "Sleep log"
+  },
+  "cmodTplSleepDesc": {
+    "ar": "النوم والاستيقاظ والساعات والجودة",
+    "en": "Bedtime, wake-up, hours and quality"
+  },
+  "cmodTplGifts": {
+    "ar": "أفكار هدايا",
+    "en": "Gift ideas"
+  },
+  "cmodTplGiftsDesc": {
+    "ar": "الفكرة ولمن والميزانية والمناسبة",
+    "en": "The idea, who for, budget and occasion"
+  },
+  "cmodTplBook": {
+    "ar": "الكتاب",
+    "en": "Book"
+  },
+  "cmodTplPages": {
+    "ar": "الصفحات",
+    "en": "Pages"
+  },
+  "cmodTplRating": {
+    "ar": "التقييم",
+    "en": "Rating"
+  },
+  "cmodTplUnitPages": {
+    "ar": "صفحة",
+    "en": "pages"
+  },
+  "cmodTplAfterPrayer": {
+    "ar": "بعد صلاة",
+    "en": "After prayer"
+  },
+  "cmodTplCount": {
+    "ar": "العدد",
+    "en": "Count"
+  },
+  "cmodTplUnitTimes": {
+    "ar": "مرّة",
+    "en": "times"
+  },
+  "cmodTplDone": {
+    "ar": "تمّ",
+    "en": "Done"
+  },
+  "cmodTplNote": {
+    "ar": "ملاحظة",
+    "en": "Note"
+  },
+  "cmodTplHabitItem": {
+    "ar": "العادة",
+    "en": "Habit"
+  },
+  "cmodTplFrequency": {
+    "ar": "التكرار",
+    "en": "How often"
+  },
+  "cmodTplDaily": {
+    "ar": "يوميًا",
+    "en": "Daily"
+  },
+  "cmodTplWeekly": {
+    "ar": "أسبوعيًا",
+    "en": "Weekly"
+  },
+  "cmodTplMonthly": {
+    "ar": "شهريًا",
+    "en": "Monthly"
+  },
+  "cmodTplBedtime": {
+    "ar": "وقت النوم",
+    "en": "Bedtime"
+  },
+  "cmodTplWake": {
+    "ar": "وقت الاستيقاظ",
+    "en": "Wake-up"
+  },
+  "cmodTplHours": {
+    "ar": "ساعات النوم",
+    "en": "Hours"
+  },
+  "cmodTplUnitHours": {
+    "ar": "ساعة",
+    "en": "h"
+  },
+  "cmodTplQuality": {
+    "ar": "الجودة",
+    "en": "Quality"
+  },
+  "cmodTplIdea": {
+    "ar": "الفكرة",
+    "en": "Idea"
+  },
+  "cmodTplFor": {
+    "ar": "لمن",
+    "en": "Who for"
+  },
+  "cmodTplBudget": {
+    "ar": "الميزانية",
+    "en": "Budget"
+  },
+  "cmodTplOccasion": {
+    "ar": "المناسبة",
+    "en": "Occasion"
+  },
+  "cmodTplNotes": {
+    "ar": "ملاحظات",
+    "en": "Notes"
+  },
+  "cmodAddEntry": {
+    "ar": "إدخال جديد",
+    "en": "New entry"
+  },
+  "cmodAddItem": {
+    "ar": "عنصر جديد",
+    "en": "New item"
+  },
+  "cmodEntriesSection": {
+    "ar": "الإدخالات",
+    "en": "Entries"
+  },
+  "cmodItemsSection": {
+    "ar": "العناصر",
+    "en": "Items"
+  },
+  "cmodDoneSection": {
+    "ar": "المنجزة",
+    "en": "Done"
+  },
+  "cmodClearDone": {
+    "ar": "امسح المنجزة",
+    "en": "Clear done"
+  },
+  "cmodToday": {
+    "ar": "اليوم",
+    "en": "Today"
+  },
+  "cmodYesterday": {
+    "ar": "أمس",
+    "en": "Yesterday"
+  },
+  "cmodEntriesEmpty": {
+    "ar": "لا إدخالات بعد. أول إدخال يبدأ الحكاية.",
+    "en": "No entries yet. The first one starts the story."
+  },
+  "cmodItemsEmpty": {
+    "ar": "القائمة فارغة. أضف أول عنصر.",
+    "en": "The list is empty. Add the first item."
+  },
+  "cmodAllDone": {
+    "ar": "أنجزت كل شيء، ما شاء الله",
+    "en": "All done – well done"
+  },
+  "cmodStatStreak": {
+    "ar": "السلسلة",
+    "en": "Streak"
+  },
+  "cmodStatBest": {
+    "ar": "الأفضل",
+    "en": "Best"
+  },
+  "cmodStatTotal": {
+    "ar": "المجموع",
+    "en": "Total"
+  },
+  "cmodStatAverage": {
+    "ar": "المتوسط",
+    "en": "Average"
+  },
+  "cmodStatActive": {
+    "ar": "أيام نشطة",
+    "en": "Active days"
+  },
+  "cmodStatEntries": {
+    "ar": "الإدخالات",
+    "en": "Entries"
+  },
+  "cmodStatRate": {
+    "ar": "نسبة الإنجاز",
+    "en": "Check-in rate"
+  },
+  "cmodDays": {
+    "ar": "{count, plural, =0{٠ يوم} =1{يوم} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =1{1 day} other{{count} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodReminders": {
+    "ar": "التذكيرات",
+    "en": "Reminders"
+  },
+  "cmodAddReminder": {
+    "ar": "أضف تذكيرًا",
+    "en": "Add reminder"
+  },
+  "cmodRemindersEmpty": {
+    "ar": "ذكّرني بعد صلاة أو في وقت أحدّده",
+    "en": "Remind me after a prayer or at a set time"
+  },
+  "cmodReminderPaused": {
+    "ar": "متوقّف",
+    "en": "Paused"
+  },
+  "cmodReminderToggle": {
+    "ar": "تشغيل التذكير",
+    "en": "Reminder on"
+  },
+  "cmodModuleMenu": {
+    "ar": "خيارات الوحدة",
+    "en": "Module options"
+  },
+  "cmodHiddenValue": {
+    "ar": "{label} (مخفي)",
+    "en": "{label} (hidden)",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodNotifyGroup": {
+    "ar": "المتتبّعات والقوائم",
+    "en": "Trackers & lists"
+  },
+  "cmodNotifyChannel": {
+    "ar": "تذكيرات المتتبّعات والقوائم",
+    "en": "Tracker & list reminders"
+  },
+  "cmodNotifyChannelDescription": {
+    "ar": "تذكيرات لطيفة لتسجيل متتبّعاتك ومراجعة قوائمك",
+    "en": "Gentle nudges to log your trackers and review your lists"
+  },
+  "cmodNotifyBodyTracker": {
+    "ar": "حان وقت التسجيل",
+    "en": "Time to log it"
+  },
+  "cmodNotifyBodyList": {
+    "ar": "ألقِ نظرة على قائمتك",
+    "en": "Take a look at your list"
+  },
+  "cmodEntryNew": {
+    "ar": "إدخال جديد",
+    "en": "New entry"
+  },
+  "cmodEntryEdit": {
+    "ar": "تعديل الإدخال",
+    "en": "Edit entry"
+  },
+  "cmodItemNew": {
+    "ar": "عنصر جديد",
+    "en": "New item"
+  },
+  "cmodItemEdit": {
+    "ar": "تعديل العنصر",
+    "en": "Edit item"
+  },
+  "cmodEntryWhen": {
+    "ar": "متى",
+    "en": "When"
+  },
+  "cmodEntryDone": {
+    "ar": "منجز",
+    "en": "Done"
+  },
+  "cmodEntryCounter": {
+    "ar": "هذه الوحدة عدّاد: الحفظ يسجّل مرّة واحدة.",
+    "en": "This module is a counter: saving logs one."
+  },
+  "cmodErrRequired": {
+    "ar": "هذا الحقل مطلوب",
+    "en": "This field is required"
+  },
+  "cmodErrNumber": {
+    "ar": "اكتب رقمًا",
+    "en": "Enter a number"
+  },
+  "cmodErrWhole": {
+    "ar": "رقم صحيح فقط",
+    "en": "Whole numbers only"
+  },
+  "cmodErrPrecise": {
+    "ar": "{count} خانات عشرية على الأكثر",
+    "en": "At most {count} decimal places",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMin": {
+    "ar": "لا يقلّ عن {value}",
+    "en": "At least {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrMax": {
+    "ar": "لا يزيد على {value}",
+    "en": "At most {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodErrDate": {
+    "ar": "تاريخ غير صالح",
+    "en": "Not a valid date"
+  },
+  "cmodErrTime": {
+    "ar": "وقت غير صالح",
+    "en": "Not a valid time"
+  },
+  "cmodErrOption": {
+    "ar": "اختر من القائمة",
+    "en": "Pick from the list"
+  },
+  "cmodErrScale": {
+    "ar": "خارج المقياس",
+    "en": "Outside the scale"
+  },
+  "cmodErrTooLong": {
+    "ar": "النص طويل جدًا",
+    "en": "The text is too long"
+  },
+  "cmodPickDate": {
+    "ar": "اختر تاريخًا",
+    "en": "Pick a date"
+  },
+  "cmodPickTime": {
+    "ar": "اختر وقتًا",
+    "en": "Pick a time"
+  },
+  "cmodClear": {
+    "ar": "مسح",
+    "en": "Clear"
+  },
+  "cmodYes": {
+    "ar": "نعم",
+    "en": "Yes"
+  },
+  "cmodNo": {
+    "ar": "لا",
+    "en": "No"
+  },
+  "cmodChecked": {
+    "ar": "تمّ",
+    "en": "Done"
+  },
+  "cmodUnchecked": {
+    "ar": "لم يتمّ",
+    "en": "Not done"
+  },
+  "cmodCardTitle": {
+    "ar": "متتبّعاتك هنا",
+    "en": "Your trackers here"
+  },
+  "cmodCardSeeAll": {
+    "ar": "عرض الكل",
+    "en": "See all"
+  },
+  "cmodCardEmpty": {
+    "ar": "أنشئ متتبّعًا لهذا العالم",
+    "en": "Create a tracker for this world"
+  },
+  "cmodCardEmptyHint": {
+    "ar": "عدّاد، أو سجلّ، أو قائمة: بحقولك أنت",
+    "en": "A counter, a log or a list – with your own fields"
+  },
+  "cmodExportDate": {
+    "ar": "التاريخ",
+    "en": "date"
+  },
+  "cmodExportTime": {
+    "ar": "الوقت",
+    "en": "time"
+  },
+  "cmodExportDone": {
+    "ar": "منجز",
+    "en": "done"
+  },
+  "cmodExportEntries": {
+    "ar": "الإدخالات",
+    "en": "Entries"
+  },
+  "cmodExportLastEntry": {
+    "ar": "آخر إدخال",
+    "en": "Last entry"
+  },
+  "cmodExportOpen": {
+    "ar": "متبقٍّ",
+    "en": "Open"
+  },
+  "cmodExportLastDays": {
+    "ar": "{count, plural, =1{آخر يوم} =2{آخر يومين} few{آخر {count} أيام} many{آخر {count} يومًا} other{آخر {count} يوم}}",
+    "en": "{count, plural, =1{Last day} other{Last {count} days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportActiveDays": {
+    "ar": "{count, plural, =0{لا أيام نشطة} =1{يوم نشط واحد} =2{يومان نشطان} few{{count} أيام نشطة} many{{count} يومًا نشطًا} other{{count} يوم نشط}}",
+    "en": "{count, plural, =1{1 active day} other{{count} active days}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cmodExportTotal": {
+    "ar": "المجموع {value}",
+    "en": "total {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportAverage": {
+    "ar": "المتوسط {value}",
+    "en": "average {value}",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportStreak": {
+    "ar": "السلسلة {current} (الأفضل {best})",
+    "en": "streak {current} (best {best})",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "best": {
+        "type": "String"
+      }
+    }
+  },
+  "cmodExportHidden": {
+    "ar": "مخفي",
+    "en": "hidden"
+  }
+}

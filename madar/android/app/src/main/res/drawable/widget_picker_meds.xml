@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The meds widget in the widget picker of Android 8–11 (previewImage;
+     Android 12+ shows @layout/widget_preview_meds): the 4×2 card as a
+     wireframe – title and count, the next-dose line, two doses taken, one
+     to take, each with its time. Colours follow light / dark mode. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="120dp"
+    android:viewportWidth="250"
+    android:viewportHeight="120">
+    <!-- Card -->
+    <path
+        android:fillColor="@color/widget_surface"
+        android:strokeColor="@color/widget_stroke"
+        android:strokeWidth="1"
+        android:pathData="M22,0.5H228A21.5,21.5 0 0,1 249.5,22V98A21.5,21.5 0 0,1 228,119.5H22A21.5,21.5 0 0,1 0.5,98V22A21.5,21.5 0 0,1 22,0.5Z" />
+    <!-- Title, count -->
+    <path
+        android:fillColor="@color/widget_text_primary"
+        android:pathData="M19,13H85A5,5 0 0,1 85,23H19A5,5 0 0,1 19,13Z" />
+    <path
+        android:fillColor="@color/widget_accent"
+        android:pathData="M214,13H231A5,5 0 0,1 231,23H214A5,5 0 0,1 214,13Z" />
+    <!-- Next dose -->
+    <path
+        android:fillColor="@color/widget_text_secondary"
+        android:pathData="M17.5,30H125.5A3.5,3.5 0 0,1 125.5,37H17.5A3.5,3.5 0 0,1 17.5,30Z" />
+    <!-- Two doses taken (muted) -->
+    <path
+        android:strokeColor="@color/widget_text_muted"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M15,53.5L18.5,57L25,50 M15,75.5L18.5,79L25,72" />
+    <path
+        android:fillColor="@color/widget_text_muted"
+        android:pathData="M36,51H126A3,3 0 0,1 126,57H36A3,3 0 0,1 36,51Z M36,73H112A3,3 0 0,1 112,79H36A3,3 0 0,1 36,73Z" />
+    <!-- One to take -->
+    <path
+        android:strokeColor="@color/widget_accent"
+        android:strokeWidth="1.8"
+        android:fillColor="#00000000"
+        android:pathData="M20,91a5,5 0 1,0 0,10a5,5 0 1,0 0,-10Z" />
+    <path
+        android:fillColor="@color/widget_text_primary"
+        android:pathData="M36,93H112A3,3 0 0,1 112,99H36A3,3 0 0,1 36,93Z" />
+    <!-- Times -->
+    <path
+        android:fillColor="@color/widget_text_secondary"
+        android:pathData="M200,51H230A3,3 0 0,1 230,57H200A3,3 0 0,1 200,51Z M200,73H230A3,3 0 0,1 230,79H200A3,3 0 0,1 200,73Z M196,93H230A3,3 0 0,1 230,99H196A3,3 0 0,1 196,93Z" />
+</vector>

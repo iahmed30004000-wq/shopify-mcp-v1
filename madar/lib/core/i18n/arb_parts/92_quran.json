@@ -1,0 +1,838 @@
+{
+  "quranTitle": {
+    "ar": "القرآن الكريم",
+    "en": "The Holy Quran",
+    "description": "Title of the Quran home screen"
+  },
+  "quranSurahTitle": {
+    "ar": "سورة {name}",
+    "en": "Surah {name}",
+    "description": "A sura's title, e.g. Surah Al-Baqarah",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quranMakki": {
+    "ar": "مكية",
+    "en": "Makki",
+    "description": "Sura revealed in Makkah"
+  },
+  "quranMadani": {
+    "ar": "مدنية",
+    "en": "Madani",
+    "description": "Sura revealed in Madinah"
+  },
+  "quranAyatCount": {
+    "ar": "{count, plural, =0{لا آيات} =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}",
+    "en": "{count, plural, =0{No ayat} =1{1 ayah} other{{count} ayat}}",
+    "description": "Number of ayat (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPageLabel": {
+    "ar": "صفحة {page}",
+    "en": "Page {page}",
+    "description": "Mushaf page number (pre-formatted)",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "quranPageCounter": {
+    "ar": "صفحة {page} من {total}",
+    "en": "Page {page} of {total}",
+    "description": "Position in the 604-page mushaf",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quranJuzLabel": {
+    "ar": "الجزء {juz}",
+    "en": "Juz {juz}",
+    "description": "Juz number (pre-formatted)",
+    "placeholders": {
+      "juz": {
+        "type": "String"
+      }
+    }
+  },
+  "quranHizbLabel": {
+    "ar": "الحزب {hizb}",
+    "en": "Hizb {hizb}",
+    "description": "Hizb number (pre-formatted)",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranAyahLabel": {
+    "ar": "الآية {ayah}",
+    "en": "Ayah {ayah}",
+    "description": "Ayah number (pre-formatted)",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranAyahOfSurah": {
+    "ar": "{surah}، الآية {ayah}",
+    "en": "{surah} · Ayah {ayah}",
+    "description": "A place in the Quran: sura name and ayah number",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranJuzHizb": {
+    "ar": "الجزء {juz}، الحزب {hizb}",
+    "en": "Juz {juz} · Hizb {hizb}",
+    "description": "Mushaf page header: juz and hizb",
+    "placeholders": {
+      "juz": {
+        "type": "String"
+      },
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranQuarter1": {
+    "ar": "ربع الحزب {hizb}",
+    "en": "¼ Hizb {hizb}",
+    "description": "Second quarter of a hizb",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranQuarter2": {
+    "ar": "نصف الحزب {hizb}",
+    "en": "½ Hizb {hizb}",
+    "description": "Middle of a hizb",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranQuarter3": {
+    "ar": "ثلاثة أرباع الحزب {hizb}",
+    "en": "¾ Hizb {hizb}",
+    "description": "Last quarter of a hizb",
+    "placeholders": {
+      "hizb": {
+        "type": "String"
+      }
+    }
+  },
+  "quranShareRef": {
+    "ar": "[{surah}: {ayah}]",
+    "en": "({surah}, ayah {ayah})",
+    "description": "Reference after a copied / shared ayah: sura name and ayah number (pre-formatted)",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranLoadError": {
+    "ar": "تعذّر تحميل المصحف",
+    "en": "Couldn't load the mushaf",
+    "description": "The bundled Quran data failed to load"
+  },
+  "quranRetry": {
+    "ar": "إعادة المحاولة",
+    "en": "Try again",
+    "description": "Retry button"
+  },
+  "quranTabSurahs": {
+    "ar": "السور",
+    "en": "Surahs",
+    "description": "Home tab: list of suras"
+  },
+  "quranTabJuz": {
+    "ar": "الأجزاء",
+    "en": "Juz",
+    "description": "Home tab: juz and hizb list"
+  },
+  "quranTabBookmarks": {
+    "ar": "العلامات",
+    "en": "Bookmarks",
+    "description": "Home tab: bookmarks"
+  },
+  "quranSearchHint": {
+    "ar": "ابحث في القرآن…",
+    "en": "Search the Quran…",
+    "description": "Placeholder of the search entry"
+  },
+  "quranGoTo": {
+    "ar": "انتقال",
+    "en": "Go to",
+    "description": "Button: jump to a sura / ayah / page"
+  },
+  "quranGoToTitle": {
+    "ar": "انتقل إلى",
+    "en": "Go to",
+    "description": "Title of the go-to sheet"
+  },
+  "quranGoToHint": {
+    "ar": "مثل {a} أو «البقرة {b}» أو «صفحة {c}»",
+    "en": "e.g. {a}, “Baqarah {b}” or “page {c}”",
+    "description": "Examples under the go-to field (numbers pre-formatted)",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "quranGoToNone": {
+    "ar": "لا نتيجة — جرّب رقم سورة وآية مثل {example}",
+    "en": "Nothing matches — try a sura and ayah like {example}",
+    "description": "Go-to found nothing",
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "quranGoToOpen": {
+    "ar": "فتح",
+    "en": "Open",
+    "description": "Open a go-to result"
+  },
+  "quranBookmarksEmptyTitle": {
+    "ar": "لا علامات بعد",
+    "en": "No bookmarks yet",
+    "description": "Empty bookmarks tab title"
+  },
+  "quranBookmarksEmptyBody": {
+    "ar": "المس آية في المصحف ثم اختر «علامة» لتحفظ موضعها.",
+    "en": "Tap an ayah in the reader, then choose “Bookmark” to keep its place.",
+    "description": "Empty bookmarks tab body"
+  },
+  "quranBookmarkDeleted": {
+    "ar": "حُذفت العلامة",
+    "en": "Bookmark removed",
+    "description": "Undo toast after deleting a bookmark"
+  },
+  "quranBookmarkSaved": {
+    "ar": "حُفظت العلامة",
+    "en": "Bookmark saved",
+    "description": "Toast after saving a bookmark"
+  },
+  "quranBookmarkEdit": {
+    "ar": "تعديل العلامة",
+    "en": "Edit bookmark",
+    "description": "Title / action: edit a bookmark"
+  },
+  "quranBookmarkNew": {
+    "ar": "علامة جديدة",
+    "en": "New bookmark",
+    "description": "Title of the new-bookmark sheet"
+  },
+  "quranBookmarkLabel": {
+    "ar": "الاسم",
+    "en": "Label",
+    "description": "Bookmark label field"
+  },
+  "quranBookmarkLabelHint": {
+    "ar": "مثل: وِرد الفجر",
+    "en": "e.g. Fajr wird",
+    "description": "Hint of the bookmark label field"
+  },
+  "quranBookmarkNote": {
+    "ar": "ملاحظة",
+    "en": "Note",
+    "description": "Bookmark note field"
+  },
+  "quranBookmarkColor": {
+    "ar": "اللون",
+    "en": "Colour",
+    "description": "Bookmark colour field"
+  },
+  "quranBookmarkRemove": {
+    "ar": "إزالة العلامة",
+    "en": "Remove bookmark",
+    "description": "Delete a bookmark"
+  },
+  "quranJuzQuarters": {
+    "ar": "أرباع الجزء",
+    "en": "Quarters of this juz",
+    "description": "Semantic label: expand a juz into its hizb quarters"
+  },
+  "quranContinueTitle": {
+    "ar": "تابع القراءة",
+    "en": "Continue reading",
+    "description": "Continue-reading card title"
+  },
+  "quranContinueEmpty": {
+    "ar": "ابدأ رحلتك مع كتاب الله",
+    "en": "Begin your journey with the Book of Allah",
+    "description": "Continue card when nothing was read yet"
+  },
+  "quranContinueStart": {
+    "ar": "ابدأ بالفاتحة",
+    "en": "Start with Al-Fatihah",
+    "description": "Continue card action when nothing was read yet"
+  },
+  "quranContinueAction": {
+    "ar": "تابع",
+    "en": "Continue",
+    "description": "Continue card action"
+  },
+  "quranLastReadAt": {
+    "ar": "آخر قراءة {when}",
+    "en": "Last read {when}",
+    "description": "When the reader was last open (a formatted date)",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "quranModeMushaf": {
+    "ar": "المصحف",
+    "en": "Mushaf",
+    "description": "Reader layout: mushaf pages"
+  },
+  "quranModeList": {
+    "ar": "الآيات",
+    "en": "Verses",
+    "description": "Reader layout: verse list"
+  },
+  "quranShowList": {
+    "ar": "عرض الآيات",
+    "en": "Show as verses",
+    "description": "Switch the reader to the verse list"
+  },
+  "quranShowMushaf": {
+    "ar": "عرض المصحف",
+    "en": "Show as mushaf pages",
+    "description": "Switch the reader to mushaf pages"
+  },
+  "quranSettingsTitle": {
+    "ar": "إعدادات القراءة",
+    "en": "Reading settings",
+    "description": "Reader settings sheet title / button"
+  },
+  "quranReaderLayout": {
+    "ar": "طريقة العرض",
+    "en": "Layout",
+    "description": "Reader settings: layout"
+  },
+  "quranFontSize": {
+    "ar": "حجم الخط",
+    "en": "Text size",
+    "description": "Reader settings: Quran text size"
+  },
+  "quranFontLarger": {
+    "ar": "تكبير الخط",
+    "en": "Larger text",
+    "description": "Increase the Quran text size"
+  },
+  "quranFontSmaller": {
+    "ar": "تصغير الخط",
+    "en": "Smaller text",
+    "description": "Decrease the Quran text size"
+  },
+  "quranTajweedColors": {
+    "ar": "ألوان التجويد",
+    "en": "Tajweed colours",
+    "description": "Reader settings: colour tajweed rules"
+  },
+  "quranTajweedSection": {
+    "ar": "التجويد",
+    "en": "Tajweed",
+    "description": "Reader settings: tajweed section title"
+  },
+  "quranTajweedLegend": {
+    "ar": "دليل الألوان",
+    "en": "Colour guide",
+    "description": "Open the tajweed colour legend"
+  },
+  "quranTajweedSource": {
+    "ar": "مصدر التجويد",
+    "en": "Tajweed source",
+    "description": "Reader settings: where tajweed colours come from"
+  },
+  "quranTajweedSourceBundled": {
+    "ar": "مدمج في التطبيق",
+    "en": "Built in",
+    "description": "Tajweed from the bundled offline data"
+  },
+  "quranTajweedSourceQuranCom": {
+    "ar": "Quran.com عند تنزيله",
+    "en": "Quran.com when downloaded",
+    "description": "Tajweed from downloaded Quran.com text"
+  },
+  "quranDownloadTajweed": {
+    "ar": "تنزيل تجويد هذه السورة من Quran.com",
+    "en": "Download this surah's tajweed from Quran.com",
+    "description": "Explicit download of the Quran.com tajweed text"
+  },
+  "quranTranslation": {
+    "ar": "الترجمة",
+    "en": "Translation",
+    "description": "Reader settings: translation section"
+  },
+  "quranTranslationShow": {
+    "ar": "إظهار الترجمة تحت الآيات",
+    "en": "Show the translation under each ayah",
+    "description": "Reader settings: translation toggle"
+  },
+  "quranTranslationName": {
+    "ar": "الإنجليزية — صحيح إنترناشونال",
+    "en": "English — Saheeh International",
+    "description": "Name of the translation offered"
+  },
+  "quranTranslationMissing": {
+    "ar": "ترجمة هذه السورة غير منزّلة بعد",
+    "en": "This surah's translation isn't downloaded yet",
+    "description": "Verse list: translation not on the device"
+  },
+  "quranDownloadTranslation": {
+    "ar": "تنزيل الترجمة",
+    "en": "Download translation",
+    "description": "Button: download the translation of this sura"
+  },
+  "quranDownloadNote": {
+    "ar": "يُنزَّل من Quran.com مرة واحدة ويبقى على جهازك.",
+    "en": "Downloaded once from Quran.com and kept on your device.",
+    "description": "Explains a download (network only on this tap)"
+  },
+  "quranDownloading": {
+    "ar": "جارٍ التنزيل…",
+    "en": "Downloading…",
+    "description": "A download is running"
+  },
+  "quranDownloaded": {
+    "ar": "مُنزَّل",
+    "en": "Downloaded",
+    "description": "A download is on the device"
+  },
+  "quranDownloadOffline": {
+    "ar": "لا اتصال بالإنترنت — حاول لاحقًا",
+    "en": "No internet connection — try again later",
+    "description": "Download failed: offline"
+  },
+  "quranDownloadFailed": {
+    "ar": "تعذّر التنزيل، حاول مرة أخرى",
+    "en": "The download failed, try again",
+    "description": "Download failed: server / format"
+  },
+  "quranNextSurah": {
+    "ar": "التالية: {name}",
+    "en": "Next: {name}",
+    "description": "Button at the end of a sura's verse list",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quranPrevSurah": {
+    "ar": "السابقة: {name}",
+    "en": "Previous: {name}",
+    "description": "Button at the start of a sura's verse list",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quranNowReciting": {
+    "ar": "تُتلى الآن",
+    "en": "Now reciting",
+    "description": "Marks the ayah being recited"
+  },
+  "quranSajdah": {
+    "ar": "سجدة تلاوة",
+    "en": "Prostration of recitation",
+    "description": "Marks a sajdah ayah"
+  },
+  "quranAyahSemantics": {
+    "ar": "الآية {ayah} من سورة {surah}",
+    "en": "Ayah {ayah} of Surah {surah}",
+    "description": "Screen reader label of an ayah",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      },
+      "surah": {
+        "type": "String"
+      }
+    }
+  },
+  "quranActionPlay": {
+    "ar": "استمع من هنا",
+    "en": "Play from here",
+    "description": "Ayah action: recite from this ayah"
+  },
+  "quranActionRepeat": {
+    "ar": "كرّر الآية",
+    "en": "Repeat ayah",
+    "description": "Ayah action: repeat this ayah"
+  },
+  "quranRepeatTimes": {
+    "ar": "{count, plural, =1{مرة} =2{مرتين} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =1{once} =2{twice} other{{count} times}}",
+    "description": "How many times to repeat an ayah (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActionBookmark": {
+    "ar": "علامة",
+    "en": "Bookmark",
+    "description": "Ayah action: bookmark"
+  },
+  "quranActionCopy": {
+    "ar": "نسخ",
+    "en": "Copy",
+    "description": "Ayah action: copy the text"
+  },
+  "quranCopied": {
+    "ar": "نُسخت الآية",
+    "en": "Ayah copied",
+    "description": "Toast after copying an ayah"
+  },
+  "quranActionShare": {
+    "ar": "مشاركة",
+    "en": "Share",
+    "description": "Ayah action: share the text"
+  },
+  "quranActionHifz": {
+    "ar": "أضف إلى الحفظ",
+    "en": "Add to Hifz",
+    "description": "Ayah action: add to memorisation"
+  },
+  "quranHifzAdded": {
+    "ar": "أُضيفت إلى الحفظ",
+    "en": "Added to Hifz",
+    "description": "Toast after adding an ayah to Hifz"
+  },
+  "quranActionTafsir": {
+    "ar": "التفسير",
+    "en": "Tafsir",
+    "description": "Ayah action: tafsir"
+  },
+  "quranTafsirSoon": {
+    "ar": "التفسير قادم قريبًا بإذن الله",
+    "en": "Tafsir is coming soon, in sha Allah",
+    "description": "Tafsir is not available yet"
+  },
+  "quranSoon": {
+    "ar": "قريبًا",
+    "en": "Soon",
+    "description": "Badge on a feature that is not ready"
+  },
+  "quranSearchTitle": {
+    "ar": "البحث في القرآن",
+    "en": "Search the Quran",
+    "description": "Search screen title"
+  },
+  "quranSearchFieldHint": {
+    "ar": "كلمة أو جزء من آية",
+    "en": "A word or part of an ayah",
+    "description": "Search field placeholder"
+  },
+  "quranSearchIntro": {
+    "ar": "يبحث في النص العربي متجاهلًا التشكيل والهمزات وصور الألف.",
+    "en": "Searches the Arabic text, ignoring diacritics, hamza and the forms of alef.",
+    "description": "Explains how the search matches"
+  },
+  "quranSearchResults": {
+    "ar": "{count, plural, =0{لا نتائج} =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}",
+    "en": "{count, plural, =0{No results} =1{1 ayah} other{{count} ayat}}",
+    "description": "Number of ayat found (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSearchOccurrences": {
+    "ar": "{count, plural, =0{لا مواضع} =1{موضع واحد} =2{موضعان} few{{count} مواضع} many{{count} موضعًا} other{{count} موضع}}",
+    "en": "{count, plural, =0{No matches} =1{1 match} other{{count} matches}}",
+    "description": "Number of places the words occur (digits localised by the caller)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSearchShowingFirst": {
+    "ar": "تُعرض أول {count}",
+    "en": "Showing the first {count}",
+    "description": "The result list is capped (number pre-formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "quranSearchTooShort": {
+    "ar": "اكتب حرفين على الأقل",
+    "en": "Type at least two letters",
+    "description": "Search query too short"
+  },
+  "quranSearchNoResults": {
+    "ar": "لا توجد آية بهذه الكلمات",
+    "en": "No ayah contains these words",
+    "description": "Search found nothing"
+  },
+  "quranSearchPreparing": {
+    "ar": "يُجهَّز فهرس البحث…",
+    "en": "Preparing the search index…",
+    "description": "Search index is being built"
+  },
+  "quranLegendTitle": {
+    "ar": "دليل ألوان التجويد",
+    "en": "Tajweed colour guide",
+    "description": "Legend sheet title"
+  },
+  "quranLegendNote": {
+    "ar": "الألوان عون على التعلّم، والتلقي من قارئ متقن هو الأصل.",
+    "en": "The colours are a learning aid; learning from a qualified reciter comes first.",
+    "description": "Legend sheet note"
+  },
+  "quranLegendCredits": {
+    "ar": "النص القرآني من مشروع تنزيل، وعلامات التجويد من مشروع quran-tajweed (CC BY).",
+    "en": "Quran text from the Tanzil Project; tajweed marks from the quran-tajweed project (CC BY).",
+    "description": "Credits line in the legend sheet"
+  },
+  "quranFamilySilent": {
+    "ar": "ما لا يُنطق",
+    "en": "Not pronounced",
+    "description": "Legend group"
+  },
+  "quranFamilyMadd": {
+    "ar": "المدود",
+    "en": "Prolongation (madd)",
+    "description": "Legend group"
+  },
+  "quranFamilyGhunnah": {
+    "ar": "الغنة",
+    "en": "Nasalisation (ghunnah)",
+    "description": "Legend group"
+  },
+  "quranFamilyMerge": {
+    "ar": "الإدغام بلا غنة",
+    "en": "Merging without ghunnah",
+    "description": "Legend group"
+  },
+  "quranFamilyQalqalah": {
+    "ar": "القلقلة",
+    "en": "Echo (qalqalah)",
+    "description": "Legend group"
+  },
+  "quranRuleHamzatWasl": {
+    "ar": "همزة الوصل",
+    "en": "Hamzat al-wasl",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleHamzatWaslHint": {
+    "ar": "تُكتب ولا تُنطق عند وصل الكلام",
+    "en": "Written, not pronounced when joined to what precedes",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleLamShamsiyyah": {
+    "ar": "اللام الشمسية",
+    "en": "Lam shamsiyyah",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleLamShamsiyyahHint": {
+    "ar": "لام «ال» لا تُنطق قبل الحرف الشمسي",
+    "en": "The lam of the article is silent before a sun letter",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleSilent": {
+    "ar": "حرف لا يُنطق",
+    "en": "Silent letter",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleSilentHint": {
+    "ar": "يُكتب ولا يُقرأ",
+    "en": "Written but not read",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddNatural": {
+    "ar": "مد طبيعي",
+    "en": "Natural madd",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddNaturalHint": {
+    "ar": "حركتان",
+    "en": "Two counts",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddPermissible": {
+    "ar": "مد عارض أو لين",
+    "en": "Madd 'arid or leen",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddPermissibleHint": {
+    "ar": "حركتان أو أربع أو ست عند الوقف",
+    "en": "Two, four or six counts when stopping",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddSeparated": {
+    "ar": "مد جائز منفصل",
+    "en": "Madd munfasil",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddSeparatedHint": {
+    "ar": "أربع أو خمس حركات",
+    "en": "Four or five counts",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddConnected": {
+    "ar": "مد واجب متصل",
+    "en": "Madd muttasil",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddConnectedHint": {
+    "ar": "أربع أو خمس حركات",
+    "en": "Four or five counts",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleMaddNecessary": {
+    "ar": "مد لازم",
+    "en": "Madd lazim",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleMaddNecessaryHint": {
+    "ar": "ست حركات",
+    "en": "Six counts",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleQalqalah": {
+    "ar": "قلقلة",
+    "en": "Qalqalah",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleQalqalahHint": {
+    "ar": "اضطراب الصوت في حروف «قطب جد» الساكنة",
+    "en": "An echo on the five qalqalah letters when still",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleGhunnah": {
+    "ar": "غنة",
+    "en": "Ghunnah",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleGhunnahHint": {
+    "ar": "النون والميم المشددتان بغنة حركتين",
+    "en": "Doubled noon or meem, nasalised for two counts",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIkhfa": {
+    "ar": "إخفاء",
+    "en": "Ikhfa",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIkhfaHint": {
+    "ar": "إخفاء النون الساكنة والتنوين مع الغنة",
+    "en": "Noon sakinah or tanween hidden, with ghunnah",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIkhfaShafawi": {
+    "ar": "إخفاء شفوي",
+    "en": "Ikhfa shafawi",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIkhfaShafawiHint": {
+    "ar": "الميم الساكنة قبل الباء",
+    "en": "Still meem before ba",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIqlab": {
+    "ar": "إقلاب",
+    "en": "Iqlab",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIqlabHint": {
+    "ar": "النون الساكنة والتنوين تُقلب ميمًا قبل الباء",
+    "en": "Noon sakinah or tanween turned into meem before ba",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamGhunnah": {
+    "ar": "إدغام بغنة",
+    "en": "Idgham with ghunnah",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamGhunnahHint": {
+    "ar": "في حروف «ينمو»",
+    "en": "Into ya, noon, meem or waw",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamShafawi": {
+    "ar": "إدغام شفوي",
+    "en": "Idgham shafawi",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamShafawiHint": {
+    "ar": "الميم الساكنة في الميم",
+    "en": "Still meem into meem",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamNoGhunnah": {
+    "ar": "إدغام بلا غنة",
+    "en": "Idgham without ghunnah",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamNoGhunnahHint": {
+    "ar": "في اللام والراء",
+    "en": "Into lam or ra",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamMutajanisayn": {
+    "ar": "إدغام متجانسين",
+    "en": "Idgham mutajanisayn",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamMutajanisaynHint": {
+    "ar": "حرفان اتفقا مخرجًا واختلفا صفة",
+    "en": "Two letters of one articulation point",
+    "description": "Tajweed rule: short explanation"
+  },
+  "quranRuleIdghamMutaqaribayn": {
+    "ar": "إدغام متقاربين",
+    "en": "Idgham mutaqaribayn",
+    "description": "Tajweed rule name"
+  },
+  "quranRuleIdghamMutaqaribaynHint": {
+    "ar": "حرفان تقاربا مخرجًا",
+    "en": "Two letters of nearby articulation points",
+    "description": "Tajweed rule: short explanation"
+  }
+}

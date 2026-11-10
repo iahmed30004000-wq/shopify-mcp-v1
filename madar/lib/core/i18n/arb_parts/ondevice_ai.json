@@ -1,0 +1,420 @@
+{
+  "ondeviceTitle": {
+    "ar": "الذكاء على الجوال",
+    "en": "AI on this phone",
+    "description": "Settings page title (Part 15)"
+  },
+  "ondeviceRowSubtitle": {
+    "ar": "الموديل بيشتغل عجوالك بلا إنترنت",
+    "en": "The model runs on your phone, no internet"
+  },
+  "ondeviceSectionPhone": {
+    "ar": "شو بيقدر جوالك يشغّل",
+    "en": "What this phone can run"
+  },
+  "ondeviceChecking": {
+    "ar": "عم نفحص جوالك…",
+    "en": "Checking your phone…"
+  },
+  "ondeviceRecheck": {
+    "ar": "افحص من جديد",
+    "en": "Check again"
+  },
+  "ondeviceNeedsMeasure": {
+    "ar": "يلزم قياس على الجوال: لسا ما جرّبنا موديل حقيقي على جوالك، فهاي تقديرات مش أرقام مؤكّدة.",
+    "en": "Needs measuring on the phone: no real model has been tried on your phone yet, so these are estimates, not confirmed numbers."
+  },
+  "ondeviceThisPhone": {
+    "ar": "جوالك هلأ",
+    "en": "Your phone now"
+  },
+  "ondeviceFactAndroid": {
+    "ar": "أندرويد",
+    "en": "Android"
+  },
+  "ondeviceFactMemory": {
+    "ar": "الذاكرة",
+    "en": "Memory"
+  },
+  "ondeviceFactStorage": {
+    "ar": "مساحة فاضية",
+    "en": "Free space"
+  },
+  "ondeviceFactHeat": {
+    "ar": "حرارة الجوال",
+    "en": "Phone heat"
+  },
+  "ondeviceFactUnknown": {
+    "ar": "مش معروف",
+    "en": "Unknown"
+  },
+  "ondeviceFactAndroidValue": {
+    "ar": "إصدار {level}",
+    "en": "version {level}",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceFactGb": {
+    "ar": "{size} جيجا",
+    "en": "{size} GB",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceFactMemoryValue": {
+    "ar": "{free} جيجا فاضية من {total}",
+    "en": "{free} GB free of {total}",
+    "placeholders": {
+      "free": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceHeatNormal": {
+    "ar": "عادية",
+    "en": "Normal"
+  },
+  "ondeviceHeatWarm": {
+    "ar": "دافية",
+    "en": "Warm"
+  },
+  "ondeviceHeatHot": {
+    "ar": "سخنة",
+    "en": "Hot"
+  },
+  "ondeviceReasonAicore": {
+    "ar": "جوالك بيقدر يشغّل الموديل بنفسه عبر نظام أندرويد.",
+    "en": "Your phone can run the model by itself through Android."
+  },
+  "ondeviceReasonEngine": {
+    "ar": "جوالك بيقدر يشغّل الموديل داخل مدار.",
+    "en": "Your phone can run the model inside Madar."
+  },
+  "ondeviceReasonBridge": {
+    "ar": "رح نستعمل الجسر اللي بيعمل نسخ ولصق.",
+    "en": "We will use the bridge, which works by copy and paste."
+  },
+  "ondeviceReasonForced": {
+    "ar": "إنت اخترت هالطريقة، وجوالك بيقدر يشغّلها.",
+    "en": "You chose this way, and your phone can run it."
+  },
+  "ondeviceReasonForcedBlocked": {
+    "ar": "اخترت طريقة جوالك ما بيقدر يشغّلها هلأ، فرجعنا للاختيار التلقائي.",
+    "en": "You chose a way this phone cannot run right now, so we went back to automatic."
+  },
+  "ondeviceBlockAicoreUnsupported": {
+    "ar": "نظام أندرويد على جوالك ما بيوفّر الموديل الجاهز.",
+    "en": "Android on your phone does not offer the built-in model."
+  },
+  "ondeviceBlockUnknown": {
+    "ar": "ما قدرنا نتأكد إنّ الميزة موجودة، فما رح نفترض إنها شغّالة.",
+    "en": "We could not confirm the feature is there, so we will not assume it works."
+  },
+  "ondeviceBlockChanged": {
+    "ar": "الميزة تغيّرت عن النسخة اللي جرّبناها، فبنتجنّبها لحدّ ما تنفحص من جديد.",
+    "en": "The feature changed from the version we tested, so we avoid it until it is checked again."
+  },
+  "ondeviceBlockEngineUnsupported": {
+    "ar": "المحرّك اللي داخل مدار لسا مش جاهز على جوالك.",
+    "en": "The engine inside Madar is not ready on your phone yet."
+  },
+  "ondeviceBlockSdk": {
+    "ar": "أندرويد عندك قديم شوي: بدنا إصدار {need} وعندك {have}.",
+    "en": "Your Android is a bit old: it needs version {need} and you have {have}.",
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockRamTooLow": {
+    "ar": "ذاكرة الجوال صغيرة: بدنا {need} جيجا وعندك {have} جيجا.",
+    "en": "The phone's memory is small: it needs {need} GB and you have {have} GB.",
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockRamBusy": {
+    "ar": "تطبيقات ثانية ماسكة الذاكرة هلأ: بدنا {need} جيجا فاضية وعندك {have} جيجا.",
+    "en": "Other apps are using the memory right now: it needs {need} GB free and you have {have} GB.",
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockStorage": {
+    "ar": "ما في مساحة كفاية: بدك {need} جيجا فاضية وعندك {have} جيجا.",
+    "en": "Not enough space: you need {need} GB free and you have {have} GB.",
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockWeights": {
+    "ar": "ملفات الموديل لسا مش منزّلة على جوالك. نزّلها من القائمة تحت.",
+    "en": "The model files are not downloaded yet. Download them from the list below."
+  },
+  "ondeviceBlockBatterySaver": {
+    "ar": "وضع توفير البطارية شغّال، فبنوقّف الموديل عشان ما يستهلك البطارية.",
+    "en": "Battery saver is on, so we keep the model off to save power."
+  },
+  "ondeviceBlockThermal": {
+    "ar": "الجوال سخن، بنستنى لحد ما يبرد.",
+    "en": "The phone is hot, so we wait until it cools down."
+  },
+  "ondeviceSectionPaths": {
+    "ar": "الطرق التلاتة",
+    "en": "The three ways"
+  },
+  "ondevicePathAicore": {
+    "ar": "موديل نظام أندرويد",
+    "en": "Android's own model"
+  },
+  "ondevicePathAicoreHint": {
+    "ar": "Gemma بيشتغل عبر نظام أندرويد نفسه، وملفاته مش داخل مدار.",
+    "en": "Gemma runs through Android itself, and its files are not inside Madar."
+  },
+  "ondevicePathEngine": {
+    "ar": "محرّك داخل مدار",
+    "en": "Engine inside Madar"
+  },
+  "ondevicePathEngineHint": {
+    "ar": "بنشغّل الموديل داخل التطبيق، وتنزيل ملفاته اختياري.",
+    "en": "We run the model inside the app, and downloading its files is optional."
+  },
+  "ondevicePathBridge": {
+    "ar": "الجسر (نسخ ولصق)",
+    "en": "The bridge (copy and paste)"
+  },
+  "ondevicePathBridgeHint": {
+    "ar": "بتنسخ الطلب لأي تطبيق ذكاء اصطناعي وبترجّع الجواب. بيشتغل عكل الجوالات.",
+    "en": "You copy the request to any AI app and bring the answer back. It works on every phone."
+  },
+  "ondevicePathActive": {
+    "ar": "المستعمل هلأ",
+    "en": "In use now"
+  },
+  "ondevicePathPossible": {
+    "ar": "ممكن",
+    "en": "Possible"
+  },
+  "ondevicePathNotNow": {
+    "ar": "مش ممكن هلأ",
+    "en": "Not possible now"
+  },
+  "ondeviceSectionChoice": {
+    "ar": "الاختيار",
+    "en": "Your choice"
+  },
+  "ondeviceChoiceHint": {
+    "ar": "تلقائي بيختار الأحسن لجوالك. وإذا اخترت طريقة بنستعملها طالما جوالك بيقدر.",
+    "en": "Automatic picks the best for your phone. If you choose a way, we use it as long as your phone can."
+  },
+  "ondeviceChoiceAuto": {
+    "ar": "تلقائي",
+    "en": "Automatic"
+  },
+  "ondeviceChoiceAicore": {
+    "ar": "نظام أندرويد",
+    "en": "Android"
+  },
+  "ondeviceChoiceEngine": {
+    "ar": "داخل مدار",
+    "en": "In Madar"
+  },
+  "ondeviceChoiceBridge": {
+    "ar": "الجسر",
+    "en": "Bridge"
+  },
+  "ondeviceSectionModels": {
+    "ar": "ملفات الموديل (اختياري)",
+    "en": "Model files (optional)"
+  },
+  "ondeviceModelsNote": {
+    "ar": "مدار بيشتغل كامل بدون هاي الملفات. التنزيل اختياري وبيطلب بصمتك قبل ما يبدأ.",
+    "en": "Madar works fully without these files. Downloading is optional and asks for your fingerprint before it starts."
+  },
+  "ondeviceWifiOnly": {
+    "ar": "التنزيل عبر الواي فاي بس",
+    "en": "Download over Wi-Fi only"
+  },
+  "ondeviceWifiOnlyHint": {
+    "ar": "ما رح ننزّل ملف كبير على باقة الإنترنت.",
+    "en": "A big file will not be downloaded on mobile data."
+  },
+  "ondeviceModelSize": {
+    "ar": "الحجم: {size} جيجا",
+    "en": "Size: {size} GB",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceModelSizeUnknown": {
+    "ar": "الحجم لسا مش مؤكّد",
+    "en": "Size not confirmed yet"
+  },
+  "ondeviceModelLicense": {
+    "ar": "الترخيص: {license}",
+    "en": "Licence: {license}",
+    "placeholders": {
+      "license": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceModelUnverified": {
+    "ar": "لسا تجريبي: ما بيتنزّل لحد ما نتأكد من الملف الحقيقي.",
+    "en": "Still a placeholder: it cannot be downloaded until the real file is confirmed."
+  },
+  "ondeviceModelKindLanguage": {
+    "ar": "موديل لغة",
+    "en": "Language model"
+  },
+  "ondeviceModelKindRecitation": {
+    "ar": "موديل تلاوة",
+    "en": "Recitation model"
+  },
+  "ondeviceDownloadWifi": {
+    "ar": "نزّل عبر الواي فاي",
+    "en": "Download over Wi-Fi"
+  },
+  "ondeviceDownload": {
+    "ar": "نزّل",
+    "en": "Download"
+  },
+  "ondeviceRemove": {
+    "ar": "احذف من الجوال",
+    "en": "Remove from phone"
+  },
+  "ondeviceInstalled": {
+    "ar": "منزّل على جوالك",
+    "en": "On your phone"
+  },
+  "ondeviceDownloading": {
+    "ar": "عم ينزّل: {percent}",
+    "en": "Downloading: {percent}",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceVerifying": {
+    "ar": "عم نتأكد إنّ الملف سليم…",
+    "en": "Checking the file is intact…"
+  },
+  "ondevicePausedUser": {
+    "ar": "موقّف. اضغط نزّل لتكمّل.",
+    "en": "Paused. Tap download to continue."
+  },
+  "ondevicePausedStorage": {
+    "ar": "وقف لأنه ما في مساحة كفاية.",
+    "en": "Stopped because there is not enough space."
+  },
+  "ondevicePausedWifi": {
+    "ar": "بنستنى الواي فاي.",
+    "en": "Waiting for Wi-Fi."
+  },
+  "ondevicePausedOffline": {
+    "ar": "ما في إنترنت هلأ.",
+    "en": "No internet right now."
+  },
+  "ondevicePausedLost": {
+    "ar": "انقطع الاتصال. اضغط نزّل لتكمّل.",
+    "en": "The connection dropped. Tap download to continue."
+  },
+  "ondeviceFailed": {
+    "ar": "ما كمل التنزيل. جرّب مرة ثانية.",
+    "en": "The download did not finish. Try again."
+  },
+  "ondeviceFailedChecksum": {
+    "ar": "الملف طلع مش سليم فانحذف. جرّب مرة ثانية.",
+    "en": "The file was not intact, so it was deleted. Try again."
+  },
+  "ondeviceRefusedUnverified": {
+    "ar": "هاد الموديل لسا تجريبي وما بيتنزّل.",
+    "en": "This model is still a placeholder and cannot be downloaded."
+  },
+  "ondeviceRefusedAuth": {
+    "ar": "ما تأكدنا إنك إنت. فعّل البصمة من الأمان وجرّب.",
+    "en": "We could not confirm it is you. Turn on the fingerprint in Security and try again."
+  },
+  "ondeviceRemoved": {
+    "ar": "انحذف الموديل من جوالك",
+    "en": "The model was removed from your phone"
+  },
+  "ondeviceSectionPrivacy": {
+    "ar": "خصوصيتك ودينك",
+    "en": "Your privacy and your faith"
+  },
+  "ondevicePrivacyLocal": {
+    "ar": "على الطرق اللي بتشتغل عجوالك ما بيطلع أي شي من جوالك. وعلى الجسر إنت اللي بتنسخ وبترسل بإيدك.",
+    "en": "On the ways that run on your phone nothing leaves it. On the bridge, you copy and send by hand."
+  },
+  "ondevicePrivacyReligious": {
+    "ar": "الموديل ما بيعطي فتوى ولا حكم شرعي، وما بينقل آية أو حديث من عنده. الآيات والأحاديث بتجي بس من القرآن والأذكار الموثّقة داخل مدار.",
+    "en": "The model never gives a religious ruling and never quotes a verse or hadith from memory. Verses and hadith come only from the verified Quran and Adhkar inside Madar."
+  },
+  "ondeviceRefusalReligious": {
+    "ar": "ما بقدر أجاوب بحكم ديني ولا بآية أو حديث من عندي. للآيات والأحاديث الموثّقة افتح القرآن أو الأذكار داخل مدار.",
+    "en": "I cannot answer with a religious ruling or a verse or hadith from memory. For verified verses and hadith, open the Quran or Adhkar inside Madar."
+  },
+  "ondeviceRefusalHealth": {
+    "ar": "ما بقدر أعطي جرعة ولا تشخيص. مدار بيتابع صحتك بس.",
+    "en": "I cannot give a dose or a diagnosis. Madar only tracks your health."
+  },
+  "ondeviceInputCut": {
+    "ar": "المحادثة طويلة، فاختصرناها: الموديل قرأ آخر الأسطر بس.",
+    "en": "The chat is long, so we shortened it: the model read only the last lines."
+  },
+  "ondeviceBridgeNotReady": {
+    "ar": "الموديل مش جاهز، فبنستعمل الجسر.",
+    "en": "The model is not ready, so we use the bridge."
+  },
+  "ondeviceBridgeFailed": {
+    "ar": "الموديل وقف قبل ما يخلّص، فبنستعمل الجسر.",
+    "en": "The model stopped before it finished, so we use the bridge."
+  },
+  "ondeviceBridgeMemory": {
+    "ar": "تطبيق ثاني أخد الذاكرة، فبنستعمل الجسر.",
+    "en": "Another app took the memory, so we use the bridge."
+  },
+  "ondeviceBridgeSlow": {
+    "ar": "الموديل تأخّر كتير، فبنستعمل الجسر.",
+    "en": "The model took too long, so we use the bridge."
+  },
+  "ondeviceRemoveConfirmTitle": {
+    "ar": "تحذف الموديل؟",
+    "en": "Remove the model?"
+  },
+  "ondeviceRemoveConfirmBody": {
+    "ar": "بتحرّر مساحة عجوالك، وبتقدر تنزّله من جديد بأي وقت.",
+    "en": "This frees space on your phone, and you can download it again any time."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "cinemaWiringEnterHall": {"ar": "ادخل القاعة", "en": "Enter the hall", "description": "Ticket on the Growth page's Madar Cinema card: opens the cinema hall"},
+  "cinemaWiringShowsReady": {"ar": "{count, plural, =0{العروض قيد التحضير} =1{عرض واحد جاهز للعب} =2{عرضان جاهزان للعب} few{{count} عروض جاهزة للعب} many{{count} عرضًا جاهزًا للعب} other{{count} عرض جاهز للعب}}", "en": "{count, plural, =0{Shows in preparation} =1{1 show ready to play} other{{count} shows ready to play}}", "description": "Madar Cinema card: how many shows (games) of the programme can be played now", "placeholders": {"count": {"type": "int"}}},
+  "cinemaWiringCreditGames": {"ar": "ألعاب الكلمات والمعرفة في سينما مَدار", "en": "Madar Cinema word & knowledge games", "description": "Settings › Fonts & credits: the word and quiz content bundled for the cinema's games"},
+  "cinemaWiringCreditGamesRole": {"ar": "قوائم الكلمات وأسئلة المسابقات", "en": "Word lists and quiz content", "description": "Settings › Fonts & credits: what the games' content credit covers"}
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The AI bridge's share target (Part 3, lib/features/ai_bridge): the row
+     Madar shows in another app's share sheet, and the name of the
+     "open with" entry for a «خطة مدار» JSON file. Everything inside the app
+     is localised from the app's own strings
+     (lib/core/i18n/arb_parts/g1_ai_bridge.json). -->
+<resources>
+    <string name="share_plan_label">Import a Madar plan</string>
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The prayer widget's astrolabe in the widget picker (a still: brass limb
+     with the quarter hours, lapis plate, the day arc, the lit window up to
+     Asr and the rete star). The live widget shows an image the app draws. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Limb -->
+    <path
+        android:fillColor="#FFB8893A"
+        android:fillType="evenOdd"
+        android:pathData="M48,5a43,43 0 1,0 0,86a43,43 0 1,0 0,-86Z M48,13.5a34.5,34.5 0 1,1 0,69a34.5,34.5 0 1,1 0,-69Z" />
+    <path
+        android:strokeColor="#FFF3DDA0"
+        android:strokeWidth="1"
+        android:fillColor="#00000000"
+        android:pathData="M48,5.6a42.4,42.4 0 1,0 0,84.8a42.4,42.4 0 1,0 0,-84.8Z" />
+    <!-- Plate -->
+    <path
+        android:fillColor="#FF16204A"
+        android:pathData="M48,13.5a34.5,34.5 0 1,0 0,69a34.5,34.5 0 1,0 0,-69Z" />
+    <!-- Day sky (sunrise to Maghrib, over the top) -->
+    <path
+        android:fillColor="#553D5BD9"
+        android:pathData="M48,48L17.4,59.6A33.8,33.8 0 0,1 78.6,59.6Z" />
+    <!-- Quarter-hour ticks -->
+    <path
+        android:strokeColor="#FF5C3F12"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M48,6.5L48,12.5 M48,83.5L48,89.5 M6.5,48L12.5,48 M83.5,48L89.5,48" />
+    <!-- Lit window (Dhuhr to Asr) -->
+    <path
+        android:strokeColor="#FFE9A43A"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M48,19A29,29 0 0,1 72.1,31.9" />
+    <!-- Alidade -->
+    <path
+        android:strokeColor="#FFF3DDA0"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M36,56L70,34" />
+    <!-- Next prayer (Asr) -->
+    <path
+        android:fillColor="#FFFFD27A"
+        android:pathData="M72.1,26.4L73.6,30.4L77.6,31.9L73.6,33.4L72.1,37.4L70.6,33.4L66.6,31.9L70.6,30.4Z" />
+    <!-- Rete star -->
+    <path
+        android:fillColor="#FFB8893A"
+        android:fillType="evenOdd"
+        android:pathData="M48,40L56,48L48,56L40,48Z M42.3,42.3L53.7,42.3L53.7,53.7L42.3,53.7Z" />
+    <path
+        android:fillColor="#FFFFE7A3"
+        android:pathData="M48,45.5a2.5,2.5 0 1,0 0,5a2.5,2.5 0 1,0 0,-5Z" />
+</vector>

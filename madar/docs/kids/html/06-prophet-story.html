@@ -1,0 +1,109 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>القصص — قصة نبي</title>
+<meta name="viewport" content="width=360, initial-scale=1">
+<style>
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Regular.ttf');font-weight:400}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Medium.ttf');font-weight:500}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Bold.ttf');font-weight:700}
+@font-face{font-family:'Reem';src:url('../../../assets/fonts/ReemKufi-Variable.ttf');font-weight:400 700}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Regular.ttf');font-weight:400}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Bold.ttf');font-weight:700}
+@font-face{font-family:'AmiriQuran';src:url('../../../assets/fonts/AmiriQuran-Regular.ttf');font-weight:400}
+:root{
+--night900:#17143F;--night800:#221E5A;--night700:#2F2A78;--night500:#5650B0;--night300:#A9A5E6;--night100:#E6E4FA;--sun700:#A8680F;--sun500:#F5B431;--sun300:#FFD479;--sun100:#FFF0CC;--teal800:#0F5552;--teal700:#17706C;--teal500:#2FA59C;--teal200:#B6E6DF;--teal100:#E2F5F1;--rose700:#A93556;--rose500:#E26A89;--rose300:#F6A9BC;--rose100:#FCE3EA;--paper:#FFF8EA;--sand:#F7E9CF;--sand2:#EBD5A8;--ink:#26214F;--ink2:#5A5482;--retry:#F7A94B;--retry100:#FFEBD0;--retry700:#8A4B05;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:780px;overflow:hidden;background:#000}
+body{font-family:'Plex',sans-serif;color:var(--ink);direction:rtl;-webkit-font-smoothing:antialiased}
+.phone{position:relative;width:360px;height:780px;overflow:hidden;background:var(--paper)}
+.abs{position:absolute}
+.fill{position:absolute;inset:0;width:100%;height:100%}
+.status{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;font-weight:600;z-index:50}
+.status .r{display:flex;gap:6px;align-items:center}
+.h1{font-family:'Reem',serif;font-weight:700;font-size:32px;line-height:1.25;word-spacing:.18em}
+.h2{font-family:'Reem',serif;font-weight:700;font-size:26px;line-height:1.3;word-spacing:.18em}
+.h3{font-family:'Reem',serif;font-weight:600;font-size:22px;line-height:1.35;word-spacing:.16em}
+.body{font-size:20px;line-height:1.6;font-weight:500}
+.small{font-size:16px;line-height:1.5;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 28px;border-radius:32px;font-family:'Plex';font-weight:700;font-size:20px;border:0;box-shadow:0 5px 0 rgba(23,20,63,.22),0 14px 22px -10px rgba(23,20,63,.45)}
+.btn.gold{background:linear-gradient(180deg,#FFD479,#F5B431);color:var(--night900)}
+.btn.teal{background:linear-gradient(180deg,#2FA59C,#17706C);color:#fff}
+.btn.rose{background:linear-gradient(180deg,#F6A9BC,#E26A89);color:var(--night900)}
+.btn.night{background:linear-gradient(180deg,#3B3590,#221E5A);color:#fff}
+.btn.paper{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 rgba(23,20,63,.14),0 12px 20px -10px rgba(23,20,63,.35)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:none;border:2.5px solid currentColor}
+.round{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;font-weight:700;font-size:16px}
+.card{background:var(--paper);border-radius:28px;box-shadow:0 2px 0 rgba(255,255,255,.7) inset,0 14px 28px -14px rgba(38,33,79,.5)}
+.ph{display:inline-block;direction:rtl;font-family:'Plex';font-weight:600;font-size:14px;color:var(--sun700);background:var(--sun100);border:1.5px dashed var(--sun700);border-radius:10px;padding:2px 10px}
+.num{font-feature-settings:'tnum'}
+.topbar{position:absolute;top:28px;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:20}
+.topbar .title{font-family:'Reem';font-weight:700;font-size:26px;text-align:center;flex:1;word-spacing:.18em}
+</style></head><body>
+<div class="phone" style="background:#FFF8EA">
+<svg width="0" height="0" style="position:absolute"><defs>
+  <radialGradient id="glowSun"><stop offset="0" stop-color="#FFD479" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD479" stop-opacity=".35"/><stop offset="1" stop-color="#FFD479" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowTeal"><stop offset="0" stop-color="#B6E6DF" stop-opacity=".9"/><stop offset="1" stop-color="#B6E6DF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowRose"><stop offset="0" stop-color="#F6A9BC" stop-opacity=".8"/><stop offset="1" stop-color="#F6A9BC" stop-opacity="0"/></radialGradient></defs></svg>
+<div class="status" style="color:#fff"><span class="num">٩:٤١</span><span class="r"><svg width="26" height="13" viewBox="0 0 26 13"><rect x=".7" y=".7" width="21" height="11.6" rx="3.2" fill="none" stroke="#fff" stroke-width="1.4"/><rect x="2.6" y="2.6" width="14" height="7.8" rx="1.6" fill="#fff"/><rect x="23" y="4" width="2.3" height="5" rx="1" fill="#fff"/></svg></span></div>
+<svg class="abs" style="top:0;left:0" width="360" height="470" viewBox="0 0 360 470">
+    <defs>
+      <linearGradient id="ssky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17143F"/><stop offset=".5" stop-color="#5650B0"/><stop offset=".8" stop-color="#E26A89"/><stop offset="1" stop-color="#FFD479"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0CC" stop-opacity=".95"/><stop offset="1" stop-color="#FFD479" stop-opacity="0"/></linearGradient>
+      <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0CC" stop-opacity=".9"/><stop offset="1" stop-color="#FFD479" stop-opacity=".15"/></linearGradient>
+      <pattern id="sp" width="72" height="72" patternUnits="userSpaceOnUse"><polygon points="0,-28.8 8.43,-20.35 20.36,-20.36 20.35,-8.43 28.8,0 20.35,8.43 20.36,20.36 8.43,20.35 0,28.8 -8.43,20.35 -20.36,20.36 -20.35,8.43 -28.8,0 -20.35,-8.43 -20.36,-20.36 -8.43,-20.35" fill="none" stroke="#FFF0CC" stroke-width="1"/><polygon points="72,-28.8 80.43,-20.35 92.36,-20.36 92.35,-8.43 100.8,0 92.35,8.43 92.36,20.36 80.43,20.35 72,28.8 63.57,20.35 51.64,20.36 51.65,8.43 43.2,0 51.65,-8.43 51.64,-20.36 63.57,-20.35" fill="none" stroke="#FFF0CC" stroke-width="1"/><polygon points="0,43.2 8.43,51.65 20.36,51.64 20.35,63.57 28.8,72 20.35,80.43 20.36,92.36 8.43,92.35 0,100.8 -8.43,92.35 -20.36,92.36 -20.35,80.43 -28.8,72 -20.35,63.57 -20.36,51.64 -8.43,51.65" fill="none" stroke="#FFF0CC" stroke-width="1"/><polygon points="72,43.2 80.43,51.65 92.36,51.64 92.35,63.57 100.8,72 92.35,80.43 92.36,92.36 80.43,92.35 72,100.8 63.57,92.35 51.64,92.36 51.65,80.43 43.2,72 51.65,63.57 51.64,51.64 63.57,51.65" fill="none" stroke="#FFF0CC" stroke-width="1"/><polygon points="43.44,18.04 46.52,25.48 53.96,28.56 50.87,36 53.96,43.44 46.52,46.52 43.44,53.96 36,50.87 28.56,53.96 25.48,46.52 18.04,43.44 21.13,36 18.04,28.56 25.48,25.48 28.56,18.04 36,21.13" fill="none" stroke="#FFF0CC" stroke-width="1"/><rect x="28.8" y="28.8" width="14.4" height="14.4" transform="rotate(45 36 36)" fill="none" stroke="#FFF0CC" stroke-width="1"/><polygon points="38.48,-5.99 39.51,-3.51 41.99,-2.48 40.96,0 41.99,2.48 39.51,3.51 38.48,5.99 36,4.96 33.52,5.99 32.49,3.51 30.01,2.48 31.04,0 30.01,-2.48 32.49,-3.51 33.52,-5.99 36,-4.96" fill="#FFF0CC" opacity=".7"/><polygon points="2.48,30.01 3.51,32.49 5.99,33.52 4.96,36 5.99,38.48 3.51,39.51 2.48,41.99 0,40.96 -2.48,41.99 -3.51,39.51 -5.99,38.48 -4.96,36 -5.99,33.52 -3.51,32.49 -2.48,30.01 0,31.04" fill="#FFF0CC" opacity=".7"/><polygon points="74.48,30.01 75.51,32.49 77.99,33.52 76.96,36 77.99,38.48 75.51,39.51 74.48,41.99 72,40.96 69.52,41.99 68.49,39.51 66.01,38.48 67.04,36 66.01,33.52 68.49,32.49 69.52,30.01 72,31.04" fill="#FFF0CC" opacity=".7"/><polygon points="38.48,66.01 39.51,68.49 41.99,69.52 40.96,72 41.99,74.48 39.51,75.51 38.48,77.99 36,76.96 33.52,77.99 32.49,75.51 30.01,74.48 31.04,72 30.01,69.52 32.49,68.49 33.52,66.01 36,67.04" fill="#FFF0CC" opacity=".7"/></pattern>
+    </defs>
+    <rect width="360" height="470" fill="url(#ssky)"/><rect width="360" height="300" fill="url(#sp)" opacity=".07"/>
+    <circle cx="46.03" cy="198.73" r="2.19" fill="#FFF0CC" opacity="0.56"/><circle cx="162.55" cy="168.69" r="1.44" fill="#FFF0CC" opacity="0.51"/><polygon points="173.22,189.21 173.98,189.98 175.06,189.98 175.06,191.06 175.83,191.83 175.06,192.59 175.06,193.67 173.98,193.67 173.22,194.44 172.45,193.67 171.37,193.67 171.37,192.59 170.6,191.83 171.37,191.06 171.37,189.98 172.45,189.98" fill="#FFF0CC" opacity="0.53"/><circle cx="162.27" cy="150.4" r="1.87" fill="#FFF0CC" opacity="0.44"/><circle cx="267.25" cy="206.92" r="2.06" fill="#FFF0CC" opacity="0.72"/><circle cx="343.48" cy="173.44" r="1.94" fill="#FFF0CC" opacity="0.81"/><polygon points="181.42,188.09 183.46,190.13 186.34,190.13 186.34,193.01 188.38,195.05 186.34,197.09 186.34,199.97 183.46,199.97 181.42,202.01 179.38,199.97 176.5,199.97 176.5,197.09 174.46,195.05 176.5,193.01 176.5,190.13 179.38,190.13" fill="#FFF0CC" opacity="0.83"/><circle cx="246.5" cy="240.59" r="1.4" fill="#FFF0CC" opacity="0.81"/><circle cx="232.79" cy="217.82" r="2.05" fill="#FFF0CC" opacity="0.57"/><circle cx="142.31" cy="204.15" r="1.52" fill="#FFF0CC" opacity="0.68"/><circle cx="80.77" cy="191.93" r="0.98" fill="#FFF0CC" opacity="0.58"/><circle cx="162.27" cy="213.41" r="2.14" fill="#FFF0CC" opacity="0.58"/><polygon points="293.12,160.77 294.79,162.44 297.16,162.44 297.15,164.8 298.83,166.47 297.15,168.14 297.16,170.51 294.79,170.51 293.12,172.18 291.45,170.51 289.09,170.51 289.09,168.14 287.42,166.47 289.09,164.8 289.09,162.44 291.45,162.44" fill="#FFF0CC" opacity="0.76"/><circle cx="358.24" cy="249.29" r="0.85" fill="#FFF0CC" opacity="0.73"/><circle cx="57.29" cy="154.87" r="1.19" fill="#FFF0CC" opacity="0.66"/><circle cx="255.14" cy="143.4" r="1.35" fill="#FFF0CC" opacity="0.72"/><circle cx="175.08" cy="149.56" r="1.83" fill="#FFF0CC" opacity="0.85"/><polygon points="5.99,150.46 7.59,152.06 9.85,152.05 9.84,154.31 11.44,155.91 9.84,157.51 9.85,159.77 7.59,159.77 5.99,161.36 4.39,159.77 2.13,159.77 2.13,157.51 0.54,155.91 2.13,154.31 2.13,152.05 4.39,152.06" fill="#FFF0CC" opacity="0.72"/><circle cx="308.83" cy="245.73" r="2.04" fill="#FFF0CC" opacity="0.53"/><circle cx="47.56" cy="118.08" r="1.45" fill="#FFF0CC" opacity="0.6"/><polygon points="111.95,147.24 112.66,147.95 113.67,147.95 113.67,148.96 114.38,149.67 113.67,150.38 113.67,151.39 112.66,151.39 111.95,152.1 111.24,151.39 110.23,151.39 110.24,150.38 109.52,149.67 110.24,148.96 110.23,147.95 111.24,147.95" fill="#FFF0CC" opacity="0.67"/><circle cx="305.91" cy="169.73" r="1.13" fill="#FFF0CC" opacity="0.39"/><polygon points="314.37,162.71 315.29,163.64 316.59,163.63 316.59,164.94 317.51,165.86 316.59,166.78 316.59,168.08 315.29,168.08 314.37,169 313.45,168.08 312.15,168.08 312.15,166.78 311.23,165.86 312.15,164.94 312.15,163.63 313.45,163.64" fill="#FFF0CC" opacity="0.93"/>
+    <!-- column of light -->
+    <path d="M150 340L168 150H192L210 340Z" fill="url(#beam)" opacity=".85"/>
+    <circle cx="180" cy="160" r="64" fill="url(#glowSun)"/>
+    <g>
+    <polygon points="180,124 189.95,133.97 204.04,133.96 204.03,148.05 214,158 204.03,167.95 204.04,182.04 189.95,182.03 180,192 170.05,182.03 155.96,182.04 155.97,167.95 146,158 155.97,148.05 155.96,133.96 170.05,133.97" fill="#FFD479" opacity=".95"/>
+    <polygon points="190.41,132.87 194.71,143.29 205.13,147.59 200.81,158 205.13,168.41 194.71,172.71 190.41,183.13 180,178.81 169.59,183.13 165.29,172.71 154.87,168.41 159.19,158 154.87,147.59 165.29,143.29 169.59,132.87 180,137.19" fill="none" stroke="#FFF0CC" stroke-width="1.4"/>
+    <polygon points="180,136.92 185.81,143.98 194.91,143.09 194.02,152.19 201.08,158 194.02,163.81 194.91,172.91 185.81,172.02 180,179.08 174.19,172.02 165.09,172.91 165.98,163.81 158.92,158 165.98,152.19 165.09,143.09 174.19,143.98" fill="#FFF0CC" opacity=".9"/>
+    <circle cx="180" cy="158" r="10.2" fill="#E26A89"/>
+    <polygon points="182.86,151.09 184.05,153.95 186.91,155.14 185.72,158 186.91,160.86 184.05,162.05 182.86,164.91 180,163.72 177.14,164.91 175.95,162.05 173.09,160.86 174.28,158 173.09,155.14 175.95,153.95 177.14,151.09 180,152.28" fill="#FFF0CC"/>
+  </g>
+    <!-- far dunes -->
+    <path d="M0 322C60 292 130 312 190 304S320 290 360 306V470H0Z" fill="#A93556"/>
+    <path d="M0 352C80 326 150 346 230 338S330 330 360 344V470H0Z" fill="#7F2E57"/>
+    <g transform="translate(54 336) scale(1)"><path d="M0 0C-3 -30 3 -50 -2 -78" stroke="#221E5A" stroke-width="7" stroke-linecap="round" fill="none"/><g transform="translate(-2 -80)"><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(-70) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(-40) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(-10) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(20) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(50) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(80) translate(0 -2)"/></g></g><g transform="translate(96 346) scale(0.7)"><path d="M0 0C-3 -30 3 -50 -2 -78" stroke="#221E5A" stroke-width="7" stroke-linecap="round" fill="none"/><g transform="translate(-2 -80)"><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(-70) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(-40) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(-10) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(20) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(50) translate(0 -2)"/><ellipse cx="0" cy="-22" rx="5" ry="26" fill="#221E5A" transform="rotate(80) translate(0 -2)"/></g></g>
+    <!-- path of light -->
+    <path d="M168 336L192 336L300 470H64Z" fill="url(#road)"/>
+    <path d="M0 392C90 372 180 392 270 382S340 376 360 386V470H0Z" fill="#A8680F" opacity=".0"/>
+    <path d="M0 410C70 392 140 410 210 404S320 396 360 408V470H0Z" fill="#221E5A" opacity=".55"/>
+    <g transform="translate(282 396) scale(1.05)">
+    <circle cx="0" cy="0" r="46" fill="url(#glowSun)"/>
+    <path d="M0 -34V-27" stroke="#221E5A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-9" y="-28" width="18" height="6" rx="3" fill="#221E5A"/>
+    <path d="M-9 -21H9L14 -4L9 18H-9L-14 -4Z" fill="#F5B431" stroke="#221E5A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -21V18M-5 -21L-8 18M5 -21L8 18" stroke="#221E5A" stroke-width="1.4" opacity=".4"/>
+    <rect x="-10" y="17" width="20" height="7" rx="3" fill="#221E5A"/>
+    <path d="M0 -10C6 -4 6 3 0 9C-6 3 -6 -4 0 -10Z" fill="#FFF8EA"/>
+  </g>
+    <!-- stones/objects -->
+    <g fill="#221E5A" opacity=".8"><ellipse cx="60" cy="408" rx="16" ry="8"/><ellipse cx="84" cy="414" rx="9" ry="5"/></g>
+  </svg><div class="topbar">
+    <div class="round" style="background:rgba(255,248,234,.92);box-shadow:0 4px 0 rgba(23,20,63,.18)"><svg class="ico" width="32" height="32" viewBox="0 0 48 48" style="--a:#221E5A;--b:rgba(255,248,234,.92);--c:#F5B431;" aria-hidden="true"><path d="M6 23L24 7L42 23" fill="none" stroke="var(--a)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 21V40H20V29H28V40H37V21L24 10Z" fill="var(--a)"/></svg></div>
+    <div class="title" style="color:#fff">القصص</div>
+    <div class="chip" style="background:#221E5A;color:#fff;height:56px;border-radius:28px;padding:0 14px 0 16px;font-size:20px;gap:6px;border:1.5px solid rgba(255,248,234,.28)"><svg class="ico" width="28" height="28" viewBox="0 0 48 48" style="--a:#F5B431;--b:#221E5A;--c:#F5B431;" aria-hidden="true"><polygon points="24,2 30.44,8.45 39.56,8.44 39.55,17.56 46,24 39.55,30.44 39.56,39.56 30.44,39.55 24,46 17.56,39.55 8.44,39.56 8.45,30.44 2,24 8.45,17.56 8.44,8.44 17.56,8.45" fill="var(--a)"/><polygon points="28.21,13.84 29.6,18.4 34.16,19.79 31.92,24 34.16,28.21 29.6,29.6 28.21,34.16 24,31.92 19.79,34.16 18.4,29.6 13.84,28.21 16.08,24 13.84,19.79 18.4,18.4 19.79,13.84 24,16.08" fill="var(--b)"/></svg><span class="num">٢٤</span></div>
+  </div><div class="abs card" style="top:462px;left:16px;right:16px;height:190px;padding:16px 20px;background:#FFFDF6">
+    <div style="display:flex;align-items:center;justify-content:space-between"><span class="ph" style="font-size:16px;padding:4px 14px">[اسم النبيّ]</span><span class="chip num" style="background:#E6E4FA;color:#2F2A78;height:34px;font-size:15px">٢ من ٦</span></div>
+    <div class="body" style="margin-top:12px;line-height:1.75"><span class="ph" style="font-size:16px;line-height:2">[نص القصة من مصدر موثّق — كلمة بكلمة]</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <span class="chip" style="background:#E2F5F1;color:#0F5552;height:34px;font-size:15px"><svg class="ico" width="18" height="18" viewBox="0 0 48 48" style="--a:#17706C;--b:#fff;--c:#F5B431;" aria-hidden="true"><path d="M24 5C15.5 5 10 11 10 18C10 23.5 13 26.5 15.5 29.5C17 31.5 17.5 33 17.5 35H30.5C30.5 33 31 31.5 32.5 29.5C35 26.5 38 23.5 38 18C38 11 32.5 5 24 5Z" fill="var(--a)"/><rect x="18" y="37.5" width="12" height="4.5" rx="2.2" fill="var(--b)"/></svg> نور</span>
+      <span class="chip" style="background:#FCE3EA;color:#A93556;height:34px;font-size:15px"><svg class="ico" width="18" height="18" viewBox="0 0 48 48" style="--a:#A93556;--b:#fff;--c:#F5B431;" aria-hidden="true"><path d="M6 23L24 7L42 23" fill="none" stroke="var(--a)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 21V40H20V29H28V40H37V21L24 10Z" fill="var(--a)"/></svg> مكان</span>
+      <span class="chip" style="background:#FFF0CC;color:#A8680F;height:34px;font-size:15px"><svg class="ico" width="18" height="18" viewBox="0 0 48 48" style="--a:#A8680F;--b:#fff;--c:#F5B431;" aria-hidden="true"><path d="M24 2.5V7" stroke="var(--a)" stroke-width="3" stroke-linecap="round"/>
+    <rect x="16.5" y="6.5" width="15" height="5.5" rx="2.5" fill="var(--a)"/>
+    <path d="M14.5 12.5H33.5L37 23L33 36.5H15L11 23Z" fill="var(--b)" stroke="var(--a)" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="15.5" y="36" width="17" height="6" rx="2.5" fill="var(--a)"/>
+    <path d="M24 18.5C28.5 23 28.5 27.5 24 31.5C19.5 27.5 19.5 23 24 18.5Z" fill="var(--c)"/></svg> أغراض</span>
+    </div>
+  </div>
+  <div class="abs" style="top:676px;left:16px;right:16px;display:flex;gap:12px;align-items:center">
+    <div class="round" style="background:#E6E4FA;box-shadow:0 5px 0 rgba(47,42,120,.25)"><svg class="ico" width="28" height="28" viewBox="0 0 48 48" style="--a:#2F2A78;--b:#FFF8EA;--c:#F5B431;" aria-hidden="true"><path d="M17 9L31 24L17 39" fill="none" stroke="var(--a)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="btn gold" style="flex:1;font-size:21px;padding:0 10px;white-space:nowrap"><svg class="ico" width="28" height="28" viewBox="0 0 48 48" style="--a:#17143F;--b:#FFF8EA;--c:#F5B431;" aria-hidden="true"><path d="M6 19H14L24 10V38L14 29H6Z" fill="var(--a)" stroke="var(--a)" stroke-width="3" stroke-linejoin="round"/><path d="M31 17C34.5 20.5 34.5 27.5 31 31M36 11.5C42 18 42 30 36 36.5" fill="none" stroke="var(--a)" stroke-width="3.6" stroke-linecap="round"/></svg> اسمع القصة</div>
+    <div class="round" style="background:#E6E4FA;box-shadow:0 5px 0 rgba(47,42,120,.25)"><svg class="ico" width="28" height="28" viewBox="0 0 48 48" style="--a:#2F2A78;--b:#FFF8EA;--c:#F5B431;" aria-hidden="true"><path d="M31 9L17 24L31 39" fill="none" stroke="var(--a)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+</div></body></html>

@@ -1,0 +1,495 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../core/design/tokens.dart';
+import '../../../../core/design/widgets/widgets.dart';
+import '../../../../core/i18n/gen/app_localizations.dart';
+import '../../../../core/motion/motion_kit.dart';
+import '../../../../core/routing/cinema_route_pages.dart';
+import '../../../../core/routing/life_route_pages.dart';
+import '../../../../core/sound/sound_api.dart';
+import '../../../body/body.dart' show BodyTab, BodyTodayCard;
+import '../../../nutrition/presentation/nutrition_ui.dart' show NutritionTodayCard;
+import '../../../sufra/presentation/sufra_ui.dart' show SufraTodayCard;
+import '../../../custom_modules/custom_modules.dart' show CustomModulesCard, customPlanetModulesProvider;
+import '../../../family/family.dart' show FamilyActions, FamilyTodayCard;
+import '../../../growth/growth.dart' show GrowthTodayCard;
+import '../../../money/hub/money_hub.dart' show MoneyTools;
+import '../../../saved_games/saved_games.dart' show SavedGamesShelf;
+import '../../../travel/travel.dart' show TravelTab, TravelTodayCard;
+import '../../../work/work.dart' show Top3Card, WorkTodayCard;
+import 'cinema_entry_card.dart';
+import 'games_scores_card.dart';
+
+/// The Phase 6 life worlds' own page content (the hubs under the balance
+/// ring of Work, Family, Travel, Growth and Body): the packages' compact
+/// "today" cards, then a row of tools. Every screen opens as its route
+/// ([LifeNav]); every part is a [StaggerItem] of the planet page's
+/// entrance.
+abstract final class LifeHubs {
+  static const Set<String> keys = {'work', 'family', 'travel', 'growth', 'body', 'sufra', 'games'};
+
+  /// Whether [planetKey] has a life hub.
+  static bool has(String planetKey) => keys.contains(planetKey);
+
+  /// The hub of [planetKey] (one of [keys]).
+  static Widget of(String planetKey, {int firstIndex = 1}) => switch (planetKey) {
+    'work' => WorkHub(firstIndex: firstIndex),
+    'family' => FamilyHub(firstIndex: firstIndex),
+    'travel' => TravelHub(firstIndex: firstIndex),
+    'growth' => GrowthHub(firstIndex: firstIndex),
+    'sufra' => SufraHub(firstIndex: firstIndex),
+    'games' => GamesHub(firstIndex: firstIndex),
+    _ => BodyHub(firstIndex: firstIndex),
+  };
+}
+
+/// Builds a hub's column: cards in the gutter, a gap between them, and
+/// titled groups (a title rises with its first card).
+class _HubColumn {
+  _HubColumn(this.index);
+
+  int index;
+  final List<Widget> children = [];
+
+  void card(Widget child) {
+    if (children.isNotEmpty && children.last is! _Header) children.add(const SizedBox(height: Space.m));
+    children.add(
+      StaggerItem(
+        index: index++,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.symmetric(horizontal: Space.gutter),
+          child: child,
+        ),
+      ),
+    );
+  }
+
+  /// A part that paints to both edges and brings its own insets (a
+  /// horizontal shelf, whose posters must not be clipped by the gutter).
+  void wide(Widget child) {
+    if (children.isNotEmpty && children.last is! _Header) children.add(const SizedBox(height: Space.m));
+    children.add(StaggerItem(index: index++, child: child));
+  }
+
+  void header(String title) => children.add(_Header(index: index, title: title));
+
+  /// The planet sheet has no Material above it: the cards the packages
+  /// bring would otherwise inherit the debug fallback text style.
+  Widget build() => Material(
+    type: MaterialType.transparency,
+    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: children),
+  );
+}
+
+/// Work: today's Top 3 (cards and tasks, the morning carry-over), what is
+/// due on the boards and placed in today's prayer windows, then the
+/// boards and the projects.
+class WorkHub extends StatelessWidget {
+  const WorkHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(const Top3Card(compact: true))
+      ..card(const WorkTodayCard(onOpen: LifeNav.work))
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            (Icons.view_kanban_rounded, l.workBoards, l.lifeHubToolBoardsHint, () => LifeNav.work(context)),
+            (Icons.rocket_launch_outlined, l.workProjects, l.lifeHubToolProjectsHint, () => LifeNav.projects(context)),
+          ],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// Family: who is due a call or a visit, the birthdays of the next two
+/// weeks, then everyone and the reach-out reminders.
+class FamilyHub extends ConsumerWidget {
+  const FamilyHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(const FamilyTodayCard(onOpen: LifeNav.family, onOpenPerson: LifeNav.person))
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            (Icons.people_alt_rounded, l.lifeHubPeople, l.lifeHubToolPeopleHint, () => LifeNav.family(context)),
+            (
+              Icons.notifications_active_rounded,
+              l.familyRemindersTitle,
+              l.lifeHubToolRemindersHint,
+              () => unawaited(FamilyActions.openSettings(context, ref)),
+            ),
+          ],
+          sfx: const [Sfx.navigate, Sfx.sheetOpen],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// Travel: the next or current trip with its countdown and packing, the
+/// documents that need attention, then the trips, the documents and the
+/// packing lists.
+class TravelHub extends StatelessWidget {
+  const TravelHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(const TravelTodayCard(onOpen: LifeNav.travel, onOpenTrip: LifeNav.trip))
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            (Icons.flight_takeoff_rounded, l.travelTabTrips, l.lifeHubToolTripsHint, () => LifeNav.travel(context)),
+            (
+              Icons.badge_rounded,
+              l.travelTabDocuments,
+              l.lifeHubToolDocumentsHint,
+              () => LifeNav.travel(context, tab: TravelTab.documents),
+            ),
+            (
+              Icons.luggage_rounded,
+              l.travelTabTemplates,
+              l.lifeHubSettingsTemplatesHint,
+              () => LifeNav.travel(context, tab: TravelTab.templates),
+            ),
+          ],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// Growth: the learning goals in progress with their pace (the card's own
+/// link is the one door to all of them), then the projects (a project can
+/// belong to Growth and feed its balance).
+///
+/// The games used to have their door here. They do not any more: playing is
+/// not self-improvement, and they are «الألعاب», a world of their own
+/// ([GamesHub]). Growth keeps what is actually growth.
+class GrowthHub extends StatelessWidget {
+  const GrowthHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(const GrowthTodayCard(onOpen: LifeNav.growth))
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            // No goals tile: the card above already opens all of them, and
+            // one screen gets one door, named once (life_cohesion_test).
+            (Icons.rocket_launch_outlined, l.workProjects, l.lifeHubToolProjectsHint, () => LifeNav.projects(context)),
+          ],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// Body: today's session, water and the fasting clock at a glance (read
+/// once, on that one card – the fast's start / end and the water's +250 sit
+/// on the Body screen's Today tab, a tap away through the card), the food
+/// of the day, then the training plan and the avoid list.
+class BodyHub extends StatelessWidget {
+  const BodyHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(BodyTodayCard(onOpen: () => LifeNav.body(context)))
+      ..card(NutritionTodayCard(onOpen: () => LifeNav.body(context, tab: BodyTab.food)))
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            (
+              Icons.event_note_rounded,
+              l.bodyTabPlan,
+              l.lifeHubToolPlanHint,
+              () => LifeNav.body(context, tab: BodyTab.plan),
+            ),
+            (
+              Icons.do_not_disturb_on_outlined,
+              l.bodyTabAvoid,
+              l.lifeHubToolAvoidHint,
+              () => LifeNav.body(context, tab: BodyTab.avoid),
+            ),
+          ],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// «السفرة» (Part 5), hers: what needs attention in the house and the one
+/// dish Madar can honestly suggest tonight, then the kitchen's four
+/// screens. Nothing on this world reads Health or Money – a kitchen screen
+/// stays a kitchen screen.
+class SufraHub extends StatelessWidget {
+  const SufraHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = L10n.of(context);
+    final hub = _HubColumn(firstIndex)
+      ..card(
+        SufraTodayCard(
+          onOpen: () => LifeNav.sufraTonight(context),
+          onOpenPantry: () => LifeNav.sufraPantry(context),
+        ),
+      )
+      ..header(l.lifeHubToolsTitle)
+      ..card(
+        _LifeTools(
+          tools: [
+            (
+              Icons.kitchen_outlined,
+              l.sufraPantryTitle,
+              l.sufraToolPantryHint,
+              () => LifeNav.sufraPantry(context),
+            ),
+            (
+              Icons.menu_book_rounded,
+              l.sufraRecipesTitle,
+              l.sufraToolRecipesHint,
+              () => LifeNav.sufraRecipes(context),
+            ),
+            (Icons.rule_rounded, l.sufraConstraintsTitle, l.sufraToolRulesHint, () => LifeNav.sufraRules(context)),
+            (
+              Icons.history_rounded,
+              l.sufraHistoryTitle,
+              l.sufraToolHistoryHint,
+              () => LifeNav.sufraHistory(context),
+            ),
+          ],
+        ),
+      );
+    return hub.build();
+  }
+}
+
+/// «الألعاب» – the games' own world: the hall's door (the marquee card,
+/// which counts the shows ready to play), then his best scores, then the
+/// games he saved from a link.
+///
+/// No row of tools: this world has two screens and both are already a full
+/// card here, with their own door. A tool tile would be the same screen
+/// named twice (the Growth hub leaves out its goals tile for the same
+/// reason).
+///
+/// This world never counts in the balance and never reaches the Neglect
+/// Radar (`weight: 0`, see `MadarDefaults.planets`), so nothing on this hub
+/// is a duty: no streak, no "you have not played in 7 days", no score out
+/// of ten. A fresh install shows the hall with its shows, an empty ticket
+/// book and the invitation to save a game – never a made-up score.
+class GamesHub extends StatelessWidget {
+  const GamesHub({super.key, this.firstIndex = 1});
+
+  /// Stagger index of the first card.
+  final int firstIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final hub = _HubColumn(firstIndex)
+      ..card(const CinemaEntryCard(onOpen: CinemaNav.hall))
+      ..card(GamesScoresCard(onOpen: CinemaNav.hall))
+      // The shelf's posters run to both edges and it brings its own header
+      // and insets, so it is not wrapped in the cards' gutter.
+      ..wide(SavedGamesShelf(onSeeAll: () => CinemaNav.savedGames(context)));
+    return hub.build();
+  }
+}
+
+/// The user's own trackers and lists attached to [planetKey], on every
+/// world's page (custom worlds included). Faith, Health and Money are
+/// already dense: they list their trackers but show no empty "create one"
+/// prompt; every other world does.
+class PlanetModulesSection extends ConsumerWidget {
+  const PlanetModulesSection({super.key, required this.planetKey});
+
+  final String planetKey;
+
+  /// Worlds that show nothing while they have no tracker.
+  static const Set<String> quietWhenEmpty = {'faith', 'health', 'money'};
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final modules = ref.watch(customPlanetModulesProvider(planetKey)).value;
+    final showWhenEmpty = !quietWhenEmpty.contains(planetKey);
+    if (modules == null || (modules.isEmpty && !showWhenEmpty)) return const SizedBox.shrink();
+    return Material(
+      type: MaterialType.transparency,
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.m, Space.gutter, 0),
+        child: CustomModulesCard(
+          planetKey: planetKey,
+          onOpenModule: LifeNav.module,
+          onSeeAll: () => LifeNav.modules(context),
+          showWhenEmpty: showWhenEmpty,
+        ),
+      ),
+    );
+  }
+}
+
+/// A group's title, rising with its first card.
+class _Header extends StatelessWidget {
+  const _Header({required this.index, required this.title});
+
+  final int index;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) => StaggerItem(
+    index: index,
+    child: SectionHeader(
+      title: title,
+      padding: const EdgeInsetsDirectional.fromSTEB(Space.gutter, Space.l, Space.gutter, Space.s),
+    ),
+  );
+}
+
+/// Icon, name, hint (for screen readers) and where it leads.
+typedef _Tool = (IconData, String, String, VoidCallback);
+
+/// A world's tools: a tile per screen the hub leads to, on the very grid
+/// Faith, Health and Money use – three to a row, so a tool tile is the
+/// same size on every world's page and they all wear one seal. A row with
+/// fewer tools keeps the empty cells, rather than stretching two tiles
+/// across the page.
+class _LifeTools extends StatelessWidget {
+  const _LifeTools({required this.tools, this.sfx = const []});
+
+  /// Tools in a row – the Money hub's grid.
+  static const int columns = MoneyTools.columns;
+
+  final List<_Tool> tools;
+
+  /// The sound of each tile (default: navigate).
+  final List<Sfx> sfx;
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = <Widget>[];
+    for (var i = 0; i < tools.length; i += columns) {
+      if (i > 0) rows.add(const SizedBox(height: Space.s));
+      rows.add(
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (var j = i; j < i + columns; j++) ...[
+                if (j > i) const SizedBox(width: Space.s),
+                Expanded(
+                  child: j < tools.length
+                      ? _ToolTile(tool: tools[j], sfx: j < sfx.length ? sfx[j] : Sfx.navigate)
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ],
+          ),
+        ),
+      );
+    }
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+  }
+}
+
+class _ToolTile extends StatelessWidget {
+  const _ToolTile({required this.tool, required this.sfx});
+
+  final _Tool tool;
+  final Sfx sfx;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final (icon, title, hint, onTap) = tool;
+    return MadarPressable(
+      onTap: onTap,
+      sfx: sfx,
+      semanticLabel: '$title. $hint',
+      excludeChildSemantics: true,
+      focusRadius: BorderRadius.circular(t.radiusM),
+      child: GlassCard(
+        glow: false,
+        padding: const EdgeInsetsDirectional.fromSTEB(Space.xs, Space.m, Space.xs, Space.m),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _Seal(icon: icon),
+            const SizedBox(height: Space.s),
+            Text(
+              title,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: text.titleSmall!.copyWith(color: t.textPrimary, height: 1.25),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A brass eight-point seal holding a tool's icon.
+class _Seal extends StatelessWidget {
+  const _Seal({required this.icon});
+
+  final IconData icon;
+
+  static const double size = 44;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return SizedBox.square(
+      dimension: size,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          IslamicStar(size: size, color: t.accentSoft),
+          IslamicStar(size: size, filled: false, color: t.brass.withValues(alpha: 0.8), strokeWidth: 1.2),
+          Icon(icon, size: 20, color: t.accent),
+        ],
+      ),
+    );
+  }
+}

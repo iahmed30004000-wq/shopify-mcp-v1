@@ -1,0 +1,17 @@
+{
+  "cinemaFlappyOrbitTapToBoost": {"ar": "المس الشاشة لتدفع الصاروخ!", "en": "Tap to boost the rocket!", "description": "Flappy Orbit opening card subtitle"},
+  "cinemaFlappyOrbitLaunchHint": {"ar": "المس الشاشة للإقلاع", "en": "Tap to launch", "description": "Flappy Orbit HUD hint on the launch pad"},
+  "cinemaFlappyOrbitBossName": {"ar": "المايسترو غَيم", "en": "Maestro Ghaym", "description": "Name of the conductor-cloud boss of Flappy Orbit (Ghaym = cloud)"},
+  "cinemaFlappyOrbitActTwo": {"ar": "الفصل الثاني", "en": "Act Two", "description": "Chapter card before the first boss"},
+  "cinemaFlappyOrbitActThree": {"ar": "الفصل الثالث", "en": "Act Three", "description": "Chapter card before the second boss"},
+  "cinemaFlappyOrbitActFinal": {"ar": "الفصل الأخير", "en": "The Final Act", "description": "Chapter card before the last boss"},
+  "cinemaFlappyOrbitBossEnters": {"ar": "المايسترو غَيم يصعد المسرح", "en": "Maestro Ghaym takes the stage", "description": "Chapter card subtitle when the boss enters"},
+  "cinemaFlappyOrbitNearMiss": {"ar": "مرور خطر!", "en": "Near miss!", "description": "HUD callout for grazing a gate"},
+  "cinemaFlappyOrbitOnBeat": {"ar": "على الإيقاع!", "en": "On the beat!", "description": "HUD callout for a streak of boosts on the music's beat"},
+  "cinemaFlappyOrbitGusted": {"ar": "عاصفة!", "en": "Gust!", "description": "HUD callout when the boss's gust catches the hero"},
+  "cinemaFlappyOrbitPhaseThunder": {"ar": "نوتات رعدية!", "en": "Thunder notes!", "description": "HUD callout when the boss enters his second phase"},
+  "cinemaFlappyOrbitPhaseSpin": {"ar": "المسرح كله يدور!", "en": "The whole stage spins!", "description": "HUD callout when the boss enters his third phase"},
+  "cinemaFlappyOrbitBossDown": {"ar": "المايسترو طار مع الريح!", "en": "The Maestro blows away!", "description": "HUD callout when the boss is defeated"},
+  "cinemaFlappyOrbitEndLoop": {"ar": "لفّة كاملة وهبوط بطولي!", "en": "A full loop and a hero's landing!", "description": "End card subtitle after beating every boss"},
+  "cinemaFlappyOrbitEndPie": {"ar": "هبط في فطيرة الجيران!", "en": "Crash-landed in the neighbours' pie!", "description": "End card subtitle after losing all lives"}
+}

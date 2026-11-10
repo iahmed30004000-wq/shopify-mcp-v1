@@ -1,0 +1,262 @@
+{
+  "tasmeeTitle": {
+    "ar": "التسميع",
+    "en": "Recitation check",
+    "description": "Part 13: reciting out loud and being checked against the verified text"
+  },
+  "tasmeeSubtitle": {
+    "ar": "سمّع، والتطبيق يتابعك كلمة كلمة",
+    "en": "Recite, and the app follows you word by word"
+  },
+  "tasmeeHintNotRuling": {
+    "ar": "هاي مساعدة إلك، مش حكم. اللي يسمعه التطبيق ممكن يغلط، والنص اللي بين إيديك هو المرجع.",
+    "en": "This is help for you, not a ruling. What the app hears can be wrong; the text in front of you is the reference."
+  },
+  "tasmeeOfflineNote": {
+    "ar": "كل إشي يصير على جوالك. لا صوتك ولا الكلام اللي سمعه التطبيق يطلع من الجوال.",
+    "en": "Everything happens on your phone. Neither your voice nor the words it heard ever leave it."
+  },
+  "tasmeeHeardLabel": {
+    "ar": "اللي سمعه التطبيق منك",
+    "en": "What the app heard from you",
+    "description": "Always labelled, always in a different type: it is never Quran text"
+  },
+  "tasmeeVerifiedLabel": {
+    "ar": "النص المصحفي",
+    "en": "The verified text"
+  },
+  "tasmeeWordRight": {
+    "ar": "صح",
+    "en": "Right"
+  },
+  "tasmeeWordWrong": {
+    "ar": "كلمة غير",
+    "en": "A different word"
+  },
+  "tasmeeWordSkipped": {
+    "ar": "كلمة مرقت",
+    "en": "A word you went past"
+  },
+  "tasmeeWordExtra": {
+    "ar": "كلمة زيادة",
+    "en": "An extra word"
+  },
+  "tasmeeWordUnsure": {
+    "ar": "التطبيق ما تأكد",
+    "en": "The app was not sure",
+    "description": "Heard something but below the confidence floor; never counted as a mistake"
+  },
+  "tasmeeWordPending": {
+    "ar": "لسا ما وصلتها",
+    "en": "Not reached yet"
+  },
+  "tasmeeRepetitionNote": {
+    "ar": "رجعت قلت كلمات من نفس الآية. هاد مش غلط.",
+    "en": "You said words of the same verse again. That is not a mistake."
+  },
+  "tasmeeBasmalaNote": {
+    "ar": "البسملة قبل السورة محسوبة عادي، مش كلمة زيادة.",
+    "en": "The basmala before a surah is fine, not an extra word."
+  },
+  "tasmeePauseNote": {
+    "ar": "وقفت شوي وكمّلت. الوقفة مش غلط.",
+    "en": "You stopped for a moment and carried on. A pause is not a mistake."
+  },
+  "tasmeeTashkeelExperimental": {
+    "ar": "فحص التشكيل تجربة أولية، ومطفي بالعادة. الكلمة نفسها صح.",
+    "en": "The diacritics check is experimental and normally off. The word itself is right."
+  },
+  "tasmeeTashkeelToggle": {
+    "ar": "افحص التشكيل كمان (تجربة)",
+    "en": "Also check the diacritics (experimental)"
+  },
+  "tasmeeHideMarkersToggle": {
+    "ar": "خفّي أرقام الآيات وأنا أسمّع",
+    "en": "Hide the verse numbers while I recite"
+  },
+  "tasmeeNoModelTitle": {
+    "ar": "التسميع لسا مش جاهز بهاي النسخة",
+    "en": "The recitation check is not ready in this build"
+  },
+  "tasmeeNoModelBody": {
+    "ar": "برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. القراءة والسماع شغّالين متل العادة.",
+    "en": "The speech recogniser is not on the phone yet. Reading and listening work as usual."
+  },
+  "tasmeePhoneCannotRunTitle": {
+    "ar": "جوالك ما بيقدر يشغّل التسميع",
+    "en": "Your phone cannot run the recitation check"
+  },
+  "tasmeePhoneCannotRunBody": {
+    "ar": "برنامج التعرّف على الصوت بدّه جوال أقوى. القراءة والسماع شغّالين متل العادة.",
+    "en": "The recogniser needs a stronger phone. Reading and listening work as usual."
+  },
+  "tasmeeMicNeededTitle": {
+    "ar": "بدنا إذن المايك",
+    "en": "The microphone needs your permission"
+  },
+  "tasmeeMicNeededBody": {
+    "ar": "المايك يفتح وأنت تسمّع بس، وصوتك ما ينسجّل ولا يطلع من الجوال.",
+    "en": "The microphone opens only while you recite; your voice is not saved and never leaves the phone."
+  },
+  "tasmeeMicDeniedBody": {
+    "ar": "رفضت إذن المايك قبل. افتح إعدادات الجوال وسمّحه إذا بدك تسمّع.",
+    "en": "You refused the microphone before. Allow it in the phone's settings if you want to recite."
+  },
+  "tasmeeStart": {
+    "ar": "ابدأ التسميع",
+    "en": "Start reciting"
+  },
+  "tasmeeStop": {
+    "ar": "خلّصت",
+    "en": "I am done"
+  },
+  "tasmeeDiscard": {
+    "ar": "ألغِ",
+    "en": "Discard"
+  },
+  "tasmeeHiddenTitle": {
+    "ar": "الآية المخفية",
+    "en": "The hidden verse"
+  },
+  "tasmeeHiddenBody": {
+    "ar": "الصفحة مخفية، والكلمة تبيّن لمّا تسمّعها صح.",
+    "en": "The page is hidden, and a word appears when you recite it correctly."
+  },
+  "tasmeePeek": {
+    "ar": "ورّيني كلمة",
+    "en": "Show me a word"
+  },
+  "tasmeePeekCountsAsHint": {
+    "ar": "لمّا تورّيك كلمة، بتُحسب مساعدة، عشان قوّة الحفظ تطلع صادقة.",
+    "en": "A revealed word counts as a hint, so your memorisation strength stays honest."
+  },
+  "tasmeeHintsCount": {
+    "ar": "{count, plural, =0{بدون أي مساعدة} =1{مساعدة واحدة} =2{مساعدتان} few{{count} مساعدات} many{{count} مساعدة} other{{count} مساعدة}}",
+    "en": "{count, plural, =0{No hints} =1{1 hint} other{{count} hints}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeBlanksTitle": {
+    "ar": "املأ الفراغ",
+    "en": "Fill in the blank"
+  },
+  "tasmeeBlanksBody": {
+    "ar": "شيلنا كلمات من الآية، وسمّعها كاملة. الحساب على الكلمات المشيلة بس.",
+    "en": "Some words are taken out; recite the whole verse. Only the missing words are scored."
+  },
+  "tasmeeBlanksCount": {
+    "ar": "{count, plural, =0{ما في فراغات} =1{فراغ واحد} =2{فراغان} few{{count} فراغات} many{{count} فراغًا} other{{count} فراغ}}",
+    "en": "{count, plural, =0{No blanks} =1{1 blank} other{{count} blanks}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeBlanksScore": {
+    "ar": "{right} من {total} صح",
+    "en": "{right} of {total} right",
+    "placeholders": {"right": {"type": "int"}, "total": {"type": "int"}}
+  },
+  "tasmeeFindTitle": {
+    "ar": "وين هاي الآية",
+    "en": "Where is this verse"
+  },
+  "tasmeeFindBody": {
+    "ar": "سمّع أي مقطع، والتطبيق يقلّك السورة والآية، وكل إشي على الجوال.",
+    "en": "Recite any phrase and the app names the surah and the verse, all on the phone."
+  },
+  "tasmeeFindSure": {
+    "ar": "لقيتها",
+    "en": "Found it"
+  },
+  "tasmeeFindSeveral": {
+    "ar": "هاد المقطع بأكثر من آية. اختار اللي بدك.",
+    "en": "This phrase is in more than one verse. Pick the one you mean."
+  },
+  "tasmeeFindUnsure": {
+    "ar": "أقرب إشي لقيته، بس التطبيق مش متأكد.",
+    "en": "The closest thing found, but the app is not sure."
+  },
+  "tasmeeFindNone": {
+    "ar": "ما لقيت هاد المقطع. جرّب سمّع شوي أكثر.",
+    "en": "That phrase was not found. Try reciting a little more."
+  },
+  "tasmeeFindTooShort": {
+    "ar": "سمّع ثلاث كلمات على الأقل، كلمتين موجودات بكل مكان.",
+    "en": "Recite at least three words; two words are everywhere."
+  },
+  "tasmeeFindCandidates": {
+    "ar": "{count, plural, =0{ما في ولا نتيجة} =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}",
+    "en": "{count, plural, =0{No results} =1{1 result} other{{count} results}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeLogTitle": {
+    "ar": "سجل أخطائي",
+    "en": "My mistake log"
+  },
+  "tasmeeLogEmptyTitle": {
+    "ar": "السجل لسا فاضي",
+    "en": "The log is still empty"
+  },
+  "tasmeeLogEmptyBody": {
+    "ar": "سمّع آية، وأي غلط بينزل هون باليوم والكلمة، وتقدر تمحيه وقت ما بدك.",
+    "en": "Recite a verse and anything that went wrong lands here with its day and its word; you can delete it whenever you like."
+  },
+  "tasmeeStatsTitle": {
+    "ar": "تقدّمي",
+    "en": "My progress"
+  },
+  "tasmeeStatsAccuracy": {
+    "ar": "نسبة الصح",
+    "en": "Share right"
+  },
+  "tasmeeWeakWordsTitle": {
+    "ar": "كلمات بتتعثّر فيها",
+    "en": "Words you stumble on"
+  },
+  "tasmeeWeakAyatTitle": {
+    "ar": "آيات بدها مراجعة",
+    "en": "Verses that need review"
+  },
+  "tasmeeMistakesCount": {
+    "ar": "{count, plural, =0{ما في ولا غلط} =1{غلط واحد} =2{غلطتان} few{{count} أغلاط} many{{count} غلطًا} other{{count} غلط}}",
+    "en": "{count, plural, =0{No mistakes} =1{1 mistake} other{{count} mistakes}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeWordsCount": {
+    "ar": "{count, plural, =0{ما في كلمات} =1{كلمة واحدة} =2{كلمتان} few{{count} كلمات} many{{count} كلمة} other{{count} كلمة}}",
+    "en": "{count, plural, =0{No words} =1{1 word} other{{count} words}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeSessionsCount": {
+    "ar": "{count, plural, =0{ولا مرة} =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =0{Never} =1{1 time} other{{count} times}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeStreakDays": {
+    "ar": "{count, plural, =0{بلّش من اليوم} =1{يوم ورا التاني} =2{يومان ورا بعض} few{{count} أيام ورا بعض} many{{count} يومًا ورا بعض} other{{count} يوم ورا بعض}}",
+    "en": "{count, plural, =0{Start today} =1{1 day in a row} other{{count} days in a row}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "tasmeeDeleteSession": {
+    "ar": "امسح هاي المرة",
+    "en": "Delete this attempt"
+  },
+  "tasmeeClearLog": {
+    "ar": "امسح السجل كله",
+    "en": "Clear the whole log"
+  },
+  "tasmeeExportTitle": {
+    "ar": "صدّر السجل",
+    "en": "Export the log"
+  },
+  "tasmeeExportBody": {
+    "ar": "ملف واحد فيه كل مرة سمّعت فيها وكل غلط، عشان برنامج «فلك» على الكمبيوتر يقدر يقراه. ما فيه ولا صوت.",
+    "en": "One file with every attempt and every mistake, so the PC app can read it. It holds no audio at all."
+  },
+  "tasmeeExportDone": {
+    "ar": "الملف جاهز",
+    "en": "The file is ready"
+  },
+  "tasmeeRecogniserCredit": {
+    "ar": "التعرّف على الصوت: {name} ({licence})",
+    "en": "Speech recognition: {name} ({licence})",
+    "placeholders": {"name": {"type": "String"}, "licence": {"type": "String"}}
+  }
+}

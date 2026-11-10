@@ -1,0 +1,560 @@
+{
+  "orbitUiSceneHint": {
+    "ar": "اسحب لتدوير المدار، وباعد بإصبعين للاقتراب من عالم",
+    "en": "Drag to turn the orbit, pinch to zoom into a world",
+    "description": "Screen-reader hint of the whole orbit scene on home"
+  },
+  "orbitUiRecenter": {
+    "ar": "إعادة ضبط العرض",
+    "en": "Reset view",
+    "description": "Pill on the orbit scene shown whenever the view differs from the default overview (turned, tilted, zoomed, or the worlds drifted into each other); puts the camera and the worlds back exactly as on a fresh start"
+  },
+  "orbitUiRadarClear": {
+    "ar": "عوالمك كلها في توازن — لا شيء يحتاج انتباهك الآن",
+    "en": "All your worlds are in balance — nothing needs you right now",
+    "description": "Neglect Radar when no planet has a neglect reason"
+  },
+  "orbitUiRadarWaiting": {
+    "ar": "سيبدأ الرادار عمله حين تسجّل أول أنشطتك",
+    "en": "The radar wakes up once you log your first activities",
+    "description": "Neglect Radar before any planet has data"
+  },
+  "orbitUiRadarEntrySemantics": {
+    "ar": "{planet}: {reason}",
+    "en": "{planet}: {reason}",
+    "description": "Screen-reader label of one Neglect Radar entry",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiRadarOpenHint": {
+    "ar": "انتقل إلى هذا العالم",
+    "en": "Fly to this world",
+    "description": "Screen-reader hint of a Neglect Radar entry"
+  },
+  "orbitUiBalanceLabel": {
+    "ar": "التوازن",
+    "en": "Balance",
+    "description": "Caption under a planet's score ring"
+  },
+  "orbitUiPlanetWeight": {
+    "ar": "وزنه في توازنك ×{weight}",
+    "en": "Weight in your balance ×{weight}",
+    "description": "How much a planet counts in the overall balance (weight already formatted)",
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPlanetNotCounted": {
+    "ar": "لا يُحتسب في توازنك",
+    "en": "Not counted in your balance",
+    "description": "Planet with weight 0"
+  },
+  "orbitUiReasonsTitle": {
+    "ar": "ما يحتاج عنايتك",
+    "en": "What needs your care",
+    "description": "Section title on a planet page listing its neglect reasons"
+  },
+  "orbitUiReasonsNone": {
+    "ar": "لا شيء متأخر هنا — أحسنت",
+    "en": "Nothing is overdue here — well done",
+    "description": "Planet page when the planet has no neglect reasons"
+  },
+  "orbitUiReasonsDormant": {
+    "ar": "هذا العالم هادئ بانتظار أول بياناتك",
+    "en": "This world is calm, waiting for your first entries",
+    "description": "Planet page when the planet has no data yet"
+  },
+  "orbitUiSourcesTitle": {
+    "ar": "ما يغذّي هذا التوازن",
+    "en": "What feeds this balance",
+    "description": "Section title listing the score sources of a planet"
+  },
+  "orbitUiMoonsTitle": {
+    "ar": "الأقمار",
+    "en": "Moons",
+    "description": "Section title listing the data moons of a planet"
+  },
+  "orbitUiMoonsNone": {
+    "ar": "لا أقمار تدور حول هذا العالم بعد",
+    "en": "No moons circle this world yet",
+    "description": "Planet page with no data moons"
+  },
+  "orbitUiMoonKindPerson": {
+    "ar": "شخص",
+    "en": "Person",
+    "description": "Kind of a data moon: a person around Family"
+  },
+  "orbitUiMoonKindWallet": {
+    "ar": "محفظة",
+    "en": "Wallet",
+    "description": "Kind of a data moon: a wallet around Money"
+  },
+  "orbitUiMoonKindBoard": {
+    "ar": "لوحة عمل",
+    "en": "Board",
+    "description": "Kind of a data moon: a work board around Work"
+  },
+  "orbitUiMoonKindTrip": {
+    "ar": "رحلة",
+    "en": "Trip",
+    "description": "Kind of a data moon: a trip around Travel"
+  },
+  "orbitUiMoonKindModule": {
+    "ar": "وحدة",
+    "en": "Module",
+    "description": "Kind of a data moon: a custom module"
+  },
+  "orbitUiMoonFreshness": {
+    "ar": "حيويته {percent}",
+    "en": "Freshness {percent}",
+    "description": "How fresh / attended a data moon is (percent formatted)",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonSelected": {
+    "ar": "القمر الذي اخترته",
+    "en": "The moon you picked",
+    "description": "Badge on the moon row that was tapped in the orbit"
+  },
+  "orbitUiCustomize": {
+    "ar": "تخصيص",
+    "en": "Customise",
+    "description": "Button opening the planet customisation sheet"
+  },
+  "orbitUiCustomizeTitle": {
+    "ar": "تخصيص {planet}",
+    "en": "Customise {planet}",
+    "description": "Title of the planet customisation sheet",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiCustomizeSubtitle": {
+    "ar": "كل تغيير يمكن التراجع عنه",
+    "en": "Every change can be undone",
+    "description": "Subtitle of the planet customisation sheet"
+  },
+  "orbitUiEditLook": {
+    "ar": "الاسم والمظهر",
+    "en": "Name and look",
+    "description": "Customisation action: rename, recolour, restyle"
+  },
+  "orbitUiEditWeight": {
+    "ar": "أهميته في التوازن",
+    "en": "Weight in the balance",
+    "description": "Customisation action: planet weight"
+  },
+  "orbitUiEditSources": {
+    "ar": "مصادر البيانات",
+    "en": "Data sources",
+    "description": "Customisation action: which data feeds the score and how much"
+  },
+  "orbitUiMoveOrbit": {
+    "ar": "نقل مداره",
+    "en": "Move its orbit",
+    "description": "Customisation action: reorder the planet among the orbits"
+  },
+  "orbitUiHide": {
+    "ar": "إخفاء من المدار",
+    "en": "Hide from the orbit",
+    "description": "Customisation action: hide the planet (its data stays)"
+  },
+  "orbitUiReset": {
+    "ar": "استعادة الإعدادات الأصلية",
+    "en": "Restore the original",
+    "description": "Customisation action: reset a built-in planet"
+  },
+  "orbitUiDelete": {
+    "ar": "حذف هذا العالم",
+    "en": "Delete this world",
+    "description": "Customisation action: delete a user-added planet"
+  },
+  "orbitUiAddPlanet": {
+    "ar": "إضافة عالم جديد",
+    "en": "Add a new world",
+    "description": "Customisation action: add a planet"
+  },
+  "orbitUiHiddenWorlds": {
+    "ar": "العوالم المخفية",
+    "en": "Hidden worlds",
+    "description": "Customisation action / sheet title: show a hidden planet again"
+  },
+  "orbitUiFieldName": {
+    "ar": "الاسم",
+    "en": "Name",
+    "description": "Field: planet name"
+  },
+  "orbitUiFieldColor": {
+    "ar": "اللون",
+    "en": "Colour",
+    "description": "Field: planet colour"
+  },
+  "orbitUiFieldStyle": {
+    "ar": "طراز العالم",
+    "en": "World style",
+    "description": "Field: planet archetype (surface look)"
+  },
+  "orbitUiFieldWeight": {
+    "ar": "الأهمية",
+    "en": "Weight",
+    "description": "Field: planet weight slider"
+  },
+  "orbitUiWeightNone": {
+    "ar": "لا يُحتسب",
+    "en": "Not counted",
+    "description": "Weight slider label at 0"
+  },
+  "orbitUiWeightNormal": {
+    "ar": "عادي",
+    "en": "Normal",
+    "description": "Weight slider label at 1×"
+  },
+  "orbitUiWeightMost": {
+    "ar": "الأهم",
+    "en": "Most important",
+    "description": "Weight slider label at the maximum"
+  },
+  "orbitUiSourcesHint": {
+    "ar": "حرّك المصدر إلى الصفر لإيقافه",
+    "en": "Slide a source to zero to switch it off",
+    "description": "Subtitle of the data sources sheet"
+  },
+  "orbitUiSourceOff": {
+    "ar": "متوقف",
+    "en": "Off",
+    "description": "Source weight slider label at 0"
+  },
+  "orbitUiMoveTitle": {
+    "ar": "موضع المدار",
+    "en": "Orbit position",
+    "description": "Title of the move-orbit sheet"
+  },
+  "orbitUiMoveSubtitle": {
+    "ar": "الأقرب إلى نجمك أولًا",
+    "en": "Closest to your star first",
+    "description": "Subtitle of the move-orbit sheet"
+  },
+  "orbitUiMoveBefore": {
+    "ar": "قبل {planet}",
+    "en": "Before {planet}",
+    "description": "Move-orbit target: put the planet just inside another one",
+    "placeholders": {
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoveLast": {
+    "ar": "المدار الأبعد",
+    "en": "Outermost orbit",
+    "description": "Move-orbit target: the last orbit"
+  },
+  "orbitUiOrbitNumber": {
+    "ar": "المدار {n}",
+    "en": "Orbit {n}",
+    "description": "Subtitle of a move target: its orbit number (n formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerAt": {
+    "ar": "وقتها {time}",
+    "en": "At {time}",
+    "description": "Subtitle of the prayer sheet (time formatted)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerPrayed": {
+    "ar": "صلّيتها",
+    "en": "Prayed",
+    "description": "Prayer sheet action: log as prayed on time"
+  },
+  "orbitUiPrayerLate": {
+    "ar": "صلّيتها متأخرة",
+    "en": "Prayed late",
+    "description": "Prayer sheet action: log as prayed late"
+  },
+  "orbitUiPrayerMissed": {
+    "ar": "فاتتني",
+    "en": "Missed it",
+    "description": "Prayer sheet action: log as missed"
+  },
+  "orbitUiPrayerClear": {
+    "ar": "إلغاء التسجيل",
+    "en": "Clear the log",
+    "description": "Prayer sheet action: remove today's log of this prayer"
+  },
+  "orbitUiPrayerNotYet": {
+    "ar": "لم يدخل وقتها بعد",
+    "en": "Its time hasn't come yet",
+    "description": "Prayer sheet: the prayer is still upcoming"
+  },
+  "orbitUiPrayerLogged": {
+    "ar": "سُجّلت صلاة {prayer}",
+    "en": "{prayer} logged",
+    "description": "Undo toast after logging a prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerCleared": {
+    "ar": "أُلغي تسجيل {prayer}",
+    "en": "{prayer} log cleared",
+    "description": "Undo toast after clearing a prayer log",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerHint": {
+    "ar": "سجّل هذه الصلاة",
+    "en": "Log this prayer",
+    "description": "Screen-reader hint of a prayer pointer on the astrolabe"
+  },
+  "orbitUiPlanetMissing": {
+    "ar": "هذا العالم لم يعد في مدارك",
+    "en": "This world is no longer in your orbit",
+    "description": "Planet page opened for a planet that was hidden or deleted"
+  },
+  "orbitUiBackToOrbit": {
+    "ar": "العودة إلى المدار",
+    "en": "Back to the orbit",
+    "description": "Back button of a planet page (screen reader and missing-planet state)"
+  },
+  "orbitUiInDuration": {
+    "ar": "بعد {duration}",
+    "en": "in {duration}",
+    "description": "Countdown on the next prayer's window chip (duration formatted, e.g. ١ س ٢٣ د)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerPrayedAt": {
+    "ar": "صُلّيت {time}",
+    "en": "Prayed at {time}",
+    "description": "Prayer sheet: the achieved state of a prayer already logged as prayed (shown with a lit flame and a check)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerLateAt": {
+    "ar": "صُلّيت متأخرة {time}",
+    "en": "Prayed late at {time}",
+    "description": "Prayer sheet: the achieved state of a prayer logged as prayed late",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonOf": {
+    "ar": "{kind} في {planet}",
+    "en": "{kind} in {planet}",
+    "description": "Moon sheet subtitle: what the record is and which world it orbits",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "planet": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonInTouch": {
+    "ar": "تواصلت اليوم",
+    "en": "In touch today",
+    "description": "Moon sheet action for a person: log that you were in touch today"
+  },
+  "orbitUiMoonInTouchLogged": {
+    "ar": "سُجّل تواصلك مع {name}",
+    "en": "Logged: in touch with {name}",
+    "description": "Undo toast after logging contact with a person",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonRename": {
+    "ar": "إعادة التسمية",
+    "en": "Rename",
+    "description": "Moon sheet action: rename the record"
+  },
+  "orbitUiMoonRenamed": {
+    "ar": "تمت إعادة التسمية",
+    "en": "Renamed",
+    "description": "Undo toast after renaming a record from its moon"
+  },
+  "orbitUiMoonLastContact": {
+    "ar": "آخر تواصل: {when}",
+    "en": "Last in touch: {when}",
+    "description": "Moon sheet detail line for a person",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonTripStarts": {
+    "ar": "تبدأ في {date}",
+    "en": "Starts {date}",
+    "description": "Moon sheet detail line for a trip",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonNever": {
+    "ar": "لم يُسجَّل بعد",
+    "en": "Not logged yet",
+    "description": "Moon sheet: no last-contact date yet"
+  },
+  "orbitUiListSeparator": {
+    "ar": "{a} · {b}",
+    "en": "{a} · {b}",
+    "description": "Joins two short parts of one line (e.g. a state and a percentage); keeps the separator translatable",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiFraction": {
+    "ar": "{done}/{total}",
+    "en": "{done}/{total}",
+    "description": "Compact progress inside a small ring, e.g. «١/٢» tasks done",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerDone": {
+    "ar": "صُلّيت",
+    "en": "Prayed",
+    "description": "Prayer sheet: the achieved state of a prayer logged as prayed when the log time is unknown (imported or back-filled)"
+  },
+  "orbitUiPrayerLateDone": {
+    "ar": "صُلّيت متأخرة",
+    "en": "Prayed late",
+    "description": "Prayer sheet: the achieved state of a prayer logged as prayed late when the log time is unknown"
+  },
+  "orbitUiPanelExpand": {
+    "ar": "عرض مهام هذا الوقت ورادار الإهمال",
+    "en": "Show this window's tasks and the Neglect Radar",
+    "description": "Screen-reader label of the home panel's grabber while the panel peeks (tap expands it)"
+  },
+  "orbitUiPanelCollapse": {
+    "ar": "طيّ اللوحة وإظهار المدار",
+    "en": "Fold the panel and show the orbit",
+    "description": "Screen-reader label of the home panel's grabber while the panel is expanded (tap folds it)"
+  },
+  "orbitUiRadarLineJoin": {
+    "ar": " — ",
+    "en": " — ",
+    "description": "Joins a planet's name and its neglect reason on the one-line Neglect Radar (keep the spaces)"
+  },
+  "orbitUiTodayPrayersTitle": {
+    "ar": "صلوات اليوم",
+    "en": "Today's prayers",
+    "description": "Section on the Faith planet page: today's five prayers on a small dial"
+  },
+  "orbitUiPrayersProgress": {
+    "ar": "صلّيت {done} من {total}",
+    "en": "{done} of {total} prayed",
+    "description": "Centre of the Faith page's prayer dial / its screen-reader summary (numbers already formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiPrayerStatusPrayed": {
+    "ar": "صُلّيت",
+    "en": "Prayed",
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiPrayerStatusDue": {
+    "ar": "حان وقتها",
+    "en": "Due now",
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiPrayerStatusMissed": {
+    "ar": "فاتت",
+    "en": "Missed",
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiPrayerStatusUpcoming": {
+    "ar": "قادمة",
+    "en": "Upcoming",
+    "description": "Status of one prayer on the Faith page"
+  },
+  "orbitUiWirdTitle": {
+    "ar": "الورد والأذكار",
+    "en": "Wird and adhkar",
+    "description": "Section on the Faith planet page: Quran wird and adhkar progress"
+  },
+  "orbitUiWorldTasksTitle": {
+    "ar": "اليوم في هذا العالم",
+    "en": "Today on this world",
+    "description": "Section on a planet page listing today's tasks attached to the planet"
+  },
+  "orbitUiWorldTasksNone": {
+    "ar": "لا شيء مخطّط لهذا العالم اليوم",
+    "en": "Nothing planned for this world today",
+    "description": "A planet page with no tasks today"
+  },
+  "orbitUiSourceSemantics": {
+    "ar": "{source}: {value}",
+    "en": "{source}: {value}",
+    "description": "Screen-reader label of one score source bar on a planet page (value already formatted)",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "orbitUiMoonWaiting": {
+    "ar": "بانتظارك",
+    "en": "Waiting on you",
+    "description": "A data moon's meter when it has had no attention at all (instead of a lone 0 %)"
+  }
+}

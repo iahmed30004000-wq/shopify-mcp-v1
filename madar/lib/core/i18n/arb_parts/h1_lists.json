@@ -1,0 +1,442 @@
+{
+  "listsTitle": {
+    "ar": "القوائم",
+    "en": "Lists",
+    "description": "Part 3b: the shared tick lists"
+  },
+  "listsOfHost": {
+    "ar": "قوائم {name}",
+    "en": "{name} · lists",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsBudgetTile": {
+    "ar": "قائمة الأغراض",
+    "en": "Shopping list"
+  },
+  "listsTripTile": {
+    "ar": "قوائم ثانية للرحلة",
+    "en": "Other lists for this trip"
+  },
+  "listsTripTileHint": {
+    "ar": "غير قائمة التجهيز: أغراض تشتريها هناك، أماكن تزورها",
+    "en": "Besides the packing list: things to buy there, places to visit"
+  },
+  "listsOpenList": {
+    "ar": "افتح القائمة",
+    "en": "Open the list"
+  },
+  "listsNewList": {
+    "ar": "قائمة جديدة",
+    "en": "New list"
+  },
+  "listsNameLabel": {
+    "ar": "اسم القائمة",
+    "en": "List name"
+  },
+  "listsNameHint": {
+    "ar": "أغراض البقالة",
+    "en": "Groceries"
+  },
+  "listsNoteLabel": {
+    "ar": "ملاحظة",
+    "en": "Note"
+  },
+  "listsRename": {
+    "ar": "غيّر الاسم",
+    "en": "Rename"
+  },
+  "listsEmptyTitle": {
+    "ar": "ما في قوائم لهون",
+    "en": "No lists here yet"
+  },
+  "listsEmptyBody": {
+    "ar": "اعمل قائمة وحُط فيها اللي بدك تشطّب عليه واحد واحد.",
+    "en": "Make a list and put in the things you want to tick off one by one."
+  },
+  "listsItemsEmptyTitle": {
+    "ar": "القائمة فاضية",
+    "en": "This list is empty"
+  },
+  "listsItemsEmptyBody": {
+    "ar": "اكتب أول غرض فوق، وزيد عليه وقت ما تتذكر.",
+    "en": "Type the first item above, and add more whenever you remember."
+  },
+  "listsAddItemHint": {
+    "ar": "زيد غرض…",
+    "en": "Add an item…"
+  },
+  "listsAddItem": {
+    "ar": "زيد",
+    "en": "Add"
+  },
+  "listsItemLabel": {
+    "ar": "الغرض",
+    "en": "Item"
+  },
+  "listsQuantityLabel": {
+    "ar": "الكمية",
+    "en": "Quantity"
+  },
+  "listsUnitLabel": {
+    "ar": "الوحدة",
+    "en": "Unit"
+  },
+  "listsUnitHint": {
+    "ar": "كيلو، علبة، حبة",
+    "en": "kg, box, piece"
+  },
+  "listsPriceLabel": {
+    "ar": "السعر",
+    "en": "Price"
+  },
+  "listsPricePerUnit": {
+    "ar": "السعر للـ{unit}",
+    "en": "Price per {unit}",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "listsLineTotal": {
+    "ar": "المجموع {amount}",
+    "en": "Total {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsProgress": {
+    "ar": "{done} من {total}",
+    "en": "{done} of {total}",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "listsItemsCount": {
+    "ar": "{count, plural, =0{ما في أغراض} =1{غرض واحد} =2{غرضين} few{{count} أغراض} many{{count} غرضًا} other{{count} غرض}}",
+    "en": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsRemainingCount": {
+    "ar": "{count, plural, =1{باقي غرض واحد} =2{باقي غرضين} few{باقي {count} أغراض} many{باقي {count} غرضًا} other{باقي {count} غرض}}",
+    "en": "{count, plural, =1{1 left} other{{count} left}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsListsCount": {
+    "ar": "{count, plural, =0{ما في قوائم} =1{قائمة وحدة} =2{قائمتين} few{{count} قوائم} many{{count} قائمة} other{{count} قائمة}}",
+    "en": "{count, plural, =0{No lists} =1{1 list} other{{count} lists}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsAllDone": {
+    "ar": "خلّصت القائمة",
+    "en": "The whole list is done"
+  },
+  "listsNothingTicked": {
+    "ar": "ما شطّبت على شي لهلأ",
+    "en": "Nothing ticked yet"
+  },
+  "listsOpenAmount": {
+    "ar": "الباقي بيكلّف {amount}",
+    "en": "The rest costs {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsTickedAmount": {
+    "ar": "المشطوب {amount}",
+    "en": "Ticked: {amount}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsUntickAll": {
+    "ar": "شيل كل الإشارات",
+    "en": "Untick everything"
+  },
+  "listsClearDone": {
+    "ar": "احذف المشطوب",
+    "en": "Remove ticked"
+  },
+  "listsTickedToast": {
+    "ar": "تشطّب",
+    "en": "Ticked"
+  },
+  "listsUntickedToast": {
+    "ar": "رجع للقائمة",
+    "en": "Back on the list"
+  },
+  "listsItemAdded": {
+    "ar": "تزاد للقائمة",
+    "en": "Added to the list"
+  },
+  "listsItemSaved": {
+    "ar": "تعدّل الغرض",
+    "en": "Item saved"
+  },
+  "listsItemDeleted": {
+    "ar": "تحذف الغرض",
+    "en": "Item deleted"
+  },
+  "listsListAdded": {
+    "ar": "تعملت القائمة",
+    "en": "List created"
+  },
+  "listsListSaved": {
+    "ar": "تعدّلت القائمة",
+    "en": "List saved"
+  },
+  "listsListDeleted": {
+    "ar": "تحذفت القائمة",
+    "en": "List deleted"
+  },
+  "listsListCopied": {
+    "ar": "تنسخت القائمة",
+    "en": "List copied"
+  },
+  "listsCopySuffix": {
+    "ar": "نسخة",
+    "en": "copy"
+  },
+  "listsUntickedAllToast": {
+    "ar": "تشالت كل الإشارات",
+    "en": "Everything unticked"
+  },
+  "listsDoneClearedToast": {
+    "ar": "{count, plural, =1{تحذف غرض واحد} =2{تحذفوا غرضين} few{تحذفوا {count} أغراض} many{تحذفوا {count} غرضًا} other{تحذف {count} غرض}}",
+    "en": "{count, plural, =1{1 item removed} other{{count} items removed}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsHostGoneTitle": {
+    "ar": "السجل اللي تحته انحذف",
+    "en": "The record it belonged to is gone"
+  },
+  "listsHostGoneBody": {
+    "ar": "القائمة لسا محفوظة، بس السجل اللي كانت تحته ما صار موجود.",
+    "en": "The list is still here, but the record it hung on was deleted."
+  },
+  "listsGoneTitle": {
+    "ar": "القائمة ما صارت موجودة",
+    "en": "This list is gone"
+  },
+  "listsPostButton": {
+    "ar": "سجّلها مصروف",
+    "en": "Post as one expense"
+  },
+  "listsPostSummary": {
+    "ar": "{count, plural, =1{غرض واحد — {amount}} =2{غرضين — {amount}} few{{count} أغراض — {amount}} many{{count} غرضًا — {amount}} other{{count} غرض — {amount}}}",
+    "en": "{count, plural, =1{1 item — {amount}} other{{count} items — {amount}}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostOnEnvelope": {
+    "ar": "على {name}",
+    "en": "on {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostedBadge": {
+    "ar": "مسجّل مصروف",
+    "en": "Posted"
+  },
+  "listsPostedNote": {
+    "ar": "تسجّل مصروف {amount} على {name}",
+    "en": "Posted {amount} on {name}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostedKeepsOpen": {
+    "ar": "اللي ما شطّبت عليه ضل بالقائمة.",
+    "en": "Whatever you did not tick stayed on the list."
+  },
+  "listsPostRefusedAlready": {
+    "ar": "هاي القائمة تسجّلت مرة، ما بتتسجّل مرتين.",
+    "en": "This list was already posted; it is never posted twice."
+  },
+  "listsPostRefusedNothing": {
+    "ar": "شطّب على اللي اشتريته أول",
+    "en": "Tick what you bought first"
+  },
+  "listsPostRefusedNoAmount": {
+    "ar": "حُط سعر للأغراض اللي شطّبت عليها",
+    "en": "Put a price on the items you ticked"
+  },
+  "listsPostRefusedNoWallet": {
+    "ar": "لازم محفظة بنفس العملة قبل التسجيل",
+    "en": "You need a wallet in the same currency first"
+  },
+  "listsPostWalletTitle": {
+    "ar": "من أي محفظة؟",
+    "en": "From which wallet?"
+  },
+  "listsPostToast": {
+    "ar": "تسجّل {amount} على {name}",
+    "en": "{amount} posted on {name}",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsPostUndoneToast": {
+    "ar": "ترجّع المصروف",
+    "en": "The expense was taken back"
+  },
+  "listsSearchLists": {
+    "ar": "القوائم",
+    "en": "Lists"
+  },
+  "listsSearchItems": {
+    "ar": "أغراض القوائم",
+    "en": "List items"
+  },
+  "listsSumTitle": {
+    "ar": "القوائم",
+    "en": "Lists"
+  },
+  "listsCsvList": {
+    "ar": "القائمة",
+    "en": "List"
+  },
+  "listsCsvItem": {
+    "ar": "الغرض",
+    "en": "Item"
+  },
+  "listsCsvQuantity": {
+    "ar": "الكمية",
+    "en": "Quantity"
+  },
+  "listsCsvUnit": {
+    "ar": "الوحدة",
+    "en": "Unit"
+  },
+  "listsCsvPrice": {
+    "ar": "السعر",
+    "en": "Price"
+  },
+  "listsCsvDone": {
+    "ar": "مشطوب",
+    "en": "Ticked"
+  },
+  "listsItemTicked": {
+    "ar": "مشطوب",
+    "en": "Ticked"
+  },
+  "listsItemOpen": {
+    "ar": "بعده بالقائمة",
+    "en": "Still on the list"
+  },
+  "listsTick": {
+    "ar": "شطّب",
+    "en": "Tick"
+  },
+  "listsUntick": {
+    "ar": "رجّعه للقائمة",
+    "en": "Untick"
+  },
+  "listsDeleteList": {
+    "ar": "احذف القائمة",
+    "en": "Delete the list"
+  },
+  "listsNewItemTitle": {
+    "ar": "غرض جديد",
+    "en": "New item"
+  },
+  "listsEditItemTitle": {
+    "ar": "تعديل الغرض",
+    "en": "Edit the item"
+  },
+  "listsEditListTitle": {
+    "ar": "تعديل القائمة",
+    "en": "Edit the list"
+  },
+  "listsDragHint": {
+    "ar": "اسحب من المقبض لترتيب الأغراض",
+    "en": "Drag a handle to reorder the items"
+  },
+  "listsPostRefusedGone": {
+    "ar": "القائمة ما صارت موجودة",
+    "en": "The list is gone"
+  },
+  "listsPostRefusedHost": {
+    "ar": "هاي القائمة ما هي تحت بند بالميزانية",
+    "en": "This list does not hang on a budget envelope"
+  },
+  "listsUnder": {
+    "ar": "تحت {name}",
+    "en": "under {name}",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsAllTitle": {
+    "ar": "كل القوائم",
+    "en": "All lists"
+  },
+  "listsAllEmptyTitle": {
+    "ar": "ما في ولا قائمة لهلأ",
+    "en": "No lists yet"
+  },
+  "listsAllEmptyBody": {
+    "ar": "أي بند بالميزانية أو أي رحلة بتقدر تعمل تحته قائمة وتشطّب عليها.",
+    "en": "Any budget envelope or any trip can carry a list you tick off."
+  },
+  "listsOrphanGroup": {
+    "ar": "قوائم بلا سجل",
+    "en": "Lists with no record"
+  },
+  "listsOrphanGroupBody": {
+    "ar": "السجل اللي كانت تحته انحذف، والقائمة ضلّت لإلك.",
+    "en": "The record they hung on was deleted; the lists stayed yours."
+  }
+}

@@ -1,0 +1,713 @@
+{
+  "trackerTitle": {
+    "ar": "متتبّع الصلاة",
+    "en": "Prayer tracker",
+    "description": "Title of the prayer tracker screen"
+  },
+  "trackerTabToday": {
+    "ar": "اليوم",
+    "en": "Today",
+    "description": "Prayer tracker tab: today's prayers"
+  },
+  "trackerTabHistory": {
+    "ar": "السجلّ",
+    "en": "History",
+    "description": "Prayer tracker tab: history, streaks and the qada ledger"
+  },
+  "trackerTodayLabel": {
+    "ar": "اليوم",
+    "en": "Today",
+    "description": "Marks today in the week strip"
+  },
+  "trackerObligatory": {
+    "ar": "الفرائض",
+    "en": "Obligatory prayers",
+    "description": "Section title: the five obligatory prayers"
+  },
+  "trackerObligatoryHint": {
+    "ar": "اضغط لتبديل الحالة، واسحب يمينًا لتسجيلها في وقتها",
+    "en": "Tap to change the status, swipe right to log it on time",
+    "description": "Hint under the obligatory prayers section"
+  },
+  "trackerVoluntary": {
+    "ar": "النوافل",
+    "en": "Voluntary prayers",
+    "description": "Section title: Duha, Witr and Qiyam"
+  },
+  "trackerTodayPrayed": {
+    "ar": "صلوات اليوم",
+    "en": "Today's prayers",
+    "description": "Title of today's summary / the compact card"
+  },
+  "trackerOfTotal": {
+    "ar": "من {total}",
+    "en": "of {total}",
+    "description": "Under the big count in the progress ring (number already formatted)",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerProgress": {
+    "ar": "صلّيت {done} من {total}",
+    "en": "{done} of {total} prayed",
+    "description": "Progress of the obligatory prayers (numbers already formatted)",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerAllDone": {
+    "ar": "اكتملت صلواتك الخمس، تقبّل الله",
+    "en": "All five prayed – may Allah accept",
+    "description": "Banner when all five obligatory prayers of the day are prayed"
+  },
+  "trackerNextIn": {
+    "ar": "{prayer} بعد {duration}",
+    "en": "{prayer} in {duration}",
+    "description": "Countdown to the next prayer (duration already formatted)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerNightLeft": {
+    "ar": "حان وقت الصلوات الخمس كلها، والليل للنوافل",
+    "en": "All five prayers are due – the night is for voluntary prayer",
+    "description": "Summary line after Isha when nothing is upcoming"
+  },
+  "trackerStreakDays": {
+    "ar": "{count, plural, =0{لا سلسلة بعد} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+    "en": "{count, plural, =0{No streak yet} =1{1 day} other{{count} days}}",
+    "description": "A streak length in days",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerStreakChip": {
+    "ar": "{count, plural, =0{ابدأ سلسلتك اليوم} =1{سلسلة يوم واحد} =2{سلسلة يومين} few{سلسلة {count} أيام} many{سلسلة {count} يومًا} other{سلسلة {count} يوم}}",
+    "en": "{count, plural, =0{Start your streak today} =1{1-day streak} other{{count}-day streak}}",
+    "description": "Streak chip on the Today view and the compact card",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerDaysUnit": {
+    "ar": "{count, plural, =0{يوم} =1{يوم} =2{يومان} few{أيام} many{يومًا} other{يوم}}",
+    "en": "{count, plural, =1{day} other{days}}",
+    "description": "The unit next to a big streak number (the number is shown separately)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerJamaahCount": {
+    "ar": "{count} في جماعة",
+    "en": "{count} in jamaah",
+    "description": "How many of today's prayers were in jamaah (number already formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerStatusPrayed": {
+    "ar": "في وقتها",
+    "en": "On time",
+    "description": "Status: prayed on time"
+  },
+  "trackerStatusLate": {
+    "ar": "متأخرة",
+    "en": "Late",
+    "description": "Status: prayed late"
+  },
+  "trackerStatusMissed": {
+    "ar": "فاتت",
+    "en": "Missed",
+    "description": "Status: missed"
+  },
+  "trackerStatusQada": {
+    "ar": "قُضيت",
+    "en": "Made up",
+    "description": "Status: a missed prayer made up (qada)"
+  },
+  "trackerStatusDue": {
+    "ar": "حان وقتها",
+    "en": "Due now",
+    "description": "Status: its time is running and it is not logged yet"
+  },
+  "trackerStatusUnlogged": {
+    "ar": "لم تُسجَّل",
+    "en": "Not logged",
+    "description": "Status: its time ended without a log"
+  },
+  "trackerStatusUpcoming": {
+    "ar": "لم يحن وقتها",
+    "en": "Not yet due",
+    "description": "Status: its time has not come yet"
+  },
+  "trackerStatusVoluntaryDone": {
+    "ar": "صلّيتها",
+    "en": "Prayed",
+    "description": "Status of a voluntary prayer that was prayed"
+  },
+  "trackerStatusVoluntaryOpen": {
+    "ar": "لم تُصلَّ بعد",
+    "en": "Not prayed yet",
+    "description": "Status of a voluntary prayer not logged"
+  },
+  "trackerUpcomingIn": {
+    "ar": "بعد {duration}",
+    "en": "in {duration}",
+    "description": "How long until a prayer is due (duration already formatted)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerTimeLeft": {
+    "ar": "يبقى {duration}",
+    "en": "{duration} left",
+    "description": "How long the current prayer's time still runs (duration already formatted)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerActionPrayed": {
+    "ar": "صلّيتها في وقتها",
+    "en": "Prayed on time",
+    "description": "Menu action: log as prayed on time"
+  },
+  "trackerActionLate": {
+    "ar": "صلّيتها متأخرة",
+    "en": "Prayed late",
+    "description": "Menu action: log as prayed late"
+  },
+  "trackerActionMissed": {
+    "ar": "فاتتني",
+    "en": "Missed it",
+    "description": "Menu action: log as missed"
+  },
+  "trackerActionMadeUp": {
+    "ar": "قضيتها",
+    "en": "Made it up",
+    "description": "Action: record that a missed prayer was made up"
+  },
+  "trackerActionClear": {
+    "ar": "إلغاء التسجيل",
+    "en": "Clear the log",
+    "description": "Menu action: remove the log"
+  },
+  "trackerActionJamaahOn": {
+    "ar": "صلّيتها في جماعة",
+    "en": "Prayed in jamaah",
+    "description": "Menu action: mark as prayed in congregation"
+  },
+  "trackerActionJamaahOff": {
+    "ar": "لم أصلّها في جماعة",
+    "en": "Not in jamaah",
+    "description": "Menu action: unmark congregation"
+  },
+  "trackerActionMosqueOn": {
+    "ar": "صلّيتها في المسجد",
+    "en": "Prayed at the mosque",
+    "description": "Menu action: mark as prayed at the mosque"
+  },
+  "trackerActionMosqueOff": {
+    "ar": "لم أصلّها في المسجد",
+    "en": "Not at the mosque",
+    "description": "Menu action: unmark mosque"
+  },
+  "trackerActionMakeUpAll": {
+    "ar": "{count, plural, =1{قضيتها} =2{قضيتهما} other{قضيتها كلها}}",
+    "en": "{count, plural, =1{Made it up} other{Made them all up}}",
+    "description": "Qada ledger: record every listed prayer as made up",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerJamaah": {
+    "ar": "جماعة",
+    "en": "Jamaah",
+    "description": "Toggle chip: prayed in congregation"
+  },
+  "trackerMosque": {
+    "ar": "المسجد",
+    "en": "Mosque",
+    "description": "Toggle chip: prayed at the mosque"
+  },
+  "trackerSwipePrayed": {
+    "ar": "صلّيتها",
+    "en": "Prayed",
+    "description": "Screen-reader label of the swipe-to-log action"
+  },
+  "trackerUndoStatus": {
+    "ar": "{prayer}: {status}",
+    "en": "{prayer}: {status}",
+    "description": "Undo toast after changing a prayer's status",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoCleared": {
+    "ar": "أُلغي تسجيل {prayer}",
+    "en": "{prayer} log cleared",
+    "description": "Undo toast after clearing a log",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoJamaahOn": {
+    "ar": "{prayer} في جماعة",
+    "en": "{prayer} in jamaah",
+    "description": "Undo toast after marking jamaah",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoJamaahOff": {
+    "ar": "{prayer} من غير جماعة",
+    "en": "{prayer} not in jamaah",
+    "description": "Undo toast after unmarking jamaah",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMosqueOn": {
+    "ar": "{prayer} في المسجد",
+    "en": "{prayer} at the mosque",
+    "description": "Undo toast after marking mosque",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMosqueOff": {
+    "ar": "{prayer} خارج المسجد",
+    "en": "{prayer} not at the mosque",
+    "description": "Undo toast after unmarking mosque",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoVoluntaryOn": {
+    "ar": "تمّ تسجيل {prayer}",
+    "en": "{prayer} logged",
+    "description": "Undo toast after logging a voluntary prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoVoluntaryOff": {
+    "ar": "أُلغي تسجيل {prayer}",
+    "en": "{prayer} removed",
+    "description": "Undo toast after removing a voluntary prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMadeUp": {
+    "ar": "قُضيت صلاة {prayer} ليوم {date}",
+    "en": "{prayer} of {date} made up",
+    "description": "Undo toast after making up a missed prayer (date already formatted)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUndoMadeUpAll": {
+    "ar": "{count, plural, =1{قُضيت صلاة واحدة} =2{قُضيت صلاتان} few{قُضيت {count} صلوات} many{قُضيت {count} صلاة} other{قُضيت {count} صلاة}}",
+    "en": "{count, plural, =1{1 prayer made up} other{{count} prayers made up}}",
+    "description": "Undo toast after making up several prayers",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerNotYet": {
+    "ar": "لم يدخل وقت {prayer} بعد",
+    "en": "It isn't time for {prayer} yet",
+    "description": "Feedback when tapping a prayer whose time has not come",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerSunnahFajr": {
+    "ar": "سنّة الفجر",
+    "en": "Fajr sunnah",
+    "description": "The two rak'ahs before Fajr"
+  },
+  "trackerSunnahDhuhr": {
+    "ar": "راتبة الظهر",
+    "en": "Dhuhr sunnah",
+    "description": "The rawatib of Dhuhr"
+  },
+  "trackerSunnahMaghrib": {
+    "ar": "راتبة المغرب",
+    "en": "Maghrib sunnah",
+    "description": "The rawatib of Maghrib"
+  },
+  "trackerSunnahIsha": {
+    "ar": "راتبة العشاء",
+    "en": "Isha sunnah",
+    "description": "The rawatib of Isha"
+  },
+  "trackerDuha": {
+    "ar": "الضحى",
+    "en": "Duha",
+    "description": "The forenoon prayer"
+  },
+  "trackerWitr": {
+    "ar": "الوتر",
+    "en": "Witr",
+    "description": "The odd-numbered night prayer"
+  },
+  "trackerQiyam": {
+    "ar": "قيام الليل",
+    "en": "Night prayer",
+    "description": "Qiyam al-layl"
+  },
+  "trackerSunnahLabel": {
+    "ar": "السنّة الراتبة",
+    "en": "Sunnah",
+    "description": "Title of the sunnah chip under a fard"
+  },
+  "trackerRakahBefore": {
+    "ar": "{count, plural, =1{ركعة قبلها} =2{ركعتان قبلها} few{{count} ركعات قبلها} many{{count} ركعة قبلها} other{{count} ركعة قبلها}}",
+    "en": "{count, plural, =1{1 before} other{{count} before}}",
+    "description": "Rak'ahs of a sunnah before its fard",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerRakahAfter": {
+    "ar": "{count, plural, =1{ركعة بعدها} =2{ركعتان بعدها} few{{count} ركعات بعدها} many{{count} ركعة بعدها} other{{count} ركعة بعدها}}",
+    "en": "{count, plural, =1{1 after} other{{count} after}}",
+    "description": "Rak'ahs of a sunnah after its fard",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerRakahBoth": {
+    "ar": "{before} و{after}",
+    "en": "{before}, {after}",
+    "description": "Joins the rak'ahs before and after (both already formatted)",
+    "placeholders": {
+      "before": {
+        "type": "String"
+      },
+      "after": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerDuhaWindow": {
+    "ar": "من ارتفاع الشمس إلى الظهر",
+    "en": "From mid-morning until Dhuhr",
+    "description": "When Duha is prayed"
+  },
+  "trackerNightWindow": {
+    "ar": "من العشاء إلى الفجر",
+    "en": "From Isha until Fajr",
+    "description": "When Witr and the night prayer are prayed"
+  },
+  "trackerStreakCurrent": {
+    "ar": "السلسلة الحالية",
+    "en": "Current streak",
+    "description": "History: the current streak"
+  },
+  "trackerStreakBest": {
+    "ar": "أطول سلسلة",
+    "en": "Best streak",
+    "description": "History: the longest streak"
+  },
+  "trackerStreakRule": {
+    "ar": "يُحتسب اليوم في السلسلة حين تُصلّى الفرائض الخمس أو تُقضى",
+    "en": "A day counts when all five are prayed or made up",
+    "description": "How streaks are counted"
+  },
+  "trackerWeekTitle": {
+    "ar": "آخر سبعة أيام",
+    "en": "The last seven days",
+    "description": "History: the week strip"
+  },
+  "trackerHeatmapTitle": {
+    "ar": "خريطة الشهر",
+    "en": "The month",
+    "description": "History: the month heatmap"
+  },
+  "trackerLegendLess": {
+    "ar": "أقل",
+    "en": "Less",
+    "description": "Heatmap legend: fewer prayers"
+  },
+  "trackerLegendMore": {
+    "ar": "الخمس",
+    "en": "All five",
+    "description": "Heatmap legend: all five prayed"
+  },
+  "trackerLegendJamaah": {
+    "ar": "النقاط: صلوات الجماعة",
+    "en": "Dots: prayers in jamaah",
+    "description": "Heatmap legend: the dots in a cell count the prayers in jamaah"
+  },
+  "trackerPrevMonth": {
+    "ar": "الشهر السابق",
+    "en": "Previous month",
+    "description": "Heatmap navigation"
+  },
+  "trackerNextMonth": {
+    "ar": "الشهر التالي",
+    "en": "Next month",
+    "description": "Heatmap navigation"
+  },
+  "trackerDaySemantics": {
+    "ar": "{date}: صلّيت {done} من {total}، منها {jamaah} في جماعة",
+    "en": "{date}: {done} of {total} prayed, {jamaah} in jamaah",
+    "description": "Screen-reader label of a day cell (all values already formatted)",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      },
+      "jamaah": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerTotalsTitle": {
+    "ar": "حصاد {month}",
+    "en": "{month} at a glance",
+    "description": "History: totals of the shown month (month name already formatted)",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerTotalOnTime": {
+    "ar": "في وقتها",
+    "en": "On time",
+    "description": "Total: share prayed on time"
+  },
+  "trackerTotalJamaah": {
+    "ar": "في جماعة",
+    "en": "In jamaah",
+    "description": "Total: share prayed in jamaah"
+  },
+  "trackerTotalMosque": {
+    "ar": "في المسجد",
+    "en": "At the mosque",
+    "description": "Total: share prayed at the mosque"
+  },
+  "trackerTotalCompleteDays": {
+    "ar": "أيام مكتملة",
+    "en": "Complete days",
+    "description": "Total: days with all five prayed"
+  },
+  "trackerTotalRawatib": {
+    "ar": "الرواتب",
+    "en": "Rawatib",
+    "description": "Total: sunnah rawatib prayed"
+  },
+  "trackerTotalSunnahTitle": {
+    "ar": "النوافل والسنن",
+    "en": "Sunnah and voluntary",
+    "description": "Heading of the sunnah counts"
+  },
+  "trackerBreakdownTitle": {
+    "ar": "كل صلاة على حدة",
+    "en": "Prayer by prayer",
+    "description": "History: stacked bars per obligatory prayer"
+  },
+  "trackerNoMonthData": {
+    "ar": "لا سجلات في هذا الشهر بعد",
+    "en": "Nothing logged this month yet",
+    "description": "History: empty month"
+  },
+  "trackerQadaTitle": {
+    "ar": "دفتر القضاء",
+    "en": "Qada ledger",
+    "description": "History: missed prayers waiting to be made up"
+  },
+  "trackerQadaOutstanding": {
+    "ar": "{count, plural, =0{لا صلوات بانتظار القضاء} =1{صلاة واحدة بانتظار القضاء} =2{صلاتان بانتظار القضاء} few{{count} صلوات بانتظار القضاء} many{{count} صلاة بانتظار القضاء} other{{count} صلاة بانتظار القضاء}}",
+    "en": "{count, plural, =0{Nothing to make up} =1{1 prayer to make up} other{{count} prayers to make up}}",
+    "description": "Qada ledger summary",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerQadaMadeUpSoFar": {
+    "ar": "قُضيت حتى الآن: {count}",
+    "en": "Made up so far: {count}",
+    "description": "Qada ledger: prayers already made up (number already formatted)",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerQadaEmpty": {
+    "ar": "لا صلوات فائتة تنتظر القضاء، بارك الله فيك",
+    "en": "No missed prayers waiting – well done",
+    "description": "Qada ledger: empty"
+  },
+  "trackerQadaEmptyFiltered": {
+    "ar": "لا قضاء لصلاة {prayer}",
+    "en": "Nothing to make up for {prayer}",
+    "description": "Qada ledger: empty for the selected prayer",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerQadaMissedOn": {
+    "ar": "فاتت يوم {date}",
+    "en": "Missed {date}",
+    "description": "Qada ledger row: the day it was missed (date already formatted)",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerQadaShowMore": {
+    "ar": "{count, plural, =1{اعرض صلاة أخرى} =2{اعرض صلاتين أخريين} few{اعرض {count} صلوات أخرى} many{اعرض {count} صلاة أخرى} other{اعرض {count} صلاة أخرى}}",
+    "en": "{count, plural, =1{Show 1 more} other{Show {count} more}}",
+    "description": "Qada ledger: reveals the next rows of a long backlog",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerFilterAll": {
+    "ar": "الكل",
+    "en": "All",
+    "description": "Qada ledger filter: every prayer"
+  },
+  "trackerCardOpen": {
+    "ar": "افتح المتتبّع",
+    "en": "Open the tracker",
+    "description": "Compact card: open the prayer tracker"
+  },
+  "trackerSlotSemantics": {
+    "ar": "{prayer}، {time}، {status}",
+    "en": "{prayer}, {time}, {status}",
+    "description": "Screen-reader label of a prayer row (all parts already formatted)",
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerMarks": {
+    "ar": "{first}، {second}",
+    "en": "{first}, {second}",
+    "description": "Joins two short labels",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerUntil": {
+    "ar": "حتى {time}",
+    "en": "until {time}",
+    "description": "When a voluntary prayer's time ends (time already formatted)",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerDueNow": {
+    "ar": "حان وقتها · يبقى {duration}",
+    "en": "Due now · {duration} left",
+    "description": "Status of a prayer whose time is running (duration already formatted)",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerValueOf": {
+    "ar": "{label}: {value}",
+    "en": "{label}: {value}",
+    "description": "Screen-reader label of a figure (value already formatted)",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  }
+}

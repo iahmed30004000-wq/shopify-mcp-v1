@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home-screen widgets: names in the widget picker, their descriptions,
+     the "Open Madar" placeholder and the sample texts of the previews.
+     Everything a live widget shows comes from the app instead, in the
+     app's language (lib/core/i18n/arb_parts/e2_widgets.json). -->
+<resources>
+    <string name="widget_prayer_label">Next prayer</string>
+    <string name="widget_meds_label">Today’s meds</string>
+    <string name="widget_tasks_label">Today’s Top 3</string>
+    <string name="widget_budget_label">Budget left</string>
+
+    <string name="widget_prayer_title">Next prayer</string>
+    <string name="widget_meds_title">Today’s meds</string>
+    <string name="widget_tasks_title">Today’s Top 3</string>
+    <string name="widget_budget_title">Budget left</string>
+
+    <string name="widget_prayer_description">The next prayer on a small astrolabe, its time, a countdown and the Hijri date.</string>
+    <string name="widget_meds_description">Today’s doses, taken or still to take. Counts only while App Lock is on.</string>
+    <string name="widget_tasks_description">Today’s Top 3 and what is done. Counts only while App Lock is on.</string>
+    <string name="widget_budget_description">What is left of this month’s budget. Only the percentage while App Lock is on.</string>
+
+    <string name="widget_placeholder">Open Madar to set up this widget</string>
+
+    <string name="widget_sample_prayer">Asr</string>
+    <string name="widget_sample_prayer_time">3:21 PM</string>
+    <string name="widget_sample_countdown">in 1:42:10</string>
+    <string name="widget_sample_hijri">8 Rabiʿ al-Akhir 1448 AH</string>
+    <string name="widget_sample_meds_count">2/4</string>
+    <string name="widget_sample_meds_next">Next at 2:00 PM</string>
+    <string name="widget_sample_meds_row_1">✓  Vitamin D · 1 capsule</string>
+    <string name="widget_sample_meds_row_2">✓  Metformin · 500 mg</string>
+    <string name="widget_sample_meds_row_3">○  Metformin · 500 mg</string>
+    <string name="widget_sample_tasks_count">1/3</string>
+    <string name="widget_sample_tasks_left">2 to go</string>
+    <string name="widget_sample_tasks_row_1">✓  Call the bank</string>
+    <string name="widget_sample_tasks_row_2">○  Finish the report</string>
+    <string name="widget_sample_tasks_row_3">○  Visit grandmother</string>
+    <string name="widget_sample_budget_amount">182.500 JOD</string>
+    <string name="widget_sample_budget_of">of 450.000 JOD</string>
+    <string name="widget_sample_budget_days">12 days left</string>
+</resources>

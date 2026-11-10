@@ -1,0 +1,48 @@
+OK   filter words are plain Arabic letters
+INFO filter: 38 LDNOOBW words (10 allowed as common words: ['بيضان', 'تمص', 'جماع', 'شهوة', 'فرج', 'لبوة', 'لحس', 'لعق', 'مبادل', 'مص']), 42 Madar additions, 59 sensitive
+OK   crossword clues: unique, 3–8 letters, not blocked, clue does not contain the answer
+OK   at least 300 crossword clue/answer pairs (565)
+INFO crossword clues: 565, by level {1: 212, 2: 260, 3: 93}, by length {3: 134, 4: 196, 5: 140, 6: 52, 7: 33, 8: 10}
+OK   every curated word is plain Arabic letters
+OK   no curated word is blocked ([])
+INFO 2 curated words not in the Wikipedia list (ranked last): ['سمبوسة', 'طواويس']
+INFO lexicon: 86118 entries by length [(3, 4360), (4, 14082), (5, 21063), (6, 20742), (7, 16203), (8, 9668)]; 1957 with a curated vowelled form
+OK   lexicon has no duplicate entries
+INFO word guess answers, 4 letters: 570
+INFO word guess answers, 5 letters: 471
+INFO word guess answers, 6 letters: 215
+OK   at least a year of distinct 5-letter daily answers
+OK   at least 150 answers for 4 and 6 letters
+OK   every answer is in the lexicon (valid guess)
+OK   themes: >= 8 words each, none filtered
+INFO themes: 29, words: 727
+WROTE arabic_lexicon.txt: 1098141 bytes, sha256 deb7e3a416e3ac32c257f186ed9779475cacfe85e2c191f19d3579e05b2bc1e9
+WROTE arabic_word_filter.json: 2486 bytes, sha256 32ce95a356bd0fa06805ebc4655dc72ef759e52fdaaac4c3d4163205028f553f
+WROTE word_guess_answers.json: 41610 bytes, sha256 acaffa371aaa0cab6a42c2ac9f676b320a9f476cc97bfd8c1a7e5784d0982c74
+WROTE word_search_themes.json: 25517 bytes, sha256 0450258b84382f7c283fb594d66290118971f5c95fc4b84bb6bc15b1d1f8d466
+WROTE crossword_clues.json: 54849 bytes, sha256 8e2acba7f84df24f7c6aedfb807c40d58fc026052c27a3cce1df1a149481bb7f
+INFO ayat naming {'موسي': 132, 'ابرهيم': 51, 'نوح': 55, 'عيسي': 25}
+INFO abudawud 499 grades ['Hasan Sahih', 'Isnaad Hasan']
+INFO abudawud 499 grades ['Hasan Sahih', 'Isnaad Hasan']
+INFO tirmidhi 413 grades ['Daif', 'Hasan', 'Sahih']
+INFO abudawud 499 grades ['Hasan Sahih', 'Isnaad Hasan']
+INFO tirmidhi 3747 grades ['Isnaad Sahih', 'Sahih']
+INFO tirmidhi 1956 grades ['Isnaad Hasan', 'Sahih']
+INFO tirmidhi 2516 grades ['Hasan Sahih', 'Isnaad Hasan', 'Sahih']
+INFO tirmidhi 2518 grades ['Isnaad Sahih', 'Sahih']
+INFO tirmidhi 2317 grades ['Daif', 'Hasan', 'Sahih']
+INFO tirmidhi 1919 grades ['Hasan', 'Sahih']
+OK   every quiz question passed structure and citation checks (0 failed)
+OK   at least 300 quiz questions (377)
+INFO quiz by category {'quran': 105, 'prophets': 100, 'seerah': 51, 'pillars': 48, 'manners': 47, 'companions': 26}, by level {1: 147, 2: 191, 3: 39}, citations {'meta': 42, 'quran': 233, 'hadith': 152}
+WROTE islamic_quiz.json: 216682 bytes, sha256 4df18b0fe70edb2dd93aff9cc9aca95aaeedebdd6e928e34842421f3c234aa30
+OK   countries: unique codes / names, known continents, valid flag specs
+OK   193 UN member states (193)
+OK   2 UN observer states (2)
+OK   undisputed capitals are unique ([])
+INFO countries: 195 ({'member': 193, 'observer': 2}), by continent {'africa': 54, 'asia': 48, 'europe': 44, 'north_america': 23, 'south_america': 12, 'oceania': 14}, flag elements 763
+WROTE countries.json: 87409 bytes, sha256 a1d5ee052dbf4ce23d32442577c6322ba388f8b74dcef97d08675d10da4dd54a
+OK   typing passages: unique, clean, Quran references valid and short
+INFO typing passages: 203 {'original': 90, 'vowelled': 20, 'saying': 51, 'quran': 42}, by level {1: 92, 2: 77, 3: 34}
+WROTE typing_passages.json: 31954 bytes, sha256 35e7b7ba68cced412ded94ca4baedc50400cc0a40767ce37a63caa4a383e43be
+RESULT PASS (0 failed checks)

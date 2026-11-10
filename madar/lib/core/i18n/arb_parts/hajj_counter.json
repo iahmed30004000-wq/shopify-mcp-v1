@@ -1,0 +1,151 @@
+{
+  "hajjCounterTitle": {
+    "ar": "عدّاد الأشواط",
+    "en": "Round counter",
+    "description": "Part 18: the offline counter for the rounds of tawaf and sa'i"
+  },
+  "hajjCounterKindTawaf": {
+    "ar": "الطواف",
+    "en": "Tawaf",
+    "description": "Counter kind"
+  },
+  "hajjCounterKindSai": {
+    "ar": "السعي",
+    "en": "Sa'i",
+    "description": "Counter kind"
+  },
+  "hajjCounterKindLabel": {
+    "ar": "نوع العدّ",
+    "en": "What to count",
+    "description": "Accessibility label of the tawaf / sa'i switch"
+  },
+  "hajjCounterRoundOf": {
+    "ar": "الشوط {n} من {total}",
+    "en": "Round {n} of {total}",
+    "description": "The big line: the round being walked now (numbers pre-formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterCountOf": {
+    "ar": "{n} من {total}",
+    "en": "{n} of {total}",
+    "description": "Rounds counted so far, e.g. 7 of 7 (numbers pre-formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterHeadingSafa": {
+    "ar": "متجه إلى الصفا",
+    "en": "Heading to Safa",
+    "description": "Sa'i: the point he is walking toward now"
+  },
+  "hajjCounterHeadingMarwa": {
+    "ar": "متجه إلى المروة",
+    "en": "Heading to Marwa",
+    "description": "Sa'i: the point he is walking toward now"
+  },
+  "hajjCounterAnnounce": {
+    "ar": "{round}، {heading}",
+    "en": "{round}, {heading}",
+    "description": "Screen-reader announcement of the new round plus the direction (sa'i)",
+    "placeholders": {
+      "round": {
+        "type": "String"
+      },
+      "heading": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterTapHint": {
+    "ar": "اضغط في كل مرة تنهي فيها شوطًا",
+    "en": "Tap each time you finish a round",
+    "description": "Hint under the big tap area and its accessibility hint"
+  },
+  "hajjCounterTapArea": {
+    "ar": "اضغط هنا لعدّ شوط",
+    "en": "Tap here to count a round",
+    "description": "Visible label inside the big tap area"
+  },
+  "hajjCounterUndo": {
+    "ar": "تراجع",
+    "en": "Undo",
+    "description": "Takes back the last counted tap"
+  },
+  "hajjCounterCorrect": {
+    "ar": "تصحيح يدوي",
+    "en": "Correct by hand",
+    "description": "Opens the sheet to set the round by hand"
+  },
+  "hajjCounterCorrectTitle": {
+    "ar": "في أي شوط أنت الآن؟",
+    "en": "Which round are you on now?",
+    "description": "Title of the manual correction sheet"
+  },
+  "hajjCounterCorrectOption": {
+    "ar": "الشوط {n}",
+    "en": "Round {n}",
+    "description": "Accessibility label of one round button in the correction sheet",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "hajjCounterPause": {
+    "ar": "إيقاف مؤقت",
+    "en": "Pause",
+    "description": "Pause counting"
+  },
+  "hajjCounterResume": {
+    "ar": "متابعة",
+    "en": "Resume",
+    "description": "Resume counting"
+  },
+  "hajjCounterPausedBanner": {
+    "ar": "العدّ متوقف مؤقتًا. الضغط لا يُحتسب.",
+    "en": "Counting is paused. Taps are not counted.",
+    "description": "Shown in the tap area while paused"
+  },
+  "hajjCounterCompleteTawaf": {
+    "ar": "اكتمل الطواف",
+    "en": "Tawaf complete",
+    "description": "Shown when the last round of the tawaf was counted"
+  },
+  "hajjCounterCompleteSai": {
+    "ar": "اكتمل السعي",
+    "en": "Sa'i complete",
+    "description": "Shown when the last leg of the sa'i was counted"
+  },
+  "hajjCounterStartAnotherTawaf": {
+    "ar": "ابدأ طوافًا جديدًا",
+    "en": "Start another tawaf",
+    "description": "Starts a new tawaf session"
+  },
+  "hajjCounterStartAnotherSai": {
+    "ar": "ابدأ سعيًا جديدًا",
+    "en": "Start another sa'i",
+    "description": "Starts a new sa'i session"
+  },
+  "hajjCounterSaved": {
+    "ar": "محفوظ على جهازك، ولا يحتاج إنترنت",
+    "en": "Saved on your phone, no internet needed",
+    "description": "Small reassurance under the counter"
+  },
+  "hajjCounterNotSaved": {
+    "ar": "تعذّر الحفظ. العدّ ما زال ظاهرًا أمامك.",
+    "en": "Could not save. Your count is still shown here.",
+    "description": "Shown quietly when writing to the phone failed"
+  }
+}

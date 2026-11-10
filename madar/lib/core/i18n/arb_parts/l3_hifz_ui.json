@@ -1,0 +1,360 @@
+{
+  "hifzPlanScreenSubtitle": {
+    "ar": "خطة اليوم: جديد، مراجعة قريبة، ومراجعة بعيدة.",
+    "en": "Today's plan: something new, a near review and a far one."
+  },
+  "hifzPlanOpenMap": {
+    "ar": "خريطة الصفحات",
+    "en": "The page map"
+  },
+  "hifzPlanOpenGoals": {
+    "ar": "أهدافي",
+    "en": "My goals"
+  },
+  "hifzPlanOpenFind": {
+    "ar": "دوّر على آية",
+    "en": "Find a verse"
+  },
+  "hifzPlanSettings": {
+    "ar": "إعدادات الخطة",
+    "en": "Plan settings"
+  },
+  "hifzPlanTodaySummary": {
+    "ar": "اليوم: {ayat} على {portions}",
+    "en": "Today: {ayat} across {portions}",
+    "placeholders": {"ayat": {"type": "String"}, "portions": {"type": "String"}}
+  },
+  "hifzPortionsCount": {
+    "ar": "{count, plural, =0{ولا مقطع} =1{مقطع واحد} =2{مقطعين} few{{count} مقاطع} many{{count} مقطعًا} other{{count} مقطع}}",
+    "en": "{count, plural, =0{no passages} =1{1 passage} other{{count} passages}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzPlanCycleLine": {
+    "ar": "دورة المراجعة البعيدة بتكمل لفّة كل {days}",
+    "en": "A full turn of the far rotation takes {days}",
+    "placeholders": {"days": {"type": "String"}}
+  },
+  "hifzPlanMemorisedLine": {
+    "ar": "بقايمتك {ayat}",
+    "en": "Your list holds {ayat}",
+    "placeholders": {"ayat": {"type": "String"}}
+  },
+  "hifzPlanStart": {
+    "ar": "ابدأ",
+    "en": "Start"
+  },
+  "hifzPlanSuggestedMethod": {
+    "ar": "الطريقة المقترحة: {method}",
+    "en": "Suggested method: {method}",
+    "placeholders": {"method": {"type": "String"}}
+  },
+  "hifzPlanPickMethod": {
+    "ar": "اختار طريقة",
+    "en": "Pick a method"
+  },
+  "hifzPlanMethodsTitle": {
+    "ar": "طرق الحفظ",
+    "en": "The memorisation methods"
+  },
+  "hifzPlanNothingTitle": {
+    "ar": "ما في خطة اليوم",
+    "en": "No plan today"
+  },
+  "hifzPlanAddFirst": {
+    "ar": "ضيف مقطع للحفظ",
+    "en": "Add a passage to memorise"
+  },
+  "hifzDrillTypedBadge": {
+    "ar": "مكتوب منك على الكيبورد",
+    "en": "Typed by you on the keyboard",
+    "description": "Marks the owner's typed answer; it is never styled as Quran text"
+  },
+  "hifzDrillCheck": {
+    "ar": "قارن",
+    "en": "Compare"
+  },
+  "hifzDrillSave": {
+    "ar": "احفظ النتيجة",
+    "en": "Save the result"
+  },
+  "hifzDrillSaved": {
+    "ar": "انحفظت النتيجة، وقوة الآيات تحدّثت",
+    "en": "The result is saved and the verses' strength is updated"
+  },
+  "hifzDrillAgain": {
+    "ar": "من جديد",
+    "en": "Again"
+  },
+  "hifzDrillNothingYet": {
+    "ar": "اكتب إشي الأول، وبعدها قارن.",
+    "en": "Write something first, then compare."
+  },
+  "hifzDrillNoResultMode": {
+    "ar": "هاي الطريقة ما بتعطي علامة: إنت بتسمع وبتردّد، والقوة بتتغيّر لمّا تسمّع أو تكتب.",
+    "en": "This method gives no score: you listen and repeat, and the strength changes when you recite or write."
+  },
+  "hifzDrillResultLine": {
+    "ar": "{right} صح · {wrong} غير · {missed} ناقصة · {extra} زيادة",
+    "en": "{right} right · {wrong} changed · {missed} missed · {extra} extra",
+    "placeholders": {
+      "right": {"type": "String"},
+      "wrong": {"type": "String"},
+      "missed": {"type": "String"},
+      "extra": {"type": "String"}
+    }
+  },
+  "hifzDrillWriteHint": {
+    "ar": "اكتب الآيات من حفظك هون",
+    "en": "Write the verses from memory here"
+  },
+  "hifzBlankField": {
+    "ar": "الفراغ رقم {number}",
+    "en": "Blank number {number}",
+    "placeholders": {"number": {"type": "String"}}
+  },
+  "hifzBlanksTypedBody": {
+    "ar": "شيلنا كلمات من النص، واكتب كل كلمة بمكانها. الحساب على الكلمات المشيلة بس.",
+    "en": "Some words were taken out; type each one in its place. Only the missing words are scored."
+  },
+  "hifzHidingTypedBody": {
+    "ar": "الصفحة مخفية، واكتب الآيات من حفظك. الكلمة بتبيّن لمّا تكتبها صح.",
+    "en": "The page is hidden; write the verses from memory. A word appears when you type it correctly."
+  },
+  "hifzHidingHarder": {
+    "ar": "صعّبها",
+    "en": "Make it harder"
+  },
+  "hifzHidingEasier": {
+    "ar": "سهّلها",
+    "en": "Make it easier"
+  },
+  "hifzHidingStageNow": {
+    "ar": "المرحلة: {stage}",
+    "en": "Stage: {stage}",
+    "placeholders": {"stage": {"type": "String"}}
+  },
+  "hifzLinkingTypedBody": {
+    "ar": "آخر كلمات الآية قدامك؛ اكتب أول كلمات الآية اللي بعدها.",
+    "en": "The end of the verse is in front of you; type the first words of the next one."
+  },
+  "hifzLinkingField": {
+    "ar": "أول الآية اللي بعدها",
+    "en": "The start of the next verse"
+  },
+  "hifzLinkingScore": {
+    "ar": "{right} وصلة صح من {total}",
+    "en": "{right} links right out of {total}",
+    "placeholders": {"right": {"type": "String"}, "total": {"type": "String"}}
+  },
+  "hifzLinkingNeedsTwo": {
+    "ar": "الربط بدّه آيتين على الأقل. اختار مقطع أطول.",
+    "en": "Linking needs at least two verses. Pick a longer passage."
+  },
+  "hifzChunkLevelAyah": {
+    "ar": "آية آية",
+    "en": "One verse at a time"
+  },
+  "hifzChunkLevelGroup": {
+    "ar": "مجموعة آيات",
+    "en": "A group of verses"
+  },
+  "hifzChunkLevelPage": {
+    "ar": "صفحة كاملة",
+    "en": "A whole page"
+  },
+  "hifzChunkBody": {
+    "ar": "اقرا آية آية، وبعدها جمّعهن مجموعات، وبعدها الصفحة كلها.",
+    "en": "Read one verse at a time, then in groups, then the whole page."
+  },
+  "hifzChunkCount": {
+    "ar": "{count, plural, =0{ولا قطعة} =1{قطعة وحدة} =2{قطعتين} few{{count} قطع} many{{count} قطعة} other{{count} قطعة}}",
+    "en": "{count, plural, =0{no chunks} =1{1 chunk} other{{count} chunks}}",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzListenPlan": {
+    "ar": "كل آية بتنعاد {times}، واللفّة كلها {passes}.",
+    "en": "Each verse plays {times}, and the whole range {passes}.",
+    "placeholders": {"times": {"type": "String"}, "passes": {"type": "String"}}
+  },
+  "hifzListenMissing": {
+    "ar": "في {count} صوتهن مش منزّل، فهاي بتنحكى عليك.",
+    "en": "The audio of {count} is not downloaded, so those will be skipped.",
+    "placeholders": {"count": {"type": "String"}}
+  },
+  "hifzMapOnlyMine": {
+    "ar": "اللي بقايمتي بس",
+    "en": "Only what is in my list"
+  },
+  "hifzMapWholeMushaf": {
+    "ar": "المصحف كله",
+    "en": "The whole mushaf"
+  },
+  "hifzMapEmpty": {
+    "ar": "لسا ما في ولا صفحة إلك. ضيف مقطع للحفظ وبتبيّن هون.",
+    "en": "No page is yours yet. Add a passage to memorise and it shows up here."
+  },
+  "hifzMapPageTitle": {
+    "ar": "صفحة {page}",
+    "en": "Page {page}",
+    "placeholders": {"page": {"type": "String"}}
+  },
+  "hifzMapTestedLine": {
+    "ar": "{tested} من آيات الصفحة انختبرت عليها",
+    "en": "{tested} of the page's verses have been tested",
+    "placeholders": {"tested": {"type": "String"}}
+  },
+  "hifzMapColourMeans": {
+    "ar": "شو بتعني الألوان",
+    "en": "What the colours mean"
+  },
+  "hifzGoalAdd": {
+    "ar": "ضيف هدف",
+    "en": "Add a goal"
+  },
+  "hifzGoalEditTitle": {
+    "ar": "عدّل الهدف",
+    "en": "Edit the goal"
+  },
+  "hifzGoalFieldTitle": {
+    "ar": "الهدف بكلامك",
+    "en": "The goal in your own words"
+  },
+  "hifzGoalFieldTitleHint": {
+    "ar": "مثلًا: الكهف كل جمعة",
+    "en": "For example: Al-Kahf every Friday"
+  },
+  "hifzGoalFieldKind": {
+    "ar": "نوع الهدف",
+    "en": "The kind of goal"
+  },
+  "hifzGoalFieldSurah": {
+    "ar": "السورة",
+    "en": "The surah"
+  },
+  "hifzGoalFieldFrom": {
+    "ar": "من آية",
+    "en": "From verse"
+  },
+  "hifzGoalFieldTo": {
+    "ar": "لآية",
+    "en": "To verse"
+  },
+  "hifzGoalFieldWeekday": {
+    "ar": "يوم الأسبوع",
+    "en": "The day of the week"
+  },
+  "hifzGoalFieldAmount": {
+    "ar": "المقدار كل يوم",
+    "en": "The amount each day"
+  },
+  "hifzGoalFieldUnit": {
+    "ar": "الوحدة",
+    "en": "The unit"
+  },
+  "hifzGoalFieldWindow": {
+    "ar": "التذكير بعد أي صلاة",
+    "en": "Remind after which prayer"
+  },
+  "hifzGoalFieldOffset": {
+    "ar": "بعدها بكم دقيقة",
+    "en": "How many minutes after"
+  },
+  "hifzGoalFieldRemind": {
+    "ar": "ذكّرني",
+    "en": "Remind me"
+  },
+  "hifzGoalFieldActive": {
+    "ar": "الهدف شغّال",
+    "en": "The goal is on"
+  },
+  "hifzGoalSaved": {
+    "ar": "انحفظ الهدف",
+    "en": "The goal is saved"
+  },
+  "hifzGoalDeleted": {
+    "ar": "انمسح الهدف",
+    "en": "The goal is deleted"
+  },
+  "hifzGoalDelete": {
+    "ar": "امسح الهدف",
+    "en": "Delete the goal"
+  },
+  "hifzGoalOffNow": {
+    "ar": "مطفي",
+    "en": "Switched off"
+  },
+  "hifzGoalNotDueToday": {
+    "ar": "مش مطلوب اليوم",
+    "en": "Not asked for today"
+  },
+  "hifzGoalNoReminder": {
+    "ar": "بدون تذكير",
+    "en": "No reminder"
+  },
+  "hifzGoalReorderHint": {
+    "ar": "اسحب الهدف لفوق أو لتحت عشان ترتّبهن.",
+    "en": "Drag a goal up or down to reorder them."
+  },
+  "hifzFindTypedTitle": {
+    "ar": "دوّر على آية بالكتابة",
+    "en": "Find a verse by typing"
+  },
+  "hifzFindTypedBody": {
+    "ar": "اكتب أي مقطع بتتذكره، والتطبيق بيقلّك وين هو بالمصحف. كل إشي على الجوال، وبدون إنترنت. لمّا يجهز المايك، نفس الإشي بصوتك.",
+    "en": "Type any phrase you remember and the app tells you where it is in the mushaf. All on the phone, with no internet. When the microphone is ready, the same thing with your voice."
+  },
+  "hifzFindTypedHint": {
+    "ar": "اكتب ثلاث كلمات على الأقل",
+    "en": "Type at least three words"
+  },
+  "hifzFindSearch": {
+    "ar": "دوّر",
+    "en": "Search"
+  },
+  "hifzFindYouTyped": {
+    "ar": "اللي كتبته: {phrase}",
+    "en": "What you typed: {phrase}",
+    "placeholders": {"phrase": {"type": "String"}}
+  },
+  "hifzFindOpenInMushaf": {
+    "ar": "افتحها بالمصحف",
+    "en": "Open it in the mushaf"
+  },
+  "hifzFindMatchedWords": {
+    "ar": "{count, plural, =0{ولا كلمة} =1{كلمة وحدة} =2{كلمتين} few{{count} كلمات} many{{count} كلمة} other{{count} كلمة}} من اللي كتبته",
+    "en": "{count, plural, =0{no words} =1{1 word} other{{count} words}} of what you typed",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "hifzMicSoonTitle": {
+    "ar": "بصوتك لسا مش جاهز",
+    "en": "By voice is not ready yet"
+  },
+  "hifzMicSoonBody": {
+    "ar": "برنامج التعرّف على الصوت بعده ما انحطّ على الجوال. لحد ما يجهز، نفس الطريقة بتشتغل بالكتابة.",
+    "en": "The speech recogniser is not on the phone yet. Until it is, the same method works by typing."
+  },
+  "hifzMicSoonNoTyping": {
+    "ar": "هاي الطريقة بدها صوتك، فما بتشتغل بالكتابة. جرّب «اكتب من حفظك» أو «الإخفاء التدريجي».",
+    "en": "This method needs your voice, so it cannot be typed. Try writing from memory, or progressive hiding."
+  },
+  "hifzFaithCardTitle": {
+    "ar": "حفظ اليوم",
+    "en": "Today's memorisation"
+  },
+  "hifzFaithCardEmpty": {
+    "ar": "ابدأ خطة الحفظ",
+    "en": "Start your memorisation plan"
+  },
+  "hifzSettingsNewFromNone": {
+    "ar": "ما في جديد",
+    "en": "No new portion"
+  },
+  "hifzSettingsRepetitions": {
+    "ar": "كم مرة تعيد كل آية",
+    "en": "How many times to repeat each verse"
+  },
+  "hifzSettingsSaved": {
+    "ar": "انحفظت الإعدادات",
+    "en": "The settings are saved"
+  }
+}

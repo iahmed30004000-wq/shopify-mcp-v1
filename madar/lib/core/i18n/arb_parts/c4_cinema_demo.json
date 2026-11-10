@@ -1,0 +1,5 @@
+{
+  "cinemaDemoTapToJump": {"ar": "المس الشاشة لتقفز!", "en": "Tap to jump!", "description": "Demo opening card subtitle"},
+  "cinemaDemoActTwo": {"ar": "الفصل الثاني", "en": "Act Two", "description": "Demo chapter card before the boss"},
+  "cinemaDemoBossEnters": {"ar": "البارون زُنبُرك يدخل المسرح", "en": "Baron Zunbruk takes the stage", "description": "Demo chapter card subtitle"}
+}

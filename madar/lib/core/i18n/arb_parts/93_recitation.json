@@ -1,0 +1,731 @@
+{
+  "recitationTitle": {
+    "ar": "التلاوة",
+    "en": "Recitation",
+    "description": "Recitation settings: screen title"
+  },
+  "recitationChannelName": {
+    "ar": "تلاوة القرآن",
+    "en": "Quran recitation",
+    "description": "Android notification channel of the recitation player"
+  },
+  "recitationAlbum": {
+    "ar": "القرآن الكريم",
+    "en": "The Noble Quran",
+    "description": "Media notification: album line"
+  },
+  "recitationReciterLabel": {
+    "ar": "القارئ",
+    "en": "Reciter",
+    "description": "Label above the chosen reciter"
+  },
+  "recitationSectionReciters": {
+    "ar": "القرّاء",
+    "en": "Reciters",
+    "description": "Settings section: reciters"
+  },
+  "recitationSectionRecitersHint": {
+    "ar": "أصوات قرّاء حقيقيين من everyayah.com – لا أصوات مولَّدة للقرآن أبدًا",
+    "en": "Real reciters from everyayah.com – never a generated voice for the Quran",
+    "description": "Reciters section subtitle"
+  },
+  "recitationStyleMujawwad": {
+    "ar": "مجوَّد",
+    "en": "Mujawwad",
+    "description": "Recitation style: mujawwad"
+  },
+  "recitationStyleMurattal": {
+    "ar": "مرتَّل",
+    "en": "Murattal",
+    "description": "Recitation style: murattal"
+  },
+  "recitationStyleMuallim": {
+    "ar": "معلِّم",
+    "en": "Muʿallim",
+    "description": "Recitation style: the teaching recitation"
+  },
+  "recitationStyleMujawwadHint": {
+    "ar": "تلاوة متأنّية منغَّمة بأحكام التجويد كاملة",
+    "en": "Slow, melodic, with the full art of tajweed",
+    "description": "Style explanation: mujawwad"
+  },
+  "recitationStyleMurattalHint": {
+    "ar": "ترتيل متّصل هادئ",
+    "en": "Measured, flowing recitation",
+    "description": "Style explanation: murattal"
+  },
+  "recitationStyleMuallimHint": {
+    "ar": "تلاوة تعليمية واضحة للحفظ",
+    "en": "The clear teaching recitation, for memorising",
+    "description": "Style explanation: muallim"
+  },
+  "recitationBitrate": {
+    "ar": "{kbps} كيلوبت/ث",
+    "en": "{kbps} kbps",
+    "description": "Audio quality of a reciter's files",
+    "placeholders": {
+      "kbps": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSample": {
+    "ar": "استمع إلى عيّنة",
+    "en": "Hear a sample",
+    "description": "Button: play a short sample of the reciter"
+  },
+  "recitationSampleStop": {
+    "ar": "إيقاف العيّنة",
+    "en": "Stop the sample",
+    "description": "Button: stop the sample"
+  },
+  "recitationSampleOf": {
+    "ar": "عيّنة من تلاوة {name}",
+    "en": "Sample of {name}",
+    "description": "Screen reader: sample button of a reciter",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationChosen": {
+    "ar": "القارئ المختار",
+    "en": "Chosen reciter",
+    "description": "Screen reader: the selected reciter"
+  },
+  "recitationChoose": {
+    "ar": "اختيار {name}",
+    "en": "Choose {name}",
+    "description": "Screen reader: choose a reciter",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSurahsDownloaded": {
+    "ar": "{count, plural, =0{لا سور محمّلة} =1{سورة واحدة محمّلة} =2{سورتان محمّلتان} few{{count} سور محمّلة} many{{count} سورة محمّلة} other{{count} سورة محمّلة}}",
+    "en": "{count, plural, =0{No surahs downloaded} =1{1 surah downloaded} other{{count} surahs downloaded}}",
+    "description": "How many surahs of a reciter are on the phone",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationWholeMushafDownloaded": {
+    "ar": "المصحف كاملًا محمّل",
+    "en": "Whole Quran downloaded",
+    "description": "All 114 surahs of a reciter are downloaded"
+  },
+  "recitationSectionPlayback": {
+    "ar": "التكرار والتشغيل",
+    "en": "Repeat and playback",
+    "description": "Settings section: repeats and playback"
+  },
+  "recitationSectionPlaybackHint": {
+    "ar": "الإعدادات الافتراضية لكل تلاوة جديدة",
+    "en": "Defaults for every new recitation",
+    "description": "Playback section subtitle"
+  },
+  "recitationRepeatAyah": {
+    "ar": "تكرار كل آية",
+    "en": "Repeat each ayah",
+    "description": "Setting: times each ayah is recited"
+  },
+  "recitationRepeatRange": {
+    "ar": "تكرار المقطع",
+    "en": "Repeat the passage",
+    "description": "Setting: passes over the whole range"
+  },
+  "recitationTimes": {
+    "ar": "{count, plural, =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+    "en": "{count, plural, =1{Once} =2{Twice} other{{count} times}}",
+    "description": "A repeat count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationEndless": {
+    "ar": "بلا توقّف",
+    "en": "Until I stop",
+    "description": "Repeat the passage until stopped"
+  },
+  "recitationGap": {
+    "ar": "مهلة بعد كل تلاوة",
+    "en": "Pause after each recitation",
+    "description": "Setting: silence after each ayah (to repeat after the reciter)"
+  },
+  "recitationGapHint": {
+    "ar": "وقت لتردّد الآية بعد القارئ",
+    "en": "Time to repeat the ayah after the reciter",
+    "description": "Gap setting explanation"
+  },
+  "recitationGapNone": {
+    "ar": "بلا مهلة",
+    "en": "None",
+    "description": "No gap"
+  },
+  "recitationSeconds": {
+    "ar": "{count, plural, =1{ثانية} =2{ثانيتان} few{{count} ثوانٍ} many{{count} ثانية} other{{count} ثانية}}",
+    "en": "{count, plural, =1{1 second} other{{count} seconds}}",
+    "description": "A number of seconds",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationSpeed": {
+    "ar": "السرعة",
+    "en": "Speed",
+    "description": "Setting: playback speed"
+  },
+  "recitationSpeedValue": {
+    "ar": "{value}×",
+    "en": "{value}×",
+    "description": "A playback speed like 1.25×",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationBasmala": {
+    "ar": "البسملة قبل السور",
+    "en": "Basmala before each surah",
+    "description": "Setting: play the basmala before ayah 1"
+  },
+  "recitationBasmalaHint": {
+    "ar": "كما في المصحف – عدا الفاتحة (البسملة آيتها الأولى) والتوبة",
+    "en": "As in the mushaf – except al-Fatihah (where it is the first ayah) and at-Tawbah",
+    "description": "Basmala setting explanation"
+  },
+  "recitationSectionDownloads": {
+    "ar": "الاستماع دون اتصال",
+    "en": "Listen offline",
+    "description": "Settings section: downloads"
+  },
+  "recitationSectionDownloadsHint": {
+    "ar": "لا يبدأ أي تنزيل إلا حين تطلبه",
+    "en": "Nothing downloads unless you start it",
+    "description": "Downloads section subtitle"
+  },
+  "recitationStorageUsed": {
+    "ar": "المساحة المستخدمة: {size}",
+    "en": "Storage used: {size}",
+    "description": "Total size of downloads",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationWifiOnly": {
+    "ar": "التنزيل عبر Wi-Fi فقط",
+    "en": "Download on Wi-Fi only",
+    "description": "Setting: downloads only on Wi-Fi"
+  },
+  "recitationWifiOnlyHint": {
+    "ar": "يتوقف التنزيل حين لا تكون على شبكة Wi-Fi",
+    "en": "Downloads wait when you're not on Wi-Fi",
+    "description": "Wi-Fi only explanation"
+  },
+  "recitationMushafFor": {
+    "ar": "المصحف كاملًا بصوت {name}",
+    "en": "The whole Quran by {name}",
+    "description": "Download card title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationAbout": {
+    "ar": "نحو {size}",
+    "en": "About {size}",
+    "description": "Estimated download size",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationDownloadMushaf": {
+    "ar": "تنزيل المصحف",
+    "en": "Download the Quran",
+    "description": "Button: download all 114 surahs"
+  },
+  "recitationChooseSurahs": {
+    "ar": "اختيار السور",
+    "en": "Choose surahs",
+    "description": "Button: open the per-surah download list"
+  },
+  "recitationSurahProgress": {
+    "ar": "{done} من {total} سورة",
+    "en": "{done} of {total} surahs",
+    "description": "Download progress in surahs",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationFilesProgress": {
+    "ar": "{done} من {total} ملف",
+    "en": "{done} of {total} files",
+    "description": "Download progress in files",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationPauseDownloads": {
+    "ar": "إيقاف مؤقت",
+    "en": "Pause",
+    "description": "Button: pause downloads"
+  },
+  "recitationResumeDownloads": {
+    "ar": "استئناف",
+    "en": "Resume",
+    "description": "Button: resume downloads"
+  },
+  "recitationCancelDownload": {
+    "ar": "إلغاء التنزيل",
+    "en": "Cancel download",
+    "description": "Button: cancel and remove a download"
+  },
+  "recitationDeleteDownloads": {
+    "ar": "حذف التنزيلات",
+    "en": "Delete downloads",
+    "description": "Button: delete downloaded files"
+  },
+  "recitationDeleteConfirm": {
+    "ar": "حذف تلاوة {name} من الهاتف؟",
+    "en": "Delete {name}'s recitation from the phone?",
+    "description": "Delete confirmation title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationDeleteConfirmHint": {
+    "ar": "تُحذف {size}. يمكنك تنزيلها مرة أخرى متى شئت.",
+    "en": "Frees {size}. You can download it again any time.",
+    "description": "Delete confirmation body",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationDeleteSurahConfirm": {
+    "ar": "حذف سورة {surah}؟",
+    "en": "Delete surah {surah}?",
+    "description": "Delete one surah confirmation",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationOtherDownloads": {
+    "ar": "تنزيلات قرّاء آخرين",
+    "en": "Other reciters' downloads",
+    "description": "Heading: downloads of reciters not currently chosen"
+  },
+  "recitationDownloadsTitle": {
+    "ar": "تنزيلات {name}",
+    "en": "{name} – downloads",
+    "description": "Per-surah downloads screen title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationAyatCount": {
+    "ar": "{count, plural, =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}",
+    "en": "{count, plural, =1{1 ayah} other{{count} ayat}}",
+    "description": "Number of ayat in a surah",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationDownloadSurah": {
+    "ar": "تنزيل السورة",
+    "en": "Download surah",
+    "description": "Button: download one surah"
+  },
+  "recitationStatusQueued": {
+    "ar": "في الانتظار",
+    "en": "Queued",
+    "description": "Download status"
+  },
+  "recitationStatusDownloading": {
+    "ar": "جارٍ التنزيل",
+    "en": "Downloading",
+    "description": "Download status"
+  },
+  "recitationStatusPaused": {
+    "ar": "متوقّف مؤقتًا",
+    "en": "Paused",
+    "description": "Download status"
+  },
+  "recitationStatusWifi": {
+    "ar": "بانتظار Wi-Fi",
+    "en": "Waiting for Wi-Fi",
+    "description": "Download status: Wi-Fi only and not on Wi-Fi"
+  },
+  "recitationStatusFailed": {
+    "ar": "تعذّر التنزيل",
+    "en": "Download failed",
+    "description": "Download status"
+  },
+  "recitationStatusComplete": {
+    "ar": "محمّلة",
+    "en": "Downloaded",
+    "description": "Download status: complete"
+  },
+  "recitationErrorNetwork": {
+    "ar": "تحقّق من الاتصال ثم استأنف",
+    "en": "Check the connection, then resume",
+    "description": "Download error: network"
+  },
+  "recitationErrorNotFound": {
+    "ar": "الملف غير متوفر لدى المصدر",
+    "en": "The file isn't available at the source",
+    "description": "Download error: 404"
+  },
+  "recitationErrorStorage": {
+    "ar": "لا توجد مساحة كافية على الهاتف",
+    "en": "Not enough space on the phone",
+    "description": "Download error: storage"
+  },
+  "recitationSizeMb": {
+    "ar": "{size} ميغابايت",
+    "en": "{size} MB",
+    "description": "A size in megabytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSizeGb": {
+    "ar": "{size} غيغابايت",
+    "en": "{size} GB",
+    "description": "A size in gigabytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSizeKb": {
+    "ar": "{size} كيلوبايت",
+    "en": "{size} KB",
+    "description": "A size in kilobytes",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationSourceCredit": {
+    "ar": "التلاوات من everyayah.com – تُبثّ عند التشغيل أو تُنزَّل بطلبك",
+    "en": "Recitations from everyayah.com – streamed when you press play or downloaded when you ask",
+    "description": "Credit line under the downloads section"
+  },
+  "recitationSurahNumber": {
+    "ar": "سورة {number}",
+    "en": "Surah {number}",
+    "description": "Fallback surah name",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationTitleAyah": {
+    "ar": "{surah}، الآية {ayah}",
+    "en": "{surah} · Ayah {ayah}",
+    "description": "Media title: surah and ayah",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationTitleBasmala": {
+    "ar": "{surah}، البسملة",
+    "en": "{surah} · Basmala",
+    "description": "Media title: the basmala before a surah",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationAyahNumber": {
+    "ar": "الآية {ayah}",
+    "en": "Ayah {ayah}",
+    "description": "The ayah being recited",
+    "placeholders": {
+      "ayah": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationBasmalaNow": {
+    "ar": "البسملة",
+    "en": "Basmala",
+    "description": "The basmala is being recited"
+  },
+  "recitationNowPlaying": {
+    "ar": "يُتلى الآن",
+    "en": "Now reciting",
+    "description": "Full player: title"
+  },
+  "recitationPlay": {
+    "ar": "تشغيل",
+    "en": "Play",
+    "description": "Player button"
+  },
+  "recitationPause": {
+    "ar": "إيقاف مؤقت",
+    "en": "Pause",
+    "description": "Player button"
+  },
+  "recitationNextAyah": {
+    "ar": "الآية التالية",
+    "en": "Next ayah",
+    "description": "Player button"
+  },
+  "recitationPreviousAyah": {
+    "ar": "الآية السابقة",
+    "en": "Previous ayah",
+    "description": "Player button"
+  },
+  "recitationStop": {
+    "ar": "إيقاف التلاوة",
+    "en": "Stop recitation",
+    "description": "Player button"
+  },
+  "recitationOpenPlayer": {
+    "ar": "فتح المشغّل",
+    "en": "Open the player",
+    "description": "Screen reader: mini player opens the full player"
+  },
+  "recitationLoading": {
+    "ar": "جارٍ التحميل…",
+    "en": "Loading…",
+    "description": "Player status"
+  },
+  "recitationPausedPrayer": {
+    "ar": "توقّفت للأذان – اضغط للمتابعة",
+    "en": "Paused for the adhan – tap to continue",
+    "description": "Player status: paused because the adhan started"
+  },
+  "recitationPausedInterruption": {
+    "ar": "متوقّفة مؤقتًا",
+    "en": "Paused",
+    "description": "Player status: another app took the audio"
+  },
+  "recitationPausedNoisy": {
+    "ar": "توقّفت بعد فصل السمّاعات",
+    "en": "Paused – headphones disconnected",
+    "description": "Player status"
+  },
+  "recitationPausedSleep": {
+    "ar": "انتهى مؤقّت النوم",
+    "en": "Sleep timer ended",
+    "description": "Player status"
+  },
+  "recitationPlaybackNetwork": {
+    "ar": "لا اتصال – نزّل السورة للاستماع دون اتصال",
+    "en": "No connection – download the surah to listen offline",
+    "description": "Player error: network"
+  },
+  "recitationPlaybackNotFound": {
+    "ar": "هذه الآية غير متوفرة لهذا القارئ",
+    "en": "This ayah isn't available for this reciter",
+    "description": "Player error: 404"
+  },
+  "recitationPlaybackFailed": {
+    "ar": "تعذّر التشغيل",
+    "en": "Couldn't play",
+    "description": "Player error"
+  },
+  "recitationRetry": {
+    "ar": "إعادة المحاولة",
+    "en": "Retry",
+    "description": "Player button after an error"
+  },
+  "recitationOffline": {
+    "ar": "من التنزيلات",
+    "en": "Offline",
+    "description": "Chip: playing from downloaded files"
+  },
+  "recitationStreaming": {
+    "ar": "بثّ",
+    "en": "Streaming",
+    "description": "Chip: streaming from the internet"
+  },
+  "recitationAyahPass": {
+    "ar": "التكرار {pass} من {total}",
+    "en": "Repeat {pass} of {total}",
+    "description": "Which repetition of the ayah",
+    "placeholders": {
+      "pass": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangePass": {
+    "ar": "الدورة {pass} من {total}",
+    "en": "Pass {pass} of {total}",
+    "description": "Which pass over the passage",
+    "placeholders": {
+      "pass": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangePassEndless": {
+    "ar": "الدورة {pass}",
+    "en": "Pass {pass}",
+    "description": "Which pass over an endless passage",
+    "placeholders": {
+      "pass": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRepeatAyahShort": {
+    "ar": "الآية",
+    "en": "Ayah",
+    "description": "Full player: repeat control label for each ayah"
+  },
+  "recitationRepeatRangeShort": {
+    "ar": "المقطع",
+    "en": "Passage",
+    "description": "Full player: repeat control label for the passage"
+  },
+  "recitationMore": {
+    "ar": "زيادة",
+    "en": "More",
+    "description": "Stepper: increase"
+  },
+  "recitationLess": {
+    "ar": "إنقاص",
+    "en": "Fewer",
+    "description": "Stepper: decrease"
+  },
+  "recitationSleepTimer": {
+    "ar": "مؤقّت النوم",
+    "en": "Sleep timer",
+    "description": "Full player: sleep timer"
+  },
+  "recitationSleepOff": {
+    "ar": "بلا",
+    "en": "Off",
+    "description": "Sleep timer off"
+  },
+  "recitationSleepAfterAyah": {
+    "ar": "بعد هذه الآية",
+    "en": "After this ayah",
+    "description": "Sleep timer: stop after the current ayah"
+  },
+  "recitationMinutes": {
+    "ar": "{count, plural, =1{دقيقة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}",
+    "en": "{count, plural, =1{1 min} other{{count} min}}",
+    "description": "Sleep timer minutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recitationSleepUntil": {
+    "ar": "يتوقف {time}",
+    "en": "Stops at {time}",
+    "description": "Sleep timer running",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationChangeReciter": {
+    "ar": "تغيير القارئ",
+    "en": "Change reciter",
+    "description": "Full player: open the reciter picker"
+  },
+  "recitationProgress": {
+    "ar": "{percent} من المقطع",
+    "en": "{percent} of the passage",
+    "description": "Screen reader: progress ring",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangeLabel": {
+    "ar": "من {from} إلى {to}",
+    "en": "{from} to {to}",
+    "description": "The queued range",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationRangeInSurah": {
+    "ar": "{surah}\u00a0{from}–{to}",
+    "en": "{surah}\u00a0{from}–{to}",
+    "description": "The queued range inside one surah (e.g. الملك ١–٣٠); numbers pre-formatted",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "recitationBackgroundOff": {
+    "ar": "يعمل ما دام مَدار مفتوحًا",
+    "en": "Plays while Madar is open",
+    "description": "Full player: background playback unavailable"
+  }
+}

@@ -1,0 +1,188 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>مدار الصغار — الرئيسية</title>
+<meta name="viewport" content="width=360, initial-scale=1">
+<style>
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Regular.ttf');font-weight:400}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Medium.ttf');font-weight:500}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Plex';src:url('../../../assets/fonts/IBMPlexSansArabic-Bold.ttf');font-weight:700}
+@font-face{font-family:'Reem';src:url('../../../assets/fonts/ReemKufi-Variable.ttf');font-weight:400 700}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Regular.ttf');font-weight:400}
+@font-face{font-family:'Amiri';src:url('../../../assets/fonts/Amiri-Bold.ttf');font-weight:700}
+@font-face{font-family:'AmiriQuran';src:url('../../../assets/fonts/AmiriQuran-Regular.ttf');font-weight:400}
+:root{
+--night900:#17143F;--night800:#221E5A;--night700:#2F2A78;--night500:#5650B0;--night300:#A9A5E6;--night100:#E6E4FA;--sun700:#A8680F;--sun500:#F5B431;--sun300:#FFD479;--sun100:#FFF0CC;--teal800:#0F5552;--teal700:#17706C;--teal500:#2FA59C;--teal200:#B6E6DF;--teal100:#E2F5F1;--rose700:#A93556;--rose500:#E26A89;--rose300:#F6A9BC;--rose100:#FCE3EA;--paper:#FFF8EA;--sand:#F7E9CF;--sand2:#EBD5A8;--ink:#26214F;--ink2:#5A5482;--retry:#F7A94B;--retry100:#FFEBD0;--retry700:#8A4B05;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:780px;overflow:hidden;background:#000}
+body{font-family:'Plex',sans-serif;color:var(--ink);direction:rtl;-webkit-font-smoothing:antialiased}
+.phone{position:relative;width:360px;height:780px;overflow:hidden;background:var(--paper)}
+.abs{position:absolute}
+.fill{position:absolute;inset:0;width:100%;height:100%}
+.status{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;font-weight:600;z-index:50}
+.status .r{display:flex;gap:6px;align-items:center}
+.h1{font-family:'Reem',serif;font-weight:700;font-size:32px;line-height:1.25;word-spacing:.18em}
+.h2{font-family:'Reem',serif;font-weight:700;font-size:26px;line-height:1.3;word-spacing:.18em}
+.h3{font-family:'Reem',serif;font-weight:600;font-size:22px;line-height:1.35;word-spacing:.16em}
+.body{font-size:20px;line-height:1.6;font-weight:500}
+.small{font-size:16px;line-height:1.5;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 28px;border-radius:32px;font-family:'Plex';font-weight:700;font-size:20px;border:0;box-shadow:0 5px 0 rgba(23,20,63,.22),0 14px 22px -10px rgba(23,20,63,.45)}
+.btn.gold{background:linear-gradient(180deg,#FFD479,#F5B431);color:var(--night900)}
+.btn.teal{background:linear-gradient(180deg,#2FA59C,#17706C);color:#fff}
+.btn.rose{background:linear-gradient(180deg,#F6A9BC,#E26A89);color:var(--night900)}
+.btn.night{background:linear-gradient(180deg,#3B3590,#221E5A);color:#fff}
+.btn.paper{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 rgba(23,20,63,.14),0 12px 20px -10px rgba(23,20,63,.35)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:none;border:2.5px solid currentColor}
+.round{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;font-weight:700;font-size:16px}
+.card{background:var(--paper);border-radius:28px;box-shadow:0 2px 0 rgba(255,255,255,.7) inset,0 14px 28px -14px rgba(38,33,79,.5)}
+.ph{display:inline-block;direction:rtl;font-family:'Plex';font-weight:600;font-size:14px;color:var(--sun700);background:var(--sun100);border:1.5px dashed var(--sun700);border-radius:10px;padding:2px 10px}
+.num{font-feature-settings:'tnum'}
+.topbar{position:absolute;top:28px;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:20}
+.topbar .title{font-family:'Reem';font-weight:700;font-size:26px;text-align:center;flex:1;word-spacing:.18em}
+</style></head><body>
+<div class="phone" style="background:#17143F">
+<svg width="0" height="0" style="position:absolute"><defs>
+  <radialGradient id="glowSun"><stop offset="0" stop-color="#FFD479" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD479" stop-opacity=".35"/><stop offset="1" stop-color="#FFD479" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowTeal"><stop offset="0" stop-color="#B6E6DF" stop-opacity=".9"/><stop offset="1" stop-color="#B6E6DF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowRose"><stop offset="0" stop-color="#F6A9BC" stop-opacity=".8"/><stop offset="1" stop-color="#F6A9BC" stop-opacity="0"/></radialGradient></defs></svg>
+<div class="status" style="color:#fff"><span class="num">٩:٤١</span><span class="r"><svg width="26" height="13" viewBox="0 0 26 13"><rect x=".7" y=".7" width="21" height="11.6" rx="3.2" fill="none" stroke="#fff" stroke-width="1.4"/><rect x="2.6" y="2.6" width="14" height="7.8" rx="1.6" fill="#fff"/><rect x="23" y="4" width="2.3" height="5" rx="1" fill="#fff"/></svg></span></div>
+
+  <svg class="fill" viewBox="0 0 360 780">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17143F"/><stop offset=".45" stop-color="#2F2A78"/><stop offset=".78" stop-color="#E26A89"/><stop offset="1" stop-color="#FFD479"/></linearGradient>
+      <pattern id="pl" width="60" height="60" patternUnits="userSpaceOnUse"><polygon points="0,-24 7.03,-16.96 16.97,-16.97 16.96,-7.03 24,0 16.96,7.03 16.97,16.97 7.03,16.96 0,24 -7.03,16.96 -16.97,16.97 -16.96,7.03 -24,0 -16.96,-7.03 -16.97,-16.97 -7.03,-16.96" fill="none" stroke="#F5B431" stroke-width="1.1"/><polygon points="60,-24 67.03,-16.96 76.97,-16.97 76.96,-7.03 84,0 76.96,7.03 76.97,16.97 67.03,16.96 60,24 52.97,16.96 43.03,16.97 43.04,7.03 36,0 43.04,-7.03 43.03,-16.97 52.97,-16.96" fill="none" stroke="#F5B431" stroke-width="1.1"/><polygon points="0,36 7.03,43.04 16.97,43.03 16.96,52.97 24,60 16.96,67.03 16.97,76.97 7.03,76.96 0,84 -7.03,76.96 -16.97,76.97 -16.96,67.03 -24,60 -16.96,52.97 -16.97,43.03 -7.03,43.04" fill="none" stroke="#F5B431" stroke-width="1.1"/><polygon points="60,36 67.03,43.04 76.97,43.03 76.96,52.97 84,60 76.96,67.03 76.97,76.97 67.03,76.96 60,84 52.97,76.96 43.03,76.97 43.04,67.03 36,60 43.04,52.97 43.03,43.03 52.97,43.04" fill="none" stroke="#F5B431" stroke-width="1.1"/><polygon points="36.2,15.03 38.76,21.24 44.97,23.8 42.39,30 44.97,36.2 38.76,38.76 36.2,44.97 30,42.39 23.8,44.97 21.24,38.76 15.03,36.2 17.61,30 15.03,23.8 21.24,21.24 23.8,15.03 30,17.61" fill="none" stroke="#F5B431" stroke-width="1.1"/><rect x="24" y="24" width="12" height="12" transform="rotate(45 30 30)" fill="none" stroke="#F5B431" stroke-width="1.1"/><polygon points="32.07,-4.99 32.92,-2.92 34.99,-2.07 34.13,0 34.99,2.07 32.92,2.92 32.07,4.99 30,4.13 27.93,4.99 27.08,2.92 25.01,2.07 25.87,0 25.01,-2.07 27.08,-2.92 27.93,-4.99 30,-4.13" fill="#F5B431" opacity=".7"/><polygon points="2.07,25.01 2.92,27.08 4.99,27.93 4.13,30 4.99,32.07 2.92,32.92 2.07,34.99 0,34.13 -2.07,34.99 -2.92,32.92 -4.99,32.07 -4.13,30 -4.99,27.93 -2.92,27.08 -2.07,25.01 0,25.87" fill="#F5B431" opacity=".7"/><polygon points="62.07,25.01 62.92,27.08 64.99,27.93 64.13,30 64.99,32.07 62.92,32.92 62.07,34.99 60,34.13 57.93,34.99 57.08,32.92 55.01,32.07 55.87,30 55.01,27.93 57.08,27.08 57.93,25.01 60,25.87" fill="#F5B431" opacity=".7"/><polygon points="32.07,55.01 32.92,57.08 34.99,57.93 34.13,60 34.99,62.07 32.92,62.92 32.07,64.99 30,64.13 27.93,64.99 27.08,62.92 25.01,62.07 25.87,60 25.01,57.93 27.08,57.08 27.93,55.01 30,55.87" fill="#F5B431" opacity=".7"/></pattern>
+      <clipPath id="planetClip"><circle cx="180" cy="745" r="525"/></clipPath>
+    </defs>
+    <rect width="360" height="300" fill="url(#sky)"/>
+    <circle cx="135.34" cy="113.68" r="1.71" fill="#FFF0CC" opacity="0.42"/><circle cx="276.09" cy="150.35" r="1.53" fill="#FFF0CC" opacity="0.64"/><polygon points="99.32,179.02 100.41,180.11 101.95,180.11 101.94,181.65 103.03,182.73 101.94,183.82 101.95,185.36 100.41,185.36 99.32,186.44 98.24,185.36 96.7,185.36 96.7,183.82 95.61,182.73 96.7,181.65 96.7,180.11 98.24,180.11" fill="#FFF0CC" opacity="0.55"/><polygon points="34.57,133.41 36.73,135.58 39.8,135.58 39.8,138.64 41.97,140.81 39.8,142.98 39.8,146.05 36.73,146.04 34.57,148.22 32.4,146.04 29.33,146.05 29.33,142.98 27.16,140.81 29.33,138.64 29.33,135.58 32.4,135.58" fill="#FFF0CC" opacity="0.58"/><circle cx="93.62" cy="181.37" r="1.04" fill="#FFF0CC" opacity="0.8"/><circle cx="235.48" cy="155.44" r="1.18" fill="#FFF0CC" opacity="0.5"/><circle cx="249.47" cy="138.25" r="0.98" fill="#FFF0CC" opacity="0.71"/><polygon points="97.99,156.66 99.04,157.7 100.51,157.7 100.51,159.18 101.56,160.23 100.51,161.27 100.51,162.75 99.04,162.75 97.99,163.79 96.95,162.75 95.47,162.75 95.47,161.27 94.42,160.23 95.47,159.18 95.47,157.7 96.95,157.7" fill="#FFF0CC" opacity="0.75"/><circle cx="54.87" cy="157.94" r="1.84" fill="#FFF0CC" opacity="0.64"/><circle cx="141.6" cy="156.36" r="0.93" fill="#FFF0CC" opacity="0.49"/><circle cx="111.82" cy="91.86" r="1.28" fill="#FFF0CC" opacity="0.37"/><circle cx="145.35" cy="163.71" r="1.52" fill="#FFF0CC" opacity="0.58"/><circle cx="88.16" cy="126.11" r="1.74" fill="#FFF0CC" opacity="0.79"/>
+    <circle cx="180" cy="214" r="150" fill="url(#glowSun)"/>
+    <polygon points="180,94 214.54,128.6 263.44,128.56 263.4,177.46 298,212 263.4,246.54 263.44,295.44 214.54,295.4 180,330 145.46,295.4 96.56,295.44 96.6,246.54 62,212 96.6,177.46 96.56,128.56 145.46,128.6" fill="#FFD479" opacity=".35"/><polygon points="215.21,127 226.84,165.16 265,176.79 246.24,212 265,247.21 226.84,258.84 215.21,297 180,278.24 144.79,297 133.16,258.84 95,247.21 113.76,212 95,176.79 133.16,165.16 144.79,127 180,145.76" fill="#FFF0CC" opacity=".45"/>
+    <circle cx="180" cy="212" r="60" fill="#FFD479"/><circle cx="180" cy="212" r="60" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/>
+    <circle cx="180" cy="745" r="535" fill="#FFD479" opacity=".55"/>
+    <circle cx="180" cy="745" r="525" fill="#FFF8EA"/>
+    <g clip-path="url(#planetClip)"><rect x="-200" y="200" width="760" height="600" fill="url(#pl)" opacity=".28"/>
+      <circle cx="180" cy="745" r="525" fill="none" stroke="#F5B431" stroke-width="3" opacity=".7"/></g>
+  </svg><div class="abs" style="top:40px;right:20px;color:#fff"><div class="h1" style="font-size:34px">أهلاً يا نجم!</div><div style="font-size:19px;font-weight:500;color:#E6E4FA">وين بدّك تروح اليوم؟</div></div>
+  <div class="abs round" style="top:38px;left:16px;background:rgba(255,248,234,.16);border:1.5px solid rgba(255,248,234,.35)"><svg class="ico" width="30" height="30" viewBox="0 0 48 48" style="--a:#FFF8EA;--b:#2F2A78;--c:#F5B431;" aria-hidden="true"><rect x="9" y="21" width="30" height="22" rx="7" fill="var(--a)"/><path d="M15 21V15C15 9.5 19 6 24 6C29 6 33 9.5 33 15V21" fill="none" stroke="var(--a)" stroke-width="4.5" stroke-linecap="round"/><circle cx="24" cy="30" r="3.6" fill="var(--b)"/><path d="M24 31v6" stroke="var(--b)" stroke-width="3.2" stroke-linecap="round"/></svg></div><div class="abs" style="left:16px;right:16px;top:262px;height:90px;border-radius:30px;background:linear-gradient(100deg,#F5B431,#FFD479);box-shadow:0 5px 0 rgba(168,104,15,.45),0 16px 24px -12px rgba(23,20,63,.5);display:flex;align-items:center;gap:14px;padding:0 14px;overflow:hidden">
+    <svg class="fill" viewBox="0 0 328 90" style="opacity:.35"><defs><pattern id="pq" width="48" height="48" patternUnits="userSpaceOnUse"><polygon points="0,-19.2 5.62,-13.57 13.58,-13.58 13.57,-5.62 19.2,0 13.57,5.62 13.58,13.58 5.62,13.57 0,19.2 -5.62,13.57 -13.58,13.58 -13.57,5.62 -19.2,0 -13.57,-5.62 -13.58,-13.58 -5.62,-13.57" fill="none" stroke="#fff" stroke-width="1"/><polygon points="48,-19.2 53.62,-13.57 61.58,-13.58 61.57,-5.62 67.2,0 61.57,5.62 61.58,13.58 53.62,13.57 48,19.2 42.38,13.57 34.42,13.58 34.43,5.62 28.8,0 34.43,-5.62 34.42,-13.58 42.38,-13.57" fill="none" stroke="#fff" stroke-width="1"/><polygon points="0,28.8 5.62,34.43 13.58,34.42 13.57,42.38 19.2,48 13.57,53.62 13.58,61.58 5.62,61.57 0,67.2 -5.62,61.57 -13.58,61.58 -13.57,53.62 -19.2,48 -13.57,42.38 -13.58,34.42 -5.62,34.43" fill="none" stroke="#fff" stroke-width="1"/><polygon points="48,28.8 53.62,34.43 61.58,34.42 61.57,42.38 67.2,48 61.57,53.62 61.58,61.58 53.62,61.57 48,67.2 42.38,61.57 34.42,61.58 34.43,53.62 28.8,48 34.43,42.38 34.42,34.42 42.38,34.43" fill="none" stroke="#fff" stroke-width="1"/><polygon points="28.96,12.03 31.01,16.99 35.97,19.04 33.91,24 35.97,28.96 31.01,31.01 28.96,35.97 24,33.91 19.04,35.97 16.99,31.01 12.03,28.96 14.09,24 12.03,19.04 16.99,16.99 19.04,12.03 24,14.09" fill="none" stroke="#fff" stroke-width="1"/><rect x="19.2" y="19.2" width="9.600000000000001" height="9.600000000000001" transform="rotate(45 24 24)" fill="none" stroke="#fff" stroke-width="1"/><polygon points="25.65,-3.99 26.34,-2.34 27.99,-1.65 27.3,0 27.99,1.65 26.34,2.34 25.65,3.99 24,3.3 22.35,3.99 21.66,2.34 20.01,1.65 20.7,0 20.01,-1.65 21.66,-2.34 22.35,-3.99 24,-3.3" fill="#fff" opacity=".7"/><polygon points="1.65,20.01 2.34,21.66 3.99,22.35 3.3,24 3.99,25.65 2.34,26.34 1.65,27.99 0,27.3 -1.65,27.99 -2.34,26.34 -3.99,25.65 -3.3,24 -3.99,22.35 -2.34,21.66 -1.65,20.01 0,20.7" fill="#fff" opacity=".7"/><polygon points="49.65,20.01 50.34,21.66 51.99,22.35 51.3,24 51.99,25.65 50.34,26.34 49.65,27.99 48,27.3 46.35,27.99 45.66,26.34 44.01,25.65 44.7,24 44.01,22.35 45.66,21.66 46.35,20.01 48,20.7" fill="#fff" opacity=".7"/><polygon points="25.65,44.01 26.34,45.66 27.99,46.35 27.3,48 27.99,49.65 26.34,50.34 25.65,51.99 24,51.3 22.35,51.99 21.66,50.34 20.01,49.65 20.7,48 20.01,46.35 21.66,45.66 22.35,44.01 24,44.7" fill="#fff" opacity=".7"/></pattern></defs><rect width="328" height="90" fill="url(#pq)"/></svg>
+    <div style="position:relative"><div style="position:relative;width:70px;height:70px;flex:none">
+    <svg width="70" height="70" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#5650B0"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#E6E4FA" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="35" height="35" viewBox="0 0 48 48" style="--a:#fff;--b:#5650B0;--c:#E6E4FA;" aria-hidden="true"><path d="M24 13C18 8.5 10 8.5 5 11.5V38C10 35 18 35 24 39.5C30 35 38 35 43 38V11.5C38 8.5 30 8.5 24 13Z" fill="var(--b)" stroke="var(--a)" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M24 13V39" stroke="var(--a)" stroke-width="2.5"/><polygon points="14.5,17.5 16.11,19.11 18.39,19.11 18.39,21.39 20,23 18.39,24.61 18.39,26.89 16.11,26.89 14.5,28.5 12.89,26.89 10.61,26.89 10.61,24.61 9,23 10.61,21.39 10.61,19.11 12.89,19.11" fill="var(--c)"/><polygon points="33.5,17.5 35.11,19.11 37.39,19.11 37.39,21.39 39,23 37.39,24.61 37.39,26.89 35.11,26.89 33.5,28.5 31.89,26.89 29.61,26.89 29.61,24.61 28,23 29.61,21.39 29.61,19.11 31.89,19.11" fill="var(--c)"/></svg></div>
+  </div></div>
+    <div style="position:relative;flex:1"><div class="h2" style="color:#17143F">القرآن</div><div style="font-size:17px;font-weight:600;color:#221E5A">جزء عمّ · اسمع وعيد</div></div>
+    <div style="position:relative"><svg class="ico" width="28" height="28" viewBox="0 0 48 48" style="--a:#17143F;--b:#FFF8EA;--c:#F5B431;" aria-hidden="true"><path d="M31 9L17 24L31 39" fill="none" stroke="var(--a)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div><div class="abs" style="left:16px;top:362px;width:102.67px;height:100px;border-radius:28px;background:#E2F5F1;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#2FA59C"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#E2F5F1" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#fff;--b:#2FA59C;--c:#E2F5F1;" aria-hidden="true"><path d="M8 43V23C8 12 15 7 24 3C33 7 40 12 40 23V43Z" fill="var(--a)"/>
+    <path d="M14 43V25C14 17.5 18.5 13 24 10.5C29.5 13 34 17.5 34 25V43Z" fill="var(--b)"/>
+    <polygon points="24,20.5 25.9,22.41 28.6,22.4 28.59,25.1 30.5,27 28.59,28.9 28.6,31.6 25.9,31.59 24,33.5 22.1,31.59 19.4,31.6 19.41,28.9 17.5,27 19.41,25.1 19.4,22.4 22.1,22.41" fill="var(--c)"/><circle cx="24" cy="27" r="2" fill="var(--a)"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">الصلاة<br>والوضوء</div>
+  </div><div class="abs" style="left:128.67000000000002px;top:362px;width:102.67px;height:100px;border-radius:28px;background:#E6E4FA;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#5650B0"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#E6E4FA" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#fff;--b:#5650B0;--c:#E6E4FA;" aria-hidden="true"><rect x="10" y="8" width="28" height="32" fill="var(--b)"/>
+    <rect x="5" y="5" width="38" height="8" rx="4" fill="var(--a)"/><rect x="5" y="35" width="38" height="8" rx="4" fill="var(--a)"/>
+    <path d="M15 20H33M15 26H33M15 31H25" stroke="var(--a)" stroke-width="3" stroke-linecap="round"/><polygon points="35,23.5 36.32,24.82 38.18,24.82 38.18,26.68 39.5,28 38.18,29.32 38.18,31.18 36.32,31.18 35,32.5 33.68,31.18 31.82,31.18 31.82,29.32 30.5,28 31.82,26.68 31.82,24.82 33.68,24.82" fill="var(--c)"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">القصص</div>
+  </div><div class="abs" style="left:241.34px;top:362px;width:102.67px;height:100px;border-radius:28px;background:#FCE3EA;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#E26A89"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#FCE3EA" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#17143F;--b:#E26A89;--c:#FCE3EA;" aria-hidden="true"><path d="M24 41C6 29 9 12 19.5 13.2C22.5 13.6 24 17 24 17C24 17 25.5 13.6 28.5 13.2C39 12 42 29 24 41Z" fill="var(--a)"/>
+    <polygon points="24,18 26.34,20.35 29.66,20.34 29.65,23.66 32,26 29.65,28.34 29.66,31.66 26.34,31.65 24,34 21.66,31.65 18.34,31.66 18.35,28.34 16,26 18.35,23.66 18.34,20.34 21.66,20.35" fill="var(--b)"/><circle cx="24" cy="26" r="2.6" fill="var(--a)"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">الأخلاق</div>
+  </div><div class="abs" style="left:16px;top:472px;width:102.67px;height:100px;border-radius:28px;background:#FFF0CC;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#F5B431"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#FFF0CC" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#17143F;--b:#F5B431;--c:#FFF0CC;" aria-hidden="true"><rect x="5" y="5" width="38" height="38" rx="12" fill="var(--b)" stroke="var(--a)" stroke-width="3"/>
+    <text x="24" y="35.5" text-anchor="middle" font-family="Reem" font-weight="700" font-size="30" fill="var(--a)">أ</text></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">الحروف</div>
+  </div><div class="abs" style="left:128.67000000000002px;top:472px;width:102.67px;height:100px;border-radius:28px;background:#B6E6DF;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#17706C"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#B6E6DF" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#fff;--b:#17706C;--c:#B6E6DF;" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="var(--b)" stroke="var(--a)" stroke-width="3"/>
+    <path d="M12.5 12.5l8 8m0-8l-8 8" stroke="var(--a)" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M28 35h8" stroke="var(--a)" stroke-width="3.2" stroke-linecap="round"/><circle cx="32" cy="29.5" r="1.9" fill="var(--a)"/><circle cx="32" cy="40.5" r="1.9" fill="var(--a)"/>
+    <path d="M27 14h10M32 9v10" stroke="var(--c)" stroke-width="3.2" stroke-linecap="round"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">الحساب</div>
+  </div><div class="abs" style="left:241.34px;top:472px;width:102.67px;height:100px;border-radius:28px;background:#FCE3EA;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#A93556"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#FCE3EA" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#fff;--b:#A93556;--c:#FCE3EA;" aria-hidden="true"><path d="M24 5C13 5 4 13.5 4 24C4 34.5 12.5 43 22 43C26.5 43 27.5 39.5 25.5 36.5C23.5 33.5 25.5 30 30 30H35.5C40.5 30 44 27 44 22C44 12.5 35.5 5 24 5Z" fill="var(--b)" stroke="var(--a)" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="14" cy="24" r="3.6" fill="#E26A89"/><circle cx="19" cy="14" r="3.6" fill="#F5B431"/><circle cx="30" cy="13" r="3.6" fill="#2FA59C"/><circle cx="37" cy="21" r="3.6" fill="#5650B0"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">التلوين</div>
+  </div><div class="abs" style="left:16px;top:582px;width:102.67px;height:100px;border-radius:28px;background:#E6E4FA;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#5650B0"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#E6E4FA" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#fff;--b:#5650B0;--c:#E6E4FA;" aria-hidden="true"><rect x="4" y="12" width="40" height="24" rx="12" fill="var(--b)" stroke="var(--a)" stroke-width="3"/>
+    <path d="M15 19v10M10 24h10" stroke="var(--a)" stroke-width="3.4" stroke-linecap="round"/><circle cx="32" cy="21.5" r="2.8" fill="var(--c)"/><circle cx="37.5" cy="27" r="2.8" fill="var(--a)"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">الألعاب</div>
+  </div><div class="abs" style="left:128.67000000000002px;top:582px;width:102.67px;height:100px;border-radius:28px;background:#FFF0CC;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#F5B431"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#FFF0CC" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#17143F;--b:#F5B431;--c:#FFF0CC;" aria-hidden="true"><path d="M24 2.5V7" stroke="var(--a)" stroke-width="3" stroke-linecap="round"/>
+    <rect x="16.5" y="6.5" width="15" height="5.5" rx="2.5" fill="var(--a)"/>
+    <path d="M14.5 12.5H33.5L37 23L33 36.5H15L11 23Z" fill="var(--b)" stroke="var(--a)" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="15.5" y="36" width="17" height="6" rx="2.5" fill="var(--a)"/>
+    <path d="M24 18.5C28.5 23 28.5 27.5 24 31.5C19.5 27.5 19.5 23 24 18.5Z" fill="var(--c)"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">جوائزي</div>
+  </div><div class="abs" style="left:241.34px;top:582px;width:102.67px;height:100px;border-radius:28px;background:#E2F5F1;box-shadow:0 5px 0 rgba(23,20,63,.14),0 14px 20px -12px rgba(23,20,63,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center">
+    <div style="position:relative;width:58px;height:58px;flex:none">
+    <svg width="58" height="58" viewBox="0 0 64 64" style="position:absolute;inset:0">
+      <polygon points="32,2.5 41.08,11.59 53.92,11.58 53.91,24.42 63,33.5 53.91,42.58 53.92,55.42 41.08,55.41 32,64.5 22.92,55.41 10.08,55.42 10.09,42.58 1,33.5 10.09,24.42 10.08,11.58 22.92,11.59" fill="rgba(23,20,63,.18)"/>
+      <polygon points="32,1 41.08,10.09 53.92,10.08 53.91,22.92 63,32 53.91,41.08 53.92,53.92 41.08,53.91 32,63 22.92,53.91 10.08,53.92 10.09,41.08 1,32 10.09,22.92 10.08,10.08 22.92,10.09" fill="#2FA59C"/>
+      <polygon points="41.57,8.9 45.52,18.48 55.1,22.43 51.13,32 55.1,41.57 45.52,45.52 41.57,55.1 32,51.13 22.43,55.1 18.48,45.52 8.9,41.57 12.88,32 8.9,22.43 18.48,18.48 22.43,8.9 32,12.88" fill="none" stroke="#E2F5F1" stroke-width="1.4" opacity=".7"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><svg class="ico" width="29" height="29" viewBox="0 0 48 48" style="--a:#fff;--b:#2FA59C;--c:#E2F5F1;" aria-hidden="true"><circle cx="24" cy="5" r="3.6" fill="var(--c)"/><circle cx="32.11" cy="7.38" r="3.6" fill="var(--a)"/><circle cx="37.64" cy="13.77" r="3.6" fill="var(--a)"/><circle cx="38.85" cy="22.13" r="3.6" fill="var(--a)"/><circle cx="35.34" cy="29.82" r="3.6" fill="var(--a)"/><circle cx="28.23" cy="34.39" r="3.6" fill="var(--c)"/><circle cx="19.77" cy="34.39" r="3.6" fill="var(--a)"/><circle cx="12.66" cy="29.82" r="3.6" fill="var(--a)"/><circle cx="9.15" cy="22.13" r="3.6" fill="var(--a)"/><circle cx="10.36" cy="13.77" r="3.6" fill="var(--a)"/><circle cx="15.89" cy="7.38" r="3.6" fill="var(--c)"/><path d="M24 36V43" stroke="var(--a)" stroke-width="2.6" stroke-linecap="round"/><polygon points="24,36.5 25.17,37.67 26.83,37.67 26.83,39.33 28,40.5 26.83,41.67 26.83,43.33 25.17,43.33 24,44.5 22.83,43.33 21.17,43.33 21.17,41.67 20,40.5 21.17,39.33 21.17,37.67 22.83,37.67" fill="var(--c)"/></svg></div>
+  </div>
+    <div style="font-weight:700;font-size:17px;line-height:1.15;color:#26214F;padding:0 4px">الأذكار</div>
+  </div><div class="abs" style="left:16px;right:16px;top:690px;height:64px;display:flex;gap:10px">
+    <div style="width:142px;border-radius:32px;background:#221E5A;color:#fff;display:flex;align-items:center;gap:8px;padding:0 14px;font-weight:700;font-size:18px;white-space:nowrap;box-shadow:0 4px 0 rgba(23,20,63,.3)"><svg class="ico" width="34" height="34" viewBox="0 0 48 48" style="--a:#F5B431;--b:#221E5A;--c:#F5B431;" aria-hidden="true"><polygon points="24,2 30.44,8.45 39.56,8.44 39.55,17.56 46,24 39.55,30.44 39.56,39.56 30.44,39.55 24,46 17.56,39.55 8.44,39.56 8.45,30.44 2,24 8.45,17.56 8.44,8.44 17.56,8.45" fill="var(--a)"/><polygon points="28.21,13.84 29.6,18.4 34.16,19.79 31.92,24 34.16,28.21 29.6,29.6 28.21,34.16 24,31.92 19.79,34.16 18.4,29.6 13.84,28.21 16.08,24 13.84,19.79 18.4,18.4 19.79,13.84 24,16.08" fill="var(--b)"/></svg><span class="num">٢٤ نجمة</span></div>
+    <div style="flex:1;border-radius:32px;flex:1;background:#E2F5F1;color:#0F5552;display:flex;align-items:center;gap:8px;padding:0 14px;font-weight:700;font-size:18px;box-shadow:0 4px 0 rgba(15,85,82,.2);white-space:nowrap"><svg class="ico" width="30" height="30" viewBox="0 0 48 48" style="--a:#17706C;--b:#E2F5F1;--c:#F5B431;" aria-hidden="true"><path d="M12 5H36M12 43H36" stroke="var(--a)" stroke-width="4.5" stroke-linecap="round"/><path d="M15 5C15 17 24 19 24 24C24 29 15 31 15 43H33C33 31 24 29 24 24C24 19 33 17 33 5Z" fill="var(--b)" stroke="var(--a)" stroke-width="3" stroke-linejoin="round"/><path d="M19 38C21 33 27 33 29 38Z" fill="var(--a)"/></svg><span class="num">باقي ٤٥ دقيقة</span></div>
+  </div>
+</div></body></html>

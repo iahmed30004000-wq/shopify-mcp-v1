@@ -1,0 +1,39 @@
+{
+  "iqamaTitle": {"ar": "الإقامة", "en": "Iqama", "description": "Iqama settings screen title / entry"},
+  "iqamaSubtitle": {"ar": "تنبيه بعد الأذان بالوقت اللي تختاره، وفيه «صلّيت»", "en": "A call a set time after the adhan, with “I prayed”", "description": "Subtitle of the Iqama entry in the Adhan settings"},
+
+  "iqamaSectionPrayers": {"ar": "الصلوات", "en": "Prayers"},
+  "iqamaSectionPrayersHint": {"ar": "كل صلاة إلها وقتها الخاص بعد الأذان، وتقدر تطفيها لحالها والأذان يضلّ شغّال", "en": "Each prayer has its own delay after the adhan and its own switch – its adhan stays on"},
+  "iqamaSectionSound": {"ar": "الصوت والتنبيه", "en": "Sound & alert"},
+  "iqamaSectionSoundHint": {"ar": "صوت الإقامة مستقل عن صوت الأذان", "en": "The iqama's sound is its own, not the adhan's"},
+
+  "iqamaWithAdhan": {"ar": "مع الأذان", "en": "With the adhan"},
+  "iqamaAfterAdhan": {"ar": "بعد الأذان بـ{minutes}", "en": "{minutes} after the adhan", "description": "Delay of one prayer's iqama; minutes pre-formatted", "placeholders": {"minutes": {"type": "String"}}},
+  "iqamaOff": {"ar": "مطفية", "en": "Off", "description": "This prayer's iqama is switched off"},
+  "iqamaAdhanOff": {"ar": "أذان هالصلاة مطفي", "en": "This prayer's adhan is off"},
+  "iqamaPrayerLabel": {"ar": "إقامة {prayer}", "en": "{prayer} iqama", "description": "Name of one prayer's iqama (row switch, edit sheet, notification centre)", "placeholders": {"prayer": {"type": "String"}}},
+  "iqamaJumuah": {"ar": "الجمعة", "en": "Friday (Jumuah)"},
+  "iqamaJumuahHint": {"ar": "ظهر الجمعة إله وقته الخاص", "en": "Friday's Dhuhr has a delay of its own"},
+
+  "iqamaFieldOn": {"ar": "نبّهني", "en": "Call me"},
+  "iqamaFieldOffset": {"ar": "بعد الأذان بـ", "en": "After the adhan"},
+  "iqamaSnoozeLength": {"ar": "طول «بعد شوي»", "en": "Length of “In a bit”"},
+  "iqamaSnoozeHint": {"ar": "مرّة وحدة بس، وما بتتكرّر", "en": "Once only – it never repeats"},
+  "iqamaVibrate": {"ar": "اهتزاز مع الإقامة", "en": "Vibrate with the iqama"},
+  "iqamaSound": {"ar": "صوت الإقامة", "en": "Iqama sound"},
+  "iqamaNote": {"ar": "إذا وقع وقت الإقامة بعد أذان الصلاة اللي بعدها، ما بتوصلك – وقت الصلاة خلص.", "en": "An iqama that would land after the next prayer's adhan is not sent – that prayer's time is over."},
+
+  "iqamaNotifTitle": {"ar": "قامت الصلاة", "en": "The prayer has begun", "description": "Iqama notification title"},
+  "iqamaNotifBody": {"ar": "{prayer} · أُذِّن الساعة {time}", "en": "{prayer} · adhan at {time}", "description": "Iqama notification body; time pre-formatted", "placeholders": {"prayer": {"type": "String"}, "time": {"type": "String"}}},
+  "iqamaNotifSnoozeTitle": {"ar": "لسّا الصلاة قائمة", "en": "The prayer is still standing", "description": "Title of the one snooze"},
+  "iqamaActionPrayed": {"ar": "صلّيت", "en": "I prayed"},
+  "iqamaActionLater": {"ar": "بعد شوي", "en": "In a bit"},
+
+  "iqamaChannel": {"ar": "الإقامة · {sound}", "en": "Iqama · {sound}", "description": "Android notification channel name of an iqama sound", "placeholders": {"sound": {"type": "String"}}},
+  "iqamaChannelHint": {"ar": "تنبيه بعد الأذان بالوقت اللي تختاره", "en": "A call a set time after the adhan"},
+
+  "iqamaAlreadyTitle": {"ar": "{prayer} مسجّلة من قبل", "en": "{prayer} is already logged", "placeholders": {"prayer": {"type": "String"}}},
+  "iqamaAlreadyBody": {"ar": "ما انسجّلت مرّتين؛ كنت سجّلتها بإيدك", "en": "Nothing was logged twice – you had already recorded it"},
+  "iqamaFailedTitle": {"ar": "ما انسجّلت الصلاة", "en": "The prayer was not recorded"},
+  "iqamaFailedBody": {"ar": "افتح مَدار وسجّلها من متابعة الصلاة", "en": "Open Madar and log it in the prayer tracker"}
+}

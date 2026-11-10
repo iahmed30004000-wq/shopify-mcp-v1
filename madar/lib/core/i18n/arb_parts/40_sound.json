@@ -1,0 +1,19 @@
+{
+  "soundProfileLapis": {"ar": "أجراسٌ بلّورية", "en": "Crystal bells", "description": "Name of the Lapis sound profile (glass bells)"},
+  "soundProfileEmerald": {"ar": "خشبٌ دافئ", "en": "Warm wood", "description": "Name of the Emerald sound profile (wood and kalimba)"},
+  "soundProfileDesert": {"ar": "عودٌ ودفّ", "en": "Oud & frame drum", "description": "Name of the Desert sound profile"},
+  "soundProfileAurora": {"ar": "وميض الشفق", "en": "Aurora shimmer", "description": "Name of the Aurora sound profile (airy synth)"},
+  "soundProfilePearl": {"ar": "رنين اللؤلؤ", "en": "Pearl chimes", "description": "Name of the Pearl sound profile (delicate crystal pings)"},
+  "soundProfileLapisDescription": {"ar": "أجراسٌ زجاجية صافية على مقام الراست", "en": "Clear glass bells in maqam Rast"},
+  "soundProfileEmeraldDescription": {"ar": "كاليمبا وخشبٌ دافئ على مقام البياتي", "en": "Kalimba and warm wood in maqam Bayati"},
+  "soundProfileDesertDescription": {"ar": "نقراتُ عودٍ ودفٌّ هادئ على مقام الحجاز", "en": "Oud plucks and a soft frame drum in maqam Hijaz"},
+  "soundProfileAuroraDescription": {"ar": "بريقٌ سماويّ هادئ على مقام العجم", "en": "An airy, shimmering glow in maqam 'Ajam"},
+  "soundProfilePearlDescription": {"ar": "رنينٌ بلّوريّ رقيق على مقام النهاوند", "en": "Delicate crystal chimes in maqam Nahawand"},
+  "soundCategoryUi": {"ar": "أصوات الواجهة", "en": "Interface sounds", "description": "Volume slider: taps, toggles, sheets"},
+  "soundCategoryAmbient": {"ar": "أجواء الفضاء", "en": "Cosmic ambience", "description": "Volume slider: deep-space ambient soundscape"},
+  "soundCategoryGames": {"ar": "الألعاب", "en": "Games", "description": "Volume slider: games music and effects"},
+  "soundCategoryPrayer": {"ar": "الأذان والصلاة", "en": "Adhan & prayer", "description": "Volume slider: adhan and prayer sounds"},
+  "soundPrayerMuteNote": {"ar": "تهدأ الأجواء والألعاب وقت الأذان والصلاة، وتبقى أصوات الواجهة الخافتة.", "en": "Ambience and games fall silent during the adhan and prayer; soft interface sounds remain."},
+  "soundPreview": {"ar": "استمع", "en": "Preview", "description": "Button that plays a sample of a sound profile"},
+  "soundUnavailable": {"ar": "الصوت غير متاح على هذا الجهاز", "en": "Audio isn't available on this device"}
+}

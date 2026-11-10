@@ -1,0 +1,28 @@
+{
+  "gamesWorldTitle": {
+    "ar": "الألعاب",
+    "en": "Games",
+    "description": "The games world (planet key `games`) – the hall, the saved games and the records"
+  },
+  "gamesWorldBestTitle": {
+    "ar": "أحسن نتائجك",
+    "en": "Your best scores"
+  },
+  "gamesWorldBestEmpty": {
+    "ar": "لسا ما لعبت ولا لعبة. افتح القاعة واختار واحدة.",
+    "en": "You haven't played anything yet. Open the hall and pick a game."
+  },
+  "gamesWorldBestSeeAll": {
+    "ar": "دفتر التذاكر",
+    "en": "The ticket book"
+  },
+  "gamesWorldPlayedGames": {
+    "ar": "{count, plural, =1{لعبة واحدة إلها نتيجة} =2{لعبتان إلهما نتيجة} few{{count} ألعاب إلها نتيجة} many{{count} لعبةً إلها نتيجة} other{{count} لعبة إلها نتيجة}}",
+    "en": "{count, plural, =1{1 game with a score} other{{count} games with a score}}",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}

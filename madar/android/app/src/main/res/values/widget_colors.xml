@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home-screen widgets, light home screens: Madar's Pearl theme
+     (mother-of-pearl, ink and gold – lib/core/design/themes.dart).
+     values-night/widget_colors.xml holds the Lapis night. Code never sets a
+     colour: the launcher re-reads these when the phone switches mode. -->
+<resources>
+    <color name="widget_surface">#F5F7F3EA</color>
+    <color name="widget_stroke">#55B8862F</color>
+    <color name="widget_text_primary">#FF1D1A24</color>
+    <color name="widget_text_secondary">#FF474353</color>
+    <!-- Muted, yet 5.3:1 on the card (WCAG AA for the 11 sp notes). -->
+    <color name="widget_text_muted">#FF686270</color>
+    <color name="widget_accent">#FF77540E</color>
+    <color name="widget_warn">#FFAB2828</color>
+    <color name="widget_bar_track">#29483A1C</color>
+    <color name="widget_bar_fill">#FF9C7127</color>
+</resources>

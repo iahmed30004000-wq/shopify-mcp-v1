@@ -1,0 +1,158 @@
+{
+  "guideHelpGlyph": {
+    "ar": "؟",
+    "en": "?",
+    "description": "The glyph on the help button («؟»)"
+  },
+  "guideHelpTooltip": {
+    "ar": "شو هاي الشاشة؟",
+    "en": "What is this screen?",
+    "description": "Help button tooltip and screen-reader label"
+  },
+  "guideSheetPurposeHeading": {
+    "ar": "شو بتعمل هاي الشاشة",
+    "en": "What this screen is for"
+  },
+  "guideSheetExampleHeading": {
+    "ar": "مثال",
+    "en": "Example"
+  },
+  "guideSheetDoHeading": {
+    "ar": "شو بتقدر تعمل هون",
+    "en": "What you can do here"
+  },
+  "guideSheetRelatedHeading": {
+    "ar": "ممكن يفيدك كمان",
+    "en": "You may also like"
+  },
+  "guideSheetBack": {
+    "ar": "ارجع للشرح السابق",
+    "en": "Back to the previous help"
+  },
+  "guideSheetMissing": {
+    "ar": "ما عندنا شرح لهاي الشاشة لسّه.",
+    "en": "There is no help for this screen yet."
+  },
+  "guideReplayTour": {
+    "ar": "أعد الجولة السريعة",
+    "en": "Replay the quick tour"
+  },
+  "guideTourNext": {
+    "ar": "التالي",
+    "en": "Next"
+  },
+  "guideTourBack": {
+    "ar": "السابق",
+    "en": "Back"
+  },
+  "guideTourSkip": {
+    "ar": "تخطّي",
+    "en": "Skip"
+  },
+  "guideTourDone": {
+    "ar": "تمام، خلصنا",
+    "en": "Done"
+  },
+  "guideTourStepOf": {
+    "ar": "الخطوة {current} من {total}",
+    "en": "Step {current} of {total}",
+    "placeholders": {
+      "current": {"type": "num", "format": "decimalPattern"},
+      "total": {"type": "num", "format": "decimalPattern"}
+    }
+  },
+  "guideTourBubbleSemantics": {
+    "ar": "جولة سريعة، الخطوة {current} من {total}. {title}. {body}",
+    "en": "Quick tour, step {current} of {total}. {title}. {body}",
+    "placeholders": {
+      "current": {"type": "num", "format": "decimalPattern"},
+      "total": {"type": "num", "format": "decimalPattern"},
+      "title": {"type": "String"},
+      "body": {"type": "String"}
+    }
+  },
+  "guideTodayTitle": {
+    "ar": "اليوم",
+    "en": "Today"
+  },
+  "guideTodayPurpose": {
+    "ar": "هون بتشوف يومك كله على شاشة وحدة: صلواتك ومهامك ومواعيدك.",
+    "en": "Your whole day on one screen: prayers, tasks and appointments."
+  },
+  "guideTodayExample": {
+    "ar": "مثال: الساعة ٩ الصبح بتفتح التطبيق وبتشوف إنه باقي ٣ مهام، وإنه صلاة الظهر بعد ساعتين.",
+    "en": "Example: at 9 in the morning you open the app and see 3 tasks left and noon prayer in two hours."
+  },
+  "guideTodayDo1": {
+    "ar": "شطّب مهمة بضغطة وحدة أول ما تخلصها",
+    "en": "Tick a task off with one tap when you finish it"
+  },
+  "guideTodayDo2": {
+    "ar": "اضغط على أي بطاقة عشان تفتح تفاصيلها",
+    "en": "Tap any card to open its details"
+  },
+  "guideTodayDo3": {
+    "ar": "اضغط زر الزائد عشان تضيف شي جديد بسرعة",
+    "en": "Tap the plus button to add something new fast"
+  },
+  "guideTodayKeywords": {
+    "ar": "يومي الرئيسية مهام مواعيد صلوات الصفحة الأولى",
+    "en": "daily home tasks appointments prayers first page"
+  },
+  "guideFaithTitle": {
+    "ar": "الإيمان",
+    "en": "Faith"
+  },
+  "guideFaithPurpose": {
+    "ar": "هذا مكان الصلاة والأذكار والقرآن، وكل شي بيخصّ عبادتك بمكان واحد.",
+    "en": "The place for prayer, remembrance and the Quran, all together."
+  },
+  "guideFaithExample": {
+    "ar": "مثال: بدك تعرف كم باقي على صلاة العصر؟ افتح الكوكب وشوف العدّ التنازلي فوق.",
+    "en": "Example: want to know how long until the afternoon prayer? Open the planet and read the countdown at the top."
+  },
+  "guideFaithDo1": {
+    "ar": "شوف مواقيت الصلاة لمدينتك",
+    "en": "See prayer times for your city"
+  },
+  "guideFaithDo2": {
+    "ar": "سجّل الصلاة اللي صلّيتها",
+    "en": "Log the prayers you have prayed"
+  },
+  "guideFaithDo3": {
+    "ar": "كمّل قراءتك من وين وقفت",
+    "en": "Continue reading from where you stopped"
+  },
+  "guideFaithKeywords": {
+    "ar": "صلاة مواقيت أذكار قرآن تسبيح قبلة أذان عبادة",
+    "en": "prayer times adhkar quran tasbeeh qibla adhan worship"
+  },
+  "guideExpenseTitle": {
+    "ar": "إضافة مصروف",
+    "en": "Add an expense"
+  },
+  "guideExpensePurpose": {
+    "ar": "سجّل أي مبلغ دفعته بدقيقة، عشان تعرف وين بتروح فلوسك.",
+    "en": "Record anything you paid in a minute, so you know where your money goes."
+  },
+  "guideExpenseExample": {
+    "ar": "مثال: ٥ دنانير بنزين. اكتب ٥، اختار «بنزين»، واضغط حفظ.",
+    "en": "Example: 5 dinars of petrol. Type 5, pick “Petrol”, and tap Save."
+  },
+  "guideExpenseDo1": {
+    "ar": "اكتب المبلغ والوصف",
+    "en": "Type the amount and a note"
+  },
+  "guideExpenseDo2": {
+    "ar": "اختار الفئة مثل أكل أو مواصلات",
+    "en": "Pick a category such as food or transport"
+  },
+  "guideExpenseDo3": {
+    "ar": "إذا غلطت، اضغط تراجع بعد الحفظ",
+    "en": "If you slipped, tap Undo after saving"
+  },
+  "guideExpenseKeywords": {
+    "ar": "مصروف دفعت فلوس مبلغ شراء مصاريف سجل بنزين أكل",
+    "en": "expense spent money amount purchase spending log petrol food"
+  }
+}
