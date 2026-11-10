@@ -27,7 +27,11 @@ class _PrayerWuduScreenState extends State<PrayerWuduScreen> {
     return KidsFaithScaffold(
       title: l.kidsFaithPrayerWuduTitle,
       background: const BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KP.teal100, KP.paper]),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [KP.teal100, KP.paper],
+        ),
       ),
       child: KidsApprovedItems(
         kinds: const {KidsReligiousKind.wuduStep, KidsReligiousKind.prayerStep},
@@ -87,7 +91,10 @@ class _StepPage extends StatelessWidget {
                   child: KhatamBadge(
                     size: 64,
                     color: KP.sun500,
-                    child: Text(fmt.formatInt(number), style: const TextStyle(fontFamily: KP.heading, fontSize: 28, color: KP.night900)),
+                    child: Text(
+                      fmt.formatInt(number),
+                      style: const TextStyle(fontFamily: KP.heading, fontSize: 28, color: KP.night900),
+                    ),
                   ),
                 ),
               ),
@@ -95,13 +102,30 @@ class _StepPage extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 14),
-        Text(l.kidsFaithPageOfTotal(fmt.formatInt(number), fmt.formatInt(total)), style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2)),
+        Text(
+          l.kidsFaithPageOfTotal(fmt.formatInt(number), fmt.formatInt(total)),
+          style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2),
+        ),
         if (step.title != null && step.title!.trim().isNotEmpty) ...[
           const SizedBox(height: 8),
-          Text(step.title!, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.heading, fontSize: 30, color: KP.night900)),
+          Text(
+            step.title!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontFamily: KP.heading, fontSize: 30, color: KP.night900),
+          ),
         ],
         const SizedBox(height: 8),
-        Text(step.arabicText, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.body, fontWeight: FontWeight.w500, fontSize: 22, height: 1.7, color: KP.ink)),
+        Text(
+          step.arabicText,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontFamily: KP.body,
+            fontWeight: FontWeight.w500,
+            fontSize: 22,
+            height: 1.7,
+            color: KP.ink,
+          ),
+        ),
       ],
     );
   }

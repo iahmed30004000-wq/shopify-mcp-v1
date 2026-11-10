@@ -18,7 +18,10 @@ class KidsApprovedItems extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(kidsApprovedItemsProvider).value ?? const <KidsReligiousItem>[];
-    final mine = [for (final i in items) if (kinds.contains(i.kind)) i];
+    final mine = [
+      for (final i in items)
+        if (kinds.contains(i.kind)) i,
+    ];
     if (mine.isEmpty) return KidsSoonState(dark: dark);
     return builder(context, mine);
   }

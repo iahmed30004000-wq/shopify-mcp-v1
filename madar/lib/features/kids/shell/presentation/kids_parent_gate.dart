@@ -290,7 +290,11 @@ class _Keypad extends StatelessWidget {
               key: k,
               color: const Color(0x33FFFFFF),
               shape: const StadiumBorder(side: BorderSide(color: Color(0x55FFFFFF))),
-              child: InkWell(customBorder: const StadiumBorder(), onTap: enabled ? onTap : null, child: Center(child: child)),
+              child: InkWell(
+                customBorder: const StadiumBorder(),
+                onTap: enabled ? onTap : null,
+                child: Center(child: child),
+              ),
             ),
           ),
         ),

@@ -26,9 +26,7 @@ class LetterPictureView extends StatelessWidget {
     child: SizedBox(
       width: size,
       height: size,
-      child: CustomPaint(
-        painter: LetterPicturePainter(picture),
-      ),
+      child: CustomPaint(painter: LetterPicturePainter(picture)),
     ),
   );
 }
@@ -248,7 +246,12 @@ class LetterPicturePainter extends CustomPainter {
         for (var r = 0; r < cols.length; r++) {
           final n = cols[r];
           for (var c = 0; c < n; c++) {
-            circle(50 + (c - (n - 1) / 2) * 17, 30 + r * 15.0, 8.4, r.isEven ? KidsColors.night500 : KidsColors.night700);
+            circle(
+              50 + (c - (n - 1) / 2) * 17,
+              30 + r * 15.0,
+              8.4,
+              r.isEven ? KidsColors.night500 : KidsColors.night700,
+            );
           }
         }
         circle(40, 28, 2.6, Colors.white.withValues(alpha: 0.5));

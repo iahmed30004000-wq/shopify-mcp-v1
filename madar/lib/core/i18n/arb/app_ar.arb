@@ -26615,6 +26615,286 @@
   "@kidsColWorking": {
     "description": "Kids colouring: shown while a picture is processed"
   },
+  "kidsPlayHome": "البيت",
+  "@kidsPlayHome": {
+    "description": "Kids: home button (play screens)"
+  },
+  "kidsPlayStarsSemantics": "عندك {count} نجمة",
+  "@kidsPlayStarsSemantics": {
+    "description": "Kids: spoken value of the star counter",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayRewardsTitle": "جوائزي",
+  "@kidsPlayRewardsTitle": {
+    "description": "Kids: rewards section title (design 11)"
+  },
+  "kidsPlayAllLanternsLit": "كل الفوانيس مضوية!",
+  "kidsPlayNextLantern": "الفانوس الجاي",
+  "kidsPlayStarsLeft": "{count, plural, =1{باقي نجمة وحدة} =2{باقي نجمتين} few{باقي {shown} نجوم} many{باقي {shown} نجمة} other{باقي {shown} نجمة}}",
+  "@kidsPlayStarsLeft": {
+    "description": "Kids: stars missing for the next lantern ({shown} is the number in the screen's digits)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shown": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayLanternLit": "الفانوس رقم {n} مضوي",
+  "@kidsPlayLanternLit": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayLanternDark": "الفانوس رقم {n} لسا ما انضوى",
+  "@kidsPlayLanternDark": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayStarsSafe": "نجومك محفوظة على جوالك",
+  "kidsPlayStarsCollected": "نجمة جمعتها",
+  "kidsPlayGamesTitle": "الألعاب",
+  "@kidsPlayGamesTitle": {
+    "description": "Kids: games section title (design 10)"
+  },
+  "kidsPlayPairsTitle": "أزواج النجوم",
+  "kidsPlayPairsBlurb": "لعبة هادية: دوّر على البطاقتين المتشابهتين. ما في وقت ولا استعجال.",
+  "kidsPlayChooseSize": "كم زوج بدك؟",
+  "kidsPlayPairsCount": "{count, plural, =1{زوج واحد} =2{زوجان} few{{shown} أزواج} many{{shown} زوجًا} other{{shown} زوج}}",
+  "@kidsPlayPairsCount": {
+    "description": "Kids: size of the memory game",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shown": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayPlay": "العب",
+  "kidsPlayPairsFound": "لقيت {found} من {total}",
+  "@kidsPlayPairsFound": {
+    "placeholders": {
+      "found": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayCheer1": "حلو!",
+  "kidsPlayCheer2": "برافو عليك!",
+  "kidsPlayCheer3": "أحسنت!",
+  "kidsPlayRetry1": "قريب! جرّب مرّة ثانية",
+  "kidsPlayRetry2": "ولا يهمّك، جرّب غيرها",
+  "kidsPlayRetry3": "تذكّر وين كانت!",
+  "kidsPlayCardDown": "بطاقة رقم {n}، مقلوبة",
+  "@kidsPlayCardDown": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayCardUp": "بطاقة رقم {n}: {name}",
+  "@kidsPlayCardUp": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlaySymLantern": "فانوس",
+  "@kidsPlaySymLantern": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymStar": "نجمة",
+  "@kidsPlaySymStar": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymSun": "شمس",
+  "@kidsPlaySymSun": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymMoon": "قمر",
+  "@kidsPlaySymMoon": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymTree": "شجرة",
+  "@kidsPlaySymTree": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymFlower": "وردة",
+  "@kidsPlaySymFlower": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymDrop": "قطرة ماء",
+  "@kidsPlaySymDrop": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymLeaf": "ورقة شجر",
+  "@kidsPlaySymLeaf": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymHeart": "قلب",
+  "@kidsPlaySymHeart": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymCloud": "غيمة",
+  "@kidsPlaySymCloud": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymKite": "طيّارة ورق",
+  "@kidsPlaySymKite": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymGem": "جوهرة",
+  "@kidsPlaySymGem": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlayWellDone": "أحسنت!",
+  "kidsPlayNewStar": "حصلت على نجمة جديدة!",
+  "kidsPlayStarAlreadyToday": "لعبتك حلوة! نجمة هالنشاط خدتها اليوم، وبكرا في نجمة جديدة.",
+  "kidsPlayAgain": "العب مرّة ثانية",
+  "kidsPlayDone": "تمام",
+  "kidsPlayVoiceTitle": "حكايات بصوت الأهل",
+  "@kidsPlayVoiceTitle": {
+    "description": "Kids: voice stories section title (design 09a)"
+  },
+  "kidsPlayInteractiveTitle": "قصة تفاعلية",
+  "@kidsPlayInteractiveTitle": {
+    "description": "Kids: interactive story section title (design 09c)"
+  },
+  "kidsPlayParentCorner": "ركن الأهل",
+  "kidsPlayMyStoriesTitle": "حكاياتي بصوتي",
+  "kidsPlayCornerIntro": "سجّل حكايات لطفلك، وهو بيسمعها بصوتك.",
+  "kidsPlayCornerPrivacy": "التسجيلات بتضلّ على هالجوال فقط. إذا اجتك مكالمة، التسجيل بيوقف وبيتحفظ اللي سجّلته.",
+  "kidsPlayCornerEmptyTitle": "ما في حكايات لسا",
+  "kidsPlayCornerEmptyBody": "اضغط «حكاية جديدة»، اكتب اسمها، وبعدين سجّلها بصوتك. طفلك بيلاقيها في صفحة الحكايات.",
+  "kidsPlayAddStory": "حكاية جديدة",
+  "kidsPlayNewStoryTitle": "حكاية جديدة",
+  "kidsPlayEditStoryTitle": "تعديل الحكاية",
+  "kidsPlayStoryNameLabel": "اسم الحكاية",
+  "kidsPlayStoryNameHint": "مثلاً: حكاية قبل النوم",
+  "kidsPlayNarratorLabel": "مين بيحكي؟ (اختياري)",
+  "kidsPlayNarratorHint": "مثلاً: بصوت بابا",
+  "kidsPlayCoverLabel": "لون الغلاف",
+  "kidsPlayCoverColour": "اللون رقم {n}",
+  "@kidsPlayCoverColour": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlaySave": "احفظ",
+  "kidsPlayCancel": "إلغاء",
+  "kidsPlayDeleteTitle": "بدك تحذف «{title}»؟",
+  "@kidsPlayDeleteTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayDeleteBody": "الحكاية وتسجيلها بيروحوا من هالجوال.",
+  "kidsPlayDelete": "احذف",
+  "kidsPlayKeep": "خلّيها",
+  "kidsPlayRecordingNow": "قيد التسجيل",
+  "kidsPlayEmptyStory": "فاضية",
+  "kidsPlayStopSave": "وقّف واحفظ",
+  "kidsPlayDiscard": "ألغِ",
+  "kidsPlayPlayStory": "شغّل",
+  "kidsPlayPauseStory": "وقّف",
+  "kidsPlayRerecord": "سجّل من جديد",
+  "kidsPlayRecordWithVoice": "سجّل بصوتك",
+  "kidsPlayBackToStories": "رجوع للحكايات",
+  "kidsPlayNoteSaved": "انحفظ التسجيل.",
+  "kidsPlayNoteInterruptedKept": "اجتك مكالمة، فوقّف التسجيل وانحفظ اللي سجّلته.",
+  "kidsPlayNoteInterruptedDiscarded": "اجتك مكالمة بعد ثواني قليلة، فما انحفظ شي. سجّل من جديد.",
+  "kidsPlayNoteTooShort": "التسجيل كان قصير كتير، فما انحفظ. جرّب مرّة ثانية.",
+  "kidsPlayNoteNoMic": "المايك مش مسموح. شغّله من إعدادات الجوال للتطبيق، وبعدين جرّب.",
+  "kidsPlayNoteFailed": "ما زبط التسجيل. تأكد إنه في مساحة فاضية على الجوال وجرّب.",
+  "kidsPlayNoteMaxLength": "وصل التسجيل لأطول مدّة، فوقّف وانحفظ.",
+  "kidsPlayPrevious": "الحكاية السابقة",
+  "kidsPlayNext": "الحكاية التالية",
+  "kidsPlayStoryByLabel": "حكاية: {title}",
+  "@kidsPlayStoryByLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayStoryRowLabel": "{title}، {minutes}",
+  "@kidsPlayStoryRowLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayCannotPlay": "ما قدرنا نشغّل هالحكاية. اطلب من الأهل يسجّلوها من جديد.",
+  "kidsPlayVoiceEmptyTitle": "ما في حكايات لسا",
+  "kidsPlayVoiceEmptyBody": "لما ماما أو بابا يسجّلوا حكاية بصوتهم، بتلاقيها هون وبتسمعها بدون إنترنت.",
+  "kidsPlayMinutes": "{count, plural, =1{دقيقة وحدة} =2{دقيقتين} few{{shown} دقايق} many{{shown} دقيقة} other{{shown} دقيقة}}",
+  "@kidsPlayMinutes": {
+    "description": "Kids: length of a story",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shown": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayStoryStageLabel": "مشهد القصة",
+  "kidsPlaySayWord": "قُل: {word}!",
+  "@kidsPlaySayWord": {
+    "placeholders": {
+      "word": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayMicOff": "المايك مش شغّال هلأ، بس بتقدر تكمّل بالزر.",
+  "kidsPlayParentMic": "للأهل: شغّل المايك",
+  "kidsPlaySkipSay": "ما بقدر أحكي هلأ",
+  "kidsPlayReplayBeat": "عيد المشهد",
+  "kidsPlayNextBeat": "التالي",
+  "kidsPlayTheEnd": "النهاية",
+  "kidsPlayReadAgain": "القصة من جديد",
+  "kidsPlayBeatOf": "المشهد {n} من {total}",
+  "@kidsPlayBeatOf": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
   "kidsShellEntryTitle": "مدار الصغار",
   "@kidsShellEntryTitle": {
     "description": "Title of the kids-mode card at the top of Settings"

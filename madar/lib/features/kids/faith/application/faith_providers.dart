@@ -27,8 +27,10 @@ final kidsApprovedItemsProvider = Provider<AsyncValue<List<KidsReligiousItem>>>(
 });
 
 /// Approved items of one [kind], in their `order`.
-List<KidsReligiousItem> kidsItemsOfKind(List<KidsReligiousItem> all, KidsReligiousKind kind) =>
-    [for (final i in all) if (i.kind == kind) i]..sort((a, b) => a.order.compareTo(b.order));
+List<KidsReligiousItem> kidsItemsOfKind(List<KidsReligiousItem> all, KidsReligiousKind kind) => [
+  for (final i in all)
+    if (i.kind == kind) i,
+]..sort((a, b) => a.order.compareTo(b.order));
 
 /// Local-only recitation (see [LocalOnlyKidsAudio]). Tests override it.
 final kidsAyahAudioProvider = Provider<KidsAyahAudio>(

@@ -108,7 +108,7 @@ Future<TestApp> pumpKids(
 );
 
 /// The router's current path.
-String pathOf(TestApp app) => app.router.routerDelegate.currentConfiguration.uri.path;
+String pathOf(TestApp app) => app.router.routerDelegate.currentConfiguration.last.matchedLocation;
 
 /// Taps the gate's keys for [digits] (Western digits).
 Future<void> typeKidsPin(WidgetTester tester, String digits) async {

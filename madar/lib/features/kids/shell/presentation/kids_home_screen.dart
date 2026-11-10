@@ -171,7 +171,13 @@ class _WorldTile extends StatelessWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({super.key, required this.background, required this.foreground, required this.leading, required this.label});
+  const _Chip({
+    super.key,
+    required this.background,
+    required this.foreground,
+    required this.leading,
+    required this.label,
+  });
 
   final Color background;
   final Color foreground;
@@ -213,7 +219,11 @@ class _Empty extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const KhatamStar(size: 120, color: KidsColors.sun300, child: Icon(Icons.star_rounded, color: Colors.white, size: 48)),
+            const KhatamStar(
+              size: 120,
+              color: KidsColors.sun300,
+              child: Icon(Icons.star_rounded, color: Colors.white, size: 48),
+            ),
             const SizedBox(height: 16),
             Text(l.kidsShellEmptyTitle, textAlign: TextAlign.center, style: KidsText.title(KidsColors.ink, size: 28)),
             const SizedBox(height: 8),

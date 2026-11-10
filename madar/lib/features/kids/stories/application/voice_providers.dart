@@ -43,7 +43,10 @@ final voiceIdProvider = Provider<String Function()>((ref) {
 /// Asks the parent (PIN or fingerprint) before the corner opens. The kids
 /// shell's own gate is the real one; until the integrator overrides this it
 /// answers **no**, so the parent corner stays closed rather than open.
-final kidsParentAskProvider = Provider<Future<bool> Function()>((ref) => () async => false);
+final kidsParentAskProvider = Provider<Future<bool> Function()>(
+  (ref) =>
+      () async => false,
+);
 
 // ------------------------------------------------------------ library ----
 

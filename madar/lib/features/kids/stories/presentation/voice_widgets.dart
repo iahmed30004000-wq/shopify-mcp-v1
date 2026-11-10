@@ -82,7 +82,8 @@ class RingWaveformPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(RingWaveformPainter old) => old.progress != progress || !identical(old.bars, bars) || old.breath != breath;
+  bool shouldRepaint(RingWaveformPainter old) =>
+      old.progress != progress || !identical(old.bars, bars) || old.breath != breath;
 }
 
 /// Vertical bars in a row (the parent corner). [played] bars are coloured;
@@ -122,7 +123,7 @@ class BarsPainter extends CustomPainter {
 /// The words for how long a story is («٣ دقايق»).
 String voiceMinutes(BuildContext context, Duration d) {
   final m = math.max(1, (d.inSeconds / 60).round());
-  return L10n.of(context).kidsPlayMinutes(kidsNumber(context, m), m);
+  return L10n.of(context).kidsPlayMinutes(m, kidsNumber(context, m));
 }
 
 /// What the parent typed in the story dialog.
@@ -292,7 +293,11 @@ Future<bool> confirmDeleteStory(BuildContext context, String title) async {
               onPressed: () => Navigator.of(ctx).pop(true),
             ),
             const SizedBox(height: 10),
-            BigPlayButton(label: l.kidsPlayKeep, background: KidsColors.sand, onPressed: () => Navigator.of(ctx).pop(false)),
+            BigPlayButton(
+              label: l.kidsPlayKeep,
+              background: KidsColors.sand,
+              onPressed: () => Navigator.of(ctx).pop(false),
+            ),
           ],
         ),
       ),

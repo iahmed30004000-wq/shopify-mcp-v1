@@ -93,7 +93,7 @@ class KidsEntryCard extends ConsumerWidget {
                 KidsBigButton(
                   key: const ValueKey('kids-enter'),
                   label: l.kidsShellEntryButton,
-                  icon: Icons.chevron_left_rounded,
+                  icon: Icons.chevron_right_rounded,
                   tone: KidsButtonTone.teal,
                   onPressed: () => unawaited(_enter(context, ref)),
                 ),

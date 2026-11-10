@@ -28971,6 +28971,371 @@ class L10nAr extends L10n {
   String get kidsColWorking => 'لحظة، عم نجهّز الصورة…';
 
   @override
+  String get kidsPlayHome => 'البيت';
+
+  @override
+  String kidsPlayStarsSemantics(String count) {
+    return 'عندك $count نجمة';
+  }
+
+  @override
+  String get kidsPlayRewardsTitle => 'جوائزي';
+
+  @override
+  String get kidsPlayAllLanternsLit => 'كل الفوانيس مضوية!';
+
+  @override
+  String get kidsPlayNextLantern => 'الفانوس الجاي';
+
+  @override
+  String kidsPlayStarsLeft(int count, String shown) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'باقي $shown نجمة',
+      many: 'باقي $shown نجمة',
+      few: 'باقي $shown نجوم',
+      two: 'باقي نجمتين',
+      one: 'باقي نجمة وحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String kidsPlayLanternLit(String n) {
+    return 'الفانوس رقم $n مضوي';
+  }
+
+  @override
+  String kidsPlayLanternDark(String n) {
+    return 'الفانوس رقم $n لسا ما انضوى';
+  }
+
+  @override
+  String get kidsPlayStarsSafe => 'نجومك محفوظة على جوالك';
+
+  @override
+  String get kidsPlayStarsCollected => 'نجمة جمعتها';
+
+  @override
+  String get kidsPlayGamesTitle => 'الألعاب';
+
+  @override
+  String get kidsPlayPairsTitle => 'أزواج النجوم';
+
+  @override
+  String get kidsPlayPairsBlurb =>
+      'لعبة هادية: دوّر على البطاقتين المتشابهتين. ما في وقت ولا استعجال.';
+
+  @override
+  String get kidsPlayChooseSize => 'كم زوج بدك؟';
+
+  @override
+  String kidsPlayPairsCount(int count, String shown) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$shown زوج',
+      many: '$shown زوجًا',
+      few: '$shown أزواج',
+      two: 'زوجان',
+      one: 'زوج واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsPlayPlay => 'العب';
+
+  @override
+  String kidsPlayPairsFound(String found, String total) {
+    return 'لقيت $found من $total';
+  }
+
+  @override
+  String get kidsPlayCheer1 => 'حلو!';
+
+  @override
+  String get kidsPlayCheer2 => 'برافو عليك!';
+
+  @override
+  String get kidsPlayCheer3 => 'أحسنت!';
+
+  @override
+  String get kidsPlayRetry1 => 'قريب! جرّب مرّة ثانية';
+
+  @override
+  String get kidsPlayRetry2 => 'ولا يهمّك، جرّب غيرها';
+
+  @override
+  String get kidsPlayRetry3 => 'تذكّر وين كانت!';
+
+  @override
+  String kidsPlayCardDown(String n) {
+    return 'بطاقة رقم $n، مقلوبة';
+  }
+
+  @override
+  String kidsPlayCardUp(String n, String name) {
+    return 'بطاقة رقم $n: $name';
+  }
+
+  @override
+  String get kidsPlaySymLantern => 'فانوس';
+
+  @override
+  String get kidsPlaySymStar => 'نجمة';
+
+  @override
+  String get kidsPlaySymSun => 'شمس';
+
+  @override
+  String get kidsPlaySymMoon => 'قمر';
+
+  @override
+  String get kidsPlaySymTree => 'شجرة';
+
+  @override
+  String get kidsPlaySymFlower => 'وردة';
+
+  @override
+  String get kidsPlaySymDrop => 'قطرة ماء';
+
+  @override
+  String get kidsPlaySymLeaf => 'ورقة شجر';
+
+  @override
+  String get kidsPlaySymHeart => 'قلب';
+
+  @override
+  String get kidsPlaySymCloud => 'غيمة';
+
+  @override
+  String get kidsPlaySymKite => 'طيّارة ورق';
+
+  @override
+  String get kidsPlaySymGem => 'جوهرة';
+
+  @override
+  String get kidsPlayWellDone => 'أحسنت!';
+
+  @override
+  String get kidsPlayNewStar => 'حصلت على نجمة جديدة!';
+
+  @override
+  String get kidsPlayStarAlreadyToday =>
+      'لعبتك حلوة! نجمة هالنشاط خدتها اليوم، وبكرا في نجمة جديدة.';
+
+  @override
+  String get kidsPlayAgain => 'العب مرّة ثانية';
+
+  @override
+  String get kidsPlayDone => 'تمام';
+
+  @override
+  String get kidsPlayVoiceTitle => 'حكايات بصوت الأهل';
+
+  @override
+  String get kidsPlayInteractiveTitle => 'قصة تفاعلية';
+
+  @override
+  String get kidsPlayParentCorner => 'ركن الأهل';
+
+  @override
+  String get kidsPlayMyStoriesTitle => 'حكاياتي بصوتي';
+
+  @override
+  String get kidsPlayCornerIntro => 'سجّل حكايات لطفلك، وهو بيسمعها بصوتك.';
+
+  @override
+  String get kidsPlayCornerPrivacy =>
+      'التسجيلات بتضلّ على هالجوال فقط. إذا اجتك مكالمة، التسجيل بيوقف وبيتحفظ اللي سجّلته.';
+
+  @override
+  String get kidsPlayCornerEmptyTitle => 'ما في حكايات لسا';
+
+  @override
+  String get kidsPlayCornerEmptyBody =>
+      'اضغط «حكاية جديدة»، اكتب اسمها، وبعدين سجّلها بصوتك. طفلك بيلاقيها في صفحة الحكايات.';
+
+  @override
+  String get kidsPlayAddStory => 'حكاية جديدة';
+
+  @override
+  String get kidsPlayNewStoryTitle => 'حكاية جديدة';
+
+  @override
+  String get kidsPlayEditStoryTitle => 'تعديل الحكاية';
+
+  @override
+  String get kidsPlayStoryNameLabel => 'اسم الحكاية';
+
+  @override
+  String get kidsPlayStoryNameHint => 'مثلاً: حكاية قبل النوم';
+
+  @override
+  String get kidsPlayNarratorLabel => 'مين بيحكي؟ (اختياري)';
+
+  @override
+  String get kidsPlayNarratorHint => 'مثلاً: بصوت بابا';
+
+  @override
+  String get kidsPlayCoverLabel => 'لون الغلاف';
+
+  @override
+  String kidsPlayCoverColour(String n) {
+    return 'اللون رقم $n';
+  }
+
+  @override
+  String get kidsPlaySave => 'احفظ';
+
+  @override
+  String get kidsPlayCancel => 'إلغاء';
+
+  @override
+  String kidsPlayDeleteTitle(String title) {
+    return 'بدك تحذف «$title»؟';
+  }
+
+  @override
+  String get kidsPlayDeleteBody => 'الحكاية وتسجيلها بيروحوا من هالجوال.';
+
+  @override
+  String get kidsPlayDelete => 'احذف';
+
+  @override
+  String get kidsPlayKeep => 'خلّيها';
+
+  @override
+  String get kidsPlayRecordingNow => 'قيد التسجيل';
+
+  @override
+  String get kidsPlayEmptyStory => 'فاضية';
+
+  @override
+  String get kidsPlayStopSave => 'وقّف واحفظ';
+
+  @override
+  String get kidsPlayDiscard => 'ألغِ';
+
+  @override
+  String get kidsPlayPlayStory => 'شغّل';
+
+  @override
+  String get kidsPlayPauseStory => 'وقّف';
+
+  @override
+  String get kidsPlayRerecord => 'سجّل من جديد';
+
+  @override
+  String get kidsPlayRecordWithVoice => 'سجّل بصوتك';
+
+  @override
+  String get kidsPlayBackToStories => 'رجوع للحكايات';
+
+  @override
+  String get kidsPlayNoteSaved => 'انحفظ التسجيل.';
+
+  @override
+  String get kidsPlayNoteInterruptedKept =>
+      'اجتك مكالمة، فوقّف التسجيل وانحفظ اللي سجّلته.';
+
+  @override
+  String get kidsPlayNoteInterruptedDiscarded =>
+      'اجتك مكالمة بعد ثواني قليلة، فما انحفظ شي. سجّل من جديد.';
+
+  @override
+  String get kidsPlayNoteTooShort =>
+      'التسجيل كان قصير كتير، فما انحفظ. جرّب مرّة ثانية.';
+
+  @override
+  String get kidsPlayNoteNoMic =>
+      'المايك مش مسموح. شغّله من إعدادات الجوال للتطبيق، وبعدين جرّب.';
+
+  @override
+  String get kidsPlayNoteFailed =>
+      'ما زبط التسجيل. تأكد إنه في مساحة فاضية على الجوال وجرّب.';
+
+  @override
+  String get kidsPlayNoteMaxLength => 'وصل التسجيل لأطول مدّة، فوقّف وانحفظ.';
+
+  @override
+  String get kidsPlayPrevious => 'الحكاية السابقة';
+
+  @override
+  String get kidsPlayNext => 'الحكاية التالية';
+
+  @override
+  String kidsPlayStoryByLabel(String title) {
+    return 'حكاية: $title';
+  }
+
+  @override
+  String kidsPlayStoryRowLabel(String title, String minutes) {
+    return '$title، $minutes';
+  }
+
+  @override
+  String get kidsPlayCannotPlay =>
+      'ما قدرنا نشغّل هالحكاية. اطلب من الأهل يسجّلوها من جديد.';
+
+  @override
+  String get kidsPlayVoiceEmptyTitle => 'ما في حكايات لسا';
+
+  @override
+  String get kidsPlayVoiceEmptyBody =>
+      'لما ماما أو بابا يسجّلوا حكاية بصوتهم، بتلاقيها هون وبتسمعها بدون إنترنت.';
+
+  @override
+  String kidsPlayMinutes(int count, String shown) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$shown دقيقة',
+      many: '$shown دقيقة',
+      few: '$shown دقايق',
+      two: 'دقيقتين',
+      one: 'دقيقة وحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsPlayStoryStageLabel => 'مشهد القصة';
+
+  @override
+  String kidsPlaySayWord(String word) {
+    return 'قُل: $word!';
+  }
+
+  @override
+  String get kidsPlayMicOff => 'المايك مش شغّال هلأ، بس بتقدر تكمّل بالزر.';
+
+  @override
+  String get kidsPlayParentMic => 'للأهل: شغّل المايك';
+
+  @override
+  String get kidsPlaySkipSay => 'ما بقدر أحكي هلأ';
+
+  @override
+  String get kidsPlayReplayBeat => 'عيد المشهد';
+
+  @override
+  String get kidsPlayNextBeat => 'التالي';
+
+  @override
+  String get kidsPlayTheEnd => 'النهاية';
+
+  @override
+  String get kidsPlayReadAgain => 'القصة من جديد';
+
+  @override
+  String kidsPlayBeatOf(String n, String total) {
+    return 'المشهد $n من $total';
+  }
+
+  @override
   String get kidsShellEntryTitle => 'مدار الصغار';
 
   @override

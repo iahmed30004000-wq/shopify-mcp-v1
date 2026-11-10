@@ -107,9 +107,7 @@ class TraceCanvasState extends State<TraceCanvas> {
                     ),
                   ),
                 ),
-                RepaintBoundary(
-                  child: CustomPaint(painter: _StrokePainter(_strokes, _tick)),
-                ),
+                RepaintBoundary(child: CustomPaint(painter: _StrokePainter(_strokes, _tick))),
               ],
             ),
           ),

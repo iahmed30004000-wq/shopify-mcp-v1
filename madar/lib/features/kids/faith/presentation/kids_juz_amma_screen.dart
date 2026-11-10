@@ -189,12 +189,17 @@ class _ReaderState extends ConsumerState<_Reader> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              if (widget.surahs.length > 1) _starButton(l.kidsFaithNext, Icons.chevron_right_rounded, () => _goSurah(1)),
+              if (widget.surahs.length > 1)
+                _starButton(l.kidsFaithNext, Icons.chevron_right_rounded, () => _goSurah(1)),
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-                  decoration: BoxDecoration(color: KP.sun100, borderRadius: BorderRadius.circular(24), border: Border.all(color: KP.sun500, width: 2)),
+                  decoration: BoxDecoration(
+                    color: KP.sun100,
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: KP.sun500, width: 2),
+                  ),
                   child: Text(
                     arabic ? surah.nameArabic : surah.nameEnglish,
                     textAlign: TextAlign.center,
@@ -202,7 +207,8 @@ class _ReaderState extends ConsumerState<_Reader> {
                   ),
                 ),
               ),
-              if (widget.surahs.length > 1) _starButton(l.kidsFaithPrevious, Icons.chevron_left_rounded, () => _goSurah(-1)),
+              if (widget.surahs.length > 1)
+                _starButton(l.kidsFaithPrevious, Icons.chevron_left_rounded, () => _goSurah(-1)),
             ],
           ),
         ),
@@ -218,15 +224,17 @@ class _ReaderState extends ConsumerState<_Reader> {
                     if (basmala != null)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: Text(basmala, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.quran, fontSize: 26, color: KP.ink2)),
+                        child: Text(
+                          basmala,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontFamily: KP.quran, fontSize: 26, color: KP.ink2),
+                        ),
                       ),
                     Wrap(
                       spacing: 6,
                       runSpacing: 6,
                       alignment: WrapAlignment.center,
-                      children: [
-                        for (var a = 1; a <= surah.ayahCount; a++) ..._ayahWidgets(a, fmt),
-                      ],
+                      children: [for (var a = 1; a <= surah.ayahCount; a++) ..._ayahWidgets(a, fmt)],
                     ),
                   ],
                 ),
@@ -262,25 +270,45 @@ class _ReaderState extends ConsumerState<_Reader> {
         else
           Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: Text(l.kidsFaithReciter(reciter.name(arabic: arabic)), style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2)),
+            child: Text(
+              l.kidsFaithReciter(reciter.name(arabic: arabic)),
+              style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2),
+            ),
           ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: LinearProgressIndicator(value: surah.ayahCount == 0 ? 0 : _ayah / surah.ayahCount, minHeight: 12, backgroundColor: KP.sand2, color: KP.sun500),
+            child: LinearProgressIndicator(
+              value: surah.ayahCount == 0 ? 0 : _ayah / surah.ayahCount,
+              minHeight: 12,
+              backgroundColor: KP.sand2,
+              color: KP.sun500,
+            ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 6),
-          child: Text(l.kidsFaithAyahOfTotal(fmt.formatInt(_ayah), fmt.formatInt(surah.ayahCount)), style: const TextStyle(fontFamily: KP.heading, fontSize: 20, color: KP.ink2)),
+          child: Text(
+            l.kidsFaithAyahOfTotal(fmt.formatInt(_ayah), fmt.formatInt(surah.ayahCount)),
+            style: const TextStyle(fontFamily: KP.heading, fontSize: 20, color: KP.ink2),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              if (canTry) KidsRoundButton(icon: Icons.mic_rounded, label: l.kidsFaithTryYourself, color: KP.retryFill, iconColor: KP.retryText, onPressed: _tryYourself) else const SizedBox(width: 64),
+              if (canTry)
+                KidsRoundButton(
+                  icon: Icons.mic_rounded,
+                  label: l.kidsFaithTryYourself,
+                  color: KP.retryFill,
+                  iconColor: KP.retryText,
+                  onPressed: _tryYourself,
+                )
+              else
+                const SizedBox(width: 64),
               KidsRoundButton(
                 icon: _playing ? Icons.pause_rounded : Icons.play_arrow_rounded,
                 label: _playing ? l.kidsFaithPause : l.kidsFaithListen,
@@ -288,7 +316,11 @@ class _ReaderState extends ConsumerState<_Reader> {
                 iconColor: KP.night900,
                 onPressed: onPhone ? () => _playPause(onPhone) : null,
               ),
-              KidsRoundButton(icon: Icons.replay_rounded, label: l.kidsFaithRepeatAyah, onPressed: onPhone ? () => _repeatAyah(onPhone) : null),
+              KidsRoundButton(
+                icon: Icons.replay_rounded,
+                label: l.kidsFaithRepeatAyah,
+                onPressed: onPhone ? () => _repeatAyah(onPhone) : null,
+              ),
             ],
           ),
         ),
@@ -303,7 +335,11 @@ class _ReaderState extends ConsumerState<_Reader> {
     child: GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
-      child: KhatamBadge(size: 64, color: KP.teal500, child: Icon(icon, color: Colors.white, size: 28)),
+      child: KhatamBadge(
+        size: 64,
+        color: KP.teal500,
+        child: Icon(icon, color: Colors.white, size: 28),
+      ),
     ),
   );
 
@@ -311,15 +347,17 @@ class _ReaderState extends ConsumerState<_Reader> {
     final words = _words(a);
     final key = _ayahKeys.putIfAbsent(a, GlobalKey.new);
     return [
-      for (var w = 0; w < words.length; w++)
-        _Word(
-          key: w == 0 ? key : null,
-          text: words[w],
-          state: _wordState(a, w),
-        ),
+      for (var w = 0; w < words.length; w++) _Word(key: w == 0 ? key : null, text: words[w], state: _wordState(a, w)),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: KhatamBadge(size: 44, color: KP.sun100, child: Text(fmt.formatInt(a), style: const TextStyle(fontFamily: KP.heading, fontSize: 18, color: KP.sun700))),
+        child: KhatamBadge(
+          size: 44,
+          color: KP.sun100,
+          child: Text(
+            fmt.formatInt(a),
+            style: const TextStyle(fontFamily: KP.heading, fontSize: 18, color: KP.sun700),
+          ),
+        ),
       ),
     ];
   }
@@ -353,7 +391,10 @@ class _Word extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(20)),
-      child: Text(text, style: TextStyle(fontFamily: KP.quran, fontSize: 30, height: 1.9, color: fg)),
+      child: Text(
+        text,
+        style: TextStyle(fontFamily: KP.quran, fontSize: 30, height: 1.9, color: fg),
+      ),
     );
   }
 }
@@ -371,12 +412,32 @@ class _MushafFrame extends StatelessWidget {
       Positioned.fill(
         child: Container(
           margin: const EdgeInsets.all(6),
-          decoration: BoxDecoration(color: KP.paper, borderRadius: BorderRadius.circular(28), border: Border.all(color: KP.sun500, width: 4), boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 12, offset: Offset(0, 4))]),
-          child: Container(margin: const EdgeInsets.all(6), decoration: BoxDecoration(borderRadius: BorderRadius.circular(22), border: Border.all(color: KP.sun300, width: 2)), child: child),
+          decoration: BoxDecoration(
+            color: KP.paper,
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: KP.sun500, width: 4),
+            boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 12, offset: Offset(0, 4))],
+          ),
+          child: Container(
+            margin: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: KP.sun300, width: 2),
+            ),
+            child: child,
+          ),
         ),
       ),
-      for (final a in const [AlignmentDirectional.topStart, AlignmentDirectional.topEnd, AlignmentDirectional.bottomStart, AlignmentDirectional.bottomEnd])
-        Align(alignment: a, child: const KhatamBadge(size: 24, color: KP.sun500)),
+      for (final a in const [
+        AlignmentDirectional.topStart,
+        AlignmentDirectional.topEnd,
+        AlignmentDirectional.bottomStart,
+        AlignmentDirectional.bottomEnd,
+      ])
+        Align(
+          alignment: a,
+          child: const KhatamBadge(size: 24, color: KP.sun500),
+        ),
     ],
   );
 }

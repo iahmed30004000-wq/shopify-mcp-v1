@@ -33,7 +33,9 @@ void main() {
     });
 
     test('no person icon is used anywhere in the faith folder', () {
-      final icon = RegExp(r'Icons\.(person|face|man|woman|boy|girl|child|people|accessibility|emoji_people|elderly|sentiment|group)');
+      final icon = RegExp(
+        r'Icons\.(person|face|man|woman|boy|girl|child|people|accessibility|emoji_people|elderly|sentiment|group)',
+      );
       for (final f in _sources()) {
         expect(icon.hasMatch(f.readAsStringSync()), isFalse, reason: f.path);
       }
@@ -41,7 +43,10 @@ void main() {
 
     test('no image asset is shipped in the faith content folder', () {
       final dir = Directory('assets/kids_religious');
-      final imgs = [for (final f in dir.listSync(recursive: true).whereType<File>()) if (RegExp(r'\.(png|jpe?g|webp|svg|gif)$').hasMatch(f.path)) f.path];
+      final imgs = [
+        for (final f in dir.listSync(recursive: true).whereType<File>())
+          if (RegExp(r'\.(png|jpe?g|webp|svg|gif)$').hasMatch(f.path)) f.path,
+      ];
       expect(imgs, isEmpty);
     });
   });
@@ -57,7 +62,9 @@ void main() {
     });
 
     test('no red anywhere', () {
-      final red = RegExp(r'Colors\.red|redAccent|0xFFFF0000|0xFFE53935|colorScheme\.error|errorContainer|Icons\.(close|cancel|error|dangerous)');
+      final red = RegExp(
+        r'Colors\.red|redAccent|0xFFFF0000|0xFFE53935|colorScheme\.error|errorContainer|Icons\.(close|cancel|error|dangerous)',
+      );
       for (final f in _sources()) {
         expect(red.hasMatch(f.readAsStringSync()), isFalse, reason: f.path);
       }

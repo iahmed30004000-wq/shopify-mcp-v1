@@ -21,7 +21,10 @@ class VoiceStoriesScreen extends ConsumerStatefulWidget {
 }
 
 class _VoiceStoriesScreenState extends ConsumerState<VoiceStoriesScreen> with SingleTickerProviderStateMixin {
-  late final AnimationController _breath = AnimationController(vsync: this, duration: const Duration(milliseconds: 2400));
+  late final AnimationController _breath = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 2400),
+  );
 
   @override
   void dispose() {
@@ -49,7 +52,8 @@ class _VoiceStoriesScreenState extends ConsumerState<VoiceStoriesScreen> with Si
     if (breathe && !_breath.isAnimating) _breath.repeat();
     if (!breathe && _breath.isAnimating) _breath.stop();
 
-    final current = (playback.storyId == null ? null : library.byId(playback.storyId!)) ??
+    final current =
+        (playback.storyId == null ? null : library.byId(playback.storyId!)) ??
         (playable.isEmpty ? null : playable.first);
 
     return Scaffold(
@@ -114,7 +118,9 @@ class _PlayerCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: cover,
         borderRadius: BorderRadius.circular(34),
-        boxShadow: [BoxShadow(color: KidsColors.night900.withValues(alpha: .3), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(color: KidsColors.night900.withValues(alpha: .3), blurRadius: 18, offset: const Offset(0, 8)),
+        ],
       ),
       child: Column(
         children: [
@@ -175,28 +181,11 @@ class _Progress extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     children: [
-      ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: SizedBox(
-          height: 14,
-          child: Stack(
-            children: [
-              const Positioned.fill(child: ColoredBox(color: KidsColors.sand2)),
-              PositionedDirectional(
-                start: 0,
-                top: 0,
-                bottom: 0,
-                child: FractionallySizedBox(
-                  widthFactor: playback.progress.clamp(0.0, 1.0),
-                  child: const DecoratedBox(
-                    decoration: BoxDecoration(gradient: LinearGradient(colors: [KidsColors.sun500, KidsColors.teal500])),
-                    child: SizedBox.expand(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+      PlayProgressBar(
+        value: playback.progress,
+        height: 14,
+        track: KidsColors.sand2,
+        colors: const [KidsColors.sun500, KidsColors.teal500],
       ),
       const SizedBox(height: 6),
       Row(
@@ -287,14 +276,23 @@ class _StoryRow extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: active ? KidsColors.sun500 : KidsColors.night100,
                       ),
-                      child: Icon(playing ? Icons.pause_rounded : Icons.play_arrow_rounded, color: KidsColors.night800, size: 32),
+                      child: Icon(
+                        playing ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                        color: KidsColors.night800,
+                        size: 32,
+                      ),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
-                      child: Text(story.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: KidsText.subtitle),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(story.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: KidsText.subtitle),
+                          Text(voiceMinutes(context, story.duration), style: KidsText.small),
+                        ],
+                      ),
                     ),
-                    const SizedBox(width: 8),
-                    Text(voiceMinutes(context, story.duration), style: KidsText.small),
                   ],
                 ),
               ),

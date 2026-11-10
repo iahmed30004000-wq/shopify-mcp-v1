@@ -42,13 +42,13 @@ class RewardsScreen extends ConsumerWidget {
                         ),
                         if (toNext > 0)
                           Text(
-                            l.kidsPlayStarsLeft(kidsNumber(context, toNext)),
+                            l.kidsPlayStarsLeft(toNext, kidsNumber(context, toNext)),
                             style: KidsText.small.copyWith(fontWeight: FontWeight.w700),
                           ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    _ProgressBar(value: Lanterns.progress(stars)),
+                    PlayProgressBar(value: Lanterns.progress(stars), height: 20, minFill: 0.02),
                     const SizedBox(height: 20),
                     for (var row = 0; row < 3; row++)
                       _Shelf(
@@ -67,10 +67,7 @@ class RewardsScreen extends ConsumerWidget {
                     Center(
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        decoration: BoxDecoration(
-                          color: KidsColors.teal100,
-                          borderRadius: BorderRadius.circular(28),
-                        ),
+                        decoration: BoxDecoration(color: KidsColors.teal100, borderRadius: BorderRadius.circular(28)),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -112,7 +109,9 @@ class _StarCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: KidsColors.night800,
           borderRadius: BorderRadius.circular(34),
-          boxShadow: [BoxShadow(color: KidsColors.night900.withValues(alpha: .25), blurRadius: 18, offset: const Offset(0, 8))],
+          boxShadow: [
+            BoxShadow(color: KidsColors.night900.withValues(alpha: .25), blurRadius: 18, offset: const Offset(0, 8)),
+          ],
         ),
         child: Row(
           children: [
@@ -140,39 +139,6 @@ class _StarCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class _ProgressBar extends StatelessWidget {
-  const _ProgressBar({required this.value});
-  final double value;
-
-  @override
-  Widget build(BuildContext context) => ClipRRect(
-    borderRadius: BorderRadius.circular(16),
-    child: SizedBox(
-      height: 20,
-      child: Stack(
-        children: [
-          const Positioned.fill(child: ColoredBox(color: KidsColors.sand)),
-          // Fills from the reading start (the right in Arabic).
-          PositionedDirectional(
-            start: 0,
-            top: 0,
-            bottom: 0,
-            child: FractionallySizedBox(
-              widthFactor: value.clamp(0.02, 1.0),
-              child: DecoratedBox(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(colors: [KidsColors.sun300, KidsColors.sun500]),
-                ),
-                child: const SizedBox.expand(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }
 
 class _Shelf extends StatelessWidget {

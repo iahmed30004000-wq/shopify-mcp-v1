@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/routing/router.dart' show routerProvider;
-import '../../../../core/routing/routes.dart';
 import '../application/kids_providers.dart';
 import '../domain/kids_logic.dart';
 import 'kids_overlays.dart';
@@ -62,8 +61,7 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
     _last = now;
     final ended = ref.read(kidsTimeProvider).status == ScreenTimeStatus.ended;
     // Time behind the parent's own layers is the parent's, not the child's.
-    final parent =
-        ref.read(kidsParentPhaseProvider) != KidsParentPhase.none || ref.read(kidsPinOfferPendingProvider);
+    final parent = ref.read(kidsParentPhaseProvider) != KidsParentPhase.none || ref.read(kidsPinOfferPendingProvider);
     // At the limit nothing more is counted, but the day is still watched: at
     // midnight a fresh day begins and the end scene lifts.
     ref.read(kidsModeProvider.notifier).play(ended || parent ? 0 : seconds);
@@ -105,13 +103,12 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
       flow.openGate();
       return true;
     }
-    final location = ref.read(routerProvider).routerDelegate.currentConfiguration.uri.path;
-    if (location == AppRoutes.kids || !isKidsLocation(location)) {
-      flow.openGate();
-      return true;
-    }
-    // Inside a section: the router pops it, back to the kids home.
-    return false;
+    // Inside a section (or anywhere the shell's navigator holds more than one
+    // page) the router pops one page, back towards the kids home; at the root
+    // there is nothing to pop and Back means "a parent, please".
+    if (ref.read(routerProvider).canPop()) return false;
+    flow.openGate();
+    return true;
   }
 
   ThemeData _theme(BuildContext context) {

@@ -55,7 +55,7 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
     final used = ref.watch(kidsTimeProvider).usedSeconds;
     final religiousHidden = !ref.watch(kidsReligiousUnlockedProvider);
     final limit = mode.limitMinutes;
-    final setLimit = ref.read(kidsModeProvider.notifier).setLimit;
+    final stepLimit = ref.read(kidsModeProvider.notifier).stepLimit;
 
     return Material(
       key: const ValueKey('kids-parent-corner'),
@@ -93,7 +93,7 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
                         semanticLabel: l.kidsShellCornerLess,
                         background: KidsColors.night100,
                         foreground: KidsColors.night800,
-                        onPressed: limit <= 0 ? null : () => setLimit(ScreenTimeRules.stepped(limit, up: false)),
+                        onPressed: limit <= 0 ? null : () => stepLimit(up: false),
                       ),
                       Expanded(
                         child: Text(
@@ -109,9 +109,7 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
                         semanticLabel: l.kidsShellCornerMore,
                         background: KidsColors.night100,
                         foreground: KidsColors.night800,
-                        onPressed: limit >= ScreenTimeRules.maxLimitMinutes
-                            ? null
-                            : () => setLimit(ScreenTimeRules.stepped(limit, up: true)),
+                        onPressed: limit >= ScreenTimeRules.maxLimitMinutes ? null : () => stepLimit(up: true),
                       ),
                     ],
                   ),

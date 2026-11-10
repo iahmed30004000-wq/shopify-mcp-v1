@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/features/kids/core/kids_section.dart';
@@ -10,7 +9,6 @@ import 'package:madar/features/kids/learn/letters/letters_screen.dart';
 import 'package:madar/features/kids/learn/letters/trace_canvas.dart';
 import 'package:madar/features/kids/learn/ui/kids_widgets.dart';
 import 'package:madar/features/kids/learn/maths/maths_screen.dart';
-import 'package:madar/features/kids/learn/voice/kids_voice.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
 
 import 'kids_harness.dart';
@@ -67,7 +65,12 @@ void main() {
       await tester.pump();
       final l = L10n.of(tester.element(find.byType(LettersScreen)));
       expect(find.text(l.kidsLettersLetterOf('عين')), findsOneWidget);
-      for (final t in [l.kidsLettersFormIsolated, l.kidsLettersFormInitial, l.kidsLettersFormMedial, l.kidsLettersFormFinal]) {
+      for (final t in [
+        l.kidsLettersFormIsolated,
+        l.kidsLettersFormInitial,
+        l.kidsLettersFormMedial,
+        l.kidsLettersFormFinal,
+      ]) {
         expect(find.text(t), findsOneWidget);
       }
       expect(find.byIcon(Icons.volume_up_rounded), findsNWidgets(2), reason: 'letter + word speakers');
@@ -118,36 +121,45 @@ void main() {
       expect(find.text(l.kidsLettersTraceHint), findsOneWidget);
     });
 
-    testWidgets('quiz: a miss shows the soft amber retry and no wrong wording; the right answer goes on; five earn one star', (tester) async {
-      setPhone(tester, height: 900);
-      await tester.pumpWidget(kidsApp(const LettersScreen(quizSeed: 5), overrides: overrides));
-      await tester.pump();
-      final l = L10n.of(tester.element(find.byType(LettersScreen)));
-      await tapText(tester, l.kidsLettersQuizCta);
-      await tester.pump();
-
-      for (var round = 0; round < kLetterQuizRound; round++) {
-        // Work out the target from the engine with the same seed is brittle:
-        // instead tap choices until "well done" appears; a miss must be soft.
-        final choices = find.byWidgetPredicate((w) => w is Semantics && w.properties.button == true && w.properties.label != null && arabicLetters.any((a) => a.name == w.properties.label));
-        expect(choices, findsNWidgets(3));
-        var tapped = 0;
-        while (find.text(l.kidsLettersQuizGood).evaluate().isEmpty) {
-          await tester.tap(choices.at(tapped++));
-          await tester.pump();
-          if (find.text(l.kidsLettersQuizGood).evaluate().isEmpty) {
-            expect(find.text(l.kidsLettersQuizRetry), findsOneWidget);
-            expectNoWrongWording(tester);
-          }
-          expect(tapped, lessThanOrEqualTo(3));
-        }
-        expect(stars, isEmpty, reason: 'the star comes at the end of the round only');
-        await tapText(tester, l.kidsLettersQuizNext);
+    testWidgets(
+      'quiz: a miss shows the soft amber retry and no wrong wording; the right answer goes on; five earn one star',
+      (tester) async {
+        setPhone(tester, height: 900);
+        await tester.pumpWidget(kidsApp(const LettersScreen(quizSeed: 5), overrides: overrides));
         await tester.pump();
-      }
-      expect(find.text(l.kidsLettersQuizDone), findsOneWidget);
-      expect(stars, ['letters_quiz']);
-    });
+        final l = L10n.of(tester.element(find.byType(LettersScreen)));
+        await tapText(tester, l.kidsLettersQuizCta);
+        await tester.pump();
+
+        for (var round = 0; round < kLetterQuizRound; round++) {
+          // Work out the target from the engine with the same seed is brittle:
+          // instead tap choices until "well done" appears; a miss must be soft.
+          final choices = find.byWidgetPredicate(
+            (w) =>
+                w is Semantics &&
+                w.properties.button == true &&
+                w.properties.label != null &&
+                arabicLetters.any((a) => a.name == w.properties.label),
+          );
+          expect(choices, findsNWidgets(3));
+          var tapped = 0;
+          while (find.text(l.kidsLettersQuizGood).evaluate().isEmpty) {
+            await tester.tap(choices.at(tapped++));
+            await tester.pump();
+            if (find.text(l.kidsLettersQuizGood).evaluate().isEmpty) {
+              expect(find.text(l.kidsLettersQuizRetry), findsOneWidget);
+              expectNoWrongWording(tester);
+            }
+            expect(tapped, lessThanOrEqualTo(3));
+          }
+          expect(stars, isEmpty, reason: 'the star comes at the end of the round only');
+          await tapText(tester, l.kidsLettersQuizNext);
+          await tester.pump();
+        }
+        expect(find.text(l.kidsLettersQuizDone), findsOneWidget);
+        expect(stars, ['letters_quiz']);
+      },
+    );
 
     testWidgets('the system back button leaves tracing for the letter card, not the section', (tester) async {
       setPhone(tester, height: 900);
@@ -163,7 +175,9 @@ void main() {
   });
 
   group('maths', () {
-    testWidgets('multiplication shows the sum with Arabic-Indic digits, the dot array and three big answers', (tester) async {
+    testWidgets('multiplication shows the sum with Arabic-Indic digits, the dot array and three big answers', (
+      tester,
+    ) async {
       setPhone(tester, height: 900);
       await tester.pumpWidget(kidsApp(const MathsScreen(seed: 1), overrides: overrides));
       await tester.pump();
@@ -183,12 +197,16 @@ void main() {
       expect(RegExp(r'[٠-٩]').hasMatch(sum), isFalse);
     });
 
-    testWidgets('a set of five: misses are soft, each miss fades its answer, a finished set earns exactly one star', (tester) async {
+    testWidgets('a set of five: misses are soft, each miss fades its answer, a finished set earns exactly one star', (
+      tester,
+    ) async {
       setPhone(tester, height: 900);
       await tester.pumpWidget(kidsApp(const MathsScreen(seed: 2), overrides: overrides));
       await tester.pump();
       final l = L10n.of(tester.element(find.byType(MathsScreen)));
-      final choice = find.byWidgetPredicate((w) => w is Semantics && w.properties.button == true && (w.properties.label ?? '').startsWith('الجواب'));
+      final choice = find.byWidgetPredicate(
+        (w) => w is Semantics && w.properties.button == true && (w.properties.label ?? '').startsWith('الجواب'),
+      );
 
       for (var n = 0; n < kMathsSetSize; n++) {
         expect(choice, findsNWidgets(3));
@@ -234,7 +252,14 @@ void main() {
       for (final lang in ['ar', 'en']) {
         testWidgets('letters + quiz + trace at ${scale}x $lang have no overflow', (tester) async {
           setPhone(tester, width: 320, height: 640);
-          await tester.pumpWidget(kidsApp(const LettersScreen(initialIndex: 17, quizSeed: 3), textScale: scale, locale: Locale(lang), overrides: overrides));
+          await tester.pumpWidget(
+            kidsApp(
+              const LettersScreen(initialIndex: 17, quizSeed: 3),
+              textScale: scale,
+              locale: Locale(lang),
+              overrides: overrides,
+            ),
+          );
           await tester.pump();
           expect(tester.takeException(), isNull);
           final l = L10n.of(tester.element(find.byType(LettersScreen)));
@@ -250,7 +275,9 @@ void main() {
 
         testWidgets('maths (all three tabs) at ${scale}x $lang have no overflow', (tester) async {
           setPhone(tester, width: 320, height: 640);
-          await tester.pumpWidget(kidsApp(const MathsScreen(seed: 4), textScale: scale, locale: Locale(lang), overrides: overrides));
+          await tester.pumpWidget(
+            kidsApp(const MathsScreen(seed: 4), textScale: scale, locale: Locale(lang), overrides: overrides),
+          );
           await tester.pump();
           final l = L10n.of(tester.element(find.byType(MathsScreen)));
           for (final t in [l.kidsMathsTabDiv, l.kidsMathsTabFrac, l.kidsMathsTabMul]) {

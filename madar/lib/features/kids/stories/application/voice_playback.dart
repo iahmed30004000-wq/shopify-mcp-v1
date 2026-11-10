@@ -26,7 +26,8 @@ class PlaybackState {
   final PlaybackProblem problem;
 
   /// 0..1 through the story.
-  double get progress => duration.inMilliseconds <= 0 ? 0 : (position.inMilliseconds / duration.inMilliseconds).clamp(0.0, 1.0);
+  double get progress =>
+      duration.inMilliseconds <= 0 ? 0 : (position.inMilliseconds / duration.inMilliseconds).clamp(0.0, 1.0);
 
   PlaybackState copyWith({
     String? storyId,
@@ -74,20 +75,28 @@ class VoicePlaybackController extends Notifier<PlaybackState> {
     _wired = true;
     final p = _player;
     _subs
-      ..add(p.position.listen((d) {
-        if (ref.mounted) state = state.copyWith(position: d);
-      }))
-      ..add(p.duration.listen((d) {
-        if (ref.mounted && d != null) state = state.copyWith(duration: d);
-      }))
-      ..add(p.playing.listen((v) {
-        if (ref.mounted) state = state.copyWith(playing: v);
-      }))
-      ..add(p.completed.listen((_) {
-        if (ref.mounted) state = state.copyWith(playing: false, position: Duration.zero);
-        unawaited(p.pause().catchError((Object _) {}));
-        unawaited(p.seek(Duration.zero).catchError((Object _) {}));
-      }));
+      ..add(
+        p.position.listen((d) {
+          if (ref.mounted) state = state.copyWith(position: d);
+        }),
+      )
+      ..add(
+        p.duration.listen((d) {
+          if (ref.mounted && d != null) state = state.copyWith(duration: d);
+        }),
+      )
+      ..add(
+        p.playing.listen((v) {
+          if (ref.mounted) state = state.copyWith(playing: v);
+        }),
+      )
+      ..add(
+        p.completed.listen((_) {
+          if (ref.mounted) state = state.copyWith(playing: false, position: Duration.zero);
+          unawaited(p.pause().catchError((Object _) {}));
+          unawaited(p.seek(Duration.zero).catchError((Object _) {}));
+        }),
+      );
   }
 
   List<VoiceStory> get _list => ref.read(voiceStoriesProvider).playable;

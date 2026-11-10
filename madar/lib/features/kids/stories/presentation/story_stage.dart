@@ -16,12 +16,8 @@ import '../domain/story_script.dart';
 /// With reduced motion it is given stopped animations and shows the end of the
 /// beat as one still picture, ghosts and all.
 class StoryStagePainter extends CustomPainter {
-  StoryStagePainter({
-    required this.beat,
-    required this.move,
-    required this.ambient,
-    this.lowPower = false,
-  }) : super(repaint: Listenable.merge([move, ambient]));
+  StoryStagePainter({required this.beat, required this.move, required this.ambient, this.lowPower = false})
+    : super(repaint: Listenable.merge([move, ambient]));
 
   final StoryBeat beat;
 
@@ -209,8 +205,12 @@ class StoryStage extends StatelessWidget {
           ),
         ),
         // A quiet lattice over the sky; cached, so it costs one drawPicture.
-        CustomPaint(painter: GeometryPatternPainter(spec: _lattice, color: Colors.white, opacity: .07)),
-        CustomPaint(painter: StoryStagePainter(beat: beat, move: move, ambient: ambient, lowPower: lowPower)),
+        CustomPaint(
+          painter: GeometryPatternPainter(spec: _lattice, color: Colors.white, opacity: .07),
+        ),
+        CustomPaint(
+          painter: StoryStagePainter(beat: beat, move: move, ambient: ambient, lowPower: lowPower),
+        ),
       ],
     ),
   );

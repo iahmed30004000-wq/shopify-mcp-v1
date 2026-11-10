@@ -27,7 +27,10 @@ void main() {
 
     test('with the flag true they all appear', () {
       final c = ProviderContainer(
-        overrides: [kidsSectionsProvider.overrideWithValue(_all), kidsReligiousUnlockedProvider.overrideWithValue(true)],
+        overrides: [
+          kidsSectionsProvider.overrideWithValue(_all),
+          kidsReligiousUnlockedProvider.overrideWithValue(true),
+        ],
       );
       addTearDown(c.dispose);
       expect(c.read(visibleKidsSectionsProvider), hasLength(5));
@@ -54,14 +57,19 @@ void main() {
     for (final t in texts) {
       final section = screens[t]!;
       testWidgets('${section.id}: flag closed => calm «قريبًا», the text is not in the tree', (tester) async {
-        await tester.pumpWidget(faithApp(Builder(builder: section.builder), overrides: contentOverrides(approved, unlocked: false)));
+        await tester.pumpWidget(
+          faithApp(Builder(builder: section.builder), overrides: contentOverrides(approved, unlocked: false)),
+        );
         await tester.pump();
         expect(find.text('قريبًا'), findsOneWidget);
         expect(find.text(t), findsNothing);
       });
 
       testWidgets('${section.id}: flag open but item unapproved => «قريبًا»', (tester) async {
-        final unapproved = [for (final i in approved) item(i.id, i.kind, approved: false, text: i.arabicText, group: i.group, repeat: i.repeat, order: i.order)];
+        final unapproved = [
+          for (final i in approved)
+            item(i.id, i.kind, approved: false, text: i.arabicText, group: i.group, repeat: i.repeat, order: i.order),
+        ];
         await tester.pumpWidget(faithApp(Builder(builder: section.builder), overrides: contentOverrides(unapproved)));
         await tester.pump();
         expect(find.text('قريبًا'), findsOneWidget);
@@ -75,11 +83,22 @@ void main() {
         expect(find.text('قريبًا'), findsNothing);
       });
 
-      testWidgets('${section.id}: an approved item that breaks the contract (no source) is not shown either', (tester) async {
+      testWidgets('${section.id}: an approved item that breaks the contract (no source) is not shown either', (
+        tester,
+      ) async {
         final bad = [
           for (final i in approved)
             if (i.arabicText == t)
-              KidsReligiousItem(id: i.id, kind: i.kind, arabicText: i.arabicText, source: '', reviewer: 'R', reviewedOn: signedOn, group: i.group, repeat: i.repeat)
+              KidsReligiousItem(
+                id: i.id,
+                kind: i.kind,
+                arabicText: i.arabicText,
+                source: '',
+                reviewer: 'R',
+                reviewedOn: signedOn,
+                group: i.group,
+                repeat: i.repeat,
+              ),
         ];
         await tester.pumpWidget(faithApp(Builder(builder: section.builder), overrides: contentOverrides(bad)));
         await tester.pump();

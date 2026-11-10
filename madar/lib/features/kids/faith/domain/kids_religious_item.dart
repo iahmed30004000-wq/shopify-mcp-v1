@@ -117,7 +117,9 @@ class KidsReligiousItem {
       isHadith: j['hadith'] == true,
       reviewer: j['reviewer'] as String?,
       reviewedOn: reviewedOn == null ? null : DateTime.parse(reviewedOn),
-      quranRef: j['quranRef'] == null ? null : (AyahRef.tryParse('${j['quranRef']}') ?? (throw FormatException('Bad quranRef', j['quranRef']))),
+      quranRef: j['quranRef'] == null
+          ? null
+          : (AyahRef.tryParse('${j['quranRef']}') ?? (throw FormatException('Bad quranRef', j['quranRef']))),
       group: j['group'] as String?,
       order: (j['order'] as num?)?.toInt() ?? 0,
       title: j['title'] as String?,

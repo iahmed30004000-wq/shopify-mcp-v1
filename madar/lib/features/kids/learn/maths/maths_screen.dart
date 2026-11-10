@@ -94,11 +94,17 @@ class _MathsScreenState extends ConsumerState<MathsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            KidsTabs(labels: [l.kidsMathsTabMul, l.kidsMathsTabDiv, l.kidsMathsTabFrac], selected: _tab, onSelect: _newSet),
+            KidsTabs(
+              labels: [l.kidsMathsTabMul, l.kidsMathsTabDiv, l.kidsMathsTabFrac],
+              selected: _tab,
+              onSelect: _newSet,
+            ),
             const SizedBox(height: 14),
             Semantics(
               label: l.kidsMathsProgress(_n + 1, kMathsSetSize),
-              child: ExcludeSemantics(child: _Dots(done: _finished ? kMathsSetSize : _n, total: kMathsSetSize)),
+              child: ExcludeSemantics(
+                child: _Dots(done: _finished ? kMathsSetSize : _n, total: kMathsSetSize),
+              ),
             ),
             const SizedBox(height: 14),
             if (_finished)
@@ -139,7 +145,8 @@ class _MathsScreenState extends ConsumerState<MathsScreen> {
 String _voiceId(MathsQuestion q) => switch (q.kind) {
   MathsKind.multiplication => 'maths_mul_${q.a}_${q.b}',
   MathsKind.division => 'maths_div_${q.a}_${q.b}',
-  MathsKind.fractions => q.task == FractionTask.ofAmount ? 'maths_fracof_${q.a}_${q.b}_${q.total}' : 'maths_frac_${q.a}_${q.b}',
+  MathsKind.fractions =>
+    q.task == FractionTask.ofAmount ? 'maths_fracof_${q.a}_${q.b}_${q.total}' : 'maths_frac_${q.a}_${q.b}',
 };
 
 class _QuestionCard extends StatelessWidget {
@@ -162,15 +169,21 @@ class _QuestionCard extends StatelessWidget {
     switch (q.kind) {
       case MathsKind.multiplication:
         sum = _sumRow([Text('${n(q.a)} × ${n(q.b)} =', style: numStyle), qMark]);
-        visual = CustomPaint(painter: DotArrayPainter(rows: q.a, cols: q.b));
+        visual = CustomPaint(
+          painter: DotArrayPainter(rows: q.a, cols: q.b),
+        );
         caption = f.localizeDigits(l.kidsMathsRowsCaption(q.a, q.b));
       case MathsKind.division:
         sum = _sumRow([Text('${n(q.a)} ÷ ${n(q.b)} =', style: numStyle), qMark]);
-        visual = CustomPaint(painter: GroupsPainter(total: q.a, groups: q.b));
+        visual = CustomPaint(
+          painter: GroupsPainter(total: q.a, groups: q.b),
+        );
         caption = f.localizeDigits(l.kidsMathsDivCaption(q.a, q.b));
       case MathsKind.fractions:
         if (q.task == FractionTask.readPie) {
-          visual = CustomPaint(painter: PiePainter(num: q.a, den: q.b));
+          visual = CustomPaint(
+            painter: PiePainter(num: q.a, den: q.b),
+          );
           caption = l.kidsMathsPieCaption;
         } else {
           sum = _sumRow([
@@ -179,7 +192,9 @@ class _QuestionCard extends StatelessWidget {
             Text('${n(q.total!)} =', style: numStyle),
             qMark,
           ]);
-          visual = CustomPaint(painter: GroupsPainter(total: q.total!, groups: q.b, lit: q.a));
+          visual = CustomPaint(
+            painter: GroupsPainter(total: q.total!, groups: q.b, lit: q.a),
+          );
           caption = f.localizeDigits(l.kidsMathsDivCaption(q.total!, q.b));
         }
     }
@@ -203,10 +218,20 @@ class _QuestionCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ExcludeSemantics(
-            child: SizedBox(height: isPie ? 170 : (q.kind == MathsKind.multiplication ? 190 : 150), width: double.infinity, child: Center(child: AspectRatio(aspectRatio: isPie ? 1 : 1.6, child: visual))),
+            child: SizedBox(
+              height: isPie ? 170 : (q.kind == MathsKind.multiplication ? 190 : 150),
+              width: double.infinity,
+              child: Center(
+                child: AspectRatio(aspectRatio: isPie ? 1 : 1.6, child: visual),
+              ),
+            ),
           ),
           const SizedBox(height: 8),
-          Text(caption, textAlign: TextAlign.center, style: KidsType.bodyText(18, color: KidsColors.ink2)),
+          Text(
+            caption,
+            textAlign: TextAlign.center,
+            style: KidsType.bodyText(18, color: KidsColors.ink2),
+          ),
         ],
       ),
     );
@@ -215,7 +240,9 @@ class _QuestionCard extends StatelessWidget {
   Widget _sumRow(List<Widget> kids) => Row(
     mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: [for (var i = 0; i < kids.length; i++) ...[if (i > 0) const SizedBox(width: 10), kids[i]]],
+    children: [
+      for (var i = 0; i < kids.length; i++) ...[if (i > 0) const SizedBox(width: 10), kids[i]],
+    ],
   );
 }
 
@@ -242,8 +269,15 @@ class _Choices extends StatelessWidget {
               right: solved && question.isCorrect(question.choices[i]),
               onTap: () => onPick(i),
               child: question.choices[i].isWhole
-                  ? FittedBox(fit: BoxFit.scaleDown, child: Text(f.localizeDigits('${question.choices[i].num}'), style: KidsType.title(44)))
-                  : FractionStack(num: f.localizeDigits('${question.choices[i].num}'), den: f.localizeDigits('${question.choices[i].den}'), size: 30),
+                  ? FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(f.localizeDigits('${question.choices[i].num}'), style: KidsType.title(44)),
+                    )
+                  : FractionStack(
+                      num: f.localizeDigits('${question.choices[i].num}'),
+                      den: f.localizeDigits('${question.choices[i].den}'),
+                      size: 30,
+                    ),
             ),
           ),
         ],
@@ -253,7 +287,13 @@ class _Choices extends StatelessWidget {
 }
 
 class _ChoiceButton extends StatelessWidget {
-  const _ChoiceButton({required this.child, required this.semantic, required this.dimmed, required this.right, required this.onTap});
+  const _ChoiceButton({
+    required this.child,
+    required this.semantic,
+    required this.dimmed,
+    required this.right,
+    required this.onTap,
+  });
 
   final Widget child;
   final String semantic;
@@ -279,7 +319,11 @@ class _ChoiceButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             color: right ? null : (dimmed ? KidsColors.retryFill : KidsColors.paper),
             gradient: right
-                ? const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KidsColors.sun300, KidsColors.sun500])
+                ? const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [KidsColors.sun300, KidsColors.sun500],
+                  )
                 : null,
             border: dimmed ? Border.all(color: KidsColors.retry, width: 3) : null,
             boxShadow: [BoxShadow(color: right ? KidsColors.sun700 : KidsColors.sand2, offset: const Offset(0, 4))],

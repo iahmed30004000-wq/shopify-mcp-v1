@@ -223,10 +223,7 @@ class StarChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              kidsNumber(context, count),
-              style: KidsText.subtitle.copyWith(color: Colors.white, fontSize: 22),
-            ),
+            Text(kidsNumber(context, count), style: KidsText.subtitle.copyWith(color: Colors.white, fontSize: 22)),
             const SizedBox(width: 6),
             const KhatamStarIcon(size: 26),
           ],
@@ -339,4 +336,51 @@ class BigPlayButton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// A rounded progress bar that fills from the reading start (the right in
+/// Arabic). Decorative: the screen says the numbers in words.
+class PlayProgressBar extends StatelessWidget {
+  const PlayProgressBar({
+    super.key,
+    required this.value,
+    this.height = 16,
+    this.track = KidsColors.sand,
+    this.colors = const [KidsColors.sun300, KidsColors.sun500],
+    this.minFill = 0,
+  });
+
+  /// 0..1.
+  final double value;
+  final double height;
+  final Color track;
+  final List<Color> colors;
+
+  /// A sliver always shown (so a bar that is at 0 still looks like a bar).
+  final double minFill;
+
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: BorderRadius.circular(height),
+    child: SizedBox(
+      height: height,
+      child: Stack(
+        children: [
+          Positioned.fill(child: ColoredBox(color: track)),
+          Positioned.fill(
+            child: Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: FractionallySizedBox(
+                widthFactor: value.clamp(minFill, 1.0),
+                heightFactor: 1,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(gradient: LinearGradient(colors: colors)),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

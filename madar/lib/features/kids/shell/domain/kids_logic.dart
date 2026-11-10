@@ -57,10 +57,7 @@ class ScreenTimeLedger {
     if (json is! Map) return empty;
     final day = json['day'];
     final used = json['used'];
-    return ScreenTimeLedger(
-      dayKey: day is int && day > 0 ? day : 0,
-      usedSeconds: used is int && used > 0 ? used : 0,
-    );
+    return ScreenTimeLedger(dayKey: day is int && day > 0 ? day : 0, usedSeconds: used is int && used > 0 ? used : 0);
   }
 
   @override
@@ -207,13 +204,8 @@ class KidsModeState {
         backoff: backoff ?? this.backoff,
       );
 
-  String encode() => jsonEncode({
-    'v': 1,
-    'on': on,
-    'limit': limitMinutes,
-    'ledger': ledger.toJson(),
-    'gate': backoff.toJson(),
-  });
+  String encode() =>
+      jsonEncode({'v': 1, 'on': on, 'limit': limitMinutes, 'ledger': ledger.toJson(), 'gate': backoff.toJson()});
 
   /// A missing or damaged record is [off] (nothing to keep a child inside),
   /// but a record that says "on" survives any damage elsewhere in it.

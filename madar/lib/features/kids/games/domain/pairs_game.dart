@@ -56,7 +56,9 @@ class PairsGame {
   static List<int> _deal(PairsSize size, int seed) {
     final rnd = math.Random(seed);
     final symbols = List<int>.generate(pairSymbolCount, (i) => i)..shuffle(rnd);
-    final cards = <int>[for (final s in symbols.take(size.pairs)) ...[s, s]]..shuffle(rnd);
+    final cards = <int>[
+      for (final s in symbols.take(size.pairs)) ...[s, s],
+    ]..shuffle(rnd);
     return List<int>.unmodifiable(cards);
   }
 

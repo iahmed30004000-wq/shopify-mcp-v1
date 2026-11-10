@@ -52,7 +52,10 @@ class KhatamBadge extends StatelessWidget {
   Widget build(BuildContext context) => SizedBox(
     width: size,
     height: size,
-    child: CustomPaint(painter: _KhatamPainter(color), child: Center(child: child)),
+    child: CustomPaint(
+      painter: _KhatamPainter(color),
+      child: Center(child: child),
+    ),
   );
 }
 
@@ -109,13 +112,19 @@ class KidsFaithScaffold extends ConsumerWidget {
                 child: Row(
                   children: [
                     DecoratedBox(
-                      decoration: BoxDecoration(color: dark ? Colors.white12 : KP.night800, borderRadius: BorderRadius.circular(32)),
+                      decoration: BoxDecoration(
+                        color: dark ? Colors.white12 : KP.night800,
+                        borderRadius: BorderRadius.circular(32),
+                      ),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(14, 8, 14, 8),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(fmt.formatInt(stars), style: const TextStyle(color: Colors.white, fontFamily: KP.heading, fontSize: 22)),
+                            Text(
+                              fmt.formatInt(stars),
+                              style: const TextStyle(color: Colors.white, fontFamily: KP.heading, fontSize: 22),
+                            ),
                             const SizedBox(width: 6),
                             const KhatamBadge(size: 24, color: KP.sun500),
                           ],
@@ -128,7 +137,11 @@ class KidsFaithScaffold extends ConsumerWidget {
                         child: Text(
                           title,
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontFamily: KP.heading, fontSize: 28, color: dark ? Colors.white : KP.night900),
+                          style: TextStyle(
+                            fontFamily: KP.heading,
+                            fontSize: 28,
+                            color: dark ? Colors.white : KP.night900,
+                          ),
                         ),
                       ),
                     ),
@@ -141,7 +154,11 @@ class KidsFaithScaffold extends ConsumerWidget {
                         child: InkWell(
                           customBorder: const CircleBorder(),
                           onTap: () => Navigator.of(context).maybePop(),
-                          child: const SizedBox(width: 56, height: 56, child: Icon(Icons.home_rounded, color: KP.night800, size: 30)),
+                          child: const SizedBox(
+                            width: 56,
+                            height: 56,
+                            child: Icon(Icons.home_rounded, color: KP.night800, size: 30),
+                          ),
                         ),
                       ),
                     ),
@@ -195,7 +212,13 @@ enum KidsButtonTone { gold, teal, soft }
 
 /// A big, forgiving button (>= 64 dp tall).
 class KidsBigButton extends StatelessWidget {
-  const KidsBigButton({super.key, required this.label, required this.onPressed, this.icon, this.tone = KidsButtonTone.gold});
+  const KidsBigButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.tone = KidsButtonTone.gold,
+  });
 
   final String label;
   final IconData? icon;
@@ -232,7 +255,11 @@ class KidsBigButton extends StatelessWidget {
                   children: [
                     if (icon != null) ...[Icon(icon, color: fg, size: 28), const SizedBox(width: 8)],
                     Flexible(
-                      child: Text(label, textAlign: TextAlign.center, style: TextStyle(fontFamily: KP.heading, fontSize: 24, color: fg)),
+                      child: Text(
+                        label,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontFamily: KP.heading, fontSize: 24, color: fg),
+                      ),
                     ),
                   ],
                 ),
@@ -247,7 +274,14 @@ class KidsBigButton extends StatelessWidget {
 
 /// A round icon button (64 dp).
 class KidsRoundButton extends StatelessWidget {
-  const KidsRoundButton({super.key, required this.icon, required this.label, required this.onPressed, this.color = KP.teal100, this.iconColor = KP.teal700});
+  const KidsRoundButton({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+    this.color = KP.teal100,
+    this.iconColor = KP.teal700,
+  });
 
   final IconData icon;
   final String label;
@@ -278,7 +312,14 @@ class KidsRoundButton extends StatelessWidget {
 
 /// Two big tabs (wudu / prayer, morning / evening).
 class KidsTabs extends StatelessWidget {
-  const KidsTabs({super.key, required this.labels, required this.selected, required this.onSelected, required this.activeColor, this.activeText = Colors.white});
+  const KidsTabs({
+    super.key,
+    required this.labels,
+    required this.selected,
+    required this.onSelected,
+    required this.activeColor,
+    this.activeText = Colors.white,
+  });
 
   final List<String> labels;
   final int selected;
@@ -313,7 +354,11 @@ class KidsTabs extends StatelessWidget {
                         child: Center(
                           child: Text(
                             labels[i],
-                            style: TextStyle(fontFamily: KP.heading, fontSize: 24, color: i == selected ? activeText : KP.teal700),
+                            style: TextStyle(
+                              fontFamily: KP.heading,
+                              fontSize: 24,
+                              color: i == selected ? activeText : KP.teal700,
+                            ),
                           ),
                         ),
                       ),
@@ -388,8 +433,16 @@ class _KidsPagerState extends State<KidsPager> {
     final last = _i >= widget.count - 1;
     return Column(
       children: [
-        Expanded(child: SingleChildScrollView(padding: const EdgeInsets.symmetric(horizontal: 16), child: widget.pageBuilder(context, _i))),
-        Padding(padding: const EdgeInsets.symmetric(vertical: 10), child: KidsDots(count: widget.count, index: _i)),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: widget.pageBuilder(context, _i),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: KidsDots(count: widget.count, index: _i),
+        ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
           child: Row(

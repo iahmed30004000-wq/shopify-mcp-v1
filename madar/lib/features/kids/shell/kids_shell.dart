@@ -20,4 +20,5 @@ export 'domain/kids_logic.dart';
 export 'kids_routes.dart' show kidsRoutes;
 export 'presentation/kids_entry_card.dart' show KidsEntryCard, ensureParentPin;
 export 'presentation/kids_overlays.dart' show KidsSpeakButton;
-export 'presentation/kids_palette.dart' show KhatamStar, KidsBigButton, KidsButtonTone, KidsColors, KidsRoundButton, KidsText, kKidsMinTarget, kidsDigits;
+export 'presentation/kids_palette.dart'
+    show KhatamStar, KidsBigButton, KidsButtonTone, KidsColors, KidsRoundButton, KidsText, kKidsMinTarget, kidsDigits;

@@ -151,11 +151,8 @@ class _LearnViewState extends State<_LearnView> {
             padding: const EdgeInsets.fromLTRB(16, 6, 16, 8),
             itemCount: widget.letters.length,
             separatorBuilder: (_, _) => const SizedBox(width: _gap),
-            itemBuilder: (context, i) => _LetterChip(
-              letter: widget.letters[i],
-              selected: i == widget.index,
-              onTap: () => widget.onSelect(i),
-            ),
+            itemBuilder: (context, i) =>
+                _LetterChip(letter: widget.letters[i], selected: i == widget.index, onTap: () => widget.onSelect(i)),
           ),
         ),
         Expanded(
@@ -168,9 +165,19 @@ class _LearnViewState extends State<_LearnView> {
                 const SizedBox(height: 16),
                 _WordCard(letter: letter),
                 const SizedBox(height: 20),
-                KidsButton(label: l.kidsLettersTraceCta, icon: Icons.draw_rounded, kind: KidsButtonKind.rose, onTap: widget.onTrace),
+                KidsButton(
+                  label: l.kidsLettersTraceCta,
+                  icon: Icons.draw_rounded,
+                  kind: KidsButtonKind.rose,
+                  onTap: widget.onTrace,
+                ),
                 const SizedBox(height: 14),
-                KidsButton(label: l.kidsLettersQuizCta, icon: Icons.extension_rounded, kind: KidsButtonKind.teal, onTap: widget.onQuiz),
+                KidsButton(
+                  label: l.kidsLettersQuizCta,
+                  icon: Icons.extension_rounded,
+                  kind: KidsButtonKind.teal,
+                  onTap: widget.onQuiz,
+                ),
                 const SizedBox(height: 14),
                 Row(
                   children: [
@@ -230,7 +237,11 @@ class _LetterChip extends StatelessWidget {
           color: selected ? null : KidsColors.paper,
           boxShadow: [BoxShadow(color: selected ? KidsColors.sun700 : KidsColors.sand2, offset: const Offset(0, 3))],
         ),
-        child: Text(letter.glyph, textDirection: TextDirection.rtl, style: KidsType.letterStyle(38, color: KidsColors.night900)),
+        child: Text(
+          letter.glyph,
+          textDirection: TextDirection.rtl,
+          style: KidsType.letterStyle(38, color: KidsColors.night900),
+        ),
       ),
     ),
   );
@@ -285,7 +296,9 @@ class _LetterCard extends StatelessWidget {
             children: [
               for (final f in LetterForm.values) ...[
                 if (f != LetterForm.isolated) const SizedBox(width: 6),
-                Expanded(child: _FormTile(letter: letter, form: f, selected: f == form, onTap: () => onForm(f))),
+                Expanded(
+                  child: _FormTile(letter: letter, form: f, selected: f == form, onTap: () => onForm(f)),
+                ),
               ],
             ],
           ),
@@ -313,14 +326,20 @@ class _BigLetter extends StatelessWidget {
               decoration: const BoxDecoration(color: KidsColors.sun100, shape: BoxShape.circle),
               child: Padding(
                 padding: const EdgeInsets.all(14),
-                child: CustomPaint(painter: const KhatamStarPainter(fill: Color(0x00000000), line: KidsColors.sun300)),
+                child: CustomPaint(
+                  painter: const KhatamStarPainter(fill: Color(0x00000000), line: KidsColors.sun300),
+                ),
               ),
             ),
           ),
           FittedBox(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Text(text, textDirection: TextDirection.rtl, style: KidsType.letterStyle(96, color: KidsColors.night800)),
+              child: Text(
+                text,
+                textDirection: TextDirection.rtl,
+                style: KidsType.letterStyle(96, color: KidsColors.night800),
+              ),
             ),
           ),
         ],
@@ -371,13 +390,21 @@ class _FormTile extends StatelessWidget {
                 child: FittedBox(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6),
-                    child: Text(letter.form(form), textDirection: TextDirection.rtl, style: KidsType.letterStyle(40).copyWith(height: 1.7)),
+                    child: Text(
+                      letter.form(form),
+                      textDirection: TextDirection.rtl,
+                      style: KidsType.letterStyle(40).copyWith(height: 1.7),
+                    ),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 4),
-            Text(label, textAlign: TextAlign.center, style: KidsType.bodyText(15, color: KidsColors.ink2)),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: KidsType.bodyText(15, color: KidsColors.ink2),
+            ),
           ],
         ),
       ),
@@ -479,7 +506,14 @@ class _TraceViewState extends State<_TraceView> {
             ),
           ),
           const SizedBox(height: 10),
-          if (_enough) GoodBanner(text: l.kidsLettersTraceGood) else Text(l.kidsLettersTraceHint, textAlign: TextAlign.center, style: KidsType.bodyText(18, color: KidsColors.ink2)),
+          if (_enough)
+            GoodBanner(text: l.kidsLettersTraceGood)
+          else
+            Text(
+              l.kidsLettersTraceHint,
+              textAlign: TextAlign.center,
+              style: KidsType.bodyText(18, color: KidsColors.ink2),
+            ),
           const SizedBox(height: 12),
           Row(
             children: [
@@ -529,8 +563,10 @@ class _LetterQuizViewState extends ConsumerState<LetterQuizView> {
   bool _finished = false;
   bool _retryShown = false;
 
-  LetterQuizEngine _newEngine() =>
-      LetterQuizEngine(seed: widget.seed ?? DateTime.now().microsecondsSinceEpoch & 0x7fffffff, letters: widget.letters);
+  LetterQuizEngine _newEngine() => LetterQuizEngine(
+    seed: widget.seed ?? DateTime.now().microsecondsSinceEpoch & 0x7fffffff,
+    letters: widget.letters,
+  );
 
   void _pick(ArabicLetter pick) {
     if (_solved) return;
@@ -586,7 +622,9 @@ class _LetterQuizViewState extends ConsumerState<LetterQuizView> {
           const SizedBox(height: 10),
           Semantics(
             label: l.kidsLettersQuizProgress(_n + 1, kLetterQuizRound),
-            child: ExcludeSemantics(child: _ProgressDots(done: _finished ? kLetterQuizRound : _n, total: kLetterQuizRound)),
+            child: ExcludeSemantics(
+              child: _ProgressDots(done: _finished ? kLetterQuizRound : _n, total: kLetterQuizRound),
+            ),
           ),
           const SizedBox(height: 14),
           if (_finished) _finishedCard(l) else ..._questionCard(l),
@@ -619,7 +657,11 @@ class _LetterQuizViewState extends ConsumerState<LetterQuizView> {
                     child: SizedBox(
                       height: 130,
                       child: FittedBox(
-                        child: Text(_q.target.form(_q.form), textDirection: TextDirection.rtl, style: KidsType.letterStyle(110, color: KidsColors.night800)),
+                        child: Text(
+                          _q.target.form(_q.form),
+                          textDirection: TextDirection.rtl,
+                          style: KidsType.letterStyle(110, color: KidsColors.night800),
+                        ),
                       ),
                     ),
                   ),
@@ -683,10 +725,17 @@ class _ChoiceTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(28),
             color: right ? KidsColors.teal100 : (dimmed ? KidsColors.retryFill : Colors.white),
-            border: Border.all(color: right ? KidsColors.teal500 : (dimmed ? KidsColors.retry : KidsColors.sand2), width: 3),
+            border: Border.all(
+              color: right ? KidsColors.teal500 : (dimmed ? KidsColors.retry : KidsColors.sand2),
+              width: 3,
+            ),
             boxShadow: const [BoxShadow(color: KidsColors.sand2, offset: Offset(0, 3))],
           ),
-          child: Text(letter.glyph, textDirection: TextDirection.rtl, style: KidsType.letterStyle(54, color: KidsColors.night900)),
+          child: Text(
+            letter.glyph,
+            textDirection: TextDirection.rtl,
+            style: KidsType.letterStyle(54, color: KidsColors.night900),
+          ),
         ),
       ),
     ),
@@ -707,10 +756,7 @@ class _ProgressDots extends StatelessWidget {
           width: 18,
           height: 18,
           margin: const EdgeInsets.symmetric(horizontal: 5),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: i < done ? KidsColors.sun500 : KidsColors.sand2,
-          ),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: i < done ? KidsColors.sun500 : KidsColors.sand2),
         ),
     ],
   );

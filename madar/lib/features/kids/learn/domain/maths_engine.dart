@@ -270,7 +270,10 @@ class MathsEngine {
     }
     sameDen.shuffle(_rng);
     otherDen.shuffle(_rng);
-    final picked = <MathsValue>[answer, ...[...sameDen, ...otherDen].take(choiceCount - 1)]..shuffle(_rng);
+    final picked = <MathsValue>[
+      answer,
+      ...[...sameDen, ...otherDen].take(choiceCount - 1),
+    ]..shuffle(_rng);
     return picked;
   }
 }

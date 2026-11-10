@@ -91,7 +91,11 @@ void main() {
   group('parsing', () {
     test('a name outside the art allow-list is refused (there is no person to ask for)', () {
       expect(
-        () => KidsReligiousItem.fromJson({'id': 'x', 'kind': 'story', 'art': ['dunes', 'person']}),
+        () => KidsReligiousItem.fromJson({
+          'id': 'x',
+          'kind': 'story',
+          'art': ['dunes', 'person'],
+        }),
         throwsFormatException,
       );
     });
@@ -117,23 +121,36 @@ void main() {
     });
 
     test('an index that lists a file that is not there is reported', () async {
-      write('index.json', {'files': ['gone.json']});
+      write('index.json', {
+        'files': ['gone.json'],
+      });
       expect((await load()).problems.single.message, contains('missing'));
     });
 
     test('garbage does not throw', () async {
       File('${tmp.path}/index.json').writeAsStringSync('not json');
       expect((await load()).problems, isNotEmpty);
-      write('index.json', {'files': ['a.json']});
+      write('index.json', {
+        'files': ['a.json'],
+      });
       File('${tmp.path}/a.json').writeAsStringSync('{{');
       expect((await load()).problems, isNotEmpty);
     });
 
     test('only signed, valid items are approved', () async {
-      write('index.json', {'files': ['a.json']});
+      write('index.json', {
+        'files': ['a.json'],
+      });
       write('a.json', {
         'items': [
-          {'id': 'signed', 'kind': 'manner', 'arabicText': 'T', 'source': 'S', 'reviewer': 'R', 'reviewedOn': '2026-11-01'},
+          {
+            'id': 'signed',
+            'kind': 'manner',
+            'arabicText': 'T',
+            'source': 'S',
+            'reviewer': 'R',
+            'reviewedOn': '2026-11-01',
+          },
           {'id': 'unsigned', 'kind': 'manner', 'arabicText': 'T', 'source': 'S'},
           // signed but no source: must never reach a child
           {'id': 'nosource', 'kind': 'manner', 'arabicText': 'T', 'reviewer': 'R', 'reviewedOn': '2026-11-01'},

@@ -59,9 +59,8 @@ class LanternPainter extends CustomPainter {
       glowCentre,
       w * 0.95,
       Paint()
-        ..shader = RadialGradient(
-          colors: [color.withValues(alpha: .38), color.withValues(alpha: 0)],
-        ).createShader(Rect.fromCircle(center: glowCentre, radius: w * 0.95)),
+        ..shader = RadialGradient(colors: [color.withValues(alpha: .38), color.withValues(alpha: 0)])
+            .createShader(Rect.fromCircle(center: glowCentre, radius: w * 0.95)),
     );
     canvas.drawRect(Rect.fromLTWH(cx - 2, 0, 4, top), Paint()..color = _outline);
     canvas.drawPath(body, Paint()..color = color);
@@ -111,7 +110,10 @@ class LanternView extends StatelessWidget {
     image: true,
     excludeSemantics: true,
     child: RepaintBoundary(
-      child: CustomPaint(size: Size(width, width * 1.75), painter: LanternPainter(color: color, lit: lit)),
+      child: CustomPaint(
+        size: Size(width, width * 1.75),
+        painter: LanternPainter(color: color, lit: lit),
+      ),
     ),
   );
 }

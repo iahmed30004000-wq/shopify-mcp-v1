@@ -37,7 +37,11 @@ class KidsRecitationScreen extends ConsumerWidget {
     return KidsFaithScaffold(
       title: l.kidsFaithTryYourself,
       background: const BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KP.night100, KP.paper]),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [KP.night100, KP.paper],
+        ),
       ),
       child: !hasEngine
           ? const KidsSoonState()
@@ -57,8 +61,19 @@ class KidsRecitationScreen extends ConsumerWidget {
                           // Never marks a word wrong: all neutral, all teal once heard well.
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(color: well ? KP.teal100 : Colors.transparent, borderRadius: BorderRadius.circular(20)),
-                            child: Text(w, style: TextStyle(fontFamily: KP.quran, fontSize: 28, height: 1.8, color: well ? KP.teal700 : KP.ink)),
+                            decoration: BoxDecoration(
+                              color: well ? KP.teal100 : Colors.transparent,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              w,
+                              style: TextStyle(
+                                fontFamily: KP.quran,
+                                fontSize: 28,
+                                height: 1.8,
+                                color: well ? KP.teal700 : KP.ink,
+                              ),
+                            ),
                           ),
                       ],
                     ),
@@ -66,7 +81,13 @@ class KidsRecitationScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 if (well)
-                  const Center(child: KhatamBadge(size: 120, color: KP.teal500, child: Icon(Icons.check_rounded, size: 56, color: KP.night900)))
+                  const Center(
+                    child: KhatamBadge(
+                      size: 120,
+                      color: KP.teal500,
+                      child: Icon(Icons.check_rounded, size: 56, color: KP.night900),
+                    ),
+                  )
                 else
                   Center(
                     child: Semantics(
@@ -79,7 +100,15 @@ class KidsRecitationScreen extends ConsumerWidget {
                         child: InkWell(
                           customBorder: const CircleBorder(),
                           onTap: ctrl.listen,
-                          child: SizedBox(width: 120, height: 120, child: Icon(phase == KidsRecitationPhase.listening ? Icons.graphic_eq_rounded : Icons.mic_rounded, size: 56, color: KP.night900)),
+                          child: SizedBox(
+                            width: 120,
+                            height: 120,
+                            child: Icon(
+                              phase == KidsRecitationPhase.listening ? Icons.graphic_eq_rounded : Icons.mic_rounded,
+                              size: 56,
+                              color: KP.night900,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -93,26 +122,57 @@ class KidsRecitationScreen extends ConsumerWidget {
                     ),
                   ),
                 if (phase == KidsRecitationPhase.tryAgain) ...[
-                  _FeedbackCard(title: l.kidsFaithSoftRetryTitle, body: l.kidsFaithSoftRetryBody, fill: KP.retryFill, border: KP.retry, text: KP.retryText),
+                  _FeedbackCard(
+                    title: l.kidsFaithSoftRetryTitle,
+                    body: l.kidsFaithSoftRetryBody,
+                    fill: KP.retryFill,
+                    border: KP.retry,
+                    text: KP.retryText,
+                  ),
                   const SizedBox(height: 16),
                   KidsBigButton(label: l.kidsFaithAgain, icon: Icons.replay_rounded, onPressed: ctrl.listen),
                   const SizedBox(height: 12),
-                  Center(child: Text(l.kidsFaithStarsSafe, style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2))),
+                  Center(
+                    child: Text(
+                      l.kidsFaithStarsSafe,
+                      style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2),
+                    ),
+                  ),
                 ],
                 if (well) ...[
-                  _FeedbackCard(title: l.kidsFaithWellDoneTitle, body: l.kidsFaithWellDoneBody, fill: KP.teal100, border: KP.teal500, text: KP.teal700),
+                  _FeedbackCard(
+                    title: l.kidsFaithWellDoneTitle,
+                    body: l.kidsFaithWellDoneBody,
+                    fill: KP.teal100,
+                    border: KP.teal500,
+                    text: KP.teal700,
+                  ),
                   const SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
-                        child: KidsBigButton(label: l.kidsFaithNextAyah, tone: KidsButtonTone.teal, onPressed: () => Navigator.of(context).maybePop(true)),
+                        child: KidsBigButton(
+                          label: l.kidsFaithNextAyah,
+                          tone: KidsButtonTone.teal,
+                          onPressed: () => Navigator.of(context).maybePop(true),
+                        ),
                       ),
                       const SizedBox(width: 12),
                       KidsRoundButton(icon: Icons.replay_rounded, label: l.kidsFaithAgain, onPressed: ctrl.listen),
                     ],
                   ),
                   const SizedBox(height: 12),
-                  Center(child: Text(l.kidsFaithStarNow(fmt.formatInt(stars)), style: const TextStyle(fontFamily: KP.body, fontWeight: FontWeight.w700, fontSize: 18, color: KP.night800))),
+                  Center(
+                    child: Text(
+                      l.kidsFaithStarNow(fmt.formatInt(stars)),
+                      style: const TextStyle(
+                        fontFamily: KP.body,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: KP.night800,
+                      ),
+                    ),
+                  ),
                 ],
               ],
             ),
@@ -121,7 +181,13 @@ class KidsRecitationScreen extends ConsumerWidget {
 }
 
 class _FeedbackCard extends StatelessWidget {
-  const _FeedbackCard({required this.title, required this.body, required this.fill, required this.border, required this.text});
+  const _FeedbackCard({
+    required this.title,
+    required this.body,
+    required this.fill,
+    required this.border,
+    required this.text,
+  });
 
   final String title;
   final String body;
@@ -133,16 +199,28 @@ class _FeedbackCard extends StatelessWidget {
   Widget build(BuildContext context) => Semantics(
     liveRegion: true,
     child: DecoratedBox(
-      decoration: BoxDecoration(color: fill, border: Border.all(color: border, width: 4), borderRadius: BorderRadius.circular(32)),
+      decoration: BoxDecoration(
+        color: fill,
+        border: Border.all(color: border, width: 4),
+        borderRadius: BorderRadius.circular(32),
+      ),
       child: SizedBox(
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Text(title, textAlign: TextAlign.center, style: TextStyle(fontFamily: KP.heading, fontSize: 34, color: text)),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontFamily: KP.heading, fontSize: 34, color: text),
+              ),
               const SizedBox(height: 6),
-              Text(body, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.body, fontSize: 20, height: 1.5, color: KP.ink)),
+              Text(
+                body,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontFamily: KP.body, fontSize: 20, height: 1.5, color: KP.ink),
+              ),
             ],
           ),
         ),

@@ -123,7 +123,13 @@ class PiePainter extends CustomPainter {
 
 /// A fraction written as numerator over a line over denominator.
 class FractionStack extends StatelessWidget {
-  const FractionStack({super.key, required this.num, required this.den, this.size = 40, this.color = KidsColors.night900});
+  const FractionStack({
+    super.key,
+    required this.num,
+    required this.den,
+    this.size = 40,
+    this.color = KidsColors.night900,
+  });
 
   /// Already localised digits.
   final String num, den;
@@ -140,7 +146,12 @@ class FractionStack extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(num, style: style),
-          Container(width: w, height: size * 0.09, margin: EdgeInsets.symmetric(vertical: size * 0.05), decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(4))),
+          Container(
+            width: w,
+            height: size * 0.09,
+            margin: EdgeInsets.symmetric(vertical: size * 0.05),
+            decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(4)),
+          ),
           Text(den, style: style),
         ],
       ),

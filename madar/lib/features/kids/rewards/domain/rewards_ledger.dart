@@ -28,7 +28,7 @@ class StarEntry {
 }
 
 /// Everything the child has collected. Stars are only a collection: this type
-/// has no way to remove or lower anything, and nothing ever reads it to lock
+/// can only add, never take a star away, and nothing ever reads it to lock
 /// content.
 @immutable
 class RewardsLedger {

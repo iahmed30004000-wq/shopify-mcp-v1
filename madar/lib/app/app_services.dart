@@ -9,8 +9,6 @@ import '../core/routing/notification_landing.dart';
 import '../core/routing/router.dart';
 import '../core/settings/app_settings.dart';
 import '../features/adhkar/adhkar.dart' show AdhkarReminderTaps, adhkarReminderSyncProvider;
-import '../features/kids/shell/application/kids_providers.dart' show kidsModeOnProvider;
-import '../features/lock/application/lock_controller.dart' show lockExemptionsProvider;
 import '../features/prayer/domain/time_zones.dart';
 import '../features/quran/quran.dart' show quranMetaProvider;
 import '../features/recitation/recitation.dart' show RecitationPlayer, recitationPlayerProvider;
@@ -197,36 +195,15 @@ class AppServices extends ConsumerStatefulWidget {
 }
 
 class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingObserver {
-  /// Whether this widget currently holds a lock exemption for kids mode.
-  bool _holdsKidsExemption = false;
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    // «مدار الصغار»: while kids mode is on, the app lock does not cover the
-    // kids shell. The adult app is unreachable from it anyway (the router
-    // redirects everything into `/kids`), and leaving it takes the parent's
-    // PIN or fingerprint, so a child resuming the phone is never stopped at an
-    // adult lock screen. Listened to from the first frame: a relaunch with
-    // kids mode on never flashes the astrolabe.
-    ref.listenManual(kidsModeOnProvider, (_, on) => _syncKidsExemption(on), fireImmediately: true);
     // One-shot: later reads (the hall reads it too) find the old row gone.
     try {
       ref.read(savedGamesLegacyImportProvider);
     } catch (e) {
       if (kDebugMode) debugPrint('Madar: saved games import failed: $e');
-    }
-  }
-
-  void _syncKidsExemption(bool on) {
-    final exemptions = ref.read(lockExemptionsProvider.notifier);
-    if (on && !_holdsKidsExemption) {
-      _holdsKidsExemption = true;
-      exemptions.hold();
-    } else if (!on && _holdsKidsExemption) {
-      _holdsKidsExemption = false;
-      exemptions.release();
     }
   }
 

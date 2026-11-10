@@ -26615,6 +26615,286 @@
   "@kidsColWorking": {
     "description": "Kids colouring: shown while a picture is processed"
   },
+  "kidsPlayHome": "Home",
+  "@kidsPlayHome": {
+    "description": "Kids: home button (play screens)"
+  },
+  "kidsPlayStarsSemantics": "You have {count} stars",
+  "@kidsPlayStarsSemantics": {
+    "description": "Kids: spoken value of the star counter",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayRewardsTitle": "My rewards",
+  "@kidsPlayRewardsTitle": {
+    "description": "Kids: rewards section title (design 11)"
+  },
+  "kidsPlayAllLanternsLit": "All the lanterns are lit!",
+  "kidsPlayNextLantern": "The next lantern",
+  "kidsPlayStarsLeft": "{count, plural, =1{One star to go} other{{shown} stars to go}}",
+  "@kidsPlayStarsLeft": {
+    "description": "Kids: stars missing for the next lantern ({shown} is the number in the screen's digits)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shown": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayLanternLit": "Lantern {n} is lit",
+  "@kidsPlayLanternLit": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayLanternDark": "Lantern {n} is not lit yet",
+  "@kidsPlayLanternDark": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayStarsSafe": "Your stars are kept on your phone",
+  "kidsPlayStarsCollected": "stars collected",
+  "kidsPlayGamesTitle": "Games",
+  "@kidsPlayGamesTitle": {
+    "description": "Kids: games section title (design 10)"
+  },
+  "kidsPlayPairsTitle": "Star Pairs",
+  "kidsPlayPairsBlurb": "A calm game: find the two cards that match. No clock, no rush.",
+  "kidsPlayChooseSize": "How many pairs?",
+  "kidsPlayPairsCount": "{count, plural, =1{One pair} other{{shown} pairs}}",
+  "@kidsPlayPairsCount": {
+    "description": "Kids: size of the memory game",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shown": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayPlay": "Play",
+  "kidsPlayPairsFound": "Found {found} of {total}",
+  "@kidsPlayPairsFound": {
+    "placeholders": {
+      "found": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayCheer1": "Lovely!",
+  "kidsPlayCheer2": "Well done!",
+  "kidsPlayCheer3": "Great!",
+  "kidsPlayRetry1": "Close! Try again",
+  "kidsPlayRetry2": "No worries, try another one",
+  "kidsPlayRetry3": "Remember where it was!",
+  "kidsPlayCardDown": "Card {n}, face down",
+  "@kidsPlayCardDown": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayCardUp": "Card {n}: {name}",
+  "@kidsPlayCardUp": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlaySymLantern": "lantern",
+  "@kidsPlaySymLantern": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymStar": "star",
+  "@kidsPlaySymStar": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymSun": "sun",
+  "@kidsPlaySymSun": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymMoon": "moon",
+  "@kidsPlaySymMoon": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymTree": "tree",
+  "@kidsPlaySymTree": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymFlower": "flower",
+  "@kidsPlaySymFlower": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymDrop": "water drop",
+  "@kidsPlaySymDrop": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymLeaf": "leaf",
+  "@kidsPlaySymLeaf": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymHeart": "heart",
+  "@kidsPlaySymHeart": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymCloud": "cloud",
+  "@kidsPlaySymCloud": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymKite": "kite",
+  "@kidsPlaySymKite": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlaySymGem": "gem",
+  "@kidsPlaySymGem": {
+    "description": "Kids: picture on a memory card (spoken name)"
+  },
+  "kidsPlayWellDone": "Well done!",
+  "kidsPlayNewStar": "You earned a new star!",
+  "kidsPlayStarAlreadyToday": "Lovely! You already took today's star for this. Tomorrow there is a new one.",
+  "kidsPlayAgain": "Play again",
+  "kidsPlayDone": "Done",
+  "kidsPlayVoiceTitle": "Stories in a parent's voice",
+  "@kidsPlayVoiceTitle": {
+    "description": "Kids: voice stories section title (design 09a)"
+  },
+  "kidsPlayInteractiveTitle": "Interactive story",
+  "@kidsPlayInteractiveTitle": {
+    "description": "Kids: interactive story section title (design 09c)"
+  },
+  "kidsPlayParentCorner": "Parents' corner",
+  "kidsPlayMyStoriesTitle": "My stories, my voice",
+  "kidsPlayCornerIntro": "Record stories for your child, and they will hear them in your voice.",
+  "kidsPlayCornerPrivacy": "Recordings stay on this phone only. If a call comes in, the recording stops and what you recorded is kept.",
+  "kidsPlayCornerEmptyTitle": "No stories yet",
+  "kidsPlayCornerEmptyBody": "Tap «New story», type its name, then record it in your voice. Your child will find it on the stories page.",
+  "kidsPlayAddStory": "New story",
+  "kidsPlayNewStoryTitle": "New story",
+  "kidsPlayEditStoryTitle": "Edit the story",
+  "kidsPlayStoryNameLabel": "Story name",
+  "kidsPlayStoryNameHint": "For example: a bedtime story",
+  "kidsPlayNarratorLabel": "Who is telling it? (optional)",
+  "kidsPlayNarratorHint": "For example: in Dad's voice",
+  "kidsPlayCoverLabel": "Cover colour",
+  "kidsPlayCoverColour": "Colour {n}",
+  "@kidsPlayCoverColour": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlaySave": "Save",
+  "kidsPlayCancel": "Cancel",
+  "kidsPlayDeleteTitle": "Delete «{title}»?",
+  "@kidsPlayDeleteTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayDeleteBody": "The story and its recording will be removed from this phone.",
+  "kidsPlayDelete": "Delete",
+  "kidsPlayKeep": "Keep it",
+  "kidsPlayRecordingNow": "Recording",
+  "kidsPlayEmptyStory": "Empty",
+  "kidsPlayStopSave": "Stop and save",
+  "kidsPlayDiscard": "Discard",
+  "kidsPlayPlayStory": "Play",
+  "kidsPlayPauseStory": "Pause",
+  "kidsPlayRerecord": "Record again",
+  "kidsPlayRecordWithVoice": "Record in your voice",
+  "kidsPlayBackToStories": "Back to the stories",
+  "kidsPlayNoteSaved": "The recording is saved.",
+  "kidsPlayNoteInterruptedKept": "A call came in, so the recording stopped and what you recorded is saved.",
+  "kidsPlayNoteInterruptedDiscarded": "A call came in after only a few seconds, so nothing was saved. Record again.",
+  "kidsPlayNoteTooShort": "The recording was too short, so it was not saved. Try again.",
+  "kidsPlayNoteNoMic": "The microphone is not allowed. Turn it on for the app in the phone's settings, then try again.",
+  "kidsPlayNoteFailed": "The recording did not work. Make sure the phone has free space and try again.",
+  "kidsPlayNoteMaxLength": "The recording reached the longest length, so it stopped and was saved.",
+  "kidsPlayPrevious": "Previous story",
+  "kidsPlayNext": "Next story",
+  "kidsPlayStoryByLabel": "Story: {title}",
+  "@kidsPlayStoryByLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayStoryRowLabel": "{title}, {minutes}",
+  "@kidsPlayStoryRowLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayCannotPlay": "We could not play this story. Ask a parent to record it again.",
+  "kidsPlayVoiceEmptyTitle": "No stories yet",
+  "kidsPlayVoiceEmptyBody": "When Mum or Dad records a story in their voice, you will find it here, and you can listen without internet.",
+  "kidsPlayMinutes": "{count, plural, =1{One minute} other{{shown} minutes}}",
+  "@kidsPlayMinutes": {
+    "description": "Kids: length of a story",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shown": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayStoryStageLabel": "The story scene",
+  "kidsPlaySayWord": "Say: {word}!",
+  "@kidsPlaySayWord": {
+    "placeholders": {
+      "word": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsPlayMicOff": "The microphone is off right now, but you can go on with the button.",
+  "kidsPlayParentMic": "For parents: turn the microphone on",
+  "kidsPlaySkipSay": "I can't speak right now",
+  "kidsPlayReplayBeat": "Play the scene again",
+  "kidsPlayNextBeat": "Next",
+  "kidsPlayTheEnd": "The end",
+  "kidsPlayReadAgain": "The story again",
+  "kidsPlayBeatOf": "Scene {n} of {total}",
+  "@kidsPlayBeatOf": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
   "kidsShellEntryTitle": "Madar Kids",
   "@kidsShellEntryTitle": {
     "description": "Title of the kids-mode card at the top of Settings"

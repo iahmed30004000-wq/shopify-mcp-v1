@@ -21,7 +21,9 @@ class _GamesScreenState extends State<GamesScreen> {
   PairsSize _size = PairsSize.small;
 
   void _play() => Navigator.of(context).push(
-    MaterialPageRoute<void>(builder: (_) => PairsPlayScreen(size: _size, seed: widget.seed)),
+    MaterialPageRoute<void>(
+      builder: (_) => PairsPlayScreen(size: _size, seed: widget.seed),
+    ),
   );
 
   @override
@@ -41,10 +43,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: KidsColors.night800,
-                        borderRadius: BorderRadius.circular(34),
-                      ),
+                      decoration: BoxDecoration(color: KidsColors.night800, borderRadius: BorderRadius.circular(34)),
                       child: Column(
                         children: [
                           const _Preview(),
@@ -72,7 +71,7 @@ class _GamesScreenState extends State<GamesScreen> {
                       children: [
                         for (final s in PairsSize.values)
                           _SizeChip(
-                            label: l.kidsPlayPairsCount(kidsNumber(context, s.pairs)),
+                            label: l.kidsPlayPairsCount(s.pairs, kidsNumber(context, s.pairs)),
                             selected: s == _size,
                             onTap: () => setState(() => _size = s),
                           ),
@@ -133,11 +132,14 @@ class _Preview extends StatelessWidget {
   Widget build(BuildContext context) => ExcludeSemantics(
     child: LayoutBuilder(
       builder: (context, c) {
-        final w = ((c.maxWidth - 24) / 3).clamp(48.0, 96.0);
+        final w = ((c.maxWidth - 24) / 3).clamp(48.0, 84.0);
         Widget card(Widget child) => SizedBox(width: w, height: w * 1.25, child: child);
-        Widget row(List<Widget> cards) => Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          for (var i = 0; i < cards.length; i++) ...[if (i > 0) const SizedBox(width: 12), card(cards[i])],
-        ]);
+        Widget row(List<Widget> cards) => Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var i = 0; i < cards.length; i++) ...[if (i > 0) const SizedBox(width: 12), card(cards[i])],
+          ],
+        );
         return Column(
           children: [
             row(const [PairCardBack(), PairCardBack(), PairCardFace(symbol: 0)]),

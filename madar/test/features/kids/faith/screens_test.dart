@@ -34,7 +34,14 @@ void main() {
   group('steps', () {
     final steps = [
       item('w2', KidsReligiousKind.wuduStep, text: 'W-SECOND', order: 2, art: const [KidsArt.water]),
-      item('w1', KidsReligiousKind.wuduStep, text: 'W-FIRST', order: 1, title: 'W-TITLE', art: const [KidsArt.water, KidsArt.drops]),
+      item(
+        'w1',
+        KidsReligiousKind.wuduStep,
+        text: 'W-FIRST',
+        order: 1,
+        title: 'W-TITLE',
+        art: const [KidsArt.water, KidsArt.drops],
+      ),
       item('w3', KidsReligiousKind.wuduStep, text: 'W-HIDDEN', order: 3, approved: false),
       item('p1', KidsReligiousKind.prayerStep, text: 'P-FIRST', order: 1),
     ];
@@ -79,9 +86,31 @@ void main() {
 
   group('stories (places, light and objects, never a figure)', () {
     final two = [
-      item('a1', KidsReligiousKind.story, text: 'A-PAGE-1', group: 'a', title: 'A-NAME', order: 1, art: const [KidsArt.dunes, KidsArt.palm, KidsArt.lantern]),
-      item('a2', KidsReligiousKind.story, text: 'A-PAGE-2', group: 'a', order: 2, art: const [KidsArt.lightColumn, KidsArt.path]),
-      item('b1', KidsReligiousKind.story, text: 'B-PAGE-1', group: 'b', title: 'B-NAME', art: const [KidsArt.sea, KidsArt.ship]),
+      item(
+        'a1',
+        KidsReligiousKind.story,
+        text: 'A-PAGE-1',
+        group: 'a',
+        title: 'A-NAME',
+        order: 1,
+        art: const [KidsArt.dunes, KidsArt.palm, KidsArt.lantern],
+      ),
+      item(
+        'a2',
+        KidsReligiousKind.story,
+        text: 'A-PAGE-2',
+        group: 'a',
+        order: 2,
+        art: const [KidsArt.lightColumn, KidsArt.path],
+      ),
+      item(
+        'b1',
+        KidsReligiousKind.story,
+        text: 'B-PAGE-1',
+        group: 'b',
+        title: 'B-NAME',
+        art: const [KidsArt.sea, KidsArt.ship],
+      ),
     ];
 
     testWidgets('with several stories a list comes first, then the pages', (tester) async {
@@ -112,7 +141,9 @@ void main() {
     testWidgets('the painter draws every allowed art without error, at phone width', (tester) async {
       _phone(tester);
       await tester.pumpWidget(faithApp(const SingleChildScrollView(child: KidsSceneArt(art: KidsArt.values))));
-      await tester.pumpWidget(faithApp(const SingleChildScrollView(child: KidsSceneArt(art: KidsArt.values, dayTone: true))));
+      await tester.pumpWidget(
+        faithApp(const SingleChildScrollView(child: KidsSceneArt(art: KidsArt.values, dayTone: true))),
+      );
       expect(tester.takeException(), isNull);
     });
 

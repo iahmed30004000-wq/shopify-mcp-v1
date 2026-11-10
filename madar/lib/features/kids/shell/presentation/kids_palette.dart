@@ -196,11 +196,7 @@ class KidsBigButton extends StatelessWidget {
                   children: [
                     if (icon != null) ...[Icon(icon, color: fg, size: 28), const SizedBox(width: 12)],
                     Flexible(
-                      child: Text(
-                        label,
-                        textAlign: TextAlign.center,
-                        style: KidsText.title(fg, size: 24),
-                      ),
+                      child: Text(label, textAlign: TextAlign.center, style: KidsText.title(fg, size: 24)),
                     ),
                   ],
                 ),

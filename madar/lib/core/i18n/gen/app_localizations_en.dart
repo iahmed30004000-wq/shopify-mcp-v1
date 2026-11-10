@@ -28269,6 +28269,366 @@ class L10nEn extends L10n {
   String get kidsColWorking => 'One moment, getting the picture ready…';
 
   @override
+  String get kidsPlayHome => 'Home';
+
+  @override
+  String kidsPlayStarsSemantics(String count) {
+    return 'You have $count stars';
+  }
+
+  @override
+  String get kidsPlayRewardsTitle => 'My rewards';
+
+  @override
+  String get kidsPlayAllLanternsLit => 'All the lanterns are lit!';
+
+  @override
+  String get kidsPlayNextLantern => 'The next lantern';
+
+  @override
+  String kidsPlayStarsLeft(int count, String shown) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$shown stars to go',
+      one: 'One star to go',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String kidsPlayLanternLit(String n) {
+    return 'Lantern $n is lit';
+  }
+
+  @override
+  String kidsPlayLanternDark(String n) {
+    return 'Lantern $n is not lit yet';
+  }
+
+  @override
+  String get kidsPlayStarsSafe => 'Your stars are kept on your phone';
+
+  @override
+  String get kidsPlayStarsCollected => 'stars collected';
+
+  @override
+  String get kidsPlayGamesTitle => 'Games';
+
+  @override
+  String get kidsPlayPairsTitle => 'Star Pairs';
+
+  @override
+  String get kidsPlayPairsBlurb =>
+      'A calm game: find the two cards that match. No clock, no rush.';
+
+  @override
+  String get kidsPlayChooseSize => 'How many pairs?';
+
+  @override
+  String kidsPlayPairsCount(int count, String shown) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$shown pairs',
+      one: 'One pair',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsPlayPlay => 'Play';
+
+  @override
+  String kidsPlayPairsFound(String found, String total) {
+    return 'Found $found of $total';
+  }
+
+  @override
+  String get kidsPlayCheer1 => 'Lovely!';
+
+  @override
+  String get kidsPlayCheer2 => 'Well done!';
+
+  @override
+  String get kidsPlayCheer3 => 'Great!';
+
+  @override
+  String get kidsPlayRetry1 => 'Close! Try again';
+
+  @override
+  String get kidsPlayRetry2 => 'No worries, try another one';
+
+  @override
+  String get kidsPlayRetry3 => 'Remember where it was!';
+
+  @override
+  String kidsPlayCardDown(String n) {
+    return 'Card $n, face down';
+  }
+
+  @override
+  String kidsPlayCardUp(String n, String name) {
+    return 'Card $n: $name';
+  }
+
+  @override
+  String get kidsPlaySymLantern => 'lantern';
+
+  @override
+  String get kidsPlaySymStar => 'star';
+
+  @override
+  String get kidsPlaySymSun => 'sun';
+
+  @override
+  String get kidsPlaySymMoon => 'moon';
+
+  @override
+  String get kidsPlaySymTree => 'tree';
+
+  @override
+  String get kidsPlaySymFlower => 'flower';
+
+  @override
+  String get kidsPlaySymDrop => 'water drop';
+
+  @override
+  String get kidsPlaySymLeaf => 'leaf';
+
+  @override
+  String get kidsPlaySymHeart => 'heart';
+
+  @override
+  String get kidsPlaySymCloud => 'cloud';
+
+  @override
+  String get kidsPlaySymKite => 'kite';
+
+  @override
+  String get kidsPlaySymGem => 'gem';
+
+  @override
+  String get kidsPlayWellDone => 'Well done!';
+
+  @override
+  String get kidsPlayNewStar => 'You earned a new star!';
+
+  @override
+  String get kidsPlayStarAlreadyToday =>
+      'Lovely! You already took today\'s star for this. Tomorrow there is a new one.';
+
+  @override
+  String get kidsPlayAgain => 'Play again';
+
+  @override
+  String get kidsPlayDone => 'Done';
+
+  @override
+  String get kidsPlayVoiceTitle => 'Stories in a parent\'s voice';
+
+  @override
+  String get kidsPlayInteractiveTitle => 'Interactive story';
+
+  @override
+  String get kidsPlayParentCorner => 'Parents\' corner';
+
+  @override
+  String get kidsPlayMyStoriesTitle => 'My stories, my voice';
+
+  @override
+  String get kidsPlayCornerIntro =>
+      'Record stories for your child, and they will hear them in your voice.';
+
+  @override
+  String get kidsPlayCornerPrivacy =>
+      'Recordings stay on this phone only. If a call comes in, the recording stops and what you recorded is kept.';
+
+  @override
+  String get kidsPlayCornerEmptyTitle => 'No stories yet';
+
+  @override
+  String get kidsPlayCornerEmptyBody =>
+      'Tap «New story», type its name, then record it in your voice. Your child will find it on the stories page.';
+
+  @override
+  String get kidsPlayAddStory => 'New story';
+
+  @override
+  String get kidsPlayNewStoryTitle => 'New story';
+
+  @override
+  String get kidsPlayEditStoryTitle => 'Edit the story';
+
+  @override
+  String get kidsPlayStoryNameLabel => 'Story name';
+
+  @override
+  String get kidsPlayStoryNameHint => 'For example: a bedtime story';
+
+  @override
+  String get kidsPlayNarratorLabel => 'Who is telling it? (optional)';
+
+  @override
+  String get kidsPlayNarratorHint => 'For example: in Dad\'s voice';
+
+  @override
+  String get kidsPlayCoverLabel => 'Cover colour';
+
+  @override
+  String kidsPlayCoverColour(String n) {
+    return 'Colour $n';
+  }
+
+  @override
+  String get kidsPlaySave => 'Save';
+
+  @override
+  String get kidsPlayCancel => 'Cancel';
+
+  @override
+  String kidsPlayDeleteTitle(String title) {
+    return 'Delete «$title»?';
+  }
+
+  @override
+  String get kidsPlayDeleteBody =>
+      'The story and its recording will be removed from this phone.';
+
+  @override
+  String get kidsPlayDelete => 'Delete';
+
+  @override
+  String get kidsPlayKeep => 'Keep it';
+
+  @override
+  String get kidsPlayRecordingNow => 'Recording';
+
+  @override
+  String get kidsPlayEmptyStory => 'Empty';
+
+  @override
+  String get kidsPlayStopSave => 'Stop and save';
+
+  @override
+  String get kidsPlayDiscard => 'Discard';
+
+  @override
+  String get kidsPlayPlayStory => 'Play';
+
+  @override
+  String get kidsPlayPauseStory => 'Pause';
+
+  @override
+  String get kidsPlayRerecord => 'Record again';
+
+  @override
+  String get kidsPlayRecordWithVoice => 'Record in your voice';
+
+  @override
+  String get kidsPlayBackToStories => 'Back to the stories';
+
+  @override
+  String get kidsPlayNoteSaved => 'The recording is saved.';
+
+  @override
+  String get kidsPlayNoteInterruptedKept =>
+      'A call came in, so the recording stopped and what you recorded is saved.';
+
+  @override
+  String get kidsPlayNoteInterruptedDiscarded =>
+      'A call came in after only a few seconds, so nothing was saved. Record again.';
+
+  @override
+  String get kidsPlayNoteTooShort =>
+      'The recording was too short, so it was not saved. Try again.';
+
+  @override
+  String get kidsPlayNoteNoMic =>
+      'The microphone is not allowed. Turn it on for the app in the phone\'s settings, then try again.';
+
+  @override
+  String get kidsPlayNoteFailed =>
+      'The recording did not work. Make sure the phone has free space and try again.';
+
+  @override
+  String get kidsPlayNoteMaxLength =>
+      'The recording reached the longest length, so it stopped and was saved.';
+
+  @override
+  String get kidsPlayPrevious => 'Previous story';
+
+  @override
+  String get kidsPlayNext => 'Next story';
+
+  @override
+  String kidsPlayStoryByLabel(String title) {
+    return 'Story: $title';
+  }
+
+  @override
+  String kidsPlayStoryRowLabel(String title, String minutes) {
+    return '$title, $minutes';
+  }
+
+  @override
+  String get kidsPlayCannotPlay =>
+      'We could not play this story. Ask a parent to record it again.';
+
+  @override
+  String get kidsPlayVoiceEmptyTitle => 'No stories yet';
+
+  @override
+  String get kidsPlayVoiceEmptyBody =>
+      'When Mum or Dad records a story in their voice, you will find it here, and you can listen without internet.';
+
+  @override
+  String kidsPlayMinutes(int count, String shown) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$shown minutes',
+      one: 'One minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsPlayStoryStageLabel => 'The story scene';
+
+  @override
+  String kidsPlaySayWord(String word) {
+    return 'Say: $word!';
+  }
+
+  @override
+  String get kidsPlayMicOff =>
+      'The microphone is off right now, but you can go on with the button.';
+
+  @override
+  String get kidsPlayParentMic => 'For parents: turn the microphone on';
+
+  @override
+  String get kidsPlaySkipSay => 'I can\'t speak right now';
+
+  @override
+  String get kidsPlayReplayBeat => 'Play the scene again';
+
+  @override
+  String get kidsPlayNextBeat => 'Next';
+
+  @override
+  String get kidsPlayTheEnd => 'The end';
+
+  @override
+  String get kidsPlayReadAgain => 'The story again';
+
+  @override
+  String kidsPlayBeatOf(String n, String total) {
+    return 'Scene $n of $total';
+  }
+
+  @override
   String get kidsShellEntryTitle => 'Madar Kids';
 
   @override

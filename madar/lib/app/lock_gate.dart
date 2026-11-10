@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/routing/router.dart';
+import '../features/kids/shell/application/kids_providers.dart' show kidsModeOnProvider;
 import '../features/lock/presentation/lock_gate_host.dart';
 
 /// Seam for the app lock (fingerprint + PIN).
@@ -36,15 +37,45 @@ class NoLockGate extends LockGate {
 /// It is always installed and follows Settings › Security: the lock is only
 /// active when `AppSettings.lockEnabled` is on and a PIN has been set, so a
 /// fresh install opens straight into the app until the owner turns it on.
+///
+/// «مدار الصغار»: while kids mode is on the lock host is simply not mounted
+/// (see [_KidsAwareLock]).
 class BiometricLockGate extends LockGate {
   const BiometricLockGate();
 
   @override
-  Widget wrap(BuildContext context, Widget app) => Consumer(
-    builder: (context, ref, child) =>
-        LockGateHost(backButtonDispatcher: ref.watch(routerProvider).backButtonDispatcher, child: child!),
-    child: app,
-  );
+  Widget wrap(BuildContext context, Widget app) => _KidsAwareLock(app: app);
+}
+
+/// The app lock around the app, except while kids mode is on.
+///
+/// The kids shell is its own gate: the adult app is unreachable from it (the
+/// router redirects every location into `/kids`) and leaving takes the
+/// parent's PIN or fingerprint, so a child who resumes the phone must never be
+/// stopped at the adult lock screen, and a relaunch with kids mode on lands
+/// in the kids home with no lock screen (and no fingerprint prompt) in between.
+/// The app is held under a [GlobalKey], so switching between the two shapes
+/// moves it without rebuilding it: its navigation stays. When kids mode is
+/// left the parent has just proved who they are, and the exit tells the lock
+/// so (`KidsActions.leave`): no second lock screen.
+class _KidsAwareLock extends ConsumerStatefulWidget {
+  const _KidsAwareLock({required this.app});
+
+  final Widget app;
+
+  @override
+  ConsumerState<_KidsAwareLock> createState() => _KidsAwareLockState();
+}
+
+class _KidsAwareLockState extends ConsumerState<_KidsAwareLock> {
+  final GlobalKey _appKey = GlobalKey(debugLabel: 'madar-app-under-lock');
+
+  @override
+  Widget build(BuildContext context) {
+    final app = KeyedSubtree(key: _appKey, child: widget.app);
+    if (ref.watch(kidsModeOnProvider)) return app;
+    return LockGateHost(backButtonDispatcher: ref.watch(routerProvider).backButtonDispatcher, child: app);
+  }
 }
 
 /// The active [LockGate].

@@ -101,12 +101,8 @@ class VoiceStory {
 }
 
 /// The stories in order (oldest first, so «next» goes down the list).
-List<VoiceStory> decodeVoiceStories(Object? json) => json is List
-    ? [
-        for (final j in json)
-          if (VoiceStory.fromJson(j) case final s?) s,
-      ]
-    : const [];
+List<VoiceStory> decodeVoiceStories(Object? json) =>
+    json is List ? [for (final j in json) ?VoiceStory.fromJson(j)] : const [];
 
 List<Object?> encodeVoiceStories(List<VoiceStory> stories) => [for (final s in stories) s.toJson()];
 

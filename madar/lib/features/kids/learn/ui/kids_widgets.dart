@@ -278,7 +278,11 @@ class KidsBackdrop extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [top, KidsColors.paper]),
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [top, KidsColors.paper],
+      ),
     ),
     child: SizedBox.expand(child: child),
   );

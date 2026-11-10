@@ -44776,6 +44776,600 @@ abstract class L10n {
   /// **'لحظة، عم نجهّز الصورة…'**
   String get kidsColWorking;
 
+  /// Kids: home button (play screens)
+  ///
+  /// In ar, this message translates to:
+  /// **'البيت'**
+  String get kidsPlayHome;
+
+  /// Kids: spoken value of the star counter
+  ///
+  /// In ar, this message translates to:
+  /// **'عندك {count} نجمة'**
+  String kidsPlayStarsSemantics(String count);
+
+  /// Kids: rewards section title (design 11)
+  ///
+  /// In ar, this message translates to:
+  /// **'جوائزي'**
+  String get kidsPlayRewardsTitle;
+
+  /// No description provided for @kidsPlayAllLanternsLit.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الفوانيس مضوية!'**
+  String get kidsPlayAllLanternsLit;
+
+  /// No description provided for @kidsPlayNextLantern.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفانوس الجاي'**
+  String get kidsPlayNextLantern;
+
+  /// Kids: stars missing for the next lantern ({shown} is the number in the screen's digits)
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{باقي نجمة وحدة} =2{باقي نجمتين} few{باقي {shown} نجوم} many{باقي {shown} نجمة} other{باقي {shown} نجمة}}'**
+  String kidsPlayStarsLeft(int count, String shown);
+
+  /// No description provided for @kidsPlayLanternLit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفانوس رقم {n} مضوي'**
+  String kidsPlayLanternLit(String n);
+
+  /// No description provided for @kidsPlayLanternDark.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفانوس رقم {n} لسا ما انضوى'**
+  String kidsPlayLanternDark(String n);
+
+  /// No description provided for @kidsPlayStarsSafe.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجومك محفوظة على جوالك'**
+  String get kidsPlayStarsSafe;
+
+  /// No description provided for @kidsPlayStarsCollected.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجمة جمعتها'**
+  String get kidsPlayStarsCollected;
+
+  /// Kids: games section title (design 10)
+  ///
+  /// In ar, this message translates to:
+  /// **'الألعاب'**
+  String get kidsPlayGamesTitle;
+
+  /// No description provided for @kidsPlayPairsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أزواج النجوم'**
+  String get kidsPlayPairsTitle;
+
+  /// No description provided for @kidsPlayPairsBlurb.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبة هادية: دوّر على البطاقتين المتشابهتين. ما في وقت ولا استعجال.'**
+  String get kidsPlayPairsBlurb;
+
+  /// No description provided for @kidsPlayChooseSize.
+  ///
+  /// In ar, this message translates to:
+  /// **'كم زوج بدك؟'**
+  String get kidsPlayChooseSize;
+
+  /// Kids: size of the memory game
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{زوج واحد} =2{زوجان} few{{shown} أزواج} many{{shown} زوجًا} other{{shown} زوج}}'**
+  String kidsPlayPairsCount(int count, String shown);
+
+  /// No description provided for @kidsPlayPlay.
+  ///
+  /// In ar, this message translates to:
+  /// **'العب'**
+  String get kidsPlayPlay;
+
+  /// No description provided for @kidsPlayPairsFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لقيت {found} من {total}'**
+  String kidsPlayPairsFound(String found, String total);
+
+  /// No description provided for @kidsPlayCheer1.
+  ///
+  /// In ar, this message translates to:
+  /// **'حلو!'**
+  String get kidsPlayCheer1;
+
+  /// No description provided for @kidsPlayCheer2.
+  ///
+  /// In ar, this message translates to:
+  /// **'برافو عليك!'**
+  String get kidsPlayCheer2;
+
+  /// No description provided for @kidsPlayCheer3.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسنت!'**
+  String get kidsPlayCheer3;
+
+  /// No description provided for @kidsPlayRetry1.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريب! جرّب مرّة ثانية'**
+  String get kidsPlayRetry1;
+
+  /// No description provided for @kidsPlayRetry2.
+  ///
+  /// In ar, this message translates to:
+  /// **'ولا يهمّك، جرّب غيرها'**
+  String get kidsPlayRetry2;
+
+  /// No description provided for @kidsPlayRetry3.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكّر وين كانت!'**
+  String get kidsPlayRetry3;
+
+  /// No description provided for @kidsPlayCardDown.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقة رقم {n}، مقلوبة'**
+  String kidsPlayCardDown(String n);
+
+  /// No description provided for @kidsPlayCardUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقة رقم {n}: {name}'**
+  String kidsPlayCardUp(String n, String name);
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'فانوس'**
+  String get kidsPlaySymLantern;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'نجمة'**
+  String get kidsPlaySymStar;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'شمس'**
+  String get kidsPlaySymSun;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'قمر'**
+  String get kidsPlaySymMoon;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'شجرة'**
+  String get kidsPlaySymTree;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'وردة'**
+  String get kidsPlaySymFlower;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'قطرة ماء'**
+  String get kidsPlaySymDrop;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'ورقة شجر'**
+  String get kidsPlaySymLeaf;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'قلب'**
+  String get kidsPlaySymHeart;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'غيمة'**
+  String get kidsPlaySymCloud;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'طيّارة ورق'**
+  String get kidsPlaySymKite;
+
+  /// Kids: picture on a memory card (spoken name)
+  ///
+  /// In ar, this message translates to:
+  /// **'جوهرة'**
+  String get kidsPlaySymGem;
+
+  /// No description provided for @kidsPlayWellDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسنت!'**
+  String get kidsPlayWellDone;
+
+  /// No description provided for @kidsPlayNewStar.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصلت على نجمة جديدة!'**
+  String get kidsPlayNewStar;
+
+  /// No description provided for @kidsPlayStarAlreadyToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'لعبتك حلوة! نجمة هالنشاط خدتها اليوم، وبكرا في نجمة جديدة.'**
+  String get kidsPlayStarAlreadyToday;
+
+  /// No description provided for @kidsPlayAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'العب مرّة ثانية'**
+  String get kidsPlayAgain;
+
+  /// No description provided for @kidsPlayDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمام'**
+  String get kidsPlayDone;
+
+  /// Kids: voice stories section title (design 09a)
+  ///
+  /// In ar, this message translates to:
+  /// **'حكايات بصوت الأهل'**
+  String get kidsPlayVoiceTitle;
+
+  /// Kids: interactive story section title (design 09c)
+  ///
+  /// In ar, this message translates to:
+  /// **'قصة تفاعلية'**
+  String get kidsPlayInteractiveTitle;
+
+  /// No description provided for @kidsPlayParentCorner.
+  ///
+  /// In ar, this message translates to:
+  /// **'ركن الأهل'**
+  String get kidsPlayParentCorner;
+
+  /// No description provided for @kidsPlayMyStoriesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حكاياتي بصوتي'**
+  String get kidsPlayMyStoriesTitle;
+
+  /// No description provided for @kidsPlayCornerIntro.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل حكايات لطفلك، وهو بيسمعها بصوتك.'**
+  String get kidsPlayCornerIntro;
+
+  /// No description provided for @kidsPlayCornerPrivacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسجيلات بتضلّ على هالجوال فقط. إذا اجتك مكالمة، التسجيل بيوقف وبيتحفظ اللي سجّلته.'**
+  String get kidsPlayCornerPrivacy;
+
+  /// No description provided for @kidsPlayCornerEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في حكايات لسا'**
+  String get kidsPlayCornerEmptyTitle;
+
+  /// No description provided for @kidsPlayCornerEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط «حكاية جديدة»، اكتب اسمها، وبعدين سجّلها بصوتك. طفلك بيلاقيها في صفحة الحكايات.'**
+  String get kidsPlayCornerEmptyBody;
+
+  /// No description provided for @kidsPlayAddStory.
+  ///
+  /// In ar, this message translates to:
+  /// **'حكاية جديدة'**
+  String get kidsPlayAddStory;
+
+  /// No description provided for @kidsPlayNewStoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حكاية جديدة'**
+  String get kidsPlayNewStoryTitle;
+
+  /// No description provided for @kidsPlayEditStoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الحكاية'**
+  String get kidsPlayEditStoryTitle;
+
+  /// No description provided for @kidsPlayStoryNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الحكاية'**
+  String get kidsPlayStoryNameLabel;
+
+  /// No description provided for @kidsPlayStoryNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلاً: حكاية قبل النوم'**
+  String get kidsPlayStoryNameHint;
+
+  /// No description provided for @kidsPlayNarratorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مين بيحكي؟ (اختياري)'**
+  String get kidsPlayNarratorLabel;
+
+  /// No description provided for @kidsPlayNarratorHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثلاً: بصوت بابا'**
+  String get kidsPlayNarratorHint;
+
+  /// No description provided for @kidsPlayCoverLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون الغلاف'**
+  String get kidsPlayCoverLabel;
+
+  /// No description provided for @kidsPlayCoverColour.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون رقم {n}'**
+  String kidsPlayCoverColour(String n);
+
+  /// No description provided for @kidsPlaySave.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ'**
+  String get kidsPlaySave;
+
+  /// No description provided for @kidsPlayCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get kidsPlayCancel;
+
+  /// No description provided for @kidsPlayDeleteTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدك تحذف «{title}»؟'**
+  String kidsPlayDeleteTitle(String title);
+
+  /// No description provided for @kidsPlayDeleteBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحكاية وتسجيلها بيروحوا من هالجوال.'**
+  String get kidsPlayDeleteBody;
+
+  /// No description provided for @kidsPlayDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف'**
+  String get kidsPlayDelete;
+
+  /// No description provided for @kidsPlayKeep.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّيها'**
+  String get kidsPlayKeep;
+
+  /// No description provided for @kidsPlayRecordingNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد التسجيل'**
+  String get kidsPlayRecordingNow;
+
+  /// No description provided for @kidsPlayEmptyStory.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاضية'**
+  String get kidsPlayEmptyStory;
+
+  /// No description provided for @kidsPlayStopSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقّف واحفظ'**
+  String get kidsPlayStopSave;
+
+  /// No description provided for @kidsPlayDiscard.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألغِ'**
+  String get kidsPlayDiscard;
+
+  /// No description provided for @kidsPlayPlayStory.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّل'**
+  String get kidsPlayPlayStory;
+
+  /// No description provided for @kidsPlayPauseStory.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقّف'**
+  String get kidsPlayPauseStory;
+
+  /// No description provided for @kidsPlayRerecord.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل من جديد'**
+  String get kidsPlayRerecord;
+
+  /// No description provided for @kidsPlayRecordWithVoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل بصوتك'**
+  String get kidsPlayRecordWithVoice;
+
+  /// No description provided for @kidsPlayBackToStories.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع للحكايات'**
+  String get kidsPlayBackToStories;
+
+  /// No description provided for @kidsPlayNoteSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'انحفظ التسجيل.'**
+  String get kidsPlayNoteSaved;
+
+  /// No description provided for @kidsPlayNoteInterruptedKept.
+  ///
+  /// In ar, this message translates to:
+  /// **'اجتك مكالمة، فوقّف التسجيل وانحفظ اللي سجّلته.'**
+  String get kidsPlayNoteInterruptedKept;
+
+  /// No description provided for @kidsPlayNoteInterruptedDiscarded.
+  ///
+  /// In ar, this message translates to:
+  /// **'اجتك مكالمة بعد ثواني قليلة، فما انحفظ شي. سجّل من جديد.'**
+  String get kidsPlayNoteInterruptedDiscarded;
+
+  /// No description provided for @kidsPlayNoteTooShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسجيل كان قصير كتير، فما انحفظ. جرّب مرّة ثانية.'**
+  String get kidsPlayNoteTooShort;
+
+  /// No description provided for @kidsPlayNoteNoMic.
+  ///
+  /// In ar, this message translates to:
+  /// **'المايك مش مسموح. شغّله من إعدادات الجوال للتطبيق، وبعدين جرّب.'**
+  String get kidsPlayNoteNoMic;
+
+  /// No description provided for @kidsPlayNoteFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما زبط التسجيل. تأكد إنه في مساحة فاضية على الجوال وجرّب.'**
+  String get kidsPlayNoteFailed;
+
+  /// No description provided for @kidsPlayNoteMaxLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل التسجيل لأطول مدّة، فوقّف وانحفظ.'**
+  String get kidsPlayNoteMaxLength;
+
+  /// No description provided for @kidsPlayPrevious.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحكاية السابقة'**
+  String get kidsPlayPrevious;
+
+  /// No description provided for @kidsPlayNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحكاية التالية'**
+  String get kidsPlayNext;
+
+  /// No description provided for @kidsPlayStoryByLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حكاية: {title}'**
+  String kidsPlayStoryByLabel(String title);
+
+  /// No description provided for @kidsPlayStoryRowLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'{title}، {minutes}'**
+  String kidsPlayStoryRowLabel(String title, String minutes);
+
+  /// No description provided for @kidsPlayCannotPlay.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قدرنا نشغّل هالحكاية. اطلب من الأهل يسجّلوها من جديد.'**
+  String get kidsPlayCannotPlay;
+
+  /// No description provided for @kidsPlayVoiceEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في حكايات لسا'**
+  String get kidsPlayVoiceEmptyTitle;
+
+  /// No description provided for @kidsPlayVoiceEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما ماما أو بابا يسجّلوا حكاية بصوتهم، بتلاقيها هون وبتسمعها بدون إنترنت.'**
+  String get kidsPlayVoiceEmptyBody;
+
+  /// Kids: length of a story
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة وحدة} =2{دقيقتين} few{{shown} دقايق} many{{shown} دقيقة} other{{shown} دقيقة}}'**
+  String kidsPlayMinutes(int count, String shown);
+
+  /// No description provided for @kidsPlayStoryStageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشهد القصة'**
+  String get kidsPlayStoryStageLabel;
+
+  /// No description provided for @kidsPlaySayWord.
+  ///
+  /// In ar, this message translates to:
+  /// **'قُل: {word}!'**
+  String kidsPlaySayWord(String word);
+
+  /// No description provided for @kidsPlayMicOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'المايك مش شغّال هلأ، بس بتقدر تكمّل بالزر.'**
+  String get kidsPlayMicOff;
+
+  /// No description provided for @kidsPlayParentMic.
+  ///
+  /// In ar, this message translates to:
+  /// **'للأهل: شغّل المايك'**
+  String get kidsPlayParentMic;
+
+  /// No description provided for @kidsPlaySkipSay.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بقدر أحكي هلأ'**
+  String get kidsPlaySkipSay;
+
+  /// No description provided for @kidsPlayReplayBeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'عيد المشهد'**
+  String get kidsPlayReplayBeat;
+
+  /// No description provided for @kidsPlayNextBeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get kidsPlayNextBeat;
+
+  /// No description provided for @kidsPlayTheEnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'النهاية'**
+  String get kidsPlayTheEnd;
+
+  /// No description provided for @kidsPlayReadAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'القصة من جديد'**
+  String get kidsPlayReadAgain;
+
+  /// No description provided for @kidsPlayBeatOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'المشهد {n} من {total}'**
+  String kidsPlayBeatOf(String n, String total);
+
   /// Title of the kids-mode card at the top of Settings
   ///
   /// In ar, this message translates to:

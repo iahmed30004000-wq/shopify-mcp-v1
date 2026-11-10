@@ -150,8 +150,8 @@ class KidsEndScreen extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.nightlight_round, color: KidsColors.sun100, size: 140),
-                      const SizedBox(height: 24),
+                      Icon(Icons.nightlight_round, color: KidsColors.sun100, size: (box.maxHeight * 0.16).clamp(56.0, 140.0)),
+                      SizedBox(height: box.maxHeight < 640 ? 8 : 24),
                       Text(
                         l.kidsShellEndTitle,
                         textAlign: TextAlign.center,
@@ -163,7 +163,7 @@ class KidsEndScreen extends ConsumerWidget {
                         textAlign: TextAlign.center,
                         style: KidsText.text(KidsColors.night100, size: 20),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: box.maxHeight < 640 ? 10 : 20),
                       DecoratedBox(
                         decoration: BoxDecoration(
                           color: const Color(0x22FFFFFF),
@@ -187,7 +187,7 @@ class KidsEndScreen extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: box.maxHeight < 640 ? 12 : 24),
                       KidsBigButton(
                         key: const ValueKey('kids-end-ok'),
                         label: l.kidsShellEndOk,

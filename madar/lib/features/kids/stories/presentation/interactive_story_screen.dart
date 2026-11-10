@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,7 +74,11 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
     }
     if (!_started) {
       _started = true;
-      _startBeat();
+      // After the first frame: a still (reduced-motion) beat finishes at once,
+      // and that must not happen while the tree is being built.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _startBeat();
+      });
     }
   }
 
@@ -171,11 +176,15 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
   Future<void> _stopListening() async {
     if (!_listening) return;
     _listening = false;
-    await _levelSub?.cancel();
+    final meter = ref.read(soundMeterProvider);
+    final sub = _levelSub;
     _levelSub = null;
-    _level.value = 0;
+    // Not awaited: the subscription is gone either way, and the microphone is
+    // what must be stopped.
+    unawaited(sub?.cancel());
+    if (mounted) _level.value = 0;
     try {
-      await ref.read(soundMeterProvider).stop();
+      await meter.stop();
     } on Object {
       // The meter is disposed with the screen anyway.
     }
@@ -258,7 +267,7 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
               ),
             ),
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.58),
+              constraints: BoxConstraints(maxHeight: height * 0.62),
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
@@ -267,9 +276,9 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
                 ),
                 child: SafeArea(
                   top: false,
-                  child: SingleChildScrollView(
+                  child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                    child: _runner.isFinished ? _finished(l) : _panel(l, lang, beat),
+                    child: _runner.isFinished ? SingleChildScrollView(child: _finished(l)) : _panel(l, lang, beat),
                   ),
                 ),
               ),
@@ -280,6 +289,8 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
     );
   }
 
+  /// The words scroll if they are long; the buttons stay where the child's
+  /// thumb expects them.
   Widget _panel(L10n l, String lang, StoryBeat beat) {
     final say = beat.say;
     final asking = _runner.isAskingToSay && say != null;
@@ -287,22 +298,33 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          beat.narration.of(lang),
-          textAlign: TextAlign.center,
-          style: KidsText.body.copyWith(fontSize: 21, height: 1.7),
+        Flexible(
+          child: SingleChildScrollView(
+            child: Text(
+              beat.narration.of(lang),
+              textAlign: TextAlign.center,
+              style: KidsText.body.copyWith(fontSize: 21, height: 1.7),
+            ),
+          ),
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 12),
         if (asking) ...[
-          Center(child: _MicOrb(level: _level, listening: _listening && _mic == _Mic.ready)),
-          const SizedBox(height: 8),
-          Text(
-            l.kidsPlaySayWord(say.word.of(lang)),
-            textAlign: TextAlign.center,
-            style: KidsText.display.copyWith(color: KidsColors.rose700),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _MicOrb(level: _level, listening: _listening && _mic == _Mic.ready),
+              const SizedBox(width: 10),
+              Flexible(
+                child: Text(
+                  l.kidsPlaySayWord(say.word.of(lang)),
+                  textAlign: TextAlign.center,
+                  style: KidsText.display.copyWith(color: KidsColors.rose700),
+                ),
+              ),
+            ],
           ),
           if (_mic == _Mic.unavailable) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(l.kidsPlayMicOff, textAlign: TextAlign.center, style: KidsText.small),
             TextButton.icon(
               style: TextButton.styleFrom(minimumSize: const Size(64, 64), foregroundColor: KidsColors.night700),
@@ -311,8 +333,13 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
               label: Text(l.kidsPlayParentMic, style: KidsText.small.copyWith(fontWeight: FontWeight.w700)),
             ),
           ],
-          const SizedBox(height: 8),
-          BigPlayButton(label: l.kidsPlaySkipSay, background: KidsColors.sand, onPressed: _skip),
+          const SizedBox(height: 4),
+          BigPlayButton(
+            key: const ValueKey('story-skip'),
+            label: l.kidsPlaySkipSay,
+            background: KidsColors.sand,
+            onPressed: _skip,
+          ),
         ] else if (_runner.phase == StoryPhase.readyToContinue)
           Row(
             children: [
@@ -320,6 +347,7 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
               const SizedBox(width: 12),
               Expanded(
                 child: BigPlayButton(
+                  key: const ValueKey('story-next'),
                   label: l.kidsPlayNextBeat,
                   icon: Directionality.of(context) == TextDirection.rtl
                       ? Icons.arrow_back_rounded
@@ -406,22 +434,22 @@ class _MicOrb extends StatelessWidget {
     final reduced = context.reducedMotion;
     return ExcludeSemantics(
       child: SizedBox(
-        width: 120,
-        height: 120,
+        width: 104,
+        height: 104,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ValueListenableBuilder<double>(
               valueListenable: level,
               builder: (context, v, _) => Container(
-                width: 96 + (reduced || !listening ? 0 : v * 22),
-                height: 96 + (reduced || !listening ? 0 : v * 22),
+                width: 84 + (reduced || !listening ? 0 : v * 20),
+                height: 84 + (reduced || !listening ? 0 : v * 20),
                 decoration: BoxDecoration(shape: BoxShape.circle, color: KidsColors.rose300.withValues(alpha: .45)),
               ),
             ),
             Container(
-              width: 88,
-              height: 88,
+              width: 76,
+              height: 76,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: const LinearGradient(
@@ -431,7 +459,7 @@ class _MicOrb extends StatelessWidget {
                 ),
                 border: Border.all(color: Colors.white.withValues(alpha: .6), width: 2),
               ),
-              child: Icon(listening ? Icons.mic_rounded : Icons.mic_off_rounded, size: 44, color: KidsColors.night900),
+              child: Icon(listening ? Icons.mic_rounded : Icons.mic_off_rounded, size: 38, color: KidsColors.night900),
             ),
           ],
         ),

@@ -43,7 +43,10 @@ class LetterQuizEngine {
     } while (target.id == _lastTarget && _letters.length > 1);
     _lastTarget = target.id;
 
-    final forms = [for (final f in LetterForm.values) if (target.hasForm(f)) f];
+    final forms = [
+      for (final f in LetterForm.values)
+        if (target.hasForm(f)) f,
+    ];
     final form = forms[_rng.nextInt(forms.length)];
 
     // Distractors: letters that are not the target. Prefer look-alikes next to

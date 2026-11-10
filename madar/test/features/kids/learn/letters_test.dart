@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -70,7 +68,11 @@ void main() {
         expect(base, isTrue, reason: '${l.id}: $hit');
         // the rest of the highlight is vowel marks only
         for (final u in hit.runes.skip(1)) {
-          expect((u >= 0x064B && u <= 0x0652) || u == 0x0670, isTrue, reason: '${l.id} has a non-mark in its highlight');
+          expect(
+            (u >= 0x064B && u <= 0x0652) || u == 0x0670,
+            isTrue,
+            reason: '${l.id} has a non-mark in its highlight',
+          );
         }
       }
     });

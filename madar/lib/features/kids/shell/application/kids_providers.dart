@@ -135,6 +135,10 @@ class KidsMode extends Notifier<KidsModeState> {
     _commit(state.copyWith(limitMinutes: clamped));
   }
 
+  /// One stepper tap: five minutes more or less (read from the live state, so
+  /// two quick taps are two steps).
+  void stepLimit({required bool up}) => setLimit(ScreenTimeRules.stepped(state.limitMinutes, up: up));
+
   /// Counts [seconds] of foreground play (zero just rolls midnight). Writes
   /// every ten seconds, and at once when the limit is reached or [flush].
   void play(int seconds, {bool flush = false}) {
@@ -210,6 +214,9 @@ class KidsMode extends Notifier<KidsModeState> {
     final lock = ref.read(lockControllerProvider.notifier);
     final record = await lock.load();
     if (record == null || !record.hasPin || !record.biometrics) return false;
+    // The parent may have enrolled a finger since the answer was cached (the
+    // lock host that normally refreshes it is not mounted in kids mode).
+    ref.invalidate(biometricAvailabilityProvider);
     try {
       return await ref.read(biometricAvailabilityProvider.future) == BiometricAvailability.available;
     } catch (_) {

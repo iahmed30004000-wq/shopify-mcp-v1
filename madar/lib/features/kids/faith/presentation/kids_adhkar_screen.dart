@@ -29,14 +29,24 @@ class _KidsAdhkarScreenState extends State<KidsAdhkarScreen> {
     return KidsFaithScaffold(
       title: l.kidsFaithAdhkarTitle,
       background: const BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KP.teal100, KP.paper]),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [KP.teal100, KP.paper],
+        ),
       ),
       child: KidsApprovedItems(
         kinds: const {KidsReligiousKind.dhikr},
         builder: (context, items) {
           final all = kidsItemsOfKind(items, KidsReligiousKind.dhikr);
-          final morning = [for (final i in all) if (i.group == KidsDhikrGroup.morning) i];
-          final evening = [for (final i in all) if (i.group == KidsDhikrGroup.evening) i];
+          final morning = [
+            for (final i in all)
+              if (i.group == KidsDhikrGroup.morning) i,
+          ];
+          final evening = [
+            for (final i in all)
+              if (i.group == KidsDhikrGroup.evening) i,
+          ];
           final tab = _tab ?? (morning.isNotEmpty ? 0 : 1);
           final list = tab == 0 ? morning : evening;
           return Column(
@@ -98,12 +108,28 @@ class _DhikrPage extends StatelessWidget {
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: Text(dhikr.arabicText, textAlign: TextAlign.center, style: const TextStyle(fontFamily: 'Amiri', fontWeight: FontWeight.w700, fontSize: 26, height: 1.8, color: KP.ink)),
+              child: Text(
+                dhikr.arabicText,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontFamily: 'Amiri',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 26,
+                  height: 1.8,
+                  color: KP.ink,
+                ),
+              ),
             ),
           ),
         ),
         const SizedBox(height: 20),
-        BeadCounter(count: count, total: total, onTap: done ? null : onTap, centerLabel: l.kidsFaithBeadsOfTotal(fmt.formatInt(total)), numberText: fmt.formatInt(count)),
+        BeadCounter(
+          count: count,
+          total: total,
+          onTap: done ? null : onTap,
+          centerLabel: l.kidsFaithBeadsOfTotal(fmt.formatInt(total)),
+          numberText: fmt.formatInt(count),
+        ),
         const SizedBox(height: 16),
         Text(
           done ? l.kidsFaithBeadsDone : l.kidsFaithTapCircle,
@@ -118,7 +144,15 @@ class _DhikrPage extends StatelessWidget {
 /// A ring of beads around a big number. Beads fill (gold) as [count] grows;
 /// with more than [maxBeads] to say, each bead stands for several.
 class BeadCounter extends StatelessWidget {
-  const BeadCounter({super.key, required this.count, required this.total, required this.onTap, required this.centerLabel, required this.numberText, this.size = 280});
+  const BeadCounter({
+    super.key,
+    required this.count,
+    required this.total,
+    required this.onTap,
+    required this.centerLabel,
+    required this.numberText,
+    this.size = 280,
+  });
 
   static const int maxBeads = 40;
 
@@ -131,7 +165,8 @@ class BeadCounter extends StatelessWidget {
 
   /// How many beads are drawn, and how many of them are filled.
   static int beadsShown(int total) => math.min(math.max(total, 1), maxBeads);
-  static int beadsFilled(int count, int total) => total <= 0 ? 0 : (count.clamp(0, total) * beadsShown(total) / total).floor();
+  static int beadsFilled(int count, int total) =>
+      total <= 0 ? 0 : (count.clamp(0, total) * beadsShown(total) / total).floor();
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +191,14 @@ class BeadCounter extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(numberText, style: const TextStyle(fontFamily: KP.heading, fontSize: 64, height: 1.1, color: Colors.white)),
-                    Text(centerLabel, style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.sun300)),
+                    Text(
+                      numberText,
+                      style: const TextStyle(fontFamily: KP.heading, fontSize: 64, height: 1.1, color: Colors.white),
+                    ),
+                    Text(
+                      centerLabel,
+                      style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.sun300),
+                    ),
                   ],
                 ),
               ),

@@ -60,7 +60,8 @@ class _Player implements QuranAudio {
   @override
   QuranPlayback get value => QuranPlayback.idle;
   @override
-  Future<void> play(AyahRange range, {int? repeatAyah, int? repeatRange}) async => plays.add((range, repeatAyah, repeatRange));
+  Future<void> play(AyahRange range, {int? repeatAyah, int? repeatRange}) async =>
+      plays.add((range, repeatAyah, repeatRange));
   @override
   Future<void> pause() async {}
   @override
@@ -71,10 +72,19 @@ class _Player implements QuranAudio {
 
 void main() {
   group('even division of the ayah (no per-word timing exists in the Quran feature)', () {
-    int? lit(int words, int ms, int totalMs) => litWordIndex(wordCount: words, elapsed: Duration(milliseconds: ms), duration: Duration(milliseconds: totalMs));
+    int? lit(int words, int ms, int totalMs) => litWordIndex(
+      wordCount: words,
+      elapsed: Duration(milliseconds: ms),
+      duration: Duration(milliseconds: totalMs),
+    );
 
     test('each word gets an equal share and the last word rests', () {
-      expect([for (final ms in [0, 999, 1000, 1999, 2000, 3000, 3999, 4000, 9000]) lit(4, ms, 4000)], [0, 0, 1, 1, 2, 3, 3, 3, 3]);
+      expect(
+        [
+          for (final ms in [0, 999, 1000, 1999, 2000, 3000, 3999, 4000, 9000]) lit(4, ms, 4000),
+        ],
+        [0, 0, 1, 1, 2, 3, 3, 3, 3],
+      );
     });
 
     test('degenerate inputs', () {
@@ -118,17 +128,29 @@ void main() {
   group('local-only sound', () {
     test('nothing downloaded: not on the phone, and play refuses without touching the player', () async {
       final player = _Player();
-      final a = LocalOnlyKidsAudio(files: _Files(missingAyah: {1, 2, 3, 4, 5, 6}), audio: player, reciter: () => Reciters.fallback);
+      final a = LocalOnlyKidsAudio(
+        files: _Files(missingAyah: {1, 2, 3, 4, 5, 6}),
+        audio: player,
+        reciter: () => Reciters.fallback,
+      );
       expect(await a.isSurahOnPhone(114, ayahCount: 6), isFalse);
       expect(await a.play(const AyahRange(AyahRef(114, 1), AyahRef(114, 6))), isFalse);
       expect(player.plays, isEmpty);
     });
 
     test('a missing basmala or a single missing ayah is enough to refuse', () async {
-      final noBasmala = LocalOnlyKidsAudio(files: _Files(basmala: false), audio: _Player(), reciter: () => Reciters.fallback);
+      final noBasmala = LocalOnlyKidsAudio(
+        files: _Files(basmala: false),
+        audio: _Player(),
+        reciter: () => Reciters.fallback,
+      );
       expect(await noBasmala.isSurahOnPhone(114, ayahCount: 6), isFalse);
       final player = _Player();
-      final hole = LocalOnlyKidsAudio(files: _Files(missingAyah: {4}), audio: player, reciter: () => Reciters.fallback);
+      final hole = LocalOnlyKidsAudio(
+        files: _Files(missingAyah: {4}),
+        audio: player,
+        reciter: () => Reciters.fallback,
+      );
       expect(await hole.play(const AyahRange(AyahRef(114, 1), AyahRef(114, 6))), isFalse);
       expect(player.plays, isEmpty);
       // ...but the ayat that ARE on the phone can be replayed on their own.
@@ -156,7 +178,12 @@ void main() {
       audio = FakeKidsAudio();
     });
 
-    Future<void> pump(WidgetTester tester, {bool unlocked = true, List<int> surahs = const [114], bool onPhone = true}) async {
+    Future<void> pump(
+      WidgetTester tester, {
+      bool unlocked = true,
+      List<int> surahs = const [114],
+      bool onPhone = true,
+    }) async {
       tester.view.physicalSize = const Size(360, 780);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
@@ -183,7 +210,9 @@ void main() {
       return ayahWords(QuranTestData.text.ayahText(meta.surah(surah).firstIndex + ayah - 1)).first;
     }
 
-    Finder litWord() => find.byWidgetPredicate((w) => w is Container && w.child is Text && (w.decoration as BoxDecoration?)?.color == KP.sun500);
+    Finder litWord() => find.byWidgetPredicate(
+      (w) => w is Container && w.child is Text && (w.decoration as BoxDecoration?)?.color == KP.sun500,
+    );
 
     String litText(WidgetTester tester) => (tester.widget<Container>(litWord()).child! as Text).data!;
 
@@ -199,7 +228,9 @@ void main() {
       expect(find.text(firstWord(114, 6)), findsWidgets);
     });
 
-    testWidgets('sound not downloaded: calm «الصوت مش محمّل», play is dead, and no network call is ever made', (tester) async {
+    testWidgets('sound not downloaded: calm «الصوت مش محمّل», play is dead, and no network call is ever made', (
+      tester,
+    ) async {
       await pump(tester, onPhone: false);
       expect(find.textContaining('الصوت مش محمّل'), findsOneWidget);
       await tester.tap(find.byIcon(Icons.play_arrow_rounded), warnIfMissed: false);

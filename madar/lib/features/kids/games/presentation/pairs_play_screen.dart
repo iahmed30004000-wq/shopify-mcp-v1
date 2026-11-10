@@ -129,12 +129,7 @@ class _PairsPlayScreenState extends ConsumerState<PairsPlayScreen> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: _Board(
-                      game: _game,
-                      onTap: _tap,
-                      turn: widget.cardTurn,
-                      cardLabel: (i) => _cardLabel(l, i),
-                    ),
+                    child: _Board(game: _game, onTap: _tap, turn: widget.cardTurn, cardLabel: (i) => _cardLabel(l, i)),
                   ),
                 ),
                 SizedBox(
@@ -233,6 +228,7 @@ class _Board extends StatelessWidget {
             excludeSemantics: true,
             onTap: () => onTap(i),
             child: GestureDetector(
+              key: ValueKey('pair-card-$i'),
               behavior: HitTestBehavior.opaque,
               onTap: () => onTap(i),
               child: FlipCard(

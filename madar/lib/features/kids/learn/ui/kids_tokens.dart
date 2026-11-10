@@ -52,6 +52,8 @@ abstract final class KidsType {
     color: color,
     fontWeight: FontWeight.w700,
     fontVariations: const [FontVariation.weight(700)],
+    // Reem Kufi's own word gap is too tight (design section 3).
+    wordSpacing: size * 0.18,
   );
 
   static TextStyle bodyText(double size, {Color color = KidsColors.ink, FontWeight weight = FontWeight.w500}) =>

@@ -34,7 +34,11 @@ class _StoriesScreenState extends State<StoriesScreen> {
         title: l.kidsFaithStoriesTitle,
         dark: true,
         background: const BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KP.night900, KP.night700]),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [KP.night900, KP.night700],
+          ),
         ),
         child: KidsApprovedItems(
           dark: true,
@@ -80,7 +84,12 @@ class _StoryList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Center(child: Text(l.kidsFaithStoryPicker, style: const TextStyle(fontFamily: KP.heading, fontSize: 26, color: Colors.white))),
+        Center(
+          child: Text(
+            l.kidsFaithStoryPicker,
+            style: const TextStyle(fontFamily: KP.heading, fontSize: 26, color: Colors.white),
+          ),
+        ),
         const SizedBox(height: 12),
         for (final e in stories.entries)
           Padding(
@@ -126,14 +135,31 @@ class _StoryPage extends StatelessWidget {
               children: [
                 Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text(l.kidsFaithPageOfTotal(fmt.formatInt(number), fmt.formatInt(total)), style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2)),
+                  child: Text(
+                    l.kidsFaithPageOfTotal(fmt.formatInt(number), fmt.formatInt(total)),
+                    style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2),
+                  ),
                 ),
                 if (page.title != null && page.title!.trim().isNotEmpty) ...[
                   const SizedBox(height: 6),
-                  Text(page.title!, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.heading, fontSize: 28, color: KP.night900)),
+                  Text(
+                    page.title!,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontFamily: KP.heading, fontSize: 28, color: KP.night900),
+                  ),
                 ],
                 const SizedBox(height: 8),
-                Text(page.arabicText, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.body, fontWeight: FontWeight.w500, fontSize: 22, height: 1.7, color: KP.ink)),
+                Text(
+                  page.arabicText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: KP.body,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22,
+                    height: 1.7,
+                    color: KP.ink,
+                  ),
+                ),
               ],
             ),
           ),
@@ -154,7 +180,11 @@ class MannersScreen extends StatelessWidget {
     return KidsFaithScaffold(
       title: l.kidsFaithMannersTitle,
       background: const BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KP.sun100, KP.paper]),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [KP.sun100, KP.paper],
+        ),
       ),
       child: KidsApprovedItems(
         kinds: const {KidsReligiousKind.manner},
@@ -168,13 +198,30 @@ class MannersScreen extends StatelessWidget {
                 children: [
                   if (m.art.isNotEmpty) KidsSceneArt(art: m.art, height: 200, dayTone: true),
                   const SizedBox(height: 12),
-                  Text(l.kidsFaithPageOfTotal(fmt.formatInt(i + 1), fmt.formatInt(manners.length)), style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2)),
+                  Text(
+                    l.kidsFaithPageOfTotal(fmt.formatInt(i + 1), fmt.formatInt(manners.length)),
+                    style: const TextStyle(fontFamily: KP.body, fontSize: 16, color: KP.ink2),
+                  ),
                   if (m.title != null && m.title!.trim().isNotEmpty) ...[
                     const SizedBox(height: 8),
-                    Text(m.title!, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.heading, fontSize: 30, color: KP.night900)),
+                    Text(
+                      m.title!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontFamily: KP.heading, fontSize: 30, color: KP.night900),
+                    ),
                   ],
                   const SizedBox(height: 8),
-                  Text(m.arabicText, textAlign: TextAlign.center, style: const TextStyle(fontFamily: KP.body, fontWeight: FontWeight.w500, fontSize: 22, height: 1.7, color: KP.ink)),
+                  Text(
+                    m.arabicText,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontFamily: KP.body,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 22,
+                      height: 1.7,
+                      color: KP.ink,
+                    ),
+                  ),
                 ],
               );
             },

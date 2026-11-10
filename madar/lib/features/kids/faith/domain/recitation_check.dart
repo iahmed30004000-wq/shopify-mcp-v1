@@ -80,7 +80,5 @@ class KidsRecitationController extends Notifier<KidsRecitationPhase> {
   }
 }
 
-final kidsRecitationControllerProvider =
-    NotifierProvider.autoDispose.family<KidsRecitationController, KidsRecitationPhase, KidsRecitationTarget>(
-      KidsRecitationController.new,
-    );
+final kidsRecitationControllerProvider = NotifierProvider.autoDispose
+    .family<KidsRecitationController, KidsRecitationPhase, KidsRecitationTarget>(KidsRecitationController.new);

@@ -58,7 +58,12 @@ class KidsScenePainter extends CustomPainter {
     final sky = dayTone ? const [KP.teal700, KP.teal500] : const [KP.night900, Color(0xFF6A3F8C)];
     canvas.drawRect(
       Offset.zero & s,
-      Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: sky).createShader(Offset.zero & s),
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: sky,
+        ).createShader(Offset.zero & s),
     );
     bool has(KidsArt a) => art.contains(a);
 
@@ -92,7 +97,12 @@ class KidsScenePainter extends CustomPainter {
         ..close();
       canvas.drawPath(
         p,
-        Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [KP.sun300.withValues(alpha: 0.85), KP.sun300.withValues(alpha: 0)]).createShader(Offset.zero & s),
+        Paint()
+          ..shader = LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [KP.sun300.withValues(alpha: 0.85), KP.sun300.withValues(alpha: 0)],
+          ).createShader(Offset.zero & s),
       );
       canvas.drawCircle(Offset(x, h * 0.12), 22, _f(KP.sun100));
     }
@@ -175,7 +185,10 @@ class KidsScenePainter extends CustomPainter {
       );
     }
     if (has(KidsArt.well)) {
-      canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.4, h * 0.66, w * 0.2, h * 0.14), const Radius.circular(8)), _f(KP.sand2));
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.4, h * 0.66, w * 0.2, h * 0.14), const Radius.circular(8)),
+        _f(KP.sand2),
+      );
       canvas.drawOval(Rect.fromLTWH(w * 0.4, h * 0.62, w * 0.2, h * 0.08), _f(KP.night900));
     }
     if (has(KidsArt.stone)) {
@@ -184,7 +197,14 @@ class KidsScenePainter extends CustomPainter {
     }
     if (has(KidsArt.water)) {
       for (var i = 0; i < 2; i++) {
-        canvas.drawOval(Rect.fromCenter(center: Offset(w / 2, h * (0.86 - i * 0.03)), width: w * (0.62 - i * 0.14), height: 26 - i * 8), _l(KP.teal200, 2));
+        canvas.drawOval(
+          Rect.fromCenter(
+            center: Offset(w / 2, h * (0.86 - i * 0.03)),
+            width: w * (0.62 - i * 0.14),
+            height: 26 - i * 8,
+          ),
+          _l(KP.teal200, 2),
+        );
       }
       final jet = RRect.fromRectAndRadius(Rect.fromLTWH(w / 2 - 12, h * 0.28, 24, h * 0.5), const Radius.circular(12));
       canvas.drawRRect(jet, _f(KP.teal200.withValues(alpha: 0.9)));
@@ -198,7 +218,10 @@ class KidsScenePainter extends CustomPainter {
     if (has(KidsArt.lantern)) {
       final c = Offset(w * 0.86, h * 0.72);
       canvas.drawCircle(c, 34, _f(KP.sun300.withValues(alpha: 0.28)));
-      canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromCenter(center: c, width: 28, height: 42), const Radius.circular(8)), _f(KP.sun500));
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromCenter(center: c, width: 28, height: 42), const Radius.circular(8)),
+        _f(KP.sun500),
+      );
       canvas.drawLine(c + const Offset(0, -21), c + const Offset(0, -32), _l(KP.night900, 3));
       canvas.drawRect(Rect.fromCenter(center: c + const Offset(0, 24), width: 20, height: 6), _f(KP.night900));
     }
@@ -227,7 +250,12 @@ class KidsScenePainter extends CustomPainter {
     for (var i = 0; i < 5; i++) {
       final a = -math.pi * (0.1 + i * 0.2);
       final tip = top + Offset(math.cos(a) * 46, math.sin(a) * 30 + 14);
-      canvas.drawPath(Path()..moveTo(top.dx, top.dy)..quadraticBezierTo(top.dx + math.cos(a) * 26, top.dy - 22, tip.dx, tip.dy), _l(KP.night900, 5));
+      canvas.drawPath(
+        Path()
+          ..moveTo(top.dx, top.dy)
+          ..quadraticBezierTo(top.dx + math.cos(a) * 26, top.dy - 22, tip.dx, tip.dy),
+        _l(KP.night900, 5),
+      );
     }
   }
 

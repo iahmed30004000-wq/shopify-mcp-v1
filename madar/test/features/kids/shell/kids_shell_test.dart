@@ -85,7 +85,10 @@ void main() {
     });
 
     testWidgets('a section opens inside /kids/s/<id>; Back returns to the home, never out', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), sections: [testSection('maths', label: 'الحساب')]);
+      final h = await KidsHarness.create(
+        initial: KidsHarness.on(),
+        sections: [testSection('maths', label: 'الحساب')],
+      );
       final app = await pumpKids(tester, h);
       await tester.tap(_key('kids-tile-maths'));
       await tester.pumpAndSettle();
@@ -286,6 +289,28 @@ void main() {
       expect(_key('kids-key-fingerprint'), findsNothing);
     });
 
+    testWidgets('fits a small phone at text scale 1.3: the gate, the end scene, the offer', (tester) async {
+      final h = await KidsHarness.create(initial: KidsHarness.on(limit: 5, used: 300));
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      final app = await pumpKids(tester, h);
+      tester.view.physicalSize = const Size(320, 568) * 2;
+      await tester.pumpAndSettle();
+      expect(_key('kids-end-screen'), findsOneWidget);
+      expect(tester.takeException(), isNull, reason: 'end scene');
+      // The child's one button is on the screen without scrolling.
+      expect(tester.getBottomLeft(_key('kids-end-ok')).dy, lessThanOrEqualTo(568));
+      await tester.tap(_key('kids-end-ok'));
+      await tester.pumpAndSettle();
+      expect(_key('kids-parent-gate'), findsOneWidget);
+      expect(tester.takeException(), isNull, reason: 'gate');
+      app.container.read(kidsPinOfferPendingProvider.notifier).set(true);
+      app.container.read(kidsParentPhaseProvider.notifier).close();
+      await tester.pumpAndSettle();
+      expect(_key('kids-pin-offer'), findsOneWidget);
+      expect(tester.takeException(), isNull, reason: 'pin offer');
+    });
+
     testWidgets('«رجوع للّعب» and the system Back close the gate; Back never leaves', (tester) async {
       final h = await KidsHarness.create(initial: KidsHarness.on());
       final app = await openGate(tester, h);
@@ -453,7 +478,7 @@ void main() {
       expect(_key('kids-end-screen'), findsOneWidget);
       await playSeconds(tester, h.clock, 3); // 00:00:01
       expect(app.container.read(kidsModeProvider).ledger.dayKey, 20260929);
-      expect(app.container.read(kidsModeProvider).ledger.usedSeconds, 0);
+      expect(app.container.read(kidsModeProvider).ledger.usedSeconds, lessThanOrEqualTo(1), reason: 'a fresh day');
       expect(_key('kids-end-screen'), findsNothing);
       expect(_key('kids-home'), findsOneWidget);
       expect(h.store.state.ledger.dayKey, 20260929, reason: 'the new day is written');

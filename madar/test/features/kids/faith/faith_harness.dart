@@ -34,9 +34,8 @@ class DiskAssetBundle extends AssetBundle {
   }
 
   @override
-  Future<String> loadString(String key, {bool cache = true}) async => utf8.decode(
-    (await load(key)).buffer.asUint8List(),
-  );
+  Future<String> loadString(String key, {bool cache = true}) async =>
+      utf8.decode((await load(key)).buffer.asUint8List());
 }
 
 final DateTime signedOn = DateTime(2026, 11, 1);

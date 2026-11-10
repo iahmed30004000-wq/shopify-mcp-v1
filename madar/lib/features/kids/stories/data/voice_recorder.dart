@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math' as math;
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:record/record.dart';
@@ -55,7 +54,8 @@ class RecordPackageRecorder implements VoiceRecorder {
   );
 
   @override
-  Stream<double> get levels => _rec.onAmplitudeChanged(const Duration(milliseconds: 100)).map((a) => dbToLevel(a.current));
+  Stream<double> get levels =>
+      _rec.onAmplitudeChanged(const Duration(milliseconds: 100)).map((a) => dbToLevel(a.current));
 
   // Nobody pauses the recorder from the app, so a pause is the system taking
   // the audio away.

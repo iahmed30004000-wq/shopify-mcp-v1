@@ -178,6 +178,10 @@ class VoiceRecordingController extends Notifier<RecordingState> {
     state = state.copyWith(elapsed: e);
   }
 
+  /// Runs one timer tick now (tests; no real time passes).
+  @visibleForTesting
+  void debugTick() => _onTick();
+
   /// «وقّف واحفظ».
   Future<void> stopAndSave() => _end();
 

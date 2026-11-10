@@ -52,7 +52,10 @@ void main() {
     });
 
     test('there is no "wrong" outcome at all', () {
-      expect(KidsRecitationPhase.values.map((p) => p.name), unorderedEquals(['idle', 'listening', 'tryAgain', 'wellDone']));
+      expect(
+        KidsRecitationPhase.values.map((p) => p.name),
+        unorderedEquals(['idle', 'listening', 'tryAgain', 'wellDone']),
+      );
     });
 
     test('a low-confidence hearing awards nothing and ends in try-again', () async {
@@ -159,7 +162,9 @@ void main() {
       expect(find.text('أحسنت!'), findsNothing);
 
       // The soft card is amber: its decoration uses the retry colours.
-      final card = tester.widget<DecoratedBox>(find.ancestor(of: find.text('ما سمعت منيح، عيد'), matching: find.byType(DecoratedBox)).first);
+      final card = tester.widget<DecoratedBox>(
+        find.ancestor(of: find.text('ما سمعت منيح، عيد'), matching: find.byType(DecoratedBox)).first,
+      );
       expect((card.decoration as BoxDecoration).color, const Color(0xFFFFEBD0));
     });
 
@@ -183,7 +188,9 @@ void main() {
         faithApp(
           const KidsRecitationScreen(ayahKey: '78:3', ayahText: 'AYAH-TEXT one two'),
           textScale: 1.3,
-          overrides: [kidsRecitationCheckerProvider.overrideWithValue(_Checker([0.1]))],
+          overrides: [
+            kidsRecitationCheckerProvider.overrideWithValue(_Checker([0.1])),
+          ],
         ),
       );
       await tester.tap(find.byIcon(Icons.mic_rounded));

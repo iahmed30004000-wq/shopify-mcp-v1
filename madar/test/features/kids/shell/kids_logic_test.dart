@@ -149,7 +149,14 @@ void main() {
     String? r(bool on, String loc) => kidsModeRedirect(kidsOn: on, location: loc);
 
     test('kids mode on: everything outside /kids goes to /kids', () {
-      for (final loc in ['/', '/settings', '/ledger/wallet/x', '/planet/health?item=a:b', '/meds?tab=meds', '/onboarding']) {
+      for (final loc in [
+        '/',
+        '/settings',
+        '/ledger/wallet/x',
+        '/planet/health?item=a:b',
+        '/meds?tab=meds',
+        '/onboarding',
+      ]) {
         expect(r(true, loc), AppRoutes.kids, reason: loc);
       }
     });

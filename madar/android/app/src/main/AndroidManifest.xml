@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Kids section (lib/features/kids/stories): the parent records stories in their
+         own voice and the interactive story listens for a sound. Audio stays on the
+         phone; nothing is uploaded. (The record plugin declares it too.) -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- Adhan (lib/features/adhan, lib/core/notifications) ======================
          * RECEIVE_BOOT_COMPLETED – flutter_local_notifications re-arms the adhan
