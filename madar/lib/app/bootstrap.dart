@@ -16,6 +16,7 @@ import '../core/sound/soloud_sound_service.dart';
 import '../core/sound/sound_api.dart';
 import '../features/orbit/presentation/orbit_ui_providers.dart' show OrbitWarmUp;
 import 'app.dart';
+import '../features/kids/kids.dart' show kidsOverrides;
 import 'app_preferences.dart';
 import 'app_services.dart';
 import 'licenses.dart';
@@ -76,6 +77,9 @@ Future<void> bootstrap() async {
       ...madarAppOverrides(prefs: prefs, sound: sound, haptics: haptics),
       // System dialogs and pickers the app opens never trip the app lock.
       ...suspendingFlowOverrides(),
+      // «مدار الصغار»: its sections, rewards and the real parent check. Kept out
+      // of madarAppOverrides so the kids tests can bring their own sections.
+      ...kidsOverrides(),
     ],
   );
   runApp(UncontrolledProviderScope(container: container, child: const MadarApp()));

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_test/flutter_test.dart' show Finder, WidgetTester, addTearDown, find;
+import 'package:flutter_test/flutter_test.dart' show Finder, WidgetTester, addTearDown;
 
 import '../rewards/kids_fakes.dart';
 

@@ -14,6 +14,7 @@
 library;
 
 export 'application/kids_actions.dart' show KidsActions, kidsActionsProvider;
+export 'application/kids_parent_check.dart';
 export 'application/kids_providers.dart';
 export 'data/kids_store.dart';
 export 'domain/kids_logic.dart';

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/routing/router.dart' show routerProvider;
+import '../application/kids_parent_check.dart';
 import '../application/kids_providers.dart';
 import '../domain/kids_logic.dart';
 import 'kids_overlays.dart';
@@ -89,6 +90,11 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
   }
 
   Future<bool> _onBack() async {
+    if (ref.read(kidsParentCheckProvider) != null) {
+      // A section's «are you the parent?» is open: Back answers no.
+      ref.read(kidsParentCheckProvider.notifier).answer(passed: false);
+      return true;
+    }
     final phase = ref.read(kidsParentPhaseProvider);
     final flow = ref.read(kidsParentPhaseProvider.notifier);
     if (phase != KidsParentPhase.none) {
@@ -131,7 +137,8 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
     final offer = ref.watch(kidsPinOfferPendingProvider);
     final status = ref.watch(kidsTimeProvider.select((t) => t.status));
     final ended = status == ScreenTimeStatus.ended;
-    final covered = offer || ended || phase != KidsParentPhase.none;
+    final check = ref.watch(kidsParentCheckProvider);
+    final covered = offer || ended || check != null || phase != KidsParentPhase.none;
 
     return BackButtonListener(
       onBackButtonPressed: _onBack,
@@ -149,6 +156,12 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
             if (offer) const KidsPinOffer(),
             if (phase == KidsParentPhase.gate) const KidsParentGate(),
             if (phase == KidsParentPhase.corner) const KidsParentCorner(),
+            if (check != null)
+              KidsParentGate(
+                key: const ValueKey('kids-parent-check'),
+                onVerified: () => ref.read(kidsParentCheckProvider.notifier).answer(passed: true),
+                onCancel: () => ref.read(kidsParentCheckProvider.notifier).answer(passed: false),
+              ),
           ],
         ),
       ),

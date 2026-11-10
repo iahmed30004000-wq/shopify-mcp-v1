@@ -14,7 +14,14 @@ import 'kids_palette.dart';
 /// no shaking, no red, nothing that blames a child. Three wrong tries in a row
 /// start a 30-second pause with a gentle message.
 class KidsParentGate extends ConsumerStatefulWidget {
-  const KidsParentGate({super.key});
+  /// [onVerified] / [onCancel] turn the gate into a plain yes/no check that
+  /// leaves kids mode alone (a section asking the parent «are you the parent?»
+  /// to record a story or add a picture). Without them it is the exit gate:
+  /// passing it opens the parent corner.
+  const KidsParentGate({super.key, this.onVerified, this.onCancel});
+
+  final VoidCallback? onVerified;
+  final VoidCallback? onCancel;
 
   @override
   ConsumerState<KidsParentGate> createState() => _KidsParentGateState();
@@ -70,7 +77,11 @@ class _KidsParentGateState extends ConsumerState<KidsParentGate> {
     });
   }
 
-  void _accepted() => ref.read(kidsParentPhaseProvider.notifier).verified();
+  void _accepted() {
+    final verified = widget.onVerified;
+    if (verified != null) return verified();
+    ref.read(kidsParentPhaseProvider.notifier).verified();
+  }
 
   void _apply(GateResult r) {
     switch (r.outcome) {
@@ -214,7 +225,7 @@ class _KidsParentGateState extends ConsumerState<KidsParentGate> {
                         label: l.kidsShellGateBack,
                         icon: Icons.home_rounded,
                         tone: KidsButtonTone.paper,
-                        onPressed: ref.read(kidsParentPhaseProvider.notifier).close,
+                        onPressed: widget.onCancel ?? ref.read(kidsParentPhaseProvider.notifier).close,
                       ),
                     ],
                   ),
