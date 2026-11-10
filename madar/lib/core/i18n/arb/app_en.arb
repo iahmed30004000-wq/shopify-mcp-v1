@@ -23093,6 +23093,199 @@
   "@ncKindMeal": {
     "description": "Notification centre: a meal reminder row's kind"
   },
+  "fastRemTitle": "My fasting",
+  "@fastRemTitle": {
+    "description": "Part 9b: title of the voluntary-fasts screen, its Faith tile and its Settings entry"
+  },
+  "fastRemSubtitle": "Reminders for Mondays, Thursdays, the white days and more – and a log of your fasts",
+  "@fastRemSubtitle": {
+    "description": "Subtitle of the Settings entry"
+  },
+  "fastRemHubHint": "Fasting reminders and your log",
+  "@fastRemHubHint": {
+    "description": "Screen-reader hint of the Faith tool tile"
+  },
+  "fastKindArafah": "Day of Arafah",
+  "fastKindAshura": "Ashura",
+  "fastKindTasua": "Tasu'a",
+  "fastKindTen": "The first days of Dhu al-Hijjah",
+  "fastKindSix": "Six of Shawwal",
+  "fastKindWhite": "The white days",
+  "fastKindMonday": "Monday",
+  "fastKindThursday": "Thursday",
+  "fastKindMuharram": "More fasting in Muharram",
+  "fastKindShaban": "More fasting in Sha'ban",
+  "fastRemNotifTitle": "Fasting reminder · {kind}",
+  "@fastRemNotifTitle": {
+    "description": "Notification title; kind is the name of the fast",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifBody": "Tomorrow, {weekday}, {hijri}: do you intend to fast?",
+  "@fastRemNotifBody": {
+    "description": "Notification body, the night before; hijri is pre-formatted",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifNudgeBody": "Tomorrow, {weekday}, {hijri}: do you want to fast more this month? Will you fast?",
+  "@fastRemNotifNudgeBody": {
+    "description": "Body of the gentle Muharram / Sha'ban nudge",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifAlso": "Also tomorrow: {kinds}",
+  "@fastRemNotifAlso": {
+    "description": "Second line when one day carries several fasts",
+    "placeholders": {
+      "kinds": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifFallback": "We could not work out Isha where you are, so this reminder comes at {time}.",
+  "@fastRemNotifFallback": {
+    "description": "Line shown when Isha is unknown that night; time pre-formatted",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemActionYes": "I intend to",
+  "fastRemActionNo": "No",
+  "fastRemChannelName": "Fasting reminders",
+  "fastRemChannelHint": "A reminder after Isha on the night before a day of fasting",
+  "fastRemFailedTitle": "Your answer was not saved",
+  "fastRemFailedBody": "Open Madar and try again.",
+  "fastRemRunwayTitle": "Renew the fasting reminders",
+  "fastRemRunwayBody": "Open Madar once so the reminders keep coming for the next weeks.",
+  "fastRemSectionUpcoming": "Coming reminders",
+  "fastRemSectionUpcomingHint": "Each reminder reaches you the night before, after Isha",
+  "fastRemUpcomingEmptyBody": "No reminders are coming. Switch on at least one kind below and the coming days appear here.",
+  "fastRemToday": "Today",
+  "fastRemTomorrow": "Tomorrow",
+  "fastRemAnsweredYes": "Intending",
+  "fastRemAnsweredNo": "Skipped",
+  "fastRemAlso": "also {kinds}",
+  "@fastRemAlso": {
+    "placeholders": {
+      "kinds": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemWhenDates": "{weekday} · {gregorian} · {hijri}",
+  "@fastRemWhenDates": {
+    "description": "One upcoming reminder: weekday, Gregorian and Hijri date",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "gregorian": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemSectionLog": "My fasting log",
+  "fastRemSectionLogHint": "The days you fasted, in both calendars",
+  "fastRemLogToday": "Log today's fast",
+  "fastRemLogTodayDone": "Today's fast is logged",
+  "fastRemLogged": "Today's fast was logged",
+  "fastRemLogRemoved": "Day removed from the log",
+  "fastRemLogRemove": "Remove this day from the log",
+  "fastRemLogEmptyTitle": "No fasts logged yet",
+  "fastRemLogEmptyBody": "When you fast, press “Log today's fast” and it appears here, with the month, the year and the six of Shawwal counted.",
+  "fastRemStatMonth": "This Hijri month",
+  "fastRemStatYear": "This Hijri year",
+  "fastRemStatDays": "{count, plural, =0{0 days} =1{1 day} other{{count} days}}",
+  "@fastRemStatDays": {
+    "description": "How many days were fasted",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fastRemSixProgress": "{done} of {goal}",
+  "@fastRemSixProgress": {
+    "description": "Progress of the six of Shawwal; numbers pre-formatted",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemWhiteCounted": "White days on their own",
+  "fastRemConfirmTitle": "You intended to fast – log it",
+  "fastRemConfirmDone": "I fasted",
+  "fastRemConfirmDoneSemantics": "Log that I fasted on {date}",
+  "@fastRemConfirmDoneSemantics": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemSectionSettings": "Reminders",
+  "fastRemSectionSettingsHint": "Switch each group on or off. They repeat every month and every year by themselves.",
+  "fastRemGroupWeekly": "Every week",
+  "fastRemGroupWeeklyHint": "Monday and Thursday, except in Ramadan",
+  "fastRemGroupWhite": "The white days",
+  "fastRemGroupWhiteHint": "The 13th, 14th and 15th of every Hijri month",
+  "fastRemGroupYearly": "Once a year",
+  "fastRemGroupYearlyHint": "Arafah, Tasu'a and Ashura, the first days of Dhu al-Hijjah and the six of Shawwal",
+  "fastRemNudge": "Muharram and Sha'ban nudge",
+  "fastRemNudgeHint": "One gentle reminder at the start of the month – not one every day",
+  "fastRemNeverNote": "There is never a reminder on the two Eids or the days of Tashriq, nor for voluntary fasts in Ramadan.",
+  "fastRemShift": "Hijri day shift",
+  "fastRemShiftNone": "As calculated",
+  "fastRemShiftAhead": "A day ahead",
+  "fastRemShiftBehind": "A day behind",
+  "fastRemShiftOther": "{days} days",
+  "@fastRemShiftOther": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemShiftNote": "The Hijri date is calculated, and Jordan's announcement can differ from it by a day. Example: the calculation puts Arafah on Saturday but it was announced for Friday – choose “A day ahead” and every reminder moves with it. It is the same setting as “Hijri day adjustment” in the prayer settings.",
+  "@fastRemShiftNote": {
+    "description": "Explains the Hijri shift with an example"
+  },
+  "fastRemShiftChanged": "Hijri day shift changed",
+  "fastRemSettingChanged": "Setting changed",
+  "fastRemShawwalStart": "First of the six of Shawwal",
+  "fastRemShawwalStartHint": "Reminders cover six days in a row from this day. The first of Shawwal is Eid, so the earliest is the second.",
+  "fastRemShawwalDay": "{day} Shawwal",
+  "@fastRemShawwalDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
   "aiPlanExportTitle": "Ask an AI",
   "@aiPlanExportTitle": {
     "description": "Data centre tile + sheet title for the AI bridge export"

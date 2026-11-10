@@ -37,8 +37,8 @@ import '../../data/orbit_providers.dart';
 ///   Hifz reviews due ([HifzTodayCard], once there is something to
 ///   memorise); the header's "Index" opens the Quran's front page;
 /// * **tools** – the qibla ([QiblaCard], a still mini astrolabe: no sensor
-///   runs on this page) over a grid of six: the mushaf, Hifz, recitation,
-///   the tasbeeh, the prayer history and the adhan.
+///   runs on this page) over a grid of seven: the mushaf, Hifz, recitation,
+///   the tasbeeh, the prayer history, the adhan and «صيامي» (Part 9b).
 ///
 /// Every part is a [StaggerItem] of the planet page's entrance (each
 /// movement's header rises with its first card), so the hub unfolds in step
@@ -285,7 +285,7 @@ class _CountdownState extends ConsumerState<_Countdown> {
 
 /// The faith tools: a grid of three by two glass tiles, each a brass seal
 /// around its icon over its name – the mushaf, Hifz and recitation, then
-/// the tasbeeh, the prayer history and the adhan. Every tile opens its page
+/// the tasbeeh, the prayer history and the adhan, then «صيامي». Every tile opens its page
 /// with a navigation sound.
 class FaithTools extends StatelessWidget {
   const FaithTools({super.key});
@@ -302,6 +302,8 @@ class FaithTools extends StatelessWidget {
       (Icons.blur_circular_rounded, l.adhkarTasbeehTitle, l.faithHubTasbeehHint, () => FaithNav.tasbeeh(context)),
       (Icons.insights_rounded, l.faithHubHistory, l.faithHubHistoryHint, () => FaithNav.tracker(context, history: true)),
       (Icons.notifications_active_rounded, l.faithHubAdhanTool, l.faithHubAdhanHint, () => FaithNav.adhanSettings(context)),
+      // Part 9b - «صيامي»: the voluntary fasts and their log.
+      (Icons.nightlight_round, l.fastRemTitle, l.fastRemHubHint, () => FaithNav.fasting(context)),
     ];
     final rows = <Widget>[];
     for (var i = 0; i < tools.length; i += columns) {

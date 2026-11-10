@@ -154,7 +154,9 @@ void main() {
     test('the block is 200000-200999 and cannot overlap a known namespace', () {
       expect(FastingNotificationIds.namespace.first, 200000);
       expect(FastingNotificationIds.namespace.last, 200999);
+      expect(NotificationNamespaces.fasting, FastingNotificationIds.namespace);
       for (final ns in NotificationNamespaces.all) {
+        if (ns == NotificationNamespaces.fasting) continue;
         expect(ns.contains(200000) || ns.contains(200999), isFalse, reason: ns.name);
       }
     });

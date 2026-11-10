@@ -39209,6 +39209,450 @@ abstract class L10n {
   /// **'تنبيه وجبة'**
   String get ncKindMeal;
 
+  /// Part 9b: title of the voluntary-fasts screen, its Faith tile and its Settings entry
+  ///
+  /// In ar, this message translates to:
+  /// **'صيامي'**
+  String get fastRemTitle;
+
+  /// Subtitle of the Settings entry
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بصيام الاثنين والخميس والأيام البيض وغيرها، وسجلّ لأيام صيامك'**
+  String get fastRemSubtitle;
+
+  /// Screen-reader hint of the Faith tool tile
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بالصيام وسجلّ أيامك'**
+  String get fastRemHubHint;
+
+  /// No description provided for @fastKindArafah.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم عرفة'**
+  String get fastKindArafah;
+
+  /// No description provided for @fastKindAshura.
+  ///
+  /// In ar, this message translates to:
+  /// **'عاشوراء'**
+  String get fastKindAshura;
+
+  /// No description provided for @fastKindTasua.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاسوعاء'**
+  String get fastKindTasua;
+
+  /// No description provided for @fastKindTen.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام العشر من ذي الحجة'**
+  String get fastKindTen;
+
+  /// No description provided for @fastKindSix.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستّ شوّال'**
+  String get fastKindSix;
+
+  /// No description provided for @fastKindWhite.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام البيض'**
+  String get fastKindWhite;
+
+  /// No description provided for @fastKindMonday.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاثنين'**
+  String get fastKindMonday;
+
+  /// No description provided for @fastKindThursday.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخميس'**
+  String get fastKindThursday;
+
+  /// No description provided for @fastKindMuharram.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإكثار من الصيام في محرّم'**
+  String get fastKindMuharram;
+
+  /// No description provided for @fastKindShaban.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإكثار من الصيام في شعبان'**
+  String get fastKindShaban;
+
+  /// Notification title; kind is the name of the fast
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الصيام · {kind}'**
+  String fastRemNotifTitle(String kind);
+
+  /// Notification body, the night before; hijri is pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'بكرة {weekday}، {hijri}: ناوي تصوم؟'**
+  String fastRemNotifBody(String weekday, String hijri);
+
+  /// Body of the gentle Muharram / Sha'ban nudge
+  ///
+  /// In ar, this message translates to:
+  /// **'بكرة {weekday}، {hijri}: بدك تكثر من الصيام هالشهر؟ ناوي تصوم؟'**
+  String fastRemNotifNudgeBody(String weekday, String hijri);
+
+  /// Second line when one day carries several fasts
+  ///
+  /// In ar, this message translates to:
+  /// **'وبكرة كمان: {kinds}'**
+  String fastRemNotifAlso(String kinds);
+
+  /// Line shown when Isha is unknown that night; time pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'ما عرفنا وقت العشاء عندك، فالتذكير إجا الساعة {time}.'**
+  String fastRemNotifFallback(String time);
+
+  /// No description provided for @fastRemActionYes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناوي'**
+  String get fastRemActionYes;
+
+  /// No description provided for @fastRemActionNo.
+  ///
+  /// In ar, this message translates to:
+  /// **'لأ'**
+  String get fastRemActionNo;
+
+  /// No description provided for @fastRemChannelName.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الصيام'**
+  String get fastRemChannelName;
+
+  /// No description provided for @fastRemChannelHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بعد العشاء بالليلة اللي قبل يوم صيام'**
+  String get fastRemChannelHint;
+
+  /// No description provided for @fastRemFailedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما انحفظ جوابك'**
+  String get fastRemFailedTitle;
+
+  /// No description provided for @fastRemFailedBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مدار وجرّب مرّة ثانية.'**
+  String get fastRemFailedBody;
+
+  /// No description provided for @fastRemRunwayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدّد تذكيرات الصيام'**
+  String get fastRemRunwayTitle;
+
+  /// No description provided for @fastRemRunwayBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح مدار مرّة وحدة عشان تضل التذكيرات شغّالة للأسابيع الجاية.'**
+  String get fastRemRunwayBody;
+
+  /// No description provided for @fastRemSectionUpcoming.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات الجاية'**
+  String get fastRemSectionUpcoming;
+
+  /// No description provided for @fastRemSectionUpcomingHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل تذكير بيجيك الليلة اللي قبل اليوم، بعد العشاء'**
+  String get fastRemSectionUpcomingHint;
+
+  /// No description provided for @fastRemUpcomingEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في تذكيرات جاية. شغّل نوع واحد على الأقل تحت، وبتشوف هون الأيام الجاية.'**
+  String get fastRemUpcomingEmptyBody;
+
+  /// No description provided for @fastRemToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get fastRemToday;
+
+  /// No description provided for @fastRemTomorrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'بكرة'**
+  String get fastRemTomorrow;
+
+  /// No description provided for @fastRemAnsweredYes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ناوي'**
+  String get fastRemAnsweredYes;
+
+  /// No description provided for @fastRemAnsweredNo.
+  ///
+  /// In ar, this message translates to:
+  /// **'لأ'**
+  String get fastRemAnsweredNo;
+
+  /// No description provided for @fastRemAlso.
+  ///
+  /// In ar, this message translates to:
+  /// **'ومعه {kinds}'**
+  String fastRemAlso(String kinds);
+
+  /// One upcoming reminder: weekday, Gregorian and Hijri date
+  ///
+  /// In ar, this message translates to:
+  /// **'{weekday} · {gregorian} · {hijri}'**
+  String fastRemWhenDates(String weekday, String gregorian, String hijri);
+
+  /// No description provided for @fastRemSectionLog.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجلّ صيامي'**
+  String get fastRemSectionLog;
+
+  /// No description provided for @fastRemSectionLogHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام اللي صمتها، بالتاريخ الهجري والميلادي'**
+  String get fastRemSectionLogHint;
+
+  /// No description provided for @fastRemLogToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل صيام اليوم'**
+  String get fastRemLogToday;
+
+  /// No description provided for @fastRemLogTodayDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيام اليوم مسجّل'**
+  String get fastRemLogTodayDone;
+
+  /// No description provided for @fastRemLogged.
+  ///
+  /// In ar, this message translates to:
+  /// **'انسجّل صيام اليوم'**
+  String get fastRemLogged;
+
+  /// No description provided for @fastRemLogRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'انشال اليوم من السجلّ'**
+  String get fastRemLogRemoved;
+
+  /// No description provided for @fastRemLogRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيل هاليوم من السجلّ'**
+  String get fastRemLogRemove;
+
+  /// No description provided for @fastRemLogEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما سجّلت أيّ صيام لسا'**
+  String get fastRemLogEmptyTitle;
+
+  /// No description provided for @fastRemLogEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لما تصوم اضغط «سجّل صيام اليوم»، وبيظهر هون مع عدّ الشهر والسنة وستّ شوّال.'**
+  String get fastRemLogEmptyBody;
+
+  /// No description provided for @fastRemStatMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'هالشهر الهجري'**
+  String get fastRemStatMonth;
+
+  /// No description provided for @fastRemStatYear.
+  ///
+  /// In ar, this message translates to:
+  /// **'هالسنة الهجرية'**
+  String get fastRemStatYear;
+
+  /// How many days were fasted
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا أيام} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String fastRemStatDays(int count);
+
+  /// Progress of the six of Shawwal; numbers pre-formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'{done} من {goal}'**
+  String fastRemSixProgress(String done, String goal);
+
+  /// No description provided for @fastRemWhiteCounted.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام البيض لحالها'**
+  String get fastRemWhiteCounted;
+
+  /// No description provided for @fastRemConfirmTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نويت تصوم؟ سجّله'**
+  String get fastRemConfirmTitle;
+
+  /// No description provided for @fastRemConfirmDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'صمت'**
+  String get fastRemConfirmDone;
+
+  /// No description provided for @fastRemConfirmDoneSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل إني صمت يوم {date}'**
+  String fastRemConfirmDoneSemantics(String date);
+
+  /// No description provided for @fastRemSectionSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات'**
+  String get fastRemSectionSettings;
+
+  /// No description provided for @fastRemSectionSettingsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّل أو طفّي كل مجموعة. التذكير بيرجع لحاله كل شهر وكل سنة من غير ما تفتح التطبيق.'**
+  String get fastRemSectionSettingsHint;
+
+  /// No description provided for @fastRemGroupWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل أسبوع'**
+  String get fastRemGroupWeekly;
+
+  /// No description provided for @fastRemGroupWeeklyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاثنين والخميس، إلا في رمضان'**
+  String get fastRemGroupWeeklyHint;
+
+  /// No description provided for @fastRemGroupWhite.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأيام البيض'**
+  String get fastRemGroupWhite;
+
+  /// No description provided for @fastRemGroupWhiteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الثالث عشر والرابع عشر والخامس عشر من كل شهر هجري'**
+  String get fastRemGroupWhiteHint;
+
+  /// No description provided for @fastRemGroupYearly.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّة بالسنة'**
+  String get fastRemGroupYearly;
+
+  /// No description provided for @fastRemGroupYearlyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرفة، تاسوعاء وعاشوراء، العشر من ذي الحجة، وستّ شوّال'**
+  String get fastRemGroupYearlyHint;
+
+  /// No description provided for @fastRemNudge.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه محرّم وشعبان'**
+  String get fastRemNudge;
+
+  /// No description provided for @fastRemNudgeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه واحد بأول الشهر يذكّرك تكثر من الصيام، مش كل يوم'**
+  String get fastRemNudgeHint;
+
+  /// No description provided for @fastRemNeverNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في تذكير أبدًا بالعيدين وأيام التشريق، ولا بصيام التطوّع في رمضان.'**
+  String get fastRemNeverNote;
+
+  /// No description provided for @fastRemShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرق التاريخ الهجري'**
+  String get fastRemShift;
+
+  /// No description provided for @fastRemShiftNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل الحساب'**
+  String get fastRemShiftNone;
+
+  /// No description provided for @fastRemShiftAhead.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم قدّام'**
+  String get fastRemShiftAhead;
+
+  /// No description provided for @fastRemShiftBehind.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم ورا'**
+  String get fastRemShiftBehind;
+
+  /// No description provided for @fastRemShiftOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days} يوم'**
+  String fastRemShiftOther(String days);
+
+  /// Explains the Hijri shift with an example
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ الهجري محسوب بالحساب، وأحيانًا إعلان الأردن بيختلف عنه بيوم. مثال: الحساب بيقول عرفة يوم السبت وأعلنوها الجمعة، فاختار «يوم قدّام» وكل التذكيرات بتتحرّك معه. هذا نفس إعداد «تعديل اليوم الهجري» في إعدادات الصلاة.'**
+  String get fastRemShiftNote;
+
+  /// No description provided for @fastRemShiftChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتغيّر فرق التاريخ الهجري'**
+  String get fastRemShiftChanged;
+
+  /// No description provided for @fastRemSettingChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتغيّر الإعداد'**
+  String get fastRemSettingChanged;
+
+  /// No description provided for @fastRemShawwalStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول يوم من ستّ شوّال'**
+  String get fastRemShawwalStart;
+
+  /// No description provided for @fastRemShawwalStartHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكير بيغطّي ستة أيام ورا بعض من هاليوم. أول شوّال عيد، فأبكر يوم هو الثاني.'**
+  String get fastRemShawwalStartHint;
+
+  /// No description provided for @fastRemShawwalDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'{day} شوّال'**
+  String fastRemShawwalDay(String day);
+
   /// Data centre tile + sheet title for the AI bridge export
   ///
   /// In ar, this message translates to:

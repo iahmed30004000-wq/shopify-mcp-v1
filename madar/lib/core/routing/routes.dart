@@ -27,6 +27,10 @@ abstract final class AppRoutes {
   /// «الإقامة»: the call after each adhan, its offsets and its sound.
   static const String iqamaSettings = '/settings/iqama';
 
+  /// «صيامي» (Part 9b): the voluntary fasts - coming reminders, the log of
+  /// the days he fasted, the Hijri shift and the switches.
+  static const String fasting = '/faith/fasting';
+
   /// Settings › Security (app lock: PIN, fingerprint, time-out).
   static const String security = '/settings/security';
 

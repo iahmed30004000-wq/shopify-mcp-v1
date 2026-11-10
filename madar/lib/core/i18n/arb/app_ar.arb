@@ -23093,6 +23093,199 @@
   "@ncKindMeal": {
     "description": "Notification centre: a meal reminder row's kind"
   },
+  "fastRemTitle": "صيامي",
+  "@fastRemTitle": {
+    "description": "Part 9b: title of the voluntary-fasts screen, its Faith tile and its Settings entry"
+  },
+  "fastRemSubtitle": "تذكير بصيام الاثنين والخميس والأيام البيض وغيرها، وسجلّ لأيام صيامك",
+  "@fastRemSubtitle": {
+    "description": "Subtitle of the Settings entry"
+  },
+  "fastRemHubHint": "تذكير بالصيام وسجلّ أيامك",
+  "@fastRemHubHint": {
+    "description": "Screen-reader hint of the Faith tool tile"
+  },
+  "fastKindArafah": "يوم عرفة",
+  "fastKindAshura": "عاشوراء",
+  "fastKindTasua": "تاسوعاء",
+  "fastKindTen": "أيام العشر من ذي الحجة",
+  "fastKindSix": "ستّ شوّال",
+  "fastKindWhite": "الأيام البيض",
+  "fastKindMonday": "الاثنين",
+  "fastKindThursday": "الخميس",
+  "fastKindMuharram": "الإكثار من الصيام في محرّم",
+  "fastKindShaban": "الإكثار من الصيام في شعبان",
+  "fastRemNotifTitle": "تذكير الصيام · {kind}",
+  "@fastRemNotifTitle": {
+    "description": "Notification title; kind is the name of the fast",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifBody": "بكرة {weekday}، {hijri}: ناوي تصوم؟",
+  "@fastRemNotifBody": {
+    "description": "Notification body, the night before; hijri is pre-formatted",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifNudgeBody": "بكرة {weekday}، {hijri}: بدك تكثر من الصيام هالشهر؟ ناوي تصوم؟",
+  "@fastRemNotifNudgeBody": {
+    "description": "Body of the gentle Muharram / Sha'ban nudge",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifAlso": "وبكرة كمان: {kinds}",
+  "@fastRemNotifAlso": {
+    "description": "Second line when one day carries several fasts",
+    "placeholders": {
+      "kinds": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemNotifFallback": "ما عرفنا وقت العشاء عندك، فالتذكير إجا الساعة {time}.",
+  "@fastRemNotifFallback": {
+    "description": "Line shown when Isha is unknown that night; time pre-formatted",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemActionYes": "ناوي",
+  "fastRemActionNo": "لأ",
+  "fastRemChannelName": "تذكير الصيام",
+  "fastRemChannelHint": "تذكير بعد العشاء بالليلة اللي قبل يوم صيام",
+  "fastRemFailedTitle": "ما انحفظ جوابك",
+  "fastRemFailedBody": "افتح مدار وجرّب مرّة ثانية.",
+  "fastRemRunwayTitle": "جدّد تذكيرات الصيام",
+  "fastRemRunwayBody": "افتح مدار مرّة وحدة عشان تضل التذكيرات شغّالة للأسابيع الجاية.",
+  "fastRemSectionUpcoming": "التذكيرات الجاية",
+  "fastRemSectionUpcomingHint": "كل تذكير بيجيك الليلة اللي قبل اليوم، بعد العشاء",
+  "fastRemUpcomingEmptyBody": "ما في تذكيرات جاية. شغّل نوع واحد على الأقل تحت، وبتشوف هون الأيام الجاية.",
+  "fastRemToday": "اليوم",
+  "fastRemTomorrow": "بكرة",
+  "fastRemAnsweredYes": "ناوي",
+  "fastRemAnsweredNo": "لأ",
+  "fastRemAlso": "ومعه {kinds}",
+  "@fastRemAlso": {
+    "placeholders": {
+      "kinds": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemWhenDates": "{weekday} · {gregorian} · {hijri}",
+  "@fastRemWhenDates": {
+    "description": "One upcoming reminder: weekday, Gregorian and Hijri date",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "gregorian": {
+        "type": "String"
+      },
+      "hijri": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemSectionLog": "سجلّ صيامي",
+  "fastRemSectionLogHint": "الأيام اللي صمتها، بالتاريخ الهجري والميلادي",
+  "fastRemLogToday": "سجّل صيام اليوم",
+  "fastRemLogTodayDone": "صيام اليوم مسجّل",
+  "fastRemLogged": "انسجّل صيام اليوم",
+  "fastRemLogRemoved": "انشال اليوم من السجلّ",
+  "fastRemLogRemove": "شيل هاليوم من السجلّ",
+  "fastRemLogEmptyTitle": "ما سجّلت أيّ صيام لسا",
+  "fastRemLogEmptyBody": "لما تصوم اضغط «سجّل صيام اليوم»، وبيظهر هون مع عدّ الشهر والسنة وستّ شوّال.",
+  "fastRemStatMonth": "هالشهر الهجري",
+  "fastRemStatYear": "هالسنة الهجرية",
+  "fastRemStatDays": "{count, plural, =0{لا أيام} =1{يوم واحد} =2{يومان} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}",
+  "@fastRemStatDays": {
+    "description": "How many days were fasted",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fastRemSixProgress": "{done} من {goal}",
+  "@fastRemSixProgress": {
+    "description": "Progress of the six of Shawwal; numbers pre-formatted",
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemWhiteCounted": "الأيام البيض لحالها",
+  "fastRemConfirmTitle": "نويت تصوم؟ سجّله",
+  "fastRemConfirmDone": "صمت",
+  "fastRemConfirmDoneSemantics": "سجّل إني صمت يوم {date}",
+  "@fastRemConfirmDoneSemantics": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemSectionSettings": "التذكيرات",
+  "fastRemSectionSettingsHint": "شغّل أو طفّي كل مجموعة. التذكير بيرجع لحاله كل شهر وكل سنة من غير ما تفتح التطبيق.",
+  "fastRemGroupWeekly": "كل أسبوع",
+  "fastRemGroupWeeklyHint": "الاثنين والخميس، إلا في رمضان",
+  "fastRemGroupWhite": "الأيام البيض",
+  "fastRemGroupWhiteHint": "الثالث عشر والرابع عشر والخامس عشر من كل شهر هجري",
+  "fastRemGroupYearly": "مرّة بالسنة",
+  "fastRemGroupYearlyHint": "عرفة، تاسوعاء وعاشوراء، العشر من ذي الحجة، وستّ شوّال",
+  "fastRemNudge": "تنبيه محرّم وشعبان",
+  "fastRemNudgeHint": "تنبيه واحد بأول الشهر يذكّرك تكثر من الصيام، مش كل يوم",
+  "fastRemNeverNote": "ما في تذكير أبدًا بالعيدين وأيام التشريق، ولا بصيام التطوّع في رمضان.",
+  "fastRemShift": "فرق التاريخ الهجري",
+  "fastRemShiftNone": "مثل الحساب",
+  "fastRemShiftAhead": "يوم قدّام",
+  "fastRemShiftBehind": "يوم ورا",
+  "fastRemShiftOther": "{days} يوم",
+  "@fastRemShiftOther": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "fastRemShiftNote": "التاريخ الهجري محسوب بالحساب، وأحيانًا إعلان الأردن بيختلف عنه بيوم. مثال: الحساب بيقول عرفة يوم السبت وأعلنوها الجمعة، فاختار «يوم قدّام» وكل التذكيرات بتتحرّك معه. هذا نفس إعداد «تعديل اليوم الهجري» في إعدادات الصلاة.",
+  "@fastRemShiftNote": {
+    "description": "Explains the Hijri shift with an example"
+  },
+  "fastRemShiftChanged": "اتغيّر فرق التاريخ الهجري",
+  "fastRemSettingChanged": "اتغيّر الإعداد",
+  "fastRemShawwalStart": "أول يوم من ستّ شوّال",
+  "fastRemShawwalStartHint": "التذكير بيغطّي ستة أيام ورا بعض من هاليوم. أول شوّال عيد، فأبكر يوم هو الثاني.",
+  "fastRemShawwalDay": "{day} شوّال",
+  "@fastRemShawwalDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
   "aiPlanExportTitle": "استشارة ذكاء اصطناعي",
   "@aiPlanExportTitle": {
     "description": "Data centre tile + sheet title for the AI bridge export"

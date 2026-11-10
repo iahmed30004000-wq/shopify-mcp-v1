@@ -25264,6 +25264,275 @@ class L10nAr extends L10n {
   String get ncKindMeal => 'تنبيه وجبة';
 
   @override
+  String get fastRemTitle => 'صيامي';
+
+  @override
+  String get fastRemSubtitle =>
+      'تذكير بصيام الاثنين والخميس والأيام البيض وغيرها، وسجلّ لأيام صيامك';
+
+  @override
+  String get fastRemHubHint => 'تذكير بالصيام وسجلّ أيامك';
+
+  @override
+  String get fastKindArafah => 'يوم عرفة';
+
+  @override
+  String get fastKindAshura => 'عاشوراء';
+
+  @override
+  String get fastKindTasua => 'تاسوعاء';
+
+  @override
+  String get fastKindTen => 'أيام العشر من ذي الحجة';
+
+  @override
+  String get fastKindSix => 'ستّ شوّال';
+
+  @override
+  String get fastKindWhite => 'الأيام البيض';
+
+  @override
+  String get fastKindMonday => 'الاثنين';
+
+  @override
+  String get fastKindThursday => 'الخميس';
+
+  @override
+  String get fastKindMuharram => 'الإكثار من الصيام في محرّم';
+
+  @override
+  String get fastKindShaban => 'الإكثار من الصيام في شعبان';
+
+  @override
+  String fastRemNotifTitle(String kind) {
+    return 'تذكير الصيام · $kind';
+  }
+
+  @override
+  String fastRemNotifBody(String weekday, String hijri) {
+    return 'بكرة $weekday، $hijri: ناوي تصوم؟';
+  }
+
+  @override
+  String fastRemNotifNudgeBody(String weekday, String hijri) {
+    return 'بكرة $weekday، $hijri: بدك تكثر من الصيام هالشهر؟ ناوي تصوم؟';
+  }
+
+  @override
+  String fastRemNotifAlso(String kinds) {
+    return 'وبكرة كمان: $kinds';
+  }
+
+  @override
+  String fastRemNotifFallback(String time) {
+    return 'ما عرفنا وقت العشاء عندك، فالتذكير إجا الساعة $time.';
+  }
+
+  @override
+  String get fastRemActionYes => 'ناوي';
+
+  @override
+  String get fastRemActionNo => 'لأ';
+
+  @override
+  String get fastRemChannelName => 'تذكير الصيام';
+
+  @override
+  String get fastRemChannelHint => 'تذكير بعد العشاء بالليلة اللي قبل يوم صيام';
+
+  @override
+  String get fastRemFailedTitle => 'ما انحفظ جوابك';
+
+  @override
+  String get fastRemFailedBody => 'افتح مدار وجرّب مرّة ثانية.';
+
+  @override
+  String get fastRemRunwayTitle => 'جدّد تذكيرات الصيام';
+
+  @override
+  String get fastRemRunwayBody =>
+      'افتح مدار مرّة وحدة عشان تضل التذكيرات شغّالة للأسابيع الجاية.';
+
+  @override
+  String get fastRemSectionUpcoming => 'التذكيرات الجاية';
+
+  @override
+  String get fastRemSectionUpcomingHint =>
+      'كل تذكير بيجيك الليلة اللي قبل اليوم، بعد العشاء';
+
+  @override
+  String get fastRemUpcomingEmptyBody =>
+      'ما في تذكيرات جاية. شغّل نوع واحد على الأقل تحت، وبتشوف هون الأيام الجاية.';
+
+  @override
+  String get fastRemToday => 'اليوم';
+
+  @override
+  String get fastRemTomorrow => 'بكرة';
+
+  @override
+  String get fastRemAnsweredYes => 'ناوي';
+
+  @override
+  String get fastRemAnsweredNo => 'لأ';
+
+  @override
+  String fastRemAlso(String kinds) {
+    return 'ومعه $kinds';
+  }
+
+  @override
+  String fastRemWhenDates(String weekday, String gregorian, String hijri) {
+    return '$weekday · $gregorian · $hijri';
+  }
+
+  @override
+  String get fastRemSectionLog => 'سجلّ صيامي';
+
+  @override
+  String get fastRemSectionLogHint =>
+      'الأيام اللي صمتها، بالتاريخ الهجري والميلادي';
+
+  @override
+  String get fastRemLogToday => 'سجّل صيام اليوم';
+
+  @override
+  String get fastRemLogTodayDone => 'صيام اليوم مسجّل';
+
+  @override
+  String get fastRemLogged => 'انسجّل صيام اليوم';
+
+  @override
+  String get fastRemLogRemoved => 'انشال اليوم من السجلّ';
+
+  @override
+  String get fastRemLogRemove => 'شيل هاليوم من السجلّ';
+
+  @override
+  String get fastRemLogEmptyTitle => 'ما سجّلت أيّ صيام لسا';
+
+  @override
+  String get fastRemLogEmptyBody =>
+      'لما تصوم اضغط «سجّل صيام اليوم»، وبيظهر هون مع عدّ الشهر والسنة وستّ شوّال.';
+
+  @override
+  String get fastRemStatMonth => 'هالشهر الهجري';
+
+  @override
+  String get fastRemStatYear => 'هالسنة الهجرية';
+
+  @override
+  String fastRemStatDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومان',
+      one: 'يوم واحد',
+      zero: 'لا أيام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String fastRemSixProgress(String done, String goal) {
+    return '$done من $goal';
+  }
+
+  @override
+  String get fastRemWhiteCounted => 'الأيام البيض لحالها';
+
+  @override
+  String get fastRemConfirmTitle => 'نويت تصوم؟ سجّله';
+
+  @override
+  String get fastRemConfirmDone => 'صمت';
+
+  @override
+  String fastRemConfirmDoneSemantics(String date) {
+    return 'سجّل إني صمت يوم $date';
+  }
+
+  @override
+  String get fastRemSectionSettings => 'التذكيرات';
+
+  @override
+  String get fastRemSectionSettingsHint =>
+      'شغّل أو طفّي كل مجموعة. التذكير بيرجع لحاله كل شهر وكل سنة من غير ما تفتح التطبيق.';
+
+  @override
+  String get fastRemGroupWeekly => 'كل أسبوع';
+
+  @override
+  String get fastRemGroupWeeklyHint => 'الاثنين والخميس، إلا في رمضان';
+
+  @override
+  String get fastRemGroupWhite => 'الأيام البيض';
+
+  @override
+  String get fastRemGroupWhiteHint =>
+      'الثالث عشر والرابع عشر والخامس عشر من كل شهر هجري';
+
+  @override
+  String get fastRemGroupYearly => 'مرّة بالسنة';
+
+  @override
+  String get fastRemGroupYearlyHint =>
+      'عرفة، تاسوعاء وعاشوراء، العشر من ذي الحجة، وستّ شوّال';
+
+  @override
+  String get fastRemNudge => 'تنبيه محرّم وشعبان';
+
+  @override
+  String get fastRemNudgeHint =>
+      'تنبيه واحد بأول الشهر يذكّرك تكثر من الصيام، مش كل يوم';
+
+  @override
+  String get fastRemNeverNote =>
+      'ما في تذكير أبدًا بالعيدين وأيام التشريق، ولا بصيام التطوّع في رمضان.';
+
+  @override
+  String get fastRemShift => 'فرق التاريخ الهجري';
+
+  @override
+  String get fastRemShiftNone => 'مثل الحساب';
+
+  @override
+  String get fastRemShiftAhead => 'يوم قدّام';
+
+  @override
+  String get fastRemShiftBehind => 'يوم ورا';
+
+  @override
+  String fastRemShiftOther(String days) {
+    return '$days يوم';
+  }
+
+  @override
+  String get fastRemShiftNote =>
+      'التاريخ الهجري محسوب بالحساب، وأحيانًا إعلان الأردن بيختلف عنه بيوم. مثال: الحساب بيقول عرفة يوم السبت وأعلنوها الجمعة، فاختار «يوم قدّام» وكل التذكيرات بتتحرّك معه. هذا نفس إعداد «تعديل اليوم الهجري» في إعدادات الصلاة.';
+
+  @override
+  String get fastRemShiftChanged => 'اتغيّر فرق التاريخ الهجري';
+
+  @override
+  String get fastRemSettingChanged => 'اتغيّر الإعداد';
+
+  @override
+  String get fastRemShawwalStart => 'أول يوم من ستّ شوّال';
+
+  @override
+  String get fastRemShawwalStartHint =>
+      'التذكير بيغطّي ستة أيام ورا بعض من هاليوم. أول شوّال عيد، فأبكر يوم هو الثاني.';
+
+  @override
+  String fastRemShawwalDay(String day) {
+    return '$day شوّال';
+  }
+
+  @override
   String get aiPlanExportTitle => 'استشارة ذكاء اصطناعي';
 
   @override

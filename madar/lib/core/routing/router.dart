@@ -10,6 +10,7 @@ import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/hifz/hifz.dart' show HifzCard;
 import '../../features/home/home_screen.dart';
 import '../../features/import/import_screen.dart';
+import '../../features/fasting/fasting.dart' show FastingScreen;
 import '../../features/iqama/iqama.dart' show IqamaSettingsScreen;
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/orbit/presentation/planet/planet_route.dart';
@@ -326,6 +327,12 @@ List<RouteBase> madarRoutes() => [
             ),
           ),
         ],
+      ),
+      // Part 9b - «صيامي»: `/faith/fasting`.
+      GoRoute(
+        path: 'faith/fasting',
+        pageBuilder: (context, state) =>
+            MadarTransitions.sharedAxis<void>(context: context, key: state.pageKey, child: const FastingScreen()),
       ),
       GoRoute(
         path: 'wird',

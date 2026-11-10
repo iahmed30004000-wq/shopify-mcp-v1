@@ -123,6 +123,13 @@ class SettingsScreen extends ConsumerWidget {
                     onTap: () => context.go(AppRoutes.iqamaSettings),
                   ),
                   SettingsTile(
+                    icon: Icons.nightlight_round,
+                    title: l.fastRemTitle,
+                    subtitle: l.fastRemSubtitle,
+                    navigates: true,
+                    onTap: () => context.go(AppRoutes.fasting),
+                  ),
+                  SettingsTile(
                     icon: Icons.auto_stories_rounded,
                     iconColor: t.gold,
                     title: l.settingsQuran,

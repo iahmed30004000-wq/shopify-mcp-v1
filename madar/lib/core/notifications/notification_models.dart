@@ -226,7 +226,12 @@ abstract final class NotificationNamespaces {
   /// planned by different syncs and neither may cancel the other's.
   static const hifz = NotificationNamespace('hifz', 190000, 190999);
 
-  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama, hifz];
+  /// «تذكير الصيام» (Part 9b): the night-before reminder of the voluntary
+  /// fasts, with «ناوي» and «لأ» (`FastingNotificationIds`). Its own block,
+  /// and held by the notification gate with the Faith (Prayer) group.
+  static const fasting = NotificationNamespace('fasting', 200000, 200999);
+
+  static const all = [adhan, adhkar, meds, reminders, wird, health, together, iqama, hifz, fasting];
 
   static NotificationNamespace? byName(String name) {
     for (final ns in all) {

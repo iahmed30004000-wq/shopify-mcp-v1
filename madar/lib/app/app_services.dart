@@ -16,6 +16,7 @@ import '../features/saved_games/saved_games.dart' show savedGamesLegacyImportPro
 import '../features/hifz/hifz_plan.dart' show hifzGoalReminderSyncProvider;
 import '../features/wird/wird.dart' show WirdReminderTaps, wirdCompletionSyncProvider, wirdReminderSyncProvider;
 import 'faith_services.dart';
+import 'fasting_services.dart';
 import 'health_services.dart';
 import 'iqama_services.dart';
 import 'life_services.dart';
@@ -95,6 +96,7 @@ class AppNotificationRouter {
     final plan = WirdReminderTaps.planOf(tap);
     if (plan != null) return AppRoutes.wirdOf(plan);
     return iqamaNotificationLocation(tap) ??
+        fastingNotificationLocation(tap) ??
         healthNotificationLocation(tap) ??
         moneyNotificationLocation(tap) ??
         lifeNotificationLocation(tap);
@@ -143,6 +145,9 @@ final appNotificationRouterProvider = Provider<AppNotificationRouter>((ref) {
 ///   taps and answers while its screen is closed, re-arms dropped snoozes
 ///   and registers every namespace's re-plan hook
 ///   ([watchNotificationCenter]);
+/// * «تذكير الصيام» stays planned - the next 21 days, the night before after
+///   Isha - and «ناوي» / «لأ» answered while Madar runs are written
+///   ([watchFastingServices]);
 /// * adhkar reminders stay planned (re-planned on settings, location,
 ///   language and day changes – [adhkarReminderSyncProvider]);
 /// * wird reminders likewise, a week ahead after each plan's prayer
@@ -223,6 +228,9 @@ class _AppServicesState extends ConsumerState<AppServices> with WidgetsBindingOb
     // this line down silently breaks that (notification_order_test).
     watchNotificationCenter(ref);
     watchIqamaServices(ref);
+    // Part 9b - «تذكير الصيام»: right after the centre has loaded the mutes,
+    // like the iqama (one gate; the Prayer group holds it).
+    watchFastingServices(ref);
     ref.watch(adhkarReminderSyncProvider);
     ref.watch(wirdReminderSyncProvider);
     ref.watch(wirdCompletionSyncProvider);

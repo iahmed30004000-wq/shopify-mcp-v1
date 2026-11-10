@@ -24636,6 +24636,272 @@ class L10nEn extends L10n {
   String get ncKindMeal => 'Meal reminder';
 
   @override
+  String get fastRemTitle => 'My fasting';
+
+  @override
+  String get fastRemSubtitle =>
+      'Reminders for Mondays, Thursdays, the white days and more – and a log of your fasts';
+
+  @override
+  String get fastRemHubHint => 'Fasting reminders and your log';
+
+  @override
+  String get fastKindArafah => 'Day of Arafah';
+
+  @override
+  String get fastKindAshura => 'Ashura';
+
+  @override
+  String get fastKindTasua => 'Tasu\'a';
+
+  @override
+  String get fastKindTen => 'The first days of Dhu al-Hijjah';
+
+  @override
+  String get fastKindSix => 'Six of Shawwal';
+
+  @override
+  String get fastKindWhite => 'The white days';
+
+  @override
+  String get fastKindMonday => 'Monday';
+
+  @override
+  String get fastKindThursday => 'Thursday';
+
+  @override
+  String get fastKindMuharram => 'More fasting in Muharram';
+
+  @override
+  String get fastKindShaban => 'More fasting in Sha\'ban';
+
+  @override
+  String fastRemNotifTitle(String kind) {
+    return 'Fasting reminder · $kind';
+  }
+
+  @override
+  String fastRemNotifBody(String weekday, String hijri) {
+    return 'Tomorrow, $weekday, $hijri: do you intend to fast?';
+  }
+
+  @override
+  String fastRemNotifNudgeBody(String weekday, String hijri) {
+    return 'Tomorrow, $weekday, $hijri: do you want to fast more this month? Will you fast?';
+  }
+
+  @override
+  String fastRemNotifAlso(String kinds) {
+    return 'Also tomorrow: $kinds';
+  }
+
+  @override
+  String fastRemNotifFallback(String time) {
+    return 'We could not work out Isha where you are, so this reminder comes at $time.';
+  }
+
+  @override
+  String get fastRemActionYes => 'I intend to';
+
+  @override
+  String get fastRemActionNo => 'No';
+
+  @override
+  String get fastRemChannelName => 'Fasting reminders';
+
+  @override
+  String get fastRemChannelHint =>
+      'A reminder after Isha on the night before a day of fasting';
+
+  @override
+  String get fastRemFailedTitle => 'Your answer was not saved';
+
+  @override
+  String get fastRemFailedBody => 'Open Madar and try again.';
+
+  @override
+  String get fastRemRunwayTitle => 'Renew the fasting reminders';
+
+  @override
+  String get fastRemRunwayBody =>
+      'Open Madar once so the reminders keep coming for the next weeks.';
+
+  @override
+  String get fastRemSectionUpcoming => 'Coming reminders';
+
+  @override
+  String get fastRemSectionUpcomingHint =>
+      'Each reminder reaches you the night before, after Isha';
+
+  @override
+  String get fastRemUpcomingEmptyBody =>
+      'No reminders are coming. Switch on at least one kind below and the coming days appear here.';
+
+  @override
+  String get fastRemToday => 'Today';
+
+  @override
+  String get fastRemTomorrow => 'Tomorrow';
+
+  @override
+  String get fastRemAnsweredYes => 'Intending';
+
+  @override
+  String get fastRemAnsweredNo => 'Skipped';
+
+  @override
+  String fastRemAlso(String kinds) {
+    return 'also $kinds';
+  }
+
+  @override
+  String fastRemWhenDates(String weekday, String gregorian, String hijri) {
+    return '$weekday · $gregorian · $hijri';
+  }
+
+  @override
+  String get fastRemSectionLog => 'My fasting log';
+
+  @override
+  String get fastRemSectionLogHint => 'The days you fasted, in both calendars';
+
+  @override
+  String get fastRemLogToday => 'Log today\'s fast';
+
+  @override
+  String get fastRemLogTodayDone => 'Today\'s fast is logged';
+
+  @override
+  String get fastRemLogged => 'Today\'s fast was logged';
+
+  @override
+  String get fastRemLogRemoved => 'Day removed from the log';
+
+  @override
+  String get fastRemLogRemove => 'Remove this day from the log';
+
+  @override
+  String get fastRemLogEmptyTitle => 'No fasts logged yet';
+
+  @override
+  String get fastRemLogEmptyBody =>
+      'When you fast, press “Log today\'s fast” and it appears here, with the month, the year and the six of Shawwal counted.';
+
+  @override
+  String get fastRemStatMonth => 'This Hijri month';
+
+  @override
+  String get fastRemStatYear => 'This Hijri year';
+
+  @override
+  String fastRemStatDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+      zero: '0 days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String fastRemSixProgress(String done, String goal) {
+    return '$done of $goal';
+  }
+
+  @override
+  String get fastRemWhiteCounted => 'White days on their own';
+
+  @override
+  String get fastRemConfirmTitle => 'You intended to fast – log it';
+
+  @override
+  String get fastRemConfirmDone => 'I fasted';
+
+  @override
+  String fastRemConfirmDoneSemantics(String date) {
+    return 'Log that I fasted on $date';
+  }
+
+  @override
+  String get fastRemSectionSettings => 'Reminders';
+
+  @override
+  String get fastRemSectionSettingsHint =>
+      'Switch each group on or off. They repeat every month and every year by themselves.';
+
+  @override
+  String get fastRemGroupWeekly => 'Every week';
+
+  @override
+  String get fastRemGroupWeeklyHint => 'Monday and Thursday, except in Ramadan';
+
+  @override
+  String get fastRemGroupWhite => 'The white days';
+
+  @override
+  String get fastRemGroupWhiteHint =>
+      'The 13th, 14th and 15th of every Hijri month';
+
+  @override
+  String get fastRemGroupYearly => 'Once a year';
+
+  @override
+  String get fastRemGroupYearlyHint =>
+      'Arafah, Tasu\'a and Ashura, the first days of Dhu al-Hijjah and the six of Shawwal';
+
+  @override
+  String get fastRemNudge => 'Muharram and Sha\'ban nudge';
+
+  @override
+  String get fastRemNudgeHint =>
+      'One gentle reminder at the start of the month – not one every day';
+
+  @override
+  String get fastRemNeverNote =>
+      'There is never a reminder on the two Eids or the days of Tashriq, nor for voluntary fasts in Ramadan.';
+
+  @override
+  String get fastRemShift => 'Hijri day shift';
+
+  @override
+  String get fastRemShiftNone => 'As calculated';
+
+  @override
+  String get fastRemShiftAhead => 'A day ahead';
+
+  @override
+  String get fastRemShiftBehind => 'A day behind';
+
+  @override
+  String fastRemShiftOther(String days) {
+    return '$days days';
+  }
+
+  @override
+  String get fastRemShiftNote =>
+      'The Hijri date is calculated, and Jordan\'s announcement can differ from it by a day. Example: the calculation puts Arafah on Saturday but it was announced for Friday – choose “A day ahead” and every reminder moves with it. It is the same setting as “Hijri day adjustment” in the prayer settings.';
+
+  @override
+  String get fastRemShiftChanged => 'Hijri day shift changed';
+
+  @override
+  String get fastRemSettingChanged => 'Setting changed';
+
+  @override
+  String get fastRemShawwalStart => 'First of the six of Shawwal';
+
+  @override
+  String get fastRemShawwalStartHint =>
+      'Reminders cover six days in a row from this day. The first of Shawwal is Eid, so the earliest is the second.';
+
+  @override
+  String fastRemShawwalDay(String day) {
+    return '$day Shawwal';
+  }
+
+  @override
   String get aiPlanExportTitle => 'Ask an AI';
 
   @override

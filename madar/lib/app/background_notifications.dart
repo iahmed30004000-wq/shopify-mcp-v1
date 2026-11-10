@@ -6,6 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart' sh
 import '../core/db/database.dart' show MadarDatabase;
 import '../core/db/repositories/repositories.dart' show KeyValueRepository, Repositories;
 import '../core/notifications/notifications.dart';
+import '../features/fasting/fasting.dart' show FastingNotificationTaps, runFastingBackgroundAction;
 import '../features/health/meds/meds.dart'
     show MedsNotificationTaps, openExistingMadarDatabase, runMedsBackgroundAction;
 import '../features/iqama/iqama.dart' show IqamaNotificationTaps, runIqamaBackgroundAction;
@@ -13,8 +14,8 @@ import '../features/notification_center/notification_center.dart'
     show GatedNotificationPlatform, NotificationGate, loadStoredNotificationPolicy;
 
 /// The app's background entry point for notification actions that never
-/// open Madar: a dose's Taken / Snooze / Skip pressed in the shade, and
-/// the iqama's «صلّيت» / «بعد شوي».
+/// open Madar: a dose's Taken / Snooze / Skip pressed in the shade, the
+/// iqama's «صلّيت» / «بعد شوي» and the fasting reminder's «ناوي» / «لأ».
 ///
 /// It is the medication tracker's own handler with one difference, and that
 /// difference is the point: the re-plan runs **through a gate**
@@ -58,6 +59,13 @@ void madarAppNotificationBackgroundTap(NotificationResponse response) {
         beforeSnooze: () => madarBackgroundPolicyInto(seams.beforeReplan),
       ),
     );
+    return;
+  }
+  // «ناوي» / «لأ» of «تذكير الصيام»: one record in `key_values`, written
+  // whatever the policy says; only the rare "not saved" notice is shown, and
+  // it goes through the gate like everything else.
+  if (FastingNotificationTaps.isFasting(tap)) {
+    unawaited(runFastingBackgroundAction(tap, wrapPlatform: seams.wrapPlatform));
   }
 }
 
