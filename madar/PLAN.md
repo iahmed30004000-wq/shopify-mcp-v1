@@ -233,7 +233,7 @@ and the three tests failing on the Work-board-and-gym build), so the current APK
 - **R3 The new shell**: Today, the objective engine, the dock, the wheel, the map, the
   assistant, one settings screen, the old-route redirects. APK.
 - **R4a Faith in the new shape, with Part 9b (the voluntary fasts) and Part 19 (Ramadan)** -
-  Ramadan is the only part with an outside deadline (about 1 February 2027). APK.
+  Ramadan is the only part with an outside deadline (about 8 February 2027). APK.
 - **R4b «صحتي»**: the Health and Body merge, with a data-safe migration of the planet settings
   and the balance history. APK.
 - **R4c «فلوسي» + «شغلي» + «مهامي».** APK.
@@ -1010,9 +1010,9 @@ part ships; the drawings are original work, so they need time rather than a deci
 
 ---
 
-## Part 19 — «رمضان» inside the Faith planet  → its own APK, **before 1 February 2027**
+## Part 19 — «رمضان» inside the Faith planet  → its own APK, **before about 8 February 2027**
 
-Owner, 2026-10-16. **A deadline, not a wish**: Ramadan 1448 begins around **1 February 2027**,
+Owner, 2026-10-16. **A deadline, not a wish**: Ramadan 1448 begins around **8 February 2027** (corrected 2026-11-10: the first plan said 1 February; the Umm al-Qura calendar in the app gives 8 February, and the +/-1 day offset still applies),
 so this must be finished and shipped **before** it, with a device check in the weeks before.
 
 **It turns itself on every year** when Ramadan starts - its own atmosphere on the Faith planet,
@@ -1124,7 +1124,7 @@ so that APK exists. That is finished first, inside the hotfix step, because the 
 ship anything until it is green.
 
 **One conflict flagged rather than silently resolved**: **Part 19 «رمضان» has a real outside
-deadline (about 1 February 2027)** but sits sixth in this order, after four parts that each take
+deadline (about 8 February 2027)** but sits sixth in this order, after four parts that each take
 days. If the earlier parts run long, Ramadan moves up the queue - it is the only part that cannot
 simply be late. Flagged for him; the order above is kept as he set it unless he says otherwise.
 

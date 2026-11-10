@@ -119,6 +119,38 @@ one APK each). This file keeps only the live state and the raw owner feedback.
   content; his approval of the kids design; his approval of a visual reference for «السما».
 - **Nothing new starts before Part 7 ships** - the working rule stands.
 
+## 2026-11-10 - ten agents built ten dark blocks; the hotfix is half answered
+
+The owner said «كمل بس ب 10 ايجنت». The container was new: Flutter 3.47.5 was reinstalled at
+`/opt/sdk/flutter`; the test lanes are in the scratchpad (`ft`, `ftfull`, `az`, `arbgen`, one run at a
+time, flock). Done and pushed (commits 82ff704, bf878c1, cdddf16):
+- The **three failing tests** fixed (84 tests green): search_opener, life_links, and the hifz backup
+  test (now compares with `db.schemaVersion`). The Work-board + gym + chat-privacy APK comes from
+  this push (CI run on cdddf16).
+- **Dark blocks** (pure Dart + tests, NOT wired into the app): `lib/features/fasting` (9b rules),
+  `ramadan` (19), `today` (objective engine + quick-add wheel), `hajj` (offline tawaf/sa'i counter),
+  `guide` (help sheet, coach tour, first-run flow, search), `reading/{domain,data}` (licence-gated
+  catalogue, resumable downloads, positions/highlights/goal), `core/design/islamic_geometry`.
+  Their reports list the exact integration each one needs (routes, tables, notification id blocks:
+  fasting 200000-200999, ramadan 210000-210999).
+- `docs/rebuild/R0_BEFORE.md` (the before-picture, 102 routes, tap counts) and `docs/kids/` (19 design
+  screens; the board was sent to the owner for approval).
+- **Page-turn widget** (`lib/features/reading/presentation/page_turn`) was still being finished by its
+  agent when this was written; it is NOT committed. Check `git status`; analyze showed two issues in its
+  test (`textScale` field, `performSemanticsAction`).
+
+**The astrolabe hotfix is NOT solved**: the dial's lettering code has not changed since 2026-09-28 and
+rendering the first build, APK #15 and the current build through the same fixtures shows the SAME
+writing in all three (countdown in the hub ring, the next prayer's name, the 12/24 numerals, the date
+line under the app name). So nothing that existed was deleted. A guard test was added
+(`test/features/home/dial_writing_test.dart`). What is needed: **a screenshot from the owner's phone**
+(and which writing he means). Suspicion if it only happens on the phone: the countdown is drawn from an
+image through a fragment shader (device-specific). At home size the dial is the `medium` detail level
+(radius < 150 dp), so prayer names for all five and the hour numerals are only drawn when it is bigger;
+raising that is a design choice, not a restore.
+
+**Date correction**: Ramadan 1448 starts about **8 February 2027** (Umm al-Qura), not 1 February.
+
 ## 2026-10-21 - the rebuild is planned, waiting on him (plan only, nothing built)
 
 He asked for a complete rebuild (smooth, step-by-step, an in-app guide, an Islamic-inspired
@@ -167,7 +199,7 @@ three were never identified - a whole-suite run was in flight when work stopped.
    (c) **Part 15** the model on the phone, (d) **Part 16 «مدار الصغار»** with its new additions
    and **a design image to him before any screen is built**; then (e) **Part 17 «كوكب القراءة»**,
    (f) **Part 18 «الحج والعمرة»**, (g) **Part 19 «رمضان»** - which has a real deadline, about
-   **1 February 2027**, and is the only part that cannot be late. The standing religious-content
+   **8 February 2027** (corrected from 1 Feb), and is the only part that cannot be late. The standing religious-content
    rule (source + grading on every hadith and dhikr; the kids' religious material behind a flag
    until the sheikh is named) is at the top of `PLAN.md`.
 5. Then the next part by his order. «الموديل على الجوال» is the next one and is **unblocked
