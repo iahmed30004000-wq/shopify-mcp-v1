@@ -46143,6 +46143,534 @@ abstract class L10n {
   /// **'مجموعات هذا اليوم'**
   String get gymSetsOfLog;
 
+  /// Settings page title (Part 15)
+  ///
+  /// In ar, this message translates to:
+  /// **'الذكاء على الجوال'**
+  String get ondeviceTitle;
+
+  /// No description provided for @ondeviceRowSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموديل بيشتغل عجوالك بلا إنترنت'**
+  String get ondeviceRowSubtitle;
+
+  /// No description provided for @ondeviceSectionPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'شو بيقدر جوالك يشغّل'**
+  String get ondeviceSectionPhone;
+
+  /// No description provided for @ondeviceChecking.
+  ///
+  /// In ar, this message translates to:
+  /// **'عم نفحص جوالك…'**
+  String get ondeviceChecking;
+
+  /// No description provided for @ondeviceRecheck.
+  ///
+  /// In ar, this message translates to:
+  /// **'افحص من جديد'**
+  String get ondeviceRecheck;
+
+  /// No description provided for @ondeviceNeedsMeasure.
+  ///
+  /// In ar, this message translates to:
+  /// **'يلزم قياس على الجوال: لسا ما جرّبنا موديل حقيقي على جوالك، فهاي تقديرات مش أرقام مؤكّدة.'**
+  String get ondeviceNeedsMeasure;
+
+  /// No description provided for @ondeviceThisPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'جوالك هلأ'**
+  String get ondeviceThisPhone;
+
+  /// No description provided for @ondeviceFactAndroid.
+  ///
+  /// In ar, this message translates to:
+  /// **'أندرويد'**
+  String get ondeviceFactAndroid;
+
+  /// No description provided for @ondeviceFactMemory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الذاكرة'**
+  String get ondeviceFactMemory;
+
+  /// No description provided for @ondeviceFactStorage.
+  ///
+  /// In ar, this message translates to:
+  /// **'مساحة فاضية'**
+  String get ondeviceFactStorage;
+
+  /// No description provided for @ondeviceFactHeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'حرارة الجوال'**
+  String get ondeviceFactHeat;
+
+  /// No description provided for @ondeviceFactUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'مش معروف'**
+  String get ondeviceFactUnknown;
+
+  /// No description provided for @ondeviceFactAndroidValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'إصدار {level}'**
+  String ondeviceFactAndroidValue(String level);
+
+  /// No description provided for @ondeviceFactGb.
+  ///
+  /// In ar, this message translates to:
+  /// **'{size} جيجا'**
+  String ondeviceFactGb(String size);
+
+  /// No description provided for @ondeviceFactMemoryValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{free} جيجا فاضية من {total}'**
+  String ondeviceFactMemoryValue(String free, String total);
+
+  /// No description provided for @ondeviceHeatNormal.
+  ///
+  /// In ar, this message translates to:
+  /// **'عادية'**
+  String get ondeviceHeatNormal;
+
+  /// No description provided for @ondeviceHeatWarm.
+  ///
+  /// In ar, this message translates to:
+  /// **'دافية'**
+  String get ondeviceHeatWarm;
+
+  /// No description provided for @ondeviceHeatHot.
+  ///
+  /// In ar, this message translates to:
+  /// **'سخنة'**
+  String get ondeviceHeatHot;
+
+  /// No description provided for @ondeviceReasonAicore.
+  ///
+  /// In ar, this message translates to:
+  /// **'جوالك بيقدر يشغّل الموديل بنفسه عبر نظام أندرويد.'**
+  String get ondeviceReasonAicore;
+
+  /// No description provided for @ondeviceReasonEngine.
+  ///
+  /// In ar, this message translates to:
+  /// **'جوالك بيقدر يشغّل الموديل داخل مدار.'**
+  String get ondeviceReasonEngine;
+
+  /// No description provided for @ondeviceReasonBridge.
+  ///
+  /// In ar, this message translates to:
+  /// **'رح نستعمل الجسر اللي بيعمل نسخ ولصق.'**
+  String get ondeviceReasonBridge;
+
+  /// No description provided for @ondeviceReasonForced.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنت اخترت هالطريقة، وجوالك بيقدر يشغّلها.'**
+  String get ondeviceReasonForced;
+
+  /// No description provided for @ondeviceReasonForcedBlocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'اخترت طريقة جوالك ما بيقدر يشغّلها هلأ، فرجعنا للاختيار التلقائي.'**
+  String get ondeviceReasonForcedBlocked;
+
+  /// No description provided for @ondeviceBlockAicoreUnsupported.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام أندرويد على جوالك ما بيوفّر الموديل الجاهز.'**
+  String get ondeviceBlockAicoreUnsupported;
+
+  /// No description provided for @ondeviceBlockUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قدرنا نتأكد إنّ الميزة موجودة، فما رح نفترض إنها شغّالة.'**
+  String get ondeviceBlockUnknown;
+
+  /// No description provided for @ondeviceBlockChanged.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميزة تغيّرت عن النسخة اللي جرّبناها، فبنتجنّبها لحدّ ما تنفحص من جديد.'**
+  String get ondeviceBlockChanged;
+
+  /// No description provided for @ondeviceBlockEngineUnsupported.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحرّك اللي داخل مدار لسا مش جاهز على جوالك.'**
+  String get ondeviceBlockEngineUnsupported;
+
+  /// No description provided for @ondeviceBlockSdk.
+  ///
+  /// In ar, this message translates to:
+  /// **'أندرويد عندك قديم شوي: بدنا إصدار {need} وعندك {have}.'**
+  String ondeviceBlockSdk(String need, String have);
+
+  /// No description provided for @ondeviceBlockRamTooLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذاكرة الجوال صغيرة: بدنا {need} جيجا وعندك {have} جيجا.'**
+  String ondeviceBlockRamTooLow(String need, String have);
+
+  /// No description provided for @ondeviceBlockRamBusy.
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيقات ثانية ماسكة الذاكرة هلأ: بدنا {need} جيجا فاضية وعندك {have} جيجا.'**
+  String ondeviceBlockRamBusy(String need, String have);
+
+  /// No description provided for @ondeviceBlockStorage.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في مساحة كفاية: بدك {need} جيجا فاضية وعندك {have} جيجا.'**
+  String ondeviceBlockStorage(String need, String have);
+
+  /// No description provided for @ondeviceBlockWeights.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملفات الموديل لسا مش منزّلة على جوالك. نزّلها من القائمة تحت.'**
+  String get ondeviceBlockWeights;
+
+  /// No description provided for @ondeviceBlockBatterySaver.
+  ///
+  /// In ar, this message translates to:
+  /// **'وضع توفير البطارية شغّال، فبنوقّف الموديل عشان ما يستهلك البطارية.'**
+  String get ondeviceBlockBatterySaver;
+
+  /// No description provided for @ondeviceBlockThermal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجوال سخن، بنستنى لحد ما يبرد.'**
+  String get ondeviceBlockThermal;
+
+  /// No description provided for @ondeviceSectionPaths.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطرق التلاتة'**
+  String get ondeviceSectionPaths;
+
+  /// No description provided for @ondevicePathAicore.
+  ///
+  /// In ar, this message translates to:
+  /// **'موديل نظام أندرويد'**
+  String get ondevicePathAicore;
+
+  /// No description provided for @ondevicePathAicoreHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'Gemma بيشتغل عبر نظام أندرويد نفسه، وملفاته مش داخل مدار.'**
+  String get ondevicePathAicoreHint;
+
+  /// No description provided for @ondevicePathEngine.
+  ///
+  /// In ar, this message translates to:
+  /// **'محرّك داخل مدار'**
+  String get ondevicePathEngine;
+
+  /// No description provided for @ondevicePathEngineHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنشغّل الموديل داخل التطبيق، وتنزيل ملفاته اختياري.'**
+  String get ondevicePathEngineHint;
+
+  /// No description provided for @ondevicePathBridge.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجسر (نسخ ولصق)'**
+  String get ondevicePathBridge;
+
+  /// No description provided for @ondevicePathBridgeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتنسخ الطلب لأي تطبيق ذكاء اصطناعي وبترجّع الجواب. بيشتغل عكل الجوالات.'**
+  String get ondevicePathBridgeHint;
+
+  /// No description provided for @ondevicePathActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستعمل هلأ'**
+  String get ondevicePathActive;
+
+  /// No description provided for @ondevicePathPossible.
+  ///
+  /// In ar, this message translates to:
+  /// **'ممكن'**
+  String get ondevicePathPossible;
+
+  /// No description provided for @ondevicePathNotNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'مش ممكن هلأ'**
+  String get ondevicePathNotNow;
+
+  /// No description provided for @ondeviceSectionChoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاختيار'**
+  String get ondeviceSectionChoice;
+
+  /// No description provided for @ondeviceChoiceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي بيختار الأحسن لجوالك. وإذا اخترت طريقة بنستعملها طالما جوالك بيقدر.'**
+  String get ondeviceChoiceHint;
+
+  /// No description provided for @ondeviceChoiceAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get ondeviceChoiceAuto;
+
+  /// No description provided for @ondeviceChoiceAicore.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام أندرويد'**
+  String get ondeviceChoiceAicore;
+
+  /// No description provided for @ondeviceChoiceEngine.
+  ///
+  /// In ar, this message translates to:
+  /// **'داخل مدار'**
+  String get ondeviceChoiceEngine;
+
+  /// No description provided for @ondeviceChoiceBridge.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجسر'**
+  String get ondeviceChoiceBridge;
+
+  /// No description provided for @ondeviceSectionModels.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملفات الموديل (اختياري)'**
+  String get ondeviceSectionModels;
+
+  /// No description provided for @ondeviceModelsNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدار بيشتغل كامل بدون هاي الملفات. التنزيل اختياري وبيطلب بصمتك قبل ما يبدأ.'**
+  String get ondeviceModelsNote;
+
+  /// No description provided for @ondeviceWifiOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنزيل عبر الواي فاي بس'**
+  String get ondeviceWifiOnly;
+
+  /// No description provided for @ondeviceWifiOnlyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما رح ننزّل ملف كبير على باقة الإنترنت.'**
+  String get ondeviceWifiOnlyHint;
+
+  /// No description provided for @ondeviceModelSize.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحجم: {size} جيجا'**
+  String ondeviceModelSize(String size);
+
+  /// No description provided for @ondeviceModelSizeUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحجم لسا مش مؤكّد'**
+  String get ondeviceModelSizeUnknown;
+
+  /// No description provided for @ondeviceModelLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترخيص: {license}'**
+  String ondeviceModelLicense(String license);
+
+  /// No description provided for @ondeviceModelUnverified.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا تجريبي: ما بيتنزّل لحد ما نتأكد من الملف الحقيقي.'**
+  String get ondeviceModelUnverified;
+
+  /// No description provided for @ondeviceModelKindLanguage.
+  ///
+  /// In ar, this message translates to:
+  /// **'موديل لغة'**
+  String get ondeviceModelKindLanguage;
+
+  /// No description provided for @ondeviceModelKindRecitation.
+  ///
+  /// In ar, this message translates to:
+  /// **'موديل تلاوة'**
+  String get ondeviceModelKindRecitation;
+
+  /// No description provided for @ondeviceDownloadWifi.
+  ///
+  /// In ar, this message translates to:
+  /// **'نزّل عبر الواي فاي'**
+  String get ondeviceDownloadWifi;
+
+  /// No description provided for @ondeviceDownload.
+  ///
+  /// In ar, this message translates to:
+  /// **'نزّل'**
+  String get ondeviceDownload;
+
+  /// No description provided for @ondeviceRemove.
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف من الجوال'**
+  String get ondeviceRemove;
+
+  /// No description provided for @ondeviceInstalled.
+  ///
+  /// In ar, this message translates to:
+  /// **'منزّل على جوالك'**
+  String get ondeviceInstalled;
+
+  /// No description provided for @ondeviceDownloading.
+  ///
+  /// In ar, this message translates to:
+  /// **'عم ينزّل: {percent}'**
+  String ondeviceDownloading(String percent);
+
+  /// No description provided for @ondeviceVerifying.
+  ///
+  /// In ar, this message translates to:
+  /// **'عم نتأكد إنّ الملف سليم…'**
+  String get ondeviceVerifying;
+
+  /// No description provided for @ondevicePausedUser.
+  ///
+  /// In ar, this message translates to:
+  /// **'موقّف. اضغط نزّل لتكمّل.'**
+  String get ondevicePausedUser;
+
+  /// No description provided for @ondevicePausedStorage.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقف لأنه ما في مساحة كفاية.'**
+  String get ondevicePausedStorage;
+
+  /// No description provided for @ondevicePausedWifi.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنستنى الواي فاي.'**
+  String get ondevicePausedWifi;
+
+  /// No description provided for @ondevicePausedOffline.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما في إنترنت هلأ.'**
+  String get ondevicePausedOffline;
+
+  /// No description provided for @ondevicePausedLost.
+  ///
+  /// In ar, this message translates to:
+  /// **'انقطع الاتصال. اضغط نزّل لتكمّل.'**
+  String get ondevicePausedLost;
+
+  /// No description provided for @ondeviceFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما كمل التنزيل. جرّب مرة ثانية.'**
+  String get ondeviceFailed;
+
+  /// No description provided for @ondeviceFailedChecksum.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف طلع مش سليم فانحذف. جرّب مرة ثانية.'**
+  String get ondeviceFailedChecksum;
+
+  /// No description provided for @ondeviceRefusedUnverified.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاد الموديل لسا تجريبي وما بيتنزّل.'**
+  String get ondeviceRefusedUnverified;
+
+  /// No description provided for @ondeviceRefusedAuth.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما تأكدنا إنك إنت. فعّل البصمة من الأمان وجرّب.'**
+  String get ondeviceRefusedAuth;
+
+  /// No description provided for @ondeviceRemoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'انحذف الموديل من جوالك'**
+  String get ondeviceRemoved;
+
+  /// No description provided for @ondeviceSectionPrivacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصوصيتك ودينك'**
+  String get ondeviceSectionPrivacy;
+
+  /// No description provided for @ondevicePrivacyLocal.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الطرق اللي بتشتغل عجوالك ما بيطلع أي شي من جوالك. وعلى الجسر إنت اللي بتنسخ وبترسل بإيدك.'**
+  String get ondevicePrivacyLocal;
+
+  /// No description provided for @ondevicePrivacyReligious.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموديل ما بيعطي فتوى ولا حكم شرعي، وما بينقل آية أو حديث من عنده. الآيات والأحاديث بتجي بس من القرآن والأذكار الموثّقة داخل مدار.'**
+  String get ondevicePrivacyReligious;
+
+  /// No description provided for @ondeviceRefusalReligious.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بقدر أجاوب بحكم ديني ولا بآية أو حديث من عندي. للآيات والأحاديث الموثّقة افتح القرآن أو الأذكار داخل مدار.'**
+  String get ondeviceRefusalReligious;
+
+  /// No description provided for @ondeviceRefusalHealth.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بقدر أعطي جرعة ولا تشخيص. مدار بيتابع صحتك بس.'**
+  String get ondeviceRefusalHealth;
+
+  /// No description provided for @ondeviceInputCut.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحادثة طويلة، فاختصرناها: الموديل قرأ آخر الأسطر بس.'**
+  String get ondeviceInputCut;
+
+  /// No description provided for @ondeviceBridgeNotReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموديل مش جاهز، فبنستعمل الجسر.'**
+  String get ondeviceBridgeNotReady;
+
+  /// No description provided for @ondeviceBridgeFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموديل وقف قبل ما يخلّص، فبنستعمل الجسر.'**
+  String get ondeviceBridgeFailed;
+
+  /// No description provided for @ondeviceBridgeMemory.
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيق ثاني أخد الذاكرة، فبنستعمل الجسر.'**
+  String get ondeviceBridgeMemory;
+
+  /// No description provided for @ondeviceBridgeSlow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموديل تأخّر كتير، فبنستعمل الجسر.'**
+  String get ondeviceBridgeSlow;
+
+  /// No description provided for @ondeviceRemoveConfirmTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحذف الموديل؟'**
+  String get ondeviceRemoveConfirmTitle;
+
+  /// No description provided for @ondeviceRemoveConfirmBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتحرّر مساحة عجوالك، وبتقدر تنزّله من جديد بأي وقت.'**
+  String get ondeviceRemoveConfirmBody;
+
   /// Part 19: title of the Ramadan screen, its Faith tile and its Settings entry
   ///
   /// In ar, this message translates to:

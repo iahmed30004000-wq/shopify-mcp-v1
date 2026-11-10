@@ -26960,6 +26960,182 @@
   "gymNoSetsYetHint": "بعد كل مجموعة اضغط «خلّصت المجموعة» وبتنزل هنا",
   "gymLibraryHint": "اضغط على التمرين تشوف صورته وفيديوه وتاريخك فيه",
   "gymSetsOfLog": "مجموعات هذا اليوم",
+  "ondeviceTitle": "الذكاء على الجوال",
+  "@ondeviceTitle": {
+    "description": "Settings page title (Part 15)"
+  },
+  "ondeviceRowSubtitle": "الموديل بيشتغل عجوالك بلا إنترنت",
+  "ondeviceSectionPhone": "شو بيقدر جوالك يشغّل",
+  "ondeviceChecking": "عم نفحص جوالك…",
+  "ondeviceRecheck": "افحص من جديد",
+  "ondeviceNeedsMeasure": "يلزم قياس على الجوال: لسا ما جرّبنا موديل حقيقي على جوالك، فهاي تقديرات مش أرقام مؤكّدة.",
+  "ondeviceThisPhone": "جوالك هلأ",
+  "ondeviceFactAndroid": "أندرويد",
+  "ondeviceFactMemory": "الذاكرة",
+  "ondeviceFactStorage": "مساحة فاضية",
+  "ondeviceFactHeat": "حرارة الجوال",
+  "ondeviceFactUnknown": "مش معروف",
+  "ondeviceFactAndroidValue": "إصدار {level}",
+  "@ondeviceFactAndroidValue": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceFactGb": "{size} جيجا",
+  "@ondeviceFactGb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceFactMemoryValue": "{free} جيجا فاضية من {total}",
+  "@ondeviceFactMemoryValue": {
+    "placeholders": {
+      "free": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceHeatNormal": "عادية",
+  "ondeviceHeatWarm": "دافية",
+  "ondeviceHeatHot": "سخنة",
+  "ondeviceReasonAicore": "جوالك بيقدر يشغّل الموديل بنفسه عبر نظام أندرويد.",
+  "ondeviceReasonEngine": "جوالك بيقدر يشغّل الموديل داخل مدار.",
+  "ondeviceReasonBridge": "رح نستعمل الجسر اللي بيعمل نسخ ولصق.",
+  "ondeviceReasonForced": "إنت اخترت هالطريقة، وجوالك بيقدر يشغّلها.",
+  "ondeviceReasonForcedBlocked": "اخترت طريقة جوالك ما بيقدر يشغّلها هلأ، فرجعنا للاختيار التلقائي.",
+  "ondeviceBlockAicoreUnsupported": "نظام أندرويد على جوالك ما بيوفّر الموديل الجاهز.",
+  "ondeviceBlockUnknown": "ما قدرنا نتأكد إنّ الميزة موجودة، فما رح نفترض إنها شغّالة.",
+  "ondeviceBlockChanged": "الميزة تغيّرت عن النسخة اللي جرّبناها، فبنتجنّبها لحدّ ما تنفحص من جديد.",
+  "ondeviceBlockEngineUnsupported": "المحرّك اللي داخل مدار لسا مش جاهز على جوالك.",
+  "ondeviceBlockSdk": "أندرويد عندك قديم شوي: بدنا إصدار {need} وعندك {have}.",
+  "@ondeviceBlockSdk": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockRamTooLow": "ذاكرة الجوال صغيرة: بدنا {need} جيجا وعندك {have} جيجا.",
+  "@ondeviceBlockRamTooLow": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockRamBusy": "تطبيقات ثانية ماسكة الذاكرة هلأ: بدنا {need} جيجا فاضية وعندك {have} جيجا.",
+  "@ondeviceBlockRamBusy": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockStorage": "ما في مساحة كفاية: بدك {need} جيجا فاضية وعندك {have} جيجا.",
+  "@ondeviceBlockStorage": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockWeights": "ملفات الموديل لسا مش منزّلة على جوالك. نزّلها من القائمة تحت.",
+  "ondeviceBlockBatterySaver": "وضع توفير البطارية شغّال، فبنوقّف الموديل عشان ما يستهلك البطارية.",
+  "ondeviceBlockThermal": "الجوال سخن، بنستنى لحد ما يبرد.",
+  "ondeviceSectionPaths": "الطرق التلاتة",
+  "ondevicePathAicore": "موديل نظام أندرويد",
+  "ondevicePathAicoreHint": "Gemma بيشتغل عبر نظام أندرويد نفسه، وملفاته مش داخل مدار.",
+  "ondevicePathEngine": "محرّك داخل مدار",
+  "ondevicePathEngineHint": "بنشغّل الموديل داخل التطبيق، وتنزيل ملفاته اختياري.",
+  "ondevicePathBridge": "الجسر (نسخ ولصق)",
+  "ondevicePathBridgeHint": "بتنسخ الطلب لأي تطبيق ذكاء اصطناعي وبترجّع الجواب. بيشتغل عكل الجوالات.",
+  "ondevicePathActive": "المستعمل هلأ",
+  "ondevicePathPossible": "ممكن",
+  "ondevicePathNotNow": "مش ممكن هلأ",
+  "ondeviceSectionChoice": "الاختيار",
+  "ondeviceChoiceHint": "تلقائي بيختار الأحسن لجوالك. وإذا اخترت طريقة بنستعملها طالما جوالك بيقدر.",
+  "ondeviceChoiceAuto": "تلقائي",
+  "ondeviceChoiceAicore": "نظام أندرويد",
+  "ondeviceChoiceEngine": "داخل مدار",
+  "ondeviceChoiceBridge": "الجسر",
+  "ondeviceSectionModels": "ملفات الموديل (اختياري)",
+  "ondeviceModelsNote": "مدار بيشتغل كامل بدون هاي الملفات. التنزيل اختياري وبيطلب بصمتك قبل ما يبدأ.",
+  "ondeviceWifiOnly": "التنزيل عبر الواي فاي بس",
+  "ondeviceWifiOnlyHint": "ما رح ننزّل ملف كبير على باقة الإنترنت.",
+  "ondeviceModelSize": "الحجم: {size} جيجا",
+  "@ondeviceModelSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceModelSizeUnknown": "الحجم لسا مش مؤكّد",
+  "ondeviceModelLicense": "الترخيص: {license}",
+  "@ondeviceModelLicense": {
+    "placeholders": {
+      "license": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceModelUnverified": "لسا تجريبي: ما بيتنزّل لحد ما نتأكد من الملف الحقيقي.",
+  "ondeviceModelKindLanguage": "موديل لغة",
+  "ondeviceModelKindRecitation": "موديل تلاوة",
+  "ondeviceDownloadWifi": "نزّل عبر الواي فاي",
+  "ondeviceDownload": "نزّل",
+  "ondeviceRemove": "احذف من الجوال",
+  "ondeviceInstalled": "منزّل على جوالك",
+  "ondeviceDownloading": "عم ينزّل: {percent}",
+  "@ondeviceDownloading": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceVerifying": "عم نتأكد إنّ الملف سليم…",
+  "ondevicePausedUser": "موقّف. اضغط نزّل لتكمّل.",
+  "ondevicePausedStorage": "وقف لأنه ما في مساحة كفاية.",
+  "ondevicePausedWifi": "بنستنى الواي فاي.",
+  "ondevicePausedOffline": "ما في إنترنت هلأ.",
+  "ondevicePausedLost": "انقطع الاتصال. اضغط نزّل لتكمّل.",
+  "ondeviceFailed": "ما كمل التنزيل. جرّب مرة ثانية.",
+  "ondeviceFailedChecksum": "الملف طلع مش سليم فانحذف. جرّب مرة ثانية.",
+  "ondeviceRefusedUnverified": "هاد الموديل لسا تجريبي وما بيتنزّل.",
+  "ondeviceRefusedAuth": "ما تأكدنا إنك إنت. فعّل البصمة من الأمان وجرّب.",
+  "ondeviceRemoved": "انحذف الموديل من جوالك",
+  "ondeviceSectionPrivacy": "خصوصيتك ودينك",
+  "ondevicePrivacyLocal": "على الطرق اللي بتشتغل عجوالك ما بيطلع أي شي من جوالك. وعلى الجسر إنت اللي بتنسخ وبترسل بإيدك.",
+  "ondevicePrivacyReligious": "الموديل ما بيعطي فتوى ولا حكم شرعي، وما بينقل آية أو حديث من عنده. الآيات والأحاديث بتجي بس من القرآن والأذكار الموثّقة داخل مدار.",
+  "ondeviceRefusalReligious": "ما بقدر أجاوب بحكم ديني ولا بآية أو حديث من عندي. للآيات والأحاديث الموثّقة افتح القرآن أو الأذكار داخل مدار.",
+  "ondeviceRefusalHealth": "ما بقدر أعطي جرعة ولا تشخيص. مدار بيتابع صحتك بس.",
+  "ondeviceInputCut": "المحادثة طويلة، فاختصرناها: الموديل قرأ آخر الأسطر بس.",
+  "ondeviceBridgeNotReady": "الموديل مش جاهز، فبنستعمل الجسر.",
+  "ondeviceBridgeFailed": "الموديل وقف قبل ما يخلّص، فبنستعمل الجسر.",
+  "ondeviceBridgeMemory": "تطبيق ثاني أخد الذاكرة، فبنستعمل الجسر.",
+  "ondeviceBridgeSlow": "الموديل تأخّر كتير، فبنستعمل الجسر.",
+  "ondeviceRemoveConfirmTitle": "تحذف الموديل؟",
+  "ondeviceRemoveConfirmBody": "بتحرّر مساحة عجوالك، وبتقدر تنزّله من جديد بأي وقت.",
   "ramadanTitle": "رمضان",
   "@ramadanTitle": {
     "description": "Part 19: title of the Ramadan screen, its Faith tile and its Settings entry"

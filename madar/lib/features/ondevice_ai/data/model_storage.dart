@@ -18,31 +18,34 @@ import '../../recitation/data/network_probe.dart';
 /// A part is written to a temporary name and renamed, so a crash never leaves
 /// half a part that looks finished.
 class DirectoryModelSink implements ModelFileSink {
-  DirectoryModelSink(this.root);
+  /// [rootDir] is resolved lazily (the app's files directory is an async
+  /// lookup) and once per call, so a test can point it at a temporary folder.
+  DirectoryModelSink(this.rootDir);
 
-  final Directory root;
+  final Future<Directory> Function() rootDir;
 
   /// Model ids contain «/» (`tarteel-ai/whisper-base-ar-quran`): keep one flat,
   /// safe folder name.
   static String safe(String id) => id.replaceAll(RegExp(r'[^A-Za-z0-9._-]'), '_');
 
-  Directory _dir(String id) => Directory(p.join(root.path, safe(id)));
-  File _part(String id, int i) => File(p.join(_dir(id).path, 'part-$i'));
-  File _final(String id) => File(p.join(root.path, '${safe(id)}.bin'));
+  Future<Directory> _dir(String id) async => Directory(p.join((await rootDir()).path, safe(id)));
+  Future<File> _part(String id, int i) async => File(p.join((await _dir(id)).path, 'part-$i'));
+  Future<File> _final(String id) async => File(p.join((await rootDir()).path, '${safe(id)}.bin'));
 
   @override
   Future<int?> partLength(String id, int index) async {
-    final f = _part(id, index);
+    final f = await _part(id, index);
     return await f.exists() ? await f.length() : null;
   }
 
   @override
   Future<void> writePart(String id, int index, Uint8List bytes) async {
-    await _dir(id).create(recursive: true);
-    final tmp = File('${_part(id, index).path}.tmp');
+    await (await _dir(id)).create(recursive: true);
+    final target = await _part(id, index);
+    final tmp = File('${target.path}.tmp');
     try {
       await tmp.writeAsBytes(bytes, flush: true);
-      await tmp.rename(_part(id, index).path);
+      await tmp.rename(target.path);
     } on FileSystemException catch (e) {
       try {
         if (await tmp.exists()) await tmp.delete();
@@ -54,56 +57,63 @@ class DirectoryModelSink implements ModelFileSink {
   }
 
   @override
-  Stream<List<int>> readPart(String id, int index) => _part(id, index).openRead();
+  Stream<List<int>> readPart(String id, int index) async* {
+    yield* (await _part(id, index)).openRead();
+  }
 
   @override
   Future<void> deletePart(String id, int index) async {
-    final f = _part(id, index);
+    final f = await _part(id, index);
     if (await f.exists()) await f.delete();
   }
 
   @override
   Future<String> finalize(String id, int partCount) async {
-    await root.create(recursive: true);
-    final tmp = File('${_final(id).path}.tmp');
+    await (await rootDir()).create(recursive: true);
+    final target = await _final(id);
+    final tmp = File('${target.path}.tmp');
     final out = tmp.openWrite();
     try {
       for (var i = 0; i < partCount; i++) {
-        await out.addStream(_part(id, i).openRead());
+        await out.addStream((await _part(id, i)).openRead());
       }
       await out.flush();
     } finally {
       await out.close();
     }
-    await tmp.rename(_final(id).path);
-    if (await _dir(id).exists()) await _dir(id).delete(recursive: true);
-    return _final(id).path;
+    await tmp.rename(target.path);
+    final dir = await _dir(id);
+    if (await dir.exists()) await dir.delete(recursive: true);
+    return target.path;
   }
 
   @override
   Future<void> discard(String id) async {
-    if (await _dir(id).exists()) await _dir(id).delete(recursive: true);
-    for (final f in [_final(id), File('${_final(id).path}.tmp')]) {
+    final dir = await _dir(id);
+    if (await dir.exists()) await dir.delete(recursive: true);
+    final target = await _final(id);
+    for (final f in [target, File('${target.path}.tmp')]) {
       if (await f.exists()) await f.delete();
     }
   }
 
   @override
-  Future<bool> finalExists(String id) => _final(id).exists();
+  Future<bool> finalExists(String id) async => (await _final(id)).exists();
 }
 
 /// The saved progress, one small JSON file per model.
 class FileDownloadStateStore implements DownloadStateStore {
-  FileDownloadStateStore(this.root);
+  FileDownloadStateStore(this.rootDir);
 
-  final Directory root;
+  final Future<Directory> Function() rootDir;
 
-  File _file(String id) => File(p.join(root.path, '${DirectoryModelSink.safe(id)}.state.json'));
+  Future<File> _file(String id) async =>
+      File(p.join((await rootDir()).path, '${DirectoryModelSink.safe(id)}.state.json'));
 
   @override
   Future<DownloadState?> load(String id) async {
     try {
-      final f = _file(id);
+      final f = await _file(id);
       if (!await f.exists()) return null;
       final json = jsonDecode(await f.readAsString());
       if (json is! Map) return null;
@@ -116,15 +126,16 @@ class FileDownloadStateStore implements DownloadStateStore {
 
   @override
   Future<void> save(DownloadState state) async {
-    await root.create(recursive: true);
-    final tmp = File('${_file(state.id).path}.tmp');
+    await (await rootDir()).create(recursive: true);
+    final target = await _file(state.id);
+    final tmp = File('${target.path}.tmp');
     await tmp.writeAsString(jsonEncode(state.toJson()), flush: true);
-    await tmp.rename(_file(state.id).path);
+    await tmp.rename(target.path);
   }
 
   @override
   Future<void> delete(String id) async {
-    final f = _file(id);
+    final f = await _file(id);
     if (await f.exists()) await f.delete();
   }
 }

@@ -29253,6 +29253,325 @@ class L10nEn extends L10n {
   String get gymSetsOfLog => 'That day\'s sets';
 
   @override
+  String get ondeviceTitle => 'AI on this phone';
+
+  @override
+  String get ondeviceRowSubtitle => 'The model runs on your phone, no internet';
+
+  @override
+  String get ondeviceSectionPhone => 'What this phone can run';
+
+  @override
+  String get ondeviceChecking => 'Checking your phone…';
+
+  @override
+  String get ondeviceRecheck => 'Check again';
+
+  @override
+  String get ondeviceNeedsMeasure =>
+      'Needs measuring on the phone: no real model has been tried on your phone yet, so these are estimates, not confirmed numbers.';
+
+  @override
+  String get ondeviceThisPhone => 'Your phone now';
+
+  @override
+  String get ondeviceFactAndroid => 'Android';
+
+  @override
+  String get ondeviceFactMemory => 'Memory';
+
+  @override
+  String get ondeviceFactStorage => 'Free space';
+
+  @override
+  String get ondeviceFactHeat => 'Phone heat';
+
+  @override
+  String get ondeviceFactUnknown => 'Unknown';
+
+  @override
+  String ondeviceFactAndroidValue(String level) {
+    return 'version $level';
+  }
+
+  @override
+  String ondeviceFactGb(String size) {
+    return '$size GB';
+  }
+
+  @override
+  String ondeviceFactMemoryValue(String free, String total) {
+    return '$free GB free of $total';
+  }
+
+  @override
+  String get ondeviceHeatNormal => 'Normal';
+
+  @override
+  String get ondeviceHeatWarm => 'Warm';
+
+  @override
+  String get ondeviceHeatHot => 'Hot';
+
+  @override
+  String get ondeviceReasonAicore =>
+      'Your phone can run the model by itself through Android.';
+
+  @override
+  String get ondeviceReasonEngine =>
+      'Your phone can run the model inside Madar.';
+
+  @override
+  String get ondeviceReasonBridge =>
+      'We will use the bridge, which works by copy and paste.';
+
+  @override
+  String get ondeviceReasonForced =>
+      'You chose this way, and your phone can run it.';
+
+  @override
+  String get ondeviceReasonForcedBlocked =>
+      'You chose a way this phone cannot run right now, so we went back to automatic.';
+
+  @override
+  String get ondeviceBlockAicoreUnsupported =>
+      'Android on your phone does not offer the built-in model.';
+
+  @override
+  String get ondeviceBlockUnknown =>
+      'We could not confirm the feature is there, so we will not assume it works.';
+
+  @override
+  String get ondeviceBlockChanged =>
+      'The feature changed from the version we tested, so we avoid it until it is checked again.';
+
+  @override
+  String get ondeviceBlockEngineUnsupported =>
+      'The engine inside Madar is not ready on your phone yet.';
+
+  @override
+  String ondeviceBlockSdk(String need, String have) {
+    return 'Your Android is a bit old: it needs version $need and you have $have.';
+  }
+
+  @override
+  String ondeviceBlockRamTooLow(String need, String have) {
+    return 'The phone\'s memory is small: it needs $need GB and you have $have GB.';
+  }
+
+  @override
+  String ondeviceBlockRamBusy(String need, String have) {
+    return 'Other apps are using the memory right now: it needs $need GB free and you have $have GB.';
+  }
+
+  @override
+  String ondeviceBlockStorage(String need, String have) {
+    return 'Not enough space: you need $need GB free and you have $have GB.';
+  }
+
+  @override
+  String get ondeviceBlockWeights =>
+      'The model files are not downloaded yet. Download them from the list below.';
+
+  @override
+  String get ondeviceBlockBatterySaver =>
+      'Battery saver is on, so we keep the model off to save power.';
+
+  @override
+  String get ondeviceBlockThermal =>
+      'The phone is hot, so we wait until it cools down.';
+
+  @override
+  String get ondeviceSectionPaths => 'The three ways';
+
+  @override
+  String get ondevicePathAicore => 'Android\'s own model';
+
+  @override
+  String get ondevicePathAicoreHint =>
+      'Gemma runs through Android itself, and its files are not inside Madar.';
+
+  @override
+  String get ondevicePathEngine => 'Engine inside Madar';
+
+  @override
+  String get ondevicePathEngineHint =>
+      'We run the model inside the app, and downloading its files is optional.';
+
+  @override
+  String get ondevicePathBridge => 'The bridge (copy and paste)';
+
+  @override
+  String get ondevicePathBridgeHint =>
+      'You copy the request to any AI app and bring the answer back. It works on every phone.';
+
+  @override
+  String get ondevicePathActive => 'In use now';
+
+  @override
+  String get ondevicePathPossible => 'Possible';
+
+  @override
+  String get ondevicePathNotNow => 'Not possible now';
+
+  @override
+  String get ondeviceSectionChoice => 'Your choice';
+
+  @override
+  String get ondeviceChoiceHint =>
+      'Automatic picks the best for your phone. If you choose a way, we use it as long as your phone can.';
+
+  @override
+  String get ondeviceChoiceAuto => 'Automatic';
+
+  @override
+  String get ondeviceChoiceAicore => 'Android';
+
+  @override
+  String get ondeviceChoiceEngine => 'In Madar';
+
+  @override
+  String get ondeviceChoiceBridge => 'Bridge';
+
+  @override
+  String get ondeviceSectionModels => 'Model files (optional)';
+
+  @override
+  String get ondeviceModelsNote =>
+      'Madar works fully without these files. Downloading is optional and asks for your fingerprint before it starts.';
+
+  @override
+  String get ondeviceWifiOnly => 'Download over Wi-Fi only';
+
+  @override
+  String get ondeviceWifiOnlyHint =>
+      'A big file will not be downloaded on mobile data.';
+
+  @override
+  String ondeviceModelSize(String size) {
+    return 'Size: $size GB';
+  }
+
+  @override
+  String get ondeviceModelSizeUnknown => 'Size not confirmed yet';
+
+  @override
+  String ondeviceModelLicense(String license) {
+    return 'Licence: $license';
+  }
+
+  @override
+  String get ondeviceModelUnverified =>
+      'Still a placeholder: it cannot be downloaded until the real file is confirmed.';
+
+  @override
+  String get ondeviceModelKindLanguage => 'Language model';
+
+  @override
+  String get ondeviceModelKindRecitation => 'Recitation model';
+
+  @override
+  String get ondeviceDownloadWifi => 'Download over Wi-Fi';
+
+  @override
+  String get ondeviceDownload => 'Download';
+
+  @override
+  String get ondeviceRemove => 'Remove from phone';
+
+  @override
+  String get ondeviceInstalled => 'On your phone';
+
+  @override
+  String ondeviceDownloading(String percent) {
+    return 'Downloading: $percent';
+  }
+
+  @override
+  String get ondeviceVerifying => 'Checking the file is intact…';
+
+  @override
+  String get ondevicePausedUser => 'Paused. Tap download to continue.';
+
+  @override
+  String get ondevicePausedStorage =>
+      'Stopped because there is not enough space.';
+
+  @override
+  String get ondevicePausedWifi => 'Waiting for Wi-Fi.';
+
+  @override
+  String get ondevicePausedOffline => 'No internet right now.';
+
+  @override
+  String get ondevicePausedLost =>
+      'The connection dropped. Tap download to continue.';
+
+  @override
+  String get ondeviceFailed => 'The download did not finish. Try again.';
+
+  @override
+  String get ondeviceFailedChecksum =>
+      'The file was not intact, so it was deleted. Try again.';
+
+  @override
+  String get ondeviceRefusedUnverified =>
+      'This model is still a placeholder and cannot be downloaded.';
+
+  @override
+  String get ondeviceRefusedAuth =>
+      'We could not confirm it is you. Turn on the fingerprint in Security and try again.';
+
+  @override
+  String get ondeviceRemoved => 'The model was removed from your phone';
+
+  @override
+  String get ondeviceSectionPrivacy => 'Your privacy and your faith';
+
+  @override
+  String get ondevicePrivacyLocal =>
+      'On the ways that run on your phone nothing leaves it. On the bridge, you copy and send by hand.';
+
+  @override
+  String get ondevicePrivacyReligious =>
+      'The model never gives a religious ruling and never quotes a verse or hadith from memory. Verses and hadith come only from the verified Quran and Adhkar inside Madar.';
+
+  @override
+  String get ondeviceRefusalReligious =>
+      'I cannot answer with a religious ruling or a verse or hadith from memory. For verified verses and hadith, open the Quran or Adhkar inside Madar.';
+
+  @override
+  String get ondeviceRefusalHealth =>
+      'I cannot give a dose or a diagnosis. Madar only tracks your health.';
+
+  @override
+  String get ondeviceInputCut =>
+      'The chat is long, so we shortened it: the model read only the last lines.';
+
+  @override
+  String get ondeviceBridgeNotReady =>
+      'The model is not ready, so we use the bridge.';
+
+  @override
+  String get ondeviceBridgeFailed =>
+      'The model stopped before it finished, so we use the bridge.';
+
+  @override
+  String get ondeviceBridgeMemory =>
+      'Another app took the memory, so we use the bridge.';
+
+  @override
+  String get ondeviceBridgeSlow =>
+      'The model took too long, so we use the bridge.';
+
+  @override
+  String get ondeviceRemoveConfirmTitle => 'Remove the model?';
+
+  @override
+  String get ondeviceRemoveConfirmBody =>
+      'This frees space on your phone, and you can download it again any time.';
+
+  @override
   String get ramadanTitle => 'Ramadan';
 
   @override

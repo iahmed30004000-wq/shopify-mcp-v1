@@ -32,10 +32,13 @@
 ///    flagged;
 ///  * **still flagged on purpose**: «حلال»/«حرام» in any other use («اللحم
 ///    حلال»), a bare «يجوز» meaning "maybe", «رواه» meaning "watered him";
-///  * the Quran match needs a run of ≥ 4 words AND ≥ 10 letters once alef and
-///    hamza are folded away, so four short function words are not a verse. It
-///    reads the Arabic Uthmani text only: a verse paraphrased, or quoted in
-///    an English translation, is caught only by the introducers above.
+///  * the Quran match is exactly the owner's rule, N ≥ 4 consecutive words,
+///    with no extra leniency: «قل هو الله أحد», the basmala, the shahada and
+///    «الحمد لله رب العالمين» are four words of the Quran and are refused when
+///    the MODEL writes them (the guard reads only model output; what he types
+///    himself is never touched). It reads the Arabic Uthmani text only: a
+///    verse paraphrased, or quoted in an English translation, is caught only
+///    by the introducers above.
 ///
 /// **Fails closed**: the guard cannot be built without the Quran text, so a
 /// phone where that text did not load never lets a model answer through
@@ -131,10 +134,11 @@ class QuranVerseIndex {
   /// A run of this many consecutive words is a verse (the owner's rule: N≥4).
   static const int defaultMinWords = 4;
 
-  /// …and must be at least this many letters long once folded (alef and
-  /// hamza fold away, so very short words would otherwise make «من في ما لا»
-  /// a «verse»).
-  static const int defaultMinLetters = 10;
+  /// Optional floor on the folded length of the run (alef and hamza fold
+  /// away, so «قل هو الله أحد» is only 9 letters). 0 = none, the owner's
+  /// rule as stated; kept as a knob in case measured false positives ask for
+  /// one.
+  static const int defaultMinLetters = 0;
 
   static const int _gram = 5;
 

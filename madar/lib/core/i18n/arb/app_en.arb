@@ -26960,6 +26960,182 @@
   "gymNoSetsYetHint": "After each set tap “Set done” and it lands here",
   "gymLibraryHint": "Tap an exercise for its photo, its video and your history with it",
   "gymSetsOfLog": "That day's sets",
+  "ondeviceTitle": "AI on this phone",
+  "@ondeviceTitle": {
+    "description": "Settings page title (Part 15)"
+  },
+  "ondeviceRowSubtitle": "The model runs on your phone, no internet",
+  "ondeviceSectionPhone": "What this phone can run",
+  "ondeviceChecking": "Checking your phone…",
+  "ondeviceRecheck": "Check again",
+  "ondeviceNeedsMeasure": "Needs measuring on the phone: no real model has been tried on your phone yet, so these are estimates, not confirmed numbers.",
+  "ondeviceThisPhone": "Your phone now",
+  "ondeviceFactAndroid": "Android",
+  "ondeviceFactMemory": "Memory",
+  "ondeviceFactStorage": "Free space",
+  "ondeviceFactHeat": "Phone heat",
+  "ondeviceFactUnknown": "Unknown",
+  "ondeviceFactAndroidValue": "version {level}",
+  "@ondeviceFactAndroidValue": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceFactGb": "{size} GB",
+  "@ondeviceFactGb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceFactMemoryValue": "{free} GB free of {total}",
+  "@ondeviceFactMemoryValue": {
+    "placeholders": {
+      "free": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceHeatNormal": "Normal",
+  "ondeviceHeatWarm": "Warm",
+  "ondeviceHeatHot": "Hot",
+  "ondeviceReasonAicore": "Your phone can run the model by itself through Android.",
+  "ondeviceReasonEngine": "Your phone can run the model inside Madar.",
+  "ondeviceReasonBridge": "We will use the bridge, which works by copy and paste.",
+  "ondeviceReasonForced": "You chose this way, and your phone can run it.",
+  "ondeviceReasonForcedBlocked": "You chose a way this phone cannot run right now, so we went back to automatic.",
+  "ondeviceBlockAicoreUnsupported": "Android on your phone does not offer the built-in model.",
+  "ondeviceBlockUnknown": "We could not confirm the feature is there, so we will not assume it works.",
+  "ondeviceBlockChanged": "The feature changed from the version we tested, so we avoid it until it is checked again.",
+  "ondeviceBlockEngineUnsupported": "The engine inside Madar is not ready on your phone yet.",
+  "ondeviceBlockSdk": "Your Android is a bit old: it needs version {need} and you have {have}.",
+  "@ondeviceBlockSdk": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockRamTooLow": "The phone's memory is small: it needs {need} GB and you have {have} GB.",
+  "@ondeviceBlockRamTooLow": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockRamBusy": "Other apps are using the memory right now: it needs {need} GB free and you have {have} GB.",
+  "@ondeviceBlockRamBusy": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockStorage": "Not enough space: you need {need} GB free and you have {have} GB.",
+  "@ondeviceBlockStorage": {
+    "placeholders": {
+      "need": {
+        "type": "String"
+      },
+      "have": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceBlockWeights": "The model files are not downloaded yet. Download them from the list below.",
+  "ondeviceBlockBatterySaver": "Battery saver is on, so we keep the model off to save power.",
+  "ondeviceBlockThermal": "The phone is hot, so we wait until it cools down.",
+  "ondeviceSectionPaths": "The three ways",
+  "ondevicePathAicore": "Android's own model",
+  "ondevicePathAicoreHint": "Gemma runs through Android itself, and its files are not inside Madar.",
+  "ondevicePathEngine": "Engine inside Madar",
+  "ondevicePathEngineHint": "We run the model inside the app, and downloading its files is optional.",
+  "ondevicePathBridge": "The bridge (copy and paste)",
+  "ondevicePathBridgeHint": "You copy the request to any AI app and bring the answer back. It works on every phone.",
+  "ondevicePathActive": "In use now",
+  "ondevicePathPossible": "Possible",
+  "ondevicePathNotNow": "Not possible now",
+  "ondeviceSectionChoice": "Your choice",
+  "ondeviceChoiceHint": "Automatic picks the best for your phone. If you choose a way, we use it as long as your phone can.",
+  "ondeviceChoiceAuto": "Automatic",
+  "ondeviceChoiceAicore": "Android",
+  "ondeviceChoiceEngine": "In Madar",
+  "ondeviceChoiceBridge": "Bridge",
+  "ondeviceSectionModels": "Model files (optional)",
+  "ondeviceModelsNote": "Madar works fully without these files. Downloading is optional and asks for your fingerprint before it starts.",
+  "ondeviceWifiOnly": "Download over Wi-Fi only",
+  "ondeviceWifiOnlyHint": "A big file will not be downloaded on mobile data.",
+  "ondeviceModelSize": "Size: {size} GB",
+  "@ondeviceModelSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceModelSizeUnknown": "Size not confirmed yet",
+  "ondeviceModelLicense": "Licence: {license}",
+  "@ondeviceModelLicense": {
+    "placeholders": {
+      "license": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceModelUnverified": "Still a placeholder: it cannot be downloaded until the real file is confirmed.",
+  "ondeviceModelKindLanguage": "Language model",
+  "ondeviceModelKindRecitation": "Recitation model",
+  "ondeviceDownloadWifi": "Download over Wi-Fi",
+  "ondeviceDownload": "Download",
+  "ondeviceRemove": "Remove from phone",
+  "ondeviceInstalled": "On your phone",
+  "ondeviceDownloading": "Downloading: {percent}",
+  "@ondeviceDownloading": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "ondeviceVerifying": "Checking the file is intact…",
+  "ondevicePausedUser": "Paused. Tap download to continue.",
+  "ondevicePausedStorage": "Stopped because there is not enough space.",
+  "ondevicePausedWifi": "Waiting for Wi-Fi.",
+  "ondevicePausedOffline": "No internet right now.",
+  "ondevicePausedLost": "The connection dropped. Tap download to continue.",
+  "ondeviceFailed": "The download did not finish. Try again.",
+  "ondeviceFailedChecksum": "The file was not intact, so it was deleted. Try again.",
+  "ondeviceRefusedUnverified": "This model is still a placeholder and cannot be downloaded.",
+  "ondeviceRefusedAuth": "We could not confirm it is you. Turn on the fingerprint in Security and try again.",
+  "ondeviceRemoved": "The model was removed from your phone",
+  "ondeviceSectionPrivacy": "Your privacy and your faith",
+  "ondevicePrivacyLocal": "On the ways that run on your phone nothing leaves it. On the bridge, you copy and send by hand.",
+  "ondevicePrivacyReligious": "The model never gives a religious ruling and never quotes a verse or hadith from memory. Verses and hadith come only from the verified Quran and Adhkar inside Madar.",
+  "ondeviceRefusalReligious": "I cannot answer with a religious ruling or a verse or hadith from memory. For verified verses and hadith, open the Quran or Adhkar inside Madar.",
+  "ondeviceRefusalHealth": "I cannot give a dose or a diagnosis. Madar only tracks your health.",
+  "ondeviceInputCut": "The chat is long, so we shortened it: the model read only the last lines.",
+  "ondeviceBridgeNotReady": "The model is not ready, so we use the bridge.",
+  "ondeviceBridgeFailed": "The model stopped before it finished, so we use the bridge.",
+  "ondeviceBridgeMemory": "Another app took the memory, so we use the bridge.",
+  "ondeviceBridgeSlow": "The model took too long, so we use the bridge.",
+  "ondeviceRemoveConfirmTitle": "Remove the model?",
+  "ondeviceRemoveConfirmBody": "This frees space on your phone, and you can download it again any time.",
   "ramadanTitle": "Ramadan",
   "@ramadanTitle": {
     "description": "Part 19: title of the Ramadan screen, its Faith tile and its Settings entry"

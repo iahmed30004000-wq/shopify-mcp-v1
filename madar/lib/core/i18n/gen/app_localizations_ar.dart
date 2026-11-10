@@ -30000,6 +30000,315 @@ class L10nAr extends L10n {
   String get gymSetsOfLog => 'مجموعات هذا اليوم';
 
   @override
+  String get ondeviceTitle => 'الذكاء على الجوال';
+
+  @override
+  String get ondeviceRowSubtitle => 'الموديل بيشتغل عجوالك بلا إنترنت';
+
+  @override
+  String get ondeviceSectionPhone => 'شو بيقدر جوالك يشغّل';
+
+  @override
+  String get ondeviceChecking => 'عم نفحص جوالك…';
+
+  @override
+  String get ondeviceRecheck => 'افحص من جديد';
+
+  @override
+  String get ondeviceNeedsMeasure =>
+      'يلزم قياس على الجوال: لسا ما جرّبنا موديل حقيقي على جوالك، فهاي تقديرات مش أرقام مؤكّدة.';
+
+  @override
+  String get ondeviceThisPhone => 'جوالك هلأ';
+
+  @override
+  String get ondeviceFactAndroid => 'أندرويد';
+
+  @override
+  String get ondeviceFactMemory => 'الذاكرة';
+
+  @override
+  String get ondeviceFactStorage => 'مساحة فاضية';
+
+  @override
+  String get ondeviceFactHeat => 'حرارة الجوال';
+
+  @override
+  String get ondeviceFactUnknown => 'مش معروف';
+
+  @override
+  String ondeviceFactAndroidValue(String level) {
+    return 'إصدار $level';
+  }
+
+  @override
+  String ondeviceFactGb(String size) {
+    return '$size جيجا';
+  }
+
+  @override
+  String ondeviceFactMemoryValue(String free, String total) {
+    return '$free جيجا فاضية من $total';
+  }
+
+  @override
+  String get ondeviceHeatNormal => 'عادية';
+
+  @override
+  String get ondeviceHeatWarm => 'دافية';
+
+  @override
+  String get ondeviceHeatHot => 'سخنة';
+
+  @override
+  String get ondeviceReasonAicore =>
+      'جوالك بيقدر يشغّل الموديل بنفسه عبر نظام أندرويد.';
+
+  @override
+  String get ondeviceReasonEngine => 'جوالك بيقدر يشغّل الموديل داخل مدار.';
+
+  @override
+  String get ondeviceReasonBridge => 'رح نستعمل الجسر اللي بيعمل نسخ ولصق.';
+
+  @override
+  String get ondeviceReasonForced =>
+      'إنت اخترت هالطريقة، وجوالك بيقدر يشغّلها.';
+
+  @override
+  String get ondeviceReasonForcedBlocked =>
+      'اخترت طريقة جوالك ما بيقدر يشغّلها هلأ، فرجعنا للاختيار التلقائي.';
+
+  @override
+  String get ondeviceBlockAicoreUnsupported =>
+      'نظام أندرويد على جوالك ما بيوفّر الموديل الجاهز.';
+
+  @override
+  String get ondeviceBlockUnknown =>
+      'ما قدرنا نتأكد إنّ الميزة موجودة، فما رح نفترض إنها شغّالة.';
+
+  @override
+  String get ondeviceBlockChanged =>
+      'الميزة تغيّرت عن النسخة اللي جرّبناها، فبنتجنّبها لحدّ ما تنفحص من جديد.';
+
+  @override
+  String get ondeviceBlockEngineUnsupported =>
+      'المحرّك اللي داخل مدار لسا مش جاهز على جوالك.';
+
+  @override
+  String ondeviceBlockSdk(String need, String have) {
+    return 'أندرويد عندك قديم شوي: بدنا إصدار $need وعندك $have.';
+  }
+
+  @override
+  String ondeviceBlockRamTooLow(String need, String have) {
+    return 'ذاكرة الجوال صغيرة: بدنا $need جيجا وعندك $have جيجا.';
+  }
+
+  @override
+  String ondeviceBlockRamBusy(String need, String have) {
+    return 'تطبيقات ثانية ماسكة الذاكرة هلأ: بدنا $need جيجا فاضية وعندك $have جيجا.';
+  }
+
+  @override
+  String ondeviceBlockStorage(String need, String have) {
+    return 'ما في مساحة كفاية: بدك $need جيجا فاضية وعندك $have جيجا.';
+  }
+
+  @override
+  String get ondeviceBlockWeights =>
+      'ملفات الموديل لسا مش منزّلة على جوالك. نزّلها من القائمة تحت.';
+
+  @override
+  String get ondeviceBlockBatterySaver =>
+      'وضع توفير البطارية شغّال، فبنوقّف الموديل عشان ما يستهلك البطارية.';
+
+  @override
+  String get ondeviceBlockThermal => 'الجوال سخن، بنستنى لحد ما يبرد.';
+
+  @override
+  String get ondeviceSectionPaths => 'الطرق التلاتة';
+
+  @override
+  String get ondevicePathAicore => 'موديل نظام أندرويد';
+
+  @override
+  String get ondevicePathAicoreHint =>
+      'Gemma بيشتغل عبر نظام أندرويد نفسه، وملفاته مش داخل مدار.';
+
+  @override
+  String get ondevicePathEngine => 'محرّك داخل مدار';
+
+  @override
+  String get ondevicePathEngineHint =>
+      'بنشغّل الموديل داخل التطبيق، وتنزيل ملفاته اختياري.';
+
+  @override
+  String get ondevicePathBridge => 'الجسر (نسخ ولصق)';
+
+  @override
+  String get ondevicePathBridgeHint =>
+      'بتنسخ الطلب لأي تطبيق ذكاء اصطناعي وبترجّع الجواب. بيشتغل عكل الجوالات.';
+
+  @override
+  String get ondevicePathActive => 'المستعمل هلأ';
+
+  @override
+  String get ondevicePathPossible => 'ممكن';
+
+  @override
+  String get ondevicePathNotNow => 'مش ممكن هلأ';
+
+  @override
+  String get ondeviceSectionChoice => 'الاختيار';
+
+  @override
+  String get ondeviceChoiceHint =>
+      'تلقائي بيختار الأحسن لجوالك. وإذا اخترت طريقة بنستعملها طالما جوالك بيقدر.';
+
+  @override
+  String get ondeviceChoiceAuto => 'تلقائي';
+
+  @override
+  String get ondeviceChoiceAicore => 'نظام أندرويد';
+
+  @override
+  String get ondeviceChoiceEngine => 'داخل مدار';
+
+  @override
+  String get ondeviceChoiceBridge => 'الجسر';
+
+  @override
+  String get ondeviceSectionModels => 'ملفات الموديل (اختياري)';
+
+  @override
+  String get ondeviceModelsNote =>
+      'مدار بيشتغل كامل بدون هاي الملفات. التنزيل اختياري وبيطلب بصمتك قبل ما يبدأ.';
+
+  @override
+  String get ondeviceWifiOnly => 'التنزيل عبر الواي فاي بس';
+
+  @override
+  String get ondeviceWifiOnlyHint => 'ما رح ننزّل ملف كبير على باقة الإنترنت.';
+
+  @override
+  String ondeviceModelSize(String size) {
+    return 'الحجم: $size جيجا';
+  }
+
+  @override
+  String get ondeviceModelSizeUnknown => 'الحجم لسا مش مؤكّد';
+
+  @override
+  String ondeviceModelLicense(String license) {
+    return 'الترخيص: $license';
+  }
+
+  @override
+  String get ondeviceModelUnverified =>
+      'لسا تجريبي: ما بيتنزّل لحد ما نتأكد من الملف الحقيقي.';
+
+  @override
+  String get ondeviceModelKindLanguage => 'موديل لغة';
+
+  @override
+  String get ondeviceModelKindRecitation => 'موديل تلاوة';
+
+  @override
+  String get ondeviceDownloadWifi => 'نزّل عبر الواي فاي';
+
+  @override
+  String get ondeviceDownload => 'نزّل';
+
+  @override
+  String get ondeviceRemove => 'احذف من الجوال';
+
+  @override
+  String get ondeviceInstalled => 'منزّل على جوالك';
+
+  @override
+  String ondeviceDownloading(String percent) {
+    return 'عم ينزّل: $percent';
+  }
+
+  @override
+  String get ondeviceVerifying => 'عم نتأكد إنّ الملف سليم…';
+
+  @override
+  String get ondevicePausedUser => 'موقّف. اضغط نزّل لتكمّل.';
+
+  @override
+  String get ondevicePausedStorage => 'وقف لأنه ما في مساحة كفاية.';
+
+  @override
+  String get ondevicePausedWifi => 'بنستنى الواي فاي.';
+
+  @override
+  String get ondevicePausedOffline => 'ما في إنترنت هلأ.';
+
+  @override
+  String get ondevicePausedLost => 'انقطع الاتصال. اضغط نزّل لتكمّل.';
+
+  @override
+  String get ondeviceFailed => 'ما كمل التنزيل. جرّب مرة ثانية.';
+
+  @override
+  String get ondeviceFailedChecksum =>
+      'الملف طلع مش سليم فانحذف. جرّب مرة ثانية.';
+
+  @override
+  String get ondeviceRefusedUnverified => 'هاد الموديل لسا تجريبي وما بيتنزّل.';
+
+  @override
+  String get ondeviceRefusedAuth =>
+      'ما تأكدنا إنك إنت. فعّل البصمة من الأمان وجرّب.';
+
+  @override
+  String get ondeviceRemoved => 'انحذف الموديل من جوالك';
+
+  @override
+  String get ondeviceSectionPrivacy => 'خصوصيتك ودينك';
+
+  @override
+  String get ondevicePrivacyLocal =>
+      'على الطرق اللي بتشتغل عجوالك ما بيطلع أي شي من جوالك. وعلى الجسر إنت اللي بتنسخ وبترسل بإيدك.';
+
+  @override
+  String get ondevicePrivacyReligious =>
+      'الموديل ما بيعطي فتوى ولا حكم شرعي، وما بينقل آية أو حديث من عنده. الآيات والأحاديث بتجي بس من القرآن والأذكار الموثّقة داخل مدار.';
+
+  @override
+  String get ondeviceRefusalReligious =>
+      'ما بقدر أجاوب بحكم ديني ولا بآية أو حديث من عندي. للآيات والأحاديث الموثّقة افتح القرآن أو الأذكار داخل مدار.';
+
+  @override
+  String get ondeviceRefusalHealth =>
+      'ما بقدر أعطي جرعة ولا تشخيص. مدار بيتابع صحتك بس.';
+
+  @override
+  String get ondeviceInputCut =>
+      'المحادثة طويلة، فاختصرناها: الموديل قرأ آخر الأسطر بس.';
+
+  @override
+  String get ondeviceBridgeNotReady => 'الموديل مش جاهز، فبنستعمل الجسر.';
+
+  @override
+  String get ondeviceBridgeFailed =>
+      'الموديل وقف قبل ما يخلّص، فبنستعمل الجسر.';
+
+  @override
+  String get ondeviceBridgeMemory => 'تطبيق ثاني أخد الذاكرة، فبنستعمل الجسر.';
+
+  @override
+  String get ondeviceBridgeSlow => 'الموديل تأخّر كتير، فبنستعمل الجسر.';
+
+  @override
+  String get ondeviceRemoveConfirmTitle => 'تحذف الموديل؟';
+
+  @override
+  String get ondeviceRemoveConfirmBody =>
+      'بتحرّر مساحة عجوالك، وبتقدر تنزّله من جديد بأي وقت.';
+
+  @override
   String get ramadanTitle => 'رمضان';
 
   @override

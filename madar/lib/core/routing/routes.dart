@@ -535,6 +535,10 @@ abstract final class AppRoutes {
   /// Settings › AI: his own key, the model, the reply length, the privacy.
   static const String aiSettings = '/settings/ai';
 
+  /// Settings › «الذكاء على الجوال» (Part 15): what this phone can run, the
+  /// three ways, the optional model files.
+  static const String ondeviceSettings = '/settings/ondevice';
+
   /// Settings › Home-screen widgets.
   static const String widgetsSettings = '/settings/widgets';
 

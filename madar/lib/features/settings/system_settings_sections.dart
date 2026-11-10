@@ -163,6 +163,13 @@ class _AiSection extends ConsumerWidget {
           onTap: () => context.go(AppRoutes.aiSettings),
         ),
         SettingsTile(
+          icon: Icons.memory_rounded,
+          title: l.ondeviceTitle,
+          subtitle: l.ondeviceRowSubtitle,
+          navigates: true,
+          onTap: () => context.go(AppRoutes.ondeviceSettings),
+        ),
+        SettingsTile(
           icon: Icons.forum_rounded,
           title: l.aiChatListTitle,
           subtitle: l.systemShellAiChatsRowHint,

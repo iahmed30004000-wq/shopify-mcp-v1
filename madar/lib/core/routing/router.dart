@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/adhan/presentation/adhan_settings_screen.dart';
 import '../../features/adhkar/adhkar.dart' show AdhkarCategoryId, TasbeehScreen;
 import '../../features/ai_chat/ai_chat.dart' show AiSettingsScreen;
+import '../../features/ondevice_ai/ondevice_ai.dart' show OnDeviceSettingsScreen;
 import '../../features/cinema/hall/hall.dart' show CinemaGameScreen, CinemaHallScreen, SavedGamesScreen;
 import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/hifz/hifz.dart' show HifzCard;
@@ -245,6 +246,14 @@ List<RouteBase> madarRoutes() => [
               context: context,
               key: state.pageKey,
               child: const AiSettingsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'ondevice',
+            pageBuilder: (context, state) => MadarTransitions.sharedAxis<void>(
+              context: context,
+              key: state.pageKey,
+              child: const OnDeviceSettingsScreen(),
             ),
           ),
           GoRoute(
