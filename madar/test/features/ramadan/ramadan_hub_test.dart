@@ -47,10 +47,23 @@ Future<TestApp> _pumpFaith(
   int offset = 0,
   RamadanConfig? config,
   Future<void> Function(MadarDatabase db)? seed,
+  Size? size,
+  double textScale = 1,
+  MadarThemeId theme = MadarThemeId.lapis,
 }) async {
+  if (size != null) {
+    tester.view.physicalSize = size * 2;
+    tester.view.devicePixelRatio = 2;
+    addTearDown(tester.view.reset);
+  }
+  if (textScale != 1) {
+    tester.platformDispatcher.textScaleFactorTestValue = textScale;
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+  }
   final app = await pumpMadarApp(
     tester,
-    settings: AppSettings(onboarded: true, languageCode: lang),
+    phone: size == null,
+    settings: AppSettings(onboarded: true, languageCode: lang, themeId: theme),
     initialLocation: AppRoutes.planetOf('faith'),
     now: now,
     beforePump: (db) async {
@@ -260,6 +273,39 @@ void main() {
     testWidgets('-1 on 9 March (the Eid by the calculation) is still the last day of Ramadan', (tester) async {
       await _pumpFaith(tester, now: DateTime(2027, 3, 9, 12), offset: -1);
       expect(_band, findsOneWidget, reason: 'the local month ends a day later');
+      await _leave(tester);
+    });
+  });
+
+  group('a narrow phone and the light theme', () {
+    for (final lang in ['ar', 'en']) {
+      testWidgets('$lang: 320 dp with the text at 1.3, last ten nights: the card and the strip do not overflow, every control is 48 dp', (tester) async {
+        await _pumpFaith(tester, now: DateTime(2027, 3, 1, 12), lang: lang, size: const Size(320, 640), textScale: 1.3);
+        await _reveal(tester, _card);
+        for (final key in ['ramadan.card.tonight']) {
+          final size = tester.getSize(find.byKey(ValueKey(key)));
+          expect(size.height, greaterThanOrEqualTo(48), reason: key);
+        }
+        await _reveal(tester, find.byKey(const ValueKey('ramadan.card.openQuran')));
+        await _reveal(tester, find.byKey(const ValueKey('ramadan.card.lastTen')));
+        expect(tester.takeException(), isNull);
+        await _leave(tester);
+      });
+
+      testWidgets('$lang: coming card at 320 dp with the text at 1.3', (tester) async {
+        await _pumpFaith(tester, now: DateTime(2027, 1, 20, 12), lang: lang, size: const Size(320, 640), textScale: 1.3);
+        await _reveal(tester, _coming);
+        expect(tester.takeException(), isNull);
+        await _leave(tester);
+      });
+    }
+
+    testWidgets('the light theme (pearl): the strip, the tint and the card are all there and nothing breaks', (tester) async {
+      await _pumpFaith(tester, now: DateTime(2027, 2, 20, 12), theme: MadarThemeId.pearl);
+      expect(_band, findsOneWidget);
+      expect(find.byType(RamadanTint), findsOneWidget);
+      await _reveal(tester, _card);
+      expect(tester.takeException(), isNull);
       await _leave(tester);
     });
   });
