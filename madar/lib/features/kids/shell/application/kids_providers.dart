@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/settings/app_settings.dart' show sharedPreferencesProvider;
+import '../../../../core/settings/app_settings.dart'
+    show sharedPreferencesProvider;
 import '../../../lock/application/lock_controller.dart';
 import '../../../lock/data/biometric_auth.dart';
 import '../data/kids_store.dart';
@@ -11,25 +12,35 @@ import '../domain/kids_logic.dart';
 
 /// Where the kids shell's state is kept (SharedPreferences: readable on the
 /// first frame, before the database is unlocked).
-final kidsStoreProvider = Provider<KidsStore>((ref) => PrefsKidsStore(ref.watch(sharedPreferencesProvider)));
+final kidsStoreProvider = Provider<KidsStore>(
+  (ref) => PrefsKidsStore(ref.watch(sharedPreferencesProvider)),
+);
 
 /// Android app pinning (tests override it with [FakeKidsPinning]).
-final kidsPinningProvider = Provider<KidsPinning>((ref) => ChannelKidsPinning());
+final kidsPinningProvider = Provider<KidsPinning>(
+  (ref) => ChannelKidsPinning(),
+);
 
 /// The kids shell's wall clock (day changes, the gate's pause). Tests drive it.
 final kidsClockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
 
 /// Silent until voices exist: speaks the text with this id, if there is a
 /// recording for it. [KidsSpeakButton] calls it.
-final kidsSpeakProvider = Provider<Future<void> Function(String textId)>((ref) => (textId) async {});
+final kidsSpeakProvider = Provider<Future<void> Function(String textId)>(
+  (ref) => (textId) async {},
+);
 
 /// Kids mode: on or off, the daily limit, today's play time, the gate's pause.
 /// Written on every change, so the battery dying loses nothing that matters:
 /// on-or-off is written at once, play time at most ten seconds late.
-final kidsModeProvider = NotifierProvider<KidsMode, KidsModeState>(KidsMode.new);
+final kidsModeProvider = NotifierProvider<KidsMode, KidsModeState>(
+  KidsMode.new,
+);
 
 /// Just the on/off bit (what the router and the app lock watch).
-final kidsModeOnProvider = Provider<bool>((ref) => ref.watch(kidsModeProvider.select((s) => s.on)));
+final kidsModeOnProvider = Provider<bool>(
+  (ref) => ref.watch(kidsModeProvider.select((s) => s.on)),
+);
 
 /// How the day's time stands: the status plus the seconds left (null = no
 /// limit).
@@ -72,7 +83,8 @@ class _Flag extends Notifier<bool> {
 /// What the parent-only layers show over the shell.
 enum KidsParentPhase { none, gate, corner }
 
-final kidsParentPhaseProvider = NotifierProvider<KidsParentFlow, KidsParentPhase>(KidsParentFlow.new);
+final kidsParentPhaseProvider =
+    NotifierProvider<KidsParentFlow, KidsParentPhase>(KidsParentFlow.new);
 
 class KidsParentFlow extends Notifier<KidsParentPhase> {
   @override
@@ -137,7 +149,8 @@ class KidsMode extends Notifier<KidsModeState> {
 
   /// One stepper tap: five minutes more or less (read from the live state, so
   /// two quick taps are two steps).
-  void stepLimit({required bool up}) => setLimit(ScreenTimeRules.stepped(state.limitMinutes, up: up));
+  void stepLimit({required bool up}) =>
+      setLimit(ScreenTimeRules.stepped(state.limitMinutes, up: up));
 
   /// Counts [seconds] of foreground play (zero just rolls midnight). Writes
   /// every ten seconds, and at once when the limit is reached or [flush].
@@ -147,8 +160,13 @@ class KidsMode extends Notifier<KidsModeState> {
     final ledger = before.ledger.add(seconds, now);
     if (ledger == before.ledger && !flush) return;
     final ended =
-        ScreenTimeRules.statusOf(before.limitMinutes, ledger.usedSeconds) == ScreenTimeStatus.ended &&
-        ScreenTimeRules.statusOf(before.limitMinutes, before.ledger.usedSeconds) != ScreenTimeStatus.ended;
+        ScreenTimeRules.statusOf(before.limitMinutes, ledger.usedSeconds) ==
+            ScreenTimeStatus.ended &&
+        ScreenTimeRules.statusOf(
+              before.limitMinutes,
+              before.ledger.usedSeconds,
+            ) !=
+            ScreenTimeStatus.ended;
     final dayChanged = ledger.dayKey != before.ledger.dayKey;
     state = before.copyWith(ledger: ledger);
     _unsavedSeconds += seconds;
@@ -185,7 +203,9 @@ class KidsMode extends Notifier<KidsModeState> {
       case PinCheck.wrong:
         final next = state.backoff.afterWrong(_now());
         _setBackoff(next);
-        return next.pausedAt(_now()) ? GateResult.paused(next.remaining(_now())) : const GateResult(GateOutcome.wrong);
+        return next.pausedAt(_now())
+            ? GateResult.paused(next.remaining(_now()))
+            : const GateResult(GateOutcome.wrong);
       case PinCheck.lockedOut:
         return GateResult.paused(r.lockout);
       case PinCheck.busy:
@@ -218,7 +238,8 @@ class KidsMode extends Notifier<KidsModeState> {
     // lock host that normally refreshes it is not mounted in kids mode).
     ref.invalidate(biometricAvailabilityProvider);
     try {
-      return await ref.read(biometricAvailabilityProvider.future) == BiometricAvailability.available;
+      return await ref.read(biometricAvailabilityProvider.future) ==
+          BiometricAvailability.available;
     } catch (_) {
       return false;
     }
@@ -231,7 +252,8 @@ enum GateOutcome { accepted, wrong, paused, unavailable, busy }
 class GateResult {
   const GateResult(this.outcome, {this.pause = Duration.zero});
 
-  factory GateResult.paused(Duration pause) => GateResult(GateOutcome.paused, pause: pause);
+  factory GateResult.paused(Duration pause) =>
+      GateResult(GateOutcome.paused, pause: pause);
 
   final GateOutcome outcome;
   final Duration pause;

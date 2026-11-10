@@ -33,7 +33,12 @@ class KidsHomeScreen extends ConsumerWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [KidsColors.night800, KidsColors.night500, KidsColors.rose500, KidsColors.sun300],
+                colors: [
+                  KidsColors.night800,
+                  KidsColors.night500,
+                  KidsColors.rose500,
+                  KidsColors.sun300,
+                ],
                 stops: [0, 0.45, 0.8, 1],
               ),
             ),
@@ -48,8 +53,14 @@ class KidsHomeScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(l.kidsShellGreeting, style: KidsText.title(Colors.white, size: 34)),
-                          Text(l.kidsShellGreetingSub, style: KidsText.text(KidsColors.night100, size: 18)),
+                          Text(
+                            l.kidsShellGreeting,
+                            style: KidsText.title(Colors.white, size: 34),
+                          ),
+                          Text(
+                            l.kidsShellGreetingSub,
+                            style: KidsText.text(KidsColors.night100, size: 18),
+                          ),
                         ],
                       ),
                     ),
@@ -57,7 +68,9 @@ class KidsHomeScreen extends ConsumerWidget {
                       key: const ValueKey('kids-lock'),
                       icon: Icons.lock_rounded,
                       semanticLabel: l.kidsShellLockSemantics,
-                      onPressed: ref.read(kidsParentPhaseProvider.notifier).openGate,
+                      onPressed: ref
+                          .read(kidsParentPhaseProvider.notifier)
+                          .openGate,
                     ),
                   ],
                 ),
@@ -72,7 +85,12 @@ class KidsHomeScreen extends ConsumerWidget {
                       final columns = box.maxWidth < 330 ? 2 : 3;
                       return GridView.builder(
                         key: const ValueKey('kids-grid'),
-                        padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 8),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                          16,
+                          16,
+                          16,
+                          8,
+                        ),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: columns,
                           mainAxisSpacing: 12,
@@ -82,7 +100,8 @@ class KidsHomeScreen extends ConsumerWidget {
                           mainAxisExtent: 112 + 62 * scale,
                         ),
                         itemCount: sections.length,
-                        itemBuilder: (context, i) => _WorldTile(section: sections[i]),
+                        itemBuilder: (context, i) =>
+                            _WorldTile(section: sections[i]),
                       );
                     },
                   ),
@@ -100,7 +119,10 @@ class KidsHomeScreen extends ConsumerWidget {
                     key: const ValueKey('kids-stars-chip'),
                     background: KidsColors.night800,
                     foreground: Colors.white,
-                    leading: const KhatamStar(size: 28, color: KidsColors.sun500),
+                    leading: const KhatamStar(
+                      size: 28,
+                      color: KidsColors.sun500,
+                    ),
                     label: kidsDigits(context, l.kidsShellStars(stars)),
                   ),
                   if (time.remainingMinutes case final minutes?)
@@ -108,7 +130,11 @@ class KidsHomeScreen extends ConsumerWidget {
                       key: const ValueKey('kids-time-chip'),
                       background: KidsColors.teal100,
                       foreground: KidsColors.teal700,
-                      leading: const Icon(Icons.hourglass_bottom_rounded, color: KidsColors.teal700, size: 26),
+                      leading: const Icon(
+                        Icons.hourglass_bottom_rounded,
+                        color: KidsColors.teal700,
+                        size: 26,
+                      ),
                       label: kidsDigits(context, l.kidsShellTimeLeft(minutes)),
                     ),
                 ],
@@ -136,13 +162,19 @@ class _WorldTile extends StatelessWidget {
       excludeSemantics: true,
       child: Material(
         key: ValueKey('kids-tile-${section.id}'),
-        color: Color.alphaBlend(section.accent.withValues(alpha: 0.16), KidsColors.paper),
+        color: Color.alphaBlend(
+          section.accent.withValues(alpha: 0.16),
+          KidsColors.paper,
+        ),
         borderRadius: BorderRadius.circular(28),
         child: InkWell(
           borderRadius: BorderRadius.circular(28),
           onTap: () => context.push(AppRoutes.kidsSectionOf(section.id)),
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 6, vertical: 10),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 6,
+              vertical: 10,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -186,18 +218,31 @@ class _Chip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-    decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(36)),
+    decoration: BoxDecoration(
+      color: background,
+      borderRadius: BorderRadius.circular(36),
+    ),
     child: ConstrainedBox(
       constraints: const BoxConstraints(minHeight: kKidsMinTarget),
       child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(horizontal: 20, vertical: 8),
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: 20,
+          vertical: 8,
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             leading,
             const SizedBox(width: 10),
             Flexible(
-              child: Text(label, style: KidsText.text(foreground, size: 18, weight: FontWeight.w700)),
+              child: Text(
+                label,
+                style: KidsText.text(
+                  foreground,
+                  size: 18,
+                  weight: FontWeight.w700,
+                ),
+              ),
             ),
           ],
         ),
@@ -225,9 +270,17 @@ class _Empty extends StatelessWidget {
               child: Icon(Icons.star_rounded, color: Colors.white, size: 48),
             ),
             const SizedBox(height: 16),
-            Text(l.kidsShellEmptyTitle, textAlign: TextAlign.center, style: KidsText.title(KidsColors.ink, size: 28)),
+            Text(
+              l.kidsShellEmptyTitle,
+              textAlign: TextAlign.center,
+              style: KidsText.title(KidsColors.ink, size: 28),
+            ),
             const SizedBox(height: 8),
-            Text(l.kidsShellEmptyBody, textAlign: TextAlign.center, style: KidsText.text(KidsColors.ink2, size: 20)),
+            Text(
+              l.kidsShellEmptyBody,
+              textAlign: TextAlign.center,
+              style: KidsText.text(KidsColors.ink2, size: 20),
+            ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
-import 'package:flutter/services.dart' show MethodChannel, MissingPluginException, PlatformException;
+import 'package:flutter/services.dart'
+    show MethodChannel, MissingPluginException, PlatformException;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../domain/kids_logic.dart';
@@ -79,7 +80,8 @@ abstract interface class KidsPinning {
 /// missing plugin (tests, iOS, an old build) means "not supported", never an
 /// error the child could see.
 class ChannelKidsPinning implements KidsPinning {
-  ChannelKidsPinning([MethodChannel? channel]) : _channel = channel ?? const MethodChannel(channelName);
+  ChannelKidsPinning([MethodChannel? channel])
+    : _channel = channel ?? const MethodChannel(channelName);
 
   static const String channelName = 'app.madar.orbit/kids_pinning';
 

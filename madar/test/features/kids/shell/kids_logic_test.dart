@@ -12,17 +12,39 @@ void main() {
     const limit = 30;
 
     test('limit - 1 second still plays, the limit and limit + 1 end', () {
-      expect(ScreenTimeRules.statusOf(limit, limit * 60 - 1), isNot(ScreenTimeStatus.ended));
-      expect(ScreenTimeRules.statusOf(limit, limit * 60), ScreenTimeStatus.ended);
-      expect(ScreenTimeRules.statusOf(limit, limit * 60 + 1), ScreenTimeStatus.ended);
-      expect(ScreenTimeRules.remainingSeconds(limit, limit * 60 + 500), 0, reason: 'never negative');
+      expect(
+        ScreenTimeRules.statusOf(limit, limit * 60 - 1),
+        isNot(ScreenTimeStatus.ended),
+      );
+      expect(
+        ScreenTimeRules.statusOf(limit, limit * 60),
+        ScreenTimeStatus.ended,
+      );
+      expect(
+        ScreenTimeRules.statusOf(limit, limit * 60 + 1),
+        ScreenTimeStatus.ended,
+      );
+      expect(
+        ScreenTimeRules.remainingSeconds(limit, limit * 60 + 500),
+        0,
+        reason: 'never negative',
+      );
     });
 
     test('limit - 1 minute is the warning, well before is plain play', () {
       expect(ScreenTimeRules.statusOf(limit, 0), ScreenTimeStatus.playing);
-      expect(ScreenTimeRules.statusOf(limit, (limit - 5) * 60 - 1), ScreenTimeStatus.playing);
-      expect(ScreenTimeRules.statusOf(limit, (limit - 5) * 60), ScreenTimeStatus.warning);
-      expect(ScreenTimeRules.statusOf(limit, (limit - 1) * 60), ScreenTimeStatus.warning);
+      expect(
+        ScreenTimeRules.statusOf(limit, (limit - 5) * 60 - 1),
+        ScreenTimeStatus.playing,
+      );
+      expect(
+        ScreenTimeRules.statusOf(limit, (limit - 5) * 60),
+        ScreenTimeStatus.warning,
+      );
+      expect(
+        ScreenTimeRules.statusOf(limit, (limit - 1) * 60),
+        ScreenTimeStatus.warning,
+      );
     });
 
     test('a limit of 0 is "off": nothing ever ends', () {
@@ -35,7 +57,10 @@ void main() {
       expect(ScreenTimeRules.stepped(0, up: true), 5);
       expect(ScreenTimeRules.stepped(5, up: false), 0);
       expect(ScreenTimeRules.stepped(0, up: false), 0);
-      expect(ScreenTimeRules.stepped(ScreenTimeRules.maxLimitMinutes, up: true), ScreenTimeRules.maxLimitMinutes);
+      expect(
+        ScreenTimeRules.stepped(ScreenTimeRules.maxLimitMinutes, up: true),
+        ScreenTimeRules.maxLimitMinutes,
+      );
     });
   });
 
@@ -63,7 +88,10 @@ void main() {
       final back = l.rolledTo(noon.subtract(const Duration(days: 2)));
       expect(back.usedSeconds, 1700);
       expect(back.dayKey, kidsDayKey(noon));
-      expect(l.add(10, noon.subtract(const Duration(days: 2))).usedSeconds, 1710);
+      expect(
+        l.add(10, noon.subtract(const Duration(days: 2))).usedSeconds,
+        1710,
+      );
     });
 
     test('negative play is ignored', () {
@@ -71,23 +99,53 @@ void main() {
     });
 
     test('a month and a year end roll over too', () {
-      expect(const ScreenTimeLedger(dayKey: 20260930, usedSeconds: 9).rolledTo(DateTime(2026, 10, 1)).usedSeconds, 0);
-      expect(const ScreenTimeLedger(dayKey: 20261231, usedSeconds: 9).rolledTo(DateTime(2027, 1, 1)).usedSeconds, 0);
+      expect(
+        const ScreenTimeLedger(
+          dayKey: 20260930,
+          usedSeconds: 9,
+        ).rolledTo(DateTime(2026, 10, 1)).usedSeconds,
+        0,
+      );
+      expect(
+        const ScreenTimeLedger(
+          dayKey: 20261231,
+          usedSeconds: 9,
+        ).rolledTo(DateTime(2027, 1, 1)).usedSeconds,
+        0,
+      );
     });
   });
 
   group('one tick of play', () {
     test('is the time since the last tick, rounded', () {
-      expect(ScreenTimeRules.tickSeconds(noon, noon.add(const Duration(seconds: 1))), 1);
-      expect(ScreenTimeRules.tickSeconds(noon, noon.add(const Duration(milliseconds: 1400))), 1);
+      expect(
+        ScreenTimeRules.tickSeconds(noon, noon.add(const Duration(seconds: 1))),
+        1,
+      );
+      expect(
+        ScreenTimeRules.tickSeconds(
+          noon,
+          noon.add(const Duration(milliseconds: 1400)),
+        ),
+        1,
+      );
     });
 
     test('a clock set forward (an hour) counts at most two seconds', () {
-      expect(ScreenTimeRules.tickSeconds(noon, noon.add(const Duration(hours: 1))), 2);
+      expect(
+        ScreenTimeRules.tickSeconds(noon, noon.add(const Duration(hours: 1))),
+        2,
+      );
     });
 
     test('a clock set back counts nothing', () {
-      expect(ScreenTimeRules.tickSeconds(noon, noon.subtract(const Duration(hours: 3))), 0);
+      expect(
+        ScreenTimeRules.tickSeconds(
+          noon,
+          noon.subtract(const Duration(hours: 3)),
+        ),
+        0,
+      );
       expect(ScreenTimeRules.tickSeconds(noon, noon), 0);
     });
   });
@@ -108,7 +166,10 @@ void main() {
     });
 
     test('a clock turned back cannot stretch the pause', () {
-      final b = GateBackoff.none.afterWrong(noon).afterWrong(noon).afterWrong(noon);
+      final b = GateBackoff.none
+          .afterWrong(noon)
+          .afterWrong(noon)
+          .afterWrong(noon);
       final back = noon.subtract(const Duration(hours: 5));
       expect(b.normalizedAt(back).remaining(back), const Duration(seconds: 30));
       expect(b.normalizedAt(noon), b, reason: 'a normal pause is left alone');
@@ -132,21 +193,31 @@ void main() {
       expect(KidsModeState.decode(s.encode()), s);
     });
 
-    test('nothing stored is off; junk is off; junk that still says on stays on', () {
-      expect(KidsModeState.decode(null), KidsModeState.off);
-      expect(KidsModeState.decode(''), KidsModeState.off);
-      expect(KidsModeState.decode('not json'), KidsModeState.off);
-      expect(KidsModeState.decode('{"on":true,"limit":'), isA<KidsModeState>().having((s) => s.on, 'on', isTrue));
-    });
+    test(
+      'nothing stored is off; junk is off; junk that still says on stays on',
+      () {
+        expect(KidsModeState.decode(null), KidsModeState.off);
+        expect(KidsModeState.decode(''), KidsModeState.off);
+        expect(KidsModeState.decode('not json'), KidsModeState.off);
+        expect(
+          KidsModeState.decode('{"on":true,"limit":'),
+          isA<KidsModeState>().having((s) => s.on, 'on', isTrue),
+        );
+      },
+    );
 
     test('an absurd limit is kept in range, a negative one is none', () {
-      expect(KidsModeState.decode('{"on":true,"limit":99999}').limitMinutes, ScreenTimeRules.maxLimitMinutes);
+      expect(
+        KidsModeState.decode('{"on":true,"limit":99999}').limitMinutes,
+        ScreenTimeRules.maxLimitMinutes,
+      );
       expect(KidsModeState.decode('{"on":true,"limit":-4}').limitMinutes, 0);
     });
   });
 
   group('the router redirect', () {
-    String? r(bool on, String loc) => kidsModeRedirect(kidsOn: on, location: loc);
+    String? r(bool on, String loc) =>
+        kidsModeRedirect(kidsOn: on, location: loc);
 
     test('kids mode on: everything outside /kids goes to /kids', () {
       for (final loc in [
@@ -162,13 +233,25 @@ void main() {
     });
 
     test('kids mode on: /kids and below stay', () {
-      for (final loc in ['/kids', '/kids/s/letters', '/kids?x=1', '/kids/s/letters?x=%2Fsettings']) {
+      for (final loc in [
+        '/kids',
+        '/kids/s/letters',
+        '/kids?x=1',
+        '/kids/s/letters?x=%2Fsettings',
+      ]) {
         expect(r(true, loc), isNull, reason: loc);
       }
     });
 
     test('look-alikes and path tricks do not count as kids', () {
-      for (final loc in ['/kidsx', '/kids-more', '//kids', '/kids/../settings', '/kids/s/../../ledger', '/x/kids']) {
+      for (final loc in [
+        '/kidsx',
+        '/kids-more',
+        '//kids',
+        '/kids/../settings',
+        '/kids/s/../../ledger',
+        '/x/kids',
+      ]) {
         expect(isKidsLocation(loc), isFalse, reason: loc);
         expect(r(true, loc), AppRoutes.kids, reason: loc);
       }

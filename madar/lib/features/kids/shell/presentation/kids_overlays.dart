@@ -23,101 +23,154 @@ class KidsPinOffer extends ConsumerWidget {
       color: KidsColors.night900,
       child: KidsNightBackdrop(
         child: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const KhatamStar(
-                          size: 150,
-                          color: KidsColors.sun500,
-                          child: Icon(Icons.stars_rounded, color: KidsColors.teal500, size: 60),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(l.kidsShellEntryTitle, style: KidsText.title(Colors.white, size: 38)),
-                      ],
+          child: LayoutBuilder(
+            builder: (context, box) => Column(
+              children: [
+                if (box.maxHeight < 640)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      vertical: 12,
                     ),
-                  ),
-                ),
-              ),
-              DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: KidsColors.paper,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(36)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Row(
+                    child: Text(
+                      l.kidsShellEntryTitle,
+                      style: KidsText.title(Colors.white, size: 28),
+                    ),
+                  )
+                else
+                  Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             const KhatamStar(
-                              size: 64,
-                              color: KidsColors.teal100,
-                              child: Icon(Icons.verified_user_rounded, color: KidsColors.teal700, size: 30),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: KidsColors.night100,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.symmetric(horizontal: 12, vertical: 4),
-                                      child: Text(
-                                        l.kidsShellPinOfferBadge,
-                                        style: KidsText.text(KidsColors.night800, size: 15, weight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(l.kidsShellPinOfferTitle, style: KidsText.title(KidsColors.ink, size: 28)),
-                                ],
+                              size: 150,
+                              color: KidsColors.sun500,
+                              child: Icon(
+                                Icons.stars_rounded,
+                                color: KidsColors.teal500,
+                                size: 60,
                               ),
+                            ),
+                            const SizedBox(height: 20),
+                            Text(
+                              l.kidsShellEntryTitle,
+                              style: KidsText.title(Colors.white, size: 38),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
-                        Text(l.kidsShellPinOfferBody, style: KidsText.text(KidsColors.ink, size: 20)),
-                        const SizedBox(height: 16),
-                        KidsBigButton(
-                          key: const ValueKey('kids-offer-pin'),
-                          label: l.kidsShellPinOfferYes,
-                          icon: Icons.verified_user_rounded,
-                          tone: KidsButtonTone.teal,
-                          onPressed: () async {
-                            await ref.read(kidsPinningProvider).start();
-                            done();
-                          },
+                      ),
+                    ),
+                  ),
+                Flexible(
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                      color: KidsColors.paper,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(36),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                        24,
+                        24,
+                        24,
+                        20,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              children: [
+                                const KhatamStar(
+                                  size: 64,
+                                  color: KidsColors.teal100,
+                                  child: Icon(
+                                    Icons.verified_user_rounded,
+                                    color: KidsColors.teal700,
+                                    size: 30,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          color: KidsColors.night100,
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.symmetric(
+                                                horizontal: 12,
+                                                vertical: 4,
+                                              ),
+                                          child: Text(
+                                            l.kidsShellPinOfferBadge,
+                                            style: KidsText.text(
+                                              KidsColors.night800,
+                                              size: 15,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        l.kidsShellPinOfferTitle,
+                                        style: KidsText.title(
+                                          KidsColors.ink,
+                                          size: 28,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              l.kidsShellPinOfferBody,
+                              style: KidsText.text(KidsColors.ink, size: 20),
+                            ),
+                            const SizedBox(height: 16),
+                            KidsBigButton(
+                              key: const ValueKey('kids-offer-pin'),
+                              label: l.kidsShellPinOfferYes,
+                              icon: Icons.verified_user_rounded,
+                              tone: KidsButtonTone.teal,
+                              onPressed: () async {
+                                await ref.read(kidsPinningProvider).start();
+                                done();
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            KidsBigButton(
+                              key: const ValueKey('kids-offer-skip'),
+                              label: l.kidsShellPinOfferNo,
+                              tone: KidsButtonTone.ghost,
+                              onPressed: done,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              l.kidsShellPinOfferLater,
+                              textAlign: TextAlign.center,
+                              style: KidsText.text(KidsColors.ink2, size: 16),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        KidsBigButton(
-                          key: const ValueKey('kids-offer-skip'),
-                          label: l.kidsShellPinOfferNo,
-                          tone: KidsButtonTone.ghost,
-                          onPressed: done,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          l.kidsShellPinOfferLater,
-                          textAlign: TextAlign.center,
-                          style: KidsText.text(KidsColors.ink2, size: 16),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -146,22 +199,35 @@ class KidsEndScreen extends ConsumerWidget {
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: box.maxHeight),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.symmetric(horizontal: 28, vertical: 16),
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 28,
+                    vertical: 16,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.nightlight_round, color: KidsColors.sun100, size: (box.maxHeight * 0.16).clamp(56.0, 140.0)),
+                      Icon(
+                        Icons.nightlight_round,
+                        color: KidsColors.sun100,
+                        size: (box.maxHeight * 0.16).clamp(56.0, 140.0),
+                      ),
                       SizedBox(height: box.maxHeight < 640 ? 8 : 24),
                       Text(
                         l.kidsShellEndTitle,
                         textAlign: TextAlign.center,
-                        style: KidsText.title(Colors.white, size: 36),
+                        style: KidsText.title(
+                          Colors.white,
+                          size: box.maxHeight < 640 ? 26 : 36,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         l.kidsShellEndBody,
                         textAlign: TextAlign.center,
-                        style: KidsText.text(KidsColors.night100, size: 20),
+                        style: KidsText.text(
+                          KidsColors.night100,
+                          size: box.maxHeight < 640 ? 16 : 20,
+                        ),
                       ),
                       SizedBox(height: box.maxHeight < 640 ? 10 : 20),
                       DecoratedBox(
@@ -171,16 +237,29 @@ class KidsEndScreen extends ConsumerWidget {
                           border: Border.all(color: KidsColors.night300),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.symmetric(horizontal: 20, vertical: 12),
+                          padding: EdgeInsetsDirectional.symmetric(
+                            horizontal: 20,
+                            vertical: box.maxHeight < 640 ? 4 : 12,
+                          ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const KhatamStar(size: 32, color: KidsColors.sun500),
+                              const KhatamStar(
+                                size: 32,
+                                color: KidsColors.sun500,
+                              ),
                               const SizedBox(width: 10),
                               Flexible(
                                 child: Text(
-                                  kidsDigits(context, l.kidsShellEndStars(stars)),
-                                  style: KidsText.text(Colors.white, size: 18, weight: FontWeight.w700),
+                                  kidsDigits(
+                                    context,
+                                    l.kidsShellEndStars(stars),
+                                  ),
+                                  style: KidsText.text(
+                                    Colors.white,
+                                    size: 18,
+                                    weight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
                             ],
@@ -192,19 +271,25 @@ class KidsEndScreen extends ConsumerWidget {
                         key: const ValueKey('kids-end-ok'),
                         label: l.kidsShellEndOk,
                         icon: Icons.nightlight_round,
-                        height: 88,
+                        height: box.maxHeight < 640 ? 64 : 88,
                         onPressed: parents,
                       ),
                       const SizedBox(height: 12),
                       TextButton.icon(
                         key: const ValueKey('kids-end-parents'),
                         style: TextButton.styleFrom(
-                          minimumSize: const Size(kKidsMinTarget, kKidsMinTarget),
+                          minimumSize: const Size(
+                            kKidsMinTarget,
+                            kKidsMinTarget,
+                          ),
                           foregroundColor: KidsColors.night300,
                         ),
                         onPressed: parents,
                         icon: const Icon(Icons.lock_rounded, size: 20),
-                        label: Text(l.kidsShellEndParent, style: KidsText.text(KidsColors.night300, size: 17)),
+                        label: Text(
+                          l.kidsShellEndParent,
+                          style: KidsText.text(KidsColors.night300, size: 17),
+                        ),
                       ),
                     ],
                   ),
@@ -224,7 +309,8 @@ class KidsWarningPill extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final minutes = ref.watch(kidsTimeProvider.select((t) => t.remainingMinutes)) ?? 0;
+    final minutes =
+        ref.watch(kidsTimeProvider.select((t) => t.remainingMinutes)) ?? 0;
     final l = L10n.of(context);
     return IgnorePointer(
       child: SafeArea(
@@ -240,10 +326,17 @@ class KidsWarningPill extends ConsumerWidget {
                 border: Border.all(color: KidsColors.sun500, width: 2),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 16, vertical: 6),
+                padding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
                 child: Text(
                   kidsDigits(context, l.kidsShellWarning(minutes)),
-                  style: KidsText.text(KidsColors.night900, size: 16, weight: FontWeight.w700),
+                  style: KidsText.text(
+                    KidsColors.night900,
+                    size: 16,
+                    weight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),

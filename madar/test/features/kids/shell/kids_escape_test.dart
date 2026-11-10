@@ -23,17 +23,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/notifications/notifications.dart';
 import 'package:madar/core/routing/routes.dart';
 import 'package:madar/core/settings/app_settings.dart';
-import 'package:madar/features/lock/data/biometric_auth.dart' show BiometricOutcome;
-import 'package:madar/core/routing/system_route_pages.dart' show SystemNav, searchTargetOf;
+import 'package:madar/features/lock/data/biometric_auth.dart'
+    show BiometricOutcome;
+import 'package:madar/core/routing/system_route_pages.dart'
+    show SystemNav, searchTargetOf;
 import 'package:madar/features/ai_bridge/ai_bridge.dart'
-    show SharedPlanPayload, ShareIntake, pendingSharedPlanProvider, shareIntakeProvider;
+    show
+        SharedPlanPayload,
+        ShareIntake,
+        pendingSharedPlanProvider,
+        shareIntakeProvider;
 import 'package:madar/features/home/home_screen.dart';
 import 'package:madar/features/kids/shell/kids_shell.dart';
 import 'package:madar/features/lock/application/lock_controller.dart';
 import 'package:madar/features/lock/presentation/lock_screen.dart';
 import 'package:madar/features/search/search.dart' show SearchDoc;
 import 'package:madar/features/settings/settings_screen.dart';
-import 'package:madar/features/widgets/widgets.dart' show widgetOpenLocationProvider;
+import 'package:madar/features/widgets/widgets.dart'
+    show widgetOpenLocationProvider;
 
 import '../../../helpers/test_app.dart';
 import 'kids_test_utils.dart';
@@ -41,7 +48,8 @@ import 'kids_test_utils.dart';
 Finder _key(String k) => find.byKey(ValueKey(k));
 
 /// `:param` placeholders of a route pattern filled with a plain id.
-String _fill(String pattern) => pattern.replaceAllMapped(RegExp(r':\w+'), (_) => 'x');
+String _fill(String pattern) =>
+    pattern.replaceAllMapped(RegExp(r':\w+'), (_) => 'x');
 
 /// EVERY `AppRoutes` constant, written out. [routesCoverTheFile] fails when
 /// routes.dart gains a constant that is missing here.
@@ -217,7 +225,11 @@ final Map<String, List<String>> forbiddenAreas = {
     AppRoutes.body,
     AppRoutes.gymSession,
   ],
-  'medication': [AppRoutes.meds, AppRoutes.medsOf(tab: 'meds'), AppRoutes.medsOf(tab: 'courses')],
+  'medication': [
+    AppRoutes.meds,
+    AppRoutes.medsOf(tab: 'meds'),
+    AppRoutes.medsOf(tab: 'courses'),
+  ],
   'wallet and money': [
     AppRoutes.planetOf('money'),
     AppRoutes.ledger,
@@ -255,9 +267,21 @@ final Map<String, List<String>> forbiddenAreas = {
 /// The search documents that open each of the six areas.
 List<SearchDoc> searchDocsFor(String area) {
   SearchDoc doc(String table, {String id = 'x', String planet = 'health'}) =>
-      SearchDoc(id: id, refTable: table, refId: id, title: 't', planetKey: planet);
+      SearchDoc(
+        id: id,
+        refTable: table,
+        refId: id,
+        title: 't',
+        planetKey: planet,
+      );
   return switch (area) {
-    'health' => [doc('conditions'), doc('lab_tests'), doc('health_alerts'), doc('appointments'), doc('worries')],
+    'health' => [
+      doc('conditions'),
+      doc('lab_tests'),
+      doc('health_alerts'),
+      doc('appointments'),
+      doc('worries'),
+    ],
     'medication' => [doc('medications'), doc('med_courses'), doc('med_doses')],
     'wallet and money' => [
       doc('wallets', planet: 'money'),
@@ -271,36 +295,38 @@ List<SearchDoc> searchDocsFor(String area) {
 }
 
 /// A notification tap for [ns] carrying every key any of the app's taps reads.
-RawNotificationTap tapFor(NotificationNamespace ns, {bool launch = false}) => RawNotificationTap(
-  id: ns.first,
-  fromLaunch: launch,
-  payload: NotificationEnvelope.encode(
-    NotificationRequest(
-      namespace: ns,
+RawNotificationTap tapFor(NotificationNamespace ns, {bool launch = false}) =>
+    RawNotificationTap(
       id: ns.first,
-      channelId: 'madar.test',
-      title: 'T',
-      body: '',
-      at: kidsNow,
-      data: const {
-        'set': 'morning',
-        'plan': 'p',
-        'k': 'dose',
-        'doc': 'd',
-        'person': 'p',
-        'appointment': 'a',
-        'id': 'x',
-        'module': 'm',
-      },
-    ),
-  ),
-);
+      fromLaunch: launch,
+      payload: NotificationEnvelope.encode(
+        NotificationRequest(
+          namespace: ns,
+          id: ns.first,
+          channelId: 'madar.test',
+          title: 'T',
+          body: '',
+          at: kidsNow,
+          data: const {
+            'set': 'morning',
+            'plan': 'p',
+            'k': 'dose',
+            'doc': 'd',
+            'person': 'p',
+            'appointment': 'a',
+            'id': 'x',
+            'module': 'm',
+          },
+        ),
+      ),
+    );
 
 class _FakeShareIntake implements ShareIntake {
   _FakeShareIntake({this.launch});
 
   final SharedPlanPayload? launch;
-  final StreamController<SharedPlanPayload> controller = StreamController.broadcast();
+  final StreamController<SharedPlanPayload> controller =
+      StreamController.broadcast();
 
   @override
   Future<SharedPlanPayload?> takeLaunchShare() async => launch;
@@ -312,10 +338,26 @@ class _FakeShareIntake implements ShareIntake {
 /// Asserts the app is inside the kids shell and no adult screen is built.
 void expectInside(WidgetTester tester, TestApp app, String what) {
   final path = pathOf(app);
-  expect(path == AppRoutes.kids || path.startsWith('${AppRoutes.kids}/'), isTrue, reason: '$what -> $path');
-  expect(find.byType(HomeScreen), findsNothing, reason: '$what showed the adult home');
-  expect(find.byType(SettingsScreen), findsNothing, reason: '$what showed Settings');
-  expect(_key('kids-home'), findsOneWidget, reason: '$what: the kids home is not showing');
+  expect(
+    path == AppRoutes.kids || path.startsWith('${AppRoutes.kids}/'),
+    isTrue,
+    reason: '$what -> $path',
+  );
+  expect(
+    find.byType(HomeScreen),
+    findsNothing,
+    reason: '$what showed the adult home',
+  );
+  expect(
+    find.byType(SettingsScreen),
+    findsNothing,
+    reason: '$what showed Settings',
+  );
+  expect(
+    _key('kids-home'),
+    findsOneWidget,
+    reason: '$what: the kids home is not showing',
+  );
 }
 
 void main() {
@@ -345,94 +387,146 @@ void main() {
         isEmpty,
         reason: 'a new AppRoutes builder: add it to `allBuilders` so the escape suite tries it',
       );
-      expect(allRoutes.keys.toSet().difference(constants), isEmpty, reason: 'stale entry in allRoutes');
-      expect(allBuilders.keys.toSet().difference(builders), isEmpty, reason: 'stale entry in allBuilders');
+      expect(
+        allRoutes.keys.toSet().difference(constants),
+        isEmpty,
+        reason: 'stale entry in allRoutes',
+      );
+      expect(
+        allBuilders.keys.toSet().difference(builders),
+        isEmpty,
+        reason: 'stale entry in allBuilders',
+      );
     });
 
-    test('every location in the lists is a plain location (no pattern left in it)', () {
-      for (final e in {...allRoutes, ...allBuilders}.entries) {
-        expect(e.value.startsWith('/'), isTrue, reason: e.key);
-        expect(e.value.contains(':'), isFalse, reason: '${e.key}: ${e.value}');
-      }
-    });
+    test(
+      'every location in the lists is a plain location (no pattern left in it)',
+      () {
+        for (final e in {...allRoutes, ...allBuilders}.entries) {
+          expect(e.value.startsWith('/'), isTrue, reason: e.key);
+          expect(
+            e.value.contains(':'),
+            isFalse,
+            reason: '${e.key}: ${e.value}',
+          );
+        }
+      },
+    );
   });
 
   group('every route, pushed while kids mode is on', () {
-    testWidgets('go: ${allRoutes.length} constants and ${allBuilders.length} builders land inside /kids', (
+    testWidgets(
+      'go: ${allRoutes.length} constants and ${allBuilders.length} builders land inside /kids',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          sections: [testSection('maths')],
+        );
+        final app = await pumpKids(tester, h);
+        for (final e in {...allRoutes, ...allBuilders}.entries) {
+          app.router.go(e.value);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'go ${e.key} (${e.value})');
+        }
+        expect(app.container.read(kidsModeProvider).on, isTrue);
+      },
+    );
+
+    testWidgets(
+      'push: the same, over the stack (and Back still stays inside)',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          sections: [testSection('maths')],
+        );
+        final app = await pumpKids(tester, h);
+        for (final e in {...allRoutes, ...allBuilders}.entries) {
+          unawaited(app.router.push<void>(e.value));
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'push ${e.key} (${e.value})');
+          while (app.router.canPop()) {
+            app.router.pop();
+            await tester.pump();
+          }
+        }
+        expect(app.container.read(kidsModeProvider).on, isTrue);
+      },
+    );
+
+    testWidgets(
+      'a context.push / SystemNav.to from inside the shell is held too',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h);
+        final context = tester.element(_key('kids-home'));
+        for (final loc in [
+          AppRoutes.ledger,
+          AppRoutes.planetOf('health'),
+          AppRoutes.meds,
+          AppRoutes.search,
+        ]) {
+          SystemNav.to(context, loc);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'SystemNav.to $loc');
+          while (app.router.canPop()) {
+            app.router.pop();
+            await tester.pump();
+          }
+        }
+      },
+    );
+
+    testWidgets(
+      'turning kids mode on moves whatever page is open into the shell at once',
+      (tester) async {
+        final h = await KidsHarness.create();
+        final app = await pumpKids(
+          tester,
+          h,
+          initialLocation: AppRoutes.ledger,
+        );
+        expect(find.byType(HomeScreen), findsNothing);
+        expect(_key('kids-home'), findsNothing);
+        app.container.read(kidsModeProvider.notifier).enter();
+        await tester.pumpAndSettle();
+        expectInside(tester, app, 'switching on at /ledger');
+      },
+    );
+
+    testWidgets(
+      'CONTROL: with kids mode OFF the same locations DO open the adult app',
+      (tester) async {
+        final h = await KidsHarness.create();
+        final app = await pumpKids(tester, h);
+        for (final loc in [
+          AppRoutes.ledger,
+          AppRoutes.meds,
+          AppRoutes.family,
+          AppRoutes.work,
+          AppRoutes.dayChat,
+        ]) {
+          app.router.go(loc);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expect(
+            pathOf(app),
+            Uri.parse(loc).path,
+            reason:
+                'without kids mode $loc is reachable, so the suite measures something',
+          );
+        }
+        unawaited(app.router.push<void>(AppRoutes.ledger));
+        await tester.pump();
+        expect(pathOf(app), AppRoutes.ledger);
+      },
+    );
+
+    testWidgets('with kids mode OFF the shell is closed: /kids goes home', (
       tester,
     ) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), sections: [testSection('maths')]);
-      final app = await pumpKids(tester, h);
-      for (final e in {...allRoutes, ...allBuilders}.entries) {
-        app.router.go(e.value);
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'go ${e.key} (${e.value})');
-      }
-      expect(app.container.read(kidsModeProvider).on, isTrue);
-    });
-
-    testWidgets('push: the same, over the stack (and Back still stays inside)', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), sections: [testSection('maths')]);
-      final app = await pumpKids(tester, h);
-      for (final e in {...allRoutes, ...allBuilders}.entries) {
-        unawaited(app.router.push<void>(e.value));
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'push ${e.key} (${e.value})');
-        while (app.router.canPop()) {
-          app.router.pop();
-          await tester.pump();
-        }
-      }
-      expect(app.container.read(kidsModeProvider).on, isTrue);
-    });
-
-    testWidgets('a context.push / SystemNav.to from inside the shell is held too', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h);
-      final context = tester.element(_key('kids-home'));
-      for (final loc in [AppRoutes.ledger, AppRoutes.planetOf('health'), AppRoutes.meds, AppRoutes.search]) {
-        SystemNav.to(context, loc);
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'SystemNav.to $loc');
-        while (app.router.canPop()) {
-          app.router.pop();
-          await tester.pump();
-        }
-      }
-    });
-
-    testWidgets('turning kids mode on moves whatever page is open into the shell at once', (tester) async {
-      final h = await KidsHarness.create();
-      final app = await pumpKids(tester, h, initialLocation: AppRoutes.ledger);
-      expect(find.byType(HomeScreen), findsNothing);
-      expect(_key('kids-home'), findsNothing);
-      app.container.read(kidsModeProvider.notifier).enter();
-      await tester.pumpAndSettle();
-      expectInside(tester, app, 'switching on at /ledger');
-    });
-
-    testWidgets('CONTROL: with kids mode OFF the same locations DO open the adult app', (tester) async {
-      final h = await KidsHarness.create();
-      final app = await pumpKids(tester, h);
-      for (final loc in [AppRoutes.ledger, AppRoutes.meds, AppRoutes.family, AppRoutes.work, AppRoutes.dayChat]) {
-        app.router.go(loc);
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expect(
-          pathOf(app),
-          Uri.parse(loc).path,
-          reason: 'without kids mode $loc is reachable, so the suite measures something',
-        );
-      }
-      unawaited(app.router.push<void>(AppRoutes.ledger));
-      await tester.pump();
-      expect(pathOf(app), AppRoutes.ledger);
-    });
-
-    testWidgets('with kids mode OFF the shell is closed: /kids goes home', (tester) async {
       final h = await KidsHarness.create();
       final app = await pumpKids(tester, h);
       app.router.go(AppRoutes.kids);
@@ -445,125 +539,175 @@ void main() {
   });
 
   group('notifications', () {
-    testWidgets('a tap for each of the ${NotificationNamespaces.all.length} namespaces lands in the kids home', (
-      tester,
-    ) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h);
-      for (final ns in NotificationNamespaces.all) {
-        app.notifications.tap(tapFor(ns));
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'a ${ns.name} notification');
-      }
-    });
+    testWidgets(
+      'a tap for each of the ${NotificationNamespaces.all.length} namespaces lands in the kids home',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h);
+        for (final ns in NotificationNamespaces.all) {
+          app.notifications.tap(tapFor(ns));
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'a ${ns.name} notification');
+        }
+      },
+    );
 
-    testWidgets('CONTROL: with kids mode OFF the same adhkar tap does open its page', (tester) async {
-      final h = await KidsHarness.create();
-      final app = await pumpKids(tester, h);
-      app.notifications.tap(tapFor(NotificationNamespaces.adhkar));
-      await tester.pumpAndSettle();
-      expect(pathOf(app), '/adhkar/morning');
-    });
+    testWidgets(
+      'CONTROL: with kids mode OFF the same adhkar tap does open its page',
+      (tester) async {
+        final h = await KidsHarness.create();
+        final app = await pumpKids(tester, h);
+        app.notifications.tap(tapFor(NotificationNamespaces.adhkar));
+        await tester.pumpAndSettle();
+        expect(pathOf(app), '/adhkar/morning');
+      },
+    );
 
-    testWidgets('a notification that arrives while a section is open lands in the kids home', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), sections: [testSection('maths')]);
-      final app = await pumpKids(tester, h);
-      await tester.tap(_key('kids-tile-maths'));
-      await tester.pumpAndSettle();
-      expect(pathOf(app), '/kids/s/maths');
-      app.notifications.tap(tapFor(NotificationNamespaces.adhkar));
-      await tester.pumpAndSettle();
-      expectInside(tester, app, 'an adhkar tap over a section');
-    });
+    testWidgets(
+      'a notification that arrives while a section is open lands in the kids home',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          sections: [testSection('maths')],
+        );
+        final app = await pumpKids(tester, h);
+        await tester.tap(_key('kids-tile-maths'));
+        await tester.pumpAndSettle();
+        expect(pathOf(app), '/kids/s/maths');
+        app.notifications.tap(tapFor(NotificationNamespaces.adhkar));
+        await tester.pumpAndSettle();
+        expectInside(tester, app, 'an adhkar tap over a section');
+      },
+    );
 
-    testWidgets('a notification that LAUNCHED the app (cold start) lands in the kids home', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpMadarApp(
-        tester,
-        settings: const AppSettings(onboarded: true, lockEnabled: false),
-        overrides: h.overrides,
-        notifications: FakeNotificationPlatform(launch: tapFor(NotificationNamespaces.adhkar, launch: true)),
-      );
-      await tester.pumpAndSettle();
-      expectInside(tester, app, 'a launch notification');
-    });
+    testWidgets(
+      'a notification that LAUNCHED the app (cold start) lands in the kids home',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpMadarApp(
+          tester,
+          settings: const AppSettings(onboarded: true, lockEnabled: false),
+          overrides: h.overrides,
+          notifications: FakeNotificationPlatform(
+            launch: tapFor(NotificationNamespaces.adhkar, launch: true),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expectInside(tester, app, 'a launch notification');
+      },
+    );
 
-    testWidgets('the location every namespace maps to is held (pure check over the known ones)', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h);
-      for (final loc in [
-        AppRoutes.adhkarSetOf('morning'),
-        AppRoutes.wirdOf('p'),
-        AppRoutes.medsOf(tab: 'meds'),
-        AppRoutes.appointmentsOf(highlightId: 'a'),
-        AppRoutes.wellbeingOf(tab: 'worries'),
-        AppRoutes.goalsOf(debt: 'd'),
-        AppRoutes.family,
-        AppRoutes.familyPersonOf('p'),
-        AppRoutes.travelOf(tab: 'documents'),
-        AppRoutes.bodyOf(tab: 'fasting'),
-        AppRoutes.moduleOf('m'),
-        AppRoutes.fasting,
-        AppRoutes.prayerTracker,
-        AppRoutes.nowPlaying,
-      ]) {
-        app.router.go(loc);
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'notification target $loc');
-      }
-    });
+    testWidgets(
+      'the location every namespace maps to is held (pure check over the known ones)',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h);
+        for (final loc in [
+          AppRoutes.adhkarSetOf('morning'),
+          AppRoutes.wirdOf('p'),
+          AppRoutes.medsOf(tab: 'meds'),
+          AppRoutes.appointmentsOf(highlightId: 'a'),
+          AppRoutes.wellbeingOf(tab: 'worries'),
+          AppRoutes.goalsOf(debt: 'd'),
+          AppRoutes.family,
+          AppRoutes.familyPersonOf('p'),
+          AppRoutes.travelOf(tab: 'documents'),
+          AppRoutes.bodyOf(tab: 'fasting'),
+          AppRoutes.moduleOf('m'),
+          AppRoutes.fasting,
+          AppRoutes.prayerTracker,
+          AppRoutes.nowPlaying,
+        ]) {
+          app.router.go(loc);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'notification target $loc');
+        }
+      },
+    );
   });
 
   group('shares, widgets, deep links, search, restored routes', () {
-    testWidgets('a share intent is dropped and the kids home stays', (tester) async {
+    testWidgets('a share intent is dropped and the kids home stays', (
+      tester,
+    ) async {
       final share = _FakeShareIntake();
       addTearDown(share.controller.close);
       final h = await KidsHarness.create(initial: KidsHarness.on());
       final app = await pumpMadarApp(
         tester,
         settings: const AppSettings(onboarded: true, lockEnabled: false),
-        overrides: [...h.overrides, shareIntakeProvider.overrideWithValue(share)],
+        overrides: [
+          ...h.overrides,
+          shareIntakeProvider.overrideWithValue(share),
+        ],
       );
-      share.controller.add(const SharedPlanPayload('{"plan": 1}', name: 'plan.json'));
+      share.controller.add(
+        const SharedPlanPayload('{"plan": 1}', name: 'plan.json'),
+      );
       await tester.pumpAndSettle();
       expectInside(tester, app, 'a shared plan');
-      expect(app.container.read(pendingSharedPlanProvider), isNull, reason: 'not even parked');
+      expect(
+        app.container.read(pendingSharedPlanProvider),
+        isNull,
+        reason: 'not even parked',
+      );
     });
 
-    testWidgets('CONTROL: with kids mode OFF the same share does open the import screen', (tester) async {
-      final share = _FakeShareIntake();
-      addTearDown(share.controller.close);
-      final h = await KidsHarness.create();
-      final app = await pumpMadarApp(
-        tester,
-        settings: const AppSettings(onboarded: true, lockEnabled: false),
-        overrides: [...h.overrides, shareIntakeProvider.overrideWithValue(share)],
-      );
-      share.controller.add(const SharedPlanPayload('{"plan": 1}', name: 'plan.json'));
-      await tester.pumpAndSettle();
-      expect(pathOf(app), AppRoutes.planImport);
-    });
+    testWidgets(
+      'CONTROL: with kids mode OFF the same share does open the import screen',
+      (tester) async {
+        final share = _FakeShareIntake();
+        addTearDown(share.controller.close);
+        final h = await KidsHarness.create();
+        final app = await pumpMadarApp(
+          tester,
+          settings: const AppSettings(onboarded: true, lockEnabled: false),
+          overrides: [
+            ...h.overrides,
+            shareIntakeProvider.overrideWithValue(share),
+          ],
+        );
+        share.controller.add(
+          const SharedPlanPayload('{"plan": 1}', name: 'plan.json'),
+        );
+        await tester.pumpAndSettle();
+        expect(pathOf(app), AppRoutes.planImport);
+      },
+    );
 
     testWidgets('a share that LAUNCHED the app is dropped too', (tester) async {
-      final share = _FakeShareIntake(launch: const SharedPlanPayload('{"plan": 1}'));
+      final share = _FakeShareIntake(
+        launch: const SharedPlanPayload('{"plan": 1}'),
+      );
       addTearDown(share.controller.close);
       final h = await KidsHarness.create(initial: KidsHarness.on());
       final app = await pumpMadarApp(
         tester,
         settings: const AppSettings(onboarded: true, lockEnabled: false),
-        overrides: [...h.overrides, shareIntakeProvider.overrideWithValue(share)],
+        overrides: [
+          ...h.overrides,
+          shareIntakeProvider.overrideWithValue(share),
+        ],
       );
       await tester.pumpAndSettle();
       expectInside(tester, app, 'a launch share');
       expect(app.container.read(pendingSharedPlanProvider), isNull);
     });
 
-    testWidgets('a home-screen widget link lands in the kids home', (tester) async {
+    testWidgets('a home-screen widget link lands in the kids home', (
+      tester,
+    ) async {
       final h = await KidsHarness.create(initial: KidsHarness.on());
       final app = await pumpKids(tester, h);
-      for (final loc in [AppRoutes.meds, AppRoutes.ledger, AppRoutes.prayerTimes, AppRoutes.dayChat, AppRoutes.work]) {
+      for (final loc in [
+        AppRoutes.meds,
+        AppRoutes.ledger,
+        AppRoutes.prayerTimes,
+        AppRoutes.dayChat,
+        AppRoutes.work,
+      ]) {
         app.container.read(widgetOpenLocationProvider)(loc);
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 50));
@@ -571,29 +715,51 @@ void main() {
       }
     });
 
-    testWidgets('a platform deep link (an intent with a location) lands in the kids home', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h);
-      for (final loc in ['/meds', '/ledger/wallet/x', '/planet/health', '/family', '/day']) {
-        await app.router.routeInformationProvider.didPushRouteInformation(RouteInformation(uri: Uri.parse(loc)));
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'deep link $loc');
-      }
-    });
-
-    testWidgets('a restored route (the app comes back at a deep location) lands in the kids home', (tester) async {
-      for (final loc in ['/settings/security', '/ledger', '/planet/money', '/day', '/kids/../settings']) {
+    testWidgets(
+      'a platform deep link (an intent with a location) lands in the kids home',
+      (tester) async {
         final h = await KidsHarness.create(initial: KidsHarness.on());
-        final app = await pumpKids(tester, h, initialLocation: loc);
-        expectInside(tester, app, 'restored $loc');
-        await tester.pumpWidget(const SizedBox());
-      }
-    });
+        final app = await pumpKids(tester, h);
+        for (final loc in [
+          '/meds',
+          '/ledger/wallet/x',
+          '/planet/health',
+          '/family',
+          '/day',
+        ]) {
+          await app.router.routeInformationProvider.didPushRouteInformation(
+            RouteInformation(uri: Uri.parse(loc)),
+          );
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'deep link $loc');
+        }
+      },
+    );
+
+    testWidgets(
+      'a restored route (the app comes back at a deep location) lands in the kids home',
+      (tester) async {
+        for (final loc in [
+          '/settings/security',
+          '/ledger',
+          '/planet/money',
+          '/day',
+          '/kids/../settings',
+        ]) {
+          final h = await KidsHarness.create(initial: KidsHarness.on());
+          final app = await pumpKids(tester, h, initialLocation: loc);
+          expectInside(tester, app, 'restored $loc');
+          await tester.pumpWidget(const SizedBox());
+        }
+      },
+    );
   });
 
   group('the app killed and relaunched', () {
-    testWidgets('kids mode ON survives: the relaunch lands INSIDE the shell', (tester) async {
+    testWidgets('kids mode ON survives: the relaunch lands INSIDE the shell', (
+      tester,
+    ) async {
       final h = await KidsHarness.create();
       var app = await pumpKids(tester, h, initialLocation: AppRoutes.settings);
       app.container.read(kidsModeProvider.notifier).enter();
@@ -603,82 +769,123 @@ void main() {
       await tester.pumpWidget(const SizedBox());
       app = await pumpKids(tester, h);
       expectInside(tester, app, 'relaunch');
-      expect(_key('kids-pin-offer'), findsNothing, reason: 'the offer is for the entry only');
+      expect(
+        _key('kids-pin-offer'),
+        findsNothing,
+        reason: 'the offer is for the entry only',
+      );
     });
 
-    testWidgets('relaunch, kill and relaunch again, many times: never the adult app', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      for (var i = 0; i < 4; i++) {
-        final app = await pumpKids(tester, h, initialLocation: i.isEven ? '/' : AppRoutes.ledger);
-        expectInside(tester, app, 'relaunch $i');
+    testWidgets(
+      'relaunch, kill and relaunch again, many times: never the adult app',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        for (var i = 0; i < 4; i++) {
+          final app = await pumpKids(
+            tester,
+            h,
+            initialLocation: i.isEven ? '/' : AppRoutes.ledger,
+          );
+          expectInside(tester, app, 'relaunch $i');
+          await tester.pumpWidget(const SizedBox());
+        }
+      },
+    );
+
+    testWidgets(
+      'leaving is also remembered: after the PIN a relaunch opens the adult app',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h);
+        await tester.tap(_key('kids-lock'));
+        await tester.pumpAndSettle();
+        await typeKidsPin(tester, '2580');
+        await tester.pumpAndSettle();
+        await tester.tap(_key('kids-corner-leave'));
+        await tester.pumpAndSettle();
+        expect(pathOf(app), '/');
         await tester.pumpWidget(const SizedBox());
-      }
-    });
+        final again = await pumpKids(tester, h);
+        expect(pathOf(again), '/');
+        expect(find.byType(HomeScreen), findsOneWidget);
+      },
+    );
 
-    testWidgets('leaving is also remembered: after the PIN a relaunch opens the adult app', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h);
-      await tester.tap(_key('kids-lock'));
-      await tester.pumpAndSettle();
-      await typeKidsPin(tester, '2580');
-      await tester.pumpAndSettle();
-      await tester.tap(_key('kids-corner-leave'));
-      await tester.pumpAndSettle();
-      expect(pathOf(app), '/');
-      await tester.pumpWidget(const SizedBox());
-      final again = await pumpKids(tester, h);
-      expect(pathOf(again), '/');
-      expect(find.byType(HomeScreen), findsOneWidget);
-    });
-
-    testWidgets('recents: leaving and returning many times never opens the adult app', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h, lockEnabled: true);
-      for (var i = 0; i < 4; i++) {
-        leaveForeground(tester);
-        await tester.pump();
-        h.clock.advance(const Duration(minutes: 10));
-        returnToForeground(tester);
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
-        expectInside(tester, app, 'resume $i');
-      }
-      expect(find.byType(LockScreen), findsNothing);
-    });
+    testWidgets(
+      'recents: leaving and returning many times never opens the adult app',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h, lockEnabled: true);
+        for (var i = 0; i < 4; i++) {
+          leaveForeground(tester);
+          await tester.pump();
+          h.clock.advance(const Duration(minutes: 10));
+          returnToForeground(tester);
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 50));
+          expectInside(tester, app, 'resume $i');
+        }
+        expect(find.byType(LockScreen), findsNothing);
+      },
+    );
   });
 
   group('the system Back', () {
-    testWidgets('pressed over and over (a held Back) never leaves the shell', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), sections: [testSection('maths')]);
+    testWidgets('pressed over and over (a held Back) never leaves the shell', (
+      tester,
+    ) async {
+      final h = await KidsHarness.create(
+        initial: KidsHarness.on(),
+        sections: [testSection('maths')],
+      );
       final app = await pumpKids(tester, h);
       for (var i = 0; i < 30; i++) {
-        expect(await tester.binding.handlePopRoute(), isTrue, reason: 'Back $i was not consumed by the shell');
+        expect(
+          await tester.binding.handlePopRoute(),
+          isTrue,
+          reason: 'Back $i was not consumed by the shell',
+        );
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 20));
-        expect(pathOf(app).startsWith('/kids'), isTrue, reason: 'Back $i left: ${pathOf(app)}');
+        expect(
+          pathOf(app).startsWith('/kids'),
+          isTrue,
+          reason: 'Back $i left: ${pathOf(app)}',
+        );
       }
       expect(app.container.read(kidsModeProvider).on, isTrue);
     });
 
-    testWidgets('Back inside a section, then at the root, then again: up, gate, close, gate...', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), sections: [testSection('maths')]);
-      final app = await pumpKids(tester, h);
-      await tester.tap(_key('kids-tile-maths'));
-      await tester.pumpAndSettle();
-      await tester.binding.handlePopRoute();
-      await tester.pumpAndSettle();
-      expect(pathOf(app), '/kids');
-      expect(_key('kids-parent-gate'), findsNothing);
-      await tester.binding.handlePopRoute();
-      await tester.pumpAndSettle();
-      expect(_key('kids-parent-gate'), findsOneWidget);
-      await tester.binding.handlePopRoute();
-      await tester.pumpAndSettle();
-      expect(_key('kids-parent-gate'), findsNothing);
-    });
+    testWidgets(
+      'Back inside a section, then at the root, then again: up, gate, close, gate...',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          sections: [testSection('maths')],
+        );
+        final app = await pumpKids(tester, h);
+        await tester.tap(_key('kids-tile-maths'));
+        await tester.pumpAndSettle();
+        await tester.binding.handlePopRoute();
+        await tester.pumpAndSettle();
+        expect(pathOf(app), '/kids');
+        expect(_key('kids-parent-gate'), findsNothing);
+        await tester.binding.handlePopRoute();
+        await tester.pumpAndSettle();
+        expect(_key('kids-parent-gate'), findsOneWidget);
+        await tester.binding.handlePopRoute();
+        await tester.pumpAndSettle();
+        expect(_key('kids-parent-gate'), findsNothing);
+      },
+    );
 
-    testWidgets('Back at the root with the app lock armed still never leaves', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), biometrics: true);
+    testWidgets('Back at the root with the app lock armed still never leaves', (
+      tester,
+    ) async {
+      final h = await KidsHarness.create(
+        initial: KidsHarness.on(),
+        biometrics: true,
+      );
       final app = await pumpKids(tester, h, lockEnabled: true);
       for (var i = 0; i < 6; i++) {
         expect(await tester.binding.handlePopRoute(), isTrue);
@@ -689,169 +896,230 @@ void main() {
   });
 
   group('the app lock and the kids gate', () {
-    testWidgets('relaunch with the lock armed: no lock screen, no fingerprint prompt, the kids home', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), biometrics: true);
-      final app = await pumpKids(tester, h, lockEnabled: true);
-      expect(find.byType(LockScreen), findsNothing);
-      expect(h.lock.bio.prompts, isEmpty, reason: 'the astrolabe must not even start a prompt');
-      expectInside(tester, app, 'cold start with an armed lock');
-    });
+    testWidgets(
+      'relaunch with the lock armed: no lock screen, no fingerprint prompt, the kids home',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          biometrics: true,
+        );
+        final app = await pumpKids(tester, h, lockEnabled: true);
+        expect(find.byType(LockScreen), findsNothing);
+        expect(
+          h.lock.bio.prompts,
+          isEmpty,
+          reason: 'the astrolabe must not even start a prompt',
+        );
+        expectInside(tester, app, 'cold start with an armed lock');
+      },
+    );
 
-    testWidgets('the kids PIN does not leave the adult app exposed or double-locked', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h, lockEnabled: true);
-      await tester.tap(_key('kids-lock'));
-      await tester.pumpAndSettle();
-      await typeKidsPin(tester, '2580');
-      await tester.pumpAndSettle();
-      await tester.tap(_key('kids-corner-leave'));
-      await tester.pumpAndSettle();
-      expect(find.byType(LockScreen), findsNothing, reason: 'the owner just proved himself');
-      expect(pathOf(app), '/');
-      expect(find.byType(HomeScreen), findsOneWidget);
-      expect(app.container.read(kidsModeProvider).on, isFalse);
-    });
+    testWidgets(
+      'the kids PIN does not leave the adult app exposed or double-locked',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h, lockEnabled: true);
+        await tester.tap(_key('kids-lock'));
+        await tester.pumpAndSettle();
+        await typeKidsPin(tester, '2580');
+        await tester.pumpAndSettle();
+        await tester.tap(_key('kids-corner-leave'));
+        await tester.pumpAndSettle();
+        expect(
+          find.byType(LockScreen),
+          findsNothing,
+          reason: 'the owner just proved himself',
+        );
+        expect(pathOf(app), '/');
+        expect(find.byType(HomeScreen), findsOneWidget);
+        expect(app.container.read(kidsModeProvider).on, isFalse);
+      },
+    );
   });
 
   group('the six locked-out areas', () {
     for (final area in forbiddenAreas.keys) {
-      testWidgets('$area: unreachable by route, push, deep link, widget link, notification and search', (tester) async {
-        final h = await KidsHarness.create(initial: KidsHarness.on());
-        final app = await pumpKids(tester, h);
-        for (final loc in forbiddenAreas[area]!) {
-          app.router.go(loc);
-          await tester.pump();
-          await tester.pump(const Duration(milliseconds: 50));
-          expectInside(tester, app, '$area: go $loc');
-
-          unawaited(app.router.push<void>(loc));
-          await tester.pump();
-          await tester.pump(const Duration(milliseconds: 50));
-          expectInside(tester, app, '$area: push $loc');
-          while (app.router.canPop()) {
-            app.router.pop();
+      testWidgets(
+        '$area: unreachable by route, push, deep link, widget link, notification and search',
+        (tester) async {
+          final h = await KidsHarness.create(initial: KidsHarness.on());
+          final app = await pumpKids(tester, h);
+          for (final loc in forbiddenAreas[area]!) {
+            app.router.go(loc);
             await tester.pump();
-          }
+            await tester.pump(const Duration(milliseconds: 50));
+            expectInside(tester, app, '$area: go $loc');
 
-          await app.router.routeInformationProvider.didPushRouteInformation(RouteInformation(uri: Uri.parse(loc)));
-          await tester.pump();
-          await tester.pump(const Duration(milliseconds: 50));
-          expectInside(tester, app, '$area: deep link $loc');
-
-          app.container.read(widgetOpenLocationProvider)(loc);
-          await tester.pump();
-          await tester.pump(const Duration(milliseconds: 50));
-          expectInside(tester, app, '$area: widget $loc');
-        }
-        // A notification tap of every namespace (their targets are in the lists).
-        for (final ns in NotificationNamespaces.all) {
-          app.notifications.tap(tapFor(ns));
-          await tester.pump();
-          expectInside(tester, app, '$area: ${ns.name} notification');
-        }
-        // A search result that would open the area.
-        final context = tester.element(_key('kids-home'));
-        for (final doc in searchDocsFor(area)) {
-          final target = searchTargetOf(doc);
-          expect(target, isNotNull, reason: '${doc.refTable} has a target');
-          SystemNav.to(context, target!);
-          await tester.pump();
-          await tester.pump(const Duration(milliseconds: 50));
-          expectInside(tester, app, '$area: search ${doc.refTable} -> $target');
-          while (app.router.canPop()) {
-            app.router.pop();
+            unawaited(app.router.push<void>(loc));
             await tester.pump();
+            await tester.pump(const Duration(milliseconds: 50));
+            expectInside(tester, app, '$area: push $loc');
+            while (app.router.canPop()) {
+              app.router.pop();
+              await tester.pump();
+            }
+
+            await app.router.routeInformationProvider.didPushRouteInformation(
+              RouteInformation(uri: Uri.parse(loc)),
+            );
+            await tester.pump();
+            await tester.pump(const Duration(milliseconds: 50));
+            expectInside(tester, app, '$area: deep link $loc');
+
+            app.container.read(widgetOpenLocationProvider)(loc);
+            await tester.pump();
+            await tester.pump(const Duration(milliseconds: 50));
+            expectInside(tester, app, '$area: widget $loc');
           }
-        }
-      });
+          // A notification tap of every namespace (their targets are in the lists).
+          for (final ns in NotificationNamespaces.all) {
+            app.notifications.tap(tapFor(ns));
+            await tester.pump();
+            expectInside(tester, app, '$area: ${ns.name} notification');
+          }
+          // A search result that would open the area.
+          final context = tester.element(_key('kids-home'));
+          for (final doc in searchDocsFor(area)) {
+            final target = searchTargetOf(doc);
+            expect(target, isNotNull, reason: '${doc.refTable} has a target');
+            SystemNav.to(context, target!);
+            await tester.pump();
+            await tester.pump(const Duration(milliseconds: 50));
+            expectInside(
+              tester,
+              app,
+              '$area: search ${doc.refTable} -> $target',
+            );
+            while (app.router.canPop()) {
+              app.router.pop();
+              await tester.pump();
+            }
+          }
+        },
+      );
     }
 
-    testWidgets('and nothing of them is visible on the kids home or in its corner', (tester) async {
-      final h = await KidsHarness.create(
-        initial: KidsHarness.on(),
-        sections: [testSection('maths', label: 'الحساب')],
-      );
-      await pumpKids(tester, h);
-      // The only tiles are the registered sections; no adult world is offered.
-      expect(
-        find.byWidgetPredicate(
-          (w) => w.key is ValueKey<String> && (w.key! as ValueKey<String>).value.startsWith('kids-tile-'),
-        ),
-        findsOneWidget,
-      );
-      for (final word in [
-        'الصحة',
-        'الدواء',
-        'المال',
-        'العائلة',
-        'المحادثة',
-        'العمل',
-        'الإعدادات',
-        'Health',
-        'Money',
-        'Family',
-        'Work',
-        'Settings',
-      ]) {
-        expect(find.textContaining(word), findsNothing, reason: word);
-      }
-      await tester.tap(_key('kids-lock'));
-      await tester.pumpAndSettle();
-      await typeKidsPin(tester, '2580');
-      await tester.pumpAndSettle();
-      for (final word in ['الصحة', 'الدواء', 'المال', 'العائلة', 'المحادثة', 'Health', 'Money', 'Family']) {
-        expect(find.textContaining(word), findsNothing, reason: 'in the corner: $word');
-      }
-    });
+    testWidgets(
+      'and nothing of them is visible on the kids home or in its corner',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          sections: [testSection('maths', label: 'الحساب')],
+        );
+        await pumpKids(tester, h);
+        // The only tiles are the registered sections; no adult world is offered.
+        expect(
+          find.byWidgetPredicate(
+            (w) =>
+                w.key is ValueKey<String> &&
+                (w.key! as ValueKey<String>).value.startsWith('kids-tile-'),
+          ),
+          findsOneWidget,
+        );
+        for (final word in [
+          'الصحة',
+          'الدواء',
+          'المال',
+          'العائلة',
+          'المحادثة',
+          'العمل',
+          'الإعدادات',
+          'Health',
+          'Money',
+          'Family',
+          'Work',
+          'Settings',
+        ]) {
+          expect(find.textContaining(word), findsNothing, reason: word);
+        }
+        await tester.tap(_key('kids-lock'));
+        await tester.pumpAndSettle();
+        await typeKidsPin(tester, '2580');
+        await tester.pumpAndSettle();
+        for (final word in [
+          'الصحة',
+          'الدواء',
+          'المال',
+          'العائلة',
+          'المحادثة',
+          'Health',
+          'Money',
+          'Family',
+        ]) {
+          expect(
+            find.textContaining(word),
+            findsNothing,
+            reason: 'in the corner: $word',
+          );
+        }
+      },
+    );
   });
 
   group('the gate is the only way out', () {
-    testWidgets('wrong PINs and a cancelled fingerprint never leave; the PIN does; the fingerprint does', (
-      tester,
-    ) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), biometrics: true);
-      h.lock.bio.fallback = BiometricOutcome.cancelled;
-      final app = await pumpKids(tester, h);
-      await tester.tap(_key('kids-lock'));
-      await tester.pumpAndSettle();
-      await typeKidsPin(tester, '0000');
-      await typeKidsPin(tester, '1234');
-      await tester.tap(_key('kids-key-fingerprint'));
-      await tester.pumpAndSettle();
-      expect(_key('kids-parent-corner'), findsNothing);
-      expect(app.container.read(kidsModeProvider).on, isTrue);
-      expectInside(tester, app, 'failed attempts');
+    testWidgets(
+      'wrong PINs and a cancelled fingerprint never leave; the PIN does; the fingerprint does',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          biometrics: true,
+        );
+        h.lock.bio.fallback = BiometricOutcome.cancelled;
+        final app = await pumpKids(tester, h);
+        await tester.tap(_key('kids-lock'));
+        await tester.pumpAndSettle();
+        await typeKidsPin(tester, '0000');
+        await typeKidsPin(tester, '1234');
+        await tester.tap(_key('kids-key-fingerprint'));
+        await tester.pumpAndSettle();
+        expect(_key('kids-parent-corner'), findsNothing);
+        expect(app.container.read(kidsModeProvider).on, isTrue);
+        expectInside(tester, app, 'failed attempts');
 
-      // The fingerprint, once it is a real one.
-      h.lock.bio.fallback = BiometricOutcome.success;
-      await tester.tap(_key('kids-key-fingerprint'));
-      await tester.pumpAndSettle();
-      expect(_key('kids-parent-corner'), findsOneWidget);
-      await tester.tap(_key('kids-corner-leave'));
-      await tester.pumpAndSettle();
-      expect(pathOf(app), '/');
-      expect(find.byType(HomeScreen), findsOneWidget);
-    });
+        // The fingerprint, once it is a real one.
+        h.lock.bio.fallback = BiometricOutcome.success;
+        await tester.tap(_key('kids-key-fingerprint'));
+        await tester.pumpAndSettle();
+        expect(_key('kids-parent-corner'), findsOneWidget);
+        await tester.tap(_key('kids-corner-leave'));
+        await tester.pumpAndSettle();
+        expect(pathOf(app), '/');
+        expect(find.byType(HomeScreen), findsOneWidget);
+      },
+    );
 
-    testWidgets('the 4-digit PIN is checked against the app lock\'s own PIN, not a copy', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on(), pin: '7391');
-      await pumpKids(tester, h);
-      await tester.tap(_key('kids-lock'));
-      await tester.pumpAndSettle();
-      await typeKidsPin(tester, '2580');
-      expect(_key('kids-parent-corner'), findsNothing);
-      await typeKidsPin(tester, '7391');
-      await tester.pumpAndSettle();
-      expect(_key('kids-parent-corner'), findsOneWidget);
-    });
+    testWidgets(
+      'the 4-digit PIN is checked against the app lock\'s own PIN, not a copy',
+      (tester) async {
+        final h = await KidsHarness.create(
+          initial: KidsHarness.on(),
+          pin: '7391',
+        );
+        await pumpKids(tester, h);
+        await tester.tap(_key('kids-lock'));
+        await tester.pumpAndSettle();
+        await typeKidsPin(tester, '2580');
+        expect(_key('kids-parent-corner'), findsNothing);
+        await typeKidsPin(tester, '7391');
+        await tester.pumpAndSettle();
+        expect(_key('kids-parent-corner'), findsOneWidget);
+      },
+    );
 
-    testWidgets('the lock state is untouched by a wrong kids PIN except through its own back-off', (tester) async {
-      final h = await KidsHarness.create(initial: KidsHarness.on());
-      final app = await pumpKids(tester, h);
-      await tester.tap(_key('kids-lock'));
-      await tester.pumpAndSettle();
-      await typeKidsPin(tester, '1111');
-      expect(app.container.read(lockControllerProvider).failures, 1, reason: 'the app lock counts it as well');
-    });
+    testWidgets(
+      'the lock state is untouched by a wrong kids PIN except through its own back-off',
+      (tester) async {
+        final h = await KidsHarness.create(initial: KidsHarness.on());
+        final app = await pumpKids(tester, h);
+        await tester.tap(_key('kids-lock'));
+        await tester.pumpAndSettle();
+        await typeKidsPin(tester, '1111');
+        expect(
+          app.container.read(lockControllerProvider).failures,
+          1,
+          reason: 'the app lock counts it as well',
+        );
+      },
+    );
   });
 }

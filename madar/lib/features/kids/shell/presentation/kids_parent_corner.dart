@@ -64,7 +64,10 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
         child: ListView(
           padding: const EdgeInsetsDirectional.all(20),
           children: [
-            Text(l.kidsShellCornerTitle, style: KidsText.title(KidsColors.ink, size: 34)),
+            Text(
+              l.kidsShellCornerTitle,
+              style: KidsText.title(KidsColors.ink, size: 34),
+            ),
             const SizedBox(height: 16),
             KidsBigButton(
               key: const ValueKey('kids-corner-leave'),
@@ -93,12 +96,17 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
                         semanticLabel: l.kidsShellCornerLess,
                         background: KidsColors.night100,
                         foreground: KidsColors.night800,
-                        onPressed: limit <= 0 ? null : () => stepLimit(up: false),
+                        onPressed: limit <= 0
+                            ? null
+                            : () => stepLimit(up: false),
                       ),
                       Expanded(
                         child: Text(
                           key: const ValueKey('kids-limit-value'),
-                          kidsDigits(context, l.kidsShellCornerTimeValue(limit)),
+                          kidsDigits(
+                            context,
+                            l.kidsShellCornerTimeValue(limit),
+                          ),
                           textAlign: TextAlign.center,
                           style: KidsText.title(KidsColors.ink, size: 28),
                         ),
@@ -109,7 +117,9 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
                         semanticLabel: l.kidsShellCornerMore,
                         background: KidsColors.night100,
                         foreground: KidsColors.night800,
-                        onPressed: limit >= ScreenTimeRules.maxLimitMinutes ? null : () => stepLimit(up: true),
+                        onPressed: limit >= ScreenTimeRules.maxLimitMinutes
+                            ? null
+                            : () => stepLimit(up: true),
                       ),
                     ],
                   ),
@@ -135,7 +145,9 @@ class _KidsParentCornerState extends ConsumerState<KidsParentCorner> {
                   Text(
                     !_pinSupported
                         ? l.kidsShellCornerPinUnsupported
-                        : (_pinned ? l.kidsShellCornerPinOn : l.kidsShellCornerPinOff),
+                        : (_pinned
+                              ? l.kidsShellCornerPinOn
+                              : l.kidsShellCornerPinOff),
                     textAlign: TextAlign.center,
                     style: KidsText.text(KidsColors.ink, size: 18),
                   ),

@@ -32,7 +32,8 @@ class KidsShellFrame extends ConsumerStatefulWidget {
   ConsumerState<KidsShellFrame> createState() => _KidsShellFrameState();
 }
 
-class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBindingObserver {
+class _KidsShellFrameState extends ConsumerState<KidsShellFrame>
+    with WidgetsBindingObserver {
   Timer? _timer;
   late DateTime _last;
   bool _foreground = true;
@@ -61,7 +62,9 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
     _last = now;
     final ended = ref.read(kidsTimeProvider).status == ScreenTimeStatus.ended;
     // Time behind the parent's own layers is the parent's, not the child's.
-    final parent = ref.read(kidsParentPhaseProvider) != KidsParentPhase.none || ref.read(kidsPinOfferPendingProvider);
+    final parent =
+        ref.read(kidsParentPhaseProvider) != KidsParentPhase.none ||
+        ref.read(kidsPinOfferPendingProvider);
     // At the limit nothing more is counted, but the day is still watched: at
     // midnight a fresh day begins and the end scene lifts.
     ref.read(kidsModeProvider.notifier).play(ended || parent ? 0 : seconds);
@@ -80,7 +83,8 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
     // counting at once and write what has been played.
     _foreground = false;
     ref.read(kidsModeProvider.notifier).play(0, flush: true);
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.hidden) {
       // A phone handed back must not still be open on the parent's corner.
       if (ref.read(kidsParentPhaseProvider) == KidsParentPhase.corner) {
         ref.read(kidsParentPhaseProvider.notifier).close();
@@ -116,7 +120,10 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
     return base.copyWith(
       brightness: Brightness.light,
       scaffoldBackgroundColor: KidsColors.paper,
-      colorScheme: ColorScheme.fromSeed(seedColor: KidsColors.night700, surface: KidsColors.paper),
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: KidsColors.night700,
+        surface: KidsColors.paper,
+      ),
       textTheme: base.textTheme.apply(
         fontFamily: KidsText.body,
         bodyColor: KidsColors.ink,
@@ -144,7 +151,8 @@ class _KidsShellFrameState extends ConsumerState<KidsShellFrame> with WidgetsBin
               excluding: covered,
               child: ExcludeSemantics(excluding: covered, child: widget.child),
             ),
-            if (status == ScreenTimeStatus.warning && !covered) const KidsWarningPill(),
+            if (status == ScreenTimeStatus.warning && !covered)
+              const KidsWarningPill(),
             if (ended) const KidsEndScreen(),
             if (offer) const KidsPinOffer(),
             if (phase == KidsParentPhase.gate) const KidsParentGate(),

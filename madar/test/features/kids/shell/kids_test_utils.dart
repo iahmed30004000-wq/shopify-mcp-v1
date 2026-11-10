@@ -17,14 +17,20 @@ import '../../../helpers/test_app.dart';
 final DateTime kidsNow = DateTime(2026, 9, 28, 21, 40);
 final int kidsToday = kidsDayKey(kidsNow);
 
-KidsSection testSection(String id, {int order = 100, bool religious = false, String? label}) => KidsSection(
+KidsSection testSection(
+  String id, {
+  int order = 100,
+  bool religious = false,
+  String? label,
+}) => KidsSection(
   id: id,
   title: (l) => label ?? id,
   icon: Icons.star_rounded,
   accent: KidsColors.teal500,
   order: order,
   religious: religious,
-  builder: (context) => Center(child: Text('body-$id', key: ValueKey('section-body-$id'))),
+  builder: (context) =>
+      Center(child: Text('body-$id', key: ValueKey('section-body-$id'))),
 );
 
 /// Everything a kids test overrides, in one place.
@@ -60,7 +66,12 @@ class KidsHarness {
   }) async {
     final lock = pin == null
         ? LockFixture.empty(now: kidsNow, available: available)
-        : await LockFixture.configured(pin: pin, biometrics: biometrics, now: kidsNow, available: available);
+        : await LockFixture.configured(
+            pin: pin,
+            biometrics: biometrics,
+            now: kidsNow,
+            available: available,
+          );
     return KidsHarness(
       lock: lock,
       initial: initial,
@@ -101,14 +112,19 @@ Future<TestApp> pumpKids(
   String languageCode = 'ar',
 }) => pumpMadarApp(
   tester,
-  settings: AppSettings(onboarded: true, lockEnabled: lockEnabled, languageCode: languageCode),
+  settings: AppSettings(
+    onboarded: true,
+    lockEnabled: lockEnabled,
+    languageCode: languageCode,
+  ),
   overrides: h.overrides,
   initialLocation: initialLocation,
   settle: settle,
 );
 
 /// The router's current path.
-String pathOf(TestApp app) => app.router.routerDelegate.currentConfiguration.last.matchedLocation;
+String pathOf(TestApp app) =>
+    app.router.routerDelegate.currentConfiguration.last.matchedLocation;
 
 /// Taps the gate's keys for [digits] (Western digits).
 Future<void> typeKidsPin(WidgetTester tester, String digits) async {
@@ -123,7 +139,11 @@ Future<void> typeKidsPin(WidgetTester tester, String digits) async {
 }
 
 /// Plays [seconds] of foreground time one second at a time.
-Future<void> playSeconds(WidgetTester tester, TestClock clock, int seconds) async {
+Future<void> playSeconds(
+  WidgetTester tester,
+  TestClock clock,
+  int seconds,
+) async {
   for (var i = 0; i < seconds; i++) {
     clock.advance(const Duration(seconds: 1));
     await tester.pump(const Duration(seconds: 1));
@@ -131,13 +151,21 @@ Future<void> playSeconds(WidgetTester tester, TestClock clock, int seconds) asyn
 }
 
 void leaveForeground(WidgetTester tester) {
-  for (final s in [AppLifecycleState.inactive, AppLifecycleState.hidden, AppLifecycleState.paused]) {
+  for (final s in [
+    AppLifecycleState.inactive,
+    AppLifecycleState.hidden,
+    AppLifecycleState.paused,
+  ]) {
     tester.binding.handleAppLifecycleStateChanged(s);
   }
 }
 
 void returnToForeground(WidgetTester tester) {
-  for (final s in [AppLifecycleState.hidden, AppLifecycleState.inactive, AppLifecycleState.resumed]) {
+  for (final s in [
+    AppLifecycleState.hidden,
+    AppLifecycleState.inactive,
+    AppLifecycleState.resumed,
+  ]) {
     tester.binding.handleAppLifecycleStateChanged(s);
   }
 }

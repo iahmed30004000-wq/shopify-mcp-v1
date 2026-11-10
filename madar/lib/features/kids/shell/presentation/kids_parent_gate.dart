@@ -40,8 +40,11 @@ class _KidsParentGateState extends ConsumerState<KidsParentGate> {
   }
 
   Future<void> _loadFingerprint() async {
-    final available = await ref.read(kidsModeProvider.notifier).fingerprintAvailable();
-    if (mounted && available != _fingerprint) setState(() => _fingerprint = available);
+    final available = await ref
+        .read(kidsModeProvider.notifier)
+        .fingerprintAvailable();
+    if (mounted && available != _fingerprint)
+      setState(() => _fingerprint = available);
   }
 
   @override
@@ -144,7 +147,10 @@ class _KidsParentGateState extends ConsumerState<KidsParentGate> {
     final paused = pause > Duration.zero;
     final String message;
     if (paused) {
-      message = kidsDigits(context, l.kidsShellGatePause((pause.inMilliseconds / 1000).ceil()));
+      message = kidsDigits(
+        context,
+        l.kidsShellGatePause((pause.inMilliseconds / 1000).ceil()),
+      );
     } else {
       message = switch (_note) {
         _Note.none => '',
@@ -163,14 +169,21 @@ class _KidsParentGateState extends ConsumerState<KidsParentGate> {
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: box.maxHeight),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.symmetric(horizontal: 32, vertical: 16),
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const KhatamStar(
                         size: 96,
                         color: KidsColors.night700,
-                        child: Icon(Icons.lock_rounded, color: KidsColors.sun500, size: 40),
+                        child: Icon(
+                          Icons.lock_rounded,
+                          color: KidsColors.sun500,
+                          size: 40,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -214,7 +227,9 @@ class _KidsParentGateState extends ConsumerState<KidsParentGate> {
                         label: l.kidsShellGateBack,
                         icon: Icons.home_rounded,
                         tone: KidsButtonTone.paper,
-                        onPressed: ref.read(kidsParentPhaseProvider.notifier).close,
+                        onPressed: ref
+                            .read(kidsParentPhaseProvider.notifier)
+                            .close,
                       ),
                     ],
                   ),
@@ -277,7 +292,12 @@ class _Keypad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget key(Widget child, VoidCallback? onTap, {required Key k, required String label}) => Expanded(
+    Widget key(
+      Widget child,
+      VoidCallback? onTap, {
+      required Key k,
+      required String label,
+    }) => Expanded(
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Semantics(
@@ -289,7 +309,9 @@ class _Keypad extends StatelessWidget {
             child: Material(
               key: k,
               color: const Color(0x33FFFFFF),
-              shape: const StadiumBorder(side: BorderSide(color: Color(0x55FFFFFF))),
+              shape: const StadiumBorder(
+                side: BorderSide(color: Color(0x55FFFFFF)),
+              ),
               child: InkWell(
                 customBorder: const StadiumBorder(),
                 onTap: enabled ? onTap : null,
@@ -302,7 +324,10 @@ class _Keypad extends StatelessWidget {
     );
 
     Widget digit(int d) => key(
-      Text(kidsDigits(context, '$d'), style: KidsText.title(Colors.white, size: 30)),
+      Text(
+        kidsDigits(context, '$d'),
+        style: KidsText.title(Colors.white, size: 30),
+      ),
       () => onDigit(d),
       k: ValueKey('kids-key-$d'),
       label: kidsDigits(context, '$d'),
@@ -326,7 +351,11 @@ class _Keypad extends StatelessWidget {
               children: [
                 if (fingerprint)
                   key(
-                    const Icon(Icons.fingerprint_rounded, color: KidsColors.sun300, size: 34),
+                    const Icon(
+                      Icons.fingerprint_rounded,
+                      color: KidsColors.sun300,
+                      size: 34,
+                    ),
                     onFingerprint,
                     k: const ValueKey('kids-key-fingerprint'),
                     label: fingerprintLabel,
@@ -335,7 +364,11 @@ class _Keypad extends StatelessWidget {
                   const Expanded(child: SizedBox.shrink()),
                 digit(0),
                 key(
-                  const Icon(Icons.backspace_rounded, color: Colors.white, size: 28),
+                  const Icon(
+                    Icons.backspace_rounded,
+                    color: Colors.white,
+                    size: 28,
+                  ),
                   onDelete,
                   k: const ValueKey('kids-key-delete'),
                   label: deleteLabel,

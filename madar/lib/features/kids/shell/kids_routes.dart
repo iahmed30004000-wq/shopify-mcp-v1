@@ -23,15 +23,23 @@ List<RouteBase> kidsRoutes() => [
     routes: [
       GoRoute(
         path: AppRoutes.kids,
-        pageBuilder: (context, state) =>
-            NoTransitionPage<void>(key: state.pageKey, name: state.uri.path, child: const KidsHomeScreen()),
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+          key: state.pageKey,
+          name: state.uri.path,
+          child: const KidsHomeScreen(),
+        ),
         routes: [
           GoRoute(
             path: 's/:id',
             redirect: (context, state) {
               final id = state.pathParameters['id'];
-              final container = ProviderScope.containerOf(context, listen: false);
-              final visible = container.read(visibleKidsSectionsProvider).any((s) => s.id == id);
+              final container = ProviderScope.containerOf(
+                context,
+                listen: false,
+              );
+              final visible = container
+                  .read(visibleKidsSectionsProvider)
+                  .any((s) => s.id == id);
               return visible ? null : AppRoutes.kids;
             },
             pageBuilder: (context, state) => CustomTransitionPage<void>(
@@ -65,6 +73,10 @@ class _KidsSectionPage extends ConsumerWidget {
       });
       return const SizedBox.shrink();
     }
-    return Material(key: ValueKey('kids-section-$id'), color: KidsColors.paper, child: section.builder(context));
+    return Material(
+      key: ValueKey('kids-section-$id'),
+      color: KidsColors.paper,
+      child: section.builder(context),
+    );
   }
 }
