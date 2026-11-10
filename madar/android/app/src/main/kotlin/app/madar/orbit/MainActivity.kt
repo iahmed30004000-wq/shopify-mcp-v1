@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager
+import app.madar.orbit.ondevice.OnDeviceChannel
 import app.madar.orbit.savedgames.SavedGamesChannel
 import app.madar.orbit.together.TogetherChannels
 import app.madar.orbit.widgets.MadarWidgetsChannel
@@ -293,6 +294,8 @@ class MainActivity : AudioServiceFragmentActivity() {
         }
         MadarWidgetsChannel.register(flutterEngine, app)
         SavedGamesChannel.register(flutterEngine)
+        // Part 15: what this phone can run (answers "unsupported" for both engines until step B).
+        OnDeviceChannel.register(flutterEngine, app)
         TogetherChannels.register(flutterEngine)
         ShareIntakeChannel.register(flutterEngine, deliverPending = warmEngine)
         // The plugins are attached to this activity by now (the engine attaches
